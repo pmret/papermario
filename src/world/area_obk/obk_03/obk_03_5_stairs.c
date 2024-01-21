@@ -2,149 +2,149 @@
 #include "effects.h"
 
 EvtScript N(EVS_DropStep) = {
-    EVT_CALL(MakeLerp, LVar0, 0, LVar1, EASING_COS_FAST_OVERSHOOT)
-    EVT_LABEL(10)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, LVar2, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_NE(LVar1, 0)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(MakeLerp, LVar0, 0, LVar1, EASING_COS_FAST_OVERSHOOT)
+    Label(10)
+        Call(UpdateLerp)
+        Call(TranslateModel, LVar2, 0, LVar0, 0)
+        Wait(1)
+        IfNe(LVar1, 0)
+            Goto(10)
+        EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_PlayDropStepFX) = {
-    EVT_CALL(PlaySoundAt, SOUND_OBK_STAIRS_DROP, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_WAIT(LVarA)
-    EVT_SET(LVar3, LVar0)
-    EVT_SET(LVar4, LVar1)
-    EVT_SET(LVar5, LVar2)
-    EVT_ADD(LVar3, 0)
-    EVT_ADD(LVar4, -8)
-    EVT_ADD(LVar5, -70)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar3, LVar4, LVar5, 0)
-    EVT_SET(LVar6, LVar0)
-    EVT_SET(LVar7, LVar1)
-    EVT_SET(LVar8, LVar2)
-    EVT_ADD(LVar6, 0)
-    EVT_ADD(LVar7, -8)
-    EVT_ADD(LVar8, 70)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar6, LVar7, LVar8, 0)
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAt, SOUND_OBK_STAIRS_DROP, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+    Wait(LVarA)
+    Set(LVar3, LVar0)
+    Set(LVar4, LVar1)
+    Set(LVar5, LVar2)
+    Add(LVar3, 0)
+    Add(LVar4, -8)
+    Add(LVar5, -70)
+    PlayEffect(EFFECT_LANDING_DUST, 1, LVar3, LVar4, LVar5, 0)
+    Set(LVar6, LVar0)
+    Set(LVar7, LVar1)
+    Set(LVar8, LVar2)
+    Add(LVar6, 0)
+    Add(LVar7, -8)
+    Add(LVar8, 70)
+    PlayEffect(EFFECT_LANDING_DUST, 1, LVar6, LVar7, LVar8, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Cam_FocusOnStairs) = {
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar1, 15)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_RETURN
-    EVT_END
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Sub(LVar1, 15)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_Cam_ResetFocus) = {
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Return
+    End
 };
 
 // first step only
 #define EVT_DROP_STEP_1(x, y, z, delay, dist, modelID) \
-    EVT_SET(LVar0, x) \
-    EVT_SET(LVar1, y) \
-    EVT_SET(LVar2, z) \
-    EVT_EXEC_WAIT(N(EVS_Cam_FocusOnStairs)) \
-    EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 30, EVT_FLOAT(3.0)) \
-    EVT_SET(LVar0, x) \
-    EVT_SET(LVar1, y) \
-    EVT_SET(LVar2, z) \
-    EVT_SET(LVarA, delay) \
-    EVT_EXEC(N(EVS_PlayDropStepFX)) \
-    EVT_SET(LVar0, dist) \
-    EVT_SET(LVar1, 5 * DT) \
-    EVT_SET(LVar2, modelID) \
-    EVT_EXEC(N(EVS_DropStep)) \
-    EVT_WAIT(5)
+    Set(LVar0, x) \
+    Set(LVar1, y) \
+    Set(LVar2, z) \
+    ExecWait(N(EVS_Cam_FocusOnStairs)) \
+    Call(ShakeCam, CAM_DEFAULT, 0, 30, Float(3.0)) \
+    Set(LVar0, x) \
+    Set(LVar1, y) \
+    Set(LVar2, z) \
+    Set(LVarA, delay) \
+    Exec(N(EVS_PlayDropStepFX)) \
+    Set(LVar0, dist) \
+    Set(LVar1, 5 * DT) \
+    Set(LVar2, modelID) \
+    Exec(N(EVS_DropStep)) \
+    Wait(5)
 
 // second step only
 #define EVT_DROP_STEP_2(x, y, z, delay, dist, modelID) \
-    EVT_SET(LVar0, x) \
-    EVT_SET(LVar1, y) \
-    EVT_SET(LVar2, z) \
-    EVT_EXEC(N(EVS_Cam_FocusOnStairs)) \
-    EVT_SET(LVar0, x) \
-    EVT_SET(LVar1, y) \
-    EVT_SET(LVar2, z) \
-    EVT_SET(LVarA, delay) \
-    EVT_EXEC(N(EVS_PlayDropStepFX)) \
-    EVT_SET(LVar0, dist) \
-    EVT_SET(LVar1, 5 * DT) \
-    EVT_SET(LVar2, modelID) \
-    EVT_EXEC(N(EVS_DropStep)) \
-    EVT_WAIT(5)
+    Set(LVar0, x) \
+    Set(LVar1, y) \
+    Set(LVar2, z) \
+    Exec(N(EVS_Cam_FocusOnStairs)) \
+    Set(LVar0, x) \
+    Set(LVar1, y) \
+    Set(LVar2, z) \
+    Set(LVarA, delay) \
+    Exec(N(EVS_PlayDropStepFX)) \
+    Set(LVar0, dist) \
+    Set(LVar1, 5 * DT) \
+    Set(LVar2, modelID) \
+    Exec(N(EVS_DropStep)) \
+    Wait(5)
 
 // other steps
 #define EVT_DROP_STEP_N(x, y, z, delay, dist, modelID) \
-    EVT_SET(LVar0, x) \
-    EVT_SET(LVar1, y) \
-    EVT_SET(LVar2, z) \
-    EVT_EXEC_WAIT(N(EVS_Cam_FocusOnStairs)) \
-    EVT_SET(LVar0, x) \
-    EVT_SET(LVar1, y) \
-    EVT_SET(LVar2, z) \
-    EVT_SET(LVarA, delay) \
-    EVT_EXEC(N(EVS_PlayDropStepFX)) \
-    EVT_SET(LVar0, dist) \
-    EVT_SET(LVar1, 5 * DT) \
-    EVT_SET(LVar2, modelID) \
-    EVT_EXEC(N(EVS_DropStep)) \
-    EVT_WAIT(5)
+    Set(LVar0, x) \
+    Set(LVar1, y) \
+    Set(LVar2, z) \
+    ExecWait(N(EVS_Cam_FocusOnStairs)) \
+    Set(LVar0, x) \
+    Set(LVar1, y) \
+    Set(LVar2, z) \
+    Set(LVarA, delay) \
+    Exec(N(EVS_PlayDropStepFX)) \
+    Set(LVar0, dist) \
+    Set(LVar1, 5 * DT) \
+    Set(LVar2, modelID) \
+    Exec(N(EVS_DropStep)) \
+    Wait(5)
 
 // last step only
 #define EVT_DROP_STEP_L(x, y, z, delay, dist, modelID) \
-    EVT_SET(LVar0, x) \
-    EVT_SET(LVar1, y) \
-    EVT_SET(LVar2, z) \
-    EVT_EXEC_WAIT(N(EVS_Cam_FocusOnStairs)) \
-    EVT_SET(LVar0, x) \
-    EVT_SET(LVar1, y) \
-    EVT_SET(LVar2, z) \
-    EVT_SET(LVarA, delay) \
-    EVT_EXEC(N(EVS_PlayDropStepFX)) \
-    EVT_SET(LVar0, dist) \
-    EVT_SET(LVar1, 2 * DT) \
-    EVT_SET(LVar2, modelID) \
-    EVT_EXEC_WAIT(N(EVS_DropStep)) \
+    Set(LVar0, x) \
+    Set(LVar1, y) \
+    Set(LVar2, z) \
+    ExecWait(N(EVS_Cam_FocusOnStairs)) \
+    Set(LVar0, x) \
+    Set(LVar1, y) \
+    Set(LVar2, z) \
+    Set(LVarA, delay) \
+    Exec(N(EVS_PlayDropStepFX)) \
+    Set(LVar0, dist) \
+    Set(LVar1, 2 * DT) \
+    Set(LVar2, modelID) \
+    ExecWait(N(EVS_DropStep)) \
 
 EvtScript N(EVS_Scene_DropSteps) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(EnableModel, MODEL_yk1, FALSE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt3, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(EnableModel, MODEL_k1, TRUE)
-    EVT_CALL(EnableModel, MODEL_k2, TRUE)
-    EVT_CALL(EnableModel, MODEL_k3, TRUE)
-    EVT_CALL(EnableModel, MODEL_k4, TRUE)
-    EVT_CALL(EnableModel, MODEL_k5, TRUE)
-    EVT_CALL(EnableModel, MODEL_k6, TRUE)
-    EVT_CALL(EnableModel, MODEL_k7, TRUE)
-    EVT_CALL(EnableModel, MODEL_k8, TRUE)
-    EVT_CALL(TranslateModel, MODEL_k1, 0, 180, 0)
-    EVT_CALL(TranslateModel, MODEL_k2, 0, 155, 0)
-    EVT_CALL(TranslateModel, MODEL_k3, 0, 130, 0)
-    EVT_CALL(TranslateModel, MODEL_k4, 0, 105, 0)
-    EVT_CALL(TranslateModel, MODEL_k5, 0, 80, 0)
-    EVT_CALL(TranslateModel, MODEL_k6, 0, 55, 0)
-    EVT_CALL(TranslateModel, MODEL_k7, 0, 30, 0)
-    EVT_CALL(TranslateModel, MODEL_k8, 0, 5, 0)
+    Call(DisablePlayerInput, TRUE)
+    Call(EnableModel, MODEL_yk1, FALSE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt3, COLLIDER_FLAGS_UPPER_MASK)
+    Call(EnableModel, MODEL_k1, TRUE)
+    Call(EnableModel, MODEL_k2, TRUE)
+    Call(EnableModel, MODEL_k3, TRUE)
+    Call(EnableModel, MODEL_k4, TRUE)
+    Call(EnableModel, MODEL_k5, TRUE)
+    Call(EnableModel, MODEL_k6, TRUE)
+    Call(EnableModel, MODEL_k7, TRUE)
+    Call(EnableModel, MODEL_k8, TRUE)
+    Call(TranslateModel, MODEL_k1, 0, 180, 0)
+    Call(TranslateModel, MODEL_k2, 0, 155, 0)
+    Call(TranslateModel, MODEL_k3, 0, 130, 0)
+    Call(TranslateModel, MODEL_k4, 0, 105, 0)
+    Call(TranslateModel, MODEL_k5, 0, 80, 0)
+    Call(TranslateModel, MODEL_k6, 0, 55, 0)
+    Call(TranslateModel, MODEL_k7, 0, 30, 0)
+    Call(TranslateModel, MODEL_k8, 0, 5, 0)
     EVT_DROP_STEP_1(275, -185, 188, 28, 175, MODEL_k1)
     EVT_DROP_STEP_2(225, -160, 188, 28, 150, MODEL_k2)
     EVT_DROP_STEP_N(175, -135, 188, 28, 125, MODEL_k3)
@@ -153,49 +153,49 @@ EvtScript N(EVS_Scene_DropSteps) = {
     EVT_DROP_STEP_N (25,  -60, 188, 14,  50, MODEL_k6)
     EVT_DROP_STEP_N(-25,  -35, 188,  9,  25, MODEL_k7)
     EVT_DROP_STEP_L(-75,  -10, 188,  4,   0, MODEL_k8)
-    EVT_CALL(EnableModel, MODEL_kage, TRUE)
-    EVT_CALL(EnableModel, MODEL_kage_no, FALSE)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k3, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k4, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k5, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k6, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k7, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_kaidan, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC_WAIT(N(EVS_Cam_ResetFocus))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableModel, MODEL_kage, TRUE)
+    Call(EnableModel, MODEL_kage_no, FALSE)
+    Wait(30 * DT)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k1, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k2, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k3, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k4, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k5, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k6, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k7, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_kaidan, COLLIDER_FLAGS_UPPER_MASK)
+    ExecWait(N(EVS_Cam_ResetFocus))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupStairs) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_HIT_HUGE_BLUE_SWITCH)
-        EVT_CALL(EnableModel, MODEL_k1, FALSE)
-        EVT_CALL(EnableModel, MODEL_k2, FALSE)
-        EVT_CALL(EnableModel, MODEL_k3, FALSE)
-        EVT_CALL(EnableModel, MODEL_k4, FALSE)
-        EVT_CALL(EnableModel, MODEL_k5, FALSE)
-        EVT_CALL(EnableModel, MODEL_k6, FALSE)
-        EVT_CALL(EnableModel, MODEL_k7, FALSE)
-        EVT_CALL(EnableModel, MODEL_k8, FALSE)
-        EVT_CALL(EnableModel, MODEL_kage, FALSE)
-        EVT_CALL(EnableModel, MODEL_kage_no, TRUE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k1, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k2, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k3, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k4, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k5, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k6, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k7, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_kaidan, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_ELSE
-        EVT_CALL(EnableModel, MODEL_yk1, FALSE)
-        EVT_CALL(EnableModel, MODEL_kage, TRUE)
-        EVT_CALL(EnableModel, MODEL_kage_no, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt3, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH3_HIT_HUGE_BLUE_SWITCH)
+        Call(EnableModel, MODEL_k1, FALSE)
+        Call(EnableModel, MODEL_k2, FALSE)
+        Call(EnableModel, MODEL_k3, FALSE)
+        Call(EnableModel, MODEL_k4, FALSE)
+        Call(EnableModel, MODEL_k5, FALSE)
+        Call(EnableModel, MODEL_k6, FALSE)
+        Call(EnableModel, MODEL_k7, FALSE)
+        Call(EnableModel, MODEL_k8, FALSE)
+        Call(EnableModel, MODEL_kage, FALSE)
+        Call(EnableModel, MODEL_kage_no, TRUE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k1, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k2, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k3, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k4, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k5, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k6, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k7, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_kaidan, COLLIDER_FLAGS_UPPER_MASK)
+    Else
+        Call(EnableModel, MODEL_yk1, FALSE)
+        Call(EnableModel, MODEL_kage, TRUE)
+        Call(EnableModel, MODEL_kage_no, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt3, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    Return
+    End
 };

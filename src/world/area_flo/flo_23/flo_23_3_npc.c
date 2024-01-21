@@ -11,151 +11,151 @@ BSS s32 N(FlowerGuard_ItemChoiceList)[ITEM_NUM_CONSUMABLES + 1];
 #include "../common/ItemChoice_FlowerGuard.inc.c"
 
 EvtScript N(EVS_NpcInteract_GateFlower) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_IF_EQ(GF_FLO23_GaveBlueBerry, FALSE)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 350)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(18.5), EVT_FLOAT(-7.5))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Talk, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_0049)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Thinking)
-        EVT_CALL(N(FlowerGuard_MakeItemList))
+    Call(DisablePlayerInput, TRUE)
+    IfEq(GF_FLO23_GaveBlueBerry, FALSE)
+        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(SetCamDistance, CAM_DEFAULT, 350)
+        Call(SetCamPitch, CAM_DEFAULT, Float(18.5), Float(-7.5))
+        Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Call(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Talk, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_0049)
+        Call(SetPlayerAnimation, ANIM_Mario1_Thinking)
+        Call(N(FlowerGuard_MakeItemList))
         EVT_CHOOSE_CONSUMABLE_FROM(N(FlowerGuard_ItemChoiceList), 2)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_LE(0)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Talk, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_004A)
-            EVT_CASE_DEFAULT
-                EVT_SET(LVar8, LVar0)
-                EVT_CALL(N(FlowerGuard_JudgeItemTastiness), LVar0)
-                EVT_CALL(MakeItemEntity, LVar8, 385, 20, -34, ITEM_SPAWN_MODE_DECORATION, 0)
-                EVT_SET(LVar7, LVar0)
-                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EAT_OR_DRINK, SOUND_SPACE_DEFAULT)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_Eat)
-                EVT_WAIT(20 * DT)
-                EVT_CALL(RemoveItemEntity, LVar7)
-                EVT_SWITCH(LVar8)
-                    EVT_CASE_EQ(158)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Chew, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_004D)
-                        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_APPROVE, SOUND_SPACE_DEFAULT)
-                        EVT_CALL(EndSpeech, NPC_SELF, ANIM_GateFlower_Blue_HappyTalk, ANIM_GateFlower_Blue_HappyIdle, 0)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_OpenGate)
-                        EVT_CALL(PlaySoundAtCollider, COLLIDER_o95, SOUND_METAL_GATE_OPEN, SOUND_SPACE_DEFAULT)
-                        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o95, COLLIDER_FLAGS_UPPER_MASK)
-                        EVT_CALL(MakeLerp, 0, 100, 30, EASING_QUADRATIC_IN)
-                        EVT_LOOP(0)
-                            EVT_CALL(UpdateLerp)
-                            EVT_SETF(LVar8, LVar0)
-                            EVT_SETF(LVar9, LVar0)
-                            EVT_MULF(LVar8, EVT_FLOAT(0.5))
-                            EVT_MULF(LVar9, EVT_FLOAT(1.2))
-                            EVT_CALL(RotateModel, MODEL_o86, LVar8, 0, -1, 0)
-                            EVT_CALL(RotateModel, MODEL_o87, LVar8, 0, -1, 0)
-                            EVT_CALL(RotateModel, MODEL_o88, LVar8, 0, -1, 0)
-                            EVT_CALL(RotateModel, MODEL_o83, LVar9, 0, 1, 0)
-                            EVT_CALL(RotateModel, MODEL_o84, LVar9, 0, 1, 0)
-                            EVT_CALL(RotateModel, MODEL_o85, LVar9, 0, 1, 0)
-                            EVT_WAIT(1)
-                            EVT_IF_NE(LVar1, 1)
-                                EVT_BREAK_LOOP
-                            EVT_END_IF
-                        EVT_END_LOOP
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_HappyDance)
-                        EVT_SET(GF_FLO23_GaveBlueBerry, TRUE)
-                    EVT_CASE_EQ(159)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Chew, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_004C)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_Idle)
-                    EVT_CASE_EQ(160)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Chew, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_004C)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_Idle)
-                    EVT_CASE_DEFAULT
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Chew, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_004B)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_Disgust)
-                        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SPIT_OUT, SOUND_SPACE_DEFAULT)
-                        EVT_CALL(MakeItemEntity, LVar8, 375, 20, 0, ITEM_SPAWN_MODE_DECORATION, 0)
-                        EVT_SET(LVar7, LVar0)
-                        EVT_WAIT(5 * DT)
-                        EVT_CALL(GetAngleToPlayer, NPC_SELF, LVar0)
-                        EVT_IF_LT(LVar0, 180)
-                            EVT_CALL(MakeLerp, 0, 100, 7, EASING_LINEAR)
-                            EVT_LOOP(0)
-                                EVT_CALL(UpdateLerp)
-                                EVT_SETF(LVar2, EVT_FLOAT(-0.5))
-                                EVT_SETF(LVar3, EVT_FLOAT(-0.2))
-                                EVT_SETF(LVar4, EVT_FLOAT(0.9))
-                                EVT_MULF(LVar2, LVar0)
-                                EVT_MULF(LVar3, LVar0)
-                                EVT_MULF(LVar4, LVar0)
-                                EVT_ADDF(LVar2, EVT_FLOAT(380.0))
-                                EVT_ADDF(LVar3, EVT_FLOAT(15.0))
-                                EVT_ADDF(LVar4, EVT_FLOAT(-30.0))
-                                EVT_CALL(N(FlowerGuard_SetItemEntityPosition), LVar7, LVar2, LVar3, LVar4)
-                                EVT_WAIT(1)
-                                EVT_IF_NE(LVar1, 1)
-                                    EVT_BREAK_LOOP
-                                EVT_END_IF
-                            EVT_END_LOOP
-                        EVT_ELSE
-                            EVT_CALL(MakeLerp, 0, 100, 7, EASING_LINEAR)
-                            EVT_LOOP(0)
-                                EVT_CALL(UpdateLerp)
-                                EVT_SETF(LVar2, EVT_FLOAT(0.5))
-                                EVT_SETF(LVar3, EVT_FLOAT(-0.2))
-                                EVT_SETF(LVar4, EVT_FLOAT(1.0))
-                                EVT_MULF(LVar2, LVar0)
-                                EVT_MULF(LVar3, LVar0)
-                                EVT_MULF(LVar4, LVar0)
-                                EVT_ADDF(LVar2, EVT_FLOAT(390.0))
-                                EVT_ADDF(LVar3, EVT_FLOAT(15.0))
-                                EVT_ADDF(LVar4, EVT_FLOAT(-30.0))
-                                EVT_CALL(N(FlowerGuard_SetItemEntityPosition), LVar7, LVar2, LVar3, LVar4)
-                                EVT_WAIT(1)
-                                EVT_IF_NE(LVar1, 1)
-                                    EVT_BREAK_LOOP
-                                EVT_END_IF
-                            EVT_END_LOOP
-                        EVT_END_IF
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_Idle)
-                        EVT_CALL(RemoveItemEntity, LVar7)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_Idle)
-                        EVT_CALL(EndSpeech, NPC_SELF, ANIM_GateFlower_Blue_Talk, ANIM_GateFlower_Blue_Idle, 0)
-                EVT_END_SWITCH
-        EVT_END_SWITCH
-        EVT_THREAD
-            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(6.0 / DT))
-        EVT_END_THREAD
-        EVT_WAIT(10 * DT)
-    EVT_ELSE
-        EVT_IF_LT(GB_StoryProgress, STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_HappyTalk, ANIM_GateFlower_Blue_HappyIdle, 0, MSG_CH6_004E)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_HappyTalk, ANIM_GateFlower_Blue_HappyIdle, 0, MSG_CH6_004F)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+        Switch(LVar0)
+            CaseLe(0)
+                Call(SetPlayerAnimation, ANIM_Mario1_Still)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Talk, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_004A)
+            CaseDefault
+                Set(LVar8, LVar0)
+                Call(N(FlowerGuard_JudgeItemTastiness), LVar0)
+                Call(MakeItemEntity, LVar8, 385, 20, -34, ITEM_SPAWN_MODE_DECORATION, 0)
+                Set(LVar7, LVar0)
+                Call(PlaySoundAtNpc, NPC_SELF, SOUND_EAT_OR_DRINK, SOUND_SPACE_DEFAULT)
+                Call(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_Eat)
+                Wait(20 * DT)
+                Call(RemoveItemEntity, LVar7)
+                Switch(LVar8)
+                    CaseEq(158)
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Chew, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_004D)
+                        Call(PlaySoundAtNpc, NPC_SELF, SOUND_APPROVE, SOUND_SPACE_DEFAULT)
+                        Call(EndSpeech, NPC_SELF, ANIM_GateFlower_Blue_HappyTalk, ANIM_GateFlower_Blue_HappyIdle, 0)
+                        Call(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_OpenGate)
+                        Call(PlaySoundAtCollider, COLLIDER_o95, SOUND_METAL_GATE_OPEN, SOUND_SPACE_DEFAULT)
+                        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o95, COLLIDER_FLAGS_UPPER_MASK)
+                        Call(MakeLerp, 0, 100, 30, EASING_QUADRATIC_IN)
+                        Loop(0)
+                            Call(UpdateLerp)
+                            SetF(LVar8, LVar0)
+                            SetF(LVar9, LVar0)
+                            MulF(LVar8, Float(0.5))
+                            MulF(LVar9, Float(1.2))
+                            Call(RotateModel, MODEL_o86, LVar8, 0, -1, 0)
+                            Call(RotateModel, MODEL_o87, LVar8, 0, -1, 0)
+                            Call(RotateModel, MODEL_o88, LVar8, 0, -1, 0)
+                            Call(RotateModel, MODEL_o83, LVar9, 0, 1, 0)
+                            Call(RotateModel, MODEL_o84, LVar9, 0, 1, 0)
+                            Call(RotateModel, MODEL_o85, LVar9, 0, 1, 0)
+                            Wait(1)
+                            IfNe(LVar1, 1)
+                                BreakLoop
+                            EndIf
+                        EndLoop
+                        Call(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_HappyDance)
+                        Set(GF_FLO23_GaveBlueBerry, TRUE)
+                    CaseEq(159)
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Chew, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_004C)
+                        Call(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_Idle)
+                    CaseEq(160)
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Chew, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_004C)
+                        Call(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_Idle)
+                    CaseDefault
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Chew, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_004B)
+                        Call(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_Disgust)
+                        Call(PlaySoundAtNpc, NPC_SELF, SOUND_SPIT_OUT, SOUND_SPACE_DEFAULT)
+                        Call(MakeItemEntity, LVar8, 375, 20, 0, ITEM_SPAWN_MODE_DECORATION, 0)
+                        Set(LVar7, LVar0)
+                        Wait(5 * DT)
+                        Call(GetAngleToPlayer, NPC_SELF, LVar0)
+                        IfLt(LVar0, 180)
+                            Call(MakeLerp, 0, 100, 7, EASING_LINEAR)
+                            Loop(0)
+                                Call(UpdateLerp)
+                                SetF(LVar2, Float(-0.5))
+                                SetF(LVar3, Float(-0.2))
+                                SetF(LVar4, Float(0.9))
+                                MulF(LVar2, LVar0)
+                                MulF(LVar3, LVar0)
+                                MulF(LVar4, LVar0)
+                                AddF(LVar2, Float(380.0))
+                                AddF(LVar3, Float(15.0))
+                                AddF(LVar4, Float(-30.0))
+                                Call(N(FlowerGuard_SetItemEntityPosition), LVar7, LVar2, LVar3, LVar4)
+                                Wait(1)
+                                IfNe(LVar1, 1)
+                                    BreakLoop
+                                EndIf
+                            EndLoop
+                        Else
+                            Call(MakeLerp, 0, 100, 7, EASING_LINEAR)
+                            Loop(0)
+                                Call(UpdateLerp)
+                                SetF(LVar2, Float(0.5))
+                                SetF(LVar3, Float(-0.2))
+                                SetF(LVar4, Float(1.0))
+                                MulF(LVar2, LVar0)
+                                MulF(LVar3, LVar0)
+                                MulF(LVar4, LVar0)
+                                AddF(LVar2, Float(390.0))
+                                AddF(LVar3, Float(15.0))
+                                AddF(LVar4, Float(-30.0))
+                                Call(N(FlowerGuard_SetItemEntityPosition), LVar7, LVar2, LVar3, LVar4)
+                                Wait(1)
+                                IfNe(LVar1, 1)
+                                    BreakLoop
+                                EndIf
+                            EndLoop
+                        EndIf
+                        Call(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_Idle)
+                        Call(RemoveItemEntity, LVar7)
+                        Call(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_Idle)
+                        Call(EndSpeech, NPC_SELF, ANIM_GateFlower_Blue_Talk, ANIM_GateFlower_Blue_Idle, 0)
+                EndSwitch
+        EndSwitch
+        Thread
+            Call(ResetCam, CAM_DEFAULT, Float(6.0 / DT))
+        EndThread
+        Wait(10 * DT)
+    Else
+        IfLt(GB_StoryProgress, STORY_CH6_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_HappyTalk, ANIM_GateFlower_Blue_HappyIdle, 0, MSG_CH6_004E)
+        Else
+            Call(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_HappyTalk, ANIM_GateFlower_Blue_HappyIdle, 0, MSG_CH6_004F)
+        EndIf
+    EndIf
+    Call(DisablePlayerInput, FALSE)
+    Unbind
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_GateFlower) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_GateFlower)))
-    EVT_IF_EQ(GF_FLO23_GaveBlueBerry, TRUE)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_HappyDance)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o95, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(RotateModel, MODEL_o86, 50, 0, -1, 0)
-        EVT_CALL(RotateModel, MODEL_o87, 50, 0, -1, 0)
-        EVT_CALL(RotateModel, MODEL_o88, 50, 0, -1, 0)
-        EVT_CALL(RotateModel, MODEL_o83, 120, 0, 1, 0)
-        EVT_CALL(RotateModel, MODEL_o84, 120, 0, 1, 0)
-        EVT_CALL(RotateModel, MODEL_o85, 120, 0, 1, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_GateFlower)))
+    IfEq(GF_FLO23_GaveBlueBerry, TRUE)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_HappyDance)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o95, COLLIDER_FLAGS_UPPER_MASK)
+        Call(RotateModel, MODEL_o86, 50, 0, -1, 0)
+        Call(RotateModel, MODEL_o87, 50, 0, -1, 0)
+        Call(RotateModel, MODEL_o88, 50, 0, -1, 0)
+        Call(RotateModel, MODEL_o83, 120, 0, 1, 0)
+        Call(RotateModel, MODEL_o84, 120, 0, 1, 0)
+        Call(RotateModel, MODEL_o85, 120, 0, 1, 0)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_GateFlower) = {

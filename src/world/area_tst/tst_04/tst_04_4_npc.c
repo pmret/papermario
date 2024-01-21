@@ -6,35 +6,35 @@ API_CALLABLE(N(DisableOwnerShadow)) {
 }
 
 EvtScript N(EVS_NpcAuxAI_Goompa) = {
-    EVT_CALL(N(DisableOwnerShadow))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(N(DisableOwnerShadow))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAux_Goompa) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_Goompa) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_Goompa) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Goompa) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Goompa) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Goompa) = {

@@ -20,89 +20,89 @@ MAP_STATIC_PAD(1,key_choice);
 #include "world/common/complete/KeyItemChoice.inc.c"
 
 EvtScript N(EVS_TossTrainInToybox) = {
-    EVT_CALL(FacePlayerTowardPoint, -440, -150, 0)
-    EVT_WAIT(15)
-    EVT_THREAD
-        EVT_WAIT(7)
-        EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-        EVT_ADD(LVar3, 50)
-        EVT_SETF(LVar5, 3)
-        EVT_CALL(MakeItemEntity, ITEM_TOY_TRAIN, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_DECORATION, 0)
-        EVT_SET(LVar7, LVar0)
-        EVT_CALL(MakeLerp, LVar4, -150, 30, EASING_CUBIC_OUT)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetItemPos, LVar7, -440, LVar3, LVar0)
-            EVT_ADDF(LVar5, EVT_FLOAT(-0.5))
-            EVT_ADD(LVar3, LVar5)
-            EVT_IF_LT(LVar3, 0)
-                EVT_SET(LVar3, 0)
-            EVT_END_IF
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(RemoveItemEntity, LVar7)
-    EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
-    EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_WAIT(10)
-    EVT_RETURN
-    EVT_END
+    Call(FacePlayerTowardPoint, -440, -150, 0)
+    Wait(15)
+    Thread
+        Wait(7)
+        Call(GetPlayerPos, LVar2, LVar3, LVar4)
+        Add(LVar3, 50)
+        SetF(LVar5, 3)
+        Call(MakeItemEntity, ITEM_TOY_TRAIN, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_DECORATION, 0)
+        Set(LVar7, LVar0)
+        Call(MakeLerp, LVar4, -150, 30, EASING_CUBIC_OUT)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetItemPos, LVar7, -440, LVar3, LVar0)
+            AddF(LVar5, Float(-0.5))
+            Add(LVar3, LVar5)
+            IfLt(LVar3, 0)
+                Set(LVar3, 0)
+            EndIf
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(RemoveItemEntity, LVar7)
+    EndThread
+    Call(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
+    Wait(20)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Wait(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_ItemPrompt_ToyTrain) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    EVT_CALL(ShowKeyChoicePopup)
-    EVT_SET(LVar2, LVar0)
-    EVT_IF_LE(LVar2, 0)
-        EVT_IF_EQ(LVar2, 0)
-            EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Inspect_Toybox, 160, 40)
-        EVT_END_IF
-        EVT_CALL(CloseChoicePopup)
-        EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(RemoveKeyItemAt, LVar1)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_OMO_TOYBOX_LID, SOUND_SPACE_DEFAULT)
-    EVT_CALL(MakeLerp, 0, -90, 10, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_SET(LVar2, 0)
-        EVT_SUB(LVar2, LVar0)
-        EVT_DIV(LVar2, 3)
-        EVT_CALL(RotateGroup, MODEL_box_top, LVar0, 1, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC_WAIT(N(EVS_TossTrainInToybox))
-    EVT_CALL(MakeLerp, -90, 0, 10, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_SET(LVar2, 0)
-        EVT_SUB(LVar2, LVar0)
-        EVT_DIV(LVar2, 3)
-        EVT_CALL(RotateGroup, MODEL_box_top, LVar0, 1, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_OMO_TOYBOX_LID, SOUND_SPACE_DEFAULT)
-    EVT_CALL(CloseChoicePopup)
-    EVT_SET(GB_StoryProgress, STORY_CH4_RETURNED_TOY_TRAIN)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-    EVT_UNBIND
-    EVT_CALL(GotoMap, EVT_PTR("omo_03"), omo_03_ENTRY_6)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
+    Call(ShowKeyChoicePopup)
+    Set(LVar2, LVar0)
+    IfLe(LVar2, 0)
+        IfEq(LVar2, 0)
+            Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_Toybox, 160, 40)
+        EndIf
+        Call(CloseChoicePopup)
+        Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+        Return
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(RemoveKeyItemAt, LVar1)
+    Call(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_OMO_TOYBOX_LID, SOUND_SPACE_DEFAULT)
+    Call(MakeLerp, 0, -90, 10, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Set(LVar2, 0)
+        Sub(LVar2, LVar0)
+        Div(LVar2, 3)
+        Call(RotateGroup, MODEL_box_top, LVar0, 1, 0, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    ExecWait(N(EVS_TossTrainInToybox))
+    Call(MakeLerp, -90, 0, 10, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Set(LVar2, 0)
+        Sub(LVar2, LVar0)
+        Div(LVar2, 3)
+        Call(RotateGroup, MODEL_box_top, LVar0, 1, 0, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_OMO_TOYBOX_LID, SOUND_SPACE_DEFAULT)
+    Call(CloseChoicePopup)
+    Set(GB_StoryProgress, STORY_CH4_RETURNED_TOY_TRAIN)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Unbind
+    Call(GotoMap, Ref("omo_03"), omo_03_ENTRY_6)
+    Wait(100)
+    Return
+    End
 };
 
 s32 N(ItemList_ToyTrain)[] = {
@@ -111,11 +111,11 @@ s32 N(ItemList_ToyTrain)[] = {
 };
 
 EvtScript N(EVS_Toybox_SetupTrainPrompt) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH4_RETURNED_TOY_TRAIN)
-        EVT_BIND_PADLOCK(EVT_PTR(N(EVS_ItemPrompt_ToyTrain)), TRIGGER_WALL_PRESS_A, COLLIDER_o468, EVT_PTR(N(ItemList_ToyTrain)), 0, 1)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH4_RETURNED_TOY_TRAIN)
+        BindPadlock(Ref(N(EVS_ItemPrompt_ToyTrain)), TRIGGER_WALL_PRESS_A, COLLIDER_o468, Ref(N(ItemList_ToyTrain)), 0, 1)
+    EndIf
+    Return
+    End
 };
 
 s32 N(get_total_equipped_bp_cost)(void) {

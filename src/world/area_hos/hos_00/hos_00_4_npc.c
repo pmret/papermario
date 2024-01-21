@@ -14,71 +14,71 @@ NpcSettings N(NpcSettings_FlyingMagikoopa) = {
 };
 
 EvtScript N(EVS_Scene_Wishing) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 305, -10, -50)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 305, -10, -50)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(400.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(9.0), EVT_FLOAT(-10.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(30)
-    EVT_CALL(SpeakToPlayer, NPC_ToadKid, ANIM_ToadKid_Red_Talk, ANIM_ToadKid_Red_Disappointed, 0, MSG_HOS_006C)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_ToadKid, ANIM_ToadKid_Red_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_Toadette, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_HOS_006D)
-    EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_ToadKid, ANIM_ToadKid_Red_Talk, ANIM_ToadKid_Red_Idle, 0, MSG_HOS_006E)
-    EVT_WAIT(50)
-    EVT_CALL(GotoMap, EVT_PTR("osr_01"), osr_01_ENTRY_3)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(UseSettingsFrom, CAM_DEFAULT, 305, -10, -50)
+    Call(SetPanTarget, CAM_DEFAULT, 305, -10, -50)
+    Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(9.0), Float(-10.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(30)
+    Call(SpeakToPlayer, NPC_ToadKid, ANIM_ToadKid_Red_Talk, ANIM_ToadKid_Red_Disappointed, 0, MSG_HOS_006C)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_ToadKid, ANIM_ToadKid_Red_Idle)
+    Call(SpeakToPlayer, NPC_Toadette, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_HOS_006D)
+    Wait(10)
+    Call(SpeakToPlayer, NPC_ToadKid, ANIM_ToadKid_Red_Talk, ANIM_ToadKid_Red_Idle, 0, MSG_HOS_006E)
+    Wait(50)
+    Call(GotoMap, Ref("osr_01"), osr_01_ENTRY_3)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_FlyingMagikoopa) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(GetPlayerPos, LVar3, LVar1, LVar2)
-            EVT_CALL(SetPlayerPos, LVar3, LVar1, -45)
-            EVT_ADD(LVar3, 40)
-            EVT_CALL(SetNpcPos, NPC_PARTNER, LVar3, LVar1, -45)
-            EVT_CALL(GetNpcPos, NPC_Twink, LVar3, LVar1, LVar2)
-            EVT_ADD(LVar3, -25)
-            EVT_CALL(SetNpcPos, NPC_Twink, LVar3, LVar1, -45)
-            EVT_EXEC(N(EVS_Scene_TwinkDeparts))
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(GetPlayerPos, LVar3, LVar1, LVar2)
+            Call(SetPlayerPos, LVar3, LVar1, -45)
+            Add(LVar3, 40)
+            Call(SetNpcPos, NPC_PARTNER, LVar3, LVar1, -45)
+            Call(GetNpcPos, NPC_Twink, LVar3, LVar1, LVar2)
+            Add(LVar3, -25)
+            Call(SetNpcPos, NPC_Twink, LVar3, LVar1, -45)
+            Exec(N(EVS_Scene_TwinkDeparts))
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_FlyingMagikoopa) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(0)
-            EVT_CASE_EQ(1)
-                EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-        EVT_END_SWITCH
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetSelfVar, 0, LVar0)
+        Switch(LVar0)
+            CaseEq(0)
+            CaseEq(1)
+                Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+        EndSwitch
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_FlyingMagikoopa) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_FlyingMagikoopa)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_FlyingMagikoopa)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_FlyingMagikoopa)))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_FlyingMagikoopa)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 API_CALLABLE(N(SetCurrentPartner)) {
@@ -87,40 +87,40 @@ API_CALLABLE(N(SetCurrentPartner)) {
 }
 
 EvtScript N(EVS_NpcIdle_Twink) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_LOOP(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(EnablePartner, PARTNER_TWINK)
-    EVT_CALL(N(SetCurrentPartner), PARTNER_TWINK)
-    EVT_CALL(StartBattle)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Loop(0)
+        Call(GetSelfVar, 0, LVar0)
+        IfEq(LVar0, 1)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(EnablePartner, PARTNER_TWINK)
+    Call(N(SetCurrentPartner), PARTNER_TWINK)
+    Call(StartBattle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Twink) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Twink) = {
-    EVT_CALL(SetSelfVar, 0, 2)
-    EVT_CALL(DisablePartner, PARTNER_TWINK)
-    EVT_CALL(N(SetCurrentPartner), PARTNER_GOOMBARIO)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 2)
+    Call(DisablePartner, PARTNER_TWINK)
+    Call(N(SetCurrentPartner), PARTNER_GOOMBARIO)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Twink) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Twink)))
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Twink)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Twink)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Twink)))
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Twink)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Twink)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Twink) = {

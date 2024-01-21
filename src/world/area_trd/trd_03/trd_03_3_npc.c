@@ -17,167 +17,167 @@ NpcSettings N(NpcSettings_KoopaBros) = {
 #include "world/common/enemy/Bobomb_Wander.inc.c"
 
 EvtScript N(EVS_Scene_GreenKoopaBros) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_EXEC(N(EVS_StartKoopaBrosTheme))
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcPos, NPC_PARTNER, -720, 0, 75)
-    EVT_CALL(SetPlayerPos, -700, 0, 80)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_IdleCrouch)
-    EVT_CALL(SetNpcPos, NPC_KoopaBros, -570, 0, -57)
-    EVT_CALL(InterpNpcYaw, NPC_KoopaBros, 270, 0)
-    EVT_THREAD
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -607, 0, 80)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 320)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, -607, 0, 80)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_END_THREAD
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Idle)
-    EVT_WAIT(15 * DT)
-    EVT_CALL(InterpNpcYaw, NPC_KoopaBros, 90, 0)
-    EVT_WAIT(3 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Run)
-    EVT_CALL(SetNpcSpeed, NPC_KoopaBros, EVT_FLOAT(2.6 / DT))
-    EVT_CALL(NpcMoveTo, NPC_KoopaBros, -555, 20, 0)
-    EVT_CALL(InterpNpcYaw, NPC_KoopaTroopa_01, 270, 0)
-    EVT_WAIT(15 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Idle)
-    EVT_WAIT(2 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Talk)
-    EVT_WAIT(25 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Idle)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaTroopa_01, ANIM_KoopaTroopa_Salute)
-    EVT_WAIT(25 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaTroopa_01, ANIM_KoopaTroopa_Idle)
-    EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_ori1, SOUND_LARGE_GATE_OPEN, SOUND_SPACE_DEFAULT)
-        EVT_CALL(MakeLerp, 100, 0, 40 * DT, EASING_QUADRATIC_IN)
-        EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, MODEL_0ri, 0, LVar0, -1)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_ori1, SOUND_LARGE_GATE_CLOSE, SOUND_SPACE_DEFAULT)
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
-        EVT_WAIT(10 * DT)
-    EVT_END_THREAD
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Run)
-    EVT_CALL(SetNpcSpeed, NPC_KoopaBros, EVT_FLOAT(2.0 / DT))
-    EVT_CALL(NpcMoveTo, NPC_KoopaBros, -550, 70, 0)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Idle)
-    EVT_WAIT(15 * DT)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_KoopaBros, ANIM_KoopaBros_Green_Talk, ANIM_KoopaBros_Green_Idle, 5, MSG_CH1_00D3)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
-    EVT_WAIT(10 * DT)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_ttw, SOUND_METAL_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-    EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
-    EVT_LABEL(10)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, MODEL_d1, LVar0, 0, -1, 0)
-    EVT_CALL(RotateModel, MODEL_d2, LVar0, 0, 1, 0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(SetPlayerPos, -647, 0, 80)
-    EVT_EXEC_WAIT(N(EVS_EnterMap))
-    EVT_CALL(InterpNpcYaw, NPC_KoopaBros, 270, 5)
-    EVT_CALL(SetNpcImgFXParams, NPC_KoopaBros, IMGFX_SET_ANIM, IMGFX_ANIM_STARTLE, 2, 1, 0)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Shock)
-    EVT_WAIT(12 * DT)
-    EVT_CALL(SetNpcImgFXParams, NPC_KoopaBros, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Idle)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_KoopaBros, ANIM_KoopaBros_Green_Talk, ANIM_KoopaBros_Green_Idle, 0, MSG_CH1_00D4)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Walk)
-    EVT_CALL(InterpNpcYaw, NPC_KoopaBros, 45, 2)
-    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros, SOUND_RUN_AWAY_BUILDUP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Run)
-    EVT_CALL(SetNpcJumpscale, NPC_KoopaBros, EVT_FLOAT(0.8))
-    EVT_CALL(GetNpcPos, NPC_KoopaBros, LVar0, LVar1, LVar2)
-    EVT_CALL(NpcJump0, NPC_KoopaBros, LVar0, LVar1, LVar2, 8 * DT)
-    EVT_WAIT(8 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros, SOUND_RUN_AWAY, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcSpeed, NPC_KoopaBros, EVT_FLOAT(8.0 / DT))
-    EVT_CALL(NpcMoveTo, NPC_KoopaBros, -300, 70, 0)
-    EVT_SET(GB_StoryProgress, STORY_CH1_KOOPA_BROS_HID_KEY)
-    EVT_CALL(RemoveNpc, NPC_KoopaBros)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_EXEC(N(EVS_EndKoopaBrosTheme))
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Exec(N(EVS_StartKoopaBrosTheme))
+    Call(DisablePartnerAI, 0)
+    Call(SetNpcPos, NPC_PARTNER, -720, 0, 75)
+    Call(SetPlayerPos, -700, 0, 80)
+    Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_IdleCrouch)
+    Call(SetNpcPos, NPC_KoopaBros, -570, 0, -57)
+    Call(InterpNpcYaw, NPC_KoopaBros, 270, 0)
+    Thread
+        Call(UseSettingsFrom, CAM_DEFAULT, -607, 0, 80)
+        Call(SetCamDistance, CAM_DEFAULT, 320)
+        Call(SetPanTarget, CAM_DEFAULT, -607, 0, 80)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    EndThread
+    Wait(10 * DT)
+    Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Idle)
+    Wait(15 * DT)
+    Call(InterpNpcYaw, NPC_KoopaBros, 90, 0)
+    Wait(3 * DT)
+    Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Run)
+    Call(SetNpcSpeed, NPC_KoopaBros, Float(2.6 / DT))
+    Call(NpcMoveTo, NPC_KoopaBros, -555, 20, 0)
+    Call(InterpNpcYaw, NPC_KoopaTroopa_01, 270, 0)
+    Wait(15 * DT)
+    Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Idle)
+    Wait(2 * DT)
+    Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Talk)
+    Wait(25 * DT)
+    Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Idle)
+    Call(SetNpcAnimation, NPC_KoopaTroopa_01, ANIM_KoopaTroopa_Salute)
+    Wait(25 * DT)
+    Call(SetNpcAnimation, NPC_KoopaTroopa_01, ANIM_KoopaTroopa_Idle)
+    Thread
+        Call(PlaySoundAtCollider, COLLIDER_ori1, SOUND_LARGE_GATE_OPEN, SOUND_SPACE_DEFAULT)
+        Call(MakeLerp, 100, 0, 40 * DT, EASING_QUADRATIC_IN)
+        Label(0)
+        Call(UpdateLerp)
+        Call(TranslateModel, MODEL_0ri, 0, LVar0, -1)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+        Call(PlaySoundAtCollider, COLLIDER_ori1, SOUND_LARGE_GATE_CLOSE, SOUND_SPACE_DEFAULT)
+        Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(1.0))
+        Wait(10 * DT)
+    EndThread
+    Wait(10 * DT)
+    Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Run)
+    Call(SetNpcSpeed, NPC_KoopaBros, Float(2.0 / DT))
+    Call(NpcMoveTo, NPC_KoopaBros, -550, 70, 0)
+    Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Idle)
+    Wait(15 * DT)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_KoopaBros, ANIM_KoopaBros_Green_Talk, ANIM_KoopaBros_Green_Idle, 5, MSG_CH1_00D3)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
+    Wait(10 * DT)
+    Call(PlaySoundAtCollider, COLLIDER_ttw, SOUND_METAL_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+    Call(MakeLerp, 0, 80, 10, EASING_LINEAR)
+    Label(10)
+    Call(UpdateLerp)
+    Call(RotateModel, MODEL_d1, LVar0, 0, -1, 0)
+    Call(RotateModel, MODEL_d2, LVar0, 0, 1, 0)
+    Wait(1)
+    IfEq(LVar1, 1)
+        Goto(10)
+    EndIf
+    Call(EnablePartnerAI)
+    Call(SetPlayerPos, -647, 0, 80)
+    ExecWait(N(EVS_EnterMap))
+    Call(InterpNpcYaw, NPC_KoopaBros, 270, 5)
+    Call(SetNpcImgFXParams, NPC_KoopaBros, IMGFX_SET_ANIM, IMGFX_ANIM_STARTLE, 2, 1, 0)
+    Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Shock)
+    Wait(12 * DT)
+    Call(SetNpcImgFXParams, NPC_KoopaBros, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Idle)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_KoopaBros, ANIM_KoopaBros_Green_Talk, ANIM_KoopaBros_Green_Idle, 0, MSG_CH1_00D4)
+    Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Walk)
+    Call(InterpNpcYaw, NPC_KoopaBros, 45, 2)
+    Call(PlaySoundAtNpc, NPC_KoopaBros, SOUND_RUN_AWAY_BUILDUP, SOUND_SPACE_DEFAULT)
+    Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Run)
+    Call(SetNpcJumpscale, NPC_KoopaBros, Float(0.8))
+    Call(GetNpcPos, NPC_KoopaBros, LVar0, LVar1, LVar2)
+    Call(NpcJump0, NPC_KoopaBros, LVar0, LVar1, LVar2, 8 * DT)
+    Wait(8 * DT)
+    Call(PlaySoundAtNpc, NPC_KoopaBros, SOUND_RUN_AWAY, SOUND_SPACE_DEFAULT)
+    Call(SetNpcSpeed, NPC_KoopaBros, Float(8.0 / DT))
+    Call(NpcMoveTo, NPC_KoopaBros, -300, 70, 0)
+    Set(GB_StoryProgress, STORY_CH1_KOOPA_BROS_HID_KEY)
+    Call(RemoveNpc, NPC_KoopaBros)
+    Call(DisablePlayerInput, FALSE)
+    Exec(N(EVS_EndKoopaBrosTheme))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoopaBros) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH1_KOOPA_BROS_HID_KEY)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH1_KOOPA_BROS_HID_KEY)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_KoopaTroopa_01) = {
-    EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPA_BROS_HID_KEY)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Walk)
-    EVT_WAIT(10)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_KoopaTroopa_Wander)))
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    Wait(1)
+    IfLt(GB_StoryProgress, STORY_CH1_KOOPA_BROS_HID_KEY)
+        Goto(0)
+    EndIf
+    Wait(10)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Walk)
+    Wait(10)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_KoopaTroopa_Wander)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoopaTroopa_01) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KoopaTroopa_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KoopaTroopa_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
-    EVT_LABEL(0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_IF_LT(LVar0, -150)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Salute)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 15)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Walk)
-    EVT_LABEL(1)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_IF_LT(LVar0, -100)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Run)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(7.0))
-    EVT_CALL(NpcMoveTo, NPC_SELF, 35, -130, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 90, -130, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 105, 10, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Walk)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_KoopaTroopa_Wander)))
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Wait(1)
+    IfLt(LVar0, -150)
+        Goto(0)
+    EndIf
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Salute)
+    Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 15)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Walk)
+    Label(1)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Wait(1)
+    IfLt(LVar0, -100)
+        Goto(1)
+    EndIf
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Run)
+    Call(SetNpcSpeed, NPC_SELF, Float(7.0))
+    Call(NpcMoveTo, NPC_SELF, 35, -130, 0)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(NpcMoveTo, NPC_SELF, 90, -130, 0)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(NpcMoveTo, NPC_SELF, 105, 10, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Walk)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_KoopaTroopa_Wander)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoopaTroopa_02) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KoopaTroopa_02)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KoopaTroopa_02)))
+    Return
+    End
 };
 
 NpcData N(NpcData_KoopaBros) = {

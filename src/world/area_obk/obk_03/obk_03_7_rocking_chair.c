@@ -4,10 +4,10 @@
 #include "../common/RockingChair.inc.c"
 
 EvtScript N(EVS_SetupRockingChair) = {
-    EVT_CALL(ParentColliderToModel, COLLIDER_i1, MODEL_i1)
-    EVT_CALL(ParentColliderToModel, COLLIDER_i2, MODEL_i3)
-    EVT_CALL(ParentColliderToModel, COLLIDER_i3, MODEL_i3)
-    EVT_CALL(N(UpdateRockingChair))
-    EVT_RETURN
-    EVT_END
+    Call(ParentColliderToModel, COLLIDER_i1, MODEL_i1)
+    Call(ParentColliderToModel, COLLIDER_i2, MODEL_i3)
+    Call(ParentColliderToModel, COLLIDER_i3, MODEL_i3)
+    Call(N(UpdateRockingChair))
+    Return
+    End
 };

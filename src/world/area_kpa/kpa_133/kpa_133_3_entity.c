@@ -27,112 +27,112 @@ API_CALLABLE(N(SetSpringPosition)) {
 }
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_IF_EQ(GF_KPA133_BlueSwitch, FALSE)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_BlueSwitch), 60, 115, 10, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_KPA133_HitWaterSwitch))
-        EVT_CALL(AssignScript, EVT_PTR(N(EVS_TriggerSwitch)))
-    EVT_END_IF
-    EVT_IF_EQ(GF_KPA133_BlueSwitch, TRUE)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_SimpleSpring), 150, 115, 0, 90, 60, MAKE_ENTITY_END)
-    EVT_ELSE
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_SimpleSpring), 150, 150, -105, 90, 60, MAKE_ENTITY_END)
-        EVT_SET(MV_SpringEntityID, LVar0)
-        EVT_CALL(N(SetSpringRotation), -90, 0, 0)
-        EVT_EXEC(N(EVS_SetupHiddenSpring))
-    EVT_END_IF
-    EVT_CALL(MakeItemEntity, ITEM_BOWSER_CASTLE_KEY, -350, 215, -50, ITEM_SPAWN_MODE_KEY, GF_KPA133_Item_CastleKey2)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_KPA133_BlueSwitch, FALSE)
+        Call(MakeEntity, Ref(Entity_BlueSwitch), 60, 115, 10, 0, MAKE_ENTITY_END)
+        Call(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_KPA133_HitWaterSwitch))
+        Call(AssignScript, Ref(N(EVS_TriggerSwitch)))
+    EndIf
+    IfEq(GF_KPA133_BlueSwitch, TRUE)
+        Call(MakeEntity, Ref(Entity_SimpleSpring), 150, 115, 0, 90, 60, MAKE_ENTITY_END)
+    Else
+        Call(MakeEntity, Ref(Entity_SimpleSpring), 150, 150, -105, 90, 60, MAKE_ENTITY_END)
+        Set(MV_SpringEntityID, LVar0)
+        Call(N(SetSpringRotation), -90, 0, 0)
+        Exec(N(EVS_SetupHiddenSpring))
+    EndIf
+    Call(MakeItemEntity, ITEM_BOWSER_CASTLE_KEY, -350, 215, -50, ITEM_SPAWN_MODE_KEY, GF_KPA133_Item_CastleKey2)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupHiddenSpring) = {
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(MV_RevealHiddenSpring, TRUE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(GF_KPA133_BlueSwitch, TRUE)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_GE(LVar0, 115)
-        EVT_IF_LE(LVar0, 180)
-            EVT_SET(LVar3, LVar0)
-            EVT_IF_LT(LVar0, 150)
-                EVT_ADD(LVar3, -40)
-                EVT_SET(LVar4, 90)
-            EVT_ELSE
-                EVT_ADD(LVar3, 40)
-                EVT_SET(LVar4, 270)
-            EVT_END_IF
-            EVT_THREAD
-                EVT_WAIT(2)
-                EVT_CALL(InterpPlayerYaw, LVar4, 0)
-                EVT_WAIT(2)
-                EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(2.0))
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
-                EVT_CALL(PlayerJump1, LVar3, LVar1, LVar2, 10)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-                EVT_WAIT(5)
-            EVT_END_THREAD
-        EVT_END_IF
-    EVT_END_IF
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 80, 15, EASING_QUADRATIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_kakusitobira, LVar0, 1, 0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 135, 115, -70, 0)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 180, 115, -70, 0)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 135, 115, -55, 0)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 180, 115, -55, 0)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 135, 115, -40, 0)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 180, 115, -40, 0)
-        EVT_WAIT(20)
-        EVT_CALL(EnableModel, MODEL_kakusitobira, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_123, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(18)
-        EVT_CALL(PlaySoundAtNpc, NPC_Dummy, SOUND_KPA_DROP_WALL, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, -90, 0, 15, EASING_QUADRATIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(N(SetSpringRotation), LVar0, 0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_LOOP(23)
-            EVT_CALL(GetNpcPos, NPC_Dummy, LVar0, LVar1, LVar2)
-            EVT_CALL(N(SetSpringPosition), LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(SetNpcPos, NPC_Dummy, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_WAIT(3)
-    EVT_CALL(SetNpcPos, NPC_Dummy, 150, 150, -105)
-    EVT_CALL(SetNpcJumpscale, NPC_Dummy, EVT_FLOAT(1.0))
-    EVT_CALL(NpcJump0, NPC_Dummy, 150, 115, 0, 17)
-    EVT_CALL(GetNpcPos, NPC_Dummy, LVar0, LVar1, LVar2)
-    EVT_WAIT(20)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Wait(1)
+        IfEq(MV_RevealHiddenSpring, TRUE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DisablePlayerInput, TRUE)
+    Set(GF_KPA133_BlueSwitch, TRUE)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    IfGe(LVar0, 115)
+        IfLe(LVar0, 180)
+            Set(LVar3, LVar0)
+            IfLt(LVar0, 150)
+                Add(LVar3, -40)
+                Set(LVar4, 90)
+            Else
+                Add(LVar3, 40)
+                Set(LVar4, 270)
+            EndIf
+            Thread
+                Wait(2)
+                Call(InterpPlayerYaw, LVar4, 0)
+                Wait(2)
+                Call(SetPlayerJumpscale, Float(2.0))
+                Call(SetPlayerAnimation, ANIM_Mario1_Flail)
+                Call(PlayerJump1, LVar3, LVar1, LVar2, 10)
+                Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+                Wait(5)
+            EndThread
+        EndIf
+    EndIf
+    Thread
+        Call(MakeLerp, 0, 80, 15, EASING_QUADRATIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_kakusitobira, LVar0, 1, 0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        PlayEffect(EFFECT_LANDING_DUST, 1, 135, 115, -70, 0)
+        PlayEffect(EFFECT_LANDING_DUST, 1, 180, 115, -70, 0)
+        PlayEffect(EFFECT_LANDING_DUST, 1, 135, 115, -55, 0)
+        PlayEffect(EFFECT_LANDING_DUST, 1, 180, 115, -55, 0)
+        PlayEffect(EFFECT_LANDING_DUST, 1, 135, 115, -40, 0)
+        PlayEffect(EFFECT_LANDING_DUST, 1, 180, 115, -40, 0)
+        Wait(20)
+        Call(EnableModel, MODEL_kakusitobira, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_123, COLLIDER_FLAGS_UPPER_MASK)
+    EndThread
+    Thread
+        Wait(18)
+        Call(PlaySoundAtNpc, NPC_Dummy, SOUND_KPA_DROP_WALL, SOUND_SPACE_DEFAULT)
+    EndThread
+    Thread
+        Call(MakeLerp, -90, 0, 15, EASING_QUADRATIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(N(SetSpringRotation), LVar0, 0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Loop(23)
+            Call(GetNpcPos, NPC_Dummy, LVar0, LVar1, LVar2)
+            Call(N(SetSpringPosition), LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+        Call(SetNpcPos, NPC_Dummy, NPC_DISPOSE_LOCATION)
+    EndThread
+    Wait(3)
+    Call(SetNpcPos, NPC_Dummy, 150, 150, -105)
+    Call(SetNpcJumpscale, NPC_Dummy, Float(1.0))
+    Call(NpcJump0, NPC_Dummy, 150, 115, 0, 17)
+    Call(GetNpcPos, NPC_Dummy, LVar0, LVar1, LVar2)
+    Wait(20)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TriggerSwitch) = {
-    EVT_SET(MV_RevealHiddenSpring, TRUE)
-    EVT_RETURN
-    EVT_END
+    Set(MV_RevealHiddenSpring, TRUE)
+    Return
+    End
 };

@@ -1,8 +1,8 @@
 #include "mim_02.h"
 
 EvtScript N(EVS_Unused_DoNothing) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 #include "world/common/npc/Oaklie.inc.c"
@@ -17,143 +17,143 @@ s32 N(KeyList)[] = {
 #include "world/common/complete/KeyItemChoice.inc.c"
 
 EvtScript N(EVS_NpcInteract_Oaklie) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_INVITED_TO_BOOS_MANSION)
-        EVT_CALL(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0006)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0007)
-    EVT_CALL(SetNpcFlagBits, NPC_Oaklie, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_WAIT(5 * DT)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Jump)
-        EVT_WAIT(15 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, -426, 58, -70)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(6.0), EVT_FLOAT(-6.0))
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 250)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcJumpscale, NPC_Oaklie, EVT_FLOAT(1.0))
-    EVT_CALL(NpcJump0, NPC_Oaklie, -426, 58, -70, 20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0008)
-    EVT_WAIT(5 * DT)
-    EVT_THREAD
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Jump)
-        EVT_WAIT(15 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_Oaklie, -333, 0, -81, 20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
-    EVT_WAIT(5 * DT)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Jump)
-        EVT_WAIT(15 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_Oaklie, -300, 0, -170, 15 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
-    EVT_WAIT(5 * DT)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Jump)
-        EVT_WAIT(15 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_Oaklie, -226, 0, -245, 15 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
-    EVT_WAIT(5 * DT)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Jump)
-        EVT_WAIT(15 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_Oaklie, -160, 0, -296, 15 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SetNpcPos, NPC_Oaklie, NPC_DISPOSE_LOCATION)
-    EVT_SET(GB_StoryProgress, STORY_CH3_ALLOWED_INTO_FOREVER_FOREST)
-    EVT_EXEC_WAIT(N(EVS_EnableWestGate))
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH3_INVITED_TO_BOOS_MANSION)
+        Call(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0006)
+        Return
+    EndIf
+    Call(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0007)
+    Call(SetNpcFlagBits, NPC_Oaklie, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Wait(5 * DT)
+    Thread
+        Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Jump)
+        Wait(15 * DT)
+        Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
+    EndThread
+    Thread
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(SetPanTarget, CAM_DEFAULT, -426, 58, -70)
+        Call(SetCamPitch, CAM_DEFAULT, Float(6.0), Float(-6.0))
+        Call(SetCamDistance, CAM_DEFAULT, 250)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    EndThread
+    Call(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+    Call(SetNpcJumpscale, NPC_Oaklie, Float(1.0))
+    Call(NpcJump0, NPC_Oaklie, -426, 58, -70, 20 * DT)
+    Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
+    Wait(5 * DT)
+    Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Idle)
+    Call(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0008)
+    Wait(5 * DT)
+    Thread
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
+    EndThread
+    Thread
+        Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Jump)
+        Wait(15 * DT)
+        Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
+    EndThread
+    Call(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_Oaklie, -333, 0, -81, 20 * DT)
+    Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
+    Wait(5 * DT)
+    Thread
+        Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Jump)
+        Wait(15 * DT)
+        Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
+    EndThread
+    Call(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_Oaklie, -300, 0, -170, 15 * DT)
+    Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
+    Wait(5 * DT)
+    Thread
+        Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Jump)
+        Wait(15 * DT)
+        Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
+    EndThread
+    Call(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_Oaklie, -226, 0, -245, 15 * DT)
+    Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
+    Wait(5 * DT)
+    Thread
+        Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Jump)
+        Wait(15 * DT)
+        Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
+    EndThread
+    Call(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_Oaklie, -160, 0, -296, 15 * DT)
+    Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
+    Wait(5 * DT)
+    Call(SetNpcPos, NPC_Oaklie, NPC_DISPOSE_LOCATION)
+    Set(GB_StoryProgress, STORY_CH3_ALLOWED_INTO_FOREVER_FOREST)
+    ExecWait(N(EVS_EnableWestGate))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Oaklie) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH3_ALLOWED_INTO_FOREVER_FOREST)
-            EVT_CALL(DisablePlayerInput, TRUE)
-            EVT_WAIT(25)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(6.0), EVT_FLOAT(-6.0))
-            EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-            EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-            EVT_CALL(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0003)
-            EVT_WAIT(10 * DT)
-            EVT_THREAD
-                EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Jump)
-                EVT_WAIT(5 * DT)
-                EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
-            EVT_END_THREAD
-            EVT_THREAD
-                EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-                EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-                EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-                EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-                EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-            EVT_END_THREAD
-            EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-            EVT_CALL(NpcJump0, NPC_SELF, -455, 0, 0, 20 * DT)
-            EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
-            EVT_WAIT(5 * DT)
-            EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Idle)
-            EVT_WAIT(15 * DT)
-            EVT_IF_LT(GB_StoryProgress, STORY_CH1_RETURNED_TO_TOAD_TOWN)
-                EVT_CALL(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0004)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0005)
-            EVT_END_IF
-            EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH3_ALLOWED_INTO_FOREVER_FOREST)
+            Call(DisablePlayerInput, TRUE)
+            Wait(25)
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Call(SetCamPitch, CAM_DEFAULT, Float(6.0), Float(-6.0))
+            Call(SetCamDistance, CAM_DEFAULT, 300)
+            Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
+            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+            Call(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0003)
+            Wait(10 * DT)
+            Thread
+                Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Jump)
+                Wait(5 * DT)
+                Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
+            EndThread
+            Thread
+                Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+                Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+                Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+                Call(PanToTarget, CAM_DEFAULT, 0, 0)
+                Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
+            EndThread
+            Call(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+            Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+            Call(NpcJump0, NPC_SELF, -455, 0, 0, 20 * DT)
+            Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
+            Wait(5 * DT)
+            Call(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Idle)
+            Wait(15 * DT)
+            IfLt(GB_StoryProgress, STORY_CH1_RETURNED_TO_TOAD_TOWN)
+                Call(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0004)
+            Else
+                Call(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0005)
+            EndIf
+            Call(DisablePlayerInput, FALSE)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Oaklie) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Oaklie)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Oaklie)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_GE(STORY_CH3_ALLOWED_INTO_FOREVER_FOREST)
-            EVT_CALL(SetNpcPos, NPC_Oaklie, NPC_DISPOSE_LOCATION)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Oaklie)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Oaklie)))
+    Switch(GB_StoryProgress)
+        CaseGe(STORY_CH3_ALLOWED_INTO_FOREVER_FOREST)
+            Call(SetNpcPos, NPC_Oaklie, NPC_DISPOSE_LOCATION)
+    EndSwitch
+    Return
+    End
 };
 
 NpcData N(NpcData_Oaklie) = {

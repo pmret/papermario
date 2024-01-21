@@ -3,36 +3,36 @@
 #include "world/common/npc/TrainToad.inc.c"
 
 EvtScript N(EVS_NpcInteract_Conductor) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_EXEC_WAIT(N(D_802444A0_DDBE50))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    ExecWait(N(D_802444A0_DDBE50))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Conductor) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Conductor)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Conductor)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_TrainToad) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH4_WATT_JOINED_PARTY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Red_Talk, ANIM_TrainToad_Red_Idle, 0, MSG_CH4_0031)
-        EVT_CASE_LT(STORY_CH4_DEFEATED_GENERAL_GUY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Red_Talk, ANIM_TrainToad_Red_Idle, 0, MSG_CH4_0032)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Red_Talk, ANIM_TrainToad_Red_Idle, 0, MSG_CH4_0033)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH4_WATT_JOINED_PARTY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Red_Talk, ANIM_TrainToad_Red_Idle, 0, MSG_CH4_0031)
+        CaseLt(STORY_CH4_DEFEATED_GENERAL_GUY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Red_Talk, ANIM_TrainToad_Red_Idle, 0, MSG_CH4_0032)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Red_Talk, ANIM_TrainToad_Red_Idle, 0, MSG_CH4_0033)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TrainToad) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TrainToad)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_TrainToad)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Toads)[] = {

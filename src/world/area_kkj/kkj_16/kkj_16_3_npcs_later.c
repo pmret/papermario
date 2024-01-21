@@ -25,165 +25,165 @@ AnimID N(ExtraAnims_HammerBros)[] = {
 #include "../common/ApproachPlayer50Units.inc.c"
 
 EvtScript N(EVS_NpcInteract_HammerBros_01) = {
-    EVT_IF_EQ(GF_KKJ16_Gift_ShootingStar, FALSE)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 16, MSG_Peach_013A)
-        EVT_CALL(ShowGotItem, ITEM_SHOOTING_STAR, TRUE, ITEM_PICKUP_FLAG_NO_ANIMS)
-        EVT_SET(GF_KKJ16_Gift_ShootingStar, TRUE)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 16, MSG_Peach_013B)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_KKJ16_Gift_ShootingStar, FALSE)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 16, MSG_Peach_013A)
+        Call(ShowGotItem, ITEM_SHOOTING_STAR, TRUE, ITEM_PICKUP_FLAG_NO_ANIMS)
+        Set(GF_KKJ16_Gift_ShootingStar, TRUE)
+    Else
+        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 16, MSG_Peach_013B)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_HammerBros_02) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0136)
-        EVT_CALL(SetSelfVar, 0, 1)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0137)
-        EVT_CALL(SetSelfVar, 0, 0)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(GetSelfVar, 0, LVar0)
+    IfEq(LVar0, 0)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0136)
+        Call(SetSelfVar, 0, 1)
+    Else
+        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0137)
+        Call(SetSelfVar, 0, 0)
+    EndIf
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_HammerBros_03) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0138)
-        EVT_CALL(SetSelfVar, 0, 1)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0139)
-        EVT_CALL(SetSelfVar, 0, 0)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(GetSelfVar, 0, LVar0)
+    IfEq(LVar0, 0)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0138)
+        Call(SetSelfVar, 0, 1)
+    Else
+        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0139)
+        Call(SetSelfVar, 0, 0)
+    EndIf
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_CapturePeach) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(PreventNextPeachDisguise))
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
-    EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_WAIT(20)
-    EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Gasp)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0174)
-    EVT_CALL(N(ApproachPlayer50Units), -1, LVar3, LVar0, LVar2)
-    EVT_IF_NE(LVar3, 0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim07)
-        EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
-        EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar2, 0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0175)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_ForwardSad)
-    EVT_WAIT(20)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kkj_14"), kkj_14_ENTRY_B, TRANSITION_PEACH_CAPTURED)
-    EVT_WAIT(100)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(N(PreventNextPeachDisguise))
+    SetGroup(EVT_GROUP_00)
+    Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
+    Call(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Wait(20)
+    Call(PlayerFaceNpc, NPC_SELF, FALSE)
+    Call(SetPlayerAnimation, ANIM_Peach2_Gasp)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0174)
+    Call(N(ApproachPlayer50Units), -1, LVar3, LVar0, LVar2)
+    IfNe(LVar3, 0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim07)
+        Call(SetNpcSpeed, NPC_SELF, Float(5.0))
+        Call(NpcMoveTo, NPC_SELF, LVar0, LVar2, 0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
+    EndIf
+    Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0175)
+    Call(SetPlayerAnimation, ANIM_Peach2_ForwardSad)
+    Wait(20)
+    Call(GotoMapSpecial, Ref("kkj_14"), kkj_14_ENTRY_B, TRANSITION_PEACH_CAPTURED)
+    Wait(100)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_WatchForPlayer) = {
-    EVT_LOOP(0)
-        EVT_CALL(N(GetPeachDisguise), LVar1)
-        EVT_IF_EQ(LVar1, PEACH_DISGUISE_NONE)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
-            EVT_CALL(N(UnkPhysicsFunc), LVar0, 85, 60, 38)
-            EVT_IF_NE(LVar0, 0)
-                EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_CapturePeach)))
-                EVT_RETURN
-            EVT_END_IF
-        EVT_ELSE
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(N(GetPeachDisguise), LVar1)
+        IfEq(LVar1, PEACH_DISGUISE_NONE)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
+            Call(N(UnkPhysicsFunc), LVar0, 85, 60, 38)
+            IfNe(LVar0, 0)
+                Call(BindNpcAI, NPC_SELF, Ref(N(EVS_CapturePeach)))
+                Return
+            EndIf
+        Else
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+        EndIf
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_HammerBros_01) = {
-    EVT_EXEC(N(EVS_WatchForPlayer))
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_WatchForPlayer))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_HammerBros_02) = {
-    EVT_EXEC(N(EVS_WatchForPlayer))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(1.7))
-    EVT_LOOP(0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
-        EVT_WAIT(20)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 15)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 280, 50, 0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
-        EVT_WAIT(20)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 15)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 80, 50, 0)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_WatchForPlayer))
+    Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
+    Call(SetNpcSpeed, NPC_SELF, Float(1.7))
+    Loop(0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
+        Wait(20)
+        Call(InterpNpcYaw, NPC_SELF, 90, 15)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
+        Call(NpcMoveTo, NPC_SELF, 280, 50, 0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
+        Wait(20)
+        Call(InterpNpcYaw, NPC_SELF, 270, 15)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
+        Call(NpcMoveTo, NPC_SELF, 80, 50, 0)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_HammerBros_03) = {
-    EVT_EXEC(N(EVS_WatchForPlayer))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(1.7))
-    EVT_LOOP(0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
-        EVT_WAIT(30)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 15)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
-        EVT_CALL(NpcMoveTo, NPC_SELF, -600, 50, 0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
-        EVT_WAIT(30)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 15)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
-        EVT_CALL(NpcMoveTo, NPC_SELF, -420, 50, 0)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_WatchForPlayer))
+    Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
+    Call(SetNpcSpeed, NPC_SELF, Float(1.7))
+    Loop(0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
+        Wait(30)
+        Call(InterpNpcYaw, NPC_SELF, 270, 15)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
+        Call(NpcMoveTo, NPC_SELF, -600, 50, 0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
+        Wait(30)
+        Call(InterpNpcYaw, NPC_SELF, 90, 15)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
+        Call(NpcMoveTo, NPC_SELF, -420, 50, 0)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_HammerBros_01) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, -700, 0, 50)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_HammerBros_01)))
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_HammerBros_01)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, -700, 0, 50)
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_HammerBros_01)))
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_HammerBros_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_HammerBros_02) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 180, 0, 50)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_HammerBros_02)))
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_HammerBros_02)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 180, 0, 50)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_HammerBros_02)))
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_HammerBros_02)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_HammerBros_03) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, -510, 0, 50)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_HammerBros_03)))
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_HammerBros_03)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, -510, 0, 50)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_HammerBros_03)))
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_HammerBros_03)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Minions)[] = {

@@ -241,249 +241,249 @@ API_CALLABLE(N(UpdateKeepAwayBoo)) {
 }
 
 EvtScript N(EVS_NpcIdle_Boo_01) = {
-    EVT_WAIT(4)
-    EVT_CALL(N(InitHiddenBoo))
-    EVT_LABEL(10)
-        EVT_CALL(N(UpdateHiddenBoo))
-        EVT_WAIT(1)
-        EVT_GOTO(10)
-    EVT_RETURN
-    EVT_END
+    Wait(4)
+    Call(N(InitHiddenBoo))
+    Label(10)
+        Call(N(UpdateHiddenBoo))
+        Wait(1)
+        Goto(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_KeepAwayBoo) = {
-    EVT_WAIT(5)
-    EVT_CALL(N(InitKeepAwayBoo))
-    EVT_LABEL(10)
-        EVT_CALL(N(UpdateKeepAwayBoo))
-        EVT_WAIT(1)
-        EVT_GOTO(10)
-    EVT_RETURN
-    EVT_END
+    Wait(5)
+    Call(N(InitKeepAwayBoo))
+    Label(10)
+        Call(N(UpdateKeepAwayBoo))
+        Wait(1)
+        Goto(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnHit_KeepAwayBoo) = {
-    EVT_IF_EQ(MV_ThrowTargetNpc, LVar0)
-        EVT_SET(MV_KeepAwayResult, KEEP_AWAY_RIGHT)
-    EVT_ELSE
-        EVT_SET(MV_KeepAwayResult, KEEP_AWAY_WRONG)
-    EVT_END_IF
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Boo_Cower)
-        EVT_WAIT(30)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Boo_Idle)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    IfEq(MV_ThrowTargetNpc, LVar0)
+        Set(MV_KeepAwayResult, KEEP_AWAY_RIGHT)
+    Else
+        Set(MV_KeepAwayResult, KEEP_AWAY_WRONG)
+    EndIf
+    Thread
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Boo_Cower)
+        Wait(30)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Boo_Idle)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_KeepAwayBoo1) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-            EVT_SET(LVar0, NPC_KeepAwayBoo1)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_JUMP)
-            EVT_SET(LVar0, NPC_KeepAwayBoo1)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+            Set(LVar0, NPC_KeepAwayBoo1)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        CaseEq(ENCOUNTER_TRIGGER_JUMP)
+            Set(LVar0, NPC_KeepAwayBoo1)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_KeepAwayBoo2) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-            EVT_SET(LVar0, NPC_KeepAwayBoo2)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_JUMP)
-            EVT_SET(LVar0, NPC_KeepAwayBoo2)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+            Set(LVar0, NPC_KeepAwayBoo2)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        CaseEq(ENCOUNTER_TRIGGER_JUMP)
+            Set(LVar0, NPC_KeepAwayBoo2)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_KeepAwayBoo3) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-            EVT_SET(LVar0, NPC_KeepAwayBoo3)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_JUMP)
-            EVT_SET(LVar0, NPC_KeepAwayBoo3)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+            Set(LVar0, NPC_KeepAwayBoo3)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        CaseEq(ENCOUNTER_TRIGGER_JUMP)
+            Set(LVar0, NPC_KeepAwayBoo3)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_KeepAwayBoo4) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-            EVT_SET(LVar0, NPC_KeepAwayBoo4)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_JUMP)
-            EVT_SET(LVar0, NPC_KeepAwayBoo4)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+            Set(LVar0, NPC_KeepAwayBoo4)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        CaseEq(ENCOUNTER_TRIGGER_JUMP)
+            Set(LVar0, NPC_KeepAwayBoo4)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_KeepAwayBoo5) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-            EVT_SET(LVar0, NPC_KeepAwayBoo5)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_JUMP)
-            EVT_SET(LVar0, NPC_KeepAwayBoo5)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+            Set(LVar0, NPC_KeepAwayBoo5)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        CaseEq(ENCOUNTER_TRIGGER_JUMP)
+            Set(LVar0, NPC_KeepAwayBoo5)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_KeepAwayBoo6) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-            EVT_SET(LVar0, NPC_KeepAwayBoo6)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_JUMP)
-            EVT_SET(LVar0, NPC_KeepAwayBoo6)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+            Set(LVar0, NPC_KeepAwayBoo6)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        CaseEq(ENCOUNTER_TRIGGER_JUMP)
+            Set(LVar0, NPC_KeepAwayBoo6)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_KeepAwayBoo7) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-            EVT_SET(LVar0, NPC_KeepAwayBoo7)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_JUMP)
-            EVT_SET(LVar0, NPC_KeepAwayBoo7)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+            Set(LVar0, NPC_KeepAwayBoo7)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        CaseEq(ENCOUNTER_TRIGGER_JUMP)
+            Set(LVar0, NPC_KeepAwayBoo7)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_KeepAwayBoo8) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-            EVT_SET(LVar0, NPC_KeepAwayBoo8)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_JUMP)
-            EVT_SET(LVar0, NPC_KeepAwayBoo8)
-            EVT_EXEC_WAIT(N(EVS_OnHit_KeepAwayBoo))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+            Set(LVar0, NPC_KeepAwayBoo8)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        CaseEq(ENCOUNTER_TRIGGER_JUMP)
+            Set(LVar0, NPC_KeepAwayBoo8)
+            ExecWait(N(EVS_OnHit_KeepAwayBoo))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Boo_01) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Boo_01)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Boo_01)))
+    IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KeepAwayBoo1) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo1)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KeepAwayBoo)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_KeepAwayBoo1)))
+    IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KeepAwayBoo2) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo2)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KeepAwayBoo)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_KeepAwayBoo2)))
+    IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KeepAwayBoo3) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo3)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KeepAwayBoo)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_KeepAwayBoo3)))
+    IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KeepAwayBoo4) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo4)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KeepAwayBoo)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_KeepAwayBoo4)))
+    IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KeepAwayBoo5) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo5)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KeepAwayBoo)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_KeepAwayBoo5)))
+    IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KeepAwayBoo6) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo6)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KeepAwayBoo)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_KeepAwayBoo6)))
+    IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KeepAwayBoo7) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo7)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KeepAwayBoo)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_KeepAwayBoo7)))
+    IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KeepAwayBoo8) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KeepAwayBoo)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_KeepAwayBoo8)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KeepAwayBoo)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_KeepAwayBoo8)))
+    IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Boo_01) = {
@@ -586,38 +586,38 @@ NpcData N(NpcData_KeepAwayBoo8) = {
 };
 
 EvtScript N(EVS_NpcInit_Boo_10) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Boo_11) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_TutorialBoo) = {
-    EVT_IF_EQ(GF_OBK04_HiddenPanel, FALSE)
-        EVT_CALL(SpeakToPlayer, NPC_TutorialBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_003F)
-    EVT_ELSE
-        EVT_IF_EQ(GF_OBK04_HeardAboutHiddenPanels, FALSE)
-            EVT_CALL(SpeakToPlayer, NPC_TutorialBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0040)
-            EVT_SET(GF_OBK04_HeardAboutHiddenPanels, TRUE)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_TutorialBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0041)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_OBK04_HiddenPanel, FALSE)
+        Call(SpeakToPlayer, NPC_TutorialBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_003F)
+    Else
+        IfEq(GF_OBK04_HeardAboutHiddenPanels, FALSE)
+            Call(SpeakToPlayer, NPC_TutorialBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0040)
+            Set(GF_OBK04_HeardAboutHiddenPanels, TRUE)
+        Else
+            Call(SpeakToPlayer, NPC_TutorialBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0041)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TutorialBoo) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TutorialBoo)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        EVT_CALL(SetNpcPos, NPC_TutorialBoo, -160, 10, -175)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_TutorialBoo)))
+    IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+        Call(SetNpcPos, NPC_TutorialBoo, -160, 10, -175)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_KeepAwayExtras)[] = {

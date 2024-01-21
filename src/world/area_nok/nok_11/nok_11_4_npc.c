@@ -10,13 +10,13 @@
 #include "common/foliage.inc.c"
 
 EvtScript N(EVS_JrTroopa_RunFX) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetNpcPos, NPC_JrTroopa_01, LVar0, LVar1, LVar2)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0)
-        EVT_WAIT(3)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetNpcPos, NPC_JrTroopa_01, LVar0, LVar1, LVar2)
+        PlayEffect(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0)
+        Wait(3)
+    EndLoop
+    Return
+    End
 };
 
 FoliageModelList N(SceneBush_Models) = FOLIAGE_MODEL_LIST(MODEL_o125);
@@ -26,190 +26,190 @@ SearchBushConfig N(SearchBush_Scene) = {
 };
 
 EvtScript N(EVS_NpcIdle_JrTroopa_01) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_LE(LVar0, -125)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CHILD_THREAD
-        EVT_LABEL(10)
-            EVT_WAIT(3)
-            EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-    EVT_END_CHILD_THREAD
-    EVT_EXEC(N(EVS_PlayJrTroopaSong))
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 5, MSG_CH1_011E)
-    EVT_WAIT(15 * DT)
-    EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(90.0), -190, 0, -40, 200, EVT_FLOAT(15.0), EVT_FLOAT(-8.5))
-    EVT_WAIT(15 * DT)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Scene)))
-    EVT_EXEC(N(EVS_SearchBush))
-    EVT_WAIT(15 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(NpcJump0, NPC_SELF, -230, 0, -157, 15 * DT)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_WAIT(15 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_PointTapFoot, 0, MSG_CH1_011F)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(4.0 / DT), -140, 0, -40, 400, EVT_FLOAT(15.0), EVT_FLOAT(-5.0))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Charge)
-    EVT_WAIT(10 * DT)
-    EVT_THREAD
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Trip)
-        EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_0120, 160, 40)
-    EVT_END_THREAD
-    EVT_THREAD
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(10 * DT)
-        EVT_LOOP(10 * DT)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVar0, LVar1, LVar2, 0, 0)
-            EVT_WAIT(2)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(NpcMoveTo, NPC_SELF, -201, -67, 10 * DT)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
-    EVT_CALL(NpcJump1, NPC_SELF, -191, 0, -32, 5 * DT)
-    EVT_EXEC_GET_TID(N(EVS_JrTroopa_RunFX), LVarA)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SLIDE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcMoveTo, NPC_SELF, -165, 50, 15 * DT)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(StopSound, SOUND_SLIDE)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_FallHeadfirstBack)
-    EVT_WAIT(15 * DT)
-    EVT_THREAD
-        EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_WATER_SPLASH, SOUND_SPACE_DEFAULT)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_SUB(LVar0, 5)
-        EVT_PLAY_EFFECT(EFFECT_WATER_SPLASH, 2, LVar0, LVar1, LVar2, EVT_FLOAT(0.7), 30)
-        EVT_ADD(LVar0, 10)
-        EVT_PLAY_EFFECT(EFFECT_WATER_SPLASH, 2, LVar0, LVar1, LVar2, EVT_FLOAT(0.7), 30)
-        EVT_WAIT(5 * DT)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_SUB(LVar0, 25)
-        EVT_PLAY_EFFECT(EFFECT_WATER_SPLASH, 2, LVar0, LVar1, LVar2, EVT_FLOAT(0.7), 30)
-        EVT_ADD(LVar0, 10)
-        EVT_PLAY_EFFECT(EFFECT_WATER_SPLASH, 2, LVar0, LVar1, LVar2, EVT_FLOAT(0.7), 30)
-        EVT_WAIT(5 * DT)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_SUB(LVar0, -15)
-        EVT_PLAY_EFFECT(EFFECT_WATER_SPLASH, 2, LVar0, LVar1, LVar2, EVT_FLOAT(0.7), 30)
-        EVT_ADD(LVar0, 10)
-        EVT_PLAY_EFFECT(EFFECT_WATER_SPLASH, 2, LVar0, LVar1, LVar2, EVT_FLOAT(0.7), 30)
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FALL_QUICK, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.5))
-    EVT_CALL(NpcJump0, NPC_SELF, -165, -90, 50, 20 * DT)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_JR_TROOPA_SCAMPER, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ScamperBack)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_THREAD
-        EVT_WAIT(85 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ClimbUpBack)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, 0)
-    EVT_CALL(NpcJump0, NPC_SELF, -165, 0, 50, 90 * DT)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Charge)
-    EVT_CALL(NpcMoveTo, NPC_SELF, -190, -45, 10 * DT)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_PointTapFoot)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(90.0), -140, 0, -40, 250, EVT_FLOAT(15.0), EVT_FLOAT(-8.5))
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_PointTapFoot, 0, MSG_CH1_0121)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(PARTNER_GOOMBARIO)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 5, MSG_CH1_0122)
-        EVT_CASE_EQ(PARTNER_KOOPER)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_CH1_0123)
-        EVT_CASE_EQ(PARTNER_BOMBETTE)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 5, MSG_CH1_0124)
-    EVT_END_SWITCH
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_PointTapFoot, 0, MSG_CH1_0125)
-    EVT_CALL(ShowChoice, MSG_Choice_0013)
-    EVT_WAIT(10 * DT)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_PointTapFoot, 0, MSG_CH1_0126)
-    EVT_ELSE
-        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_PointTapFoot, 0, MSG_CH1_0127)
-    EVT_END_IF
-    EVT_WAIT(10 * DT)
-    EVT_CALL(StartBossBattle, SONG_JR_TROOPA_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfLe(LVar0, -125)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(DisablePlayerInput, TRUE)
+    ChildThread
+        Label(10)
+            Wait(3)
+            Call(PlayerFaceNpc, NPC_SELF, FALSE)
+            Wait(1)
+            Goto(10)
+    EndChildThread
+    Exec(N(EVS_PlayJrTroopaSong))
+    Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 5, MSG_CH1_011E)
+    Wait(15 * DT)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(SetCamProperties, CAM_DEFAULT, Float(90.0), -190, 0, -40, 200, Float(15.0), Float(-8.5))
+    Wait(15 * DT)
+    Set(LVar0, Ref(N(SearchBush_Scene)))
+    Exec(N(EVS_SearchBush))
+    Wait(15 * DT)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+    Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+    Call(NpcJump0, NPC_SELF, -230, 0, -157, 15 * DT)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Wait(15 * DT)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_PointTapFoot, 0, MSG_CH1_011F)
+    Call(SetCamProperties, CAM_DEFAULT, Float(4.0 / DT), -140, 0, -40, 400, Float(15.0), Float(-5.0))
+    Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Charge)
+    Wait(10 * DT)
+    Thread
+        Wait(10 * DT)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Trip)
+        Call(ShowMessageAtScreenPos, MSG_CH1_0120, 160, 40)
+    EndThread
+    Thread
+    EndThread
+    Thread
+        Wait(10 * DT)
+        Loop(10 * DT)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            PlayEffect(EFFECT_WALKING_DUST, 2, LVar0, LVar1, LVar2, 0, 0)
+            Wait(2)
+        EndLoop
+    EndThread
+    Call(NpcMoveTo, NPC_SELF, -201, -67, 10 * DT)
+    Call(SetNpcJumpscale, NPC_SELF, Float(2.0))
+    Call(NpcJump1, NPC_SELF, -191, 0, -32, 5 * DT)
+    ExecGetTID(N(EVS_JrTroopa_RunFX), LVarA)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_SLIDE, SOUND_SPACE_DEFAULT)
+    Call(NpcMoveTo, NPC_SELF, -165, 50, 15 * DT)
+    KillThread(LVarA)
+    Call(StopSound, SOUND_SLIDE)
+    Wait(5 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_FallHeadfirstBack)
+    Wait(15 * DT)
+    Thread
+        Wait(15 * DT)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_WATER_SPLASH, SOUND_SPACE_DEFAULT)
+        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Sub(LVar0, 5)
+        PlayEffect(EFFECT_WATER_SPLASH, 2, LVar0, LVar1, LVar2, Float(0.7), 30)
+        Add(LVar0, 10)
+        PlayEffect(EFFECT_WATER_SPLASH, 2, LVar0, LVar1, LVar2, Float(0.7), 30)
+        Wait(5 * DT)
+        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Sub(LVar0, 25)
+        PlayEffect(EFFECT_WATER_SPLASH, 2, LVar0, LVar1, LVar2, Float(0.7), 30)
+        Add(LVar0, 10)
+        PlayEffect(EFFECT_WATER_SPLASH, 2, LVar0, LVar1, LVar2, Float(0.7), 30)
+        Wait(5 * DT)
+        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Sub(LVar0, -15)
+        PlayEffect(EFFECT_WATER_SPLASH, 2, LVar0, LVar1, LVar2, Float(0.7), 30)
+        Add(LVar0, 10)
+        PlayEffect(EFFECT_WATER_SPLASH, 2, LVar0, LVar1, LVar2, Float(0.7), 30)
+    EndThread
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_FALL_QUICK, SOUND_SPACE_DEFAULT)
+    Call(SetNpcJumpscale, NPC_SELF, Float(0.5))
+    Call(NpcJump0, NPC_SELF, -165, -90, 50, 20 * DT)
+    Wait(30 * DT)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_JR_TROOPA_SCAMPER, SOUND_SPACE_DEFAULT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ScamperBack)
+    Call(SetNpcYaw, NPC_SELF, 270)
+    Thread
+        Wait(85 * DT)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ClimbUpBack)
+    EndThread
+    Call(SetNpcJumpscale, NPC_SELF, 0)
+    Call(NpcJump0, NPC_SELF, -165, 0, 50, 90 * DT)
+    Wait(30 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Charge)
+    Call(NpcMoveTo, NPC_SELF, -190, -45, 10 * DT)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_PointTapFoot)
+    Call(SetCamProperties, CAM_DEFAULT, Float(90.0), -140, 0, -40, 250, Float(15.0), Float(-8.5))
+    Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_PointTapFoot, 0, MSG_CH1_0121)
+    Call(DisablePartnerAI, 0)
+    Call(GetCurrentPartnerID, LVar0)
+    Switch(LVar0)
+        CaseEq(PARTNER_GOOMBARIO)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 5, MSG_CH1_0122)
+        CaseEq(PARTNER_KOOPER)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_CH1_0123)
+        CaseEq(PARTNER_BOMBETTE)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 5, MSG_CH1_0124)
+    EndSwitch
+    Call(EnablePartnerAI)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_PointTapFoot, 0, MSG_CH1_0125)
+    Call(ShowChoice, MSG_Choice_0013)
+    Wait(10 * DT)
+    IfEq(LVar0, 0)
+        Call(ContinueSpeech, NPC_SELF, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_PointTapFoot, 0, MSG_CH1_0126)
+    Else
+        Call(ContinueSpeech, NPC_SELF, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_PointTapFoot, 0, MSG_CH1_0127)
+    EndIf
+    Wait(10 * DT)
+    Call(StartBossBattle, SONG_JR_TROOPA_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_JrTroopa_01) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_JrTroopa_01) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Defeated, ANIM_JrTroopa_Defeated, 5, MSG_CH1_012B)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Defeated, ANIM_JrTroopa_Defeated, 5, MSG_CH1_012B)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_JrTroopa_02) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetNpcPos, NPC_JrTroopa_01, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetNpcPos, NPC_JrTroopa_01, LVar0, LVar1, LVar2)
+        Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_JrTroopa_02) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_JUMP)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_CALL(DisablePlayerInput, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Defeated, ANIM_JrTroopa_Defeated, 5, MSG_CH1_012B)
-            EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseOrEq(ENCOUNTER_TRIGGER_JUMP)
+        CaseOrEq(ENCOUNTER_TRIGGER_HAMMER)
+        CaseOrEq(ENCOUNTER_TRIGGER_PARTNER)
+            Call(DisablePlayerInput, TRUE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Defeated, ANIM_JrTroopa_Defeated, 5, MSG_CH1_012B)
+            Call(DisablePlayerInput, FALSE)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_JrTroopa_01) = {
-    EVT_CALL(ClearDefeatedEnemies)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Defeated)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcPos, NPC_JrTroopa_02, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcCollisionSize, NPC_SELF, 24, 32)
-    EVT_CALL(SetNpcCollisionSize, NPC_JrTroopa_02, 24, 32)
-    EVT_SET(GB_StoryProgress, STORY_CH1_DEFEATED_JR_TROOPA)
-    EVT_THREAD
-        EVT_WAIT(4)
-        EVT_EXEC(N(EVS_SetupMusic))
-    EVT_END_THREAD
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_JrTroopa_01)))
-    EVT_CALL(SetNpcFlagBits, NPC_JrTroopa_02, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(ClearDefeatedEnemies)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Defeated)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(SetNpcPos, NPC_JrTroopa_02, LVar0, LVar1, LVar2)
+    Call(SetNpcCollisionSize, NPC_SELF, 24, 32)
+    Call(SetNpcCollisionSize, NPC_JrTroopa_02, 24, 32)
+    Set(GB_StoryProgress, STORY_CH1_DEFEATED_JR_TROOPA)
+    Thread
+        Wait(4)
+        Exec(N(EVS_SetupMusic))
+    EndThread
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_JrTroopa_01)))
+    Call(SetNpcFlagBits, NPC_JrTroopa_02, NPC_FLAG_INVISIBLE, TRUE)
+    Call(ResetCam, CAM_DEFAULT, Float(90.0))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_KentCKoopa_02) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0134)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0134)
+    Return
+    End
 };
 
 API_CALLABLE(N(KentCheckNotEnoughCoins)) {
@@ -233,220 +233,220 @@ API_CALLABLE(N(KentTakeCoins)) {
 }
 
 EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
-    EVT_LABEL(1)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_EQ(AB_NOK_2, 0)
-            EVT_IF_GE(LVar0, -260)
-                EVT_GOTO(10)
-            EVT_ELSE
-                EVT_GOTO(2)
-            EVT_END_IF
-        EVT_ELSE
-            EVT_IF_LE(LVar0, -55)
-                EVT_GOTO(10)
-            EVT_ELSE
-                EVT_GOTO(2)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_LABEL(2)
-        EVT_WAIT(1)
-        EVT_GOTO(1)
-    EVT_LABEL(10)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(InterruptUsePartner)
-    EVT_CALL(SetMusicTrack, 0, SONG_MINIBOSS_BATTLE, 0, 8)
-    EVT_CALL(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_012C)
-    EVT_IF_EQ(AB_NOK_2, 0)
-        EVT_SET(LVar0, 20)
-    EVT_ELSE
-        EVT_SET(LVar0, -20)
-    EVT_END_IF
-    EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(5.0), LVar0, EVT_FLOAT(275.0), EVT_FLOAT(17.5), EVT_FLOAT(-12.0))
-    EVT_CALL(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_012D)
-    EVT_LABEL(15)
-    EVT_CALL(ShowCoinCounter, TRUE)
-    EVT_CALL(ShowChoice, MSG_Choice_0045)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_GOTO(30)
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(50)
-    EVT_END_IF
-    EVT_IF_EQ(AB_NOK_2, 0)
-        EVT_SET(LVar0, 20)
-    EVT_ELSE
-        EVT_SET(LVar0, -20)
-    EVT_END_IF
-    EVT_CALL(ShowCoinCounter, FALSE)
-    EVT_CALL(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_012E)
-    EVT_CALL(ShowCoinCounter, TRUE)
-    EVT_CALL(ShowChoice, MSG_Choice_0045)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_GOTO(30)
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(50)
-    EVT_END_IF
-    EVT_CALL(ShowCoinCounter, FALSE)
-    EVT_LABEL(20)
-    EVT_CALL(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0135)
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_IF_EQ(AB_NOK_2, 0)
-        EVT_SET(LVar0, 20)
-    EVT_ELSE
-        EVT_SET(LVar0, -20)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0136)
-    EVT_CALL(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim05)
-    EVT_IF_EQ(AB_NOK_2, 0)
-        EVT_SET(LVar0, 90)
-    EVT_ELSE
-        EVT_SET(LVar0, 270)
-    EVT_END_IF
-    EVT_CALL(InterpNpcYaw, NPC_KentCKoopa_02, LVar0, 0)
-    EVT_WAIT(30)
-    EVT_IF_EQ(AB_NOK_2, 0)
-        EVT_SET(LVar0, 125)
-    EVT_ELSE
-        EVT_SET(LVar0, -430)
-    EVT_END_IF
-    EVT_CALL(NpcMoveTo, NPC_KentCKoopa_02, LVar0, -37, 40)
-    EVT_CALL(SetNpcPos, NPC_KentCKoopa_02, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
-    EVT_GOTO(100)
-    EVT_LABEL(30)
-    EVT_CALL(N(KentCheckNotEnoughCoins))
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(40)
-    EVT_END_IF
-    EVT_CALL(CloseMessage)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_EQ(AB_NOK_2, 0)
-        EVT_SET(LVar0, -215)
-    EVT_ELSE
-        EVT_SET(LVar0, -100)
-    EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim03)
-    EVT_CALL(NpcMoveTo, NPC_KentCKoopa_02, LVar0, LVar2, 20)
-    EVT_CALL(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim01)
-    EVT_CALL(N(KentTakeCoins))
-    EVT_CALL(ShowCoinCounter, FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0133)
-    EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim03)
-    EVT_CALL(NpcMoveTo, NPC_KentCKoopa_02, -167, -100, 20)
-    EVT_CALL(SetNpcFlagBits, NPC_KentCKoopa_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_CALL(BindNpcInteract, NPC_KentCKoopa_02, EVT_PTR(N(EVS_NpcInteract_KentCKoopa_02)))
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim01)
-    EVT_IF_EQ(AB_NOK_2, 0)
-        EVT_SET(LVar0, 270)
-    EVT_ELSE
-        EVT_SET(LVar0, 90)
-    EVT_END_IF
-    EVT_CALL(InterpNpcYaw, NPC_KentCKoopa_02, LVar0, 0)
-    EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0134)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
-    EVT_GOTO(100)
-    EVT_LABEL(40)
-    EVT_CALL(ShowCoinCounter, FALSE)
-    EVT_CALL(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_012F)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_WAIT(30)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_LABEL(41)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_EQ(AB_NOK_2, 0)
-            EVT_IF_GE(LVar0, -255)
-                EVT_SET(LVar3, -256)
-                EVT_GOTO(43)
-            EVT_ELSE
-                EVT_GOTO(42)
-            EVT_END_IF
-        EVT_ELSE
-            EVT_IF_LE(LVar0, -60)
-                EVT_SET(LVar3, -59)
-                EVT_GOTO(43)
-            EVT_ELSE
-                EVT_GOTO(42)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_LABEL(42)
-        EVT_WAIT(1)
-        EVT_GOTO(41)
-    EVT_LABEL(43)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(InterruptUsePartner)
-    EVT_CALL(SetPlayerPos, LVar3, LVar1, LVar2)
-    EVT_CALL(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0130)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPlayerPos, LVar3, LVar1, LVar2)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_GOTO(41)
-    EVT_LABEL(50)
-    EVT_CALL(ShowCoinCounter, FALSE)
-    EVT_CALL(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0131)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_WAIT(30)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_LABEL(51)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_EQ(AB_NOK_2, 0)
-            EVT_IF_GE(LVar0, -255)
-                EVT_SET(LVar3, -256)
-                EVT_GOTO(53)
-            EVT_ELSE
-                EVT_GOTO(52)
-            EVT_END_IF
-        EVT_ELSE
-            EVT_IF_LE(LVar0, -60)
-                EVT_SET(LVar3, -59)
-                EVT_GOTO(53)
-            EVT_ELSE
-                EVT_GOTO(52)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_LABEL(52)
-        EVT_WAIT(1)
-        EVT_GOTO(51)
-    EVT_LABEL(53)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(InterruptUsePartner)
-    EVT_CALL(SetMusicTrack, 0, SONG_MINIBOSS_BATTLE, 0, 8)
-    EVT_CALL(SetPlayerPos, LVar3, LVar1, LVar2)
-    EVT_CALL(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0132)
-    EVT_IF_EQ(AB_NOK_2, 0)
-        EVT_SET(LVar0, 20)
-    EVT_ELSE
-        EVT_SET(LVar0, -20)
-    EVT_END_IF
-    EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(5.0), LVar0, EVT_FLOAT(275.0), EVT_FLOAT(17.5), EVT_FLOAT(-12.0))
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPlayerPos, LVar3, LVar1, LVar2)
-    EVT_GOTO(15)
-    EVT_LABEL(100)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_WAIT(30)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Label(1)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfEq(AB_NOK_2, 0)
+            IfGe(LVar0, -260)
+                Goto(10)
+            Else
+                Goto(2)
+            EndIf
+        Else
+            IfLe(LVar0, -55)
+                Goto(10)
+            Else
+                Goto(2)
+            EndIf
+        EndIf
+        Label(2)
+        Wait(1)
+        Goto(1)
+    Label(10)
+    Call(DisablePlayerInput, TRUE)
+    Call(InterruptUsePartner)
+    Call(SetMusicTrack, 0, SONG_MINIBOSS_BATTLE, 0, 8)
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_012C)
+    IfEq(AB_NOK_2, 0)
+        Set(LVar0, 20)
+    Else
+        Set(LVar0, -20)
+    EndIf
+    Call(AdjustCam, CAM_DEFAULT, Float(5.0), LVar0, Float(275.0), Float(17.5), Float(-12.0))
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_012D)
+    Label(15)
+    Call(ShowCoinCounter, TRUE)
+    Call(ShowChoice, MSG_Choice_0045)
+    IfEq(LVar0, 0)
+        Goto(30)
+    EndIf
+    IfEq(LVar0, 1)
+        Goto(50)
+    EndIf
+    IfEq(AB_NOK_2, 0)
+        Set(LVar0, 20)
+    Else
+        Set(LVar0, -20)
+    EndIf
+    Call(ShowCoinCounter, FALSE)
+    Call(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_012E)
+    Call(ShowCoinCounter, TRUE)
+    Call(ShowChoice, MSG_Choice_0045)
+    IfEq(LVar0, 0)
+        Goto(30)
+    EndIf
+    IfEq(LVar0, 1)
+        Goto(50)
+    EndIf
+    Call(ShowCoinCounter, FALSE)
+    Label(20)
+    Call(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0135)
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    IfEq(AB_NOK_2, 0)
+        Set(LVar0, 20)
+    Else
+        Set(LVar0, -20)
+    EndIf
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0136)
+    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim05)
+    IfEq(AB_NOK_2, 0)
+        Set(LVar0, 90)
+    Else
+        Set(LVar0, 270)
+    EndIf
+    Call(InterpNpcYaw, NPC_KentCKoopa_02, LVar0, 0)
+    Wait(30)
+    IfEq(AB_NOK_2, 0)
+        Set(LVar0, 125)
+    Else
+        Set(LVar0, -430)
+    EndIf
+    Call(NpcMoveTo, NPC_KentCKoopa_02, LVar0, -37, 40)
+    Call(SetNpcPos, NPC_KentCKoopa_02, NPC_DISPOSE_LOCATION)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Call(ResetCam, CAM_DEFAULT, Float(5.0))
+    Goto(100)
+    Label(30)
+    Call(N(KentCheckNotEnoughCoins))
+    IfEq(LVar0, 1)
+        Goto(40)
+    EndIf
+    Call(CloseMessage)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    IfEq(AB_NOK_2, 0)
+        Set(LVar0, -215)
+    Else
+        Set(LVar0, -100)
+    EndIf
+    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim03)
+    Call(NpcMoveTo, NPC_KentCKoopa_02, LVar0, LVar2, 20)
+    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim01)
+    Call(N(KentTakeCoins))
+    Call(ShowCoinCounter, FALSE)
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0133)
+    Wait(20)
+    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim03)
+    Call(NpcMoveTo, NPC_KentCKoopa_02, -167, -100, 20)
+    Call(SetNpcFlagBits, NPC_KentCKoopa_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(BindNpcInteract, NPC_KentCKoopa_02, Ref(N(EVS_NpcInteract_KentCKoopa_02)))
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim01)
+    IfEq(AB_NOK_2, 0)
+        Set(LVar0, 270)
+    Else
+        Set(LVar0, 90)
+    EndIf
+    Call(InterpNpcYaw, NPC_KentCKoopa_02, LVar0, 0)
+    Wait(10)
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0134)
+    Call(ResetCam, CAM_DEFAULT, Float(5.0))
+    Goto(100)
+    Label(40)
+    Call(ShowCoinCounter, FALSE)
+    Call(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_012F)
+    Call(ResetCam, CAM_DEFAULT, Float(5.0))
+    Exec(N(EVS_SetupMusic))
+    Wait(30)
+    Call(DisablePlayerInput, FALSE)
+    Label(41)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfEq(AB_NOK_2, 0)
+            IfGe(LVar0, -255)
+                Set(LVar3, -256)
+                Goto(43)
+            Else
+                Goto(42)
+            EndIf
+        Else
+            IfLe(LVar0, -60)
+                Set(LVar3, -59)
+                Goto(43)
+            Else
+                Goto(42)
+            EndIf
+        EndIf
+        Label(42)
+        Wait(1)
+        Goto(41)
+    Label(43)
+    Call(DisablePlayerInput, TRUE)
+    Call(InterruptUsePartner)
+    Call(SetPlayerPos, LVar3, LVar1, LVar2)
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0130)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(SetPlayerPos, LVar3, LVar1, LVar2)
+    Call(DisablePlayerInput, FALSE)
+    Goto(41)
+    Label(50)
+    Call(ShowCoinCounter, FALSE)
+    Call(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0131)
+    Call(ResetCam, CAM_DEFAULT, Float(5.0))
+    Exec(N(EVS_SetupMusic))
+    Wait(30)
+    Call(DisablePlayerInput, FALSE)
+    Label(51)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfEq(AB_NOK_2, 0)
+            IfGe(LVar0, -255)
+                Set(LVar3, -256)
+                Goto(53)
+            Else
+                Goto(52)
+            EndIf
+        Else
+            IfLe(LVar0, -60)
+                Set(LVar3, -59)
+                Goto(53)
+            Else
+                Goto(52)
+            EndIf
+        EndIf
+        Label(52)
+        Wait(1)
+        Goto(51)
+    Label(53)
+    Call(DisablePlayerInput, TRUE)
+    Call(InterruptUsePartner)
+    Call(SetMusicTrack, 0, SONG_MINIBOSS_BATTLE, 0, 8)
+    Call(SetPlayerPos, LVar3, LVar1, LVar2)
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0132)
+    IfEq(AB_NOK_2, 0)
+        Set(LVar0, 20)
+    Else
+        Set(LVar0, -20)
+    EndIf
+    Call(AdjustCam, CAM_DEFAULT, Float(5.0), LVar0, Float(275.0), Float(17.5), Float(-12.0))
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(SetPlayerPos, LVar3, LVar1, LVar2)
+    Goto(15)
+    Label(100)
+    Exec(N(EVS_SetupMusic))
+    Wait(30)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_KentCKoopa_01) = {
-    EVT_SET(GF_NOK11_Defeated_KentC, TRUE)
-    EVT_CALL(ClearDefeatedEnemies)
-    EVT_RETURN
-    EVT_END
+    Set(GF_NOK11_Defeated_KentC, TRUE)
+    Call(ClearDefeatedEnemies)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_KentCKoopa_02) = {
-    EVT_CALL(ClearDefeatedEnemies)
-    EVT_RETURN
-    EVT_END
+    Call(ClearDefeatedEnemies)
+    Return
+    End
 };
 
 NpcData N(NpcData_KoopaTroopa) = {
@@ -516,20 +516,20 @@ NpcData N(NpcData_SpikedGoomba) = {
 };
 
 EvtScript N(EVS_NpcInit_JrTroopa_01) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_JrTroopa_01)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_JrTroopa_01)))
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_JrTroopa_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_JrTroopa_01)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_JrTroopa_01)))
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_JrTroopa_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_JrTroopa_02) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_JrTroopa_02)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_JrTroopa_02)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_JrTroopa_02)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_JrTroopa_02)))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Return
+    End
 };
 
 NpcData N(NpcData_JrTroopa)[] = {
@@ -558,26 +558,26 @@ NpcData N(NpcData_JrTroopa)[] = {
 };
 
 EvtScript N(EVS_NpcInit_KentCKoopa_01) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KentCKoopa_01)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_KentCKoopa_01)))
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(GetEntryID, AB_NOK_2)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KentCKoopa_01)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_KentCKoopa_01)))
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(GetEntryID, AB_NOK_2)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KentCKoopa_02) = {
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_KentCKoopa_02)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(GetEntryID, LVar3)
-    EVT_IF_EQ(LVar3, nok_11_ENTRY_0)
-        EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_ELSE
-        EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_KentCKoopa_02)))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(GetEntryID, LVar3)
+    IfEq(LVar3, nok_11_ENTRY_0)
+        Call(SetNpcYaw, NPC_SELF, 270)
+    Else
+        Call(SetNpcYaw, NPC_SELF, 90)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_KentCKoopa)[] = {

@@ -2,93 +2,93 @@
 #include "sprite/player.h"
 
 EvtScript N(EVS_PlayerExitPipe_Epilogue) = {
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerPos, -100, -10, -370)
-    EVT_CALL(InterpPlayerYaw, 135, 0)
-    EVT_WAIT(2)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_ENTER_PIPE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_REVERSE_ANIM)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_LOOP(40)
-        EVT_ADD(LVar1, 1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerPhysics, TRUE)
+    Call(HidePlayerShadow, TRUE)
+    Call(SetPlayerPos, -100, -10, -370)
+    Call(InterpPlayerYaw, 135, 0)
+    Wait(2)
+    Call(PlaySoundAtPlayer, SOUND_ENTER_PIPE, SOUND_SPACE_DEFAULT)
+    Call(SetPlayerImgFXFlags, IMGFX_FLAG_REVERSE_ANIM)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Loop(40)
+        Add(LVar1, 1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(HidePlayerShadow, FALSE)
+    Call(DisablePlayerPhysics, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_LuigiExitPipe_Epilogue) = {
-    EVT_CALL(EnableNpcShadow, NPC_Luigi_Epilogue, FALSE)
-    EVT_CALL(SetNpcPos, NPC_Luigi_Epilogue, -100, -35, -370)
-    EVT_CALL(SetNpcYaw, NPC_Luigi_Epilogue, 135)
-    EVT_WAIT(2)
-    EVT_CALL(PlaySoundAtNpc, NPC_Luigi_Epilogue, SOUND_ENTER_PIPE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcImgFXFlags, NPC_Luigi_Epilogue, IMGFX_FLAG_REVERSE_ANIM)
-    EVT_CALL(SetNpcImgFXParams, NPC_Luigi_Epilogue, IMGFX_SET_ANIM, IMGFX_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
-    EVT_CALL(SetNpcPos, NPC_Luigi_Epilogue, -100, -10, -370)
-    EVT_CALL(GetNpcPos, NPC_Luigi_Epilogue, LVar0, LVar1, LVar2)
-    EVT_LOOP(45)
-        EVT_ADD(LVar1, 1)
-        EVT_CALL(SetNpcPos, NPC_Luigi_Epilogue, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcImgFXParams, NPC_Luigi_Epilogue, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(SetNpcPos, NPC_Luigi_Epilogue, -100, 30, -370)
-    EVT_WAIT(3)
-    EVT_CALL(EnableNpcShadow, NPC_Luigi_Epilogue, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_Luigi_Epilogue, FALSE)
+    Call(SetNpcPos, NPC_Luigi_Epilogue, -100, -35, -370)
+    Call(SetNpcYaw, NPC_Luigi_Epilogue, 135)
+    Wait(2)
+    Call(PlaySoundAtNpc, NPC_Luigi_Epilogue, SOUND_ENTER_PIPE, SOUND_SPACE_DEFAULT)
+    Call(SetNpcImgFXFlags, NPC_Luigi_Epilogue, IMGFX_FLAG_REVERSE_ANIM)
+    Call(SetNpcImgFXParams, NPC_Luigi_Epilogue, IMGFX_SET_ANIM, IMGFX_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
+    Call(SetNpcPos, NPC_Luigi_Epilogue, -100, -10, -370)
+    Call(GetNpcPos, NPC_Luigi_Epilogue, LVar0, LVar1, LVar2)
+    Loop(45)
+        Add(LVar1, 1)
+        Call(SetNpcPos, NPC_Luigi_Epilogue, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Call(SetNpcImgFXParams, NPC_Luigi_Epilogue, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(SetNpcPos, NPC_Luigi_Epilogue, -100, 30, -370)
+    Wait(3)
+    Call(EnableNpcShadow, NPC_Luigi_Epilogue, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_BeginEpilogue) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -100, 30, -370)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, -100, 30, -370)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_THREAD
-        EVT_EXEC_WAIT(N(EVS_PlayerExitPipe_Epilogue))
-        EVT_WAIT(10)
-        EVT_CALL(func_802D1270, -60, -320, EVT_FLOAT(4.0))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(70)
-        EVT_EXEC_WAIT(N(EVS_LuigiExitPipe_Epilogue))
-        EVT_WAIT(10)
-        EVT_CALL(SetNpcFlagBits, NPC_Luigi_Epilogue, NPC_FLAG_GRAVITY, TRUE)
-        EVT_CALL(SetNpcAnimation, NPC_Luigi_Epilogue, ANIM_Luigi_Run)
-        EVT_CALL(SetNpcSpeed, NPC_Luigi_Epilogue, EVT_FLOAT(4.0))
-        EVT_CALL(NpcMoveTo, NPC_Luigi_Epilogue, -100, -300, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Luigi_Epilogue, ANIM_Luigi_Idle)
-    EVT_END_THREAD
-    EVT_WAIT(70)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -60, 0, -320)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, -60, 0, -320)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(80)
-    EVT_CALL(SpeakToPlayer, NPC_Luigi_Epilogue, ANIM_Luigi_Talk, ANIM_Luigi_Idle, 0, MSG_Outro_0023)
-    EVT_WAIT(10)
-    EVT_CHILD_THREAD
-        EVT_LOOP(0)
-            EVT_CALL(PlayerFaceNpc, NPC_Luigi_Epilogue, FALSE)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_Luigi_Epilogue, ANIM_Luigi_Run)
-    EVT_CALL(NpcMoveTo, NPC_Luigi_Epilogue, 60, -100, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_Luigi_Epilogue, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcPos, NPC_Luigi_Epilogue, NPC_DISPOSE_LOCATION)
-    EVT_EXEC(N(EVS_BlockExitToGoomaRoad))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(UseSettingsFrom, CAM_DEFAULT, -100, 30, -370)
+    Call(SetPanTarget, CAM_DEFAULT, -100, 30, -370)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Thread
+        ExecWait(N(EVS_PlayerExitPipe_Epilogue))
+        Wait(10)
+        Call(func_802D1270, -60, -320, Float(4.0))
+    EndThread
+    Thread
+        Wait(70)
+        ExecWait(N(EVS_LuigiExitPipe_Epilogue))
+        Wait(10)
+        Call(SetNpcFlagBits, NPC_Luigi_Epilogue, NPC_FLAG_GRAVITY, TRUE)
+        Call(SetNpcAnimation, NPC_Luigi_Epilogue, ANIM_Luigi_Run)
+        Call(SetNpcSpeed, NPC_Luigi_Epilogue, Float(4.0))
+        Call(NpcMoveTo, NPC_Luigi_Epilogue, -100, -300, 0)
+        Call(SetNpcAnimation, NPC_Luigi_Epilogue, ANIM_Luigi_Idle)
+    EndThread
+    Wait(70)
+    Call(UseSettingsFrom, CAM_DEFAULT, -60, 0, -320)
+    Call(SetPanTarget, CAM_DEFAULT, -60, 0, -320)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(80)
+    Call(SpeakToPlayer, NPC_Luigi_Epilogue, ANIM_Luigi_Talk, ANIM_Luigi_Idle, 0, MSG_Outro_0023)
+    Wait(10)
+    ChildThread
+        Loop(0)
+            Call(PlayerFaceNpc, NPC_Luigi_Epilogue, FALSE)
+            Wait(1)
+        EndLoop
+    EndChildThread
+    Call(SetNpcAnimation, NPC_Luigi_Epilogue, ANIM_Luigi_Run)
+    Call(NpcMoveTo, NPC_Luigi_Epilogue, 60, -100, 0)
+    Call(SetNpcFlagBits, NPC_Luigi_Epilogue, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcPos, NPC_Luigi_Epilogue, NPC_DISPOSE_LOCATION)
+    Exec(N(EVS_BlockExitToGoomaRoad))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };

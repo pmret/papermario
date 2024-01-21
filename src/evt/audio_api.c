@@ -9,9 +9,9 @@ extern s32 RunningMusicEventIDs[10];
 s32 MusicEventPollCount = 0;
 
 static EvtScript EVS_MusicEventMonitor = {
-    EVT_CALL(PollMusicEvents)
-    EVT_RETURN
-    EVT_END
+    Call(PollMusicEvents)
+    Return
+    End
 };
 
 API_CALLABLE(PollMusicEvents) {

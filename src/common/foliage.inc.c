@@ -4,176 +4,176 @@
 #include "FoliageTransform.inc.c"
 
 EvtScript N(EVS_SearchBush) = {
-    EVT_USE_BUF(LVar0)
-    EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)
-    EVT_CALL(GetPlayerPos, LVar5, LVarF, LVar7)
-    EVT_THREAD
-        EVT_SET(LFlag0, FALSE)
-        EVT_IF_NE(LVar1, 0)
-            EVT_LOOP(5)
-                EVT_USE_BUF(LVar1)
-                EVT_BUF_READ1(LVar2)
-                EVT_LOOP(LVar2)
-                    EVT_BUF_READ1(LVar3)
-                    EVT_CALL(N(TransformFoliage), LVar3, EVT_FLOAT(0.1), 1, LVarF, 0)
-                    EVT_IF_EQ(LFlag0, FALSE)
-                        EVT_SET(LFlag0, TRUE)
-                        EVT_CALL(PlaySoundAtModel, LVar3, SOUND_SEARCH_BUSH, SOUND_SPACE_DEFAULT)
-                    EVT_END_IF
-                EVT_END_LOOP
-                EVT_WAIT(1)
-                EVT_USE_BUF(LVar1)
-                EVT_BUF_READ1(LVar2)
-                EVT_LOOP(LVar2)
-                    EVT_BUF_READ1(LVar3)
-                    EVT_CALL(N(TransformFoliage), LVar3, EVT_FLOAT(0.1), -1, LVarF, 0)
-                EVT_END_LOOP
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_USE_BUF(LVar1)
-            EVT_BUF_READ1(LVar2)
-            EVT_LOOP(LVar2)
-                EVT_BUF_READ1(LVar3)
-                EVT_CALL(TranslateModel, LVar3, 0, 0, 0)
-            EVT_END_LOOP
-            EVT_WAIT(1)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_IF_NE(LVar2, 0)
-            EVT_USE_BUF(LVar2)
-            EVT_BUF_READ1(LVar3)
-            EVT_LOOP(LVar3)
-                EVT_BUF_READ1(LVar4)
-                EVT_BUF_READ3(LVar5, LVar6, LVar7)
-                EVT_BUF_READ3(LVar8, LVar9, LVarA)
-                EVT_IF_EQ(LVarA, 0)
-                    EVT_CALL(DropItemEntity, LVar4, LVar5, LVar6, LVar7, LVar8, LVar9)
-                EVT_ELSE
-                    EVT_CALL(GetValueByRef, LVarA, LVarB)
-                    EVT_IF_EQ(LVarB, 0)
-                        EVT_CALL(SetValueByRef, LVarA, 1)
-                        EVT_CALL(DropItemEntity, LVar4, LVar5, LVar6, LVar7, LVar8, LVar9)
-                    EVT_END_IF
-                EVT_END_IF
-            EVT_END_LOOP
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(15)
-    EVT_IF_NE(LVar4, 0)
-        EVT_EXEC_WAIT(LVar4)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    UseBuf(LVar0)
+    BufRead4(LVar1, LVar2, LVar3, LVar4)
+    Call(GetPlayerPos, LVar5, LVarF, LVar7)
+    Thread
+        Set(LFlag0, FALSE)
+        IfNe(LVar1, 0)
+            Loop(5)
+                UseBuf(LVar1)
+                BufRead1(LVar2)
+                Loop(LVar2)
+                    BufRead1(LVar3)
+                    Call(N(TransformFoliage), LVar3, Float(0.1), 1, LVarF, 0)
+                    IfEq(LFlag0, FALSE)
+                        Set(LFlag0, TRUE)
+                        Call(PlaySoundAtModel, LVar3, SOUND_SEARCH_BUSH, SOUND_SPACE_DEFAULT)
+                    EndIf
+                EndLoop
+                Wait(1)
+                UseBuf(LVar1)
+                BufRead1(LVar2)
+                Loop(LVar2)
+                    BufRead1(LVar3)
+                    Call(N(TransformFoliage), LVar3, Float(0.1), -1, LVarF, 0)
+                EndLoop
+                Wait(1)
+            EndLoop
+            UseBuf(LVar1)
+            BufRead1(LVar2)
+            Loop(LVar2)
+                BufRead1(LVar3)
+                Call(TranslateModel, LVar3, 0, 0, 0)
+            EndLoop
+            Wait(1)
+        EndIf
+    EndThread
+    Thread
+        IfNe(LVar2, 0)
+            UseBuf(LVar2)
+            BufRead1(LVar3)
+            Loop(LVar3)
+                BufRead1(LVar4)
+                BufRead3(LVar5, LVar6, LVar7)
+                BufRead3(LVar8, LVar9, LVarA)
+                IfEq(LVarA, 0)
+                    Call(DropItemEntity, LVar4, LVar5, LVar6, LVar7, LVar8, LVar9)
+                Else
+                    Call(GetValueByRef, LVarA, LVarB)
+                    IfEq(LVarB, 0)
+                        Call(SetValueByRef, LVarA, 1)
+                        Call(DropItemEntity, LVar4, LVar5, LVar6, LVar7, LVar8, LVar9)
+                    EndIf
+                EndIf
+            EndLoop
+        EndIf
+    EndThread
+    Wait(15)
+    IfNe(LVar4, 0)
+        ExecWait(LVar4)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_ShakeTree) = {
-    EVT_SET_TIMESCALE(EVT_FLOAT(2.0))
-    EVT_USE_BUF(LVar0)
-    EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)
-    EVT_BUF_READ1(LVar5)
-    EVT_CALL(GetPlayerPos, LVar6, LVarF, LVar8)
-    EVT_CALL(PlaySound, SOUND_SMACK_TREE)
-    EVT_CALL(PlaySound, SOUND_SHAKE_TREE_LEAVES)
-    EVT_THREAD
-        EVT_SET(LFlag0, FALSE)
-        EVT_IF_NE(LVar1, 0)
-            EVT_WAIT(1)
-            EVT_LOOP(5)
-                EVT_USE_BUF(LVar1)
-                EVT_BUF_READ1(LVar2)
-                EVT_LOOP(LVar2)
-                    EVT_BUF_READ1(LVar3)
-                    EVT_CALL(N(TransformFoliage), LVar3, EVT_FLOAT(0.1), EVT_FLOAT(0.2), LVarF, 0)
-                    EVT_IF_EQ(LFlag0, FALSE)
-                        EVT_SET(LFlag0, TRUE)
-                        EVT_CALL(PlaySoundAtModel, LVar3, SOUND_SHAKE_TREE_LEAVES, SOUND_SPACE_DEFAULT)
-                    EVT_END_IF
-                EVT_END_LOOP
-                EVT_WAIT(1)
-                EVT_USE_BUF(LVar1)
-                EVT_BUF_READ1(LVar2)
-                EVT_LOOP(LVar2)
-                    EVT_BUF_READ1(LVar3)
-                    EVT_CALL(N(TransformFoliage), LVar3, EVT_FLOAT(0.1), EVT_FLOAT(-0.2), LVarF, 0)
-                EVT_END_LOOP
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_USE_BUF(LVar1)
-            EVT_BUF_READ1(LVar2)
-            EVT_LOOP(LVar2)
-                EVT_BUF_READ1(LVar3)
-                EVT_CALL(TranslateModel, LVar3, 0, 0, 0)
-            EVT_END_LOOP
-            EVT_WAIT(1)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LFlag0, FALSE)
-        EVT_IF_NE(LVar2, 0)
-            EVT_LOOP(5)
-                EVT_USE_BUF(LVar2)
-                EVT_BUF_READ1(LVar3)
-                EVT_LOOP(LVar3)
-                    EVT_BUF_READ1(LVar4)
-                    EVT_CALL(N(TransformFoliage), LVar4, EVT_FLOAT(0.1), EVT_FLOAT(0.2), LVarF, 0)
-                    EVT_IF_EQ(LFlag0, FALSE)
-                        EVT_SET(LFlag0, TRUE)
-                        EVT_CALL(PlaySoundAtModel, LVar4, SOUND_SMACK_TREE, SOUND_SPACE_DEFAULT)
-                    EVT_END_IF
-                EVT_END_LOOP
-                EVT_WAIT(1)
-                EVT_USE_BUF(LVar2)
-                EVT_BUF_READ1(LVar3)
-                EVT_LOOP(LVar3)
-                    EVT_BUF_READ1(LVar4)
-                    EVT_CALL(N(TransformFoliage), LVar4, EVT_FLOAT(0.1), EVT_FLOAT(-0.2), LVarF, 0)
-                EVT_END_LOOP
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_USE_BUF(LVar2)
-            EVT_BUF_READ1(LVar3)
-            EVT_LOOP(LVar3)
-                EVT_BUF_READ1(LVar4)
-                EVT_CALL(TranslateModel, LVar4, 0, 0, 0)
-            EVT_END_LOOP
-            EVT_WAIT(1)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_IF_NE(LVar3, 0)
-            EVT_USE_BUF(LVar3)
-            EVT_BUF_READ1(LVar4)
-            EVT_LOOP(LVar4)
-                EVT_BUF_READ1(LVar5)
-                EVT_BUF_READ3(LVar6, LVar7, LVar8)
-                EVT_BUF_READ3(LVar9, LVarA, LVarB)
-                EVT_IF_EQ(LVarB, 0)
-                    EVT_CALL(DropItemEntity, LVar5, LVar6, LVar7, LVar8, LVar9, LVarA)
-                EVT_ELSE
-                    EVT_CALL(GetValueByRef, LVarB, LVarC)
-                    EVT_IF_EQ(LVarC, 0)
-                        EVT_CALL(SetValueByRef, LVarB, 1)
-                        EVT_CALL(DropItemEntity, LVar5, LVar6, LVar7, LVar8, LVar9, LVarA)
-                    EVT_END_IF
-                EVT_END_IF
-            EVT_END_LOOP
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_IF_NE(LVar4, 0)
-            EVT_USE_BUF(LVar4)
-            EVT_BUF_READ1(LVar5)
-            EVT_LOOP(LVar5)
-                EVT_BUF_READ3(LVar6, LVar7, LVar8)
-                EVT_PLAY_EFFECT(EFFECT_DROP_LEAVES, 0, LVar6, LVar7, LVar8, 100)
-            EVT_END_LOOP
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_IF_NE(LVar5, 0)
-        EVT_EXEC_WAIT(LVar5)
-    EVT_END_IF
-    EVT_WAIT(15)
-    EVT_RETURN
-    EVT_END
+    SetTimescale(Float(2.0))
+    UseBuf(LVar0)
+    BufRead4(LVar1, LVar2, LVar3, LVar4)
+    BufRead1(LVar5)
+    Call(GetPlayerPos, LVar6, LVarF, LVar8)
+    Call(PlaySound, SOUND_SMACK_TREE)
+    Call(PlaySound, SOUND_SHAKE_TREE_LEAVES)
+    Thread
+        Set(LFlag0, FALSE)
+        IfNe(LVar1, 0)
+            Wait(1)
+            Loop(5)
+                UseBuf(LVar1)
+                BufRead1(LVar2)
+                Loop(LVar2)
+                    BufRead1(LVar3)
+                    Call(N(TransformFoliage), LVar3, Float(0.1), Float(0.2), LVarF, 0)
+                    IfEq(LFlag0, FALSE)
+                        Set(LFlag0, TRUE)
+                        Call(PlaySoundAtModel, LVar3, SOUND_SHAKE_TREE_LEAVES, SOUND_SPACE_DEFAULT)
+                    EndIf
+                EndLoop
+                Wait(1)
+                UseBuf(LVar1)
+                BufRead1(LVar2)
+                Loop(LVar2)
+                    BufRead1(LVar3)
+                    Call(N(TransformFoliage), LVar3, Float(0.1), Float(-0.2), LVarF, 0)
+                EndLoop
+                Wait(1)
+            EndLoop
+            UseBuf(LVar1)
+            BufRead1(LVar2)
+            Loop(LVar2)
+                BufRead1(LVar3)
+                Call(TranslateModel, LVar3, 0, 0, 0)
+            EndLoop
+            Wait(1)
+        EndIf
+    EndThread
+    Thread
+        Set(LFlag0, FALSE)
+        IfNe(LVar2, 0)
+            Loop(5)
+                UseBuf(LVar2)
+                BufRead1(LVar3)
+                Loop(LVar3)
+                    BufRead1(LVar4)
+                    Call(N(TransformFoliage), LVar4, Float(0.1), Float(0.2), LVarF, 0)
+                    IfEq(LFlag0, FALSE)
+                        Set(LFlag0, TRUE)
+                        Call(PlaySoundAtModel, LVar4, SOUND_SMACK_TREE, SOUND_SPACE_DEFAULT)
+                    EndIf
+                EndLoop
+                Wait(1)
+                UseBuf(LVar2)
+                BufRead1(LVar3)
+                Loop(LVar3)
+                    BufRead1(LVar4)
+                    Call(N(TransformFoliage), LVar4, Float(0.1), Float(-0.2), LVarF, 0)
+                EndLoop
+                Wait(1)
+            EndLoop
+            UseBuf(LVar2)
+            BufRead1(LVar3)
+            Loop(LVar3)
+                BufRead1(LVar4)
+                Call(TranslateModel, LVar4, 0, 0, 0)
+            EndLoop
+            Wait(1)
+        EndIf
+    EndThread
+    Thread
+        IfNe(LVar3, 0)
+            UseBuf(LVar3)
+            BufRead1(LVar4)
+            Loop(LVar4)
+                BufRead1(LVar5)
+                BufRead3(LVar6, LVar7, LVar8)
+                BufRead3(LVar9, LVarA, LVarB)
+                IfEq(LVarB, 0)
+                    Call(DropItemEntity, LVar5, LVar6, LVar7, LVar8, LVar9, LVarA)
+                Else
+                    Call(GetValueByRef, LVarB, LVarC)
+                    IfEq(LVarC, 0)
+                        Call(SetValueByRef, LVarB, 1)
+                        Call(DropItemEntity, LVar5, LVar6, LVar7, LVar8, LVar9, LVarA)
+                    EndIf
+                EndIf
+            EndLoop
+        EndIf
+    EndThread
+    Thread
+        IfNe(LVar4, 0)
+            UseBuf(LVar4)
+            BufRead1(LVar5)
+            Loop(LVar5)
+                BufRead3(LVar6, LVar7, LVar8)
+                PlayEffect(EFFECT_DROP_LEAVES, 0, LVar6, LVar7, LVar8, 100)
+            EndLoop
+        EndIf
+    EndThread
+    IfNe(LVar5, 0)
+        ExecWait(LVar5)
+    EndIf
+    Wait(15)
+    Return
+    End
 };

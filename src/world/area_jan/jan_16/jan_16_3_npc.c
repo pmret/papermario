@@ -3,9 +3,9 @@
 #include "sprite/player.h"
 
 EvtScript N(EVS_NpcAuxAI_RaphaelRaven) = {
-    EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(1.5), EVT_FLOAT(1.5), EVT_FLOAT(1.5))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcScale, NPC_SELF, Float(1.5), Float(1.5), Float(1.5))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_RaphaelRaven) = {
@@ -22,204 +22,204 @@ NpcSettings N(NpcSettings_Raven) = {
 };
 
 EvtScript N(D_802412D4_B812D4) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_REACHED_RAPHAELS_TREE)
-        EVT_CALL(EnableGroup, MODEL_g38, FALSE)
-        EVT_CALL(EnableGroup, MODEL_g54, FALSE)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CALL(SetCamType, CAM_DEFAULT, 1, FALSE)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -269, 94, -8)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, -269, 94, -8)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 1000)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, 20, 0)
-        EVT_CALL(SetCamPosA, CAM_DEFAULT, -410, -85)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_WAIT(10)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 400)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, -13, 1)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.45 / DT))
-        EVT_CALL(SetCamPosA, CAM_DEFAULT, -207, -85)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, EVT_FLOAT(0.8), 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_WAIT(30 * DT)
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_SET(GB_StoryProgress, STORY_CH5_REACHED_RAPHAELS_TREE)
-    EVT_END_IF
-    EVT_CALL(EnableGroup, MODEL_g38, TRUE)
-    EVT_CALL(EnableGroup, MODEL_g54, TRUE)
-    EVT_CALL(EnableGroup, MODEL_g39, FALSE)
-    EVT_CALL(EnableGroup, MODEL_g56, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    IfLt(GB_StoryProgress, STORY_CH5_REACHED_RAPHAELS_TREE)
+        Call(EnableGroup, MODEL_g38, FALSE)
+        Call(EnableGroup, MODEL_g54, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(SetCamType, CAM_DEFAULT, 1, FALSE)
+        Call(UseSettingsFrom, CAM_DEFAULT, -269, 94, -8)
+        Call(SetPanTarget, CAM_DEFAULT, -269, 94, -8)
+        Call(SetCamDistance, CAM_DEFAULT, 1000)
+        Call(SetCamPitch, CAM_DEFAULT, 20, 0)
+        Call(SetCamPosA, CAM_DEFAULT, -410, -85)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Wait(10)
+        Call(SetCamDistance, CAM_DEFAULT, 400)
+        Call(SetCamPitch, CAM_DEFAULT, -13, 1)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(0.45 / DT))
+        Call(SetCamPosA, CAM_DEFAULT, -207, -85)
+        Call(PanToTarget, CAM_DEFAULT, Float(0.8), 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Wait(30 * DT)
+        Call(ResetCam, CAM_DEFAULT, Float(90.0))
+        Set(GB_StoryProgress, STORY_CH5_REACHED_RAPHAELS_TREE)
+    EndIf
+    Call(EnableGroup, MODEL_g38, TRUE)
+    Call(EnableGroup, MODEL_g54, TRUE)
+    Call(EnableGroup, MODEL_g39, FALSE)
+    Call(EnableGroup, MODEL_g56, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Raven) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_00E3)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_00E3)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Raven) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_RAPHAEL_LEFT_NEST)
-            EVT_GOTO(20)
-        EVT_CASE_RANGE(STORY_CH5_RAPHAEL_LEFT_NEST, STORY_CH5_RAPHAEL_MOVED_ROOT)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Raven)))
-            EVT_CALL(GetSelfNpcID, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_CALL(SetNpcPos, NPC_Raven_01, -450, 0, 26)
-                EVT_CALL(SetNpcPos, NPC_Raven_02, -430, 0, 4)
-                EVT_CALL(SetNpcPos, NPC_Raven_03, -410, 0, -18)
-                EVT_CALL(SetNpcPos, NPC_Raven_04, -390, 0, -40)
-                EVT_CALL(SetNpcPos, NPC_Raven_05, -411, 93, -16)
-            EVT_END_IF
-        EVT_CASE_GT(STORY_CH5_RAPHAEL_MOVED_ROOT)
-            EVT_LABEL(20)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o113, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_RAPHAEL_LEFT_NEST)
+            Goto(20)
+        CaseRange(STORY_CH5_RAPHAEL_LEFT_NEST, STORY_CH5_RAPHAEL_MOVED_ROOT)
+            Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Raven)))
+            Call(GetSelfNpcID, LVar0)
+            IfEq(LVar0, 1)
+                Call(SetNpcPos, NPC_Raven_01, -450, 0, 26)
+                Call(SetNpcPos, NPC_Raven_02, -430, 0, 4)
+                Call(SetNpcPos, NPC_Raven_03, -410, 0, -18)
+                Call(SetNpcPos, NPC_Raven_04, -390, 0, -40)
+                Call(SetNpcPos, NPC_Raven_05, -411, 93, -16)
+            EndIf
+        CaseGt(STORY_CH5_RAPHAEL_MOVED_ROOT)
+            Label(20)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o113, COLLIDER_FLAGS_UPPER_MASK)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_Idle)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 4)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(4.5 / DT), LVar0, LVar1, LVar2, 450, EVT_FLOAT(20.0), EVT_FLOAT(-9.5))
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_Jump)
-        EVT_WAIT(8 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_Fall)
-        EVT_WAIT(15 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_TalkNoFeetAngry)
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RaphaelRaven_TalkNoFeetAngry, ANIM_RaphaelRaven_TalkNoFeetAngry, 5, MSG_CH5_00E1)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_IdleNoFeet)
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_Idle)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, 2)
-    EVT_CALL(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 30)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_JAN_RAPHAEL_POUND, SOUND_SPACE_DEFAULT)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 50, EVT_FLOAT(1.0))
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
-    EVT_THREAD
-        EVT_WAIT(20)
-        EVT_LOOP(10)
-            EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 115, 0, 355, 0)
-            EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 205, 0, 475, 0)
-            EVT_WAIT(2)
-            EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 190, 0, 445, 0)
-            EVT_WAIT(2)
-            EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 140, 0, 380, 0)
-            EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 170, 0, 400, 0)
-            EVT_WAIT(2)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_LOOP(15)
-        EVT_CALL(ScaleGroup, MODEL_g40, 1, EVT_FLOAT(1.05), 1)
-        EVT_WAIT(2)
-        EVT_CALL(ScaleGroup, MODEL_g40, 1, EVT_FLOAT(0.95), 1)
-        EVT_WAIT(2)
-    EVT_END_LOOP
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(MakeLerp, 0, 100, 100, EASING_QUADRATIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateGroup, MODEL_g40, 0, LVar0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar0, 1)
-        EVT_LOOP(6)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_RANGE(1, 4)
-                    EVT_CALL(PlaySoundAtCollider, COLLIDER_o97, SOUND_JAN_ROOT_WOBBLE_1, 0)
-                EVT_CASE_EQ(5)
-                    EVT_CALL(PlaySoundAtCollider, COLLIDER_o97, SOUND_JAN_ROOT_WOBBLE_2, 0)
-                EVT_CASE_EQ(6)
-                    EVT_CALL(PlaySoundAtCollider, COLLIDER_o97, SOUND_JAN_ROOT_WOBBLE_3, 0)
-            EVT_END_SWITCH
-            EVT_ADD(LVar0, 1)
-            EVT_WAIT(20)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_SETF(LVar2, EVT_FLOAT(1.0))
-    EVT_SETF(LVar3, EVT_FLOAT(0.25))
-    EVT_LOOP(5)
-        EVT_LOOP(10)
-            EVT_ADDF(LVar2, LVar3)
-            EVT_CALL(ScaleGroup, MODEL_g40, 1, LVar2, 1)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 123, 0, 352, 0)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 193, 0, 450, 0)
-        EVT_LOOP(10)
-            EVT_SUBF(LVar2, LVar3)
-            EVT_CALL(ScaleGroup, MODEL_g40, 1, LVar2, 1)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 115, 0, 355, 0)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 205, 0, 475, 0)
-        EVT_SUBF(LVar3, EVT_FLOAT(0.05))
-    EVT_END_LOOP
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o97, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RaphaelRaven_Talk, ANIM_RaphaelRaven_Idle, 0, MSG_CH5_00E2)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_Walk)
-    EVT_CALL(SetNpcSpeed, NPC_RaphaelRaven, EVT_FLOAT(4.0 / DT))
-    EVT_CALL(NpcMoveTo, NPC_SELF, 340, 270, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Call(DisablePlayerInput, TRUE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_Idle)
+    Call(NpcFacePlayer, NPC_SELF, 4)
+    Wait(5 * DT)
+    Call(PlayerFaceNpc, NPC_SELF, FALSE)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(SetCamProperties, CAM_DEFAULT, Float(4.5 / DT), LVar0, LVar1, LVar2, 450, Float(20.0), Float(-9.5))
+    Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Wait(10 * DT)
+    Call(InterpPlayerYaw, 90, 0)
+    Wait(20 * DT)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Thread
+        Call(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_Jump)
+        Wait(8 * DT)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_Fall)
+        Wait(15 * DT)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_TalkNoFeetAngry)
+        Wait(10 * DT)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_RaphaelRaven_TalkNoFeetAngry, ANIM_RaphaelRaven_TalkNoFeetAngry, 5, MSG_CH5_00E1)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_IdleNoFeet)
+        Wait(10 * DT)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_Idle)
+    EndThread
+    Call(SetNpcJumpscale, NPC_SELF, 2)
+    Call(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 30)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_JAN_RAPHAEL_POUND, SOUND_SPACE_DEFAULT)
+    Thread
+        Call(ShakeCam, CAM_DEFAULT, 0, 50, Float(1.0))
+        Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    EndThread
+    Call(SetPlayerAnimation, ANIM_Mario1_Flail)
+    Thread
+        Wait(20)
+        Loop(10)
+            PlayEffect(EFFECT_LANDING_DUST, 1, 115, 0, 355, 0)
+            PlayEffect(EFFECT_LANDING_DUST, 1, 205, 0, 475, 0)
+            Wait(2)
+            PlayEffect(EFFECT_LANDING_DUST, 1, 190, 0, 445, 0)
+            Wait(2)
+            PlayEffect(EFFECT_LANDING_DUST, 1, 140, 0, 380, 0)
+            PlayEffect(EFFECT_LANDING_DUST, 1, 170, 0, 400, 0)
+            Wait(2)
+        EndLoop
+    EndThread
+    Loop(15)
+        Call(ScaleGroup, MODEL_g40, 1, Float(1.05), 1)
+        Wait(2)
+        Call(ScaleGroup, MODEL_g40, 1, Float(0.95), 1)
+        Wait(2)
+    EndLoop
+    Thread
+        Wait(15)
+        Call(MakeLerp, 0, 100, 100, EASING_QUADRATIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(TranslateGroup, MODEL_g40, 0, LVar0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Set(LVar0, 1)
+        Loop(6)
+            Switch(LVar0)
+                CaseRange(1, 4)
+                    Call(PlaySoundAtCollider, COLLIDER_o97, SOUND_JAN_ROOT_WOBBLE_1, 0)
+                CaseEq(5)
+                    Call(PlaySoundAtCollider, COLLIDER_o97, SOUND_JAN_ROOT_WOBBLE_2, 0)
+                CaseEq(6)
+                    Call(PlaySoundAtCollider, COLLIDER_o97, SOUND_JAN_ROOT_WOBBLE_3, 0)
+            EndSwitch
+            Add(LVar0, 1)
+            Wait(20)
+        EndLoop
+    EndThread
+    SetF(LVar2, Float(1.0))
+    SetF(LVar3, Float(0.25))
+    Loop(5)
+        Loop(10)
+            AddF(LVar2, LVar3)
+            Call(ScaleGroup, MODEL_g40, 1, LVar2, 1)
+            Wait(1)
+        EndLoop
+        PlayEffect(EFFECT_LANDING_DUST, 1, 123, 0, 352, 0)
+        PlayEffect(EFFECT_LANDING_DUST, 1, 193, 0, 450, 0)
+        Loop(10)
+            SubF(LVar2, LVar3)
+            Call(ScaleGroup, MODEL_g40, 1, LVar2, 1)
+            Wait(1)
+        EndLoop
+        PlayEffect(EFFECT_LANDING_DUST, 1, 115, 0, 355, 0)
+        PlayEffect(EFFECT_LANDING_DUST, 1, 205, 0, 475, 0)
+        SubF(LVar3, Float(0.05))
+    EndLoop
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o97, COLLIDER_FLAGS_UPPER_MASK)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_RaphaelRaven_Talk, ANIM_RaphaelRaven_Idle, 0, MSG_CH5_00E2)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_Walk)
+    Call(SetNpcSpeed, NPC_RaphaelRaven, Float(4.0 / DT))
+    Call(NpcMoveTo, NPC_SELF, 340, 270, 0)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
 #if VERSION_PAL
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5 * DT))
+    Call(ResetCam, CAM_DEFAULT, Float(5 * DT))
 #else
-    EVT_CALL(ResetCam, CAM_DEFAULT, 5)
+    Call(ResetCam, CAM_DEFAULT, 5)
 #endif
-    EVT_SET(GB_StoryProgress, STORY_CH5_RAPHAEL_MOVED_ROOT)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Set(GB_StoryProgress, STORY_CH5_RAPHAEL_MOVED_ROOT)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_RaphaelRaven) = {
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-        EVT_CALL(SetNpcPos, NPC_SELF, 85, 0, 410)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_RaphaelRaven)))
-        EVT_RETURN
-    EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_IF_GE(GB_StoryProgress, STORY_CH5_RAPHAEL_MOVED_ROOT)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o97, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_CALL(TranslateGroup, MODEL_g40, 0, 100, 0)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcPos, NPC_SELF, 85, 0, 410)
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_RaphaelRaven)))
+        Return
+    Else
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
+        IfGe(GB_StoryProgress, STORY_CH5_RAPHAEL_MOVED_ROOT)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o97, COLLIDER_FLAGS_UPPER_MASK)
+            Call(TranslateGroup, MODEL_g40, 0, 100, 0)
+        EndIf
+    EndIf
+    Call(RemoveNpc, NPC_SELF)
+    Return
+    End
 };
 
 NpcData N(NpcData_RaphaelRaven)[] = {

@@ -9,9 +9,9 @@ MobileAISettings N(AISettings_Dryite_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_Dryite_Wander) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_Dryite_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_Dryite_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Dryite_Wander) = {

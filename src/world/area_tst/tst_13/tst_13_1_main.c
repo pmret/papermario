@@ -20,68 +20,68 @@ MapSettings N(settings) = {
 #include "world/common/atomic/BetaFloorPanels.inc.c"
 
 EvtScript N(EVS_NpcAuxAI_00) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_00) = {
-    EVT_CALL(SetNpcSprite, NPC_SELF, ANIM_WorldBombette_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcSprite, NPC_SELF, ANIM_WorldBombette_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_01) = {
-    EVT_CALL(SetNpcSprite, NPC_SELF, ANIM_WorldParakarry_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcSprite, NPC_SELF, ANIM_WorldParakarry_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_02) = {
-    EVT_CALL(SetNpcSprite, NPC_SELF, ANIM_WorldBow_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcSprite, NPC_SELF, ANIM_WorldBow_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_03) = {
-    EVT_CALL(SetNpcSprite, NPC_SELF, ANIM_WorldWatt_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcSprite, NPC_SELF, ANIM_WorldWatt_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_04) = {
-    EVT_CALL(SetNpcSprite, NPC_SELF, ANIM_WorldSushie_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcSprite, NPC_SELF, ANIM_WorldSushie_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_05) = {
-    EVT_CALL(SetNpcSprite, NPC_SELF, ANIM_WorldLakilester_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcSprite, NPC_SELF, ANIM_WorldLakilester_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_06) = {
-    EVT_CALL(SetNpcSprite, NPC_SELF, ANIM_WorldLakilester_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcSprite, NPC_SELF, ANIM_WorldLakilester_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_07) = {
-    EVT_CALL(SetNpcSprite, NPC_SELF, ANIM_WorldLakilester_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcSprite, NPC_SELF, ANIM_WorldLakilester_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_08) = {
-    EVT_CALL(SetNpcSprite, NPC_SELF, ANIM_WorldGoombario_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcSprite, NPC_SELF, ANIM_WorldGoombario_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_09) = {
-    EVT_CALL(SetNpcSprite, NPC_SELF, ANIM_WorldKooper_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcSprite, NPC_SELF, ANIM_WorldKooper_Idle)
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_00) = {
@@ -313,16 +313,16 @@ s32 N(BetaPanelData)[] = {
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_TESTING)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
-    EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_SET(LVar0, EVT_PTR(N(BetaPanelData)))
-    EVT_EXEC(N(EVS_BetaPanel_Setup))
-    EVT_CALL(SetModelCustomGfx, MODEL_o152, CUSTOM_GFX_0, -1)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, 0, EVT_PTR(N(build_gfx_floor)))
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_TESTING)
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
+    Call(SetCamBGColor, CAM_DEFAULT, 0, 0, 0)
+    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
+    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Set(LVar0, Ref(N(BetaPanelData)))
+    Exec(N(EVS_BetaPanel_Setup))
+    Call(SetModelCustomGfx, MODEL_o152, CUSTOM_GFX_0, -1)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_0, 0, Ref(N(build_gfx_floor)))
+    Return
+    End
 };

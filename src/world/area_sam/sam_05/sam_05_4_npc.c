@@ -16,30 +16,30 @@ NpcSettings N(NpcSettings_Monstar) = {
 #include "world/common/enemy/FrostPiranha.inc.c"
 
 EvtScript N(EVS_NpcAI_Monstar) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetSelfVar, 0, LVar0)
+        Wait(1)
+        IfEq(LVar0, 0)
+            Goto(0)
+        EndIf
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    Return
+    End
 };
 
 extern EvtScript N(EVS_NpcAux_Monstar);
 
 EvtScript N(EVS_NpcDefeat_Monstar) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Monstar)))
-            EVT_EXEC_WAIT(N(EVS_Scene_MonstarDefeated))
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_CALL(ClearDefeatedEnemies)
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Monstar)))
+            ExecWait(N(EVS_Scene_MonstarDefeated))
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Call(ClearDefeatedEnemies)
+    Return
+    End
 };
 
 INCLUDE_IMG("world/area_sam/sam_05/monstar.png", sam_05_monstar_png);
@@ -112,32 +112,32 @@ API_CALLABLE(N(CheckSkipInput)) {
 }
 
 EvtScript N(EVS_NpcAux_Monstar) = {
-    EVT_CALL(N(UpdateMonstarSpriteEffects))
-    EVT_RETURN
-    EVT_END
+    Call(N(UpdateMonstarSpriteEffects))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Monstar) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcVar, NPC_Monstar, 3, 255)
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Monstar)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_DEFEATED_MONSTAR)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_ELSE
-        EVT_EXEC(N(EVS_Scene_MonstarAppears))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Monstar)))
-        EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Monstar)))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Call(SetNpcVar, NPC_Monstar, 3, 255)
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Monstar)))
+    IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_MONSTAR)
+        Call(RemoveNpc, NPC_SELF)
+    Else
+        Exec(N(EVS_Scene_MonstarAppears))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Monstar)))
+        Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Monstar)))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarKid) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Twink_Shout)
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Twink_Shout)
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Monstar)[] = {

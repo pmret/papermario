@@ -6,97 +6,97 @@
 
 EvtScript N(EVS_TrySpawningStarCard) = {
     // determine if card should be spawned
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_EQ(STORY_CH4_OPENED_GENERAL_GUY_ROOM)
-            EVT_SET(LVar0, FALSE)
-            EVT_SET(GB_StoryProgress, STORY_CH4_DEFEATED_GENERAL_GUY)
-        EVT_CASE_EQ(STORY_CH4_DEFEATED_GENERAL_GUY)
-            EVT_SET(LVar0, TRUE)
-        EVT_CASE_DEFAULT
-            EVT_RETURN
-    EVT_END_SWITCH
-    EVT_IF_EQ(LVar0, FALSE)
+    Switch(GB_StoryProgress)
+        CaseEq(STORY_CH4_OPENED_GENERAL_GUY_ROOM)
+            Set(LVar0, FALSE)
+            Set(GB_StoryProgress, STORY_CH4_DEFEATED_GENERAL_GUY)
+        CaseEq(STORY_CH4_DEFEATED_GENERAL_GUY)
+            Set(LVar0, TRUE)
+        CaseDefault
+            Return
+    EndSwitch
+    IfEq(LVar0, FALSE)
         // card appearing scene
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -100, 85, 0)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.5))
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, -100, 30, 0)
+        Call(DisablePlayerInput, TRUE)
+        Call(UseSettingsFrom, CAM_DEFAULT, -100, 85, 0)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(0.5))
+        Call(SetPanTarget, CAM_DEFAULT, -100, 30, 0)
         EVT_SPIRIT_ADJUST_CAM(10000)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(N(StarSpiritEffectFunc2), 3, 180, 215, 60, 0, -100, 85, 0, 30, 0)
-        EVT_THREAD
-            EVT_CALL(N(StarSpiritEffectFunc3))
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_WAIT(1)
-            EVT_CALL(PlaySound, SOUND_LOOP_STAR_ORB_RISING)
-            EVT_CALL(N(StarSpiritEffectFunc1))
-            EVT_CALL(StopSound, SOUND_LOOP_STAR_ORB_RISING)
-            EVT_CALL(PlaySoundAt, SOUND_STAR_ORB_BURST, SOUND_SPACE_DEFAULT, -100, 85, 0)
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_WAIT(45)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_WAIT(180)
-            EVT_WAIT(115)
-            EVT_CALL(PlaySoundAt, SOUND_STAR_CARD_APPEARS, SOUND_SPACE_DEFAULT, -100, 85, 0)
-        EVT_END_THREAD
-        EVT_CALL(N(StarSpiritEffectFunc4), 1)
-        EVT_THREAD
-            EVT_WAIT(80)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-        EVT_END_THREAD
-        EVT_ADD(LVar1, 100)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, LVar1)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, -100, 0, 0)
-        EVT_CALL(N(StarSpiritEffectFunc4), 2)
-        EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_ELSE
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(N(StarSpiritEffectFunc2), 3, 180, 215, 60, 0, -100, 85, 0, 30, 0)
+        Thread
+            Call(N(StarSpiritEffectFunc3))
+        EndThread
+        Thread
+            Wait(1)
+            Call(PlaySound, SOUND_LOOP_STAR_ORB_RISING)
+            Call(N(StarSpiritEffectFunc1))
+            Call(StopSound, SOUND_LOOP_STAR_ORB_RISING)
+            Call(PlaySoundAt, SOUND_STAR_ORB_BURST, SOUND_SPACE_DEFAULT, -100, 85, 0)
+        EndThread
+        Thread
+            Wait(45)
+            Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+        EndThread
+        Thread
+            Wait(180)
+            Wait(115)
+            Call(PlaySoundAt, SOUND_STAR_CARD_APPEARS, SOUND_SPACE_DEFAULT, -100, 85, 0)
+        EndThread
+        Call(N(StarSpiritEffectFunc4), 1)
+        Thread
+            Wait(80)
+            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+        EndThread
+        Add(LVar1, 100)
+        Call(SetCamDistance, CAM_DEFAULT, LVar1)
+        Call(SetPanTarget, CAM_DEFAULT, -100, 0, 0)
+        Call(N(StarSpiritEffectFunc4), 2)
+        Call(GetPlayerPos, LVar2, LVar3, LVar4)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
+        Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(DisablePlayerInput, FALSE)
+    Else
         // just make the card spawn
-        EVT_CALL(N(StarSpiritEffectFunc5), 3, -100, 30, 0, 0)
-        EVT_THREAD
-            EVT_CALL(N(StarSpiritEffectFunc6))
-        EVT_END_THREAD
-        EVT_WAIT(1)
-    EVT_END_IF
+        Call(N(StarSpiritEffectFunc5), 3, -100, 30, 0, 0)
+        Thread
+            Call(N(StarSpiritEffectFunc6))
+        EndThread
+        Wait(1)
+    EndIf
     // wait for pickup
-    EVT_CALL(N(StarSpiritEffectFunc4), 3)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_RESCUE_STAR_SPIRIT, SOUND_SPACE_DEFAULT)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(GB_StoryProgress, STORY_CH4_STAR_SPIRIT_RESCUED)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), kmr_23_ENTRY_3, TRANSITION_GET_STAR_CARD)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(N(StarSpiritEffectFunc4), 3)
+    Call(PlaySoundAtPlayer, SOUND_RESCUE_STAR_SPIRIT, SOUND_SPACE_DEFAULT)
+    Call(DisablePlayerInput, TRUE)
+    Set(GB_StoryProgress, STORY_CH4_STAR_SPIRIT_RESCUED)
+    Call(GotoMapSpecial, Ref("kmr_23"), kmr_23_ENTRY_3, TRANSITION_GET_STAR_CARD)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitWalk_omo_14_1) = EVT_EXIT_WALK(60, omo_15_ENTRY_0, "omo_14", omo_14_ENTRY_1);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_omo_14_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_omo_14_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_SHY_GUYS_TOYBOX)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_ALT_NO_LEAD()
-    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC_WAIT(N(EVS_SetupMusic))
-    EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-    EVT_EXEC(EnterWalk)
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH4_DEFEATED_GENERAL_GUY)
-        EVT_EXEC(N(EVS_TrySpawningStarCard))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_SHY_GUYS_TOYBOX)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_ALT_NO_LEAD()
+    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    ExecWait(N(EVS_SetupMusic))
+    Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+    Exec(EnterWalk)
+    IfEq(GB_StoryProgress, STORY_CH4_DEFEATED_GENERAL_GUY)
+        Exec(N(EVS_TrySpawningStarCard))
+    EndIf
+    Return
+    End
 };

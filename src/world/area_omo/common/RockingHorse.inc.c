@@ -63,7 +63,7 @@ API_CALLABLE(N(UpdateRockingHorses)) {
 }
 
 EvtScript N(EVS_Gizmos_RockingHorses) = {
-    EVT_CALL(N(UpdateRockingHorses))
-    EVT_RETURN
-    EVT_END
+    Call(N(UpdateRockingHorses))
+    Return
+    End
 };

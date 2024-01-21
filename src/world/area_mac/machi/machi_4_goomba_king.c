@@ -1,34 +1,34 @@
 #include "machi.h"
 
 EvtScript N(EVS_GoombaKing_Init) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAuxAI_GoombaKing) = {
-    EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcScale, NPC_SELF, Float(0.5), Float(0.5), Float(0.5))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_GoombaKing) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_GoombaKing) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_GoombaKing) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_GoombaKing) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_GoombaKing) = {

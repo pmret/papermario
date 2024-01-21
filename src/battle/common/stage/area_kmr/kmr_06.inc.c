@@ -13,21 +13,21 @@ API_CALLABLE(N(SetupFog)) {
 }
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(N(SetupFog))
-    EVT_SET(LVar0, MODEL_g59)
-    EVT_SET(LVar2, 0)
-    EVT_EXEC(N(EVS_AnimateCloud))
-    EVT_SET(LVar0, MODEL_g60)
-    EVT_SET(LVar2, 70)
-    EVT_EXEC(N(EVS_AnimateCloud))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(N(SetupFog))
+    Set(LVar0, MODEL_g59)
+    Set(LVar2, 0)
+    Exec(N(EVS_AnimateCloud))
+    Set(LVar0, MODEL_g60)
+    Set(LVar2, 70)
+    Exec(N(EVS_AnimateCloud))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

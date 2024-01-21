@@ -64,35 +64,35 @@ API_CALLABLE(N(UpdateRockingHorse)) {
 }
 
 EvtScript N(EVS_UpdateRockingHorse) = {
-    EVT_CALL(N(UpdateRockingHorse))
-    EVT_RETURN
-    EVT_END
+    Call(N(UpdateRockingHorse))
+    Return
+    End
 };
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_THREAD
-        EVT_SETF(LVar0, EVT_FLOAT(0.0))
-        EVT_SETF(LVar1, EVT_FLOAT(0.0))
-        EVT_LOOP(0)
-            EVT_CALL(RotateModel, MODEL_o367, LVar1, 0, 0, 1)
-            EVT_CALL(RotateModel, MODEL_hari, LVar0, 0, 0, 1)
-            EVT_SUBF(LVar0, EVT_FLOAT(0.6))
-            EVT_SUBF(LVar1, EVT_FLOAT(7.2))
-            EVT_CALL(ClampAngleFloat, LVar0)
-            EVT_CALL(ClampAngleFloat, LVar1)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_EXEC(N(EVS_UpdateRockingHorse))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Thread
+        SetF(LVar0, Float(0.0))
+        SetF(LVar1, Float(0.0))
+        Loop(0)
+            Call(RotateModel, MODEL_o367, LVar1, 0, 0, 1)
+            Call(RotateModel, MODEL_hari, LVar0, 0, 0, 1)
+            SubF(LVar0, Float(0.6))
+            SubF(LVar1, Float(7.2))
+            Call(ClampAngleFloat, LVar0)
+            Call(ClampAngleFloat, LVar1)
+            Wait(1)
+        EndLoop
+    EndThread
+    Exec(N(EVS_UpdateRockingHorse))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 Stage NAMESPACE = {

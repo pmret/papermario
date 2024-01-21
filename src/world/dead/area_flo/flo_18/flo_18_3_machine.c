@@ -22,471 +22,471 @@ API_CALLABLE(N(SetMachineLightningColor)) {
 }
 
 EvtScript N(EVS_AnimateMachineLightning) = {
-    EVT_SET_GROUP(EVT_GROUP_0B)
-    EVT_LOOP(0)
-        EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, EVT_FLOAT(-16.0), EVT_FLOAT(102.0), EVT_FLOAT(-4.1), EVT_FLOAT(80.9), EVT_FLOAT(102.0), EVT_FLOAT(-4.1), EVT_FLOAT(0.5), 6)
-        EVT_CALL(N(SetMachineLightningColor))
-        EVT_WAIT(4)
-        EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, EVT_FLOAT(80.9), EVT_FLOAT(102.0), EVT_FLOAT(-4.1), EVT_FLOAT(-16.0), EVT_FLOAT(102.0), EVT_FLOAT(-4.1), EVT_FLOAT(0.5), 6)
-        EVT_CALL(N(SetMachineLightningColor))
-        EVT_WAIT(4)
-        EVT_IF_GE(GB_FLO18_MachineDamage_Right, 3)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_SET(LVar0, 6)
-    EVT_LOOP(5)
-        EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, EVT_FLOAT(-16.0), EVT_FLOAT(102.0), EVT_FLOAT(-4.1), EVT_FLOAT(80.9), EVT_FLOAT(102.0), EVT_FLOAT(-4.1), EVT_FLOAT(0.5), 6)
-        EVT_CALL(N(SetMachineLightningColor))
-        EVT_WAIT(LVar0)
-        EVT_ADD(LVar0, 2)
-        EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, EVT_FLOAT(80.9), EVT_FLOAT(102.0), EVT_FLOAT(-4.1), EVT_FLOAT(-16.0), EVT_FLOAT(102.0), EVT_FLOAT(-4.1), EVT_FLOAT(0.5), 6)
-        EVT_CALL(N(SetMachineLightningColor))
-        EVT_WAIT(LVar0)
-        EVT_ADD(LVar0, 2)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_0B)
+    Loop(0)
+        PlayEffect(EFFECT_LIGHTNING_BOLT, 0, Float(-16.0), Float(102.0), Float(-4.1), Float(80.9), Float(102.0), Float(-4.1), Float(0.5), 6)
+        Call(N(SetMachineLightningColor))
+        Wait(4)
+        PlayEffect(EFFECT_LIGHTNING_BOLT, 0, Float(80.9), Float(102.0), Float(-4.1), Float(-16.0), Float(102.0), Float(-4.1), Float(0.5), 6)
+        Call(N(SetMachineLightningColor))
+        Wait(4)
+        IfGe(GB_FLO18_MachineDamage_Right, 3)
+            BreakLoop
+        EndIf
+    EndLoop
+    Set(LVar0, 6)
+    Loop(5)
+        PlayEffect(EFFECT_LIGHTNING_BOLT, 0, Float(-16.0), Float(102.0), Float(-4.1), Float(80.9), Float(102.0), Float(-4.1), Float(0.5), 6)
+        Call(N(SetMachineLightningColor))
+        Wait(LVar0)
+        Add(LVar0, 2)
+        PlayEffect(EFFECT_LIGHTNING_BOLT, 0, Float(80.9), Float(102.0), Float(-4.1), Float(-16.0), Float(102.0), Float(-4.1), Float(0.5), 6)
+        Call(N(SetMachineLightningColor))
+        Wait(LVar0)
+        Add(LVar0, 2)
+    EndLoop
+    Return
+    End
 };
 
 #include "common/CosInterpMinMax.inc.c"
 
 EvtScript N(EVS_UpdateSmokeParticle) = {
-    EVT_CALL(EnableModel, LVarF, TRUE)
-    EVT_SET(LVarE, 159)
-    EVT_LOOP(LVarE)
-        EVT_ADDF(LVar3, 0)
-        EVT_ADDF(LVar4, EVT_FLOAT(0.0))
-        EVT_SETF(LVar5, EVT_FLOAT(0.01))
-        EVT_ADDF(LVar0, LVar3)
-        EVT_ADDF(LVar1, LVar4)
-        EVT_ADDF(LVar2, LVar5)
-        EVT_MULF(LVar6, EVT_FLOAT(1.01))
-        EVT_ADDF(LVar7, EVT_FLOAT(0.01))
-        EVT_SETF(LVar8, LVar6)
-        EVT_CALL(N(CosInterpMinMax), LVarE, LVarA, EVT_FLOAT(0.0), EVT_FLOAT(0.203), 15, 0, 0)
-        EVT_ADDF(LVar8, LVarA)
-        EVT_SETF(LVar9, LVar7)
-        EVT_CALL(N(CosInterpMinMax), LVarE, LVarA, EVT_FLOAT(0.0), EVT_FLOAT(0.203), 20, 0, 90)
-        EVT_ADDF(LVar9, LVarA)
-        EVT_SETF(LVarA, LVar0)
-        EVT_MULF(LVarA, EVT_FLOAT(10.0))
-        EVT_CALL(TranslateModel, LVarF, LVar0, LVar1, LVar2)
-        EVT_CALL(ScaleModel, LVarF, LVar8, LVar9, 1)
-        EVT_CALL(RotateModel, LVarF, LVarA, 0, 0, 1)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(EnableModel, LVarF, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableModel, LVarF, TRUE)
+    Set(LVarE, 159)
+    Loop(LVarE)
+        AddF(LVar3, 0)
+        AddF(LVar4, Float(0.0))
+        SetF(LVar5, Float(0.01))
+        AddF(LVar0, LVar3)
+        AddF(LVar1, LVar4)
+        AddF(LVar2, LVar5)
+        MulF(LVar6, Float(1.01))
+        AddF(LVar7, Float(0.01))
+        SetF(LVar8, LVar6)
+        Call(N(CosInterpMinMax), LVarE, LVarA, Float(0.0), Float(0.203), 15, 0, 0)
+        AddF(LVar8, LVarA)
+        SetF(LVar9, LVar7)
+        Call(N(CosInterpMinMax), LVarE, LVarA, Float(0.0), Float(0.203), 20, 0, 90)
+        AddF(LVar9, LVarA)
+        SetF(LVarA, LVar0)
+        MulF(LVarA, Float(10.0))
+        Call(TranslateModel, LVarF, LVar0, LVar1, LVar2)
+        Call(ScaleModel, LVarF, LVar8, LVar9, 1)
+        Call(RotateModel, LVarF, LVarA, 0, 0, 1)
+        Wait(1)
+    EndLoop
+    Call(EnableModel, LVarF, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_ManageSmoke) = {
-    EVT_SET(LVarE, 0)
-    EVT_LABEL(0)
-        EVT_IF_GE(GB_FLO18_MachineDamage_Right, 3)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_SETF(LVar0, EVT_FLOAT(132.0))
-        EVT_SETF(LVar1, EVT_FLOAT(90.0))
-        EVT_SETF(LVar2, EVT_FLOAT(-30.0))
-        EVT_CALL(RandInt, 100, LVar3)
-        EVT_ADDF(LVar3, -50)
-        EVT_DIVF(LVar3, EVT_FLOAT(200.0))
-        EVT_SETF(LVar4, EVT_FLOAT(1.0))
-        EVT_SETF(LVar5, 0)
-        EVT_SETF(LVar6, EVT_FLOAT(0.296))
-        EVT_SETF(LVar7, EVT_FLOAT(0.296))
-        EVT_SET(LVarF, LVarE)
-        EVT_ADD(LVarF, CLONED_MODEL(0))
-        EVT_EXEC(N(EVS_UpdateSmokeParticle))
-        EVT_ADD(LVarE, 1)
-        EVT_IF_GE(LVarE, 16)
-            EVT_SET(LVarE, 0)
-        EVT_END_IF
-        EVT_WAIT(10)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LVarE, 0)
+    Label(0)
+        IfGe(GB_FLO18_MachineDamage_Right, 3)
+            Return
+        EndIf
+        SetF(LVar0, Float(132.0))
+        SetF(LVar1, Float(90.0))
+        SetF(LVar2, Float(-30.0))
+        Call(RandInt, 100, LVar3)
+        AddF(LVar3, -50)
+        DivF(LVar3, Float(200.0))
+        SetF(LVar4, Float(1.0))
+        SetF(LVar5, 0)
+        SetF(LVar6, Float(0.296))
+        SetF(LVar7, Float(0.296))
+        Set(LVarF, LVarE)
+        Add(LVarF, CLONED_MODEL(0))
+        Exec(N(EVS_UpdateSmokeParticle))
+        Add(LVarE, 1)
+        IfGe(LVarE, 16)
+            Set(LVarE, 0)
+        EndIf
+        Wait(10)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_ShakeMachine) = {
-    EVT_IF_EQ(MF_MachineShaking, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(MF_MachineShaking, TRUE)
-    EVT_SET(LVarF, 0)
-    EVT_LOOP(12)
-        EVT_CALL(RandInt, 80, LVar0)
-        EVT_SUB(LVar0, 40)
-        EVT_CALL(RandInt, 50, LVar1)
-        EVT_CALL(RandInt, 50, LVar2)
-        EVT_SUB(LVar2, 25)
-        EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar1, LVar2, 5, 10, 1, 1)
-        EVT_ADD(LVarF, 1)
-        EVT_CALL(N(CosInterpMinMax), LVarF, LVarE, EVT_FLOAT(1.0), EVT_FLOAT(1.093), 2, 0, 0)
-        EVT_CALL(N(CosInterpMinMax), LVarF, LVarD, EVT_FLOAT(1.093), EVT_FLOAT(1.0), 2, 0, 0)
-        EVT_SETF(LVar0, LVarE)
-        EVT_SETF(LVar1, LVarD)
-        EVT_SETF(LVar2, LVarE)
-        EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 0)
-            EVT_CALL(ScaleModel, MODEL_o115, LVar0, LVar1, LVar2)
-            EVT_CALL(ScaleModel, MODEL_o116, LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 0)
-            EVT_CALL(ScaleModel, MODEL_o117, LVar0, LVar1, LVar2)
-            EVT_CALL(ScaleModel, MODEL_o118, LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_IF_LE(GB_FLO18_MachineDamage_Left, 1)
-            EVT_CALL(ScaleModel, MODEL_o119, LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
-            EVT_IF_LE(GB_FLO18_MachineDamage_Right, 1)
-                EVT_CALL(ScaleModel, MODEL_o120, LVar0, LVar1, LVar2)
-                EVT_CALL(ScaleModel, MODEL_o121, LVar0, LVar1, LVar2)
-                EVT_CALL(ScaleModel, MODEL_o122, LVar0, LVar1, LVar2)
-                EVT_CALL(ScaleModel, MODEL_o123, LVar0, LVar1, LVar2)
-                EVT_CALL(ScaleModel, MODEL_o124, LVar0, LVar1, LVar2)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(ScaleModel, MODEL_o113, LVar0, LVar1, LVar2)
-        EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
-            EVT_IF_LE(GB_FLO18_MachineDamage_Right, 2)
-                EVT_CALL(ScaleModel, MODEL_o100, LVar0, LVar1, LVar2)
-                EVT_CALL(ScaleModel, MODEL_o99, LVar0, LVar1, LVar2)
-                EVT_CALL(ScaleModel, MODEL_o125, LVar0, LVar1, LVar2)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(ScaleModel, MODEL_o92, LVar0, LVar1, LVar2)
-        EVT_CALL(ScaleModel, MODEL_o93, LVar0, LVar1, LVar2)
-        EVT_CALL(ScaleModel, MODEL_o94, LVar0, LVar1, LVar2)
-        EVT_CALL(ScaleModel, MODEL_o95, LVar0, LVar1, LVar2)
-        EVT_CALL(ScaleModel, MODEL_o91, LVar0, LVar1, LVar2)
-        EVT_CALL(ScaleModel, MODEL_o114, LVar0, LVar1, LVar2)
-        EVT_SUBF(LVar0, EVT_FLOAT(1.046))
-        EVT_MULF(LVar0, EVT_FLOAT(100.0))
-        EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 0)
-            EVT_CALL(RotateModel, MODEL_o115, LVar0, 0, 0, 1)
-            EVT_CALL(RotateModel, MODEL_o116, LVar0, 0, 0, 1)
-        EVT_END_IF
-        EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 0)
-            EVT_CALL(RotateModel, MODEL_o117, LVar0, 0, 0, 1)
-            EVT_CALL(RotateModel, MODEL_o118, LVar0, 0, 0, 1)
-        EVT_END_IF
-        EVT_IF_LE(GB_FLO18_MachineDamage_Left, 1)
-            EVT_CALL(RotateModel, MODEL_o119, LVar0, 0, 0, 1)
-        EVT_END_IF
-        EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
-            EVT_IF_LE(GB_FLO18_MachineDamage_Right, 1)
-                EVT_CALL(RotateModel, MODEL_o120, LVar0, 0, 0, 1)
-                EVT_CALL(RotateModel, MODEL_o121, LVar0, 0, 0, 1)
-                EVT_CALL(RotateModel, MODEL_o122, LVar0, 0, 0, 1)
-                EVT_CALL(RotateModel, MODEL_o123, LVar0, 0, 0, 1)
-                EVT_CALL(RotateModel, MODEL_o124, LVar0, 0, 0, 1)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(RotateModel, MODEL_o113, LVar0, 0, 0, 1)
-        EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
-            EVT_IF_LE(GB_FLO18_MachineDamage_Right, 2)
-                EVT_CALL(RotateModel, MODEL_o100, LVar0, 0, 0, 1)
-                EVT_CALL(RotateModel, MODEL_o99, LVar0, 0, 0, 1)
-                EVT_CALL(RotateModel, MODEL_o125, LVar0, 0, 0, 1)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(RotateModel, MODEL_o92, LVar0, 0, 0, 1)
-        EVT_CALL(RotateModel, MODEL_o93, LVar0, 0, 0, 1)
-        EVT_CALL(RotateModel, MODEL_o94, LVar0, 0, 0, 1)
-        EVT_CALL(RotateModel, MODEL_o95, LVar0, 0, 0, 1)
-        EVT_CALL(RotateModel, MODEL_o91, LVar0, 0, 0, 1)
-        EVT_CALL(RotateModel, MODEL_o114, LVar0, 0, 0, 1)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_SETF(LVar0, 1)
-    EVT_SETF(LVar1, 1)
-    EVT_SETF(LVar2, 1)
-    EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 0)
-        EVT_CALL(ScaleModel, MODEL_o115, LVar0, LVar1, LVar2)
-        EVT_CALL(ScaleModel, MODEL_o116, LVar0, LVar1, LVar2)
-    EVT_END_IF
-    EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 0)
-        EVT_CALL(ScaleModel, MODEL_o117, LVar0, LVar1, LVar2)
-        EVT_CALL(ScaleModel, MODEL_o118, LVar0, LVar1, LVar2)
-    EVT_END_IF
-    EVT_IF_LE(GB_FLO18_MachineDamage_Left, 1)
-        EVT_CALL(ScaleModel, MODEL_o119, LVar0, LVar1, LVar2)
-    EVT_END_IF
-    EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
-        EVT_IF_LE(GB_FLO18_MachineDamage_Right, 1)
-            EVT_CALL(ScaleModel, MODEL_o120, LVar0, LVar1, LVar2)
-            EVT_CALL(ScaleModel, MODEL_o121, LVar0, LVar1, LVar2)
-            EVT_CALL(ScaleModel, MODEL_o122, LVar0, LVar1, LVar2)
-            EVT_CALL(ScaleModel, MODEL_o123, LVar0, LVar1, LVar2)
-            EVT_CALL(ScaleModel, MODEL_o124, LVar0, LVar1, LVar2)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(ScaleModel, MODEL_o113, LVar0, LVar1, LVar2)
-    EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
-        EVT_IF_LE(GB_FLO18_MachineDamage_Right, 2)
-            EVT_CALL(ScaleModel, MODEL_o100, LVar0, LVar1, LVar2)
-            EVT_CALL(ScaleModel, MODEL_o99, LVar0, LVar1, LVar2)
-            EVT_CALL(ScaleModel, MODEL_o125, LVar0, LVar1, LVar2)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(ScaleModel, MODEL_o92, LVar0, LVar1, LVar2)
-    EVT_CALL(ScaleModel, MODEL_o93, LVar0, LVar1, LVar2)
-    EVT_CALL(ScaleModel, MODEL_o94, LVar0, LVar1, LVar2)
-    EVT_CALL(ScaleModel, MODEL_o95, LVar0, LVar1, LVar2)
-    EVT_CALL(ScaleModel, MODEL_o91, LVar0, LVar1, LVar2)
-    EVT_CALL(ScaleModel, MODEL_o114, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_SET(MF_MachineShaking, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfEq(MF_MachineShaking, TRUE)
+        Return
+    EndIf
+    Set(MF_MachineShaking, TRUE)
+    Set(LVarF, 0)
+    Loop(12)
+        Call(RandInt, 80, LVar0)
+        Sub(LVar0, 40)
+        Call(RandInt, 50, LVar1)
+        Call(RandInt, 50, LVar2)
+        Sub(LVar2, 25)
+        PlayEffect(EFFECT_00, LVar0, LVar1, LVar2, 5, 10, 1, 1)
+        Add(LVarF, 1)
+        Call(N(CosInterpMinMax), LVarF, LVarE, Float(1.0), Float(1.093), 2, 0, 0)
+        Call(N(CosInterpMinMax), LVarF, LVarD, Float(1.093), Float(1.0), 2, 0, 0)
+        SetF(LVar0, LVarE)
+        SetF(LVar1, LVarD)
+        SetF(LVar2, LVarE)
+        IfEq(GB_FLO18_MachineDamage_Left, 0)
+            Call(ScaleModel, MODEL_o115, LVar0, LVar1, LVar2)
+            Call(ScaleModel, MODEL_o116, LVar0, LVar1, LVar2)
+        EndIf
+        IfEq(GB_FLO18_MachineDamage_Right, 0)
+            Call(ScaleModel, MODEL_o117, LVar0, LVar1, LVar2)
+            Call(ScaleModel, MODEL_o118, LVar0, LVar1, LVar2)
+        EndIf
+        IfLe(GB_FLO18_MachineDamage_Left, 1)
+            Call(ScaleModel, MODEL_o119, LVar0, LVar1, LVar2)
+        EndIf
+        IfLe(GB_FLO18_MachineDamage_Left, 2)
+            IfLe(GB_FLO18_MachineDamage_Right, 1)
+                Call(ScaleModel, MODEL_o120, LVar0, LVar1, LVar2)
+                Call(ScaleModel, MODEL_o121, LVar0, LVar1, LVar2)
+                Call(ScaleModel, MODEL_o122, LVar0, LVar1, LVar2)
+                Call(ScaleModel, MODEL_o123, LVar0, LVar1, LVar2)
+                Call(ScaleModel, MODEL_o124, LVar0, LVar1, LVar2)
+            EndIf
+        EndIf
+        Call(ScaleModel, MODEL_o113, LVar0, LVar1, LVar2)
+        IfLe(GB_FLO18_MachineDamage_Left, 2)
+            IfLe(GB_FLO18_MachineDamage_Right, 2)
+                Call(ScaleModel, MODEL_o100, LVar0, LVar1, LVar2)
+                Call(ScaleModel, MODEL_o99, LVar0, LVar1, LVar2)
+                Call(ScaleModel, MODEL_o125, LVar0, LVar1, LVar2)
+            EndIf
+        EndIf
+        Call(ScaleModel, MODEL_o92, LVar0, LVar1, LVar2)
+        Call(ScaleModel, MODEL_o93, LVar0, LVar1, LVar2)
+        Call(ScaleModel, MODEL_o94, LVar0, LVar1, LVar2)
+        Call(ScaleModel, MODEL_o95, LVar0, LVar1, LVar2)
+        Call(ScaleModel, MODEL_o91, LVar0, LVar1, LVar2)
+        Call(ScaleModel, MODEL_o114, LVar0, LVar1, LVar2)
+        SubF(LVar0, Float(1.046))
+        MulF(LVar0, Float(100.0))
+        IfEq(GB_FLO18_MachineDamage_Left, 0)
+            Call(RotateModel, MODEL_o115, LVar0, 0, 0, 1)
+            Call(RotateModel, MODEL_o116, LVar0, 0, 0, 1)
+        EndIf
+        IfEq(GB_FLO18_MachineDamage_Right, 0)
+            Call(RotateModel, MODEL_o117, LVar0, 0, 0, 1)
+            Call(RotateModel, MODEL_o118, LVar0, 0, 0, 1)
+        EndIf
+        IfLe(GB_FLO18_MachineDamage_Left, 1)
+            Call(RotateModel, MODEL_o119, LVar0, 0, 0, 1)
+        EndIf
+        IfLe(GB_FLO18_MachineDamage_Left, 2)
+            IfLe(GB_FLO18_MachineDamage_Right, 1)
+                Call(RotateModel, MODEL_o120, LVar0, 0, 0, 1)
+                Call(RotateModel, MODEL_o121, LVar0, 0, 0, 1)
+                Call(RotateModel, MODEL_o122, LVar0, 0, 0, 1)
+                Call(RotateModel, MODEL_o123, LVar0, 0, 0, 1)
+                Call(RotateModel, MODEL_o124, LVar0, 0, 0, 1)
+            EndIf
+        EndIf
+        Call(RotateModel, MODEL_o113, LVar0, 0, 0, 1)
+        IfLe(GB_FLO18_MachineDamage_Left, 2)
+            IfLe(GB_FLO18_MachineDamage_Right, 2)
+                Call(RotateModel, MODEL_o100, LVar0, 0, 0, 1)
+                Call(RotateModel, MODEL_o99, LVar0, 0, 0, 1)
+                Call(RotateModel, MODEL_o125, LVar0, 0, 0, 1)
+            EndIf
+        EndIf
+        Call(RotateModel, MODEL_o92, LVar0, 0, 0, 1)
+        Call(RotateModel, MODEL_o93, LVar0, 0, 0, 1)
+        Call(RotateModel, MODEL_o94, LVar0, 0, 0, 1)
+        Call(RotateModel, MODEL_o95, LVar0, 0, 0, 1)
+        Call(RotateModel, MODEL_o91, LVar0, 0, 0, 1)
+        Call(RotateModel, MODEL_o114, LVar0, 0, 0, 1)
+        Wait(1)
+    EndLoop
+    SetF(LVar0, 1)
+    SetF(LVar1, 1)
+    SetF(LVar2, 1)
+    IfEq(GB_FLO18_MachineDamage_Left, 0)
+        Call(ScaleModel, MODEL_o115, LVar0, LVar1, LVar2)
+        Call(ScaleModel, MODEL_o116, LVar0, LVar1, LVar2)
+    EndIf
+    IfEq(GB_FLO18_MachineDamage_Right, 0)
+        Call(ScaleModel, MODEL_o117, LVar0, LVar1, LVar2)
+        Call(ScaleModel, MODEL_o118, LVar0, LVar1, LVar2)
+    EndIf
+    IfLe(GB_FLO18_MachineDamage_Left, 1)
+        Call(ScaleModel, MODEL_o119, LVar0, LVar1, LVar2)
+    EndIf
+    IfLe(GB_FLO18_MachineDamage_Left, 2)
+        IfLe(GB_FLO18_MachineDamage_Right, 1)
+            Call(ScaleModel, MODEL_o120, LVar0, LVar1, LVar2)
+            Call(ScaleModel, MODEL_o121, LVar0, LVar1, LVar2)
+            Call(ScaleModel, MODEL_o122, LVar0, LVar1, LVar2)
+            Call(ScaleModel, MODEL_o123, LVar0, LVar1, LVar2)
+            Call(ScaleModel, MODEL_o124, LVar0, LVar1, LVar2)
+        EndIf
+    EndIf
+    Call(ScaleModel, MODEL_o113, LVar0, LVar1, LVar2)
+    IfLe(GB_FLO18_MachineDamage_Left, 2)
+        IfLe(GB_FLO18_MachineDamage_Right, 2)
+            Call(ScaleModel, MODEL_o100, LVar0, LVar1, LVar2)
+            Call(ScaleModel, MODEL_o99, LVar0, LVar1, LVar2)
+            Call(ScaleModel, MODEL_o125, LVar0, LVar1, LVar2)
+        EndIf
+    EndIf
+    Call(ScaleModel, MODEL_o92, LVar0, LVar1, LVar2)
+    Call(ScaleModel, MODEL_o93, LVar0, LVar1, LVar2)
+    Call(ScaleModel, MODEL_o94, LVar0, LVar1, LVar2)
+    Call(ScaleModel, MODEL_o95, LVar0, LVar1, LVar2)
+    Call(ScaleModel, MODEL_o91, LVar0, LVar1, LVar2)
+    Call(ScaleModel, MODEL_o114, LVar0, LVar1, LVar2)
+    Wait(1)
+    Set(MF_MachineShaking, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_DamagedLeftOnce) = {
-    EVT_SETF(LVar0, 0)
-    EVT_SETF(LVar1, 0)
-    EVT_SETF(LVar2, 0)
-    EVT_SETF(LVar3, EVT_FLOAT(-1.0))
-    EVT_SETF(LVar4, EVT_FLOAT(0.0))
-    EVT_SETF(LVar5, EVT_FLOAT(3.0))
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o130, SOUND_PUFF_PUFF_PART_BREAKS, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_LOOP(300)
-        EVT_ADDF(LVar4, EVT_FLOAT(-0.5))
-        EVT_ADDF(LVar5, EVT_FLOAT(0.093))
-        EVT_ADDF(LVar0, LVar3)
-        EVT_ADDF(LVar1, LVar4)
-        EVT_ADDF(LVar2, LVar5)
-        EVT_IF_LT(LVar1, -10)
-            EVT_SETF(LVar1, EVT_FLOAT(-10.0))
-            EVT_SETF(LVar3, EVT_FLOAT(0.0))
-            EVT_SETF(LVar4, EVT_FLOAT(0.0))
-            EVT_IF_GE(LVar2, 80)
-                EVT_GOTO(0)
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(TranslateModel, MODEL_o115, -78, 19, 2)
-    EVT_CALL(TranslateModel, MODEL_o116, -78, 19, 2)
-    EVT_CALL(TranslateModel, MODEL_o115, LVar0, LVar1, 0)
-    EVT_CALL(TranslateModel, MODEL_o116, LVar0, LVar1, 0)
-    EVT_CALL(RotateModel, MODEL_o115, LVar2, 0, 0, 1)
-    EVT_CALL(RotateModel, MODEL_o116, LVar2, 0, 0, 1)
-    EVT_CALL(TranslateModel, MODEL_o115, 78, -19, -2)
-    EVT_CALL(TranslateModel, MODEL_o116, 78, -19, -2)
-    EVT_WAIT(1)
-EVT_END_LOOP
-EVT_LABEL(0)
-EVT_WAIT(30)
-EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
-EVT_RETURN
-EVT_END
+    SetF(LVar0, 0)
+    SetF(LVar1, 0)
+    SetF(LVar2, 0)
+    SetF(LVar3, Float(-1.0))
+    SetF(LVar4, Float(0.0))
+    SetF(LVar5, Float(3.0))
+    Thread
+        Wait(10)
+        Call(PlaySoundAtCollider, COLLIDER_o130, SOUND_PUFF_PUFF_PART_BREAKS, SOUND_SPACE_DEFAULT)
+    EndThread
+    Loop(300)
+        AddF(LVar4, Float(-0.5))
+        AddF(LVar5, Float(0.093))
+        AddF(LVar0, LVar3)
+        AddF(LVar1, LVar4)
+        AddF(LVar2, LVar5)
+        IfLt(LVar1, -10)
+            SetF(LVar1, Float(-10.0))
+            SetF(LVar3, Float(0.0))
+            SetF(LVar4, Float(0.0))
+            IfGe(LVar2, 80)
+                Goto(0)
+            EndIf
+        EndIf
+    EndIf
+    Call(TranslateModel, MODEL_o115, -78, 19, 2)
+    Call(TranslateModel, MODEL_o116, -78, 19, 2)
+    Call(TranslateModel, MODEL_o115, LVar0, LVar1, 0)
+    Call(TranslateModel, MODEL_o116, LVar0, LVar1, 0)
+    Call(RotateModel, MODEL_o115, LVar2, 0, 0, 1)
+    Call(RotateModel, MODEL_o116, LVar2, 0, 0, 1)
+    Call(TranslateModel, MODEL_o115, 78, -19, -2)
+    Call(TranslateModel, MODEL_o116, 78, -19, -2)
+    Wait(1)
+EndLoop
+Label(0)
+Wait(30)
+Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
+Return
+End
 };
 
 EvtScript N(EVS_DamagedRightOnce) = {
-    EVT_SETF(LVar0, 0)
-    EVT_SETF(LVar1, 0)
-    EVT_SETF(LVar2, 0)
-    EVT_SETF(LVar3, EVT_FLOAT(0.0))
-    EVT_SETF(LVar4, EVT_FLOAT(0.0))
-    EVT_SETF(LVar5, EVT_FLOAT(-5.0))
-    EVT_THREAD
-        EVT_WAIT(12)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o175, SOUND_PUFF_PUFF_PANEL_BREAKS, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_LOOP(300)
-        EVT_ADDF(LVar4, EVT_FLOAT(-0.5))
-        EVT_ADDF(LVar0, LVar3)
-        EVT_ADDF(LVar1, LVar4)
-        EVT_ADDF(LVar2, LVar5)
-        EVT_IF_LT(LVar2, -45)
-            EVT_SET(LVar5, 5)
-        EVT_END_IF
-        EVT_IF_GT(LVar2, 0)
-            EVT_SET(LVar2, 0)
-            EVT_SET(LVar3, 5)
-        EVT_END_IF
-        EVT_IF_LT(LVar1, -25)
-            EVT_SET(LVar4, 0)
-            EVT_SET(LVar1, -25)
-        EVT_END_IF
-        EVT_IF_GT(LVar0, 90)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_CALL(TranslateModel, MODEL_o117, 50, 28, 27)
-        EVT_CALL(TranslateModel, MODEL_o118, 50, 28, 27)
-        EVT_CALL(TranslateModel, MODEL_o117, 0, LVar1, 1)
-        EVT_CALL(TranslateModel, MODEL_o118, 0, LVar1, 1)
-        EVT_CALL(RotateModel, MODEL_o117, LVar0, 1, 0, 0)
-        EVT_CALL(RotateModel, MODEL_o118, LVar0, 1, 0, 0)
-        EVT_CALL(RotateModel, MODEL_o117, LVar2, 0, 0, 1)
-        EVT_CALL(RotateModel, MODEL_o118, LVar2, 0, 0, 1)
-        EVT_CALL(TranslateModel, MODEL_o117, -50, -28, -27)
-        EVT_CALL(TranslateModel, MODEL_o118, -50, -28, -27)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_LABEL(0)
-    EVT_WAIT(30)
-    EVT_RETURN
-    EVT_END
+    SetF(LVar0, 0)
+    SetF(LVar1, 0)
+    SetF(LVar2, 0)
+    SetF(LVar3, Float(0.0))
+    SetF(LVar4, Float(0.0))
+    SetF(LVar5, Float(-5.0))
+    Thread
+        Wait(12)
+        Call(PlaySoundAtCollider, COLLIDER_o175, SOUND_PUFF_PUFF_PANEL_BREAKS, SOUND_SPACE_DEFAULT)
+    EndThread
+    Loop(300)
+        AddF(LVar4, Float(-0.5))
+        AddF(LVar0, LVar3)
+        AddF(LVar1, LVar4)
+        AddF(LVar2, LVar5)
+        IfLt(LVar2, -45)
+            Set(LVar5, 5)
+        EndIf
+        IfGt(LVar2, 0)
+            Set(LVar2, 0)
+            Set(LVar3, 5)
+        EndIf
+        IfLt(LVar1, -25)
+            Set(LVar4, 0)
+            Set(LVar1, -25)
+        EndIf
+        IfGt(LVar0, 90)
+            Goto(0)
+        EndIf
+        Call(TranslateModel, MODEL_o117, 50, 28, 27)
+        Call(TranslateModel, MODEL_o118, 50, 28, 27)
+        Call(TranslateModel, MODEL_o117, 0, LVar1, 1)
+        Call(TranslateModel, MODEL_o118, 0, LVar1, 1)
+        Call(RotateModel, MODEL_o117, LVar0, 1, 0, 0)
+        Call(RotateModel, MODEL_o118, LVar0, 1, 0, 0)
+        Call(RotateModel, MODEL_o117, LVar2, 0, 0, 1)
+        Call(RotateModel, MODEL_o118, LVar2, 0, 0, 1)
+        Call(TranslateModel, MODEL_o117, -50, -28, -27)
+        Call(TranslateModel, MODEL_o118, -50, -28, -27)
+        Wait(1)
+    EndLoop
+    Label(0)
+    Wait(30)
+    Return
+    End
 };
 
 EvtScript N(EVS_DamagedLeftTwice) = {
-    EVT_SETF(LVar2, 0)
-    EVT_SETF(LVar1, 0)
-    EVT_SETF(LVar0, 0)
-    EVT_SETF(LVar5, EVT_FLOAT(0.0))
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o174, SOUND_PUFF_PUFF_PANEL_BREAKS, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_LOOP(300)
-        EVT_ADDF(LVar5, EVT_FLOAT(0.5))
-        EVT_ADDF(LVar2, LVar5)
-        EVT_IF_GE(LVar2, 80)
-            EVT_SETF(LVar2, 80)
-            EVT_MULF(LVar5, EVT_FLOAT(-0.5))
-            EVT_IF_EQ(LVar5, 0)
-                EVT_GOTO(0)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(TranslateModel, MODEL_o119, -55, 5, 16)
-        EVT_CALL(TranslateModel, MODEL_o119, LVar0, LVar1, 0)
-        EVT_CALL(RotateModel, MODEL_o119, LVar2, 0, 0, 1)
-        EVT_CALL(TranslateModel, MODEL_o119, 55, -5, -16)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_LABEL(0)
-    EVT_WAIT(30)
-    EVT_RETURN
-    EVT_END
+    SetF(LVar2, 0)
+    SetF(LVar1, 0)
+    SetF(LVar0, 0)
+    SetF(LVar5, Float(0.0))
+    Thread
+        Wait(15)
+        Call(PlaySoundAtCollider, COLLIDER_o174, SOUND_PUFF_PUFF_PANEL_BREAKS, SOUND_SPACE_DEFAULT)
+    EndThread
+    Loop(300)
+        AddF(LVar5, Float(0.5))
+        AddF(LVar2, LVar5)
+        IfGe(LVar2, 80)
+            SetF(LVar2, 80)
+            MulF(LVar5, Float(-0.5))
+            IfEq(LVar5, 0)
+                Goto(0)
+            EndIf
+        EndIf
+        Call(TranslateModel, MODEL_o119, -55, 5, 16)
+        Call(TranslateModel, MODEL_o119, LVar0, LVar1, 0)
+        Call(RotateModel, MODEL_o119, LVar2, 0, 0, 1)
+        Call(TranslateModel, MODEL_o119, 55, -5, -16)
+        Wait(1)
+    EndLoop
+    Label(0)
+    Wait(30)
+    Return
+    End
 };
 
 EvtScript N(EVS_DamagedRightTwice) = {
-    EVT_SETF(LVar2, 0)
-    EVT_SETF(LVar1, 0)
-    EVT_SETF(LVar0, 0)
-    EVT_SETF(LVar5, EVT_FLOAT(0.0))
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o127, SOUND_PUFF_PUFF_PANEL_BREAKS, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_LOOP(300)
-        EVT_ADDF(LVar5, EVT_FLOAT(0.5))
-        EVT_ADDF(LVar2, LVar5)
-        EVT_IF_GE(LVar2, 80)
-            EVT_SETF(LVar2, 80)
-            EVT_MULF(LVar5, EVT_FLOAT(-0.5))
-            EVT_IF_EQ(LVar5, 0)
-                EVT_GOTO(0)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(TranslateModel, MODEL_o122, 60, 0, 16)
-        EVT_CALL(RotateModel, MODEL_o122, LVar2, 0, 0, -1)
-        EVT_CALL(TranslateModel, MODEL_o122, -60, 0, -16)
-        EVT_CALL(TranslateModel, MODEL_o120, 0, 0, 27)
-        EVT_CALL(TranslateModel, MODEL_o121, 0, 0, 27)
-        EVT_CALL(RotateModel, MODEL_o120, LVar2, 1, 0, 0)
-        EVT_CALL(RotateModel, MODEL_o121, LVar2, 1, 0, 0)
-        EVT_CALL(TranslateModel, MODEL_o120, 0, 0, -27)
-        EVT_CALL(TranslateModel, MODEL_o121, 0, 0, -27)
-        EVT_CALL(TranslateModel, MODEL_o123, 0, 0, -41)
-        EVT_CALL(TranslateModel, MODEL_o124, 0, 0, -41)
-        EVT_CALL(RotateModel, MODEL_o123, LVar2, -1, 0, 0)
-        EVT_CALL(RotateModel, MODEL_o124, LVar2, -1, 0, 0)
-        EVT_CALL(TranslateModel, MODEL_o123, 0, 0, 41)
-        EVT_CALL(TranslateModel, MODEL_o124, 0, 0, 41)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_LABEL(0)
-    EVT_WAIT(30)
-    EVT_RETURN
-    EVT_END
+    SetF(LVar2, 0)
+    SetF(LVar1, 0)
+    SetF(LVar0, 0)
+    SetF(LVar5, Float(0.0))
+    Thread
+        Wait(15)
+        Call(PlaySoundAtCollider, COLLIDER_o127, SOUND_PUFF_PUFF_PANEL_BREAKS, SOUND_SPACE_DEFAULT)
+    EndThread
+    Loop(300)
+        AddF(LVar5, Float(0.5))
+        AddF(LVar2, LVar5)
+        IfGe(LVar2, 80)
+            SetF(LVar2, 80)
+            MulF(LVar5, Float(-0.5))
+            IfEq(LVar5, 0)
+                Goto(0)
+            EndIf
+        EndIf
+        Call(TranslateModel, MODEL_o122, 60, 0, 16)
+        Call(RotateModel, MODEL_o122, LVar2, 0, 0, -1)
+        Call(TranslateModel, MODEL_o122, -60, 0, -16)
+        Call(TranslateModel, MODEL_o120, 0, 0, 27)
+        Call(TranslateModel, MODEL_o121, 0, 0, 27)
+        Call(RotateModel, MODEL_o120, LVar2, 1, 0, 0)
+        Call(RotateModel, MODEL_o121, LVar2, 1, 0, 0)
+        Call(TranslateModel, MODEL_o120, 0, 0, -27)
+        Call(TranslateModel, MODEL_o121, 0, 0, -27)
+        Call(TranslateModel, MODEL_o123, 0, 0, -41)
+        Call(TranslateModel, MODEL_o124, 0, 0, -41)
+        Call(RotateModel, MODEL_o123, LVar2, -1, 0, 0)
+        Call(RotateModel, MODEL_o124, LVar2, -1, 0, 0)
+        Call(TranslateModel, MODEL_o123, 0, 0, 41)
+        Call(TranslateModel, MODEL_o124, 0, 0, 41)
+        Wait(1)
+    EndLoop
+    Label(0)
+    Wait(30)
+    Return
+    End
 };
 
 EvtScript N(EVS_BreakSmokestack) = {
-    EVT_SETF(LVar0, 0)
-    EVT_SETF(LVar1, 0)
-    EVT_SETF(LVar2, 0)
-    EVT_SETF(LVar3, EVT_FLOAT(-1.0))
-    EVT_SETF(LVar4, EVT_FLOAT(0.0))
-    EVT_SETF(LVar5, EVT_FLOAT(3.0))
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o131, SOUND_PUFF_PUFF_PART_BREAKS, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_LOOP(300)
-        EVT_ADDF(LVar4, EVT_FLOAT(-0.5))
-        EVT_ADDF(LVar5, EVT_FLOAT(0.093))
-        EVT_ADDF(LVar0, LVar3)
-        EVT_ADDF(LVar1, LVar4)
-        EVT_ADDF(LVar2, LVar5)
-        EVT_IF_LT(LVar1, -25)
-            EVT_SETF(LVar1, EVT_FLOAT(-25.0))
-            EVT_SETF(LVar3, EVT_FLOAT(0.0))
-            EVT_SETF(LVar4, EVT_FLOAT(0.0))
-            EVT_IF_GE(LVar2, 80)
-                EVT_GOTO(0)
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(TranslateModel, MODEL_o100, 124, 17, 3)
-    EVT_CALL(TranslateModel, MODEL_o100, LVar0, LVar1, 0)
-    EVT_CALL(RotateModel, MODEL_o100, LVar2, 0, 0, -1)
-    EVT_CALL(TranslateModel, MODEL_o100, -124, -17, -3)
-    EVT_WAIT(1)
-EVT_END_LOOP
-EVT_LABEL(0)
-EVT_RETURN
-EVT_END
+    SetF(LVar0, 0)
+    SetF(LVar1, 0)
+    SetF(LVar2, 0)
+    SetF(LVar3, Float(-1.0))
+    SetF(LVar4, Float(0.0))
+    SetF(LVar5, Float(3.0))
+    Thread
+        Wait(15)
+        Call(PlaySoundAtCollider, COLLIDER_o131, SOUND_PUFF_PUFF_PART_BREAKS, SOUND_SPACE_DEFAULT)
+    EndThread
+    Loop(300)
+        AddF(LVar4, Float(-0.5))
+        AddF(LVar5, Float(0.093))
+        AddF(LVar0, LVar3)
+        AddF(LVar1, LVar4)
+        AddF(LVar2, LVar5)
+        IfLt(LVar1, -25)
+            SetF(LVar1, Float(-25.0))
+            SetF(LVar3, Float(0.0))
+            SetF(LVar4, Float(0.0))
+            IfGe(LVar2, 80)
+                Goto(0)
+            EndIf
+        EndIf
+    EndIf
+    Call(TranslateModel, MODEL_o100, 124, 17, 3)
+    Call(TranslateModel, MODEL_o100, LVar0, LVar1, 0)
+    Call(RotateModel, MODEL_o100, LVar2, 0, 0, -1)
+    Call(TranslateModel, MODEL_o100, -124, -17, -3)
+    Wait(1)
+EndLoop
+Label(0)
+Return
+End
 };
 
 EvtScript N(EVS_BreakAntenna) = {
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o131, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SETF(LVar0, 0)
-    EVT_SETF(LVar1, 0)
-    EVT_SETF(LVar2, 0)
-    EVT_SETF(LVar3, EVT_FLOAT(3.0))
-    EVT_SETF(LVar4, EVT_FLOAT(1.0))
-    EVT_SETF(LVar5, EVT_FLOAT(5.0))
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o126, SOUND_PUFF_PUFF_PART_BREAKS, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_LOOP(300)
-        EVT_ADDF(LVar4, EVT_FLOAT(-0.5))
-        EVT_ADDF(LVar0, LVar3)
-        EVT_ADDF(LVar1, LVar4)
-        EVT_ADDF(LVar2, LVar5)
-        EVT_IF_LE(LVar1, -40)
-            EVT_SETF(LVar1, -40)
-            EVT_MULF(LVar4, EVT_FLOAT(-0.5))
-            EVT_IF_LE(LVar4, 1)
-                EVT_GOTO(1)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_IF_GE(LVar2, 60)
-            EVT_SETF(LVar2, 60)
-            EVT_SETF(LVar5, 0)
-        EVT_END_IF
-        EVT_CALL(TranslateModel, MODEL_o99, -34, 50, 10)
-        EVT_CALL(TranslateModel, MODEL_o125, -34, 50, 10)
-        EVT_CALL(TranslateModel, MODEL_o99, 0, LVar1, LVar0)
-        EVT_CALL(RotateModel, MODEL_o99, LVar2, 0, 0, 1)
-        EVT_CALL(TranslateModel, MODEL_o125, 0, LVar1, LVar0)
-        EVT_CALL(RotateModel, MODEL_o125, LVar2, 0, 0, 1)
-        EVT_CALL(TranslateModel, MODEL_o99, 34, -50, -10)
-        EVT_CALL(TranslateModel, MODEL_o125, 34, -50, -10)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_LABEL(1)
-    EVT_WAIT(30)
-    EVT_RETURN
-    EVT_END
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o131, COLLIDER_FLAGS_UPPER_MASK)
+    SetF(LVar0, 0)
+    SetF(LVar1, 0)
+    SetF(LVar2, 0)
+    SetF(LVar3, Float(3.0))
+    SetF(LVar4, Float(1.0))
+    SetF(LVar5, Float(5.0))
+    Thread
+        Wait(15)
+        Call(PlaySoundAtCollider, COLLIDER_o126, SOUND_PUFF_PUFF_PART_BREAKS, SOUND_SPACE_DEFAULT)
+    EndThread
+    Loop(300)
+        AddF(LVar4, Float(-0.5))
+        AddF(LVar0, LVar3)
+        AddF(LVar1, LVar4)
+        AddF(LVar2, LVar5)
+        IfLe(LVar1, -40)
+            SetF(LVar1, -40)
+            MulF(LVar4, Float(-0.5))
+            IfLe(LVar4, 1)
+                Goto(1)
+            EndIf
+        EndIf
+        IfGe(LVar2, 60)
+            SetF(LVar2, 60)
+            SetF(LVar5, 0)
+        EndIf
+        Call(TranslateModel, MODEL_o99, -34, 50, 10)
+        Call(TranslateModel, MODEL_o125, -34, 50, 10)
+        Call(TranslateModel, MODEL_o99, 0, LVar1, LVar0)
+        Call(RotateModel, MODEL_o99, LVar2, 0, 0, 1)
+        Call(TranslateModel, MODEL_o125, 0, LVar1, LVar0)
+        Call(RotateModel, MODEL_o125, LVar2, 0, 0, 1)
+        Call(TranslateModel, MODEL_o99, 34, -50, -10)
+        Call(TranslateModel, MODEL_o125, 34, -50, -10)
+        Wait(1)
+    EndLoop
+    Label(1)
+    Wait(30)
+    Return
+    End
 };
 
 Vec3i N(SmokeBurstPositions)[] = {
@@ -502,128 +502,128 @@ Vec3i N(SmokeBurstPositions)[] = {
 
 EvtScript N(EVS_DamageMachine) = {
     #define LABEL_DONE 0
-    EVT_DEBUG_PRINT_VAR(LVar0)
-    EVT_SET(LVarA, LVar0) // in: damage part
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_LT(LVar0, -210)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_PUFF_PUFF_SMASH)
-    EVT_EXEC_WAIT(N(EVS_ShakeMachine))
-    EVT_DEBUG_PRINT_VAR(LVarA)
-    EVT_SET(LVar0, LVarA)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS)
-        EVT_SET(MF_HitGuardedMachine, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_DEBUG_PRINT_VAR(MF_MachineBeingDamaged)
-    EVT_IF_EQ(MF_MachineBeingDamaged, TRUE)
-        EVT_RETURN
-    EVT_END_IF
+    DebugPrintVar(LVar0)
+    Set(LVarA, LVar0) // in: damage part
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    IfLt(LVar0, -210)
+        Return
+    EndIf
+    Call(PlaySound, SOUND_PUFF_PUFF_SMASH)
+    ExecWait(N(EVS_ShakeMachine))
+    DebugPrintVar(LVarA)
+    Set(LVar0, LVarA)
+    IfLt(GB_StoryProgress, STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS)
+        Set(MF_HitGuardedMachine, TRUE)
+        Return
+    EndIf
+    DebugPrintVar(MF_MachineBeingDamaged)
+    IfEq(MF_MachineBeingDamaged, TRUE)
+        Return
+    EndIf
     // check damage type
-    EVT_SET(MF_MachineBeingDamaged, TRUE)
-    EVT_IF_GT(LVar0, DAMAGE_PART_PROTRUSTIONS)
-        EVT_GOTO(LABEL_DONE)
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, DAMAGE_PART_PROTRUSTIONS)
-        EVT_GOTO(11)
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, DAMAGE_PART_LEFT_SIDE)
-        EVT_LABEL(11)
-        EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 0)
-            EVT_SET(GB_FLO18_MachineDamage_Left, 1)
-            EVT_EXEC(N(EVS_DamagedLeftOnce))
-            EVT_GOTO(LABEL_DONE)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, DAMAGE_PART_RIGHT_SIDE)
-        EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 0)
-            EVT_SET(GB_FLO18_MachineDamage_Right, 1)
-            EVT_EXEC(N(EVS_DamagedRightOnce))
-            EVT_GOTO(LABEL_DONE)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, DAMAGE_PART_LEFT_SIDE)
-        EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 1)
-            EVT_SET(GB_FLO18_MachineDamage_Left, 2)
-            EVT_EXEC(N(EVS_DamagedLeftTwice))
-            EVT_GOTO(LABEL_DONE)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 2)
-        EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 1)
-            EVT_SET(GB_FLO18_MachineDamage_Right, 2)
-            EVT_EXEC(N(EVS_DamagedRightTwice))
-            EVT_GOTO(LABEL_DONE)
-        EVT_END_IF
-    EVT_END_IF
+    Set(MF_MachineBeingDamaged, TRUE)
+    IfGt(LVar0, DAMAGE_PART_PROTRUSTIONS)
+        Goto(LABEL_DONE)
+    EndIf
+    IfEq(LVar0, DAMAGE_PART_PROTRUSTIONS)
+        Goto(11)
+    EndIf
+    IfEq(LVar0, DAMAGE_PART_LEFT_SIDE)
+        Label(11)
+        IfEq(GB_FLO18_MachineDamage_Left, 0)
+            Set(GB_FLO18_MachineDamage_Left, 1)
+            Exec(N(EVS_DamagedLeftOnce))
+            Goto(LABEL_DONE)
+        EndIf
+    EndIf
+    IfEq(LVar0, DAMAGE_PART_RIGHT_SIDE)
+        IfEq(GB_FLO18_MachineDamage_Right, 0)
+            Set(GB_FLO18_MachineDamage_Right, 1)
+            Exec(N(EVS_DamagedRightOnce))
+            Goto(LABEL_DONE)
+        EndIf
+    EndIf
+    IfEq(LVar0, DAMAGE_PART_LEFT_SIDE)
+        IfEq(GB_FLO18_MachineDamage_Left, 1)
+            Set(GB_FLO18_MachineDamage_Left, 2)
+            Exec(N(EVS_DamagedLeftTwice))
+            Goto(LABEL_DONE)
+        EndIf
+    EndIf
+    IfEq(GB_FLO18_MachineDamage_Left, 2)
+        IfEq(GB_FLO18_MachineDamage_Right, 1)
+            Set(GB_FLO18_MachineDamage_Right, 2)
+            Exec(N(EVS_DamagedRightTwice))
+            Goto(LABEL_DONE)
+        EndIf
+    EndIf
     // check if machine is fully broken (2 damage to each side)
-    EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 2)
-        EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 2)
-            EVT_CALL(DisablePlayerInput, TRUE)
-            EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 40, 0, 0)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, 40, 0, 0)
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.5))
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-            EVT_SET(GB_FLO18_MachineDamage_Right, 3)
-            EVT_EXEC_WAIT(N(EVS_ShakeMachine))
-            EVT_EXEC_WAIT(N(EVS_ShakeMachine))
-            EVT_EXEC_WAIT(N(EVS_ShakeMachine))
-            EVT_WAIT(30)
-            EVT_CALL(GetModelCenter, MODEL_o113)
-            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar0, 50, LVar2, 100, 20, 0, 30)
-            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar0, 30, LVar2, 120, 20, 0, 30)
-            EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar0, 10, LVar2, 100, 20, 0, 30)
-            EVT_WAIT(15)
-            EVT_THREAD
-                EVT_SET(LVar3, 6)
-                EVT_USE_BUF(EVT_PTR(N(SmokeBurstPositions)))
-                EVT_LOOP(ARRAY_COUNT(N(SmokeBurstPositions)))
-                    EVT_BUF_READ3(LVar0, LVar1, LVar2)
-                    EVT_CALL(PlaySoundAt, SOUND_FLO_PUFF_PUFF_SMOKE_BURST, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
-                    EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 6)
-                    EVT_WAIT(2)
-                    EVT_ADD(LVar1, 5)
-                    EVT_CALL(PlaySoundAt, SOUND_FLO_PUFF_PUFF_SMOKE_BURST, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
-                    EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 2, 15)
-                    EVT_WAIT(LVar3)
-                    EVT_ADD(LVar3, 1)
-                EVT_END_LOOP
-                EVT_SETF(LVar4, EVT_FLOAT(2.0))
-                EVT_LOOP(2)
-                    EVT_USE_BUF(EVT_PTR(N(SmokeBurstPositions)))
-                    EVT_LOOP(ARRAY_COUNT(N(SmokeBurstPositions)))
-                        EVT_BUF_READ3(LVar0, LVar1, LVar2)
-                        EVT_CALL(PlaySoundAt, SOUND_FLO_PUFF_PUFF_SMOKE_BURST, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
-                        EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 25)
-                        EVT_WAIT(LVar3)
-                        EVT_ADD(LVar3, LVar4)
-                        EVT_ADDF(LVar4, EVT_FLOAT(0.5))
-                    EVT_END_LOOP
-                EVT_END_LOOP
-            EVT_END_THREAD
-            EVT_CALL(PlaySoundAt, SOUND_FLO_PUFF_PUFF_EXPLODE, SOUND_SPACE_DEFAULT, 70, 40, 10)
-            EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, 70, 40, 10, EVT_FLOAT(3.0), 30)
-            EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(1.0))
-            EVT_CALL(PlaySoundAt, SOUND_FLO_PUFF_PUFF_EXPLODE, SOUND_SPACE_DEFAULT, 0, 30, 30)
-            EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, 0, 30, 30, EVT_FLOAT(4.0), 40)
-            EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(2.0))
-            EVT_EXEC_WAIT(N(EVS_BreakSmokestack))
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o126, SOUND_LRAW_PUFF_PUFF_MACHINE | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_DEFAULT)
-            EVT_CALL(FadeOutMusic, 0, 1000)
-            EVT_CALL(DisablePlayerPhysics, TRUE)
-            EVT_WAIT(30)
-            EVT_EXEC_WAIT(N(EVS_BreakAntenna))
-            EVT_SET(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-            EVT_CALL(GotoMap, EVT_PTR("flo_15"), flo_15_ENTRY_1)
-            EVT_WAIT(70)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_LABEL(LABEL_DONE)
-    EVT_SET(MF_MachineBeingDamaged, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_FLO18_MachineDamage_Left, 2)
+        IfEq(GB_FLO18_MachineDamage_Right, 2)
+            Call(DisablePlayerInput, TRUE)
+            Call(UseSettingsFrom, CAM_DEFAULT, 40, 0, 0)
+            Call(SetPanTarget, CAM_DEFAULT, 40, 0, 0)
+            Call(SetCamSpeed, CAM_DEFAULT, Float(1.5))
+            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Set(GB_FLO18_MachineDamage_Right, 3)
+            ExecWait(N(EVS_ShakeMachine))
+            ExecWait(N(EVS_ShakeMachine))
+            ExecWait(N(EVS_ShakeMachine))
+            Wait(30)
+            Call(GetModelCenter, MODEL_o113)
+            PlayEffect(EFFECT_SMOKE_IMPACT, 0, LVar0, 50, LVar2, 100, 20, 0, 30)
+            PlayEffect(EFFECT_SMOKE_IMPACT, 0, LVar0, 30, LVar2, 120, 20, 0, 30)
+            PlayEffect(EFFECT_SMOKE_IMPACT, 0, LVar0, 10, LVar2, 100, 20, 0, 30)
+            Wait(15)
+            Thread
+                Set(LVar3, 6)
+                UseBuf(Ref(N(SmokeBurstPositions)))
+                Loop(ARRAY_COUNT(N(SmokeBurstPositions)))
+                    BufRead3(LVar0, LVar1, LVar2)
+                    Call(PlaySoundAt, SOUND_FLO_PUFF_PUFF_SMOKE_BURST, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+                    PlayEffect(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 6)
+                    Wait(2)
+                    Add(LVar1, 5)
+                    Call(PlaySoundAt, SOUND_FLO_PUFF_PUFF_SMOKE_BURST, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+                    PlayEffect(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 2, 15)
+                    Wait(LVar3)
+                    Add(LVar3, 1)
+                EndLoop
+                SetF(LVar4, Float(2.0))
+                Loop(2)
+                    UseBuf(Ref(N(SmokeBurstPositions)))
+                    Loop(ARRAY_COUNT(N(SmokeBurstPositions)))
+                        BufRead3(LVar0, LVar1, LVar2)
+                        Call(PlaySoundAt, SOUND_FLO_PUFF_PUFF_SMOKE_BURST, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+                        PlayEffect(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 25)
+                        Wait(LVar3)
+                        Add(LVar3, LVar4)
+                        AddF(LVar4, Float(0.5))
+                    EndLoop
+                EndLoop
+            EndThread
+            Call(PlaySoundAt, SOUND_FLO_PUFF_PUFF_EXPLODE, SOUND_SPACE_DEFAULT, 70, 40, 10)
+            PlayEffect(EFFECT_RING_BLAST, 0, 70, 40, 10, Float(3.0), 30)
+            Call(ShakeCam, CAM_DEFAULT, 0, 20, Float(1.0))
+            Call(PlaySoundAt, SOUND_FLO_PUFF_PUFF_EXPLODE, SOUND_SPACE_DEFAULT, 0, 30, 30)
+            PlayEffect(EFFECT_RING_BLAST, 0, 0, 30, 30, Float(4.0), 40)
+            Call(ShakeCam, CAM_DEFAULT, 0, 20, Float(2.0))
+            ExecWait(N(EVS_BreakSmokestack))
+            Call(PlaySoundAtCollider, COLLIDER_o126, SOUND_LRAW_PUFF_PUFF_MACHINE | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_DEFAULT)
+            Call(FadeOutMusic, 0, 1000)
+            Call(DisablePlayerPhysics, TRUE)
+            Wait(30)
+            ExecWait(N(EVS_BreakAntenna))
+            Set(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+            Call(GotoMap, Ref("flo_15"), flo_15_ENTRY_1)
+            Wait(70)
+            Return
+        EndIf
+    EndIf
+    Label(LABEL_DONE)
+    Set(MF_MachineBeingDamaged, FALSE)
+    Return
+    End
 };
 
 BombTrigger N(Machine_BombTrigger_01) = {
@@ -647,124 +647,124 @@ BombTrigger N(Machine_BombTrigger_04) = {
 };
 
 EvtScript N(EVS_SetupMachine) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-        EVT_CALL(EnableModel, MODEL_o101, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(EnableModel, MODEL_o115, FALSE)
-        EVT_CALL(EnableModel, MODEL_o116, FALSE)
-        EVT_CALL(EnableModel, MODEL_o117, FALSE)
-        EVT_CALL(EnableModel, MODEL_o118, FALSE)
-        EVT_CALL(EnableModel, MODEL_o119, FALSE)
-        EVT_CALL(EnableModel, MODEL_o120, FALSE)
-        EVT_CALL(EnableModel, MODEL_o121, FALSE)
-        EVT_CALL(EnableModel, MODEL_o122, FALSE)
-        EVT_CALL(EnableModel, MODEL_o123, FALSE)
-        EVT_CALL(EnableModel, MODEL_o124, FALSE)
-        EVT_CALL(EnableModel, MODEL_o100, FALSE)
-        EVT_CALL(EnableModel, MODEL_o99, FALSE)
-        EVT_CALL(EnableModel, MODEL_o125, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o131, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_EXEC(N(EVS_AnimateMachineLightning))
-    EVT_CALL(EnableModel, MODEL_o101, FALSE)
-    EVT_IF_GE(GB_FLO18_MachineDamage_Left, 1)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(EnableModel, MODEL_o115, FALSE)
-        EVT_CALL(EnableModel, MODEL_o116, FALSE)
-    EVT_END_IF
-    EVT_IF_GE(GB_FLO18_MachineDamage_Right, 1)
-        EVT_CALL(EnableModel, MODEL_o117, FALSE)
-        EVT_CALL(EnableModel, MODEL_o118, FALSE)
-    EVT_END_IF
-    EVT_IF_GE(GB_FLO18_MachineDamage_Left, 2)
-        EVT_CALL(EnableModel, MODEL_o119, FALSE)
-    EVT_END_IF
-    EVT_IF_GE(GB_FLO18_MachineDamage_Right, 2)
-        EVT_CALL(EnableModel, MODEL_o120, FALSE)
-        EVT_CALL(EnableModel, MODEL_o121, FALSE)
-        EVT_CALL(EnableModel, MODEL_o122, FALSE)
-        EVT_CALL(EnableModel, MODEL_o123, FALSE)
-        EVT_CALL(EnableModel, MODEL_o124, FALSE)
-    EVT_END_IF
-    EVT_IF_GE(GB_FLO18_MachineDamage_Right, 3)
-        EVT_CALL(EnableModel, MODEL_o100, FALSE)
-        EVT_CALL(EnableModel, MODEL_o99, FALSE)
-        EVT_CALL(EnableModel, MODEL_o125, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o131, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(LVar0, DAMAGE_PART_LEFT_SIDE)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_DamageMachine)), TRIGGER_WALL_HAMMER, COLLIDER_o174, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_DamageMachine)), TRIGGER_POINT_BOMB, EVT_PTR(N(Machine_BombTrigger_01)), 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_DamageMachine)), TRIGGER_POINT_BOMB, EVT_PTR(N(Machine_BombTrigger_02)), 1, 0)
-    EVT_SET(LVar0, DAMAGE_PART_RIGHT_SIDE)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_DamageMachine)), TRIGGER_WALL_HAMMER, COLLIDER_o127, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_DamageMachine)), TRIGGER_POINT_BOMB, EVT_PTR(N(Machine_BombTrigger_03)), 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_DamageMachine)), TRIGGER_POINT_BOMB, EVT_PTR(N(Machine_BombTrigger_04)), 1, 0)
-    EVT_SET(LVar0, DAMAGE_PART_LEVER)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_DamageMachine)), TRIGGER_WALL_HAMMER, COLLIDER_o130, 1, 0)
-    EVT_SET(LVar0, DAMAGE_PART_SMOKE_STACK)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_DamageMachine)), TRIGGER_WALL_HAMMER, COLLIDER_o131, 1, 0)
-    EVT_SET(LVar0, 0)
-    EVT_LOOP(16)
-        EVT_SET(LVar1, LVar0)
-        EVT_ADD(LVar1, CLONED_MODEL(0))
-        EVT_ADD(LVar0, 1)
-        EVT_CALL(CloneModel, MODEL_o101, LVar1)
-        EVT_CALL(EnableModel, LVar1, FALSE)
-    EVT_END_LOOP
-    EVT_EXEC(N(EVS_ManageSmoke))
-    EVT_CALL(EnableTexPanning, MODEL_o92, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o93, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o94, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o95, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o91, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o99, TRUE)
-    EVT_THREAD
-        EVT_SETF(LVarE, EVT_FLOAT(1.0))
-        EVT_LABEL(0)
-        EVT_IF_GE(GB_FLO18_MachineDamage_Right, 3)
-            EVT_MULF(LVarE, EVT_FLOAT(0.953))
-        EVT_END_IF
-        EVT_ADDF(LVarF, LVarE)
-        EVT_IF_EQ(LVarF, 1080)
-            EVT_SETF(LVarF, 0)
-        EVT_END_IF
-        EVT_SET(LVar0, LVarF)
-        EVT_DIV(LVar0, 9)
-        EVT_MOD(LVar0, 4)
-        EVT_MUL(LVar0, 0x4000)
-        EVT_SET(LVar1, LVarF)
-        EVT_DIV(LVar1, 4)
-        EVT_MOD(LVar1, 2)
-        EVT_MUL(LVar1, 0x4000)
-        EVT_SET(LVar2, LVarF)
-        EVT_DIV(LVar2, 5)
-        EVT_MOD(LVar2, 2)
-        EVT_MUL(LVar2, 0x4000)
-        EVT_SET(LVar3, LVarF)
-        EVT_DIV(LVar3, 6)
-        EVT_MOD(LVar3, 2)
-        EVT_MUL(LVar3, 0x4000)
-        EVT_SET(LVar4, LVarF)
-        EVT_DIV(LVar4, 2)
-        EVT_MOD(LVar4, 2)
-        EVT_MUL(LVar4, 0x8000)
-        EVT_SET(LVar5, LVarF)
-        EVT_DIV(LVar5, 8)
-        EVT_MOD(LVar5, 2)
-        EVT_MUL(LVar5, 0x4000)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_C, TEX_PANNER_MAIN, LVar0, 0)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_D, TEX_PANNER_MAIN, LVar1, 0)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_E, TEX_PANNER_MAIN, LVar2, 0)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_F, TEX_PANNER_MAIN, LVar3, 0)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, LVar4, 0)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_A, TEX_PANNER_MAIN, LVar5, 0)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_9, TEX_PANNER_MAIN, LVar5, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+        Call(EnableModel, MODEL_o101, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
+        Call(EnableModel, MODEL_o115, FALSE)
+        Call(EnableModel, MODEL_o116, FALSE)
+        Call(EnableModel, MODEL_o117, FALSE)
+        Call(EnableModel, MODEL_o118, FALSE)
+        Call(EnableModel, MODEL_o119, FALSE)
+        Call(EnableModel, MODEL_o120, FALSE)
+        Call(EnableModel, MODEL_o121, FALSE)
+        Call(EnableModel, MODEL_o122, FALSE)
+        Call(EnableModel, MODEL_o123, FALSE)
+        Call(EnableModel, MODEL_o124, FALSE)
+        Call(EnableModel, MODEL_o100, FALSE)
+        Call(EnableModel, MODEL_o99, FALSE)
+        Call(EnableModel, MODEL_o125, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o131, COLLIDER_FLAGS_UPPER_MASK)
+        Return
+    EndIf
+    Exec(N(EVS_AnimateMachineLightning))
+    Call(EnableModel, MODEL_o101, FALSE)
+    IfGe(GB_FLO18_MachineDamage_Left, 1)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
+        Call(EnableModel, MODEL_o115, FALSE)
+        Call(EnableModel, MODEL_o116, FALSE)
+    EndIf
+    IfGe(GB_FLO18_MachineDamage_Right, 1)
+        Call(EnableModel, MODEL_o117, FALSE)
+        Call(EnableModel, MODEL_o118, FALSE)
+    EndIf
+    IfGe(GB_FLO18_MachineDamage_Left, 2)
+        Call(EnableModel, MODEL_o119, FALSE)
+    EndIf
+    IfGe(GB_FLO18_MachineDamage_Right, 2)
+        Call(EnableModel, MODEL_o120, FALSE)
+        Call(EnableModel, MODEL_o121, FALSE)
+        Call(EnableModel, MODEL_o122, FALSE)
+        Call(EnableModel, MODEL_o123, FALSE)
+        Call(EnableModel, MODEL_o124, FALSE)
+    EndIf
+    IfGe(GB_FLO18_MachineDamage_Right, 3)
+        Call(EnableModel, MODEL_o100, FALSE)
+        Call(EnableModel, MODEL_o99, FALSE)
+        Call(EnableModel, MODEL_o125, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o131, COLLIDER_FLAGS_UPPER_MASK)
+        Return
+    EndIf
+    Set(LVar0, DAMAGE_PART_LEFT_SIDE)
+    BindTrigger(Ref(N(EVS_DamageMachine)), TRIGGER_WALL_HAMMER, COLLIDER_o174, 1, 0)
+    BindTrigger(Ref(N(EVS_DamageMachine)), TRIGGER_POINT_BOMB, Ref(N(Machine_BombTrigger_01)), 1, 0)
+    BindTrigger(Ref(N(EVS_DamageMachine)), TRIGGER_POINT_BOMB, Ref(N(Machine_BombTrigger_02)), 1, 0)
+    Set(LVar0, DAMAGE_PART_RIGHT_SIDE)
+    BindTrigger(Ref(N(EVS_DamageMachine)), TRIGGER_WALL_HAMMER, COLLIDER_o127, 1, 0)
+    BindTrigger(Ref(N(EVS_DamageMachine)), TRIGGER_POINT_BOMB, Ref(N(Machine_BombTrigger_03)), 1, 0)
+    BindTrigger(Ref(N(EVS_DamageMachine)), TRIGGER_POINT_BOMB, Ref(N(Machine_BombTrigger_04)), 1, 0)
+    Set(LVar0, DAMAGE_PART_LEVER)
+    BindTrigger(Ref(N(EVS_DamageMachine)), TRIGGER_WALL_HAMMER, COLLIDER_o130, 1, 0)
+    Set(LVar0, DAMAGE_PART_SMOKE_STACK)
+    BindTrigger(Ref(N(EVS_DamageMachine)), TRIGGER_WALL_HAMMER, COLLIDER_o131, 1, 0)
+    Set(LVar0, 0)
+    Loop(16)
+        Set(LVar1, LVar0)
+        Add(LVar1, CLONED_MODEL(0))
+        Add(LVar0, 1)
+        Call(CloneModel, MODEL_o101, LVar1)
+        Call(EnableModel, LVar1, FALSE)
+    EndLoop
+    Exec(N(EVS_ManageSmoke))
+    Call(EnableTexPanning, MODEL_o92, TRUE)
+    Call(EnableTexPanning, MODEL_o93, TRUE)
+    Call(EnableTexPanning, MODEL_o94, TRUE)
+    Call(EnableTexPanning, MODEL_o95, TRUE)
+    Call(EnableTexPanning, MODEL_o91, TRUE)
+    Call(EnableTexPanning, MODEL_o99, TRUE)
+    Thread
+        SetF(LVarE, Float(1.0))
+        Label(0)
+        IfGe(GB_FLO18_MachineDamage_Right, 3)
+            MulF(LVarE, Float(0.953))
+        EndIf
+        AddF(LVarF, LVarE)
+        IfEq(LVarF, 1080)
+            SetF(LVarF, 0)
+        EndIf
+        Set(LVar0, LVarF)
+        Div(LVar0, 9)
+        Mod(LVar0, 4)
+        Mul(LVar0, 0x4000)
+        Set(LVar1, LVarF)
+        Div(LVar1, 4)
+        Mod(LVar1, 2)
+        Mul(LVar1, 0x4000)
+        Set(LVar2, LVarF)
+        Div(LVar2, 5)
+        Mod(LVar2, 2)
+        Mul(LVar2, 0x4000)
+        Set(LVar3, LVarF)
+        Div(LVar3, 6)
+        Mod(LVar3, 2)
+        Mul(LVar3, 0x4000)
+        Set(LVar4, LVarF)
+        Div(LVar4, 2)
+        Mod(LVar4, 2)
+        Mul(LVar4, 0x8000)
+        Set(LVar5, LVarF)
+        Div(LVar5, 8)
+        Mod(LVar5, 2)
+        Mul(LVar5, 0x4000)
+        Call(SetTexPanOffset, TEX_PANNER_C, TEX_PANNER_MAIN, LVar0, 0)
+        Call(SetTexPanOffset, TEX_PANNER_D, TEX_PANNER_MAIN, LVar1, 0)
+        Call(SetTexPanOffset, TEX_PANNER_E, TEX_PANNER_MAIN, LVar2, 0)
+        Call(SetTexPanOffset, TEX_PANNER_F, TEX_PANNER_MAIN, LVar3, 0)
+        Call(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, LVar4, 0)
+        Call(SetTexPanOffset, TEX_PANNER_A, TEX_PANNER_MAIN, LVar5, 0)
+        Call(SetTexPanOffset, TEX_PANNER_9, TEX_PANNER_MAIN, LVar5, 0)
+        Wait(1)
+        Goto(0)
+    EndThread
+    Return
+    End
 };

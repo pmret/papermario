@@ -17,352 +17,352 @@ API_CALLABLE(N(UpgradeStarPowerCh3)) {
 }
 
 EvtScript N(EVS_TubbaWalking) = {
-    EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_HEAVY_NPC_STEP_C, SOUND_SPACE_DEFAULT)
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.8))
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(PlaySoundAtNpc, NPC_Tubba, SOUND_HEAVY_NPC_STEP_C, SOUND_SPACE_DEFAULT)
+        Call(ShakeCam, CAM_DEFAULT, 0, 3, Float(0.8))
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_TubbaRelents) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 236, 0, -46)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 250, 0, -46)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim08)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim12, ANIM_WorldTubba_Anim08, 5, MSG_CH3_00CA)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim12, ANIM_WorldTubba_Anim08, 5, MSG_CH3_00CB)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(5.0), EVT_FLOAT(-16.0))
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(UseSettingsFrom, CAM_DEFAULT, 236, 0, -46)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(SetPanTarget, CAM_DEFAULT, 250, 0, -46)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim08)
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim12, ANIM_WorldTubba_Anim08, 5, MSG_CH3_00CA)
+    Wait(10 * DT)
+    Call(InterpNpcYaw, NPC_SELF, 270, 0)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim12, ANIM_WorldTubba_Anim08, 5, MSG_CH3_00CB)
+    Call(SetCamDistance, CAM_DEFAULT, 300)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(5.0), Float(-16.0))
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_BossDefeated) = {
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim22)
-    EVT_WAIT(15 * DT)
-    EVT_LOOP(4)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
-        EVT_CALL(SetNpcVar, NPC_Boo_02, 0, 1)
-        EVT_WAIT(4 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
-        EVT_CALL(SetNpcVar, NPC_Boo_05, 0, 1)
-        EVT_WAIT(4 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
-        EVT_CALL(SetNpcVar, NPC_Boo_01, 0, 1)
-        EVT_WAIT(6 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
-        EVT_CALL(SetNpcVar, NPC_Boo_03, 0, 1)
-        EVT_WAIT(8 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
-        EVT_CALL(SetNpcVar, NPC_Boo_04, 0, 1)
-        EVT_WAIT(6 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
-        EVT_CALL(SetNpcVar, NPC_Boo_06, 0, 1)
-        EVT_WAIT(6 * DT)
-    EVT_END_LOOP
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim23)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim22)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcVar, NPC_Boo_02, 0, 1)
-    EVT_WAIT(15 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim21)
-    EVT_WAIT(45 * DT)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 236, 0, -46)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar0, 50)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim0F)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim12, ANIM_WorldTubba_Anim08, 0, MSG_CH3_00CC)
-    EVT_THREAD
-        EVT_WAIT(5 * DT)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_LOOP(40 * DT)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(func_802CF56C, 2)
-        EVT_LOOP(45 * DT)
-            EVT_CALL(PlayerFaceNpc, NPC_SELF, TRUE)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_EXEC_GET_TID(N(EVS_TubbaWalking), LVarA)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar0, 800)
-    EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar2, 80 * DT)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_SET(GB_StoryProgress, STORY_CH3_DEFEATED_TUBBA_BLUBBA)
-    EVT_CALL(SetMusicTrack, 0, SONG_CHEERFUL_BOOS_MANSION, 0, 8)
-    EVT_CALL(GetCurrentPartnerID, LVar6)
-    EVT_IF_EQ(LVar6, PARTNER_BOW)
-        EVT_SET(LVar5, -4)
-        EVT_CALL(func_802CF56C, 0)
-        EVT_CALL(DisablePartnerAI, 0)
-        EVT_CALL(SetNpcPos, NPC_PARTNER, 257, 25, 0)
-    EVT_END_IF
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 30)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_WAIT(10 * DT)
-    EVT_IF_NE(LVar6, PARTNER_BOW)
-        EVT_SET(LVar5, 8)
-        EVT_CALL(SetNpcPos, NPC_Bow, 257, 25, 0)
-        EVT_CALL(SetNpcImgFXParams, NPC_Bow, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-        EVT_CALL(NpcFacePlayer, NPC_Bow, 0)
-        EVT_CALL(MakeLerp, 0, 240, 20 * DT, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcImgFXParams, NPC_Bow, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(func_802CF56C, 0)
-    EVT_END_IF
-    EVT_WAIT(10 * DT)
-    EVT_THREAD
-        EVT_IF_NE(LVar6, PARTNER_BOW)
-            EVT_CALL(DisablePartnerAI, 0)
-            EVT_WAIT(1)
-            EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Bow, 0)
-            EVT_WAIT(5 * DT)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, LVar5, ANIM_WorldBow_Celebrate, ANIM_WorldBow_Celebrate, 0, MSG_CH3_00CD)
-    EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(GetNpcPos, LVar5, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, -20)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(2.0), LVar0, LVar1, LVar2, EVT_FLOAT(300.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
-    EVT_CALL(PlayerFaceNpc, LVar5, FALSE)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, LVar5, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_00CE)
-    EVT_CALL(ShowChoice, MSG_Choice_000D)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ContinueSpeech, LVar5, ANIM_WorldBow_Celebrate, ANIM_WorldBow_Celebrate, 0, MSG_CH3_00CF)
-    EVT_ELSE
-        EVT_CALL(ContinueSpeech, LVar5, ANIM_WorldBow_Celebrate, ANIM_WorldBow_Celebrate, 0, MSG_CH3_00D0)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, LVar5, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_00D1)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 175, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 175, 0, 0)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SetNpcPos, NPC_Bootler, 93, 160, -6)
-    EVT_CALL(InterpNpcYaw, NPC_Bootler, 90, 0)
-    EVT_THREAD
-        EVT_WAIT(10 * DT)
-        EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_IF_NE(LVar6, PARTNER_BOW)
-            EVT_WAIT(12 * DT)
-            EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(MakeLerp, 160, 31, 70 * DT, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcPos, NPC_Bootler, 93, LVar0, -6)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_THREAD
-        EVT_IF_NE(LVar6, PARTNER_BOW)
-            EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, LVar5, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_00D2)
-    EVT_THREAD
-        EVT_IF_NE(LVar6, PARTNER_BOW)
-            EVT_WAIT(12 * DT)
-            EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(10 * DT)
-    EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_EXEC(N(EVS_SpawnStarCard))
-    EVT_WAIT(20 * DT)
-    EVT_THREAD
-        EVT_IF_NE(LVar6, 9)
-            EVT_CALL(MakeLerp, 240, 0, 20 * DT, EASING_LINEAR)
-            EVT_LOOP(0)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(SetNpcImgFXParams, NPC_Bow, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-            EVT_CALL(SetNpcPos, NPC_Bow, NPC_DISPOSE_LOCATION)
-            EVT_CALL(EnablePartnerAI)
-        EVT_ELSE
-            EVT_WAIT(20 * DT)
-            EVT_CALL(ClearPartnerMoveHistory, NPC_PARTNER)
-            EVT_CALL(EnablePartnerAI)
-        EVT_END_IF
-        EVT_WAIT(8 * DT)
-        EVT_CALL(func_802CF56C, 2)
-    EVT_END_THREAD
-    EVT_WAIT(20 * DT)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Wait(10 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim22)
+    Wait(15 * DT)
+    Loop(4)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
+        Call(SetNpcVar, NPC_Boo_02, 0, 1)
+        Wait(4 * DT)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
+        Call(SetNpcVar, NPC_Boo_05, 0, 1)
+        Wait(4 * DT)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
+        Call(SetNpcVar, NPC_Boo_01, 0, 1)
+        Wait(6 * DT)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
+        Call(SetNpcVar, NPC_Boo_03, 0, 1)
+        Wait(8 * DT)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
+        Call(SetNpcVar, NPC_Boo_04, 0, 1)
+        Wait(6 * DT)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
+        Call(SetNpcVar, NPC_Boo_06, 0, 1)
+        Wait(6 * DT)
+    EndLoop
+    Wait(10 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim23)
+    Wait(30 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim22)
+    Wait(10 * DT)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
+    Call(SetNpcVar, NPC_Boo_02, 0, 1)
+    Wait(15 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim21)
+    Wait(45 * DT)
+    Call(UseSettingsFrom, CAM_DEFAULT, 236, 0, -46)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Sub(LVar0, 50)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(5 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_Still)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim0F)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim12, ANIM_WorldTubba_Anim08, 0, MSG_CH3_00CC)
+    Thread
+        Wait(5 * DT)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Loop(40 * DT)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Thread
+        Call(func_802CF56C, 2)
+        Loop(45 * DT)
+            Call(PlayerFaceNpc, NPC_SELF, TRUE)
+        EndLoop
+    EndThread
+    ExecGetTID(N(EVS_TubbaWalking), LVarA)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Sub(LVar0, 800)
+    Call(NpcMoveTo, NPC_SELF, LVar0, LVar2, 80 * DT)
+    KillThread(LVarA)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Set(GB_StoryProgress, STORY_CH3_DEFEATED_TUBBA_BLUBBA)
+    Call(SetMusicTrack, 0, SONG_CHEERFUL_BOOS_MANSION, 0, 8)
+    Call(GetCurrentPartnerID, LVar6)
+    IfEq(LVar6, PARTNER_BOW)
+        Set(LVar5, -4)
+        Call(func_802CF56C, 0)
+        Call(DisablePartnerAI, 0)
+        Call(SetNpcPos, NPC_PARTNER, 257, 25, 0)
+    EndIf
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(SetCamDistance, CAM_DEFAULT, 300)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar0, 30)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Wait(10 * DT)
+    IfNe(LVar6, PARTNER_BOW)
+        Set(LVar5, 8)
+        Call(SetNpcPos, NPC_Bow, 257, 25, 0)
+        Call(SetNpcImgFXParams, NPC_Bow, IMGFX_SET_ALPHA, 0, 0, 0, 0)
+        Call(NpcFacePlayer, NPC_Bow, 0)
+        Call(MakeLerp, 0, 240, 20 * DT, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetNpcImgFXParams, NPC_Bow, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(func_802CF56C, 0)
+    EndIf
+    Wait(10 * DT)
+    Thread
+        IfNe(LVar6, PARTNER_BOW)
+            Call(DisablePartnerAI, 0)
+            Wait(1)
+            Call(NpcFaceNpc, NPC_PARTNER, NPC_Bow, 0)
+            Wait(5 * DT)
+        EndIf
+    EndThread
+    Call(SpeakToPlayer, LVar5, ANIM_WorldBow_Celebrate, ANIM_WorldBow_Celebrate, 0, MSG_CH3_00CD)
+    Call(InterpPlayerYaw, 270, 0)
+    Wait(10 * DT)
+    Call(GetNpcPos, LVar5, LVar0, LVar1, LVar2)
+    Add(LVar1, -20)
+    Call(SetCamProperties, CAM_DEFAULT, Float(2.0), LVar0, LVar1, LVar2, Float(300.0), Float(15.0), Float(-7.0))
+    Call(PlayerFaceNpc, LVar5, FALSE)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, LVar5, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_00CE)
+    Call(ShowChoice, MSG_Choice_000D)
+    IfEq(LVar0, 0)
+        Call(ContinueSpeech, LVar5, ANIM_WorldBow_Celebrate, ANIM_WorldBow_Celebrate, 0, MSG_CH3_00CF)
+    Else
+        Call(ContinueSpeech, LVar5, ANIM_WorldBow_Celebrate, ANIM_WorldBow_Celebrate, 0, MSG_CH3_00D0)
+    EndIf
+    Call(SpeakToPlayer, LVar5, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_00D1)
+    Call(UseSettingsFrom, CAM_DEFAULT, 175, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
+    Call(SetPanTarget, CAM_DEFAULT, 175, 0, 0)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SetNpcPos, NPC_Bootler, 93, 160, -6)
+    Call(InterpNpcYaw, NPC_Bootler, 90, 0)
+    Thread
+        Wait(10 * DT)
+        Call(InterpPlayerYaw, 270, 0)
+    EndThread
+    Thread
+        IfNe(LVar6, PARTNER_BOW)
+            Wait(12 * DT)
+            Call(InterpNpcYaw, NPC_PARTNER, 270, 0)
+        EndIf
+    EndThread
+    Call(MakeLerp, 160, 31, 70 * DT, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(SetNpcPos, NPC_Bootler, 93, LVar0, -6)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Thread
+        IfNe(LVar6, PARTNER_BOW)
+            Call(InterpNpcYaw, NPC_PARTNER, 90, 0)
+        EndIf
+    EndThread
+    Call(SpeakToPlayer, LVar5, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_00D2)
+    Thread
+        IfNe(LVar6, PARTNER_BOW)
+            Wait(12 * DT)
+            Call(InterpNpcYaw, NPC_PARTNER, 270, 0)
+        EndIf
+    EndThread
+    Wait(10 * DT)
+    Call(InterpPlayerYaw, 270, 0)
+    Exec(N(EVS_SpawnStarCard))
+    Wait(20 * DT)
+    Thread
+        IfNe(LVar6, 9)
+            Call(MakeLerp, 240, 0, 20 * DT, EASING_LINEAR)
+            Loop(0)
+                Call(UpdateLerp)
+                Call(SetNpcImgFXParams, NPC_Bow, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+                Wait(1)
+                IfEq(LVar1, 0)
+                    BreakLoop
+                EndIf
+            EndLoop
+            Call(SetNpcPos, NPC_Bow, NPC_DISPOSE_LOCATION)
+            Call(EnablePartnerAI)
+        Else
+            Wait(20 * DT)
+            Call(ClearPartnerMoveHistory, NPC_PARTNER)
+            Call(EnablePartnerAI)
+        EndIf
+        Wait(8 * DT)
+        Call(func_802CF56C, 2)
+    EndThread
+    Wait(20 * DT)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Tubba) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(StartBossBattle, SONG_TUBBA_BLUBBA_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetSelfVar, 0, LVar0)
+        IfEq(LVar0, 1)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(StartBossBattle, SONG_TUBBA_BLUBBA_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Boo) = {
-    EVT_LABEL(10)
-    EVT_LOOP(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_THREAD
-        EVT_SETF(LVar0, EVT_FLOAT(0.5))
-        EVT_CALL(MakeLerp, 50, 80, 15 * DT, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_SETF(LVar2, LVar0)
-            EVT_DIVF(LVar2, 100)
-            EVT_CALL(SetNpcScale, NPC_SELF, LVar2, LVar2, LVar2)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(RandInt, 80, LVar2)
-        EVT_CALL(RandInt, 10, LVar3)
-        EVT_ADD(LVar3, 5 * DT)
-        EVT_CALL(MakeLerp, LVar2, 240, LVar3, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(SetNpcPos, NPC_SELF, 293, 59, 21)
-    EVT_WAIT(1)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(-0.3))
-    EVT_CALL(RandInt, 100, LVar3)
-    EVT_SUB(LVar0, LVar3)
-    EVT_ADD(LVar1, 100)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 20 * DT)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_GOTO(10)
-    EVT_RETURN
-    EVT_END
+    Label(10)
+    Loop(0)
+        Call(GetSelfVar, 0, LVar0)
+        IfEq(LVar0, 1)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Thread
+        SetF(LVar0, Float(0.5))
+        Call(MakeLerp, 50, 80, 15 * DT, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            SetF(LVar2, LVar0)
+            DivF(LVar2, 100)
+            Call(SetNpcScale, NPC_SELF, LVar2, LVar2, LVar2)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Call(RandInt, 80, LVar2)
+        Call(RandInt, 10, LVar3)
+        Add(LVar3, 5 * DT)
+        Call(MakeLerp, LVar2, 240, LVar3, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Call(SetNpcPos, NPC_SELF, 293, 59, 21)
+    Wait(1)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(SetNpcJumpscale, NPC_SELF, Float(-0.3))
+    Call(RandInt, 100, LVar3)
+    Sub(LVar0, LVar3)
+    Add(LVar1, 100)
+    Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 20 * DT)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Call(SetSelfVar, 0, 0)
+    Goto(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Tubba) = {
-    EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_2, TRUE)
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 1, 8)
-            EVT_EXEC_WAIT(N(EVS_Scene_TubbaRelents))
-            EVT_EXEC(N(EVS_Scene_BossDefeated))
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_2, TRUE)
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 1, 8)
+            ExecWait(N(EVS_Scene_TubbaRelents))
+            Exec(N(EVS_Scene_BossDefeated))
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TubbasHeart) = {
-    EVT_IF_NE(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WINDY_MILL)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfNe(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WINDY_MILL)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Tubba) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Tubba)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Tubba)))
-    EVT_IF_NE(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WINDY_MILL)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Tubba)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Tubba)))
+    IfNe(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WINDY_MILL)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Boo) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Boo)))
-    EVT_IF_NE(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WINDY_MILL)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Boo)))
+    IfNe(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WINDY_MILL)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bow) = {
-    EVT_IF_NE(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WINDY_MILL)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfNe(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WINDY_MILL)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bootler) = {
-    EVT_IF_NE(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WINDY_MILL)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfNe(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WINDY_MILL)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Tubba)[] = {
@@ -393,170 +393,170 @@ AnimID N(ExtraAnims_Bootler)[] = {
 };
 
 EvtScript N(EVS_NpcIdle_Skolar) = {
-    EVT_LOOP(0)
-        EVT_LOOP(10)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar1, 1)
-            EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_LOOP(10)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar1, 1)
-            EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Loop(10)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Sub(LVar1, 1)
+            Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+        Loop(10)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Add(LVar1, 1)
+            Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_SkolarRescued) = {
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(func_802CF56C, 2)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_SET(LVar3, LVar0)
-    EVT_ADD(LVar3, -50)
-    EVT_SET(LVar4, LVar1)
-    EVT_ADD(LVar4, 26)
-    EVT_CALL(SetNpcPos, NPC_Skolar, LVar3, LVar4, LVar2)
-    EVT_CALL(PlayerFaceNpc, NPC_Skolar, FALSE)
-    EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Skolar, 0)
-    EVT_ADD(LVar0, -25)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(475.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, 18, -8)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(WaitForPlayerInputEnabled)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(40 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Skolar, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 512, MSG_CH3_00D3)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, 18, -9)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(MakeLerp, 0, 360, 10 * DT, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcRotation, NPC_Skolar, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(EnableNpcAI, NPC_Skolar, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Leap)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_UsePower)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_RECEIVE_STAR_POWER, SOUND_SPACE_DEFAULT)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_SET(LVar3, LVar1)
-    EVT_ADD(LVar1, 50)
-    EVT_ADD(LVar2, 10)
-    EVT_ADD(LVar3, 30)
-    EVT_LOOP(5)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20)
-        EVT_WAIT(6 * DT)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 1, LVar0, LVar3, LVar2, 20)
-        EVT_WAIT(6 * DT)
-    EVT_END_LOOP
-    EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_GET_STAR_POWER_WAVE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 20)
-    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Idle)
-    EVT_CALL(EnableNpcAI, NPC_Skolar, TRUE)
-    EVT_CALL(N(UpgradeStarPowerCh3))
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0193, 160, 40)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(250.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Skolar, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 512, MSG_CH3_00D4)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, -25)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Skolar, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 512, MSG_CH3_00D5)
-    EVT_CALL(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    EVT_THREAD
-        EVT_LOOP(25)
-            EVT_CALL(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 20)
-            EVT_WAIT(4 * DT)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar2, 0)
-        EVT_SET(LVar3, 1800)
-        EVT_CALL(MakeLerp, LVar2, LVar3, 100 * DT, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcRotation, NPC_Skolar, 0, LVar0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_Skolar, LVar2, LVar3, LVar4)
-        EVT_SET(LVar5, LVar3)
-        EVT_ADD(LVar5, 180)
-        EVT_CALL(MakeLerp, LVar3, LVar5, 100 * DT, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcPos, NPC_Skolar, LVar2, LVar0, LVar4)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(SetNpcPos, NPC_Skolar, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_Skolar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-    EVT_WAIT(90 * DT)
-    EVT_CALL(ResetCam, CAM_DEFAULT, 3)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_SET(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePartnerAI, 0)
+    Call(func_802CF56C, 2)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Set(LVar3, LVar0)
+    Add(LVar3, -50)
+    Set(LVar4, LVar1)
+    Add(LVar4, 26)
+    Call(SetNpcPos, NPC_Skolar, LVar3, LVar4, LVar2)
+    Call(PlayerFaceNpc, NPC_Skolar, FALSE)
+    Call(NpcFaceNpc, NPC_PARTNER, NPC_Skolar, 0)
+    Add(LVar0, -25)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(475.0))
+    Call(SetCamPitch, CAM_DEFAULT, 18, -8)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(1)
+    Call(WaitForPlayerInputEnabled)
+    Call(DisablePlayerInput, TRUE)
+    Wait(40 * DT)
+    Call(SpeakToPlayer, NPC_Skolar, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 512, MSG_CH3_00D3)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, 18, -9)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(MakeLerp, 0, 360, 10 * DT, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(SetNpcRotation, NPC_Skolar, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(EnableNpcAI, NPC_Skolar, FALSE)
+    Call(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Leap)
+    Wait(20 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_UsePower)
+    Call(PlaySoundAtPlayer, SOUND_RECEIVE_STAR_POWER, SOUND_SPACE_DEFAULT)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Set(LVar3, LVar1)
+    Add(LVar1, 50)
+    Add(LVar2, 10)
+    Add(LVar3, 30)
+    Loop(5)
+        PlayEffect(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20)
+        Wait(6 * DT)
+        PlayEffect(EFFECT_SPARKLES, 1, LVar0, LVar3, LVar2, 20)
+        Wait(6 * DT)
+    EndLoop
+    Wait(20 * DT)
+    Call(PlaySoundAtPlayer, SOUND_GET_STAR_POWER_WAVE, SOUND_SPACE_DEFAULT)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar1, 20)
+    PlayEffect(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30)
+    Wait(30 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Idle)
+    Call(EnableNpcAI, NPC_Skolar, TRUE)
+    Call(N(UpgradeStarPowerCh3))
+    Call(ShowMessageAtScreenPos, MSG_Menus_0193, 160, 40)
+    Wait(10 * DT)
+    Call(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_Skolar, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 512, MSG_CH3_00D4)
+    Wait(10 * DT)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar0, -25)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_Skolar, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 512, MSG_CH3_00D5)
+    Call(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Thread
+        Loop(25)
+            Call(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)
+            PlayEffect(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 20)
+            Wait(4 * DT)
+        EndLoop
+    EndThread
+    Thread
+        Set(LVar2, 0)
+        Set(LVar3, 1800)
+        Call(MakeLerp, LVar2, LVar3, 100 * DT, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetNpcRotation, NPC_Skolar, 0, LVar0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Call(GetNpcPos, NPC_Skolar, LVar2, LVar3, LVar4)
+        Set(LVar5, LVar3)
+        Add(LVar5, 180)
+        Call(MakeLerp, LVar3, LVar5, 100 * DT, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetNpcPos, NPC_Skolar, LVar2, LVar0, LVar4)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(SetNpcPos, NPC_Skolar, NPC_DISPOSE_LOCATION)
+    EndThread
+    Thread
+        Wait(15 * DT)
+        Call(PlaySoundAtNpc, NPC_Skolar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
+    EndThread
+    Wait(10 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+    Wait(90 * DT)
+    Call(ResetCam, CAM_DEFAULT, 3)
+    Wait(20 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Set(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
+    Exec(N(EVS_SetupMusic))
+    Call(EnablePartnerAI)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Skolar) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, arn_07_ENTRY_3)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Skolar)))
-        EVT_EXEC(N(EVS_Scene_SkolarRescued))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, arn_07_ENTRY_3)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Skolar)))
+        Exec(N(EVS_Scene_SkolarRescued))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Tubba)[] = {
@@ -710,13 +710,13 @@ NpcData N(NpcData_Bootler) = {
 };
 
 EvtScript N(EVS_NpcInit_HyperParagoomba) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
-        EVT_IF_LT(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
+        IfLt(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
+            Call(RemoveNpc, NPC_SELF)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_HyperParagoomba_01) = {

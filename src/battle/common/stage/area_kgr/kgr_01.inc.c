@@ -6,48 +6,48 @@
 #include "battle/common/stage/lib/WaterEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_THREAD
-        EVT_SET(LVar0, MODEL_bin1)
-        EVT_EXEC(N(EVS_AnimateFlotsam))
-        EVT_WAIT(4)
-        EVT_SET(LVar0, MODEL_bin2)
-        EVT_EXEC(N(EVS_AnimateFlotsam))
-        EVT_WAIT(4)
-        EVT_SET(LVar0, MODEL_bin3)
-        EVT_EXEC(N(EVS_AnimateFlotsam))
-        EVT_WAIT(4)
-        EVT_SET(LVar0, MODEL_bin4)
-        EVT_EXEC(N(EVS_AnimateFlotsam))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar0, MODEL_hako1)
-        EVT_EXEC(N(EVS_AnimateFlotsam))
-        EVT_WAIT(4)
-        EVT_SET(LVar0, MODEL_hako2)
-        EVT_EXEC(N(EVS_AnimateFlotsam))
-        EVT_WAIT(4)
-        EVT_SET(LVar0, MODEL_hako4)
-        EVT_EXEC(N(EVS_AnimateFlotsam))
-        EVT_WAIT(4)
-        EVT_SET(LVar0, MODEL_hako5)
-        EVT_EXEC(N(EVS_AnimateFlotsam))
-        EVT_WAIT(4)
-        EVT_SET(LVar0, MODEL_hako6)
-        EVT_EXEC(N(EVS_AnimateFlotsam))
-    EVT_END_THREAD
-    EVT_SET(LVar0, MODEL_fune2)
-    EVT_EXEC(N(EVS_AnimateFlotsam))
-    EVT_SET(LVar0, MODEL_fune1)
-    EVT_EXEC(N(EVS_AnimateFlotsam))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Thread
+        Set(LVar0, MODEL_bin1)
+        Exec(N(EVS_AnimateFlotsam))
+        Wait(4)
+        Set(LVar0, MODEL_bin2)
+        Exec(N(EVS_AnimateFlotsam))
+        Wait(4)
+        Set(LVar0, MODEL_bin3)
+        Exec(N(EVS_AnimateFlotsam))
+        Wait(4)
+        Set(LVar0, MODEL_bin4)
+        Exec(N(EVS_AnimateFlotsam))
+    EndThread
+    Thread
+        Set(LVar0, MODEL_hako1)
+        Exec(N(EVS_AnimateFlotsam))
+        Wait(4)
+        Set(LVar0, MODEL_hako2)
+        Exec(N(EVS_AnimateFlotsam))
+        Wait(4)
+        Set(LVar0, MODEL_hako4)
+        Exec(N(EVS_AnimateFlotsam))
+        Wait(4)
+        Set(LVar0, MODEL_hako5)
+        Exec(N(EVS_AnimateFlotsam))
+        Wait(4)
+        Set(LVar0, MODEL_hako6)
+        Exec(N(EVS_AnimateFlotsam))
+    EndThread
+    Set(LVar0, MODEL_fune2)
+    Exec(N(EVS_AnimateFlotsam))
+    Set(LVar0, MODEL_fune1)
+    Exec(N(EVS_AnimateFlotsam))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

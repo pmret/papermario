@@ -12,91 +12,91 @@ API_CALLABLE(N(SetPartnerFollowDist)) {
 }
 
 EvtScript N(EVS_ProvideDemoInputs) = {
-    EVT_CALL(N(InitializeDemoEquipment))
-    EVT_CALL(DemoJoystickXY, 2, 0)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 12, 4)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 28, 11)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 47, 22)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 68, 38)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 67, 48)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 64, 59)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 64, 62)
-    EVT_WAIT(4)
-    EVT_CALL(DemoSetButtons, BUTTON_A)
-    EVT_WAIT(10)
-    EVT_CALL(DemoJoystickXY, 64, 58)
-    EVT_CALL(DemoSetButtons, 0)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 70, 34)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 77, -2)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 74, -23)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 71, -36)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 69, -44)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 67, -49)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 30, -30)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 0, 0)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 0, -1)
-    EVT_WAIT(8)
-    EVT_CALL(DemoSetButtons, BUTTON_A)
-    EVT_WAIT(2)
-    EVT_CALL(DemoJoystickXY, 0, -2)
-    EVT_WAIT(2)
-    EVT_CALL(DemoJoystickXY, 0, -1)
-    EVT_WAIT(2)
-    EVT_CALL(DemoJoystickXY, 0, 0)
-    EVT_WAIT(1)
-    EVT_CALL(DemoSetButtons, 0)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 1, 0)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 0, 0)
-    EVT_CALL(N(SetPartnerFollowDist))
-    EVT_CALL(DemoSetButtons, BUTTON_A)
-    EVT_WAIT(12)
-    EVT_CALL(DemoSetButtons, 0)
-    EVT_WAIT(20)
-    EVT_IF_EQ(GF_DemoSceneDone, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("arn_08"), arn_08_ENTRY_2, TRANSITION_END_DEMO_SCENE_BLACK)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(N(InitializeDemoEquipment))
+    Call(DemoJoystickXY, 2, 0)
+    Wait(1)
+    Call(DemoJoystickXY, 12, 4)
+    Wait(1)
+    Call(DemoJoystickXY, 28, 11)
+    Wait(1)
+    Call(DemoJoystickXY, 47, 22)
+    Wait(1)
+    Call(DemoJoystickXY, 68, 38)
+    Wait(1)
+    Call(DemoJoystickXY, 67, 48)
+    Wait(1)
+    Call(DemoJoystickXY, 64, 59)
+    Wait(1)
+    Call(DemoJoystickXY, 64, 62)
+    Wait(4)
+    Call(DemoSetButtons, BUTTON_A)
+    Wait(10)
+    Call(DemoJoystickXY, 64, 58)
+    Call(DemoSetButtons, 0)
+    Wait(1)
+    Call(DemoJoystickXY, 70, 34)
+    Wait(1)
+    Call(DemoJoystickXY, 77, -2)
+    Wait(1)
+    Call(DemoJoystickXY, 74, -23)
+    Wait(1)
+    Call(DemoJoystickXY, 71, -36)
+    Wait(1)
+    Call(DemoJoystickXY, 69, -44)
+    Wait(1)
+    Call(DemoJoystickXY, 67, -49)
+    Wait(1)
+    Call(DemoJoystickXY, 30, -30)
+    Wait(1)
+    Call(DemoJoystickXY, 0, 0)
+    Wait(1)
+    Call(DemoJoystickXY, 0, -1)
+    Wait(8)
+    Call(DemoSetButtons, BUTTON_A)
+    Wait(2)
+    Call(DemoJoystickXY, 0, -2)
+    Wait(2)
+    Call(DemoJoystickXY, 0, -1)
+    Wait(2)
+    Call(DemoJoystickXY, 0, 0)
+    Wait(1)
+    Call(DemoSetButtons, 0)
+    Wait(1)
+    Call(DemoJoystickXY, 1, 0)
+    Wait(1)
+    Call(DemoJoystickXY, 0, 0)
+    Call(N(SetPartnerFollowDist))
+    Call(DemoSetButtons, BUTTON_A)
+    Wait(12)
+    Call(DemoSetButtons, 0)
+    Wait(20)
+    IfEq(GF_DemoSceneDone, TRUE)
+        Return
+    EndIf
+    Set(GF_DemoSceneDone, TRUE)
+    Call(GotoMapSpecial, Ref("arn_08"), arn_08_ENTRY_2, TRANSITION_END_DEMO_SCENE_BLACK)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_MonitorDemoState) = {
-    EVT_WAIT(10)
-    EVT_LOOP(0)
-        EVT_CALL(GetDemoState, LVar0)
-        EVT_IF_EQ(LVar0, DEMO_STATE_CHANGE_MAP)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_IF_EQ(GF_DemoSceneDone, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("arn_08"), arn_08_ENTRY_2, TRANSITION_END_DEMO_SCENE_WHITE)
-    EVT_WAIT(35)
-    EVT_RETURN
-    EVT_END
+    Wait(10)
+    Loop(0)
+        Call(GetDemoState, LVar0)
+        IfEq(LVar0, DEMO_STATE_CHANGE_MAP)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    IfEq(GF_DemoSceneDone, TRUE)
+        Return
+    EndIf
+    Set(GF_DemoSceneDone, TRUE)
+    Call(GotoMapSpecial, Ref("arn_08"), arn_08_ENTRY_2, TRANSITION_END_DEMO_SCENE_WHITE)
+    Wait(35)
+    Return
+    End
 };
 
 API_CALLABLE(N(func_802400F4_BF4894)) {
@@ -120,9 +120,9 @@ API_CALLABLE(N(func_802400F4_BF4894)) {
 }
 
 EvtScript N(EVS_8024116C) = {
-    EVT_CALL(N(func_802400F4_BF4894))
-    EVT_RETURN
-    EVT_END
+    Call(N(func_802400F4_BF4894))
+    Return
+    End
 };
 
 s32 N(DemoInitState) = 0;
@@ -154,11 +154,11 @@ API_CALLABLE(N(SetupDemoScene)) {
 }
 
 EvtScript N(EVS_PlayDemoScene) = {
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(90.0), 0, 0, 0, EVT_FLOAT(470.0), EVT_FLOAT(17.0), EVT_FLOAT(-7.0))
-    EVT_CALL(N(SetupDemoScene))
-    EVT_SET(GF_DemoSceneDone, FALSE)
-    EVT_EXEC(N(EVS_MonitorDemoState))
-    EVT_EXEC(N(EVS_ProvideDemoInputs))
-    EVT_RETURN
-    EVT_END
+    Call(SetCamProperties, CAM_DEFAULT, Float(90.0), 0, 0, 0, Float(470.0), Float(17.0), Float(-7.0))
+    Call(N(SetupDemoScene))
+    Set(GF_DemoSceneDone, FALSE)
+    Exec(N(EVS_MonitorDemoState))
+    Exec(N(EVS_ProvideDemoInputs))
+    Return
+    End
 };

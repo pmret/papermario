@@ -20,15 +20,15 @@ MobileAISettings N(AISettings_Lakitu_SpinySpawner) = {
 
 EvtScript N(EVS_NpcAI_Lakitu_SpinySpawner) = {
     #ifdef DEBUG_LAKITU
-    EVT_DEBUG_LOG(EVT_PTR("JUGEMU MOVE"))
+    EVT_DEBUG_LOG(Ref("JUGEMU MOVE"))
     #endif
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 5, -650)
-    EVT_CALL(SetSelfVar, 6, 30)
-    EVT_CALL(SetSelfVar, 1, 400)
-    EVT_CALL(N(LakituAI_Main), EVT_PTR(N(AISettings_Lakitu_SpinySpawner)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(SetSelfVar, 5, -650)
+    Call(SetSelfVar, 6, 30)
+    Call(SetSelfVar, 1, 400)
+    Call(N(LakituAI_Main), Ref(N(AISettings_Lakitu_SpinySpawner)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Lakitu_SpinySpawner) = {
@@ -56,33 +56,33 @@ MobileAISettings N(AISettings_SpawnedSpiny) = {
 };
 
 EvtScript N(EVS_NpcAI_SpawnedSpiny) = {
-    EVT_CALL(SetSelfVar, 2, 3)
-    EVT_CALL(SetSelfVar, 3, 18)
-    EVT_CALL(SetSelfVar, 5, 3)
-    EVT_CALL(SetSelfVar, 7, 4)
+    Call(SetSelfVar, 2, 3)
+    Call(SetSelfVar, 3, 18)
+    Call(SetSelfVar, 5, 3)
+    Call(SetSelfVar, 7, 4)
     #ifdef DEBUG_LAKITU
-    EVT_DEBUG_LOG(EVT_PTR("TOGEZO TYPE1 : NORMAL MOVE"))
+    EVT_DEBUG_LOG(Ref("TOGEZO TYPE1 : NORMAL MOVE"))
     #endif
-    EVT_CALL(N(SpinyAI_Main), EVT_PTR(N(AISettings_SpawnedSpiny)))
-    EVT_RETURN
-    EVT_END
+    Call(N(SpinyAI_Main), Ref(N(AISettings_SpawnedSpiny)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_SpawnedSpiny) = {
-    EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetSelfVar, 10, 100)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(OnPlayerFled, 0)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcRotation, NPC_SELF, 0, 0, 0)
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetSelfVar, 10, 100)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(OnPlayerFled, 0)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_SpawnedSpiny) = {

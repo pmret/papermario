@@ -21,127 +21,127 @@ API_CALLABLE(N(SetNewWanderCenterPos)) {
 }
 
 EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-    EVT_CALL(GetSelfNpcID, LVar0)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(SetNpcPos, NPC_SELF, 45, -30, 20)
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, -70, -30, -20)
-    EVT_END_IF
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar2, LVar3, LVar4)
-    EVT_LABEL(0)
-    EVT_CALL(MakeLerp, EVT_FLOAT(-2.0), EVT_FLOAT(2.0), 30, EASING_COS_IN_OUT)
-    EVT_LABEL(10)
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH1_RAISED_SUBMERGED_STAIRS)
-        EVT_GOTO(100)
-    EVT_END_IF
-    EVT_CALL(UpdateLerp)
-    EVT_SET(LVar5, LVar3)
-    EVT_ADD(LVar5, LVar0)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar2, LVar5, LVar4)
-    EVT_WAIT(1)
-    EVT_IF_NE(LVar1, 0)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_WAIT(5)
-    EVT_CALL(MakeLerp, EVT_FLOAT(2.0), EVT_FLOAT(-2.0), 30, EASING_COS_IN_OUT)
-    EVT_LABEL(20)
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH1_RAISED_SUBMERGED_STAIRS)
-        EVT_GOTO(100)
-    EVT_END_IF
-    EVT_CALL(UpdateLerp)
-    EVT_SET(LVar5, LVar3)
-    EVT_ADD(LVar5, LVar0)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar2, LVar5, LVar4)
-    EVT_WAIT(1)
-    EVT_IF_NE(LVar1, 0)
-        EVT_GOTO(20)
-    EVT_END_IF
-    EVT_WAIT(5)
-    EVT_GOTO(0)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-    EVT_LABEL(100)
-    EVT_CALL(GetSelfNpcID, LVar0)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_IF_EQ(NPC_KoopaTroopa_02_DonePanic, FALSE)
-            EVT_WAIT(1)
-            EVT_GOTO(100)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_IF_EQ(NPC_KoopaTroopa_03_DonePanic, FALSE)
-            EVT_WAIT(1)
-            EVT_GOTO(100)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, FALSE)
-    EVT_CALL(GetSelfNpcID, LVar0)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
-        EVT_CALL(NpcMoveTo, NPC_SELF, 190, 20, 0)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 245, 75, 0)
-    EVT_ELSE
-        EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.6))
-        EVT_CALL(NpcMoveTo, NPC_SELF, 210, -20, 0)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 260, 25, 0)
-    EVT_END_IF
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(1.5))
-    EVT_CALL(N(SetNewWanderCenterPos))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_KoopaTroopa_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(GetSelfNpcID, LVar0)
+    IfEq(LVar0, 1)
+        Call(SetNpcPos, NPC_SELF, 45, -30, 20)
+    Else
+        Call(SetNpcPos, NPC_SELF, -70, -30, -20)
+    EndIf
+    Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(GetNpcPos, NPC_SELF, LVar2, LVar3, LVar4)
+    Label(0)
+    Call(MakeLerp, Float(-2.0), Float(2.0), 30, EASING_COS_IN_OUT)
+    Label(10)
+    IfEq(GB_StoryProgress, STORY_CH1_RAISED_SUBMERGED_STAIRS)
+        Goto(100)
+    EndIf
+    Call(UpdateLerp)
+    Set(LVar5, LVar3)
+    Add(LVar5, LVar0)
+    Call(SetNpcPos, NPC_SELF, LVar2, LVar5, LVar4)
+    Wait(1)
+    IfNe(LVar1, 0)
+        Goto(10)
+    EndIf
+    Wait(5)
+    Call(MakeLerp, Float(2.0), Float(-2.0), 30, EASING_COS_IN_OUT)
+    Label(20)
+    IfEq(GB_StoryProgress, STORY_CH1_RAISED_SUBMERGED_STAIRS)
+        Goto(100)
+    EndIf
+    Call(UpdateLerp)
+    Set(LVar5, LVar3)
+    Add(LVar5, LVar0)
+    Call(SetNpcPos, NPC_SELF, LVar2, LVar5, LVar4)
+    Wait(1)
+    IfNe(LVar1, 0)
+        Goto(20)
+    EndIf
+    Wait(5)
+    Goto(0)
+    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Label(100)
+    Call(GetSelfNpcID, LVar0)
+    IfEq(LVar0, 1)
+        IfEq(NPC_KoopaTroopa_02_DonePanic, FALSE)
+            Wait(1)
+            Goto(100)
+        EndIf
+    Else
+        IfEq(NPC_KoopaTroopa_03_DonePanic, FALSE)
+            Wait(1)
+            Goto(100)
+        EndIf
+    EndIf
+    Wait(10)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, FALSE)
+    Call(GetSelfNpcID, LVar0)
+    IfEq(LVar0, 1)
+        Call(SetNpcSpeed, NPC_SELF, Float(3.0))
+        Call(NpcMoveTo, NPC_SELF, 190, 20, 0)
+        Call(NpcMoveTo, NPC_SELF, 245, 75, 0)
+    Else
+        Call(SetNpcSpeed, NPC_SELF, Float(3.6))
+        Call(NpcMoveTo, NPC_SELF, 210, -20, 0)
+        Call(NpcMoveTo, NPC_SELF, 260, 25, 0)
+    EndIf
+    Call(SetNpcSpeed, NPC_SELF, Float(1.5))
+    Call(N(SetNewWanderCenterPos))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_KoopaTroopa_Wander)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoopaTroopa_02) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_RAISED_SUBMERGED_STAIRS)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KoopaTroopa_02)))
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Floating)
-    EVT_ELSE
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-        EVT_CALL(GetSelfNpcID, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_CALL(SetNpcPos, NPC_SELF, 240, 220, 130)
-        EVT_ELSE
-            EVT_CALL(SetNpcPos, NPC_SELF, 80, 220, 265)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH1_RAISED_SUBMERGED_STAIRS)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KoopaTroopa_02)))
+        Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Floating)
+    Else
+        Call(InterpNpcYaw, NPC_SELF, 270, 0)
+        Call(GetSelfNpcID, LVar0)
+        IfEq(LVar0, 1)
+            Call(SetNpcPos, NPC_SELF, 240, 220, 130)
+        Else
+            Call(SetNpcPos, NPC_SELF, 80, 220, 265)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_KoopaTroopa_01) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(GF_TRD01_Defeated_KoopaGuard, TRUE)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
-            EVT_CALL(MakeItemEntity, ITEM_KOOPA_FORTRESS_KEY, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_TRD01_Item_FortressKey)
-            EVT_EXEC(N(EVS_FocusCamOnLock))
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Set(GF_TRD01_Defeated_KoopaGuard, TRUE)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Call(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
+            Call(MakeItemEntity, ITEM_KOOPA_FORTRESS_KEY, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_TRD01_Item_FortressKey)
+            Exec(N(EVS_FocusCamOnLock))
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoopaTroopa_01) = {
-    EVT_IF_EQ(GF_TRD01_Defeated_KoopaGuard, TRUE)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_KoopaTroopa_01)))
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_TRD01_Defeated_KoopaGuard, TRUE)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_KoopaTroopa_01)))
+    Return
+    End
 };
 
 NpcData N(NpcData_KoopaTroopa_01) = {

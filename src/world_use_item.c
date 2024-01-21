@@ -106,103 +106,103 @@ API_CALLABLE(WorldItem_ConsumeItem) {
 }
 
 EvtScript EVS_WorldItem_ShowUsedItem = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_UsePower)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 45)
-    EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
-    EVT_SET(LVarA, LVar0)
-    EVT_WAIT(15)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 20)
-    EVT_CALL(WorldItem_ShowUseSparkles, LVar0, LVar1, LVar2)
-    EVT_CALL(RemoveItemEntity, LVarA)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Call(SetPlayerAnimation, ANIM_Mario1_UsePower)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar1, 45)
+    Call(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
+    Set(LVarA, LVar0)
+    Wait(15)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar1, 20)
+    Call(WorldItem_ShowUseSparkles, LVar0, LVar1, LVar2)
+    Call(RemoveItemEntity, LVarA)
+    Return
+    End
 };
 
 EvtScript EVS_WorldItem_PlayEatingSounds = {
-    EVT_THREAD
-        EVT_LOOP(4)
-            EVT_CALL(PlaySound, SOUND_EAT_OR_DRINK)
-            EVT_WAIT(10)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Eat)
-    EVT_WAIT(45)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Loop(4)
+            Call(PlaySound, SOUND_EAT_OR_DRINK)
+            Wait(10)
+        EndLoop
+    EndThread
+    Call(SetPlayerAnimation, ANIM_Mario1_Eat)
+    Wait(45)
+    Return
+    End
 };
 
 EvtScript EVS_WorldItem_PlayDrinkingSounds = {
-    EVT_THREAD
-        EVT_LOOP(4)
-            EVT_CALL(PlaySound, SOUND_EAT_OR_DRINK)
-            EVT_WAIT(10)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Drink)
-    EVT_WAIT(45)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Loop(4)
+            Call(PlaySound, SOUND_EAT_OR_DRINK)
+            Wait(10)
+        EndLoop
+    EndThread
+    Call(SetPlayerAnimation, ANIM_Mario1_Drink)
+    Wait(45)
+    Return
+    End
 };
 
 EvtScript EVS_World_UseItem = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(InterruptUsePartner)
-        EVT_WAIT(20)
-    EVT_END_IF
-    EVT_CALL(WorldItem_PauseTime)
-    EVT_CALL(WorldItem_GetItemProperties, LVarA)
-    EVT_EXEC_WAIT(EVS_WorldItem_ShowUsedItem)
-    EVT_IF_EQ(LVarD, 0)
-        EVT_EXEC_WAIT(EVS_WorldItem_PlayEatingSounds)
-    EVT_ELSE
-        EVT_EXEC_WAIT(EVS_WorldItem_PlayDrinkingSounds)
-    EVT_END_IF
-    EVT_IF_EQ(LVarF, 1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_StickOutTongue)
-    EVT_END_IF
-    EVT_IF_GT(LVarB, 0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 0)
-        EVT_ADD(LVar1, 35)
-        EVT_CALL(WorldItem_ShowHPGain, LVar0, LVar1, LVar2, LVarB)
-    EVT_END_IF
-    EVT_IF_GT(LVarC, 0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 20)
-        EVT_ADD(LVar1, 25)
-        EVT_CALL(WorldItem_ShowFPGain, LVar0, LVar1, LVar2, LVarC)
-    EVT_END_IF
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 25)
-    EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
-    EVT_IF_NE(LVarB, 0)
-        EVT_CALL(WorldItem_RestoreHP, LVarB)
-    EVT_END_IF
-    EVT_IF_NE(LVarC, 0)
-        EVT_CALL(WorldItem_RestoreFP, LVarC)
-    EVT_END_IF
-    EVT_IF_EQ(LVarF, 0)
-        EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_ThumbsUp)
-        EVT_WAIT(30)
-    EVT_ELSE
-        EVT_WAIT(30)
-    EVT_END_IF
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_WAIT(20)
-    EVT_CALL(WorldItem_ConsumeItem)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(WorldItem_UnpauseTime)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Call(DisablePlayerInput, TRUE)
+    Call(GetPartnerInUse, LVar0)
+    IfNe(LVar0, 0)
+        Call(InterruptUsePartner)
+        Wait(20)
+    EndIf
+    Call(WorldItem_PauseTime)
+    Call(WorldItem_GetItemProperties, LVarA)
+    ExecWait(EVS_WorldItem_ShowUsedItem)
+    IfEq(LVarD, 0)
+        ExecWait(EVS_WorldItem_PlayEatingSounds)
+    Else
+        ExecWait(EVS_WorldItem_PlayDrinkingSounds)
+    EndIf
+    IfEq(LVarF, 1)
+        Call(SetPlayerAnimation, ANIM_Mario1_StickOutTongue)
+    EndIf
+    IfGt(LVarB, 0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar0, 0)
+        Add(LVar1, 35)
+        Call(WorldItem_ShowHPGain, LVar0, LVar1, LVar2, LVarB)
+    EndIf
+    IfGt(LVarC, 0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar0, 20)
+        Add(LVar1, 25)
+        Call(WorldItem_ShowFPGain, LVar0, LVar1, LVar2, LVarC)
+    EndIf
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar1, 25)
+    Call(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
+    IfNe(LVarB, 0)
+        Call(WorldItem_RestoreHP, LVarB)
+    EndIf
+    IfNe(LVarC, 0)
+        Call(WorldItem_RestoreFP, LVarC)
+    EndIf
+    IfEq(LVarF, 0)
+        Wait(10)
+        Call(SetPlayerAnimation, ANIM_Mario1_ThumbsUp)
+        Wait(30)
+    Else
+        Wait(30)
+    EndIf
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Wait(20)
+    Call(WorldItem_ConsumeItem)
+    Call(DisablePlayerInput, FALSE)
+    Call(WorldItem_UnpauseTime)
+    Return
+    End
 };
 
 MATCHING_BSS(0x2700);

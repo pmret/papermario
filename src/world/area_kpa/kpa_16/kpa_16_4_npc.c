@@ -25,265 +25,265 @@ NpcSettings N(NpcSettings_Dummy) = {
 };
 
 EvtScript N(EVS_Scene_LavaShutoff) = {
-    EVT_LABEL(0)
-    EVT_IF_EQ(AF_KPA16_HitSwitch, FALSE)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetPlayerActionState, LVar0)
-        EVT_IF_EQ(LVar0, ACTION_STATE_IDLE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_WAIT(1)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(350.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0 / DT))
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 330, 230, -150)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 330, 170, -150)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_THREAD
-        EVT_CALL(N(MuteAmbience))
-        EVT_SETF(LVar2, 1)
-        EVT_CALL(MakeLerp, 0, -20, 100 * DT, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_ADDF(LVar2, EVT_FLOAT(-0.01))
-            EVT_CALL(TranslateModel, MODEL_o1283, 0, LVar0, 0)
-            EVT_CALL(TranslateModel, MODEL_o1282, 0, LVar0, 0)
-            EVT_CALL(ScaleModel, MODEL_o1282, LVar2, 1, 1)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(50 * DT)
-    EVT_CALL(MakeLerp, 0, 255, 50 * DT, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetScreenBlackFadeAmount), LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o782, 0)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o929, 0)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o930, 0)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o776, 0)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o952, 0)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o954, 0)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deiliw, 0)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o952, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(EVS_TexPan_Steam))
-    EVT_CALL(EnableGroup, MODEL_before, FALSE)
-    EVT_CALL(EnableGroup, MODEL_after, TRUE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o782, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o954, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SET(GF_KPA16_ShutOffLava, TRUE)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(MakeLerp, 255, 0, 50 * DT, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetScreenBlackFadeAmount), LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_WAIT(60 * DT)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(PARTNER_GOOMBARIO)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_CH8_001B)
-        EVT_CASE_EQ(PARTNER_KOOPER)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH8_001C)
-        EVT_CASE_EQ(PARTNER_BOMBETTE)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH8_001D)
-        EVT_CASE_EQ(PARTNER_PARAKARRY)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH8_001E)
-        EVT_CASE_EQ(PARTNER_BOW)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH8_001F)
-        EVT_CASE_EQ(PARTNER_WATT)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH8_0020)
-        EVT_CASE_EQ(PARTNER_SUSHIE)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH8_0021)
-        EVT_CASE_EQ(PARTNER_LAKILESTER)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH8_0022)
-    EVT_END_SWITCH
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    IfEq(AF_KPA16_HitSwitch, FALSE)
+        Wait(1)
+        Goto(0)
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Loop(0)
+        Wait(1)
+        Call(GetPlayerActionState, LVar0)
+        IfEq(LVar0, ACTION_STATE_IDLE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Wait(1)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
+    Call(SetPanTarget, CAM_DEFAULT, 330, 230, -150)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(1)
+    Call(SetPanTarget, CAM_DEFAULT, 330, 170, -150)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Thread
+        Call(N(MuteAmbience))
+        SetF(LVar2, 1)
+        Call(MakeLerp, 0, -20, 100 * DT, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            AddF(LVar2, Float(-0.01))
+            Call(TranslateModel, MODEL_o1283, 0, LVar0, 0)
+            Call(TranslateModel, MODEL_o1282, 0, LVar0, 0)
+            Call(ScaleModel, MODEL_o1282, LVar2, 1, 1)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Wait(50 * DT)
+    Call(MakeLerp, 0, 255, 50 * DT, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(N(SetScreenBlackFadeAmount), LVar0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o782, 0)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o929, 0)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o930, 0)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o776, 0)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o952, 0)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o954, 0)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deiliw, 0)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o952, COLLIDER_FLAGS_UPPER_MASK)
+    Exec(N(EVS_TexPan_Steam))
+    Call(EnableGroup, MODEL_before, FALSE)
+    Call(EnableGroup, MODEL_after, TRUE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o782, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o954, COLLIDER_FLAGS_UPPER_MASK)
+    Set(GF_KPA16_ShutOffLava, TRUE)
+    Call(ResetCam, CAM_DEFAULT, Float(90.0))
+    Call(MakeLerp, 255, 0, 50 * DT, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(N(SetScreenBlackFadeAmount), LVar0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Wait(60 * DT)
+    Call(DisablePartnerAI, 0)
+    Call(GetCurrentPartnerID, LVar0)
+    Switch(LVar0)
+        CaseEq(PARTNER_GOOMBARIO)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_CH8_001B)
+        CaseEq(PARTNER_KOOPER)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH8_001C)
+        CaseEq(PARTNER_BOMBETTE)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH8_001D)
+        CaseEq(PARTNER_PARAKARRY)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH8_001E)
+        CaseEq(PARTNER_BOW)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH8_001F)
+        CaseEq(PARTNER_WATT)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH8_0020)
+        CaseEq(PARTNER_SUSHIE)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH8_0021)
+        CaseEq(PARTNER_LAKILESTER)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH8_0022)
+    EndSwitch
+    Call(EnablePartnerAI)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_ChargeAtPlayer) = {
-    EVT_CHILD_THREAD
-        EVT_WAIT(15 * DT)
-        EVT_CALL(SetNpcSpeed, NPC_Koopatrol_01, EVT_FLOAT(3.0 / DT))
-        EVT_CALL(NpcMoveTo, NPC_Koopatrol_01, 650, -145, 0)
-    EVT_END_CHILD_THREAD
-    EVT_CHILD_THREAD
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SetNpcSpeed, NPC_Koopatrol_03, EVT_FLOAT(3.5 / DT))
-        EVT_CALL(NpcMoveTo, NPC_Koopatrol_03, 650, -165, 0)
-    EVT_END_CHILD_THREAD
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SetNpcSpeed, NPC_Koopatrol_02, EVT_FLOAT(4.0 / DT))
-    EVT_CALL(NpcMoveTo, NPC_Koopatrol_02, 650, -120, 0)
-    EVT_RETURN
-    EVT_END
+    ChildThread
+        Wait(15 * DT)
+        Call(SetNpcSpeed, NPC_Koopatrol_01, Float(3.0 / DT))
+        Call(NpcMoveTo, NPC_Koopatrol_01, 650, -145, 0)
+    EndChildThread
+    ChildThread
+        Wait(10 * DT)
+        Call(SetNpcSpeed, NPC_Koopatrol_03, Float(3.5 / DT))
+        Call(NpcMoveTo, NPC_Koopatrol_03, 650, -165, 0)
+    EndChildThread
+    Wait(5 * DT)
+    Call(SetNpcSpeed, NPC_Koopatrol_02, Float(4.0 / DT))
+    Call(NpcMoveTo, NPC_Koopatrol_02, 650, -120, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Guards) = {
-    EVT_LABEL(0)
-        EVT_WAIT(1)
-        EVT_CALL(N(GetFloorCollider), LVar0)
-        EVT_IF_NE(LVar0, COLLIDER_o785)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_LT(LVar1, 230)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_IF_GT(LVar0, 710)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_01, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_02, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_03, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
-    EVT_CALL(ShowEmote, NPC_Koopatrol_01, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
-    EVT_CALL(ShowEmote, NPC_Koopatrol_02, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
-    EVT_CALL(ShowEmote, NPC_Koopatrol_03, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
-    EVT_WAIT(15 * DT)
-    EVT_CALL(InterpNpcYaw, NPC_Koopatrol_01, 90, 0)
-    EVT_CALL(InterpNpcYaw, NPC_Koopatrol_02, 90, 0)
-    EVT_CALL(InterpNpcYaw, NPC_Koopatrol_03, 90, 0)
-    EVT_CALL(InterpNpcYaw, NPC_Magikoopa, 90, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
-    EVT_CALL(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim06)
-    EVT_CALL(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim06)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 555, 230, -150)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 555, 230, -150)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(10.0), EVT_FLOAT(-10.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_THREAD
-        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
-        EVT_CALL(PlayerMoveTo, 680, -145, 0)
-        EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_END_THREAD
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_THREAD
-        EVT_WAIT(30 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim06)
-        EVT_CALL(SetNpcSpeed, NPC_Koopatrol_02, EVT_FLOAT(4.0 / DT))
-        EVT_LABEL(10)
-        EVT_CALL(NpcMoveTo, NPC_Koopatrol_02, 550, -165, 0)
-        EVT_WAIT(5 * DT)
-        EVT_CALL(NpcMoveTo, NPC_Koopatrol_02, 510, -165, 0)
-        EVT_WAIT(5 * DT)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_CALL(NpcMoveTo, NPC_Koopatrol_02, 535, -165, 0)
-        EVT_CALL(SetSelfVar, 0, 2)
-    EVT_END_THREAD
-    EVT_CALL(InterpNpcYaw, NPC_Koopatrol_01, 270, 0)
-    EVT_CALL(SpeakToPlayer, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06, ANIM_WorldKoopatrol_Anim06, 1, MSG_CH8_0017)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(SetNpcJumpscale, NPC_Koopatrol_03, EVT_FLOAT(1.0))
-        EVT_CALL(GetNpcPos, NPC_Koopatrol_03, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcJump0, NPC_Koopatrol_03, LVar0, LVar1, LVar2, 20 * DT)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim06, ANIM_WorldKoopatrol_Anim06, 0, MSG_CH8_0018)
-    EVT_CALL(SetSelfVar, 0, 1)
-    EVT_LABEL(15)
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_WAIT(1)
-        EVT_GOTO(15)
-    EVT_END_IF
-    EVT_CALL(InterpNpcYaw, NPC_Koopatrol_02, 270, 0)
-    EVT_CALL(InterpNpcYaw, NPC_Koopatrol_03, 270, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
-    EVT_CALL(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim01)
-    EVT_CALL(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim01)
-    EVT_CALL(SpeakToPlayer, NPC_Magikoopa, ANIM_Magikoopa_Anim02, ANIM_Magikoopa_Anim01, 0, MSG_CH8_0019)
-    EVT_THREAD
-        EVT_WAIT(15 * DT)
-        EVT_CALL(InterpNpcYaw, NPC_Koopatrol_03, 90, 0)
-        EVT_WAIT(10 * DT)
-        EVT_CALL(InterpNpcYaw, NPC_Koopatrol_01, 90, 0)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_CH8_001A)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
-    EVT_CALL(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim06)
-    EVT_CALL(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim06)
-    EVT_EXEC(N(EVS_ChargeAtPlayer))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_THREAD
-        EVT_LOOP(0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(GF_KPA16_Defeated_SwitchGuards, TRUE)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_WAIT(30 * DT)
-        EVT_CALL(SetNpcPos, NPC_Koopatrol_01, NPC_DISPOSE_LOCATION)
-        EVT_CALL(SetNpcPos, NPC_Koopatrol_02, NPC_DISPOSE_LOCATION)
-        EVT_CALL(SetNpcPos, NPC_Koopatrol_03, NPC_DISPOSE_LOCATION)
-        EVT_CALL(SetNpcPos, NPC_Magikoopa, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Wait(1)
+        Call(N(GetFloorCollider), LVar0)
+        IfNe(LVar0, COLLIDER_o785)
+            Goto(0)
+        EndIf
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfLt(LVar1, 230)
+            Goto(0)
+        EndIf
+        IfGt(LVar0, 710)
+            Goto(0)
+        EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(PlaySoundAtNpc, NPC_Koopatrol_01, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
+    Call(PlaySoundAtNpc, NPC_Koopatrol_02, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
+    Call(PlaySoundAtNpc, NPC_Koopatrol_03, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
+    Call(ShowEmote, NPC_Koopatrol_01, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
+    Call(ShowEmote, NPC_Koopatrol_02, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
+    Call(ShowEmote, NPC_Koopatrol_03, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
+    Wait(15 * DT)
+    Call(InterpNpcYaw, NPC_Koopatrol_01, 90, 0)
+    Call(InterpNpcYaw, NPC_Koopatrol_02, 90, 0)
+    Call(InterpNpcYaw, NPC_Koopatrol_03, 90, 0)
+    Call(InterpNpcYaw, NPC_Magikoopa, 90, 0)
+    Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
+    Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim06)
+    Call(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim06)
+    Wait(10 * DT)
+    Call(UseSettingsFrom, CAM_DEFAULT, 555, 230, -150)
+    Call(SetPanTarget, CAM_DEFAULT, 555, 230, -150)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(10.0), Float(-10.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Thread
+        Call(SetPlayerSpeed, Float(3.0 / DT))
+        Call(PlayerMoveTo, 680, -145, 0)
+        Call(InterpPlayerYaw, 270, 0)
+    EndThread
+    Call(SetSelfVar, 0, 0)
+    Thread
+        Wait(30 * DT)
+        Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcSpeed, NPC_Koopatrol_02, Float(4.0 / DT))
+        Label(10)
+        Call(NpcMoveTo, NPC_Koopatrol_02, 550, -165, 0)
+        Wait(5 * DT)
+        Call(NpcMoveTo, NPC_Koopatrol_02, 510, -165, 0)
+        Wait(5 * DT)
+        Call(GetSelfVar, 0, LVar0)
+        IfEq(LVar0, 0)
+            Goto(10)
+        EndIf
+        Call(NpcMoveTo, NPC_Koopatrol_02, 535, -165, 0)
+        Call(SetSelfVar, 0, 2)
+    EndThread
+    Call(InterpNpcYaw, NPC_Koopatrol_01, 270, 0)
+    Call(SpeakToPlayer, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06, ANIM_WorldKoopatrol_Anim06, 1, MSG_CH8_0017)
+    Thread
+        Wait(5)
+        Call(SetNpcJumpscale, NPC_Koopatrol_03, Float(1.0))
+        Call(GetNpcPos, NPC_Koopatrol_03, LVar0, LVar1, LVar2)
+        Call(NpcJump0, NPC_Koopatrol_03, LVar0, LVar1, LVar2, 20 * DT)
+    EndThread
+    Call(SpeakToPlayer, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim06, ANIM_WorldKoopatrol_Anim06, 0, MSG_CH8_0018)
+    Call(SetSelfVar, 0, 1)
+    Label(15)
+    Call(GetSelfVar, 0, LVar0)
+    IfEq(LVar0, 1)
+        Wait(1)
+        Goto(15)
+    EndIf
+    Call(InterpNpcYaw, NPC_Koopatrol_02, 270, 0)
+    Call(InterpNpcYaw, NPC_Koopatrol_03, 270, 0)
+    Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
+    Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim01)
+    Call(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim01)
+    Call(SpeakToPlayer, NPC_Magikoopa, ANIM_Magikoopa_Anim02, ANIM_Magikoopa_Anim01, 0, MSG_CH8_0019)
+    Thread
+        Wait(15 * DT)
+        Call(InterpNpcYaw, NPC_Koopatrol_03, 90, 0)
+        Wait(10 * DT)
+        Call(InterpNpcYaw, NPC_Koopatrol_01, 90, 0)
+    EndThread
+    Call(SpeakToPlayer, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_CH8_001A)
+    Call(ResetCam, CAM_DEFAULT, Float(90.0))
+    Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
+    Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim06)
+    Call(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim06)
+    Exec(N(EVS_ChargeAtPlayer))
+    Call(DisablePlayerInput, FALSE)
+    Thread
+        Loop(0)
+            Wait(1)
+            IfEq(GF_KPA16_Defeated_SwitchGuards, TRUE)
+                BreakLoop
+            EndIf
+        EndLoop
+        Wait(30 * DT)
+        Call(SetNpcPos, NPC_Koopatrol_01, NPC_DISPOSE_LOCATION)
+        Call(SetNpcPos, NPC_Koopatrol_02, NPC_DISPOSE_LOCATION)
+        Call(SetNpcPos, NPC_Koopatrol_03, NPC_DISPOSE_LOCATION)
+        Call(SetNpcPos, NPC_Magikoopa, NPC_DISPOSE_LOCATION)
+    EndThread
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Guards) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(GF_KPA16_Defeated_SwitchGuards, TRUE)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o958, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Set(GF_KPA16_Defeated_SwitchGuards, TRUE)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o958, COLLIDER_FLAGS_UPPER_MASK)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Guards) = {
-    EVT_IF_EQ(GF_KPA16_ShutOffLava, FALSE)
-        EVT_EXEC(N(EVS_Scene_LavaShutoff))
-    EVT_END_IF
-    EVT_IF_EQ(GF_KPA16_Defeated_SwitchGuards, FALSE)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Guards)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Guards)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_Magikoopa)
-        EVT_CALL(RemoveNpc, NPC_Koopatrol_02)
-        EVT_CALL(RemoveNpc, NPC_Koopatrol_03)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_KPA16_ShutOffLava, FALSE)
+        Exec(N(EVS_Scene_LavaShutoff))
+    EndIf
+    IfEq(GF_KPA16_Defeated_SwitchGuards, FALSE)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Guards)))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Guards)))
+    Else
+        Call(RemoveNpc, NPC_Magikoopa)
+        Call(RemoveNpc, NPC_Koopatrol_02)
+        Call(RemoveNpc, NPC_Koopatrol_03)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Guards)[] = {

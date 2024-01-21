@@ -56,31 +56,31 @@ API_CALLABLE(N(TryEvilTreeLaugh)) {
 }
 
 EvtScript N(EVS_ManageEvilTree) = {
-    EVT_LABEL(0)
-        EVT_CALL(AwaitPlayerApproach, 0, -340, 50)
-        EVT_CALL(AwaitPlayerLeave, 0, -340, 50)
-        EVT_CALL(N(TryEvilTreeLaugh))
-        EVT_CALL(PlaySoundAt, SOUND_TREE_LAUGHTER, SOUND_SPACE_DEFAULT, 55, 96, -254)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(AwaitPlayerApproach, 0, -340, 50)
+        Call(AwaitPlayerLeave, 0, -340, 50)
+        Call(N(TryEvilTreeLaugh))
+        Call(PlaySoundAt, SOUND_TREE_LAUGHTER, SOUND_SPACE_DEFAULT, 55, 96, -254)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupExitHint) = {
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(gfx_build_evil_tree_face)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_kao, CUSTOM_GFX_1, -1)
-    EVT_CALL(SetModelFlags, MODEL_kao, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
-    EVT_WAIT(20)
-    EVT_EXEC(N(EVS_ManageEvilTree))
-    EVT_THREAD
-        EVT_CALL(SetTexPanner, MODEL_kao, TEX_PANNER_0)
-        EVT_LABEL(0)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, -0x8000)
-        EVT_WAIT(2)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, 0)
-        EVT_WAIT(3)
-        EVT_GOTO(0)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(gfx_build_evil_tree_face)), NULL)
+    Call(SetModelCustomGfx, MODEL_kao, CUSTOM_GFX_1, -1)
+    Call(SetModelFlags, MODEL_kao, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
+    Wait(20)
+    Exec(N(EVS_ManageEvilTree))
+    Thread
+        Call(SetTexPanner, MODEL_kao, TEX_PANNER_0)
+        Label(0)
+        Call(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, -0x8000)
+        Wait(2)
+        Call(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, 0)
+        Wait(3)
+        Goto(0)
+    EndThread
+    Return
+    End
 };

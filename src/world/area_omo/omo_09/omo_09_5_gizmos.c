@@ -1,76 +1,76 @@
 #include "omo_09.h"
 
 EvtScript N(EVS_Gizmos_Wheels) = {
-    EVT_LABEL(0)
-        EVT_CALL(MakeLerp, 0, -360, 100, EASING_LINEAR)
-        EVT_LABEL(1)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_ha1, LVar0, 0, 0, 1)
-            EVT_CALL(RotateModel, MODEL_ha2, LVar0, 0, 0, 1)
-            EVT_CALL(RotateModel, MODEL_ha3, LVar0, 0, 0, 1)
-            EVT_CALL(RotateModel, MODEL_ha4, LVar0, 0, 0, 1)
-            EVT_CALL(RotateModel, MODEL_ha5, LVar0, 0, 0, 1)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(1)
-            EVT_END_IF
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(MakeLerp, 0, -360, 100, EASING_LINEAR)
+        Label(1)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_ha1, LVar0, 0, 0, 1)
+            Call(RotateModel, MODEL_ha2, LVar0, 0, 0, 1)
+            Call(RotateModel, MODEL_ha3, LVar0, 0, 0, 1)
+            Call(RotateModel, MODEL_ha4, LVar0, 0, 0, 1)
+            Call(RotateModel, MODEL_ha5, LVar0, 0, 0, 1)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(1)
+            EndIf
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Gizmos_Shutters) = {
-    EVT_LABEL(0)
-    EVT_LABEL(0)
-        EVT_CALL(MakeLerp, 0, 160, 60, EASING_COS_IN_OUT)
-        EVT_LABEL(1)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_m1_1, LVar0, 0, -1, 0)
-            EVT_CALL(RotateModel, MODEL_m1_2, LVar0, 0, 1, 0)
-            EVT_CALL(RotateModel, MODEL_m2_1, LVar0, 0, -1, 0)
-            EVT_CALL(RotateModel, MODEL_m2_2, LVar0, 0, 1, 0)
-            EVT_CALL(RotateModel, MODEL_m3_1, LVar0, 0, -1, 0)
-            EVT_CALL(RotateModel, MODEL_m3_2, LVar0, 0, 1, 0)
-            EVT_CALL(RotateModel, MODEL_m4_1, LVar0, 0, -1, 0)
-            EVT_CALL(RotateModel, MODEL_m4_2, LVar0, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(1)
-            EVT_END_IF
-        EVT_CALL(MakeLerp, 160, 0, 60, EASING_COS_IN_OUT)
-        EVT_LABEL(2)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_m1_1, LVar0, 0, -1, 0)
-            EVT_CALL(RotateModel, MODEL_m1_2, LVar0, 0, 1, 0)
-            EVT_CALL(RotateModel, MODEL_m2_1, LVar0, 0, -1, 0)
-            EVT_CALL(RotateModel, MODEL_m2_2, LVar0, 0, 1, 0)
-            EVT_CALL(RotateModel, MODEL_m3_1, LVar0, 0, -1, 0)
-            EVT_CALL(RotateModel, MODEL_m3_2, LVar0, 0, 1, 0)
-            EVT_CALL(RotateModel, MODEL_m4_1, LVar0, 0, -1, 0)
-            EVT_CALL(RotateModel, MODEL_m4_2, LVar0, 0, 1, 0)
-            EVT_WAIT(2)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(2)
-            EVT_END_IF
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    Label(0)
+        Call(MakeLerp, 0, 160, 60, EASING_COS_IN_OUT)
+        Label(1)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_m1_1, LVar0, 0, -1, 0)
+            Call(RotateModel, MODEL_m1_2, LVar0, 0, 1, 0)
+            Call(RotateModel, MODEL_m2_1, LVar0, 0, -1, 0)
+            Call(RotateModel, MODEL_m2_2, LVar0, 0, 1, 0)
+            Call(RotateModel, MODEL_m3_1, LVar0, 0, -1, 0)
+            Call(RotateModel, MODEL_m3_2, LVar0, 0, 1, 0)
+            Call(RotateModel, MODEL_m4_1, LVar0, 0, -1, 0)
+            Call(RotateModel, MODEL_m4_2, LVar0, 0, 1, 0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(1)
+            EndIf
+        Call(MakeLerp, 160, 0, 60, EASING_COS_IN_OUT)
+        Label(2)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_m1_1, LVar0, 0, -1, 0)
+            Call(RotateModel, MODEL_m1_2, LVar0, 0, 1, 0)
+            Call(RotateModel, MODEL_m2_1, LVar0, 0, -1, 0)
+            Call(RotateModel, MODEL_m2_2, LVar0, 0, 1, 0)
+            Call(RotateModel, MODEL_m3_1, LVar0, 0, -1, 0)
+            Call(RotateModel, MODEL_m3_2, LVar0, 0, 1, 0)
+            Call(RotateModel, MODEL_m4_1, LVar0, 0, -1, 0)
+            Call(RotateModel, MODEL_m4_2, LVar0, 0, 1, 0)
+            Wait(2)
+            IfEq(LVar1, 1)
+                Goto(2)
+            EndIf
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Gizmos_Clocks) = {
-    EVT_LABEL(0)
-        EVT_CALL(MakeLerp, 0, -360, 100, EASING_LINEAR)
-        EVT_LABEL(1)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_hari1, LVar0, 0, 0, 1)
-            EVT_CALL(RotateModel, MODEL_hari2, LVar0, 0, 0, 1)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(1)
-            EVT_END_IF
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(MakeLerp, 0, -360, 100, EASING_LINEAR)
+        Label(1)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_hari1, LVar0, 0, 0, 1)
+            Call(RotateModel, MODEL_hari2, LVar0, 0, 0, 1)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(1)
+            EndIf
+        Goto(0)
+    Return
+    End
 };
 
 typedef struct MovingBlock {
@@ -97,55 +97,55 @@ API_CALLABLE(N(AwaitPlayerNearPlatforms)) {
 }
 
 EvtScript N(EVS_Gizmos_MovingBlocks) = {
-    EVT_SET_GROUP(EVT_GROUP_EF)
-    EVT_CALL(N(AwaitPlayerNearPlatforms))
-    EVT_WAIT(LVar9)
-    EVT_CALL(ParentColliderToModel, LVar6, LVar7)
-    EVT_LOOP(0)
-        EVT_CALL(MakeLerp, 0, LVar8, LVar8, EASING_COS_IN_OUT)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateModel, LVar7, 0, LVar0, 0)
-            EVT_CALL(UpdateColliderTransform, LVar6)
-            EVT_CALL(N(AwaitPlayerNearPlatforms))
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_LOOP(30)
-            EVT_CALL(N(AwaitPlayerNearPlatforms))
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(MakeLerp, LVar8, 0, LVar8, EASING_COS_IN_OUT)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateModel, LVar7, 0, LVar0, 0)
-            EVT_CALL(UpdateColliderTransform, LVar6)
-            EVT_CALL(N(AwaitPlayerNearPlatforms))
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_LOOP(30)
-            EVT_CALL(N(AwaitPlayerNearPlatforms))
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_EF)
+    Call(N(AwaitPlayerNearPlatforms))
+    Wait(LVar9)
+    Call(ParentColliderToModel, LVar6, LVar7)
+    Loop(0)
+        Call(MakeLerp, 0, LVar8, LVar8, EASING_COS_IN_OUT)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(TranslateModel, LVar7, 0, LVar0, 0)
+            Call(UpdateColliderTransform, LVar6)
+            Call(N(AwaitPlayerNearPlatforms))
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Loop(30)
+            Call(N(AwaitPlayerNearPlatforms))
+            Wait(1)
+        EndLoop
+        Call(MakeLerp, LVar8, 0, LVar8, EASING_COS_IN_OUT)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(TranslateModel, LVar7, 0, LVar0, 0)
+            Call(UpdateColliderTransform, LVar6)
+            Call(N(AwaitPlayerNearPlatforms))
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Loop(30)
+            Call(N(AwaitPlayerNearPlatforms))
+            Wait(1)
+        EndLoop
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupGizmos) = {
-    EVT_EXEC(N(EVS_Gizmos_Wheels))
-    EVT_EXEC(N(EVS_Gizmos_Shutters))
-    EVT_EXEC(N(EVS_Gizmos_Clocks))
-    EVT_USE_BUF(EVT_PTR(N(MovingBlockPlatforms)))
-    EVT_LOOP(ARRAY_COUNT(N(MovingBlockPlatforms)))
-        EVT_BUF_READ4(LVar6, LVar7, LVar8, LVar9)
-        EVT_EXEC(N(EVS_Gizmos_MovingBlocks))
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_Gizmos_Wheels))
+    Exec(N(EVS_Gizmos_Shutters))
+    Exec(N(EVS_Gizmos_Clocks))
+    UseBuf(Ref(N(MovingBlockPlatforms)))
+    Loop(ARRAY_COUNT(N(MovingBlockPlatforms)))
+        BufRead4(LVar6, LVar7, LVar8, LVar9)
+        Exec(N(EVS_Gizmos_MovingBlocks))
+    EndLoop
+    Return
+    End
 };

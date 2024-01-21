@@ -44,46 +44,46 @@ API_CALLABLE(N(ItemChoice_SaveSelected)) {
 #include "world/common/atomic/MakeKeyChoice.inc.c"
 
 EvtScript N(EVS_KeyItemChoicePopup) = {
-    EVT_SET(LVar9, LVar1)
-    EVT_CALL(ShowKeyChoicePopup)
-    EVT_SET(LVarA, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-        EVT_CASE_EQ(-1)
-        EVT_CASE_DEFAULT
-            EVT_CALL(RemoveKeyItemAt, LVar1)
-            EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
-            EVT_CALL(N(AddPlayerHandsOffset), LVar3, LVar4, LVar5)
-            EVT_BITWISE_OR_CONST(LVar0, ITEM_VIS_GROUP(ITEM_NONE, 5))
-            EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, ITEM_SPAWN_MODE_DECORATION, 0)
-            EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
-            EVT_WAIT(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-            EVT_CALL(RemoveItemEntity, LVar0)
-    EVT_END_SWITCH
-    EVT_CALL(N(ItemChoice_SaveSelected), LVarA)
-    EVT_CALL(CloseChoicePopup)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    Set(LVar9, LVar1)
+    Call(ShowKeyChoicePopup)
+    Set(LVarA, LVar0)
+    Switch(LVar0)
+        CaseEq(0)
+        CaseEq(-1)
+        CaseDefault
+            Call(RemoveKeyItemAt, LVar1)
+            Call(GetPlayerPos, LVar3, LVar4, LVar5)
+            Call(N(AddPlayerHandsOffset), LVar3, LVar4, LVar5)
+            BitwiseOrConst(LVar0, ITEM_VIS_GROUP(ITEM_NONE, 5))
+            Call(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, ITEM_SPAWN_MODE_DECORATION, 0)
+            Call(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
+            Wait(30)
+            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+            Call(RemoveItemEntity, LVar0)
+    EndSwitch
+    Call(N(ItemChoice_SaveSelected), LVarA)
+    Call(CloseChoicePopup)
+    Unbind
+    Return
+    End
 };
 
 EvtScript N(EVS_ChooseKeyItem) = {
-    EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
-    EVT_BIND_PADLOCK(EVT_PTR(N(EVS_KeyItemChoicePopup)), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
-    EVT_CALL(N(ItemChoice_WaitForSelection), LVar0)
-    EVT_RETURN
-    EVT_END
+    Call(N(BuildKeyItemChoiceList), LVar0)
+    BindPadlock(Ref(N(EVS_KeyItemChoicePopup)), TRIGGER_FORCE_ACTIVATE, 0, Ref(N(KeyItemChoiceList)), 0, 1)
+    Call(N(ItemChoice_WaitForSelection), LVar0)
+    Return
+    End
 };
 
 #define EVT_CHOOSE_ANY_KEY_ITEM() \
-    EVT_SET(LVar0, NULL) \
-    EVT_SET(LVar1, 0) \
-    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
+    Set(LVar0, NULL) \
+    Set(LVar1, 0) \
+    ExecWait(N(EVS_ChooseKeyItem))
 
 #define EVT_CHOOSE_KEY_ITEM_FROM(itemList) \
-    EVT_SET(LVar0, EVT_PTR(itemList)) \
-    EVT_SET(LVar1, 0) \
-    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
+    Set(LVar0, Ref(itemList)) \
+    Set(LVar1, 0) \
+    ExecWait(N(EVS_ChooseKeyItem))
 
 #endif

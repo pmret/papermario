@@ -2,8 +2,8 @@
 #include "Bubulb.h"
 
 EvtScript N(EVS_NpcAuxAI_Bubulb) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Bubulb) = {

@@ -6,24 +6,24 @@
 #include "world/common/complete/LetterDelivery.inc.c"
 
 EvtScript N(EVS_Scene_Wishing) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, 400)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, 400)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(400.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(3.0), EVT_FLOAT(-10.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(30)
-    EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_HOS_006F)
-    EVT_WAIT(10)
-    EVT_CALL(GotoMap, EVT_PTR("mac_04"), mac_04_ENTRY_4)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_LAND)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 400)
+    Call(SetPanTarget, CAM_DEFAULT, 0, 0, 400)
+    Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(3.0), Float(-10.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(30)
+    Call(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_HOS_006F)
+    Wait(10)
+    Call(GotoMap, Ref("mac_04"), mac_04_ENTRY_4)
+    Wait(100)
+    Return
+    End
 };
 
 s32 N(LetterList)[] = {
@@ -32,71 +32,71 @@ s32 N(LetterList)[] = {
 };
 
 EvtScript N(EVS_NpcInteract_Toad) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_OSR_0000)
-        EVT_CASE_LT(STORY_CH1_SPOKE_WITH_MERLIN)
-            EVT_SET(LVar0, MSG_OSR_0001)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_OSR_0002)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, MSG_OSR_0003)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_OSR_0004)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_OSR_0005)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC01_MailbagStolen, FALSE)
-                EVT_SET(LVar0, MSG_OSR_0006)
-            EVT_ELSE
-                EVT_IF_EQ(GF_MAC01_MailbagReturned, FALSE)
-                    EVT_SET(LVar0, MSG_OSR_0007)
-                EVT_ELSE
-                    EVT_SET(LVar0, MSG_OSR_0008)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, MSG_OSR_0009)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_OSR_000A)
-        EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, MSG_OSR_000B)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_OSR_000C)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, MSG_OSR_000D)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_OSR_000E)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_OSR_000F)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
-    EVT_CALL(N(LetterDelivery_Init),
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_OSR_0000)
+        CaseLt(STORY_CH1_SPOKE_WITH_MERLIN)
+            Set(LVar0, MSG_OSR_0001)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_OSR_0002)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_BombedRock, FALSE)
+                Set(LVar0, MSG_OSR_0003)
+            Else
+                Set(LVar0, MSG_OSR_0004)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_OSR_0005)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC01_MailbagStolen, FALSE)
+                Set(LVar0, MSG_OSR_0006)
+            Else
+                IfEq(GF_MAC01_MailbagReturned, FALSE)
+                    Set(LVar0, MSG_OSR_0007)
+                Else
+                    Set(LVar0, MSG_OSR_0008)
+                EndIf
+            EndIf
+        CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
+            Set(LVar0, MSG_OSR_0009)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_OSR_000A)
+        CaseLt(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+            Set(LVar0, MSG_OSR_000B)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_OSR_000C)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Set(LVar0, MSG_OSR_000D)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_OSR_000E)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_OSR_000F)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
+    Call(N(LetterDelivery_Init),
         NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle,
         ITEM_LETTER_CHAIN_MUSS_T, ITEM_LETTER_CHAIN_KOOVER_1,
         MSG_OSR_0010, MSG_OSR_0011, MSG_OSR_0012, MSG_OSR_0013,
-        EVT_PTR(N(LetterList)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_IF_EQ(LVarC, 1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    IfEq(LVarC, 1)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(osr_01_ENTRY_3)
-            EVT_CALL(SetNpcPos, NPC_SELF, 0, 0, 400)
-            EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-        EVT_CASE_DEFAULT
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad)))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(osr_01_ENTRY_3)
+            Call(SetNpcPos, NPC_SELF, 0, 0, 400)
+            Call(SetNpcYaw, NPC_SELF, 90)
+        CaseDefault
+            Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad)))
+    EndSwitch
+    Return
+    End
 };
 
 NpcData N(NpcData_Toad) = {

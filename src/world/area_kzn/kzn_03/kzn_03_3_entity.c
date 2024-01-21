@@ -21,123 +21,123 @@ API_CALLABLE(N(IsPlayerOnFirstCliff)) {
 }
 
 EvtScript N(EVS_TetherCameraToPlayer) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_UseSpringA) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAUNCH)
-    EVT_WAIT(1)
-    EVT_CALL(N(EnableCameraFollowPlayerY))
-    EVT_EXEC_GET_TID(N(EVS_TetherCameraToPlayer), LVarA)
-    EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
-    EVT_CALL(PlayerJump, 335, 290, 360, 40)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAG_FLYING, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_FALLING)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(N(DisableCameraFollowPlayerY))
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_IDLE)
+    Wait(1)
+    Call(SetPlayerActionState, ACTION_STATE_LAUNCH)
+    Wait(1)
+    Call(N(EnableCameraFollowPlayerY))
+    ExecGetTID(N(EVS_TetherCameraToPlayer), LVarA)
+    Call(SetPlayerJumpscale, Float(0.7))
+    Call(PlayerJump, 335, 290, 360, 40)
+    Call(SetPlayerFlagBits, PS_FLAG_FLYING, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_FALLING)
+    Call(DisablePlayerPhysics, FALSE)
+    KillThread(LVarA)
+    Call(N(DisableCameraFollowPlayerY))
+    Return
+    End
 };
 
 EvtScript N(EVS_UseSpringB) = {
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
-    EVT_WAIT(1)
-    EVT_CALL(N(EnableCameraFollowPlayerY))
-    EVT_EXEC_GET_TID(N(EVS_TetherCameraToPlayer), LVarA)
-    EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
-    EVT_CALL(PlayerJump, 350, 470, 210, 40)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(N(DisableCameraFollowPlayerY))
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_IDLE)
+    Wait(1)
+    Call(SetPlayerActionState, ACTION_STATE_JUMP)
+    Wait(1)
+    Call(N(EnableCameraFollowPlayerY))
+    ExecGetTID(N(EVS_TetherCameraToPlayer), LVarA)
+    Call(SetPlayerJumpscale, Float(0.7))
+    Call(PlayerJump, 350, 470, 210, 40)
+    Call(SetPlayerActionState, ACTION_STATE_LAND)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    KillThread(LVarA)
+    Call(N(DisableCameraFollowPlayerY))
+    Return
+    End
 };
 
 EvtScript N(EVS_UseSpringC) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
-    EVT_WAIT(1)
-    EVT_CALL(N(EnableCameraFollowPlayerY))
-    EVT_EXEC_GET_TID(N(EVS_TetherCameraToPlayer), LVarA)
-    EVT_IF_EQ(MV_PlayerCliffState, 0)
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.4))
-        EVT_CALL(PlayerJump, -470, 670, 71, 18)
-    EVT_ELSE
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
-        EVT_CALL(PlayerJump, -384, 870, -22, 40)
-    EVT_END_IF
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(N(DisableCameraFollowPlayerY))
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_IDLE)
+    Wait(1)
+    Call(SetPlayerActionState, ACTION_STATE_JUMP)
+    Wait(1)
+    Call(N(EnableCameraFollowPlayerY))
+    ExecGetTID(N(EVS_TetherCameraToPlayer), LVarA)
+    IfEq(MV_PlayerCliffState, 0)
+        Call(SetPlayerJumpscale, Float(1.4))
+        Call(PlayerJump, -470, 670, 71, 18)
+    Else
+        Call(SetPlayerJumpscale, Float(0.7))
+        Call(PlayerJump, -384, 870, -22, 40)
+    EndIf
+    Call(SetPlayerActionState, ACTION_STATE_LAND)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    KillThread(LVarA)
+    Call(N(DisableCameraFollowPlayerY))
+    Return
+    End
 };
 
 EvtScript N(EVS_OnBreakBlock) = {
-    EVT_SET(GB_StoryProgress, STORY_CH5_SMASHED_ULTRA_BLOCK)
-    EVT_RETURN
-    EVT_END
+    Set(GB_StoryProgress, STORY_CH5_SMASHED_ULTRA_BLOCK)
+    Return
+    End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), 365, 530, 135, 0, MAKE_ENTITY_END)
-    EVT_CALL(MakeItemEntity, ITEM_FIRE_SHIELD, 75, 290, 235, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_KZN03_Item_FireShield)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 215, 745, -105, 0, MAKE_ENTITY_END)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 85, 770, -105, 0, MAKE_ENTITY_END)
-    EVT_CALL(MakeItemEntity, ITEM_POW_BLOCK, 85, 795, -105, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_KZN03_Item_POWBlock)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 35, 730, -105, 0, ITEM_COIN, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, GF_KZN03_ItemBlock_CoinA)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -15, 730, -105, 0, ITEM_COIN, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, GF_KZN03_ItemBlock_CoinB)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -65, 730, -105, 0, ITEM_COIN, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, GF_KZN03_ItemBlock_CoinC)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -115, 730, -105, 0, ITEM_COIN, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, GF_KZN03_ItemBlock_CoinD)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_SMASHED_ULTRA_BLOCK)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer3Block), 490, 470, 210, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_PTR(N(EVS_OnBreakBlock)))
-        EVT_THREAD
-            EVT_LOOP(0)
-                EVT_IF_GE(GB_StoryProgress, STORY_CH5_SMASHED_ULTRA_BLOCK)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_on_off, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_END_THREAD
-    EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_on_off, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 160, 30, 350, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_UseSpringA)))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 335, 265, 360, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_UseSpringB)))
-    EVT_THREAD
-        EVT_CALL(N(IsPlayerOnFirstCliff))
-    EVT_END_THREAD
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), -410, 645, 120, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_UseSpringC)))
-    EVT_RETURN
-    EVT_END
+    Call(MakeEntity, Ref(Entity_SavePoint), 365, 530, 135, 0, MAKE_ENTITY_END)
+    Call(MakeItemEntity, ITEM_FIRE_SHIELD, 75, 290, 235, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_KZN03_Item_FireShield)
+    Call(MakeEntity, Ref(Entity_BrickBlock), 215, 745, -105, 0, MAKE_ENTITY_END)
+    Call(MakeEntity, Ref(Entity_BrickBlock), 85, 770, -105, 0, MAKE_ENTITY_END)
+    Call(MakeItemEntity, ITEM_POW_BLOCK, 85, 795, -105, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_KZN03_Item_POWBlock)
+    Call(MakeEntity, Ref(Entity_YellowBlock), 35, 730, -105, 0, ITEM_COIN, MAKE_ENTITY_END)
+    Call(AssignBlockFlag, GF_KZN03_ItemBlock_CoinA)
+    Call(MakeEntity, Ref(Entity_YellowBlock), -15, 730, -105, 0, ITEM_COIN, MAKE_ENTITY_END)
+    Call(AssignBlockFlag, GF_KZN03_ItemBlock_CoinB)
+    Call(MakeEntity, Ref(Entity_YellowBlock), -65, 730, -105, 0, ITEM_COIN, MAKE_ENTITY_END)
+    Call(AssignBlockFlag, GF_KZN03_ItemBlock_CoinC)
+    Call(MakeEntity, Ref(Entity_YellowBlock), -115, 730, -105, 0, ITEM_COIN, MAKE_ENTITY_END)
+    Call(AssignBlockFlag, GF_KZN03_ItemBlock_CoinD)
+    IfLt(GB_StoryProgress, STORY_CH5_SMASHED_ULTRA_BLOCK)
+        Call(MakeEntity, Ref(Entity_Hammer3Block), 490, 470, 210, 0, MAKE_ENTITY_END)
+        Call(AssignScript, Ref(N(EVS_OnBreakBlock)))
+        Thread
+            Loop(0)
+                IfGe(GB_StoryProgress, STORY_CH5_SMASHED_ULTRA_BLOCK)
+                    BreakLoop
+                EndIf
+                Wait(1)
+            EndLoop
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_on_off, COLLIDER_FLAGS_UPPER_MASK)
+        EndThread
+    Else
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_on_off, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    Call(MakeEntity, Ref(Entity_ScriptSpring), 160, 30, 350, 0, MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(EVS_UseSpringA)))
+    Call(MakeEntity, Ref(Entity_ScriptSpring), 335, 265, 360, 0, MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(EVS_UseSpringB)))
+    Thread
+        Call(N(IsPlayerOnFirstCliff))
+    EndThread
+    Call(MakeEntity, Ref(Entity_ScriptSpring), -410, 645, 120, 0, MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(EVS_UseSpringC)))
+    Return
+    End
 };

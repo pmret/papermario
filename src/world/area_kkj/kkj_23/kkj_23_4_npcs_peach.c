@@ -27,99 +27,99 @@ AnimID N(ExtraAnims_Koopatrol)[] = {
 };
 
 EvtScript N(EVS_NpcInteract_Koopatrol_01) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_014D)
-        EVT_CALL(SetSelfVar, 0, 1)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_014E)
-        EVT_CALL(SetSelfVar, 0, 0)
-    EVT_END_IF
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(GetSelfVar, 0, LVar0)
+    IfEq(LVar0, 0)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_014D)
+        Call(SetSelfVar, 0, 1)
+    Else
+        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_014E)
+        Call(SetSelfVar, 0, 0)
+    EndIf
+    Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_CapturePeach) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(PreventNextPeachDisguise))
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
-    EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_WAIT(20)
-    EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Gasp)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim01)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_0174)
-    EVT_CALL(N(ApproachPlayer50Units), -1, LVar3, LVar0, LVar2)
-    EVT_IF_NE(LVar3, 0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim06)
-        EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
-        EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar2, 0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim01)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_0175)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_ForwardSad)
-    EVT_WAIT(20)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kkj_14"), kkj_14_ENTRY_B, TRANSITION_PEACH_CAPTURED)
-    EVT_WAIT(100)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(N(PreventNextPeachDisguise))
+    SetGroup(EVT_GROUP_00)
+    Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
+    Call(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Wait(20)
+    Call(PlayerFaceNpc, NPC_SELF, FALSE)
+    Call(SetPlayerAnimation, ANIM_Peach2_Gasp)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim01)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_0174)
+    Call(N(ApproachPlayer50Units), -1, LVar3, LVar0, LVar2)
+    IfNe(LVar3, 0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcSpeed, NPC_SELF, Float(5.0))
+        Call(NpcMoveTo, NPC_SELF, LVar0, LVar2, 0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim01)
+    EndIf
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_0175)
+    Call(SetPlayerAnimation, ANIM_Peach2_ForwardSad)
+    Wait(20)
+    Call(GotoMapSpecial, Ref("kkj_14"), kkj_14_ENTRY_B, TRANSITION_PEACH_CAPTURED)
+    Wait(100)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Koopatrol_WatchForPeach) = {
-    EVT_LOOP(0)
-        EVT_CALL(N(GetPeachDisguise), LVar1)
-        EVT_IF_EQ(LVar1, PEACH_DISGUISE_NONE)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
-            EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_CapturePeach)))
-            EVT_RETURN
-        EVT_ELSE
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(N(GetPeachDisguise), LVar1)
+        IfEq(LVar1, PEACH_DISGUISE_NONE)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
+            Call(BindNpcAI, NPC_SELF, Ref(N(EVS_CapturePeach)))
+            Return
+        Else
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+        EndIf
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Koopatrol_01) = {
-    EVT_EXEC_GET_TID(N(EVS_Koopatrol_WatchForPeach), LVarA)
-    EVT_CALL(SetSelfVar, 1, 1)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetSelfVar, 1, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
-    EVT_RETURN
-    EVT_END
+    ExecGetTID(N(EVS_Koopatrol_WatchForPeach), LVarA)
+    Call(SetSelfVar, 1, 1)
+    Loop(0)
+        Wait(1)
+        Call(GetSelfVar, 1, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    KillThread(LVarA)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Koopatrol_01) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim01)
-    EVT_CALL(SetNpcPos, NPC_SELF, 140, 0, -80)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Koopatrol_01)))
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Koopatrol_01)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim01)
+    Call(SetNpcPos, NPC_SELF, 140, 0, -80)
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Koopatrol_01)))
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Koopatrol_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Koopatrol_02) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim01)
-    EVT_CALL(SetNpcPos, NPC_SELF, 40, 0, -80)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim01)
+    Call(SetNpcPos, NPC_SELF, 40, 0, -80)
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Kammy)[] = {

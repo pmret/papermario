@@ -3,93 +3,93 @@
 #include "../common/FallingStars.inc.c"
 
 EvtScript N(EVS_ExitWalk_osr) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(UseExitHeading, 60, hos_00_ENTRY_0)
-    EVT_EXEC(ExitWalk)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_RANGE(STORY_CH0_WAKE_UP, STORY_CH8_REACHED_PEACHS_CASTLE)
-            EVT_CALL(GotoMap, EVT_PTR("osr_01"), osr_01_ENTRY_1)
-        EVT_CASE_DEFAULT
-            EVT_CALL(GotoMap, EVT_PTR("osr_00"), osr_00_ENTRY_1)
-    EVT_END_SWITCH
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(UseExitHeading, 60, hos_00_ENTRY_0)
+    Exec(ExitWalk)
+    Switch(GB_StoryProgress)
+        CaseRange(STORY_CH0_WAKE_UP, STORY_CH8_REACHED_PEACHS_CASTLE)
+            Call(GotoMap, Ref("osr_01"), osr_01_ENTRY_1)
+        CaseDefault
+            Call(GotoMap, Ref("osr_00"), osr_00_ENTRY_1)
+    EndSwitch
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitWalk_hos_01_0) = EVT_EXIT_WALK(60, hos_00_ENTRY_1, "hos_01", hos_01_ENTRY_0);
 EvtScript N(EVS_ExitWalk_hos_06_0) = EVT_EXIT_WALK(60, hos_00_ENTRY_2, "hos_06", hos_06_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_osr)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_hos_01_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiline, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_hos_06_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilise, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_osr)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_hos_01_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiline, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_hos_06_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilise, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_TexPan_Unknown) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SET(LVar0, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_D, TEX_PANNER_MAIN, LVar0, 0)
-        EVT_ADD(LVar0, 0x4000)
-        EVT_WAIT(15)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Set(LVar0, 0)
+    Loop(0)
+        Call(SetTexPanOffset, TEX_PANNER_D, TEX_PANNER_MAIN, LVar0, 0)
+        Add(LVar0, 0x4000)
+        Wait(15)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(GetLoadType, LVar1)
-    EVT_IF_EQ(LVar1, LOAD_FROM_FILE_SELECT)
-        EVT_EXEC(N(EVS_SetupBackgroundShade))
-        EVT_EXEC(EnterSavePoint)
-        EVT_EXEC(N(EVS_BindExitTriggers))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, hos_00_ENTRY_3)
-        EVT_CALL(SetGroupVisibility, MODEL_g107, MODEL_GROUP_HIDDEN)
-        EVT_EXEC(N(EVS_Scene_Wishing))
-        EVT_RETURN
-    EVT_ELSE
-        EVT_EXEC(N(EVS_SetupBackgroundShade))
-        EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-        EVT_EXEC(EnterWalk)
-        EVT_WAIT(1)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetLoadType, LVar1)
+    IfEq(LVar1, LOAD_FROM_FILE_SELECT)
+        Exec(N(EVS_SetupBackgroundShade))
+        Exec(EnterSavePoint)
+        Exec(N(EVS_BindExitTriggers))
+        Return
+    EndIf
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, hos_00_ENTRY_3)
+        Call(SetGroupVisibility, MODEL_g107, MODEL_GROUP_HIDDEN)
+        Exec(N(EVS_Scene_Wishing))
+        Return
+    Else
+        Exec(N(EVS_SetupBackgroundShade))
+        Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+        Exec(EnterWalk)
+        Wait(1)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_SHOOTING_STAR_SUMMIT)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_SET(GF_MAP_ShootingStarSummit, TRUE)
-    EVT_SET(GF_MAC01_RowfBadgesChosen, FALSE)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, hos_00_ENTRY_3)
-        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(WishingNPCs)))
-    EVT_ELSE
-        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_NE(LVar0, hos_00_ENTRY_3)
-        EVT_EXEC(N(EVS_Starfall_Directed))
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_SetupMusic))
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH0_BEGAN_PEACH_MISSION)
-        EVT_IF_EQ(AF_HOS_B4, FALSE)
-            EVT_WAIT(50)
-            EVT_SET(AF_HOS_B4, TRUE)
-        EVT_END_IF
-        EVT_EXEC(N(EVS_Scene_MeetingTwink))
-    EVT_END_IF
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_EXEC(N(EVS_TexPan_Unknown))
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_SHOOTING_STAR_SUMMIT)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_DEFAULT()
+    Set(GF_MAP_ShootingStarSummit, TRUE)
+    Set(GF_MAC01_RowfBadgesChosen, FALSE)
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, hos_00_ENTRY_3)
+        Call(MakeNpcs, FALSE, Ref(N(WishingNPCs)))
+    Else
+        Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    EndIf
+    ExecWait(N(EVS_MakeEntities))
+    Call(GetEntryID, LVar0)
+    IfNe(LVar0, hos_00_ENTRY_3)
+        Exec(N(EVS_Starfall_Directed))
+    EndIf
+    ExecWait(N(EVS_SetupMusic))
+    IfEq(GB_StoryProgress, STORY_CH0_BEGAN_PEACH_MISSION)
+        IfEq(AF_HOS_B4, FALSE)
+            Wait(50)
+            Set(AF_HOS_B4, TRUE)
+        EndIf
+        Exec(N(EVS_Scene_MeetingTwink))
+    EndIf
+    Exec(N(EVS_EnterMap))
+    Exec(N(EVS_TexPan_Unknown))
+    Return
+    End
 };

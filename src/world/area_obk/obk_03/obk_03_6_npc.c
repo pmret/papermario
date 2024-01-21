@@ -10,43 +10,43 @@ s32 N(LetterList_Igor)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_Igor) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_Igor, ANIM_Boo_Talk, ANIM_Boo_Idle,
         ITEM_LETTER_TO_IGOR, ITEM_NONE,
         MSG_CH3_005D, MSG_CH3_005E, MSG_CH3_005F, MSG_CH3_0060,
-        EVT_PTR(N(LetterList_Igor)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList_Igor)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_LetterReward_Igor) = {
-    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+    IfEq(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Igor) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
-        EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_005C)
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Igor))
-    EVT_EXEC_WAIT(N(EVS_LetterReward_Igor))
-    EVT_IF_NE(LVarC, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
+        ExecWait(EVS_ShopOwnerDialog)
+    Else
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_005C)
+    EndIf
+    ExecWait(N(EVS_LetterPrompt_Igor))
+    ExecWait(N(EVS_LetterReward_Igor))
+    IfNe(LVarC, 0)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Igor) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Igor)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Igor)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Igor) = {

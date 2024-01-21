@@ -6,45 +6,45 @@
 #include "world/common/npc/Dummy.inc.c"
 
 EvtScript N(EVS_NpcInit_RussT) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, -300, 0, 295)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, -300, 0, 295)
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShiverToad_02) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, -175, 0, -75)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, -175, 0, -75)
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Unused) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, -440, 0, 220)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, -440, 0, 220)
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toadette_03) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 295, 0, -15)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 295, 0, -15)
+    Call(SetNpcYaw, NPC_SELF, 270)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toadette_04) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 325, 0, -10)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 325, 0, -10)
+    Call(SetNpcYaw, NPC_SELF, 270)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ToadGuard_03) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 50, 100, -365)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 50, 100, -365)
+    Call(SetNpcYaw, NPC_SELF, 270)
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Peach)[] = {

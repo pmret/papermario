@@ -3,46 +3,46 @@
 #include "world/common/enemy/PutridPiranhaSentinel.inc.c"
 
 EvtScript N(EVS_NpcIdle_PutridPiranha) = {
-    EVT_LABEL(0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_LT(LVar0, 225)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 270, -200, 0)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 400)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.5 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetNpcPos, NPC_SELF, 320, -220, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim17)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim01)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_LargePiranha_Putrid_Anim04, ANIM_LargePiranha_Putrid_Anim01, 0, MSG_CH5_00ED)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim18)
-    EVT_WAIT(25 * DT)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-    EVT_SET(GF_KZN01_IntruderAlert, TRUE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    IfLt(LVar0, 225)
+        Wait(1)
+        Goto(0)
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, 270, -200, 0)
+    Call(SetCamDistance, CAM_DEFAULT, 400)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.5 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(10 * DT)
+    Call(SetNpcPos, NPC_SELF, 320, -220, 0)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim17)
+    Wait(30 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim01)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_LargePiranha_Putrid_Anim04, ANIM_LargePiranha_Putrid_Anim01, 0, MSG_CH5_00ED)
+    Wait(10 * DT)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim18)
+    Wait(25 * DT)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Call(ResetCam, CAM_DEFAULT, Float(3.0 / DT))
+    Set(GF_KZN01_IntruderAlert, TRUE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_PutridPiranha) = {
-    EVT_IF_EQ(GF_KZN01_IntruderAlert, FALSE)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_PutridPiranha)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_KZN01_IntruderAlert, FALSE)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_PutridPiranha)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcPutridPiranha) = {

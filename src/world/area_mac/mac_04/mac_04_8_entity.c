@@ -54,172 +54,172 @@ void N(appendGfx_shrunk_player)(void* data) {
 }
 
 EvtScript N(EVS_ShrinkPlayer) = {
-    EVT_SETF(MV_PlayerShrinkScale, EVT_FLOAT(1.0))
-    EVT_CALL(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, TRUE)
-    EVT_CALL(N(CreateShrinkingWorker))
-    EVT_THREAD
-        EVT_WAIT(8)
-        EVT_CALL(MakeLerp, 100, 20, 20, EASING_QUADRATIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_SETF(MV_PlayerShrinkScale, LVar0)
-            EVT_DIVF(MV_PlayerShrinkScale, 100)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    SetF(MV_PlayerShrinkScale, Float(1.0))
+    Call(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, TRUE)
+    Call(N(CreateShrinkingWorker))
+    Thread
+        Wait(8)
+        Call(MakeLerp, 100, 20, 20, EASING_QUADRATIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            SetF(MV_PlayerShrinkScale, LVar0)
+            DivF(MV_PlayerShrinkScale, 100)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_UnshrinkPlayer) = {
-    EVT_SETF(MV_PlayerShrinkScale, EVT_FLOAT(0.2))
-    EVT_CALL(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, TRUE)
-    EVT_CALL(N(CreateShrinkingWorker))
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 20, 100, 40, EASING_QUADRATIC_OUT)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_SETF(MV_PlayerShrinkScale, LVar0)
-            EVT_DIVF(MV_PlayerShrinkScale, 100)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    SetF(MV_PlayerShrinkScale, Float(0.2))
+    Call(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, TRUE)
+    Call(N(CreateShrinkingWorker))
+    Thread
+        Call(MakeLerp, 20, 100, 40, EASING_QUADRATIC_OUT)
+        Loop(0)
+            Call(UpdateLerp)
+            SetF(MV_PlayerShrinkScale, LVar0)
+            DivF(MV_PlayerShrinkScale, 100)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_FinishUnshrinking) = {
-    EVT_CALL(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, FALSE)
-    EVT_CALL(N(DestroyShrinkingWorker))
-    EVT_RETURN
-    EVT_END
+    Call(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, FALSE)
+    Call(N(DestroyShrinkingWorker))
+    Return
+    End
 };
 
 EvtScript N(EVS_FocusCameraOnPlayer) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterToybox) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_EXEC_WAIT(N(EVS_ShrinkPlayer))
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
-    EVT_WAIT(1)
-    EVT_EXEC_GET_TID(N(EVS_FocusCameraOnPlayer), LVarA)
-    EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_OMO_TOYBOX_LID, SOUND_SPACE_DEFAULT)
-        EVT_CALL(MakeLerp, 0, -90, 10, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_SET(LVar2, 0)
-            EVT_SUB(LVar2, LVar0)
-            EVT_DIV(LVar2, 3)
-            EVT_CALL(RotateGroup, MODEL_box_top, LVar0, 0, 0, 1)
-            EVT_CALL(TranslateGroup, MODEL_box_top, 0, LVar2, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(PlaySoundAtPlayer, SOUND_TRANSPORTER_IN, SOUND_SPACE_DEFAULT)
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.35))
-        EVT_CALL(PlayerJump, -450, 20, -160, 32)
-    EVT_END_THREAD
-    EVT_WAIT(25)
-    EVT_IF_EQ(GF_StartedChapter4, FALSE)
-        EVT_SET(GF_StartedChapter4, TRUE)
-        EVT_CALL(FadeOutMusic, 0, 1500)
-        EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_4, TRANSITION_BEGIN_OR_END_CHAPTER)
-        EVT_WAIT(100)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GotoMap, EVT_PTR("omo_03"), omo_03_ENTRY_4)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    ExecWait(N(EVS_ShrinkPlayer))
+    Call(SetPlayerActionState, ACTION_STATE_JUMP)
+    Wait(1)
+    ExecGetTID(N(EVS_FocusCameraOnPlayer), LVarA)
+    Thread
+        Call(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_OMO_TOYBOX_LID, SOUND_SPACE_DEFAULT)
+        Call(MakeLerp, 0, -90, 10, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Set(LVar2, 0)
+            Sub(LVar2, LVar0)
+            Div(LVar2, 3)
+            Call(RotateGroup, MODEL_box_top, LVar0, 0, 0, 1)
+            Call(TranslateGroup, MODEL_box_top, 0, LVar2, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Call(PlaySoundAtPlayer, SOUND_TRANSPORTER_IN, SOUND_SPACE_DEFAULT)
+        Call(SetPlayerJumpscale, Float(0.35))
+        Call(PlayerJump, -450, 20, -160, 32)
+    EndThread
+    Wait(25)
+    IfEq(GF_StartedChapter4, FALSE)
+        Set(GF_StartedChapter4, TRUE)
+        Call(FadeOutMusic, 0, 1500)
+        Call(GotoMapSpecial, Ref("kmr_22"), kmr_22_ENTRY_4, TRANSITION_BEGIN_OR_END_CHAPTER)
+        Wait(100)
+        Return
+    EndIf
+    Call(GotoMap, Ref("omo_03"), omo_03_ENTRY_4)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitToybox) = {
-    EVT_SET(AF_ExitingToybox, TRUE)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_EXEC_WAIT(N(EVS_UnshrinkPlayer))
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
-    EVT_WAIT(1)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, -90, 0, 10, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_SET(LVar2, 0)
-            EVT_SUB(LVar2, LVar0)
-            EVT_DIV(LVar2, 3)
-            EVT_CALL(RotateGroup, MODEL_box_top, LVar0, 0, 0, 1)
-            EVT_CALL(TranslateGroup, MODEL_box_top, 0, LVar2, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_OMO_TOYBOX_LID, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_EXEC_GET_TID(N(EVS_FocusCameraOnPlayer), LVarA)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_TRANSPORTER_OUT, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
-    EVT_CALL(PlayerJump, -480, 45, -90, 25)
-    EVT_EXEC_WAIT(N(EVS_FinishUnshrinking))
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_RETURN
-    EVT_END
+    Set(AF_ExitingToybox, TRUE)
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    ExecWait(N(EVS_UnshrinkPlayer))
+    Call(SetPlayerActionState, ACTION_STATE_JUMP)
+    Wait(1)
+    Thread
+        Call(MakeLerp, -90, 0, 10, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Set(LVar2, 0)
+            Sub(LVar2, LVar0)
+            Div(LVar2, 3)
+            Call(RotateGroup, MODEL_box_top, LVar0, 0, 0, 1)
+            Call(TranslateGroup, MODEL_box_top, 0, LVar2, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_OMO_TOYBOX_LID, SOUND_SPACE_DEFAULT)
+    EndThread
+    ExecGetTID(N(EVS_FocusCameraOnPlayer), LVarA)
+    Call(PlaySoundAtPlayer, SOUND_TRANSPORTER_OUT, SOUND_SPACE_DEFAULT)
+    Call(SetPlayerJumpscale, Float(0.7))
+    Call(PlayerJump, -480, 45, -90, 25)
+    ExecWait(N(EVS_FinishUnshrinking))
+    KillThread(LVarA)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Call(SetPlayerActionState, ACTION_STATE_IDLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_BounceOffSpring) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
-    EVT_WAIT(1)
-    EVT_EXEC_GET_TID(N(EVS_FocusCameraOnPlayer), LVarA)
-    EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
-    EVT_CALL(PlayerJump, -430, 20, -45, 15)
-    EVT_SET(AF_ExitingToybox, FALSE)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_JUMP)
+    Wait(1)
+    ExecGetTID(N(EVS_FocusCameraOnPlayer), LVarA)
+    Call(SetPlayerJumpscale, Float(0.7))
+    Call(PlayerJump, -430, 20, -45, 15)
+    Set(AF_ExitingToybox, FALSE)
+    KillThread(LVarA)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Call(SetPlayerActionState, ACTION_STATE_IDLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseSpring_Toybox) = {
-    EVT_IF_EQ(AF_ExitingToybox, FALSE)
-        EVT_EXEC(N(EVS_EnterToybox))
-    EVT_ELSE
-        EVT_EXEC(N(EVS_BounceOffSpring))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(AF_ExitingToybox, FALSE)
+        Exec(N(EVS_EnterToybox))
+    Else
+        Exec(N(EVS_BounceOffSpring))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_UnlockStoreroom) = {
-    EVT_EXEC_WAIT(N(EVS_MakeStoreroom))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_MakeStoreroom))
+    Return
+    End
 };
 
 #include "world/common/todo/RemovePadlock.inc.c"
@@ -230,82 +230,82 @@ s32 N(StoreroomKeyList)[] = {
 };
 
 EvtScript N(EVS_ItemPrompt_StoreroomKey) = {
-    EVT_CALL(ShowKeyChoicePopup)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
-        EVT_CALL(CloseChoicePopup)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, -1)
-        EVT_CALL(CloseChoicePopup)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, 155, 48, -480)
-    EVT_SET(LVar0, MV_StoreroomLockEntityID)
-    EVT_CALL(N(RemovePadlock))
-    EVT_WAIT(5)
-    EVT_CALL(RemoveKeyItemAt, LVar1)
-    EVT_CALL(CloseChoicePopup)
-    EVT_UNBIND
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SpeakToPlayer, NPC_HarryT, ANIM_HarryT_Talk, ANIM_HarryT_Idle, 0, MSG_MAC_Housing_0004)
-    EVT_CALL(SetNpcFlagBits, NPC_HarryT, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_HarryT, ANIM_HarryT_Run)
-    EVT_CALL(NpcMoveTo, NPC_HarryT, 295, -460, 0)
-    EVT_CALL(NpcMoveTo, NPC_HarryT, 230, -480, 0)
-    EVT_CALL(NpcJump0, NPC_HarryT, 200, 30, -524, 0)
-    EVT_CALL(SetNpcPos, NPC_HarryT, 200, 30, -524)
-    EVT_CALL(SetNpcAnimation, NPC_HarryT, ANIM_HarryT_Idle)
-    EVT_CALL(SetNpcFlagBits, NPC_HarryT, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_HarryT, ANIM_HarryT_Talk, ANIM_HarryT_Idle, 0, MSG_MAC_Housing_0005)
-    EVT_SET(GB_StoryProgress, STORY_CH4_RETURNED_STOREROOM_KEY)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(ShowKeyChoicePopup)
+    IfEq(LVar0, 0)
+        Call(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
+        Call(CloseChoicePopup)
+        Return
+    EndIf
+    IfEq(LVar0, -1)
+        Call(CloseChoicePopup)
+        Return
+    EndIf
+    Call(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, 155, 48, -480)
+    Set(LVar0, MV_StoreroomLockEntityID)
+    Call(N(RemovePadlock))
+    Wait(5)
+    Call(RemoveKeyItemAt, LVar1)
+    Call(CloseChoicePopup)
+    Unbind
+    Call(DisablePlayerInput, TRUE)
+    Call(SpeakToPlayer, NPC_HarryT, ANIM_HarryT_Talk, ANIM_HarryT_Idle, 0, MSG_MAC_Housing_0004)
+    Call(SetNpcFlagBits, NPC_HarryT, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcAnimation, NPC_HarryT, ANIM_HarryT_Run)
+    Call(NpcMoveTo, NPC_HarryT, 295, -460, 0)
+    Call(NpcMoveTo, NPC_HarryT, 230, -480, 0)
+    Call(NpcJump0, NPC_HarryT, 200, 30, -524, 0)
+    Call(SetNpcPos, NPC_HarryT, 200, 30, -524)
+    Call(SetNpcAnimation, NPC_HarryT, ANIM_HarryT_Idle)
+    Call(SetNpcFlagBits, NPC_HarryT, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SpeakToPlayer, NPC_HarryT, ANIM_HarryT_Talk, ANIM_HarryT_Idle, 0, MSG_MAC_Housing_0005)
+    Set(GB_StoryProgress, STORY_CH4_RETURNED_STOREROOM_KEY)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_ForceStoreroomUnlock) = {
-    EVT_SET(LVar0, MV_StoreroomLockEntityID)
-    EVT_CALL(N(RemovePadlock))
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, MV_StoreroomLockEntityID)
+    Call(N(RemovePadlock))
+    Return
+    End
 };
 
 EvtScript N(EVS_OnInspect_StreetSign) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0173, 160, 40)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(ShowMessageAtScreenPos, MSG_Menus_0173, 160, 40)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH4_RETURNED_STOREROOM_KEY)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), 155, 48, -480, 90, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_PTR(N(EVS_UnlockStoreroom)))
-        EVT_SET(MV_StoreroomLockEntityID, LVar0)
-        EVT_CALL(SetEntityCullMode, 3)
-        EVT_BIND_PADLOCK(EVT_PTR(N(EVS_ItemPrompt_StoreroomKey)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), EVT_PTR(N(StoreroomKeyList)), 0, 1)
-    EVT_END_IF
-    EVT_CALL(MakeItemEntity, ITEM_VIS_GROUP(ITEM_TOY_TRAIN, VIS_GROUP_2), 50, 40, -430, ITEM_SPAWN_MODE_KEY, GF_MAC04_Item_ToyTrain)
-    EVT_THREAD
-        EVT_IF_LT(GB_StoryProgress, STORY_CH4_GOT_TOY_TRAIN)
-            EVT_LOOP(0)
-                EVT_IF_NE(GF_MAC04_Item_ToyTrain, FALSE)
-                    EVT_SET(GB_StoryProgress, STORY_CH4_GOT_TOY_TRAIN)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-                EVT_WAIT(1)
-            EVT_END_LOOP
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(MakeItemEntity, ITEM_VIS_GROUP(ITEM_SNOWMAN_DOLL, VIS_GROUP_2), 50, 40, -310, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_MAC04_Item_SnowmanDoll)
-    EVT_CALL(MakeItemEntity, ITEM_VIS_GROUP(ITEM_VOLT_SHROOM, VIS_GROUP_2), 50, 40, -370, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_MAC04_Item_VoltShroom)
-    EVT_CALL(MakeItemEntity, ITEM_VIS_GROUP(ITEM_DIZZY_DIAL, VIS_GROUP_2), 50, 40, -490, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_MAC04_Item_DizzyDial)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), -480, 20, -90, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_UseSpring_Toybox)))
-    EVT_CALL(SetEntityCullMode, 2)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnInspect_StreetSign)), TRIGGER_WALL_PRESS_A, COLLIDER_sign, 1, 0)
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH4_RETURNED_STOREROOM_KEY)
+        Call(MakeEntity, Ref(Entity_Padlock), 155, 48, -480, 90, MAKE_ENTITY_END)
+        Call(AssignScript, Ref(N(EVS_UnlockStoreroom)))
+        Set(MV_StoreroomLockEntityID, LVar0)
+        Call(SetEntityCullMode, 3)
+        BindPadlock(Ref(N(EVS_ItemPrompt_StoreroomKey)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), Ref(N(StoreroomKeyList)), 0, 1)
+    EndIf
+    Call(MakeItemEntity, ITEM_VIS_GROUP(ITEM_TOY_TRAIN, VIS_GROUP_2), 50, 40, -430, ITEM_SPAWN_MODE_KEY, GF_MAC04_Item_ToyTrain)
+    Thread
+        IfLt(GB_StoryProgress, STORY_CH4_GOT_TOY_TRAIN)
+            Loop(0)
+                IfNe(GF_MAC04_Item_ToyTrain, FALSE)
+                    Set(GB_StoryProgress, STORY_CH4_GOT_TOY_TRAIN)
+                    BreakLoop
+                EndIf
+                Wait(1)
+            EndLoop
+        EndIf
+    EndThread
+    Call(MakeItemEntity, ITEM_VIS_GROUP(ITEM_SNOWMAN_DOLL, VIS_GROUP_2), 50, 40, -310, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_MAC04_Item_SnowmanDoll)
+    Call(MakeItemEntity, ITEM_VIS_GROUP(ITEM_VOLT_SHROOM, VIS_GROUP_2), 50, 40, -370, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_MAC04_Item_VoltShroom)
+    Call(MakeItemEntity, ITEM_VIS_GROUP(ITEM_DIZZY_DIAL, VIS_GROUP_2), 50, 40, -490, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_MAC04_Item_DizzyDial)
+    Call(MakeEntity, Ref(Entity_ScriptSpring), -480, 20, -90, 0, MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(EVS_UseSpring_Toybox)))
+    Call(SetEntityCullMode, 2)
+    BindTrigger(Ref(N(EVS_OnInspect_StreetSign)), TRIGGER_WALL_PRESS_A, COLLIDER_sign, 1, 0)
+    Return
+    End
 };

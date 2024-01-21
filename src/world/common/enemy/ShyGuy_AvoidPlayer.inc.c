@@ -16,9 +16,9 @@ MobileAISettings N(AISettings_ShyGuy_AvoidPlayer) = {
 };
 
 EvtScript N(EVS_NpcAI_ShyGuy_AvoidPlayer) = {
-    EVT_CALL(N(AvoidPlayerAI_Main), EVT_PTR(N(AISettings_ShyGuy_AvoidPlayer)))
-    EVT_RETURN
-    EVT_END
+    Call(N(AvoidPlayerAI_Main), Ref(N(AISettings_ShyGuy_AvoidPlayer)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_ShyGuy_AvoidPlayer) = {

@@ -11,9 +11,9 @@ GuardAISettings N(AISettings_Kammy_Guard) = {
 };
 
 EvtScript N(EVS_NpcAI_Kammy_Guard) = {
-    EVT_CALL(N(GuardAI_Main), EVT_PTR(N(AISettings_Kammy_Guard)))
-    EVT_RETURN
-    EVT_END
+    Call(N(GuardAI_Main), Ref(N(AISettings_Kammy_Guard)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Kammy_Guard) = {

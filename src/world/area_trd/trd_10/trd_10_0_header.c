@@ -15,15 +15,15 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(EVS_SetupMusic) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH1_DEFEATED_KOOPA_BROS)
-            EVT_CALL(SetMusicTrack, 0, SONG_KOOPA_BROS_THEME, 1, 8)
-        EVT_CASE_EQ(STORY_CH1_DEFEATED_KOOPA_BROS)
-            EVT_CALL(FadeOutMusic, 0, 500)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, 8)
-    EVT_END_SWITCH
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_METAL)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH1_DEFEATED_KOOPA_BROS)
+            Call(SetMusicTrack, 0, SONG_KOOPA_BROS_THEME, 1, 8)
+        CaseEq(STORY_CH1_DEFEATED_KOOPA_BROS)
+            Call(FadeOutMusic, 0, 500)
+        CaseDefault
+            Call(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, 8)
+    EndSwitch
+    Call(UseDoorSounds, DOOR_SOUNDS_METAL)
+    Return
+    End
 };

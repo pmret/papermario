@@ -148,10 +148,10 @@ void N(test_reflection_worker_partner)(void) {
 }
 
 EvtScript N(EVS_SetupReflections) = {
-    EVT_MALLOC_ARRAY(16, LVarA)
-    EVT_CALL(N(EnableWallReflectionTest))
-    EVT_CALL(N(EnableFloorReflectionTest))
-    EVT_CALL(N(PartnerReflectTest))
-    EVT_RETURN
-    EVT_END
+    MallocArray(16, LVarA)
+    Call(N(EnableWallReflectionTest))
+    Call(N(EnableFloorReflectionTest))
+    Call(N(PartnerReflectTest))
+    Return
+    End
 };

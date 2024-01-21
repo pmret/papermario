@@ -284,245 +284,245 @@ s32 N(BowserModels)[] = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_FakeBowser_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_FakeBowser_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_FakeBowser_HandleEvent)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_FakeBowser_HandlePhase)))
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_None)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_BowserTaunts, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, 0)
-    EVT_SET(ArrayVar(0), ANIM_BEGIN_IDLE)
-    EVT_CALL(SetActorPos, ACTOR_SELF, 96, 0, 0)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(HPBarToHome, ACTOR_SELF)
-    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_TARGET_NO_DAMAGE, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_FakeBowser_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_FakeBowser_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_FakeBowser_HandleEvent)))
+    Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_FakeBowser_HandlePhase)))
+    UseArray(FakeBowserAnimState)
+    Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_None)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Boss_BowserTaunts, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, 0)
+    Set(ArrayVar(0), ANIM_BEGIN_IDLE)
+    Call(SetActorPos, ACTOR_SELF, 96, 0, 0)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(HPBarToHome, ACTOR_SELF)
+    Call(SetPartTargetFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_TARGET_NO_DAMAGE, TRUE)
+    Return
+    End
 };
 
 // -------------------------------------------------------------------------
 // FAKE BOWSER BATTLE
 
 s32 N(IdleHeadAngles)[] = {
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(1.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(2.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(2.5),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(3.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(4.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(4.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(4.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(4.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(4.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(4.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(4.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(4.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(3.5),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(3.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(2.5),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(3.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(2.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(1.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.5),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
+    Float(0.0), Float(0.0), Float(0.0),
+    Float(0.0), Float(0.0), Float(0.0),
+    Float(0.0), Float(0.0), Float(1.0),
+    Float(0.0), Float(0.0), Float(2.0),
+    Float(0.0), Float(0.0), Float(2.5),
+    Float(0.0), Float(0.0), Float(3.0),
+    Float(0.0), Float(0.0), Float(4.0),
+    Float(0.0), Float(0.0), Float(4.0),
+    Float(0.0), Float(0.0), Float(4.0),
+    Float(0.0), Float(0.0), Float(4.0),
+    Float(0.0), Float(0.0), Float(4.0),
+    Float(0.0), Float(0.0), Float(4.0),
+    Float(0.0), Float(0.0), Float(4.0),
+    Float(0.0), Float(0.0), Float(4.0),
+    Float(0.0), Float(0.0), Float(3.5),
+    Float(0.0), Float(0.0), Float(3.0),
+    Float(0.0), Float(0.0), Float(2.5),
+    Float(0.0), Float(0.0), Float(3.0),
+    Float(0.0), Float(0.0), Float(2.0),
+    Float(0.0), Float(0.0), Float(1.0),
+    Float(0.0), Float(0.0), Float(0.5),
+    Float(0.0), Float(0.0), Float(0.0),
+    Float(0.0), Float(0.0), Float(0.0),
     255,            255,            255
 };
 
 
 EvtScript N(EVS_AnimBowser_IdleHead) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_USE_FBUF(EVT_PTR(N(IdleHeadAngles)))
-    EVT_LABEL(0)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_IF_NE(LVar0, ANIM_DOING_IDLE)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_FBUF_READ3(LVar0, LVar1, LVar2)
-        EVT_IF_EQ(LVar0, 255)
-            EVT_USE_FBUF(EVT_PTR(N(IdleHeadAngles)))
-            EVT_FBUF_READ3(LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    UseFBuf(Ref(N(IdleHeadAngles)))
+    Label(0)
+        Set(LVar0, ArrayVar(0))
+        IfNe(LVar0, ANIM_DOING_IDLE)
+            Return
+        EndIf
+        FBufRead3(LVar0, LVar1, LVar2)
+        IfEq(LVar0, 255)
+            UseFBuf(Ref(N(IdleHeadAngles)))
+            FBufRead3(LVar0, LVar1, LVar2)
+        EndIf
+        Call(SetPartRotation, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 s32 N(MoveHeadAngles)[] = {
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(2.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(5.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(8.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(8.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(8.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(8.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(7.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(5.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(4.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(1.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
+    Float(0.0), Float(0.0), Float(0.0),
+    Float(0.0), Float(0.0), Float(2.0),
+    Float(0.0), Float(0.0), Float(5.0),
+    Float(0.0), Float(0.0), Float(8.0),
+    Float(0.0), Float(0.0), Float(8.0),
+    Float(0.0), Float(0.0), Float(8.0),
+    Float(0.0), Float(0.0), Float(8.0),
+    Float(0.0), Float(0.0), Float(7.0),
+    Float(0.0), Float(0.0), Float(5.0),
+    Float(0.0), Float(0.0), Float(4.0),
+    Float(0.0), Float(0.0), Float(1.0),
+    Float(0.0), Float(0.0), Float(0.0),
     255,            255,            255
 };
 
 EvtScript N(EVS_AnimBowser_MoveHead) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_USE_FBUF(EVT_PTR(N(MoveHeadAngles)))
-    EVT_LABEL(0)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_IF_NE(LVar0, ANIM_DOING_MOVE)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_FBUF_READ3(LVar0, LVar1, LVar2)
-        EVT_IF_EQ(LVar0, 255)
-            EVT_USE_FBUF(EVT_PTR(N(MoveHeadAngles)))
-            EVT_FBUF_READ3(LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    UseFBuf(Ref(N(MoveHeadAngles)))
+    Label(0)
+        Set(LVar0, ArrayVar(0))
+        IfNe(LVar0, ANIM_DOING_MOVE)
+            Return
+        EndIf
+        FBufRead3(LVar0, LVar1, LVar2)
+        IfEq(LVar0, 255)
+            UseFBuf(Ref(N(MoveHeadAngles)))
+            FBufRead3(LVar0, LVar1, LVar2)
+        EndIf
+        Call(SetPartRotation, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 s32 N(HurtHeadAngles)[] = {
-    EVT_FLOAT(0.0),  EVT_FLOAT(10.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(20.0), EVT_FLOAT(0.0),  EVT_FLOAT(5.0),
-    EVT_FLOAT(0.0),  EVT_FLOAT(0.0),  EVT_FLOAT(0.0),
-    EVT_FLOAT(5.0),  EVT_FLOAT(20.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(10.0), EVT_FLOAT(0.0),  EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0),  EVT_FLOAT(30.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0),  EVT_FLOAT(5.0),  EVT_FLOAT(2.0),
-    EVT_FLOAT(30.0), EVT_FLOAT(0.0),  EVT_FLOAT(10.0),
-    EVT_FLOAT(30.0), EVT_FLOAT(10.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0),  EVT_FLOAT(40.0), EVT_FLOAT(2.0),
-    EVT_FLOAT(0.0),  EVT_FLOAT(0.0),  EVT_FLOAT(5.0),
-    EVT_FLOAT(5.0),  EVT_FLOAT(0.0),  EVT_FLOAT(8.0),
-    EVT_FLOAT(10.0), EVT_FLOAT(0.0),  EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0),  EVT_FLOAT(30.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(20.0), EVT_FLOAT(0.0),  EVT_FLOAT(5.0),
-    EVT_FLOAT(0.0),  EVT_FLOAT(0.0),  EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0),  EVT_FLOAT(5.0),  EVT_FLOAT(0.0),
-    EVT_FLOAT(10.0), EVT_FLOAT(0.0),  EVT_FLOAT(8.0),
-    EVT_FLOAT(0.0),  EVT_FLOAT(20.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(5.0),  EVT_FLOAT(0.0),  EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0),  EVT_FLOAT(5.0),  EVT_FLOAT(5.0),
-    EVT_FLOAT(30.0), EVT_FLOAT(0.0),  EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0),  EVT_FLOAT(0.0),  EVT_FLOAT(0.0),
+    Float(0.0),  Float(10.0), Float(0.0),
+    Float(20.0), Float(0.0),  Float(5.0),
+    Float(0.0),  Float(0.0),  Float(0.0),
+    Float(5.0),  Float(20.0), Float(0.0),
+    Float(10.0), Float(0.0),  Float(0.0),
+    Float(0.0),  Float(30.0), Float(0.0),
+    Float(0.0),  Float(5.0),  Float(2.0),
+    Float(30.0), Float(0.0),  Float(10.0),
+    Float(30.0), Float(10.0), Float(0.0),
+    Float(0.0),  Float(40.0), Float(2.0),
+    Float(0.0),  Float(0.0),  Float(5.0),
+    Float(5.0),  Float(0.0),  Float(8.0),
+    Float(10.0), Float(0.0),  Float(0.0),
+    Float(0.0),  Float(30.0), Float(0.0),
+    Float(20.0), Float(0.0),  Float(5.0),
+    Float(0.0),  Float(0.0),  Float(0.0),
+    Float(0.0),  Float(5.0),  Float(0.0),
+    Float(10.0), Float(0.0),  Float(8.0),
+    Float(0.0),  Float(20.0), Float(0.0),
+    Float(5.0),  Float(0.0),  Float(0.0),
+    Float(0.0),  Float(5.0),  Float(5.0),
+    Float(30.0), Float(0.0),  Float(0.0),
+    Float(0.0),  Float(0.0),  Float(0.0),
     255,             255,             255
 };
 
 EvtScript N(EVS_AnimBowser_HurtHead) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_USE_FBUF(EVT_PTR(N(HurtHeadAngles)))
-    EVT_LABEL(0)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_IF_NE(LVar0, ANIM_DOING_HURT)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_FBUF_READ3(LVar0, LVar1, LVar2)
-        EVT_IF_EQ(LVar0, 255)
-            EVT_USE_FBUF(EVT_PTR(N(HurtHeadAngles)))
-            EVT_FBUF_READ3(LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_CALL(RandInt, 100, LVarA)
-        EVT_IF_LT(LVarA, 50)
-            EVT_SETF(LVarA, EVT_FLOAT(0.0))
-            EVT_SUBF(LVarA, LVar0)
-            EVT_SETF(LVar0, LVarA)
-            EVT_SETF(LVarA, EVT_FLOAT(0.0))
-            EVT_SUBF(LVarA, LVar1)
-            EVT_SETF(LVar1, LVarA)
-        EVT_END_IF
-        EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    UseFBuf(Ref(N(HurtHeadAngles)))
+    Label(0)
+        Set(LVar0, ArrayVar(0))
+        IfNe(LVar0, ANIM_DOING_HURT)
+            Return
+        EndIf
+        FBufRead3(LVar0, LVar1, LVar2)
+        IfEq(LVar0, 255)
+            UseFBuf(Ref(N(HurtHeadAngles)))
+            FBufRead3(LVar0, LVar1, LVar2)
+        EndIf
+        Call(RandInt, 100, LVarA)
+        IfLt(LVarA, 50)
+            SetF(LVarA, Float(0.0))
+            SubF(LVarA, LVar0)
+            SetF(LVar0, LVarA)
+            SetF(LVarA, Float(0.0))
+            SubF(LVarA, LVar1)
+            SetF(LVar1, LVarA)
+        EndIf
+        Call(SetPartRotation, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_AnimBowser_DeathMain) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_CALL(N(StartRumbleWithParams), 256, 30)
-    EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 20, EVT_FLOAT(3.0))
-    EVT_END_THREAD
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_HEAD, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
-    EVT_CALL(GetPartPos, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, PRT_HEAD, 0, -60, 0)
-    EVT_SET(LVar1, 60)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVar1, 0)
-        EVT_SET(LVar2, 0)
-        EVT_LOOP(60)
-            EVT_ADD(LVar0, 20)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_SUB(LVar0, 60)
-    EVT_SET(LVar1, -200)
-    EVT_ADD(LVar2, 100)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_HEAD, EVT_FLOAT(0.5))
-    EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2, 60, TRUE)
-    EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtModel, MODEL_k1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
-    EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_CALL(N(StartRumbleWithParams), 100, 20)
-    EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtModel, MODEL_u1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
-    EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.5))
-    EVT_END_THREAD
-    EVT_CALL(N(StartRumbleWithParams), 150, 20)
-    EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtModel, MODEL_p1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
-    EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_CALL(N(StartRumbleWithParams), 100, 20)
-    EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtModel, MODEL_d1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
-    EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(0.7))
-    EVT_END_THREAD
-    EVT_CALL(N(StartRumbleWithParams), 70, 20)
-    EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtModel, MODEL_s1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
-    EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_CALL(N(StartRumbleWithParams), 100, 20)
-    EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtModel, MODEL_km1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
-    EVT_CALL(N(StartRumbleWithParams), 60, 20)
-    EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(0.6))
-    EVT_END_THREAD
-    EVT_WAIT(20)
-    EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(0.3))
-    EVT_END_THREAD
-    EVT_CALL(N(StartRumbleWithParams), 30, 20)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    Call(N(StartRumbleWithParams), 256, 30)
+    Thread
+        SetGroup(EVT_GROUP_00)
+        Call(ShakeCam, CAM_BATTLE, 0, 20, Float(3.0))
+    EndThread
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_HEAD, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
+    Call(GetPartPos, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
+    Call(SetPartDispOffset, ACTOR_SELF, PRT_HEAD, 0, -60, 0)
+    Set(LVar1, 60)
+    Call(SetPartPos, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
+    Thread
+        Set(LVar0, 0)
+        Set(LVar1, 0)
+        Set(LVar2, 0)
+        Loop(60)
+            Add(LVar0, 20)
+            Call(SetPartRotation, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Sub(LVar0, 60)
+    Set(LVar1, -200)
+    Add(LVar2, 100)
+    Call(SetPartJumpGravity, ACTOR_SELF, PRT_HEAD, Float(0.5))
+    Call(JumpPartTo, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2, 60, TRUE)
+    Wait(30)
+    Call(PlaySoundAtModel, MODEL_k1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
+    Thread
+        SetGroup(EVT_GROUP_00)
+        Call(ShakeCam, CAM_BATTLE, 0, 5, Float(1.0))
+    EndThread
+    Call(N(StartRumbleWithParams), 100, 20)
+    Wait(20)
+    Call(PlaySoundAtModel, MODEL_u1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
+    Thread
+        SetGroup(EVT_GROUP_00)
+        Call(ShakeCam, CAM_BATTLE, 0, 10, Float(1.5))
+    EndThread
+    Call(N(StartRumbleWithParams), 150, 20)
+    Wait(30)
+    Call(PlaySoundAtModel, MODEL_p1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
+    Thread
+        SetGroup(EVT_GROUP_00)
+        Call(ShakeCam, CAM_BATTLE, 0, 10, Float(1.0))
+    EndThread
+    Call(N(StartRumbleWithParams), 100, 20)
+    Wait(30)
+    Call(PlaySoundAtModel, MODEL_d1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
+    Thread
+        SetGroup(EVT_GROUP_00)
+        Call(ShakeCam, CAM_BATTLE, 0, 5, Float(0.7))
+    EndThread
+    Call(N(StartRumbleWithParams), 70, 20)
+    Wait(20)
+    Call(PlaySoundAtModel, MODEL_s1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
+    Thread
+        SetGroup(EVT_GROUP_00)
+        Call(ShakeCam, CAM_BATTLE, 0, 10, Float(1.0))
+    EndThread
+    Call(N(StartRumbleWithParams), 100, 20)
+    Wait(20)
+    Call(PlaySoundAtModel, MODEL_km1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
+    Call(N(StartRumbleWithParams), 60, 20)
+    Thread
+        SetGroup(EVT_GROUP_00)
+        Call(ShakeCam, CAM_BATTLE, 0, 5, Float(0.6))
+    EndThread
+    Wait(20)
+    Thread
+        SetGroup(EVT_GROUP_00)
+        Call(ShakeCam, CAM_BATTLE, 0, 5, Float(0.3))
+    EndThread
+    Call(N(StartRumbleWithParams), 30, 20)
+    Return
+    End
 };
 
 s32 N(IdleBodyOffsets)[] = {
@@ -553,23 +553,23 @@ s32 N(IdleBodyOffsets)[] = {
 };
 
 EvtScript N(EVS_AnimBowser_IdleBody) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_USE_BUF(EVT_PTR(N(IdleBodyOffsets)))
-    EVT_LABEL(0)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_IF_NE(LVar0, ANIM_DOING_IDLE)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_IF_EQ(LVar0, 255)
-            EVT_USE_BUF(EVT_PTR(N(IdleBodyOffsets)))
-            EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_CALL(SetActorDispOffset, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    UseBuf(Ref(N(IdleBodyOffsets)))
+    Label(0)
+        Set(LVar0, ArrayVar(0))
+        IfNe(LVar0, ANIM_DOING_IDLE)
+            Return
+        EndIf
+        BufRead3(LVar0, LVar1, LVar2)
+        IfEq(LVar0, 255)
+            UseBuf(Ref(N(IdleBodyOffsets)))
+            BufRead3(LVar0, LVar1, LVar2)
+        EndIf
+        Call(SetActorDispOffset, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 s32 N(MoveBodyOffsets)[] = {
@@ -588,23 +588,23 @@ s32 N(MoveBodyOffsets)[] = {
 };
 
 EvtScript N(EVS_AnimBowser_MoveBody) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_USE_BUF(EVT_PTR(N(MoveBodyOffsets)))
-    EVT_LABEL(0)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_IF_NE(LVar0, ANIM_DOING_MOVE)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_IF_EQ(LVar0, 255)
-            EVT_USE_BUF(EVT_PTR(N(MoveBodyOffsets)))
-            EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_CALL(SetActorDispOffset, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    UseBuf(Ref(N(MoveBodyOffsets)))
+    Label(0)
+        Set(LVar0, ArrayVar(0))
+        IfNe(LVar0, ANIM_DOING_MOVE)
+            Return
+        EndIf
+        BufRead3(LVar0, LVar1, LVar2)
+        IfEq(LVar0, 255)
+            UseBuf(Ref(N(MoveBodyOffsets)))
+            BufRead3(LVar0, LVar1, LVar2)
+        EndIf
+        Call(SetActorDispOffset, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 s32 N(StrikeBodyOffsets)[] = {
@@ -635,26 +635,26 @@ s32 N(StrikeBodyOffsets)[] = {
 };
 
 EvtScript N(EVS_AnimBowser_StrikeBody) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_USE_BUF(EVT_PTR(N(StrikeBodyOffsets)))
-    EVT_LABEL(0)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(ANIM_DOING_STRIKE)
-            EVT_CASE_EQ(ANIM_DOING_BLOCKED)
-            EVT_CASE_DEFAULT
-                EVT_RETURN
-        EVT_END_SWITCH
-        EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_IF_EQ(LVar0, 255)
-            EVT_USE_BUF(EVT_PTR(N(StrikeBodyOffsets)))
-            EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_CALL(SetActorDispOffset, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    UseBuf(Ref(N(StrikeBodyOffsets)))
+    Label(0)
+        Set(LVar0, ArrayVar(0))
+        Switch(LVar0)
+            CaseEq(ANIM_DOING_STRIKE)
+            CaseEq(ANIM_DOING_BLOCKED)
+            CaseDefault
+                Return
+        EndSwitch
+        BufRead3(LVar0, LVar1, LVar2)
+        IfEq(LVar0, 255)
+            UseBuf(Ref(N(StrikeBodyOffsets)))
+            BufRead3(LVar0, LVar1, LVar2)
+        EndIf
+        Call(SetActorDispOffset, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 s32 N(HurtBodyOffsets)[] = {
@@ -685,76 +685,76 @@ s32 N(HurtBodyOffsets)[] = {
 };
 
 EvtScript N(EVS_AnimBowser_HurtBody) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_USE_BUF(EVT_PTR(N(HurtBodyOffsets)))
-    EVT_LABEL(0)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_IF_NE(LVar0, ANIM_DOING_HURT)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_IF_EQ(LVar0, 255)
-            EVT_USE_BUF(EVT_PTR(N(HurtBodyOffsets)))
-            EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_CALL(SetActorDispOffset, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    UseBuf(Ref(N(HurtBodyOffsets)))
+    Label(0)
+        Set(LVar0, ArrayVar(0))
+        IfNe(LVar0, ANIM_DOING_HURT)
+            Return
+        EndIf
+        BufRead3(LVar0, LVar1, LVar2)
+        IfEq(LVar0, 255)
+            UseBuf(Ref(N(HurtBodyOffsets)))
+            BufRead3(LVar0, LVar1, LVar2)
+        EndIf
+        Call(SetActorDispOffset, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_AnimBowser_DeathBody) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
-    EVT_CALL(GetPartPos, ACTOR_SELF, PRT_BODY, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, PRT_BODY, 0, -30, 0)
-    EVT_SET(LVar1, 30)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_BODY, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVar1, 0)
-        EVT_SET(LVar2, 0)
-        EVT_LOOP(80)
-            EVT_ADD(LVar0, -20)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_BODY, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_SUB(LVar0, 150)
-    EVT_SET(LVar1, -200)
-    EVT_SUB(LVar2, 200)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_BODY, EVT_FLOAT(0.3))
-    EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_BODY, LVar0, LVar1, LVar2, 80, TRUE)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_BODY, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
+    Call(GetPartPos, ACTOR_SELF, PRT_BODY, LVar0, LVar1, LVar2)
+    Call(SetPartDispOffset, ACTOR_SELF, PRT_BODY, 0, -30, 0)
+    Set(LVar1, 30)
+    Call(SetPartPos, ACTOR_SELF, PRT_BODY, LVar0, LVar1, LVar2)
+    Thread
+        Set(LVar0, 0)
+        Set(LVar1, 0)
+        Set(LVar2, 0)
+        Loop(80)
+            Add(LVar0, -20)
+            Call(SetPartRotation, ACTOR_SELF, PRT_BODY, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Sub(LVar0, 150)
+    Set(LVar1, -200)
+    Sub(LVar2, 200)
+    Call(SetPartJumpGravity, ACTOR_SELF, PRT_BODY, Float(0.3))
+    Call(JumpPartTo, ACTOR_SELF, PRT_BODY, LVar0, LVar1, LVar2, 80, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_AnimBowser_DeathShell) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_SHELL, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
-    EVT_CALL(GetPartPos, ACTOR_SELF, PRT_SHELL, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, PRT_SHELL, 0, -24, 0)
-    EVT_SET(LVar1, 24)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_SHELL, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVar1, 0)
-        EVT_SET(LVar2, 0)
-        EVT_LOOP(60)
-            EVT_ADD(LVar0, 4)
-            EVT_ADD(LVar1, -1)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_SHELL, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_ADD(LVar0, 30)
-    EVT_SET(LVar1, -200)
-    EVT_ADD(LVar2, 150)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_SHELL, EVT_FLOAT(0.5))
-    EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_SHELL, LVar0, LVar1, LVar2, 60, TRUE)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_SHELL, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
+    Call(GetPartPos, ACTOR_SELF, PRT_SHELL, LVar0, LVar1, LVar2)
+    Call(SetPartDispOffset, ACTOR_SELF, PRT_SHELL, 0, -24, 0)
+    Set(LVar1, 24)
+    Call(SetPartPos, ACTOR_SELF, PRT_SHELL, LVar0, LVar1, LVar2)
+    Thread
+        Set(LVar0, 0)
+        Set(LVar1, 0)
+        Set(LVar2, 0)
+        Loop(60)
+            Add(LVar0, 4)
+            Add(LVar1, -1)
+            Call(SetPartRotation, ACTOR_SELF, PRT_SHELL, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Add(LVar0, 30)
+    Set(LVar1, -200)
+    Add(LVar2, 150)
+    Call(SetPartJumpGravity, ACTOR_SELF, PRT_SHELL, Float(0.5))
+    Call(JumpPartTo, ACTOR_SELF, PRT_SHELL, LVar0, LVar1, LVar2, 60, TRUE)
+    Return
+    End
 };
 
 // opposite of IdleBodyOffsets
@@ -786,23 +786,23 @@ s32 N(IdleFeetOffsets)[] = {
 };
 
 EvtScript N(EVS_AnimBowser_IdleFeet) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_USE_BUF(EVT_PTR(N(IdleFeetOffsets)))
-    EVT_LABEL(0)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_IF_NE(LVar0, ANIM_DOING_IDLE)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_IF_EQ(LVar0, 255)
-            EVT_USE_BUF(EVT_PTR(N(IdleFeetOffsets)))
-            EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_CALL(SetPartPos, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    UseBuf(Ref(N(IdleFeetOffsets)))
+    Label(0)
+        Set(LVar0, ArrayVar(0))
+        IfNe(LVar0, ANIM_DOING_IDLE)
+            Return
+        EndIf
+        BufRead3(LVar0, LVar1, LVar2)
+        IfEq(LVar0, 255)
+            UseBuf(Ref(N(IdleFeetOffsets)))
+            BufRead3(LVar0, LVar1, LVar2)
+        EndIf
+        Call(SetPartPos, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 // opposite of StrikeBodyOffsets
@@ -834,26 +834,26 @@ s32 N(StrikeFeetOffsets)[] = {
 };
 
 EvtScript N(EVS_AnimBowser_StrikeFeet) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_USE_BUF(EVT_PTR(N(StrikeFeetOffsets)))
-    EVT_LABEL(0)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(ANIM_DOING_STRIKE)
-            EVT_CASE_EQ(ANIM_DOING_BLOCKED)
-            EVT_CASE_DEFAULT
-                EVT_RETURN
-        EVT_END_SWITCH
-        EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_IF_EQ(LVar0, 255)
-            EVT_USE_BUF(EVT_PTR(N(StrikeFeetOffsets)))
-            EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_CALL(SetPartPos, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    UseBuf(Ref(N(StrikeFeetOffsets)))
+    Label(0)
+        Set(LVar0, ArrayVar(0))
+        Switch(LVar0)
+            CaseEq(ANIM_DOING_STRIKE)
+            CaseEq(ANIM_DOING_BLOCKED)
+            CaseDefault
+                Return
+        EndSwitch
+        BufRead3(LVar0, LVar1, LVar2)
+        IfEq(LVar0, 255)
+            UseBuf(Ref(N(StrikeFeetOffsets)))
+            BufRead3(LVar0, LVar1, LVar2)
+        EndIf
+        Call(SetPartPos, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 // opposite of MoveBodyOffsets
@@ -874,753 +874,753 @@ s32 N(MoveFeetOffsets)[] = {
 };
 
 EvtScript N(EVS_AnimBowser_MoveFeet) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_USE_BUF(EVT_PTR(N(MoveFeetOffsets)))
-    EVT_LABEL(0)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_IF_NE(LVar0, ANIM_DOING_MOVE)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_IF_EQ(LVar0, 255)
-            EVT_USE_BUF(EVT_PTR(N(MoveFeetOffsets)))
-            EVT_BUF_READ3(LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_CALL(SetPartPos, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    UseBuf(Ref(N(MoveFeetOffsets)))
+    Label(0)
+        Set(LVar0, ArrayVar(0))
+        IfNe(LVar0, ANIM_DOING_MOVE)
+            Return
+        EndIf
+        BufRead3(LVar0, LVar1, LVar2)
+        IfEq(LVar0, 255)
+            UseBuf(Ref(N(MoveFeetOffsets)))
+            BufRead3(LVar0, LVar1, LVar2)
+        EndIf
+        Call(SetPartPos, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_AnimBowser_DeathFeet) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FEET, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
-    EVT_CALL(GetPartPos, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVar1, 0)
-        EVT_SET(LVar2, 0)
-        EVT_LOOP(80)
-            EVT_ADD(LVar0, -10)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_SUB(LVar0, 50)
-    EVT_SET(LVar1, -200)
-    EVT_SUB(LVar2, 200)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_FEET, EVT_FLOAT(0.3))
-    EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2, 80, TRUE)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_FEET, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
+    Call(GetPartPos, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
+    Call(SetPartPos, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
+    Thread
+        Set(LVar0, 0)
+        Set(LVar1, 0)
+        Set(LVar2, 0)
+        Loop(80)
+            Add(LVar0, -10)
+            Call(SetPartRotation, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Sub(LVar0, 50)
+    Set(LVar1, -200)
+    Sub(LVar2, 200)
+    Call(SetPartJumpGravity, ACTOR_SELF, PRT_FEET, Float(0.3))
+    Call(JumpPartTo, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2, 80, TRUE)
+    Return
+    End
 };
 
 s32 N(StrikeArmAngles)[] = {
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(5.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(10.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(15.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(20.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(25.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(30.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(35.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(40.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(45.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(45.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(48.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(45.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(48.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(45.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(48.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(45.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(48.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(45.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(48.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(45.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(48.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(45.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(35.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(25.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(15.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(5.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
+    Float(0.0), Float(0.0), Float(5.0),
+    Float(0.0), Float(0.0), Float(10.0),
+    Float(0.0), Float(0.0), Float(15.0),
+    Float(0.0), Float(0.0), Float(20.0),
+    Float(0.0), Float(0.0), Float(25.0),
+    Float(0.0), Float(0.0), Float(30.0),
+    Float(0.0), Float(0.0), Float(35.0),
+    Float(0.0), Float(0.0), Float(40.0),
+    Float(0.0), Float(0.0), Float(45.0),
+    Float(0.0), Float(0.0), Float(45.0),
+    Float(0.0), Float(0.0), Float(48.0),
+    Float(0.0), Float(0.0), Float(45.0),
+    Float(0.0), Float(0.0), Float(48.0),
+    Float(0.0), Float(0.0), Float(45.0),
+    Float(0.0), Float(0.0), Float(48.0),
+    Float(0.0), Float(0.0), Float(45.0),
+    Float(0.0), Float(0.0), Float(48.0),
+    Float(0.0), Float(0.0), Float(45.0),
+    Float(0.0), Float(0.0), Float(48.0),
+    Float(0.0), Float(0.0), Float(45.0),
+    Float(0.0), Float(0.0), Float(48.0),
+    Float(0.0), Float(0.0), Float(45.0),
+    Float(0.0), Float(0.0), Float(35.0),
+    Float(0.0), Float(0.0), Float(25.0),
+    Float(0.0), Float(0.0), Float(15.0),
+    Float(0.0), Float(0.0), Float(5.0),
+    Float(0.0), Float(0.0), Float(0.0),
+    Float(0.0), Float(0.0), Float(0.0),
+    Float(0.0), Float(0.0), Float(0.0),
+    Float(0.0), Float(0.0), Float(0.0),
+    Float(0.0), Float(0.0), Float(0.0),
+    Float(0.0), Float(0.0), Float(0.0),
+    Float(0.0), Float(0.0), Float(0.0),
+    Float(0.0), Float(0.0), Float(0.0),
+    Float(0.0), Float(0.0), Float(0.0),
     255,            255,            255,
 };
 
 EvtScript N(EVS_AnimBowser_StrikeArm) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_USE_FBUF(EVT_PTR(N(StrikeArmAngles)))
-    EVT_SET(LVarF, 0)
-    EVT_LABEL(0)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_IF_NE(LVar0, ANIM_DOING_STRIKE)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_IF_EQ(LVarF, 0)
-            EVT_FBUF_READ3(LVar0, LVar1, LVar2)
-            EVT_IF_EQ(LVar0, 255)
-                EVT_SET(LVarF, 1)
-                EVT_SET(LVar0, EVT_FLOAT(0.0))
-                EVT_SET(LVar1, EVT_FLOAT(0.0))
-                EVT_SET(LVar2, EVT_FLOAT(0.0))
-            EVT_END_IF
-        EVT_END_IF
-        EVT_MULF(LVar2, EVT_FLOAT(-2.0))
-        EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    UseFBuf(Ref(N(StrikeArmAngles)))
+    Set(LVarF, 0)
+    Label(0)
+        Set(LVar0, ArrayVar(0))
+        IfNe(LVar0, ANIM_DOING_STRIKE)
+            Return
+        EndIf
+        IfEq(LVarF, 0)
+            FBufRead3(LVar0, LVar1, LVar2)
+            IfEq(LVar0, 255)
+                Set(LVarF, 1)
+                Set(LVar0, Float(0.0))
+                Set(LVar1, Float(0.0))
+                Set(LVar2, Float(0.0))
+            EndIf
+        EndIf
+        MulF(LVar2, Float(-2.0))
+        Call(SetPartRotation, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_AnimBowser_BlockArm) = {
-    EVT_CALL(GetPartRotation, ACTOR_SELF, PRT_LEFT_ARM, LVar2, LVar3, LVar4)
-    EVT_CALL(MakeLerp, LVar4, 0, 20, EASING_LINEAR)
-    EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_LEFT_ARM, EVT_FLOAT(0.0), EVT_FLOAT(0.0), LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetPartRotation, ACTOR_SELF, PRT_LEFT_ARM, LVar2, LVar3, LVar4)
+    Call(MakeLerp, LVar4, 0, 20, EASING_LINEAR)
+    Label(0)
+        Call(UpdateLerp)
+        Call(SetPartRotation, ACTOR_SELF, PRT_LEFT_ARM, Float(0.0), Float(0.0), LVar0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_AnimBowser_DeathLeftArm) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_LEFT_ARM, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
-    EVT_CALL(GetPartPos, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, PRT_LEFT_ARM, 0, -60, 0)
-    EVT_SET(LVar1, 60)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVar1, 0)
-        EVT_SET(LVar2, 0)
-        EVT_LOOP(80)
-            EVT_ADD(LVar0, 8)
-            EVT_ADD(LVar1, 10)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_SUB(LVar0, 0)
-    EVT_SET(LVar1, -200)
-    EVT_ADD(LVar2, 100)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_LEFT_ARM, EVT_FLOAT(0.6))
-    EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2, 80, TRUE)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_LEFT_ARM, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
+    Call(GetPartPos, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2)
+    Call(SetPartDispOffset, ACTOR_SELF, PRT_LEFT_ARM, 0, -60, 0)
+    Set(LVar1, 60)
+    Call(SetPartPos, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2)
+    Thread
+        Set(LVar0, 0)
+        Set(LVar1, 0)
+        Set(LVar2, 0)
+        Loop(80)
+            Add(LVar0, 8)
+            Add(LVar1, 10)
+            Call(SetPartRotation, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Sub(LVar0, 0)
+    Set(LVar1, -200)
+    Add(LVar2, 100)
+    Call(SetPartJumpGravity, ACTOR_SELF, PRT_LEFT_ARM, Float(0.6))
+    Call(JumpPartTo, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2, 80, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_AnimBowser_DeathRightArm) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_RIGHT_ARM, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
-    EVT_CALL(GetPartPos, ACTOR_SELF, PRT_RIGHT_ARM, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, PRT_RIGHT_ARM, 0, -60, 0)
-    EVT_SET(LVar1, 60)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_RIGHT_ARM, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar0, 0)
-    EVT_SET(LVar1, -200)
-    EVT_SUB(LVar2, 200)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_RIGHT_ARM, EVT_FLOAT(0.4))
-    EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_RIGHT_ARM, LVar0, LVar1, LVar2, 80, TRUE)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_RIGHT_ARM, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
+    Call(GetPartPos, ACTOR_SELF, PRT_RIGHT_ARM, LVar0, LVar1, LVar2)
+    Call(SetPartDispOffset, ACTOR_SELF, PRT_RIGHT_ARM, 0, -60, 0)
+    Set(LVar1, 60)
+    Call(SetPartPos, ACTOR_SELF, PRT_RIGHT_ARM, LVar0, LVar1, LVar2)
+    Sub(LVar0, 0)
+    Set(LVar1, -200)
+    Sub(LVar2, 200)
+    Call(SetPartJumpGravity, ACTOR_SELF, PRT_RIGHT_ARM, Float(0.4))
+    Call(JumpPartTo, ACTOR_SELF, PRT_RIGHT_ARM, LVar0, LVar1, LVar2, 80, TRUE)
+    Return
+    End
 };
 
 s32 N(MoveWheelAngles)[] = {
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(20.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(40.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(60.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(80.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(100.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(120.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(140.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(160.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(180.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(200.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(220.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(240.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(260.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(280.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(300.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(320.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(340.0),
-    EVT_FLOAT(0.0), EVT_FLOAT(0.0), EVT_FLOAT(0.0),
+    Float(0.0), Float(0.0), Float(20.0),
+    Float(0.0), Float(0.0), Float(40.0),
+    Float(0.0), Float(0.0), Float(60.0),
+    Float(0.0), Float(0.0), Float(80.0),
+    Float(0.0), Float(0.0), Float(100.0),
+    Float(0.0), Float(0.0), Float(120.0),
+    Float(0.0), Float(0.0), Float(140.0),
+    Float(0.0), Float(0.0), Float(160.0),
+    Float(0.0), Float(0.0), Float(180.0),
+    Float(0.0), Float(0.0), Float(200.0),
+    Float(0.0), Float(0.0), Float(220.0),
+    Float(0.0), Float(0.0), Float(240.0),
+    Float(0.0), Float(0.0), Float(260.0),
+    Float(0.0), Float(0.0), Float(280.0),
+    Float(0.0), Float(0.0), Float(300.0),
+    Float(0.0), Float(0.0), Float(320.0),
+    Float(0.0), Float(0.0), Float(340.0),
+    Float(0.0), Float(0.0), Float(0.0),
     255,            255,            255
 };
 
 EvtScript N(EVS_AnimBowser_MoveWheels) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_USE_FBUF(EVT_PTR(N(MoveWheelAngles)))
-    EVT_LABEL(0)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_IF_NE(LVar0, ANIM_DOING_MOVE)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_FBUF_READ3(LVar0, LVar1, LVar2)
-        EVT_IF_EQ(LVar0, 255)
-            EVT_USE_FBUF(EVT_PTR(N(MoveWheelAngles)))
-            EVT_FBUF_READ3(LVar0, LVar1, LVar2)
-        EVT_END_IF
-        EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
-        EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    UseFBuf(Ref(N(MoveWheelAngles)))
+    Label(0)
+        Set(LVar0, ArrayVar(0))
+        IfNe(LVar0, ANIM_DOING_MOVE)
+            Return
+        EndIf
+        FBufRead3(LVar0, LVar1, LVar2)
+        IfEq(LVar0, 255)
+            UseFBuf(Ref(N(MoveWheelAngles)))
+            FBufRead3(LVar0, LVar1, LVar2)
+        EndIf
+        Call(SetPartRotation, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
+        Call(SetPartRotation, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_AnimBowser_DeathFrontWheels) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FRONT_WHEELS, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
-    EVT_CALL(GetPartPos, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVar1, 0)
-        EVT_SET(LVar2, 0)
-        EVT_LOOP(80)
-            EVT_ADD(LVar0, 8)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_SUB(LVar0, 150)
-    EVT_SET(LVar1, -200)
-    EVT_ADD(LVar2, 100)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_FRONT_WHEELS, EVT_FLOAT(0.3))
-    EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2, 80, TRUE)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_FRONT_WHEELS, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
+    Call(GetPartPos, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
+    Call(SetPartPos, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
+    Thread
+        Set(LVar0, 0)
+        Set(LVar1, 0)
+        Set(LVar2, 0)
+        Loop(80)
+            Add(LVar0, 8)
+            Call(SetPartRotation, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Sub(LVar0, 150)
+    Set(LVar1, -200)
+    Add(LVar2, 100)
+    Call(SetPartJumpGravity, ACTOR_SELF, PRT_FRONT_WHEELS, Float(0.3))
+    Call(JumpPartTo, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2, 80, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_AnimBowser_DeathBackWheels) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BACK_WHEELS, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
-    EVT_CALL(GetPartPos, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVar1, 0)
-        EVT_SET(LVar2, 0)
-        EVT_LOOP(80)
-            EVT_ADD(LVar0, 8)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_SUB(LVar0, 50)
-    EVT_SET(LVar1, -200)
-    EVT_SUB(LVar2, 100)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_BACK_WHEELS, EVT_FLOAT(0.3))
-    EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2, 80, TRUE)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_BACK_WHEELS, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
+    Call(GetPartPos, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
+    Call(SetPartPos, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
+    Thread
+        Set(LVar0, 0)
+        Set(LVar1, 0)
+        Set(LVar2, 0)
+        Loop(80)
+            Add(LVar0, 8)
+            Call(SetPartRotation, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Sub(LVar0, 50)
+    Set(LVar1, -200)
+    Sub(LVar2, 100)
+    Call(SetPartJumpGravity, ACTOR_SELF, PRT_BACK_WHEELS, Float(0.3))
+    Call(JumpPartTo, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2, 80, TRUE)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_AnimBowser_DeathTail) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_TAIL, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
-    EVT_CALL(GetPartPos, ACTOR_SELF, PRT_TAIL, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, PRT_TAIL, 0, -30, 0)
-    EVT_SET(LVar1, 30)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_TAIL, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVar1, 0)
-        EVT_SET(LVar2, 0)
-        EVT_LOOP(80)
-            EVT_ADD(LVar0, 25)
-            EVT_ADD(LVar1, 1)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_TAIL, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_SUB(LVar0, 0)
-    EVT_SET(LVar1, -200)
-    EVT_ADD(LVar2, 200)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_TAIL, EVT_FLOAT(0.3))
-    EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_TAIL, LVar0, LVar1, LVar2, 80, TRUE)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_TAIL, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
+    Call(GetPartPos, ACTOR_SELF, PRT_TAIL, LVar0, LVar1, LVar2)
+    Call(SetPartDispOffset, ACTOR_SELF, PRT_TAIL, 0, -30, 0)
+    Set(LVar1, 30)
+    Call(SetPartPos, ACTOR_SELF, PRT_TAIL, LVar0, LVar1, LVar2)
+    Thread
+        Set(LVar0, 0)
+        Set(LVar1, 0)
+        Set(LVar2, 0)
+        Loop(80)
+            Add(LVar0, 25)
+            Add(LVar1, 1)
+            Call(SetPartRotation, ACTOR_SELF, PRT_TAIL, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Sub(LVar0, 0)
+    Set(LVar1, -200)
+    Add(LVar2, 200)
+    Call(SetPartJumpGravity, ACTOR_SELF, PRT_TAIL, Float(0.3))
+    Call(JumpPartTo, ACTOR_SELF, PRT_TAIL, LVar0, LVar1, LVar2, 80, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_FakeBowser_Idle) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_SET(LVarA, 0)
-    EVT_LABEL(0)
+    UseArray(FakeBowserAnimState)
+    Set(LVarA, 0)
+    Label(0)
         // update animation state. ANIM_BEGIN states start new animations, ANIM_DOING states continue them.
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(ANIM_BEGIN_IDLE)
-                EVT_SET(ArrayVar(0), ANIM_DOING_IDLE)
-                EVT_EXEC(N(EVS_AnimBowser_IdleBody))
-                EVT_EXEC(N(EVS_AnimBowser_IdleFeet))
-                EVT_EXEC(N(EVS_AnimBowser_IdleHead))
-            EVT_CASE_EQ(ANIM_DOING_IDLE)
-            EVT_CASE_EQ(ANIM_BEGIN_HURT)
-                EVT_SET(ArrayVar(0), ANIM_DOING_HURT)
-                EVT_EXEC(N(EVS_AnimBowser_HurtBody))
-                EVT_EXEC(N(EVS_AnimBowser_HurtHead))
-            EVT_CASE_EQ(ANIM_DOING_HURT)
-            EVT_CASE_EQ(ANIM_BEGIN_MOVE)
-                EVT_SET(ArrayVar(0), ANIM_DOING_MOVE)
-                EVT_EXEC(N(EVS_AnimBowser_MoveBody))
-                EVT_EXEC(N(EVS_AnimBowser_MoveFeet))
-                EVT_EXEC(N(EVS_AnimBowser_MoveHead))
-                EVT_EXEC(N(EVS_AnimBowser_MoveWheels))
-            EVT_CASE_EQ(ANIM_DOING_MOVE)
-            EVT_CASE_EQ(ANIM_BEGIN_STRIKE)
-                EVT_SET(ArrayVar(0), ANIM_DOING_STRIKE)
-                EVT_EXEC(N(EVS_AnimBowser_StrikeBody))
-                EVT_EXEC(N(EVS_AnimBowser_StrikeFeet))
-                EVT_EXEC(N(EVS_AnimBowser_StrikeArm))
-            EVT_CASE_EQ(ANIM_DOING_STRIKE)
-            EVT_CASE_EQ(ANIM_BEGIN_DEATH)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FAKE_BOWSER_BLAST)
-                EVT_SET(ArrayVar(0), ANIM_DOING_DEATH)
-                EVT_EXEC(N(EVS_AnimBowser_DeathMain))
-                EVT_EXEC(N(EVS_AnimBowser_DeathBody))
-                EVT_EXEC(N(EVS_AnimBowser_DeathShell))
-                EVT_EXEC(N(EVS_AnimBowser_DeathLeftArm))
-                EVT_EXEC(N(EVS_AnimBowser_DeathRightArm))
-                EVT_EXEC(N(EVS_AnimBowser_DeathTail))
-                EVT_EXEC(N(EVS_AnimBowser_DeathFrontWheels))
-                EVT_EXEC(N(EVS_AnimBowser_DeathBackWheels))
-                EVT_EXEC(N(EVS_AnimBowser_DeathFeet))
-                EVT_EXEC(N(EVS_KoopaBrosEnter))
-            EVT_CASE_EQ(ANIM_DOING_DEATH)
-            EVT_CASE_EQ(ANIM_BEGIN_BLOCKED)
-                EVT_SET(ArrayVar(0), ANIM_DOING_BLOCKED)
-                EVT_EXEC(N(EVS_AnimBowser_StrikeBody))
-                EVT_EXEC(N(EVS_AnimBowser_StrikeFeet))
-                EVT_EXEC(N(EVS_AnimBowser_BlockArm))
-            EVT_CASE_EQ(ANIM_DOING_BLOCKED)
-        EVT_END_SWITCH
+        Set(LVar0, ArrayVar(0))
+        Switch(LVar0)
+            CaseEq(ANIM_BEGIN_IDLE)
+                Set(ArrayVar(0), ANIM_DOING_IDLE)
+                Exec(N(EVS_AnimBowser_IdleBody))
+                Exec(N(EVS_AnimBowser_IdleFeet))
+                Exec(N(EVS_AnimBowser_IdleHead))
+            CaseEq(ANIM_DOING_IDLE)
+            CaseEq(ANIM_BEGIN_HURT)
+                Set(ArrayVar(0), ANIM_DOING_HURT)
+                Exec(N(EVS_AnimBowser_HurtBody))
+                Exec(N(EVS_AnimBowser_HurtHead))
+            CaseEq(ANIM_DOING_HURT)
+            CaseEq(ANIM_BEGIN_MOVE)
+                Set(ArrayVar(0), ANIM_DOING_MOVE)
+                Exec(N(EVS_AnimBowser_MoveBody))
+                Exec(N(EVS_AnimBowser_MoveFeet))
+                Exec(N(EVS_AnimBowser_MoveHead))
+                Exec(N(EVS_AnimBowser_MoveWheels))
+            CaseEq(ANIM_DOING_MOVE)
+            CaseEq(ANIM_BEGIN_STRIKE)
+                Set(ArrayVar(0), ANIM_DOING_STRIKE)
+                Exec(N(EVS_AnimBowser_StrikeBody))
+                Exec(N(EVS_AnimBowser_StrikeFeet))
+                Exec(N(EVS_AnimBowser_StrikeArm))
+            CaseEq(ANIM_DOING_STRIKE)
+            CaseEq(ANIM_BEGIN_DEATH)
+                Call(PlaySoundAtActor, ACTOR_SELF, SOUND_FAKE_BOWSER_BLAST)
+                Set(ArrayVar(0), ANIM_DOING_DEATH)
+                Exec(N(EVS_AnimBowser_DeathMain))
+                Exec(N(EVS_AnimBowser_DeathBody))
+                Exec(N(EVS_AnimBowser_DeathShell))
+                Exec(N(EVS_AnimBowser_DeathLeftArm))
+                Exec(N(EVS_AnimBowser_DeathRightArm))
+                Exec(N(EVS_AnimBowser_DeathTail))
+                Exec(N(EVS_AnimBowser_DeathFrontWheels))
+                Exec(N(EVS_AnimBowser_DeathBackWheels))
+                Exec(N(EVS_AnimBowser_DeathFeet))
+                Exec(N(EVS_KoopaBrosEnter))
+            CaseEq(ANIM_DOING_DEATH)
+            CaseEq(ANIM_BEGIN_BLOCKED)
+                Set(ArrayVar(0), ANIM_DOING_BLOCKED)
+                Exec(N(EVS_AnimBowser_StrikeBody))
+                Exec(N(EVS_AnimBowser_StrikeFeet))
+                Exec(N(EVS_AnimBowser_BlockArm))
+            CaseEq(ANIM_DOING_BLOCKED)
+        EndSwitch
         // sync the positions of the models to corresponding actor parts
-        EVT_CALL(GetPartPos, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
-        EVT_CALL(TranslateGroup, MODEL_atama, LVar0, LVar1, LVar2)
-        EVT_CALL(GetPartRotation, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateGroup, MODEL_atama, LVar0, 1, 0, 0)
-        EVT_CALL(RotateGroup, MODEL_atama, LVar1, 0, 1, 0)
-        EVT_CALL(RotateGroup, MODEL_atama, LVar2, 0, 0, 1)
-        EVT_CALL(SetModelFlags, MODEL_k1, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_k2, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_k3, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_k4, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_k5, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_k6, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_k7, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_k8, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_k9, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(GetPartPos, ACTOR_SELF, PRT_BODY, LVar0, LVar1, LVar2)
-        EVT_CALL(TranslateGroup, MODEL_dou, LVar0, LVar1, LVar2)
-        EVT_CALL(GetPartRotation, ACTOR_SELF, PRT_BODY, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateGroup, MODEL_dou, LVar0, 1, 0, 0)
-        EVT_CALL(RotateGroup, MODEL_dou, LVar1, 0, 1, 0)
-        EVT_CALL(RotateGroup, MODEL_dou, LVar2, 0, 0, 1)
-        EVT_CALL(SetModelFlags, MODEL_d1, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_d2, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_d3, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(GetPartPos, ACTOR_SELF, PRT_SHELL, LVar0, LVar1, LVar2)
-        EVT_CALL(TranslateGroup, MODEL_koura, LVar0, LVar1, LVar2)
-        EVT_CALL(GetPartRotation, ACTOR_SELF, PRT_SHELL, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateGroup, MODEL_koura, LVar0, 1, 0, 0)
-        EVT_CALL(RotateGroup, MODEL_koura, LVar1, 0, 1, 0)
-        EVT_CALL(RotateGroup, MODEL_koura, LVar2, 0, 0, 1)
-        EVT_CALL(SetModelFlags, MODEL_s1, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_s2, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_s3, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_s4, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_s5, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(GetPartPos, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2)
-        EVT_CALL(TranslateGroup, MODEL_left_arm, LVar0, LVar1, LVar2)
-        EVT_CALL(GetPartRotation, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateGroup, MODEL_left_arm, LVar0, 1, 0, 0)
-        EVT_CALL(RotateGroup, MODEL_left_arm, LVar1, 0, 1, 0)
-        EVT_CALL(RotateGroup, MODEL_left_arm, LVar2, 0, 0, 1)
-        EVT_CALL(SetModelFlags, MODEL_u1, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_u2, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_u3, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(GetPartPos, ACTOR_SELF, PRT_TAIL, LVar0, LVar1, LVar2)
-        EVT_CALL(TranslateGroup, MODEL_shippo, LVar0, LVar1, LVar2)
-        EVT_CALL(GetPartRotation, ACTOR_SELF, PRT_TAIL, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateGroup, MODEL_shippo, LVar0, 1, 0, 0)
-        EVT_CALL(RotateGroup, MODEL_shippo, LVar1, 0, 1, 0)
-        EVT_CALL(RotateGroup, MODEL_shippo, LVar2, 0, 0, 1)
-        EVT_CALL(SetModelFlags, MODEL_p1, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_IF_EQ(LVar0, ANIM_DOING_DEATH)
-            EVT_CALL(GetPartPos, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
-        EVT_ELSE
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_SET(LVar1, 0)
-        EVT_END_IF
-        EVT_CALL(SetPartPos, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
-        EVT_CALL(TranslateGroup, MODEL_koma1, LVar0, LVar1, LVar2)
-        EVT_CALL(GetPartRotation, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateGroup, MODEL_koma1, LVar0, 1, 0, 0)
-        EVT_CALL(RotateGroup, MODEL_koma1, LVar1, 0, 1, 0)
-        EVT_CALL(RotateGroup, MODEL_koma1, LVar2, 0, 0, 1)
-        EVT_CALL(SetModelFlags, MODEL_km1, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_SET(LVar0, ArrayVar(0))
-        EVT_IF_EQ(LVar0, ANIM_DOING_DEATH)
-            EVT_CALL(GetPartPos, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
-        EVT_ELSE
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_SET(LVar1, 0)
-        EVT_END_IF
-        EVT_CALL(SetPartPos, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
-        EVT_CALL(TranslateGroup, MODEL_koma2, LVar0, LVar1, LVar2)
-        EVT_CALL(GetPartRotation, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateGroup, MODEL_koma2, LVar0, 1, 0, 0)
-        EVT_CALL(RotateGroup, MODEL_koma2, LVar1, 0, 1, 0)
-        EVT_CALL(RotateGroup, MODEL_koma2, LVar2, 0, 0, 1)
-        EVT_CALL(SetModelFlags, MODEL_km2, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(GetPartPos, ACTOR_SELF, PRT_RIGHT_ARM, LVar0, LVar1, LVar2)
-        EVT_CALL(TranslateGroup, MODEL_right_arm, LVar0, LVar1, LVar2)
-        EVT_CALL(GetPartRotation, ACTOR_SELF, PRT_RIGHT_ARM, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateGroup, MODEL_right_arm, LVar0, 1, 0, 0)
-        EVT_CALL(RotateGroup, MODEL_right_arm, LVar1, 0, 1, 0)
-        EVT_CALL(RotateGroup, MODEL_right_arm, LVar2, 0, 0, 1)
-        EVT_CALL(SetModelFlags, MODEL_o171, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_o172, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_o183, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(GetPartPos, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
-        EVT_CALL(TranslateGroup, MODEL_ashi, LVar0, LVar1, LVar2)
-        EVT_CALL(GetPartRotation, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateGroup, MODEL_ashi, LVar0, 1, 0, 0)
-        EVT_CALL(RotateGroup, MODEL_ashi, LVar1, 0, 1, 0)
-        EVT_CALL(RotateGroup, MODEL_ashi, LVar2, 0, 0, 1)
-        EVT_CALL(SetModelFlags, MODEL_o118, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_o120, MODEL_FLAG_IGNORE_FOG, TRUE)
-        EVT_CALL(SetModelFlags, MODEL_o165, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(GetPartPos, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
+        Call(TranslateGroup, MODEL_atama, LVar0, LVar1, LVar2)
+        Call(GetPartRotation, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2)
+        Call(RotateGroup, MODEL_atama, LVar0, 1, 0, 0)
+        Call(RotateGroup, MODEL_atama, LVar1, 0, 1, 0)
+        Call(RotateGroup, MODEL_atama, LVar2, 0, 0, 1)
+        Call(SetModelFlags, MODEL_k1, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_k2, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_k3, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_k4, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_k5, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_k6, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_k7, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_k8, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_k9, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(GetPartPos, ACTOR_SELF, PRT_BODY, LVar0, LVar1, LVar2)
+        Call(TranslateGroup, MODEL_dou, LVar0, LVar1, LVar2)
+        Call(GetPartRotation, ACTOR_SELF, PRT_BODY, LVar0, LVar1, LVar2)
+        Call(RotateGroup, MODEL_dou, LVar0, 1, 0, 0)
+        Call(RotateGroup, MODEL_dou, LVar1, 0, 1, 0)
+        Call(RotateGroup, MODEL_dou, LVar2, 0, 0, 1)
+        Call(SetModelFlags, MODEL_d1, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_d2, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_d3, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(GetPartPos, ACTOR_SELF, PRT_SHELL, LVar0, LVar1, LVar2)
+        Call(TranslateGroup, MODEL_koura, LVar0, LVar1, LVar2)
+        Call(GetPartRotation, ACTOR_SELF, PRT_SHELL, LVar0, LVar1, LVar2)
+        Call(RotateGroup, MODEL_koura, LVar0, 1, 0, 0)
+        Call(RotateGroup, MODEL_koura, LVar1, 0, 1, 0)
+        Call(RotateGroup, MODEL_koura, LVar2, 0, 0, 1)
+        Call(SetModelFlags, MODEL_s1, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_s2, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_s3, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_s4, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_s5, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(GetPartPos, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2)
+        Call(TranslateGroup, MODEL_left_arm, LVar0, LVar1, LVar2)
+        Call(GetPartRotation, ACTOR_SELF, PRT_LEFT_ARM, LVar0, LVar1, LVar2)
+        Call(RotateGroup, MODEL_left_arm, LVar0, 1, 0, 0)
+        Call(RotateGroup, MODEL_left_arm, LVar1, 0, 1, 0)
+        Call(RotateGroup, MODEL_left_arm, LVar2, 0, 0, 1)
+        Call(SetModelFlags, MODEL_u1, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_u2, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_u3, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(GetPartPos, ACTOR_SELF, PRT_TAIL, LVar0, LVar1, LVar2)
+        Call(TranslateGroup, MODEL_shippo, LVar0, LVar1, LVar2)
+        Call(GetPartRotation, ACTOR_SELF, PRT_TAIL, LVar0, LVar1, LVar2)
+        Call(RotateGroup, MODEL_shippo, LVar0, 1, 0, 0)
+        Call(RotateGroup, MODEL_shippo, LVar1, 0, 1, 0)
+        Call(RotateGroup, MODEL_shippo, LVar2, 0, 0, 1)
+        Call(SetModelFlags, MODEL_p1, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Set(LVar0, ArrayVar(0))
+        IfEq(LVar0, ANIM_DOING_DEATH)
+            Call(GetPartPos, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
+        Else
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Set(LVar1, 0)
+        EndIf
+        Call(SetPartPos, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
+        Call(TranslateGroup, MODEL_koma1, LVar0, LVar1, LVar2)
+        Call(GetPartRotation, ACTOR_SELF, PRT_FRONT_WHEELS, LVar0, LVar1, LVar2)
+        Call(RotateGroup, MODEL_koma1, LVar0, 1, 0, 0)
+        Call(RotateGroup, MODEL_koma1, LVar1, 0, 1, 0)
+        Call(RotateGroup, MODEL_koma1, LVar2, 0, 0, 1)
+        Call(SetModelFlags, MODEL_km1, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Set(LVar0, ArrayVar(0))
+        IfEq(LVar0, ANIM_DOING_DEATH)
+            Call(GetPartPos, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
+        Else
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Set(LVar1, 0)
+        EndIf
+        Call(SetPartPos, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
+        Call(TranslateGroup, MODEL_koma2, LVar0, LVar1, LVar2)
+        Call(GetPartRotation, ACTOR_SELF, PRT_BACK_WHEELS, LVar0, LVar1, LVar2)
+        Call(RotateGroup, MODEL_koma2, LVar0, 1, 0, 0)
+        Call(RotateGroup, MODEL_koma2, LVar1, 0, 1, 0)
+        Call(RotateGroup, MODEL_koma2, LVar2, 0, 0, 1)
+        Call(SetModelFlags, MODEL_km2, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(GetPartPos, ACTOR_SELF, PRT_RIGHT_ARM, LVar0, LVar1, LVar2)
+        Call(TranslateGroup, MODEL_right_arm, LVar0, LVar1, LVar2)
+        Call(GetPartRotation, ACTOR_SELF, PRT_RIGHT_ARM, LVar0, LVar1, LVar2)
+        Call(RotateGroup, MODEL_right_arm, LVar0, 1, 0, 0)
+        Call(RotateGroup, MODEL_right_arm, LVar1, 0, 1, 0)
+        Call(RotateGroup, MODEL_right_arm, LVar2, 0, 0, 1)
+        Call(SetModelFlags, MODEL_o171, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_o172, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_o183, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(GetPartPos, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
+        Call(TranslateGroup, MODEL_ashi, LVar0, LVar1, LVar2)
+        Call(GetPartRotation, ACTOR_SELF, PRT_FEET, LVar0, LVar1, LVar2)
+        Call(RotateGroup, MODEL_ashi, LVar0, 1, 0, 0)
+        Call(RotateGroup, MODEL_ashi, LVar1, 0, 1, 0)
+        Call(RotateGroup, MODEL_ashi, LVar2, 0, 0, 1)
+        Call(SetModelFlags, MODEL_o118, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_o120, MODEL_FLAG_IGNORE_FOG, TRUE)
+        Call(SetModelFlags, MODEL_o165, MODEL_FLAG_IGNORE_FOG, TRUE)
         // spawn puffs of smoke if health is low enough
         // written to have different effects at every quintile, but every case in the final
         // version just executes the same script
-        EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-        EVT_IF_NOT_FLAG(LVar0, AFLAG_Boss_Dialogue_HaveATaste) // odd reuse/misuse of flag. always FALSE here.
-            EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
-            EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar1)
-            EVT_MUL(LVar0, 100)
-            EVT_DIV(LVar0, LVar1)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(0)
-                EVT_CASE_LT(20)
-                    EVT_IF_GT(LVarA, 20)
-                        EVT_EXEC(N(EVS_SpawnDamageFX))
-                        EVT_SET(LVarA, 0)
-                    EVT_END_IF
-                EVT_CASE_LT(40)
-                    EVT_IF_GT(LVarA, 40)
-                        EVT_EXEC(N(EVS_SpawnDamageFX))
-                        EVT_SET(LVarA, 0)
-                    EVT_END_IF
-                EVT_CASE_LT(60)
-                    EVT_IF_GT(LVarA, 60)
-                        EVT_EXEC(N(EVS_SpawnDamageFX))
-                        EVT_SET(LVarA, 0)
-                    EVT_END_IF
-                EVT_CASE_LT(80)
-                    EVT_IF_GT(LVarA, 80)
-                        EVT_EXEC(N(EVS_SpawnDamageFX))
-                        EVT_SET(LVarA, 0)
-                    EVT_END_IF
-            EVT_END_SWITCH
-            EVT_ADD(LVarA, 1)
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+        Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+        IfNotFlag(LVar0, AFLAG_Boss_Dialogue_HaveATaste) // odd reuse/misuse of flag. always FALSE here.
+            Call(GetActorHP, ACTOR_SELF, LVar0)
+            Call(GetEnemyMaxHP, ACTOR_SELF, LVar1)
+            Mul(LVar0, 100)
+            Div(LVar0, LVar1)
+            Switch(LVar0)
+                CaseEq(0)
+                CaseLt(20)
+                    IfGt(LVarA, 20)
+                        Exec(N(EVS_SpawnDamageFX))
+                        Set(LVarA, 0)
+                    EndIf
+                CaseLt(40)
+                    IfGt(LVarA, 40)
+                        Exec(N(EVS_SpawnDamageFX))
+                        Set(LVarA, 0)
+                    EndIf
+                CaseLt(60)
+                    IfGt(LVarA, 60)
+                        Exec(N(EVS_SpawnDamageFX))
+                        Set(LVarA, 0)
+                    EndIf
+                CaseLt(80)
+                    IfGt(LVarA, 80)
+                        Exec(N(EVS_SpawnDamageFX))
+                        Set(LVarA, 0)
+                    EndIf
+            EndSwitch
+            Add(LVarA, 1)
+        EndIf
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 // (in) LVarA : remaining health percent
 EvtScript N(EVS_SpawnDamageFX) = {
-    EVT_DIV(LVarA, 4)
-    EVT_ADD(LVarA, 1)
-    EVT_CALL(RandInt, LVarA, LVar3)
-    EVT_ADD(LVar3, 1)
-    EVT_WAIT(LVar3)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, -8)
-    EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVar0, 98, 0, 0, 0, 0)
-    EVT_CALL(RandInt, LVarA, LVar3)
-    EVT_ADD(LVar3, 1)
-    EVT_WAIT(LVar3)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, -12)
-    EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVar0, 23, 0, 0, 0, 0)
-    EVT_CALL(RandInt, LVarA, LVar3)
-    EVT_ADD(LVar3, 1)
-    EVT_WAIT(LVar3)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, -47)
-    EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVar0, 70, 0, 0, 0, 0)
-    EVT_CALL(RandInt, LVarA, LVar3)
-    EVT_ADD(LVar3, 1)
-    EVT_WAIT(LVar3)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 40)
-    EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVar0, 22, 0, 0, 0, 0)
-    EVT_CALL(RandInt, LVarA, LVar3)
-    EVT_ADD(LVar3, 1)
-    EVT_WAIT(LVar3)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, -19)
-    EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVar0, 59, 33, 0, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Div(LVarA, 4)
+    Add(LVarA, 1)
+    Call(RandInt, LVarA, LVar3)
+    Add(LVar3, 1)
+    Wait(LVar3)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Add(LVar0, -8)
+    PlayEffect(EFFECT_WALKING_DUST, 2, LVar0, 98, 0, 0, 0, 0)
+    Call(RandInt, LVarA, LVar3)
+    Add(LVar3, 1)
+    Wait(LVar3)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Add(LVar0, -12)
+    PlayEffect(EFFECT_WALKING_DUST, 2, LVar0, 23, 0, 0, 0, 0)
+    Call(RandInt, LVarA, LVar3)
+    Add(LVar3, 1)
+    Wait(LVar3)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Add(LVar0, -47)
+    PlayEffect(EFFECT_WALKING_DUST, 2, LVar0, 70, 0, 0, 0, 0)
+    Call(RandInt, LVarA, LVar3)
+    Add(LVar3, 1)
+    Wait(LVar3)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Add(LVar0, 40)
+    PlayEffect(EFFECT_WALKING_DUST, 2, LVar0, 22, 0, 0, 0, 0)
+    Call(RandInt, LVarA, LVar3)
+    Add(LVar3, 1)
+    Wait(LVar3)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Add(LVar0, -19)
+    PlayEffect(EFFECT_WALKING_DUST, 2, LVar0, 59, 33, 0, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_FakeBowser_HandleEvent) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_SET(ArrayVar(0), ANIM_BEGIN_HURT)
-            EVT_WAIT(20)
-            EVT_SET(ArrayVar(0), ANIM_BEGIN_IDLE)
-        EVT_CASE_EQ(EVENT_HIT)
-            EVT_SET(ArrayVar(0), ANIM_BEGIN_HURT)
-            EVT_WAIT(20)
-            EVT_SET(ArrayVar(0), ANIM_BEGIN_IDLE)
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_SET(ArrayVar(0), ANIM_BEGIN_HURT)
-            EVT_WAIT(20)
-            EVT_SET(ArrayVar(0), ANIM_BEGIN_IDLE)
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_DEATH)
-        EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
-            EVT_CALL(HideHealthBar, ACTOR_SELF)
-            EVT_IF_EQ(LVar0, EVENT_BURN_DEATH)
-                EVT_CALL(N(SetModelTintMode), APPLY_TINT_MODELS, EVT_PTR(N(BowserModels)), ENV_TINT_REMAP)
-                EVT_CALL(N(SetModelTintParams), ENV_TINT_REMAP, 35, 35, 35, 0, 0, 0, 0, 0, 0)
-            EVT_END_IF
-            EVT_SET(ArrayVar(0), ANIM_BEGIN_HURT)
-            EVT_WAIT(20)
-            EVT_IF_EQ(LVar0, EVENT_BURN_DEATH)
-                EVT_CALL(N(SetModelTintMode), APPLY_TINT_MODELS, EVT_PTR(N(BowserModels)), ENV_TINT_NONE)
-                EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
-                EVT_DIVF(LVar3, EVT_FLOAT(2.0))
-                EVT_ADDF(LVar1, LVar3)
-                EVT_ADDF(LVar2, EVT_FLOAT(5.0))
-                EVT_DIVF(LVar3, EVT_FLOAT(10.0))
-                EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
-                EVT_WAIT(5)
-                EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
-            EVT_END_IF
-            EVT_CALL(ActorSpeak, MSG_CH1_0106, ACTOR_SELF, PRT_TARGET, -1, -1)
-            EVT_WAIT(30)
-            EVT_SET(ArrayVar(0), ANIM_BEGIN_DEATH)
-            EVT_LABEL(20)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_WAIT(1)
-                EVT_IF_NOT_FLAG(LVar0, AFLAG_Boss_KoopaBrosRevealed)
-                    EVT_GOTO(20)
-                EVT_END_IF
-            EVT_WAIT(20)
-            EVT_EXEC_WAIT(N(EVS_TryFormingTower))
-            EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar0)
-            EVT_CALL(SetEnemyHP, ACTOR_SELF, LVar0)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_BURN_CONTACT)
-        EVT_CASE_OR_EQ(EVENT_BURN_HIT)
-            EVT_CALL(N(SetModelTintMode), APPLY_TINT_MODELS, EVT_PTR(N(BowserModels)), ENV_TINT_REMAP)
-            EVT_CALL(N(SetModelTintParams), ENV_TINT_REMAP, 35, 35, 35, 0, 0, 0, 0, 0, 0)
-            EVT_SET(ArrayVar(0), ANIM_BEGIN_HURT)
-            EVT_WAIT(20)
-            EVT_SET(ArrayVar(0), ANIM_BEGIN_IDLE)
-            EVT_CALL(N(SetModelTintMode), APPLY_TINT_MODELS, EVT_PTR(N(BowserModels)), ENV_TINT_NONE)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
-            EVT_DIVF(LVar3, EVT_FLOAT(2.0))
-            EVT_ADDF(LVar1, LVar3)
-            EVT_ADDF(LVar2, EVT_FLOAT(5.0))
-            EVT_DIVF(LVar3, EVT_FLOAT(10.0))
-            EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
-            EVT_WAIT(5)
-            EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseEq(EVENT_HIT_COMBO)
+            Set(ArrayVar(0), ANIM_BEGIN_HURT)
+            Wait(20)
+            Set(ArrayVar(0), ANIM_BEGIN_IDLE)
+        CaseEq(EVENT_HIT)
+            Set(ArrayVar(0), ANIM_BEGIN_HURT)
+            Wait(20)
+            Set(ArrayVar(0), ANIM_BEGIN_IDLE)
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
+            Set(ArrayVar(0), ANIM_BEGIN_HURT)
+            Wait(20)
+            Set(ArrayVar(0), ANIM_BEGIN_IDLE)
+        EndCaseGroup
+        CaseOrEq(EVENT_DEATH)
+        CaseOrEq(EVENT_BURN_DEATH)
+            Call(HideHealthBar, ACTOR_SELF)
+            IfEq(LVar0, EVENT_BURN_DEATH)
+                Call(N(SetModelTintMode), APPLY_TINT_MODELS, Ref(N(BowserModels)), ENV_TINT_REMAP)
+                Call(N(SetModelTintParams), ENV_TINT_REMAP, 35, 35, 35, 0, 0, 0, 0, 0, 0)
+            EndIf
+            Set(ArrayVar(0), ANIM_BEGIN_HURT)
+            Wait(20)
+            IfEq(LVar0, EVENT_BURN_DEATH)
+                Call(N(SetModelTintMode), APPLY_TINT_MODELS, Ref(N(BowserModels)), ENV_TINT_NONE)
+                Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+                Call(GetActorSize, ACTOR_SELF, LVar3, LVar4)
+                DivF(LVar3, Float(2.0))
+                AddF(LVar1, LVar3)
+                AddF(LVar2, Float(5.0))
+                DivF(LVar3, Float(10.0))
+                PlayEffect(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
+                Wait(5)
+                PlayEffect(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
+            EndIf
+            Call(ActorSpeak, MSG_CH1_0106, ACTOR_SELF, PRT_TARGET, -1, -1)
+            Wait(30)
+            Set(ArrayVar(0), ANIM_BEGIN_DEATH)
+            Label(20)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                Wait(1)
+                IfNotFlag(LVar0, AFLAG_Boss_KoopaBrosRevealed)
+                    Goto(20)
+                EndIf
+            Wait(20)
+            ExecWait(N(EVS_TryFormingTower))
+            Call(GetEnemyMaxHP, ACTOR_SELF, LVar0)
+            Call(SetEnemyHP, ACTOR_SELF, LVar0)
+            Return
+        EndCaseGroup
+        CaseOrEq(EVENT_BURN_CONTACT)
+        CaseOrEq(EVENT_BURN_HIT)
+            Call(N(SetModelTintMode), APPLY_TINT_MODELS, Ref(N(BowserModels)), ENV_TINT_REMAP)
+            Call(N(SetModelTintParams), ENV_TINT_REMAP, 35, 35, 35, 0, 0, 0, 0, 0, 0)
+            Set(ArrayVar(0), ANIM_BEGIN_HURT)
+            Wait(20)
+            Set(ArrayVar(0), ANIM_BEGIN_IDLE)
+            Call(N(SetModelTintMode), APPLY_TINT_MODELS, Ref(N(BowserModels)), ENV_TINT_NONE)
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(GetActorSize, ACTOR_SELF, LVar3, LVar4)
+            DivF(LVar3, Float(2.0))
+            AddF(LVar1, LVar3)
+            AddF(LVar2, Float(5.0))
+            DivF(LVar3, Float(10.0))
+            PlayEffect(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
+            Wait(5)
+            PlayEffect(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
+        EndCaseGroup
+        CaseDefault
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_FakeBowser_TakeTurn) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_THREAD
-        EVT_LOOP(4)
-            EVT_CALL(N(StartRumbleWithParams), 256, 3)
-            EVT_WAIT(5)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_SET(ArrayVar(0), ANIM_BEGIN_MOVE)
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(AddGoalPos, ACTOR_SELF, 70, 0, 0)
-    EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_SET(ArrayVar(0), ANIM_BEGIN_IDLE)
-    EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FAKE_BOWSER_SWING)
-        EVT_WAIT(22)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FAKE_BOWSER_STRIKE)
-    EVT_END_THREAD
-    EVT_SET(ArrayVar(0), ANIM_BEGIN_STRIKE)
-    EVT_WAIT(24)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_IF_EQ(LVar0, HIT_RESULT_LUCKY)
-                EVT_THREAD
-                    EVT_WAIT(15)
-                    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-                EVT_END_THREAD
-            EVT_END_IF
-            EVT_WAIT(8)
-            EVT_THREAD
-                EVT_LOOP(4)
-                    EVT_CALL(N(StartRumbleWithParams), 256, 5)
-                    EVT_WAIT(8)
-                EVT_END_LOOP
-            EVT_END_THREAD
-            EVT_SET(ArrayVar(0), ANIM_BEGIN_MOVE)
-            EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_SET(ArrayVar(0), ANIM_BEGIN_IDLE)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_ALL, 0, DMG_STRIKE, BS_FLAGS1_NICE_HIT)
-    EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_FLAG(LVar0, BS_FLAGS1_ATK_BLOCKED)
-        EVT_CALL(GetPlayerHP, LVar0)
-        EVT_IF_NE(LVar0, 0)
-            EVT_SET(ArrayVar(0), ANIM_BEGIN_BLOCKED)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_WAIT(18)
-    EVT_THREAD
-        EVT_LOOP(4)
-            EVT_CALL(N(StartRumbleWithParams), 256, 5)
-            EVT_WAIT(8)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_SET(ArrayVar(0), ANIM_BEGIN_MOVE)
-    EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-    EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_SET(ArrayVar(0), ANIM_BEGIN_IDLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_CALL(GetPlayerHP, LVar0)
-    EVT_IF_LE(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(EnableBattleStatusBar, FALSE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-    EVT_CALL(SetBattleCamTarget, 28, 75, -101)
-    EVT_CALL(SetBattleCamOffsetZ, 0)
-    EVT_CALL(SetBattleCamZoom, 500)
-    EVT_CALL(MoveBattleCamOver, 20)
-    EVT_WAIT(15)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_BowserTaunts, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(ActorSpeak, MSG_CH1_00FE, ACTOR_SELF, PRT_TARGET, -1, -1)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_BowserTaunts, 1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(ActorSpeak, MSG_CH1_00FF, ACTOR_SELF, PRT_TARGET, -1, -1)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_BowserTaunts, 2)
-        EVT_CASE_EQ(2)
-            EVT_CALL(ActorSpeak, MSG_CH1_0100, ACTOR_SELF, PRT_TARGET, -1, -1)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-            EVT_CALL(SetBattleCamTarget, 85, 81, 0)
-            EVT_CALL(SetBattleCamOffsetZ, 0)
-            EVT_CALL(SetBattleCamZoom, 249)
-            EVT_CALL(MoveBattleCamOver, 10)
-            EVT_WAIT(10)
-            EVT_CALL(ActorSpeak, MSG_CH1_0101, ACTOR_SELF, PRT_TARGET, -1, -1)
-            EVT_WAIT(10)
-            EVT_CALL(ActorSpeak, MSG_CH1_0102, ACTOR_SELF, PRT_TARGET, -1, -1)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_BowserTaunts, 3)
-        EVT_CASE_EQ(3)
-            EVT_CALL(ActorSpeak, MSG_CH1_0103, ACTOR_SELF, PRT_TARGET, -1, -1)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-            EVT_CALL(SetBattleCamTarget, 85, 81, 0)
-            EVT_CALL(SetBattleCamOffsetZ, 0)
-            EVT_CALL(SetBattleCamZoom, 249)
-            EVT_CALL(MoveBattleCamOver, 10)
-            EVT_WAIT(10)
-            EVT_CALL(ActorSpeak, MSG_CH1_0104, ACTOR_SELF, PRT_TARGET, -1, -1)
-            EVT_WAIT(10)
-            EVT_CALL(ActorSpeak, MSG_CH1_0105, ACTOR_SELF, PRT_TARGET, -1, -1)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_BowserTaunts, 1)
-    EVT_END_SWITCH
-    EVT_CALL(EnableBattleStatusBar, TRUE)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Thread
+        Loop(4)
+            Call(N(StartRumbleWithParams), 256, 3)
+            Wait(5)
+        EndLoop
+    EndThread
+    Set(ArrayVar(0), ANIM_BEGIN_MOVE)
+    Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(AddGoalPos, ACTOR_SELF, 70, 0, 0)
+    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Set(ArrayVar(0), ANIM_BEGIN_IDLE)
+    Thread
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_FAKE_BOWSER_SWING)
+        Wait(22)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_FAKE_BOWSER_STRIKE)
+    EndThread
+    Set(ArrayVar(0), ANIM_BEGIN_STRIKE)
+    Wait(24)
+    Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            IfEq(LVar0, HIT_RESULT_LUCKY)
+                Thread
+                    Wait(15)
+                    Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+                EndThread
+            EndIf
+            Wait(8)
+            Thread
+                Loop(4)
+                    Call(N(StartRumbleWithParams), 256, 5)
+                    Wait(8)
+                EndLoop
+            EndThread
+            Set(ArrayVar(0), ANIM_BEGIN_MOVE)
+            Call(SetGoalToHome, ACTOR_SELF)
+            Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
+            Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+            Set(ArrayVar(0), ANIM_BEGIN_IDLE)
+            Return
+        EndCaseGroup
+    EndSwitch
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Wait(2)
+    Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_ALL, 0, DMG_STRIKE, BS_FLAGS1_NICE_HIT)
+    Call(GetBattleFlags, LVar0)
+    IfFlag(LVar0, BS_FLAGS1_ATK_BLOCKED)
+        Call(GetPlayerHP, LVar0)
+        IfNe(LVar0, 0)
+            Set(ArrayVar(0), ANIM_BEGIN_BLOCKED)
+        EndIf
+    EndIf
+    Wait(18)
+    Thread
+        Loop(4)
+            Call(N(StartRumbleWithParams), 256, 5)
+            Wait(8)
+        EndLoop
+    EndThread
+    Set(ArrayVar(0), ANIM_BEGIN_MOVE)
+    Call(SetGoalToHome, ACTOR_SELF)
+    Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
+    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Set(ArrayVar(0), ANIM_BEGIN_IDLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(GetPlayerHP, LVar0)
+    IfLe(LVar0, 0)
+        Return
+    EndIf
+    Call(EnableBattleStatusBar, FALSE)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(SetBattleCamTarget, 28, 75, -101)
+    Call(SetBattleCamOffsetZ, 0)
+    Call(SetBattleCamZoom, 500)
+    Call(MoveBattleCamOver, 20)
+    Wait(15)
+    Call(GetActorVar, ACTOR_SELF, AVAR_Boss_BowserTaunts, LVar0)
+    Switch(LVar0)
+        CaseEq(0)
+            Call(ActorSpeak, MSG_CH1_00FE, ACTOR_SELF, PRT_TARGET, -1, -1)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Boss_BowserTaunts, 1)
+        CaseEq(1)
+            Call(ActorSpeak, MSG_CH1_00FF, ACTOR_SELF, PRT_TARGET, -1, -1)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Boss_BowserTaunts, 2)
+        CaseEq(2)
+            Call(ActorSpeak, MSG_CH1_0100, ACTOR_SELF, PRT_TARGET, -1, -1)
+            Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+            Call(SetBattleCamTarget, 85, 81, 0)
+            Call(SetBattleCamOffsetZ, 0)
+            Call(SetBattleCamZoom, 249)
+            Call(MoveBattleCamOver, 10)
+            Wait(10)
+            Call(ActorSpeak, MSG_CH1_0101, ACTOR_SELF, PRT_TARGET, -1, -1)
+            Wait(10)
+            Call(ActorSpeak, MSG_CH1_0102, ACTOR_SELF, PRT_TARGET, -1, -1)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Boss_BowserTaunts, 3)
+        CaseEq(3)
+            Call(ActorSpeak, MSG_CH1_0103, ACTOR_SELF, PRT_TARGET, -1, -1)
+            Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+            Call(SetBattleCamTarget, 85, 81, 0)
+            Call(SetBattleCamOffsetZ, 0)
+            Call(SetBattleCamZoom, 249)
+            Call(MoveBattleCamOver, 10)
+            Wait(10)
+            Call(ActorSpeak, MSG_CH1_0104, ACTOR_SELF, PRT_TARGET, -1, -1)
+            Wait(10)
+            Call(ActorSpeak, MSG_CH1_0105, ACTOR_SELF, PRT_TARGET, -1, -1)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Boss_BowserTaunts, 1)
+    EndSwitch
+    Call(EnableBattleStatusBar, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_FakeBowser_HandlePhase) = {
-    EVT_USE_ARRAY(FakeBowserAnimState)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetBattlePhase, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, AFLAG_Boss_Dialogue_BowserReveal)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-                EVT_CALL(SetBattleCamTarget, -4, 46, -2)
-                EVT_CALL(SetBattleCamYaw, 24)
-                EVT_CALL(SetBattleCamOffsetZ, 30)
-                EVT_CALL(SetBattleCamZoom, 461)
-                EVT_CALL(MoveBattleCamOver, 30)
-                EVT_WAIT(30)
-                EVT_CALL(ActorSpeak, MSG_CH1_00FD, ACTOR_SELF, PRT_TARGET, -1, -1)
-                EVT_THREAD
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FAKE_BOWSER_SWING)
-                    EVT_WAIT(22)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FAKE_BOWSER_STRIKE)
-                EVT_END_THREAD
-                EVT_SET(ArrayVar(0), ANIM_BEGIN_STRIKE)
-                EVT_WAIT(30)
-                EVT_SET(ArrayVar(0), ANIM_BEGIN_IDLE)
-                EVT_CALL(EndActorSpeech, ACTOR_SELF, PRT_TARGET, -1, -1)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_Dialogue_BowserReveal)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-                EVT_WAIT(20)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    UseArray(FakeBowserAnimState)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetBattlePhase, LVar0)
+    Switch(LVar0)
+        CaseEq(PHASE_PLAYER_BEGIN)
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            IfNotFlag(LVar0, AFLAG_Boss_Dialogue_BowserReveal)
+                Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+                Call(SetBattleCamTarget, -4, 46, -2)
+                Call(SetBattleCamYaw, 24)
+                Call(SetBattleCamOffsetZ, 30)
+                Call(SetBattleCamZoom, 461)
+                Call(MoveBattleCamOver, 30)
+                Wait(30)
+                Call(ActorSpeak, MSG_CH1_00FD, ACTOR_SELF, PRT_TARGET, -1, -1)
+                Thread
+                    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_FAKE_BOWSER_SWING)
+                    Wait(22)
+                    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_FAKE_BOWSER_STRIKE)
+                EndThread
+                Set(ArrayVar(0), ANIM_BEGIN_STRIKE)
+                Wait(30)
+                Set(ArrayVar(0), ANIM_BEGIN_IDLE)
+                Call(EndActorSpeech, ACTOR_SELF, PRT_TARGET, -1, -1)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_Dialogue_BowserReveal)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+                Wait(20)
+            EndIf
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 // -------------------------------------------------------------------------
@@ -1633,191 +1633,191 @@ API_CALLABLE(N(PlayKoopaBrosSong)) {
 }
 
 EvtScript N(EVS_KoopaBrosEnter) = {
-    EVT_CALL(UseIdleAnimation, GREEN_ACTOR, FALSE)
-    EVT_CALL(EnableIdleScript, GREEN_ACTOR, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(SetActorPos, GREEN_ACTOR, 100, 0, 10)
-    EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Launched)
-    EVT_THREAD
-        EVT_CALL(SetActorJumpGravity, GREEN_ACTOR, EVT_FLOAT(0.4))
-        EVT_CALL(SetActorSounds, GREEN_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
-        EVT_CALL(SetGoalPos, GREEN_ACTOR, -300, 250, 0)
-        EVT_CALL(JumpToGoal, GREEN_ACTOR, 50, FALSE, TRUE, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(UseIdleAnimation, YELLOW_ACTOR, FALSE)
-    EVT_CALL(EnableIdleScript, YELLOW_ACTOR, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(SetActorPos, YELLOW_ACTOR, 100, 0, 10)
-    EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_Launched)
-    EVT_THREAD
-        EVT_CALL(SetActorJumpGravity, YELLOW_ACTOR, EVT_FLOAT(0.4))
-        EVT_CALL(SetActorSounds, YELLOW_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
-        EVT_CALL(SetGoalPos, YELLOW_ACTOR, -200, 250, 0)
-        EVT_CALL(JumpToGoal, YELLOW_ACTOR, 50, FALSE, TRUE, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(UseIdleAnimation, BLACK_ACTOR, FALSE)
-    EVT_CALL(EnableIdleScript, BLACK_ACTOR, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(SetActorPos, BLACK_ACTOR, 100, 0, 10)
-    EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_Launched)
-    EVT_THREAD
-        EVT_CALL(SetActorJumpGravity, BLACK_ACTOR, EVT_FLOAT(0.4))
-        EVT_CALL(SetActorSounds, BLACK_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
-        EVT_CALL(SetGoalPos, BLACK_ACTOR, 0, 250, 0)
-        EVT_CALL(JumpToGoal, BLACK_ACTOR, 50, FALSE, TRUE, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(UseIdleAnimation, RED_ACTOR, FALSE)
-    EVT_CALL(EnableIdleScript, RED_ACTOR, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(SetActorPos, RED_ACTOR, 100, 0, 10)
-    EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Launched)
-    EVT_THREAD
-        EVT_CALL(SetActorJumpGravity, RED_ACTOR, EVT_FLOAT(0.4))
-        EVT_CALL(SetActorSounds, RED_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
-        EVT_CALL(SetGoalPos, RED_ACTOR, 150, 250, 0)
-        EVT_CALL(JumpToGoal, RED_ACTOR, 50, FALSE, TRUE, FALSE)
-    EVT_END_THREAD
-    EVT_WAIT(100)
-    EVT_WAIT(100)
-    EVT_CALL(EnableGroup, MODEL_atama, FALSE)
-    EVT_CALL(EnableGroup, MODEL_left_arm, FALSE)
-    EVT_CALL(EnableGroup, MODEL_shippo, FALSE)
-    EVT_CALL(EnableGroup, MODEL_dou, FALSE)
-    EVT_CALL(EnableGroup, MODEL_koura, FALSE)
-    EVT_CALL(EnableGroup, MODEL_koma1, FALSE)
-    EVT_CALL(EnableGroup, MODEL_koma2, FALSE)
-    EVT_CALL(EnableGroup, MODEL_right_arm, FALSE)
-    EVT_CALL(EnableGroup, MODEL_ashi, FALSE)
-    EVT_THREAD
-        EVT_WAIT(23)
-        EVT_CALL(PlaySoundAtActor, GREEN_ACTOR, SOUND_FALL_QUICK)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, YELLOW_ACTOR, SOUND_FALL_QUICK)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, BLACK_ACTOR, SOUND_FALL_QUICK)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, RED_ACTOR, SOUND_FALL_QUICK)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Land)
-        EVT_CALL(SetActorPos, GREEN_ACTOR, 20, 250, 0)
-        EVT_CALL(SetGoalPos, GREEN_ACTOR, 20, 0, 0)
-        EVT_CALL(SetActorJumpGravity, GREEN_ACTOR, EVT_FLOAT(1.5))
-        EVT_CALL(SetActorSounds, GREEN_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
-        EVT_CALL(FallToGoal, GREEN_ACTOR, 30)
-        EVT_CALL(PlaySoundAtActor, GREEN_ACTOR, SOUND_KOOPA_BROS_LAND)
-        EVT_CALL(ResetActorSounds, GREEN_ACTOR, ACTOR_SOUND_JUMP)
-        EVT_CALL(ForceHomePos, GREEN_ACTOR, 20, 0, 0)
-        EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_IdleCrouch)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_Land)
-        EVT_CALL(SetActorPos, YELLOW_ACTOR, 60, 250, -5)
-        EVT_CALL(SetGoalPos, YELLOW_ACTOR, 60, 0, -5)
-        EVT_CALL(SetActorJumpGravity, YELLOW_ACTOR, EVT_FLOAT(1.5))
-        EVT_CALL(SetActorSounds, YELLOW_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
-        EVT_CALL(FallToGoal, YELLOW_ACTOR, 30)
-        EVT_CALL(PlaySoundAtActor, YELLOW_ACTOR, SOUND_KOOPA_BROS_LAND)
-        EVT_CALL(ResetActorSounds, YELLOW_ACTOR, ACTOR_SOUND_JUMP)
-        EVT_CALL(ForceHomePos, YELLOW_ACTOR, 60, 0, -5)
-        EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_Land)
-        EVT_CALL(SetActorPos, BLACK_ACTOR, 100, 250, -10)
-        EVT_CALL(SetGoalPos, BLACK_ACTOR, 100, 0, -10)
-        EVT_CALL(SetActorJumpGravity, BLACK_ACTOR, EVT_FLOAT(1.5))
-        EVT_CALL(SetActorSounds, BLACK_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
-        EVT_CALL(FallToGoal, BLACK_ACTOR, 30)
-        EVT_CALL(PlaySoundAtActor, BLACK_ACTOR, SOUND_KOOPA_BROS_LAND)
-        EVT_CALL(ResetActorSounds, BLACK_ACTOR, ACTOR_SOUND_JUMP)
-        EVT_CALL(ForceHomePos, BLACK_ACTOR, 100, 0, -10)
-        EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_IdleCrouch)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Land)
-        EVT_CALL(SetActorPos, RED_ACTOR, 140, 250, -15)
-        EVT_CALL(SetGoalPos, RED_ACTOR, 140, 0, -15)
-        EVT_CALL(SetActorJumpGravity, RED_ACTOR, EVT_FLOAT(1.5))
-        EVT_CALL(SetActorSounds, RED_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
-        EVT_CALL(FallToGoal, RED_ACTOR, 30)
-        EVT_CALL(PlaySoundAtActor, RED_ACTOR, SOUND_KOOPA_BROS_LAND)
-        EVT_CALL(ResetActorSounds, RED_ACTOR, ACTOR_SOUND_JUMP)
-        EVT_CALL(ForceHomePos, RED_ACTOR, 140, 0, -15)
-        EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_IdleCrouch)
-    EVT_END_THREAD
-    EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-    EVT_CALL(SetBattleCamTarget, 70, 46, 0)
-    EVT_CALL(SetBattleCamOffsetZ, 0)
-    EVT_CALL(SetBattleCamZoom, 292)
-    EVT_CALL(MoveBattleCamOver, 20)
-    EVT_WAIT(28)
-    EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_ThumbsUp)
-    EVT_WAIT(5)
-    EVT_CALL(GetActorPos, GREEN_ACTOR, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 7)
-    EVT_ADD(LVar1, 28)
-    EVT_ADD(LVar2, 5)
-    EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 30, 0)
-    EVT_CALL(PlaySoundAtActor, GREEN_ACTOR, SOUND_SMALL_LENS_FLARE)
-    EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_ThumbsUp)
-    EVT_WAIT(5)
-    EVT_CALL(GetActorPos, YELLOW_ACTOR, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 7)
-    EVT_ADD(LVar1, 28)
-    EVT_ADD(LVar2, 5)
-    EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 30, 0)
-    EVT_CALL(PlaySoundAtActor, YELLOW_ACTOR, SOUND_SMALL_LENS_FLARE)
-    EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_ThumbsUp)
-    EVT_WAIT(5)
-    EVT_CALL(GetActorPos, BLACK_ACTOR, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 7)
-    EVT_ADD(LVar1, 28)
-    EVT_ADD(LVar2, 5)
-    EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 30, 0)
-    EVT_CALL(PlaySoundAtActor, BLACK_ACTOR, SOUND_SMALL_LENS_FLARE)
-    EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_ThumbsUp)
-    EVT_WAIT(5)
-    EVT_CALL(GetActorPos, RED_ACTOR, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 7)
-    EVT_ADD(LVar1, 28)
-    EVT_ADD(LVar2, 5)
-    EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 30, 0)
-    EVT_CALL(PlaySoundAtActor, RED_ACTOR, SOUND_SMALL_LENS_FLARE)
-    EVT_WAIT(30)
-    EVT_CALL(N(PlayKoopaBrosSong))
-    EVT_CALL(ActorSpeak, MSG_CH1_0107, YELLOW_ACTOR, 1, -1, -1)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_TARGET, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_TARGET, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_KoopaBros_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_KoopaBros_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_KoopaBros_HandleEvent)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_KoopaBros_HandlePhase)))
-    EVT_CALL(SetActorFlagBits, GREEN_ACTOR, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
-    EVT_CALL(SetPartFlagBits, GREEN_ACTOR, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    EVT_CALL(HPBarToHome, GREEN_ACTOR)
-    EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Idle)
-    EVT_CALL(SetActorFlagBits, YELLOW_ACTOR, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
-    EVT_CALL(SetPartFlagBits, YELLOW_ACTOR, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    EVT_CALL(HPBarToHome, YELLOW_ACTOR)
-    EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_Idle)
-    EVT_CALL(SetActorFlagBits, BLACK_ACTOR, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
-    EVT_CALL(SetPartFlagBits, BLACK_ACTOR, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    EVT_CALL(HPBarToHome, BLACK_ACTOR)
-    EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_Idle)
-    EVT_CALL(SetActorFlagBits, RED_ACTOR, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
-    EVT_CALL(SetPartFlagBits, RED_ACTOR, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    EVT_CALL(HPBarToHome, RED_ACTOR)
-    EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Idle)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Toppled) // prevents first-turn tower attack
-    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_KoopaBrosRevealed)
-    EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, GREEN_ACTOR, FALSE)
+    Call(EnableIdleScript, GREEN_ACTOR, IDLE_SCRIPT_DISABLE)
+    Call(SetActorPos, GREEN_ACTOR, 100, 0, 10)
+    Call(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Launched)
+    Thread
+        Call(SetActorJumpGravity, GREEN_ACTOR, Float(0.4))
+        Call(SetActorSounds, GREEN_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
+        Call(SetGoalPos, GREEN_ACTOR, -300, 250, 0)
+        Call(JumpToGoal, GREEN_ACTOR, 50, FALSE, TRUE, FALSE)
+    EndThread
+    Call(UseIdleAnimation, YELLOW_ACTOR, FALSE)
+    Call(EnableIdleScript, YELLOW_ACTOR, IDLE_SCRIPT_DISABLE)
+    Call(SetActorPos, YELLOW_ACTOR, 100, 0, 10)
+    Call(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_Launched)
+    Thread
+        Call(SetActorJumpGravity, YELLOW_ACTOR, Float(0.4))
+        Call(SetActorSounds, YELLOW_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
+        Call(SetGoalPos, YELLOW_ACTOR, -200, 250, 0)
+        Call(JumpToGoal, YELLOW_ACTOR, 50, FALSE, TRUE, FALSE)
+    EndThread
+    Call(UseIdleAnimation, BLACK_ACTOR, FALSE)
+    Call(EnableIdleScript, BLACK_ACTOR, IDLE_SCRIPT_DISABLE)
+    Call(SetActorPos, BLACK_ACTOR, 100, 0, 10)
+    Call(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_Launched)
+    Thread
+        Call(SetActorJumpGravity, BLACK_ACTOR, Float(0.4))
+        Call(SetActorSounds, BLACK_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
+        Call(SetGoalPos, BLACK_ACTOR, 0, 250, 0)
+        Call(JumpToGoal, BLACK_ACTOR, 50, FALSE, TRUE, FALSE)
+    EndThread
+    Call(UseIdleAnimation, RED_ACTOR, FALSE)
+    Call(EnableIdleScript, RED_ACTOR, IDLE_SCRIPT_DISABLE)
+    Call(SetActorPos, RED_ACTOR, 100, 0, 10)
+    Call(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Launched)
+    Thread
+        Call(SetActorJumpGravity, RED_ACTOR, Float(0.4))
+        Call(SetActorSounds, RED_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
+        Call(SetGoalPos, RED_ACTOR, 150, 250, 0)
+        Call(JumpToGoal, RED_ACTOR, 50, FALSE, TRUE, FALSE)
+    EndThread
+    Wait(100)
+    Wait(100)
+    Call(EnableGroup, MODEL_atama, FALSE)
+    Call(EnableGroup, MODEL_left_arm, FALSE)
+    Call(EnableGroup, MODEL_shippo, FALSE)
+    Call(EnableGroup, MODEL_dou, FALSE)
+    Call(EnableGroup, MODEL_koura, FALSE)
+    Call(EnableGroup, MODEL_koma1, FALSE)
+    Call(EnableGroup, MODEL_koma2, FALSE)
+    Call(EnableGroup, MODEL_right_arm, FALSE)
+    Call(EnableGroup, MODEL_ashi, FALSE)
+    Thread
+        Wait(23)
+        Call(PlaySoundAtActor, GREEN_ACTOR, SOUND_FALL_QUICK)
+        Wait(5)
+        Call(PlaySoundAtActor, YELLOW_ACTOR, SOUND_FALL_QUICK)
+        Wait(5)
+        Call(PlaySoundAtActor, BLACK_ACTOR, SOUND_FALL_QUICK)
+        Wait(5)
+        Call(PlaySoundAtActor, RED_ACTOR, SOUND_FALL_QUICK)
+    EndThread
+    Thread
+        Call(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Land)
+        Call(SetActorPos, GREEN_ACTOR, 20, 250, 0)
+        Call(SetGoalPos, GREEN_ACTOR, 20, 0, 0)
+        Call(SetActorJumpGravity, GREEN_ACTOR, Float(1.5))
+        Call(SetActorSounds, GREEN_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
+        Call(FallToGoal, GREEN_ACTOR, 30)
+        Call(PlaySoundAtActor, GREEN_ACTOR, SOUND_KOOPA_BROS_LAND)
+        Call(ResetActorSounds, GREEN_ACTOR, ACTOR_SOUND_JUMP)
+        Call(ForceHomePos, GREEN_ACTOR, 20, 0, 0)
+        Call(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_IdleCrouch)
+    EndThread
+    Thread
+        Wait(5)
+        Call(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_Land)
+        Call(SetActorPos, YELLOW_ACTOR, 60, 250, -5)
+        Call(SetGoalPos, YELLOW_ACTOR, 60, 0, -5)
+        Call(SetActorJumpGravity, YELLOW_ACTOR, Float(1.5))
+        Call(SetActorSounds, YELLOW_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
+        Call(FallToGoal, YELLOW_ACTOR, 30)
+        Call(PlaySoundAtActor, YELLOW_ACTOR, SOUND_KOOPA_BROS_LAND)
+        Call(ResetActorSounds, YELLOW_ACTOR, ACTOR_SOUND_JUMP)
+        Call(ForceHomePos, YELLOW_ACTOR, 60, 0, -5)
+        Call(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
+    EndThread
+    Thread
+        Wait(10)
+        Call(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_Land)
+        Call(SetActorPos, BLACK_ACTOR, 100, 250, -10)
+        Call(SetGoalPos, BLACK_ACTOR, 100, 0, -10)
+        Call(SetActorJumpGravity, BLACK_ACTOR, Float(1.5))
+        Call(SetActorSounds, BLACK_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
+        Call(FallToGoal, BLACK_ACTOR, 30)
+        Call(PlaySoundAtActor, BLACK_ACTOR, SOUND_KOOPA_BROS_LAND)
+        Call(ResetActorSounds, BLACK_ACTOR, ACTOR_SOUND_JUMP)
+        Call(ForceHomePos, BLACK_ACTOR, 100, 0, -10)
+        Call(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_IdleCrouch)
+    EndThread
+    Thread
+        Wait(15)
+        Call(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Land)
+        Call(SetActorPos, RED_ACTOR, 140, 250, -15)
+        Call(SetGoalPos, RED_ACTOR, 140, 0, -15)
+        Call(SetActorJumpGravity, RED_ACTOR, Float(1.5))
+        Call(SetActorSounds, RED_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
+        Call(FallToGoal, RED_ACTOR, 30)
+        Call(PlaySoundAtActor, RED_ACTOR, SOUND_KOOPA_BROS_LAND)
+        Call(ResetActorSounds, RED_ACTOR, ACTOR_SOUND_JUMP)
+        Call(ForceHomePos, RED_ACTOR, 140, 0, -15)
+        Call(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_IdleCrouch)
+    EndThread
+    Wait(30)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(SetBattleCamTarget, 70, 46, 0)
+    Call(SetBattleCamOffsetZ, 0)
+    Call(SetBattleCamZoom, 292)
+    Call(MoveBattleCamOver, 20)
+    Wait(28)
+    Call(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_ThumbsUp)
+    Wait(5)
+    Call(GetActorPos, GREEN_ACTOR, LVar0, LVar1, LVar2)
+    Add(LVar0, 7)
+    Add(LVar1, 28)
+    Add(LVar2, 5)
+    PlayEffect(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 30, 0)
+    Call(PlaySoundAtActor, GREEN_ACTOR, SOUND_SMALL_LENS_FLARE)
+    Call(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_ThumbsUp)
+    Wait(5)
+    Call(GetActorPos, YELLOW_ACTOR, LVar0, LVar1, LVar2)
+    Add(LVar0, 7)
+    Add(LVar1, 28)
+    Add(LVar2, 5)
+    PlayEffect(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 30, 0)
+    Call(PlaySoundAtActor, YELLOW_ACTOR, SOUND_SMALL_LENS_FLARE)
+    Call(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_ThumbsUp)
+    Wait(5)
+    Call(GetActorPos, BLACK_ACTOR, LVar0, LVar1, LVar2)
+    Add(LVar0, 7)
+    Add(LVar1, 28)
+    Add(LVar2, 5)
+    PlayEffect(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 30, 0)
+    Call(PlaySoundAtActor, BLACK_ACTOR, SOUND_SMALL_LENS_FLARE)
+    Call(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_ThumbsUp)
+    Wait(5)
+    Call(GetActorPos, RED_ACTOR, LVar0, LVar1, LVar2)
+    Add(LVar0, 7)
+    Add(LVar1, 28)
+    Add(LVar2, 5)
+    PlayEffect(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 30, 0)
+    Call(PlaySoundAtActor, RED_ACTOR, SOUND_SMALL_LENS_FLARE)
+    Wait(30)
+    Call(N(PlayKoopaBrosSong))
+    Call(ActorSpeak, MSG_CH1_0107, YELLOW_ACTOR, 1, -1, -1)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_TARGET, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_TARGET, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_KoopaBros_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_KoopaBros_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_KoopaBros_HandleEvent)))
+    Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_KoopaBros_HandlePhase)))
+    Call(SetActorFlagBits, GREEN_ACTOR, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
+    Call(SetPartFlagBits, GREEN_ACTOR, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
+    Call(HPBarToHome, GREEN_ACTOR)
+    Call(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Idle)
+    Call(SetActorFlagBits, YELLOW_ACTOR, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
+    Call(SetPartFlagBits, YELLOW_ACTOR, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
+    Call(HPBarToHome, YELLOW_ACTOR)
+    Call(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_Idle)
+    Call(SetActorFlagBits, BLACK_ACTOR, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
+    Call(SetPartFlagBits, BLACK_ACTOR, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
+    Call(HPBarToHome, BLACK_ACTOR)
+    Call(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_Idle)
+    Call(SetActorFlagBits, RED_ACTOR, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
+    Call(SetPartFlagBits, RED_ACTOR, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
+    Call(HPBarToHome, RED_ACTOR)
+    Call(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Idle)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Toppled) // prevents first-turn tower attack
+    Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+    BitwiseOrConst(LVar0, AFLAG_Boss_KoopaBrosRevealed)
+    Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+    Return
+    End
 };
 
 API_CALLABLE(N(PlayLandOnTowerFX)) {
@@ -1835,359 +1835,359 @@ API_CALLABLE(N(PlayLandOnTowerFX)) {
 EvtScript N(EVS_BuildTowerWithKoopa) = {
     #define VAR_TOWER_HEIGHT LVarB
     #define VAR_CUR_TOWER_IDX LVarC
-    EVT_IF_EQ(LVar2, TOWER_TOP)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_LeadKoopaID, LVar0)
-    EVT_END_IF
-    EVT_SET(LVarA, LVar0)
-    EVT_SET(VAR_TOWER_HEIGHT, LVar1)
-    EVT_SET(VAR_CUR_TOWER_IDX, LVar2)
-    EVT_CALL(UseIdleAnimation, LVarA, FALSE)
-    EVT_SWITCH(LVar2)
-        EVT_CASE_EQ(TOWER_TOP)
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_PointForward)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_PointForward)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_PointForward)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_PointForward)
-            EVT_END_SWITCH
-            EVT_CALL(SetActorYaw, LVarA, 0)
-            EVT_CALL(GetActorPos, LVarA, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar0, 22)
-            EVT_ADD(LVar1, 19)
-            EVT_WAIT(10)
-            EVT_WAIT(30)
-            EVT_SET(LVar0, VAR_TOWER_HEIGHT)
-            EVT_SUB(LVar0, 1)
-            EVT_MUL(LVar0, 16)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
-            EVT_CALL(GetHomePos, LVar1, LVar2, LVar3, LVar4)
-            EVT_CALL(SetBattleCamTarget, LVar2, LVar3, LVar4)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-            EVT_CALL(SetBattleCamOffsetZ, 50)
-            EVT_CALL(SetBattleCamZoom, 400)
-            EVT_CALL(MoveBattleCamOver, LVar0)
-            EVT_WAIT(LVar0)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
-            EVT_CALL(GetHomePos, LVar1, LVar2, LVar3, LVar4)
-            EVT_SET(LVar4, 15)
-            EVT_CALL(SetGoalPos, LVarA, LVar2, LVar3, LVar4)
-            EVT_CALL(AddGoalPos, LVarA, 0, 0, 0)
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Run)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Run)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Run)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Run)
-            EVT_END_SWITCH
-            EVT_CALL(GetGoalPos, LVarA, LVar0, LVar1, LVar2)
-            EVT_CALL(GetActorPos, LVarA, LVar3, LVar4, LVar5)
-            EVT_IF_LT(LVar0, LVar3)
-                EVT_CALL(SetActorYaw, LVarA, 0)
-            EVT_ELSE
-                EVT_CALL(SetActorYaw, LVarA, 180)
-            EVT_END_IF
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
-            EVT_END_SWITCH
-            EVT_WAIT(5)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
-            EVT_CALL(GetHomePos, LVar1, LVar2, LVar3, LVar4)
-            EVT_SET(LVar4, 15)
-            EVT_CALL(SetGoalPos, LVarA, LVar2, LVar3, LVar4)
-            EVT_SET(LVar0, VAR_TOWER_HEIGHT)
-            EVT_SUB(LVar0, 1)
-            EVT_MUL(LVar0, 18)
-            EVT_SWITCH(VAR_TOWER_HEIGHT)
-                EVT_CASE_EQ(4)
-                    EVT_CALL(AddGoalPos, LVarA, 0, LVar0, -10)
-                EVT_CASE_EQ(3)
-                    EVT_CALL(AddGoalPos, LVarA, 0, LVar0, -7)
-                EVT_CASE_EQ(2)
-                    EVT_CALL(AddGoalPos, LVarA, 0, LVar0, -4)
-            EVT_END_SWITCH
-            EVT_CALL(AddGoalPos, LVarA, 15, 0, 0)
-            EVT_THREAD
-                EVT_WAIT(10)
-                EVT_SWITCH(LVarA)
-                    EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
-                    EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
-                    EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
-                    EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
-                EVT_END_SWITCH
-            EVT_END_THREAD
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
-            EVT_END_SWITCH
-            EVT_CALL(SetActorJumpGravity, LVarA, EVT_FLOAT(1.6))
-            EVT_CALL(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
-            EVT_CALL(N(PlayLandOnTowerFX), LVarA)
-            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_KOOPA_BROS_LAND)
-            EVT_CALL(GetActorPos, LVarA, LVar3, LVar4, LVar5)
-            EVT_SUB(LVar3, 15)
-            EVT_CALL(SetActorPos, LVarA, LVar3, LVar4, LVar5)
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Idle)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Idle)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Idle)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Idle)
-            EVT_END_SWITCH
-            EVT_WAIT(5)
-            EVT_CALL(SetActorYaw, LVarA, 0)
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_PointForward)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_PointForward)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_PointForward)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_PointForward)
-            EVT_END_SWITCH
-            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_SMALL_LENS_FLARE)
-            EVT_CALL(GetActorPos, LVarA, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar0, 22)
-            EVT_ADD(LVar1, 19)
-            EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 30, 0)
-            EVT_WAIT(20)
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, AFLAG_Boss_Dialogue_HaveATaste)
-                EVT_CALL(ActorSpeak, MSG_CH1_010A, LVarA, 1, -1, -1)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_Dialogue_HaveATaste)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_END_IF
-            EVT_WAIT(10)
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Idle)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Idle)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Idle)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Idle)
-            EVT_END_SWITCH
-            EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
-            EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-            EVT_CALL(HPBarToHome, LVarA)
-            EVT_CALL(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosA)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
-        EVT_CASE_OR_EQ(TOWER_DOWN_1)
-        EVT_CASE_OR_EQ(TOWER_DOWN_2)
-        EVT_CASE_OR_EQ(TOWER_DOWN_3)
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
-            EVT_END_SWITCH
-            EVT_WAIT(50)
+    IfEq(LVar2, TOWER_TOP)
+        Call(SetActorVar, ACTOR_SELF, AVAR_Boss_LeadKoopaID, LVar0)
+    EndIf
+    Set(LVarA, LVar0)
+    Set(VAR_TOWER_HEIGHT, LVar1)
+    Set(VAR_CUR_TOWER_IDX, LVar2)
+    Call(UseIdleAnimation, LVarA, FALSE)
+    Switch(LVar2)
+        CaseEq(TOWER_TOP)
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_PointForward)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_PointForward)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_PointForward)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_PointForward)
+            EndSwitch
+            Call(SetActorYaw, LVarA, 0)
+            Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
+            Sub(LVar0, 22)
+            Add(LVar1, 19)
+            Wait(10)
+            Wait(30)
+            Set(LVar0, VAR_TOWER_HEIGHT)
+            Sub(LVar0, 1)
+            Mul(LVar0, 16)
+            Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
+            Call(GetHomePos, LVar1, LVar2, LVar3, LVar4)
+            Call(SetBattleCamTarget, LVar2, LVar3, LVar4)
+            Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+            Call(SetBattleCamOffsetZ, 50)
+            Call(SetBattleCamZoom, 400)
+            Call(MoveBattleCamOver, LVar0)
+            Wait(LVar0)
+            Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
+            Call(GetHomePos, LVar1, LVar2, LVar3, LVar4)
+            Set(LVar4, 15)
+            Call(SetGoalPos, LVarA, LVar2, LVar3, LVar4)
+            Call(AddGoalPos, LVarA, 0, 0, 0)
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Run)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Run)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Run)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Run)
+            EndSwitch
+            Call(GetGoalPos, LVarA, LVar0, LVar1, LVar2)
+            Call(GetActorPos, LVarA, LVar3, LVar4, LVar5)
+            IfLt(LVar0, LVar3)
+                Call(SetActorYaw, LVarA, 0)
+            Else
+                Call(SetActorYaw, LVarA, 180)
+            EndIf
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
+            EndSwitch
+            Wait(5)
+            Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
+            Call(GetHomePos, LVar1, LVar2, LVar3, LVar4)
+            Set(LVar4, 15)
+            Call(SetGoalPos, LVarA, LVar2, LVar3, LVar4)
+            Set(LVar0, VAR_TOWER_HEIGHT)
+            Sub(LVar0, 1)
+            Mul(LVar0, 18)
+            Switch(VAR_TOWER_HEIGHT)
+                CaseEq(4)
+                    Call(AddGoalPos, LVarA, 0, LVar0, -10)
+                CaseEq(3)
+                    Call(AddGoalPos, LVarA, 0, LVar0, -7)
+                CaseEq(2)
+                    Call(AddGoalPos, LVarA, 0, LVar0, -4)
+            EndSwitch
+            Call(AddGoalPos, LVarA, 15, 0, 0)
+            Thread
+                Wait(10)
+                Switch(LVarA)
+                    CaseEq(GREEN_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
+                    CaseEq(YELLOW_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
+                    CaseEq(BLACK_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
+                    CaseEq(RED_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
+                EndSwitch
+            EndThread
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
+            EndSwitch
+            Call(SetActorJumpGravity, LVarA, Float(1.6))
+            Call(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
+            Call(N(PlayLandOnTowerFX), LVarA)
+            Call(PlaySoundAtActor, LVarA, SOUND_KOOPA_BROS_LAND)
+            Call(GetActorPos, LVarA, LVar3, LVar4, LVar5)
+            Sub(LVar3, 15)
+            Call(SetActorPos, LVarA, LVar3, LVar4, LVar5)
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Idle)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Idle)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Idle)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Idle)
+            EndSwitch
+            Wait(5)
+            Call(SetActorYaw, LVarA, 0)
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_PointForward)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_PointForward)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_PointForward)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_PointForward)
+            EndSwitch
+            Call(PlaySoundAtActor, LVarA, SOUND_SMALL_LENS_FLARE)
+            Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
+            Sub(LVar0, 22)
+            Add(LVar1, 19)
+            PlayEffect(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 30, 0)
+            Wait(20)
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            IfNotFlag(LVar0, AFLAG_Boss_Dialogue_HaveATaste)
+                Call(ActorSpeak, MSG_CH1_010A, LVarA, 1, -1, -1)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_Dialogue_HaveATaste)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            EndIf
+            Wait(10)
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Idle)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Idle)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Idle)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Idle)
+            EndSwitch
+            Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
+            Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+            Call(HPBarToHome, LVarA)
+            Call(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosA)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
+        CaseOrEq(TOWER_DOWN_1)
+        CaseOrEq(TOWER_DOWN_2)
+        CaseOrEq(TOWER_DOWN_3)
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
+            EndSwitch
+            Wait(50)
             // handle (height - 1) position
-            EVT_SET(LVar0, VAR_TOWER_HEIGHT)
-            EVT_SUB(LVar0, TOWER_DOWN_1)
-            EVT_IF_EQ(VAR_CUR_TOWER_IDX, LVar0)
-                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
-                EVT_CALL(GetHomePos, LVar1, LVar2, LVar3, LVar4)
-                EVT_SET(LVar4, 15)
-                EVT_CALL(SetGoalPos, LVarA, LVar2, LVar3, LVar4)
-                EVT_CALL(AddGoalPos, LVarA, 0, 0, 0)
-                EVT_SWITCH(LVarA)
-                    EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Run)
-                    EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Run)
-                    EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Run)
-                    EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Run)
-                EVT_END_SWITCH
-                EVT_CALL(RunToGoal, LVarA, 10, FALSE)
-                EVT_SWITCH(LVarA)
-                    EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
-                    EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
-                    EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
-                    EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
-                EVT_END_SWITCH
-                EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
-                EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-                EVT_CALL(HPBarToHome, LVarA)
-                EVT_CALL(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosB)
-            EVT_END_IF
+            Set(LVar0, VAR_TOWER_HEIGHT)
+            Sub(LVar0, TOWER_DOWN_1)
+            IfEq(VAR_CUR_TOWER_IDX, LVar0)
+                Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
+                Call(GetHomePos, LVar1, LVar2, LVar3, LVar4)
+                Set(LVar4, 15)
+                Call(SetGoalPos, LVarA, LVar2, LVar3, LVar4)
+                Call(AddGoalPos, LVarA, 0, 0, 0)
+                Switch(LVarA)
+                    CaseEq(GREEN_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Run)
+                    CaseEq(YELLOW_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Run)
+                    CaseEq(BLACK_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Run)
+                    CaseEq(RED_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Run)
+                EndSwitch
+                Call(RunToGoal, LVarA, 10, FALSE)
+                Switch(LVarA)
+                    CaseEq(GREEN_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
+                    CaseEq(YELLOW_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
+                    CaseEq(BLACK_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
+                    CaseEq(RED_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
+                EndSwitch
+                Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
+                Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+                Call(HPBarToHome, LVarA)
+                Call(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosB)
+            EndIf
             // handle (height - 2) position
-            EVT_SET(LVar0, VAR_TOWER_HEIGHT)
-            EVT_SUB(LVar0, TOWER_DOWN_2)
-            EVT_IF_EQ(VAR_CUR_TOWER_IDX, LVar0)
-                EVT_WAIT(10)
-                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
-                EVT_CALL(GetHomePos, LVar1, LVar2, LVar3, LVar4)
-                EVT_SET(LVar4, 15)
-                EVT_CALL(SetGoalPos, LVarA, LVar2, LVar3, LVar4)
-                EVT_CALL(AddGoalPos, LVarA, 0, 18, -4)
-                EVT_SWITCH(LVarA)
-                    EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
-                    EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
-                    EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
-                    EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
-                EVT_END_SWITCH
-                EVT_WAIT(5)
-                EVT_CALL(AddGoalPos, LVarA, 15, 0, 0)
-                EVT_THREAD
-                    EVT_WAIT(10)
-                    EVT_SWITCH(LVarA)
-                        EVT_CASE_EQ(GREEN_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
-                        EVT_CASE_EQ(YELLOW_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
-                        EVT_CASE_EQ(BLACK_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
-                        EVT_CASE_EQ(RED_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
-                    EVT_END_SWITCH
-                EVT_END_THREAD
-                EVT_SWITCH(LVarA)
-                    EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
-                    EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
-                    EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
-                    EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
-                EVT_END_SWITCH
-                EVT_CALL(SetActorJumpGravity, LVarA, EVT_FLOAT(1.6))
-                EVT_CALL(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
-                EVT_CALL(N(PlayLandOnTowerFX), LVarA)
-                EVT_CALL(PlaySoundAtActor, LVarA, SOUND_KOOPA_BROS_LAND)
-                EVT_CALL(GetActorPos, LVarA, LVar3, LVar4, LVar5)
-                EVT_SUB(LVar3, 15)
-                EVT_CALL(SetActorPos, LVarA, LVar3, LVar4, LVar5)
-                EVT_SWITCH(LVarA)
-                    EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
-                    EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
-                    EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
-                    EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
-                EVT_END_SWITCH
-                EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
-                EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-                EVT_CALL(HPBarToHome, LVarA)
-                EVT_CALL(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosC)
-            EVT_END_IF
+            Set(LVar0, VAR_TOWER_HEIGHT)
+            Sub(LVar0, TOWER_DOWN_2)
+            IfEq(VAR_CUR_TOWER_IDX, LVar0)
+                Wait(10)
+                Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
+                Call(GetHomePos, LVar1, LVar2, LVar3, LVar4)
+                Set(LVar4, 15)
+                Call(SetGoalPos, LVarA, LVar2, LVar3, LVar4)
+                Call(AddGoalPos, LVarA, 0, 18, -4)
+                Switch(LVarA)
+                    CaseEq(GREEN_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
+                    CaseEq(YELLOW_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
+                    CaseEq(BLACK_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
+                    CaseEq(RED_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
+                EndSwitch
+                Wait(5)
+                Call(AddGoalPos, LVarA, 15, 0, 0)
+                Thread
+                    Wait(10)
+                    Switch(LVarA)
+                        CaseEq(GREEN_ACTOR)
+                            Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
+                        CaseEq(YELLOW_ACTOR)
+                            Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
+                        CaseEq(BLACK_ACTOR)
+                            Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
+                        CaseEq(RED_ACTOR)
+                            Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
+                    EndSwitch
+                EndThread
+                Switch(LVarA)
+                    CaseEq(GREEN_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
+                    CaseEq(YELLOW_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
+                    CaseEq(BLACK_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
+                    CaseEq(RED_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
+                EndSwitch
+                Call(SetActorJumpGravity, LVarA, Float(1.6))
+                Call(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
+                Call(N(PlayLandOnTowerFX), LVarA)
+                Call(PlaySoundAtActor, LVarA, SOUND_KOOPA_BROS_LAND)
+                Call(GetActorPos, LVarA, LVar3, LVar4, LVar5)
+                Sub(LVar3, 15)
+                Call(SetActorPos, LVarA, LVar3, LVar4, LVar5)
+                Switch(LVarA)
+                    CaseEq(GREEN_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
+                    CaseEq(YELLOW_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
+                    CaseEq(BLACK_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
+                    CaseEq(RED_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
+                EndSwitch
+                Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
+                Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+                Call(HPBarToHome, LVarA)
+                Call(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosC)
+            EndIf
             // handle (height - 3) position
-            EVT_SET(LVar0, LVarB)
-            EVT_SUB(LVar0, TOWER_DOWN_3)
-            EVT_IF_EQ(VAR_CUR_TOWER_IDX, LVar0)
-                EVT_WAIT(30)
-                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
-                EVT_CALL(GetHomePos, LVar1, LVar2, LVar3, LVar4)
-                EVT_SET(LVar4, 15)
-                EVT_CALL(SetGoalPos, LVarA, LVar2, LVar3, LVar4)
-                EVT_CALL(AddGoalPos, LVarA, 0, 36, -7)
-                EVT_SWITCH(LVarA)
-                    EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
-                    EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
-                    EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
-                    EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
-                EVT_END_SWITCH
-                EVT_WAIT(5)
-                EVT_CALL(AddGoalPos, LVarA, 15, 0, 0)
-                EVT_THREAD
-                    EVT_WAIT(10)
-                    EVT_SWITCH(LVarA)
-                        EVT_CASE_EQ(GREEN_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
-                        EVT_CASE_EQ(YELLOW_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
-                        EVT_CASE_EQ(BLACK_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
-                        EVT_CASE_EQ(RED_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
-                    EVT_END_SWITCH
-                EVT_END_THREAD
-                EVT_SWITCH(LVarA)
-                    EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
-                    EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
-                    EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
-                    EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
-                EVT_END_SWITCH
-                EVT_CALL(SetActorJumpGravity, LVarA, EVT_FLOAT(1.6))
-                EVT_CALL(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
-                EVT_CALL(N(PlayLandOnTowerFX), LVarA)
-                EVT_CALL(PlaySoundAtActor, LVarA, SOUND_KOOPA_BROS_LAND)
-                EVT_CALL(GetActorPos, LVarA, LVar3, LVar4, LVar5)
-                EVT_SUB(LVar3, 15)
-                EVT_CALL(SetActorPos, LVarA, LVar3, LVar4, LVar5)
-                EVT_SWITCH(LVarA)
-                    EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
-                    EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
-                    EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
-                    EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
-                EVT_END_SWITCH
-                EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
-                EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-                EVT_CALL(HPBarToHome, LVarA)
-                EVT_CALL(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosD)
-            EVT_END_IF
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+            Set(LVar0, LVarB)
+            Sub(LVar0, TOWER_DOWN_3)
+            IfEq(VAR_CUR_TOWER_IDX, LVar0)
+                Wait(30)
+                Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
+                Call(GetHomePos, LVar1, LVar2, LVar3, LVar4)
+                Set(LVar4, 15)
+                Call(SetGoalPos, LVarA, LVar2, LVar3, LVar4)
+                Call(AddGoalPos, LVarA, 0, 36, -7)
+                Switch(LVarA)
+                    CaseEq(GREEN_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
+                    CaseEq(YELLOW_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
+                    CaseEq(BLACK_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
+                    CaseEq(RED_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
+                EndSwitch
+                Wait(5)
+                Call(AddGoalPos, LVarA, 15, 0, 0)
+                Thread
+                    Wait(10)
+                    Switch(LVarA)
+                        CaseEq(GREEN_ACTOR)
+                            Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
+                        CaseEq(YELLOW_ACTOR)
+                            Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
+                        CaseEq(BLACK_ACTOR)
+                            Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
+                        CaseEq(RED_ACTOR)
+                            Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
+                    EndSwitch
+                EndThread
+                Switch(LVarA)
+                    CaseEq(GREEN_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
+                    CaseEq(YELLOW_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
+                    CaseEq(BLACK_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
+                    CaseEq(RED_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
+                EndSwitch
+                Call(SetActorJumpGravity, LVarA, Float(1.6))
+                Call(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
+                Call(N(PlayLandOnTowerFX), LVarA)
+                Call(PlaySoundAtActor, LVarA, SOUND_KOOPA_BROS_LAND)
+                Call(GetActorPos, LVarA, LVar3, LVar4, LVar5)
+                Sub(LVar3, 15)
+                Call(SetActorPos, LVarA, LVar3, LVar4, LVar5)
+                Switch(LVarA)
+                    CaseEq(GREEN_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
+                    CaseEq(YELLOW_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
+                    CaseEq(BLACK_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
+                    CaseEq(RED_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
+                EndSwitch
+                Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
+                Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+                Call(HPBarToHome, LVarA)
+                Call(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosD)
+            EndIf
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
     #undef VAR_TOWER_HEIGHT
     #undef VAR_CUR_TOWER_IDX
 };
@@ -2197,306 +2197,306 @@ EvtScript N(EVS_BuildTowerWithKoopa) = {
 // (in) Var2 : add index (0, 1, ...), or (-1) to mean "demoting"
 // (in) Var3 : orphan count
 EvtScript N(EVS_UpdateTowerWithKoopa) = {
-    EVT_IF_EQ(LVar2, 0)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_LeadKoopaID, LVar0)
-    EVT_END_IF
-    EVT_SET(LVarA, LVar0)
-    EVT_SET(LVarB, LVar1)
-    EVT_SET(LVarC, LVar2)
-    EVT_SET(LVarD, LVar3)
-    EVT_CALL(UseIdleAnimation, LVarA, FALSE)
-    EVT_SWITCH(LVarA)
-        EVT_CASE_EQ(GREEN_ACTOR)
-            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_PointForward)
-        EVT_CASE_EQ(YELLOW_ACTOR)
-            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_PointForward)
-        EVT_CASE_EQ(BLACK_ACTOR)
-            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_PointForward)
-        EVT_CASE_EQ(RED_ACTOR)
-            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_PointForward)
-    EVT_END_SWITCH
-    EVT_WAIT(15)
-    EVT_SWITCH(LVarC)
-        EVT_CASE_EQ(-1)
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
-            EVT_END_SWITCH
-            EVT_SWITCH(LVarB)
-                EVT_CASE_EQ(4)
-                    EVT_SWITCH(LVarD)
-                        EVT_CASE_EQ(2)
-                            EVT_CALL(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosC)
-                        EVT_CASE_EQ(1)
-                            EVT_CALL(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosD)
-                    EVT_END_SWITCH
-                EVT_CASE_EQ(3)
-                    EVT_CALL(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosC)
-            EVT_END_SWITCH
-        EVT_CASE_EQ(0)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
-            EVT_CALL(GetHomePos, LVar1, LVar2, LVar3, LVar4)
-            EVT_CALL(SetBattleCamTarget, LVar2, LVar3, LVar4)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-            EVT_CALL(SetBattleCamOffsetZ, 50)
-            EVT_CALL(SetBattleCamZoom, 400)
-            EVT_CALL(MoveBattleCamOver, 30)
-            EVT_IF_EQ(LVarD, 2)
-                EVT_WAIT(25)
-            EVT_END_IF
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
-            EVT_END_SWITCH
-            EVT_WAIT(5)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
-            EVT_CALL(GetHomePos, LVar0, LVar1, LVar2, LVar3)
-            EVT_SET(LVar3, 15)
-            EVT_CALL(SetGoalPos, LVarA, LVar1, LVar2, LVar3)
-            EVT_SWITCH(LVarB)
-                EVT_CASE_EQ(4)
-                    EVT_CALL(AddGoalPos, LVarA, 0, 54, -10)
-                EVT_CASE_EQ(3)
-                    EVT_CALL(AddGoalPos, LVarA, 0, 36, -7)
-            EVT_END_SWITCH
-            EVT_CALL(AddGoalPos, LVarA, 15, 0, 0)
-            EVT_THREAD
-                EVT_WAIT(10)
-                EVT_SWITCH(LVarA)
-                    EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
-                    EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
-                    EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
-                    EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
-                EVT_END_SWITCH
-            EVT_END_THREAD
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
-            EVT_END_SWITCH
-            EVT_CALL(SetActorJumpGravity, LVarA, EVT_FLOAT(1.6))
-            EVT_CALL(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
-            EVT_CALL(N(PlayLandOnTowerFX), LVarA)
-            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_KOOPA_BROS_LAND)
-            EVT_CALL(GetActorPos, LVarA, LVar3, LVar4, LVar5)
-            EVT_SUB(LVar3, 15)
-            EVT_CALL(SetActorPos, LVarA, LVar3, LVar4, LVar5)
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Idle)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Idle)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Idle)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Idle)
-            EVT_END_SWITCH
-            EVT_WAIT(10)
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_PointForward)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_PointForward)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_PointForward)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_PointForward)
-            EVT_END_SWITCH
-            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_SMALL_LENS_FLARE)
-            EVT_CALL(GetActorPos, LVarA, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar0, 22)
-            EVT_ADD(LVar1, 19)
-            EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 30, 0)
-            EVT_WAIT(30)
-            EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
-            EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-            EVT_CALL(HPBarToHome, LVarA)
-            EVT_CALL(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosA)
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_DoneTowerUpdate)
-            EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-        EVT_CASE_EQ(1)
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
-            EVT_END_SWITCH
-            EVT_WAIT(5)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
-            EVT_CALL(GetHomePos, LVar0, LVar1, LVar2, LVar3)
-            EVT_SET(LVar3, 15)
-            EVT_CALL(SetGoalPos, LVarA, LVar1, LVar2, LVar3)
-            EVT_CALL(AddGoalPos, LVarA, 0, 36, -7)
-            EVT_CALL(AddGoalPos, LVarA, 15, 0, 0)
-            EVT_THREAD
-                EVT_WAIT(10)
-                EVT_SWITCH(LVarA)
-                    EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
-                    EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
-                    EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
-                    EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
-                EVT_END_SWITCH
-            EVT_END_THREAD
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
-            EVT_END_SWITCH
-            EVT_CALL(SetActorJumpGravity, LVarA, EVT_FLOAT(1.6))
-            EVT_CALL(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
-            EVT_CALL(N(PlayLandOnTowerFX), LVarA)
-            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_KOOPA_BROS_LAND)
-            EVT_CALL(GetActorPos, LVarA, LVar3, LVar4, LVar5)
-            EVT_SUB(LVar3, 15)
-            EVT_CALL(SetActorPos, LVarA, LVar3, LVar4, LVar5)
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Idle)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Idle)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Idle)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Idle)
-            EVT_END_SWITCH
-            EVT_WAIT(10)
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
-                EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
-                EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
-                EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
-            EVT_END_SWITCH
-            EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
-            EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-            EVT_CALL(HPBarToHome, LVarA)
-            EVT_CALL(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosD)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    IfEq(LVar2, 0)
+        Call(SetActorVar, ACTOR_SELF, AVAR_Boss_LeadKoopaID, LVar0)
+    EndIf
+    Set(LVarA, LVar0)
+    Set(LVarB, LVar1)
+    Set(LVarC, LVar2)
+    Set(LVarD, LVar3)
+    Call(UseIdleAnimation, LVarA, FALSE)
+    Switch(LVarA)
+        CaseEq(GREEN_ACTOR)
+            Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_PointForward)
+        CaseEq(YELLOW_ACTOR)
+            Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_PointForward)
+        CaseEq(BLACK_ACTOR)
+            Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_PointForward)
+        CaseEq(RED_ACTOR)
+            Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_PointForward)
+    EndSwitch
+    Wait(15)
+    Switch(LVarC)
+        CaseEq(-1)
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
+            EndSwitch
+            Switch(LVarB)
+                CaseEq(4)
+                    Switch(LVarD)
+                        CaseEq(2)
+                            Call(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosC)
+                        CaseEq(1)
+                            Call(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosD)
+                    EndSwitch
+                CaseEq(3)
+                    Call(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosC)
+            EndSwitch
+        CaseEq(0)
+            Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
+            Call(GetHomePos, LVar1, LVar2, LVar3, LVar4)
+            Call(SetBattleCamTarget, LVar2, LVar3, LVar4)
+            Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+            Call(SetBattleCamOffsetZ, 50)
+            Call(SetBattleCamZoom, 400)
+            Call(MoveBattleCamOver, 30)
+            IfEq(LVarD, 2)
+                Wait(25)
+            EndIf
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
+            EndSwitch
+            Wait(5)
+            Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
+            Call(GetHomePos, LVar0, LVar1, LVar2, LVar3)
+            Set(LVar3, 15)
+            Call(SetGoalPos, LVarA, LVar1, LVar2, LVar3)
+            Switch(LVarB)
+                CaseEq(4)
+                    Call(AddGoalPos, LVarA, 0, 54, -10)
+                CaseEq(3)
+                    Call(AddGoalPos, LVarA, 0, 36, -7)
+            EndSwitch
+            Call(AddGoalPos, LVarA, 15, 0, 0)
+            Thread
+                Wait(10)
+                Switch(LVarA)
+                    CaseEq(GREEN_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
+                    CaseEq(YELLOW_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
+                    CaseEq(BLACK_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
+                    CaseEq(RED_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
+                EndSwitch
+            EndThread
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
+            EndSwitch
+            Call(SetActorJumpGravity, LVarA, Float(1.6))
+            Call(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
+            Call(N(PlayLandOnTowerFX), LVarA)
+            Call(PlaySoundAtActor, LVarA, SOUND_KOOPA_BROS_LAND)
+            Call(GetActorPos, LVarA, LVar3, LVar4, LVar5)
+            Sub(LVar3, 15)
+            Call(SetActorPos, LVarA, LVar3, LVar4, LVar5)
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Idle)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Idle)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Idle)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Idle)
+            EndSwitch
+            Wait(10)
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_PointForward)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_PointForward)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_PointForward)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_PointForward)
+            EndSwitch
+            Call(PlaySoundAtActor, LVarA, SOUND_SMALL_LENS_FLARE)
+            Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
+            Sub(LVar0, 22)
+            Add(LVar1, 19)
+            PlayEffect(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 30, 0)
+            Wait(30)
+            Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
+            Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+            Call(HPBarToHome, LVarA)
+            Call(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosA)
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            BitwiseOrConst(LVar0, AFLAG_Boss_DoneTowerUpdate)
+            Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+        CaseEq(1)
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
+            EndSwitch
+            Wait(5)
+            Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
+            Call(GetHomePos, LVar0, LVar1, LVar2, LVar3)
+            Set(LVar3, 15)
+            Call(SetGoalPos, LVarA, LVar1, LVar2, LVar3)
+            Call(AddGoalPos, LVarA, 0, 36, -7)
+            Call(AddGoalPos, LVarA, 15, 0, 0)
+            Thread
+                Wait(10)
+                Switch(LVarA)
+                    CaseEq(GREEN_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
+                    CaseEq(YELLOW_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
+                    CaseEq(BLACK_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
+                    CaseEq(RED_ACTOR)
+                        Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
+                EndSwitch
+            EndThread
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
+            EndSwitch
+            Call(SetActorJumpGravity, LVarA, Float(1.6))
+            Call(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
+            Call(N(PlayLandOnTowerFX), LVarA)
+            Call(PlaySoundAtActor, LVarA, SOUND_KOOPA_BROS_LAND)
+            Call(GetActorPos, LVarA, LVar3, LVar4, LVar5)
+            Sub(LVar3, 15)
+            Call(SetActorPos, LVarA, LVar3, LVar4, LVar5)
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Idle)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Idle)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Idle)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Idle)
+            EndSwitch
+            Wait(10)
+            Switch(LVarA)
+                CaseEq(GREEN_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
+                CaseEq(YELLOW_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
+                CaseEq(BLACK_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
+                CaseEq(RED_ACTOR)
+                    Call(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
+            EndSwitch
+            Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
+            Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+            Call(HPBarToHome, LVarA)
+            Call(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosD)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_TryFormingTower) = {
     // count the number of standing koopa bros
     #define VAR_STANDING_COUNT LVarA
-    EVT_SET(VAR_STANDING_COUNT, 0)
-    EVT_CALL(CreateCurrentPosTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
-    EVT_CALL(InitTargetIterator)
-    EVT_LABEL(0)
-        EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-        EVT_CALL(GetActorVar, LVar0, AVAR_Koopa_State, LVar1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_CALL(GetStatusFlags, LVar0, LVar1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_IF_EQ(VAR_STANDING_COUNT, 0)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
-                EVT_END_IF
-                EVT_ADD(VAR_STANDING_COUNT, 1)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, ITER_NO_MORE)
-            EVT_GOTO(0)
-        EVT_END_IF
+    Set(VAR_STANDING_COUNT, 0)
+    Call(CreateCurrentPosTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
+    Call(InitTargetIterator)
+    Label(0)
+        Call(GetOwnerTarget, LVar0, LVar1)
+        Call(GetActorVar, LVar0, AVAR_Koopa_State, LVar1)
+        IfEq(LVar1, 0)
+            Call(GetStatusFlags, LVar0, LVar1)
+            IfEq(LVar1, 0)
+                IfEq(VAR_STANDING_COUNT, 0)
+                    Call(SetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
+                EndIf
+                Add(VAR_STANDING_COUNT, 1)
+            EndIf
+        EndIf
+        Call(ChooseNextTarget, ITER_NEXT, LVar0)
+        IfNe(LVar0, ITER_NO_MORE)
+            Goto(0)
+        EndIf
     // check special cases for standing koopa count
-    EVT_SWITCH(VAR_STANDING_COUNT)
-        EVT_CASE_EQ(0)
-            EVT_RETURN
-        EVT_CASE_EQ(1)
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_DoingSoloAttack)
-            EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_RETURN
-    EVT_END_SWITCH
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, VAR_STANDING_COUNT)
-    EVT_SET(LFlag0, FALSE)
+    Switch(VAR_STANDING_COUNT)
+        CaseEq(0)
+            Return
+        CaseEq(1)
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            BitwiseOrConst(LVar0, AFLAG_Boss_DoingSoloAttack)
+            Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            Return
+    EndSwitch
+    Call(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, VAR_STANDING_COUNT)
+    Set(LFlag0, FALSE)
     // have each koopa join the tower from front to back
     // the index ranges from (height - 1) for the bottom koopa to 0 for the top
     #define VAR_CUR_KOOPA_IDX LVarB
-    EVT_SET(VAR_CUR_KOOPA_IDX, VAR_STANDING_COUNT)
-    EVT_SUB(VAR_CUR_KOOPA_IDX, 1)
-    EVT_CALL(CreateCurrentPosTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
-    EVT_CALL(InitTargetIterator)
-    EVT_LABEL(1)
-        EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-        EVT_CALL(GetActorVar, LVar0, AVAR_Koopa_State, LVar1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_CALL(GetStatusFlags, LVar0, LVar1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_SET(LVar1, VAR_STANDING_COUNT)
-                EVT_SET(LVar2, VAR_CUR_KOOPA_IDX)
-                EVT_EXEC(N(EVS_BuildTowerWithKoopa))
-                EVT_SUB(VAR_CUR_KOOPA_IDX, 1)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, ITER_NO_MORE)
-            EVT_GOTO(1)
-        EVT_END_IF
+    Set(VAR_CUR_KOOPA_IDX, VAR_STANDING_COUNT)
+    Sub(VAR_CUR_KOOPA_IDX, 1)
+    Call(CreateCurrentPosTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
+    Call(InitTargetIterator)
+    Label(1)
+        Call(GetOwnerTarget, LVar0, LVar1)
+        Call(GetActorVar, LVar0, AVAR_Koopa_State, LVar1)
+        IfEq(LVar1, 0)
+            Call(GetStatusFlags, LVar0, LVar1)
+            IfEq(LVar1, 0)
+                Set(LVar1, VAR_STANDING_COUNT)
+                Set(LVar2, VAR_CUR_KOOPA_IDX)
+                Exec(N(EVS_BuildTowerWithKoopa))
+                Sub(VAR_CUR_KOOPA_IDX, 1)
+            EndIf
+        EndIf
+        Call(ChooseNextTarget, ITER_NEXT, LVar0)
+        IfNe(LVar0, ITER_NO_MORE)
+            Goto(1)
+        EndIf
     // hide the status bar until the tower is formed
-    EVT_CALL(EnableBattleStatusBar, FALSE)
-    EVT_LABEL(2)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, AVAL_Boss_TowerState_Toppled)
-            EVT_GOTO(2)
-        EVT_END_IF
-    EVT_CALL(EnableBattleStatusBar, TRUE)
+    Call(EnableBattleStatusBar, FALSE)
+    Label(2)
+        Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
+        Wait(1)
+        IfEq(LVar0, AVAL_Boss_TowerState_Toppled)
+            Goto(2)
+        EndIf
+    Call(EnableBattleStatusBar, TRUE)
     // housekeeping for various actor states in the new tower configuration
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_POPUP, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    EVT_SET(LVar0, VAR_STANDING_COUNT)
-    EVT_MUL(LVar0, 18)
-    EVT_ADD(LVar0, 20)
-    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_TOWER, -4, LVar0)
-    EVT_CALL(SetActorSize, ACTOR_SELF, LVar0, 45)
-    EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_KOOPA_BROS)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
-    EVT_CALL(GetActorPos, LVar1, LVar2, LVar3, LVar4)
-    EVT_CALL(SetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
-    EVT_SET(LVarA, BOSS_CMD_STABLE)
-    EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
-    EVT_RETURN
-    EVT_END
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_POPUP, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_FLAG_NO_TARGET, FALSE)
+    Set(LVar0, VAR_STANDING_COUNT)
+    Mul(LVar0, 18)
+    Add(LVar0, 20)
+    Call(SetTargetOffset, ACTOR_SELF, PRT_TOWER, -4, LVar0)
+    Call(SetActorSize, ACTOR_SELF, LVar0, 45)
+    Call(SetActorType, ACTOR_SELF, ACTOR_TYPE_KOOPA_BROS)
+    Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
+    Call(GetActorPos, LVar1, LVar2, LVar3, LVar4)
+    Call(SetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
+    Set(LVarA, BOSS_CMD_STABLE)
+    ExecWait(N(EVS_BroadcastToKoopaBros))
+    Call(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
+    Return
+    End
     #undef VAR_STANDING_COUNT
     #undef VAR_CUR_KOOPA_IDX 
 };
@@ -2504,643 +2504,643 @@ EvtScript N(EVS_TryFormingTower) = {
 // count the number of standing koopa bros
 EvtScript N(EVS_TryJoiningTower) = {
     #define VAR_STANDING_COUNT LVarA
-    EVT_SET(VAR_STANDING_COUNT, 0)
-    EVT_CALL(CreateCurrentPosTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
-    EVT_CALL(InitTargetIterator)
-    EVT_LABEL(0)
-        EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-        EVT_CALL(GetActorVar, LVar0, AVAR_Koopa_State, LVar1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_CALL(GetStatusFlags, LVar0, LVar1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_ADD(VAR_STANDING_COUNT, 1)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, ITER_NO_MORE)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_IF_EQ(VAR_STANDING_COUNT, 0)
+    Set(VAR_STANDING_COUNT, 0)
+    Call(CreateCurrentPosTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
+    Call(InitTargetIterator)
+    Label(0)
+        Call(GetOwnerTarget, LVar0, LVar1)
+        Call(GetActorVar, LVar0, AVAR_Koopa_State, LVar1)
+        IfEq(LVar1, 0)
+            Call(GetStatusFlags, LVar0, LVar1)
+            IfEq(LVar1, 0)
+                Add(VAR_STANDING_COUNT, 1)
+            EndIf
+        EndIf
+        Call(ChooseNextTarget, ITER_NEXT, LVar0)
+        IfNe(LVar0, ITER_NO_MORE)
+            Goto(0)
+        EndIf
+    IfEq(VAR_STANDING_COUNT, 0)
         // no orphaned koopa bros found
-        EVT_RETURN
-    EVT_END_IF
+        Return
+    EndIf
     // add orphan count to tower size
-    EVT_SET(LVar3, LVarA)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, LVar0)
-    EVT_ADD(LVarA, LVar0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, LVarA)
+    Set(LVar3, LVarA)
+    Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, LVar0)
+    Add(LVarA, LVar0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, LVarA)
     // reset 'joined' flag
-    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_BITWISE_AND_CONST(LVar0, ~AFLAG_Boss_DoneTowerUpdate)
-    EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+    Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+    BitwiseAndConst(LVar0, ~AFLAG_Boss_DoneTowerUpdate)
+    Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
     // demote the top koopa bros
-    EVT_SET(LVar0, FIRST_KOOPA_ACTOR)
-    EVT_LOOP(4)
-        EVT_CALL(ActorExists, LVar0, LVar1)
-        EVT_IF_EQ(LVar1, TRUE)
-            EVT_CALL(GetActorVar, LVar0, AVAR_Koopa_State, LVar2)
-            EVT_IF_EQ(LVar2, AVAL_Koopa_State_PosA)
-                EVT_SET(LVar1, LVarA)
-                EVT_SET(LVar2, -1)
-                EVT_EXEC(N(EVS_UpdateTowerWithKoopa))
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_IF
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
+    Set(LVar0, FIRST_KOOPA_ACTOR)
+    Loop(4)
+        Call(ActorExists, LVar0, LVar1)
+        IfEq(LVar1, TRUE)
+            Call(GetActorVar, LVar0, AVAR_Koopa_State, LVar2)
+            IfEq(LVar2, AVAL_Koopa_State_PosA)
+                Set(LVar1, LVarA)
+                Set(LVar2, -1)
+                Exec(N(EVS_UpdateTowerWithKoopa))
+                BreakLoop
+            EndIf
+        EndIf
+        Add(LVar0, 1)
+    EndLoop
     // have each orphaned koopa join the tower from front to back
-    EVT_SET(LVar2, 0)
-    EVT_CALL(CreateCurrentPosTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
-    EVT_CALL(InitTargetIterator)
-    EVT_LABEL(1)
-        EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-        EVT_CALL(GetActorVar, LVar0, AVAR_Koopa_State, LVar8)
-        EVT_IF_EQ(LVar8, AVAL_Koopa_State_Ready)
-            EVT_SET(LVar1, LVarA)
-            EVT_EXEC(N(EVS_UpdateTowerWithKoopa))
-            EVT_ADD(LVar2, 1)
-        EVT_END_IF
-        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, ITER_NO_MORE)
-            EVT_GOTO(1)
-        EVT_END_IF
+    Set(LVar2, 0)
+    Call(CreateCurrentPosTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
+    Call(InitTargetIterator)
+    Label(1)
+        Call(GetOwnerTarget, LVar0, LVar1)
+        Call(GetActorVar, LVar0, AVAR_Koopa_State, LVar8)
+        IfEq(LVar8, AVAL_Koopa_State_Ready)
+            Set(LVar1, LVarA)
+            Exec(N(EVS_UpdateTowerWithKoopa))
+            Add(LVar2, 1)
+        EndIf
+        Call(ChooseNextTarget, ITER_NEXT, LVar0)
+        IfNe(LVar0, ITER_NO_MORE)
+            Goto(1)
+        EndIf
     // hide the status bar until the tower is formed
-    EVT_CALL(EnableBattleStatusBar, FALSE)
-    EVT_LABEL(2)
-        EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-        EVT_IF_NOT_FLAG(LVar0, AFLAG_Boss_DoneTowerUpdate)
-            EVT_WAIT(1)
-            EVT_GOTO(2)
-        EVT_END_IF
-    EVT_CALL(EnableBattleStatusBar, TRUE)
+    Call(EnableBattleStatusBar, FALSE)
+    Label(2)
+        Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+        IfNotFlag(LVar0, AFLAG_Boss_DoneTowerUpdate)
+            Wait(1)
+            Goto(2)
+        EndIf
+    Call(EnableBattleStatusBar, TRUE)
     // housekeeping for various actor states in the new tower configuration
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_POPUP, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    EVT_SET(LVar0, LVarA)
-    EVT_MUL(LVar0, 18)
-    EVT_ADD(LVar0, 20)
-    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_TOWER, -4, LVar0)
-    EVT_CALL(SetActorSize, ACTOR_SELF, LVar0, 45)
-    EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_KOOPA_BROS)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
-    EVT_CALL(GetActorPos, LVar1, LVar2, LVar3, LVar4)
-    EVT_CALL(SetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
-    EVT_SET(LVarA, BOSS_CMD_STABLE)
-    EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
-    EVT_RETURN
-    EVT_END
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_POPUP, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_FLAG_NO_TARGET, FALSE)
+    Set(LVar0, LVarA)
+    Mul(LVar0, 18)
+    Add(LVar0, 20)
+    Call(SetTargetOffset, ACTOR_SELF, PRT_TOWER, -4, LVar0)
+    Call(SetActorSize, ACTOR_SELF, LVar0, 45)
+    Call(SetActorType, ACTOR_SELF, ACTOR_TYPE_KOOPA_BROS)
+    Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
+    Call(GetActorPos, LVar1, LVar2, LVar3, LVar4)
+    Call(SetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
+    Set(LVarA, BOSS_CMD_STABLE)
+    ExecWait(N(EVS_BroadcastToKoopaBros))
+    Call(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
+    Return
+    End
     #undef VAR_STANDING_COUNT
 };
 
 EvtScript N(EVS_Broadcast_TowerUnstable) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
-    EVT_IF_EQ(LVar0, AVAL_Boss_TowerState_Unstable)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_TowerUnstable)
-    EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Unstable)
-    EVT_SET(LVarA, BOSS_CMD_UNSTABLE)
-    EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, LVarA)
-    EVT_SET(LVar0, LVarA)
-    EVT_MUL(LVar0, 18)
-    EVT_ADD(LVar0, 5)
-    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_TOWER, -4, LVar0)
-    EVT_CALL(SetActorSize, ACTOR_SELF, LVar0, 45)
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
+    IfEq(LVar0, AVAL_Boss_TowerState_Unstable)
+        Return
+    EndIf
+    Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+    BitwiseOrConst(LVar0, AFLAG_Boss_TowerUnstable)
+    Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Unstable)
+    Set(LVarA, BOSS_CMD_UNSTABLE)
+    ExecWait(N(EVS_BroadcastToKoopaBros))
+    Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, LVarA)
+    Set(LVar0, LVarA)
+    Mul(LVar0, 18)
+    Add(LVar0, 5)
+    Call(SetTargetOffset, ACTOR_SELF, PRT_TOWER, -4, LVar0)
+    Call(SetActorSize, ACTOR_SELF, LVar0, 45)
+    Return
+    End
 };
 
 EvtScript N(EVS_Broadcast_ToppleHit) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Toppled)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_IF_NE(LVar0, EVENT_BURN_HIT)
-        EVT_SET(LVarA, BOSS_CMD_TOPPLE_HIT)
-    EVT_ELSE
-        EVT_SET(LVarA, BOSS_CMD_TOPPLE_BURN_HIT)
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_TARGET, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_BITWISE_AND_CONST(LVar0, ~AFLAG_Boss_TowerUnstable)
-    EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_BITWISE_AND_CONST(LVar0, ~AFLAG_Boss_Dialogue_WereGoingOver)
-    EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_RETURN
-    EVT_END
+    Call(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Toppled)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    IfNe(LVar0, EVENT_BURN_HIT)
+        Set(LVarA, BOSS_CMD_TOPPLE_HIT)
+    Else
+        Set(LVarA, BOSS_CMD_TOPPLE_BURN_HIT)
+    EndIf
+    ExecWait(N(EVS_BroadcastToKoopaBros))
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_TARGET, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+    Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+    BitwiseAndConst(LVar0, ~AFLAG_Boss_TowerUnstable)
+    Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+    Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+    BitwiseAndConst(LVar0, ~AFLAG_Boss_Dialogue_WereGoingOver)
+    Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+    Return
+    End
 };
 
 // (in) LVarA : event
 EvtScript N(EVS_BroadcastToKoopaBros) = {
-    EVT_CALL(ActorExists, GREEN_ACTOR, LVar0)
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_EXEC_GET_TID(A(green_ninja_koopa_HandleCommand), LVar1)
-    EVT_END_IF
-    EVT_CALL(ActorExists, YELLOW_ACTOR, LVar0)
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_EXEC_GET_TID(A(yellow_ninja_koopa_HandleCommand), LVar1)
-    EVT_END_IF
-    EVT_CALL(ActorExists, BLACK_ACTOR, LVar0)
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_EXEC_GET_TID(A(black_ninja_koopa_HandleCommand), LVar1)
-    EVT_END_IF
-    EVT_CALL(ActorExists, RED_ACTOR, LVar0)
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_EXEC_GET_TID(A(red_ninja_koopa_HandleCommand), LVar1)
-    EVT_END_IF
+    Call(ActorExists, GREEN_ACTOR, LVar0)
+    IfEq(LVar0, TRUE)
+        ExecGetTID(A(green_ninja_koopa_HandleCommand), LVar1)
+    EndIf
+    Call(ActorExists, YELLOW_ACTOR, LVar0)
+    IfEq(LVar0, TRUE)
+        ExecGetTID(A(yellow_ninja_koopa_HandleCommand), LVar1)
+    EndIf
+    Call(ActorExists, BLACK_ACTOR, LVar0)
+    IfEq(LVar0, TRUE)
+        ExecGetTID(A(black_ninja_koopa_HandleCommand), LVar1)
+    EndIf
+    Call(ActorExists, RED_ACTOR, LVar0)
+    IfEq(LVar0, TRUE)
+        ExecGetTID(A(red_ninja_koopa_HandleCommand), LVar1)
+    EndIf
     // if any koopa bros are still alive, wait for their script to finish
-    EVT_LABEL(0)
-        EVT_IS_THREAD_RUNNING(LVar1, LVar0)
-        EVT_IF_EQ(LVar0, TRUE)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        IsThreadRunning(LVar1, LVar0)
+        IfEq(LVar0, TRUE)
+            Wait(1)
+            Goto(0)
+        EndIf
+    Return
+    End
 };
 
 // adds a random jitter to KoopaBros actors' X position while the tower is unstable
 EvtScript N(EVS_KoopaBros_Idle) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
-        EVT_IF_NE(LVar0, AVAL_Boss_TowerState_Unstable)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
+    Label(0)
+        Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
+        IfNe(LVar0, AVAL_Boss_TowerState_Unstable)
+            Wait(1)
+            Goto(0)
+        EndIf
         // get initial actor positions
-        EVT_CALL(ActorExists, GREEN_ACTOR, LVar0)
-        EVT_IF_NE(LVar0, FALSE)
-            EVT_CALL(GetActorPos, GREEN_ACTOR, LVarA, LVarE, LVarF)
-        EVT_END_IF
-        EVT_CALL(ActorExists, YELLOW_ACTOR, LVar0)
-        EVT_IF_NE(LVar0, FALSE)
-            EVT_CALL(GetActorPos, YELLOW_ACTOR, LVarC, LVarE, LVarF)
-        EVT_END_IF
-        EVT_CALL(ActorExists, BLACK_ACTOR, LVar0)
-        EVT_IF_NE(LVar0, FALSE)
-            EVT_CALL(GetActorPos, BLACK_ACTOR, LVarD, LVarE, LVarF)
-        EVT_END_IF
-        EVT_CALL(ActorExists, RED_ACTOR, LVar0)
-        EVT_IF_NE(LVar0, FALSE)
-            EVT_CALL(GetActorPos, RED_ACTOR, LVarB, LVarE, LVarF)
-        EVT_END_IF
+        Call(ActorExists, GREEN_ACTOR, LVar0)
+        IfNe(LVar0, FALSE)
+            Call(GetActorPos, GREEN_ACTOR, LVarA, LVarE, LVarF)
+        EndIf
+        Call(ActorExists, YELLOW_ACTOR, LVar0)
+        IfNe(LVar0, FALSE)
+            Call(GetActorPos, YELLOW_ACTOR, LVarC, LVarE, LVarF)
+        EndIf
+        Call(ActorExists, BLACK_ACTOR, LVar0)
+        IfNe(LVar0, FALSE)
+            Call(GetActorPos, BLACK_ACTOR, LVarD, LVarE, LVarF)
+        EndIf
+        Call(ActorExists, RED_ACTOR, LVar0)
+        IfNe(LVar0, FALSE)
+            Call(GetActorPos, RED_ACTOR, LVarB, LVarE, LVarF)
+        EndIf
         // while tower is unstable, add random X offsets to koopa bros
-        EVT_LABEL(1)
-            EVT_CALL(ActorExists, GREEN_ACTOR, LVar0)
-            EVT_IF_NE(LVar0, FALSE)
-                EVT_CALL(GetActorVar, GREEN_ACTOR, AVAR_Koopa_State, LVar0)
-                EVT_SWITCH(LVar0)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosA)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosD)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosC)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosB)
-                        EVT_CALL(RandInt, 2, LVar0)
-                        EVT_SET(LVar1, 1)
-                        EVT_SUB(LVar0, LVar1)
-                        EVT_ADD(LVar0, LVarA)
-                        EVT_CALL(GetActorPos, GREEN_ACTOR, LVar1, LVar2, LVar3)
-                        EVT_CALL(SetActorPos, GREEN_ACTOR, LVar0, LVar2, LVar3)
-                    EVT_END_CASE_GROUP
-                EVT_END_SWITCH
-            EVT_END_IF
-            EVT_CALL(ActorExists, YELLOW_ACTOR, LVar0)
-            EVT_IF_NE(LVar0, FALSE)
-                EVT_CALL(GetActorVar, YELLOW_ACTOR, AVAR_Koopa_State, LVar0)
-                EVT_SWITCH(LVar0)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosA)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosD)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosC)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosB)
-                        EVT_CALL(RandInt, 2, LVar0)
-                        EVT_SET(LVar1, 1)
-                        EVT_SUB(LVar0, LVar1)
-                        EVT_ADD(LVar0, LVarC)
-                        EVT_CALL(GetActorPos, YELLOW_ACTOR, LVar1, LVar2, LVar3)
-                        EVT_CALL(SetActorPos, YELLOW_ACTOR, LVar0, LVar2, LVar3)
-                    EVT_END_CASE_GROUP
-                EVT_END_SWITCH
-            EVT_END_IF
-            EVT_CALL(ActorExists, BLACK_ACTOR, LVar0)
-            EVT_IF_NE(LVar0, FALSE)
-                EVT_CALL(GetActorVar, BLACK_ACTOR, AVAR_Koopa_State, LVar0)
-                EVT_SWITCH(LVar0)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosA)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosD)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosC)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosB)
-                        EVT_CALL(RandInt, 2, LVar0)
-                        EVT_SET(LVar1, 1)
-                        EVT_SUB(LVar0, LVar1)
-                        EVT_ADD(LVar0, LVarD)
-                        EVT_CALL(GetActorPos, BLACK_ACTOR, LVar1, LVar2, LVar3)
-                        EVT_CALL(SetActorPos, BLACK_ACTOR, LVar0, LVar2, LVar3)
-                    EVT_END_CASE_GROUP
-                EVT_END_SWITCH
-            EVT_END_IF
-            EVT_CALL(ActorExists, RED_ACTOR, LVar0)
-            EVT_IF_NE(LVar0, FALSE)
-                EVT_CALL(GetActorVar, RED_ACTOR, AVAR_Koopa_State, LVar0)
-                EVT_SWITCH(LVar0)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosA)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosD)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosC)
-                    EVT_CASE_OR_EQ(AVAL_Koopa_State_PosB)
-                        EVT_CALL(RandInt, 2, LVar0)
-                        EVT_SET(LVar1, 1)
-                        EVT_SUB(LVar0, LVar1)
-                        EVT_ADD(LVar0, LVarB)
-                        EVT_CALL(GetActorPos, RED_ACTOR, LVar1, LVar2, LVar3)
-                        EVT_CALL(SetActorPos, RED_ACTOR, LVar0, LVar2, LVar3)
-                    EVT_END_CASE_GROUP
-                EVT_END_SWITCH
-            EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
-            EVT_IF_EQ(LVar0, AVAL_Boss_TowerState_Unstable)
-                EVT_WAIT(2)
-                EVT_GOTO(1)
-            EVT_END_IF
+        Label(1)
+            Call(ActorExists, GREEN_ACTOR, LVar0)
+            IfNe(LVar0, FALSE)
+                Call(GetActorVar, GREEN_ACTOR, AVAR_Koopa_State, LVar0)
+                Switch(LVar0)
+                    CaseOrEq(AVAL_Koopa_State_PosA)
+                    CaseOrEq(AVAL_Koopa_State_PosD)
+                    CaseOrEq(AVAL_Koopa_State_PosC)
+                    CaseOrEq(AVAL_Koopa_State_PosB)
+                        Call(RandInt, 2, LVar0)
+                        Set(LVar1, 1)
+                        Sub(LVar0, LVar1)
+                        Add(LVar0, LVarA)
+                        Call(GetActorPos, GREEN_ACTOR, LVar1, LVar2, LVar3)
+                        Call(SetActorPos, GREEN_ACTOR, LVar0, LVar2, LVar3)
+                    EndCaseGroup
+                EndSwitch
+            EndIf
+            Call(ActorExists, YELLOW_ACTOR, LVar0)
+            IfNe(LVar0, FALSE)
+                Call(GetActorVar, YELLOW_ACTOR, AVAR_Koopa_State, LVar0)
+                Switch(LVar0)
+                    CaseOrEq(AVAL_Koopa_State_PosA)
+                    CaseOrEq(AVAL_Koopa_State_PosD)
+                    CaseOrEq(AVAL_Koopa_State_PosC)
+                    CaseOrEq(AVAL_Koopa_State_PosB)
+                        Call(RandInt, 2, LVar0)
+                        Set(LVar1, 1)
+                        Sub(LVar0, LVar1)
+                        Add(LVar0, LVarC)
+                        Call(GetActorPos, YELLOW_ACTOR, LVar1, LVar2, LVar3)
+                        Call(SetActorPos, YELLOW_ACTOR, LVar0, LVar2, LVar3)
+                    EndCaseGroup
+                EndSwitch
+            EndIf
+            Call(ActorExists, BLACK_ACTOR, LVar0)
+            IfNe(LVar0, FALSE)
+                Call(GetActorVar, BLACK_ACTOR, AVAR_Koopa_State, LVar0)
+                Switch(LVar0)
+                    CaseOrEq(AVAL_Koopa_State_PosA)
+                    CaseOrEq(AVAL_Koopa_State_PosD)
+                    CaseOrEq(AVAL_Koopa_State_PosC)
+                    CaseOrEq(AVAL_Koopa_State_PosB)
+                        Call(RandInt, 2, LVar0)
+                        Set(LVar1, 1)
+                        Sub(LVar0, LVar1)
+                        Add(LVar0, LVarD)
+                        Call(GetActorPos, BLACK_ACTOR, LVar1, LVar2, LVar3)
+                        Call(SetActorPos, BLACK_ACTOR, LVar0, LVar2, LVar3)
+                    EndCaseGroup
+                EndSwitch
+            EndIf
+            Call(ActorExists, RED_ACTOR, LVar0)
+            IfNe(LVar0, FALSE)
+                Call(GetActorVar, RED_ACTOR, AVAR_Koopa_State, LVar0)
+                Switch(LVar0)
+                    CaseOrEq(AVAL_Koopa_State_PosA)
+                    CaseOrEq(AVAL_Koopa_State_PosD)
+                    CaseOrEq(AVAL_Koopa_State_PosC)
+                    CaseOrEq(AVAL_Koopa_State_PosB)
+                        Call(RandInt, 2, LVar0)
+                        Set(LVar1, 1)
+                        Sub(LVar0, LVar1)
+                        Add(LVar0, LVarB)
+                        Call(GetActorPos, RED_ACTOR, LVar1, LVar2, LVar3)
+                        Call(SetActorPos, RED_ACTOR, LVar0, LVar2, LVar3)
+                    EndCaseGroup
+                EndSwitch
+            EndIf
+            Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
+            IfEq(LVar0, AVAL_Boss_TowerState_Unstable)
+                Wait(2)
+                Goto(1)
+            EndIf
         // once tower regains stability, reset X positions to initial values
-        EVT_CALL(ActorExists, GREEN_ACTOR, LVar0)
-        EVT_IF_NE(LVar0, FALSE)
-            EVT_CALL(GetActorVar, GREEN_ACTOR, AVAR_Koopa_State, LVar0)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosA)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosD)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosC)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosB)
-                    EVT_CALL(GetActorPos, GREEN_ACTOR, LVar1, LVar2, LVar3)
-                    EVT_CALL(SetActorPos, GREEN_ACTOR, LVarA, LVar2, LVar3)
-                EVT_END_CASE_GROUP
-            EVT_END_SWITCH
-        EVT_END_IF
-        EVT_CALL(ActorExists, YELLOW_ACTOR, LVar0)
-        EVT_IF_NE(LVar0, FALSE)
-            EVT_CALL(GetActorVar, YELLOW_ACTOR, AVAR_Koopa_State, LVar0)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosA)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosD)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosC)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosB)
-                    EVT_CALL(GetActorPos, YELLOW_ACTOR, LVar1, LVar2, LVar3)
-                    EVT_CALL(SetActorPos, YELLOW_ACTOR, LVarC, LVar2, LVar3)
-                EVT_END_CASE_GROUP
-            EVT_END_SWITCH
-        EVT_END_IF
-        EVT_CALL(ActorExists, BLACK_ACTOR, LVar0)
-        EVT_IF_NE(LVar0, FALSE)
-            EVT_CALL(GetActorVar, BLACK_ACTOR, AVAR_Koopa_State, LVar0)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosA)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosD)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosC)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosB)
-                    EVT_CALL(GetActorPos, BLACK_ACTOR, LVar1, LVar2, LVar3)
-                    EVT_CALL(SetActorPos, BLACK_ACTOR, LVarD, LVar2, LVar3)
-                EVT_END_CASE_GROUP
-            EVT_END_SWITCH
-        EVT_END_IF
-        EVT_CALL(ActorExists, RED_ACTOR, LVar0)
-        EVT_IF_NE(LVar0, FALSE)
-            EVT_CALL(GetActorVar, RED_ACTOR, AVAR_Koopa_State, LVar0)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosA)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosD)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosC)
-                EVT_CASE_OR_EQ(AVAL_Koopa_State_PosB)
-                    EVT_CALL(GetActorPos, RED_ACTOR, LVar1, LVar2, LVar3)
-                    EVT_CALL(SetActorPos, RED_ACTOR, LVarB, LVar2, LVar3)
-                EVT_END_CASE_GROUP
-            EVT_END_SWITCH
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+        Call(ActorExists, GREEN_ACTOR, LVar0)
+        IfNe(LVar0, FALSE)
+            Call(GetActorVar, GREEN_ACTOR, AVAR_Koopa_State, LVar0)
+            Switch(LVar0)
+                CaseOrEq(AVAL_Koopa_State_PosA)
+                CaseOrEq(AVAL_Koopa_State_PosD)
+                CaseOrEq(AVAL_Koopa_State_PosC)
+                CaseOrEq(AVAL_Koopa_State_PosB)
+                    Call(GetActorPos, GREEN_ACTOR, LVar1, LVar2, LVar3)
+                    Call(SetActorPos, GREEN_ACTOR, LVarA, LVar2, LVar3)
+                EndCaseGroup
+            EndSwitch
+        EndIf
+        Call(ActorExists, YELLOW_ACTOR, LVar0)
+        IfNe(LVar0, FALSE)
+            Call(GetActorVar, YELLOW_ACTOR, AVAR_Koopa_State, LVar0)
+            Switch(LVar0)
+                CaseOrEq(AVAL_Koopa_State_PosA)
+                CaseOrEq(AVAL_Koopa_State_PosD)
+                CaseOrEq(AVAL_Koopa_State_PosC)
+                CaseOrEq(AVAL_Koopa_State_PosB)
+                    Call(GetActorPos, YELLOW_ACTOR, LVar1, LVar2, LVar3)
+                    Call(SetActorPos, YELLOW_ACTOR, LVarC, LVar2, LVar3)
+                EndCaseGroup
+            EndSwitch
+        EndIf
+        Call(ActorExists, BLACK_ACTOR, LVar0)
+        IfNe(LVar0, FALSE)
+            Call(GetActorVar, BLACK_ACTOR, AVAR_Koopa_State, LVar0)
+            Switch(LVar0)
+                CaseOrEq(AVAL_Koopa_State_PosA)
+                CaseOrEq(AVAL_Koopa_State_PosD)
+                CaseOrEq(AVAL_Koopa_State_PosC)
+                CaseOrEq(AVAL_Koopa_State_PosB)
+                    Call(GetActorPos, BLACK_ACTOR, LVar1, LVar2, LVar3)
+                    Call(SetActorPos, BLACK_ACTOR, LVarD, LVar2, LVar3)
+                EndCaseGroup
+            EndSwitch
+        EndIf
+        Call(ActorExists, RED_ACTOR, LVar0)
+        IfNe(LVar0, FALSE)
+            Call(GetActorVar, RED_ACTOR, AVAR_Koopa_State, LVar0)
+            Switch(LVar0)
+                CaseOrEq(AVAL_Koopa_State_PosA)
+                CaseOrEq(AVAL_Koopa_State_PosD)
+                CaseOrEq(AVAL_Koopa_State_PosC)
+                CaseOrEq(AVAL_Koopa_State_PosB)
+                    Call(GetActorPos, RED_ACTOR, LVar1, LVar2, LVar3)
+                    Call(SetActorPos, RED_ACTOR, LVarB, LVar2, LVar3)
+                EndCaseGroup
+            EndSwitch
+        EndIf
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_KoopaBros_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(EVENT_HIT_COMBO)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseEq(EVENT_HIT_COMBO)
             // set flags for player or partner hitting the koopa bros tower
-            EVT_CALL(GetBattleFlags, LVar0)
-            EVT_IF_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PartnerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_ELSE
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PlayerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_END_IF
-            EVT_SET(LVarA, BOSS_CMD_HIT)
-            EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-            EVT_WAIT(30)
+            Call(GetBattleFlags, LVar0)
+            IfFlag(LVar0, BS_FLAGS1_PARTNER_ACTING)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PartnerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            Else
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PlayerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            EndIf
+            Set(LVarA, BOSS_CMD_HIT)
+            ExecWait(N(EVS_BroadcastToKoopaBros))
+            Wait(30)
             // if the attack was explosive, set both flags
-            EVT_CALL(GetLastElement, LVar0)
-            EVT_IF_FLAG(LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_BLAST)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PlayerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PartnerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_END_IF
-            EVT_EXEC_WAIT(N(EVS_Broadcast_TowerUnstable))
-        EVT_CASE_EQ(EVENT_HIT)
+            Call(GetLastElement, LVar0)
+            IfFlag(LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_BLAST)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PlayerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PartnerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            EndIf
+            ExecWait(N(EVS_Broadcast_TowerUnstable))
+        CaseEq(EVENT_HIT)
             // set flags for player or partner hitting the koopa bros tower
-            EVT_CALL(GetBattleFlags, LVar0)
-            EVT_IF_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PartnerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_ELSE
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PlayerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_END_IF
+            Call(GetBattleFlags, LVar0)
+            IfFlag(LVar0, BS_FLAGS1_PARTNER_ACTING)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PartnerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            Else
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PlayerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            EndIf
             // if the attack was explosive, set both flags
-            EVT_CALL(GetLastElement, LVar0)
-            EVT_IF_FLAG(LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_BLAST)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PlayerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PartnerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_END_IF
+            Call(GetLastElement, LVar0)
+            IfFlag(LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_BLAST)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PlayerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PartnerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            EndIf
             // if this was the second hit, topple the tower
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_IF_FLAG(LVar0, AFLAG_Boss_PlayerHitTower)
-                EVT_IF_FLAG(LVar0, AFLAG_Boss_PartnerHitTower)
-                    EVT_EXEC_WAIT(N(EVS_Broadcast_ToppleHit))
-                    EVT_WAIT(20)
-                    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-                    EVT_RETURN
-                EVT_END_IF
-            EVT_END_IF
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            IfFlag(LVar0, AFLAG_Boss_PlayerHitTower)
+                IfFlag(LVar0, AFLAG_Boss_PartnerHitTower)
+                    ExecWait(N(EVS_Broadcast_ToppleHit))
+                    Wait(20)
+                    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+                    Return
+                EndIf
+            EndIf
             // this was the first hit
-            EVT_SET(LVarA, BOSS_CMD_HIT)
-            EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-            EVT_WAIT(30)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
-            EVT_IF_NE(LVar0, AVAL_Boss_TowerState_Unstable)
-                EVT_EXEC_WAIT(N(EVS_Broadcast_TowerUnstable))
-            EVT_END_IF
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_IF_FLAG(LVar0, AFLAG_Boss_TowerUnstable)
-                EVT_IF_NOT_FLAG(LVar0, AFLAG_Boss_Dialogue_WereGoingOver)
-                    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
-                    EVT_CALL(ActorSpeak, MSG_CH1_0109, LVar0, 1, -1, -1)
-                    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                    EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_Dialogue_WereGoingOver)
-                    EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                    EVT_WAIT(20)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_EQ(EVENT_BURN_HIT)
+            Set(LVarA, BOSS_CMD_HIT)
+            ExecWait(N(EVS_BroadcastToKoopaBros))
+            Wait(30)
+            Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
+            IfNe(LVar0, AVAL_Boss_TowerState_Unstable)
+                ExecWait(N(EVS_Broadcast_TowerUnstable))
+            EndIf
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            IfFlag(LVar0, AFLAG_Boss_TowerUnstable)
+                IfNotFlag(LVar0, AFLAG_Boss_Dialogue_WereGoingOver)
+                    Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
+                    Call(ActorSpeak, MSG_CH1_0109, LVar0, 1, -1, -1)
+                    Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                    BitwiseOrConst(LVar0, AFLAG_Boss_Dialogue_WereGoingOver)
+                    Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                    Wait(20)
+                EndIf
+            EndIf
+        CaseEq(EVENT_BURN_HIT)
             // set flags for player or partner hitting the koopa bros tower
-            EVT_CALL(GetBattleFlags, LVar0)
-            EVT_IF_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PartnerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_ELSE
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PlayerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_END_IF
+            Call(GetBattleFlags, LVar0)
+            IfFlag(LVar0, BS_FLAGS1_PARTNER_ACTING)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PartnerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            Else
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PlayerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            EndIf
             // if the attack was explosive, set both flags
-            EVT_CALL(GetLastElement, LVar0)
-            EVT_IF_FLAG(LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_BLAST)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PlayerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PartnerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_END_IF
+            Call(GetLastElement, LVar0)
+            IfFlag(LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_BLAST)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PlayerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PartnerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            EndIf
             // if this was the second hit, topple the tower
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_IF_FLAG(LVar0, AFLAG_Boss_PlayerHitTower)
-                EVT_IF_FLAG(LVar0, AFLAG_Boss_PartnerHitTower)
-                    EVT_EXEC_WAIT(N(EVS_Broadcast_ToppleHit))
-                    EVT_WAIT(20)
-                    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-                    EVT_RETURN
-                EVT_END_IF
-            EVT_END_IF
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            IfFlag(LVar0, AFLAG_Boss_PlayerHitTower)
+                IfFlag(LVar0, AFLAG_Boss_PartnerHitTower)
+                    ExecWait(N(EVS_Broadcast_ToppleHit))
+                    Wait(20)
+                    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+                    Return
+                EndIf
+            EndIf
             // this was the first hit
-            EVT_SET(LVarA, BOSS_CMD_BURN_HIT)
-            EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-            EVT_WAIT(30)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
-            EVT_IF_NE(LVar0, AVAL_Boss_TowerState_Unstable)
-                EVT_EXEC_WAIT(N(EVS_Broadcast_TowerUnstable))
-            EVT_END_IF
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_IF_FLAG(LVar0, AFLAG_Boss_TowerUnstable)
-                EVT_IF_NOT_FLAG(LVar0, AFLAG_Boss_Dialogue_WereGoingOver)
-                    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
-                    EVT_CALL(ActorSpeak, MSG_CH1_0109, LVar0, 1, -1, -1)
-                    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                    EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_Dialogue_WereGoingOver)
-                    EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                    EVT_WAIT(20)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
-            EVT_SET(LVarA, BOSS_CMD_NO_DAMAGE_HIT)
-            EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-        EVT_CASE_EQ(EVENT_IMMUNE)
+            Set(LVarA, BOSS_CMD_BURN_HIT)
+            ExecWait(N(EVS_BroadcastToKoopaBros))
+            Wait(30)
+            Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
+            IfNe(LVar0, AVAL_Boss_TowerState_Unstable)
+                ExecWait(N(EVS_Broadcast_TowerUnstable))
+            EndIf
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            IfFlag(LVar0, AFLAG_Boss_TowerUnstable)
+                IfNotFlag(LVar0, AFLAG_Boss_Dialogue_WereGoingOver)
+                    Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
+                    Call(ActorSpeak, MSG_CH1_0109, LVar0, 1, -1, -1)
+                    Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                    BitwiseOrConst(LVar0, AFLAG_Boss_Dialogue_WereGoingOver)
+                    Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                    Wait(20)
+                EndIf
+            EndIf
+        CaseEq(EVENT_ZERO_DAMAGE)
+            Set(LVarA, BOSS_CMD_NO_DAMAGE_HIT)
+            ExecWait(N(EVS_BroadcastToKoopaBros))
+        CaseEq(EVENT_IMMUNE)
             // set both flags if the tower is already unstable
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
-            EVT_IF_EQ(LVar0, AVAL_Boss_TowerState_Unstable)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PlayerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PartnerHitTower)
-                EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_END_IF
+            Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
+            IfEq(LVar0, AVAL_Boss_TowerState_Unstable)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PlayerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                BitwiseOrConst(LVar0, AFLAG_Boss_PartnerHitTower)
+                Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            EndIf
             // if this was the second hit, topple the tower
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_IF_FLAG(LVar0, AFLAG_Boss_PlayerHitTower)
-                EVT_IF_FLAG(LVar0, AFLAG_Boss_PartnerHitTower)
-                    EVT_EXEC_WAIT(N(EVS_Broadcast_ToppleHit))
-                    EVT_WAIT(20)
-                    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-                    EVT_RETURN
-                EVT_END_IF
-            EVT_END_IF
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            IfFlag(LVar0, AFLAG_Boss_PlayerHitTower)
+                IfFlag(LVar0, AFLAG_Boss_PartnerHitTower)
+                    ExecWait(N(EVS_Broadcast_ToppleHit))
+                    Wait(20)
+                    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+                    Return
+                EndIf
+            EndIf
             // this was the first hit
-            EVT_SET(LVarA, BOSS_CMD_NO_DAMAGE_HIT)
-            EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_IF_FLAG(LVar0, AFLAG_Boss_TowerUnstable)
-                EVT_IF_NOT_FLAG(LVar0, AFLAG_Boss_Dialogue_WereGoingOver)
-                    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
-                    EVT_CALL(ActorSpeak, MSG_CH1_0109, LVar0, 1, -1, -1)
-                    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                    EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_Dialogue_WereGoingOver)
-                    EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-                    EVT_WAIT(20)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_OR_EQ(EVENT_DEATH)
-        EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+            Set(LVarA, BOSS_CMD_NO_DAMAGE_HIT)
+            ExecWait(N(EVS_BroadcastToKoopaBros))
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            IfFlag(LVar0, AFLAG_Boss_TowerUnstable)
+                IfNotFlag(LVar0, AFLAG_Boss_Dialogue_WereGoingOver)
+                    Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
+                    Call(ActorSpeak, MSG_CH1_0109, LVar0, 1, -1, -1)
+                    Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                    BitwiseOrConst(LVar0, AFLAG_Boss_Dialogue_WereGoingOver)
+                    Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+                    Wait(20)
+                EndIf
+            EndIf
+        CaseOrEq(EVENT_DEATH)
+        CaseOrEq(EVENT_BURN_DEATH)
+        EndCaseGroup
+        CaseDefault
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_KoopaBros_TakeTurn) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
     // reform stable tower if tipping
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(AVAL_Boss_TowerState_None)
-        EVT_CASE_EQ(AVAL_Boss_TowerState_Stable)
-        EVT_CASE_EQ(AVAL_Boss_TowerState_Unstable)
-            EVT_WAIT(30)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
-            EVT_SET(LVarA, BOSS_CMD_STABLE)
-            EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_BITWISE_AND_CONST(LVar0, ~AFLAG_Boss_TowerUnstable)
-            EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_BITWISE_AND_CONST(LVar0, ~AFLAG_Boss_Dialogue_WereGoingOver)
-            EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, LVarA)
-            EVT_SET(LVar0, LVarA)
-            EVT_MUL(LVar0, 18)
-            EVT_ADD(LVar0, 20)
-            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_TOWER, -4, LVar0)
-            EVT_CALL(SetActorSize, ACTOR_SELF, LVar0, 45)
-        EVT_CASE_EQ(AVAL_Boss_TowerState_Toppled)
-    EVT_END_SWITCH
+    Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
+    Switch(LVar0)
+        CaseEq(AVAL_Boss_TowerState_None)
+        CaseEq(AVAL_Boss_TowerState_Stable)
+        CaseEq(AVAL_Boss_TowerState_Unstable)
+            Wait(30)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
+            Set(LVarA, BOSS_CMD_STABLE)
+            ExecWait(N(EVS_BroadcastToKoopaBros))
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            BitwiseAndConst(LVar0, ~AFLAG_Boss_TowerUnstable)
+            Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            BitwiseAndConst(LVar0, ~AFLAG_Boss_Dialogue_WereGoingOver)
+            Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, LVarA)
+            Set(LVar0, LVarA)
+            Mul(LVar0, 18)
+            Add(LVar0, 20)
+            Call(SetTargetOffset, ACTOR_SELF, PRT_TOWER, -4, LVar0)
+            Call(SetActorSize, ACTOR_SELF, LVar0, 45)
+        CaseEq(AVAL_Boss_TowerState_Toppled)
+    EndSwitch
     // find if any koopa bros are toppled
-    EVT_SET(LVar0, FIRST_KOOPA_ACTOR)
-    EVT_LOOP(4)
-        EVT_CALL(ActorExists, LVar0, LVar1)
-        EVT_IF_EQ(LVar1, TRUE)
-            EVT_CALL(GetStatusFlags, LVar0, LVar1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_CALL(GetActorVar, LVar0, AVAR_Koopa_State, LVar1)
-                EVT_IF_EQ(LVar1, AVAL_Koopa_State_Toppled)
-                    EVT_SET(LFlag0, TRUE)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_IF
-        EVT_END_IF
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
+    Set(LVar0, FIRST_KOOPA_ACTOR)
+    Loop(4)
+        Call(ActorExists, LVar0, LVar1)
+        IfEq(LVar1, TRUE)
+            Call(GetStatusFlags, LVar0, LVar1)
+            IfEq(LVar1, 0)
+                Call(GetActorVar, LVar0, AVAR_Koopa_State, LVar1)
+                IfEq(LVar1, AVAL_Koopa_State_Toppled)
+                    Set(LFlag0, TRUE)
+                    BreakLoop
+                EndIf
+            EndIf
+        EndIf
+        Add(LVar0, 1)
+    EndLoop
     // zoom in to show the toppled koopa bros and have them try to get up
-    EVT_IF_EQ(LFlag0, TRUE)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-        EVT_CALL(SetBattleCamTarget, 90, 0, 0)
-        EVT_CALL(SetBattleCamZoom, 350)
-        EVT_CALL(SetBattleCamOffsetZ, 40)
-        EVT_CALL(MoveBattleCamOver, 15)
-        EVT_WAIT(15)
-    EVT_END_IF
-    EVT_SET(LVarA, BOSS_CMD_TRY_GET_UP)
-    EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
+    IfEq(LFlag0, TRUE)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+        Call(SetBattleCamTarget, 90, 0, 0)
+        Call(SetBattleCamZoom, 350)
+        Call(SetBattleCamOffsetZ, 40)
+        Call(MoveBattleCamOver, 15)
+        Wait(15)
+    EndIf
+    Set(LVarA, BOSS_CMD_TRY_GET_UP)
+    ExecWait(N(EVS_BroadcastToKoopaBros))
     // try tower operations
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(AVAL_Boss_TowerState_Stable)
+    Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
+    Switch(LVar0)
+        CaseEq(AVAL_Boss_TowerState_Stable)
             // try adding any orphaned koopa bros to the tower
-            EVT_EXEC_WAIT(N(EVS_TryJoiningTower))
-        EVT_CASE_DEFAULT
+            ExecWait(N(EVS_TryJoiningTower))
+        CaseDefault
             // try forming a new tower
-            EVT_EXEC_WAIT(N(EVS_TryFormingTower))
-    EVT_END_SWITCH
+            ExecWait(N(EVS_TryFormingTower))
+    EndSwitch
     // if only one koopa bro is alive, perform a solo attack
-    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_IF_FLAG(LVar0, AFLAG_Boss_DoingSoloAttack)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-        EVT_CALL(MoveBattleCamOver, 15)
-        EVT_SET(LVarA, BOSS_CMD_SOLO_ATTACK)
-        EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-        EVT_LABEL(123)
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_IF_FLAG(LVar0, AFLAG_Boss_DoingSoloAttack)
-                EVT_WAIT(1)
-                EVT_GOTO(123)
-            EVT_END_IF
-        EVT_SET(LVarA, BOSS_CMD_GET_READY)
-        EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-        EVT_WAIT(5)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(LVarA, BOSS_CMD_GET_READY)
-    EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-    EVT_WAIT(5)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
-    EVT_IF_EQ(LVar0, AVAL_Boss_TowerState_Toppled)
-        EVT_RETURN
-    EVT_END_IF
+    Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+    IfFlag(LVar0, AFLAG_Boss_DoingSoloAttack)
+        Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+        Call(MoveBattleCamOver, 15)
+        Set(LVarA, BOSS_CMD_SOLO_ATTACK)
+        ExecWait(N(EVS_BroadcastToKoopaBros))
+        Label(123)
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            IfFlag(LVar0, AFLAG_Boss_DoingSoloAttack)
+                Wait(1)
+                Goto(123)
+            EndIf
+        Set(LVarA, BOSS_CMD_GET_READY)
+        ExecWait(N(EVS_BroadcastToKoopaBros))
+        Wait(5)
+        Return
+    EndIf
+    Set(LVarA, BOSS_CMD_GET_READY)
+    ExecWait(N(EVS_BroadcastToKoopaBros))
+    Wait(5)
+    Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
+    IfEq(LVar0, AVAL_Boss_TowerState_Toppled)
+        Return
+    EndIf
     // execute spin attack
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, AFLAG_Boss_Dialogue_SpinAttack)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_LeadKoopaID, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(GREEN_ACTOR)
-                EVT_CALL(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Green_Talk, ANIM_KoopaBros_Green_Idle)
-            EVT_CASE_EQ(YELLOW_ACTOR)
-                EVT_CALL(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Yellow_Talk, ANIM_KoopaBros_Yellow_Idle)
-            EVT_CASE_EQ(BLACK_ACTOR)
-                EVT_CALL(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Black_Talk, ANIM_KoopaBros_Black_Idle)
-            EVT_CASE_EQ(RED_ACTOR)
-                EVT_CALL(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Red_Talk, ANIM_KoopaBros_Red_Idle)
-        EVT_END_SWITCH
-        EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-        EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_Dialogue_SpinAttack)
-        EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_END_IF
-    EVT_SET(LVarA, BOSS_CMD_SPIN_ATTACK)
-    EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-    EVT_LABEL(10)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_NE(LVar0, AVAL_Boss_TowerState_None)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
-    EVT_RETURN
-    EVT_END
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+    IfNotFlag(LVar0, AFLAG_Boss_Dialogue_SpinAttack)
+        Call(GetActorVar, ACTOR_SELF, AVAR_Boss_LeadKoopaID, LVar0)
+        Switch(LVar0)
+            CaseEq(GREEN_ACTOR)
+                Call(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Green_Talk, ANIM_KoopaBros_Green_Idle)
+            CaseEq(YELLOW_ACTOR)
+                Call(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Yellow_Talk, ANIM_KoopaBros_Yellow_Idle)
+            CaseEq(BLACK_ACTOR)
+                Call(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Black_Talk, ANIM_KoopaBros_Black_Idle)
+            CaseEq(RED_ACTOR)
+                Call(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Red_Talk, ANIM_KoopaBros_Red_Idle)
+        EndSwitch
+        Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+        BitwiseOrConst(LVar0, AFLAG_Boss_Dialogue_SpinAttack)
+        Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+    EndIf
+    Set(LVarA, BOSS_CMD_SPIN_ATTACK)
+    ExecWait(N(EVS_BroadcastToKoopaBros))
+    Label(10)
+        Call(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
+        Wait(1)
+        IfNe(LVar0, AVAL_Boss_TowerState_None)
+            Goto(10)
+        EndIf
+    Call(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
+    Return
+    End
 };
 
 EvtScript N(EVS_KoopaBros_HandlePhase) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar0)
-    EVT_CALL(SetEnemyHP, ACTOR_SELF, LVar0)
-    EVT_CALL(GetBattlePhase, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_BITWISE_AND_CONST(LVar0, ~AFLAG_Boss_PlayerHitTower)
-            EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_BITWISE_AND_CONST(LVar0, ~AFLAG_Boss_PartnerHitTower)
-            EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-        EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
-        EVT_CASE_EQ(PHASE_ENEMY_END)
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetEnemyMaxHP, ACTOR_SELF, LVar0)
+    Call(SetEnemyHP, ACTOR_SELF, LVar0)
+    Call(GetBattlePhase, LVar0)
+    Switch(LVar0)
+        CaseEq(PHASE_PLAYER_BEGIN)
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            BitwiseAndConst(LVar0, ~AFLAG_Boss_PlayerHitTower)
+            Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+            BitwiseAndConst(LVar0, ~AFLAG_Boss_PartnerHitTower)
+            Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
+        CaseEq(PHASE_ENEMY_BEGIN)
+        CaseEq(PHASE_ENEMY_END)
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };

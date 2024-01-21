@@ -213,12 +213,12 @@ ActorBlueprint N(prism) = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_HandlePhase)))
+    Return
+    End
 };
 
 API_CALLABLE(N(UpdateCrystalBitEffect)) {
@@ -243,167 +243,167 @@ API_CALLABLE(N(UpdateCrystalBitEffect)) {
 }
 
 EvtScript N(EVS_Idle) = {
-    EVT_PLAY_EFFECT(EFFECT_MISC_PARTICLES, 1, NPC_DISPOSE_LOCATION, 24, 24, EVT_FLOAT(1.0), 5, 0, 0, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Bit_ParticlesEffect, LVarF)
-    EVT_CHILD_THREAD
-        EVT_CALL(N(UpdateCrystalBitEffect), LVarF)
-    EVT_END_CHILD_THREAD
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    PlayEffect(EFFECT_MISC_PARTICLES, 1, NPC_DISPOSE_LOCATION, 24, 24, Float(1.0), 5, 0, 0, 0, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Bit_ParticlesEffect, LVarF)
+    ChildThread
+        Call(N(UpdateCrystalBitEffect), LVarF)
+    EndChildThread
+    Loop(0)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
-        EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_CALL(GetOwnerID, LVar0)
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_CubeBitID, LVar3)
-            EVT_IF_EQ(LVar0, LVar3)
-                EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim22)
-                EVT_SET_CONST(LVar2, -1)
-            EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_SphereBitID, LVar3)
-            EVT_IF_EQ(LVar0, LVar3)
-                EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim23)
-                EVT_SET_CONST(LVar2, -1)
-            EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_PrismBitID, LVar3)
-            EVT_IF_EQ(LVar0, LVar3)
-                EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim24)
-                EVT_SET_CONST(LVar2, -1)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
-        EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_CALL(HideHealthBar, ACTOR_SELF)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FALL_QUICK)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_CALL(GetOwnerID, LVar0)
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_CubeBitID, LVar1)
-            EVT_IF_EQ(LVar0, LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim05)
-            EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_SphereBitID, LVar1)
-            EVT_IF_EQ(LVar0, LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim06)
-            EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_PrismBitID, LVar1)
-            EVT_IF_EQ(LVar0, LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim07)
-            EVT_END_IF
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
-            EVT_CALL(RandInt, 360, LVar0)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
-            EVT_CALL(AddVectorPolar, LVar1, LVar3, EVT_FLOAT(30.0), LVar0)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_CALL(AddVectorPolar, LVar1, LVar3, EVT_FLOAT(20.0), LVar0)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(AddVectorPolar, LVar1, LVar3, EVT_FLOAT(10.0), LVar0)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-            EVT_SET(LVar0, 255)
-            EVT_LOOP(20)
-                EVT_SUB(LVar0, 12)
-                EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Bit_ParticlesEffect, LVar0)
-            EVT_CALL(RemoveEffect, LVar0)
-            EVT_CALL(RemoveActor, ACTOR_SELF)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_CALL(GetOwnerID, LVar0)
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_CubeBitID, LVar3)
-            EVT_IF_EQ(LVar0, LVar3)
-                EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim22)
-                EVT_SET_CONST(LVar2, -1)
-            EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_SphereBitID, LVar3)
-            EVT_IF_EQ(LVar0, LVar3)
-                EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim23)
-                EVT_SET_CONST(LVar2, -1)
-            EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_PrismBitID, LVar3)
-            EVT_IF_EQ(LVar0, LVar3)
-                EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim24)
-                EVT_SET_CONST(LVar2, -1)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_CALL(HideHealthBar, ACTOR_SELF)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FALL_QUICK)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
-            EVT_CALL(RandInt, 360, LVar0)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
-            EVT_CALL(AddVectorPolar, LVar1, LVar3, EVT_FLOAT(30.0), LVar0)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_CALL(AddVectorPolar, LVar1, LVar3, EVT_FLOAT(20.0), LVar0)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(AddVectorPolar, LVar1, LVar3, EVT_FLOAT(10.0), LVar0)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-            EVT_SET(LVar0, 255)
-            EVT_LOOP(20)
-                EVT_SUB(LVar0, 12)
-                EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Bit_ParticlesEffect, LVar0)
-            EVT_CALL(RemoveEffect, LVar0)
-            EVT_CALL(RemoveActor, ACTOR_SELF)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Bit_ParticlesEffect, LVar0)
-            EVT_CALL(RemoveEffect, LVar0)
-            EVT_RETURN
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseOrEq(EVENT_HIT_COMBO)
+        CaseOrEq(EVENT_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
+            ExecWait(EVS_Enemy_Hit)
+        EndCaseGroup
+        CaseEq(EVENT_BURN_HIT)
+            Call(GetOwnerID, LVar0)
+            Call(GetActorVar, ACTOR_KING, AVAR_King_CubeBitID, LVar3)
+            IfEq(LVar0, LVar3)
+                SetConst(LVar0, PRT_MAIN)
+                SetConst(LVar1, ANIM_CrystalKing_Anim22)
+                SetConst(LVar2, -1)
+            EndIf
+            Call(GetActorVar, ACTOR_KING, AVAR_King_SphereBitID, LVar3)
+            IfEq(LVar0, LVar3)
+                SetConst(LVar0, PRT_MAIN)
+                SetConst(LVar1, ANIM_CrystalKing_Anim23)
+                SetConst(LVar2, -1)
+            EndIf
+            Call(GetActorVar, ACTOR_KING, AVAR_King_PrismBitID, LVar3)
+            IfEq(LVar0, LVar3)
+                SetConst(LVar0, PRT_MAIN)
+                SetConst(LVar1, ANIM_CrystalKing_Anim24)
+                SetConst(LVar2, -1)
+            EndIf
+            ExecWait(EVS_Enemy_BurnHit)
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
+        CaseOrEq(EVENT_AIR_LIFT_FAILED)
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
+            ExecWait(EVS_Enemy_NoDamageHit)
+        EndCaseGroup
+        CaseEq(EVENT_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
+            ExecWait(EVS_Enemy_Hit)
+            Call(HideHealthBar, ACTOR_SELF)
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_FALL_QUICK)
+            Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
+            Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
+            Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
+            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            Call(GetOwnerID, LVar0)
+            Call(GetActorVar, ACTOR_KING, AVAR_King_CubeBitID, LVar1)
+            IfEq(LVar0, LVar1)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim05)
+            EndIf
+            Call(GetActorVar, ACTOR_KING, AVAR_King_SphereBitID, LVar1)
+            IfEq(LVar0, LVar1)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim06)
+            EndIf
+            Call(GetActorVar, ACTOR_KING, AVAR_King_PrismBitID, LVar1)
+            IfEq(LVar0, LVar1)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim07)
+            EndIf
+            Call(SetActorJumpGravity, ACTOR_SELF, Float(1.2))
+            Call(RandInt, 360, LVar0)
+            Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
+            Call(AddVectorPolar, LVar1, LVar3, Float(30.0), LVar0)
+            Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
+            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            Call(AddVectorPolar, LVar1, LVar3, Float(20.0), LVar0)
+            Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
+            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(AddVectorPolar, LVar1, LVar3, Float(10.0), LVar0)
+            Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
+            Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            Set(LVar0, 255)
+            Loop(20)
+                Sub(LVar0, 12)
+                Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
+                Wait(1)
+            EndLoop
+            Call(GetActorVar, ACTOR_SELF, AVAR_Bit_ParticlesEffect, LVar0)
+            Call(RemoveEffect, LVar0)
+            Call(RemoveActor, ACTOR_SELF)
+            Return
+        CaseEq(EVENT_BURN_DEATH)
+            Call(GetOwnerID, LVar0)
+            Call(GetActorVar, ACTOR_KING, AVAR_King_CubeBitID, LVar3)
+            IfEq(LVar0, LVar3)
+                SetConst(LVar0, PRT_MAIN)
+                SetConst(LVar1, ANIM_CrystalKing_Anim22)
+                SetConst(LVar2, -1)
+            EndIf
+            Call(GetActorVar, ACTOR_KING, AVAR_King_SphereBitID, LVar3)
+            IfEq(LVar0, LVar3)
+                SetConst(LVar0, PRT_MAIN)
+                SetConst(LVar1, ANIM_CrystalKing_Anim23)
+                SetConst(LVar2, -1)
+            EndIf
+            Call(GetActorVar, ACTOR_KING, AVAR_King_PrismBitID, LVar3)
+            IfEq(LVar0, LVar3)
+                SetConst(LVar0, PRT_MAIN)
+                SetConst(LVar1, ANIM_CrystalKing_Anim24)
+                SetConst(LVar2, -1)
+            EndIf
+            ExecWait(EVS_Enemy_BurnHit)
+            Call(HideHealthBar, ACTOR_SELF)
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_FALL_QUICK)
+            Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
+            Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
+            Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
+            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            Call(SetActorJumpGravity, ACTOR_SELF, Float(1.2))
+            Call(RandInt, 360, LVar0)
+            Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
+            Call(AddVectorPolar, LVar1, LVar3, Float(30.0), LVar0)
+            Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
+            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            Call(AddVectorPolar, LVar1, LVar3, Float(20.0), LVar0)
+            Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
+            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(AddVectorPolar, LVar1, LVar3, Float(10.0), LVar0)
+            Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
+            Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            Set(LVar0, 255)
+            Loop(20)
+                Sub(LVar0, 12)
+                Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
+                Wait(1)
+            EndLoop
+            Call(GetActorVar, ACTOR_SELF, AVAR_Bit_ParticlesEffect, LVar0)
+            Call(RemoveEffect, LVar0)
+            Call(RemoveActor, ACTOR_SELF)
+            Return
+        CaseEq(EVENT_BLOW_AWAY)
+            Call(GetActorVar, ACTOR_SELF, AVAR_Bit_ParticlesEffect, LVar0)
+            Call(RemoveEffect, LVar0)
+            Return
+        CaseDefault
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_HandlePhase) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };

@@ -16,9 +16,9 @@ GuardAISettings N(AISettings_Bobomb_Guard) = {
 };
 
 EvtScript N(EVS_NpcAI_Bobomb_Guard) = {
-    EVT_CALL(N(GuardAI_Main), EVT_PTR(N(AISettings_Bobomb_Guard)))
-    EVT_RETURN
-    EVT_END
+    Call(N(GuardAI_Main), Ref(N(AISettings_Bobomb_Guard)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Bobomb_Guard) = {

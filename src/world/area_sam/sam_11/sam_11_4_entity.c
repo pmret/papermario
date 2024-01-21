@@ -118,321 +118,321 @@ API_CALLABLE(N(MonitorCurrenFloor)) {
 }
 
 EvtScript N(EVS_OnExitRightHouse) = {
-    EVT_EXEC_WAIT(N(EVS_RevealRightHouse))
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, MODEL_sou)
-    EVT_SET(LVar2, 90)
-    EVT_CALL(N(UpdateHouseShowHide))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_RevealRightHouse))
+    Set(LVar0, 0)
+    Set(LVar1, MODEL_sou)
+    Set(LVar2, 90)
+    Call(N(UpdateHouseShowHide))
+    Return
+    End
 };
 
 EvtScript N(EVS_OnEnterRightHouse) = {
-    EVT_SET(LVar0, 1)
-    EVT_SET(LVar1, MODEL_sou)
-    EVT_SET(LVar2, 32)
-    EVT_CALL(N(UpdateHouseShowHide))
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, 1)
+    Set(LVar1, MODEL_sou)
+    Set(LVar2, 32)
+    Call(N(UpdateHouseShowHide))
+    Return
+    End
 };
 
 EvtScript N(EVS_OnEnterLeftHouse) = {
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, MODEL_gon)
-    EVT_SET(LVar2, 32)
-    EVT_CALL(N(UpdateHouseShowHide))
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, 0)
+    Set(LVar1, MODEL_gon)
+    Set(LVar2, 32)
+    Call(N(UpdateHouseShowHide))
+    Return
+    End
 };
 
 EvtScript N(EVS_SetEntityHideMode_LeftHouse) = {
-    EVT_CALL(N(SetEntityHideMode1))
-    EVT_WAIT(1)
-    EVT_CALL(N(SetEntityHideMode2))
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Call(N(SetEntityHideMode1))
+    Wait(1)
+    Call(N(SetEntityHideMode2))
+    Wait(1)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetEntityHideMode_Outside) = {
-    EVT_CALL(N(SetEntityHideMode0))
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Call(N(SetEntityHideMode0))
+    Wait(1)
+    Return
+    End
 };
 
 EvtScript N(EVS_TetherCamToPlayerCappedY) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_GE(LVar1, LVar3)
-            EVT_SET(LVar1, LVar3)
-        EVT_END_IF
-        EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfGe(LVar1, LVar3)
+            Set(LVar1, LVar3)
+        EndIf
+        Call(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_TouchFloor_RightRoof) = {
-    EVT_CALL(N(IsPlayerInputDisabled))
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_NE(LVar0, PARTNER_NONE)
-        EVT_CALL(InterruptUsePartner)
-        EVT_WAIT(20)
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_SpinJump)
-    EVT_CALL(SetZoneEnabled, ZONE_s, FALSE)
-    EVT_WAIT(1)
-    EVT_CALL(SetZoneEnabled, ZONE_gon, FALSE)
-    EVT_CALL(SetZoneEnabled, ZONE_sou, FALSE)
-    EVT_CALL(N(EnableCameraFollowPlayerY))
-    EVT_SET(LVar3, 500)
-    EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayerCappedY), LVarA)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_SLIDE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(N(MovePlayerAlongRoofSlide))
-    EVT_CALL(StopSound, SOUND_SLIDE)
-    EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.5))
-    EVT_CALL(PlayerJump, -150, 325, -300, 40)
-    EVT_CALL(ShakeCam, CAM_DEFAULT, 1, 5, EVT_FLOAT(1.0))
-    EVT_CALL(SetZoneEnabled, ZONE_s, TRUE)
-    EVT_CALL(SetZoneEnabled, ZONE_gon, TRUE)
-    EVT_CALL(SetZoneEnabled, ZONE_sou, TRUE)
-    EVT_CALL(N(DisableCameraFollowPlayerY))
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_RETURN
-    EVT_END
+    Call(N(IsPlayerInputDisabled))
+    IfEq(LVar0, TRUE)
+        Return
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(GetPartnerInUse, LVar0)
+    IfNe(LVar0, PARTNER_NONE)
+        Call(InterruptUsePartner)
+        Wait(20)
+    EndIf
+    Wait(1)
+    Call(SetPlayerActionState, ACTION_STATE_IDLE)
+    Wait(1)
+    Call(SetPlayerAnimation, ANIM_Mario1_SpinJump)
+    Call(SetZoneEnabled, ZONE_s, FALSE)
+    Wait(1)
+    Call(SetZoneEnabled, ZONE_gon, FALSE)
+    Call(SetZoneEnabled, ZONE_sou, FALSE)
+    Call(N(EnableCameraFollowPlayerY))
+    Set(LVar3, 500)
+    ExecGetTID(N(EVS_TetherCamToPlayerCappedY), LVarA)
+    Call(PlaySoundAtPlayer, SOUND_SLIDE, SOUND_SPACE_DEFAULT)
+    Call(N(MovePlayerAlongRoofSlide))
+    Call(StopSound, SOUND_SLIDE)
+    Call(SetPlayerJumpscale, Float(0.5))
+    Call(PlayerJump, -150, 325, -300, 40)
+    Call(ShakeCam, CAM_DEFAULT, 1, 5, Float(1.0))
+    Call(SetZoneEnabled, ZONE_s, TRUE)
+    Call(SetZoneEnabled, ZONE_gon, TRUE)
+    Call(SetZoneEnabled, ZONE_sou, TRUE)
+    Call(N(DisableCameraFollowPlayerY))
+    KillThread(LVarA)
+    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(SetPlayerActionState, ACTION_STATE_IDLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_SpawnChimneySmokeAtPlayer) = {
-    EVT_CALL(PlaySoundAtPlayer, SOUND_FIREPLACE_BURST, SOUND_SPACE_DEFAULT)
-    EVT_THREAD
-        EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar1, LVar2, LVar3, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
-        EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar1, LVar2, LVar3, 20, 10, 0, 40)
-    EVT_END_THREAD
-    EVT_LOOP(7)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(RandInt, 30, LVar3)
-        EVT_CALL(RandInt, 30, LVar4)
-        EVT_ADD(LVar0, -15)
-        EVT_ADD(LVar2, 10)
-        EVT_ADD(LVar0, LVar3)
-        EVT_ADD(LVar1, LVar4)
-        EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 20)
-        EVT_WAIT(6)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAtPlayer, SOUND_FIREPLACE_BURST, SOUND_SPACE_DEFAULT)
+    Thread
+        Call(GetPlayerPos, LVar1, LVar2, LVar3)
+        PlayEffect(EFFECT_LANDING_DUST, 4, LVar1, LVar2, LVar3, 0)
+    EndThread
+    Thread
+        Call(GetPlayerPos, LVar1, LVar2, LVar3)
+        PlayEffect(EFFECT_SMOKE_IMPACT, 0, LVar1, LVar2, LVar3, 20, 10, 0, 40)
+    EndThread
+    Loop(7)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(RandInt, 30, LVar3)
+        Call(RandInt, 30, LVar4)
+        Add(LVar0, -15)
+        Add(LVar2, 10)
+        Add(LVar0, LVar3)
+        Add(LVar1, LVar4)
+        PlayEffect(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 20)
+        Wait(6)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_TouchFloor_LeftRoof) = {
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_LT(LVar0, -215)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GT(LVar0, -205)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_LT(LVar2, -390)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GT(LVar2, -375)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(IsPlayerInputDisabled))
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_RETURN
-    EVT_END_IF
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    IfLt(LVar0, -215)
+        Return
+    EndIf
+    IfGt(LVar0, -205)
+        Return
+    EndIf
+    IfLt(LVar2, -390)
+        Return
+    EndIf
+    IfGt(LVar2, -375)
+        Return
+    EndIf
+    Call(N(IsPlayerInputDisabled))
+    IfEq(LVar0, TRUE)
+        Return
+    EndIf
     // fall down the chimney
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_NE(LVar0, PARTNER_NONE)
-        EVT_CALL(InterruptUsePartner)
-        EVT_WAIT(20)
-    EVT_END_IF
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_WAIT(1)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPlayerPos, -210, LVar1, -380)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
-    EVT_WAIT(30)
-    EVT_LOOP(10)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_SUB(LVar1, 5)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetPlayerPos, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcPos, NPC_PARTNER, NPC_DISPOSE_LOCATION)
-    EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_TRIP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(ShakeCam, CAM_DEFAULT, 1, 10, EVT_FLOAT(1.0))
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcPos, NPC_PARTNER, -214, 150, -375)
-    EVT_CALL(SetPlayerPos, -214, 150, -370)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Burnt)
-    EVT_WAIT(10)
-    EVT_EXEC(N(EVS_SpawnChimneySmokeAtPlayer))
-    EVT_EXEC_WAIT(N(EVS_RevealLeftHouse))
-    EVT_EXEC_WAIT(N(EVS_SetEntityHideMode_LeftHouse))
-    EVT_EXEC(N(EVS_OnEnterLeftHouse))
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(200.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(-165.0), EVT_FLOAT(-140.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-12.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(40)
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_SPOKE_WITH_HERRINGWAY)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CALL(DisablePlayerPhysics, FALSE)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_CALL(EnablePartnerAI)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(NpcFacePlayer, NPC_Herringway, 0)
-    EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_Herringway, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH7_00CC)
-    EVT_CALL(GetNpcPos, NPC_Herringway, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(200.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(-224.0), EVT_FLOAT(-132.0))
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(-127.0), EVT_FLOAT(-314.0))
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-9.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Herringway, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH7_00CD)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_WAIT(1)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(GetPartnerInUse, LVar0)
+    IfNe(LVar0, PARTNER_NONE)
+        Call(InterruptUsePartner)
+        Wait(20)
+    EndIf
+    Call(DisablePartnerAI, 0)
+    Wait(1)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(SetPlayerPos, -210, LVar1, -380)
+    Call(SetPlayerAnimation, ANIM_Mario1_Flail)
+    Wait(30)
+    Loop(10)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Sub(LVar1, 5)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Call(SetPlayerPos, NPC_DISPOSE_LOCATION)
+    Call(SetNpcPos, NPC_PARTNER, NPC_DISPOSE_LOCATION)
+    Wait(20)
+    Call(PlaySoundAtPlayer, SOUND_TRIP, SOUND_SPACE_DEFAULT)
+    Call(ShakeCam, CAM_DEFAULT, 1, 10, Float(1.0))
+    Wait(10)
+    Call(SetNpcPos, NPC_PARTNER, -214, 150, -375)
+    Call(SetPlayerPos, -214, 150, -370)
+    Call(SetPlayerAnimation, ANIM_Mario1_Burnt)
+    Wait(10)
+    Exec(N(EVS_SpawnChimneySmokeAtPlayer))
+    ExecWait(N(EVS_RevealLeftHouse))
+    ExecWait(N(EVS_SetEntityHideMode_LeftHouse))
+    Exec(N(EVS_OnEnterLeftHouse))
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(200.0))
+    Call(SetCamPosA, CAM_DEFAULT, Float(-165.0), Float(-140.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-12.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(40)
+    IfGe(GB_StoryProgress, STORY_CH7_SPOKE_WITH_HERRINGWAY)
+        Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(DisablePlayerPhysics, FALSE)
+        Call(DisablePlayerInput, FALSE)
+        Call(EnablePartnerAI)
+        Return
+    EndIf
+    Call(NpcFacePlayer, NPC_Herringway, 0)
+    Wait(10)
+    Call(SpeakToPlayer, NPC_Herringway, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH7_00CC)
+    Call(GetNpcPos, NPC_Herringway, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(200.0))
+    Call(SetCamPosA, CAM_DEFAULT, Float(-224.0), Float(-132.0))
+    Call(SetCamPosB, CAM_DEFAULT, Float(-127.0), Float(-314.0))
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-9.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Herringway, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH7_00CD)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Wait(1)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(EnablePartnerAI)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SetPlayerActionState, ACTION_STATE_IDLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_LandOnRightRoof) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_IF_EQ(MF_Unk_00, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(MF_Unk_00, TRUE)
-    EVT_LABEL(10)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(GetPlayerActionState, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_LE(LVar0, 190)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_IF_GE(LVar0, 230)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_IF_LE(LVar1, 350)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_IF_GE(LVar1, 373)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_IF_LE(LVar2, -335)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_IF_GE(LVar2, -303)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_IF_EQ(MF_UsingSpring, FALSE)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_SetEntityHideMode_LeftHouse))
-    EVT_EXEC(N(EVS_OnExitRightHouse))
-    EVT_SET(MF_Unk_00, FALSE)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    IfEq(MF_Unk_00, TRUE)
+        Return
+    EndIf
+    Set(MF_Unk_00, TRUE)
+    Label(10)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(GetPlayerActionState, LVar3)
+        Wait(1)
+        IfLe(LVar0, 190)
+            Goto(10)
+        EndIf
+        IfGe(LVar0, 230)
+            Goto(10)
+        EndIf
+        IfLe(LVar1, 350)
+            Goto(10)
+        EndIf
+        IfGe(LVar1, 373)
+            Goto(10)
+        EndIf
+        IfLe(LVar2, -335)
+            Goto(10)
+        EndIf
+        IfGe(LVar2, -303)
+            Goto(10)
+        EndIf
+        IfEq(MF_UsingSpring, FALSE)
+            Goto(10)
+        EndIf
+    ExecWait(N(EVS_SetEntityHideMode_LeftHouse))
+    Exec(N(EVS_OnExitRightHouse))
+    Set(MF_Unk_00, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseSpring) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAUNCH)
-    EVT_IF_EQ(MV_CurrentFloor, 1)
-        EVT_SET(LVar3, 500)
-        EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayerCappedY), LVarA)
-        EVT_EXEC_WAIT(N(EVS_SetEntityHideMode_Outside))
-        EVT_SET(MF_UsingSpring, FALSE)
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.5))
-        EVT_CALL(PlayerJump, 175, 385, -310, 35)
-        EVT_SET(MF_UsingSpring, TRUE)
-        EVT_EXEC(N(EVS_LandOnRightRoof))
-        EVT_EXEC_WAIT(N(EVS_OnEnterRightHouse))
-    EVT_ELSE
-        EVT_SET(LVar3, 175)
-        EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayerCappedY), LVarA)
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
-        EVT_CALL(PlayerJump, 160, 150, -310, 25)
-    EVT_END_IF
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_KILL_THREAD(LVarA)
-    EVT_WAIT(2)
-    EVT_IF_EQ(MV_CurrentFloor, 1)
-        EVT_EXEC_WAIT(N(EVS_HideRightHouse))
-    EVT_END_IF
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_LAUNCH)
+    IfEq(MV_CurrentFloor, 1)
+        Set(LVar3, 500)
+        ExecGetTID(N(EVS_TetherCamToPlayerCappedY), LVarA)
+        ExecWait(N(EVS_SetEntityHideMode_Outside))
+        Set(MF_UsingSpring, FALSE)
+        Call(SetPlayerJumpscale, Float(0.5))
+        Call(PlayerJump, 175, 385, -310, 35)
+        Set(MF_UsingSpring, TRUE)
+        Exec(N(EVS_LandOnRightRoof))
+        ExecWait(N(EVS_OnEnterRightHouse))
+    Else
+        Set(LVar3, 175)
+        ExecGetTID(N(EVS_TetherCamToPlayerCappedY), LVarA)
+        Call(SetPlayerJumpscale, Float(0.7))
+        Call(PlayerJump, 160, 150, -310, 25)
+    EndIf
+    Call(SetPlayerActionState, ACTION_STATE_IDLE)
+    KillThread(LVarA)
+    Wait(2)
+    IfEq(MV_CurrentFloor, 1)
+        ExecWait(N(EVS_HideRightHouse))
+    EndIf
+    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Interact_Padlock) = {
-    EVT_EXEC_WAIT(N(EVS_SetupLockedHouse))
-    EVT_SET(GF_SAM11_UnlockedDoor, TRUE)
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_SetupLockedHouse))
+    Set(GF_SAM11_UnlockedDoor, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_IF_EQ(GF_SAM11_UnlockedDoor, FALSE)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), 153, 8, -145, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_PTR(N(EVS_Interact_Padlock)))
-        EVT_SET(MV_PadlockEntityID, LVar0)
-    EVT_END_IF
-    EVT_THREAD
-        EVT_CALL(N(MonitorCurrenFloor))
-    EVT_END_THREAD
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 224, 150, -328, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_UseSpring)))
-    EVT_CALL(SetEntityCullMode, 1)
-    EVT_SET(MF_Unk_00, FALSE)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_TouchFloor_RightRoof)), TRIGGER_FLOOR_TOUCH, COLLIDER_o570, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_TouchFloor_LeftRoof)), TRIGGER_FLOOR_TOUCH, COLLIDER_g_yuki2, 1, 0)
-    EVT_CALL(MakeItemEntity, ITEM_WAREHOUSE_KEY, 0, -60, 220, ITEM_SPAWN_MODE_KEY, GF_SAM11_Item_WarehouseKey)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_SAM11_UnlockedDoor, FALSE)
+        Call(MakeEntity, Ref(Entity_Padlock), 153, 8, -145, 0, MAKE_ENTITY_END)
+        Call(AssignScript, Ref(N(EVS_Interact_Padlock)))
+        Set(MV_PadlockEntityID, LVar0)
+    EndIf
+    Thread
+        Call(N(MonitorCurrenFloor))
+    EndThread
+    Call(MakeEntity, Ref(Entity_ScriptSpring), 224, 150, -328, 0, MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(EVS_UseSpring)))
+    Call(SetEntityCullMode, 1)
+    Set(MF_Unk_00, FALSE)
+    BindTrigger(Ref(N(EVS_TouchFloor_RightRoof)), TRIGGER_FLOOR_TOUCH, COLLIDER_o570, 1, 0)
+    BindTrigger(Ref(N(EVS_TouchFloor_LeftRoof)), TRIGGER_FLOOR_TOUCH, COLLIDER_g_yuki2, 1, 0)
+    Call(MakeItemEntity, ITEM_WAREHOUSE_KEY, 0, -60, 220, ITEM_SPAWN_MODE_KEY, GF_SAM11_Item_WarehouseKey)
+    Return
+    End
 };

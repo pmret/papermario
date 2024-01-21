@@ -146,225 +146,225 @@ Vec3f N(UnusedPath)[] = {
 };
 
 EvtScript N(EVS_PlayerFalling) = {
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(PlaySound, SOUND_PAPER_GLIDE_1)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 150, 45, EASING_COS_IN_OUT)
-        EVT_LABEL(10)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(N(SetFallingSpriteRot), 0, EVT_FLOAT(0.0), EVT_FLOAT(0.0), LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(10)
-            EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(1)
-    EVT_CALL(GetPlayerPos, LVar4, LVar5, LVar6)
-    EVT_CALL(SetPlayerPos, NPC_DISPOSE_LOCATION)
-    EVT_CALL(LoadPath, 45, EVT_PTR(N(FallPath)), ARRAY_COUNT(N(FallPath)), EASING_COS_IN_OUT)
-    EVT_LABEL(0)
-        EVT_CALL(GetNextPathPos)
-        EVT_ADDF(LVar1, LVar4)
-        EVT_ADDF(LVar2, LVar5)
-        EVT_ADDF(LVar3, LVar6)
-        EVT_CALL(N(SetFallingSpritePos), LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_SETF(LVar4, LVar1)
-    EVT_SETF(LVar5, LVar2)
-    EVT_SETF(LVar6, LVar3)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(PlaySound, SOUND_PAPER_GLIDE_1)
-    EVT_END_THREAD
-    EVT_CALL(MakeLerp, 0, 100, 30, EASING_QUADRATIC_IN)
-    EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_SETF(LVar7, EVT_FLOAT(-1.0))
-        EVT_SETF(LVar8, EVT_FLOAT(-1.7315))
-        EVT_SETF(LVar9, EVT_FLOAT(0.0))
-        EVT_MULF(LVar7, LVar0)
-        EVT_MULF(LVar8, LVar0)
-        EVT_MULF(LVar9, LVar0)
-        EVT_ADDF(LVar7, LVar4)
-        EVT_ADDF(LVar8, LVar5)
-        EVT_ADDF(LVar9, LVar6)
-        EVT_CALL(N(SetFallingSpritePos), LVar7, LVar8, LVar9)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
-    EVT_CALL(SetPlayerPos, LVar7, LVar8, LVar9)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Wait(5)
+        Call(PlaySound, SOUND_PAPER_GLIDE_1)
+    EndThread
+    Thread
+        Call(MakeLerp, 0, 150, 45, EASING_COS_IN_OUT)
+        Label(10)
+            Call(UpdateLerp)
+            Call(N(SetFallingSpriteRot), 0, Float(0.0), Float(0.0), LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(10)
+            EndIf
+    EndThread
+    Wait(1)
+    Call(GetPlayerPos, LVar4, LVar5, LVar6)
+    Call(SetPlayerPos, NPC_DISPOSE_LOCATION)
+    Call(LoadPath, 45, Ref(N(FallPath)), ARRAY_COUNT(N(FallPath)), EASING_COS_IN_OUT)
+    Label(0)
+        Call(GetNextPathPos)
+        AddF(LVar1, LVar4)
+        AddF(LVar2, LVar5)
+        AddF(LVar3, LVar6)
+        Call(N(SetFallingSpritePos), LVar1, LVar2, LVar3)
+        Wait(1)
+        IfEq(LVar0, 1)
+            Goto(0)
+        EndIf
+    SetF(LVar4, LVar1)
+    SetF(LVar5, LVar2)
+    SetF(LVar6, LVar3)
+    Thread
+        Wait(5)
+        Call(PlaySound, SOUND_PAPER_GLIDE_1)
+    EndThread
+    Call(MakeLerp, 0, 100, 30, EASING_QUADRATIC_IN)
+    Label(1)
+        Call(UpdateLerp)
+        SetF(LVar7, Float(-1.0))
+        SetF(LVar8, Float(-1.7315))
+        SetF(LVar9, Float(0.0))
+        MulF(LVar7, LVar0)
+        MulF(LVar8, LVar0)
+        MulF(LVar9, LVar0)
+        AddF(LVar7, LVar4)
+        AddF(LVar8, LVar5)
+        AddF(LVar9, LVar6)
+        Call(N(SetFallingSpritePos), LVar7, LVar8, LVar9)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(1)
+        EndIf
+    Call(SetPlayerPos, LVar7, LVar8, LVar9)
+    Return
+    End
 };
 
 EvtScript N(EVS_PartnerFalling) = {
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(PlaySound, SOUND_PAPER_GLIDE_2)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, -135, 45, EASING_COS_IN_OUT)
-        EVT_LABEL(10)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcRotation, NPC_PARTNER, EVT_FLOAT(0.0), EVT_FLOAT(0.0), LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(1)
-    EVT_CALL(GetNpcPos, NPC_PARTNER, LVar4, LVar5, LVar6)
-    EVT_CALL(LoadPath, 45, EVT_PTR(N(FallPath)), ARRAY_COUNT(N(FallPath)), EASING_COS_IN_OUT)
-    EVT_LABEL(0)
-    EVT_CALL(GetNextPathPos)
-    EVT_MULF(LVar1, EVT_FLOAT(-1.0))
-    EVT_ADDF(LVar1, LVar4)
-    EVT_ADDF(LVar2, LVar5)
-    EVT_ADDF(LVar3, LVar6)
-    EVT_CALL(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(PlaySound, SOUND_PAPER_GLIDE_2)
-    EVT_END_THREAD
-    EVT_CALL(GetNpcPos, NPC_PARTNER, LVar4, LVar5, LVar6)
-    EVT_CALL(MakeLerp, 0, 100, 30, EASING_QUADRATIC_IN)
-    EVT_LABEL(1)
-    EVT_CALL(UpdateLerp)
-    EVT_SETF(LVar7, EVT_FLOAT(1.0))
-    EVT_SETF(LVar8, EVT_FLOAT(-2.0))
-    EVT_SETF(LVar9, EVT_FLOAT(0.0))
-    EVT_MULF(LVar7, LVar0)
-    EVT_MULF(LVar8, LVar0)
-    EVT_MULF(LVar9, LVar0)
-    EVT_ADDF(LVar7, LVar4)
-    EVT_ADDF(LVar8, LVar5)
-    EVT_ADDF(LVar9, LVar6)
-    EVT_CALL(SetNpcPos, NPC_PARTNER, LVar7, LVar8, LVar9)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_CALL(SetNpcPos, NPC_PARTNER, LVar7, LVar8, LVar9)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Thread
+        Wait(5)
+        Call(PlaySound, SOUND_PAPER_GLIDE_2)
+    EndThread
+    Thread
+        Call(MakeLerp, 0, -135, 45, EASING_COS_IN_OUT)
+        Label(10)
+        Call(UpdateLerp)
+        Call(SetNpcRotation, NPC_PARTNER, Float(0.0), Float(0.0), LVar0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(10)
+        EndIf
+    EndThread
+    Wait(1)
+    Call(GetNpcPos, NPC_PARTNER, LVar4, LVar5, LVar6)
+    Call(LoadPath, 45, Ref(N(FallPath)), ARRAY_COUNT(N(FallPath)), EASING_COS_IN_OUT)
+    Label(0)
+    Call(GetNextPathPos)
+    MulF(LVar1, Float(-1.0))
+    AddF(LVar1, LVar4)
+    AddF(LVar2, LVar5)
+    AddF(LVar3, LVar6)
+    Call(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
+    Wait(1)
+    IfEq(LVar0, 1)
+        Goto(0)
+    EndIf
+    Call(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
+    Thread
+        Wait(5)
+        Call(PlaySound, SOUND_PAPER_GLIDE_2)
+    EndThread
+    Call(GetNpcPos, NPC_PARTNER, LVar4, LVar5, LVar6)
+    Call(MakeLerp, 0, 100, 30, EASING_QUADRATIC_IN)
+    Label(1)
+    Call(UpdateLerp)
+    SetF(LVar7, Float(1.0))
+    SetF(LVar8, Float(-2.0))
+    SetF(LVar9, Float(0.0))
+    MulF(LVar7, LVar0)
+    MulF(LVar8, LVar0)
+    MulF(LVar9, LVar0)
+    AddF(LVar7, LVar4)
+    AddF(LVar8, LVar5)
+    AddF(LVar9, LVar6)
+    Call(SetNpcPos, NPC_PARTNER, LVar7, LVar8, LVar9)
+    Wait(1)
+    IfEq(LVar1, 1)
+        Goto(1)
+    EndIf
+    Call(SetNpcPos, NPC_PARTNER, LVar7, LVar8, LVar9)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnHitTrapTrigger) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_LABEL(10)
-        EVT_CALL(GetPlayerActionState, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_NE(LVar0, ACTION_STATE_IDLE)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_LOOP(0)
-        EVT_CALL(GetPartnerInUse, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_WAIT(10)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, -10)
-        EVT_ADD(LVar2, -5)
-        EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 10)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-    EVT_END_THREAD
-    EVT_WAIT(10)
-    EVT_CALL(EnableModel, MODEL_o101, FALSE)
-    EVT_CALL(EnableModel, MODEL_o95, TRUE)
-    EVT_CALL(EnableModel, MODEL_o96, TRUE)
-    EVT_CALL(SetGroupVisibility, MODEL_kesu, MODEL_GROUP_VISIBLE)
-    EVT_CALL(PlaySound, SOUND_OPEN_TRAPDOOR)
-    EVT_CALL(MakeLerp, 0, 90, 30, EASING_COS_SLOW_OVERSHOOT)
-    EVT_LABEL(0)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, MODEL_o95, LVar0, 0, 0, -1)
-    EVT_CALL(RotateModel, MODEL_o96, LVar0, 0, 0, 1)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(InterpPlayerYaw, 270, 1)
-    EVT_WAIT(10)
-    EVT_CALL(InterpPlayerYaw, 90, 1)
-    EVT_WAIT(15)
-    EVT_CALL(InterpPlayerYaw, 270, 1)
-    EVT_WAIT(3)
-    EVT_CALL(InterpPlayerYaw, 90, 1)
-    EVT_WAIT(3)
-    EVT_CALL(InterpPlayerYaw, 270, 1)
-    EVT_WAIT(3)
-    EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Flail)
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_HURT)
-    EVT_WAIT(15)
-    EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-    EVT_WAIT(5)
-    EVT_THREAD
-        EVT_CALL(N(InitializeFallingSprite))
-        EVT_EXEC_WAIT(N(EVS_PlayerFalling))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_EXEC_WAIT(N(EVS_PartnerFalling))
-    EVT_END_THREAD
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o82, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)
-    EVT_SET(LVar5, LVar3)
-    EVT_SUB(LVar5, 200)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar2, LVar5, LVar4)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, EVT_FLOAT(0.5), 1)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_MARIO_ACTIVATED_TRAP)
-        EVT_WAIT(60)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(N(DeleteFallingSprite))
-        EVT_CALL(SetNpcPos, NPC_KoopaBros_01, -250, 240, -25)
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Walk)
-        EVT_CALL(SetNpcSpeed, NPC_KoopaBros_01, EVT_FLOAT(3.0))
-        EVT_CALL(NpcMoveTo, NPC_KoopaBros_01, -150, -25, 0)
-        EVT_WAIT(5)
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_ThumbsUp)
-        EVT_WAIT(20)
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Idle)
-        EVT_WAIT(5)
-        EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Talk, ANIM_KoopaBros_Yellow_Idle, 5, MSG_CH1_00D7)
-        EVT_THREAD
-            EVT_WAIT(10)
-            EVT_CALL(SetNpcSpeed, NPC_KoopaBros_01, EVT_FLOAT(2.5))
-            EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Walk)
-            EVT_CALL(NpcMoveTo, NPC_KoopaBros_01, -200, -25, 0)
-        EVT_END_THREAD
-        EVT_WAIT(20)
-        EVT_SET(GB_StoryProgress, STORY_CH1_MARIO_ACTIVATED_TRAP)
-    EVT_ELSE
-        EVT_WAIT(20)
-    EVT_END_IF
-    EVT_CALL(GotoMap, EVT_PTR("trd_06"), trd_06_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Label(10)
+        Call(GetPlayerActionState, LVar0)
+        Wait(1)
+        IfNe(LVar0, ACTION_STATE_IDLE)
+            Goto(10)
+        EndIf
+    Loop(0)
+        Call(GetPartnerInUse, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Wait(10)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePartnerAI, 0)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Thread
+        Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar0, -10)
+        Add(LVar2, -5)
+        Call(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 10)
+        Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
+    EndThread
+    Wait(10)
+    Call(EnableModel, MODEL_o101, FALSE)
+    Call(EnableModel, MODEL_o95, TRUE)
+    Call(EnableModel, MODEL_o96, TRUE)
+    Call(SetGroupVisibility, MODEL_kesu, MODEL_GROUP_VISIBLE)
+    Call(PlaySound, SOUND_OPEN_TRAPDOOR)
+    Call(MakeLerp, 0, 90, 30, EASING_COS_SLOW_OVERSHOOT)
+    Label(0)
+    Call(UpdateLerp)
+    Call(RotateModel, MODEL_o95, LVar0, 0, 0, -1)
+    Call(RotateModel, MODEL_o96, LVar0, 0, 0, 1)
+    Wait(1)
+    IfEq(LVar1, 1)
+        Goto(0)
+    EndIf
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(InterpPlayerYaw, 270, 1)
+    Wait(10)
+    Call(InterpPlayerYaw, 90, 1)
+    Wait(15)
+    Call(InterpPlayerYaw, 270, 1)
+    Wait(3)
+    Call(InterpPlayerYaw, 90, 1)
+    Wait(3)
+    Call(InterpPlayerYaw, 270, 1)
+    Wait(3)
+    Wait(10)
+    Call(SetPlayerAnimation, ANIM_MarioW2_Flail)
+    Wait(5)
+    Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_HURT)
+    Wait(15)
+    Call(GetPlayerPos, LVar2, LVar3, LVar4)
+    Wait(5)
+    Thread
+        Call(N(InitializeFallingSprite))
+        ExecWait(N(EVS_PlayerFalling))
+    EndThread
+    Thread
+        Wait(10)
+        ExecWait(N(EVS_PartnerFalling))
+    EndThread
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o82, COLLIDER_FLAGS_UPPER_MASK)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)
+    Set(LVar5, LVar3)
+    Sub(LVar5, 200)
+    Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar5, LVar4)
+    Call(PanToTarget, CAM_DEFAULT, Float(0.5), 1)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    IfLt(GB_StoryProgress, STORY_CH1_MARIO_ACTIVATED_TRAP)
+        Wait(60)
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Call(N(DeleteFallingSprite))
+        Call(SetNpcPos, NPC_KoopaBros_01, -250, 240, -25)
+        Call(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Walk)
+        Call(SetNpcSpeed, NPC_KoopaBros_01, Float(3.0))
+        Call(NpcMoveTo, NPC_KoopaBros_01, -150, -25, 0)
+        Wait(5)
+        Call(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_ThumbsUp)
+        Wait(20)
+        Call(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Idle)
+        Wait(5)
+        Call(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Talk, ANIM_KoopaBros_Yellow_Idle, 5, MSG_CH1_00D7)
+        Thread
+            Wait(10)
+            Call(SetNpcSpeed, NPC_KoopaBros_01, Float(2.5))
+            Call(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Walk)
+            Call(NpcMoveTo, NPC_KoopaBros_01, -200, -25, 0)
+        EndThread
+        Wait(20)
+        Set(GB_StoryProgress, STORY_CH1_MARIO_ACTIVATED_TRAP)
+    Else
+        Wait(20)
+    EndIf
+    Call(GotoMap, Ref("trd_06"), trd_06_ENTRY_0)
+    Wait(100)
+    Return
+    End
 };

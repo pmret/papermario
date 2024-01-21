@@ -123,26 +123,26 @@ ShopSellPriceData N(RowfDummyPriceList)[] = {
 };
 
 EvtScript N(EVS_OnBuy) = {
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_CANCEL)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_4)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_OK)
-            EVT_SWITCH(LVar2)
-                EVT_CASE_EQ(0) // left badge shop slot
-                    EVT_SET(GF_MAC01_RowfBadgeAvailableA, TRUE)
-                    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b3, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CASE_EQ(1) // middle badge shop slot
-                    EVT_SET(GF_MAC01_RowfBadgeAvailableB, TRUE)
-                    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CASE_EQ(2) // right badge shop slot
-                    EVT_SET(GF_MAC01_RowfBadgeAvailableC, TRUE)
-                    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_END_SWITCH
-            EVT_CALL(N(SetRowfBadgeBought), LVar2)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_2)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(LVar0)
+        CaseEq(SHOP_BUY_RESULT_CANCEL)
+        CaseEq(SHOP_BUY_RESULT_4)
+        CaseEq(SHOP_BUY_RESULT_OK)
+            Switch(LVar2)
+                CaseEq(0) // left badge shop slot
+                    Set(GF_MAC01_RowfBadgeAvailableA, TRUE)
+                    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b3, COLLIDER_FLAGS_UPPER_MASK)
+                CaseEq(1) // middle badge shop slot
+                    Set(GF_MAC01_RowfBadgeAvailableB, TRUE)
+                    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
+                CaseEq(2) // right badge shop slot
+                    Set(GF_MAC01_RowfBadgeAvailableC, TRUE)
+                    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
+            EndSwitch
+            Call(N(SetRowfBadgeBought), LVar2)
+        CaseEq(SHOP_BUY_RESULT_2)
+    EndSwitch
+    Return
+    End
 };
 
 ShopItemData N(RowfBadgeInventory)[] = {
@@ -179,73 +179,73 @@ ShopOwner N(ShopOwnerRowf) = {
 };
 
 EvtScript N(EVS_SetupBadgeShop) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
-        EVT_GOTO(2)
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
-        EVT_GOTO(3)
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
-        EVT_GOTO(4)
-    EVT_END_IF
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_0F, TRUE)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_0E, TRUE)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_0D, TRUE)
-    EVT_LABEL(4)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_0C, TRUE)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_0B, TRUE)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_0A, TRUE)
-    EVT_LABEL(3)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_09, TRUE)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_08, TRUE)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_07, TRUE)
-    EVT_LABEL(2)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_06, TRUE)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_05, TRUE)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_04, TRUE)
-    EVT_LABEL(1)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_03, TRUE)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_02, TRUE)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_01, TRUE)
-    EVT_SET(GF_MAC01_UnlockedRowfBadge_00, TRUE)
-    EVT_CALL(N(CreateShopInventory))
-    EVT_SET(MV_RowfShopBuyFlags, LVar1)
-    EVT_IF_EQ(LVar3, 0)
-        EVT_SET(GF_MAC01_RowfBadgeAvailableA, FALSE)
-        EVT_SET(GF_MAC01_RowfBadgeAvailableB, FALSE)
-        EVT_SET(GF_MAC01_RowfBadgeAvailableC, FALSE)
-        EVT_IF_LT(LVar0, 3)
-            EVT_SET(GF_MAC01_RowfBadgeAvailableC, TRUE)
-        EVT_END_IF
-        EVT_IF_LT(LVar0, 2)
-            EVT_SET(GF_MAC01_RowfBadgeAvailableB, TRUE)
-        EVT_END_IF
-        EVT_IF_LT(LVar0, 1)
-            EVT_SET(GF_MAC01_RowfBadgeAvailableA, TRUE)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(MakeShop, EVT_PTR(N(RowfItemPositions)), LVar2, EVT_PTR(N(RowfDummyPriceList)), 0)
-    EVT_CALL(MakeShopOwner, EVT_PTR(N(ShopOwnerRowf)))
-    EVT_IF_EQ(LVar3, 1)
-        EVT_IF_GE(LVar0, 3)
-            EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableC, TRUE)
-                EVT_CALL(N(SetRowfBadgeBought), 2)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_IF_GE(LVar0, 2)
-            EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableB, TRUE)
-                EVT_CALL(N(SetRowfBadgeBought), 1)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_IF_GE(LVar0, 1)
-            EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableA, TRUE)
-                EVT_CALL(N(SetRowfBadgeBought), 0)
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
+        Goto(1)
+    EndIf
+    IfLt(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
+        Goto(2)
+    EndIf
+    IfLt(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
+        Goto(3)
+    EndIf
+    IfLt(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
+        Goto(4)
+    EndIf
+    Set(GF_MAC01_UnlockedRowfBadge_0F, TRUE)
+    Set(GF_MAC01_UnlockedRowfBadge_0E, TRUE)
+    Set(GF_MAC01_UnlockedRowfBadge_0D, TRUE)
+    Label(4)
+    Set(GF_MAC01_UnlockedRowfBadge_0C, TRUE)
+    Set(GF_MAC01_UnlockedRowfBadge_0B, TRUE)
+    Set(GF_MAC01_UnlockedRowfBadge_0A, TRUE)
+    Label(3)
+    Set(GF_MAC01_UnlockedRowfBadge_09, TRUE)
+    Set(GF_MAC01_UnlockedRowfBadge_08, TRUE)
+    Set(GF_MAC01_UnlockedRowfBadge_07, TRUE)
+    Label(2)
+    Set(GF_MAC01_UnlockedRowfBadge_06, TRUE)
+    Set(GF_MAC01_UnlockedRowfBadge_05, TRUE)
+    Set(GF_MAC01_UnlockedRowfBadge_04, TRUE)
+    Label(1)
+    Set(GF_MAC01_UnlockedRowfBadge_03, TRUE)
+    Set(GF_MAC01_UnlockedRowfBadge_02, TRUE)
+    Set(GF_MAC01_UnlockedRowfBadge_01, TRUE)
+    Set(GF_MAC01_UnlockedRowfBadge_00, TRUE)
+    Call(N(CreateShopInventory))
+    Set(MV_RowfShopBuyFlags, LVar1)
+    IfEq(LVar3, 0)
+        Set(GF_MAC01_RowfBadgeAvailableA, FALSE)
+        Set(GF_MAC01_RowfBadgeAvailableB, FALSE)
+        Set(GF_MAC01_RowfBadgeAvailableC, FALSE)
+        IfLt(LVar0, 3)
+            Set(GF_MAC01_RowfBadgeAvailableC, TRUE)
+        EndIf
+        IfLt(LVar0, 2)
+            Set(GF_MAC01_RowfBadgeAvailableB, TRUE)
+        EndIf
+        IfLt(LVar0, 1)
+            Set(GF_MAC01_RowfBadgeAvailableA, TRUE)
+        EndIf
+    EndIf
+    Call(MakeShop, Ref(N(RowfItemPositions)), LVar2, Ref(N(RowfDummyPriceList)), 0)
+    Call(MakeShopOwner, Ref(N(ShopOwnerRowf)))
+    IfEq(LVar3, 1)
+        IfGe(LVar0, 3)
+            IfEq(GF_MAC01_RowfBadgeAvailableC, TRUE)
+                Call(N(SetRowfBadgeBought), 2)
+            EndIf
+        EndIf
+        IfGe(LVar0, 2)
+            IfEq(GF_MAC01_RowfBadgeAvailableB, TRUE)
+                Call(N(SetRowfBadgeBought), 1)
+            EndIf
+        EndIf
+        IfGe(LVar0, 1)
+            IfEq(GF_MAC01_RowfBadgeAvailableA, TRUE)
+                Call(N(SetRowfBadgeBought), 0)
+            EndIf
+        EndIf
+    EndIf
+    Return
+    End
 };

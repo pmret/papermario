@@ -7,16 +7,16 @@
 #include "sprite.h"
 
 EvtScript D_80293820 = {
-    EVT_WAIT(LVar0)
-    EVT_LOOP(4)
-        EVT_CALL(SetBattleCamParam, 4, 11)
-        EVT_WAIT(1)
-        EVT_CALL(SetBattleCamParam, 4, 5)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetBattleCamParam, 4, 8)
-    EVT_RETURN
-    EVT_END
+    Wait(LVar0)
+    Loop(4)
+        Call(SetBattleCamParam, 4, 11)
+        Wait(1)
+        Call(SetBattleCamParam, 4, 5)
+        Wait(1)
+    EndLoop
+    Call(SetBattleCamParam, 4, 8)
+    Return
+    End
 };
 
 f32 D_802938A4 = 0.0f;
@@ -3113,71 +3113,71 @@ void show_foreground_models(void) {
 #include "common/StartRumbleWithParams.inc.c"
 
 EvtScript EVS_BattleRumble_Long = {
-    EVT_CALL(N(StartRumbleWithParams), 256, 30)
-    EVT_CALL(N(StartRumbleWithParams), 200, 15)
-    EVT_CALL(N(StartRumbleWithParams), 50, 15)
-    EVT_RETURN
-    EVT_END
+    Call(N(StartRumbleWithParams), 256, 30)
+    Call(N(StartRumbleWithParams), 200, 15)
+    Call(N(StartRumbleWithParams), 50, 15)
+    Return
+    End
 };
 
 EvtScript EVS_BattleRumble_HitMin = {
-    EVT_CALL(N(StartRumbleWithParams), 100, 20)
-    EVT_RETURN
-    EVT_END
+    Call(N(StartRumbleWithParams), 100, 20)
+    Return
+    End
 };
 
 EvtScript EVS_BattleRumble_HitLight = {
-    EVT_CALL(N(StartRumbleWithParams), 150, 20)
-    EVT_RETURN
-    EVT_END
+    Call(N(StartRumbleWithParams), 150, 20)
+    Return
+    End
 };
 
 EvtScript EVS_BattleRumble_HitHeavy = {
-    EVT_CALL(N(StartRumbleWithParams), 200, 30)
-    EVT_RETURN
-    EVT_END
+    Call(N(StartRumbleWithParams), 200, 30)
+    Return
+    End
 };
 
 EvtScript EVS_BattleRumble_HitExtreme = {
-    EVT_CALL(N(StartRumbleWithParams), 256, 40)
-    EVT_RETURN
-    EVT_END
+    Call(N(StartRumbleWithParams), 256, 40)
+    Return
+    End
 };
 
 EvtScript EVS_BattleRumble_HitMax = {
-    EVT_CALL(N(StartRumbleWithParams), 256, 60)
-    EVT_RETURN
-    EVT_END
+    Call(N(StartRumbleWithParams), 256, 60)
+    Return
+    End
 };
 
 EvtScript EVS_BattleRumble_PlayerMin = {
-    EVT_CALL(N(StartRumbleWithParams), 100, 20)
-    EVT_RETURN
-    EVT_END
+    Call(N(StartRumbleWithParams), 100, 20)
+    Return
+    End
 };
 
 EvtScript EVS_BattleRumble_PlayerLight = {
-    EVT_CALL(N(StartRumbleWithParams), 150, 20)
-    EVT_RETURN
-    EVT_END
+    Call(N(StartRumbleWithParams), 150, 20)
+    Return
+    End
 };
 
 EvtScript EVS_BattleRumble_PlayerHeavy = {
-    EVT_CALL(N(StartRumbleWithParams), 200, 30)
-    EVT_RETURN
-    EVT_END
+    Call(N(StartRumbleWithParams), 200, 30)
+    Return
+    End
 };
 
 EvtScript EVS_BattleRumble_PlayerExtreme = {
-    EVT_CALL(N(StartRumbleWithParams), 256, 40)
-    EVT_RETURN
-    EVT_END
+    Call(N(StartRumbleWithParams), 256, 40)
+    Return
+    End
 };
 
 EvtScript EVS_BattleRumble_PlayerMax = {
-    EVT_CALL(N(StartRumbleWithParams), 256, 60)
-    EVT_RETURN
-    EVT_END
+    Call(N(StartRumbleWithParams), 256, 60)
+    Return
+    End
 };
 
 void start_rumble_type(u32 type) {

@@ -7,45 +7,45 @@ API_CALLABLE(N(ChangePartnerFollowState)) {
 }
 
 EvtScript N(EVS_ProvideDemoInputs) = {
-    EVT_CALL(DemoJoystickXY, -85, -1)
-    EVT_WAIT(32)
-    EVT_CALL(DemoSetButtons, BUTTON_A)
-    EVT_WAIT(7)
-    EVT_CALL(DemoSetButtons, 0)
-    EVT_WAIT(20)
-    EVT_CALL(DemoSetButtons, BUTTON_A)
-    EVT_WAIT(30)
-    EVT_CALL(DemoSetButtons, 0)
-    EVT_WAIT(15)
-    EVT_CALL(N(ChangePartnerFollowState))
-    EVT_WAIT(15)
-    EVT_IF_EQ(GF_DemoSceneDone, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("tik_03"), tik_03_ENTRY_2, TRANSITION_END_DEMO_SCENE_BLACK)
-    EVT_WAIT(110)
-    EVT_RETURN
-    EVT_END
+    Call(DemoJoystickXY, -85, -1)
+    Wait(32)
+    Call(DemoSetButtons, BUTTON_A)
+    Wait(7)
+    Call(DemoSetButtons, 0)
+    Wait(20)
+    Call(DemoSetButtons, BUTTON_A)
+    Wait(30)
+    Call(DemoSetButtons, 0)
+    Wait(15)
+    Call(N(ChangePartnerFollowState))
+    Wait(15)
+    IfEq(GF_DemoSceneDone, TRUE)
+        Return
+    EndIf
+    Set(GF_DemoSceneDone, TRUE)
+    Call(GotoMapSpecial, Ref("tik_03"), tik_03_ENTRY_2, TRANSITION_END_DEMO_SCENE_BLACK)
+    Wait(110)
+    Return
+    End
 };
 
 EvtScript N(EVS_MonitorDemoState) = {
-    EVT_WAIT(10)
-    EVT_LOOP(0)
-        EVT_CALL(GetDemoState, LVar0)
-        EVT_IF_EQ(LVar0, DEMO_STATE_CHANGE_MAP)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_IF_EQ(GF_DemoSceneDone, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("tik_03"), tik_03_ENTRY_2, TRANSITION_END_DEMO_SCENE_WHITE)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Wait(10)
+    Loop(0)
+        Call(GetDemoState, LVar0)
+        IfEq(LVar0, DEMO_STATE_CHANGE_MAP)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    IfEq(GF_DemoSceneDone, TRUE)
+        Return
+    EndIf
+    Set(GF_DemoSceneDone, TRUE)
+    Call(GotoMapSpecial, Ref("tik_03"), tik_03_ENTRY_2, TRANSITION_END_DEMO_SCENE_WHITE)
+    Wait(100)
+    Return
+    End
 };
 
 s32 N(DemoInitState) = {
@@ -78,10 +78,10 @@ API_CALLABLE(N(SetupDemoScene)) {
 }
 
 EvtScript N(EVS_PlayDemoScene) = {
-    EVT_CALL(N(SetupDemoScene))
-    EVT_SET(GF_DemoSceneDone, FALSE)
-    EVT_EXEC(N(EVS_MonitorDemoState))
-    EVT_EXEC(N(EVS_ProvideDemoInputs))
-    EVT_RETURN
-    EVT_END
+    Call(N(SetupDemoScene))
+    Set(GF_DemoSceneDone, FALSE)
+    Exec(N(EVS_MonitorDemoState))
+    Exec(N(EVS_ProvideDemoInputs))
+    Return
+    End
 };

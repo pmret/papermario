@@ -36,14 +36,14 @@ s32 N(RedYoshiKidLetters)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_RedYoshiKid) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_YoshiKid_02, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle,
         ITEM_LETTER_CHAIN_YOSHI_KID, ITEM_LETTER_CHAIN_DANE_T_2,
         MSG_CH5_0079, MSG_CH5_007A, MSG_CH5_007B, MSG_CH5_007C,
-        EVT_PTR(N(RedYoshiKidLetters)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(RedYoshiKidLetters)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 s32 N(KoloradoLetters)[] = {
@@ -52,22 +52,22 @@ s32 N(KoloradoLetters)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_Kolorado) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
         ITEM_LETTER_TO_KOLORADO, ITEM_NONE,
         MSG_CH5_001D, MSG_CH5_001E, MSG_CH5_001F, MSG_CH5_0020,
-        EVT_PTR(N(KoloradoLetters)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(KoloradoLetters)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_LetterReward_Kolorado) = {
-    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+    IfEq(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    EndIf
+    Return
+    End
 };
 
 s32 N(FoodItemList)[] = {
@@ -134,489 +134,489 @@ API_CALLABLE(N(CountFoodItems)) {
 
 
 EvtScript N(EVS_GetRescuedYoshiCount) = {
-    EVT_SET(LVar0, 0)
-    EVT_ADD(LVar0, GF_JAN05_SavedYoshi)
-    EVT_ADD(LVar0, GF_JAN07_SavedYoshi)
-    EVT_ADD(LVar0, GF_JAN08_SavedYoshi)
-    EVT_ADD(LVar0, GF_JAN10_SavedYoshi)
-    EVT_ADD(LVar0, GF_JAN11_SavedYoshi)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, 0)
+    Add(LVar0, GF_JAN05_SavedYoshi)
+    Add(LVar0, GF_JAN07_SavedYoshi)
+    Add(LVar0, GF_JAN08_SavedYoshi)
+    Add(LVar0, GF_JAN10_SavedYoshi)
+    Add(LVar0, GF_JAN11_SavedYoshi)
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_SetDialogue) = {
-    EVT_SET(LVar0, MSG_CH5_0094)
-    EVT_SET(LVar8, MSG_CH5_0095)
-    EVT_SET(LVar1, MSG_CH5_0096)
-    EVT_SET(LVar2, MSG_CH5_0097)
-    EVT_SET(LVar3, MSG_CH5_0098)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, MSG_CH5_0094)
+    Set(LVar8, MSG_CH5_0095)
+    Set(LVar1, MSG_CH5_0096)
+    Set(LVar2, MSG_CH5_0097)
+    Set(LVar3, MSG_CH5_0098)
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_GetInBed) = {
-    EVT_EXEC(N(EVS_PlayRestingSong))
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.5))
-    EVT_CALL(PlayerMoveTo, 322, -178, 0)
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(N(ToadHouse_CamSetFOV), 0, 40)
-        EVT_CALL(SetCamType, CAM_DEFAULT, 4, FALSE)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, 54, -27)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 135)
-        EVT_CALL(SetCamPosA, CAM_DEFAULT, 406, -130)
-        EVT_CALL(SetCamPosB, CAM_DEFAULT, 361, -190)
-        EVT_CALL(SetCamPosC, CAM_DEFAULT, 0, -1)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_END_THREAD
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
-    EVT_CALL(PlayerMoveTo, 361, -194, 0)
-    EVT_CALL(PlayerMoveTo, 370, -257, 0)
-    EVT_CALL(InterpPlayerYaw, 229, 1)
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_800)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
-    EVT_THREAD
-        EVT_WAIT(60)
-        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
-    EVT_END_THREAD
-    EVT_WAIT(20)
-    EVT_THREAD
-        EVT_WAIT(81)
-        EVT_CALL(N(ToadHouse_CamSetFOV), 0, 25)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_PlayRestingSong))
+    Call(SetPlayerSpeed, Float(3.5))
+    Call(PlayerMoveTo, 322, -178, 0)
+    Thread
+        Wait(15)
+        Call(N(ToadHouse_CamSetFOV), 0, 40)
+        Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+        Call(SetCamPitch, CAM_DEFAULT, 54, -27)
+        Call(SetCamDistance, CAM_DEFAULT, 135)
+        Call(SetCamPosA, CAM_DEFAULT, 406, -130)
+        Call(SetCamPosB, CAM_DEFAULT, 361, -190)
+        Call(SetCamPosC, CAM_DEFAULT, 0, -1)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    EndThread
+    Call(SetPlayerSpeed, Float(3.0))
+    Call(PlayerMoveTo, 361, -194, 0)
+    Call(PlayerMoveTo, 370, -257, 0)
+    Call(InterpPlayerYaw, 229, 1)
+    Call(HidePlayerShadow, TRUE)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SetPlayerImgFXFlags, IMGFX_FLAG_800)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
+    Thread
+        Wait(60)
+        Call(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
+    EndThread
+    Wait(20)
+    Thread
+        Wait(81)
+        Call(N(ToadHouse_CamSetFOV), 0, 25)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
-    EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(SetPlayerPos, 345, 0, -186)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
-    EVT_CALL(PlayerMoveTo, 291, -100, 0)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_RETURN
-    EVT_END
+    Call(HidePlayerShadow, FALSE)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(SetPlayerPos, 345, 0, -186)
+    Call(SetPlayerSpeed, Float(3.0))
+    Call(PlayerMoveTo, 291, -100, 0)
+    Exec(N(EVS_SetupMusic))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ToadHouseKeeper)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ToadHouseKeeper)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Yoshi_01) = {
-    EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
-    EVT_RETURN
-    EVT_END
+    ExecWait(EVS_ShopOwnerDialog)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Yoshi_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Yoshi_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Yoshi_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_VillageLeader) = {
-    EVT_EXEC_WAIT(N(EVS_GetRescuedYoshiCount))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_LT(1)
-            EVT_IF_EQ(GF_JAN03_AgreedToRescueChildren, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_VillageLeader_Shout, ANIM_VillageLeader_IdleSad, 0, MSG_CH5_0099)
-                EVT_SET(GF_JAN03_AgreedToRescueChildren, TRUE)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_VillageLeader_Shout, ANIM_VillageLeader_IdleSad, 0, MSG_CH5_009A)
-            EVT_END_IF
-        EVT_CASE_LT(3)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_VillageLeader_Shout, ANIM_VillageLeader_IdleSad, 0, MSG_CH5_009B)
-        EVT_CASE_LT(4)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_VillageLeader_Shout, ANIM_VillageLeader_IdleSad, 0, MSG_CH5_009C)
-        EVT_CASE_LT(5)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_VillageLeader_Shout, ANIM_VillageLeader_IdleSad, 0, MSG_CH5_009D)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_GetRescuedYoshiCount))
+    Switch(LVar0)
+        CaseLt(1)
+            IfEq(GF_JAN03_AgreedToRescueChildren, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_VillageLeader_Shout, ANIM_VillageLeader_IdleSad, 0, MSG_CH5_0099)
+                Set(GF_JAN03_AgreedToRescueChildren, TRUE)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_VillageLeader_Shout, ANIM_VillageLeader_IdleSad, 0, MSG_CH5_009A)
+            EndIf
+        CaseLt(3)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_VillageLeader_Shout, ANIM_VillageLeader_IdleSad, 0, MSG_CH5_009B)
+        CaseLt(4)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_VillageLeader_Shout, ANIM_VillageLeader_IdleSad, 0, MSG_CH5_009C)
+        CaseLt(5)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_VillageLeader_Shout, ANIM_VillageLeader_IdleSad, 0, MSG_CH5_009D)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_VillageLeader) = {
-    EVT_LOOP(0)
-        EVT_CALL(NpcMoveTo, NPC_SELF, -300, -70, 50)
-        EVT_CALL(NpcMoveTo, NPC_SELF, -350, -70, 50)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(NpcMoveTo, NPC_SELF, -300, -70, 50)
+        Call(NpcMoveTo, NPC_SELF, -350, -70, 50)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_VillageLeader) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_VillageLeader_Panic)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_VillageLeader)))
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_VillageLeader)))
-        EVT_CASE_DEFAULT
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+            Call(RemoveNpc, NPC_SELF)
+        CaseLt(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_VillageLeader_Panic)
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_VillageLeader)))
+            Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_VillageLeader)))
+        CaseDefault
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Yoshi_02) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_Talk, ANIM_Yoshi_Green_Idle, 0, MSG_CH5_005A)
-        EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_EXEC_WAIT(N(EVS_GetRescuedYoshiCount))
-            EVT_IF_EQ(LVar0, 0)
-                EVT_IF_EQ(GF_JAN03_AgreedToRescueChildren, FALSE)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_CryTalk, ANIM_Yoshi_Green_Cry, 0, MSG_CH5_005B)
-                EVT_ELSE
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_CryTalk, ANIM_Yoshi_Green_Cry, 0, MSG_CH5_005C)
-                EVT_END_IF
-            EVT_ELSE
-                EVT_IF_EQ(GF_JAN11_SavedYoshi, FALSE)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_CryTalk, ANIM_Yoshi_Green_Cry, 0, MSG_CH5_005D)
-                EVT_ELSE
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_Talk, ANIM_Yoshi_Green_Idle, 0, MSG_CH5_005E)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LE(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_Talk, ANIM_Yoshi_Green_Idle, 0, MSG_CH5_005F)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_Talk, ANIM_Yoshi_Green_Idle, 0, MSG_CH5_0060)
-        EVT_CASE_LT(STORY_CH6_FLOWER_GATE_OPEN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_Talk, ANIM_Yoshi_Green_Idle, 0, MSG_CH5_0061)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_Talk, ANIM_Yoshi_Green_Idle, 0, MSG_CH5_0062)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_Talk, ANIM_Yoshi_Green_Idle, 0, MSG_CH5_005A)
+        CaseLt(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+            ExecWait(N(EVS_GetRescuedYoshiCount))
+            IfEq(LVar0, 0)
+                IfEq(GF_JAN03_AgreedToRescueChildren, FALSE)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_CryTalk, ANIM_Yoshi_Green_Cry, 0, MSG_CH5_005B)
+                Else
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_CryTalk, ANIM_Yoshi_Green_Cry, 0, MSG_CH5_005C)
+                EndIf
+            Else
+                IfEq(GF_JAN11_SavedYoshi, FALSE)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_CryTalk, ANIM_Yoshi_Green_Cry, 0, MSG_CH5_005D)
+                Else
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_Talk, ANIM_Yoshi_Green_Idle, 0, MSG_CH5_005E)
+                EndIf
+            EndIf
+        CaseLe(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_Talk, ANIM_Yoshi_Green_Idle, 0, MSG_CH5_005F)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_Talk, ANIM_Yoshi_Green_Idle, 0, MSG_CH5_0060)
+        CaseLt(STORY_CH6_FLOWER_GATE_OPEN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_Talk, ANIM_Yoshi_Green_Idle, 0, MSG_CH5_0061)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Green_Talk, ANIM_Yoshi_Green_Idle, 0, MSG_CH5_0062)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Yoshi_02) = {
-    EVT_LOOP(0)
-        EVT_CALL(NpcMoveTo, NPC_SELF, -430, -220, 50)
-        EVT_CALL(NpcMoveTo, NPC_SELF, -340, -220, 50)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(NpcMoveTo, NPC_SELF, -430, -220, 50)
+        Call(NpcMoveTo, NPC_SELF, -340, -220, 50)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Yoshi_02) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-        EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_IF_EQ(GF_JAN11_SavedYoshi, FALSE)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Yoshi_Green_Panic)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Yoshi_02)))
-            EVT_ELSE
-                EVT_CALL(BindNpcIdle, NPC_SELF, 0)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Yoshi_02)))
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+        CaseLt(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+            IfEq(GF_JAN11_SavedYoshi, FALSE)
+                Call(SetNpcAnimation, NPC_SELF, ANIM_Yoshi_Green_Panic)
+                Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Yoshi_02)))
+            Else
+                Call(BindNpcIdle, NPC_SELF, 0)
+            EndIf
+    EndSwitch
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Yoshi_02)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Yoshi_03) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH5_STAR_SPRIT_DEPARTED)
-        EVT_CALL(N(CountFoodItems), LVar0)
-        EVT_IF_NE(LVar0, 0)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_006C)
+    IfGe(GB_StoryProgress, STORY_CH5_STAR_SPRIT_DEPARTED)
+        Call(N(CountFoodItems), LVar0)
+        IfNe(LVar0, 0)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_006C)
             EVT_CHOOSE_CONSUMABLE_FROM(N(FoodItemList), 4)
-            EVT_IF_LE(LVar0, 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_006E)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_006D)
-                EVT_SET(LVar0, ITEM_MELON)
-                EVT_SET(LVar1, ITEM_TYPE_CONSUMABLE)
-                EVT_EXEC_WAIT(N(GiveItemReward)) // misuse?
-                EVT_CALL(AddItem, ITEM_MELON, LVar0)
-            EVT_END_IF
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_0063)
-        EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_EXEC_WAIT(N(EVS_GetRescuedYoshiCount))
-            EVT_IF_EQ(LVar0, 0)
-                EVT_IF_EQ(GF_JAN03_AgreedToRescueChildren, FALSE)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_CryTalk, ANIM_Yoshi_Yellow_Cry, 0, MSG_CH5_0064)
-                EVT_ELSE
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_CryTalk, ANIM_Yoshi_Yellow_Cry, 0, MSG_CH5_0065)
-                EVT_END_IF
-            EVT_ELSE
-                EVT_IF_EQ(GF_JAN07_SavedYoshi, FALSE)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_CryTalk, ANIM_Yoshi_Yellow_Cry, 0, MSG_CH5_0066)
-                EVT_ELSE
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_0067)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LE(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_0068)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_0069)
-        EVT_CASE_LT(STORY_CH6_FLOWER_GATE_OPEN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_006A)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_006B)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+            IfLe(LVar0, 0)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_006E)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_006D)
+                Set(LVar0, ITEM_MELON)
+                Set(LVar1, ITEM_TYPE_CONSUMABLE)
+                ExecWait(N(GiveItemReward)) // misuse?
+                Call(AddItem, ITEM_MELON, LVar0)
+            EndIf
+            Return
+        EndIf
+    EndIf
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_0063)
+        CaseLt(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+            ExecWait(N(EVS_GetRescuedYoshiCount))
+            IfEq(LVar0, 0)
+                IfEq(GF_JAN03_AgreedToRescueChildren, FALSE)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_CryTalk, ANIM_Yoshi_Yellow_Cry, 0, MSG_CH5_0064)
+                Else
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_CryTalk, ANIM_Yoshi_Yellow_Cry, 0, MSG_CH5_0065)
+                EndIf
+            Else
+                IfEq(GF_JAN07_SavedYoshi, FALSE)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_CryTalk, ANIM_Yoshi_Yellow_Cry, 0, MSG_CH5_0066)
+                Else
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_0067)
+                EndIf
+            EndIf
+        CaseLe(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_0068)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_0069)
+        CaseLt(STORY_CH6_FLOWER_GATE_OPEN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_006A)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yoshi_Yellow_Talk, ANIM_Yoshi_Yellow_Idle, 0, MSG_CH5_006B)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Yoshi_03) = {
-    EVT_LOOP(0)
-        EVT_CALL(NpcMoveTo, NPC_SELF, -105, -20, 50)
-        EVT_CALL(NpcMoveTo, NPC_SELF, -190, -80, 50)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(NpcMoveTo, NPC_SELF, -105, -20, 50)
+        Call(NpcMoveTo, NPC_SELF, -190, -80, 50)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Yoshi_03) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-        EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_IF_EQ(GF_JAN07_SavedYoshi, FALSE)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Yoshi_Yellow_Panic)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Yoshi_03)))
-            EVT_ELSE
-                EVT_CALL(BindNpcIdle, NPC_SELF, 0)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Yoshi_03)))
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+        CaseLt(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+            IfEq(GF_JAN07_SavedYoshi, FALSE)
+                Call(SetNpcAnimation, NPC_SELF, ANIM_Yoshi_Yellow_Panic)
+                Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Yoshi_03)))
+            Else
+                Call(BindNpcIdle, NPC_SELF, 0)
+            EndIf
+    EndSwitch
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Yoshi_03)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_YoshiKid_01) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_YoshiKid_04) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_YoshiKid_01) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Green_Talk, ANIM_YoshiKid_Green_Idle, 0, MSG_CH5_006F)
-        EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Green_Talk, ANIM_YoshiKid_Green_Idle, 0, MSG_CH5_0070)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Green_Talk, ANIM_YoshiKid_Green_Idle, 0, MSG_CH5_0071)
-        EVT_CASE_LT(STORY_CH6_FLOWER_GATE_OPEN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Green_Talk, ANIM_YoshiKid_Green_Idle, 0, MSG_CH5_0072)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Green_Talk, ANIM_YoshiKid_Green_Idle, 0, MSG_CH5_0073)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Green_Talk, ANIM_YoshiKid_Green_Idle, 0, MSG_CH5_006F)
+        CaseLt(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Green_Talk, ANIM_YoshiKid_Green_Idle, 0, MSG_CH5_0070)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Green_Talk, ANIM_YoshiKid_Green_Idle, 0, MSG_CH5_0071)
+        CaseLt(STORY_CH6_FLOWER_GATE_OPEN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Green_Talk, ANIM_YoshiKid_Green_Idle, 0, MSG_CH5_0072)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Green_Talk, ANIM_YoshiKid_Green_Idle, 0, MSG_CH5_0073)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_YoshiKid_02) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0, MSG_CH5_0074)
-        EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0, MSG_CH5_0075)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0, MSG_CH5_0076)
-        EVT_CASE_LT(STORY_CH6_FLOWER_GATE_OPEN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0, MSG_CH5_0077)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0, MSG_CH5_0078)
-    EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_RedYoshiKid))
-    EVT_IF_NE(LVarC, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0, MSG_CH5_0074)
+        CaseLt(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0, MSG_CH5_0075)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0, MSG_CH5_0076)
+        CaseLt(STORY_CH6_FLOWER_GATE_OPEN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0, MSG_CH5_0077)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0, MSG_CH5_0078)
+    EndSwitch
+    ExecWait(N(EVS_LetterPrompt_RedYoshiKid))
+    IfNe(LVarC, 0)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_YoshiKid_03) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Blue_Talk, ANIM_YoshiKid_Blue_Idle, 0, MSG_CH5_007D)
-        EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Blue_Talk, ANIM_YoshiKid_Blue_Idle, 0, MSG_CH5_007E)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Blue_Talk, ANIM_YoshiKid_Blue_Idle, 0, MSG_CH5_007F)
-        EVT_CASE_LT(STORY_CH6_FLOWER_GATE_OPEN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Blue_Talk, ANIM_YoshiKid_Blue_Idle, 0, MSG_CH5_0080)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Blue_Talk, ANIM_YoshiKid_Blue_Idle, 0, MSG_CH5_0081)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Blue_Talk, ANIM_YoshiKid_Blue_Idle, 0, MSG_CH5_007D)
+        CaseLt(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Blue_Talk, ANIM_YoshiKid_Blue_Idle, 0, MSG_CH5_007E)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Blue_Talk, ANIM_YoshiKid_Blue_Idle, 0, MSG_CH5_007F)
+        CaseLt(STORY_CH6_FLOWER_GATE_OPEN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Blue_Talk, ANIM_YoshiKid_Blue_Idle, 0, MSG_CH5_0080)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Blue_Talk, ANIM_YoshiKid_Blue_Idle, 0, MSG_CH5_0081)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_YoshiKid_04) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Yellow_Talk, ANIM_YoshiKid_Yellow_Idle, 0, MSG_CH5_0082)
-        EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Yellow_Talk, ANIM_YoshiKid_Yellow_Idle, 0, MSG_CH5_0083)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Yellow_Talk, ANIM_YoshiKid_Yellow_Idle, 0, MSG_CH5_0084)
-        EVT_CASE_LT(STORY_CH6_FLOWER_GATE_OPEN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Yellow_Talk, ANIM_YoshiKid_Yellow_Idle, 0, MSG_CH5_0085)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Yellow_Talk, ANIM_YoshiKid_Yellow_Idle, 0, MSG_CH5_0086)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Yellow_Talk, ANIM_YoshiKid_Yellow_Idle, 0, MSG_CH5_0082)
+        CaseLt(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Yellow_Talk, ANIM_YoshiKid_Yellow_Idle, 0, MSG_CH5_0083)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Yellow_Talk, ANIM_YoshiKid_Yellow_Idle, 0, MSG_CH5_0084)
+        CaseLt(STORY_CH6_FLOWER_GATE_OPEN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Yellow_Talk, ANIM_YoshiKid_Yellow_Idle, 0, MSG_CH5_0085)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Yellow_Talk, ANIM_YoshiKid_Yellow_Idle, 0, MSG_CH5_0086)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_YoshiKid_05) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Purple_Talk, ANIM_YoshiKid_Purple_Idle, 0, MSG_CH5_0087)
-        EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Purple_Talk, ANIM_YoshiKid_Purple_Idle, 0, MSG_CH5_0088)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Purple_Talk, ANIM_YoshiKid_Purple_Idle, 0, MSG_CH5_0089)
-        EVT_CASE_LT(STORY_CH6_FLOWER_GATE_OPEN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Purple_Talk, ANIM_YoshiKid_Purple_Idle, 0, MSG_CH5_008A)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Purple_Talk, ANIM_YoshiKid_Purple_Idle, 0, MSG_CH5_008B)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Purple_Talk, ANIM_YoshiKid_Purple_Idle, 0, MSG_CH5_0087)
+        CaseLt(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Purple_Talk, ANIM_YoshiKid_Purple_Idle, 0, MSG_CH5_0088)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Purple_Talk, ANIM_YoshiKid_Purple_Idle, 0, MSG_CH5_0089)
+        CaseLt(STORY_CH6_FLOWER_GATE_OPEN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Purple_Talk, ANIM_YoshiKid_Purple_Idle, 0, MSG_CH5_008A)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Purple_Talk, ANIM_YoshiKid_Purple_Idle, 0, MSG_CH5_008B)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_YoshiKid_01) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-        EVT_IF_EQ(GF_JAN11_SavedYoshi, FALSE)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_RETURN
-        EVT_ELSE
-            EVT_IF_EQ(GB_StoryProgress, STORY_CH5_STAR_SPRIT_DEPARTED)
-                EVT_CALL(SetNpcPos, NPC_SELF, -490, 0, -90)
-            EVT_ELSE
-                EVT_CALL(SetNpcPos, NPC_SELF, -450, 0, -190)
-            EVT_END_IF
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_YoshiKid_01)))
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_YoshiKid_01)))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+        IfEq(GF_JAN11_SavedYoshi, FALSE)
+            Call(RemoveNpc, NPC_SELF)
+            Return
+        Else
+            IfEq(GB_StoryProgress, STORY_CH5_STAR_SPRIT_DEPARTED)
+                Call(SetNpcPos, NPC_SELF, -490, 0, -90)
+            Else
+                Call(SetNpcPos, NPC_SELF, -450, 0, -190)
+            EndIf
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_YoshiKid_01)))
+        EndIf
+    EndIf
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_YoshiKid_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_YoshiKid_02) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-        EVT_IF_EQ(GF_JAN08_SavedYoshi, FALSE)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_YoshiKid_02)))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+        IfEq(GF_JAN08_SavedYoshi, FALSE)
+            Call(RemoveNpc, NPC_SELF)
+            Return
+        EndIf
+    EndIf
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_YoshiKid_02)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_YoshiKid_03) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-        EVT_IF_EQ(GF_JAN10_SavedYoshi, FALSE)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_YoshiKid_03)))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+        IfEq(GF_JAN10_SavedYoshi, FALSE)
+            Call(RemoveNpc, NPC_SELF)
+            Return
+        EndIf
+    EndIf
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_YoshiKid_03)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_YoshiKid_04) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-        EVT_IF_EQ(GF_JAN07_SavedYoshi, FALSE)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_RETURN
-        EVT_ELSE
-            EVT_CALL(SetNpcPos, NPC_SELF, -135, 0, -70)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_YoshiKid_04)))
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_YoshiKid_04)))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+        IfEq(GF_JAN07_SavedYoshi, FALSE)
+            Call(RemoveNpc, NPC_SELF)
+            Return
+        Else
+            Call(SetNpcPos, NPC_SELF, -135, 0, -70)
+            Call(InterpNpcYaw, NPC_SELF, 270, 0)
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_YoshiKid_04)))
+        EndIf
+    EndIf
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_YoshiKid_04)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_YoshiKid_05) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-        EVT_IF_EQ(GF_JAN05_SavedYoshi, FALSE)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_YoshiKid_05)))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+        IfEq(GF_JAN05_SavedYoshi, FALSE)
+            Call(RemoveNpc, NPC_SELF)
+            Return
+        EndIf
+    EndIf
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_YoshiKid_05)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Raven) = {
-    EVT_CALL(GetSelfNpcID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(NPC_Raven_01)
-            EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_008C)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_008D)
-            EVT_END_IF
-        EVT_CASE_EQ(NPC_Raven_03)
-            EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_008E)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_008F)
-            EVT_END_IF
-        EVT_CASE_EQ(NPC_Raven_04)
-            EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_0090)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_0091)
-            EVT_END_IF
-        EVT_CASE_EQ(NPC_Raven_05)
-            EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_0092)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_0093)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetSelfNpcID, LVar0)
+    Switch(LVar0)
+        CaseEq(NPC_Raven_01)
+            IfLt(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_008C)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_008D)
+            EndIf
+        CaseEq(NPC_Raven_03)
+            IfLt(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_008E)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_008F)
+            EndIf
+        CaseEq(NPC_Raven_04)
+            IfLt(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_0090)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_0091)
+            EndIf
+        CaseEq(NPC_Raven_05)
+            IfLt(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_0092)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_0093)
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Raven) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Raven)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_RAPHAEL_LEFT_NEST)
-        EVT_CASE_RANGE(STORY_CH5_ZIP_LINE_READY, STORY_CH5_OPENED_ESCAPE_ROUTE)
-            EVT_CALL(GetSelfNpcID, LVar0)
-            EVT_IF_EQ(LVar0, 14)
-                EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_END_IF
-        EVT_CASE_GE(STORY_CH5_BEGAN_PEACH_MISSION)
-        EVT_CASE_DEFAULT
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Raven)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_RAPHAEL_LEFT_NEST)
+        CaseRange(STORY_CH5_ZIP_LINE_READY, STORY_CH5_OPENED_ESCAPE_ROUTE)
+            Call(GetSelfNpcID, LVar0)
+            IfEq(LVar0, 14)
+                Call(RemoveNpc, NPC_SELF)
+            EndIf
+        CaseGe(STORY_CH5_BEGAN_PEACH_MISSION)
+        CaseDefault
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 s32 N(VolcanoVaseList)[] = {
@@ -625,122 +625,122 @@ s32 N(VolcanoVaseList)[] = {
 };
 
 EvtScript N(EVS_NpcInteract_Kolorado) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0012)
-            EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado))
-            EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
-        EVT_CASE_LT(STORY_CH5_GOT_JADE_RAVEN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0013)
-            EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado))
-            EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
-        EVT_CASE_LT(STORY_CH5_ZIP_LINE_READY)
-            EVT_IF_EQ(AF_JAN_06, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0014)
-                EVT_SET(AF_JAN_06, TRUE)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0015)
-            EVT_END_IF
-            EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado))
-            EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
-        EVT_CASE_EQ(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(FindKeyItem, ITEM_VOLCANO_VASE, LVar0)
-            EVT_IF_EQ(LVar0, -1)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0016)
-                EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado))
-                EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
-            EVT_ELSE
-                EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(5.0), 0, 325, EVT_FLOAT(20.0), EVT_FLOAT(-7.5))
-                EVT_SET(LVar0, EVT_PTR(N(VolcanoVaseList)))
-                EVT_SET(LVar1, 15)
-                EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
-                EVT_SWITCH(LVar0)
-                    EVT_CASE_EQ(-1)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0017)
-                        EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado))
-                        EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
-                    EVT_CASE_DEFAULT
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0018)
-                        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
-                        EVT_WAIT(20)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0019)
-                        EVT_WAIT(10)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_IdleSad)
-                        EVT_WAIT(15)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-                        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
-                        EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
-                        EVT_WAIT(25)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_001A)
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0012)
+            ExecWait(N(EVS_LetterPrompt_Kolorado))
+            ExecWait(N(EVS_LetterReward_Kolorado))
+        CaseLt(STORY_CH5_GOT_JADE_RAVEN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0013)
+            ExecWait(N(EVS_LetterPrompt_Kolorado))
+            ExecWait(N(EVS_LetterReward_Kolorado))
+        CaseLt(STORY_CH5_ZIP_LINE_READY)
+            IfEq(AF_JAN_06, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0014)
+                Set(AF_JAN_06, TRUE)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0015)
+            EndIf
+            ExecWait(N(EVS_LetterPrompt_Kolorado))
+            ExecWait(N(EVS_LetterReward_Kolorado))
+        CaseEq(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(FindKeyItem, ITEM_VOLCANO_VASE, LVar0)
+            IfEq(LVar0, -1)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0016)
+                ExecWait(N(EVS_LetterPrompt_Kolorado))
+                ExecWait(N(EVS_LetterReward_Kolorado))
+            Else
+                Call(AdjustCam, CAM_DEFAULT, Float(5.0), 0, 325, Float(20.0), Float(-7.5))
+                Set(LVar0, Ref(N(VolcanoVaseList)))
+                Set(LVar1, 15)
+                ExecWait(N(EVS_ChooseKeyItem))
+                Switch(LVar0)
+                    CaseEq(-1)
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0017)
+                        ExecWait(N(EVS_LetterPrompt_Kolorado))
+                        ExecWait(N(EVS_LetterReward_Kolorado))
+                    CaseDefault
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0018)
+                        Call(SetPlayerAnimation, ANIM_Mario1_NodYes)
+                        Wait(20)
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0019)
+                        Wait(10)
+                        Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_IdleSad)
+                        Wait(15)
+                        Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
+                        Call(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
+                        Call(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
+                        Wait(25)
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_001A)
                         EVT_GIVE_KEY_REWARD(ITEM_MAGICAL_SEED4)
-                        EVT_SET(GF_JAN03_Gift_MagicalSeed4, TRUE)
-                        EVT_WAIT(20)
-                        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_001B)
-                        EVT_WAIT(10)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_001C)
-                        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
-                        EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
-                        EVT_CALL(NpcMoveTo, NPC_SELF, -465, -185, 0)
-                        EVT_CALL(NpcMoveTo, NPC_SELF, -540, -70, 0)
-                        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                        EVT_SET(GB_StoryProgress, STORY_CH5_TRADED_VASE_FOR_SEED)
-                EVT_END_SWITCH
-                EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+                        Set(GF_JAN03_Gift_MagicalSeed4, TRUE)
+                        Wait(20)
+                        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_001B)
+                        Wait(10)
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_001C)
+                        Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
+                        Call(SetNpcSpeed, NPC_SELF, Float(4.0))
+                        Call(NpcMoveTo, NPC_SELF, -465, -185, 0)
+                        Call(NpcMoveTo, NPC_SELF, -540, -70, 0)
+                        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+                        Set(GB_StoryProgress, STORY_CH5_TRADED_VASE_FOR_SEED)
+                EndSwitch
+                Call(ResetCam, CAM_DEFAULT, Float(5.0))
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kolorado) = {
-    EVT_SET(LVar0, 0)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_ZIP_LINE_READY)
-            EVT_SET(LVar0, 1)
-        EVT_CASE_EQ(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SetNpcPos, NPC_SELF, -433, 0, -205)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 0)
-            EVT_SET(LVar0, 1)
-    EVT_END_SWITCH
-    EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, 0)
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_ZIP_LINE_READY)
+            Set(LVar0, 1)
+        CaseEq(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SetNpcPos, NPC_SELF, -433, 0, -205)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 0)
+            Set(LVar0, 1)
+    EndSwitch
+    IfEq(LVar0, 1)
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Kolorado)))
+    Else
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Sushie) = {
-    EVT_IF_EQ(AF_JAN_07, FALSE)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_0058)
-        EVT_SET(AF_JAN_07, TRUE)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_0059)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(AF_JAN_07, FALSE)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_0058)
+        Set(AF_JAN_07, TRUE)
+    Else
+        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_0059)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Sushie) = {
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, 1)
-    EVT_LOOP(0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldSushie_Talk)
-        EVT_WAIT(30)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldSushie_Run)
-        EVT_WAIT(15)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(SetNpcJumpscale, NPC_SELF, 1)
+    Loop(0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldSushie_Talk)
+        Wait(30)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldSushie_Run)
+        Wait(15)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Sushie) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Sushie)))
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Sushie)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Sushie)))
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Sushie)))
+    Return
+    End
 };
 
 #include "world/common/npc/Raven.inc.c"

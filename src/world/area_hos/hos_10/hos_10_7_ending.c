@@ -180,377 +180,377 @@ Vec3f N(TwinkPath)[] = {
 };
 
 EvtScript N(EVS_Scene_CastleDescending) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(PlaySound, SOUND_KPA_LIGHT_RAYS | SOUND_ID_TRIGGER_CHANGE_SOUND)
-    EVT_CALL(SetPlayerPos, -130, 200, 1300)
-    EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_CALL(SetNpcPos, NPC_PARTNER, -150, 200, 1300)
-    EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
-    EVT_CALL(EnableModel, MODEL_o2, FALSE)
-    EVT_CALL(EnableGroup, MODEL_kumo, FALSE)
-    EVT_CALL(EnableModel, MODEL_nagare, FALSE)
-    EVT_CALL(TranslateGroup, MODEL_castle, 0, -2500, 0)
-    EVT_CALL(ScaleGroup, MODEL_castle, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
-    EVT_PLAY_EFFECT(EFFECT_ENDING_DECALS, 2, 0, 35, 70, EVT_FLOAT(7.0), MV_BubbleFXPtr)
-    EVT_CALL(N(SetHaloAlpha), MV_BubbleFXPtr, 128)
-    EVT_CHILD_THREAD
-        EVT_PLAY_EFFECT(EFFECT_ENDING_DECALS, 2, 0, 0, 0, EVT_FLOAT(10.0), MV_Unk_01)
-        EVT_LOOP(0)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar1, 12)
-            EVT_ADD(LVar2, 60)
-            EVT_CALL(N(SetHaloPos), MV_Unk_01, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(0.0), EVT_FLOAT(0.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_THREAD
-        EVT_SETF(LVar0, -2250)
-        EVT_LOOP(1500)
-            EVT_CALL(TranslateModel, MODEL_o3, 0, LVar0, 0)
-            EVT_ADDF(LVar0, EVT_FLOAT(1.0))
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.0))
-        EVT_CALL(PlayerJump1, -130, 0, 1300, 250)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.0))
-        EVT_CALL(NpcJump0, NPC_PARTNER, -150, 0, 1300, 250)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetNpcJumpscale, NPC_Peach, EVT_FLOAT(0.0))
-        EVT_CALL(NpcJump0, NPC_Peach, -100, 0, 1300, 250)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetNpcJumpscale, NPC_Twink, EVT_FLOAT(0.0))
-        EVT_CALL(NpcJump0, NPC_Twink, -130, 60, 1300, 250)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(NpcOrbitPlayerPos), NPC_Eldstar, 0, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(NpcOrbitPlayerPos), NPC_Mamar, 1, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(NpcOrbitPlayerPos), NPC_Skolar, 2, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(NpcOrbitPlayerPos), NPC_Muskular, 3, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(NpcOrbitPlayerPos), NPC_Misstar, 4, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(NpcOrbitPlayerPos), NPC_Klevar, 5, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(NpcOrbitPlayerPos), NPC_Kalmar, 6, 0)
-    EVT_END_THREAD
-    EVT_WAIT(350)
-    EVT_THREAD
-        EVT_CALL(LoadPath, 190, EVT_PTR(N(PlayerPath)), ARRAY_COUNT(N(PlayerPath)), EASING_LINEAR)
-        EVT_LABEL(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_GOTO(0)
-            EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 100, 20, 190, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_DIVF(LVar0, 100)
-            EVT_SETF(LVar1, -20)
-            EVT_MULF(LVar1, LVar0)
-            EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-            EVT_ADDF(LVar2, LVar1)
-            EVT_CALL(SetNpcPos, NPC_PARTNER, LVar2, LVar3, LVar4)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 100, 20, 190, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_DIVF(LVar0, 100)
-            EVT_SETF(LVar1, 30)
-            EVT_MULF(LVar1, LVar0)
-            EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-            EVT_ADDF(LVar2, LVar1)
-            EVT_CALL(SetNpcPos, NPC_Peach, LVar2, LVar3, LVar4)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 100, 20, 190, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_DIVF(LVar0, 100)
-            EVT_SETF(LVar1, 60)
-            EVT_MULF(LVar1, LVar0)
-            EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-            EVT_ADDF(LVar3, LVar1)
-            EVT_CALL(SetNpcPos, NPC_Twink, LVar2, LVar3, LVar4)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 100, 5, 190, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_DIVF(LVar0, 100)
-            EVT_CALL(SetNpcScale, NPC_PARTNER, LVar0, LVar0, LVar0)
-            EVT_CALL(SetNpcScale, NPC_Peach, LVar0, LVar0, LVar0)
-            EVT_CALL(SetNpcScale, NPC_Twink, LVar0, LVar0, LVar0)
-            EVT_CALL(SetNpcScale, NPC_Eldstar, LVar0, LVar0, LVar0)
-            EVT_CALL(SetNpcScale, NPC_Mamar, LVar0, LVar0, LVar0)
-            EVT_CALL(SetNpcScale, NPC_Skolar, LVar0, LVar0, LVar0)
-            EVT_CALL(SetNpcScale, NPC_Muskular, LVar0, LVar0, LVar0)
-            EVT_CALL(SetNpcScale, NPC_Misstar, LVar0, LVar0, LVar0)
-            EVT_CALL(SetNpcScale, NPC_Klevar, LVar0, LVar0, LVar0)
-            EVT_CALL(SetNpcScale, NPC_Kalmar, LVar0, LVar0, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 1000, 50, 190, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_DIVF(LVar0, 100)
-            EVT_CALL(N(SetHaloScale), MV_Unk_01, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(290)
-    EVT_CALL(GotoMap, EVT_PTR("osr_02"), osr_02_ENTRY_2)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePartnerAI, 0)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(PlaySound, SOUND_KPA_LIGHT_RAYS | SOUND_ID_TRIGGER_CHANGE_SOUND)
+    Call(SetPlayerPos, -130, 200, 1300)
+    Call(InterpPlayerYaw, 90, 0)
+    Call(SetNpcPos, NPC_PARTNER, -150, 200, 1300)
+    Call(SetNpcYaw, NPC_PARTNER, 90)
+    Call(EnableModel, MODEL_o2, FALSE)
+    Call(EnableGroup, MODEL_kumo, FALSE)
+    Call(EnableModel, MODEL_nagare, FALSE)
+    Call(TranslateGroup, MODEL_castle, 0, -2500, 0)
+    Call(ScaleGroup, MODEL_castle, Float(0.4), Float(0.4), Float(0.4))
+    PlayEffect(EFFECT_ENDING_DECALS, 2, 0, 35, 70, Float(7.0), MV_BubbleFXPtr)
+    Call(N(SetHaloAlpha), MV_BubbleFXPtr, 128)
+    ChildThread
+        PlayEffect(EFFECT_ENDING_DECALS, 2, 0, 0, 0, Float(10.0), MV_Unk_01)
+        Loop(0)
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            Add(LVar1, 12)
+            Add(LVar2, 60)
+            Call(N(SetHaloPos), MV_Unk_01, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndChildThread
+    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
+    Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
+    Call(SetCamPitch, CAM_DEFAULT, Float(0.0), Float(0.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Thread
+        SetF(LVar0, -2250)
+        Loop(1500)
+            Call(TranslateModel, MODEL_o3, 0, LVar0, 0)
+            AddF(LVar0, Float(1.0))
+            Wait(1)
+        EndLoop
+    EndThread
+    Thread
+        Call(SetPlayerJumpscale, Float(0.0))
+        Call(PlayerJump1, -130, 0, 1300, 250)
+    EndThread
+    Thread
+        Call(SetNpcJumpscale, NPC_PARTNER, Float(0.0))
+        Call(NpcJump0, NPC_PARTNER, -150, 0, 1300, 250)
+    EndThread
+    Thread
+        Call(SetNpcJumpscale, NPC_Peach, Float(0.0))
+        Call(NpcJump0, NPC_Peach, -100, 0, 1300, 250)
+    EndThread
+    Thread
+        Call(SetNpcJumpscale, NPC_Twink, Float(0.0))
+        Call(NpcJump0, NPC_Twink, -130, 60, 1300, 250)
+    EndThread
+    Thread
+        Call(N(NpcOrbitPlayerPos), NPC_Eldstar, 0, 0)
+    EndThread
+    Thread
+        Call(N(NpcOrbitPlayerPos), NPC_Mamar, 1, 0)
+    EndThread
+    Thread
+        Call(N(NpcOrbitPlayerPos), NPC_Skolar, 2, 0)
+    EndThread
+    Thread
+        Call(N(NpcOrbitPlayerPos), NPC_Muskular, 3, 0)
+    EndThread
+    Thread
+        Call(N(NpcOrbitPlayerPos), NPC_Misstar, 4, 0)
+    EndThread
+    Thread
+        Call(N(NpcOrbitPlayerPos), NPC_Klevar, 5, 0)
+    EndThread
+    Thread
+        Call(N(NpcOrbitPlayerPos), NPC_Kalmar, 6, 0)
+    EndThread
+    Wait(350)
+    Thread
+        Call(LoadPath, 190, Ref(N(PlayerPath)), ARRAY_COUNT(N(PlayerPath)), EASING_LINEAR)
+        Label(0)
+            Call(GetNextPathPos)
+            Call(SetPlayerPos, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 1)
+                Goto(0)
+            EndIf
+    EndThread
+    Thread
+        Call(MakeLerp, 100, 20, 190, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            DivF(LVar0, 100)
+            SetF(LVar1, -20)
+            MulF(LVar1, LVar0)
+            Call(GetPlayerPos, LVar2, LVar3, LVar4)
+            AddF(LVar2, LVar1)
+            Call(SetNpcPos, NPC_PARTNER, LVar2, LVar3, LVar4)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Call(MakeLerp, 100, 20, 190, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            DivF(LVar0, 100)
+            SetF(LVar1, 30)
+            MulF(LVar1, LVar0)
+            Call(GetPlayerPos, LVar2, LVar3, LVar4)
+            AddF(LVar2, LVar1)
+            Call(SetNpcPos, NPC_Peach, LVar2, LVar3, LVar4)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Call(MakeLerp, 100, 20, 190, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            DivF(LVar0, 100)
+            SetF(LVar1, 60)
+            MulF(LVar1, LVar0)
+            Call(GetPlayerPos, LVar2, LVar3, LVar4)
+            AddF(LVar3, LVar1)
+            Call(SetNpcPos, NPC_Twink, LVar2, LVar3, LVar4)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Call(MakeLerp, 100, 5, 190, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            DivF(LVar0, 100)
+            Call(SetNpcScale, NPC_PARTNER, LVar0, LVar0, LVar0)
+            Call(SetNpcScale, NPC_Peach, LVar0, LVar0, LVar0)
+            Call(SetNpcScale, NPC_Twink, LVar0, LVar0, LVar0)
+            Call(SetNpcScale, NPC_Eldstar, LVar0, LVar0, LVar0)
+            Call(SetNpcScale, NPC_Mamar, LVar0, LVar0, LVar0)
+            Call(SetNpcScale, NPC_Skolar, LVar0, LVar0, LVar0)
+            Call(SetNpcScale, NPC_Muskular, LVar0, LVar0, LVar0)
+            Call(SetNpcScale, NPC_Misstar, LVar0, LVar0, LVar0)
+            Call(SetNpcScale, NPC_Klevar, LVar0, LVar0, LVar0)
+            Call(SetNpcScale, NPC_Kalmar, LVar0, LVar0, LVar0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Call(MakeLerp, 1000, 50, 190, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            DivF(LVar0, 100)
+            Call(N(SetHaloScale), MV_Unk_01, LVar0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Wait(290)
+    Call(GotoMap, Ref("osr_02"), osr_02_ENTRY_2)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_MakeNpcSparkleTrail) = {
-    EVT_CHILD_THREAD
-        EVT_LOOP(30)
-            EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-            EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar1, LVar2, LVar3, 20)
-            EVT_WAIT(6)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_CHILD_THREAD
-        EVT_LOOP(30)
-            EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-            EVT_ADD(LVar1, 20)
-            EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar1, LVar2, LVar3, 40)
-            EVT_WAIT(8)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_LOOP(0)
-        EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-        EVT_IF_GE(LVar3, 1800)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    ChildThread
+        Loop(30)
+            Call(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
+            PlayEffect(EFFECT_SPARKLES, 3, LVar1, LVar2, LVar3, 20)
+            Wait(6)
+        EndLoop
+    EndChildThread
+    ChildThread
+        Loop(30)
+            Call(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
+            Add(LVar1, 20)
+            PlayEffect(EFFECT_SPARKLES, 4, LVar1, LVar2, LVar3, 40)
+            Wait(8)
+        EndLoop
+    EndChildThread
+    Loop(0)
+        Call(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
+        IfGe(LVar3, 1800)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_SpiritsFlyingAway) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetPlayerPos, NPC_DISPOSE_LOCATION)
-    EVT_CALL(EnableModel, MODEL_o2, FALSE)
-    EVT_CALL(EnableModel, MODEL_nagare, FALSE)
-    EVT_CALL(TranslateGroup, MODEL_castle, 0, -2500, 0)
-    EVT_CALL(ScaleGroup, MODEL_castle, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
-    EVT_PLAY_EFFECT(EFFECT_ENDING_DECALS, 2, 0, 35, 70, EVT_FLOAT(7.0), LVarA)
-    EVT_CALL(N(SetHaloAlpha), LVarA, 128)
-    EVT_CALL(EnableTexPanning, MODEL_k2, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_k7, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_k1, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_k5, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_k9, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_k12, TRUE)
-    EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_THREAD
-        EVT_SET(LVar0, NPC_Eldstar)
-        EVT_EXEC(N(EVS_MakeNpcSparkleTrail))
-        EVT_CALL(LoadPath, 75, EVT_PTR(N(EldstarPath)), ARRAY_COUNT(N(EldstarPath)), EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, NPC_Eldstar, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(50)
-        EVT_SET(LVar0, NPC_Misstar)
-        EVT_EXEC(N(EVS_MakeNpcSparkleTrail))
-        EVT_CALL(LoadPath, 75, EVT_PTR(N(MisstarPath)), ARRAY_COUNT(N(MisstarPath)), EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, NPC_Misstar, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(100)
-        EVT_SET(LVar0, NPC_Skolar)
-        EVT_EXEC(N(EVS_MakeNpcSparkleTrail))
-        EVT_CALL(LoadPath, 75, EVT_PTR(N(SkolarPath)), ARRAY_COUNT(N(SkolarPath)), EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, NPC_Skolar, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(150)
-        EVT_SET(LVar0, NPC_Mamar)
-        EVT_EXEC(N(EVS_MakeNpcSparkleTrail))
-        EVT_CALL(LoadPath, 75, EVT_PTR(N(MamarPath)), ARRAY_COUNT(N(MamarPath)), EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, NPC_Mamar, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(200)
-        EVT_SET(LVar0, NPC_Kalmar)
-        EVT_EXEC(N(EVS_MakeNpcSparkleTrail))
-        EVT_CALL(LoadPath, 75, EVT_PTR(N(KalmarPath)), ARRAY_COUNT(N(KalmarPath)), EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, NPC_Kalmar, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(250)
-        EVT_SET(LVar0, NPC_Muskular)
-        EVT_EXEC(N(EVS_MakeNpcSparkleTrail))
-        EVT_CALL(LoadPath, 75, EVT_PTR(N(MuskularPath)), ARRAY_COUNT(N(MuskularPath)), EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, NPC_Muskular, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(300)
-        EVT_SET(LVar0, NPC_Klevar)
-        EVT_EXEC(N(EVS_MakeNpcSparkleTrail))
-        EVT_CALL(LoadPath, 75, EVT_PTR(N(KlevarPath)), ARRAY_COUNT(N(KlevarPath)), EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, NPC_Klevar, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(450)
-        EVT_SET(LVar0, NPC_Twink)
-        EVT_EXEC(N(EVS_MakeNpcSparkleTrail))
-        EVT_CALL(LoadPath, 75, EVT_PTR(N(TwinkPath)), ARRAY_COUNT(N(TwinkPath)), EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_WAIT(20)
-        EVT_CALL(InterpNpcYaw, NPC_Twink, 270, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Back)
-        EVT_WAIT(50)
-        EVT_CALL(InterpNpcYaw, NPC_Twink, 90, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Idle)
-        EVT_WAIT(10)
-        EVT_CALL(NpcFlyTo, NPC_Twink, 100, 60, 1800, 20, -10, EASING_LINEAR)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SETF(LVar0, -2250)
-        EVT_LOOP(1500)
-            EVT_CALL(TranslateModel, MODEL_o3, 0, LVar0, 0)
-            EVT_ADDF(LVar0, EVT_FLOAT(1.5))
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SETF(LVar0, -2700)
-        EVT_LOOP(1200)
-            EVT_CALL(TranslateGroup, MODEL_kumo, 0, LVar0, 0)
-            EVT_ADDF(LVar0, EVT_FLOAT(2.5))
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(840)
-        EVT_CALL(FadeOutMusic, 0, 3000)
-    EVT_END_THREAD
-    EVT_WAIT(800)
-    EVT_CALL(N(FadeScreenToWhite))
-    EVT_WAIT(90)
-    EVT_CALL(N(ClearCurrentPartner))
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_20"), kmr_20_ENTRY_2, TRANSITION_OUTRO_END_SCENE)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePartnerAI, 0)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetPlayerPos, NPC_DISPOSE_LOCATION)
+    Call(EnableModel, MODEL_o2, FALSE)
+    Call(EnableModel, MODEL_nagare, FALSE)
+    Call(TranslateGroup, MODEL_castle, 0, -2500, 0)
+    Call(ScaleGroup, MODEL_castle, Float(0.4), Float(0.4), Float(0.4))
+    PlayEffect(EFFECT_ENDING_DECALS, 2, 0, 35, 70, Float(7.0), LVarA)
+    Call(N(SetHaloAlpha), LVarA, 128)
+    Call(EnableTexPanning, MODEL_k2, TRUE)
+    Call(EnableTexPanning, MODEL_k7, TRUE)
+    Call(EnableTexPanning, MODEL_k1, TRUE)
+    Call(EnableTexPanning, MODEL_k5, TRUE)
+    Call(EnableTexPanning, MODEL_k9, TRUE)
+    Call(EnableTexPanning, MODEL_k12, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
+    Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Thread
+        Set(LVar0, NPC_Eldstar)
+        Exec(N(EVS_MakeNpcSparkleTrail))
+        Call(LoadPath, 75, Ref(N(EldstarPath)), ARRAY_COUNT(N(EldstarPath)), EASING_LINEAR)
+        Loop(0)
+            Call(GetNextPathPos)
+            Call(SetNpcPos, NPC_Eldstar, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Wait(50)
+        Set(LVar0, NPC_Misstar)
+        Exec(N(EVS_MakeNpcSparkleTrail))
+        Call(LoadPath, 75, Ref(N(MisstarPath)), ARRAY_COUNT(N(MisstarPath)), EASING_LINEAR)
+        Loop(0)
+            Call(GetNextPathPos)
+            Call(SetNpcPos, NPC_Misstar, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Wait(100)
+        Set(LVar0, NPC_Skolar)
+        Exec(N(EVS_MakeNpcSparkleTrail))
+        Call(LoadPath, 75, Ref(N(SkolarPath)), ARRAY_COUNT(N(SkolarPath)), EASING_LINEAR)
+        Loop(0)
+            Call(GetNextPathPos)
+            Call(SetNpcPos, NPC_Skolar, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Wait(150)
+        Set(LVar0, NPC_Mamar)
+        Exec(N(EVS_MakeNpcSparkleTrail))
+        Call(LoadPath, 75, Ref(N(MamarPath)), ARRAY_COUNT(N(MamarPath)), EASING_LINEAR)
+        Loop(0)
+            Call(GetNextPathPos)
+            Call(SetNpcPos, NPC_Mamar, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Wait(200)
+        Set(LVar0, NPC_Kalmar)
+        Exec(N(EVS_MakeNpcSparkleTrail))
+        Call(LoadPath, 75, Ref(N(KalmarPath)), ARRAY_COUNT(N(KalmarPath)), EASING_LINEAR)
+        Loop(0)
+            Call(GetNextPathPos)
+            Call(SetNpcPos, NPC_Kalmar, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Wait(250)
+        Set(LVar0, NPC_Muskular)
+        Exec(N(EVS_MakeNpcSparkleTrail))
+        Call(LoadPath, 75, Ref(N(MuskularPath)), ARRAY_COUNT(N(MuskularPath)), EASING_LINEAR)
+        Loop(0)
+            Call(GetNextPathPos)
+            Call(SetNpcPos, NPC_Muskular, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Wait(300)
+        Set(LVar0, NPC_Klevar)
+        Exec(N(EVS_MakeNpcSparkleTrail))
+        Call(LoadPath, 75, Ref(N(KlevarPath)), ARRAY_COUNT(N(KlevarPath)), EASING_LINEAR)
+        Loop(0)
+            Call(GetNextPathPos)
+            Call(SetNpcPos, NPC_Klevar, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Wait(450)
+        Set(LVar0, NPC_Twink)
+        Exec(N(EVS_MakeNpcSparkleTrail))
+        Call(LoadPath, 75, Ref(N(TwinkPath)), ARRAY_COUNT(N(TwinkPath)), EASING_LINEAR)
+        Loop(0)
+            Call(GetNextPathPos)
+            Call(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Wait(20)
+        Call(InterpNpcYaw, NPC_Twink, 270, 0)
+        Call(SetNpcAnimation, NPC_Twink, ANIM_Twink_Back)
+        Wait(50)
+        Call(InterpNpcYaw, NPC_Twink, 90, 0)
+        Call(SetNpcAnimation, NPC_Twink, ANIM_Twink_Idle)
+        Wait(10)
+        Call(NpcFlyTo, NPC_Twink, 100, 60, 1800, 20, -10, EASING_LINEAR)
+    EndThread
+    Thread
+        SetF(LVar0, -2250)
+        Loop(1500)
+            Call(TranslateModel, MODEL_o3, 0, LVar0, 0)
+            AddF(LVar0, Float(1.5))
+            Wait(1)
+        EndLoop
+    EndThread
+    Thread
+        SetF(LVar0, -2700)
+        Loop(1200)
+            Call(TranslateGroup, MODEL_kumo, 0, LVar0, 0)
+            AddF(LVar0, Float(2.5))
+            Wait(1)
+        EndLoop
+    EndThread
+    Thread
+        Wait(840)
+        Call(FadeOutMusic, 0, 3000)
+    EndThread
+    Wait(800)
+    Call(N(FadeScreenToWhite))
+    Wait(90)
+    Call(N(ClearCurrentPartner))
+    Call(GotoMapSpecial, Ref("kmr_20"), kmr_20_ENTRY_2, TRANSITION_OUTRO_END_SCENE)
+    Wait(100)
+    Return
+    End
 };

@@ -18,9 +18,9 @@ MobileAISettings N(AISettings_ShyGuy_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_ShyGuy_Wander) = {
-    EVT_CALL(N(ShyGuyWanderAI_Main), EVT_PTR(N(AISettings_ShyGuy_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(N(ShyGuyWanderAI_Main), Ref(N(AISettings_ShyGuy_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_ShyGuy_Wander) = {

@@ -24,29 +24,29 @@ s32 N(LetterList)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle,
         ITEM_LETTER_TO_MERLOW, ITEM_NONE,
         MSG_HOS_0058, MSG_HOS_0059, MSG_HOS_005A, MSG_HOS_005B,
-        EVT_PTR(N(LetterList)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_LetterReward) = {
-    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+    IfEq(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    EndIf
+    Return
+    End
 };
 #define NAME_SUFFIX
 
 EvtScript N(EVS_NpcInteract_Merluvlee_Passthrough) = {
-    EVT_EXEC_WAIT(N(EVS_NpcInteract_Merluvlee))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_NpcInteract_Merluvlee))
+    Return
+    End
 };
 
 ShopItemData N(MerlowBadgeInventory)[MERLOW_BADGE_COUNT] = {
@@ -151,105 +151,105 @@ API_CALLABLE(N(Merlow_ShopBadgesPopup)) {
 }
 
 EvtScript N(EVS_NpcInteract_Merlow) = {
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Merlow))
-    EVT_EXEC_WAIT(N(EVS_LetterReward_Merlow))
-    EVT_IF_NE(LVarC, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GE(GB_HOS06_Merlow_PurchaseCount, MERLOW_BADGE_COUNT)
-        EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004C)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(MF_PurchasedBadge, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004D)
-    EVT_ELSE
-        EVT_IF_EQ(GF_HOS06_Met_Merlow, FALSE)
-            EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004A)
-            EVT_SET(GF_HOS06_Met_Merlow, TRUE)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004B)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(ShowChoice, MSG_Choice_0014)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ContinueSpeech, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004E)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(Merlow_GetPlayerStarPieces), LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ContinueSpeech, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004F)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(ContinueSpeech, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0050)
-    EVT_LABEL(0)
-    EVT_CALL(N(Merlow_ShopBadgesPopup))
-    EVT_WAIT(10)
-    EVT_IF_EQ(LVar0, -1)
-        EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0051)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(Merlow_GetPlayerStarPieces), LVar3)
-    EVT_IF_LT(LVar3, LVar1)
-        EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0051)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(SetMessageText, LVar4, 0)
-    EVT_CALL(SetMessageValue, LVar1, 1)
-    EVT_CALL(SetMessageValue, LVar5, 2)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0053)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0052)
-    EVT_END_IF
-    EVT_SET(LVar3, LVar0)
-    EVT_CALL(ShowChoice, MSG_Choice_000D)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ContinueSpeech, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0054)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(CloseMessage)
-    EVT_MUL(LVar1, -1)
-    EVT_CALL(AddStarPieces, LVar1)
-    EVT_ADD(GB_HOS06_Merlow_PurchaseCount, 1)
-    EVT_SET(MF_PurchasedBadge, TRUE)
-    EVT_CALL(N(Merlow_SetBadgePurchased), LVar2)
+    ExecWait(N(EVS_LetterPrompt_Merlow))
+    ExecWait(N(EVS_LetterReward_Merlow))
+    IfNe(LVarC, 0)
+        Return
+    EndIf
+    IfGe(GB_HOS06_Merlow_PurchaseCount, MERLOW_BADGE_COUNT)
+        Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004C)
+        Return
+    EndIf
+    IfEq(MF_PurchasedBadge, TRUE)
+        Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004D)
+    Else
+        IfEq(GF_HOS06_Met_Merlow, FALSE)
+            Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004A)
+            Set(GF_HOS06_Met_Merlow, TRUE)
+        Else
+            Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004B)
+        EndIf
+    EndIf
+    Call(ShowChoice, MSG_Choice_0014)
+    IfEq(LVar0, 1)
+        Call(ContinueSpeech, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004E)
+        Return
+    EndIf
+    Call(N(Merlow_GetPlayerStarPieces), LVar0)
+    IfEq(LVar0, 0)
+        Call(ContinueSpeech, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_004F)
+        Return
+    EndIf
+    Call(ContinueSpeech, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0050)
+    Label(0)
+    Call(N(Merlow_ShopBadgesPopup))
+    Wait(10)
+    IfEq(LVar0, -1)
+        Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0051)
+        Return
+    EndIf
+    Call(N(Merlow_GetPlayerStarPieces), LVar3)
+    IfLt(LVar3, LVar1)
+        Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0051)
+        Goto(0)
+    EndIf
+    Call(SetMessageText, LVar4, 0)
+    Call(SetMessageValue, LVar1, 1)
+    Call(SetMessageValue, LVar5, 2)
+    IfEq(LVar1, 1)
+        Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0053)
+    Else
+        Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0052)
+    EndIf
+    Set(LVar3, LVar0)
+    Call(ShowChoice, MSG_Choice_000D)
+    IfEq(LVar0, 1)
+        Call(ContinueSpeech, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0054)
+        Goto(0)
+    EndIf
+    Call(CloseMessage)
+    Mul(LVar1, -1)
+    Call(AddStarPieces, LVar1)
+    Add(GB_HOS06_Merlow_PurchaseCount, 1)
+    Set(MF_PurchasedBadge, TRUE)
+    Call(N(Merlow_SetBadgePurchased), LVar2)
     // awkward
     #define NAME_SUFFIX _Merlow
     EVT_GIVE_BADGE_REWARD_ALT(LVar3, LVar1)
     #define NAME_SUFFIX
-    EVT_IF_GE(GB_HOS06_Merlow_PurchaseCount, MERLOW_BADGE_COUNT)
-        EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0055)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(Merlow_GetPlayerStarPieces), LVar0)
-    EVT_IF_LE(LVar0, 0)
-        EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0055)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0056)
-    EVT_CALL(ShowChoice, MSG_Choice_000D)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ContinueSpeech, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0057)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(CloseMessage)
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_HOS06_Merlow_PurchaseCount, MERLOW_BADGE_COUNT)
+        Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0055)
+        Return
+    EndIf
+    Call(N(Merlow_GetPlayerStarPieces), LVar0)
+    IfLe(LVar0, 0)
+        Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0055)
+        Return
+    EndIf
+    Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0056)
+    Call(ShowChoice, MSG_Choice_000D)
+    IfEq(LVar0, 1)
+        Call(ContinueSpeech, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0057)
+        Return
+    EndIf
+    Call(CloseMessage)
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Merluvlee_Passthrough) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Merluvlee_Passthrough)))
-    EVT_EXEC(N(EVS_NpcInit_Merluvlee))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Merluvlee_Passthrough)))
+    Exec(N(EVS_NpcInit_Merluvlee))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Merlow) = {
-    EVT_SET(MF_PurchasedBadge, FALSE)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Merlow)))
-    EVT_RETURN
-    EVT_END
+    Set(MF_PurchasedBadge, FALSE)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Merlow)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Merluvlee)[] = {

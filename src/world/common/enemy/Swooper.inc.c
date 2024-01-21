@@ -16,9 +16,9 @@ MobileAISettings N(AISettings_Swooper) = {
 };
 
 EvtScript N(EVS_NpcAI_Swooper) = {
-    EVT_CALL(N(SwooperAI_Main), EVT_PTR(N(AISettings_Swooper)))
-    EVT_RETURN
-    EVT_END
+    Call(N(SwooperAI_Main), Ref(N(AISettings_Swooper)))
+    Return
+    End
 };
 
 MobileAISettings N(AISettings_Swoopula) = {
@@ -35,9 +35,9 @@ MobileAISettings N(AISettings_Swoopula) = {
 };
 
 EvtScript N(EVS_NpcAI_Swoopula) = {
-    EVT_CALL(N(SwooperAI_Main), EVT_PTR(N(AISettings_Swoopula)))
-    EVT_RETURN
-    EVT_END
+    Call(N(SwooperAI_Main), Ref(N(AISettings_Swoopula)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Swooper) = {

@@ -734,9 +734,9 @@ API_CALLABLE(N(UseAbility)) {
 }
 
 EvtScript EVS_WorldSushie_UseAbility = {
-    EVT_CALL(N(UseAbility))
-    EVT_RETURN
-    EVT_END
+    Call(N(UseAbility))
+    Return
+    End
 };
 
 void N(init)(Npc* sushie) {
@@ -765,9 +765,9 @@ API_CALLABLE(N(TakeOut)) {
 }
 
 EvtScript EVS_WorldSushie_TakeOut = {
-    EVT_CALL(N(TakeOut))
-    EVT_RETURN
-    EVT_END
+    Call(N(TakeOut))
+    Return
+    End
 };
 
 TweesterPhysics* N(TweesterPhysicsPtr) = &N(TweesterPhysicsData);
@@ -854,9 +854,9 @@ API_CALLABLE(N(Update)) {
 }
 
 EvtScript EVS_WorldSushie_Update = {
-    EVT_CALL(N(Update))
-    EVT_RETURN
-    EVT_END
+    Call(N(Update))
+    Return
+    End
 };
 
 void N(try_cancel_tweester)(Npc* sushie) {
@@ -880,9 +880,9 @@ API_CALLABLE(N(PutAway)) {
 }
 
 EvtScript EVS_WorldSushie_PutAway = {
-    EVT_CALL(N(PutAway))
-    EVT_RETURN
-    EVT_END
+    Call(N(PutAway))
+    Return
+    End
 };
 
 void N(pre_battle)(Npc* sushie) {
@@ -979,7 +979,7 @@ API_CALLABLE(N(EnterMap)) {
 }
 
 EvtScript EVS_WorldSushie_EnterMap = {
-    EVT_CALL(N(EnterMap))
-    EVT_RETURN
-    EVT_END
+    Call(N(EnterMap))
+    Return
+    End
 };

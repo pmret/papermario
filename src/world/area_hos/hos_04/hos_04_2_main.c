@@ -4,99 +4,99 @@ EvtScript N(EVS_ExitWalk_hos_03_1) = EVT_EXIT_WALK(60, hos_04_ENTRY_0, "hos_03",
 EvtScript N(EVS_ExitWalk_hos_05_0) = EVT_EXIT_WALK(60, hos_04_ENTRY_1, "hos_05", hos_05_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_hos_03_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilinw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_hos_05_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_o163, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_hos_03_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilinw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_hos_05_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_o163, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_SET(AF_HOS_B5, FALSE)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(hos_04_ENTRY_0)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitnw, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_IF_EQ(GF_HOS04_Visited, FALSE)
-                EVT_THREAD
-                    EVT_CALL(DisablePlayerInput, TRUE)
-                    EVT_CALL(SetPlayerPos, -630, 0, 0)
-                    EVT_CALL(GetPartnerInUse, LVar0)
-                    EVT_IF_EQ(LVar0, PARTNER_NONE)
-                        EVT_CALL(DisablePartnerAI, 0)
-                        EVT_CALL(SetNpcPos, NPC_PARTNER, -660, 0, 0)
-                        EVT_WAIT(1)
-                        EVT_CALL(EnablePartnerAI)
-                    EVT_END_IF
-                    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -565, 0, 0)
-                    EVT_CALL(SetPanTarget, CAM_DEFAULT, -565, 0, 0)
-                    EVT_CALL(SetCamDistance, CAM_DEFAULT, 1350)
-                    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-25.0))
-                    EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(-15.0), EVT_FLOAT(-100.0))
-                    EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(87.5), EVT_FLOAT(50.0))
-                    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-                    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-                    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-                    EVT_WAIT(10)
-                    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(4.0), EVT_FLOAT(-7.5))
-                    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.15))
-                    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-                    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-                    EVT_WAIT(30)
-                    EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-                    EVT_EXEC_WAIT(EnterWalk)
-                    EVT_WAIT(20)
-                    EVT_SET(GF_HOS04_Visited, TRUE)
-                    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, 0, LVar2)
-                    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, 0, LVar2)
-                    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-                    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-                    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-                    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-                    EVT_SET(AF_HOS_B5, TRUE)
-                    EVT_CALL(DisablePlayerInput, FALSE)
-                EVT_END_THREAD
-            EVT_ELSE
-                EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-                EVT_EXEC(EnterWalk)
-                EVT_WAIT(1)
-            EVT_END_IF
-        EVT_CASE_EQ(hos_04_ENTRY_1)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitnw, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-            EVT_EXEC(EnterWalk)
-        EVT_CASE_EQ(hos_04_ENTRY_2)
-            EVT_EXEC(N(EVS_Starship_FlyingAway))
-        EVT_CASE_EQ(hos_04_ENTRY_3)
-            EVT_EXEC_WAIT(N(EVS_Intro_PreHeist_Unused))
-        EVT_CASE_EQ(hos_04_ENTRY_4)
-            EVT_EXEC_WAIT(N(EVS_Intro_PostHeist))
-        EVT_CASE_EQ(hos_04_ENTRY_5)
-            EVT_CALL(EnableGroup, MODEL_g1, FALSE)
-            EVT_EXEC(N(EVS_BetaStarship_Flight1))
-        EVT_CASE_EQ(hos_04_ENTRY_6)
-            EVT_CALL(EnableGroup, MODEL_g1, FALSE)
-            EVT_EXEC(N(EVS_BetaStarship_Flight2))
-        EVT_CASE_EQ(hos_04_ENTRY_7)
-            EVT_CALL(EnableGroup, MODEL_g1, FALSE)
-            EVT_EXEC(N(EVS_BetaStarship_Return))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Set(AF_HOS_B5, FALSE)
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(hos_04_ENTRY_0)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitnw, COLLIDER_FLAGS_UPPER_MASK)
+            IfEq(GF_HOS04_Visited, FALSE)
+                Thread
+                    Call(DisablePlayerInput, TRUE)
+                    Call(SetPlayerPos, -630, 0, 0)
+                    Call(GetPartnerInUse, LVar0)
+                    IfEq(LVar0, PARTNER_NONE)
+                        Call(DisablePartnerAI, 0)
+                        Call(SetNpcPos, NPC_PARTNER, -660, 0, 0)
+                        Wait(1)
+                        Call(EnablePartnerAI)
+                    EndIf
+                    Call(UseSettingsFrom, CAM_DEFAULT, -565, 0, 0)
+                    Call(SetPanTarget, CAM_DEFAULT, -565, 0, 0)
+                    Call(SetCamDistance, CAM_DEFAULT, 1350)
+                    Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-25.0))
+                    Call(SetCamPosA, CAM_DEFAULT, Float(-15.0), Float(-100.0))
+                    Call(SetCamPosB, CAM_DEFAULT, Float(87.5), Float(50.0))
+                    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+                    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+                    Wait(10)
+                    Call(SetCamPitch, CAM_DEFAULT, Float(4.0), Float(-7.5))
+                    Call(SetCamSpeed, CAM_DEFAULT, Float(0.15))
+                    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+                    Wait(30)
+                    Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+                    ExecWait(EnterWalk)
+                    Wait(20)
+                    Set(GF_HOS04_Visited, TRUE)
+                    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, 0, LVar2)
+                    Call(SetPanTarget, CAM_DEFAULT, LVar0, 0, LVar2)
+                    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+                    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+                    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+                    Set(AF_HOS_B5, TRUE)
+                    Call(DisablePlayerInput, FALSE)
+                EndThread
+            Else
+                Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+                Exec(EnterWalk)
+                Wait(1)
+            EndIf
+        CaseEq(hos_04_ENTRY_1)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitnw, COLLIDER_FLAGS_UPPER_MASK)
+            Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+            Exec(EnterWalk)
+        CaseEq(hos_04_ENTRY_2)
+            Exec(N(EVS_Starship_FlyingAway))
+        CaseEq(hos_04_ENTRY_3)
+            ExecWait(N(EVS_Intro_PreHeist_Unused))
+        CaseEq(hos_04_ENTRY_4)
+            ExecWait(N(EVS_Intro_PostHeist))
+        CaseEq(hos_04_ENTRY_5)
+            Call(EnableGroup, MODEL_g1, FALSE)
+            Exec(N(EVS_BetaStarship_Flight1))
+        CaseEq(hos_04_ENTRY_6)
+            Call(EnableGroup, MODEL_g1, FALSE)
+            Exec(N(EVS_BetaStarship_Flight2))
+        CaseEq(hos_04_ENTRY_7)
+            Call(EnableGroup, MODEL_g1, FALSE)
+            Exec(N(EVS_BetaStarship_Return))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_STAR_HAVEN)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_ALT_NO_LEAD()
-    EVT_THREAD
-        EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_END_THREAD
-    EVT_EXEC(N(EVS_SetupFountains))
-    EVT_EXEC_WAIT(N(EVS_SetupMusic))
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_WAIT(1)
-    EVT_EXEC(N(EVS_SetupNarrator))
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_STAR_HAVEN)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_ALT_NO_LEAD()
+    Thread
+        Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    EndThread
+    Exec(N(EVS_SetupFountains))
+    ExecWait(N(EVS_SetupMusic))
+    Exec(N(EVS_EnterMap))
+    Wait(1)
+    Exec(N(EVS_SetupNarrator))
+    Return
+    End
 };

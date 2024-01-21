@@ -138,98 +138,98 @@ API_CALLABLE(N(AwaitPlayerNotPoundingFloor)) {
 #include "world/common/EnableCameraFollowPlayerY.inc.c"
 
 EvtScript N(EVS_BreakIce) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o116, SOUND_ICE_SHATTER, 0)
-    EVT_CALL(N(AnimateIceShattering))
-    EVT_LOOP(10)
-        EVT_CALL(SetGroupVisibility, MODEL_move1, MODEL_GROUP_VISIBLE)
-        EVT_WAIT(1)
-        EVT_CALL(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
-        EVT_CALL(EnableModel, MODEL_m1_yuka, TRUE)
-        EVT_CALL(EnableModel, MODEL_m1_kabe, TRUE)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAtCollider, COLLIDER_o116, SOUND_ICE_SHATTER, 0)
+    Call(N(AnimateIceShattering))
+    Loop(10)
+        Call(SetGroupVisibility, MODEL_move1, MODEL_GROUP_VISIBLE)
+        Wait(1)
+        Call(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
+        Call(EnableModel, MODEL_m1_yuka, TRUE)
+        Call(EnableModel, MODEL_m1_kabe, TRUE)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_TouchFloor_FragileIce) = {
-    EVT_CALL(GetPlayerActionState, LVar0)
-    EVT_IF_NE(LVar0, ACTION_STATE_SPIN_POUND)
-        EVT_IF_NE(LVar0, ACTION_STATE_TORNADO_POUND)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_IF_EQ(GF_SAM07_IceBroken, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(GF_SAM07_IceBroken, TRUE)
-    EVT_WAIT(5)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o116, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(EVS_BreakIce))
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    Call(GetPlayerActionState, LVar0)
+    IfNe(LVar0, ACTION_STATE_SPIN_POUND)
+        IfNe(LVar0, ACTION_STATE_TORNADO_POUND)
+            Return
+        EndIf
+    EndIf
+    IfEq(GF_SAM07_IceBroken, TRUE)
+        Return
+    EndIf
+    Set(GF_SAM07_IceBroken, TRUE)
+    Wait(5)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o116, COLLIDER_FLAGS_UPPER_MASK)
+    Exec(N(EVS_BreakIce))
+    Unbind
+    Return
+    End
 };
 
 EvtScript N(EVS_Blast_FragileIce) = {
-    EVT_IF_EQ(GF_SAM07_IceBroken, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(GF_SAM07_IceBroken, TRUE)
-    EVT_WAIT(5)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o116, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(EVS_BreakIce))
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_SAM07_IceBroken, TRUE)
+        Return
+    EndIf
+    Set(GF_SAM07_IceBroken, TRUE)
+    Wait(5)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o116, COLLIDER_FLAGS_UPPER_MASK)
+    Exec(N(EVS_BreakIce))
+    Unbind
+    Return
+    End
 };
 
 EvtScript N(EVS_UseGreenSwitch) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(GetEntityPosition), MV_SwitchEntityID, LVar7, LVar8, LVar9)
-    EVT_IF_EQ(GF_SAM07_FloorRaised, FALSE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_m1_yuka, SOUND_SAM07_RAISE_FLOOR, 0)
-        EVT_SUB(LVar8, -180)
-        EVT_CALL(MakeLerp, -180, 0, 120, EASING_COS_IN_OUT)
-        EVT_LABEL(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateModel, MODEL_m1_yuka, 0, LVar0, 0)
-            EVT_CALL(TranslateModel, MODEL_m1_kabe, 0, LVar0, 0)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_m1_yuka)
-            EVT_ADD(LVar0, LVar8)
-            EVT_CALL(N(SetEntityPositionF), MV_SwitchEntityID, LVar7, LVar0, LVar9)
-            EVT_CALL(N(EnableCameraFollowPlayerY))
-            EVT_WAIT(1)
-            EVT_CALL(N(AwaitPlayerNotPoundingFloor), COLLIDER_m1_yuka, ENTITY_COLLIDER_ID(0))
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(0)
-            EVT_END_IF
-        EVT_CALL(EnableModel, MODEL_o135, TRUE)
-        EVT_CALL(EnableModel, MODEL_o137, FALSE)
-        EVT_SET(GF_SAM07_FloorRaised, TRUE)
-    EVT_ELSE
-        EVT_CALL(EnableModel, MODEL_o137, TRUE)
-        EVT_CALL(EnableModel, MODEL_o135, FALSE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_m1_yuka, SOUND_SAM07_LOWER_FLOOR, 0)
-        EVT_CALL(MakeLerp, 0, -180, 120, EASING_COS_IN_OUT)
-        EVT_LABEL(1)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateModel, MODEL_m1_yuka, 0, LVar0, 0)
-            EVT_CALL(TranslateModel, MODEL_m1_kabe, 0, LVar0, 0)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_m1_yuka)
-            EVT_ADD(LVar0, LVar8)
-            EVT_CALL(N(SetEntityPositionF), MV_SwitchEntityID, LVar7, LVar0, LVar9)
-            EVT_CALL(N(EnableCameraFollowPlayerY))
-            EVT_WAIT(1)
-            EVT_CALL(N(AwaitPlayerNotPoundingFloor), COLLIDER_m1_yuka, ENTITY_COLLIDER_ID(0))
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(1)
-            EVT_END_IF
-        EVT_SET(GF_SAM07_FloorRaised, FALSE)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(N(GetEntityPosition), MV_SwitchEntityID, LVar7, LVar8, LVar9)
+    IfEq(GF_SAM07_FloorRaised, FALSE)
+        Call(PlaySoundAtCollider, COLLIDER_m1_yuka, SOUND_SAM07_RAISE_FLOOR, 0)
+        Sub(LVar8, -180)
+        Call(MakeLerp, -180, 0, 120, EASING_COS_IN_OUT)
+        Label(0)
+            Call(UpdateLerp)
+            Call(TranslateModel, MODEL_m1_yuka, 0, LVar0, 0)
+            Call(TranslateModel, MODEL_m1_kabe, 0, LVar0, 0)
+            Call(UpdateColliderTransform, COLLIDER_m1_yuka)
+            Add(LVar0, LVar8)
+            Call(N(SetEntityPositionF), MV_SwitchEntityID, LVar7, LVar0, LVar9)
+            Call(N(EnableCameraFollowPlayerY))
+            Wait(1)
+            Call(N(AwaitPlayerNotPoundingFloor), COLLIDER_m1_yuka, ENTITY_COLLIDER_ID(0))
+            IfEq(LVar1, 1)
+                Goto(0)
+            EndIf
+        Call(EnableModel, MODEL_o135, TRUE)
+        Call(EnableModel, MODEL_o137, FALSE)
+        Set(GF_SAM07_FloorRaised, TRUE)
+    Else
+        Call(EnableModel, MODEL_o137, TRUE)
+        Call(EnableModel, MODEL_o135, FALSE)
+        Call(PlaySoundAtCollider, COLLIDER_m1_yuka, SOUND_SAM07_LOWER_FLOOR, 0)
+        Call(MakeLerp, 0, -180, 120, EASING_COS_IN_OUT)
+        Label(1)
+            Call(UpdateLerp)
+            Call(TranslateModel, MODEL_m1_yuka, 0, LVar0, 0)
+            Call(TranslateModel, MODEL_m1_kabe, 0, LVar0, 0)
+            Call(UpdateColliderTransform, COLLIDER_m1_yuka)
+            Add(LVar0, LVar8)
+            Call(N(SetEntityPositionF), MV_SwitchEntityID, LVar7, LVar0, LVar9)
+            Call(N(EnableCameraFollowPlayerY))
+            Wait(1)
+            Call(N(AwaitPlayerNotPoundingFloor), COLLIDER_m1_yuka, ENTITY_COLLIDER_ID(0))
+            IfEq(LVar1, 1)
+                Goto(1)
+            EndIf
+        Set(GF_SAM07_FloorRaised, FALSE)
+    EndIf
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 BombTriggerF N(BombPos_Ice) = {
@@ -238,31 +238,31 @@ BombTriggerF N(BombPos_Ice) = {
 };
 
 EvtScript N(EVS_SetupPit) = {
-    EVT_CALL(EnableGroup, MODEL_g72, TRUE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_m1_kabe, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ParentColliderToModel, COLLIDER_m1_yuka, MODEL_m1_yuka)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o116, MODEL_m1_yuka)
-    EVT_IF_EQ(GF_SAM07_IceBroken, FALSE)
-        EVT_CALL(EnableModel, MODEL_o137, TRUE)
-        EVT_CALL(TranslateGroup, MODEL_move1, 0, -180, 0)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_m1_yuka)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o116)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_TouchFloor_FragileIce)), TRIGGER_FLOOR_TOUCH, COLLIDER_o116, 1, 0)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Blast_FragileIce)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Ice)), 1, 0)
-    EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o116, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
-        EVT_CALL(EnableModel, MODEL_m1_yuka, TRUE)
-        EVT_CALL(EnableModel, MODEL_m1_kabe, TRUE)
-        EVT_CALL(EnableModel, MODEL_o135, TRUE)
-        EVT_IF_EQ(GF_SAM07_FloorRaised, FALSE)
-            EVT_CALL(EnableModel, MODEL_o137, TRUE)
-            EVT_CALL(TranslateGroup, MODEL_move1, 0, -180, 0)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_m1_yuka)
-        EVT_ELSE
-            EVT_CALL(EnableModel, MODEL_o135, TRUE)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(EnableGroup, MODEL_g72, TRUE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_m1_kabe, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ParentColliderToModel, COLLIDER_m1_yuka, MODEL_m1_yuka)
+    Call(ParentColliderToModel, COLLIDER_o116, MODEL_m1_yuka)
+    IfEq(GF_SAM07_IceBroken, FALSE)
+        Call(EnableModel, MODEL_o137, TRUE)
+        Call(TranslateGroup, MODEL_move1, 0, -180, 0)
+        Call(UpdateColliderTransform, COLLIDER_m1_yuka)
+        Call(UpdateColliderTransform, COLLIDER_o116)
+        BindTrigger(Ref(N(EVS_TouchFloor_FragileIce)), TRIGGER_FLOOR_TOUCH, COLLIDER_o116, 1, 0)
+        BindTrigger(Ref(N(EVS_Blast_FragileIce)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Ice)), 1, 0)
+    Else
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o116, COLLIDER_FLAGS_UPPER_MASK)
+        Call(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
+        Call(EnableModel, MODEL_m1_yuka, TRUE)
+        Call(EnableModel, MODEL_m1_kabe, TRUE)
+        Call(EnableModel, MODEL_o135, TRUE)
+        IfEq(GF_SAM07_FloorRaised, FALSE)
+            Call(EnableModel, MODEL_o137, TRUE)
+            Call(TranslateGroup, MODEL_move1, 0, -180, 0)
+            Call(UpdateColliderTransform, COLLIDER_m1_yuka)
+        Else
+            Call(EnableModel, MODEL_o135, TRUE)
+        EndIf
+    EndIf
+    Return
+    End
 };

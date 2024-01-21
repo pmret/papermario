@@ -6,23 +6,23 @@
 #include "battle/common/stage/lib/BeachEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(EnableModel, MODEL_o318, FALSE)
-    EVT_CALL(EnableModel, MODEL_mizu1, FALSE)
-    EVT_CALL(EnableModel, MODEL_mizu2, FALSE)
-    EVT_CALL(EnableModel, MODEL_mizu3, FALSE)
-    EVT_CALL(EnableModel, MODEL_ori, FALSE)
-    EVT_CALL(EnableModel, MODEL_saku1, FALSE)
-    EVT_CALL(EnableModel, MODEL_saku2, FALSE)
-    EVT_CALL(EnableModel, MODEL_mizu4, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Call(EnableModel, MODEL_o318, FALSE)
+    Call(EnableModel, MODEL_mizu1, FALSE)
+    Call(EnableModel, MODEL_mizu2, FALSE)
+    Call(EnableModel, MODEL_mizu3, FALSE)
+    Call(EnableModel, MODEL_ori, FALSE)
+    Call(EnableModel, MODEL_saku1, FALSE)
+    Call(EnableModel, MODEL_saku2, FALSE)
+    Call(EnableModel, MODEL_mizu4, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 Stage NAMESPACE = {

@@ -16,9 +16,9 @@ MobileAISettings N(AISettings_CrazyDayzee) = {
 };
 
 EvtScript N(EVS_NpcAI_CrazyDayzee) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_CrazyDayzee)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_CrazyDayzee)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_CrazyDayzee) = {

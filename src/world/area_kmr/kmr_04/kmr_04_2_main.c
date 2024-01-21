@@ -3,43 +3,43 @@
 EvtScript N(EVS_ExitWalk_kmr_03_0) = EVT_EXIT_WALK(60, kmr_04_ENTRY_0, "kmr_03", kmr_03_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kmr_03_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_kmr_03_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(GetLoadType, LVar1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_EXEC(EnterSavePoint)
-        EVT_EXEC(N(EVS_BindExitTriggers))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_NE(LVar0, kmr_04_ENTRY_A)
-        EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-        EVT_EXEC(EnterWalk)
-    EVT_ELSE
-        EVT_EXEC(EnterPostPipe)
-        EVT_EXEC(N(EVS_BindExitTriggers))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetLoadType, LVar1)
+    IfEq(LVar1, 1)
+        Exec(EnterSavePoint)
+        Exec(N(EVS_BindExitTriggers))
+        Return
+    EndIf
+    Call(GetEntryID, LVar0)
+    IfNe(LVar0, kmr_04_ENTRY_A)
+        Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+        Exec(EnterWalk)
+    Else
+        Exec(EnterPostPipe)
+        Exec(N(EVS_BindExitTriggers))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_GOOMBA_VILLAGE)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_SET(AF_KMR_09, FALSE)
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_CALL(ClearDefeatedEnemies)
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC_WAIT(N(EVS_SetupFoliage))
-    EVT_EXEC(N(EVS_SetNormalMusic))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilit1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_GOOMBA_VILLAGE)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_NO_LEAD()
+    Set(AF_KMR_09, FALSE)
+    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(ClearDefeatedEnemies)
+    ExecWait(N(EVS_MakeEntities))
+    ExecWait(N(EVS_SetupFoliage))
+    Exec(N(EVS_SetNormalMusic))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilit1, COLLIDER_FLAGS_UPPER_MASK)
+    Exec(N(EVS_EnterMap))
+    Wait(1)
+    Return
+    End
 };

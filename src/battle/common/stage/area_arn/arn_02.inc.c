@@ -4,31 +4,31 @@
 #define NAMESPACE A(arn_02)
 
 EvtScript N(EVS_RotateWindmill) = {
-    EVT_SET(LVarA, LVar0)
-    EVT_SET(LVar0, 0)
-    EVT_LABEL(0)
-        EVT_ADD(LVar0, 1)
-        EVT_IF_GT(LVar0, 359)
-            EVT_SUB(LVar0, 360)
-        EVT_END_IF
-        EVT_CALL(RotateModel, LVarA, LVar0, 0, 0, 1)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0)
+    Set(LVar0, 0)
+    Label(0)
+        Add(LVar0, 1)
+        IfGt(LVar0, 359)
+            Sub(LVar0, 360)
+        EndIf
+        Call(RotateModel, LVarA, LVar0, 0, 0, 1)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SET(LVar0, MODEL_o332)
-    EVT_EXEC_WAIT(N(EVS_RotateWindmill))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Set(LVar0, MODEL_o332)
+    ExecWait(N(EVS_RotateWindmill))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

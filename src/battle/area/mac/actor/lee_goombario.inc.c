@@ -88,375 +88,375 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FormDuration, 1)
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_HandlePhase)))
+    Call(SetActorVar, ACTOR_SELF, AVAR_FormDuration, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
-        EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_BurnHurt1)
-            EVT_SET_CONST(LVar2, ANIM_BattleGoombario_BurnHurt2)
-            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-        EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_BurnHurt1)
-            EVT_SET_CONST(LVar2, ANIM_BattleGoombario_BurnHurt2)
-            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
-            EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_BurnHurt2)
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_SET(LVar2, 12)
-            EVT_EXEC_WAIT(A(EVS_Lee_ShockKnockback))
-            EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Run)
-            EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-        EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_SET(LVar2, 12)
-            EVT_EXEC_WAIT(A(EVS_Lee_ShockKnockback))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
-        EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_DEATH)
-            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_Recover)
-        EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Run)
-            EVT_SET_CONST(LVar2, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Run)
-            EVT_EXEC_WAIT(EVS_Enemy_AirLift)
-        EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
-            EVT_RETURN
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseOrEq(EVENT_HIT_COMBO)
+        CaseOrEq(EVENT_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_HurtStill)
+            ExecWait(EVS_Enemy_Hit)
+        EndCaseGroup
+        CaseEq(EVENT_BURN_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_BurnHurt1)
+            SetConst(LVar2, ANIM_BattleGoombario_BurnHurt2)
+            ExecWait(EVS_Enemy_BurnHit)
+        CaseEq(EVENT_BURN_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_BurnHurt1)
+            SetConst(LVar2, ANIM_BattleGoombario_BurnHurt2)
+            ExecWait(EVS_Enemy_BurnHit)
+            ExecWait(A(EVS_Lee_RemoveParentActor))
+            Wait(10)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_BurnHurt2)
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseEq(EVENT_SPIN_SMASH_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_HurtStill)
+            ExecWait(EVS_Enemy_SpinSmashHit)
+        CaseEq(EVENT_SPIN_SMASH_DEATH)
+            ExecWait(A(EVS_Lee_RemoveParentActor))
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_HurtStill)
+            ExecWait(EVS_Enemy_SpinSmashHit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_HurtStill)
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseEq(EVENT_SHOCK_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_HurtStill)
+            Set(LVar2, 12)
+            ExecWait(A(EVS_Lee_ShockKnockback))
+            Call(SetGoalToHome, ACTOR_SELF)
+            Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Run)
+            Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+        CaseEq(EVENT_SHOCK_DEATH)
+            ExecWait(A(EVS_Lee_RemoveParentActor))
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_HurtStill)
+            Set(LVar2, 12)
+            ExecWait(A(EVS_Lee_ShockKnockback))
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_HurtStill)
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
+        CaseOrEq(EVENT_AIR_LIFT_FAILED)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_Idle)
+            ExecWait(EVS_Enemy_NoDamageHit)
+        EndCaseGroup
+        CaseEq(EVENT_DEATH)
+            ExecWait(A(EVS_Lee_RemoveParentActor))
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_HurtStill)
+            ExecWait(EVS_Enemy_Hit)
+            Wait(10)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_HurtStill)
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseEq(EVENT_RECOVER_STATUS)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_Idle)
+            ExecWait(EVS_Enemy_Recover)
+        CaseEq(EVENT_SCARE_AWAY)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_Run)
+            SetConst(LVar2, ANIM_BattleGoombario_HurtStill)
+            ExecWait(EVS_Enemy_ScareAway)
+            Return
+        CaseEq(EVENT_BEGIN_AIR_LIFT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_Run)
+            ExecWait(EVS_Enemy_AirLift)
+        CaseEq(EVENT_BLOW_AWAY)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_HurtStill)
+            ExecWait(EVS_Enemy_BlowAway)
+            Return
+        CaseDefault
+    EndSwitch
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 #include "world/common/todo/UnkFunc62.inc.c"
 #include "common/ActorJumpToPos.inc.c"
 
 EvtScript N(EVS_HeadbonkFollowthrough) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
-    EVT_THREAD
-        EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
-        EVT_SET(LVar0, 180)
-        EVT_LOOP(15)
-            EVT_SUB(LVar0, 60)
-            EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Fall)
-        EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-        EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_END_THREAD
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 60)
-    EVT_SET(LVar1, 0)
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
-    EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
-        EVT_SETF(LVar5, EVT_FLOAT(7.2))
-    EVT_ELSE
-        EVT_SET(LVar5, 18)
-    EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar5, 0)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
-    EVT_ADD(LVar0, 20)
-    EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar5, 0)
-    EVT_WAIT(1)
-    EVT_ADD(LVar0, 10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar5, 0)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
-    EVT_WAIT(2)
-    EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Run)
-    EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
+    Thread
+        Call(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
+        Set(LVar0, 180)
+        Loop(15)
+            Sub(LVar0, 60)
+            Call(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
+            Wait(1)
+        EndLoop
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Fall)
+        Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
+        Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
+    EndThread
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Add(LVar0, 60)
+    Set(LVar1, 0)
+    Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
+    Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+    Call(GetStatusFlags, ACTOR_SELF, LVarA)
+    IfFlag(LVarA, STATUS_FLAG_SHRINK)
+        SetF(LVar5, Float(7.2))
+    Else
+        Set(LVar5, 18)
+    EndIf
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, LVar5, 0)
+    Wait(1)
+    Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
+    Add(LVar0, 20)
+    Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, LVar5, 0)
+    Wait(1)
+    Add(LVar0, 10)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
+    Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, LVar5, 0)
+    Wait(1)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
+    Wait(2)
+    Call(SetGoalToHome, ACTOR_SELF)
+    Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Run)
+    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_ApproachPlayer) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(AddGoalPos, ACTOR_SELF, 70, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Run)
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
-    EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(AddGoalPos, ACTOR_SELF, 70, 0, 0)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Run)
+    Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
+    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
+    Return
+    End
 };
 
 // copied from goombario.c and used, but result is discarded
 EvtScript N(EVS_CalculateJumpTime) = {
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVarB, LVarC, LVarD)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVarC, LVarD, LVarE)
-    EVT_IF_GT(LVarB, LVarC)
-        EVT_SUB(LVarB, LVarC)
-    EVT_ELSE
-        EVT_SUB(LVarC, LVarB)
-        EVT_SET(LVarB, LVarC)
-    EVT_END_IF
-    EVT_SUB(LVarB, 20)
-    EVT_DIVF(LVarB, EVT_FLOAT(10.588))
-    EVT_ADDF(LVarB, 15)
-    EVT_SET(LVarA, LVarB)
-    EVT_RETURN
-    EVT_END
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVarB, LVarC, LVarD)
+    Call(GetActorPos, ACTOR_SELF, LVarC, LVarD, LVarE)
+    IfGt(LVarB, LVarC)
+        Sub(LVarB, LVarC)
+    Else
+        Sub(LVarC, LVarB)
+        Set(LVarB, LVarC)
+    EndIf
+    Sub(LVarB, 20)
+    DivF(LVarB, Float(10.588))
+    AddF(LVarB, 15)
+    Set(LVarA, LVarB)
+    Return
+    End
 };
 
 EvtScript N(EVS_Attack_Headbonk) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_EXEC_WAIT(N(EVS_ApproachPlayer))
-    EVT_EXEC_WAIT(N(EVS_CalculateJumpTime))
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
-    EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
-        EVT_SETF(LVar0, EVT_FLOAT(7.2))
-        EVT_SETF(LVar1, EVT_FLOAT(7.6))
-        EVT_SETF(LVar1, EVT_FLOAT(3.6))
-    EVT_ELSE
-        EVT_SET(LVar0, 18)
-        EVT_SET(LVar1, 19)
-        EVT_SET(LVar2, 9)
-    EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar0, 0)
-    EVT_WAIT(5)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar1, 0)
-    EVT_WAIT(1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar2, 0)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 0, 5)
-    EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-    EVT_CALL(N(UnkFunc62), LVarA, 0)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-            EVT_CALL(N(ActorJumpToPos))
-            EVT_THREAD
-                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
-            EVT_END_THREAD
-            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_END_IF
-            EVT_WAIT(20)
-            EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(EVS_HeadbonkFollowthrough))
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CHILD_THREAD
-        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
-        EVT_WAIT(1)
-        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
-        EVT_WAIT(1)
-        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-    EVT_END_CHILD_THREAD
-    EVT_WAIT(1)
-    EVT_WAIT(2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
-    EVT_SWITCH(LVar9)
-        EVT_CASE_EQ(PARTNER_RANK_NORMAL)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-        EVT_CASE_EQ(PARTNER_RANK_SUPER)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS)
-        EVT_CASE_EQ(PARTNER_RANK_ULTRA)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_END_SWITCH
-    EVT_CALL(GetActorHP, ACTOR_PLAYER, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_GOTO(100)
-    EVT_END_IF
-    EVT_SET(LVarA, 24)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
-    EVT_SWITCH(LVar9)
-        EVT_CASE_EQ(PARTNER_RANK_NORMAL)
-            EVT_THREAD
-                EVT_WAIT(4)
-                EVT_SET(LVar0, 0)
-                EVT_LOOP(6)
-                    EVT_ADD(LVar0, 30)
-                    EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-            EVT_END_THREAD
-            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-            EVT_CALL(N(UnkFunc62), LVarA, 3)
-        EVT_CASE_EQ(PARTNER_RANK_SUPER)
-            EVT_THREAD
-                EVT_WAIT(4)
-                EVT_SET(LVar0, 0)
-                EVT_LOOP(6)
-                    EVT_ADD(LVar0, 30)
-                    EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-            EVT_END_THREAD
-            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
-            EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-            EVT_CALL(N(UnkFunc62), LVarA, 3)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
-        EVT_CASE_EQ(PARTNER_RANK_ULTRA)
-            EVT_THREAD
-                EVT_WAIT(4)
-                EVT_SET(LVar0, 0)
-                EVT_LOOP(6)
-                    EVT_ADD(LVar0, 30)
-                    EVT_CALL(SetActorRotation, ACTOR_SELF, 0, EVT_IGNORE_ARG, LVar0)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
-            EVT_END_THREAD
-            EVT_THREAD
-                EVT_SET(LVar0, 0)
-                EVT_LOOP(LVarA)
-                    EVT_ADD(LVar0, 133)
-                    EVT_CALL(SetActorRotation, ACTOR_SELF, EVT_IGNORE_ARG, LVar0, EVT_IGNORE_ARG)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-            EVT_END_THREAD
-            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
-            EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-            EVT_CALL(N(UnkFunc62), LVarA, 3)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
-    EVT_END_SWITCH
-    EVT_CHILD_THREAD
-        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
-        EVT_WAIT(1)
-        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
-        EVT_WAIT(1)
-        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-    EVT_END_CHILD_THREAD
-    EVT_WAIT(1)
-    EVT_WAIT(2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
-    EVT_SWITCH(LVar9)
-        EVT_CASE_EQ(PARTNER_RANK_NORMAL)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CASE_EQ(PARTNER_RANK_SUPER)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CASE_EQ(PARTNER_RANK_ULTRA)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_END_SWITCH
-    EVT_LABEL(100)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(EVS_HeadbonkFollowthrough))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    ExecWait(N(EVS_ApproachPlayer))
+    ExecWait(N(EVS_CalculateJumpTime))
+    Call(GetStatusFlags, ACTOR_SELF, LVarA)
+    IfFlag(LVarA, STATUS_FLAG_SHRINK)
+        SetF(LVar0, Float(7.2))
+        SetF(LVar1, Float(7.6))
+        SetF(LVar1, Float(3.6))
+    Else
+        Set(LVar0, 18)
+        Set(LVar1, 19)
+        Set(LVar2, 9)
+    EndIf
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, LVar0, 0)
+    Wait(5)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, LVar1, 0)
+    Wait(1)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, LVar2, 0)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(AddGoalPos, ACTOR_SELF, 0, 0, 5)
+    Call(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
+    Call(N(UnkFunc62), LVarA, 0)
+    Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            Set(LVarA, LVar0)
+            Call(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
+            Call(N(ActorJumpToPos))
+            Thread
+                Call(ShakeCam, CAM_BATTLE, 0, 5, Float(1.0))
+            EndThread
+            IfEq(LVarA, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EndIf
+            Wait(20)
+            Call(YieldTurn)
+            ExecWait(N(EVS_HeadbonkFollowthrough))
+            Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Return
+        EndCaseGroup
+    EndSwitch
+    ChildThread
+        Call(SetPartScale, ACTOR_SELF, PRT_MAIN, Float(1.1), Float(0.8), Float(1.0))
+        Wait(1)
+        Call(SetPartScale, ACTOR_SELF, PRT_MAIN, Float(1.3), Float(0.5), Float(1.0))
+        Wait(1)
+        Call(SetPartScale, ACTOR_SELF, PRT_MAIN, Float(1.0), Float(1.0), Float(1.0))
+    EndChildThread
+    Wait(1)
+    Wait(2)
+    Call(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
+    Switch(LVar9)
+        CaseEq(PARTNER_RANK_NORMAL)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+        CaseEq(PARTNER_RANK_SUPER)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS)
+        CaseEq(PARTNER_RANK_ULTRA)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_INCLUDE_POWER_UPS)
+    EndSwitch
+    Call(GetActorHP, ACTOR_PLAYER, LVar0)
+    IfEq(LVar0, 0)
+        Goto(100)
+    EndIf
+    Set(LVarA, 24)
+    Call(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
+    Switch(LVar9)
+        CaseEq(PARTNER_RANK_NORMAL)
+            Thread
+                Wait(4)
+                Set(LVar0, 0)
+                Loop(6)
+                    Add(LVar0, 30)
+                    Call(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
+                    Wait(1)
+                EndLoop
+            EndThread
+            Call(SetGoalToTarget, ACTOR_SELF)
+            Call(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
+            Call(N(UnkFunc62), LVarA, 3)
+        CaseEq(PARTNER_RANK_SUPER)
+            Thread
+                Wait(4)
+                Set(LVar0, 0)
+                Loop(6)
+                    Add(LVar0, 30)
+                    Call(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
+                    Wait(1)
+                EndLoop
+            EndThread
+            Call(SetGoalToTarget, ACTOR_SELF)
+            Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
+            Call(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
+            Call(N(UnkFunc62), LVarA, 3)
+            Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
+        CaseEq(PARTNER_RANK_ULTRA)
+            Thread
+                Wait(4)
+                Set(LVar0, 0)
+                Loop(6)
+                    Add(LVar0, 30)
+                    Call(SetActorRotation, ACTOR_SELF, 0, EVT_IGNORE_ARG, LVar0)
+                    Wait(1)
+                EndLoop
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
+            EndThread
+            Thread
+                Set(LVar0, 0)
+                Loop(LVarA)
+                    Add(LVar0, 133)
+                    Call(SetActorRotation, ACTOR_SELF, EVT_IGNORE_ARG, LVar0, EVT_IGNORE_ARG)
+                    Wait(1)
+                EndLoop
+            EndThread
+            Call(SetGoalToTarget, ACTOR_SELF)
+            Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
+            Call(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
+            Call(N(UnkFunc62), LVarA, 3)
+            Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
+    EndSwitch
+    ChildThread
+        Call(SetPartScale, ACTOR_SELF, PRT_MAIN, Float(1.1), Float(0.8), Float(1.0))
+        Wait(1)
+        Call(SetPartScale, ACTOR_SELF, PRT_MAIN, Float(1.3), Float(0.5), Float(1.0))
+        Wait(1)
+        Call(SetPartScale, ACTOR_SELF, PRT_MAIN, Float(1.0), Float(1.0), Float(1.0))
+    EndChildThread
+    Wait(1)
+    Wait(2)
+    Call(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
+    Switch(LVar9)
+        CaseEq(PARTNER_RANK_NORMAL)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_TRIGGER_EVENTS)
+        CaseEq(PARTNER_RANK_SUPER)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
+        CaseEq(PARTNER_RANK_ULTRA)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_TRIGGER_EVENTS)
+    EndSwitch
+    Label(100)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            Call(YieldTurn)
+            ExecWait(N(EVS_HeadbonkFollowthrough))
+        EndCaseGroup
+    EndSwitch
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 API_CALLABLE(N(CalculateTattleCamBoomLength)) {
@@ -510,76 +510,76 @@ API_CALLABLE(N(CloseTattleWindow)) {
 }
 
 EvtScript N(EVS_Move_Tattle) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-    EVT_WAIT(10)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TATTLE_OPEN, TRUE)
-    EVT_CALL(N(OpenTattleWindow), LVar5)
-    EVT_WAIT(12)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+    Wait(10)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(SetBattleFlagBits, BS_FLAGS1_TATTLE_OPEN, TRUE)
+    Call(N(OpenTattleWindow), LVar5)
+    Wait(12)
     // enable the tattle viewport
-    EVT_CALL(SetCamEnabled, CAM_TATTLE, TRUE)
-    EVT_CALL(SetCamNoDraw, CAM_TATTLE, FALSE)
-    EVT_CALL(SetCamPerspective, CAM_TATTLE, CAM_UPDATE_MODE_6, 25, 16, 1024)
-    EVT_CALL(SetCamViewport, CAM_TATTLE, 37, 95, 138, 99)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar0, 8)
-    EVT_SET(LVar1, 0)
-    EVT_CALL(N(CalculateTattleCamBoomLength))
-    EVT_WAIT(1)
-    EVT_CALL(func_802CAE50, CAM_TATTLE, LVar0, LVar1, LVar2)
-    EVT_CALL(func_802CABE8, CAM_TATTLE, 0, LVar3, 100, 4)
-    EVT_WAIT(2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_TATTLE_WINDOW_OPEN)
-    EVT_CALL(SetCamNoDraw, CAM_TATTLE, TRUE)
-    EVT_WAIT(10)
-    EVT_CALL(ActorSpeak, MSG_EnemyTattle_Mario, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)
-    EVT_CALL(N(CloseTattleWindow), LVar5)
-    EVT_WAIT(12)
-    EVT_CALL(SetCamEnabled, CAM_TATTLE, FALSE)
-    EVT_WAIT(32)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TATTLE_OPEN, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(SetCamEnabled, CAM_TATTLE, TRUE)
+    Call(SetCamNoDraw, CAM_TATTLE, FALSE)
+    Call(SetCamPerspective, CAM_TATTLE, CAM_UPDATE_MODE_6, 25, 16, 1024)
+    Call(SetCamViewport, CAM_TATTLE, 37, 95, 138, 99)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Sub(LVar0, 8)
+    Set(LVar1, 0)
+    Call(N(CalculateTattleCamBoomLength))
+    Wait(1)
+    Call(func_802CAE50, CAM_TATTLE, LVar0, LVar1, LVar2)
+    Call(func_802CABE8, CAM_TATTLE, 0, LVar3, 100, 4)
+    Wait(2)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_TATTLE_WINDOW_OPEN)
+    Call(SetCamNoDraw, CAM_TATTLE, TRUE)
+    Wait(10)
+    Call(ActorSpeak, MSG_EnemyTattle_Mario, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)
+    Call(N(CloseTattleWindow), LVar5)
+    Wait(12)
+    Call(SetCamEnabled, CAM_TATTLE, FALSE)
+    Wait(32)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(SetBattleFlagBits, BS_FLAGS1_TATTLE_OPEN, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(RandInt, 100, LVar0)
-    EVT_IF_LT(LVar0, 40)
-        EVT_EXEC_WAIT(N(EVS_Move_Tattle))
-    EVT_ELSE
-        EVT_EXEC_WAIT(N(EVS_Attack_Headbonk))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(RandInt, 100, LVar0)
+    IfLt(LVar0, 40)
+        ExecWait(N(EVS_Move_Tattle))
+    Else
+        ExecWait(N(EVS_Attack_Headbonk))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_HandlePhase) = {
-    EVT_CALL(GetBattlePhase, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_FormDuration, LVar0)
-            EVT_IF_GT(LVar0, 0)
-                EVT_SUB(LVar0, 1)
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FormDuration, LVar0)
-                EVT_BREAK_SWITCH
-            EVT_END_IF
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(A(EVS_Lee_LoseDisguise))
-            EVT_RETURN
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattlePhase, LVar0)
+    Switch(LVar0)
+        CaseEq(PHASE_ENEMY_BEGIN)
+            Call(GetActorVar, ACTOR_SELF, AVAR_FormDuration, LVar0)
+            IfGt(LVar0, 0)
+                Sub(LVar0, 1)
+                Call(SetActorVar, ACTOR_SELF, AVAR_FormDuration, LVar0)
+                BreakSwitch
+            EndIf
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_HurtStill)
+            ExecWait(A(EVS_Lee_LoseDisguise))
+            Return
+    EndSwitch
+    Return
+    End
 };
 
 Formation A(LeeGoombarioFormation) = {

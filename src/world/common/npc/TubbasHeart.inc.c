@@ -1,13 +1,13 @@
 #include "TubbasHeart.h"
 
 EvtScript N(EVS_NpcAuxAI_TubbasHeart) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_TubbasHeart) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_TubbasHeart) = {

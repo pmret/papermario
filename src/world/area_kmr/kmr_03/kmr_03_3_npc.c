@@ -22,146 +22,146 @@ NpcSettings N(NpcSettings_Goompa) = {
 };
 
 EvtScript N(EVS_NpcAux_Goompa) = {
-    EVT_LABEL(1)
-    EVT_IF_EQ(AF_KMR_08, TRUE)
-        EVT_LABEL(100)
-        EVT_CALL(AwaitPlayerLeave, 294, 123, 170)
-        EVT_CALL(EnableNpcAI, NPC_Goompa, FALSE)
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(SetNpcSpeed, NPC_Goompa, EVT_FLOAT(4.0))
-        EVT_CALL(SetNpcAnimation, NPC_Goompa, ANIM_Goompa_Run)
-        EVT_CALL(N(func_802401B0_8C8140))
-        EVT_CALL(GetAngleToPlayer, NPC_Goompa, LVar2)
-        EVT_LOOP(LVar1)
-            EVT_CALL(GetNpcPos, NPC_Goompa, LVar7, LVar8, LVar9)
-            EVT_CALL(AddVectorPolar, LVar7, LVar9, EVT_FLOAT(4.0), LVar2)
-            EVT_CALL(SetNpcPos, NPC_Goompa, LVar7, LVar8, LVar9)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(PlayerFaceNpc, NPC_Goompa, 3)
-        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
-        EVT_CALL(PlayerMoveTo, 243, 243, 0)
-        EVT_CALL(SetNpcVar, NPC_Goompa, 0, 1)
-        EVT_CALL(EnableNpcAI, NPC_Goompa, TRUE)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_GOTO(100)
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_GOTO(1)
-    EVT_RETURN
-    EVT_END
+    Label(1)
+    IfEq(AF_KMR_08, TRUE)
+        Label(100)
+        Call(AwaitPlayerLeave, 294, 123, 170)
+        Call(EnableNpcAI, NPC_Goompa, FALSE)
+        Call(DisablePlayerInput, TRUE)
+        Call(SetNpcSpeed, NPC_Goompa, Float(4.0))
+        Call(SetNpcAnimation, NPC_Goompa, ANIM_Goompa_Run)
+        Call(N(func_802401B0_8C8140))
+        Call(GetAngleToPlayer, NPC_Goompa, LVar2)
+        Loop(LVar1)
+            Call(GetNpcPos, NPC_Goompa, LVar7, LVar8, LVar9)
+            Call(AddVectorPolar, LVar7, LVar9, Float(4.0), LVar2)
+            Call(SetNpcPos, NPC_Goompa, LVar7, LVar8, LVar9)
+            Wait(1)
+        EndLoop
+        Call(PlayerFaceNpc, NPC_Goompa, 3)
+        Call(SetPlayerSpeed, Float(3.0))
+        Call(PlayerMoveTo, 243, 243, 0)
+        Call(SetNpcVar, NPC_Goompa, 0, 1)
+        Call(EnableNpcAI, NPC_Goompa, TRUE)
+        Call(DisablePlayerInput, FALSE)
+        Goto(100)
+    EndIf
+    Wait(1)
+    Goto(1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_Goompa) = {
-    EVT_LABEL(1)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_EQ(STORY_CH0_FELL_OFF_CLIFF)
-            EVT_LABEL(89)
-            EVT_CALL(N(CheckPositionRelativeToPlane), -118, 86, -70, -15)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_GOTO(89)
-            EVT_END_IF
-            EVT_CALL(DisablePlayerInput, TRUE)
-            EVT_CALL(SetNpcAux, NPC_Goompa, 0)
-            EVT_CALL(PlaySoundAtNpc, NPC_Goompa, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
-            EVT_CALL(ShowEmote, NPC_Goompa, EMOTE_EXCLAMATION, 45, 15, EMOTER_NPC, 0, 0, 0, 0)
-            EVT_WAIT(15 * DT)
-            EVT_CALL(NpcFacePlayer, NPC_SELF, 5)
-            EVT_WAIT(10 * DT)
-            EVT_CALL(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00A6)
-            EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -220, 20, -72)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, -20, 0, 68)
-            EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-8.5))
-            EVT_CALL(SetCamDistance, CAM_DEFAULT, 275)
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.5 / DT))
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-            EVT_THREAD
-                EVT_WAIT(20 * DT)
-                EVT_CALL(SetPlayerSpeed, EVT_FLOAT(2.0))
-                EVT_CALL(PlayerMoveTo, -38, 68, 0)
-            EVT_END_THREAD
-            EVT_CALL(GetNpcPos, NPC_Goompa, LVar7, LVar8, LVar9)
-            EVT_CALL(SetNpcSpeed, NPC_Goompa, EVT_FLOAT(4.0 / DT))
-            EVT_CALL(SetNpcAnimation, NPC_Goompa, ANIM_Goompa_Run)
-            EVT_CALL(NpcMoveTo, NPC_Goompa, 0, 70, 0)
-            EVT_CALL(SetNpcAnimation, NPC_Goompa, ANIM_Goompa_Idle)
-            EVT_CALL(InterpNpcYaw, NPC_Goompa, 276, 20 * DT)
-            EVT_WAIT(30 * DT)
-            EVT_CALL(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00A7)
-            EVT_WAIT(5 * DT)
-            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
-            EVT_WAIT(30 * DT)
-            EVT_CALL(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00A8)
-            EVT_CALL(N(ChangeNpcToPartner), 0, 5)
-            EVT_SET(GB_StoryProgress, STORY_CH0_GOOMPA_JOINED_PARTY)
-            EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -220, 20, -72)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-            EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-            EVT_CALL(EnablePartnerAI)
-            EVT_CALL(DisablePlayerInput, FALSE)
-            EVT_WAIT(1)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Label(1)
+    Switch(GB_StoryProgress)
+        CaseEq(STORY_CH0_FELL_OFF_CLIFF)
+            Label(89)
+            Call(N(CheckPositionRelativeToPlane), -118, 86, -70, -15)
+            Wait(1)
+            IfEq(LVar0, 0)
+                Goto(89)
+            EndIf
+            Call(DisablePlayerInput, TRUE)
+            Call(SetNpcAux, NPC_Goompa, 0)
+            Call(PlaySoundAtNpc, NPC_Goompa, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
+            Call(ShowEmote, NPC_Goompa, EMOTE_EXCLAMATION, 45, 15, EMOTER_NPC, 0, 0, 0, 0)
+            Wait(15 * DT)
+            Call(NpcFacePlayer, NPC_SELF, 5)
+            Wait(10 * DT)
+            Call(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00A6)
+            Call(UseSettingsFrom, CAM_DEFAULT, -220, 20, -72)
+            Call(SetPanTarget, CAM_DEFAULT, -20, 0, 68)
+            Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-8.5))
+            Call(SetCamDistance, CAM_DEFAULT, 275)
+            Call(SetCamSpeed, CAM_DEFAULT, Float(1.5 / DT))
+            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Thread
+                Wait(20 * DT)
+                Call(SetPlayerSpeed, Float(2.0))
+                Call(PlayerMoveTo, -38, 68, 0)
+            EndThread
+            Call(GetNpcPos, NPC_Goompa, LVar7, LVar8, LVar9)
+            Call(SetNpcSpeed, NPC_Goompa, Float(4.0 / DT))
+            Call(SetNpcAnimation, NPC_Goompa, ANIM_Goompa_Run)
+            Call(NpcMoveTo, NPC_Goompa, 0, 70, 0)
+            Call(SetNpcAnimation, NPC_Goompa, ANIM_Goompa_Idle)
+            Call(InterpNpcYaw, NPC_Goompa, 276, 20 * DT)
+            Wait(30 * DT)
+            Call(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00A7)
+            Wait(5 * DT)
+            Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
+            Wait(30 * DT)
+            Call(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00A8)
+            Call(N(ChangeNpcToPartner), 0, 5)
+            Set(GB_StoryProgress, STORY_CH0_GOOMPA_JOINED_PARTY)
+            Call(UseSettingsFrom, CAM_DEFAULT, -220, 20, -72)
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
+            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+            Call(PanToTarget, CAM_DEFAULT, 0, 0)
+            Call(EnablePartnerAI)
+            Call(DisablePlayerInput, FALSE)
+            Wait(1)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_Goompa) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goompa_Injured)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goompa_Idle)
-    EVT_ADD(MV_Unk_00, 1)
-    EVT_IF_LT(MV_Unk_00, 3)
-        EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(ENCOUNTER_TRIGGER_JUMP)
-                EVT_CALL(SetNpcVar, NPC_Goompa, 0, 1)
-                EVT_IF_EQ(AF_KMR_06, TRUE)
-                EVT_ELSE
-                    EVT_SET(AF_KMR_06, TRUE)
-                    EVT_SET(AF_KMR_07, FALSE)
-                EVT_END_IF
-            EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-                EVT_CALL(SetNpcVar, NPC_Goompa, 0, 1)
-                EVT_IF_EQ(AF_KMR_07, TRUE)
-                EVT_ELSE
-                    EVT_SET(AF_KMR_06, FALSE)
-                    EVT_SET(AF_KMR_07, TRUE)
-                EVT_END_IF
-        EVT_END_SWITCH
-        EVT_WAIT(10)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goompa_Run)
-    EVT_ELSE
-        EVT_WAIT(10)
-        EVT_CALL(GetNpcPos, NPC_Goompa, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
-        EVT_CALL(SetNpcPos, NPC_Goompa, NPC_DISPOSE_LOCATION)
-        EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-        EVT_CALL(EnablePartnerAI)
-        EVT_CALL(SetNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Goompa)))
-        EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Goompa)))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Goompa_Injured)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Goompa_Idle)
+    Add(MV_Unk_00, 1)
+    IfLt(MV_Unk_00, 3)
+        Call(GetOwnerEncounterTrigger, LVar0)
+        Switch(LVar0)
+            CaseEq(ENCOUNTER_TRIGGER_JUMP)
+                Call(SetNpcVar, NPC_Goompa, 0, 1)
+                IfEq(AF_KMR_06, TRUE)
+                Else
+                    Set(AF_KMR_06, TRUE)
+                    Set(AF_KMR_07, FALSE)
+                EndIf
+            CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+                Call(SetNpcVar, NPC_Goompa, 0, 1)
+                IfEq(AF_KMR_07, TRUE)
+                Else
+                    Set(AF_KMR_06, FALSE)
+                    Set(AF_KMR_07, TRUE)
+                EndIf
+        EndSwitch
+        Wait(10)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Goompa_Run)
+    Else
+        Wait(10)
+        Call(GetNpcPos, NPC_Goompa, LVar0, LVar1, LVar2)
+        Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
+        Call(SetNpcPos, NPC_Goompa, NPC_DISPOSE_LOCATION)
+        Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(EnablePartnerAI)
+        Call(SetNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Goompa)))
+        Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Goompa)))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Goompa) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Goompa)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Goompa)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_Goompa)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_GE(STORY_CH0_GOOMPA_JOINED_PARTY)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcAI_Goompa)))
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Goompa)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Goompa)))
+    Switch(GB_StoryProgress)
+        CaseGe(STORY_CH0_GOOMPA_JOINED_PARTY)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndSwitch
+    Return
+    End
 };
 
 NpcData N(NpcData_GoombaFamily) = {

@@ -4,45 +4,45 @@
 #define NAMESPACE A(nok_01)
 
 EvtScript N(EVS_AnimateFlower) = {
-    EVT_SET(LVarA, LVar0)
-    EVT_LABEL(0)
-        EVT_CALL(TranslateModel, LVarA, 0, 2, 0)
-        EVT_WAIT(5)
-        EVT_CALL(TranslateModel, LVarA, 0, 0, 0)
-        EVT_WAIT(5)
-        EVT_CALL(TranslateModel, LVarA, 0, 2, 0)
-        EVT_WAIT(5)
-        EVT_CALL(TranslateModel, LVarA, 0, 0, 0)
-        EVT_WAIT(5)
-        EVT_CALL(RandInt, 30, LVar0)
-        EVT_ADD(LVar0, 30)
-        EVT_WAIT(LVar0)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0)
+    Label(0)
+        Call(TranslateModel, LVarA, 0, 2, 0)
+        Wait(5)
+        Call(TranslateModel, LVarA, 0, 0, 0)
+        Wait(5)
+        Call(TranslateModel, LVarA, 0, 2, 0)
+        Wait(5)
+        Call(TranslateModel, LVarA, 0, 0, 0)
+        Wait(5)
+        Call(RandInt, 30, LVar0)
+        Add(LVar0, 30)
+        Wait(LVar0)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SET(LVar0, MODEL_h1)
-    EVT_EXEC(N(EVS_AnimateFlower))
-    EVT_SET(LVar0, MODEL_h2)
-    EVT_EXEC(N(EVS_AnimateFlower))
-    EVT_SET(LVar0, MODEL_h3)
-    EVT_EXEC(N(EVS_AnimateFlower))
-    EVT_SET(LVar0, MODEL_h5)
-    EVT_EXEC(N(EVS_AnimateFlower))
-    EVT_SET(LVar0, MODEL_h7)
-    EVT_EXEC(N(EVS_AnimateFlower))
-    EVT_SET(LVar0, MODEL_h8)
-    EVT_EXEC(N(EVS_AnimateFlower))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Set(LVar0, MODEL_h1)
+    Exec(N(EVS_AnimateFlower))
+    Set(LVar0, MODEL_h2)
+    Exec(N(EVS_AnimateFlower))
+    Set(LVar0, MODEL_h3)
+    Exec(N(EVS_AnimateFlower))
+    Set(LVar0, MODEL_h5)
+    Exec(N(EVS_AnimateFlower))
+    Set(LVar0, MODEL_h7)
+    Exec(N(EVS_AnimateFlower))
+    Set(LVar0, MODEL_h8)
+    Exec(N(EVS_AnimateFlower))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

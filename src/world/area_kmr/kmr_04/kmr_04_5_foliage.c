@@ -40,101 +40,101 @@ API_CALLABLE(N(func_80240444_8CAD44)) {
 }
 
 EvtScript N(EVS_GotHammer) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_Lift)
-    EVT_CALL(GetPlayerPos, LVar5, LVar6, LVar7)
-    EVT_ADD(LVar6, 40)
-    EVT_CALL(MakeItemEntity, ITEM_HAMMER, LVar5, LVar6, LVar7, ITEM_SPAWN_MODE_DECORATION, 0)
-    EVT_SET(LVarC, LVar0)
-    EVT_ADD(LVar6, 16)
-    EVT_PLAY_EFFECT(EFFECT_GOT_ITEM_OUTLINE, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.0), LVar8)
-    EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 9, LVar5, LVar6, LVar7, EVT_FLOAT(1.0), 100)
-    EVT_EXEC(N(EVS_PlayUpgradeSong))
-    EVT_THREAD
-        EVT_WAIT(4 * DT)
-        EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
-        EVT_ADD(LVar4, 50)
-        EVT_ADD(LVar5, 2)
-        EVT_ADD(LVar3, 8)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar3, LVar4, LVar5, 20)
-        EVT_ADD(LVar3, -16)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar3, LVar4, LVar5, 20)
-    EVT_END_THREAD
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(MF_Unk_12, TRUE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DismissItemOutline, LVar8)
-    EVT_CALL(RemoveItemEntity, LVarC)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetPlayerAnimation, ANIM_MarioW1_Lift)
+    Call(GetPlayerPos, LVar5, LVar6, LVar7)
+    Add(LVar6, 40)
+    Call(MakeItemEntity, ITEM_HAMMER, LVar5, LVar6, LVar7, ITEM_SPAWN_MODE_DECORATION, 0)
+    Set(LVarC, LVar0)
+    Add(LVar6, 16)
+    PlayEffect(EFFECT_GOT_ITEM_OUTLINE, 0, LVar5, LVar6, LVar7, Float(1.0), LVar8)
+    PlayEffect(EFFECT_RADIAL_SHIMMER, 9, LVar5, LVar6, LVar7, Float(1.0), 100)
+    Exec(N(EVS_PlayUpgradeSong))
+    Thread
+        Wait(4 * DT)
+        Call(GetPlayerPos, LVar3, LVar4, LVar5)
+        Add(LVar4, 50)
+        Add(LVar5, 2)
+        Add(LVar3, 8)
+        PlayEffect(EFFECT_SPARKLES, 3, LVar3, LVar4, LVar5, 20)
+        Add(LVar3, -16)
+        PlayEffect(EFFECT_SPARKLES, 3, LVar3, LVar4, LVar5, 20)
+    EndThread
+    Loop(0)
+        Wait(1)
+        IfEq(MF_Unk_12, TRUE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DismissItemOutline, LVar8)
+    Call(RemoveItemEntity, LVarC)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnSearch_HammerBush) = {
-    EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(8.0), 0, EVT_FLOAT(300.0), EVT_FLOAT(19.0), EVT_FLOAT(-9.0))
-    EVT_SET(MF_Unk_12, FALSE)
-    EVT_EXEC(N(EVS_GotHammer))
-    EVT_CALL(N(GiveWoodenHammer))
-    EVT_WAIT(30 * DT)
-    EVT_CALL(N(SetMessageImage_HammerBlock))
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Inspect_FoundHammer, 160, 40)
-    EVT_SET(MF_Unk_12, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00AA)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
-    EVT_SET(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
-    EVT_CALL(ClearPartnerMoveHistory, NPC_PARTNER)
-    EVT_CALL(EnablePartnerAI)
-    EVT_THREAD
+    Call(AdjustCam, CAM_DEFAULT, Float(8.0), 0, Float(300.0), Float(19.0), Float(-9.0))
+    Set(MF_Unk_12, FALSE)
+    Exec(N(EVS_GotHammer))
+    Call(N(GiveWoodenHammer))
+    Wait(30 * DT)
+    Call(N(SetMessageImage_HammerBlock))
+    Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_FoundHammer, 160, 40)
+    Set(MF_Unk_12, TRUE)
+    Call(DisablePartnerAI, 0)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00AA)
+    Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
+    Set(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
+    Call(ClearPartnerMoveHistory, NPC_PARTNER)
+    Call(EnablePartnerAI)
+    Thread
 #if VERSION_PAL
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3 * DT))
+        Call(ResetCam, CAM_DEFAULT, Float(3 * DT))
 #else
-        EVT_CALL(ResetCam, CAM_DEFAULT, 3)
+        Call(ResetCam, CAM_DEFAULT, 3)
 #endif
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_OnSearchBush7) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_EXEC_WAIT(N(EVS_OnSearch_HammerBush))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
+        Return
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    ExecWait(N(EVS_OnSearch_HammerBush))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnSearchBush8) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(MakeLerp, 0, 85, 20 * DT, EASING_COS_IN_OUT)
-    EVT_LABEL(0)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, MODEL_o213, LVar0, 1, 0, 0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_OnSearch_HammerBush))
-    EVT_CALL(MakeLerp, 85, 0, 20 * DT, EASING_COS_IN_OUT)
-    EVT_LABEL(10)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, MODEL_o213, LVar0, 1, 0, 0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
+        Return
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(MakeLerp, 0, 85, 20 * DT, EASING_COS_IN_OUT)
+    Label(0)
+    Call(UpdateLerp)
+    Call(RotateModel, MODEL_o213, LVar0, 1, 0, 0)
+    Wait(1)
+    IfEq(LVar1, 1)
+        Goto(0)
+    EndIf
+    ExecWait(N(EVS_OnSearch_HammerBush))
+    Call(MakeLerp, 85, 0, 20 * DT, EASING_COS_IN_OUT)
+    Label(10)
+    Call(UpdateLerp)
+    Call(RotateModel, MODEL_o213, LVar0, 1, 0, 0)
+    Wait(1)
+    IfEq(LVar1, 1)
+        Goto(10)
+    EndIf
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 FoliageModelList N(Bush1_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o181);
@@ -404,34 +404,34 @@ BombTrigger N(BombPos_Tree2) = {
 };
 
 EvtScript N(EVS_OnShakeTree3) = {
-    EVT_IF_EQ(GF_KMR04_Tree3_Dolly, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(AF_KMR_09, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_WAIT(15)
-    EVT_CALL(MakeItemEntity, ITEM_DOLLY, 250, 132, -100, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_KMR04_Tree3_Dolly)
-    EVT_SET(AF_KMR_09, TRUE)
-    EVT_THREAD
-        EVT_LABEL(10)
-        EVT_IF_EQ(GF_KMR04_Tree3_Dolly, FALSE)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_CALL(GetCurrentPartnerID, LVar0)
-        EVT_IF_EQ(LVar0, PARTNER_GOOMPA)
-            EVT_CALL(DisablePlayerInput, TRUE)
-            EVT_WAIT(5)
-            EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00AB)
-            EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
-            EVT_CALL(EnablePartnerAI)
-            EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_KMR04_Tree3_Dolly, TRUE)
+        Return
+    EndIf
+    IfEq(AF_KMR_09, TRUE)
+        Return
+    EndIf
+    Wait(15)
+    Call(MakeItemEntity, ITEM_DOLLY, 250, 132, -100, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_KMR04_Tree3_Dolly)
+    Set(AF_KMR_09, TRUE)
+    Thread
+        Label(10)
+        IfEq(GF_KMR04_Tree3_Dolly, FALSE)
+            Wait(1)
+            Goto(10)
+        EndIf
+        Call(GetCurrentPartnerID, LVar0)
+        IfEq(LVar0, PARTNER_GOOMPA)
+            Call(DisablePlayerInput, TRUE)
+            Wait(5)
+            Call(DisablePartnerAI, 0)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00AB)
+            Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
+            Call(EnablePartnerAI)
+            Call(DisablePlayerInput, FALSE)
+        EndIf
+    EndThread
+    Return
+    End
 };
 
 FoliageModelList N(Tree3_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o192);
@@ -458,38 +458,38 @@ BombTrigger N(BombPos_Tree3) = {
 };
 
 EvtScript N(EVS_SetupFoliage) = {
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o402, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush2)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o415, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush3)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o409, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush4)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o412, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush5)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o399, 1, 0)
-    EVT_IF_GE(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
-        EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush6)))
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o410, 1, 0)
-        EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush6)))
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o410_1, 1, 0)
-    EVT_ELSE
-        EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush7)))
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o410, 1, 0)
-        EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush8)))
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o410_1, 1, 0)
-    EVT_END_IF
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush9)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o413, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o407, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree2)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o271, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree2)), 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree3)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o341, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree3)), 1, 0)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, Ref(N(SearchBush_Bush1)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o402, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush2)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o415, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush3)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o409, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush4)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o412, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush5)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o399, 1, 0)
+    IfGe(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
+        Set(LVar0, Ref(N(SearchBush_Bush6)))
+        BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o410, 1, 0)
+        Set(LVar0, Ref(N(SearchBush_Bush6)))
+        BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o410_1, 1, 0)
+    Else
+        Set(LVar0, Ref(N(SearchBush_Bush7)))
+        BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o410, 1, 0)
+        Set(LVar0, Ref(N(SearchBush_Bush8)))
+        BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o410_1, 1, 0)
+    EndIf
+    Set(LVar0, Ref(N(SearchBush_Bush9)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o413, 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree1)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o407, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree2)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o271, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree2)), 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree3)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o341, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree3)), 1, 0)
+    Return
+    End
 };

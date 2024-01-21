@@ -115,228 +115,228 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_ReturnHome) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Run)
-    EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Run)
+    Call(SetGoalToHome, ACTOR_SELF)
+    Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
+    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
-        EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_BurntHurt)
-            EVT_SET_CONST(LVar2, ANIM_AlbinoDino_BurntStill)
-            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-        EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_BurntHurt)
-            EVT_SET_CONST(LVar2, ANIM_AlbinoDino_BurntStill)
-            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_BurntStill)
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-        EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
-        EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_Recover)
-        EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Run)
-            EVT_SET_CONST(LVar2, ANIM_AlbinoDino_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Run)
-            EVT_EXEC_WAIT(EVS_Enemy_AirLift)
-        EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
-            EVT_RETURN
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseOrEq(EVENT_HIT_COMBO)
+        CaseOrEq(EVENT_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_Hurt)
+            ExecWait(EVS_Enemy_Hit)
+        EndCaseGroup
+        CaseEq(EVENT_BURN_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_BurntHurt)
+            SetConst(LVar2, ANIM_AlbinoDino_BurntStill)
+            ExecWait(EVS_Enemy_BurnHit)
+        CaseEq(EVENT_BURN_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_BurntHurt)
+            SetConst(LVar2, ANIM_AlbinoDino_BurntStill)
+            ExecWait(EVS_Enemy_BurnHit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_BurntStill)
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseEq(EVENT_SPIN_SMASH_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_Hurt)
+            ExecWait(EVS_Enemy_SpinSmashHit)
+        CaseEq(EVENT_SPIN_SMASH_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_Hurt)
+            ExecWait(EVS_Enemy_SpinSmashHit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_HurtStill)
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseEq(EVENT_SHOCK_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_Hurt)
+            ExecWait(EVS_Enemy_ShockHit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_Hurt)
+            ExecWait(EVS_Enemy_Knockback)
+            ExecWait(N(EVS_ReturnHome))
+        CaseEq(EVENT_SHOCK_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_Hurt)
+            ExecWait(EVS_Enemy_ShockHit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_HurtStill)
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
+        CaseOrEq(EVENT_AIR_LIFT_FAILED)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_Idle)
+            ExecWait(EVS_Enemy_NoDamageHit)
+        EndCaseGroup
+        CaseEq(EVENT_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_Hurt)
+            ExecWait(EVS_Enemy_Hit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_HurtStill)
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseEq(EVENT_RECOVER_STATUS)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_Idle)
+            ExecWait(EVS_Enemy_Recover)
+        CaseEq(EVENT_SCARE_AWAY)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_Run)
+            SetConst(LVar2, ANIM_AlbinoDino_Hurt)
+            ExecWait(EVS_Enemy_ScareAway)
+            Return
+        CaseEq(EVENT_BEGIN_AIR_LIFT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_Run)
+            ExecWait(EVS_Enemy_AirLift)
+        CaseEq(EVENT_BLOW_AWAY)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_AlbinoDino_Hurt)
+            ExecWait(EVS_Enemy_BlowAway)
+            Return
+        CaseDefault
+    EndSwitch
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_AddWalkQuakeFX) = {
-    EVT_SET(LVarA, 0)
-    EVT_LABEL(0)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(GetActorYaw, ACTOR_SELF, LVar3)
-        EVT_IF_EQ(LVar3, 0)
-            EVT_ADD(LVar0, 20)
-        EVT_ELSE
-            EVT_ADD(LVar0, -20)
-        EVT_END_IF
-        EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 25, 8, 45, 20, 0)
-        EVT_IF_GT(LVarA, 3)
-            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.2))
-            EVT_SET(LVarA, 0)
-        EVT_END_IF
-        EVT_ADD(LVarA, 1)
-        EVT_WAIT(2)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, 0)
+    Label(0)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Call(GetActorYaw, ACTOR_SELF, LVar3)
+        IfEq(LVar3, 0)
+            Add(LVar0, 20)
+        Else
+            Add(LVar0, -20)
+        EndIf
+        PlayEffect(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 25, 8, 45, 20, 0)
+        IfGt(LVarA, 3)
+            Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.2))
+            Set(LVarA, 0)
+        EndIf
+        Add(LVarA, 1)
+        Wait(2)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_EXEC_GET_TID(N(EVS_AddWalkQuakeFX), LVar9)
-    EVT_THREAD
-        EVT_LOOP(3)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ALBINO_DINO_STEP_A)
-            EVT_WAIT(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ALBINO_DINO_STEP_B)
-            EVT_WAIT(4)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Run)
-    EVT_WAIT(20)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVarF)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_THREAD
-                EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                EVT_CALL(AddGoalPos, ACTOR_SELF, -100, 0, 0)
-                EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(12.0))
-                EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-                EVT_KILL_THREAD(LVar9)
-            EVT_END_THREAD
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_WAIT(30)
-            EVT_IF_EQ(LVarF, HIT_RESULT_LUCKY)
-                EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_END_IF
-            EVT_WAIT(40)
-            EVT_CALL(YieldTurn)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
-            EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-            EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
-    EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
-        EVT_CALL(AddGoalPos, ACTOR_SELF, 12, 0, 0)
-    EVT_ELSE
-        EVT_CALL(AddGoalPos, ACTOR_SELF, 30, 0, 0)
-    EVT_END_IF
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(12.0))
-    EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(1.5))
-    EVT_END_THREAD
-    EVT_KILL_THREAD(LVar9)
-    EVT_WAIT(2)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    ExecGetTID(N(EVS_AddWalkQuakeFX), LVar9)
+    Thread
+        Loop(3)
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_ALBINO_DINO_STEP_A)
+            Wait(4)
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_ALBINO_DINO_STEP_B)
+            Wait(4)
+        EndLoop
+    EndThread
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Run)
+    Wait(20)
+    Call(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVarF)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            Thread
+                Call(SetGoalToTarget, ACTOR_SELF)
+                Call(AddGoalPos, ACTOR_SELF, -100, 0, 0)
+                Call(SetActorSpeed, ACTOR_SELF, Float(12.0))
+                Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+                KillThread(LVar9)
+            EndThread
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Wait(30)
+            IfEq(LVarF, HIT_RESULT_LUCKY)
+                Call(SetGoalToTarget, ACTOR_SELF)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EndIf
+            Wait(40)
+            Call(YieldTurn)
+            Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+            Call(SetActorYaw, ACTOR_SELF, 180)
+            ExecWait(N(EVS_ReturnHome))
+            Call(SetActorYaw, ACTOR_SELF, 0)
+            Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
+            Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Return
+        EndCaseGroup
+    EndSwitch
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetStatusFlags, ACTOR_SELF, LVarA)
+    IfFlag(LVarA, STATUS_FLAG_SHRINK)
+        Call(AddGoalPos, ACTOR_SELF, 12, 0, 0)
+    Else
+        Call(AddGoalPos, ACTOR_SELF, 30, 0, 0)
+    EndIf
+    Call(SetActorSpeed, ACTOR_SELF, Float(12.0))
+    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Thread
+        Call(ShakeCam, CAM_BATTLE, 0, 4, Float(1.5))
+    EndThread
+    KillThread(LVar9)
+    Wait(2)
+    Call(SetGoalToTarget, ACTOR_SELF)
     // invalid status field has 24% chance, but no status and doesn't have STATUS_FLAG_80000000 set
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 24, DMG_TACKLE, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_SWITCH(LVarF)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar0, 40)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ALBINO_DINO_STEP_B)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Idle)
-            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(1.0))
-            EVT_WAIT(10)
-            EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 24, DMG_TACKLE, BS_FLAGS1_TRIGGER_EVENTS)
+    Switch(LVarF)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Add(LVar0, 40)
+            Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
+            Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_ALBINO_DINO_STEP_B)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Idle)
+            Call(ShakeCam, CAM_BATTLE, 0, 3, Float(1.0))
+            Wait(10)
+            Call(YieldTurn)
+            ExecWait(N(EVS_ReturnHome))
+        EndCaseGroup
+    EndSwitch
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };

@@ -19,8 +19,8 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(EVS_SetupMusic) = {
-    EVT_CALL(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, 8)
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_METAL)
-    EVT_RETURN
-    EVT_END
+    Call(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, 8)
+    Call(UseDoorSounds, DOOR_SOUNDS_METAL)
+    Return
+    End
 };

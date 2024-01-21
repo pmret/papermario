@@ -19,10 +19,10 @@ MobileAISettings N(AISettings_Pokey) = {
 };
 
 EvtScript N(EVS_NpcAI_Pokey) = {
-    EVT_CALL(N(SetPokeyInstigatorValue))
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_Pokey)))
-    EVT_RETURN
-    EVT_END
+    Call(N(SetPokeyInstigatorValue))
+    Call(BasicAI_Main, Ref(N(AISettings_Pokey)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Pokey) = {

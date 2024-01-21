@@ -1,110 +1,110 @@
 #include "dgb_02.h"
 
 EvtScript N(EVS_ExitDoors_dgb_03_1) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_CREAKY)
-    EVT_SET(LVar0, dgb_02_ENTRY_0)
-    EVT_SET(LVar1, COLLIDER_deilittw)
-    EVT_SET(LVar2, MODEL_o30)
-    EVT_SET(LVar3, MODEL_o31)
-    EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_03"), dgb_03_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(DisablePlayerInput, TRUE)
+    Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
+    Set(LVar0, dgb_02_ENTRY_0)
+    Set(LVar1, COLLIDER_deilittw)
+    Set(LVar2, MODEL_o30)
+    Set(LVar3, MODEL_o31)
+    Exec(ExitDoubleDoor)
+    Wait(17)
+    Call(GotoMap, Ref("dgb_03"), dgb_03_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitDoors_dgb_01_1) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_CREAKY)
-    EVT_SET(LVar0, dgb_02_ENTRY_1)
-    EVT_SET(LVar1, COLLIDER_deilitte)
-    EVT_SET(LVar2, MODEL_o102)
-    EVT_SET(LVar3, MODEL_o101)
-    EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_01"), dgb_01_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(DisablePlayerInput, TRUE)
+    Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
+    Set(LVar0, dgb_02_ENTRY_1)
+    Set(LVar1, COLLIDER_deilitte)
+    Set(LVar2, MODEL_o102)
+    Set(LVar3, MODEL_o101)
+    Exec(ExitDoubleDoor)
+    Wait(17)
+    Call(GotoMap, Ref("dgb_01"), dgb_01_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitDoor_dgb_07_0) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_BASIC)
-    EVT_SET(LVar0, dgb_02_ENTRY_2)
-    EVT_SET(LVar1, COLLIDER_deilittnw)
-    EVT_SET(LVar2, MODEL_o76)
-    EVT_SET(LVar3, DOOR_SWING_OUT)
-    EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_07"), dgb_07_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(DisablePlayerInput, TRUE)
+    Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
+    Set(LVar0, dgb_02_ENTRY_2)
+    Set(LVar1, COLLIDER_deilittnw)
+    Set(LVar2, MODEL_o76)
+    Set(LVar3, DOOR_SWING_OUT)
+    Exec(ExitSingleDoor)
+    Wait(17)
+    Call(GotoMap, Ref("dgb_07"), dgb_07_ENTRY_0)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitDoor_dgb_11_0) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_BASIC)
-    EVT_SET(LVar0, dgb_02_ENTRY_3)
-    EVT_SET(LVar1, COLLIDER_deilittne)
-    EVT_SET(LVar2, MODEL_o123)
-    EVT_SET(LVar3, DOOR_SWING_OUT)
-    EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_11"), dgb_11_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(DisablePlayerInput, TRUE)
+    Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
+    Set(LVar0, dgb_02_ENTRY_3)
+    Set(LVar1, COLLIDER_deilittne)
+    Set(LVar2, MODEL_o123)
+    Set(LVar3, DOOR_SWING_OUT)
+    Exec(ExitSingleDoor)
+    Wait(17)
+    Call(GotoMap, Ref("dgb_11"), dgb_11_ENTRY_0)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(dgb_02_ENTRY_0)
-            EVT_CALL(UseDoorSounds, DOOR_SOUNDS_CREAKY)
-            EVT_SET(LVar2, MODEL_o30)
-            EVT_SET(LVar3, MODEL_o31)
-            EVT_EXEC_WAIT(EnterDoubleDoor)
-        EVT_CASE_EQ(dgb_02_ENTRY_1)
-            EVT_CALL(UseDoorSounds, DOOR_SOUNDS_CREAKY)
-            EVT_SET(LVar2, MODEL_o102)
-            EVT_SET(LVar3, MODEL_o101)
-            EVT_EXEC_WAIT(EnterDoubleDoor)
-        EVT_CASE_EQ(dgb_02_ENTRY_2)
-            EVT_CALL(UseDoorSounds, DOOR_SOUNDS_BASIC)
-            EVT_SET(LVar2, MODEL_o76)
-            EVT_SET(LVar3, DOOR_SWING_OUT)
-            EVT_EXEC_WAIT(EnterSingleDoor)
-        EVT_CASE_EQ(dgb_02_ENTRY_3)
-            EVT_CALL(UseDoorSounds, DOOR_SOUNDS_BASIC)
-            EVT_SET(LVar2, MODEL_o123)
-            EVT_SET(LVar3, DOOR_SWING_OUT)
-            EVT_EXEC_WAIT(EnterSingleDoor)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(dgb_02_ENTRY_0)
+            Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
+            Set(LVar2, MODEL_o30)
+            Set(LVar3, MODEL_o31)
+            ExecWait(EnterDoubleDoor)
+        CaseEq(dgb_02_ENTRY_1)
+            Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
+            Set(LVar2, MODEL_o102)
+            Set(LVar3, MODEL_o101)
+            ExecWait(EnterDoubleDoor)
+        CaseEq(dgb_02_ENTRY_2)
+            Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
+            Set(LVar2, MODEL_o76)
+            Set(LVar3, DOOR_SWING_OUT)
+            ExecWait(EnterSingleDoor)
+        CaseEq(dgb_02_ENTRY_3)
+            Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
+            Set(LVar2, MODEL_o123)
+            Set(LVar3, DOOR_SWING_OUT)
+            ExecWait(EnterSingleDoor)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_TUBBAS_MANOR)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
-        EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
-    EVT_END_IF
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_dgb_03_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_dgb_01_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilitte, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoor_dgb_07_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittnw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoor_dgb_11_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittne, 1, 0)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_TUBBAS_MANOR)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_DEFAULT()
+    IfLt(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
+        Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    EndIf
+    BindTrigger(Ref(N(EVS_ExitDoors_dgb_03_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitDoors_dgb_01_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilitte, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitDoor_dgb_07_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittnw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitDoor_dgb_11_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittne, 1, 0)
+    Exec(N(EVS_SetupMusic))
+    Exec(N(EVS_EnterMap))
+    Return
+    End
 };

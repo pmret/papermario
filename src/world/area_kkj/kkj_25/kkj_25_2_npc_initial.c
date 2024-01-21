@@ -11,70 +11,70 @@
 #include "world/common/npc/Twink.h"
 
 EvtScript N(EVS_NpcIdle_Bowser) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_LOOP(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_NE(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_Bowser_01, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, -75)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 1000)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-7.0))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_END_THREAD
-    EVT_CALL(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE)
-    EVT_CALL(StopSound, SOUND_LRAW_KPA_ARENA_TURN_ON)
-    EVT_CALL(StartBossBattle, SONG_BOWSER_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Loop(0)
+        Call(GetSelfVar, 0, LVar0)
+        IfNe(LVar0, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Thread
+        Call(GetNpcPos, NPC_Bowser_01, LVar0, LVar1, LVar2)
+        Add(LVar0, -75)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(SetCamDistance, CAM_DEFAULT, 1000)
+        Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-7.0))
+        Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    EndThread
+    Call(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE)
+    Call(StopSound, SOUND_LRAW_KPA_ARENA_TURN_ON)
+    Call(StartBossBattle, SONG_BOWSER_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Bowser) = {
     #define NAME_SUFFIX
-    EVT_CALL(PlaySound, SOUND_LRAW_KPA_ARENA_ACTIVE)
-    EVT_EXEC(N(EVS_Scene_PeachBreaksFree))
-    EVT_RETURN
-    EVT_END
+    Call(PlaySound, SOUND_LRAW_KPA_ARENA_ACTIVE)
+    Exec(N(EVS_Scene_PeachBreaksFree))
+    Return
+    End
     #define NAME_SUFFIX _Npc1
 };
 
 EvtScript N(EVS_NpcInit_Bowser) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Bowser)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Bowser)))
-    EVT_CALL(SetNpcPos, NPC_Bowser_01, 350, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Bowser)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Bowser)))
+    Call(SetNpcPos, NPC_Bowser_01, 350, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Kammy_Broom) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_LOOP(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_NE(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_2000)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_TINT, 0, 0, 0, 0)
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_WAIT(1)
-    EVT_CALL(GetNpcPos, NPC_Peach_01, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE)
-    EVT_CALL(StopSound, SOUND_LRAW_KPA_ARENA_ACTIVE)
-    EVT_CALL(StartBossBattle, SONG_BOWSER_BATTLE)
-    EVT_CALL(EnablePartnerAI)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Loop(0)
+        Call(GetSelfVar, 0, LVar0)
+        IfNe(LVar0, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(SetPlayerImgFXFlags, IMGFX_FLAG_2000)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_TINT, 0, 0, 0, 0)
+    Call(HidePlayerShadow, TRUE)
+    Call(DisablePartnerAI, 0)
+    Wait(1)
+    Call(GetNpcPos, NPC_Peach_01, LVar0, LVar1, LVar2)
+    Call(SetPlayerPos, LVar0, LVar1, LVar2)
+    Call(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE)
+    Call(StopSound, SOUND_LRAW_KPA_ARENA_ACTIVE)
+    Call(StartBossBattle, SONG_BOWSER_BATTLE)
+    Call(EnablePartnerAI)
+    Return
+    End
 };
 
 API_CALLABLE(N(func_80240020_B06A20)) {
@@ -85,64 +85,64 @@ API_CALLABLE(N(func_80240020_B06A20)) {
 }
 
 EvtScript N(EVS_NpcDefeat_Kammy_Broom) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_CALL(N(func_80240020_B06A20))
-    EVT_SET(GF_KKJ25_Defeated_Kammy, TRUE)
+    Call(GetBattleOutcome, LVar0)
+    Call(N(func_80240020_B06A20))
+    Set(GF_KKJ25_Defeated_Kammy, TRUE)
     // reload the map in the 'midpoint' configuration
-    EVT_CALL(GotoMap, EVT_PTR("kkj_25"), kkj_25_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(GotoMap, Ref("kkj_25"), kkj_25_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAux_Kammy_Broom) = {
-    EVT_SET(LVar3, 1)
-    EVT_LOOP(0)
-        EVT_LOOP(5)
-            EVT_CALL(GetNpcPos, NPC_Kammy_01, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar1, LVar3)
-            EVT_CALL(SetNpcPos, NPC_Kammy_01, LVar0, LVar1, LVar2)
-            EVT_WAIT(2)
-        EVT_END_LOOP
-        EVT_MUL(LVar3, -1)
-        EVT_WAIT(3)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(LVar3, 1)
+    Loop(0)
+        Loop(5)
+            Call(GetNpcPos, NPC_Kammy_01, LVar0, LVar1, LVar2)
+            Add(LVar1, LVar3)
+            Call(SetNpcPos, NPC_Kammy_01, LVar0, LVar1, LVar2)
+            Wait(2)
+        EndLoop
+        Mul(LVar3, -1)
+        Wait(3)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kammy_Broom) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kammy_Broom)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Kammy_Broom)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Kammy_Broom)))
-    EVT_CALL(SetNpcPos, NPC_Kammy_01, 460, 10, 0)
-    EVT_CALL(SetNpcYaw, NPC_Kammy_01, 270)
-    EVT_CALL(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_Anim04)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Kammy_Broom)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Kammy_Broom)))
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Kammy_Broom)))
+    Call(SetNpcPos, NPC_Kammy_01, 460, 10, 0)
+    Call(SetNpcYaw, NPC_Kammy_01, 270)
+    Call(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_Anim04)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kammy) = {
-    EVT_CALL(SetNpcPos, NPC_Kammy_02, 300, -100, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Kammy_02, ANIM_BattleKammy_Anim02)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Kammy_02, 300, -100, 0)
+    Call(SetNpcAnimation, NPC_Kammy_02, ANIM_BattleKammy_Anim02)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_BattleKooper_01) = {
-    EVT_CALL(SetNpcPos, NPC_Peach_01, 400, 0, -30)
-    EVT_CALL(SetNpcYaw, NPC_Peach_01, 270)
-    EVT_CALL(SetNpcAnimation, NPC_Peach_01, ANIM_Peach2_TiedIdle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Peach_01, 400, 0, -30)
+    Call(SetNpcYaw, NPC_Peach_01, 270)
+    Call(SetNpcAnimation, NPC_Peach_01, ANIM_Peach2_TiedIdle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Twink) = {
-    EVT_CALL(SetNpcAnimation, NPC_Twink_01, ANIM_Twink_Idle)
-    EVT_CALL(EnableNpcShadow, NPC_Twink_01, FALSE)
-    EVT_CALL(SetNpcPos, NPC_Twink_01, 300, -100, 0)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_Twink_01, ANIM_Twink_Idle)
+    Call(EnableNpcShadow, NPC_Twink_01, FALSE)
+    Call(SetNpcPos, NPC_Twink_01, 300, -100, 0)
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Bowser)[] = {

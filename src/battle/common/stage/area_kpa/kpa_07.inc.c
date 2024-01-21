@@ -6,30 +6,30 @@
 #include "battle/common/stage/lib/TexturePanner.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_SET(LVar0, MODEL_kemu2)
-    EVT_SET(LVar1, TEX_PANNER_0)
-    EVT_SET(LVar2, -200)
-    EVT_SET(LVar3, 0)
-    EVT_EXEC(N(EVS_TexturePanMain))
-    EVT_SET(LVar0, MODEL_kemu1)
-    EVT_SET(LVar1, TEX_PANNER_1)
-    EVT_SET(LVar2, -120)
-    EVT_SET(LVar3, 0)
-    EVT_EXEC(N(EVS_TexturePanMain))
-    EVT_SET(LVar0, MODEL_kemu3)
-    EVT_SET(LVar1, TEX_PANNER_2)
-    EVT_SET(LVar2, -100)
-    EVT_SET(LVar3, 0)
-    EVT_EXEC(N(EVS_TexturePanMain))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Set(LVar0, MODEL_kemu2)
+    Set(LVar1, TEX_PANNER_0)
+    Set(LVar2, -200)
+    Set(LVar3, 0)
+    Exec(N(EVS_TexturePanMain))
+    Set(LVar0, MODEL_kemu1)
+    Set(LVar1, TEX_PANNER_1)
+    Set(LVar2, -120)
+    Set(LVar3, 0)
+    Exec(N(EVS_TexturePanMain))
+    Set(LVar0, MODEL_kemu3)
+    Set(LVar1, TEX_PANNER_2)
+    Set(LVar2, -100)
+    Set(LVar3, 0)
+    Exec(N(EVS_TexturePanMain))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

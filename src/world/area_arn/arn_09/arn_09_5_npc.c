@@ -18,31 +18,31 @@ API_CALLABLE(N(PlaySpringAnimation)) {
 }
 
 EvtScript N(EVS_NpcIdle_TubbasHeart) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, 0, 25, -10, 6 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SPRING, SOUND_SPACE_DEFAULT)
-    EVT_CALL(N(PlaySpringAnimation))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, 0, 200, 0, 15 * DT)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_SET(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WELL)
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
+    Call(SetNpcJumpscale, NPC_SELF, Float(2.5))
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, 0, 25, -10, 6 * DT)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_SPRING, SOUND_SPACE_DEFAULT)
+    Call(N(PlaySpringAnimation))
+    Call(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
+    Call(SetNpcJumpscale, NPC_SELF, Float(2.5))
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, 0, 200, 0, 15 * DT)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Set(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WELL)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TubbasHeart) = {
-    EVT_IF_NE(GB_StoryProgress, STORY_CH3_HEART_FLED_SECOND_TUNNEL)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_ELSE
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TubbasHeart)))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfNe(GB_StoryProgress, STORY_CH3_HEART_FLED_SECOND_TUNNEL)
+        Call(RemoveNpc, NPC_SELF)
+    Else
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TubbasHeart)))
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_TubbasHeart) = {

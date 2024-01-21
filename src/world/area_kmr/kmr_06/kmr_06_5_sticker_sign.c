@@ -218,44 +218,44 @@ API_CALLABLE(N(DeleteSticker)) {
 }
 
 EvtScript N(EVS_OnInspect_StickerSign) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SUSPEND_GROUP(EVT_GROUP_01)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Sign_EatMushroomsTip, 160, 40)
-    EVT_IF_EQ(GF_KMR06_Item_Mushroom, FALSE)
-        EVT_IF_EQ(AF_JAN01_TreeDrop_StarPiece, FALSE)
-            EVT_SET(AF_JAN01_TreeDrop_StarPiece, TRUE)
-            EVT_THREAD
-                EVT_WAIT(2)
-                EVT_SETF(LVar0, EVT_FLOAT(0.0))
-                EVT_LOOP(18)
-                    EVT_ADDF(LVar0, EVT_FLOAT(10.0))
-                    EVT_CALL(N(SetStickerRotation), 0, LVar0)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-                EVT_CALL(N(SetStickerRotation), 0, 0)
-            EVT_END_THREAD
-            EVT_THREAD
-                EVT_CALL(N(SetStickerGravity), EVT_FLOAT(0.6))
-                EVT_CALL(N(JumpStickerTo), 362, 0, 40, 23)
-                EVT_CALL(N(DeleteSticker))
-                EVT_CALL(MakeItemEntity, ITEM_MUSHROOM, 362, 0, 40, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_KMR06_Item_Mushroom)
-            EVT_END_THREAD
-            EVT_WAIT(10)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RESUME_GROUP(EVT_GROUP_01)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    SuspendGroup(EVT_GROUP_01)
+    Call(DisablePlayerInput, TRUE)
+    Call(ShowMessageAtScreenPos, MSG_Menus_Sign_EatMushroomsTip, 160, 40)
+    IfEq(GF_KMR06_Item_Mushroom, FALSE)
+        IfEq(AF_JAN01_TreeDrop_StarPiece, FALSE)
+            Set(AF_JAN01_TreeDrop_StarPiece, TRUE)
+            Thread
+                Wait(2)
+                SetF(LVar0, Float(0.0))
+                Loop(18)
+                    AddF(LVar0, Float(10.0))
+                    Call(N(SetStickerRotation), 0, LVar0)
+                    Wait(1)
+                EndLoop
+                Call(N(SetStickerRotation), 0, 0)
+            EndThread
+            Thread
+                Call(N(SetStickerGravity), Float(0.6))
+                Call(N(JumpStickerTo), 362, 0, 40, 23)
+                Call(N(DeleteSticker))
+                Call(MakeItemEntity, ITEM_MUSHROOM, 362, 0, 40, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_KMR06_Item_Mushroom)
+            EndThread
+            Wait(10)
+        EndIf
+    EndIf
+    ResumeGroup(EVT_GROUP_01)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupStickerSign) = {
-    EVT_IF_EQ(GF_KMR06_Item_Mushroom, FALSE)
-        EVT_CALL(N(CreateSticker), ITEM_MUSHROOM)
-        EVT_CALL(N(SetStickerPos), 362, 40, -17)
-    EVT_END_IF
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnInspect_StickerSign)), TRIGGER_WALL_PRESS_A, COLLIDER_o852, 1, 0)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_KMR06_Item_Mushroom, FALSE)
+        Call(N(CreateSticker), ITEM_MUSHROOM)
+        Call(N(SetStickerPos), 362, 40, -17)
+    EndIf
+    BindTrigger(Ref(N(EVS_OnInspect_StickerSign)), TRIGGER_WALL_PRESS_A, COLLIDER_o852, 1, 0)
+    Return
+    End
 };

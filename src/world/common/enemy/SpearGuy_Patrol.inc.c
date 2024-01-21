@@ -11,9 +11,9 @@ MobileAISettings N(AISettings_SpearGuy_Patrol) = {
 };
 
 EvtScript N(EVS_NpcAI_SpearGuy_Patrol) = {
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(AISettings_SpearGuy_Patrol)))
-    EVT_RETURN
-    EVT_END
+    Call(N(PatrolNoAttackAI_Main), Ref(N(AISettings_SpearGuy_Patrol)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_SpearGuy_Patrol) = {

@@ -9,9 +9,9 @@ GuardAISettings N(AISettings_Toad_Guard) = {
 };
 
 EvtScript N(EVS_NpcAI_Toad_Guard) = {
-    EVT_CALL(N(GuardAI_Main), EVT_PTR(N(AISettings_Toad_Guard)))
-    EVT_RETURN
-    EVT_END
+    Call(N(GuardAI_Main), Ref(N(AISettings_Toad_Guard)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Toad_Guard) = {

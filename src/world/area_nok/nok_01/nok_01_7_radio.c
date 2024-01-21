@@ -56,77 +56,77 @@ API_CALLABLE(N(SetTradeEventStartTime)) {
 }
 
 EvtScript N(EVS_InitiateTradingEvent) = {
-    EVT_SWITCH(GB_TradingEvent_Count)
-        EVT_CASE_EQ(0)
-            EVT_IF_LT(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
-                EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-                    EVT_CALL(SwitchMessage, MSG_CH1_0028)
-                EVT_ELSE
-                    EVT_CALL(SwitchMessage, MSG_CH1_0029)
-                EVT_END_IF
-            EVT_ELSE
-                EVT_CALL(SwitchMessage, MSG_CH1_002A)
-                EVT_SET(GF_TradingEvent1_Active, TRUE)
-                EVT_CALL(N(SetTradeEventStartTime))
-            EVT_END_IF
-        EVT_CASE_EQ(1)
-            EVT_IF_LT(GB_StoryProgress, STORY_CH3_BEGAN_PEACH_MISSION)
-                EVT_CALL(SwitchMessage, MSG_CH1_002E)
-            EVT_ELSE
-                EVT_CALL(SwitchMessage, MSG_CH1_002B)
-                EVT_SET(GF_TradingEvent2_Active, TRUE)
-                EVT_CALL(N(SetTradeEventStartTime))
-            EVT_END_IF
-        EVT_CASE_EQ(2)
-            EVT_IF_LT(GB_StoryProgress, STORY_CH5_STAR_SPRIT_DEPARTED)
-                EVT_CALL(SwitchMessage, MSG_CH1_002E)
-            EVT_ELSE
-                EVT_CALL(SwitchMessage, MSG_CH1_002C)
-                EVT_SET(GF_TradingEvent3_Active, TRUE)
-                EVT_CALL(N(SetTradeEventStartTime))
-            EVT_END_IF
-        EVT_CASE_EQ(3)
-            EVT_CALL(SwitchMessage, MSG_CH1_002D)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_TradingEvent_Count)
+        CaseEq(0)
+            IfLt(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
+                IfLt(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
+                    Call(SwitchMessage, MSG_CH1_0028)
+                Else
+                    Call(SwitchMessage, MSG_CH1_0029)
+                EndIf
+            Else
+                Call(SwitchMessage, MSG_CH1_002A)
+                Set(GF_TradingEvent1_Active, TRUE)
+                Call(N(SetTradeEventStartTime))
+            EndIf
+        CaseEq(1)
+            IfLt(GB_StoryProgress, STORY_CH3_BEGAN_PEACH_MISSION)
+                Call(SwitchMessage, MSG_CH1_002E)
+            Else
+                Call(SwitchMessage, MSG_CH1_002B)
+                Set(GF_TradingEvent2_Active, TRUE)
+                Call(N(SetTradeEventStartTime))
+            EndIf
+        CaseEq(2)
+            IfLt(GB_StoryProgress, STORY_CH5_STAR_SPRIT_DEPARTED)
+                Call(SwitchMessage, MSG_CH1_002E)
+            Else
+                Call(SwitchMessage, MSG_CH1_002C)
+                Set(GF_TradingEvent3_Active, TRUE)
+                Call(N(SetTradeEventStartTime))
+            EndIf
+        CaseEq(3)
+            Call(SwitchMessage, MSG_CH1_002D)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Interact_Radio) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_WAIT(2)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_RideLaki)
-    EVT_WAIT(7)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_ADD(AB_NOK_0, 1)
-    EVT_IF_GE(AB_NOK_0, 4)
-        EVT_SET(AB_NOK_0, 0)
-    EVT_END_IF
-    EVT_IF_NE(GF_MAC05_SimonGotMelody, TRUE)
-        EVT_IF_EQ(AB_NOK_0, 2)
-            EVT_ADD(AB_NOK_0, 1)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(N(SetRadioStation), AB_NOK_0)
-    EVT_SWITCH(AB_NOK_0)
-        EVT_CASE_EQ(0) // island sounds
-            EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_002F, 160, 40)
-        EVT_CASE_EQ(1) // golden oldies
-            EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_0030, 160, 40)
-        EVT_CASE_EQ(2) // hot hits
-            EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_0031, 160, 40)
-        EVT_CASE_EQ(3) // information
-            EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_0032, 160, 40)
-            EVT_EXEC_WAIT(N(EVS_InitiateTradingEvent))
-    EVT_END_SWITCH
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Wait(2)
+    Call(SetPlayerAnimation, ANIM_MarioW2_RideLaki)
+    Wait(7)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Add(AB_NOK_0, 1)
+    IfGe(AB_NOK_0, 4)
+        Set(AB_NOK_0, 0)
+    EndIf
+    IfNe(GF_MAC05_SimonGotMelody, TRUE)
+        IfEq(AB_NOK_0, 2)
+            Add(AB_NOK_0, 1)
+        EndIf
+    EndIf
+    Call(N(SetRadioStation), AB_NOK_0)
+    Switch(AB_NOK_0)
+        CaseEq(0) // island sounds
+            Call(ShowMessageAtScreenPos, MSG_CH1_002F, 160, 40)
+        CaseEq(1) // golden oldies
+            Call(ShowMessageAtScreenPos, MSG_CH1_0030, 160, 40)
+        CaseEq(2) // hot hits
+            Call(ShowMessageAtScreenPos, MSG_CH1_0031, 160, 40)
+        CaseEq(3) // information
+            Call(ShowMessageAtScreenPos, MSG_CH1_0032, 160, 40)
+            ExecWait(N(EVS_InitiateTradingEvent))
+    EndSwitch
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupRadio) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Interact_Radio)), TRIGGER_WALL_PRESS_A, COLLIDER_o235, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_Interact_Radio)), TRIGGER_WALL_PRESS_A, COLLIDER_o235, 1, 0)
+    Return
+    End
 };

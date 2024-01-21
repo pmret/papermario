@@ -7,17 +7,17 @@
 #include "battle/common/stage/lib/Snowflakes.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetGroupVisibility, MODEL_p1, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, MODEL_yuki, MODEL_GROUP_HIDDEN)
-    EVT_EXEC(N(EVS_SpawnSnowfall))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetGroupVisibility, MODEL_p1, MODEL_GROUP_HIDDEN)
+    Call(SetGroupVisibility, MODEL_yuki, MODEL_GROUP_HIDDEN)
+    Exec(N(EVS_SpawnSnowfall))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

@@ -59,444 +59,444 @@ extern EvtScript N(EVS_UseMove_ImplB);
 extern EvtScript N(EVS_UseMove_ImplC);
 
 EvtScript N(EVS_UseMove) = {
-    EVT_SET(LFlagA, FALSE)
-    EVT_CALL(ShowActionHud, TRUE)
-    EVT_CALL(N(InitializeHitCounter))
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(0)
-            EVT_SET(LVarC, 1)
-            EVT_EXEC_WAIT(N(EVS_UseMove_ImplA))
-        EVT_CASE_EQ(1)
-            EVT_SET(LVarC, 2)
-            EVT_EXEC_WAIT(N(EVS_UseMove_ImplB))
-        EVT_CASE_EQ(2)
-            EVT_SET(LVarC, 3)
-            EVT_EXEC_WAIT(N(EVS_UseMove_ImplC))
-    EVT_END_SWITCH
-    EVT_CALL(N(StoreHitCountRecord))
-    EVT_RETURN
-    EVT_END
+    Set(LFlagA, FALSE)
+    Call(ShowActionHud, TRUE)
+    Call(N(InitializeHitCounter))
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    Switch(LVar1)
+        CaseEq(0)
+            Set(LVarC, 1)
+            ExecWait(N(EVS_UseMove_ImplA))
+        CaseEq(1)
+            Set(LVarC, 2)
+            ExecWait(N(EVS_UseMove_ImplB))
+        CaseEq(2)
+            Set(LVarC, 3)
+            ExecWait(N(EVS_UseMove_ImplC))
+    EndSwitch
+    Call(N(StoreHitCountRecord))
+    Return
+    End
 };
 
 EvtScript N(EVS_UseMove_ImplA) = {
-    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_init)
-    EVT_CALL(SetActionDifficultyTable, EVT_PTR(N(DifficultyTable)))
-    EVT_EXEC_WAIT(N(EVS_JumpSupport_Approach))
-    EVT_EXEC_WAIT(N(EVS_JumpSupport_B))
-    EVT_CALL(action_command_jump_start, LVarA, 1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_34)
-    EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
-    EVT_CALL(func_80274A18, LVarA, 0)
-    EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
-    EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_CALL(GetPlayerActionSuccess, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(FALSE)
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(EVS_JumpSupport_G))
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CHILD_THREAD
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_27)
-        EVT_WAIT(5)
-        EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_35)
-    EVT_END_CHILD_THREAD
-    EVT_CALL(GetActionResult, LVarE)
-    EVT_CALL(N(IncrementHitCounter))
-    EVT_SET(LVarD, 0)
-    EVT_SET(LVarF, 0)
-    EVT_SET(LFlag0, FALSE)
-    EVT_LABEL(10)
-        EVT_CHILD_THREAD
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_27)
-            EVT_WAIT(5)
-            EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_35)
-        EVT_END_CHILD_THREAD
-        EVT_CALL(CloseActionCommandInfo)
-        EVT_CALL(SetActionDifficultyTable, EVT_PTR(N(DifficultyTable)))
-        EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-        EVT_CALL(action_command_jump_init)
-        EVT_SET(LVarA, 24)
-        EVT_SWITCH(LVarF)
-            EVT_CASE_EQ(0)
-                EVT_CALL(action_command_jump_start, LVarA, 1)
-            EVT_CASE_EQ(1)
-                EVT_CALL(action_command_jump_start, LVarA, 2)
-            EVT_CASE_EQ(2)
-                EVT_CALL(action_command_jump_start, LVarA, 3)
-            EVT_CASE_EQ(3)
-                EVT_CALL(action_command_jump_start, LVarA, 4)
-            EVT_CASE_DEFAULT
-                EVT_CALL(action_command_jump_start, LVarA, 5)
-        EVT_END_SWITCH
-        EVT_SUB(LVarD, 1)
-        EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_SpinFall)
-        EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-        EVT_IF_EQ(LVarF, 0)
-            EVT_CALL(func_80274A18, 24, 3)
-        EVT_ELSE
-            EVT_CALL(func_80274A18, 24, 4)
-        EVT_END_IF
-        EVT_CALL(GetCommandAutoSuccess, LVar1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_IF_GE(LVarF, 3)
-                EVT_SET(LFlag0, TRUE)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(N(GetHitChance))
-        EVT_IF_GE(LVarF, LVar0)
-            EVT_SET(LFlag0, TRUE)
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_CALL(GetPlayerActionSuccess, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_GT(0)
-                EVT_IF_EQ(LFlag0, FALSE)
-                    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
-                    EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, BS_FLAGS1_NICE_HIT)
-                EVT_ELSE
-                    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
-                    EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT | BS_FLAGS1_NO_RATING)
-                EVT_END_IF
-            EVT_CASE_DEFAULT
-                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
-                EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_END_SWITCH
-        EVT_SWITCH(LVarF)
-            EVT_CASE_EQ(0)
-                EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_1)
-            EVT_CASE_EQ(1)
-                EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_2)
-            EVT_CASE_EQ(2)
-                EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_3)
-            EVT_CASE_EQ(3)
-                EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
-            EVT_CASE_DEFAULT
-                EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
-        EVT_END_SWITCH
-        EVT_CALL(SetActionResult, LVarE)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-            EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-                EVT_IF_EQ(LFlag0, TRUE)
-                    EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
-                    EVT_RETURN
-                EVT_END_IF
-                EVT_EXEC_WAIT(N(EVS_JumpSupport_G))
-                EVT_RETURN
-            EVT_END_CASE_GROUP
-            EVT_CASE_OR_EQ(HIT_RESULT_NICE)
-            EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
-                EVT_IF_EQ(LFlag0, TRUE)
-                    EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
-                    EVT_RETURN
-                EVT_END_IF
-            EVT_END_CASE_GROUP
-        EVT_END_SWITCH
-        EVT_ADD(LVarF, 1)
-        EVT_CALL(N(IncrementHitCounter))
-        EVT_GOTO(10)
-    EVT_RETURN
-    EVT_END
+    Call(LoadActionCommand, ACTION_COMMAND_JUMP)
+    Call(action_command_jump_init)
+    Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
+    ExecWait(N(EVS_JumpSupport_Approach))
+    ExecWait(N(EVS_JumpSupport_B))
+    Call(action_command_jump_start, LVarA, 1)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_34)
+    Call(SetGoalToTarget, ACTOR_PLAYER)
+    Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
+    Call(func_80274A18, LVarA, 0)
+    Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
+    IfEq(LVar0, HIT_RESULT_MISS)
+        ExecWait(N(EVS_JumpSupport_Miss))
+        Return
+    EndIf
+    Wait(1)
+    Call(GetPlayerActionSuccess, LVar0)
+    Switch(LVar0)
+        CaseGt(FALSE)
+            Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
+            Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
+        CaseDefault
+            Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
+            Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
+    EndSwitch
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            ExecWait(N(EVS_JumpSupport_G))
+            Return
+        EndCaseGroup
+        CaseOrEq(HIT_RESULT_NICE)
+        CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
+        EndCaseGroup
+    EndSwitch
+    ChildThread
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_27)
+        Wait(5)
+        Call(SetGoalToTarget, ACTOR_PLAYER)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_35)
+    EndChildThread
+    Call(GetActionResult, LVarE)
+    Call(N(IncrementHitCounter))
+    Set(LVarD, 0)
+    Set(LVarF, 0)
+    Set(LFlag0, FALSE)
+    Label(10)
+        ChildThread
+            Call(UseBattleCamPreset, BTL_CAM_PRESET_27)
+            Wait(5)
+            Call(SetGoalToTarget, ACTOR_PLAYER)
+            Call(UseBattleCamPreset, BTL_CAM_PRESET_35)
+        EndChildThread
+        Call(CloseActionCommandInfo)
+        Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
+        Call(LoadActionCommand, ACTION_COMMAND_JUMP)
+        Call(action_command_jump_init)
+        Set(LVarA, 24)
+        Switch(LVarF)
+            CaseEq(0)
+                Call(action_command_jump_start, LVarA, 1)
+            CaseEq(1)
+                Call(action_command_jump_start, LVarA, 2)
+            CaseEq(2)
+                Call(action_command_jump_start, LVarA, 3)
+            CaseEq(3)
+                Call(action_command_jump_start, LVarA, 4)
+            CaseDefault
+                Call(action_command_jump_start, LVarA, 5)
+        EndSwitch
+        Sub(LVarD, 1)
+        Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_SpinFall)
+        Call(SetGoalToTarget, ACTOR_PLAYER)
+        IfEq(LVarF, 0)
+            Call(func_80274A18, 24, 3)
+        Else
+            Call(func_80274A18, 24, 4)
+        EndIf
+        Call(GetCommandAutoSuccess, LVar1)
+        IfEq(LVar1, 1)
+            IfGe(LVarF, 3)
+                Set(LFlag0, TRUE)
+            EndIf
+        EndIf
+        Call(N(GetHitChance))
+        IfGe(LVarF, LVar0)
+            Set(LFlag0, TRUE)
+        EndIf
+        Wait(1)
+        Call(GetPlayerActionSuccess, LVar0)
+        Switch(LVar0)
+            CaseGt(0)
+                IfEq(LFlag0, FALSE)
+                    Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
+                    Call(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, BS_FLAGS1_NICE_HIT)
+                Else
+                    Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
+                    Call(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT | BS_FLAGS1_NO_RATING)
+                EndIf
+            CaseDefault
+                Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
+                Call(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, BS_FLAGS1_TRIGGER_EVENTS)
+        EndSwitch
+        Switch(LVarF)
+            CaseEq(0)
+                Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_1)
+            CaseEq(1)
+                Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_2)
+            CaseEq(2)
+                Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_3)
+            CaseEq(3)
+                Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
+            CaseDefault
+                Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
+        EndSwitch
+        Call(SetActionResult, LVarE)
+        Switch(LVar0)
+            CaseOrEq(HIT_RESULT_HIT)
+            CaseOrEq(HIT_RESULT_NO_DAMAGE)
+                IfEq(LFlag0, TRUE)
+                    ExecWait(N(EVS_JumpSupport_E))
+                    Return
+                EndIf
+                ExecWait(N(EVS_JumpSupport_G))
+                Return
+            EndCaseGroup
+            CaseOrEq(HIT_RESULT_NICE)
+            CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
+                IfEq(LFlag0, TRUE)
+                    ExecWait(N(EVS_JumpSupport_E))
+                    Return
+                EndIf
+            EndCaseGroup
+        EndSwitch
+        Add(LVarF, 1)
+        Call(N(IncrementHitCounter))
+        Goto(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseMove_ImplB) = {
-    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_init)
-    EVT_CALL(SetActionDifficultyTable, EVT_PTR(N(DifficultyTable)))
-    EVT_EXEC_WAIT(N(EVS_JumpSupport_Approach))
-    EVT_EXEC_WAIT(N(EVS_JumpSupport_B))
-    EVT_CALL(action_command_jump_start, LVarA, 1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_34)
-    EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
-    EVT_CALL(func_80274A18, LVarA, 0)
-    EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
-    EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_CALL(GetPlayerActionSuccess, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(FALSE)
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(EVS_JumpSupport_G))
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(GetActionResult, LVarE)
-    EVT_CALL(N(IncrementHitCounter))
-    EVT_SET(LVarD, 0)
-    EVT_SET(LVarF, 0)
-    EVT_SET(LFlag0, FALSE)
-    EVT_LABEL(10)
-    EVT_CHILD_THREAD
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_27)
-        EVT_WAIT(5)
-        EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_35)
-    EVT_END_CHILD_THREAD
-    EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(SetActionDifficultyTable, EVT_PTR(N(DifficultyTable)))
-    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_init)
-    EVT_SET(LVarA, 37)
-    EVT_SWITCH(LVarF)
-        EVT_CASE_EQ(0)
-            EVT_CALL(action_command_jump_start, LVarA, 1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(action_command_jump_start, LVarA, 2)
-        EVT_CASE_EQ(2)
-            EVT_CALL(action_command_jump_start, LVarA, 3)
-        EVT_CASE_EQ(3)
-            EVT_CALL(action_command_jump_start, LVarA, 4)
-        EVT_CASE_DEFAULT
-            EVT_CALL(action_command_jump_start, LVarA, 5)
-    EVT_END_SWITCH
-    EVT_SUB(LVarD, 1)
-    EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
-    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
-    EVT_IF_EQ(LVarF, 0)
-        EVT_CALL(func_802752AC, 20, 3)
-        EVT_WAIT(7)
-        EVT_CALL(func_802752AC, 3, 6)
-    EVT_ELSE
-        EVT_CALL(func_802752AC, 20, 4)
-        EVT_WAIT(7)
-        EVT_CALL(func_802752AC, 3, 5)
-    EVT_END_IF
-    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
-    EVT_CALL(GetCommandAutoSuccess, LVar1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_IF_GT(LVarF, 3)
-            EVT_SET(LFlag0, TRUE)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(N(GetHitChance))
-    EVT_IF_GT(LVarF, LVar0)
-        EVT_SET(LFlag0, TRUE)
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_CALL(GetPlayerActionSuccess, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(FALSE)
-            EVT_IF_EQ(LFlag0, FALSE)
-                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
-                EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 64)
-            EVT_ELSE
-                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
-                EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 224)
-            EVT_END_IF
-        EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
-            EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 32)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVarF)
-        EVT_CASE_EQ(0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_2)
-        EVT_CASE_EQ(2)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_3)
-        EVT_CASE_EQ(3)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
-        EVT_CASE_DEFAULT
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
-    EVT_END_SWITCH
-    EVT_CALL(SetActionResult, LVarE)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_IF_EQ(LFlag0, TRUE)
-                EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
-                EVT_RETURN
-            EVT_END_IF
-            EVT_EXEC_WAIT(N(EVS_JumpSupport_G))
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
-            EVT_IF_EQ(LFlag0, TRUE)
-                EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
-                EVT_RETURN
-            EVT_END_IF
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_ADD(LVarF, 1)
-    EVT_CALL(N(IncrementHitCounter))
-    EVT_GOTO(10)
-    EVT_RETURN
-    EVT_END
+    Call(LoadActionCommand, ACTION_COMMAND_JUMP)
+    Call(action_command_jump_init)
+    Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
+    ExecWait(N(EVS_JumpSupport_Approach))
+    ExecWait(N(EVS_JumpSupport_B))
+    Call(action_command_jump_start, LVarA, 1)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_34)
+    Call(SetGoalToTarget, ACTOR_PLAYER)
+    Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
+    Call(func_80274A18, LVarA, 0)
+    Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
+    IfEq(LVar0, HIT_RESULT_MISS)
+        ExecWait(N(EVS_JumpSupport_Miss))
+        Return
+    EndIf
+    Wait(1)
+    Call(GetPlayerActionSuccess, LVar0)
+    Switch(LVar0)
+        CaseGt(FALSE)
+            Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
+            Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
+        CaseDefault
+            Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
+            Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
+    EndSwitch
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            ExecWait(N(EVS_JumpSupport_G))
+            Return
+        EndCaseGroup
+        CaseOrEq(HIT_RESULT_NICE)
+        CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
+        EndCaseGroup
+    EndSwitch
+    Call(GetActionResult, LVarE)
+    Call(N(IncrementHitCounter))
+    Set(LVarD, 0)
+    Set(LVarF, 0)
+    Set(LFlag0, FALSE)
+    Label(10)
+    ChildThread
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_27)
+        Wait(5)
+        Call(SetGoalToTarget, ACTOR_PLAYER)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_35)
+    EndChildThread
+    Call(CloseActionCommandInfo)
+    Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
+    Call(LoadActionCommand, ACTION_COMMAND_JUMP)
+    Call(action_command_jump_init)
+    Set(LVarA, 37)
+    Switch(LVarF)
+        CaseEq(0)
+            Call(action_command_jump_start, LVarA, 1)
+        CaseEq(1)
+            Call(action_command_jump_start, LVarA, 2)
+        CaseEq(2)
+            Call(action_command_jump_start, LVarA, 3)
+        CaseEq(3)
+            Call(action_command_jump_start, LVarA, 4)
+        CaseDefault
+            Call(action_command_jump_start, LVarA, 5)
+    EndSwitch
+    Sub(LVarD, 1)
+    Call(SetGoalToTarget, ACTOR_PLAYER)
+    Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
+    Call(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
+    IfEq(LVarF, 0)
+        Call(func_802752AC, 20, 3)
+        Wait(7)
+        Call(func_802752AC, 3, 6)
+    Else
+        Call(func_802752AC, 20, 4)
+        Wait(7)
+        Call(func_802752AC, 3, 5)
+    EndIf
+    Call(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
+    Call(GetCommandAutoSuccess, LVar1)
+    IfEq(LVar1, 1)
+        IfGt(LVarF, 3)
+            Set(LFlag0, TRUE)
+        EndIf
+    EndIf
+    Call(N(GetHitChance))
+    IfGt(LVarF, LVar0)
+        Set(LFlag0, TRUE)
+    EndIf
+    Wait(1)
+    Call(GetPlayerActionSuccess, LVar0)
+    Switch(LVar0)
+        CaseGt(FALSE)
+            IfEq(LFlag0, FALSE)
+                Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
+                Call(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 64)
+            Else
+                Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
+                Call(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 224)
+            EndIf
+        CaseDefault
+            Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
+            Call(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 32)
+    EndSwitch
+    Switch(LVarF)
+        CaseEq(0)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_1)
+        CaseEq(1)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_2)
+        CaseEq(2)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_3)
+        CaseEq(3)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
+        CaseDefault
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
+    EndSwitch
+    Call(SetActionResult, LVarE)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            IfEq(LFlag0, TRUE)
+                ExecWait(N(EVS_JumpSupport_E))
+                Return
+            EndIf
+            ExecWait(N(EVS_JumpSupport_G))
+            Return
+        EndCaseGroup
+        CaseOrEq(HIT_RESULT_NICE)
+        CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
+            IfEq(LFlag0, TRUE)
+                ExecWait(N(EVS_JumpSupport_E))
+                Return
+            EndIf
+        EndCaseGroup
+    EndSwitch
+    Add(LVarF, 1)
+    Call(N(IncrementHitCounter))
+    Goto(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseMove_ImplC) = {
-    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_init)
-    EVT_CALL(SetActionDifficultyTable, EVT_PTR(N(DifficultyTable)))
-    EVT_EXEC_WAIT(N(EVS_JumpSupport_Approach))
-    EVT_EXEC_WAIT(N(EVS_JumpSupport_B))
-    EVT_CALL(action_command_jump_start, LVarA, 1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_34)
-    EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
-    EVT_CALL(func_80274A18, LVarA, 0)
-    EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
-    EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_CALL(GetPlayerActionSuccess, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(FALSE)
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(EVS_JumpSupport_G))
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(GetActionResult, LVarE)
-    EVT_CALL(N(IncrementHitCounter))
-    EVT_SET(LVarD, 0)
-    EVT_SET(LVarF, 0)
-    EVT_SET(LFlag0, FALSE)
-    EVT_LABEL(10)
-    EVT_CHILD_THREAD
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_28)
-        EVT_WAIT(5)
-        EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_35)
-    EVT_END_CHILD_THREAD
-    EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(SetActionDifficultyTable, EVT_PTR(N(DifficultyTable)))
-    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-    EVT_CALL(action_command_jump_init)
-    EVT_SET(LVarA, 25)
-    EVT_SWITCH(LVarF)
-        EVT_CASE_EQ(0)
-            EVT_CALL(action_command_jump_start, LVarA, 1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(action_command_jump_start, LVarA, 2)
-        EVT_CASE_EQ(2)
-            EVT_CALL(action_command_jump_start, LVarA, 3)
-        EVT_CASE_EQ(3)
-            EVT_CALL(action_command_jump_start, LVarA, 4)
-        EVT_CASE_DEFAULT
-            EVT_CALL(action_command_jump_start, LVarA, 5)
-    EVT_END_SWITCH
-    EVT_SUB(LVarD, 1)
-    EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_SpinFall)
-    EVT_IF_EQ(LVarF, 0)
-        EVT_CALL(func_80275F00, 25, 2)
-    EVT_ELSE
-        EVT_CALL(func_80275F00, 25, 4)
-    EVT_END_IF
-    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
-    EVT_CALL(GetCommandAutoSuccess, LVar1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_IF_GT(LVarF, 3)
-            EVT_SET(LFlag0, TRUE)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(N(GetHitChance))
-    EVT_IF_GT(LVarF, LVar0)
-        EVT_SET(LFlag0, TRUE)
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_CALL(GetPlayerActionSuccess, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(FALSE)
-            EVT_IF_EQ(LFlag0, FALSE)
-                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
-                EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 64)
-            EVT_ELSE
-                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
-                EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 224)
-            EVT_END_IF
-        EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
-            EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 32)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVarF)
-        EVT_CASE_EQ(0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_2)
-        EVT_CASE_EQ(2)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_3)
-        EVT_CASE_EQ(3)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
-        EVT_CASE_DEFAULT
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
-    EVT_END_SWITCH
-    EVT_CALL(SetActionResult, LVarE)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_IF_EQ(LFlag0, TRUE)
-                EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
-                EVT_RETURN
-            EVT_END_IF
-            EVT_EXEC_WAIT(N(EVS_JumpSupport_G))
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
-            EVT_IF_EQ(LFlag0, TRUE)
-                EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
-                EVT_RETURN
-            EVT_END_IF
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_ADD(LVarF, 1)
-    EVT_CALL(N(IncrementHitCounter))
-    EVT_GOTO(10)
-    EVT_RETURN
-    EVT_END
+    Call(LoadActionCommand, ACTION_COMMAND_JUMP)
+    Call(action_command_jump_init)
+    Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
+    ExecWait(N(EVS_JumpSupport_Approach))
+    ExecWait(N(EVS_JumpSupport_B))
+    Call(action_command_jump_start, LVarA, 1)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_34)
+    Call(SetGoalToTarget, ACTOR_PLAYER)
+    Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
+    Call(func_80274A18, LVarA, 0)
+    Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
+    IfEq(LVar0, HIT_RESULT_MISS)
+        ExecWait(N(EVS_JumpSupport_Miss))
+        Return
+    EndIf
+    Wait(1)
+    Call(GetPlayerActionSuccess, LVar0)
+    Switch(LVar0)
+        CaseGt(FALSE)
+            Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
+            Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
+        CaseDefault
+            Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
+            Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
+    EndSwitch
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            ExecWait(N(EVS_JumpSupport_G))
+            Return
+        EndCaseGroup
+        CaseOrEq(HIT_RESULT_NICE)
+        CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
+        EndCaseGroup
+    EndSwitch
+    Call(GetActionResult, LVarE)
+    Call(N(IncrementHitCounter))
+    Set(LVarD, 0)
+    Set(LVarF, 0)
+    Set(LFlag0, FALSE)
+    Label(10)
+    ChildThread
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_28)
+        Wait(5)
+        Call(SetGoalToTarget, ACTOR_PLAYER)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_35)
+    EndChildThread
+    Call(CloseActionCommandInfo)
+    Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
+    Call(LoadActionCommand, ACTION_COMMAND_JUMP)
+    Call(action_command_jump_init)
+    Set(LVarA, 25)
+    Switch(LVarF)
+        CaseEq(0)
+            Call(action_command_jump_start, LVarA, 1)
+        CaseEq(1)
+            Call(action_command_jump_start, LVarA, 2)
+        CaseEq(2)
+            Call(action_command_jump_start, LVarA, 3)
+        CaseEq(3)
+            Call(action_command_jump_start, LVarA, 4)
+        CaseDefault
+            Call(action_command_jump_start, LVarA, 5)
+    EndSwitch
+    Sub(LVarD, 1)
+    Call(SetGoalToTarget, ACTOR_PLAYER)
+    Call(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
+    Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_SpinFall)
+    IfEq(LVarF, 0)
+        Call(func_80275F00, 25, 2)
+    Else
+        Call(func_80275F00, 25, 4)
+    EndIf
+    Call(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
+    Call(GetCommandAutoSuccess, LVar1)
+    IfEq(LVar1, 1)
+        IfGt(LVarF, 3)
+            Set(LFlag0, TRUE)
+        EndIf
+    EndIf
+    Call(N(GetHitChance))
+    IfGt(LVarF, LVar0)
+        Set(LFlag0, TRUE)
+    EndIf
+    Wait(1)
+    Call(GetPlayerActionSuccess, LVar0)
+    Switch(LVar0)
+        CaseGt(FALSE)
+            IfEq(LFlag0, FALSE)
+                Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
+                Call(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 64)
+            Else
+                Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
+                Call(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 224)
+            EndIf
+        CaseDefault
+            Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
+            Call(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 32)
+    EndSwitch
+    Switch(LVarF)
+        CaseEq(0)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_1)
+        CaseEq(1)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_2)
+        CaseEq(2)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_3)
+        CaseEq(3)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
+        CaseDefault
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
+    EndSwitch
+    Call(SetActionResult, LVarE)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            IfEq(LFlag0, TRUE)
+                ExecWait(N(EVS_JumpSupport_E))
+                Return
+            EndIf
+            ExecWait(N(EVS_JumpSupport_G))
+            Return
+        EndCaseGroup
+        CaseOrEq(HIT_RESULT_NICE)
+        CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
+            IfEq(LFlag0, TRUE)
+                ExecWait(N(EVS_JumpSupport_E))
+                Return
+            EndIf
+        EndCaseGroup
+    EndSwitch
+    Add(LVarF, 1)
+    Call(N(IncrementHitCounter))
+    Goto(10)
+    Return
+    End
 };

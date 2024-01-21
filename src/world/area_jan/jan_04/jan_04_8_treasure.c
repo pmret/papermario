@@ -63,89 +63,89 @@ Vec3f N(ChestBouncePath)[] = {
 };
 
 EvtScript N(EVS_Scene_TreasureChest) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, jan_04_ENTRY_1)
-        EVT_CALL(PlaySound, SOUND_FALL_LONG)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -350, 300, 0)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, -350, 300, 0)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, 10, EVT_FLOAT(-7.0))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_Chest), 0, 2650, 0, 148, MAKE_ENTITY_END)
-        EVT_SET(LVarA, LVar0)
-        EVT_THREAD
-            EVT_CALL(N(AnimateFlyingChestRotScale))
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_SET(LVar9, LVarA)
-            EVT_CALL(LoadPath, 70, EVT_PTR(N(ChestFlightArc)), ARRAY_COUNT(N(ChestFlightArc)), EASING_QUADRATIC_OUT)
-            EVT_LOOP(0)
-                EVT_CALL(GetNextPathPos)
-                EVT_CALL(N(SetEntityPositionF), LVar9, LVar1, LVar2, LVar3)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar0, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-        EVT_END_THREAD
-        EVT_WAIT(50)
-        EVT_CALL(GotoMap, EVT_PTR("jan_04"), jan_04_ENTRY_2)
-        EVT_WAIT(100)
-    EVT_ELSE
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 170, 0)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 350)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, 16, EVT_FLOAT(-6.0))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_WAIT(20)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.2))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_Chest), 0, 2650, 0, 0, MAKE_ENTITY_END)
-        EVT_SET(LVarA, LVar0)
-        EVT_THREAD
-            EVT_CALL(N(AnimateFallingChestRot))
-        EVT_END_THREAD
-        EVT_SET(LVar9, LVarA)
-        EVT_CALL(LoadPath, 12, EVT_PTR(N(ChestFallPath)), ARRAY_COUNT(N(ChestFallPath)), EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(N(SetEntityPositionF), LVar9, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(PlaySoundAt, SOUND_JAN_CHEST_IMPACT, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
-        EVT_THREAD
-            EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, -15, 0, 0, 10, 10)
-            EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, 0, 0, 0, 0, 0)
-            EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, 15, 0, 0, 350, 350)
-            EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 30, EVT_FLOAT(1.0))
-        EVT_END_THREAD
-        EVT_CALL(LoadPath, 10, EVT_PTR(N(ChestBouncePath)), ARRAY_COUNT(N(ChestBouncePath)), EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(N(SetEntityPositionF), LVar9, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(PlaySoundAt, SOUND_JAN_CHEST_IMPACT, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
-        EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, -10, 0, 15, 0, 0)
-        EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, -10, 0, 15, 0, 0)
-        EVT_WAIT(60)
-        EVT_EXEC(N(EVS_GotoMap_kmr_24_0))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_LAND)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, jan_04_ENTRY_1)
+        Call(PlaySound, SOUND_FALL_LONG)
+        Call(UseSettingsFrom, CAM_DEFAULT, -350, 300, 0)
+        Call(SetPanTarget, CAM_DEFAULT, -350, 300, 0)
+        Call(SetCamPitch, CAM_DEFAULT, 10, Float(-7.0))
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Call(MakeEntity, Ref(Entity_Chest), 0, 2650, 0, 148, MAKE_ENTITY_END)
+        Set(LVarA, LVar0)
+        Thread
+            Call(N(AnimateFlyingChestRotScale))
+        EndThread
+        Thread
+            Set(LVar9, LVarA)
+            Call(LoadPath, 70, Ref(N(ChestFlightArc)), ARRAY_COUNT(N(ChestFlightArc)), EASING_QUADRATIC_OUT)
+            Loop(0)
+                Call(GetNextPathPos)
+                Call(N(SetEntityPositionF), LVar9, LVar1, LVar2, LVar3)
+                Wait(1)
+                IfEq(LVar0, 0)
+                    BreakLoop
+                EndIf
+            EndLoop
+        EndThread
+        Wait(50)
+        Call(GotoMap, Ref("jan_04"), jan_04_ENTRY_2)
+        Wait(100)
+    Else
+        Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
+        Call(SetPanTarget, CAM_DEFAULT, 0, 170, 0)
+        Call(SetCamDistance, CAM_DEFAULT, 350)
+        Call(SetCamPitch, CAM_DEFAULT, 16, Float(-6.0))
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Wait(20)
+        Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(1.2))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Call(MakeEntity, Ref(Entity_Chest), 0, 2650, 0, 0, MAKE_ENTITY_END)
+        Set(LVarA, LVar0)
+        Thread
+            Call(N(AnimateFallingChestRot))
+        EndThread
+        Set(LVar9, LVarA)
+        Call(LoadPath, 12, Ref(N(ChestFallPath)), ARRAY_COUNT(N(ChestFallPath)), EASING_LINEAR)
+        Loop(0)
+            Call(GetNextPathPos)
+            Call(N(SetEntityPositionF), LVar9, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(PlaySoundAt, SOUND_JAN_CHEST_IMPACT, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
+        Thread
+            PlayEffect(EFFECT_WALKING_DUST, 2, -15, 0, 0, 10, 10)
+            PlayEffect(EFFECT_WALKING_DUST, 2, 0, 0, 0, 0, 0)
+            PlayEffect(EFFECT_WALKING_DUST, 2, 15, 0, 0, 350, 350)
+            Call(ShakeCam, CAM_DEFAULT, 0, 30, Float(1.0))
+        EndThread
+        Call(LoadPath, 10, Ref(N(ChestBouncePath)), ARRAY_COUNT(N(ChestBouncePath)), EASING_LINEAR)
+        Loop(0)
+            Call(GetNextPathPos)
+            Call(N(SetEntityPositionF), LVar9, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(PlaySoundAt, SOUND_JAN_CHEST_IMPACT, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
+        PlayEffect(EFFECT_WALKING_DUST, 2, -10, 0, 15, 0, 0)
+        PlayEffect(EFFECT_WALKING_DUST, 2, -10, 0, 15, 0, 0)
+        Wait(60)
+        Exec(N(EVS_GotoMap_kmr_24_0))
+    EndIf
+    Return
+    End
 };

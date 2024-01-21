@@ -92,9 +92,9 @@ API_CALLABLE(N(TakeOut)) {
 }
 
 EvtScript EVS_WorldKooper_TakeOut = {
-    EVT_CALL(N(TakeOut))
-    EVT_RETURN
-    EVT_END
+    Call(N(TakeOut))
+    Return
+    End
 };
 
 BSS TweesterPhysics N(TweesterPhysicsData);
@@ -193,9 +193,9 @@ void N(try_cancel_tweester)(Npc* kooper) {
 }
 
 EvtScript EVS_WorldKooper_Update = {
-    EVT_CALL(N(Update))
-    EVT_RETURN
-    EVT_END
+    Call(N(Update))
+    Return
+    End
 };
 
 API_CALLABLE(N(UseAbility)) {
@@ -646,9 +646,9 @@ API_CALLABLE(N(UseAbility)) {
 }
 
 EvtScript EVS_WorldKooper_UseAbility = {
-    EVT_CALL(N(UseAbility))
-    EVT_RETURN
-    EVT_END
+    Call(N(UseAbility))
+    Return
+    End
 };
 
 API_CALLABLE(N(PutAway)) {
@@ -662,9 +662,9 @@ API_CALLABLE(N(PutAway)) {
 }
 
 EvtScript EVS_WorldKooper_PutAway = {
-    EVT_CALL(N(PutAway))
-    EVT_RETURN
-    EVT_END
+    Call(N(PutAway))
+    Return
+    End
 };
 
 s32 N(test_first_strike)(Npc* kooper, Npc* enemy) {

@@ -55,42 +55,42 @@ API_CALLABLE(N(GetModelPos)) {
 }
 
 EvtScript N(EVS_UpdateSunPos) = {
-    EVT_SET(LVarA, LVar0) // modelID
-    EVT_SET(LVar7, LVar1) // initialPhase
-    EVT_MUL(LVar7, 10)
-    EVT_CALL(N(GetModelPos))
-    EVT_LABEL(0)
-        EVT_ADD(LVar7, 1)
-        EVT_IF_GT(LVar7, 3599)
-            EVT_SUB(LVar7, 3600)
-        EVT_END_IF
-        EVT_CALL(N(UpdateSunPos), LVar7, LVar0, LVar1, LVar2)
-        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0) // modelID
+    Set(LVar7, LVar1) // initialPhase
+    Mul(LVar7, 10)
+    Call(N(GetModelPos))
+    Label(0)
+        Add(LVar7, 1)
+        IfGt(LVar7, 3599)
+            Sub(LVar7, 3600)
+        EndIf
+        Call(N(UpdateSunPos), LVar7, LVar0, LVar1, LVar2)
+        Call(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SET(LVar0, MODEL_g60)
-    EVT_SET(LVar1, 0)
-    EVT_EXEC(N(EVS_UpdateSunPos))
-    EVT_SET(LVar0, MODEL_g63)
-    EVT_SET(LVar1, 120)
-    EVT_EXEC(N(EVS_UpdateSunPos))
-    EVT_SET(LVar0, MODEL_g62)
-    EVT_SET(LVar1, 240)
-    EVT_EXEC(N(EVS_UpdateSunPos))
-    EVT_PLAY_EFFECT(EFFECT_SUN, 0, 0, 0, 0, 0, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Set(LVar0, MODEL_g60)
+    Set(LVar1, 0)
+    Exec(N(EVS_UpdateSunPos))
+    Set(LVar0, MODEL_g63)
+    Set(LVar1, 120)
+    Exec(N(EVS_UpdateSunPos))
+    Set(LVar0, MODEL_g62)
+    Set(LVar1, 240)
+    Exec(N(EVS_UpdateSunPos))
+    PlayEffect(EFFECT_SUN, 0, 0, 0, 0, 0, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

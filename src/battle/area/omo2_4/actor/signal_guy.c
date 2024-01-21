@@ -90,109 +90,109 @@ s32 N(DefaultAnims)[] = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetActorPos, ACTOR_SELF, 180, 0, 0)
-    EVT_CALL(ForceHomePos, ACTOR_SELF, 180, 0, 0)
-    EVT_CALL(HPBarToHome, ACTOR_SELF)
-    EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim0F)
-        EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
-        EVT_CALL(SetGoalPos, ACTOR_SELF, 0, 0, 0)
-        EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-        EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GENERAL_WHISTLE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim04)
-        EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim05)
-        EVT_WAIT(15)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim09)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(SetActorPos, ACTOR_SELF, 180, 0, 0)
+    Call(ForceHomePos, ACTOR_SELF, 180, 0, 0)
+    Call(HPBarToHome, ACTOR_SELF)
+    Thread
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim0F)
+        Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
+        Call(SetGoalPos, ACTOR_SELF, 0, 0, 0)
+        Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+        Call(SetActorYaw, ACTOR_SELF, 180)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_GENERAL_WHISTLE)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim04)
+        Wait(20)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim05)
+        Wait(15)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim09)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_LABEL(0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
-        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
-        EVT_CASE_OR_EQ(EVENT_HIT)
-        EVT_CASE_OR_EQ(EVENT_BURN_HIT)
-        EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
-        EVT_CASE_OR_EQ(EVENT_SPIN_SMASH_HIT)
-        EVT_CASE_OR_EQ(EVENT_SPIN_SMASH_DEATH)
-        EVT_CASE_OR_EQ(EVENT_SHOCK_HIT)
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
-        EVT_CASE_OR_EQ(EVENT_SPIKE_TAUNT)
-        EVT_CASE_OR_EQ(EVENT_DEATH)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim0A)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.5))
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar0, 35)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-            EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim02)
-            EVT_WAIT(24)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim03)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar0, 5)
-            EVT_ADD(LVar1, 10)
-            EVT_LOOP(4)
-                EVT_PLAY_EFFECT(EFFECT_SWEAT, 0, LVar0, LVar1, LVar2, 10, 45, 4, 0)
-                EVT_WAIT(6)
-            EVT_END_LOOP
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim0C)
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_STEAM_EMITTER)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, -200, 0, 20)
-            EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, LVar0, 0)
-            EVT_CALL(RemoveActor, ACTOR_SELF)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
-            EVT_CALL(HPBarToHome, ACTOR_SELF)
-        EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_MarshalGuy_Anim01)
-            EVT_EXEC_WAIT(EVS_Enemy_Recover)
-        EVT_CASE_EQ(EVENT_30)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_MarshalGuy_Anim0A)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_WAIT(1000)
-        EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_MarshalGuy_Anim01)
-            EVT_SET_CONST(LVar2, ANIM_MarshalGuy_Anim0A)
-            EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
-            EVT_RETURN
-        EVT_CASE_DEFAULT
-            EVT_SET_CONST(LVar1, ANIM_MarshalGuy_Anim0A)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
-            EVT_WAIT(20)
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseEq(EVENT_BEGIN_FIRST_STRIKE)
+        CaseOrEq(EVENT_HIT_COMBO)
+        CaseOrEq(EVENT_HIT)
+        CaseOrEq(EVENT_BURN_HIT)
+        CaseOrEq(EVENT_BURN_DEATH)
+        CaseOrEq(EVENT_SPIN_SMASH_HIT)
+        CaseOrEq(EVENT_SPIN_SMASH_DEATH)
+        CaseOrEq(EVENT_SHOCK_HIT)
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
+        CaseOrEq(EVENT_SPIKE_TAUNT)
+        CaseOrEq(EVENT_DEATH)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim0A)
+            Call(SetActorJumpGravity, ACTOR_SELF, Float(1.5))
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Sub(LVar0, 35)
+            Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(SetActorYaw, ACTOR_SELF, 0)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim02)
+            Wait(24)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim03)
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Add(LVar0, 5)
+            Add(LVar1, 10)
+            Loop(4)
+                PlayEffect(EFFECT_SWEAT, 0, LVar0, LVar1, LVar2, 10, 45, 4, 0)
+                Wait(6)
+            EndLoop
+            Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B)
+            Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim0C)
+            Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
+            Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_STEAM_EMITTER)
+            Call(SetGoalPos, ACTOR_SELF, -200, 0, 20)
+            Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+            Call(RemoveActorDecoration, ACTOR_SELF, LVar0, 0)
+            Call(RemoveActor, ACTOR_SELF)
+            Return
+        EndCaseGroup
+        CaseEq(EVENT_END_FIRST_STRIKE)
+            Call(HPBarToHome, ACTOR_SELF)
+        CaseEq(EVENT_RECOVER_STATUS)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_MarshalGuy_Anim01)
+            ExecWait(EVS_Enemy_Recover)
+        CaseEq(EVENT_30)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_MarshalGuy_Anim0A)
+            ExecWait(EVS_Enemy_Hit)
+            Wait(1000)
+        CaseEq(EVENT_SCARE_AWAY)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_MarshalGuy_Anim01)
+            SetConst(LVar2, ANIM_MarshalGuy_Anim0A)
+            ExecWait(EVS_Enemy_ScareAway)
+            Return
+        CaseDefault
+            SetConst(LVar1, ANIM_MarshalGuy_Anim0A)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
+            Wait(20)
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };

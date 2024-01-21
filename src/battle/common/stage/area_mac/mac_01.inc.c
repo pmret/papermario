@@ -6,30 +6,30 @@
 #include "battle/common/stage/lib/WaterEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_THREAD
-        EVT_SET(LVar0, MODEL_nami4)
-        EVT_EXEC(N(EVS_AnimateWaveModel))
-        EVT_WAIT(5)
-        EVT_SET(LVar0, MODEL_nami3)
-        EVT_EXEC(N(EVS_AnimateWaveModel))
-        EVT_WAIT(5)
-        EVT_SET(LVar0, MODEL_nami2)
-        EVT_EXEC(N(EVS_AnimateWaveModel))
-        EVT_WAIT(5)
-        EVT_SET(LVar0, MODEL_nami1)
-        EVT_EXEC(N(EVS_AnimateWaveModel))
-    EVT_END_THREAD
-    EVT_SET(LVar0, MODEL_o391)
-    EVT_EXEC(N(EVS_AnimateFishModel))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Thread
+        Set(LVar0, MODEL_nami4)
+        Exec(N(EVS_AnimateWaveModel))
+        Wait(5)
+        Set(LVar0, MODEL_nami3)
+        Exec(N(EVS_AnimateWaveModel))
+        Wait(5)
+        Set(LVar0, MODEL_nami2)
+        Exec(N(EVS_AnimateWaveModel))
+        Wait(5)
+        Set(LVar0, MODEL_nami1)
+        Exec(N(EVS_AnimateWaveModel))
+    EndThread
+    Set(LVar0, MODEL_o391)
+    Exec(N(EVS_AnimateFishModel))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 Stage NAMESPACE = {

@@ -23,22 +23,22 @@ DripVolumeList N(DripVolumes) = {
 };
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_SET(LVar0, EVT_PTR(N(DripVolumes)))
-    EVT_EXEC(N(EVS_CreateDripVolumes))
-    EVT_SET(LVar0, MODEL_misu)
-    EVT_SET(LVar1, TEX_PANNER_0)
-    EVT_SET(LVar2, 0)
-    EVT_SET(LVar3, -500)
-    EVT_EXEC(N(EVS_TexturePanMain))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Set(LVar0, Ref(N(DripVolumes)))
+    Exec(N(EVS_CreateDripVolumes))
+    Set(LVar0, MODEL_misu)
+    Set(LVar1, TEX_PANNER_0)
+    Set(LVar2, 0)
+    Set(LVar3, -500)
+    Exec(N(EVS_TexturePanMain))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 Stage NAMESPACE = {

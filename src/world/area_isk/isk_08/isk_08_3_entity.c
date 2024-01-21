@@ -2,12 +2,12 @@
 #include "effects.h"
 
 EvtScript N(EVS_SetupFlames) = {
-    EVT_PLAY_EFFECT(EFFECT_FLAME, FX_FLAME_RED, -358, -323, 358, EVT_FLOAT(0.3), LVar0)
-    EVT_PLAY_EFFECT(EFFECT_FLAME, FX_FLAME_RED, -459, -323, 214, EVT_FLOAT(0.3), LVar0)
-    EVT_PLAY_EFFECT(EFFECT_FLAME, FX_FLAME_RED, -358, -453, 358, EVT_FLOAT(0.3), LVar0)
-    EVT_PLAY_EFFECT(EFFECT_FLAME, FX_FLAME_RED, -459, -453, 214, EVT_FLOAT(0.3), LVar0)
-    EVT_RETURN
-    EVT_END
+    PlayEffect(EFFECT_FLAME, FX_FLAME_RED, -358, -323, 358, Float(0.3), LVar0)
+    PlayEffect(EFFECT_FLAME, FX_FLAME_RED, -459, -323, 214, Float(0.3), LVar0)
+    PlayEffect(EFFECT_FLAME, FX_FLAME_RED, -358, -453, 358, Float(0.3), LVar0)
+    PlayEffect(EFFECT_FLAME, FX_FLAME_RED, -459, -453, 214, Float(0.3), LVar0)
+    Return
+    End
 };
 
 BombTrigger N(BombPos_Wall) = {
@@ -16,49 +16,49 @@ BombTrigger N(BombPos_Wall) = {
 };
 
 EvtScript N(EVS_OnBlast_Wall) = {
-    EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 36, 12, 1, 10, 30)
-    EVT_LOOP(10)
-        EVT_CALL(EnableModel, MODEL_g293, TRUE)
-        EVT_WAIT(1)
-        EVT_CALL(EnableModel, MODEL_g293, FALSE)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SET(GF_ISK_BombedWallFrom08, TRUE)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 36, 12, 1, 10, 30)
+    Loop(10)
+        Call(EnableModel, MODEL_g293, TRUE)
+        Wait(1)
+        Call(EnableModel, MODEL_g293, FALSE)
+        Wait(1)
+    EndLoop
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
+    Set(GF_ISK_BombedWallFrom08, TRUE)
+    Unbind
+    Return
+    End
 };
 
 EvtScript N(EVS_HideDestroyedWall) = {
-    EVT_CALL(EnableModel, MODEL_o2012, FALSE)
-    EVT_CALL(EnableModel, MODEL_o2019, FALSE)
-    EVT_CALL(EnableModel, MODEL_o2021, FALSE)
-    EVT_CALL(EnableModel, MODEL_o2018, FALSE)
-    EVT_CALL(EnableModel, MODEL_o2020, FALSE)
-    EVT_CALL(EnableModel, MODEL_o2022, FALSE)
-    EVT_CALL(EnableModel, MODEL_o2023, FALSE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2029, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2030, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2032, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_RETURN
-    EVT_END
+    Call(EnableModel, MODEL_o2012, FALSE)
+    Call(EnableModel, MODEL_o2019, FALSE)
+    Call(EnableModel, MODEL_o2021, FALSE)
+    Call(EnableModel, MODEL_o2018, FALSE)
+    Call(EnableModel, MODEL_o2020, FALSE)
+    Call(EnableModel, MODEL_o2022, FALSE)
+    Call(EnableModel, MODEL_o2023, FALSE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2029, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2030, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2032, COLLIDER_FLAGS_UPPER_MASK)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupBombableWall) = {
-    EVT_IF_EQ(GF_ISK_BombedWallFrom08, FALSE)
-        EVT_IF_EQ(GF_ISK_BombedWallFrom10, FALSE)
-            EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnBlast_Wall)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Wall)), 1, 0)
-            EVT_EXEC_WAIT(N(EVS_HideDestroyedWall))
-        EVT_ELSE
-            EVT_CALL(EnableModel, MODEL_g293, FALSE)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_CALL(EnableModel, MODEL_g293, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_EXEC_WAIT(N(EVS_HideDestroyedWall))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_ISK_BombedWallFrom08, FALSE)
+        IfEq(GF_ISK_BombedWallFrom10, FALSE)
+            BindTrigger(Ref(N(EVS_OnBlast_Wall)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Wall)), 1, 0)
+            ExecWait(N(EVS_HideDestroyedWall))
+        Else
+            Call(EnableModel, MODEL_g293, FALSE)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
+        EndIf
+    Else
+        Call(EnableModel, MODEL_g293, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
+        ExecWait(N(EVS_HideDestroyedWall))
+    EndIf
+    Return
+    End
 };

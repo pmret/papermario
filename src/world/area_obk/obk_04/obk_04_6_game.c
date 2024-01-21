@@ -140,381 +140,381 @@ API_CALLABLE(N(WaitForFirstCarrier)) {
 }
 
 EvtScript N(EVS_TetherItemToDummy) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetNpcPos, NPC_DummyBoo, LVar0, LVar1, LVar2)
-        EVT_CALL(SetItemPos, MV_KeepAwayItem, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetNpcPos, NPC_DummyBoo, LVar0, LVar1, LVar2)
+        Call(SetItemPos, MV_KeepAwayItem, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_IntroduceAndHideBoots) = {
-    EVT_CALL(N(WaitForFirstCarrier))
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(MakeLerp, 255, 0, 10, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetItemAlpha, MV_KeepAwayItem, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_LOOP(20)
-        EVT_CALL(GetNpcPos, NPC_KeepAwayBoo1, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcPos, NPC_DummyBoo, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcPos, NPC_DummyBoo, NPC_DISPOSE_LOCATION)
-    EVT_RETURN
-    EVT_END
+    Call(N(WaitForFirstCarrier))
+    Thread
+        Wait(10)
+        Call(MakeLerp, 255, 0, 10, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetItemAlpha, MV_KeepAwayItem, LVar0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Loop(20)
+        Call(GetNpcPos, NPC_KeepAwayBoo1, LVar0, LVar1, LVar2)
+        Call(SetNpcPos, NPC_DummyBoo, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Call(SetNpcPos, NPC_DummyBoo, NPC_DISPOSE_LOCATION)
+    Return
+    End
 };
 
 // useless
 EvtScript N(EVS_DetermineCarrierNPC) = {
-    EVT_SWITCH(MV_ThrowTargetNpc)
-        EVT_CASE_EQ(NPC_Boo_01)
-            EVT_SET(MV_ItemCarrierNpc, NPC_Boo_01)
-        EVT_CASE_EQ(NPC_KeepAwayBoo1)
-            EVT_SET(MV_ItemCarrierNpc, NPC_KeepAwayBoo1)
-        EVT_CASE_EQ(NPC_KeepAwayBoo2)
-            EVT_SET(MV_ItemCarrierNpc, NPC_KeepAwayBoo2)
-        EVT_CASE_EQ(NPC_KeepAwayBoo3)
-            EVT_SET(MV_ItemCarrierNpc, NPC_KeepAwayBoo3)
-        EVT_CASE_EQ(NPC_KeepAwayBoo4)
-            EVT_SET(MV_ItemCarrierNpc, NPC_KeepAwayBoo4)
-        EVT_CASE_EQ(NPC_KeepAwayBoo5)
-            EVT_SET(MV_ItemCarrierNpc, NPC_KeepAwayBoo5)
-        EVT_CASE_EQ(NPC_KeepAwayBoo6)
-            EVT_SET(MV_ItemCarrierNpc, NPC_KeepAwayBoo6)
-        EVT_CASE_EQ(NPC_KeepAwayBoo7)
-            EVT_SET(MV_ItemCarrierNpc, NPC_KeepAwayBoo7)
-        EVT_CASE_EQ(NPC_KeepAwayBoo8)
-            EVT_SET(MV_ItemCarrierNpc, NPC_KeepAwayBoo8)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(MV_ThrowTargetNpc)
+        CaseEq(NPC_Boo_01)
+            Set(MV_ItemCarrierNpc, NPC_Boo_01)
+        CaseEq(NPC_KeepAwayBoo1)
+            Set(MV_ItemCarrierNpc, NPC_KeepAwayBoo1)
+        CaseEq(NPC_KeepAwayBoo2)
+            Set(MV_ItemCarrierNpc, NPC_KeepAwayBoo2)
+        CaseEq(NPC_KeepAwayBoo3)
+            Set(MV_ItemCarrierNpc, NPC_KeepAwayBoo3)
+        CaseEq(NPC_KeepAwayBoo4)
+            Set(MV_ItemCarrierNpc, NPC_KeepAwayBoo4)
+        CaseEq(NPC_KeepAwayBoo5)
+            Set(MV_ItemCarrierNpc, NPC_KeepAwayBoo5)
+        CaseEq(NPC_KeepAwayBoo6)
+            Set(MV_ItemCarrierNpc, NPC_KeepAwayBoo6)
+        CaseEq(NPC_KeepAwayBoo7)
+            Set(MV_ItemCarrierNpc, NPC_KeepAwayBoo7)
+        CaseEq(NPC_KeepAwayBoo8)
+            Set(MV_ItemCarrierNpc, NPC_KeepAwayBoo8)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_BooAppear) = {
-    EVT_WAIT(10)
-    EVT_CALL(MakeLerp, 0, 255, 60, EASING_LINEAR)
-    EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcImgFXParams, LVarA, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Wait(10)
+    Call(MakeLerp, 0, 255, 60, EASING_LINEAR)
+    Label(0)
+        Call(UpdateLerp)
+        Call(SetNpcImgFXParams, LVarA, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_BooSpookAndVanish) = {
-    EVT_CALL(SetNpcFlagBits, LVarA, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, FALSE)
-    EVT_CALL(NpcFacePlayer, LVarA, 0)
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcAnimation, LVarA, ANIM_Boo_Spook)
-    EVT_WAIT(10)
-    EVT_CALL(MakeLerp, 255, 0, 60, EASING_LINEAR)
-    EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcImgFXParams, LVarA, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(SetNpcPos, LVarA, NPC_DISPOSE_LOCATION)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, LVarA, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, FALSE)
+    Call(NpcFacePlayer, LVarA, 0)
+    Wait(5)
+    Call(SetNpcAnimation, LVarA, ANIM_Boo_Spook)
+    Wait(10)
+    Call(MakeLerp, 255, 0, 60, EASING_LINEAR)
+    Label(0)
+        Call(UpdateLerp)
+        Call(SetNpcImgFXParams, LVarA, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+    Call(SetNpcPos, LVarA, NPC_DISPOSE_LOCATION)
+    Return
+    End
 };
 
 EvtScript N(EVS_SpawnGotSuperBootsFX) = {
-    EVT_THREAD
-        EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(8.0), 0, EVT_FLOAT(300.0), EVT_FLOAT(17.5), EVT_FLOAT(-9.5))
-    EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_Lift)
-    EVT_CALL(GetPlayerPos, LVar5, LVar6, LVar7)
-    EVT_ADD(LVar6, 40)
-    EVT_CALL(MakeItemEntity, ITEM_SUPER_BOOTS, LVar5, LVar6, LVar7, ITEM_SPAWN_MODE_DECORATION, 0)
-    EVT_SET(LVarC, LVar0)
-    EVT_ADD(LVar6, 16)
-    EVT_PLAY_EFFECT(EFFECT_GOT_ITEM_OUTLINE, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.0), LVar8)
-    EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 9, LVar5, LVar6, LVar7, EVT_FLOAT(1.0), 100)
-    EVT_THREAD
-        EVT_WAIT(4)
-        EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
-        EVT_ADD(LVar4, 50)
-        EVT_ADD(LVar5, 2)
-        EVT_ADD(LVar3, 8)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar3, LVar4, LVar5, 20)
-        EVT_ADD(LVar3, -16)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar3, LVar4, LVar5, 20)
-    EVT_END_THREAD
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(MF_WaitForUpgradeDone, TRUE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DismissItemOutline, LVar8)
-    EVT_CALL(RemoveItemEntity, LVarC)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_THREAD
-        EVT_CALL(ResetCam, CAM_DEFAULT, 3)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(AdjustCam, CAM_DEFAULT, Float(8.0), 0, Float(300.0), Float(17.5), Float(-9.5))
+    EndThread
+    Call(SetPlayerAnimation, ANIM_MarioW1_Lift)
+    Call(GetPlayerPos, LVar5, LVar6, LVar7)
+    Add(LVar6, 40)
+    Call(MakeItemEntity, ITEM_SUPER_BOOTS, LVar5, LVar6, LVar7, ITEM_SPAWN_MODE_DECORATION, 0)
+    Set(LVarC, LVar0)
+    Add(LVar6, 16)
+    PlayEffect(EFFECT_GOT_ITEM_OUTLINE, 0, LVar5, LVar6, LVar7, Float(1.0), LVar8)
+    PlayEffect(EFFECT_RADIAL_SHIMMER, 9, LVar5, LVar6, LVar7, Float(1.0), 100)
+    Thread
+        Wait(4)
+        Call(GetPlayerPos, LVar3, LVar4, LVar5)
+        Add(LVar4, 50)
+        Add(LVar5, 2)
+        Add(LVar3, 8)
+        PlayEffect(EFFECT_SPARKLES, 3, LVar3, LVar4, LVar5, 20)
+        Add(LVar3, -16)
+        PlayEffect(EFFECT_SPARKLES, 3, LVar3, LVar4, LVar5, 20)
+    EndThread
+    Loop(0)
+        Wait(1)
+        IfEq(MF_WaitForUpgradeDone, TRUE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DismissItemOutline, LVar8)
+    Call(RemoveItemEntity, LVarC)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Thread
+        Call(ResetCam, CAM_DEFAULT, 3)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_BoosUnleashed) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetMusicTrack, 0, SONG_BOO_MINIGAME, 0, 8)
-    EVT_EXEC(N(EVS_TetherItemToDummy))
-    EVT_WAIT(1)
-    EVT_EXEC(N(EVS_IntroduceAndHideBoots))
-    EVT_SET(MV_KeepAwayStarted, TRUE)
-    EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
-    EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(2.0), 0, 0, 0, EVT_FLOAT(400.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
-    EVT_WAIT(60)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(2.0), 0, 0, 0, EVT_FLOAT(325.0), EVT_FLOAT(13.0), EVT_FLOAT(-13.0))
+    Call(DisablePlayerInput, TRUE)
+    Call(SetMusicTrack, 0, SONG_BOO_MINIGAME, 0, 8)
+    Exec(N(EVS_TetherItemToDummy))
+    Wait(1)
+    Exec(N(EVS_IntroduceAndHideBoots))
+    Set(MV_KeepAwayStarted, TRUE)
+    Wait(30)
+    Call(SetPlayerAnimation, ANIM_Mario1_Flail)
+    Wait(20)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(InterpPlayerYaw, 270, 0)
+    Call(SetCamProperties, CAM_DEFAULT, Float(2.0), 0, 0, 0, Float(400.0), Float(15.0), Float(-7.0))
+    Wait(60)
+    Call(SetCamProperties, CAM_DEFAULT, Float(2.0), 0, 0, 0, Float(325.0), Float(13.0), Float(-13.0))
     // have item appear with leader via dummy NPC
-    EVT_CALL(SetNpcPos, NPC_LeaderBoo, 0, 45, 20)
-    EVT_CALL(SetNpcPos, NPC_DummyBoo, 0, 65, 0)
-    EVT_CALL(MakeLerp, 0, 255, 30, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcImgFXParams, NPC_LeaderBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_CALL(SetItemAlpha, MV_KeepAwayItem, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
+    Call(SetNpcPos, NPC_LeaderBoo, 0, 45, 20)
+    Call(SetNpcPos, NPC_DummyBoo, 0, 65, 0)
+    Call(MakeLerp, 0, 255, 30, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(SetNpcImgFXParams, NPC_LeaderBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        Call(SetItemAlpha, MV_KeepAwayItem, LVar0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
     // explain the game
-    EVT_CALL(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_003A)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(2.0), 0, 0, 0, EVT_FLOAT(450.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
-    EVT_CALL(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_003B)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(MV_Unk_02, 1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_SET(MV_KeepAwayRound, 0)
-    EVT_LABEL(100)
-        EVT_ADD(MV_KeepAwayRound, 1)
-        EVT_IF_GE(MV_KeepAwayRound, 10)
-            EVT_SET(MV_KeepAwayRound, 10)
-        EVT_END_IF
-        EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(2.0), 0, 0, 0, EVT_FLOAT(500.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
-        EVT_WAIT(20)
+    Call(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_003A)
+    Call(SetCamProperties, CAM_DEFAULT, Float(2.0), 0, 0, 0, Float(450.0), Float(15.0), Float(-7.0))
+    Call(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_003B)
+    Loop(0)
+        Wait(1)
+        IfEq(MV_Unk_02, 1)
+            BreakLoop
+        EndIf
+    EndLoop
+    Set(MV_KeepAwayRound, 0)
+    Label(100)
+        Add(MV_KeepAwayRound, 1)
+        IfGe(MV_KeepAwayRound, 10)
+            Set(MV_KeepAwayRound, 10)
+        EndIf
+        Call(SetCamProperties, CAM_DEFAULT, Float(2.0), 0, 0, 0, Float(500.0), Float(15.0), Float(-7.0))
+        Wait(20)
         // first throw -- from leader
         // choose which boo will have the item next
-        EVT_CALL(RandInt, KEEP_AWAY_BOO_7, LVar0)
-        EVT_SET(MV_KeepAwayTarget, LVar0)
+        Call(RandInt, KEEP_AWAY_BOO_7, LVar0)
+        Set(MV_KeepAwayTarget, LVar0)
         // jump dummy to the location of that NPC
-        EVT_SET(LVar1, 30)
-        EVT_CALL(N(GetKeepAwayCarrierYaw))
-        EVT_CALL(N(GetItemJumpDest))
-        EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
-        EVT_CALL(SetNpcJumpscale, NPC_DummyBoo, EVT_FLOAT(1.0))
-        EVT_CALL(NpcJump0, NPC_DummyBoo, LVar0, LVar1, LVar2, 14 * DT)
-        EVT_CALL(SetNpcPos, NPC_DummyBoo, NPC_DISPOSE_LOCATION)
-        EVT_WAIT(30 * DT)
-        EVT_THREAD
-            EVT_CALL(MakeLerp, 255, 0, 10, EASING_LINEAR)
-            EVT_LOOP(0)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(SetNpcImgFXParams, NPC_LeaderBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-        EVT_END_THREAD
+        Set(LVar1, 30)
+        Call(N(GetKeepAwayCarrierYaw))
+        Call(N(GetItemJumpDest))
+        Call(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
+        Call(SetNpcJumpscale, NPC_DummyBoo, Float(1.0))
+        Call(NpcJump0, NPC_DummyBoo, LVar0, LVar1, LVar2, 14 * DT)
+        Call(SetNpcPos, NPC_DummyBoo, NPC_DISPOSE_LOCATION)
+        Wait(30 * DT)
+        Thread
+            Call(MakeLerp, 255, 0, 10, EASING_LINEAR)
+            Loop(0)
+                Call(UpdateLerp)
+                Call(SetNpcImgFXParams, NPC_LeaderBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+                Wait(1)
+                IfEq(LVar1, 0)
+                    BreakLoop
+                EndIf
+            EndLoop
+        EndThread
         // throw between 4-10 times
-        EVT_CALL(RandInt, 4, MV_KeepAwayThrows)
-        EVT_ADD(MV_KeepAwayThrows, 6)
-        EVT_LOOP(0)
-            EVT_CALL(N(GetKeepAwayCarrierPos))
+        Call(RandInt, 4, MV_KeepAwayThrows)
+        Add(MV_KeepAwayThrows, 6)
+        Loop(0)
+            Call(N(GetKeepAwayCarrierPos))
             // choose which boo will have the item next
-            EVT_CALL(SetNpcPos, NPC_DummyBoo, LVar0, LVar1, LVar2)
-            EVT_CALL(RandInt, KEEP_AWAY_BOO_7, LVar0)
-            EVT_IF_EQ(MV_KeepAwayTarget, LVar0)
-                EVT_ADD(LVar0, 4)
-                EVT_IF_GE(LVar0, 8)
-                    EVT_SUB(LVar0, 8)
-                EVT_END_IF
-            EVT_END_IF
-            EVT_SET(MV_KeepAwayTarget, LVar0)
+            Call(SetNpcPos, NPC_DummyBoo, LVar0, LVar1, LVar2)
+            Call(RandInt, KEEP_AWAY_BOO_7, LVar0)
+            IfEq(MV_KeepAwayTarget, LVar0)
+                Add(LVar0, 4)
+                IfGe(LVar0, 8)
+                    Sub(LVar0, 8)
+                EndIf
+            EndIf
+            Set(MV_KeepAwayTarget, LVar0)
             // jump dummy to the location of that NPC
-            EVT_SET(LVar1, 30)
-            EVT_CALL(N(GetKeepAwayCarrierYaw))
-            EVT_CALL(N(GetItemJumpDest))
-            EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
-            EVT_CALL(SetNpcJumpscale, NPC_DummyBoo, EVT_FLOAT(1.5))
-            EVT_CALL(NpcJump0, NPC_DummyBoo, LVar0, LVar1, LVar2, 14 * DT)
-            EVT_CALL(SetNpcPos, NPC_DummyBoo, NPC_DISPOSE_LOCATION)
-            EVT_CALL(RandInt, 10 * DT, LVar0)
-            EVT_ADD(LVar0, 5 * DT)
-            EVT_WAIT(LVar0)
-            EVT_ADD(MV_KeepAwayThrows, -1)
-            EVT_IF_EQ(MV_KeepAwayThrows, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_SET(MV_KeepAwayMovement, KEEP_AWAY_SPIRAL)
-        EVT_CALL(RandInt, 50, LVar0)
-        EVT_ADD(LVar0, 100)
-        EVT_WAIT(LVar0)
-        EVT_CALL(MakeLerp, 0, 255, 10, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcImgFXParams, NPC_LeaderBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 5, MSG_CH3_003C)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_LOOP(0)
-            EVT_WAIT(1)
-            EVT_IF_NE(MV_KeepAwayResult, KEEP_AWAY_WAITING)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_SET(MV_KeepAwayMovement, KEEP_AWAY_STOP)
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_IF_EQ(MV_KeepAwayResult, KEEP_AWAY_WRONG)
+            Set(LVar1, 30)
+            Call(N(GetKeepAwayCarrierYaw))
+            Call(N(GetItemJumpDest))
+            Call(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
+            Call(SetNpcJumpscale, NPC_DummyBoo, Float(1.5))
+            Call(NpcJump0, NPC_DummyBoo, LVar0, LVar1, LVar2, 14 * DT)
+            Call(SetNpcPos, NPC_DummyBoo, NPC_DISPOSE_LOCATION)
+            Call(RandInt, 10 * DT, LVar0)
+            Add(LVar0, 5 * DT)
+            Wait(LVar0)
+            Add(MV_KeepAwayThrows, -1)
+            IfEq(MV_KeepAwayThrows, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Set(MV_KeepAwayMovement, KEEP_AWAY_SPIRAL)
+        Call(RandInt, 50, LVar0)
+        Add(LVar0, 100)
+        Wait(LVar0)
+        Call(MakeLerp, 0, 255, 10, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetNpcImgFXParams, NPC_LeaderBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 5, MSG_CH3_003C)
+        Call(DisablePlayerInput, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Loop(0)
+            Wait(1)
+            IfNe(MV_KeepAwayResult, KEEP_AWAY_WAITING)
+                BreakLoop
+            EndIf
+        EndLoop
+        Set(MV_KeepAwayMovement, KEEP_AWAY_STOP)
+        Call(DisablePlayerInput, TRUE)
+        IfEq(MV_KeepAwayResult, KEEP_AWAY_WRONG)
             // player hit the wrong Boo, begin another round
-            EVT_WAIT(20)
-            EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(2.0), 0, 0, 0, EVT_FLOAT(450.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
-            EVT_WAIT(30)
-            EVT_EXEC_WAIT(N(EVS_DetermineCarrierNPC))
-            EVT_CALL(GetNpcPos, MV_ItemCarrierNpc, LVar0, LVar1, LVar2)
-            EVT_CALL(SetNpcPos, NPC_DummyBoo, LVar0, LVar1, LVar2)
-            EVT_CALL(GetNpcPos, NPC_DummyBoo, LVar3, LVar4, LVar5)
-            EVT_SET(LVar6, 25)
-            EVT_ADD(LVar6, LVar4)
-            EVT_CALL(MakeLerp, LVar4, LVar6, 20, EASING_LINEAR)
-            EVT_LOOP(0)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(SetNpcPos, NPC_DummyBoo, LVar3, LVar0, LVar5)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-            EVT_CALL(SpeakToPlayer, MV_ItemCarrierNpc, ANIM_Boo_Talk, ANIM_Boo_Idle, 5, MSG_CH3_003E)
-            EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
-            EVT_CALL(SetNpcJumpscale, NPC_DummyBoo, EVT_FLOAT(2.0))
-            EVT_CALL(NpcJump0, NPC_DummyBoo, 0, 65, 0, 10)
-            EVT_CALL(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 5, MSG_CH3_003B)
-            EVT_SET(MV_KeepAwayResult, KEEP_AWAY_WAITING)
-            EVT_SET(MV_KeepAwayMovement, KEEP_AWAY_CLOCKWISE)
-            EVT_CALL(N(GetPlayerPosOutsideKeepAwayRing))
-            EVT_CALL(SetPlayerSpeed, EVT_FLOAT(4.0))
-            EVT_CALL(PlayerMoveTo, LVar0, LVar2, 0)
-            EVT_WAIT(30)
-            EVT_GOTO(100)
-        EVT_END_IF
-    EVT_LOOP(0)
-        EVT_CALL(GetPlayerActionState, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, ACTION_STATE_IDLE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC_WAIT(N(EVS_DetermineCarrierNPC))
-    EVT_CALL(GetNpcPos, MV_ItemCarrierNpc, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 20)
-    EVT_CALL(SetNpcPos, NPC_DummyBoo, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_WAIT(1)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 30)
-    EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcJumpscale, NPC_DummyBoo, EVT_FLOAT(2.0))
-    EVT_CALL(NpcJump0, NPC_DummyBoo, LVar0, LVar1, LVar2, 10)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcPos, NPC_DummyBoo, NPC_DISPOSE_LOCATION)
-    EVT_WAIT(1)
-    EVT_SET(MF_WaitForUpgradeDone, FALSE)
-    EVT_EXEC(N(EVS_PlayUpgradeSong))
-    EVT_EXEC(N(EVS_SpawnGotSuperBootsFX))
-    EVT_CALL(N(UpgradeBootsToSuper))
-    EVT_WAIT(30)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0180, 160, 40)
-    EVT_SET(MF_WaitForUpgradeDone, TRUE)
-    EVT_WAIT(30)
-    EVT_CALL(N(GetPlayerPosOutsideKeepAwayRing))
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(4.0))
-    EVT_CALL(PlayerMoveTo, LVar0, LVar2, 0)
-    EVT_WAIT(20)
-    EVT_CALL(GetNpcPos, NPC_LeaderBoo, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(350.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_003D)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(450.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(20)
-    EVT_THREAD
-        EVT_WAIT(30)
-        EVT_CALL(PlaySound, SOUND_BOO_SPOOK)
-    EVT_END_THREAD
-    EVT_SET(LVarA, NPC_KeepAwayBoo1)
-    EVT_EXEC(N(EVS_BooSpookAndVanish))
-    EVT_SET(LVarA, NPC_KeepAwayBoo2)
-    EVT_EXEC(N(EVS_BooSpookAndVanish))
-    EVT_SET(LVarA, NPC_KeepAwayBoo3)
-    EVT_EXEC(N(EVS_BooSpookAndVanish))
-    EVT_SET(LVarA, NPC_KeepAwayBoo4)
-    EVT_EXEC(N(EVS_BooSpookAndVanish))
-    EVT_SET(LVarA, NPC_KeepAwayBoo5)
-    EVT_EXEC(N(EVS_BooSpookAndVanish))
-    EVT_SET(LVarA, NPC_KeepAwayBoo6)
-    EVT_EXEC(N(EVS_BooSpookAndVanish))
-    EVT_SET(LVarA, NPC_KeepAwayBoo7)
-    EVT_EXEC(N(EVS_BooSpookAndVanish))
-    EVT_SET(LVarA, NPC_KeepAwayBoo8)
-    EVT_EXEC(N(EVS_BooSpookAndVanish))
-    EVT_SET(LVarA, NPC_LeaderBoo)
-    EVT_EXEC(N(EVS_BooSpookAndVanish))
-    EVT_WAIT(60)
-    EVT_CALL(SetNpcPos, NPC_TutorialBoo, -160, 10, -175)
-    EVT_CALL(SetNpcImgFXParams, NPC_TutorialBoo, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-    EVT_SET(LVarA, NPC_TutorialBoo)
-    EVT_EXEC(N(EVS_BooAppear))
-    EVT_WAIT(60)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(450.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_WAIT(20)
-    EVT_SET(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+            Wait(20)
+            Call(SetCamProperties, CAM_DEFAULT, Float(2.0), 0, 0, 0, Float(450.0), Float(15.0), Float(-7.0))
+            Wait(30)
+            ExecWait(N(EVS_DetermineCarrierNPC))
+            Call(GetNpcPos, MV_ItemCarrierNpc, LVar0, LVar1, LVar2)
+            Call(SetNpcPos, NPC_DummyBoo, LVar0, LVar1, LVar2)
+            Call(GetNpcPos, NPC_DummyBoo, LVar3, LVar4, LVar5)
+            Set(LVar6, 25)
+            Add(LVar6, LVar4)
+            Call(MakeLerp, LVar4, LVar6, 20, EASING_LINEAR)
+            Loop(0)
+                Call(UpdateLerp)
+                Call(SetNpcPos, NPC_DummyBoo, LVar3, LVar0, LVar5)
+                Wait(1)
+                IfEq(LVar1, 0)
+                    BreakLoop
+                EndIf
+            EndLoop
+            Call(SpeakToPlayer, MV_ItemCarrierNpc, ANIM_Boo_Talk, ANIM_Boo_Idle, 5, MSG_CH3_003E)
+            Call(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
+            Call(SetNpcJumpscale, NPC_DummyBoo, Float(2.0))
+            Call(NpcJump0, NPC_DummyBoo, 0, 65, 0, 10)
+            Call(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 5, MSG_CH3_003B)
+            Set(MV_KeepAwayResult, KEEP_AWAY_WAITING)
+            Set(MV_KeepAwayMovement, KEEP_AWAY_CLOCKWISE)
+            Call(N(GetPlayerPosOutsideKeepAwayRing))
+            Call(SetPlayerSpeed, Float(4.0))
+            Call(PlayerMoveTo, LVar0, LVar2, 0)
+            Wait(30)
+            Goto(100)
+        EndIf
+    Loop(0)
+        Call(GetPlayerActionState, LVar0)
+        Wait(1)
+        IfEq(LVar0, ACTION_STATE_IDLE)
+            BreakLoop
+        EndIf
+    EndLoop
+    ExecWait(N(EVS_DetermineCarrierNPC))
+    Call(GetNpcPos, MV_ItemCarrierNpc, LVar0, LVar1, LVar2)
+    Add(LVar1, 20)
+    Call(SetNpcPos, NPC_DummyBoo, LVar0, LVar1, LVar2)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Wait(1)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar1, 30)
+    Call(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
+    Call(SetNpcJumpscale, NPC_DummyBoo, Float(2.0))
+    Call(NpcJump0, NPC_DummyBoo, LVar0, LVar1, LVar2, 10)
+    Wait(10)
+    Call(SetNpcPos, NPC_DummyBoo, NPC_DISPOSE_LOCATION)
+    Wait(1)
+    Set(MF_WaitForUpgradeDone, FALSE)
+    Exec(N(EVS_PlayUpgradeSong))
+    Exec(N(EVS_SpawnGotSuperBootsFX))
+    Call(N(UpgradeBootsToSuper))
+    Wait(30)
+    Call(ShowMessageAtScreenPos, MSG_Menus_0180, 160, 40)
+    Set(MF_WaitForUpgradeDone, TRUE)
+    Wait(30)
+    Call(N(GetPlayerPosOutsideKeepAwayRing))
+    Call(SetPlayerSpeed, Float(4.0))
+    Call(PlayerMoveTo, LVar0, LVar2, 0)
+    Wait(20)
+    Call(GetNpcPos, NPC_LeaderBoo, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_003D)
+    Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
+    Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
+    Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(20)
+    Thread
+        Wait(30)
+        Call(PlaySound, SOUND_BOO_SPOOK)
+    EndThread
+    Set(LVarA, NPC_KeepAwayBoo1)
+    Exec(N(EVS_BooSpookAndVanish))
+    Set(LVarA, NPC_KeepAwayBoo2)
+    Exec(N(EVS_BooSpookAndVanish))
+    Set(LVarA, NPC_KeepAwayBoo3)
+    Exec(N(EVS_BooSpookAndVanish))
+    Set(LVarA, NPC_KeepAwayBoo4)
+    Exec(N(EVS_BooSpookAndVanish))
+    Set(LVarA, NPC_KeepAwayBoo5)
+    Exec(N(EVS_BooSpookAndVanish))
+    Set(LVarA, NPC_KeepAwayBoo6)
+    Exec(N(EVS_BooSpookAndVanish))
+    Set(LVarA, NPC_KeepAwayBoo7)
+    Exec(N(EVS_BooSpookAndVanish))
+    Set(LVarA, NPC_KeepAwayBoo8)
+    Exec(N(EVS_BooSpookAndVanish))
+    Set(LVarA, NPC_LeaderBoo)
+    Exec(N(EVS_BooSpookAndVanish))
+    Wait(60)
+    Call(SetNpcPos, NPC_TutorialBoo, -160, 10, -175)
+    Call(SetNpcImgFXParams, NPC_TutorialBoo, IMGFX_SET_ALPHA, 0, 0, 0, 0)
+    Set(LVarA, NPC_TutorialBoo)
+    Exec(N(EVS_BooAppear))
+    Wait(60)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Wait(20)
+    Set(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };

@@ -83,49 +83,49 @@ API_CALLABLE(PlayShrinkHitFX) {
 }
 
 EvtScript EVS_PlaySleepHitFX = {
-    EVT_CALL(PlaySleepHitFX)
-    EVT_RETURN
-    EVT_END
+    Call(PlaySleepHitFX)
+    Return
+    End
 };
 
 EvtScript EVS_PlayDizzyHitFX = {
-    EVT_CALL(PlayDizzyHitFX)
-    EVT_RETURN
-    EVT_END
+    Call(PlayDizzyHitFX)
+    Return
+    End
 };
 
 EvtScript EVS_PlayParalyzeHitFX = {
-    EVT_CALL(PlayParalyzeHitFX)
-    EVT_RETURN
-    EVT_END
+    Call(PlayParalyzeHitFX)
+    Return
+    End
 };
 
 EvtScript EVS_PlayPoisonHitFX = {
-    EVT_CALL(PlayPoisonHitFX)
-    EVT_RETURN
-    EVT_END
+    Call(PlayPoisonHitFX)
+    Return
+    End
 };
 
 EvtScript EVS_PlayStopHitFX = {
-    EVT_CALL(PlayStopHitFX)
-    EVT_RETURN
-    EVT_END
+    Call(PlayStopHitFX)
+    Return
+    End
 };
 
 EvtScript EVS_PlayFreezeHitFX = {
-    EVT_CALL(PlayFreezeHitSnowflakeFX)
-    EVT_WAIT(8)
-    EVT_CALL(PlayFreezeHitSnowflakeFX)
-    EVT_WAIT(15)
-    EVT_CALL(PlayFreezeHitParticleFX)
-    EVT_RETURN
-    EVT_END
+    Call(PlayFreezeHitSnowflakeFX)
+    Wait(8)
+    Call(PlayFreezeHitSnowflakeFX)
+    Wait(15)
+    Call(PlayFreezeHitParticleFX)
+    Return
+    End
 };
 
 EvtScript EVS_PlayShrinkHitFX = {
-    EVT_CALL(PlayShrinkHitFX)
-    EVT_RETURN
-    EVT_END
+    Call(PlayShrinkHitFX)
+    Return
+    End
 };
 
 void dispatch_event_player(s32 eventType) {

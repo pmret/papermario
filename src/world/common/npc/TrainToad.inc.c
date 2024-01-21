@@ -1,8 +1,8 @@
 #include "TrainToad.h"
 
 EvtScript N(EVS_NpcAuxAI_TrainToad) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_TrainToad) = {

@@ -7,22 +7,22 @@
 #include "battle/common/stage/lib/BeachEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_SET(LVar0, MODEL_g88)
-    EVT_EXEC(N(EVS_AnimatePalmLeaves))
-    EVT_SET(LVar0, MODEL_g89)
-    EVT_EXEC(N(EVS_AnimatePalmLeaves))
-    EVT_SET(LVar0, MODEL_g86)
-    EVT_EXEC(N(EVS_AnimateWave))
-    EVT_PLAY_EFFECT(EFFECT_SUN, 0, 0, 0, 0, 0, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Set(LVar0, MODEL_g88)
+    Exec(N(EVS_AnimatePalmLeaves))
+    Set(LVar0, MODEL_g89)
+    Exec(N(EVS_AnimatePalmLeaves))
+    Set(LVar0, MODEL_g86)
+    Exec(N(EVS_AnimateWave))
+    PlayEffect(EFFECT_SUN, 0, 0, 0, 0, 0, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 Stage NAMESPACE = {

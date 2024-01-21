@@ -34,76 +34,76 @@ Vec3f N(YoshiKidsRunPath)[] = {
 };
 
 EvtScript N(EVS_Scene_Epilogue) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
-    EVT_CALL(SetNpcPos, NPC_Sushie, -40, 0, 15)
-    EVT_CALL(SetNpcYaw, NPC_Sushie, 270)
-    EVT_CALL(SetNpcAnimation, NPC_Sushie, ANIM_WorldSushie_Read)
-    EVT_CALL(SetNpcAnimation, NPC_YoshiKid_04, ANIM_YoshiKid_Yellow_Sleep)
-    EVT_CALL(SetNpcAnimation, NPC_YoshiKid_02, ANIM_YoshiKid_Red_Sleep)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -20, 0, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, -20, 0, 0)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 350)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(16.0), EVT_FLOAT(-7.5))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(90)
-    EVT_THREAD
-        EVT_CALL(SetNpcPos, NPC_YoshiKid_01, -350, 0, 15)
-        EVT_CALL(SetNpcAnimation, NPC_YoshiKid_01, ANIM_YoshiKid_Green_Run)
-        EVT_CALL(LoadPath, 90, EVT_PTR(N(YoshiKidsRunPath)), ARRAY_COUNT(N(YoshiKidsRunPath)), EASING_LINEAR)
-        EVT_LABEL(10)
-        EVT_CALL(GetNextPathPos)
-        EVT_CALL(SetNpcPos, NPC_YoshiKid_01, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(SetNpcPos, NPC_YoshiKid_05, -350, 0, 15)
-        EVT_CALL(SetNpcAnimation, NPC_YoshiKid_05, ANIM_YoshiKid_Purple_Run)
-        EVT_CALL(LoadPath, 90, EVT_PTR(N(YoshiKidsRunPath)), ARRAY_COUNT(N(YoshiKidsRunPath)), EASING_LINEAR)
-        EVT_LABEL(11)
-        EVT_CALL(GetNextPathPos)
-        EVT_CALL(SetNpcPos, NPC_YoshiKid_05, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(11)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(60)
-    EVT_CALL(InterpNpcYaw, NPC_Sushie, 90, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Sushie, ANIM_WorldSushie_Talk)
-    EVT_CALL(SetNpcJumpscale, NPC_Sushie, EVT_FLOAT(2.0))
-    EVT_CALL(GetNpcPos, NPC_Sushie, LVar0, LVar1, LVar2)
-    EVT_CALL(NpcJump0, NPC_Sushie, LVar0, LVar1, LVar2, 10)
-    EVT_CALL(SetNpcAnimation, NPC_YoshiKid_01, ANIM_YoshiKid_Green_Talk)
-    EVT_CALL(SetNpcFlagBits, NPC_YoshiKid_03, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcPos, NPC_YoshiKid_03, -350, 0, 15)
-    EVT_CALL(SetNpcAnimation, NPC_YoshiKid_03, ANIM_YoshiKid_Blue_Run)
-    EVT_CALL(SetNpcSpeed, NPC_YoshiKid_03, EVT_FLOAT(5.0))
-    EVT_CALL(NpcMoveTo, NPC_YoshiKid_03, -100, 0, 0)
-    EVT_CALL(SetNpcAnimation, NPC_YoshiKid_03, ANIM_YoshiKid_Blue_Idle)
-    EVT_CHILD_THREAD
-        EVT_WAIT(20)
-        EVT_CALL(SetNpcJumpscale, NPC_YoshiKid_03, EVT_FLOAT(2.0))
-        EVT_LOOP(10)
-            EVT_CALL(SetNpcAnimation, NPC_YoshiKid_03, ANIM_YoshiKid_Blue_Jump)
-            EVT_CALL(GetNpcPos, NPC_YoshiKid_03, LVar0, LVar1, LVar2)
-            EVT_CALL(NpcJump0, NPC_YoshiKid_03, LVar0, LVar1, LVar2, 10)
-            EVT_CALL(SetNpcAnimation, NPC_YoshiKid_03, ANIM_YoshiKid_Blue_Land)
-            EVT_WAIT(8)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_WAIT(90)
-    EVT_CALL(FadeOutMusic, 0, 1000)
-    EVT_CALL(GotoMap, EVT_PTR("flo_00"), flo_00_ENTRY_B)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_LAND)
+    Call(SetNpcPos, NPC_Sushie, -40, 0, 15)
+    Call(SetNpcYaw, NPC_Sushie, 270)
+    Call(SetNpcAnimation, NPC_Sushie, ANIM_WorldSushie_Read)
+    Call(SetNpcAnimation, NPC_YoshiKid_04, ANIM_YoshiKid_Yellow_Sleep)
+    Call(SetNpcAnimation, NPC_YoshiKid_02, ANIM_YoshiKid_Red_Sleep)
+    Call(UseSettingsFrom, CAM_DEFAULT, -20, 0, 0)
+    Call(SetPanTarget, CAM_DEFAULT, -20, 0, 0)
+    Call(SetCamDistance, CAM_DEFAULT, 350)
+    Call(SetCamPitch, CAM_DEFAULT, Float(16.0), Float(-7.5))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(90)
+    Thread
+        Call(SetNpcPos, NPC_YoshiKid_01, -350, 0, 15)
+        Call(SetNpcAnimation, NPC_YoshiKid_01, ANIM_YoshiKid_Green_Run)
+        Call(LoadPath, 90, Ref(N(YoshiKidsRunPath)), ARRAY_COUNT(N(YoshiKidsRunPath)), EASING_LINEAR)
+        Label(10)
+        Call(GetNextPathPos)
+        Call(SetNpcPos, NPC_YoshiKid_01, LVar1, LVar2, LVar3)
+        Wait(1)
+        IfEq(LVar0, 1)
+            Goto(10)
+        EndIf
+    EndThread
+    Thread
+        Wait(15)
+        Call(SetNpcPos, NPC_YoshiKid_05, -350, 0, 15)
+        Call(SetNpcAnimation, NPC_YoshiKid_05, ANIM_YoshiKid_Purple_Run)
+        Call(LoadPath, 90, Ref(N(YoshiKidsRunPath)), ARRAY_COUNT(N(YoshiKidsRunPath)), EASING_LINEAR)
+        Label(11)
+        Call(GetNextPathPos)
+        Call(SetNpcPos, NPC_YoshiKid_05, LVar1, LVar2, LVar3)
+        Wait(1)
+        IfEq(LVar0, 1)
+            Goto(11)
+        EndIf
+    EndThread
+    Wait(60)
+    Call(InterpNpcYaw, NPC_Sushie, 90, 0)
+    Call(SetNpcAnimation, NPC_Sushie, ANIM_WorldSushie_Talk)
+    Call(SetNpcJumpscale, NPC_Sushie, Float(2.0))
+    Call(GetNpcPos, NPC_Sushie, LVar0, LVar1, LVar2)
+    Call(NpcJump0, NPC_Sushie, LVar0, LVar1, LVar2, 10)
+    Call(SetNpcAnimation, NPC_YoshiKid_01, ANIM_YoshiKid_Green_Talk)
+    Call(SetNpcFlagBits, NPC_YoshiKid_03, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcPos, NPC_YoshiKid_03, -350, 0, 15)
+    Call(SetNpcAnimation, NPC_YoshiKid_03, ANIM_YoshiKid_Blue_Run)
+    Call(SetNpcSpeed, NPC_YoshiKid_03, Float(5.0))
+    Call(NpcMoveTo, NPC_YoshiKid_03, -100, 0, 0)
+    Call(SetNpcAnimation, NPC_YoshiKid_03, ANIM_YoshiKid_Blue_Idle)
+    ChildThread
+        Wait(20)
+        Call(SetNpcJumpscale, NPC_YoshiKid_03, Float(2.0))
+        Loop(10)
+            Call(SetNpcAnimation, NPC_YoshiKid_03, ANIM_YoshiKid_Blue_Jump)
+            Call(GetNpcPos, NPC_YoshiKid_03, LVar0, LVar1, LVar2)
+            Call(NpcJump0, NPC_YoshiKid_03, LVar0, LVar1, LVar2, 10)
+            Call(SetNpcAnimation, NPC_YoshiKid_03, ANIM_YoshiKid_Blue_Land)
+            Wait(8)
+        EndLoop
+    EndChildThread
+    Wait(90)
+    Call(FadeOutMusic, 0, 1000)
+    Call(GotoMap, Ref("flo_00"), flo_00_ENTRY_B)
+    Wait(100)
+    Return
+    End
 };
 
 MAP_RODATA_PAD(2, epilogue);

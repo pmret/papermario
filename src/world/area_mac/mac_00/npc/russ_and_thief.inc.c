@@ -4,31 +4,31 @@ s32 N(LetterList_RussT)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_RussT) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_RussT, ANIM_RussT_Talk, ANIM_RussT_Idle,
         ITEM_LETTER_TO_RUSS_T, ITEM_NONE,
         MSG_MAC_Gate_0011, MSG_MAC_Gate_0012, MSG_MAC_Gate_0013, MSG_MAC_Gate_0014,
-        EVT_PTR(N(LetterList_RussT)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList_RussT)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_LetterReward_RussT) = {
-    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+    IfEq(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_ShyGuy_PlayRunningSounds) = {
-    EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SEQ_SHY_GUY_STEP, SOUND_SPACE_DEFAULT)
-        EVT_WAIT(2)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(PlaySoundAtNpc, LVar0, SOUND_SEQ_SHY_GUY_STEP, SOUND_SPACE_DEFAULT)
+        Wait(2)
+    EndLoop
+    Return
+    End
 };
 
 typedef struct RussTLoreEntry {
@@ -160,117 +160,117 @@ API_CALLABLE(N(GetRussHintCount)) {
 }
 
 EvtScript N(EVS_ManageCarriedDictionary) = {
-    EVT_CALL(GetNpcPos, NPC_ShyGuyThief, LVar2, LVar3, LVar4)
-    EVT_ADD(LVar3, 20)
-    EVT_CALL(MakeItemEntity, ITEM_DICTIONARY, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_DECORATION, 0)
-    EVT_SET(LVar9, LVar0)
-    EVT_WAIT(1)
-    EVT_LOOP(300)
-        EVT_CALL(GetNpcPos, NPC_ShyGuyThief, LVar2, LVar3, LVar4)
-        EVT_ADD(LVar3, 20)
-        EVT_CALL(SetItemPos, LVar9, LVar2, LVar3, LVar4)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(RemoveItemEntity, LVar9)
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, NPC_ShyGuyThief, LVar2, LVar3, LVar4)
+    Add(LVar3, 20)
+    Call(MakeItemEntity, ITEM_DICTIONARY, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_DECORATION, 0)
+    Set(LVar9, LVar0)
+    Wait(1)
+    Loop(300)
+        Call(GetNpcPos, NPC_ShyGuyThief, LVar2, LVar3, LVar4)
+        Add(LVar3, 20)
+        Call(SetItemPos, LVar9, LVar2, LVar3, LVar4)
+        Wait(1)
+    EndLoop
+    Call(RemoveItemEntity, LVar9)
+    Return
+    End
 };
 
 EvtScript N(EVS_ShyGuy_StealDictionary) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, -60)
-            EVT_IF_LT(LVar0, 120)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcPos, NPC_ShyGuyThief, -30, 20, -470)
-    EVT_CALL(SetNpcAnimation, NPC_ShyGuyThief, ANIM_ShyGuy_Red_Anim04)
-    EVT_WAIT(1)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_MAC_Gate_0009, 160, 40)
-    EVT_EXEC(N(EVS_ManageCarriedDictionary))
-    EVT_THREAD
-        EVT_CALL(SetGroupVisibility, MODEL_intel_inn, MODEL_GROUP_VISIBLE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-        EVT_SET(LVar0, 0)
-        EVT_LOOP(10)
-            EVT_ADD(LVar0, 8)
-            EVT_CALL(RotateModel, MODEL_o210, LVar0, 0, 1, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_LOOP(10)
-            EVT_ADD(LVar0, -8)
-            EVT_CALL(RotateModel, MODEL_o210, LVar0, 0, 1, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-        EVT_CALL(SetGroupVisibility, MODEL_intel_inn, MODEL_GROUP_HIDDEN)
-    EVT_END_THREAD
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcSpeed, NPC_ShyGuyThief, 10)
-    EVT_SET(LVar0, 21)
-    EVT_EXEC_GET_TID(N(EVS_ShyGuy_PlayRunningSounds), LVarA)
-    EVT_CALL(NpcMoveTo, NPC_ShyGuyThief, -10, -410, 0)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuyThief, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_ShyGuyThief, -10, 0, -340, 0)
-    EVT_SET(LVar0, 21)
-    EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SHY_GUY_RUN_AWAY, SOUND_SPACE_DEFAULT)
-    EVT_EXEC_GET_TID(N(EVS_ShyGuy_PlayRunningSounds), LVarA)
-    EVT_CALL(NpcMoveTo, NPC_ShyGuyThief, 45, -186, 0)
-    EVT_CALL(NpcMoveTo, NPC_ShyGuyThief, 139, -67, 0)
-    EVT_THREAD
-        EVT_CALL(NpcMoveTo, NPC_ShyGuyThief, 300, -20, 0)
-        EVT_CALL(NpcMoveTo, NPC_ShyGuyThief, 600, 0, 0)
-        EVT_KILL_THREAD(LVarA)
-        EVT_CALL(SetNpcPos, NPC_ShyGuyThief, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_SET(GF_MAC00_DictionaryStolen, TRUE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfGt(LVar0, -60)
+            IfLt(LVar0, 120)
+                BreakLoop
+            EndIf
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(SetNpcPos, NPC_ShyGuyThief, -30, 20, -470)
+    Call(SetNpcAnimation, NPC_ShyGuyThief, ANIM_ShyGuy_Red_Anim04)
+    Wait(1)
+    Call(DisablePlayerInput, TRUE)
+    Call(ShowMessageAtScreenPos, MSG_MAC_Gate_0009, 160, 40)
+    Exec(N(EVS_ManageCarriedDictionary))
+    Thread
+        Call(SetGroupVisibility, MODEL_intel_inn, MODEL_GROUP_VISIBLE)
+        Call(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+        Set(LVar0, 0)
+        Loop(10)
+            Add(LVar0, 8)
+            Call(RotateModel, MODEL_o210, LVar0, 0, 1, 0)
+            Wait(1)
+        EndLoop
+        Loop(10)
+            Add(LVar0, -8)
+            Call(RotateModel, MODEL_o210, LVar0, 0, 1, 0)
+            Wait(1)
+        EndLoop
+        Call(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
+        Call(SetGroupVisibility, MODEL_intel_inn, MODEL_GROUP_HIDDEN)
+    EndThread
+    Wait(5)
+    Call(SetNpcSpeed, NPC_ShyGuyThief, 10)
+    Set(LVar0, 21)
+    ExecGetTID(N(EVS_ShyGuy_PlayRunningSounds), LVarA)
+    Call(NpcMoveTo, NPC_ShyGuyThief, -10, -410, 0)
+    KillThread(LVarA)
+    Call(PlaySoundAtNpc, NPC_ShyGuyThief, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_ShyGuyThief, -10, 0, -340, 0)
+    Set(LVar0, 21)
+    Call(PlaySoundAtNpc, LVar0, SOUND_SHY_GUY_RUN_AWAY, SOUND_SPACE_DEFAULT)
+    ExecGetTID(N(EVS_ShyGuy_PlayRunningSounds), LVarA)
+    Call(NpcMoveTo, NPC_ShyGuyThief, 45, -186, 0)
+    Call(NpcMoveTo, NPC_ShyGuyThief, 139, -67, 0)
+    Thread
+        Call(NpcMoveTo, NPC_ShyGuyThief, 300, -20, 0)
+        Call(NpcMoveTo, NPC_ShyGuyThief, 600, 0, 0)
+        KillThread(LVarA)
+        Call(SetNpcPos, NPC_ShyGuyThief, NPC_DISPOSE_LOCATION)
+    EndThread
+    Set(GF_MAC00_DictionaryStolen, TRUE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShyGuyThief) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GT(GB_StoryProgress, STORY_CH4_GOT_TAYCE_TS_CAKE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_NE(GF_MAC00_DictionaryStolen, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_EXEC(N(EVS_ShyGuy_StealDictionary))
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
+        Return
+    EndIf
+    IfGt(GB_StoryProgress, STORY_CH4_GOT_TAYCE_TS_CAKE)
+        Return
+    EndIf
+    IfNe(GF_MAC00_DictionaryStolen, FALSE)
+        Return
+    EndIf
+    Exec(N(EVS_ShyGuy_StealDictionary))
+    Return
+    End
 };
 
 EvtScript N(EVS_RussT_GetHint) = {
-    EVT_CALL(N(InitRussHintUnlocks))
-    EVT_IF_EQ(GF_MAC00_Met_RussT, FALSE)
-        EVT_SET(GF_MAC00_Met_RussT, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0004)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(GetRussHintCount))
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SpeakToPlayer, NPC_RussT, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0008)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(GetRussHintMessage))
-    EVT_IF_NE(LVar2, 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0005)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0006)
-    EVT_END_IF
-    EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, LVar1)
-    EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0007)
-    EVT_RETURN
-    EVT_END
+    Call(N(InitRussHintUnlocks))
+    IfEq(GF_MAC00_Met_RussT, FALSE)
+        Set(GF_MAC00_Met_RussT, TRUE)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0004)
+        Return
+    EndIf
+    Call(N(GetRussHintCount))
+    IfEq(LVar0, 0)
+        Call(SpeakToPlayer, NPC_RussT, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0008)
+        Return
+    EndIf
+    Call(N(GetRussHintMessage))
+    IfNe(LVar2, 0)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0005)
+    Else
+        Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0006)
+    EndIf
+    Call(ContinueSpeech, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, LVar1)
+    Call(ContinueSpeech, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0007)
+    Return
+    End
 };
 
 s32 N(ItemList_RussDocuments1)[] = {
@@ -287,90 +287,90 @@ s32 N(ItemList_RussDocuments2)[] = {
 };
 
 EvtScript N(EVS_ItemPrompt_Dictionary) = {
-    EVT_IF_EQ(AF_MAC_0D, FALSE)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000A)
-        EVT_SET(AF_MAC_0D, TRUE)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000B)
-    EVT_END_IF
+    IfEq(AF_MAC_0D, FALSE)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000A)
+        Set(AF_MAC_0D, TRUE)
+    Else
+        Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000B)
+    EndIf
     EVT_CHOOSE_KEY_ITEM_FROM(N(ItemList_RussDocuments1))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ITEM_DICTIONARY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000D)
-            EVT_SET(GF_MAC00_DictionaryReturned, TRUE)
-            EVT_WAIT(10)
+    Switch(LVar0)
+        CaseEq(ITEM_DICTIONARY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000D)
+            Set(GF_MAC00_DictionaryReturned, TRUE)
+            Wait(10)
             EVT_GIVE_STAR_PIECE()
-            EVT_WAIT(10)
-            EVT_IF_EQ(GF_MAC00_TranslatedMysteryNote, TRUE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0010)
-            EVT_END_IF
-        EVT_CASE_EQ(ITEM_MYSTERY_NOTE)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000F)
-            EVT_SET(GF_MAC00_TranslatedMysteryNote, TRUE)
-        EVT_CASE_EQ(-1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000C)
-        EVT_CASE_EQ(0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+            Wait(10)
+            IfEq(GF_MAC00_TranslatedMysteryNote, TRUE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0010)
+            EndIf
+        CaseEq(ITEM_MYSTERY_NOTE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000F)
+            Set(GF_MAC00_TranslatedMysteryNote, TRUE)
+        CaseEq(-1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000C)
+        CaseEq(0)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_ItemPrompt_Documents) = {
-    EVT_SET(LVarA, 0)
+    Set(LVarA, 0)
     EVT_CHOOSE_KEY_ITEM_FROM(N(ItemList_RussDocuments2))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_IF_LT(GB_StoryProgress, STORY_CH4_SOLVED_COLOR_PUZZLE)
-                EVT_IF_EQ(GF_MAC00_TranslatedMysteryNote, TRUE)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0010)
-                    EVT_SET(LVarA, 1)
-                    EVT_RETURN
-                EVT_END_IF
-            EVT_ELSE
-            EVT_END_IF
-        EVT_CASE_EQ(-1)
-        EVT_CASE_DEFAULT
-            EVT_IF_EQ(LVar0, ITEM_MYSTERY_NOTE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000E)
-                EVT_SET(GF_MAC00_TranslatedMysteryNote, TRUE)
-                EVT_SET(LVarA, 1)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(LVar0)
+        CaseEq(0)
+            IfLt(GB_StoryProgress, STORY_CH4_SOLVED_COLOR_PUZZLE)
+                IfEq(GF_MAC00_TranslatedMysteryNote, TRUE)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0010)
+                    Set(LVarA, 1)
+                    Return
+                EndIf
+            Else
+            EndIf
+        CaseEq(-1)
+        CaseDefault
+            IfEq(LVar0, ITEM_MYSTERY_NOTE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000E)
+                Set(GF_MAC00_TranslatedMysteryNote, TRUE)
+                Set(LVarA, 1)
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_RussT) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
-        EVT_IF_EQ(GF_MAC00_DictionaryReturned, FALSE)
-            EVT_EXEC_WAIT(N(EVS_ItemPrompt_Dictionary))
-            EVT_EXEC_WAIT(N(EVS_LetterPrompt_RussT))
-            EVT_EXEC_WAIT(N(EVS_LetterReward_RussT))
-            EVT_IF_NE(LVarC, 0)
-                EVT_RETURN
-            EVT_END_IF
-            EVT_RETURN
-        EVT_END_IF
-        EVT_EXEC_WAIT(N(EVS_ItemPrompt_Documents))
-        EVT_IF_NE(LVarA, 0)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_RussT_GetHint))
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_RussT))
-    EVT_EXEC_WAIT(N(EVS_LetterReward_RussT))
-    EVT_IF_NE(LVarC, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
+        IfEq(GF_MAC00_DictionaryReturned, FALSE)
+            ExecWait(N(EVS_ItemPrompt_Dictionary))
+            ExecWait(N(EVS_LetterPrompt_RussT))
+            ExecWait(N(EVS_LetterReward_RussT))
+            IfNe(LVarC, 0)
+                Return
+            EndIf
+            Return
+        EndIf
+        ExecWait(N(EVS_ItemPrompt_Documents))
+        IfNe(LVarA, 0)
+            Return
+        EndIf
+    EndIf
+    ExecWait(N(EVS_RussT_GetHint))
+    ExecWait(N(EVS_LetterPrompt_RussT))
+    ExecWait(N(EVS_LetterReward_RussT))
+    IfNe(LVarC, 0)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_RussT) = {
-    EVT_CALL(N(ResetRussHintsGiven))
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_RussT)))
-    EVT_RETURN
-    EVT_END
+    Call(N(ResetRussHintsGiven))
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_RussT)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_RussT) = {

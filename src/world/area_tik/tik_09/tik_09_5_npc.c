@@ -5,48 +5,48 @@
 #include "world/common/util/GetDefeatedEnemyCount.inc.c"
 
 EvtScript N(EVS_OpenGates) = {
-    EVT_CALL(MakeLerp, 0, 60, 25, EASING_COS_IN_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, MODEL_ew_kousi, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_ee_kousi, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o58, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o59, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_RETURN
-    EVT_END
+    Call(MakeLerp, 0, 60, 25, EASING_COS_IN_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(TranslateModel, MODEL_ew_kousi, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_ee_kousi, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o58, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o59, COLLIDER_FLAGS_UPPER_MASK)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_DarkTroopa) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(N(GetDefeatedEnemyCount), LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_SET(GF_TIK09_Defeated_Ambush, TRUE)
-                EVT_EXEC(N(EVS_SpawnSwitch))
-                EVT_EXEC(N(EVS_OpenGates))
-            EVT_END_IF
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(N(GetDefeatedEnemyCount), LVar0)
+            IfEq(LVar0, 1)
+                Set(GF_TIK09_Defeated_Ambush, TRUE)
+                Exec(N(EVS_SpawnSwitch))
+                Exec(N(EVS_OpenGates))
+            EndIf
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_DarkTroopa) = {
-    EVT_IF_EQ(GF_TIK09_Defeated_Ambush, FALSE)
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_DarkTroopa)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_TIK09_Defeated_Ambush, FALSE)
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_DarkTroopa)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_KoopaTroopa_01) = {

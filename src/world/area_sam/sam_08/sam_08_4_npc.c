@@ -18,109 +18,109 @@ NpcSettings N(NpcSettings_Duplighost) = {
 #include "world/common/enemy/FrostClubba_Multi.inc.c"
 
 EvtScript N(EVS_NpcInteract_TrueKooperA) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH7_012B)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH7_012B)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_TrueKooperB) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-            EVT_EXEC_WAIT(N(EVS_Scene_HitTrueKooper))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+            ExecWait(N(EVS_Scene_HitTrueKooper))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_FakeKooperA) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH7_012A)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH7_012A)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_FakeKooperB) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-            EVT_EXEC_WAIT(N(EVS_Scene_HitFakeKooper))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+            ExecWait(N(EVS_Scene_HitFakeKooper))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Duplighost) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetSelfVar, 0, LVar0)
+        Wait(1)
+        IfEq(LVar0, 0)
+            Goto(0)
+        EndIf
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Duplighost) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetNpcFlagBits, NPC_Duplighost, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-            EVT_CALL(SetNpcSpeed, NPC_Duplighost, EVT_FLOAT(3.0 / DT))
-            EVT_CALL(SetNpcJumpscale, NPC_Duplighost, EVT_FLOAT(1.5))
-            EVT_CALL(SetNpcAnimation, NPC_Duplighost, ANIM_Duplighost_Anim04)
-            EVT_CALL(GetNpcPos, NPC_Duplighost, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar0, 50)
-            EVT_CALL(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
-            EVT_CALL(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 13 * DT)
-            EVT_CALL(InterpPlayerYaw, 90, 0)
-            EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
-            EVT_ADD(LVar0, 50)
-            EVT_CALL(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
-            EVT_CALL(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 13 * DT)
-            EVT_ADD(LVar0, 50)
-            EVT_CALL(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
-            EVT_CALL(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 13 * DT)
-            EVT_SET(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
-            EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, FALSE)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o47, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_CALL(DisablePlayerInput, FALSE)
-            EVT_ADD(LVar0, 50)
-            EVT_CALL(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
-            EVT_CALL(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 20 * DT)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetNpcFlagBits, NPC_Duplighost, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcSpeed, NPC_Duplighost, Float(3.0 / DT))
+            Call(SetNpcJumpscale, NPC_Duplighost, Float(1.5))
+            Call(SetNpcAnimation, NPC_Duplighost, ANIM_Duplighost_Anim04)
+            Call(GetNpcPos, NPC_Duplighost, LVar0, LVar1, LVar2)
+            Add(LVar0, 50)
+            Call(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
+            Call(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 13 * DT)
+            Call(InterpPlayerYaw, 90, 0)
+            Call(InterpNpcYaw, NPC_PARTNER, 90, 0)
+            Add(LVar0, 50)
+            Call(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
+            Call(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 13 * DT)
+            Add(LVar0, 50)
+            Call(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
+            Call(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 13 * DT)
+            Set(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
+            Call(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, FALSE)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o47, COLLIDER_FLAGS_UPPER_MASK)
+            Call(DisablePlayerInput, FALSE)
+            Add(LVar0, 50)
+            Call(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
+            Call(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 20 * DT)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TrueKooperA) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TrueKooperA)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_TrueKooperA)))
+    IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_RealKooperA) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_FakeKooperA)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_FakeKooperA)))
+    IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Duplighost) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Duplighost)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Duplighost)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Duplighost)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Duplighost)))
+    IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Ambush)[] = {
@@ -208,47 +208,47 @@ NpcData N(NpcData_Ambush)[] = {
 };
 
 EvtScript N(EVS_NpcIdle_TrueKooperB) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetNpcPos, NPC_Kooper_01A, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetNpcPos, NPC_Kooper_01A, LVar0, LVar1, LVar2)
+        Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TrueKooperB) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_PASSIVE, 0)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrueKooperB)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_TrueKooperB)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_PASSIVE, 0)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TrueKooperB)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_TrueKooperB)))
+    IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_FakeKooperB) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetNpcPos, NPC_Kooper_02A, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetNpcPos, NPC_Kooper_02A, LVar0, LVar1, LVar2)
+        Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_FakeKooperB) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_PASSIVE, 0)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_FakeKooperB)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_FakeKooperB)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_PASSIVE, 0)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_FakeKooperB)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_FakeKooperB)))
+    IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Hittable)[] = {

@@ -18,13 +18,13 @@ MobileAISettings N(AISettings_Gulpit) = {
 };
 
 EvtScript N(EVS_NpcAI_Gulpit) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 1, 5)
-    EVT_CALL(SetSelfVar, 2, 13)
-    EVT_CALL(SetSelfVar, 3, 30)
-    EVT_CALL(N(WanderMeleeAI_Main), EVT_PTR(N(AISettings_Gulpit)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(SetSelfVar, 1, 5)
+    Call(SetSelfVar, 2, 13)
+    Call(SetSelfVar, 3, 30)
+    Call(N(WanderMeleeAI_Main), Ref(N(AISettings_Gulpit)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Gulpit) = {
@@ -37,16 +37,16 @@ NpcSettings N(NpcSettings_Gulpit) = {
 };
 
 EvtScript N(EVS_NpcAI_Gulpit_Hitbox) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetSelfVar, 0, 6)
-    EVT_CALL(SetSelfVar, 1, 28)
-    EVT_CALL(SetSelfVar, 2, 55)
-    EVT_CALL(SetSelfVar, 3, 32)
-    EVT_CALL(SetSelfVar, 4, 10)
-    EVT_CALL(SetSelfVar, 15, 0)
-    EVT_CALL(N(MeleeHitbox_Main))
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetSelfVar, 0, 6)
+    Call(SetSelfVar, 1, 28)
+    Call(SetSelfVar, 2, 55)
+    Call(SetSelfVar, 3, 32)
+    Call(SetSelfVar, 4, 10)
+    Call(SetSelfVar, 15, 0)
+    Call(N(MeleeHitbox_Main))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Gulpit_Hitbox) = {

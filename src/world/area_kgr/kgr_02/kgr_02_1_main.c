@@ -22,21 +22,21 @@ MapSettings N(settings) = {
 EvtScript N(EVS_ExitWalk_kgr_01_1) = EVT_EXIT_WALK(60, kgr_02_ENTRY_0, "kgr_01", kgr_01_ENTRY_1);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kgr_01_1), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(N(EVS_ExitWalk_kgr_01_1), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_TOAD_TOWN)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_SET(LVar0, N(EVS_BindExitTriggers))
-    EVT_EXEC(EnterWalk)
-    EVT_EXEC(N(EVS_Dummy))
-    EVT_EXEC(N(EVS_CreateDarkness))
-    EVT_EXEC(N(EVS_MonitorFriendlyFire))
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_TOAD_TOWN)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_NO_LEAD()
+    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Set(LVar0, N(EVS_BindExitTriggers))
+    Exec(EnterWalk)
+    Exec(N(EVS_Dummy))
+    Exec(N(EVS_CreateDarkness))
+    Exec(N(EVS_MonitorFriendlyFire))
+    Return
+    End
 };

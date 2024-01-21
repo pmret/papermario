@@ -17,13 +17,13 @@ MobileAISettings N(AISettings_DarkTroopa_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_DarkTroopa_Wander) = {
-    EVT_CALL(SetSelfVar, 2, 6)
-    EVT_CALL(SetSelfVar, 3, 4)
-    EVT_CALL(SetSelfVar, 5, 13)
-    EVT_CALL(SetSelfVar, 7, 1)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(AISettings_DarkTroopa_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 2, 6)
+    Call(SetSelfVar, 3, 4)
+    Call(SetSelfVar, 5, 13)
+    Call(SetSelfVar, 7, 1)
+    Call(N(TackleAI_Main), Ref(N(AISettings_DarkTroopa_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_DarkTroopa_Wander) = {

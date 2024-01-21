@@ -4,9 +4,9 @@
 #include "world/common/enemy/FrostClubba_Multi.inc.c"
 
 EvtScript N(EVS_NpcInit_FrostClubba) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_REFLECT_FLOOR, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_REFLECT_FLOOR, TRUE)
+    Return
+    End
 };
 
 NpcData N(NpcData_FrostClubba)[] = {

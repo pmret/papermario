@@ -7,27 +7,27 @@ extern EvtScript N(EVS_DropSwitch);
 #include "world/common/enemy/Paratroopa.inc.c"
 
 EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(GB_StoryProgress, STORY_CH1_DEFEATED_BASEMENT_GUARD)
-            EVT_THREAD
-                EVT_CALL(DoNpcDefeat)
-            EVT_END_THREAD
-            EVT_EXEC_WAIT(N(EVS_DropSwitch))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Set(GB_StoryProgress, STORY_CH1_DEFEATED_BASEMENT_GUARD)
+            Thread
+                Call(DoNpcDefeat)
+            EndThread
+            ExecWait(N(EVS_DropSwitch))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoopaTroopa) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH1_DEFEATED_BASEMENT_GUARD)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_KoopaTroopa)))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH1_DEFEATED_BASEMENT_GUARD)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_KoopaTroopa)))
+    Return
+    End
 };
 
 NpcData N(NpcData_KoopaTroopa_Wander) = {

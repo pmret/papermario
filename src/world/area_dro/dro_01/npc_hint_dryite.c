@@ -18,53 +18,53 @@ API_CALLABLE(N(GetFloorCollider)) {
 }
 
 EvtScript N(EVS_Scene_TreeOrbitReaction) = {
-    EVT_LOOP(0)
-        EVT_CALL(N(GetFloorCollider), LVar0)
-        EVT_IF_EQ(LVar0, COLLIDER_ground)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(func_802CF56C, 1)
-    EVT_THREAD
-        EVT_WAIT(20)
-        EVT_CALL(func_802CF56C, 0)
-        EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
-    EVT_END_THREAD
-    EVT_CALL(PlayerFaceNpc, NPC_Dryite_03, FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0078)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(GetNpcPos, NPC_Dryite_03, LVar3, LVar4, LVar5)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_ADDF(LVar0, LVar3)
-    EVT_ADDF(LVar1, LVar4)
-    EVT_ADDF(LVar2, LVar5)
-    EVT_DIVF(LVar0, EVT_FLOAT(2.0))
-    EVT_DIVF(LVar1, EVT_FLOAT(2.0))
-    EVT_DIVF(LVar2, EVT_FLOAT(2.0))
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(-300.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(5.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0079)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
-    EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_007A)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(N(SaveSpinningRoofHintTime))
-    EVT_SET(GF_DRO01_HeardHintAboutSpinningRoof, TRUE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(N(GetFloorCollider), LVar0)
+        IfEq(LVar0, COLLIDER_ground)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(DisablePlayerInput, TRUE)
+    Call(func_802CF56C, 1)
+    Thread
+        Wait(20)
+        Call(func_802CF56C, 0)
+        Call(NpcFacePlayer, NPC_PARTNER, 0)
+    EndThread
+    Call(PlayerFaceNpc, NPC_Dryite_03, FALSE)
+    Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0078)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(GetNpcPos, NPC_Dryite_03, LVar3, LVar4, LVar5)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    AddF(LVar0, LVar3)
+    AddF(LVar1, LVar4)
+    AddF(LVar2, LVar5)
+    DivF(LVar0, Float(2.0))
+    DivF(LVar1, Float(2.0))
+    DivF(LVar2, Float(2.0))
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(-300.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(5.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0079)
+    Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
+    Wait(30)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_007A)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(N(SaveSpinningRoofHintTime))
+    Set(GF_DRO01_HeardHintAboutSpinningRoof, TRUE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 void N(red_tree_orbit_listener)(PlayerOrbitState* orbit, s32 event) {
@@ -113,57 +113,57 @@ PlayerOrbitTarget N(RunAroundTarget) = {
 };
 
 EvtScript N(EVS_NpcInteract_HintDryite) = {
-    EVT_IF_EQ(GF_MAC01_Merlon_HeardAboutDream, TRUE)
-        EVT_IF_EQ(GF_DRO01_HeardHintAboutSpinningRoof, TRUE)
+    IfEq(GF_MAC01_Merlon_HeardAboutDream, TRUE)
+        IfEq(GF_DRO01_HeardHintAboutSpinningRoof, TRUE)
             // in case the player forgets, remind them after a half hour
-            EVT_CALL(N(HasBeenHalfHourSinceTreeOrbit))
-            EVT_IF_EQ(LVar0, TRUE)
-                EVT_CALL(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_007B)
-                EVT_RETURN
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_IF
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(AF_DRO_01, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_006C)
-                EVT_CALL(SpeakToPlayer, NPC_Dryite_04, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_006D)
-                EVT_CALL(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_006E)
-                EVT_SET(AF_DRO_01, TRUE)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_006F)
-                EVT_CALL(SpeakToPlayer, NPC_Dryite_04, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0070)
-                EVT_CALL(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0071)
-                EVT_SET(AF_DRO_01, FALSE)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0072)
-            EVT_CALL(SpeakToPlayer, NPC_Dryite_04, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0073)
-            EVT_CALL(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0074)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0075)
-            EVT_CALL(SpeakToPlayer, NPC_Dryite_04, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0076)
-            EVT_CALL(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0077)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+            Call(N(HasBeenHalfHourSinceTreeOrbit))
+            IfEq(LVar0, TRUE)
+                Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_007B)
+                Return
+            EndIf
+        EndIf
+    EndIf
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(AF_DRO_01, FALSE)
+                Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_006C)
+                Call(SpeakToPlayer, NPC_Dryite_04, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_006D)
+                Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_006E)
+                Set(AF_DRO_01, TRUE)
+            Else
+                Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_006F)
+                Call(SpeakToPlayer, NPC_Dryite_04, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0070)
+                Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0071)
+                Set(AF_DRO_01, FALSE)
+            EndIf
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0072)
+            Call(SpeakToPlayer, NPC_Dryite_04, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0073)
+            Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0074)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0075)
+            Call(SpeakToPlayer, NPC_Dryite_04, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0076)
+            Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0077)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_HintDryite) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(dro_01_ENTRY_3)
-        EVT_CASE_OR_EQ(dro_01_ENTRY_4)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Dryite_Green_Talk)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_HintDryite)))
-    EVT_IF_EQ(GF_MAC01_Merlon_HeardAboutDream, TRUE)
-        EVT_THREAD
-            EVT_CALL(N(MonitorPlayerOrbiting), EVT_PTR(N(RunAroundTarget)))
-        EVT_END_THREAD
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseOrEq(dro_01_ENTRY_3)
+        CaseOrEq(dro_01_ENTRY_4)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Dryite_Green_Talk)
+            Return
+        EndCaseGroup
+    EndSwitch
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_HintDryite)))
+    IfEq(GF_MAC01_Merlon_HeardAboutDream, TRUE)
+        Thread
+            Call(N(MonitorPlayerOrbiting), Ref(N(RunAroundTarget)))
+        EndThread
+    EndIf
+    Return
+    End
 };

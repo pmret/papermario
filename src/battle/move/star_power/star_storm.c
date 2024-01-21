@@ -32,65 +32,65 @@ API_CALLABLE(N(SpawnDamageStarsFX)) {
 }
 
 EvtScript N(EVS_UsePower) = {
-    EVT_EXEC_WAIT(N(EVS_StarPower_WishForSpirit))
-    EVT_SET_CONST(LVar0, ANIM_BattleSkolar_Idle)
-    EVT_EXEC_WAIT(N(EVS_StarPower_SpiritSummoned))
-    EVT_CALL(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleSkolar_Shout)
-    EVT_WAIT(16)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_LOOP(10)
-            EVT_CALL(PlaySound, SOUND_SHOOTING_STAR_FALL_A)
-            EVT_CALL(N(SpawnShootingStarFX))
-            EVT_WAIT(5)
-            EVT_ADD(LVar0, 1)
-            EVT_CALL(PlaySound, SOUND_SHOOTING_STAR_FALL_B)
-            EVT_CALL(N(SpawnShootingStarFX))
-            EVT_WAIT(5)
-            EVT_ADD(LVar0, 1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_WAIT(50)
-        EVT_LOOP(10)
-            EVT_CALL(PlaySound, SOUND_STAR_BOUNCE_A)
-            EVT_ADD(LVar0, 1)
-            EVT_WAIT(5)
-            EVT_CALL(PlaySound, SOUND_STAR_BOUNCE_B)
-            EVT_ADD(LVar0, 1)
-            EVT_WAIT(5)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_LOOP(10)
-            EVT_WAIT(7)
-            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
-            EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(90)
-    EVT_CALL(InitTargetIterator)
-    EVT_LABEL(0)
-        EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-        EVT_CALL(ItemCheckHit, LVar0, 0, 0, 0, 0)
-        EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(N(SpawnDamageStarsFX), LVar0, LVar1, LVar2)
-        EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 7, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_LABEL(1)
-        EVT_WAIT(10)
-        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, ITER_NO_MORE)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_WAIT(20)
-    EVT_EXEC_WAIT(N(EVS_StarPower_SpiritDeparts))
-    EVT_CALL(PlayerYieldTurn)
-    EVT_EXEC_WAIT(N(EVS_StarPower_EndWish))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_StarPower_WishForSpirit))
+    SetConst(LVar0, ANIM_BattleSkolar_Idle)
+    ExecWait(N(EVS_StarPower_SpiritSummoned))
+    Call(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleSkolar_Shout)
+    Wait(16)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Thread
+        Set(LVar0, 0)
+        Loop(10)
+            Call(PlaySound, SOUND_SHOOTING_STAR_FALL_A)
+            Call(N(SpawnShootingStarFX))
+            Wait(5)
+            Add(LVar0, 1)
+            Call(PlaySound, SOUND_SHOOTING_STAR_FALL_B)
+            Call(N(SpawnShootingStarFX))
+            Wait(5)
+            Add(LVar0, 1)
+        EndLoop
+    EndThread
+    Thread
+        Set(LVar0, 0)
+        Wait(50)
+        Loop(10)
+            Call(PlaySound, SOUND_STAR_BOUNCE_A)
+            Add(LVar0, 1)
+            Wait(5)
+            Call(PlaySound, SOUND_STAR_BOUNCE_B)
+            Add(LVar0, 1)
+            Wait(5)
+        EndLoop
+    EndThread
+    Thread
+        Loop(10)
+            Wait(7)
+            Call(ShakeCam, CAM_BATTLE, 0, 5, Float(1.0))
+            Call(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
+        EndLoop
+    EndThread
+    Wait(90)
+    Call(InitTargetIterator)
+    Label(0)
+        Call(SetGoalToTarget, ACTOR_SELF)
+        Call(ItemCheckHit, LVar0, 0, 0, 0, 0)
+        IfEq(LVar0, HIT_RESULT_MISS)
+            Goto(1)
+        EndIf
+        Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Call(N(SpawnDamageStarsFX), LVar0, LVar1, LVar2)
+        Call(ItemDamageEnemy, LVar0, DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 7, BS_FLAGS1_TRIGGER_EVENTS)
+        Label(1)
+        Wait(10)
+        Call(ChooseNextTarget, ITER_NEXT, LVar0)
+        IfNe(LVar0, ITER_NO_MORE)
+            Goto(0)
+        EndIf
+    Wait(20)
+    ExecWait(N(EVS_StarPower_SpiritDeparts))
+    Call(PlayerYieldTurn)
+    ExecWait(N(EVS_StarPower_EndWish))
+    Return
+    End
 };

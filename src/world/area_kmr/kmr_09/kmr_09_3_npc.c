@@ -54,77 +54,77 @@ API_CALLABLE(N(GetAmbushEnemy)) {
 }
 
 EvtScript N(EVS_OnReadBillboard) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SUSPEND_GROUP(EVT_GROUP_01)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Sign_BewareOfGoombas, 160, 40)
-    EVT_RESUME_GROUP(EVT_GROUP_01)
-    EVT_SET(LFlag0, FALSE)
-    EVT_CALL(N(GetAmbushEnemy))
-    EVT_IF_NE(LVar0, NULL)
-        EVT_CALL(GetNpcVar, NPC_Goomba_Ambush, 0, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(SetNpcVar, NPC_Goomba_Ambush, 0, 1)
-            EVT_SET(LFlag0, TRUE)
-            EVT_WAIT(10)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_IF_EQ(LFlag0, TRUE)
-        EVT_UNBIND
-    EVT_END_IF
-    EVT_END
-    EVT_RETURN //@bug wrong order for END/RETURN
+    SetGroup(EVT_GROUP_00)
+    SuspendGroup(EVT_GROUP_01)
+    Call(DisablePlayerInput, TRUE)
+    Call(ShowMessageAtScreenPos, MSG_Menus_Sign_BewareOfGoombas, 160, 40)
+    ResumeGroup(EVT_GROUP_01)
+    Set(LFlag0, FALSE)
+    Call(N(GetAmbushEnemy))
+    IfNe(LVar0, NULL)
+        Call(GetNpcVar, NPC_Goomba_Ambush, 0, LVar0)
+        IfEq(LVar0, 0)
+            Call(SetNpcVar, NPC_Goomba_Ambush, 0, 1)
+            Set(LFlag0, TRUE)
+            Wait(10)
+        EndIf
+    EndIf
+    Call(DisablePlayerInput, FALSE)
+    IfEq(LFlag0, TRUE)
+        Unbind
+    EndIf
+    End
+    Return //@bug wrong order for END/RETURN
 };
 
 EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Goomba_Still)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
-    EVT_LABEL(0)
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FLIP_PAGE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcImgFXFlags, NPC_SELF, IMGFX_FLAG_2000)
-    EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ANIM, IMGFX_ANIM_UNFURL, 1, 1, 0)
-    EVT_WAIT(15)
-    EVT_CALL(SetNpcImgFXFlags, NPC_SELF, IMGFX_FLAG_2000)
-    EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_RESET, 0, 0, 0, 0)
-    EVT_THREAD
-        EVT_WAIT(2)
-        EVT_SETF(LVar0, EVT_FLOAT(0.0))
-        EVT_LOOP(20)
-            EVT_ADDF(LVar0, EVT_FLOAT(18.0))
-            EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.6))
-    EVT_CALL(NpcJump0, NPC_SELF, -35, 0, 25, 23)
-    EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_NO_SHADOW_RAYCAST, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnReadBillboard)), TRIGGER_WALL_PRESS_A, COLLIDER_kan, 1, 0)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Goomba_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Goomba_Still)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
+    Label(0)
+    Call(GetSelfVar, 0, LVar0)
+    IfEq(LVar0, 0)
+        Wait(1)
+        Goto(0)
+    EndIf
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_FLIP_PAGE, SOUND_SPACE_DEFAULT)
+    Call(SetNpcImgFXFlags, NPC_SELF, IMGFX_FLAG_2000)
+    Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ANIM, IMGFX_ANIM_UNFURL, 1, 1, 0)
+    Wait(15)
+    Call(SetNpcImgFXFlags, NPC_SELF, IMGFX_FLAG_2000)
+    Call(SetNpcImgFXParams, NPC_SELF, IMGFX_RESET, 0, 0, 0, 0)
+    Thread
+        Wait(2)
+        SetF(LVar0, Float(0.0))
+        Loop(20)
+            AddF(LVar0, Float(18.0))
+            Call(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
+            Wait(1)
+        EndLoop
+        Call(SetNpcRotation, NPC_SELF, 0, 0, 0)
+    EndThread
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Call(SetNpcJumpscale, NPC_SELF, Float(0.6))
+    Call(NpcJump0, NPC_SELF, -35, 0, 25, 23)
+    Call(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_NO_SHADOW_RAYCAST, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+    BindTrigger(Ref(N(EVS_OnReadBillboard)), TRIGGER_WALL_PRESS_A, COLLIDER_kan, 1, 0)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Goomba_Wander)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Goomba_Ambush) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Goomba_Ambush)))
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Goomba_Ambush)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Goomba_Ambush) = {

@@ -241,23 +241,23 @@ API_CALLABLE(N(ShowGameRecords)) {
 }
 
 EvtScript N(EVS_Inspect_Records) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(GetPlayerPos, LVarA, LVarB, LVarC)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVarA, 30, LVarC)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVarA, 30, LVarC)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(320.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.2))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(N(ShowGameRecords))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(400.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.2))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(GetPlayerPos, LVarA, LVarB, LVarC)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVarA, 30, LVarC)
+    Call(SetPanTarget, CAM_DEFAULT, LVarA, 30, LVarC)
+    Call(SetCamDistance, CAM_DEFAULT, Float(320.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.2))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(N(ShowGameRecords))
+    Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.2))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, FALSE)
+    Return
+    End
 };

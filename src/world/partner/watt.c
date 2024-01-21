@@ -88,9 +88,9 @@ API_CALLABLE(N(TakeOut)) {
 }
 
 EvtScript EVS_WorldWatt_TakeOut = {
-    EVT_CALL(N(TakeOut))
-    EVT_RETURN
-    EVT_END
+    Call(N(TakeOut))
+    Return
+    End
 };
 
 BSS TweesterPhysics N(TweesterPhysicsData);
@@ -206,9 +206,9 @@ API_CALLABLE(N(Update)) {
 }
 
 EvtScript EVS_WorldWatt_Update = {
-    EVT_CALL(N(Update))
-    EVT_RETURN
-    EVT_END
+    Call(N(Update))
+    Return
+    End
 };
 
 void N(try_cancel_tweester)(Npc* watt) {
@@ -392,9 +392,9 @@ API_CALLABLE(N(UseAbility)) {
 }
 
 EvtScript EVS_WorldWatt_UseAbility = {
-    EVT_CALL(N(UseAbility))
-    EVT_RETURN
-    EVT_END
+    Call(N(UseAbility))
+    Return
+    End
 };
 
 API_CALLABLE(N(PutAway)) {
@@ -420,9 +420,9 @@ API_CALLABLE(N(PutAway)) {
 }
 
 EvtScript EVS_WorldWatt_PutAway = {
-    EVT_CALL(N(PutAway))
-    EVT_RETURN
-    EVT_END
+    Call(N(PutAway))
+    Return
+    End
 };
 
 void N(pre_battle)(Npc* watt) {
@@ -556,7 +556,7 @@ void N(sync_held_position)(void) {
 }
 
 EvtScript EVS_WorldWatt_EnterMap = {
-    EVT_CALL(N(EnterMap))
-    EVT_RETURN
-    EVT_END
+    Call(N(EnterMap))
+    Return
+    End
 };

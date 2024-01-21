@@ -17,9 +17,9 @@ MobileAISettings N(AISettings_Tubba_Patrol) = {
 };
 
 EvtScript N(EVS_NpcAI_Tubba_Patrol) = {
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(AISettings_Tubba_Patrol)))
-    EVT_RETURN
-    EVT_END
+    Call(N(PatrolNoAttackAI_Main), Ref(N(AISettings_Tubba_Patrol)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_TubbaBlubba_Patrol) = {

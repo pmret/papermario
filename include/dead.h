@@ -127,7 +127,7 @@
 #define SetMusicTrack dead_SetMusicTrack
 #define FadeInMusic dead_FadeInMusic
 #define RandInt dead_RandInt
-#define PlayEffect dead_PlayEffect
+#define PlayEffect_impl dead_PlayEffect_impl
 #define DisablePlayerInput dead_DisablePlayerInput
 #define ModifyColliderFlags dead_ModifyColliderFlags
 #define PlayerMoveTo dead_PlayerMoveTo

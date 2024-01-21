@@ -595,246 +595,246 @@ API_CALLABLE(N(func_80243068_96C228)) {
 }
 
 EvtScript N(EVS_NpcAuxAI_Merlee) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_Merlee) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_PerformRitual) = {
-    EVT_USE_ARRAY(EVT_PTR(N(RitualBuffer)))
-    EVT_SET(RITUAL_VAR_STATE, RITUAL_STATE_INIT)
-    EVT_CALL(GetNpcPos, NPC_Merlee, RITUAL_VAR_POS_X, RITUAL_VAR_POS_Y, RITUAL_VAR_POS_Z)
-    EVT_ADD(RITUAL_VAR_POS_X, 60)
-    EVT_ADD(RITUAL_VAR_POS_Z, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Merlee, SOUND_MERLEE_TWIRL, SOUND_SPACE_DEFAULT)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 720, 0, 60, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcRotation, NPC_Merlee, 0, LVar0, 0)
-            EVT_IF_GT(LVar0, 360)
-                EVT_ADD(LVar0, -360)
-            EVT_END_IF
-            EVT_SWITCH(LVar0)
-                EVT_CASE_RANGE(90, 270)
-                    EVT_SET(LVar2, ANIM_WorldMerlee_SpinBack)
-                EVT_CASE_DEFAULT
-                    EVT_SET(LVar2, ANIM_WorldMerlee_SpinFront)
-            EVT_END_SWITCH
-            EVT_CALL(SetNpcAnimation, NPC_Merlee, LVar2)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(SetNpcRotation, NPC_Merlee, 0, 0, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Merlee, ANIM_WorldMerlee_Gather)
-        EVT_WAIT(200)
-        EVT_CALL(SetNpcAnimation, NPC_Merlee, ANIM_WorldMerlee_Bow)
-        EVT_WAIT(40)
-        EVT_CALL(SetNpcAnimation, NPC_Merlee, ANIM_WorldMerlee_Gather)
-        EVT_WAIT(75)
-        EVT_CALL(SetNpcAnimation, NPC_Merlee, ANIM_WorldMerlee_Release)
-    EVT_END_THREAD
-    EVT_WAIT(60)
-    EVT_CALL(PlaySoundAtNpc, NPC_Merlee, SOUND_MERLEE_GATHER_ENERGY, SOUND_SPACE_DEFAULT)
-    EVT_SET(LVar0, RITUAL_VAR_POS_Y)
-    EVT_ADD(LVar0, 25)
-    EVT_PLAY_EFFECT(EFFECT_RADIATING_ENERGY_ORB, 0, RITUAL_VAR_POS_X, LVar0, RITUAL_VAR_POS_Z, 1, -1)
-    EVT_SET(RITUAL_VAR_ORB_EFFECT, LVarF)
-    EVT_THREAD
-        EVT_WAIT(30)
-        EVT_CALL(DismissEffect, RITUAL_VAR_ORB_EFFECT)
-    EVT_END_THREAD
-    EVT_CALL(N(DarkenWorld))
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(InterpPlayerYaw, 0, 0)
-    EVT_CALL(N(CreateRitualCards))
-    EVT_THREAD
-        EVT_LOOP(0)
-            EVT_IF_EQ(RITUAL_VAR_STATE, RITUAL_STATE_2)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(10)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(9)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(4)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(4)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(2)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(2)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(2)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(2)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(6)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-        EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_LOOP(0)
-            EVT_IF_GE(RITUAL_VAR_STATE, RITUAL_STATE_3)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_WAIT(9)
-        EVT_CALL(N(func_8024303C_96C1FC))
-        EVT_WAIT(2)
-        EVT_CALL(N(func_80243068_96C228))
-        EVT_LOOP(0)
-            EVT_IF_GE(RITUAL_VAR_STATE, RITUAL_STATE_A)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_MERLEE_GATHER_CARDS)
-        EVT_LOOP(0)
-            EVT_IF_GE(RITUAL_VAR_STATE, RITUAL_STATE_B)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_WAIT(15)
-        EVT_CALL(PlaySound, SOUND_MERLEE_RELEASE_PLAYER)
-    EVT_END_THREAD
-    EVT_LOOP(0)
-        EVT_IF_EQ(RITUAL_VAR_STATE, RITUAL_STATE_D)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetPlayerPos, RITUAL_VAR_POS_X, RITUAL_VAR_POS_Y, RITUAL_VAR_POS_Z)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_UsePower)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerPos, RITUAL_VAR_POS_X, RITUAL_VAR_POS_Y, RITUAL_VAR_POS_Z)
-    EVT_WAIT(1)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(N(DestroyRitualCards))
-    EVT_THREAD
-        EVT_CALL(N(UndarkenWorld))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    UseArray(Ref(N(RitualBuffer)))
+    Set(RITUAL_VAR_STATE, RITUAL_STATE_INIT)
+    Call(GetNpcPos, NPC_Merlee, RITUAL_VAR_POS_X, RITUAL_VAR_POS_Y, RITUAL_VAR_POS_Z)
+    Add(RITUAL_VAR_POS_X, 60)
+    Add(RITUAL_VAR_POS_Z, 0)
+    Call(PlaySoundAtNpc, NPC_Merlee, SOUND_MERLEE_TWIRL, SOUND_SPACE_DEFAULT)
+    Thread
+        Call(MakeLerp, 720, 0, 60, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetNpcRotation, NPC_Merlee, 0, LVar0, 0)
+            IfGt(LVar0, 360)
+                Add(LVar0, -360)
+            EndIf
+            Switch(LVar0)
+                CaseRange(90, 270)
+                    Set(LVar2, ANIM_WorldMerlee_SpinBack)
+                CaseDefault
+                    Set(LVar2, ANIM_WorldMerlee_SpinFront)
+            EndSwitch
+            Call(SetNpcAnimation, NPC_Merlee, LVar2)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(SetNpcRotation, NPC_Merlee, 0, 0, 0)
+        Call(SetNpcAnimation, NPC_Merlee, ANIM_WorldMerlee_Gather)
+        Wait(200)
+        Call(SetNpcAnimation, NPC_Merlee, ANIM_WorldMerlee_Bow)
+        Wait(40)
+        Call(SetNpcAnimation, NPC_Merlee, ANIM_WorldMerlee_Gather)
+        Wait(75)
+        Call(SetNpcAnimation, NPC_Merlee, ANIM_WorldMerlee_Release)
+    EndThread
+    Wait(60)
+    Call(PlaySoundAtNpc, NPC_Merlee, SOUND_MERLEE_GATHER_ENERGY, SOUND_SPACE_DEFAULT)
+    Set(LVar0, RITUAL_VAR_POS_Y)
+    Add(LVar0, 25)
+    PlayEffect(EFFECT_RADIATING_ENERGY_ORB, 0, RITUAL_VAR_POS_X, LVar0, RITUAL_VAR_POS_Z, 1, -1)
+    Set(RITUAL_VAR_ORB_EFFECT, LVarF)
+    Thread
+        Wait(30)
+        Call(DismissEffect, RITUAL_VAR_ORB_EFFECT)
+    EndThread
+    Call(N(DarkenWorld))
+    Call(DisablePlayerPhysics, TRUE)
+    Call(InterpPlayerYaw, 0, 0)
+    Call(N(CreateRitualCards))
+    Thread
+        Loop(0)
+            IfEq(RITUAL_VAR_STATE, RITUAL_STATE_2)
+                BreakLoop
+            EndIf
+            Wait(1)
+        EndLoop
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(10)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(9)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(4)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(4)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(3)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(2)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(2)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(2)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(3)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(2)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(6)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(3)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(3)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(3)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+        Wait(3)
+        Call(PlaySound, SOUND_SEQ_SHUFFLE_CARD)
+    EndThread
+    Thread
+        Loop(0)
+            IfGe(RITUAL_VAR_STATE, RITUAL_STATE_3)
+                BreakLoop
+            EndIf
+            Wait(1)
+        EndLoop
+        Wait(9)
+        Call(N(func_8024303C_96C1FC))
+        Wait(2)
+        Call(N(func_80243068_96C228))
+        Loop(0)
+            IfGe(RITUAL_VAR_STATE, RITUAL_STATE_A)
+                BreakLoop
+            EndIf
+            Wait(1)
+        EndLoop
+        Wait(3)
+        Call(PlaySound, SOUND_MERLEE_GATHER_CARDS)
+        Loop(0)
+            IfGe(RITUAL_VAR_STATE, RITUAL_STATE_B)
+                BreakLoop
+            EndIf
+            Wait(1)
+        EndLoop
+        Wait(15)
+        Call(PlaySound, SOUND_MERLEE_RELEASE_PLAYER)
+    EndThread
+    Loop(0)
+        IfEq(RITUAL_VAR_STATE, RITUAL_STATE_D)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(SetPlayerPos, RITUAL_VAR_POS_X, RITUAL_VAR_POS_Y, RITUAL_VAR_POS_Z)
+    Call(SetPlayerAnimation, ANIM_Mario1_UsePower)
+    Wait(1)
+    Call(SetPlayerPos, RITUAL_VAR_POS_X, RITUAL_VAR_POS_Y, RITUAL_VAR_POS_Z)
+    Wait(1)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(N(DestroyRitualCards))
+    Thread
+        Call(N(UndarkenWorld))
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_BeginMerleeCamera) = {
-    EVT_CALL(GetNpcPos, NPC_Merlee, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, 0, 200)
-    EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(8.0))
-    EVT_CALL(SetCamPitch, 0, 20, -15)
-    EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, NPC_Merlee, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, 0, 200)
+    Call(SetPanTarget, 0, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, 0, Float(8.0))
+    Call(SetCamPitch, 0, 20, -15)
+    Call(PanToTarget, 0, 0, 1)
+    Call(WaitForCam, 0, Float(1.0))
+    Return
+    End
 };
 
 EvtScript N(EVS_EndMerleeCamera) = {
-    EVT_CALL(PanToTarget, 0, 0, 0)
-    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(3.0))
-    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_RETURN
-    EVT_END
+    Call(PanToTarget, 0, 0, 0)
+    Call(SetCamSpeed, 0, Float(3.0))
+    Call(WaitForCam, 0, Float(1.0))
+    Return
+    End
 };
 
 
 EvtScript N(EVS_NpcInteract_Merlee) = {
-    EVT_CALL(func_802D2C14, 1)
-    EVT_EXEC_WAIT(N(EVS_BeginMerleeCamera))
-    EVT_SET(LVar0, 0)
-    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH4_1)
-        EVT_ADD(LVar0, 1)
-    EVT_END_IF
-    EVT_IF_EQ(GF_HOS06_MerluvleeRequestedCrystalBall, 1)
-        EVT_ADD(LVar0, 1)
-    EVT_END_IF
-    EVT_IF_EQ(GF_DRO01_Gift_CrystalBall, 0)
-        EVT_ADD(LVar0, 1)
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, 3)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DC)
-        EVT_SET(LVar0, ITEM_CRYSTAL_BALL)
-        EVT_SET(LVar1, 1)
-        EVT_EXEC_WAIT(N(GiveItemReward))
-        EVT_CALL(AddKeyItem, ITEM_CRYSTAL_BALL)
-        EVT_SET(GF_DRO01_Gift_CrystalBall, 1)
-        EVT_WAIT(20)
-        EVT_CALL(func_802D2C14, 0)
-        EVT_EXEC_WAIT(N(EVS_EndMerleeCamera))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D6)
-    EVT_CALL(ShowChoice, MSG_Choice_0011)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D7)
-        EVT_CALL(func_802D2C14, 0)
-        EVT_EXEC_WAIT(N(EVS_EndMerleeCamera))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D8)
-    EVT_CALL(ShowCoinCounter, 1)
-    EVT_CALL(ShowChoice, MSG_Choice_0018)
-    EVT_CALL(ShowCoinCounter, 0)
-    EVT_IF_EQ(LVar0, 3)
-        EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D7)
-        EVT_CALL(func_802D2C14, 0)
-        EVT_EXEC_WAIT(N(EVS_EndMerleeCamera))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(TryEnchantPlayer), LVar0, LVar1)
-    EVT_IF_NE(LVar1, 0)
-        EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D9)
-        EVT_CALL(func_802D2C14, 0)
-        EVT_EXEC_WAIT(N(EVS_EndMerleeCamera))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DA)
-    EVT_CALL(SetMusicTrack, 0, SONG_MERLEE_SPELL, 0, 8)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-    EVT_EXEC_GET_TID(N(EVS_PerformRitual), LVar9)
-    EVT_LOOP(0)
-        EVT_IS_THREAD_RUNNING(LVar9, LVar1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_WAIT(60)
-    EVT_CALL(SetNpcAnimation, 4, ANIM_WorldMerlee_Idle)
-    EVT_CALL(PlayerMoveTo, -100, -370, 8)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DB)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(func_802D2C14, 0)
-    EVT_EXEC_WAIT(N(EVS_EndMerleeCamera))
-    EVT_RETURN
-    EVT_END
+    Call(func_802D2C14, 1)
+    ExecWait(N(EVS_BeginMerleeCamera))
+    Set(LVar0, 0)
+    IfEq(GB_KootFavor_Current, KOOT_FAVOR_CH4_1)
+        Add(LVar0, 1)
+    EndIf
+    IfEq(GF_HOS06_MerluvleeRequestedCrystalBall, 1)
+        Add(LVar0, 1)
+    EndIf
+    IfEq(GF_DRO01_Gift_CrystalBall, 0)
+        Add(LVar0, 1)
+    EndIf
+    IfEq(LVar0, 3)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DC)
+        Set(LVar0, ITEM_CRYSTAL_BALL)
+        Set(LVar1, 1)
+        ExecWait(N(GiveItemReward))
+        Call(AddKeyItem, ITEM_CRYSTAL_BALL)
+        Set(GF_DRO01_Gift_CrystalBall, 1)
+        Wait(20)
+        Call(func_802D2C14, 0)
+        ExecWait(N(EVS_EndMerleeCamera))
+        Return
+    EndIf
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D6)
+    Call(ShowChoice, MSG_Choice_0011)
+    IfNe(LVar0, 0)
+        Call(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D7)
+        Call(func_802D2C14, 0)
+        ExecWait(N(EVS_EndMerleeCamera))
+        Return
+    EndIf
+    Call(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D8)
+    Call(ShowCoinCounter, 1)
+    Call(ShowChoice, MSG_Choice_0018)
+    Call(ShowCoinCounter, 0)
+    IfEq(LVar0, 3)
+        Call(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D7)
+        Call(func_802D2C14, 0)
+        ExecWait(N(EVS_EndMerleeCamera))
+        Return
+    EndIf
+    Call(N(TryEnchantPlayer), LVar0, LVar1)
+    IfNe(LVar1, 0)
+        Call(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00D9)
+        Call(func_802D2C14, 0)
+        ExecWait(N(EVS_EndMerleeCamera))
+        Return
+    EndIf
+    Call(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DA)
+    Call(SetMusicTrack, 0, SONG_MERLEE_SPELL, 0, 8)
+    Call(DisablePartnerAI, 0)
+    Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
+    ExecGetTID(N(EVS_PerformRitual), LVar9)
+    Loop(0)
+        IsThreadRunning(LVar9, LVar1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Wait(60)
+    Call(SetNpcAnimation, 4, ANIM_WorldMerlee_Idle)
+    Call(PlayerMoveTo, -100, -370, 8)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DB)
+    Exec(N(EVS_SetupMusic))
+    Call(EnablePartnerAI)
+    Call(func_802D2C14, 0)
+    ExecWait(N(EVS_EndMerleeCamera))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Merlee) = {

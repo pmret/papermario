@@ -103,244 +103,244 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
-        EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_CALL(GetLastElement, LVar1)
-            EVT_IF_FLAG(LVar1, DAMAGE_TYPE_SHOCK)
-                EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
-                EVT_EXEC_WAIT(A(EVS_Duplighost_OnHitElectric))
-                EVT_RETURN
-            EVT_ELSE
-                EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
-                EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_END_IF
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_BurnHurt)
-            EVT_SET_CONST(LVar2, ANIM_BattleParakarry_BurnStill)
-            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-        EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_BurnHurt)
-            EVT_SET_CONST(LVar2, ANIM_BattleParakarry_BurnStill)
-            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
-            EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_BurnStill)
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
-            EVT_EXEC_WAIT(A(EVS_Duplighost_OnShockHit))
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_HurtStill)
-            EVT_SET(LVar2, 22)
-            EVT_EXEC_WAIT(A(EVS_Duplighost_OnShockDeath))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
-        EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_DEATH)
-            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_Recover)
-        EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Run)
-            EVT_SET_CONST(LVar2, ANIM_BattleParakarry_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Run)
-            EVT_EXEC_WAIT(EVS_Enemy_AirLift)
-        EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
-                EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
-                EVT_ELSE
-                    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 3, 0)
-                EVT_END_IF
-            EVT_END_IF
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
-            EVT_RETURN
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseOrEq(EVENT_HIT_COMBO)
+        CaseOrEq(EVENT_HIT)
+            Call(GetLastElement, LVar1)
+            IfFlag(LVar1, DAMAGE_TYPE_SHOCK)
+                SetConst(LVar0, PRT_MAIN)
+                SetConst(LVar1, ANIM_BattleParakarry_Hurt)
+                ExecWait(A(EVS_Duplighost_OnHitElectric))
+                Return
+            Else
+                SetConst(LVar0, PRT_MAIN)
+                SetConst(LVar1, ANIM_BattleParakarry_Hurt)
+                ExecWait(EVS_Enemy_Hit)
+            EndIf
+        EndCaseGroup
+        CaseEq(EVENT_BURN_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_BurnHurt)
+            SetConst(LVar2, ANIM_BattleParakarry_BurnStill)
+            ExecWait(EVS_Enemy_BurnHit)
+        CaseEq(EVENT_BURN_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_BurnHurt)
+            SetConst(LVar2, ANIM_BattleParakarry_BurnStill)
+            ExecWait(EVS_Enemy_BurnHit)
+            ExecWait(A(EVS_Duplighost_OnDeath))
+            Wait(10)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_BurnStill)
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseEq(EVENT_SPIN_SMASH_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_Hurt)
+            ExecWait(EVS_Enemy_SpinSmashHit)
+        CaseEq(EVENT_SPIN_SMASH_DEATH)
+            ExecWait(A(EVS_Duplighost_OnDeath))
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_Hurt)
+            ExecWait(EVS_Enemy_SpinSmashHit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_Hurt)
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseEq(EVENT_SHOCK_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_Hurt)
+            ExecWait(A(EVS_Duplighost_OnShockHit))
+            Return
+        CaseEq(EVENT_SHOCK_DEATH)
+            ExecWait(A(EVS_Duplighost_OnDeath))
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_HurtStill)
+            Set(LVar2, 22)
+            ExecWait(A(EVS_Duplighost_OnShockDeath))
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_Hurt)
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
+        CaseOrEq(EVENT_AIR_LIFT_FAILED)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_Idle)
+            ExecWait(EVS_Enemy_NoDamageHit)
+        EndCaseGroup
+        CaseEq(EVENT_DEATH)
+            ExecWait(A(EVS_Duplighost_OnDeath))
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_Hurt)
+            ExecWait(EVS_Enemy_Hit)
+            Wait(10)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_Hurt)
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseEq(EVENT_RECOVER_STATUS)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_Idle)
+            ExecWait(EVS_Enemy_Recover)
+        CaseEq(EVENT_SCARE_AWAY)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_Run)
+            SetConst(LVar2, ANIM_BattleParakarry_Hurt)
+            ExecWait(EVS_Enemy_ScareAway)
+            Return
+        CaseEq(EVENT_BEGIN_AIR_LIFT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_Run)
+            ExecWait(EVS_Enemy_AirLift)
+        CaseEq(EVENT_BLOW_AWAY)
+            Call(GetStatusFlags, ACTOR_SELF, LVar0)
+            IfNotFlag(LVar0, STATUS_FLAGS_IMMOBILIZED)
+                IfFlag(LVar0, STATUS_FLAG_SHRINK)
+                    Call(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
+                Else
+                    Call(SetActorDispOffset, ACTOR_SELF, 0, 3, 0)
+                EndIf
+            EndIf
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleParakarry_Hurt)
+            ExecWait(EVS_Enemy_BlowAway)
+            Return
+        CaseDefault
+    EndSwitch
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Attack_SkyDive) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Run)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(AddGoalPos, ACTOR_SELF, 20, 0, 0)
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_COS_IN_OUT)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Still)
-    EVT_WAIT(3)
-    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_01)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAKARRY_PREDIVE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_FlyFast)
-    EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 10, 0)
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 5, 0, EASING_LINEAR)
-    EVT_WAIT(2)
-    EVT_THREAD
-        EVT_WAIT(3)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_PreDive)
-    EVT_END_THREAD
-    EVT_CALL(AddGoalPos, ACTOR_SELF, 40, 15, 0)
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 20, -20, EASING_QUARTIC_OUT)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAKARRY_DIVE)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Dive)
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 5, 0, EASING_LINEAR)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LVarA, LVar0)
-            EVT_THREAD
-                EVT_WAIT(5)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Idle)
-            EVT_END_THREAD
-            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(AddGoalPos, ACTOR_SELF, -40, 10, 0)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 10, -20, EASING_QUADRATIC_OUT)
-            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_END_IF
-            EVT_WAIT(20)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
-            EVT_WAIT(15)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(YieldTurn)
-            EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Run)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -5, EASING_LINEAR)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_PostDive)
-    EVT_WAIT(1)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
-    EVT_SWITCH(LVar9)
-        EVT_CASE_EQ(PARTNER_RANK_NORMAL)
-            EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CASE_EQ(PARTNER_RANK_SUPER)
-            EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CASE_EQ(PARTNER_RANK_ULTRA)
-            EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_END_SWITCH
-    EVT_CALL(PlaySound, SOUND_NONE)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Dive)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
-            EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, FALSE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Still)
-            EVT_THREAD
-                EVT_WAIT(4)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Run)
-            EVT_END_THREAD
-            EVT_CALL(AddGoalPos, ACTOR_SELF, 30, 0, 0)
-            EVT_CALL(JumpWithBounce, ACTOR_SELF, 10, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Idle)
-            EVT_WAIT(6)
-            EVT_CALL(YieldTurn)
-            EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Run)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -5, EASING_LINEAR)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Run)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(AddGoalPos, ACTOR_SELF, 20, 0, 0)
+    Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
+    Call(FlyToGoal, ACTOR_SELF, 0, -10, EASING_COS_IN_OUT)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Still)
+    Wait(3)
+    Call(UseBattleCamPresetImmediately, BTL_CAM_PRESET_01)
+    Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAKARRY_PREDIVE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_FlyFast)
+    Call(AddGoalPos, ACTOR_SELF, 0, 10, 0)
+    Call(FlyToGoal, ACTOR_SELF, 5, 0, EASING_LINEAR)
+    Wait(2)
+    Thread
+        Wait(3)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_PreDive)
+    EndThread
+    Call(AddGoalPos, ACTOR_SELF, 40, 15, 0)
+    Call(FlyToGoal, ACTOR_SELF, 20, -20, EASING_QUARTIC_OUT)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAKARRY_DIVE)
+    Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Dive)
+    Call(FlyToGoal, ACTOR_SELF, 5, 0, EASING_LINEAR)
+    Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            Set(LVarA, LVar0)
+            Thread
+                Wait(5)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Idle)
+            EndThread
+            Call(SetGoalToTarget, ACTOR_SELF)
+            Call(AddGoalPos, ACTOR_SELF, -40, 10, 0)
+            Call(FlyToGoal, ACTOR_SELF, 10, -20, EASING_QUADRATIC_OUT)
+            IfEq(LVarA, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EndIf
+            Wait(20)
+            Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
+            Wait(15)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(YieldTurn)
+            Call(SetGoalToHome, ACTOR_SELF)
+            Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Run)
+            Call(FlyToGoal, ACTOR_SELF, 0, -5, EASING_LINEAR)
+            Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Return
+        EndCaseGroup
+    EndSwitch
+    Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_PostDive)
+    Wait(1)
+    Call(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
+    Switch(LVar9)
+        CaseEq(PARTNER_RANK_NORMAL)
+            Wait(2)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
+        CaseEq(PARTNER_RANK_SUPER)
+            Wait(2)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_TRIGGER_EVENTS)
+        CaseEq(PARTNER_RANK_ULTRA)
+            Wait(2)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_TRIGGER_EVENTS)
+    EndSwitch
+    Call(PlaySound, SOUND_NONE)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Dive)
+            Call(SetActorJumpGravity, ACTOR_SELF, Float(1.4))
+            Call(AddGoalPos, ACTOR_SELF, 50, 0, 0)
+            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, FALSE, FALSE)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Still)
+            Thread
+                Wait(4)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Run)
+            EndThread
+            Call(AddGoalPos, ACTOR_SELF, 30, 0, 0)
+            Call(JumpWithBounce, ACTOR_SELF, 10, Float(4.0))
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Idle)
+            Wait(6)
+            Call(YieldTurn)
+            Call(SetGoalToHome, ACTOR_SELF)
+            Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Run)
+            Call(FlyToGoal, ACTOR_SELF, 0, -5, EASING_LINEAR)
+        EndCaseGroup
+    EndSwitch
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_EXEC_WAIT(N(EVS_Attack_SkyDive))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_Attack_SkyDive))
+    Return
+    End
 };
 
 Formation A(ParakarryCloneFormation) = {

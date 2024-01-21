@@ -94,73 +94,73 @@ API_CALLABLE(N(WaitForConfirmInput)) {
 }
 
 EvtScript N(EVS_SetupInitialCamera) = {
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, PARADE_START, 0, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, PARADE_START, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_RETURN
-    EVT_END
+    Call(UseSettingsFrom, CAM_DEFAULT, PARADE_START, 0, 0)
+    Call(SetPanTarget, CAM_DEFAULT, PARADE_START, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateScrollPos) = {
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, EVT_FLOAT(PARADE_START), 0, 0)
-    EVT_SETF(LVar1, EVT_FLOAT(0.0))
-    EVT_LOOP(0)
-        EVT_CALL(N(UpdateCameraScroll))
-        EVT_CALL(TranslateGroup, MODEL_bg, LVar1, 0, 0)
-        EVT_ADDF(LVar1, EVT_FLOAT(PARADE_SCROLL_RATE / DT))
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(SetPanTarget, CAM_DEFAULT, Float(PARADE_START), 0, 0)
+    SetF(LVar1, Float(0.0))
+    Loop(0)
+        Call(N(UpdateCameraScroll))
+        Call(TranslateGroup, MODEL_bg, LVar1, 0, 0)
+        AddF(LVar1, Float(PARADE_SCROLL_RATE / DT))
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateTexPan_Ground) = {
-    EVT_CALL(EnableTexPanning, MODEL_o145, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o146, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_j2, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o152, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o153, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o154, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o166, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o157, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o159, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o160, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o161, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o162, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o195, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o196, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o197, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o198, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o260, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o201, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o202, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o203, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o204, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o275, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o276, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o277, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o278, TRUE)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVar1, 0)
-        EVT_LOOP(0)
-            EVT_ADD(LVar0, 150)
-            EVT_IF_GT(LVar0, 0x20000)
-                EVT_ADD(LVar0, -0x20000)
-            EVT_END_IF
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(EnableTexPanning, MODEL_o145, TRUE)
+    Call(EnableTexPanning, MODEL_o146, TRUE)
+    Call(EnableTexPanning, MODEL_j2, TRUE)
+    Call(EnableTexPanning, MODEL_o152, TRUE)
+    Call(EnableTexPanning, MODEL_o153, TRUE)
+    Call(EnableTexPanning, MODEL_o154, TRUE)
+    Call(EnableTexPanning, MODEL_o166, TRUE)
+    Call(EnableTexPanning, MODEL_o157, TRUE)
+    Call(EnableTexPanning, MODEL_o159, TRUE)
+    Call(EnableTexPanning, MODEL_o160, TRUE)
+    Call(EnableTexPanning, MODEL_o161, TRUE)
+    Call(EnableTexPanning, MODEL_o162, TRUE)
+    Call(EnableTexPanning, MODEL_o195, TRUE)
+    Call(EnableTexPanning, MODEL_o196, TRUE)
+    Call(EnableTexPanning, MODEL_o197, TRUE)
+    Call(EnableTexPanning, MODEL_o198, TRUE)
+    Call(EnableTexPanning, MODEL_o260, TRUE)
+    Call(EnableTexPanning, MODEL_o201, TRUE)
+    Call(EnableTexPanning, MODEL_o202, TRUE)
+    Call(EnableTexPanning, MODEL_o203, TRUE)
+    Call(EnableTexPanning, MODEL_o204, TRUE)
+    Call(EnableTexPanning, MODEL_o275, TRUE)
+    Call(EnableTexPanning, MODEL_o276, TRUE)
+    Call(EnableTexPanning, MODEL_o277, TRUE)
+    Call(EnableTexPanning, MODEL_o278, TRUE)
+    Thread
+        Set(LVar0, 0)
+        Set(LVar1, 0)
+        Loop(0)
+            Add(LVar0, 150)
+            IfGt(LVar0, 0x20000)
+                Add(LVar0, -0x20000)
+            EndIf
+            Call(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
+            Wait(1)
+        EndLoop
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_OffsetNpcScroll) = {
-    EVT_CALL(N(AddScrollToNpcPos), LVar0)
-    EVT_RETURN
-    EVT_END
+    Call(N(AddScrollToNpcPos), LVar0)
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Eldstar)[] = {
@@ -564,277 +564,277 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
 };
 
 EvtScript N(EVS_ManageNpcPool) = {
-    EVT_CALL(N(CreateParadeNPC), NPC_Eldstar)
-    EVT_CALL(N(CreateParadeNPC), NPC_Mamar)
-    EVT_CALL(N(CreateParadeNPC), NPC_Skolar)
-    EVT_CALL(N(CreateParadeNPC), NPC_Muskular)
-    EVT_CALL(N(CreateParadeNPC), NPC_Misstar)
-    EVT_CALL(N(CreateParadeNPC), NPC_Klevar)
-    EVT_CALL(N(CreateParadeNPC), NPC_Kalmar)
-    EVT_CALL(N(CreateParadeNPC), NPC_PenguinMayor)
-    EVT_CALL(N(CreateParadeNPC), NPC_PenguinMayorWife)
-    EVT_CALL(N(CreateParadeNPC), NPC_PenguinSkater1)
-    EVT_CALL(N(CreateParadeNPC), NPC_PenguinSkater2)
-    EVT_CALL(N(CreateParadeNPC), NPC_ViolinPlayer1)
-    EVT_CALL(N(CreateParadeNPC), NPC_ViolinPlayer2)
-    EVT_CALL(N(CreateParadeNPC), NPC_ViolinPlayer3)
-    EVT_CALL(N(CreateParadeNPC), NPC_Conductor)
-    EVT_CALL(N(CreateParadeNPC), NPC_Singer)
-    EVT_CALL(N(ParadeSpriteHeapMalloc), 0x13400, LVar0)
-    EVT_CALL(N(CreateParadeNPC), NPC_AmayzeDayzee1)
-    EVT_CALL(N(CreateParadeNPC), NPC_AmayzeDayzee2)
-    EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_WIZARDS + 100)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_Eldstar)
-    EVT_CALL(DeleteNpc, NPC_Mamar)
-    EVT_CALL(DeleteNpc, NPC_Skolar)
-    EVT_CALL(DeleteNpc, NPC_Muskular)
-    EVT_CALL(DeleteNpc, NPC_Misstar)
-    EVT_CALL(DeleteNpc, NPC_Klevar)
-    EVT_CALL(DeleteNpc, NPC_Kalmar)
-    EVT_CALL(DeleteNpc, NPC_PenguinMayor)
-    EVT_CALL(DeleteNpc, NPC_PenguinMayorWife)
-    EVT_CALL(DeleteNpc, NPC_PenguinSkater1)
-    EVT_CALL(DeleteNpc, NPC_PenguinSkater2)
-    EVT_CALL(DeleteNpc, NPC_ViolinPlayer1)
-    EVT_CALL(DeleteNpc, NPC_ViolinPlayer2)
-    EVT_CALL(DeleteNpc, NPC_ViolinPlayer3)
-    EVT_CALL(DeleteNpc, NPC_Conductor)
-    EVT_CALL(DeleteNpc, NPC_Singer)
-    EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_Merle)
-    EVT_CALL(N(CreateParadeNPC), NPC_Merlee)
-    EVT_CALL(N(CreateParadeNPC), NPC_Merlon)
-    EVT_CALL(N(CreateParadeNPC), NPC_Merluvlee)
-    EVT_CALL(N(CreateParadeNPC), NPC_Merlow)
-    EVT_CALL(N(CreateParadeNPC), NPC_Merlar)
-    EVT_CALL(N(CreateParadeNPC), NPC_SunSad)
-    EVT_CALL(N(CreateParadeNPC), NPC_SunHappy)
-    EVT_CALL(N(CreateParadeNPC), NPC_Bubulb1)
-    EVT_CALL(N(CreateParadeNPC), NPC_Bubulb2)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_SHYGUY_DANCE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_AmayzeDayzee1)
-    EVT_CALL(DeleteNpc, NPC_AmayzeDayzee2)
-    EVT_WAIT(1)
-    EVT_CALL(N(ParadeSpriteHeapMalloc), 0x4700, LVar0)
-    EVT_CALL(N(CreateParadeNPC), NPC_PyroGuy1)
-    EVT_CALL(N(CreateParadeNPC), NPC_PyroGuy2)
-    EVT_CALL(N(CreateParadeNPC), NPC_Pratfaller)
-    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyMarshall)
-    EVT_CALL(N(CreateParadeNPC), NPC_GeneralGuy)
-    EVT_CALL(N(CreateParadeNPC), NPC_BackupDancer1)
-    EVT_CALL(N(CreateParadeNPC), NPC_BackupDancer2)
-    EVT_CALL(N(CreateParadeNPC), NPC_GrooveGuy1)
-    EVT_CALL(N(CreateParadeNPC), NPC_GrooveGuy2)
-    EVT_CALL(N(CreateParadeNPC), NPC_GrooveGuy3)
-    EVT_CALL(N(CreateParadeNPC), NPC_GrooveGuy4)
-    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation11)
-    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation12)
-    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation13)
-    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation21)
-    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation22)
-    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation23)
-    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation31)
-    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation32)
-    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation33)
-    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation41)
-    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation42)
-    EVT_CALL(N(CreateParadeNPC), NPC_ShyGuyFormation43)
-    EVT_CALL(N(ParadeSpriteHeapFree), LVar0)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_TOADS)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_Merle)
-    EVT_CALL(DeleteNpc, NPC_Merlee)
-    EVT_CALL(DeleteNpc, NPC_Merlon)
-    EVT_CALL(DeleteNpc, NPC_Merluvlee)
-    EVT_CALL(DeleteNpc, NPC_Merlow)
-    EVT_CALL(DeleteNpc, NPC_Merlar)
-    EVT_CALL(DeleteNpc, NPC_SunSad)
-    EVT_CALL(DeleteNpc, NPC_SunHappy)
-    EVT_CALL(DeleteNpc, NPC_Bubulb1)
-    EVT_CALL(DeleteNpc, NPC_Bubulb2)
-    EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_HornPlayer1)
-    EVT_CALL(N(CreateParadeNPC), NPC_HornPlayer2)
-    EVT_CALL(N(CreateParadeNPC), NPC_Drummer1)
-    EVT_CALL(N(CreateParadeNPC), NPC_Drummer2)
-    EVT_CALL(N(CreateParadeNPC), NPC_StandardBearer1)
-    EVT_CALL(N(CreateParadeNPC), NPC_StandardBearer2)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_PEACH)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DeleteNpc, NPC_PyroGuy1)
-    EVT_CALL(DeleteNpc, NPC_PyroGuy2)
-    EVT_CALL(DeleteNpc, NPC_Pratfaller)
-    EVT_CALL(DeleteNpc, NPC_ShyGuyMarshall)
-    EVT_CALL(DeleteNpc, NPC_GeneralGuy)
-    EVT_CALL(DeleteNpc, NPC_BackupDancer1)
-    EVT_CALL(DeleteNpc, NPC_BackupDancer2)
-    EVT_CALL(DeleteNpc, NPC_GrooveGuy1)
-    EVT_CALL(DeleteNpc, NPC_GrooveGuy2)
-    EVT_CALL(DeleteNpc, NPC_GrooveGuy3)
-    EVT_CALL(DeleteNpc, NPC_GrooveGuy4)
-    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation11)
-    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation12)
-    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation13)
-    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation21)
-    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation22)
-    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation23)
-    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation31)
-    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation32)
-    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation33)
-    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation41)
-    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation42)
-    EVT_CALL(DeleteNpc, NPC_ShyGuyFormation43)
-    EVT_WAIT(1)
-    EVT_CALL(N(CreateParadeNPC), NPC_Mario)
-    EVT_CALL(N(CreateParadeNPC), NPC_Peach)
-    EVT_CALL(N(CreateParadeNPC), NPC_Twink)
-    EVT_CALL(N(CreateParadeNPC), NPC_Twirler1)
-    EVT_CALL(N(CreateParadeNPC), NPC_Twirler2)
-    EVT_CALL(N(CreateParadeNPC), NPC_Twirler3)
-    EVT_CALL(N(CreateParadeNPC), NPC_Baton1)
-    EVT_CALL(N(CreateParadeNPC), NPC_Baton2)
-    EVT_CALL(N(CreateParadeNPC), NPC_Baton3)
-    EVT_CALL(N(CreateParadeNPC), NPC_StandardBearer3)
-    EVT_CALL(N(CreateParadeNPC), NPC_StandardBearer4)
-    EVT_RETURN
-    EVT_END
+    Call(N(CreateParadeNPC), NPC_Eldstar)
+    Call(N(CreateParadeNPC), NPC_Mamar)
+    Call(N(CreateParadeNPC), NPC_Skolar)
+    Call(N(CreateParadeNPC), NPC_Muskular)
+    Call(N(CreateParadeNPC), NPC_Misstar)
+    Call(N(CreateParadeNPC), NPC_Klevar)
+    Call(N(CreateParadeNPC), NPC_Kalmar)
+    Call(N(CreateParadeNPC), NPC_PenguinMayor)
+    Call(N(CreateParadeNPC), NPC_PenguinMayorWife)
+    Call(N(CreateParadeNPC), NPC_PenguinSkater1)
+    Call(N(CreateParadeNPC), NPC_PenguinSkater2)
+    Call(N(CreateParadeNPC), NPC_ViolinPlayer1)
+    Call(N(CreateParadeNPC), NPC_ViolinPlayer2)
+    Call(N(CreateParadeNPC), NPC_ViolinPlayer3)
+    Call(N(CreateParadeNPC), NPC_Conductor)
+    Call(N(CreateParadeNPC), NPC_Singer)
+    Call(N(ParadeSpriteHeapMalloc), 0x13400, LVar0)
+    Call(N(CreateParadeNPC), NPC_AmayzeDayzee1)
+    Call(N(CreateParadeNPC), NPC_AmayzeDayzee2)
+    Call(N(ParadeSpriteHeapFree), LVar0)
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_WIZARDS + 100)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DeleteNpc, NPC_Eldstar)
+    Call(DeleteNpc, NPC_Mamar)
+    Call(DeleteNpc, NPC_Skolar)
+    Call(DeleteNpc, NPC_Muskular)
+    Call(DeleteNpc, NPC_Misstar)
+    Call(DeleteNpc, NPC_Klevar)
+    Call(DeleteNpc, NPC_Kalmar)
+    Call(DeleteNpc, NPC_PenguinMayor)
+    Call(DeleteNpc, NPC_PenguinMayorWife)
+    Call(DeleteNpc, NPC_PenguinSkater1)
+    Call(DeleteNpc, NPC_PenguinSkater2)
+    Call(DeleteNpc, NPC_ViolinPlayer1)
+    Call(DeleteNpc, NPC_ViolinPlayer2)
+    Call(DeleteNpc, NPC_ViolinPlayer3)
+    Call(DeleteNpc, NPC_Conductor)
+    Call(DeleteNpc, NPC_Singer)
+    Wait(1)
+    Call(N(CreateParadeNPC), NPC_Merle)
+    Call(N(CreateParadeNPC), NPC_Merlee)
+    Call(N(CreateParadeNPC), NPC_Merlon)
+    Call(N(CreateParadeNPC), NPC_Merluvlee)
+    Call(N(CreateParadeNPC), NPC_Merlow)
+    Call(N(CreateParadeNPC), NPC_Merlar)
+    Call(N(CreateParadeNPC), NPC_SunSad)
+    Call(N(CreateParadeNPC), NPC_SunHappy)
+    Call(N(CreateParadeNPC), NPC_Bubulb1)
+    Call(N(CreateParadeNPC), NPC_Bubulb2)
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_SHYGUY_DANCE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DeleteNpc, NPC_AmayzeDayzee1)
+    Call(DeleteNpc, NPC_AmayzeDayzee2)
+    Wait(1)
+    Call(N(ParadeSpriteHeapMalloc), 0x4700, LVar0)
+    Call(N(CreateParadeNPC), NPC_PyroGuy1)
+    Call(N(CreateParadeNPC), NPC_PyroGuy2)
+    Call(N(CreateParadeNPC), NPC_Pratfaller)
+    Call(N(CreateParadeNPC), NPC_ShyGuyMarshall)
+    Call(N(CreateParadeNPC), NPC_GeneralGuy)
+    Call(N(CreateParadeNPC), NPC_BackupDancer1)
+    Call(N(CreateParadeNPC), NPC_BackupDancer2)
+    Call(N(CreateParadeNPC), NPC_GrooveGuy1)
+    Call(N(CreateParadeNPC), NPC_GrooveGuy2)
+    Call(N(CreateParadeNPC), NPC_GrooveGuy3)
+    Call(N(CreateParadeNPC), NPC_GrooveGuy4)
+    Call(N(CreateParadeNPC), NPC_ShyGuyFormation11)
+    Call(N(CreateParadeNPC), NPC_ShyGuyFormation12)
+    Call(N(CreateParadeNPC), NPC_ShyGuyFormation13)
+    Call(N(CreateParadeNPC), NPC_ShyGuyFormation21)
+    Call(N(CreateParadeNPC), NPC_ShyGuyFormation22)
+    Call(N(CreateParadeNPC), NPC_ShyGuyFormation23)
+    Call(N(CreateParadeNPC), NPC_ShyGuyFormation31)
+    Call(N(CreateParadeNPC), NPC_ShyGuyFormation32)
+    Call(N(CreateParadeNPC), NPC_ShyGuyFormation33)
+    Call(N(CreateParadeNPC), NPC_ShyGuyFormation41)
+    Call(N(CreateParadeNPC), NPC_ShyGuyFormation42)
+    Call(N(CreateParadeNPC), NPC_ShyGuyFormation43)
+    Call(N(ParadeSpriteHeapFree), LVar0)
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_TOADS)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DeleteNpc, NPC_Merle)
+    Call(DeleteNpc, NPC_Merlee)
+    Call(DeleteNpc, NPC_Merlon)
+    Call(DeleteNpc, NPC_Merluvlee)
+    Call(DeleteNpc, NPC_Merlow)
+    Call(DeleteNpc, NPC_Merlar)
+    Call(DeleteNpc, NPC_SunSad)
+    Call(DeleteNpc, NPC_SunHappy)
+    Call(DeleteNpc, NPC_Bubulb1)
+    Call(DeleteNpc, NPC_Bubulb2)
+    Wait(1)
+    Call(N(CreateParadeNPC), NPC_HornPlayer1)
+    Call(N(CreateParadeNPC), NPC_HornPlayer2)
+    Call(N(CreateParadeNPC), NPC_Drummer1)
+    Call(N(CreateParadeNPC), NPC_Drummer2)
+    Call(N(CreateParadeNPC), NPC_StandardBearer1)
+    Call(N(CreateParadeNPC), NPC_StandardBearer2)
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_PEACH)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DeleteNpc, NPC_PyroGuy1)
+    Call(DeleteNpc, NPC_PyroGuy2)
+    Call(DeleteNpc, NPC_Pratfaller)
+    Call(DeleteNpc, NPC_ShyGuyMarshall)
+    Call(DeleteNpc, NPC_GeneralGuy)
+    Call(DeleteNpc, NPC_BackupDancer1)
+    Call(DeleteNpc, NPC_BackupDancer2)
+    Call(DeleteNpc, NPC_GrooveGuy1)
+    Call(DeleteNpc, NPC_GrooveGuy2)
+    Call(DeleteNpc, NPC_GrooveGuy3)
+    Call(DeleteNpc, NPC_GrooveGuy4)
+    Call(DeleteNpc, NPC_ShyGuyFormation11)
+    Call(DeleteNpc, NPC_ShyGuyFormation12)
+    Call(DeleteNpc, NPC_ShyGuyFormation13)
+    Call(DeleteNpc, NPC_ShyGuyFormation21)
+    Call(DeleteNpc, NPC_ShyGuyFormation22)
+    Call(DeleteNpc, NPC_ShyGuyFormation23)
+    Call(DeleteNpc, NPC_ShyGuyFormation31)
+    Call(DeleteNpc, NPC_ShyGuyFormation32)
+    Call(DeleteNpc, NPC_ShyGuyFormation33)
+    Call(DeleteNpc, NPC_ShyGuyFormation41)
+    Call(DeleteNpc, NPC_ShyGuyFormation42)
+    Call(DeleteNpc, NPC_ShyGuyFormation43)
+    Wait(1)
+    Call(N(CreateParadeNPC), NPC_Mario)
+    Call(N(CreateParadeNPC), NPC_Peach)
+    Call(N(CreateParadeNPC), NPC_Twink)
+    Call(N(CreateParadeNPC), NPC_Twirler1)
+    Call(N(CreateParadeNPC), NPC_Twirler2)
+    Call(N(CreateParadeNPC), NPC_Twirler3)
+    Call(N(CreateParadeNPC), NPC_Baton1)
+    Call(N(CreateParadeNPC), NPC_Baton2)
+    Call(N(CreateParadeNPC), NPC_Baton3)
+    Call(N(CreateParadeNPC), NPC_StandardBearer3)
+    Call(N(CreateParadeNPC), NPC_StandardBearer4)
+    Return
+    End
 };
 
 EvtScript N(EVS_ParadePhase_PlayCredits) = {
-    EVT_WAIT(60)
-    EVT_EXEC(N(EVS_InitCredits))
-    EVT_EXEC(N(EVS_ShowCredits_Jobs))
-    EVT_EXEC(N(EVS_ShowCredits_Names))
-    EVT_RETURN
-    EVT_END
+    Wait(60)
+    Exec(N(EVS_InitCredits))
+    Exec(N(EVS_ShowCredits_Jobs))
+    Exec(N(EVS_ShowCredits_Names))
+    Return
+    End
 };
 
 EvtScript N(EVS_ManageParade) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetMusicTrack, 0, SONG_PARADE_NIGHT, 0, 8)
-    EVT_EXEC(N(EVS_SetupInitialCamera))
-    EVT_EXEC(N(EVS_ManageNpcPool))
-    EVT_EXEC_GET_TID(N(EVS_ParadePhase_StarSpirits), LVarA)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IS_THREAD_RUNNING(LVarA, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC(N(EVS_ParadePhase_PlayCredits))
-    EVT_EXEC_GET_TID(N(EVS_UpdateScrollPos), LVarA)
-    EVT_EXEC_GET_TID(N(EVS_UpdateTexPan_Ground), LVarB)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_SKATERS)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC(N(EVS_ParadePhase_SkatingPenguins))
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_MAYOR)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC(N(EVS_ParadePhase_MayorPenguin))
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_OPERA)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC(N(EVS_ParadePhase_Opera))
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_WIZARDS)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC(N(EVS_ParadePhase_Wizards))
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_SHYGUY_DANCE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC(N(EVS_ParadePhase_ShyGuyDancing))
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_SHYGUY_MARCH)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC(N(EVS_ParadePhase_ShyGuyFormation))
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_TOADS)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC(N(EVS_ParadePhase_Toads1))
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_PEACH)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC_GET_TID(N(EVS_ParadePhase_MarioPeach), LVarC)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_EXIT)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_KILL_THREAD(LVarA)
-    EVT_KILL_THREAD(LVarB)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IS_THREAD_RUNNING(LVarC, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC(N(EVS_ParadePhase_Toads2))
-    EVT_WAIT(150)
-    EVT_EXEC(N(EVS_MarioPeachExit))
-    EVT_WAIT(200)
-    EVT_CALL(GotoMap, EVT_PTR("kmr_30"), kmr_30_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetMusicTrack, 0, SONG_PARADE_NIGHT, 0, 8)
+    Exec(N(EVS_SetupInitialCamera))
+    Exec(N(EVS_ManageNpcPool))
+    ExecGetTID(N(EVS_ParadePhase_StarSpirits), LVarA)
+    Loop(0)
+        Wait(1)
+        IsThreadRunning(LVarA, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Exec(N(EVS_ParadePhase_PlayCredits))
+    ExecGetTID(N(EVS_UpdateScrollPos), LVarA)
+    ExecGetTID(N(EVS_UpdateTexPan_Ground), LVarB)
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_SKATERS)
+            BreakLoop
+        EndIf
+    EndLoop
+    Exec(N(EVS_ParadePhase_SkatingPenguins))
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_MAYOR)
+            BreakLoop
+        EndIf
+    EndLoop
+    Exec(N(EVS_ParadePhase_MayorPenguin))
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_OPERA)
+            BreakLoop
+        EndIf
+    EndLoop
+    Exec(N(EVS_ParadePhase_Opera))
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_WIZARDS)
+            BreakLoop
+        EndIf
+    EndLoop
+    Exec(N(EVS_ParadePhase_Wizards))
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_SHYGUY_DANCE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Exec(N(EVS_ParadePhase_ShyGuyDancing))
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_SHYGUY_MARCH)
+            BreakLoop
+        EndIf
+    EndLoop
+    Exec(N(EVS_ParadePhase_ShyGuyFormation))
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_TOADS)
+            BreakLoop
+        EndIf
+    EndLoop
+    Exec(N(EVS_ParadePhase_Toads1))
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_PEACH)
+            BreakLoop
+        EndIf
+    EndLoop
+    ExecGetTID(N(EVS_ParadePhase_MarioPeach), LVarC)
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_EXIT)
+            BreakLoop
+        EndIf
+    EndLoop
+    KillThread(LVarA)
+    KillThread(LVarB)
+    Loop(0)
+        Wait(1)
+        IsThreadRunning(LVarC, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Exec(N(EVS_ParadePhase_Toads2))
+    Wait(150)
+    Exec(N(EVS_MarioPeachExit))
+    Wait(200)
+    Call(GotoMap, Ref("kmr_30"), kmr_30_ENTRY_0)
+    Wait(100)
+    Return
+    End
 };

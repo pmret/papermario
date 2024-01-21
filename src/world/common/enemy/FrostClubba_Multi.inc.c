@@ -1,19 +1,19 @@
 #include "FrostClubba.h"
 
 EvtScript N(EVS_NpcDefeat_FrostClubba) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CALL(OnPlayerFled, 1)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(RemoveNpc, NPC_SELF)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+            Call(OnPlayerFled, 1)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_FrostClubba)[] = {
@@ -53,13 +53,13 @@ MobileAISettings N(AISettings_FrostClubba_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_FrostClubba_Wander) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 1, 3)
-    EVT_CALL(SetSelfVar, 2, 7)
-    EVT_CALL(SetSelfVar, 3, 6)
-    EVT_CALL(N(WanderMeleeAI_Main), EVT_PTR(N(AISettings_FrostClubba_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(SetSelfVar, 1, 3)
+    Call(SetSelfVar, 2, 7)
+    Call(SetSelfVar, 3, 6)
+    Call(N(WanderMeleeAI_Main), Ref(N(AISettings_FrostClubba_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_FrostClubba_Wander) = {
@@ -91,13 +91,13 @@ MobileAISettings N(AISettings_FrostClubba_Patrol) = {
 };
 
 EvtScript N(EVS_NpcAI_FrostClubba_Patrol) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 1, 3)
-    EVT_CALL(SetSelfVar, 2, 7)
-    EVT_CALL(SetSelfVar, 3, 6)
-    EVT_CALL(N(ClubbaPatrolAI_Main), EVT_PTR(N(AISettings_FrostClubba_Patrol)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(SetSelfVar, 1, 3)
+    Call(SetSelfVar, 2, 7)
+    Call(SetSelfVar, 3, 6)
+    Call(N(ClubbaPatrolAI_Main), Ref(N(AISettings_FrostClubba_Patrol)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_FrostClubba_Patrol) = {
@@ -131,13 +131,13 @@ MobileAISettings N(AISettings_FrostClubba_Napping) = {
 };
 
 EvtScript N(EVS_NpcAI_FrostClubba_Napping) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 1, 10)
-    EVT_CALL(SetSelfVar, 2, 14)
-    EVT_CALL(SetSelfVar, 3, 18)
-    EVT_CALL(N(ClubbaNappingAI_Main), EVT_PTR(N(AISettings_FrostClubba_Napping)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(SetSelfVar, 1, 10)
+    Call(SetSelfVar, 2, 14)
+    Call(SetSelfVar, 3, 18)
+    Call(N(ClubbaNappingAI_Main), Ref(N(AISettings_FrostClubba_Napping)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_FrostClubba_Napping) = {
@@ -154,16 +154,16 @@ NpcSettings N(NpcSettings_FrostClubba_Napping) = {
 #include "world/common/enemy/ai/MeleeHitbox.inc.c"
 
 EvtScript N(EVS_NpcAI_FrostClubba_Hitbox) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetSelfVar, 0, 4)
-    EVT_CALL(SetSelfVar, 1, 32)
-    EVT_CALL(SetSelfVar, 2, 48)
-    EVT_CALL(SetSelfVar, 3, 30)
-    EVT_CALL(SetSelfVar, 4, 3)
-    EVT_CALL(SetSelfVar, 15, SOUND_CLUBBA_SWING)
-    EVT_CALL(N(MeleeHitbox_Main))
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetSelfVar, 0, 4)
+    Call(SetSelfVar, 1, 32)
+    Call(SetSelfVar, 2, 48)
+    Call(SetSelfVar, 3, 30)
+    Call(SetSelfVar, 4, 3)
+    Call(SetSelfVar, 15, SOUND_CLUBBA_SWING)
+    Call(N(MeleeHitbox_Main))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_FrostClubba_Hitbox) = {

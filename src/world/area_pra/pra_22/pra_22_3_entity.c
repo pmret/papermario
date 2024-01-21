@@ -26,62 +26,62 @@ API_CALLABLE(N(MonitorPlayerFloor)) {
 }
 
 EvtScript N(EVS_TetherCamToPlayer) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_GE(LVar1, LVar3)
-            EVT_SET(LVar1, LVar3)
-        EVT_END_IF
-        EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfGe(LVar1, LVar3)
+            Set(LVar1, LVar3)
+        EndIf
+        Call(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseSpring) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAUNCH)
-    EVT_CALL(GetPlayerPos, LVar7, LVar8, LVar9)
-    EVT_IF_EQ(MV_PlayerFloor, 0)
-        EVT_SET(LVar3, -175)
-        EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayer), LVarA)
-        EVT_CALL(N(GetTargetPosXForSpring))
-        EVT_SET(LVar1, -200)
-        EVT_SET(LVar2, 15)
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(2.0))
-    EVT_ELSE
-        EVT_SET(LVar3, 0)
-        EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayer), LVarA)
-        EVT_IF_EQ(GB_PRA_TwinStatueState, 2)
-            EVT_SET(LVar0, 340)
-        EVT_ELSE
-            EVT_SET(LVar0, 410)
-        EVT_END_IF
-        EVT_SET(LVar1, 0)
-        EVT_SET(LVar2, 35)
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
-    EVT_END_IF
-    EVT_CALL(PlayerJump, LVar0, LVar1, LVar9, LVar2)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_WAIT(2)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_LAUNCH)
+    Call(GetPlayerPos, LVar7, LVar8, LVar9)
+    IfEq(MV_PlayerFloor, 0)
+        Set(LVar3, -175)
+        ExecGetTID(N(EVS_TetherCamToPlayer), LVarA)
+        Call(N(GetTargetPosXForSpring))
+        Set(LVar1, -200)
+        Set(LVar2, 15)
+        Call(SetPlayerJumpscale, Float(2.0))
+    Else
+        Set(LVar3, 0)
+        ExecGetTID(N(EVS_TetherCamToPlayer), LVarA)
+        IfEq(GB_PRA_TwinStatueState, 2)
+            Set(LVar0, 340)
+        Else
+            Set(LVar0, 410)
+        EndIf
+        Set(LVar1, 0)
+        Set(LVar2, 35)
+        Call(SetPlayerJumpscale, Float(0.7))
+    EndIf
+    Call(PlayerJump, LVar0, LVar1, LVar9, LVar2)
+    KillThread(LVarA)
+    Call(SetPlayerActionState, ACTION_STATE_IDLE)
+    Wait(2)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_THREAD
-        EVT_CALL(N(MonitorPlayerFloor))
-    EVT_END_THREAD
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 366, -200, 80, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_UseSpring)))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 55, 80, 75, 0, ITEM_JAMMIN_JELLY, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, GF_PRA22_HiddenItem_JamminJelly)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenPanel), 50, 0, 75, 0, MODEL_o1088, MAKE_ENTITY_END)
-    EVT_CALL(AssignPanelFlag, GF_PRA22_HiddenPanel)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(N(MonitorPlayerFloor))
+    EndThread
+    Call(MakeEntity, Ref(Entity_ScriptSpring), 366, -200, 80, 0, MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(EVS_UseSpring)))
+    Call(MakeEntity, Ref(Entity_HiddenYellowBlock), 55, 80, 75, 0, ITEM_JAMMIN_JELLY, MAKE_ENTITY_END)
+    Call(AssignBlockFlag, GF_PRA22_HiddenItem_JamminJelly)
+    Call(MakeEntity, Ref(Entity_HiddenPanel), 50, 0, 75, 0, MODEL_o1088, MAKE_ENTITY_END)
+    Call(AssignPanelFlag, GF_PRA22_HiddenPanel)
+    Return
+    End
 };

@@ -140,262 +140,262 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IN_IsLarge, LVar0)
-    EVT_IF_FALSE(LVar0)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -9)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_TARGET, -1, -9)
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -1, 9)
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_TARGET, -1, -41)
-        EVT_CALL(SetActorSize, ACTOR_SELF, 20, 25)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(SmallAnims)))
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Anim02)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_IsLarge, FALSE)
-    EVT_ELSE
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -8, -13)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_TARGET, -8, -13)
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 1, 14)
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_TARGET, 1, -36)
-        EVT_CALL(SetActorSize, ACTOR_SELF, 28, 35)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(LargeAnims)))
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Anim03)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_IsLarge, TRUE)
-    EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleX, 100)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleY, 100)
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_HandlePhase)))
+    Call(GetActorVar, ACTOR_SELF, AVAR_IN_IsLarge, LVar0)
+    IfFalse(LVar0)
+        Call(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -9)
+        Call(SetProjectileTargetOffset, ACTOR_SELF, PRT_TARGET, -1, -9)
+        Call(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -1, 9)
+        Call(SetTargetOffset, ACTOR_SELF, PRT_TARGET, -1, -41)
+        Call(SetActorSize, ACTOR_SELF, 20, 25)
+        Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(SmallAnims)))
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Anim02)
+        Call(SetActorVar, ACTOR_SELF, AVAR_IsLarge, FALSE)
+    Else
+        Call(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -8, -13)
+        Call(SetProjectileTargetOffset, ACTOR_SELF, PRT_TARGET, -8, -13)
+        Call(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 1, 14)
+        Call(SetTargetOffset, ACTOR_SELF, PRT_TARGET, 1, -36)
+        Call(SetActorSize, ACTOR_SELF, 28, 35)
+        Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(LargeAnims)))
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Anim03)
+        Call(SetActorVar, ACTOR_SELF, AVAR_IsLarge, TRUE)
+    EndIf
+    Call(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, 100)
+    Call(SetActorVar, ACTOR_SELF, AVAR_ScaleY, 100)
+    Return
+    End
 };
 
 EvtScript N(EVS_HandlePhase) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 #include "common/CosInterpMinMax.inc.c"
 
 EvtScript N(EVS_Idle) = {
-    EVT_SET(LVarF, 0)
-    EVT_LOOP(0)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_WobbleMode, LVarA)
-        EVT_SWITCH(LVarA)
-            EVT_CASE_EQ(0)
-                EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.97), EVT_FLOAT(1.03), 15, 0, 0)
-                EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(1.03), EVT_FLOAT(0.97), 15, 0, 0)
-                EVT_ADD(LVarF, 1)
-            EVT_CASE_EQ(1)
-                EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.95), EVT_FLOAT(1.05), 15, 0, 0)
-                EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(1.05), EVT_FLOAT(0.95), 15, 0, 0)
-                EVT_ADD(LVarF, 3)
-            EVT_CASE_EQ(2)
-                EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.9), EVT_FLOAT(1.1), 15, 0, 0)
-                EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(1.1), EVT_FLOAT(0.9), 15, 0, 0)
-                EVT_ADD(LVarF, 5)
-        EVT_END_SWITCH
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
-        EVT_DIVF(LVar2, EVT_FLOAT(100.0))
-        EVT_DIVF(LVar3, EVT_FLOAT(100.0))
-        EVT_MULF(LVar1, LVar2)
-        EVT_MULF(LVar0, LVar3)
-        EVT_CALL(SetActorScale, ACTOR_SELF, LVar1, LVar0, EVT_FLOAT(1.0))
-        EVT_IF_GE(LVarF, 30)
-            EVT_SET(LVarF, 0)
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(LVarF, 0)
+    Loop(0)
+        Call(GetActorVar, ACTOR_SELF, AVAR_WobbleMode, LVarA)
+        Switch(LVarA)
+            CaseEq(0)
+                Call(N(CosInterpMinMax), LVarF, LVar0, Float(0.97), Float(1.03), 15, 0, 0)
+                Call(N(CosInterpMinMax), LVarF, LVar1, Float(1.03), Float(0.97), 15, 0, 0)
+                Add(LVarF, 1)
+            CaseEq(1)
+                Call(N(CosInterpMinMax), LVarF, LVar0, Float(0.95), Float(1.05), 15, 0, 0)
+                Call(N(CosInterpMinMax), LVarF, LVar1, Float(1.05), Float(0.95), 15, 0, 0)
+                Add(LVarF, 3)
+            CaseEq(2)
+                Call(N(CosInterpMinMax), LVarF, LVar0, Float(0.9), Float(1.1), 15, 0, 0)
+                Call(N(CosInterpMinMax), LVarF, LVar1, Float(1.1), Float(0.9), 15, 0, 0)
+                Add(LVarF, 5)
+        EndSwitch
+        Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
+        Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
+        DivF(LVar2, Float(100.0))
+        DivF(LVar3, Float(100.0))
+        MulF(LVar1, LVar2)
+        MulF(LVar0, LVar3)
+        Call(SetActorScale, ACTOR_SELF, LVar1, LVar0, Float(1.0))
+        IfGe(LVarF, 30)
+            Set(LVarF, 0)
+        EndIf
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(onDeath) = {
-    EVT_CALL(ActorExists, ACTOR_HUFF_N_PUFF, LVar0)
-    EVT_IF_FALSE(LVar0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Index, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_HuffNPuff_Flags, LVar1)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_BITWISE_AND_CONST(LVar1, ~(1 << 0))
-        EVT_CASE_EQ(1)
-            EVT_BITWISE_AND_CONST(LVar1, ~(1 << 1))
-        EVT_CASE_EQ(2)
-            EVT_BITWISE_AND_CONST(LVar1, ~(1 << 2))
-        EVT_CASE_EQ(3)
-            EVT_BITWISE_AND_CONST(LVar1, ~(1 << 3))
-        EVT_CASE_EQ(4)
-            EVT_BITWISE_AND_CONST(LVar1, ~(1 << 4))
-        EVT_CASE_EQ(5)
-            EVT_BITWISE_AND_CONST(LVar1, ~(1 << 5))
-        EVT_CASE_EQ(6)
-            EVT_BITWISE_AND_CONST(LVar1, ~(1 << 6))
-        EVT_CASE_EQ(7)
-            EVT_BITWISE_AND_CONST(LVar1, ~(1 << 7))
-        EVT_CASE_EQ(8)
-            EVT_BITWISE_AND_CONST(LVar1, ~(1 << 8))
-        EVT_CASE_EQ(9)
-            EVT_BITWISE_AND_CONST(LVar1, ~(1 << 9))
-    EVT_END_SWITCH
-    EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_WobbleMode, LVar1)
-    EVT_RETURN
-    EVT_END
+    Call(ActorExists, ACTOR_HUFF_N_PUFF, LVar0)
+    IfFalse(LVar0)
+        Return
+    EndIf
+    Call(GetActorVar, ACTOR_SELF, AVAR_Index, LVar0)
+    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_HuffNPuff_Flags, LVar1)
+    Switch(LVar0)
+        CaseEq(0)
+            BitwiseAndConst(LVar1, ~(1 << 0))
+        CaseEq(1)
+            BitwiseAndConst(LVar1, ~(1 << 1))
+        CaseEq(2)
+            BitwiseAndConst(LVar1, ~(1 << 2))
+        CaseEq(3)
+            BitwiseAndConst(LVar1, ~(1 << 3))
+        CaseEq(4)
+            BitwiseAndConst(LVar1, ~(1 << 4))
+        CaseEq(5)
+            BitwiseAndConst(LVar1, ~(1 << 5))
+        CaseEq(6)
+            BitwiseAndConst(LVar1, ~(1 << 6))
+        CaseEq(7)
+            BitwiseAndConst(LVar1, ~(1 << 7))
+        CaseEq(8)
+            BitwiseAndConst(LVar1, ~(1 << 8))
+        CaseEq(9)
+            BitwiseAndConst(LVar1, ~(1 << 9))
+    EndSwitch
+    Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_WobbleMode, LVar1)
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
-            EVT_IF_FALSE(LVar1)
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim0C)
-            EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim0D)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-        EVT_CASE_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
-            EVT_IF_FALSE(LVar1)
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim0C)
-            EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim0D)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-        EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET(LVar0, 1)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
-            EVT_IF_FALSE(LVar1)
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim0E)
-            EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim10)
-            EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar2)
-            EVT_IF_FALSE(LVar2)
-                EVT_SET_CONST(LVar2, ANIM_TuffPuff_Anim0F)
-            EVT_ELSE
-                EVT_SET_CONST(LVar2, ANIM_TuffPuff_Anim11)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-        EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_SET(LVar0, 1)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
-            EVT_IF_FALSE(LVar1)
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim0E)
-            EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim10)
-            EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar2)
-            EVT_IF_FALSE(LVar2)
-                EVT_SET_CONST(LVar2, ANIM_TuffPuff_Anim0F)
-            EVT_ELSE
-                EVT_SET_CONST(LVar2, ANIM_TuffPuff_Anim11)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_EXEC_WAIT(N(onDeath))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
-            EVT_IF_FALSE(LVar1)
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim0F)
-            EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim11)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
-            EVT_IF_FALSE(LVar1)
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim02)
-            EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim03)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_CASE_EQ(EVENT_IMMUNE)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
-            EVT_IF_FALSE(LVar1)
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim02)
-            EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim03)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
-            EVT_IF_FALSE(LVar1)
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim0C)
-            EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim0D)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_EXEC_WAIT(N(onDeath))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
-            EVT_IF_FALSE(LVar1)
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim0C)
-            EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim0D)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
-            EVT_IF_FALSE(LVar1)
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim02)
-            EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim03)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_Recover)
-        EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
-            EVT_IF_FALSE(LVar1)
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim06)
-            EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim07)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_AirLift)
-        EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_EXEC_WAIT(N(onDeath))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
-            EVT_IF_FALSE(LVar1)
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim0C)
-            EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim0D)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
-            EVT_IF_FALSE(LVar1)
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim02)
-            EVT_ELSE
-                EVT_SET_CONST(LVar1, ANIM_TuffPuff_Anim03)
-            EVT_END_IF
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseEq(EVENT_HIT_COMBO)
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
+            IfFalse(LVar1)
+                SetConst(LVar1, ANIM_TuffPuff_Anim0C)
+            Else
+                SetConst(LVar1, ANIM_TuffPuff_Anim0D)
+            EndIf
+            ExecWait(EVS_Enemy_Hit)
+        CaseEq(EVENT_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
+            IfFalse(LVar1)
+                SetConst(LVar1, ANIM_TuffPuff_Anim0C)
+            Else
+                SetConst(LVar1, ANIM_TuffPuff_Anim0D)
+            EndIf
+            ExecWait(EVS_Enemy_Hit)
+        CaseEq(EVENT_BURN_HIT)
+            Set(LVar0, 1)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
+            IfFalse(LVar1)
+                SetConst(LVar1, ANIM_TuffPuff_Anim0E)
+            Else
+                SetConst(LVar1, ANIM_TuffPuff_Anim10)
+            EndIf
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar2)
+            IfFalse(LVar2)
+                SetConst(LVar2, ANIM_TuffPuff_Anim0F)
+            Else
+                SetConst(LVar2, ANIM_TuffPuff_Anim11)
+            EndIf
+            ExecWait(EVS_Enemy_BurnHit)
+        CaseEq(EVENT_BURN_DEATH)
+            Set(LVar0, 1)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
+            IfFalse(LVar1)
+                SetConst(LVar1, ANIM_TuffPuff_Anim0E)
+            Else
+                SetConst(LVar1, ANIM_TuffPuff_Anim10)
+            EndIf
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar2)
+            IfFalse(LVar2)
+                SetConst(LVar2, ANIM_TuffPuff_Anim0F)
+            Else
+                SetConst(LVar2, ANIM_TuffPuff_Anim11)
+            EndIf
+            ExecWait(EVS_Enemy_BurnHit)
+            ExecWait(N(onDeath))
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
+            IfFalse(LVar1)
+                SetConst(LVar1, ANIM_TuffPuff_Anim0F)
+            Else
+                SetConst(LVar1, ANIM_TuffPuff_Anim11)
+            EndIf
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseEq(EVENT_ZERO_DAMAGE)
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
+            IfFalse(LVar1)
+                SetConst(LVar1, ANIM_TuffPuff_Anim02)
+            Else
+                SetConst(LVar1, ANIM_TuffPuff_Anim03)
+            EndIf
+            ExecWait(EVS_Enemy_NoDamageHit)
+        CaseEq(EVENT_IMMUNE)
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
+            IfFalse(LVar1)
+                SetConst(LVar1, ANIM_TuffPuff_Anim02)
+            Else
+                SetConst(LVar1, ANIM_TuffPuff_Anim03)
+            EndIf
+            ExecWait(EVS_Enemy_NoDamageHit)
+        CaseEq(EVENT_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
+            IfFalse(LVar1)
+                SetConst(LVar1, ANIM_TuffPuff_Anim0C)
+            Else
+                SetConst(LVar1, ANIM_TuffPuff_Anim0D)
+            EndIf
+            ExecWait(EVS_Enemy_Hit)
+            ExecWait(N(onDeath))
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
+            IfFalse(LVar1)
+                SetConst(LVar1, ANIM_TuffPuff_Anim0C)
+            Else
+                SetConst(LVar1, ANIM_TuffPuff_Anim0D)
+            EndIf
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseEq(EVENT_RECOVER_STATUS)
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
+            IfFalse(LVar1)
+                SetConst(LVar1, ANIM_TuffPuff_Anim02)
+            Else
+                SetConst(LVar1, ANIM_TuffPuff_Anim03)
+            EndIf
+            ExecWait(EVS_Enemy_Recover)
+        CaseEq(EVENT_BEGIN_AIR_LIFT)
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
+            IfFalse(LVar1)
+                SetConst(LVar1, ANIM_TuffPuff_Anim06)
+            Else
+                SetConst(LVar1, ANIM_TuffPuff_Anim07)
+            EndIf
+            ExecWait(EVS_Enemy_AirLift)
+        CaseEq(EVENT_BLOW_AWAY)
+            ExecWait(N(onDeath))
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
+            IfFalse(LVar1)
+                SetConst(LVar1, ANIM_TuffPuff_Anim0C)
+            Else
+                SetConst(LVar1, ANIM_TuffPuff_Anim0D)
+            EndIf
+            ExecWait(EVS_Enemy_BlowAway)
+            Return
+        CaseEq(EVENT_AIR_LIFT_FAILED)
+            SetConst(LVar0, PRT_MAIN)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IsLarge, LVar1)
+            IfFalse(LVar1)
+                SetConst(LVar1, ANIM_TuffPuff_Anim02)
+            Else
+                SetConst(LVar1, ANIM_TuffPuff_Anim03)
+            EndIf
+            ExecWait(EVS_Enemy_NoDamageHit)
+        CaseDefault
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     // do nothing
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };

@@ -12,136 +12,136 @@
 #include "world/common/complete/Quizmo.inc.c"
 
 EvtScript N(EVS_NpcInteract_StarKid_01) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_005F)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_005F)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarKid_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_StarKid_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_02) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_0060)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_0060)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarKid_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_02)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_StarKid_02)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_03) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_0061)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_0061)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarKid_03) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_03)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_StarKid_03)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_04) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_0062)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_0062)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarKid_04) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_04)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_StarKid_04)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_05) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_0063)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_0063)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarKid_05) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_05)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_StarKid_05)))
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_GetInBed) = {
-    EVT_EXEC(N(EVS_PlayRestingSong))
-    EVT_THREAD
-        EVT_WAIT(20)
-        EVT_CALL(N(ToadHouse_CamSetFOV), 0, 40)
-        EVT_CALL(SetCamType, CAM_DEFAULT, 4, FALSE)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, 34, -8)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 220)
-        EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(448.0), EVT_FLOAT(180.0))
-        EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(410.0), EVT_FLOAT(150.0))
-        EVT_CALL(SetCamPosC, CAM_DEFAULT, 0, 25)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_END_THREAD
-    EVT_CALL(func_802D1270, 442, 140, EVT_FLOAT(3.0))
-    EVT_CALL(InterpPlayerYaw, 191, 1)
-    EVT_WAIT(5)
-    EVT_CALL(InterpPlayerYaw, 204, 1)
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_800)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
-    EVT_WAIT(61)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
-    EVT_THREAD
-        EVT_WAIT(70)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_PlayRestingSong))
+    Thread
+        Wait(20)
+        Call(N(ToadHouse_CamSetFOV), 0, 40)
+        Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+        Call(SetCamPitch, CAM_DEFAULT, 34, -8)
+        Call(SetCamDistance, CAM_DEFAULT, 220)
+        Call(SetCamPosA, CAM_DEFAULT, Float(448.0), Float(180.0))
+        Call(SetCamPosB, CAM_DEFAULT, Float(410.0), Float(150.0))
+        Call(SetCamPosC, CAM_DEFAULT, 0, 25)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    EndThread
+    Call(func_802D1270, 442, 140, Float(3.0))
+    Call(InterpPlayerYaw, 191, 1)
+    Wait(5)
+    Call(InterpPlayerYaw, 204, 1)
+    Call(HidePlayerShadow, TRUE)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SetPlayerImgFXFlags, IMGFX_FLAG_800)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
+    Wait(61)
+    Call(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
+    Thread
+        Wait(70)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(N(ToadHouse_CamSetFOV), 0, 25)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(SetPlayerPos, 445, 25, 185)
-    EVT_CALL(PlayerMoveTo, 440, 215, 20)
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_SetupMusic))
+    Call(N(ToadHouse_CamSetFOV), 0, 25)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(SetPlayerPos, 445, 25, 185)
+    Call(PlayerMoveTo, 440, 215, 20)
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_SetDialogue) = {
-    EVT_SET(LVar0, MSG_HOS_0064)
-    EVT_SET(LVar8, MSG_HOS_0065)
-    EVT_SET(LVar1, MSG_HOS_0066)
-    EVT_SET(LVar2, MSG_HOS_0067)
-    EVT_SET(LVar3, MSG_HOS_0068)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, MSG_HOS_0064)
+    Set(LVar8, MSG_HOS_0065)
+    Set(LVar1, MSG_HOS_0066)
+    Set(LVar2, MSG_HOS_0067)
+    Set(LVar3, MSG_HOS_0068)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ToadHouseKeeper) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ToadHouseKeeper)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ToadHouseKeeper)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_ShopOwner) = {
-    EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
-    EVT_RETURN
-    EVT_END
+    ExecWait(EVS_ShopOwnerDialog)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShopOwner) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ShopOwner)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ShopOwner)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Townsfolk)[] = {

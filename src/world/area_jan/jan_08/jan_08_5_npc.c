@@ -9,136 +9,136 @@
 #include "world/common/enemy/SpearGuy_Wander.inc.c"
 
 EvtScript N(EVS_YoshiKid_CryForHelp) = {
-    EVT_SET(AF_JAN_02, FALSE)
-    EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_YOSHI_KID_CRY, SOUND_SPACE_DEFAULT)
-        EVT_WAIT(20)
-        EVT_IF_EQ(AF_JAN_02, TRUE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(AF_JAN_02, FALSE)
+    Loop(0)
+        Call(PlaySoundAtNpc, NPC_YoshiKid, SOUND_YOSHI_KID_CRY, SOUND_SPACE_DEFAULT)
+        Wait(20)
+        IfEq(AF_JAN_02, TRUE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_YoshiKid) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_LABEL(0)
-    EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
-    EVT_IF_LE(LVar1, -90)
-        EVT_IF_GT(LVar3, 280)
-            EVT_CALL(GetEntryID, LVar0)
-            EVT_IF_EQ(LVar0, jan_08_ENTRY_0)
-                EVT_WAIT(18)
-            EVT_END_IF
-            EVT_CALL(DisablePlayerInput, TRUE)
-            EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00AF, 160, 40)
-            EVT_EXEC(N(EVS_YoshiKid_CryForHelp))
-            EVT_CALL(DisablePlayerInput, FALSE)
-            EVT_SET(LVar0, 1)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_IF_NE(LVar0, 1)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_LABEL(10)
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(4.0), -23, 350, EVT_FLOAT(17.0), EVT_FLOAT(-7.0))
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_SET(AF_JAN_02, TRUE)
-    EVT_WAIT(15)
-    EVT_IF_EQ(LVar0, PARTNER_SUSHIE)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_SadTalk, ANIM_YoshiKid_Red_SadIdle, 0, MSG_CH5_00B0)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_SadTalk, ANIM_YoshiKid_Red_SadIdle, 0, MSG_CH5_00B1)
-    EVT_END_IF
-    EVT_CALL(EndSpeech, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0)
-    EVT_THREAD
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Red_Run)
-        EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
-        EVT_CALL(NpcMoveTo, NPC_SELF, -418, -60, 0)
-        EVT_CALL(NpcMoveTo, NPC_SELF, -300, 80, 0)
-        EVT_CALL(NpcMoveTo, NPC_SELF, -320, 115, 0)
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_SET(GF_JAN08_SavedYoshi, TRUE)
-    EVT_SET(LVar0, 0)
-    EVT_ADD(LVar0, GF_JAN05_SavedYoshi)
-    EVT_ADD(LVar0, GF_JAN07_SavedYoshi)
-    EVT_ADD(LVar0, GF_JAN08_SavedYoshi)
-    EVT_ADD(LVar0, GF_JAN10_SavedYoshi)
-    EVT_ADD(LVar0, GF_JAN11_SavedYoshi)
-    EVT_IF_EQ(LVar0, 5)
-        EVT_CALL(SetMusicTrack, 0, SONG_YOSHI_KIDS_FOUND, 0, 8)
-        EVT_SET(GB_StoryProgress, STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_ThumbsUp)
-        EVT_WAIT(120)
-        EVT_EXEC(N(EVS_SetupMusic))
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_ELSE
-        EVT_WAIT(40)
-    EVT_END_IF
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Label(0)
+    Call(GetPlayerPos, LVar1, LVar2, LVar3)
+    IfLe(LVar1, -90)
+        IfGt(LVar3, 280)
+            Call(GetEntryID, LVar0)
+            IfEq(LVar0, jan_08_ENTRY_0)
+                Wait(18)
+            EndIf
+            Call(DisablePlayerInput, TRUE)
+            Call(ShowMessageAtScreenPos, MSG_CH5_00AF, 160, 40)
+            Exec(N(EVS_YoshiKid_CryForHelp))
+            Call(DisablePlayerInput, FALSE)
+            Set(LVar0, 1)
+        EndIf
+    EndIf
+    IfNe(LVar0, 1)
+        Wait(1)
+        Goto(0)
+    EndIf
+    Label(10)
+    Call(GetSelfVar, 0, LVar0)
+    IfEq(LVar0, 0)
+        Wait(1)
+        Goto(10)
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(AdjustCam, CAM_DEFAULT, Float(4.0), -23, 350, Float(17.0), Float(-7.0))
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Call(GetCurrentPartnerID, LVar0)
+    Set(AF_JAN_02, TRUE)
+    Wait(15)
+    IfEq(LVar0, PARTNER_SUSHIE)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_SadTalk, ANIM_YoshiKid_Red_SadIdle, 0, MSG_CH5_00B0)
+    Else
+        Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_SadTalk, ANIM_YoshiKid_Red_SadIdle, 0, MSG_CH5_00B1)
+    EndIf
+    Call(EndSpeech, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0)
+    Thread
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Red_Run)
+        Call(SetNpcSpeed, NPC_SELF, Float(5.0))
+        Call(NpcMoveTo, NPC_SELF, -418, -60, 0)
+        Call(NpcMoveTo, NPC_SELF, -300, 80, 0)
+        Call(NpcMoveTo, NPC_SELF, -320, 115, 0)
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndThread
+    Set(GF_JAN08_SavedYoshi, TRUE)
+    Set(LVar0, 0)
+    Add(LVar0, GF_JAN05_SavedYoshi)
+    Add(LVar0, GF_JAN07_SavedYoshi)
+    Add(LVar0, GF_JAN08_SavedYoshi)
+    Add(LVar0, GF_JAN10_SavedYoshi)
+    Add(LVar0, GF_JAN11_SavedYoshi)
+    IfEq(LVar0, 5)
+        Call(SetMusicTrack, 0, SONG_YOSHI_KIDS_FOUND, 0, 8)
+        Set(GB_StoryProgress, STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
+        Call(SetPlayerAnimation, ANIM_Mario1_ThumbsUp)
+        Wait(120)
+        Exec(N(EVS_SetupMusic))
+        Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Else
+        Wait(40)
+    EndIf
+    Call(ResetCam, CAM_DEFAULT, Float(4.0))
+    Call(DisablePlayerInput, FALSE)
+    Call(RemoveNpc, NPC_SELF)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_YoshiKid) = {
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
-        EVT_IF_EQ(GF_JAN08_SavedYoshi, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-            EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Red_Cry)
-            EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-            EVT_CALL(SetNpcPos, NPC_SELF, -391, 0, -164)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_YoshiKid)))
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
+        IfEq(GF_JAN08_SavedYoshi, FALSE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(EnableNpcShadow, NPC_SELF, FALSE)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Red_Cry)
+            Call(SetNpcYaw, NPC_SELF, 90)
+            Call(SetNpcPos, NPC_SELF, -391, 0, -164)
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_YoshiKid)))
+            Return
+        EndIf
+    EndIf
+    Call(RemoveNpc, NPC_SELF)
+    Return
+    End
 };
 
 // unchanged from MBush.inc.c
 EvtScript N(EVS_NpcDefeat_MBush_Copy) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim05)
-            EVT_CALL(GetSelfVar, 10, LVar0)
-            EVT_CALL(GetSelfVar, 11, LVar1)
-            EVT_CALL(GetSelfVar, 12, LVar2)
-            EVT_CALL(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 8)
-            EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim00)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-            EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_MBush)))
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim05)
+            Call(GetSelfVar, 10, LVar0)
+            Call(GetSelfVar, 11, LVar1)
+            Call(GetSelfVar, 12, LVar2)
+            Call(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 8)
+            Call(EnableNpcShadow, NPC_SELF, FALSE)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim00)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_MBush)))
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_MBush_01) = {
-    EVT_CALL(SetNpcCollisionSize, NPC_SELF, 60, 30)
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_MBush_Copy)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcCollisionSize, NPC_SELF, 60, 30)
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_MBush_Copy)))
+    Return
+    End
 };
 
 NpcData N(NpcData_SpearGuy)[] = {

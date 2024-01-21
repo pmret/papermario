@@ -63,9 +63,9 @@ API_CALLABLE(N(func_80243EE0_C75360)) {
 }
 
 EvtScript N(EVS_802455A0) = {
-    EVT_THREAD
-        EVT_CALL(N(func_80243EE0_C75360))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(N(func_80243EE0_C75360))
+    EndThread
+    Return
+    End
 };

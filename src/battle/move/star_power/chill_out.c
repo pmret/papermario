@@ -115,89 +115,89 @@ API_CALLABLE(N(InflictChillOutHit)) {
 }
 
 EvtScript N(EVS_UsePower) = {
-    EVT_CALL(N(InitHitCheck))
-    EVT_EXEC_WAIT(N(EVS_StarPower_WishForSpirit))
-    EVT_SET_CONST(LVar0, ANIM_BattleMuskular_Idle)
-    EVT_EXEC_WAIT(N(EVS_StarPower_SpiritSummoned))
-    EVT_CALL(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleMuskular_Shout)
-    EVT_WAIT(16)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
-    EVT_CALL(PlaySound, SOUND_CHILL_OUT)
-    EVT_CALL(InitTargetIterator)
-    EVT_LABEL(10)
-        EVT_CALL(ItemCheckHit, LVar0, 0, 0, 0, 0)
-        EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-            EVT_GOTO(11)
-        EVT_END_IF
-        EVT_CALL(N(CanChillOutHit))
-        EVT_IF_EQ(LVar0, TRUE)
-            EVT_CALL(GetOwnerTarget, LVarA, LVarB)
-            EVT_THREAD
-                EVT_LOOP(5)
-                    EVT_CALL(SetActorScaleModifier, LVarA, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScaleModifier, LVarA, EVT_FLOAT(1.1), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScaleModifier, LVarA, EVT_FLOAT(1.2), EVT_FLOAT(0.95), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScaleModifier, LVarA, EVT_FLOAT(1.3), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScaleModifier, LVarA, EVT_FLOAT(1.35), EVT_FLOAT(0.85), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScaleModifier, LVarA, EVT_FLOAT(1.38), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScaleModifier, LVarA, EVT_FLOAT(1.4), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScaleModifier, LVarA, EVT_FLOAT(1.3), EVT_FLOAT(0.85), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScaleModifier, LVarA, EVT_FLOAT(1.2), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScaleModifier, LVarA, EVT_FLOAT(1.1), EVT_FLOAT(0.95), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-                EVT_CALL(SetActorScaleModifier, LVarA, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-            EVT_END_THREAD
-        EVT_END_IF
-        EVT_LABEL(11)
-        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, ITER_NO_MORE)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_LOOP(30)
-        EVT_CALL(N(SpawnChillOutFX))
-        EVT_WAIT(2)
-    EVT_END_LOOP
-    EVT_CALL(ChooseNextTarget, ITER_FIRST, 0)
-    EVT_LABEL(0)
-        EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-        EVT_CALL(ItemCheckHit, LVar0, 0, 0, 0, 0)
-        EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_CALL(N(CanChillOutHit))
-        EVT_IF_EQ(LVar0, TRUE)
-            EVT_CALL(N(InflictChillOutHit))
-        EVT_ELSE
-            EVT_CALL(PlayerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 0, BS_FLAGS1_FORCE_IMMUNE_HIT | BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_END_IF
-        EVT_LABEL(1)
-        EVT_WAIT(5)
-        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, ITER_NO_MORE)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_WAIT(5)
-    EVT_CALL(N(DidMoveHit))
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_CALL(ShowMessageBox, BTL_MSG_CHILL_OUT_BEGIN, 60)
-    EVT_END_IF
-    EVT_CALL(PlayerYieldTurn)
-    EVT_EXEC_WAIT(N(EVS_StarPower_SpiritDeparts))
-    EVT_EXEC_WAIT(N(EVS_StarPower_EndWish))
-    EVT_CALL(N(DidMoveHit))
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_CALL(WaitForMessageBoxDone)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(N(InitHitCheck))
+    ExecWait(N(EVS_StarPower_WishForSpirit))
+    SetConst(LVar0, ANIM_BattleMuskular_Idle)
+    ExecWait(N(EVS_StarPower_SpiritSummoned))
+    Call(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleMuskular_Shout)
+    Wait(16)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(PlaySound, SOUND_CHILL_OUT)
+    Call(InitTargetIterator)
+    Label(10)
+        Call(ItemCheckHit, LVar0, 0, 0, 0, 0)
+        IfEq(LVar0, HIT_RESULT_MISS)
+            Goto(11)
+        EndIf
+        Call(N(CanChillOutHit))
+        IfEq(LVar0, TRUE)
+            Call(GetOwnerTarget, LVarA, LVarB)
+            Thread
+                Loop(5)
+                    Call(SetActorScaleModifier, LVarA, Float(1.0), Float(1.0), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScaleModifier, LVarA, Float(1.1), Float(1.0), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScaleModifier, LVarA, Float(1.2), Float(0.95), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScaleModifier, LVarA, Float(1.3), Float(0.9), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScaleModifier, LVarA, Float(1.35), Float(0.85), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScaleModifier, LVarA, Float(1.38), Float(0.8), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScaleModifier, LVarA, Float(1.4), Float(0.8), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScaleModifier, LVarA, Float(1.3), Float(0.85), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScaleModifier, LVarA, Float(1.2), Float(0.9), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScaleModifier, LVarA, Float(1.1), Float(0.95), Float(1.0))
+                    Wait(1)
+                EndLoop
+                Call(SetActorScaleModifier, LVarA, Float(1.0), Float(1.0), Float(1.0))
+            EndThread
+        EndIf
+        Label(11)
+        Call(ChooseNextTarget, ITER_NEXT, LVar0)
+        IfNe(LVar0, ITER_NO_MORE)
+            Goto(10)
+        EndIf
+    Loop(30)
+        Call(N(SpawnChillOutFX))
+        Wait(2)
+    EndLoop
+    Call(ChooseNextTarget, ITER_FIRST, 0)
+    Label(0)
+        Call(SetGoalToTarget, ACTOR_SELF)
+        Call(ItemCheckHit, LVar0, 0, 0, 0, 0)
+        IfEq(LVar0, HIT_RESULT_MISS)
+            Goto(1)
+        EndIf
+        Call(N(CanChillOutHit))
+        IfEq(LVar0, TRUE)
+            Call(N(InflictChillOutHit))
+        Else
+            Call(PlayerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 0, BS_FLAGS1_FORCE_IMMUNE_HIT | BS_FLAGS1_TRIGGER_EVENTS)
+        EndIf
+        Label(1)
+        Wait(5)
+        Call(ChooseNextTarget, ITER_NEXT, LVar0)
+        IfNe(LVar0, ITER_NO_MORE)
+            Goto(0)
+        EndIf
+    Wait(5)
+    Call(N(DidMoveHit))
+    IfEq(LVar0, TRUE)
+        Call(ShowMessageBox, BTL_MSG_CHILL_OUT_BEGIN, 60)
+    EndIf
+    Call(PlayerYieldTurn)
+    ExecWait(N(EVS_StarPower_SpiritDeparts))
+    ExecWait(N(EVS_StarPower_EndWish))
+    Call(N(DidMoveHit))
+    IfEq(LVar0, TRUE)
+        Call(WaitForMessageBoxDone)
+    EndIf
+    Return
+    End
 };

@@ -25,51 +25,51 @@ API_CALLABLE(N(UpdatePropellerSoundPos)) {
 }
 
 EvtScript N(EVS_UpdatePropellerSounds) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Prop, SOUND_LOOP_BOWSER_PROPELLER, SOUND_SPACE_DEFAULT)
-    EVT_LOOP(0)
-        EVT_CALL(N(UpdatePropellerSoundPos))
-        EVT_IF_LT(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_LOOP_BOWSER_PROPELLER)
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAtNpc, NPC_Bowser_Prop, SOUND_LOOP_BOWSER_PROPELLER, SOUND_SPACE_DEFAULT)
+    Loop(0)
+        Call(N(UpdatePropellerSoundPos))
+        IfLt(LVar0, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(StopSound, SOUND_LOOP_BOWSER_PROPELLER)
+    Return
+    End
 };
 
 EvtScript N(EVS_BowserTauntMario) = {
-    EVT_IF_EQ(GF_KKJ13_BowserTaunts, TRUE)
-        EVT_IF_EQ(GF_KKJ23_BowserFledToTower, TRUE)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarIdle)
-    EVT_CALL(AwaitPlayerApproach, 100, -60, 300)
-    EVT_SET(GF_KKJ23_BowserFledToTower, TRUE)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarLaugh)
-        EVT_WAIT(30)
-        EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarIdle)
-    EVT_END_THREAD
-    EVT_CALL(AwaitPlayerApproach, 0, -60, 250)
-    EVT_CALL(LoadPath, 30, EVT_PTR(N(FlyAwayPath)), ARRAY_COUNT(N(FlyAwayPath)), EASING_LINEAR)
-    EVT_LABEL(0)
-    EVT_CALL(GetNextPathPos)
-    EVT_CALL(SetNpcPos, NPC_Bowser_Body, LVar1, LVar2, LVar3)
-    EVT_CALL(SetNpcPos, NPC_Bowser_Prop, LVar1, LVar2, LVar3)
-    EVT_ADD(LVar1, 28)
-    EVT_ADD(LVar2, 40)
-    EVT_ADD(LVar3, -3)
-    EVT_CALL(SetNpcPos, NPC_Peach, LVar1, LVar2, LVar3)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(SetNpcPos, NPC_Bowser_Body, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcPos, NPC_Bowser_Prop, NPC_DISPOSE_LOCATION)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_KKJ13_BowserTaunts, TRUE)
+        IfEq(GF_KKJ23_BowserFledToTower, TRUE)
+            Return
+        EndIf
+    EndIf
+    Call(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarIdle)
+    Call(AwaitPlayerApproach, 100, -60, 300)
+    Set(GF_KKJ23_BowserFledToTower, TRUE)
+    Thread
+        Call(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarLaugh)
+        Wait(30)
+        Call(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarIdle)
+    EndThread
+    Call(AwaitPlayerApproach, 0, -60, 250)
+    Call(LoadPath, 30, Ref(N(FlyAwayPath)), ARRAY_COUNT(N(FlyAwayPath)), EASING_LINEAR)
+    Label(0)
+    Call(GetNextPathPos)
+    Call(SetNpcPos, NPC_Bowser_Body, LVar1, LVar2, LVar3)
+    Call(SetNpcPos, NPC_Bowser_Prop, LVar1, LVar2, LVar3)
+    Add(LVar1, 28)
+    Add(LVar2, 40)
+    Add(LVar3, -3)
+    Call(SetNpcPos, NPC_Peach, LVar1, LVar2, LVar3)
+    Wait(1)
+    IfEq(LVar0, 1)
+        Goto(0)
+    EndIf
+    Call(SetNpcPos, NPC_Bowser_Body, NPC_DISPOSE_LOCATION)
+    Call(SetNpcPos, NPC_Bowser_Prop, NPC_DISPOSE_LOCATION)
+    Return
+    End
 };
 
 s32 N(HoverYOffsets)[] = {
@@ -78,94 +78,94 @@ s32 N(HoverYOffsets)[] = {
 };
 
 EvtScript N(EVS_NpcIdle_Bowser_Body) = {
-    EVT_LABEL(0)
-    EVT_USE_BUF(EVT_PTR(N(HoverYOffsets)))
-    EVT_LOOP(10)
-        EVT_BUF_READ1(LVar1)
-        EVT_CALL(GetNpcPos, NPC_Bowser_Body, LVar2, LVar3, LVar4)
-        EVT_ADD(LVar3, LVar1)
-        EVT_CALL(SetNpcPos, NPC_Bowser_Body, LVar2, LVar3, LVar4)
-        EVT_WAIT(3)
-    EVT_END_LOOP
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    UseBuf(Ref(N(HoverYOffsets)))
+    Loop(10)
+        BufRead1(LVar1)
+        Call(GetNpcPos, NPC_Bowser_Body, LVar2, LVar3, LVar4)
+        Add(LVar3, LVar1)
+        Call(SetNpcPos, NPC_Bowser_Body, LVar2, LVar3, LVar4)
+        Wait(3)
+    EndLoop
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Bowser_Propeller) = {
-    EVT_LABEL(0)
-    EVT_USE_BUF(EVT_PTR(N(HoverYOffsets)))
-    EVT_LOOP(10)
-        EVT_BUF_READ1(LVar1)
-        EVT_CALL(GetNpcPos, NPC_Bowser_Prop, LVar2, LVar3, LVar4)
-        EVT_ADD(LVar3, LVar1)
-        EVT_CALL(SetNpcPos, NPC_Bowser_Prop, LVar2, LVar3, LVar4)
-        EVT_WAIT(3)
-    EVT_END_LOOP
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    UseBuf(Ref(N(HoverYOffsets)))
+    Loop(10)
+        BufRead1(LVar1)
+        Call(GetNpcPos, NPC_Bowser_Prop, LVar2, LVar3, LVar4)
+        Add(LVar3, LVar1)
+        Call(SetNpcPos, NPC_Bowser_Prop, LVar2, LVar3, LVar4)
+        Wait(3)
+    EndLoop
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Peach) = {
-    EVT_LABEL(0)
-    EVT_USE_BUF(EVT_PTR(N(HoverYOffsets)))
-    EVT_LOOP(10)
-        EVT_BUF_READ1(LVar1)
-        EVT_CALL(GetNpcPos, NPC_Peach, LVar2, LVar3, LVar4)
-        EVT_ADD(LVar3, LVar1)
-        EVT_CALL(SetNpcPos, NPC_Peach, LVar2, LVar3, LVar4)
-        EVT_WAIT(3)
-    EVT_END_LOOP
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    UseBuf(Ref(N(HoverYOffsets)))
+    Loop(10)
+        BufRead1(LVar1)
+        Call(GetNpcPos, NPC_Peach, LVar2, LVar3, LVar4)
+        Add(LVar3, LVar1)
+        Call(SetNpcPos, NPC_Peach, LVar2, LVar3, LVar4)
+        Wait(3)
+    EndLoop
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bowser_Body) = {
-    EVT_CALL(SetNpcPos, NPC_Bowser_Body, NPC_DISPOSE_LOCATION)
-    EVT_IF_EQ(GF_KKJ13_BowserTaunts, TRUE)
-        EVT_IF_EQ(GF_KKJ23_BowserFledToTower, TRUE)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Bowser_Body)))
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_CALL(SetNpcPos, NPC_SELF, 250, 10, -250)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldBowser_ClownCarIdle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Bowser_Body, NPC_DISPOSE_LOCATION)
+    IfEq(GF_KKJ13_BowserTaunts, TRUE)
+        IfEq(GF_KKJ23_BowserFledToTower, TRUE)
+            Return
+        EndIf
+    EndIf
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Bowser_Body)))
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Call(SetNpcPos, NPC_SELF, 250, 10, -250)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldBowser_ClownCarIdle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bowser_Propeller) = {
-    EVT_CALL(SetNpcPos, NPC_Bowser_Prop, NPC_DISPOSE_LOCATION)
-    EVT_IF_EQ(GF_KKJ13_BowserTaunts, TRUE)
-        EVT_IF_EQ(GF_KKJ23_BowserFledToTower, TRUE)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Bowser_Propeller)))
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_CALL(SetNpcPos, NPC_SELF, 250, 10, -250)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldBowser_ClownCarPropeller)
-    EVT_EXEC(N(EVS_UpdatePropellerSounds))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Bowser_Prop, NPC_DISPOSE_LOCATION)
+    IfEq(GF_KKJ13_BowserTaunts, TRUE)
+        IfEq(GF_KKJ23_BowserFledToTower, TRUE)
+            Return
+        EndIf
+    EndIf
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Bowser_Propeller)))
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Call(SetNpcPos, NPC_SELF, 250, 10, -250)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldBowser_ClownCarPropeller)
+    Exec(N(EVS_UpdatePropellerSounds))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Peach) = {
-    EVT_CALL(SetNpcPos, NPC_Peach, NPC_DISPOSE_LOCATION)
-    EVT_IF_EQ(GF_KKJ13_BowserTaunts, TRUE)
-        EVT_IF_EQ(GF_KKJ23_BowserFledToTower, TRUE)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Peach)))
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_CALL(SetNpcPos, NPC_Peach, 278, 50, -253)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach2_TiedIdle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Peach, NPC_DISPOSE_LOCATION)
+    IfEq(GF_KKJ13_BowserTaunts, TRUE)
+        IfEq(GF_KKJ23_BowserFledToTower, TRUE)
+            Return
+        EndIf
+    EndIf
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Peach)))
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Call(SetNpcPos, NPC_Peach, 278, 50, -253)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_Peach2_TiedIdle)
+    Return
+    End
 };
 
 NpcData N(NpcData_Bowser_Body) = {

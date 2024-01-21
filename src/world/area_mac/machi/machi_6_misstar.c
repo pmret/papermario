@@ -40,59 +40,59 @@ API_CALLABLE(N(MisstarFlyAway)) {
 }
 
 EvtScript N(EVS_NpcAuxAI_Misstar) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAux_Misstar) = {
-    EVT_LABEL(0)
-        EVT_SETF(LVar0, EVT_FLOAT(40.0))
-        EVT_LOOP(20)
-            EVT_ADDF(LVar0, EVT_FLOAT(4.0))
-            EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_LOOP(20)
-            EVT_ADDF(LVar0, EVT_FLOAT(-4.0))
-            EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        SetF(LVar0, Float(40.0))
+        Loop(20)
+            AddF(LVar0, Float(4.0))
+            Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+            Wait(1)
+        EndLoop
+        Loop(20)
+            AddF(LVar0, Float(-4.0))
+            Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+            Wait(1)
+        EndLoop
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Misstar_Bobbing) = {
-    EVT_LABEL(0)
-        EVT_LOOP(10)
-            EVT_LOOP(10)
-                EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                EVT_SUB(LVar1, 1)
-                EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_LOOP(10)
-                EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                EVT_ADD(LVar1, 1)
-                EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-        EVT_END_LOOP
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Loop(10)
+            Loop(10)
+                Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                Sub(LVar1, 1)
+                Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                Wait(1)
+            EndLoop
+            Loop(10)
+                Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                Add(LVar1, 1)
+                Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                Wait(1)
+            EndLoop
+        EndLoop
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_Misstar) = {
-    EVT_EXEC_GET_TID(N(EVS_Misstar_Bobbing), LVarA)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(AwaitPlayerApproach, LVar0, LVar2, 60)
-    EVT_CALL(N(MisstarFlyAway))
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_RETURN
-    EVT_END
+    ExecGetTID(N(EVS_Misstar_Bobbing), LVarA)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(AwaitPlayerApproach, LVar0, LVar2, 60)
+    Call(N(MisstarFlyAway))
+    KillThread(LVarA)
+    Call(RemoveNpc, NPC_SELF)
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Misstar) = {

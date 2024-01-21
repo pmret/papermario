@@ -1,49 +1,49 @@
 #include "common.h"
 
 EvtScript N(EVS_UseGate_North) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar7, 0)
-    EVT_SET(LVar8, 70)
-    EVT_SET(LVar9, COLLIDER_monn)
-    EVT_SET(LVarA, MODEL_monn)
-    EVT_EXEC_WAIT(N(EVS_UseGate))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar7, 0)
+    Set(LVar8, 70)
+    Set(LVar9, COLLIDER_monn)
+    Set(LVarA, MODEL_monn)
+    ExecWait(N(EVS_UseGate))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseGate_South) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar7, 0)
-    EVT_SET(LVar8, -70)
-    EVT_SET(LVar9, COLLIDER_mons)
-    EVT_SET(LVarA, MODEL_mons)
-    EVT_EXEC_WAIT(N(EVS_UseGate))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar7, 0)
+    Set(LVar8, -70)
+    Set(LVar9, COLLIDER_mons)
+    Set(LVarA, MODEL_mons)
+    ExecWait(N(EVS_UseGate))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseGate_East) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar7, -70)
-    EVT_SET(LVar8, 0)
-    EVT_SET(LVar9, COLLIDER_mone)
-    EVT_SET(LVarA, MODEL_mone)
-    EVT_EXEC_WAIT(N(EVS_UseGate))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar7, -70)
+    Set(LVar8, 0)
+    Set(LVar9, COLLIDER_mone)
+    Set(LVarA, MODEL_mone)
+    ExecWait(N(EVS_UseGate))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseGate_West) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar7, 70)
-    EVT_SET(LVar8, 0)
-    EVT_SET(LVar9, COLLIDER_monw)
-    EVT_SET(LVarA, MODEL_monw)
-    EVT_EXEC_WAIT(N(EVS_UseGate))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar7, 70)
+    Set(LVar8, 0)
+    Set(LVar9, COLLIDER_monw)
+    Set(LVarA, MODEL_monw)
+    ExecWait(N(EVS_UseGate))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };

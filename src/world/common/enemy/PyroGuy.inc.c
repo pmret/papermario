@@ -16,9 +16,9 @@ MobileAISettings N(AISettings_PyroGuy) = {
 };
 
 EvtScript N(EVS_NpcAI_PyroGuy) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_PyroGuy)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_PyroGuy)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_PyroGuy) = {

@@ -5,187 +5,187 @@
 #include "world/common/npc/Toad_Stationary.inc.c"
 
 EvtScript N(EVS_Scene_FallIntoCell) = {
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 1042, 30, -496)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 1042, 30, -496)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_WAIT(60)
-    EVT_CALL(PartnerIsFlying, LVar0)
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
-    EVT_ELSE
-        EVT_CALL(func_802CF56C, 1)
-    EVT_END_IF
-    EVT_CALL(PlaySoundAtPlayer, SOUND_PLAYER_LONG_FALL, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_LOOP(0)
-        EVT_SUB(LVar1, 16)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_IF_LE(LVar1, 30)
-            EVT_CALL(SetPlayerPos, LVar0, 30, LVar2)
-            EVT_CALL(PlaySoundAtPlayer, SOUND_PLAYER_COLLAPSE, SOUND_SPACE_DEFAULT)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(0.6))
-    EVT_END_THREAD
-    EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
-    EVT_CALL(PlayerJump1, 1030, 30, -496, 10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_WAIT(1)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_WAIT(1)
-    EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_WAIT(5)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-    EVT_WAIT(1)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_CH8_0007, 1000, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_WAIT(10)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(ClearPartnerMoveHistory, NPC_PARTNER)
-    EVT_CALL(func_802CF56C, 0)
-    EVT_RETURN
-    EVT_END
+    Call(UseSettingsFrom, CAM_DEFAULT, 1042, 30, -496)
+    Call(SetPanTarget, CAM_DEFAULT, 1042, 30, -496)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(InterpPlayerYaw, 270, 0)
+    Wait(60)
+    Call(PartnerIsFlying, LVar0)
+    IfEq(LVar0, TRUE)
+        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
+    Else
+        Call(func_802CF56C, 1)
+    EndIf
+    Call(PlaySoundAtPlayer, SOUND_PLAYER_LONG_FALL, SOUND_SPACE_DEFAULT)
+    Call(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Loop(0)
+        Sub(LVar1, 16)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        IfLe(LVar1, 30)
+            Call(SetPlayerPos, LVar0, 30, LVar2)
+            Call(PlaySoundAtPlayer, SOUND_PLAYER_COLLAPSE, SOUND_SPACE_DEFAULT)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
+    Thread
+        Call(ShakeCam, CAM_DEFAULT, 0, 20, Float(0.6))
+    EndThread
+    Call(SetPlayerJumpscale, Float(1.0))
+    Call(PlayerJump1, 1030, 30, -496, 10)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Wait(1)
+    Call(DisablePlayerPhysics, FALSE)
+    Wait(1)
+    Call(InterpPlayerYaw, 90, 0)
+    Wait(5)
+    Call(DisablePlayerPhysics, TRUE)
+    Wait(1)
+    Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+    Wait(1)
+    Call(ShowMessageAtScreenPos, MSG_CH8_0007, 1000, 0)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Wait(10)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(DisablePlayerInput, FALSE)
+    Call(ClearPartnerMoveHistory, NPC_PARTNER)
+    Call(func_802CF56C, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_BlastWall) = {
-    EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 8, 8, 1, 10, 30)
-    EVT_CALL(EnableModel, MODEL_g296, FALSE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitte, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SET(GF_KPA17_BombedWall, TRUE)
-    EVT_CALL(WaitForPlayerInputEnabled)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(80 * DT)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH8_0016)
-    EVT_CALL(EnablePartnerAI)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 8, 8, 1, 10, 30)
+    Call(EnableModel, MODEL_g296, FALSE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitte, COLLIDER_FLAGS_UPPER_MASK)
+    Set(GF_KPA17_BombedWall, TRUE)
+    Call(WaitForPlayerInputEnabled)
+    Call(DisablePlayerInput, TRUE)
+    Wait(80 * DT)
+    Call(DisablePartnerAI, 0)
+    Wait(5 * DT)
+    Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH8_0016)
+    Call(EnablePartnerAI)
+    Wait(10 * DT)
+    Call(DisablePlayerInput, FALSE)
+    Unbind
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_01) = {
-    EVT_SWITCH(GF_KPA17_BombedWall)
-        EVT_CASE_EQ(0)
-            EVT_SWITCH(AB_KPA17_Toad1_Dialogue)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH8_0009)
-                    EVT_SET(AB_KPA17_Toad1_Dialogue, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH8_000A)
-                    EVT_SET(AB_KPA17_Toad1_Dialogue, 0)
-            EVT_END_SWITCH
-        EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH8_000B)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GF_KPA17_BombedWall)
+        CaseEq(0)
+            Switch(AB_KPA17_Toad1_Dialogue)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH8_0009)
+                    Set(AB_KPA17_Toad1_Dialogue, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH8_000A)
+                    Set(AB_KPA17_Toad1_Dialogue, 0)
+            EndSwitch
+        CaseEq(1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH8_000B)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_02) = {
-    EVT_SWITCH(GF_KPA17_BombedWall)
-        EVT_CASE_EQ(0)
-            EVT_SWITCH(AB_KPA17_Toad2_Dialogue)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_CH8_000C)
-                    EVT_SET(AB_KPA17_Toad2_Dialogue, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_CH8_000D)
-                    EVT_SET(AB_KPA17_Toad2_Dialogue, 0)
-            EVT_END_SWITCH
-        EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_CH8_000E)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GF_KPA17_BombedWall)
+        CaseEq(0)
+            Switch(AB_KPA17_Toad2_Dialogue)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_CH8_000C)
+                    Set(AB_KPA17_Toad2_Dialogue, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_CH8_000D)
+                    Set(AB_KPA17_Toad2_Dialogue, 0)
+            EndSwitch
+        CaseEq(1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_CH8_000E)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_ToadGuard) = {
-    EVT_SWITCH(GF_KPA17_BombedWall)
-        EVT_CASE_EQ(0)
-            EVT_SWITCH(AB_KPA17_Toad3_Dialogue)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_000F)
-                    EVT_SET(AB_KPA17_Toad3_Dialogue, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_0010)
-                    EVT_SET(AB_KPA17_Toad3_Dialogue, 0)
-            EVT_END_SWITCH
-        EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_0011)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GF_KPA17_BombedWall)
+        CaseEq(0)
+            Switch(AB_KPA17_Toad3_Dialogue)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_000F)
+                    Set(AB_KPA17_Toad3_Dialogue, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_0010)
+                    Set(AB_KPA17_Toad3_Dialogue, 0)
+            EndSwitch
+        CaseEq(1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_0011)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_ToadMinister) = {
-    EVT_SWITCH(GF_KPA17_BombedWall)
-        EVT_CASE_EQ(0)
-            EVT_SWITCH(AB_KPA17_Toad4_Dialogue)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ToadMinister_Talk, ANIM_ToadMinister_Idle, 0, MSG_CH8_0012)
-                    EVT_SET(AB_KPA17_Toad4_Dialogue, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ToadMinister_Talk, ANIM_ToadMinister_Idle, 0, MSG_CH8_0013)
-                    EVT_SET(AB_KPA17_Toad4_Dialogue, 2)
-                EVT_CASE_EQ(2)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ToadMinister_Talk, ANIM_ToadMinister_Idle, 0, MSG_CH8_0014)
-                    EVT_SET(AB_KPA17_Toad4_Dialogue, 1)
-            EVT_END_SWITCH
-        EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ToadMinister_Talk, ANIM_ToadMinister_Idle, 0, MSG_CH8_0015)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GF_KPA17_BombedWall)
+        CaseEq(0)
+            Switch(AB_KPA17_Toad4_Dialogue)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_ToadMinister_Talk, ANIM_ToadMinister_Idle, 0, MSG_CH8_0012)
+                    Set(AB_KPA17_Toad4_Dialogue, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_ToadMinister_Talk, ANIM_ToadMinister_Idle, 0, MSG_CH8_0013)
+                    Set(AB_KPA17_Toad4_Dialogue, 2)
+                CaseEq(2)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_ToadMinister_Talk, ANIM_ToadMinister_Idle, 0, MSG_CH8_0014)
+                    Set(AB_KPA17_Toad4_Dialogue, 1)
+            EndSwitch
+        CaseEq(1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ToadMinister_Talk, ANIM_ToadMinister_Idle, 0, MSG_CH8_0015)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_01)))
-    EVT_CALL(SetNpcPos, NPC_SELF, 813, 30, -394)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_01)))
+    Call(SetNpcPos, NPC_SELF, 813, 30, -394)
+    Call(InterpNpcYaw, NPC_SELF, 270, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_02)))
-    EVT_CALL(SetNpcPos, NPC_SELF, 870, 30, -465)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_02)))
+    Call(SetNpcPos, NPC_SELF, 870, 30, -465)
+    Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ToadGuard) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ToadGuard)))
-    EVT_CALL(SetNpcPos, NPC_SELF, 930, 30, -400)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ToadGuard)))
+    Call(SetNpcPos, NPC_SELF, 930, 30, -400)
+    Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ToadMinister) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ToadMinister)))
-    EVT_CALL(SetNpcPos, NPC_SELF, 1100, 30, -450)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ToadMinister)))
+    Call(SetNpcPos, NPC_SELF, 1100, 30, -450)
+    Call(InterpNpcYaw, NPC_SELF, 270, 0)
+    Return
+    End
 };
 
 NpcData N(NpcData_Prisoners)[] = {

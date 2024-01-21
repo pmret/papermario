@@ -7,119 +7,119 @@
 #include "world/common/complete/GiveReward.inc.c"
 
 EvtScript N(EVS_NpcInteract_TrainToad_01) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, iwa_10_ENTRY_0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, MSG_CH2_0001)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, MSG_CH2_0002)
-        EVT_CALL(ShowChoice, MSG_Choice_000C)
-        EVT_CALL(EndSpeech, NPC_SELF, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_EXEC(N(EVS_DepartForToadTown))
-        EVT_ELSE
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, iwa_10_ENTRY_0)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, MSG_CH2_0001)
+    Else
+        Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, MSG_CH2_0002)
+        Call(ShowChoice, MSG_Choice_000C)
+        Call(EndSpeech, NPC_SELF, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0)
+        IfEq(LVar0, 0)
+            Exec(N(EVS_DepartForToadTown))
+        Else
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TrainToad_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TrainToad_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_TrainToad_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TrainToad_02) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, iwa_10_ENTRY_0)
-        EVT_CALL(SetNpcPos, NPC_SELF, -425, 70, -20)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, -425, 70, -20)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, iwa_10_ENTRY_0)
+        Call(SetNpcPos, NPC_SELF, -425, 70, -20)
+        Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Else
+        Call(SetNpcPos, NPC_SELF, -425, 70, -20)
+        Call(InterpNpcYaw, NPC_SELF, 270, 0)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH2_0004)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH2_0004)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad)))
+    IfGe(GB_StoryProgress, STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toadette_02) = {
-    EVT_CALL(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_000B)
-    EVT_CALL(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_000C)
-    EVT_CALL(SpeakToPlayer, NPC_Toadette_04, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_000D)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_000B)
+    Call(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_000C)
+    Call(SpeakToPlayer, NPC_Toadette_04, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_000D)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toadette_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette_02)))
-    EVT_IF_LT(GB_StoryProgress, STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toadette_02)))
+    IfLt(GB_StoryProgress, STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Dryite) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(AF_IWA_SpokeWIthDryite, FALSE)
-                EVT_SET(LVar0, MSG_CH2_0005)
-                EVT_SET(AF_IWA_SpokeWIthDryite, TRUE)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_CH2_0006)
-                EVT_SET(AF_IWA_SpokeWIthDryite, TRUE)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_CH2_0007)
-        EVT_CASE_DEFAULT
-            EVT_SET(LVar0, MSG_CH2_0008)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(AF_IWA_SpokeWIthDryite, FALSE)
+                Set(LVar0, MSG_CH2_0005)
+                Set(AF_IWA_SpokeWIthDryite, TRUE)
+            Else
+                Set(LVar0, MSG_CH2_0006)
+                Set(AF_IWA_SpokeWIthDryite, TRUE)
+            EndIf
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_CH2_0007)
+        CaseDefault
+            Set(LVar0, MSG_CH2_0008)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Dryite) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Dryite)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Dryite)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toadette_01) = {
-    EVT_IF_LT(GB_IWA00_Whacka_HitCount, 8)
-        EVT_SET(LVar0, MSG_CH2_0009)
-    EVT_ELSE
-        EVT_SET(LVar0, MSG_CH2_000A)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toadette_Green_Talk, ANIM_Toadette_Green_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_IWA00_Whacka_HitCount, 8)
+        Set(LVar0, MSG_CH2_0009)
+    Else
+        Set(LVar0, MSG_CH2_000A)
+    EndIf
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toadette_Green_Talk, ANIM_Toadette_Green_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toadette_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toadette_01)))
+    Return
+    End
 };
 
 NpcData N(NpcData_TrainToad)[] = {

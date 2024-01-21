@@ -9,9 +9,9 @@ MobileAISettings N(AISettings_Toad_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_Toad_Wander) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_Toad_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_Toad_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Toad_Wander) = {

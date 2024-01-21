@@ -23,104 +23,104 @@ API_CALLABLE(func_802A10A4_77F2E4) {
 extern EvtScript N(UseMove_Impl);
 
 EvtScript N(EVS_UseMove) = {
-    EVT_CALL(ShowActionHud, TRUE)
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(0)
-            EVT_SET(LVarD, 60)
-            EVT_SET(LVarE, 1)
-            EVT_SET(LVarF, 2)
-            EVT_EXEC_WAIT(N(UseMove_Impl))
-        EVT_CASE_EQ(1)
-            EVT_SET(LVarD, 60)
-            EVT_SET(LVarE, 2)
-            EVT_SET(LVarF, 4)
-            EVT_EXEC_WAIT(N(UseMove_Impl))
-        EVT_CASE_EQ(2)
-            EVT_SET(LVarD, 60)
-            EVT_SET(LVarE, 3)
-            EVT_SET(LVarF, 6)
-            EVT_EXEC_WAIT(N(UseMove_Impl))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(ShowActionHud, TRUE)
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    Switch(LVar1)
+        CaseEq(0)
+            Set(LVarD, 60)
+            Set(LVarE, 1)
+            Set(LVarF, 2)
+            ExecWait(N(UseMove_Impl))
+        CaseEq(1)
+            Set(LVarD, 60)
+            Set(LVarE, 2)
+            Set(LVarF, 4)
+            ExecWait(N(UseMove_Impl))
+        CaseEq(2)
+            Set(LVarD, 60)
+            Set(LVarE, 3)
+            Set(LVarF, 6)
+            ExecWait(N(UseMove_Impl))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_802A3248) = {
-    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_EXTREME)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(3.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(6.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(5.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(4.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(3.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(2.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.2))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(StartRumble, BTL_RUMBLE_PLAYER_EXTREME)
+    Thread
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(1.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(3.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(6.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(5.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(4.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(3.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(2.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(1.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.5))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.2))
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(UseMove_Impl) = {
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(0)
-            EVT_EXEC_WAIT(N(EVS_UseBasicHammer))
-        EVT_CASE_EQ(1)
-            EVT_EXEC_WAIT(N(EVS_UseSuperHammer))
-        EVT_CASE_EQ(2)
-            EVT_EXEC_WAIT(N(EVS_UseUltraHammer))
-    EVT_END_SWITCH
-    EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
-    EVT_EXEC_WAIT(N(EVS_802A3248))
-    EVT_CALL(InitTargetIterator)
-    EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(func_802A10A4_77F2E4)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
-    EVT_WAIT(1)
-    EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
-    EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetPlayerActionSuccess, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(FALSE)
-            EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-            EVT_SWITCH(LVar1)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
-                EVT_CASE_EQ(2)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
-            EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SHELL_CRACK, SUPPRESS_EVENTS_HAMMER, 0, LVarF, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
-        EVT_CASE_DEFAULT
-            EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-            EVT_SWITCH(LVar1)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
-                EVT_CASE_EQ(2)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
-            EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SHELL_CRACK, SUPPRESS_EVENTS_HAMMER, 0, LVarE, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_A))
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    Switch(LVar1)
+        CaseEq(0)
+            ExecWait(N(EVS_UseBasicHammer))
+        CaseEq(1)
+            ExecWait(N(EVS_UseSuperHammer))
+        CaseEq(2)
+            ExecWait(N(EVS_UseUltraHammer))
+    EndSwitch
+    Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
+    ExecWait(N(EVS_802A3248))
+    Call(InitTargetIterator)
+    Call(SetGoalToTarget, ACTOR_PLAYER)
+    Call(func_802A10A4_77F2E4)
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
+    Wait(1)
+    Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
+    IfEq(LVar0, HIT_RESULT_MISS)
+        ExecWait(N(EVS_Hammer_ReturnHome_C))
+        Return
+    EndIf
+    Call(GetPlayerActionSuccess, LVar0)
+    Switch(LVar0)
+        CaseGt(FALSE)
+            Call(GetMenuSelection, LVar0, LVar1, LVar2)
+            Switch(LVar1)
+                CaseEq(0)
+                    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
+                CaseEq(1)
+                    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
+                CaseEq(2)
+                    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
+            EndSwitch
+            Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SHELL_CRACK, SUPPRESS_EVENTS_HAMMER, 0, LVarF, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
+        CaseDefault
+            Call(GetMenuSelection, LVar0, LVar1, LVar2)
+            Switch(LVar1)
+                CaseEq(0)
+                    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
+                CaseEq(1)
+                    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
+                CaseEq(2)
+                    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
+            EndSwitch
+            Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SHELL_CRACK, SUPPRESS_EVENTS_HAMMER, 0, LVarE, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
+    EndSwitch
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_NICE)
+        CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
+            ExecWait(N(EVS_Hammer_ReturnHome_A))
+        EndCaseGroup
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            ExecWait(N(EVS_Hammer_ReturnHome_C))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };

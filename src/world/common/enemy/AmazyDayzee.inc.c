@@ -18,21 +18,21 @@ MobileAISettings N(AISettings_AmazyDayzee) = {
 };
 
 EvtScript N(EVS_NpcAI_AmazyDayzee) = {
-    EVT_CALL(N(AvoidPlayerAI_Main), EVT_PTR(N(AISettings_AmazyDayzee)))
-    EVT_RETURN
-    EVT_END
+    Call(N(AvoidPlayerAI_Main), Ref(N(AISettings_AmazyDayzee)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAux_AmazyDayzee) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 30)
-        EVT_SUB(LVar2, 2)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 30)
-        EVT_WAIT(15)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Add(LVar1, 30)
+        Sub(LVar2, 2)
+        PlayEffect(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 30)
+        Wait(15)
+        Goto(0)
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_AmazyDayzee) = {

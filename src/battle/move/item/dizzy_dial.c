@@ -49,53 +49,53 @@ API_CALLABLE(N(AnimateDizzyDialCameraFX)) {
 #include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(EVS_UseItem) = {
-    EVT_SET_CONST(LVarA, ITEM_DIZZY_DIAL)
-    EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 20)
-    EVT_WAIT(10)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(AddBattleCamZoom, -250)
-        EVT_CALL(MoveBattleCamOver, 80)
-        EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
-        EVT_WAIT(80)
-        EVT_CALL(AddBattleCamZoom, 250)
-        EVT_CALL(MoveBattleCamOver, 3)
-        EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
-    EVT_END_THREAD
-    EVT_CALL(N(AnimateDizzyDialCameraFX))
-    EVT_THREAD
-        EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(4.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(3.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(2.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
-        EVT_WAIT(10)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
-        EVT_CALL(MoveBattleCamOver, 10)
-        EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(InitTargetIterator)
-    EVT_LABEL(0)
-        EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-        EVT_CALL(ItemCheckHit, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, LVar0, 0)
-        EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_CALL(GetItemPower, ITEM_DIZZY_DIAL, LVar0, LVar1)
-        EVT_CALL(MakeStatusField, LVar0, STATUS_FLAG_DIZZY, 100, LVar0)
-        EVT_CALL(ItemAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_STATUS_ALWAYS_HITS, LVar0, 0, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_LABEL(1)
-        EVT_WAIT(5)
-        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, ITER_NO_MORE)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_WAIT(30)
-    EVT_EXEC_WAIT(N(PlayerGoHome))
-    EVT_RETURN
-    EVT_END
+    SetConst(LVarA, ITEM_DIZZY_DIAL)
+    ExecWait(N(UseItemWithEffect))
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 20)
+    Wait(10)
+    Thread
+        Wait(5)
+        Call(AddBattleCamZoom, -250)
+        Call(MoveBattleCamOver, 80)
+        Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+        Wait(80)
+        Call(AddBattleCamZoom, 250)
+        Call(MoveBattleCamOver, 3)
+        Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+    EndThread
+    Call(N(AnimateDizzyDialCameraFX))
+    Thread
+        Call(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(1.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(4.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(3.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(2.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(1.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.5))
+        Wait(10)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+        Call(MoveBattleCamOver, 10)
+        Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, FALSE)
+    EndThread
+    Call(InitTargetIterator)
+    Label(0)
+        Call(SetGoalToTarget, ACTOR_SELF)
+        Call(ItemCheckHit, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, LVar0, 0)
+        IfEq(LVar0, HIT_RESULT_MISS)
+            Goto(1)
+        EndIf
+        Call(GetItemPower, ITEM_DIZZY_DIAL, LVar0, LVar1)
+        Call(MakeStatusField, LVar0, STATUS_FLAG_DIZZY, 100, LVar0)
+        Call(ItemAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_STATUS_ALWAYS_HITS, LVar0, 0, BS_FLAGS1_TRIGGER_EVENTS)
+        Label(1)
+        Wait(5)
+        Call(ChooseNextTarget, ITER_NEXT, LVar0)
+        IfNe(LVar0, ITER_NO_MORE)
+            Goto(0)
+        EndIf
+    Wait(30)
+    ExecWait(N(PlayerGoHome))
+    Return
+    End
 };

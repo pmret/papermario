@@ -461,79 +461,79 @@ void func_80240DA4_9087D4(void) {
 }
 
 EvtScript N(EVS_Scene_EndOfChapter) = {
-    EVT_THREAD
-        EVT_SET(MF_Unk_0B, FALSE)
-        EVT_CALL(GetEntryID, LVar0)
-        EVT_CALL(GetNpcPos, NPC_StarSpirit, LVar1, LVar2, LVar3)
-        EVT_CALL(N(CreateEndChapterData), LVar0, LVar1, LVar2, LVar3)
-    EVT_END_THREAD
-    EVT_WAIT(1)
-    EVT_THREAD
-        EVT_CALL(N(AddCardAngularVelocity), 10 / DT)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(AccelerateCardSpin), 20, 150 * DT)
-    EVT_END_THREAD
-    EVT_CALL(N(MakeCardFloatUpward), 5, 0, 60, 150 * DT)
-    EVT_WAIT(30)
-    EVT_CALL(N(ShowRadialShimmer), 1, 120 * DT)
-    EVT_CALL(N(FadeInSpiritNpc), 60 * DT)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(N(FlashScreenWhite))
-    EVT_CALL(N(SpinDownStarSpirit), 1800, 100 * DT)
-    EVT_CALL(N(EndOfChapterBounceIn), 36, 0, 55, 60)
-    EVT_THREAD
-        EVT_CALL(N(AddCardAngularVelocity), 0)
-    EVT_END_THREAD
-    EVT_WAIT(60 * DT)
-    EVT_SET(MF_Unk_0B, TRUE)
-    EVT_WAIT(1)
-    EVT_CALL(SetNpcAnimation, NPC_StarSpirit, ENEMY_ANIM_8)
-    EVT_CALL(N(ShowMessagesInFrontOfCurtains))
-    EVT_WAIT(16)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SET(LVar1, MSG_Menus_01A5)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(kmr_23_ENTRY_0)
-            EVT_SET(LVar1, MSG_Menus_01A5)
-        EVT_CASE_EQ(kmr_23_ENTRY_1)
-            EVT_SET(LVar1, MSG_Menus_01A6)
-        EVT_CASE_EQ(kmr_23_ENTRY_2)
-            EVT_SET(LVar1, MSG_Menus_01A7)
-        EVT_CASE_EQ(kmr_23_ENTRY_3)
-            EVT_SET(LVar1, MSG_Menus_01A8)
-        EVT_CASE_EQ(kmr_23_ENTRY_4)
-            EVT_SET(LVar1, MSG_Menus_01A9)
-        EVT_CASE_EQ(kmr_23_ENTRY_5)
-            EVT_SET(LVar1, MSG_Menus_01AA)
-        EVT_CASE_EQ(kmr_23_ENTRY_6)
-            EVT_SET(LVar1, MSG_Menus_01AB)
-    EVT_END_SWITCH
-    EVT_CALL(ShowMessageAtScreenPos, LVar1, 160, 40)
-    EVT_CALL(N(ShowMessagesBehindCurtains))
-    EVT_WAIT(15 * DT)
-    EVT_SET(AF_JAN01_TreeDrop_StarPiece, TRUE)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Set(MF_Unk_0B, FALSE)
+        Call(GetEntryID, LVar0)
+        Call(GetNpcPos, NPC_StarSpirit, LVar1, LVar2, LVar3)
+        Call(N(CreateEndChapterData), LVar0, LVar1, LVar2, LVar3)
+    EndThread
+    Wait(1)
+    Thread
+        Call(N(AddCardAngularVelocity), 10 / DT)
+    EndThread
+    Thread
+        Call(N(AccelerateCardSpin), 20, 150 * DT)
+    EndThread
+    Call(N(MakeCardFloatUpward), 5, 0, 60, 150 * DT)
+    Wait(30)
+    Call(N(ShowRadialShimmer), 1, 120 * DT)
+    Call(N(FadeInSpiritNpc), 60 * DT)
+    Wait(30 * DT)
+    Call(N(FlashScreenWhite))
+    Call(N(SpinDownStarSpirit), 1800, 100 * DT)
+    Call(N(EndOfChapterBounceIn), 36, 0, 55, 60)
+    Thread
+        Call(N(AddCardAngularVelocity), 0)
+    EndThread
+    Wait(60 * DT)
+    Set(MF_Unk_0B, TRUE)
+    Wait(1)
+    Call(SetNpcAnimation, NPC_StarSpirit, ENEMY_ANIM_8)
+    Call(N(ShowMessagesInFrontOfCurtains))
+    Wait(16)
+    Call(GetEntryID, LVar0)
+    Set(LVar1, MSG_Menus_01A5)
+    Switch(LVar0)
+        CaseEq(kmr_23_ENTRY_0)
+            Set(LVar1, MSG_Menus_01A5)
+        CaseEq(kmr_23_ENTRY_1)
+            Set(LVar1, MSG_Menus_01A6)
+        CaseEq(kmr_23_ENTRY_2)
+            Set(LVar1, MSG_Menus_01A7)
+        CaseEq(kmr_23_ENTRY_3)
+            Set(LVar1, MSG_Menus_01A8)
+        CaseEq(kmr_23_ENTRY_4)
+            Set(LVar1, MSG_Menus_01A9)
+        CaseEq(kmr_23_ENTRY_5)
+            Set(LVar1, MSG_Menus_01AA)
+        CaseEq(kmr_23_ENTRY_6)
+            Set(LVar1, MSG_Menus_01AB)
+    EndSwitch
+    Call(ShowMessageAtScreenPos, LVar1, 160, 40)
+    Call(N(ShowMessagesBehindCurtains))
+    Wait(15 * DT)
+    Set(AF_JAN01_TreeDrop_StarPiece, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Eldstar_01) = {
-    EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(0.85), EVT_FLOAT(0.85), EVT_FLOAT(0.85))
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, 0, 20)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_EXEC(N(EVS_Scene_EndOfChapter))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcScale, NPC_SELF, Float(0.85), Float(0.85), Float(0.85))
+    Call(SetNpcPos, NPC_SELF, 0, 0, 20)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Exec(N(EVS_Scene_EndOfChapter))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Eldstar_02) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ENEMY_ANIM_8)
-    EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_TINT, 0, 0, 0, 0)
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, 94, 0)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ENEMY_ANIM_8)
+    Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_TINT, 0, 0, 0, 0)
+    Call(SetNpcPos, NPC_SELF, 0, 94, 0)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Return
+    End
 };
 
 NpcData N(NpcData_Eldstar)[] = {

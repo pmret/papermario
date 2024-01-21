@@ -85,31 +85,31 @@ API_CALLABLE(N(GetEffectiveTongueOffset)) {
         percent = 100.0f;
     }
     amplitude = (amplitude * percent) / 100.0f;
-    script->varTable[0] = EVT_FLOAT_TO_FIXED(amplitude);
+    script->varTable[0] = Float_TO_FIXED(amplitude);
     return ApiStatus_DONE2;
 }
 
 EvtScript N(EVS_WiggleTongue) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(N(GetEffectiveTongueOffset))
-        EVT_CALL(TranslateModel, TONGUE_COPY_MODEL_ID, 0, LVar0, 0)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_sita)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(N(GetEffectiveTongueOffset))
+        Call(TranslateModel, TONGUE_COPY_MODEL_ID, 0, LVar0, 0)
+        Call(UpdateColliderTransform, COLLIDER_sita)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_StartTongueWiggle) = {
-    EVT_CALL(CloneModel, MODEL_sita, TONGUE_COPY_MODEL_ID)
-    EVT_CALL(ParentColliderToModel, COLLIDER_sita, TONGUE_COPY_MODEL_ID)
-    EVT_CALL(EnableModel, TONGUE_COPY_MODEL_ID, FALSE)
-    EVT_EXEC(N(EVS_WiggleTongue))
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_1, MODEL_sita, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(make_tongue_gfx)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_sita, CUSTOM_GFX_1, -1)
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(CloneModel, MODEL_sita, TONGUE_COPY_MODEL_ID)
+    Call(ParentColliderToModel, COLLIDER_sita, TONGUE_COPY_MODEL_ID)
+    Call(EnableModel, TONGUE_COPY_MODEL_ID, FALSE)
+    Exec(N(EVS_WiggleTongue))
+    Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_sita, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(make_tongue_gfx)), NULL)
+    Call(SetModelCustomGfx, MODEL_sita, CUSTOM_GFX_1, -1)
+    Call(HidePlayerShadow, TRUE)
+    Return
+    End
 };

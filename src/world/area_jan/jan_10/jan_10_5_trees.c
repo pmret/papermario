@@ -14,13 +14,13 @@ API_CALLABLE(N(IsJungleFuzzyAlive)) {
 }
 
 EvtScript N(EVS_OnShakeTree1) = {
-    EVT_WAIT(15)
-    EVT_CALL(N(IsJungleFuzzyAlive))
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_CALL(SetNpcVar, NPC_JungleFuzzy, 7, 1)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Wait(15)
+    Call(N(IsJungleFuzzyAlive))
+    IfEq(LVar0, TRUE)
+        Call(SetNpcVar, NPC_JungleFuzzy, 7, 1)
+    EndIf
+    Return
+    End
 };
 
 FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o59, MODEL_o60, MODEL_o61, MODEL_o62, MODEL_o63);
@@ -47,9 +47,9 @@ BombTrigger N(BombPos_Tree1) = {
 };
 
 EvtScript N(EVS_SetupTrees) = {
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_Trees)), TRIGGER_WALL_HAMMER, COLLIDER_o91, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_Trees)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, Ref(N(ShakeTree_Tree1)))
+    BindTrigger(Ref(N(EVS_ShakeTree_Trees)), TRIGGER_WALL_HAMMER, COLLIDER_o91, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree_Trees)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)
+    Return
+    End
 };

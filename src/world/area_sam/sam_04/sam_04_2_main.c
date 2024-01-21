@@ -5,88 +5,88 @@ EvtScript N(EVS_ExitWalk_sam_05_0) = EVT_EXIT_WALK(60, sam_04_ENTRY_1, "sam_05",
 EvtScript N(EVS_ExitWalk_sam_07_0) = EVT_EXIT_WALK(60, sam_04_ENTRY_2, "sam_07", sam_07_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_sam_03_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilisw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_sam_05_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_sam_07_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilin, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_sam_03_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilisw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_sam_05_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_sam_07_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilin, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_LT(LVar0, sam_04_ENTRY_3)
-        EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-        EVT_EXEC(EnterWalk)
-    EVT_ELSE
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    IfLt(LVar0, sam_04_ENTRY_3)
+        Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+        Exec(EnterWalk)
+    Else
+    EndIf
+    Return
+    End
 };
 
 #include "common/foliage.inc.c"
 
 EvtScript N(EVS_KnockAwayTreePart) = {
-    EVT_CALL(MakeLerp, 0, 255, 20, EASING_QUARTIC_IN)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, LVar2, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(EnableModel, LVar2, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(MakeLerp, 0, 255, 20, EASING_QUARTIC_IN)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(TranslateModel, LVar2, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(EnableModel, LVar2, FALSE)
+    Return
+    End
 };
 
 // script causes a crash if player picks up the item before it is killed
 EvtScript N(EVS_TetherItemToDummyNpc) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetNpcPos, NPC_LetterDummy, LVar0, LVar1, LVar2)
-        EVT_CALL(SetItemPos, MV_LetterItemID, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetNpcPos, NPC_LetterDummy, LVar0, LVar1, LVar2)
+        Call(SetItemPos, MV_LetterItemID, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_OnShakeTree2) = {
-    EVT_SWITCH(MV_TreeHitCount)
-        EVT_CASE_EQ(0)
-            EVT_ADD(MV_TreeHitCount, 1)
-            EVT_SET(LVar2, MODEL_ki2_1)
-            EVT_EXEC_WAIT(N(EVS_KnockAwayTreePart))
-        EVT_CASE_EQ(1)
-            EVT_ADD(MV_TreeHitCount, 1)
-            EVT_SET(LVar2, MODEL_ki2_2)
-            EVT_EXEC_WAIT(N(EVS_KnockAwayTreePart))
-        EVT_CASE_EQ(2)
-            EVT_ADD(MV_TreeHitCount, 1)
-            EVT_SET(LVar2, MODEL_ki2_3)
-            EVT_EXEC_WAIT(N(EVS_KnockAwayTreePart))
-        EVT_CASE_EQ(3)
-            EVT_IF_EQ(GF_SAM04_Item_Letter05, FALSE)
-                EVT_IF_EQ(MV_DroppedLetter, FALSE)
-                    EVT_SET(MV_DroppedLetter, TRUE)
-                    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                    EVT_CALL(SetNpcPos, NPC_LetterDummy, -290, 70, 110)
-                    EVT_EXEC_GET_TID(N(EVS_TetherItemToDummyNpc), LVarA)
-                    EVT_IF_LE(LVar0, -295)
-                        EVT_SET(LVar0, -268)
-                    EVT_ELSE
-                        EVT_SET(LVar0, -316)
-                    EVT_END_IF
-                    EVT_CALL(SetNpcJumpscale, NPC_LetterDummy, EVT_FLOAT(2.0))
-                    EVT_CALL(NpcJump0, NPC_LetterDummy, LVar0, 0, 141, 20)
-                    EVT_KILL_THREAD(LVarA)
-                    EVT_WAIT(1)
-                    EVT_CALL(SetNpcPos, NPC_LetterDummy, NPC_DISPOSE_LOCATION)
-                EVT_END_IF
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(MV_TreeHitCount)
+        CaseEq(0)
+            Add(MV_TreeHitCount, 1)
+            Set(LVar2, MODEL_ki2_1)
+            ExecWait(N(EVS_KnockAwayTreePart))
+        CaseEq(1)
+            Add(MV_TreeHitCount, 1)
+            Set(LVar2, MODEL_ki2_2)
+            ExecWait(N(EVS_KnockAwayTreePart))
+        CaseEq(2)
+            Add(MV_TreeHitCount, 1)
+            Set(LVar2, MODEL_ki2_3)
+            ExecWait(N(EVS_KnockAwayTreePart))
+        CaseEq(3)
+            IfEq(GF_SAM04_Item_Letter05, FALSE)
+                IfEq(MV_DroppedLetter, FALSE)
+                    Set(MV_DroppedLetter, TRUE)
+                    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                    Call(SetNpcPos, NPC_LetterDummy, -290, 70, 110)
+                    ExecGetTID(N(EVS_TetherItemToDummyNpc), LVarA)
+                    IfLe(LVar0, -295)
+                        Set(LVar0, -268)
+                    Else
+                        Set(LVar0, -316)
+                    EndIf
+                    Call(SetNpcJumpscale, NPC_LetterDummy, Float(2.0))
+                    Call(NpcJump0, NPC_LetterDummy, LVar0, 0, 141, 20)
+                    KillThread(LVarA)
+                    Wait(1)
+                    Call(SetNpcPos, NPC_LetterDummy, NPC_DISPOSE_LOCATION)
+                EndIf
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_ki1);
@@ -162,37 +162,37 @@ BombTrigger N(BombPos_Tree6) = {
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_SHIVER_SNOWFIELD)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC_WAIT(N(EVS_SetupMusic))
-    EVT_PLAY_EFFECT(EFFECT_SNOWFALL, 0, 40)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_ground, SURFACE_TYPE_SNOW)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deilie, SURFACE_TYPE_SNOW)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deilin, SURFACE_TYPE_SNOW)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deilisw, SURFACE_TYPE_SNOW)
-    EVT_EXEC_WAIT(N(EVS_SetupSnowmen))
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_miki1, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree2)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_miki2, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree3)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_miki3, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree3)), 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree4)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_miki4, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree4)), 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree5)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_miki5, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree5)), 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree6)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_miki6, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree6)), 1, 0)
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_SHIVER_SNOWFIELD)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_NO_LEAD()
+    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    ExecWait(N(EVS_MakeEntities))
+    ExecWait(N(EVS_SetupMusic))
+    PlayEffect(EFFECT_SNOWFALL, 0, 40)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_ground, SURFACE_TYPE_SNOW)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deilie, SURFACE_TYPE_SNOW)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deilin, SURFACE_TYPE_SNOW)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deilisw, SURFACE_TYPE_SNOW)
+    ExecWait(N(EVS_SetupSnowmen))
+    Set(LVar0, Ref(N(ShakeTree_Tree1)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_miki1, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree2)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_miki2, 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree3)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_miki3, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree3)), 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree4)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_miki4, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree4)), 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree5)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_miki5, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree5)), 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree6)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_miki6, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree6)), 1, 0)
+    Exec(N(EVS_EnterMap))
+    Wait(1)
+    Return
+    End
 };

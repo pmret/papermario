@@ -16,13 +16,13 @@ MobileAISettings N(AISettings_BuzzyBeetle) = {
 };
 
 EvtScript N(EVS_NpcAI_BuzzyBeetle) = {
-    EVT_CALL(SetSelfVar, 2, 5)
-    EVT_CALL(SetSelfVar, 3, 2)
-    EVT_CALL(SetSelfVar, 5, 5)
-    EVT_CALL(SetSelfVar, 7, 2)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(AISettings_BuzzyBeetle)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 2, 5)
+    Call(SetSelfVar, 3, 2)
+    Call(SetSelfVar, 5, 5)
+    Call(SetSelfVar, 7, 2)
+    Call(N(TackleAI_Main), Ref(N(AISettings_BuzzyBeetle)))
+    Return
+    End
 };
 
 MobileAISettings N(AISettings_SpikeTop) = {
@@ -39,13 +39,13 @@ MobileAISettings N(AISettings_SpikeTop) = {
 };
 
 EvtScript N(EVS_NpcAI_SpikeTop) = {
-    EVT_CALL(SetSelfVar, 2, 4)
-    EVT_CALL(SetSelfVar, 3, 10)
-    EVT_CALL(SetSelfVar, 5, 4)
-    EVT_CALL(SetSelfVar, 7, 3)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(AISettings_SpikeTop)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 2, 4)
+    Call(SetSelfVar, 3, 10)
+    Call(SetSelfVar, 5, 4)
+    Call(SetSelfVar, 7, 3)
+    Call(N(TackleAI_Main), Ref(N(AISettings_SpikeTop)))
+    Return
+    End
 };
 
 MobileAISettings N(AISettings_BonyBeetle) = {
@@ -60,33 +60,33 @@ MobileAISettings N(AISettings_BonyBeetle) = {
 };
 
 EvtScript N(EVS_NpcAI_BonyBeetle) = {
-    EVT_CALL(SetSelfVar, 2, 3)
-    EVT_CALL(SetSelfVar, 3, 8)
-    EVT_CALL(SetSelfVar, 5, 6)
-    EVT_CALL(SetSelfVar, 7, 6)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(AISettings_BonyBeetle)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 2, 3)
+    Call(SetSelfVar, 3, 8)
+    Call(SetSelfVar, 5, 6)
+    Call(SetSelfVar, 7, 6)
+    Call(N(TackleAI_Main), Ref(N(AISettings_BonyBeetle)))
+    Return
+    End
 };
 
 #include "world/common/todo/AwaitPlayerNearNpc.inc.c"
 
 EvtScript N(EVS_NpcAI_BuzzyBeetle_Ceiling) = {
-    EVT_CALL(N(func_80240814_97BE44))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_Anim0F)
-    EVT_CALL(N(AwaitPlayerNearNpc))
-    EVT_CALL(SelfEnemyOverrideSyncPos, 1)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_Anim00)
-    EVT_CALL(N(func_802408B4_97BEE4))
-    EVT_CALL(SelfEnemyOverrideSyncPos, 0)
-    EVT_CALL(SetSelfVar, 2, 5)
-    EVT_CALL(SetSelfVar, 3, 2)
-    EVT_CALL(SetSelfVar, 5, 5)
-    EVT_CALL(SetSelfVar, 7, 2)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(AISettings_BuzzyBeetle)))
-    EVT_RETURN
-    EVT_END
+    Call(N(func_80240814_97BE44))
+    Call(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_Anim0F)
+    Call(N(AwaitPlayerNearNpc))
+    Call(SelfEnemyOverrideSyncPos, 1)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_Anim00)
+    Call(N(func_802408B4_97BEE4))
+    Call(SelfEnemyOverrideSyncPos, 0)
+    Call(SetSelfVar, 2, 5)
+    Call(SetSelfVar, 3, 2)
+    Call(SetSelfVar, 5, 5)
+    Call(SetSelfVar, 7, 2)
+    Call(N(TackleAI_Main), Ref(N(AISettings_BuzzyBeetle)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_BuzzyBeetle) = {

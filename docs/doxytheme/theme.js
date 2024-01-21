@@ -1,4 +1,4 @@
-// Make @evtapi prototype use EVT_CALL and params
+// Make @evtapi prototype use Call and params
 for (const item of document.querySelectorAll(".memitem:has(.evtapi)")) {
     // <a id="..." /> appears 2 children before item
     const id = item.previousElementSibling.previousElementSibling.id
@@ -12,7 +12,7 @@ for (const item of document.querySelectorAll(".memitem:has(.evtapi)")) {
         params.push(param.textContent.trim())
     }
 
-    const proto = `EVT_CALL(${params.join(", ")})`
+    const proto = `Call(${params.join(", ")})`
     tbody.innerHTML = `<tr>${proto}</tr>`
 
     // Find its link

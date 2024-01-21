@@ -5,17 +5,17 @@
 #define NAMESPACE A(mac_02)
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(EnableBattleFloorReflections, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Call(EnableBattleFloorReflections, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_CALL(EnableBattleFloorReflections, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableBattleFloorReflections, FALSE)
+    Return
+    End
 };
 
 Stage NAMESPACE = {

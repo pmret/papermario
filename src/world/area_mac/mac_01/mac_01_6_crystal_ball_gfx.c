@@ -124,14 +124,14 @@ void N(gfx_build_inside_crystal_ball)(void) {
 }
 
 EvtScript N(EVS_SetupCrystalBallGfx) = {
-    EVT_WAIT(1)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_2, EVT_PTR(N(gfx_build_crystal_ball_pre)), EVT_PTR(N(gfx_build_crystal_ball_post)))
-    EVT_CALL(SetModelCustomGfx, MODEL_mirrorball, CUSTOM_GFX_2, -1)
-    EVT_CALL(EnableModel, MODEL_mirrorball, FALSE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_3, EVT_PTR(N(gfx_build_inside_crystal_ball)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_tama, CUSTOM_GFX_3, -1)
-    EVT_CALL(SetModelFlags, MODEL_tama, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
-    EVT_CALL(SetModelFlags, MODEL_ohosi, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
-    EVT_RETURN
-    EVT_END
+    Wait(1)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_2, Ref(N(gfx_build_crystal_ball_pre)), Ref(N(gfx_build_crystal_ball_post)))
+    Call(SetModelCustomGfx, MODEL_mirrorball, CUSTOM_GFX_2, -1)
+    Call(EnableModel, MODEL_mirrorball, FALSE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_3, Ref(N(gfx_build_inside_crystal_ball)), NULL)
+    Call(SetModelCustomGfx, MODEL_tama, CUSTOM_GFX_3, -1)
+    Call(SetModelFlags, MODEL_tama, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
+    Call(SetModelFlags, MODEL_ohosi, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
+    Return
+    End
 };

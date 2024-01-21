@@ -9,24 +9,24 @@ extern ActorBlueprint N(slot_machine_stop);
 extern ActorBlueprint N(slot_machine_start);
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetTexPanner, MODEL_o409, TEX_PANNER_A)
-    EVT_THREAD
-        EVT_SET(LVarE, 0)
-        EVT_LOOP(0)
-            EVT_ADD(LVarE, 0x8000)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_A, TEX_PANNER_MAIN, LVarE, 0)
-            EVT_WAIT(10)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Call(SetTexPanner, MODEL_o409, TEX_PANNER_A)
+    Thread
+        Set(LVarE, 0)
+        Loop(0)
+            Add(LVarE, 0x8000)
+            Call(SetTexPanOffset, TEX_PANNER_A, TEX_PANNER_MAIN, LVarE, 0)
+            Wait(10)
+        EndLoop
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

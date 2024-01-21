@@ -7,18 +7,18 @@
 #include "world/common/enemy/SpyGuy.inc.c"
 
 EvtScript N(EVS_NpcAuxAI_Conductor) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Conductor) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_Conductor) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Conductor) = {

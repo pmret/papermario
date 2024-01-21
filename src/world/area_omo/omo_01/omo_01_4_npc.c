@@ -3,78 +3,78 @@
 #include "world/common/enemy/ShyGuy_AvoidPlayer.inc.c"
 
 EvtScript N(EVS_ShyGuy_CarryItem) = {
-    EVT_SET(LVarA, LVar0) // npcID
-    EVT_SET(LVarB, LVar1) // itemID
-    EVT_SET(LVarD, LVar2) // item type
-    EVT_SET(LVarE, LVar3) // pickup flag
-    EVT_CALL(SetNpcVar, LVarA, 10, 0)
-    EVT_CALL(GetNpcPos, LVarA, LVar2, LVar3, LVar4)
-    EVT_ADD(LVar3, 26)
-    EVT_CALL(MakeItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_DECORATION, 0)
-    EVT_SET(LVar9, LVar0)
-    EVT_WAIT(1)
-    EVT_LABEL(10)
-        EVT_CALL(GetNpcPos, LVarA, LVar2, LVar3, LVar4)
-        EVT_ADD(LVar3, 26)
-        EVT_SUB(LVar4, 1)
-        EVT_CALL(SetItemPos, LVar9, LVar2, LVar3, LVar4)
-        EVT_WAIT(1)
-        EVT_CALL(GetNpcVar, LVarA, 10, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_CALL(RemoveItemEntity, LVar9)
-    EVT_SWITCH(LVarD)
-        EVT_CASE_EQ(ITEM_TYPE_CONSUMABLE)
-            EVT_CALL(MakeItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS, LVarE)
-        EVT_CASE_EQ(ITEM_TYPE_KEY)
-            EVT_CALL(DropItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, LVarE)
-        EVT_CASE_EQ(ITEM_TYPE_BADGE)
-            EVT_CALL(DropItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_FALL, LVarE)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0) // npcID
+    Set(LVarB, LVar1) // itemID
+    Set(LVarD, LVar2) // item type
+    Set(LVarE, LVar3) // pickup flag
+    Call(SetNpcVar, LVarA, 10, 0)
+    Call(GetNpcPos, LVarA, LVar2, LVar3, LVar4)
+    Add(LVar3, 26)
+    Call(MakeItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_DECORATION, 0)
+    Set(LVar9, LVar0)
+    Wait(1)
+    Label(10)
+        Call(GetNpcPos, LVarA, LVar2, LVar3, LVar4)
+        Add(LVar3, 26)
+        Sub(LVar4, 1)
+        Call(SetItemPos, LVar9, LVar2, LVar3, LVar4)
+        Wait(1)
+        Call(GetNpcVar, LVarA, 10, LVar0)
+        IfEq(LVar0, 0)
+            Goto(10)
+        EndIf
+    Call(RemoveItemEntity, LVar9)
+    Switch(LVarD)
+        CaseEq(ITEM_TYPE_CONSUMABLE)
+            Call(MakeItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS, LVarE)
+        CaseEq(ITEM_TYPE_KEY)
+            Call(DropItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, LVarE)
+        CaseEq(ITEM_TYPE_BADGE)
+            Call(DropItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_FALL, LVarE)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_ShyGuy) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(GF_OMO09_Defeated_CalculatorThief, TRUE)
-            EVT_CALL(SetSelfVar, 10, 1)
-            EVT_WAIT(2)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(OnPlayerFled, 0)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_CALL(SetSelfVar, 10, 1)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Set(GF_OMO09_Defeated_CalculatorThief, TRUE)
+            Call(SetSelfVar, 10, 1)
+            Wait(2)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(OnPlayerFled, 0)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+            Call(SetSelfVar, 10, 1)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy) = {
-    EVT_IF_EQ(GF_OMO09_Defeated_CalculatorThief, TRUE)
-        EVT_IF_EQ(GF_OMO01_Item_Calculator, FALSE)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_ShyGuy)))
-    EVT_SET(LVar0, NPC_ShyGuy_01)
-    EVT_IF_EQ(GF_OMO01_Item_Calculator, FALSE)
-        EVT_SET(LVar1, ITEM_CALCULATOR)
-        EVT_SET(LVar2, ITEM_TYPE_KEY)
-        EVT_SET_CONST(LVar3, GF_OMO01_Item_Calculator)
-    EVT_ELSE
-        EVT_SET(LVar1, ITEM_MAPLE_SYRUP)
-        EVT_SET(LVar2, ITEM_TYPE_CONSUMABLE)
-        EVT_SET(LVar3, 0)
-    EVT_END_IF
-    EVT_EXEC(N(EVS_ShyGuy_CarryItem))
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_OMO09_Defeated_CalculatorThief, TRUE)
+        IfEq(GF_OMO01_Item_Calculator, FALSE)
+            Call(RemoveNpc, NPC_SELF)
+        EndIf
+    EndIf
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_ShyGuy)))
+    Set(LVar0, NPC_ShyGuy_01)
+    IfEq(GF_OMO01_Item_Calculator, FALSE)
+        Set(LVar1, ITEM_CALCULATOR)
+        Set(LVar2, ITEM_TYPE_KEY)
+        SetConst(LVar3, GF_OMO01_Item_Calculator)
+    Else
+        Set(LVar1, ITEM_MAPLE_SYRUP)
+        Set(LVar2, ITEM_TYPE_CONSUMABLE)
+        Set(LVar3, 0)
+    EndIf
+    Exec(N(EVS_ShyGuy_CarryItem))
+    Return
+    End
 };
 
 NpcData N(NpcData_ShyGuy_01) = {
@@ -102,14 +102,14 @@ NpcData N(NpcData_ShyGuy_01) = {
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy_02) = {
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_ShyGuy)))
-    EVT_SET(LVar0, NPC_ShyGuy_02)
-    EVT_SET(LVar1, ITEM_CAKE_MIX)
-    EVT_SET(LVar2, ITEM_TYPE_CONSUMABLE)
-    EVT_SET(LVar3, 0)
-    EVT_EXEC(N(EVS_ShyGuy_CarryItem))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_ShyGuy)))
+    Set(LVar0, NPC_ShyGuy_02)
+    Set(LVar1, ITEM_CAKE_MIX)
+    Set(LVar2, ITEM_TYPE_CONSUMABLE)
+    Set(LVar3, 0)
+    Exec(N(EVS_ShyGuy_CarryItem))
+    Return
+    End
 };
 
 NpcData N(NpcData_ShyGuy_02) = {
@@ -137,14 +137,14 @@ NpcData N(NpcData_ShyGuy_02) = {
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy_03) = {
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_ShyGuy)))
-    EVT_SET(LVar0, NPC_ShyGuy_03)
-    EVT_SET(LVar1, ITEM_CAKE_MIX)
-    EVT_SET(LVar2, ITEM_TYPE_CONSUMABLE)
-    EVT_SET(LVar3, 0)
-    EVT_EXEC(N(EVS_ShyGuy_CarryItem))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_ShyGuy)))
+    Set(LVar0, NPC_ShyGuy_03)
+    Set(LVar1, ITEM_CAKE_MIX)
+    Set(LVar2, ITEM_TYPE_CONSUMABLE)
+    Set(LVar3, 0)
+    Exec(N(EVS_ShyGuy_CarryItem))
+    Return
+    End
 };
 
 NpcData N(NpcData_ShyGuy_03) = {
@@ -172,14 +172,14 @@ NpcData N(NpcData_ShyGuy_03) = {
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy_04) = {
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_ShyGuy)))
-    EVT_SET(LVar0, NPC_ShyGuy_04)
-    EVT_SET(LVar1, ITEM_MUSHROOM)
-    EVT_SET(LVar2, ITEM_TYPE_CONSUMABLE)
-    EVT_SET(LVar3, 0)
-    EVT_EXEC(N(EVS_ShyGuy_CarryItem))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_ShyGuy)))
+    Set(LVar0, NPC_ShyGuy_04)
+    Set(LVar1, ITEM_MUSHROOM)
+    Set(LVar2, ITEM_TYPE_CONSUMABLE)
+    Set(LVar3, 0)
+    Exec(N(EVS_ShyGuy_CarryItem))
+    Return
+    End
 };
 
 NpcData N(NpcData_ShyGuy_04) = {
@@ -207,14 +207,14 @@ NpcData N(NpcData_ShyGuy_04) = {
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy_05) = {
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_ShyGuy)))
-    EVT_SET(LVar0, NPC_ShyGuy_05)
-    EVT_SET(LVar1, ITEM_FIRE_FLOWER)
-    EVT_SET(LVar2, ITEM_TYPE_CONSUMABLE)
-    EVT_SET(LVar3, 0)
-    EVT_EXEC(N(EVS_ShyGuy_CarryItem))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_ShyGuy)))
+    Set(LVar0, NPC_ShyGuy_05)
+    Set(LVar1, ITEM_FIRE_FLOWER)
+    Set(LVar2, ITEM_TYPE_CONSUMABLE)
+    Set(LVar3, 0)
+    Exec(N(EVS_ShyGuy_CarryItem))
+    Return
+    End
 };
 
 NpcData N(NpcData_ShyGuy_05) = {

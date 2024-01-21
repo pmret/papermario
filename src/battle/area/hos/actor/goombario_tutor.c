@@ -102,183 +102,183 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FirstTurn, TRUE)
-    EVT_EXEC(N(EVS_ManageTutorial))
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(SetActorVar, ACTOR_SELF, AVAR_FirstTurn, TRUE)
+    Exec(N(EVS_ManageTutorial))
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_THREAD
-        EVT_CALL(FreezeBattleState, TRUE)
-        EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(EVENT_HIT)
-                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_FirstTurn, LVar0)
-                EVT_IF_EQ(LVar0, FALSE)
-                    EVT_CALL(RandInt, 2, LVar0)
-                    EVT_SWITCH(LVar0)
-                        EVT_CASE_EQ(0)
-                            EVT_CALL(ActorSpeak, MSG_HOS_002D, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_HurtStill, ANIM_BattleGoombario_Walk)
-                        EVT_CASE_EQ(1)
-                            EVT_CALL(ActorSpeak, MSG_HOS_002E, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_HurtStill, ANIM_BattleGoombario_Walk)
-                        EVT_CASE_EQ(2)
-                    EVT_END_SWITCH
-                EVT_END_IF
-        EVT_END_SWITCH
-        EVT_CALL(FreezeBattleState, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
-        EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_30)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_WAIT(1000)
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Thread
+        Call(FreezeBattleState, TRUE)
+        Call(GetLastEvent, ACTOR_SELF, LVar0)
+        Switch(LVar0)
+            CaseEq(EVENT_HIT)
+                Call(GetActorVar, ACTOR_SELF, AVAR_FirstTurn, LVar0)
+                IfEq(LVar0, FALSE)
+                    Call(RandInt, 2, LVar0)
+                    Switch(LVar0)
+                        CaseEq(0)
+                            Call(ActorSpeak, MSG_HOS_002D, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_HurtStill, ANIM_BattleGoombario_Walk)
+                        CaseEq(1)
+                            Call(ActorSpeak, MSG_HOS_002E, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_HurtStill, ANIM_BattleGoombario_Walk)
+                        CaseEq(2)
+                    EndSwitch
+                EndIf
+        EndSwitch
+        Call(FreezeBattleState, FALSE)
+    EndThread
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseOrEq(EVENT_HIT_COMBO)
+        CaseOrEq(EVENT_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_HurtStill)
+            ExecWait(EVS_Enemy_Hit)
+        EndCaseGroup
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_Idle)
+            ExecWait(EVS_Enemy_NoDamageHit)
+        EndCaseGroup
+        CaseEq(EVENT_30)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleGoombario_HurtStill)
+            ExecWait(EVS_Enemy_Hit)
+            Wait(1000)
+        CaseDefault
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-    EVT_CALL(SetBattleCamZoom, 400)
-    EVT_CALL(SetBattleCamOffsetZ, 40)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Run)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-    EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
-    EVT_WAIT(5)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 10, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_66)
-    EVT_CALL(SetBattleCamZoom, 400)
-    EVT_CALL(SetBattleCamOffsetZ, 40)
-    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(AddGoalPos, ACTOR_SELF, -10, 0, 0)
-    EVT_CALL(GetBattleFlags2, LVar0)
-    EVT_IF_FLAG(LVar0, BS_FLAGS2_DOING_JUMP_TUTORIAL)
-        EVT_CALL(AddGoalPos, ACTOR_SELF, 5, 10, 0)
-    EVT_END_IF
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1))
-    EVT_THREAD
-        EVT_WAIT(4)
-        EVT_SET(LVar0, 0)
-        EVT_LOOP(4)
-            EVT_ADD(LVar0, 45)
-            EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
-        EVT_CALL(action_command_jump_init)
-        EVT_CALL(ShowActionHud, TRUE)
-        EVT_WAIT(10)
-        EVT_CALL(action_command_jump_start, 12, 3)
-    EVT_END_THREAD
-    EVT_CALL(PlaySound, SOUND_ACTOR_JUMP)
-    EVT_CALL(JumpToGoal, ACTOR_SELF, 22, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
-    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
-    EVT_WAIT(1)
-    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
-    EVT_WAIT(1)
-    EVT_CALL(GetActionCommandMode, LVar0)
-    EVT_IF_EQ(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
-        EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_WAIT_INPUT)
-        EVT_LOOP(0)
-            EVT_CALL(GetActionCommandMode, LVar0)
-            EVT_IF_LT(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_FirstTurn, LVar0)
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_CALL(SetDamageSource, DMG_SRC_TUTORIAL_GOOMBARIO)
-    EVT_END_IF
-    EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_CALL(CloseActionCommandInfo)
-    EVT_SET(LVarF, LVar0)
-    EVT_SWITCH(LVarF)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-        EVT_CASE_OR_EQ(HIT_RESULT_10)
-            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
-            EVT_WAIT(1)
-            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-            EVT_WAIT(1)
-            EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
-            EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar0, 40)
-            EVT_SET(LVar1, 0)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_ADD(LVar0, 30)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-            EVT_ADD(LVar0, 20)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
-            EVT_SUB(LVar0, 10)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
-            EVT_WAIT(8)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(YieldTurn)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
-            EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Run)
-            EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
+    Call(SetBattleCamZoom, 400)
+    Call(SetBattleCamOffsetZ, 40)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Run)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(AddGoalPos, ACTOR_SELF, 50, 0, 0)
+    Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
+    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
+    Wait(1)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
+    Wait(5)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, 10, 0)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_66)
+    Call(SetBattleCamZoom, 400)
+    Call(SetBattleCamOffsetZ, 40)
+    Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(AddGoalPos, ACTOR_SELF, -10, 0, 0)
+    Call(GetBattleFlags2, LVar0)
+    IfFlag(LVar0, BS_FLAGS2_DOING_JUMP_TUTORIAL)
+        Call(AddGoalPos, ACTOR_SELF, 5, 10, 0)
+    EndIf
+    Call(SetActorJumpGravity, ACTOR_SELF, Float(1.1))
+    Thread
+        Wait(4)
+        Set(LVar0, 0)
+        Loop(4)
+            Add(LVar0, 45)
+            Call(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
+            Wait(1)
+        EndLoop
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
+    EndThread
+    Thread
+        Call(LoadActionCommand, ACTION_COMMAND_JUMP)
+        Call(action_command_jump_init)
+        Call(ShowActionHud, TRUE)
+        Wait(10)
+        Call(action_command_jump_start, 12, 3)
+    EndThread
+    Call(PlaySound, SOUND_ACTOR_JUMP)
+    Call(JumpToGoal, ACTOR_SELF, 22, FALSE, TRUE, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
+    Call(SetActorScale, ACTOR_SELF, Float(1.1), Float(0.8), Float(1.0))
+    Wait(1)
+    Call(SetActorScale, ACTOR_SELF, Float(1.3), Float(0.5), Float(1.0))
+    Wait(1)
+    Call(GetActionCommandMode, LVar0)
+    IfEq(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
+        Call(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_WAIT_INPUT)
+        Loop(0)
+            Call(GetActionCommandMode, LVar0)
+            IfLt(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
+                BreakLoop
+            EndIf
+            Wait(1)
+        EndLoop
+    EndIf
+    Call(GetActorVar, ACTOR_SELF, AVAR_FirstTurn, LVar0)
+    IfEq(LVar0, TRUE)
+        Call(SetDamageSource, DMG_SRC_TUTORIAL_GOOMBARIO)
+    EndIf
+    Wait(2)
+    Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_TRIGGER_EVENTS)
+    Call(CloseActionCommandInfo)
+    Set(LVarF, LVar0)
+    Switch(LVarF)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+        CaseOrEq(HIT_RESULT_10)
+            Call(SetActorScale, ACTOR_SELF, Float(1.1), Float(0.8), Float(1.0))
+            Wait(1)
+            Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
+            Wait(1)
+            Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
+            Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
+            Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Add(LVar0, 40)
+            Set(LVar1, 0)
+            Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
+            Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Add(LVar0, 30)
+            Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Add(LVar0, 20)
+            Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+            Sub(LVar0, 10)
+            Call(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
+            Wait(8)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(YieldTurn)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
+            Call(SetGoalToHome, ACTOR_SELF)
+            Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Run)
+            Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
+        EndCaseGroup
+    EndSwitch
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 API_CALLABLE(N(SetPartnerGoombario)) {
@@ -289,258 +289,258 @@ API_CALLABLE(N(SetPartnerGoombario)) {
 }
 
 EvtScript N(EVS_ManageTutorial) = {
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, TRUE)
-    EVT_CALL(EnableBattleStatusBar, FALSE)
-    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
-    EVT_WAIT(15)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.0))
-    EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 10, FALSE, FALSE, FALSE)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_0019, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_JUMP)
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
-    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_WAIT(15)
-    EVT_CALL(SetGoalPos, ACTOR_PARTNER, -73, 40, 202)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 20, EASING_COS_IN_OUT)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_001A, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-    EVT_CALL(SetMessageBoxDuration, -1)
-    EVT_THREAD
-        EVT_LOOP(15)
-            EVT_CALL(SetMessageBoxDuration, 35)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(15)
-    EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 20, EASING_COS_IN_OUT)
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
-    EVT_CALL(WaitForState, BATTLE_STATE_0)
-    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_DOING_JUMP_TUTORIAL, TRUE)
-    EVT_LOOP(0)
-        EVT_CALL(GetActionCommandMode, LVar0)
-        EVT_IF_NE(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
+    Call(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, TRUE)
+    Call(EnableBattleStatusBar, FALSE)
+    Call(WaitForState, BATTLE_STATE_PLAYER_MENU)
+    Wait(15)
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
+    Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
+    Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, FALSE, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(ActorSpeak, MSG_HOS_0019, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_JUMP)
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
+    Call(WaitForState, BATTLE_STATE_PLAYER_MOVE)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Wait(15)
+    Call(SetGoalPos, ACTOR_PARTNER, -73, 40, 202)
+    Call(FlyToGoal, ACTOR_PARTNER, 20, 20, EASING_COS_IN_OUT)
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(ActorSpeak, MSG_HOS_001A, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
+    Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+    Call(SetMessageBoxDuration, -1)
+    Thread
+        Loop(15)
+            Call(SetMessageBoxDuration, 35)
+            Wait(1)
+        EndLoop
+    EndThread
+    Wait(15)
+    Call(SetGoalToHome, ACTOR_PARTNER)
+    Call(FlyToGoal, ACTOR_PARTNER, 20, 20, EASING_COS_IN_OUT)
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
+    Call(WaitForState, BATTLE_STATE_0)
+    Call(SetBattleFlagBits2, BS_FLAGS2_DOING_JUMP_TUTORIAL, TRUE)
+    Loop(0)
+        Call(GetActionCommandMode, LVar0)
+        IfNe(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
     // 'Press [A] at exactly this moment.'
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_001B, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_LOOP(0)
-        EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_LOOP(0)
-        EVT_CALL(CheckButtonPress, BUTTON_A, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetActionSuccess, 1)
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
-    EVT_CALL(WaitForState, BATTLE_STATE_BEGIN_PARTNER_TURN)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_WAIT(15)
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(ActorSpeak, MSG_HOS_001B, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Loop(0)
+        Call(CheckButtonDown, BUTTON_A, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Loop(0)
+        Call(CheckButtonPress, BUTTON_A, LVar0)
+        IfEq(LVar0, 1)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(SetActionSuccess, 1)
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
+    Call(WaitForState, BATTLE_STATE_BEGIN_PARTNER_TURN)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Wait(15)
     // 'When you see "Nice" appear ...'
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_001D, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(WaitForState, BATTLE_STATE_9)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_WAIT(15)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_001E, ACTOR_ENEMY0, 1, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
-    EVT_CALL(WaitForState, BATTLE_STATE_0)
-    EVT_LOOP(0)
-        EVT_CALL(GetActionCommandMode, LVar0)
-        EVT_IF_NE(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_001F, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_LOOP(0)
-        EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_LOOP(0)
-        EVT_CALL(CheckButtonPress, BUTTON_A, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetActionSuccess, 1)
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_BLOCK)
-    EVT_CALL(WaitForState, BATTLE_STATE_END_TURN)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_WAIT(15)
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_0020, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
-    EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_SMASH)
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
-    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_0022, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_LOOP(0)
-        EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_LOOP(0)
-        EVT_CALL(CheckButtonPress, BUTTON_STICK_LEFT, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
-    EVT_CALL(WaitForState, BATTLE_STATE_0)
-    EVT_WAIT(5)
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
-    EVT_LOOP(0)
-        EVT_CALL(GetActionCommandMode, LVar0)
-        EVT_IF_NE(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_BLOCK)
-            EVT_CALL(PauseTakeTurn, ACTOR_PLAYER)
-            EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-            EVT_CALL(ActorSpeak, MSG_HOS_0023, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-            EVT_LOOP(0)
-                EVT_CALL(CheckButtonPress, BUTTON_STICK_LEFT, LVar0)
-                EVT_IF_EQ(LVar0, 1)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-            EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-            EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
-            EVT_CALL(ResumeTakeTurn, ACTOR_PLAYER)
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_LOOP(0)
-        EVT_CALL(GetActionQuality, LVar0)
-        EVT_IF_EQ(LVar0, 3)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_0024, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_LOOP(0)
-        EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetActionSuccess, 1)
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
-    EVT_CALL(WaitForState, BATTLE_STATE_BEGIN_PARTNER_TURN)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_WAIT(15)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_0025, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_NO_ATTACK, TRUE)
-    EVT_CALL(WaitForState, BATTLE_STATE_0)
-    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
-    EVT_CALL(ShowBattleChoice, MSG_Choice_001D)
-    EVT_CALL(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ActorSpeak, MSG_HOS_0027, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-        EVT_GOTO(100)
-    EVT_END_IF
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_0028, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FirstTurn, FALSE)
-    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_DOING_JUMP_TUTORIAL, FALSE)
-    EVT_LABEL(10)
-    EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_JUMP | BTL_MENU_ENABLED_SMASH | BTL_MENU_ENABLED_STRATEGIES)
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
-    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_IF_EQ(LVar0, BTL_MENU_TYPE_STRATEGIES)
-        EVT_GOTO(99)
-    EVT_END_IF
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
-    EVT_CALL(WaitForState, BATTLE_STATE_BEGIN_PARTNER_TURN)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(GetActionResult, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ACTION_RESULT_EARLY)
-            EVT_CALL(ActorSpeak, MSG_HOS_002A, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-        EVT_CASE_EQ(ACTION_RESULT_FAIL)
-            EVT_CALL(ActorSpeak, MSG_HOS_002B, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-        EVT_CASE_EQ(ACTION_RESULT_SUCCESS)
-            EVT_CALL(ActorSpeak, MSG_HOS_0029, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetEnemyHP, ACTOR_ENEMY0, 99)
-    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_NO_ATTACK, FALSE)
-    EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
-    EVT_CALL(WaitForState, BATTLE_STATE_END_TURN)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(GetBlockResult, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(BLOCK_RESULT_EARLY)
-            EVT_CALL(ActorSpeak, MSG_HOS_002A, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-        EVT_CASE_EQ(BLOCK_RESULT_FAIL)
-            EVT_CALL(ActorSpeak, MSG_HOS_002B, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-        EVT_CASE_EQ(BLOCK_RESULT_SUCCESS)
-            EVT_CALL(ActorSpeak, MSG_HOS_0029, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
-    EVT_GOTO(10)
-    EVT_LABEL(99)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_HOS_002C, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
-    EVT_LABEL(100)
-    EVT_CALL(WaitForState, BATTLE_STATE_0)
-    EVT_CALL(SetBattleState, BATTLE_STATE_END_TRAINING_BATTLE)
-    EVT_CALL(N(SetPartnerGoombario))
-    EVT_WAIT(10000)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(ActorSpeak, MSG_HOS_001D, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(WaitForState, BATTLE_STATE_9)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Wait(15)
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(ActorSpeak, MSG_HOS_001E, ACTOR_ENEMY0, 1, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
+    Call(WaitForState, BATTLE_STATE_0)
+    Loop(0)
+        Call(GetActionCommandMode, LVar0)
+        IfNe(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(ActorSpeak, MSG_HOS_001F, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Loop(0)
+        Call(CheckButtonDown, BUTTON_A, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Loop(0)
+        Call(CheckButtonPress, BUTTON_A, LVar0)
+        IfEq(LVar0, 1)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(SetActionSuccess, 1)
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_BLOCK)
+    Call(WaitForState, BATTLE_STATE_END_TURN)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Wait(15)
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(ActorSpeak, MSG_HOS_0020, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(WaitForState, BATTLE_STATE_PLAYER_MENU)
+    Call(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_SMASH)
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
+    Call(WaitForState, BATTLE_STATE_PLAYER_MOVE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(ActorSpeak, MSG_HOS_0022, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Loop(0)
+        Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Loop(0)
+        Call(CheckButtonPress, BUTTON_STICK_LEFT, LVar0)
+        IfEq(LVar0, 1)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
+    Call(WaitForState, BATTLE_STATE_0)
+    Wait(5)
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
+    Loop(0)
+        Call(GetActionCommandMode, LVar0)
+        IfNe(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
+            BreakLoop
+        EndIf
+        Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
+        IfEq(LVar0, 0)
+            Call(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_BLOCK)
+            Call(PauseTakeTurn, ACTOR_PLAYER)
+            Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+            Call(ActorSpeak, MSG_HOS_0023, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+            Loop(0)
+                Call(CheckButtonPress, BUTTON_STICK_LEFT, LVar0)
+                IfEq(LVar0, 1)
+                    BreakLoop
+                EndIf
+                Wait(1)
+            EndLoop
+            Call(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+            Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+            Call(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
+            Call(ResumeTakeTurn, ACTOR_PLAYER)
+        EndIf
+        Wait(1)
+    EndLoop
+    Loop(0)
+        Call(GetActionQuality, LVar0)
+        IfEq(LVar0, 3)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(ActorSpeak, MSG_HOS_0024, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Loop(0)
+        Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(SetActionSuccess, 1)
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
+    Call(WaitForState, BATTLE_STATE_BEGIN_PARTNER_TURN)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Wait(15)
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(ActorSpeak, MSG_HOS_0025, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_NO_ATTACK, TRUE)
+    Call(WaitForState, BATTLE_STATE_0)
+    Call(WaitForState, BATTLE_STATE_PLAYER_MENU)
+    Call(ShowBattleChoice, MSG_Choice_001D)
+    Call(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    IfEq(LVar0, 1)
+        Call(ActorSpeak, MSG_HOS_0027, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+        Goto(100)
+    EndIf
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(ActorSpeak, MSG_HOS_0028, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_FirstTurn, FALSE)
+    Call(SetBattleFlagBits2, BS_FLAGS2_DOING_JUMP_TUTORIAL, FALSE)
+    Label(10)
+    Call(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_JUMP | BTL_MENU_ENABLED_SMASH | BTL_MENU_ENABLED_STRATEGIES)
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
+    Call(WaitForState, BATTLE_STATE_PLAYER_MOVE)
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    IfEq(LVar0, BTL_MENU_TYPE_STRATEGIES)
+        Goto(99)
+    EndIf
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
+    Call(WaitForState, BATTLE_STATE_BEGIN_PARTNER_TURN)
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(GetActionResult, LVar0)
+    Switch(LVar0)
+        CaseEq(ACTION_RESULT_EARLY)
+            Call(ActorSpeak, MSG_HOS_002A, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+        CaseEq(ACTION_RESULT_FAIL)
+            Call(ActorSpeak, MSG_HOS_002B, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+        CaseEq(ACTION_RESULT_SUCCESS)
+            Call(ActorSpeak, MSG_HOS_0029, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(SetEnemyHP, ACTOR_ENEMY0, 99)
+    Call(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_NO_ATTACK, FALSE)
+    Call(SetActionCommandMode, ACTION_COMMAND_MODE_LEARNED)
+    Call(WaitForState, BATTLE_STATE_END_TURN)
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(GetBlockResult, LVar0)
+    Switch(LVar0)
+        CaseEq(BLOCK_RESULT_EARLY)
+            Call(ActorSpeak, MSG_HOS_002A, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+        CaseEq(BLOCK_RESULT_FAIL)
+            Call(ActorSpeak, MSG_HOS_002B, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+        CaseEq(BLOCK_RESULT_SUCCESS)
+            Call(ActorSpeak, MSG_HOS_0029, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(WaitForState, BATTLE_STATE_PLAYER_MENU)
+    Goto(10)
+    Label(99)
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(ActorSpeak, MSG_HOS_002C, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
+    Label(100)
+    Call(WaitForState, BATTLE_STATE_0)
+    Call(SetBattleState, BATTLE_STATE_END_TRAINING_BATTLE)
+    Call(N(SetPartnerGoombario))
+    Wait(10000)
+    Return
+    End
 };

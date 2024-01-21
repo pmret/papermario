@@ -7,32 +7,32 @@
 #include "battle/common/stage/lib/Snowflakes.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_EXEC(N(EVS_SpawnSnowfall))
-    EVT_THREAD
-        EVT_SET(LVar0, MODEL_o262)
-        EVT_SET(LVar1, 1)
-        EVT_EXEC(N(EVS_AnimateHangingSnowflake_RandomSpin))
-        EVT_WAIT(5)
-        EVT_SET(LVar0, MODEL_o261)
-        EVT_SET(LVar1, 3)
-        EVT_EXEC(N(EVS_AnimateHangingSnowflake_RandomSpin))
-        EVT_WAIT(5)
-        EVT_SET(LVar0, MODEL_o260)
-        EVT_SET(LVar1, 4)
-        EVT_EXEC(N(EVS_AnimateHangingSnowflake_RandomSpin))
-        EVT_WAIT(5)
-        EVT_SET(LVar0, MODEL_o253)
-        EVT_SET(LVar1, 2)
-        EVT_EXEC(N(EVS_AnimateHangingSnowflake_RandomSpin))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Exec(N(EVS_SpawnSnowfall))
+    Thread
+        Set(LVar0, MODEL_o262)
+        Set(LVar1, 1)
+        Exec(N(EVS_AnimateHangingSnowflake_RandomSpin))
+        Wait(5)
+        Set(LVar0, MODEL_o261)
+        Set(LVar1, 3)
+        Exec(N(EVS_AnimateHangingSnowflake_RandomSpin))
+        Wait(5)
+        Set(LVar0, MODEL_o260)
+        Set(LVar1, 4)
+        Exec(N(EVS_AnimateHangingSnowflake_RandomSpin))
+        Wait(5)
+        Set(LVar0, MODEL_o253)
+        Set(LVar1, 2)
+        Exec(N(EVS_AnimateHangingSnowflake_RandomSpin))
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

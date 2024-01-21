@@ -5,84 +5,84 @@ API_CALLABLE(func_8005DD54);
 API_CALLABLE(func_8005DDF0);
 
 EvtScript EVS_800936C0 = {
-    EVT_CALL(func_8005DB00)
-    EVT_RETURN
-    EVT_END
+    Call(func_8005DB00)
+    Return
+    End
 };
 
 EvtScript EVS_NpcHitRecoil = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, LVar0)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar3, LVar2)
-    EVT_SET(LVar1, LVar3)
-    EVT_ADD(LVar1, 1)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_SET(LVar1, LVar3)
-    EVT_ADD(LVar1, 4)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_SET(LVar1, LVar3)
-    EVT_ADD(LVar1, 16)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_SET(LVar1, LVar3)
-    EVT_ADD(LVar1, 8)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_SET(LVar1, LVar3)
-    EVT_ADD(LVar1, 20)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_SET(LVar1, LVar3)
-    EVT_ADD(LVar1, 8)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_SET(LVar1, LVar3)
-    EVT_ADD(LVar1, 12)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_SET(LVar1, LVar3)
-    EVT_ADD(LVar1, 6)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_SET(LVar1, LVar3)
-    EVT_ADD(LVar1, 0)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, LVar0)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar3, LVar2)
+    Set(LVar1, LVar3)
+    Add(LVar1, 1)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Set(LVar1, LVar3)
+    Add(LVar1, 4)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Set(LVar1, LVar3)
+    Add(LVar1, 16)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Set(LVar1, LVar3)
+    Add(LVar1, 8)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Set(LVar1, LVar3)
+    Add(LVar1, 20)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Set(LVar1, LVar3)
+    Add(LVar1, 8)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Set(LVar1, LVar3)
+    Add(LVar1, 12)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Set(LVar1, LVar3)
+    Add(LVar1, 6)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Set(LVar1, LVar3)
+    Add(LVar1, 0)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Return
+    End
 };
 
 EvtScript D_800939A4 = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript D_800939B4 = {
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SetSelfVar, 0, 1)
-        EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(D_800939A4))
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_JUMPING, FALSE)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, LVar2)
-        EVT_SET(LVar0, 0)
-        EVT_LOOP(30)
-            EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
-            EVT_CALL(func_8005DD54)
-            EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_COLOR, LVar2, LVar2, LVar2, 0)
-            EVT_ADD(LVar0, 30)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-        EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_COLOR, 255, 255, 255, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, FALSE)
-        EVT_CALL(SetSelfVar, 0, 0)
-        EVT_CALL(func_8005DDF0)
-        EVT_CALL(BindNpcAI, NPC_SELF, LVar1)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetSelfVar, 0, LVar0)
+    IfEq(LVar0, 0)
+        Call(SetSelfVar, 0, 1)
+        Call(BindNpcAI, NPC_SELF, Ref(D_800939A4))
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_JUMPING, FALSE)
+        Call(SetNpcAnimation, NPC_SELF, LVar2)
+        Set(LVar0, 0)
+        Loop(30)
+            Call(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
+            Call(func_8005DD54)
+            Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_COLOR, LVar2, LVar2, LVar2, 0)
+            Add(LVar0, 30)
+            Wait(1)
+        EndLoop
+        Call(SetNpcRotation, NPC_SELF, 0, 0, 0)
+        Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_COLOR, 255, 255, 255, 0)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, FALSE)
+        Call(SetSelfVar, 0, 0)
+        Call(func_8005DDF0)
+        Call(BindNpcAI, NPC_SELF, LVar1)
+    EndIf
+    Return
+    End
 };
 
 API_CALLABLE(func_8005DB00) {

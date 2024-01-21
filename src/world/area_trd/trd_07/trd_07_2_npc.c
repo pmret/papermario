@@ -8,33 +8,33 @@ extern EvtScript N(EVS_RestoreMagicDoors);
 #include "world/common/util/GetDefeatedEnemyCount.inc.c"
 
 EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(N(GetDefeatedEnemyCount), LVar0)
-            EVT_IF_EQ(LVar0, 1) // ???
-                EVT_SET(GF_TRD07_Defeated_DungeonAmbush, TRUE)
-                EVT_EXEC(N(EVS_RestoreMagicDoors))
-            EVT_END_IF
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(OnPlayerFled, 0)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(N(GetDefeatedEnemyCount), LVar0)
+            IfEq(LVar0, 1) // ???
+                Set(GF_TRD07_Defeated_DungeonAmbush, TRUE)
+                Exec(N(EVS_RestoreMagicDoors))
+            EndIf
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(OnPlayerFled, 0)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoopaTroopa) = {
-    EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_KoopaTroopa)))
-    EVT_IF_EQ(GF_TRD07_Defeated_DungeonAmbush, TRUE)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_KoopaTroopa)))
+    IfEq(GF_TRD07_Defeated_DungeonAmbush, TRUE)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_KoopaTroopa) = {

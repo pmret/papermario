@@ -18,13 +18,13 @@ MobileAISettings N(AISettings_Bzzap) = {
 };
 
 EvtScript N(EVS_NpcAI_Bzzap) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 5, -630)
-    EVT_CALL(SetSelfVar, 6, 50)
-    EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(AISettings_Bzzap)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(SetSelfVar, 5, -630)
+    Call(SetSelfVar, 6, 50)
+    Call(SetSelfVar, 1, 200)
+    Call(N(FlyingAI_Main), Ref(N(AISettings_Bzzap)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Bzzap) = {

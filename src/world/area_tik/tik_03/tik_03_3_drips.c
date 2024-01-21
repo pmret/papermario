@@ -26,8 +26,8 @@ DripVolumeList N(DripVolumes) = {
 };
 
 EvtScript N(EVS_SetupDrips) = {
-    EVT_SET(LVar0, EVT_PTR(N(DripVolumes)))
-    EVT_EXEC(N(EVS_CreateDripVolumes))
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, Ref(N(DripVolumes)))
+    Exec(N(EVS_CreateDripVolumes))
+    Return
+    End
 };

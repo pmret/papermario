@@ -105,29 +105,29 @@ API_CALLABLE(N(AddConveyorPush)) {
 }
 
 EvtScript N(EVS_SetupConveyors) = {
-    EVT_SET_GROUP(EVT_GROUP_0B)
-    EVT_CALL(EnableTexPanning, MODEL_1, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_3, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_4, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_8, TRUE)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_LABEL(0)
-            EVT_CALL(N(WaitWhileConveyorPaused))
-            EVT_ADD(LVar1, -1280)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, 0, LVar1)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_3, TEX_PANNER_MAIN, 0, LVar1)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_4, TEX_PANNER_MAIN, 0, LVar1)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_8, TEX_PANNER_MAIN, 0, LVar1)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_LABEL(10)
-            EVT_CALL(N(AddConveyorPush))
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_0B)
+    Call(EnableTexPanning, MODEL_1, TRUE)
+    Call(EnableTexPanning, MODEL_3, TRUE)
+    Call(EnableTexPanning, MODEL_4, TRUE)
+    Call(EnableTexPanning, MODEL_8, TRUE)
+    Thread
+        Set(LVar0, 0)
+        Label(0)
+            Call(N(WaitWhileConveyorPaused))
+            Add(LVar1, -1280)
+            Call(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, 0, LVar1)
+            Call(SetTexPanOffset, TEX_PANNER_3, TEX_PANNER_MAIN, 0, LVar1)
+            Call(SetTexPanOffset, TEX_PANNER_4, TEX_PANNER_MAIN, 0, LVar1)
+            Call(SetTexPanOffset, TEX_PANNER_8, TEX_PANNER_MAIN, 0, LVar1)
+            Wait(1)
+            Goto(0)
+    EndThread
+    Thread
+        Label(10)
+            Call(N(AddConveyorPush))
+            Wait(1)
+            Goto(10)
+    EndThread
+    Return
+    End
 };

@@ -13,9 +13,9 @@ MobileAISettings N(AISettings_Ninji_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_Ninji_Wander) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_Ninji_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_Ninji_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Ninji_Wander) = {
@@ -34,9 +34,9 @@ MobileAISettings N(AISettings_ShiverToad_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_ShiverToad_Wander) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_ShiverToad_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_ShiverToad_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_ShiverToad_Wander) = {
@@ -87,198 +87,198 @@ s32 N(LetterList_FrostT)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_FrostT) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_ShiverToad_03, ANIM_ShiverToad_Green_Talk, ANIM_ShiverToad_Green_Idle,
         ITEM_LETTER_CHAIN_FROST_T, ITEM_LETTER_CHAIN_GOOMPAPA_2,
         MSG_CH7_00FE, MSG_CH7_00FF, MSG_CH7_0100, MSG_CH7_0101,
-        EVT_PTR(N(LetterList_FrostT)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList_FrostT)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Merle) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_UNLOCKED_SHIVER_MOUNTAIN)
-            EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F4)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F5)
-        EVT_CASE_GE(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_SAM06_Merle_HeardLongerMessage, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F6)
-                EVT_SET(GF_SAM06_Merle_HeardLongerMessage, TRUE)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F7)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_UNLOCKED_SHIVER_MOUNTAIN)
+            Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F4)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F5)
+        CaseGe(STORY_CH7_STAR_SPRIT_DEPARTED)
+            IfEq(GF_SAM06_Merle_HeardLongerMessage, FALSE)
+                Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F6)
+                Set(GF_SAM06_Merle_HeardLongerMessage, TRUE)
+            Else
+                Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F7)
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Merle_CarryScarf) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 5)
-        EVT_ADD(LVar1, 15)
-        EVT_CALL(GetNpcYaw, NPC_Merle, LVar3)
-        EVT_IF_GE(LVar3, 90)
-            EVT_IF_LE(LVar3, 270)
-                EVT_ADD(LVar2, 10)
-            EVT_ELSE
-                EVT_ADD(LVar2, -10)
-            EVT_END_IF
-        EVT_ELSE
-            EVT_ADD(LVar2, -10)
-        EVT_END_IF
-        EVT_CALL(SetItemPos, MV_ScarfItemID, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
+        Add(LVar0, 5)
+        Add(LVar1, 15)
+        Call(GetNpcYaw, NPC_Merle, LVar3)
+        IfGe(LVar3, 90)
+            IfLe(LVar3, 270)
+                Add(LVar2, 10)
+            Else
+                Add(LVar2, -10)
+            EndIf
+        Else
+            Add(LVar2, -10)
+        EndIf
+        Call(SetItemPos, MV_ScarfItemID, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Merle_HandOverScarf) = {
-    EVT_SET(LVar4, 10)
-    EVT_LOOP(10)
-        EVT_CALL(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 5)
-        EVT_ADD(LVar1, 15)
-        EVT_CALL(GetNpcYaw, NPC_Merle, LVar3)
-        EVT_IF_GE(LVar3, 90)
-            EVT_IF_LE(LVar3, 270)
-                EVT_ADD(LVar2, LVar4)
-            EVT_ELSE
-                EVT_SUB(LVar2, LVar4)
-            EVT_END_IF
-        EVT_ELSE
-            EVT_SUB(LVar2, LVar4)
-        EVT_END_IF
-        EVT_CALL(SetItemPos, MV_ScarfItemID, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar4, 1)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(LVar4, 10)
+    Loop(10)
+        Call(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
+        Add(LVar0, 5)
+        Add(LVar1, 15)
+        Call(GetNpcYaw, NPC_Merle, LVar3)
+        IfGe(LVar3, 90)
+            IfLe(LVar3, 270)
+                Add(LVar2, LVar4)
+            Else
+                Sub(LVar2, LVar4)
+            EndIf
+        Else
+            Sub(LVar2, LVar4)
+        EndIf
+        Call(SetItemPos, MV_ScarfItemID, LVar0, LVar1, LVar2)
+        Add(LVar4, 1)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_Merle_Greeting) = {
-    EVT_CALL(WaitForPlayerInputEnabled)
-    EVT_WAIT(1)
-    EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_EQ(LVar0, PARTNER_LAKILESTER)
-        EVT_CALL(InterruptUsePartner)
-        EVT_CALL(WaitForPlayerTouchingFloor)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(PlayerMoveTo, -240, 300, 0)
-    EVT_CALL(PlayerFaceNpc, NPC_Merle, FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00E9)
-    EVT_CALL(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(250.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-7.5))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EA)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -250, 0, 300)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, -250, 0, 300)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(500.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-    EVT_CALL(SetNpcSpeed, NPC_Merle, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(NpcMoveTo, NPC_Merle, -110, 300, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-    EVT_CALL(GetAngleToPlayer, NPC_Merle, LVar0)
-    EVT_CALL(InterpNpcYaw, NPC_Merle, LVar0, 0)
-    EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EB)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_SET(AF_SAM_05, TRUE)
-    EVT_SET(GB_StoryProgress, STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_SET(MF_MerleReady, FALSE)
-    EVT_THREAD
-        EVT_CALL(BindNpcInteract, NPC_Merle, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_Merle, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-        EVT_CALL(SetNpcSpeed, NPC_Merle, EVT_FLOAT(2.0 / DT))
-        EVT_CALL(NpcMoveTo, NPC_Merle, -78, 287, 0)
-        EVT_CALL(SetNpcJumpscale, NPC_Merle, EVT_FLOAT(0.5))
-        EVT_CALL(NpcJump0, NPC_Merle, -25, 20, 253, 17)
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-        EVT_CALL(NpcJump0, NPC_Merle, -40, 45, 188, 17)
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-        EVT_CALL(NpcMoveTo, NPC_Merle, -90, 190, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-        EVT_SET(MF_MerleReady, TRUE)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(WaitForPlayerInputEnabled)
+    Wait(1)
+    Call(GetPartnerInUse, LVar0)
+    IfEq(LVar0, PARTNER_LAKILESTER)
+        Call(InterruptUsePartner)
+        Call(WaitForPlayerTouchingFloor)
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(SetPlayerSpeed, Float(3.0 / DT))
+    Call(PlayerMoveTo, -240, 300, 0)
+    Call(PlayerFaceNpc, NPC_Merle, FALSE)
+    Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00E9)
+    Call(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.5))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EA)
+    Call(UseSettingsFrom, CAM_DEFAULT, -250, 0, 300)
+    Call(SetPanTarget, CAM_DEFAULT, -250, 0, 300)
+    Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
+    Call(SetNpcSpeed, NPC_Merle, Float(3.0 / DT))
+    Call(NpcMoveTo, NPC_Merle, -110, 300, 0)
+    Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
+    Call(GetAngleToPlayer, NPC_Merle, LVar0)
+    Call(InterpNpcYaw, NPC_Merle, LVar0, 0)
+    Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EB)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Set(AF_SAM_05, TRUE)
+    Set(GB_StoryProgress, STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
+    Call(DisablePlayerInput, FALSE)
+    Set(MF_MerleReady, FALSE)
+    Thread
+        Call(BindNpcInteract, NPC_Merle, 0)
+        Call(SetNpcFlagBits, NPC_Merle, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
+        Call(SetNpcSpeed, NPC_Merle, Float(2.0 / DT))
+        Call(NpcMoveTo, NPC_Merle, -78, 287, 0)
+        Call(SetNpcJumpscale, NPC_Merle, Float(0.5))
+        Call(NpcJump0, NPC_Merle, -25, 20, 253, 17)
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
+        Wait(10 * DT)
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
+        Call(NpcJump0, NPC_Merle, -40, 45, 188, 17)
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
+        Wait(10 * DT)
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
+        Call(NpcMoveTo, NPC_Merle, -90, 190, 0)
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
+        Set(MF_MerleReady, TRUE)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_Merle_WaitingOnHill) = {
-    EVT_LABEL(60)
-    EVT_CALL(GetPlayerActionState, LVar0)
-    EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar0, ACTION_STATE_JUMP)
-        EVT_GOTO(60)
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, ACTION_STATE_FALLING)
-        EVT_GOTO(60)
-    EVT_END_IF
-    EVT_IF_LT(LVar1, -60)
-        EVT_GOTO(60)
-    EVT_END_IF
-    EVT_IF_LT(LVar2, 20)
-        EVT_GOTO(60)
-    EVT_END_IF
-    EVT_IF_GT(LVar3, 300)
-        EVT_GOTO(60)
-    EVT_END_IF
-    EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_EQ(LVar0, PARTNER_LAKILESTER)
-        EVT_CALL(InterruptUsePartner)
-        EVT_CALL(WaitForPlayerTouchingFloor)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(MF_MerleReady, TRUE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(PlayerFaceNpc, NPC_Merle, FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EC)
-    EVT_SET(GB_StoryProgress, STORY_CH7_MERLE_APOLOGIZED)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_SET(MF_MerleReady, FALSE)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-        EVT_CALL(NpcMoveTo, NPC_Merle, -110, 145, 0)
-        EVT_CALL(NpcJump0, NPC_Merle, -131, 60, 91, 20 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-        EVT_CALL(NpcJump0, NPC_Merle, -117, 90, 7, 20 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-        EVT_CALL(NpcMoveTo, NPC_Merle, 0, -143, 0)
-        EVT_CALL(InterpNpcYaw, NPC_Merle, 270, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-        EVT_SET(MF_MerleReady, TRUE)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Label(60)
+    Call(GetPlayerActionState, LVar0)
+    Call(GetPlayerPos, LVar1, LVar2, LVar3)
+    Wait(1)
+    IfEq(LVar0, ACTION_STATE_JUMP)
+        Goto(60)
+    EndIf
+    IfEq(LVar0, ACTION_STATE_FALLING)
+        Goto(60)
+    EndIf
+    IfLt(LVar1, -60)
+        Goto(60)
+    EndIf
+    IfLt(LVar2, 20)
+        Goto(60)
+    EndIf
+    IfGt(LVar3, 300)
+        Goto(60)
+    EndIf
+    Call(GetPartnerInUse, LVar0)
+    IfEq(LVar0, PARTNER_LAKILESTER)
+        Call(InterruptUsePartner)
+        Call(WaitForPlayerTouchingFloor)
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Loop(0)
+        Wait(1)
+        IfEq(MF_MerleReady, TRUE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(PlayerFaceNpc, NPC_Merle, FALSE)
+    Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EC)
+    Set(GB_StoryProgress, STORY_CH7_MERLE_APOLOGIZED)
+    Call(DisablePlayerInput, FALSE)
+    Set(MF_MerleReady, FALSE)
+    Thread
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
+        Call(NpcMoveTo, NPC_Merle, -110, 145, 0)
+        Call(NpcJump0, NPC_Merle, -131, 60, 91, 20 * DT)
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
+        Wait(10 * DT)
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
+        Call(NpcJump0, NPC_Merle, -117, 90, 7, 20 * DT)
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
+        Wait(10 * DT)
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
+        Call(NpcMoveTo, NPC_Merle, 0, -143, 0)
+        Call(InterpNpcYaw, NPC_Merle, 270, 0)
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
+        Set(MF_MerleReady, TRUE)
+    EndThread
+    Return
+    End
 };
 
 API_CALLABLE(N(func_80242538_D223C8)) {
@@ -317,581 +317,581 @@ API_CALLABLE(N(func_80242538_D223C8)) {
 }
 
 EvtScript N(EVS_Scene_Merle_EnterHouse) = {
-    EVT_CALL(AwaitPlayerApproach, 0, -140, 60)
-    EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_EQ(LVar0, PARTNER_LAKILESTER)
-        EVT_CALL(InterruptUsePartner)
-        EVT_CALL(WaitForPlayerTouchingFloor)
-    EVT_END_IF
-    EVT_CALL(WaitForPlayerTouchingFloor)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(MF_MerleReady, TRUE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_SET(MF_MerleReady, FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00ED)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-        EVT_CALL(SetNpcSpeed, NPC_Merle, EVT_FLOAT(3.0 / DT))
-        EVT_CALL(NpcMoveTo, NPC_Merle, 27, -120, 0)
-    EVT_END_THREAD
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(PlayerMoveTo, 15, -90, 0)
-    EVT_CALL(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_VISIBLE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-    EVT_CALL(MakeLerp, 0, 90, 10, EASING_QUADRATIC_OUT)
-    EVT_LABEL(70)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(70)
-        EVT_END_IF
-    EVT_SET(AF_SAM_Snowing, FALSE)
-    EVT_CALL(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_VISIBLE)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-        EVT_CALL(SetNpcSpeed, NPC_Merle, EVT_FLOAT(4.0 / DT))
-        EVT_CALL(NpcMoveTo, NPC_Merle, 0, -330, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-    EVT_END_THREAD
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.8 / DT))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k_d1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k_d2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(PlayerMoveTo, 0, -200, 0)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVarF, MODEL_k)
-        EVT_CALL(SetNpcFlagBits, NPC_Merle, NPC_FLAG_HIDING, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_StarKid_03, NPC_FLAG_HIDING, TRUE)
-        EVT_CALL(N(func_80242538_D223C8))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 90, 10, EASING_QUADRATIC_IN)
-        EVT_LABEL(71)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateGroup, MODEL_km_yane, LVar0, 0, 0, 1)
-            EVT_CALL(RotateGroup, MODEL_km_sita, LVar0, 0, 0, -1)
-            EVT_SET(LVar2, 90)
-            EVT_SUB(LVar2, LVar0)
-            EVT_CALL(RotateModel, MODEL_km_doa, LVar2, 0, -1, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(71)
-            EVT_END_IF
-        EVT_CALL(SetGroupVisibility, MODEL_km_sita, MODEL_GROUP_HIDDEN)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_CALL(PlayerMoveTo, 0, -240, 0)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k_d1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k_d2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(30 * DT)
-    EVT_CALL(GetAngleToPlayer, NPC_Merle, LVar0)
-    EVT_CALL(InterpNpcYaw, NPC_Merle, LVar0, 0)
-    EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EE)
-    EVT_CALL(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(250.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(200.7), EVT_FLOAT(-321.0))
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(0.7), EVT_FLOAT(-321.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(21.0), EVT_FLOAT(-14.5))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EF)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(275.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(200.7), EVT_FLOAT(-250.0))
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(0.7), EVT_FLOAT(-250.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(21.0), EVT_FLOAT(-14.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(SetNpcSpeed, NPC_Merle, EVT_FLOAT(2.0 / DT))
-    EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-    EVT_EXEC_GET_TID(N(EVS_Merle_CarryScarf), LVarA)
-    EVT_CALL(NpcMoveTo, NPC_Merle, 0, -275, 0)
-    EVT_KILL_THREAD(LVarA)
-    EVT_EXEC_GET_TID(N(EVS_Merle_HandOverScarf), LVarA)
-    EVT_WAIT(20 * DT)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetItemPos, MV_ScarfItemID, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
+    Call(AwaitPlayerApproach, 0, -140, 60)
+    Call(GetPartnerInUse, LVar0)
+    IfEq(LVar0, PARTNER_LAKILESTER)
+        Call(InterruptUsePartner)
+        Call(WaitForPlayerTouchingFloor)
+    EndIf
+    Call(WaitForPlayerTouchingFloor)
+    Call(DisablePlayerInput, TRUE)
+    Loop(0)
+        Wait(1)
+        IfEq(MF_MerleReady, TRUE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Set(MF_MerleReady, FALSE)
+    Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00ED)
+    Thread
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
+        Call(SetNpcSpeed, NPC_Merle, Float(3.0 / DT))
+        Call(NpcMoveTo, NPC_Merle, 27, -120, 0)
+    EndThread
+    Call(SetPlayerSpeed, Float(3.0 / DT))
+    Call(PlayerMoveTo, 15, -90, 0)
+    Call(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_VISIBLE)
+    Call(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+    Call(MakeLerp, 0, 90, 10, EASING_QUADRATIC_OUT)
+    Label(70)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(70)
+        EndIf
+    Set(AF_SAM_Snowing, FALSE)
+    Call(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_VISIBLE)
+    Thread
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
+        Call(SetNpcSpeed, NPC_Merle, Float(4.0 / DT))
+        Call(NpcMoveTo, NPC_Merle, 0, -330, 0)
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
+    EndThread
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.8 / DT))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k_d1, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k_d2, COLLIDER_FLAGS_UPPER_MASK)
+    Call(PlayerMoveTo, 0, -200, 0)
+    Thread
+        Set(LVar0, 0)
+        Set(LVarF, MODEL_k)
+        Call(SetNpcFlagBits, NPC_Merle, NPC_FLAG_HIDING, FALSE)
+        Call(SetNpcFlagBits, NPC_StarKid_03, NPC_FLAG_HIDING, TRUE)
+        Call(N(func_80242538_D223C8))
+    EndThread
+    Thread
+        Call(MakeLerp, 0, 90, 10, EASING_QUADRATIC_IN)
+        Label(71)
+            Call(UpdateLerp)
+            Call(RotateGroup, MODEL_km_yane, LVar0, 0, 0, 1)
+            Call(RotateGroup, MODEL_km_sita, LVar0, 0, 0, -1)
+            Set(LVar2, 90)
+            Sub(LVar2, LVar0)
+            Call(RotateModel, MODEL_km_doa, LVar2, 0, -1, 0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(71)
+            EndIf
+        Call(SetGroupVisibility, MODEL_km_sita, MODEL_GROUP_HIDDEN)
+        Call(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
+    EndThread
+    Call(PlayerMoveTo, 0, -240, 0)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k_d1, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k_d2, COLLIDER_FLAGS_UPPER_MASK)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
+    Wait(30 * DT)
+    Call(GetAngleToPlayer, NPC_Merle, LVar0)
+    Call(InterpNpcYaw, NPC_Merle, LVar0, 0)
+    Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EE)
+    Call(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
+    Call(SetCamPosA, CAM_DEFAULT, Float(200.7), Float(-321.0))
+    Call(SetCamPosB, CAM_DEFAULT, Float(0.7), Float(-321.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(21.0), Float(-14.5))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(5 * DT)
+    Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EF)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F0)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
+    Call(SetCamPosA, CAM_DEFAULT, Float(200.7), Float(-250.0))
+    Call(SetCamPosB, CAM_DEFAULT, Float(0.7), Float(-250.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(21.0), Float(-14.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(SetNpcSpeed, NPC_Merle, Float(2.0 / DT))
+    Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
+    ExecGetTID(N(EVS_Merle_CarryScarf), LVarA)
+    Call(NpcMoveTo, NPC_Merle, 0, -275, 0)
+    KillThread(LVarA)
+    ExecGetTID(N(EVS_Merle_HandOverScarf), LVarA)
+    Wait(20 * DT)
+    KillThread(LVarA)
+    Call(SetItemPos, MV_ScarfItemID, NPC_DISPOSE_LOCATION)
+    Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EVT_GIVE_KEY_REWARD(ITEM_SNOWMAN_SCARF)
-    EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F1)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(200.7), EVT_FLOAT(-321.0))
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(0.7), EVT_FLOAT(-321.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.7))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(SetNpcSpeed, NPC_Merle, EVT_FLOAT(2.0 / DT))
-    EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-    EVT_CALL(NpcMoveTo, NPC_Merle, 0, -330, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-    EVT_CALL(GetAngleToPlayer, NPC_Merle, LVar0)
-    EVT_CALL(InterpNpcYaw, NPC_Merle, LVar0, 0)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(15 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F2)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(BindNpcInteract, NPC_Merle, EVT_PTR(N(EVS_NpcInteract_Merle)))
-    EVT_CALL(SetNpcFlagBits, NPC_Merle, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F1)
+    Wait(10 * DT)
+    Call(SetCamPosA, CAM_DEFAULT, Float(200.7), Float(-321.0))
+    Call(SetCamPosB, CAM_DEFAULT, Float(0.7), Float(-321.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(0.7))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(SetNpcSpeed, NPC_Merle, Float(2.0 / DT))
+    Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
+    Call(NpcMoveTo, NPC_Merle, 0, -330, 0)
+    Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
+    Call(GetAngleToPlayer, NPC_Merle, LVar0)
+    Call(InterpNpcYaw, NPC_Merle, LVar0, 0)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(15 * DT)
+    Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F2)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(BindNpcInteract, NPC_Merle, Ref(N(EVS_NpcInteract_Merle)))
+    Call(SetNpcFlagBits, NPC_Merle, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Merle) = {
-    EVT_WAIT(3)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
-        EVT_EXEC_WAIT(N(EVS_Scene_Merle_Greeting))
-        EVT_EXEC_WAIT(N(EVS_Scene_Merle_WaitingOnHill))
-        EVT_EXEC_WAIT(N(EVS_Scene_Merle_EnterHouse))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
-        EVT_CALL(SetNpcPos, NPC_Merle, -90, 45, 190)
-        EVT_CALL(InterpNpcYaw, NPC_Merle, 270, 0)
-        EVT_SET(MF_MerleReady, TRUE)
-        EVT_EXEC_WAIT(N(EVS_Scene_Merle_WaitingOnHill))
-        EVT_EXEC_WAIT(N(EVS_Scene_Merle_EnterHouse))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH7_MERLE_APOLOGIZED)
-        EVT_CALL(SetNpcPos, NPC_Merle, 0, 90, -143)
-        EVT_CALL(InterpNpcYaw, NPC_Merle, 270, 0)
-        EVT_SET(MF_MerleReady, TRUE)
-        EVT_EXEC_WAIT(N(EVS_Scene_Merle_EnterHouse))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Wait(3)
+    IfLt(GB_StoryProgress, STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
+        ExecWait(N(EVS_Scene_Merle_Greeting))
+        ExecWait(N(EVS_Scene_Merle_WaitingOnHill))
+        ExecWait(N(EVS_Scene_Merle_EnterHouse))
+        Return
+    EndIf
+    IfEq(GB_StoryProgress, STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
+        Call(SetNpcPos, NPC_Merle, -90, 45, 190)
+        Call(InterpNpcYaw, NPC_Merle, 270, 0)
+        Set(MF_MerleReady, TRUE)
+        ExecWait(N(EVS_Scene_Merle_WaitingOnHill))
+        ExecWait(N(EVS_Scene_Merle_EnterHouse))
+        Return
+    EndIf
+    IfEq(GB_StoryProgress, STORY_CH7_MERLE_APOLOGIZED)
+        Call(SetNpcPos, NPC_Merle, 0, 90, -143)
+        Call(InterpNpcYaw, NPC_Merle, 270, 0)
+        Set(MF_MerleReady, TRUE)
+        ExecWait(N(EVS_Scene_Merle_EnterHouse))
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_Merle_OneLastThing) = {
-    EVT_THREAD
-        EVT_CALL(DisablePartnerAI, 0)
-        EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(3.0 / DT))
-        EVT_CALL(NpcMoveTo, NPC_PARTNER, -28, -80, 0)
-        EVT_CALL(EnablePartnerAI)
-    EVT_END_THREAD
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(PlayerMoveTo, 0, -100, 0)
-    EVT_CALL(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_VISIBLE)
-    EVT_CALL(SetGroupVisibility, MODEL_km_sita, MODEL_GROUP_VISIBLE)
-    EVT_CALL(SetNpcPos, NPC_Merle, 0, 90, -180)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-    EVT_CALL(MakeLerp, 0, 90, 10, EASING_QUADRATIC_IN)
-    EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(SetNpcSpeed, NPC_Merle, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-    EVT_CALL(NpcMoveTo, NPC_Merle, 40, -140, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-    EVT_CALL(MakeLerp, 90, 0, 10, EASING_QUADRATIC_IN)
-    EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_HIDDEN)
-    EVT_CALL(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
-    EVT_CALL(PlayerFaceNpc, NPC_Merle, FALSE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Merle, 0)
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F3)
-    EVT_CALL(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_VISIBLE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-    EVT_CALL(MakeLerp, 0, 90, 10, EASING_QUADRATIC_IN)
-    EVT_LABEL(2)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(2)
-        EVT_END_IF
-    EVT_CALL(SetNpcSpeed, NPC_Merle, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
-    EVT_CALL(NpcMoveTo, NPC_Merle, 0, -180, 0)
-    EVT_THREAD
-        EVT_CALL(NpcMoveTo, NPC_Merle, 0, -300, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-    EVT_END_THREAD
-    EVT_CALL(MakeLerp, 90, 0, 10, EASING_QUADRATIC_IN)
-    EVT_LABEL(3)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(3)
-        EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_HIDDEN)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_SET(AF_SAM_05, FALSE)
-    EVT_SET(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_SCARF)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(DisablePartnerAI, 0)
+        Call(SetNpcSpeed, NPC_PARTNER, Float(3.0 / DT))
+        Call(NpcMoveTo, NPC_PARTNER, -28, -80, 0)
+        Call(EnablePartnerAI)
+    EndThread
+    Call(SetPlayerSpeed, Float(3.0 / DT))
+    Call(PlayerMoveTo, 0, -100, 0)
+    Call(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_VISIBLE)
+    Call(SetGroupVisibility, MODEL_km_sita, MODEL_GROUP_VISIBLE)
+    Call(SetNpcPos, NPC_Merle, 0, 90, -180)
+    Call(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+    Call(MakeLerp, 0, 90, 10, EASING_QUADRATIC_IN)
+    Label(0)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+    Call(SetNpcSpeed, NPC_Merle, Float(3.0 / DT))
+    Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
+    Call(NpcMoveTo, NPC_Merle, 40, -140, 0)
+    Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
+    Call(MakeLerp, 90, 0, 10, EASING_QUADRATIC_IN)
+    Label(1)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(1)
+        EndIf
+    Call(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
+    Call(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_HIDDEN)
+    Call(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
+    Call(PlayerFaceNpc, NPC_Merle, FALSE)
+    Call(DisablePartnerAI, 0)
+    Call(NpcFaceNpc, NPC_PARTNER, NPC_Merle, 0)
+    Call(EnablePartnerAI)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F3)
+    Call(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_VISIBLE)
+    Call(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+    Call(MakeLerp, 0, 90, 10, EASING_QUADRATIC_IN)
+    Label(2)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(2)
+        EndIf
+    Call(SetNpcSpeed, NPC_Merle, Float(3.0 / DT))
+    Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
+    Call(NpcMoveTo, NPC_Merle, 0, -180, 0)
+    Thread
+        Call(NpcMoveTo, NPC_Merle, 0, -300, 0)
+        Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
+    EndThread
+    Call(MakeLerp, 90, 0, 10, EASING_QUADRATIC_IN)
+    Label(3)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_km_doa, LVar0, 0, -1, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(3)
+        EndIf
+    Call(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
+    Call(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_HIDDEN)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(DisablePlayerInput, FALSE)
+    Set(AF_SAM_05, FALSE)
+    Set(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_SCARF)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_ShiverToad_01) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShiverToad_Red_Talk, ANIM_ShiverToad_Red_Idle, 0, MSG_CH7_00F8)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShiverToad_Red_Talk, ANIM_ShiverToad_Red_Idle, 0, MSG_CH7_00F9)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShiverToad_Red_Talk, ANIM_ShiverToad_Red_Idle, 0, MSG_CH7_00F8)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShiverToad_Red_Talk, ANIM_ShiverToad_Red_Idle, 0, MSG_CH7_00F9)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_ShiverToad_02) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShiverToad_Blue_Talk, ANIM_ShiverToad_Blue_Idle, 0, MSG_CH7_00FA)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShiverToad_Blue_Talk, ANIM_ShiverToad_Blue_Idle, 0, MSG_CH7_00FB)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShiverToad_Blue_Talk, ANIM_ShiverToad_Blue_Idle, 0, MSG_CH7_00FA)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShiverToad_Blue_Talk, ANIM_ShiverToad_Blue_Idle, 0, MSG_CH7_00FB)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_ShiverToad_03) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShiverToad_Green_Talk, ANIM_ShiverToad_Green_Idle, 0, MSG_CH7_00FC)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShiverToad_Green_Talk, ANIM_ShiverToad_Green_Idle, 0, MSG_CH7_00FD)
-    EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_FrostT))
-    EVT_IF_NE(LVarC, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShiverToad_Green_Talk, ANIM_ShiverToad_Green_Idle, 0, MSG_CH7_00FC)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShiverToad_Green_Talk, ANIM_ShiverToad_Green_Idle, 0, MSG_CH7_00FD)
+    EndSwitch
+    ExecWait(N(EVS_LetterPrompt_FrostT))
+    IfNe(LVarC, 0)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Ninji_01) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0102)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0103)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0102)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0103)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Ninji_02) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0104)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0105)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0104)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0105)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Ninji_03) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0106)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0107)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0106)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0107)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Ninji_04) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0114)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0115)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0114)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_CH7_0115)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_01) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0108)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0109)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0108)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0109)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_02) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010A)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010B)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010A)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010B)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_03) = {
-    EVT_IF_EQ(GF_SAM06_FoundSidewaysStarKid, FALSE)
-        EVT_SET(GF_SAM06_FoundSidewaysStarKid, TRUE)
-        EVT_CALL(MakeLerp, 90, 360, 20, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_IF
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010C)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010D)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_SAM06_FoundSidewaysStarKid, FALSE)
+        Set(GF_SAM06_FoundSidewaysStarKid, TRUE)
+        Call(MakeLerp, 90, 360, 20, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndIf
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010C)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010D)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_04) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010E)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010F)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010E)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_010F)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_05) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0110)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0111)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0110)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0111)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_06) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0112)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0113)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0112)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_CH7_0113)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_SetDialogue) = {
-    EVT_SET(LVar0, MSG_CH7_0116)
-    EVT_SET(LVar8, MSG_CH7_0117)
-    EVT_SET(LVar1, MSG_CH7_0118)
-    EVT_SET(LVar2, MSG_CH7_0119)
-    EVT_SET(LVar3, MSG_CH7_011A)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, MSG_CH7_0116)
+    Set(LVar8, MSG_CH7_0117)
+    Set(LVar1, MSG_CH7_0118)
+    Set(LVar2, MSG_CH7_0119)
+    Set(LVar3, MSG_CH7_011A)
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_GetInBed) = {
-    EVT_EXEC(N(EVS_PlayRestingSong))
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
-    EVT_CALL(PlayerMoveTo, -336, -48, 0)
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(N(ToadHouse_CamSetFOV), 0, EVT_FLOAT(40.0))
-        EVT_CALL(SetCamType, CAM_DEFAULT, 4, FALSE)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(50.0), EVT_FLOAT(-16.0))
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(111.0))
-        EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(-92.0), EVT_FLOAT(94.0))
-        EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(-318.1), EVT_FLOAT(-35.5))
-        EVT_CALL(SetCamPosC, CAM_DEFAULT, EVT_FLOAT(-641.0), EVT_FLOAT(122.0))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_END_THREAD
-    EVT_CALL(PlayerMoveTo, -347, -114, 0)
-    EVT_CALL(InterpPlayerYaw, 229, 1)
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_800)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
-    EVT_THREAD
-        EVT_WAIT(60)
-        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
-    EVT_END_THREAD
-    EVT_WAIT(20)
-    EVT_THREAD
-        EVT_WAIT(81)
-        EVT_CALL(N(ToadHouse_CamSetFOV), 0, 25)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_PlayRestingSong))
+    Call(SetPlayerSpeed, Float(3.0))
+    Call(PlayerMoveTo, -336, -48, 0)
+    Thread
+        Wait(15)
+        Call(N(ToadHouse_CamSetFOV), 0, Float(40.0))
+        Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+        Call(SetCamPitch, CAM_DEFAULT, Float(50.0), Float(-16.0))
+        Call(SetCamDistance, CAM_DEFAULT, Float(111.0))
+        Call(SetCamPosA, CAM_DEFAULT, Float(-92.0), Float(94.0))
+        Call(SetCamPosB, CAM_DEFAULT, Float(-318.1), Float(-35.5))
+        Call(SetCamPosC, CAM_DEFAULT, Float(-641.0), Float(122.0))
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    EndThread
+    Call(PlayerMoveTo, -347, -114, 0)
+    Call(InterpPlayerYaw, 229, 1)
+    Call(HidePlayerShadow, TRUE)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SetPlayerImgFXFlags, IMGFX_FLAG_800)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
+    Thread
+        Wait(60)
+        Call(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
+    EndThread
+    Wait(20)
+    Thread
+        Wait(81)
+        Call(N(ToadHouse_CamSetFOV), 0, 25)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(PlayerMoveTo, -347, -114, 0)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
-    EVT_CALL(PlayerMoveTo, -309, -16, 0)
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_SetupMusic))
+    Call(HidePlayerShadow, FALSE)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(PlayerMoveTo, -347, -114, 0)
+    Call(SetPlayerSpeed, Float(3.0))
+    Call(PlayerMoveTo, -309, -16, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Merle) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Merle)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Merle)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_GOT_SNOWMAN_SCARF)
-            EVT_CALL(SetNpcPos, NPC_SELF, -200, 0, 300)
-        EVT_CASE_GE(STORY_CH7_GOT_SNOWMAN_SCARF)
-            EVT_CALL(SetNpcPos, NPC_SELF, 0, 90, -300)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 180, 0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Merle)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Merle)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_GOT_SNOWMAN_SCARF)
+            Call(SetNpcPos, NPC_SELF, -200, 0, 300)
+        CaseGe(STORY_CH7_GOT_SNOWMAN_SCARF)
+            Call(SetNpcPos, NPC_SELF, 0, 90, -300)
+            Call(InterpNpcYaw, NPC_SELF, 180, 0)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShiverToad_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ShiverToad_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ShiverToad_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShiverToad_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ShiverToad_02)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ShiverToad_02)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShiverToad_03) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ShiverToad_03)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ShiverToad_03)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Ninji_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Ninji_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Ninji_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Ninji_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Ninji_02)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Ninji_02)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Ninji_03) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Ninji_03)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Ninji_03)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Ninji_04) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Ninji_04)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Ninji_04)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarKid_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_StarKid_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarKid_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_02)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_StarKid_02)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarKid_03) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_03)))
-    EVT_IF_EQ(GF_SAM06_FoundSidewaysStarKid, FALSE)
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 90, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_StarKid_03)))
+    IfEq(GF_SAM06_FoundSidewaysStarKid, FALSE)
+        Call(SetNpcRotation, NPC_SELF, 0, 90, 0)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarKid_04) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_04)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_StarKid_04)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarKid_05) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_05)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_StarKid_05)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarKid_06) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_StarKid_06)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_StarKid_06)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShiverToad_04) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ToadHouseKeeper)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ToadHouseKeeper)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Merle)[] = {

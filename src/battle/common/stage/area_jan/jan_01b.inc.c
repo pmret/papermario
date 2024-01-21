@@ -6,27 +6,27 @@
 #include "battle/common/stage/lib/BeachEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupVisibility, MODEL_g17, MODEL_GROUP_HIDDEN)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_SET(LVar0, MODEL_o55)
-        EVT_EXEC(N(EVS_AnimateWave))
-        EVT_WAIT(5)
-        EVT_SET(LVar0, MODEL_o54)
-        EVT_EXEC(N(EVS_AnimateWave))
-        EVT_WAIT(5)
-        EVT_SET(LVar0, MODEL_o53)
-        EVT_EXEC(N(EVS_AnimateWave))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Call(SetGroupVisibility, MODEL_g17, MODEL_GROUP_HIDDEN)
+    Thread
+        Wait(5)
+        Set(LVar0, MODEL_o55)
+        Exec(N(EVS_AnimateWave))
+        Wait(5)
+        Set(LVar0, MODEL_o54)
+        Exec(N(EVS_AnimateWave))
+        Wait(5)
+        Set(LVar0, MODEL_o53)
+        Exec(N(EVS_AnimateWave))
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

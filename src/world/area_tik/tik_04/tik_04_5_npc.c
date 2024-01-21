@@ -3,45 +3,45 @@
 #include "world/common/enemy/SpikedGloomba_Wander.inc.c"
 
 EvtScript N(EVS_NpcIdle_SpikedGloomba) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(tik_04_ENTRY_0)
-            EVT_CALL(SetNpcPos, NPC_SELF, 280, -10, 0)
-        EVT_CASE_EQ(tik_04_ENTRY_1)
-            EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_SpikedGloomba_Wander)))
-            EVT_RETURN
-        EVT_CASE_EQ(tik_04_ENTRY_2)
-            EVT_CALL(SetNpcPos, NPC_SELF, 280, -10, 0)
-        EVT_CASE_EQ(tik_04_ENTRY_3)
-            EVT_CALL(SetNpcPos, NPC_SELF, 360, -10, 0)
-    EVT_END_SWITCH
-    EVT_LABEL(100)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_LT(LVar0, -30)
-        EVT_WAIT(1)
-        EVT_GOTO(100)
-    EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Run)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_NO_SHADOW_RAYCAST, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, 2)
-    EVT_CALL(GetSelfNpcID, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 55, 0, 0)
-    EVT_ELSE
-        EVT_WAIT(14)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 60, 0, 0)
-    EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Idle)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_SpikedGloomba_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(tik_04_ENTRY_0)
+            Call(SetNpcPos, NPC_SELF, 280, -10, 0)
+        CaseEq(tik_04_ENTRY_1)
+            Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_SpikedGloomba_Wander)))
+            Return
+        CaseEq(tik_04_ENTRY_2)
+            Call(SetNpcPos, NPC_SELF, 280, -10, 0)
+        CaseEq(tik_04_ENTRY_3)
+            Call(SetNpcPos, NPC_SELF, 360, -10, 0)
+    EndSwitch
+    Label(100)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    IfLt(LVar0, -30)
+        Wait(1)
+        Goto(100)
+    EndIf
+    Call(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Run)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_NO_SHADOW_RAYCAST, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcSpeed, NPC_SELF, 2)
+    Call(GetSelfNpcID, LVar0)
+    IfEq(LVar0, 0)
+        Call(NpcMoveTo, NPC_SELF, 55, 0, 0)
+    Else
+        Wait(14)
+        Call(NpcMoveTo, NPC_SELF, 60, 0, 0)
+    EndIf
+    Call(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Idle)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_SpikedGloomba_Wander)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_SpikedGloomba) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_SpikedGloomba)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_SpikedGloomba)))
+    Return
+    End
 };
 
 NpcData N(NpcData_SpikedGloomba_01) = {

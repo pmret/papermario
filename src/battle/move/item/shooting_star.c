@@ -75,74 +75,74 @@ API_CALLABLE(N(CustomFadeBackgroundLighten)) {
 #include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(EVS_UseItem) = {
-    EVT_SET_CONST(LVarA, ITEM_SHOOTING_STAR)
-    EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-        EVT_CALL(MoveBattleCamOver, 20)
-    EVT_END_THREAD
-    EVT_CALL(N(CustomFadeBackgroundDarken))
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_LOOP(10)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SHOOTING_STAR_FALL_A)
-            EVT_CALL(N(SpawnShootingStarFX))
-            EVT_ADD(LVar0, 1)
-            EVT_WAIT(5)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SHOOTING_STAR_FALL_B)
-            EVT_CALL(N(SpawnShootingStarFX))
-            EVT_ADD(LVar0, 1)
-            EVT_WAIT(5)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_WAIT(50)
-        EVT_LOOP(10)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_STAR_BOUNCE_A)
-            EVT_ADD(LVar0, 1)
-            EVT_WAIT(5)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_STAR_BOUNCE_B)
-            EVT_ADD(LVar0, 1)
-            EVT_WAIT(5)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_LOOP(5)
-            EVT_WAIT(15)
-            EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
-            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(90)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
-    EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(InitTargetIterator)
-    EVT_LABEL(0)
-        EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-        EVT_CALL(ItemCheckHit, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, LVar0, 0)
-        EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(N(SpawnDamageStarsFX), LVar0, LVar1, LVar2)
-        EVT_CALL(GetItemPower, ITEM_SHOOTING_STAR, LVar0, LVar1)
-        EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_LABEL(1)
-        EVT_WAIT(10)
-        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, ITER_NO_MORE)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_WAIT(20)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 20)
-    EVT_EXEC_WAIT(N(PlayerGoHome))
-    EVT_THREAD
-        EVT_CALL(N(CustomFadeBackgroundLighten))
-    EVT_END_THREAD
-    EVT_WAIT(30)
-    EVT_RETURN
-    EVT_END
+    SetConst(LVarA, ITEM_SHOOTING_STAR)
+    ExecWait(N(UseItemWithEffect))
+    Thread
+        Wait(5)
+        Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+        Call(MoveBattleCamOver, 20)
+    EndThread
+    Call(N(CustomFadeBackgroundDarken))
+    Thread
+        Set(LVar0, 0)
+        Loop(10)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SHOOTING_STAR_FALL_A)
+            Call(N(SpawnShootingStarFX))
+            Add(LVar0, 1)
+            Wait(5)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SHOOTING_STAR_FALL_B)
+            Call(N(SpawnShootingStarFX))
+            Add(LVar0, 1)
+            Wait(5)
+        EndLoop
+    EndThread
+    Thread
+        Set(LVar0, 0)
+        Wait(50)
+        Loop(10)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_STAR_BOUNCE_A)
+            Add(LVar0, 1)
+            Wait(5)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_STAR_BOUNCE_B)
+            Add(LVar0, 1)
+            Wait(5)
+        EndLoop
+    EndThread
+    Thread
+        Loop(5)
+            Wait(15)
+            Call(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
+            Call(ShakeCam, CAM_BATTLE, 0, 5, Float(1.0))
+        EndLoop
+    EndThread
+    Wait(90)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(MoveBattleCamOver, 20)
+    Call(InitTargetIterator)
+    Label(0)
+        Call(SetGoalToTarget, ACTOR_SELF)
+        Call(ItemCheckHit, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, LVar0, 0)
+        IfEq(LVar0, HIT_RESULT_MISS)
+            Goto(1)
+        EndIf
+        Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Call(N(SpawnDamageStarsFX), LVar0, LVar1, LVar2)
+        Call(GetItemPower, ITEM_SHOOTING_STAR, LVar0, LVar1)
+        Call(ItemDamageEnemy, LVar0, DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
+        Label(1)
+        Wait(10)
+        Call(ChooseNextTarget, ITER_NEXT, LVar0)
+        IfNe(LVar0, ITER_NO_MORE)
+            Goto(0)
+        EndIf
+    Wait(20)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 20)
+    ExecWait(N(PlayerGoHome))
+    Thread
+        Call(N(CustomFadeBackgroundLighten))
+    EndThread
+    Wait(30)
+    Return
+    End
 };

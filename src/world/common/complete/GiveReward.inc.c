@@ -31,60 +31,60 @@ API_CALLABLE(N(StashVars)) {
 #include "world/common/todo/GetItemName.inc.c"
 
 EvtScript N(GiveItemReward) = {
-    EVT_CALL(ShowGotItem, LVar0, ITEM_TYPE_KEY, 0)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
+    Call(ShowGotItem, LVar0, ITEM_TYPE_KEY, 0)
+    Return
+    Return
+    End
 };
 
 EvtScript N(GiveCoinReward) = {
-    EVT_CALL(ShowGotItem, LVar0, ITEM_TYPE_KEY, ITEM_PICKUP_FLAG_1_COIN)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
+    Call(ShowGotItem, LVar0, ITEM_TYPE_KEY, ITEM_PICKUP_FLAG_1_COIN)
+    Return
+    Return
+    End
 };
 
 #define EVT_GIVE_KEY_REWARD(itemID) \
-    EVT_SET(LVar0, itemID) \
-    EVT_SET(LVar1, ITEM_TYPE_KEY) \
-    EVT_EXEC_WAIT(N(GiveItemReward)) \
-    EVT_CALL(AddKeyItem, itemID)
+    Set(LVar0, itemID) \
+    Set(LVar1, ITEM_TYPE_KEY) \
+    ExecWait(N(GiveItemReward)) \
+    Call(AddKeyItem, itemID)
 
 #define EVT_GIVE_BADGE_REWARD(itemID) \
-    EVT_SET(LVar0, itemID) \
-    EVT_SET(LVar1, ITEM_TYPE_BADGE) \
-    EVT_EXEC_WAIT(N(GiveItemReward)) \
-    EVT_CALL(AddBadge, itemID, LVar0)
+    Set(LVar0, itemID) \
+    Set(LVar1, ITEM_TYPE_BADGE) \
+    ExecWait(N(GiveItemReward)) \
+    Call(AddBadge, itemID, LVar0)
 
 #define EVT_GIVE_BADGE_REWARD_ALT(itemID, outIdx) \
-    EVT_SET(LVar0, itemID) \
-    EVT_SET(LVar1, ITEM_TYPE_BADGE) \
-    EVT_EXEC_WAIT(N(GiveItemReward)) \
-    EVT_CALL(AddBadge, LVar0, outIdx)
+    Set(LVar0, itemID) \
+    Set(LVar1, ITEM_TYPE_BADGE) \
+    ExecWait(N(GiveItemReward)) \
+    Call(AddBadge, LVar0, outIdx)
 
 #define EVT_GIVE_CONSUMABLE_REWARD(itemID) \
-    EVT_SET(LVar0, itemID) \
-    EVT_SET(LVar1, ITEM_TYPE_CONSUMABLE) \
-    EVT_EXEC_WAIT(N(GiveItemReward)) \
-    EVT_CALL(AddItem, LVar0, LVar1)
+    Set(LVar0, itemID) \
+    Set(LVar1, ITEM_TYPE_CONSUMABLE) \
+    ExecWait(N(GiveItemReward)) \
+    Call(AddItem, LVar0, LVar1)
 
 #define EVT_GIVE_CONSUMABLE_REWARD_ALT(itemID) \
-    EVT_SET(LVar0, itemID) \
-    EVT_SET(LVar1, ITEM_TYPE_CONSUMABLE) \
-    EVT_EXEC_WAIT(N(GiveItemReward)) \
-    EVT_CALL(AddItem, itemID, LVar0)
+    Set(LVar0, itemID) \
+    Set(LVar1, ITEM_TYPE_CONSUMABLE) \
+    ExecWait(N(GiveItemReward)) \
+    Call(AddItem, itemID, LVar0)
 
 #define EVT_GIVE_STAR_PIECE() \
-    EVT_SET(LVar0, ITEM_STAR_PIECE) \
-    EVT_SET(LVar1, ITEM_TYPE_STAR_PIECE) \
-    EVT_EXEC_WAIT(N(GiveItemReward)) \
-    EVT_CALL(AddStarPieces, 1)
+    Set(LVar0, ITEM_STAR_PIECE) \
+    Set(LVar1, ITEM_TYPE_STAR_PIECE) \
+    ExecWait(N(GiveItemReward)) \
+    Call(AddStarPieces, 1)
 
 
 #define EVT_GIVE_COIN() \
-    EVT_SET(LVar0, ITEM_COIN) \
-    EVT_SET(LVar1, 0) \
-    EVT_EXEC_WAIT(N(GiveCoinReward)) \
-    EVT_CALL(AddCoin, 1)
+    Set(LVar0, ITEM_COIN) \
+    Set(LVar1, 0) \
+    ExecWait(N(GiveCoinReward)) \
+    Call(AddCoin, 1)
 
 #endif

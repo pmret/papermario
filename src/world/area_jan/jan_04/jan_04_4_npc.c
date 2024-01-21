@@ -6,120 +6,120 @@
 #include "world/common/npc/YoshiKid.inc.c"
 
 EvtScript N(EVS_ShakeTree_Sushie) = {
-    EVT_CALL(GetNpcVar, NPC_Sushie, 0, LVar0)
-    EVT_IF_EQ(LVar0, 2)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(AF_JAN_08, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(AF_JAN_08, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Sushie, NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
-    EVT_IF_EQ(GF_JAN04_SushieTreeHitCounterB, FALSE)
-        EVT_IF_EQ(GF_JAN04_SushieTreeHitCounterA, FALSE)
-            EVT_CALL(SetNpcJumpscale, NPC_Sushie, EVT_FLOAT(1.0))
-            EVT_CALL(PlaySoundAtNpc, NPC_Sushie, SOUND_SUSHIE_FLOP, SOUND_SPACE_DEFAULT)
-            EVT_CALL(NpcJump0, NPC_Sushie, 90, 140, -85, 20 * DT)
-            EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 90, 140, -85)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, 90, 140, -85)
-            EVT_CALL(SetCamDistance, CAM_DEFAULT, 280)
-            EVT_CALL(SetCamPitch, CAM_DEFAULT, 16, EVT_FLOAT(-6.0))
+    Call(GetNpcVar, NPC_Sushie, 0, LVar0)
+    IfEq(LVar0, 2)
+        Return
+    EndIf
+    IfEq(AF_JAN_08, TRUE)
+        Return
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Set(AF_JAN_08, TRUE)
+    Call(SetNpcFlagBits, NPC_Sushie, NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
+    IfEq(GF_JAN04_SushieTreeHitCounterB, FALSE)
+        IfEq(GF_JAN04_SushieTreeHitCounterA, FALSE)
+            Call(SetNpcJumpscale, NPC_Sushie, Float(1.0))
+            Call(PlaySoundAtNpc, NPC_Sushie, SOUND_SUSHIE_FLOP, SOUND_SPACE_DEFAULT)
+            Call(NpcJump0, NPC_Sushie, 90, 140, -85, 20 * DT)
+            Call(UseSettingsFrom, CAM_DEFAULT, 90, 140, -85)
+            Call(SetPanTarget, CAM_DEFAULT, 90, 140, -85)
+            Call(SetCamDistance, CAM_DEFAULT, 280)
+            Call(SetCamPitch, CAM_DEFAULT, 16, Float(-6.0))
 #if VERSION_PAL
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3 / DT))
+            Call(SetCamSpeed, CAM_DEFAULT, Float(3 / DT))
 #else
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, 3)
+            Call(SetCamSpeed, CAM_DEFAULT, 3)
 #endif
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-            EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-            EVT_CALL(SpeakToPlayer, NPC_Sushie, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A1)
-            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-            EVT_SET(GF_JAN04_SushieTreeHitCounterA, TRUE)
-            EVT_WAIT(10 * DT)
-            EVT_SET(AF_JAN_08, FALSE)
-        EVT_ELSE
-            EVT_CALL(SetNpcJumpscale, NPC_Sushie, EVT_FLOAT(1.0))
-            EVT_CALL(PlaySoundAtNpc, NPC_Sushie, SOUND_SUSHIE_FLOP, SOUND_SPACE_DEFAULT)
-            EVT_CALL(NpcJump0, NPC_Sushie, -10, 112, -80, 15 * DT)
-            EVT_SET(GF_JAN04_SushieTreeHitCounterA, FALSE)
-            EVT_SET(GF_JAN04_SushieTreeHitCounterB, TRUE)
-            EVT_WAIT(10 * DT)
-            EVT_SET(AF_JAN_08, FALSE)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_CALL(SetNpcJumpscale, NPC_Sushie, EVT_FLOAT(1.0))
-        EVT_CALL(PlaySoundAtNpc, NPC_Sushie, SOUND_SUSHIE_FLOP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(NpcJump0, NPC_Sushie, 50, 0, 0, 20 * DT)
-        EVT_SET(GF_JAN04_SushieTreeHitCounterA, TRUE)
-        EVT_CALL(EnableNpcShadow, NPC_Sushie, TRUE)
-        EVT_CALL(SetNpcAnimation, NPC_Sushie, ANIM_WorldSushie_Hurt)
-        EVT_CALL(SetNpcVar, NPC_Sushie, 0, 10)
-        EVT_UNBIND
-    EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, NPC_Sushie, NPC_FLAG_IGNORE_ENTITY_COLLISION, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+            Call(SpeakToPlayer, NPC_Sushie, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A1)
+            Call(ResetCam, CAM_DEFAULT, Float(90.0))
+            Set(GF_JAN04_SushieTreeHitCounterA, TRUE)
+            Wait(10 * DT)
+            Set(AF_JAN_08, FALSE)
+        Else
+            Call(SetNpcJumpscale, NPC_Sushie, Float(1.0))
+            Call(PlaySoundAtNpc, NPC_Sushie, SOUND_SUSHIE_FLOP, SOUND_SPACE_DEFAULT)
+            Call(NpcJump0, NPC_Sushie, -10, 112, -80, 15 * DT)
+            Set(GF_JAN04_SushieTreeHitCounterA, FALSE)
+            Set(GF_JAN04_SushieTreeHitCounterB, TRUE)
+            Wait(10 * DT)
+            Set(AF_JAN_08, FALSE)
+        EndIf
+    Else
+        Call(SetNpcJumpscale, NPC_Sushie, Float(1.0))
+        Call(PlaySoundAtNpc, NPC_Sushie, SOUND_SUSHIE_FLOP, SOUND_SPACE_DEFAULT)
+        Call(NpcJump0, NPC_Sushie, 50, 0, 0, 20 * DT)
+        Set(GF_JAN04_SushieTreeHitCounterA, TRUE)
+        Call(EnableNpcShadow, NPC_Sushie, TRUE)
+        Call(SetNpcAnimation, NPC_Sushie, ANIM_WorldSushie_Hurt)
+        Call(SetNpcVar, NPC_Sushie, 0, 10)
+        Unbind
+    EndIf
+    Call(SetNpcFlagBits, NPC_Sushie, NPC_FLAG_IGNORE_ENTITY_COLLISION, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Sushie_ScoldPlayerLeaving) = {
-    EVT_LABEL(1)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(0)
-                EVT_CALL(AwaitPlayerLeave, 0, 0, 170)
-                EVT_CALL(DisablePlayerInput, TRUE)
-                EVT_CALL(SetSelfVar, 0, 2)
-                EVT_SET(LVar0, GF_JAN04_SushieTreeHitCounterA)
-                EVT_SET(LVar1, GF_JAN04_SushieTreeHitCounterB)
-                EVT_ADD(LVar0, LVar1)
-                EVT_IF_EQ(LVar0, 0)
-                    EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00A2, 160, 40)
-                EVT_ELSE
-                    EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00A3, 160, 40)
-                EVT_END_IF
-                EVT_CALL(DisablePlayerInput, FALSE)
-                EVT_CALL(SetSelfVar, 0, 1)
-            EVT_CASE_EQ(1)
-                EVT_CALL(AwaitPlayerApproach, 0, 0, 130)
-                EVT_CALL(SetSelfVar, 0, 0)
-        EVT_END_SWITCH
-        EVT_WAIT(1)
-        EVT_GOTO(1)
-    EVT_RETURN
-    EVT_END
+    Label(1)
+        Call(GetSelfVar, 0, LVar0)
+        Switch(LVar0)
+            CaseEq(0)
+                Call(AwaitPlayerLeave, 0, 0, 170)
+                Call(DisablePlayerInput, TRUE)
+                Call(SetSelfVar, 0, 2)
+                Set(LVar0, GF_JAN04_SushieTreeHitCounterA)
+                Set(LVar1, GF_JAN04_SushieTreeHitCounterB)
+                Add(LVar0, LVar1)
+                IfEq(LVar0, 0)
+                    Call(ShowMessageAtScreenPos, MSG_CH5_00A2, 160, 40)
+                Else
+                    Call(ShowMessageAtScreenPos, MSG_CH5_00A3, 160, 40)
+                EndIf
+                Call(DisablePlayerInput, FALSE)
+                Call(SetSelfVar, 0, 1)
+            CaseEq(1)
+                Call(AwaitPlayerApproach, 0, 0, 130)
+                Call(SetSelfVar, 0, 0)
+        EndSwitch
+        Wait(1)
+        Goto(1)
+    Return
+    End
 };
 
 EvtScript N(EVS_Sushie_ShoutAtChildren) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_009E, 320, 60)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(AwaitPlayerApproach, 0, 0, 130)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_009F, 160, 40)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_LookAround)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 30, 140, -60)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, 16, EVT_FLOAT(-6.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Hurt, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A0)
+    Call(DisablePlayerInput, TRUE)
+    Call(ShowMessageAtScreenPos, MSG_CH5_009E, 320, 60)
+    Call(DisablePlayerInput, FALSE)
+    Call(AwaitPlayerApproach, 0, 0, 130)
+    Call(DisablePlayerInput, TRUE)
+    Call(ShowMessageAtScreenPos, MSG_CH5_009F, 160, 40)
+    Call(SetPlayerAnimation, ANIM_MarioW2_LookAround)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SetPanTarget, CAM_DEFAULT, 30, 140, -60)
+    Call(SetCamDistance, CAM_DEFAULT, 300)
+    Call(SetCamPitch, CAM_DEFAULT, 16, Float(-6.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Hurt, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A0)
 #if VERSION_PAL
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3 / DT))
+    Call(ResetCam, CAM_DEFAULT, Float(3 / DT))
 #else
-    EVT_CALL(ResetCam, CAM_DEFAULT, 3)
+    Call(ResetCam, CAM_DEFAULT, 3)
 #endif
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 BombTrigger N(BombPos_SushieTree) = {
@@ -130,133 +130,133 @@ BombTrigger N(BombPos_SushieTree) = {
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
 EvtScript N(EVS_NpcIdle_Sushie) = {
-    EVT_SET(LVar0, GF_JAN04_SushieTreeHitCounterA)
-    EVT_SET(LVar1, GF_JAN04_SushieTreeHitCounterB)
-    EVT_ADD(LVar0, LVar1)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_EXEC_WAIT(N(EVS_Sushie_ShoutAtChildren))
-    EVT_ELSE
-        EVT_CALL(SetSelfVar, 0, 1)
-    EVT_END_IF
-    EVT_SET(AF_JAN_08, FALSE)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_Sushie)), TRIGGER_WALL_HAMMER, COLLIDER_o34, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_Sushie)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_SushieTree)), 1, 0)
-    EVT_EXEC_GET_TID(N(EVS_Sushie_ScoldPlayerLeaving), LVar9)
-    EVT_LABEL(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_NE(LVar0, 10)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_KILL_THREAD(LVar9)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(4.0 / DT))
-    EVT_CALL(PlayerMoveTo, 10, 0, 0)
-    EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldSushie_Idle)
-    EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(5.0 / DT), 20, 301, EVT_FLOAT(17.0), EVT_FLOAT(-7.0))
-    EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A4)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
-    EVT_WAIT(40 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A5)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldSushie_Sad)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldSushie_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A6)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
-    EVT_WAIT(40 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A7)
-    EVT_CALL(CloseMessage)
-    EVT_CALL(N(ChangeNpcToPartner), NPC_Sushie, PARTNER_SUSHIE)
-    EVT_CALL(N(LoadPartyImage))
-    EVT_EXEC(N(EVS_PushNewPartnerSong))
-    EVT_WAIT(15 * DT)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_018F, 160, 40)
-    EVT_EXEC(N(EVS_PopSong))
-    EVT_WAIT(10 * DT)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
-    EVT_SET(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, GF_JAN04_SushieTreeHitCounterA)
+    Set(LVar1, GF_JAN04_SushieTreeHitCounterB)
+    Add(LVar0, LVar1)
+    IfEq(LVar0, 0)
+        ExecWait(N(EVS_Sushie_ShoutAtChildren))
+    Else
+        Call(SetSelfVar, 0, 1)
+    EndIf
+    Set(AF_JAN_08, FALSE)
+    BindTrigger(Ref(N(EVS_ShakeTree_Sushie)), TRIGGER_WALL_HAMMER, COLLIDER_o34, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree_Sushie)), TRIGGER_POINT_BOMB, Ref(N(BombPos_SushieTree)), 1, 0)
+    ExecGetTID(N(EVS_Sushie_ScoldPlayerLeaving), LVar9)
+    Label(0)
+        Call(GetSelfVar, 0, LVar0)
+        IfNe(LVar0, 10)
+            Wait(1)
+            Goto(0)
+        EndIf
+    KillThread(LVar9)
+    Call(DisablePlayerInput, TRUE)
+    Call(SetPlayerSpeed, Float(4.0 / DT))
+    Call(PlayerMoveTo, 10, 0, 0)
+    Call(PlayerFaceNpc, NPC_SELF, FALSE)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldSushie_Idle)
+    Call(AdjustCam, CAM_DEFAULT, Float(5.0 / DT), 20, 301, Float(17.0), Float(-7.0))
+    Wait(10)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A4)
+    Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
+    Wait(40 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A5)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldSushie_Sad)
+    Wait(30 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldSushie_Idle)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A6)
+    Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
+    Wait(40 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A7)
+    Call(CloseMessage)
+    Call(N(ChangeNpcToPartner), NPC_Sushie, PARTNER_SUSHIE)
+    Call(N(LoadPartyImage))
+    Exec(N(EVS_PushNewPartnerSong))
+    Wait(15 * DT)
+    Call(ShowMessageAtScreenPos, MSG_Menus_018F, 160, 40)
+    Exec(N(EVS_PopSong))
+    Wait(10 * DT)
+    Call(ResetCam, CAM_DEFAULT, Float(5.0))
+    Set(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
+    Call(EnablePartnerAI)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Sushie) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, jan_04_ENTRY_3)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
-        EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldSushie_Sad)
-        EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-        EVT_IF_EQ(GF_JAN04_SushieTreeHitCounterB, FALSE)
-            EVT_IF_EQ(GF_JAN04_SushieTreeHitCounterA, FALSE)
-                EVT_CALL(SetNpcPos, NPC_SELF, 55, 150, -95)
-            EVT_ELSE
-                EVT_CALL(SetNpcPos, NPC_SELF, 90, 140, -85)
-            EVT_END_IF
-        EVT_ELSE
-            EVT_IF_EQ(GF_JAN04_SushieTreeHitCounterA, FALSE)
-                EVT_CALL(SetNpcPos, NPC_SELF, -10, 112, -80)
-            EVT_ELSE
-                EVT_CALL(SetNpcPos, NPC_SELF, 50, 0, 0)
-                EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Sushie)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, jan_04_ENTRY_3)
+        Return
+    EndIf
+    IfEq(GB_StoryProgress, STORY_CH5_YOSHI_CHILDREN_ARE_MISSING)
+        Call(EnableNpcShadow, NPC_SELF, FALSE)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldSushie_Sad)
+        Call(SetNpcYaw, NPC_SELF, 270)
+        IfEq(GF_JAN04_SushieTreeHitCounterB, FALSE)
+            IfEq(GF_JAN04_SushieTreeHitCounterA, FALSE)
+                Call(SetNpcPos, NPC_SELF, 55, 150, -95)
+            Else
+                Call(SetNpcPos, NPC_SELF, 90, 140, -85)
+            EndIf
+        Else
+            IfEq(GF_JAN04_SushieTreeHitCounterA, FALSE)
+                Call(SetNpcPos, NPC_SELF, -10, 112, -80)
+            Else
+                Call(SetNpcPos, NPC_SELF, 50, 0, 0)
+                Call(EnableNpcShadow, NPC_SELF, TRUE)
+            EndIf
+        EndIf
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Sushie)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Bubulb) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_RAPHAEL_LEFT_NEST)
-            EVT_IF_EQ(GF_JAN04_Met_Bubulb, FALSE)
-                EVT_WAIT(30)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Yellow_PopUp)
-                EVT_WAIT(10)
-                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
-                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
-                EVT_WAIT(35)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Yellow_Idle)
-                EVT_CALL(SetNpcCollisionSize, NPC_SELF, 45, 26)
-                EVT_CALL(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH5_00A8)
-                EVT_SET(GF_JAN04_Met_Bubulb, TRUE)
-                EVT_CALL(SetTattleMessage, NPC_Bubulb, MSG_NpcTattle_JAN_Bubulb_Revealed)
-                EVT_RETURN
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH5_00A9)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_TRADED_VASE_FOR_SEED)
-            EVT_CALL(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH5_00AA)
-        EVT_CASE_LT(STORY_CH6_FLOWER_GATE_OPEN)
-            EVT_CALL(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH5_00AB)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH5_00AC)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_RAPHAEL_LEFT_NEST)
+            IfEq(GF_JAN04_Met_Bubulb, FALSE)
+                Wait(30)
+                Call(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Yellow_PopUp)
+                Wait(10)
+                Call(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
+                Call(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
+                Wait(35)
+                Call(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Yellow_Idle)
+                Call(SetNpcCollisionSize, NPC_SELF, 45, 26)
+                Call(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH5_00A8)
+                Set(GF_JAN04_Met_Bubulb, TRUE)
+                Call(SetTattleMessage, NPC_Bubulb, MSG_NpcTattle_JAN_Bubulb_Revealed)
+                Return
+            Else
+                Call(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH5_00A9)
+            EndIf
+        CaseLt(STORY_CH5_TRADED_VASE_FOR_SEED)
+            Call(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH5_00AA)
+        CaseLt(STORY_CH6_FLOWER_GATE_OPEN)
+            Call(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH5_00AB)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH5_00AC)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bubulb) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bubulb)))
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
-        EVT_IF_EQ(GF_JAN04_Met_Bubulb, FALSE)
-            EVT_CALL(SetNpcCollisionSize, NPC_SELF, 25, 25)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Yellow_BuriedIdle)
-            EVT_CALL(SetTattleMessage, NPC_Bubulb, MSG_NpcTattle_MAC_Bubulb_Hidden)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bubulb)))
+    IfLt(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
+        IfEq(GF_JAN04_Met_Bubulb, FALSE)
+            Call(SetNpcCollisionSize, NPC_SELF, 25, 25)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Yellow_BuriedIdle)
+            Call(SetTattleMessage, NPC_Bubulb, MSG_NpcTattle_MAC_Bubulb_Hidden)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Characters)[] = {

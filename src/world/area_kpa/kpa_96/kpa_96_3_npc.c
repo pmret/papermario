@@ -49,14 +49,14 @@ ShopSellPriceData N(PriceList)[] = {
 };
 
 EvtScript N(EVS_OnBuy) = {
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_CANCEL)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_4)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_OK)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_OK) //@bug duplicate case
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(LVar0)
+        CaseEq(SHOP_BUY_RESULT_CANCEL)
+        CaseEq(SHOP_BUY_RESULT_4)
+        CaseEq(SHOP_BUY_RESULT_OK)
+        CaseEq(SHOP_BUY_RESULT_OK) //@bug duplicate case
+    EndSwitch
+    Return
+    End
 };
 
 ShopItemLocation N(ItemPositions)[] = {
@@ -77,16 +77,16 @@ ShopOwner N(Owner) = {
 };
 
 EvtScript N(EVS_SetupShop) = {
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o860, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o861, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o862, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o863, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o864, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o865, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(MakeShop, EVT_PTR(N(ItemPositions)), EVT_PTR(N(Inventory)), EVT_PTR(N(PriceList)), 0)
-    EVT_CALL(MakeShopOwner, EVT_PTR(N(Owner)))
-    EVT_RETURN
-    EVT_END
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o860, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o861, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o862, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o863, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o864, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o865, COLLIDER_FLAGS_UPPER_MASK)
+    Call(MakeShop, Ref(N(ItemPositions)), Ref(N(Inventory)), Ref(N(PriceList)), 0)
+    Call(MakeShopOwner, Ref(N(Owner)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_SpikedGoomba) = {
@@ -106,38 +106,38 @@ API_CALLABLE(N(CheckPlayerHasCoins)) {
 }
 
 EvtScript N(EVS_NpcInteract_SpikedGoomba) = {
-    EVT_IF_EQ(MV_MetShopkeeper, 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_SpikedGoomba_Walk, ANIM_SpikedGoomba_Idle, 0, MSG_CH8_004F)
-        EVT_CALL(ShowChoice, MSG_Choice_0013)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(N(CheckPlayerHasCoins))
-            EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_SpikedGoomba_Walk, ANIM_SpikedGoomba_Idle, 0, MSG_CH8_0051)
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o860, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o861, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o862, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o863, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o864, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o865, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o964, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_SET(MV_MetShopkeeper, 1)
-            EVT_ELSE
-                EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_SpikedGoomba_Walk, ANIM_SpikedGoomba_Idle, 0, MSG_CH8_0052)
-            EVT_END_IF
-        EVT_ELSE
-            EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_SpikedGoomba_Walk, ANIM_SpikedGoomba_Idle, 0, MSG_CH8_0050)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(MV_MetShopkeeper, 0)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_SpikedGoomba_Walk, ANIM_SpikedGoomba_Idle, 0, MSG_CH8_004F)
+        Call(ShowChoice, MSG_Choice_0013)
+        IfEq(LVar0, 0)
+            Call(N(CheckPlayerHasCoins))
+            IfEq(LVar0, 0)
+                Call(ContinueSpeech, NPC_SELF, ANIM_SpikedGoomba_Walk, ANIM_SpikedGoomba_Idle, 0, MSG_CH8_0051)
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o860, COLLIDER_FLAGS_UPPER_MASK)
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o861, COLLIDER_FLAGS_UPPER_MASK)
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o862, COLLIDER_FLAGS_UPPER_MASK)
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o863, COLLIDER_FLAGS_UPPER_MASK)
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o864, COLLIDER_FLAGS_UPPER_MASK)
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o865, COLLIDER_FLAGS_UPPER_MASK)
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o964, COLLIDER_FLAGS_UPPER_MASK)
+                Set(MV_MetShopkeeper, 1)
+            Else
+                Call(ContinueSpeech, NPC_SELF, ANIM_SpikedGoomba_Walk, ANIM_SpikedGoomba_Idle, 0, MSG_CH8_0052)
+            EndIf
+        Else
+            Call(ContinueSpeech, NPC_SELF, ANIM_SpikedGoomba_Walk, ANIM_SpikedGoomba_Idle, 0, MSG_CH8_0050)
+        EndIf
+    Else
+        ExecWait(EVS_ShopOwnerDialog)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_SpikedGoomba) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_SpikedGoomba)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_SpikedGoomba)))
+    Return
+    End
 };
 
 NpcData N(NpcData_SpikedGoomba) = {

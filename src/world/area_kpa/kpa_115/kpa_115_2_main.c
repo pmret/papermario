@@ -5,25 +5,25 @@ EvtScript N(EVS_ExitWalk_kpa_116_0) = EVT_EXIT_WALK(60, kpa_115_ENTRY_1, "kpa_11
 EvtScript N(EVS_ExitWalk_kpa_118_0) = EVT_EXIT_WALK(60, kpa_115_ENTRY_2, "kpa_118", kpa_118_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kpa_114_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kpa_118_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilin, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kpa_116_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiline, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_kpa_114_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_kpa_118_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilin, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_kpa_116_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiline, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_BOWSERS_CASTLE)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC(N(EVS_SetupStatues))
-    EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-    EVT_EXEC(EnterWalk)
-    EVT_WAIT(1)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_BOWSERS_CASTLE)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_DEFAULT()
+    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Exec(N(EVS_SetupStatues))
+    Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+    Exec(EnterWalk)
+    Wait(1)
+    Exec(N(EVS_SetupMusic))
+    Return
+    End
 };
 
 MAP_RODATA_PAD(1, exits);

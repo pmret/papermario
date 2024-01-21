@@ -184,280 +184,280 @@ BombTrigger N(BombPos_Barricade) = {
 };
 
 EvtScript N(EVS_Scene_BreakBarricade) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(EnableGroup, MODEL_hibi, FALSE)
-    EVT_THREAD
-        EVT_CALL(N(AnimateBarricadeParts))
-        EVT_LOOP(10)
-            EVT_USE_BUF(EVT_PTR(N(BarricadeModels)))
-            EVT_LOOP(ARRAY_COUNT(N(BarricadeModels)))
-                EVT_BUF_READ1(LVar0)
-                EVT_CALL(EnableModel, LVar0, TRUE)
-            EVT_END_LOOP
-            EVT_WAIT(2)
-            EVT_USE_BUF(EVT_PTR(N(BarricadeModels)))
-            EVT_LOOP(ARRAY_COUNT(N(BarricadeModels)))
-                EVT_BUF_READ1(LVar0)
-                EVT_CALL(EnableModel, LVar0, FALSE)
-            EVT_END_LOOP
-            EVT_WAIT(2)
-        EVT_END_LOOP
-        EVT_USE_BUF(EVT_PTR(N(BarricadeColliders)))
-        EVT_LOOP(ARRAY_COUNT(N(BarricadeColliders)))
-            EVT_BUF_READ1(LVar0)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar0, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(30)
-        EVT_KILL_THREAD(MV_RestrictCamScript)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_WAIT(1)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -380, 0, 0)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, -380, 0, 0)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, -10, 20, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_t1, LVar0, EVT_FLOAT(0.518), 0, EVT_FLOAT(1.931))
-            EVT_CALL(UpdateColliderTransform, COLLIDER_t1)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(MakeLerp, -10, 7, 40, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_t1, LVar0, EVT_FLOAT(0.518), 0, EVT_FLOAT(1.931))
-            EVT_CALL(UpdateColliderTransform, COLLIDER_t1)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(MakeLerp, 7, -90, 30, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_t1, LVar0, EVT_FLOAT(0.518), 0, EVT_FLOAT(1.931))
-            EVT_CALL(UpdateColliderTransform, COLLIDER_t1)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(PlaySoundAtModel, MODEL_t1, SOUND_OMO_BARRICADE_DROP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(GetModelCenter, MODEL_t1)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(MakeLerp, 0, -10, 20, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_t2_1, LVar0, EVT_FLOAT(0.518), 0, EVT_FLOAT(1.931))
-            EVT_CALL(UpdateColliderTransform, COLLIDER_t2_1)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(MakeLerp, -10, 7, 40, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_t2_1, LVar0, EVT_FLOAT(0.518), 0, EVT_FLOAT(1.931))
-            EVT_CALL(UpdateColliderTransform, COLLIDER_t2_1)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(MakeLerp, 7, -90, 30, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_t2_1, LVar0, EVT_FLOAT(0.518), 0, EVT_FLOAT(1.931))
-            EVT_CALL(UpdateColliderTransform, COLLIDER_t2_1)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(PlaySoundAtModel, MODEL_t2_1, SOUND_OMO_BARRICADE_DROP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(GetModelCenter, MODEL_t2_1)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_SET(LVar0, 1)
-    EVT_LOOP(10)
-        EVT_THREAD
-            EVT_WAIT(10)
-            EVT_CALL(SetNpcJumpscale, LVar0, EVT_FLOAT(1.5))
-            EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-            EVT_IF_EQ(LVar2, 0)
-                EVT_CALL(NpcJump0, LVar0, LVar1, 0, LVar3, 20)
-            EVT_END_IF
-        EVT_END_THREAD
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_CALL(MakeLerp, 0, -10, 20, EASING_CUBIC_IN)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_t3_2, LVar0, EVT_FLOAT(0.518), 0, EVT_FLOAT(1.931))
-        EVT_CALL(UpdateColliderTransform, COLLIDER_t3_2)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(MakeLerp, -10, 7, 40, EASING_CUBIC_IN)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_t3_2, LVar0, EVT_FLOAT(0.518), 0, EVT_FLOAT(1.931))
-        EVT_CALL(UpdateColliderTransform, COLLIDER_t3_2)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(MakeLerp, 7, -90, 30, EASING_CUBIC_IN)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_t3_2, LVar0, EVT_FLOAT(0.518), 0, EVT_FLOAT(1.931))
-        EVT_CALL(UpdateColliderTransform, COLLIDER_t3_2)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(PlaySoundAtModel, MODEL_t3_2, SOUND_OMO_BARRICADE_DROP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(GetModelCenter, MODEL_t3_2)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
-    EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
-    EVT_THREAD
-        EVT_WAIT(35)
-        EVT_CALL(PlaySound, SOUND_LOOP_SHY_GUY_CROWD_2)
-    EVT_END_THREAD
-    EVT_SET(LVar0, 1)
-    EVT_SET(LVar5, 1)
-    EVT_LOOP(10)
-        EVT_THREAD
-            EVT_CALL(SetNpcJumpscale, LVar0, EVT_FLOAT(1.5))
-            EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-            EVT_CALL(RandInt, 10, LVar4)
-            EVT_ADD(LVar4, 10)
-            EVT_IF_EQ(LVar2, 0)
-                EVT_CALL(NpcJump0, LVar0, LVar1, 0, LVar3, LVar4)
-            EVT_END_IF
-            EVT_CALL(SetNpcVar, LVar0, 0, CROWD_STATE_TURN_AROUND)
-            EVT_WAIT(LVar5)
-            EVT_CALL(SetNpcVar, LVar0, 0, CROWD_STATE_RUN_AWAY)
-        EVT_END_THREAD
-        EVT_ADD(LVar0, 1)
-        EVT_ADD(LVar5, 12)
-    EVT_END_LOOP
-    EVT_WAIT(60)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -125, 0, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, -125, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(165)
-    EVT_CALL(PlaySound, SOUND_LRAW_SHY_GUY_CROWD_2 | SOUND_ID_TRIGGER_CHANGE_SOUND)
-    EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_SHY_GUY_CROWD_2)
-    EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim04)
-    EVT_CALL(SetNpcPos, NPC_ShyGuy_01, -285, 0, 35)
-    EVT_CALL(SetNpcSpeed, NPC_ShyGuy_01, EVT_FLOAT(8.0))
-    EVT_CALL(NpcMoveTo, NPC_ShyGuy_01, -135, 23, 0)
-    EVT_CALL(NpcMoveTo, NPC_ShyGuy_01, -110, -13, 0)
-    EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_01, EVT_FLOAT(1.0))
-    EVT_CALL(SetNpcRotationPivot, NPC_ShyGuy_01, 10)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_LOOP(10)
-            EVT_ADD(LVar0, -9)
-            EVT_CALL(SetNpcRotation, NPC_ShyGuy_01, 0, 0, LVar0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(SetNpcRotation, NPC_ShyGuy_01, 0, 0, 0)
-        EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim10)
-    EVT_END_THREAD
-    EVT_CALL(NpcJump0, NPC_ShyGuy_01, -45, 0, -8, 10)
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_ACTOR_TRIP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
-    EVT_WAIT(50)
-    EVT_LOOP(2)
-        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_ACTOR_TWITCH, SOUND_SPACE_DEFAULT)
-        EVT_WAIT(7)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcRotationPivot, NPC_ShyGuy_01, 0)
-    EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim01)
-    EVT_CALL(NpcJump0, NPC_ShyGuy_01, -50, 0, -8, 10)
-    EVT_CALL(InterpNpcYaw, NPC_ShyGuy_01, 270, 0)
-    EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_SHY_GUY_FLEE_LOOP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim04)
-    EVT_CALL(SetNpcSpeed, NPC_ShyGuy_01, EVT_FLOAT(6.0))
-    EVT_CALL(NpcMoveTo, NPC_ShyGuy_01, 100, 50, 0)
-    EVT_CALL(RemoveNpc, NPC_ShyGuy_01)
-    EVT_WAIT(30)
-    EVT_CALL(StopSound, SOUND_SHY_GUY_FLEE_LOOP)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_SET(GF_OMO02_BombedWall, TRUE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(EnableGroup, MODEL_hibi, FALSE)
+    Thread
+        Call(N(AnimateBarricadeParts))
+        Loop(10)
+            UseBuf(Ref(N(BarricadeModels)))
+            Loop(ARRAY_COUNT(N(BarricadeModels)))
+                BufRead1(LVar0)
+                Call(EnableModel, LVar0, TRUE)
+            EndLoop
+            Wait(2)
+            UseBuf(Ref(N(BarricadeModels)))
+            Loop(ARRAY_COUNT(N(BarricadeModels)))
+                BufRead1(LVar0)
+                Call(EnableModel, LVar0, FALSE)
+            EndLoop
+            Wait(2)
+        EndLoop
+        UseBuf(Ref(N(BarricadeColliders)))
+        Loop(ARRAY_COUNT(N(BarricadeColliders)))
+            BufRead1(LVar0)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar0, COLLIDER_FLAGS_UPPER_MASK)
+        EndLoop
+    EndThread
+    Thread
+        Wait(30)
+        KillThread(MV_RestrictCamScript)
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Wait(1)
+        Call(UseSettingsFrom, CAM_DEFAULT, -380, 0, 0)
+        Call(SetPanTarget, CAM_DEFAULT, -380, 0, 0)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    EndThread
+    Thread
+        Call(MakeLerp, 0, -10, 20, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_t1, LVar0, Float(0.518), 0, Float(1.931))
+            Call(UpdateColliderTransform, COLLIDER_t1)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(MakeLerp, -10, 7, 40, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_t1, LVar0, Float(0.518), 0, Float(1.931))
+            Call(UpdateColliderTransform, COLLIDER_t1)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(MakeLerp, 7, -90, 30, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_t1, LVar0, Float(0.518), 0, Float(1.931))
+            Call(UpdateColliderTransform, COLLIDER_t1)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(PlaySoundAtModel, MODEL_t1, SOUND_OMO_BARRICADE_DROP, SOUND_SPACE_DEFAULT)
+        Call(GetModelCenter, MODEL_t1)
+        PlayEffect(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
+        Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(1.0))
+    EndThread
+    Thread
+        Wait(5)
+        Call(MakeLerp, 0, -10, 20, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_t2_1, LVar0, Float(0.518), 0, Float(1.931))
+            Call(UpdateColliderTransform, COLLIDER_t2_1)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(MakeLerp, -10, 7, 40, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_t2_1, LVar0, Float(0.518), 0, Float(1.931))
+            Call(UpdateColliderTransform, COLLIDER_t2_1)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(MakeLerp, 7, -90, 30, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_t2_1, LVar0, Float(0.518), 0, Float(1.931))
+            Call(UpdateColliderTransform, COLLIDER_t2_1)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(PlaySoundAtModel, MODEL_t2_1, SOUND_OMO_BARRICADE_DROP, SOUND_SPACE_DEFAULT)
+        Call(GetModelCenter, MODEL_t2_1)
+        PlayEffect(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
+        Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(1.0))
+    EndThread
+    Set(LVar0, 1)
+    Loop(10)
+        Thread
+            Wait(10)
+            Call(SetNpcJumpscale, LVar0, Float(1.5))
+            Call(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
+            IfEq(LVar2, 0)
+                Call(NpcJump0, LVar0, LVar1, 0, LVar3, 20)
+            EndIf
+        EndThread
+        Add(LVar0, 1)
+    EndLoop
+    Call(MakeLerp, 0, -10, 20, EASING_CUBIC_IN)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_t3_2, LVar0, Float(0.518), 0, Float(1.931))
+        Call(UpdateColliderTransform, COLLIDER_t3_2)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(MakeLerp, -10, 7, 40, EASING_CUBIC_IN)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_t3_2, LVar0, Float(0.518), 0, Float(1.931))
+        Call(UpdateColliderTransform, COLLIDER_t3_2)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(MakeLerp, 7, -90, 30, EASING_CUBIC_IN)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_t3_2, LVar0, Float(0.518), 0, Float(1.931))
+        Call(UpdateColliderTransform, COLLIDER_t3_2)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(PlaySoundAtModel, MODEL_t3_2, SOUND_OMO_BARRICADE_DROP, SOUND_SPACE_DEFAULT)
+    Call(GetModelCenter, MODEL_t3_2)
+    PlayEffect(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
+    Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(1.0))
+    Thread
+        Wait(35)
+        Call(PlaySound, SOUND_LOOP_SHY_GUY_CROWD_2)
+    EndThread
+    Set(LVar0, 1)
+    Set(LVar5, 1)
+    Loop(10)
+        Thread
+            Call(SetNpcJumpscale, LVar0, Float(1.5))
+            Call(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
+            Call(RandInt, 10, LVar4)
+            Add(LVar4, 10)
+            IfEq(LVar2, 0)
+                Call(NpcJump0, LVar0, LVar1, 0, LVar3, LVar4)
+            EndIf
+            Call(SetNpcVar, LVar0, 0, CROWD_STATE_TURN_AROUND)
+            Wait(LVar5)
+            Call(SetNpcVar, LVar0, 0, CROWD_STATE_RUN_AWAY)
+        EndThread
+        Add(LVar0, 1)
+        Add(LVar5, 12)
+    EndLoop
+    Wait(60)
+    Call(UseSettingsFrom, CAM_DEFAULT, -125, 0, 0)
+    Call(SetPanTarget, CAM_DEFAULT, -125, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(165)
+    Call(PlaySound, SOUND_LRAW_SHY_GUY_CROWD_2 | SOUND_ID_TRIGGER_CHANGE_SOUND)
+    Call(StopTrackingSoundPos, SOUND_LRAW_SHY_GUY_CROWD_2)
+    Call(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim04)
+    Call(SetNpcPos, NPC_ShyGuy_01, -285, 0, 35)
+    Call(SetNpcSpeed, NPC_ShyGuy_01, Float(8.0))
+    Call(NpcMoveTo, NPC_ShyGuy_01, -135, 23, 0)
+    Call(NpcMoveTo, NPC_ShyGuy_01, -110, -13, 0)
+    Call(SetNpcJumpscale, NPC_ShyGuy_01, Float(1.0))
+    Call(SetNpcRotationPivot, NPC_ShyGuy_01, 10)
+    Thread
+        Set(LVar0, 0)
+        Loop(10)
+            Add(LVar0, -9)
+            Call(SetNpcRotation, NPC_ShyGuy_01, 0, 0, LVar0)
+            Wait(1)
+        EndLoop
+    EndThread
+    Thread
+        Wait(10)
+        Call(SetNpcRotation, NPC_ShyGuy_01, 0, 0, 0)
+        Call(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim10)
+    EndThread
+    Call(NpcJump0, NPC_ShyGuy_01, -45, 0, -8, 10)
+    Call(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_ACTOR_TRIP, SOUND_SPACE_DEFAULT)
+    Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(1.0))
+    Wait(50)
+    Loop(2)
+        Call(PlaySoundAtNpc, LVar9, SOUND_ACTOR_TWITCH, SOUND_SPACE_DEFAULT)
+        Wait(7)
+    EndLoop
+    Call(SetNpcRotationPivot, NPC_ShyGuy_01, 0)
+    Call(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim01)
+    Call(NpcJump0, NPC_ShyGuy_01, -50, 0, -8, 10)
+    Call(InterpNpcYaw, NPC_ShyGuy_01, 270, 0)
+    Wait(20)
+    Call(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_SHY_GUY_FLEE_LOOP, SOUND_SPACE_DEFAULT)
+    Call(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim04)
+    Call(SetNpcSpeed, NPC_ShyGuy_01, Float(6.0))
+    Call(NpcMoveTo, NPC_ShyGuy_01, 100, 50, 0)
+    Call(RemoveNpc, NPC_ShyGuy_01)
+    Wait(30)
+    Call(StopSound, SOUND_SHY_GUY_FLEE_LOOP)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Set(GF_OMO02_BombedWall, TRUE)
+    Call(DisablePlayerInput, FALSE)
+    Unbind
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupBarricade) = {
-    EVT_CALL(ParentColliderToModel, COLLIDER_t1, MODEL_t1)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t2, MODEL_t2)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t3, MODEL_t3)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t4, MODEL_t4)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t5, MODEL_t5)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t2_1, MODEL_t2_1)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t2_2, MODEL_t2_2)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t2_3, MODEL_t2_3)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t2_4, MODEL_t2_4)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t2_5, MODEL_t2_5)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t3_1, MODEL_t3_1)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t3_2, MODEL_t3_2)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t3_3, MODEL_t3_3)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t3_4, MODEL_t3_4)
-    EVT_CALL(ParentColliderToModel, COLLIDER_t3_5, MODEL_t3_5)
-    EVT_IF_EQ(GF_OMO02_BombedWall, FALSE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_BreakBarricade)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Barricade)), 1, 0)
-    EVT_ELSE
-        EVT_CALL(EnableGroup, MODEL_hibi, FALSE)
-        EVT_USE_BUF(EVT_PTR(N(BarricadeModels)))
-        EVT_LOOP(ARRAY_COUNT(N(BarricadeModels)))
-            EVT_BUF_READ1(LVar0)
-            EVT_CALL(EnableModel, LVar0, FALSE)
-        EVT_END_LOOP
-        EVT_USE_BUF(EVT_PTR(N(BarricadeColliders)))
-        EVT_LOOP(ARRAY_COUNT(N(BarricadeColliders)))
-            EVT_BUF_READ1(LVar0)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar0, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_END_LOOP
-        EVT_CALL(RotateModel, MODEL_t1, -90, EVT_FLOAT(0.518), 0, EVT_FLOAT(1.931))
-        EVT_CALL(RotateModel, MODEL_t2_1, -90, EVT_FLOAT(0.518), 0, EVT_FLOAT(1.931))
-        EVT_CALL(RotateModel, MODEL_t3_2, -90, EVT_FLOAT(0.518), 0, EVT_FLOAT(1.931))
-        EVT_CALL(UpdateColliderTransform, COLLIDER_t1)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_t2_1)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_t3_2)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(ParentColliderToModel, COLLIDER_t1, MODEL_t1)
+    Call(ParentColliderToModel, COLLIDER_t2, MODEL_t2)
+    Call(ParentColliderToModel, COLLIDER_t3, MODEL_t3)
+    Call(ParentColliderToModel, COLLIDER_t4, MODEL_t4)
+    Call(ParentColliderToModel, COLLIDER_t5, MODEL_t5)
+    Call(ParentColliderToModel, COLLIDER_t2_1, MODEL_t2_1)
+    Call(ParentColliderToModel, COLLIDER_t2_2, MODEL_t2_2)
+    Call(ParentColliderToModel, COLLIDER_t2_3, MODEL_t2_3)
+    Call(ParentColliderToModel, COLLIDER_t2_4, MODEL_t2_4)
+    Call(ParentColliderToModel, COLLIDER_t2_5, MODEL_t2_5)
+    Call(ParentColliderToModel, COLLIDER_t3_1, MODEL_t3_1)
+    Call(ParentColliderToModel, COLLIDER_t3_2, MODEL_t3_2)
+    Call(ParentColliderToModel, COLLIDER_t3_3, MODEL_t3_3)
+    Call(ParentColliderToModel, COLLIDER_t3_4, MODEL_t3_4)
+    Call(ParentColliderToModel, COLLIDER_t3_5, MODEL_t3_5)
+    IfEq(GF_OMO02_BombedWall, FALSE)
+        BindTrigger(Ref(N(EVS_Scene_BreakBarricade)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Barricade)), 1, 0)
+    Else
+        Call(EnableGroup, MODEL_hibi, FALSE)
+        UseBuf(Ref(N(BarricadeModels)))
+        Loop(ARRAY_COUNT(N(BarricadeModels)))
+            BufRead1(LVar0)
+            Call(EnableModel, LVar0, FALSE)
+        EndLoop
+        UseBuf(Ref(N(BarricadeColliders)))
+        Loop(ARRAY_COUNT(N(BarricadeColliders)))
+            BufRead1(LVar0)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar0, COLLIDER_FLAGS_UPPER_MASK)
+        EndLoop
+        Call(RotateModel, MODEL_t1, -90, Float(0.518), 0, Float(1.931))
+        Call(RotateModel, MODEL_t2_1, -90, Float(0.518), 0, Float(1.931))
+        Call(RotateModel, MODEL_t3_2, -90, Float(0.518), 0, Float(1.931))
+        Call(UpdateColliderTransform, COLLIDER_t1)
+        Call(UpdateColliderTransform, COLLIDER_t2_1)
+        Call(UpdateColliderTransform, COLLIDER_t3_2)
+    EndIf
+    Return
+    End
 };

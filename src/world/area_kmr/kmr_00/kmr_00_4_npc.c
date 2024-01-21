@@ -34,76 +34,76 @@ API_CALLABLE(N(UpdateStarSpiritBobbing)) {
 }
 
 EvtScript N(EVS_NpcAux_StarSpirit) = {
-    EVT_THREAD
-        EVT_CALL(N(UpdateStarSpiritBobbing))
-    EVT_END_THREAD
-    EVT_CALL(RandInt, 100, LVar0)
-    EVT_ADD(LVar0, 1)
-    EVT_WAIT(LVar0)
-    EVT_MALLOC_ARRAY(1, LVarA)
-    EVT_USE_ARRAY(LVarA)
-    EVT_THREAD
-        EVT_USE_ARRAY(LVarA)
-        EVT_LABEL(0)
-        EVT_CALL(RandInt, 90, LVar0)
-        EVT_ADD(LVar0, 30)
-        EVT_SETF(ArrayVar(0), EVT_FLOAT(10.0))
-        EVT_WAIT(LVar0)
-        EVT_CALL(RandInt, 100, LVar1)
-        EVT_IF_LT(LVar1, 80)
-            EVT_SET(LVar1, 1)
-        EVT_ELSE
-            EVT_SET(LVar1, 2)
-        EVT_END_IF
-        EVT_LOOP(LVar1)
-            EVT_SETF(ArrayVar(0), EVT_FLOAT(40.0))
-            EVT_WAIT(1)
-            EVT_SETF(ArrayVar(0), EVT_FLOAT(50.0))
-            EVT_WAIT(1)
-            EVT_SETF(ArrayVar(0), EVT_FLOAT(80.0))
-            EVT_WAIT(1)
-            EVT_SETF(ArrayVar(0), EVT_FLOAT(70.0))
-            EVT_WAIT(1)
-            EVT_SETF(ArrayVar(0), EVT_FLOAT(60.0))
-            EVT_WAIT(1)
-            EVT_SETF(ArrayVar(0), EVT_FLOAT(50.0))
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_GOTO(0)
-    EVT_END_THREAD
-    EVT_SETF(LVar0, EVT_FLOAT(100.0))
-    EVT_LABEL(1)
-    EVT_LOOP(50)
-        EVT_ADDF(LVar0, EVT_FLOAT(0.8))
-        EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_HOLOGRAM, IMGFX_HOLOGRAM_NOISE, ArrayVar(0), MV_Unk_01, LVar0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_LOOP(50)
-        EVT_ADDF(LVar0, EVT_FLOAT(-0.8))
-        EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_HOLOGRAM, IMGFX_HOLOGRAM_NOISE, ArrayVar(0), MV_Unk_01, LVar0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_GOTO(1)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(N(UpdateStarSpiritBobbing))
+    EndThread
+    Call(RandInt, 100, LVar0)
+    Add(LVar0, 1)
+    Wait(LVar0)
+    MallocArray(1, LVarA)
+    UseArray(LVarA)
+    Thread
+        UseArray(LVarA)
+        Label(0)
+        Call(RandInt, 90, LVar0)
+        Add(LVar0, 30)
+        SetF(ArrayVar(0), Float(10.0))
+        Wait(LVar0)
+        Call(RandInt, 100, LVar1)
+        IfLt(LVar1, 80)
+            Set(LVar1, 1)
+        Else
+            Set(LVar1, 2)
+        EndIf
+        Loop(LVar1)
+            SetF(ArrayVar(0), Float(40.0))
+            Wait(1)
+            SetF(ArrayVar(0), Float(50.0))
+            Wait(1)
+            SetF(ArrayVar(0), Float(80.0))
+            Wait(1)
+            SetF(ArrayVar(0), Float(70.0))
+            Wait(1)
+            SetF(ArrayVar(0), Float(60.0))
+            Wait(1)
+            SetF(ArrayVar(0), Float(50.0))
+            Wait(1)
+        EndLoop
+        Goto(0)
+    EndThread
+    SetF(LVar0, Float(100.0))
+    Label(1)
+    Loop(50)
+        AddF(LVar0, Float(0.8))
+        Call(SetNpcImgFXParams, NPC_SELF, IMGFX_HOLOGRAM, IMGFX_HOLOGRAM_NOISE, ArrayVar(0), MV_Unk_01, LVar0)
+        Wait(1)
+    EndLoop
+    Loop(50)
+        AddF(LVar0, Float(-0.8))
+        Call(SetNpcImgFXParams, NPC_SELF, IMGFX_HOLOGRAM, IMGFX_HOLOGRAM_NOISE, ArrayVar(0), MV_Unk_01, LVar0)
+        Wait(1)
+    EndLoop
+    Goto(1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarSpirit) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_StarSpirit)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH0_WAKE_UP)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_StarSpirit)))
+    IfGe(GB_StoryProgress, STORY_CH0_WAKE_UP)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Goombaria) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH0_WAKE_UP)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH0_WAKE_UP)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Goombaria) = {

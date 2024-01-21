@@ -13,113 +13,113 @@ BombTrigger N(BombPos_Wall) = {
 };
 
 EvtScript N(EVS_BlastWall) = {
-    EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 60, 61, 1, 10, 30)
-    EVT_SET(GF_NOK15_BombedWall, TRUE)
-    EVT_CALL(EnableModel, MODEL_bomb_ato, TRUE)
-    EVT_CALL(EnableModel, MODEL_bomb_1, FALSE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 60, 61, 1, 10, 30)
+    Set(GF_NOK15_BombedWall, TRUE)
+    Call(EnableModel, MODEL_bomb_ato, TRUE)
+    Call(EnableModel, MODEL_bomb_1, FALSE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
+    Unbind
+    Return
+    End
 };
 
 EvtScript N(EVS_TexPan_Water) = {
-    EVT_THREAD
-        EVT_CALL(SetTexPanner, MODEL_suimen1, TEX_PANNER_1)
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVar1, 0)
-        EVT_SET(LVar2, 0)
-        EVT_LABEL(10)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_AUX, LVar1, LVar2)
-            EVT_SUB(LVar0, 100)
-            EVT_SUB(LVar1, 400)
-            EVT_ADD(LVar1, 1000)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-    EVT_END_THREAD
-    EVT_CALL(SetTexPanner, MODEL_kabemizu1, TEX_PANNER_2)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_SET(LVar2, 0)
-    EVT_LABEL(20)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, LVar0, 0)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_AUX, LVar1, LVar2)
-        EVT_SUB(LVar0, 100)
-        EVT_ADD(LVar1, 800)
-        EVT_SUB(LVar2, 400)
-        EVT_WAIT(1)
-        EVT_GOTO(20)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(SetTexPanner, MODEL_suimen1, TEX_PANNER_1)
+        Set(LVar0, 0)
+        Set(LVar1, 0)
+        Set(LVar2, 0)
+        Label(10)
+            Call(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
+            Call(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_AUX, LVar1, LVar2)
+            Sub(LVar0, 100)
+            Sub(LVar1, 400)
+            Add(LVar1, 1000)
+            Wait(1)
+            Goto(10)
+    EndThread
+    Call(SetTexPanner, MODEL_kabemizu1, TEX_PANNER_2)
+    Set(LVar0, 0)
+    Set(LVar1, 0)
+    Set(LVar2, 0)
+    Label(20)
+        Call(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, LVar0, 0)
+        Call(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_AUX, LVar1, LVar2)
+        Sub(LVar0, 100)
+        Add(LVar1, 800)
+        Sub(LVar2, 400)
+        Wait(1)
+        Goto(20)
+    Return
+    End
 };
 
 EvtScript N(EVS_GotoMap_nok_15_4) = {
-    EVT_CALL(GotoMap, EVT_PTR("nok_15"), nok_15_ENTRY_4)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(GotoMap, Ref("nok_15"), nok_15_ENTRY_4)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_GotoMap_nok_15_3) = {
-    EVT_CALL(GotoMap, EVT_PTR("nok_15"), nok_15_ENTRY_3)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(GotoMap, Ref("nok_15"), nok_15_ENTRY_3)
+    Wait(100)
+    Return
+    End
 };
 
 MAP_RODATA_PAD(1, exits);
 
 EvtScript N(EVS_ExitPipe) = {
-    EVT_SET(LVarA, LVar0)
-    EVT_SET(LVarB, LVar1)
-    EVT_SET(LVarC, LVar2)
-    EVT_EXEC_WAIT(N(EVS_Pipe_ExitVertical))
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0)
+    Set(LVarB, LVar1)
+    Set(LVarC, LVar2)
+    ExecWait(N(EVS_Pipe_ExitVertical))
+    Return
+    End
 };
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_nok_14_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_trd_00_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_trd_00_4)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili3, 1, 0)
-    EVT_SET(LVar0, nok_15_ENTRY_3)
-    EVT_SET(LVar1, COLLIDER_o680)
-    EVT_SET(LVar2, EVT_PTR(N(EVS_GotoMap_nok_15_4)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitPipe)), TRIGGER_FLOOR_TOUCH, LVar1, 1, 0)
-    EVT_SET(LVar0, nok_15_ENTRY_4)
-    EVT_SET(LVar1, COLLIDER_o679)
-    EVT_SET(LVar2, EVT_PTR(N(EVS_GotoMap_nok_15_3)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitPipe)), TRIGGER_FLOOR_TOUCH, LVar1, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_nok_14_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_trd_00_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_trd_00_4)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili3, 1, 0)
+    Set(LVar0, nok_15_ENTRY_3)
+    Set(LVar1, COLLIDER_o680)
+    Set(LVar2, Ref(N(EVS_GotoMap_nok_15_4)))
+    BindTrigger(Ref(N(EVS_ExitPipe)), TRIGGER_FLOOR_TOUCH, LVar1, 1, 0)
+    Set(LVar0, nok_15_ENTRY_4)
+    Set(LVar1, COLLIDER_o679)
+    Set(LVar2, Ref(N(EVS_GotoMap_nok_15_3)))
+    BindTrigger(Ref(N(EVS_ExitPipe)), TRIGGER_FLOOR_TOUCH, LVar1, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_PLEASANT_PATH)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_SetupFoliage))
-    EVT_EXEC(N(EVS_TexPan_Water))
-    EVT_IF_EQ(GF_NOK15_BombedWall, FALSE)
-        EVT_CALL(EnableModel, MODEL_bomb_ato, FALSE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_BlastWall)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Wall)), 1, 0)
-    EVT_ELSE
-        EVT_CALL(EnableModel, MODEL_bomb_1, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_LE(LVar0, nok_15_ENTRY_2)
-        EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-        EVT_EXEC(EnterWalk)
-    EVT_ELSE
-        EVT_SET(LVarA, EVT_PTR(N(EVS_BindExitTriggers)))
-        EVT_EXEC(N(EVS_Pipe_EnterVertical))
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_PLEASANT_PATH)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_DEFAULT()
+    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    ExecWait(N(EVS_MakeEntities))
+    Exec(N(EVS_SetupFoliage))
+    Exec(N(EVS_TexPan_Water))
+    IfEq(GF_NOK15_BombedWall, FALSE)
+        Call(EnableModel, MODEL_bomb_ato, FALSE)
+        BindTrigger(Ref(N(EVS_BlastWall)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Wall)), 1, 0)
+    Else
+        Call(EnableModel, MODEL_bomb_1, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    Exec(N(EVS_SetupMusic))
+    Call(GetEntryID, LVar0)
+    IfLe(LVar0, nok_15_ENTRY_2)
+        Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+        Exec(EnterWalk)
+    Else
+        Set(LVarA, Ref(N(EVS_BindExitTriggers)))
+        Exec(N(EVS_Pipe_EnterVertical))
+    EndIf
+    Wait(1)
+    Return
+    End
 };

@@ -17,64 +17,64 @@ API_CALLABLE(N(UseSlowerFadeOnMapChange)) {
 }
 
 EvtScript N(EVS_PlayFortressAnimation) = {
-    EVT_CALL(LoadAnimatedModel, MDL_ANIMATOR_1, EVT_PTR(N(AnimSkeleton_Fortress)))
-    EVT_CALL(PlayModelAnimation, MDL_ANIMATOR_1, EVT_PTR(N(AnimScript_Fortress)))
-    EVT_CALL(SetAnimatedModelRootPosition, MDL_ANIMATOR_1, 0, 0, 0)
-    EVT_CALL(SetAnimatedModelRenderMode, MDL_ANIMATOR_1, RENDER_MODE_SURFACE_OPA)
-    EVT_RETURN
-    EVT_END
+    Call(LoadAnimatedModel, MDL_ANIMATOR_1, Ref(N(AnimSkeleton_Fortress)))
+    Call(PlayModelAnimation, MDL_ANIMATOR_1, Ref(N(AnimScript_Fortress)))
+    Call(SetAnimatedModelRootPosition, MDL_ANIMATOR_1, 0, 0, 0)
+    Call(SetAnimatedModelRenderMode, MDL_ANIMATOR_1, RENDER_MODE_SURFACE_OPA)
+    Return
+    End
 };
 
 EvtScript N(EVS_PlayBridgeAnimation) = {
-    EVT_CALL(LoadAnimatedModel, MDL_ANIMATOR_0, EVT_PTR(N(AnimSkeleton_Bridge)))
-    EVT_CALL(PlayModelAnimation, MDL_ANIMATOR_0, EVT_PTR(N(AnimScript_Bridge)))
-    EVT_CALL(SetAnimatedModelRootPosition, MDL_ANIMATOR_0, 0, 0, 0)
-    EVT_CALL(SetAnimatedModelRenderMode, MDL_ANIMATOR_0, RENDER_MODE_SURFACE_OPA)
-    EVT_RETURN
-    EVT_END
+    Call(LoadAnimatedModel, MDL_ANIMATOR_0, Ref(N(AnimSkeleton_Bridge)))
+    Call(PlayModelAnimation, MDL_ANIMATOR_0, Ref(N(AnimScript_Bridge)))
+    Call(SetAnimatedModelRootPosition, MDL_ANIMATOR_0, 0, 0, 0)
+    Call(SetAnimatedModelRenderMode, MDL_ANIMATOR_0, RENDER_MODE_SURFACE_OPA)
+    Return
+    End
 };
 
 //@bug exit to 'Save and Continue?' map is not properly terminated!
 EvtScript N(EVS_BadExit_kmr_24_0) = {
-    EVT_CALL(FadeOutMusic, 0, 1500)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_24"), kmr_24_ENTRY_0, TRANSITION_MARIO_BLACK)
-    EVT_WAIT(100)
+    Call(FadeOutMusic, 0, 1500)
+    Call(GotoMapSpecial, Ref("kmr_24"), kmr_24_ENTRY_0, TRANSITION_MARIO_BLACK)
+    Wait(100)
 };
 
 EvtScript N(EVS_ExitWalk_kmr_12_1) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(UseExitHeading, 60, kmr_11_ENTRY_0)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, EVT_PTR("kmr_12"), kmr_12_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(UseExitHeading, 60, kmr_11_ENTRY_0)
+    Exec(ExitWalk)
+    Call(GotoMap, Ref("kmr_12"), kmr_12_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitWalk_kmr_10_0) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(UseExitHeading, 60, kmr_11_ENTRY_1)
-    EVT_EXEC(ExitWalk)
-    EVT_IF_GE(GB_StoryProgress, STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
-        EVT_CALL(GotoMap, EVT_PTR("kmr_10"), kmr_10_ENTRY_0)
-        EVT_WAIT(100)
-        EVT_RETURN
-    EVT_ELSE
-        EVT_WAIT(10)
-        EVT_EXEC_WAIT(N(EVS_Scene_KammyWatching))
-    EVT_END_IF
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(UseExitHeading, 60, kmr_11_ENTRY_1)
+    Exec(ExitWalk)
+    IfGe(GB_StoryProgress, STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
+        Call(GotoMap, Ref("kmr_10"), kmr_10_ENTRY_0)
+        Wait(100)
+        Return
+    Else
+        Wait(10)
+        ExecWait(N(EVS_Scene_KammyWatching))
+    EndIf
+    Unbind
+    Return
+    End
 };
 
 MAP_RODATA_PAD(1,exits);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kmr_12_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kmr_10_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiline, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_kmr_12_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_kmr_10_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiline, 1, 0)
+    Return
+    End
 };
 
 FoliageModelList N(SwitchBush_Models) = FOLIAGE_MODEL_LIST(MODEL_kusa4);
@@ -93,58 +93,58 @@ SearchBushConfig N(SearchBush_SwitchBush) = {
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_GOOMBA_ROAD)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(N(UseSlowerFadeOnMapChange))
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_CALL(ClearDefeatedEnemies)
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_IF_LT(GB_StoryProgress, STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
-        EVT_CALL(N(SetupFog))
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_SetupFoliage))
-    EVT_CALL(InitAnimatedModels)
-    EVT_CALL(EnableModel, MODEL_eye_mask, FALSE)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH0_HIT_GATEHOUSE_SWITCH)
-        EVT_CALL(EnableModel, MODEL_bb, FALSE)
-    EVT_ELSE
-        EVT_CALL(SetGroupVisibility, MODEL_ue, MODEL_GROUP_HIDDEN)
-        EVT_CALL(SetGroupVisibility, MODEL_sotokabe, MODEL_GROUP_HIDDEN)
-        EVT_CALL(SetGroupVisibility, MODEL_tobira, MODEL_GROUP_HIDDEN)
-        EVT_CALL(EnableModel, MODEL_b1, FALSE)
-        EVT_CALL(EnableModel, MODEL_b2, FALSE)
-        EVT_CALL(EnableModel, MODEL_b3, FALSE)
-        EVT_CALL(EnableModel, MODEL_b4, FALSE)
-        EVT_CALL(EnableModel, MODEL_b5, FALSE)
-        EVT_CALL(EnableModel, MODEL_b6, FALSE)
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH0_DEFEATED_GOOMBA_KING)
-        EVT_IF_EQ(GF_KMR11_GoombaBrosFledToCastle, FALSE)
-            EVT_EXEC(N(EVS_BindExitTriggers))
-            EVT_CALL(SetMusicTrack, 0, SONG_GOOMBA_BROS_RETREAT, 1, 8)
-            EVT_EXEC_WAIT(N(EVS_Scene_MeetGoombaKing))
-            EVT_SET(GF_KMR11_GoombaBrosFledToCastle, TRUE)
-        EVT_ELSE
-            EVT_EXEC(N(EVS_SetupMusic))
-            EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-            EVT_EXEC(EnterWalk)
-            EVT_WAIT(1)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_EXEC(N(EVS_SetupMusic))
-        EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-        EVT_EXEC(EnterWalk)
-        EVT_WAIT(1)
-    EVT_END_IF
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_SwitchBush)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Scripted)), TRIGGER_WALL_PRESS_A, COLLIDER_kusa4, 1, 0)
-    EVT_CALL(SetGroupVisibility, MODEL_event_cam, MODEL_GROUP_HIDDEN)
-    EVT_CALL(TranslateGroup, MODEL_g172, NPC_DISPOSE_LOCATION)
-    EVT_CALL(TranslateGroup, MODEL_g173, NPC_DISPOSE_LOCATION)
-    EVT_IF_GE(GB_StoryProgress, STORY_CH0_HIT_GATEHOUSE_SWITCH)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_GOOMBA_ROAD)
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(N(UseSlowerFadeOnMapChange))
+    SetUP_CAMERA_NO_LEAD()
+    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(ClearDefeatedEnemies)
+    ExecWait(N(EVS_MakeEntities))
+    IfLt(GB_StoryProgress, STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
+        Call(N(SetupFog))
+    EndIf
+    ExecWait(N(EVS_SetupFoliage))
+    Call(InitAnimatedModels)
+    Call(EnableModel, MODEL_eye_mask, FALSE)
+    IfLt(GB_StoryProgress, STORY_CH0_HIT_GATEHOUSE_SWITCH)
+        Call(EnableModel, MODEL_bb, FALSE)
+    Else
+        Call(SetGroupVisibility, MODEL_ue, MODEL_GROUP_HIDDEN)
+        Call(SetGroupVisibility, MODEL_sotokabe, MODEL_GROUP_HIDDEN)
+        Call(SetGroupVisibility, MODEL_tobira, MODEL_GROUP_HIDDEN)
+        Call(EnableModel, MODEL_b1, FALSE)
+        Call(EnableModel, MODEL_b2, FALSE)
+        Call(EnableModel, MODEL_b3, FALSE)
+        Call(EnableModel, MODEL_b4, FALSE)
+        Call(EnableModel, MODEL_b5, FALSE)
+        Call(EnableModel, MODEL_b6, FALSE)
+    EndIf
+    IfLt(GB_StoryProgress, STORY_CH0_DEFEATED_GOOMBA_KING)
+        IfEq(GF_KMR11_GoombaBrosFledToCastle, FALSE)
+            Exec(N(EVS_BindExitTriggers))
+            Call(SetMusicTrack, 0, SONG_GOOMBA_BROS_RETREAT, 1, 8)
+            ExecWait(N(EVS_Scene_MeetGoombaKing))
+            Set(GF_KMR11_GoombaBrosFledToCastle, TRUE)
+        Else
+            Exec(N(EVS_SetupMusic))
+            Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+            Exec(EnterWalk)
+            Wait(1)
+        EndIf
+    Else
+        Exec(N(EVS_SetupMusic))
+        Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+        Exec(EnterWalk)
+        Wait(1)
+    EndIf
+    Set(LVar0, Ref(N(SearchBush_SwitchBush)))
+    BindTrigger(Ref(N(EVS_SearchBush_Scripted)), TRIGGER_WALL_PRESS_A, COLLIDER_kusa4, 1, 0)
+    Call(SetGroupVisibility, MODEL_event_cam, MODEL_GROUP_HIDDEN)
+    Call(TranslateGroup, MODEL_g172, NPC_DISPOSE_LOCATION)
+    Call(TranslateGroup, MODEL_g173, NPC_DISPOSE_LOCATION)
+    IfGe(GB_StoryProgress, STORY_CH0_HIT_GATEHOUSE_SWITCH)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    Return
+    End
 };

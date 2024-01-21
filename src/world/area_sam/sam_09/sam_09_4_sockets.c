@@ -81,247 +81,247 @@ API_CALLABLE(N(CreateConsumableItemList)) {
 }
 
 EvtScript N(EVS_PlaceItemInSocket) = {
-    EVT_CALL(PlaySoundAtCollider, LVar4, SOUND_SAM_RAISE_BARRIER, 0)
-    EVT_CALL(MakeLerp, 0, 130, 30 * DT, EASING_LINEAR)
-    EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, LVar2, 0, LVar0, 0)
-        EVT_CALL(UpdateColliderTransform, LVar4)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAtCollider, LVar4, SOUND_SAM_RAISE_BARRIER, 0)
+    Call(MakeLerp, 0, 130, 30 * DT, EASING_LINEAR)
+    Label(0)
+        Call(UpdateLerp)
+        Call(TranslateModel, LVar2, 0, LVar0, 0)
+        Call(UpdateColliderTransform, LVar4)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeItemFromSocket) = {
-    EVT_CALL(PlaySoundAtCollider, LVar4, SOUND_SAM_LOWER_BARRIER, 0)
-    EVT_CALL(MakeLerp, 130, 0, 30 * DT, EASING_CUBIC_IN)
-    EVT_LABEL(0)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(TranslateModel, LVar2, 0, LVar0, 0)
-    EVT_CALL(UpdateColliderTransform, LVar4)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, LVar4, SOUND_SAM_BARRIER_THUD, 0)
-    EVT_CALL(GetModelCenter, LVar2)
-    EVT_SET(LVar3, LVar2)
-    EVT_SET(LVar4, LVar2)
-    EVT_ADD(LVar3, 30)
-    EVT_SUB(LVar4, 30)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, LVar0, 0, LVar2, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, LVar0, 0, LVar3, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, LVar0, 0, LVar4, 0)
-    EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(1.0))
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAtCollider, LVar4, SOUND_SAM_LOWER_BARRIER, 0)
+    Call(MakeLerp, 130, 0, 30 * DT, EASING_CUBIC_IN)
+    Label(0)
+    Call(UpdateLerp)
+    Call(TranslateModel, LVar2, 0, LVar0, 0)
+    Call(UpdateColliderTransform, LVar4)
+    Wait(1)
+    IfEq(LVar1, 1)
+        Goto(0)
+    EndIf
+    Call(PlaySoundAtCollider, LVar4, SOUND_SAM_BARRIER_THUD, 0)
+    Call(GetModelCenter, LVar2)
+    Set(LVar3, LVar2)
+    Set(LVar4, LVar2)
+    Add(LVar3, 30)
+    Sub(LVar4, 30)
+    PlayEffect(EFFECT_LANDING_DUST, 3, LVar0, 0, LVar2, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, LVar0, 0, LVar3, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, LVar0, 0, LVar4, 0)
+    Call(ShakeCam, CAM_DEFAULT, 0, 10, Float(1.0))
+    Return
+    End
 };
 
 EvtScript N(EVS_UseSocket1) = {
-    EVT_IF_EQ(MV_Socket1_ItemID, -1)
-        EVT_CALL(ShowConsumableChoicePopup)
-        EVT_CALL(CloseChoicePopup)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_SAM09_PlaceItemTip, 160, 40)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_IF_EQ(LVar0, -1)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_SET(MV_Socket1_ItemID, LVar0)
-        EVT_CALL(N(SerializeItemIDs))
-        EVT_CALL(RemoveItem, LVar0, LVar2)
-        EVT_CALL(MakeItemEntity, LVar0, -385, 30, -50, ITEM_SPAWN_MODE_DECORATION, 0)
-        EVT_SET(MV_Socket1_ItemEntityID, LVar0)
-        EVT_SET(LVar2, MODEL_m1_kabe)
-        EVT_SET(LVar4, COLLIDER_o55)
-        EVT_EXEC_WAIT(N(EVS_PlaceItemInSocket))
-        EVT_RETURN
-    EVT_ELSE
-        EVT_SET(LVar0, MV_Socket1_ItemEntityID)
-        EVT_CALL(N(GetItemIDFromItemEntity), LVar0)
-        EVT_CALL(N(GetItemName), LVar0)
-        EVT_CALL(SetMessageText, LVar0, 0)
-        EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Inspect_PickUpPrompt, 160, 40)
-        EVT_CALL(ShowChoice, MSG_Choice_000D)
-        EVT_CALL(CloseMessage)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(AddItem, MV_Socket1_ItemID, LVar0)
-            EVT_IF_EQ(LVar0, -1)
-                EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Inspect_CantCarryMore, 160, 40)
-                EVT_RETURN
-            EVT_END_IF
-            EVT_CALL(N(GetItemIDFromItemEntity), MV_Socket1_ItemEntityID)
-            EVT_CALL(RemoveItemEntity, MV_Socket1_ItemEntityID)
-            EVT_SET(MV_Socket1_ItemID, -1)
-            EVT_CALL(N(SerializeItemIDs))
-            EVT_CALL(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_UNIQUE)
-            EVT_SET(LVar2, MODEL_m1_kabe)
-            EVT_SET(LVar4, COLLIDER_o55)
-            EVT_EXEC_WAIT(N(EVS_TakeItemFromSocket))
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(MV_Socket1_ItemID, -1)
+        Call(ShowConsumableChoicePopup)
+        Call(CloseChoicePopup)
+        IfEq(LVar0, 0)
+            Call(ShowMessageAtScreenPos, MSG_Menus_SAM09_PlaceItemTip, 160, 40)
+            Return
+        EndIf
+        IfEq(LVar0, -1)
+            Return
+        EndIf
+        Set(MV_Socket1_ItemID, LVar0)
+        Call(N(SerializeItemIDs))
+        Call(RemoveItem, LVar0, LVar2)
+        Call(MakeItemEntity, LVar0, -385, 30, -50, ITEM_SPAWN_MODE_DECORATION, 0)
+        Set(MV_Socket1_ItemEntityID, LVar0)
+        Set(LVar2, MODEL_m1_kabe)
+        Set(LVar4, COLLIDER_o55)
+        ExecWait(N(EVS_PlaceItemInSocket))
+        Return
+    Else
+        Set(LVar0, MV_Socket1_ItemEntityID)
+        Call(N(GetItemIDFromItemEntity), LVar0)
+        Call(N(GetItemName), LVar0)
+        Call(SetMessageText, LVar0, 0)
+        Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_PickUpPrompt, 160, 40)
+        Call(ShowChoice, MSG_Choice_000D)
+        Call(CloseMessage)
+        IfEq(LVar0, 0)
+            Call(AddItem, MV_Socket1_ItemID, LVar0)
+            IfEq(LVar0, -1)
+                Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_CantCarryMore, 160, 40)
+                Return
+            EndIf
+            Call(N(GetItemIDFromItemEntity), MV_Socket1_ItemEntityID)
+            Call(RemoveItemEntity, MV_Socket1_ItemEntityID)
+            Set(MV_Socket1_ItemID, -1)
+            Call(N(SerializeItemIDs))
+            Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_UNIQUE)
+            Set(LVar2, MODEL_m1_kabe)
+            Set(LVar4, COLLIDER_o55)
+            ExecWait(N(EVS_TakeItemFromSocket))
+            Return
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_UseSocket2) = {
-    EVT_IF_EQ(MV_Socket2_ItemID, -1)
-        EVT_CALL(ShowConsumableChoicePopup)
-        EVT_CALL(CloseChoicePopup)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_SAM09_PlaceItemTip, 160, 40)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_IF_EQ(LVar0, -1)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_SET(MV_Socket2_ItemID, LVar0)
-        EVT_CALL(N(SerializeItemIDs))
-        EVT_CALL(RemoveItem, LVar0, LVar2)
-        EVT_CALL(MakeItemEntity, LVar0, -35, 30, -50, ITEM_SPAWN_MODE_DECORATION, 0)
-        EVT_SET(MV_Socket2_ItemEntityID, LVar0)
-        EVT_SET(LVar2, MODEL_m2_kabe)
-        EVT_SET(LVar4, COLLIDER_o54)
-        EVT_EXEC_WAIT(N(EVS_PlaceItemInSocket))
-        EVT_RETURN
-    EVT_ELSE
-        EVT_SET(LVar0, MV_Socket2_ItemEntityID)
-        EVT_CALL(N(GetItemIDFromItemEntity), LVar0)
-        EVT_CALL(N(GetItemName), LVar0)
-        EVT_CALL(SetMessageText, LVar0, 0)
-        EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Inspect_PickUpPrompt, 160, 40)
-        EVT_CALL(ShowChoice, MSG_Choice_000D)
-        EVT_CALL(CloseMessage)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(AddItem, MV_Socket2_ItemID, LVar0)
-            EVT_IF_EQ(LVar0, -1)
-                EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Inspect_CantCarryMore, 160, 40)
-                EVT_RETURN
-            EVT_END_IF
-            EVT_CALL(N(GetItemIDFromItemEntity), MV_Socket2_ItemEntityID)
-            EVT_CALL(RemoveItemEntity, MV_Socket2_ItemEntityID)
-            EVT_SET(MV_Socket2_ItemID, -1)
-            EVT_CALL(N(SerializeItemIDs))
-            EVT_CALL(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_UNIQUE)
-            EVT_SET(LVar2, MODEL_m2_kabe)
-            EVT_SET(LVar4, COLLIDER_o54)
-            EVT_EXEC_WAIT(N(EVS_TakeItemFromSocket))
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(MV_Socket2_ItemID, -1)
+        Call(ShowConsumableChoicePopup)
+        Call(CloseChoicePopup)
+        IfEq(LVar0, 0)
+            Call(ShowMessageAtScreenPos, MSG_Menus_SAM09_PlaceItemTip, 160, 40)
+            Return
+        EndIf
+        IfEq(LVar0, -1)
+            Return
+        EndIf
+        Set(MV_Socket2_ItemID, LVar0)
+        Call(N(SerializeItemIDs))
+        Call(RemoveItem, LVar0, LVar2)
+        Call(MakeItemEntity, LVar0, -35, 30, -50, ITEM_SPAWN_MODE_DECORATION, 0)
+        Set(MV_Socket2_ItemEntityID, LVar0)
+        Set(LVar2, MODEL_m2_kabe)
+        Set(LVar4, COLLIDER_o54)
+        ExecWait(N(EVS_PlaceItemInSocket))
+        Return
+    Else
+        Set(LVar0, MV_Socket2_ItemEntityID)
+        Call(N(GetItemIDFromItemEntity), LVar0)
+        Call(N(GetItemName), LVar0)
+        Call(SetMessageText, LVar0, 0)
+        Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_PickUpPrompt, 160, 40)
+        Call(ShowChoice, MSG_Choice_000D)
+        Call(CloseMessage)
+        IfEq(LVar0, 0)
+            Call(AddItem, MV_Socket2_ItemID, LVar0)
+            IfEq(LVar0, -1)
+                Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_CantCarryMore, 160, 40)
+                Return
+            EndIf
+            Call(N(GetItemIDFromItemEntity), MV_Socket2_ItemEntityID)
+            Call(RemoveItemEntity, MV_Socket2_ItemEntityID)
+            Set(MV_Socket2_ItemID, -1)
+            Call(N(SerializeItemIDs))
+            Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_UNIQUE)
+            Set(LVar2, MODEL_m2_kabe)
+            Set(LVar4, COLLIDER_o54)
+            ExecWait(N(EVS_TakeItemFromSocket))
+            Return
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_UseSocket3) = {
-    EVT_IF_EQ(MV_Socket3_ItemID, -1)
-        EVT_CALL(ShowConsumableChoicePopup)
-        EVT_CALL(CloseChoicePopup)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_SAM09_PlaceItemTip, 160, 40)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_IF_EQ(LVar0, -1)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_SET(MV_Socket3_ItemID, LVar0)
-        EVT_CALL(N(SerializeItemIDs))
-        EVT_CALL(RemoveItem, LVar0, LVar2)
-        EVT_CALL(MakeItemEntity, LVar0, 265, 30, -50, ITEM_SPAWN_MODE_DECORATION, 0)
-        EVT_SET(MV_Socket3_ItemEntityID, LVar0)
-        EVT_SET(LVar2, MODEL_m3_kabe)
-        EVT_SET(LVar4, COLLIDER_o53)
-        EVT_EXEC_WAIT(N(EVS_PlaceItemInSocket))
-        EVT_RETURN
-    EVT_ELSE
-        EVT_SET(LVar0, MV_Socket3_ItemEntityID)
-        EVT_CALL(N(GetItemIDFromItemEntity), LVar0)
-        EVT_CALL(N(GetItemName), LVar0)
-        EVT_CALL(SetMessageText, LVar0, 0)
-        EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Inspect_PickUpPrompt, 160, 40)
-        EVT_CALL(ShowChoice, MSG_Choice_000D)
-        EVT_CALL(CloseMessage)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(AddItem, MV_Socket3_ItemID, LVar0)
-            EVT_IF_EQ(LVar0, -1)
-                EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Inspect_CantCarryMore, 160, 40)
-                EVT_RETURN
-            EVT_END_IF
-            EVT_CALL(N(GetItemIDFromItemEntity), MV_Socket3_ItemEntityID)
-            EVT_CALL(RemoveItemEntity, MV_Socket3_ItemEntityID)
-            EVT_SET(MV_Socket3_ItemID, -1)
-            EVT_CALL(N(SerializeItemIDs))
-            EVT_CALL(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_UNIQUE)
-            EVT_SET(LVar2, MODEL_m3_kabe)
-            EVT_SET(LVar4, COLLIDER_o53)
-            EVT_EXEC_WAIT(N(EVS_TakeItemFromSocket))
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(MV_Socket3_ItemID, -1)
+        Call(ShowConsumableChoicePopup)
+        Call(CloseChoicePopup)
+        IfEq(LVar0, 0)
+            Call(ShowMessageAtScreenPos, MSG_Menus_SAM09_PlaceItemTip, 160, 40)
+            Return
+        EndIf
+        IfEq(LVar0, -1)
+            Return
+        EndIf
+        Set(MV_Socket3_ItemID, LVar0)
+        Call(N(SerializeItemIDs))
+        Call(RemoveItem, LVar0, LVar2)
+        Call(MakeItemEntity, LVar0, 265, 30, -50, ITEM_SPAWN_MODE_DECORATION, 0)
+        Set(MV_Socket3_ItemEntityID, LVar0)
+        Set(LVar2, MODEL_m3_kabe)
+        Set(LVar4, COLLIDER_o53)
+        ExecWait(N(EVS_PlaceItemInSocket))
+        Return
+    Else
+        Set(LVar0, MV_Socket3_ItemEntityID)
+        Call(N(GetItemIDFromItemEntity), LVar0)
+        Call(N(GetItemName), LVar0)
+        Call(SetMessageText, LVar0, 0)
+        Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_PickUpPrompt, 160, 40)
+        Call(ShowChoice, MSG_Choice_000D)
+        Call(CloseMessage)
+        IfEq(LVar0, 0)
+            Call(AddItem, MV_Socket3_ItemID, LVar0)
+            IfEq(LVar0, -1)
+                Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_CantCarryMore, 160, 40)
+                Return
+            EndIf
+            Call(N(GetItemIDFromItemEntity), MV_Socket3_ItemEntityID)
+            Call(RemoveItemEntity, MV_Socket3_ItemEntityID)
+            Set(MV_Socket3_ItemID, -1)
+            Call(N(SerializeItemIDs))
+            Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_UNIQUE)
+            Set(LVar2, MODEL_m3_kabe)
+            Set(LVar4, COLLIDER_o53)
+            ExecWait(N(EVS_TakeItemFromSocket))
+            Return
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Interact_ItemSockets) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_LABEL(0)
-    EVT_CALL(GetPlayerActionState, LVar0)
-    EVT_WAIT(1)
-    EVT_IF_NE(LVar0, ACTION_STATE_IDLE)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
-    EVT_IF_LT(LVar1, -150)
-        EVT_EXEC_WAIT(N(EVS_UseSocket1))
-    EVT_ELSE
-        EVT_IF_LT(LVar1, 100)
-            EVT_EXEC_WAIT(N(EVS_UseSocket2))
-        EVT_ELSE
-            EVT_EXEC_WAIT(N(EVS_UseSocket3))
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Label(0)
+    Call(GetPlayerActionState, LVar0)
+    Wait(1)
+    IfNe(LVar0, ACTION_STATE_IDLE)
+        Goto(0)
+    EndIf
+    Call(GetPlayerPos, LVar1, LVar2, LVar3)
+    IfLt(LVar1, -150)
+        ExecWait(N(EVS_UseSocket1))
+    Else
+        IfLt(LVar1, 100)
+            ExecWait(N(EVS_UseSocket2))
+        Else
+            ExecWait(N(EVS_UseSocket3))
+        EndIf
+    EndIf
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupSockets) = {
-    EVT_CALL(ParentColliderToModel, COLLIDER_o55, MODEL_m1_kabe)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o54, MODEL_m2_kabe)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o53, MODEL_m3_kabe)
-    EVT_IF_EQ(GF_SAM09_Visited, FALSE)
-        EVT_SET(GF_SAM09_Visited, TRUE)
-        EVT_SET(MV_Socket1_ItemID, ITEM_SHOOTING_STAR)
-        EVT_SET(MV_Socket2_ItemID, ITEM_SNOWMAN_DOLL)
-        EVT_SET(MV_Socket3_ItemID, ITEM_THUNDER_RAGE)
-        EVT_CALL(N(SerializeItemIDs))
-    EVT_END_IF
-    EVT_CALL(N(DeserializeItemIDs))
-    EVT_IF_NE(MV_Socket1_ItemID, -1)
-        EVT_CALL(TranslateModel, MODEL_m1_kabe, 0, 130, 0)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o55)
-        EVT_CALL(MakeItemEntity, MV_Socket1_ItemID, -385, 30, -50, ITEM_SPAWN_MODE_DECORATION, 0)
-        EVT_SET(MV_Socket1_ItemEntityID, LVar0)
-    EVT_END_IF
-    EVT_IF_NE(MV_Socket2_ItemID, -1)
-        EVT_CALL(TranslateModel, MODEL_m2_kabe, 0, 130, 0)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o54)
-        EVT_CALL(MakeItemEntity, MV_Socket2_ItemID, -35, 30, -50, ITEM_SPAWN_MODE_DECORATION, 0)
-        EVT_SET(MV_Socket2_ItemEntityID, LVar0)
-    EVT_END_IF
-    EVT_IF_NE(MV_Socket3_ItemID, -1)
-        EVT_CALL(TranslateModel, MODEL_m3_kabe, 0, 130, 0)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o53)
-        EVT_CALL(MakeItemEntity, MV_Socket3_ItemID, 265, 30, -50, ITEM_SPAWN_MODE_DECORATION, 0)
-        EVT_SET(MV_Socket3_ItemEntityID, LVar0)
-    EVT_END_IF
-    EVT_CALL(N(CreateConsumableItemList))
-    EVT_BIND_PADLOCK(EVT_PTR(N(EVS_Interact_ItemSockets)), TRIGGER_WALL_PRESS_A, COLLIDER_hako, LVar0, 0, 1)
-    EVT_RETURN
-    EVT_END
+    Call(ParentColliderToModel, COLLIDER_o55, MODEL_m1_kabe)
+    Call(ParentColliderToModel, COLLIDER_o54, MODEL_m2_kabe)
+    Call(ParentColliderToModel, COLLIDER_o53, MODEL_m3_kabe)
+    IfEq(GF_SAM09_Visited, FALSE)
+        Set(GF_SAM09_Visited, TRUE)
+        Set(MV_Socket1_ItemID, ITEM_SHOOTING_STAR)
+        Set(MV_Socket2_ItemID, ITEM_SNOWMAN_DOLL)
+        Set(MV_Socket3_ItemID, ITEM_THUNDER_RAGE)
+        Call(N(SerializeItemIDs))
+    EndIf
+    Call(N(DeserializeItemIDs))
+    IfNe(MV_Socket1_ItemID, -1)
+        Call(TranslateModel, MODEL_m1_kabe, 0, 130, 0)
+        Call(UpdateColliderTransform, COLLIDER_o55)
+        Call(MakeItemEntity, MV_Socket1_ItemID, -385, 30, -50, ITEM_SPAWN_MODE_DECORATION, 0)
+        Set(MV_Socket1_ItemEntityID, LVar0)
+    EndIf
+    IfNe(MV_Socket2_ItemID, -1)
+        Call(TranslateModel, MODEL_m2_kabe, 0, 130, 0)
+        Call(UpdateColliderTransform, COLLIDER_o54)
+        Call(MakeItemEntity, MV_Socket2_ItemID, -35, 30, -50, ITEM_SPAWN_MODE_DECORATION, 0)
+        Set(MV_Socket2_ItemEntityID, LVar0)
+    EndIf
+    IfNe(MV_Socket3_ItemID, -1)
+        Call(TranslateModel, MODEL_m3_kabe, 0, 130, 0)
+        Call(UpdateColliderTransform, COLLIDER_o53)
+        Call(MakeItemEntity, MV_Socket3_ItemID, 265, 30, -50, ITEM_SPAWN_MODE_DECORATION, 0)
+        Set(MV_Socket3_ItemEntityID, LVar0)
+    EndIf
+    Call(N(CreateConsumableItemList))
+    BindPadlock(Ref(N(EVS_Interact_ItemSockets)), TRIGGER_WALL_PRESS_A, COLLIDER_hako, LVar0, 0, 1)
+    Return
+    End
 };

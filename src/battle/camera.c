@@ -36,106 +36,106 @@ s8 BattleCam_IsFrozen = FALSE;
 s32 BattleCam_CurrentPresetID = -1;
 
 EvtScript CamPreset_B = {
-    EVT_CALL(CamPresetUpdate_B)
-    EVT_RETURN
-    EVT_END
+    Call(CamPresetUpdate_B)
+    Return
+    End
 };
 
 EvtScript CamPreset_F = {
-    EVT_CALL(CamPresetUpdate_F)
-    EVT_RETURN
-    EVT_END
+    Call(CamPresetUpdate_F)
+    Return
+    End
 };
 
 EvtScript CamPreset_M = {
-    EVT_CALL(CamPresetUpdate_M)
-    EVT_RETURN
-    EVT_END
+    Call(CamPresetUpdate_M)
+    Return
+    End
 };
 
 EvtScript CamPreset_G = {
-    EVT_CALL(CamPresetUpdate_G)
-    EVT_RETURN
-    EVT_END
+    Call(CamPresetUpdate_G)
+    Return
+    End
 };
 
 EvtScript CamPreset_I = {
-    EVT_CALL(CamPresetUpdate_I)
-    EVT_RETURN
-    EVT_END
+    Call(CamPresetUpdate_I)
+    Return
+    End
 };
 
 EvtScript CamPreset_H = {
-    EVT_CALL(CamPresetUpdate_H)
-    EVT_RETURN
-    EVT_END
+    Call(CamPresetUpdate_H)
+    Return
+    End
 };
 
 EvtScript CamPreset_N = {
-    EVT_CALL(CamPresetUpdate_N)
-    EVT_RETURN
-    EVT_END
+    Call(CamPresetUpdate_N)
+    Return
+    End
 };
 
 EvtScript EVS_BattleCam_Default = {
-    EVT_CALL(BattleCamImpl_Default)
-    EVT_RETURN
-    EVT_END
+    Call(BattleCamImpl_Default)
+    Return
+    End
 };
 
 EvtScript CamPreset_D = {
-    EVT_CALL(CamPresetUpdate_D)
-    EVT_RETURN
-    EVT_END
+    Call(CamPresetUpdate_D)
+    Return
+    End
 };
 
 EvtScript CamPreset_E = {
-    EVT_CALL(CamPresetUpdate_E)
-    EVT_RETURN
-    EVT_END
+    Call(CamPresetUpdate_E)
+    Return
+    End
 };
 
 EvtScript CamPreset_J = {
-    EVT_CALL(CamPresetUpdate_J)
-    EVT_RETURN
-    EVT_END
+    Call(CamPresetUpdate_J)
+    Return
+    End
 };
 
 EvtScript CamPreset_K = {
-    EVT_CALL(CamPresetUpdate_K)
-    EVT_RETURN
-    EVT_END
+    Call(CamPresetUpdate_K)
+    Return
+    End
 };
 
 EvtScript CamPreset_L = {
-    EVT_CALL(CamPresetUpdate_L)
-    EVT_RETURN
-    EVT_END
+    Call(CamPresetUpdate_L)
+    Return
+    End
 };
 
 EvtScript CamPreset_A = {
-    EVT_CALL(SetBattleCamPos, 0, 15, 0)
-    EVT_CALL(SetBattleCamParam, AUX_CAM_BOOM_LENGTH, 550)
-    EVT_CALL(SetBattleCamParam, AUX_CAM_PARAM_3, 100)
-    EVT_CALL(SetBattleCamParam, AUX_CAM_BOOM_PITCH, 8)
-    EVT_RETURN
-    EVT_END
+    Call(SetBattleCamPos, 0, 15, 0)
+    Call(SetBattleCamParam, AUX_CAM_BOOM_LENGTH, 550)
+    Call(SetBattleCamParam, AUX_CAM_PARAM_3, 100)
+    Call(SetBattleCamParam, AUX_CAM_BOOM_PITCH, 8)
+    Return
+    End
 };
 
 EvtScript EVS_OnBattleInit = {
-    EVT_CALL(SetCamPerspective, CAM_BATTLE, CAM_UPDATE_MODE_6, 25, 16, 1024)
-    EVT_CALL(SetCamViewport, CAM_BATTLE, 12, 20, 296, 200)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetCamEnabled, CAM_BATTLE, TRUE)
-    EVT_WAIT(1)
-    EVT_CALL(InitVirtualEntityList)
-    EVT_CALL(InitAnimatedModels)
-    EVT_CALL(func_802CABE8, CAM_BATTLE, 0, 240, 100, 8)
-    EVT_CALL(func_802CAE50, CAM_BATTLE, -75, 35, 0)
-    EVT_CALL(BattleCamTargetActor, 0)
-    EVT_CALL(func_8024CE9C)
-    EVT_RETURN
-    EVT_END
+    Call(SetCamPerspective, CAM_BATTLE, CAM_UPDATE_MODE_6, 25, 16, 1024)
+    Call(SetCamViewport, CAM_BATTLE, 12, 20, 296, 200)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Call(SetCamEnabled, CAM_BATTLE, TRUE)
+    Wait(1)
+    Call(InitVirtualEntityList)
+    Call(InitAnimatedModels)
+    Call(func_802CABE8, CAM_BATTLE, 0, 240, 100, 8)
+    Call(func_802CAE50, CAM_BATTLE, -75, 35, 0)
+    Call(BattleCamTargetActor, 0)
+    Call(func_8024CE9C)
+    Return
+    End
 };
 
 API_CALLABLE(CamPresetUpdate_B) {

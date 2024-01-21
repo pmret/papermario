@@ -189,649 +189,649 @@ ActorBlueprint NAMESPACE = {
 #include "common/GetItemEntityPosition.inc.c"
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TurnCount, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceShockwave, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceClawSwipe, 3)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceBodySlam, 3)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceStarBeam, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceRecover, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_RecoversLeft, 3)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unused, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_CommandLossState, AVAL_LossState_Idle)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_CommandLossItemIdx, 0)
-    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.5), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
-    EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 1, 150, 0, 0, 0)
-    EVT_EXEC(N(EVS_AnimateImgFX))
-    EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 150, 150, 0, 0)
-    EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_BOWSER_AURA)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_FINAL_BOWSER_PART_1 | BS_FLAGS2_DONT_STOP_MUSIC, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(SetActorVar, ACTOR_SELF, AVAR_TurnCount, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceShockwave, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceClawSwipe, 3)
+    Call(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceBodySlam, 3)
+    Call(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceStarBeam, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceRecover, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_RecoversLeft, 3)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Unused, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_CommandLossState, AVAL_LossState_Idle)
+    Call(SetActorVar, ACTOR_SELF, AVAR_CommandLossItemIdx, 0)
+    Call(SetActorScale, ACTOR_SELF, Float(1.5), Float(1.5), Float(1.0))
+    Call(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 1, 150, 0, 0, 0)
+    Exec(N(EVS_AnimateImgFX))
+    Call(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 150, 150, 0, 0)
+    Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_BOWSER_AURA)
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(SetBattleFlagBits2, BS_FLAGS2_FINAL_BOWSER_PART_1 | BS_FLAGS2_DONT_STOP_MUSIC, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar3)
-    EVT_LABEL(0)
-        EVT_CALL(ActorExists, ACTOR_SELF, LVarB)
-        EVT_IF_EQ(LVarB, 0)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarB)
-        EVT_IF_NOT_FLAG(LVarB, STATUS_FLAG_SHRINK)
-            EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 150, 150, 255, 0)
-            EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 1, 150, 0, 0, 0)
-        EVT_ELSE
-            EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 60, 60, 255, 0)
-            EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 1, 60, 0, 0, 0)
-        EVT_END_IF
-        EVT_EXEC_WAIT(N(EVS_PlayFootstepSounds))
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar3)
+    Label(0)
+        Call(ActorExists, ACTOR_SELF, LVarB)
+        IfEq(LVarB, 0)
+            Return
+        EndIf
+        Call(GetStatusFlags, ACTOR_SELF, LVarB)
+        IfNotFlag(LVarB, STATUS_FLAG_SHRINK)
+            Call(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 150, 150, 255, 0)
+            Call(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 1, 150, 0, 0, 0)
+        Else
+            Call(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 60, 60, 255, 0)
+            Call(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 1, 60, 0, 0, 0)
+        EndIf
+        ExecWait(N(EVS_PlayFootstepSounds))
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetLastElement, LVarE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
-        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
-        EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET(LVar1, ANIM_BattleBowser_Hurt)
-            EVT_EXEC_WAIT(N(EVS_Hit))
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET(LVar0, 1)
-            EVT_SET(LVar1, ANIM_BattleBowser_BurnHurt)
-            EVT_SET(LVar2, ANIM_BattleBowser_BurnStill)
-            EVT_EXEC_WAIT(N(EVS_BurnHit))
-        EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_SET(LVar0, 1)
-            EVT_SET(LVar1, ANIM_BattleBowser_BurnHurt)
-            EVT_SET(LVar2, ANIM_BattleBowser_BurnStill)
-            EVT_EXEC_WAIT(N(EVS_BurnHit))
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_SET(LVar1, ANIM_BattleBowser_Hurt)
-            EVT_EXEC_WAIT(N(EVS_Hit))
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
-            EVT_EXEC_WAIT(N(EVS_Hit))
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
-            EVT_EXEC_WAIT(N(EVS_ShockReaction))
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-        EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
-            EVT_EXEC_WAIT(N(EVS_ShockReaction))
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_CALL(GetDamageSource, LVar2)
-            EVT_SWITCH(LVar2)
-                EVT_CASE_OR_EQ(DMG_SRC_SPOOK)
-                EVT_CASE_OR_EQ(DMG_SRC_FRIGHT_JAR)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Mock)
-                    EVT_WAIT(30)
-                EVT_END_CASE_GROUP
-                EVT_CASE_DEFAULT
-                    EVT_SET(LVar1, ANIM_BattleBowser_Mock)
-                    EVT_EXEC_WAIT(N(EVS_NoDamageHit))
-            EVT_END_SWITCH
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET(LVar1, ANIM_BattleBowser_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_CASE_EQ(EVENT_SPIKE_TAUNT)
-        EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
-            EVT_EXEC_WAIT(N(EVS_Hit))
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
-        EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleBowser_Jump)
-            EVT_EXEC_WAIT(EVS_Enemy_Recover)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostJump)
-            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(3.0))
-        EVT_CASE_EQ(EVENT_RECEIVE_BUFF)
-            EVT_CALL(N(FadeBackgroundLighten))
-        EVT_CASE_EQ(EVENT_30)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_WAIT(1000)
-        EVT_CASE_EQ(EVENT_INVUNERABLE_TAUNT)
-            EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
-            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
-                EVT_SET(LVar3, 60)
-                EVT_SET(LVar4, 97)
-            EVT_ELSE
-                EVT_SET(LVar3, 24)
-                EVT_SET(LVar4, 39)
-            EVT_END_IF
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar1, LVar3)
-            EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 20, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_RearUpLaugh)
-            EVT_WAIT(30)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar0, 15)
-            EVT_ADD(LVar1, LVar4)
-            EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-            EVT_CALL(SetBattleCamZoom, 420)
-            EVT_CALL(SetBattleCamOffsetZ, 0)
-            EVT_CALL(MoveBattleCamOver, 30)
-            EVT_WAIT(30)
-            EVT_CALL(ActorSpeak, MSG_CH8_0085, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Mock, ANIM_BattleBowser_Mock)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
-            EVT_CALL(BattleCamTargetActor, ACTOR_PLAYER)
-            EVT_CALL(MoveBattleCamOver, 20)
-            EVT_WAIT(20)
-            EVT_CALL(GetCurrentPartnerID, LVar0)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(PARTNER_KOOPER)
-                    EVT_CALL(ActorSpeak, MSG_CH8_0087, ACTOR_PARTNER, 0, -1, -1)
-                EVT_CASE_EQ(PARTNER_BOMBETTE)
-                    EVT_CALL(ActorSpeak, MSG_CH8_0088, ACTOR_PARTNER, 0, -1, -1)
-                EVT_CASE_EQ(PARTNER_PARAKARRY)
-                    EVT_CALL(ActorSpeak, MSG_CH8_0089, ACTOR_PARTNER, 0, -1, -1)
-                EVT_CASE_EQ(PARTNER_BOW)
-                    EVT_CALL(ActorSpeak, MSG_CH8_008A, ACTOR_PARTNER, 0, -1, -1)
-                EVT_CASE_EQ(PARTNER_WATT)
-                    EVT_CALL(ActorSpeak, MSG_CH8_008B, ACTOR_PARTNER, 0, -1, -1)
-                EVT_CASE_EQ(PARTNER_SUSHIE)
-                    EVT_CALL(ActorSpeak, MSG_CH8_008C, ACTOR_PARTNER, 0, -1, -1)
-                EVT_CASE_EQ(PARTNER_LAKILESTER)
-                    EVT_CALL(ActorSpeak, MSG_CH8_008D, ACTOR_PARTNER, 0, -1, -1)
-                EVT_CASE_DEFAULT
-                    EVT_CALL(ActorSpeak, MSG_CH8_0086, ACTOR_PARTNER, 0, -1, -1)
-            EVT_END_SWITCH
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(MoveBattleCamOver, 30)
-            EVT_CALL(GetActorHP, ACTOR_SELF, GB_FinalBowserHP)
-            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
-            EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, TRUE)
-            EVT_CALL(SetEndBattleFadeOutRate, 20)
-            EVT_RETURN
-        EVT_CASE_EQ(20)
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetLastElement, LVarE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseEq(EVENT_BEGIN_FIRST_STRIKE)
+        CaseOrEq(EVENT_HIT_COMBO)
+        CaseOrEq(EVENT_HIT)
+            Set(LVar1, ANIM_BattleBowser_Hurt)
+            ExecWait(N(EVS_Hit))
+            Return
+        EndCaseGroup
+        CaseEq(EVENT_BURN_HIT)
+            Set(LVar0, 1)
+            Set(LVar1, ANIM_BattleBowser_BurnHurt)
+            Set(LVar2, ANIM_BattleBowser_BurnStill)
+            ExecWait(N(EVS_BurnHit))
+        CaseEq(EVENT_BURN_DEATH)
+            Set(LVar0, 1)
+            Set(LVar1, ANIM_BattleBowser_BurnHurt)
+            Set(LVar2, ANIM_BattleBowser_BurnStill)
+            ExecWait(N(EVS_BurnHit))
+            Return
+        CaseEq(EVENT_SPIN_SMASH_HIT)
+            Set(LVar1, ANIM_BattleBowser_Hurt)
+            ExecWait(N(EVS_Hit))
+            Return
+        CaseEq(EVENT_SPIN_SMASH_DEATH)
+            SetConst(LVar1, ANIM_BattleBowser_Hurt)
+            ExecWait(N(EVS_Hit))
+            Return
+        CaseEq(EVENT_SHOCK_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleBowser_Hurt)
+            ExecWait(EVS_Enemy_ShockHit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleBowser_Hurt)
+            ExecWait(N(EVS_ShockReaction))
+            Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
+            Set(LVar1, ANIM_BattleBowser_Walk)
+            ExecWait(N(EVS_ReturnHome))
+        CaseEq(EVENT_SHOCK_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleBowser_Hurt)
+            ExecWait(EVS_Enemy_ShockHit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleBowser_Hurt)
+            ExecWait(N(EVS_ShockReaction))
+            Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
+            Set(LVar1, ANIM_BattleBowser_Walk)
+            ExecWait(N(EVS_ReturnHome))
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
+            Call(GetDamageSource, LVar2)
+            Switch(LVar2)
+                CaseOrEq(DMG_SRC_SPOOK)
+                CaseOrEq(DMG_SRC_FRIGHT_JAR)
+                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Mock)
+                    Wait(30)
+                EndCaseGroup
+                CaseDefault
+                    Set(LVar1, ANIM_BattleBowser_Mock)
+                    ExecWait(N(EVS_NoDamageHit))
+            EndSwitch
+        EndCaseGroup
+        CaseEq(EVENT_AIR_LIFT_FAILED)
+            SetConst(LVar0, PRT_MAIN)
+            Set(LVar1, ANIM_BattleBowser_Idle)
+            ExecWait(EVS_Enemy_NoDamageHit)
+        CaseEq(EVENT_SPIKE_TAUNT)
+        CaseEq(EVENT_DEATH)
+            SetConst(LVar1, ANIM_BattleBowser_Hurt)
+            ExecWait(N(EVS_Hit))
+            Return
+        CaseEq(EVENT_END_FIRST_STRIKE)
+        CaseEq(EVENT_RECOVER_STATUS)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleBowser_Jump)
+            ExecWait(EVS_Enemy_Recover)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostJump)
+            Call(ShakeCam, CAM_BATTLE, 0, 4, Float(3.0))
+        CaseEq(EVENT_RECEIVE_BUFF)
+            Call(N(FadeBackgroundLighten))
+        CaseEq(EVENT_30)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleBowser_Hurt)
+            ExecWait(EVS_Enemy_Hit)
+            Wait(1000)
+        CaseEq(EVENT_INVUNERABLE_TAUNT)
+            Call(GetStatusFlags, ACTOR_SELF, LVar3)
+            IfNotFlag(LVar3, STATUS_FLAG_SHRINK)
+                Set(LVar3, 60)
+                Set(LVar4, 97)
+            Else
+                Set(LVar3, 24)
+                Set(LVar4, 39)
+            EndIf
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Add(LVar1, LVar3)
+            PlayEffect(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, Float(1.5), 20, 0)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_RearUpLaugh)
+            Wait(30)
+            Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Sub(LVar0, 15)
+            Add(LVar1, LVar4)
+            Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+            Call(SetBattleCamZoom, 420)
+            Call(SetBattleCamOffsetZ, 0)
+            Call(MoveBattleCamOver, 30)
+            Wait(30)
+            Call(ActorSpeak, MSG_CH8_0085, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Mock, ANIM_BattleBowser_Mock)
+            Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+            Call(BattleCamTargetActor, ACTOR_PLAYER)
+            Call(MoveBattleCamOver, 20)
+            Wait(20)
+            Call(GetCurrentPartnerID, LVar0)
+            Switch(LVar0)
+                CaseEq(PARTNER_KOOPER)
+                    Call(ActorSpeak, MSG_CH8_0087, ACTOR_PARTNER, 0, -1, -1)
+                CaseEq(PARTNER_BOMBETTE)
+                    Call(ActorSpeak, MSG_CH8_0088, ACTOR_PARTNER, 0, -1, -1)
+                CaseEq(PARTNER_PARAKARRY)
+                    Call(ActorSpeak, MSG_CH8_0089, ACTOR_PARTNER, 0, -1, -1)
+                CaseEq(PARTNER_BOW)
+                    Call(ActorSpeak, MSG_CH8_008A, ACTOR_PARTNER, 0, -1, -1)
+                CaseEq(PARTNER_WATT)
+                    Call(ActorSpeak, MSG_CH8_008B, ACTOR_PARTNER, 0, -1, -1)
+                CaseEq(PARTNER_SUSHIE)
+                    Call(ActorSpeak, MSG_CH8_008C, ACTOR_PARTNER, 0, -1, -1)
+                CaseEq(PARTNER_LAKILESTER)
+                    Call(ActorSpeak, MSG_CH8_008D, ACTOR_PARTNER, 0, -1, -1)
+                CaseDefault
+                    Call(ActorSpeak, MSG_CH8_0086, ACTOR_PARTNER, 0, -1, -1)
+            EndSwitch
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(MoveBattleCamOver, 30)
+            Call(GetActorHP, ACTOR_SELF, GB_FinalBowserHP)
+            Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+            Call(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, TRUE)
+            Call(SetEndBattleFadeOutRate, 20)
+            Return
+        CaseEq(20)
+        CaseDefault
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Hit) = {
-    EVT_EXEC_WAIT(N(EVS_Hit_Inner))
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_Hit_Inner))
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Hit_Inner) = {
-    EVT_SET_CONST(LVar0, PRT_MAIN)
-    EVT_EXEC_WAIT(EVS_Enemy_Hit)
-    EVT_RETURN
-    EVT_END
+    SetConst(LVar0, PRT_MAIN)
+    ExecWait(EVS_Enemy_Hit)
+    Return
+    End
 };
 
 EvtScript N(EVS_Death) = {
-    EVT_SET_CONST(LVar0, PRT_MAIN)
-    EVT_EXEC_WAIT(EVS_Enemy_Hit)
-    EVT_SET_CONST(LVar0, PRT_MAIN)
-    EVT_EXEC_WAIT(EVS_Enemy_Death)
-    EVT_RETURN
-    EVT_END
+    SetConst(LVar0, PRT_MAIN)
+    ExecWait(EVS_Enemy_Hit)
+    SetConst(LVar0, PRT_MAIN)
+    ExecWait(EVS_Enemy_Death)
+    Return
+    End
 };
 
 EvtScript N(EVS_NoDamageHit) = {
-    EVT_SET_CONST(LVar0, PRT_MAIN)
-    EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-    EVT_RETURN
-    EVT_END
+    SetConst(LVar0, PRT_MAIN)
+    ExecWait(EVS_Enemy_NoDamageHit)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_EXEC_WAIT(N(EVS_TakeTurn_Inner))
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    ExecWait(N(EVS_TakeTurn_Inner))
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Move_UseStarRod) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
-    EVT_EXEC_WAIT(N(EVS_StarRodCast))
-    EVT_RETURN
-    EVT_END
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
+    ExecWait(N(EVS_StarRodCast))
+    Return
+    End
 };
 
 EvtScript N(EVS_ReturnHome) = {
-    EVT_SET(LVar0, 1)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
-    EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVarD, LVarE, LVarF)
-    EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-    EVT_CALL(GetDist2D, LVar9, LVarA, LVarC, LVarD, LVarF)
-    EVT_IF_GE(LVar9, EVT_FLOAT(5.0))
-        EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-        EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_END_IF
-    EVT_IF_EQ(LVarB, 180)
-        EVT_LOOP(15)
-            EVT_SUB(LVarB, 12)
-            EVT_CALL(SetActorYaw, ACTOR_SELF, LVarB)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_IF
-    EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, 1)
+    Call(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
+    Call(SetGoalToHome, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVarD, LVarE, LVarF)
+    Call(SetActorYaw, ACTOR_SELF, 0)
+    Call(GetDist2D, LVar9, LVarA, LVarC, LVarD, LVarF)
+    IfGe(LVar9, Float(5.0))
+        Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
+        Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    EndIf
+    IfEq(LVarB, 180)
+        Loop(15)
+            Sub(LVarB, 12)
+            Call(SetActorYaw, ACTOR_SELF, LVarB)
+            Wait(1)
+        EndLoop
+    EndIf
+    Call(SetActorYaw, ACTOR_SELF, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_AnimateImgFX) = {
-    EVT_CALL(N(UpdateEnchantedBowserColors))
-    EVT_RETURN
-    EVT_END
+    Call(N(UpdateEnchantedBowserColors))
+    Return
+    End
 };
 
 EvtScript N(EVS_StarRodCast) = {
-    EVT_CALL(N(FadeBackgroundDarken))
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
-        EVT_ADD(LVar0, 22)
-        EVT_ADD(LVar1, 135)
-        EVT_THREAD
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_GATHER)
-            EVT_ADD(LVar2, 10)
-            EVT_CALL(N(StarRodAppearEffect), LVar0, LVar1, LVar2, EVT_FLOAT(2.5), EVT_FLOAT(0.075))
-        EVT_END_THREAD
-    EVT_ELSE
-        EVT_ADD(LVar0, 9)
-        EVT_ADD(LVar1, 54)
-        EVT_THREAD
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_GATHER)
-            EVT_ADD(LVar2, 10)
-            EVT_CALL(N(StarRodAppearEffect), LVar0, LVar1, LVar2, EVT_FLOAT(2.5), EVT_FLOAT(0.03))
-        EVT_END_THREAD
-    EVT_END_IF
-    EVT_WAIT(65)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
-        EVT_ADD(LVar0, 22)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, LVar0, 135, LVar2, EVT_FLOAT(1.5), LVarF, 0)
-        EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 135, LVar2, EVT_FLOAT(1.0), LVarE, 0)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 135, LVar2, EVT_FLOAT(1.5), LVarD, 0)
-    EVT_ELSE
-        EVT_ADD(LVar0, 9)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, LVar0, 54, LVar2, EVT_FLOAT(0.6), LVarF, 0)
-        EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 54, LVar2, EVT_FLOAT(0.4), LVarE, 0)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 54, LVar2, EVT_FLOAT(0.6), LVarD, 0)
-    EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_USE)
-    EVT_WAIT(30)
-    EVT_CALL(RemoveEffect, LVarF)
-    EVT_CALL(RemoveEffect, LVarE)
-    EVT_CALL(RemoveEffect, LVarD)
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED, TRUE)
-    EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 1, ACTOR_DECORATION_RADIAL_STAR_EMITTER)
-    EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(BoostedDefense)))
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(BoostedStatusTable)))
-    EVT_CALL(N(RemoveChillOut))
-    EVT_WAIT(3)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
-    EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 60)
-        EVT_ADD(LVar2, 12)
-        EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 3, LVar0, LVar1, LVar2, 105, 120, 37, 60, 0)
-    EVT_ELSE
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 24)
-        EVT_ADD(LVar2, 12)
-        EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 3, LVar0, LVar1, LVar2, 42, 48, 15, 60, 0)
-    EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_ENCHANT)
-    EVT_THREAD
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(N(StarRodPowerUpEffect), LVar0, LVar1, LVar2, EVT_FLOAT(1.2))
-    EVT_END_THREAD
-    EVT_WAIT(75)
-    EVT_THREAD
-        EVT_CALL(N(FadeBackgroundLighten))
-    EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_RearUpLaugh)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
-        EVT_ADD(LVar1, 60)
-    EVT_ELSE
-        EVT_ADD(LVar1, 24)
-    EVT_END_IF
-    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 15, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_SHOCKWAVE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 39)
-    EVT_WAIT(30)
-    EVT_RETURN
-    EVT_END
+    Call(N(FadeBackgroundDarken))
+    Call(GetStatusFlags, ACTOR_SELF, LVar3)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    IfNotFlag(LVar3, STATUS_FLAG_SHRINK)
+        Add(LVar0, 22)
+        Add(LVar1, 135)
+        Thread
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_GATHER)
+            Add(LVar2, 10)
+            Call(N(StarRodAppearEffect), LVar0, LVar1, LVar2, Float(2.5), Float(0.075))
+        EndThread
+    Else
+        Add(LVar0, 9)
+        Add(LVar1, 54)
+        Thread
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_GATHER)
+            Add(LVar2, 10)
+            Call(N(StarRodAppearEffect), LVar0, LVar1, LVar2, Float(2.5), Float(0.03))
+        EndThread
+    EndIf
+    Wait(65)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    IfNotFlag(LVar3, STATUS_FLAG_SHRINK)
+        Add(LVar0, 22)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_LIGHT_RAYS, 2, LVar0, 135, LVar2, Float(1.5), LVarF, 0)
+        PlayEffect(EFFECT_BULB_GLOW, 2, LVar0, 135, LVar2, Float(1.0), LVarE, 0)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_BULB_GLOW, 2, LVar0, 135, LVar2, Float(1.5), LVarD, 0)
+    Else
+        Add(LVar0, 9)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_LIGHT_RAYS, 2, LVar0, 54, LVar2, Float(0.6), LVarF, 0)
+        PlayEffect(EFFECT_BULB_GLOW, 2, LVar0, 54, LVar2, Float(0.4), LVarE, 0)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_BULB_GLOW, 2, LVar0, 54, LVar2, Float(0.6), LVarD, 0)
+    EndIf
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_USE)
+    Wait(30)
+    Call(RemoveEffect, LVarF)
+    Call(RemoveEffect, LVarE)
+    Call(RemoveEffect, LVarD)
+    Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED, TRUE)
+    Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 1, ACTOR_DECORATION_RADIAL_STAR_EMITTER)
+    Call(SetDefenseTable, ACTOR_SELF, PRT_MAIN, Ref(N(BoostedDefense)))
+    Call(SetStatusTable, ACTOR_SELF, Ref(N(BoostedStatusTable)))
+    Call(N(RemoveChillOut))
+    Wait(3)
+    Call(GetStatusFlags, ACTOR_SELF, LVar3)
+    IfNotFlag(LVar3, STATUS_FLAG_SHRINK)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar1, 60)
+        Add(LVar2, 12)
+        PlayEffect(EFFECT_STARS_SHIMMER, 3, LVar0, LVar1, LVar2, 105, 120, 37, 60, 0)
+    Else
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar1, 24)
+        Add(LVar2, 12)
+        PlayEffect(EFFECT_STARS_SHIMMER, 3, LVar0, LVar1, LVar2, 42, 48, 15, 60, 0)
+    EndIf
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_ENCHANT)
+    Thread
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Call(N(StarRodPowerUpEffect), LVar0, LVar1, LVar2, Float(1.2))
+    EndThread
+    Wait(75)
+    Thread
+        Call(N(FadeBackgroundLighten))
+    EndThread
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_RearUpLaugh)
+    Call(GetStatusFlags, ACTOR_SELF, LVar3)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    IfNotFlag(LVar3, STATUS_FLAG_SHRINK)
+        Add(LVar1, 60)
+    Else
+        Add(LVar1, 24)
+    EndIf
+    PlayEffect(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, Float(1.5), 15, 0)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_SHOCKWAVE)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 39)
+    Wait(30)
+    Return
+    End
 };
 
 EvtScript N(EVS_ShockReaction) = {
-    EVT_IF_NE(LVar1, -1)
-        EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-    EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
-    EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar2, LVar3, LVar4)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar5, LVar6, LVar7)
-    EVT_SET(LVar8, LVar2)
-    EVT_ADD(LVar8, LVar5)
-    EVT_DIV(LVar8, 2)
-    EVT_SET(LVar9, LVar4)
-    EVT_ADD(LVar9, LVar7)
-    EVT_DIV(LVar9, 2)
-    EVT_CALL(SetGoalPos, ACTOR_SELF, LVar8, 0, LVar9)
-    EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-    EVT_ADD(LVar8, LVar2)
-    EVT_DIV(LVar8, 2)
-    EVT_ADD(LVar9, LVar4)
-    EVT_DIV(LVar9, 2)
-    EVT_CALL(SetGoalPos, ACTOR_SELF, LVar8, 0, LVar9)
-    EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-    EVT_CALL(SetGoalPos, ACTOR_SELF, LVar2, LVar3, LVar4)
-    EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfNe(LVar1, -1)
+        Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
+    EndIf
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(SetActorJumpGravity, ACTOR_SELF, Float(1.4))
+    Call(SetGoalToHome, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVar2, LVar3, LVar4)
+    Call(GetActorPos, ACTOR_SELF, LVar5, LVar6, LVar7)
+    Set(LVar8, LVar2)
+    Add(LVar8, LVar5)
+    Div(LVar8, 2)
+    Set(LVar9, LVar4)
+    Add(LVar9, LVar7)
+    Div(LVar9, 2)
+    Call(SetGoalPos, ACTOR_SELF, LVar8, 0, LVar9)
+    Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+    Add(LVar8, LVar2)
+    Div(LVar8, 2)
+    Add(LVar9, LVar4)
+    Div(LVar9, 2)
+    Call(SetGoalPos, ACTOR_SELF, LVar8, 0, LVar9)
+    Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+    Call(SetGoalPos, ACTOR_SELF, LVar2, LVar3, LVar4)
+    Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_PlayFootstepSounds) = {
-    EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar7)
-    EVT_IF_NE(LVar7, ANIM_BattleBowser_Walk)
-        EVT_IF_EQ(LVar3, ANIM_BattleBowser_Walk)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_B)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
-        EVT_END_IF
-        EVT_SET(LVar3, LVar7)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar5, LVar6, LVar7)
-    EVT_SUB(LVar5, LVar0)
-    EVT_IF_GT(LVar5, -30)
-        EVT_IF_LT(LVar5, 30)
-            EVT_SET(LVar3, LVar7)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_B)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
-    EVT_SET(LVar3, LVar7)
-    EVT_RETURN
-    EVT_END
+    Call(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar7)
+    IfNe(LVar7, ANIM_BattleBowser_Walk)
+        IfEq(LVar3, ANIM_BattleBowser_Walk)
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_B)
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
+        EndIf
+        Set(LVar3, LVar7)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Return
+    EndIf
+    Call(GetActorPos, ACTOR_SELF, LVar5, LVar6, LVar7)
+    Sub(LVar5, LVar0)
+    IfGt(LVar5, -30)
+        IfLt(LVar5, 30)
+            Set(LVar3, LVar7)
+            Return
+        EndIf
+    EndIf
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_B)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
+    Set(LVar3, LVar7)
+    Return
+    End
 };
 
 EvtScript N(EVS_Recover) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RecoversLeft, LVar0)
-    EVT_SUB(LVar0, 1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_RecoversLeft, LVar0)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
-    EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_SUB(LVar0, 15)
-        EVT_ADD(LVar1, 97)
-        EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-        EVT_CALL(SetBattleCamZoom, 420)
-        EVT_CALL(SetBattleCamOffsetZ, 0)
-        EVT_CALL(MoveBattleCamOver, 40)
-    EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_SUB(LVar0, 6)
-        EVT_ADD(LVar1, 39)
-        EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-        EVT_CALL(SetBattleCamZoom, 294)
-        EVT_CALL(SetBattleCamOffsetZ, 0)
-        EVT_CALL(MoveBattleCamOver, 40)
-    EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
-    EVT_CALL(N(FadeBackgroundDarken))
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_CAST_RECOVER)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
-    EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 22)
-        EVT_ADD(LVar1, 135)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 2, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 50, 0)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 22)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 5, LVar0, 135, LVar2, EVT_FLOAT(0.45), 30, 0)
-    EVT_ELSE
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 9)
-        EVT_ADD(LVar1, 54)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 2, LVar0, LVar1, LVar2, EVT_FLOAT(0.6), 50, 0)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 9)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 5, LVar0, 54, LVar2, EVT_FLOAT(0.18), 30, 0)
-    EVT_END_IF
-    EVT_WAIT(30)
-    EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar0)
-    EVT_MUL(LVar0, 31)
-    EVT_DIV(LVar0, 100)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEART_BOUNCE)
-        EVT_WAIT(30)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_STAR_BOUNCE_A)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(FreezeBattleState, TRUE)
-        EVT_CALL(HealActor, ACTOR_SELF, LVar0, FALSE)
-        EVT_CALL(FreezeBattleState, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_SELF, AVAR_RecoversLeft, LVar0)
+    Sub(LVar0, 1)
+    Call(SetActorVar, ACTOR_SELF, AVAR_RecoversLeft, LVar0)
+    Call(GetStatusFlags, ACTOR_SELF, LVar3)
+    IfNotFlag(LVar3, STATUS_FLAG_SHRINK)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Sub(LVar0, 15)
+        Add(LVar1, 97)
+        Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+        Call(SetBattleCamZoom, 420)
+        Call(SetBattleCamOffsetZ, 0)
+        Call(MoveBattleCamOver, 40)
+    Else
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Sub(LVar0, 6)
+        Add(LVar1, 39)
+        Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+        Call(SetBattleCamZoom, 294)
+        Call(SetBattleCamOffsetZ, 0)
+        Call(MoveBattleCamOver, 40)
+    EndIf
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
+    Call(N(FadeBackgroundDarken))
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_CAST_RECOVER)
+    Call(GetStatusFlags, ACTOR_SELF, LVar3)
+    IfNotFlag(LVar3, STATUS_FLAG_SHRINK)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar0, 22)
+        Add(LVar1, 135)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_ENERGY_IN_OUT, 2, LVar0, LVar1, LVar2, Float(1.5), 50, 0)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar0, 22)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_RADIAL_SHIMMER, 5, LVar0, 135, LVar2, Float(0.45), 30, 0)
+    Else
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar0, 9)
+        Add(LVar1, 54)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_ENERGY_IN_OUT, 2, LVar0, LVar1, LVar2, Float(0.6), 50, 0)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar0, 9)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_RADIAL_SHIMMER, 5, LVar0, 54, LVar2, Float(0.18), 30, 0)
+    EndIf
+    Wait(30)
+    Call(GetEnemyMaxHP, ACTOR_SELF, LVar0)
+    Mul(LVar0, 31)
+    Div(LVar0, 100)
+    Thread
+        Wait(5)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEART_BOUNCE)
+        Wait(30)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_STAR_BOUNCE_A)
+    EndThread
+    Thread
+        Call(FreezeBattleState, TRUE)
+        Call(HealActor, ACTOR_SELF, LVar0, FALSE)
+        Call(FreezeBattleState, FALSE)
+    EndThread
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn_Inner) = {
-    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_TurnCount, 1)
-    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_TurnsSinceClawSwipe, 1)
-    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_TurnsSinceBodySlam, 1)
-    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_TurnsSinceShockwave, 1)
-    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_TurnsSinceStarBeam, 1)
-    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_TurnsSinceRecover, 1)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_TurnCount, LVar0)
-    EVT_IF_EQ(LVar0, 2)
-        EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-        EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar0, 15)
-            EVT_ADD(LVar1, 90)
-            EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-            EVT_CALL(SetBattleCamZoom, 420)
-            EVT_CALL(SetBattleCamOffsetZ, 0)
-            EVT_CALL(MoveBattleCamOver, 30)
-        EVT_ELSE
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar0, 6)
-            EVT_ADD(LVar1, 36)
-            EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-            EVT_CALL(SetBattleCamZoom, 420)
-            EVT_CALL(SetBattleCamOffsetZ, 0)
-            EVT_CALL(MoveBattleCamOver, 30)
-        EVT_END_IF
-        EVT_CALL(ActorSpeak, MSG_CH8_0084, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Mock, ANIM_BattleBowser_Mock)
-        EVT_EXEC_WAIT(N(EVS_Move_UseStarRod))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
-    EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar1)
-    EVT_MUL(LVar0, 100)
-    EVT_DIV(LVar0, LVar1)
-    EVT_CALL(N(GetPlayerHpPercent), LVar2)
-    EVT_SUB(LVar2, LVar0)
-    EVT_IF_GT(LVar2, 25)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RecoversLeft, LVar0)
-        EVT_IF_NE(LVar0, 0)
-            EVT_CALL(RandInt, 100, LVar0)
-            EVT_IF_LT(LVar0, 75)
-                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_TurnsSinceRecover, LVar0)
-                EVT_IF_GT(LVar0, 1)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceRecover, 0)
-                    EVT_EXEC_WAIT(N(EVS_Recover))
-                    EVT_RETURN
-                EVT_ELSE
-                    EVT_CALL(RandInt, 100, LVar0)
-                    EVT_IF_LT(LVar0, 0)
-                        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceRecover, 0)
-                        EVT_EXEC_WAIT(N(EVS_Recover))
-                        EVT_RETURN
-                    EVT_END_IF
-                EVT_END_IF
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_TurnCount, LVar0)
-    EVT_IF_GT(LVar0, 1)
-        EVT_CALL(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar0)
-        EVT_IF_NOT_FLAG(LVar0, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_TurnsSinceStarBeam, LVar0)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(1)
-                    EVT_SET(LVar0, 0)
-                EVT_CASE_EQ(2)
-                    EVT_SET(LVar0, 0)
-                EVT_CASE_EQ(3)
-                    EVT_SET(LVar0, 15)
-                EVT_CASE_DEFAULT
-                    EVT_SET(LVar0, 75)
-            EVT_END_SWITCH
-            EVT_CALL(RandInt, 100, LVar1)
-            EVT_IF_LT(LVar1, LVar0)
-                EVT_EXEC_WAIT(N(EVS_Move_UseStarRod))
-                EVT_RETURN
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_TurnsSinceShockwave, LVar0)
-    EVT_IF_LT(LVar0, 3)
-        EVT_EXEC_WAIT(N(EVS_UseAttack))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_UseAttackOrShockwave))
-    EVT_RETURN
-    EVT_END
+    Call(AddActorVar, ACTOR_SELF, AVAR_TurnCount, 1)
+    Call(AddActorVar, ACTOR_SELF, AVAR_TurnsSinceClawSwipe, 1)
+    Call(AddActorVar, ACTOR_SELF, AVAR_TurnsSinceBodySlam, 1)
+    Call(AddActorVar, ACTOR_SELF, AVAR_TurnsSinceShockwave, 1)
+    Call(AddActorVar, ACTOR_SELF, AVAR_TurnsSinceStarBeam, 1)
+    Call(AddActorVar, ACTOR_SELF, AVAR_TurnsSinceRecover, 1)
+    Call(GetActorVar, ACTOR_SELF, AVAR_TurnCount, LVar0)
+    IfEq(LVar0, 2)
+        Call(GetStatusFlags, ACTOR_SELF, LVar0)
+        IfNotFlag(LVar0, STATUS_FLAG_SHRINK)
+            Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Sub(LVar0, 15)
+            Add(LVar1, 90)
+            Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+            Call(SetBattleCamZoom, 420)
+            Call(SetBattleCamOffsetZ, 0)
+            Call(MoveBattleCamOver, 30)
+        Else
+            Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Sub(LVar0, 6)
+            Add(LVar1, 36)
+            Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+            Call(SetBattleCamZoom, 420)
+            Call(SetBattleCamOffsetZ, 0)
+            Call(MoveBattleCamOver, 30)
+        EndIf
+        Call(ActorSpeak, MSG_CH8_0084, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Mock, ANIM_BattleBowser_Mock)
+        ExecWait(N(EVS_Move_UseStarRod))
+        Return
+    EndIf
+    Call(GetActorHP, ACTOR_SELF, LVar0)
+    Call(GetEnemyMaxHP, ACTOR_SELF, LVar1)
+    Mul(LVar0, 100)
+    Div(LVar0, LVar1)
+    Call(N(GetPlayerHpPercent), LVar2)
+    Sub(LVar2, LVar0)
+    IfGt(LVar2, 25)
+        Call(GetActorVar, ACTOR_SELF, AVAR_RecoversLeft, LVar0)
+        IfNe(LVar0, 0)
+            Call(RandInt, 100, LVar0)
+            IfLt(LVar0, 75)
+                Call(GetActorVar, ACTOR_SELF, AVAR_TurnsSinceRecover, LVar0)
+                IfGt(LVar0, 1)
+                    Call(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceRecover, 0)
+                    ExecWait(N(EVS_Recover))
+                    Return
+                Else
+                    Call(RandInt, 100, LVar0)
+                    IfLt(LVar0, 0)
+                        Call(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceRecover, 0)
+                        ExecWait(N(EVS_Recover))
+                        Return
+                    EndIf
+                EndIf
+            EndIf
+        EndIf
+    EndIf
+    Call(GetActorVar, ACTOR_SELF, AVAR_TurnCount, LVar0)
+    IfGt(LVar0, 1)
+        Call(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar0)
+        IfNotFlag(LVar0, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
+            Call(GetActorVar, ACTOR_SELF, AVAR_TurnsSinceStarBeam, LVar0)
+            Switch(LVar0)
+                CaseEq(1)
+                    Set(LVar0, 0)
+                CaseEq(2)
+                    Set(LVar0, 0)
+                CaseEq(3)
+                    Set(LVar0, 15)
+                CaseDefault
+                    Set(LVar0, 75)
+            EndSwitch
+            Call(RandInt, 100, LVar1)
+            IfLt(LVar1, LVar0)
+                ExecWait(N(EVS_Move_UseStarRod))
+                Return
+            EndIf
+        EndIf
+    EndIf
+    Call(GetActorVar, ACTOR_SELF, AVAR_TurnsSinceShockwave, LVar0)
+    IfLt(LVar0, 3)
+        ExecWait(N(EVS_UseAttack))
+        Return
+    EndIf
+    ExecWait(N(EVS_UseAttackOrShockwave))
+    Return
+    End
 };
 
 EvtScript N(EVS_UseAttackOrShockwave) = {
     // only use regular attacks for the first few turns
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_TurnCount, LVar0)
-    EVT_IF_LE(LVar0, 3)
-        EVT_EXEC_WAIT(N(EVS_UseAttack))
-        EVT_RETURN
-    EVT_END_IF
+    Call(GetActorVar, ACTOR_SELF, AVAR_TurnCount, LVar0)
+    IfLe(LVar0, 3)
+        ExecWait(N(EVS_UseAttack))
+        Return
+    EndIf
     // use shockwave if it hasn't been used recently
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_TurnsSinceShockwave, LVar0)
-    EVT_IF_GE(LVar0, 6)
-        EVT_CALL(RandInt, 30, LVar0)
-        EVT_IF_LT(LVar0, 20)
-            EVT_EXEC_WAIT(N(EVS_UseDrainingShockwave))
-        EVT_ELSE
-            EVT_EXEC_WAIT(N(EVS_Attack_LightningBlast))
-        EVT_END_IF
-        EVT_RETURN
-    EVT_END_IF
+    Call(GetActorVar, ACTOR_SELF, AVAR_TurnsSinceShockwave, LVar0)
+    IfGe(LVar0, 6)
+        Call(RandInt, 30, LVar0)
+        IfLt(LVar0, 20)
+            ExecWait(N(EVS_UseDrainingShockwave))
+        Else
+            ExecWait(N(EVS_Attack_LightningBlast))
+        EndIf
+        Return
+    EndIf
     // if either hammer or jump are boosted, try using shockwave
-    EVT_CALL(RandInt, 100, LVar0)
-    EVT_IF_LT(LVar0, 75)
-        EVT_CALL(N(GetJumpHammerCharge), LVar0, LVar1)
-        EVT_IF_GT(LVar0, 0)
-            EVT_EXEC_WAIT(N(EVS_UseDrainingShockwave))
-            EVT_RETURN
-        EVT_END_IF
-        EVT_IF_GT(LVar1, 0)
-            EVT_EXEC_WAIT(N(EVS_UseDrainingShockwave))
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
+    Call(RandInt, 100, LVar0)
+    IfLt(LVar0, 75)
+        Call(N(GetJumpHammerCharge), LVar0, LVar1)
+        IfGt(LVar0, 0)
+            ExecWait(N(EVS_UseDrainingShockwave))
+            Return
+        EndIf
+        IfGt(LVar1, 0)
+            ExecWait(N(EVS_UseDrainingShockwave))
+            Return
+        EndIf
+    EndIf
     // ~27% chance to use regardless
-    EVT_CALL(RandInt, 110, LVar0)
-    EVT_IF_LT(LVar0, 30)
-        EVT_IF_LT(LVar0, 20)
-            EVT_EXEC_WAIT(N(EVS_UseDrainingShockwave))
-        EVT_ELSE
-            EVT_EXEC_WAIT(N(EVS_Attack_LightningBlast))
-        EVT_END_IF
-        EVT_RETURN
-    EVT_END_IF
+    Call(RandInt, 110, LVar0)
+    IfLt(LVar0, 30)
+        IfLt(LVar0, 20)
+            ExecWait(N(EVS_UseDrainingShockwave))
+        Else
+            ExecWait(N(EVS_Attack_LightningBlast))
+        EndIf
+        Return
+    EndIf
     // fallback to using a regular attack
-    EVT_EXEC_WAIT(N(EVS_UseAttack))
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_UseAttack))
+    Return
+    Return
+    End
 };
 
 EvtScript N(EVS_UseAttack) = {
-    EVT_CALL(RandInt, 80, LVar0)
-    EVT_IF_LT(LVar0, 20)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_TurnsSinceBodySlam, LVar0)
-        EVT_IF_GE(LVar0, 2)
-            EVT_EXEC_WAIT(N(EVS_Attack_BodySlam))
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(RandInt, 60, LVar0)
-    EVT_IF_LT(LVar0, 20)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_TurnsSinceClawSwipe, LVar0)
-        EVT_IF_GE(LVar0, 2)
-            EVT_EXEC_WAIT(N(EVS_Attack_ClawSwipe))
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_Attack_FireBreath))
-    EVT_RETURN
-    EVT_END
+    Call(RandInt, 80, LVar0)
+    IfLt(LVar0, 20)
+        Call(GetActorVar, ACTOR_SELF, AVAR_TurnsSinceBodySlam, LVar0)
+        IfGe(LVar0, 2)
+            ExecWait(N(EVS_Attack_BodySlam))
+            Return
+        EndIf
+    EndIf
+    Call(RandInt, 60, LVar0)
+    IfLt(LVar0, 20)
+        Call(GetActorVar, ACTOR_SELF, AVAR_TurnsSinceClawSwipe, LVar0)
+        IfGe(LVar0, 2)
+            ExecWait(N(EVS_Attack_ClawSwipe))
+            Return
+        EndIf
+    EndIf
+    ExecWait(N(EVS_Attack_FireBreath))
+    Return
+    End
 };
 
 #include "common/DisableRandomAbility.inc.c"
@@ -840,799 +840,799 @@ EvtScript N(EVS_UseAttack) = {
 #include "common/UnkLightningBoltFxFunc1.inc.c"
 
 EvtScript N(EVS_ManageCommandLoss) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_CommandLossState, LVarA)
-        EVT_SWITCH(LVarA)
-            EVT_CASE_EQ(AVAL_LossState_Idle)
+    Label(0)
+        Call(GetActorVar, ACTOR_SELF, AVAR_CommandLossState, LVarA)
+        Switch(LVarA)
+            CaseEq(AVAL_LossState_Idle)
                 // do nothing
-            EVT_CASE_EQ(AVAL_LossState_KnockAway)
-                EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar1, LVar2, LVar3)
-                EVT_SET(LVar2, 0)
-                EVT_SUB(LVar3, 1)
-                EVT_CALL(N(DisableRandomAbility), LVar4, LVar5)
-                EVT_CALL(MakeItemEntity, LVar4, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_DECORATION, 0)
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_CommandLossItemIdx, LVar0)
-                EVT_ADD(LVar1, 7)
-                EVT_CALL(N(ItemEntityJumpToPos), LVar0, LVar1, LVar2, LVar3, 8, EVT_FLOAT(1.0))
-                EVT_ADD(LVar1, 12)
-                EVT_CALL(N(ItemEntityJumpToPos), LVar0, LVar1, LVar2, LVar3, 8, EVT_FLOAT(1.0))
-                EVT_ADD(LVar1, 7)
-                EVT_CALL(N(ItemEntityJumpToPos), LVar0, LVar1, LVar2, LVar3, 5, EVT_FLOAT(1.0))
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_CommandLossState, AVAL_LossState_Idle)
-            EVT_CASE_EQ(AVAL_LossState_ShowMessage)
-                EVT_CALL(ShowMessageBox, LVar5, 60)
-                EVT_CALL(RemoveItemEntity, LVar0)
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_CommandLossState, AVAL_LossState_Done)
-                EVT_RETURN
-        EVT_END_SWITCH
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+            CaseEq(AVAL_LossState_KnockAway)
+                Call(GetActorPos, ACTOR_PLAYER, LVar1, LVar2, LVar3)
+                Set(LVar2, 0)
+                Sub(LVar3, 1)
+                Call(N(DisableRandomAbility), LVar4, LVar5)
+                Call(MakeItemEntity, LVar4, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_DECORATION, 0)
+                Call(SetActorVar, ACTOR_SELF, AVAR_CommandLossItemIdx, LVar0)
+                Add(LVar1, 7)
+                Call(N(ItemEntityJumpToPos), LVar0, LVar1, LVar2, LVar3, 8, Float(1.0))
+                Add(LVar1, 12)
+                Call(N(ItemEntityJumpToPos), LVar0, LVar1, LVar2, LVar3, 8, Float(1.0))
+                Add(LVar1, 7)
+                Call(N(ItemEntityJumpToPos), LVar0, LVar1, LVar2, LVar3, 5, Float(1.0))
+                Call(SetActorVar, ACTOR_SELF, AVAR_CommandLossState, AVAL_LossState_Idle)
+            CaseEq(AVAL_LossState_ShowMessage)
+                Call(ShowMessageBox, LVar5, 60)
+                Call(RemoveItemEntity, LVar0)
+                Call(SetActorVar, ACTOR_SELF, AVAR_CommandLossState, AVAL_LossState_Done)
+                Return
+        EndSwitch
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Attack_BodySlam) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceBodySlam, 0)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-        EVT_CALL(SetBattleCamZoom, 300)
-        EVT_CALL(SetBattleCamOffsetZ, 54)
-        EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-        EVT_CALL(MoveBattleCamOver, 40)
-        EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-        EVT_CALL(SetBattleCamZoom, 240)
-        EVT_CALL(SetBattleCamOffsetZ, 21)
-        EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-        EVT_CALL(MoveBattleCamOver, 40)
-        EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Walk)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(AddGoalPos, ACTOR_SELF, 60, 0, 0)
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
-    EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
-    EVT_WAIT(15)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PreJump)
-    EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Jump)
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVarA)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar0, 30)
-            EVT_SET(LVar1, 0)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
-            EVT_THREAD
-                EVT_CALL(N(StartRumbleWithParams), 80, 14)
-                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(3.0))
-            EVT_END_THREAD
-            EVT_SUB(LVar0, 35)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 14, FALSE, TRUE, FALSE)
-            EVT_THREAD
-                EVT_CALL(N(StartRumbleWithParams), 80, 14)
-                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(2.0))
-            EVT_END_THREAD
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostJump)
-            EVT_WAIT(3)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
-            EVT_WAIT(25)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_END_IF
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(3.0))
-    EVT_END_THREAD
-    EVT_WAIT(2)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Land)
-    EVT_CALL(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar1)
-    EVT_IF_FLAG(LVar1, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
-        EVT_SET(LVar0, DMG_BOOSTED_BODY_SLAM)
-    EVT_ELSE
-        EVT_SET(LVar0, DMG_BODY_SLAM)
-    EVT_END_IF
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarF)
-    EVT_IF_NOT_FLAG(LVarF, STATUS_FLAG_SHRINK)
-        EVT_CALL(SetDamageSource, DMG_SRC_CRUSH)
-    EVT_END_IF
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_SET(LVar0, -1)
-    EVT_CALL(GetBattleFlags, LVar1)
-    EVT_IF_NOT_FLAG(LVar1, BS_FLAGS1_ATK_BLOCKED)
-        EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar1)
-        EVT_IF_NOT_FLAG(LVar1, STATUS_FLAG_STONE | STATUS_FLAG_RIGHT_ON)
-            EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-            EVT_IF_NOT_FLAG(LVar1, STATUS_FLAG_SHRINK)
-                EVT_CALL(N(CanPlayerLoseAction), LVar0)
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_IF
-    EVT_IF_NE(LVar0, -1)
-        EVT_CALL(LandJump, ACTOR_SELF)
-        EVT_CALL(N(StartRumbleWithParams), 80, 14)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_CommandLossState, AVAL_LossState_KnockAway)
-        EVT_EXEC(N(EVS_ManageCommandLoss))
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 52)
-        EVT_SET(LVar1, 0)
-        EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
-        EVT_THREAD
-            EVT_CALL(N(StartRumbleWithParams), 80, 14)
-            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(3.0))
-        EVT_END_THREAD
-        EVT_ADD(LVar0, 30)
-        EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-        EVT_THREAD
-            EVT_CALL(N(StartRumbleWithParams), 80, 14)
-            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(2.0))
-        EVT_END_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostJump)
-        EVT_WAIT(3)
-        EVT_LABEL(0)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_CommandLossState, LVar0)
-            EVT_IF_NE(LVar0, AVAL_LossState_Idle)
-                EVT_WAIT(1)
-                EVT_GOTO(0)
-        EVT_END_IF
-        EVT_WAIT(8)
-        EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Walk)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_CommandLossItemIdx, LVar0)
-        EVT_CALL(N(GetItemEntityPosition), LVar0, LVar1, LVar2, LVar3)
-        EVT_ADD(LVar1, 38)
-        EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(2.0))
-        EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, LVar2, LVar3)
-        EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
-        EVT_WAIT(8)
-        EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(2.0))
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_StompOnce)
-        EVT_WAIT(2)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_CommandLossItemIdx, LVar0)
-        EVT_CALL(N(GetItemEntityPosition), LVar0, LVar1, LVar2, LVar3)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_CommandLossState, AVAL_LossState_ShowMessage)
-        EVT_PLAY_EFFECT(EFFECT_FIREWORK, 0, LVar1, 0, LVar3, EVT_FLOAT(0.75), 0, 0)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar1, 0, LVar3, EVT_FLOAT(3.0), 0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
-        EVT_WAIT(4)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_StompOnce)
-        EVT_WAIT(2)
-        EVT_PLAY_EFFECT(EFFECT_FIREWORK, 0, LVar1, 0, LVar3, EVT_FLOAT(0.75), 0, 0)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar1, 0, LVar3, EVT_FLOAT(3.0), 0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
-        EVT_WAIT(4)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_StompOnce)
-        EVT_WAIT(2)
-        EVT_PLAY_EFFECT(EFFECT_FIREWORK, 0, LVar1, 0, LVar3, EVT_FLOAT(0.75), 0, 0)
-        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar1, 0, LVar3, EVT_FLOAT(3.0), 0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
-        EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Mock)
-        EVT_WAIT(20)
-        EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0))
-    EVT_ELSE
-        EVT_CALL(GetBattleFlags, LVar1)
-        EVT_IF_NOT_FLAG(LVar1, BS_FLAGS1_ATK_BLOCKED)
-            EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar1)
-            EVT_IF_NOT_FLAG(LVar1, STATUS_FLAG_STONE)
-                EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-                EVT_IF_NOT_FLAG(LVar1, STATUS_FLAG_SHRINK)
-                    EVT_CALL(LandJump, ACTOR_SELF)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(N(StartRumbleWithParams), 80, 14)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 40)
-        EVT_SET(LVar1, 0)
-        EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
-        EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
-        EVT_THREAD
-            EVT_CALL(N(StartRumbleWithParams), 80, 14)
-            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(3.0))
-        EVT_END_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostJump)
-        EVT_WAIT(3)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
-        EVT_WAIT(20)
-    EVT_END_IF
-    EVT_IF_EQ(LVarF, 10)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-    EVT_EXEC_WAIT(N(EVS_ReturnHome))
-    EVT_RETURN
-    EVT_END
+    Call(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceBodySlam, 0)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(GetStatusFlags, ACTOR_SELF, LVar0)
+    IfNotFlag(LVar0, STATUS_FLAG_SHRINK)
+        Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
+        Call(SetBattleCamZoom, 300)
+        Call(SetBattleCamOffsetZ, 54)
+        Call(BattleCamTargetActor, ACTOR_SELF)
+        Call(MoveBattleCamOver, 40)
+        Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Else
+        Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
+        Call(SetBattleCamZoom, 240)
+        Call(SetBattleCamOffsetZ, 21)
+        Call(BattleCamTargetActor, ACTOR_SELF)
+        Call(MoveBattleCamOver, 40)
+        Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    EndIf
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Walk)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(AddGoalPos, ACTOR_SELF, 60, 0, 0)
+    Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
+    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
+    Wait(15)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PreJump)
+    Wait(3)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Jump)
+    Call(SetActorJumpGravity, ACTOR_SELF, Float(1.2))
+    Call(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVarA)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            Call(SetGoalToTarget, ACTOR_SELF)
+            Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Sub(LVar0, 30)
+            Set(LVar1, 0)
+            Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
+            Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
+            Thread
+                Call(N(StartRumbleWithParams), 80, 14)
+                Call(ShakeCam, CAM_BATTLE, 0, 4, Float(3.0))
+            EndThread
+            Sub(LVar0, 35)
+            Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(JumpToGoal, ACTOR_SELF, 14, FALSE, TRUE, FALSE)
+            Thread
+                Call(N(StartRumbleWithParams), 80, 14)
+                Call(ShakeCam, CAM_BATTLE, 0, 4, Float(2.0))
+            EndThread
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostJump)
+            Wait(3)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
+            Wait(25)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            IfEq(LVarA, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EndIf
+            Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
+            Set(LVar1, ANIM_BattleBowser_Walk)
+            ExecWait(N(EVS_ReturnHome))
+            Return
+        EndCaseGroup
+        CaseDefault
+    EndSwitch
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+    Thread
+        Call(ShakeCam, CAM_BATTLE, 0, 4, Float(3.0))
+    EndThread
+    Wait(2)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Land)
+    Call(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar1)
+    IfFlag(LVar1, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
+        Set(LVar0, DMG_BOOSTED_BODY_SLAM)
+    Else
+        Set(LVar0, DMG_BODY_SLAM)
+    EndIf
+    Call(GetStatusFlags, ACTOR_SELF, LVarF)
+    IfNotFlag(LVarF, STATUS_FLAG_SHRINK)
+        Call(SetDamageSource, DMG_SRC_CRUSH)
+    EndIf
+    Call(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
+    Set(LVar0, -1)
+    Call(GetBattleFlags, LVar1)
+    IfNotFlag(LVar1, BS_FLAGS1_ATK_BLOCKED)
+        Call(GetStatusFlags, ACTOR_PLAYER, LVar1)
+        IfNotFlag(LVar1, STATUS_FLAG_STONE | STATUS_FLAG_RIGHT_ON)
+            Call(GetStatusFlags, ACTOR_SELF, LVar1)
+            IfNotFlag(LVar1, STATUS_FLAG_SHRINK)
+                Call(N(CanPlayerLoseAction), LVar0)
+            EndIf
+        EndIf
+    EndIf
+    IfNe(LVar0, -1)
+        Call(LandJump, ACTOR_SELF)
+        Call(N(StartRumbleWithParams), 80, 14)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
+        Call(SetActorVar, ACTOR_SELF, AVAR_CommandLossState, AVAL_LossState_KnockAway)
+        Exec(N(EVS_ManageCommandLoss))
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar0, 52)
+        Set(LVar1, 0)
+        Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
+        Thread
+            Call(N(StartRumbleWithParams), 80, 14)
+            Call(ShakeCam, CAM_BATTLE, 0, 4, Float(3.0))
+        EndThread
+        Add(LVar0, 30)
+        Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+        Thread
+            Call(N(StartRumbleWithParams), 80, 14)
+            Call(ShakeCam, CAM_BATTLE, 0, 3, Float(2.0))
+        EndThread
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostJump)
+        Wait(3)
+        Label(0)
+            Call(GetActorVar, ACTOR_SELF, AVAR_CommandLossState, LVar0)
+            IfNe(LVar0, AVAL_LossState_Idle)
+                Wait(1)
+                Goto(0)
+        EndIf
+        Wait(8)
+        Call(SetActorYaw, ACTOR_SELF, 0)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Walk)
+        Call(GetActorVar, ACTOR_SELF, AVAR_CommandLossItemIdx, LVar0)
+        Call(N(GetItemEntityPosition), LVar0, LVar1, LVar2, LVar3)
+        Add(LVar1, 38)
+        Call(SetActorSpeed, ACTOR_SELF, Float(2.0))
+        Call(SetGoalPos, ACTOR_SELF, LVar1, LVar2, LVar3)
+        Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
+        Wait(8)
+        Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(2.0))
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_StompOnce)
+        Wait(2)
+        Call(GetActorVar, ACTOR_SELF, AVAR_CommandLossItemIdx, LVar0)
+        Call(N(GetItemEntityPosition), LVar0, LVar1, LVar2, LVar3)
+        Call(SetActorVar, ACTOR_SELF, AVAR_CommandLossState, AVAL_LossState_ShowMessage)
+        PlayEffect(EFFECT_FIREWORK, 0, LVar1, 0, LVar3, Float(0.75), 0, 0)
+        PlayEffect(EFFECT_LANDING_DUST, 1, LVar1, 0, LVar3, Float(3.0), 0)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
+        Wait(4)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_StompOnce)
+        Wait(2)
+        PlayEffect(EFFECT_FIREWORK, 0, LVar1, 0, LVar3, Float(0.75), 0, 0)
+        PlayEffect(EFFECT_LANDING_DUST, 1, LVar1, 0, LVar3, Float(3.0), 0)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
+        Wait(4)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_StompOnce)
+        Wait(2)
+        PlayEffect(EFFECT_FIREWORK, 0, LVar1, 0, LVar3, Float(0.75), 0, 0)
+        PlayEffect(EFFECT_LANDING_DUST, 1, LVar1, 0, LVar3, Float(3.0), 0)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
+        Wait(20)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Mock)
+        Wait(20)
+        Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(1.0))
+    Else
+        Call(GetBattleFlags, LVar1)
+        IfNotFlag(LVar1, BS_FLAGS1_ATK_BLOCKED)
+            Call(GetStatusFlags, ACTOR_PLAYER, LVar1)
+            IfNotFlag(LVar1, STATUS_FLAG_STONE)
+                Call(GetStatusFlags, ACTOR_SELF, LVar1)
+                IfNotFlag(LVar1, STATUS_FLAG_SHRINK)
+                    Call(LandJump, ACTOR_SELF)
+                EndIf
+            EndIf
+        EndIf
+        Call(N(StartRumbleWithParams), 80, 14)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar0, 40)
+        Set(LVar1, 0)
+        Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
+        Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Call(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
+        Thread
+            Call(N(StartRumbleWithParams), 80, 14)
+            Call(ShakeCam, CAM_BATTLE, 0, 4, Float(3.0))
+        EndThread
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostJump)
+        Wait(3)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
+        Wait(20)
+    EndIf
+    IfEq(LVarF, 10)
+        Return
+    EndIf
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
+    Set(LVar1, ANIM_BattleBowser_Walk)
+    ExecWait(N(EVS_ReturnHome))
+    Return
+    End
 };
 
 EvtScript N(EVS_AttackMissed) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Tantrum)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_LOOP(4)
-            EVT_CALL(N(StartRumbleWithParams), 80, 14)
-            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(2.0))
-            EVT_WAIT(4)
-        EVT_END_LOOP
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Tantrum)
+    Thread
+        Wait(5)
+        Loop(4)
+            Call(N(StartRumbleWithParams), 80, 14)
+            Call(ShakeCam, CAM_BATTLE, 0, 2, Float(2.0))
+            Wait(4)
+        EndLoop
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_Attack_ClawSwipe) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceClawSwipe, 0)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-        EVT_CALL(SetBattleCamZoom, 200)
-        EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-        EVT_CALL(MoveBattleCamOver, 40)
-        EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-        EVT_CALL(SetBattleCamZoom, 160)
-        EVT_CALL(SetBattleCamOffsetZ, 5)
-        EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-        EVT_CALL(MoveBattleCamOver, 40)
-        EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Walk)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(AddGoalPos, ACTOR_SELF, 60, 0, 0)
-    EVT_ELSE
-        EVT_CALL(AddGoalPos, ACTOR_SELF, 24, 0, 0)
-    EVT_END_IF
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
-    EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_RearUpMock)
-    EVT_WAIT(25)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Swipe)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_SWIPE)
-    EVT_WAIT(3)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVarA)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_WAIT(20)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(MoveBattleCamOver, 20)
-            EVT_EXEC_WAIT(N(EVS_AttackMissed))
-            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-                EVT_WAIT(30)
-            EVT_ELSE
-                EVT_WAIT(30)
-            EVT_END_IF
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_WAIT(2)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar0)
-    EVT_IF_FLAG(LVar0, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
-        EVT_SET(LVar0, DMG_BOOSTED_CLAW_SWIPE)
-        EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, DMG_STATUS_KEY(STATUS_FLAG_POISON, 3, 100), LVar0, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_ELSE
-        EVT_SET(LVar0, DMG_CLAW_SWIPE)
-        EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, DMG_STATUS_KEY(STATUS_FLAG_POISON, 3, 100), LVar0, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_END_IF
-    EVT_SWITCH(LVarF)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-        EVT_CASE_OR_EQ(HIT_RESULT_10)
-            EVT_WAIT(30)
-            EVT_IF_EQ(LVarF, HIT_RESULT_10)
-                EVT_RETURN
-            EVT_END_IF
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(MoveBattleCamOver, 20)
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceClawSwipe, 0)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(GetStatusFlags, ACTOR_SELF, LVar0)
+    IfNotFlag(LVar0, STATUS_FLAG_SHRINK)
+        Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
+        Call(SetBattleCamZoom, 200)
+        Call(BattleCamTargetActor, ACTOR_SELF)
+        Call(MoveBattleCamOver, 40)
+        Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Else
+        Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
+        Call(SetBattleCamZoom, 160)
+        Call(SetBattleCamOffsetZ, 5)
+        Call(BattleCamTargetActor, ACTOR_SELF)
+        Call(MoveBattleCamOver, 40)
+        Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    EndIf
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Walk)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetStatusFlags, ACTOR_SELF, LVar0)
+    IfNotFlag(LVar0, STATUS_FLAG_SHRINK)
+        Call(AddGoalPos, ACTOR_SELF, 60, 0, 0)
+    Else
+        Call(AddGoalPos, ACTOR_SELF, 24, 0, 0)
+    EndIf
+    Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
+    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_RearUpMock)
+    Wait(25)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Swipe)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_SWIPE)
+    Wait(3)
+    Call(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVarA)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            Wait(20)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(MoveBattleCamOver, 20)
+            ExecWait(N(EVS_AttackMissed))
+            IfEq(LVarA, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+                Wait(30)
+            Else
+                Wait(30)
+            EndIf
+            Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
+            Set(LVar1, ANIM_BattleBowser_Walk)
+            ExecWait(N(EVS_ReturnHome))
+            Return
+        EndCaseGroup
+        CaseDefault
+    EndSwitch
+    Wait(2)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar0)
+    IfFlag(LVar0, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
+        Set(LVar0, DMG_BOOSTED_CLAW_SWIPE)
+        Call(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
+        Call(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, DMG_STATUS_KEY(STATUS_FLAG_POISON, 3, 100), LVar0, BS_FLAGS1_TRIGGER_EVENTS)
+    Else
+        Set(LVar0, DMG_CLAW_SWIPE)
+        Call(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
+        Call(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, DMG_STATUS_KEY(STATUS_FLAG_POISON, 3, 100), LVar0, BS_FLAGS1_TRIGGER_EVENTS)
+    EndIf
+    Switch(LVarF)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+        CaseOrEq(HIT_RESULT_10)
+            Wait(30)
+            IfEq(LVarF, HIT_RESULT_10)
+                Return
+            EndIf
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(MoveBattleCamOver, 20)
+            Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
+            Set(LVar1, ANIM_BattleBowser_Walk)
+            ExecWait(N(EVS_ReturnHome))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_UseDrainingShockwave) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceShockwave, 0)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
-    EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_SUB(LVar0, 24)
-        EVT_ADD(LVar1, 97)
-        EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-        EVT_CALL(SetBattleCamZoom, 420)
-        EVT_CALL(SetBattleCamOffsetZ, 0)
-        EVT_CALL(MoveBattleCamOver, 40)
-    EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_SUB(LVar0, 9)
-        EVT_ADD(LVar1, 39)
-        EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-        EVT_CALL(SetBattleCamZoom, 375)
-        EVT_CALL(SetBattleCamOffsetZ, 0)
-        EVT_CALL(MoveBattleCamOver, 40)
-    EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
-    EVT_WAIT(10)
-    EVT_CALL(N(FadeBackgroundDarken))
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_USE)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 22)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, LVar0, 135, LVar2, EVT_FLOAT(1.0), LVarF, 0)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 135, LVar2, EVT_FLOAT(1.0), LVarE, 0)
-    EVT_ELSE
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 9)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, LVar0, 54, LVar2, EVT_FLOAT(0.4), LVarF, 0)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 54, LVar2, EVT_FLOAT(0.4), LVarE, 0)
-    EVT_END_IF
-    EVT_WAIT(25)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-    EVT_CALL(SetBattleCamTarget, -45, 60, 0)
-    EVT_CALL(SetBattleCamZoom, 530)
-    EVT_CALL(SetBattleCamOffsetZ, 0)
-    EVT_CALL(MoveBattleCamOver, 80)
-    EVT_WAIT(10)
-    EVT_CALL(RemoveEffect, LVarF)
-    EVT_CALL(RemoveEffect, LVarE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_DRAIN_WAVE)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 19)
-        EVT_SET(LVar1, 55)
-        EVT_PLAY_EFFECT(EFFECT_ENERGY_SHOCKWAVE, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 60, 0)
-    EVT_ELSE
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 7)
-        EVT_SET(LVar1, 22)
-        EVT_PLAY_EFFECT(EFFECT_ENERGY_SHOCKWAVE, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 60, 0)
-    EVT_END_IF
-    EVT_THREAD
-        EVT_CALL(N(FadeBackgroundLighten))
-    EVT_END_THREAD
-    EVT_WAIT(8)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVarA)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
-            EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarB, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-            EVT_SWITCH(LVarB)
-                EVT_CASE_EQ(HIT_RESULT_MISS)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
-                    EVT_WAIT(30)
-                    EVT_RETURN
-                EVT_CASE_DEFAULT
-                    EVT_WAIT(2)
-                    EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
-                        EVT_EXEC_WAIT(N(EVS_AttackMissed))
-                        EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-                        EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-                    EVT_END_IF
-                    EVT_WAIT(2)
-                    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
-                    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    Call(SetActorVar, ACTOR_SELF, AVAR_TurnsSinceShockwave, 0)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetStatusFlags, ACTOR_SELF, LVar3)
+    IfNotFlag(LVar3, STATUS_FLAG_SHRINK)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Sub(LVar0, 24)
+        Add(LVar1, 97)
+        Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+        Call(SetBattleCamZoom, 420)
+        Call(SetBattleCamOffsetZ, 0)
+        Call(MoveBattleCamOver, 40)
+    Else
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Sub(LVar0, 9)
+        Add(LVar1, 39)
+        Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+        Call(SetBattleCamZoom, 375)
+        Call(SetBattleCamOffsetZ, 0)
+        Call(MoveBattleCamOver, 40)
+    EndIf
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
+    Wait(10)
+    Call(N(FadeBackgroundDarken))
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_USE)
+    Call(GetStatusFlags, ACTOR_SELF, LVar0)
+    IfNotFlag(LVar0, STATUS_FLAG_SHRINK)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar0, 22)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_LIGHT_RAYS, 2, LVar0, 135, LVar2, Float(1.0), LVarF, 0)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_BULB_GLOW, 2, LVar0, 135, LVar2, Float(1.0), LVarE, 0)
+    Else
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar0, 9)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_LIGHT_RAYS, 2, LVar0, 54, LVar2, Float(0.4), LVarF, 0)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_BULB_GLOW, 2, LVar0, 54, LVar2, Float(0.4), LVarE, 0)
+    EndIf
+    Wait(25)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(SetBattleCamTarget, -45, 60, 0)
+    Call(SetBattleCamZoom, 530)
+    Call(SetBattleCamOffsetZ, 0)
+    Call(MoveBattleCamOver, 80)
+    Wait(10)
+    Call(RemoveEffect, LVarF)
+    Call(RemoveEffect, LVarE)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_DRAIN_WAVE)
+    Call(GetStatusFlags, ACTOR_SELF, LVar0)
+    IfNotFlag(LVar0, STATUS_FLAG_SHRINK)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar0, 19)
+        Set(LVar1, 55)
+        PlayEffect(EFFECT_ENERGY_SHOCKWAVE, 0, LVar0, LVar1, LVar2, Float(1.0), 60, 0)
+    Else
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar0, 7)
+        Set(LVar1, 22)
+        PlayEffect(EFFECT_ENERGY_SHOCKWAVE, 0, LVar0, LVar1, LVar2, Float(1.0), 60, 0)
+    EndIf
+    Thread
+        Call(N(FadeBackgroundLighten))
+    EndThread
+    Wait(8)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVarA)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            Call(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
+            Call(EnemyTestTarget, ACTOR_SELF, LVarB, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+            Switch(LVarB)
+                CaseEq(HIT_RESULT_MISS)
+                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
+                    Wait(30)
+                    Return
+                CaseDefault
+                    Wait(2)
+                    IfEq(LVarA, HIT_RESULT_LUCKY)
+                        ExecWait(N(EVS_AttackMissed))
+                        Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+                        Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+                    EndIf
+                    Wait(2)
+                    Call(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
+                    Call(SetGoalToTarget, ACTOR_SELF)
                     //// @bug missing a call to GetPartEventFlags, LVar0 is invalid in next block
-                    EVT_IF_FLAG(LVar0, ACTOR_EVENT_FLAG_ENCHANTED)
-                        EVT_SET(LVar1, DMG_BOOSTED_SHOCKWAVE_P)
-                    EVT_ELSE
-                        EVT_SET(LVar1, DMG_SHOCKWAVE_P)
-                    EVT_END_IF
-                    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_TRIGGER_EVENTS)
-                    EVT_CALL(RemovePlayerBuffs, PLAYER_BUFF_PARTNER_GLOWING)
-                    EVT_IF_NE(LVarA, HIT_RESULT_LUCKY)
-                        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
-                    EVT_END_IF
-                    EVT_WAIT(30)
-                    EVT_RETURN
-            EVT_END_SWITCH
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(FreezeBattleState, TRUE)
-    EVT_THREAD
-        EVT_WAIT(4)
-        EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
-        EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+                    IfFlag(LVar0, ACTOR_EVENT_FLAG_ENCHANTED)
+                        Set(LVar1, DMG_BOOSTED_SHOCKWAVE_P)
+                    Else
+                        Set(LVar1, DMG_SHOCKWAVE_P)
+                    EndIf
+                    Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_TRIGGER_EVENTS)
+                    Call(RemovePlayerBuffs, PLAYER_BUFF_PARTNER_GLOWING)
+                    IfNe(LVarA, HIT_RESULT_LUCKY)
+                        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
+                    EndIf
+                    Wait(30)
+                    Return
+            EndSwitch
+        EndCaseGroup
+        CaseDefault
+    EndSwitch
+    Call(FreezeBattleState, TRUE)
+    Thread
+        Wait(4)
+        Call(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
+        Call(SetGoalToTarget, ACTOR_SELF)
         /// @bug missing a call to GetPartEventFlags, LVar0 is invalid in next block
-        EVT_IF_FLAG(LVar0, ACTOR_EVENT_FLAG_ENCHANTED)
-            EVT_SET(LVar1, DMG_BOOSTED_SHOCKWAVE_P)
-        EVT_ELSE
-            EVT_SET(LVar1, DMG_SHOCKWAVE_P)
-        EVT_END_IF
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CALL(FreezeBattleState, FALSE)
-    EVT_END_THREAD
-    EVT_WAIT(2)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+        IfFlag(LVar0, ACTOR_EVENT_FLAG_ENCHANTED)
+            Set(LVar1, DMG_BOOSTED_SHOCKWAVE_P)
+        Else
+            Set(LVar1, DMG_SHOCKWAVE_P)
+        EndIf
+        Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_TRIGGER_EVENTS)
+        Call(FreezeBattleState, FALSE)
+    EndThread
+    Wait(2)
+    Call(SetGoalToTarget, ACTOR_SELF)
     /// @bug missing a call to GetPartEventFlags, LVar0 is invalid in next block
-    EVT_IF_FLAG(LVar0, ACTOR_EVENT_FLAG_ENCHANTED)
-        EVT_SET(LVar1, DMG_BOOSTED_SHOCKWAVE)
-    EVT_ELSE
-        EVT_SET(LVar1, DMG_SHOCKWAVE)
-    EVT_END_IF
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_CALL(RemovePlayerBuffs, PLAYER_BUFF_JUMP_CHARGE | PLAYER_BUFF_HAMMER_CHARGE | PLAYER_BUFF_STONE | PLAYER_BUFF_HUSTLE | PLAYER_BUFF_STATIC | PLAYER_BUFF_TRANSPARENT | PLAYER_BUFF_CLOUD_NINE | PLAYER_BUFF_TURBO_CHARGE | PLAYER_BUFF_WATER_BLOCK | PLAYER_BUFF_PARTNER_GLOWING | 0xFFEFC04)
-    EVT_SWITCH(LVarF)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-        EVT_CASE_OR_EQ(HIT_RESULT_10)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
-            EVT_WAIT(15)
-            EVT_IF_EQ(LVarF, HIT_RESULT_10)
-                EVT_RETURN
-            EVT_END_IF
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    IfFlag(LVar0, ACTOR_EVENT_FLAG_ENCHANTED)
+        Set(LVar1, DMG_BOOSTED_SHOCKWAVE)
+    Else
+        Set(LVar1, DMG_SHOCKWAVE)
+    EndIf
+    Call(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_TRIGGER_EVENTS)
+    Call(RemovePlayerBuffs, PLAYER_BUFF_JUMP_CHARGE | PLAYER_BUFF_HAMMER_CHARGE | PLAYER_BUFF_STONE | PLAYER_BUFF_HUSTLE | PLAYER_BUFF_STATIC | PLAYER_BUFF_TRANSPARENT | PLAYER_BUFF_CLOUD_NINE | PLAYER_BUFF_TURBO_CHARGE | PLAYER_BUFF_WATER_BLOCK | PLAYER_BUFF_PARTNER_GLOWING | 0xFFEFC04)
+    Switch(LVarF)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+        CaseOrEq(HIT_RESULT_10)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
+            Wait(15)
+            IfEq(LVarF, HIT_RESULT_10)
+                Return
+            EndIf
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Attack_FireBreath) = {
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_SUB(LVar0, 30)
-        EVT_ADD(LVar1, 81)
-        EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-        EVT_CALL(SetBattleCamZoom, 400)
-        EVT_CALL(MoveBattleCamOver, 40)
-    EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_SUB(LVar0, 30)
-        EVT_ADD(LVar1, 56)
-        EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-        EVT_CALL(SetBattleCamZoom, 350)
-        EVT_CALL(MoveBattleCamOver, 40)
-    EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PreFireBreath)
-    EVT_WAIT(35)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_FireBreathStill)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 55)
-    EVT_WAIT(10)
-    EVT_CALL(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar3)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar4)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_IF_FLAG(LVar3, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
-        EVT_IF_NOT_FLAG(LVar4, STATUS_FLAG_SHRINK)
-            EVT_SUB(LVar0, 70)
-            EVT_ADD(LVar1, 35)
-        EVT_ELSE
-            EVT_SUB(LVar0, 28)
-            EVT_ADD(LVar1, 14)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_IF_NOT_FLAG(LVar4, STATUS_FLAG_SHRINK)
-            EVT_SUB(LVar0, 75)
-            EVT_ADD(LVar1, 49)
-        EVT_ELSE
-            EVT_SUB(LVar0, 30)
-            EVT_ADD(LVar1, 19)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_ADD(LVar2, 10)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
-    EVT_SUB(LVar3, 40)
-    EVT_SET(LVar4, 20)
-    EVT_CALL(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar6)
-    EVT_IF_FLAG(LVar6, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
-        EVT_PLAY_EFFECT(EFFECT_FIRE_BREATH, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 50, 1, 24, 0)
-    EVT_ELSE
-        EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar7)
-        EVT_IF_NOT_FLAG(LVar7, STATUS_FLAG_SHRINK)
-            EVT_ADD(LVar0, 15)
-        EVT_ELSE
-            EVT_ADD(LVar0, 6)
-        EVT_END_IF
-        EVT_SUB(LVar3, 10)
-        EVT_PLAY_EFFECT(EFFECT_FIRE_BREATH, 2, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 50, 1, 24, 0)
-        EVT_CALL(N(SetBowserFireBreathScales), LVarF)
-    EVT_END_IF
-    EVT_THREAD
-        EVT_CALL(N(StartRumbleWithParams), 50, 148)
-        EVT_CALL(PlaySound, SOUND_BOWSER_FIRE_BREATH_LOOP)
-        EVT_WAIT(70)
-        EVT_CALL(PlaySound, SOUND_BOWSER_FIRE_BREATH_LOOP | SOUND_ID_TRIGGER_CHANGE_SOUND)
-    EVT_END_THREAD
-    EVT_WAIT(10)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVarA)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_WAIT(10)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_FireBreathLoop)
-            EVT_WAIT(30)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostFireBreath)
-            EVT_WAIT(15)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
-            EVT_WAIT(30)
-            EVT_EXEC_WAIT(N(EVS_AttackMissed))
-            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_END_IF
-            EVT_WAIT(30)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_WAIT(2)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar0)
-    EVT_IF_FLAG(LVar0, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
-        EVT_SET(LVar0, DMG_BOOSTED_FIRE_BREATH)
-    EVT_ELSE
-        EVT_SET(LVar0, DMG_FIRE_BREATH)
-    EVT_END_IF
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_FIRE, SUPPRESS_EVENT_ALL, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_SWITCH(LVarF)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-        EVT_CASE_OR_EQ(HIT_RESULT_10)
-            EVT_WAIT(10)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_FireBreathLoop)
-            EVT_WAIT(30)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostFireBreath)
-            EVT_WAIT(15)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
-            EVT_WAIT(30)
-            EVT_IF_EQ(LVarF, HIT_RESULT_10)
-                EVT_RETURN
-            EVT_END_IF
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetStatusFlags, ACTOR_SELF, LVar0)
+    IfNotFlag(LVar0, STATUS_FLAG_SHRINK)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Sub(LVar0, 30)
+        Add(LVar1, 81)
+        Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+        Call(SetBattleCamZoom, 400)
+        Call(MoveBattleCamOver, 40)
+    Else
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Sub(LVar0, 30)
+        Add(LVar1, 56)
+        Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+        Call(SetBattleCamZoom, 350)
+        Call(MoveBattleCamOver, 40)
+    EndIf
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PreFireBreath)
+    Wait(35)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_FireBreathStill)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 55)
+    Wait(10)
+    Call(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar3)
+    Call(GetStatusFlags, ACTOR_SELF, LVar4)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    IfFlag(LVar3, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
+        IfNotFlag(LVar4, STATUS_FLAG_SHRINK)
+            Sub(LVar0, 70)
+            Add(LVar1, 35)
+        Else
+            Sub(LVar0, 28)
+            Add(LVar1, 14)
+        EndIf
+    Else
+        IfNotFlag(LVar4, STATUS_FLAG_SHRINK)
+            Sub(LVar0, 75)
+            Add(LVar1, 49)
+        Else
+            Sub(LVar0, 30)
+            Add(LVar1, 19)
+        EndIf
+    EndIf
+    Add(LVar2, 10)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
+    Sub(LVar3, 40)
+    Set(LVar4, 20)
+    Call(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar6)
+    IfFlag(LVar6, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
+        PlayEffect(EFFECT_FIRE_BREATH, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 50, 1, 24, 0)
+    Else
+        Call(GetStatusFlags, ACTOR_SELF, LVar7)
+        IfNotFlag(LVar7, STATUS_FLAG_SHRINK)
+            Add(LVar0, 15)
+        Else
+            Add(LVar0, 6)
+        EndIf
+        Sub(LVar3, 10)
+        PlayEffect(EFFECT_FIRE_BREATH, 2, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 50, 1, 24, 0)
+        Call(N(SetBowserFireBreathScales), LVarF)
+    EndIf
+    Thread
+        Call(N(StartRumbleWithParams), 50, 148)
+        Call(PlaySound, SOUND_BOWSER_FIRE_BREATH_LOOP)
+        Wait(70)
+        Call(PlaySound, SOUND_BOWSER_FIRE_BREATH_LOOP | SOUND_ID_TRIGGER_CHANGE_SOUND)
+    EndThread
+    Wait(10)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVarA)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            Wait(10)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_FireBreathLoop)
+            Wait(30)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostFireBreath)
+            Wait(15)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
+            Wait(30)
+            ExecWait(N(EVS_AttackMissed))
+            IfEq(LVarA, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EndIf
+            Wait(30)
+            Return
+        EndCaseGroup
+        CaseDefault
+    EndSwitch
+    Wait(2)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar0)
+    IfFlag(LVar0, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
+        Set(LVar0, DMG_BOOSTED_FIRE_BREATH)
+    Else
+        Set(LVar0, DMG_FIRE_BREATH)
+    EndIf
+    Call(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_FIRE, SUPPRESS_EVENT_ALL, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
+    Switch(LVarF)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+        CaseOrEq(HIT_RESULT_10)
+            Wait(10)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_FireBreathLoop)
+            Wait(30)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostFireBreath)
+            Wait(15)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
+            Wait(30)
+            IfEq(LVarF, HIT_RESULT_10)
+                Return
+            EndIf
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_BurnHit) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-    EVT_CALL(GetDamageSource, LVar3)
-    EVT_SWITCH(LVar3)
-        EVT_CASE_EQ(DMG_SRC_FIRE_SHELL)
-            EVT_CALL(GetOriginalActorType, ACTOR_SELF, LVar7)
-            EVT_SWITCH(LVar7)
-                EVT_CASE_OR_EQ(ACTOR_TYPE_MONTY_MOLE)
-                EVT_CASE_OR_EQ(ACTOR_TYPE_MONTY_MOLE_BOSS)
-                EVT_END_CASE_GROUP
-                EVT_CASE_DEFAULT
-                    EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.01))
-                    EVT_ADD(LVar5, 55)
-                    EVT_CALL(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                    EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, FALSE, FALSE)
-            EVT_END_SWITCH
-            EVT_SET(LVar7, 0)
-            EVT_LOOP(30)
-                EVT_ADD(LVar7, 48)
-                EVT_CALL(SetActorYaw, ACTOR_SELF, LVar7)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_CALL(GetOriginalActorType, ACTOR_SELF, LVar7)
-            EVT_SWITCH(LVar7)
-                EVT_CASE_OR_EQ(ACTOR_TYPE_MONTY_MOLE)
-                EVT_CASE_OR_EQ(ACTOR_TYPE_MONTY_MOLE_BOSS)
-                    EVT_WAIT(30)
-                EVT_END_CASE_GROUP
-                EVT_CASE_DEFAULT
-                    EVT_SUB(LVar5, 55)
-                    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
-                    EVT_IF_EQ(LVar5, 0)
-                        EVT_CALL(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-                        EVT_CALL(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-                        EVT_CALL(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-                    EVT_ELSE
-                        EVT_CALL(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, FALSE, FALSE)
-                        EVT_CALL(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
-                        EVT_CALL(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, FALSE, FALSE)
-                    EVT_END_IF
-            EVT_END_SWITCH
-        EVT_CASE_DEFAULT
-            EVT_WAIT(20)
-    EVT_END_SWITCH
-    EVT_IF_NE(LVar2, -1)
-        EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar2)
-    EVT_END_IF
-    EVT_WAIT(10)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar1)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_CALL(GetPartEventFlags, ACTOR_SELF, LVar0, LVar1)
-            EVT_IF_NOT_FLAG(LVar1, ACTOR_EVENT_FLAG_FIREY | ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)
-                EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
-                EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar5)
-                EVT_IF_FLAG(LVar5, STATUS_FLAG_SHRINK)
-                    EVT_MULF(LVar3, EVT_FLOAT(0.4))
-                    EVT_MULF(LVar4, EVT_FLOAT(0.4))
-                EVT_END_IF
-                EVT_DIVF(LVar3, EVT_FLOAT(2.0))
-                EVT_CALL(GetActorFlags, ACTOR_SELF, LVar5)
-                EVT_IF_FLAG(LVar5, ACTOR_FLAG_UPSIDE_DOWN)
-                    EVT_SUBF(LVar1, LVar3)
-                EVT_ELSE
-                    EVT_ADDF(LVar1, LVar3)
-                EVT_END_IF
-                EVT_ADDF(LVar2, EVT_FLOAT(5.0))
-                EVT_DIVF(LVar3, EVT_FLOAT(10.0))
-                EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar5)
-                EVT_IF_FLAG(LVar5, STATUS_FLAG_SHRINK)
-                    EVT_MULF(LVar3, EVT_FLOAT(0.4))
-                    EVT_IF_LT(LVar3, 1)
-                        EVT_SETF(LVar3, EVT_FLOAT(1.0))
-                    EVT_END_IF
-                EVT_END_IF
-                EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
-            EVT_END_IF
-        EVT_CASE_EQ(EVENT_BURN_DEATH)
+    Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
+    Call(GetDamageSource, LVar3)
+    Switch(LVar3)
+        CaseEq(DMG_SRC_FIRE_SHELL)
+            Call(GetOriginalActorType, ACTOR_SELF, LVar7)
+            Switch(LVar7)
+                CaseOrEq(ACTOR_TYPE_MONTY_MOLE)
+                CaseOrEq(ACTOR_TYPE_MONTY_MOLE_BOSS)
+                EndCaseGroup
+                CaseDefault
+                    Call(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+                    Call(SetActorJumpGravity, ACTOR_SELF, Float(0.01))
+                    Add(LVar5, 55)
+                    Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+                    Call(JumpToGoal, ACTOR_SELF, 8, FALSE, FALSE, FALSE)
+            EndSwitch
+            Set(LVar7, 0)
+            Loop(30)
+                Add(LVar7, 48)
+                Call(SetActorYaw, ACTOR_SELF, LVar7)
+                Wait(1)
+            EndLoop
+            Call(GetOriginalActorType, ACTOR_SELF, LVar7)
+            Switch(LVar7)
+                CaseOrEq(ACTOR_TYPE_MONTY_MOLE)
+                CaseOrEq(ACTOR_TYPE_MONTY_MOLE_BOSS)
+                    Wait(30)
+                EndCaseGroup
+                CaseDefault
+                    Sub(LVar5, 55)
+                    Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
+                    IfEq(LVar5, 0)
+                        Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+                        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+                        Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+                        Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+                        Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+                        Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+                    Else
+                        Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+                        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, FALSE, FALSE)
+                        Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+                        Call(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
+                        Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+                        Call(JumpToGoal, ACTOR_SELF, 5, FALSE, FALSE, FALSE)
+                    EndIf
+            EndSwitch
+        CaseDefault
+            Wait(20)
+    EndSwitch
+    IfNe(LVar2, -1)
+        Call(SetAnimation, ACTOR_SELF, LVar0, LVar2)
+    EndIf
+    Wait(10)
+    Call(GetLastEvent, ACTOR_SELF, LVar1)
+    Switch(LVar1)
+        CaseEq(EVENT_BURN_HIT)
+            Call(GetPartEventFlags, ACTOR_SELF, LVar0, LVar1)
+            IfNotFlag(LVar1, ACTOR_EVENT_FLAG_FIREY | ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)
+                Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+                Call(GetActorSize, ACTOR_SELF, LVar3, LVar4)
+                Call(GetStatusFlags, ACTOR_SELF, LVar5)
+                IfFlag(LVar5, STATUS_FLAG_SHRINK)
+                    MulF(LVar3, Float(0.4))
+                    MulF(LVar4, Float(0.4))
+                EndIf
+                DivF(LVar3, Float(2.0))
+                Call(GetActorFlags, ACTOR_SELF, LVar5)
+                IfFlag(LVar5, ACTOR_FLAG_UPSIDE_DOWN)
+                    SubF(LVar1, LVar3)
+                Else
+                    AddF(LVar1, LVar3)
+                EndIf
+                AddF(LVar2, Float(5.0))
+                DivF(LVar3, Float(10.0))
+                Call(GetStatusFlags, ACTOR_SELF, LVar5)
+                IfFlag(LVar5, STATUS_FLAG_SHRINK)
+                    MulF(LVar3, Float(0.4))
+                    IfLt(LVar3, 1)
+                        SetF(LVar3, Float(1.0))
+                    EndIf
+                EndIf
+                PlayEffect(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
+            EndIf
+        CaseEq(EVENT_BURN_DEATH)
             // do nothing
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Attack_LightningBlast) = {
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_CHARGE_LIGHTNING)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
-    EVT_CALL(N(FadeBackgroundDarken))
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 54)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 2, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 50, 0)
-        EVT_WAIT(50)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 22)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, LVar0, 135, LVar2, EVT_FLOAT(1.5), LVarF, 0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_USE)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 135, LVar2, EVT_FLOAT(1.5), LVarE, 0)
-        EVT_WAIT(30)
-        EVT_CALL(RemoveEffect, LVarF)
-        EVT_CALL(RemoveEffect, LVarE)
-    EVT_ELSE
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 21)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 2, LVar0, LVar1, LVar2, EVT_FLOAT(0.6), 50, 0)
-        EVT_WAIT(50)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 9)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, LVar0, 54, LVar2, EVT_FLOAT(0.6), LVarF, 0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_USE)
-        EVT_SUB(LVar2, 3)
-        EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 54, LVar2, EVT_FLOAT(0.6), LVarE, 0)
-        EVT_WAIT(30)
-        EVT_CALL(RemoveEffect, LVarF)
-        EVT_CALL(RemoveEffect, LVarE)
-    EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_LIGHTNING)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_THREAD
-        EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, 0, LVar1)
-        EVT_CALL(N(UnkLightningBoltFxFunc1), LVar0, LVar1)
-    EVT_END_THREAD
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVarA)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_WAIT(10)
-            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-                EVT_WAIT(20)
-                EVT_CALL(N(FadeBackgroundLighten))
-            EVT_ELSE
-                EVT_WAIT(20)
-                EVT_CALL(N(FadeBackgroundLighten))
-            EVT_END_IF
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
-            EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_WAIT(5)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar0)
-    EVT_IF_FLAG(LVar0, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
-        EVT_SET(LVar0, DMG_BOOSTED_LIGHTNING_BLAST)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_ELSE
-        EVT_SET(LVar0, DMG_LIGHTNING_BLAST)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_END_IF
-    EVT_SWITCH(LVarF)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-        EVT_CASE_OR_EQ(HIT_RESULT_10)
-            EVT_WAIT(30)
-            EVT_CALL(N(FadeBackgroundLighten))
-            EVT_IF_EQ(LVarF, HIT_RESULT_10)
-                EVT_RETURN
-            EVT_END_IF
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
-            EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_13)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(MoveBattleCamOver, 30)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 30)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_CHARGE_LIGHTNING)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
+    Call(N(FadeBackgroundDarken))
+    Call(GetStatusFlags, ACTOR_SELF, LVar0)
+    IfNotFlag(LVar0, STATUS_FLAG_SHRINK)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar1, 54)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_ENERGY_IN_OUT, 2, LVar0, LVar1, LVar2, Float(1.5), 50, 0)
+        Wait(50)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar0, 22)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_LIGHT_RAYS, 2, LVar0, 135, LVar2, Float(1.5), LVarF, 0)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_USE)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_BULB_GLOW, 2, LVar0, 135, LVar2, Float(1.5), LVarE, 0)
+        Wait(30)
+        Call(RemoveEffect, LVarF)
+        Call(RemoveEffect, LVarE)
+    Else
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar1, 21)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_ENERGY_IN_OUT, 2, LVar0, LVar1, LVar2, Float(0.6), 50, 0)
+        Wait(50)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar0, 9)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_LIGHT_RAYS, 2, LVar0, 54, LVar2, Float(0.6), LVarF, 0)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_USE)
+        Sub(LVar2, 3)
+        PlayEffect(EFFECT_BULB_GLOW, 2, LVar0, 54, LVar2, Float(0.6), LVarE, 0)
+        Wait(30)
+        Call(RemoveEffect, LVarF)
+        Call(RemoveEffect, LVarE)
+    EndIf
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_LIGHTNING)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Thread
+        Call(GetGoalPos, ACTOR_SELF, LVar0, 0, LVar1)
+        Call(N(UnkLightningBoltFxFunc1), LVar0, LVar1)
+    EndThread
+    Call(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVarA)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            Wait(10)
+            IfEq(LVarA, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+                Wait(20)
+                Call(N(FadeBackgroundLighten))
+            Else
+                Wait(20)
+                Call(N(FadeBackgroundLighten))
+            EndIf
+            Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
+            Set(LVar1, ANIM_BattleBowser_Walk)
+            ExecWait(N(EVS_ReturnHome))
+            Return
+        EndCaseGroup
+        CaseDefault
+    EndSwitch
+    Wait(5)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar0)
+    IfFlag(LVar0, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
+        Set(LVar0, DMG_BOOSTED_LIGHTNING_BLAST)
+        Call(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
+    Else
+        Set(LVar0, DMG_LIGHTNING_BLAST)
+        Call(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
+    EndIf
+    Switch(LVarF)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+        CaseOrEq(HIT_RESULT_10)
+            Wait(30)
+            Call(N(FadeBackgroundLighten))
+            IfEq(LVarF, HIT_RESULT_10)
+                Return
+            EndIf
+            Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
+            Set(LVar1, ANIM_BattleBowser_Walk)
+            ExecWait(N(EVS_ReturnHome))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };

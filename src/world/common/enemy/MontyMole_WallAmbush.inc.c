@@ -1,24 +1,24 @@
 #include "MontyMole.h"
 
 EvtScript N(EVS_NpcAuxAI_MontyMole_WallAmbush) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar2, 50)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Sub(LVar2, 50)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAuxAI_MontyMole_WallAmbush_Hole) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar2, 50)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Anim13)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Sub(LVar2, 50)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Anim13)
+    Return
+    End
 };
 
 MobileAISettings N(AISettings_MontyMole_WallAmbush) = {
@@ -37,47 +37,47 @@ MobileAISettings N(AISettings_MontyMole_WallAmbush) = {
 };
 
 EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
-    EVT_CALL(func_800445D4, LVar0)
-    EVT_IF_EQ(LVar0, 100)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
-        EVT_LABEL(10)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar2, 130)
-        EVT_CALL(IsPlayerWithin, LVar0, LVar2, 80, LVar3)
-        EVT_IF_NE(LVar3, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_CALL(GetSelfNpcID, LVar0)
-        EVT_ADD(LVar0, 1)
-        EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-        EVT_ADD(LVar2, 30)
-        EVT_ADD(LVar3, 50)
-        EVT_CALL(SetNpcPos, LVar0, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-        EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Anim0E)
-        EVT_CALL(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
-        EVT_SUB(LVar2, 30)
-        EVT_ADD(LVar3, 80)
-        EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.7))
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(NpcJump0, NPC_SELF, LVar1, LVar2, LVar3, 20)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
-        EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-        EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
-    EVT_END_IF
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_MontyMole_WallAmbush)))
-    EVT_RETURN
-    EVT_END
+    Call(func_800445D4, LVar0)
+    IfEq(LVar0, 100)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
+        Label(10)
+        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Add(LVar2, 130)
+        Call(IsPlayerWithin, LVar0, LVar2, 80, LVar3)
+        IfNe(LVar3, 1)
+            Wait(1)
+            Goto(10)
+        EndIf
+        Call(GetSelfNpcID, LVar0)
+        Add(LVar0, 1)
+        Call(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
+        Add(LVar2, 30)
+        Add(LVar3, 50)
+        Call(SetNpcPos, LVar0, LVar1, LVar2, LVar3)
+        Wait(1)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, FALSE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+        Call(EnableNpcShadow, NPC_SELF, TRUE)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Anim0E)
+        Call(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
+        Sub(LVar2, 30)
+        Add(LVar3, 80)
+        Call(SetNpcJumpscale, NPC_SELF, Float(0.7))
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
+        Call(NpcJump0, NPC_SELF, LVar1, LVar2, LVar3, 20)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
+        Call(NpcFacePlayer, NPC_SELF, 0)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+    EndIf
+    Call(BasicAI_Main, Ref(N(AISettings_MontyMole_WallAmbush)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_MontyMole_WallAmbush_Hole_Unused) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_MontyMole_WallAmbush) = {

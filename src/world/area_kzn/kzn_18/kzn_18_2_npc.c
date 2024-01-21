@@ -8,139 +8,139 @@
 #include "world/common/todo/GetFloorCollider.inc.c"
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_KOLORADO_RAN_AHEAD)
-        EVT_LABEL(0)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_IF_LT(LVar0, -125)
-                EVT_WAIT(1)
-                EVT_GOTO(0)
-            EVT_END_IF
-        EVT_SET(GB_StoryProgress, STORY_CH5_KOLORADO_RAN_AHEAD)
-        EVT_CALL(SetNpcPos, NPC_SELF, -280, 250, -360)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_LT(LVar2, -340)
-            EVT_SET(LVar2, -320)
-        EVT_ELSE
-            EVT_SET(LVar2, -360)
-        EVT_END_IF
-        EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(10.0 / DT))
-        EVT_CALL(NpcMoveTo, NPC_SELF, 185, LVar2, 0)
-        EVT_CALL(NpcFacePlayer, NPC_SELF, 4)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, 185, 250, -340)
-        EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_END_IF
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(N(GetFloorCollider), LVar0)
-        EVT_IF_EQ(LVar0, COLLIDER_o442)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_IF_EQ(LVar0, COLLIDER_o405)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar3, LVar4, LVar5)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar3, LVar4, LVar5)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(400.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00FD)
-    EVT_WAIT(15 * DT)
-    EVT_SET(MV_KoloradoJumpDone, FALSE)
-    EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10 * DT)
-        EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-        EVT_SET(MV_KoloradoJumpDone, TRUE)
-    EVT_END_THREAD
-    EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00FE)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(MV_KoloradoJumpDone, TRUE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar3, LVar4, LVar5)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 420, 250, -350)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Run)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0 / DT))
-    EVT_CALL(NpcMoveTo, NPC_SELF, 530, -360, 0)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_WAIT(15 * DT)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-    EVT_SET(GB_StoryProgress, STORY_CH5_KOLORADO_IN_TREASURE_ROOM)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH5_KOLORADO_RAN_AHEAD)
+        Label(0)
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            IfLt(LVar0, -125)
+                Wait(1)
+                Goto(0)
+            EndIf
+        Set(GB_StoryProgress, STORY_CH5_KOLORADO_RAN_AHEAD)
+        Call(SetNpcPos, NPC_SELF, -280, 250, -360)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfLt(LVar2, -340)
+            Set(LVar2, -320)
+        Else
+            Set(LVar2, -360)
+        EndIf
+        Call(SetNpcSpeed, NPC_SELF, Float(10.0 / DT))
+        Call(NpcMoveTo, NPC_SELF, 185, LVar2, 0)
+        Call(NpcFacePlayer, NPC_SELF, 4)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
+    Else
+        Call(SetNpcPos, NPC_SELF, 185, 250, -340)
+        Call(SetNpcYaw, NPC_SELF, 270)
+    EndIf
+    Loop(0)
+        Wait(1)
+        Call(N(GetFloorCollider), LVar0)
+        IfEq(LVar0, COLLIDER_o442)
+            BreakLoop
+        EndIf
+        IfEq(LVar0, COLLIDER_o405)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DisablePlayerInput, TRUE)
+    Call(GetPlayerPos, LVar3, LVar4, LVar5)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar3, LVar4, LVar5)
+    Call(SetPanTarget, CAM_DEFAULT, LVar3, LVar4, LVar5)
+    Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00FD)
+    Wait(15 * DT)
+    Set(MV_KoloradoJumpDone, FALSE)
+    Thread
+        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Call(SetNpcJumpscale, NPC_SELF, Float(2.0))
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+        Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10 * DT)
+        Call(SetNpcYaw, NPC_SELF, 90)
+        Set(MV_KoloradoJumpDone, TRUE)
+    EndThread
+    Call(ContinueSpeech, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00FE)
+    Loop(0)
+        Wait(1)
+        IfEq(MV_KoloradoJumpDone, TRUE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar3, LVar4, LVar5)
+    Call(SetPanTarget, CAM_DEFAULT, 420, 250, -350)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Run)
+    Call(SetNpcSpeed, NPC_SELF, Float(5.0 / DT))
+    Call(NpcMoveTo, NPC_SELF, 530, -360, 0)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Wait(15 * DT)
+    Call(ResetCam, CAM_DEFAULT, Float(3.0 / DT))
+    Set(GB_StoryProgress, STORY_CH5_KOLORADO_IN_TREASURE_ROOM)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kolorado) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_KOLORADO_IN_TREASURE_ROOM)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH5_KOLORADO_IN_TREASURE_ROOM)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Kolorado)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Piranha) = {
-    EVT_LABEL(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar1, 100)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_IF_LT(LVar0, 100)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(DisableCameraLeadingPlayer))
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 285, 25, 35)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 400)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.5 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetNpcPos, NPC_SELF, 285, 25, 35)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim17)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim01)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_LargePiranha_Putrid_Anim04, ANIM_LargePiranha_Putrid_Anim01, 0, MSG_CH5_00FF)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim18)
-    EVT_WAIT(25 * DT)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_CALL(N(EnableCameraLeadingPlayer))
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-    EVT_SET(GF_KZN18_IntruderAlert, TRUE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Wait(1)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfGt(LVar1, 100)
+            Goto(0)
+        EndIf
+        IfLt(LVar0, 100)
+            Goto(0)
+        EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(N(DisableCameraLeadingPlayer))
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, 285, 25, 35)
+    Call(SetCamDistance, CAM_DEFAULT, 400)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.5 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(10 * DT)
+    Call(SetNpcPos, NPC_SELF, 285, 25, 35)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim17)
+    Wait(30 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim01)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_LargePiranha_Putrid_Anim04, ANIM_LargePiranha_Putrid_Anim01, 0, MSG_CH5_00FF)
+    Wait(10 * DT)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_LargePiranha_Putrid_Anim18)
+    Wait(25 * DT)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Call(N(EnableCameraLeadingPlayer))
+    Call(ResetCam, CAM_DEFAULT, Float(3.0 / DT))
+    Set(GF_KZN18_IntruderAlert, TRUE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Piranha) = {
-    EVT_IF_EQ(GF_KZN18_IntruderAlert, FALSE)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Piranha)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_KZN18_IntruderAlert, FALSE)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Piranha)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Kolorado) = {

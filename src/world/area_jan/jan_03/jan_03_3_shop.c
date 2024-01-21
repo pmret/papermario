@@ -47,14 +47,14 @@ ShopSellPriceData N(PriceList)[] = {
 };
 
 EvtScript N(EVS_OnBuy) = {
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_CANCEL)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_4)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_OK)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_2)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(LVar0)
+        CaseEq(SHOP_BUY_RESULT_CANCEL)
+        CaseEq(SHOP_BUY_RESULT_4)
+        CaseEq(SHOP_BUY_RESULT_OK)
+        CaseEq(SHOP_BUY_RESULT_2)
+    EndSwitch
+    Return
+    End
 };
 
 ShopItemLocation N(ItemPositions)[] = {
@@ -75,9 +75,9 @@ ShopOwner N(Owner) = {
 };
 
 EvtScript N(EVS_SetupShop) = {
-    EVT_CALL(EnableGroup, MODEL_g126, FALSE)
-    EVT_CALL(MakeShop, EVT_PTR(N(ItemPositions)), EVT_PTR(N(Inventory)), EVT_PTR(N(PriceList)), ITEM_ENTITY_FLAG_TOSS_LOWER)
-    EVT_CALL(MakeShopOwner, EVT_PTR(N(Owner)))
-    EVT_RETURN
-    EVT_END
+    Call(EnableGroup, MODEL_g126, FALSE)
+    Call(MakeShop, Ref(N(ItemPositions)), Ref(N(Inventory)), Ref(N(PriceList)), ITEM_ENTITY_FLAG_TOSS_LOWER)
+    Call(MakeShopOwner, Ref(N(Owner)))
+    Return
+    End
 };

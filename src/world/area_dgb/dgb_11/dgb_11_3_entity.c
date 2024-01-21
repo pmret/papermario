@@ -18,105 +18,105 @@ API_CALLABLE(N(PlaySpringAnimation)) {
 }
 
 EvtScript N(EVS_TetherCamToPlayer) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_GE(LVar1, LVar3)
-            EVT_SET(LVar1, LVar3)
-        EVT_END_IF
-        EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfGe(LVar1, LVar3)
+            Set(LVar1, LVar3)
+        EndIf
+        Call(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_LaunchToCeiling) = {
-    EVT_CALL(PlayerJump, 375, 270, -250, 20)
-    EVT_RETURN
-    EVT_END
+    Call(PlayerJump, 375, 270, -250, 20)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseSpring) = {
-    EVT_IF_EQ(AF_DGB_03, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(AF_DGB_03, TRUE)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetZoneEnabled, ZONE_o203, FALSE)
-    EVT_IF_EQ(AF_DGB_02, FALSE)
-        EVT_IF_EQ(GF_DGB10_BoardedFloor3, FALSE)
-            EVT_CALL(DisablePlayerPhysics, TRUE)
-            EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
-            EVT_WAIT(1)
-            EVT_SET(LVar3, 500)
-            EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayer), LVarA)
-            EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
-            EVT_EXEC_GET_TID(N(EVS_LaunchToCeiling), LVarB)
-            EVT_LOOP(0)
-                EVT_WAIT(1)
-                EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                EVT_IF_GE(LVar1, 165)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_CALL(SetPlayerPos, LVar0, 165, LVar2)
-            EVT_KILL_THREAD(LVarB)
-            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_JumpHitHead)
-            EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(1.0))
-            EVT_WAIT(10)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-            EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.0))
-            EVT_CALL(PlayerJump1, 375, 25, -250, 10)
-            EVT_CALL(N(PlaySpringAnimation))
-            EVT_CALL(PlaySoundAtPlayer, SOUND_SPRING, SOUND_SPACE_DEFAULT)
-            EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
-            EVT_CALL(PlayerJump, 375, 0, -175, 15)
-            EVT_KILL_THREAD(LVarA)
-            EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-            EVT_WAIT(2)
-            EVT_CALL(SetZoneEnabled, ZONE_o203, TRUE)
-            EVT_CALL(DisablePlayerPhysics, FALSE)
-            EVT_CALL(DisablePlayerInput, FALSE)
-            EVT_SET(AF_DGB_03, FALSE)
-        EVT_ELSE
-            EVT_CALL(DisablePlayerPhysics, TRUE)
-            EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
-            EVT_WAIT(1)
-            EVT_THREAD
-                EVT_WAIT(8)
-                EVT_CALL(GotoMap, EVT_PTR("dgb_10"), dgb_10_ENTRY_1)
-                EVT_WAIT(100)
-            EVT_END_THREAD
-            EVT_SET(LVar3, 500)
-            EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayer), LVarA)
-            EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
-            EVT_CALL(PlayerJump, 375, 270, -250, 20)
-            EVT_SET(AF_DGB_03, FALSE)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
-        EVT_WAIT(1)
-        EVT_SET(LVar3, 25)
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
-        EVT_CALL(PlayerJump, 375, 0, -175, 15)
-        EVT_SET(AF_DGB_02, FALSE)
-        EVT_KILL_THREAD(LVarA)
-        EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-        EVT_WAIT(2)
-        EVT_CALL(SetZoneEnabled, ZONE_o203, TRUE)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_SET(AF_DGB_03, FALSE)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(AF_DGB_03, TRUE)
+        Return
+    EndIf
+    Set(AF_DGB_03, TRUE)
+    Call(DisablePlayerInput, TRUE)
+    Call(SetZoneEnabled, ZONE_o203, FALSE)
+    IfEq(AF_DGB_02, FALSE)
+        IfEq(GF_DGB10_BoardedFloor3, FALSE)
+            Call(DisablePlayerPhysics, TRUE)
+            Call(SetPlayerActionState, ACTION_STATE_JUMP)
+            Wait(1)
+            Set(LVar3, 500)
+            ExecGetTID(N(EVS_TetherCamToPlayer), LVarA)
+            Call(SetPlayerJumpscale, Float(0.7))
+            ExecGetTID(N(EVS_LaunchToCeiling), LVarB)
+            Loop(0)
+                Wait(1)
+                Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                IfGe(LVar1, 165)
+                    BreakLoop
+                EndIf
+            EndLoop
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            Call(SetPlayerPos, LVar0, 165, LVar2)
+            KillThread(LVarB)
+            Call(SetPlayerAnimation, ANIM_MarioW2_JumpHitHead)
+            Call(ShakeCam, CAM_DEFAULT, 0, 20, Float(1.0))
+            Wait(10)
+            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+            Call(SetPlayerJumpscale, Float(0.0))
+            Call(PlayerJump1, 375, 25, -250, 10)
+            Call(N(PlaySpringAnimation))
+            Call(PlaySoundAtPlayer, SOUND_SPRING, SOUND_SPACE_DEFAULT)
+            Call(SetPlayerJumpscale, Float(0.7))
+            Call(PlayerJump, 375, 0, -175, 15)
+            KillThread(LVarA)
+            Call(SetPlayerActionState, ACTION_STATE_IDLE)
+            Wait(2)
+            Call(SetZoneEnabled, ZONE_o203, TRUE)
+            Call(DisablePlayerPhysics, FALSE)
+            Call(DisablePlayerInput, FALSE)
+            Set(AF_DGB_03, FALSE)
+        Else
+            Call(DisablePlayerPhysics, TRUE)
+            Call(SetPlayerActionState, ACTION_STATE_JUMP)
+            Wait(1)
+            Thread
+                Wait(8)
+                Call(GotoMap, Ref("dgb_10"), dgb_10_ENTRY_1)
+                Wait(100)
+            EndThread
+            Set(LVar3, 500)
+            ExecGetTID(N(EVS_TetherCamToPlayer), LVarA)
+            Call(SetPlayerJumpscale, Float(0.7))
+            Call(PlayerJump, 375, 270, -250, 20)
+            Set(AF_DGB_03, FALSE)
+        EndIf
+    Else
+        Call(SetPlayerActionState, ACTION_STATE_JUMP)
+        Wait(1)
+        Set(LVar3, 25)
+        Call(SetPlayerJumpscale, Float(0.7))
+        Call(PlayerJump, 375, 0, -175, 15)
+        Set(AF_DGB_02, FALSE)
+        KillThread(LVarA)
+        Call(SetPlayerActionState, ACTION_STATE_IDLE)
+        Wait(2)
+        Call(SetZoneEnabled, ZONE_o203, TRUE)
+        Call(DisablePlayerInput, FALSE)
+        Set(AF_DGB_03, FALSE)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_CALL(MakeItemEntity, ITEM_D_DOWN_JUMP, 250, 75, -100, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_DGB11_Item_DDownJump)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 375, 0, -250, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_UseSpring)))
-    EVT_SET(MV_SpringEntityID, LVar0)
-    EVT_RETURN
-    EVT_END
+    Call(MakeItemEntity, ITEM_D_DOWN_JUMP, 250, 75, -100, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_DGB11_Item_DDownJump)
+    Call(MakeEntity, Ref(Entity_ScriptSpring), 375, 0, -250, 0, MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(EVS_UseSpring)))
+    Set(MV_SpringEntityID, LVar0)
+    Return
+    End
 };

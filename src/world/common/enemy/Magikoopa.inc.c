@@ -30,38 +30,38 @@ MobileAISettings N(AISettings_Magikoopa) = {
 };
 
 EvtScript N(EVS_NpcAI_Magikoopa) = {
-    EVT_CALL(N(MagikoopaAI_Main), EVT_PTR(N(AISettings_Magikoopa)))
-    EVT_RETURN
-    EVT_END
+    Call(N(MagikoopaAI_Main), Ref(N(AISettings_Magikoopa)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_Magikoopa) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_NONE)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_JUMP)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_CALL(GetSelfAnimationFromTable, ENEMY_ANIM_INDEX_HIT, LVar0)
-            EVT_EXEC_WAIT(EVS_NpcHitRecoil)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_NONE)
+        CaseOrEq(ENCOUNTER_TRIGGER_JUMP)
+        CaseOrEq(ENCOUNTER_TRIGGER_HAMMER)
+        CaseOrEq(ENCOUNTER_TRIGGER_PARTNER)
+            Call(GetSelfAnimationFromTable, ENEMY_ANIM_INDEX_HIT, LVar0)
+            ExecWait(EVS_NpcHitRecoil)
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Magikoopa) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(N(MagikoopaAI_OnPlayerWon))
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(N(MagikoopaAI_OnPlayerFled))
-            EVT_CALL(OnPlayerFled, 0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(N(MagikoopaAI_OnPlayerWon))
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(N(MagikoopaAI_OnPlayerFled))
+            Call(OnPlayerFled, 0)
+    EndSwitch
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Magikoopa) = {
@@ -85,50 +85,50 @@ AnimID N(ExtraAnims_Magikoopa)[] = {
 };
 
 EvtScript N(EVS_NpcAuxAI_Magikoopa_GroundHitbox) = {
-    EVT_CALL(SetSelfVar, 1, 10)
-    EVT_CALL(SetSelfVar, 2, 40)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 1, 10)
+    Call(SetSelfVar, 2, 40)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAuxAI_Magikoopa_FlyingHitbox) = {
-    EVT_CALL(SetSelfVar, 1, 0)
-    EVT_CALL(SetSelfVar, 2, 55)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 1, 0)
+    Call(SetSelfVar, 2, 55)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_Magikoopa_Hitbox) = {
-    EVT_CALL(N(MagikoopaAI_SpellMain))
-    EVT_RETURN
-    EVT_END
+    Call(N(MagikoopaAI_SpellMain))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_Magikoopa_Hitbox) = {
-    EVT_CALL(N(MagikoopaAI_OnHitInit))
-    EVT_IF_EQ(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(MagikoopaAI_OnHit))
-    EVT_EXEC(EnemyNpcHit)
-    EVT_RETURN
-    EVT_END
+    Call(N(MagikoopaAI_OnHitInit))
+    IfEq(LVar0, 0)
+        Return
+    EndIf
+    Call(N(MagikoopaAI_OnHit))
+    Exec(EnemyNpcHit)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Magikoopa_Hitbox) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CALL(OnPlayerFled, 1)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(RemoveNpc, NPC_SELF)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+            Call(OnPlayerFled, 1)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Magikoopa_GroundHitbox) = {

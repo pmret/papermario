@@ -18,22 +18,22 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(EVS_SetupMusic) = {
-    EVT_CALL(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, 8)
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_METAL)
-    EVT_RETURN
-    EVT_END
+    Call(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, 8)
+    Call(UseDoorSounds, DOOR_SOUNDS_METAL)
+    Return
+    End
 };
 
 EvtScript N(EVS_StartKoopaBrosTheme) = {
-    EVT_CALL(FadeInMusic, 1, SONG_KOOPA_BROS_INTERLUDE, 0, 3000, 0, 127)
-    EVT_CALL(FadeOutMusic, 0, 3000)
-    EVT_RETURN
-    EVT_END
+    Call(FadeInMusic, 1, SONG_KOOPA_BROS_INTERLUDE, 0, 3000, 0, 127)
+    Call(FadeOutMusic, 0, 3000)
+    Return
+    End
 };
 
 EvtScript N(EVS_EndKoopaBrosTheme) = {
-    EVT_CALL(FadeInMusic, 0, SONG_KOOPA_FORTRESS, 0, 3000, 0, 127)
-    EVT_CALL(FadeOutMusic, 1, 3000)
-    EVT_RETURN
-    EVT_END
+    Call(FadeInMusic, 0, SONG_KOOPA_FORTRESS, 0, 3000, 0, 127)
+    Call(FadeOutMusic, 1, 3000)
+    Return
+    End
 };

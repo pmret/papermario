@@ -10,31 +10,31 @@
 #include "world/common/npc/Peach.inc.c"
 
 EvtScript N(EVS_NpcIdle_BowserAwaitBattle) = {
-    EVT_CALL(SetSelfVar, 0, 1)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE)
-    EVT_CALL(StartBossBattle, SONG_BOWSER_THEME)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 1)
+    Loop(0)
+        Wait(1)
+        Call(GetSelfVar, 0, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE)
+    Call(StartBossBattle, SONG_BOWSER_THEME)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Bowser_Body) = {
-    EVT_CALL(SetSelfVar, 0, 1)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bowser_Body) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_BowserAwaitBattle)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Bowser_Body)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_BowserAwaitBattle)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Bowser_Body)))
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Bowser)[] = {

@@ -6,59 +6,59 @@
 #include "world/common/enemy/ShyGuy_Stationary.inc.c"
 
 EvtScript N(EVS_ItemPrompt_ToyTrain) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH4_RETURNED_TOY_TRAIN)
-        EVT_CALL(ShowKeyChoicePopup)
-        EVT_CALL(CloseChoicePopup)
-        EVT_IF_EQ(LVar0, ITEM_TOY_TRAIN)
-            EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0002)
-        EVT_ELSE
-            EVT_IF_EQ(AF_OMO_05, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_SadTalk, ANIM_TrainToad_SadIdle, 0, MSG_CH4_0000)
-                EVT_SET(AF_OMO_05, TRUE)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_SadTalk, ANIM_TrainToad_SadIdle, 0, MSG_CH4_0001)
-                EVT_SET(AF_OMO_05, FALSE)
-            EVT_END_IF
-        EVT_END_IF
-    EVT_ELSE
-        EVT_IF_EQ(GF_OMO03_LearnedAboutTrainSwitches, FALSE)
-            EVT_IF_EQ(AF_OMO_05, FALSE)
-                EVT_THREAD
-                    EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-                    EVT_CALL(SetNpcJumpscale, NPC_Conductor, EVT_FLOAT(1.0))
-                    EVT_CALL(GetNpcPos, NPC_Conductor, LVar0, LVar1, LVar2)
-                    EVT_LOOP(2)
-                        EVT_CALL(NpcJump1, NPC_Conductor, LVar0, LVar1, LVar2, 15)
-                    EVT_END_LOOP
-                    EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-                EVT_END_THREAD
-                EVT_WAIT(10)
-                EVT_IF_EQ(MF_EitherSwitchPressed, FALSE)
-                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0003)
-                    EVT_CALL(EndSpeech, NPC_Conductor, -1, -1, 0)
-                EVT_ELSE
-                    EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0003)
-                    EVT_CALL(ContinueSpeech, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0005)
-                    EVT_SET(GF_OMO03_LearnedAboutTrainSwitches, TRUE)
-                EVT_END_IF
-                EVT_SET(AF_OMO_05, TRUE)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0004)
-                EVT_SET(GF_OMO03_LearnedAboutTrainSwitches, TRUE)
-            EVT_END_IF
-        EVT_ELSE
-            EVT_IF_EQ(AF_OMO_06, FALSE)
-                EVT_EXEC_WAIT(N(EVS_8024705C))
-            EVT_ELSE
-                EVT_EXEC_WAIT(N(EVS_80246108))
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    IfLt(GB_StoryProgress, STORY_CH4_RETURNED_TOY_TRAIN)
+        Call(ShowKeyChoicePopup)
+        Call(CloseChoicePopup)
+        IfEq(LVar0, ITEM_TOY_TRAIN)
+            Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0002)
+        Else
+            IfEq(AF_OMO_05, FALSE)
+                Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_SadTalk, ANIM_TrainToad_SadIdle, 0, MSG_CH4_0000)
+                Set(AF_OMO_05, TRUE)
+            Else
+                Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_SadTalk, ANIM_TrainToad_SadIdle, 0, MSG_CH4_0001)
+                Set(AF_OMO_05, FALSE)
+            EndIf
+        EndIf
+    Else
+        IfEq(GF_OMO03_LearnedAboutTrainSwitches, FALSE)
+            IfEq(AF_OMO_05, FALSE)
+                Thread
+                    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+                    Call(SetNpcJumpscale, NPC_Conductor, Float(1.0))
+                    Call(GetNpcPos, NPC_Conductor, LVar0, LVar1, LVar2)
+                    Loop(2)
+                        Call(NpcJump1, NPC_Conductor, LVar0, LVar1, LVar2, 15)
+                    EndLoop
+                    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+                EndThread
+                Wait(10)
+                IfEq(MF_EitherSwitchPressed, FALSE)
+                    Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0003)
+                    Call(EndSpeech, NPC_Conductor, -1, -1, 0)
+                Else
+                    Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0003)
+                    Call(ContinueSpeech, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0005)
+                    Set(GF_OMO03_LearnedAboutTrainSwitches, TRUE)
+                EndIf
+                Set(AF_OMO_05, TRUE)
+            Else
+                Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0004)
+                Set(GF_OMO03_LearnedAboutTrainSwitches, TRUE)
+            EndIf
+        Else
+            IfEq(AF_OMO_06, FALSE)
+                ExecWait(N(EVS_8024705C))
+            Else
+                ExecWait(N(EVS_80246108))
+            EndIf
+        EndIf
+    EndIf
+    Call(DisablePlayerInput, FALSE)
+    Unbind
+    Return
+    End
 };
 
 s32 N(ToyTrainList)[] = {
@@ -67,58 +67,58 @@ s32 N(ToyTrainList)[] = {
 };
 
 EvtScript N(EVS_NpcInteract_Conductor) = {
-    EVT_BIND_PADLOCK(EVT_PTR(N(EVS_ItemPrompt_ToyTrain)), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(ToyTrainList)), 0, 1)
-    EVT_RETURN
-    EVT_END
+    BindPadlock(Ref(N(EVS_ItemPrompt_ToyTrain)), TRIGGER_FORCE_ACTIVATE, 0, Ref(N(ToyTrainList)), 0, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Conductor) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH4_RETURNED_TOY_TRAIN)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TrainToad_SadIdle)
-    EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Conductor)))
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH4_RETURNED_TOY_TRAIN)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_TrainToad_SadIdle)
+    EndIf
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Conductor)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_TrainToad) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH4_GOT_STOREROOM_KEY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_SadTalk, ANIM_TrainToad_Blue_SadIdle, 0, MSG_CH4_0017)
-        EVT_CASE_LT(STORY_CH4_RETURNED_STOREROOM_KEY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_0018)
-        EVT_CASE_LT(STORY_CH4_RETURNED_TOY_TRAIN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_0019)
-        EVT_CASE_LT(STORY_CH4_GOT_FRYING_PAN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_001A)
-        EVT_CASE_LT(STORY_CH4_GOT_TAYCE_TS_CAKE)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_001B)
-        EVT_CASE_LT(STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_001C)
-        EVT_CASE_LT(STORY_CH4_PULLED_SWITCH_SWITCH)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_001D)
-        EVT_CASE_LT(STORY_CH4_SOLVED_COLOR_PUZZLE)
-            EVT_CALL(FindKeyItem, ITEM_MYSTERY_NOTE, LVar0)
-            EVT_IF_EQ(LVar0, -1)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_001E)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_001F)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH4_WATT_JOINED_PARTY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_0020)
-        EVT_CASE_LT(STORY_CH4_DEFEATED_GENERAL_GUY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_0021)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_0022)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH4_GOT_STOREROOM_KEY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_SadTalk, ANIM_TrainToad_Blue_SadIdle, 0, MSG_CH4_0017)
+        CaseLt(STORY_CH4_RETURNED_STOREROOM_KEY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_0018)
+        CaseLt(STORY_CH4_RETURNED_TOY_TRAIN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_0019)
+        CaseLt(STORY_CH4_GOT_FRYING_PAN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_001A)
+        CaseLt(STORY_CH4_GOT_TAYCE_TS_CAKE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_001B)
+        CaseLt(STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_001C)
+        CaseLt(STORY_CH4_PULLED_SWITCH_SWITCH)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_001D)
+        CaseLt(STORY_CH4_SOLVED_COLOR_PUZZLE)
+            Call(FindKeyItem, ITEM_MYSTERY_NOTE, LVar0)
+            IfEq(LVar0, -1)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_001E)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_001F)
+            EndIf
+        CaseLt(STORY_CH4_WATT_JOINED_PARTY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_0020)
+        CaseLt(STORY_CH4_DEFEATED_GENERAL_GUY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_0021)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Blue_Talk, ANIM_TrainToad_Blue_Idle, 0, MSG_CH4_0022)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TrainToad) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TrainToad)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_TrainToad)))
+    Return
+    End
 };
 
 NpcData N(NpcData_TrainToads)[] = {

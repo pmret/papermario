@@ -47,31 +47,31 @@ API_CALLABLE(N(GetSectionPosOffsets)) {
 }
 
 EvtScript N(EVS_UpdateSceneryPos) = {
-    EVT_CALL(TranslateGroup, MODEL_mac_side, -5750, 0, 0)
-    EVT_CALL(TranslateGroup, MODEL_turen, -3250, 0, 0)
-    EVT_CALL(TranslateGroup, MODEL_iwa_side, 1750, 0, 0)
-    EVT_CALL(GetEntryID, LVar2)
-    EVT_SWITCH(LVar2)
-        EVT_CASE_EQ(iwa_11_ENTRY_0)
-            EVT_SET(LVar3, 350)
-            EVT_SET(MV_TrainMoveSpeed, 10)
-        EVT_CASE_EQ(iwa_11_ENTRY_1)
-            EVT_SET(LVar3, 400)
-            EVT_SET(MV_TrainMoveSpeed, -10)
-    EVT_END_SWITCH
-    EVT_LOOP(0)
-        EVT_SET(LVar0, MV_TrainMoveDist)
-        EVT_SUB(LVar0, LVar3)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, 0, 0)
-        EVT_CALL(N(GetSectionPosOffsets))
-        EVT_CALL(TranslateGroup, MODEL_field_a, LVar5, 0, 0)
-        EVT_CALL(TranslateGroup, MODEL_field_b, LVar6, 0, 0)
-        EVT_CALL(TranslateGroup, MODEL_field_c, LVar7, 0, 0)
-        EVT_CALL(TranslateGroup, MODEL_field_d, LVar8, 0, 0)
-        EVT_CALL(TranslateGroup, MODEL_field_e, LVar9, 0, 0)
-        EVT_CALL(TranslateGroup, MODEL_field_f, LVarA, 0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(TranslateGroup, MODEL_mac_side, -5750, 0, 0)
+    Call(TranslateGroup, MODEL_turen, -3250, 0, 0)
+    Call(TranslateGroup, MODEL_iwa_side, 1750, 0, 0)
+    Call(GetEntryID, LVar2)
+    Switch(LVar2)
+        CaseEq(iwa_11_ENTRY_0)
+            Set(LVar3, 350)
+            Set(MV_TrainMoveSpeed, 10)
+        CaseEq(iwa_11_ENTRY_1)
+            Set(LVar3, 400)
+            Set(MV_TrainMoveSpeed, -10)
+    EndSwitch
+    Loop(0)
+        Set(LVar0, MV_TrainMoveDist)
+        Sub(LVar0, LVar3)
+        Call(SetPanTarget, CAM_DEFAULT, LVar0, 0, 0)
+        Call(N(GetSectionPosOffsets))
+        Call(TranslateGroup, MODEL_field_a, LVar5, 0, 0)
+        Call(TranslateGroup, MODEL_field_b, LVar6, 0, 0)
+        Call(TranslateGroup, MODEL_field_c, LVar7, 0, 0)
+        Call(TranslateGroup, MODEL_field_d, LVar8, 0, 0)
+        Call(TranslateGroup, MODEL_field_e, LVar9, 0, 0)
+        Call(TranslateGroup, MODEL_field_f, LVarA, 0, 0)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };

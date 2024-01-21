@@ -16,63 +16,63 @@ Vec3f N(D_80245E88_CA3DA8)[] = {
 };
 
 EvtScript N(EVS_Scene_Epilogue) = {
-    EVT_CALL(SetPlayerPos, -400, 0, 200)
-    EVT_CALL(SetNpcPos, NPC_PARTNER, -380, 0, 200)
-    EVT_CALL(func_802CF56C, 2)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerPos, -400, 0, 200)
+    Call(SetNpcPos, NPC_PARTNER, -380, 0, 200)
+    Call(func_802CF56C, 2)
+    Call(DisablePartnerAI, 0)
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
     EVT_VEC3I_SET(LVar0, 230, 0, 350)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-10.0))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 350)
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(17.5), EVT_FLOAT(35.0))
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, 0, -50)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(70)
-    EVT_CALL(InterpNpcYaw, NPC_Lakilester_Epilogue, 90, 0)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Lakilester_Epilogue, ANIM_WorldLakilester_Talk)
-    EVT_WAIT(40)
-    EVT_CALL(SetNpcAnimation, NPC_Lakilester_Epilogue, ANIM_WorldLakilester_Idle)
-    EVT_CALL(SetNpcAnimation, NPC_Parakarry_Epilogue, ANIM_WorldParakarry_Talk)
-    EVT_WAIT(40)
-    EVT_CALL(SetNpcAnimation, NPC_Parakarry_Epilogue, ANIM_WorldParakarry_Idle)
-    EVT_CALL(InterpNpcYaw, NPC_Parakarry_Epilogue, 90, 0)
-    EVT_CALL(NpcFlyTo, NPC_Parakarry_Epilogue, 400, 200, 287, 80, -5, EASING_LINEAR)
-    EVT_CALL(InterpNpcYaw, NPC_Lakilester_Epilogue, 270, 0)
-    EVT_WAIT(40)
-    EVT_CALL(FadeOutMusic, 0, 1000)
-    EVT_CALL(GotoMap, EVT_PTR("sam_11"), sam_11_ENTRY_2)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-10.0))
+    Call(SetCamDistance, CAM_DEFAULT, 350)
+    Call(SetCamPosA, CAM_DEFAULT, Float(17.5), Float(35.0))
+    Call(SetCamPosB, CAM_DEFAULT, 0, -50)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(70)
+    Call(InterpNpcYaw, NPC_Lakilester_Epilogue, 90, 0)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_Lakilester_Epilogue, ANIM_WorldLakilester_Talk)
+    Wait(40)
+    Call(SetNpcAnimation, NPC_Lakilester_Epilogue, ANIM_WorldLakilester_Idle)
+    Call(SetNpcAnimation, NPC_Parakarry_Epilogue, ANIM_WorldParakarry_Talk)
+    Wait(40)
+    Call(SetNpcAnimation, NPC_Parakarry_Epilogue, ANIM_WorldParakarry_Idle)
+    Call(InterpNpcYaw, NPC_Parakarry_Epilogue, 90, 0)
+    Call(NpcFlyTo, NPC_Parakarry_Epilogue, 400, 200, 287, 80, -5, EASING_LINEAR)
+    Call(InterpNpcYaw, NPC_Lakilester_Epilogue, 270, 0)
+    Wait(40)
+    Call(FadeOutMusic, 0, 1000)
+    Call(GotoMap, Ref("sam_11"), sam_11_ENTRY_2)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Lakilester_Epilogue) = {
-    EVT_CALL(SetPlayerPos, -400, 0, 200)
-    EVT_CALL(SetNpcPos, NPC_PARTNER, -380, 0, 200)
-    EVT_CALL(SetNpcPos, NPC_Lakilester_Epilogue, 196, 20, 354)
-    EVT_CALL(SetNpcYaw, NPC_Lakilester_Epilogue, 270)
-    EVT_RETURN
-    EVT_END
+    Call(SetPlayerPos, -400, 0, 200)
+    Call(SetNpcPos, NPC_PARTNER, -380, 0, 200)
+    Call(SetNpcPos, NPC_Lakilester_Epilogue, 196, 20, 354)
+    Call(SetNpcYaw, NPC_Lakilester_Epilogue, 270)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Lakilulu_Epilogue) = {
-    EVT_CALL(SetNpcPos, NPC_Lakilulu_Epilogue, 163, 20, 370)
-    EVT_CALL(SetNpcYaw, NPC_Lakilulu_Epilogue, 90)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Lakilulu_Epilogue, 163, 20, 370)
+    Call(SetNpcYaw, NPC_Lakilulu_Epilogue, 90)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Parakarry_Epilogue) = {
-    EVT_CALL(SetNpcPos, NPC_Parakarry_Epilogue, 266, 20, 322)
-    EVT_CALL(SetNpcYaw, NPC_Parakarry_Epilogue, 270)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Parakarry_Epilogue, 266, 20, 322)
+    Call(SetNpcYaw, NPC_Parakarry_Epilogue, 270)
+    Return
+    End
 };
 
 NpcData N(NpcData_Lakilester_Epilogue)[] = {

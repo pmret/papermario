@@ -7,101 +7,101 @@ extern EvtScript N(EVS_ToadHouse_ReturnFromRest);
 extern EvtScript N(EVS_ToadHouse_GetInBed);
 
 EvtScript N(8024AC14) = {
-    EVT_CALL(EnableModel, LVar4, FALSE)
-    EVT_CALL(EnableModel, LVar5, TRUE)
-    EVT_CALL(RotateModel, LVar6, 0, 0, 0, 1)
-    EVT_CALL(RotateModel, LVar7, 0, 0, 0, 1)
-    EVT_RETURN
-    EVT_END
+    Call(EnableModel, LVar4, FALSE)
+    Call(EnableModel, LVar5, TRUE)
+    Call(RotateModel, LVar6, 0, 0, 0, 1)
+    Call(RotateModel, LVar7, 0, 0, 0, 1)
+    Return
+    End
 };
 
 EvtScript N(8024AC8C) = {
-    EVT_SET(LVar9, LVar7)
-    EVT_SET(LVar8, LVar6)
-    EVT_SET(LVar7, LVar5)
-    EVT_SET(LVar6, LVar4)
-    EVT_WAIT(70)
-    EVT_CALL(EnableModel, LVar6, FALSE)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(EnableModel, LVar6, TRUE)
-    EVT_END_THREAD
-    EVT_CALL(MakeLerp, 0, 180, 20, EASING_CUBIC_IN)
-    EVT_LABEL(1)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, LVar8, LVar0, 0, 0, -1)
-    EVT_CALL(RotateModel, LVar9, LVar0, 0, 0, -1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_WAIT(1)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_CALL(EnableModel, LVar7, FALSE)
-    EVT_RETURN
-    EVT_END
+    Set(LVar9, LVar7)
+    Set(LVar8, LVar6)
+    Set(LVar7, LVar5)
+    Set(LVar6, LVar4)
+    Wait(70)
+    Call(EnableModel, LVar6, FALSE)
+    Thread
+        Wait(5)
+        Call(EnableModel, LVar6, TRUE)
+    EndThread
+    Call(MakeLerp, 0, 180, 20, EASING_CUBIC_IN)
+    Label(1)
+    Call(UpdateLerp)
+    Call(RotateModel, LVar8, LVar0, 0, 0, -1)
+    Call(RotateModel, LVar9, LVar0, 0, 0, -1)
+    IfEq(LVar1, 1)
+        Wait(1)
+        Goto(1)
+    EndIf
+    Call(EnableModel, LVar7, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_ToadHouseKeeper) = {
-    EVT_CALL(N(ToadHouse_InitScreenOverlay), 0, 0, 0)
-    EVT_EXEC_WAIT(N(EVS_ToadHouse_SetDialogue))
-    EVT_IF_EQ(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(LVar9, LVar1)
-    EVT_SET(LVarA, LVar2)
-    EVT_SET(LVarB, LVar3)
-    EVT_CALL(N(ToadHouse_DoesPlayerNeedSleep))
-    EVT_IF_EQ(LVar1, 0)
-        EVT_SET(LVar8, LVar0)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVar8)
-    EVT_CALL(ShowChoice, MSG_Choice_0006)
-    EVT_WAIT(3)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVar9)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVarA)
-    EVT_CALL(SetPlayerJumpscale, 1)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(N(ToadHouse_DisableStatusBar))
-    EVT_IF_NE(LVar4, 0)
-        EVT_EXEC(N(8024AC8C))
-    EVT_END_IF
-    EVT_CALL(N(ToadHouse_PutPartnerAway), LVarA)
-    EVT_WAIT(20)
-    EVT_EXEC_WAIT(N(EVS_ToadHouse_GetInBed))
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 255, 60, EASING_LINEAR)
-        EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(ToadHouse_UpdateScreenOverlay), 3, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_CALL(FullyRestoreHPandFP)
-        EVT_CALL(FullyRestoreSP)
-        EVT_IF_NE(LVar4, 0)
-            EVT_EXEC(N(8024AC14))
-        EVT_END_IF
-        EVT_CALL(N(ToadHouse_GetPartnerBackOut), LVarA)
-        EVT_WAIT(45)
-        EVT_CALL(MakeLerp, 255, 0, 30, EASING_LINEAR)
-        EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(ToadHouse_UpdateScreenOverlay), 0, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(105)
-    EVT_EXEC_WAIT(N(EVS_ToadHouse_ReturnFromRest))
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVarB)
-    EVT_CALL(N(ToadHouse_ShowWorldStatusBar))
-    EVT_RETURN
-    EVT_END
+    Call(N(ToadHouse_InitScreenOverlay), 0, 0, 0)
+    ExecWait(N(EVS_ToadHouse_SetDialogue))
+    IfEq(LVar0, 0)
+        Return
+    EndIf
+    Set(LVar9, LVar1)
+    Set(LVarA, LVar2)
+    Set(LVarB, LVar3)
+    Call(N(ToadHouse_DoesPlayerNeedSleep))
+    IfEq(LVar1, 0)
+        Set(LVar8, LVar0)
+    EndIf
+    Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVar8)
+    Call(ShowChoice, MSG_Choice_0006)
+    Wait(3)
+    IfEq(LVar0, 1)
+        Call(ContinueSpeech, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVar9)
+        Return
+    EndIf
+    Call(ContinueSpeech, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVarA)
+    Call(SetPlayerJumpscale, 1)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(N(ToadHouse_DisableStatusBar))
+    IfNe(LVar4, 0)
+        Exec(N(8024AC8C))
+    EndIf
+    Call(N(ToadHouse_PutPartnerAway), LVarA)
+    Wait(20)
+    ExecWait(N(EVS_ToadHouse_GetInBed))
+    Thread
+        Call(MakeLerp, 0, 255, 60, EASING_LINEAR)
+        Label(0)
+        Call(UpdateLerp)
+        Call(N(ToadHouse_UpdateScreenOverlay), 3, LVar0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+        Call(FullyRestoreHPandFP)
+        Call(FullyRestoreSP)
+        IfNe(LVar4, 0)
+            Exec(N(8024AC14))
+        EndIf
+        Call(N(ToadHouse_GetPartnerBackOut), LVarA)
+        Wait(45)
+        Call(MakeLerp, 255, 0, 30, EASING_LINEAR)
+        Label(1)
+        Call(UpdateLerp)
+        Call(N(ToadHouse_UpdateScreenOverlay), 0, LVar0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(1)
+        EndIf
+    EndThread
+    Wait(105)
+    ExecWait(N(EVS_ToadHouse_ReturnFromRest))
+    Call(DisablePlayerPhysics, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, LVarB)
+    Call(N(ToadHouse_ShowWorldStatusBar))
+    Return
+    End
 };

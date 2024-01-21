@@ -73,35 +73,35 @@ API_CALLABLE(N(AnimateChestSize)) {
 #include "world/common/npc/StarSpirit.inc.c"
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
-    EVT_WAIT(30)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Panic, 5, MSG_CH5_0117)
-    EVT_RETURN
-    EVT_END
+    Wait(30)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Panic, 5, MSG_CH5_0117)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kolorado) = {
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
-    EVT_WAIT(1)
-    EVT_CALL(SetNpcRotationPivot, NPC_SELF, 10)
-    EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 180)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado)))
-    EVT_RETURN
-    EVT_END
+    Call(InterpNpcYaw, NPC_SELF, 90, 1)
+    Wait(1)
+    Call(SetNpcRotationPivot, NPC_SELF, 10)
+    Call(SetNpcRotation, NPC_SELF, 0, 0, 180)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Kolorado)))
+    Return
+    End
 };
 
 EvtScript N(EVS_CameraFollowMisstar) = {
-    EVT_LABEL(0)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(GetNpcPos, NPC_Misstar, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 60)
-        EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_LT(LVar1, 2740)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(GetNpcPos, NPC_Misstar, LVar0, LVar1, LVar2)
+        Add(LVar1, 60)
+        Call(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfLt(LVar1, 2740)
+            Wait(1)
+            Goto(0)
+        EndIf
+    Return
+    End
 };
 
 Vec3f N(PyroclastPathA)[] = {
@@ -139,141 +139,141 @@ s32 N(SoundXPositions)[] = {
 };
 
 EvtScript N(EVS_PlayPyroclastSounds) = {
-    EVT_ADD(LVar0, 1)
-    EVT_USE_BUF(N(SoundXPositions))
-    EVT_LOOP(LVar0)
-        EVT_BUF_READ1(LVar1)
-    EVT_END_LOOP
-    EVT_IF_EQ(AF_KZN23_UseAlternateSound, FALSE)
-        EVT_CALL(PlaySoundAt, SOUND_FLYING_PYROCLAST_1, SOUND_SPACE_DEFAULT, LVar1, 2800, 0)
-        EVT_SET(AF_KZN23_UseAlternateSound, TRUE)
-    EVT_ELSE
-        EVT_CALL(PlaySoundAt, SOUND_FLYING_PYROCLAST_2, SOUND_SPACE_DEFAULT, LVar1, 2800, 0)
-        EVT_SET(AF_KZN23_UseAlternateSound, FALSE)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Add(LVar0, 1)
+    UseBuf(N(SoundXPositions))
+    Loop(LVar0)
+        BufRead1(LVar1)
+    EndLoop
+    IfEq(AF_KZN23_UseAlternateSound, FALSE)
+        Call(PlaySoundAt, SOUND_FLYING_PYROCLAST_1, SOUND_SPACE_DEFAULT, LVar1, 2800, 0)
+        Set(AF_KZN23_UseAlternateSound, TRUE)
+    Else
+        Call(PlaySoundAt, SOUND_FLYING_PYROCLAST_2, SOUND_SPACE_DEFAULT, LVar1, 2800, 0)
+        Set(AF_KZN23_UseAlternateSound, FALSE)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_SpawnPyroclasts) = {
-    EVT_LOOP(0)
-        EVT_THREAD
-            EVT_CALL(RandInt, 3, LVar0)
-            EVT_EXEC(N(EVS_PlayPyroclastSounds))
-            EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(0)
-                    EVT_PLAY_EFFECT(EFFECT_65, 2, 50, 2650, -20, 1, 0)
-                    EVT_SET(LVarE, LVarF)
-                    EVT_CALL(LoadPath, 15, EVT_PTR(N(PyroclastPathA)), ARRAY_COUNT(N(PyroclastPathA)), EASING_QUADRATIC_OUT)
-                EVT_CASE_EQ(1)
-                    EVT_PLAY_EFFECT(EFFECT_65, 2, -20, 2650, -20, 1, 0)
-                    EVT_SET(LVarE, LVarF)
-                    EVT_CALL(LoadPath, 10, EVT_PTR(N(PyroclastPathB)), ARRAY_COUNT(N(PyroclastPathB)), EASING_QUADRATIC_OUT)
-                EVT_CASE_EQ(2)
-                    EVT_PLAY_EFFECT(EFFECT_65, 2, 10, 2650, -20, 1, 0)
-                    EVT_SET(LVarE, LVarF)
-                    EVT_CALL(LoadPath, 15, EVT_PTR(N(PyroclastPathC)), ARRAY_COUNT(N(PyroclastPathC)), EASING_QUADRATIC_OUT)
-                EVT_CASE_EQ(3)
-                    EVT_PLAY_EFFECT(EFFECT_65, 2, -50, 2650, -20, 1, 0)
-                    EVT_SET(LVarE, LVarF)
-                    EVT_CALL(LoadPath, 20, EVT_PTR(N(PyroclastPathD)), ARRAY_COUNT(N(PyroclastPathD)), EASING_QUADRATIC_OUT)
-            EVT_END_SWITCH
-            EVT_CALL(RandInt, 1, LVar4)
-            EVT_IF_EQ(LVar4, 0)
-                EVT_SET(LVar4, -1)
-            EVT_END_IF
-            EVT_LOOP(0)
-                EVT_CALL(GetNextPathPos)
-                EVT_MUL(LVar1, LVar4)
-                EVT_CALL(N(SetPyroclastPos), LVar1, LVar2, LVar3)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar0, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-            EVT_CALL(DismissEffect, LVarE)
-        EVT_END_THREAD
-        EVT_WAIT(8)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Thread
+            Call(RandInt, 3, LVar0)
+            Exec(N(EVS_PlayPyroclastSounds))
+            Switch(LVar0)
+                CaseEq(0)
+                    PlayEffect(EFFECT_65, 2, 50, 2650, -20, 1, 0)
+                    Set(LVarE, LVarF)
+                    Call(LoadPath, 15, Ref(N(PyroclastPathA)), ARRAY_COUNT(N(PyroclastPathA)), EASING_QUADRATIC_OUT)
+                CaseEq(1)
+                    PlayEffect(EFFECT_65, 2, -20, 2650, -20, 1, 0)
+                    Set(LVarE, LVarF)
+                    Call(LoadPath, 10, Ref(N(PyroclastPathB)), ARRAY_COUNT(N(PyroclastPathB)), EASING_QUADRATIC_OUT)
+                CaseEq(2)
+                    PlayEffect(EFFECT_65, 2, 10, 2650, -20, 1, 0)
+                    Set(LVarE, LVarF)
+                    Call(LoadPath, 15, Ref(N(PyroclastPathC)), ARRAY_COUNT(N(PyroclastPathC)), EASING_QUADRATIC_OUT)
+                CaseEq(3)
+                    PlayEffect(EFFECT_65, 2, -50, 2650, -20, 1, 0)
+                    Set(LVarE, LVarF)
+                    Call(LoadPath, 20, Ref(N(PyroclastPathD)), ARRAY_COUNT(N(PyroclastPathD)), EASING_QUADRATIC_OUT)
+            EndSwitch
+            Call(RandInt, 1, LVar4)
+            IfEq(LVar4, 0)
+                Set(LVar4, -1)
+            EndIf
+            Loop(0)
+                Call(GetNextPathPos)
+                Mul(LVar1, LVar4)
+                Call(N(SetPyroclastPos), LVar1, LVar2, LVar3)
+                Wait(1)
+                IfEq(LVar0, 0)
+                    BreakLoop
+                EndIf
+            EndLoop
+            Call(DismissEffect, LVarE)
+        EndThread
+        Wait(8)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_Misstar) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(N(AllowCameraInterpY))
-    EVT_EXEC(N(EVS_CameraFollowMisstar))
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_THREAD
-        EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Carried)
-    EVT_END_THREAD
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_LAND)
+    Call(DisablePartnerAI, 0)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(N(AllowCameraInterpY))
+    Exec(N(EVS_CameraFollowMisstar))
+    Call(SetSelfVar, 0, 0)
+    Thread
+        Wait(1)
+        Call(SetPlayerAnimation, ANIM_MarioW2_Carried)
+    EndThread
     // fly out of the volcano shaft
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 3090, 160, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_SUB(LVar0, 100)
-            EVT_CALL(SetNpcPos, NPC_SELF, 0, LVar0, 0)
-            EVT_CALL(SetNpcPos, NPC_Kolorado, 10, LVar0, -5)
-            EVT_CALL(SetPlayerPos, -10, LVar0, 5)
-            EVT_ADD(LVar0, 20)
-            EVT_CALL(SetNpcPos, NPC_PARTNER, -10, LVar0, 0)
-            EVT_IF_GT(LVar0, 2840)
-                EVT_CALL(SetSelfVar, 0, 1)
-            EVT_END_IF
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
+    Thread
+        Call(MakeLerp, 0, 3090, 160, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Sub(LVar0, 100)
+            Call(SetNpcPos, NPC_SELF, 0, LVar0, 0)
+            Call(SetNpcPos, NPC_Kolorado, 10, LVar0, -5)
+            Call(SetPlayerPos, -10, LVar0, 5)
+            Add(LVar0, 20)
+            Call(SetNpcPos, NPC_PARTNER, -10, LVar0, 0)
+            IfGt(LVar0, 2840)
+                Call(SetSelfVar, 0, 1)
+            EndIf
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
     // wait for escape
-    EVT_LABEL(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
+    Label(0)
+        Call(GetSelfVar, 0, LVar0)
+        IfEq(LVar0, 0)
+            Wait(1)
+            Goto(0)
+        EndIf
     // make the pyroclasts + sounds
-    EVT_EXEC(N(EVS_SpawnPyroclasts))
-    EVT_WAIT(35)
+    Exec(N(EVS_SpawnPyroclasts))
+    Wait(35)
     // make the chest thrown from the volcano
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_Chest), 0, 2650, 0, 148, MAKE_ENTITY_END)
-    EVT_SET(LVarA, LVar0)
-    EVT_THREAD
-        EVT_CALL(N(AnimateChestSize))
-    EVT_END_THREAD
-    EVT_SET(LVar9, LVarA)
-    EVT_CALL(N(GetChestPosition), LVar9, LVar2, LVar3, LVar4)
-    EVT_CALL(MakeLerp, LVar3, 3000, 10, EASING_QUADRATIC_IN)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetChestPosition), LVar9, LVar2, LVar0, LVar4)
-        EVT_ADD(LVar2, -1)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
+    Call(MakeEntity, Ref(Entity_Chest), 0, 2650, 0, 148, MAKE_ENTITY_END)
+    Set(LVarA, LVar0)
+    Thread
+        Call(N(AnimateChestSize))
+    EndThread
+    Set(LVar9, LVarA)
+    Call(N(GetChestPosition), LVar9, LVar2, LVar3, LVar4)
+    Call(MakeLerp, LVar3, 3000, 10, EASING_QUADRATIC_IN)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(N(SetChestPosition), LVar9, LVar2, LVar0, LVar4)
+        Add(LVar2, -1)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
     // end scene
-    EVT_WAIT(45)
-    EVT_CALL(GotoMap, EVT_PTR("jan_04"), jan_04_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Wait(45)
+    Call(GotoMap, Ref("jan_04"), jan_04_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Misstar) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -100, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldMisstar_IdleAngry)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_Scene_Misstar)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 0, -100, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldMisstar_IdleAngry)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_Scene_Misstar)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Kolorado) = {

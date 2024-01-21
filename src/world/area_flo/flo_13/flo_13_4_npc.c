@@ -94,503 +94,503 @@ Vec3f N(FlightPath_LakiluluDeparts)[] = {
 };
 
 EvtScript N(EVS_Lakliester_ManageYaw) = {
-    EVT_CALL(GetNpcPos, NPC_Lakilester, LVar0, LVar1, LVar2)
-    EVT_LABEL(0)
-        EVT_CALL(GetNpcPos, NPC_Lakilester, LVar3, LVar4, LVar5)
-        EVT_CALL(N(UnkFunc42))
-        EVT_CALL(InterpNpcYaw, NPC_Lakilester, LVarA, 0)
-        EVT_SET(LVar0, LVar3)
-        EVT_SET(LVar1, LVar4)
-        EVT_SET(LVar2, LVar5)
-        EVT_CALL(GetAngleBetweenNPCs, NPC_PARTNER, NPC_Lakilester, LVarA)
-        EVT_CALL(InterpNpcYaw, NPC_PARTNER, LVarA, 0)
-        EVT_CALL(PlayerFaceNpc, NPC_Lakilester, FALSE)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, NPC_Lakilester, LVar0, LVar1, LVar2)
+    Label(0)
+        Call(GetNpcPos, NPC_Lakilester, LVar3, LVar4, LVar5)
+        Call(N(UnkFunc42))
+        Call(InterpNpcYaw, NPC_Lakilester, LVarA, 0)
+        Set(LVar0, LVar3)
+        Set(LVar1, LVar4)
+        Set(LVar2, LVar5)
+        Call(GetAngleBetweenNPCs, NPC_PARTNER, NPC_Lakilester, LVarA)
+        Call(InterpNpcYaw, NPC_PARTNER, LVarA, 0)
+        Call(PlayerFaceNpc, NPC_Lakilester, FALSE)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Laklilulu_ManageYaw) = {
-    EVT_CALL(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
-    EVT_LABEL(0)
-        EVT_CALL(GetNpcPos, NPC_Lakilulu, LVar3, LVar4, LVar5)
-        EVT_CALL(N(UnkFunc42))
-        EVT_CALL(InterpNpcYaw, NPC_Lakilulu, LVarA, 0)
-        EVT_SET(LVar0, LVar3)
-        EVT_SET(LVar1, LVar4)
-        EVT_SET(LVar2, LVar5)
-        EVT_CALL(GetAngleBetweenNPCs, NPC_PARTNER, NPC_Lakilulu, LVarA)
-        EVT_CALL(InterpNpcYaw, NPC_PARTNER, LVarA, 0)
-        EVT_IF_LT(GB_StoryProgress, STORY_CH6_LAKILESTER_JOINED_PARTY)
-            EVT_CALL(GetAngleBetweenNPCs, NPC_Lakilester, NPC_Lakilulu, LVarB)
-            EVT_CALL(InterpNpcYaw, NPC_Lakilester, LVarB, 0)
-        EVT_END_IF
-        EVT_CALL(PlayerFaceNpc, NPC_Lakilulu, FALSE)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
+    Label(0)
+        Call(GetNpcPos, NPC_Lakilulu, LVar3, LVar4, LVar5)
+        Call(N(UnkFunc42))
+        Call(InterpNpcYaw, NPC_Lakilulu, LVarA, 0)
+        Set(LVar0, LVar3)
+        Set(LVar1, LVar4)
+        Set(LVar2, LVar5)
+        Call(GetAngleBetweenNPCs, NPC_PARTNER, NPC_Lakilulu, LVarA)
+        Call(InterpNpcYaw, NPC_PARTNER, LVarA, 0)
+        IfLt(GB_StoryProgress, STORY_CH6_LAKILESTER_JOINED_PARTY)
+            Call(GetAngleBetweenNPCs, NPC_Lakilester, NPC_Lakilulu, LVarB)
+            Call(InterpNpcYaw, NPC_Lakilester, LVarB, 0)
+        EndIf
+        Call(PlayerFaceNpc, NPC_Lakilulu, FALSE)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_LakiluluAndSpiny_HoverBobbing) = {
-    EVT_SET(MV_LakiluluSpinySceneState, 0)
-    EVT_LOOP(0)
-        EVT_LOOP(2)
-            EVT_CALL(GetNpcPos, NPC_Lakilulu_Spiny, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar1, 1)
-            EVT_CALL(SetNpcPos, NPC_Lakilulu_Spiny, LVar0, LVar1, LVar2)
-            EVT_CALL(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar1, 1)
-            EVT_CALL(SetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
-            EVT_WAIT(2)
-        EVT_END_LOOP
-        EVT_WAIT(1)
-        EVT_LOOP(2)
-            EVT_CALL(GetNpcPos, NPC_Lakilulu_Spiny, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar1, -1)
-            EVT_CALL(SetNpcPos, NPC_Lakilulu_Spiny, LVar0, LVar1, LVar2)
-            EVT_CALL(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar1, -1)
-            EVT_CALL(SetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
-            EVT_WAIT(2)
-        EVT_END_LOOP
-        EVT_WAIT(1)
-        EVT_IF_EQ(MV_LakiluluSpinySceneState, 1)
-            EVT_SET(MV_LakiluluSpinySceneState, 2)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(MV_LakiluluSpinySceneState, 0)
+    Loop(0)
+        Loop(2)
+            Call(GetNpcPos, NPC_Lakilulu_Spiny, LVar0, LVar1, LVar2)
+            Add(LVar1, 1)
+            Call(SetNpcPos, NPC_Lakilulu_Spiny, LVar0, LVar1, LVar2)
+            Call(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
+            Add(LVar1, 1)
+            Call(SetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
+            Wait(2)
+        EndLoop
+        Wait(1)
+        Loop(2)
+            Call(GetNpcPos, NPC_Lakilulu_Spiny, LVar0, LVar1, LVar2)
+            Add(LVar1, -1)
+            Call(SetNpcPos, NPC_Lakilulu_Spiny, LVar0, LVar1, LVar2)
+            Call(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
+            Add(LVar1, -1)
+            Call(SetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
+            Wait(2)
+        EndLoop
+        Wait(1)
+        IfEq(MV_LakiluluSpinySceneState, 1)
+            Set(MV_LakiluluSpinySceneState, 2)
+            BreakLoop
+        EndIf
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_Lakilulu_SpinyToss) = {
-    EVT_EXEC(N(EVS_LakiluluAndSpiny_HoverBobbing))
-    EVT_CALL(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_Lift)
-    EVT_CALL(GetNpcPos, NPC_Lakilulu, LVar1, LVar2, LVar3)
-    EVT_ADD(LVar1, -5)
-    EVT_ADD(LVar2, 30)
-    EVT_ADD(LVar3, 2)
-    EVT_CALL(SetNpcYaw, NPC_Lakilulu_Spiny, 270)
-    EVT_CALL(SetNpcPos, NPC_Lakilulu_Spiny, LVar1, LVar2, LVar3)
-    EVT_THREAD
-        EVT_WAIT(5 * DT)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
-    EVT_END_THREAD
-    EVT_CALL(ContinueSpeech, NPC_Lakilulu, -1, -1, SPEECH_FLAG_200, MSG_CH6_00A8)
-    EVT_THREAD
-        EVT_WAIT(15 * DT)
-        EVT_CALL(EndSpeech, NPC_Lakilulu, -1, -1, SPEECH_FLAG_200)
-    EVT_END_THREAD
-    EVT_SET(MV_LakiluluSpinySceneState, 1)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(MV_LakiluluSpinySceneState, 2)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_Throw)
-    EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
-    EVT_ADD(LVar1, 5)
-    EVT_ADD(LVar2, 20)
-    EVT_CALL(SetNpcJumpscale, NPC_Lakilulu_Spiny, EVT_FLOAT(0.0))
-    EVT_CALL(NpcJump0, NPC_Lakilulu_Spiny, LVar1, LVar2, LVar3, 7)
-    EVT_ADD(LVar1, -100)
-    EVT_ADD(LVar2, 10)
-    EVT_THREAD
-        EVT_CALL(SetNpcJumpscale, NPC_Lakilulu_Spiny, EVT_FLOAT(1.5))
-        EVT_CALL(NpcJump0, NPC_Lakilulu_Spiny, LVar1, LVar2, LVar3, 15 * DT)
-        EVT_CALL(SetNpcPos, NPC_Lakilulu_Spiny, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(2.0))
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtPlayer, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Hurt)
-    EVT_SET(LVar0, 90)
-    EVT_LOOP(20)
-        EVT_ADD(LVar0, 144)
-        EVT_IF_GT(LVar0, 359)
-            EVT_SUB(LVar0, 360)
-        EVT_END_IF
-        EVT_CALL(InterpPlayerYaw, LVar0, 1)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
-    EVT_CALL(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_Idle)
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_LakiluluAndSpiny_HoverBobbing))
+    Call(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_Lift)
+    Call(GetNpcPos, NPC_Lakilulu, LVar1, LVar2, LVar3)
+    Add(LVar1, -5)
+    Add(LVar2, 30)
+    Add(LVar3, 2)
+    Call(SetNpcYaw, NPC_Lakilulu_Spiny, 270)
+    Call(SetNpcPos, NPC_Lakilulu_Spiny, LVar1, LVar2, LVar3)
+    Thread
+        Wait(5 * DT)
+        Call(SetPlayerAnimation, ANIM_Mario1_Flail)
+    EndThread
+    Call(ContinueSpeech, NPC_Lakilulu, -1, -1, SPEECH_FLAG_200, MSG_CH6_00A8)
+    Thread
+        Wait(15 * DT)
+        Call(EndSpeech, NPC_Lakilulu, -1, -1, SPEECH_FLAG_200)
+    EndThread
+    Set(MV_LakiluluSpinySceneState, 1)
+    Loop(0)
+        Wait(1)
+        IfEq(MV_LakiluluSpinySceneState, 2)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_Throw)
+    Call(GetPlayerPos, LVar1, LVar2, LVar3)
+    Add(LVar1, 5)
+    Add(LVar2, 20)
+    Call(SetNpcJumpscale, NPC_Lakilulu_Spiny, Float(0.0))
+    Call(NpcJump0, NPC_Lakilulu_Spiny, LVar1, LVar2, LVar3, 7)
+    Add(LVar1, -100)
+    Add(LVar2, 10)
+    Thread
+        Call(SetNpcJumpscale, NPC_Lakilulu_Spiny, Float(1.5))
+        Call(NpcJump0, NPC_Lakilulu_Spiny, LVar1, LVar2, LVar3, 15 * DT)
+        Call(SetNpcPos, NPC_Lakilulu_Spiny, NPC_DISPOSE_LOCATION)
+    EndThread
+    Thread
+        Call(ShakeCam, CAM_DEFAULT, 0, 10, Float(2.0))
+    EndThread
+    Call(PlaySoundAtPlayer, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
+    Call(SetPlayerAnimation, ANIM_Mario1_Hurt)
+    Set(LVar0, 90)
+    Loop(20)
+        Add(LVar0, 144)
+        IfGt(LVar0, 359)
+            Sub(LVar0, 360)
+        EndIf
+        Call(InterpPlayerYaw, LVar0, 1)
+        Wait(1)
+    EndLoop
+    Call(SetPlayerAnimation, ANIM_Mario1_Still)
+    Call(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Lakilester) = {
-    EVT_IF_NE(GB_StoryProgress, STORY_CH6_SPOKE_WITH_THE_SUN)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(AwaitPlayerApproach, 200, 20, 275)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetNpcPos, NPC_Lakilester, -250, 120, 45)
-    EVT_CALL(SetMusicTrack, 0, SONG_LAKILESTER_THEME, 0, 8)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_CH6_00A0, 160, 40)
-    EVT_CALL(InterruptUsePartner)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(InterpPlayerYaw, 270, 1)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(InterpPlayerYaw, 90, 1)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
-    EVT_CALL(func_802CF56C, 2)
-    EVT_CALL(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Run)
-    EVT_THREAD
-        EVT_CALL(N(PlayLakilesterFlightSounds))
-    EVT_END_THREAD
-    EVT_EXEC_GET_TID(N(EVS_Lakliester_ManageYaw), LVar9)
-    EVT_CALL(LoadPath, 80 * DT, EVT_PTR(N(FlightPath_LakilesterAmbush)), ARRAY_COUNT(N(FlightPath_LakilesterAmbush)), EASING_LINEAR)
-    EVT_LABEL(0)
-    EVT_CALL(GetNextPathPos)
-    EVT_CALL(SetNpcPos, NPC_Lakilester, LVar1, LVar2, LVar3)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_KILL_THREAD(LVar9)
-    EVT_CALL(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Idle)
-    EVT_CALL(PlayerFaceNpc, NPC_Lakilester, FALSE)
-    EVT_WAIT(15 * DT)
-    EVT_CALL(GetNpcPos, NPC_Lakilester, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 200)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(18.0), EVT_FLOAT(-8.5))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_THREAD
-        EVT_CALL(PlayerMoveTo, -75, 65, 10 * DT)
-        EVT_CALL(PlayerFaceNpc, NPC_Lakilester, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00A1)
-    EVT_CALL(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Run)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Idle)
-    EVT_THREAD
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 1000)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-6.0))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_RETURN
-    EVT_END
+    IfNe(GB_StoryProgress, STORY_CH6_SPOKE_WITH_THE_SUN)
+        Return
+    EndIf
+    Call(AwaitPlayerApproach, 200, 20, 275)
+    Call(DisablePlayerInput, TRUE)
+    Call(SetNpcPos, NPC_Lakilester, -250, 120, 45)
+    Call(SetMusicTrack, 0, SONG_LAKILESTER_THEME, 0, 8)
+    Call(ShowMessageAtScreenPos, MSG_CH6_00A0, 160, 40)
+    Call(InterruptUsePartner)
+    Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+    Wait(20 * DT)
+    Call(InterpPlayerYaw, 270, 1)
+    Wait(20 * DT)
+    Call(InterpPlayerYaw, 90, 1)
+    Wait(20 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_Still)
+    Call(func_802CF56C, 2)
+    Call(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Run)
+    Thread
+        Call(N(PlayLakilesterFlightSounds))
+    EndThread
+    ExecGetTID(N(EVS_Lakliester_ManageYaw), LVar9)
+    Call(LoadPath, 80 * DT, Ref(N(FlightPath_LakilesterAmbush)), ARRAY_COUNT(N(FlightPath_LakilesterAmbush)), EASING_LINEAR)
+    Label(0)
+    Call(GetNextPathPos)
+    Call(SetNpcPos, NPC_Lakilester, LVar1, LVar2, LVar3)
+    Wait(1)
+    IfEq(LVar0, 1)
+        Goto(0)
+    EndIf
+    KillThread(LVar9)
+    Call(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Idle)
+    Call(PlayerFaceNpc, NPC_Lakilester, FALSE)
+    Wait(15 * DT)
+    Call(GetNpcPos, NPC_Lakilester, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, 200)
+    Call(SetCamPitch, CAM_DEFAULT, Float(18.0), Float(-8.5))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Thread
+        Call(PlayerMoveTo, -75, 65, 10 * DT)
+        Call(PlayerFaceNpc, NPC_Lakilester, FALSE)
+    EndThread
+    Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00A1)
+    Call(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Run)
+    Wait(10 * DT)
+    Call(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Idle)
+    Thread
+        Call(SetCamDistance, CAM_DEFAULT, 1000)
+        Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-6.0))
+        Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    EndThread
+    Call(DisablePlayerInput, FALSE)
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Lakilulu_FlyAway) = {
-    EVT_CALL(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
-    EVT_CALL(AwaitPlayerLeave, LVar0, LVar2, 120)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, 0, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 250)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(5.5), EVT_FLOAT(-7.5))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(NpcFaceNpc, NPC_Lakilulu, NPC_Lakilester, 1)
-    EVT_CALL(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_00B4)
-    EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Lakilulu, 1)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 600)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(10.0), EVT_FLOAT(-8.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, 130, -200)
-    EVT_CALL(SetCamPosC, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_THREAD
-        EVT_CALL(N(PlayLakiluluFlightSounds), 55 * DT)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcFlagBits, NPC_Lakilulu, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_EXEC_GET_TID(N(EVS_Laklilulu_ManageYaw), LVar9)
-    EVT_CALL(LoadPath, 55 * DT, EVT_PTR(N(FlightPath_LakiluluDeparts)), ARRAY_COUNT(N(FlightPath_LakiluluDeparts)), EASING_LINEAR)
-    EVT_LABEL(20)
-    EVT_CALL(GetNextPathPos)
-    EVT_CALL(SetNpcPos, NPC_Lakilulu, LVar1, LVar2, LVar3)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(20)
-    EVT_END_IF
-    EVT_KILL_THREAD(LVar9)
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_CALL(BringPartnerOut, PARTNER_LAKILESTER)
-    EVT_IF_NE(LVar0, PARTNER_LAKILESTER)
-        EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.0))
-        EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
-        EVT_ADD(LVar1, 20)
-        EVT_ADD(LVar2, 20)
-        EVT_ADD(LVar3, 20)
-        EVT_CALL(NpcJump0, NPC_PARTNER, LVar1, LVar2, LVar3, 30 * DT)
-    EVT_END_IF
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 5, MSG_CH6_00B5)
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(PutPartnerAway)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
+    Call(AwaitPlayerLeave, LVar0, LVar2, 120)
+    Call(DisablePlayerInput, TRUE)
+    Call(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, 0, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, 250)
+    Call(SetCamPitch, CAM_DEFAULT, Float(5.5), Float(-7.5))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(NpcFaceNpc, NPC_Lakilulu, NPC_Lakilester, 1)
+    Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_00B4)
+    Call(NpcFaceNpc, NPC_PARTNER, NPC_Lakilulu, 1)
+    Call(SetCamDistance, CAM_DEFAULT, 600)
+    Call(SetCamPitch, CAM_DEFAULT, Float(10.0), Float(-8.0))
+    Call(SetCamPosA, CAM_DEFAULT, 0, 0)
+    Call(SetCamPosB, CAM_DEFAULT, 130, -200)
+    Call(SetCamPosC, CAM_DEFAULT, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Thread
+        Call(N(PlayLakiluluFlightSounds), 55 * DT)
+    EndThread
+    Call(SetNpcFlagBits, NPC_Lakilulu, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    ExecGetTID(N(EVS_Laklilulu_ManageYaw), LVar9)
+    Call(LoadPath, 55 * DT, Ref(N(FlightPath_LakiluluDeparts)), ARRAY_COUNT(N(FlightPath_LakiluluDeparts)), EASING_LINEAR)
+    Label(20)
+    Call(GetNextPathPos)
+    Call(SetNpcPos, NPC_Lakilulu, LVar1, LVar2, LVar3)
+    Wait(1)
+    IfEq(LVar0, 1)
+        Goto(20)
+    EndIf
+    KillThread(LVar9)
+    Call(GetCurrentPartnerID, LVar0)
+    Call(BringPartnerOut, PARTNER_LAKILESTER)
+    IfNe(LVar0, PARTNER_LAKILESTER)
+        Call(SetNpcJumpscale, NPC_PARTNER, Float(0.0))
+        Call(GetPlayerPos, LVar1, LVar2, LVar3)
+        Add(LVar1, 20)
+        Add(LVar2, 20)
+        Add(LVar3, 20)
+        Call(NpcJump0, NPC_PARTNER, LVar1, LVar2, LVar3, 30 * DT)
+    EndIf
+    Call(DisablePartnerAI, 0)
+    Call(InterpNpcYaw, NPC_PARTNER, 270, 0)
+    Wait(5 * DT)
+    Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 5, MSG_CH6_00B5)
+    Call(EnablePartnerAI)
+    Call(PutPartnerAway)
+    Call(ResetCam, CAM_DEFAULT, Float(90.0))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_LakilesterDefeated) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_TiredTalk, ANIM_WorldLakilester_Tired, 0, MSG_CH6_00A2)
-    EVT_CALL(SetNpcPos, NPC_Lakilulu, -290, 120, 45)
-    EVT_THREAD
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Idle)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-        EVT_WAIT(20 * DT)
-        EVT_CALL(InterpPlayerYaw, 270, 1)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 5, MSG_CH6_00A3)
-    EVT_CALL(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_Panic)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 500)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(5.5), EVT_FLOAT(-6.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, 130, -200)
-    EVT_CALL(SetCamPosC, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(1)
-    EVT_THREAD
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 400)
-        EVT_CALL(SetCamPosB, CAM_DEFAULT, 130, 60)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0 / DT))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(PlayLakiluluFlightSounds), 80 * DT)
-    EVT_END_THREAD
-    EVT_EXEC_GET_TID(N(EVS_Laklilulu_ManageYaw), LVar9)
-    EVT_CALL(LoadPath, 80 * DT, EVT_PTR(N(FlightPath_LakiluluArrives)), ARRAY_COUNT(N(FlightPath_LakiluluArrives)), EASING_LINEAR)
-    EVT_LABEL(0)
-    EVT_CALL(GetNextPathPos)
-    EVT_CALL(SetNpcPos, NPC_Lakilulu, LVar1, LVar2, LVar3)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_KILL_THREAD(LVar9)
-    EVT_CALL(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_ConcernedNod)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 20)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 250)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(5.5), EVT_FLOAT(-7.5))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00A4)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 40)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Shout, ANIM_Lakilulu_Shout, 0, MSG_CH6_00A5)
-    EVT_CALL(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 20)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 250)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 0, MSG_CH6_00A6)
-    EVT_CALL(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Idle)
-    EVT_CALL(EndSpeech, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 40)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 350)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(10.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_LABEL(10)
-    EVT_CALL(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_ConcernedTalk, ANIM_Lakilulu_ConcernedNod, 0, MSG_CH6_00A7)
-    EVT_CALL(ShowChoice, MSG_Choice_0020)
-    EVT_IF_NE(LVar0, 0)
-        EVT_EXEC_WAIT(N(EVS_Lakilulu_SpinyToss))
-        EVT_WAIT(10 * DT)
-        EVT_GOTO(10)
-    EVT_ELSE
-        EVT_CALL(ContinueSpeech, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_00A9)
-        EVT_CALL(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_Idle)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
-        EVT_WAIT(20 * DT)
-        EVT_CALL(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 20)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 250)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 0, MSG_CH6_00AA)
-        EVT_CALL(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Idle)
-        EVT_CALL(EndSpeech, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 40)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 350)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 0, MSG_CH6_00AB)
-        EVT_WAIT(10 * DT)
-        EVT_CALL(ShowChoice, MSG_Choice_0021)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(-1)
-            EVT_CASE_EQ(0)
-                EVT_CALL(ContinueSpeech, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00AC)
-            EVT_CASE_EQ(1)
-                EVT_CALL(ContinueSpeech, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00AD)
-            EVT_CASE_EQ(2)
-                EVT_CALL(ContinueSpeech, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00AE)
-            EVT_CASE_EQ(3)
-                EVT_CALL(ContinueSpeech, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00AF)
-        EVT_END_SWITCH
-    EVT_END_IF
-    EVT_CALL(InterpNpcYaw, NPC_Lakilulu, 90, 1)
-    EVT_CALL(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_ConcernedNod)
-    EVT_CALL(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_ConcernedTalk, ANIM_Lakilulu_ConcernedNod, 5, MSG_CH6_00B0)
-    EVT_CALL(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00B1)
-    EVT_WAIT(15 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_ConcernedTalk, ANIM_Lakilulu_ConcernedNod, 5, MSG_CH6_00B2)
-    EVT_CALL(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00B3)
-    EVT_WAIT(10 * DT)
-    EVT_THREAD
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_END_THREAD
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 30)
-    EVT_CALL(SetNpcSpeed, NPC_Lakilester, EVT_FLOAT(3.5 / DT))
-    EVT_CALL(NpcMoveTo, NPC_Lakilester, LVar0, 60, 0)
-    EVT_CALL(N(ChangeNpcToPartner), 0, 8)
-    EVT_CALL(N(LoadPartyImage))
-    EVT_EXEC(N(EVS_PushPartnerSong))
-    EVT_WAIT(15 * DT)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0190, 160, 40)
-    EVT_EXEC(N(EVS_PopSong))
-    EVT_WAIT(10 * DT)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_SET(GB_StoryProgress, STORY_CH6_LAKILESTER_JOINED_PARTY)
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_EXEC_WAIT(N(EVS_Lakilulu_FlyAway))
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Wait(30 * DT)
+    Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_TiredTalk, ANIM_WorldLakilester_Tired, 0, MSG_CH6_00A2)
+    Call(SetNpcPos, NPC_Lakilulu, -290, 120, 45)
+    Thread
+        Wait(10 * DT)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Idle)
+        Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+        Wait(20 * DT)
+        Call(InterpPlayerYaw, 270, 1)
+    EndThread
+    Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 5, MSG_CH6_00A3)
+    Call(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_Panic)
+    Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
+    Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
+    Call(SetCamDistance, CAM_DEFAULT, 500)
+    Call(SetCamPitch, CAM_DEFAULT, Float(5.5), Float(-6.0))
+    Call(SetCamPosA, CAM_DEFAULT, 0, 0)
+    Call(SetCamPosB, CAM_DEFAULT, 130, -200)
+    Call(SetCamPosC, CAM_DEFAULT, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(1)
+    Thread
+        Call(SetCamDistance, CAM_DEFAULT, 400)
+        Call(SetCamPosB, CAM_DEFAULT, 130, 60)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    EndThread
+    Thread
+        Call(N(PlayLakiluluFlightSounds), 80 * DT)
+    EndThread
+    ExecGetTID(N(EVS_Laklilulu_ManageYaw), LVar9)
+    Call(LoadPath, 80 * DT, Ref(N(FlightPath_LakiluluArrives)), ARRAY_COUNT(N(FlightPath_LakiluluArrives)), EASING_LINEAR)
+    Label(0)
+    Call(GetNextPathPos)
+    Call(SetNpcPos, NPC_Lakilulu, LVar1, LVar2, LVar3)
+    Wait(1)
+    IfEq(LVar0, 1)
+        Goto(0)
+    EndIf
+    KillThread(LVar9)
+    Call(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_ConcernedNod)
+    Call(SetPlayerAnimation, ANIM_Mario1_Still)
+    Wait(20 * DT)
+    Call(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
+    Add(LVar0, 20)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, 250)
+    Call(SetCamPitch, CAM_DEFAULT, Float(5.5), Float(-7.5))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00A4)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar0, 40)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, 300)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Shout, ANIM_Lakilulu_Shout, 0, MSG_CH6_00A5)
+    Call(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
+    Add(LVar0, 20)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, 250)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 0, MSG_CH6_00A6)
+    Call(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Idle)
+    Call(EndSpeech, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar0, 40)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, 350)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(10.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Label(10)
+    Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_ConcernedTalk, ANIM_Lakilulu_ConcernedNod, 0, MSG_CH6_00A7)
+    Call(ShowChoice, MSG_Choice_0020)
+    IfNe(LVar0, 0)
+        ExecWait(N(EVS_Lakilulu_SpinyToss))
+        Wait(10 * DT)
+        Goto(10)
+    Else
+        Call(ContinueSpeech, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_00A9)
+        Call(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_Idle)
+        Call(SetPlayerAnimation, ANIM_Mario1_NodYes)
+        Wait(10 * DT)
+        Call(SetPlayerAnimation, ANIM_Mario1_Still)
+        Wait(20 * DT)
+        Call(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
+        Add(LVar0, 20)
+        Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(SetCamDistance, CAM_DEFAULT, 250)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 0, MSG_CH6_00AA)
+        Call(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Idle)
+        Call(EndSpeech, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar0, 40)
+        Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(SetCamDistance, CAM_DEFAULT, 350)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Wait(10 * DT)
+        Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 0, MSG_CH6_00AB)
+        Wait(10 * DT)
+        Call(ShowChoice, MSG_Choice_0021)
+        Switch(LVar0)
+            CaseEq(-1)
+            CaseEq(0)
+                Call(ContinueSpeech, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00AC)
+            CaseEq(1)
+                Call(ContinueSpeech, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00AD)
+            CaseEq(2)
+                Call(ContinueSpeech, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00AE)
+            CaseEq(3)
+                Call(ContinueSpeech, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00AF)
+        EndSwitch
+    EndIf
+    Call(InterpNpcYaw, NPC_Lakilulu, 90, 1)
+    Call(SetNpcAnimation, NPC_Lakilulu, ANIM_Lakilulu_ConcernedNod)
+    Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_ConcernedTalk, ANIM_Lakilulu_ConcernedNod, 5, MSG_CH6_00B0)
+    Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00B1)
+    Wait(15 * DT)
+    Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_ConcernedTalk, ANIM_Lakilulu_ConcernedNod, 5, MSG_CH6_00B2)
+    Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00B3)
+    Wait(10 * DT)
+    Thread
+        Call(ResetCam, CAM_DEFAULT, Float(90.0))
+    EndThread
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar0, 30)
+    Call(SetNpcSpeed, NPC_Lakilester, Float(3.5 / DT))
+    Call(NpcMoveTo, NPC_Lakilester, LVar0, 60, 0)
+    Call(N(ChangeNpcToPartner), 0, 8)
+    Call(N(LoadPartyImage))
+    Exec(N(EVS_PushPartnerSong))
+    Wait(15 * DT)
+    Call(ShowMessageAtScreenPos, MSG_Menus_0190, 160, 40)
+    Exec(N(EVS_PopSong))
+    Wait(10 * DT)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Set(GB_StoryProgress, STORY_CH6_LAKILESTER_JOINED_PARTY)
+    Call(EnablePartnerAI)
+    Call(DisablePlayerInput, FALSE)
+    ExecWait(N(EVS_Lakilulu_FlyAway))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Lakilester) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Tired)
-            EVT_CALL(SetCamType, CAM_DEFAULT, 6, TRUE)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar1, LVar2)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar0, LVar3)
-            EVT_DIV(LVar0, 2)
-            EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
-            EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-7.5))
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-            EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-            EVT_EXEC(N(EVS_Scene_LakilesterDefeated))
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Tired)
+            Call(SetCamType, CAM_DEFAULT, 6, TRUE)
+            Call(GetNpcPos, NPC_SELF, LVar3, LVar1, LVar2)
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            Add(LVar0, LVar3)
+            Div(LVar0, 2)
+            Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Call(SetCamDistance, CAM_DEFAULT, 300)
+            Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-7.5))
+            Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+            Exec(N(EVS_Scene_LakilesterDefeated))
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Lakilulu) = {
-    EVT_IF_LE(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-        EVT_CALL(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0032)
-    EVT_ELSE
-        EVT_CALL(GetCurrentPartnerID, LVar0)
-        EVT_IF_NE(LVar0, PARTNER_LAKILESTER)
-            EVT_CALL(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0034)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0032)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLe(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+        Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0032)
+    Else
+        Call(GetCurrentPartnerID, LVar0)
+        IfNe(LVar0, PARTNER_LAKILESTER)
+            Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0034)
+        Else
+            Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0032)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Lakilester) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH6_LAKILESTER_JOINED_PARTY)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Lakilester)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Lakilester)))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH6_LAKILESTER_JOINED_PARTY)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Lakilester)))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Lakilester)))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Lakilulu) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH6_BEGAN_PEACH_MISSION)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Lakilulu)))
-        EVT_CALL(SetNpcCollisionSize, NPC_SELF, 36, 28)
-        EVT_IF_GE(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-            EVT_CALL(SetNpcPos, NPC_SELF, -50, 180, -50)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH6_BEGAN_PEACH_MISSION)
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Lakilulu)))
+        Call(SetNpcCollisionSize, NPC_SELF, 36, 28)
+        IfGe(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+            Call(SetNpcPos, NPC_SELF, -50, 180, -50)
+        EndIf
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Lakilulu_Spiny) = {
-    EVT_CALL(SetNpcPos, NPC_Lakilulu_Spiny, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcAnimation, NPC_Lakilulu_Spiny, ANIM_Lakilulu_Spiny)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Lakilulu_Spiny, NPC_DISPOSE_LOCATION)
+    Call(SetNpcAnimation, NPC_Lakilulu_Spiny, ANIM_Lakilulu_Spiny)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Lakitu) = {
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH6_SPOKE_WITH_THE_SUN)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_StoryProgress, STORY_CH6_SPOKE_WITH_THE_SUN)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Spiny) = {
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH6_SPOKE_WITH_THE_SUN)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_CALL(SetSelfVar, 13, 1)
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_StoryProgress, STORY_CH6_SPOKE_WITH_THE_SUN)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Call(SetSelfVar, 13, 1)
+    Return
+    End
 };
 
 NpcData N(NpcData_Lakilester) = {

@@ -7,6 +7,6 @@
 
 EvtScript N(EVS_MakeEntities) = {
     EVT_MAKE_SUPER_BLOCK(-130, 50, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };

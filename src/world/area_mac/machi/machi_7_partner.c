@@ -19,34 +19,34 @@ Vec3f N(FlightPath)[] = {
 };
 
 EvtScript N(EVS_ChasePartner) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Run)
-    EVT_LABEL(0)
-        EVT_CALL(GetAngleToNPC, NPC_PARTNER, LVar0)
-        EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
-        EVT_CALL(AddVectorPolar, LVar1, LVar3, EVT_FLOAT(4.0), LVar0)
-        EVT_CALL(InterpPlayerYaw, LVar0, 0)
-        EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Call(SetPlayerAnimation, ANIM_Mario1_Run)
+    Label(0)
+        Call(GetAngleToNPC, NPC_PARTNER, LVar0)
+        Call(GetPlayerPos, LVar1, LVar2, LVar3)
+        Call(AddVectorPolar, LVar1, LVar3, Float(4.0), LVar0)
+        Call(InterpPlayerYaw, LVar0, 0)
+        Call(SetPlayerPos, LVar1, LVar2, LVar3)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_FlyPartnerAround) = {
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING, TRUE)
-    EVT_CALL(EnableNpcBlur, NPC_PARTNER, TRUE)
-    EVT_LABEL(10)
-        EVT_CALL(LoadPath, 500, EVT_PTR(N(FlightPath)), ARRAY_COUNT(N(FlightPath)), EASING_LINEAR)
-        EVT_LABEL(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_GOTO(0)
-            EVT_END_IF
-        EVT_GOTO(10)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePartnerAI, 0)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING, TRUE)
+    Call(EnableNpcBlur, NPC_PARTNER, TRUE)
+    Label(10)
+        Call(LoadPath, 500, Ref(N(FlightPath)), ARRAY_COUNT(N(FlightPath)), EASING_LINEAR)
+        Label(0)
+            Call(GetNextPathPos)
+            Call(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 1)
+                Goto(0)
+            EndIf
+        Goto(10)
+    Return
+    End
 };

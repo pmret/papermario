@@ -21,60 +21,60 @@ API_CALLABLE(PlayMerleeOrbFX);
 s32 D_80077C40 = 0;
 
 EvtScript EVS_MerleeDropCoins = {
-    EVT_WAIT(10)
-    EVT_CALL(FadeBackgroundDarken)
-    EVT_WAIT(10)
-    EVT_CALL(CreateNpc, NPC_BTL_MERLEE, ANIM_BattleMerlee_Gather)
-    EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcYaw, NPC_BTL_MERLEE, 0)
-    EVT_CALL(GetCamLookAtObjVector)
-    EVT_CALL(SetNpcPos, NPC_BTL_MERLEE, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_CALL(MerleeUpdateFX)
-    EVT_END_THREAD
-    EVT_CALL(FadeInMerlee)
-    EVT_WAIT(30)
-    EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
-    EVT_CALL(MerleeStopFX)
-    EVT_CALL(FadeBackgroundLighten)
-    EVT_WAIT(20)
-    EVT_THREAD
-        EVT_CALL(FadeOutMerlee)
-        EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
-    EVT_END_THREAD
-    EVT_CALL(PlaySound, SOUND_MAGIC_DESCENDING)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(PlayMerleeGatherFX, LVar0, LVar1, LVar2)
-    EVT_CALL(PlayMerleeOrbFX, LVar0, LVar1, LVar2)
-    EVT_WAIT(15)
-    EVT_CALL(ShowMerleeCoinMessage)
-    EVT_WAIT(15)
-    EVT_CALL(HasMerleeCasts)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(ShowMerleeRanOutMessage)
-    EVT_WAIT(15)
-    EVT_RETURN
-    EVT_END
+    Wait(10)
+    Call(FadeBackgroundDarken)
+    Wait(10)
+    Call(CreateNpc, NPC_BTL_MERLEE, ANIM_BattleMerlee_Gather)
+    Call(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcYaw, NPC_BTL_MERLEE, 0)
+    Call(GetCamLookAtObjVector)
+    Call(SetNpcPos, NPC_BTL_MERLEE, LVar0, LVar1, LVar2)
+    Thread
+        Call(MerleeUpdateFX)
+    EndThread
+    Call(FadeInMerlee)
+    Wait(30)
+    Call(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
+    Call(MerleeStopFX)
+    Call(FadeBackgroundLighten)
+    Wait(20)
+    Thread
+        Call(FadeOutMerlee)
+        Call(DeleteNpc, NPC_BTL_MERLEE)
+    EndThread
+    Call(PlaySound, SOUND_MAGIC_DESCENDING)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(PlayMerleeGatherFX, LVar0, LVar1, LVar2)
+    Call(PlayMerleeOrbFX, LVar0, LVar1, LVar2)
+    Wait(15)
+    Call(ShowMerleeCoinMessage)
+    Wait(15)
+    Call(HasMerleeCasts)
+    IfEq(LVar0, 1)
+        Return
+    EndIf
+    Call(ShowMerleeRanOutMessage)
+    Wait(15)
+    Return
+    End
 };
 
 EvtScript EVS_NpcDefeat = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(OnDefeatEnemy)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(OnDefeatEnemy)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript EVS_FleeBattleDrops = {
-    EVT_CALL(OnFleeBattleDrops)
-    EVT_RETURN
-    EVT_END
+    Call(OnFleeBattleDrops)
+    Return
+    End
 };
 
 EnemyDrops DefaultEnemyDrops = {
@@ -126,46 +126,46 @@ EnemyDrops DefaultEnemyDrops = {
 };
 
 EvtScript EnemyNpcHit = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_NONE)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_JUMP)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_CALL(GetSelfAnimationFromTable, ENEMY_ANIM_INDEX_HIT, LVar0)
-            EVT_EXEC_WAIT(EVS_NpcHitRecoil)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_SPIN)
-            EVT_THREAD
-                EVT_CALL(func_800458CC, LVar0)
-                EVT_IF_EQ(LVar0, 0)
-                    EVT_SET(LVarA, 0)
-                    EVT_LOOP(30)
-                        EVT_ADD(LVarA, 40)
-                        EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVarA, 0)
-                        EVT_WAIT(1)
-                    EVT_END_LOOP
-                EVT_END_IF
-            EVT_END_THREAD
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_NONE)
+        CaseOrEq(ENCOUNTER_TRIGGER_JUMP)
+        CaseOrEq(ENCOUNTER_TRIGGER_HAMMER)
+        CaseOrEq(ENCOUNTER_TRIGGER_PARTNER)
+            Call(GetSelfAnimationFromTable, ENEMY_ANIM_INDEX_HIT, LVar0)
+            ExecWait(EVS_NpcHitRecoil)
+        CaseEq(ENCOUNTER_TRIGGER_SPIN)
+            Thread
+                Call(func_800458CC, LVar0)
+                IfEq(LVar0, 0)
+                    Set(LVarA, 0)
+                    Loop(30)
+                        Add(LVarA, 40)
+                        Call(SetNpcRotation, NPC_SELF, 0, LVarA, 0)
+                        Wait(1)
+                    EndLoop
+                EndIf
+            EndThread
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript EnemyNpcDefeat = {
-    EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(OnPlayerFled, 0)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, -1, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcRotation, NPC_SELF, 0, 0, 0)
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(OnPlayerFled, 0)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, -1, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 SHIFT_BSS s32 gEncounterState;

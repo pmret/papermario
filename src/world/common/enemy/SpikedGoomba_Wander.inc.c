@@ -14,9 +14,9 @@ MobileAISettings N(AISettings_SpikedGoomba_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_SpikedGoomba_Wander) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_SpikedGoomba_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_SpikedGoomba_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_SpikedGoomba_Wander) = {

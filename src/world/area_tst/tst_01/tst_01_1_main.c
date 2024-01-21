@@ -25,26 +25,26 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(EVS_GotoMap_machi_7) = {
-    EVT_CALL(GotoMap, EVT_PTR("machi"), machi_ENTRY_7)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(GotoMap, Ref("machi"), machi_ENTRY_7)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_GotoMap_tst_02_0) = {
-    EVT_CALL(GotoMap, EVT_PTR("tst_02"), tst_02_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(GotoMap, Ref("tst_02"), tst_02_ENTRY_0)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_TESTING)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_GotoMap_machi_7)), TRIGGER_WALL_PUSH, COLLIDER_deilitw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_GotoMap_tst_02_0)), TRIGGER_WALL_PUSH, COLLIDER_deilite, 1, 0)
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_TESTING)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_DEFAULT()
+    ExecWait(N(EVS_MakeEntities))
+    BindTrigger(Ref(N(EVS_GotoMap_machi_7)), TRIGGER_WALL_PUSH, COLLIDER_deilitw, 1, 0)
+    BindTrigger(Ref(N(EVS_GotoMap_tst_02_0)), TRIGGER_WALL_PUSH, COLLIDER_deilite, 1, 0)
+    Return
+    End
 };

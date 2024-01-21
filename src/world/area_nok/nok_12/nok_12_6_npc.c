@@ -8,91 +8,91 @@
 
 // 'sleep' on top of brick block until it's broken
 EvtScript N(EVS_NpcIdle_SpikedGoomba) = {
-    EVT_LABEL(0)
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Sleep)
-    EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_AI_FOUND_PLAYER_JUMP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(MakeLerp, -90, 0, 10, EASING_LINEAR)
-        EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcRotation, NPC_SELF, LVar0, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_CALL(GetNpcPos, NPC_SELF, LVarA, LVarB, LVarC)
-        EVT_CALL(MakeLerp, 0, 360, 15, EASING_LINEAR)
-        EVT_LABEL(2)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(2)
-        EVT_END_IF
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.7))
-    EVT_CALL(NpcJump0, NPC_SELF, -65, 0, -120, 25)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Hurt)
-    EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Idle)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_SpikedGoomba_Wander)))
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    Call(GetSelfVar, 0, LVar0)
+    IfEq(LVar0, 0)
+        Wait(1)
+        Goto(0)
+    EndIf
+    Call(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Sleep)
+    Thread
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_AI_FOUND_PLAYER_JUMP, SOUND_SPACE_DEFAULT)
+        Call(MakeLerp, -90, 0, 10, EASING_LINEAR)
+        Label(1)
+        Call(UpdateLerp)
+        Call(SetNpcRotation, NPC_SELF, LVar0, 0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(1)
+        EndIf
+        Call(GetNpcPos, NPC_SELF, LVarA, LVarB, LVarC)
+        Call(MakeLerp, 0, 360, 15, EASING_LINEAR)
+        Label(2)
+        Call(UpdateLerp)
+        Call(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(2)
+        EndIf
+        Call(SetNpcRotation, NPC_SELF, 0, 0, 0)
+    EndThread
+    Call(SetNpcJumpscale, NPC_SELF, Float(0.7))
+    Call(NpcJump0, NPC_SELF, -65, 0, -120, 25)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Hurt)
+    Wait(20)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Idle)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_SpikedGoomba_Wander)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_SpikedGoomba) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, -165, 86, -118)
-    EVT_CALL(SetNpcRotation, NPC_SELF, -85, 0, 0)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_SpikedGoomba)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, -165, 86, -118)
+    Call(SetNpcRotation, NPC_SELF, -85, 0, 0)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_SpikedGoomba)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_KoopaTroopa_Demo_MissAttack) = {
-    EVT_WAIT(45)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_ShellEnter)
-    EVT_WAIT(8)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_ShellSpin)
-    EVT_WAIT(6)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar0, 80)
-    EVT_ADD(LVar2, 100)
-    EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar2, 12)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_ShellExit)
-    EVT_WAIT(8)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Idle)
-    EVT_RETURN
-    EVT_END
+    Wait(45)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_ShellEnter)
+    Wait(8)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_ShellSpin)
+    Wait(6)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Sub(LVar0, 80)
+    Add(LVar2, 100)
+    Call(NpcMoveTo, NPC_SELF, LVar0, LVar2, 12)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_ShellExit)
+    Wait(8)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoopaTroopa_02) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_GE(LVar0, nok_12_ENTRY_2)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KoopaTroopa_02)))
-        EVT_CALL(SetNpcPos, NPC_SELF, 310, 0, -165)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    IfGe(LVar0, nok_12_ENTRY_2)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KoopaTroopa_02)))
+        Call(SetNpcPos, NPC_SELF, 310, 0, -165)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoopaTroopa_02_Demo) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_GE(LVar0, nok_12_ENTRY_2)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_KoopaTroopa_Demo_MissAttack)))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    IfGe(LVar0, nok_12_ENTRY_2)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_KoopaTroopa_Demo_MissAttack)))
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_KoopaTroopa_01) = {

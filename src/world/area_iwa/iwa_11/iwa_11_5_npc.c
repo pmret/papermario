@@ -5,17 +5,17 @@
 #include "world/common/npc/Dryite_Stationary.inc.c"
 
 EvtScript N(EVS_NpcInit_TrainToad) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, iwa_11_ENTRY_0)
-        EVT_CALL(SetNpcPos, NPC_SELF, -425, 70, -20)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, -425, 70, -20)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, iwa_11_ENTRY_0)
+        Call(SetNpcPos, NPC_SELF, -425, 70, -20)
+        Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Else
+        Call(SetNpcPos, NPC_SELF, -425, 70, -20)
+        Call(InterpNpcYaw, NPC_SELF, 270, 0)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_TrainToad) = {

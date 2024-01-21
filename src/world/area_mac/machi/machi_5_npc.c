@@ -110,108 +110,108 @@ API_CALLABLE(N(SetupChapter2)) {
 }
 
 EvtScript N(EVS_NpcAuxAI_Goompa) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_802411A8) = {
-    EVT_CALL(N(func_802401B0_7E7550))
-    EVT_LABEL(0)
-        EVT_CALL(N(func_802402EC_7E768C))
-        EVT_CALL(N(func_80240318_7E76B8))
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Call(N(func_802401B0_7E7550))
+    Label(0)
+        Call(N(func_802402EC_7E768C))
+        Call(N(func_80240318_7E76B8))
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Goompa) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_Goompa) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Goompa) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_Unused) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAuxAI_Unused) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Unused) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_Unused) = {
-    EVT_CALL(StartBattle)
-    EVT_RETURN
-    EVT_END
+    Call(StartBattle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Unused) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_StarRod) = {
-    EVT_CALL(BringPartnerOut, PARTNER_PARAKARRY)
-    EVT_WAIT(200)
-    EVT_CALL(PutPartnerAway)
-    EVT_RETURN
-    EVT_END
+    Call(BringPartnerOut, PARTNER_PARAKARRY)
+    Wait(200)
+    Call(PutPartnerAway)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_StarRod) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAuxAI_StarRod) = {
-    EVT_CALL(N(SetupStarRodPaletteCycling))
-    EVT_RETURN
-    EVT_END
+    Call(N(SetupStarRodPaletteCycling))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Koopa) = {
-    EVT_CALL(N(SetupChapter1))
-    EVT_RETURN
-    EVT_END
+    Call(N(SetupChapter1))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_Koopa) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Kolorado) = {
-    EVT_CALL(N(SetupChapter2))
-    EVT_RETURN
-    EVT_END
+    Call(N(SetupChapter2))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_Kolorado) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_StarRod) = {

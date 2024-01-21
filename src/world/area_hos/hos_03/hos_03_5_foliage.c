@@ -4,105 +4,105 @@
 #include "common/foliage.inc.c"
 
 EvtScript N(EVS_ShakeTree_StarHaven) = {
-    EVT_SET_TIMESCALE(EVT_FLOAT(2.0))
-    EVT_USE_BUF(LVar0)
-    EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)
-    EVT_BUF_READ1(LVar5)
-    EVT_CALL(GetPlayerPos, LVar6, LVarF, LVar8)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_SMACK_TREE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_SHAKE_TREE_LEAVES, SOUND_SPACE_DEFAULT)
-    EVT_THREAD
-        EVT_IF_NE(LVar1, 0)
-            EVT_WAIT(1)
-            EVT_LOOP(5)
-                EVT_USE_BUF(LVar1)
-                EVT_BUF_READ1(LVar2)
-                EVT_LOOP(LVar2)
-                    EVT_BUF_READ1(LVar3)
-                    EVT_CALL(N(TransformFoliage), LVar3, EVT_FLOAT(0.1), EVT_FLOAT(0.2), LVarF, 0)
-                EVT_END_LOOP
-                EVT_WAIT(1)
-                EVT_USE_BUF(LVar1)
-                EVT_BUF_READ1(LVar2)
-                EVT_LOOP(LVar2)
-                    EVT_BUF_READ1(LVar3)
-                    EVT_CALL(N(TransformFoliage), LVar3, EVT_FLOAT(0.1), EVT_FLOAT(-0.2), LVarF, 0)
-                EVT_END_LOOP
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_USE_BUF(LVar1)
-            EVT_BUF_READ1(LVar2)
-            EVT_LOOP(LVar2)
-                EVT_BUF_READ1(LVar3)
-                EVT_CALL(TranslateModel, LVar3, 0, 0, 0)
-            EVT_END_LOOP
-            EVT_WAIT(1)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_IF_NE(LVar2, 0)
-            EVT_LOOP(5)
-                EVT_USE_BUF(LVar2)
-                EVT_BUF_READ1(LVar3)
-                EVT_LOOP(LVar3)
-                    EVT_BUF_READ1(LVar4)
-                    EVT_CALL(N(TransformFoliage), LVar4, EVT_FLOAT(0.1), EVT_FLOAT(0.2), LVarF, 0)
-                EVT_END_LOOP
-                EVT_WAIT(1)
-                EVT_USE_BUF(LVar2)
-                EVT_BUF_READ1(LVar3)
-                EVT_LOOP(LVar3)
-                    EVT_BUF_READ1(LVar4)
-                    EVT_CALL(N(TransformFoliage), LVar4, EVT_FLOAT(0.1), EVT_FLOAT(-0.2), LVarF, 0)
-                EVT_END_LOOP
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_USE_BUF(LVar2)
-            EVT_BUF_READ1(LVar3)
-            EVT_LOOP(LVar3)
-                EVT_BUF_READ1(LVar4)
-                EVT_CALL(TranslateModel, LVar4, 0, 0, 0)
-            EVT_END_LOOP
-            EVT_WAIT(1)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_IF_NE(LVar3, 0)
-            EVT_USE_BUF(LVar3)
-            EVT_BUF_READ1(LVar4)
-            EVT_LOOP(LVar4)
-                EVT_BUF_READ1(LVar5)
-                EVT_BUF_READ3(LVar6, LVar7, LVar8)
-                EVT_BUF_READ3(LVar9, LVarA, LVarB)
-                EVT_IF_EQ(LVarB, 0)
-                    EVT_CALL(DropItemEntity, LVar5, LVar6, LVar7, LVar8, LVar9, LVarA)
-                EVT_ELSE
-                    EVT_CALL(GetValueByRef, LVarB, LVarC)
-                    EVT_IF_EQ(LVarC, 0)
-                        EVT_CALL(SetValueByRef, LVarB, 1)
-                        EVT_CALL(DropItemEntity, LVar5, LVar6, LVar7, LVar8, LVar9, LVarA)
-                    EVT_END_IF
-                EVT_END_IF
-            EVT_END_LOOP
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_IF_NE(LVar4, 0)
-            EVT_USE_BUF(LVar4)
-            EVT_BUF_READ1(LVar5)
-            EVT_LOOP(LVar5)
-                EVT_BUF_READ3(LVar6, LVar7, LVar8)
-                EVT_PLAY_EFFECT(EFFECT_SPARKLES, 2, LVar6, LVar7, LVar8, 50)
-                EVT_PLAY_EFFECT(EFFECT_SPARKLES, 2, LVar6, LVar7, LVar8, 50)
-            EVT_END_LOOP
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_IF_NE(LVar5, 0)
-        EVT_EXEC_WAIT(LVar5)
-    EVT_END_IF
-    EVT_WAIT(15)
-    EVT_RETURN
-    EVT_END
+    SetTimescale(Float(2.0))
+    UseBuf(LVar0)
+    BufRead4(LVar1, LVar2, LVar3, LVar4)
+    BufRead1(LVar5)
+    Call(GetPlayerPos, LVar6, LVarF, LVar8)
+    Call(PlaySoundAtPlayer, SOUND_SMACK_TREE, SOUND_SPACE_DEFAULT)
+    Call(PlaySoundAtPlayer, SOUND_SHAKE_TREE_LEAVES, SOUND_SPACE_DEFAULT)
+    Thread
+        IfNe(LVar1, 0)
+            Wait(1)
+            Loop(5)
+                UseBuf(LVar1)
+                BufRead1(LVar2)
+                Loop(LVar2)
+                    BufRead1(LVar3)
+                    Call(N(TransformFoliage), LVar3, Float(0.1), Float(0.2), LVarF, 0)
+                EndLoop
+                Wait(1)
+                UseBuf(LVar1)
+                BufRead1(LVar2)
+                Loop(LVar2)
+                    BufRead1(LVar3)
+                    Call(N(TransformFoliage), LVar3, Float(0.1), Float(-0.2), LVarF, 0)
+                EndLoop
+                Wait(1)
+            EndLoop
+            UseBuf(LVar1)
+            BufRead1(LVar2)
+            Loop(LVar2)
+                BufRead1(LVar3)
+                Call(TranslateModel, LVar3, 0, 0, 0)
+            EndLoop
+            Wait(1)
+        EndIf
+    EndThread
+    Thread
+        IfNe(LVar2, 0)
+            Loop(5)
+                UseBuf(LVar2)
+                BufRead1(LVar3)
+                Loop(LVar3)
+                    BufRead1(LVar4)
+                    Call(N(TransformFoliage), LVar4, Float(0.1), Float(0.2), LVarF, 0)
+                EndLoop
+                Wait(1)
+                UseBuf(LVar2)
+                BufRead1(LVar3)
+                Loop(LVar3)
+                    BufRead1(LVar4)
+                    Call(N(TransformFoliage), LVar4, Float(0.1), Float(-0.2), LVarF, 0)
+                EndLoop
+                Wait(1)
+            EndLoop
+            UseBuf(LVar2)
+            BufRead1(LVar3)
+            Loop(LVar3)
+                BufRead1(LVar4)
+                Call(TranslateModel, LVar4, 0, 0, 0)
+            EndLoop
+            Wait(1)
+        EndIf
+    EndThread
+    Thread
+        IfNe(LVar3, 0)
+            UseBuf(LVar3)
+            BufRead1(LVar4)
+            Loop(LVar4)
+                BufRead1(LVar5)
+                BufRead3(LVar6, LVar7, LVar8)
+                BufRead3(LVar9, LVarA, LVarB)
+                IfEq(LVarB, 0)
+                    Call(DropItemEntity, LVar5, LVar6, LVar7, LVar8, LVar9, LVarA)
+                Else
+                    Call(GetValueByRef, LVarB, LVarC)
+                    IfEq(LVarC, 0)
+                        Call(SetValueByRef, LVarB, 1)
+                        Call(DropItemEntity, LVar5, LVar6, LVar7, LVar8, LVar9, LVarA)
+                    EndIf
+                EndIf
+            EndLoop
+        EndIf
+    EndThread
+    Thread
+        IfNe(LVar4, 0)
+            UseBuf(LVar4)
+            BufRead1(LVar5)
+            Loop(LVar5)
+                BufRead3(LVar6, LVar7, LVar8)
+                PlayEffect(EFFECT_SPARKLES, 2, LVar6, LVar7, LVar8, 50)
+                PlayEffect(EFFECT_SPARKLES, 2, LVar6, LVar7, LVar8, 50)
+            EndLoop
+        EndIf
+    EndThread
+    IfNe(LVar5, 0)
+        ExecWait(LVar5)
+    EndIf
+    Wait(15)
+    Return
+    End
 };
 
 FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o37, MODEL_o38, MODEL_o39);
@@ -150,12 +150,12 @@ BombTrigger N(BombPos_Tree2) = {
 };
 
 EvtScript N(EVS_SetupFoliage) = {
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_StarHaven)), TRIGGER_WALL_HAMMER, COLLIDER_o35, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_StarHaven)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree2)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_StarHaven)), TRIGGER_WALL_HAMMER, COLLIDER_o32, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_StarHaven)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree2)), 1, 0)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, Ref(N(ShakeTree_Tree1)))
+    BindTrigger(Ref(N(EVS_ShakeTree_StarHaven)), TRIGGER_WALL_HAMMER, COLLIDER_o35, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree_StarHaven)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree2)))
+    BindTrigger(Ref(N(EVS_ShakeTree_StarHaven)), TRIGGER_WALL_HAMMER, COLLIDER_o32, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree_StarHaven)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree2)), 1, 0)
+    Return
+    End
 };

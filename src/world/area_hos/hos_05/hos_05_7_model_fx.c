@@ -93,66 +93,66 @@ API_CALLABLE(N(SetUnusedAlphaParam)) {
 }
 
 EvtScript N(EVS_Starship_Update) = {
-    EVT_LOOP(0)
-        EVT_CALL(MakeLerp, 0, 60, 30, EASING_COS_IN_OUT)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_SETF(LVar2, LVar0)
-            EVT_MULF(LVar2, EVT_FLOAT(0.1))
-            EVT_ADDF(LVar2, MV_Starship_PosY)
-            EVT_CALL(TranslateGroup, MODEL_g279, 0, LVar2, 0)
-            EVT_CALL(TranslateGroup, MODEL_g277, 0, LVar2, 0)
-            EVT_CALL(RotateGroup, MODEL_g277, MV_Starship_Yaw, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(MakeLerp, 60, 0, 30, EASING_COS_IN_OUT)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_SETF(LVar2, LVar0)
-            EVT_MULF(LVar2, EVT_FLOAT(0.1))
-            EVT_ADDF(LVar2, MV_Starship_PosY)
-            EVT_CALL(TranslateGroup, MODEL_g279, 0, LVar2, 0)
-            EVT_CALL(TranslateGroup, MODEL_g277, 0, LVar2, 0)
-            EVT_CALL(RotateGroup, MODEL_g277, MV_Starship_Yaw, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(MakeLerp, 0, 60, 30, EASING_COS_IN_OUT)
+        Loop(0)
+            Call(UpdateLerp)
+            SetF(LVar2, LVar0)
+            MulF(LVar2, Float(0.1))
+            AddF(LVar2, MV_Starship_PosY)
+            Call(TranslateGroup, MODEL_g279, 0, LVar2, 0)
+            Call(TranslateGroup, MODEL_g277, 0, LVar2, 0)
+            Call(RotateGroup, MODEL_g277, MV_Starship_Yaw, 0, 1, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(MakeLerp, 60, 0, 30, EASING_COS_IN_OUT)
+        Loop(0)
+            Call(UpdateLerp)
+            SetF(LVar2, LVar0)
+            MulF(LVar2, Float(0.1))
+            AddF(LVar2, MV_Starship_PosY)
+            Call(TranslateGroup, MODEL_g279, 0, LVar2, 0)
+            Call(TranslateGroup, MODEL_g277, 0, LVar2, 0)
+            Call(RotateGroup, MODEL_g277, MV_Starship_Yaw, 0, 1, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateStarshipCollision) = {
-    EVT_LOOP(0)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o630)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o627)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(UpdateColliderTransform, COLLIDER_o630)
+        Call(UpdateColliderTransform, COLLIDER_o627)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupStarship) = {
-    EVT_CALL(ParentColliderToModel, COLLIDER_o630, MODEL_o637)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o627, MODEL_o637)
-    EVT_IF_GE(GB_StoryProgress, STORY_CH8_STAR_SHIP_ACTIVATED)
-        EVT_EXEC(N(EVS_UpdateStarshipCollision))
-        EVT_SET(MV_Starship_Yaw, -110)
-        EVT_CALL(GetEntryID, LVar0)
-        EVT_IF_EQ(LVar0, hos_05_ENTRY_3)
-            EVT_SET(MV_Starship_PosY, 900)
-        EVT_ELSE
-            EVT_SET(MV_Starship_PosY, -85)
-        EVT_END_IF
-        EVT_EXEC(N(EVS_Starship_Update))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(ParentColliderToModel, COLLIDER_o630, MODEL_o637)
+    Call(ParentColliderToModel, COLLIDER_o627, MODEL_o637)
+    IfGe(GB_StoryProgress, STORY_CH8_STAR_SHIP_ACTIVATED)
+        Exec(N(EVS_UpdateStarshipCollision))
+        Set(MV_Starship_Yaw, -110)
+        Call(GetEntryID, LVar0)
+        IfEq(LVar0, hos_05_ENTRY_3)
+            Set(MV_Starship_PosY, 900)
+        Else
+            Set(MV_Starship_PosY, -85)
+        EndIf
+        Exec(N(EVS_Starship_Update))
+    EndIf
+    Return
+    End
 };
 
 s32 N(MostSolidGeometry)[] = {
@@ -160,114 +160,114 @@ s32 N(MostSolidGeometry)[] = {
 };
 
 EvtScript N(EVS_SetupLightBeam) = {
-    EVT_CALL(EnableGroup, MODEL_g268, FALSE)
-    EVT_CALL(EnableGroup, MODEL_g178, FALSE)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH8_STAR_SHIP_ACTIVATED)
-        EVT_CALL(EnableModel, MODEL_o8, FALSE)
-    EVT_ELSE
-        EVT_CALL(SetModelCustomGfx, MODEL_o8, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
-        EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, EVT_PTR(N(setup_gfx_light_beam)), NULL)
-        EVT_CALL(EnableModel, MODEL_o8, TRUE)
-        EVT_CALL(N(SetLightBeamAlpha), 127)
-        EVT_CALL(EnableGroup, MODEL_g277, TRUE)
-        EVT_CALL(EnableModel, MODEL_o362, FALSE)
-        EVT_CALL(EnableModel, MODEL_o397, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o616, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(SetZoneEnabled, ZONE_o622, FALSE)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.5))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(EnableGroup, MODEL_g268, FALSE)
+    Call(EnableGroup, MODEL_g178, FALSE)
+    IfLt(GB_StoryProgress, STORY_CH8_STAR_SHIP_ACTIVATED)
+        Call(EnableModel, MODEL_o8, FALSE)
+    Else
+        Call(SetModelCustomGfx, MODEL_o8, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
+        Call(SetCustomGfxBuilders, CUSTOM_GFX_0, Ref(N(setup_gfx_light_beam)), NULL)
+        Call(EnableModel, MODEL_o8, TRUE)
+        Call(N(SetLightBeamAlpha), 127)
+        Call(EnableGroup, MODEL_g277, TRUE)
+        Call(EnableModel, MODEL_o362, FALSE)
+        Call(EnableModel, MODEL_o397, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o616, COLLIDER_FLAGS_UPPER_MASK)
+        Call(SetZoneEnabled, ZONE_o622, FALSE)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(2.5))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Starship_Summon) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_THREAD
-        EVT_CALL(N(SetModelTintMode_Starship), 2, NULL, ENV_TINT_REMAP)
-        EVT_CALL(N(SetModelTintMode_Starship), 1, EVT_PTR(N(MostSolidGeometry)), ENV_TINT_REMAP)
-        EVT_CALL(N(SetWorldColorParams_Starship), 255, 255, 255, 0, 0, 0, 0)
-        EVT_WAIT(1)
-        EVT_CALL(N(SetWorldColorParams_Starship), 102, 102, 102, 0, 0, 0, 60)
-    EVT_END_THREAD
-    EVT_EXEC(N(EVS_UpdateStarshipCollision))
-    EVT_SET(MV_Starship_Yaw, 0)
-    EVT_SET(MV_Starship_PosY, 0)
-    EVT_EXEC(N(EVS_Starship_Update))
-    EVT_THREAD
+    Call(DisablePlayerInput, TRUE)
+    Thread
+        Call(N(SetModelTintMode_Starship), 2, NULL, ENV_TINT_REMAP)
+        Call(N(SetModelTintMode_Starship), 1, Ref(N(MostSolidGeometry)), ENV_TINT_REMAP)
+        Call(N(SetWorldColorParams_Starship), 255, 255, 255, 0, 0, 0, 0)
+        Wait(1)
+        Call(N(SetWorldColorParams_Starship), 102, 102, 102, 0, 0, 0, 60)
+    EndThread
+    Exec(N(EVS_UpdateStarshipCollision))
+    Set(MV_Starship_Yaw, 0)
+    Set(MV_Starship_PosY, 0)
+    Exec(N(EVS_Starship_Update))
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_9)
         TEX_PAN_PARAMS_STEP(  -90,   70,  -60,   90)
         TEX_PAN_PARAMS_FREQ(    1,    1,    1,    1)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan_Starship))
-    EVT_END_THREAD
-    EVT_CALL(SetTexPanner, MODEL_o646, 9)
-    EVT_CALL(PlaySoundAt, SOUND_STARSHIP_APPEARS, SOUND_SPACE_DEFAULT, 0, 250, 0)
-    EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, 0, 250, 0, 10, LVar9)
-    EVT_WAIT(20)
-    EVT_CALL(SetModelCustomGfx, MODEL_o646, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(setup_gfx_starship_shimmer)), NULL)
-    EVT_CALL(EnableGroup, MODEL_g279, TRUE)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 200, 75, EASING_QUADRATIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(N(SetStarshipShimmerAmt), LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(60)
-    EVT_CALL(SetModelCustomGfx, MODEL_o8, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, EVT_PTR(N(setup_gfx_light_beam)), NULL)
-    EVT_CALL(EnableModel, MODEL_o8, TRUE)
-    EVT_CALL(MakeLerp, 0, 127, 60, EASING_COS_IN_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetLightBeamAlpha), LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_WAIT(40)
-    EVT_CALL(PlaySoundAt, SOUND_STARSHIP_APPEARS | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, 0, 250, 0)
-    EVT_CALL(DismissEffect, LVar9)
-    EVT_CALL(EnableGroup, MODEL_g277, TRUE)
-    EVT_CALL(MakeLerp, 200, 0, 45, EASING_QUADRATIC_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetStarshipShimmerAmt), LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(EnableGroup, MODEL_g279, FALSE)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, -110, 90, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_SET(MV_Starship_Yaw, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(MakeLerp, 0, -85, 60, EASING_QUADRATIC_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_SET(MV_Starship_PosY, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_WAIT(30)
-    EVT_CALL(N(SetWorldColorParams_Starship), 255, 255, 255, 0, 0, 0, 60)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+        Exec(N(EVS_UpdateTexturePan_Starship))
+    EndThread
+    Call(SetTexPanner, MODEL_o646, 9)
+    Call(PlaySoundAt, SOUND_STARSHIP_APPEARS, SOUND_SPACE_DEFAULT, 0, 250, 0)
+    PlayEffect(EFFECT_LIGHT_RAYS, 2, 0, 250, 0, 10, LVar9)
+    Wait(20)
+    Call(SetModelCustomGfx, MODEL_o646, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(setup_gfx_starship_shimmer)), NULL)
+    Call(EnableGroup, MODEL_g279, TRUE)
+    Thread
+        Call(MakeLerp, 0, 200, 75, EASING_QUADRATIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(N(SetStarshipShimmerAmt), LVar0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Wait(60)
+    Call(SetModelCustomGfx, MODEL_o8, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_0, Ref(N(setup_gfx_light_beam)), NULL)
+    Call(EnableModel, MODEL_o8, TRUE)
+    Call(MakeLerp, 0, 127, 60, EASING_COS_IN_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(N(SetLightBeamAlpha), LVar0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Wait(40)
+    Call(PlaySoundAt, SOUND_STARSHIP_APPEARS | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, 0, 250, 0)
+    Call(DismissEffect, LVar9)
+    Call(EnableGroup, MODEL_g277, TRUE)
+    Call(MakeLerp, 200, 0, 45, EASING_QUADRATIC_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(N(SetStarshipShimmerAmt), LVar0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(EnableGroup, MODEL_g279, FALSE)
+    Thread
+        Call(MakeLerp, 0, -110, 90, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Set(MV_Starship_Yaw, LVar0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Call(MakeLerp, 0, -85, 60, EASING_QUADRATIC_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        Set(MV_Starship_PosY, LVar0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Wait(30)
+    Call(N(SetWorldColorParams_Starship), 255, 255, 255, 0, 0, 0, 60)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };

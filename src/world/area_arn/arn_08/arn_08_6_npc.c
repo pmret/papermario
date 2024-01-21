@@ -4,45 +4,45 @@
 #include "world/common/npc/Yakkey.inc.c"
 
 EvtScript N(EVS_NpcIdle_TubbasHeart) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TubbasHeart) = {
-    EVT_IF_NE(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WELL)
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_ELSE
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TubbasHeart)))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfNe(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WELL)
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Else
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TubbasHeart)))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Yakkey) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_WHALE_MOUTH_OPEN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BA)
-        EVT_CASE_LT(STORY_CH6_FLOWER_GATE_OPEN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BB)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BC)
-        EVT_CASE_LT(STORY_CH8_OPENED_PATH_TO_STAR_WAY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BD)
-        EVT_CASE_GE(STORY_CH8_OPENED_PATH_TO_STAR_WAY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BE)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_WHALE_MOUTH_OPEN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BA)
+        CaseLt(STORY_CH6_FLOWER_GATE_OPEN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BB)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BC)
+        CaseLt(STORY_CH8_OPENED_PATH_TO_STAR_WAY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BD)
+        CaseGe(STORY_CH8_OPENED_PATH_TO_STAR_WAY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 0, MSG_CH3_00BE)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Yakkey) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH4_FRYING_PAN_STOLEN)
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_ELSE
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Yakkey)))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH4_FRYING_PAN_STOLEN)
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Else
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Yakkey)))
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_TubbasHeart) = {

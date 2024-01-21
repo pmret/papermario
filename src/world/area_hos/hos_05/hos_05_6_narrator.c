@@ -72,11 +72,11 @@ void N(curtain_callback_narration)(void) {
 }
 
 EvtScript N(EVS_SetupNarrator) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(hos_05_ENTRY_3)
-            EVT_CALL(N(SetCurtainCallback), EVT_PTR(N(curtain_callback_narration)))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(hos_05_ENTRY_3)
+            Call(N(SetCurtainCallback), Ref(N(curtain_callback_narration)))
+    EndSwitch
+    Return
+    End
 };

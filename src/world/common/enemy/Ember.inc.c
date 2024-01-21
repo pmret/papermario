@@ -16,13 +16,13 @@ MobileAISettings N(AISettings_Ember) = {
 };
 
 EvtScript N(EVS_NpcAI_Ember) = {
-    EVT_CALL(SetSelfVar, 0, 1)
-    EVT_CALL(SetSelfVar, 5, 0)
-    EVT_CALL(SetSelfVar, 6, 0)
-    EVT_CALL(SetSelfVar, 1, 0)
-    EVT_CALL(N(FlyingNoAttackAI_Main), EVT_PTR(N(AISettings_Ember)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 1)
+    Call(SetSelfVar, 5, 0)
+    Call(SetSelfVar, 6, 0)
+    Call(SetSelfVar, 1, 0)
+    Call(N(FlyingNoAttackAI_Main), Ref(N(AISettings_Ember)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Ember) = {

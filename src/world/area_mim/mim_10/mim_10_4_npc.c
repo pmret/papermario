@@ -75,25 +75,25 @@ NpcSettings N(NpcSettings_JrTroopa) = {
 };
 
 EvtScript N(EVS_Bootler_SpookPlayer) = {
-    EVT_CHILD_THREAD
-        EVT_CALL(GetPlayerPos, LVarA, LVarB, LVarC)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVarA, LVarB, LVarC)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_LOOP(0)
-            EVT_CALL(SetCamDistance, CAM_DEFAULT, 400)
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-            EVT_WAIT(1)
-            EVT_CALL(SetCamDistance, CAM_DEFAULT, 450)
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Spook, ANIM_Bootler_Spook, 0, MSG_CH3_0002)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_RETURN
-    EVT_END
+    ChildThread
+        Call(GetPlayerPos, LVarA, LVarB, LVarC)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVarA, LVarB, LVarC)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Loop(0)
+            Call(SetCamDistance, CAM_DEFAULT, 400)
+            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Wait(1)
+            Call(SetCamDistance, CAM_DEFAULT, 450)
+            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Wait(1)
+        EndLoop
+    EndChildThread
+    Call(SetPlayerAnimation, ANIM_Mario1_Flail)
+    Wait(5 * DT)
+    Call(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Spook, ANIM_Bootler_Spook, 0, MSG_CH3_0002)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Return
+    End
 };
 
 #if VERSION_PAL
@@ -103,154 +103,154 @@ EvtScript N(EVS_Bootler_SpookPlayer) = {
 #endif
 
 EvtScript N(EVS_Scene_BootlersInvitation) = {
-    EVT_CALL(N(AwaitPlayerApproachForest))
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 650)
-    EVT_CALL(N(InitializeLightingBright))
-    EVT_THREAD
-        EVT_CALL(N(ReduceFogEndDist))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(DarkenBackground))
-    EVT_END_THREAD
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetNpcPos, NPC_Bootler, 200, 44, 0)
-    EVT_CALL(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-    EVT_SET(MV_Unk_00, TRUE)
-    EVT_CALL(SetMusicTrack, 0, SONG_BOOS_MANSION, 0, 8)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_LookAround)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_VANISH_A, SOUND_SPACE_DEFAULT)
-    EVT_SETF(LVar0, EVT_FLOAT(0.0))
-    EVT_LOOP(20 * DT)
-        EVT_ADDF(LVar0, EVT_FLOAT(VAR_1))
-        EVT_CALL(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_WAIT(20 * DT)
-    EVT_CALL(GetNpcPos, NPC_Bootler, LVarA, LVarB, LVarC)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVarA, LVarB, LVarC)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVarA, LVarB, LVarC)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 270)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Talk, ANIM_Bootler_Idle, 0, MSG_CH3_0000)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, TRUE)
-    EVT_WAIT(1)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Talk, ANIM_Bootler_Idle, 0, MSG_CH3_0001)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_APPEAR_A, SOUND_SPACE_DEFAULT)
-    EVT_SETF(LVar0, EVT_FLOAT(240.0))
-    EVT_LOOP(20 * DT)
-        EVT_SUBF(LVar0, EVT_FLOAT(VAR_1))
-        EVT_CALL(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_WAIT(25 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Bootler, ANIM_Bootler_Spook)
-    EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_Bootler, LVarA, LVarB, LVarC)
-        EVT_SUB(LVarB, 40)
-        EVT_CALL(SetNpcPos, NPC_Bootler, LVarA, LVarB, LVarC)
-        EVT_CALL(SetNpcScale, NPC_Bootler, EVT_FLOAT(3.0), EVT_FLOAT(3.0), EVT_FLOAT(3.0))
-        EVT_SETF(LVar0, EVT_FLOAT(0.0))
-        EVT_LOOP(20 * DT)
-            EVT_ADDF(LVar0, EVT_FLOAT(VAR_1))
-            EVT_CALL(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOOTLER_SPOOK, SOUND_SPACE_DEFAULT)
-    EVT_EXEC_WAIT(N(EVS_Bootler_SpookPlayer))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 450)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_SETF(LVar0, EVT_FLOAT(240.0))
-    EVT_LOOP(20 * DT)
-        EVT_SUBF(LVar0, EVT_FLOAT(VAR_1))
-        EVT_CALL(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_SET(GB_StoryProgress, STORY_CH3_INVITED_TO_BOOS_MANSION)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(SetNpcPos, NPC_Bootler, NPC_DISPOSE_LOCATION)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(N(AwaitPlayerApproachForest))
+    Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 650)
+    Call(N(InitializeLightingBright))
+    Thread
+        Call(N(ReduceFogEndDist))
+    EndThread
+    Thread
+        Call(N(DarkenBackground))
+    EndThread
+    Call(DisablePlayerInput, TRUE)
+    Call(SetNpcPos, NPC_Bootler, 200, 44, 0)
+    Call(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, 0, 0, 0, 0)
+    Set(MV_Unk_00, TRUE)
+    Call(SetMusicTrack, 0, SONG_BOOS_MANSION, 0, 8)
+    Wait(20 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+    Wait(10 * DT)
+    Call(SetPlayerAnimation, ANIM_MarioW2_LookAround)
+    Wait(30 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+    Wait(10 * DT)
+    Call(InterpPlayerYaw, 270, 0)
+    Wait(20 * DT)
+    Call(InterpPlayerYaw, 90, 0)
+    Wait(20 * DT)
+    Call(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_VANISH_A, SOUND_SPACE_DEFAULT)
+    SetF(LVar0, Float(0.0))
+    Loop(20 * DT)
+        AddF(LVar0, Float(VAR_1))
+        Call(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        Wait(1)
+    EndLoop
+    Wait(20 * DT)
+    Call(GetNpcPos, NPC_Bootler, LVarA, LVarB, LVarC)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVarA, LVarB, LVarC)
+    Call(SetPanTarget, CAM_DEFAULT, LVarA, LVarB, LVarC)
+    Call(SetCamDistance, CAM_DEFAULT, 270)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Talk, ANIM_Bootler_Idle, 0, MSG_CH3_0000)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, TRUE)
+    Wait(1)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Wait(30 * DT)
+    Call(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Talk, ANIM_Bootler_Idle, 0, MSG_CH3_0001)
+    Call(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_APPEAR_A, SOUND_SPACE_DEFAULT)
+    SetF(LVar0, Float(240.0))
+    Loop(20 * DT)
+        SubF(LVar0, Float(VAR_1))
+        Call(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        Wait(1)
+    EndLoop
+    Wait(25 * DT)
+    Call(SetNpcAnimation, NPC_Bootler, ANIM_Bootler_Spook)
+    Thread
+        Call(GetNpcPos, NPC_Bootler, LVarA, LVarB, LVarC)
+        Sub(LVarB, 40)
+        Call(SetNpcPos, NPC_Bootler, LVarA, LVarB, LVarC)
+        Call(SetNpcScale, NPC_Bootler, Float(3.0), Float(3.0), Float(3.0))
+        SetF(LVar0, Float(0.0))
+        Loop(20 * DT)
+            AddF(LVar0, Float(VAR_1))
+            Call(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+            Wait(1)
+        EndLoop
+    EndThread
+    Call(PlaySoundAtNpc, NPC_Bootler, SOUND_BOOTLER_SPOOK, SOUND_SPACE_DEFAULT)
+    ExecWait(N(EVS_Bootler_SpookPlayer))
+    Call(SetCamDistance, CAM_DEFAULT, 450)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(1)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    SetF(LVar0, Float(240.0))
+    Loop(20 * DT)
+        SubF(LVar0, Float(VAR_1))
+        Call(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        Wait(1)
+    EndLoop
+    Set(GB_StoryProgress, STORY_CH3_INVITED_TO_BOOS_MANSION)
+    Exec(N(EVS_SetupMusic))
+    Call(SetNpcPos, NPC_Bootler, NPC_DISPOSE_LOCATION)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupBootlerTrigger) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH3_SAW_BOO_ENTER_FOREST)
-            EVT_RETURN
-        EVT_CASE_LT(STORY_CH3_INVITED_TO_BOOS_MANSION)
-            EVT_EXEC(N(EVS_Scene_BootlersInvitation))
-        EVT_CASE_RANGE(STORY_CH3_INVITED_TO_BOOS_MANSION, STORY_CH3_STAR_SPIRIT_RESCUED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH3_SAW_BOO_ENTER_FOREST)
+            Return
+        CaseLt(STORY_CH3_INVITED_TO_BOOS_MANSION)
+            Exec(N(EVS_Scene_BootlersInvitation))
+        CaseRange(STORY_CH3_INVITED_TO_BOOS_MANSION, STORY_CH3_STAR_SPIRIT_RESCUED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bootler) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH3_SAW_BOO_ENTER_FOREST)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_LT(STORY_CH3_INVITED_TO_BOOS_MANSION)
-            EVT_SET(GF_KMR20_ReunitedWithLuigi, TRUE)
-        EVT_CASE_GE(STORY_CH3_INVITED_TO_BOOS_MANSION)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH3_SAW_BOO_ENTER_FOREST)
+            Call(RemoveNpc, NPC_SELF)
+        CaseLt(STORY_CH3_INVITED_TO_BOOS_MANSION)
+            Set(GF_KMR20_ReunitedWithLuigi, TRUE)
+        CaseGe(STORY_CH3_INVITED_TO_BOOS_MANSION)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_JrTroopa) = {
-    EVT_CALL(WaitForPlayerInputEnabled)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(MV_Unk_00, TRUE)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(3.0 / DT), LVar0, LVar1, LVar2, 300, 15, -7)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 5, MSG_CH3_0023)
-    EVT_WAIT(15 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ChargeArmsUp)
-    EVT_SUB(LVar0, 200)
-    EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar2, 25 * DT)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_SET(GF_MIM10_JrTroopaEscaped, TRUE)
-    EVT_SET(MV_Unk_00, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_RETURN
-    EVT_END
+    Call(WaitForPlayerInputEnabled)
+    Call(DisablePlayerInput, TRUE)
+    Set(MV_Unk_00, TRUE)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(SetCamProperties, CAM_DEFAULT, Float(3.0 / DT), LVar0, LVar1, LVar2, 300, 15, -7)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 5, MSG_CH3_0023)
+    Wait(15 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ChargeArmsUp)
+    Sub(LVar0, 200)
+    Call(NpcMoveTo, NPC_SELF, LVar0, LVar2, 25 * DT)
+    Call(ResetCam, CAM_DEFAULT, Float(90.0))
+    Set(GF_MIM10_JrTroopaEscaped, TRUE)
+    Set(MV_Unk_00, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Call(RemoveNpc, NPC_SELF)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_JrTroopa) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_JrTroopa)))
-    EVT_IF_EQ(GF_MIM10_JrTroopaEscaped, TRUE)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(GF_MIM10_Defeated_JrTroopa, FALSE)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_JrTroopa)))
+    IfEq(GF_MIM10_JrTroopaEscaped, TRUE)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    IfEq(GF_MIM10_Defeated_JrTroopa, FALSE)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Bootler) = {
