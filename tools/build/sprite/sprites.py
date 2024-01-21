@@ -17,6 +17,7 @@ from splat_ext.pm_sprites import (
     MAX_COMPONENTS_XML,
     NPC_SPRITE_MEDADATA_XML_FILENAME,
     PALETTE_GROUPS_XML,
+    HAS_BACK_XML,
     PALETTE_XML,
     PLAYER_SPRITE_MEDADATA_XML_FILENAME,
     SPECIAL_RASTER,
@@ -141,13 +142,12 @@ def player_raster_from_xml(xml: ET.Element, back: bool = False) -> PlayerRaster:
 
 
 def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[bytes]:
-    has_back = False
-
     out_bytes = b""
     back_out_bytes = b""
 
     max_components = int(xml.attrib[MAX_COMPONENTS_XML])
     num_variations = int(xml.attrib[PALETTE_GROUPS_XML])
+    has_back = xml.attrib[HAS_BACK_XML] == "true"
 
     # Animations
     animations: List[List[AnimComponent]] = []
@@ -253,8 +253,6 @@ def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[
     raster_bytes_back: bytes = b""
     raster_offset = 0
     for raster_xml in xml[1]:
-        if "back" in raster_xml.attrib:
-            has_back = True
         r = player_raster_from_xml(raster_xml, back=False)
         raster_bytes += struct.pack(">IBBBB", raster_offset, r.width, r.height, r.palette_idx, 0xFF)
 
@@ -343,13 +341,6 @@ def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[
     return ret
 
 
-def xml_has_back(xml: ET.Element) -> bool:
-    for raster_xml in xml[1]:
-        if "back" in raster_xml.attrib:
-            return True
-    return False
-
-
 def write_player_sprite_header(
     sprite_order: List[str],
     out_file: Path,
@@ -365,7 +356,7 @@ def write_player_sprite_header(
 
     for sprite_name in sprite_order:
         sprite_xml = PLAYER_XML_CACHE[sprite_name]
-        has_back = xml_has_back(sprite_xml)
+        has_back = sprite_xml.attrib[HAS_BACK_XML] == "true"
 
         player_sprites[f"SPR_{sprite_name}"] = sprite_id
         player_rasters[sprite_name] = {}
