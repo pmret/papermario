@@ -5,6 +5,7 @@ This repository supports:
 - [Linux](#unix)
 - [macOS](#unix)
 - [Windows Subsystem for Linux 2](#wsl-2)
+- [Nix](#nix)
 
 If you encounter any issues setting up the repo, please feel free to [reach out to us on Discord](https://discord.gg/PgcMpQTzh5).
 
@@ -59,6 +60,12 @@ Continue onto [building](#building)
 If you have Visual Studio Code, you can type `code .` to open the repo within it.
 `Ctrl + J` opens up a Linux terminal within VS Code.
 
+## Nix
+
+1. Install [Nix](https://nixos.org/download.html)
+2. Clone the repository and `cd` into it
+3. Enter a shell with `NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 NIX_BUILD_CORES=0 nix-shell`
+4. Continue with [building](#building)
 
 # Building
 
