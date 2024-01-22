@@ -55,6 +55,7 @@ in pkgsCross.mkShell {
     zlib
     libyaml
     patchelf
+    glibc
     python3
     python3Packages.virtualenv
     cargo
