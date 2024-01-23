@@ -75,7 +75,7 @@ def write_ninja_rules(
 
     cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
 
-    cflags_modern = f"-c -G0 -O2 -gdwarf-2 -fdiagnostics-color=always -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mgp32 -mfp32 -mabi=32 -mfix4300 -march=vr4300 -mno-gpopt -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -Wno-builtin-declaration-mismatch -DMODERN_COMPILER -x c {extra_cflags}"
+    cflags_modern = f"-c -G0 -O2 -gdwarf-2 -fdiagnostics-color=always -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mgp32 -mfp32 -mabi=32 -mfix4300 -march=vr4300 -mno-gpopt -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -Wno-builtin-declaration-mismatch -x c {extra_cflags}"
 
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3", "-g1")
@@ -85,26 +85,27 @@ def write_ninja_rules(
     ninja.variable("python", sys.executable)
 
     ld_args = f"-T ver/$version/build/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map $mapfile --no-check-sections -T $in -o $out"
+    ld = f"{cross}ld" if not 'PAPERMARIO_LD' in os.environ else os.environ['PAPERMARIO_LD']
 
     if shift:
         # For the shiftable build, we link twice to resolve some addresses that gnu ld can't figure out all in one go.
         ninja.rule(
             "ld",
             description="link($version) $out",
-            command=f"{cross}ld $$(tools/build/ld/multilink_calc.py $version hardcode) {ld_args} && \
-                      {cross}ld $$(tools/build/ld/multilink_calc.py $version calc) {ld_args}",
+            command=f"{ld} $$(tools/build/ld/multilink_calc.py $version hardcode) {ld_args} && \
+                      {ld} $$(tools/build/ld/multilink_calc.py $version calc) {ld_args}",
         )
     else:
         ninja.rule(
             "ld",
             description="link($version) $out",
-            command=f"{cross}ld {ld_args}",
+            command=f"{ld} {ld_args}",
         )
 
     ninja.rule(
         "shape_ld",
         description="link($version) shape $out",
-        command=f"{cross}ld -T src/map_shape.ld $in -o $out",
+        command=f"{ld} -T src/map_shape.ld $in -o $out",
     )
 
     ninja.rule(
@@ -187,7 +188,7 @@ def write_ninja_rules(
     ninja.rule(
         "bin",
         description="bin $in",
-        command=f"{cross}ld -r -b binary $in -o $out",
+        command=f"{ld} -r -b binary $in -o $out",
     )
 
     ninja.rule(
@@ -659,6 +660,8 @@ class Configure:
                 elif len(seg.yaml) >= 4:
                     cflags = seg.yaml[3]
 
+                cppflags = f"-DVERSION_{self.version.upper()}"
+
                 # default cflags where not specified
                 if cflags is None:
                     if "nusys" in entry.src_paths[0].parts:
@@ -691,6 +694,9 @@ class Configure:
                     task = "cc_modern"
                     cflags = cflags.replace("gcc_modern", "")
 
+                if task == "cc_modern":
+                    cppflags += " -DMODERN_COMPILER"
+
                 encoding = "CP932"  # similar to SHIFT-JIS, but includes backslash and tilde
                 if version == "ique":
                     encoding = "EUC-JP"
@@ -714,7 +720,7 @@ class Configure:
                         task,
                         variables={
                             "cflags": cflags,
-                            "cppflags": f"-DVERSION_{self.version.upper()}",
+                            "cppflags": cppflags,
                             "iconv": iconv,
                         },
                     )
@@ -737,7 +743,7 @@ class Configure:
                         task,
                         variables={
                             "cflags": cflags,
-                            "cppflags": f"-DVERSION_{self.version.upper()}",
+                            "cppflags": cppflags,
                             "iconv": iconv,
                         },
                     )
