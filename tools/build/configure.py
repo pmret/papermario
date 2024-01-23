@@ -362,7 +362,7 @@ def does_iconv_work() -> bool:
     stdin = "エリア ＯＭＯ２＿１".encode("utf-8")
 
     def run(command, stdin):
-        sub = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, input=stdin)
+        sub = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, input=stdin, cwd=ROOT)
         return sub.stdout
 
     expected_stdout = run(["tools/build/iconv.py", "UTF-8", "CP932"], stdin)
