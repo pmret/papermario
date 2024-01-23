@@ -365,7 +365,7 @@ def does_iconv_work() -> bool:
         sub = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, input=stdin, cwd=ROOT)
         return sub.stdout
 
-    expected_stdout = run(["python3", "tools/build/iconv.py", "UTF-8", "CP932"], stdin)
+    expected_stdout = run(["tools/build/iconv.py", "UTF-8", "CP932"], stdin)
     actual_stdout = run(["iconv", "--from", "UTF-8", "--to", "CP932"], stdin)
     return expected_stdout == actual_stdout
 
