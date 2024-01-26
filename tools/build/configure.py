@@ -941,7 +941,7 @@ class Configure:
                     entry.src_paths,
                     "icons",
                     variables={
-                        "list_path": entry.src_paths[0],
+                        "list_path": self.resolve_asset_path(entry.src_paths[0]),
                         "header_path": header_path,
                         "asset_stack": ",".join(self.asset_stack),
                     },
