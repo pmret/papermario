@@ -40,7 +40,7 @@ def build(out_bin: Path, in_xml: Path, out_header: Path, asset_stack: Tuple[Path
     out_bytes = bytearray()
     offsets: Dict[str, int] = {}
 
-    xml = ET.parse(in_xml)
+    xml = ET.parse(get_asset_path(in_xml, asset_stack))
     IconList = xml.getroot()
 
     for Icon in IconList.findall("Icon"):
