@@ -48,7 +48,7 @@ EvtScript N(EVS_AnimateWaves) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_TOAD_TOWN)
     Call(SetSpriteShading, SHADING_NONE)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
     Exec(N(EVS_FlyingGull))
     Exec(N(EVS_WhaleMain))

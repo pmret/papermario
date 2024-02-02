@@ -22,7 +22,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_FLOWER_FIELDS)
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Set(AF_FLO_TreeDrop_RedBerry1, FALSE)
     Set(AF_FLO_TreeDrop_RedBerry2, FALSE)
     Set(AB_FLO_PetuniaDialogue, 0)
