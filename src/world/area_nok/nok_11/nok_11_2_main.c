@@ -80,7 +80,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_PLEASANT_PATH)
     Call(SetSpriteShading, SHADING_NONE)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Set(GF_MAP_PleasantPath, TRUE)
     IfEq(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
         Call(MakeNpcs, FALSE, Ref(N(JrTroopaNPCs)))
