@@ -49,7 +49,7 @@ EvtScript N(EVS_TexPan_MotionLines) = {
 
 EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Exec(N(EVS_TexPan_MotionLines))
     Call(GetEntryID, LVar0)
     Switch(LVar0)

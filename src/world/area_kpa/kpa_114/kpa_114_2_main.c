@@ -34,7 +34,7 @@ EvtScript N(EVS_EnterMap) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_BOWSERS_CASTLE)
     Call(SetSpriteShading, SHADING_NONE)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
     Exec(N(EVS_EnterMap))

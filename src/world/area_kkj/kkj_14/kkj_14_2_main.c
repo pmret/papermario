@@ -163,7 +163,7 @@ EvtScript N(EVS_EnterMap) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_PEACHS_CASTLE)
     Call(SetSpriteShading, SHADING_NONE)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Call(GetEntryID, LVar0)
     IfGe(LVar0, kkj_14_ENTRY_3)
         IfNe(LVar0, kkj_14_ENTRY_B)
