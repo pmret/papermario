@@ -385,11 +385,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                         var_name = (
                             var_names[1]
                             if i == 0x4
-                            else var_names[3]
-                            if i == 0x14
-                            else var_names[4]
-                            if i == 0x18
-                            else var_names[17]
+                            else var_names[3] if i == 0x14 else var_names[4] if i == 0x18 else var_names[17]
                         )
                         addr = unpack_from(f">I", staticNpc, curr_base + i)[0]
                         if not addr == 0:
