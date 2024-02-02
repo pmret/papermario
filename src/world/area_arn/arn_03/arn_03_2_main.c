@@ -40,7 +40,7 @@ EvtScript N(EVS_EnterMap) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_GUSTY_GULCH)
     Call(SetSpriteShading, SHADING_NONE)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Set(AF_ARN_03, FALSE)
     Set(AF_ARN_04, FALSE)
     Set(AF_ARN_05, FALSE)

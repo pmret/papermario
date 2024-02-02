@@ -92,7 +92,7 @@ EvtScript N(EVS_Main) = {
                 Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
             EndIf
         Else
-            Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    EVT_SETUP_CAMERA_DEFAULTs, FALSE, Ref(N(DefaultNPCs)))
         EndIf
     EndIf
     ExecWait(N(EVS_MakeEntities))

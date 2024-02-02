@@ -13,7 +13,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_SHY_GUYS_TOYBOX)
     Call(SetSpriteShading, SHADING_NONE)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     IfEq(GF_OMO04_SpawnedPeachChoice1, FALSE)
         Call(MakeNpcs, TRUE, Ref(N(KammySceneNPCs)))
     Else

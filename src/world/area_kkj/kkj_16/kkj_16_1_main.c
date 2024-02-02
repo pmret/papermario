@@ -46,7 +46,7 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_DEFAULT()
     Switch(GB_StoryProgress)
-        CaseOrEq(STORY_CH2_BEGAN_PEACH_MISSION)
+    EVT_SETUP_CAMERA_DEFAULTH2_BEGAN_PEACH_MISSION)
         CaseOrEq(STORY_CH4_BEGAN_PEACH_MISSION)
         CaseOrEq(STORY_CH5_BEGAN_PEACH_MISSION)
             Call(MakeNpcs, FALSE, Ref(N(EarlyNPCs)))

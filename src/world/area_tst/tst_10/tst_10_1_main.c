@@ -84,7 +84,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_TESTING)
     Call(SetSpriteShading, SHADING_NONE)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     ExecWait(N(EVS_MakeEntities))
     IfEq(AF_TST_00, TRUE)
         Call(SetZoneEnabled, ZONE_north, FALSE)

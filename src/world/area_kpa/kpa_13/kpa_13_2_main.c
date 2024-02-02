@@ -49,7 +49,7 @@ LavaReset N(SafeFloorColliders)[] = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_BOWSERS_CASTLE)
     Call(SetSpriteShading, SHADING_NONE)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     ExecWait(N(EVS_MakeEntities))
     IfEq(GF_KPA16_ShutOffLava, FALSE)
         Call(EnableGroup, MODEL_after, FALSE)

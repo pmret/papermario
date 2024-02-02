@@ -47,7 +47,7 @@ EvtScript N(EVS_EnterMap) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_KOOPA_BROS_FORTRESS)
     Call(SetSpriteShading, SHADING_NONE)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Call(GetDemoState, LVar0)
     IfNe(LVar0, DEMO_STATE_NONE)
         Call(MakeNpcs, TRUE, Ref(N(DemoNPCs)))

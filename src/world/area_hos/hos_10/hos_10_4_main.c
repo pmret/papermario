@@ -6,7 +6,7 @@ EvtScript N(EVS_Main) = {
         Wait(75)
     EndIf
     Call(SetSpriteShading, SHADING_NONE)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(hos_10_ENTRY_1)

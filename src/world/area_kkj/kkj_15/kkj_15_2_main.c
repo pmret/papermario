@@ -105,7 +105,7 @@ EvtScript N(EVS_Main) = {
         CaseEq(kkj_15_ENTRY_2)
             Set(GB_StoryProgress, STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
     EndSwitch
-    Switch(GB_StoryProgress)
+    EVT_SETUP_CAMERA_DEFAULTess)
         CaseEq(STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
             Call(MakeNpcs, FALSE, Ref(N(Chapter0NPCs)))
         CaseEq(STORY_CH1_BEGAN_PEACH_MISSION)
