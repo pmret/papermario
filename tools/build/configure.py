@@ -253,7 +253,7 @@ def write_ninja_rules(
 
     ninja.rule(
         "icons",
-        command=f"$python {BUILD_TOOLS}/icons.py $out $list_path $header_path $asset_stack",
+        command=f"$python {BUILD_TOOLS}/icons.py $out $header_path $asset_stack",
     )
 
     ninja.rule(
@@ -941,7 +941,6 @@ class Configure:
                     entry.src_paths,
                     "icons",
                     variables={
-                        "list_path": entry.src_paths[0],
                         "header_path": header_path,
                         "asset_stack": ",".join(self.asset_stack),
                     },
