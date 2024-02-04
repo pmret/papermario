@@ -1409,8 +1409,22 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
 }
 
 #if VERSION_PAL
-void dma_load_msg(u32 msgID, void* dest);
-INCLUDE_ASM(s32, "msg", dma_load_msg);
+void dma_load_msg(u32 msgID, void* dest) {
+    u8* langPtr = D_PAL_8014AE50[gCurrentLanguage];
+    u8* new_langPtr;
+    u8* addr = (u8*) langPtr + (msgID >> 14); // (msgID >> 16) * 4
+    u8* offset[2]; // start, end
+
+    dma_copy(addr, addr + 4, &offset[0]); // Load section offset
+
+    new_langPtr = langPtr;
+    new_langPtr = offset[0] + ((u32) new_langPtr);
+    addr = new_langPtr + ((msgID & 0xFFFF) * 4);
+    dma_copy(addr, addr + 8, &offset); // Load message start and end offsets
+
+    // Load the msg data
+    dma_copy(&langPtr[(u32)offset[0]], &langPtr[(u32)offset[1]], dest);
+}
 #else
 void dma_load_msg(u32 msgID, void* dest) {
     u8* addr = (u8*) MSG_ROM_START + (msgID >> 14); // (msgID >> 16) * 4
