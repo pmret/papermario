@@ -106,27 +106,22 @@ API_CALLABLE(DemoSetButtons) {
 
 API_CALLABLE(DemoJoystickRadial) {
     GameStatus** gameStatus = &gGameStatusPtr;
-    f32 a;
-    f32 b;
-    s32* thisPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
-    a = evt_get_float_variable(script, *thisPos++);
-    b = evt_get_float_variable(script, *thisPos++);
+    f32 mag = evt_get_float_variable(script, *args++);
+    f32 ang = evt_get_float_variable(script, *args++);
 
-    (*gameStatus)->demoStickX = a * sin_deg(b);
-    (*gameStatus)->demoStickY = a * cos_deg(b);
+    (*gameStatus)->demoStickX = mag * sin_deg(ang);
+    (*gameStatus)->demoStickY = mag * cos_deg(ang);
 
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(DemoJoystickXY) {
     GameStatus** gameStatus = &gGameStatusPtr;
-    f32 x;
-    f32 y;
-    s32* thisPos = script->ptrReadPos;
-
-    x = evt_get_float_variable(script, *thisPos++);
-    y = evt_get_float_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
 
     (*gameStatus)->demoStickX = x;
     (*gameStatus)->demoStickY = y;

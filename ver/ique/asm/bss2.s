@@ -84,7 +84,7 @@ dlabel JumpedOnSwitchZ
 dlabel PlayerRunStateTime
 .space 4
 
-dlabel D_8010C984
+dlabel StepUpLastYaw
 .space 4
 
 dlabel D_8010C988

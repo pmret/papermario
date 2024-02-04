@@ -51,10 +51,10 @@ dlabel NextPartnerCommand
 dlabel wPartner
 .space 4
 
-dlabel D_8010CFF0
+dlabel PrevTimeInAir
 .space 4
 
-dlabel D_8010CFF4
+dlabel LandedTimeInAir
 .space 4
 
 dlabel D_8010CFF8

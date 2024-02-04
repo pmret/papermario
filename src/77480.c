@@ -38,9 +38,9 @@ extern f32 D_800F7B48;
 extern s32 D_800F7B4C;
 extern s32 WorldTattleInteractionID;
 
-s32 player_raycast_down(f32*, f32*, f32*, f32*);
-s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length);
-s32 player_raycast_general(s32, f32, f32, f32, f32, f32, f32, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
+HitID player_raycast_down(f32*, f32*, f32*, f32*);
+HitID player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length);
+HitID player_raycast_general(s32, f32, f32, f32, f32, f32, f32, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
 void player_get_slip_vector(f32* outX, f32* outY, f32 x, f32 y, f32 nX, f32 nY);
 void phys_update_standard(void);
 void phys_update_lava_reset(void);
@@ -65,7 +65,7 @@ void appendGfx_player_spin(void* data);
 void update_player_shadow(void);
 s32 partner_use_ability(void);
 
-s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ, f32* outLength, f32* hitRx, f32* hitRz,
+HitID player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ, f32* outLength, f32* hitRx, f32* hitRz,
                          f32* hitDirX, f32* hitDirZ) {
     f32 x, y, z, length;
     f32 inputX, inputY, inputZ, inputLength;
@@ -185,7 +185,7 @@ s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ,
     return ret;
 }
 
-s32 player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32* outY, f32* outZ, f32* outLength,
+HitID player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32* outY, f32* outZ, f32* outLength,
                                       f32* hitRx, f32* hitRz, f32* hitDirX, f32* hitDirZ) {
     f32 yaw = 0.0f;
 
@@ -197,7 +197,7 @@ s32 player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32
                                 outX, outY, outZ, outLength, hitRx, hitRz, hitDirX, hitDirZ);
 }
 
-s32 player_raycast_down(f32* x, f32* y, f32* z, f32* length) {
+HitID player_raycast_down(f32* x, f32* y, f32* z, f32* length) {
     f32 hitX;
     f32 hitY;
     f32 hitZ;
@@ -247,7 +247,7 @@ s32 player_raycast_down(f32* x, f32* y, f32* z, f32* length) {
     return ret;
 }
 
-s32 player_raycast_up_corners(PlayerStatus* player, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw) {
+HitID player_raycast_up_corners(PlayerStatus* player, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw) {
     f32 startX;
     f32 startY;
     f32 startZ;
@@ -316,7 +316,7 @@ s32 player_raycast_up_corners(PlayerStatus* player, f32* posX, f32* posY, f32* p
     return ret;
 }
 
-s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length) {
+HitID player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length) {
     f32 hitX;
     f32 hitY;
     f32 hitZ;
@@ -364,7 +364,7 @@ s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length) {
     return ret;
 }
 
-s32 player_test_lateral_overlap(s32 mode, PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw) {
+HitID player_test_lateral_overlap(s32 mode, PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw) {
     f32 sinTheta;
     f32 cosTheta;
     f32 hitX;
@@ -428,7 +428,7 @@ s32 player_test_lateral_overlap(s32 mode, PlayerStatus* playerStatus, f32* x, f3
     return ret;
 }
 
-s32 player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX,
+HitID player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX,
                             f32* hitY, f32* hitZ, f32* hitDepth, f32*hitNx, f32* hitNy, f32* hitNz) {
     f32 nAngleX;
     f32 nAngleZ;
@@ -483,7 +483,7 @@ s32 player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 dir
     return ret;
 }
 
-s32 player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw, s32* hasClimbableStep) {
+HitID player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw, s32* hasClimbableStep) {
     f32 sinTheta;
     f32 cosTheta;
     f32 hitX;
@@ -550,7 +550,7 @@ void player_get_slip_vector(f32* outX, f32* outY, f32 x, f32 y, f32 nX, f32 nY) 
     *outY = (y - projectionLength * nY) * 0.5f;
 }
 
-s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw) {
+HitID player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw) {
     f32 sinTheta;
     f32 cosTheta;
     f32 hitX;

@@ -6,7 +6,7 @@ SHIFT_BSS CollisionStatus gCollisionStatus;
 SHIFT_BSS f32 D_8010C928;
 SHIFT_BSS f32 JumpedOnSwitchX;
 SHIFT_BSS f32 JumpedOnSwitchZ;
-SHIFT_BSS f32 D_8010C984;
+SHIFT_BSS f32 StepUpLastYaw;
 
 extern f32 GravityParamsStartJump[];
 
@@ -964,7 +964,7 @@ void phys_main_collision_below(void) {
                             } else {
                                 set_action_state(ACTION_STATE_STEP_UP);
                                 D_8010C928 = playerY;
-                                D_8010C984 = playerStatus->targetYaw;
+                                StepUpLastYaw = playerStatus->targetYaw;
                             }
                         } else {
                             playerStatus->pos.y = playerY;

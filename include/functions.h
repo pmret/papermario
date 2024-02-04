@@ -248,8 +248,8 @@ s32 phys_can_player_interact(void);
 
 void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2);
 
-s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, f32, f32, s32*);
-s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* posX, f32* posY, f32* posZ, f32 speed, f32 heading);
+HitID player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, f32, f32, s32*);
+HitID player_test_move_with_slipping(PlayerStatus* playerStatus, f32* posX, f32* posY, f32* posZ, f32 speed, f32 heading);
 
 s32 evt_get_variable(Evt* script, Bytecode var);
 s32 evt_set_variable(Evt* script, Bytecode var, s32 value);
@@ -404,7 +404,7 @@ b32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
 s32 npc_raycast_up(s32, f32*, f32*, f32*, f32*);
 s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw, f32 radius);
 s32 player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32);
-s32 player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32* outY, f32* outZ, f32* outLength,
+HitID player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32* outY, f32* outZ, f32* outLength,
                                       f32* hitRx, f32* hitRz, f32* hitDirX, f32* hitDirZ);
 b32 npc_test_move_taller_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 b32 npc_test_move_simple_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
