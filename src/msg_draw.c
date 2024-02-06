@@ -1514,7 +1514,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                             gDPSetCombineMode(gMainGfxPos++, PM_CC_07, PM_CC_07);
                             gDPSetPrimColor(gMainGfxPos++, 0, 0, 40, 40, 40, 72);
 #if VERSION_IQUE
-                            if (byte >= 0x5f && byte <= 0x8f) {
+                            if (byte >= MSG_CHAR_MULTIBYTE_FIRST && byte <= MSG_CHAR_MULTIBYTE_LAST) {
                                 glyph_index = (MSG_CHAR_ZH_START - MSG_CHAR_MULTIBYTE_FIRST) + byte + (byte2 - 1)
                                     * (MSG_CHAR_MULTIBYTE_LAST - MSG_CHAR_MULTIBYTE_FIRST + 1);
                                 msg_draw_char(printer, msg_drawState, glyph_index,
@@ -1549,7 +1549,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                                     phi_s1_8 += (rand_int(10000) % 3) - 1;
                                 }
 #if VERSION_IQUE
-                                if (byte >= 0x5f && byte <= 0x8f) {
+                                if (byte >= MSG_CHAR_MULTIBYTE_FIRST && byte <= MSG_CHAR_MULTIBYTE_LAST) {
                                     glyph_index = (MSG_CHAR_ZH_START - MSG_CHAR_MULTIBYTE_FIRST) + byte + (byte2 - 1)
                                         * (MSG_CHAR_MULTIBYTE_LAST - MSG_CHAR_MULTIBYTE_FIRST + 1);
                                     msg_draw_char(printer, msg_drawState, glyph_index,
@@ -1566,7 +1566,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                             }
                         } else {
 #if VERSION_IQUE
-                            if (byte >= 0x5f && byte <= 0x8f) {
+                            if (byte >= MSG_CHAR_MULTIBYTE_FIRST && byte <= MSG_CHAR_MULTIBYTE_LAST) {
                                 glyph_index = (MSG_CHAR_ZH_START - MSG_CHAR_MULTIBYTE_FIRST) + byte + (byte2 - 1)
                                     * (MSG_CHAR_MULTIBYTE_LAST - MSG_CHAR_MULTIBYTE_FIRST + 1);
                                 msg_draw_char(printer, msg_drawState, glyph_index,
