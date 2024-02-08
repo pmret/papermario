@@ -26,6 +26,7 @@ options:
   undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
   symbol_name_format: PAL_$VRAM
   symbol_name_format_no_rom: PAL_$VRAM_$SEG
+  hasm_in_src_path: True
 asset_stack:
   - pal
 segments:
@@ -39,7 +40,7 @@ segments:
     start: 0x71D80
     vram: 0x800D8C70
     subsegments:
-    - [auto, hasm, bss2]
+    - [auto, hasm, engine1.bss]
     - [auto, c, npc_collision]
     - [auto, c, 77480]
     - [auto, c, 7B440]
@@ -49,7 +50,7 @@ segments:
     - [auto, c, inventory]
     - [auto, c, world/actions] # DUMMY ROM
     - [auto, c, world/partners]
-    - [auto, hasm, bss2_2]
+    - [auto, hasm, engine1.bss2]
     - [auto, c, global_hud_scripts]
     - [auto, c, 891b0_len_fb0]
     - [auto, c, 8a160_len_700]
@@ -544,7 +545,7 @@ segments:
     start: 0xA4520
     vram: 0x8010E1D0
     subsegments:
-    - [auto, hasm, bss3]
+    - [auto, hasm, engine2.bss]
     - [auto, c, entity]
     - [auto, c, game_states]
     - [auto, c, model]

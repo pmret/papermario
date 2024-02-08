@@ -103,9 +103,7 @@ SHIFT_BSS TitleDataStruct* TitleScreen_ImgList;
 SHIFT_BSS s32* TitleScreen_ImgList_Logo;
 SHIFT_BSS u8 (*TitleScreen_ImgList_Copyright)[COPYRIGHT_WIDTH];
 SHIFT_BSS s32* TitleScreen_ImgList_PressStart;
-#if VERSION_JP
 SHIFT_BSS s32* TitleScreen_ImgList_CopyrightPalette;
-#endif
 SHIFT_BSS s16 TitleScreen_TimeLeft;
 
 void appendGfx_title_screen(void);

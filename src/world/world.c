@@ -46,7 +46,11 @@ s32 pad_map_table[] = { 0, 0 };
 
 SHIFT_BSS MapSettings gMapSettings;
 SHIFT_BSS MapConfig* gMapConfig;
+#if VERSION_JP
+SHIFT_BSS char wMapHitName[0x14];
+#else
 SHIFT_BSS char wMapHitName[0x18];
+#endif
 SHIFT_BSS char wMapShapeName[0x18];
 SHIFT_BSS char wMapTexName[0x18];
 SHIFT_BSS char wMapBgName[0x18];

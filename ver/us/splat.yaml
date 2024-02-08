@@ -26,6 +26,7 @@ options:
   undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
   ld_wildcard_sections: True
   ld_use_symbolic_vram_addresses: False
+  hasm_in_src_path: True
 vram_classes:
   # Main
   - { name: main, vram: 0x80025C00 }
@@ -80,15 +81,15 @@ segments:
     start: 0x0040
     vram: 0xA4000040
     subsegments:
-    - [0x0040, asm, boot]
+    - [0x0040, hasm, boot/ipl3_boot]
     - [0x0B70, bin, rspboot_font]
   - name: main
     type: code
     start: 0x1000
     vram_class: main
     subsegments:
-    - [auto, hasm, bss]
-    - [auto, hasm, entry_point]
+    - [auto, hasm, main.bss]
+    - [auto, hasm, boot/entry_point]
     - [auto, c, is_debug, -g -fforce-addr]
     - [auto, c, main_pre]
     - [auto, c, main]
@@ -381,7 +382,7 @@ segments:
     start: 0x759B0
     vram_class: engine1
     subsegments:
-    - [auto, hasm, bss2]
+    - [auto, hasm, engine1.bss]
     - [auto, c, npc_collision]
     - [auto, c, 77480]
     - [auto, c, 7B440]
@@ -392,7 +393,7 @@ segments:
     - [auto, c, world/actions] # DUMMY ROM
     - [auto, c, world/partners]
     - [auto, c, global_hud_scripts]
-    - [auto, hasm, bss2_2]
+    - [auto, hasm, engine1.bss2]
     - [auto, c, 891b0_len_fb0]
     - [auto, c, 8a160_len_700]
     - [auto, c, 8a860_len_3f30]
@@ -815,7 +816,7 @@ segments:
     start: 0xA5DD0
     vram_class: engine2
     subsegments:
-    - [auto, hasm, bss3]
+    - [auto, hasm, engine2.bss]
     - [auto, c, entity]
     - [auto, c, game_states]
     - [auto, c, model]

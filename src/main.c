@@ -24,6 +24,7 @@ SHIFT_BSS OSMesgQueue __osPiAccessQueue;
 SHIFT_BSS OSThread piThread;
 SHIFT_BSS OSMesgQueue piEventQueue;
 SHIFT_BSS OSMesg piEventBuf[1];
+// NOTE Addendum: iQue says this should be size 4 so decrement by 1
 SHIFT_BSS OSContStatus nuContStatus[5]; // ??? enough space for 5, but it makes no sense
 SHIFT_BSS OSMesgQueue nuSiMesgQ;
 SHIFT_BSS u32 nuContDataLockKey;
