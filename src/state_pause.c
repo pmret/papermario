@@ -39,10 +39,10 @@ NUPiOverlaySegment D_8007795C = {
     .bssEnd = pause_BSS_END,
 };
 
-SHIFT_BSS s8 StepPauseDelay;
-SHIFT_BSS s8 StepPauseState;
-SHIFT_BSS s16 StepPauseAlpha; // effectively unused, always zero
-SHIFT_BSS s32 SavedReverbMode;
+static s8 StepPauseDelay;
+static s8 StepPauseState;
+static s16 StepPauseAlpha; // effectively unused, always zero
+static s32 SavedReverbMode;
 
 void state_init_pause(void) {
     StepPauseState = 0;

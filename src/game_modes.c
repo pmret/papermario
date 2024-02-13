@@ -256,7 +256,7 @@ GameMode* gameModeMap[] = {
     [GAME_MODE_DEMO]                (GameMode*) &GameModeDemo,
 };
 
-SHIFT_BSS s16 CurGameMode;
+static s16 CurGameMode;
 
 void set_game_mode(s16 mode) {
     CurGameMode = mode;

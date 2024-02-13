@@ -30,8 +30,6 @@ Gfx D_80074230[] = {
     gsSPEndDisplayList(),
 };
 
-//extern s32 timeFreezeMode; // TODO bss
-
 void gfx_init_state(void) {
     gSPSegment(gMainGfxPos++, 0x00, 0x0);
     gSPDisplayList(gMainGfxPos++, OS_K0_TO_PHYSICAL(D_80074230));

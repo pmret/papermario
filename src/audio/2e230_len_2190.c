@@ -1,13 +1,13 @@
 #include "audio.h"
 #include "ld_addrs.h"
 
-SHIFT_BSS AuCallback BeginSoundUpdateCallback;
-SHIFT_BSS BGMPlayer* gBGMPlayerA;
-SHIFT_BSS BGMPlayer* gBGMPlayerB;
-SHIFT_BSS BGMPlayer* gBGMPlayerC;
-SHIFT_BSS SoundManager* gSoundManager;
-SHIFT_BSS AuGlobals* gSoundGlobals;
-SHIFT_BSS AmbienceManager* gAuAmbienceManager;
+AuCallback BeginSoundUpdateCallback;
+BGMPlayer* gBGMPlayerA;
+BGMPlayer* gBGMPlayerB;
+BGMPlayer* gBGMPlayerC;
+SoundManager* gSoundManager;
+AuGlobals* gSoundGlobals;
+AmbienceManager* gAuAmbienceManager;
 
 // data
 extern u16 D_80078530[9];

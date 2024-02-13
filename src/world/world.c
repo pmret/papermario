@@ -44,16 +44,17 @@ s32 pad_map_table[] = { 0, 0 };
 #define ASSET_TABLE_HEADER_SIZE 0x20
 #define ASSET_TABLE_FIRST_ENTRY (ASSET_TABLE_ROM_START + ASSET_TABLE_HEADER_SIZE)
 
-SHIFT_BSS MapSettings gMapSettings;
-SHIFT_BSS MapConfig* gMapConfig;
-#if VERSION_JP
-SHIFT_BSS char wMapHitName[0x14];
+static MapConfig* gMapConfig;
+static s32 D_800A41E4;
+static MapSettings gMapSettings;
+#if VERSION_JP || VERSION_IQUE
+char wMapHitName[0x14];
 #else
-SHIFT_BSS char wMapHitName[0x18];
+char wMapHitName[0x18];
 #endif
-SHIFT_BSS char wMapShapeName[0x18];
-SHIFT_BSS char wMapTexName[0x18];
-SHIFT_BSS char wMapBgName[0x18];
+char wMapShapeName[0x18];
+char wMapTexName[0x18];
+char wMapBgName[0x14];
 
 typedef struct {
     /* 0x00 */ char name[16];

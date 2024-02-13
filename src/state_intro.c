@@ -12,15 +12,15 @@ enum IntroStates {
     INTRO_ENABLE_DRAW_FRAME      = 0x00000015, // unused
 };
 
-SHIFT_BSS s32 IntroEnableDrawFrameDelay;
-SHIFT_BSS s16 IntroOverlayAlpha;
-SHIFT_BSS s16 IntroFrontFadeAlpha;
-SHIFT_BSS s16 IntroOverlayDelta;
-SHIFT_BSS s16 IntroFadeColorR;
-SHIFT_BSS s16 IntroFadeColorG;
-SHIFT_BSS s16 IntroFadeColorB;
-SHIFT_BSS s32 IntroOverlayType;
-SHIFT_BSS s32 D_800A0964; // related to skipping the intro
+static s32 IntroEnableDrawFrameDelay;
+static s16 IntroOverlayAlpha;
+static s16 IntroFrontFadeAlpha;
+static s16 IntroOverlayDelta;
+static s16 IntroFadeColorR;
+static s16 IntroFadeColorG;
+static s16 IntroFadeColorB;
+static s32 IntroOverlayType;
+static s32 D_800A0964; // related to skipping the intro
 
 void state_init_intro(void) {
     s8 viewportMode;

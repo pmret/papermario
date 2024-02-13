@@ -2,12 +2,12 @@
 #include "PR/os_flash.h"
 
 // BSS
-extern u32 __osFlashID[4];
-extern OSIoMesg __osFlashMsg;
-extern OSMesgQueue __osFlashMessageQ;
-extern OSPiHandle __osFlashHandler;
-extern OSMesg __osFlashMsgBuf;
-extern s32 __osFlashVersion;
+u32 __osFlashID[4];
+OSIoMesg __osFlashMsg;
+OSMesgQueue __osFlashMessageQ;
+OSPiHandle __osFlashHandler;
+OSMesg __osFlashMsgBuf;
+s32 __osFlashVersion;
 
 OSPiHandle* osFlashReInit(u8 latency, u8 pulse, u8 page_size, u8 rel_duration, u32 start) {
     __osFlashHandler.baseAddress = PHYS_TO_K1(start);

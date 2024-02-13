@@ -703,9 +703,14 @@ class Configure:
 
                 if task == "cc_modern":
                     cppflags += " -DMODERN_COMPILER"
-                
-                if version == "ique" and seg.name.startswith("os/") and not seg.name.startswith("os/nusys/"):
-                    cppflags += " -DBBPLAYER"
+
+                if version == "ique":
+                    if "nusys" in entry.src_paths[0].parts:
+                        pass
+                    elif "os" in entry.src_paths[0].parts:
+                        cppflags += " -DBBPLAYER"
+                    elif entry.src_paths[0].parts[-1].startswith("main_common_syms_"):
+                        cppflags += " -DBBPLAYER"
 
                 encoding = "CP932"  # similar to SHIFT-JIS, but includes backslash and tilde
                 if version == "ique":

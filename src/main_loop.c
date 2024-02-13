@@ -6,10 +6,12 @@
 #include "overlay.h"
 #include "game_modes.h"
 
-SHIFT_BSS s32 gOverrideFlags;
-SHIFT_BSS s32 timeFreezeMode;
-SHIFT_BSS u16** nuGfxCfb;
-SHIFT_BSS s16 SoftResetDelay;
+s32 gOverrideFlags;
+s32 timeFreezeMode;
+u16** nuGfxCfb;
+static s16 SoftResetDelay;
+
+//extern DisplayContext D_80164000[2];
 SHIFT_BSS DisplayContext D_80164000[2];
 
 s8 gGameStepDelayAmount = 1;

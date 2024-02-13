@@ -202,12 +202,12 @@ Gfx NoControllerGfx[] = {
     gsSPEndDisplayList(),
 };
 
-SHIFT_BSS Mtx D_8009BAA8[2];
-SHIFT_BSS f32 gCurtainScale;
-SHIFT_BSS f32 gCurtainScaleGoal;
-SHIFT_BSS f32 gCurtainFade;
-SHIFT_BSS f32 gCurtainFadeGoal;
-SHIFT_BSS UNK_FUN_PTR(gCurtainDrawCallback);
+static f32 gCurtainScale;
+static f32 gCurtainScaleGoal;
+static f32 gCurtainFade;
+static f32 gCurtainFadeGoal;
+static UNK_FUN_PTR(gCurtainDrawCallback);
+static Mtx D_8009BAA8[2];
 
 void initialize_curtains(void) {
     gCurtainDrawCallback = NULL;

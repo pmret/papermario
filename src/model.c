@@ -96,7 +96,7 @@ enum {
 
 SHIFT_BSS u8* gBackgroundTintModePtr; // NOTE: the type for this u8 is TintMode, as shown in SetModelTintMode
 SHIFT_BSS ModelList* gCurrentModels;
-SHIFT_BSS ModelTreeInfoList* gCurrentModelTreeNodeInfo;
+ModelTreeInfoList* gCurrentModelTreeNodeInfo;
 
 extern Addr TextureHeap;
 

@@ -1,10 +1,11 @@
 #include "audio.h"
 
+static void (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
+
 extern u8 EnvelopeReleaseDefaultFast[];
 extern u8 BgmDivisors[8];
 extern u8 D_80078558[40];
 
-extern void (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
 extern void (*SefCmdHandlers[])(SoundManager*, SoundPlayer*);
 extern void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*);
 extern u8 SeqCmdArgCounts[];

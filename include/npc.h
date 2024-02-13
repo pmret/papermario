@@ -417,10 +417,13 @@ typedef struct EncounterStatus {
     /* 0x0AC */ FieldStatus unusedAttack3;
     /* 0x0B0 */ s32 defeatFlags[60][12];
     /* 0xBF0 */ s16 recentMaps[2];
-    /* 0xBF4 */ char unk_FB4[4]; // TODO this should be deleted
-} EncounterStatus; // size = 0xBF8
+} EncounterStatus; // size = 0xBF4
+
+#ifndef NO_EXTERN_VARIABLES
 
 extern EncounterStatus gCurrentEncounter;
+
+#endif
 
 s32 basic_ai_check_player_dist(EnemyDetectVolume* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
 

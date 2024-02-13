@@ -7,12 +7,12 @@
 OSDevMgr __osViDevMgr = {0};
 u32 __additional_scanline = 0;
 
-extern OSThread viThread;
-extern unsigned char viThreadStack[OS_VIM_STACKSIZE] ALIGNED(16);
-extern OSMesgQueue viEventQueue;
-extern OSMesg viEventBuf[5] ALIGNED(8);
-extern OSIoMesg viRetraceMsg ALIGNED(8);
-extern OSIoMesg viCounterMsg ALIGNED(8);
+static OSThread viThread;
+static unsigned char viThreadStack[OS_VIM_STACKSIZE] OSALIGNED(16);
+static OSMesgQueue viEventQueue OSALIGNED(8);
+static OSMesg viEventBuf[5] OSALIGNED(8);
+static OSIoMesg viRetraceMsg OSALIGNED(8);
+static OSIoMesg viCounterMsg OSALIGNED(8);
 
 static void viMgrMain(void *arg);
 
@@ -64,13 +64,11 @@ void osCreateViManager(OSPri pri) {
     }
 }
 
-extern u16 retrace;
-
 static void viMgrMain(void *arg) {
     __OSViContext *vc;
     OSDevMgr *dm;
     OSIoMesg *mb;
-    //static u16 retrace;
+    static u16 retrace;
     s32 first;
     u32 count;
 

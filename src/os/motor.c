@@ -4,11 +4,7 @@
 #include "PR/siint.h"
 
 #ifndef BBPLAYER
-/*
-static OSPifRam __MotorDataBuf[MAXCONTROLLERS] ALIGNED(8);
-*/
-
-extern OSPifRam __MotorDataBuf[MAXCONTROLLERS];
+static OSPifRam __MotorDataBuf[MAXCONTROLLERS] OSALIGNED(8);
 #endif
 
 #define READFORMAT(ptr) ((__OSContRamReadFormat*)(ptr))

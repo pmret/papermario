@@ -10,12 +10,13 @@ typedef struct SaveInfo {
 #define GLOBALS_PAGE_1 6
 #define GLOBALS_PAGE_2 7
 
-SHIFT_BSS SaveData FetchSaveBuffer;
-SHIFT_BSS SaveInfo LogicalSaveInfo[4];  // 4 save slots presented to the player
-SHIFT_BSS SaveInfo PhysicalSaveInfo[6]; // 6 saves as represented on the EEPROM
-SHIFT_BSS s32 NextAvailablePhysicalSave;
-SHIFT_BSS SaveGlobals gSaveGlobals;
-SHIFT_BSS SaveData gCurrentSaveFile;
+static SaveData FetchSaveBuffer;
+static SaveInfo LogicalSaveInfo[4];  // 4 save slots presented to the player
+static SaveInfo PhysicalSaveInfo[6]; // 6 saves as represented on the EEPROM
+static s32 NextAvailablePhysicalSave;
+
+SaveGlobals gSaveGlobals;
+SaveData gCurrentSaveFile;
 
 char MagicSaveString[] = "Mario Story 006";
 

@@ -185,8 +185,13 @@ typedef struct ShapeFile {
 } ShapeFile; // size = variable
 
 typedef ModelTreeInfo ModelTreeInfoList[0x200];
+
+#ifndef NO_EXTERN_VARIABLES
+
 extern ModelTreeInfoList* gCurrentModelTreeNodeInfo;
 extern ModelList* gCurrentModels;
+
+#endif
 
 void mdl_set_depth_tint_params(u8 primR, u8 primG, u8 primB, u8 primA, u8 fogR, u8 fogG, u8 fogB, s32 fogStart, s32 fogEnd);
 void mdl_set_remap_tint_params(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB);

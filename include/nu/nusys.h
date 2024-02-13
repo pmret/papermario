@@ -652,6 +652,8 @@ typedef struct st_DebConWindow {
     u16	text[NU_DEB_CON_TEXT_SIZE];	/* Character buffer*/
 } NUDebConWindow;
 
+#ifndef NO_EXTERN_VARIABLES
+
 /*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/
 /* extern variables 							*/
@@ -752,6 +754,7 @@ extern u32		nuDebTaskPerfInterval;
 extern volatile u32	nuDebTaskPerfCnt;
 extern volatile u32	nuDebTaskPerfEnd;
 
+#endif
 
 /*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/

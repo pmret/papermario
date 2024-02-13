@@ -88,8 +88,8 @@ segments:
     start: 0x1000
     vram_class: main
     subsegments:
-    - [auto, hasm, main.bss]
     - [auto, hasm, boot/entry_point]
+    - [auto, c, main_common_syms_1]
     - [auto, c, is_debug, -g -fforce-addr]
     - [auto, c, main_pre]
     - [auto, c, main]
@@ -339,7 +339,9 @@ segments:
     - [auto, hasm, os/decode_yay0]
     - [auto, c, os/osFlash]
     - [0x4AC90, pm_effect_loads, effect_loads]
+    - [auto, c, main_common_syms_2]
     - [auto, c, battle/battle]
+    - [auto, c, battle/battle_bss]
     - [0x4E5A0, bin, n_aspMain_text]
     - start: 0x4F200
       type: .data

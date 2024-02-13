@@ -57,10 +57,10 @@ Gfx D_80077908[] = {
     gsSPEndDisplayList(),
 };
 
-SHIFT_BSS u8* gLogosImages;
-SHIFT_BSS u8* gLogosImage3;
-SHIFT_BSS u8* gLogosImage1;
-SHIFT_BSS u8* gLogosImage2;
+static u8* gLogosImages;
+static u8* gLogosImage3;
+static u8* gLogosImage1;
+static u8* gLogosImage2;
 
 void state_init_logos(void) {
     s8* romStart;
