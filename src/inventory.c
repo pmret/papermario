@@ -9,13 +9,10 @@ enum BlinkModes {
     BLINK_ON    = 1,
 };
 
-BSS b16 D_8010CD10;
-BSS b16 D_8010CD12;
-BSS char D_8010CD14[0xA];
-BSS s32 D_8010CD20;
-BSS char D_8010CD24[0xC];
+static b16 D_8010CD10;
+static b16 D_8010CD12;
 
-SHIFT_BSS StatusBar gStatusBar;
+StatusBar gStatusBar;
 
 extern HudScript* TimesHudScript;
 extern HudScript* SPIncrementHudScripts[];

@@ -24,14 +24,13 @@ enum WorldMenuTypes {
     WORLD_MENU_PAUSE            = 2,
 };
 
-BSS s16 SwappedWorldMenus;
-BSS char D_8010C9C4[0x4];
-BSS PopupMenu WorldPopupMenu;
-BSS s16 WorldMenuType;
-BSS s16 WorldMenuDelay;
-BSS s16 WorldPopupResult;
-BSS s16 OpenMenuDisableCount;
-BSS s16 WorldMenuState;
+static s32 D_8010C9C4;
+static PopupMenu WorldPopupMenu;
+static s16 WorldMenuType;
+static s16 WorldMenuDelay;
+static s16 WorldPopupResult;
+static s16 OpenMenuDisableCount;
+static s16 WorldMenuState;
 
 extern s32 MenuIndexFromPartnerID[];
 

@@ -384,7 +384,7 @@ segments:
     start: 0x759B0
     vram_class: engine1
     subsegments:
-    - [auto, hasm, engine1.bss]
+    - [auto, c, engine1_common_syms_1]
     - [auto, c, npc_collision]
     - [auto, c, 77480]
     - [auto, c, 7B440]
@@ -395,11 +395,11 @@ segments:
     - [auto, c, world/actions] # DUMMY ROM
     - [auto, c, world/partners]
     - [auto, c, global_hud_scripts]
-    - [auto, hasm, engine1.bss2]
     - [auto, c, 891b0_len_fb0]
     - [auto, c, 8a160_len_700]
     - [auto, c, 8a860_len_3f30]
     - [auto, c, draw_box]
+    - [auto, c, engine1_common_syms_2]
     - start: 0x919B0
       type: .data
       name: global_hud_scripts
