@@ -89,7 +89,7 @@ segments:
     vram_class: main
     subsegments:
     - [auto, hasm, boot/entry_point]
-    - [auto, c, main_common_syms_1]
+    - [auto, c, bss/main_pre_bss]
     - [auto, c, is_debug, -g -fforce-addr]
     - [auto, c, main_pre]
     - [auto, c, main]
@@ -339,7 +339,7 @@ segments:
     - [auto, hasm, os/decode_yay0]
     - [auto, c, os/osFlash]
     - [0x4AC90, pm_effect_loads, effect_loads]
-    - [auto, c, main_common_syms_2]
+    - [auto, c, bss/main_post_bss]
     - [auto, c, battle/battle]
     - [auto, c, battle/battle_bss]
     - [0x4E5A0, bin, n_aspMain_text]
@@ -384,7 +384,7 @@ segments:
     start: 0x759B0
     vram_class: engine1
     subsegments:
-    - [auto, c, engine1_common_syms_1]
+    - [auto, c, bss/engine1_pre_bss]
     - [auto, c, npc_collision]
     - [auto, c, 77480]
     - [auto, c, 7B440]
@@ -399,7 +399,7 @@ segments:
     - [auto, c, 8a160_len_700]
     - [auto, c, 8a860_len_3f30]
     - [auto, c, draw_box]
-    - [auto, c, engine1_common_syms_2]
+    - [auto, c, bss/engine1_post_bss]
     - start: 0x919B0
       type: .data
       name: global_hud_scripts
@@ -818,7 +818,7 @@ segments:
     start: 0xA5DD0
     vram_class: engine2
     subsegments:
-    - [auto, c, engine2_common_syms_1]
+    - [auto, c, bss/engine2_pre_bss]
     - [auto, c, entity]
     - [auto, c, game_states]
     - [auto, c, model]
@@ -841,7 +841,7 @@ segments:
     - [auto, c, sprite_shading]
     - [auto, c, audio/sfx]
     - [auto, c, audio/e0b30_len_b80]
-    - [auto, c, engine2_common_syms_2]
+    - [auto, c, bss/engine2_post_bss]
     - start: 0xE2DF0
       type: .data
       name: screen_overlays

@@ -709,7 +709,7 @@ class Configure:
                         pass
                     elif "os" in entry.src_paths[0].parts:
                         cppflags += " -DBBPLAYER"
-                    elif entry.src_paths[0].parts[-1].startswith("main_common_syms_"):
+                    elif entry.src_paths[0].parts[-2] == "bss":
                         cppflags += " -DBBPLAYER"
 
                 encoding = "CP932"  # similar to SHIFT-JIS, but includes backslash and tilde

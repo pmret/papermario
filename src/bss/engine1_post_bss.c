@@ -5,10 +5,6 @@
 
 #ifndef SHIFT
 
-//
-// engine1 segment COMMON symbols
-//
-
 BSS PartnerStatus gPartnerStatus;
 BSS s32 gSpinHistoryPosY[6];
 BSS s32 gSpinHistoryPosX[6];

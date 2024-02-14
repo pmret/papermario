@@ -12,7 +12,7 @@
 #ifndef SHIFT
 
 //
-// main segment COMMON symbols
+// main segment COMMON/.scommon symbols
 //
 
 #if VERSION_IQUE

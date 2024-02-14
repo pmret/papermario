@@ -5,10 +5,6 @@
 
 #ifndef SHIFT
 
-//
-// engine1 segment .scommon (Common syms for the small ones)
-//
-
 BSS UNK_FUN_PTR(PulseStoneNotificationCallback);
 BSS void* D_8010C924;
 BSS f32 D_8010C928;

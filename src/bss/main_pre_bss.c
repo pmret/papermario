@@ -8,7 +8,7 @@
 #ifndef SHIFT
 
 //
-// Main segment Common symbols for the small ones (.scommon)
+// Main segment COMMON/.scommon symbols
 //
 
 BSS u8 nuScPreNMIFlag;
