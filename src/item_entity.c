@@ -25,29 +25,32 @@ extern HudCacheEntry* gHudElementCacheTablePalette;
 extern u8* gHudElementCacheBuffer;
 extern s32* gHudElementCacheSize;
 
-SHIFT_BSS s32 ItemEntitiesCreated;
-SHIFT_BSS s32 UnusedItemPhysicsScriptID;
-SHIFT_BSS s32 ItemEntityAlternatingSpawn;
-SHIFT_BSS s32 ItemEntityRenderGroup;
-SHIFT_BSS s16 CoinSparkleCenterX;
-SHIFT_BSS s16 CoinSparkleCenterY;
-SHIFT_BSS s16 CoinSparkleCenterZ;
-SHIFT_BSS ItemEntity* WorldItemEntities[MAX_ITEM_ENTITIES];
-SHIFT_BSS ItemEntity* BattleItemEntities[MAX_ITEM_ENTITIES];
-SHIFT_BSS ItemEntity** gCurrentItemEntities;
-SHIFT_BSS s16 isPickingUpItem;
-SHIFT_BSS s16 ItemSpawnWithinPlayerPickupDelay;
+s32 ItemEntitiesCreated;
+
+static s32 UnusedItemPhysicsScriptID;
+static s32 ItemEntityAlternatingSpawn;
+static s32 ItemEntityRenderGroup;
+static s16 CoinSparkleCenterX;
+static s16 CoinSparkleCenterY;
+static s16 CoinSparkleCenterZ;
+static s32 pad_ItemEntity[3];
+static ItemEntity* WorldItemEntities[MAX_ITEM_ENTITIES];
+static ItemEntity* BattleItemEntities[MAX_ITEM_ENTITIES];
+static ItemEntity** gCurrentItemEntities;
+static s16 isPickingUpItem;
+static s16 ItemSpawnWithinPlayerPickupDelay;
 #if !VERSION_JP
-SHIFT_BSS s16 D_801565A8;
+static s16 D_801565A8;
+static s32 D_801565AC;
 #endif
-SHIFT_BSS PopupMenu ItemPickupMenu;
-SHIFT_BSS s32 ItemPickupIconID;
-SHIFT_BSS s32 ItemPickupStateDelay;
-SHIFT_BSS s32 ThrowAwayMenuIdx;
-SHIFT_BSS s32 ThrowAwayItemID;
-SHIFT_BSS EffectInstance* ItemPickupGotOutline;
-SHIFT_BSS MessagePrintState* GotItemTutorialPrinter;
-SHIFT_BSS b32 GotItemTutorialClosed;
+static PopupMenu ItemPickupMenu;
+static s32 ItemPickupIconID;
+static s32 ItemPickupStateDelay;
+static s32 ThrowAwayMenuIdx;
+static s32 ThrowAwayItemID;
+static EffectInstance* ItemPickupGotOutline;
+static MessagePrintState* GotItemTutorialPrinter;
+static b32 GotItemTutorialClosed;
 
 void item_entity_update(ItemEntity*);
 void appendGfx_item_entity(void*);

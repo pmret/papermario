@@ -2,13 +2,13 @@
 #include "sprite.h"
 #include "nu/nusys.h"
 
-SHIFT_BSS SpriteShadingProfile* gSpriteShadingProfile;
-SHIFT_BSS SpriteShadingProfile wSpriteShadingProfile;
-SHIFT_BSS SpriteShadingProfile bSpriteShadingProfile;
-SHIFT_BSS SpriteShadingProfile wSpriteShadingProfileAux;
-SHIFT_BSS SpriteShadingProfile bSpriteShadingProfileAux;
-SHIFT_BSS SpriteShadingProfile* gAuxSpriteShadingProfile;
-SHIFT_BSS PAL_BIN SpriteShadingPalette[16];
+SpriteShadingProfile* gSpriteShadingProfile;
+static SpriteShadingProfile wSpriteShadingProfile;
+static SpriteShadingProfile bSpriteShadingProfile;
+static SpriteShadingProfile wSpriteShadingProfileAux;
+static SpriteShadingProfile bSpriteShadingProfileAux;
+SpriteShadingProfile* gAuxSpriteShadingProfile;
+static PAL_BIN SpriteShadingPalette[16];
 
 void appendGfx_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s32 alpha,
                              f32 shadowX, f32 shadowY, f32 shadowZ,

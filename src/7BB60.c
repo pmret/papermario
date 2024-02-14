@@ -2,7 +2,7 @@
 #include "world/partners.h"
 #include "sprite/player.h"
 
-SHIFT_BSS CollisionStatus gCollisionStatus;
+CollisionStatus gCollisionStatus;
 f32 D_8010C928;
 f32 JumpedOnSwitchX;
 f32 JumpedOnSwitchZ;

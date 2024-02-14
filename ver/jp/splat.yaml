@@ -785,7 +785,7 @@ segments:
     start: 0xa9770
     vram: 0x801148e0
     subsegments:
-    - [auto, hasm, engine2.bss]
+    - [auto, c, engine2_common_syms_1]
     - [auto, c, entity]
     - [auto, c, game_states]
     - [auto, c, model]
@@ -808,6 +808,7 @@ segments:
     - [auto, c, sprite_shading]
     - [auto, c, audio/sfx]
     - [auto, c, audio/e0b30_len_b80]
+    - [auto, c, engine2_common_syms_2]
     - start: 0xE6620
       type: .data
       name: screen_overlays

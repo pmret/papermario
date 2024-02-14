@@ -9,25 +9,27 @@ typedef struct DisplayListBufferHandle {
 
 typedef DisplayListBufferHandle AnimatedMeshVertexCopyList[0x60];
 
-SHIFT_BSS AnimatedMeshList* gCurrentAnimMeshListPtr;
-SHIFT_BSS s32 gAnimCount;
-SHIFT_BSS AnimatedMeshVertexCopyList D_801533C0;
-SHIFT_BSS AnimatedMeshVertexCopyList D_801536C0;
-SHIFT_BSS AnimatedMeshList D_801539C0;
-SHIFT_BSS AnimatedMeshList D_80153A00;
-SHIFT_BSS s32 gAnimModelFogEnabled;
-SHIFT_BSS s32 gAnimModelFogR;
-SHIFT_BSS s32 gAnimModelFogG;
-SHIFT_BSS s32 gAnimModelFogB;
-SHIFT_BSS s32 gAnimModelFogA;
-SHIFT_BSS s32 gAnimModelFogStart;
-SHIFT_BSS s32 gAnimModelFogEnd;
-SHIFT_BSS s32 gAnimVtxSegment;
-SHIFT_BSS Matrix4f gAnimRotMtx;
-SHIFT_BSS Matrix4f gAnimScaleMtx;
-SHIFT_BSS Matrix4f gAnimTranslateMtx;
-SHIFT_BSS Matrix4f gAnimRotScaleMtx;
-SHIFT_BSS StaticAnimatorNode** gAnimTreeRoot;
+s32 gAnimCount;
+
+static AnimatedMeshVertexCopyList D_801533C0;
+static AnimatedMeshVertexCopyList D_801536C0;
+static AnimatedMeshList D_801539C0;
+static AnimatedMeshList D_80153A00;
+static AnimatedMeshList* gCurrentAnimMeshListPtr;
+static s32 gAnimModelFogEnabled;
+static s32 gAnimModelFogR;
+static s32 gAnimModelFogG;
+static s32 gAnimModelFogB;
+static s32 gAnimModelFogA;
+static s32 gAnimModelFogStart;
+static s32 gAnimModelFogEnd;
+static s32 gAnimVtxSegment;
+static s32 D_80153A64;
+static Matrix4f gAnimRotMtx;
+static Matrix4f gAnimScaleMtx;
+static Matrix4f gAnimTranslateMtx;
+static Matrix4f gAnimRotScaleMtx;
+static StaticAnimatorNode** gAnimTreeRoot;
 
 extern Gfx Gfx_RM1_SURFACE_OPA[];
 extern Gfx Gfx_RM1_DECAL_OPA[];

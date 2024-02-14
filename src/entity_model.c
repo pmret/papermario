@@ -7,19 +7,19 @@ EntityModelScript D_8014C260 = {
 };
 Lights1 D_8014C268 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
 
-SHIFT_BSS EntityModelList gWorldEntityModelList;
-SHIFT_BSS EntityModelList gBattleEntityModelList;
-SHIFT_BSS EntityModelList* gCurrentEntityModelList;
-SHIFT_BSS s32 gEntityModelCount;
+static EntityModelList gWorldEntityModelList;
+static EntityModelList gBattleEntityModelList;
+static EntityModelList* gCurrentEntityModelList;
+s32 gEntityModelCount;
 
-SHIFT_BSS s32 D_80154374;
-SHIFT_BSS s32 entity_fog_enabled;
-SHIFT_BSS s32 entity_fog_red;
-SHIFT_BSS s32 entity_fog_green;
-SHIFT_BSS s32 entity_fog_blue;
-SHIFT_BSS s32 entity_fog_alpha;
-SHIFT_BSS s32 entity_fog_dist_min;
-SHIFT_BSS s32 entity_fog_dist_max;
+static s32 D_80154374;
+static s32 entity_fog_enabled;
+static s32 entity_fog_red;
+static s32 entity_fog_green;
+static s32 entity_fog_blue;
+static s32 entity_fog_alpha;
+static s32 entity_fog_dist_min;
+static s32 entity_fog_dist_max;
 
 extern Gfx Gfx_RM1_SURFACE_OPA[];
 extern Gfx Gfx_RM1_DECAL_OPA[];

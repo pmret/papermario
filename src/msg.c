@@ -80,24 +80,24 @@ Gfx D_8014C2D8[] = {
     gsSPEndDisplayList(),
 };
 
-SHIFT_BSS s32 gMsgBGScrollAmtX;
-SHIFT_BSS u16 gMsgGlobalWaveCounter;
-SHIFT_BSS MessageImageDataList gMsgVarImages;
-SHIFT_BSS s32 gMsgBGScrollAmtY;
-SHIFT_BSS u8* D_8015131C;
-SHIFT_BSS Gfx* D_80151338;
-SHIFT_BSS char gMessageBuffers[2][1024];
-SHIFT_BSS u8 gMessageMsgVars[3][32];
-SHIFT_BSS s16 D_80155C98;
-SHIFT_BSS Mtx gMessageWindowProjMatrix[2];
-SHIFT_BSS MessageDrawState D_80155D20;
-SHIFT_BSS MessageDrawState* msg_drawState;
-SHIFT_BSS IMG_BIN D_80159B50[0x200];
-SHIFT_BSS PAL_BIN D_8015C7E0[0x10];
-SHIFT_BSS MessagePrintState gMessagePrinters[3];
-#if VERSION_IQUE
-SHIFT_BSS IMG_BIN D_801544A0[120][128];
+s32 gMsgBGScrollAmtX;
+u16 gMsgGlobalWaveCounter;
+MessageImageDataList gMsgVarImages;
+s32 gMsgBGScrollAmtY;
+u8* D_8015131C;
+Gfx* D_80151338;
+
+static char gMessageBuffers[2][1024];
+static MessagePrintState gMessagePrinters[3];
+#if VERSION_JP
+static s32 D_80155C38; 
 #endif
+static u8 gMessageMsgVars[3][32];
+static s16 D_80155C98;
+static Mtx gMessageWindowProjMatrix[2];
+
+IMG_BIN D_80159B50[0x200];
+PAL_BIN D_8015C7E0[0x10];
 
 extern s16 MsgStyleVerticalLineOffsets[];
 

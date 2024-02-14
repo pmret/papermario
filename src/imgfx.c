@@ -113,16 +113,18 @@ typedef ImgFXState ImgFXInstanceList[MAX_IMGFX_INSTANCES];
 
 extern HeapNode heap_spriteHead;
 
-SHIFT_BSS ImgFXWorkingTexture ImgFXCurrentTexture;
-SHIFT_BSS Vtx* ImgFXVtxBuffers[2];
-SHIFT_BSS Vtx* imgfx_vtxBuf;
-SHIFT_BSS ImgFXInstanceList* ImgFXInstances;
-SHIFT_BSS s8 D_80156958[2];
-SHIFT_BSS s32 D_80156960[2];
-SHIFT_BSS s32 D_80156968[2];
-SHIFT_BSS s8 D_80156970;
-SHIFT_BSS ImgFXAnimHeader ImgFXAnimHeaders[MAX_IMGFX_INSTANCES];
-SHIFT_BSS ImgFXCacheEntry ImgFXDataCache[8];
+static ImgFXWorkingTexture ImgFXCurrentTexture;
+static Vtx* ImgFXVtxBuffers[2];
+static Vtx* imgfx_vtxBuf;
+static ImgFXInstanceList* ImgFXInstances;
+static s8 D_80156958[2];
+static s32 D_8015695C;
+static s32 D_80156960[2];
+static s32 D_80156968[2];
+static s8 D_80156970;
+static s32 D_80156974[3];
+static ImgFXAnimHeader ImgFXAnimHeaders[MAX_IMGFX_INSTANCES];
+static ImgFXCacheEntry ImgFXDataCache[8];
 
 // Data
 ImgFXWorkingTexture* ImgFXCurrentTexturePtr = &ImgFXCurrentTexture;

@@ -100,23 +100,26 @@ Vtx D_8014F0C8[] = {
 
 Lights1 HudElementLights = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
 
-SHIFT_BSS s32 gHudElementsNumber;
-SHIFT_BSS s32 D_80159180;
-SHIFT_BSS HudElementList* gHudElements;
-SHIFT_BSS HudElementList gHudElementsWorld;
-SHIFT_BSS HudElementList gHudElementsBattle;
-SHIFT_BSS s32* gHudElementCacheSize;
-SHIFT_BSS s32 gHudElementCacheSizeWorld;
-SHIFT_BSS s32 gHudElementCacheSizeBattle;
-SHIFT_BSS HudCacheEntry* gHudElementCacheTableRaster;
-SHIFT_BSS HudCacheEntry* gHudElementCacheTablePalette;
-SHIFT_BSS HudCacheEntry gHudElementCacheTableRasterWorld[192];
-SHIFT_BSS HudCacheEntry gHudElementCacheTablePaletteWorld[192];
-SHIFT_BSS HudCacheEntry gHudElementCacheTableRasterBattle[192];
-SHIFT_BSS HudCacheEntry gHudElementCacheTablePaletteBattle[192];
-SHIFT_BSS u8* gHudElementCacheBufferWorld;
-SHIFT_BSS u8* gHudElementCacheBufferBattle;
-SHIFT_BSS u8* gHudElementCacheBuffer;
+s32 gHudElementsNumber;
+HudCacheEntry* gHudElementCacheTableRaster;
+HudCacheEntry* gHudElementCacheTablePalette;
+s32* gHudElementCacheSize;
+u8* gHudElementCacheBuffer;
+
+static HudElementList gHudElementsWorld;
+static HudElementList gHudElementsBattle;
+static HudElementList* gHudElements;
+static u8* gHudElementCacheBufferWorld;
+static s32 gHudElementCacheSizeWorld;
+static s32 D_8015796C;
+static HudCacheEntry gHudElementCacheTableRasterWorld[192];
+static HudCacheEntry gHudElementCacheTablePaletteWorld[192];
+static u8* gHudElementCacheBufferBattle;
+static s32 gHudElementCacheSizeBattle;
+static s32 D_80158578[2];
+static HudCacheEntry gHudElementCacheTableRasterBattle[192];
+static HudCacheEntry gHudElementCacheTablePaletteBattle[192];
+static s32 D_80159180;
 
 void func_801413F8(void);
 

@@ -29,7 +29,6 @@ extern PAL_BIN ui_msg_rewind_arrow_pal[];
 extern IMG_BIN ui_msg_star_png[];
 extern IMG_BIN ui_msg_star_silhouette_png[];
 
-// .bss
 typedef MessageImageData* MessageImageDataList[1];
 
 extern s32 gMsgBGScrollAmtX;
@@ -42,14 +41,9 @@ extern char gMessageBuffers[2][1024];
 extern u8 gMessageMsgVars[3][32];
 extern s16 D_80155C98;
 extern Mtx gMessageWindowProjMatrix[2];
-extern MessageDrawState D_80155D20;
-extern MessageDrawState* msg_drawState;
 extern IMG_BIN D_80159B50[0x200];
 extern PAL_BIN D_8015C7E0[0x10];
 extern MessagePrintState gMessagePrinters[3];
-#if VERSION_IQUE
-extern IMG_BIN D_801544A0[120][128];
-#endif
 
 extern s16 MsgStyleVerticalLineOffsets[];
 
@@ -61,6 +55,12 @@ extern MessageCharset* MsgCharsets[5];
 extern IMG_BIN MsgCharImgSubtitle[];
 extern PAL_BIN D_802F4560[80][8];
 extern s32 gMessageBoxFrameParts[2][16];
+
+#if VERSION_IQUE
+static IMG_BIN D_801544A0[120][128];
+#endif
+static MessageDrawState D_80155D20;
+static MessageDrawState* msg_drawState;
 
 Vtx gMsgSpeechBoxLQuad[4] = {
     { .v = { .ob = {1, 0, 0},           .tc = {0, 0},           .cn = {255, 255, 248, 255} } },

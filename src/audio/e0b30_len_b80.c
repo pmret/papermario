@@ -4,11 +4,11 @@
 void bgm_update_volume(void);
 void bgm_set_target_volume(s16 volume);
 
-SHIFT_BSS s16 MusicDefaultVolume;
-SHIFT_BSS s16 MusicMaxVolume;
-SHIFT_BSS s16 MusicCurrentVolume;
-SHIFT_BSS s16 MusicTargetVolume;
-SHIFT_BSS MusicSettings gMusicSettings[2];
+static s16 MusicDefaultVolume;
+static s16 MusicTargetVolume;
+static s16 MusicMaxVolume;
+static s16 MusicCurrentVolume;
+MusicSettings gMusicSettings[2];
 
 MusicSettings BlankMusicSettings = {
     .flags = 0,

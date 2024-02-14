@@ -31,36 +31,38 @@ extern Addr entity_sbk_omo_ROM_START;
 
 s32 D_8014AFB0 = 255;
 
-SHIFT_BSS s32 CreateEntityVarArgBuffer[4];
-SHIFT_BSS HiddenPanelsData gCurrentHiddenPanels;
-SHIFT_BSS s32 gEntityHideMode;
+s32 CreateEntityVarArgBuffer[4];
+HiddenPanelsData gCurrentHiddenPanels;
+s32 gEntityHideMode;
 
-SHIFT_BSS s32 D_801516FC;
-SHIFT_BSS s32 D_801512BC;
-SHIFT_BSS s32 D_80151304;
-SHIFT_BSS s32 D_80151344;
-SHIFT_BSS s32 entity_numEntities;
-SHIFT_BSS s32 gEntityHeapBase;
-SHIFT_BSS s32 gLastCreatedEntityIndex;
+s32 D_801512BC;
+s32 D_80151304;
+s32 D_80151344;
+s32 entity_numEntities;
+s32 gEntityHeapBase;
+s32 gLastCreatedEntityIndex;
 
-SHIFT_BSS s32 gEntityHeapBottom;
-SHIFT_BSS s32 entity_numShadows;
-SHIFT_BSS s32 isAreaSpecificEntityDataLoaded;
-SHIFT_BSS s32 entity_updateCounter;
+s32 gEntityHeapBottom;
+s32 entity_numShadows;
+s32 isAreaSpecificEntityDataLoaded;
+s32 entity_updateCounter;
 
-SHIFT_BSS s32 wEntityDataLoadedSize;
-SHIFT_BSS s32 bEntityDataLoadedSize;
+static EntityList gWorldEntityList;
+static EntityList gBattleEntityList;
+static EntityList* gCurrentEntityListPtr;
+static s32 D_80151474;
+static ShadowList gWorldShadowList;
+static ShadowList gBattleShadowList;
+static ShadowList* gCurrentShadowListPtr;
 
-SHIFT_BSS EntityBlueprint* wEntityBlueprint[30];
-SHIFT_BSS EntityBlueprint* bEntityBlueprint[4];
+static s32 wEntityDataLoadedSize;
+static s32 bEntityDataLoadedSize;
+static s32 D_80151664;
 
-SHIFT_BSS EntityList gWorldEntityList;
-SHIFT_BSS EntityList gBattleEntityList;
-SHIFT_BSS EntityList* gCurrentEntityListPtr;
-
-SHIFT_BSS ShadowList gWorldShadowList;
-SHIFT_BSS ShadowList gBattleShadowList;
-SHIFT_BSS ShadowList* gCurrentShadowListPtr;
+static EntityBlueprint* wEntityBlueprint[MAX_ENTITIES + 2];
+static EntityBlueprint* bEntityBlueprint[4];
+static s32 D_801516F8;
+static s32 D_801516FC;
 
 extern Addr BattleEntityHeapBottom; // todo ???
 
