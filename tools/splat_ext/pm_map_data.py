@@ -130,7 +130,12 @@ class N64SegPm_map_data(N64Segment):
             if name == "end_data":
                 break
 
-            assert self.files.get(name) is not None
+            if self.files.get(name) is None:
+                # TODO
+                # https://github.com/pmret/papermario/issues/1170
+                self.warn(f"skipping unknown file {name}")
+                asset_idx += 1
+                continue
 
             if offset == 0:
                 path = None
