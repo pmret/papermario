@@ -9,7 +9,7 @@ u8 nuScPreNMIFlag;
 
 char nusys_version[] = "NuSystem2.05";
 
-u32 nuScRetraceCounter = (u32) nusys_version; // wtf?
+u32 nuScRetraceCounter = (u32) nusys_version;
 
 void nuScEventHandler(void);
 void nuScExecuteAudio(void);
