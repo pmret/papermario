@@ -11,7 +11,7 @@ s32 timeFreezeMode;
 u16** nuGfxCfb;
 static s16 SoftResetDelay;
 
-extern DisplayContext D_80164000[2];
+DisplayContext D_80164000[2];
 
 s8 gGameStepDelayAmount = 1;
 s8 gGameStepDelayCount = 5;
