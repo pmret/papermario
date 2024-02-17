@@ -24,10 +24,6 @@ extern IMG_BIN ui_msg_sign_fill_png[];
 extern PAL_BIN ui_msg_sign_pal[];
 extern PAL_BIN ui_msg_lamppost_pal[];
 extern IMG_BIN ui_msg_background_png[];
-extern IMG_BIN ui_msg_rewind_arrow_png[];
-extern PAL_BIN ui_msg_rewind_arrow_pal[];
-extern IMG_BIN ui_msg_star_png[];
-extern IMG_BIN ui_msg_star_silhouette_png[];
 
 typedef MessageImageData* MessageImageDataList[1];
 
@@ -37,22 +33,14 @@ extern MessageImageDataList gMsgVarImages;
 extern s32 gMsgBGScrollAmtY;
 extern u8* D_8015131C;
 extern Gfx* D_80151338;
-extern char gMessageBuffers[2][1024];
-extern u8 gMessageMsgVars[3][32];
-extern s16 D_80155C98;
-extern Mtx gMessageWindowProjMatrix[2];
 extern IMG_BIN D_80159B50[0x200];
 extern PAL_BIN D_8015C7E0[0x10];
-extern MessagePrintState gMessagePrinters[3];
 
+#if !VERSION_JP
 extern s16 MsgStyleVerticalLineOffsets[];
+#endif
 
-extern IMG_BIN D_802ED550[];
-extern PAL_BIN D_802ED670[];
-extern IMG_BIN MsgCharImgTitle[];
-extern IMG_BIN MsgCharImgNormal[];
 extern MessageCharset* MsgCharsets[5];
-extern IMG_BIN MsgCharImgSubtitle[];
 extern PAL_BIN D_802F4560[80][8];
 extern s32 gMessageBoxFrameParts[2][16];
 
@@ -120,21 +108,8 @@ u8 D_8014C580[] = { 50, 80, 100, 105, 100, 0, 0, 0 };
 u8 D_8014C588[] = { 105, 100, 77, 57, 40, 27, 16, 8, 3, 0, 0, 0};
 #if VERSION_IQUE
 u32 D_8014AD24 = 2;
-#else
-u8 D_8014C594[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 #endif
 
-s32 draw_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
-                             u16 clipULy, u16 clipLRx, u16 clipRLy);
-
-s32 _update_message(MessagePrintState* printer);
-void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2);
-void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2);
-MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback, s32 arg2);
-void msg_update_rewind_arrow(s32);
-void msg_draw_rewind_arrow(s32);
-void msg_draw_choice_pointer(MessagePrintState* printer);
-void draw_message_window(MessagePrintState* printer);
 void appendGfx_message(MessagePrintState*, s16, s16, u16, u16, u16, u8);
 void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, u16 lrY);
 void msg_reset_gfx_state(void);

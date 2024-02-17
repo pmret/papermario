@@ -82,7 +82,7 @@ BSS DisplayContext* gDisplayContext;
 BSS s32 D_8009A678;
 BSS s32 D_8009A67C;
 #if VERSION_IQUE
-static BSS char _ique_space[8];
+BSS s32 D_80099258[2];
 #endif
 BSS u16* ResetFrameBufferArray;
 
