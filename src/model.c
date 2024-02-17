@@ -1303,53 +1303,53 @@ ModelNode** gCurrentModelTreeRoot;
 ModelTransformGroupList* gCurrentTransformGroups;
 ModelCustomGfxList* gCurrentCustomModelGfxPtr;
 
-static TextureHeader gCurrentTextureHeader ALIGNED(16);
+BSS TextureHeader gCurrentTextureHeader ALIGNED(16);
 
-static ModelList wModelList;
-static ModelList bModelList;
+BSS ModelList wModelList;
+BSS ModelList bModelList;
 
-static ModelTransformGroupList wTransformGroups;
-static ModelTransformGroupList bTransformGroups;
+BSS ModelTransformGroupList wTransformGroups;
+BSS ModelTransformGroupList bTransformGroups;
 
-static ModelCustomGfxList wCustomModelGfx;
-static ModelCustomGfxList bCustomModelGfx;
+BSS ModelCustomGfxList wCustomModelGfx;
+BSS ModelCustomGfxList bCustomModelGfx;
 
-static ModelCustomGfxBuilderList wCustomModelGfxBuilders;
-static ModelCustomGfxBuilderList bCustomModelGfxBuilders;
-static ModelLocalVertexCopyList wModelLocalVtxBuffers;
-static ModelLocalVertexCopyList bModelLocalVtxBuffers;
-static ModelLocalVertexCopyList* gCurrentModelLocalVtxBuffers;
+BSS ModelCustomGfxBuilderList wCustomModelGfxBuilders;
+BSS ModelCustomGfxBuilderList bCustomModelGfxBuilders;
+BSS ModelLocalVertexCopyList wModelLocalVtxBuffers;
+BSS ModelLocalVertexCopyList bModelLocalVtxBuffers;
+BSS ModelLocalVertexCopyList* gCurrentModelLocalVtxBuffers;
 
-static ModelNode* wModelTreeRoot;
-static ModelNode* bModelTreeRoot;
-static s32 D_8015221C;
-static ModelTreeInfoList wModelTreeNodeInfo;
-static ModelTreeInfoList bModelTreeNodeInfo;
+BSS ModelNode* wModelTreeRoot;
+BSS ModelNode* bModelTreeRoot;
+BSS s32 D_8015221C;
+BSS ModelTreeInfoList wModelTreeNodeInfo;
+BSS ModelTreeInfoList bModelTreeNodeInfo;
 
-static s8 wBackgroundTintMode;
-static s8 bBackgroundTintMode;
-static s8 D_80153222;
-static s8 D_80153223;
-static s32 TreeIterPos;
-static FogSettings wFogSettings;
-static s32 D_80153244;
-static FogSettings bFogSettings;
-static FogSettings* gFogSettings;
-static s32 texPannerMainU[MAX_TEX_PANNERS];
-static s32 texPannerMainV[MAX_TEX_PANNERS];
-static s32 texPannerAuxU[MAX_TEX_PANNERS];
-static s32 texPannerAuxV[MAX_TEX_PANNERS];
-static void* TextureHeapPos;
-static u16 mtg_IterIdx;
-static u16 mtg_SearchModelID;
-static ModelNode* mtg_FoundModelNode;
-static u16 mtg_MinChild;
-static u16 mtg_MaxChild;
-static s32 D_80153378[2];
-static u16 DepthCopyBuffer[16];
-static RenderTask* RenderTaskLists[3];
-static s32 RenderTaskListIdx;
-static s32 RenderTaskCount;
+BSS s8 wBackgroundTintMode;
+BSS s8 bBackgroundTintMode;
+BSS s8 D_80153222;
+BSS s8 D_80153223;
+BSS s32 TreeIterPos;
+BSS FogSettings wFogSettings;
+BSS s32 D_80153244;
+BSS FogSettings bFogSettings;
+BSS FogSettings* gFogSettings;
+BSS s32 texPannerMainU[MAX_TEX_PANNERS];
+BSS s32 texPannerMainV[MAX_TEX_PANNERS];
+BSS s32 texPannerAuxU[MAX_TEX_PANNERS];
+BSS s32 texPannerAuxV[MAX_TEX_PANNERS];
+BSS void* TextureHeapPos;
+BSS u16 mtg_IterIdx;
+BSS u16 mtg_SearchModelID;
+BSS ModelNode* mtg_FoundModelNode;
+BSS u16 mtg_MinChild;
+BSS u16 mtg_MaxChild;
+BSS s32 D_80153378[2];
+BSS u16 DepthCopyBuffer[16];
+BSS RenderTask* RenderTaskLists[3];
+BSS s32 RenderTaskListIdx;
+BSS s32 RenderTaskCount;
 
 TextureHandle TextureHandles[128];
 

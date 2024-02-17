@@ -5,7 +5,7 @@
 typedef s32 TlbEntry[0x1000 / 4];
 typedef TlbEntry TlbMappablePage[15];
 
-static EffectGraphics gEffectGraphicsData[15];
+BSS EffectGraphics gEffectGraphicsData[15];
 EffectInstance* gEffectInstances[96];
 
 extern TlbMappablePage D_80197000;

@@ -8,7 +8,8 @@ s32 PlayerRunStateTime;
 f32 PlayerNormalYaw;
 f32 PlayerNormalPitch;
 PlayerSpinState gPlayerSpinState;
-static s32 PlayerYInterpUpdateDelay;
+
+BSS s32 PlayerYInterpUpdateDelay;
 
 void update_player_input(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;

@@ -47,22 +47,22 @@ s32 entity_numShadows;
 s32 isAreaSpecificEntityDataLoaded;
 s32 entity_updateCounter;
 
-static EntityList gWorldEntityList;
-static EntityList gBattleEntityList;
-static EntityList* gCurrentEntityListPtr;
-static s32 D_80151474;
-static ShadowList gWorldShadowList;
-static ShadowList gBattleShadowList;
-static ShadowList* gCurrentShadowListPtr;
+BSS EntityList gWorldEntityList;
+BSS EntityList gBattleEntityList;
+BSS EntityList* gCurrentEntityListPtr;
+BSS s32 D_80151474;
+BSS ShadowList gWorldShadowList;
+BSS ShadowList gBattleShadowList;
+BSS ShadowList* gCurrentShadowListPtr;
 
-static s32 wEntityDataLoadedSize;
-static s32 bEntityDataLoadedSize;
-static s32 D_80151664;
+BSS s32 wEntityDataLoadedSize;
+BSS s32 bEntityDataLoadedSize;
+BSS s32 D_80151664;
 
-static EntityBlueprint* wEntityBlueprint[MAX_ENTITIES + 2];
-static EntityBlueprint* bEntityBlueprint[4];
-static s32 D_801516F8;
-static s32 D_801516FC;
+BSS EntityBlueprint* wEntityBlueprint[MAX_ENTITIES + 2];
+BSS EntityBlueprint* bEntityBlueprint[4];
+BSS s32 D_801516F8;
+BSS s32 D_801516FC;
 
 extern Addr BattleEntityHeapBottom; // todo ???
 

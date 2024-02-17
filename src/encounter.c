@@ -176,13 +176,14 @@ s8 HasPreBattleSongPushed;
 s16 gFirstStrikeMessagePos;
 s8 D_8009A670;
 s32 D_8009A678;
-static s32 D_800A0BA0;
-static f32 D_800A0BA4;
-static EffectInstance* WorldMerleeOrbEffect;
-static EffectInstance* WorldMerleeWaveEffect;
-static Evt* D_800A0BB0;
-static s32 D_800A0BB4;
-static s16 D_800A0BB8;
+
+BSS s32 D_800A0BA0;
+BSS f32 D_800A0BA4;
+BSS EffectInstance* WorldMerleeOrbEffect;
+BSS EffectInstance* WorldMerleeWaveEffect;
+BSS Evt* D_800A0BB0;
+BSS s32 D_800A0BB4;
+BSS s16 D_800A0BB8;
 
 void set_battle_formation(Battle*);
 void setup_status_bar_for_world(void);

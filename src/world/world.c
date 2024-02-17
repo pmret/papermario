@@ -44,9 +44,10 @@ s32 pad_map_table[] = { 0, 0 };
 #define ASSET_TABLE_HEADER_SIZE 0x20
 #define ASSET_TABLE_FIRST_ENTRY (ASSET_TABLE_ROM_START + ASSET_TABLE_HEADER_SIZE)
 
-static MapConfig* gMapConfig;
-static s32 D_800A41E4;
-static MapSettings gMapSettings;
+BSS MapConfig* gMapConfig;
+BSS s32 D_800A41E4;
+BSS MapSettings gMapSettings;
+
 #if VERSION_JP || VERSION_IQUE
 char wMapHitName[0x14];
 #else

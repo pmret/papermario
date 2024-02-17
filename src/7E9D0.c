@@ -17,11 +17,12 @@ void* D_8010C924;
 s32 D_8010C92C;
 s32 D_8010C964;
 s32 gSpinHistoryBufferPos;
-static s16 D_8010C9B0;
 s32 gSpinHistoryPosY[5];
 s32 gSpinHistoryPosX[5];
 s32 gSpinHistoryPosZ[5];
 s16 gSpinHistoryPosAngle[5];
+
+BSS s16 D_8010C9B0;
 
 void func_800E5520(void) {
     D_8010C9B0 = 0;

@@ -1,8 +1,8 @@
 #include "common.h"
 #include "game_modes.h"
 
-static GameMode gMainGameMode[2];
-static s32 D_80151730[4]; // unused? or probably a part of GameMode?
+BSS GameMode gMainGameMode[2];
+BSS s32 D_80151730[4]; // unused? or probably a part of GameMode?
 
 void mode_default_nop(void) {
 }

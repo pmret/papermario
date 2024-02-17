@@ -9,7 +9,7 @@
 s32 gOverrideFlags;
 s32 timeFreezeMode;
 u16** nuGfxCfb;
-static s16 SoftResetDelay;
+BSS s16 SoftResetDelay;
 
 DisplayContext D_80164000[2];
 

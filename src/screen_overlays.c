@@ -2,11 +2,11 @@
 #include "overlay.h"
 #include "include_asset.h"
 
-static s32 screen_overlay_frontType;
-static f32 screen_overlay_frontZoom;
-static s32 screen_overlay_backType;
-static f32 screen_overlay_backZoom;
-static s32 D_80156910;
+BSS s32 screen_overlay_frontType;
+BSS f32 screen_overlay_frontZoom;
+BSS s32 screen_overlay_backType;
+BSS f32 screen_overlay_backZoom;
+BSS s32 D_80156910;
 ScreenOverlay ScreenOverlays[2];
 
 ScreenTransition CurrentScreenTransition = TRANSITION_END_DEMO_SCENE_BLACK;

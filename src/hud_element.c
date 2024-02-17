@@ -106,20 +106,20 @@ HudCacheEntry* gHudElementCacheTablePalette;
 s32* gHudElementCacheSize;
 u8* gHudElementCacheBuffer;
 
-static HudElementList gHudElementsWorld;
-static HudElementList gHudElementsBattle;
-static HudElementList* gHudElements;
-static u8* gHudElementCacheBufferWorld;
-static s32 gHudElementCacheSizeWorld;
-static s32 D_8015796C;
-static HudCacheEntry gHudElementCacheTableRasterWorld[192];
-static HudCacheEntry gHudElementCacheTablePaletteWorld[192];
-static u8* gHudElementCacheBufferBattle;
-static s32 gHudElementCacheSizeBattle;
-static s32 D_80158578[2];
-static HudCacheEntry gHudElementCacheTableRasterBattle[192];
-static HudCacheEntry gHudElementCacheTablePaletteBattle[192];
-static s32 D_80159180;
+BSS HudElementList gHudElementsWorld;
+BSS HudElementList gHudElementsBattle;
+BSS HudElementList* gHudElements;
+BSS u8* gHudElementCacheBufferWorld;
+BSS s32 gHudElementCacheSizeWorld;
+BSS s32 D_8015796C;
+BSS HudCacheEntry gHudElementCacheTableRasterWorld[192];
+BSS HudCacheEntry gHudElementCacheTablePaletteWorld[192];
+BSS u8* gHudElementCacheBufferBattle;
+BSS s32 gHudElementCacheSizeBattle;
+BSS s32 D_80158578[2];
+BSS HudCacheEntry gHudElementCacheTableRasterBattle[192];
+BSS HudCacheEntry gHudElementCacheTablePaletteBattle[192];
+BSS s32 D_80159180;
 
 void func_801413F8(void);
 

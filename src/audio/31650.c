@@ -4,12 +4,12 @@
 
 static s16 _getVol(s16 arg0, s32 arg1, s16 arg2, u16 arg3);
 
-static s16* AuDelayBufferMain;
-static s16* AuDelayBufferAux;
-static s32 AuDelayCounter;
-static u8 AuDelayedVoiceGroup;
-static s16 AuDelayedChannel;
-static s32 AuDelayCount;
+BSS s16* AuDelayBufferMain;
+BSS s16* AuDelayBufferAux;
+BSS s32 AuDelayCounter;
+BSS u8 AuDelayedVoiceGroup;
+BSS s16 AuDelayedChannel;
+BSS s32 AuDelayCount;
 
 AuSynDriver* gActiveSynDriverPtr = NULL;
 AuSynDriver* gSynDriverPtr = NULL;

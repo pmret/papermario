@@ -2,11 +2,11 @@
 #include "nu/nusys.h"
 
 OSContPad D_8009A5B8;
-static s16 D_8009A6A0;
-static s16 D_8009A6A2;
-static s16 D_8009A6A4;
-static s16 D_8009A6A6;
-static s32 D_8009A6A8; // unused
+BSS s16 D_8009A6A0;
+BSS s16 D_8009A6A2;
+BSS s16 D_8009A6A4;
+BSS s16 D_8009A6A6;
+BSS s32 D_8009A6A8; // unused
 
 void func_800287F0(void) {
     gGameStatusPtr->curButtons[0] = 0;

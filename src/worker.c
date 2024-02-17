@@ -1,8 +1,8 @@
 #include "common.h"
 
-static WorkerList gWorldWorkerList;
-static WorkerList gBattleWorkerList;
-static WorkerList* gCurrentWorkerListPtr;
+BSS WorkerList gWorldWorkerList;
+BSS WorkerList gBattleWorkerList;
+BSS WorkerList* gCurrentWorkerListPtr;
 
 void worker_delegate_do_nothing(void) {
 }

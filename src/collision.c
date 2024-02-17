@@ -35,21 +35,21 @@ typedef struct HitAssetCollider {
 CollisionData gCollisionData;
 CollisionData gZoneCollisionData;
 
-static f32 gCollisionRayStartX;
-static f32 gCollisionRayStartY;
-static f32 gCollisionRayStartZ;
-static f32 gCollisionRayDirX;
-static f32 gCollisionRayDirY;
-static f32 gCollisionRayDirZ;
-static f32 gCollisionPointX;
-static f32 gCollisionPointY;
-static f32 gCollisionPointZ;
-static f32 gCollisionRayLength;
-static f32 gCollisionNormalX;
-static f32 gCollisionNormalY;
-static f32 gCollisionNormalZ;
-static ColliderBackupEntry* gCollisionDataBackup;
-static ColliderBackupEntry* gCollisionDataZoneBackup;
+BSS f32 gCollisionRayStartX;
+BSS f32 gCollisionRayStartY;
+BSS f32 gCollisionRayStartZ;
+BSS f32 gCollisionRayDirX;
+BSS f32 gCollisionRayDirY;
+BSS f32 gCollisionRayDirZ;
+BSS f32 gCollisionPointX;
+BSS f32 gCollisionPointY;
+BSS f32 gCollisionPointZ;
+BSS f32 gCollisionRayLength;
+BSS f32 gCollisionNormalX;
+BSS f32 gCollisionNormalY;
+BSS f32 gCollisionNormalZ;
+BSS ColliderBackupEntry* gCollisionDataBackup;
+BSS ColliderBackupEntry* gCollisionDataZoneBackup;
 
 extern Vec3s gEntityColliderFaces[];
 extern Vec3f gEntityColliderNormals[];

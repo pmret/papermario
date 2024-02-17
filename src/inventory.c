@@ -9,8 +9,8 @@ enum BlinkModes {
     BLINK_ON    = 1,
 };
 
-static b16 D_8010CD10;
-static b16 D_8010CD12;
+BSS b16 D_8010CD10;
+BSS b16 D_8010CD12;
 
 StatusBar gStatusBar;
 

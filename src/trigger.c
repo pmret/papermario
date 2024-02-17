@@ -1,9 +1,9 @@
 #include "common.h"
 
 s16 gTriggerCount;
-static TriggerList wTriggerList;
-static TriggerList bTriggerList;
-static TriggerList* gCurrentTriggerListPtr;
+BSS TriggerList wTriggerList;
+BSS TriggerList bTriggerList;
+BSS TriggerList* gCurrentTriggerListPtr;
 
 void default_trigger_on_activate(Trigger* self) {
     self->flags |= TRIGGER_ACTIVATED;

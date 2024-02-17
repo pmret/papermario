@@ -3,12 +3,13 @@
 #include "nu/nusys.h"
 
 SpriteShadingProfile* gSpriteShadingProfile;
-static SpriteShadingProfile wSpriteShadingProfile;
-static SpriteShadingProfile bSpriteShadingProfile;
-static SpriteShadingProfile wSpriteShadingProfileAux;
-static SpriteShadingProfile bSpriteShadingProfileAux;
 SpriteShadingProfile* gAuxSpriteShadingProfile;
-static PAL_BIN SpriteShadingPalette[16];
+
+BSS SpriteShadingProfile wSpriteShadingProfile;
+BSS SpriteShadingProfile bSpriteShadingProfile;
+BSS SpriteShadingProfile wSpriteShadingProfileAux;
+BSS SpriteShadingProfile bSpriteShadingProfileAux;
+BSS PAL_BIN SpriteShadingPalette[16];
 
 void appendGfx_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s32 alpha,
                              f32 shadowX, f32 shadowY, f32 shadowZ,

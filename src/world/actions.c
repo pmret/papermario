@@ -227,7 +227,7 @@ Action PlayerActionsTable[] = {
 
 extern UseItemStruct UseItemDmaArgs;
 
-static s32 D_8010CD20;
+BSS s32 D_8010CD20;
 
 s32 use_consumable(s32 invSlot) {
     Evt* script;

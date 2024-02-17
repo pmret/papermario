@@ -10,10 +10,10 @@ typedef struct SaveInfo {
 #define GLOBALS_PAGE_1 6
 #define GLOBALS_PAGE_2 7
 
-static SaveData FetchSaveBuffer;
-static SaveInfo LogicalSaveInfo[4];  // 4 save slots presented to the player
-static SaveInfo PhysicalSaveInfo[6]; // 6 saves as represented on the EEPROM
-static s32 NextAvailablePhysicalSave;
+BSS SaveData FetchSaveBuffer;
+BSS SaveInfo LogicalSaveInfo[4];  // 4 save slots presented to the player
+BSS SaveInfo PhysicalSaveInfo[6]; // 6 saves as represented on the EEPROM
+BSS s32 NextAvailablePhysicalSave;
 
 SaveGlobals gSaveGlobals;
 SaveData gCurrentSaveFile;

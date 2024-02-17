@@ -8,11 +8,11 @@ s8 gBackroundWaveEnabled = FALSE;
 s16 gBackroundTextureYOffset = 0;
 f32 gBackroundWavePhase = 0.0f;
 
-static PAL_BIN gBackgroundPalette[256];
-static f32 gBackroundLastScrollValue;
-static s32 D_801595A4[3];
+BSS PAL_BIN gBackgroundPalette[256];
+BSS f32 gBackroundLastScrollValue;
+BSS s32 D_801595A4[3];
 #if !VERSION_PAL
-static s32 D_801595AC;
+BSS s32 D_801595AC;
 #endif
 
 void load_map_bg(char* optAssetName) {
