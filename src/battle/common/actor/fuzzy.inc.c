@@ -262,7 +262,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Idle)
     Label(100)
     Call(SetActorDispOffset, ACTOR_SELF, 0, 10, 0)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Leech)
     Call(SetActorDispOffset, ACTOR_SELF, 0, 9, 0)
     Wait(1)
     Call(SetActorDispOffset, ACTOR_SELF, 0, 8, 0)
