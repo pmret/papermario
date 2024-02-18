@@ -336,7 +336,7 @@ EvtScript N(EVS_Attack_Leech) = {
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jungle_Idle)
     Label(100)
     Call(SetActorDispOffset, ACTOR_SELF, 0, 10, 0)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jungle_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jungle_Leech)
     Call(SetActorDispOffset, ACTOR_SELF, 0, 9, 0)
     Wait(1)
     Call(SetActorDispOffset, ACTOR_SELF, 0, 8, 0)
