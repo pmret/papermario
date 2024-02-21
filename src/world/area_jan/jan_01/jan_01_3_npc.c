@@ -259,7 +259,7 @@ EvtScript N(EVS_NpcDefeat_JungleFuzzyBoss) = {
 EvtScript N(EVS_NpcInit_JungleFuzzy_01) = {
     IfLt(GB_StoryProgress, STORY_CH5_KOLORADO_ESCAPED_FUZZIES)
         Call(SetSelfVar, 0, 0)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Jungle_Anim04)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Jungle_Leech)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_JungleFuzzy_01)))
         Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_JungleFuzzyBoss)))
     Else
