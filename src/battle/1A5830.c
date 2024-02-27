@@ -2700,8 +2700,8 @@ API_CALLABLE(RemoveActor) {
 }
 
 /// Star Point multiplier, indexed by actor count.
-/// +10% multiplier for four actors
-/// +30% multiplier for three or more actors
+/// +10% multiplier for three actors
+/// +30% multiplier for four or more actors
 s32 StarPointMultiplier[] = {
     100, 100, 100,
     110,
@@ -2737,7 +2737,7 @@ API_CALLABLE(DropStarPoints) {
 
     ntd = 0.0f;
     if (!(enemyLevel < playerLevel)) {
-        ntd = ((enemyLevel - playerLevel) * 0.5f) * multiplier[battleStatus->initialEnemyCount];
+        ntd = ((enemyLevel - playerLevel) * 0.5f) * StarPointMultiplier[battleStatus->initialEnemyCount];
         ntd = (ntd + 50.0f) / 100.0f;
     }
     numToDrop = ntd;
