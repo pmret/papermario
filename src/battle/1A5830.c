@@ -2699,16 +2699,16 @@ API_CALLABLE(RemoveActor) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(DropStarPoints) {
-    /// Star Point multiplier, indexed by actor count.
-    /// +10% multiplier for four actors
-    /// +30% multiplier for three or more actors
-    static s32 multiplier[] = {
-        100, 100, 100,
-        110,
-        130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130,
-    };
+/// Star Point multiplier, indexed by actor count.
+/// +10% multiplier for four actors
+/// +30% multiplier for three or more actors
+s32 StarPointMultiplier[] = {
+    100, 100, 100,
+    110,
+    130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130,
+};
 
+API_CALLABLE(DropStarPoints) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     Bytecode* args = script->ptrReadPos;
