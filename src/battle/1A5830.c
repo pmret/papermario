@@ -4,8 +4,6 @@
 #include "hud_element.h"
 #include "sprite.h"
 
-s32 D_802946E0[] = { 100, 100, 100, 110, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130 };
-
 s32 has_enchanted_part(Actor* actor) {
     ActorPart* partIt = actor->partsTable;
     s32 ret = FALSE;
@@ -2701,6 +2699,15 @@ API_CALLABLE(RemoveActor) {
     return ApiStatus_DONE2;
 }
 
+/// Star Point multiplier, indexed by actor count.
+/// +10% multiplier for three actors
+/// +30% multiplier for four or more actors
+s32 StarPointMultiplier[] = {
+    100, 100, 100,
+    110,
+    130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130,
+};
+
 API_CALLABLE(DropStarPoints) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
@@ -2730,7 +2737,7 @@ API_CALLABLE(DropStarPoints) {
 
     ntd = 0.0f;
     if (!(enemyLevel < playerLevel)) {
-        ntd = ((enemyLevel - playerLevel) * 0.5f) * D_802946E0[battleStatus->initialEnemyCount];
+        ntd = ((enemyLevel - playerLevel) * 0.5f) * StarPointMultiplier[battleStatus->initialEnemyCount];
         ntd = (ntd + 50.0f) / 100.0f;
     }
     numToDrop = ntd;
