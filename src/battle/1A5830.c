@@ -2701,7 +2701,7 @@ API_CALLABLE(RemoveActor) {
 
 API_CALLABLE(DropStarPoints) {
     /// Star Point multiplier, indexed by actor count.
-    /// +10% multiplier for two actors
+    /// +10% multiplier for four actors
     /// +30% multiplier for three or more actors
     static s32 multiplier[] = {
         100, 100, 100,
