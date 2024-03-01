@@ -1968,10 +1968,6 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
     }
 }
 
-#if !VERSION_JP
-static const f32 padding = 0.0f;
-#endif
-
 s32 get_msg_width(s32 msgID, u16 charset) {
     s32 width;
 
