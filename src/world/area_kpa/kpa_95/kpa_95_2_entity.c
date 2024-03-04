@@ -5,7 +5,7 @@
 #include "world/common/todo/GetEntityPosition.inc.c"
 
 s32 N(KeyList_PrisonCell)[] = {
-    ITEM_PRISON_KEY1,
+    ITEM_PRISON_KEY,
     ITEM_NONE
 };
 
@@ -44,7 +44,7 @@ EvtScript N(EVS_MakeEntities) = {
         BindTrigger(Ref(N(EVS_OpenCellDoor)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittn, 1, 0)
     EndIf
     IfEq(GF_KPA95_Defeated_Guard, TRUE)
-        Call(MakeItemEntity, ITEM_PRISON_KEY1, -70, 0, 55, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_KPA95_Item_PrisonKey1)
+        Call(MakeItemEntity, ITEM_PRISON_KEY, -70, 0, 55, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_KPA95_Item_PrisonKey1)
     EndIf
     Return
     End

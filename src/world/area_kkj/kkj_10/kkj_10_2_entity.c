@@ -4,7 +4,7 @@
 #include "world/common/todo/RemovePadlock.inc.c"
 
 s32 N(PeachKeyList)[] = {
-    ITEM_PEACH_KEY1,
+    ITEM_PEACH_KEY,
     ITEM_NONE
 };
 

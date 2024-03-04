@@ -447,7 +447,7 @@ EvtScript N(EVS_Scene_GiveKitchenKey) = {
     Call(SpeakToPlayer, NPC_GourmetGuy, ANIM_GourmetGuy_Talk, ANIM_GourmetGuy_Idle, 5, MSG_Peach_009F)
     Call(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_Inspect)
     Wait(30 * DT)
-    Set(LVar0, ITEM_PEACH_KEY1)
+    Set(LVar0, ITEM_PEACH_KEY)
     Call(ShowGotItem, LVar0, TRUE, 0)
     Call(AddKeyItem, LVar0)
     Set(GF_KKJ18_GourmetGuy_GaveKey, TRUE)

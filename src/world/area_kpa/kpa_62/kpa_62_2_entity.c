@@ -43,7 +43,7 @@ EvtScript N(EVS_MakeEntities) = {
     Else
         BindTrigger(Ref(N(EVS_ExitDoors_kpa_70_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittn, 1, 0)
     EndIf
-    Call(MakeEntity, Ref(Entity_RedBlock), -532, 145, -59, 0, ITEM_DEEP_FOCUS3, MAKE_ENTITY_END)
+    Call(MakeEntity, Ref(Entity_RedBlock), -532, 145, -59, 0, ITEM_DEEP_FOCUS_C, MAKE_ENTITY_END)
     Call(AssignBlockFlag, GF_KPA62_BadgeBlock_DeepFocus3)
     Return
     End
