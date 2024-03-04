@@ -1845,7 +1845,7 @@ void partner_flying_update_motion(Npc* partner) {
     z = partner->pos.z;
 
     hitDepth = partner->collisionHeight * 0.5f;
-    if (npc_raycast_up(0, &x, &y, &z, &hitDepth) != 0) {
+    if (npc_raycast_up(0, &x, &y, &z, &hitDepth)) {
         D_800F8020 = 1;
         wSavedPartnerPosX = partner->pos.x;
         wSavedPartnerPosY = partner->pos.y;

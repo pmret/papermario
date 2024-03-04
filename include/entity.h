@@ -6,7 +6,7 @@
 typedef s32 EntityScript[];
 typedef s32 EntityModelScript[];
 
-extern s32 CreateEntityVarArgBuffer[4];
+extern s32 CreateEntityVarArgBuffer[];
 
 enum {
     ENTITY_SCRIPT_OP_End,

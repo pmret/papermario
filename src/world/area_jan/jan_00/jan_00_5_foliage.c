@@ -26,7 +26,7 @@ ShakeTreeConfig N(ShakeTree_Tree1) = {
 
 BombTrigger N(D_80247A1C_B27F5C) = {
     .pos = { 481.0f, 0.0f, -165.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_80247A2C) = {

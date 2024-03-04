@@ -42,7 +42,7 @@ EvtScript N(EVS_EnterMap) = {
 
 BombTrigger N(BombPos_Wall) = {
     .pos = { 388.0f, 240.0f, -25.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_BlastWall) = {

@@ -467,22 +467,22 @@ EvtScript N(EVS_BombReaction_Lakitu_03) = {
 
 BombTrigger N(Npc_BombTrigger_01) = {
     .pos = { 5.0f, 0.0f, -10.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 BombTrigger N(Npc_BombTrigger_02) = {
     .pos = { -5.0f, 0.0f, -20.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 BombTrigger N(Npc_BombTrigger_03) = {
     .pos = { 50.0f, 0.0f, -10.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 BombTrigger N(Npc_BombTrigger_04) = {
     .pos = { 105.0f, 0.0f, -10.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_SetupMachineDamageReactions) = {

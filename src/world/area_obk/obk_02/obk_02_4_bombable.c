@@ -3,7 +3,7 @@
 
 BombTrigger N(BombPos_Wall) = {
     .pos = { 237.0f, -210.0f, 53.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_OnBlast_Wall) = {

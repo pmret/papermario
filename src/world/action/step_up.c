@@ -67,7 +67,7 @@ void action_update_step_up(void) {
         playerStatus->pos.y += playerStatus->gravityIntegrator[0];
     }
 
-    if (colliderID >= 0) {
+    if (colliderID > NO_COLLIDER) {
         if (playerStatus->prevActionState != ACTION_STATE_SPIN) {
             set_action_state(playerStatus->prevActionState);
         } else {

@@ -17,7 +17,7 @@ ShakeTreeConfig N(ShakeTree_Tree1) = {
 
 BombTrigger N(BombPos_Tree1) = {
     .pos = { 230.0f, 20.0f, -370.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 //@bug model count is 2, but only one is supplied. the extra comma is needed.
@@ -30,7 +30,7 @@ ShakeTreeConfig N(ShakeTree_Tree2) = {
 
 BombTrigger N(BombPos_Tree2) = {
     .pos = { 264.0f, 24.0f, 316.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_ExitWalk_sam_01_0) = EVT_EXIT_WALK(60, sam_02_ENTRY_0, "sam_01", sam_01_ENTRY_0);

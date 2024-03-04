@@ -106,8 +106,8 @@
 - { name: Letter, template: STANDARD, icon: key/Letter }
 - { name: Unused_089, template: STANDARD, icon: key/LongLetter }
 - { name: Unused_08A, template: STANDARD, icon: key/TealLetter }
-- { name: Unused_08B, template: STANDARD, icon: key/Postcard }
-- { name: Unused_08C, template: STANDARD, icon: key/EmptyBook }
+- { name: Postcard, template: STANDARD, icon: key/Postcard }
+- { name: EmptyBook, template: STANDARD, icon: key/EmptyBook }
 - { name: Unused_08D, template: STANDARD, icon: unused/item_08D }
 - { name: Unused_08E, template: STANDARD, icon: unused/item_08E }
 - { name: Unused_08F, template: STANDARD, icon: unused/item_08F }

@@ -76,12 +76,12 @@ EvtScript N(EVS_EnterMap) = {
 
 BombTrigger N(BombPos_MiddleCell) = {
     .pos = { -160.0f, 0.0f, -10.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 BombTrigger N(BombPos_RightCell) = {
     .pos = { 360.0f, 0.0f, -10.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_BombWall_MiddleCell) = {

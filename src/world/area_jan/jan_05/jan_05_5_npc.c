@@ -283,7 +283,11 @@ NpcData N(NpcData_SpearGuy)[] = {
             }
         },
         .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
-        SPEAR_GUY_WANDER_NPC_DATA
+        .settings = &N(NpcSettings_SpearGuy_Wander),
+        .drops = SPEAR_GUY_DROPS,
+        .animations = SPEAR_GUY_ANIMS,
+        .extraAnimations = N(ExtraAnims_SpearGuy),
+        .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
     SPEAR_GUY_HITBOX(NPC_SpearGuy_Hitbox)
 };
@@ -303,7 +307,12 @@ NpcData N(NpcData_HurtPlant) = {
     .id = NPC_HurtPlant,
     .pos = { 375.0f, 0.0f, 260.0f },
     .yaw = 270,
-    HURT_PLANT_NPC_DATA
+    .settings = &N(NpcSettings_HurtPlant),
+    .flags = HURT_PLANT_FLAGS,
+    .drops = HURT_PLANT_DROPS,
+    .animations = HURT_PLANT_ANIMS,
+    .extraAnimations = N(ExtraAnims_HurtPlant),
+    .tattle = MSG_NpcTattle_HeartPlant,
 };
 
 NpcData N(NpcData_MBush) = {

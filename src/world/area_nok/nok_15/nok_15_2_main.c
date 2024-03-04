@@ -9,7 +9,7 @@ EvtScript N(EVS_ExitWalk_trd_00_4) = EVT_EXIT_WALK_NOK(60, nok_15_ENTRY_2, "trd_
 
 BombTrigger N(BombPos_Wall) = {
     .pos = { -26.0f, 0.0f, -531.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_BlastWall) = {

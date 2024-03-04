@@ -8,7 +8,6 @@
 
 s32 entity_try_partner_interaction_trigger(s32);
 s32 test_item_entity_position(f32, f32, f32, f32);
-s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
 void fx_damage_stars(s32, f32, f32, f32, f32, f32, f32, s32);
 void auto_collect_item_entity(s32);
 

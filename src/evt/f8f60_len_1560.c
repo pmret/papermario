@@ -433,9 +433,9 @@ API_CALLABLE(GetNextPathPos) {
     }
 
     get_path_position(alpha, &pos, path->numVectors, path->lengths, path->staticVectorList, path->vectors);
-    script->varTable[1] = (pos.x * 1024.0f) + -2.3e8f;
-    script->varTable[2] = (pos.y * 1024.0f) + -2.3e8f;
-    script->varTable[3] = (pos.z * 1024.0f) + -2.3e8f;
+    script->varTable[1] = FLOAT_TO_FIXED(pos.x);
+    script->varTable[2] = FLOAT_TO_FIXED(pos.y);
+    script->varTable[3] = FLOAT_TO_FIXED(pos.z);
 
     if (path->timeElapsed < path->timeLeft) {
         path->timeElapsed = path->timeElapsed + 1;

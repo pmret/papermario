@@ -48,9 +48,6 @@ NpcSettings N(NpcSettings_HeartPlant) = {
     .onInteract = &N(EVS_NpcInteract_HeartPlant),
 };
 
-#define HEART_PLANT_NPC_DATA \
-    .settings = &N(NpcSettings_HeartPlant), \
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000, \
-    .drops = NO_DROPS, \
-    .animations = HEART_PLANT_ANIMS, \
-    .tattle = MSG_NpcTattle_HeartPlant, \
+#define HEART_PLANT_FLAGS \
+    ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | \
+    ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000

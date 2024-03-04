@@ -1,25 +1,25 @@
 - None:
-    nameMsg: 0
-    fullDescMsg: 0
-    shortDescMsg: 0
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: []
     category: MOVE_TYPE_NONE
     actionTip: NONE
     costFP: 0
     costBP: 0
 - Unused_01:
-    nameMsg: 0
-    fullDescMsg: 0
-    shortDescMsg: 0
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
     actionTip: NONE
     costFP: 0
     costBP: 0
 - Unused_02:
-    nameMsg: 0
-    fullDescMsg: 0
-    shortDescMsg: 0
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_NONE
     actionTip: NONE
@@ -27,7 +27,7 @@
     costBP: 0
 - Hammer1:
     nameMsg: MSG_Menus_Hammer
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_ItemShortDesc_Hammer
     flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
@@ -54,8 +54,8 @@
     costBP: 0
 - FirstStrikeHammer:
     nameMsg: MSG_Menus_Hammer
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
     actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
@@ -261,8 +261,8 @@
     costBP: 0
 - FirstStrikeJump:
     nameMsg: MSG_Menus_Jump
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
     actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
@@ -468,7 +468,7 @@
     costBP: 3
 - Items:
     nameMsg: MSG_Menus_Items
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_Menus_Action_UseItem
     flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_ITEMS
@@ -495,8 +495,8 @@
     costBP: 3
 - Unused_37:
     nameMsg: (s32) "つうじょう"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: []
     category: MOVE_TYPE_SWITCH
     actionTip: NONE
@@ -513,8 +513,8 @@
     costBP: 4
 - Unused_39:
     nameMsg: (s32) "つうじょう"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_6
     actionTip: NONE
@@ -522,8 +522,8 @@
     costBP: 0
 - Unused_3A:
     nameMsg: (s32) "つうじょう"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: []
     category: MOVE_TYPE_ATTACK_UP
     actionTip: NONE
@@ -567,8 +567,8 @@
     costBP: 2
 - Unused_3F:
     nameMsg: (s32) "つうじょう"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_DEFENSE_UP
     actionTip: NONE
@@ -675,8 +675,8 @@
     costBP: 1
 - Unused_4B:
     nameMsg: (s32) "つうじょう"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: []
     category: MOVE_TYPE_9
     actionTip: NONE
@@ -729,8 +729,8 @@
     costBP: 5
 - Unused_51:
     nameMsg: (s32) "つうじょう"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_NONE
     actionTip: NONE
@@ -999,8 +999,8 @@
     costBP: 1
 - Unused_FinalGoompa:
     nameMsg: (s32) "ファイナルクリジイ"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
     actionTip: NONE
@@ -1008,8 +1008,8 @@
     costBP: 1
 - Unused_FinalBobomb:
     nameMsg: (s32) "ファイナルボムヘイ"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
     actionTip: NONE
@@ -1071,7 +1071,7 @@
     costBP: 3
 - Focus:
     nameMsg: MSG_Menus_StarPower_Focus
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_Menus_StarPowerDesc_Focus
     flags: [ TARGET_FLAG_OVERRIDE ]
     category: MOVE_TYPE_STAR_POWER
@@ -1080,7 +1080,7 @@
     costBP: 0
 - Refresh:
     nameMsg: MSG_Menus_StarPower_Refresh
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_Menus_StarPowerDesc_Refresh
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_STAR_POWER
@@ -1089,7 +1089,7 @@
     costBP: 1
 - Lullaby:
     nameMsg: MSG_Menus_StarPower_Lullaby
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_Menus_StarPowerDesc_Lullaby
     flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
@@ -1098,7 +1098,7 @@
     costBP: 1
 - StarStorm:
     nameMsg: MSG_Menus_StarPower_StarStorm
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_Menus_StarPowerDesc_StarStorm
     flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
@@ -1107,7 +1107,7 @@
     costBP: 2
 - ChillOutMove:
     nameMsg: MSG_Menus_StarPower_ChillOut
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_Menus_StarPowerDesc_ChillOut
     flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
@@ -1116,7 +1116,7 @@
     costBP: 2
 - Smooch:
     nameMsg: MSG_Menus_StarPower_Smooch
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_Menus_StarPowerDesc_Smooch
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_STAR_POWER
@@ -1125,7 +1125,7 @@
     costBP: 3
 - TimeOut:
     nameMsg: MSG_Menus_StarPower_TimeOut
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_Menus_StarPowerDesc_TimeOut
     flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
@@ -1134,7 +1134,7 @@
     costBP: 2
 - UpAndAway:
     nameMsg: MSG_Menus_StarPower_UpAndAway
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_Menus_StarPowerDesc_UpAndAway
     flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
@@ -1143,7 +1143,7 @@
     costBP: 2
 - StarBeam:
     nameMsg: MSG_Menus_StarPower_StarBeam
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_Menus_StarPowerDesc_StarBeam
     flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
@@ -1152,7 +1152,7 @@
     costBP: 0
 - PeachBeam:
     nameMsg: MSG_Menus_StarPower_PeachBeam
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_Menus_StarPowerDesc_PeachBeam
     flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
@@ -1161,7 +1161,7 @@
     costBP: 0
 - PeachFocus:
     nameMsg: MSG_Menus_StarPower_Peach_Focus
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_Menus_StarPowerDesc_Focus
     flags: [ TARGET_FLAG_PARTNER ]
     category: MOVE_TYPE_STAR_POWER
@@ -1170,7 +1170,7 @@
     costBP: 0
 - TwinkDash:
     nameMsg: MSG_Menus_StarPower_Twink_Dash
-    fullDescMsg: 0
+    fullDescMsg: MSG_NONE
     shortDescMsg: MSG_Menus_StarPowerDesc_Focus
     flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
@@ -1395,8 +1395,8 @@
     costBP: 0
 - Unused_LoneFool1:
     nameMsg: (s32) "ひとりぼけ"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
     actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
@@ -1404,8 +1404,8 @@
     costBP: 0
 - Unused_LoneFool2:
     nameMsg: (s32) "ひとりぼけ"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
     actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
@@ -1413,8 +1413,8 @@
     costBP: 0
 - Unused_LoneFool3:
     nameMsg: (s32) "ひとりぼけ"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
     actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
@@ -1422,8 +1422,8 @@
     costBP: 0
 - Unused_Mumble:
     nameMsg: (s32) "むにゃむにゃ"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_GROUND ]
     category: MOVE_TYPE_PARTNER
     actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
@@ -1431,8 +1431,8 @@
     costBP: 0
 - Unused_Preach:
     nameMsg: (s32) "せっきょう"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
     actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
@@ -1440,8 +1440,8 @@
     costBP: 0
 - Unused_Awakening:
     nameMsg: (s32) "かくせい"
-    fullDescMsg: 0
-    shortDescMsg: 0
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
     flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
     actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING

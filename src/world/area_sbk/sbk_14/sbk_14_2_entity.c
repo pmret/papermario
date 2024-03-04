@@ -1,7 +1,7 @@
 #include "sbk_14.h"
 #include "entity.h"
 
-TweesterPath N(D_80240440_936B20) = {
+TweesterPath N(DefaultTweesterPath) = {
     -65, 0, 217,
     -262, 0, -64,
     57, 0, -286,
@@ -9,8 +9,8 @@ TweesterPath N(D_80240440_936B20) = {
     TWEESTER_PATH_LOOP
 };
 
-TweesterPath* N(D_80240474_936B54)[] = {
-    &N(D_80240440_936B20),
+TweesterPath* N(TweesterPaths)[] = {
+    &N(DefaultTweesterPath),
     PTR_LIST_END
 };
 
@@ -24,7 +24,7 @@ EvtScript N(D_8024047C_936B5C) = {
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    Call(MakeEntity, Ref(Entity_Tweester), 327, 0, 8, 0, Ref(N(D_80240474_936B54)), MAKE_ENTITY_END)
+    Call(MakeEntity, Ref(Entity_Tweester), 327, 0, 8, 0, Ref(N(TweesterPaths)), MAKE_ENTITY_END)
     Call(AssignScript, Ref(N(D_8024047C_936B5C)))
     Call(MakeEntity, Ref(Entity_MulticoinBlock), 0, 60, -100, 0, MAKE_ENTITY_END)
     Call(AssignBlockFlag, GF_SBK14_MultiCoinBrick)

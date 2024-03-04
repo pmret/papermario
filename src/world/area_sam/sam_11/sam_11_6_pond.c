@@ -433,10 +433,9 @@ EvtScript N(EVS_TouchPond_After) = {
     End
 };
 
-// @bug radius is f32 here, should be s32
-BombTriggerF N(BombTrigger_Pond) = {
+BombTrigger N(BombTrigger_Pond) = {
     .pos = { 0.0f, -10.0f, 220.0f },
-    .radius = 300.0
+    .diameter = 300.0
 };
 
 EvtScript N(EVS_SetupPond) = {

@@ -259,7 +259,7 @@ s32 N(can_dismount)(void) {
     temp = hitResult;
 
     //TODO find better match
-    if (outLength <= 16.0f && temp >= 0) {
+    if (outLength <= 16.0f && temp > NO_COLLIDER) {
         if (!(temp & COLLISION_WITH_ENTITY_BIT) ||
             (entityType = get_entity_type(temp),
             !(entityType == ENTITY_TYPE_SIMPLE_SPRING || entityType == ENTITY_TYPE_SCRIPT_SPRING))

@@ -159,10 +159,10 @@ void N(try_cancel_tweester)(Npc* parakarry) {
     }
 }
 
-s32 N(update_current_floor)(void) {
+HitID N(update_current_floor)(void) {
     f32 x, y, z, length, hitRx, hitRz, hitDirX, hitDirZ;
     f32 colliderBaseHeight = gPlayerStatus.colliderHeight;
-    s32 hitResult;
+    HitID hitID;
     s32 surfaceType;
 
     x = gPlayerStatus.pos.x;
@@ -170,17 +170,17 @@ s32 N(update_current_floor)(void) {
     z = gPlayerStatus.pos.z;
     length = colliderBaseHeight / 2.0f;
 
-    hitResult = player_raycast_below_cam_relative(&gPlayerStatus, &x, &y, &z, &length, &hitRx,
+    hitID = player_raycast_below_cam_relative(&gPlayerStatus, &x, &y, &z, &length, &hitRx,
                                                       &hitRz, &hitDirX, &hitDirZ);
 
-    surfaceType = get_collider_flags(hitResult) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+    surfaceType = get_collider_flags(hitID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
     if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
         gPlayerStatus.hazardType = HAZARD_TYPE_SPIKES;
         gPlayerStatus.flags |= PS_FLAG_HIT_FIRE;
         N(AbilityState) = AIR_LIFT_DROP;
     }
 
-    return hitResult;
+    return hitID;
 }
 
 API_CALLABLE(N(UseAbility)) {

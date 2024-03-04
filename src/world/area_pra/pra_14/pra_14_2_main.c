@@ -23,12 +23,12 @@ EvtScript N(EVS_EnterMap) = {
 
 BombTrigger N(BombPos_WallA) = {
     .pos = { 13.0f, 0.0f, 70.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 BombTrigger N(BombPos_WallB) = {
     .pos = { 13.0f, 0.0f, -70.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_BlastWallA) = {

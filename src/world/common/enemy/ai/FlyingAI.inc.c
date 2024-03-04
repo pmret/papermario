@@ -207,19 +207,19 @@ void N(FlyingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     if (enemy->varTable[1] > 0) {
         f32 undulateAmplitude = (f32)enemy->varTable[1] / 100.0;
         f32 undulateAmount = sin_deg(enemy->varTable[2]);
-        s32 hitResult;
+        s32 hasCollision;
 
         if (npc->flags & NPC_FLAG_FLYING) {
-            hitResult = FALSE;
+            hasCollision = FALSE;
         } else {
             posX = npc->pos.x;
             posY = npc->pos.y;
             posZ = npc->pos.z;
             posW = 1000.0f;
-            hitResult = npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
+            hasCollision = npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
         }
 
-        if (hitResult) {
+        if (hasCollision) {
             npc->pos.y = posY + hoverHeight + (undulateAmount * undulateAmplitude);
         } else {
             npc->pos.y = temp_f26 + (undulateAmount * undulateAmplitude);
