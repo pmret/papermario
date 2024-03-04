@@ -277,7 +277,7 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
 
 /// Test a general ray from a given starting position and direction against all entities.
 /// If one is hit, returns the position and normal of the hit and the length along the ray on the output params.
-/// All output params are only valid when a value of `NO_COLLIDER` is returned.
+/// All output params are invalid when a value of `NO_COLLIDER` is returned.
 /// @param startX origin x position of the ray
 /// @param startY origin y position of the ray
 /// @param startZ origin z position of the ray
