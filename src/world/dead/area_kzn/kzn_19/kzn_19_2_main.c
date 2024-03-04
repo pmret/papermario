@@ -171,7 +171,7 @@ EvtScript N(EVS_UpdateLavaWaves) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     Call(SetSpriteShading, SHADING_KZN_19)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Call(GetEntryID, LVar0)
     IfEq(LVar0, kzn_19_ENTRY_3)
         Call(MakeNpcs, TRUE, Ref(N(EscapeNPCs)))

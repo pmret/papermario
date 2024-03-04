@@ -61,6 +61,15 @@ build/
 dump
 *.backup
 crash.xml
+/audio/*
+/sprite/*
+/battle/*
+/globals/*
+/map/*
+/world/*
+/image/*
+/strings/*
+/res/*
 
 /tools/Yay0compress
 /tools/n64crc

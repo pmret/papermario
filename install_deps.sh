@@ -99,7 +99,7 @@ if cat /etc/os-release | grep -E ID=fedora &> /dev/null; then
 fi
 
 # Arch Linux and derivatives (pacman)
-if cat /etc/os-release | grep -E 'ID=arch|ID_LIKE=arch' &> /dev/null; then
+if cat /etc/os-release | grep -E 'ID=arch|ID_LIKE="?arch"?' &> /dev/null; then
     supported=true
 
     echo "Installing packages for Arch Linux or derivative (pacman)"

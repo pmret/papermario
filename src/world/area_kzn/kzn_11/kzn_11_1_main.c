@@ -55,7 +55,7 @@ LavaReset N(SafeFloorColliders)[] = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     Call(SetSpriteShading, SHADING_KZN_11)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
     Call(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
     Call(PlayAmbientSounds, AMBIENT_LAVA_1)

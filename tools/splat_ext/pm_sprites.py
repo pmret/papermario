@@ -424,9 +424,9 @@ def write_player_xmls(
                     raster_attributes["special"] = f"{back_raster.width & 0xFF:X},{back_raster.height & 0xFF:X}"
                 else:
                     back_name_offset = raster_sets[sprite_idx + 1].raster_offsets[i]
-                    raster_attributes[
-                        "back"
-                    ] = f"{get_sprite_name_from_offset(back_name_offset, sprite_offsets, raster_names)}.png"
+                    raster_attributes["back"] = (
+                        f"{get_sprite_name_from_offset(back_name_offset, sprite_offsets, raster_names)}.png"
+                    )
                 if back_raster.palette_idx != raster.palette_idx:
                     raster_attributes[BACK_PALETTE_XML] = f"{back_raster.palette_idx:X}"
 
@@ -719,11 +719,15 @@ class N64SegPm_sprites(N64Segment):
     def __init__(self, rom_start, rom_end, type, name, vram_start, args, yaml) -> None:
         super().__init__(rom_start, rom_end, type, name, vram_start, args=args, yaml=yaml)
 
-        with (Path(__file__).parent / f"npc_sprite_names.yaml").open("r") as f:
+        path = Path(__file__).parent / f"npc_sprite_names.yaml"
+        with path.open("r") as f:
             self.npc_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
+        self.npc_cfg_modified_time = path.stat().st_mtime
 
-        with (Path(__file__).parent / f"player_sprite_names.yaml").open("r") as f:
+        path = Path(__file__).parent / f"player_sprite_names.yaml"
+        with path.open("r") as f:
             self.player_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
+        self.player_cfg_modified_time = path.stat().st_mtime
 
     def out_path(self):
         return options.opts.asset_path / "sprite" / "sprites"
@@ -852,4 +856,4 @@ class N64SegPm_sprites(N64Segment):
         return [LinkerEntry(self, src_paths, self.out_path(), self.get_linker_section(), self.get_linker_section())]
 
     def cache(self):
-        return (self.yaml, self.rom_end, self.player_cfg, self.npc_cfg)
+        return (self.yaml, self.rom_end, self.player_cfg_modified_time, self.npc_cfg_modified_time)

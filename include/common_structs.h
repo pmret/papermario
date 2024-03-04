@@ -1292,7 +1292,7 @@ typedef struct MessageDrawState {
     /* 0x3E */ u16 fontVariant;
     /* 0x40 */ u8 curPosX;
     /* 0x41 */ char unk_41;
-    /* 0x42 */ u16 nextPos[2];
+    /* 0x42 */ s16 nextPos[2];
     /* 0x46 */ s16 textStartPos[2]; // relative to textbox
     /* 0x4A */ s16 textColor;
     /* 0x4C */ u8* printBuffer;

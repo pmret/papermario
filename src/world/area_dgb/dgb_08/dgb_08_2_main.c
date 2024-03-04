@@ -54,7 +54,7 @@ EvtScript N(EVS_EnterMap) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_TUBBAS_MANOR)
     Call(SetSpriteShading, SHADING_NONE)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_TUBBA_SMASHED_THE_BRIDGES)
             Call(MakeNpcs, TRUE, Ref(N(BeforeNPCs)))

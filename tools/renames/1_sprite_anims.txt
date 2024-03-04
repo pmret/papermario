@@ -1,0 +1,3 @@
+ANIM_Fuzzy_Anim04 ANIM_Fuzzy_Leech
+ANIM_Fuzzy_Forest_Anim04 ANIM_Fuzzy_Forest_Leech
+ANIM_Fuzzy_Jungle_Anim04 ANIM_Fuzzy_Jungle_Leech

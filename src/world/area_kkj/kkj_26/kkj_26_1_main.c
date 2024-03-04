@@ -55,7 +55,7 @@ EvtScript N(EVS_EnterMap) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_PEACHS_CASTLE)
     Call(SetSpriteShading, SHADING_KKJ_26)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Call(GetEntryID, LVar0)
     IfEq(LVar0, kkj_26_ENTRY_1)
         Set(GB_StoryProgress, STORY_CH7_BEGAN_PEACH_MISSION)

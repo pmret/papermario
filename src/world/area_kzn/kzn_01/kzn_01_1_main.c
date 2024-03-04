@@ -15,7 +15,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     Call(SetSpriteShading, SHADING_KZN_01)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Set(GF_MAP_MtLavalava, TRUE)
     IfLt(GB_StoryProgress, STORY_CH5_ENTERED_MT_LAVA_LAVA)
         Set(GB_StoryProgress, STORY_CH5_ENTERED_MT_LAVA_LAVA)

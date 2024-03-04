@@ -28,7 +28,7 @@ def get_img_file(fmt_str, img_file: str):
         palette = img.palette(alpha="force")
         for rgba in palette:
             if rgba[3] not in (0, 0xFF):
-                self.warn("alpha mask mode but translucent pixels used")
+                print("alpha mask mode but translucent pixels used")
 
             color = pack_color(*rgba)
             out_pal += color.to_bytes(2, byteorder="big")
@@ -36,11 +36,11 @@ def get_img_file(fmt_str, img_file: str):
     return (out_img, out_pal, out_w, out_h)
 
 
-def build(out_bin: Path, in_xml: Path, out_header: Path, asset_stack: Tuple[Path, ...]):
+def build(out_bin: Path, out_header: Path, asset_stack: Tuple[Path, ...]):
     out_bytes = bytearray()
     offsets: Dict[str, int] = {}
 
-    xml = ET.parse(in_xml)
+    xml = ET.parse(get_asset_path(Path("icon/Icons.xml"), asset_stack))
     IconList = xml.getroot()
 
     for Icon in IconList.findall("Icon"):
@@ -100,11 +100,10 @@ def build(out_bin: Path, in_xml: Path, out_header: Path, asset_stack: Tuple[Path
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Icon archive")
     parser.add_argument("out_bin", type=Path, help="output binary file path")
-    parser.add_argument("list_path", type=Path, help="input xml file path")
     parser.add_argument("header_path", type=Path, help="output header file to generate")
     parser.add_argument("asset_stack", help="comma-separated asset stack")
     args = parser.parse_args()
 
     asset_stack = tuple(Path(d) for d in args.asset_stack.split(","))
 
-    build(args.out_bin, args.list_path, args.header_path, asset_stack)
+    build(args.out_bin, args.header_path, asset_stack)

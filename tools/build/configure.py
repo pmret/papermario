@@ -85,7 +85,7 @@ def write_ninja_rules(
     ninja.variable("python", sys.executable)
 
     ld_args = f"-T ver/$version/build/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map $mapfile --no-check-sections -T $in -o $out"
-    ld = f"{cross}ld" if not 'PAPERMARIO_LD' in os.environ else os.environ['PAPERMARIO_LD']
+    ld = f"{cross}ld" if not "PAPERMARIO_LD" in os.environ else os.environ["PAPERMARIO_LD"]
 
     if shift:
         # For the shiftable build, we link twice to resolve some addresses that gnu ld can't figure out all in one go.
@@ -253,7 +253,7 @@ def write_ninja_rules(
 
     ninja.rule(
         "icons",
-        command=f"$python {BUILD_TOOLS}/icons.py $out $list_path $header_path $asset_stack",
+        command=f"$python {BUILD_TOOLS}/icons.py $out $header_path $asset_stack",
     )
 
     ninja.rule(
@@ -941,7 +941,6 @@ class Configure:
                     entry.src_paths,
                     "icons",
                     variables={
-                        "list_path": entry.src_paths[0],
                         "header_path": header_path,
                         "asset_stack": ",".join(self.asset_stack),
                     },

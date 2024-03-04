@@ -23,7 +23,7 @@ API_CALLABLE(N(func_8024030C_C7E48C)) {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     Call(SetSpriteShading, SHADING_KZN_10)
-    SetUP_CAMERA_DEFAULT()
+    EVT_SETUP_CAMERA_DEFAULT()
     Thread
         Call(GetEntryID, LVar0)
         IfEq(LVar0, kzn_10_ENTRY_0)

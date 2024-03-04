@@ -13,5 +13,5 @@ rabbitizer
 n64img
 python-githooks
 crunch64>=0.2.0
-splat64>=0.21.5
+splat64>=0.22.0
 requests
