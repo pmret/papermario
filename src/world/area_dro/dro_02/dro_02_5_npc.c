@@ -360,7 +360,18 @@ NpcData N(PassiveNPCs)[] = {
         .id = NPC_Archeologist,
         .pos = { -320.0f, 0.0f, -14.0f },
         .yaw = 90,
-        .territory = { .temp = { -303, 0, 22, 146, 38, -32767, 1, 0, 0, 0, 0, 0, 0, 1 }},
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_RECT,
+                .centerPos  = { -303, 0, 22 },
+                .wanderSize = { 146, 38 },
+                .detectShape = SHAPE_CYLINDER,
+                .detectPos  = { 0, 0, 0 },
+                .detectSize = { 0, 0 },
+            }
+        },
         .init = &N(EVS_NpcInit_Archeologist),
         .settings = &N(NpcSettings_Archeologist),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
@@ -389,7 +400,18 @@ NpcData N(PassiveNPCs)[] = {
         .id = NPC_Dryite_01,
         .pos = { -20.0f, 0.0f, 40.0f },
         .yaw = 270,
-        .territory = { .temp = { -20, 0, 40, 60, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 }},
+        .territory = {
+            .wander = {
+                .isFlying = TRUE,
+                .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
+                .wanderShape = SHAPE_CYLINDER,
+                .centerPos  = { -20, 0, 40 },
+                .wanderSize = { 60, 0 },
+                .detectShape = SHAPE_CYLINDER,
+                .detectPos  = { 0, 0, 0 },
+                .detectSize = { 0, 0 },
+            }
+        },
         .init = &N(EVS_NpcInit_MrE),
         .settings = &N(NpcSettings_Dryite_Wander),
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,

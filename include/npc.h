@@ -239,7 +239,6 @@ typedef struct {
 typedef union {
     EnemyTerritoryWander wander;
     EnemyTerritoryPatrol patrol;
-    s32 temp[48]; // TODO: remove when old map data is replaced
     char PADDING[0xC0];
 } EnemyTerritory; // size = 0xC0
 
