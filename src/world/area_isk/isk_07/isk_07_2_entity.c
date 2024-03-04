@@ -20,7 +20,7 @@ EvtScript N(EVS_MakeEntities) = {
         Set(MV_LockEntityID, LVar0)
     EndIf
     IfEq(GF_ISK07_Hammer2Block, FALSE)
-        Call(MakeEntity, Ref(Entity_Hammer2Block_WideX), 470, -250, 270, 150, MAKE_ENTITY_END)
+        Call(MakeEntity, Ref(Entity_Hammer2BlockWideX), 470, -250, 270, 150, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_SmashBlock_Stone)))
     EndIf
     IfEq(GF_ISK07_OpenedSarcophagi, FALSE)

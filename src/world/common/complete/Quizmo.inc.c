@@ -455,7 +455,7 @@ API_CALLABLE(N(Quizmo_GetCamVfov)) {
     Bytecode* args = script->ptrReadPos;
     s32 cameraID = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, *args++, Float_TO_FIXED(gCameras[cameraID].vfov));
+    evt_set_variable(script, *args++, FLOAT_TO_FIXED(gCameras[cameraID].vfov));
     return ApiStatus_DONE2;
 }
 

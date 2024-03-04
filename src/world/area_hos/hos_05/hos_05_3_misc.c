@@ -35,10 +35,10 @@ API_CALLABLE(N(func_80240690_A2A8D0)) {
     angle = (script->varTable[1] * 180.0f) / PI;
     magnitude = (rand_int(10) / vt2) + 3.0f;
 
-    script->varTable[10] = Float_TO_FIXED(magnitude * cos_rad(angle));
-    script->varTable[11] = Float_TO_FIXED(rand_int(15) + 5);
-    script->varTable[12] = Float_TO_FIXED(magnitude * sin_rad(angle));
-    script->varTable[13] = Float_TO_FIXED((f32)(rand_int(10) + 10) * -0.05);
+    script->varTable[10] = FLOAT_TO_FIXED(magnitude * cos_rad(angle));
+    script->varTable[11] = FLOAT_TO_FIXED(rand_int(15) + 5);
+    script->varTable[12] = FLOAT_TO_FIXED(magnitude * sin_rad(angle));
+    script->varTable[13] = FLOAT_TO_FIXED((f32)(rand_int(10) + 10) * -0.05);
 
     return ApiStatus_DONE2;
 }

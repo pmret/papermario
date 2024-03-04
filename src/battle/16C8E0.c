@@ -97,7 +97,7 @@ EvtScript BtlBringPartnerOut = {
 };
 
 extern HudScript HES_HPBar;
-extern HudScript HES_Item_SmallStarPoint;
+extern HudScript HES_SmallStarPoint;
 extern HudScript HES_Item_StarPoint;
 extern HudScript HES_StatusSPShine;
 
@@ -218,7 +218,7 @@ void initialize_battle(void) {
     }
 
     for (i = 0; i < ARRAY_COUNT(BtlStarPointOnesHIDs); i++) {
-        hudElemID = BtlStarPointOnesHIDs[i] = hud_element_create(&HES_Item_SmallStarPoint);
+        hudElemID = BtlStarPointOnesHIDs[i] = hud_element_create(&HES_SmallStarPoint);
         hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
         hud_element_set_render_depth(hudElemID, 20);
     }
@@ -1049,8 +1049,8 @@ void btl_update_starpoints_display(void) {
 
             for (i = 0; i < ones; i++) {
                 id = BtlStarPointOnesHIDs[i];
-                if (hud_element_get_script(id) != &HES_Item_SmallStarPoint) {
-                    hud_element_set_script(id, &HES_Item_SmallStarPoint);
+                if (hud_element_get_script(id) != &HES_SmallStarPoint) {
+                    hud_element_set_script(id, &HES_SmallStarPoint);
                 }
                 hud_element_clear_flags(id, 2);
                 hud_element_set_render_pos(id, posX, posY);

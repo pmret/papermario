@@ -629,7 +629,7 @@ EntityBlueprint Entity_Hammer1Block = {
     .aabbSize = { 50, 50, 50 }
 };
 
-EntityBlueprint Entity_Hammer1Block_WideX = {
+EntityBlueprint Entity_Hammer1BlockWideX = {
     .flags = ENTITY_FLAG_4000 | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer1Block_RenderScript,
@@ -642,7 +642,7 @@ EntityBlueprint Entity_Hammer1Block_WideX = {
     .aabbSize = { 100, 50, 50 }
 };
 
-EntityBlueprint Entity_Hammer1Block_WideZ = {
+EntityBlueprint Entity_Hammer1BlockWideZ = {
     .flags = ENTITY_FLAG_4000 | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer1Block_RenderScript,
@@ -681,7 +681,7 @@ EntityBlueprint Entity_Hammer2Block = {
     .aabbSize = { 50, 50, 50 }
 };
 
-EntityBlueprint Entity_Hammer2Block_WideX = {
+EntityBlueprint Entity_Hammer2BlockWideX = {
     .flags = ENTITY_FLAG_4000 | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer2Block_RenderScript,
@@ -694,7 +694,7 @@ EntityBlueprint Entity_Hammer2Block_WideX = {
     .aabbSize = { 100, 50, 50 }
 };
 
-EntityBlueprint Entity_Hammer2Block_WideZ = {
+EntityBlueprint Entity_Hammer2BlockWideZ = {
     .flags = ENTITY_FLAG_4000 | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer2Block_RenderScript,
@@ -733,7 +733,7 @@ EntityBlueprint Entity_Hammer3Block = {
     .aabbSize = { 50, 50, 50 }
 };
 
-EntityBlueprint Entity_Hammer3Block_WideX = {
+EntityBlueprint Entity_Hammer3BlockWideX = {
     .flags = ENTITY_FLAG_4000 | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer3Block_RenderScript,
@@ -746,7 +746,7 @@ EntityBlueprint Entity_Hammer3Block_WideX = {
     .aabbSize = { 100, 50, 50 }
 };
 
-EntityBlueprint Entity_Hammer3Block_WideZ = {
+EntityBlueprint Entity_Hammer3BlockWideZ = {
     .flags = ENTITY_FLAG_4000 | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer3Block_RenderScript,

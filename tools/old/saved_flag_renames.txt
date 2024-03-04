@@ -401,7 +401,7 @@ GameFlag(399) GF_TIK02_Chest_ShrinkStomp
 GameFlag(400) GF_TIK03_ItemBlock_SnowmanDoll
 GameFlag(401) GF_TIK03_ItemBlock_CoinA
 GameFlag(402) GF_TIK03_ItemBlock_CoinB
-GameFlag(403) GF_TIK05_Chest_PowerSmash1
+GameFlag(403) GF_TIK05_Chest_PowerSmash
 GameFlag(404) GF_TIK07_Item_StarPiece
 GameFlag(405) GF_TIK10_HiddenItem_CoinA
 GameFlag(406) GF_TIK10_HiddenItem_CoinB

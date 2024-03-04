@@ -404,7 +404,7 @@ enum GameFlags {
     GF_TIK03_ItemBlock_SnowmanDoll              = GameFlag(0x190),
     GF_TIK03_ItemBlock_CoinA                    = GameFlag(0x191),
     GF_TIK03_ItemBlock_CoinB                    = GameFlag(0x192),
-    GF_TIK05_Chest_PowerSmash1                  = GameFlag(0x193),
+    GF_TIK05_Chest_PowerSmash                   = GameFlag(0x193),
     GF_TIK07_Item_StarPiece                     = GameFlag(0x194),
     GF_TIK10_HiddenItem_CoinA                   = GameFlag(0x195),
     GF_TIK10_HiddenItem_CoinB                   = GameFlag(0x196),

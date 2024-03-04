@@ -74,7 +74,7 @@ HitID player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* out
     f32 temp_f20;
     f32 cosTemp;
     f32 sinTemp;
-    s32 hitObjectID;
+    s32 hitID;
     s32 ret;
 
     *hitRx = 0.0f;
@@ -94,9 +94,9 @@ HitID player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* out
     y = inputY;
     z = inputZ + cosTemp;
     length = inputLength;
-    hitObjectID = player_raycast_down(&x, &y, &z, &length);
+    hitID = player_raycast_down(&x, &y, &z, &length);
     ret = NO_COLLIDER;
-    if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
+    if (hitID > NO_COLLIDER && length <= fabsf(*outLength)) {
         *hitRx = -gGameStatusPtr->playerGroundTraceAngles.x;
         *hitRz = -gGameStatusPtr->playerGroundTraceAngles.z;
         *outX = x;
@@ -105,15 +105,15 @@ HitID player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* out
         *outLength = length;
         *hitDirX = sinTemp;
         *hitDirZ = cosTemp;
-        ret = hitObjectID;
+        ret = hitID;
     }
 
     x = inputX - sinTemp;
     y = inputY;
     z = inputZ - cosTemp;
     length = inputLength;
-    hitObjectID = player_raycast_down(&x, &y, &z, &length);
-    if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
+    hitID = player_raycast_down(&x, &y, &z, &length);
+    if (hitID > NO_COLLIDER && length <= fabsf(*outLength)) {
         *hitRx = -gGameStatusPtr->playerGroundTraceAngles.x;
         *hitRz = -gGameStatusPtr->playerGroundTraceAngles.z;
         *outX = x;
@@ -122,15 +122,15 @@ HitID player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* out
         *outLength = length;
         *hitDirX = -sinTemp;
         *hitDirZ = -cosTemp;
-        ret = hitObjectID;
+        ret = hitID;
     }
 
     x = inputX + cosTemp;
     y = inputY;
     z = inputZ + sinTemp;
     length = inputLength;
-    hitObjectID = player_raycast_down(&x, &y, &z, &length);
-    if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
+    hitID = player_raycast_down(&x, &y, &z, &length);
+    if (hitID > NO_COLLIDER && length <= fabsf(*outLength)) {
         *hitRx = -gGameStatusPtr->playerGroundTraceAngles.x;
         *hitRz = -gGameStatusPtr->playerGroundTraceAngles.z;
         *outX = x;
@@ -139,15 +139,15 @@ HitID player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* out
         *outLength = length;
         *hitDirX = sinTemp;
         *hitDirZ = cosTemp;
-        ret = hitObjectID;
+        ret = hitID;
     }
 
     x = inputX - cosTemp;
     y = inputY;
     z = inputZ - sinTemp;
     length = inputLength;
-    hitObjectID = player_raycast_down(&x, &y, &z, &length);
-    if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
+    hitID = player_raycast_down(&x, &y, &z, &length);
+    if (hitID > NO_COLLIDER && length <= fabsf(*outLength)) {
         *hitRx = -gGameStatusPtr->playerGroundTraceAngles.x;
         *hitRz = -gGameStatusPtr->playerGroundTraceAngles.z;
         *outX = x;
@@ -156,15 +156,15 @@ HitID player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* out
         *outLength = length;
         *hitDirX = -sinTemp;
         *hitDirZ = -cosTemp;
-        ret = hitObjectID;
+        ret = hitID;
     }
 
     x = inputX;
     y = inputY;
     z = inputZ;
     length = inputLength;
-    hitObjectID = player_raycast_down(&x, &y, &z, &length);
-    if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
+    hitID = player_raycast_down(&x, &y, &z, &length);
+    if (hitID > NO_COLLIDER && length <= fabsf(*outLength)) {
         *hitRx = -gGameStatusPtr->playerGroundTraceAngles.x;
         *hitRz = -gGameStatusPtr->playerGroundTraceAngles.z;
         *outX = x;
@@ -173,10 +173,10 @@ HitID player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* out
         *outLength = length;
         *hitDirX = 0.0f;
         *hitDirZ = 0.0f;
-        ret = hitObjectID;
+        ret = hitID;
     }
 
-    if (ret < 0) {
+    if (ret <= NO_COLLIDER) {
         *outX = x;
         *outY = y;
         *outZ = z;
@@ -211,7 +211,7 @@ HitID player_raycast_down(f32* x, f32* y, f32* z, f32* length) {
 
     hitDepth = *length;
     entityID = test_ray_entities(*x, *y, *z, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
-    if (entityID >= 0) {
+    if (entityID > NO_COLLIDER) {
         entity = get_entity_by_index(entityID);
         if (entity->alpha < 255) {
             entity->collisionTimer = 4;
@@ -222,11 +222,11 @@ HitID player_raycast_down(f32* x, f32* y, f32* z, f32* length) {
     }
 
     colliderID = test_ray_colliders(COLLIDER_FLAG_IGNORE_PLAYER, *x, *y, *z, 0, -1.0f, 0, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
-    if (colliderID >= 0) {
+    if (colliderID > NO_COLLIDER) {
         ret = colliderID;
     }
 
-    if (ret >= 0) {
+    if (ret > NO_COLLIDER) {
         *length = hitDepth;
         *x = hitX;
         *y = hitY;
@@ -277,28 +277,28 @@ HitID player_raycast_up_corners(PlayerStatus* player, f32* posX, f32* posY, f32*
     ret = NO_COLLIDER;
     hitID = player_raycast_up_corner(&startX, &startY, &startZ, &depth);
 
-    if (hitID < 0) {
+    if (hitID <= NO_COLLIDER) {
         startX = x - deltaX;
         startY = y;
         startZ = z - deltaZ;
         hitID = player_raycast_up_corner(&startX, &startY, &startZ, &depth);
     }
 
-    if (hitID < 0) {
+    if (hitID <= NO_COLLIDER) {
         startX = x + deltaZ;
         startY = y;
         startZ = z + deltaX;
         hitID = player_raycast_up_corner(&startX, &startY, &startZ, &depth);
     }
 
-    if (hitID < 0) {
+    if (hitID <= NO_COLLIDER) {
         startX = x - deltaZ;
         startY = y;
         startZ = z - deltaX;
         hitID = player_raycast_up_corner(&startX, &startY, &startZ, &depth);
     }
 
-    if (hitID >= 0) {
+    if (hitID > NO_COLLIDER) {
         *posX = startX;
         *posY = startY;
         *posZ = startZ;
@@ -306,7 +306,7 @@ HitID player_raycast_up_corners(PlayerStatus* player, f32* posX, f32* posY, f32*
         ret = hitID;
     }
 
-    if (ret < 0) {
+    if (ret <= NO_COLLIDER) {
         *posX = startX;
         *posY = startY;
         *posZ = startZ;
@@ -339,7 +339,7 @@ HitID player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length) {
     sz2 = sz = *z;
     hitDepth = *length;
     hitID = test_ray_colliders(COLLIDER_FLAG_IGNORE_PLAYER, sx, sy, sz, 0.0f, 1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
-    if (hitID >= 0 && *length > hitDepth) {
+    if (hitID > NO_COLLIDER && *length > hitDepth) {
         *length = hitDepth;
         ret = hitID;
         *x = sx = sx2;
@@ -352,7 +352,7 @@ HitID player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length) {
     sx = sx2;
     sy = sy2;
     sz = sz2;
-    if (hitID >= 0 && *length > hitDepth) {
+    if (hitID > NO_COLLIDER && *length > hitDepth) {
         get_entity_by_index(hitID);
         ret = hitID | COLLISION_WITH_ENTITY_BIT;
         *length = hitDepth;
@@ -409,7 +409,7 @@ HitID player_test_lateral_overlap(s32 mode, PlayerStatus* playerStatus, f32* x, 
         targetDz = length * cosTheta;
     }
 
-    if (hitID >= 0) {
+    if (hitID > NO_COLLIDER) {
         originalDepth = length + radius;
         if (hitDepth <= originalDepth) {
             depthDiff = hitDepth - originalDepth;
@@ -441,7 +441,7 @@ HitID player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 d
     entityID = test_ray_entities(startX, startY, startZ, dirX, dirY, dirZ, hitX, hitY, hitZ, hitDepth, hitNx, hitNy,
                                 hitNz);
     ret = NO_COLLIDER;
-    if (entityID >= 0) {
+    if (entityID > NO_COLLIDER) {
         entity = get_entity_by_index(entityID);
         if (entity->alpha < 255) {
             entity->collisionTimer = 0;
@@ -467,11 +467,11 @@ HitID player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 d
     colliderID = test_ray_colliders(ignoreFlags, startX, startY, startZ, dirX, dirY, dirZ,
         hitX, hitY, hitZ, hitDepth, hitNx, hitNy, hitNz);
 
-    if (ret < 0) {
+    if (ret <= NO_COLLIDER) {
         ret = colliderID;
     }
 
-    if (ret >= 0) {
+    if (ret > NO_COLLIDER) {
         nAngleZ = 180.0f - atan2(0, 0, *hitNz * 100.0, *hitNy * 100.0);
         nAngleX = 180.0f - atan2(0, 0, *hitNx * 100.0, *hitNy * 100.0);
 
@@ -500,7 +500,7 @@ HitID player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32*
     f32 depthDiff;
     f32 height;
     s32 ret;
-    s32 raycastID;
+    s32 hitID;
     f32 targetDx;
     f32 targetDz;
     f32 dx, dz;
@@ -515,8 +515,8 @@ HitID player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32*
     dx = radius * sinTheta;
     ret = NO_COLLIDER;
 
-    raycastID = player_raycast_general(PLAYER_COLLISION_0, *x, *y + 0.1, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
-    if (raycastID >= 0 && hitDepth <= depth) {
+    hitID = player_raycast_general(PLAYER_COLLISION_0, *x, *y + 0.1, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    if (hitID > NO_COLLIDER && hitDepth <= depth) {
         *hasClimbableStep = TRUE;
     }
 
@@ -524,19 +524,19 @@ HitID player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32*
     hitDepth = depth;
     dz = radius * cosTheta;
 
-    raycastID = player_raycast_general(PLAYER_COLLISION_0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    hitID = player_raycast_general(PLAYER_COLLISION_0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
 
     targetDx = 0.0f;
     targetDz = 0.0f;
 
-    if ((raycastID >= 0) && (hitDepth <= depth)) {
+    if (hitID > NO_COLLIDER && hitDepth <= depth) {
         depthDiff = hitDepth - depth;
         dx = depthDiff * sinTheta;
         dz = depthDiff * cosTheta;
         player_get_slip_vector(&slipDx, &slipDz, 0.0f, 0.0f, hitNx, hitNz);
         *x += dx + slipDx;
         *z += dz + slipDz;
-        ret = raycastID;
+        ret = hitID;
     }
     *x += targetDx;
     *z += targetDz;
@@ -584,7 +584,7 @@ HitID player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y,
     targetDz = length * cosTheta;
 
     hitID = player_raycast_general(PLAYER_COLLISION_0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
-    if (hitID >= 0 && (depthDiff = hitDepth, depthDiff <= length + radius)) {
+    if (hitID > NO_COLLIDER && (depthDiff = hitDepth, depthDiff <= length + radius)) {
         depthDiff -= (length + radius);
         dx = depthDiff * sinTheta;
         dz = depthDiff * cosTheta;
@@ -595,7 +595,7 @@ HitID player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y,
     } else {
         height = playerStatus->colliderHeight * 0.75;
         hitID = player_raycast_general(PLAYER_COLLISION_0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
-        if (hitID >= 0 && (depthDiff = hitDepth, depthDiff <= length + radius)) {
+        if (hitID > NO_COLLIDER && (depthDiff = hitDepth, depthDiff <= length + radius)) {
             depthDiff -= (length + radius);
             dx = depthDiff * sinTheta;
             dz = depthDiff * cosTheta;
@@ -744,7 +744,7 @@ void phys_update_standard(void) {
         collision_main_lateral();
         collision_check_player_overlaps();
 
-        if (collision_main_above() < 0 && playerStatus->timeInAir == 0 &&
+        if (collision_main_above() <= NO_COLLIDER && playerStatus->timeInAir == 0 &&
             playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS) {
             collision_lateral_peach();
         }
@@ -1215,7 +1215,7 @@ void check_for_interactables(void) {
         if (curInteraction == NO_COLLIDER) {
             s32 floor = gCollisionStatus.curFloor;
 
-            if ((floor >= 0) && (floor & COLLISION_WITH_ENTITY_BIT)) {
+            if (floor > NO_COLLIDER && (floor & COLLISION_WITH_ENTITY_BIT)) {
                 phi_s2 = 1;
                 curInteraction = floor;
                 switch (get_entity_type(floor)) {
@@ -1274,7 +1274,7 @@ void check_for_interactables(void) {
         }
 
         playerStatus->interactingWithID = curInteraction;
-        if ((phi_s2 == 0) || curInteraction >= 0 && get_entity_by_index(curInteraction)->flags & ENTITY_FLAG_SHOWS_INSPECT_PROMPT) {
+        if ((phi_s2 == 0) || curInteraction > NO_COLLIDER && get_entity_by_index(curInteraction)->flags & ENTITY_FLAG_SHOWS_INSPECT_PROMPT) {
             if (playerStatus->actionState == ACTION_STATE_IDLE || playerStatus->actionState == ACTION_STATE_WALK || playerStatus->actionState == ACTION_STATE_RUN) {
                 playerStatus->animFlags |= PA_FLAG_INTERACT_PROMPT_AVAILABLE;
                 func_800EF3D4(2);

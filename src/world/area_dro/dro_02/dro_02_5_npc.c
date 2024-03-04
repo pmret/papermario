@@ -369,7 +369,7 @@ NpcData N(PassiveNPCs)[] = {
                 .wanderSize = { 146, 38 },
                 .detectShape = SHAPE_CYLINDER,
                 .detectPos  = { 0, 0, 0 },
-                .detectSize = { 0, 0 },
+                .detectSize = { 0 },
             }
         },
         .init = &N(EVS_NpcInit_Archeologist),

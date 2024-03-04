@@ -833,7 +833,7 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
         }
     }
 
-    if (colliderID >= 0) {
+    if (colliderID > NO_COLLIDER) {
         *hitX = gCollisionPointX;
         *hitY = gCollisionPointY;
         *hitZ = gCollisionPointZ;
@@ -882,7 +882,7 @@ s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 d
         }
     }
 
-    if (colliderID >= 0) {
+    if (colliderID > NO_COLLIDER) {
         *hitX = gCollisionPointX;
         *hitY = gCollisionPointY;
         *hitZ = gCollisionPointZ;
@@ -928,12 +928,6 @@ f32 test_ray_collider_horizontal(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, 
     return ret;
 }
 
-enum {
-    ENTITY_TEST_ANY     = 0,
-    ENTITY_TEST_DOWN    = 1,
-    ENTITY_TEST_LATERAL = 2,
-};
-
 s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
                       f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz) {
     f32 hitDepthDown, hitDepthHoriz;
@@ -950,6 +944,12 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
     s32 hasCollision;
     f32 dist, dist2;
     ColliderTriangle *triangle = &entityTriangle;
+
+    enum {
+        ENTITY_TEST_ANY     = 0,
+        ENTITY_TEST_DOWN    = 1,
+        ENTITY_TEST_LATERAL = 2,
+    };
 
     entityIndex = -1;
     type = ENTITY_TEST_ANY;

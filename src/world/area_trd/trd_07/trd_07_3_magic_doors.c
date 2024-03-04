@@ -7,10 +7,10 @@ API_CALLABLE(N(GetPointsWithCamRelativeOffset)) {
     f32 posZ = evt_get_float_variable(script, *args++);
     f32 angle = evt_get_float_variable(script, *args++);
 
-    script->varTable[0] = Float_TO_FIXED(posX + (sin_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 270.0f)) * 1000.0f));
-    script->varTable[1] = Float_TO_FIXED(posZ - (cos_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 270.0f)) * 1000.0f));
-    script->varTable[2] = Float_TO_FIXED(posX + (sin_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 90.0f)) * 1000.0f));
-    script->varTable[3] = Float_TO_FIXED(posZ - (cos_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 90.0f)) * 1000.0f));
+    script->varTable[0] = FLOAT_TO_FIXED(posX + (sin_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 270.0f)) * 1000.0f));
+    script->varTable[1] = FLOAT_TO_FIXED(posZ - (cos_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 270.0f)) * 1000.0f));
+    script->varTable[2] = FLOAT_TO_FIXED(posX + (sin_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 90.0f)) * 1000.0f));
+    script->varTable[3] = FLOAT_TO_FIXED(posZ - (cos_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 90.0f)) * 1000.0f));
     return ApiStatus_DONE2;
 }
 
