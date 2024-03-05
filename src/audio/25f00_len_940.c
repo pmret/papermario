@@ -31,7 +31,9 @@ BSS NUDMABuffer nuAuDmaBufList[50];
 
 ALHeap nuAuHeap;
 AuSynDriver auSynDriver;
+#if !VERSION_IQUE
 u8 rspbootUcodeBuffer[0x100] ALIGNED(16);
+#endif
 
 extern u64 n_aspMain_text_bin[];
 extern u64 n_aspMain_data_bin[];

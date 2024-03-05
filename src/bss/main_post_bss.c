@@ -16,7 +16,7 @@
 //
 
 #if VERSION_IQUE
-BSS s32 D_800AF710[6];
+BSS OSIoMesg __osFlashMsg OSALIGNED(8);
 #endif
 BSS char wMapTexName[0x18];
 BSS OSThread __osThreadSave;
@@ -28,7 +28,7 @@ BSS OSContStatus nuContStatus[NU_CONT_MAXCONTROLLERS];
 BSS OSThread D_800B1B90;
 BSS NUContRmbCtl nuContRmbCtl[NU_CONT_MAXCONTROLLERS];
 #if VERSION_IQUE
-BSS s32 D_800B07A0[4];
+BSS u32 __osFlashID[4] OSALIGNED(8);
 #endif
 BSS OSContPad nuContData[NU_CONT_MAXCONTROLLERS];
 BSS Camera gCameras[4] ALIGNED(16);
@@ -61,7 +61,7 @@ BSS ALHeap nuAuHeap;
 #if VERSION_IQUE
 BSS OSMesgQueue __osFlashMessageQ OSALIGNED(8);
 #endif
-BSS char D_800D9258[0x20];
+BSS OSTimer __osEepromTimer;
 BSS NUScTask nuGfxTask[NU_GFX_TASK_NUM];
 BSS SaveGlobals gSaveGlobals;
 BSS char wMapBgName[0x14];
