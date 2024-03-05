@@ -5,10 +5,11 @@ void gfxThread(void*);
 
 NUGfxFunc nuGfxFunc = NULL;
 NUGfxPreNMIFunc nuGfxPreNMIFunc = NULL;
+OSMesgQueue	nuGfxMesgQ;
+static OSMesg nuGfxMesgBuf[NU_GFX_MESGS];
+static char GfxStack[NU_GFX_STACK_SIZE];
 
-extern char GfxStack[NU_GFX_STACK_SIZE];
-extern OSThread D_800B1B90;
-extern OSMesg nuGfxMesgBuf[NU_GFX_MESGS];
+OSThread D_800B1B90;
 
 void nuGfxThreadStart(void) {
     osCreateThread(&D_800B1B90, 4, gfxThread, NULL, &GfxStack[NU_GFX_STACK_SIZE], NU_GFX_THREAD_PRI);

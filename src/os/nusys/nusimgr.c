@@ -1,14 +1,14 @@
 #include "common.h"
 #include "nu/nusys.h"
 
+OSMesgQueue nuSiMesgQ;
+static OSMesg nuSiMesgBuf[8];
+static OSThread siMgrThread;
+static u64 siMgrStack[NU_SI_STACK_SIZE/sizeof(u64)];
+OSMesgQueue	nuSiMgrMesgQ;
 NUCallBackList* nuSiCallBackList = NULL;
 
-extern OSMesg nuSiMesgBuf[8];
-extern OSThread siMgrThread;
-
 static void nuSiMgrThread(void* arg);
-
-extern u64 siMgrStack[NU_SI_STACK_SIZE/sizeof(u64)];
 
 #if !VERSION_JP && !VERSION_IQUE
 u8 nuSiMgrInit(void) {

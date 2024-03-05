@@ -418,8 +418,7 @@ f32 AlTuneScaling[] = {
 
 extern s32* AU_FX_CUSTOM_PARAMS[0]; // points to 80078290
 
-SHIFT_BSS void (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
-SHIFT_BSS void (*CurrentSefCmdHandler)(SoundManager*, SoundPlayer*);
+void (*CurrentSefCmdHandler)(SoundManager*, SoundPlayer*);
 
 void au_sfx_init(SoundManager* manager, u8 priority, u8 busId, AuGlobals* globals, u8 minVoiceIdx) {
     u32 i;

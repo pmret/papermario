@@ -12,7 +12,7 @@ u8 __osContLastCmd;
 u8 __osMaxControllers;
 
 OSTimer __osEepromTimer;
-OSMesgQueue __osEepromTimerQ ALIGNED(8);
+OSMesgQueue __osEepromTimerQ OSALIGNED(8);
 OSMesg __osEepromTimerMsg;
 
 s32 __osContinitialized = 0;

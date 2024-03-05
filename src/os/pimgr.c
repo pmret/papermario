@@ -4,25 +4,17 @@
 #include "PR/piint.h"
 #include "PR/rdb.h"
 
-extern OSThread piThread;
-extern char piThreadStack[OS_PIM_STACKSIZE];
+static OSThread piThread OSALIGNED(8);
+static char piThreadStack[OS_PIM_STACKSIZE] OSALIGNED(16);
 
-extern OSMesgQueue piEventQueue;
-extern OSMesg piEventBuf[1];
-
-/*
-static OSThread piThread ALIGNED(8);
-static char piThreadStack[OS_PIM_STACKSIZE] ALIGNED(16);
-
-static OSMesgQueue piEventQueue ALIGNED(8);
+static OSMesgQueue piEventQueue OSALIGNED(8);
 static OSMesg piEventBuf[1];
-*/
 
 OSDevMgr __osPiDevMgr = { 0 };
 OSPiHandle* __osPiTable = NULL;
-OSPiHandle __Dom1SpeedParam ALIGNED(8);
-OSPiHandle __Dom2SpeedParam ALIGNED(8);
-OSPiHandle* __osCurrentHandle[2] ALIGNED(8) = { &__Dom1SpeedParam, &__Dom2SpeedParam };
+OSPiHandle __Dom1SpeedParam OSALIGNED(8);
+OSPiHandle __Dom2SpeedParam OSALIGNED(8);
+OSPiHandle* __osCurrentHandle[2] OSALIGNED(8) = { &__Dom1SpeedParam, &__Dom2SpeedParam };
 
 void osCreatePiManager(OSPri pri, OSMesgQueue* cmdQ, OSMesg* cmdBuf, s32 cmdMsgCnt) {
     u32 savedMask;

@@ -254,9 +254,13 @@ typedef struct PlayerCelebrationAnimOptions {
     /* 0x04 */ s32 options[80];
 } PlayerCelebrationAnimOptions; // size = 0x8
 
+#ifndef NO_EXTERN_VARIABLES
+
 extern Battle* gCurrentBattlePtr;
 
 extern ActorOffsets bActorOffsets[];
+
+#endif
 
 void func_80072BCC(s32 arg0);
 void load_demo_battle(u32 index);

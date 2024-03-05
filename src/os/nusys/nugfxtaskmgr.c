@@ -6,17 +6,24 @@ NUGfxSwapCfbFunc nuGfxSwapCfbFunc = NULL;
 NUGfxTaskEndFunc nuGfxTaskEndFunc = NULL;
 u16 beforeFlag = 0;
 
-extern OSMesg D_8009E6D0[NU_GFX_TASKMGR_MESGS];
-extern OSMesgQueue D_800DAC90;
-extern NUScTask* nuGfxTask_ptr;
-extern s16 taskDoneMsg;
-extern s16 swapBufMsg;
-extern OSThread GfxTaskMgrThread;
-extern NUScTask nuGfxTask[NU_GFX_TASK_NUM];
-extern s32 D_800DA040;
-extern s32 D_800B91D0[NU_GFX_RDP_OUTPUTBUFF_SIZE / sizeof(u32)];
-extern u64 GfxTaskMgrStack[NU_GFX_TASKMGR_STACK_SIZE / sizeof(u64)];
+static NUScTask* nuGfxTask_ptr;
+static s16 taskDoneMsg;
+static s16 swapBufMsg;
+static OSThread GfxTaskMgrThread;
+static u64 GfxTaskMgrStack[NU_GFX_TASKMGR_STACK_SIZE / sizeof(u64)] ALIGNED(16);
+static OSMesg D_8009E6D0[NU_GFX_TASKMGR_MESGS];
+
+NUScTask nuGfxTask[NU_GFX_TASK_NUM];
+u64 D_800DA040[0x400 / sizeof(u64)];
+s32 D_800B91D0[NU_GFX_RDP_OUTPUTBUFF_SIZE / sizeof(u32)];
+
 extern u8 rspbootUcodeBuffer[];
+
+u32 nuGfxCfbCounter;
+u32 nuGfxDisplay;
+NUUcode* nuGfxUcode;
+volatile u32 nuGfxTaskSpool;
+OSMesgQueue D_800DAC90;
 
 void nuGfxTaskMgr(void* data) {
     NUScTask* task;

@@ -1,9 +1,10 @@
+#include "macros.h"
 #include "PR/os_internal.h"
 
 #define PI_Q_BUF_LEN 1
 u32 __osPiAccessQueueEnabled = 0;
-extern OSMesg piAccessBuf[PI_Q_BUF_LEN];
-extern OSMesgQueue __osPiAccessQueue;
+static OSMesg piAccessBuf[PI_Q_BUF_LEN];
+OSMesgQueue __osPiAccessQueue OSALIGNED(8);
 
 void __osPiCreateAccessQueue(void) {
     __osPiAccessQueueEnabled = 1;
