@@ -424,9 +424,9 @@ def write_player_xmls(
                     raster_attributes["special"] = f"{back_raster.width & 0xFF:X},{back_raster.height & 0xFF:X}"
                 else:
                     back_name_offset = raster_sets[sprite_idx + 1].raster_offsets[i]
-                    raster_attributes[
-                        "back"
-                    ] = f"{get_sprite_name_from_offset(back_name_offset, sprite_offsets, raster_names)}.png"
+                    raster_attributes["back"] = (
+                        f"{get_sprite_name_from_offset(back_name_offset, sprite_offsets, raster_names)}.png"
+                    )
                 if back_raster.palette_idx != raster.palette_idx:
                     raster_attributes[BACK_PALETTE_XML] = f"{back_raster.palette_idx:X}"
 
