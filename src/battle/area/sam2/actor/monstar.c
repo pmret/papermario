@@ -190,6 +190,7 @@ API_CALLABLE(N(UpdateMonstarImgFX)) {
     }
 
     return ApiStatus_BLOCK;
+    
     #undef RGBA_BUF_SIZE
 }
 

@@ -69,5 +69,6 @@ API_CALLABLE(N(UpdateEnchantedBowserColors)) {
         script->functionTemp[0] = 0;
         return ApiStatus_BLOCK;
     }
+    
     #undef RGBA_BUF_SIZE
 }

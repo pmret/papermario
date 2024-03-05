@@ -104,6 +104,8 @@ API_CALLABLE(N(UpdateMonstarSpriteEffects)) {
                             enemy->varTable[3], 0, enemy->varTable[3], 0);
     }
     return ApiStatus_BLOCK;
+
+    #undef RGBA_BUF_SIZE
 }
 
 API_CALLABLE(N(CheckSkipInput)) {
