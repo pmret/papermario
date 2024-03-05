@@ -23,7 +23,7 @@ AmbientSoundSettings DefaultAmbientSoundData = {
     .unkC = -1
 };
 
-SHIFT_BSS AmbientSoundSettings AmbientSoundData;
+AmbientSoundSettings AmbientSoundData;
 
 void reset_ambient_sounds(void) {
     AmbientSoundData = DefaultAmbientSoundData;

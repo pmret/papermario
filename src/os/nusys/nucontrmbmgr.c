@@ -1,14 +1,15 @@
 #include "common.h"
 #include "nu/nusys.h"
 
+NUContRmbCtl nuContRmbCtl[NU_CONT_MAXCONTROLLERS];
+u32 nuContRmbSearchTime = NU_CONT_RMB_AUTO_SEARCHTIME;
+
 s32 contRmbRetrace(NUSiCommonMesg* mesg);
 s32 contRmbCheckMesg(NUSiCommonMesg* mesg);
 s32 contRmbStartMesg(NUSiCommonMesg* mesg);
 s32 contRmbStopMesg(NUSiCommonMesg* mesg);
 s32 contRmbForceStopMesg(NUSiCommonMesg* mesg);
 s32 contRmbForceStopEndMesg(NUSiCommonMesg* mesg);
-
-u32 nuContRmbSearchTime = 300;
 
 s32 (*D_80093CE4[])(NUSiCommonMesg*) = {
     contRmbRetrace, contRmbCheckMesg, contRmbStartMesg, contRmbStopMesg, contRmbForceStopMesg, contRmbForceStopEndMesg,

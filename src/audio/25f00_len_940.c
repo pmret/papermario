@@ -12,22 +12,28 @@ u32 nuAuFrameCounter = 0;
 u8 nuAuTaskStop = NU_AU_TASK_RUN;
 u8 volatile AuSynUseStereo = TRUE;
 
-SHIFT_BSS NUDMAState nuAuDmaState;
-SHIFT_BSS Acmd* AlCmdListBuffers[3];
-SHIFT_BSS NUScTask nuAuTasks[3];
-SHIFT_BSS u8* D_800A3628[3];
-SHIFT_BSS s32 AlFrameSize;
-SHIFT_BSS s32 AlMinFrameSize;
-SHIFT_BSS OSMesgQueue nuAuDmaMesgQ;
-SHIFT_BSS OSMesg nuAuDmaMesgBuf[50];
-SHIFT_BSS OSIoMesg nuAuDmaIOMesgBuf[50];
-SHIFT_BSS NUDMABuffer nuAuDmaBufList[50];
-SHIFT_BSS AuSynDriver auSynDriver;
-SHIFT_BSS u8 rspbootUcodeBuffer[0x100] ALIGNED(16);
-SHIFT_BSS u64 AuStack[NU_AU_STACK_SIZE / sizeof(u64)];
-SHIFT_BSS u16 AuInitialGlobalVolume;
-SHIFT_BSS OSThread nuAuMgrThread;
-SHIFT_BSS ALHeap nuAuHeap;
+BSS u16 AuInitialGlobalVolume;
+BSS OSThread nuAuMgrThread;
+BSS char D_800A1108[0x408];
+BSS u64 AuStack[NU_AU_STACK_SIZE / sizeof(u64)];
+BSS Acmd* AlCmdListBuffers[3];
+BSS NUScTask nuAuTasks[3];
+BSS u8* D_800A3628[3];
+BSS s32 AlFrameSize;
+BSS s32 AlMinFrameSize;
+BSS s32 D_800A363C;
+BSS OSMesgQueue nuAuDmaMesgQ;
+BSS OSMesg nuAuDmaMesgBuf[50];
+BSS OSIoMesg nuAuDmaIOMesgBuf[50];
+BSS NUDMAState nuAuDmaState;
+BSS s32 D_800A3BDC;
+BSS NUDMABuffer nuAuDmaBufList[50];
+
+ALHeap nuAuHeap;
+AuSynDriver auSynDriver;
+#if !VERSION_IQUE
+u8 rspbootUcodeBuffer[0x100] ALIGNED(16);
+#endif
 
 extern u64 n_aspMain_text_bin[];
 extern u64 n_aspMain_data_bin[];

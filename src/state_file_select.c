@@ -42,9 +42,9 @@ u8 IntroMessageIdx = 0;
 extern s32 D_80200000;
 extern ShapeFile gMapShapeData;
 
-SHIFT_BSS s8 D_800A0930;
-SHIFT_BSS s8 D_800A0931;
-SHIFT_BSS s16 D_800A0932[1];
+BSS s8 D_800A0930;
+BSS s8 D_800A0931;
+static s16 D_800A0932[1]; // TODO any possible workaround to make this visible?
 
 void state_init_language_select(void) {
     D_800A0931 = 0;

@@ -6,11 +6,11 @@
 #include "world/partners.h"
 #include "sprite/npc/WorldWatt.h"
 
-SHIFT_BSS s16 gNpcCount;
-SHIFT_BSS NpcList gWorldNpcList;
-SHIFT_BSS NpcList gBattleNpcList;
-SHIFT_BSS NpcList* gCurrentNpcListPtr;
-SHIFT_BSS b8 gNpcPlayerCollisionsEnabled;
+s16 gNpcCount;
+static NpcList gWorldNpcList;
+static NpcList gBattleNpcList;
+static NpcList* gCurrentNpcListPtr;
+static b8 gNpcPlayerCollisionsEnabled;
 
 #define PAL_ANIM_END 0xFF
 

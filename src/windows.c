@@ -20,7 +20,7 @@ typedef struct WindowGroup {
     /* 0x01 */ u8 max;
 } WindowGroup; // size = 0x02
 
-SHIFT_BSS Window gWindows[64];
+Window gWindows[64];
 
 WindowStyle gWindowStyles[64] = {
     { WINDOW_STYLE_3 }, { WINDOW_STYLE_3 }, { WINDOW_STYLE_11 }, { WINDOW_STYLE_12 },

@@ -13,7 +13,7 @@ typedef struct DefaultWindowStyle {
 } DefaultWindowStyle; // size = 0x0B
 
 #define BOX_QUAD_BUFFER_NUM 21
-SHIFT_BSS Vtx gBoxQuadBuffer[BOX_QUAD_BUFFER_NUM][16];
+BSS Vtx gBoxQuadBuffer[BOX_QUAD_BUFFER_NUM][16];
 
 DefaultWindowStyle gBoxDefaultStyles[] = {
     {

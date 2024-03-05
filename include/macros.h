@@ -18,7 +18,7 @@
 #define MATCHING_BSS(size) static BSS u8 padding_bss[size];
 #endif
 
-#define BSS __attribute__ ((section (".bss")))
+#define BSS __attribute__ ((nocommon, section (".bss")))
 #define TRANSPARENT_UNION __attribute__ ((__transparent_union__))
 #else
 #define SHIFT_BSS static
@@ -26,13 +26,15 @@
 #define TRANSPARENT_UNION
 #endif
 
+#define ALIGNED(x) __attribute__((aligned(x)))
+
 #ifndef BBPLAYER
-# define ALIGNED(x) __attribute__((aligned(x)))
+# define OSALIGNED(x) ALIGNED(x)
 #else
-# define ALIGNED(x)
+# define OSALIGNED(x)
 #endif
 
-#define BBALIGNED(x) __attribute__((aligned(x)))
+# define BBALIGNED(x) ALIGNED(x)
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 #define ALIGN8(val) (((val) + 0x7) & ~0x7)

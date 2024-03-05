@@ -2,11 +2,11 @@
 #include "world/partners.h"
 #include "sprite/player.h"
 
-SHIFT_BSS CollisionStatus gCollisionStatus;
-SHIFT_BSS f32 D_8010C928;
-SHIFT_BSS f32 JumpedOnSwitchX;
-SHIFT_BSS f32 JumpedOnSwitchZ;
-SHIFT_BSS f32 D_8010C984;
+CollisionStatus gCollisionStatus;
+f32 D_8010C928;
+f32 JumpedOnSwitchX;
+f32 JumpedOnSwitchZ;
+f32 D_8010C984;
 
 extern f32 GravityParamsStartJump[];
 

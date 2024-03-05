@@ -3,8 +3,8 @@
 
 #define MAX_SOUND_INSTANCES 10
 
-SHIFT_BSS u16 gCurrentDoorSounds;
-SHIFT_BSS u16 gCurrentRoomDoorSounds;
+u16 gCurrentDoorSounds;
+u16 gCurrentRoomDoorSounds;
 
 #define SOUND_LOOP_IDX(soundID) (soundID & 0xFFFF)
 
@@ -209,10 +209,10 @@ s32 OpenCloseSounds[][2] = {
     { SOUND_CREAKY_WINDOW_OPEN, SOUND_CREAKY_WINDOW_CLOSE },
 };
 
-SHIFT_BSS SoundInstance wEnvSounds[MAX_SOUND_INSTANCES];
-SHIFT_BSS SoundInstance bEnvSounds[MAX_SOUND_INSTANCES];
-SHIFT_BSS SoundInstance* gCurrentEnvSounds;
-SHIFT_BSS s32 SfxReverbMode;
+BSS SoundInstance wEnvSounds[MAX_SOUND_INSTANCES];
+BSS SoundInstance bEnvSounds[MAX_SOUND_INSTANCES];
+BSS SoundInstance* gCurrentEnvSounds;
+BSS s32 SfxReverbMode;
 
 void sfx_compute_spatialized_sound_params_full(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags) {
     s32 screenX, screenY, screenZ;

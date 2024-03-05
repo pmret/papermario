@@ -1,8 +1,8 @@
 #include "common.h"
 
-SHIFT_BSS WorkerList gWorldWorkerList;
-SHIFT_BSS WorkerList gBattleWorkerList;
-SHIFT_BSS WorkerList* gCurrentWorkerListPtr;
+BSS WorkerList gWorldWorkerList;
+BSS WorkerList gBattleWorkerList;
+BSS WorkerList* gCurrentWorkerListPtr;
 
 void worker_delegate_do_nothing(void) {
 }

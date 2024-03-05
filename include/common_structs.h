@@ -2514,6 +2514,13 @@ typedef struct PartnerDMAData {
     /* 0x10 */ s32 y;
 } PartnerDMAData; // size = 0x14
 
+typedef struct UseItemStruct {
+    /* 0x00 */ u8* dmaStart;
+    /* 0x04 */ u8* dmaEnd;
+    /* 0x08 */ EvtScript* main;
+    /* 0x0C */ s32 unk_0C;
+} UseItemStruct;
+
 typedef struct MsgVoice {
     /* 0x00 */ s32 voiceA;
     /* 0x04 */ s32 voiceB;
