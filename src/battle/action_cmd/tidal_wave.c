@@ -37,7 +37,7 @@ API_CALLABLE(N(init)) {
         hud_element_set_render_depth(id, 0);
         hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-        for (i = 1; i < 15; i++) {
+        for (i = 1; i < ARRAY_COUNT(actionCommandStatus->hudElements) - 1; i++) {
             id = hud_element_create(&HES_AButton);
             actionCommandStatus->hudElements[i] = id;
             hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
@@ -298,7 +298,7 @@ void N(update)(void) {
 void N(draw)(void) {
     s32 i;
 
-    for (i = 1; i < 15; i++) {
+    for (i = 1; i < ARRAY_COUNT(gActionCommandStatus.hudElements) - 1; i++) {
         hud_element_draw_clipped(gActionCommandStatus.hudElements[i]);
     }
 }
@@ -308,7 +308,7 @@ void N(free)(void) {
 
     hud_element_free(gActionCommandStatus.hudElements[0]);
 
-    for (i = 1; i < 15; i++) {
+    for (i = 1; i < ARRAY_COUNT(gActionCommandStatus.hudElements) - 1; i++) {
         hud_element_free(gActionCommandStatus.hudElements[i]);
     }
 }

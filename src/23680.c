@@ -51,7 +51,7 @@ void spawn_drops(Enemy* enemy) {
     if (drops->itemDropChance > rand_int(100)) {
         tempMax = 0;
 
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < ARRAY_COUNT(drops->itemDrops) / 3; i++) {
             if (drops->itemDrops[3 * i] != 0) {
                 tempMax += drops->itemDrops[3 * i + 1];
             } else {
@@ -63,7 +63,7 @@ void spawn_drops(Enemy* enemy) {
         dropCount = rand_int(tempMax);
         itemToDrop = ITEM_NONE;
 
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < ARRAY_COUNT(drops->itemDrops) / 3; i++) {
             if (drops->itemDrops[3 * i] == 0) {
                 break;
             }
@@ -122,7 +122,7 @@ void spawn_drops(Enemy* enemy) {
     itemToDrop = ITEM_NONE;
     fraction = playerData->curHP / (f32) playerData->curMaxHP;
 
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < ARRAY_COUNT(drops->itemDrops) / 3; i++) {
         attempts  = drops->heartDrops[4 * i];
         threshold = drops->heartDrops[4 * i + 1];
         attempts  /= 32767.0f;
@@ -176,7 +176,7 @@ void spawn_drops(Enemy* enemy) {
     itemToDrop = ITEM_NONE;
     fraction = playerData->curFP / (f32) playerData->curMaxFP;
 
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < ARRAY_COUNT(drops->itemDrops) / 3; i++) {
         attempts  = drops->flowerDrops[4 * i + 0];
         threshold = drops->flowerDrops[4 * i + 1];
         attempts  /= 32767.0f;

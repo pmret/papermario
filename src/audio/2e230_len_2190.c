@@ -79,7 +79,7 @@ void au_engine_init(s32 outputRate) {
         globals->unk_globals_6C[i].unk_5 = 0;
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(globals->effectChanges); i++) {
         globals->effectChanges[i].type = AU_FX_NONE;
         globals->effectChanges[i].changed = FALSE;
     }

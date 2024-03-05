@@ -263,19 +263,21 @@ typedef struct PadlockData {
     /* 0x18 */ Gfx* shackleGfx;
 } PadlockData; // size = 0x1C
 
+#define FRAGMENT_BUF_SIZE 13
+
 typedef struct BoardedFloorData {
     /* 0x000 */ Gfx** fragmentsGfx;
     /* 0x004 */ f32 inititalY;
-    /* 0x008 */ s8 fragmentRebounds[13];
-    /* 0x015 */ u8 fragmentMoveAngle[13];
-    /* 0x022 */ u8 fragmentRotX[13];
-    /* 0x02F */ u8 fragmentRotY[13];
-    /* 0x03C */ u8 fragmentLateralSpeed[13];
-    /* 0x04C */ f32 fragmentRotSpeed[13];
-    /* 0x080 */ f32 fragmentPosX[13];
-    /* 0x0B4 */ f32 fragmentPosY[13];
-    /* 0x0E8 */ f32 fragmentPosZ[13];
-    /* 0x11C */ f32 fragmentFallSpeed[13];
+    /* 0x008 */ s8 fragmentRebounds[FRAGMENT_BUF_SIZE];
+    /* 0x015 */ u8 fragmentMoveAngle[FRAGMENT_BUF_SIZE];
+    /* 0x022 */ u8 fragmentRotX[FRAGMENT_BUF_SIZE];
+    /* 0x02F */ u8 fragmentRotY[FRAGMENT_BUF_SIZE];
+    /* 0x03C */ u8 fragmentLateralSpeed[FRAGMENT_BUF_SIZE];
+    /* 0x04C */ f32 fragmentRotSpeed[FRAGMENT_BUF_SIZE];
+    /* 0x080 */ f32 fragmentPosX[FRAGMENT_BUF_SIZE];
+    /* 0x0B4 */ f32 fragmentPosY[FRAGMENT_BUF_SIZE];
+    /* 0x0E8 */ f32 fragmentPosZ[FRAGMENT_BUF_SIZE];
+    /* 0x11C */ f32 fragmentFallSpeed[FRAGMENT_BUF_SIZE];
 } BoardedFloorData; // size = 0x150
 
 typedef struct BombableRockData {

@@ -1370,15 +1370,17 @@ typedef struct RadiatingEnergyOrbFXData {
     /* 0x30 */ f32 unk_30;
 } RadiatingEnergyOrbFXData; // size = 0x34
 
+#define Unk_Array_Size1 4
+
 typedef struct MotionBlurFlameFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
     /* 0x0C */ f32 unk_0C;
     /* 0x10 */ Vec3f pos;
-    /* 0x1C */ f32 unk_1C[4];
-    /* 0x2C */ f32 unk_2C[4];
-    /* 0x3C */ f32 unk_3C[4];
+    /* 0x1C */ f32 unk_1C[Unk_Array_Size1];
+    /* 0x2C */ f32 unk_2C[Unk_Array_Size1];
+    /* 0x3C */ f32 unk_3C[Unk_Array_Size1];
     /* 0x4C */ s32 unk_4C;
     /* 0x50 */ s32 unk_50;
     /* 0x54 */ s32 unk_54;
@@ -2131,6 +2133,8 @@ typedef struct Effect75FXData {
     /* 0x7C */ f32 unk_7C;
 } Effect75FXData; // size = 0x80
 
+#define ROCKET_BUF_SIZE 4
+
 typedef struct FireworkRocketFXData {
     /* 0x00 */ s32 variation;
     /* 0x04 */ Vec3f pos;
@@ -2148,12 +2152,12 @@ typedef struct FireworkRocketFXData {
     /* 0x44 */ f32 radius;
     /* 0x48 */ f32 maxRadius;
     /* 0x4C */ s32 isExploded;
-    /* 0x50 */ f32 rocketX[4];
-    /* 0x60 */ f32 rocketY[4];
-    /* 0x70 */ f32 rocketZ[4];
-    /* 0x80 */ f32 rocketVelX[4];
-    /* 0x90 */ f32 rocketVelY[4];
-    /* 0xA0 */ f32 rocketVelZ[4];
+    /* 0x50 */ f32 rocketX[ROCKET_BUF_SIZE];
+    /* 0x60 */ f32 rocketY[ROCKET_BUF_SIZE];
+    /* 0x70 */ f32 rocketZ[ROCKET_BUF_SIZE];
+    /* 0x80 */ f32 rocketVelX[ROCKET_BUF_SIZE];
+    /* 0x90 */ f32 rocketVelY[ROCKET_BUF_SIZE];
+    /* 0xA0 */ f32 rocketVelZ[ROCKET_BUF_SIZE];
 } FireworkRocketFXData; // size = 0xB0
 
 typedef struct PeachStarBeamSpirit {

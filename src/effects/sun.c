@@ -118,7 +118,7 @@ void sun_update(EffectInstance* effect) {
         }
     }
 
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < ARRAY_COUNT(data->texScrollAmt); i++) {
         data->texScrollAmt[i] -= 4.0
             * ((sin_deg((time * 2 + (20 * i))) * 0.01) + 0.05)
             * sin_deg(((f32) time * 0.25) + (SQ(i) * 20));

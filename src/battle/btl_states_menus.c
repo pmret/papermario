@@ -4372,7 +4372,7 @@ void btl_state_update_partner_menu(void) {
         break;
     case BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_1:
         popupIndex = 0;
-        for (i = 1; i < 12; i++) {
+        for (i = 1; i < ARRAY_COUNT(PartnerIDFromMenuIndex); i++) {
             s32 partnerId = PartnerIDFromMenuIndex[i];
             if (playerData->partners[partnerId].enabled) {
                 popupProps = &gPartnerPopupProperties[partnerId];

@@ -44,6 +44,9 @@
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
+#define COUNT_ROWS(matrix) (s32)(sizeof(matrix) / sizeof(matrix[0]))
+#define COUNT_COLS(matrix) (s32)(sizeof(matrix[0]) / sizeof(matrix[0][0]))
+
 #if !defined(PERMUTER) && !defined(M2CTX) && defined(OLD_GCC)
 #define NOP_FIX __asm__(".set nogpopt");
 #define NOP_UNFIX __asm__(".set gpopt");
