@@ -474,8 +474,8 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
                 guMtxCatF(mtx2, rotScaleMtx, mtx1);
             }
             if (outMtx) {
-                for (i = 0; i < COUNT_ROWS(mtx1); i++) {
-                    for (j = 0; j < COUNT_COLS(mtx1); j++) {
+                for (i = 0; i < 4; i++) {
+                    for (j = 0; j < 4; j++) {
                         outMtx[i][j] = mtx1[i][j];
                     }
                 }

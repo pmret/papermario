@@ -1370,7 +1370,7 @@ typedef struct RadiatingEnergyOrbFXData {
     /* 0x30 */ f32 unk_30;
 } RadiatingEnergyOrbFXData; // size = 0x34
 
-#define Unk_Array_Size1 4
+#define UNK_ARRAY_SIZE_1 4
 
 typedef struct MotionBlurFlameFXData {
     /* 0x00 */ s32 unk_00;
@@ -1378,9 +1378,9 @@ typedef struct MotionBlurFlameFXData {
     /* 0x08 */ f32 unk_08;
     /* 0x0C */ f32 unk_0C;
     /* 0x10 */ Vec3f pos;
-    /* 0x1C */ f32 unk_1C[Unk_Array_Size1];
-    /* 0x2C */ f32 unk_2C[Unk_Array_Size1];
-    /* 0x3C */ f32 unk_3C[Unk_Array_Size1];
+    /* 0x1C */ f32 unk_1C[UNK_ARRAY_SIZE_1];
+    /* 0x2C */ f32 unk_2C[UNK_ARRAY_SIZE_1];
+    /* 0x3C */ f32 unk_3C[UNK_ARRAY_SIZE_1];
     /* 0x4C */ s32 unk_4C;
     /* 0x50 */ s32 unk_50;
     /* 0x54 */ s32 unk_54;

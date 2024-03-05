@@ -809,7 +809,7 @@ void func_8004E844(BGMPlayer* player, s32 arg1) {
     u16* temp = player->unk_174[arg1];
     player->unk_212[arg1] = 0;
 
-    for (i = 0; i < COUNT_COLS(player->unk_174); i++) {
+    for (i = 0; i < 9; i++) {
         *temp++ = 0xFF00;
     }
 }
