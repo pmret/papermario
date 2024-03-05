@@ -28,11 +28,14 @@ extern Addr inspect_icon_ROM_START;
 extern Addr inspect_icon_ROM_END;
 #endif
 
-SHIFT_BSS UNK_FUN_PTR(ISpyNotificationCallback);
-SHIFT_BSS UNK_FUN_PTR(PulseStoneNotificationCallback);
-SHIFT_BSS UNK_FUN_PTR(TalkNotificationCallback);
-SHIFT_BSS UNK_FUN_PTR(InteractNotificationCallback);
-SHIFT_BSS s32 D_8010C950;
+UNK_FUN_PTR(ISpyNotificationCallback);
+UNK_FUN_PTR(PulseStoneNotificationCallback);
+UNK_FUN_PTR(TalkNotificationCallback);
+UNK_FUN_PTR(InteractNotificationCallback);
+s32 D_8010C950;
+
+PlayerStatus gPlayerStatus;
+PlayerData gPlayerData;
 
 extern f32 D_800F7B48;
 extern s32 D_800F7B4C;

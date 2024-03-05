@@ -24,8 +24,7 @@ enum WorldMenuTypes {
     WORLD_MENU_PAUSE            = 2,
 };
 
-BSS s16 SwappedWorldMenus;
-BSS char D_8010C9C4[0x4];
+BSS s32 D_8010C9C4;
 BSS PopupMenu WorldPopupMenu;
 BSS s16 WorldMenuType;
 BSS s16 WorldMenuDelay;

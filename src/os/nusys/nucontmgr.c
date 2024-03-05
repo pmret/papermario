@@ -3,6 +3,17 @@
 
 NOP_FIX
 
+OSMesgQueue    nuContWaitMesgQ;
+static OSMesg  nuContWaitMesgBuf;
+OSMesgQueue    nuContDataMutexQ;
+static OSMesg  nuContDataMutexBuf;
+OSContStatus   nuContStatus[NU_CONT_MAXCONTROLLERS];
+OSContPad      nuContData[NU_CONT_MAXCONTROLLERS];
+u32            nuContNum;
+u32            nuContDataLockKey;
+
+OSPfs nuContPfs[NU_CONT_MAXCONTROLLERS];
+
 static s32 contRetrace(NUSiCommonMesg* mesg);
 static s32 contRead(NUSiCommonMesg* mesg);
 static s32 contReadNW(NUSiCommonMesg* mesg);
@@ -20,10 +31,6 @@ static s32 (*funcList[])(NUSiCommonMesg*) = {
 };
 
 NUCallBackList nuContCallBack = { NULL, funcList, NU_SI_MAJOR_NO_CONT };
-
-extern OSMesg nuContWaitMesgBuf;
-extern OSMesg nuContDataMutexBuf;
-extern OSMesgQueue nuContDataMutexQ;
 
 u8 nuContMgrInit(void) {
     s32 i;

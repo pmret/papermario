@@ -27,6 +27,7 @@ options:
   symbol_name_format_no_rom: IQUE_$VRAM_$SEG
   ld_wildcard_sections: True
   ld_use_symbolic_vram_addresses: False
+  hasm_in_src_path: True
 asset_stack:
   - ique
 segments:
@@ -40,8 +41,8 @@ segments:
     start: 0x1000
     vram: 0x80025C00
     subsegments:
-    - [auto, hasm, bss]
-    - [auto, hasm, entry_point]
+    - [auto, hasm, boot/entry_point]
+    - [auto, c, bss/main_pre_bss]
     - [auto, c, main_pre]
     - [auto, c, main]
     - [auto, c, main_loop]
@@ -178,10 +179,10 @@ segments:
     - [auto, c, os/settime, egcs -O0 -mips2]
     - [auto, c, os/settimer, egcs -O0 -mips2]
     - [auto, c, os/timerintr, egcs -O0 -mips2]
-    - [auto, hasm, os/maptlb]
-    - [auto, hasm, os/probetlb]
-    - [auto, hasm, os/unmaptlb]
-    - [auto, hasm, os/unmaptlball]
+    - [auto, hasm, os/osMapTLB]
+    - [auto, hasm, os/__osProbeTLB]
+    - [auto, hasm, os/osUnmapTLB]
+    - [auto, hasm, os/osUnmapTLBAll]
     - [auto, c, os/vigetcurrframebuf, egcs -O2 -mips2]
     - [auto, c, os/vigetnextframebuf, egcs -O2 -mips2]
     - [auto, c, os/vigetmode, egcs -O2 -mips2]
@@ -211,8 +212,9 @@ segments:
     - [auto, c, os/guMtxXFMF, egcs -O2 -mips2]
     - [auto, c, os/guRotate, egcs -O2 -mips2]
     - [auto, hasm, os/exceptasm]
-    - [auto, hasm, os/interrupt]
-    - [auto, hasm, os/setintmask]
+    - [auto, hasm, os/__osDisableInt]
+    - [auto, hasm, os/__osRestoreInt]
+    - [auto, hasm, os/osSetIntMask]
     - [auto, c, os/pimgr, egcs -O2 -mips2]
     - [auto, c, os/epirawdma, egcs -O2 -mips2]
     - [auto, c, os/epiwrite, egcs -O2 -mips2]
@@ -253,11 +255,11 @@ segments:
     - [auto, c, os/xlitob, egcs -O2 -mips2]
     - [auto, c, os/xldtob, egcs -O2 -mips2]
     - [auto, c, os/jammesg, egcs -O0 -mips2]
-    - [auto, hasm, os/getcause]
-    - [auto, hasm, os/getsr]
+    - [auto, hasm, os/__osGetCause]
+    - [auto, hasm, os/__osGetSR]
     - [auto, hasm, os/setfpccsr]
     - [auto, hasm, os/setsr]
-    - [auto, hasm, os/setwatchlo]
+    - [auto, hasm, os/__osSetWatchLo]
     - [auto, c, os/_setcompare, egcs -O0 -mips3 -mgp64 -mfp64]
     - [auto, c, os/sp, egcs -O2 -mips2]
     - [auto, c, os/spgetstat, egcs -O2 -mips2]
@@ -269,7 +271,7 @@ segments:
     - [auto, c, os/destroythread, egcs -O0 -mips2]
     - [auto, c, os/getthreadpri, egcs -O0 -mips2]
     - [auto, c, os/yieldthread, egcs -O0 -mips2]
-    - [auto, hasm, os/maptlbrdb]
+    - [auto, hasm, os/osMapTLBRdb]
     - [auto, c, os/vi, egcs -O2 -mips2]
     - [auto, c, os/vigetcurrcontext, egcs -O2 -mips2]
     - [auto, c, os/vimodepallan1, egcs -O2 -mips2]
@@ -292,7 +294,9 @@ segments:
     - [auto, c, os/strcpy, gcc_272 -O1]
     - [auto, hasm, os/decode_yay0]
     - [0x49830, pm_effect_loads, effect_loads]
+    - [auto, c, bss/main_post_bss]
     - [auto, c, battle/battle]
+    - [auto, c, battle/battle_bss]
     - [0x4D140, bin, rspboot]
     - [0x4D210, bin, n_aspMain_text]
     - start: 0x4DE70
@@ -332,7 +336,7 @@ segments:
     start: 0x74570
     vram: 0x800da8e0
     subsegments:
-    - [auto, hasm, bss2]
+    - [auto, c, bss/engine1_pre_bss]
     - [auto, c, npc_collision]
     - [auto, c, 77480]
     - [auto, c, 7B440]
@@ -342,12 +346,12 @@ segments:
     - [auto, c, inventory]
     - [auto, c, world/actions]
     - [auto, c, world/partners]
-    - [auto, hasm, bss2_2]
     - [auto, c, global_hud_scripts]
     - [auto, c, 891b0_len_fb0]
     - [auto, c, 8a160_len_700]
     - [auto, c, 8a860_len_3f30]
     - [auto, c, draw_box]
+    - [auto, c, bss/engine1_post_bss]
     - start: 0x90570
       type: .data
       name: global_hud_scripts
@@ -767,7 +771,7 @@ segments:
     start: 0xa4990
     vram: 0x8010dab0
     subsegments:
-    - [auto, hasm, bss3]
+    - [auto, c, bss/engine2_pre_bss]
     - [auto, c, entity]
     - [auto, c, game_states]
     - [auto, c, model]
@@ -790,6 +794,7 @@ segments:
     - [auto, c, sprite_shading]
     - [auto, c, audio/sfx]
     - [auto, c, audio/e0b30_len_b80]
+    - [auto, c, bss/engine2_post_bss]
     - start: 0xE1D60
       type: .data
       name: screen_overlays

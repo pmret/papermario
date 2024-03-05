@@ -1,5 +1,7 @@
+#include "macros.h"
 #include <PR/osint.h>
 
+__OSEventState __osEventStateTab[OS_NUM_EVENTS] OSALIGNED(8);
 u32 __osPreNMI = 0;
 
 void osSetEventMesg(OSEvent event, OSMesgQueue *mq, OSMesg msg) {

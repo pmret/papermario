@@ -2,10 +2,10 @@
 #include "PR/os_internal_flash.h"
 #include "macros.h"
 
-u32 __osFlashID[4] ALIGNED(8);
-OSIoMesg __osFlashMsg ALIGNED(8);
-OSMesgQueue __osFlashMessageQ ALIGNED(8);
-OSPiHandle __osFlashHandler ALIGNED(8);
+u32 __osFlashID[4] OSALIGNED(8);
+OSIoMesg __osFlashMsg OSALIGNED(8);
+OSMesgQueue __osFlashMessageQ OSALIGNED(8);
+OSPiHandle __osFlashHandler OSALIGNED(8);
 OSMesg __osFlashMsgBuf[1];
 s32 __osFlashVersion;
 

@@ -39,29 +39,27 @@
 #include "partner/twink.h"
 #include "sprite/npc/Twink.h"
 
-extern s32 D_8010CD20;
-
-SHIFT_BSS PartnerStatus gPartnerStatus;
-SHIFT_BSS Npc* wPartnerNpc;
+PartnerStatus gPartnerStatus;
+Npc* wPartnerNpc;
 
 BSS s32 PartnerCommandState;
 BSS PlayerPathElement gPlayerMoveHistory[40];
 BSS s32 gPlayerMoveHistoryIndex;
 BSS s32 D_8010CFBC;
-SHIFT_BSS f32 wPartnerTetherDistance;
-SHIFT_BSS s32 D_8010CFC4;
-SHIFT_BSS s16 wPartnerFollowState;
-SHIFT_BSS s16 D_8010CFCA;
-SHIFT_BSS s16 D_8010CFCC;
-SHIFT_BSS s16 D_8010CFCE;
-SHIFT_BSS s32 wPartnerNpcIndex;
-SHIFT_BSS Evt* wPartnerCurrentScript;
-SHIFT_BSS s32 wCurrentPartnerId;
-SHIFT_BSS s32 wPartnerCurrentScriptID;
-SHIFT_BSS s32 D_8010CFE0;
-SHIFT_BSS s32 NextPartnerID;
-SHIFT_BSS s32 NextPartnerCommand;
-SHIFT_BSS WorldPartner* wPartner;
+BSS f32 wPartnerTetherDistance;
+BSS s32 D_8010CFC4;
+BSS s16 wPartnerFollowState;
+BSS s16 D_8010CFCA;
+BSS s16 D_8010CFCC;
+BSS s16 D_8010CFCE;
+BSS s32 wPartnerNpcIndex;
+BSS Evt* wPartnerCurrentScript;
+BSS s32 wCurrentPartnerId;
+BSS s32 wPartnerCurrentScriptID;
+BSS s32 D_8010CFE0;
+BSS s32 NextPartnerID;
+BSS s32 NextPartnerCommand;
+BSS WorldPartner* wPartner;
 
 extern HudScript HES_Partner0;
 extern HudScript HES_Goombario;
@@ -159,13 +157,6 @@ s32 world_partner_can_open_menus_default(Npc* partner);
 void _use_partner_ability(void);
 void partner_flying_follow_player(Npc*);
 void partner_move_to_goal(Npc*, s32);
-
-typedef struct UseItemStruct {
-    /* 0x00 */ u8* dmaStart;
-    /* 0x04 */ u8* dmaEnd;
-    /* 0x08 */ EvtScript* main;
-    /* 0x0C */ s32 unk_0C;
-} UseItemStruct;
 
 // Partner icons
 HudScript* wPartnerHudScripts[] = {
@@ -514,22 +505,6 @@ PartnerAnimations gPartnerAnimations[] = {
 };
 
 f32 D_800F84F8 = 0.0f;
-
-s32 use_consumable(s32 invSlot) {
-    Evt* script;
-
-    D_8010CD20 = invSlot;
-    invSlot = gPlayerData.invItems[invSlot];
-    dma_copy(UseItemDmaArgs.dmaStart, UseItemDmaArgs.dmaEnd, world_use_item_VRAM);
-    script = start_script(UseItemDmaArgs.main, EVT_PRIORITY_1, 0);
-    script->varTable[10] = invSlot;
-    return script->id;
-}
-
-void remove_consumable(void) {
-    gPlayerData.invItems[D_8010CD20] = ITEM_NONE;
-    sort_items();
-}
 
 s32 func_800EA4B0(s32 collisionID) {
     s32 ret = TRUE;

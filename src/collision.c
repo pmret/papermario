@@ -32,23 +32,24 @@ typedef struct HitAssetCollider {
     /* 0x08 */ s32 trianglesOffset;
 } HitAssetCollider; // size = 0x0C
 
-SHIFT_BSS CollisionData gCollisionData;
-SHIFT_BSS CollisionData gZoneCollisionData;
-SHIFT_BSS f32 gCollisionRayStartX;
-SHIFT_BSS f32 gCollisionRayStartY;
-SHIFT_BSS f32 gCollisionRayStartZ;
-SHIFT_BSS f32 gCollisionRayDirX;
-SHIFT_BSS f32 gCollisionRayDirY;
-SHIFT_BSS f32 gCollisionRayDirZ;
-SHIFT_BSS f32 gCollisionPointX;
-SHIFT_BSS f32 gCollisionPointY;
-SHIFT_BSS f32 gCollisionPointZ;
-SHIFT_BSS f32 gCollisionRayLength;
-SHIFT_BSS f32 gCollisionNormalX;
-SHIFT_BSS f32 gCollisionNormalY;
-SHIFT_BSS f32 gCollisionNormalZ;
-SHIFT_BSS ColliderBackupEntry* gCollisionDataBackup;
-SHIFT_BSS ColliderBackupEntry* gCollisionDataZoneBackup;
+CollisionData gCollisionData;
+CollisionData gZoneCollisionData;
+
+BSS f32 gCollisionRayStartX;
+BSS f32 gCollisionRayStartY;
+BSS f32 gCollisionRayStartZ;
+BSS f32 gCollisionRayDirX;
+BSS f32 gCollisionRayDirY;
+BSS f32 gCollisionRayDirZ;
+BSS f32 gCollisionPointX;
+BSS f32 gCollisionPointY;
+BSS f32 gCollisionPointZ;
+BSS f32 gCollisionRayLength;
+BSS f32 gCollisionNormalX;
+BSS f32 gCollisionNormalY;
+BSS f32 gCollisionNormalZ;
+BSS ColliderBackupEntry* gCollisionDataBackup;
+BSS ColliderBackupEntry* gCollisionDataZoneBackup;
 
 extern Vec3s gEntityColliderFaces[];
 extern Vec3f gEntityColliderNormals[];

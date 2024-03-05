@@ -3,7 +3,7 @@
 #include "PR/controller.h"
 #include "PR/rmon.h"
 
-__OSInode __osPfsInodeCache ALIGNED(8);
+__OSInode __osPfsInodeCache OSALIGNED(8);
 s32 __osPfsInodeCacheChannel = -1;
 u8 __osPfsInodeCacheBank = 250;
 

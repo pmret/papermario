@@ -3,11 +3,13 @@
 
 NOP_FIX
 
+NUSched nusched;
 NUScPreNMIFunc nuScPreNMIFunc = NULL;
+u8 nuScPreNMIFlag;
 
 char nusys_version[] = "NuSystem2.05";
 
-u32 nuScRetraceCounter = (u32) nusys_version; // wtf?
+u32 nuScRetraceCounter = (u32) nusys_version;
 
 void nuScEventHandler(void);
 void nuScExecuteAudio(void);
@@ -15,9 +17,9 @@ void nuScExecuteGraphics(void);
 void nuScEventBroadcast(NUScMsg* msg);
 void nuScWaitTaskReady(NUScTask* task);
 
-extern u64 nuScStack[NU_SC_STACK_SIZE / sizeof(u64)];
-extern u64 nuScAudioStack[NU_SC_STACK_SIZE / sizeof(u64)];
-extern u64 nuScGraphicsStack[NU_SC_STACK_SIZE / sizeof(u64)];
+static u64 nuScStack[NU_SC_STACK_SIZE / sizeof(u64)];
+static u64 nuScAudioStack[NU_SC_STACK_SIZE / sizeof(u64)];
+static u64 nuScGraphicsStack[NU_SC_STACK_SIZE / sizeof(u64)];
 
 void nuScCreateScheduler(u8 videoMode, u8 numFields) {
     nusched.curGraphicsTask =       NULL;

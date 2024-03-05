@@ -26,8 +26,8 @@ s32 D_801094A8 = 0;
 s16 D_801094AC = 4;
 s16 D_801094AE = 4;
 
-SHIFT_BSS s32 PrevTimeInAir;
-SHIFT_BSS s32 LandedTimeInAir;
+BSS s32 PrevTimeInAir;
+BSS s32 LandedTimeInAir;
 
 void func_800EFD00(void) {
 }

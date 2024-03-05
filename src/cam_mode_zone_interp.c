@@ -1,11 +1,11 @@
 #include "common.h"
 
-SHIFT_BSS CamConfiguration gCurrentCamConfiguration;
-SHIFT_BSS f32 D_800A08DC;
-SHIFT_BSS f32 D_800A08E0;
-SHIFT_BSS f32 D_800A08E4;
-SHIFT_BSS f32 D_800A08E8;
-SHIFT_BSS f32 D_800A08EC;
+BSS CamConfiguration gCurrentCamConfiguration;
+BSS f32 D_800A08DC;
+BSS f32 D_800A08E0;
+BSS f32 D_800A08E4;
+BSS f32 D_800A08E8;
+BSS f32 D_800A08EC;
 
 void cam_interp_lookat_pos(Camera* camera, f32 arg1, f32 arg2, s16 arg3);
 void func_8003034C(Camera* camera);

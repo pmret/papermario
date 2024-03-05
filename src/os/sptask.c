@@ -9,7 +9,7 @@
         ptr = (void *)osVirtualToPhysical(ptr); \
     }
 
-extern OSTask tmp_task;
+static OSTask tmp_task;
 
 #if VERSION_IQUE
 static OSTask* _VirtualToPhysicalTask(OSTask* intp) {
