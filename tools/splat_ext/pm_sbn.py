@@ -281,7 +281,7 @@ class SBN:
                 return id
             elif sbn_file.file_name().split('_')[0] == filename.split('_')[0]:
                 suggestion = sbn_file.file_name()
-        if (suggestion == ""):
+        if suggestion == "":
             raise Exception(f"File not found: {filename} - is it in the file_id_map?")
         else:
             raise Exception(f"File not found: {filename} - is it in the file_id_map? (Did you mean to name the file: {suggestion}?)")
