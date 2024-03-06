@@ -79,7 +79,7 @@ EvtScript N(EVS_EnterMap) = {
 
 BombTrigger N(D_802432A8_D904F8) = {
     .pos = { 13.0f, 0.0f, -80.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(D_802432B8_D90508) = {

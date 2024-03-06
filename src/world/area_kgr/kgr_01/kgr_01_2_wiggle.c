@@ -85,7 +85,7 @@ API_CALLABLE(N(GetEffectiveTongueOffset)) {
         percent = 100.0f;
     }
     amplitude = (amplitude * percent) / 100.0f;
-    script->varTable[0] = Float_TO_FIXED(amplitude);
+    script->varTable[0] = FLOAT_TO_FIXED(amplitude);
     return ApiStatus_DONE2;
 }
 

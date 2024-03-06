@@ -105,8 +105,8 @@
 - { priority: 136, name: Letter, template: STANDARD_ITEM, icon: key/Letter, pair: true }
 - { priority: 137, name: Unused_089, template: STANDARD_ITEM, icon: key/LongLetter, pair: true }
 - { priority: 138, name: Unused_08A, template: STANDARD_ITEM, icon: key/TealLetter, pair: true }
-- { priority: 139, name: Unused_08B, template: STANDARD_ITEM, icon: key/Postcard, pair: true }
-- { priority: 140, name: Unused_08C, template: STANDARD_ITEM, icon: key/EmptyBook, pair: true }
+- { priority: 139, name: Postcard, template: STANDARD_ITEM, icon: key/Postcard, pair: true }
+- { priority: 140, name: EmptyBook, template: STANDARD_ITEM, icon: key/EmptyBook, pair: true }
 - { priority: 141, name: Unused_08D, template: STANDARD_ITEM, icon: unused/item_08D, pair: true }
 - { priority: 142, name: Unused_08E, template: STANDARD_ITEM, icon: unused/item_08E, pair: true }
 - { priority: 143, name: Unused_08F, template: STANDARD_ITEM, icon: unused/item_08F, pair: true }

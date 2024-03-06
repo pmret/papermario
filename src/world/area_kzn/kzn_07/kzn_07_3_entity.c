@@ -37,7 +37,7 @@ EvtScript N(EVS_MakeEntities) = {
     Call(AssignChestFlag, GF_KZN07_GiantChest)
     Exec(N(EVS_MonitorChestStatus))
     IfEq(GF_KZN07_Hammer3Block, FALSE)
-        Call(MakeEntity, Ref(Entity_Hammer3Block_WideZ), 175, 35, -185, 0, MAKE_ENTITY_END)
+        Call(MakeEntity, Ref(Entity_Hammer3BlockWideZ), 175, 35, -185, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnBreakBlock)))
     EndIf
     Call(CreatePushBlockGrid, 0, 15, 5, -62, 0, 35, 0)

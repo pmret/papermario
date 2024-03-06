@@ -180,7 +180,7 @@ API_CALLABLE(N(AnimateBarricadeParts)) {
 
 BombTrigger N(BombPos_Barricade) = {
     .pos = { -520.0f, 0.0f, 0.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_Scene_BreakBarricade) = {

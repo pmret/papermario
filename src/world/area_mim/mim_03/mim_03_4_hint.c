@@ -12,9 +12,9 @@ API_CALLABLE(N(GetFlowerNormal)) {
 
     N(GetFirstTriangleNormal)(mdl->modelNode->displayData->displayList, &x, &y, &z);
 
-    evt_set_variable(script, *args++, Float_TO_FIXED(x));
-    evt_set_variable(script, *args++, Float_TO_FIXED(y));
-    evt_set_variable(script, *args++, Float_TO_FIXED(z));
+    evt_set_variable(script, *args++, FLOAT_TO_FIXED(x));
+    evt_set_variable(script, *args++, FLOAT_TO_FIXED(y));
+    evt_set_variable(script, *args++, FLOAT_TO_FIXED(z));
     return ApiStatus_DONE2;
 }
 

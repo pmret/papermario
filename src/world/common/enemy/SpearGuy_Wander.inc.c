@@ -90,10 +90,3 @@ NpcSettings N(NpcSettings_SpearGuy_Hitbox) = {
     .onDefeat = &N(EVS_NpcDefeat_SpearGuy_Hitbox),
     .actionFlags = AI_ACTION_08,
 };
-
-#define SPEAR_GUY_WANDER_NPC_DATA \
-    .settings = &N(NpcSettings_SpearGuy_Wander), \
-    .drops = SPEAR_GUY_DROPS, \
-    .animations = SPEAR_GUY_ANIMS, \
-    .extraAnimations = N(ExtraAnims_SpearGuy), \
-    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION, \

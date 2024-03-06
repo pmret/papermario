@@ -55,7 +55,7 @@ void action_update_hit_fire(void) {
         s32 colliderID;
 
         playerStatus->pos.y = player_check_collision_below(player_fall_distance(), &colliderID);
-        if (colliderID >= 0) {
+        if (colliderID > NO_COLLIDER) {
             colliderID = get_collider_flags(colliderID); //TODO surfaceType
             set_action_state(ACTION_STATE_LAND);
             playerStatus->blinkTimer = 60;

@@ -220,7 +220,7 @@ ShakeTreeConfig N(ShakeTree_CrystalTree) = {
 
 BombTrigger N(BombPos_CrystalTree) = {
     .pos = { -309.0f, 0.0f, 31.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_SetupFoliage) = {

@@ -22,7 +22,7 @@ LavaReset N(SafeFloorColliders)[] = {
     { .colliderID = COLLIDER_o158, .pos = { -540.0,    0.0,   50.0 }},
     { .colliderID = COLLIDER_o132, .pos = {   60.0,    0.0,   50.0 }},
     { .colliderID = COLLIDER_o223, .pos = {   60.0,    0.0,   50.0 }},
-    { .colliderID = -1 }
+    { .colliderID = NO_COLLIDER }
 };
 
 EvtScript N(EVS_Main) = {

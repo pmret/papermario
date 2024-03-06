@@ -600,7 +600,7 @@ s32 N(test_first_strike)(Npc* bombette, Npc* enemy) {
     f32 x, y, z, dist;
     f32 angle, distance;
     f32 enemyRadius, blastRadius;
-    s32 hitResult;
+    s32 hasCollision;
     s32 enemyHit;
 
     if (!N(IsBlasting)) {
@@ -633,9 +633,9 @@ s32 N(test_first_strike)(Npc* bombette, Npc* enemy) {
     x = bombette->pos.x;
     y = bombette->pos.y;
     z = bombette->pos.z;
-    hitResult = npc_test_move_taller_with_slipping(0, &x, &y, &z, distance, angle, 35.0f, 2.0f);
+    hasCollision = npc_test_move_taller_with_slipping(0, &x, &y, &z, distance, angle, 35.0f, 2.0f);
 
-    if (hitResult) {
+    if (hasCollision) {
         return FALSE;
     }
 

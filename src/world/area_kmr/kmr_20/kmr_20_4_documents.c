@@ -11,10 +11,10 @@
 #define SET_PACKED_FLAG(base, i) \
     get_global_byte((i / 8) + EVT_INDEX_OF_GAME_BYTE(base)) | (1 << (i % 8))
 
-extern HudScript HES_Item_Unused_08B;
-extern HudScript HES_Item_Unused_08B_disabled;
-extern HudScript HES_Item_Unused_08C;
-extern HudScript HES_Item_Unused_08C_disabled;
+extern HudScript HES_Item_Postcard;
+extern HudScript HES_Item_Postcard_disabled;
+extern HudScript HES_Item_EmptyBook;
+extern HudScript HES_Item_EmptyBook_disabled;
 
 BSS PopupMenu N(ChooseDocumentPopupMenu);
 BSS IMG_BIN N(LetterBackgroundImg)[0x3D86] ALIGNED(16);
@@ -168,7 +168,7 @@ API_CALLABLE(N(ReadLetters)){
                 }
 
                 if (cond) {
-                    menu->ptrIcon[numEntries] = &HES_Item_Unused_08B;
+                    menu->ptrIcon[numEntries] = &HES_Item_Postcard;
                     menu->userIndex[numEntries] = i;
                     menu->enabled[numEntries] = TRUE;
                     menu->nameMsg[numEntries] = N(LetterSenderStringIDs)[i];
@@ -178,7 +178,7 @@ API_CALLABLE(N(ReadLetters)){
                     menu->value[numEntries] = 0;
                     if (temp) {
                         menu->value[numEntries] = 1;
-                        menu->ptrIcon[numEntries] = &HES_Item_Unused_08B_disabled;
+                        menu->ptrIcon[numEntries] = &HES_Item_Postcard_disabled;
                     }
                     numEntries++;
                 }
@@ -349,7 +349,7 @@ API_CALLABLE(N(ReadDiary)){
             numEntries = 0;
             for (i = 0; i < ARRAY_COUNT(N(DiaryStoryRequirements)); i++) {
                 if (evt_get_variable(NULL, GB_StoryProgress) >= N(DiaryStoryRequirements)[i]) {
-                    menu->ptrIcon[numEntries] = &HES_Item_Unused_08C;
+                    menu->ptrIcon[numEntries] = &HES_Item_EmptyBook;
                     menu->userIndex[numEntries] = i;
                     menu->enabled[numEntries] = TRUE;
                     menu->nameMsg[numEntries] = 0;
@@ -359,7 +359,7 @@ API_CALLABLE(N(ReadDiary)){
                     menu->value[numEntries] = 0;
                     if (flags) {
                         menu->value[numEntries] = 1;
-                        menu->ptrIcon[numEntries] = &HES_Item_Unused_08C_disabled;
+                        menu->ptrIcon[numEntries] = &HES_Item_EmptyBook_disabled;
                     }
                     numEntries++;
                 }

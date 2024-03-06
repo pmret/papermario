@@ -43,14 +43,14 @@
 #define EVT_LIMIT               -270000000 // TODO better name
 
  // This fixes an issue with fixed point numbers not being correct. Potentially a truncation vs round difference.
-#define Float_ROUND(x) ((x) >=0 ? (f64)((x) + 0.9) : (f64)(x))
-#define Float(DOUBLE)  ((Bytecode)Float_ROUND(((DOUBLE) * 1024.0f)) - EVT_FIXED_OFFSET)
+#define FLOAT_ROUND(x) ((x) >=0 ? (f64)((x) + 0.9) : (f64)(x))
+#define Float(DOUBLE)  ((Bytecode)FLOAT_ROUND(((DOUBLE) * 1024.0f)) - EVT_FIXED_OFFSET)
 
 /// Progammatically converts Float --> f32
 #define EVT_FIXED_TO_FLOAT(x) ({f32 var = (x) + EVT_FIXED_OFFSET; var /= 1024.0f; var;})
 
 /// Progammatically converts f32 --> Float
-#define Float_TO_FIXED(x) (((x) * 1024.0f) + -EVT_FIXED_OFFSET)
+#define FLOAT_TO_FIXED(x) (((x) * 1024.0f) + -EVT_FIXED_OFFSET)
 
 /// Address/pointer constant.
 #define Ref(sym) ((Bytecode) &(sym))

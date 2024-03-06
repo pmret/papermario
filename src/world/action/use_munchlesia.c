@@ -58,7 +58,7 @@ void action_update_use_munchlesia(void) {
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
             gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
             hitPosY = player_check_collision_below(Munchlesia_LaunchVelocity, &colliderID);
-            if (colliderID >= 0) {
+            if (colliderID > NO_COLLIDER) {
                 sfx_play_sound_at_player(SOUND_TRIP, SOUND_SPACE_DEFAULT);
                 suggest_player_anim_always_forward(ANIM_MarioW2_Collapse);
                 playerStatus->pos.y = hitPosY;

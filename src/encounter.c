@@ -84,7 +84,7 @@ EnemyDrops DefaultEnemyDrops = {
         {
             .item = ITEM_MUSHROOM,
             .weight = 50,
-            .unk_04 = -1,
+            .flagIdx = -1,
         },
     },
     .heartDrops = {

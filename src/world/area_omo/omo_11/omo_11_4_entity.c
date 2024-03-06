@@ -16,7 +16,7 @@ EvtScript N(EVS_MakeEntities) = {
     Call(AssignBlockFlag, GF_OMO11_HiddenItem_SnowmanDoll)
     Call(MakeEntity, Ref(Entity_YellowBlock), -100, 60, -45, 0, ITEM_COIN, MAKE_ENTITY_END)
     Call(AssignBlockFlag, GF_OMO11_ItemBlock_CoinB)
-    Call(MakeEntity, Ref(Entity_HiddenRedBlock), -150, 60, -45, 0, ITEM_DEEP_FOCUS2, MAKE_ENTITY_END)
+    Call(MakeEntity, Ref(Entity_HiddenRedBlock), -150, 60, -45, 0, ITEM_DEEP_FOCUS_B, MAKE_ENTITY_END)
     Call(AssignBlockFlag, GF_OMO11_HiddenBadge_DeepFocus2)
     Call(MakeEntity, Ref(Entity_YellowBlock), -200, 60, -45, 0, ITEM_COIN, MAKE_ENTITY_END)
     Call(AssignBlockFlag, GF_OMO11_ItemBlock_CoinA)

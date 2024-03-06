@@ -14,7 +14,7 @@ TweesterPath* N(TweesterPaths)[] = {
     PTR_LIST_END
 };
 
-EvtScript N(EVS_RideTweester) = {
+EvtScript N(EVS_GotoMap_sbk_32_4) = {
     Call(DisablePlayerInput, TRUE)
     Call(DisablePlayerPhysics, TRUE)
     Call(GotoMap, Ref("sbk_32"), sbk_32_ENTRY_4)
@@ -25,7 +25,7 @@ EvtScript N(EVS_RideTweester) = {
 
 EvtScript N(EVS_MakeEntities) = {
     Call(MakeEntity, Ref(Entity_Tweester), 327, 0, 8, 0, Ref(N(TweesterPaths)), MAKE_ENTITY_END)
-    Call(AssignScript, Ref(N(EVS_RideTweester)))
+    Call(AssignScript, Ref(N(EVS_GotoMap_sbk_32_4)))
     Return
     End
 };

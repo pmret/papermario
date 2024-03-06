@@ -98,7 +98,7 @@ LavaReset N(SafeFloorColliders)[] = {
     { .colliderID = COLLIDER_o322, .pos = {  -10.0, 0.0, 100.0 }},
     { .colliderID = COLLIDER_o446, .pos = {  -10.0, 0.0, 100.0 }},
     { .colliderID = COLLIDER_o454, .pos = {  -90.0, 0.0, -45.0 }},
-    { .colliderID = -1 }
+    { .colliderID = NO_COLLIDER }
 };
 
 // unused

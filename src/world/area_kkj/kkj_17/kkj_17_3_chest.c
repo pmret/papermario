@@ -31,7 +31,7 @@ EvtScript N(EVS_Chest_ShowGotItem) = {
 s32 N(ChestItems)[] = {
     ITEM_POWER_RUSH,
     ITEM_SHOOTING_STAR,
-    ITEM_DEEP_FOCUS1,
+    ITEM_DEEP_FOCUS_A,
     ITEM_LAST_STAND,
     ITEM_JAMMIN_JELLY,
 };

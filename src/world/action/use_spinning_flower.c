@@ -12,9 +12,9 @@ BSS f32 SpinningFlower_AngleToCenter;
 BSS f32 D_802B6EF0;
 BSS f32 D_802B6EF4;
 
-extern s16 D_802BCE30;
-extern s16 D_802BCE32;
-extern s16 D_802BCE34;
+extern s16 FlowerGoalPositionY;
+extern s16 FlowerGoalPositionZ;
+extern s16 FlowerGoalPositionX;
 
 enum {
     SUBSTATE_ATTRACT    = 1,
@@ -221,11 +221,11 @@ void action_update_use_spinning_flower(void) {
             gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
             gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
-            distToCenter = fabsf(dist2D(D_802BCE34, D_802BCE32, playerStatus->pos.x, playerStatus->pos.z));
+            distToCenter = fabsf(dist2D(FlowerGoalPositionX, FlowerGoalPositionZ, playerStatus->pos.x, playerStatus->pos.z));
             if (distToCenter > 40.0f) {
-                if (D_802BCE30 + 30 < playerStatus->pos.y) {
+                if (FlowerGoalPositionY + 30 < playerStatus->pos.y) {
                     playerStatus->actionSubstate++; // SUBSTATE_ASCEND_B
-                    inputAngle = atan2(playerStatus->pos.x, playerStatus->pos.z, D_802BCE34, D_802BCE32);
+                    inputAngle = atan2(playerStatus->pos.x, playerStatus->pos.z, FlowerGoalPositionX, FlowerGoalPositionZ);
                     sin_cos_rad(DEG_TO_RAD(inputAngle), &dx, &dz);
                     playerStatus->curStateTime = 64;
                     SpinningFlower_AngleToCenter = inputAngle;
