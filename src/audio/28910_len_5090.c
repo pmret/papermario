@@ -90,7 +90,7 @@ void au_bgm_update_main(BGMPlayer* player) {
                             BGMDrumInfo* drum = &player->drumsInfo[i];
                             player->drums[i] = drum;
                         }
-                        for (; i < 12; i++) {
+                        for (; i < ARRAY_COUNT(player->drums); i++) {
                             player->drums[i] = player->drums[0];
                         }
                     } else {
@@ -1799,7 +1799,7 @@ void au_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
             if (arg1 == 0) {
                 if (track->unk_4E != 0) {
                     track->unk_4E = 0;
-                    for (i = 0; i < 16; i++) {
+                    for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
                         BGMPlayerTrack* otherTrack = &player->tracks[i];
                         if (player->proxMixVolume == 0x7F) {
                             if (otherTrack->unk_4F != 0) {

@@ -2040,14 +2040,14 @@ Bytecode* evt_find_label(Evt* script, s32 arg1) {
         return (Bytecode*) arg1;
     }
 
-    for (i = 0; i < 16; i++) {
+    for (i = 0; i < ARRAY_COUNT(script->labelIndices); i++) {
         if (script->labelIndices[i] == arg1) {
             ret = script->labelPositions[i];
             break;
         }
     }
 
-    ASSERT(i < 16);
+    ASSERT(i < ARRAY_COUNT(script->labelIndices));
     return ret;
 }
 

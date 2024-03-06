@@ -80,13 +80,13 @@ void bgm_reset_volume(void) {
 
 //TODO refactor out constants
 void bgm_update_music_settings(void) {
-    MusicSettings* music = &gMusicSettings[0];
+    MusicSettings* music = gMusicSettings;
     s32 i = 0;
     s16 state2 = 2;
     s16 flag4 = MUSIC_SETTINGS_FLAG_4;
     s32 flags;
 
-    for (i; i < 2; i++, music++) {
+    for (i; i < ARRAY_COUNT(gMusicSettings); i++, music++) {
         switch (music->state) {
         case 0:
             break;
@@ -360,7 +360,7 @@ s32 func_8014AD40(void) {
     MusicSettings* settings = gMusicSettings;
     s32 i;
 
-    for (i = 0; i < 2; i++, settings++) {
+    for (i = 0; i < ARRAY_COUNT(gMusicSettings); i++, settings++) {
         if (!(settings->flags & MUSIC_SETTINGS_FLAG_1)) {
             continue;
         }

@@ -91,7 +91,7 @@ API_CALLABLE(N(func_80245028_8058A8)) {
     if (isInitialCall) {
         numEntries = 0;
 
-        for (i = 1; i < 12; i++) {
+        for (i = 1; i < ARRAY_COUNT(PartnerIDFromMenuIndex); i++) {
             partnerID = PartnerIDFromMenuIndex[i];
             if (playerData->partners[partnerID].enabled && partnerID != PARTNER_GOOMPA) {
                 temp_s2 = &gPartnerPopupProperties[partnerID];

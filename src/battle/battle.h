@@ -252,7 +252,7 @@ typedef struct PlayerCelebrationAnimOptions {
     /* 0x00 */ s16 randomChance;
     /* 0x02 */ s16 hpBasedChance;
     /* 0x04 */ s32 options[80];
-} PlayerCelebrationAnimOptions; // size = 0x8
+} PlayerCelebrationAnimOptions; // size = 0x144
 
 #ifndef NO_EXTERN_VARIABLES
 

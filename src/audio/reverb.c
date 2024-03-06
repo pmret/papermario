@@ -116,7 +116,7 @@ static void _init_lpfilter(AuLowPass* lp) {
     timeConstant = timeConstant >> 1;
     lp->fgain = SCALE - timeConstant;
 
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < ARRAY_COUNT(lp->fccoef) / 2; i++) {
         lp->fccoef[i] = 0;
     }
 
@@ -125,7 +125,7 @@ static void _init_lpfilter(AuLowPass* lp) {
     // ith value is 16384 * (timeConstant / 16384)^(i-7)
     // ex: i = 9 --> timeConstant^2 / 16384
     attenuation = ((f64)timeConstant / SCALE);
-    for (i = 9; i < 16; i++) {
+    for (i = 9; i < ARRAY_COUNT(lp->fccoef); i++) {
         attenuation *= ((f64)timeConstant /SCALE);
         lp->fccoef[i] = attenuation * SCALE;
     }

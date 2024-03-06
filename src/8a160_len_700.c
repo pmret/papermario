@@ -72,7 +72,7 @@ void func_800F0D5C(void) {
     Unk8a160Outer* outer = &D_8010D000[0];
     s32 i;
 
-    for (i = 0; i < 1; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_8010D000); i++) {
         outer[i].subs[0].alive = FALSE;
     }
 }

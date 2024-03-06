@@ -124,7 +124,7 @@ EffectInstance* firework_rocket_main(s32 variation, f32 centerX, f32 centerY, f3
     data->unk_3C = 150;
     data->unk_40 = 255;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ROCKET_BUF_SIZE; i++) {
         data->rocketX[i] = data->pos.x;
         data->rocketY[i] = data->pos.y - 1000.0f;
         data->rocketZ[i] = data->pos.z;
@@ -189,7 +189,7 @@ void firework_rocket_update(EffectInstance* effect) {
     data->rocketVelY[i] = (rand_int(10) - 5) * 0.1f;
     data->rocketVelZ[i] = (rand_int(10) - 5) * 0.1f;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ROCKET_BUF_SIZE; i++) {
         data->rocketX[i] += data->rocketVelX[i];
         data->rocketY[i] += data->rocketVelY[i];
         data->rocketZ[i] += data->rocketVelZ[i];

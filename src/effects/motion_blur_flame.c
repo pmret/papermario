@@ -157,7 +157,7 @@ void motion_blur_flame_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, D_E00A29D0[temp_a2]);
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < UNK_ARRAY_SIZE_1; i++) {
         f32 temp_f12 = data->unk_1C[i];
         f32 temp_f14 = data->unk_2C[i];
         f32 temp_f0 = data->unk_3C[i];

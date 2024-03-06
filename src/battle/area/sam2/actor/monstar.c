@@ -158,12 +158,13 @@ ImgFXOverlayTexture N(MonstarDetailTexture) = {
 };
 
 API_CALLABLE(N(UpdateMonstarImgFX)) {
+    #define RGBA_BUF_SIZE 20
     ActorPart* part = get_actor_part(get_actor(script->owner1.actorID), 1);
     s32 i;
-    u8 colR[20];
-    u8 colG[20];
-    u8 colB[20];
-    u8 colA[20];
+    u8 colR[RGBA_BUF_SIZE];
+    u8 colG[RGBA_BUF_SIZE];
+    u8 colB[RGBA_BUF_SIZE];
+    u8 colA[RGBA_BUF_SIZE];
 
     if (isInitialCall) {
         script->functionTemp[1] = 0;
@@ -178,17 +179,19 @@ API_CALLABLE(N(UpdateMonstarImgFX)) {
         script->functionTemp[1] %= 360;
     }
 
-    for (i = 0; i < 20; i++) {
+    for (i = 0; i < RGBA_BUF_SIZE; i++) {
         colR[i] = (cosine(script->functionTemp[1] + i * 25) + 1.0) * 56.0;
         colG[i] = (cosine(script->functionTemp[1] + i * 25 + 45) + 1.0) * 56.0;
         colB[i] = (cosine(script->functionTemp[1] + i * 25 + 90) + 1.0) * 56.0;
     }
 
-    for (i = 0; i < 20; i++) {
+    for (i = 0; i < RGBA_BUF_SIZE; i++) {
         set_npc_imgfx_comp(part->spriteInstanceID, 0, IMGFX_COLOR_BUF_SET_MODULATE, i, colR[i] << 0x18 | colG[i] << 0x10 | colB[i] << 8 | 255, 0, 255, 0);
     }
 
     return ApiStatus_BLOCK;
+    
+    #undef RGBA_BUF_SIZE
 }
 
 #include "common/Dist3D.inc.c"
