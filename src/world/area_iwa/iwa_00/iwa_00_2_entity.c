@@ -9,7 +9,7 @@ EvtScript N(EVS_OnSmashBlock) = {
 
 EvtScript N(EVS_MakeEntities) = {
     IfEq(GF_IWA01_Hammer1Block, FALSE)
-        Call(MakeEntity, Ref(Entity_Hammer1Block_WideZ), 900, -30, 220, 0, MAKE_ENTITY_END)
+        Call(MakeEntity, Ref(Entity_Hammer1BlockWideZ), 900, -30, 220, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnSmashBlock)))
     EndIf
     Call(MakeItemEntity, ITEM_COIN, 405, 25, 25, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_IWA00_Item_CoinA)

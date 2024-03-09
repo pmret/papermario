@@ -30,7 +30,7 @@ EvtScript N(EVS_UpdateTexPan_Lava) = {
 LavaReset N(SafeFloorColliders)[] = {
     { .colliderID = COLLIDER_o919, .pos = { -30.0, 125.0, -15.0 }},
     { .colliderID = COLLIDER_o870, .pos = {  30.0, 150.0,   0.0 }},
-    { .colliderID = -1 }
+    { .colliderID = NO_COLLIDER }
 };
 
 EvtScript N(EVS_DetermineLavaLevel) = {
@@ -149,7 +149,7 @@ EvtScript N(EVS_UpdateLavaWaves) = {
 
 BombTrigger N(WeakWallBombTrigger) = {
     .pos = { 175.0, 150.0, 15.0 },
-    .radius = 0.0
+    .diameter = 0.0
 };
 
 EvtScript N(EVS_OnBreakWall) = {

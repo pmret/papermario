@@ -124,7 +124,7 @@ EvtScript N(EVS_Sushie_ShoutAtChildren) = {
 
 BombTrigger N(BombPos_SushieTree) = {
     .pos = { 30.0f, 0.0f, -110.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"

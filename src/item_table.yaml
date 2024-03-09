@@ -1588,7 +1588,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- PeachKey1:
+- PeachKey:
     category: KEY
     nameMsg: MSG_ItemName_PeachKey
     fullDescMsg: MSG_ItemFullDesc_PeachKey
@@ -1798,7 +1798,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- PeachKey2:
+- UnusedPeachKey:
     category: KEY
     nameMsg: MSG_ItemName_PeachKey
     fullDescMsg: MSG_ItemFullDesc_PeachKey
@@ -1828,7 +1828,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- PrisonKey1:
+- PrisonKey:
     category: KEY
     nameMsg: MSG_ItemName_PrisonKey
     fullDescMsg: MSG_ItemFullDesc_PrisonKey
@@ -1873,7 +1873,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- PrisonKey2:
+- UnusedPrisonKey1:
     category: KEY
     nameMsg: MSG_ItemName_PrisonKey
     fullDescMsg: MSG_ItemFullDesc_PrisonKey
@@ -1888,7 +1888,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- PrisonKey3:
+- UnusedPrisonKey2:
     category: KEY
     nameMsg: MSG_ItemName_PrisonKey
     fullDescMsg: MSG_ItemFullDesc_PrisonKey
@@ -1903,7 +1903,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- PrisonKey4:
+- UnusedPrisonKey3:
     category: KEY
     nameMsg: MSG_ItemName_PrisonKey
     fullDescMsg: MSG_ItemFullDesc_PrisonKey
@@ -3268,7 +3268,7 @@
     moveID: MOVE_NONE
     potencyA: 15
     potencyB: 15
-- JellyShroom1:
+- JellyShroom:
     category: CONSUMABLE
     nameMsg: MSG_ItemName_JellyShroom
     fullDescMsg: MSG_ItemFullDesc_JellyShroom
@@ -3283,7 +3283,7 @@
     moveID: MOVE_NONE
     potencyA: 5
     potencyB: 50
-- JellyShroom2:
+- UnusedJellyShroom1:
     category: UNUSED
     nameMsg: MSG_ItemName_JellyShroom
     fullDescMsg: MSG_ItemFullDesc_JellyShroom
@@ -3298,7 +3298,7 @@
     moveID: MOVE_NONE
     potencyA: 5
     potencyB: 50
-- JellyShroom3:
+- UnusedJellyShroom2:
     category: UNUSED
     nameMsg: MSG_ItemName_JellyShroom
     fullDescMsg: MSG_ItemFullDesc_JellyShroom
@@ -3313,7 +3313,7 @@
     moveID: MOVE_NONE
     potencyA: 5
     potencyB: 50
-- JellyShroom4:
+- UnusedJellyShroom3:
     category: UNUSED
     nameMsg: MSG_ItemName_JellyShroom
     fullDescMsg: MSG_ItemFullDesc_JellyShroom
@@ -3328,7 +3328,7 @@
     moveID: MOVE_NONE
     potencyA: 5
     potencyB: 50
-- JellyShroom5:
+- UnusedJellyShroom4:
     category: UNUSED
     nameMsg: MSG_ItemName_JellyShroom
     fullDescMsg: MSG_ItemFullDesc_JellyShroom
@@ -3343,7 +3343,7 @@
     moveID: MOVE_NONE
     potencyA: 5
     potencyB: 50
-- JellyShroom6:
+- UnusedJellyShroom5:
     category: UNUSED
     nameMsg: MSG_ItemName_JellyShroom
     fullDescMsg: MSG_ItemFullDesc_JellyShroom
@@ -4378,7 +4378,7 @@
     moveID: MOVE_MEGA_JUMP
     potencyA: 0
     potencyB: 0
-- PowerSmash1:
+- PowerSmash:
     category: BADGE
     nameMsg: MSG_ItemName_PowerSmash
     fullDescMsg: MSG_ItemFullDesc_PowerSmash
@@ -4423,7 +4423,7 @@
     moveID: MOVE_MEGA_SMASH
     potencyA: 0
     potencyB: 0
-- PowerSmash2:
+- UnusedPowerSmash1:
     category: BADGE
     nameMsg: MSG_ItemName_PowerSmash
     fullDescMsg: MSG_ItemFullDesc_PowerSmash
@@ -4438,7 +4438,7 @@
     moveID: MOVE_MEGA_SMASH
     potencyA: 0
     potencyB: 0
-- PowerSmash3:
+- UnusedPowerSmash2:
     category: BADGE
     nameMsg: MSG_ItemName_PowerSmash
     fullDescMsg: MSG_ItemFullDesc_PowerSmash
@@ -4453,7 +4453,7 @@
     moveID: MOVE_MEGA_SMASH
     potencyA: 0
     potencyB: 0
-- DeepFocus1:
+- DeepFocusA:
     category: BADGE
     nameMsg: MSG_ItemName_DeepFocus
     fullDescMsg: MSG_ItemFullDesc_DeepFocus
@@ -4588,7 +4588,7 @@
     moveID: MOVE_EARTHQUAKE_JUMP
     potencyA: 0
     potencyB: 0
-- DeepFocus2:
+- DeepFocusB:
     category: BADGE
     nameMsg: MSG_ItemName_DeepFocus
     fullDescMsg: MSG_ItemFullDesc_DeepFocus
@@ -4603,7 +4603,7 @@
     moveID: MOVE_DEEP_FOCUS
     potencyA: 0
     potencyB: 0
-- DeepFocus3:
+- DeepFocusC:
     category: BADGE
     nameMsg: MSG_ItemName_DeepFocus
     fullDescMsg: MSG_ItemFullDesc_DeepFocus
@@ -5053,7 +5053,7 @@
     moveID: MOVE_HEALTHY_HEALTHY
     potencyA: 0
     potencyB: 0
-- AttackFX_F2:
+- UnusedAttackFX_1:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXF
     fullDescMsg: MSG_ItemFullDesc_AttackFXF
@@ -5068,7 +5068,7 @@
     moveID: MOVE_ATTACK_FX_F
     potencyA: 0
     potencyB: 0
-- AttackFX_F3:
+- UnusedAttackFX_2:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXF
     fullDescMsg: MSG_ItemFullDesc_AttackFXF
@@ -5083,7 +5083,7 @@
     moveID: MOVE_ATTACK_FX_F
     potencyA: 0
     potencyB: 0
-- AttackFX_F4:
+- UnusedAttackFX_3:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXF
     fullDescMsg: MSG_ItemFullDesc_AttackFXF
@@ -5098,7 +5098,7 @@
     moveID: MOVE_ATTACK_FX_F
     potencyA: 0
     potencyB: 0
-- AttackFX_F5:
+- UnusedAttackFX_4:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXF
     fullDescMsg: MSG_ItemFullDesc_AttackFXF

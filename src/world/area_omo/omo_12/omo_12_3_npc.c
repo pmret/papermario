@@ -188,7 +188,7 @@ Vec3f N(WattLeftFlightPath)[] = {
 
 BombTrigger N(BombPos_Lantern_Unused) = {
     .pos = { 0.0f, 0.0f, 20.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_Scene_ReleaseWatt) = {

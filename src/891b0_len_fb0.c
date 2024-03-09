@@ -26,8 +26,8 @@ s32 D_801094A8 = 0;
 s16 D_801094AC = 4;
 s16 D_801094AE = 4;
 
-BSS s32 D_8010CFF0;
-BSS s32 D_8010CFF4;
+BSS s32 PrevTimeInAir;
+BSS s32 LandedTimeInAir;
 
 void func_800EFD00(void) {
 }
@@ -48,10 +48,10 @@ void handle_floor_behavior(void) {
     }
 
     if (playerStatus->actionState == ACTION_STATE_LAND && playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
-        D_8010CFF4 = D_8010CFF0;
+        LandedTimeInAir = PrevTimeInAir;
     }
 
-    D_8010CFF0 = playerStatus->timeInAir;
+    PrevTimeInAir = playerStatus->timeInAir;
 
     switch (colliderType) {
         case SURFACE_TYPE_FLOWERS:
@@ -88,7 +88,7 @@ void surface_standard_behavior(void) {
 
     if (playerStatus->actionState == ACTION_STATE_LAND &&
         (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) &&
-        D_8010CFF4 >= 10)
+        LandedTimeInAir >= 10)
     {
         x = playerStatus->pos.x;
         y = playerStatus->pos.y + 0.0f;
@@ -222,7 +222,7 @@ void surface_cloud_behavior(void) {
 
     if (((playerStatus->actionState == ACTION_STATE_LAND && (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED)) ||
         ((playerStatus->actionState == ACTION_STATE_SPIN_POUND || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) && (playerStatus->flags & PS_FLAG_SPECIAL_LAND))) &&
-        D_8010CFF4 >= 10)
+        LandedTimeInAir >= 10)
     {
         fx_cloud_puff(
             playerStatus->pos.x,

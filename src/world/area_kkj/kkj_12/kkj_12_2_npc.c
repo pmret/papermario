@@ -97,7 +97,7 @@ EvtScript N(EVS_NpcInteract_Koopatrol_02) = {
         Call(AdjustCam, CAM_DEFAULT, Float(5.0 / DT), 0, Float(350.0), Float(15.0), Float(-7.0))
         Call(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim09, ANIM_WorldKoopatrol_Anim02, 0, MSG_Peach_0144)
         Wait(10 * DT)
-        Set(LVar0, ITEM_PEACH_KEY1)
+        Set(LVar0, ITEM_PEACH_KEY)
         Call(ShowGotItem, LVar0, TRUE, 0)
         Call(AddKeyItem, LVar0)
         Set(GF_KKJ11_TrickedGuard, TRUE)

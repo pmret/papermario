@@ -194,7 +194,7 @@ def generate_hud_scripts(fout: TextIOWrapper, hud_scripts: List[ItemHudScriptEnt
             fout.write("HudScript HES_Item_CoinSparkleE = HES_COIN_SPARKLE( 1, -8);\n")
             fout.write("HudScript HES_Item_CoinSparkleRandom = HES_TEMPLATE_COIN_SPARKLE();\n")
         elif entry.name == "StarPoint":
-            fout.write("HudScript HES_Item_SmallStarPoint = HES_TEMPLATE_SMALL_STAR_POINT();\n")
+            fout.write("HudScript HES_SmallStarPoint = HES_TEMPLATE_SMALL_STAR_POINT();\n")
     fout.write("\n")
 
     fout.write("s32 pad_after_item_hudscripts[] = { 0, 0 };\n")

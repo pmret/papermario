@@ -54,11 +54,11 @@ EvtScript N(EVS_BreakBlock_DropSpring) = {
     End
 };
 
-EvtScript N(EVS_OpenChest) = EVT_OPEN_CHEST_BADGE(ITEM_POWER_SMASH1, GF_TIK05_Chest_PowerSmash1);
+EvtScript N(EVS_OpenChest) = EVT_OPEN_CHEST_BADGE(ITEM_POWER_SMASH, GF_TIK05_Chest_PowerSmash);
 
 EvtScript N(EVS_MakeEntities) = {
     Call(MakeEntity, Ref(Entity_Chest), -185, 60, -25, 0, 0, MAKE_ENTITY_END)
-    Call(AssignChestFlag, GF_TIK05_Chest_PowerSmash1)
+    Call(AssignChestFlag, GF_TIK05_Chest_PowerSmash)
     Call(AssignScript, Ref(N(EVS_OpenChest)))
     Call(MakeEntity, Ref(Entity_BrickBlock), 25, 50, 0, 0, MAKE_ENTITY_END)
     Call(AssignScript, Ref(N(EVS_BreakBlock_DropSpring)))

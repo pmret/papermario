@@ -155,7 +155,7 @@ typedef struct NpcSettings {
 typedef struct ItemDrop {
     /* 0x00 */ s16 item;
     /* 0x02 */ s16 weight;
-    /* 0x04 */ s16 unk_04;
+    /* 0x04 */ s16 flagIdx;
 } ItemDrop; // size = 0x06
 
 /// @brief Describes heart/flower drop chances after defeating an Npc in the overworld.
@@ -239,7 +239,6 @@ typedef struct {
 typedef union {
     EnemyTerritoryWander wander;
     EnemyTerritoryPatrol patrol;
-    s32 temp[48]; // TODO: remove when old map data is replaced
     char PADDING[0xC0];
 } EnemyTerritory; // size = 0xC0
 

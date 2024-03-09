@@ -120,7 +120,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
 
 BombTrigger N(D_8024240C_9A33EC) = {
     .pos = { 255.0f, 50.0f, -80.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(D_8024241C_9A33FC) = {

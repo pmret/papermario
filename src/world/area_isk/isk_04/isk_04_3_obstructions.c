@@ -10,7 +10,7 @@ s32 N(ItemList_RuinsKey)[] = {
 
 BombTrigger N(BombPos_Wall) = {
     .pos = { 510.0f, 25.0f, -184.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_OnBlast_Wall) = {

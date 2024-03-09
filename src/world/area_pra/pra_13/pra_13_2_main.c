@@ -118,12 +118,12 @@ EvtScript N(EVS_EnterMap) = {
 
 BombTrigger N(BombPos_NearWall) = {
     .pos = { 487.0f, 0.0f, 80.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 BombTrigger N(BombPos_FarWall) = {
     .pos = { 487.0f, 0.0f, -80.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_BlastWall_Near) = {

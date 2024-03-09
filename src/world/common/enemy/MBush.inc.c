@@ -95,9 +95,6 @@ NpcSettings N(NpcSettings_MBush) = {
     .onDefeat = &N(EVS_NpcDefeat_MBush),
 };
 
-#define MBUSH_NPC_DATA \
-    .settings = &N(NpcSettings_MBush), \
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000, \
-    .drops = MBUSH_DROPS, \
-    .animations = MBUSH_ANIMS, \
-    .tattle = MSG_NpcTattle_MBush, \
+#define MBUSH_FLAGS \
+    ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | \
+    ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000

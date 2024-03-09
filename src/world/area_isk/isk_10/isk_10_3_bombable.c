@@ -3,12 +3,12 @@
 
 BombTrigger N(BombPos_UpperWall) = {
     .pos = { -593.0f, -520.0f, 104.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 BombTrigger N(BombPos_LowerWall) = {
     .pos = { -569.0f, -780.0f, -99.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_OnBlast_UpperWall) = {

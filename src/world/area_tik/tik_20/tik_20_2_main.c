@@ -27,7 +27,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 LavaReset N(SafeFloorColliders)[] = {
     { .colliderID = COLLIDER_yuka, .pos = { -190.0,   30.0,  -85.0 }},
     { .colliderID = COLLIDER_yuka2, .pos = {  200.0,   30.0,  -70.0 }},
-    { .colliderID = -1 }
+    { .colliderID = NO_COLLIDER }
 };
 
 #define DROPLET_MODEL MODEL_sizuku

@@ -86,7 +86,7 @@ void action_update_sliding(void) {
             posY = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
             hitID = player_raycast_below_cam_relative(playerStatus, &posX, &posY, &posZ, &depth, &hitRx, &hitRy, &hitDirX, &hitDirZ);
             D_802B6798 = hitRy;
-            if (hitID >= 0) {
+            if (hitID > NO_COLLIDER) {
                 collisionStatus = &gCollisionStatus;
                 surfaceType = get_collider_flags(hitID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                 if (surfaceType == SURFACE_TYPE_SLIDE) {
@@ -113,7 +113,7 @@ void action_update_sliding(void) {
             posZ = playerStatus->pos.z;
             posY = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
             hitID = player_raycast_below_cam_relative(playerStatus, &posX, &posY, &posZ, &depth, &hitRx, &hitRy, &hitDirX, &hitDirZ);
-            if (hitID >= 0) {
+            if (hitID > NO_COLLIDER) {
                 speed = playerStatus->curSpeed / 3.0f;
                 if (speed < 0.01) {
                     playerStatus->curSpeed = 0.0f;
@@ -147,7 +147,7 @@ void action_update_sliding(void) {
                 playerStatus->curSpeed = 0.0f;
             }
             playerStatus->pos.y = player_check_collision_below(player_fall_distance(), &hitID);
-            if (hitID >= 0) {
+            if (hitID > NO_COLLIDER) {
                 SlideLaunchSpeed = -1;
                 suggest_player_anim_always_forward(ANIM_MarioW2_Collapse);
                 sfx_play_sound_at_player(SOUND_TRIP, SOUND_SPACE_DEFAULT);
