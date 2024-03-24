@@ -1,17 +1,7 @@
 from splat.segtypes.n64.segment import N64Segment
-from splat.segtypes.n64.palette import iter_in_groups
-from splat.util.color import unpack_color
+from splat.segtypes.n64.palette import N64SegPalette
 from splat.util import options
 import png  # type: ignore
-
-
-def parse_palette(data):
-    palette = []
-
-    for a, b in iter_in_groups(data, 2):
-        palette.append(unpack_color([a, b]))
-
-    return palette
 
 
 class N64SegPm_charset_palettes(N64Segment):
@@ -34,7 +24,7 @@ class N64SegPm_charset_palettes(N64Segment):
         self.palettes = []
 
         for i in range(0, self.size, 0x10):
-            palette = parse_palette(data[i : i + 0x10])
+            palette = N64SegPalette.parse_palette_bytes(data[i : i + 0x10])
             self.palettes.append(palette)
 
     def split(self, rom_bytes):

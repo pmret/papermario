@@ -69,7 +69,7 @@ def write_ninja_rules(
 
     CPPFLAGS_272 = CPPFLAGS_COMMON + " -nostdinc"
 
-    CPPFLAGS_EGCS = CPPFLAGS_COMMON + " -D__USE_ISOC99 -DBBPLAYER -nostdinc"
+    CPPFLAGS_EGCS = CPPFLAGS_COMMON + " -D__USE_ISOC99 -nostdinc"
 
     CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
 
@@ -643,6 +643,13 @@ class Configure:
 
             if isinstance(seg, splat.segtypes.n64.header.N64SegHeader):
                 build(entry.object_path, entry.src_paths, "as")
+            elif isinstance(seg, splat.segtypes.common.hasm.CommonSegHasm):
+                cppflags = f"-DVERSION_{self.version.upper()}"
+
+                if version == "ique" and seg.name.startswith("os/"):
+                    cppflags += " -DBBPLAYER"
+
+                build(entry.object_path, entry.src_paths, "as", variables={"cppflags": cppflags})
             elif isinstance(seg, splat.segtypes.common.asm.CommonSegAsm) or (
                 isinstance(seg, splat.segtypes.common.data.CommonSegData)
                 and not seg.type[0] == "."
@@ -696,6 +703,14 @@ class Configure:
 
                 if task == "cc_modern":
                     cppflags += " -DMODERN_COMPILER"
+
+                if version == "ique":
+                    if "nusys" in entry.src_paths[0].parts:
+                        pass
+                    elif "os" in entry.src_paths[0].parts:
+                        cppflags += " -DBBPLAYER"
+                    elif entry.src_paths[0].parts[-2] == "bss":
+                        cppflags += " -DBBPLAYER"
 
                 encoding = "CP932"  # similar to SHIFT-JIS, but includes backslash and tilde
                 if version == "ique":

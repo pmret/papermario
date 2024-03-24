@@ -625,22 +625,22 @@ EvtScript N(EVS_DamageMachine) = {
 
 BombTrigger N(Machine_BombTrigger_01) = {
     .pos = { 5.0f, 0.0f, -10.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 BombTrigger N(Machine_BombTrigger_02) = {
     .pos = { -5.0f, 0.0f, -20.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 BombTrigger N(Machine_BombTrigger_03) = {
     .pos = { 50.0f, 0.0f, -10.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 BombTrigger N(Machine_BombTrigger_04) = {
     .pos = { 105.0f, 0.0f, -10.0f },
-    .radius = 0.0f
+    .diameter = 0.0f
 };
 
 EvtScript N(EVS_SetupMachine) = {

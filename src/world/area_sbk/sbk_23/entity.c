@@ -1,7 +1,7 @@
 #include "sbk_23.h"
 #include "entity.h"
 
-TweesterPath N(D_802403C0_93AB20) = {
+TweesterPath N(DefaultTweesterPath) = {
     -65, 0, 217,
     -262, 0, -64,
     57, 0, -286,
@@ -9,12 +9,12 @@ TweesterPath N(D_802403C0_93AB20) = {
     TWEESTER_PATH_LOOP
 };
 
-TweesterPath* N(D_802403F4_93AB54)[] = {
-    &N(D_802403C0_93AB20),
+TweesterPath* N(TweesterPaths)[] = {
+    &N(DefaultTweesterPath),
     PTR_LIST_END
 };
 
-EvtScript N(D_802403FC_93AB5C) = {
+EvtScript N(EVS_GotoMap_sbk_14_4) = {
     Call(DisablePlayerInput, TRUE)
     Call(DisablePlayerPhysics, TRUE)
     Call(GotoMap, Ref("sbk_14"), sbk_14_ENTRY_4)
@@ -24,8 +24,8 @@ EvtScript N(D_802403FC_93AB5C) = {
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    Call(MakeEntity, Ref(Entity_Tweester), 327, 0, 8, 0, Ref(N(D_802403F4_93AB54)), MAKE_ENTITY_END)
-    Call(AssignScript, Ref(N(D_802403FC_93AB5C)))
+    Call(MakeEntity, Ref(Entity_Tweester), 327, 0, 8, 0, Ref(N(TweesterPaths)), MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(EVS_GotoMap_sbk_14_4)))
     Return
     End
 };

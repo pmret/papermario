@@ -155,7 +155,7 @@ typedef struct NpcSettings {
 typedef struct ItemDrop {
     /* 0x00 */ s16 item;
     /* 0x02 */ s16 weight;
-    /* 0x04 */ s16 unk_04;
+    /* 0x04 */ s16 flagIdx;
 } ItemDrop; // size = 0x06
 
 /// @brief Describes heart/flower drop chances after defeating an Npc in the overworld.
@@ -239,7 +239,6 @@ typedef struct {
 typedef union {
     EnemyTerritoryWander wander;
     EnemyTerritoryPatrol patrol;
-    s32 temp[48]; // TODO: remove when old map data is replaced
     char PADDING[0xC0];
 } EnemyTerritory; // size = 0xC0
 
@@ -416,11 +415,14 @@ typedef struct EncounterStatus {
     /* 0x0A8 */ FieldStatus unusedAttack2;
     /* 0x0AC */ FieldStatus unusedAttack3;
     /* 0x0B0 */ s32 defeatFlags[60][12];
-    /* 0xFB0 */ s16 recentMaps[2];
-    /* 0xFB4 */ char unk_FB4[4];
-} EncounterStatus; // size = 0xFB8
+    /* 0xBF0 */ s16 recentMaps[2];
+} EncounterStatus; // size = 0xBF4
+
+#ifndef NO_EXTERN_VARIABLES
 
 extern EncounterStatus gCurrentEncounter;
+
+#endif
 
 s32 basic_ai_check_player_dist(EnemyDetectVolume* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
 

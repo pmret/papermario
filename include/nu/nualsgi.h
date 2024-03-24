@@ -186,6 +186,8 @@ typedef struct st_SndState {
 typedef void (*NUAuPreNMIFunc)(NUScMsg,u32);	/* PRENMI callback function */
 typedef void (*NUAuMgrFunc)(void);		/* Acmd callback function */
 
+#ifndef NO_EXTERN_VARIABLES
+
 /*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/
 /* extern variables 							*/
@@ -194,11 +196,15 @@ typedef void (*NUAuMgrFunc)(void);		/* Acmd callback function */
 /*--------------------------------------*/
 /*  audio variables 			*/
 /*--------------------------------------*/
+
+// NOTE: some variables have been commented out due to
+// being declared static which affects bss reordering
+
 extern u64*		nuAuMgrStack;
 extern NUScTask		nuAuTask;		/* Audio task buffer*/
 extern s16*		nuAuBuffer_ptr[];		/* Audio buffer */
 extern NUScClient	nuAuClient;
-extern OSThread		nuAuMgrThread;
+//extern OSThread		nuAuMgrThread;
 extern u32		nuAuFrameCounter;		/* Frame counter */
 extern ALHeap		nuAuHeap;		/* Heap structure */
 extern NUAuSeqPlayer	nuAuSeqPlayer[];
@@ -219,7 +225,7 @@ extern OSMesgQueue	nuAuMesgQ;	/* Audio Manager queue	*/
 extern ALGlobals	nuAuGlobal;
 extern s16		nuAuDmaBufNum;
 extern s16		nuAuDmaBufSize;
-extern NUDMAState	nuAuDmaState;
+//extern NUDMAState	nuAuDmaState;
 extern NUDMABuffer*	nuAuDmaBuf;
 extern Acmd*		nuAuCmdListBuf; 	/* pointer of command list */
 extern u32		nuAuAcmdLen;
@@ -239,6 +245,8 @@ extern u32		nuAuDebAcmdLenMax;	/* Maximum length of the audio command list */
 
 extern s16		nuAuFrameSampleSize;	/* Number of samples created at one time */
 extern s16		nuAuExtraSampleSize;	/* Number of extra samples */
+
+#endif
 
 /*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/

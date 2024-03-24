@@ -67,10 +67,6 @@ AnimID N(ExtraAnims_HurtPlant)[] = {
     ANIM_LIST_END
 };
 
-#define HURT_PLANT_NPC_DATA \
-    .settings = &N(NpcSettings_HurtPlant), \
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000, \
-    .drops = HURT_PLANT_DROPS, \
-    .animations = HURT_PLANT_ANIMS, \
-    .extraAnimations = N(ExtraAnims_HurtPlant), \
-    .tattle = MSG_NpcTattle_HeartPlant, \
+#define HURT_PLANT_FLAGS \
+    ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | \
+    ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000

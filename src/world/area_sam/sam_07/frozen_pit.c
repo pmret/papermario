@@ -232,9 +232,9 @@ EvtScript N(EVS_UseGreenSwitch) = {
     End
 };
 
-BombTriggerF N(BombPos_Ice) = {
+BombTrigger N(BombPos_Ice) = {
     .pos = { -940.0f, -130.0f, -75.0f },
-    .radius = 60.0f
+    .diameter = 60.0f
 };
 
 EvtScript N(EVS_SetupPit) = {

@@ -88,7 +88,7 @@ API_CALLABLE(FinishPushBlockMotion) {
     PushBlockGrid* grid = script->varTablePtr[10];
     Entity* block = get_entity_by_index(script->varTable[11]);
     f32 hitX, hitY, hitZ, hitDepth;
-    s32 hitResult;
+    s32 hasCollision;
     s32 i, j;
 
     if (isInitialCall) {
@@ -100,10 +100,10 @@ API_CALLABLE(FinishPushBlockMotion) {
         hitY = block->pos.y + 5.0f;
 
         hitDepth = 35.0f;
-        hitResult = npc_raycast_down_sides(0, &hitX, &hitY, &hitZ, &hitDepth);
+        hasCollision = npc_raycast_down_sides(0, &hitX, &hitY, &hitZ, &hitDepth);
         script->functionTemp[1] = hitDepth;
 
-        if (hitResult != 0 && hitDepth <= 6.0f) {
+        if (hasCollision && hitDepth <= 6.0f) {
             return ApiStatus_DONE2;
         }
     }

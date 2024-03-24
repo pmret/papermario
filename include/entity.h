@@ -6,7 +6,7 @@
 typedef s32 EntityScript[];
 typedef s32 EntityModelScript[];
 
-extern s32 CreateEntityVarArgBuffer[4];
+extern s32 CreateEntityVarArgBuffer[];
 
 enum {
     ENTITY_SCRIPT_OP_End,
@@ -263,19 +263,21 @@ typedef struct PadlockData {
     /* 0x18 */ Gfx* shackleGfx;
 } PadlockData; // size = 0x1C
 
+#define FRAGMENT_BUF_SIZE 13
+
 typedef struct BoardedFloorData {
     /* 0x000 */ Gfx** fragmentsGfx;
     /* 0x004 */ f32 inititalY;
-    /* 0x008 */ s8 fragmentRebounds[13];
-    /* 0x015 */ u8 fragmentMoveAngle[13];
-    /* 0x022 */ u8 fragmentRotX[13];
-    /* 0x02F */ u8 fragmentRotY[13];
-    /* 0x03C */ u8 fragmentLateralSpeed[13];
-    /* 0x04C */ f32 fragmentRotSpeed[13];
-    /* 0x080 */ f32 fragmentPosX[13];
-    /* 0x0B4 */ f32 fragmentPosY[13];
-    /* 0x0E8 */ f32 fragmentPosZ[13];
-    /* 0x11C */ f32 fragmentFallSpeed[13];
+    /* 0x008 */ s8 fragmentRebounds[FRAGMENT_BUF_SIZE];
+    /* 0x015 */ u8 fragmentMoveAngle[FRAGMENT_BUF_SIZE];
+    /* 0x022 */ u8 fragmentRotX[FRAGMENT_BUF_SIZE];
+    /* 0x02F */ u8 fragmentRotY[FRAGMENT_BUF_SIZE];
+    /* 0x03C */ u8 fragmentLateralSpeed[FRAGMENT_BUF_SIZE];
+    /* 0x04C */ f32 fragmentRotSpeed[FRAGMENT_BUF_SIZE];
+    /* 0x080 */ f32 fragmentPosX[FRAGMENT_BUF_SIZE];
+    /* 0x0B4 */ f32 fragmentPosY[FRAGMENT_BUF_SIZE];
+    /* 0x0E8 */ f32 fragmentPosZ[FRAGMENT_BUF_SIZE];
+    /* 0x11C */ f32 fragmentFallSpeed[FRAGMENT_BUF_SIZE];
 } BoardedFloorData; // size = 0x150
 
 typedef struct BombableRockData {
@@ -360,9 +362,7 @@ typedef struct SpinningFlowerData {
     /* 0x14 */ f32 spinSpeed;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ char unk_1C[0x0C];
-    /* 0x28 */ s16 unk_28;
-    /* 0x2A */ s16 unk_2A;
-    /* 0x2C */ s16 unk_2C;
+    /* 0x28 */ Vec3s pos;
     /* 0x30 */ Mtx unk_30;
 } SpinningFlowerData; // size = 0x70
 
@@ -399,16 +399,16 @@ extern EntityBlueprint Entity_InertRedBlock;
 extern EntityBlueprint Entity_BrickBlock;
 extern EntityBlueprint Entity_MulticoinBlock;
 extern EntityBlueprint Entity_Hammer1Block;
-extern EntityBlueprint Entity_Hammer1Block_WideX;
-extern EntityBlueprint Entity_Hammer1Block_WideZ;
+extern EntityBlueprint Entity_Hammer1BlockWideX;
+extern EntityBlueprint Entity_Hammer1BlockWideZ;
 extern EntityBlueprint Entity_Hammer1BlockTiny;
 extern EntityBlueprint Entity_Hammer2Block;
-extern EntityBlueprint Entity_Hammer2Block_WideX;
-extern EntityBlueprint Entity_Hammer2Block_WideZ;
+extern EntityBlueprint Entity_Hammer2BlockWideX;
+extern EntityBlueprint Entity_Hammer2BlockWideZ;
 extern EntityBlueprint Entity_Hammer2BlockTiny;
 extern EntityBlueprint Entity_Hammer3Block;
-extern EntityBlueprint Entity_Hammer3Block_WideX;
-extern EntityBlueprint Entity_Hammer3Block_WideZ;
+extern EntityBlueprint Entity_Hammer3BlockWideX;
+extern EntityBlueprint Entity_Hammer3BlockWideZ;
 extern EntityBlueprint Entity_Hammer3BlockTiny;
 extern EntityBlueprint Entity_PushBlock;
 extern EntityBlueprint Entity_PowBlock;
@@ -433,7 +433,7 @@ extern EntityBlueprint Entity_PadlockRedFace;
 extern EntityBlueprint Entity_PadlockBlueFace;
 extern EntityBlueprint Entity_BoardedFloor;
 extern EntityBlueprint Entity_BombableRock;
-extern EntityBlueprint Entity_BombableRock2;
+extern EntityBlueprint Entity_BombableRockWide;
 extern EntityBlueprint Entity_Tweester;
 extern EntityBlueprint Entity_StarBoxLauncher;
 extern EntityBlueprint Entity_CymbalPlant;

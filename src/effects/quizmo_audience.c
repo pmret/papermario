@@ -103,7 +103,7 @@ EffectInstance* quizmo_audience_main(s32 arg0, f32 posX, f32 posY, f32 posZ) {
     data->pos.z = posZ;
     data->lifeTime = 0;
 
-    for(i = 0; i < 10; i++) {
+    for (i = 0; i < ARRAY_COUNT(data->compState); i++) {
         data->compState[i] = 0;
         data->compX[i] = data->compY[i] = 0.0f;
     }

@@ -21,7 +21,7 @@ void Entity_BoardedFloor_init_fragments(Entity* entity, Gfx** dlists, Mtx* matri
     entity->pos.y = data->inititalY;
     guTranslateF(mtxTrans, entity->pos.x, entity->pos.y, entity->pos.z);
 
-    for (i = 0; i < 12; i++) {
+    for (i = 0; i < FRAGMENT_BUF_SIZE - 1; i++) {
         guMtxL2F(mtxFragment, ENTITY_ADDR(entity, Mtx*, matrices++));
         guMtxCatF(mtxTrans, mtxFragment, mtxFragment);
         data->fragmentPosX[i] = mtxFragment[3][0];

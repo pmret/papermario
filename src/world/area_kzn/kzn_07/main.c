@@ -47,7 +47,7 @@ EvtScript N(EVS_SetupTexPanners) = {
 LavaReset N(SafeFloorColliders)[] = {
     { .colliderID = COLLIDER_o365, .pos = {  120.0, 0.0, 100.0 }},
     { .colliderID = COLLIDER_o411, .pos = { -120.0, 0.0, 100.0 }},
-    { .colliderID = -1 }
+    { .colliderID = NO_COLLIDER }
 };
 
 EvtScript N(EVS_Main) = {

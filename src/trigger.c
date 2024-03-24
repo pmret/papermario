@@ -1,9 +1,9 @@
 #include "common.h"
 
-SHIFT_BSS s16 gTriggerCount;
-SHIFT_BSS TriggerList wTriggerList;
-SHIFT_BSS TriggerList bTriggerList;
-SHIFT_BSS TriggerList* gCurrentTriggerListPtr;
+s16 gTriggerCount;
+BSS TriggerList wTriggerList;
+BSS TriggerList bTriggerList;
+BSS TriggerList* gCurrentTriggerListPtr;
 
 void default_trigger_on_activate(Trigger* self) {
     self->flags |= TRIGGER_ACTIVATED;
@@ -190,19 +190,19 @@ void update_triggers(void) {
         }
 
         if (listTrigger->flags & TRIGGER_POINT_BOMB) {
-            Vec4f* triggerPos;
+            BombTrigger* bombPos;
             f32 dist;
 
             if (collisionStatus->bombetteExploded < 0) {
                 continue;
             }
 
-            triggerPos = listTrigger->location.pos;
-            dist = dist3D(triggerPos->x, triggerPos->y, triggerPos->z,
+            bombPos = listTrigger->location.blast;
+            dist = dist3D(bombPos->pos.x, bombPos->pos.y, bombPos->pos.z,
                                 collisionStatus->bombetteExplosionPos.x, collisionStatus->bombetteExplosionPos.y,
                                 collisionStatus->bombetteExplosionPos.z);
 
-            if ((triggerPos->yaw * 0.5f) + 50.0f < dist) {
+            if ((bombPos->diameter * 0.5f) + 50.0f < dist) {
                 continue;
             }
         }

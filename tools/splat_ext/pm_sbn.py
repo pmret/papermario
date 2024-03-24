@@ -275,10 +275,18 @@ class SBN:
             f.write("\n")
 
     def lookup_file_id(self, filename: str) -> int:
+        suggestion = ""
         for id, sbn_file in enumerate(self.files):
             if sbn_file.file_name() == filename:
                 return id
-        raise Exception(f"File not found: {filename} - is it in the file_id_map?")
+            elif sbn_file.file_name().split("_")[0] == filename.split("_")[0]:
+                suggestion = sbn_file.file_name()
+        if suggestion == "":
+            raise Exception(f"File not found: {filename} - is it in the file_id_map?")
+        else:
+            raise Exception(
+                f"File not found: {filename} - is it in the file_id_map? (Did you mean to name the file: {suggestion}?)"
+            )
 
     def __str__(self) -> str:
         s = "SBN(\n"

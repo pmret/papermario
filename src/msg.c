@@ -55,12 +55,11 @@ void* D_PAL_8014AE50[] = {
 
 s16 gNextMessageBuffer = 0;
 
-//TODO Vtx
-ALIGNED(8) s32 gRewindArrowQuad[] = {
-    0xFFF00009, 0x00000000, 0x00000000, 0xFFFFFFFF,
-    0x00100009, 0x00000000, 0x04000000, 0xFFFFFFFF,
-    0xFFF0FFF7, 0x00000000, 0x00000240, 0xFFFFFFFF,
-    0x0010FFF7, 0x00000000, 0x04000240, 0xFFFFFFFF,
+Vtx gRewindArrowQuad[] = {
+    { .v = { .ob = { 0xFFF0, 0x0009, 0x0000 }, .tc = { 0x0000, 0x0000 }, .cn = { 0xFF, 0xFF, 0xFF, 0xFF }}},
+    { .v = { .ob = { 0x0010, 0x0009, 0x0000 }, .tc = { 0x0400, 0x0000 }, .cn = { 0xFF, 0xFF, 0xFF, 0xFF }}},
+    { .v = { .ob = { 0xFFF0, 0xFFF7, 0x0000 }, .tc = { 0x0000, 0x0240 }, .cn = { 0xFF, 0xFF, 0xFF, 0xFF }}},
+    { .v = { .ob = { 0x0010, 0xFFF7, 0x0000 }, .tc = { 0x0400, 0x0240 }, .cn = { 0xFF, 0xFF, 0xFF, 0xFF }}},
 };
 
 Gfx D_8014C2D8[] = {
@@ -80,66 +79,43 @@ Gfx D_8014C2D8[] = {
     gsSPEndDisplayList(),
 };
 
-SHIFT_BSS s32 gMsgBGScrollAmtX;
-SHIFT_BSS u16 gMsgGlobalWaveCounter;
-SHIFT_BSS MessageImageDataList gMsgVarImages;
-SHIFT_BSS s32 gMsgBGScrollAmtY;
-SHIFT_BSS u8* D_8015131C;
-SHIFT_BSS Gfx* D_80151338;
-SHIFT_BSS char gMessageBuffers[2][1024];
-SHIFT_BSS u8 gMessageMsgVars[3][32];
-SHIFT_BSS s16 D_80155C98;
-SHIFT_BSS Mtx gMessageWindowProjMatrix[2];
-SHIFT_BSS MessageDrawState D_80155D20;
-SHIFT_BSS MessageDrawState* msg_drawState;
-SHIFT_BSS IMG_BIN D_80159B50[0x200];
-SHIFT_BSS PAL_BIN D_8015C7E0[0x10];
-SHIFT_BSS MessagePrintState gMessagePrinters[3];
-#if VERSION_IQUE
-SHIFT_BSS IMG_BIN D_801544A0[120][128];
+s32 gMsgBGScrollAmtX;
+u16 gMsgGlobalWaveCounter;
+MessageImageDataList gMsgVarImages;
+s32 gMsgBGScrollAmtY;
+u8* D_8015131C;
+Gfx* D_80151338;
+
+static char gMessageBuffers[2][1024];
+static MessagePrintState gMessagePrinters[3];
+#if VERSION_JP
+static s32 D_80155C38; 
 #endif
+static u8 gMessageMsgVars[3][32];
+static s16 D_80155C98;
+static Mtx gMessageWindowProjMatrix[2];
+
+IMG_BIN D_80159B50[0x200];
+PAL_BIN D_8015C7E0[0x10];
 
 extern s16 MsgStyleVerticalLineOffsets[];
 
-extern IMG_BIN ui_msg_bubble_left_png[];
-extern IMG_BIN ui_msg_bubble_mid_png[];
-extern IMG_BIN ui_msg_bubble_right_png[];
-extern IMG_BIN ui_msg_arrow_png[];
-extern unsigned char ui_msg_palettes[16][32];
-extern IMG_BIN ui_msg_sign_corner_topleft_png[];
-extern IMG_BIN ui_msg_sign_corner_topright_png[];
-extern IMG_BIN ui_msg_sign_corner_bottomleft_png[];
-extern IMG_BIN ui_msg_sign_corner_bottomright_png[];
-extern IMG_BIN ui_msg_lamppost_corner_bottomright_png[];
-extern IMG_BIN ui_msg_sign_side_top_png[];
-extern IMG_BIN ui_msg_sign_side_left_png[];
-extern IMG_BIN ui_msg_sign_side_right_png[];
-extern IMG_BIN ui_msg_sign_side_bottom_png[];
-extern IMG_BIN ui_msg_sign_fill_png[];
-extern PAL_BIN ui_msg_sign_pal[];
-extern PAL_BIN ui_msg_lamppost_pal[];
-extern IMG_BIN ui_msg_background_png[];
 extern IMG_BIN ui_msg_rewind_arrow_png[];
 extern PAL_BIN ui_msg_rewind_arrow_pal[];
 extern IMG_BIN ui_msg_star_png[];
 extern IMG_BIN ui_msg_star_silhouette_png[];
 
-extern IMG_BIN D_802ED550[];
-extern PAL_BIN D_802ED670[];
 extern IMG_BIN MsgCharImgTitle[];
 extern IMG_BIN MsgCharImgNormal[];
 extern MessageCharset* MsgCharsets[5];
 extern IMG_BIN MsgCharImgSubtitle[];
 extern PAL_BIN D_802F4560[80][8];
-
 #if VERSION_JP
 extern IMG_BIN MsgCharImgKana[];
 extern IMG_BIN MsgCharImgLatin[];
 extern IMG_BIN MsgCharImgMenuKana[];
 extern IMG_BIN MsgCharImgMenuLatin[];
 #endif
-
-extern s32 gMessageBoxFrameParts[2][16];
 
 extern IMG_BIN ui_point_right_png[];
 extern PAL_BIN ui_point_right_pal[];
@@ -206,15 +182,6 @@ void msg_draw_rewind_arrow(s32);
 void msg_draw_choice_pointer(MessagePrintState* printer);
 void draw_message_window(MessagePrintState* printer);
 void appendGfx_message(MessagePrintState*, s16, s16, u16, u16, u16, u8);
-void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, u16 lrY);
-void msg_reset_gfx_state(void);
-void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 charIndex, s32 palette, s32 posX,
-                   s32 posY);
-void msg_draw_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 posX, u16 posY, u16 sizeX, u16 sizeY);
-void msg_draw_speech_arrow(MessagePrintState* printer);
-void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 palette, s32 fading, s32 bgAlpha, s32 frameAlpha);
-void msg_draw_speech_bubble(MessagePrintState* printer, s16 posX, s16 posY, s16 straightWidth, s16 curveWidth,
-                            s16 height, f32 scaleX, f32 scaleY, u8 opacity, s32 arg9);
 
 void clear_character_set(void) {
     D_80155C98 = -1;
@@ -2000,10 +1967,6 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
         *numSpaces = spaceCount;
     }
 }
-
-#if !VERSION_JP
-static const f32 padding = 0.0f;
-#endif
 
 s32 get_msg_width(s32 msgID, u16 charset) {
     s32 width;

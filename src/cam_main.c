@@ -8,12 +8,12 @@ void render_models(void);
 void execute_render_tasks(void);
 void render_item_entities(void);
 
-SHIFT_BSS f32 D_8009A5EC;
-SHIFT_BSS s16 gCurrentCamID;
-SHIFT_BSS u16* nuGfxCfb_ptr;
-SHIFT_BSS Gfx* gMainGfxPos;
-SHIFT_BSS DisplayContext* gDisplayContext;
-SHIFT_BSS Camera gCameras[4];
+f32 D_8009A5EC;
+s16 gCurrentCamID;
+u16* nuGfxCfb_ptr;
+Gfx* gMainGfxPos;
+DisplayContext* gDisplayContext;
+Camera gCameras[4];
 
 void update_cameras(void) {
     s32 i;

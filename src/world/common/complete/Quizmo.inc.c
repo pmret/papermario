@@ -11,22 +11,22 @@
 
 #define QUIZMO_ANIMS \
 { \
-    ANIM_ChuckQuizmo_Idle, \
-    ANIM_ChuckQuizmo_Walk, \
-    ANIM_ChuckQuizmo_Run, \
-    ANIM_ChuckQuizmo_Run, \
-    ANIM_ChuckQuizmo_Idle, \
-    ANIM_ChuckQuizmo_Idle, \
-    ANIM_ChuckQuizmo_Still, \
-    ANIM_ChuckQuizmo_Still, \
-    ANIM_ChuckQuizmo_Run, \
-    ANIM_ChuckQuizmo_Run, \
-    ANIM_ChuckQuizmo_Run, \
-    ANIM_ChuckQuizmo_Run, \
-    ANIM_ChuckQuizmo_Run, \
-    ANIM_ChuckQuizmo_Run, \
-    ANIM_ChuckQuizmo_Run, \
-    ANIM_ChuckQuizmo_Run, \
+    .idle   = ANIM_ChuckQuizmo_Idle, \
+    .walk   = ANIM_ChuckQuizmo_Walk, \
+    .run    = ANIM_ChuckQuizmo_Run, \
+    .chase  = ANIM_ChuckQuizmo_Run, \
+    .anim_4 = ANIM_ChuckQuizmo_Idle, \
+    .anim_5 = ANIM_ChuckQuizmo_Idle, \
+    .death  = ANIM_ChuckQuizmo_Still, \
+    .hit    = ANIM_ChuckQuizmo_Still, \
+    .anim_8 = ANIM_ChuckQuizmo_Run, \
+    .anim_9 = ANIM_ChuckQuizmo_Run, \
+    .anim_A = ANIM_ChuckQuizmo_Run, \
+    .anim_B = ANIM_ChuckQuizmo_Run, \
+    .anim_C = ANIM_ChuckQuizmo_Run, \
+    .anim_D = ANIM_ChuckQuizmo_Run, \
+    .anim_E = ANIM_ChuckQuizmo_Run, \
+    .anim_F = ANIM_ChuckQuizmo_Run, \
 }
 
 extern s16 MessagePlural;
@@ -455,7 +455,7 @@ API_CALLABLE(N(Quizmo_GetCamVfov)) {
     Bytecode* args = script->ptrReadPos;
     s32 cameraID = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, *args++, Float_TO_FIXED(gCameras[cameraID].vfov));
+    evt_set_variable(script, *args++, FLOAT_TO_FIXED(gCameras[cameraID].vfov));
     return ApiStatus_DONE2;
 }
 

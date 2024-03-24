@@ -26,6 +26,7 @@ options:
   undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
   symbol_name_format: PAL_$VRAM
   symbol_name_format_no_rom: PAL_$VRAM_$SEG
+  hasm_in_src_path: True
 asset_stack:
   - pal
 segments:
@@ -39,7 +40,7 @@ segments:
     start: 0x71D80
     vram: 0x800D8C70
     subsegments:
-    - [auto, hasm, bss2]
+    - [auto, c, bss/engine1_pre_bss]
     - [auto, c, npc_collision]
     - [auto, c, 77480]
     - [auto, c, 7B440]
@@ -49,12 +50,12 @@ segments:
     - [auto, c, inventory]
     - [auto, c, world/actions] # DUMMY ROM
     - [auto, c, world/partners]
-    - [auto, hasm, bss2_2]
     - [auto, c, global_hud_scripts]
     - [auto, c, 891b0_len_fb0]
     - [auto, c, 8a160_len_700]
     - [auto, c, 8a860_len_3f30]
     - [auto, c, draw_box]
+    - [auto, c, bss/engine1_post_bss]
     - start: 0x8DA40
       type: .data
       name: global_hud_scripts
@@ -544,7 +545,7 @@ segments:
     start: 0xA4520
     vram: 0x8010E1D0
     subsegments:
-    - [auto, hasm, bss3]
+    - [auto, c, bss/engine2_pre_bss]
     - [auto, c, entity]
     - [auto, c, game_states]
     - [auto, c, model]
@@ -567,6 +568,7 @@ segments:
     - [auto, c, sprite_shading]
     - [auto, c, audio/sfx]
     - [auto, c, audio/e0b30_len_b80]
+    - [auto, c, bss/engine2_post_bss]
     - start: 0xE1610
       type: .data
       name: screen_overlays

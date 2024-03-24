@@ -21,7 +21,7 @@ f32 evt_fixed_var_to_float(Bytecode scriptVar) {
 }
 
 Bytecode evt_float_to_fixed_var(f32 value) {
-    // not equivalent to hte Float_TO_FIXED() macro due to the s32 cast
+    // not equivalent to the FLOAT_TO_FIXED() macro due to the s32 cast
     // occuring *before* the add here and *after* the add in the macro
     return (s32)(value * 1024.0f) + -EVT_FIXED_OFFSET;
 }
@@ -2040,14 +2040,14 @@ Bytecode* evt_find_label(Evt* script, s32 arg1) {
         return (Bytecode*) arg1;
     }
 
-    for (i = 0; i < 16; i++) {
+    for (i = 0; i < ARRAY_COUNT(script->labelIndices); i++) {
         if (script->labelIndices[i] == arg1) {
             ret = script->labelPositions[i];
             break;
         }
     }
 
-    ASSERT(i < 16);
+    ASSERT(i < ARRAY_COUNT(script->labelIndices));
     return ret;
 }
 

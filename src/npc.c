@@ -6,11 +6,11 @@
 #include "world/partners.h"
 #include "sprite/npc/WorldWatt.h"
 
-SHIFT_BSS s16 gNpcCount;
-SHIFT_BSS NpcList gWorldNpcList;
-SHIFT_BSS NpcList gBattleNpcList;
-SHIFT_BSS NpcList* gCurrentNpcListPtr;
-SHIFT_BSS b8 gNpcPlayerCollisionsEnabled;
+s16 gNpcCount;
+static NpcList gWorldNpcList;
+static NpcList gBattleNpcList;
+static NpcList* gCurrentNpcListPtr;
+static b8 gNpcPlayerCollisionsEnabled;
 
 #define PAL_ANIM_END 0xFF
 
@@ -1963,9 +1963,10 @@ void npc_remove_decoration_glow_behind(Npc* npc, s32 idx) {
 }
 
 void npc_update_decoration_charged(Npc* npc, s32 idx) {
-    u8 rbuf[20];
-    u8 gbuf[20];
-    u8 bbuf[20];
+    #define RGBA_BUF_SIZE 20
+    u8 rbuf[RGBA_BUF_SIZE];
+    u8 gbuf[RGBA_BUF_SIZE];
+    u8 bbuf[RGBA_BUF_SIZE];
     s32 color;
     s32 alpha;
     s32 i;
@@ -1980,18 +1981,19 @@ void npc_update_decoration_charged(Npc* npc, s32 idx) {
             npc->decorationGlowPhase[idx] %= 360;
         }
 
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < RGBA_BUF_SIZE; i++) {
             rbuf[i] = (cosine(npc->decorationGlowPhase[idx] + (25 * i)) + 1.0) * 80.0f;
             gbuf[i] = (cosine(npc->decorationGlowPhase[idx] + (25 * i) + 45) + 1.0) * 80.0f;
             bbuf[i] = (cosine(npc->decorationGlowPhase[idx] + (25 * i) + 90) + 1.0) * 80.0f;
         }
 
         alpha = 255;
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < RGBA_BUF_SIZE; i++) {
             color = (rbuf[i] << 24) | (gbuf[i] << 16) | (bbuf[i] << 8) | alpha;
             set_npc_imgfx_all(npc->spriteInstanceID, IMGFX_COLOR_BUF_SET_MODULATE, i, color, 0, 255, 0);
         }
     }
+    #undef RGBA_BUF_SIZE
 }
 
 void npc_remove_decoration_charged(Npc* npc, s32 idx) {

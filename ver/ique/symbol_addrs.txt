@@ -4087,7 +4087,7 @@ level_up_ROM_START = 0x7E7990;
 starpoint_ROM_START = 0x7F13D0;
 world_model_anim_kzn_01_ROM_START = 0x7FE390;
 
-HES_Item_SmallStarPoint = 0x8007FD28;
+HES_SmallStarPoint = 0x8007FD28;
 gMoveTable = 0x8008DCC0;
 nuGfxZBuffer = 0x800991A8;
 gCurrentStagePtr = 0x800DA444;

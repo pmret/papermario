@@ -14,7 +14,7 @@ TweesterPath* N(TweesterPaths)[] = {
     PTR_LIST_END
 };
 
-EvtScript N(D_802400FC_945ACC) = {
+EvtScript N(EVS_GotoMap_sbk_24_4) = {
     Call(DisablePlayerInput, TRUE)
     Call(DisablePlayerPhysics, TRUE)
     Call(GotoMap, Ref("sbk_24"), sbk_24_ENTRY_4)
@@ -27,7 +27,7 @@ EvtScript N(EVS_MakeEntities) = {
     Call(MakeEntity, Ref(Entity_HiddenPanel), 0, 0, 225, 0, MODEL_stage, MAKE_ENTITY_END)
     Call(AssignPanelFlag, GF_SBK33_HiddenPanel)
     Call(MakeEntity, Ref(Entity_Tweester), 327, 0, 8, 0, Ref(N(TweesterPaths)), MAKE_ENTITY_END)
-    Call(AssignScript, Ref(N(D_802400FC_945ACC)))
+    Call(AssignScript, Ref(N(EVS_GotoMap_sbk_24_4)))
     Return
     End
 };

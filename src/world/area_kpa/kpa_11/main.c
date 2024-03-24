@@ -64,7 +64,7 @@ EvtScript N(D_80240F84_A53844) = {
 
 LavaReset N(SafeFloorColliders)[] = {
     { .colliderID = COLLIDER_o1234, .pos = { 1400.0,   30.0, -325.0 }},
-    { .colliderID = -1 }
+    { .colliderID = NO_COLLIDER }
 };
 
 EvtScript N(EVS_Main) = {

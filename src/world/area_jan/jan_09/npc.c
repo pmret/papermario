@@ -33,14 +33,22 @@ NpcData N(NpcData_MBush_01) = {
     .id = NPC_MBush_01,
     .pos = { 335.0f, 0.0f, -40.0f },
     .yaw = 90,
-    MBUSH_NPC_DATA
+    .settings = &N(NpcSettings_MBush),
+    .flags = MBUSH_FLAGS,
+    .drops = MBUSH_DROPS,
+    .animations = MBUSH_ANIMS,
+    .tattle = MSG_NpcTattle_MBush,
 };
 
 NpcData N(NpcData_MBush_02) = {
     .id = NPC_MBush_02,
     .pos = { 415.0f, 0.0f, -65.0f },
     .yaw = 90,
-    MBUSH_NPC_DATA
+    .settings = &N(NpcSettings_MBush),
+    .flags = MBUSH_FLAGS,
+    .drops = MBUSH_DROPS,
+    .animations = MBUSH_ANIMS,
+    .tattle = MSG_NpcTattle_MBush,
 };
 
 NpcGroupList N(DefaultNPCs) = {

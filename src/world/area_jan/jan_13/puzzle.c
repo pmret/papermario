@@ -28,8 +28,8 @@ void N(setup_gfx_geyser)(void) {
 }
 
 API_CALLABLE(N(GetRatioFromPercent)) {
-    script->varTable[2] = Float_TO_FIXED(script->varTable[1] / 100.0f);
-    script->varTable[3] = Float_TO_FIXED(script->varTable[1] / 100.0f);
+    script->varTable[2] = FLOAT_TO_FIXED(script->varTable[1] / 100.0f);
+    script->varTable[3] = FLOAT_TO_FIXED(script->varTable[1] / 100.0f);
     return ApiStatus_DONE2;
 }
 

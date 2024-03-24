@@ -52,7 +52,7 @@ EvtScript N(EVS_StartTexPanners_Lava) = {
 
 LavaReset N(SafeFloorColliders)[] = {
     { .colliderID = COLLIDER_o382, .pos = { 50.0, 200.0, -185.0 }},
-    { .colliderID = -1 }
+    { .colliderID = NO_COLLIDER }
 };
 
 EvtScript N(EVS_EnterMap) = {

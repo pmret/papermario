@@ -13,7 +13,7 @@ EvtScript N(EVS_OnSmashBlock) = {
 
 EvtScript N(EVS_MakeEntities) = {
     IfEq(GF_IWA10_Hammer1Block, FALSE)
-        Call(MakeEntity, Ref(Entity_Hammer2Block_WideZ), -1040, 160, -425, 0, MAKE_ENTITY_END)
+        Call(MakeEntity, Ref(Entity_Hammer2BlockWideZ), -1040, 160, -425, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnSmashBlock)))
     EndIf
     EVT_MAKE_SUPER_BLOCK(-1350, 220, -210, 0)

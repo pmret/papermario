@@ -124,7 +124,7 @@ EvtScript N(EVS_MakeEntities) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH0_GATE_CRUSHED)
         CaseLt(STORY_CH0_SMASHED_GATE_BLOCK)
-            Call(MakeEntity, Ref(Entity_Hammer1Block_WideX), 326, 0, 261, 270, MAKE_ENTITY_END)
+            Call(MakeEntity, Ref(Entity_Hammer1BlockWideX), 326, 0, 261, 270, MAKE_ENTITY_END)
             Call(AssignScript, Ref(N(EVS_OnSmash_GateBlock)))
         CaseLt(STORY_CH0_TWINK_GAVE_LUCKY_STAR)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt2, COLLIDER_FLAGS_UPPER_MASK)

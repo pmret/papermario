@@ -84,7 +84,7 @@ EnemyDrops DefaultEnemyDrops = {
         {
             .item = ITEM_MUSHROOM,
             .weight = 50,
-            .unk_04 = -1,
+            .flagIdx = -1,
         },
     },
     .heartDrops = {
@@ -168,21 +168,22 @@ EvtScript EnemyNpcDefeat = {
     End
 };
 
-SHIFT_BSS s32 gEncounterState;
-SHIFT_BSS s32 gEncounterSubState;
-SHIFT_BSS EncounterStatus gCurrentEncounter;
-SHIFT_BSS s8 D_8009A63C;
-SHIFT_BSS s8 HasPreBattleSongPushed;
-SHIFT_BSS s16 gFirstStrikeMessagePos;
-SHIFT_BSS s8 D_8009A670;
-SHIFT_BSS s32 D_8009A678;
-SHIFT_BSS s32 D_800A0BA0;
-SHIFT_BSS f32 D_800A0BA4;
-SHIFT_BSS Evt* D_800A0BB0;
-SHIFT_BSS s32 D_800A0BB4;
-SHIFT_BSS s16 D_800A0BB8;
-SHIFT_BSS EffectInstance* WorldMerleeOrbEffect;
-SHIFT_BSS EffectInstance* WorldMerleeWaveEffect;
+s32 gEncounterState;
+s32 gEncounterSubState;
+EncounterStatus gCurrentEncounter;
+s8 D_8009A63C;
+s8 HasPreBattleSongPushed;
+s16 gFirstStrikeMessagePos;
+s8 D_8009A670;
+s32 D_8009A678;
+
+BSS s32 D_800A0BA0;
+BSS f32 D_800A0BA4;
+BSS EffectInstance* WorldMerleeOrbEffect;
+BSS EffectInstance* WorldMerleeWaveEffect;
+BSS Evt* D_800A0BB0;
+BSS s32 D_800A0BB4;
+BSS s16 D_800A0BB8;
 
 void set_battle_formation(Battle*);
 void setup_status_bar_for_world(void);

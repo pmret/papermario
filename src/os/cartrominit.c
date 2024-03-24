@@ -4,7 +4,7 @@
 #include "PR/rcp.h"
 #include "PR/piint.h"
 
-OSPiHandle __CartRomHandle ALIGNED(8);
+OSPiHandle __CartRomHandle OSALIGNED(8);
 OSPiHandle *osCartRomInit(void)
 {
    u32 value;

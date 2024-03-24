@@ -32,23 +32,24 @@ typedef struct HitAssetCollider {
     /* 0x08 */ s32 trianglesOffset;
 } HitAssetCollider; // size = 0x0C
 
-SHIFT_BSS CollisionData gCollisionData;
-SHIFT_BSS CollisionData gZoneCollisionData;
-SHIFT_BSS f32 gCollisionRayStartX;
-SHIFT_BSS f32 gCollisionRayStartY;
-SHIFT_BSS f32 gCollisionRayStartZ;
-SHIFT_BSS f32 gCollisionRayDirX;
-SHIFT_BSS f32 gCollisionRayDirY;
-SHIFT_BSS f32 gCollisionRayDirZ;
-SHIFT_BSS f32 gCollisionPointX;
-SHIFT_BSS f32 gCollisionPointY;
-SHIFT_BSS f32 gCollisionPointZ;
-SHIFT_BSS f32 gCollisionRayLength;
-SHIFT_BSS f32 gCollisionNormalX;
-SHIFT_BSS f32 gCollisionNormalY;
-SHIFT_BSS f32 gCollisionNormalZ;
-SHIFT_BSS ColliderBackupEntry* gCollisionDataBackup;
-SHIFT_BSS ColliderBackupEntry* gCollisionDataZoneBackup;
+CollisionData gCollisionData;
+CollisionData gZoneCollisionData;
+
+BSS f32 gCollisionRayStartX;
+BSS f32 gCollisionRayStartY;
+BSS f32 gCollisionRayStartZ;
+BSS f32 gCollisionRayDirX;
+BSS f32 gCollisionRayDirY;
+BSS f32 gCollisionRayDirZ;
+BSS f32 gCollisionPointX;
+BSS f32 gCollisionPointY;
+BSS f32 gCollisionPointZ;
+BSS f32 gCollisionRayLength;
+BSS f32 gCollisionNormalX;
+BSS f32 gCollisionNormalY;
+BSS f32 gCollisionNormalZ;
+BSS ColliderBackupEntry* gCollisionDataBackup;
+BSS ColliderBackupEntry* gCollisionDataZoneBackup;
 
 extern Vec3s gEntityColliderFaces[];
 extern Vec3f gEntityColliderNormals[];
@@ -833,7 +834,7 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
         }
     }
 
-    if (colliderID >= 0) {
+    if (colliderID > NO_COLLIDER) {
         *hitX = gCollisionPointX;
         *hitY = gCollisionPointY;
         *hitZ = gCollisionPointZ;
@@ -882,7 +883,7 @@ s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 d
         }
     }
 
-    if (colliderID >= 0) {
+    if (colliderID > NO_COLLIDER) {
         *hitX = gCollisionPointX;
         *hitY = gCollisionPointY;
         *hitZ = gCollisionPointZ;
@@ -928,12 +929,6 @@ f32 test_ray_collider_horizontal(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, 
     return ret;
 }
 
-enum {
-    ENTITY_TEST_ANY     = 0,
-    ENTITY_TEST_DOWN    = 1,
-    ENTITY_TEST_LATERAL = 2,
-};
-
 s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
                       f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz) {
     f32 hitDepthDown, hitDepthHoriz;
@@ -950,6 +945,12 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
     s32 hasCollision;
     f32 dist, dist2;
     ColliderTriangle *triangle = &entityTriangle;
+
+    enum {
+        ENTITY_TEST_ANY     = 0,
+        ENTITY_TEST_DOWN    = 1,
+        ENTITY_TEST_LATERAL = 2,
+    };
 
     entityIndex = -1;
     type = ENTITY_TEST_ANY;

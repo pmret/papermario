@@ -7,7 +7,7 @@
 #include "PR/rcp.h"
 #include "PR/viint.h"
 
-static __OSViContext vi[2] ALIGNED(8) = {{0}, {0}};
+static __OSViContext vi[2] OSALIGNED(8) = {{0}, {0}};
 __OSViContext *__osViCurr = &vi[0];
 __OSViContext *__osViNext = &vi[1];
 

@@ -420,7 +420,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                 posY = pause_badges_get_pos_y(pageIndex, itemIndex);
                 isNone = badgeID == BADGE_NONE_STANDIN;
 
-                for (j = 0; j < 64; equippedBadges++, j++) {
+                for (j = 0; j < ARRAY_COUNT(gPlayerData.equippedBadges); equippedBadges++, j++) {
                     if (badgeID == *equippedBadges) {
                         isEquipped = TRUE;
                         break;

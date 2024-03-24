@@ -1186,6 +1186,8 @@ typedef struct ALConfig {
     /* 0x14 */ ALHeap* heap;
 } ALConfig; // size = 0x18;
 
+#ifndef NO_EXTERN_VARIABLES
+
 extern volatile u8 AuSynUseStereo;
 extern u16 DummyInstrumentPredictor[32];
 extern u8 DummyInstrumentBase[190];
@@ -1211,6 +1213,8 @@ extern BGMPlayer* gBGMPlayerB;
 extern AmbienceManager* gAuAmbienceManager;
 extern SoundManager* gSoundManager;
 extern BGMPlayer* gBGMPlayerA;
+
+#endif
 
 #include "audio/private.h"
 

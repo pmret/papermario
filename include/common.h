@@ -6,12 +6,14 @@
 #include "types.h"
 #include "common_structs.h"
 #include "functions.h"
+#ifndef NO_EXTERN_VARIABLES
 #include "variables.h"
+#endif
 #include "macros.h"
 #include "enums.h"
 #include "evt.h"
 #include "messages.h"
-#include "battle/formation_names.h"
+#include "battle/battle_names.h"
 #include "battle/stage_names.h"
 #include "battle/actor_types.h"
 

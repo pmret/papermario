@@ -346,13 +346,13 @@ API_CALLABLE(MakeTransformGroup) {
 
 API_CALLABLE(SetTransformGroupEnabled) {
     Bytecode* args = script->ptrReadPos;
-    u16 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
+    u16 modelID = evt_get_variable(script, *args++);
+    s32 enable = evt_get_variable(script, *args++);
 
-    if (var2 != 0) {
-        enable_transform_group(var1);
+    if (enable) {
+        enable_transform_group(modelID);
     } else {
-        disable_transform_group(var1);
+        disable_transform_group(modelID);
     }
     return ApiStatus_DONE2;
 }

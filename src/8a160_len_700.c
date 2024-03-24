@@ -45,7 +45,7 @@ typedef struct Unk8a160Outer {
     /* 0x00 */ Unk8a160 subs[57]; // one base + 56 others?
 } Unk8a160Outer;
 
-SHIFT_BSS Unk8a160Outer D_8010D000[1];
+BSS Unk8a160Outer D_8010D000[1];
 
 void func_800F0CB0(s32 arg0, f32 x, f32 y, f32 scale) {
     Unk8a160Outer* outer = &D_8010D000[arg0];
@@ -72,7 +72,7 @@ void func_800F0D5C(void) {
     Unk8a160Outer* outer = &D_8010D000[0];
     s32 i;
 
-    for (i = 0; i < 1; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_8010D000); i++) {
         outer[i].subs[0].alive = FALSE;
     }
 }
