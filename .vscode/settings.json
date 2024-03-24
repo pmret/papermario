@@ -70,4 +70,6 @@
         "-l 120"
     ],
     "search.useIgnoreFiles": false,
+    "nixEnvSelector.nixFile": "${workspaceFolder}/shell.nix",
+    "workbench.editor.labelFormat": "short",
 }
