@@ -13,7 +13,7 @@
 #include "enums.h"
 #include "evt.h"
 #include "messages.h"
-#include "battle/formation_names.h"
+#include "battle/battle_names.h"
 #include "battle/stage_names.h"
 #include "battle/actor_types.h"
 
