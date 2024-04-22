@@ -213,7 +213,7 @@ void pause_tabs_draw_stats(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32
     hud_element_set_render_pos(gPauseTabsIconIDs[0], baseX + 22, baseY + 7);
     hud_element_draw_without_clipping(gPauseTabsIconIDs[0]);
     if (gPauseMenuCurrentTab == 0) {
-        if (gPauseTabsWindowIDs[menu->col] == 25) {
+        if (gPauseTabsWindowIDs[menu->col] == WINDOW_ID_PAUSE_TAB_STATS) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX + TABS_CURSOR_OFFSET_X, baseY + 6);
         }
     }
@@ -231,7 +231,7 @@ void pause_tabs_draw_badges(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s3
     hud_element_set_render_pos(gPauseTabsIconIDs[1], baseX + 22, baseY + 7);
     hud_element_draw_without_clipping(gPauseTabsIconIDs[1]);
     if (gPauseMenuCurrentTab == 0) {
-        if (gPauseTabsWindowIDs[menu->col] == 26) {
+        if (gPauseTabsWindowIDs[menu->col] == WINDOW_ID_PAUSE_TAB_BADGES) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX + TABS_CURSOR_OFFSET_X, baseY + 6);
         }
     }
@@ -249,7 +249,7 @@ void pause_tabs_draw_items(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32
     hud_element_set_render_pos(gPauseTabsIconIDs[2], baseX + 22, baseY + 7);
     hud_element_draw_without_clipping(gPauseTabsIconIDs[2]);
     if (gPauseMenuCurrentTab == 0) {
-        if (gPauseTabsWindowIDs[menu->col] == 27) {
+        if (gPauseTabsWindowIDs[menu->col] == WINDOW_ID_PAUSE_TAB_ITEMS) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX + TABS_CURSOR_OFFSET_X, baseY + 6);
         }
     }
@@ -267,7 +267,7 @@ void pause_tabs_draw_party(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32
     hud_element_set_render_pos(gPauseTabsIconIDs[3], baseX + 22, baseY + 7);
     hud_element_draw_without_clipping(gPauseTabsIconIDs[3]);
     if (gPauseMenuCurrentTab == 0) {
-        if (gPauseTabsWindowIDs[menu->col] == 28) {
+        if (gPauseTabsWindowIDs[menu->col] == WINDOW_ID_PAUSE_TAB_PARTY) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX + TABS_CURSOR_OFFSET_X, baseY + 6);
         }
     }
@@ -285,7 +285,7 @@ void pause_tabs_draw_spirits(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
     hud_element_set_render_pos(gPauseTabsIconIDs[4], baseX + 22, baseY + 7);
     hud_element_draw_without_clipping(gPauseTabsIconIDs[4]);
     if (gPauseMenuCurrentTab == 0) {
-        if (gPauseTabsWindowIDs[menu->col] == 29) {
+        if (gPauseTabsWindowIDs[menu->col] == WINDOW_ID_PAUSE_TAB_SPIRITS) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX + TABS_CURSOR_OFFSET_X, baseY + 6);
         }
     }
@@ -303,7 +303,7 @@ void pause_tabs_draw_map(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 h
     hud_element_set_render_pos(gPauseTabsIconIDs[5], baseX + 23, baseY + 7);
     hud_element_draw_without_clipping(gPauseTabsIconIDs[5]);
     if (gPauseMenuCurrentTab == 0) {
-        if (gPauseTabsWindowIDs[menu->col] == 30) {
+        if (gPauseTabsWindowIDs[menu->col] == WINDOW_ID_PAUSE_TAB_MAP) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX + TABS_CURSOR_OFFSET_X, baseY + 6);
         }
     }
