@@ -1730,8 +1730,8 @@
     shadowOffset: 0
 - BlackNinjakoopa:
     level: 17
-    nameMsg: MSG_EnemyName_BlueNinjakoopa
-    tattleMsg: MSG_EnemyTattle_BlueNinjakoopa
+    nameMsg: MSG_EnemyName_BlackNinjakoopa
+    tattleMsg: MSG_EnemyTattle_BlackNinjakoopa
     walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_ACTOR_JUMP
