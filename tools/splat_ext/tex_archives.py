@@ -222,9 +222,7 @@ class TexImage:
     # extract texture properties and rasters from buffer
     def from_bytes(self, texbuf: TexBuffer):
         # strip area prefix and original extension suffix
-        raw_name = decode_null_terminated_ascii(texbuf.get(32))
-        self.img_name = raw_name[4:-3]
-        self.raw_ext = raw_name[-3:]
+        self.img_name = decode_null_terminated_ascii(texbuf.get(32))
 
         (
             self.aux_width,
@@ -339,10 +337,6 @@ class TexImage:
         out = {}
         out["name"] = self.img_name
 
-        # only a single texture in 'tst_tex' has 'rgb', otherwise this is always 'tif'
-        if self.raw_ext != "tif":
-            out["ext"] = self.raw_ext
-
         out["main"] = {
             "format": get_format_name(self.main_fmt, self.main_depth),
             "hwrap": wrap_modes.get(self.main_hwrap),
@@ -439,9 +433,8 @@ class TexImage:
     def add_bytes(self, tex_name: str, bytes: bytearray):
         pos = len(bytes)
 
-        # form raw name and write to header
-        raw_name = tex_name[:4] + self.img_name + self.raw_ext
-        name_bytes = raw_name.encode("ascii")
+        #  write name to header
+        name_bytes = self.img_name.encode("ascii")
         bytes += name_bytes
 
         # pad name out to 32 bytes
@@ -491,7 +484,7 @@ class TexImage:
                 bytes += self.aux_pal
 
         size = len(bytes) - pos
-        assert size == self.expected_size(), f"{raw_name}: size mismatch: {size} != {self.expected_size()}"
+        assert size == self.expected_size(), f"{self.img_name}: size mismatch: {size} != {self.expected_size()}"
 
     def expected_size(self) -> int:
         """

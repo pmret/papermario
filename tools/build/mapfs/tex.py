@@ -30,11 +30,6 @@ def img_from_json(json_data, tex_name: str, asset_stack: Tuple[Path, ...]) -> Te
 
     ret.img_name = json_data["name"]
 
-    if "ext" in json_data:
-        ret.raw_ext = json_data["ext"]
-    else:
-        ret.raw_ext = "tif"
-
     # read data for main tile
     main_data = json_data.get("main")
     if main_data == None:
