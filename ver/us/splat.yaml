@@ -6104,21 +6104,23 @@ segments:
     type: code
     start: 0x4D01F0
     vram_class: battle_area
-    subalign: 4
     subsegments:
     - [auto, c, area]
-    - [auto, c, actor/cleft]
-    - [auto, c, actor/monty_mole]
-    - [auto, c, actor/buzzar]
-    - [auto, c, actor/whacka]
-    - [auto, c, stage/iwa_01]
-    - [auto, c, stage/iwa_01b]
-    - [auto, c, stage/iwa_02]
+    - [auto, c, more_funcs]
+    - [auto, c, whacka_funcs]
+    - [auto, c, iwa_01_funcs]
+    - [auto, c, iwa_02_funcs]
+    # - [auto, c, actor/cleft]
+    # - [auto, c, actor/monty_mole]
+    # - [auto, c, actor/buzzar]
+    # - [auto, c, actor/whacka]
+    # - [auto, c, stage/iwa_01]
+    # - [auto, c, stage/iwa_01b]
+    # - [auto, c, stage/iwa_02]
   - dir: battle/area/sbk
     type: code
     start: 0x4DA5E0
     vram_class: battle_area
-    subalign: 16 # BSS alignment hack
     subsegments:
     - [auto, c, actor/pokey]
     - [auto, c, actor/bandit]
@@ -6596,7 +6598,6 @@ segments:
     type: code
     start: 0x660750
     vram_class: battle_area
-    subalign: 16 # BSS alignment hack
     subsegments:
     - [auto, c, actor/crystal_king]
     - [auto, c, actor/crystal_bit]

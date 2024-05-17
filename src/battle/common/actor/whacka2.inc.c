@@ -11,6 +11,7 @@ extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_MakeWhackaBump);
 extern EvtScript N(EVS_Death);
 
+API_CALLABLE(N(IsHitEightTimes));
 
 s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Whacka_Idle,
@@ -92,15 +93,6 @@ ActorBlueprint NAMESPACE = {
     .statusIconOffset = { -20, 40 },
     .statusTextOffset = { 10, 30 },
 };
-
-API_CALLABLE(N(IsHitEightTimes)) {
-    script->varTable[0] = 0;
-    if (evt_get_variable(NULL, GB_IWA00_Whacka_HitCount) >= 8) {
-        script->varTable[0] = 1;
-    }
-
-    return ApiStatus_DONE2;
-}
 
 EvtScript N(EVS_Init) = {
     Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))

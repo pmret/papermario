@@ -47,5 +47,5 @@ Formation N(WhackaFormation) = {
 // needs to match stage name used while defining NAMESPACE above
 // the actor include redefines NAMESPACE based on current AREA, so we need to insert the stage name via prefix
 #define NAME_PREFIX iwa_01_
-#include "battle/common/actor/whacka.inc.c"
+#include "battle/common/actor/whacka2.inc.c"
 #define NAME_PREFIX
