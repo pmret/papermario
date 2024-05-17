@@ -111,10 +111,15 @@ StageList A(Stages) = {
     {},
 };
 
+static s32 padding[] = { 0, 0, 0 };
+
 #include "battle/common/actor/cleft.inc.c"
+
+static s32 padding2[] = { 0 };
 
 #include "battle/common/actor/monty_mole.inc.c"
 
+static s32 padding3[] = { 0, 0, 0 };
 
 // BUZZAR
 
@@ -1359,10 +1364,18 @@ EvtScript N(EVS_DummyHit) = {
 
 // BUZZAR end
 
+static s32 padding35[] = { 0 };
+
 #include "battle/common/actor/whacka2.inc.c"
+
+static s32 padding4[] = { 0 };
 
 #include "battle/common/stage/area_iwa/iwa_01.inc.c"
 
+static s32 padding5[] = { 0 };
+
 #include "battle/common/stage/area_iwa/iwa_01b.inc.c"
+
+static s32 padding6[] = { 0, 0 };
 
 #include "battle/common/stage/area_iwa/iwa_02.inc.c"
