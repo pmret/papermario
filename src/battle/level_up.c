@@ -362,7 +362,11 @@ EvtScript EVS_ShowStarpoints = {
         Call(SetVirtualEntityPosition, LVar6, -278, 68, 70)
         Call(SetVirtualEntityScale, LVar6, Float(0.5), Float(0.5), Float(0.5))
     Else
+#if VERSION_JP
+        Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoint))
+#else
         Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoints))
+#endif
         Call(SetVirtualEntityPosition, LVar6, -278, 68, 70)
         Call(SetVirtualEntityScale, LVar6, Float(0.5), Float(0.5), Float(0.5))
         Set(LFlag0, TRUE)
@@ -400,13 +404,25 @@ EvtScript EVS_ShowStarpoints = {
         Add(LVar1, -78)
         Call(SetVirtualEntityPosition, LVar6, LVar1, 68, 70)
         Set(LVar1, LVar0)
+#if VERSION_JP
+        Add(LVar1, -154)
+#else
         Add(LVar1, -146)
+#endif
         Call(SetVirtualEntityPosition, LVar7, LVar1, 68, 70)
         Set(LVar1, LVar0)
+#if VERSION_JP
+        Add(LVar1, -139)
+#else
         Add(LVar1, -131)
+#endif
         Call(SetVirtualEntityPosition, LVar8, LVar1, 68, 70)
         Set(LVar1, LVar0)
+#if VERSION_JP
+        Add(LVar1, -124)
+#else
         Add(LVar1, -116)
+#endif
         Call(SetVirtualEntityPosition, LVar9, LVar1, 68, 70)
         Wait(1)
     EndLoop
@@ -970,9 +986,15 @@ void btl_state_update_celebration(void) {
             CelebrateSubstateTime--;
             if (CelebrateSubstateTime == 0) {
                 hud_element_set_tint(id, 128, 128, 128);
+#if VERSION_JP
+                x = 32;
+                y = 186;
+                set_window_properties(WINDOW_ID_8, 32, 186, 242, 32, WINDOW_PRIORITY_20, draw_content_level_up_textbox, NULL, -1);
+#else
                 x = 20;
                 y = 186;
                 set_window_properties(WINDOW_ID_8, 20, 186, 280, 32, WINDOW_PRIORITY_20, draw_content_level_up_textbox, NULL, -1);
+#endif
                 set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CHOOSE;
             }
@@ -1142,6 +1164,9 @@ void btl_state_update_celebration(void) {
         case BTL_SUBSTATE_CELEBRATE_SKIPPABLE_END_DELAY:
             if (battleStatus->curButtonsPressed & (BUTTON_A | BUTTON_B)) {
                 CelebrateStateTime = 99;
+#if VERSION_JP
+                sfx_play_sound(SOUND_MENU_NEXT);
+#endif
             }
             if (CelebrateStateTime >= 99) {
                 if (!(gBattleStatus.flags2 & BS_FLAGS2_DONT_STOP_MUSIC)) {

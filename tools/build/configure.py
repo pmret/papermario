@@ -620,16 +620,28 @@ class Configure:
             "item_data",
         )
 
-        build(
-            [
-                self.build_path() / "include/battle/actor_types.inc.c",
-                self.build_path() / "include/battle/actor_types.h",
-            ],
-            [
-                Path("src/battle/actors.yaml"),
-            ],
-            "actor_types",
-        )
+        if self.version == "jp":
+            build(
+                [
+                    self.build_path() / "include/battle/actor_types.inc.c",
+                    self.build_path() / "include/battle/actor_types.h",
+                ],
+                [
+                    Path("src/battle/actors_jp.yaml"),
+                ],
+                "actor_types",
+            )
+        else:
+            build(
+                [
+                    self.build_path() / "include/battle/actor_types.inc.c",
+                    self.build_path() / "include/battle/actor_types.h",
+                ],
+                [
+                    Path("src/battle/actors.yaml"),
+                ],
+                "actor_types",
+            )
 
         import splat
 

@@ -206,8 +206,11 @@ Vec3s StandardActorHomePositions[] = {
 };
 
 // TODO: what is this, and look into warnings that are silenced via casts
+// Note: check D_8028358C_2 in battle/popup_messages.c (file split might be incorrect)
 s32* D_8028358C[] = {
     (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1,
-    (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C,
-    (s32*)D_8028358C, (s32*)D_8028358C, 0
+    (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C,
+#if !VERSION_JP
+    (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, 0
+#endif
 };

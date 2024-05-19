@@ -542,7 +542,9 @@ HitResult calc_player_damage_enemy(void) {
             if (!(gBattleStatus.flags1 & (BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT))) {
                 missedAllOrNothing = TRUE;
                 currentAttackDamage = 0;
+#if !VERSION_JP
                 targetDefense = 0;
+#endif
                 gBattleStatus.flags1 &= ~BS_FLAGS1_NICE_HIT;
                 gBattleStatus.flags1 &= ~BS_FLAGS1_SUPER_HIT;
                 gBattleStatus.flags1 &= ~BS_FLAGS1_INCLUDE_POWER_UPS;

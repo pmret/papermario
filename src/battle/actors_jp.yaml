@@ -1,0 +1,2336 @@
+- RedGoomba:
+    level: 6
+    nameMsg: MSG_EnemyName_RedGoomba
+    tattleMsg: MSG_EnemyTattle_RedGoomba
+    walkSound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    flySound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- RedParagoomba:
+    level: 6
+    nameMsg: MSG_EnemyName_RedParagoomba
+    tattleMsg: MSG_EnemyTattle_RedParagoomba
+    walkSound: [ SOUND_PARAGOOMBA_FLY, SOUND_PARAGOOMBA_FLY ]
+    flySound: [ SOUND_PARAGOOMBA_FLY, SOUND_PARAGOOMBA_FLY ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Gloomba:
+    level: 11
+    nameMsg: MSG_EnemyName_Gloomba
+    tattleMsg: MSG_EnemyTattle_Gloomba
+    walkSound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    flySound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- Paragloomba:
+    level: 11
+    nameMsg: MSG_EnemyName_Paragloomba
+    tattleMsg: MSG_EnemyTattle_Paragloomba
+    walkSound: [ SOUND_PARAGOOMBA_FLY, SOUND_PARAGOOMBA_FLY ]
+    flySound: [ SOUND_PARAGOOMBA_FLY, SOUND_PARAGOOMBA_FLY ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- SpikedGloomba:
+    level: 12
+    nameMsg: MSG_EnemyName_SpikedGloomba
+    tattleMsg: MSG_EnemyTattle_SpikedGloomba
+    walkSound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    flySound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- DarkKoopa:
+    level: 18
+    nameMsg: MSG_EnemyName_DarkKoopa
+    tattleMsg: MSG_EnemyTattle_DarkKoopa
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 2, 0 ]
+    shadowOffset: 0
+- DarkParatroopa:
+    level: 18
+    nameMsg: MSG_EnemyName_DarkParatroopa
+    tattleMsg: MSG_EnemyTattle_DarkParatroopa
+    walkSound: [ SOUND_PARAGOOMBA_FLY, SOUND_PARAGOOMBA_FLY ]
+    flySound: [ SOUND_PARAGOOMBA_FLY, SOUND_PARAGOOMBA_FLY ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 3, 0 ]
+    shadowOffset: 0
+- Goomba:
+    level: 5
+    nameMsg: MSG_EnemyName_Goomba
+    tattleMsg: MSG_EnemyTattle_Goomba
+    walkSound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    flySound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- Paragoomba:
+    level: 6
+    nameMsg: MSG_EnemyName_Paragoomba
+    tattleMsg: MSG_EnemyTattle_Paragoomba
+    walkSound: [ SOUND_PARAGOOMBA_FLY, SOUND_PARAGOOMBA_FLY ]
+    flySound: [ SOUND_PARAGOOMBA_FLY, SOUND_PARAGOOMBA_FLY ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- SpikedGoomba:
+    level: 6
+    nameMsg: MSG_EnemyName_SpikedGoomba
+    tattleMsg: MSG_EnemyTattle_SpikedGoomba
+    walkSound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    flySound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- Fuzzy:
+    level: 6
+    nameMsg: MSG_EnemyName_Fuzzy
+    tattleMsg: MSG_EnemyTattle_Fuzzy
+    walkSound: [ SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A ]
+    flySound: [ SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A ]
+    jumpSound: SOUND_FUZZY_HOP_A
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- KoopaTroopa:
+    level: 6
+    nameMsg: MSG_EnemyName_KoopaTroopa
+    tattleMsg: MSG_EnemyTattle_KoopaTroopa
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 2, 0 ]
+    shadowOffset: 0
+- Paratroopa:
+    level: 6
+    nameMsg: MSG_EnemyName_Paratroopa
+    tattleMsg: MSG_EnemyTattle_Paratroopa
+    walkSound: [ SOUND_PARAGOOMBA_FLY, SOUND_PARAGOOMBA_FLY ]
+    flySound: [ SOUND_PARAGOOMBA_FLY, SOUND_PARAGOOMBA_FLY ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 3, 0 ]
+    shadowOffset: 0
+- BobOmb:
+    level: 6
+    nameMsg: MSG_EnemyName_BobOmb
+    tattleMsg: MSG_EnemyTattle_BobOmb
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- BobOmb_Dup:
+    level: 6
+    nameMsg: MSG_EnemyName_BobOmb
+    tattleMsg: MSG_EnemyTattle_BobOmb
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- BulletBill:
+    level: 5
+    nameMsg: MSG_EnemyName_BulletBill
+    tattleMsg: MSG_EnemyTattle_BulletBill
+    walkSound: [ SOUND_BULLET_BILL_MOTION, SOUND_BULLET_BILL_MOTION ]
+    flySound: [ SOUND_BULLET_BILL_MOTION, SOUND_BULLET_BILL_MOTION ]
+    jumpSound: SOUND_BULLET_BILL_MOTION
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- BillBlaster:
+    level: 10
+    nameMsg: MSG_EnemyName_BillBlaster
+    tattleMsg: MSG_EnemyTattle_BillBlaster
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 6, 0 ]
+    shadowOffset: 0
+- Cleft:
+    level: 10
+    nameMsg: MSG_EnemyName_Cleft
+    tattleMsg: MSG_EnemyTattle_Cleft
+    walkSound: [ SOUND_CLEFT_STEP, SOUND_CLEFT_STEP ]
+    flySound: [ SOUND_CLEFT_STEP, SOUND_CLEFT_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 254, 241 ]
+    shadowOffset: 0
+- MontyMole:
+    level: 8
+    nameMsg: MSG_EnemyName_MontyMole
+    tattleMsg: MSG_EnemyTattle_MontyMole
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 14, 0 ]
+    shadowOffset: 0
+- Bandit:
+    level: 9
+    nameMsg: MSG_EnemyName_Bandit
+    tattleMsg: MSG_EnemyTattle_Bandit
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
+    flySound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- Pokey:
+    level: 9
+    nameMsg: MSG_EnemyName_Pokey
+    tattleMsg: MSG_EnemyTattle_Pokey
+    walkSound: [ SOUND_POKEY_WALK, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- PokeyMummy:
+    level: 10
+    nameMsg: MSG_EnemyName_PokeyMummy
+    tattleMsg: MSG_EnemyTattle_PokeyMummy
+    walkSound: [ SOUND_POKEY_WALK, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Swooper:
+    level: 10
+    nameMsg: MSG_EnemyName_Swooper
+    tattleMsg: MSG_EnemyTattle_Swooper
+    walkSound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
+    flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- BuzzyBeetle:
+    level: 10
+    nameMsg: MSG_EnemyName_BuzzyBeetle
+    tattleMsg: MSG_EnemyTattle_BuzzyBeetle
+    walkSound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    flySound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 10, 0 ]
+    shadowOffset: 0
+- StoneChomp:
+    level: 14
+    nameMsg: MSG_EnemyName_StoneChomp
+    tattleMsg: MSG_EnemyTattle_StoneChomp
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- PiranhaPlant:
+    level: 11
+    nameMsg: MSG_EnemyName_PiranhaPlant
+    tattleMsg: MSG_EnemyTattle_PiranhaPlant
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- ForestFuzzy:
+    level: 11
+    nameMsg: MSG_EnemyName_ForestFuzzy
+    tattleMsg: MSG_EnemyTattle_ForestFuzzy
+    walkSound: [ SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A ]
+    flySound: [ SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A ]
+    jumpSound: SOUND_FUZZY_HOP_A
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- HyperGoomba:
+    level: 12
+    nameMsg: MSG_EnemyName_HyperGoomba
+    tattleMsg: MSG_EnemyTattle_HyperGoomba
+    walkSound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    flySound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- HyperParagoomba:
+    level: 12
+    nameMsg: MSG_EnemyName_HyperParagoomba
+    tattleMsg: MSG_EnemyTattle_HyperParagoomba
+    walkSound: [ SOUND_PARAGOOMBA_FLY, SOUND_PARAGOOMBA_FLY ]
+    flySound: [ SOUND_PARAGOOMBA_FLY, SOUND_PARAGOOMBA_FLY ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- HyperCleft:
+    level: 15
+    nameMsg: MSG_EnemyName_HyperCleft
+    tattleMsg: MSG_EnemyTattle_HyperCleft
+    walkSound: [ SOUND_CLEFT_STEP, SOUND_CLEFT_STEP ]
+    flySound: [ SOUND_CLEFT_STEP, SOUND_CLEFT_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 254, 241 ]
+    shadowOffset: 0
+- Clubba:
+    level: 13
+    nameMsg: MSG_EnemyName_Clubba
+    tattleMsg: MSG_EnemyTattle_Clubba
+    walkSound: [ SOUND_CLUBBA_STEP, SOUND_CLUBBA_STEP ]
+    flySound: [ SOUND_CLUBBA_STEP, SOUND_CLUBBA_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- ShyGuy:
+    level: 14
+    nameMsg: MSG_EnemyName_ShyGuy
+    tattleMsg: MSG_EnemyTattle_ShyGuy
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- GrooveGuy:
+    level: 15
+    nameMsg: MSG_EnemyName_GrooveGuy
+    tattleMsg: MSG_EnemyTattle_GrooveGuy
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- SkyGuy:
+    level: 14
+    nameMsg: MSG_EnemyName_SkyGuy
+    tattleMsg: MSG_EnemyTattle_SkyGuy
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 15, 23 ]
+    shadowOffset: 0
+- MediGuy:
+    level: 14
+    nameMsg: MSG_EnemyName_MediGuy
+    tattleMsg: MSG_EnemyTattle_MediGuy
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_SHY_GUY_FLY, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- PyroGuy:
+    level: 15
+    nameMsg: MSG_EnemyName_PyroGuy
+    tattleMsg: MSG_EnemyTattle_PyroGuy
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- SpyGuy:
+    level: 15
+    nameMsg: MSG_EnemyName_SpyGuy
+    tattleMsg: MSG_EnemyTattle_SpyGuy
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 3, 0 ]
+    shadowOffset: 0
+- Fuzzipede:
+    level: 43
+    nameMsg: MSG_EnemyName_Fuzzipede
+    tattleMsg: MSG_EnemyTattle_Fuzzipede
+    walkSound: [ SOUND_FUZZIPEDE_MOTION, SOUND_FUZZIPEDE_MOTION ]
+    flySound: [ SOUND_FUZZIPEDE_MOTION, SOUND_FUZZIPEDE_MOTION ]
+    jumpSound: SOUND_FUZZIPEDE_MOTION
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- HurtPlant:
+    level: 16
+    nameMsg: MSG_EnemyName_HurtPlant
+    tattleMsg: MSG_EnemyTattle_HurtPlant
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 6, 0 ]
+    shadowOffset: 0
+- MBush:
+    level: 16
+    nameMsg: MSG_EnemyName_MBush
+    tattleMsg: MSG_EnemyTattle_MBush
+    walkSound: [ SOUND_MBUSH_STEP, SOUND_MBUSH_STEP ]
+    flySound: [ SOUND_MBUSH_STEP, SOUND_MBUSH_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 7, 0 ]
+    shadowOffset: 0
+- AquaFuzzy:
+    level: 16
+    nameMsg: MSG_EnemyName_AquaFuzzy
+    tattleMsg: MSG_EnemyTattle_AquaFuzzy
+    walkSound: [ SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A ]
+    flySound: [ SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A ]
+    jumpSound: SOUND_FUZZY_HOP_A
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- JungleFuzzy:
+    level: 16
+    nameMsg: MSG_EnemyName_JungleFuzzy
+    tattleMsg: MSG_EnemyTattle_JungleFuzzy
+    walkSound: [ SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A ]
+    flySound: [ SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A ]
+    jumpSound: SOUND_FUZZY_HOP_A
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- SpearGuy:
+    level: 16
+    nameMsg: MSG_EnemyName_SpearGuy
+    tattleMsg: MSG_EnemyTattle_SpearGuy
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 6, 0 ]
+    shadowOffset: 0
+- LavaBubble:
+    level: 17
+    nameMsg: MSG_EnemyName_LavaBubble
+    tattleMsg: MSG_EnemyTattle_LavaBubble
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- SpikeTop:
+    level: 17
+    nameMsg: MSG_EnemyName_SpikeTop
+    tattleMsg: MSG_EnemyTattle_SpikeTop
+    walkSound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    flySound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 6, 0 ]
+    shadowOffset: 0
+- PutridPiranha:
+    level: 17
+    nameMsg: MSG_EnemyName_PutridPiranha
+    tattleMsg: MSG_EnemyTattle_PutridPiranha
+    walkSound: [ SOUND_PIRANHA_STEP, SOUND_PIRANHA_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Lakitu:
+    level: 20
+    nameMsg: MSG_EnemyName_Lakitu
+    tattleMsg: MSG_EnemyTattle_Lakitu
+    walkSound: [ SOUND_FLIGHT, SOUND_FLIGHT ]
+    flySound: [ SOUND_FLIGHT, SOUND_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ -5, -5 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Spiny:
+    level: 19
+    nameMsg: MSG_EnemyName_Spiny
+    tattleMsg: MSG_EnemyTattle_Spiny
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- MontyMoleBoss:
+    level: 19
+    nameMsg: MSG_EnemyName_MontyMoleBoss
+    tattleMsg: MSG_EnemyTattle_MontyMoleBoss
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 14, 0 ]
+    shadowOffset: 0
+- Bzzap:
+    level: 19
+    nameMsg: MSG_EnemyName_Bzzap
+    tattleMsg: MSG_EnemyTattle_Bzzap
+    walkSound: [ SOUND_BZZAP_BUZZ, SOUND_NONE ]
+    flySound: [ SOUND_BZZAP_BUZZ, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- CrazeeDayzee:
+    level: 19
+    nameMsg: MSG_EnemyName_CrazeeDayzee
+    tattleMsg: MSG_EnemyTattle_CrazeeDayzee
+    walkSound: [ SOUND_DAYZEE_STEP, SOUND_DAYZEE_STEP ]
+    flySound: [ SOUND_DAYZEE_STEP, SOUND_DAYZEE_STEP ]
+    jumpSound: SOUND_DAYZEE_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 2, 0 ]
+    shadowOffset: 0
+- AmazyDayzee:
+    level: 100
+    nameMsg: MSG_EnemyName_AmazyDayzee
+    tattleMsg: MSG_EnemyTattle_AmazyDayzee
+    walkSound: [ SOUND_DAYZEE_STEP, SOUND_DAYZEE_STEP ]
+    flySound: [ SOUND_DAYZEE_STEP, SOUND_DAYZEE_STEP ]
+    jumpSound: SOUND_DAYZEE_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 2, 0 ]
+    shadowOffset: 0
+- RuffPuff:
+    level: 19
+    nameMsg: MSG_EnemyName_RuffPuff
+    tattleMsg: MSG_EnemyTattle_RuffPuff
+    walkSound: [ SOUND_FLIGHT, SOUND_NONE ]
+    flySound: [ SOUND_FLIGHT, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Spike:
+    level: 40
+    nameMsg: MSG_EnemyName_Spike
+    tattleMsg: MSG_EnemyTattle_Spike
+    walkSound: [ SOUND_FLIGHT, SOUND_NONE ]
+    flySound: [ SOUND_FLIGHT, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Gulpit:
+    level: 22
+    nameMsg: MSG_EnemyName_Gulpit
+    tattleMsg: MSG_EnemyTattle_Gulpit
+    walkSound: [ SOUND_CLUBBA_STEP, SOUND_CLUBBA_STEP ]
+    flySound: [ SOUND_CLUBBA_STEP, SOUND_CLUBBA_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- GulpitRocks:
+    level: 0
+    nameMsg: MSG_EnemyName_GulpitRocks
+    tattleMsg: MSG_EnemyTattle_GulpitRocks
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- WhiteClubba:
+    level: 23
+    nameMsg: MSG_EnemyName_WhiteClubba
+    tattleMsg: MSG_EnemyTattle_WhiteClubba
+    walkSound: [ SOUND_CLUBBA_STEP, SOUND_CLUBBA_STEP ]
+    flySound: [ SOUND_CLUBBA_STEP, SOUND_CLUBBA_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- FrostPiranha:
+    level: 22
+    nameMsg: MSG_EnemyName_FrostPiranha
+    tattleMsg: MSG_EnemyTattle_FrostPiranha
+    walkSound: [ SOUND_PIRANHA_STEP, SOUND_PIRANHA_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Swoopula:
+    level: 22
+    nameMsg: MSG_EnemyName_Swoopula
+    tattleMsg: MSG_EnemyTattle_Swoopula
+    walkSound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
+    flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- AlbinoDino:
+    level: 23
+    nameMsg: MSG_EnemyName_AlbinoDino
+    tattleMsg: MSG_EnemyTattle_AlbinoDino
+    walkSound: [ SOUND_ALBINO_DINO_STEP_A, SOUND_ALBINO_DINO_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Duplighost:
+    level: 23
+    nameMsg: MSG_EnemyName_Duplighost
+    tattleMsg: MSG_EnemyTattle_Duplighost
+    walkSound: [ SOUND_DUPLIGHOST_STEP, SOUND_DUPLIGHOST_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- GhostGoombario:
+    level: 23
+    nameMsg: MSG_EnemyName_GhostGoombario
+    tattleMsg: MSG_EnemyTattle_GhostGoombario
+    walkSound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 6, 0 ]
+    shadowOffset: 0
+- GhostKooper:
+    level: 23
+    nameMsg: MSG_EnemyName_GhostKooper
+    tattleMsg: MSG_EnemyTattle_GhostKooper
+    walkSound: [ SOUND_KOOPER_STEP, SOUND_KOOPER_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 2, 0 ]
+    shadowOffset: 0
+- GhostBombette:
+    level: 23
+    nameMsg: MSG_EnemyName_GhostBombette
+    tattleMsg: MSG_EnemyTattle_GhostBombette
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- GhostParakarry:
+    level: 23
+    nameMsg: MSG_EnemyName_GhostParakarry
+    tattleMsg: MSG_EnemyTattle_GhostParakarry
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- GhostBow:
+    level: 23
+    nameMsg: MSG_EnemyName_GhostBow
+    tattleMsg: MSG_EnemyTattle_GhostBow
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- GhostWatt:
+    level: 23
+    nameMsg: MSG_EnemyName_GhostWatt
+    tattleMsg: MSG_EnemyTattle_GhostWatt
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- GhostSushie:
+    level: 23
+    nameMsg: MSG_EnemyName_GhostSushie
+    tattleMsg: MSG_EnemyTattle_GhostSushie
+    walkSound: [ SOUND_SUSHIE_STEP, SOUND_SUSHIE_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 8, 0 ]
+    shadowOffset: 0
+- GhostLakilester:
+    level: 23
+    nameMsg: MSG_EnemyName_GhostLakilester
+    tattleMsg: MSG_EnemyTattle_GhostLakilester
+    walkSound: [ SOUND_FLIGHT, SOUND_FLIGHT ]
+    flySound: [ SOUND_FLIGHT, SOUND_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ -5, -5 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Ember:
+    level: 24
+    nameMsg: MSG_EnemyName_Ember
+    tattleMsg: MSG_EnemyTattle_Ember
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- BonyBeetle:
+    level: 25
+    nameMsg: MSG_EnemyName_BonyBeetle
+    tattleMsg: MSG_EnemyTattle_BonyBeetle
+    walkSound: [ SOUND_BONY_BEETLE_STEP, SOUND_BONY_BEETLE_STEP ]
+    flySound: [ SOUND_BONY_BEETLE_STEP, SOUND_BONY_BEETLE_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 6, 0 ]
+    shadowOffset: 0
+- DryBones:
+    level: 30
+    nameMsg: MSG_EnemyName_DryBones
+    tattleMsg: MSG_EnemyTattle_DryBones
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 3, 0 ]
+    shadowOffset: 0
+- DryBones2:
+    level: 30
+    nameMsg: MSG_EnemyName_DryBones
+    tattleMsg: MSG_EnemyTattle_DryBones
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 3, 0 ]
+    shadowOffset: 0
+- BombshellBlaster:
+    level: 27
+    nameMsg: MSG_EnemyName_BombshellBlaster
+    tattleMsg: MSG_EnemyTattle_BombshellBlaster
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 6, 0 ]
+    shadowOffset: 0
+- BombshellBill:
+    level: 24
+    nameMsg: MSG_EnemyName_BombshellBill
+    tattleMsg: MSG_EnemyTattle_BombshellBill
+    walkSound: [ SOUND_BULLET_BILL_MOTION, SOUND_BULLET_BILL_MOTION ]
+    flySound: [ SOUND_BULLET_BILL_MOTION, SOUND_BULLET_BILL_MOTION ]
+    jumpSound: SOUND_BULLET_BILL_MOTION
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- HammerBros:
+    level: 27
+    nameMsg: MSG_EnemyName_HammerBros
+    tattleMsg: MSG_EnemyTattle_HammerBros
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 2, 0 ]
+    shadowOffset: 0
+- Koopatrol:
+    level: 25
+    nameMsg: MSG_EnemyName_Koopatrol
+    tattleMsg: MSG_EnemyTattle_Koopatrol
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Magikoopa:
+    level: 26
+    nameMsg: MSG_EnemyName_Magikoopa
+    tattleMsg: MSG_EnemyTattle_Magikoopa
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- FlyingMagikoopa:
+    level: 26
+    nameMsg: MSG_EnemyName_FlyingMagikoopa
+    tattleMsg: MSG_EnemyTattle_MagikoopaDup
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Magiclone:
+    level: 26
+    nameMsg: MSG_EnemyName_Magiclone
+    tattleMsg: MSG_EnemyTattle_Magiclone
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- FlyingMagiclone:
+    level: 26
+    nameMsg: MSG_EnemyName_FlyingMagiclone
+    tattleMsg: MSG_EnemyTattle_MagicloneDup
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- RedMagikoopa:
+    level: 21
+    nameMsg: MSG_EnemyName_RedMagikoopa
+    tattleMsg: MSG_EnemyTattle_RedMagikoopa
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- FlyingRedMagikoopa:
+    level: 21
+    nameMsg: MSG_EnemyName_FlyingRedMagikoopa
+    tattleMsg: MSG_EnemyTattle_FlyingRedMagikoopa
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- GreenMagikoopa:
+    level: 21
+    nameMsg: MSG_EnemyName_GreenMagikoopa
+    tattleMsg: MSG_EnemyTattle_GreenMagikoopa
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- FlyingGreenMagikoopa:
+    level: 21
+    nameMsg: MSG_EnemyName_FlyingGreenMagikoopa
+    tattleMsg: MSG_EnemyTattle_FlyingGreenMagikoopa
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- YellowMagikoopa:
+    level: 21
+    nameMsg: MSG_EnemyName_YellowMagikoopa
+    tattleMsg: MSG_EnemyTattle_YellowMagikoopa
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- FlyingYellowMagikoopa:
+    level: 21
+    nameMsg: MSG_EnemyName_FlyingYellowMagikoopa
+    tattleMsg: MSG_EnemyTattle_FlyingYellowMagikoopa
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- GrayMagikoopa:
+    level: 21
+    nameMsg: MSG_EnemyName_GrayMagikoopa
+    tattleMsg: MSG_EnemyTattle_GrayMagikoopa
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- FlyingGrayMagikoopa:
+    level: 21
+    nameMsg: MSG_EnemyName_FlyingGrayMagikoopa
+    tattleMsg: MSG_EnemyTattle_FlyingGrayMagikoopa
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- WhiteMagikoopa:
+    level: 21
+    nameMsg: MSG_EnemyName_WhiteMagikoopa
+    tattleMsg: MSG_EnemyTattle_FlyingWhiteMagikoopa
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- FlyingWhiteMagikoopa:
+    level: 21
+    nameMsg: MSG_EnemyName_FlyingWhiteMagikoopa
+    tattleMsg: MSG_EnemyTattle_WhiteMagikoopa
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_5b:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_5c:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_5d:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_5e:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_5f:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_60:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_61:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_62:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_63:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_64:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_65:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_66:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_FLIGHT, SOUND_FLIGHT ]
+    flySound: [ SOUND_FLIGHT, SOUND_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ -5, -5 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_67:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    flySound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- Unused_68:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_69:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_6a:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- MontyHole:
+    level: 9
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_6c:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_6d:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Player:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Goombario:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Kooper:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_KOOPER_STEP, SOUND_KOOPER_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Bombette:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Parakarry:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Bow:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Watt:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Sushie:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_SUSHIE_STEP, SOUND_SUSHIE_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Lakilester:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_FLIGHT, SOUND_FLIGHT ]
+    flySound: [ SOUND_FLIGHT, SOUND_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ -5, -5 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Twink:
+    level: 0
+    nameMsg: MSG_EnemyName_Twink
+    tattleMsg: MSG_EnemyTattle_Twink
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ -5, -5 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_78:
+    ignoreDuringCount: TRUE
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Unused_79:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- TheMaster_1:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster1
+    tattleMsg: MSG_EnemyTattle_TheMaster1
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- TheMaster_2:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster2
+    tattleMsg: MSG_EnemyTattle_TheMaster2
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- TheMaster_3:
+    level: 0
+    nameMsg: MSG_EnemyName_TheMaster3
+    tattleMsg: MSG_EnemyTattle_TheMaster3
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- Chan:
+    level: 0
+    nameMsg: MSG_EnemyName_Chan
+    tattleMsg: MSG_EnemyTattle_Chan
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 10, 0 ]
+    shadowOffset: 0
+- Lee:
+    level: 0
+    nameMsg: MSG_EnemyName_Lee
+    tattleMsg: MSG_EnemyTattle_Lee
+    walkSound: [ SOUND_DUPLIGHOST_STEP, SOUND_DUPLIGHOST_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- LeeGoombario:
+    level: 0
+    nameMsg: MSG_EnemyName_LeeGoombario
+    tattleMsg: MSG_EnemyTattle_LeeGoombario
+    walkSound: [ SOUND_GOOMBA_STEP, SOUND_GOOMBA_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 6, 0 ]
+    shadowOffset: 0
+- LeeKooper:
+    level: 0
+    nameMsg: MSG_EnemyName_LeeKooper
+    tattleMsg: MSG_EnemyTattle_LeeKooper
+    walkSound: [ SOUND_KOOPER_STEP, SOUND_KOOPER_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 2, 0 ]
+    shadowOffset: 0
+- LeeBombette:
+    level: 0
+    nameMsg: MSG_EnemyName_LeeBombette
+    tattleMsg: MSG_EnemyTattle_LeeBombette
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- LeeParakarry:
+    level: 0
+    nameMsg: MSG_EnemyName_LeeParakarry
+    tattleMsg: MSG_EnemyTattle_LeeParakarry
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- LeeBow:
+    level: 0
+    nameMsg: MSG_EnemyName_LeeBow
+    tattleMsg: MSG_EnemyTattle_LeeBow
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- LeeWatt:
+    level: 0
+    nameMsg: MSG_EnemyName_LeeWatt
+    tattleMsg: MSG_EnemyTattle_LeeWatt
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- LeeSushie:
+    level: 0
+    nameMsg: MSG_EnemyName_LeeSushie
+    tattleMsg: MSG_EnemyTattle_LeeSushie
+    walkSound: [ SOUND_SUSHIE_STEP, SOUND_SUSHIE_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 8, 0 ]
+    shadowOffset: 0
+- LeeLakilester:
+    level: 0
+    nameMsg: MSG_EnemyName_LeeLakilester
+    tattleMsg: MSG_EnemyTattle_LeeLakilester
+    walkSound: [ SOUND_FLIGHT, SOUND_FLIGHT ]
+    flySound: [ SOUND_FLIGHT, SOUND_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ -5, -5 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- KammyKoopa:
+    level: 99
+    nameMsg: MSG_EnemyName_KammyKoopa
+    tattleMsg: MSG_EnemyTattle_KammyKoopa
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- JrTroopa_1:
+    level: 41
+    nameMsg: MSG_EnemyName_JrTroopa1
+    tattleMsg: MSG_EnemyTattle_JrTroopa1
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
+    flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- JrTroopa_2:
+    level: 44
+    nameMsg: MSG_EnemyName_JrTroopa2
+    tattleMsg: MSG_EnemyTattle_JrTroopa2
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
+    flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- JrTroopa_3:
+    level: 52
+    nameMsg: MSG_EnemyName_JrTroopa3
+    tattleMsg: MSG_EnemyTattle_JrTroopa3
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
+    flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- JrTroopa_4:
+    level: 59
+    nameMsg: MSG_EnemyName_JrTroopa4
+    tattleMsg: MSG_EnemyTattle_JrTroopa4
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
+    flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- JrTroopa_5:
+    level: 65
+    nameMsg: MSG_EnemyName_JrTroopa5
+    tattleMsg: MSG_EnemyTattle_JrTroopa5
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
+    flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- JrTroopa_6:
+    level: 74
+    nameMsg: MSG_EnemyName_JrTroopa6
+    tattleMsg: MSG_EnemyTattle_JrTroopa6
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
+    flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- JrTroopaDup1:
+    level: 74
+    nameMsg: MSG_EnemyName_JrTroopa6
+    tattleMsg: MSG_EnemyTattle_JrTroopa6
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
+    flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- JrTroopaDup2:
+    level: 74
+    nameMsg: MSG_EnemyName_JrTroopa6
+    tattleMsg: MSG_EnemyTattle_JrTroopa6
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
+    flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- BlueGoombaBoss:
+    level: 20
+    nameMsg: MSG_EnemyName_BlueGoombaBoss
+    tattleMsg: MSG_EnemyTattle_BlueGoombaBoss
+    walkSound: [ SOUND_GOOMBA_BROS_STEP, SOUND_GOOMBA_BROS_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_HURT
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- RedGoombaBoss:
+    level: 20
+    nameMsg: MSG_EnemyName_RedGoombaBoss
+    tattleMsg: MSG_EnemyTattle_RedGoombaBoss
+    walkSound: [ SOUND_GOOMBA_BROS_STEP, SOUND_GOOMBA_BROS_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_HURT
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- GoombaKing:
+    level: 49
+    nameMsg: MSG_EnemyName_GoombaKing
+    tattleMsg: MSG_EnemyTattle_GoombaKing
+    walkSound: [ SOUND_HEAVY_NPC_STEP_A, SOUND_HEAVY_NPC_STEP_A ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 22, 30 ]
+    tattleCamOffset: [ 0, 6, 10 ]
+    shadowOffset: 0
+- GoomnutTree:
+    ignoreDuringCount: TRUE
+    level: 1
+    nameMsg: MSG_EnemyName_GoomnutTree
+    tattleMsg: MSG_EnemyTattle_GoomnutTree
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 8, 12, 17 ]
+    shadowOffset: 0
+- GoombarioTutor1:
+    level: 99
+    nameMsg: MSG_EnemyName_GoombarioTutor
+    tattleMsg: MSG_EnemyTattle_GoombarioTutor
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- MagikoopaBoss:
+    level: 32
+    nameMsg: MSG_EnemyName_MagikoopaBoss
+    tattleMsg: MSG_EnemyTattle_MagikoopaBoss
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- FlyingMagikoopaBoss:
+    level: 32
+    nameMsg: MSG_EnemyName_FlyingMagikoopaBoss
+    tattleMsg: MSG_EnemyTattle_MagikoopaBossDup
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- MagikoopaDup1:
+    level: 0
+    nameMsg: MSG_EnemyName_MagikoopaBoss
+    tattleMsg: MSG_EnemyTattle_MagikoopaBoss
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- MagikoopaDup2:
+    level: 0
+    nameMsg: MSG_EnemyName_FlyingMagikoopaBoss
+    tattleMsg: MSG_EnemyTattle_MagikoopaBossDup
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- FakeBowser:
+    ignoreDuringCount: TRUE
+    level: 0
+    nameMsg: MSG_EnemyName_FakeBowser
+    tattleMsg: MSG_EnemyTattle_FakeBowser
+    walkSound: [ SOUND_FAKE_BOWSER_STEP, SOUND_FAKE_BOWSER_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- KoopaBros:
+    level: 0
+    nameMsg: MSG_EnemyName_KoopaBros
+    tattleMsg: MSG_EnemyTattle_KoopaBros
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 26 ]
+    shadowOffset: 26
+- GreenNinjakoopa:
+    level: 16
+    nameMsg: MSG_EnemyName_GreenNinjakoopa
+    tattleMsg: MSG_EnemyTattle_GreenNinjakoopa
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- RedNinjakoopa:
+    level: 17
+    nameMsg: MSG_EnemyName_RedNinjakoopa
+    tattleMsg: MSG_EnemyTattle_RedNinjakoopa
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- BlackNinjakoopa:
+    level: 17
+    nameMsg: MSG_EnemyName_BlackNinjakoopa
+    tattleMsg: MSG_EnemyTattle_BlackNinjakoopa
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- YellowNinjakoopa:
+    level: 16
+    nameMsg: MSG_EnemyName_YellowNinjakoopa
+    tattleMsg: MSG_EnemyTattle_YellowNinjakoopa
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 4, 0 ]
+    shadowOffset: 0
+- Eldstar:
+    level: 99
+    nameMsg: MSG_EnemyName_GoombarioTutor
+    tattleMsg: MSG_EnemyTattle_GoombarioTutor
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Buzzar:
+    level: 35
+    nameMsg: MSG_EnemyName_Buzzar
+    tattleMsg: MSG_EnemyTattle_Buzzar
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_BUZZAR_FLAP, SOUND_BUZZAR_FLAP ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ -14, -14 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Tutankoopa:
+    level: 55
+    nameMsg: MSG_EnemyName_Tutankoopa
+    tattleMsg: MSG_EnemyTattle_Tutankoopa
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ -3, -3 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Chomp:
+    level: 14
+    nameMsg: MSG_EnemyName_Chomp
+    tattleMsg: MSG_EnemyTattle_Chomp
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- TubbaBlubbaInvincible:
+    level: 70
+    nameMsg: MSG_EnemyName_TubbaBlubbaInvincible
+    tattleMsg: MSG_EnemyTattle_TubbaBlubba
+    walkSound: [ SOUND_HEAVY_NPC_STEP_C, SOUND_HEAVY_NPC_STEP_C ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- TubbaBlubba:
+    level: 0
+    nameMsg: MSG_EnemyName_TubbaBlubba
+    tattleMsg: MSG_EnemyTattle_TubbaBlubbaInvincible
+    walkSound: [ SOUND_HEAVY_NPC_STEP_C, SOUND_HEAVY_NPC_STEP_C ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- TubbaHeart:
+    level: 0
+    nameMsg: MSG_EnemyName_TubbaHeart
+    tattleMsg: MSG_EnemyTattle_TubbaHeart
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_TUBBA_HEART_JUMP
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- StiltGuy:
+    level: 0
+    nameMsg: MSG_EnemyName_StiltGuy
+    tattleMsg: MSG_EnemyTattle_StiltGuy
+    walkSound: [ SOUND_STILT_GUY_STEP, SOUND_STILT_GUY_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- ShyStack:
+    level: 0
+    nameMsg: MSG_EnemyName_ShyStack
+    tattleMsg: MSG_EnemyTattle_ShyStack
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 10, 10 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- ShySquad:
+    level: 0
+    nameMsg: MSG_EnemyName_ShySquad
+    tattleMsg: MSG_EnemyTattle_ShySquad
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 5, 0 ]
+    shadowOffset: 0
+- GeneralGuy:
+    level: 73
+    nameMsg: MSG_EnemyName_GeneralGuyDup
+    tattleMsg: MSG_EnemyTattle_GeneralGuyDup
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- ToyTank:
+    level: 0
+    nameMsg: MSG_EnemyName_GeneralGuy
+    tattleMsg: MSG_EnemyTattle_GeneralGuy
+    walkSound: [ SOUND_TOY_TANK_STEP, SOUND_TOY_TANK_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- LightBulb:
+    level: 0
+    nameMsg: MSG_EnemyName_Bulb
+    tattleMsg: MSG_EnemyTattle_Bulb
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- SignalGuy:
+    level: 0
+    nameMsg: MSG_EnemyName_ShyGuy
+    tattleMsg: MSG_EnemyTattle_ShyGuy
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- ShySquadRedux:
+    level: 0
+    nameMsg: MSG_EnemyName_ShySquadRedux
+    tattleMsg: MSG_EnemyTattle_ShySquadRedux
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- ShySquadStub:
+    level: 0
+    nameMsg: MSG_EnemyName_ShyGuy
+    tattleMsg: MSG_EnemyTattle_ShyGuy
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_A ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- AntiGuyOmo:
+    level: 42
+    nameMsg: MSG_EnemyName_AntiGuy
+    tattleMsg: MSG_EnemyTattle_AntiGuy
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- AntiGuyKpa:
+    level: 42
+    nameMsg: MSG_EnemyName_AntiGuy
+    tattleMsg: MSG_EnemyTattle_AntiGuy
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- BigLanternGhost:
+    level: 42
+    nameMsg: MSG_EnemyName_BigLanternGhost
+    tattleMsg: MSG_EnemyTattle_BigLanternGhost
+    walkSound: [ SOUND_LANTERN_GHOST_STEP, SOUND_LANTERN_GHOST_STEP ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- GoombaKing_Dup:
+    ignoreDuringCount: TRUE
+    level: 49
+    nameMsg: MSG_EnemyName_GoombaKing
+    tattleMsg: MSG_EnemyTattle_GoombaKing
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- LavaPiranha_Phase_1:
+    level: 45
+    nameMsg: MSG_EnemyName_LavaPiranhaPhase1
+    tattleMsg: MSG_EnemyTattle_LavaPiranhaPhase1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 25, 250, 60 ]
+    shadowOffset: 0
+- LavaPiranha_Phase_2:
+    level: 45
+    nameMsg: MSG_EnemyName_LavaPiranhaPhase2
+    tattleMsg: MSG_EnemyTattle_LavaPiranhaPhase2
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 25, 250, 60 ]
+    shadowOffset: 0
+- LavaBud_Phase_1:
+    level: 0
+    nameMsg: MSG_EnemyName_LavaBudPhase1
+    tattleMsg: MSG_EnemyTattle_LavaBudPhase1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 233, 0 ]
+    shadowOffset: 0
+- LavaBud_Phase_2:
+    level: 0
+    nameMsg: MSG_EnemyName_LavaBudPhase2
+    tattleMsg: MSG_EnemyTattle_LavaBudPhase2
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 233, 0 ]
+    shadowOffset: 0
+- PetitPiranha:
+    level: 0
+    nameMsg: MSG_EnemyName_PetitPiranha
+    tattleMsg: MSG_EnemyTattle_PetitPiranha
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- PetitPiranhaBomb:
+    level: 0
+    nameMsg: MSG_EnemyName_LavaPiranhaPhase1
+    tattleMsg: MSG_EnemyTattle_LavaPiranhaPhase1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- KentCKoopa:
+    level: 55
+    nameMsg: MSG_EnemyName_KentCKoopa
+    tattleMsg: MSG_EnemyTattle_KentCKoopa
+    walkSound: [ SOUND_HEAVY_NPC_STEP_A, SOUND_HEAVY_NPC_STEP_A ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- HuffNPuff:
+    level: 80
+    nameMsg: MSG_EnemyName_HuffNPuff
+    tattleMsg: MSG_EnemyTattle_HuffNPuff
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_HUFF_N_PUFF_FLY, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- TuffPuff:
+    level: 0
+    nameMsg: MSG_EnemyName_TuffPuff
+    tattleMsg: MSG_EnemyTattle_TuffPuff
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Monstar:
+    level: 45
+    nameMsg: MSG_EnemyName_Monstar
+    tattleMsg: MSG_EnemyTattle_Monstar
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- CrystalKing:
+    level: 85
+    nameMsg: MSG_EnemyName_CrystalKing
+    tattleMsg: MSG_EnemyTattle_CrystalKing
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- CrystalClone:
+    level: 0
+    nameMsg: MSG_EnemyName_CrystalClone
+    tattleMsg: MSG_EnemyTattle_CrystalClone
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- CrystalBit:
+    level: 0
+    nameMsg: MSG_EnemyName_CrystalBit
+    tattleMsg: MSG_EnemyTattle_CrystalBit
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- IntroBowser:
+    level: 0
+    nameMsg: MSG_EnemyName_Bowser
+    tattleMsg: MSG_EnemyTattle_Bowser
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_LARGE_ACTOR_JUMP
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 241
+- HallwayBowser:
+    level: 100
+    nameMsg: MSG_EnemyName_HallwayBowser
+    tattleMsg: MSG_EnemyTattle_HallwayBowser
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_LARGE_ACTOR_JUMP
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 241
+- HallwayBowser_Dup:
+    level: 100
+    nameMsg: MSG_EnemyName_HallwayBowser
+    tattleMsg: MSG_EnemyTattle_HallwayBowser
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 241
+- FinalBowser_1:
+    level: 0
+    nameMsg: MSG_EnemyName_FinalBowser1
+    tattleMsg: MSG_EnemyTattle_FinalBowser1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_LARGE_ACTOR_JUMP
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 241, 19, 45 ]
+    shadowOffset: 241
+- FinalBowser_1_Dup:
+    level: 0
+    nameMsg: MSG_EnemyName_FinalBowser1
+    tattleMsg: MSG_EnemyTattle_FinalBowser1
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 241
+- FinalBowser_2:
+    level: 0
+    nameMsg: MSG_EnemyName_FinalBowser2
+    tattleMsg: MSG_EnemyTattle_FinalBowser2
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_LARGE_ACTOR_JUMP
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 241, 19, 45 ]
+    shadowOffset: 241
+- FinalBowser_2_Dup:
+    level: 0
+    nameMsg: MSG_EnemyName_FinalBowser2
+    tattleMsg: MSG_EnemyTattle_FinalBowser2
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 241
+- Blooper:
+    level: 44
+    nameMsg: MSG_EnemyName_Blooper
+    tattleMsg: MSG_EnemyTattle_Blooper
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 25, 25 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- ElectroBlooper1:
+    level: 50
+    nameMsg: MSG_EnemyName_ElectroBlooper
+    tattleMsg: MSG_EnemyTattle_ElectroBlooper
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 25, 25 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- ElectroBlooper2:
+    level: 50
+    nameMsg: MSG_EnemyName_ElectroBlooper
+    tattleMsg: MSG_EnemyTattle_ElectroBlooper
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 25, 25 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- SuperBlooper1:
+    level: 65
+    nameMsg: MSG_EnemyName_SuperBlooper
+    tattleMsg: MSG_EnemyTattle_SuperBlooper
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 25, 25 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- SuperBlooper2:
+    level: 65
+    nameMsg: MSG_EnemyName_SuperBlooper
+    tattleMsg: MSG_EnemyTattle_SuperBlooper
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 25, 25 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- BlooperBaby:
+    level: 0
+    nameMsg: MSG_EnemyName_BlooperBaby
+    tattleMsg: MSG_EnemyTattle_BlooperBaby
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- Lakilester_Dup:
+    level: 0
+    nameMsg: MSG_EnemyName_GhostLakilester
+    tattleMsg: MSG_EnemyTattle_GhostLakilester
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- SlotMachineStart:
+    level: 99
+    nameMsg: MSG_EnemyName_SlotMachineStart
+    tattleMsg: MSG_EnemyTattle_SlotMachineStart
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 226, 0 ]
+    shadowOffset: 0
+- SlotMachineStop:
+    level: 99
+    nameMsg: MSG_EnemyName_SlotMachineStop
+    tattleMsg: MSG_EnemyTattle_SlotMachineStop
+    walkSound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    flySound: [ SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B ]
+    jumpSound: SOUND_ACTOR_JUMP
+    hurtSound: SOUND_ACTOR_HURT
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 226, 0 ]
+    shadowOffset: 0
+- Whacka:
+    level: 0
+    nameMsg: MSG_EnemyName_Whacka
+    tattleMsg: MSG_EnemyTattle_Whacka
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- SlotMachineStartDup1:
+    level: 0
+    nameMsg: MSG_EnemyName_SlotMachineStart
+    tattleMsg: MSG_EnemyTattle_SlotMachineStart
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- SlotMachineStartDup2:
+    level: 0
+    nameMsg: MSG_EnemyName_SlotMachineStart
+    tattleMsg: MSG_EnemyTattle_SlotMachineStart
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0
+- SlotMachineStartDup3:
+    level: 0
+    nameMsg: MSG_EnemyName_SlotMachineStart
+    tattleMsg: MSG_EnemyTattle_SlotMachineStart
+    walkSound: [ SOUND_NONE, SOUND_NONE ]
+    flySound: [ SOUND_NONE, SOUND_NONE ]
+    jumpSound: SOUND_NONE
+    hurtSound: SOUND_NONE
+    stepDelay: [ 30, 30 ]
+    tattleCamOffset: [ 0, 0, 0 ]
+    shadowOffset: 0

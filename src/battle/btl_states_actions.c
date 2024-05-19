@@ -7,6 +7,12 @@
 #include "model.h"
 #include "game_modes.h"
 
+#if VERSION_JP
+extern Addr btl_states_menus_ROM_START;
+extern Addr btl_states_menus_ROM_END;
+extern Addr btl_states_menus_VRAM;
+#endif
+
 extern StageListRow* gCurrentStagePtr;
 
 extern s16 D_802809F6;

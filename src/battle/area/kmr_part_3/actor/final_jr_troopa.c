@@ -60,7 +60,11 @@ enum N(ActorParams) {
     DMG_SWOOP       = 8,
     DMG_SPIKE_DIVE  = 9,
     DMG_SPELL       = 8,
+#if VERSION_JP
+    DMG_LIGHTNING   = 5,
+#else
     DMG_LIGHTNING   = 9,
+#endif
 };
 
 // keys for getting form-specific anim sets
@@ -1351,7 +1355,11 @@ EvtScript N(EVS_Move_HealSelf) = {
     Call(SetAnimation, ACTOR_SELF, PRT_MAGE, ANIM_MageJrTroopa_Idle)
     Wait(10)
     Call(GetEnemyMaxHP, ACTOR_SELF, LVar0)
+#if VERSION_JP
+    Mul(LVar0, 16)
+#else
     Mul(LVar0, 17)
+#endif
     Div(LVar0, 100)
     Thread
         Wait(5)

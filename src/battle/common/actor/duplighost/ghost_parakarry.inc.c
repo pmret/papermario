@@ -298,7 +298,11 @@ EvtScript N(EVS_Attack_SkyDive) = {
     Switch(LVar9)
         CaseEq(PARTNER_RANK_NORMAL)
             Wait(2)
+#if VERSION_JP
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_TRIGGER_EVENTS)
+#else
             Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
+#endif
         CaseEq(PARTNER_RANK_SUPER)
             Wait(2)
             Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_TRIGGER_EVENTS)
