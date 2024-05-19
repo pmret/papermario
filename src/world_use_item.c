@@ -69,13 +69,17 @@ API_CALLABLE(WorldItem_RestoreFP) {
 
 API_CALLABLE(WorldItem_PauseTime) {
     set_time_freeze_mode(TIME_FREEZE_FULL);
+#if !VERSION_JP
     gOverrideFlags |= GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS;
+#endif
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(WorldItem_UnpauseTime) {
     set_time_freeze_mode(TIME_FREEZE_NORMAL);
+#if !VERSION_JP
     gOverrideFlags &= ~GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS;
+#endif
     return ApiStatus_DONE2;
 }
 

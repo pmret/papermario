@@ -341,6 +341,42 @@ API_CALLABLE(N(UseAbility)) {
             break;
         case SHINING_STATE_HOLDING:
             N(sync_held_position)();
+#if VERSION_JP
+            // wait for begin holding cooldown
+            if (script->functionTemp[1] != 0) {
+                script->functionTemp[1]--;
+                break;
+            }
+            if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER) {
+                break;
+            }
+            // allow stop-holding input
+            actionState = playerStatus->actionState;
+            if ((actionState == ACTION_STATE_IDLE
+                    || actionState == ACTION_STATE_WALK
+                    || actionState == ACTION_STATE_RUN
+                    || actionState == ACTION_STATE_LAND)
+                && partnerStatus->pressedButtons & BUTTON_B
+                || playerStatus->flags & PS_FLAG_HIT_FIRE
+            ) {
+        case SHINING_STATE_RELEASE:
+                playerStatus->animFlags &= ~(PA_FLAG_WATT_IN_HANDS | PA_FLAG_USING_WATT);
+                npc->curAnim = ANIM_WorldWatt_Idle;
+                partner_clear_player_tracking(npc);
+                N(IsPlayerHolding) = FALSE;
+                partnerStatus->actingPartner = PARTNER_NONE;
+                partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
+                gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
+                N(AbilityState) = SHINING_STATE_BEGIN;
+                npc_set_palswap_mode_A(npc, NPC_PAL_ADJUST_NONE);
+                if (!(playerStatus->flags & PS_FLAG_HIT_FIRE)) {
+                    set_action_state(ACTION_STATE_IDLE);
+                } else {
+                    set_action_state(ACTION_STATE_HIT_LAVA);
+                }
+                return ApiStatus_DONE1;
+            }
+#else
             // immediately cancel state on touching fire
             if ((playerStatus->flags & PS_FLAG_HIT_FIRE)) {
                 N(AbilityState) = SHINING_STATE_RELEASE;
@@ -364,9 +400,11 @@ API_CALLABLE(N(UseAbility)) {
             ) {
                 N(AbilityState) = SHINING_STATE_RELEASE;
             }
+#endif
             break;
     }
 
+#if !VERSION_JP
     if (N(AbilityState) == SHINING_STATE_RELEASE) {
         playerStatus->animFlags &= ~(PA_FLAG_WATT_IN_HANDS | PA_FLAG_USING_WATT);
         npc->curAnim = ANIM_WorldWatt_Idle;
@@ -382,6 +420,7 @@ API_CALLABLE(N(UseAbility)) {
         }
         return ApiStatus_DONE1;
     }
+#endif
 
     if (N(StaticEffect) != NULL) {
         N(StaticEffect)->data.staticStatus->pos.x = npc->pos.x;

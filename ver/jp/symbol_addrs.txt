@@ -3002,3 +3002,32 @@ MsgCharWidthKana = 0x802E6380; // rom:0x10CC20
 MsgCharWidthLatin = 0x802E6448; // rom:0x10CCE8
 MsgCharWidthKanji = 0x802E6464; // rom:0x10CD04
 MsgCharWidthButtons = 0x802E64E0; // rom:0x10CD80
+
+battle_action_cmd_whirlwind_bubble_png = 0x802AA1A0; // rom:0x42C7D0
+
+battle_item_dusty_hammer_png = 0x802A1800; // rom:0x71FB10
+battle_item_pebble_png = 0x802A1800; // rom:0x7212B0
+battle_item_sleepy_sheep1_png = 0x802A1F30; // rom:0x726EC0
+battle_item_sleepy_sheep2_png = 0x802A2490; // rom:0x727420
+battle_item_sleepy_sheep3_png = 0x802A29F0; // rom:0x727980
+battle_item_egg_missile1_png = 0x802A18D0; // rom:0x7310D0
+battle_item_egg_missile2_png = 0x802A1AF0; // rom:0x7312F0
+battle_item_egg_missile3_png = 0x802A1D10; // rom:0x731510
+battle_item_egg_missile4_png = 0x802A1F30; // rom:0x731730
+battle_item_insecticide_herb_png = 0x802A19E0; // rom:0x732A70
+battle_item_mystery_png = 0x802A1F10; // rom:0x734E00
+battle_item_coconut_png = 0x802A1800; // rom:0x737860
+
+battle_move_hammer_throw_dusty_hammer_png = 0x802A3048; // rom:0x75BDD8
+battle_move_hammer_throw_dusty_hammer_pal = 0x802A3248; // rom:0x75BFD8
+battle_move_hammer_throw_basic_hammer_png = 0x802A3268; // rom:0x75BFF8
+battle_move_hammer_throw_basic_hammer_pal = 0x802A3468; // rom:0x75C1F8
+battle_move_hammer_throw_super_hammer_png = 0x802A3488; // rom:0x75C218
+battle_move_hammer_throw_super_hammer_pal = 0x802A3688; // rom:0x75C418
+battle_move_hammer_throw_ultra_hammer_png = 0x802A36A8; // rom:0x75C438
+battle_move_hammer_throw_ultra_hammer_pal = 0x802A38A8; // rom:0x75C638
+battle_move_hammer_throw_vtx = 0x802A38C8;              // rom:0x75C658 size:0x40
+battle_move_hammer_throw_dusty_hammer_gfx = 0x802A3908; // rom:0x75C698
+battle_move_hammer_throw_basic_hammer_gfx = 0x802A39F8; // rom:0x75C788
+battle_move_hammer_throw_super_hammer_gfx = 0x802A3AE8; // rom:0x75C878
+battle_move_hammer_throw_ultra_hammer_gfx = 0x802A3BD8; // rom:0x75C968

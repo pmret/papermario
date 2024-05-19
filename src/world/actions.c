@@ -38,7 +38,6 @@ void action_update_use_tweester(void);
 void action_update_state_23(void);
 
 #if VERSION_JP // TODO remove once segments are split
-extern Addr world_use_item_VRAM;
 extern Addr world_action_idle_ROM_START;
 extern Addr world_action_idle_ROM_END;
 extern Addr world_action_walk_ROM_START;

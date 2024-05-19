@@ -56,6 +56,11 @@ HudScript HES_FilenameCaret = {
 
 HudScript HES_FilenameSpace = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_files_filename_space, 8, 8);
 
+#if VERSION_JP
+HudScript HES_HeaderStats = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_label_spirits, 32, 16);
+
+HudScript HES_HeaderBadges = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_label_map, 32, 16);
+#else
 HudScript HES_HeaderStats = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_label_stats, 48, 16);
 
 HudScript HES_HeaderBadges = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_label_badges, 48, 16);
@@ -67,6 +72,7 @@ HudScript HES_HeaderParty = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_label_party, 48
 HudScript HES_HeaderSpirits = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_label_spirits, 48, 16);
 
 HudScript HES_HeaderMap = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_label_map, 48, 16);
+#endif
 
 #if VERSION_PAL
 HudScript HES_HeaderStats_de = HES_TEMPLATE_CI_CUSTOM_SIZE(de_ui_pause_label_stats, 48, 16);
