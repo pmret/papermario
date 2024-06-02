@@ -457,7 +457,9 @@ def build_player_sprites(sprite_order: List[str], build_dir: Path, asset_stack: 
 
         subprocess.run(
             [
-                str(TOOLS_DIR / "build/yay0/Yay0compress"),
+                str("crunch64"),
+                "compress",
+                "yay0",
                 yay0_in_path,
                 yay0_out_path,
             ]

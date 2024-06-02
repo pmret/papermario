@@ -57,5 +57,4 @@ build/
 *.backup
 *.crash
 
-/tools/Yay0compress
 /tools/n64crc

@@ -19,6 +19,7 @@ pipeline {
                 sh 'curl -L "https://github.com/decompals/mips-gcc-egcs-2.91.66/releases/latest/download/mips-gcc-egcs-2.91.66-linux.tar.gz" | tar zx -C tools/build/cc/egcs'
                 sh 'pip install -U -r requirements.txt'
                 sh 'cargo install pigment64'
+                sh 'cargo install crunch64-cli'
                 sh './configure'
             }
         }
