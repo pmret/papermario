@@ -20,11 +20,15 @@ if ROOT.is_absolute():
     ROOT = ROOT.relative_to(Path.cwd())
 
 BUILD_TOOLS = Path("tools/build")
-YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
-PIGMENT = "pigment64"
-PIGMENT_REQ_VERSION = "0.4.2"
+PIGMENT64 = "pigment64"
+CRUNCH64 = "crunch64"
+
+RUST_TOOLS = [
+    (PIGMENT64, "0.4.2"),
+    (CRUNCH64, "0.3.1"),
+]
 
 
 def exec_shell(command: List[str]) -> str:
@@ -212,7 +216,7 @@ def write_ninja_rules(
     ninja.rule(
         "pigment",
         description="img($img_type) $in",
-        command=f"{PIGMENT} to-bin $img_flags -f $img_type -o $out $in",
+        command=f"{PIGMENT64} to-bin $img_flags -f $img_type -o $out $in",
     )
 
     ninja.rule(
@@ -224,7 +228,7 @@ def write_ninja_rules(
     ninja.rule(
         "yay0",
         description="yay0 $in",
-        command=f"{BUILD_TOOLS}/yay0/Yay0compress $in $out",
+        command=f"crunch64 compress yay0 $in $out",
     )
 
     ninja.rule(
@@ -354,7 +358,6 @@ def write_ninja_for_tools(ninja: ninja_syntax.Writer):
         command=f"cc -w $in -O3 -o $out",
     )
 
-    ninja.build(YAY0_COMPRESS_TOOL, "cc_tool", f"{BUILD_TOOLS}/yay0/Yay0compress.c")
     ninja.build(CRC_TOOL, "cc_tool", f"{BUILD_TOOLS}/rom/n64crc.c")
 
 
@@ -549,9 +552,7 @@ class Configure:
                 implicit = []
                 order_only = []
 
-                if task == "yay0":
-                    implicit.append(YAY0_COMPRESS_TOOL)
-                elif task in ["cc", "cxx", "cc_modern"]:
+                if task in ["cc", "cxx", "cc_modern"]:
                     order_only.append("generated_code_" + self.version)
                     order_only.append("inc_img_bins_" + self.version)
 
@@ -1334,16 +1335,33 @@ if __name__ == "__main__":
             print(f"    ./configure --cpp {gcc_cpps[0]}")
             exit(1)
 
-    try:
-        version = exec_shell([PIGMENT, "--version"]).split(" ")[1].strip()
+    version_err_msg = ""
+    missing_tools = []
+    version_old_tools = []
+    for tool, req_version in RUST_TOOLS:
+        try:
+            version = exec_shell([tool, "--version"]).split(" ")[1].strip()
 
-        if version < PIGMENT_REQ_VERSION:
-            print(f"error: {PIGMENT} version {PIGMENT_REQ_VERSION} or newer is required, system version is {version}\n")
-            exit(1)
-    except (FileNotFoundError, PermissionError):
-        print(f"error: {PIGMENT} is not installed\n")
-        print("To build and install it, obtain cargo:\n\tcurl https://sh.rustup.rs -sSf | sh")
-        print(f"and then run:\n\tcargo install {PIGMENT}")
+            if version < req_version:
+                version_err_msg += (
+                    f"error: {tool} version {req_version} or newer is required, system version is {version}"
+                )
+                version_old_tools.append(tool)
+        except (FileNotFoundError, PermissionError):
+            missing_tools.append(tool)
+
+    if version_old_tools or missing_tools:
+        if version_err_msg:
+            print(version_err_msg)
+        if missing_tools:
+            print(f"error: cannot find required Rust tool(s): {', '.join(missing_tools)}")
+        print()
+        print("To install/update dependencies, obtain cargo:\n\tcurl https://sh.rustup.rs -sSf | sh")
+        print(f"and then run:")
+        for tool in missing_tools:
+            print(f"\tcargo install {tool}")
+        for tool in version_old_tools:
+            print(f"\tcargo install {tool}")
         exit(1)
 
     # default version behaviour is to only do those that exist
