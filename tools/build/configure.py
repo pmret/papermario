@@ -26,8 +26,8 @@ PIGMENT64 = "pigment64"
 CRUNCH64 = "crunch64"
 
 RUST_TOOLS = [
-    (PIGMENT64, "0.4.2"),
-    (CRUNCH64, "0.3.1"),
+    (PIGMENT64, "pigment64", "0.4.2"),
+    (CRUNCH64, "crunch64-cli", "0.3.1"),
 ]
 
 
@@ -1338,7 +1338,7 @@ if __name__ == "__main__":
     version_err_msg = ""
     missing_tools = []
     version_old_tools = []
-    for tool, req_version in RUST_TOOLS:
+    for tool, crate_name, req_version in RUST_TOOLS:
         try:
             version = exec_shell([tool, "--version"]).split(" ")[1].strip()
 
@@ -1346,9 +1346,9 @@ if __name__ == "__main__":
                 version_err_msg += (
                     f"error: {tool} version {req_version} or newer is required, system version is {version}"
                 )
-                version_old_tools.append(tool)
+                version_old_tools.append(crate_name)
         except (FileNotFoundError, PermissionError):
-            missing_tools.append(tool)
+            missing_tools.append(crate_name)
 
     if version_old_tools or missing_tools:
         if version_err_msg:
