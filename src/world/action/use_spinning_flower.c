@@ -64,13 +64,16 @@ void action_update_use_spinning_flower(void) {
         disable_player_input();
         playerStatus->flags |= PS_FLAG_ROTATION_LOCKED;
         entityID = gCollisionStatus.curFloor;
+#if VERSION_JP
+        gCollisionStatus.curFloor = -1;
+#endif
 
         TempPointer = &SpinningFlower_EntityIndex;
         if (entityID >= 0){
-            if (!(entityID & COLLISION_WITH_ENTITY_BIT)) {
-                SpinningFlower_EntityIndex = -1;
-            } else {
+            if (entityID & COLLISION_WITH_ENTITY_BIT) {
                 SpinningFlower_EntityIndex = entityID & 0x3FF;
+            } else {
+                SpinningFlower_EntityIndex = -1;
             }
         } else {
             SpinningFlower_EntityIndex = -1;

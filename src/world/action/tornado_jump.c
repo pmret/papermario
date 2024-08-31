@@ -136,7 +136,9 @@ void action_update_tornado_jump(void) {
 
                 surfaceType = get_collider_flags(colliderBelow) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                 if (surfaceType == SURFACE_TYPE_LAVA) {
+#if !VERSION_JP
                     playerStatus->hazardType = HAZARD_TYPE_LAVA;
+#endif
                     playerStatus->flags &= ~(PS_FLAG_SPINNING | PS_FLAG_FLYING);
                     set_action_state(ACTION_STATE_HIT_LAVA);
                     playerStatus->flags |= PS_FLAG_HIT_FIRE;

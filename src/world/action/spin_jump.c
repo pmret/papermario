@@ -115,7 +115,9 @@ void action_update_spin_jump(void) {
                 } else {
                     surfaceType = get_collider_flags(belowColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                     if (surfaceType == SURFACE_TYPE_LAVA) {
+#if !VERSION_JP
                         playerStatus->hazardType = HAZARD_TYPE_LAVA;
+#endif
                         set_action_state(ACTION_STATE_HIT_LAVA);
                         playerStatus->flags |= PS_FLAG_HIT_FIRE;
                         playerStatus->flags &= ~PS_FLAG_FLYING;
