@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 from typing import List
-from splat.segtypes.n64.segment import N64Segment
+from splat.segtypes.segment import Segment
 from splat.util import options
 import yaml as yaml_loader
 
@@ -43,7 +43,7 @@ def effects_from_yaml(yaml_path: Path) -> List[Effect]:
     return effects
 
 
-class N64SegPm_effect_loads(N64Segment):
+class N64SegPm_effect_loads(Segment):
     effects: List[Effect] = []
 
     @staticmethod

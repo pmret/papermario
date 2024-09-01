@@ -10,7 +10,7 @@ import json
 import struct
 from typing import Literal
 
-from splat.segtypes.n64.segment import N64Segment
+from splat.segtypes.segment import Segment
 from splat.util import options
 
 GROUPS = [
@@ -194,7 +194,7 @@ def extract(input_data: bytes, endian: Literal["big", "little"] = "big") -> str:
     )
 
 
-class N64SegPm_sprite_shading_profiles(N64Segment):
+class N64SegPm_sprite_shading_profiles(Segment):
     OUT_DIR: Path = options.opts.asset_path / "sprite"
 
     def scan(self, rom_bytes):

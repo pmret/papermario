@@ -4,7 +4,7 @@ import struct
 from pathlib import Path
 
 import crunch64
-from splat.segtypes.n64.segment import N64Segment
+from splat.segtypes.segment import Segment
 from common import iter_in_groups
 from splat.util import options
 import png  # type: ignore
@@ -66,7 +66,7 @@ def add_file_ext(name: str, linker: bool = False) -> str:
         return name + ".bin"
 
 
-class N64SegPm_map_data(N64Segment):
+class N64SegPm_map_data(Segment):
     def __init__(
         self,
         rom_start,

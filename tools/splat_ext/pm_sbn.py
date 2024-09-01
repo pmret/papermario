@@ -8,7 +8,7 @@ from typing import List
 
 # splat imports; will fail if script run directly
 try:
-    from splat.segtypes.n64.segment import N64Segment
+    from splat.segtypes.segment import Segment
     from splat.segtypes.linker_entry import LinkerEntry
     from splat.util import options
 
@@ -542,7 +542,7 @@ class InitSongEntry:
 
 if splat_loaded:
 
-    class N64SegPm_sbn(N64Segment):
+    class N64SegPm_sbn(Segment):
         def split(self, rom_bytes):
             dir = options.opts.asset_path / self.dir / self.name
             data = rom_bytes[self.rom_start : self.rom_end]
