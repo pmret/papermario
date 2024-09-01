@@ -113,45 +113,6 @@ extern HudScript HES_StatusSPIncrement7;
 
 extern EvtScript EVS_World_UseItem;
 
-#if VERSION_JP // TODO remove once segments are split
-extern Addr world_use_item_ROM_START;
-extern Addr world_use_item_ROM_END;
-extern Addr world_use_item_VRAM;
-extern Addr world_partner_goombario_ROM_START;
-extern Addr world_partner_goombario_ROM_END;
-extern Addr world_partner_goombario_VRAM;
-extern Addr world_partner_kooper_ROM_START;
-extern Addr world_partner_kooper_ROM_END;
-extern Addr world_partner_kooper_VRAM;
-extern Addr world_partner_bombette_ROM_START;
-extern Addr world_partner_bombette_ROM_END;
-extern Addr world_partner_bombette_VRAM;
-extern Addr world_partner_parakarry_ROM_START;
-extern Addr world_partner_parakarry_ROM_END;
-extern Addr world_partner_parakarry_VRAM;
-extern Addr world_partner_goompa_ROM_START;
-extern Addr world_partner_goompa_ROM_END;
-extern Addr world_partner_goompa_VRAM;
-extern Addr world_partner_watt_ROM_START;
-extern Addr world_partner_watt_ROM_END;
-extern Addr world_partner_watt_VRAM;
-extern Addr world_partner_sushie_ROM_START;
-extern Addr world_partner_sushie_ROM_END;
-extern Addr world_partner_sushie_VRAM;
-extern Addr world_partner_lakilester_ROM_START;
-extern Addr world_partner_lakilester_ROM_END;
-extern Addr world_partner_lakilester_VRAM;
-extern Addr world_partner_bow_ROM_START;
-extern Addr world_partner_bow_ROM_END;
-extern Addr world_partner_bow_VRAM;
-extern Addr world_partner_goombaria_ROM_START;
-extern Addr world_partner_goombaria_ROM_END;
-extern Addr world_partner_goombaria_VRAM;
-extern Addr world_partner_twink_ROM_START;
-extern Addr world_partner_twink_ROM_END;
-extern Addr world_partner_twink_VRAM;
-#endif
-
 s32 partner_is_idle(Npc* partner);
 s32 world_partner_can_open_menus_default(Npc* partner);
 void _use_partner_ability(void);

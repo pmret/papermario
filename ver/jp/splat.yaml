@@ -1039,8 +1039,157 @@ segments:
     - [0x1381B0, ci8,     letter_content_12, 70, 95]
     - [0x139BB0, linker_offset, letter_content_12_pal]
     - [0x139BB0, palette, letter_content_12]
-    - [0x139DB0]
-  - [0x139DB0, bin]
+    - [0x139DB0, bin]
+  - name: ui_images_filemenu_pause
+    type: code
+    start: 0x139DC0
+    vram: 0x8023E000
+    subsegments:
+    - [auto, ci4, ui/pause/unused_badge_points, 24, 24]
+    - [auto, palette, ui/pause/unused_badge_points]
+    - [auto, palette, ui/pause/unused_badge_points.disabled]
+    - [auto, ci4, ui/pause/unused_compass, 24, 24]
+    - [auto, palette, ui/pause/unused_compass]
+    - [auto, palette, ui/pause/unused_compass.disabled]
+    - [auto, ci4, ui/pause/cursor_hand, 16, 16]
+    - [auto, palette, ui/pause/cursor_hand]
+    - [auto, ci4, ui/files/filename_caret, 16, 16]
+    - [auto, palette, ui/files/filename_caret]
+    - [auto, ci4, ui/files/filename_space, 8, 8]
+    - [auto, palette, ui/files/filename_space]
+    - [auto, ci4, ui/pause/label_spirits, 32, 16]
+    - [auto, palette, ui/pause/label_spirits]
+    - [auto, ci4, ui/pause/label_map, 32, 16]
+    - [auto, palette, ui/pause/label_map]
+    - [auto, ci4, ui/pause/small_digit_0, 8, 8]
+    - [auto, palette, ui/pause/small_digit_0]
+    - [auto, ci4, ui/pause/small_digit_1, 8, 8]
+    - [auto, palette, ui/pause/small_digit_1]
+    - [auto, ci4, ui/pause/small_digit_2, 8, 8]
+    - [auto, palette, ui/pause/small_digit_2]
+    - [auto, ci4, ui/pause/small_digit_3, 8, 8]
+    - [auto, palette, ui/pause/small_digit_3]
+    - [auto, ci4, ui/pause/small_digit_4, 8, 8]
+    - [auto, palette, ui/pause/small_digit_4]
+    - [auto, ci4, ui/pause/small_digit_5, 8, 8]
+    - [auto, palette, ui/pause/small_digit_5]
+    - [auto, ci4, ui/pause/small_digit_6, 8, 8]
+    - [auto, palette, ui/pause/small_digit_6]
+    - [auto, ci4, ui/pause/small_digit_7, 8, 8]
+    - [auto, palette, ui/pause/small_digit_7]
+    - [auto, ci4, ui/pause/small_digit_8, 8, 8]
+    - [auto, palette, ui/pause/small_digit_8]
+    - [auto, ci4, ui/pause/small_digit_9, 8, 8]
+    - [auto, palette, ui/pause/small_digit_9]
+    - [auto, ci4, ui/pause/small_text_bp, 8, 8]
+    - [auto, palette, ui/pause/small_text_bp]
+    - [auto, ci4, ui/pause/label_jp_file, 32, 16]
+    - [auto, palette, ui/pause/label_jp_file]
+    - [auto, ci4, ui/pause/label_jp_file_disabled, 32, 16]
+    - [auto, palette, ui/pause/label_jp_file_disabled]
+    - [auto, ci4, ui/files/option_mono_on, 64, 16]
+    - [auto, palette, ui/files/option_mono_on]
+    - [auto, ci4, ui/files/option_mono_off, 64, 16]
+    - [auto, palette, ui/files/option_mono_off]
+    - [auto, ci4, ui/files/option_stereo_on, 64, 16]
+    - [auto, palette, ui/files/option_stereo_on]
+    - [auto, ci4, ui/files/option_stereo_off, 64, 16]
+    - [auto, palette, ui/files/option_stereo_off]
+    - [auto, ci4, ui/files/eldstar, 16, 16]
+    - [auto, palette, ui/files/eldstar]
+    - [auto, ci4, ui/files/eldstar_silhouette, 16, 16]
+    - [auto, palette, ui/files/eldstar_silhouette]
+    - [auto, ci4, ui/files/mamar, 16, 16]
+    - [auto, palette, ui/files/mamar]
+    - [auto, ci4, ui/files/mamar_silhouette, 16, 16]
+    - [auto, palette, ui/files/mamar_silhouette]
+    - [auto, ci4, ui/files/skolar, 16, 16]
+    - [auto, palette, ui/files/skolar]
+    - [auto, ci4, ui/files/skolar_silhouette, 16, 16]
+    - [auto, palette, ui/files/skolar_silhouette]
+    - [auto, ci4, ui/files/muskular, 16, 16]
+    - [auto, palette, ui/files/muskular]
+    - [auto, ci4, ui/files/muskular_silhouette, 16, 16]
+    - [auto, palette, ui/files/muskular_silhouette]
+    - [auto, ci4, ui/files/misstar, 16, 16]
+    - [auto, palette, ui/files/misstar]
+    - [auto, ci4, ui/files/misstar_silhouette, 16, 16]
+    - [auto, palette, ui/files/misstar_silhouette]
+    - [auto, ci4, ui/files/klevar, 16, 16]
+    - [auto, palette, ui/files/klevar]
+    - [auto, ci4, ui/files/klevar_silhouette, 16, 16]
+    - [auto, palette, ui/files/klevar_silhouette]
+    - [auto, ci4, ui/files/kalmar, 16, 16]
+    - [auto, palette, ui/files/kalmar]
+    - [auto, ci4, ui/files/kalmar_silhouette, 16, 16]
+    - [auto, palette, ui/files/kalmar_silhouette]
+    - [auto, ci4, ui/pause/map_walk0, 24, 24]
+    - [auto, palette, ui/pause/map_walk0]
+    - [auto, ci4, ui/pause/map_walk1, 24, 24]
+    - [auto, palette, ui/pause/map_walk1]
+    - [auto, ci4, ui/pause/map_walk2, 24, 24]
+    - [auto, palette, ui/pause/map_walk2]
+    - [auto, ci4, ui/pause/jp_super, 40, 16]
+    - [auto, palette, ui/pause/jp_super]
+    - [auto, ci4, ui/pause/jp_ultra, 40, 16]
+    - [auto, palette, ui/pause/jp_ultra]
+    - [auto, ci4, ui/pause/list_prev_page, 16, 16]
+    - [auto, palette, ui/pause/list_prev_page]
+    - [auto, ci4, ui/pause/list_next_page, 16, 16]
+    - [auto, palette, ui/pause/list_next_page]
+    - [auto, ci4, ui/pause/unused_z_up_arrow, 16, 16]
+    - [auto, palette, ui/pause/unused_z_up_arrow]
+    - [auto, ci4, ui/pause/unused_r_down_arrow, 16, 16]
+    - [auto, palette, ui/pause/unused_r_down_arrow]
+    - [auto, ci4, ui/pause/desc_msg_prev, 16, 16]
+    - [auto, palette, ui/pause/desc_msg_prev]
+    - [auto, ci4, ui/pause/desc_msg_next, 16, 16]
+    - [auto, palette, ui/pause/desc_msg_next]
+    - [auto, ci4, ui/pause/bp_needed, 48, 8]
+    - [auto, palette, ui/pause/bp_needed]
+    - [auto, ci4, ui/pause/mario_large, 32, 32]
+    - [auto, palette, ui/pause/mario_large]
+    - [auto, ci4, ui/pause/dash, 16, 8]
+    - [auto, palette, ui/pause/dash]
+    - [auto, ci4, ui/pause/stat_bp, 16, 16]
+    - [auto, palette, ui/pause/stat_bp]
+    - [auto, ci4, ui/pause/stat_mario, 16, 16]
+    - [auto, palette, ui/pause/stat_mario]
+    - [auto, ci4, ui/pause/stat_time, 16, 16]
+    - [auto, palette, ui/pause/stat_time]
+    - [auto, ci4, ui/pause/stat_star_piece0, 16, 16]
+    - [auto, palette, ui/pause/stat_star_piece0]
+    - [auto, ci4, ui/pause/stat_star_piece1, 16, 16]
+    - [auto, palette, ui/pause/stat_star_piece1]
+    - [auto, ci4, ui/pause/stat_star_piece2, 16, 16]
+    - [auto, palette, ui/pause/stat_star_piece2]
+    - [auto, ci4, ui/pause/stat_fp, 16, 16]
+    - [auto, palette, ui/pause/stat_fp]
+    - [auto, ci4, ui/pause/stat_times, 8, 8]
+    - [auto, palette, ui/pause/stat_times]
+    - [auto, ci4, ui/pause/stat_boots0, 16, 16]
+    - [auto, palette, ui/pause/stat_boots0]
+    - [auto, ci4, ui/pause/stat_boots1, 16, 16]
+    - [auto, palette, ui/pause/stat_boots1]
+    - [auto, ci4, ui/pause/stat_boots2, 16, 16]
+    - [auto, palette, ui/pause/stat_boots2]
+    - [auto, ci4, ui/pause/stat_boots3, 16, 16]
+    - [auto, palette, ui/pause/stat_boots3]
+    - [auto, ci4, ui/pause/stat_hammer0, 16, 16]
+    - [auto, palette, ui/pause/stat_hammer0]
+    - [auto, ci4, ui/pause/stat_hammer1, 16, 16]
+    - [auto, palette, ui/pause/stat_hammer1]
+    - [auto, ci4, ui/pause/stat_hammer2, 16, 16]
+    - [auto, palette, ui/pause/stat_hammer2]
+    - [auto, ci4, ui/pause/stat_hammer3, 16, 16]
+    - [auto, palette, ui/pause/stat_hammer3]
+    - [auto, ci4, ui/pause/partner_rank, 16, 16]
+    - [auto, palette, ui/pause/partner_rank]
+    - [auto, ci4, ui/pause/unused_bubble, 56, 16]
+    - [auto, palette, ui/pause/unused_bubble]
+    - [auto, .data, menu_hud_scripts]
+
+  - [0x13E130, bin]
 
   - name: battle_code
     type: bin
@@ -1048,12 +1197,136 @@ segments:
     vram: 0x8023E000
 
   - [0x1D4720, pm_icons, icon]
-
-  - name: logos
-    type: bin
+  - dir: logos
+    type: code
     start: 0x2065C0
+    subsegments:
+    - [auto, rgba16,  logo_n64, 128, 112]
+    - [auto, rgba16,  logo_is, 256, 112]
+    - [auto, rgba16,  logo_nintendo, 256, 48]
+  - [0x2215C0, ci8,     title/bg_1, 264, 162]
+  - [0x22BCD0, palette, title/bg_1]
+  - [0x22BED0, ci8,     title/bg_2, 264, 162]
+  - [0x2365E0, palette, title/bg_2]
+  - [0x2367E0, ci8,     title/bg_3, 264, 162]
+  - [0x240EF0, palette, title/bg_3]
+  - [0x2410F0, ci8,     title/bg_4, 264, 162]
+  - [0x24B800, palette, title/bg_4]
+  - [0x24BA00, ia8,     title/tape, 128, 128]
+  - [0x24FA00, ci8,     title/bowser_silhouette, 128, 128]
+  - [0x253A00, palette, title/bowser_silhouette]
+  - start: 0x253C00
+    type: pm_imgfx_data
+    name: imgfx_data
+    vram: 0
+    animations:
+    - ["shock", 0x14358]
+    - ["shiver", 0x18200]
+    - ["vertical_pipe_curl", 0x1A858]
+    - ["horizontal_pipe_curl", 0x1E830]
+    - ["startle", 0x29458]
+    - ["flutter_down", 0x314E0]
+    - ["unfurl", 0x33498]
+    - ["get_in_bed", 0x38988]
+    - ["spirit_capture", 0x39228]
+    - ["unused_1", 0x5B7A8]
+    - ["unused_2", 0x7CF10]
+    - ["unused_3", 0x86490]
+    - ["tutankoopa_gather", 0x96258]
+    - ["tutankoopa_swirl_2", 0xA1820]
+    - ["tutankoopa_swirl_1", 0xACDE8]
+    - ["shuffle_cards", 0xBBF68]
+    - ["flip_card_1", 0xC0490]
+    - ["flip_card_2", 0xC49B8]
+    - ["flip_card_3", 0xC6150]
+    - ["cymbal_crush", 0xCA380]
+  - [0x31DF90, pm_sprite_shading_profiles, sprite_shading_profiles]
 
-  - [0x2215C0, bin]
+  - [0x31EE00, bin]
+
+  - type: code
+    dir: world/partner
+    name: world_partner_goombario
+    start: 0x31F430
+    vram: 0x802BD100
+    subsegments:
+    - [auto, c, goombario]
+  - type: code
+    dir: world/partner
+    name: world_partner_bombette
+    start: 0x320260
+    vram: 0x802BD100
+    subsegments:
+    - [auto, c, bombette]
+  - type: code
+    dir: world/partner
+    name: world_partner_parakarry
+    start: 0x321A80
+    vram: 0x802BD100
+    subsegments:
+    - [auto, c, parakarry]
+  - type: code
+    dir: world/partner
+    name: world_partner_kooper
+    start: 0x323530
+    vram: 0x802BD100
+    subsegments:
+    - [auto, c, kooper]
+  - type: code
+    dir: world/partner
+    name: world_partner_watt
+    start: 0x325080
+    vram: 0x802BD100
+    subsegments:
+    - [auto, c, watt]
+  - type: code
+    dir: world/partner
+    name: world_partner_sushie
+    start: 0x326270
+    vram: 0x802BD100
+    subsegments:
+    - [auto, c, sushie]
+  - type: code
+    dir: world/partner
+    name: world_partner_lakilester
+    start: 0x328FF0
+    vram: 0x802BD100
+    subsegments:
+    - [auto, c, lakilester]
+  - type: code
+    dir: world/partner
+    name: world_partner_bow
+    start: 0x32BD80
+    vram: 0x802BD100
+    subsegments:
+    - [auto, c, bow]
+  - type: code
+    dir: world/partner
+    name: world_partner_goompa
+    start: 0x32CD40
+    vram: 0x802BD100
+    subsegments:
+    - [auto, c, goompa]
+  - type: code
+    dir: world/partner
+    name: world_partner_goombaria
+    start: 0x32D240
+    vram: 0x802BD100
+    subsegments:
+    - [auto, c, goombaria]
+  - type: code
+    dir: world/partner
+    name: world_partner_twink
+    start: 0x32D3A0
+    vram: 0x802BD100
+    subsegments:
+    - [auto, c, twink]
+  - type: code
+    name: world_use_item
+    start: 0x32D500
+    vram: 0x802C0000
+    subsegments:
+    - [auto, c, world_use_item]
 
 ###############
 ### Effects ###
@@ -1906,7 +2179,217 @@ segments:
   - name: effect_gfx_effect_86
     type: bin
     start: 0x41CA20
+
+#######################
+### Action Commands ###
+#######################
   - [0x41D750, bin]
+
+  - type: code
+    start: 0x429330
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_jump
+    subsegments:
+    - [auto, c, jump]
+  - type: code
+    start: 0x429940
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_hammer
+    subsegments:
+    - [auto, c, hammer]
+  - type: code
+    start: 0x42A410
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_flee
+    subsegments:
+    - [auto, c, flee]
+  - type: code
+    start: 0x42AD30
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_break_free
+    subsegments:
+    - [auto, c, break_free]
+  - type: code
+    start: 0x42B5B0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_whirlwind
+    subsegments:
+    - [auto, c, whirlwind]
+    - start: 0x42BE90
+      type: .data
+      name: whirlwind
+      subsegments:
+      - [0x42BE90, ci4, whirlwind_1, 24, 24]
+      - [0x42BFB0, palette, whirlwind_1]
+      - [0x42BFD0, ci4, whirlwind_2, 24, 24]
+      - [0x42C0F0, palette, whirlwind_2]
+      - [0x42C110, ci4, whirlwind_3, 24, 24]
+      - [0x42C230, palette, whirlwind_3]
+      - [0x42C250, ci4, whirlwind_4, 24, 24]
+      - [0x42C370, palette, whirlwind_4]
+      - [0x42C390, ci4, whirlwind_5, 24, 24]
+      - [0x42C4B0, palette, whirlwind_5]
+      - [0x42C4D0, ci4, whirlwind_6, 24, 24]
+      - [0x42C5F0, palette, whirlwind_6]
+      - [0x42C610, ci4, whirlwind_7, 24, 24]
+      - [0x42C730, palette, whirlwind_7]
+      - [0x42C750, ci4, whirlwind_bubble, 56, 48]
+      - [0x42CC90, palette, whirlwind_bubble]
+      - [0x42CCB0]
+    - [0x42CE90]
+  - type: code
+    start: 0x42CED0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_stop_leech
+    subsegments:
+    - [auto, c, stop_leech]
+  - type: code
+    start: 0x42D490
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_07
+    subsegments:
+    - [auto, c, "07"]
+  - type: code
+    start: 0x42DAB0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_dizzy_shell
+    subsegments:
+    - [auto, c, dizzy_shell]
+  - type: code
+    start: 0x42E310
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_fire_shell
+    subsegments:
+    - [auto, c, fire_shell]
+  - type: code
+    start: 0x42ECF0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_0A
+    subsegments:
+    - [auto, c, 0A]
+  - type: code
+    start: 0x42F3B0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_bomb
+    subsegments:
+    - [auto, c, bomb]
+  - type: code
+    start: 0x42FC20
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_body_slam
+    subsegments:
+    - [auto, c, body_slam]
+  - type: code
+    start: 0x4303B0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_air_lift
+    subsegments:
+    - [auto, c, air_lift]
+  - type: code
+    start: 0x430C60
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_air_raid
+    subsegments:
+    - [auto, c, air_raid]
+  - type: code
+    start: 0x431660
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_squirt
+    subsegments:
+    - [auto, c, squirt]
+  - type: code
+    start: 0x431E30
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_water_block
+    subsegments:
+    - [auto, c, water_block]
+    - start: 0x432F90
+      type: .data
+      name: water_block
+      subsegments:
+      - [0x432F90, ci4, water_block_1, 24, 24]
+      - [0x4330B0, palette, water_block_1]
+      - [0x4330D0, ci4, water_block_2, 24, 24]
+      - [0x4331F0, palette, water_block_2]
+      - [0x433210, ci4, water_block_3, 24, 24]
+      - [0x433330, palette, water_block_3]
+      - [0x433350, ci4, water_block_0, 24, 24]
+      - [0x433470, palette, water_block_0]
+      - [0x433490, ci4, water_block_block, 32, 32]
+      - [0x433690, palette, water_block_block]
+      - [0x4336B0, ci4, water_block_circle, 40, 40]
+      - [0x4339D0, palette, water_block_circle]
+      - [0x4339F0, ci4, water_block_cloud, 40, 40]
+      - [0x433D10, palette, water_block_cloud]
+      - [0x433D30, ci4, water_block_4, 24, 24]
+      - [0x433E50, palette, water_block_4]
+      - [0x433E70]
+    - [0x434030]
+  - type: code
+    start: 0x434030
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_tidal_wave
+    subsegments:
+    - [auto, c, tidal_wave]
+  - type: code
+    start: 0x434850
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_power_shock
+    subsegments:
+    - [auto, c, power_shock]
+  - type: code
+    start: 0x435350
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_mega_shock
+    subsegments:
+    - [auto, c, mega_shock]
+  - type: code
+    start: 0x435CE0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_smack
+    subsegments:
+    - [auto, c, smack]
+  - type: code
+    start: 0x436760
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_spiny_surge
+    subsegments:
+    - [auto, c, spiny_surge]
+  - type: code
+    start: 0x437020
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_hurricane
+    subsegments:
+    - [auto, c, hurricane]
+  - type: code
+    start: 0x437960
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_spook
+    subsegments:
+    - [auto, c, spook]
 
   ####################
   ### Battle Areas ###
@@ -2096,12 +2579,992 @@ segments:
     start: 0x006E5700
     vram: 0x80218000
 
-  - [0x006F8470, bin]
+#######################
+### Battle Partners ###
+#######################
+  - name: battle_partner_goompa
+    dir: battle/partner
+    type: code
+    start: 0x6F8470
+    vram: 0x80238000
+    subsegments:
+    - [auto, c, goompa]
+  - name: battle_partner_goombario
+    dir: battle/partner
+    type: code
+    start: 0x6F8A20
+    vram: 0x80238000
+    subsegments:
+    - [auto, c, goombario]
+  - name: battle_partner_kooper
+    dir: battle/partner
+    type: code
+    start: 0x6FD7C0
+    vram: 0x80238000
+    subsegments:
+    - [auto, c, kooper]
+  - name: battle_partner_bombette
+    dir: battle/partner
+    type: code
+    start: 0x702650
+    vram: 0x80238000
+    subsegments:
+    - [auto, c, bombette]
+  - name: battle_partner_parakarry
+    dir: battle/partner
+    type: code
+    start: 0x7076C0
+    vram: 0x80238000
+    subsegments:
+    - [auto, c, parakarry]
+  - name: battle_partner_watt
+    dir: battle/partner
+    type: code
+    start: 0x70B430
+    vram: 0x80238000
+    subsegments:
+    - [auto, c, watt]
+  - name: battle_partner_sushie
+    dir: battle/partner
+    type: code
+    start: 0x70F5E0
+    vram: 0x80238000
+    subsegments:
+    - [auto, c, sushie]
+  - name: battle_partner_lakilester
+    dir: battle/partner
+    type: code
+    start: 0x713650
+    vram: 0x80238000
+    subsegments:
+    - [auto, c, lakilester]
+  - name: battle_partner_bow
+    dir: battle/partner
+    type: code
+    start: 0x718830
+    vram: 0x80238000
+    subsegments:
+    - [auto, c, bow]
+  - name: battle_partner_twink
+    dir: battle/partner
+    type: code
+    start: 0x71C630
+    vram: 0x80238000
+    subsegments:
+    - [auto, c, twink]
 
-  - type: bin
-    name: world_script_api
+####################
+### Battle Items ###
+####################
+  - name: mushroom
+    dir: battle/move/item
+    type: code
+    start: 0x71D190
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, mushroom]
+  - name: fire_flower
+    dir: battle/move/item
+    type: code
+    start: 0x71E5A0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, fire_flower]
+  - name: dusty_hammer
+    dir: battle/move/item
+    type: code
+    start: 0x71F310
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, dusty_hammer]
+    - start: 0x71F550
+      type: .data
+      name: dusty_hammer
+      subsegments:
+      - [0x71FB10, ci4, dusty_hammer, 32, 32]
+      - [0x71FD10, palette, dusty_hammer]
+      - [0x71FD30]
+  - name: pow_block
+    dir: battle/move/item
+    type: code
+    start: 0x720190
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, pow_block]
+  - name: pebble
+    dir: battle/move/item
+    type: code
+    start: 0x7212B0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, pebble]
+    - start: 0x7214F0
+      type: .data
+      name: pebble
+      subsegments:
+      - [0x721AB0, ci4, pebble, 32, 32]
+      - [0x721CB0, palette, pebble]
+      - [0x721CD0]
+  - name: volt_shroom
+    dir: battle/move/item
+    type: code
+    start: 0x722130
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, volt_shroom]
+  - name: thunder_rage
+    dir: battle/move/item
+    type: code
+    start: 0x722AE0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, thunder_rage]
+  - name: snowman_doll
+    dir: battle/move/item
+    type: code
+    start: 0x723770
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, snowman_doll]
+  - name: dried_shroom
+    dir: battle/move/item
+    type: code
+    start: 0x724620
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, dried_shroom]
+  - name: shooting_star
+    dir: battle/move/item
+    type: code
+    start: 0x7250B0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, shooting_star]
+  - name: sleepy_sheep
+    dir: battle/move/item
+    type: code
+    start: 0x725F90
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, sleepy_sheep]
+    - start: 0x726900
+      type: .data
+      name: sleepy_sheep
+      subsegments:
+      - [0x726900]
+      - [0x726EC0, ci4, sleepy_sheep1, 56, 48]
+      - [0x727400, palette, sleepy_sheep1]
+      - [0x727420, ci4, sleepy_sheep2, 56, 48]
+      - [0x727960, palette, sleepy_sheep2]
+      - [0x727980, ci4, sleepy_sheep3, 56, 48]
+      - [0x727EC0, palette, sleepy_sheep3]
+      - [0x727EE0]
+  - name: stone_cap
+    dir: battle/move/item
+    type: code
+    start: 0x728EE0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, stone_cap]
+  - name: tasty_tonic
+    dir: battle/move/item
+    type: code
+    start: 0x729940
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, tasty_tonic]
+  - name: thunder_bolt
+    dir: battle/move/item
+    type: code
+    start: 0x72A480
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, thunder_bolt]
+  - name: ultra_shroom
+    dir: battle/move/item
+    type: code
+    start: 0x72B0C0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, ultra_shroom]
+  - name: unknown_item
+    dir: battle/move/item
+    type: code
+    start: 0x72BB80
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, unknown_item]
+  - name: super_soda
+    dir: battle/move/item
+    type: code
+    start: 0x72C620
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, super_soda]
+  - name: hustle_drink
+    dir: battle/move/item
+    type: code
+    start: 0x72D8A0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, hustle_drink]
+  - name: stop_watch
+    dir: battle/move/item
+    type: code
+    start: 0x72E710
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, stop_watch]
+  - name: dizzy_dial
+    dir: battle/move/item
+    type: code
+    start: 0x72F250
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, dizzy_dial]
+  - name: please_come_back
+    dir: battle/move/item
+    type: code
+    start: 0x72FF20
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, please_come_back]
+  - name: egg_missile
+    dir: battle/move/item
+    type: code
+    start: 0x730800
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, egg_missile]
+    - start: 0x730B10
+      type: .data
+      name: egg_missile
+      subsegments:
+      - [0x730B10]
+      - [0x7310D0, ci4, egg_missile1, 32, 32]
+      - [0x7312D0, palette, egg_missile1]
+      - [0x7312F0, ci4, egg_missile2, 32, 32]
+      - [0x7314F0, palette, egg_missile2]
+      - [0x731510, ci4, egg_missile3, 32, 32]
+      - [0x731710, palette, egg_missile3]
+      - [0x731730, ci4, egg_missile4, 32, 32]
+      - [0x731930, palette, egg_missile4]
+      - [0x731950]
+  - name: insecticide_herb
+    dir: battle/move/item
+    type: code
+    start: 0x732090
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, insecticide_herb]
+    - start: 0x7324B0
+      type: .data
+      name: insecticide_herb
+      subsegments:
+      - [0x7324B0]
+      - [0x732A70, ci4, insecticide_herb, 32, 32]
+      - [0x732C70, palette, insecticide_herb]
+      - [0x732C90]
+  - name: fright_jar
+    dir: battle/move/item
+    type: code
+    start: 0x733250
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, fright_jar]
+  - name: mystery
+    dir: battle/move/item
+    type: code
+    start: 0x733EF0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, mystery]
+    - start: 0x734840
+      type: .data
+      name: mystery
+      subsegments:
+      - [0x734840]
+      - [0x734E00, ci4, mystery, 32, 32]
+      - [0x735000, palette, mystery]
+      - [0x735020]
+  - name: repel_gel
+    dir: battle/move/item
+    type: code
+    start: 0x7354B0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, repel_gel]
+  - name: life_shroom
+    dir: battle/move/item
+    type: code
+    start: 0x735E70
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, life_shroom]
+  - name: coconut
+    dir: battle/move/item
+    type: code
+    start: 0x737060
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, coconut]
+    - start: 0x7372A0
+      type: .data
+      name: coconut
+      subsegments:
+      - [0x7372A0]
+      - [0x737860, ci4, coconut, 32, 32]
+      - [0x737A60, palette, coconut]
+      - [0x737A80]
+  - name: electro_pop
+    dir: battle/move/item
+    type: code
+    start: 0x737EE0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, electro_pop]
+  - name: strange_cake
+    dir: battle/move/item
+    type: code
+    start: 0x738C40
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, strange_cake]
+    - start: 0x7397E0
+      type: .data
+      name: strange_cake
+      subsegments:
+      - [0x7397E0]
+      - [0x739DB0, ci4, strange_cake1, 32, 32]
+      - [0x739FB0, palette, strange_cake1]
+      - [0x739FD0, ci4, strange_cake2, 32, 32]
+      - [0x73A1D0, palette, strange_cake2]
+      - [0x73A1F0, ci4, strange_cake3, 32, 32]
+      - [0x73A3F0, palette, strange_cake3]
+      - [0x73A410]
+  - name: food
+    dir: battle/move/item
+    type: code
+    start: 0x73AA10
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, food]
+
+####################
+### Battle Moves ###
+####################
+  - name: battle_move_hammer_attack
+    dir: battle/move/hammer
+    type: code
+    start: 0x73BEE0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, attack]
+  - name: battle_move_spin_smash
+    dir: battle/move/hammer
+    type: code
+    start: 0x73F1D0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, spin_smash]
+  - name: battle_move_quake_hammer
+    dir: battle/move/hammer
+    type: code
+    start: 0x742810
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, quake_hammer]
+  - name: battle_move_jump_attack
+    dir: battle/move/jump
+    type: code
+    start: 0x7451A0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, attack]
+  - name: battle_move_multibounce
+    dir: battle/move/jump
+    type: code
+    start: 0x748600
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, multibounce]
+  - name: battle_move_power_bounce
+    dir: battle/move/jump
+    type: code
+    start: 0x74B730
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, power_bounce]
+  - name: battle_move_sleep_stomp
+    dir: battle/move/jump
+    type: code
+    start: 0x74E750
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, sleep_stomp]
+  - name: battle_move_dizzy_stomp
+    dir: battle/move/jump
+    type: code
+    start: 0x750710
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, dizzy_stomp]
+  - name: battle_move_d_down_pound
+    dir: battle/move/hammer
+    type: code
+    start: 0x7526D0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, d_down_pound]
+  - name: battle_move_jump_charge_0
+    dir: battle/move/jump
+    type: code
+    start: 0x754EB0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, jump_charge_0]
+  - name: battle_move_hammer_charge_0
+    dir: battle/move/hammer
+    type: code
+    start: 0x756A70
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, hammer_charge_0]
+  - name: battle_move_hammer_throw
+    dir: battle/move/hammer
+    type: code
+    start: 0x759D90
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, hammer_throw]
+    - start: 0x759E40
+      type: .data
+      name: hammer_throw
+      subsegments:
+      - [0x759E40]
+      - [0x75BDD8, ci4, dusty_hammer, 32, 32]
+      - [0x75BFD8, palette, dusty_hammer]
+      - [0x75BFF8, ci4, basic_hammer, 32, 32]
+      - [0x75C1F8, palette, basic_hammer]
+      - [0x75C218, ci4, super_hammer, 32, 32]
+      - [0x75C418, palette, super_hammer]
+      - [0x75C438, ci4, ultra_hammer, 32, 32]
+      - [0x75C638, palette, ultra_hammer]
+      - [0x75C658, vtx, hammer_throw]
+      - [0x75C698, gfx, dusty_hammer]
+      - [0x75C788, gfx, basic_hammer]
+      - [0x75C878, gfx, super_hammer]
+      - [0x75C968, gfx, ultra_hammer]
+      - [0x75CA58]
+  - name: battle_move_mega_quake
+    dir: battle/move/hammer
+    type: code
+    start: 0x75E0C0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, mega_quake]
+  - name: battle_move_hammer_charge_1
+    dir: battle/move/hammer
+    type: code
+    start: 0x760EF0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, hammer_charge_1]
+  - name: battle_move_jump_charge_1
+    dir: battle/move/jump
+    type: code
+    start: 0x7642C0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, jump_charge_1]
+  - name: battle_move_hammer_charge_2
+    dir: battle/move/hammer
+    type: code
+    start: 0x765F10
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, hammer_charge_2]
+  - name: battle_move_jump_charge_2
+    dir: battle/move/jump
+    type: code
+    start: 0x769260
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, jump_charge_2]
+  - name: battle_move_auto_smash
+    dir: battle/move/hammer
+    type: code
+    start: 0x76AE80
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, auto_smash]
+  - name: battle_move_auto_jump
+    dir: battle/move/jump
+    type: code
+    start: 0x76D560
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, auto_jump]
+  - name: battle_move_power_quake
+    dir: battle/move/hammer
+    type: code
+    start: 0x76F5D0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, power_quake]
+  - name: battle_move_auto_multibounce
+    dir: battle/move/jump
+    type: code
+    start: 0x772170
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, auto_multibounce]
+  - name: battle_move_power_jump
+    dir: battle/move/jump
+    type: code
+    start: 0x7750A0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, power_jump]
+  - name: battle_move_super_jump
+    dir: battle/move/jump
+    type: code
+    start: 0x776C70
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, super_jump]
+  - name: battle_move_mega_jump
+    dir: battle/move/jump
+    type: code
+    start: 0x778870
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, mega_jump]
+  - name: battle_move_power_smash
+    dir: battle/move/hammer
+    type: code
+    start: 0x77A4E0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, power_smash]
+  - name: battle_move_super_smash
+    dir: battle/move/hammer
+    type: code
+    start: 0x77CA40
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, super_smash]
+  - name: battle_move_mega_smash
+    dir: battle/move/hammer
+    type: code
+    start: 0x77EFD0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, mega_smash]
+  - name: battle_move_demo_power_bounce
+    dir: battle/move/jump
+    type: code
+    start: 0x7815D0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, demo_power_bounce]
+  - name: battle_move_shrink_smash
+    dir: battle/move/hammer
+    type: code
+    start: 0x7844C0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, shrink_smash]
+  - name: battle_move_shell_crack
+    dir: battle/move/hammer
+    type: code
+    start: 0x786B80
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, shell_crack]
+  - name: battle_move_d_down_jump
+    dir: battle/move/jump
+    type: code
+    start: 0x789260
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, d_down_jump]
+  - name: battle_move_shrink_stomp
+    dir: battle/move/jump
+    type: code
+    start: 0x78B4E0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, shrink_stomp]
+  - name: battle_move_earthquake_jump
+    dir: battle/move/jump
+    type: code
+    start: 0x78D460
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, earthquake_jump]
+  - name: battle_move_focus
+    dir: battle/move/star_power
+    type: code
+    start: 0x7917A0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, focus]
+  - name: battle_move_refresh
+    dir: battle/move/star_power
+    type: code
+    start: 0x792F40
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, refresh]
+  - name: battle_move_lullaby
+    dir: battle/move/star_power
+    type: code
+    start: 0x794A90
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, lullaby]
+  - name: battle_move_star_storm
+    dir: battle/move/star_power
+    type: code
+    start: 0x796110
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, star_storm]
+  - name: battle_move_chill_out
+    dir: battle/move/star_power
+    type: code
+    start: 0x797A10
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, chill_out]
+  - name: battle_move_smooch
+    dir: battle/move/star_power
+    type: code
+    start: 0x7996D0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, smooch]
+  - name: battle_move_time_out
+    dir: battle/move/star_power
+    type: code
+    start: 0x79B660
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, time_out]
+  - name: battle_move_up_and_away
+    dir: battle/move/star_power
+    type: code
+    start: 0x79CC20
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, up_and_away]
+  - name: battle_move_star_beam
+    dir: battle/move/star_power
+    type: code
+    start: 0x79E900
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, star_beam]
+  - name: battle_move_peach_beam
+    dir: battle/move/star_power
+    type: code
+    start: 0x7A10F0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, peach_beam]
+  - name: battle_move_peach_focus
+    dir: battle/move/star_power
+    type: code
+    start: 0x7A38E0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, peach_focus]
+  - name: battle_move_peach_focus_alt
+    dir: battle/move/star_power
+    type: code
+    start: 0x7A51E0
+    vram: 0x802A1000
+    subsegments:
+    - [auto, c, peach_focus_alt]
+
+  - [0x7A6880, bin]
+
+  - name: world_model_anim_kzn_01
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7BD2F0
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "01"]
+  - name: world_model_anim_kzn_00
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7BE020
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "00"]
+  - name: world_model_anim_kzn_04
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7BEA70
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "04"]
+  - name: world_model_anim_kzn_05
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7BF9C0
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "05"]
+  - name: world_model_anim_kzn_06
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7C06C0
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "06"]
+  - name: world_model_anim_kzn_07
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7C1170
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "07"]
+  - name: world_model_anim_kzn_08
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7C1C10
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "08"]
+  - name: world_model_anim_kzn_09
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7C29E0
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "09"]
+  - name: world_model_anim_kzn_0A
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7C3710
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "0A"]
+  - name: world_model_anim_kzn_0B
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7C6760
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "0B"]
+  - name: world_model_anim_kzn_0C
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7C9050
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "0C"]
+  - name: world_model_anim_kzn_0D
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7CB390
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "0D"]
+  - name: world_model_anim_kzn_0E
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7CBE60
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "0E"]
+  - name: world_model_anim_kzn_02
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7CC8E0
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "02"]
+  - name: world_model_anim_kzn_03
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7CEDA0
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "03"]
+  - name: world_model_anim_kzn_0F
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7CF7E0
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "0F"]
+  - name: world_model_anim_kzn_10
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7D21E0
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "10"]
+  - name: world_model_anim_kzn_11
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7D4F80
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "11"]
+  - name: world_model_anim_kzn_12
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7D54C0
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "12"]
+  - name: world_model_anim_kzn_13
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7D6980
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "13"]
+  - name: world_model_anim_kzn_14
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7D7650
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "14"]
+  - name: world_model_anim_kzn_15
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7D81F0
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "15"]
+  - name: world_model_anim_kzn_16
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7D8E70
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "16"]
+  - name: world_model_anim_kzn_17
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7D9A10
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "17"]
+  - name: world_model_anim_kzn_18
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7DA2F0
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "18"]
+  - name: world_model_anim_kzn_19
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7DABF0
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "19"]
+  - name: world_model_anim_kzn_1A
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7DCF00
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "1A"]
+  - name: world_model_anim_kzn_1B
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7DE910
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "1B"]
+  - name: world_model_anim_kzn_1C
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7DF040
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "1C"]
+  - name: world_model_anim_kzn_1D
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7E0980
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "1D"]
+  - name: world_model_anim_kzn_1E
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7E1070
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "1E"]
+  - name: world_model_anim_kzn_1F
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7E1270
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "1F"]
+  - name: world_model_anim_kzn_20
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7E1AD0
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "20"]
+  - name: world_model_anim_kzn_21
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7E3B10
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "21"]
+  - name: world_model_anim_kzn_22
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7E6300
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "22"]
+  - name: world_model_anim_kzn_23
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7E6C40
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "23"]
+  - name: world_model_anim_kzn_24
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x7E7D40
+    vram: 0x80234000
+    subsegments:
+    - [auto, c, "24"]
+  - name: world_script_api
+    dir: world/script_api
+    type: code
     start: 0x7E8810
     vram: 0x80280000
+    subsegments:
+    - [auto, c, shops]
+    - [auto, c, rooms]
+    - [auto, c, push_blocks]
+    - [auto, c, enter_exit]
+  - name: texture_memory
+    type: code
+    start: 0x7EECD0
+    vram: 0x8028E000
+    subsegments:
+    - [auto, c, texture_memory]
 
 ############
 ### Maps ###

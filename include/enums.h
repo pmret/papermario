@@ -2414,9 +2414,7 @@ enum DoorSounds {
     DOOR_SOUNDS_UNUSED              = 6,
 };
 
-#if VERSION_US || VERSION_PAL || VERSION_IQUE
 #include "sprite/sprite_shading_profiles.h"
-#endif
 
 enum LightSourceFlags {
     LIGHT_SOURCE_DISABLED           = 0,

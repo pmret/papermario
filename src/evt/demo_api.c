@@ -1,11 +1,6 @@
 #include "common.h"
 #include "ld_addrs.h"
 
-#if VERSION_JP // TODO remove once this part is split
-#define SHADING_NONE 0xFFFFFFFF
-extern Addr sprite_shading_profiles_ROM_START;
-#endif
-
 // TODO: not sure where these go
 u8 ReflectWallPrevAlpha = 254;
 u8 ReflectFloorPrevAlpha = 254;
