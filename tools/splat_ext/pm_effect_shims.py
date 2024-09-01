@@ -1,11 +1,11 @@
 from typing import List
 from yaml.loader import Loader
-from splat.segtypes.n64.segment import N64Segment
+from splat.segtypes.segment import Segment
 from splat.util import options
 import yaml as yaml_loader
 
 
-class N64SegPm_effect_shims(N64Segment):
+class N64SegPm_effect_shims(Segment):
     shims: List[str] = []
 
     @staticmethod

@@ -1,7 +1,7 @@
 import os
 import re
 from pathlib import Path
-from splat.segtypes.n64.segment import N64Segment
+from splat.segtypes.segment import Segment
 import n64img.image
 from splat.util.color import unpack_color
 from common import iter_in_groups
@@ -46,7 +46,7 @@ def parse_palette(data):
     return palette
 
 
-class N64SegPm_icons(N64Segment):
+class N64SegPm_icons(Segment):
     def split(self, rom_bytes):
         self.out_dir = options.opts.asset_path / "icon"
 

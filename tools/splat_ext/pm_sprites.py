@@ -12,7 +12,7 @@ import crunch64
 import png  # type: ignore
 import yaml as yaml_loader
 from n64img.image import CI4
-from splat.segtypes.n64.segment import N64Segment
+from splat.segtypes.segment import Segment
 from splat.util import options
 from splat.util.color import unpack_color
 
@@ -713,7 +713,7 @@ class NpcSprite:
         pretty_print_xml(xml, path / "SpriteSheet.xml")
 
 
-class N64SegPm_sprites(N64Segment):
+class N64SegPm_sprites(Segment):
     DEFAULT_NPC_SPRITE_NAMES = [f"{i:02X}" for i in range(0xEA)]
 
     def __init__(self, rom_start, rom_end, type, name, vram_start, args, yaml) -> None:

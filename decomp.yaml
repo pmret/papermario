@@ -1,0 +1,41 @@
+name: Paper Mario
+github: https://github.com/pmret/papermario
+platform: n64
+versions:
+- name: us
+  fullname: US
+  paths:
+    baserom: "ver/us/baserom.z64"
+    build: "ver/us/build/papermario.z64"
+    asm: "ver/us/asm"
+    nonmatchings: "ver/us/asm/nonmatchings"
+    map: "ver/us/build/papermario.map"
+    elf: "ver/us/build/papermario.elf"
+- name: pal
+  fullname: PAL
+  paths:
+    baserom: "ver/pal/baserom.z64"
+    build: "ver/pal/build/papermario.z64"
+    asm: "ver/pal/asm"
+    nonmatchings: "ver/pal/asm/nonmatchings"
+    map: "ver/pal/build/papermario.map"
+    elf: "ver/pal/build/papermario.elf"
+- name: ique
+  fullname: iQue
+  paths:
+    baserom: "ver/ique/baserom.z64"
+    build: "ver/ique/build/papermario.z64"
+    asm: "ver/ique/asm"
+    nonmatchings: "ver/ique/asm/nonmatchings"
+    map: "ver/ique/build/papermario.map"
+    elf: "ver/ique/build/papermario.elf"
+- name: jp
+  fullname: JP
+  paths:
+    baserom: "ver/jp/baserom.z64"
+    build: "ver/jp/build/papermario.z64"
+    asm: "ver/jp/asm"
+    nonmatchings: "ver/jp/asm/nonmatchings"
+    map: "ver/jp/build/papermario.map"
+    elf: "ver/jp/build/papermario.elf"
+tools:

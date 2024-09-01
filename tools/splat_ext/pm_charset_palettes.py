@@ -1,10 +1,10 @@
-from splat.segtypes.n64.segment import N64Segment
+from splat.segtypes.segment import Segment
 from splat.segtypes.n64.palette import N64SegPalette
 from splat.util import options
 import png  # type: ignore
 
 
-class N64SegPm_charset_palettes(N64Segment):
+class N64SegPm_charset_palettes(Segment):
     require_unique_name = False
 
     def scan(self, rom_bytes):
