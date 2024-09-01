@@ -507,7 +507,8 @@ segments:
       - [auto, palette, ui/move_partner_3]
       - [auto, palette, ui/move_partner_3.disabled]
       - [0x9B5A0]
-      - [0x9B5A8, rgba32,  ui/stat_heart, 16, 16]
+      - [0x9B5A8, rgba32,  ui/stat_heart, 16, 16, 0x408]
+      - [0x9B9A8]
       - [0x9B9B0, rgba32,  ui/stat_flower, 16, 16]
       - [0x9BDB0]
     - start: 0xA1160

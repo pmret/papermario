@@ -8,11 +8,11 @@ TOOLS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(str(Path(TOOLS_DIR) / "build/imgfx"))
 from imgfx_data import Anim, Triangle, Vertex
 
-from splat.segtypes.n64.segment import N64Segment
+from splat.segtypes.segment import Segment
 from splat.util import log, options
 
 
-class N64SegPm_imgfx_data(N64Segment):
+class N64SegPm_imgfx_data(Segment):
     anims: List[Anim] = []
 
     OUT_DIR: Path = options.opts.asset_path / "imgfx"

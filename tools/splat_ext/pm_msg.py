@@ -1,5 +1,5 @@
 import shutil
-from splat.segtypes.n64.segment import N64Segment
+from splat.segtypes.segment import Segment
 from pathlib import Path
 from splat.util import options
 import re
@@ -3273,7 +3273,7 @@ CHARSET_IQUE = {
 }
 
 
-class N64SegPm_msg(N64Segment):
+class N64SegPm_msg(Segment):
     def __init__(
         self,
         rom_start,

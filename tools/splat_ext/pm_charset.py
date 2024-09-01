@@ -1,4 +1,4 @@
-from splat.segtypes.n64.segment import N64Segment
+from splat.segtypes.segment import Segment
 from splat.util import options
 import png  # type: ignore
 
@@ -60,7 +60,7 @@ def get_palette_idx(charset_name, char_id):
     return pal_id
 
 
-class N64SegPm_charset(N64Segment):
+class N64SegPm_charset(Segment):
     def scan(self, rom_bytes):
         data = rom_bytes[self.rom_start : self.rom_end]
 
