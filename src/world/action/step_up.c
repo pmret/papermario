@@ -99,9 +99,11 @@ void action_update_step_up_peach(void) {
 
     if (playerStatus->curStateTime != 0) {
         playerStatus->curStateTime--;
+#if !VERSION_JP
         if (playerStatus->curStateTime == 4) {
             try_player_footstep_sounds(1);
         }
+#endif
     } else {
         if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
             set_action_state(ACTION_STATE_IDLE);
