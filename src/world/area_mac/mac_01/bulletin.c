@@ -47,7 +47,11 @@ BulletinBoardEntry N(BulletinBoardData)[] = {
     { MSG_NewsBoard_000E, MSG_GossipBoard_000E, STORY_CH4_STAR_SPIRIT_RESCUED },
     { MSG_NewsBoard_000F, MSG_GossipBoard_000F, STORY_CH5_REACHED_LAVA_LAVA_ISLAND },
     { MSG_NewsBoard_0010, MSG_GossipBoard_0010, STORY_CH5_ZIP_LINE_READY },
+#if VERSION_JP
+    { MSG_NewsBoard_0011, MSG_GossipBoard_0011, STORY_CH5_OPENED_ESCAPE_ROUTE },
+#else
     { MSG_NewsBoard_0011, MSG_GossipBoard_0011, STORY_CH5_TRADED_VASE_FOR_SEED },
+#endif
     { MSG_NewsBoard_0012, MSG_GossipBoard_0012, STORY_CH6_ARRIVED_AT_FLOWER_FIELDS },
     { MSG_NewsBoard_0013, MSG_GossipBoard_0013, STORY_CH6_SPOKE_WITH_THE_SUN },
     { MSG_NewsBoard_0014, MSG_GossipBoard_0014, STORY_CH6_STAR_SPIRIT_RESCUED },

@@ -1114,20 +1114,24 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             Call(N(Quizmo_SetStageLightsDelay), 15)
             Call(N(Quizmo_SetVannaAnim_Idle))
             Call(SetMessageValue, GB_CompletedQuizzes, 0)
+#if VERSION_US || VERSION_IQUE
             IfEq(GB_CompletedQuizzes, 1)
                 Call(SetMessageText, Ref(MessageSingular), 1)
             Else
-#if VERSION_PAL
+                Call(SetMessageText, Ref(MessagePlural), 1)
+            EndIf
+#elif VERSION_PAL
+            IfEq(GB_CompletedQuizzes, 1)
+                Call(SetMessageText, Ref(MessageSingular), 1)
+            Else
                 Call(GetLanguage, LVar0)
                 IfEq(LVar0, LANGUAGE_DE)
                     Call(SetMessageText, Ref(MessagePlural_de), 1)
                 Else
                     Call(SetMessageText, Ref(MessagePlural), 1)
                 EndIf
-#else
-                Call(SetMessageText, Ref(MessagePlural), 1)
-#endif
             EndIf
+#endif
             Call(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000F)
         EndIf
         Set(LVar0, 1)

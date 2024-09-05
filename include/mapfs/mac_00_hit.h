@@ -1,3 +1,31 @@
+#if VERSION_JP
+#define COLLIDER_tt             0x70
+#define COLLIDER_deilim         0x6F
+#define COLLIDER_op3            0x67
+#define COLLIDER_op2            0x66
+#define COLLIDER_op_1           0x65
+#define COLLIDER_deilit5u       0x57
+#define COLLIDER_deilit5        0x56
+#define COLLIDER_dummy          0x41
+#define COLLIDER_mono6          0x40
+#define COLLIDER_mono5          0x3F
+#define COLLIDER_mono4          0x3E
+#define COLLIDER_mono3          0x3D
+#define COLLIDER_mono2          0x3C
+#define COLLIDER_mono1          0x3B
+#define COLLIDER_deilinw        0x39
+#define COLLIDER_o484           0x33
+#define COLLIDER_sign           0x32
+#define COLLIDER_deilit3u       0x2D
+#define COLLIDER_deilit3        0x2C
+#define COLLIDER_deilit6u       0x23
+#define COLLIDER_deilit6        0x22
+#define COLLIDER_deilit         0x1E
+#define COLLIDER_water          0x13
+#define COLLIDER_deilie         0x10
+#define COLLIDER_deilit4u       0x8
+#define COLLIDER_deilit4        0x7
+#else
 #define COLLIDER_Root           0x6E
 #define COLLIDER_g74            0x6D
 #define COLLIDER_tt             0x6C
@@ -109,6 +137,7 @@
 #define COLLIDER_min2mawari     0x2
 #define COLLIDER_o259           0x1
 #define COLLIDER_o258           0x0
+#endif
 
 #define ZONE_Root               0x12
 #define ZONE_g64                0x11

@@ -1,5 +1,13 @@
 EvtScript N(EVS_NpcInteract_Toad_02) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Housing_00DD)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Housing_00DE)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Housing_00DF)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Housing_002D)

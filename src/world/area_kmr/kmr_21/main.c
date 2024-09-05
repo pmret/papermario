@@ -13,7 +13,11 @@ static TitleDataFile* TitleData;
 static IMG_PTR TitleImage;
 
 s32 TitlePrimAlpha = 0;
+#if VERSION_JP
+s32 TitlePosY = 125;
+#else
 s32 TitlePosY = 106;
+#endif
 
 Gfx N(Gfx_TexSetup_TitleImage)[] = {
     gsDPPipeSync(),
@@ -42,6 +46,19 @@ void worker_render_title_image(void) {
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, TitlePrimAlpha);
     gDPPipeSync(gMainGfxPos++);
 
+#if VERSION_JP
+    for (i = 0; i < 44; i++) {
+        gDPLoadTextureTile(gMainGfxPos++, &TitleImage[2176 * i], G_IM_FMT_RGBA, G_IM_SIZ_32b, 272, 112,
+                           0, 0, 271, 1, 0,
+                           G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        gSPTextureRectangle(gMainGfxPos++,
+            /* ulx */ 25 * 4,
+            /* uly */ (i * 2 + TitlePosY) * 4,
+            /* lrx */ 297 * 4,
+            /* lry */ ((i * 2 + 2) + TitlePosY) * 4,
+            G_TX_RENDERTILE, 0, 0, 1024, 1024);
+    }
+#else
     for (i = 0; i < 56; i++) {
         gDPLoadTextureTile(gMainGfxPos++, &TitleImage[1600 * i], G_IM_FMT_RGBA, G_IM_SIZ_32b, 200, 112,
                            0, 0, 199, 1, 0,
@@ -53,6 +70,7 @@ void worker_render_title_image(void) {
             /* lry */ ((i * 2 + 2) + TitlePosY) * 4,
             G_TX_RENDERTILE, 0, 0, 1024, 1024);
     }
+#endif
     gDPPipeSync(gMainGfxPos++);
 }
 
@@ -103,7 +121,11 @@ EvtScript N(EVS_Scene_ShowTitle) = {
             EndIf
         EndLoop
     EndThread
+#if VERSION_JP
+    Call(MakeLerp, 125, 75, 100 * DT, EASING_CUBIC_OUT)
+#else
     Call(MakeLerp, 106, 56, 100 * DT, EASING_CUBIC_OUT)
+#endif
     Loop(0)
         Call(UpdateLerp)
         Call(N(SetTitlePosY))

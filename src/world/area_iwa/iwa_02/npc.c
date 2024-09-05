@@ -6,6 +6,11 @@
 #include "world/common/npc/Bubulb.inc.c"
 
 #include "world/common/complete/GiveReward.inc.c"
+#if VERSION_JP
+#include "world/common/todo/SomeItemEntityFunc.inc.c"
+#include "world/common/todo/IsItemBadge.inc.c"
+#include "world/common/todo/UnkScriptJP00.inc.c"
+#endif
 
 NpcData N(NpcData_Cleft_01) = {
     .id = NPC_Cleft_01,

@@ -1595,6 +1595,9 @@ EvtScript N(EVS_NpcInteract_Toad_08) = {
             Set(LVar0, MSG_MAC_Plaza_00C1)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC01_ShyGuysTramplingGarden, FALSE)
+#if VERSION_JP
+                Set(LVar0, MSG_MAC_Plaza_00EE)
+#endif
             Else
                 Set(LVar0, GF_MAC01_ChasedShyGuysFromGardenA)
                 Add(LVar0, GF_MAC01_ChasedShyGuysFromGardenB)

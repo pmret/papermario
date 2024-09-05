@@ -7772,430 +7772,1170 @@ segments:
 ############
 ### Maps ###
 ############
-  - type: bin
-    name: machi
+  - name: machi
+    dir: world/area_mac/machi
+    type: code
     start: 0x7EECD0
     vram: 0x80240000
-  - type: bin
-    name: mac_00
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, tables]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, goomba_king]
+    - [auto, c, npc]
+    - [auto, c, misstar]
+    - [auto, c, partner]
+  - name: mac_00
+    dir: world/area_mac/mac_00
+    type: code
     start: 0x7F2640
     vram: 0x80240000
-  - type: bin
-    name: mac_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, rooms]
+    - [auto, c, npc]
+    - [auto, c, shop]
+    - [auto, c, music_mix]
+    - [auto, c, demo]
+    - [auto, c, water_gfx]
+    - [auto, c, shared_npc]
+    - [auto, c, intro_npc]
+    - [auto, c, intro]
+    - [auto, c, epilogue_npc]
+    - [auto, c, epilogue]
+  - name: mac_01
+    dir: world/area_mac/mac_01
+    type: code
     start: 0x808370
     vram: 0x80240000
-  - type: bin
-    name: mac_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, rooms]
+    - [auto, c, shop]
+    - [auto, c, crystal_ball_gfx]
+    - [auto, c, bulletin]
+    - [auto, c, music_mix]
+    - [auto, c, npc]
+    - [auto, c, intro_npc]
+    - [auto, c, epilogue_npc]
+    - [auto, c, intro]
+    - [auto, c, foliage]
+    - start: 0x810C98
+      type: .data
+      name: npc
+      subsegments:
+      - [0x9786E8]
+      - [0x8138B8, vtx_common, ../../toad_house/blanket]
+      - [0x814E98, gfx_common, ../../toad_house/blanket]
+      - [0x815000, rgba16, ../../toad_house/blanket, 16, 32, namespaced]
+      - [0x815400]
+    - [0x827468]
+  - name: mac_02
+    dir: world/area_mac/mac_02
+    type: code
     start: 0x82AE80
     vram: 0x80240000
-  - type: bin
-    name: mac_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, rooms]
+    - [auto, c, foliage]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, music_mix]
+  - name: mac_03
+    dir: world/area_mac/mac_03
+    type: code
     start: 0x839560
     vram: 0x80240000
-  - type: bin
-    name: mac_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, train]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, foliage]
+    - [auto, c, oinks]
+    - [auto, c, demo]
+  - name: mac_04
+    dir: world/area_mac/mac_04
+    type: code
     start: 0x84AA80
     vram: 0x80240000
-  - type: bin
-    name: mac_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, rooms]
+    - [auto, c, foliage]
+    - [auto, c, shop]
+    - [auto, c, npc]
+    - [auto, c, wish_scene]
+    - [auto, c, entity]
+    - [auto, c, music_mix]
+  - name: mac_05
+    dir: world/area_mac/mac_05
+    type: code
     start: 0x85A330
     vram: 0x80240000
-  - type: bin
-    name: mac_06
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, whale]
+    - [auto, c, rooms]
+    - [auto, c, club64_sign]
+  - name: mac_06
+    dir: world/area_mac/mac_06
+    type: code
     start: 0x86CF40
     vram: 0x80240000
-  - type: bin
-    name: tik_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, whale]
+    - [auto, c, npc]
+  - name: tik_01
+    dir: world/area_tik/tik_01
+    type: code
     start: 0x8718B0
     vram: 0x80240000
-  - type: bin
-    name: tik_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, drips]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: tik_02
+    dir: world/area_tik/tik_02
+    type: code
     start: 0x874B40
     vram: 0x80240000
-  - type: bin
-    name: tik_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, drips]
+    - [auto, c, npc]
+  - name: tik_03
+    dir: world/area_tik/tik_03
+    type: code
     start: 0x876F00
     vram: 0x80240000
-  - type: bin
-    name: tik_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, drips]
+    - [auto, c, platforms]
+    - [auto, c, entity]
+    - [auto, c, demo]
+  - name: tik_04
+    dir: world/area_tik/tik_04
+    type: code
     start: 0x879E30
     vram: 0x80240000
-  - type: bin
-    name: tik_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, drips]
+    - [auto, c, platforms]
+    - [auto, c, npc]
+  - name: tik_05
+    dir: world/area_tik/tik_05
+    type: code
     start: 0x87D1C0
     vram: 0x80240000
-  - type: bin
-    name: tik_06
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, drips]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: tik_06
+    dir: world/area_tik/tik_06
+    type: code
     start: 0x87F2E0
     vram: 0x80240000
-  - type: bin
-    name: tik_07
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, drips]
+    - [auto, c, entity]
+  - name: tik_07
+    dir: world/area_tik/tik_07
+    type: code
     start: 0x881FE0
     vram: 0x80240000
-  - type: bin
-    name: tik_08
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, drips]
+    - [auto, c, platforms]
+    - [auto, c, npc]
+  - name: tik_08
+    dir: world/area_tik/tik_08
+    type: code
     start: 0x8871F0
     vram: 0x80240000
-  - type: bin
-    name: tik_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, drips]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: tik_09
+    dir: world/area_tik/tik_09
+    type: code
     start: 0x88A5C0
     vram: 0x80240000
-  - type: bin
-    name: tik_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, drips]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: tik_10
+    dir: world/area_tik/tik_10
+    type: code
     start: 0x88E7C0
     vram: 0x80240000
-  - type: bin
-    name: tik_12
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, drips]
+    - [auto, c, entity]
+  - name: tik_12
+    dir: world/area_tik/tik_12
+    type: code
     start: 0x890FD0
     vram: 0x80240000
-  - type: bin
-    name: tik_14
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, drips]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: tik_14
+    dir: world/area_tik/tik_14
+    type: code
     start: 0x895A00
     vram: 0x80240000
-  - type: bin
-    name: tik_15
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, drips]
+    - [auto, c, entity]
+  - name: tik_15
+    dir: world/area_tik/tik_15
+    type: code
     start: 0x897FA0
     vram: 0x80240000
-  - type: bin
-    name: tik_17
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, drips]
+    - [auto, c, npc]
+  - name: tik_17
+    dir: world/area_tik/tik_17
+    type: code
     start: 0x89AE20
     vram: 0x80240000
-  - type: bin
-    name: tik_18
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+  - name: tik_18
+    dir: world/area_tik/tik_18
+    type: code
     start: 0x89DAE0
     vram: 0x80240000
-  - type: bin
-    name: tik_19
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, drips]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: tik_19
+    dir: world/area_tik/tik_19
+    type: code
     start: 0x89F9E0
     vram: 0x80240000
-  - type: bin
-    name: tik_20
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: tik_20
+    dir: world/area_tik/tik_20
+    type: code
     start: 0x8A2750
     vram: 0x80240000
-  - type: bin
-    name: tik_21
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: tik_21
+    dir: world/area_tik/tik_21
+    type: code
     start: 0x8A5BA0
     vram: 0x80240000
-  - type: bin
-    name: tik_22
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: tik_22
+    dir: world/area_tik/tik_22
+    type: code
     start: 0x8A82C0
     vram: 0x80240000
-  - type: bin
-    name: tik_23
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+  - name: tik_23
+    dir: world/area_tik/tik_23
+    type: code
     start: 0x8AA7D0
     vram: 0x80240000
-  - type: bin
-    name: tik_24
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: tik_24
+    dir: world/area_tik/tik_24
+    type: code
     start: 0x8ADE80
     vram: 0x80240000
-  - type: bin
-    name: tik_25
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, drips]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: tik_25
+    dir: world/area_tik/tik_25
+    type: code
     start: 0x8B0380
     vram: 0x80240000
-  - type: bin
-    name: kgr_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: kgr_01
+    dir: world/area_kgr/kgr_01
+    type: code
     start: 0x8B1E10
     vram: 0x80240000
-  - type: bin
-    name: kgr_02
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, wiggle]
+    - [auto, c, extra]
+  - name: kgr_02
+    dir: world/area_kgr/kgr_02
+    type: code
     start: 0x8B2850
     vram: 0x80240000
-  - type: bin
-    name: kmr_00
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, unused]
+    - [auto, c, npc]
+    - [auto, c, extra]
+  - name: kmr_00
+    dir: world/area_kmr/kmr_00
+    type: code
     start: 0x8B4390
     vram: 0x80240000
-  - type: bin
-    name: kmr_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, revival]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: kmr_02
+    dir: world/area_kmr/kmr_02
+    type: code
     start: 0x8B8470
     vram: 0x80240000
-  - type: bin
-    name: kmr_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, rooms_1]
+    - [auto, c, entity]
+    - [auto, c, rooms_2]
+    - [auto, c, kammy]
+    - [auto, c, foliage]
+    - [auto, c, images]
+    - start: 0x8CFF30
+      type: .data
+      name: images
+      subsegments:
+      - [0x8CFF30, ci4, heart_block, 32, 32]
+      - [0x8D0130, palette, heart_block]
+      - [0x8D0150]
+  - name: kmr_03
+    dir: world/area_kmr/kmr_03
+    type: code
     start: 0x8D0350
     vram: 0x80240000
-  - type: bin
-    name: kmr_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, foliage]
+    - [auto, c, fall_down]
+  - name: kmr_04
+    dir: world/area_kmr/kmr_04
+    type: code
     start: 0x8D2CC0
     vram: 0x80240000
-  - type: bin
-    name: kmr_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, foliage]
+    - start: 0x8D48B0
+      type: .data
+      name: foliage
+      subsegments:
+      - [0x8D48B0, ci4, hammer_block_message, 48, 48]
+      - [0x8D4D30, palette, hammer_block_message]
+      - [0x8D4D50]
+  - name: kmr_05
+    dir: world/area_kmr/kmr_05
+    type: code
     start: 0x8D6430
     vram: 0x80240000
-  - type: bin
-    name: kmr_06
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, foliage]
+  - name: kmr_06
+    dir: world/area_kmr/kmr_06
+    type: code
     start: 0x8D98D0
     vram: 0x80240000
-  - type: bin
-    name: kmr_07
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, sticker_sign]
+  - name: kmr_07
+    dir: world/area_kmr/kmr_07
+    type: code
     start: 0x8DC180
     vram: 0x80240000
-  - type: bin
-    name: kmr_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: kmr_09
+    dir: world/area_kmr/kmr_09
+    type: code
     start: 0x8DE1C0
     vram: 0x80240000
-  - type: bin
-    name: kmr_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: kmr_10
+    dir: world/area_kmr/kmr_10
+    type: code
     start: 0x8E0890
     vram: 0x80240000
-  - type: bin
-    name: kmr_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, foliage]
+  - name: kmr_11
+    dir: world/area_kmr/kmr_11
+    type: code
     start: 0x8E24C0
     vram: 0x80240000
-  - type: bin
-    name: kmr_12
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, scenes]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, kammy]
+    - [auto, c, foliage]
+    - [auto, c, fortress_skeleton]
+    - [auto, c, fortress_animation]
+    - [auto, c, bridge_skeleton]
+    - [auto, c, bridge_animation]
+  - name: kmr_12
+    dir: world/area_kmr/kmr_12
+    type: code
     start: 0x8F3720
     vram: 0x80240000
-  - type: bin
-    name: kmr_20
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: kmr_20
+    dir: world/area_kmr/kmr_20
+    type: code
     start: 0x8F41E0
     vram: 0x80240000
-  - type: bin
-    name: kmr_21
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, rooms]
+    - [auto, c, documents]
+    - [auto, c, entity]
+    - [auto, c, trees]
+    - [auto, c, bushes]
+    - [auto, c, bed]
+    - [auto, c, npc_scenes]
+    - [auto, c, npc]
+    - [auto, c, npc_intro]
+    - [auto, c, npc_epilogue]
+    - [auto, c, records]
+    - start: 0x906E80
+      type: .data
+      name: records
+      subsegments:
+      - [0x906E80, gfx, records_screen]
+      - [0x906FF0]
+  - name: kmr_21
+    dir: world/area_kmr/kmr_21
+    type: code
     start: 0x907190
     vram: 0x80240000
-  - type: bin
-    name: kmr_22
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+  - name: kmr_22
+    dir: world/area_kmr/kmr_22
+    type: code
     start: 0x907990
     vram: 0x80240000
-  - type: bin
-    name: kmr_23
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - start: 0x908DA0
+      type: .data
+      name: npc
+      subsegments:
+      - [0x908DA0]
+      - [0x909290, ci4, lava_piranha_vine, 64, 32]
+      - [0x909690, palette, lava_piranha_vine]
+      - [0x909890, gfx, lava_piranha_vine]
+      - [0x909970]
+  - name: kmr_23
+    dir: world/area_kmr/kmr_23
+    type: code
     start: 0x90FD50
     vram: 0x80240000
-  - type: bin
-    name: kmr_24
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - start: 0x9113B0
+      type: .data
+      name: npc
+      subsegments:
+      - [0x9113B0]
+      - [0x911418, ia8, window_ul, 8, 8]
+      - [0x911458, ia8, window_ur, 8, 8]
+      - [0x911498, ia8, window_ll, 8, 8]
+      - [0x9114D8, ia8, window_lr, 8, 8]
+      - [0x911518]
+  - name: kmr_24
+    dir: world/area_kmr/kmr_24
+    type: code
     start: 0x913560
     vram: 0x80240000
-  - type: bin
-    name: kmr_30
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+  - name: kmr_30
+    dir: world/area_kmr/kmr_30
+    type: code
     start: 0x9139F0
     vram: 0x80240000
-  - type: bin
-    name: iwa_00
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, the_end]
+  - name: iwa_00
+    dir: world/area_iwa/iwa_00
+    type: code
     start: 0x914F60
     vram: 0x80240000
-  - type: bin
-    name: iwa_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, slide]
+  - name: iwa_01
+    dir: world/area_iwa/iwa_01
+    type: code
     start: 0x917F50
     vram: 0x80240000
-  - type: bin
-    name: iwa_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, splash]
+    - [auto, c, npc]
+    - [auto, c, slide]
+    - start: 0x91B910
+      type: .data
+      name: splash
+      subsegments:
+      - [0x91B910, i8, splash, 32, 32]
+      - [0x91BD10, vtx, splash]
+      - [0x91BD50, gfx, splash]
+      - [0x91BE18]
+  - name: iwa_02
+    dir: world/area_iwa/iwa_02
+    type: code
     start: 0x91E610
     vram: 0x80240000
-  - type: bin
-    name: iwa_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: iwa_03
+    dir: world/area_iwa/iwa_03
+    type: code
     start: 0x9219C0
     vram: 0x80240000
-  - type: bin
-    name: iwa_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, slide]
+  - name: iwa_04
+    dir: world/area_iwa/iwa_04
+    type: code
     start: 0x9246F0
     vram: 0x80240000
-  - type: bin
-    name: iwa_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: iwa_10
+    dir: world/area_iwa/iwa_10
+    type: code
     start: 0x927380
     vram: 0x80240000
-  - type: bin
-    name: iwa_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, train]
+    - [auto, c, entity]
+    - [auto, c, parakarry]
+    - [auto, c, new_partner]
+    - [auto, c, foliage]
+  - name: iwa_11
+    dir: world/area_iwa/iwa_11
+    type: code
     start: 0x92FD70
     vram: 0x80240000
-  - type: bin
-    name: sbk_00
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, train]
+    - [auto, c, scenery]
+    - [auto, c, npc]
+  - name: sbk_00
+    dir: world/area_sbk/sbk_00
+    type: code
     start: 0x9325F0
     vram: 0x80240000
-  - type: bin
-    name: sbk_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: sbk_01
+    dir: world/area_sbk/sbk_01
+    type: code
     start: 0x932E10
     vram: 0x80240000
-  - type: bin
-    name: sbk_02
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_02 #TODO
+    dir: world/area_sbk/sbk_02
+    type: code
     start: 0x933630
     vram: 0x80240000
-  - type: bin
-    name: sbk_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, ruins]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: sbk_03
+    dir: world/area_sbk/sbk_03
+    type: code
     start: 0x938C30
     vram: 0x80240000
-  - type: bin
-    name: sbk_04
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_04
+    dir: world/area_sbk/sbk_04
+    type: code
     start: 0x939850
     vram: 0x80240000
-  - type: bin
-    name: sbk_05
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_05
+    dir: world/area_sbk/sbk_05
+    type: code
     start: 0x93A070
     vram: 0x80240000
-  - type: bin
-    name: sbk_06
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: sbk_06
+    dir: world/area_sbk/sbk_06
+    type: code
     start: 0x93B940
     vram: 0x80240000
-  - type: bin
-    name: sbk_10
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+    - [auto, c, entity]
+  - name: sbk_10
+    dir: world/area_sbk/sbk_10
+    type: code
     start: 0x93D000
     vram: 0x80240000
-  - type: bin
-    name: sbk_11
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: sbk_11
+    dir: world/area_sbk/sbk_11
+    type: code
     start: 0x93D3C0
     vram: 0x80240000
-  - type: bin
-    name: sbk_12
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_12
+    dir: world/area_sbk/sbk_12
+    type: code
     start: 0x93E0C0
     vram: 0x80240000
-  - type: bin
-    name: sbk_13
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_13
+    dir: world/area_sbk/sbk_13
+    type: code
     start: 0x93EB60
     vram: 0x80240000
-  - type: bin
-    name: sbk_14
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_14
+    dir: world/area_sbk/sbk_14
+    type: code
     start: 0x93FA60
     vram: 0x80240000
-  - type: bin
-    name: sbk_15
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: sbk_15
+    dir: world/area_sbk/sbk_15
+    type: code
     start: 0x940050
     vram: 0x80240000
-  - type: bin
-    name: sbk_16
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_16
+    dir: world/area_sbk/sbk_16
+    type: code
     start: 0x9408F0
     vram: 0x80240000
-  - type: bin
-    name: sbk_20
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, foliage]
+  - name: sbk_20
+    dir: world/area_sbk/sbk_20
+    type: code
     start: 0x941910
     vram: 0x80240000
-  - type: bin
-    name: sbk_21
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: sbk_21
+    dir: world/area_sbk/sbk_21
+    type: code
     start: 0x9428E0
     vram: 0x80240000
-  - type: bin
-    name: sbk_22
+    subsegments:
+    - [auto, c, main]
+  - name: sbk_22
+    dir: world/area_sbk/sbk_22
+    type: code
     start: 0x942CB0
     vram: 0x80240000
-  - type: bin
-    name: sbk_23
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: sbk_23
+    dir: world/area_sbk/sbk_23
+    type: code
     start: 0x943AE0
     vram: 0x80240000
-  - type: bin
-    name: sbk_24
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: sbk_24
+    dir: world/area_sbk/sbk_24
+    type: code
     start: 0x943FB0
     vram: 0x80240000
-  - type: bin
-    name: sbk_25
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, foliage]
+  - name: sbk_25
+    dir: world/area_sbk/sbk_25
+    type: code
     start: 0x945600
     vram: 0x80240000
-  - type: bin
-    name: sbk_26
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+    - [auto, c, entity]
+  - name: sbk_26
+    dir: world/area_sbk/sbk_26
+    type: code
     start: 0x947050
     vram: 0x80240000
-  - type: bin
-    name: sbk_30
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+  - name: sbk_30
+    dir: world/area_sbk/sbk_30
+    type: code
     start: 0x948930
     vram: 0x80240000
-  - type: bin
-    name: sbk_31
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+  - name: sbk_31
+    dir: world/area_sbk/sbk_31
+    type: code
     start: 0x94D380
     vram: 0x80240000
-  - type: bin
-    name: sbk_32
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_32
+    dir: world/area_sbk/sbk_32
+    type: code
     start: 0x94DDE0
     vram: 0x80240000
-  - type: bin
-    name: sbk_33
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_33
+    dir: world/area_sbk/sbk_33
+    type: code
     start: 0x94ED50
     vram: 0x80240000
-  - type: bin
-    name: sbk_34
+    subsegments: # unusual organization
+    - [auto, c, settings]
+    - [auto, c, entity]
+    - [auto, c, main]
+  - name: sbk_34
+    dir: world/area_sbk/sbk_34
+    type: code
     start: 0x94F250
     vram: 0x80240000
-  - type: bin
-    name: sbk_35
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+  - name: sbk_35
+    dir: world/area_sbk/sbk_35
+    type: code
     start: 0x951A30
     vram: 0x80240000
-  - type: bin
-    name: sbk_36
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+  - name: sbk_36
+    dir: world/area_sbk/sbk_36
+    type: code
     start: 0x9531E0
     vram: 0x80240000
-  - type: bin
-    name: sbk_40
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, foliage]
+    - [auto, c, entity]
+  - name: sbk_40
+    dir: world/area_sbk/sbk_40
+    type: code
     start: 0x954720
     vram: 0x80240000
-  - type: bin
-    name: sbk_41
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: sbk_41
+    dir: world/area_sbk/sbk_41
+    type: code
     start: 0x9553C0
     vram: 0x80240000
-  - type: bin
-    name: sbk_42
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: sbk_42
+    dir: world/area_sbk/sbk_42
+    type: code
     start: 0x955890
     vram: 0x80240000
-  - type: bin
-    name: sbk_43
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_43
+    dir: world/area_sbk/sbk_43
+    type: code
     start: 0x9564F0
     vram: 0x80240000
-  - type: bin
-    name: sbk_44
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: sbk_44
+    dir: world/area_sbk/sbk_44
+    type: code
     start: 0x956920
     vram: 0x80240000
-  - type: bin
-    name: sbk_45
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_45
+    dir: world/area_sbk/sbk_45
+    type: code
     start: 0x957820
     vram: 0x80240000
-  - type: bin
-    name: sbk_46
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: sbk_46
+    dir: world/area_sbk/sbk_46
+    type: code
     start: 0x957D20
     vram: 0x80240000
-  - type: bin
-    name: sbk_50
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+    - [auto, c, entity]
+  - name: sbk_50
+    dir: world/area_sbk/sbk_50
+    type: code
     start: 0x959990
     vram: 0x80240000
-  - type: bin
-    name: sbk_51
+    subsegments:
+    - [auto, c, main]
+  - name: sbk_51
+    dir: world/area_sbk/sbk_51
+    type: code
     start: 0x959CF0
     vram: 0x80240000
-  - type: bin
-    name: sbk_52
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_52
+    dir: world/area_sbk/sbk_52
+    type: code
     start: 0x95A9F0
     vram: 0x80240000
-  - type: bin
-    name: sbk_53
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: sbk_53
+    dir: world/area_sbk/sbk_53
+    type: code
     start: 0x95AE60
     vram: 0x80240000
-  - type: bin
-    name: sbk_54
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_54
+    dir: world/area_sbk/sbk_54
+    type: code
     start: 0x95B900
     vram: 0x80240000
-  - type: bin
-    name: sbk_55
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: sbk_55
+    dir: world/area_sbk/sbk_55
+    type: code
     start: 0x95BDD0
     vram: 0x80240000
-  - type: bin
-    name: sbk_56
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+    - [auto, c, entity]
+  - name: sbk_56
+    dir: world/area_sbk/sbk_56
+    type: code
     start: 0x95D340
     vram: 0x80240000
-  - type: bin
-    name: sbk_60
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, foliage]
+  - name: sbk_60
+    dir: world/area_sbk/sbk_60
+    type: code
     start: 0x95FD70
     vram: 0x80240000
-  - type: bin
-    name: sbk_61
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_61
+    dir: world/area_sbk/sbk_61
+    type: code
     start: 0x960310
     vram: 0x80240000
-  - type: bin
-    name: sbk_62
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: sbk_62
+    dir: world/area_sbk/sbk_62
+    type: code
     start: 0x9606D0
     vram: 0x80240000
-  - type: bin
-    name: sbk_63
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_63
+    dir: world/area_sbk/sbk_63
+    type: code
     start: 0x9610F0
     vram: 0x80240000
-  - type: bin
-    name: sbk_64
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: sbk_64
+    dir: world/area_sbk/sbk_64
+    type: code
     start: 0x961910
     vram: 0x80240000
-  - type: bin
-    name: sbk_65
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: sbk_65
+    dir: world/area_sbk/sbk_65
+    type: code
     start: 0x961CD0
     vram: 0x80240000
-  - type: bin
-    name: sbk_66
+    subsegments:
+    - [auto, c, main]
+  - name: sbk_66
+    dir: world/area_sbk/sbk_66
+    type: code
     start: 0x962030
     vram: 0x80240000
-  - type: bin
-    name: sbk_99
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+    - [auto, c, entity]
+  - name: sbk_99
+    dir: world/area_sbk/sbk_99
+    type: code
     start: 0x964230
     vram: 0x80240000
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
   - type: bin
     name: dro_01
     start: 0x964580
@@ -9519,9 +10259,12 @@ segments:
       - [0xE2C040, gfx, ispy_icon]
       - [0xE2C0B8]
     - [0xE2C0C0]
-
-  - [ 0xE2C0F0, bin ]
-
+  - type: code
+    name: model_clear_render_tasks
+    start: 0xE2C0F0
+    vram: 0x802B7E00
+    subsegments:
+    - [auto, c, model_clear_render_tasks]
   - type: code
     name: world_action_idle
     dir: world/action
@@ -9648,8 +10391,1166 @@ segments:
     vram: 0x802B6000
     subsegments:
     - [auto, c, sneaky_parasol]
+  - type: code
+    dir: entity/default
+    start: 0xE343B0
+    vram: 0x802BAE00
+    subsegments:
+    - [auto, c, Padlock]
+    - [auto, c, BoardedFloor]
+    - [auto, c, BombableRock]
+  - type: code
+    dir: entity/jan_iwa
+    start: 0xE365B0
+    vram: 0x802BAE00
+    subsegments:
+    - [auto, c, Plants1]
+    - [auto, c, Plants2]
+    - [auto, c, ArrowSign]
+  - type: code
+    dir: entity/sbk_omo
+    start: 0xE385D0
+    vram: 0x802BAE00
+    subsegments:
+    - [auto, c, Tweester]
+    - [auto, c, StarBoxLauncher]
+  - name: entity_model_Hammer1Block
+    dir: entity/model
+    type: code
+    start: 0xE3A3B0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Hammer1Block]
+    - start: 0xE3A3B0
+      type: .data
+      name: Hammer1Block
+      subsegments:
+      - [0xE3A3B0, vtx, Hammer1Block]
+      - [0xE3A630, ci4, Hammer1Block_face, 16, 32]
+      - [0xE3A730, palette, Hammer1Block_face]
+      - [0xE3A750]
+  - name: entity_model_Hammer2Block
+    dir: entity/model
+    type: code
+    start: 0xE3A8B0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Hammer2Block]
+    - start: 0xE3A8B0
+      type: .data
+      name: Hammer2Block
+      subsegments:
+      - [0xE3A8B0, vtx, Hammer2Block]
+      - [0xE3AB30, ci4, Hammer2Block_face, 16, 32]
+      - [0xE3AC30, palette, Hammer2Block_face]
+      - [0xE3AC50]
+  - name: entity_model_Hammer3Block
+    dir: entity/model
+    type: code
+    start: 0xE3ADB0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Hammer3Block]
+    - start: 0xE3ADB0
+      type: .data
+      name: Hammer3Block
+      subsegments:
+      - [0xE3ADB0, vtx, Hammer3Block]
+      - [0xE3B030, ci4, Hammer3Block_face, 16, 32]
+      - [0xE3B130, palette, Hammer3Block_face]
+      - [0xE3B150]
+  - name: entity_model_ShatteringHammer1Block
+    dir: entity/model
+    type: code
+    start: 0xE3B2A0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, ShatteringHammer1Block]
+    - start: 0xE3B2A0
+      type: .data
+      name: ShatteringHammer1Block
+      subsegments:
+      - [0xE3B2A0, vtx, ShatteringHammer1Block]
+      - [0xE3C300, ci8, ShatteringHammer1Block_texture, 16, 32]
+      - [0xE3C500, palette, ShatteringHammer1Block_texture]
+      - [0xE3C700]
+  - name: entity_model_ShatteringHammer2Block
+    dir: entity/model
+    type: code
+    start: 0xE3E4F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, ShatteringHammer2Block]
+    - start: 0xE3E4F0
+      type: .data
+      name: ShatteringHammer2Block
+      subsegments:
+      - [0xE3E4F0, vtx, ShatteringHammer2Block]
+      - [0xE3F550, rgba16, ShatteringHammer2Block_texture, 16, 32]
+      - [0xE3F950]
+  - name: entity_model_ShatteringHammer3Block
+    dir: entity/model
+    type: code
+    start: 0xE41710
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, ShatteringHammer3Block]
+    - start: 0xE41710
+      type: .data
+      name: ShatteringHammer3Block
+      subsegments:
+      - [0xE41710, vtx, ShatteringHammer3Block]
+      - [0xE42760, ci4, ShatteringHammer3Block_texture, 16, 32]
+      - [0xE42860, palette, ShatteringHammer3Block_texture]
+      - [0xE42880]
+  - name: entity_model_YellowBlock
+    dir: entity/model
+    type: code
+    start: 0xE446F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, YellowBlock]
+    - start: 0xE446F0
+      type: .data
+      name: YellowBlock
+      subsegments:
+      - [0xE446F0, vtx, YellowBlock]
+      - [0xE44870, rgba16, YellowBlock_face, 32, 32]
+      - [0xE45070]
+  - name: entity_model_RedBlock
+    dir: entity/model
+    type: code
+    start: 0xE451A0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, RedBlock]
+    - start: 0xE451A0
+      type: .data
+      name: RedBlock
+      subsegments:
+      - [0xE451A0, vtx, RedBlock]
+      - [0xE45320, rgba16, RedBlock_face, 32, 32]
+      - [0xE45B20]
+  - name: entity_model_UnusedBlock
+    dir: entity/model
+    type: code
+    start: 0xE45C50
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, UnusedBlock]
+    - start: 0xE45C50
+      type: .data
+      name: UnusedBlock
+      subsegments:
+      - [0xE45C50, vtx, UnusedBlock]
+      - [0xE46010, rgba16, UnusedBlock_img1, 16, 32]
+      - [0xE46410]
+      - [0xE46498, ci4, UnusedBlock_img2, 16, 32]
+      - [0xE46598, palette, UnusedBlock_img2]
+      - [0xE465B8]
+  - name: entity_model_PushBlock
+    dir: entity/model
+    type: code
+    start: 0xE468E0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, PushBlock]
+    - start: 0xE468E0
+      type: .data
+      name: PushBlock
+      subsegments:
+      - [0xE468E0, vtx, PushBlock]
+      - [0xE46A00, ci4, PushBlock_face, 16, 16]
+      - [0xE46A80, palette, PushBlock_face]
+      - [0xE46AA0]
+  - name: entity_model_BrickBlock
+    dir: entity/model
+    type: code
+    start: 0xE46C30
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, BrickBlock]
+    - start: 0xE46C30
+      type: .data
+      name: BrickBlock
+      subsegments:
+      - [0xE46C30, vtx, BrickBlock]
+      - [0xE46D70, ci4, BrickBlock_face, 32, 32]
+      - [0xE46F70, palette, BrickBlock_face]
+      - [0xE46F90]
+  - name: entity_model_ShatteringBrickBlock
+    dir: entity/model
+    type: code
+    start: 0xE470E0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, ShatteringBrickBlock]
+    - start: 0xE470E0
+      type: .data
+      name: ShatteringBrickBlock
+      subsegments:
+      - [0xE470E0, vtx, ShatteringBrickBlock]
+      - [0xE48B80, rgba16, ShatteringBrickBlock_texture, 32, 32]
+      - [0xE49380]
+  - name: entity_model_InertYellowBlock
+    dir: entity/model
+    type: code
+    start: 0xE4B0C0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, InertYellowBlock]
+    - start: 0xE4B0C0
+      type: .data
+      name: InertYellowBlock
+      subsegments:
+      - [0xE4B0C0, vtx, InertYellowBlock_1]
+      - [0xE4B1C0, vtx, InertYellowBlock_2]
+      - [0xE4B240, ci4, InertYellowBlock_face, 32, 32]
+      - [0xE4B440, palette, InertYellowBlock_face]
+      - [0xE4B460]
+  - name: entity_model_InertRedBlock
+    dir: entity/model
+    type: code
+    start: 0xE4B5C0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, InertRedBlock]
+    - start: 0xE4B5C0
+      type: .data
+      name: InertRedBlock
+      subsegments:
+      - [0xE4B5C0, vtx, InertRedBlock_1]
+      - [0xE4B6C0, vtx, InertRedBlock_2]
+      - [0xE4B740, rgba16, InertRedBlock_face, 32, 32]
+      - [0xE4BF40]
+  - name: entity_model_HeartBlock
+    dir: entity/model
+    type: code
+    start: 0xE4C070
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, HeartBlock]
+    - start: 0xE4C070
+      type: .data
+      name: HeartBlock
+      subsegments:
+      - [0xE4C070, vtx, HeartBlock]
+      - [0xE4C430, rgba16, HeartBlock_face, 16, 32]
+      - [0xE4C830]
+  - name: entity_model_PowBlock
+    dir: entity/model
+    type: code
+    start: 0xE4C9A0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, PowBlock]
+    - start: 0xE4C9A0
+      type: .data
+      name: PowBlock
+      subsegments:
+      - [0xE4C9A0, vtx, PowBlock]
+      - [0xE4CAA0, ci8, PowBlock_face, 64, 32]
+      - [0xE4D2A0, palette, PowBlock_face]
+      - [0xE4D4A0]
+  - name: entity_model_SuperBlock
+    dir: entity/model
+    type: code
+    start: 0xE4D680
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, SuperBlock]
+    - start: 0xE4D680
+      type: .data
+      name: SuperBlock
+      subsegments:
+      - [0xE4D680, vtx, SuperBlock]
+      - [0xE4DB00, ci4, SuperBlock_tex, 16, 32]
+      - [0xE4DC00, palette, SuperBlock_tex]
+      - [0xE4DC20]
+  - name: entity_model_UltraBlock
+    dir: entity/model
+    type: code
+    start: 0xE4DF90
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, UltraBlock]
+    - start: 0xE4DF90
+      type: .data
+      name: UltraBlock
+      subsegments:
+      - [0xE4DF90, vtx, UltraBlock]
+      - [0xE4E410, ci4, UltraBlock_tex, 16, 32]
+      - [0xE4E510, palette, UltraBlock_tex]
+      - [0xE4E530]
+  - name: entity_model_HitYellowBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xE4E870
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, HitYellowBlock_gfx]
+    - start: 0xE4E870
+      type: .data
+      name: HitYellowBlock_gfx
+      subsegments:
+      - [0xE4E870, vtx, HitYellowBlock_1]
+      - [0xE4E9D0, vtx, HitYellowBlock_2]
+      - [0xE4EB30]
+      - [0xE4EC90, rgba16, HitYellowBlock_face1, 32, 32]
+      - [0xE4F490, rgba16, HitYellowBlock_face2, 32, 32]
+  - name: entity_model_HitYellowBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xE4FC90
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, HitYellowBlock_anim]
+  - name: entity_model_HitFloatingYellowBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xE4FF30
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, HitFloatingYellowBlock_gfx]
+    - start: 0xE4FF30
+      type: .data
+      name: HitFloatingYellowBlock_gfx
+      subsegments:
+      - [0xE4FF30, vtx, HitFloatingYellowBlock_1]
+      - [0xE50090, vtx, HitFloatingYellowBlock_2]
+      - [0xE50210]
+      - [0xE50370, rgba16, HitFloatingYellowBlock_face1, 32, 32]
+      - [0xE50B70, rgba16, HitFloatingYellowBlock_face2, 32, 32]
+  - name: entity_model_HitFloatingYellowBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xE51370
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, HitFloatingYellowBlock_anim]
+  - name: entity_model_HitRedBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xE51600
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, HitRedBlock_gfx]
+    - start: 0xE51600
+      type: .data
+      name: HitRedBlock_gfx
+      subsegments:
+      - [0xE51600, vtx, HitRedBlock_1]
+      - [0xE51760, vtx, HitRedBlock_2]
+      - [0xE518C0]
+      - [0xE51A60, rgba16, HitRedBlock_face1, 32, 32]
+      - [0xE52260, rgba16, HitRedBlock_face2, 32, 32]
+  - name: entity_model_HitRedBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xE52A60
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, HitRedBlock_anim]
+  - name: entity_model_HeartBlockContent
+    dir: entity/model
+    type: code
+    start: 0xE52CC0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, HeartBlockContent]
+    - start: 0xE52CC0
+      type: .data
+      name: HeartBlockContent
+      subsegments:
+      - [0xE52CC0]
+      #- [0xE52CC0, ci4, HeartBlockContent_img1, 32, 32]
+      #- [0xE52EC0, ci4, HeartBlockContent_img2, 32, 32]
+      #- [0xE530C0, ci4, HeartBlockContent_img3, 32, 32]
+      #- [0xE532C0, palette, HeartBlockContent_pal] # this palette is common for all images above
+      #- [0xE532E0]
+  - name: entity_model_SuperBlockContent
+    dir: entity/model
+    type: code
+    start: 0xE53520
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, SuperBlockContent]
+    - start: 0xE53520
+      type: .data
+      name: SuperBlockContent
+      subsegments:
+      - [0xE53520, ci4, SuperBlockContent, 32, 32]
+      - [0xE53720, palette, SuperBlockContent]
+      - [0xE53740, palette, SuperBlockContent.pal2]
+      - [0xE53760, palette, SuperBlockContent.pal3]
+      - [0xE53780, palette, SuperBlockContent.pal4]
+      - [0xE537A0]
+  - name: entity_model_UltraBlockContent
+    dir: entity/model
+    type: code
+    start: 0xE53900
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, UltraBlockContent]
+    - start: 0xE53900
+      type: .data
+      name: UltraBlockContent
+      subsegments:
+      - [0xE53900]
+      #- [0xE53900, ci4, UltraBlockContent_img1, 32, 32]
+      #- [0xE53B00, ci4, UltraBlockContent_img2, 32, 32]
+      #- [0xE53D00, ci4, UltraBlockContent_img3, 32, 32]
+      #- [0xE53F00, palette, UltraBlockContent_pal] # this palette is common for all images above
+      #- [0xE53F20]
+  - name: entity_model_SaveBlock
+    dir: entity/model
+    type: code
+    start: 0xE54160
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, SaveBlock]
+    - start: 0xE54160
+      type: .data
+      name: SaveBlock
+      subsegments:
+      - [0xE54160, vtx, SaveBlock_1]
+      - [0xE544D0, vtx, SaveBlock_2]
+      - [0xE54820, vtx, SaveBlock_3]
+      - [0xE54A60, rgba16, SaveBlock_star, 32, 32]
+      - [0xE55260]
+      - [0xE552D0, rgba32, SaveBlock_face, 32, 32]
+      - [0xE562D0]
+      - [0xE56348, rgba16, SaveBlock_letterS, 64, 32]
+      - [0xE57348]
+  - name: entity_model_BoardedFloor
+    dir: entity/model
+    type: code
+    start: 0xE57670
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, BoardedFloor]
+    - start: 0xE57670
+      type: .data
+      name: BoardedFloor
+      subsegments:
+      - [0xE57670, vtx, BoardedFloor_1]
+      - [0xE57850, vtx, BoardedFloor_2]
+      - [0xE57A30, vtx, BoardedFloor_3]
+      - [0xE57C10, vtx, BoardedFloor_4]
+      - [0xE57DF0, vtx, BoardedFloor_5]
+      - [0xE57F70, vtx, BoardedFloor_6]
+      - [0xE580F0, vtx, BoardedFloor_7]
+      - [0xE582F0, vtx, BoardedFloor_8]
+      - [0xE584F0, vtx, BoardedFloor_9]
+      - [0xE58670, vtx, BoardedFloor_A]
+      - [0xE587F0, vtx, BoardedFloor_B]
+      - [0xE588F0, vtx, BoardedFloor_C]
+      - [0xE58A70, rgba16, BoardedFloor, 64, 32]
+      - [0xE59A70]
+  - name: entity_model_WoodenCrate
+    dir: entity/model
+    type: code
+    start: 0xE5A4C0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, WoodenCrate]
+    - start: 0xE5A4C0
+      type: .data
+      name: WoodenCrate
+      subsegments:
+      - [0xE5A4C0, vtx, WoodenCrate]
+      - [0xE5BA20, ci4, WoodenCrate_img1, 64, 64]
+      - [0xE5C220, palette, WoodenCrate_img1]
+      - [0xE5C240]
+      - [0xE5C2E8, ci4, WoodenCrate_img2, 64, 64]
+      - [0xE5CAE8, palette, WoodenCrate_img2]
+      - [0xE5CB08]
+  - name: entity_model_StarBoxLauncher
+    dir: entity/model
+    type: code
+    start: 0xE5E8C0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, StarBoxLauncher]
+    - start: 0xE5E8C0
+      type: .data
+      name: StarBoxLauncher
+      subsegments:
+      - [0xE5E8C0, vtx, StarBoxLauncher_1]
+      - [0xE5E9B0, vtx, StarBoxLauncher_2]
+      - [0xE5EAD0, vtx, StarBoxLauncher_3]
+      - [0xE5EB10, vtx, StarBoxLauncher_4]
+      - [0xE5EB50, rgba16, StarBoxLauncher_link, 16, 16]
+      - [0xE5ED50]
+      - [0xE5EDC8, ci4, StarBoxLauncher_face, 128, 32]
+      - [0xE5F5C8, palette, StarBoxLauncher_face]
+      - [0xE5F5E8]
+      - [0xE5F690, ci4, StarBoxLauncher_box, 16, 32]
+      - [0xE5F790, palette, StarBoxLauncher_box]
+      - [0xE5F7B0]
+  - name: entity_model_HiddenPanel
+    dir: entity/model
+    type: code
+    start: 0xE5FA20
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, HiddenPanel]
+  - name: entity_model_Tweester
+    dir: entity/model
+    type: code
+    start: 0xE5FCE0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Tweester]
+    - start: 0xE5FCE0
+      type: .data
+      name: Tweester
+      subsegments:
+      - [0xE5FCE0, vtx, Tweester_1]
+      - [0xE600F0, vtx, Tweester_2]
+      - [0xE60500, vtx, Tweester_3]
+      - [0xE60540, vtx, Tweester_4]
+      - [0xE608D0, i8, Tweester_img1, 32, 32]
+      - [0xE60CD0, i8, Tweester_img2, 32, 32]
+      - [0xE610D0]
+      - [0xE61180, ci4, Tweester_img3, 64, 32]
+      - [0xE61580, palette, Tweester_img3]
+      - [0xE615A0]
+  - name: entity_model_BlueWarpPipe
+    dir: entity/model
+    type: code
+    start: 0xE61B50
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, BlueWarpPipe]
+    - start: 0xE61B50
+      type: .data
+      name: BlueWarpPipe
+      subsegments:
+      - [0xE61B50, vtx, BlueWarpPipe_1]
+      - [0xE61BB0, vtx, BlueWarpPipe_2]
+      - [0xE61E30, vtx, BlueWarpPipe_3]
+      - [0xE61E70, ci4, BlueWarpPipe_texBase, 16, 16]
+      - [0xE61EF0, palette, BlueWarpPipe_texBase]
+      - [0xE61F10]
+      - [0xE61FC0, ci4, BlueWarpPipe_texPipe, 32, 16]
+      - [0xE620C0, palette, BlueWarpPipe_texPipe]
+      - [0xE620E0]
+  - name: entity_model_Signpost
+    dir: entity/model
+    type: code
+    start: 0xE62300
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Signpost]
+    - start: 0xE62300
+      type: .data
+      name: Signpost
+      subsegments:
+      - [0xE62300, vtx, Signpost_1]
+      - [0xE62420, vtx, Signpost_2]
+      - [0xE62880, ci4, Signpost, 32, 32]
+      - [0xE62A80, palette, Signpost]
+      - [0xE62AA0]
+  - name: entity_model_ArrowSign
+    dir: entity/model
+    type: code
+    start: 0xE62D80
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, ArrowSign]
+    - start: 0xE62D80
+      type: .data
+      name: ArrowSign
+      subsegments:
+      - [0xE62D80]
+      - [0xE62E00, ci8, ArrowSign, 64, 32]
+      - [0xE63600, palette, ArrowSign]
+      - [0xE63800]
+  - name: entity_model_Padlock
+    dir: entity/model
+    type: code
+    start: 0xE639D0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Padlock]
+    - start: 0xE639D0
+      type: .data
+      name: Padlock
+      subsegments:
+      - [0xE639D0, vtx, Padlock_1]
+      - [0xE63F90, vtx, Padlock_2]
+      - [0xE63FF0, vtx, Padlock_3]
+      - [0xE64030, vtx, Padlock_4]
+      - [0xE640D0, ci8, Padlock_face, 32, 32]
+      - [0xE644D0, palette, Padlock_face]
+      - [0xE646D0]
+      - [0xE64778, ci8, Padlock_keyhole, 32, 64]
+      - [0xE64F78, palette, Padlock_keyhole]
+      - [0xE65178]
+      - [0xE65220, ci8, Padlock_body, 32, 32]
+      - [0xE65620, palette, Padlock_body]
+      - [0xE65820]
+  - name: entity_model_PadlockRedFrame
+    dir: entity/model
+    type: code
+    start: 0xE65C00
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, PadlockRedFrame]
+    - start: 0xE65C00
+      type: .data
+      name: PadlockRedFrame
+      subsegments:
+      - [0xE65C00, vtx, PadlockRedFrame_1]
+      - [0xE65E00, vtx, PadlockRedFrame_2]
+      - [0xE65E40, vtx, PadlockRedFrame_3]
+      - [0xE65E80, vtx, PadlockRedFrame_4]
+      - [0xE66140, ci8, PadlockRedFrame_keyhole, 32, 64]
+      - [0xE66940, palette, PadlockRedFrame_keyhole]
+      - [0xE66B40]
+      - [0xE66BE8, ci8, PadlockRedFrame_face, 32, 32]
+      - [0xE66FE8, palette, PadlockRedFrame_face]
+      - [0xE671E8]
+  - name: entity_model_PadlockRedFace
+    dir: entity/model
+    type: code
+    start: 0xE675B0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, PadlockRedFace]
+    - start: 0xE675B0
+      type: .data
+      name: PadlockRedFace
+      subsegments:
+      - [0xE675B0, vtx, PadlockRedFace_1]
+      - [0xE67B70, vtx, PadlockRedFace_2]
+      - [0xE67BD0, vtx, PadlockRedFace_3]
+      - [0xE67C10, vtx, PadlockRedFace_4]
+      - [0xE67CB0, i4, PadlockRedFace_face, 32, 32]
+      - [0xE67EB0]
+      - [0xE67F28, ci8, PadlockRedFace_keyhole, 32, 64]
+      - [0xE68728, palette, PadlockRedFace_keyhole]
+      - [0xE68928]
+      - [0xE689D0, ci8, PadlockRedFace_body, 32, 32]
+      - [0xE68DD0, palette, PadlockRedFace_body]
+      - [0xE68FD0]
+  - name: entity_model_PadlockBlueFace
+    dir: entity/model
+    type: code
+    start: 0xE693D0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, PadlockBlueFace]
+    - start: 0xE693D0
+      type: .data
+      name: PadlockBlueFace
+      subsegments:
+      - [0xE693D0, vtx, PadlockBlueFace_1]
+      - [0xE69990, vtx, PadlockBlueFace_2]
+      - [0xE699F0, vtx, PadlockBlueFace_3]
+      - [0xE69A30, vtx, PadlockBlueFace_4]
+      - [0xE69AD0, i4, PadlockBlueFace_face, 32, 32]
+      - [0xE69CD0]
+      - [0xE69D48, ci8, PadlockBlueFace_keyhole, 32, 64]
+      - [0xE6A548, palette, PadlockBlueFace_keyhole]
+      - [0xE6A748]
+      - [0xE6A7F0, ci8, PadlockBlueFace_body, 32, 32]
+      - [0xE6ABF0, palette, PadlockBlueFace_body]
+      - [0xE6ADF0]
+  - name: entity_model_GreenStompSwitch
+    dir: entity/model
+    type: code
+    start: 0xE6B1F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, GreenStompSwitch]
+    - start: 0xE6B1F0
+      type: .data
+      name: GreenStompSwitch
+      subsegments:
+      - [0xE6B1F0, vtx, GreenStompSwitch_1]
+      - [0xE6B270, vtx, GreenStompSwitch_2]
+      - [0xE6B470, ci4, GreenStompSwitch_tex, 16, 16]
+      - [0xE6B4F0, palette, GreenStompSwitch_tex]
+      - [0xE6B510]
+      - [0xE6B5C8, ci4, GreenStompSwitch_exclamationMark, 16, 32]
+      - [0xE6B6C8, palette, GreenStompSwitch_exclamationMark]
+      - [0xE6B6E8]
+  - name: entity_model_RedSwitch
+    dir: entity/model
+    type: code
+    start: 0xE6B940
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, RedSwitch]
+    - start: 0xE6B940
+      type: .data
+      name: RedSwitch
+      subsegments:
+      - [0xE6B940, vtx, RedSwitch_1]
+      - [0xE6BCD0, vtx, RedSwitch_2]
+      - [0xE6BD10, vtx, RedSwitch_3]
+      - [0xE6BF10, ci8, RedSwitch_tex, 16, 16]
+      - [0xE6C010, palette, RedSwitch_tex]
+      - [0xE6C210]
+      - [0xE6C2B8, ia4, RedSwitch_exclamationMark, 16, 32]
+      - [0xE6C3B8]
+  - name: entity_model_BlueSwitch
+    dir: entity/model
+    type: code
+    start: 0xE6C840
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, BlueSwitch]
+    - start: 0xE6C840
+      type: .data
+      name: BlueSwitch
+      subsegments:
+      - [0xE6C840, vtx, BlueSwitch_1]
+      - [0xE6CB40, vtx, BlueSwitch_2]
+      - [0xE6CBD0, vtx, BlueSwitch_3]
+      - [0xE6CC10, vtx, BlueSwitch_4]
+      - [0xE6CE10, ci8, BlueSwitch_tex, 16, 16]
+      - [0xE6CF10, palette, BlueSwitch_tex]
+      - [0xE6D110]
+      - [0xE6D1B8, ia4, BlueSwitch_exclamationMark, 16, 32]
+      - [0xE6D2B8]
+  - name: entity_model_Chest
+    dir: entity/model
+    type: code
+    start: 0xE6D750
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Chest]
+    - start: 0xE6D750
+      type: .data
+      name: Chest
+      subsegments:
+      - [0xE6D750, vtx, Chest_1]
+      - [0xE6D8E0, vtx, Chest_2]
+      - [0xE6D960, vtx, Chest_3]
+      - [0xE6DAE0, vtx, Chest_4]
+      - [0xE6DB60, rgba16, Chest_tex1, 16, 32]
+      - [0xE6DF60]
+      - [0xE6DFE8, ci4, Chest_tex2, 16, 32]
+      - [0xE6E0E8, palette, Chest_tex2]
+      - [0xE6E108]
+      - [0xE6E1C0, ci4, Chest_lock, 16, 32]
+      - [0xE6E2C0, palette, Chest_lock]
+      - [0xE6E2E0]
+  - name: entity_model_ScriptSpring_gfx
+    dir: entity/model
+    type: code
+    start: 0xE6E620
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, ScriptSpring_gfx]
+    - start: 0xE6E620
+      type: .data
+      name: ScriptSpring_gfx
+      subsegments:
+      - [0xE6E620, vtx, ScriptSpring_1]
+      - [0xE6E8A0, vtx, ScriptSpring_2]
+      - [0xE6E920, vtx, ScriptSpring_3]
+      - [0xE6E9A0, vtx, ScriptSpring_4]
+      - [0xE6EA20, vtx, ScriptSpring_5]
+      - [0xE6ECA0, vtx, ScriptSpring_6]
+      - [0xE6EE00, vtx, ScriptSpring_7]
+      - [0xE6EE80, ci8, ScriptSpring_tex1, 16, 16]
+      - [0xE6EF80, palette, ScriptSpring_tex1]
+      - [0xE6F180]
+      - [0xE6F228, ci8, ScriptSpring_tex2, 16, 16]
+      - [0xE6F328, palette, ScriptSpring_tex2]
+      - [0xE6F528]
+      - [0xE6F5D0, ci8, ScriptSpring_star, 32, 32]
+      - [0xE6F9D0, palette, ScriptSpring_star]
+      - [0xE6FBD0]
+  - name: entity_model_ScriptSpring_anim
+    dir: entity/model
+    type: code
+    start: 0xE6FFA0
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, ScriptSpring_anim]
+  - name: entity_model_SimpleSpring_gfx
+    dir: entity/model
+    type: code
+    start: 0xE71400
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, SimpleSpring_gfx]
+    - start: 0xE71400
+      type: .data
+      name: SimpleSpring_gfx
+      subsegments:
+      - [0xE71400, vtx, SimpleSpring_1]
+      - [0xE71680, vtx, SimpleSpring_2]
+      - [0xE71700, vtx, SimpleSpring_3]
+      - [0xE71780, vtx, SimpleSpring_4]
+      - [0xE71A00, vtx, SimpleSpring_5]
+      - [0xE71B60, vtx, SimpleSpring_6]
+      - [0xE71BE0, ci8, SimpleSpring_tex1, 16, 16]
+      - [0xE71CE0, palette, SimpleSpring_tex1]
+      - [0xE71EE0]
+      - [0xE71F88, rgba16, SimpleSpring_tex2, 16, 16]
+      - [0xE72188]
+      - [0xE72200, ci8, SimpleSpring_star, 32, 32]
+      - [0xE72600, palette, SimpleSpring_star]
+      - [0xE72800]
+  - name: entity_model_SimpleSpring_anim
+    dir: entity/model
+    type: code
+    start: 0xE72BD0
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, SimpleSpring_anim]
+  - name: entity_model_BellbellPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xE74030
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, BellbellPlant_gfx]
+    - start: 0xE74030
+      type: .data
+      name: BellbellPlant_gfx
+      subsegments:
+      - [0xE74030, vtx, BellbellPlant_1]
+      - [0xE743C0, vtx, BellbellPlant_2]
+      - [0xE74670, vtx, BellbellPlant_3]
+      - [0xE74750, vtx, BellbellPlant_4]
+      - [0xE74A40, vtx, BellbellPlant_5]
+      - [0xE74B20]
+      - [0xE750C0, rgba16, BellbellPlant, 16, 16]
+  - name: entity_model_BellbellPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xE752C0
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, BellbellPlant_anim]
+  - name: entity_model_TrumpetPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xE76210
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, TrumpetPlant_gfx]
+    - start: 0xE76210
+      type: .data
+      name: TrumpetPlant_gfx
+      subsegments:
+      - [0xE76210, vtx, TrumpetPlant_1]
+      - [0xE76450, vtx, TrumpetPlant_2]
+      - [0xE76BC0]
+      - [0xE76F50, rgba16, TrumpetPlant, 16, 16]
+  - name: entity_model_TrumpetPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xE77150
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, TrumpetPlant_anim]
+  - name: entity_model_MunchlesiaReset_gfx
+    dir: entity/model
+    type: code
+    start: 0xE774E0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaReset_gfx]
+    - start: 0xE774E0
+      type: .data
+      name: MunchlesiaReset_gfx
+      subsegments:
+      - [0xE774E0, vtx, MunchlesiaReset]
+      - [0xE78DD0]
+      - [0xE7D3C8, rgba16, MunchlesiaReset, 16, 16]
+  - name: entity_model_MunchlesiaReset_anim
+    dir: entity/model
+    type: code
+    start: 0xE7D5D0
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaReset_anim]
+  - name: entity_model_MunchlesiaGrab_gfx
+    dir: entity/model
+    type: code
+    start: 0xE7DA50
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaGrab_gfx]
+    - start: 0xE7DA50
+      type: .data
+      name: MunchlesiaGrab_gfx
+      subsegments:
+      - [0xE7DA50, vtx, MunchlesiaGrab]
+      - [0xE7F340]
+      - [0xE83938, rgba16, MunchlesiaGrab, 16, 16]
+  - name: entity_model_MunchlesiaGrab_anim
+    dir: entity/model
+    type: code
+    start: 0xE83B40
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaGrab_anim]
+  - name: entity_model_MunchlesiaEnvelop_gfx
+    dir: entity/model
+    type: code
+    start: 0xE83F60
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaEnvelop_gfx]
+    - start: 0xE83F60
+      type: .data
+      name: MunchlesiaEnvelop_gfx
+      subsegments:
+      - [0xE83F60, vtx, MunchlesiaEnvelop]
+      - [0xE85850]
+      - [0xE89E48, rgba16, MunchlesiaEnvelop, 16, 16]
+  - name: entity_model_MunchlesiaEnvelop_anim
+    dir: entity/model
+    type: code
+    start: 0xE8A050
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaEnvelop_anim]
+  - name: entity_model_MunchlesiaBeginChew_gfx
+    dir: entity/model
+    type: code
+    start: 0xE8A470
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaBeginChew_gfx]
+    - start: 0xE8A470
+      type: .data
+      name: MunchlesiaBeginChew_gfx
+      subsegments:
+      - [0xE8A470, vtx, MunchlesiaBeginChew]
+      - [0xE8BD60]
+      - [0xE90CB0, rgba16, MunchlesiaBeginChew, 16, 16]
+  - name: entity_model_MunchlesiaBeginChew_anim
+    dir: entity/model
+    type: code
+    start: 0xE90EB0
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaBeginChew_anim]
+  - name: entity_model_MunchlesiaChewing_gfx
+    dir: entity/model
+    type: code
+    start: 0xE91320
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaChewing_gfx]
+    - start: 0xE91320
+      type: .data
+      name: MunchlesiaChewing_gfx
+      subsegments:
+      - [0xE91320, vtx, MunchlesiaChewing]
+      - [0xE92C10]
+      - [0xE93090, rgba16, MunchlesiaChewing, 16, 16]
+  - name: entity_model_MunchlesiaChewing_anim
+    dir: entity/model
+    type: code
+    start: 0xE93290
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaChewing_anim]
+  - name: entity_model_MunchlesiaSpitOut_gfx
+    dir: entity/model
+    type: code
+    start: 0xE93860
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaSpitOut_gfx]
+    - start: 0xE93860
+      type: .data
+      name: MunchlesiaSpitOut_gfx
+      subsegments:
+      - [0xE93860, vtx, MunchlesiaSpitOut]
+      - [0xE95150]
+      - [0xE9A0A0, rgba16, MunchlesiaSpitOut, 16, 16]
+  - name: entity_model_MunchlesiaSpitOut_anim
+    dir: entity/model
+    type: code
+    start: 0xE9A2A0
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaSpitOut_anim]
+  - name: entity_model_MunchlesiaReset1_gfx
+    dir: entity/model
+    type: code
+    start: 0xE9A710
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaReset1_gfx]
+    - start: 0xE9A710
+      type: .data
+      name: MunchlesiaReset1_gfx
+      subsegments:
+      - [0xE9A710, vtx, MunchlesiaReset1]
+      - [0xE9C000]
+      - [0xEA0F50, rgba16, MunchlesiaReset1, 16, 16]
+  - name: entity_model_MunchlesiaReset1_anim
+    dir: entity/model
+    type: code
+    start: 0xEA1150
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaReset1_anim]
+  - name: entity_model_CymbalPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xEA15C0
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, CymbalPlant_anim]
+  - name: entity_model_CymbalPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xEA2170
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, CymbalPlant_gfx]
+    - start: 0xEA2170
+      type: .data
+      name: CymbalPlant_gfx
+      subsegments:
+      - [0xEA2170, ci4, CymbalPlant, 64, 64]
+      - [0xEA2970, palette, CymbalPlant]
+      - [0xEA2990]
+      - [0xEA2A38, vtx, CymbalPlant_1]
+      - [0xEA2AD8, vtx, CymbalPlant_2]
+      - [0xEA2B38, vtx, CymbalPlant_3]
+      - [0xEA2BD8, vtx, CymbalPlant_4]
+      - [0xEA2D28, vtx, CymbalPlant_5]
+      - [0xEA2E98, vtx, CymbalPlant_6]
+      - [0xEA2F28, vtx, CymbalPlant_7]
+      - [0xEA3098, vtx, CymbalPlant_8]
+      - [0xEA31E8]
+  - name: entity_model_PinkFlower_anim
+    dir: entity/model
+    type: code
+    start: 0xEA3810
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, PinkFlower_anim]
+  - name: entity_model_PinkFlower_gfx
+    dir: entity/model
+    type: code
+    start: 0xEA4380
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, PinkFlower_gfx]
+    - start: 0xEA4380
+      type: .data
+      name: PinkFlower_gfx
+      subsegments:
+      - [0xEA4380, vtx, PinkFlower_1]
+      - [0xEA43C0, vtx, PinkFlower_2]
+      - [0xEA4610, vtx, PinkFlower_3]
+      - [0xEA4730, vtx, PinkFlower_4]
+      - [0xEA4830, vtx, PinkFlower_5]
+      - [0xEA4930, ia16, PinkFlower_light, 16, 16]
+      - [0xEA4B30]
+      - [0xEA4BA0, rgba16, PinkFlower_tex, 16, 64]
+      - [0xEA53A0]
+  - name: entity_model_SpinningFlower
+    dir: entity/model
+    type: code
+    start: 0xEA5780
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, SpinningFlower]
+    - start: 0xEA5780
+      type: .data
+      name: SpinningFlower
+      subsegments:
+      - [0xEA5780, vtx, SpinningFlower_1]
+      - [0xEA57D0, vtx, SpinningFlower_2]
+      - [0xEA5820, vtx, SpinningFlower_3]
+      - [0xEA58A0, vtx, SpinningFlower_4]
+      - [0xEA5900, ia4, SpinningFlower_img1, 16, 32]
+      - [0xEA5A00]
+      - [0xEA5A78, rgba16, SpinningFlower_petal, 32, 32]
+      - [0xEA6278]
+  - name: entity_model_BombableRock
+    dir: entity/model
+    type: code
+    start: 0xEA64D0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, BombableRock]
+    - start: 0xEA64D0
+      type: .data
+      name: BombableRock
+      subsegments:
+      - [0xEA64D0, vtx, BombableRock_1]
+      - [0xEA6850, vtx, BombableRock_2]
+      - [0xEA6970, vtx, BombableRock_3]
+      - [0xEA6AD0, vtx, BombableRock_4]
+      - [0xEA6BF0, vtx, BombableRock_5]
+      - [0xEA6D10, ci4, BombableRock, 64, 64]
+      - [0xEA7510, palette, BombableRock]
+      - [0xEA7530]
 
-  - [ 0xE343B0, bin ]
+  - [ 0xEA7B50, bin ]
 
   - start: 0xFC0000
     type: pm_sbn

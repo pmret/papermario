@@ -592,11 +592,18 @@ class Configure:
             "world_map",
         )
 
-        build(
-            self.build_path() / "include/recipes.inc.c",
-            [Path("src/recipes.yaml")],
-            "recipes",
-        )
+        if self.version == "jp":
+            build(
+                self.build_path() / "include/recipes.inc.c",
+                [Path("src/recipes_jp.yaml")],
+                "recipes",
+            )
+        else:
+            build(
+                self.build_path() / "include/recipes.inc.c",
+                [Path("src/recipes.yaml")],
+                "recipes",
+            )
 
         build(
             [
