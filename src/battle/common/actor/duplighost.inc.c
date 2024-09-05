@@ -5,7 +5,7 @@
 
 #define NAMESPACE A(duplighost)
 
-// scripts in duplighost.c calls two functions defined in ghost_watt.c for adjusting the background fade
+// scripts in duplighost.c call two functions defined in ghost_watt.c for adjusting the background fade
 // this macro is used to highlight those instances
 #define WATT(x) A(  watt_clone_##x )
 

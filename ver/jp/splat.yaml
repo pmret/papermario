@@ -1192,10 +1192,201 @@ segments:
   - [0x13E130, bin]
 
   - name: battle_code
-    type: bin
+    type: code
     start: 0x1749F0
     vram: 0x8023E000
-
+    subsegments:
+    - [auto, c, battle/16C8E0]
+    - [auto, c, battle/btl_states_actions]
+    - [auto, c, battle/camera]
+    - [auto, c, battle/actors]
+    - [auto, c, battle/popup_messages]
+    - [auto, c, battle/entity_model_icons]
+    - [auto, c, battle/partner_dma]
+    - [auto, c, battle/dmg_item]
+    - [auto, c, battle/181810]
+    - [auto, c, battle/actor_rendering]
+    - [auto, c, battle/level_up]
+    - [auto, c, battle/player_events]
+    - [auto, c, battle_ui_gfx]
+    - [auto, c, battle/190A10]
+    - [auto, c, battle/190B20]
+    - [auto, c, battle/use_items]
+    - [auto, c, battle/use_moves]
+    - [auto, c, battle/action_cmd]
+    - [auto, c, battle/actor_api]
+    - [auto, c, battle/dmg_player]
+    - [auto, c, battle/1A5830]
+    - [auto, c, battle/dmg_partner]
+    - [auto, c, battle/standard_events]
+    - [auto, c, battle/use_star_powers]
+    - start: 0x1BA5F0
+      type: .data
+      name: battle/entity_model_icons
+      subsegments:
+      - [0x1BA5F0, ci4, ui/battle/cursor_hand, 32, 32]
+      - [0x1BA7F0, palette, ui/battle/cursor_hand]
+      - [0x1BA810]
+    - start: 0x1C00F0
+      type: .data
+      name: battle_ui_gfx
+      subsegments:
+      - [0x1C00F0, ci4, ui/battle/menu/unused, 32, 32]
+      - [0x1C02F0, palette, ui/battle/menu/unused]
+      - [0x1C0310, palette, ui/battle/menu/unused.disabled]
+      - [0x1C0330, ci4, ui/battle/menu/flee, 32, 32]
+      - [0x1C0530, palette, ui/battle/menu/flee]
+      - [0x1C0550, palette, ui/battle/menu/flee.disabled]
+      - [0x1C0570, ci4, ui/battle/menu/defend, 32, 32]
+      - [0x1C0770, palette, ui/battle/menu/defend]
+      - [0x1C0790, palette, ui/battle/menu/defend.disabled]
+      - [0x1C07B0, ci4, ui/battle/menu/strategies, 32, 32]
+      - [0x1C09B0, palette, ui/battle/menu/strategies]
+      - [0x1C09D0, palette, ui/battle/menu/strategies.disabled]
+      - [0x1C09F0, ci4, ui/battle/menu/nothing, 32, 32]
+      - [0x1C0BF0, palette, ui/battle/menu/nothing]
+      - [0x1C0C10, palette, ui/battle/menu/nothing.disabled]
+      - [0x1C0C30, ci4, ui/battle/menu/pouch, 32, 32]
+      - [0x1C0E30, palette, ui/battle/menu/pouch]
+      - [0x1C0E50, palette, ui/battle/menu/pouch.disabled]
+      - [0x1C0E70, ci4, ui/battle/swap_Z, 16, 16]
+      - [0x1C0EF0, palette, ui/battle/swap_Z]
+      - [0x1C0F10, ci4, ui/battle/swap_arrow_left, 8, 16]
+      - [0x1C0F50, palette, ui/battle/swap_arrow_left]
+      - [0x1C0F70, ci4, ui/battle/swap_arrow_right, 8, 16]
+      - {start: 0x1C0FB0, type: palette, name: ui/battle/swap_arrow_right, size: 0x190}
+      - [0x1C1150, ci4, ui/battle/menu/spirits, 32, 32]
+      - [0x1C1350, palette, ui/battle/menu/spirits]
+      - [0x1C1370, ci4, ui/battle/yellow_arrow, 16, 16]
+      - {start: 0x1C13F0, type: palette, name: ui/battle/yellow_arrow, size: 0x140}
+      - [0x1C1530, ci4, ui/battle/hp_bar, 32, 16]
+      - [0x1C1630, palette, ui/battle/hp_bar]
+      - [0x1C1650, ci4, ui/battle/hp_0, 8, 8]
+      - [0x1C1670, palette, ui/battle/hp_0]
+      - [0x1C1690, ci4, ui/battle/hp_1, 8, 8]
+      - [0x1C16B0, palette, ui/battle/hp_1]
+      - [0x1C16D0, ci4, ui/battle/hp_2, 8, 8]
+      - [0x1C16F0, palette, ui/battle/hp_2]
+      - [0x1C1710, ci4, ui/battle/hp_3, 8, 8]
+      - [0x1C1730, palette, ui/battle/hp_3]
+      - [0x1C1750, ci4, ui/battle/hp_4, 8, 8]
+      - [0x1C1770, palette, ui/battle/hp_4]
+      - [0x1C1790, ci4, ui/battle/hp_5, 8, 8]
+      - [0x1C17B0, palette, ui/battle/hp_5]
+      - [0x1C17D0, ci4, ui/battle/hp_6, 8, 8]
+      - [0x1C17F0, palette, ui/battle/hp_6]
+      - [0x1C1810, ci4, ui/battle/hp_7, 8, 8]
+      - [0x1C1830, palette, ui/battle/hp_7]
+      - [0x1C1850, ci4, ui/battle/hp_8, 8, 8]
+      - [0x1C1870, palette, ui/battle/hp_8]
+      - [0x1C1890, ci4, ui/battle/hp_9, 8, 8]
+      - [0x1C18B0, palette, ui/battle/hp_9]
+      - [0x1C18D0, ci4, ui/battle/cont/b_up, 48, 40]
+      - [0x1C1C90, palette, ui/battle/cont/b_up]
+      - [0x1C1CB0, ci4, ui/battle/cont/b_down, 48, 40]
+      - [0x1C2070, palette, ui/battle/cont/b_down]
+      - [0x1C2090, ci4, ui/battle/cont/c_left_up, 40, 34]
+      - [0x1C2338, palette, ui/battle/cont/c_left_up]
+      - [0x1C2358, ci4, ui/battle/cont/c_left_down, 40, 34]
+      - [0x1C2600, palette, ui/battle/cont/c_left_down]
+      - [0x1C2620, ci4, ui/battle/cont/c_right_up, 40, 34]
+      - [0x1C28C8, palette, ui/battle/cont/c_right_up]
+      - [0x1C28E8, ci4, ui/battle/cont/c_right_down, 40, 34]
+      - [0x1C2B90, palette, ui/battle/cont/c_right_down]
+      - [0x1C2BB0, ci4, ui/battle/cont/c_up_up, 40, 34]
+      - [0x1C2E58, palette, ui/battle/cont/c_up_up]
+      - [0x1C2E78, ci4, ui/battle/cont/c_up_down, 40, 34]
+      - [0x1C3120, palette, ui/battle/cont/c_up_down]
+      - [0x1C3140, ci4, ui/battle/cont/c_down_up, 40, 34]
+      - [0x1C33E8, palette, ui/battle/cont/c_down_up]
+      - [0x1C3408, ci4, ui/battle/cont/c_down_down, 40, 34]
+      - [0x1C36B0, palette, ui/battle/cont/c_down_down]
+      - [0x1C36D0, ci4, ui/battle/cmd/timing_1_chance, 72, 24]
+      - [0x1C3A30, palette, ui/battle/cmd/timing_1_chance]
+      - [0x1C3A50, ci4, ui/battle/cmd/timing_ready, 16, 16]
+      - [0x1C3AD0, palette, ui/battle/cmd/timing_ready]
+      - [0x1C3AF0, ci4, ui/battle/cmd/timing_wait, 16, 16]
+      - [0x1C3B70, palette, ui/battle/cmd/timing_wait]
+      - [0x1C3B90, ci4, ui/battle/cmd/charge_1, 8, 8]
+      - [0x1C3BB0, palette, ui/battle/cmd/charge_1]
+      - [0x1C3BD0, ci4, ui/battle/cmd/charge_2, 8, 8]
+      - [0x1C3BF0, palette, ui/battle/cmd/charge_2]
+      - [0x1C3C10, ci4, ui/battle/cmd/charge_3, 8, 8]
+      - [0x1C3C30, palette, ui/battle/cmd/charge_3]
+      - [0x1C3C50, ci4, ui/battle/cmd/charge_4, 8, 8]
+      - [0x1C3C70, palette, ui/battle/cmd/charge_4]
+      - [0x1C3C90, ci4, ui/battle/cmd/timing_3_chances, 96, 24]
+      - [0x1C4110, palette, ui/battle/cmd/timing_3_chances]
+      - [0x1C4130, ci4, ui/battle/cmd/gauge_result, 32, 24]
+      - [0x1C42B0, palette, ui/battle/cmd/gauge_result]
+      - [0x1C42D0, ci4, ui/battle/cmd/timing_ok, 24, 24]
+      - [0x1C43F0, palette, ui/battle/cmd/timing_ok]
+      - [0x1C4410, ci4, ui/battle/cmd/timing_miss, 24, 24]
+      - [0x1C4530, palette, ui/battle/cmd/timing_miss]
+      - [0x1C4550, ci4, ui/battle/cmd/flee_0, 16, 24]
+      - [0x1C4610, palette, ui/battle/cmd/flee_0]
+      - [0x1C4630, ci4, ui/battle/cmd/flee_1, 16, 24]
+      - [0x1C46F0, palette, ui/battle/cmd/flee_1]
+      - [0x1C4710, ci4, ui/battle/cmd/flee_2, 16, 24]
+      - [0x1C47D0, palette, ui/battle/cmd/flee_2]
+      - [0x1C47F0, ci4, ui/battle/cmd/100pct, 64, 48]
+      - [0x1C4DF0, palette, ui/battle/cmd/100pct]
+      - [0x1C4E10, ci4, ui/battle/cmd/right_on, 56, 24]
+      - [0x1C50B0, palette, ui/battle/cmd/right_on]
+      - [0x1C50D0, ci4, ui/battle/cmd/fill_result, 32, 24]
+      - [0x1C5250, palette, ui/battle/cmd/fill_result]
+      - [0x1C5270, ci4, ui/battle/cmd/aim/marker_0, 16, 16]
+      - [0x1C52F0, palette, ui/battle/cmd/aim/marker_0]
+      - [0x1C5310, ci4, ui/battle/cmd/aim/marker_1, 16, 16]
+      - [0x1C5390, palette, ui/battle/cmd/aim/marker_1]
+      - [0x1C53B0, ci4, ui/battle/cmd/aim/marker_2, 16, 16]
+      - [0x1C5430, palette, ui/battle/cmd/aim/marker_2]
+      - [0x1C5450, ci4, ui/battle/cmd/aim/marker_3, 16, 16]
+      - [0x1C54D0, palette, ui/battle/cmd/aim/marker_3]
+      - [0x1C54F0, ci4, ui/battle/cmd/aim/marker_4, 16, 16]
+      - [0x1C5570, palette, ui/battle/cmd/aim/marker_4]
+      - [0x1C5590, ci4, ui/battle/cmd/aim/marker_5, 16, 16]
+      - [0x1C5610, palette, ui/battle/cmd/aim/marker_5]
+      - [0x1C5630, ci4, ui/battle/cmd/aim/marker_6, 16, 16]
+      - [0x1C56B0, palette, ui/battle/cmd/aim/marker_6]
+      - [0x1C56D0, ci4, ui/battle/cmd/aim/marker_7, 16, 16]
+      - [0x1C5750, palette, ui/battle/cmd/aim/marker_7]
+      - [0x1C5770, ci4, ui/battle/cmd/aim/shimmer_0, 16, 16]
+      - [0x1C57F0, palette, ui/battle/cmd/aim/shimmer_0]
+      - [0x1C5810, ci4, ui/battle/cmd/aim/shimmer_1, 16, 16]
+      - [0x1C5890, palette, ui/battle/cmd/aim/shimmer_1]
+      - [0x1C58B0, ci4, ui/battle/cmd/aim/shimmer_2, 16, 16]
+      - [0x1C5930, palette, ui/battle/cmd/aim/shimmer_2]
+      - [0x1C5950, ci4, ui/battle/cmd/aim/shimmer_3, 16, 16]
+      - [0x1C59D0, palette, ui/battle/cmd/aim/shimmer_3]
+      - [0x1C59F0, ci4, ui/battle/cmd/aim/shimmer_4, 16, 16]
+      - [0x1C5A70, palette, ui/battle/cmd/aim/shimmer_4]
+      - [0x1C5A90, ci4, ui/battle/cmd/aim/shimmer_5, 16, 16]
+      - [0x1C5B10, palette, ui/battle/cmd/aim/shimmer_5]
+      - [0x1C5B30, ci4, ui/battle/cmd/aim/shimmer_6, 16, 16]
+      - [0x1C5BB0, palette, ui/battle/cmd/aim/shimmer_6]
+      - [0x1C5BD0, ci4, ui/battle/cmd/aim/shimmer_7, 16, 16]
+      - [0x1C5C50, palette, ui/battle/cmd/aim/shimmer_7]
+      - [0x1C5C70, ci4, ui/battle/cmd/aim/reticle_0, 32, 32]
+      - [0x1C5E70, palette, ui/battle/cmd/aim/reticle_0]
+      - [0x1C5E90, ci4, ui/battle/cmd/aim/reticle_1, 32, 32]
+      - [0x1C6090, palette, ui/battle/cmd/aim/reticle_1]
+      - [0x1C60B0, ci4, ui/battle/cmd/aim/target_0, 24, 24]
+      - [0x1C61D0, palette, ui/battle/cmd/aim/target_0]
+      - [0x1C61F0, ci4, ui/battle/cmd/aim/target_1, 24, 24]
+      - [0x1C6310, palette, ui/battle/cmd/aim/target_1]
+      - [0x1C6330, ci4, ui/battle/solid_star, 32, 32]
+      - [0x1C6530, palette, ui/battle/solid_star]
+      - [0x1C6550]
+      - [0x1C6558, ia8, ui/battle/projector_spot, 32, 32]
+      - [0x1C6958]
+      - [0x1C6960, ia8, ui/battle/projector_beam, 64, 64]
+      - [0x1C7960]
+      - [0x1C7968, ia8, ui/battle/projector_reel, 64, 64]
+      - [0x1C8968]
+      - [0x1C8970, ia8, ui/battle/swap_background, 48, 16]
+      - [0x1C8C70]
+    - [0x1D3650]
   - [0x1D4720, pm_icons, icon]
   - dir: logos
     type: code
@@ -5593,190 +5784,787 @@ segments:
   ####################
   ### Battle Areas ###
   ####################
-  - type: bin
-    name: battle_area_kmr_part_1
-    start: 0x004382E0
+  - dir: battle/area/kmr_part_1
+    type: code
+    start: 0x4382E0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_kmr_part_2
-    start: 0x004413D0
+    subalign: 4
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/goomba]
+    - [auto, c, actor/spiked_goomba]
+    - [auto, c, actor/paragoomba]
+    - [auto, c, stage/kmr_02]
+    - [auto, c, stage/kmr_03]
+    - [auto, c, stage/kmr_04]
+    - [auto, c, stage/kmr_05]
+    - [auto, c, stage/kmr_06]
+  - dir: battle/area/kmr_part_2
+    type: code
+    start: 0x4413D0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_kmr_part_3
-    start: 0x0044ED80
+    subalign: 4
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/blue_goomba_1]
+    - [auto, c, actor/red_goomba_1]
+    - [auto, c, actor/blue_goomba_2]
+    - [auto, c, actor/red_goomba_2]
+    - [auto, c, actor/goomba_king]
+    - [auto, c, actor/goomnut_tree]
+    - [auto, c, stage/kmr_02]
+    - [auto, c, stage/kmr_03]
+    - [auto, c, stage/kmr_04]
+    - [auto, c, stage/kmr_05]
+    - [auto, c, stage/kmr_06]
+  - dir: battle/area/kmr_part_3
+    type: code
+    start: 0x44ED80
     vram: 0x80218000
-  - type: bin
-    name: battle_area_mac
-    start: 0x0046BDD0
+    subalign: 4
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/tutorial_spiked_goomba]
+    - [auto, c, actor/tutorial_paragoomba]
+    - [auto, c, actor/paragoomba]
+    - [auto, c, actor/jr_troopa]
+    - [auto, c, actor/egg_jr_troopa]
+    - [auto, c, actor/para_jr_troopa]
+    - [auto, c, actor/spiked_para_jr_troopa]
+    - [auto, c, actor/mage_jr_troopa]
+    - [auto, c, actor/final_jr_troopa]
+    - [auto, c, stage/kmr_02]
+    - [auto, c, stage/kmr_03]
+    - [auto, c, stage/kmr_04]
+    - [auto, c, stage/kmr_05b]
+    - [auto, c, stage/kmr_06]
+    - [auto, c, stage/nok_01]
+    - [auto, c, stage/mim_01]
+    - [auto, c, stage/sam_01]
+    - [auto, c, stage/mac_01]
+    - [auto, c, stage/kpa_13]
+  - dir: battle/area/mac
+    type: code
+    start: 0x46BDD0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_hos
-    start: 0x004869F0
+    subsegments:
+    - [auto, c, actor/chan]
+    - [auto, c, actor/lee]
+    - [auto, c, actor/master1]
+    - [auto, c, actor/master2]
+    - [auto, c, actor/master3]
+    - [auto, c, stage/mac_01]
+    - [auto, c, stage/mac_02]
+    - [auto, c, area]
+  - dir: battle/area/hos
+    type: code
+    start: 0x4869F0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_nok
-    start: 0x00494AE0
+    subsegments:
+    - [auto, c, actor/goombario_tutor]
+    - [auto, c, actor/ember]
+    - [auto, c, actor/magikoopa]
+    - [auto, c, stage/hos_01]
+    - [auto, c, stage/hos_00]
+    - [auto, c, stage/hos_02]
+    - [auto, c, area]
+  - dir: battle/area/nok
+    type: code
+    start: 0x494AE0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_trd_part_1
-    start: 0x004A89E0
+    subalign: 4
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/goomba]
+    - [auto, c, actor/paragoomba]
+    - [auto, c, actor/spiked_goomba]
+    - [auto, c, actor/koopa_troopa]
+    - [auto, c, actor/fuzzy]
+    - [auto, c, actor/paratroopa]
+    - [auto, c, actor/kent_c_koopa]
+    - [auto, c, stage/nok_01]
+    - [auto, c, stage/nok_02]
+    - [auto, c, stage/nok_03]
+    - [auto, c, stage/nok_04]
+  - dir: battle/area/trd_part_1
+    type: code
+    start: 0x4A89E0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_trd_part_2
-    start: 0x004B8B30
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/bullet_bill]
+    - [auto, c, actor/bill_blaster]
+    - [auto, c, actor/bob_omb]
+    - [auto, c, actor/koopa_troopa]
+    - [auto, c, actor/paratroopa]
+    - [auto, c, stage/trd_01]
+    - [auto, c, stage/trd_02]
+    - [auto, c, stage/trd_02b]
+    - [auto, c, stage/trd_03]
+    - [auto, c, stage/trd_04]
+    - [auto, c, stage/trd_05]
+    - [auto, c, stage/trd_00]
+    - [auto, c, stage/trd_02c]
+    - [auto, c, stage/trd_02d]
+    - [auto, c, stage/trd_05b]
+    - [auto, c, stage/trd_05c]
+    - [auto, c, stage/trd_05d]
+    - [auto, c, stage/trd_05e]
+    - [auto, c, stage/trd_05f]
+  - dir: battle/area/trd_part_2
+    type: code
+    start: 0x4B8B30
     vram: 0x80218000
-  - type: bin
-    name: battle_area_trd_part_3
-    start: 0x004D6AF0
+    subalign: 4
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/fake_bowser]
+    - [auto, c, actor/koopa_bros_green]
+    - [auto, c, actor/koopa_bros_red]
+    - [auto, c, actor/koopa_bros_black]
+    - [auto, c, actor/koopa_bros_yellow]
+    - [auto, c, stage/trd_00]
+    - [auto, c, stage/trd_01]
+    - [auto, c, stage/trd_02]
+    - [auto, c, stage/trd_02b]
+    - [auto, c, stage/trd_03]
+    - [auto, c, stage/trd_04]
+    - [auto, c, stage/trd_05]
+    - [auto, c, stage/trd_05b]
+    - [auto, c, stage/trd_05c]
+    - [auto, c, stage/trd_05d]
+    - [auto, c, stage/trd_05e]
+    - [auto, c, stage/trd_05f]
+  - dir: battle/area/trd_part_3
+    type: code
+    start: 0x4D6AF0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_iwa
-    start: 0x004D7B30
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/eldstar]
+    - [auto, c, stage/nok_01]
+  - dir: battle/area/iwa
+    type: code
+    start: 0x4D7B30
     vram: 0x80218000
-  - type: bin
-    name: battle_area_sbk
-    start: 0x004E1F20
+    subalign: 4
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/cleft]
+    - [auto, c, actor/monty_mole]
+    - [auto, c, actor/buzzar]
+    - [auto, c, actor/whacka]
+    - [auto, c, stage/iwa_01]
+    - [auto, c, stage/iwa_01b]
+    - [auto, c, stage/iwa_02]
+  - dir: battle/area/sbk
+    type: code
+    start: 0x4E1F20
     vram: 0x80218000
-  - type: bin
-    name: battle_area_isk_part_1
-    start: 0x004EA080
+    subsegments:
+    - [auto, c, actor/pokey]
+    - [auto, c, actor/bandit]
+    - [auto, c, stage/sbk_02]
+    - [auto, c, area]
+  - dir: battle/area/isk_part_1
+    type: code
+    start: 0x4EA080
     vram: 0x80218000
-  - type: bin
-    name: battle_area_isk_part_2
-    start: 0x004F6DE0
+    subsegments:
+    - [auto, c, actor/pokey_mummy]
+    - [auto, c, actor/swooper]
+    - [auto, c, actor/buzzy_beetle]
+    - [auto, c, actor/stone_chomp]
+    - [auto, c, stage/isk_00]
+    - [auto, c, stage/isk_01]
+    - [auto, c, stage/isk_02]
+    - [auto, c, stage/isk_03]
+    - [auto, c, stage/isk_04]
+    - [auto, c, stage/isk_05]
+    - [auto, c, stage/isk_06]
+    - [auto, c, stage/isk_07]
+    - [auto, c, stage/isk_07]
+    - [auto, c, stage/isk_03b]
+    - [auto, c, stage/isk_02b]
+    - [auto, c, stage/isk_02c]
+    - [auto, c, stage/isk_06b]
+    - [auto, c, stage/isk_08]
+    - [auto, c, area]
+  - dir: battle/area/isk_part_2
+    type: code
+    start: 0x4F6DE0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_mim
-    start: 0x004FF520
+    subsegments:
+    - [auto, c, actor/chain_chomp]
+    - [auto, c, actor/tutankoopa]
+    - [auto, c, stage/isk_00]
+    - [auto, c, stage/isk_01]
+    - [auto, c, stage/isk_02]
+    - [auto, c, stage/isk_02b]
+    - [auto, c, stage/isk_02c]
+    - [auto, c, stage/isk_03]
+    - [auto, c, stage/isk_03b]
+    - [auto, c, stage/isk_04]
+    - [auto, c, stage/isk_05]
+    - [auto, c, stage/isk_06]
+    - [auto, c, stage/isk_06b]
+    - [auto, c, stage/isk_07]
+    - [auto, c, area]
+  - dir: battle/area/mim
+    type: code
+    start: 0x4FF520
     vram: 0x80218000
-  - type: bin
-    name: battle_area_arn
-    start: 0x00506390
+    subsegments:
+    - [auto, c, actor/forest_fuzzy]
+    - [auto, c, actor/bzzap]
+    - [auto, c, actor/piranha_plant]
+    - [auto, c, stage/mim_01]
+    - [auto, c, area]
+  - dir: battle/area/arn
+    type: code
+    start: 0x506390
     vram: 0x80218000
-  - type: bin
-    name: battle_area_dgb
-    start: 0x00516960
+    subsegments:
+    - [auto, c, actor/hyper_goomba]
+    - [auto, c, actor/hyper_paragoomba]
+    - [auto, c, actor/hyper_cleft]
+    - [auto, c, actor/tubbas_heart]
+    - [auto, c, actor/tubba_blubba]
+    - [auto, c, stage/arn_01]
+    - [auto, c, stage/arn_02]
+    - [auto, c, stage/arn_03]
+    - [auto, c, stage/arn_04]
+    - [auto, c, stage/arn_05]
+    - [auto, c, stage/arn_06]
+    - [auto, c, area]
+  - dir: battle/area/dgb
+    type: code
+    start: 0x516960
     vram: 0x80218000
-  - type: bin
-    name: battle_area_omo
-    start: 0x00519F10
+    subsegments:
+    - [auto, c, actor/clubba]
+    - [auto, c, actor/tubba_blubba]
+    - [auto, c, stage/dgb_01]
+    - [auto, c, stage/dgb_02]
+    - [auto, c, stage/dgb_03]
+    - [auto, c, stage/dgb_04]
+    - [auto, c, stage/dgb_05]
+    - [auto, c, area]
+  - dir: battle/area/omo
+    type: code
+    start: 0x519F10
     vram: 0x80218000
-  - type: bin
-    name: battle_area_omo2
-    start: 0x00532FE0
+    subsegments:
+    - [auto, c, actor/red_shy_guy]
+    - [auto, c, actor/blue_shy_guy]
+    - [auto, c, actor/yellow_shy_guy]
+    - [auto, c, actor/pink_shy_guy]
+    - [auto, c, actor/green_shy_guy]
+    - [auto, c, actor/anti_guy]
+    - [auto, c, actor/medi_guy]
+    - [auto, c, actor/groove_guy]
+    - [auto, c, actor/spy_guy]
+    - [auto, c, actor/sky_guy]
+    - [auto, c, actor/pyro_guy]
+    - [auto, c, stage/omo_01]
+    - [auto, c, stage/omo_02]
+    - [auto, c, stage/omo_03]
+    - [auto, c, stage/omo_03b]
+    - [auto, c, stage/omo_04]
+    - [auto, c, stage/omo_05]
+    - [auto, c, stage/omo_05b]
+    - [auto, c, stage/omo_06]
+    - [auto, c, stage/omo_07]
+    - [auto, c, area]
+  - dir: battle/area/omo2
+    type: code
+    start: 0x532FE0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_omo2_1
-    start: 0x0054AEB0
+    subsegments:
+    - [auto, c, actor/general_guy]
+    - [auto, c, actor/toy_tank]
+    - [auto, c, actor/light_bulb]
+    - [auto, c, stage/omo_07]
+    - [auto, c, area]
+  - dir: battle/area/omo2_1
+    type: code
+    start: 0x54AEB0
     vram: 0x80231000
-  - type: bin
-    name: battle_area_omo2_2
-    start: 0x0054FD20
+    subsegments:
+    - [auto, c, actor/shy_squad]
+  - dir: battle/area/omo2_2
+    type: code
+    start: 0x54FD20
     vram: 0x80231000
-  - type: bin
-    name: battle_area_omo2_3
-    start: 0x005545B0
+    subsegments:
+    - [auto, c, actor/stilt_guy]
+  - dir: battle/area/omo2_3
+    type: code
+    start: 0x5545B0
     vram: 0x80231000
-  - type: bin
-    name: battle_area_omo2_4
-    start: 0x00559D80
+    subsegments:
+    - [auto, c, actor/shy_stack]
+  - dir: battle/area/omo2_4
+    type: code
+    start: 0x559D80
     vram: 0x80231000
-  - type: bin
-    name: battle_area_omo2_5
-    start: 0x0055A4F0
+    subsegments:
+    - [auto, c, actor/signal_guy]
+  - dir: battle/area/omo2_5
+    type: code
+    start: 0x55A4F0
     vram: 0x80231000
-  - type: bin
-    name: battle_area_omo2_6
-    start: 0x0055E5D0
+    subsegments:
+    - [auto, c, actor/shy_squad_redux]
+  - dir: battle/area/omo2_6
+    type: code
+    start: 0x55E5D0
     vram: 0x80231000
-  - type: bin
-    name: battle_area_omo3
-    start: 0x0055ED20
+    subsegments:
+    - [auto, c, actor/shy_squad_stub]
+  - dir: battle/area/omo3
+    type: code
+    start: 0x55ED20
     vram: 0x80218000
-  - type: bin
-    name: battle_area_kgr
-    start: 0x00575BE0
+    subsegments:
+    - [auto, c, actor/big_lantern_ghost]
+    - [auto, c, stage/omo_01]
+    - [auto, c, stage/omo_02]
+    - [auto, c, stage/omo_03]
+    - [auto, c, stage/omo_03b]
+    - [auto, c, stage/omo_04]
+    - [auto, c, stage/omo_05]
+    - [auto, c, stage/omo_05b]
+    - [auto, c, stage/omo_06]
+    - [auto, c, stage/omo_07]
+    - [auto, c, actor/goomba]
+    - [auto, c, actor/clubba]
+    - [auto, c, actor/fuzzy]
+    - [auto, c, actor/hammer_bro]
+    - [auto, c, actor/pokey]
+    - [auto, c, actor/koopatrol]
+    - [auto, c, actor/red_shy_guy]
+    - [auto, c, area]
+  - dir: battle/area/kgr
+    type: code
+    start: 0x575BE0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_jan
-    start: 0x0057B260
+    subsegments:
+    - [auto, c, actor/fuzzipede]
+    - [auto, c, stage/kgr_01]
+    - [auto, c, area]
+  - dir: battle/area/jan
+    type: code
+    start: 0x57B260
     vram: 0x80218000
-  - type: bin
-    name: battle_area_jan2
-    start: 0x0058C280
+    subsegments:
+    - [auto, c, actor/spear_guy]
+    - [auto, c, actor/hurt_plant]
+    - [auto, c, actor/jungle_fuzzy]
+    - [auto, c, actor/m_bush]
+    - [auto, c, actor/medi_guy]
+    - [auto, c, actor/spike_top]
+    - [auto, c, stage/jan_00]
+    - [auto, c, stage/jan_01]
+    - [auto, c, stage/jan_01b]
+    - [auto, c, stage/jan_02]
+    - [auto, c, stage/jan_03]
+    - [auto, c, stage/jan_03b]
+    - [auto, c, stage/jan_04]
+    - [auto, c, stage/jan_04b]
+    - [auto, c, area]
+  - dir: battle/area/jan2
+    type: code
+    start: 0x58C280
     vram: 0x80218000
-  - type: bin
-    name: battle_area_kzn
-    start: 0x00593C30
+    subsegments:
+    - [auto, c, actor/putrid_piranha]
+    - [auto, c, actor/white_magikoopa]
+    - [auto, c, stage/jan_00]
+    - [auto, c, stage/jan_01]
+    - [auto, c, stage/jan_01b]
+    - [auto, c, stage/jan_02]
+    - [auto, c, stage/jan_03]
+    - [auto, c, stage/jan_03b]
+    - [auto, c, stage/jan_04]
+    - [auto, c, stage/jan_04b]
+    - [auto, c, area]
+  - dir: battle/area/kzn
+    type: code
+    start: 0x593C30
     vram: 0x80218000
-  - type: bin
-    name: battle_area_kzn2
-    start: 0x005A6020
+    subsegments:
+    - [auto, c, actor/lava_bubble]
+    - [auto, c, actor/putrid_piranha]
+    - [auto, c, actor/spike_top]
+    - [auto, c, actor/medi_guy]
+    - [auto, c, actor/red_magikoopa]
+    - [auto, c, actor/white_magikoopa]
+    - [auto, c, stage/kzn_01]
+    - [auto, c, stage/kzn_01b]
+    - [auto, c, stage/kzn_02]
+    - [auto, c, stage/kzn_04]
+    - [auto, c, stage/kzn_04b]
+    - [auto, c, stage/kzn_04c]
+    - [auto, c, stage/kzn_05]
+    - [auto, c, area]
+  - dir: battle/area/kzn2
+    type: code
+    start: 0x5A6020
     vram: 0x80218000
-  - type: bin
-    name: battle_area_flo
-    start: 0x005B8DF0
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, anim/unused_gfx]
+    - [auto, c, anim/lava_piranha_anim]
+    - [auto, c, actor/lava_piranha]
+    - [auto, c, actor/petit_piranha]
+    - [auto, c, actor/lava_bud]
+    - [auto, c, actor/petit_piranha_bomb]
+    - [auto, c, stage/kzn_01]
+    - [auto, c, stage/kzn_01b]
+    - [auto, c, stage/kzn_02]
+    - [auto, c, stage/kzn_04]
+    - [auto, c, stage/kzn_04b]
+    - [auto, c, stage/kzn_04c]
+    - [auto, c, stage/kzn_05]
+    - [auto, c, area]
+    - start: 0x5A6E70
+      type: .data
+      name: anim/unused_gfx
+      subsegments:
+      - [0x5A6E70, vtx, vtx1]
+      - [0x5A6FF0, vtx, vtx2]
+      - [0x5A7110, vtx, vtx3]
+      - [0x5A7270, vtx, vtx4]
+      - [0x5A7370, vtx, vtx5]
+      - [0x5A74D0, vtx, vtx6]
+      - [0x5A7670, vtx, vtx7]
+      - [0x5A77F0, vtx, vtx8]
+      - [0x5A7970, vtx, vtx9]
+      - [0x5A7AD0, vtx, vtx10]
+      - [0x5A7BF0, vtx, vtx11]
+      - [0x5A7C20, vtx, vtx12]
+      - [0x5A7C50, vtx, vtx13]
+      - [0x5A7C80, vtx, vtx14]
+      - [0x5A7CB0, vtx, vtx15]
+      - [0x5A7CE0, vtx, vtx16]
+      - [0x5A7D10, vtx, vtx17]
+      - [0x5A7D40, vtx, vtx18]
+      - [0x5A7D70, gfx, gfx1]
+      - [0x5A7E40, gfx, gfx2]
+      - [0x5A7E80, gfx, gfx3]
+      - [0x5A7ED0, gfx, gfx4]
+      - [0x5A7F20, gfx, gfx5]
+      - [0x5A7F70, gfx, gfx6]
+      - [0x5A7FD0, gfx, gfx7]
+      - [0x5A8020, gfx, gfx8]
+      - [0x5A8060, gfx, gfx9]
+      - [0x5A80B0, gfx, gfx10]
+      - [0x5A80F0, gfx, gfx11]
+      - [0x5A8140]
+    - start: 0x5AA7C0
+      type: .data
+      name: actor/lava_piranha
+      subsegments:
+      - [0x5AA7C0]
+      - [0x5AA960, ci4, lava_piranha_vine, 64, 32]
+      - [0x5AAD60, palette, lava_piranha_vine]
+      - [0x5AAF60, gfx, lava_piranha_vine]
+      - [0x5AB038]
+    - [0x5B8B80]
+  - dir: battle/area/flo
+    type: code
+    start: 0x5B8DF0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_flo2
-    start: 0x005D5FD0
+    subsegments:
+    - [auto, c, actor/lakitu]
+    - [auto, c, actor/spiny]
+    - [auto, c, actor/crazee_dayzee]
+    - [auto, c, actor/bzzap]
+    - [auto, c, actor/amazy_dayzee]
+    - [auto, c, actor/ruff_puff]
+    - [auto, c, actor/medi_guy]
+    - [auto, c, actor/red_magikoopa]
+    - [auto, c, actor/green_magikoopa]
+    - [auto, c, actor/white_magikoopa]
+    - [auto, c, actor/yellow_magikoopa]
+    - [auto, c, stage/flo_01]
+    - [auto, c, stage/flo_01b]
+    - [auto, c, stage/flo_01c]
+    - [auto, c, stage/flo_02]
+    - [auto, c, stage/flo_02b]
+    - [auto, c, stage/flo_02c]
+    - [auto, c, stage/flo_03]
+    - [auto, c, stage/flo_04]
+    - [auto, c, stage/flo_05]
+    - [auto, c, stage/flo_06]
+    - [auto, c, area]
+  - dir: battle/area/flo2
+    type: code
+    start: 0x5D5FD0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_tik
-    start: 0x005F3DD0
+    subsegments:
+    - [auto, c, actor/huff_n_puff]
+    - [auto, c, actor/tuff_puff]
+    - [auto, c, actor/monty_mole_boss]
+    - [auto, c, actor/spike]
+    - [auto, c, stage/flo_01]
+    - [auto, c, stage/flo_01b]
+    - [auto, c, stage/flo_01c]
+    - [auto, c, stage/flo_02]
+    - [auto, c, stage/flo_02b]
+    - [auto, c, stage/flo_02c]
+    - [auto, c, stage/flo_03]
+    - [auto, c, stage/flo_04]
+    - [auto, c, stage/flo_05]
+    - [auto, c, stage/flo_06]
+    - [auto, c, area]
+  - dir: battle/area/tik
+    type: code
+    start: 0x5F3DD0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_tik2
-    start: 0x006103F0
+    subsegments:
+    - [auto, c, actor/dark_koopa]
+    - [auto, c, actor/dark_paratroopa]
+    - [auto, c, actor/gloomba]
+    - [auto, c, actor/spiked_gloomba]
+    - [auto, c, actor/paragloomba]
+    - [auto, c, actor/buzzy_beetle]
+    - [auto, c, actor/spike_top]
+    - [auto, c, actor/spiny]
+    - [auto, c, stage/tik_01]
+    - [auto, c, stage/tik_02]
+    - [auto, c, stage/tik_03]
+    - [auto, c, stage/tik_04]
+    - [auto, c, stage/tik_05]
+    - [auto, c, area]
+  - dir: battle/area/tik2
+    type: code
+    start: 0x6103F0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_tik3
-    start: 0x00620030
+    subsegments:
+    - [auto, c, actor/blooper]
+    - [auto, c, actor/electro_blooper]
+    - [auto, c, actor/super_blooper]
+    - [auto, c, actor/blooper_baby]
+    - [auto, c, stage/tik_01]
+    - [auto, c, stage/tik_02]
+    - [auto, c, stage/tik_03]
+    - [auto, c, stage/tik_04]
+    - [auto, c, stage/tik_05]
+    - [auto, c, area]
+  - dir: battle/area/tik3
+    type: code
+    start: 0x620030
     vram: 0x80218000
-  - type: bin
-    name: battle_area_sam
-    start: 0x0062B4E0
+    subsegments:
+    - [auto, c, actor/swooper]
+    - [auto, c, actor/swoopula]
+    - [auto, c, stage/tik_01]
+    - [auto, c, stage/tik_02]
+    - [auto, c, stage/tik_03]
+    - [auto, c, stage/tik_04]
+    - [auto, c, stage/tik_05]
+    - [auto, c, area]
+  - dir: battle/area/sam
+    type: code
+    start: 0x62B4E0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_sam2
-    start: 0x00644B20
+    subsegments:
+    - [auto, c, actor/duplighost]
+    - [auto, c, actor/gulpit]
+    - [auto, c, actor/gulpit_rocks]
+    - [auto, c, actor/white_clubba]
+    - [auto, c, actor/frost_piranha]
+    - [auto, c, actor/gray_magikoopa]
+    - [auto, c, stage/sam_01]
+    - [auto, c, stage/sam_02]
+    - [auto, c, stage/sam_02b]
+    - [auto, c, stage/sam_02c]
+    - [auto, c, stage/sam_02d]
+    - [auto, c, stage/sam_03]
+    - [auto, c, area]
+  - dir: battle/area/sam2
+    type: code
+    start: 0x644B20
     vram: 0x80218000
-  - type: bin
-    name: battle_area_pra
-    start: 0x00650750
+    subsegments:
+    - [auto, c, actor/monstar]
+    - [auto, c, actor/paragoomba]
+    - [auto, c, actor/gray_magikoopa]
+    - [auto, c, stage/sam_01]
+    - [auto, c, stage/sam_02]
+    - [auto, c, stage/sam_02b]
+    - [auto, c, stage/sam_02c]
+    - [auto, c, stage/sam_02d]
+    - [auto, c, stage/sam_03]
+    - [auto, c, area]
+    - [auto, c, dlist]
+    - start: 0x646980
+      type: .data
+      name: actor/monstar
+      subsegments:
+      - [0x646980]
+      - [0x646BB8, ci4, actor/img, 32, 32]
+      - [0x646DB8, palette, actor/img]
+      - [0x646DD8]
+    - start: 0x6501A0
+      type: .data
+      name: vtx
+      subsegments:
+      - [0x6501A0, vtx, monstar_bubbles]
+    - [0x6505C0]
+  - dir: battle/area/pra
+    type: code
+    start: 0x650750
     vram: 0x80218000
-  - type: bin
-    name: battle_area_pra2
-    start: 0x00668090
+    subsegments:
+    - [auto, c, actor/swoopula]
+    - [auto, c, actor/albino_dino]
+    - [auto, c, actor/white_clubba]
+    - [auto, c, actor/red_magikoopa]
+    - [auto, c, actor/green_magikoopa]
+    - [auto, c, actor/yellow_magikoopa]
+    - [auto, c, actor/gray_magikoopa]
+    - [auto, c, actor/white_magikoopa]
+    - [auto, c, stage/pra_01]
+    - [auto, c, stage/pra_02]
+    - [auto, c, stage/pra_03]
+    - [auto, c, stage/pra_03b]
+    - [auto, c, stage/pra_03c]
+    - [auto, c, stage/pra_04]
+    - [auto, c, area]
+  - dir: battle/area/pra2
+    type: code
+    start: 0x668090
     vram: 0x80218000
-  - type: bin
-    name: battle_area_pra3
-    start: 0x006716C0
+    subsegments:
+    - [auto, c, actor/crystal_king]
+    - [auto, c, actor/crystal_bit]
+    - [auto, c, stage/sam_04]
+    - [auto, c, area]
+  - dir: battle/area/pra3
+    type: code
+    start: 0x6716C0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_kpa
-    start: 0x0068C370
+    subsegments:
+    - [auto, c, actor/duplighost]
+    - [auto, c, actor/swoopula]
+    - [auto, c, actor/white_clubba]
+    - [auto, c, actor/red_magikoopa]
+    - [auto, c, actor/gray_magikoopa]
+    - [auto, c, stage/pra_01]
+    - [auto, c, stage/pra_02]
+    - [auto, c, stage/pra_03]
+    - [auto, c, stage/pra_03b]
+    - [auto, c, stage/pra_03c]
+    - [auto, c, stage/pra_04]
+    - [auto, c, area]
+  - dir: battle/area/kpa
+    type: code
+    start: 0x68C370
     vram: 0x80218000
-  - type: bin
-    name: battle_area_kpa2
-    start: 0x006A6B40
+    subsegments:
+    - [auto, c, actor/bony_beetle]
+    - [auto, c, actor/dry_bones]
+    - [auto, c, actor/hammer_bro]
+    - [auto, c, actor/koopatrol]
+    - [auto, c, actor/magikoopa]
+    - [auto, c, actor/ember]
+    - [auto, c, stage/kpa_01]
+    - [auto, c, stage/kpa_01b]
+    - [auto, c, stage/kpa_02]
+    - [auto, c, stage/kpa_03]
+    - [auto, c, stage/kpa_04]
+    - [auto, c, stage/kpa_04b]
+    - [auto, c, stage/kpa_04c]
+    - [auto, c, stage/kpa_05]
+    - [auto, c, stage/kpa_07]
+    - [auto, c, stage/kpa_08]
+    - [auto, c, stage/kpa_09]
+    - [auto, c, stage/kpa_11]
+    - [auto, c, stage/kpa_13]
+    - [auto, c, stage/kpa_14]
+    - [auto, c, area]
+  - dir: battle/area/kpa2
+    type: code
+    start: 0x6A6B40
     vram: 0x80218000
-  - type: bin
-    name: battle_area_kpa3
-    start: 0x006C34D0
+    subsegments:
+    - [auto, c, actor/unused_bowser]
+    - [auto, c, actor/intro_bowser]
+    - [auto, c, actor/hallway_bowser]
+    - [auto, c, actor/final_bowser_1]
+    - [auto, c, actor/final_bowser_2]
+    - [auto, c, stage/kpa_01]
+    - [auto, c, stage/kkj_01]
+    - [auto, c, stage/kkj_02]
+    - [auto, c, area]
+  - dir: battle/area/kpa3
+    type: code
+    start: 0x6C34D0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_kpa4
-    start: 0x006D39B0
+    subsegments:
+    - [auto, c, actor/anti_guy]
+    - [auto, c, actor/duplighost]
+    - [auto, c, stage/kpa_01]
+    - [auto, c, area]
+  - dir: battle/area/kpa4
+    type: code
+    start: 0x6D39B0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_kkj
-    start: 0x006E36E0
+    subsegments:
+    - [auto, c, actor/bombshell_blaster]
+    - [auto, c, actor/bombshell_bill]
+    - [auto, c, actor/koopatrol]
+    - [auto, c, actor/magikoopa]
+    - [auto, c, stage/kpa_01]
+    - [auto, c, stage/kpa_01b]
+    - [auto, c, stage/kpa_02]
+    - [auto, c, stage/kpa_03]
+    - [auto, c, stage/kpa_04]
+    - [auto, c, stage/kpa_04b]
+    - [auto, c, stage/kpa_04c]
+    - [auto, c, stage/kpa_05]
+    - [auto, c, stage/kpa_07]
+    - [auto, c, stage/kpa_08]
+    - [auto, c, stage/kpa_09]
+    - [auto, c, stage/kpa_11]
+    - [auto, c, stage/kpa_13]
+    - [auto, c, stage/kpa_14]
+    - [auto, c, area]
+  - dir: battle/area/kkj
+    type: code
+    start: 0x6E36E0
     vram: 0x80218000
-  - type: bin
-    name: battle_area_dig
-    start: 0x006E5700
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/kammy_koopa]
+    - [auto, c, stage/kpa_05]
+  - dir: battle/area/dig
+    type: code
+    start: 0x6E5700
     vram: 0x80218000
+    subsegments:
+    - [auto, c, actor/koopa_troopa]
+    - [auto, c, actor/fuzzy]
+    - [auto, c, actor/pokey]
+    - [auto, c, actor/bandit]
+    - [auto, c, actor/red_shy_guy]
+    - [auto, c, actor/tubba_blubba]
+    - [auto, c, actor/monty_mole]
+    - [auto, c, actor/whacka]
+    - [auto, c, stage/dig_01]
+    - [auto, c, stage/dig_02]
+    - [auto, c, stage/dig_03]
+    - [auto, c, stage/dig_04]
+    - [auto, c, stage/dig_05]
+    - [auto, c, area]
+    - [auto, c, script/dig_01]
+    - [auto, c, script/dig_02]
+    - [auto, c, script/dig_03]
+    - [auto, c, script/dig_04]
+    - [auto, c, script/dig_05]
 
 #######################
 ### Battle Partners ###

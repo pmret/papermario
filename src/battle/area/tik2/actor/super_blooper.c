@@ -37,7 +37,11 @@ enum N(ActorVars) {
 enum N(ActorParams) {
     DMG_SPIN_DROP       = 5,
     DMG_INK_BLAST       = 5,
+#if VERSION_JP
+    DMG_RAGE_DROP       = 4,
+#else
     DMG_RAGE_DROP       = 10,
+#endif
 };
 
 EvtScript N(EVS_FloatToPos) = {

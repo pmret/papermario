@@ -86,7 +86,11 @@ s32 N(NormalDefense)[] = {
 };
 
 s32 N(BoostedDefense)[] = {
+#if VERSION_JP
+    ELEMENT_NORMAL,   5,
+#else
     ELEMENT_NORMAL,   4,
+#endif
     ELEMENT_END,
 };
 
