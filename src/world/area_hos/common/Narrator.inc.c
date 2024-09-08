@@ -86,11 +86,15 @@ void N(UpdateIntroMessages)(IntroMessage** introMessageLists) {
     if (opacity > 0) {
         messageID = N(CurMessageList)->messageID;
         if (messageID != 0) {
+#if VERSION_JP
+            draw_msg(N(CurMessageList)->messageID, 0, 200, opacity, -1, 0);
+#else
             yOffset = 0;
             if (get_msg_lines(messageID) >= 2) {
                 yOffset = -7;
             }
             draw_msg(N(CurMessageList)->messageID, 0, yOffset + 196, opacity, -1, 0);
+#endif
         }
     }
 }

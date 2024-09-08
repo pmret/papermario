@@ -25,7 +25,9 @@ NpcSettings N(NpcSettings_KoopaWithoutShell_Patrol) = {
     .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
 };
 
-s32 N(missing_80246F94_6F94)[] = {
-    0x00000000, 0x002A0018, 0x00000000, 0x00000000, 0x80246F48, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00630000,
+NpcSettings N(missing_80246F94_6F94) = {
+    .height = 42,
+    .radius = 24,
+    .level = ACTOR_LEVEL_NONE,
+    .ai = &N(EVS_NpcAI_KoopaWithoutShell_Patrol),
 };

@@ -1,3 +1,9 @@
+#if VERSION_JP
+#define COLLIDER_deili4         0x1C
+#define COLLIDER_deili3         0x17
+#define COLLIDER_deilie         0x12
+#define COLLIDER_deiliw         0xD
+#else
 #define COLLIDER_Root           0x1F
 #define COLLIDER_exit4          0x1E
 #define COLLIDER_tt4            0x1D
@@ -30,6 +36,7 @@
 #define COLLIDER_kaidann        0x2
 #define COLLIDER_k_sokumen2     0x1
 #define COLLIDER_k_sokumen      0x0
+#endif
 
 #define ZONE_Root               0x4
 #define ZONE_yuka               0x3

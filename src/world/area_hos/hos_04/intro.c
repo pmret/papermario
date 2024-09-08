@@ -134,7 +134,11 @@ EvtScript N(EVS_ControlTwink) = {
     Call(SetNpcAnimation, NPC_Twink, ANIM_Twink_Back)
     Call(SetNpcYaw, NPC_Twink, 180)
     Call(N(AnimateBoomLengthPostHeist))
+#if VERSION_JP
+    Wait(30 * DT)
+#else
     Wait(15 * DT)
+#endif
     Thread
         Wait(10 * DT)
         Call(InterpNpcYaw, NPC_Twink, 0, 0)
@@ -189,6 +193,9 @@ EvtScript N(EVS_Intro_PreHeist_Unused) = {
     End
 };
 
+// TODO: this has moved to starship.c in JP. This is a possible indication that
+// file spitting in other versions might be off.
+#if !VERSION_JP
 #include "world/common/npc/StarSpirit.inc.c"
 #include "world/common/npc/Twink.h"
 
@@ -212,3 +219,4 @@ NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_Twink)),
     {}
 };
+#endif

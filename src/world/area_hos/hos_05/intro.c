@@ -2046,7 +2046,9 @@ EvtScript N(EVS_Scene_IntroStory) = {
             Call(SetNpcRotation, NPC_Bowser_Body, 0, LVar0, 0)
             Wait(1)
         EndLoop
+#if !VERSION_JP
         Call(SetNpcRotation, NPC_Bowser_Body, 0, 0, 0)
+#endif
         Call(InterpNpcYaw, NPC_Bowser_Body, 90, 0)
     EndThread
     Thread
@@ -2519,7 +2521,11 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EndThread
     Wait(10 * DT)
     Call(N(AnimKammy_FlyOff))
+#if VERSION_JP
+    Wait(28 * DT)
+#else
     Wait(20 * DT)
+#endif
     Call(N(ResumeIntro))
     Return
     End

@@ -126,7 +126,11 @@ EvtScript N(EVS_Starfall_Directed) = {
     #define LV_Dz LVarC
     #define LV_Time LVarD
     #define LV_SoundDelay LVarE
+#if VERSION_JP
+    SetGroup(EVT_GROUP_00)
+#else
     SetGroup(EVT_GROUP_0B)
+#endif
     Set(LV_Time, 0)
     Set(LV_SoundDelay, 0)
     Label(0)

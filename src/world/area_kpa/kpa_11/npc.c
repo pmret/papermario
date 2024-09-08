@@ -64,7 +64,11 @@ EvtScript N(EVS_NpcInit_Prisoner) = {
 NpcData N(NpcData_Prisoners)[] = {
     {
         .id = NPC_Toad_01,
+#if VERSION_JP
+        .pos = { 840.0f, 30.0f, -260.0f },
+#else
         .pos = { 845.0f, 30.0f, -285.0f },
+#endif
         .yaw = 0,
         .init = &N(EVS_NpcInit_Prisoner),
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -75,7 +79,11 @@ NpcData N(NpcData_Prisoners)[] = {
     },
     {
         .id = NPC_Toad_02,
+#if VERSION_JP
+        .pos = { 870.0f, 30.0f, -310.0f },
+#else
         .pos = { 872.0f, 30.0f, -315.0f },
+#endif
         .yaw = 0,
         .init = &N(EVS_NpcInit_Prisoner),
         .settings = &N(NpcSettings_Toad_Stationary),
@@ -86,7 +94,11 @@ NpcData N(NpcData_Prisoners)[] = {
     },
     {
         .id = NPC_ToadGuard,
+#if VERSION_JP
+        .pos = { 900.0f, 30.0f, -260.0f },
+#else
         .pos = { 900.0f, 30.0f, -285.0f },
+#endif
         .yaw = 0,
         .init = &N(EVS_NpcInit_Prisoner),
         .settings = &N(NpcSettings_Toad_Stationary),

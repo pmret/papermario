@@ -37,5 +37,8 @@ extern EvtScript N(EVS_Scene_SpiritsFlyingAway);
 extern EvtScript N(EVS_Scene_RisingAboveClouds);
 extern EvtScript N(EVS_Scene_UnusedWhiteScreen);
 extern EvtScript N(EVS_Scene_PreTitle);
+#if VERSION_JP
+extern EvtScript N(EVS_SetupNarrator);
+#endif
 extern NpcGroupList N(NpcGroup_Descent);
 extern NpcGroupList N(NpcGroup_FlyAway);

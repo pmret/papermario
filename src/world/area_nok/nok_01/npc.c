@@ -405,6 +405,10 @@ EvtScript N(EVS_NpcInteract_RelaxedKoopa) = {
             Call(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0026)
         CaseEq(3)
             Call(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0027)
+#if VERSION_JP
+        CaseEq(4)
+            Call(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0137)
+#endif
     EndSwitch
     Return
     End

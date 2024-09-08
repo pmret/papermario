@@ -196,11 +196,15 @@ EvtScript N(EVS_NpcInteract_Merlow) = {
     Call(SetMessageText, LVar4, 0)
     Call(SetMessageValue, LVar1, 1)
     Call(SetMessageValue, LVar5, 2)
+#if VERSION_JP
+    Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0052)
+#else
     IfEq(LVar1, 1)
         Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0053)
     Else
         Call(SpeakToPlayer, NPC_Merlow, ANIM_Merlow_Talk, ANIM_Merlow_Idle, 0, MSG_HOS_0052)
     EndIf
+#endif
     Set(LVar3, LVar0)
     Call(ShowChoice, MSG_Choice_000D)
     IfEq(LVar0, 1)
