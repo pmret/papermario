@@ -9454,8 +9454,6 @@ segments:
     start: 0xE272F0
     vram: 0x80240000
 
-  - [ 0xE28FA0, bin ]
-
   - type: code
     name: inspect_icon
     start: 0xE28FA0
@@ -9519,8 +9517,6 @@ segments:
       - [0xE2C040, gfx, ispy_icon]
       - [0xE2C0B8]
     - [0xE2C0C0]
-
-  - [ 0xE2C0F0, bin ]
 
   - type: code
     name: world_action_idle
