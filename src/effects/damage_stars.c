@@ -19,7 +19,7 @@ u8 D_E0030E90[] = {
     254, 213, 172
 };
 
-f32 D_E0030EB4;
+f32 D_E0030EB4 = 0.0f;
 
 void damage_stars_init(EffectInstance* effect);
 void damage_stars_update(EffectInstance* effect);
