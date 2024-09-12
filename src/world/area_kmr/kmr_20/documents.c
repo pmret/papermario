@@ -100,19 +100,19 @@ s32 N(LetterBodyStringIDs)[] = {
 };
 
 s32 N(LetterDmaOffsets)[] = {
-    (s32) charset_postcard_OFFSET, (s32) charset_postcard_pal_OFFSET
-    (s32) charset_letter_content_1_OFFSET, (s32) charset_letter_content_1_pal_OFFSET
-    (s32) charset_letter_content_2_OFFSET, (s32) charset_letter_content_2_pal_OFFSET
-    (s32) charset_letter_content_3_OFFSET, (s32) charset_letter_content_3_pal_OFFSET
-    (s32) charset_letter_content_4_OFFSET, (s32) charset_letter_content_4_pal_OFFSET
-    (s32) charset_letter_content_5_OFFSET, (s32) charset_letter_content_5_pal_OFFSET
-    (s32) charset_letter_content_6_OFFSET, (s32) charset_letter_content_6_pal_OFFSET
-    (s32) charset_letter_content_7_OFFSET, (s32) charset_letter_content_7_pal_OFFSET
-    (s32) charset_letter_content_8_OFFSET, (s32) charset_letter_content_8_pal_OFFSET
-    (s32) charset_letter_content_9_OFFSET, (s32) charset_letter_content_9_pal_OFFSET
-    (s32) charset_letter_content_10_OFFSET, (s32) charset_letter_content_10_pal_OFFSET
-    (s32) charset_letter_content_11_OFFSET, (s32) charset_letter_content_11_pal_OFFSET
-    (s32) charset_letter_content_12_OFFSET, (s32) charset_letter_content_12_pal_OFFSET
+    (s32) charset_postcard_OFFSET, (s32) charset_postcard_pal_OFFSET,
+    (s32) charset_letter_content_1_OFFSET, (s32) charset_letter_content_1_pal_OFFSET,
+    (s32) charset_letter_content_2_OFFSET, (s32) charset_letter_content_2_pal_OFFSET,
+    (s32) charset_letter_content_3_OFFSET, (s32) charset_letter_content_3_pal_OFFSET,
+    (s32) charset_letter_content_4_OFFSET, (s32) charset_letter_content_4_pal_OFFSET,
+    (s32) charset_letter_content_5_OFFSET, (s32) charset_letter_content_5_pal_OFFSET,
+    (s32) charset_letter_content_6_OFFSET, (s32) charset_letter_content_6_pal_OFFSET,
+    (s32) charset_letter_content_7_OFFSET, (s32) charset_letter_content_7_pal_OFFSET,
+    (s32) charset_letter_content_8_OFFSET, (s32) charset_letter_content_8_pal_OFFSET,
+    (s32) charset_letter_content_9_OFFSET, (s32) charset_letter_content_9_pal_OFFSET,
+    (s32) charset_letter_content_10_OFFSET, (s32) charset_letter_content_10_pal_OFFSET,
+    (s32) charset_letter_content_11_OFFSET, (s32) charset_letter_content_11_pal_OFFSET,
+    (s32) charset_letter_content_12_OFFSET, (s32) charset_letter_content_12_pal_OFFSET,
 };
 
 API_CALLABLE(N(InitLetters)){

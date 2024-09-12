@@ -851,7 +851,7 @@ class Configure:
                             )
                         elif seg.type == "pm_charset":
                             rasters = []
-                            print("pm_charset: " + str(entry.src_paths))
+                            entry = seg.get_linker_entries()[0]
 
                             for src_path in entry.src_paths:
                                 out_path = self.build_path() / seg.dir / seg.name / (src_path.stem + ".bin")
@@ -870,7 +870,7 @@ class Configure:
                             build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
                         elif seg.type == "pm_charset_palettes":
                             palettes = []
-                            print("pm_charset_palettes: " + str(entry.src_paths))
+                            entry = seg.get_linker_entries()[0]
 
                             for src_path in entry.src_paths:
                                 out_path = self.build_path() / seg.dir / seg.name / "palette" / (src_path.stem + ".bin")

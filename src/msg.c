@@ -571,7 +571,7 @@ void render_messages(void) {
 
     for (i = 0; i < ARRAY_COUNT(gMessagePrinters); i++) {
         if (gMessagePrinters[i].stateFlags & MSG_STATE_FLAG_2) {
-            gSPViewport(gMainGfxPos++, D_8014C280);
+            gSPViewport(gMainGfxPos++, &D_8014C280);
             guOrtho(matrix, 0.0f, 319.0f, -240.0f, 0.0f, -500.0f, 500.0f, 1.0f);
             gSPMatrix(gMainGfxPos++, OS_K0_TO_PHYSICAL(matrix), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gDPPipeSync(gMainGfxPos++);
@@ -804,7 +804,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         romAddr = charset_ROM_START + (s32)charset_postcard_OFFSET;
                         dma_copy(romAddr, romAddr + ((charset_postcard_png_width * charset_postcard_png_height) / 2), printer->letterBackgroundImg);
                         printer->letterBackgroundPal = heap_malloc(0x20);
-                        romAddr = charset_ROM_START + ((s32)charset_postcard_pal_OFFSET + 5);
+                        romAddr = charset_ROM_START + (s32)charset_postcard_pal_OFFSET;
                         dma_copy(romAddr, romAddr + 0x20, printer->letterBackgroundPal);
                         printer->letterContentImg = heap_malloc(charset_letter_content_1_png_width * charset_letter_content_1_png_height);
                         romAddr = charset_ROM_START + MsgLetterRasterOffsets[arg];

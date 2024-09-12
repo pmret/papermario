@@ -1,13 +1,15 @@
 #ifndef _CHARSET_H_
 
+#include "charset/peach_letter.png.h"
+
 extern unsigned char charset_standard_OFFSET[];
-extern unsigned short charset_standard_pal_OFFSET[];
+extern unsigned char charset_standard_pal_OFFSET[];
 
 extern unsigned char charset_title_OFFSET[];
-extern unsigned short charset_title_pal_OFFSET[];
+extern unsigned char charset_title_pal_OFFSET[];
 
 extern unsigned char charset_subtitle_OFFSET[];
-extern unsigned short charset_subtitle_pal_OFFSET[];
+extern unsigned char charset_subtitle_pal_OFFSET[];
 
 extern unsigned char charset_peach_letter_OFFSET[];
 extern unsigned short charset_peach_letter_pal_OFFSET[];

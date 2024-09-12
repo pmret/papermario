@@ -1,17 +1,17 @@
 #include "include_asset.h"
 
-INCLUDE_IMG("charset/standard/standard.dat", charset_standard_OFFSET);
-INCLUDE_PAL("charset/standard/palette.dat", charset_standard_pal_OFFSET);
-INCLUDE_IMG("charset/title/title.dat", charset_title_OFFSET);
-INCLUDE_PAL("charset/subtitle/subtitle.dat", charset_subtitle_OFFSET);
-INCLUDE_PAL("charset/subtitle/palette.dat", charset_subtitle_pal_OFFSET);
-INCLUDE_PAL("charset/title/palette.dat", charset_title_pal_OFFSET);
+INCLUDE_RAW("charset/standard.dat", charset_standard_OFFSET);
+INCLUDE_RAW("charset/standard/palette.dat", charset_standard_pal_OFFSET);
+INCLUDE_RAW("charset/title.dat", charset_title_OFFSET);
+INCLUDE_RAW("charset/subtitle.dat", charset_subtitle_OFFSET);
+INCLUDE_RAW("charset/subtitle/palette.dat", charset_subtitle_pal_OFFSET);
+INCLUDE_RAW("charset/title/palette.dat", charset_title_pal_OFFSET);
 
 INCLUDE_IMG("charset/peach_letter.png", charset_peach_letter_OFFSET);
 INCLUDE_PAL("charset/peach_letter.pal", charset_peach_letter_pal_OFFSET);
 
-INCLUDE_IMG("charset/postcard/postcard.png", charset_postcard_OFFSET);
-INCLUDE_PAL("charset/postcard/postcard.pal", charset_postcard_pal_OFFSET);
+INCLUDE_IMG("charset/postcard.png", charset_postcard_OFFSET);
+INCLUDE_PAL("charset/postcard.pal", charset_postcard_pal_OFFSET);
 
 INCLUDE_IMG("charset/letter_content_1.png", charset_letter_content_1_OFFSET);
 INCLUDE_PAL("charset/letter_content_1.pal", charset_letter_content_1_pal_OFFSET);
@@ -49,3 +49,6 @@ INCLUDE_PAL("charset/letter_content_11.pal", charset_letter_content_11_pal_OFFSE
 INCLUDE_IMG("charset/letter_content_12.png", charset_letter_content_12_OFFSET);
 INCLUDE_PAL("charset/letter_content_12.pal", charset_letter_content_12_pal_OFFSET);
 
+int something[] = {
+    0, 0, 0x03E00008
+};
