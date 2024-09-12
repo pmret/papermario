@@ -1075,8 +1075,6 @@ segments:
     start: 0x25C5A0
     # TODO: split into images
 
-  - [0x2705A0, bin]
-
   - start: 0x2705A0
     type: pm_imgfx_data
     name: imgfx_data
@@ -12129,9 +12127,7 @@ segments:
     - [0xE8AFB0, c, settings]
     - [0xE8AFB0, c, main]
 
-
 # todo: add heaps2
-  - [0xE8D120, bin]
 
   - type: code
     start: 0xE8D120

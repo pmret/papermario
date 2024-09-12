@@ -247,7 +247,7 @@ enum GameFlags {
     GF_MAC00_DictionaryStolen                   = GameFlag(0x0F3),
     GF_MAC00_DictionaryReturned                 = GameFlag(0x0F4),
     GF_MAC00_TranslatedMysteryNote              = GameFlag(0x0F5),
-    GF_Unused_MAC_74                            = GameFlag(0x0F6), ///< presumably for translating the unused SuspiciousNote
+    GF_MAC00_TranslatedSuspiciousNote           = GameFlag(0x0F6),
     GF_MAC01_ShyGuyTookOverShop                 = GameFlag(0x0F7),
     GF_MAC00_ShyGuyChasedFromShop               = GameFlag(0x0F8),
     GF_MAC01_Merlon_Shoo1                       = GameFlag(0x0F9),

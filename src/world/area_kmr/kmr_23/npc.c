@@ -481,7 +481,11 @@ EvtScript N(EVS_Scene_EndOfChapter) = {
     Wait(30 * DT)
     Call(N(FlashScreenWhite))
     Call(N(SpinDownStarSpirit), 1800, 100 * DT)
+#if VERSION_JP
+    Call(N(EndOfChapterBounceIn), 64, 0, 55, 60)
+#else
     Call(N(EndOfChapterBounceIn), 36, 0, 55, 60)
+#endif
     Thread
         Call(N(AddCardAngularVelocity), 0)
     EndThread
@@ -495,7 +499,11 @@ EvtScript N(EVS_Scene_EndOfChapter) = {
     Set(LVar1, MSG_Menus_01A5)
     Switch(LVar0)
         CaseEq(kmr_23_ENTRY_0)
+#if VERSION_JP
+            Set(LVar1, MSG_Menus_JP_01C8)
+#else
             Set(LVar1, MSG_Menus_01A5)
+#endif
         CaseEq(kmr_23_ENTRY_1)
             Set(LVar1, MSG_Menus_01A6)
         CaseEq(kmr_23_ENTRY_2)

@@ -1,6 +1,8 @@
 #include "mac_05.h"
 #include "sprite/player.h"
 
+void increment_max_star_power(void);
+
 NpcSettings N(NpcSettings_Whale) = {
     .height = 24,
     .radius = 48,
@@ -130,6 +132,13 @@ EvtScript N(EVS_ArtifactPrompt_Kolorado) = {
     Return
     End
 };
+
+#if VERSION_JP
+API_CALLABLE(N(IncreaseMaxSP)) {
+    increment_max_star_power();
+    return ApiStatus_DONE2;
+}
+#endif
 
 API_CALLABLE(N(func_80242A90_854C00)) {
     Bytecode* args = script->ptrReadPos;
@@ -1371,6 +1380,17 @@ EvtScript N(EVS_NpcInit_JrTroopa_02) = {
 
 EvtScript N(EVS_NpcInteract_Fuzzipede1) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Port_00D9)
+            Set(LVar1, MSG_MAC_Port_00DC)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Port_00DA)
+            Set(LVar1, MSG_MAC_Port_00DD)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Port_00DB)
+            Set(LVar1, MSG_MAC_Port_00DE)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Port_004E)
@@ -1477,6 +1497,14 @@ EvtScript N(EVS_NpcInit_Fuzzipede) = {
 
 EvtScript N(EVS_NpcInteract_Toad_04) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Port_00CC)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Port_00CD)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Port_00CE)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Port_001A)
@@ -1521,6 +1549,14 @@ EvtScript N(EVS_NpcInit_Toad_04) = {
 
 EvtScript N(EVS_NpcInteract_Toad_05) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Port_00CF)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Port_00D0)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Port_00D1)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Port_0027)
@@ -1565,6 +1601,14 @@ EvtScript N(EVS_NpcInit_Toad_05) = {
 
 EvtScript N(EVS_NpcInteract_Toad_06) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Port_00D3)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Port_00D4)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Port_00D5)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Port_0034)
@@ -1609,6 +1653,14 @@ EvtScript N(EVS_NpcInit_Toad_06) = {
 
 EvtScript N(EVS_NpcInteract_Toad_07) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Port_00D6)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Port_00D7)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Port_00D8)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Port_0041)
@@ -1653,6 +1705,14 @@ EvtScript N(EVS_NpcInit_Toad_07) = {
 
 EvtScript N(EVS_NpcInteract_Bartender) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Port_00C6)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Port_00C7)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Port_00C8)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Port_0000)
@@ -1697,6 +1757,14 @@ EvtScript N(EVS_NpcInit_Bartender) = {
 
 EvtScript N(EVS_NpcInteract_Toad_02) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Port_00C9)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Port_00CA)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Port_00CB)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Port_000D)

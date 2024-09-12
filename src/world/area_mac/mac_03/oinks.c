@@ -351,7 +351,11 @@ LilOinkReward N(LilOinkPrizes)[] = {
     [LIL_OINK_TYPE_STAR]        { .itemID = ITEM_SHOOTING_STAR, .quantity = 1, .chance = 100 },
     [LIL_OINK_TYPE_QUESTION]    { .itemID = ITEM_REPEL_GEL,     .quantity = 1, .chance = 100 },
     [LIL_OINK_TYPE_SILVER]      { .itemID = ITEM_JAMMIN_JELLY,  .quantity = 1, .chance = 100 },
+#if VERSION_JP
+    [LIL_OINK_TYPE_GOLD]        { .itemID = ITEM_JELLY_SHROOM,  .quantity = 1, .chance = 100 },
+#else
     [LIL_OINK_TYPE_GOLD]        { .itemID = ITEM_ULTRA_SHROOM,  .quantity = 1, .chance = 100 },
+#endif
 };
 
 API_CALLABLE(N(GetLilOinkPrize)) {
