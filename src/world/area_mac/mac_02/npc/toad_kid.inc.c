@@ -1,5 +1,11 @@
 EvtScript N(EVS_NpcInteract_ToadKid) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Bridge_009E)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Bridge_009F)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             Set(LVar0, MSG_MAC_Bridge_0064)
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)

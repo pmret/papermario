@@ -1,5 +1,13 @@
 EvtScript N(EVS_NpcInteract_NewResident1) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Housing_00D4)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Housing_00D5)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Housing_00D6)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Housing_0006)
@@ -45,6 +53,14 @@ EvtScript N(EVS_NpcInit_NewResident1) = {
 
 EvtScript N(EVS_NpcInteract_NewResident2) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Housing_00D7)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Housing_00D8)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Housing_00D9)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Housing_0013)

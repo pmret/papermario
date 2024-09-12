@@ -6,6 +6,11 @@
 #include "world/common/enemy/Whacka.inc.c"
 
 #include "world/common/complete/GiveReward.inc.c"
+#if VERSION_JP
+#include "world/common/todo/SomeItemEntityFunc.inc.c"
+#include "world/common/todo/IsItemBadge.inc.c"
+#include "world/common/todo/UnkScriptJP00.inc.c"
+#endif
 
 API_CALLABLE(N(func_80240118_90CD58)) {
     Enemy* enemy = script->owner1.enemy;

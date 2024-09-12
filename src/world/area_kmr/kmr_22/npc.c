@@ -33,7 +33,11 @@ NpcSettings N(NpcSettings_Unused) = {
 NpcData N(NpcData_Chapter1)[] = {
     {
         .id = NPC_Eldstar,
+#if VERSION_JP
+        .pos = { -40.0f, 96.0f, 0.0f },
+#else
         .pos = { -62.0f, 96.0f, 0.0f },
+#endif
         .yaw = 270,
         .init = &N(EVS_NpcInit_Eldstar),
         .settings = &N(NpcSettings_Dummy),
@@ -86,7 +90,11 @@ NpcData N(NpcData_Chapter1)[] = {
 NpcData N(NpcData_Chapter2)[] = {
     {
         .id = NPC_Mamar,
+#if VERSION_JP
+        .pos = { -40.0f, 96.0f, 0.0f },
+#else
         .pos = { -62.0f, 96.0f, 0.0f },
+#endif
         .yaw = 270,
         .init = &N(EVS_NpcInit_Mamar),
         .settings = &N(NpcSettings_Dummy),
@@ -257,7 +265,11 @@ NpcData N(NpcData_Chapter2)[] = {
 NpcData N(NpcData_Chapter3)[] = {
     {
         .id = NPC_Skolar,
+#if VERSION_JP
+        .pos = { -40.0f, 96.0f, 0.0f },
+#else
         .pos = { -62.0f, 96.0f, 0.0f },
+#endif
         .yaw = 270,
         .init = &N(EVS_NpcInit_Skolar),
         .settings = &N(NpcSettings_Dummy),
@@ -297,7 +309,11 @@ NpcData N(NpcData_Chapter3)[] = {
 NpcData N(NpcData_Chapter4)[] = {
     {
         .id = NPC_Muskular,
+#if VERSION_JP
+        .pos = { -40.0f, 96.0f, 0.0f },
+#else
         .pos = { -62.0f, 96.0f, 0.0f },
+#endif
         .yaw = 270,
         .init = &N(EVS_NpcInit_Muskular),
         .settings = &N(NpcSettings_Dummy),
@@ -357,7 +373,11 @@ NpcData N(NpcData_Chapter4)[] = {
 NpcData N(NpcData_Chapter5)[] = {
     {
         .id = NPC_Misstar,
+#if VERSION_JP
+        .pos = { -40.0f, 96.0f, 0.0f },
+#else
         .pos = { -62.0f, 96.0f, 0.0f },
+#endif
         .yaw = 270,
         .init = &N(EVS_NpcInit_Misstar),
         .settings = &N(NpcSettings_Dummy),
@@ -403,7 +423,11 @@ NpcData N(NpcData_Chapter5)[] = {
 NpcData N(NpcData_Chapter6)[] = {
     {
         .id = NPC_Klevar,
+#if VERSION_JP
+        .pos = { -40.0f, 96.0f, 0.0f },
+#else
         .pos = { -62.0f, 96.0f, 0.0f },
+#endif
         .yaw = 270,
         .init = &N(EVS_NpcInit_Klevar),
         .settings = &N(NpcSettings_Dummy),
@@ -550,7 +574,11 @@ NpcData N(NpcData_Chapter6)[] = {
 NpcData N(NpcData_Chapter7)[] = {
     {
         .id = NPC_Kalmar,
+#if VERSION_JP
+        .pos = { -40.0f, 96.0f, 0.0f },
+#else
         .pos = { -62.0f, 96.0f, 0.0f },
+#endif
         .yaw = 270,
         .init = &N(EVS_NpcInit_Kalmar),
         .settings = &N(NpcSettings_Dummy),

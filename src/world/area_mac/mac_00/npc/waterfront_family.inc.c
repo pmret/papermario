@@ -62,6 +62,18 @@ EvtScript N(EVS_NpcInteract_WaterfrontMom) = {
             EndIf
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Gate_0059)
+#if VERSION_JP
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+                Set(LVar0, MSG_MAC_Gate_0123)
+            Else
+                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                    Set(LVar0, MSG_MAC_Gate_0124)
+                Else
+                    Set(LVar0, MSG_MAC_Gate_0125)
+                EndIf
+            EndIf
+#endif
         CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
             Set(LVar0, MSG_MAC_Gate_005A)
         CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
@@ -148,6 +160,18 @@ EvtScript N(EVS_NpcInteract_WaterfrontKid2) = {
             EndIf
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Gate_0076)
+#if VERSION_JP
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+                Set(LVar0, MSG_MAC_Gate_0126)
+            Else
+                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                    Set(LVar0, MSG_MAC_Gate_0127)
+                Else
+                    Set(LVar0, MSG_MAC_Gate_0128)
+                EndIf
+            EndIf
+#endif
         CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
             Set(LVar0, MSG_MAC_Gate_0077)
         CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
