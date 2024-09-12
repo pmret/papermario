@@ -8,7 +8,8 @@
 #include "ld_addrs.h"
 
 #ifdef SHIFT
-#define PLAYER_ACTION_VRAM_DEF texture_memory_VRAM_END
+extern Addr world_action_CLASS_VRAM;
+#define PLAYER_ACTION_VRAM_DEF world_action_CLASS_VRAM
 #else
 #define PLAYER_ACTION_VRAM_DEF (void*) 0x802B6000
 #endif

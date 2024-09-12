@@ -56,10 +56,10 @@ vram_classes:
   # Totally linear past this point
   - { name: texture_memory, vram: 0x8028E000, follows_classes: [battle_code, world_script_api] }
   - { name: world_action, vram: 0x802B6000, follows_classes: [texture_memory] }
-  - { name: indicator_icon, vram: 0x802B7000, vram_symbol: world_action_vram_end } # follows_classes: [world_action] }
+  - { name: indicator_icon, vram: 0x802B7000, follows_classes: [world_action] }
   - { name: model_clear_render_tasks, vram: 0x802B7E00, follows_classes: [indicator_icon] }
   - { name: area_entities, vram: 0x802BAE00, vram_symbol: model_clear_render_tasks_VRAM_END }
-  - { name: world_partner, vram: 0x802BD100, vram_symbol: entity_data_vram_end } # follows_classes: [area_entities] }
+  - { name: world_partner, vram: 0x802BD100, follows_classes: [area_entities] }
   - { name: world_use_item, vram: 0x802C0000, follows_classes: [world_partner] }
   - { name: evt, vram: 0x802C3000, vram_symbol: world_use_item_VRAM_END }
   - { name: engine4, vram: 0x802DBD40, vram_symbol: evt_VRAM_END }

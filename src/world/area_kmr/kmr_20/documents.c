@@ -99,20 +99,21 @@ s32 N(LetterBodyStringIDs)[] = {
     MSG_Document_Letter_Mario12_Body,
 };
 
-u8* N(LetterDmaOffsets)[] = {
-    charset_postcard_OFFSET, (u8*) charset_postcard_pal_OFFSET,
-    charset_letter_content_1_OFFSET, (u8*) charset_letter_content_1_pal_OFFSET,
-    charset_letter_content_2_OFFSET, (u8*) charset_letter_content_2_pal_OFFSET,
-    charset_letter_content_3_OFFSET, (u8*) charset_letter_content_3_pal_OFFSET,
-    charset_letter_content_4_OFFSET, (u8*) charset_letter_content_4_pal_OFFSET,
-    charset_letter_content_5_OFFSET, (u8*) charset_letter_content_5_pal_OFFSET,
-    charset_letter_content_6_OFFSET, (u8*) charset_letter_content_6_pal_OFFSET,
-    charset_letter_content_7_OFFSET, (u8*) charset_letter_content_7_pal_OFFSET,
-    charset_letter_content_8_OFFSET, (u8*) charset_letter_content_8_pal_OFFSET,
-    charset_letter_content_9_OFFSET, (u8*) charset_letter_content_9_pal_OFFSET,
-    charset_letter_content_10_OFFSET, (u8*) charset_letter_content_10_pal_OFFSET,
-    charset_letter_content_11_OFFSET, (u8*) charset_letter_content_11_pal_OFFSET,
-    charset_letter_content_12_OFFSET, (u8*) charset_letter_content_12_pal_OFFSET,
+// TODO mix of image / palette pointers
+IMG_PTR N(LetterDmaOffsets)[] = {
+    charset_postcard_OFFSET, (IMG_PTR) charset_postcard_pal_OFFSET,
+    charset_letter_content_1_OFFSET, (IMG_PTR) charset_letter_content_1_pal_OFFSET,
+    charset_letter_content_2_OFFSET, (IMG_PTR) charset_letter_content_2_pal_OFFSET,
+    charset_letter_content_3_OFFSET, (IMG_PTR) charset_letter_content_3_pal_OFFSET,
+    charset_letter_content_4_OFFSET, (IMG_PTR) charset_letter_content_4_pal_OFFSET,
+    charset_letter_content_5_OFFSET, (IMG_PTR) charset_letter_content_5_pal_OFFSET,
+    charset_letter_content_6_OFFSET, (IMG_PTR) charset_letter_content_6_pal_OFFSET,
+    charset_letter_content_7_OFFSET, (IMG_PTR) charset_letter_content_7_pal_OFFSET,
+    charset_letter_content_8_OFFSET, (IMG_PTR) charset_letter_content_8_pal_OFFSET,
+    charset_letter_content_9_OFFSET, (IMG_PTR) charset_letter_content_9_pal_OFFSET,
+    charset_letter_content_10_OFFSET, (IMG_PTR) charset_letter_content_10_pal_OFFSET,
+    charset_letter_content_11_OFFSET, (IMG_PTR) charset_letter_content_11_pal_OFFSET,
+    charset_letter_content_12_OFFSET, (IMG_PTR) charset_letter_content_12_pal_OFFSET,
 };
 
 API_CALLABLE(N(InitLetters)){
