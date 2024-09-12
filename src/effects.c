@@ -321,7 +321,7 @@ s32 load_effect(s32 effectIndex) {
 
     // Map space for the effect
     tlbMappablePages = &D_80197000;
-    osMapTLB(i, 0, effectEntry->dmaDest, (s32)((*tlbMappablePages)[i]) & 0xFFFFFF, -1, -1);
+    osMapTLB(i, OS_PM_4K, effectEntry->dmaDest, (s32)((*tlbMappablePages)[i]) & 0xFFFFFF, -1, -1);
 
     // Copy the effect into the newly mapped space
     dma_copy(effectEntry->dmaStart, effectEntry->dmaEnd, effectEntry->dmaDest);
