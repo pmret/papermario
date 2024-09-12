@@ -2,7 +2,17 @@
 
 #include "charset/peach_letter.png.h"
 
+#if VERSION_JP
+extern unsigned char charset_kana_OFFSET[];
+extern unsigned char charset_latin_OFFSET[];
+extern unsigned char charset_kanji_OFFSET[];
+extern unsigned char charset_buttons_OFFSET[];
+extern unsigned char charset_menu_kana_OFFSET[];
+extern unsigned char charset_menu_latin_OFFSET[];
+#else
 extern unsigned char charset_standard_OFFSET[];
+#endif
+
 extern unsigned char charset_standard_pal_OFFSET[];
 
 extern unsigned char charset_title_OFFSET[];

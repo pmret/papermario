@@ -1054,7 +1054,7 @@ segments:
       - [0x12F528, palette, letter_content_11]
       - [0x12F728, ci8,     letter_content_12, 70, 95]
       - [0x131128, palette, letter_content_12]
-      - [0x131328, bin] # length 0x18, non zero
+      - [0x131328]
   - name: ui_images_filemenu_pause
     type: code
     start: 0x131340

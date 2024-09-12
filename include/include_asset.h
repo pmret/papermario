@@ -27,7 +27,7 @@
 #define INCLUDE_IMG(FILENAME, SYMBOLNAME) \
     _INCLUDE_IMG(FILENAME, SYMBOLNAME)
 
-#define _INCLUDE_PAL(FILENAME, SYMBOLNAME) \
+#define INCLUDE_PAL(FILENAME, SYMBOLNAME) \
     extern unsigned short SYMBOLNAME[]; \
     __asm__( \
         ".globl " #SYMBOLNAME"\n" \
@@ -38,9 +38,6 @@
         ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/" FILENAME ".bin\"\n" \
         POPSECTION \
     )
-
-#define INCLUDE_PAL(FILENAME, SYMBOLNAME) \
-    _INCLUDE_PAL(FILENAME, SYMBOLNAME)
 
 #define INCLUDE_RAW(FILENAME, SYMBOLNAME) \
     extern unsigned char SYMBOLNAME[]; \
