@@ -875,7 +875,7 @@ MessageCharset* MsgCharsets[] = {
     NULL
 };
 
-u8* MsgLetterRasterOffsets[] = {
+IMG_PTR MsgLetterRasterOffsets[] = {
     charset_letter_content_1_OFFSET,
     charset_letter_content_2_OFFSET,
     charset_letter_content_3_OFFSET,
@@ -890,7 +890,7 @@ u8* MsgLetterRasterOffsets[] = {
     charset_letter_content_12_OFFSET,
 };
 
-u16* MsgLetterPaletteOffsets[] = {
+PAL_PTR MsgLetterPaletteOffsets[] = {
     charset_letter_content_1_pal_OFFSET,
     charset_letter_content_2_pal_OFFSET,
     charset_letter_content_3_pal_OFFSET,

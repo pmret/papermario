@@ -632,8 +632,8 @@ void msg_play_speech_sound(MessagePrintState* printer, u8 character) {
 
 extern s32 gItemIconRasterOffsets[];
 extern s32 gItemIconPaletteOffsets[];
-extern u8* MsgLetterRasterOffsets[];
-extern u16* MsgLetterPaletteOffsets[];
+extern IMG_PTR MsgLetterRasterOffsets[];
+extern PAL_PTR MsgLetterPaletteOffsets[];
 extern MsgVoice MsgVoices[];
 
 #if VERSION_PAL
