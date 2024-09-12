@@ -632,8 +632,8 @@ void msg_play_speech_sound(MessagePrintState* printer, u8 character) {
 
 extern s32 gItemIconRasterOffsets[];
 extern s32 gItemIconPaletteOffsets[];
-extern s32 MsgLetterRasterOffsets[];
-extern s32 MsgLetterPaletteOffsets[];
+extern u8* MsgLetterRasterOffsets[];
+extern u16* MsgLetterPaletteOffsets[];
 extern MsgVoice MsgVoices[];
 
 #if VERSION_PAL
@@ -807,10 +807,10 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         romAddr = charset_ROM_START + (s32)charset_postcard_pal_OFFSET;
                         dma_copy(romAddr, romAddr + 0x20, printer->letterBackgroundPal);
                         printer->letterContentImg = heap_malloc(charset_letter_content_1_png_width * charset_letter_content_1_png_height);
-                        romAddr = charset_ROM_START + MsgLetterRasterOffsets[arg];
+                        romAddr = charset_ROM_START + (s32) MsgLetterRasterOffsets[arg];
                         dma_copy(romAddr, romAddr + (charset_letter_content_1_png_width * charset_letter_content_1_png_height), printer->letterContentImg);
                         printer->letterContentPal = heap_malloc(0x200);
-                        romAddr = charset_ROM_START + MsgLetterPaletteOffsets[arg];
+                        romAddr = charset_ROM_START + (s32) MsgLetterPaletteOffsets[arg];
                         dma_copy(romAddr, romAddr + 0x200, printer->letterContentPal);
                         break;
                     case MSG_STYLE_POPUP:
