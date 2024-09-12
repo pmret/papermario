@@ -382,7 +382,9 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
             IfEq(LVar1, 1)
                 Goto(71)
             EndIf
+#if !VERSION_JP
         Call(SetGroupVisibility, MODEL_km_sita, MODEL_GROUP_HIDDEN)
+#endif
         Call(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EndThread
     Call(PlayerMoveTo, 0, -240, 0)
@@ -487,16 +489,20 @@ EvtScript N(EVS_NpcIdle_Merle) = {
 };
 
 EvtScript N(EVS_Scene_Merle_OneLastThing) = {
+#if !VERSION_JP
     Thread
         Call(DisablePartnerAI, 0)
         Call(SetNpcSpeed, NPC_PARTNER, Float(3.0 / DT))
         Call(NpcMoveTo, NPC_PARTNER, -28, -80, 0)
         Call(EnablePartnerAI)
     EndThread
+#endif
     Call(SetPlayerSpeed, Float(3.0 / DT))
     Call(PlayerMoveTo, 0, -100, 0)
     Call(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_VISIBLE)
+#if !VERSION_JP
     Call(SetGroupVisibility, MODEL_km_sita, MODEL_GROUP_VISIBLE)
+#endif
     Call(SetNpcPos, NPC_Merle, 0, 90, -180)
     Call(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     Call(MakeLerp, 0, 90, 10, EASING_QUADRATIC_IN)
@@ -523,9 +529,11 @@ EvtScript N(EVS_Scene_Merle_OneLastThing) = {
     Call(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_HIDDEN)
     Call(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
     Call(PlayerFaceNpc, NPC_Merle, FALSE)
+#if !VERSION_JP
     Call(DisablePartnerAI, 0)
     Call(NpcFaceNpc, NPC_PARTNER, NPC_Merle, 0)
     Call(EnablePartnerAI)
+#endif
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))

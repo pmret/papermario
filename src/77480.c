@@ -17,17 +17,6 @@
 #define i_spy_VRAM (void*)0x802B7000
 #endif
 
-#if VERSION_JP // TODO remove once segments are split
-extern Addr i_spy_ROM_START;
-extern Addr i_spy_ROM_END;
-extern Addr pulse_stone_ROM_START;
-extern Addr pulse_stone_ROM_END;
-extern Addr speech_bubble_ROM_START;
-extern Addr speech_bubble_ROM_END;
-extern Addr inspect_icon_ROM_START;
-extern Addr inspect_icon_ROM_END;
-#endif
-
 UNK_FUN_PTR(ISpyNotificationCallback);
 UNK_FUN_PTR(PulseStoneNotificationCallback);
 UNK_FUN_PTR(TalkNotificationCallback);

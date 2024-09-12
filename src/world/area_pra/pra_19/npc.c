@@ -777,7 +777,9 @@ EvtScript N(EVS_ManageImpostersScene) = {
                         Call(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, FALSE)
                         Call(EnablePartnerAI)
                         Call(DisablePlayerInput, FALSE)
+#if !VERSION_JP
                         BindTrigger(Ref(N(EVS_ExitWalk_pra_20_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilise, 1, 0)
+#endif
                         Set(GB_StoryProgress, STORY_CH7_DEFEATED_KOOPER_DUPLIGHOSTS)
                         BreakLoop
                     EndIf
@@ -876,7 +878,9 @@ EvtScript N(EVS_Scene_DefeatMiniboss) = {
     Call(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, FALSE)
     Call(EnablePartnerAI)
     Call(DisablePlayerInput, FALSE)
+#if !VERSION_JP
     BindTrigger(Ref(N(EVS_ExitWalk_pra_20_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilise, 1, 0)
+#endif
     Set(GB_StoryProgress, STORY_CH7_DEFEATED_KOOPER_DUPLIGHOSTS)
     Return
     End

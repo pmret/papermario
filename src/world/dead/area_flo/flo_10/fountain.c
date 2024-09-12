@@ -225,7 +225,9 @@ EvtScript N(EVS_Scene_PostReleaseFountain) = {
     Wait(20)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Wait(10)
+#if !VERSION_JP
     ExecWait(N(EVS_PushFlowerSong))
+#endif
     Wait(10)
     Call(SpeakToPlayer, NPC_Lily, ANIM_Lily_Talk, ANIM_Lily_Idle, 5, MSG_CH6_0082)
     Call(NpcFacePlayer, NPC_Lily, 1)
@@ -238,7 +240,9 @@ EvtScript N(EVS_Scene_PostReleaseFountain) = {
     Call(EndSpeech, NPC_Lily, ANIM_Lily_Talk, ANIM_Lily_Idle, 0)
     Call(SetNpcAnimation, NPC_Lily, ANIM_Lily_Idle)
     Call(ResetCam, CAM_DEFAULT, Float(4.0))
+#if !VERSION_JP
     ExecWait(N(EVS_PopSong))
+#endif
     Call(DisablePlayerPhysics, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return

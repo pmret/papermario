@@ -4,6 +4,11 @@
 MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/NormalItemChoice.inc.c"
 #include "world/common/complete/GiveReward.inc.c"
+#if VERSION_JP
+#include "world/common/todo/SomeItemEntityFunc.inc.c"
+#include "world/common/todo/IsItemBadge.inc.c"
+#include "world/common/todo/UnkScriptJP00.inc.c"
+#endif
 
 #include "world/common/npc/Penguin_Wander.inc.c"
 #include "world/common/npc/Penguin.inc.c"
@@ -617,6 +622,9 @@ EvtScript N(EVS_NpcInit_Penguin_08) = {
 };
 
 EvtScript N(EVS_NpcInit_Penguin_09) = {
+#if VERSION_JP
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_Inspect_Present)))
+#endif
     IfLt(GB_StoryProgress, STORY_CH7_MAYOR_MURDER_SOLVED)
         Call(SetNpcFlagBits, NPC_Penguin_09, NPC_FLAG_INVISIBLE | NPC_FLAG_10000000, TRUE)
         Call(EnableNpcShadow, NPC_Penguin_09, FALSE)

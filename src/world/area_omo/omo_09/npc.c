@@ -215,7 +215,11 @@ NpcData N(NpcData_Pokey) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Pokey),
     .settings = &N(NpcSettings_Pokey),
+#if VERSION_JP
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
+#else
     .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+#endif
     .drops = NO_DROPS,
     .animations = POKEY_ANIMS,
 };
@@ -226,7 +230,11 @@ NpcData N(NpcData_Koopatrol) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Koopatrol),
     .settings = &N(NpcSettings_Koopatrol_Stationary),
+#if VERSION_JP
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
+#else
     .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+#endif
     .drops = NO_DROPS,
     .animations = KOOPATROL_ANIMS,
 };

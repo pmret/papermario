@@ -493,9 +493,11 @@ EvtScript N(EVS_PushStatue_Impl) = {
 };
 
 EvtScript N(EVS_PushStatue_01) = {
+#if !VERSION_JP
     IfGe(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
         Return
     EndIf
+#endif
     Call(N(IsDestCellUnavailable), NPC_AlbinoDino_01)
     IfEq(LVar0, TRUE)
         Return
@@ -508,9 +510,11 @@ EvtScript N(EVS_PushStatue_01) = {
 };
 
 EvtScript N(EVS_PushStatue_02) = {
+#if !VERSION_JP
     IfGe(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
         Return
     EndIf
+#endif
     Call(N(IsDestCellUnavailable), NPC_AlbinoDino_02)
     IfEq(LVar0, TRUE)
         Return
@@ -523,9 +527,11 @@ EvtScript N(EVS_PushStatue_02) = {
 };
 
 EvtScript N(EVS_PushStatue_03) = {
+#if !VERSION_JP
     IfGe(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
         Return
     EndIf
+#endif
     Call(N(IsDestCellUnavailable), NPC_AlbinoDino_03)
     IfEq(LVar0, TRUE)
         Return

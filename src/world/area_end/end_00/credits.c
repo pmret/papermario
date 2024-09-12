@@ -8,6 +8,10 @@
 #include "credits_title_pal.inc.c"
 #include "credits_jobs_pal.inc.c"
 #include "credits_names_pal.inc.c"
+#elif VERSION_JP
+#include "credits_title.inc.c"
+#include "credits_jobs_jp.inc.c"
+#include "credits_names_jp.inc.c"
 #else
 #include "credits_title.inc.c"
 #include "credits_jobs.inc.c"

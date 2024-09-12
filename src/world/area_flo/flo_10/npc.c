@@ -30,11 +30,13 @@ s32 N(KeyList)[] = {
 
 EvtScript N(EVS_OnInteract_WaterStoneSocket) = {
     IfEq(GF_FLO10_ShowedLilyTheWaterStone, TRUE)
+#if !VERSION_JP
         Call(GetPartnerInUse, LVarA)
         IfNe(LVarA, 0)
             Call(AwaitPlayerLeave, 0, 0, 19)
             Return
         EndIf
+#endif
         Call(DisablePlayerInput, TRUE)
         SetGroup(EVT_GROUP_00)
         Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)

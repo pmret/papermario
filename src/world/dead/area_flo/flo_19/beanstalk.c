@@ -51,8 +51,8 @@ API_CALLABLE(N(SetScreenFadeAmount)) {
 
 #include "common/CosInterpMinMax.inc.c"
 
-// all data in this file is truncated
-/*
+// all data in this file is truncated in other versions
+#if VERSION_JP
 EvtScript N(EVS_FadeOutToBlack) = {
     Set(LVar0, 0)
     Label(10)
@@ -393,4 +393,4 @@ EvtScript N(EVS_SetupBeanstalk) = {
     Return
     End
 };
-*/
+#endif
