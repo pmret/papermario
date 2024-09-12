@@ -16,7 +16,7 @@
     __asm__( \
         ".globl " #SYMBOLNAME"\n" \
         PUSHSECTION(".data") \
-        ".align 2\n" \
+        ".align 3\n" \
         ".type " #SYMBOLNAME", @object\n" \
         #SYMBOLNAME":\n" \
         ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/" FILENAME ".bin\"\n" \
@@ -32,11 +32,24 @@
     __asm__( \
         ".globl " #SYMBOLNAME"\n" \
         PUSHSECTION(".data") \
-        ".align 2\n" \
+        ".align 3\n" \
         ".type " #SYMBOLNAME", @object\n" \
         #SYMBOLNAME":\n" \
         ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/" FILENAME ".bin\"\n" \
         POPSECTION \
     )
+
+#define INCLUDE_RAW(FILENAME, SYMBOLNAME) \
+    extern unsigned char SYMBOLNAME[]; \
+    __asm__( \
+        ".globl " #SYMBOLNAME"\n" \
+        PUSHSECTION(".data") \
+        ".align 3\n" \
+        ".type " #SYMBOLNAME", @object\n" \
+        #SYMBOLNAME":\n" \
+        ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/assets/"ASTRINGIFY(VERSION)"/" FILENAME "\"\n" \
+        POPSECTION \
+    )
+
 
 #endif // _H_INCLUDE_ASSET

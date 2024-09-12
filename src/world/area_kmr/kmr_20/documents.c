@@ -1,6 +1,7 @@
 #include "kmr_20.h"
 #include "hud_element.h"
 #include "ld_addrs.h"
+#include "charset/charset.h"
 
 #define PACKED_BYTE(base, i) \
     (i / 8) + EVT_INDEX_OF_GAME_BYTE(base)
@@ -98,20 +99,20 @@ s32 N(LetterBodyStringIDs)[] = {
     MSG_Document_Letter_Mario12_Body,
 };
 
-s32 N(LetterDmaOffsets)[] = {
-    (s32) charset_postcard_OFFSET, (s32) charset_postcard_pal_OFFSET + 5,
-    (s32) charset_letter_content_1_OFFSET, (s32) charset_letter_content_1_pal_OFFSET + 6,
-    (s32) charset_letter_content_2_OFFSET, (s32) charset_letter_content_2_pal_OFFSET + 6,
-    (s32) charset_letter_content_3_OFFSET, (s32) charset_letter_content_3_pal_OFFSET + 6,
-    (s32) charset_letter_content_4_OFFSET, (s32) charset_letter_content_4_pal_OFFSET + 6,
-    (s32) charset_letter_content_5_OFFSET, (s32) charset_letter_content_5_pal_OFFSET + 6,
-    (s32) charset_letter_content_6_OFFSET, (s32) charset_letter_content_6_pal_OFFSET + 6,
-    (s32) charset_letter_content_7_OFFSET, (s32) charset_letter_content_7_pal_OFFSET + 6,
-    (s32) charset_letter_content_8_OFFSET, (s32) charset_letter_content_8_pal_OFFSET + 6,
-    (s32) charset_letter_content_9_OFFSET, (s32) charset_letter_content_9_pal_OFFSET + 6,
-    (s32) charset_letter_content_10_OFFSET, (s32) charset_letter_content_10_pal_OFFSET + 6,
-    (s32) charset_letter_content_11_OFFSET, (s32) charset_letter_content_11_pal_OFFSET + 6,
-    (s32) charset_letter_content_12_OFFSET, (s32) charset_letter_content_12_pal_OFFSET + 6,
+u8* N(LetterDmaOffsets)[] = {
+    charset_postcard_OFFSET, (u8*) charset_postcard_pal_OFFSET,
+    charset_letter_content_1_OFFSET, (u8*) charset_letter_content_1_pal_OFFSET,
+    charset_letter_content_2_OFFSET, (u8*) charset_letter_content_2_pal_OFFSET,
+    charset_letter_content_3_OFFSET, (u8*) charset_letter_content_3_pal_OFFSET,
+    charset_letter_content_4_OFFSET, (u8*) charset_letter_content_4_pal_OFFSET,
+    charset_letter_content_5_OFFSET, (u8*) charset_letter_content_5_pal_OFFSET,
+    charset_letter_content_6_OFFSET, (u8*) charset_letter_content_6_pal_OFFSET,
+    charset_letter_content_7_OFFSET, (u8*) charset_letter_content_7_pal_OFFSET,
+    charset_letter_content_8_OFFSET, (u8*) charset_letter_content_8_pal_OFFSET,
+    charset_letter_content_9_OFFSET, (u8*) charset_letter_content_9_pal_OFFSET,
+    charset_letter_content_10_OFFSET, (u8*) charset_letter_content_10_pal_OFFSET,
+    charset_letter_content_11_OFFSET, (u8*) charset_letter_content_11_pal_OFFSET,
+    charset_letter_content_12_OFFSET, (u8*) charset_letter_content_12_pal_OFFSET,
 };
 
 API_CALLABLE(N(InitLetters)){
@@ -224,11 +225,11 @@ API_CALLABLE(N(ReadLetters)){
                     evt_set_variable(NULL, GF_KMR20_ReadThankYouLetterFromKoopaVillage, TRUE);
                 }
 
-                dma_copy(charset_ROM_START + N(LetterDmaOffsets)[0],
-                         charset_ROM_START + N(LetterDmaOffsets)[0] + sizeof(N(LetterBackgroundImg)),
+                dma_copy(charset_ROM_START + (s32) N(LetterDmaOffsets)[0],
+                         charset_ROM_START + (s32) N(LetterDmaOffsets)[0] + sizeof(N(LetterBackgroundImg)),
                          N(LetterBackgroundImg));
-                dma_copy(charset_ROM_START + N(LetterDmaOffsets)[1],
-                         charset_ROM_START + N(LetterDmaOffsets)[1] + sizeof(N(LetterBackgroundPal)),
+                dma_copy(charset_ROM_START + (s32) N(LetterDmaOffsets)[1],
+                         charset_ROM_START + (s32) N(LetterDmaOffsets)[1] + sizeof(N(LetterBackgroundPal)),
                          N(LetterBackgroundPal));
 
                 N(LetterImgData)[0].raster = N(LetterBackgroundImg);
@@ -238,11 +239,11 @@ API_CALLABLE(N(ReadLetters)){
                 N(LetterImgData)[0].format = G_IM_FMT_CI;
                 N(LetterImgData)[0].bitDepth = G_IM_SIZ_4b;
 
-                dma_copy(charset_ROM_START + N(LetterDmaOffsets)[(userIndex * 2) + 2],
-                         charset_ROM_START + N(LetterDmaOffsets)[(userIndex * 2) + 2] + sizeof(N(LetterPhotoImg)),
+                dma_copy(charset_ROM_START + (s32) N(LetterDmaOffsets)[(userIndex * 2) + 2],
+                         charset_ROM_START + (s32) N(LetterDmaOffsets)[(userIndex * 2) + 2] + sizeof(N(LetterPhotoImg)),
                          N(LetterPhotoImg));
-                dma_copy(charset_ROM_START + N(LetterDmaOffsets)[(userIndex * 2) + 3],
-                         charset_ROM_START + N(LetterDmaOffsets)[(userIndex * 2) + 3] + sizeof(N(N(LetterPhotoPal))),
+                dma_copy(charset_ROM_START + (s32) N(LetterDmaOffsets)[(userIndex * 2) + 3],
+                         charset_ROM_START + (s32) N(LetterDmaOffsets)[(userIndex * 2) + 3] + sizeof(N(N(LetterPhotoPal))),
                          N(N(LetterPhotoPal)));
 
                 N(LetterImgData)[1].raster = N(LetterPhotoImg);

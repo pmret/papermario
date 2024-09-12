@@ -3,6 +3,7 @@
 #include "message_ids.h"
 #include "sprite.h"
 
+#include "charset/charset.h"
 #include "charset/postcard.png.h"
 #include "charset/letter_content_1.png.h"
 

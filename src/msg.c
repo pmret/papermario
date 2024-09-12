@@ -3,6 +3,7 @@
 #include "message_ids.h"
 #include "sprite.h"
 
+#include "charset/charset.h"
 #include "charset/postcard.png.h"
 #include "charset/letter_content_1.png.h"
 
@@ -30,7 +31,12 @@ enum RewindArrowStates {
 
 typedef MessageImageData* MessageImageDataList[1];
 
-s32 D_8014C280[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000 };
+Vp D_8014C280 = {
+    .vp = {
+        .vscale = {640, 480, 511, 0},
+        .vtrans = {640, 480, 511, 0},
+    }
+};
 
 #if !VERSION_JP
 u8 MessagePlural[] = { MSG_CHAR_LOWER_S, MSG_CHAR_READ_END };
@@ -89,7 +95,7 @@ Gfx* D_80151338;
 static char gMessageBuffers[2][1024];
 static MessagePrintState gMessagePrinters[3];
 #if VERSION_JP
-static s32 D_80155C38; 
+static s32 D_80155C38;
 #endif
 static u8 gMessageMsgVars[3][32];
 static s16 D_80155C98;
@@ -233,7 +239,7 @@ void load_font(s32 font) {
         } else if (font == 1) {
             load_font_data(charset_title_OFFSET, 0xF60, MsgCharImgTitle);
             load_font_data(charset_subtitle_OFFSET, 0xB88, MsgCharImgSubtitle);
-            load_font_data(charset_credits_pal_OFFSET, 0x80, D_802F4560);
+            load_font_data(charset_subtitle_pal_OFFSET, 0x80, D_802F4560);
         }
     }
 }
@@ -565,7 +571,7 @@ void render_messages(void) {
 
     for (i = 0; i < ARRAY_COUNT(gMessagePrinters); i++) {
         if (gMessagePrinters[i].stateFlags & MSG_STATE_FLAG_2) {
-            gSPViewport(gMainGfxPos++, D_8014C280);
+            gSPViewport(gMainGfxPos++, &D_8014C280);
             guOrtho(matrix, 0.0f, 319.0f, -240.0f, 0.0f, -500.0f, 500.0f, 1.0f);
             gSPMatrix(gMainGfxPos++, OS_K0_TO_PHYSICAL(matrix), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             gDPPipeSync(gMainGfxPos++);
@@ -626,8 +632,8 @@ void msg_play_speech_sound(MessagePrintState* printer, u8 character) {
 
 extern s32 gItemIconRasterOffsets[];
 extern s32 gItemIconPaletteOffsets[];
-extern s32 MsgLetterRasterOffsets[];
-extern s32 MsgLetterPaletteOffsets[];
+extern u8* MsgLetterRasterOffsets[];
+extern u16* MsgLetterPaletteOffsets[];
 extern MsgVoice MsgVoices[];
 
 #if VERSION_PAL
@@ -798,13 +804,13 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         romAddr = charset_ROM_START + (s32)charset_postcard_OFFSET;
                         dma_copy(romAddr, romAddr + ((charset_postcard_png_width * charset_postcard_png_height) / 2), printer->letterBackgroundImg);
                         printer->letterBackgroundPal = heap_malloc(0x20);
-                        romAddr = charset_ROM_START + ((s32)charset_postcard_pal_OFFSET + 5);
+                        romAddr = charset_ROM_START + (s32)charset_postcard_pal_OFFSET;
                         dma_copy(romAddr, romAddr + 0x20, printer->letterBackgroundPal);
                         printer->letterContentImg = heap_malloc(charset_letter_content_1_png_width * charset_letter_content_1_png_height);
-                        romAddr = charset_ROM_START + MsgLetterRasterOffsets[arg];
+                        romAddr = charset_ROM_START + (s32) MsgLetterRasterOffsets[arg];
                         dma_copy(romAddr, romAddr + (charset_letter_content_1_png_width * charset_letter_content_1_png_height), printer->letterContentImg);
                         printer->letterContentPal = heap_malloc(0x200);
-                        romAddr = charset_ROM_START + MsgLetterPaletteOffsets[arg];
+                        romAddr = charset_ROM_START + (s32) MsgLetterPaletteOffsets[arg];
                         dma_copy(romAddr, romAddr + 0x200, printer->letterContentPal);
                         break;
                     case MSG_STYLE_POPUP:

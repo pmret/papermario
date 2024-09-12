@@ -2925,3 +2925,7 @@ D_0A0006C0_E4B9A0 = 0xA0006C0; // rom:0xEB89B0
 D_0A000900_E4BBE0 = 0xA000900; // rom:0xEB8BF0
 D_0A0021E8_E4D4C8 = 0xA001170; // rom:0xEB9460
 D_PAL_0A002170_EBA460 = 0xA002170; // rom:0xEBA460
+
+charset_peach_letter_png = 0x00007308; //rom:0x117FB8
+charset_postcard_png = 0x0000B290; //rom:0x11BF40
+charset_letter_content_1_png = 0x0000D178; //rom:0x11DE28

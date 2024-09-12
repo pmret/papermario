@@ -26304,3 +26304,7 @@ battle_move_hammer_throw_dusty_hammer_gfx = 0x802A3908; // rom:0x754D58
 battle_move_hammer_throw_basic_hammer_gfx = 0x802A39F8; // rom:0x754E48
 battle_move_hammer_throw_super_hammer_gfx = 0x802A3AE8; // rom:0x754F38
 battle_move_hammer_throw_ultra_hammer_gfx = 0x802A3BD8; // rom:0x755028
+
+charset_peach_letter_png = 0x00007308; //rom:0x1164B8
+charset_postcard_png = 0x0000B290; //rom:0x11A440
+charset_letter_content_1_png = 0x0000D178; //rom:0x11C328
