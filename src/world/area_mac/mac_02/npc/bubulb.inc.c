@@ -15,6 +15,9 @@ EvtScript N(EVS_NpcInteract_Bubulb) = {
     Else
         Switch(GB_StoryProgress)
             CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+#if VERSION_JP
+                Set(LVar0, MSG_MAC_Bridge_00A6)
+#endif
             CaseLt(STORY_CH2_BEGAN_PEACH_MISSION)
                 Set(LVar0, MSG_MAC_Bridge_0088)
             CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)

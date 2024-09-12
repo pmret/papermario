@@ -29,6 +29,12 @@ EvtScript N(EVS_LetterReward_FiceT) = {
 EvtScript N(EVS_NpcInteract_FiceT) = {
     Set(LVar3, 0)
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Bridge_0094)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Bridge_0095)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             Set(LVar0, MSG_MAC_Bridge_0021)
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)

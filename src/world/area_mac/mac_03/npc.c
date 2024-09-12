@@ -157,6 +157,14 @@ EvtScript N(EVS_NpcInit_TrainToad_01) = {
 
 EvtScript N(EVS_NpcInteract_Toad_01) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Station_0067)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Station_0068)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Station_0069)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Station_000A)
@@ -203,6 +211,14 @@ EvtScript N(EVS_NpcInit_Toad_01) = {
 
 EvtScript N(EVS_NpcInteract_Toadette_01) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Station_006A)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Station_006B)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Station_006C)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Station_0017)
@@ -249,6 +265,14 @@ EvtScript N(EVS_NpcInit_Toadette_01) = {
 
 EvtScript N(EVS_NpcInteract_Toad_02) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Station_006D)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Station_006E)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Station_006F)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Station_0024)
@@ -303,6 +327,17 @@ EvtScript N(EVS_NpcInteract_ToadKid_02) = {
     Call(SetNpcAnimation, NPC_ToadKid_01, ANIM_ToadKid_Red_Idle)
     Call(SetNpcAnimation, NPC_ToadKid_02, ANIM_ToadKid_Yellow_Idle)
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Station_0070)
+            Set(LVar1, MSG_MAC_Station_0071)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Station_0072)
+            Set(LVar1, MSG_MAC_Station_0073)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Station_0074)
+            Set(LVar1, MSG_MAC_Station_0075)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Station_0031)
@@ -316,6 +351,10 @@ EvtScript N(EVS_NpcInteract_ToadKid_02) = {
             Set(LVar1, MSG_MAC_Station_0036)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_ShyGuyBlockingTracks, FALSE)
+#if VERSION_JP
+                Set(LVar0, MSG_MAC_Station_0076)
+                Set(LVar1, MSG_MAC_Station_0077)
+#endif
             Else
                 IfEq(GF_MAC03_ShyGuyChasedOff, FALSE)
                     Set(LVar0, MSG_MAC_Station_0037)

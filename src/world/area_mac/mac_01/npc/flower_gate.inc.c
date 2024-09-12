@@ -471,6 +471,10 @@ EvtScript N(EVS_NpcInteract_MinhT) = {
             Set(LVar0, GF_MAC01_ChasedShyGuysFromGardenA)
             Add(LVar0, GF_MAC01_ChasedShyGuysFromGardenB)
             IfEq(LVar0, 2)
+#if VERSION_JP
+                Set(LVar0, MSG_MAC_Plaza_00EC)
+                Set(LVar1, MSG_MAC_Plaza_00EC)
+#endif
                 Set(LVar2, 1)
             Else
                 Set(LVar0, MSG_MAC_Plaza_006D)
@@ -561,6 +565,10 @@ EvtScript N(EVS_NpcInteract_MinhT) = {
                 Set(LVar5, 2)
                 ExecWait(N(EVS_MinhT_PlantSeed))
             CaseEq(ITEM_MAGICAL_SEED4)
+#if VERSION_JP
+                Set(GF_MAC01_Planted_MagicalSeed4, TRUE)
+                Set(LVar4, MSG_MAC_Plaza_00ED)
+#endif
                 Set(LVar5, 3)
                 ExecWait(N(EVS_MinhT_PlantSeed))
         EndSwitch

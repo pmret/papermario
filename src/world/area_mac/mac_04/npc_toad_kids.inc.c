@@ -1,5 +1,19 @@
 EvtScript N(EVS_NpcInteract_ToadKids) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Housing_00E0)
+            Set(LVar1, MSG_MAC_Housing_00E1)
+            Set(LVar2, MSG_MAC_Housing_00E2)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Housing_00E3)
+            Set(LVar1, MSG_MAC_Housing_00E4)
+            Set(LVar2, MSG_MAC_Housing_00E5)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Housing_00E6)
+            Set(LVar1, MSG_MAC_Housing_00E7)
+            Set(LVar2, MSG_MAC_Housing_00E8)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Housing_003A)

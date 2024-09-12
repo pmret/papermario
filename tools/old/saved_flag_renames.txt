@@ -244,7 +244,7 @@ GameFlag(242) GF_MAC00_Met_TheMaster
 GameFlag(243) GF_MAC00_DictionaryStolen
 GameFlag(244) GF_MAC00_DictionaryReturned
 GameFlag(245) GF_MAC00_TranslatedMysteryNote
-GameFlag(246) GF_Unused_MAC_74
+GameFlag(246) GF_MAC00_TranslatedSuspiciousNote
 GameFlag(247) GF_MAC01_ShyGuyTookOverShop
 GameFlag(248) GF_MAC00_ShyGuyChasedFromShop
 GameFlag(249) GF_MAC01_Merlon_Shoo1

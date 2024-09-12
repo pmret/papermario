@@ -1,5 +1,13 @@
 EvtScript N(EVS_NpcInteract_CookingApprentice) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Bridge_0097)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Bridge_0098)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Bridge_0099)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Bridge_004A)
@@ -8,6 +16,10 @@ EvtScript N(EVS_NpcInteract_CookingApprentice) = {
             EndIf
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Bridge_004C)
+#if VERSION_JP
+        CaseLt(STORY_CH3_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Bridge_009A)
+#endif
         CaseLt(STORY_CH4_GOT_TAYCE_TS_CAKE)
             Set(LVar0, MSG_MAC_Bridge_004D)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)

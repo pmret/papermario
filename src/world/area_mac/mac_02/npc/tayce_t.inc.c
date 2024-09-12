@@ -304,7 +304,11 @@ EvtScript N(EVS_TayceT_Cook) = {
         CaseEq(0)
         CaseEq(-1)
             Call(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0006)
+#if VERSION_JP
+            Call(ShowChoice, MSG_Choice_0010)
+#else
             Call(ShowChoice, MSG_Choice_0009)
+#endif
             IfEq(LVar0, 0)
                 Call(ContinueSpeech, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0004)
                 Goto(LABEL_DONE)

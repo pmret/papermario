@@ -304,9 +304,19 @@ EvtScript N(EVS_ItemPrompt_Dictionary) = {
             IfEq(GF_MAC00_TranslatedMysteryNote, TRUE)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0010)
             EndIf
+#if VERSION_JP
+            IfEq(GF_MAC00_TranslatedSuspiciousNote, TRUE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_JP_0011)
+            EndIf
+#endif
         CaseEq(ITEM_MYSTERY_NOTE)
             Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000F)
             Set(GF_MAC00_TranslatedMysteryNote, TRUE)
+#if VERSION_JP
+        CaseEq(ITEM_SUSPICIOUS_NOTE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0122)
+            Set(GF_MAC00_TranslatedSuspiciousNote, TRUE)
+#endif
         CaseEq(-1)
             Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000C)
         CaseEq(0)
@@ -327,6 +337,13 @@ EvtScript N(EVS_ItemPrompt_Documents) = {
                     Return
                 EndIf
             Else
+#if VERSION_JP
+                IfEq(GF_MAC00_TranslatedSuspiciousNote, TRUE)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_JP_0011)
+                    Set(LVarA, 1)
+                    Return
+                EndIf
+#endif
             EndIf
         CaseEq(-1)
         CaseDefault
@@ -334,6 +351,12 @@ EvtScript N(EVS_ItemPrompt_Documents) = {
                 Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_000E)
                 Set(GF_MAC00_TranslatedMysteryNote, TRUE)
                 Set(LVarA, 1)
+#if VERSION_JP
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_RussT_Talk, ANIM_RussT_Idle, 0, MSG_MAC_Gate_0121)
+                Set(GF_MAC00_TranslatedSuspiciousNote, TRUE)
+                Set(LVarA, 1)
+#endif
             EndIf
     EndSwitch
     Return

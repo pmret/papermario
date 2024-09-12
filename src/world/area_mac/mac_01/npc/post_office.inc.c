@@ -222,6 +222,19 @@ API_CALLABLE(N(func_80245440_805CC0)) {
     return ApiStatus_DONE2;
 }
 
+#if VERSION_JP
+EvtScript N(D_80256C10_81EF80) = {
+    IfEq(GF_MAC01_Met_Postmaster, FALSE)
+        Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_00EA)
+        Set(GF_MAC01_Met_Postmaster, TRUE)
+    Else
+        Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_00EB)
+    EndIf
+    Return
+    End
+};
+#endif
+
 s32 N(ItemList_Mailbag)[] = {
     ITEM_MAILBAG,
     ITEM_NONE
@@ -263,6 +276,9 @@ EvtScript N(EVS_NpcInteract_Postmaster) = {
         Call(N(func_80244E90_805710))
         Switch(LVar0)
             CaseEq(-1)
+#if VERSION_JP
+                Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_00EA)
+#endif
                 Return
             CaseEq(1)
                 Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0055)
@@ -271,6 +287,9 @@ EvtScript N(EVS_NpcInteract_Postmaster) = {
         Call(N(func_80244E90_805710))
         Switch(LVar0)
             CaseEq(-1)
+#if VERSION_JP
+                Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_00EB)
+#endif
                 Return
             CaseEq(0)
                 Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0057)

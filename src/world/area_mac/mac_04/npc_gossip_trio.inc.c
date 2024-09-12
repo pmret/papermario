@@ -1,5 +1,19 @@
 EvtScript N(EVS_NpcInteract_GossipTrio) = {
     Switch(GB_StoryProgress)
+#if VERSION_JP
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Housing_00EF)
+            Set(LVar1, MSG_MAC_Housing_00F0)
+            Set(LVar2, MSG_MAC_Housing_00F1)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Housing_00F2)
+            Set(LVar1, MSG_MAC_Housing_00F3)
+            Set(LVar2, MSG_MAC_Housing_00F4)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Housing_00F5)
+            Set(LVar1, MSG_MAC_Housing_00F6)
+            Set(LVar2, MSG_MAC_Housing_00F7)
+#endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
             IfEq(GF_MAC03_BombedRock, FALSE)
                 Set(LVar0, MSG_MAC_Housing_0081)
