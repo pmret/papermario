@@ -1,5 +1,6 @@
 #include "common.h"
 #include "ld_addrs.h"
+#include "charset/charset.h"
 
 extern IMG_BIN MsgCharImgTitle[];
 extern IMG_BIN MsgCharImgSubtitle[];
@@ -890,18 +891,18 @@ s32 MsgLetterRasterOffsets[] = {
 };
 
 s32 MsgLetterPaletteOffsets[] = {
-    (s32) charset_letter_content_1_pal_OFFSET + 6,
-    (s32) charset_letter_content_2_pal_OFFSET + 6,
-    (s32) charset_letter_content_3_pal_OFFSET + 6,
-    (s32) charset_letter_content_4_pal_OFFSET + 6,
-    (s32) charset_letter_content_5_pal_OFFSET + 6,
-    (s32) charset_letter_content_6_pal_OFFSET + 6,
-    (s32) charset_letter_content_7_pal_OFFSET + 6,
-    (s32) charset_letter_content_8_pal_OFFSET + 6,
-    (s32) charset_letter_content_9_pal_OFFSET + 6,
-    (s32) charset_letter_content_10_pal_OFFSET + 6,
-    (s32) charset_letter_content_11_pal_OFFSET + 6,
-    (s32) charset_letter_content_12_pal_OFFSET + 6,
+    (s32) charset_letter_content_1_pal_OFFSET,
+    (s32) charset_letter_content_2_pal_OFFSET,
+    (s32) charset_letter_content_3_pal_OFFSET,
+    (s32) charset_letter_content_4_pal_OFFSET,
+    (s32) charset_letter_content_5_pal_OFFSET,
+    (s32) charset_letter_content_6_pal_OFFSET,
+    (s32) charset_letter_content_7_pal_OFFSET,
+    (s32) charset_letter_content_8_pal_OFFSET,
+    (s32) charset_letter_content_9_pal_OFFSET,
+    (s32) charset_letter_content_10_pal_OFFSET,
+    (s32) charset_letter_content_11_pal_OFFSET,
+    (s32) charset_letter_content_12_pal_OFFSET,
 };
 
 MsgVoice MsgVoices[] = {

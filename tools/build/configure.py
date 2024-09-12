@@ -849,6 +849,44 @@ class Configure:
                                 type="data",
                                 define=True,
                             )
+                        elif seg.type == "pm_charset":
+                            rasters = []
+                            print("pm_charset: " + str(entry.src_paths))
+
+                            for src_path in entry.src_paths:
+                                out_path = self.build_path() / seg.dir / seg.name / (src_path.stem + ".bin")
+                                build(
+                                    out_path,
+                                    [src_path],
+                                    "pigment",
+                                    variables={
+                                        "img_type": "ci4",
+                                        "img_flags": "",
+                                    },
+                                )
+                                rasters.append(out_path)
+
+                            build(entry.object_path.with_suffix(""), rasters, "charset")
+                            build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+                        elif seg.type == "pm_charset_palettes":
+                            palettes = []
+                            print("pm_charset_palettes: " + str(entry.src_paths))
+
+                            for src_path in entry.src_paths:
+                                out_path = self.build_path() / seg.dir / seg.name / "palette" / (src_path.stem + ".bin")
+                                build(
+                                    out_path,
+                                    [src_path],
+                                    "pigment",
+                                    variables={
+                                        "img_type": "palette",
+                                        "img_flags": "",
+                                    },
+                                )
+                                palettes.append(out_path)
+
+                            build(entry.object_path.with_suffix(""), palettes, "charset_palettes")
+                            build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             elif isinstance(seg, splat.segtypes.common.bin.CommonSegBin):
                 build(entry.object_path, entry.src_paths, "bin")
             elif isinstance(seg, splat.segtypes.n64.yay0.N64SegYay0):
@@ -1144,42 +1182,6 @@ class Configure:
 
                 # combine
                 build(entry.object_path.with_suffix(""), bin_yay0s, "mapfs")
-                build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
-            elif seg.type == "pm_charset":
-                rasters = []
-
-                for src_path in entry.src_paths:
-                    out_path = self.build_path() / seg.dir / seg.name / (src_path.stem + ".bin")
-                    build(
-                        out_path,
-                        [src_path],
-                        "pigment",
-                        variables={
-                            "img_type": "ci4",
-                            "img_flags": "",
-                        },
-                    )
-                    rasters.append(out_path)
-
-                build(entry.object_path.with_suffix(""), rasters, "charset")
-                build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
-            elif seg.type == "pm_charset_palettes":
-                palettes = []
-
-                for src_path in entry.src_paths:
-                    out_path = self.build_path() / seg.dir / seg.name / "palette" / (src_path.stem + ".bin")
-                    build(
-                        out_path,
-                        [src_path],
-                        "pigment",
-                        variables={
-                            "img_type": "palette",
-                            "img_flags": "",
-                        },
-                    )
-                    palettes.append(out_path)
-
-                build(entry.object_path.with_suffix(""), palettes, "charset_palettes")
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             elif seg.type == "pm_sprite_shading_profiles":
                 header_path = str(self.build_path() / "include/sprite/sprite_shading_profiles.h")

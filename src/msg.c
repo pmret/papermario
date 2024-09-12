@@ -3,6 +3,7 @@
 #include "message_ids.h"
 #include "sprite.h"
 
+#include "charset/charset.h"
 #include "charset/postcard.png.h"
 #include "charset/letter_content_1.png.h"
 
@@ -30,7 +31,12 @@ enum RewindArrowStates {
 
 typedef MessageImageData* MessageImageDataList[1];
 
-s32 D_8014C280[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000 };
+Vp D_8014C280 = {
+    .vp = {
+        .vscale = {640, 480, 511, 0},
+        .vtrans = {640, 480, 511, 0},
+    }
+};
 
 #if !VERSION_JP
 u8 MessagePlural[] = { MSG_CHAR_LOWER_S, MSG_CHAR_READ_END };
@@ -89,7 +95,7 @@ Gfx* D_80151338;
 static char gMessageBuffers[2][1024];
 static MessagePrintState gMessagePrinters[3];
 #if VERSION_JP
-static s32 D_80155C38; 
+static s32 D_80155C38;
 #endif
 static u8 gMessageMsgVars[3][32];
 static s16 D_80155C98;
@@ -233,7 +239,7 @@ void load_font(s32 font) {
         } else if (font == 1) {
             load_font_data(charset_title_OFFSET, 0xF60, MsgCharImgTitle);
             load_font_data(charset_subtitle_OFFSET, 0xB88, MsgCharImgSubtitle);
-            load_font_data(charset_credits_pal_OFFSET, 0x80, D_802F4560);
+            load_font_data(charset_subtitle_pal_OFFSET, 0x80, D_802F4560);
         }
     }
 }

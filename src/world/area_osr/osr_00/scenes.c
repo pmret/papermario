@@ -1,6 +1,6 @@
 #include "osr_00.h"
 #include "ld_addrs.h"
-#include "charset/peach_letter.png.h"
+#include "charset/charset.h"
 
 #include "sprite/npc/Luigi.h"
 
@@ -23,11 +23,10 @@ BSS PAL_BIN N(PeachLetterPal)[0x100];
 MAP_STATIC_PAD(2, letter);
 BSS MessageImageData N(MsgImage);
 
-// TODO look into + 1 here...
 API_CALLABLE(N(func_802406E0_AACF10)) {
     s8* romStart = charset_ROM_START;
     u8* rasterOffset = charset_peach_letter_png;
-    u16* paletteOffset = (u16*) charset_peach_letter_pal + 1; // todo ???
+    u16* paletteOffset = charset_peach_letter_pal;
 
     dma_copy(romStart + (s32)rasterOffset, romStart + (s32)rasterOffset + sizeof(N(PeachLetterImg)), &N(PeachLetterImg));
     dma_copy(romStart + (s32)paletteOffset, romStart + (s32)paletteOffset + sizeof(N(PeachLetterPal)), &N(PeachLetterPal));
