@@ -87,14 +87,14 @@ EffectInstance* recover_main(s32 type, f32 posX, f32 posY, f32 posZ, s32 duratio
         if (i == 1) {
             part->pos.x = 0.0f;
             part->unk_34 = 0;
-            part->scaleX = 0.0f;;
-            part->scaleY = 0.0f;;
+            part->scaleX = 0.0f;
+            part->scaleY = 0.0f;
             part->vel.y = 1.4f;
         } else {
             part->vel.y = 1.4f;
             part->unk_34 = i + 10;
-            part->scaleX = 0.0f;;
-            part->scaleY = 0.0f;;
+            part->scaleX = 0.0f;
+            part->scaleY = 0.0f;
             part->pos.x = ((i & 1) * 2 - 1) * ((i - 1) >> 1) * 4;
         }
         part->timeLeft = 0;

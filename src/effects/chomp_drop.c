@@ -40,7 +40,7 @@ EffectInstance* chomp_drop_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
     data->unk_18 = arg6;
     data->unk_34 = 1.0f;
     data->unk_20 = arg7;
-    data->unk_38 = rand_int(0x168);
+    data->unk_38 = rand_int(360);
     data->unk_40 = arg9;
     data->unk_44 = 0;
     data->unk_3C = arg5;

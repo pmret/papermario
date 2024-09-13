@@ -21,7 +21,7 @@ FlamePreset FlamePresets[] = {
         .colorScale = { 255, 109, 255 },
         .keyCenter = 92,
         .envColor = { 102, 191, 255 },
-        .primIntensity = 75, 
+        .primIntensity = 75,
         .sizeScale = 50,
         .dlist = D_09000800_3543B0,
     },
@@ -29,7 +29,7 @@ FlamePreset FlamePresets[] = {
         .colorScale = { 255, 255, 255 },
         .keyCenter = 0,
         .envColor = { 255, 32, 0 },
-        .primIntensity = 75, 
+        .primIntensity = 75,
         .sizeScale = 100,
         .dlist = D_09000800_3543B0,
     },
@@ -37,7 +37,7 @@ FlamePreset FlamePresets[] = {
         .colorScale = { 255, 0, 255 },
         .keyCenter = 92,
         .envColor = { 107, 168, 255 },
-        .primIntensity = 75, 
+        .primIntensity = 75,
         .sizeScale = 10,
         .dlist = D_09000800_3543B0,
     },
@@ -45,13 +45,13 @@ FlamePreset FlamePresets[] = {
         .colorScale = { 255, 255, 255 },
         .keyCenter = 244,
         .envColor = { 247, 175, 175 },
-        .primIntensity = 22, 
+        .primIntensity = 22,
         .sizeScale = 30,
         .dlist = D_09000800_3543B0,
     },
 };
 
-s32 LastFlameRenderFrame;
+s32 LastFlameRenderFrame = 0;
 
 void flame_init(EffectInstance* effect);
 void flame_update(EffectInstance* effect);
