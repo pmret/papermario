@@ -1,8 +1,8 @@
-update_camera_mode_4 = 0x8002dfc0;
-update_camera_mode_2 = 0x8002e3a8;
-update_camera_mode_1 = 0x8002e940;
-update_camera_mode_0 = 0x8002ef00;
-update_camera_mode_unused = 0x8002f390;
+update_camera_unused_confined = 0x8002dfc0;
+update_camera_interp_pos = 0x8002e3a8;
+update_camera_unused_radial = 0x8002e940;
+update_camera_minimal = 0x8002ef00;
+update_camera_unused_ahead = 0x8002f390;
 update_camera_from_controller = 0x8002fbac;
 calculate_segment_intersection = 0x8003198c;
 calculate_line_segment_intersection = 0x80031c94;
@@ -43,7 +43,7 @@ atan2 = 0x80029950;
 dist2D = 0x80029ba4;
 sin_rad = 0x80029e3c;
 cos_rad = 0x80029ea0;
-D_8009A5EC = 0x800991b8;
+CamLengthScale = 0x800991b8;
 
 __osEepromTimerQ = 0x800d8e20;
 TitleScreen_ImgList_Copyright = 0x8009d38c;

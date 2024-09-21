@@ -359,7 +359,7 @@ void update_camera_lead_amount(Camera* camera, f32 candidateLeadAmount) {
     }
 }
 
-void func_80032C64(Camera* camera) {
+void apply_constraints_to_lead_amount(Camera* camera) {
     s32 i;
     f32 rotationRad;
     f32 leadAmount;
@@ -522,7 +522,7 @@ void create_camera_leadplayer_matrix(Camera* camera) {
     distTanTheta /= cos_rad(theta);
 
     update_camera_lead_amount(camera, (distTanTheta * camera->viewportW / camera->viewportH) * camera->unk_520);
-    func_80032C64(camera);
+    apply_constraints_to_lead_amount(camera);
     guTranslateF(camera->viewMtxLeading, -camera->leadAmount, 0.0f, 0.0f);
 }
 

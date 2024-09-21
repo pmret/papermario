@@ -60,7 +60,7 @@ API_CALLABLE(SetCamPerspective) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802CA90C) {
+API_CALLABLE(SetCamUpdateMode) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s16 mode = evt_get_variable(script, *args++);
@@ -71,7 +71,7 @@ API_CALLABLE(func_802CA90C) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802CA988) {
+API_CALLABLE(GrabCamera) {
     Bytecode* args = script->ptrReadPos;
     Bytecode id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
@@ -114,7 +114,7 @@ API_CALLABLE(SetCamViewport) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802CABE8) {
+API_CALLABLE(SetInterpCamParams) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s16 pitch = evt_get_variable(script, *args++);
@@ -160,7 +160,7 @@ API_CALLABLE(SetCamBGColor) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802CAE50) {
+API_CALLABLE(SetCamLookTarget) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s32 x = evt_get_variable(script, *args++);

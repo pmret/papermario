@@ -8,7 +8,7 @@ void render_models(void);
 void execute_render_tasks(void);
 void render_item_entities(void);
 
-f32 D_8009A5EC;
+f32 CamLengthScale;
 s16 gCurrentCamID;
 u16* nuGfxCfb_ptr;
 Gfx* gMainGfxPos;
@@ -35,23 +35,23 @@ void update_cameras(void) {
                 update_camera_zone_interp(cam);
                 break;
             case CAM_UPDATE_MODE_INIT:
-                update_camera_mode_0(cam);
+                update_camera_minimal(cam);
                 break;
             case CAM_UPDATE_UNUSED_1:
-                update_camera_mode_1(cam);
+                update_camera_unused_radial(cam);
                 break;
             case CAM_UPDATE_MODE_2:
-                update_camera_mode_2(cam);
+                update_camera_interp_pos(cam);
                 break;
             case CAM_UPDATE_UNUSED_4:
-                update_camera_mode_4(cam);
+                update_camera_unused_confined(cam);
                 break;
             case CAM_UPDATE_UNUSED_5:
-                update_camera_mode_5(cam);
+                update_camera_unused_leading(cam);
                 break;
             case CAM_UPDATE_MODE_6:
             default:
-                update_camera_mode_6(cam);
+                update_camera_no_interp(cam);
                 break;
         }
 
@@ -234,12 +234,12 @@ void render_frame(s32 isSecondPass) {
     }
 }
 
-void create_cameras_a(void) {
+void create_cameras(void) {
     CameraInitData camData;
     CameraInitData* camDataPtr = &camData;
     s32 i;
 
-    D_8009A5EC = 1.0f;
+    CamLengthScale = 1.0f;
 
     for (i = 0; i < ARRAY_COUNT(gCameras); i++) {
         gCameras[i].flags = 0;
@@ -290,7 +290,7 @@ void create_cameras_a(void) {
     initialize_next_camera(camDataPtr);
 }
 
-void create_cameras_b(void) {
+void create_cameras_unused(void) {
     CameraInitData camData;
     CameraInitData* camDataPtr = &camData;
     s32 i;
@@ -476,7 +476,7 @@ void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screen
     }
 }
 
-s32 func_8002E754(s32 camID, s32 x, s32 y) {
+s32 is_outside_cam_viewport_bounds(s32 camID, s32 x, s32 y) {
     s32 startX = gCameras[camID].viewportStartX;
     s32 startY = gCameras[camID].viewportStartY;
     s32 endX = startX + gCameras[camID].viewportW;
@@ -495,7 +495,7 @@ s32 func_8002E754(s32 camID, s32 x, s32 y) {
     }
 }
 
-void func_8002E7CC(s32 camID, s32* x, s32* y, s32* width, s32* height) {
+void get_cam_viewport_bounds(s32 camID, s32* x, s32* y, s32* width, s32* height) {
     *x = gCameras[camID].viewportStartX;
     *y = gCameras[camID].viewportStartY;
     *width = gCameras[camID].viewportStartX + gCameras[camID].viewportW;

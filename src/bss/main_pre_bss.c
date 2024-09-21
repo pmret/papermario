@@ -35,7 +35,7 @@ BSS u16* nuGfxZBuffer;
 BSS u32 nuContDataLockKey;
 BSS u32 __osViIntrCount;
 BSS AuCallback BeginSoundUpdateCallback;
-BSS f32 D_8009A5EC;
+BSS f32 CamLengthScale;
 BSS u32 nuGfxCfbCounter;
 BSS ModelTreeInfoList* gCurrentModelTreeNodeInfo;
 BSS u32 nuGfxDisplay;

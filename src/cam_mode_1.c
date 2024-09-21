@@ -2,7 +2,7 @@
 #include "camera.h"
 
 // implementation for CAM_UPDATE_UNUSED_1
-void update_camera_mode_1(Camera* camera) {
+void update_camera_unused_radial(Camera* camera) {
     f32 sinBoom, cosBoom;
     f32 f20;
     f32 boomYaw;
@@ -23,11 +23,11 @@ void update_camera_mode_1(Camera* camera) {
         deltaZ = camera->targetPos.z;
 
         camera->curBoomYaw = camera->auxPitch;
-        camera->curBoomLength = camera->lookAt_dist * 100 / D_8009A5EC;
-        camera->curYOffset = camera->auxBoomPitch * 20 / D_8009A5EC;
+        camera->curBoomLength = camera->lookAt_dist * 100 / CamLengthScale;
+        camera->curYOffset = camera->auxBoomPitch * 20 / CamLengthScale;
 
         f20 = atan2(deltaX, deltaZ2, deltaX2, deltaZ);
-        if ((dist2D(deltaX, deltaZ2, deltaX2, deltaZ) < camera->auxBoomLength * 100 / D_8009A5EC)) {
+        if ((dist2D(deltaX, deltaZ2, deltaX2, deltaZ) < camera->auxBoomLength * 100 / CamLengthScale)) {
             f20 = camera->trueRot.x;
             camera->trueRot.x = f20;
         } else {
@@ -77,8 +77,8 @@ void update_camera_mode_1(Camera* camera) {
     z3 = camera->lookAt_obj_target.z;
 
     camera->curBoomYaw = camera->auxPitch;
-    camera->curBoomLength = camera->lookAt_dist * 100 / D_8009A5EC;
-    camera->curYOffset = camera->auxBoomPitch * 20 / D_8009A5EC;
+    camera->curBoomLength = camera->lookAt_dist * 100 / CamLengthScale;
+    camera->curYOffset = camera->auxBoomPitch * 20 / CamLengthScale;
 
     y3 += camera->curYOffset;
 
@@ -99,7 +99,7 @@ void update_camera_mode_1(Camera* camera) {
     camera->lookAt_obj.z += z3 * 0.5f;
 
     f20 = atan2(deltaX, deltaZ2, deltaX2, deltaZ);
-    if ((dist2D(deltaX, deltaZ2, deltaX2, deltaZ) < camera->auxBoomLength * 100 / D_8009A5EC)) {
+    if ((dist2D(deltaX, deltaZ2, deltaX2, deltaZ) < camera->auxBoomLength * 100 / CamLengthScale)) {
         f20 = camera->trueRot.x;
     } else {
         camera->trueRot.x = f20;

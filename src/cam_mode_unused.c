@@ -1,6 +1,6 @@
 #include "common.h"
 
-void update_camera_mode_unused(Camera* camera) {
+void update_camera_unused_ahead(Camera* camera) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sinBoom;
     f32 cosBoom;

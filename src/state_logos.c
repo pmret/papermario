@@ -83,7 +83,7 @@ void state_init_logos(void) {
     gLogosImage2 = gLogosImages + 0x15000;
 
     nuContRmbForceStop();
-    create_cameras_a();
+    create_cameras();
     gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_MODE_6;
     gCameras[CAM_DEFAULT].needsInit = TRUE;
     gCameras[CAM_DEFAULT].nearClip = 16;

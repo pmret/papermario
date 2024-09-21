@@ -57,7 +57,7 @@ s32 PressStart_Alpha = 0; // the opacity of "PRESS START" text
 b32 PressStart_IsVisible = FALSE; // toggles the visibility of "PRESS START"
 s32 PressStart_BlinkCounter = 0; // counts to 16, then toggles PressStart_IsVisible
 
-// controls whether the intro story or the demo will player after TITLE_STATE_HOLD is done 
+// controls whether the intro story or the demo will player after TITLE_STATE_HOLD is done
 // since this state is reached for the first time after the intro has already played once or was skipped,
 // this is initially false and the demo is will play first.
 s32 PlayIntroNext = FALSE;
@@ -141,7 +141,7 @@ void state_init_title_screen(void) {
     TitleScreen_ImgList_CopyrightPalette = (s32*)(TitleScreen_ImgList->copyrightPalette + (s32) TitleScreen_ImgList);
 #endif
 
-    create_cameras_a();
+    create_cameras();
     gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_MODE_6;
     gCameras[CAM_DEFAULT].needsInit = TRUE;
     gCameras[CAM_DEFAULT].nearClip = CAM_NEAR_CLIP;
@@ -288,7 +288,7 @@ void state_step_title_screen(void) {
             }
             general_heap_create();
             clear_render_tasks();
-            create_cameras_a();
+            create_cameras();
             clear_entity_models();
             clear_animator_list();
             clear_npcs();

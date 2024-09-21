@@ -11,7 +11,7 @@ EvtScript N(EVS_MonitorPlayerFallDown) = {
         IfGe(LVar1, -10)
             Goto(0)
         EndIf
-    Call(func_802CA988, CAM_DEFAULT, LVar2, LVar3, LVar4, LVar5)
+    Call(GrabCamera, CAM_DEFAULT, LVar2, LVar3, LVar4, LVar5)
     Label(1)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Wait(1)

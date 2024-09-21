@@ -121,7 +121,7 @@ BSS HudCacheEntry gHudElementCacheTableRasterBattle[192];
 BSS HudCacheEntry gHudElementCacheTablePaletteBattle[192];
 BSS s32 D_80159180;
 
-void func_801413F8(void);
+void hud_element_setup_cam(void);
 
 void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
     s32* pos = (s32*)anim;
@@ -656,7 +656,7 @@ void hud_element_clear_cache(void) {
 
     gHudElementsNumber = 0;
     D_80159180 = 0;
-    func_801413F8();
+    hud_element_setup_cam();
 }
 
 #if VERSION_PAL
@@ -693,7 +693,7 @@ void init_hud_element_list(void) {
     D_80159180 = 0;
 }
 
-void func_801413F8(void) {
+void hud_element_setup_cam(void) {
     set_cam_viewport(CAM_3, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
     gCameras[CAM_3].updateMode = CAM_UPDATE_MODE_2;
     gCameras[CAM_3].needsInit = TRUE;
@@ -2175,7 +2175,7 @@ void hud_element_create_transform_A(s32 id) {
     transform->scale.z = 1.0f;
     transform->pivot.x = 0;
     transform->pivot.y = 0;
-    func_801413F8();
+    hud_element_setup_cam();
 }
 
 void hud_element_create_transform_B(s32 id) {
@@ -2195,7 +2195,7 @@ void hud_element_create_transform_B(s32 id) {
     transform->scale.x = 1.0f;
     transform->scale.y = 1.0f;
     transform->scale.z = 1.0f;
-    func_801413F8();
+    hud_element_setup_cam();
 }
 
 void hud_element_create_transform_C(s32 id) {
@@ -2215,7 +2215,7 @@ void hud_element_create_transform_C(s32 id) {
     transform->scale.x = 1.0f;
     transform->scale.y = 1.0f;
     transform->scale.z = 1.0f;
-    func_801413F8();
+    hud_element_setup_cam();
 }
 
 void hud_element_free_transform(s32 id) {

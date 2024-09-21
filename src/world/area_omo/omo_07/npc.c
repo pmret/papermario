@@ -47,7 +47,7 @@ API_CALLABLE(N(SetShyGuyPoolState)) {
 
     base = AF_OMO07_NpcPool0;
     do {
-        npcID = evt_get_variable(script, *(args++));
+        npcID = evt_get_variable(script, *args++);
     } while (0); // TODO required to match
     npcID += base;
     value = evt_get_variable(script, *args++);

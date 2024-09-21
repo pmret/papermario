@@ -2,7 +2,7 @@
 #include "camera.h"
 
 // implementation for CAM_UPDATE_UNUSED_4
-void update_camera_mode_4(Camera* camera) {
+void update_camera_unused_confined(Camera* camera) {
     f32 sinBoom;
     f32 cosBoom;
     f32 deltaX;
@@ -38,8 +38,8 @@ void update_camera_mode_4(Camera* camera) {
     camera->unk_70 = 0.0f;
     camera->curBoomYaw = 0.0f;
     camera->trueRot.x = camera->unk_70;
-    camera->curBoomLength = camera->lookAt_dist * D_8009A5EC;
-    camera->curYOffset = camera->auxBoomPitch * D_8009A5EC;
+    camera->curBoomLength = camera->lookAt_dist * CamLengthScale;
+    camera->curYOffset = camera->auxBoomPitch * CamLengthScale;
     if (camera->needsInit) {
         camera->needsInit = FALSE;
         camera->unk_98 = 0.0f;
@@ -106,7 +106,7 @@ void update_camera_mode_4(Camera* camera) {
 }
 
 // implementation for CAM_UPDATE_MODE_2
-void update_camera_mode_2(Camera *camera) {
+void update_camera_interp_pos(Camera *camera) {
     f32 cosBoom;
     f32 sinBoom;
     f32 boomYaw;
@@ -122,8 +122,8 @@ void update_camera_mode_2(Camera *camera) {
     f32 tmp;
 
     camera->unk_70 = camera->auxBoomLength;
-    camera->curBoomLength = camera->lookAt_dist * D_8009A5EC;
-    camera->curYOffset = camera->auxBoomPitch * D_8009A5EC;
+    camera->curBoomLength = camera->lookAt_dist * CamLengthScale;
+    camera->curYOffset = camera->auxBoomPitch * CamLengthScale;
     camera->curBoomYaw = camera->auxPitch;
     camera->trueRot.x = camera->unk_70;
     if (camera->needsInit) {

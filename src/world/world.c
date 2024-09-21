@@ -168,7 +168,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     sfx_clear_env_sounds(0);
     clear_worker_list();
     clear_script_list();
-    create_cameras_a();
+    create_cameras();
     spr_init_sprites(gGameStatusPtr->playerSpriteSet);
     clear_animator_list();
     clear_entity_models();

@@ -225,7 +225,7 @@ void load_demo_battle(u32 index) {
     general_heap_create();
     clear_worker_list();
     clear_script_list();
-    create_cameras_a();
+    create_cameras();
     spr_init_sprites(PLAYER_SPRITES_MARIO_WORLD);
     clear_animator_list();
     clear_entity_models();

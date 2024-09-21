@@ -130,8 +130,8 @@ EvtScript EVS_OnBattleInit = {
     Wait(1)
     Call(InitVirtualEntityList)
     Call(InitAnimatedModels)
-    Call(func_802CABE8, CAM_BATTLE, 0, 240, 100, 8)
-    Call(func_802CAE50, CAM_BATTLE, -75, 35, 0)
+    Call(SetInterpCamParams, CAM_BATTLE, 0, 240, 100, 8)
+    Call(SetCamLookTarget, CAM_BATTLE, -75, 35, 0)
     Call(BattleCamTargetActor, 0)
     Call(func_8024CE9C)
     Return

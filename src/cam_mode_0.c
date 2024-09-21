@@ -3,7 +3,7 @@
 
 // implementation for CAM_UPDATE_MODE_INIT
 // simple camera based on lookAt_eye and lookAt_obj with no blending or interpolation
-void update_camera_mode_0(Camera* camera) {
+void update_camera_minimal(Camera* camera) {
     f32 dx;
     f32 dy;
     f32 dz;
@@ -15,7 +15,7 @@ void update_camera_mode_0(Camera* camera) {
         camera->needsInit = FALSE;
         camera->lookAt_eye.x = camera->lookAt_obj.x;
         camera->lookAt_eye.y = camera->lookAt_obj.y;
-        camera->lookAt_eye.z = camera->lookAt_obj.z - (1000.0f / D_8009A5EC);
+        camera->lookAt_eye.z = camera->lookAt_obj.z - (1000.0f / CamLengthScale);
     }
 
     camera->curYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);

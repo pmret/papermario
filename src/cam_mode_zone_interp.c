@@ -1,14 +1,14 @@
 #include "common.h"
 
-BSS CamConfiguration gCurrentCamConfiguration;
+BSS CamConfiguration CurrentCamRig;
 BSS f32 D_800A08DC;
 BSS f32 D_800A08E0;
 BSS f32 D_800A08E4;
 BSS f32 D_800A08E8;
 BSS f32 D_800A08EC;
 
-void cam_interp_lookat_pos(Camera* camera, f32 arg1, f32 arg2, s16 arg3);
-void func_8003034C(Camera* camera);
+void interp_lookat_pos(Camera* camera, f32 arg1, f32 arg2, s16 arg3);
+void update_unused_lead_amt(Camera* camera);
 
 void func_80030450(Camera* camera) {
 }
@@ -742,7 +742,7 @@ void update_camera_zone_interp(Camera* camera) {
                 camera->prevController = (CameraControlSettings*) CAMERA_SETTINGS_PTR_MINUS_1;
             }
             changingZone = TRUE;
-            camera->prevConfiguration = gCurrentCamConfiguration;
+            camera->prevConfiguration = CurrentCamRig;
             camera->curController = cs;
             camera->interpAlpha = 0.0f;
             camera->linearInterp = 0.0f;
@@ -887,50 +887,50 @@ void update_camera_zone_interp(Camera* camera) {
 
     interpAlpha = camera->interpAlpha;
     interpAlphaInv = 1.0f - interpAlpha;
-    gCurrentCamConfiguration.boomYaw = (camera->prevConfiguration.boomYaw * interpAlphaInv) + (camera->goalConfiguration.boomYaw * interpAlpha);
-    gCurrentCamConfiguration.boomLength = (camera->prevConfiguration.boomLength * interpAlphaInv) + (camera->goalConfiguration.boomLength * interpAlpha);
-    gCurrentCamConfiguration.boomPitch = (camera->prevConfiguration.boomPitch * interpAlphaInv) + (camera->goalConfiguration.boomPitch * interpAlpha);
-    gCurrentCamConfiguration.viewPitch = (camera->prevConfiguration.viewPitch * interpAlphaInv) + (camera->goalConfiguration.viewPitch * interpAlpha);
-    gCurrentCamConfiguration.targetPos.x = (camera->prevConfiguration.targetPos.x * interpAlphaInv) + (camera->goalConfiguration.targetPos.x * interpAlpha);
-    gCurrentCamConfiguration.targetPos.y = (camera->prevConfiguration.targetPos.y * interpAlphaInv) + (camera->goalConfiguration.targetPos.y * interpAlpha);
-    gCurrentCamConfiguration.targetPos.z = (camera->prevConfiguration.targetPos.z * interpAlphaInv) + (camera->goalConfiguration.targetPos.z * interpAlpha);
-    gCurrentCamConfiguration.boomLength *= camera->zoomPercent;
-    gCurrentCamConfiguration.boomLength *= 0.01;
+    CurrentCamRig.boomYaw = (camera->prevConfiguration.boomYaw * interpAlphaInv) + (camera->goalConfiguration.boomYaw * interpAlpha);
+    CurrentCamRig.boomLength = (camera->prevConfiguration.boomLength * interpAlphaInv) + (camera->goalConfiguration.boomLength * interpAlpha);
+    CurrentCamRig.boomPitch = (camera->prevConfiguration.boomPitch * interpAlphaInv) + (camera->goalConfiguration.boomPitch * interpAlpha);
+    CurrentCamRig.viewPitch = (camera->prevConfiguration.viewPitch * interpAlphaInv) + (camera->goalConfiguration.viewPitch * interpAlpha);
+    CurrentCamRig.targetPos.x = (camera->prevConfiguration.targetPos.x * interpAlphaInv) + (camera->goalConfiguration.targetPos.x * interpAlpha);
+    CurrentCamRig.targetPos.y = (camera->prevConfiguration.targetPos.y * interpAlphaInv) + (camera->goalConfiguration.targetPos.y * interpAlpha);
+    CurrentCamRig.targetPos.z = (camera->prevConfiguration.targetPos.z * interpAlphaInv) + (camera->goalConfiguration.targetPos.z * interpAlpha);
+    CurrentCamRig.boomLength *= camera->zoomPercent;
+    CurrentCamRig.boomLength *= 0.01;
 
     func_80030450(camera);
-    temp_f20_2 = gCurrentCamConfiguration.boomYaw + D_800A08E0;
+    temp_f20_2 = CurrentCamRig.boomYaw + D_800A08E0;
     temp_f26 = sin_deg(temp_f20_2);
     temp_f24_2 = -cos_deg(temp_f20_2);
-    cosAngle = cos_deg(gCurrentCamConfiguration.boomPitch + D_800A08DC);
-    sinAngle = sin_deg(gCurrentCamConfiguration.boomPitch + D_800A08DC);
+    cosAngle = cos_deg(CurrentCamRig.boomPitch + D_800A08DC);
+    sinAngle = sin_deg(CurrentCamRig.boomPitch + D_800A08DC);
 
     if (!(camera->moveFlags & CAMERA_MOVE_NO_INTERP_Y)) {
-        camera->lookAt_eye.y = gCurrentCamConfiguration.targetPos.y + (gCurrentCamConfiguration.boomLength * sinAngle);
+        camera->lookAt_eye.y = CurrentCamRig.targetPos.y + (CurrentCamRig.boomLength * sinAngle);
     }
 
-    camera->lookAt_eye.x = gCurrentCamConfiguration.targetPos.x - (temp_f26 * gCurrentCamConfiguration.boomLength * cosAngle);
-    camera->lookAt_eye.z = gCurrentCamConfiguration.targetPos.z - (temp_f24_2 * gCurrentCamConfiguration.boomLength * cosAngle);
-    cosAngle = cos_deg(-gCurrentCamConfiguration.viewPitch);
-    sinAngle = sin_deg(-gCurrentCamConfiguration.viewPitch);
+    camera->lookAt_eye.x = CurrentCamRig.targetPos.x - (temp_f26 * CurrentCamRig.boomLength * cosAngle);
+    camera->lookAt_eye.z = CurrentCamRig.targetPos.z - (temp_f24_2 * CurrentCamRig.boomLength * cosAngle);
+    cosAngle = cos_deg(-CurrentCamRig.viewPitch);
+    sinAngle = sin_deg(-CurrentCamRig.viewPitch);
 
-    if (camera->lookAt_eye.x == gCurrentCamConfiguration.targetPos.x && camera->lookAt_eye.z == gCurrentCamConfiguration.targetPos.z) {
+    if (camera->lookAt_eye.x == CurrentCamRig.targetPos.x && camera->lookAt_eye.z == CurrentCamRig.targetPos.z) {
         dist = 0.0f;
     } else {
-        dist = dist2D(camera->lookAt_eye.x, camera->lookAt_eye.z, gCurrentCamConfiguration.targetPos.x, gCurrentCamConfiguration.targetPos.z);
+        dist = dist2D(camera->lookAt_eye.x, camera->lookAt_eye.z, CurrentCamRig.targetPos.x, CurrentCamRig.targetPos.z);
     }
 
-    temp_f8_2 = gCurrentCamConfiguration.targetPos.y - camera->lookAt_eye.y;
+    temp_f8_2 = CurrentCamRig.targetPos.y - camera->lookAt_eye.y;
     if (!(camera->moveFlags & CAMERA_MOVE_NO_INTERP_Y)) {
         camera->lookAt_obj.y = camera->lookAt_eye.y + ((dist * sinAngle) + (temp_f8_2 * cosAngle));
     }
     temp_f4_4 = (dist * cosAngle) - (temp_f8_2 * sinAngle);
     camera->lookAt_obj.x = camera->lookAt_eye.x + (temp_f26 * temp_f4_4);
     camera->lookAt_obj.z = camera->lookAt_eye.z + (temp_f24_2 * temp_f4_4);
-    camera->curYaw = gCurrentCamConfiguration.boomYaw + D_800A08E0;
+    camera->curYaw = CurrentCamRig.boomYaw + D_800A08E0;
     camera->trueRot.x = camera->curYaw;
-    camera->curBoomLength = gCurrentCamConfiguration.boomLength;
-    camera->curBlendedYawNegated = -gCurrentCamConfiguration.boomYaw;
-    camera->curPitch = -gCurrentCamConfiguration.boomPitch - gCurrentCamConfiguration.viewPitch;
+    camera->curBoomLength = CurrentCamRig.boomLength;
+    camera->curBlendedYawNegated = -CurrentCamRig.boomYaw;
+    camera->curPitch = -CurrentCamRig.boomPitch - CurrentCamRig.viewPitch;
     camera->lookAt_obj_target.x = camera->lookAt_obj.x;
     camera->lookAt_obj_target.y = camera->lookAt_obj.y;
     camera->lookAt_obj_target.z = camera->lookAt_obj.z;

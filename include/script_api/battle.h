@@ -289,7 +289,7 @@ API_CALLABLE(SetBattleCamParam);
 API_CALLABLE(GetPartAnimNotify);
 API_CALLABLE(InitAnimatedModels);
 API_CALLABLE(func_8024CE9C);
-API_CALLABLE(func_802CAE50);
+API_CALLABLE(SetCamLookTarget);
 API_CALLABLE(func_802807D0);
 API_CALLABLE(PartnerYieldTurn); ///< YieldTurn copy
 API_CALLABLE(func_8024ECF8);

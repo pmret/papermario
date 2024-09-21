@@ -1,10 +1,10 @@
 #include "common.h"
 
-void cam_interp_lookat_pos(Camera* camera, f32 arg1, f32 arg2, s16 arg3);
-void func_8003034C(Camera* camera);
+void interp_lookat_pos(Camera* camera, f32 arg1, f32 arg2, s16 arg3);
+void update_unused_lead_amt(Camera* camera);
 
 // implementation for CAM_UPDATE_UNUSED_5
-void update_camera_mode_5(Camera* camera) {
+void update_camera_unused_leading(Camera* camera) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 lookXDelta, lookYDelta, lookZDelta;
 
@@ -21,7 +21,7 @@ void update_camera_mode_5(Camera* camera) {
         camera->lookAt_obj.x = camera->targetPos.x;
         camera->lookAt_obj.y = camera->targetPos.y + camera->curYOffset;
         camera->lookAt_obj.z = camera->targetPos.z;
-        cam_interp_lookat_pos(camera, 0.0f, 0.0f, FALSE);
+        interp_lookat_pos(camera, 0.0f, 0.0f, FALSE);
     } else {
         f32 maxInterpSpeed = (playerStatus->curSpeed * 1.5f) + 1.0f;
         f32 interpRate = (playerStatus->curSpeed * 0.05f) + 0.05f;
@@ -29,13 +29,13 @@ void update_camera_mode_5(Camera* camera) {
         camera->lookAt_obj_target.x = camera->targetPos.x + camera->unk_550;
         camera->lookAt_obj_target.y = camera->targetPos.y + camera->curYOffset;
         camera->lookAt_obj_target.z = camera->targetPos.z;
-        func_8003034C(camera);
+        update_unused_lead_amt(camera);
         if (!(camera->moveFlags & CAMERA_MOVE_IGNORE_PLAYER_Y)) {
-            cam_interp_lookat_pos(camera, interpRate, maxInterpSpeed, FALSE);
+            interp_lookat_pos(camera, interpRate, maxInterpSpeed, FALSE);
         } else {
             lookXDelta = maxInterpSpeed; // needed to match
 
-            cam_interp_lookat_pos(camera, interpRate, lookXDelta, TRUE);
+            interp_lookat_pos(camera, interpRate, lookXDelta, TRUE);
         }
     }
 
@@ -47,7 +47,7 @@ void update_camera_mode_5(Camera* camera) {
     camera->curPitch = atan2(0.0f, 0.0f, lookYDelta, -sqrtf(SQ(lookXDelta) + SQ(lookZDelta)));
 }
 
-void cam_interp_lookat_pos(Camera* camera, f32 interpAmtXZ, f32 maxDeltaXZ, s16 lockPosY) {
+void interp_lookat_pos(Camera* camera, f32 interpAmtXZ, f32 maxDeltaXZ, s16 lockPosY) {
     f32 xDelta = (camera->lookAt_obj_target.x - camera->lookAt_obj.x) * interpAmtXZ;
     f32 theta;
     f32 cosTheta;
@@ -74,7 +74,7 @@ void cam_interp_lookat_pos(Camera* camera, f32 interpAmtXZ, f32 maxDeltaXZ, s16 
     }
 }
 
-void func_8003034C(Camera* camera) {
+void update_unused_lead_amt(Camera* camera) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (fabsf(get_clamped_angle_diff(playerStatus->curYaw, 90.0f)) < 45.0f) {

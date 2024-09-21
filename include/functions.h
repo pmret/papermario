@@ -1035,7 +1035,7 @@ void set_background_size(s16, s16, s16, s16);
 void set_background(BackgroundHeader*);
 void set_max_star_power(s8);
 void sync_status_bar(void);
-void create_cameras_a(void);
+void create_cameras(void);
 void func_80045AC0(void);
 void func_8005AF84(void);
 void npc_follow_init(Npc*, s32, FollowAnims*, f32, f32, s32, s32);
