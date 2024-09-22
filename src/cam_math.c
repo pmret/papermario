@@ -377,7 +377,7 @@ void apply_constraints_to_lead_amount(Camera* camera) {
     f32 deltaPosX, deltaPosZ;
     f32 f24, f22, cosYaw, sinYaw;
 
-    rotationRad = camera->trueRot.x / 180.0f * PI;
+    rotationRad = camera->curBoomYaw / 180.0f * PI;
     leadAmount = camera->leadAmount;
 
     newPosX = camera->targetPos.x + leadAmount * cos_rad(rotationRad);

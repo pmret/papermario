@@ -1,7 +1,15 @@
 #include "common.h"
 #include "camera.h"
 
-// implementation for CAM_UPDATE_UNUSED_1
+// implements CAM_UPDATE_UNUSED_RADIAL
+// this camera tracks lookAt_obj_target in a circular region centered on targetPos. the camera does not update
+// unless lookAt_obj_target is greater than a minimum distance from targetPos to prevent wild movements.
+//
+// control parameters:
+// dist -- length of the camera boom arm
+// pitch -- rising angle of the boom arm, up toward the y-axis
+// offsetY -- offset of the base of the boom arm above the target point
+// minRadius -- do not update camera if lookAt_obj_target is closer than this distance from targetPos
 void update_camera_unused_radial(Camera* camera) {
     f32 sinBoom, cosBoom;
     f32 f20;
@@ -22,24 +30,24 @@ void update_camera_unused_radial(Camera* camera) {
         deltaX2 = camera->targetPos.x;
         deltaZ = camera->targetPos.z;
 
-        camera->curBoomYaw = camera->auxPitch;
-        camera->curBoomLength = camera->lookAt_dist * 100 / CamLengthScale;
-        camera->curYOffset = camera->auxBoomPitch * 20 / CamLengthScale;
+        camera->curBoomPitch = camera->params.radial.pitch;
+        camera->curBoomLength = camera->params.radial.dist * 100 / CamLengthScale;
+        camera->targetOffsetY = camera->params.radial.offsetY * 20 / CamLengthScale;
 
         f20 = atan2(deltaX, deltaZ2, deltaX2, deltaZ);
-        if ((dist2D(deltaX, deltaZ2, deltaX2, deltaZ) < camera->auxBoomLength * 100 / CamLengthScale)) {
-            f20 = camera->trueRot.x;
-            camera->trueRot.x = f20;
+        if ((dist2D(deltaX, deltaZ2, deltaX2, deltaZ) < camera->params.radial.minRadius * 100 / CamLengthScale)) {
+            f20 = camera->curBoomYaw;
+            camera->curBoomYaw = f20;
         } else {
-            camera->trueRot.x = f20;
+            camera->curBoomYaw = f20;
         }
-        camera->trueRot.y = f20;
+        camera->targetBoomYaw = f20;
 
         camera->lookAt_obj.x = camera->lookAt_obj_target.x;
-        camera->lookAt_obj.y = camera->lookAt_obj_target.y + camera->curYOffset;
+        camera->lookAt_obj.y = camera->lookAt_obj_target.y + camera->targetOffsetY;
         camera->lookAt_obj.z = camera->lookAt_obj_target.z;
 
-        boomYaw = DEG_TO_RAD(camera->curBoomYaw);
+        boomYaw = DEG_TO_RAD(camera->curBoomPitch);
         sinBoom = sin_rad(boomYaw);
 
         deltaX = 0.0f;
@@ -76,11 +84,11 @@ void update_camera_unused_radial(Camera* camera) {
     y3 = tmp1;
     z3 = camera->lookAt_obj_target.z;
 
-    camera->curBoomYaw = camera->auxPitch;
-    camera->curBoomLength = camera->lookAt_dist * 100 / CamLengthScale;
-    camera->curYOffset = camera->auxBoomPitch * 20 / CamLengthScale;
+    camera->curBoomPitch = camera->params.radial.pitch;
+    camera->curBoomLength = camera->params.radial.dist * 100 / CamLengthScale;
+    camera->targetOffsetY = camera->params.radial.offsetY * 20 / CamLengthScale;
 
-    y3 += camera->curYOffset;
+    y3 += camera->targetOffsetY;
 
     x3 -= camera->lookAt_obj.x;
     y3 -= camera->lookAt_obj.y;
@@ -99,15 +107,15 @@ void update_camera_unused_radial(Camera* camera) {
     camera->lookAt_obj.z += z3 * 0.5f;
 
     f20 = atan2(deltaX, deltaZ2, deltaX2, deltaZ);
-    if ((dist2D(deltaX, deltaZ2, deltaX2, deltaZ) < camera->auxBoomLength * 100 / CamLengthScale)) {
-        f20 = camera->trueRot.x;
+    if ((dist2D(deltaX, deltaZ2, deltaX2, deltaZ) < camera->params.radial.minRadius * 100 / CamLengthScale)) {
+        f20 = camera->curBoomYaw;
     } else {
-        camera->trueRot.x = f20;
+        camera->curBoomYaw = f20;
     }
-    camera->trueRot.y -= get_clamped_angle_diff(f20, camera->trueRot.y) / 10.0f;
-    f20 = camera->trueRot.y;
+    camera->targetBoomYaw -= get_clamped_angle_diff(f20, camera->targetBoomYaw) / 10.0f;
+    f20 = camera->targetBoomYaw;
 
-    boomYaw = DEG_TO_RAD(camera->curBoomYaw);
+    boomYaw = DEG_TO_RAD(camera->curBoomPitch);
     sinBoom = sin_rad(boomYaw);
     cosBoom = cos_rad(boomYaw);
 
@@ -143,6 +151,6 @@ void update_camera_unused_radial(Camera* camera) {
     deltaY = camera->lookAt_obj.y - camera->lookAt_eye.y;
     deltaZ2 = camera->lookAt_obj.z - camera->lookAt_eye.z;
 
-    camera->curBlendedYawNegated = -atan2(0.0f, 0.0f, deltaX, deltaZ2);
-    camera->curPitch = atan2(0.0f, 0.0f, deltaY, -sqrtf((deltaX * deltaX) + (deltaZ2 * deltaZ2)));
+    camera->lookAt_yaw = -atan2(0.0f, 0.0f, deltaX, deltaZ2);
+    camera->lookAt_pitch = atan2(0.0f, 0.0f, deltaY, -sqrtf((deltaX * deltaX) + (deltaZ2 * deltaZ2)));
 }

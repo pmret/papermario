@@ -63,7 +63,7 @@ void state_init_file_select(void) {
     hud_element_set_aux_cache(0, 0);
     hud_element_clear_cache();
     mdl_load_all_textures(NULL, 0, 0);
-    gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_MODE_6;
+    gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_NO_INTERP;
     gCameras[CAM_DEFAULT].needsInit = TRUE;
     gCameras[CAM_DEFAULT].nearClip = 16;
     gCameras[CAM_DEFAULT].farClip = 4096;
@@ -74,7 +74,7 @@ void state_init_file_select(void) {
     gCameras[CAM_HUD].flags |= CAMERA_FLAG_DISABLED;
     gCameras[CAM_DEFAULT].vfov = 25.0f;
     set_cam_viewport(CAM_DEFAULT, 12, 28, 296, 184);
-    gCameras[CAM_DEFAULT].auxBoomLength = 40;
+    gCameras[CAM_DEFAULT].params.basic.dist = 40;
     gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
     gCameras[CAM_DEFAULT].lookAt_eye.y = 1000.0f;
     gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
@@ -84,9 +84,9 @@ void state_init_file_select(void) {
     gCameras[CAM_DEFAULT].bgColor[2] = 0;
     gCameras[CAM_DEFAULT].lookAt_obj_target.x = 25.0f;
     gCameras[CAM_DEFAULT].lookAt_obj_target.y = 25.0f;
-    gCameras[CAM_DEFAULT].auxPitch = 0;
-    gCameras[CAM_DEFAULT].lookAt_dist = 100;
-    gCameras[CAM_DEFAULT].auxBoomPitch = 0;
+    gCameras[CAM_DEFAULT].params.basic.skipRecalc = FALSE;
+    gCameras[CAM_DEFAULT].params.basic.fovScale = 100;
+    gCameras[CAM_DEFAULT].params.basic.pitch = 0;
     gOverrideFlags |= GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS;
 }
 

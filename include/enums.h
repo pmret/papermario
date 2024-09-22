@@ -1810,15 +1810,15 @@ enum CamShakeModes {
 };
 
 // for use with SetBattleCamParam
-enum AuxCameraParams {
-    AUX_CAM_PARAM_1             = 1,
-    AUX_CAM_BOOM_LENGTH         = 2,
-    AUX_CAM_PARAM_3             = 3,
-    AUX_CAM_BOOM_PITCH          = 4,
-    AUX_CAM_BOOM_YAW            = 5,
-    AUX_CAM_BOOM_ZOFFSET        = 6,
-    AUX_CAM_PARAM_7             = 7,
-    AUX_CAM_ZOOM_PERCENT        = 8
+enum BasicCameraParams {
+    CAM_PARAM_SKIP_RECALC           = 1,
+    CAM_PARAM_BOOM_LENGTH           = 2,
+    CAM_PARAM_FOV_SCALE             = 3,
+    CAM_PARAM_BOOM_PITCH            = 4,
+    CAM_PARAM_BOOM_YAW              = 5,
+    CAM_PARAM_BOOM_Y_OFFSET         = 6,
+    CAM_PARAM_UNK_7                 = 7,
+    CAM_PARAM_ZOOM_PERCENT          = 8,
 };
 
 #include "item_enum.h"
@@ -4698,14 +4698,51 @@ enum CameraMoveFlags {
     CAMERA_MOVE_ACCEL_INTERP_Y      = 0x00000004,
 };
 
-enum CameraUpdateType {
-    CAM_UPDATE_MODE_INIT            = 0,
-    CAM_UPDATE_UNUSED_1             = 1,
-    CAM_UPDATE_MODE_2               = 2,
+enum CameraUpdateMode {
+    // simple camera based on lookAt_eye and lookAt_obj with no blending or interpolation
+    // control this camera by directly setting these positions
+    // has no other control parameters
+    CAM_UPDATE_MINIMAL              = 0,
+
+    // this camera uses a set of control parameters to calculate its target lookAt_obj and lookAt_eye positions,
+    // then interpolates current positions toward those targets, moving up to half the remaining distance each frame
+    // the ultimate target is given by lookAt_obj_target
+    // mostly used for CAM_HUD
+    CAM_UPDATE_INTERP_POS           = 2,
+
+    // this camera samples camera zones below its targetPos and derives control parameters from their settings,
+    // interpolating its control parameters when changing zones. these control parameters determine the camera
+    // position and orientation just like other camera modes.
+    // note that this code does NOT directly reference the player position in any manner, it is only concerned
+    // with the camera's targetPos, which must be assigned elsewhere.
+    // this is the camera used during world gameplay
     CAM_UPDATE_FROM_ZONE            = 3,
-    CAM_UPDATE_UNUSED_4             = 4,
-    CAM_UPDATE_UNUSED_5             = 5,
-    CAM_UPDATE_MODE_6               = 6,
+
+    // this camera uses a set of control parameters to calculate its lookAt_obj and lookAt_eye positions,
+    // which are only updated if skipRecalc = FALSE
+    // the ultimate target is given by lookAt_obj_target, with an offset given by targetPos (?!)
+    // in practice, this is used for CAM_BATTLE and CAM_TATTLE, with skipRecalc almost always set to FALSE
+    CAM_UPDATE_NO_INTERP            = 6,
+
+    // this camera tracks lookAt_obj_target in a circular region centered on targetPos. the camera does not update
+    // unless lookAt_obj_target is greater than a minimum distance from targetPos to prevent wild movements.
+    CAM_UPDATE_UNUSED_RADIAL        = 1,
+
+    // this camera tracks targetPos, clamped within the rectangular region given by +/- xLimit and +/- zLimit
+    // y-position is drawn from lookAt_obj_target
+    // does not use easing or interpolation
+    CAM_UPDATE_UNUSED_CONFINED      = 4,
+
+    // this camera tracks player position and adds basic 'leading' in the x-direction only
+    // camera yaw is fixed at zero and the lead direction is determined by player world yaw
+    // thus, this only works for '2D' style maps where left is -x and right is +x
+    CAM_UPDATE_UNUSED_LEADING       = 5,
+
+    // this mode is completely unused in vanilla; it doesn't even have a case in update_cameras
+    // seems to be based on CAM_UPDATE_NO_INTERP (the one used for battle cam)
+    // tracks a point 400 units ahead of player position in the z-direction and 60 units above
+    // defaults to a relatively short boom length and no pitch angle, resulting in a head-on direct view
+    // CAM_UPDATE_UNUSED_AHEAD,
 };
 
 enum CameraControlType {

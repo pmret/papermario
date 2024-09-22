@@ -695,13 +695,13 @@ void init_hud_element_list(void) {
 
 void hud_element_setup_cam(void) {
     set_cam_viewport(CAM_HUD, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
-    gCameras[CAM_HUD].updateMode = CAM_UPDATE_MODE_2;
+    gCameras[CAM_HUD].updateMode = CAM_UPDATE_INTERP_POS;
     gCameras[CAM_HUD].needsInit = TRUE;
-    gCameras[CAM_HUD].lookAt_dist = 15551;
+    gCameras[CAM_HUD].params.interp.dist = 15551;
     gCameras[CAM_HUD].nearClip = CAM_NEAR_CLIP;
-    gCameras[CAM_HUD].auxPitch = 0;
-    gCameras[CAM_HUD].auxBoomLength = 0;
-    gCameras[CAM_HUD].auxBoomPitch = 0;
+    gCameras[CAM_HUD].params.interp.pitch = 0;
+    gCameras[CAM_HUD].params.interp.yaw = 0;
+    gCameras[CAM_HUD].params.interp.offsetY = 0;
     gCameras[CAM_HUD].lookAt_obj_target.z = 0;
     gCameras[CAM_HUD].farClip = 0x4000;
     gCameras[CAM_HUD].bgColor[0] = 0;

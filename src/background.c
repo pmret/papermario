@@ -190,7 +190,7 @@ void appendGfx_background_texture(void) {
         }
     }
 
-    theta = clamp_angle(-cam->trueRot.x);
+    theta = clamp_angle(-cam->curBoomYaw);
     sinTheta = sin_deg(theta);
     cosTheta = cos_deg(theta);
     f5 = cosTheta * cam->lookAt_obj.x - sinTheta * cam->lookAt_obj.z + cam->leadAmount;

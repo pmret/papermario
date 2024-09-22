@@ -535,7 +535,7 @@ EvtScript N(EVS_Move_Tattle) = {
     Call(EnableBattleStatusBar, FALSE)
     Call(SetCamEnabled, CAM_TATTLE, TRUE)
     Call(SetCamNoDraw, CAM_TATTLE, FALSE)
-    Call(SetCamPerspective, CAM_TATTLE, CAM_UPDATE_MODE_6, 25, 16, 1024)
+    Call(SetCamPerspective, CAM_TATTLE, CAM_UPDATE_NO_INTERP, 25, 16, 1024)
     Call(SetCamViewport, CAM_TATTLE, 37, 95, 138, 99)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)

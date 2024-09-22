@@ -769,14 +769,46 @@ typedef struct Camera {
     /* 0x014 */ s16 farClip;
     /* 0x016 */ char unk_16[2];
     /* 0x018 */ f32 vfov;
-    /* 0x01C */ s16 auxPitch;
-    /* 0x01E */ s16 auxBoomLength;
-    /* 0x020 */ s16 lookAt_dist;
-    /* 0x022 */ s16 auxBoomPitch;
-    /* 0x024 */ s16 auxBoomYaw;
-    /* 0x026 */ s16 auxBoomZOffset;
-    /* 0x028 */ s16 unk_28;
-    /* 0x02A */ s16 zoomPercent;
+                union {
+                    struct {
+    /* 0x01C */         s16 camParam1;
+    /* 0x01E */         s16 camParam2;
+    /* 0x020 */         s16 camParam3;
+    /* 0x022 */         s16 camParam4;
+    /* 0x024 */         s16 camParam5;
+    /* 0x026 */         s16 camParam6;
+    /* 0x028 */         s16 camParam7;
+    /* 0x02A */         s16 zoomPercent;
+                    } world;
+                    struct {
+    /* 0x01C */         b16 skipRecalc;
+    /* 0x01E */         s16 dist;
+    /* 0x020 */         s16 fovScale; // 100 --> vfov = 25, scales as 1/x so larger values mean smaller vfov
+    /* 0x022 */         s16 pitch;
+    /* 0x024 */         s16 yaw;
+    /* 0x026 */         s16 offsetY;
+    /* 0x028 */         s16 camParam7;
+    /* 0x02A */         s16 zoomPercent;
+                    } basic;
+                    struct {
+    /* 0x01C */         s16 pitch;
+    /* 0x01E */         s16 yaw;
+    /* 0x020 */         s16 dist;
+    /* 0x022 */         s16 offsetY;
+                    } interp;
+                    struct {
+    /* 0x01C */         s16 pitch;
+    /* 0x01E */         s16 minRadius;
+    /* 0x020 */         s16 dist;
+    /* 0x022 */         s16 offsetY;
+                    } radial;
+                    struct {
+    /* 0x01C */         s16 xLimit;
+    /* 0x01E */         s16 zLimit;
+    /* 0x020 */         s16 dist;
+    /* 0x022 */         s16 offsetY;
+                    } confined;
+                } params;
     /* 0x02C */ s16 bgColor[3];
     /* 0x032 */ Vec3s targetScreenCoords; // screen coords corresponding to targetPos
     /* 0x038 */ u16 perspNorm;
@@ -787,13 +819,15 @@ typedef struct Camera {
     /* 0x060 */ Vec3f targetPos; // target for camera rig, often but not necessarily the player position
     /* 0x06C */ f32 curYaw;
     /* 0x070 */ f32 interpYaw; // no camera mode actually uses this for interpolation
-    /* 0x074 */ f32 curBoomYaw;
+    /* 0x074 */ f32 curBoomPitch;
     /* 0x078 */ f32 curBoomLength;
-    /* 0x07C */ f32 curYOffset;
+    /* 0x07C */ f32 targetOffsetY;
     /* 0x080 */ char unk_80[4];
-    /* 0x084 */ Vec3f trueRot;
-    /* 0x090 */ f32 curBlendedYawNegated;
-    /* 0x094 */ f32 curPitch;
+    /* 0x084 */ f32 curBoomYaw;
+    /* 0x088 */ f32 targetBoomYaw; // only used by CAM_UPDATE_UNUSED_RADIAL
+    /* 0x08C */ f32 unk_8C;
+    /* 0x090 */ f32 lookAt_yaw;
+    /* 0x094 */ f32 lookAt_pitch;
     /* 0x098 */ f32 unk_98;
     /* 0x09C */ f32 unk_9C;
     /* 0x0A0 */ Vp vp;

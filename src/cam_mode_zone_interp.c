@@ -572,6 +572,16 @@ void update_camera_from_controller(
     }
 }
 
+// implements CAM_UPDATE_FROM_ZONE
+// this camera samples camera zones below its targetPos and derives control parameters from their settings,
+// interpolating its control parameters when changing zones. these control parameters determine the camera
+// position and orientation just like other camera modes.
+// note that this code does NOT directly reference the player position in any manner, it is only concerned
+// with the camera's targetPos, which must be assigned elsewhere.
+// this is the camera used during world gameplay
+//
+// control parameters:
+// zoomPercent -- boom length is adjusted by this factor, with 100 being no change, 50 being half distance, etc
 void update_camera_zone_interp(Camera* camera) {
     CameraControlSettings* currentController;
     CameraControlSettings* cs;
@@ -867,6 +877,8 @@ void update_camera_zone_interp(Camera* camera) {
     }
 
     if (camera->interpAlpha < 1.0) {
+        // this parameter controls whether the easing will be cosine in/out or quadratic out
+        // in practice, only 0 and 0.5 are ever used, and 0.5 is extremely rare
         panPhase = camera->interpEasingParameter;
         panRad = panPhase * PI_D;
         temp_f24 = 2.0f / (cos_rad(panRad) + 1.0f);
@@ -894,7 +906,7 @@ void update_camera_zone_interp(Camera* camera) {
     CurrentCamRig.targetPos.x = (camera->prevRig.targetPos.x * interpAlphaInv) + (camera->nextRig.targetPos.x * interpAlpha);
     CurrentCamRig.targetPos.y = (camera->prevRig.targetPos.y * interpAlphaInv) + (camera->nextRig.targetPos.y * interpAlpha);
     CurrentCamRig.targetPos.z = (camera->prevRig.targetPos.z * interpAlphaInv) + (camera->nextRig.targetPos.z * interpAlpha);
-    CurrentCamRig.boomLength *= camera->zoomPercent;
+    CurrentCamRig.boomLength *= camera->params.world.zoomPercent;
     CurrentCamRig.boomLength *= 0.01;
 
     func_80030450(camera);
@@ -927,12 +939,12 @@ void update_camera_zone_interp(Camera* camera) {
     camera->lookAt_obj.x = camera->lookAt_eye.x + (temp_f26 * temp_f4_4);
     camera->lookAt_obj.z = camera->lookAt_eye.z + (temp_f24_2 * temp_f4_4);
     camera->curYaw = CurrentCamRig.boomYaw + D_800A08E0;
-    camera->trueRot.x = camera->curYaw;
+    camera->curBoomYaw = camera->curYaw;
     camera->curBoomLength = CurrentCamRig.boomLength;
-    camera->curBlendedYawNegated = -CurrentCamRig.boomYaw;
-    camera->curPitch = -CurrentCamRig.boomPitch - CurrentCamRig.viewPitch;
+    camera->lookAt_yaw = -CurrentCamRig.boomYaw;
+    camera->lookAt_pitch = -CurrentCamRig.boomPitch - CurrentCamRig.viewPitch;
     camera->lookAt_obj_target.x = camera->lookAt_obj.x;
     camera->lookAt_obj_target.y = camera->lookAt_obj.y;
     camera->lookAt_obj_target.z = camera->lookAt_obj.z;
-    camera->curYOffset = 0.0f;
+    camera->targetOffsetY = 0.0f;
 }

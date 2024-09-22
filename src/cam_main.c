@@ -34,22 +34,22 @@ void update_cameras(void) {
             case CAM_UPDATE_FROM_ZONE:
                 update_camera_zone_interp(cam);
                 break;
-            case CAM_UPDATE_MODE_INIT:
+            case CAM_UPDATE_MINIMAL:
                 update_camera_minimal(cam);
                 break;
-            case CAM_UPDATE_UNUSED_1:
+            case CAM_UPDATE_UNUSED_RADIAL:
                 update_camera_unused_radial(cam);
                 break;
-            case CAM_UPDATE_MODE_2:
+            case CAM_UPDATE_INTERP_POS:
                 update_camera_interp_pos(cam);
                 break;
-            case CAM_UPDATE_UNUSED_4:
+            case CAM_UPDATE_UNUSED_CONFINED:
                 update_camera_unused_confined(cam);
                 break;
-            case CAM_UPDATE_UNUSED_5:
+            case CAM_UPDATE_UNUSED_LEADING:
                 update_camera_unused_leading(cam);
                 break;
-            case CAM_UPDATE_MODE_6:
+            case CAM_UPDATE_NO_INTERP:
             default:
                 update_camera_no_interp(cam);
                 break;
@@ -191,7 +191,7 @@ void render_frame(s32 isSecondPass) {
 
         camera->mtxBillboard = &gDisplayContext->matrixStack[gMatrixListPos];
         matrixListPos = gMatrixListPos++;
-        guRotate(&gDisplayContext->matrixStack[matrixListPos], -camera->trueRot.x, 0.0f, 1.0f, 0.0f);
+        guRotate(&gDisplayContext->matrixStack[matrixListPos], -camera->curBoomYaw, 0.0f, 1.0f, 0.0f);
         camera->vpAlt.vp.vtrans[0] = camera->vp.vp.vtrans[0] + gGameStatusPtr->altViewportOffset.x;
         camera->vpAlt.vp.vtrans[1] = camera->vp.vp.vtrans[1] + gGameStatusPtr->altViewportOffset.y;
 
@@ -246,7 +246,7 @@ void create_cameras(void) {
     }
 
     camDataPtr->flags = CAMERA_FLAG_DISABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
+    camDataPtr->updateMode = CAM_UPDATE_MINIMAL;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 0;
@@ -257,7 +257,7 @@ void create_cameras(void) {
     initialize_next_camera(camDataPtr);
 
     camDataPtr->flags = CAMERA_FLAG_DISABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
+    camDataPtr->updateMode = CAM_UPDATE_MINIMAL;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 160;
@@ -268,7 +268,7 @@ void create_cameras(void) {
     initialize_next_camera(camDataPtr);
 
     camDataPtr->flags = CAMERA_FLAG_DISABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
+    camDataPtr->updateMode = CAM_UPDATE_MINIMAL;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 0;
@@ -279,7 +279,7 @@ void create_cameras(void) {
     initialize_next_camera(camDataPtr);
 
     camDataPtr->flags = CAMERA_FLAG_DISABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
+    camDataPtr->updateMode = CAM_UPDATE_MINIMAL;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 160;
@@ -300,7 +300,7 @@ void create_cameras_unused(void) {
     }
 
     camDataPtr->flags = CAMERA_FLAG_DISABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
+    camDataPtr->updateMode = CAM_UPDATE_MINIMAL;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 0;
@@ -311,7 +311,7 @@ void create_cameras_unused(void) {
     initialize_next_camera(camDataPtr);
 
     camDataPtr->flags = CAMERA_FLAG_DISABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
+    camDataPtr->updateMode = CAM_UPDATE_MINIMAL;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 160;
@@ -322,7 +322,7 @@ void create_cameras_unused(void) {
     initialize_next_camera(camDataPtr);
 
     camDataPtr->flags = CAMERA_FLAG_DISABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
+    camDataPtr->updateMode = CAM_UPDATE_MINIMAL;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 0;
@@ -333,7 +333,7 @@ void create_cameras_unused(void) {
     initialize_next_camera(camDataPtr);
 
     camDataPtr->flags = CAMERA_FLAG_DISABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
+    camDataPtr->updateMode = CAM_UPDATE_MINIMAL;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 160;
@@ -368,16 +368,16 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->lookAt_obj.z = -100.0f;
     camera->curYaw = 0;
     camera->curBoomLength = 0;
-    camera->curYOffset = 0;
-    camera->trueRot.x = 0.0f;
-    camera->trueRot.y = 0.0f;
-    camera->trueRot.z = 0.0f;
+    camera->targetOffsetY = 0;
+    camera->curBoomYaw = 0.0f;
+    camera->targetBoomYaw = 0.0f;
+    camera->unk_8C = 0.0f;
     camera->updateMode = initData->updateMode;
     camera->needsInit = TRUE;
     camera->nearClip = initData->nearClip;
     camera->farClip = initData->farClip;
     camera->vfov = initData->vfov;
-    camera->zoomPercent = 100;
+    camera->params.world.zoomPercent = 100;
     set_cam_viewport(camID, initData->viewStartX, initData->viewStartY, initData->viewWidth, initData->viewHeight);
     camera->unk_212 = -1;
     camera->needsInitialConstrainDir = TRUE;
