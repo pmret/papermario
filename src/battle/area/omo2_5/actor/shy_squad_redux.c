@@ -1103,7 +1103,7 @@ EvtScript N(EVS_Attack_Swarm) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-    Call(SetBattleCamZoom, 300)
+    Call(SetBattleCamDist, 300)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 30)
     Set(LVar0, PRT_MEMBER_01)

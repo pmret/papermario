@@ -6,7 +6,7 @@
 #include "model.h"
 #include "sprite.h"
 
-EvtScript D_80293820 = {
+EvtScript EVS_ShakeBattleCamPitch = {
     Wait(LVar0)
     Loop(4)
         Call(SetBattleCamParam, 4, 11)
@@ -1054,8 +1054,8 @@ void reset_actor_turn_info(void) {
     }
 }
 
-void func_80263CC4(s32 arg0) {
-    start_script(&D_80293820, EVT_PRIORITY_A, 0)->varTable[0] = arg0;
+void shake_battle_cam_pitch(s32 initialDelay) {
+    start_script(&EVS_ShakeBattleCamPitch, EVT_PRIORITY_A, 0)->varTable[0] = initialDelay;
 }
 
 void set_actor_anim(s32 actorID, s32 partID, AnimID animID) {

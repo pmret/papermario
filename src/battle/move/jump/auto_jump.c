@@ -29,7 +29,7 @@ EvtScript N(EVS_UseMove) = {
 };
 
 EvtScript N(EVS_UseMove_ImplA) = {
-    ExecWait(N(EVS_JumpSupport_InitCommand))
+    ExecWait(N(EVS_JumpSupport_ApproachAndJump))
     Call(GetActionCommandMode, LVar0)
     IfEq(LVar0, 2)
         Call(SetActionCommandMode, 3)
@@ -80,18 +80,18 @@ EvtScript N(EVS_UseMove_ImplA) = {
     Call(action_command_jump_start, 24, 3)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_SpinFall)
-    Call(func_80274A18, 24, 3)
+    Call(PlayerBasicJumpToGoal, 24, 3)
     Wait(1)
     Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
     Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT | BS_FLAGS1_NO_RATING)
     Call(SetActionResult, LVarF)
-    ExecWait(N(EVS_JumpSupport_E))
+    ExecWait(N(EVS_JumpSupport_Rebound))
     Return
     End
 };
 
 EvtScript N(EVS_UseMove_ImplB) = {
-    ExecWait(N(EVS_JumpSupport_InitCommand))
+    ExecWait(N(EVS_JumpSupport_ApproachAndJump))
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     IfEq(LVar0, HIT_RESULT_MISS)
         ExecWait(N(EVS_JumpSupport_Miss))
@@ -132,21 +132,21 @@ EvtScript N(EVS_UseMove_ImplB) = {
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
-    Call(func_802752AC, 20, 4)
+    Call(PlayerSuperJumpToGoal, 20, 4)
     Wait(7)
-    Call(func_802752AC, 3, 5)
+    Call(PlayerSuperJumpToGoal, 3, 5)
     Call(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     Wait(1)
     Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
     Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 2, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT | BS_FLAGS1_NO_RATING)
     Call(SetActionResult, LVarF)
-    ExecWait(N(EVS_JumpSupport_E))
+    ExecWait(N(EVS_JumpSupport_Rebound))
     Return
     End
 };
 
 EvtScript N(EVS_UseMove_ImplC) = {
-    ExecWait(N(EVS_JumpSupport_InitCommand))
+    ExecWait(N(EVS_JumpSupport_ApproachAndJump))
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     IfEq(LVar0, HIT_RESULT_MISS)
         ExecWait(N(EVS_JumpSupport_Miss))
@@ -187,13 +187,13 @@ EvtScript N(EVS_UseMove_ImplC) = {
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_SpinFall)
-    Call(func_80275F00, 25, 4)
+    Call(PlayerUltraJumpToGoal, 25, 4)
     Call(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     Wait(1)
     Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
     Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 3, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT | BS_FLAGS1_NO_RATING)
     Call(SetActionResult, LVarF)
-    ExecWait(N(EVS_JumpSupport_E))
+    ExecWait(N(EVS_JumpSupport_Rebound))
     Return
     End
 };

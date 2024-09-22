@@ -1800,7 +1800,7 @@ enum Cams {
     CAM_DEFAULT      = 0,
     CAM_BATTLE       = 1,
     CAM_TATTLE       = 2,
-    CAM_3            = 3,
+    CAM_HUD          = 3,
 };
 
 enum CamShakeModes {

@@ -468,7 +468,7 @@ EvtScript N(EVS_TakeTurn) = {
     Add(LVar1, 50)
     Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    Call(SetBattleCamZoom, 325)
+    Call(SetBattleCamDist, 325)
     Call(MoveBattleCamOver, 30)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim02)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))

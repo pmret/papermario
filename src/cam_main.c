@@ -98,13 +98,13 @@ void render_frame(s32 isSecondPass) {
     }
 
     if (isSecondPass) {
-        camID = CAM_3;
+        camID = CAM_HUD;
     } else {
         camID = CAM_DEFAULT;
     }
 
-    // first pass:  loop uses camIDs from CAM_DEFAULT to CAM_3 - 1
-    // second pass: loop only uses CAM_3
+    // first pass:  loop uses camIDs from CAM_DEFAULT to CAM_HUD - 1
+    // second pass: loop only uses CAM_HUD
     isSecondPass = 1 - isSecondPass;
 
     for (; camID < ARRAY_COUNT(gCameras) - isSecondPass; camID++) {
@@ -196,7 +196,7 @@ void render_frame(s32 isSecondPass) {
         camera->vpAlt.vp.vtrans[1] = camera->vp.vp.vtrans[1] + gGameStatusPtr->altViewportOffset.y;
 
         if (!(camera->flags & CAMERA_FLAG_ORTHO)) {
-            if (gCurrentCamID != CAM_3) {
+            if (gCurrentCamID != CAM_HUD) {
                 if (!(camera->flags & CAMERA_FLAG_RENDER_ENTITIES)) {
                     render_entities();
                 }

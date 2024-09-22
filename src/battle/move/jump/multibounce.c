@@ -36,12 +36,12 @@ EvtScript N(EVS_UseMove_Basic) = {
     Call(action_command_jump_init)
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
     ExecWait(N(EVS_JumpSupport_Approach))
-    ExecWait(N(EVS_JumpSupport_B))
+    ExecWait(N(EVS_JumpSupport_CalcJumpTime))
     Call(action_command_jump_start, LVarA, 1)
     Call(UseBattleCamPreset, BTL_CAM_PRESET_34)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
-    Call(func_80274A18, LVarA, 0)
+    Call(PlayerBasicJumpToGoal, LVarA, 0)
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     IfEq(LVar0, HIT_RESULT_MISS)
         ExecWait(N(EVS_JumpSupport_Miss))
@@ -72,7 +72,7 @@ EvtScript N(EVS_UseMove_Basic) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             IfEq(LFlag0, TRUE)
-                ExecWait(N(EVS_JumpSupport_E))
+                ExecWait(N(EVS_JumpSupport_Rebound))
                 Return
             EndIf
             ExecWait(N(EVS_JumpSupport_G))
@@ -81,7 +81,7 @@ EvtScript N(EVS_UseMove_Basic) = {
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
             IfEq(LFlag0, TRUE)
-                ExecWait(N(EVS_JumpSupport_E))
+                ExecWait(N(EVS_JumpSupport_Rebound))
                 Return
             EndIf
         EndCaseGroup
@@ -104,15 +104,15 @@ EvtScript N(EVS_UseMove_Basic) = {
     EndIf
     Call(ChooseNextTarget, ITER_NEXT, LVar0)
     Call(SetGoalToTarget, ACTOR_PLAYER)
-    ExecWait(N(EVS_JumpSupport_B))
+    ExecWait(N(EVS_JumpSupport_CalcJumpTime))
     Add(LVarA, 5)
     Call(action_command_jump_start, LVarA, 3)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_SpinFall)
     IfEq(LVarF, 1)
-        Call(func_80274A18, LVarA, 3)
+        Call(PlayerBasicJumpToGoal, LVarA, 3)
     Else
-        Call(func_80274A18, LVarA, 4)
+        Call(PlayerBasicJumpToGoal, LVarA, 4)
     EndIf
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     IfEq(LVar0, HIT_RESULT_MISS)
@@ -157,7 +157,7 @@ EvtScript N(EVS_UseMove_Basic) = {
         CaseOrEq(FALSE)
         CaseOrEq(2)
             IfEq(LFlag0, TRUE)
-                ExecWait(N(EVS_JumpSupport_E))
+                ExecWait(N(EVS_JumpSupport_Rebound))
                 Return
             EndIf
             ExecWait(N(EVS_JumpSupport_G))
@@ -166,7 +166,7 @@ EvtScript N(EVS_UseMove_Basic) = {
         CaseOrEq(TRUE)
         CaseOrEq(3)
             IfEq(LFlag0, TRUE)
-                ExecWait(N(EVS_JumpSupport_E))
+                ExecWait(N(EVS_JumpSupport_Rebound))
                 Return
             EndIf
         EndCaseGroup
@@ -187,12 +187,12 @@ EvtScript N(EVS_UseMove_Super) = {
     Call(action_command_jump_init)
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
     ExecWait(N(EVS_JumpSupport_Approach))
-    ExecWait(N(EVS_JumpSupport_B))
+    ExecWait(N(EVS_JumpSupport_CalcJumpTime))
     Call(action_command_jump_start, LVarA, 1)
     Call(UseBattleCamPreset, BTL_CAM_PRESET_34)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
-    Call(func_80274A18, LVarA, 0)
+    Call(PlayerBasicJumpToGoal, LVarA, 0)
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     IfEq(LVar0, HIT_RESULT_MISS)
         ExecWait(N(EVS_JumpSupport_Miss))
@@ -223,7 +223,7 @@ EvtScript N(EVS_UseMove_Super) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             IfEq(LFlag0, TRUE)
-                ExecWait(N(EVS_JumpSupport_E))
+                ExecWait(N(EVS_JumpSupport_Rebound))
                 Return
             EndIf
             ExecWait(N(EVS_JumpSupport_G))
@@ -232,7 +232,7 @@ EvtScript N(EVS_UseMove_Super) = {
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
             IfEq(LFlag0, TRUE)
-                ExecWait(N(EVS_JumpSupport_E))
+                ExecWait(N(EVS_JumpSupport_Rebound))
                 Return
             EndIf
         EndCaseGroup
@@ -261,13 +261,13 @@ EvtScript N(EVS_UseMove_Super) = {
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
     Call(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     IfEq(LVarF, 1)
-        Call(func_802752AC, 20, 3)
+        Call(PlayerSuperJumpToGoal, 20, 3)
         Wait(7)
-        Call(func_802752AC, 3, 6)
+        Call(PlayerSuperJumpToGoal, 3, 6)
     Else
-        Call(func_802752AC, 20, 4)
+        Call(PlayerSuperJumpToGoal, 20, 4)
         Wait(7)
-        Call(func_802752AC, 3, 5)
+        Call(PlayerSuperJumpToGoal, 3, 5)
     EndIf
     Call(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
@@ -313,7 +313,7 @@ EvtScript N(EVS_UseMove_Super) = {
         CaseOrEq(FALSE)
         CaseOrEq(2)
             IfEq(LFlag0, TRUE)
-                ExecWait(N(EVS_JumpSupport_E))
+                ExecWait(N(EVS_JumpSupport_Rebound))
                 Return
             EndIf
             ExecWait(N(EVS_JumpSupport_G))
@@ -322,7 +322,7 @@ EvtScript N(EVS_UseMove_Super) = {
         CaseOrEq(TRUE)
         CaseOrEq(3)
             IfEq(LFlag0, TRUE)
-                ExecWait(N(EVS_JumpSupport_E))
+                ExecWait(N(EVS_JumpSupport_Rebound))
                 Return
             EndIf
         EndCaseGroup
@@ -343,12 +343,12 @@ EvtScript N(EVS_UseMove_Ultra) = {
     Call(action_command_jump_init)
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
     ExecWait(N(EVS_JumpSupport_Approach))
-    ExecWait(N(EVS_JumpSupport_B))
+    ExecWait(N(EVS_JumpSupport_CalcJumpTime))
     Call(action_command_jump_start, LVarA, 1)
     Call(UseBattleCamPreset, BTL_CAM_PRESET_34)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
-    Call(func_80274A18, LVarA, 0)
+    Call(PlayerBasicJumpToGoal, LVarA, 0)
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     IfEq(LVar0, HIT_RESULT_MISS)
         ExecWait(N(EVS_JumpSupport_Miss))
@@ -379,7 +379,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             IfEq(LFlag0, TRUE)
-                ExecWait(N(EVS_JumpSupport_E))
+                ExecWait(N(EVS_JumpSupport_Rebound))
                 Return
             EndIf
             ExecWait(N(EVS_JumpSupport_G))
@@ -388,7 +388,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
             IfEq(LFlag0, TRUE)
-                ExecWait(N(EVS_JumpSupport_E))
+                ExecWait(N(EVS_JumpSupport_Rebound))
                 Return
             EndIf
         EndCaseGroup
@@ -415,9 +415,9 @@ EvtScript N(EVS_UseMove_Ultra) = {
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_SpinFall)
     IfEq(LVarF, 1)
-        Call(func_80275F00, 25, 2)
+        Call(PlayerUltraJumpToGoal, 25, 2)
     Else
-        Call(func_80275F00, 25, 4)
+        Call(PlayerUltraJumpToGoal, 25, 4)
     EndIf
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     IfEq(LVar0, HIT_RESULT_MISS)
@@ -462,7 +462,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
         CaseOrEq(FALSE)
         CaseOrEq(2)
             IfEq(LFlag0, TRUE)
-                ExecWait(N(EVS_JumpSupport_E))
+                ExecWait(N(EVS_JumpSupport_Rebound))
                 Return
             EndIf
             ExecWait(N(EVS_JumpSupport_G))
@@ -471,7 +471,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
         CaseOrEq(TRUE)
         CaseOrEq(3)
             IfEq(LFlag0, TRUE)
-                ExecWait(N(EVS_JumpSupport_E))
+                ExecWait(N(EVS_JumpSupport_Rebound))
                 Return
             EndIf
         EndCaseGroup

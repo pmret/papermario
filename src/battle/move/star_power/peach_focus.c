@@ -45,7 +45,7 @@ EvtScript N(EVS_UsePower) = {
     Call(SetActorYaw, ACTOR_PLAYER, 180)
     Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
     Call(SetBattleCamTarget, -105, -7, 0)
-    Call(SetBattleCamZoom, 213)
+    Call(SetBattleCamDist, 213)
     Call(MoveBattleCamOver, 60)
     Wait(10)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach3_Pray)

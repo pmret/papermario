@@ -886,7 +886,7 @@ void btl_cam_set_zoffset(s16);
 void btl_cam_target_actor(s32);
 void btl_cam_set_zoom(s16);
 void btl_cam_move(s16);
-void func_8024E60C(void);
+void btl_cam_disable_clamp_x(void);
 
 void initialize_battle(void);
 

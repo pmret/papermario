@@ -1148,7 +1148,7 @@ API_CALLABLE(GetMenuSelection) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80273444) {
+API_CALLABLE(PlayerHopToGoal) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* player = battleStatus->playerActor;
@@ -1782,7 +1782,7 @@ API_CALLABLE(ForceDisablePlayerBlurImmediately) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80274A18) {
+API_CALLABLE(PlayerBasicJumpToGoal) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* player = battleStatus->playerActor;
@@ -1946,7 +1946,7 @@ API_CALLABLE(func_80274A18) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(func_802752AC) {
+API_CALLABLE(PlayerSuperJumpToGoal) {
     Bytecode* args = script->ptrReadPos;
     Actor* player = gBattleStatus.playerActor;
     ActorState* playerState = &player->state;
@@ -2188,7 +2188,7 @@ API_CALLABLE(func_802752AC) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(func_80275F00) {
+API_CALLABLE(PlayerUltraJumpToGoal) {
     Bytecode* args = script->ptrReadPos;
     Actor* player = gBattleStatus.playerActor;
     ActorState* playerState = &player->state;

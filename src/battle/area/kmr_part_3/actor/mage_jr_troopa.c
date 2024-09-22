@@ -217,8 +217,8 @@ EvtScript N(EVS_Cam_FocusOnJrTroopa) = {
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(UseBattleCamPreset, BTL_CAM_PRESET_07)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamOffsetZ, 38)
-    Call(SetBattleCamZoom, 256)
+    Call(SetBattleCamOffsetY, 38)
+    Call(SetBattleCamDist, 256)
     Call(MoveBattleCamOver, 15)
     Return
     End
@@ -590,8 +590,8 @@ EvtScript N(EVS_JrTroopa_Death) = {
     Call(DropStarPoints, ACTOR_SELF)
     Call(SetActorYaw, ACTOR_SELF, 0)
     Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
-    Call(SetBattleCamZoom, 260)
-    Call(SetBattleCamOffsetZ, 15)
+    Call(SetBattleCamDist, 260)
+    Call(SetBattleCamOffsetY, 15)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 30)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_KNOCKOUT_CHIRPING)

@@ -37,10 +37,10 @@ EvtScript N(EVS_UseItem) = {
     PlayEffect(EFFECT_FRIGHT_JAR, 0, LVar0, LVar1, LVar2, Float(1.5), 60, 0)
     Wait(20)
     Loop(4)
-        Call(AddBattleCamZoom, -100)
+        Call(AddBattleCamDist, -100)
         Call(MoveBattleCamOver, 2)
         Wait(2)
-        Call(AddBattleCamZoom, 100)
+        Call(AddBattleCamDist, 100)
         Call(MoveBattleCamOver, 2)
         Wait(2)
     EndLoop

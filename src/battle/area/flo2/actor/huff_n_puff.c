@@ -1012,8 +1012,8 @@ EvtScript N(EVS_Dialogue_PummelPermission) = {
     Label(0)
     Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
     Call(BattleCamTargetActor, LVar0)
-    Call(SetBattleCamZoom, 300)
-    Call(SetBattleCamOffsetZ, -10)
+    Call(SetBattleCamDist, 300)
+    Call(SetBattleCamOffsetY, -10)
     Call(MoveBattleCamOver, 30)
     Wait(30)
     Call(UseIdleAnimation, LVar0, FALSE)
@@ -1030,8 +1030,8 @@ EvtScript N(EVS_Dialogue_PummelPermission) = {
     Label(1)
     Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamZoom, 180)
-    Call(SetBattleCamOffsetZ, -10)
+    Call(SetBattleCamDist, 180)
+    Call(SetBattleCamOffsetY, -10)
     Call(MoveBattleCamOver, 30)
     Wait(30)
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -1050,8 +1050,8 @@ EvtScript N(EVS_Dialogue_FullPower) = {
     UseArray(N(RuffPuffDataBuffer))
     Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamZoom, 180)
-    Call(SetBattleCamOffsetZ, -10)
+    Call(SetBattleCamDist, 180)
+    Call(SetBattleCamOffsetY, -10)
     Call(MoveBattleCamOver, 30)
     Wait(30)
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -1076,8 +1076,8 @@ EvtScript N(EVS_Dialogue_FullPower) = {
     // found a Tuff Puff to speak
     Label(0)
     Call(BattleCamTargetActor, LVar0)
-    Call(SetBattleCamZoom, 300)
-    Call(SetBattleCamOffsetZ, -10)
+    Call(SetBattleCamDist, 300)
+    Call(SetBattleCamOffsetY, -10)
     Call(MoveBattleCamOver, 30)
     Wait(30)
     Call(GetActorPos, LVar0, LVar1, LVar2, LVar3)
@@ -1120,8 +1120,8 @@ EvtScript N(EVS_Dialogue_PraiseHuff) = {
     UseArray(N(RuffPuffDataBuffer))
     Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamZoom, 180)
-    Call(SetBattleCamOffsetZ, -10)
+    Call(SetBattleCamDist, 180)
+    Call(SetBattleCamOffsetY, -10)
     Call(MoveBattleCamOver, 30)
     Wait(30)
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -1146,8 +1146,8 @@ EvtScript N(EVS_Dialogue_PraiseHuff) = {
     // found a Tuff Puff to speak
     Label(0)
     Call(BattleCamTargetActor, LVar0)
-    Call(SetBattleCamZoom, 300)
-    Call(SetBattleCamOffsetZ, -10)
+    Call(SetBattleCamDist, 300)
+    Call(SetBattleCamOffsetY, -10)
     Call(MoveBattleCamOver, 30)
     Wait(30)
     Call(GetActorPos, LVar0, LVar1, LVar2, LVar3)
@@ -1189,8 +1189,8 @@ EvtScript N(EVS_Dialogue_Concerned) = {
     UseArray(N(RuffPuffDataBuffer))
     Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamZoom, 180)
-    Call(SetBattleCamOffsetZ, -10)
+    Call(SetBattleCamDist, 180)
+    Call(SetBattleCamOffsetY, -10)
     Call(MoveBattleCamOver, 30)
     Wait(30)
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -1215,8 +1215,8 @@ EvtScript N(EVS_Dialogue_Concerned) = {
     // found a Tuff Puff to speak
     Label(0)
     Call(BattleCamTargetActor, LVar0)
-    Call(SetBattleCamZoom, 300)
-    Call(SetBattleCamOffsetZ, -10)
+    Call(SetBattleCamDist, 300)
+    Call(SetBattleCamOffsetY, -10)
     Call(MoveBattleCamOver, 30)
     Wait(30)
     Call(UseIdleAnimation, LVar0, FALSE)
@@ -1231,8 +1231,8 @@ EvtScript N(EVS_Dialogue_Concerned) = {
     Label(1)
     Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamZoom, 180)
-    Call(SetBattleCamOffsetZ, -10)
+    Call(SetBattleCamDist, 180)
+    Call(SetBattleCamOffsetY, -10)
     Call(MoveBattleCamOver, 30)
     Wait(30)
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -1371,8 +1371,8 @@ EvtScript N(EVS_Attack_BodySlam) = {
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-    Call(AddBattleCamZoom, -200)
-    Call(SetBattleCamOffsetZ, -30)
+    Call(AddBattleCamDist, -200)
+    Call(SetBattleCamOffsetY, -30)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
@@ -1541,7 +1541,7 @@ EvtScript N(EVS_RuffPuff_Inhale) = {
         #define HNP_LOAD_SUCTION_PATH(idx) \
             CaseEq(idx) \
                 Call(LoadPath, 40, Ref(N(SuctionPaths)[idx]), 3, EASING_QUADRATIC_IN)
-        
+
         // select the suction path for this Tuff Puff
         FOR_CHILDREN_ORDERED(HNP_LOAD_SUCTION_PATH)
 
@@ -1724,8 +1724,8 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Sub(LVar0, 20)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    Call(SetBattleCamZoom, 300)
-    Call(SetBattleCamOffsetZ, 20)
+    Call(SetBattleCamDist, 300)
+    Call(SetBattleCamOffsetY, 20)
     Call(MoveBattleCamOver, 180)
     Wait(90)
     Call(StopSound, SOUND_HUFF_N_PUFF_INHALE)
@@ -1995,8 +1995,8 @@ EvtScript N(EVS_Move_ChargeForGround) = {
     Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    Call(SetBattleCamZoom, 400)
-    Call(SetBattleCamOffsetZ, 5)
+    Call(SetBattleCamDist, 400)
+    Call(SetBattleCamOffsetY, 5)
     Call(MoveBattleCamOver, 60)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim11)
     Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim12)
@@ -2030,8 +2030,8 @@ EvtScript N(EVS_Attack_GroundLightning) = {
     Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    Call(SetBattleCamZoom, 400)
-    Call(SetBattleCamOffsetZ, 5)
+    Call(SetBattleCamDist, 400)
+    Call(SetBattleCamOffsetY, 5)
     Call(MoveBattleCamOver, 60)
     Call(N(StartRumbleWithParams), 70, 100)
     Thread
@@ -2139,8 +2139,8 @@ EvtScript N(EVS_Move_ChargeForDirect) = {
     Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    Call(SetBattleCamZoom, 400)
-    Call(SetBattleCamOffsetZ, 5)
+    Call(SetBattleCamDist, 400)
+    Call(SetBattleCamOffsetY, 5)
     Call(MoveBattleCamOver, 60)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim11)
     Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim12)
@@ -2173,10 +2173,10 @@ EvtScript N(EVS_Attack_DirectLightning) = {
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-    Call(AddBattleCamZoom, -100)
-    Call(SetBattleCamOffsetZ, 50)
+    Call(AddBattleCamDist, -100)
+    Call(SetBattleCamOffsetY, 50)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     Call(N(StartRumbleWithParams), 70, 80)
     Thread
         Call(ShakeCam, CAM_BATTLE, 0, 40, Float(0.3))
@@ -2376,8 +2376,8 @@ EvtScript N(EVS_Attack_GroupSlam) = {
     Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    Call(SetBattleCamZoom, 400)
-    Call(SetBattleCamOffsetZ, 5)
+    Call(SetBattleCamDist, 400)
+    Call(SetBattleCamOffsetY, 5)
     Call(MoveBattleCamOver, 30)
     Wait(30)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_REAR_UP)
@@ -2631,7 +2631,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
 
             // have each Tuff Puff return to their home position
             FOR_CHILDREN_SCATTERED(HNP_RETURN_HOME)
-            
+
             Call(SetGoalToHome, ACTOR_SELF)
             Call(FlyToGoal, ACTOR_SELF, 20, -10, EASING_SIN_OUT)
             Wait(15)
@@ -2646,7 +2646,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
         IfFlag(LVar0, 1 << idx) \
             Add(LVarA, 1) \
         EndIf
-    
+
     // add 1 damage for each Tuff Puff
     FOR_CHILDREN_ORDERED(HNP_ADD_CHILD)
 
@@ -2758,7 +2758,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
-    
+
     #define HNP_SWARM_MOVE_UP(idx) \
         IfFlag(LVar0, 1 << idx) \
             Thread \
@@ -2781,7 +2781,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
         IfFlag(LVar0, 1 << idx) \
             Add(LVarA, 1) \
         EndIf
-    
+
     // count the number of Tuff Puffs to compute radial spacing around the player
     FOR_CHILDREN_ORDERED(HNP_ADD_CHILD)
 
@@ -2793,8 +2793,8 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
         Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
         Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
-        Call(SetBattleCamZoom, 300)
-        Call(SetBattleCamOffsetZ, 35)
+        Call(SetBattleCamDist, 300)
+        Call(SetBattleCamOffsetY, 35)
         Call(MoveBattleCamOver, 60)
     EndThread
     Set(LVarA, 0)
@@ -2838,17 +2838,17 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
 
     // move each Tuff Puff to a position surrounding the player
     FOR_CHILDREN_SCATTERED(HNP_SWARM_SURROUND_PLAYER)
-    
+
     Wait(30)
     Call(UseBattleCamPreset, BTL_CAM_PRESET_01)
     Set(LVar9, 0)
     Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
-    
+
     #define HNP_ADD_CHILD(idx) \
         IfFlag(LVar0, 1 << idx) \
             Add(LVar9, 1) \
         EndIf
-    
+
     // count the number of Tuff Puffs
     FOR_CHILDREN_ORDERED(HNP_ADD_CHILD)
 
@@ -3081,7 +3081,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                     Call(SetActorJumpGravity, ACTOR_PLAYER, Float(1.5))
                     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
                     Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-                    Call(func_80273444, 20, 0, 1)
+                    Call(PlayerHopToGoal, 20, 0, 1)
                 Else
                     Wait(20)
                 EndIf

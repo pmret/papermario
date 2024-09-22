@@ -401,14 +401,14 @@ EvtScript N(EVS_Attack_SpinDrop) = {
         Add(LVar1, 95)
         Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
         Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
-        Call(SetBattleCamZoom, 400)
+        Call(SetBattleCamDist, 400)
         Call(MoveBattleCamOver, 130)
     Else
         Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         Add(LVar1, 72)
         Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
         Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
-        Call(SetBattleCamZoom, 340)
+        Call(SetBattleCamDist, 340)
         Call(MoveBattleCamOver, 130)
     EndIf
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -515,7 +515,7 @@ EvtScript N(EVS_Attack_InkBlast) = {
         Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
         Sub(LVar0, 30)
         Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
-        Call(SetBattleCamZoom, 350)
+        Call(SetBattleCamDist, 350)
         Call(MoveBattleCamOver, 50)
     EndThread
     Call(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)

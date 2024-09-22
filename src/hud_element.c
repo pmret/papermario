@@ -694,23 +694,23 @@ void init_hud_element_list(void) {
 }
 
 void hud_element_setup_cam(void) {
-    set_cam_viewport(CAM_3, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
-    gCameras[CAM_3].updateMode = CAM_UPDATE_MODE_2;
-    gCameras[CAM_3].needsInit = TRUE;
-    gCameras[CAM_3].lookAt_dist = 15551;
-    gCameras[CAM_3].nearClip = CAM_NEAR_CLIP;
-    gCameras[CAM_3].auxPitch = 0;
-    gCameras[CAM_3].auxBoomLength = 0;
-    gCameras[CAM_3].auxBoomPitch = 0;
-    gCameras[CAM_3].lookAt_obj_target.z = 0;
-    gCameras[CAM_3].farClip = 0x4000;
-    gCameras[CAM_3].bgColor[0] = 0;
-    gCameras[CAM_3].bgColor[1] = 0;
-    gCameras[CAM_3].bgColor[2] = 0;
-    gCameras[CAM_3].lookAt_obj_target.x = 160.0f;
-    gCameras[CAM_3].lookAt_obj_target.y = -120.0f;
-    gCameras[CAM_3].vfov = 1.0f;
-    gCameras[CAM_3].flags &= ~(CAMERA_FLAG_DISABLED | CAMERA_FLAG_LEAD_PLAYER);
+    set_cam_viewport(CAM_HUD, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+    gCameras[CAM_HUD].updateMode = CAM_UPDATE_MODE_2;
+    gCameras[CAM_HUD].needsInit = TRUE;
+    gCameras[CAM_HUD].lookAt_dist = 15551;
+    gCameras[CAM_HUD].nearClip = CAM_NEAR_CLIP;
+    gCameras[CAM_HUD].auxPitch = 0;
+    gCameras[CAM_HUD].auxBoomLength = 0;
+    gCameras[CAM_HUD].auxBoomPitch = 0;
+    gCameras[CAM_HUD].lookAt_obj_target.z = 0;
+    gCameras[CAM_HUD].farClip = 0x4000;
+    gCameras[CAM_HUD].bgColor[0] = 0;
+    gCameras[CAM_HUD].bgColor[1] = 0;
+    gCameras[CAM_HUD].bgColor[2] = 0;
+    gCameras[CAM_HUD].lookAt_obj_target.x = 160.0f;
+    gCameras[CAM_HUD].lookAt_obj_target.y = -120.0f;
+    gCameras[CAM_HUD].vfov = 1.0f;
+    gCameras[CAM_HUD].flags &= ~(CAMERA_FLAG_DISABLED | CAMERA_FLAG_LEAD_PLAYER);
 }
 
 s32 hud_element_create(HudScript* anim) {
@@ -1628,7 +1628,7 @@ void render_transformed_hud_elements(void) {
     do {
         do {
             count = 0;
-            if (gCurrentCamID == CAM_3) {
+            if (gCurrentCamID == CAM_HUD) {
                 for (i = 0; i < ARRAY_COUNT(*gHudElements); i++) {
                     hudElement = (*gHudElements)[i];
                     if (hudElement == NULL) {
@@ -1710,7 +1710,7 @@ void render_transformed_hud_elements(void) {
                         continue;
                     }
 
-                    // different from CAM_3 pass
+                    // different from CAM_HUD pass
                     if (!(flags & HUD_ELEMENT_FLAG_40000000)) {
                         continue;
                     }
@@ -1841,11 +1841,11 @@ void func_80143C48(s32 elemID, s32 arg1, s32 camID) {
 }
 
 void func_80144218(s32 id) {
-    func_80143C48(id, 1, CAM_3);
+    func_80143C48(id, 1, CAM_HUD);
 }
 
 void func_80144238(s32 id) {
-    func_80143C48(id, 0, CAM_3);
+    func_80143C48(id, 0, CAM_HUD);
 }
 
 void func_80144258(s32 id) {

@@ -47,8 +47,8 @@ EvtScript N(UseItemWithEffect) = {
 EvtScript N(UseItem) = {
     Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
     Call(SetBattleCamTarget, -85, 1, 0)
-    Call(SetBattleCamOffsetZ, 41)
-    Call(SetBattleCamZoom, 248)
+    Call(SetBattleCamOffsetY, 41)
+    Call(SetBattleCamDist, 248)
     Call(MoveBattleCamOver, 30)
     Wait(10)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)

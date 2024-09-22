@@ -40,7 +40,7 @@ EvtScript N(EVS_802A26B4) = {
 };
 
 EvtScript N(EVS_UseMove_ImplA) = {
-    ExecWait(N(EVS_JumpSupport_InitCommand))
+    ExecWait(N(EVS_JumpSupport_ApproachAndJump))
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     IfEq(LVar0, HIT_RESULT_MISS)
         ExecWait(N(EVS_JumpSupport_Miss))
@@ -59,7 +59,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EndSwitch
     Switch(LVar0)
         CaseGt(HIT_RESULT_HIT)
-            ExecWait(N(EVS_JumpSupport_E))
+            ExecWait(N(EVS_JumpSupport_Rebound))
         CaseDefault
             ExecWait(N(EVS_JumpSupport_F))
     EndSwitch
@@ -68,7 +68,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
 };
 
 EvtScript N(EVS_UseMove_ImplB) = {
-    ExecWait(N(EVS_JumpSupport_InitCommand))
+    ExecWait(N(EVS_JumpSupport_ApproachAndJump))
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     IfEq(LVar0, HIT_RESULT_MISS)
         ExecWait(N(EVS_JumpSupport_Miss))
@@ -87,7 +87,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EndSwitch
     Switch(LVar0)
         CaseGt(HIT_RESULT_HIT)
-            ExecWait(N(EVS_JumpSupport_E))
+            ExecWait(N(EVS_JumpSupport_Rebound))
         CaseDefault
             ExecWait(N(EVS_JumpSupport_F))
     EndSwitch
@@ -96,7 +96,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
 };
 
 EvtScript N(EVS_UseMove_ImplC) = {
-    ExecWait(N(EVS_JumpSupport_InitCommand))
+    ExecWait(N(EVS_JumpSupport_ApproachAndJump))
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     IfEq(LVar0, HIT_RESULT_MISS)
         ExecWait(N(EVS_JumpSupport_Miss))
@@ -115,7 +115,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EndSwitch
     Switch(LVar0)
         CaseGt(HIT_RESULT_HIT)
-            ExecWait(N(EVS_JumpSupport_E))
+            ExecWait(N(EVS_JumpSupport_Rebound))
         CaseDefault
             ExecWait(N(EVS_JumpSupport_F))
     EndSwitch
