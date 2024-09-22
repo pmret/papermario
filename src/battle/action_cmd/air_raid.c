@@ -162,7 +162,7 @@ void N(update)(void) {
             sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
 
             switch (partner->actorBlueprint->level) {
-                case 0:
+                case PARTNER_RANK_NORMAL:
                     if (battleStatus->actionQuality >= D_802A9984_429CA4[battleStatus->unk_85]) {
                         battleStatus->unk_85++;
                     }
@@ -171,7 +171,7 @@ void N(update)(void) {
                         battleStatus->unk_85--;
                     }
                     break;
-                case 1:
+                case PARTNER_RANK_SUPER:
                     if (battleStatus->actionQuality >= D_802A9994_429CB4[battleStatus->unk_85]) {
                         battleStatus->unk_85++;
                     }
@@ -179,7 +179,7 @@ void N(update)(void) {
                         battleStatus->unk_85--;
                     }
                     break;
-                case 2:
+                case PARTNER_RANK_ULTRA:
                     if (battleStatus->actionQuality >= D_802A99A8_429CC8[battleStatus->unk_85]) {
                         battleStatus->unk_85++;
                     }

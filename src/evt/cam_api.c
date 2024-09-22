@@ -330,7 +330,7 @@ API_CALLABLE(ShakeCam) {
 void exec_ShakeCam1(s32 camID, s32 mode, s32 duration) {
     Evt* script;
 
-    script = start_script_in_group(&ShakeCam1, EVT_PRIORITY_1, 0, EVT_GROUP_04);
+    script = start_script_in_group(&ShakeCam1, EVT_PRIORITY_1, 0, EVT_GROUP_SHAKE_CAM);
     script->varTable[0] = camID;
     script->varTable[1] = mode;
     script->varTable[2] = duration;
@@ -339,7 +339,7 @@ void exec_ShakeCam1(s32 camID, s32 mode, s32 duration) {
 void exec_ShakeCamX(s32 camID, s32 mode, s32 duration, f32 magnitude) {
     Evt* script;
 
-    script = start_script_in_group(&ShakeCamX, EVT_PRIORITY_1, 0, EVT_GROUP_04);
+    script = start_script_in_group(&ShakeCamX, EVT_PRIORITY_1, 0, EVT_GROUP_SHAKE_CAM);
     evt_set_variable(script, LVar0, camID);
     evt_set_variable(script, LVar1, mode);
     evt_set_variable(script, LVar2, duration);

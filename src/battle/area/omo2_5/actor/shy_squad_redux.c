@@ -721,7 +721,7 @@ EvtScript N(EVS_MemberShockReaction) = {
     Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     Call(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
     Call(GetActorSize, ACTOR_SELF, LVar4, LVar5)
-    PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LVar1, LVar2, LVar3, LVar5, LVar4, 0)
+    PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, FX_SHOCK_OVERLAY_SHOCK_HIT, LVar1, LVar2, LVar3, LVar5, LVar4, 0)
     Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 0, 0)
     Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 1, 0)
     Wait(1)

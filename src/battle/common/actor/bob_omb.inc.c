@@ -577,7 +577,7 @@ EvtScript N(EVS_Attack_Tackle) = {
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Buildup)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(GetActorSize, ACTOR_SELF, LVar3, LVar4)
-            PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LVar0, LVar1, LVar2, LVar4, LVar3, 0)
+            PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, FX_SHOCK_OVERLAY_SHOCK_HIT, LVar0, LVar1, LVar2, LVar4, LVar3, 0)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_SHOCK)
             Wait(20)
             ExecWait(N(EVS_Explode))

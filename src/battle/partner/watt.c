@@ -1314,10 +1314,10 @@ EvtScript N(EVS_Attack_MegaShock) = {
         Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         Add(LVar1, 12)
         Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_WATT_MEGA_DISCHARGE)
-        PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, 2, LVar0, LVar1, LVar2, 0, 0, 0)
+        PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, FX_SHOCK_OVERLAY_MEGA_SHOCK, LVar0, LVar1, LVar2, 0, 0, 0)
         Wait(10)
         Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_WATT_MEGA_CHARGE_WAVE)
-        PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, 2, LVar0, LVar1, LVar2, 0, 0, 0)
+        PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, FX_SHOCK_OVERLAY_MEGA_SHOCK, LVar0, LVar1, LVar2, 0, 0, 0)
     EndThread
     Thread
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBiggest)

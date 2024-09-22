@@ -1173,7 +1173,7 @@ void btl_state_update_celebration(void) {
                     bgm_set_song(0, -1, 0, 1500, 8);
                 }
                 bFadeToBlackAmt = 0;
-                btl_cam_set_params(1, 270, 100, 8, 0, 0x2400, 0, 100);
+                btl_cam_set_params(TRUE, 270, 100, 8, 0, 0x2400, 0, 100);
                 set_actor_anim(0, 0, ANIM_MarioB1_AdjustCap);
                 if (partner != NULL) {
                     set_actor_anim(ACTOR_PARTNER, 0, D_80284154[playerData->curPartner]);

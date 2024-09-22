@@ -881,7 +881,7 @@ void draw_entity_model_D(s32, Mtx*, s32, Vec3s*);
 void draw_entity_model_E(s32, Mtx*);
 void free_entity_model_by_index(s32 idx);
 void btl_cam_use_preset(s32);
-void btl_cam_set_params(s16, s16, s16, s16, s32, s32, s32, s32);
+void btl_cam_set_params(b16, s16, s16, s16, s32, s32, s32, s32);
 void btl_cam_set_zoffset(s16);
 void btl_cam_target_actor(s32);
 void btl_cam_set_zoom(s16);

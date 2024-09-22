@@ -2041,7 +2041,7 @@ typedef struct PlayerStatus {
     /* 0x06C */ f32 maxJumpSpeed;
     /* 0x070 */ f32 gravityIntegrator[4]; // derivatives of y; 0 = velocity, 1 = accel, etc
     /* 0x080 */ f32 targetYaw;
-    /* 0x084 */ f32 curYaw;
+    /* 0x084 */ f32 curYaw; // the direction of player input in world-space (not camera-relative)
     /* 0x088 */ f32 overlapPushYaw;
     /* 0x08C */ f32 pitch;
     /* 0x090 */ f32 flipYaw[4];

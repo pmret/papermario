@@ -1600,7 +1600,7 @@ EvtScript EVS_Enemy_ShockHit_Impl = {
     SetF(LVar5, LVar3)
     DivF(LVar5, Float(20.0))
     AddF(LVar1, LVar5)
-    PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LVar0, LVar1, LVar2, LVar4, LVar3)
+    PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, FX_SHOCK_OVERLAY_SHOCK_HIT, LVar0, LVar1, LVar2, LVar4, LVar3)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_SHOCK)
     Call(HideHealthBar, ACTOR_SELF)
     Call(HPBarToCurrent, ACTOR_SELF)

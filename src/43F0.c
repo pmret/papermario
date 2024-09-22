@@ -611,23 +611,23 @@ f32 get_clamped_angle_diff(f32 a, f32 b) {
 }
 
 f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ) {
-    f32 xDiff = endX - startX;
-    f32 zDiff = endZ - startZ;
-    f32 absXDiff = fabsf(xDiff);
-    f32 absZDiff = fabsf(zDiff);
+    f32 dx = endX - startX;
+    f32 dz = endZ - startZ;
+    f32 absXDiff = fabsf(dx);
+    f32 absZDiff = fabsf(dz);
     f32 ret;
 
     if (absZDiff < absXDiff) {
         ret = (absZDiff / absXDiff) * 45.0f;
         ret *= sAtanFactors[round(2.0f * ret)];
-        if (xDiff >= 0.0f) {
-            if (zDiff >= 0.0f) {
+        if (dx >= 0.0f) {
+            if (dz >= 0.0f) {
                 return ret + 90.0f;
             } else {
                 return 90.0f - ret;
             }
         }
-        if (zDiff >= 0.0f) {
+        if (dz >= 0.0f) {
             return 270.0f - ret;
         } else {
             return ret + 270.0f;
@@ -638,13 +638,13 @@ f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ) {
         }
         ret = (absXDiff / absZDiff) * 45.0f;
         ret *= sAtanFactors[round(2.0f * ret)];
-        if (zDiff >= 0.0f) {
-            if (xDiff >= 0.0f) {
+        if (dz >= 0.0f) {
+            if (dx >= 0.0f) {
                 return 180.0f - ret;
             } else {
                 return ret + 180.0f;
             }
-        } else if (!(xDiff >= 0.0f)) {
+        } else if (!(dx >= 0.0f)) {
             return 360.0f - ret;
         }
     }

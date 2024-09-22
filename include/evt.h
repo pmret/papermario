@@ -133,7 +133,7 @@ enum EventGroupFlags {
     EVT_GROUP_EF    = 0xEF, // ~10
     EVT_GROUP_01    = 0x01,
     EVT_GROUP_02    = 0x02,
-    EVT_GROUP_04    = 0x04,
+    EVT_GROUP_SHAKE_CAM    = 0x04,
     EVT_GROUP_08    = 0x08,
     EVT_GROUP_10    = 0x10,
 };

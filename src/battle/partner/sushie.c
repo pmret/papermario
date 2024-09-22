@@ -67,7 +67,7 @@ API_CALLABLE(N(GetSquirtDamage)) {
     script->varTable[0] = 0;
 
     switch (partner->actorBlueprint->level) {
-        case 0:
+        case PARTNER_RANK_NORMAL:
             if (actionCmdResult <= 40) {
                 damage = 3;
             } else if (actionCmdResult <= 75) {
@@ -77,7 +77,7 @@ API_CALLABLE(N(GetSquirtDamage)) {
                 script->varTable[0] = 1;
             }
             break;
-        case 1:
+        case PARTNER_RANK_SUPER:
             if (actionCmdResult <= 35) {
                 damage = 3;
             } else if (actionCmdResult <= 60) {
@@ -89,7 +89,7 @@ API_CALLABLE(N(GetSquirtDamage)) {
                 script->varTable[0] = 1;
             }
             break;
-        case 2:
+        case PARTNER_RANK_ULTRA:
             if (actionCmdResult <= 20) {
                 damage = 3;
             } else if (actionCmdResult <= 30) {
