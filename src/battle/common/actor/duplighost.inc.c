@@ -596,7 +596,7 @@ API_CALLABLE(N(AdjustFormationPriority)) {
 EvtScript N(EVS_CopyPartner) = {
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Wait(15)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_GHOST_TRANSFORM)

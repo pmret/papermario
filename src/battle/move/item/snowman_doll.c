@@ -42,7 +42,7 @@ EvtScript N(EVS_UseItem) = {
         EndLoop
     EndThread
     Wait(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 50)
     Wait(50)
     PlayEffect(EFFECT_SNOWMAN_DOLL, 0, 0, 0, 20, Float(1.0), 160, 0)

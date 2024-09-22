@@ -143,7 +143,7 @@ EvtScript N(EVS_802A3238) = {
     EndSwitch
     Call(GetPlayerActionSuccess, LVar0)
     IfGt(LVar0, FALSE)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_46)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_QUAKE)
         Call(MoveBattleCamOver, 5)
         Wait(15)
         SetF(LVar6, Float(0.0))
@@ -158,7 +158,7 @@ EvtScript N(EVS_802A3238) = {
         EndLoop
         Wait(10)
     Else
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_46)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_QUAKE)
         Call(MoveBattleCamOver, 50)
     EndIf
     Call(GetMenuSelection, LVar0, LVar1, LVar2)

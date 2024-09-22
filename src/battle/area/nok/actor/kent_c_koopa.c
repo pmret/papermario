@@ -514,7 +514,7 @@ EvtScript N(EVS_TakeTurn) = {
     IfEq(LVar0, 1)
         Call(UseIdleAnimation, ACTOR_SELF, FALSE)
         Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+        Call(UseBattleCamPreset, BTL_CAM_ACTOR)
         Call(SetBattleCamDist, 200)
         Call(SetBattleCamOffsetY, 20)
         Call(BattleCamTargetActor, ACTOR_SELF)
@@ -613,7 +613,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(SetBattleCamDist, 200)
     Call(SetBattleCamOffsetY, 20)
     Call(BattleCamTargetActor, ACTOR_SELF)
@@ -669,7 +669,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
                         Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
                         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Flail)
                     EndIf
-                    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+                    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
                     Call(SetBattleCamTarget, -25, 60, 0)
                     Call(SetBattleCamDist, 460)
                     Call(SetBattleCamOffsetY, 0)
@@ -694,7 +694,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
             EndSwitch
         EndCaseGroup
         CaseDefault
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+            Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
             Call(SetBattleCamTarget, -25, 60, 0)
             Call(SetBattleCamDist, 460)
             Call(SetBattleCamOffsetY, 0)
@@ -765,7 +765,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
             Call(UseIdleAnimation, ACTOR_SELF, TRUE)
             Return
         Else
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+            Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
             Call(SetBattleCamTarget, -45, 60, 0)
             Call(SetBattleCamDist, 460)
             Call(SetBattleCamOffsetY, 0)

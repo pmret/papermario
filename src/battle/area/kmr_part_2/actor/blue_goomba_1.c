@@ -483,7 +483,7 @@ EvtScript N(EVS_Init) = {
 EvtScript N(EVS_TakeTurn) = {
     Call(GetActorVar, ACTOR_SELF, AVAR_UsedTaunt, LVar0)
     IfEq(LVar0, FALSE)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+        Call(UseBattleCamPreset, BTL_CAM_ACTOR)
         Call(BattleCamTargetActor, ACTOR_SELF)
         Call(MoveBattleCamOver, 30)
         Wait(30)
@@ -525,7 +525,7 @@ EvtScript N(EVS_GoombaBros_Death) = {
         Call(GetActorHP, ACTOR_RED_GOOMBA, LVar0)
     EndIf
     IfNe(LVar0, 0)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+        Call(UseBattleCamPreset, BTL_CAM_ACTOR)
         Call(BattleCamTargetActor, ACTOR_RED_GOOMBA)
         Call(MoveBattleCamOver, 20)
         Wait(20)

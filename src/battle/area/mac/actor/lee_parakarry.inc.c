@@ -239,7 +239,7 @@ EvtScript N(EVS_Attack_SkyDive) = {
     Call(FlyToGoal, ACTOR_SELF, 0, -10, EASING_COS_IN_OUT)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Still)
     Wait(3)
-    Call(UseBattleCamPresetImmediately, BTL_CAM_PRESET_01)
+    Call(UseBattleCamPresetImmediately, BTL_CAM_INTERRUPT)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAKARRY_PREDIVE)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_FlyFast)

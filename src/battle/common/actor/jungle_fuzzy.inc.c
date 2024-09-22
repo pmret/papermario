@@ -251,7 +251,7 @@ EvtScript N(EVS_HandleEvent) = {
 EvtScript N(EVS_Move_Divide) = {
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
     Call(SetBattleCamDist, 330)
@@ -259,7 +259,7 @@ EvtScript N(EVS_Move_Divide) = {
     Call(MoveBattleCamOver, 20)
     Wait(20)
     Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_01)
+    Call(UseBattleCamPreset, BTL_CAM_INTERRUPT)
     Thread
         Wait(30)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_FUZZY_RUMBLE)

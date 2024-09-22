@@ -604,7 +604,7 @@ EvtScript N(EVS_TakeTurn_Ceiling) = {
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_FALL_QUICK, 0)
     Call(GetBattlePhase, LVar0)
     IfEq(LVar0, PHASE_FIRST_STRIKE)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_05)
+        Call(UseBattleCamPreset, BTL_CAM_ACTOR_TARGET_MIDPOINT)
         Call(SetBattleCamDist, 430)
         Call(SetBattleCamOffsetY, 20)
         Call(MoveBattleCamOver, 10)
@@ -771,7 +771,7 @@ EvtScript N(EVS_TakeTurn_Ground) = {
                     EndIf
                     Wait(1)
                 EndLoop
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_01)
+                Call(UseBattleCamPreset, BTL_CAM_INTERRUPT)
                 IfEq(LVarA, HIT_RESULT_LUCKY)
                     Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
                 EndIf

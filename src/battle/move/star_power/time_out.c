@@ -13,7 +13,7 @@ EvtScript N(EVS_UsePower) = {
     ExecWait(N(EVS_StarPower_SpiritSummoned))
     Call(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleKlevar_Shout)
     Wait(16)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(PlaySound, SOUND_TIME_OUT)
     PlayEffect(EFFECT_STOP_WATCH, 0, 0, 0, 0, Float(1.0), 200, 0)
     Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_TIME_OUT)

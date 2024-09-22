@@ -63,7 +63,7 @@ EvtScript N(EVS_UseItem) = {
         EndLoop
     EndThread
     Wait(80)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 20)
     Call(InitTargetIterator)
     Label(0)

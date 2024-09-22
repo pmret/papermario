@@ -232,7 +232,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(RunToGoal, ACTOR_SELF, LVarA, FALSE)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleSushie_Idle)
     Wait(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(AddBattleCamDist, -50)
     Call(MoveBattleCamOver, 30)

@@ -628,7 +628,7 @@ EvtScript N(EVS_ExecuteAction) = {
 
 EvtScript N(returnHome2) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+    Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Sub(LVar0, 60)
@@ -657,7 +657,7 @@ EvtScript N(returnHome2) = {
 
 EvtScript N(EVS_ReturnHome) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Sub(LVar0, 15)
@@ -681,7 +681,7 @@ EvtScript N(EVS_ReturnHome) = {
 
 EvtScript N(restoreFromSquirt2) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+    Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
     Call(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
@@ -692,7 +692,7 @@ EvtScript N(restoreFromSquirt2) = {
 
 EvtScript N(restoreFromSquirt) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
     Call(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
@@ -747,7 +747,7 @@ EvtScript N(bellyFlop) = {
     Call(action_command_hammer_start, 0, 57, 3)
     Call(SetActionQuality, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Tense1)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_59)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_CLOSE_UP)
     Set(LVar0, 30)
     Loop(60)
         Wait(1)
@@ -762,7 +762,7 @@ EvtScript N(bellyFlop) = {
     EndLoop
     Thread
         Call(GetPartnerActionSuccess, LVar0)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_52)
+        Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
         Call(MoveBattleCamOver, 20)
     EndThread
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Jump)
@@ -920,12 +920,12 @@ EvtScript N(bellyFlop) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
             ExecWait(N(EVS_ReturnHome))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+            Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
             Call(MoveBattleCamOver, 8)
             ExecWait(N(returnHome2))
         EndCaseGroup
@@ -946,7 +946,7 @@ EvtScript N(squirt) = {
         CaseEq(2)
             Call(SetupMashMeter, 5, 20, 40, 60, 80, 100)
     EndSwitch
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_13)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_CLOSE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 40)
     Call(InitTargetIterator)
@@ -983,7 +983,7 @@ EvtScript N(squirt) = {
         Wait(1)
     EndLoop
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_SUSHIE_SQUIRT)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 10)
     Call(PartnerTestEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     IfEq(LVar0, HIT_RESULT_MISS)
@@ -1036,7 +1036,7 @@ EvtScript N(squirt) = {
 EvtScript N(waterBlock) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     Call(InitTargetIterator)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -95, 26, 10)
     Call(SetBattleCamOffsetY, 11)
     Call(SetBattleCamDist, 238)
@@ -1067,7 +1067,7 @@ EvtScript N(waterBlock) = {
         Goto(10)
     EndIf
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_SpitArc)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -95, 27, 10)
     Call(SetBattleCamOffsetY, 11)
     Call(SetBattleCamDist, 277)
@@ -1143,7 +1143,7 @@ EvtScript N(tidalWave) = {
     Call(action_command_tidal_wave_init)
     Call(SetupMashMeter, 5, 20, 30, 60, 80, 100)
     Call(InitTargetIterator)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -65, 53, 10)
     Call(SetBattleCamOffsetY, 16)
     Call(SetBattleCamDist, 214)
@@ -1195,7 +1195,7 @@ EvtScript N(tidalWave) = {
     Call(SetActorPos, ACTOR_PARTNER, -220, 0, 0)
     Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
     Wait(15)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 20)
     Call(GetActionSuccessCopy, LVar0)
     Set(LVarE, LVar0)

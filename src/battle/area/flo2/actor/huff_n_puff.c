@@ -1010,7 +1010,7 @@ EvtScript N(EVS_Dialogue_PummelPermission) = {
     Goto(1)
     // found a Tuff Puff to speak
     Label(0)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_SIMPLE)
     Call(BattleCamTargetActor, LVar0)
     Call(SetBattleCamDist, 300)
     Call(SetBattleCamOffsetY, -10)
@@ -1028,7 +1028,7 @@ EvtScript N(EVS_Dialogue_PummelPermission) = {
     Wait(20)
     // Huff N Puff replies
     Label(1)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamDist, 180)
     Call(SetBattleCamOffsetY, -10)
@@ -1048,7 +1048,7 @@ EvtScript N(EVS_Dialogue_PummelPermission) = {
 
 EvtScript N(EVS_Dialogue_FullPower) = {
     UseArray(N(RuffPuffDataBuffer))
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamDist, 180)
     Call(SetBattleCamOffsetY, -10)
@@ -1118,7 +1118,7 @@ EvtScript N(EVS_Dialogue_FullPower) = {
 
 EvtScript N(EVS_Dialogue_PraiseHuff) = {
     UseArray(N(RuffPuffDataBuffer))
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamDist, 180)
     Call(SetBattleCamOffsetY, -10)
@@ -1187,7 +1187,7 @@ EvtScript N(EVS_Dialogue_PraiseHuff) = {
 
 EvtScript N(EVS_Dialogue_Concerned) = {
     UseArray(N(RuffPuffDataBuffer))
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamDist, 180)
     Call(SetBattleCamOffsetY, -10)
@@ -1229,7 +1229,7 @@ EvtScript N(EVS_Dialogue_Concerned) = {
     Call(UseIdleAnimation, LVar0, TRUE)
     // Huff N Puff replies
     Label(1)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamDist, 180)
     Call(SetBattleCamOffsetY, -10)
@@ -1392,7 +1392,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_MISS)
         CaseOrEq(HIT_RESULT_LUCKY)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_01)
+            Call(UseBattleCamPreset, BTL_CAM_INTERRUPT)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim0B)
             Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim0C)
             Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim0D)
@@ -1720,7 +1720,7 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
         Wait(15)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BIG_POWER_UP)
     EndThread
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Sub(LVar0, 20)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
@@ -1992,7 +1992,7 @@ EvtScript N(EVS_Move_ChargeForGround) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     ExecGetTID(N(EVS_UpdateChargedJitter), LVarA)
     Call(SetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVarA)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
     Call(SetBattleCamDist, 400)
@@ -2027,7 +2027,7 @@ EvtScript N(EVS_Move_ChargeForGround) = {
 EvtScript N(EVS_Attack_GroundLightning) = {
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
     Call(SetBattleCamDist, 400)
@@ -2136,7 +2136,7 @@ EvtScript N(EVS_Move_ChargeForDirect) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     ExecGetTID(N(EVS_UpdateChargedJitter), LVarA)
     Call(SetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVarA)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
     Call(SetBattleCamDist, 400)
@@ -2373,7 +2373,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
     UseArray(N(RuffPuffDataBuffer))
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
     Call(SetBattleCamDist, 400)
@@ -2790,7 +2790,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
     DivF(LVarB, LVarA)
     Thread
         Wait(10)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+        Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
         Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
         Call(SetBattleCamDist, 300)
@@ -2840,7 +2840,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
     FOR_CHILDREN_SCATTERED(HNP_SWARM_SURROUND_PLAYER)
 
     Wait(30)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_01)
+    Call(UseBattleCamPreset, BTL_CAM_INTERRUPT)
     Set(LVar9, 0)
     Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 

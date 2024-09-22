@@ -77,7 +77,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     Add(LVarF, 1)
     Set(LFlag0, FALSE)
     Label(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_40)
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_MULTIBOUNCE)
     Call(GetTargetListLength, LVar0)
     Sub(LVar0, 1)
     IfEq(LVarF, LVar0)
@@ -231,7 +231,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     IfEq(LFlag0, TRUE)
         Call(ShowActionHud, FALSE)
     EndIf
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_40)
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_MULTIBOUNCE)
     Call(action_command_jump_start, 37, 3)
     Call(ChooseNextTarget, ITER_NEXT, LVar0)
     Call(SetGoalToTarget, ACTOR_PLAYER)
@@ -378,7 +378,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     IfEq(LFlag0, TRUE)
         Call(ShowActionHud, FALSE)
     EndIf
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_40)
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_MULTIBOUNCE)
     Call(action_command_jump_start, 25, 3)
     Call(ChooseNextTarget, ITER_NEXT, LVar0)
     Call(SetGoalToTarget, ACTOR_PLAYER)

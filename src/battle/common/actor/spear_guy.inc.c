@@ -611,11 +611,11 @@ EvtScript N(EVS_Attack_SpearStab) = {
 EvtScript N(EVS_Move_SummonBackup) = {
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 15)
     Wait(15)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_01)
+    Call(UseBattleCamPreset, BTL_CAM_INTERRUPT)
     Call(SetAnimation, ACTOR_SELF, PRT_SPEAR_GUY, ANIM_SpearGuy_Anim05)
     Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
     Thread

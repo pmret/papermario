@@ -290,7 +290,7 @@ EntityModelScript N(modelCommandList3) = {
 EvtScript N(EVS_UseItem) = {
     SetConst(LVarA, ITEM_SLEEPY_SHEEP)
     ExecWait(N(UseItemWithEffect))
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -67, -15, -5)
     Call(SetBattleCamOffsetY, 45)
     Call(SetBattleCamDist, 169)
@@ -413,7 +413,7 @@ EvtScript N(EVS_UseItem) = {
         Call(DeleteVirtualEntity, LVarA)
     EndThread
     Wait(30)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 20)
     Call(InitTargetIterator)
     Label(0)

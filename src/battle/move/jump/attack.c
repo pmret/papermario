@@ -94,10 +94,10 @@ EvtScript N(EVS_UseMove_Normal) = {
         EndCaseGroup
     EndSwitch
     ChildThread
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_27)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_PRE_JUMP_FINISH)
         Wait(5)
         Call(SetGoalToTarget, ACTOR_PLAYER)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_35)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
     Call(GetActionResult, LVarF)
     Call(CloseActionCommandInfo)
@@ -146,10 +146,10 @@ EvtScript N(EVS_UseMove_Super) = {
     EndSwitch
     Call(GetActionResult, LVarF)
     ChildThread
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_27)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_PRE_JUMP_FINISH)
         Wait(5)
         Call(SetGoalToTarget, ACTOR_PLAYER)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_35)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
     Call(CloseActionCommandInfo)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
@@ -201,10 +201,10 @@ EvtScript N(EVS_UseMove_Ultra) = {
     EndSwitch
     Call(GetActionResult, LVarF)
     ChildThread
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_28)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_PRE_ULTRA_JUMP_FINISH)
         Wait(5)
         Call(SetGoalToTarget, ACTOR_PLAYER)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_35)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
     Call(CloseActionCommandInfo)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
@@ -252,7 +252,7 @@ EvtScript N(EVS_FirstStrike_Normal) = {
     Call(SetActorPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_PLAYER)
-    Call(UseBattleCamPresetImmediately, BTL_CAM_PRESET_34)
+    Call(UseBattleCamPresetImmediately, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Call(GetActorPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
@@ -281,14 +281,14 @@ EvtScript N(EVS_FirstStrike_Super) = {
     Call(SetActorPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     ExecWait(N(EVS_JumpSupport_CalcJumpTime_Alt1))
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_37)
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_SUPER_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
     Call(PlayerSuperJumpToGoal, LVarA, 0)
     Wait(7)
     Call(PlayerSuperJumpToGoal, 3, 1)
     Call(SetGoalToTarget, ACTOR_PLAYER)
-    Call(UseBattleCamPresetImmediately, BTL_CAM_PRESET_34)
+    Call(UseBattleCamPresetImmediately, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
     Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 4, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
     ExecWait(N(EVS_JumpSupport_Rebound))
@@ -304,7 +304,7 @@ EvtScript N(EVS_FirstStrike_Ultra) = {
     Call(SetActorPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     ExecWait(N(EVS_JumpSupport_CalcJumpTime_Alt2))
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_38)
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_ULTRA_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_MarioB1_Stomp)
     Call(PlayerUltraJumpToGoal, LVarA, 0)
@@ -364,10 +364,10 @@ EvtScript N(EVS_UseBerserker_Normal) = {
         EndCaseGroup
     EndSwitch
     ChildThread
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_27)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_PRE_JUMP_FINISH)
         Wait(5)
         Call(SetGoalToTarget, ACTOR_PLAYER)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_35)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
     Call(GetActionResult, LVarF)
     Call(CloseActionCommandInfo)
@@ -416,10 +416,10 @@ EvtScript N(EVS_UseBerserker_Super) = {
     EndSwitch
     Call(GetActionResult, LVarF)
     ChildThread
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_27)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_PRE_JUMP_FINISH)
         Wait(5)
         Call(SetGoalToTarget, ACTOR_PLAYER)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_35)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
     Call(CloseActionCommandInfo)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
@@ -473,10 +473,10 @@ EvtScript N(EVS_UseBerserker_Ultra) = {
     EndSwitch
     Call(GetActionResult, LVarF)
     ChildThread
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_28)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_PRE_ULTRA_JUMP_FINISH)
         Wait(5)
         Call(SetGoalToTarget, ACTOR_PLAYER)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_35)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
     Call(CloseActionCommandInfo)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
@@ -503,7 +503,7 @@ EvtScript N(EVS_UseMove_Tutorial) = {
     ExecWait(N(EVS_JumpSupport_Approach))
     ExecWait(N(EVS_JumpSupport_CalcJumpTime))
     Call(action_command_jump_start, LVarA, 3)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_34)
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(AddGoalPos, ACTOR_PLAYER, -5, 10, 0)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
@@ -548,10 +548,10 @@ EvtScript N(EVS_UseMove_Tutorial) = {
         EndCaseGroup
     EndSwitch
     ChildThread
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_27)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_PRE_JUMP_FINISH)
         Wait(5)
         Call(SetGoalToTarget, ACTOR_PLAYER)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_35)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
     Call(GetActionResult, LVarF)
     Call(CloseActionCommandInfo)

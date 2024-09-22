@@ -183,7 +183,7 @@ EvtScript N(EVS_TakeTurn) = {
     Wait(5)
     Call(SetActorDispOffset, ACTOR_SELF, 0, 10, 0)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_66)
+    Call(UseBattleCamPreset, BTL_CAM_ENEMY_DIVE)
     Call(SetBattleCamDist, 400)
     Call(SetBattleCamOffsetY, 40)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)

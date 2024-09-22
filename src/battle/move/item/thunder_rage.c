@@ -72,7 +72,7 @@ EvtScript N(EVS_UseItem) = {
         IfNe(LVar0, ITER_NO_MORE)
             Goto(0)
         EndIf
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 20)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     Wait(30)

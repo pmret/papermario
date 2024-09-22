@@ -344,7 +344,7 @@ EvtScript N(EVS_ExecuteAction) = {
 
 EvtScript N(returnHome2) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+    Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Run)
     Call(FlyToGoal, ACTOR_PARTNER, 15, 0, EASING_COS_IN_OUT)
@@ -355,7 +355,7 @@ EvtScript N(returnHome2) = {
 
 EvtScript N(EVS_ReturnHome) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Run)
     Call(FlyToGoal, ACTOR_PARTNER, 15, 0, EASING_COS_IN_OUT)
@@ -846,7 +846,7 @@ EvtScript N(EVS_Move_SpinyFlip) = {
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
     Call(InitTargetIterator)
     Call(SetGoalToTarget, ACTOR_PARTNER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 47, 46, 12)
     Call(SetBattleCamOffsetY, 7)
     Call(SetBattleCamDist, 416)
@@ -944,9 +944,9 @@ EvtScript N(EVS_Move_SpinyFlip) = {
     EndSwitch
     Switch(LVarF)
         CaseEq(1)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+            Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
         CaseDefault
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     EndSwitch
     Wait(15)
     Switch(LVar0)
@@ -976,7 +976,7 @@ EvtScript N(EVS_Move_SpinySurge) = {
             Call(SetupMashMeter, 4, 40, 70, 99, 100, 0)
     EndSwitch
     Call(SetActionHudPrepareTime, 10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 45, 60, 0)
     Call(SetBattleCamOffsetY, 0)
     Call(SetBattleCamDist, 400)
@@ -1089,9 +1089,9 @@ EvtScript N(EVS_Move_SpinySurge) = {
         EndSwitch
         Switch(LVar0)
             CaseGt(0)
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+                Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
             CaseDefault
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+                Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
         EndSwitch
         Wait(6)
         Label(12)
@@ -1124,7 +1124,7 @@ EvtScript N(cloudNine_normal) = {
     Call(SetActionHudPrepareTime, 50)
     Call(InitTargetIterator)
     Call(SetGoalToHome, ACTOR_PARTNER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_10)
+    Call(UseBattleCamPreset, BTL_CAM_MIDPOINT_CLOSE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamOffsetY, 17)
     Call(SetBattleCamDist, 300)
@@ -1244,7 +1244,7 @@ EvtScript N(cloudNine_immobile) = {
     Call(N(RemoveCloudNineFX))
     Call(InitTargetIterator)
     Call(SetGoalToHome, ACTOR_PARTNER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_10)
+    Call(UseBattleCamPreset, BTL_CAM_MIDPOINT_CLOSE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamOffsetY, 0)
     Call(SetBattleCamDist, 300)
@@ -1718,7 +1718,7 @@ EvtScript N(EVS_Move_Hurricane) = {
     Call(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     Call(SetActionHudPrepareTime, 15)
     Call(SetDamageSource, DMG_SRC_HURRICANE)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -45, 54, 0)
     Call(SetBattleCamOffsetY, 0)
     Call(SetBattleCamDist, 280)
@@ -1734,7 +1734,7 @@ EvtScript N(EVS_Move_Hurricane) = {
     Call(action_command_hurricane_start, 0, 147 * DT, 3, LVar0)
     Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     Call(SetActorRotationOffset, ACTOR_PARTNER, 0, 20, 0)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 35, 54, 0)
     Call(SetBattleCamOffsetY, 0)
     Call(SetBattleCamDist, 430)
@@ -1760,9 +1760,9 @@ EvtScript N(EVS_Move_Hurricane) = {
     Call(GetActionSuccessCopy, LVar0)
     Switch(LVar0)
         CaseGt(99)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+            Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
         CaseDefault
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     EndSwitch
     Call(InitTargetIterator)
     Label(10)

@@ -74,7 +74,7 @@ EvtScript N(EVS_UseItem) = {
         Call(ShakeCam, CAM_BATTLE, 0, 2, Float(1.0))
         Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.5))
         Wait(10)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+        Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
         Call(MoveBattleCamOver, 10)
         Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, FALSE)
     EndThread

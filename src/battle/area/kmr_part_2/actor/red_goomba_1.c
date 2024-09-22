@@ -507,7 +507,7 @@ EvtScript N(EVS_GoombaBros_Death) = {
         Call(GetActorHP, ACTOR_BLUE_GOOMBA, LVar0)
     EndIf
     IfNe(LVar0, 0)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+        Call(UseBattleCamPreset, BTL_CAM_ACTOR)
         Call(BattleCamTargetActor, ACTOR_BLUE_GOOMBA)
         Call(MoveBattleCamOver, 20)
         Wait(20)

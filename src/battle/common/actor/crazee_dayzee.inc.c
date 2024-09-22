@@ -326,7 +326,7 @@ EvtScript N(EVS_Attack_Sing) = {
 
 EvtScript N(EVS_Move_Flee) = {
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamDist, 300)
     Call(SetBattleCamOffsetY, 30)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

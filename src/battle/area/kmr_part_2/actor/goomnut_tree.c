@@ -358,7 +358,7 @@ EvtScript N(EVS_DropNutOnGoombas) = {
     IfNe(LVar0, FALSE)
         Return
     EndIf
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_15)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_FAR)
     Call(BattleCamTargetActor, ACTOR_KING)
     Wait(20)
     Call(SetActorVar, ACTOR_SELF, AVAR_BigNutDropped, TRUE)

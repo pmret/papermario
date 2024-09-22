@@ -89,10 +89,10 @@ EvtScript N(EVS_802A3168) = {
     EndSwitch
     Call(GetPlayerActionSuccess, LVar0)
     IfGt(LVar0, FALSE)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_46)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_QUAKE)
         Call(MoveBattleCamOver, 5)
     Else
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_46)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_QUAKE)
         Call(MoveBattleCamOver, 50)
     EndIf
     Call(GetMenuSelection, LVar0, LVar1, LVar2)

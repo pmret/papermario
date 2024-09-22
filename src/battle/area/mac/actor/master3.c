@@ -381,7 +381,7 @@ EvtScript N(EVS_Attack_StrikeOnce) = {
 
 EvtScript N(EVS_Attack_StrikeTwice) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamDist, 200)
     Call(SetBattleCamOffsetY, 13)
@@ -389,7 +389,7 @@ EvtScript N(EVS_Attack_StrikeTwice) = {
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedDownwardStance)
     Wait(40)
     Call(SetGoalToTarget, ACTOR_SELF)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_07)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_GOAL_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 1)
     Wait(10)
@@ -511,7 +511,7 @@ EvtScript N(EVS_Attack_StrikeTwice) = {
 
 EvtScript N(EVS_Attack_StrikeThrice) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamDist, 200)
     Call(SetBattleCamOffsetY, 13)
@@ -520,7 +520,7 @@ EvtScript N(EVS_Attack_StrikeThrice) = {
     Wait(20)
     Call(ActorSpeak, MSG_MAC_Gate_003C, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedTalk, ANIM_TheMaster_AscendedWalk)
     Call(SetGoalToTarget, ACTOR_SELF)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_07)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_GOAL_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 1)
     Wait(10)
@@ -701,7 +701,7 @@ EvtScript N(EVS_Attack_StrikeThrice) = {
 
 // Unused final phase of the battle, the Master rises into the air and becomes an airborne enemy
 EvtScript N(EVS_AscendToFinalForm) = {
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamDist, 200)
     Call(SetBattleCamOffsetY, 13)
@@ -754,7 +754,7 @@ EvtScript N(EVS_AscendToFinalForm) = {
 // The Master flies over to the player and waits an inordinately long time before dealing damage.
 EvtScript N(EVS_Attack_SpiritStrike) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamDist, 200)
     Call(SetBattleCamOffsetY, 13)
@@ -806,7 +806,7 @@ EvtScript N(EVS_Attack_SpiritStrike) = {
 // The Master flies over to the player and waits an inordinately long time before dealing damage.
 EvtScript N(EVS_Attack_FlyingGrab) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamDist, 200)
     Call(SetBattleCamOffsetY, 13)
@@ -892,7 +892,7 @@ EvtScript N(EVS_HandlePhase) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_BattleCry, LVar0)
             IfEq(LVar0, FALSE)
                 // 'To battle!'
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_13)
+                Call(UseBattleCamPreset, BTL_CAM_ACTOR_CLOSE)
                 Call(BattleCamTargetActor, ACTOR_SELF)
                 Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
                 Wait(10)

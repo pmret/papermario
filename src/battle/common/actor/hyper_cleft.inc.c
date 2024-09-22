@@ -153,7 +153,7 @@ EvtScript N(EVS_Move_Charge) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(GetActorVar, ACTOR_SELF, AVAR_State, LVar0)
     IfEq(LVar0, AVAL_State_Normal)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+        Call(UseBattleCamPreset, BTL_CAM_ACTOR)
         Call(BattleCamTargetActor, ACTOR_SELF)
         Call(MoveBattleCamOver, 20)
         Wait(20)
@@ -214,7 +214,7 @@ EvtScript N(EVS_Move_Charge) = {
                     EndIf
                     Wait(1)
                 EndLoop
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_01)
+                Call(UseBattleCamPreset, BTL_CAM_INTERRUPT)
                 IfEq(LVarA, HIT_RESULT_LUCKY)
                     Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
                 EndIf

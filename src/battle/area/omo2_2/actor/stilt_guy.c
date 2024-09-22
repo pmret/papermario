@@ -890,7 +890,7 @@ EvtScript N(EVS_ShyGuy_SpinSmash) = {
         Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_TRIGGER_EVENTS)
         Goto(1)
     Label(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.1))
     Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
     Call(GetActorSize, ACTOR_SELF, LVar0, LVar3)

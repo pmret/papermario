@@ -395,7 +395,7 @@ EvtScript N(EVS_TakeTurn) = {
         CaseOrEq(HIT_RESULT_LUCKY)
             Set(LVarA, LVar0)
             Wait(10)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_66)
+            Call(UseBattleCamPreset, BTL_CAM_ENEMY_DIVE)
             Call(SetBattleCamDist, 300)
             Call(BattleCamTargetActor, ACTOR_SELF)
             Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
@@ -445,7 +445,7 @@ EvtScript N(EVS_TakeTurn) = {
         EndCaseGroup
         CaseDefault
             Wait(10)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_66)
+            Call(UseBattleCamPreset, BTL_CAM_ENEMY_DIVE)
             Call(SetBattleCamDist, 300)
             Call(BattleCamTargetActor, ACTOR_SELF)
             Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)

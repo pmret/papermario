@@ -687,7 +687,7 @@ EvtScript N(EVS_Move_MakeBabies) = {
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_07)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_GOAL_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamOffsetY, 50)
     Call(SetBattleCamDist, 330)
@@ -699,7 +699,7 @@ EvtScript N(EVS_Move_MakeBabies) = {
     Thread
         Call(ShakeCam, CAM_BATTLE, 0, 10, Float(0.3))
     EndThread
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_07)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_GOAL_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamOffsetY, 65)
     Call(SetBattleCamDist, 240)
@@ -710,7 +710,7 @@ EvtScript N(EVS_Move_MakeBabies) = {
     Thread
         Call(ShakeCam, CAM_BATTLE, 0, 10, Float(0.4))
     EndThread
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_07)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_GOAL_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamOffsetY, 80)
     Call(SetBattleCamDist, 150)
@@ -721,7 +721,7 @@ EvtScript N(EVS_Move_MakeBabies) = {
     Thread
         Call(ShakeCam, CAM_BATTLE, 0, 10, Float(0.5))
     EndThread
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_07)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_GOAL_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamOffsetY, 95)
     Call(SetBattleCamDist, 60)
@@ -757,7 +757,7 @@ EvtScript N(EVS_Move_Enrage) = {
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_07)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_GOAL_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamOffsetY, 28)
     Call(SetBattleCamDist, 297)

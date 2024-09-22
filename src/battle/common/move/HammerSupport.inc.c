@@ -165,7 +165,7 @@ EvtScript N(EVS_HammerSupport_F) = {
 
 EvtScript N(EVS_Hammer_ReturnHome_A) = {
     Call(PlayerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+    Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(MoveBattleCamOver, 5)
     Call(func_802693F0)
     Wait(20)
@@ -199,7 +199,7 @@ EvtScript N(EVS_Hammer_ReturnHome_B) = {
 
 EvtScript N(EVS_Hammer_ReturnHome_C) = {
     Call(PlayerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_29)
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_MISTAKE)
     Call(func_802693F0)
     Wait(20)
     Call(EnablePlayerBlur, ACTOR_BLUR_RESET)

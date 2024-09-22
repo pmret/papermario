@@ -538,7 +538,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(RunToGoal, ACTOR_SELF, 0, FALSE)
             Call(GetBattlePhase, LVar0)
             IfEq(LVar0, PHASE_FIRST_STRIKE)
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_05)
+                Call(UseBattleCamPreset, BTL_CAM_ACTOR_TARGET_MIDPOINT)
                 Call(SetBattleCamDist, 300)
                 Call(SetBattleCamOffsetY, 20)
                 Call(MoveBattleCamOver, 10)

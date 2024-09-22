@@ -1293,7 +1293,7 @@ EvtScript EVS_RunAwayFail = {
 EvtScript EVS_PlayerDies = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Dying)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_24)
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_DIES)
     Wait(15)
     Call(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_SPINNING)
@@ -1339,7 +1339,7 @@ EvtScript EVS_PlayerDies = {
 
 EvtScript D_80287404 = {
     IfEq(LVar1, 0)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_WISH)
         Wait(10)
         Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_USE_ITEM)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
@@ -1380,7 +1380,7 @@ EvtScript D_80287404 = {
 };
 
 EvtScript D_80287708 = {
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -85, 1, 0)
     Call(SetBattleCamOffsetY, 41)
     Call(SetBattleCamDist, 248)
@@ -1595,7 +1595,7 @@ EvtScript EVS_MerleeAttackBonus = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(BattleMerleeFadeStageToBlack)
     Wait(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 0, 80, 0)
     Call(SetBattleCamOffsetY, 0)
     Call(SetBattleCamDist, 246)
@@ -1644,7 +1644,7 @@ EvtScript EVS_MerleeDefenseBonus = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(BattleMerleeFadeStageToBlack)
     Wait(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 0, 80, 0)
     Call(SetBattleCamOffsetY, 0)
     Call(SetBattleCamDist, 246)
@@ -1698,7 +1698,7 @@ EvtScript EVS_MerleeExpBonus = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(BattleMerleeFadeStageToBlack)
     Wait(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 0, 80, 0)
     Call(SetBattleCamOffsetY, 0)
     Call(SetBattleCamDist, 246)

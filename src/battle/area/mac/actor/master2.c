@@ -349,7 +349,7 @@ EvtScript N(EVS_Attack_StrikeOnce) = {
 
 EvtScript N(EVS_Attack_StrikeTwice) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamDist, 200)
     Call(SetBattleCamOffsetY, 13)
@@ -357,7 +357,7 @@ EvtScript N(EVS_Attack_StrikeTwice) = {
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedDownwardStance)
     Wait(40)
     Call(SetGoalToTarget, ACTOR_SELF)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_07)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_GOAL_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 1)
     Wait(10)
@@ -501,7 +501,7 @@ EvtScript N(EVS_HandlePhase) = {
         CaseEq(PHASE_PLAYER_BEGIN)
             Call(GetActorVar, ACTOR_SELF, AVAR_BattleCry, LVar0)
             IfEq(LVar0, FALSE)
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_13)
+                Call(UseBattleCamPreset, BTL_CAM_ACTOR_CLOSE)
                 Call(BattleCamTargetActor, ACTOR_SELF)
                 Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
                 Wait(10)

@@ -24,7 +24,7 @@ EvtScript N(EVS_UseItem) = {
     PlayEffect(EFFECT_STOP_WATCH, 0, 0, 0, 0, Float(1.0), 200, 0)
     Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_TIME_OUT)
     Wait(200)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 20)
     Call(InitTargetIterator)
     Label(0)

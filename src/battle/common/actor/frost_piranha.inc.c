@@ -280,7 +280,7 @@ EvtScript N(EVS_Attack_Bite) = {
         Div(LVar3, 2)
         Div(LVar4, 2)
         Div(LVar5, 2)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+        Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
         Call(SetBattleCamTarget, LVar3, LVar4, LVar5)
         Call(SetBattleCamDist, 300)
         Call(SetBattleCamOffsetY, 40)

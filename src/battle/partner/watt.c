@@ -711,7 +711,7 @@ EvtScript N(EVS_ExecuteAction) = {
 };
 
 EvtScript N(returnHome2) = {
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+    Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
     Call(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
@@ -721,7 +721,7 @@ EvtScript N(returnHome2) = {
 };
 
 EvtScript N(EVS_ReturnHome) = {
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
     Call(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
@@ -775,7 +775,7 @@ EvtScript N(EVS_Attack_ElectroDash) = {
     Call(action_command_body_slam_init)
     Call(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     Wait(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_48)
+    Call(UseBattleCamPreset, BTL_CAM_CLOSER_PARTNER_APPROACH)
     Call(InitTargetIterator)
     Call(SetGoalToTarget, ACTOR_PARTNER)
     Call(AddGoalPos, ACTOR_PARTNER, -20, 0, 0)
@@ -1095,7 +1095,7 @@ EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
     Wait(5)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -125, 42, 0)
     Call(SetBattleCamOffsetY, 0)
     Call(SetBattleCamDist, 340)
@@ -1178,7 +1178,7 @@ EvtScript N(EVS_TurboCharge_ImmobilePlayer) = {
     Call(SetActionHudPrepareTime, 0)
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Wait(5)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -125, 42, 0)
     Call(SetBattleCamOffsetY, 0)
     Call(SetBattleCamDist, 340)
@@ -1261,7 +1261,7 @@ EvtScript N(EVS_Attack_MegaShock) = {
     Call(action_command_mega_shock_init)
     Call(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     Call(SetActionHudPrepareTime, 0)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -54, 63, 10)
     Call(SetBattleCamOffsetY, 15)
     Call(SetBattleCamDist, 314)

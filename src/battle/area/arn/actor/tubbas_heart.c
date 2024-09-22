@@ -293,7 +293,7 @@ EvtScript N(EVS_HandleEvent) = {
 };
 
 EvtScript N(EVS_FleeFromBattle) = {
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 40)
     Wait(40)
@@ -336,12 +336,12 @@ EvtScript N(EVS_TakeTurn) = {
                 //@bug -- meant to OR 3 with value of AVAR_Flags, not PARTNER_BOW
                 BitwiseOrConst(LVar0, AVAL_Flag_TauntBow | AVAL_Flag_HidStatusBar)
                 Call(SetActorVar, ACTOR_SELF, AVAR_Flags, LVar0)
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+                Call(UseBattleCamPreset, BTL_CAM_ACTOR)
                 Call(BattleCamTargetActor, ACTOR_SELF)
                 Call(MoveBattleCamOver, 40)
                 Wait(40)
                 Call(ActorSpeak, MSG_CH3_00C3, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim0B, ANIM_TubbasHeart_Anim01)
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+                Call(UseBattleCamPreset, BTL_CAM_ACTOR)
                 Call(BattleCamTargetActor, ACTOR_PARTNER)
                 Call(MoveBattleCamOver, 25)
                 Wait(25)
@@ -371,7 +371,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_ChargeTaunt, LVar0)
             IfEq(LVar0, 0)
                 Call(SetActorVar, ACTOR_SELF, AVAR_ChargeTaunt, TRUE)
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+                Call(UseBattleCamPreset, BTL_CAM_ACTOR)
                 Call(BattleCamTargetActor, ACTOR_SELF)
                 Call(MoveBattleCamOver, 40)
                 Wait(40)
@@ -507,7 +507,7 @@ EvtScript N(EVS_Attack_Leap) = {
 };
 
 EvtScript N(EVS_Move_Charge) = {
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 85, 50, 0)
     Call(SetBattleCamDist, 280)
     Call(SetBattleCamOffsetY, 0)
@@ -553,7 +553,7 @@ EvtScript N(EVS_Move_Charge) = {
 
 EvtScript N(EVS_Attack_DarkSwarm) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 85, 50, 0)
     Call(SetBattleCamDist, 280)
     Call(SetBattleCamOffsetY, 0)
@@ -616,7 +616,7 @@ EvtScript N(EVS_Attack_DarkSwarm) = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Flail)
     Wait(30)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
     Call(SetBattleCamDist, 300)

@@ -931,7 +931,7 @@ EvtScript N(EVS_KnockPartAway) = {
         Call(DispatchDamageEvent, LVar0, 1, EVENT_SPIN_SMASH_LAUNCH_HIT)
         Goto(1)
     Label(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(SetPartJumpGravity, ACTOR_SELF, PRT_PROJECTILE, Float(0.1))
     Call(SetPartMoveSpeed, ACTOR_SELF, PRT_PROJECTILE, Float(6.0))
     Call(JumpPartTo, ACTOR_SELF, PRT_PROJECTILE, 296, 0, 0, 0, TRUE)

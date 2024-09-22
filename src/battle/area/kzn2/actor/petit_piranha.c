@@ -260,7 +260,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     IfGe(LVar1, 41)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PetitPiranha_Anim04)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+        Call(UseBattleCamPreset, BTL_CAM_ACTOR)
         Call(SetBattleCamDist, 380)
         Call(SetBattleCamOffsetY, -20)
         Call(BattleCamTargetActor, ACTOR_SELF)
@@ -275,7 +275,7 @@ EvtScript N(EVS_TakeTurn) = {
         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         Call(FlyToGoal, ACTOR_SELF, 20, -12, EASING_LINEAR)
     Else
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+        Call(UseBattleCamPreset, BTL_CAM_ACTOR)
         Call(SetBattleCamDist, 380)
         Call(SetBattleCamOffsetY, 0)
         Call(BattleCamTargetActor, ACTOR_SELF)
