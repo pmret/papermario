@@ -20,7 +20,7 @@ EvtScript N(EVS_SpawnStarCard) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.6))
         Call(SetPanTarget, CAM_DEFAULT, 408, -880, 414)
         EVT_SPIRIT_ADJUST_CAM(10000)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(N(StarSpiritEffectFunc2), 1, 180, 408, -900, 414, 408, -825, 414, -880, -910)
         Thread
             Call(N(StarSpiritEffectFunc3))
@@ -55,7 +55,7 @@ EvtScript N(EVS_SpawnStarCard) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
         Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Call(DisablePlayerInput, FALSE)
     Else
         Call(N(StarSpiritEffectFunc5), 1, 408, -880, 414, -910)

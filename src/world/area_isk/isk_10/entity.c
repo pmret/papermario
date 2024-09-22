@@ -33,10 +33,10 @@ EvtScript N(EVS_UseSpring) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetCamPosC, CAM_DEFAULT, 0, -520)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(SetPlayerJumpscale, Float(1.4))
         Call(PlayerJump, -561, -520, 23, 30)
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.8))
     EndIf
     Call(SetPlayerActionState, ACTION_STATE_IDLE)

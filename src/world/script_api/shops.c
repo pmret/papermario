@@ -827,7 +827,7 @@ void draw_shop_items(void) {
             inY = shopItemEntities->pos.y + 30.0f;
             inZ = shopItemEntities->pos.z;
 
-            transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &s);
+            transform_point(camera->mtxPerspective, inX, inY, inZ, 1.0f, &x, &y, &z, &s);
 
             s = 1.0f / s;
 

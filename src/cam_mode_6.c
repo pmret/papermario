@@ -14,9 +14,9 @@ void update_camera_no_interp(Camera* camera) {
     f32 new_var;
     f32 planarDist;
 
-    if (camera->needsInit || camera->isChangingMap) {
+    if (camera->needsInit || camera->needsReinit) {
         camera->needsInit = FALSE;
-        camera->isChangingMap = FALSE;
+        camera->needsReinit = FALSE;
         camera->auxPitch = 0;
         camera->auxBoomLength = 100;
         camera->lookAt_dist = 100;

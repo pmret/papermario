@@ -180,7 +180,7 @@ EvtScript N(EVS_Starship_Arrive) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -120, 0, 230)
     Call(SetPanTarget, CAM_DEFAULT, -120, 0, 230)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(HidePlayerShadow, FALSE)
     Call(EnableNpcShadow, NPC_PARTNER, TRUE)
     ExecGetTID(N(EVS_UpdatePassengers), LVar9)
@@ -224,7 +224,7 @@ EvtScript N(EVS_Starship_Arrive) = {
     EndIf
     Call(EnableNpcShadow, NPC_PARTNER, TRUE)
     Call(EnablePartnerAI)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Wait(10)
     IfLt(GB_StoryProgress, STORY_CH8_REACHED_BOWSERS_CASTLE)
         Set(GB_StoryProgress, STORY_CH8_REACHED_BOWSERS_CASTLE)

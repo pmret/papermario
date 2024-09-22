@@ -55,29 +55,29 @@ void update_cameras(void) {
                 break;
         }
 
-        guLookAtReflectF(cam->viewMtxPlayer, &gDisplayContext->lookAt, cam->lookAt_eye.x, cam->lookAt_eye.y, cam->lookAt_eye.z, cam->lookAt_obj.x, cam->lookAt_obj.y, cam->lookAt_obj.z, 0, 1.0f, 0);
+        guLookAtReflectF(cam->mtxViewPlayer, &gDisplayContext->lookAt, cam->lookAt_eye.x, cam->lookAt_eye.y, cam->lookAt_eye.z, cam->lookAt_obj.x, cam->lookAt_obj.y, cam->lookAt_obj.z, 0, 1.0f, 0);
 
         if (!(cam->flags & CAMERA_FLAG_ORTHO)) {
             if (cam->flags & CAMERA_FLAG_LEAD_PLAYER) {
                 create_camera_leadplayer_matrix(cam);
             }
 
-            guPerspectiveF(cam->perspectiveMatrix, &cam->perspNorm, cam->vfov, (f32) cam->viewportW / (f32) cam->viewportH, (f32) cam->nearClip, (f32) cam->farClip, 1.0f);
+            guPerspectiveF(cam->mtxPerspective, &cam->perspNorm, cam->vfov, (f32) cam->viewportW / (f32) cam->viewportH, (f32) cam->nearClip, (f32) cam->farClip, 1.0f);
 
             if (cam->flags & CAMERA_FLAG_SHAKING) {
-                guMtxCatF(cam->viewMtxShaking, cam->perspectiveMatrix, cam->perspectiveMatrix);
+                guMtxCatF(cam->mtxViewShaking, cam->mtxPerspective, cam->mtxPerspective);
             }
 
             if (cam->flags & CAMERA_FLAG_LEAD_PLAYER) {
-                guMtxCatF(cam->viewMtxLeading, cam->perspectiveMatrix, cam->perspectiveMatrix);
+                guMtxCatF(cam->mtxViewLeading, cam->mtxPerspective, cam->mtxPerspective);
             }
 
-            guMtxCatF(cam->viewMtxPlayer, cam->perspectiveMatrix, cam->perspectiveMatrix);
+            guMtxCatF(cam->mtxViewPlayer, cam->mtxPerspective, cam->mtxPerspective);
         } else {
             f32 w = cam->viewportW;
             f32 h = cam->viewportH;
 
-            guOrthoF(cam->perspectiveMatrix, -w * 0.5, w * 0.5, -h * 0.5, h * 0.5, -1000.0f, 1000.0f, 1.0f);
+            guOrthoF(cam->mtxPerspective, -w * 0.5, w * 0.5, -h * 0.5, h * 0.5, -1000.0f, 1000.0f, 1.0f);
         }
 
         get_screen_coords(CAM_DEFAULT, cam->targetPos.x, cam->targetPos.y, cam->targetPos.z, &sx, &sy, &sz);
@@ -184,12 +184,12 @@ void render_frame(s32 isSecondPass) {
                 gSPPerspNormalize(gMainGfxPos++, camera->perspNorm);
             }
 
-            guMtxF2L(camera->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
+            guMtxF2L(camera->mtxPerspective, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
             gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH | G_MTX_LOAD |
                         G_MTX_PROJECTION);
         }
 
-        camera->unkMatrix = &gDisplayContext->matrixStack[gMatrixListPos];
+        camera->mtxBillboard = &gDisplayContext->matrixStack[gMatrixListPos];
         matrixListPos = gMatrixListPos++;
         guRotate(&gDisplayContext->matrixStack[matrixListPos], -camera->trueRot.x, 0.0f, 1.0f, 0.0f);
         camera->vpAlt.vp.vtrans[0] = camera->vp.vp.vtrans[0] + gGameStatusPtr->altViewportOffset.x;
@@ -210,9 +210,9 @@ void render_frame(s32 isSecondPass) {
                 execute_render_tasks();
                 render_transformed_hud_elements();
             } else {
-                guOrthoF(camera->perspectiveMatrix, 0.0f, SCREEN_WIDTH, -SCREEN_HEIGHT, 0.0f, -1000.0f, 1000.0f,
+                guOrthoF(camera->mtxPerspective, 0.0f, SCREEN_WIDTH, -SCREEN_HEIGHT, 0.0f, -1000.0f, 1000.0f,
                             1.0f);
-                guMtxF2L(camera->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
+                guMtxF2L(camera->mtxPerspective, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
                 gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH |
                             G_MTX_LOAD | G_MTX_PROJECTION);
                 render_transformed_hud_elements();
@@ -380,7 +380,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->zoomPercent = 100;
     set_cam_viewport(camID, initData->viewStartX, initData->viewStartY, initData->viewWidth, initData->viewHeight);
     camera->unk_212 = -1;
-    camera->unk_530 = TRUE;
+    camera->needsInitialConstrainDir = TRUE;
     camera->bgColor[0] = 0;
     camera->bgColor[1] = 0;
     camera->bgColor[2] = 0;
@@ -400,14 +400,14 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->leadInterpAlpha = 0.0f;
     camera->accumulatedStickLead = 0.0f;
     camera->increasingLeadInterp = FALSE;
-    camera->leadUnkX = 0.0f;
-    camera->leadUnkZ = 0.0f;
-    camera->unk_52C = 0;
-    camera->leadControlSettings = NULL;
+    camera->prevLeadPosX = 0.0f;
+    camera->prevLeadPosZ = 0.0f;
+    camera->leadConstrainDir = 0;
+    camera->prevLeadSettings = NULL;
     camera->panActive = FALSE;
     camera->followPlayer = FALSE;
     camera->unk_C4 = 1000.0f;
-    camera->unk_520 = 0.2f;
+    camera->leadAmtScale = 0.2f;
     camera->moveSpeed = 1.0f;
     return camera;
 }
@@ -456,7 +456,7 @@ void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screen
     f32 tY;
     f32 tX;
 
-    transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &tX, &tY, &tZ, &tW);
+    transform_point(camera->mtxPerspective, x, y, z, 1.0f, &tX, &tY, &tZ, &tW);
 
     *screenZ = tZ + 5000.0f;
     if (*screenZ < 0) {

@@ -13,9 +13,9 @@ EvtScript N(EVS_FocusCamOnLock) = {
             Call(GetCamPosA, CAM_DEFAULT, LVar0, LVar1)
             Call(SetCamPosA, CAM_DEFAULT, Float(-64.0), LVar1)
             Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(AwaitPlayerLeave, 320, 0, 60)
-            Call(PanToTarget, CAM_DEFAULT, 0, 0)
+            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         EndIf
         Wait(1)
         Goto(0)
@@ -49,7 +49,7 @@ EvtScript N(EVS_UnlockDoors) = {
     Call(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     Set(LVar0, MV_Padlock_EntityIndex)
     Call(N(RemovePadlock))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     ResumeGroup(EVT_GROUP_01)
     Unbind
     Return

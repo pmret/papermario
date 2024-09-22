@@ -117,7 +117,7 @@ EvtScript N(EVS_Scene_TheEnd) = {
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(SetCamPitch, CAM_DEFAULT, Float(8.0), Float(-11.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         Call(SetNpcSpeed, NPC_ParadePeach, Float(2.0))
         Call(SetNpcFlagBits, NPC_ParadePeach, NPC_FLAG_GRAVITY, TRUE)

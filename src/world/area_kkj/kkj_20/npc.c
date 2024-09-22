@@ -145,7 +145,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
         Call(SetCamPosB, CAM_DEFAULT, Float(30.0), Float(-85.0))
         Call(SetCamPosC, CAM_DEFAULT, 0, Float(-50.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Call(PlayerMoveTo, 95, -87, 0)
     Call(InterpPlayerYaw, 229, 1)
@@ -164,7 +164,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Wait(1)
     EndThread
     Return
@@ -269,7 +269,7 @@ EvtScript N(EVS_Inspect_Dresser_Mario) = {
     Call(SetCamDistance, CAM_DEFAULT, 250)
     Call(SetCamPitch, CAM_DEFAULT, Float(18.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(func_802D1270, -50, 0, Float(2.5))
     Call(InterpPlayerYaw, 90, 5)
     Call(func_802CF56C, 2)

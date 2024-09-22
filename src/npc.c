@@ -974,7 +974,7 @@ void render_npcs(void) {
             && (npc->flags != 0)
             && !(npc->flags & (NPC_FLAG_SUSPENDED | NPC_FLAG_HAS_NO_SPRITE | NPC_FLAG_INACTIVE | NPC_FLAG_INVISIBLE))
         ) {
-            transform_point(cam->perspectiveMatrix, npc->pos.x, npc->pos.y, npc->pos.z, 1.0f, &x, &y, &z, &s);
+            transform_point(cam->mtxPerspective, npc->pos.x, npc->pos.y, npc->pos.z, 1.0f, &x, &y, &z, &s);
             if (!(s < 0.01) || !(s > -0.01)) {
                 renderDist = ((z * 5000.0f) / s) + 5000.0f;
                 if (renderDist < 0.0f) {

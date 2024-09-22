@@ -6,7 +6,7 @@ EvtScript N(EVS_Scene_FallingDown) = {
     Call(SetPanTarget, CAM_DEFAULT, -270, 20, -80)
     Call(SetCamDistance, CAM_DEFAULT, Float(700.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     IfGe(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
         Call(SetPlayerPos, NPC_DISPOSE_LOCATION)
         Call(DisablePlayerInput, TRUE)
@@ -17,9 +17,9 @@ EvtScript N(EVS_Scene_FallingDown) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Call(DisablePlayerInput, FALSE)
         Return
     EndIf
@@ -30,7 +30,7 @@ EvtScript N(EVS_Scene_FallingDown) = {
     Wait(30 * DT)
     Call(SetCamDistance, CAM_DEFAULT, 220)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Wait(18 * DT)
@@ -61,7 +61,7 @@ EvtScript N(EVS_Scene_FallingDown) = {
         Wait(20 * DT)
         Call(SetPanTarget, CAM_DEFAULT, -310, 20, -80)
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.2 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Call(SetPlayerImgFXFlags, IMGFX_FLAG_2000 | IMGFX_FLAG_800)
     Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_FLUTTER_DOWN, 1, 1, 0)
@@ -81,9 +81,9 @@ EvtScript N(EVS_Scene_FallingDown) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     EndThread
     Wait(30 * DT)
     Call(DisablePlayerPhysics, FALSE)

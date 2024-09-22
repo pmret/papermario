@@ -48,7 +48,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
     Call(SetCamDistance, CAM_DEFAULT, 300)
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(30 * DT)
     Thread
         Call(SetNpcSpeed, NPC_GoombaBros_Red, Float(6.0 / DT))
@@ -76,7 +76,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
     Call(SetCamDistance, CAM_DEFAULT, 450)
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-3.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_GoombaBros_Red, ANIM_GoombaBros_Red_Talk, ANIM_GoombaBros_Red_Idle, 0, MSG_CH0_00BD)
     Wait(10 * DT)
@@ -99,7 +99,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
     Wait(15 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Wait(5 * DT)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return

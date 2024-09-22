@@ -283,7 +283,7 @@ void N(CleftAI_PostDisguise)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     }
 }
 
-s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(CleftAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

@@ -288,7 +288,7 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
     Call(SetCamPosA, CAM_DEFAULT, 300, -500)
     Call(SetCamPosB, CAM_DEFAULT, -100, 0)
     Call(SetCamDistance, CAM_DEFAULT, 360)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(DisablePartnerAI, 0)
     Call(DisablePlayerInput, TRUE)
     Call(DisablePlayerPhysics, TRUE)
@@ -347,7 +347,7 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
             Call(SetPlayerAnimation, ANIM_Mario1_Idle)
         EndThread
         Call(EndSpeech, NPC_Bombette, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0)
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Call(SetNpcVar, NPC_Bombette, 0, 1)

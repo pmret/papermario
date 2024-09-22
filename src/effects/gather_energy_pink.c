@@ -117,7 +117,7 @@ void gather_energy_pink_update(EffectInstance* effect) {
         part->unk_1C += (part->unk_20 + sin_deg(unk_28 * 10) * 0.1 * part->unk_20 - part->unk_1C) * 0.3;
     }
 
-    transform_point(&gCameras[gCurrentCameraID].perspectiveMatrix[0], part->posA.x, part->posA.y, part->posA.z, 1.0f, &sp28, &sp2C, &sp30, &sp34);
+    transform_point(&gCameras[gCurrentCameraID].mtxPerspective[0], part->posA.x, part->posA.y, part->posA.z, 1.0f, &sp28, &sp2C, &sp30, &sp34);
 
     sp34 = 1.0f / sp34;
     sp28 *= sp34;

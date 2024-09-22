@@ -21,7 +21,7 @@ EvtScript N(EVS_RaisePipe_JumpAttack) = {
     Call(SetPanTarget, CAM_DEFAULT, -25, 0, -155)
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.2))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(5)
     Call(PlaySoundWithVolume, SOUND_GROW, 0)
@@ -46,7 +46,7 @@ EvtScript N(EVS_RaisePipe_SmashAttack) = {
     Call(SetPanTarget, CAM_DEFAULT, 95, 0, -155)
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.2))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(5)
     Call(PlaySoundWithVolume, SOUND_GROW, 0)
@@ -73,9 +73,9 @@ EvtScript N(EVS_SetCamera_RaisePipe) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, 0, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.2))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Return
     End
 };

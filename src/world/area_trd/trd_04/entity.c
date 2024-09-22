@@ -107,7 +107,7 @@ EvtScript N(EVS_DropSwitch) = {
     Call(SetPanTarget, CAM_DEFAULT, -188, 0, -43)
     Call(SetCamDistance, CAM_DEFAULT, Float(510.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(3 * DT)
     Call(PlaySoundAt, SOUND_FALL_QUICK, SOUND_SPACE_DEFAULT, -180, 175, -35)
     Call(MakeLerp, 175, 0, 20 * DT, EASING_QUADRATIC_IN)
@@ -128,9 +128,9 @@ EvtScript N(EVS_DropSwitch) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(2)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return
     End

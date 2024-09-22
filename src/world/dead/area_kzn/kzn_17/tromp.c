@@ -12,7 +12,7 @@ EvtScript N(EVS_SpinyTromp_ManageCamera) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar3, LVar4, LVar5)
     Call(SetCamDistance, CAM_DEFAULT, 500)
     Call(SetCamSpeed, CAM_DEFAULT, Float(10.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Loop(0)
         IfEq(AF_KZN_Tromp2_ShakingDone, FALSE)
             IfLt(MV_TrompPosX, 550)
@@ -28,7 +28,7 @@ EvtScript N(EVS_SpinyTromp_ManageCamera) = {
                 Call(N(UnkFunc46))
                 Sub(LVar2, 55)
                 Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar2, 30)
-                Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             EndIf
         EndIf
         Wait(1)

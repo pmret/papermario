@@ -18,7 +18,7 @@ EvtScript N(EVS_SpawnStarCard) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.6))
         Call(SetPanTarget, CAM_DEFAULT, 145, 30, 0)
         EVT_SPIRIT_ADJUST_CAM(10000)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(N(StarSpiritEffectFunc2), 2, 50, 100, 31, -6, 145, 65, 0, 30, 0)
         Thread
             Call(N(StarSpiritEffectFunc3))
@@ -53,7 +53,7 @@ EvtScript N(EVS_SpawnStarCard) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
         Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Call(DisablePlayerInput, FALSE)
     Else
         Call(N(StarSpiritEffectFunc5), 2, 145, 30, 0, 0)
@@ -80,7 +80,7 @@ EvtScript N(EVS_RespawnStarCard) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.6))
         Call(SetPanTarget, CAM_DEFAULT, 145, 30, 0)
         EVT_SPIRIT_ADJUST_CAM(10000)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(N(StarSpiritEffectFunc2), 2, 50, 100, 31, -6, 145, 65, 0, 30, 0)
         Thread
             Call(N(StarSpiritEffectFunc3))
@@ -115,7 +115,7 @@ EvtScript N(EVS_RespawnStarCard) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
         Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Call(DisablePlayerInput, FALSE)
     Else
         Call(N(StarSpiritEffectFunc5), 2, 145, 30, 0, 0)
@@ -152,7 +152,7 @@ EvtScript N(EVS_Scene_TubbaReunion) = {
     Call(SetCamPosB, CAM_DEFAULT, 0, -500)
     Call(SetCamPosC, CAM_DEFAULT, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 5, 0, -147)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(RotateModel, MODEL_o39, 80, 0, -1, 0)
     Call(PlaySoundAtNpc, NPC_TubbasHeart, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
     Call(SetNpcJumpscale, NPC_TubbasHeart, Float(2.5))
@@ -214,7 +214,7 @@ EvtScript N(EVS_Scene_TubbaReunion) = {
         Call(SetCamPosB, CAM_DEFAULT, 0, -500)
         Call(SetCamPosC, CAM_DEFAULT, 0, 0)
         Call(SetPanTarget, CAM_DEFAULT, 65, 0, -137)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim22)
     EndThread
     Call(PlaySoundAtNpc, NPC_TubbasHeart, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
@@ -246,7 +246,7 @@ EvtScript N(EVS_Scene_TubbaReunion) = {
         Call(SetCamPitch, CAM_DEFAULT, Float(8.0), Float(-9.0))
         Call(SetCamDistance, CAM_DEFAULT, 450)
         Call(SetPanTarget, CAM_DEFAULT, 250, 0, -46)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt3, COLLIDER_FLAGS_UPPER_MASK)
     Call(SetPlayerPos, 0, 20, -195)

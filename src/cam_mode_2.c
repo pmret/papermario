@@ -35,9 +35,9 @@ void update_camera_unused_confined(Camera* camera) {
         f4 = -deltaZ;
     }
     camera->lookAt_obj_target.z = f4;
-    camera->unk_70 = 0.0f;
+    camera->interpYaw = 0.0f;
     camera->curBoomYaw = 0.0f;
-    camera->trueRot.x = camera->unk_70;
+    camera->trueRot.x = camera->interpYaw;
     camera->curBoomLength = camera->lookAt_dist * CamLengthScale;
     camera->curYOffset = camera->auxBoomPitch * CamLengthScale;
     if (camera->needsInit) {
@@ -61,7 +61,7 @@ void update_camera_unused_confined(Camera* camera) {
         deltaX = deltaX2;
         deltaY = cosBoom * deltaY2 + deltaZ2 * sinBoom;
         deltaZ = sinBoom * new_var + deltaZ2 * cosBoom;
-        boomYaw = DEG_TO_RAD(camera->unk_70);
+        boomYaw = DEG_TO_RAD(camera->interpYaw);
         sinBoom = sin_rad(boomYaw);
         cosBoom = cos_rad(boomYaw);
         deltaX2 = cosBoom * deltaX - deltaZ * sinBoom;
@@ -88,7 +88,7 @@ void update_camera_unused_confined(Camera* camera) {
     deltaX = deltaX2;
     deltaY = cosBoom * deltaY2 + deltaZ2 * sinBoom;
     deltaZ = sinBoom * new_var + deltaZ2 * cosBoom;
-    boomYaw = DEG_TO_RAD(camera->unk_70);
+    boomYaw = DEG_TO_RAD(camera->interpYaw);
     sinBoom = sin_rad(boomYaw);
     cosBoom = cos_rad(boomYaw);
     deltaX2 = cosBoom * deltaX - deltaZ * sinBoom;
@@ -121,11 +121,11 @@ void update_camera_interp_pos(Camera *camera) {
     f32 deltaZ3;
     f32 tmp;
 
-    camera->unk_70 = camera->auxBoomLength;
+    camera->interpYaw = camera->auxBoomLength;
     camera->curBoomLength = camera->lookAt_dist * CamLengthScale;
     camera->curYOffset = camera->auxBoomPitch * CamLengthScale;
     camera->curBoomYaw = camera->auxPitch;
-    camera->trueRot.x = camera->unk_70;
+    camera->trueRot.x = camera->interpYaw;
     if (camera->needsInit) {
         camera->needsInit = FALSE;
         camera->unk_98 = 0.0f;
@@ -152,7 +152,7 @@ void update_camera_interp_pos(Camera *camera) {
         deltaY = cosBoom * -deltaY3 + deltaZ3 * sinBoom;
         deltaZ = sinBoom * deltaY3 + deltaZ3 * cosBoom;
 
-        boomYaw = DEG_TO_RAD(camera->unk_70);
+        boomYaw = DEG_TO_RAD(camera->interpYaw);
         sinBoom = sin_rad(boomYaw);
         cosBoom = cos_rad(boomYaw);
 
@@ -215,7 +215,7 @@ void update_camera_interp_pos(Camera *camera) {
     deltaY = cosBoom * -deltaY3 + deltaZ3 * sinBoom;
     deltaZ = sinBoom * deltaY3 + deltaZ3 * cosBoom;
 
-    boomYaw = DEG_TO_RAD(camera->unk_70);
+    boomYaw = DEG_TO_RAD(camera->interpYaw);
     sinBoom = sin_rad(boomYaw);
     cosBoom = cos_rad(boomYaw);
 

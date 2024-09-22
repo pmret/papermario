@@ -25,14 +25,14 @@ EvtScript N(EVS_Moustafa_SetCamBetween) = {
     Add(LVar1, 15)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(8.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
 };
 
 EvtScript N(EVS_Moustafa_ResetCam) = {
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return

@@ -359,7 +359,7 @@ EvtScript N(EVS_Scene_ShuffleFuzzyPositions) = {
 #else
     Call(SetCamSpeed, CAM_DEFAULT, 3)
 #endif
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(60 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
     Call(SetNpcJumpscale, NPC_BossFuzzy, 3)
@@ -540,7 +540,7 @@ EvtScript N(EVS_Scene_ShuffleFuzzyPositions) = {
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Wait(30)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
 #if VERSION_PAL
     Call(SetCamSpeed, CAM_DEFAULT, Float(3 / DT))
 #else
@@ -887,7 +887,7 @@ EvtScript N(EVS_Scene_KooperArrives) = {
 #else
     Call(SetCamSpeed, CAM_DEFAULT, 3)
 #endif
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         Wait(20 * DT)
         Call(PlayerMoveTo, -205, 267, 40)
@@ -992,7 +992,7 @@ EvtScript N(EVS_Scene_KooperArrives) = {
     Exec(N(EVS_PopSong))
     Wait(10 * DT)
     Call(EnablePartnerAI)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
 #if VERSION_PAL
     Call(SetCamSpeed, CAM_DEFAULT, Float(3 / DT))
 #else
@@ -1010,7 +1010,7 @@ EvtScript N(EVS_Scene_KooperArrives) = {
 #else
     Call(SetCamSpeed, CAM_DEFAULT, 3)
 #endif
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(20 * DT)
     Call(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Walk)
     Call(SetNpcPos, NPC_BossFuzzy, 63, 0, 212)
@@ -1077,7 +1077,7 @@ EvtScript N(EVS_Scene_KooperArrives) = {
     EndThread
     Call(UseSettingsFrom, CAM_DEFAULT, -260, 0, 284)
     Call(SetPanTarget, CAM_DEFAULT, -260, 0, 284)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
 #if VERSION_PAL
     Call(SetCamSpeed, CAM_DEFAULT, Float(2 / DT))
 #else
@@ -1207,9 +1207,9 @@ EvtScript N(EVS_Scene_KooperArrives) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -260, 0, 284)
     Call(SetPanTarget, CAM_DEFAULT, -260, 0, 284)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(15 * DT)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Set(AF_NOK04_CamPanDone, TRUE)
     Wait(30 * DT)
     Call(DisablePlayerInput, FALSE)
@@ -1229,7 +1229,7 @@ EvtScript N(EVS_HitTree_Correct) = {
         Call(SetPanTarget, CAM_DEFAULT, LVarA, LVarB, LVarC)
         Call(SetCamPitch, CAM_DEFAULT, 15, -11)
         Call(SetCamSpeed, CAM_DEFAULT, 3)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Call(N(GetTreeHidingSpotPos), LVar0, LVar0, LVar1, LVar2)
     Call(GetNpcPointer, NPC_BossFuzzy, LVarE)
@@ -1364,7 +1364,7 @@ EvtScript N(EVS_HitTree_Correct) = {
             Set(AF_NOK04_PlayingGame, FALSE)
             Exec(N(EVS_Scene_KooperArrives))
     EndSwitch
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
 #if VERSION_PAL
     Call(SetCamSpeed, CAM_DEFAULT, Float(3 / DT))
 #else
@@ -1386,7 +1386,7 @@ EvtScript N(EVS_HitTree_Wrong) = {
         Call(SetPanTarget, CAM_DEFAULT, LVarA, LVarB, LVarC)
         Call(SetCamPitch, CAM_DEFAULT, 15, -11)
         Call(SetCamSpeed, CAM_DEFAULT, 3)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Wait(15)
     Set(MV_LastWrongTreeIndex, LVar0)

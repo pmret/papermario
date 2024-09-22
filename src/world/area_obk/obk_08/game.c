@@ -297,7 +297,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
             EndIf
         EndLoop
         Call(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0032)
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Wait(10)
         Set(MV_KeepAwayResult, KEEP_AWAY_WAITING)
         Call(DisablePlayerInput, FALSE)
@@ -327,7 +327,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
             Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
             Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
             Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Call(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0033)
             Wait(20)
@@ -343,7 +343,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
             Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
             Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
             Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Wait(20)
             Thread
@@ -374,9 +374,9 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
             Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
             Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
             Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, 0)
+            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Else
             Call(SetCamProperties, CAM_DEFAULT, Float(2.0), 0, 0, 0, Float(450.0), Float(15.0), Float(-7.0))
             Wait(30)

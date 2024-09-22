@@ -29,7 +29,7 @@ EvtScript N(EVS_NpcIdle_Bowser) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-7.0))
         Call(SetCamDistance, CAM_DEFAULT, 1000)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Call(StartBossBattle, SONG_FINAL_BOWSER_BATTLE)
     Goto(0)

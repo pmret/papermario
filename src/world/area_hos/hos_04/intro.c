@@ -121,7 +121,7 @@ EvtScript N(EVS_Intro_PostHeist) = {
     Call(N(SetCamVfov), CAM_DEFAULT, 75)
     Call(SetPanTarget, CAM_DEFAULT, 0, 30, 0)
     Call(LoadSettings, CAM_DEFAULT, Ref(N(CamSettings_PostHeist)))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Thread
         Exec(N(EVS_ControlTwink))
@@ -176,7 +176,7 @@ EvtScript N(EVS_Intro_PreHeist_Unused) = {
     Call(N(SetCamVfov), CAM_DEFAULT, 75)
     Call(SetPanTarget, CAM_DEFAULT, 0, 30, 0)
     Call(LoadSettings, CAM_DEFAULT, Ref(N(CamSettings_PreHeist)))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Thread
         Call(N(AnimateBoomLengthPreHeist))

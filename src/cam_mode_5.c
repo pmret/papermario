@@ -13,11 +13,11 @@ void update_camera_unused_leading(Camera* camera) {
     camera->curYOffset = 47.0f;
 
     if (camera->needsInit) {
-        camera->unk_550 = 0.0f;
-        camera->unk_70 = 0.0f;
+        camera->unusedLeadAmt = 0.0f;
+        camera->interpYaw = 0.0f;
         camera->trueRot.x = 0.0f;
         camera->needsInit = FALSE;
-        camera->unk_554 = 0;
+        camera->unusedLeadCounter = 0;
         camera->lookAt_obj.x = camera->targetPos.x;
         camera->lookAt_obj.y = camera->targetPos.y + camera->curYOffset;
         camera->lookAt_obj.z = camera->targetPos.z;
@@ -26,7 +26,7 @@ void update_camera_unused_leading(Camera* camera) {
         f32 maxInterpSpeed = (playerStatus->curSpeed * 1.5f) + 1.0f;
         f32 interpRate = (playerStatus->curSpeed * 0.05f) + 0.05f;
 
-        camera->lookAt_obj_target.x = camera->targetPos.x + camera->unk_550;
+        camera->lookAt_obj_target.x = camera->targetPos.x + camera->unusedLeadAmt;
         camera->lookAt_obj_target.y = camera->targetPos.y + camera->curYOffset;
         camera->lookAt_obj_target.z = camera->targetPos.z;
         update_unused_lead_amt(camera);
@@ -78,26 +78,26 @@ void update_unused_lead_amt(Camera* camera) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (fabsf(get_clamped_angle_diff(playerStatus->curYaw, 90.0f)) < 45.0f) {
-        if (camera->unk_556 == 0) {
-            if (camera->unk_554 <= 0) {
-                camera->unk_550 = 35.0f;
+        if (camera->unusedLeadDir == 0) {
+            if (camera->unusedLeadCounter <= 0) {
+                camera->unusedLeadAmt = 35.0f;
             } else {
-                camera->unk_554--;
+                camera->unusedLeadCounter--;
             }
         } else {
-            camera->unk_554 = 15;
-            camera->unk_556 = 0;
+            camera->unusedLeadCounter = 15;
+            camera->unusedLeadDir = 0;
         }
     } else if (fabsf(get_clamped_angle_diff(playerStatus->curYaw, 270.0f)) < 45.0f) {
-        if (camera->unk_556 == 1) {
-            if (camera->unk_554 <= 0) {
-                camera->unk_550 = -35.0f;
+        if (camera->unusedLeadDir == 1) {
+            if (camera->unusedLeadCounter <= 0) {
+                camera->unusedLeadAmt = -35.0f;
             } else {
-                camera->unk_554--;
+                camera->unusedLeadCounter--;
             }
         } else {
-            camera->unk_554 = 15;
-            camera->unk_556 = 1;
+            camera->unusedLeadCounter = 15;
+            camera->unusedLeadDir = 1;
         }
     }
 }

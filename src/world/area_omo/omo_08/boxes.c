@@ -333,7 +333,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     Call(SetCamDistance, CAM_DEFAULT, 700)
     Call(SetCamPitch, CAM_DEFAULT, 40, Float(-4.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(30)
     Thread
         Call(MakeLerp, 0, 90, 40, EASING_CUBIC_IN)
@@ -404,7 +404,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     Call(SetCamDistance, CAM_DEFAULT, -450)
     Call(SetCamPitch, CAM_DEFAULT, 16, Float(-6.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(10)
     Thread
         Call(GetModelCenter, MODEL_b1_1)
@@ -669,7 +669,7 @@ EvtScript N(EVS_HitBox) = {
         Call(SetCamDistance, CAM_DEFAULT, -450)
         Call(SetCamPitch, CAM_DEFAULT, 16, Float(-6.0))
         Call(SetCamSpeed, CAM_DEFAULT, 1)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Wait(30)
         Switch(MV_BoxHitSequence)
             CaseEq(BOX_SEQUENCE(BOX_COLOR_GREEN, BOX_COLOR_YELLOW, BOX_COLOR_RED, BOX_COLOR_BLUE))

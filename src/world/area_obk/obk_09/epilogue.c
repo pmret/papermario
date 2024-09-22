@@ -16,7 +16,7 @@ EvtScript N(EVS_Scene_Epilogue) = {
     Call(SetCamPosA, CAM_DEFAULT, -280, 234)
     Call(SetCamPosB, CAM_DEFAULT, -135, 105)
     Call(SetCamPosC, CAM_DEFAULT, 0, 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(SetNpcAnimation, NPC_Bootler, ANIM_Bootler_Walk)
     Call(NpcMoveTo, NPC_Bootler, -159, 158, 50)
     Call(SetNpcAnimation, NPC_Bootler, ANIM_Bootler_Idle)

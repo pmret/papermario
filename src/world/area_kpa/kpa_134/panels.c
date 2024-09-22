@@ -24,7 +24,7 @@ EvtScript N(EVS_FocusCam_Wall) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.5), Float(-8.0))
     Call(SetPanTarget, CAM_DEFAULT, LVar6, LVar7, LVar8)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Return
     End
 };
@@ -78,7 +78,7 @@ EvtScript N(EVS_FlipWallPanels) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Set(GF_KPA134_BlueSwitch, TRUE)
     Call(DisablePlayerInput, FALSE)
     Unbind

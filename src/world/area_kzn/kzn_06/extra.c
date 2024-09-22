@@ -95,7 +95,7 @@ EvtScript N(EVS_LowerMainLavaLevel) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(600.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(5.0), Float(8.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(15)
     Thread

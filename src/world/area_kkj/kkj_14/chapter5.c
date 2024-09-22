@@ -10,13 +10,13 @@ EvtScript N(EVS_Scene_Chapter5) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -140, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -140, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.6 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Loop(2)

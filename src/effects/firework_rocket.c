@@ -255,22 +255,22 @@ void firework_rocket_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    mtx_0_0 = camera->perspectiveMatrix[0][0];
-    mtx_0_1 = camera->perspectiveMatrix[0][1];
-    mtx_0_2 = camera->perspectiveMatrix[0][2];
-    mtx_0_3 = camera->perspectiveMatrix[0][3];
-    mtx_1_0 = camera->perspectiveMatrix[1][0];
-    mtx_1_1 = camera->perspectiveMatrix[1][1];
-    mtx_1_2 = camera->perspectiveMatrix[1][2];
-    mtx_1_3 = camera->perspectiveMatrix[1][3];
-    mtx_2_0 = camera->perspectiveMatrix[2][0];
-    mtx_2_1 = camera->perspectiveMatrix[2][1];
-    mtx_2_2 = camera->perspectiveMatrix[2][2];
-    mtx_2_3 = camera->perspectiveMatrix[2][3];
-    mtx_3_0 = camera->perspectiveMatrix[3][0];
-    mtx_3_1 = camera->perspectiveMatrix[3][1];
-    mtx_3_2 = camera->perspectiveMatrix[3][2];
-    mtx_3_3 = camera->perspectiveMatrix[3][3];
+    mtx_0_0 = camera->mtxPerspective[0][0];
+    mtx_0_1 = camera->mtxPerspective[0][1];
+    mtx_0_2 = camera->mtxPerspective[0][2];
+    mtx_0_3 = camera->mtxPerspective[0][3];
+    mtx_1_0 = camera->mtxPerspective[1][0];
+    mtx_1_1 = camera->mtxPerspective[1][1];
+    mtx_1_2 = camera->mtxPerspective[1][2];
+    mtx_1_3 = camera->mtxPerspective[1][3];
+    mtx_2_0 = camera->mtxPerspective[2][0];
+    mtx_2_1 = camera->mtxPerspective[2][1];
+    mtx_2_2 = camera->mtxPerspective[2][2];
+    mtx_2_3 = camera->mtxPerspective[2][3];
+    mtx_3_0 = camera->mtxPerspective[3][0];
+    mtx_3_1 = camera->mtxPerspective[3][1];
+    mtx_3_2 = camera->mtxPerspective[3][2];
+    mtx_3_3 = camera->mtxPerspective[3][3];
 
     gSPDisplayList(gMainGfxPos++, D_E010ACCC[variation]);
     centerX = data->pos.x;

@@ -163,7 +163,7 @@ EvtScript N(EVS_NpcInteract_Herringway) = {
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
             Call(SetCamPosA, CAM_DEFAULT, Float(-224.0), Float(-132.0))
             Call(SetCamPosB, CAM_DEFAULT, Float(-127.0), Float(-314.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(SetPlayerPos, -137, 150, -340)
             Call(PlayerFaceNpc, NPC_SELF, FALSE)
             Call(SetNpcPos, NPC_PARTNER, -170, 150, -350)
@@ -186,7 +186,7 @@ EvtScript N(EVS_NpcInteract_Herringway) = {
                     Wait(1)
                 EndLoop
             EndThread
-            Call(PanToTarget, CAM_DEFAULT, 0, 0)
+            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
             Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             Call(SetNpcSpeed, NPC_SELF, Float(3.0 / DT))
             Call(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Walk)
@@ -823,7 +823,7 @@ EvtScript N(EVS_Scene_EpilogueDelivery) = {
         Call(SetCamDistance, CAM_DEFAULT, Float(-300.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Call(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Walk)
     Call(NpcFlyTo, NPC_Parakarry, 270, 15, 26, 50, 0, EASING_LINEAR)
@@ -896,7 +896,7 @@ EvtScript N(EVS_Scene_EpilogueDelivery) = {
         Call(SetCamDistance, CAM_DEFAULT, Float(-450.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Thread
         Call(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Walk)

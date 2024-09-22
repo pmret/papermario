@@ -157,7 +157,7 @@ API_CALLABLE(BattleCam_Update_Interrupt) {
     return ApiStatus_BLOCK;
 }
 
-s32 BattleCam_Update_FocusMidpointA(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BattleCam_Update_FocusMidpointA) {
     Actor* actor;
     Actor* targetActor;
     Camera* camera = &gCameras[CAM_BATTLE];
@@ -372,7 +372,7 @@ s32 BattleCam_Update_FocusMidpointA(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-s32 BattleCam_Update_FocusMidpointB(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BattleCam_Update_FocusMidpointB) {
     Actor* actor;
     Actor* targetActor;
     Camera* camera = &gCameras[CAM_BATTLE];
@@ -585,7 +585,7 @@ s32 BattleCam_Update_FocusMidpointB(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-s32 BattleCam_Update_FocusActorPart(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BattleCam_Update_FocusActorPart) {
     Actor* actor;
     Actor* targetActor;
     Actor* enemyActor;
@@ -781,7 +781,7 @@ s32 BattleCam_Update_FocusActorPart(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-s32 BattleCam_Update_FocusActor(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BattleCam_Update_FocusActor) {
     Actor* actor;
     Camera* camera = &gCameras[CAM_BATTLE];
     BattleStatus* battleStatus = &gBattleStatus;
@@ -904,7 +904,7 @@ s32 BattleCam_Update_FocusActor(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-s32 BattleCam_Update_FocusGoal(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BattleCam_Update_FocusGoal) {
     Actor* actor;
     Camera* camera = &gCameras[CAM_BATTLE];
     BattleStatus* battleStatus = &gBattleStatus;

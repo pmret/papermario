@@ -40,7 +40,7 @@ EvtScript N(EVS_Scene_Chapter1) = {
     Wait(10 * DT)
     Call(SetPlayerAnimation, ANIM_Peach1_Idle)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0038)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(EnablePartnerAI)
     Call(DisablePlayerPhysics, FALSE)
     Call(DisablePlayerInput, FALSE)

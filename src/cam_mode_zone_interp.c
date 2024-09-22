@@ -1,6 +1,6 @@
 #include "common.h"
 
-BSS CamConfiguration CurrentCamRig;
+BSS CameraRig CurrentCamRig;
 BSS f32 D_800A08DC;
 BSS f32 D_800A08E0;
 BSS f32 D_800A08E4;
@@ -34,15 +34,15 @@ enum CameraSettingsPtrType {
 
 void update_camera_from_controller(
     Camera* camera,
-    CamConfiguration* oldConfiguration, CameraControlSettings** prevController,
-    CamConfiguration* newConfiguration, CameraControlSettings** newController,
+    CameraRig* oldConfiguration, CameraControlSettings** prevController,
+    CameraRig* newConfiguration, CameraControlSettings** newController,
     f32 x1, f32 y1, f32 z1,
     f32 tX, f32 tY, f32 tZ, s32 changingMap,
     f32* interpAlpha, s32 changingZone)
 {
     CameraControlSettings* prevSettings;
     CameraControlSettings* controller;
-    CamConfiguration* configuration;
+    CameraRig* configuration;
 
     f32 boomLength;
 
@@ -615,9 +615,9 @@ void update_camera_zone_interp(Camera* camera) {
     targetZ = camera->targetPos.z;
     changingZone = FALSE;
 
-    if (camera->isChangingMap) {
-        camera->curController = NULL;
-        camera->prevController = NULL;
+    if (camera->needsReinit) {
+        camera->curSettings = NULL;
+        camera->prevSettings = NULL;
         camera->linearInterp = 0.0f;
         camera->yinterpGoal = 0.0f;
         camera->yinterpCur = targetY;
@@ -628,12 +628,12 @@ void update_camera_zone_interp(Camera* camera) {
         camera->prevTargetPos.z = 0.0f;
         camera->prevPrevFollowPlayer = FALSE;
         camera->prevFollowPlayer = FALSE;
-        camera->panPhase = 0.0f;
+        camera->interpEasingParameter = 0.0f;
         D_800A08DC = 0.0f;
         D_800A08E0 = 0.0f;
         camera->interpAlpha = 1.0f;
         camera->yinterpAlpha = 1.0f;
-        camera->linearInterpScale = 1.0f;
+        camera->linearInterpRate = 1.0f;
     }
     tempX = targetX;
     if (camera->moveFlags & CAMERA_MOVE_IGNORE_PLAYER_Y) {
@@ -671,7 +671,7 @@ void update_camera_zone_interp(Camera* camera) {
         || camera->prevTargetPos.x != targetX
         || camera->prevTargetPos.y != targetY
         || camera->prevTargetPos.z != targetZ
-        || camera->isChangingMap
+        || camera->needsReinit
     ) {
 
         if (camera->followPlayer) {
@@ -682,7 +682,7 @@ void update_camera_zone_interp(Camera* camera) {
 
         cond2 = FALSE;
         cs2 = cs;
-        currentController = camera->curController;
+        currentController = camera->curSettings;
         if (cs != NULL
             && currentController != NULL
             && cs->type == currentController->type
@@ -737,17 +737,17 @@ void update_camera_zone_interp(Camera* camera) {
 
         if (camera->panActive || (!cond2 && cs2 != currentController)) {
             if (camera->interpAlpha == 1.0f) {
-                camera->prevController = camera->curController;
+                camera->prevSettings = camera->curSettings;
             } else {
-                camera->prevController = (CameraControlSettings*) CAMERA_SETTINGS_PTR_MINUS_1;
+                camera->prevSettings = (CameraControlSettings*) CAMERA_SETTINGS_PTR_MINUS_1;
             }
             changingZone = TRUE;
-            camera->prevConfiguration = CurrentCamRig;
-            camera->curController = cs;
+            camera->prevRig = CurrentCamRig;
+            camera->curSettings = cs;
             camera->interpAlpha = 0.0f;
             camera->linearInterp = 0.0f;
             camera->panActive = FALSE;
-            camera->linearInterpScale = camera->moveSpeed;
+            camera->linearInterpRate = camera->moveSpeed;
             camera->prevPrevFollowPlayer = camera->prevFollowPlayer;
             camera->prevFollowPlayer = camera->followPlayer;
             camera->prevPrevMovePos.x = camera->prevMovePos.x;
@@ -780,24 +780,24 @@ void update_camera_zone_interp(Camera* camera) {
         tZ = tempZ;
     }
 
-    update_camera_from_controller(camera, &camera->prevConfiguration, &camera->prevController,
-                                  &camera->goalConfiguration, &camera->curController, posX, posY, posZ, tX, tY, tZ,
-                                  camera->isChangingMap, &camera->interpAlpha, changingZone);
+    update_camera_from_controller(camera, &camera->prevRig, &camera->prevSettings,
+                                  &camera->nextRig, &camera->curSettings, posX, posY, posZ, tX, tY, tZ,
+                                  camera->needsReinit, &camera->interpAlpha, changingZone);
 
-    if (camera->isChangingMap) {
-        camera->prevConfiguration = camera->goalConfiguration;
-        camera->isChangingMap = FALSE;
+    if (camera->needsReinit) {
+        camera->prevRig = camera->nextRig;
+        camera->needsReinit = FALSE;
         camera->interpAlpha = 1.0f;
     }
 
-    if (camera->prevConfiguration.boomYaw - camera->goalConfiguration.boomYaw > 180.0f) {
-        camera->prevConfiguration.boomYaw -= 360.0f;
+    if (camera->prevRig.boomYaw - camera->nextRig.boomYaw > 180.0f) {
+        camera->prevRig.boomYaw -= 360.0f;
     }
-    if (camera->prevConfiguration.boomYaw - camera->goalConfiguration.boomYaw < -180.0f) {
-        camera->prevConfiguration.boomYaw += 360.0f;
+    if (camera->prevRig.boomYaw - camera->nextRig.boomYaw < -180.0f) {
+        camera->prevRig.boomYaw += 360.0f;
     }
 
-    delta = camera->prevConfiguration.boomYaw - camera->goalConfiguration.boomYaw;
+    delta = camera->prevRig.boomYaw - camera->nextRig.boomYaw;
     if (delta < 0.0f) {
         delta = -delta;
     }
@@ -806,7 +806,7 @@ void update_camera_zone_interp(Camera* camera) {
     }
     maxDelta = delta;
 
-    delta = camera->prevConfiguration.boomPitch - camera->goalConfiguration.boomPitch;
+    delta = camera->prevRig.boomPitch - camera->nextRig.boomPitch;
     if (delta < 0.0f) {
         delta = -delta;
     }
@@ -817,7 +817,7 @@ void update_camera_zone_interp(Camera* camera) {
         maxDelta = delta;
     }
 
-    delta = camera->prevConfiguration.viewPitch - camera->goalConfiguration.viewPitch;
+    delta = camera->prevRig.viewPitch - camera->nextRig.viewPitch;
     if (delta < 0.0f) {
         delta = -delta;
     }
@@ -828,7 +828,7 @@ void update_camera_zone_interp(Camera* camera) {
         maxDelta = delta;
     }
 
-    delta = camera->prevConfiguration.boomLength - camera->goalConfiguration.boomLength;
+    delta = camera->prevRig.boomLength - camera->nextRig.boomLength;
     if (delta < 0.0f) {
         delta = -delta;
     }
@@ -836,9 +836,9 @@ void update_camera_zone_interp(Camera* camera) {
         maxDelta = delta;
     }
 
-    deltaX = camera->prevConfiguration.targetPos.x - camera->goalConfiguration.targetPos.x;
-    deltaY = camera->prevConfiguration.targetPos.y - camera->goalConfiguration.targetPos.y;
-    deltaZ = camera->prevConfiguration.targetPos.z - camera->goalConfiguration.targetPos.z;
+    deltaX = camera->prevRig.targetPos.x - camera->nextRig.targetPos.x;
+    deltaY = camera->prevRig.targetPos.y - camera->nextRig.targetPos.y;
+    deltaZ = camera->prevRig.targetPos.z - camera->nextRig.targetPos.z;
     delta = SQ(deltaX);
     delta += SQ(deltaY);
     delta += SQ(deltaZ);
@@ -860,14 +860,14 @@ void update_camera_zone_interp(Camera* camera) {
     }
 
     if (maxDelta != 0.0f) {
-        camera->linearInterp += (1.0f / maxDelta) * camera->linearInterpScale;
+        camera->linearInterp += (1.0f / maxDelta) * camera->linearInterpRate;
         if (camera->linearInterp > 1.0f) {
             camera->linearInterp = 1.0f;
         }
     }
 
     if (camera->interpAlpha < 1.0) {
-        panPhase = camera->panPhase;
+        panPhase = camera->interpEasingParameter;
         panRad = panPhase * PI_D;
         temp_f24 = 2.0f / (cos_rad(panRad) + 1.0f);
         temp_f22_2 = cos_rad((camera->linearInterp * PI_D * (1.0f - panPhase)) + panRad);
@@ -887,13 +887,13 @@ void update_camera_zone_interp(Camera* camera) {
 
     interpAlpha = camera->interpAlpha;
     interpAlphaInv = 1.0f - interpAlpha;
-    CurrentCamRig.boomYaw = (camera->prevConfiguration.boomYaw * interpAlphaInv) + (camera->goalConfiguration.boomYaw * interpAlpha);
-    CurrentCamRig.boomLength = (camera->prevConfiguration.boomLength * interpAlphaInv) + (camera->goalConfiguration.boomLength * interpAlpha);
-    CurrentCamRig.boomPitch = (camera->prevConfiguration.boomPitch * interpAlphaInv) + (camera->goalConfiguration.boomPitch * interpAlpha);
-    CurrentCamRig.viewPitch = (camera->prevConfiguration.viewPitch * interpAlphaInv) + (camera->goalConfiguration.viewPitch * interpAlpha);
-    CurrentCamRig.targetPos.x = (camera->prevConfiguration.targetPos.x * interpAlphaInv) + (camera->goalConfiguration.targetPos.x * interpAlpha);
-    CurrentCamRig.targetPos.y = (camera->prevConfiguration.targetPos.y * interpAlphaInv) + (camera->goalConfiguration.targetPos.y * interpAlpha);
-    CurrentCamRig.targetPos.z = (camera->prevConfiguration.targetPos.z * interpAlphaInv) + (camera->goalConfiguration.targetPos.z * interpAlpha);
+    CurrentCamRig.boomYaw = (camera->prevRig.boomYaw * interpAlphaInv) + (camera->nextRig.boomYaw * interpAlpha);
+    CurrentCamRig.boomLength = (camera->prevRig.boomLength * interpAlphaInv) + (camera->nextRig.boomLength * interpAlpha);
+    CurrentCamRig.boomPitch = (camera->prevRig.boomPitch * interpAlphaInv) + (camera->nextRig.boomPitch * interpAlpha);
+    CurrentCamRig.viewPitch = (camera->prevRig.viewPitch * interpAlphaInv) + (camera->nextRig.viewPitch * interpAlpha);
+    CurrentCamRig.targetPos.x = (camera->prevRig.targetPos.x * interpAlphaInv) + (camera->nextRig.targetPos.x * interpAlpha);
+    CurrentCamRig.targetPos.y = (camera->prevRig.targetPos.y * interpAlphaInv) + (camera->nextRig.targetPos.y * interpAlpha);
+    CurrentCamRig.targetPos.z = (camera->prevRig.targetPos.z * interpAlphaInv) + (camera->nextRig.targetPos.z * interpAlpha);
     CurrentCamRig.boomLength *= camera->zoomPercent;
     CurrentCamRig.boomLength *= 0.01;
 

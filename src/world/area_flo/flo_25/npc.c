@@ -19,7 +19,7 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
         Call(SetCamDistance, CAM_DEFAULT, 350)
         Call(SetCamPitch, CAM_DEFAULT, Float(18.5), Float(-7.5))
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Call(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Talk, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003B)
         Call(SetPlayerAnimation, ANIM_Mario1_Thinking)

@@ -43,7 +43,7 @@ EvtScript N(EVS_EnterMap) = {
     Call(DisablePlayerInput, TRUE)
     Call(InterpPlayerYaw, 180, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Loop(0)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         IfLe(LVar1, LVar3)
@@ -51,7 +51,7 @@ EvtScript N(EVS_EnterMap) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return
     End

@@ -47,7 +47,7 @@ EvtScript N(EVS_NpcIdle_Boo_01) = {
         Call(SetCamDistance, CAM_DEFAULT, 325)
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Thread
         Wait(20 * DT)
@@ -100,9 +100,9 @@ EvtScript N(EVS_NpcIdle_Boo_01) = {
 #else
     Call(SetCamSpeed, CAM_DEFAULT, 3)
 #endif
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Return
     End
 };

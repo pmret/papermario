@@ -117,7 +117,7 @@ EvtScript N(EVS_RaiseCamera) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.7))
     Call(SetCamPitch, CAM_DEFAULT, Float(25.0), Float(-22.0))
     Call(SetCamDistance, CAM_DEFAULT, 450)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -181,7 +181,7 @@ EvtScript N(EVS_Scene_ReleaseFountain) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar3, LVar4, LVar5)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
     Call(SetCamDistance, CAM_DEFAULT, 600)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(EnableGroup, MODEL_g22, TRUE)
     Call(TranslateGroup, MODEL_g22, 0, -50, 0)

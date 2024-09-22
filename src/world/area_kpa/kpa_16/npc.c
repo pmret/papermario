@@ -44,7 +44,7 @@ EvtScript N(EVS_Scene_LavaShutoff) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
     Call(SetPanTarget, CAM_DEFAULT, 330, 230, -150)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(1)
     Call(SetPanTarget, CAM_DEFAULT, 330, 170, -150)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
@@ -178,7 +178,7 @@ EvtScript N(EVS_NpcIdle_Guards) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(10.0), Float(-10.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Call(SetPlayerSpeed, Float(3.0 / DT))

@@ -123,7 +123,7 @@ EvtScript N(EVS_Scene_BeginInterlude) = {
     Call(SetPanTarget, CAM_DEFAULT, 0, -1, 0)
     Call(SetCamPitch, CAM_DEFAULT, Float(-13.0), Float(18.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Set(MV_CastleLiftDist, 0)
     Exec(N(EVS_AnimateSwingingChains))
     Exec(N(EVS_AnimateSpinningRing))

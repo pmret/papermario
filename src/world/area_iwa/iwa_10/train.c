@@ -408,7 +408,7 @@ EvtScript N(EVS_ArriveFromToadTown) = {
     Wait(20)
     Call(UseSettingsFrom, CAM_DEFAULT, -420, 20, 97)
     Call(SetPanTarget, CAM_DEFAULT, -420, 20, 97)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitk, COLLIDER_FLAGS_UPPER_MASK)
     Call(SetPlayerJumpscale, Float(1.0))
     Call(SetPlayerActionState, ACTION_STATE_JUMP)
@@ -430,7 +430,7 @@ EvtScript N(EVS_ArriveFromToadTown) = {
     Wait(20)
     Call(SpeakToPlayer, NPC_TrainToad_01, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, MSG_CH2_0000)
     Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return
     End
@@ -503,11 +503,11 @@ EvtScript N(EVS_DepartForToadTown) = {
     Call(SetCamPosA, CAM_DEFAULT, Float(-538.5), Float(-60.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(0.0), Float(-10.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(1)
     Sub(LVar0, 150)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_TrainToad_02, ANIM_TrainToad_Talk, ANIM_TrainToad_Still, 5, MSG_CH2_0003)
     Call(PlaySound, SOUND_TRAIN_DEPARTURE)
@@ -521,7 +521,7 @@ EvtScript N(EVS_DepartForToadTown) = {
         EndLoop
     EndThread
     Wait(90)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     ExecGetTID(N(EVS_FollowTrainCamera), LVar9)
     Wait(130)
     Wait(100)

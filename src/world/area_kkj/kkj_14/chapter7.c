@@ -237,7 +237,7 @@ EvtScript N(EVS_FocusCam_Door_Ch7) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-13.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(-310.0), Float(32.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -248,7 +248,7 @@ EvtScript N(EVS_FocusCam_Bed) = {
     Call(SetPanTarget, CAM_DEFAULT, 380, 30, 10)
     Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -296,7 +296,7 @@ EvtScript N(EVS_Scene_Chapter7) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(325.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Ch7_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, MSG_Peach_0162)
     Call(InterpPlayerYaw, 90, 5)
@@ -328,7 +328,7 @@ EvtScript N(EVS_Scene_Chapter7) = {
     Call(SetPanTarget, CAM_DEFAULT, 250, 30, 10)
     Call(SetCamDistance, CAM_DEFAULT, Float(325.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(10 * DT)
     Call(SetNpcPos, NPC_Ch7_Kammy, 50, 0, -10)
     Call(SetNpcAnimation, NPC_Ch7_Kammy, ANIM_WorldKammy_Anim03)
@@ -348,7 +348,7 @@ EvtScript N(EVS_Scene_Chapter7) = {
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Call(InterpNpcYaw, NPC_Ch7_Bowser, 270, 10)
@@ -430,7 +430,7 @@ EvtScript N(EVS_Scene_Chapter7) = {
     ExecWait(N(EVS_CarryPeachAway))
     Wait(30 * DT)
     ExecWait(N(EVS_EndPeachChapter7))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(EnablePartnerAI)
     Call(DisablePlayerPhysics, FALSE)
     Call(DisablePlayerInput, FALSE)

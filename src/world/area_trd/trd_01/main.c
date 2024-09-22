@@ -55,7 +55,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamPitch, CAM_DEFAULT, 18, 12)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.4 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o162, COLLIDER_FLAGS_UPPER_MASK)
@@ -266,7 +266,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
         Call(EnableModel, MODEL_sui2, FALSE)
     EndThread
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 220, 255)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(1)
     Call(ResetCam, CAM_DEFAULT, Float(1.5 / DT))
     Call(StopSound, SOUND_LOOP_TRD_FLOWING_WATER)

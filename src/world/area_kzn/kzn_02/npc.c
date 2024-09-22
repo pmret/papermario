@@ -45,7 +45,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     Call(NpcMoveTo, NPC_SELF, -740, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -650, 20, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Thrown)
     Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)

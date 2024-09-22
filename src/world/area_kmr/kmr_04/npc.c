@@ -162,7 +162,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
                         Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
                         Call(SetCamPitch, CAM_DEFAULT, Float(17.5), Float(-7.5))
                         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-                        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
                         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                     EndThread
                     Call(SetNpcPos, NPC_JrTroopa, 630, 0, 0)
@@ -181,9 +181,9 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
                         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
                         Call(SetPanTarget, CAM_DEFAULT, 430, LVar1, LVar2)
                         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-                        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
                         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-                        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+                        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
                     EndThread
                     Call(StartBossBattle, SONG_JR_TROOPA_BATTLE)
             EndSwitch
@@ -209,7 +209,7 @@ EvtScript N(EVS_NpcDefeat_JrTroopa) = {
             Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
             Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.5))
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Call(PlayerFaceNpc, NPC_SELF, FALSE)
             Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Hurt)

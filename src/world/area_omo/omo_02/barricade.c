@@ -211,12 +211,12 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     Thread
         Wait(30)
         KillThread(MV_RestrictCamScript)
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Wait(1)
         Call(UseSettingsFrom, CAM_DEFAULT, -380, 0, 0)
         Call(SetPanTarget, CAM_DEFAULT, -380, 0, 0)
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Thread
@@ -364,7 +364,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -125, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -125, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(165)
     Call(PlaySound, SOUND_LRAW_SHY_GUY_CROWD_2 | SOUND_ID_TRIGGER_CHANGE_SOUND)
     Call(StopTrackingSoundPos, SOUND_LRAW_SHY_GUY_CROWD_2)
@@ -413,7 +413,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Set(GF_OMO02_BombedWall, TRUE)
     Call(DisablePlayerInput, FALSE)
     Unbind

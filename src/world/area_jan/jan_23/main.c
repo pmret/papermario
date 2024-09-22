@@ -47,7 +47,7 @@ EvtScript N(EVS_ExitFall_jan_16_4) = {
                     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, 250, 100)
                     Call(SetPanTarget, CAM_DEFAULT, LVar0, -100, LVar2)
                     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-                    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
                     Set(MV_Unk_05, -1)
                 CaseDefault
                     Wait(10)
@@ -78,7 +78,7 @@ EvtScript N(EVS_ExitFall_jan_16_4) = {
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, 250, 100)
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndIf
     Wait(30)
     Call(GotoMap, Ref("jan_16"), jan_16_ENTRY_4)

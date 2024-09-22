@@ -52,7 +52,7 @@ EvtScript N(EVS_Main) = {
     Call(SetCamPosC, CAM_DEFAULT, 0, 65)
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(kmr_23_ENTRY_0)

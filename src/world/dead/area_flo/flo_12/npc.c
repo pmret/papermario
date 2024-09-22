@@ -25,7 +25,7 @@ EvtScript N(EVS_Scene_SunReturns) = {
     Call(SetCamPosA, CAM_DEFAULT, 0, 0)
     Call(SetCamPosB, CAM_DEFAULT, 0, -50)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(20)
     Call(SpeakToPlayer, NPC_Rosie, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_00C7)

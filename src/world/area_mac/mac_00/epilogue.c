@@ -52,7 +52,7 @@ EvtScript N(EVS_Scene_BeginEpilogue) = {
     Call(SetPanTarget, CAM_DEFAULT, -100, 30, -370)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         ExecWait(N(EVS_PlayerExitPipe_Epilogue))
         Wait(10)
@@ -72,7 +72,7 @@ EvtScript N(EVS_Scene_BeginEpilogue) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -60, 0, -320)
     Call(SetPanTarget, CAM_DEFAULT, -60, 0, -320)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(80)
     Call(SpeakToPlayer, NPC_Luigi_Epilogue, ANIM_Luigi_Talk, ANIM_Luigi_Idle, 0, MSG_Outro_0023)
     Wait(10)
@@ -87,7 +87,7 @@ EvtScript N(EVS_Scene_BeginEpilogue) = {
     Call(SetNpcFlagBits, NPC_Luigi_Epilogue, NPC_FLAG_GRAVITY, FALSE)
     Call(SetNpcPos, NPC_Luigi_Epilogue, NPC_DISPOSE_LOCATION)
     Exec(N(EVS_BlockExitToGoomaRoad))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return
     End

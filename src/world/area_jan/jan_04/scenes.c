@@ -47,7 +47,7 @@ EvtScript N(EVS_Scene_Epilogue) = {
     Call(SetCamDistance, CAM_DEFAULT, 350)
     Call(SetCamPitch, CAM_DEFAULT, Float(16.0), Float(-7.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(90)
     Thread
         Call(SetNpcPos, NPC_YoshiKid_01, -350, 0, 15)

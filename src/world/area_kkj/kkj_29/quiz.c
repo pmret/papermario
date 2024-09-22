@@ -48,7 +48,7 @@ EvtScript N(EVS_SetCam_Contestants) = {
     Call(SetPanTarget, CAM_DEFAULT, -265, 0, -140)
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Return
     End
 };
@@ -128,7 +128,7 @@ EvtScript N(EVS_WaitForBuzzIn) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-12.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -936,7 +936,7 @@ EvtScript N(EVS_ManageQuizGame) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 0, NPC_Koopatrol_01, MSG_Peach_00F0)
     Call(InterpNpcYaw, NPC_Koopatrol_01, 270, 0)
@@ -984,7 +984,7 @@ EvtScript N(EVS_ManageQuizGame) = {
 #else
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.8))
 #endif
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_Angry)
     Call(LoadPath, 100 * DT, Ref(N(TwinkFollowPath2)), ARRAY_COUNT(N(TwinkFollowPath2)), EASING_LINEAR)
     ExecWait(N(EVS_TwinkFollowPath))
@@ -1021,7 +1021,7 @@ EvtScript N(EVS_ManageQuizGame) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(-370.0), Float(40.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetMusicTrack, 0, SONG_PEACH_QUIZ_INTRO, 1, 8)
     Call(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, MSG_Peach_00F8)
@@ -1161,7 +1161,7 @@ EvtScript N(EVS_ManageQuizGame) = {
     EndLoop
     Call(SetPanTarget, CAM_DEFAULT, -190, 0, 70)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(InterpPlayerYaw, 270, 0)
     Call(InterpNpcYaw, NPC_PARTNER, 270, 0)

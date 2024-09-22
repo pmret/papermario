@@ -52,7 +52,7 @@ API_CALLABLE(SetCamPerspective) {
 
     camera->updateMode = mode;
     camera->needsInit = TRUE;
-    camera->isChangingMap = TRUE;
+    camera->needsReinit = TRUE;
 
     camera->vfov = vfov;
     camera->farClip = farClip;
@@ -301,15 +301,15 @@ API_CALLABLE(ShakeCam) {
     scale = script->functionTempF[3];
     switch (shakeMode) {
         case CAM_SHAKE_CONSTANT_VERTICAL:
-            guTranslateF(camera->viewMtxShaking, 0.0f, -scale * magnitude, 0.0f);
+            guTranslateF(camera->mtxViewShaking, 0.0f, -scale * magnitude, 0.0f);
             script->functionTempF[3] = -script->functionTempF[3];
             break;
         case CAM_SHAKE_ANGULAR_HORIZONTAL:
-            guRotateF(camera->viewMtxShaking, scale * magnitude, 0.0f, 0.0f, 1.0f);
+            guRotateF(camera->mtxViewShaking, scale * magnitude, 0.0f, 0.0f, 1.0f);
             script->functionTempF[3] = -script->functionTempF[3];
             break;
         case CAM_SHAKE_DECAYING_VERTICAL:
-            guTranslateF(camera->viewMtxShaking, 0.0f, -scale * magnitude, 0.0f);
+            guTranslateF(camera->mtxViewShaking, 0.0f, -scale * magnitude, 0.0f);
             if ((script->functionTemp[1] < (duration * 2)) && (duration < script->functionTemp[1])) {
                 script->functionTempF[3] = script->functionTempF[3] * -0.8;
             } else {
@@ -365,7 +365,7 @@ API_CALLABLE(func_802CB710) {
     f32 value = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
 
-    camera->unk_520 = (value / 100.0f);
+    camera->leadAmtScale = (value / 100.0f);
     return ApiStatus_DONE2;
 }
 
@@ -379,10 +379,10 @@ API_CALLABLE(PanToTarget) {
     camera->panActive = TRUE;
     if (targetType != 0) {
         camera->followPlayer = TRUE;
-        camera->panPhase = panPhase;
+        camera->interpEasingParameter = panPhase;
     } else {
         camera->followPlayer = FALSE;
-        camera->panPhase = 0.0f;
+        camera->interpEasingParameter = 0.0f;
         camera->moveSpeed = 1.0f;
     }
     return ApiStatus_DONE2;
@@ -637,7 +637,7 @@ API_CALLABLE(SetCamProperties) {
         camera->moveSpeed = moveSpeed;
         camera->panActive = TRUE;
         camera->followPlayer = TRUE;
-        camera->panPhase = 0.0f;
+        camera->interpEasingParameter = 0.0f;
         return ApiStatus_BLOCK;
     }
 
@@ -680,7 +680,7 @@ API_CALLABLE(AdjustCam) {
         camera->moveSpeed = moveSpeed;
         camera->panActive = TRUE;
         camera->followPlayer = TRUE;
-        camera->panPhase = 0.0f;
+        camera->interpEasingParameter = 0.0f;
         return ApiStatus_BLOCK;
     }
 
@@ -720,7 +720,7 @@ API_CALLABLE(ResetCam) {
         camera->moveSpeed = moveSpeed;
         camera->panActive = TRUE;
         camera->followPlayer = TRUE;
-        camera->panPhase = 0.0f;
+        camera->interpEasingParameter = 0.0f;
         return ApiStatus_BLOCK;
     }
 
@@ -728,7 +728,7 @@ API_CALLABLE(ResetCam) {
         camera->panActive = TRUE;
         camera->followPlayer = FALSE;
         camera->moveSpeed = 1.0f;
-        camera->panPhase = 0.0f;
+        camera->interpEasingParameter = 0.0f;
         return ApiStatus_DONE2;
     }
 

@@ -30,7 +30,7 @@ EvtScript N(EVS_ShakeTree_Sushie) = {
 #else
             Call(SetCamSpeed, CAM_DEFAULT, 3)
 #endif
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Call(SpeakToPlayer, NPC_Sushie, ANIM_WorldSushie_Talk, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A1)
             Call(ResetCam, CAM_DEFAULT, Float(90.0))
@@ -102,13 +102,13 @@ EvtScript N(EVS_Sushie_ShoutAtChildren) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetPanTarget, CAM_DEFAULT, 30, 140, -60)
     Call(SetCamDistance, CAM_DEFAULT, 300)
     Call(SetCamPitch, CAM_DEFAULT, 16, Float(-6.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_SELF, ANIM_WorldSushie_Hurt, ANIM_WorldSushie_Idle, 0, MSG_CH5_00A0)
 #if VERSION_PAL

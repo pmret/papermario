@@ -347,7 +347,7 @@ EvtScript N(EVS_MinhT_PlantSeed) = {
 #else
     Call(SetCamSpeed, CAM_DEFAULT, 1)
 #endif
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(InterpNpcYaw, NPC_SELF, 90, 1)
     Call(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Run)
     Call(NpcMoveTo, NPC_SELF, 175, 444, 0)
@@ -387,9 +387,9 @@ EvtScript N(EVS_MinhT_PlantSeed) = {
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
             Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, 0)
+            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         EndThread
     EndIf
     Call(InterpNpcYaw, NPC_SELF, 270, 1)

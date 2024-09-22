@@ -12,9 +12,9 @@ void update_camera_unused_ahead(Camera* camera) {
     f32 deltaZ2;
     f32 boomYaw;
 
-    if (camera->needsInit || camera->isChangingMap) {
+    if (camera->needsInit || camera->needsReinit) {
         camera->needsInit = FALSE;
-        camera->isChangingMap = FALSE;
+        camera->needsReinit = FALSE;
         camera->auxPitch = 0;
         camera->auxBoomLength = 100;
         camera->lookAt_dist = 100;

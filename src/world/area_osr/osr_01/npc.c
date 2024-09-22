@@ -15,7 +15,7 @@ EvtScript N(EVS_Scene_Wishing) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(3.0), Float(-10.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(30)
     Call(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_HOS_006F)

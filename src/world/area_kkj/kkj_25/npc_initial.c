@@ -27,7 +27,7 @@ EvtScript N(EVS_NpcIdle_Bowser) = {
         Call(SetCamDistance, CAM_DEFAULT, 1000)
         Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-7.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Call(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE)
     Call(StopSound, SOUND_LRAW_KPA_ARENA_TURN_ON)

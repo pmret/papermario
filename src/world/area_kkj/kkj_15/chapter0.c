@@ -33,7 +33,7 @@ EvtScript N(EVS_FocusCam_WholeRoom) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -45,7 +45,7 @@ EvtScript N(EVS_FocusCam_BowserWide) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-13.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -57,7 +57,7 @@ EvtScript N(EVS_FocusCam_KoopaBros) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(240.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Return
     End
 };
@@ -102,7 +102,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 237, 0, -74)
     Call(SetPanTarget, CAM_DEFAULT, 237, 0, -74)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(30 * DT)
     Exec(N(EVS_OpenDoor_Ch0))
@@ -237,7 +237,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(240.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(15)
     Thread
         Call(PlaySoundAtNpc, NPC_KoopaBros_02, SOUND_SMALL_LENS_FLARE, SOUND_SPACE_DEFAULT)
@@ -304,7 +304,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(200.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-18.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.2 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(40 * DT)
     ExecGetTID(N(EVS_PlaySounds_KoopaBrosShowOff), LVarB)
     Call(N(SetLightSourcePos), 100, 0, -40)
@@ -405,7 +405,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     EndThread
     Wait(30 * DT)
     ExecWait(N(EVS_EndPeachChapter0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerPhysics, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return

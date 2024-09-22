@@ -48,7 +48,7 @@ EvtScript N(EVS_Scene_ShowInvitation) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetCamDistance, CAM_DEFAULT, 775)
     Call(SetCamPitch, CAM_DEFAULT, 20, -19)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
     Call(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
     Call(N(func_80240678_AACEA8), 200, 200, 200, 40, 40, 40)
@@ -72,7 +72,7 @@ EvtScript N(EVS_Scene_ApproachParty) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(3.5), Float(-6.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(60.0), 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         Call(PlayerMoveTo, 0, -250, 150 * DT)
     EndThread

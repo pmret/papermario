@@ -8,7 +8,7 @@ EvtScript N(EVS_SetupCamera) = {
     Call(SetPanTarget, CAM_DEFAULT, 60, 30, 0)
     Call(SetCamPitch, CAM_DEFAULT, Float(20.0), Float(-13.0))
     Call(SetCamDistance, CAM_DEFAULT, 275)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End

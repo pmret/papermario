@@ -49,7 +49,7 @@ EvtScript N(EVS_NpcDefeat_Pokey_01) = {
                         Call(UseSettingsFrom, CAM_DEFAULT, -251, -390, 553)
                         Call(SetPanTarget, CAM_DEFAULT, -251, -390, 553)
                         Wait(1)
-                        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
                         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                         Wait(45)
                         Call(MakeItemEntity, ITEM_RUINS_KEY, -250, -240, 545, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_ISK07_Item_RuinsKey)
@@ -61,7 +61,7 @@ EvtScript N(EVS_NpcDefeat_Pokey_01) = {
                         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
                         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
                         Wait(1)
-                        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+                        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
                         Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
                         Call(DisablePlayerInput, FALSE)
                     EndIf

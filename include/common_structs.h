@@ -136,13 +136,13 @@ typedef struct Matrix4s {
     /* 0x20 */ s16 frac[4][4];
 } Matrix4s; // size = 0x40
 
-typedef struct CamConfiguration {
+typedef struct CameraRig {
     /* 0x00 */ f32 boomYaw;
     /* 0x04 */ f32 boomLength;
     /* 0x08 */ f32 boomPitch;
     /* 0x0C */ f32 viewPitch;
     /* 0x10 */ Vec3f targetPos;
-} CamConfiguration; // size = 0x1C
+} CameraRig; // size = 0x1C
 
 typedef struct DmaTable {
     /* 0x00 */ u8* start;
@@ -752,15 +752,15 @@ typedef struct CameraControlSettings {
         } three;
     } points;
     /* 0x24 */ f32 viewPitch;
-    /* 0x28 */ s32 flag;
+    /* 0x28 */ b32 flag;
 } CameraControlSettings; // size = 0x2C
 
 typedef struct Camera {
     /* 0x000 */ u16 flags;
     /* 0x002 */ s16 moveFlags;
     /* 0x004 */ s16 updateMode;
-    /* 0x006 */ s16 needsInit;
-    /* 0x008 */ b16 isChangingMap;
+    /* 0x006 */ b16 needsInit;
+    /* 0x008 */ b16 needsReinit; // used when loading from a save point or calling SetCamPerspective
     /* 0x00A */ s16 viewportW;
     /* 0x00C */ s16 viewportH;
     /* 0x00E */ s16 viewportStartX;
@@ -778,15 +778,15 @@ typedef struct Camera {
     /* 0x028 */ s16 unk_28;
     /* 0x02A */ s16 zoomPercent;
     /* 0x02C */ s16 bgColor[3];
-    /* 0x032 */ Vec3s targetScreenCoords;
+    /* 0x032 */ Vec3s targetScreenCoords; // screen coords corresponding to targetPos
     /* 0x038 */ u16 perspNorm;
     /* 0x03A */ char unk_3A[2];
-    /* 0x03C */ Vec3f lookAt_eye;
-    /* 0x048 */ Vec3f lookAt_obj;
+    /* 0x03C */ Vec3f lookAt_eye; // used to construct the view matrix
+    /* 0x048 */ Vec3f lookAt_obj; // used to construct the view matrix
     /* 0x054 */ Vec3f lookAt_obj_target;
-    /* 0x060 */ Vec3f targetPos;
+    /* 0x060 */ Vec3f targetPos; // target for camera rig, often but not necessarily the player position
     /* 0x06C */ f32 curYaw;
-    /* 0x070 */ f32 unk_70;
+    /* 0x070 */ f32 interpYaw; // no camera mode actually uses this for interpolation
     /* 0x074 */ f32 curBoomYaw;
     /* 0x078 */ f32 curBoomLength;
     /* 0x07C */ f32 curYOffset;
@@ -801,26 +801,26 @@ typedef struct Camera {
     /* 0x0C0 */ s32 unk_C0;
     /* 0x0C4 */ f32 unk_C4;
     /* 0x0C8 */ char unk_C8[0xC];
-    /* 0x0D4 */ Matrix4f perspectiveMatrix;
-    /* 0x114 */ Matrix4f viewMtxPlayer; /* centers on player */
-    /* 0x154 */ Matrix4f viewMtxLeading; /* leads player slightly */
-    /* 0x194 */ Matrix4f viewMtxShaking; /* used while ShakeCam is active */
+    /* 0x0D4 */ Matrix4f mtxPerspective;
+    /* 0x114 */ Matrix4f mtxViewPlayer; // centers on player
+    /* 0x154 */ Matrix4f mtxViewLeading; // leads player slightly
+    /* 0x194 */ Matrix4f mtxViewShaking; // used while ShakeCam is active
     /* 0x1D4 */ char unk_1D4[0x28];
     /* 0x1FC */ void (*fpDoPreRender)(struct Camera*);
     /* 0x200 */ void (*fpDoPostRender)(struct Camera*);
-    /* 0x204 */ Mtx* unkMatrix;
+    /* 0x204 */ Mtx* mtxBillboard; // rotation matrix created from -curBoomYaw
     /* 0x208 */ s32 unk_208;
     /* 0x20C */ Matrix4s* unkEffectMatrix;
     /* 0x210 */ char unk_210[0x2];
     /* 0x212 */ s16 unk_212;
     /* 0x214 */ CameraUnk unk_214[4];
-    /* 0x444 */ CameraControlSettings* prevController;
-    /* 0x448 */ CameraControlSettings* curController;
-    /* 0x44C */ CamConfiguration prevConfiguration;
-    /* 0x468 */ CamConfiguration goalConfiguration;
+    /* 0x444 */ CameraControlSettings* prevSettings;
+    /* 0x448 */ CameraControlSettings* curSettings;
+    /* 0x44C */ CameraRig prevRig;
+    /* 0x468 */ CameraRig nextRig;
     /* 0x484 */ f32 interpAlpha;
     /* 0x488 */ f32 linearInterp;
-    /* 0x48C */ f32 linearInterpScale; /* 3.0? */
+    /* 0x48C */ f32 linearInterpRate;
     /* 0x490 */ f32 moveSpeed;
     /* 0x494 */ f32 yinterpGoal;
     /* 0x498 */ f32 yinterpAlpha;
@@ -835,22 +835,22 @@ typedef struct Camera {
     /* 0x4D8 */ CameraControlSettings controlSettings;
     /* 0x504 */ u16 followPlayer;
     /* 0x506 */ u16 panActive;
-    /* 0x508 */ f32 panPhase;
+    /* 0x508 */ f32 interpEasingParameter; // controls whether easing for camera rig interpolation is more cosine-like (values near 0) or quadratic (values near 1)
     /* 0x50C */ f32 leadAmount;
     /* 0x510 */ f32 targetLeadAmount;
     /* 0x514 */ f32 leadInterpAlpha;
     /* 0x518 */ f32 accumulatedStickLead;
     /* 0x51C */ s32 increasingLeadInterp;
-    /* 0x520 */ f32 unk_520;
-    /* 0x524 */ f32 leadUnkX;
-    /* 0x528 */ f32 leadUnkZ;
-    /* 0x52C */ s32 unk_52C;
-    /* 0x530 */ s32 unk_530;
-    /* 0x534 */ CameraControlSettings* leadControlSettings;
+    /* 0x520 */ f32 leadAmtScale;
+    /* 0x524 */ f32 prevLeadPosX;
+    /* 0x528 */ f32 prevLeadPosZ;
+    /* 0x52C */ s32 leadConstrainDir;
+    /* 0x530 */ b32 needsInitialConstrainDir;
+    /* 0x534 */ CameraControlSettings* prevLeadSettings;
     /* 0x538 */ char unk_538[0x18];
-    /* 0x550 */ f32 unk_550;
-    /* 0x554 */ s16 unk_554;
-    /* 0x556 */ s16 unk_556;
+    /* 0x550 */ f32 unusedLeadAmt;
+    /* 0x554 */ s16 unusedLeadCounter;
+    /* 0x556 */ s16 unusedLeadDir;
 } Camera; // size = 0x558
 
 typedef struct BattleStatus {

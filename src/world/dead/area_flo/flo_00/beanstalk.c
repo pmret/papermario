@@ -308,7 +308,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Set(LVar9, Float(-59.0))
     Set(LVarA, Float(22.0))
     Set(LVarB, Float(125.0))
@@ -397,7 +397,7 @@ EvtScript N(EVS_Scene_BeanstalkGrowing) = {
                     Call(SetCamDistance, CAM_DEFAULT, 800)
                     Call(SetCamPosA, CAM_DEFAULT, -200, 0)
                     Call(SetCamPosB, CAM_DEFAULT, 0, -300)
-                    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
                     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                 CaseDefault
             EndSwitch
@@ -436,7 +436,7 @@ EvtScript N(EVS_Scene_BeanstalkGrewRemark) = {
     Call(SetCamDistance, CAM_DEFAULT, 800)
     Call(SetCamPosA, CAM_DEFAULT, -200, 0)
     Call(SetCamPosB, CAM_DEFAULT, 0, -300)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Set(LVarF, 0)
     Loop(5)
@@ -577,7 +577,7 @@ EvtScript N(EVS_BeanPatch_ItemPrompt) = {
                 Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
                 Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-6.0))
                 Call(SetCamDistance, CAM_DEFAULT, 250)
-                Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                 ExecWait(N(EVS_Scene_BeanstalkGrowing))
         EndSwitch

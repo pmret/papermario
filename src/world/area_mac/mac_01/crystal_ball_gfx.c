@@ -39,7 +39,7 @@ void N(gfx_build_inside_crystal_ball)(void) {
     Camera* camera = &gCameras[gCurrentCameraID];
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_tama));
 
-    transform_point(camera->perspectiveMatrix, model->center.x, model->center.y, model->center.z, 1.0f, &x, &y, &z, &s);
+    transform_point(camera->mtxPerspective, model->center.x, model->center.y, model->center.z, 1.0f, &x, &y, &z, &s);
     s = 1.0f / s;
     x *= s;
     y *= -s;

@@ -171,7 +171,7 @@ EvtScript N(EVS_Scene_KooverGetsMugged) = {
     Call(NpcJump0, NPC_FuzzyWithShell, LVar0, LVar1, LVar2, 20)
     PlayEffect(EFFECT_DAMAGE_STARS, FX_DAMAGE_STARS_3, LVar0, LVar1, LVar2, 0, -1, 0, 3)
     Thread
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Call(SetCamSpeed, CAM_DEFAULT, 4)
         Wait(60)
         Call(SetCamSpeed, CAM_DEFAULT, 1)
@@ -281,7 +281,7 @@ EvtScript N(EVS_NpcIdle_Koover_Crisis) = {
         MulF(LVarA, Float(0.7))
         Call(SetCamDistance, CAM_DEFAULT, LVarA)
         Call(SetCamSpeed, CAM_DEFAULT, 4)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(NpcMoveTo, NPC_Koover, -280, 301, 30)
         Call(SetNpcAnimation, NPC_Koover, ANIM_Koopa_Idle)
         Wait(7)

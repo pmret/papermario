@@ -358,7 +358,7 @@ EvtScript N(EVS_ManagePuzzle) = {
                 Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
                 Call(SetCamDistance, CAM_DEFAULT, 400)
                 Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
-                Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             EndThread
             Loop(3)
                 Exec(N(EVS_BoulderTremble))

@@ -31,7 +31,7 @@ API_CALLABLE(N(AnimateDizzyDialCameraFX)) {
         case 1:
             camera->flags |= CAMERA_FLAG_SHAKING;
             angle = script->functionTemp[1];
-            guRotateF(camera->viewMtxShaking, angle, 0.0f, 0.0f, 1.0f);
+            guRotateF(camera->mtxViewShaking, angle, 0.0f, 0.0f, 1.0f);
             script->functionTemp[1] = 2.0 * ((1.0 - sin_rad(DEG_TO_RAD(script->functionTemp[2] + 90))) * 360.0);
             script->functionTemp[2]++;
             if (script->functionTemp[2] <= 90) {

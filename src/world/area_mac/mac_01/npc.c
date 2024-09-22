@@ -333,14 +333,14 @@ EvtScript N(EVS_QuickChange_CheckForPound) = {
     Call(SetCamDistance, CAM_DEFAULT, 250)
     Call(SetCamPitch, CAM_DEFAULT, 15, -8)
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(PlayerFaceNpc, NPC_Merlon, FALSE)
     Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 5, MSG_MAC_Plaza_0041)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0042)
     Set(GF_MAC01_QuickChangeDropped, TRUE)
     Call(DisablePlayerInput, FALSE)
@@ -484,7 +484,7 @@ EvtScript N(EVS_MerlonBargeOut) = {
     Call(DisablePlayerPhysics, FALSE)
     Call(UseSettingsFrom, CAM_DEFAULT, -250, 20, -280)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(30 * DT)
     Call(N(func_80244848_8050C8))
     Call(InterpNpcYaw, NPC_Merlon, 135, 5)
@@ -566,7 +566,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
     Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_002B)
     Call(SetPanTarget, CAM_DEFAULT, 480, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Wait(5 * DT)
@@ -576,14 +576,14 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
     Call(SpeakToPlayer, NPC_DarkToad_04, ANIM_DarkToad_Green_Dismiss, ANIM_DarkToad_Green_Idle, 0, MSG_MAC_Plaza_002D)
     Call(SetPanTarget, CAM_DEFAULT, 410, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Wait(5 * DT)
         Call(PlayerFaceNpc, NPC_Merlon, FALSE)
     EndThread
     Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_002E)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(PlaySoundAtNpc, NPC_Merlon, SOUND_MERLON_GATHER, SOUND_SPACE_DEFAULT)
@@ -716,7 +716,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
     Call(PopSong)
     Call(SetPanTarget, CAM_DEFAULT, 410, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Wait(3)
@@ -843,7 +843,7 @@ EvtScript N(EVS_NpcInteract_Merlon) = {
                 Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
                 Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
                 Call(SetCamSpeed, CAM_DEFAULT, Float(5.0))
-                Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_003F)
                 Thread
@@ -879,7 +879,7 @@ EvtScript N(EVS_NpcInteract_Merlon) = {
                 Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
                 Call(SetCamSpeed, CAM_DEFAULT, Float(5.0))
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-                Call(PanToTarget, CAM_DEFAULT, 0, 0)
+                Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
                 Return
             Else
                 IfEq(GF_MAC01_QuickChangeDropped, FALSE)
@@ -1790,7 +1790,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
         Call(SetCamPosB, CAM_DEFAULT, 507, -19)
         Call(SetCamPosC, CAM_DEFAULT, 0, 20)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Call(PlayerMoveTo, 580, -210, 20)
     Call(InterpPlayerYaw, 263, 1)
@@ -1809,7 +1809,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Wait(1)
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     EndThread
     Return
     End
@@ -2020,7 +2020,7 @@ EvtScript N(EVS_NpcIdle_Twink) = {
     Call(AdjustCam, CAM_DEFAULT, Float(3.0 / DT), -40, -200, 15, -15)
     Call(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_MAC_Plaza_00DE)
     Wait(5 * DT)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(InterpNpcYaw, NPC_Twink, 270, 0)
     Call(GetNpcPos, NPC_Twink, LVar4, LVar5, LVar6)
     Call(LoadPath, 35 * DT, Ref(N(FlightPath_TwinkDepart)), ARRAY_COUNT(N(FlightPath_TwinkDepart)), EASING_QUADRATIC_IN)

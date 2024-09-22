@@ -162,7 +162,7 @@ void effect_75_render(EffectInstance* effect) {
     f32 outZ;
     f32 outS;
 
-    transform_point(&gCameras[gCurrentCameraID].perspectiveMatrix[0],
+    transform_point(&gCameras[gCurrentCameraID].mtxPerspective[0],
         data->pos.x, data->pos.y, data->pos.z, 1.0f,
         &outX, &outY, &outZ, &outS);
 
@@ -213,7 +213,7 @@ void effect_75_appendGfx(void* effect) {
     guMtxF2L(mtxTransfrom, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, camera->mtxBillboard, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primCol.r, data->primCol.g, data->primCol.b, data->unk_34);
     gDPSetEnvColor(gMainGfxPos++, data->envCol.r, data->envCol.g, data->envCol.b, data->unk_24 * data->masterAlpha / 255);
     gSPDisplayList(gMainGfxPos++, D_E00EAA58[0]);

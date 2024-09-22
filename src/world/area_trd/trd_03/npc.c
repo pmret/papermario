@@ -30,7 +30,7 @@ EvtScript N(EVS_Scene_GreenKoopaBros) = {
         Call(SetCamDistance, CAM_DEFAULT, 320)
         Call(SetPanTarget, CAM_DEFAULT, -607, 0, 80)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Wait(10 * DT)
     Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Idle)
@@ -72,7 +72,7 @@ EvtScript N(EVS_Scene_GreenKoopaBros) = {
     Wait(15 * DT)
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_KoopaBros, ANIM_KoopaBros_Green_Talk, ANIM_KoopaBros_Green_Idle, 5, MSG_CH1_00D3)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
     Wait(10 * DT)
     Call(PlaySoundAtCollider, COLLIDER_ttw, SOUND_METAL_DOOR_OPEN, SOUND_SPACE_DEFAULT)

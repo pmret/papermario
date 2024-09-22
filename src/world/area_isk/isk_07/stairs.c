@@ -40,7 +40,7 @@ EvtScript N(EVS_FlipRedStairs) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 369, -349, 369)
     Call(SetPanTarget, CAM_DEFAULT, 369, -349, 369)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     IfEq(MF_StairsFlipped, FALSE)
         ExecWait(N(EVS_RedStairs_FlipCCW))
@@ -53,7 +53,7 @@ EvtScript N(EVS_FlipRedStairs) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Set(AF_ISK07_FlippingRedStairs, FALSE)
     Return

@@ -211,7 +211,7 @@ EvtScript N(EVS_Scene_CastleDescending) = {
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(SetCamPitch, CAM_DEFAULT, Float(0.0), Float(0.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         SetF(LVar0, -2250)
         Loop(1500)
@@ -405,7 +405,7 @@ EvtScript N(EVS_Scene_SpiritsFlyingAway) = {
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         Set(LVar0, NPC_Eldstar)
         Exec(N(EVS_MakeNpcSparkleTrail))

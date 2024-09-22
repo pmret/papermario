@@ -13,7 +13,7 @@ EvtScript N(EVS_OnShakeTree3) = {
     Call(SetPanTarget, CAM_DEFAULT, -128, 20, -555)
     Call(SetCamDistance, CAM_DEFAULT, Float(330.0))
     Call(SetCamSpeed, CAM_DEFAULT, 3)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(5)
     Call(PlaySoundWithVolume, SOUND_GROW, 0)
@@ -33,9 +33,9 @@ EvtScript N(EVS_OnShakeTree3) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return
     End

@@ -561,7 +561,7 @@ EvtScript N(EVS_DamageMachine) = {
             Call(UseSettingsFrom, CAM_DEFAULT, 40, 0, 0)
             Call(SetPanTarget, CAM_DEFAULT, 40, 0, 0)
             Call(SetCamSpeed, CAM_DEFAULT, Float(1.5))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Set(GB_FLO18_MachineDamage_Right, 3)
             ExecWait(N(EVS_ShakeMachine))
             ExecWait(N(EVS_ShakeMachine))

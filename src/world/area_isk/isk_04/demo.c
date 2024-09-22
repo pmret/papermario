@@ -143,7 +143,7 @@ EvtScript N(EVS_SetupDemo) = {
     Call(SetCamPitch, CAM_DEFAULT, 12, -3)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetPanTarget, CAM_DEFAULT, LVar0, 25, LVar2)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         Wait(1)
         Loop(0)

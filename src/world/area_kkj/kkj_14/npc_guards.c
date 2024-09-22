@@ -38,7 +38,7 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -300, 0, -30)
     Call(SetPanTarget, CAM_DEFAULT, -300, 0, -30)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(30 * DT)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)

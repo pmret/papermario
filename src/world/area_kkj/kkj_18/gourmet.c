@@ -24,7 +24,7 @@ API_CALLABLE(N(SpinCameraAround)) {
     }
 
     script->functionTempF[0] += 10.0f;
-    guRotateF(camera->viewMtxShaking, script->functionTempF[0], 0.0f, 0.0f, -1.0f);
+    guRotateF(camera->mtxViewShaking, script->functionTempF[0], 0.0f, 0.0f, -1.0f);
 
     if (script->functionTempF[0] >= 360.0) {
         return ApiStatus_DONE2;
@@ -251,19 +251,19 @@ EvtScript N(EVS_GourmetGuy_LovesCake) = {
     Call(SetCamPitch, CAM_DEFAULT, 12, Float(-2.5))
     Call(SetCamPosB, CAM_DEFAULT, Float(110.0), Float(45.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(20.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_GOURMET_GUY_SHOCK_1, SOUND_SPACE_DEFAULT)
     Wait(33 * DT)
     Call(SetCamDistance, CAM_DEFAULT, Float(65.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(7.5), Float(-1.3))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_GOURMET_GUY_SHOCK_2, SOUND_SPACE_DEFAULT)
     Wait(33 * DT)
     Call(SetCamDistance, CAM_DEFAULT, Float(1.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(3.5), 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_GOURMET_GUY_SHOCK_3, SOUND_SPACE_DEFAULT)
     Wait(18 * DT)
@@ -273,10 +273,10 @@ EvtScript N(EVS_GourmetGuy_LovesCake) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(12.0))
     Loop(7)
         Call(SetCamDistance, CAM_DEFAULT, 65)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Call(SetCamDistance, CAM_DEFAULT, 1)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndLoop
     Call(N(SpinCameraAround))
@@ -286,7 +286,7 @@ EvtScript N(EVS_GourmetGuy_LovesCake) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 120, 0, 10)
     Call(SetPanTarget, CAM_DEFAULT, 120, 0, 10)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Return
     End
 };
@@ -384,7 +384,7 @@ EvtScript N(EVS_RejectCake) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 120, 0, 10)
     Call(SetPanTarget, CAM_DEFAULT, 120, 0, 10)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Switch(AB_KKJ_CompletedBakeStep)
         CaseEq(CAKE_TYPE_BAKED)
@@ -483,7 +483,7 @@ EvtScript N(EVS_Scene_JudgeCake) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 120, 0, 10)
     Call(SetPanTarget, CAM_DEFAULT, 120, 0, 10)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_GourmetGuy, ANIM_GourmetGuy_Talk, ANIM_GourmetGuy_Idle, 5, MSG_Peach_00A3)
     Call(ResetCam, CAM_DEFAULT, Float(90.0))
@@ -512,7 +512,7 @@ EvtScript N(EVS_Scene_JudgeCake) = {
     Call(SetCamPitch, CAM_DEFAULT, 17, -14)
     Call(SetCamPosB, CAM_DEFAULT, Float(110.0), Float(45.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(GetNpcVar, NPC_GourmetGuy, 7, LVarA)
     Call(RemoveItemEntity, LVarA)
@@ -600,7 +600,7 @@ EvtScript N(EVS_Scene_JudgeCake) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(-110.0), Float(45.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(PlaySoundAtCollider, COLLIDER_ttw, SOUND_BASIC_DOOR_OPEN, 0)
     Call(MakeLerp, 0, -120, 14, EASING_QUADRATIC_OUT)

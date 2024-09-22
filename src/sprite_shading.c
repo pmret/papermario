@@ -118,8 +118,8 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
     shadowColorG = gSpriteShadingProfile->ambientColor.g;
     shadowColorB = gSpriteShadingProfile->ambientColor.b;
 
-    Pxz = camera->perspectiveMatrix[0][2];
-    Pzz = camera->perspectiveMatrix[2][2];
+    Pxz = camera->mtxPerspective[0][2];
+    Pzz = camera->mtxPerspective[2][2];
 
     if ((-Mxz * Pxz + Mzz * Pzz) < 0.0f) {
         facingDir = 1.0f;
@@ -313,7 +313,7 @@ void appendGfx_shading_palette(
     pm02 = var_f12; // TODO required to match
     shadowZ *= var_f12;
 
-    if (((-mtx[0][2] * camera->perspectiveMatrix[0][2]) + (mtx[2][2] * camera->perspectiveMatrix[2][2])) < 0.0f) {
+    if (((-mtx[0][2] * camera->mtxPerspective[0][2]) + (mtx[2][2] * camera->mtxPerspective[2][2])) < 0.0f) {
         facingDir = 1.0f;
     } else {
         facingDir = -1.0f;
@@ -329,9 +329,9 @@ void appendGfx_shading_palette(
         ez = mtx[2][2];
     }
 
-    pm02 = camera->perspectiveMatrix[0][2];
-    pm12 = camera->perspectiveMatrix[1][2];
-    pm22 = camera->perspectiveMatrix[2][2];
+    pm02 = camera->mtxPerspective[0][2];
+    pm12 = camera->mtxPerspective[1][2];
+    pm22 = camera->mtxPerspective[2][2];
 
     t1 = (ex * shadowX) + (ey * shadowY) + (ez * shadowZ);
     apMag = (shadowX * -pm22) + (shadowZ * pm02);

@@ -339,7 +339,7 @@ EvtScript N(EVS_OnHitTrapTrigger) = {
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     IfLt(GB_StoryProgress, STORY_CH1_MARIO_ACTIVATED_TRAP)
         Wait(60)
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Call(N(DeleteFallingSprite))
         Call(SetNpcPos, NPC_KoopaBros_01, -250, 240, -25)

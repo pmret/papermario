@@ -143,7 +143,7 @@ void flame_render(EffectInstance* effect) {
     f32 outZ;
     f32 outW;
 
-    transform_point(gCameras[gCurrentCameraID].perspectiveMatrix, data->pos.x, data->pos.y, data->pos.z, 1.0f,
+    transform_point(gCameras[gCurrentCameraID].mtxPerspective, data->pos.x, data->pos.y, data->pos.z, 1.0f,
                          &outX, &outY, &outZ, &outW);
 
     outDist = outZ + 5000;
