@@ -1806,7 +1806,7 @@ enum Cams {
 enum CamShakeModes {
     CAM_SHAKE_CONSTANT_VERTICAL     = 0,
     CAM_SHAKE_ANGULAR_HORIZONTAL    = 1,
-    CAM_SHAKE_DECAYING_VERTICAL     = 2
+    CAM_SHAKE_DECAYING_VERTICAL     = 2,
 };
 
 // for use with SetBattleCamParam
@@ -4286,6 +4286,32 @@ enum DebuffTypes {
     DEBUFF_TYPE_INVISIBLE           = 0x04000000,
 };
 
+enum PlayerBasicJump {
+    PLAYER_BASIC_JUMP_0         = 0,
+    PLAYER_BASIC_JUMP_1         = 1,
+    PLAYER_BASIC_JUMP_2         = 2,
+    PLAYER_BASIC_JUMP_3         = 3,
+    PLAYER_BASIC_JUMP_4         = 4,
+};
+
+enum PlayerSuperJump {
+    PLAYER_SUPER_JUMP_0         = 0,
+    PLAYER_SUPER_JUMP_1         = 1,
+    PLAYER_SUPER_JUMP_2         = 2,
+    PLAYER_SUPER_JUMP_3         = 3,
+    PLAYER_SUPER_JUMP_4         = 4,
+    PLAYER_SUPER_JUMP_5         = 5,
+    PLAYER_SUPER_JUMP_6         = 6,
+};
+
+enum PlayerUltraJump {
+    PLAYER_ULTRA_JUMP_0         = 0,
+    PLAYER_ULTRA_JUMP_1         = 1,
+    PLAYER_ULTRA_JUMP_2         = 2,
+    PLAYER_ULTRA_JUMP_3         = 3,
+    PLAYER_ULTRA_JUMP_4         = 4,
+};
+
 enum GlobalOverrides {
     GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD           = 0x00000002,
     GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME             = 0x00000008,
@@ -4313,7 +4339,7 @@ enum GlobalOverrides {
     | MODEL_FLAG_20 \
     | MODEL_FLAG_IGNORE_FOG \
     | MODEL_FLAG_HAS_LOCAL_VERTEX_COPY \
-    | MODEL_FLAG_USE_CAMERA_UNK_MATRIX \
+    | MODEL_FLAG_BILLBOARD \
     | MODEL_FLAG_DO_BOUNDS_CULLING \
     | MODEL_FLAG_HAS_TRANSFORM \
     | MODEL_FLAG_HAS_TEX_PANNER \
@@ -4331,7 +4357,7 @@ enum ModelFlags {
     MODEL_FLAG_20                       = 0x0020,
     MODEL_FLAG_IGNORE_FOG               = 0x0040,
     MODEL_FLAG_HAS_LOCAL_VERTEX_COPY    = 0x0080,
-    MODEL_FLAG_USE_CAMERA_UNK_MATRIX    = 0x0100,
+    MODEL_FLAG_BILLBOARD                = 0x0100, // rotate to face the camera
     MODEL_FLAG_DO_BOUNDS_CULLING        = 0x0200,
     MODEL_FLAG_HAS_TRANSFORM            = 0x0400,
     MODEL_FLAG_HAS_TEX_PANNER           = 0x0800,
@@ -4859,16 +4885,16 @@ enum BtlCameraPreset {
     BTL_CAM_PRESET_73               = 73,
 };
 
-enum BattleCamXModes {
-    BTL_CAM_MODEX_0         = 0,
-    BTL_CAM_MODEX_1         = 1,
+enum BattleCamTargetAdjustX {
+    BTL_CAM_XADJ_NONE       = 0, // use actor X
+    BTL_CAM_XADJ_AVG        = 1, // use average
 };
 
-enum BattleCamYModes {
-    BTL_CAM_MODEY_MINUS_2   = -2,
-    BTL_CAM_MODEY_MINUS_1   = -1,
-    BTL_CAM_MODEY_0         = 0,
-    BTL_CAM_MODEY_1         = 1,
+enum BattleCamTargetAdjustY {
+    BTL_CAM_YADJ_SLIGHT     = -2, // target y position is weighted 75% actor and 25% target:
+    BTL_CAM_YADJ_TARGET     = -1, // use target Y
+    BTL_CAM_YADJ_NONE       = 0, // use actor Y
+    BTL_CAM_YADJ_AVG        = 1, // target y position is weighted 66% actor and 33% target:
 };
 
 enum ModelAnimatorFlags {

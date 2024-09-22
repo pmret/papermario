@@ -1080,7 +1080,7 @@ EvtScript N(EVS_Downed_TakeTurn) = {
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SHELL_SPIN)
         Call(SetAnimation, ACTOR_SELF, PRT_DOWNED, ANIM_KoopaTroopa_ShellSpin)
         Wait(10)
-        Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     EndIf
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SHELL_TOSS)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
@@ -1099,7 +1099,7 @@ EvtScript N(EVS_Downed_TakeTurn) = {
                 Call(SetBattleCamDist, 300)
                 Call(SetBattleCamOffsetY, 20)
                 Call(MoveBattleCamOver, 10)
-                Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+                Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
             EndIf
             Call(SetAnimation, ACTOR_SELF, PRT_DOWNED, ANIM_KoopaTroopa_ShellExit)
             Wait(8)

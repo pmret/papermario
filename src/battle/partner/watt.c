@@ -1115,7 +1115,7 @@ EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
     Call(action_command_water_block_start, 0, 100 * DT, 3)
     Call(AddBattleCamDist, -75)
     Call(MoveBattleCamOver, 100 * DT)
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
     Thread
         Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
@@ -1198,7 +1198,7 @@ EvtScript N(EVS_TurboCharge_ImmobilePlayer) = {
     Call(action_command_water_block_start, 0, 100 * DT, 3)
     Call(AddBattleCamDist, -100)
     Call(MoveBattleCamOver, 100 * DT)
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
     Thread
         Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
@@ -1293,7 +1293,7 @@ EvtScript N(EVS_Attack_MegaShock) = {
     PlayEffect(EFFECT_RADIAL_SHIMMER, 8, LVar0, LVar1, LVar2, Float(1.3), 90 * DT, 0)
     Call(AddBattleCamDist, -100)
     Call(MoveBattleCamOver, 90 * DT)
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
     Call(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_ATTACK)
     Call(N(WattFXDisable))

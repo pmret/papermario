@@ -881,14 +881,14 @@ EvtScript N(EVS_Attack_BodySlam) = {
         Call(SetBattleCamOffsetY, 54)
         Call(BattleCamTargetActor, ACTOR_SELF)
         Call(MoveBattleCamOver, 40)
-        Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Else
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(SetBattleCamDist, 240)
         Call(SetBattleCamOffsetY, 21)
         Call(BattleCamTargetActor, ACTOR_SELF)
         Call(MoveBattleCamOver, 40)
-        Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     EndIf
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Walk)
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -1100,14 +1100,14 @@ EvtScript N(EVS_Attack_ClawSwipe) = {
         Call(SetBattleCamDist, 200)
         Call(BattleCamTargetActor, ACTOR_SELF)
         Call(MoveBattleCamOver, 40)
-        Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Else
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(SetBattleCamDist, 160)
         Call(SetBattleCamOffsetY, 5)
         Call(BattleCamTargetActor, ACTOR_SELF)
         Call(MoveBattleCamOver, 40)
-        Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     EndIf
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Walk)
     Call(SetGoalToTarget, ACTOR_SELF)

@@ -293,7 +293,7 @@ EvtScript N(EVS_Attack_Bite) = {
     Else
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(BattleCamTargetActor, ACTOR_SELF)
-        Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Frost_Anim03)
         Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Frost_Anim03)
@@ -407,7 +407,7 @@ EvtScript N(EVS_Attack_FrostBreath) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Frost_Anim03)
     Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Frost_Anim03)

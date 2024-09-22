@@ -103,10 +103,10 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         Exec(N(EVS_UpdateTexturePan))
     EndThread
-    Call(SetModelFlags, MODEL_o189, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
-    Call(SetModelFlags, MODEL_o186, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
-    Call(SetModelFlags, MODEL_o192, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
-    Call(SetModelFlags, MODEL_o195, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
+    Call(SetModelFlags, MODEL_o189, MODEL_FLAG_BILLBOARD, TRUE)
+    Call(SetModelFlags, MODEL_o186, MODEL_FLAG_BILLBOARD, TRUE)
+    Call(SetModelFlags, MODEL_o192, MODEL_FLAG_BILLBOARD, TRUE)
+    Call(SetModelFlags, MODEL_o195, MODEL_FLAG_BILLBOARD, TRUE)
     Exec(N(EVS_SetupShop))
     Return
     End

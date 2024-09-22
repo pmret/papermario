@@ -352,7 +352,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 75)
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_1, BTL_CAM_MODEX_1, TRUE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_AVG, BTL_CAM_XADJ_AVG, TRUE)
     Call(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar0)
     Switch(LVar0)
         CaseEq(PARTNER_RANK_NORMAL)

@@ -345,7 +345,7 @@ EvtScript N(EVS_Attack_ClawSwipe) = {
     Call(SetBattleCamDist, 200)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 40)
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Walk)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, 40, 0, 0)

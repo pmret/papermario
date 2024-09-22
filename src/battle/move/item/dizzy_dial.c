@@ -58,11 +58,11 @@ EvtScript N(EVS_UseItem) = {
         Wait(5)
         Call(AddBattleCamDist, -250)
         Call(MoveBattleCamOver, 80)
-        Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
         Wait(80)
         Call(AddBattleCamDist, 250)
         Call(MoveBattleCamOver, 3)
-        Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
     EndThread
     Call(N(AnimateDizzyDialCameraFX))
     Thread
@@ -76,7 +76,7 @@ EvtScript N(EVS_UseItem) = {
         Wait(10)
         Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
         Call(MoveBattleCamOver, 10)
-        Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, FALSE)
     EndThread
     Call(InitTargetIterator)
     Label(0)

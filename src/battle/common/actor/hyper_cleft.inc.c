@@ -188,7 +188,7 @@ EvtScript N(EVS_Move_Charge) = {
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Call(MoveBattleCamOver, 30)
     Loop(20)
         Call(SetActorDispOffset, ACTOR_SELF, 1, 0, 0)
@@ -746,7 +746,7 @@ EvtScript N(EVS_Attack_Tackle) = {
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Call(MoveBattleCamOver, 30)
     Thread
         Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

@@ -256,7 +256,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(UseBattleCamPreset, BTL_CAM_PRESET_15)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 30)
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOO_VANISH_A)
     Set(LVar0, 55)
     Loop(20)

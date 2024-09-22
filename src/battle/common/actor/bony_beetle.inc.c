@@ -423,13 +423,13 @@ EvtScript N(EVS_Attack_ShellToss) = {
     IfEq(LVar0, PHASE_FIRST_STRIKE)
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(BattleCamTargetActor, ACTOR_SELF)
-        Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim16)
         Goto(100)
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim10)
     Wait(10)
     Thread
@@ -660,14 +660,14 @@ EvtScript N(EVS_Attack_SpikeBounce) = {
     IfEq(LVar0, PHASE_FIRST_STRIKE)
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(BattleCamTargetActor, ACTOR_SELF)
-        Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim17)
         Wait(10)
         Goto(100)
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim11)
     Wait(10)
     Thread

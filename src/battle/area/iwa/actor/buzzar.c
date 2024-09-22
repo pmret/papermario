@@ -649,7 +649,7 @@ EvtScript N(EVS_Attack_FeatherFling) = {
                 Call(SetPartFlagBits, ACTOR_SELF, PRT_FEATHER_3, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EndThread
             Wait(10)
-            Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_0, BTL_CAM_MODEX_1, FALSE)
+            Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_AVG, FALSE)
             Wait(10)
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -661,7 +661,7 @@ EvtScript N(EVS_Attack_FeatherFling) = {
         EndCaseGroup
         CaseDefault
     EndSwitch
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_0, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_AVG, FALSE)
     Call(SetGoalToTarget, ACTOR_SELF)
     Thread
         Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1042,7 +1042,7 @@ EvtScript N(EVS_Attack_ClawSwipe) = {
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(SetBattleCamDist, 240)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, 60, 15, 0)

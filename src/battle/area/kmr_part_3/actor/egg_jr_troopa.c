@@ -399,7 +399,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 20)
-    Call(SetBattleCamTargetingModes, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_JrTroopa_Run)
     Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
     Call(SetGoalToTarget, ACTOR_SELF)
