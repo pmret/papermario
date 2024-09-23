@@ -69,7 +69,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetGoalPos, ACTOR_PLAYER, 30, 0, 0)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_MarioB1_Stomp, ANIM_MarioB1_Stomp)
-    Call(PlayerBasicJumpToGoal, LVarA, 0)
+    Call(PlayerBasicJumpToGoal, LVarA, PLAYER_BASIC_JUMP_0)
     ChildThread
         Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.2))
         Call(ShakeCam, CAM_BATTLE, 0, 5, Float(1.0))
@@ -158,9 +158,9 @@ EvtScript N(EVS_UseMove_ImplA) = {
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_SpinFall)
     Call(SetGoalPos, ACTOR_PLAYER, 30, 0, 0)
     IfEq(LVarF, 0)
-        Call(PlayerBasicJumpToGoal, 24, 3)
+        Call(PlayerBasicJumpToGoal, 24, PLAYER_BASIC_JUMP_3)
     Else
-        Call(PlayerBasicJumpToGoal, 24, 4)
+        Call(PlayerBasicJumpToGoal, 24, PLAYER_BASIC_JUMP_4)
     EndIf
     ChildThread
         Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.2))
@@ -289,7 +289,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetGoalPos, ACTOR_PLAYER, 30, 0, 0)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_MarioB1_Stomp, ANIM_MarioB1_Stomp)
-    Call(PlayerBasicJumpToGoal, LVarA, 0)
+    Call(PlayerBasicJumpToGoal, LVarA, PLAYER_BASIC_JUMP_0)
     ChildThread
         Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.2))
         Call(ShakeCam, CAM_BATTLE, 0, 5, Float(1.0))
@@ -379,13 +379,13 @@ EvtScript N(EVS_UseMove_ImplB) = {
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
     Call(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     IfEq(LVarF, 0)
-        Call(PlayerSuperJumpToGoal, 20, 3)
+        Call(PlayerSuperJumpToGoal, 20, PLAYER_SUPER_JUMP_3)
         Wait(7)
-        Call(PlayerSuperJumpToGoal, 3, 6)
+        Call(PlayerSuperJumpToGoal, 3, PLAYER_SUPER_JUMP_6)
     Else
-        Call(PlayerSuperJumpToGoal, 20, 4)
+        Call(PlayerSuperJumpToGoal, 20, PLAYER_SUPER_JUMP_4)
         Wait(7)
-        Call(PlayerSuperJumpToGoal, 3, 5)
+        Call(PlayerSuperJumpToGoal, 3, PLAYER_SUPER_JUMP_5)
     EndIf
     Call(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     ChildThread
@@ -515,7 +515,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetGoalPos, ACTOR_PLAYER, 30, 0, 0)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_MarioB1_Stomp, ANIM_MarioB1_Stomp)
-    Call(PlayerBasicJumpToGoal, LVarA, 0)
+    Call(PlayerBasicJumpToGoal, LVarA, PLAYER_BASIC_JUMP_0)
     ChildThread
         Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.2))
         Call(ShakeCam, CAM_BATTLE, 0, 5, Float(1.0))
@@ -605,9 +605,9 @@ EvtScript N(EVS_UseMove_ImplC) = {
     Call(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_SpinFall)
     IfEq(LVarF, 0)
-        Call(PlayerUltraJumpToGoal, 25, 2)
+        Call(PlayerUltraJumpToGoal, 25, PLAYER_ULTRA_JUMP_2)
     Else
-        Call(PlayerUltraJumpToGoal, 25, 4)
+        Call(PlayerUltraJumpToGoal, 25, PLAYER_ULTRA_JUMP_4)
     EndIf
     Call(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     ChildThread

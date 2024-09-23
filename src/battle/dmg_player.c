@@ -1796,17 +1796,24 @@ API_CALLABLE(PlayerBasicJumpToGoal) {
     f64 acc1, acc2;
     f64 acc3, acc4;
 
+    enum {
+        BASIC_STATE_00      = 0,
+        BASIC_STATE_01      = 1,
+        BASIC_STATE_02      = 2,
+        BASIC_STATE_03      = 3,
+    };
+
     if (isInitialCall) {
         player->state.moveTime = evt_get_variable(script, *args++);
         player->state.moveArcAmplitude = evt_get_variable(script, *args++);
         script->functionTemp[1] = 0;
-        script->functionTemp[0] = 0;
+        script->functionTemp[0] = BASIC_STATE_00;
         if (player->state.moveArcAmplitude == 1) {
-            script->functionTemp[0] = 2;
+            script->functionTemp[0] = BASIC_STATE_02;
         }
     }
 
-    if (script->functionTemp[0] == 0) {
+    if (script->functionTemp[0] == BASIC_STATE_00) {
         playerState->curPos.x = player->curPos.x;
         playerState->curPos.y = player->curPos.y;
         playerState->curPos.z = player->curPos.z;
@@ -1870,11 +1877,11 @@ API_CALLABLE(PlayerBasicJumpToGoal) {
         }
         set_actor_anim(0, 0, playerState->animJumpRise);
         sfx_play_sound_at_position(SOUND_LONG_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
-        script->functionTemp[0] = 1;
+        script->functionTemp[0] = BASIC_STATE_01;
     }
 
     switch (script->functionTemp[0]) {
-        case 1:
+        case BASIC_STATE_01:
             if (playerState->vel > PI_S / 2) {
                 set_actor_anim(ACTOR_PLAYER, 0, playerState->animJumpFall);
             }
@@ -1909,7 +1916,7 @@ API_CALLABLE(PlayerBasicJumpToGoal) {
                 return ApiStatus_DONE1;
             }
             break;
-        case 2:
+        case BASIC_STATE_02:
             if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
                 return ApiStatus_DONE2;
             }
@@ -1922,9 +1929,9 @@ API_CALLABLE(PlayerBasicJumpToGoal) {
             playerState->curPos.x = player->curPos.x;
             playerState->curPos.y = player->curPos.y;
             playerState->curPos.z = player->curPos.z;
-            script->functionTemp[0] = 3;
+            script->functionTemp[0] = BASIC_STATE_03;
             // fallthrough
-        case 3:
+        case BASIC_STATE_03:
             temp_f20_2 = playerState->curPos.x;
             playerState->curPos.x = temp_f20_2 + ((playerState->bounceDivisor * sin_rad(DEG_TO_RAD(playerState->unk_24))) / 33.0);
             playerState->curPos.y -= (playerState->bounceDivisor * sin_rad(DEG_TO_RAD(playerState->unk_24)));
@@ -1963,23 +1970,33 @@ API_CALLABLE(PlayerSuperJumpToGoal) {
     f64 acc5, acc6;
     f64 acc7, acc8;
 
+    enum {
+        SUPER_STATE_00       = 0,
+        SUPER_STATE_01       = 1,
+        SUPER_STATE_02       = 2,
+        SUPER_STATE_10       = 10,
+        SUPER_STATE_11       = 11,
+        SUPER_STATE_20       = 20,
+        SUPER_STATE_21       = 21,
+    };
+
     if (isInitialCall) {
         player->state.moveTime = evt_get_variable(script, *args++);
         player->state.moveArcAmplitude = evt_get_variable(script, *args++);
-        script->functionTemp[0] = 0;
-        if (player->state.moveArcAmplitude == 1 ||
-            player->state.moveArcAmplitude == 5 ||
-            player->state.moveArcAmplitude == 6)
+        script->functionTemp[0] = SUPER_STATE_00;
+        if (player->state.moveArcAmplitude == PLAYER_SUPER_JUMP_1 ||
+            player->state.moveArcAmplitude == PLAYER_SUPER_JUMP_5 ||
+            player->state.moveArcAmplitude == PLAYER_SUPER_JUMP_6)
         {
-            script->functionTemp[0] = 10;
+            script->functionTemp[0] = SUPER_STATE_10;
         }
-        if (playerState->moveArcAmplitude == 2) {
-            script->functionTemp[0] = 20;
+        if (playerState->moveArcAmplitude == PLAYER_SUPER_JUMP_2) {
+            script->functionTemp[0] = SUPER_STATE_20;
         }
     }
 
     switch (script->functionTemp[0]) {
-        case 0:
+        case SUPER_STATE_00:
             playerState->curPos.x = player->curPos.x;
             playerState->curPos.y = player->curPos.y;
             playerState->curPos.z = player->curPos.z;
@@ -2028,9 +2045,9 @@ API_CALLABLE(PlayerSuperJumpToGoal) {
                 acc2 = playerState->acceleration;
                 playerState->vel = (vel2 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.01 * acc2) + acc2));
             }
-            script->functionTemp[0] = 1;
+            script->functionTemp[0] = SUPER_STATE_01;
             break;
-        case 10:
+        case SUPER_STATE_10:
             playerState->curPos.x = player->curPos.x;
             playerState->curPos.y = player->curPos.y;
             playerState->curPos.z = player->curPos.z;
@@ -2077,9 +2094,9 @@ API_CALLABLE(PlayerSuperJumpToGoal) {
                 playerState->vel = (vel4 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.01 * acc4) + acc4));
             }
             playerState->curPos.y = player->curPos.y - playerState->bounceDivisor;
-            script->functionTemp[0] = 11;
+            script->functionTemp[0] = SUPER_STATE_11;
             break;
-        case 20:
+        case SUPER_STATE_20:
             playerState->moveTime = 1;
             playerState->unk_24 = 90.0f;
             playerState->bounceDivisor = (fabsf(playerState->unk_18.x - playerState->unk_18.y) / 16.5);
@@ -2087,12 +2104,12 @@ API_CALLABLE(PlayerSuperJumpToGoal) {
             playerState->curPos.x = player->curPos.x;
             playerState->curPos.y = player->curPos.y;
             playerState->curPos.z = player->curPos.z;
-            script->functionTemp[0] = 21;
+            script->functionTemp[0] = SUPER_STATE_21;
             break;
     }
 
     switch (script->functionTemp[0]) {
-        case 1:
+        case SUPER_STATE_01:
             if (playerState->moveArcAmplitude == 0) {
                 vel5 = playerState->vel;
                 acc5 = playerState->acceleration;
@@ -2119,10 +2136,10 @@ API_CALLABLE(PlayerSuperJumpToGoal) {
                 player->rotPivotOffset.y = 14;
                 player->rot.z -= 66.0f;
                 playerState->moveTime = 7;
-                script->functionTemp[0] = 2;
+                script->functionTemp[0] = SUPER_STATE_02;
             }
             break;
-        case 2:
+        case SUPER_STATE_02:
             player->rotPivotOffset.y = 14;
             player->rot.z -= 66.0f;
             playerState->moveTime--;
@@ -2133,7 +2150,7 @@ API_CALLABLE(PlayerSuperJumpToGoal) {
                 return ApiStatus_DONE1;
             }
             break;
-        case 11:
+        case SUPER_STATE_11:
             playerState->curPos.x += playerState->velStep.x;
             playerState->curPos.y += playerState->velStep.y;
             playerState->curPos.z += playerState->velStep.z;
@@ -2165,7 +2182,7 @@ API_CALLABLE(PlayerSuperJumpToGoal) {
                 return ApiStatus_DONE1;
             }
             break;
-        case 21:
+        case SUPER_STATE_21:
             temp_f20 = playerState->curPos.x;
             temp_f20 += (playerState->bounceDivisor * sin_rad(DEG_TO_RAD(playerState->unk_24))) / 33.0;
             playerState->curPos.x = temp_f20;
@@ -2212,24 +2229,35 @@ API_CALLABLE(PlayerUltraJumpToGoal) {
     f64 temp_f22_6;
     f64 temp_f22_7;
 
+    enum {
+        ULTRA_STATE_00       = 0,
+        ULTRA_STATE_01       = 1,
+        ULTRA_STATE_10       = 10,
+        ULTRA_STATE_11       = 11,
+        ULTRA_STATE_20       = 20,
+        ULTRA_STATE_21       = 21,
+        ULTRA_STATE_30       = 30,
+        ULTRA_STATE_31       = 31,
+    };
+
     if (isInitialCall) {
         player->state.moveTime = evt_get_variable(script, *args++);
         player->state.moveArcAmplitude = evt_get_variable(script, *args++);
         script->functionTemp[1] = 0;
-        script->functionTemp[0] = 0;
-        if (player->state.moveArcAmplitude == 1) {
-            script->functionTemp[0] = 11;
+        script->functionTemp[0] = ULTRA_STATE_00;
+        if (player->state.moveArcAmplitude == PLAYER_ULTRA_JUMP_1) {
+            script->functionTemp[0] = ULTRA_STATE_11;
         }
-        if (player->state.moveArcAmplitude == 3) {
-            script->functionTemp[0] = 20;
+        if (player->state.moveArcAmplitude == PLAYER_ULTRA_JUMP_3) {
+            script->functionTemp[0] = ULTRA_STATE_20;
         }
-        if (player->state.moveArcAmplitude == 2 || player->state.moveArcAmplitude == 4) {
-            script->functionTemp[0] = 30;
+        if (player->state.moveArcAmplitude == PLAYER_ULTRA_JUMP_2 || player->state.moveArcAmplitude == PLAYER_ULTRA_JUMP_4) {
+            script->functionTemp[0] = ULTRA_STATE_30;
         }
     }
 
     switch (script->functionTemp[0]) {
-        case 0:
+        case ULTRA_STATE_00:
             playerState->curPos.x = player->curPos.x;
             playerState->curPos.y = player->curPos.y;
             playerState->curPos.z = player->curPos.z;
@@ -2270,9 +2298,9 @@ API_CALLABLE(PlayerUltraJumpToGoal) {
             temp_f22 = playerState->acceleration;
             playerState->unk_28 = 360 / playerState->moveTime;
             playerState->vel = temp_f20 + (((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53) * temp_f22) + temp_f22);
-            script->functionTemp[0] = 1;
+            script->functionTemp[0] = ULTRA_STATE_01;
             break;
-        case 10:
+        case ULTRA_STATE_10:
             playerState->curPos.x = player->curPos.x;
             playerState->curPos.y = player->curPos.y;
             playerState->curPos.z = player->curPos.z;
@@ -2314,9 +2342,9 @@ API_CALLABLE(PlayerUltraJumpToGoal) {
 
             playerState->unk_28 = 360 / playerState->moveTime;
             playerState->vel = temp_f20_2 + (((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53) * temp_f22_2) + temp_f22_2);
-            script->functionTemp[0] = 11;
+            script->functionTemp[0] = ULTRA_STATE_11;
             break;
-        case 20:
+        case ULTRA_STATE_20:
             playerState->moveTime = 1;
             set_actor_anim(ACTOR_PLAYER, 1, ANIM_Mario1_SpinFall);
             player->rot.y = 0.0f;
@@ -2326,9 +2354,9 @@ API_CALLABLE(PlayerUltraJumpToGoal) {
             playerState->curPos.x = player->curPos.x;
             playerState->curPos.y = player->curPos.y;
             playerState->curPos.z = player->curPos.z;
-            script->functionTemp[0] = 21;
+            script->functionTemp[0] = ULTRA_STATE_21;
             break;
-        case 30:
+        case ULTRA_STATE_30:
             playerState->curPos.x = player->curPos.x;
             playerState->curPos.y = player->curPos.y;
             playerState->curPos.z = player->curPos.z;
@@ -2366,12 +2394,12 @@ API_CALLABLE(PlayerUltraJumpToGoal) {
             temp_f22_7 = playerState->vel;
             temp_f22_7 = temp_f22_7 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * temp_f22_3) + temp_f22_3);
             playerState->vel = temp_f22_7;
-            script->functionTemp[0] = 31;
+            script->functionTemp[0] = ULTRA_STATE_31;
             break;
     }
 
     switch (script->functionTemp[0]) {
-        case 1:
+        case ULTRA_STATE_01:
             temp_f22_4 = playerState->vel;
             temp_f20_4 = playerState->acceleration;
             playerState->vel = temp_f22_4 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * temp_f20_4) + temp_f20_4);
@@ -2395,7 +2423,7 @@ API_CALLABLE(PlayerUltraJumpToGoal) {
                 return ApiStatus_DONE1;
             }
             break;
-        case 11:
+        case ULTRA_STATE_11:
             temp_f22_6 = playerState->vel;
             temp_f20_7 = playerState->acceleration;
             playerState->vel = temp_f22_6 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * temp_f20_7) + temp_f20_7);
@@ -2426,7 +2454,7 @@ API_CALLABLE(PlayerUltraJumpToGoal) {
                 return ApiStatus_DONE1;
             }
             break;
-        case 21:
+        case ULTRA_STATE_21:
             temp_f20_5 = playerState->curPos.x;
             temp_f20_5 += (playerState->bounceDivisor * sin_rad(DEG_TO_RAD(playerState->unk_24))) / 33.0;
             playerState->curPos.x = temp_f20_5;
@@ -2444,7 +2472,7 @@ API_CALLABLE(PlayerUltraJumpToGoal) {
                 return ApiStatus_DONE1;
             }
             break;
-        case 31:
+        case ULTRA_STATE_31:
             temp_f22_5 = playerState->vel;
             temp_f20_6 = playerState->acceleration;
             playerState->vel = temp_f22_5 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * temp_f20_6) + temp_f20_6);

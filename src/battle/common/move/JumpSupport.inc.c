@@ -315,7 +315,7 @@ EvtScript N(EVS_JumpSupport_ApproachAndJump) = {
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
-    Call(PlayerBasicJumpToGoal, LVarA, 0)
+    Call(PlayerBasicJumpToGoal, LVarA, PLAYER_BASIC_JUMP_0)
     Return
     End
 };
@@ -333,14 +333,14 @@ EvtScript N(EVS_JumpSupport_UnusedSuper) = {
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_SUPER_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
-    Call(PlayerSuperJumpToGoal, LVarA, 0)
+    Call(PlayerSuperJumpToGoal, LVarA, PLAYER_SUPER_JUMP_0)
     Wait(7)
     Call(GetPlayerActionSuccess, LVar0)
     Switch(LVar0)
         CaseGt(0)
-            Call(PlayerSuperJumpToGoal, 3, 1)
+            Call(PlayerSuperJumpToGoal, 3, PLAYER_SUPER_JUMP_1)
         CaseDefault
-            Call(PlayerSuperJumpToGoal, 5, 1)
+            Call(PlayerSuperJumpToGoal, 5, PLAYER_SUPER_JUMP_1)
     EndSwitch
     Return
     End
@@ -359,7 +359,7 @@ EvtScript N(EVS_JumpSupport_UnusedUltra) = {
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_ULTRA_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_MarioW2_Carried, ANIM_MarioB1_Stomp)
-    Call(PlayerUltraJumpToGoal, LVarA, 0)
+    Call(PlayerUltraJumpToGoal, LVarA, PLAYER_ULTRA_JUMP_0)
     Call(CloseActionCommandInfo)
     Set(LVar9, 0)
     Call(GetPlayerActionSuccess, LVar0)
@@ -374,13 +374,13 @@ EvtScript N(EVS_JumpSupport_UnusedUltra) = {
         Call(action_command_jump_init)
         Call(action_command_jump_start, 13, 3)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_UNUSED_ULTRA_JUMP)
-        Call(PlayerUltraJumpToGoal, 15, 2)
+        Call(PlayerUltraJumpToGoal, 15, PLAYER_ULTRA_JUMP_2)
         Goto(10)
     Else
         Call(LoadActionCommand, ACTION_COMMAND_JUMP)
         Call(action_command_jump_init)
         Call(action_command_jump_start, 2, 3)
-        Call(PlayerUltraJumpToGoal, 4, 1)
+        Call(PlayerUltraJumpToGoal, 4, PLAYER_ULTRA_JUMP_1)
         Goto(10)
     EndIf
     Label(10)

@@ -97,9 +97,9 @@ EvtScript N(EVS_UseMove_ImplA) = {
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_SpinFall)
     IfEq(LVarF, 1)
-        Call(PlayerBasicJumpToGoal, LVarA, 3)
+        Call(PlayerBasicJumpToGoal, LVarA, PLAYER_BASIC_JUMP_3)
     Else
-        Call(PlayerBasicJumpToGoal, LVarA, 4)
+        Call(PlayerBasicJumpToGoal, LVarA, PLAYER_BASIC_JUMP_4)
     EndIf
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     IfEq(LVar0, HIT_RESULT_MISS)
@@ -239,13 +239,13 @@ EvtScript N(EVS_UseMove_ImplB) = {
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
     Call(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     IfEq(LVarF, 1)
-        Call(PlayerSuperJumpToGoal, 20, 3)
+        Call(PlayerSuperJumpToGoal, 20, PLAYER_SUPER_JUMP_3)
         Wait(7)
-        Call(PlayerSuperJumpToGoal, 3, 6)
+        Call(PlayerSuperJumpToGoal, 3, PLAYER_SUPER_JUMP_6)
     Else
-        Call(PlayerSuperJumpToGoal, 20, 4)
+        Call(PlayerSuperJumpToGoal, 20, PLAYER_SUPER_JUMP_4)
         Wait(7)
-        Call(PlayerSuperJumpToGoal, 3, 5)
+        Call(PlayerSuperJumpToGoal, 3, PLAYER_SUPER_JUMP_5)
     EndIf
     Call(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
@@ -384,9 +384,9 @@ EvtScript N(EVS_UseMove_ImplC) = {
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_SpinFall)
     IfEq(LVarF, 1)
-        Call(PlayerUltraJumpToGoal, 25, 2)
+        Call(PlayerUltraJumpToGoal, 25, PLAYER_ULTRA_JUMP_2)
     Else
-        Call(PlayerUltraJumpToGoal, 25, 4)
+        Call(PlayerUltraJumpToGoal, 25, PLAYER_ULTRA_JUMP_4)
     EndIf
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     IfEq(LVar0, HIT_RESULT_MISS)
