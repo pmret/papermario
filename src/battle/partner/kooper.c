@@ -465,7 +465,7 @@ EvtScript N(firstStrike) = {
     End
 };
 
-EvtScript N(returnHomeOnMiss) = {
+EvtScript N(EVS_ReturnHome_Miss) = {
     Call(ResetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_WALK)
     Thread
         Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
@@ -498,7 +498,7 @@ EvtScript N(returnHomeOnMiss) = {
     End
 };
 
-EvtScript N(EVS_ReturnHome) = {
+EvtScript N(EVS_ReturnHome_Success) = {
     Call(ResetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_WALK)
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(PartnerYieldTurn)
@@ -691,11 +691,11 @@ EvtScript N(shellToss) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(returnHomeOnMiss))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
     EndSwitch
     Return
@@ -873,9 +873,9 @@ EvtScript N(powerShell) = {
     Call(GetPartnerActionSuccess, LVar0)
     Switch(LVar0)
         CaseGt(0)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Success))
         CaseDefault
-            ExecWait(N(returnHomeOnMiss))
+            ExecWait(N(EVS_ReturnHome_Miss))
     EndSwitch
     Return
     End

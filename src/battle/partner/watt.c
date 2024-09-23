@@ -710,7 +710,7 @@ EvtScript N(EVS_ExecuteAction) = {
     End
 };
 
-EvtScript N(returnHome2) = {
+EvtScript N(EVS_ReturnHome_Success) = {
     Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
@@ -720,7 +720,7 @@ EvtScript N(returnHome2) = {
     End
 };
 
-EvtScript N(EVS_ReturnHome) = {
+EvtScript N(EVS_ReturnHome_Miss) = {
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
@@ -953,11 +953,11 @@ EvtScript N(EVS_Attack_ElectroDash) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
     EndSwitch
     Return
@@ -1053,7 +1053,7 @@ EvtScript N(EVS_Attack_PowerShock) = {
     Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     IfEq(LVar0, HIT_RESULT_MISS)
         Wait(15)
-        ExecWait(N(EVS_ReturnHome))
+        ExecWait(N(EVS_ReturnHome_Miss))
         Return
     EndIf
     Call(GetActionQuality, LVarF)
@@ -1076,11 +1076,11 @@ EvtScript N(EVS_Attack_PowerShock) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
     EndSwitch
     Return
@@ -1370,9 +1370,9 @@ EvtScript N(EVS_Attack_MegaShock) = {
     Call(GetPartnerActionSuccess, LVar0)
     Switch(LVar0)
         CaseGt(99)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         CaseDefault
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
     EndSwitch
     Return
     End

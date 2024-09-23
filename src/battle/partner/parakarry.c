@@ -878,7 +878,7 @@ EvtScript N(EVS_HandlePhase) = {
     End
 };
 
-EvtScript N(returnHome2) = {
+EvtScript N(EVS_ReturnHome_Success) = {
     Call(PartnerYieldTurn)
     Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarA)
@@ -903,7 +903,7 @@ EvtScript N(returnHome2) = {
     End
 };
 
-EvtScript N(EVS_ReturnHome) = {
+EvtScript N(EVS_ReturnHome_Miss) = {
     Call(PartnerYieldTurn)
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarA)
@@ -999,12 +999,12 @@ EvtScript N(skyDive) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             SetConst(LVarA, ANIM_BattleParakarry_Think)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
             SetConst(LVarA, ANIM_BattleParakarry_Dive)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
@@ -1082,12 +1082,12 @@ EvtScript N(shellShot) = {
             Else
                 SetConst(LVarA, ANIM_BattleParakarry_Think)
             EndIf
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
             SetConst(LVarA, ANIM_BattleParakarry_ShellFly)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
     EndSwitch
     Return

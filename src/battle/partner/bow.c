@@ -397,7 +397,7 @@ EvtScript N(EVS_ExecuteAction) = {
     End
 };
 
-EvtScript N(returnHome2) = {
+EvtScript N(EVS_ReturnHome_Success) = {
     Call(PartnerYieldTurn)
     Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)
@@ -426,7 +426,7 @@ EvtScript N(returnHome2) = {
     End
 };
 
-EvtScript N(EVS_ReturnHome) = {
+EvtScript N(EVS_ReturnHome_Miss) = {
     Call(PartnerYieldTurn)
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)
@@ -552,7 +552,7 @@ EvtScript N(smack) = {
         Call(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
         Wait(10)
-        ExecWait(N(EVS_ReturnHome))
+        ExecWait(N(EVS_ReturnHome_Miss))
         Return
     EndIf
     Add(LVarE, 1)
@@ -640,12 +640,12 @@ EvtScript N(smack) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
     EndSwitch
     Return
@@ -1069,7 +1069,7 @@ EvtScript N(fanSmack) = {
         Call(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
         Wait(10)
-        ExecWait(N(EVS_ReturnHome))
+        ExecWait(N(EVS_ReturnHome_Miss))
         Return
     EndIf
     Add(LVarE, 1)
@@ -1213,13 +1213,13 @@ EvtScript N(fanSmack) = {
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             Wait(10)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
         CaseOrEq(1)
         CaseOrEq(3)
             Wait(10)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
     EndSwitch
     Return

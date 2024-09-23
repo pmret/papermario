@@ -342,7 +342,7 @@ EvtScript N(EVS_ExecuteAction) = {
     End
 };
 
-EvtScript N(returnHome2) = {
+EvtScript N(EVS_ReturnHome_Success) = {
     Call(PartnerYieldTurn)
     Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(SetGoalToHome, ACTOR_PARTNER)
@@ -353,7 +353,7 @@ EvtScript N(returnHome2) = {
     End
 };
 
-EvtScript N(EVS_ReturnHome) = {
+EvtScript N(EVS_ReturnHome_Miss) = {
     Call(PartnerYieldTurn)
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(SetGoalToHome, ACTOR_PARTNER)
@@ -952,11 +952,11 @@ EvtScript N(EVS_Move_SpinyFlip) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
     EndSwitch
     Return
@@ -1104,11 +1104,11 @@ EvtScript N(EVS_Move_SpinySurge) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
     EndSwitch
     Return
@@ -1788,7 +1788,7 @@ EvtScript N(EVS_Move_Hurricane) = {
     Wait(34)
     Call(SetActorRotation, ACTOR_PARTNER, 0, 0, 0)
     Call(SetActorRotationOffset, ACTOR_PARTNER, 0, 0, 0)
-    ExecWait(N(EVS_ReturnHome))
+    ExecWait(N(EVS_ReturnHome_Miss))
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Walk)
     Call(N(AllEnemiesBlownAway))
     Call(PartnerYieldTurn)

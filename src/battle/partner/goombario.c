@@ -769,7 +769,7 @@ EvtScript N(EVS_HandlePhase) = {
     End
 };
 
-EvtScript N(EVS_ReturnHome) = {
+EvtScript N(EVS_ReturnHome_Miss) = {
     Call(PartnerYieldTurn)
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleGoombario_Idle)
@@ -820,7 +820,7 @@ EvtScript N(EVS_ReturnHome) = {
     End
 };
 
-EvtScript N(returnHome2) = {
+EvtScript N(EVS_ReturnHome_Success) = {
     Call(PartnerYieldTurn)
     Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleGoombario_Idle)
@@ -953,7 +953,7 @@ EvtScript N(EVS_Attack_Headbonk1) = {
         EndThread
         Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TRIP)
         Wait(20)
-        ExecWait(N(EVS_ReturnHome))
+        ExecWait(N(EVS_ReturnHome_Miss))
         Return
     EndIf
     ChildThread
@@ -979,7 +979,7 @@ EvtScript N(EVS_Attack_Headbonk1) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
             Return
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
@@ -1025,7 +1025,7 @@ EvtScript N(EVS_Attack_Headbonk1) = {
     Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
     Call(SetActionResult, LVarF)
-    ExecWait(N(returnHome2))
+    ExecWait(N(EVS_ReturnHome_Success))
     Return
     End
 };
@@ -1058,7 +1058,7 @@ EvtScript N(EVS_Attack_Headbonk2) = {
         EndThread
         Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TRIP)
         Wait(20)
-        ExecWait(N(EVS_ReturnHome))
+        ExecWait(N(EVS_ReturnHome_Miss))
         Return
     EndIf
     ChildThread
@@ -1084,7 +1084,7 @@ EvtScript N(EVS_Attack_Headbonk2) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
             Return
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
@@ -1132,7 +1132,7 @@ EvtScript N(EVS_Attack_Headbonk2) = {
     Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
     Call(SetActionResult, LVarF)
-    ExecWait(N(returnHome2))
+    ExecWait(N(EVS_ReturnHome_Success))
     Return
     End
 };
@@ -1165,7 +1165,7 @@ EvtScript N(EVS_Attack_Headbonk3) = {
         EndThread
         Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TRIP)
         Wait(20)
-        ExecWait(N(EVS_ReturnHome))
+        ExecWait(N(EVS_ReturnHome_Miss))
         Return
     EndIf
     ChildThread
@@ -1191,7 +1191,7 @@ EvtScript N(EVS_Attack_Headbonk3) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
             Return
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
@@ -1248,7 +1248,7 @@ EvtScript N(EVS_Attack_Headbonk3) = {
     Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
     Call(SetActionResult, LVarF)
-    ExecWait(N(returnHome2))
+    ExecWait(N(EVS_ReturnHome_Success))
     Return
     End
 };
@@ -1285,7 +1285,7 @@ EvtScript N(EVS_Move_Multibonk) = {
         EndThread
         Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TRIP)
         Wait(20)
-        ExecWait(N(EVS_ReturnHome))
+        ExecWait(N(EVS_ReturnHome_Miss))
         Return
     EndIf
     ChildThread
@@ -1311,7 +1311,7 @@ EvtScript N(EVS_Move_Multibonk) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
             Return
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
@@ -1412,13 +1412,13 @@ EvtScript N(EVS_Move_Multibonk) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
             Return
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
             IfEq(LFlag0, TRUE)
-                ExecWait(N(returnHome2))
+                ExecWait(N(EVS_ReturnHome_Success))
                 Return
             EndIf
         EndCaseGroup
