@@ -50,7 +50,7 @@ EntityModelScript N(EMS_DustyHammer) = STANDARD_ENTITY_MODEL_SCRIPT(N(DustyHamme
 EvtScript N(EVS_UseItem) = {
     SetConst(LVarA, ITEM_DUSTY_HAMMER)
     ExecWait(N(UseItemWithEffect))
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 15)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Throw)
     Call(PlaySound, SOUND_THROW)

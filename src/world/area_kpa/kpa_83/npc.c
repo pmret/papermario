@@ -32,7 +32,7 @@ EvtScript N(EVS_FocusCam_LookAtDoor) = {
     Call(SetCamPosA, CAM_DEFAULT, Float(88.0), Float(256.6))
     Call(SetCamPosB, CAM_DEFAULT, Float(195.0), Float(142.0))
     Call(SetCamPosC, CAM_DEFAULT, Float(0.0), Float(0.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -453,7 +453,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     Set(LVar6, Float(3.0 / DT))
     ExecWait(N(EVS_FocusCam_LookAtDoor))
     Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0063)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Set(GB_KPA83_BowserDoorState, 1)
     Call(DisablePlayerInput, FALSE)
     Return

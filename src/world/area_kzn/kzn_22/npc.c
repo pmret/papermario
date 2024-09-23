@@ -65,7 +65,7 @@ EndIf //@bug unmatched endif
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-4.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(480.0), Float(299.6))
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Call(SetPlayerSpeed, Float(3.0))
@@ -124,7 +124,7 @@ EvtScript N(EVS_ControlCamera) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(390.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-9.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Label(10)
         Wait(1)
         IfEq(AF_KZN23_GrabbedKolorado, FALSE)
@@ -134,7 +134,7 @@ EvtScript N(EVS_ControlCamera) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.3))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Label(20)
         Wait(1)
         IfEq(AF_KZN22_FlewAway, FALSE)
@@ -142,7 +142,7 @@ EvtScript N(EVS_ControlCamera) = {
         EndIf
     Call(SetPanTarget, CAM_DEFAULT, 368, 310, 170)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.8))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End

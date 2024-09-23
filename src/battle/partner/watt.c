@@ -710,8 +710,8 @@ EvtScript N(EVS_ExecuteAction) = {
     End
 };
 
-EvtScript N(returnHome2) = {
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+EvtScript N(EVS_ReturnHome_Success) = {
+    Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
     Call(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
@@ -720,8 +720,8 @@ EvtScript N(returnHome2) = {
     End
 };
 
-EvtScript N(EVS_ReturnHome) = {
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+EvtScript N(EVS_ReturnHome_Miss) = {
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
     Call(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
@@ -775,7 +775,7 @@ EvtScript N(EVS_Attack_ElectroDash) = {
     Call(action_command_body_slam_init)
     Call(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     Wait(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_48)
+    Call(UseBattleCamPreset, BTL_CAM_CLOSER_PARTNER_APPROACH)
     Call(InitTargetIterator)
     Call(SetGoalToTarget, ACTOR_PARTNER)
     Call(AddGoalPos, ACTOR_PARTNER, -20, 0, 0)
@@ -953,11 +953,11 @@ EvtScript N(EVS_Attack_ElectroDash) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
     EndSwitch
     Return
@@ -985,7 +985,7 @@ EvtScript N(EVS_Attack_PowerShock) = {
     Call(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
     Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    Call(AddBattleCamZoom, -100)
+    Call(AddBattleCamDist, -100)
     Call(MoveBattleCamOver, 80)
     Call(N(WattFXDisable))
     Call(N(TargetParalyzeChance))
@@ -1024,7 +1024,7 @@ EvtScript N(EVS_Attack_PowerShock) = {
     Add(LVar2, 5)
     Call(N(PowerShockFX), LVar0, LVar1, LVar2)
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_APPROACH)
-    Call(AddBattleCamZoom, 100)
+    Call(AddBattleCamDist, 100)
     Call(MoveBattleCamOver, 5)
     Thread
         Call(N(PowerShockDischargeFX), 20)
@@ -1053,7 +1053,7 @@ EvtScript N(EVS_Attack_PowerShock) = {
     Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     IfEq(LVar0, HIT_RESULT_MISS)
         Wait(15)
-        ExecWait(N(EVS_ReturnHome))
+        ExecWait(N(EVS_ReturnHome_Miss))
         Return
     EndIf
     Call(GetActionQuality, LVarF)
@@ -1076,11 +1076,11 @@ EvtScript N(EVS_Attack_PowerShock) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
     EndSwitch
     Return
@@ -1095,10 +1095,10 @@ EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
     Wait(5)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -125, 42, 0)
-    Call(SetBattleCamOffsetZ, 0)
-    Call(SetBattleCamZoom, 340)
+    Call(SetBattleCamOffsetY, 0)
+    Call(SetBattleCamDist, 340)
     Call(MoveBattleCamOver, 30)
     Call(SetActorYaw, ACTOR_PARTNER, 30)
     Wait(1)
@@ -1113,9 +1113,9 @@ EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
     Call(SetActorYaw, ACTOR_PARTNER, 180)
     Wait(10)
     Call(action_command_water_block_start, 0, 100 * DT, 3)
-    Call(AddBattleCamZoom, -75)
+    Call(AddBattleCamDist, -75)
     Call(MoveBattleCamOver, 100 * DT)
-    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
     Thread
         Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
@@ -1133,7 +1133,7 @@ EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
     Add(LVar1, 42)
     Call(N(TurboChargeFX), LVar0, LVar1, LVar2)
     Wait(59)
-    Call(AddBattleCamZoom, 100)
+    Call(AddBattleCamDist, 100)
     Call(MoveBattleCamOver, 5)
     Thread
         Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_LONG_PLAYER_JUMP)
@@ -1142,7 +1142,7 @@ EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
         Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
         Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        Call(func_80273444, 20, 0, 0)
+        Call(PlayerHopToGoal, 20, 0, 0)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Land)
         Wait(4)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
@@ -1178,10 +1178,10 @@ EvtScript N(EVS_TurboCharge_ImmobilePlayer) = {
     Call(SetActionHudPrepareTime, 0)
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Wait(5)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -125, 42, 0)
-    Call(SetBattleCamOffsetZ, 0)
-    Call(SetBattleCamZoom, 340)
+    Call(SetBattleCamOffsetY, 0)
+    Call(SetBattleCamDist, 340)
     Call(MoveBattleCamOver, 30)
     Call(SetActorYaw, ACTOR_PARTNER, 30)
     Wait(1)
@@ -1196,9 +1196,9 @@ EvtScript N(EVS_TurboCharge_ImmobilePlayer) = {
     Call(SetActorYaw, ACTOR_PARTNER, 180)
     Wait(10)
     Call(action_command_water_block_start, 0, 100 * DT, 3)
-    Call(AddBattleCamZoom, -100)
+    Call(AddBattleCamDist, -100)
     Call(MoveBattleCamOver, 100 * DT)
-    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
     Thread
         Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
@@ -1216,7 +1216,7 @@ EvtScript N(EVS_TurboCharge_ImmobilePlayer) = {
     Add(LVar1, 42)
     Call(N(TurboChargeFX), LVar0, LVar1, LVar2)
     Wait(59)
-    Call(AddBattleCamZoom, 100)
+    Call(AddBattleCamDist, 100)
     Call(MoveBattleCamOver, 5)
     Wait(30)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -1261,10 +1261,10 @@ EvtScript N(EVS_Attack_MegaShock) = {
     Call(action_command_mega_shock_init)
     Call(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     Call(SetActionHudPrepareTime, 0)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -54, 63, 10)
-    Call(SetBattleCamOffsetZ, 15)
-    Call(SetBattleCamZoom, 314)
+    Call(SetBattleCamOffsetY, 15)
+    Call(SetBattleCamDist, 314)
     Call(MoveBattleCamOver, 30)
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Add(LVar0, 40)
@@ -1291,9 +1291,9 @@ EvtScript N(EVS_Attack_MegaShock) = {
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Add(LVar1, 12)
     PlayEffect(EFFECT_RADIAL_SHIMMER, 8, LVar0, LVar1, LVar2, Float(1.3), 90 * DT, 0)
-    Call(AddBattleCamZoom, -100)
+    Call(AddBattleCamDist, -100)
     Call(MoveBattleCamOver, 90 * DT)
-    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
     Call(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_ATTACK)
     Call(N(WattFXDisable))
@@ -1314,10 +1314,10 @@ EvtScript N(EVS_Attack_MegaShock) = {
         Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         Add(LVar1, 12)
         Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_WATT_MEGA_DISCHARGE)
-        PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, 2, LVar0, LVar1, LVar2, 0, 0, 0)
+        PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, FX_SHOCK_OVERLAY_MEGA_SHOCK, LVar0, LVar1, LVar2, 0, 0, 0)
         Wait(10)
         Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_WATT_MEGA_CHARGE_WAVE)
-        PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, 2, LVar0, LVar1, LVar2, 0, 0, 0)
+        PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, FX_SHOCK_OVERLAY_MEGA_SHOCK, LVar0, LVar1, LVar2, 0, 0, 0)
     EndThread
     Thread
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBiggest)
@@ -1327,7 +1327,7 @@ EvtScript N(EVS_Attack_MegaShock) = {
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
     EndThread
     Thread
-        Call(SetBattleCamZoom, 420)
+        Call(SetBattleCamDist, 420)
         Call(SetBattleCamTarget, 6, 63, 10)
         Call(MoveBattleCamOver, 15)
         Wait(4)
@@ -1370,9 +1370,9 @@ EvtScript N(EVS_Attack_MegaShock) = {
     Call(GetPartnerActionSuccess, LVar0)
     Switch(LVar0)
         CaseGt(99)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         CaseDefault
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
     EndSwitch
     Return
     End

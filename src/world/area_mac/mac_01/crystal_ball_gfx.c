@@ -39,7 +39,7 @@ void N(gfx_build_inside_crystal_ball)(void) {
     Camera* camera = &gCameras[gCurrentCameraID];
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_tama));
 
-    transform_point(camera->perspectiveMatrix, model->center.x, model->center.y, model->center.z, 1.0f, &x, &y, &z, &s);
+    transform_point(camera->mtxPerspective, model->center.x, model->center.y, model->center.z, 1.0f, &x, &y, &z, &s);
     s = 1.0f / s;
     x *= s;
     y *= -s;
@@ -130,8 +130,8 @@ EvtScript N(EVS_SetupCrystalBallGfx) = {
     Call(EnableModel, MODEL_mirrorball, FALSE)
     Call(SetCustomGfxBuilders, CUSTOM_GFX_3, Ref(N(gfx_build_inside_crystal_ball)), NULL)
     Call(SetModelCustomGfx, MODEL_tama, CUSTOM_GFX_3, -1)
-    Call(SetModelFlags, MODEL_tama, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
-    Call(SetModelFlags, MODEL_ohosi, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
+    Call(SetModelFlags, MODEL_tama, MODEL_FLAG_BILLBOARD, TRUE)
+    Call(SetModelFlags, MODEL_ohosi, MODEL_FLAG_BILLBOARD, TRUE)
     Return
     End
 };

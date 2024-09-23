@@ -30,7 +30,7 @@ EvtScript N(EVS_Scene_Epilogue) = {
     Call(SetCamDistance, CAM_DEFAULT, 350)
     Call(SetCamPosA, CAM_DEFAULT, Float(17.5), Float(35.0))
     Call(SetCamPosB, CAM_DEFAULT, 0, -50)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(70)
     Call(InterpNpcYaw, NPC_Lakilester_Epilogue, 90, 0)

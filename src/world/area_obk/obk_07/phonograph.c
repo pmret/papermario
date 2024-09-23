@@ -842,7 +842,7 @@ EvtScript N(EVS_PlayPhonograph) = {
         EndIf
     EndLoop
     KillThread(MV_UpdateGuardScript)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     IfEq(MV_GuardDeparted, FALSE)
         IfEq(MV_GuardDancing, TRUE)
@@ -1128,7 +1128,7 @@ EvtScript N(EVS_Scene_PlayerGotChestItem) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Cower, ANIM_Boo_Cower, 0, MSG_CH3_0039)
     Call(SetNpcAnimation, NPC_GuardBoo, ANIM_Boo_Idle)
@@ -1138,9 +1138,9 @@ EvtScript N(EVS_Scene_PlayerGotChestItem) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return
     End

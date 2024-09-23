@@ -22,7 +22,7 @@ EvtScript N(EVS_NpcIdle_Blooper) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -25, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, -25, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(InterpPlayerYaw, 270, 0)
     Wait(20)

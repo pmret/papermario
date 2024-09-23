@@ -29,7 +29,7 @@ EvtScript N(EVS_Scene_RuinsRising) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 175, 0, -201)
     Call(SetPanTarget, CAM_DEFAULT, 175, 0, -201)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
     Call(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
     Call(N(SetModelTintParams), ENV_TINT_REMAP, 44, 32, 177, 0, 0, 0, 0, 0, 0)

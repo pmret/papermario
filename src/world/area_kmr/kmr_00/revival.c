@@ -272,7 +272,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     Call(SetCamDistance, CAM_DEFAULT, -540)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetPanTarget, CAM_DEFAULT, 0, 15, 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(1)
     Call(func_802D4D14, 180)
     Call(SetPlayerPos, 0, 2, 0)
@@ -280,7 +280,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     Wait(60 * DT)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.7 / DT))
     Call(SetCamDistance, CAM_DEFAULT, -350)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         Wait(2)
         SetF(LVar0, 0)
@@ -385,7 +385,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
 #endif
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
     Call(SetCamDistance, CAM_DEFAULT, -200)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         Call(SetNpcAnimation, NPC_Kalmar, ANIM_WorldKalmar_LeanLeft)
         Call(NpcFlyTo, NPC_Kalmar, 20, 10, -5, 25 * DT, -10, EASING_QUADRATIC_OUT)
@@ -433,7 +433,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
         Wait(40 * DT)
         Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
         Call(SetCamDistance, CAM_DEFAULT, -350)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Loop(3)
             Call(N(func_80240530_8AC4C0), NPC_Kalmar)
             Wait(4)

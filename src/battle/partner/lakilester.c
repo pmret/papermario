@@ -342,9 +342,9 @@ EvtScript N(EVS_ExecuteAction) = {
     End
 };
 
-EvtScript N(returnHome2) = {
+EvtScript N(EVS_ReturnHome_Success) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+    Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Run)
     Call(FlyToGoal, ACTOR_PARTNER, 15, 0, EASING_COS_IN_OUT)
@@ -353,9 +353,9 @@ EvtScript N(returnHome2) = {
     End
 };
 
-EvtScript N(EVS_ReturnHome) = {
+EvtScript N(EVS_ReturnHome_Miss) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Run)
     Call(FlyToGoal, ACTOR_PARTNER, 15, 0, EASING_COS_IN_OUT)
@@ -603,7 +603,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             break;
     }
 
-    // show aim dot hud element in center of 
+    // show aim dot hud element in center of
     switch (script->functionTemp[0]) {
         case SPINY_FLIP_DELAY:
         case SPINY_FLIP_AIMING:
@@ -846,10 +846,10 @@ EvtScript N(EVS_Move_SpinyFlip) = {
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
     Call(InitTargetIterator)
     Call(SetGoalToTarget, ACTOR_PARTNER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 47, 46, 12)
-    Call(SetBattleCamOffsetZ, 7)
-    Call(SetBattleCamZoom, 416)
+    Call(SetBattleCamOffsetY, 7)
+    Call(SetBattleCamDist, 416)
     Call(MoveBattleCamOver, 30)
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Add(LVar0, 3)
@@ -944,19 +944,19 @@ EvtScript N(EVS_Move_SpinyFlip) = {
     EndSwitch
     Switch(LVarF)
         CaseEq(1)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+            Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
         CaseDefault
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     EndSwitch
     Wait(15)
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
     EndSwitch
     Return
@@ -976,10 +976,10 @@ EvtScript N(EVS_Move_SpinySurge) = {
             Call(SetupMashMeter, 4, 40, 70, 99, 100, 0)
     EndSwitch
     Call(SetActionHudPrepareTime, 10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 45, 60, 0)
-    Call(SetBattleCamOffsetZ, 0)
-    Call(SetBattleCamZoom, 400)
+    Call(SetBattleCamOffsetY, 0)
+    Call(SetBattleCamDist, 400)
     Call(MoveBattleCamOver, 30)
     Call(InitTargetIterator)
     Call(SetGoalToHome, ACTOR_PARTNER)
@@ -1089,9 +1089,9 @@ EvtScript N(EVS_Move_SpinySurge) = {
         EndSwitch
         Switch(LVar0)
             CaseGt(0)
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+                Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
             CaseDefault
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+                Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
         EndSwitch
         Wait(6)
         Label(12)
@@ -1104,11 +1104,11 @@ EvtScript N(EVS_Move_SpinySurge) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
     EndSwitch
     Return
@@ -1124,12 +1124,12 @@ EvtScript N(cloudNine_normal) = {
     Call(SetActionHudPrepareTime, 50)
     Call(InitTargetIterator)
     Call(SetGoalToHome, ACTOR_PARTNER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_10)
+    Call(UseBattleCamPreset, BTL_CAM_MIDPOINT_CLOSE)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamOffsetZ, 17)
-    Call(SetBattleCamZoom, 300)
+    Call(SetBattleCamOffsetY, 17)
+    Call(SetBattleCamDist, 300)
     Call(MoveBattleCamOver, 30)
-    Call(func_8024EDA4)
+    Call(DisableBattleCamClampX)
     Wait(10)
     Thread
         Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -1157,17 +1157,17 @@ EvtScript N(cloudNine_normal) = {
     Call(SetActorJumpGravity, ACTOR_PLAYER, Float(1.0))
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_FightingStance)
     Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    Call(func_80273444, 18, 0, 0)
+    Call(PlayerHopToGoal, 18, 0, 0)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_FightingStance)
     Wait(3)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     Call(action_command_water_block_start, 0, 97, 3)
-    Call(AddBattleCamZoom, -75)
+    Call(AddBattleCamDist, -75)
     Call(MoveBattleCamOver, 100)
-    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
     Wait(100)
     Wait(3)
-    Call(AddBattleCamZoom, 50)
+    Call(AddBattleCamDist, 50)
     Call(MoveBattleCamOver, 5)
     Call(GetPartnerActionSuccess, LVarA)
     IfGt(LVarA, 0)
@@ -1244,12 +1244,12 @@ EvtScript N(cloudNine_immobile) = {
     Call(N(RemoveCloudNineFX))
     Call(InitTargetIterator)
     Call(SetGoalToHome, ACTOR_PARTNER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_10)
+    Call(UseBattleCamPreset, BTL_CAM_MIDPOINT_CLOSE)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamOffsetZ, 0)
-    Call(SetBattleCamZoom, 300)
+    Call(SetBattleCamOffsetY, 0)
+    Call(SetBattleCamDist, 300)
     Call(MoveBattleCamOver, 30)
-    Call(func_8024EDA4)
+    Call(DisableBattleCamClampX)
     Wait(10)
     Set(LVar0, 0)
     Loop(10)
@@ -1277,12 +1277,12 @@ EvtScript N(cloudNine_immobile) = {
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Call(FlyToGoal, ACTOR_PARTNER, 20, 0, EASING_COS_IN_OUT)
     Call(action_command_water_block_start, 0, 97, 3)
-    Call(AddBattleCamZoom, -75)
+    Call(AddBattleCamDist, -75)
     Call(MoveBattleCamOver, 100)
-    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
     Wait(100)
     Wait(3)
-    Call(AddBattleCamZoom, 50)
+    Call(AddBattleCamDist, 50)
     Call(MoveBattleCamOver, 5)
     Call(GetPartnerActionSuccess, LVarA)
     IfGt(LVarA, 0)
@@ -1718,10 +1718,10 @@ EvtScript N(EVS_Move_Hurricane) = {
     Call(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     Call(SetActionHudPrepareTime, 15)
     Call(SetDamageSource, DMG_SRC_HURRICANE)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -45, 54, 0)
-    Call(SetBattleCamOffsetZ, 0)
-    Call(SetBattleCamZoom, 280)
+    Call(SetBattleCamOffsetY, 0)
+    Call(SetBattleCamDist, 280)
     Call(MoveBattleCamOver, 40)
     Call(InitTargetIterator)
     Call(SetGoalToHome, ACTOR_PARTNER)
@@ -1734,12 +1734,12 @@ EvtScript N(EVS_Move_Hurricane) = {
     Call(action_command_hurricane_start, 0, 147 * DT, 3, LVar0)
     Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     Call(SetActorRotationOffset, ACTOR_PARTNER, 0, 20, 0)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 35, 54, 0)
-    Call(SetBattleCamOffsetZ, 0)
-    Call(SetBattleCamZoom, 430)
+    Call(SetBattleCamOffsetY, 0)
+    Call(SetBattleCamDist, 430)
     Call(MoveBattleCamOver, 150 * DT)
-    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_HURRICANE_WIND)
     Thread
         Call(N(ProcessHurricane))
@@ -1760,9 +1760,9 @@ EvtScript N(EVS_Move_Hurricane) = {
     Call(GetActionSuccessCopy, LVar0)
     Switch(LVar0)
         CaseGt(99)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+            Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
         CaseDefault
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     EndSwitch
     Call(InitTargetIterator)
     Label(10)
@@ -1788,7 +1788,7 @@ EvtScript N(EVS_Move_Hurricane) = {
     Wait(34)
     Call(SetActorRotation, ACTOR_PARTNER, 0, 0, 0)
     Call(SetActorRotationOffset, ACTOR_PARTNER, 0, 0, 0)
-    ExecWait(N(EVS_ReturnHome))
+    ExecWait(N(EVS_ReturnHome_Miss))
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Walk)
     Call(N(AllEnemiesBlownAway))
     Call(PartnerYieldTurn)

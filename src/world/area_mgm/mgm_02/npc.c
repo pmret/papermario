@@ -1633,7 +1633,7 @@ EvtScript N(EVS_Toad_GovernGame) = {
         Call(SetPanTarget, CAM_DEFAULT, 358, -20, 185)
         Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Call(SetNpcFlagBits, NPC_Toad, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
@@ -1694,9 +1694,9 @@ EvtScript N(EVS_Toad_GovernGame) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return
     End

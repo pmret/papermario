@@ -21,7 +21,7 @@ EvtScript N(EVS_NpcIdle_Blooper) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -25, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, -25, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(20)
     Thread
@@ -74,7 +74,7 @@ EvtScript N(EVS_NpcDefeat_Blooper) = {
         Set(GF_TIK_DefeatedTwoBloopers, TRUE)
     EndIf
     Set(GF_TIK02_Defeated_Blooper, TRUE)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Exec(N(EVS_SetupMusic))
     Call(DisablePlayerInput, FALSE)
     Call(RemoveNpc, NPC_SELF)

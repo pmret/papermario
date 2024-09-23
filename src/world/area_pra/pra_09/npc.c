@@ -102,7 +102,7 @@ EvtScript N(EVS_FocusCam_OnPosition) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(12.0), Float(-5.5))
     Call(SetCamPosB, CAM_DEFAULT, Float(500.0), Float(20.0))
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -115,9 +115,9 @@ EvtScript N(EVS_FocusCam_StartBattle) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(386.0), Float(20.0))
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Return
     End
 };
@@ -132,9 +132,9 @@ EvtScript N(EVS_FocusCam_OnPlayer) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(500.0), Float(20.0))
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Return
     End
 };
@@ -159,7 +159,7 @@ EvtScript N(EVS_Imposter_Unmask) = {
     EndIf
     Call(EndSpeech, LVar4, ANIM_Duplighost_Anim05, ANIM_Duplighost_Anim02, 0)
     ExecWait(N(EVS_FocusCam_OnPlayer))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Thread
         Call(SetNpcAnimation, LVar4, ANIM_Duplighost_Anim04)
         Call(InterpNpcYaw, LVar4, 90, 0)
@@ -309,10 +309,10 @@ EvtScript N(EVS_PreventPlayerLeaving) = {
             Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
             Call(SetPanTarget, CAM_DEFAULT, LVar0, 0, LVar2)
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Wait(1)
         EndLoop
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     EndThread
     Thread
         Loop(30)
@@ -406,7 +406,7 @@ EvtScript N(EVS_ManageImpostersScene) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(12.0), Float(-7.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(500.0), Float(20.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Set(LVar0, NPC_Bombette_04)
@@ -504,7 +504,7 @@ EvtScript N(EVS_ManageImpostersScene) = {
     ExecWait(N(EVS_FocusCam_OnPosition))
     Call(SpeakToPlayer, NPC_Bombette_04, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH7_0143)
     Call(ResetCam, CAM_DEFAULT, Float(2.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Call(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, TRUE)
     Loop(0)

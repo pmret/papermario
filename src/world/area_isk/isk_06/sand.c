@@ -26,7 +26,7 @@ EvtScript N(EVS_Camera_LookAtDrain) = {
     Call(SetCamPosB, CAM_DEFAULT, 566, 0)
     Call(SetCamPitch, CAM_DEFAULT, Float(13.6), Float(-1.5))
     Call(SetPanTarget, CAM_DEFAULT, 356, -95, -373)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Return
     End
 };
@@ -46,7 +46,7 @@ EvtScript N(EVS_Camera_Reset) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Return
     End
 };

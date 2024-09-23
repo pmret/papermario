@@ -214,25 +214,25 @@ API_CALLABLE(SetCamNoDraw);
 API_CALLABLE(SetCamPerspective);
 
 /// @evtapi
-API_CALLABLE(func_802CA90C);
+API_CALLABLE(SetCamUpdateMode);
 
 /// @evtapi
-API_CALLABLE(func_802CA988);
+API_CALLABLE(GrabCamera);
 
 /// @evtapi
 API_CALLABLE(SetCamViewport);
 
 /// @evtapi
-API_CALLABLE(func_802CABE8);
+API_CALLABLE(SetInterpCamParams);
 
 /// @evtapi
-API_CALLABLE(func_802CACC0);
+API_CALLABLE(SetNoInterpCamParams);
 
 /// @evtapi
 API_CALLABLE(SetCamBGColor);
 
 /// @evtapi
-API_CALLABLE(func_802CAE50);
+API_CALLABLE(SetCamLookTarget);
 
 /// @evtapi
 API_CALLABLE(SetCamTarget);

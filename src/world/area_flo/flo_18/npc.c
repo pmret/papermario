@@ -247,7 +247,7 @@ EvtScript N(EVS_NpcIdle_Magikoopa) = {
     Call(SetCamDistance, CAM_DEFAULT, 1000)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-6.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(DisablePlayerInput, FALSE)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
@@ -406,7 +406,7 @@ EvtScript N(EVS_GenericBombReaction) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(8.0 / DT))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-6.0))
     Call(SetCamDistance, CAM_DEFAULT, 300)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     ExecWait(N(EVS_ReactionFacePlayer))
     IfEq(AB_FLO_GuardedMachineHitCount, 0)

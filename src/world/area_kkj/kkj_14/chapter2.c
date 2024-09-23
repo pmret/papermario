@@ -73,7 +73,7 @@ EvtScript N(EVS_FocusCam_Door_Ch2) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(-310.0), Float(32.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Return
     End
 };

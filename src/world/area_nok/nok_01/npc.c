@@ -326,7 +326,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
         Call(SetCamPosB, CAM_DEFAULT, -401, 50)
         Call(SetCamPosC, CAM_DEFAULT, 0, -2)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Call(func_802D1270, -334, 70, Float(3.0))
     Call(func_802D1270, -385, -6, Float(3.0))
@@ -347,7 +347,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Wait(1)
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     EndThread
     Return
     End

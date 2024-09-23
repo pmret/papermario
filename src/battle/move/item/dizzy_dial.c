@@ -25,19 +25,19 @@ API_CALLABLE(N(AnimateDizzyDialCameraFX)) {
             script->functionTemp[1] = 0;
             script->functionTemp[2] = 0;
             sfx_play_sound(SOUND_DIZZY_DIAL);
-            camera->auxPitch = 0;
+            camera->params.basic.skipRecalc = FALSE;
             ScreenBlurWorkerID = create_worker_frontUI(NULL, N(worker_render_screen_blur));
             script->functionTemp[0] = 1;
         case 1:
             camera->flags |= CAMERA_FLAG_SHAKING;
             angle = script->functionTemp[1];
-            guRotateF(camera->viewMtxShaking, angle, 0.0f, 0.0f, 1.0f);
+            guRotateF(camera->mtxViewShaking, angle, 0.0f, 0.0f, 1.0f);
             script->functionTemp[1] = 2.0 * ((1.0 - sin_rad(DEG_TO_RAD(script->functionTemp[2] + 90))) * 360.0);
             script->functionTemp[2]++;
             if (script->functionTemp[2] <= 90) {
                 return ApiStatus_BLOCK;
             }
-            camera->auxPitch = 0;
+            camera->params.basic.skipRecalc = FALSE;
             camera->flags &= ~CAMERA_FLAG_SHAKING;
             free_worker(ScreenBlurWorkerID);
             return ApiStatus_DONE2;
@@ -56,13 +56,13 @@ EvtScript N(EVS_UseItem) = {
     Wait(10)
     Thread
         Wait(5)
-        Call(AddBattleCamZoom, -250)
+        Call(AddBattleCamDist, -250)
         Call(MoveBattleCamOver, 80)
-        Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
         Wait(80)
-        Call(AddBattleCamZoom, 250)
+        Call(AddBattleCamDist, 250)
         Call(MoveBattleCamOver, 3)
-        Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
     EndThread
     Call(N(AnimateDizzyDialCameraFX))
     Thread
@@ -74,9 +74,9 @@ EvtScript N(EVS_UseItem) = {
         Call(ShakeCam, CAM_BATTLE, 0, 2, Float(1.0))
         Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.5))
         Wait(10)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+        Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
         Call(MoveBattleCamOver, 10)
-        Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, FALSE)
     EndThread
     Call(InitTargetIterator)
     Label(0)

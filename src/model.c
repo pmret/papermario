@@ -336,7 +336,7 @@ Gfx SolidCombineModes[][5] = {
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
         [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_TINT_REMAP_SHADE_ALPHA),
     },
-    
+
     // shaded color multiplied main/aux textures for alpha
     [TEX_COMBINE_3] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_26, PM_CC_27),
@@ -1406,7 +1406,7 @@ void appendGfx_model(void* data) {
 
     renderMode = model->renderMode;
     tintCombineType = 0;
-    
+
     if (textureHeader != NULL) {
         switch (extraTileType) {
             case EXTRA_TILE_NONE:
@@ -1424,7 +1424,7 @@ void appendGfx_model(void* data) {
     } else {
         renderClass = RENDER_CLASS_1CYC;
     }
-    
+
     if (textureHeader != NULL || renderMode <= RENDER_MODES_LAST_OPAQUE) {
         if (gFogSettings->enabled && !(flags & MODEL_FLAG_IGNORE_FOG)) {
             renderClass = RENDER_CLASS_FOG;
@@ -1975,8 +1975,8 @@ void appendGfx_model(void* data) {
         }
     }
 
-    if (flags & MODEL_FLAG_USE_CAMERA_UNK_MATRIX) {
-        gSPMatrix((*gfxPos)++, gCameras[gCurrentCamID].unkMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
+    if (flags & MODEL_FLAG_BILLBOARD) {
+        gSPMatrix((*gfxPos)++, gCameras[gCurrentCamID].mtxBillboard, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
         if (mtxPushMode != G_MTX_NOPUSH) {
             mtxPushMode = G_MTX_NOPUSH;
         }
@@ -2755,22 +2755,22 @@ void render_models(void) {
         break; \
     }
 
-    m00 = camera->perspectiveMatrix[0][0];
-    m01 = camera->perspectiveMatrix[0][1];
-    m02 = camera->perspectiveMatrix[0][2];
-    m03 = camera->perspectiveMatrix[0][3];
-    m10 = camera->perspectiveMatrix[1][0];
-    m11 = camera->perspectiveMatrix[1][1];
-    m12 = camera->perspectiveMatrix[1][2];
-    m13 = camera->perspectiveMatrix[1][3];
-    m20 = camera->perspectiveMatrix[2][0];
-    m21 = camera->perspectiveMatrix[2][1];
-    m22 = camera->perspectiveMatrix[2][2];
-    m23 = camera->perspectiveMatrix[2][3];
-    m30 = camera->perspectiveMatrix[3][0];
-    m31 = camera->perspectiveMatrix[3][1];
-    m32 = camera->perspectiveMatrix[3][2];
-    m33 = camera->perspectiveMatrix[3][3];
+    m00 = camera->mtxPerspective[0][0];
+    m01 = camera->mtxPerspective[0][1];
+    m02 = camera->mtxPerspective[0][2];
+    m03 = camera->mtxPerspective[0][3];
+    m10 = camera->mtxPerspective[1][0];
+    m11 = camera->mtxPerspective[1][1];
+    m12 = camera->mtxPerspective[1][2];
+    m13 = camera->mtxPerspective[1][3];
+    m20 = camera->mtxPerspective[2][0];
+    m21 = camera->mtxPerspective[2][1];
+    m22 = camera->mtxPerspective[2][2];
+    m23 = camera->mtxPerspective[2][3];
+    m30 = camera->mtxPerspective[3][0];
+    m31 = camera->mtxPerspective[3][1];
+    m32 = camera->mtxPerspective[3][2];
+    m33 = camera->mtxPerspective[3][3];
 
     // enqueue all visible models not in transform groups
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
@@ -2873,7 +2873,7 @@ void render_models(void) {
         }
 
         // map all model depths to the interval [0, 10k] and submit render task
-        transform_point(camera->perspectiveMatrix, centerX, centerY, centerZ, 1.0f, &outX, &outY, &outZ, &outW);
+        transform_point(camera->mtxPerspective, centerX, centerY, centerZ, 1.0f, &outX, &outY, &outZ, &outW);
         distance = outZ + 5000.0f;
         if (distance < 0) {
             distance = 0;
@@ -2912,7 +2912,7 @@ void render_models(void) {
         zComp = transformGroup->center.z;
 
         transform_point(
-            camera->perspectiveMatrix,
+            camera->mtxPerspective,
             xComp, yComp, zComp, 1.0f,
             &outX, &outY, &outZ, &outW
         );
@@ -4302,7 +4302,7 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
         return FALSE;
     }
     // Transform the model's center into clip space.
-    transform_point(camera->perspectiveMatrix, model->center.x, model->center.y, model->center.z, 1.0f, &outX, &outY, &outZ, &outW);
+    transform_point(camera->mtxPerspective, model->center.x, model->center.y, model->center.z, 1.0f, &outX, &outY, &outZ, &outW);
     if (outW == 0.0f) {
         *screenX = 0.0f;
         *screenY = 0.0f;
@@ -4412,7 +4412,7 @@ s32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* s
         return FALSE;
     }
     // Transform the point into clip space.
-    transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &outX, &outY, &outZ, &outW);
+    transform_point(camera->mtxPerspective, x, y, z, 1.0f, &outX, &outY, &outZ, &outW);
     if (outW == 0.0f) {
         *screenX = 0.0f;
         *screenY = 0.0f;

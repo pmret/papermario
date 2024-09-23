@@ -748,14 +748,14 @@ EvtScript N(EVS_BeginMerleeCamera) = {
     Call(SetPanTarget, 0, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, 0, Float(8.0))
     Call(SetCamPitch, 0, 20, -15)
-    Call(PanToTarget, 0, 0, 1)
+    Call(PanToTarget, 0, 0, TRUE)
     Call(WaitForCam, 0, Float(1.0))
     Return
     End
 };
 
 EvtScript N(EVS_EndMerleeCamera) = {
-    Call(PanToTarget, 0, 0, 0)
+    Call(PanToTarget, 0, 0, FALSE)
     Call(SetCamSpeed, 0, Float(3.0))
     Call(WaitForCam, 0, Float(1.0))
     Return

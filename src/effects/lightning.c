@@ -102,9 +102,9 @@ EffectInstance* lightning_main(
 
         load_effect(EFFECT_FLASHING_BOX_SHOCKWAVE);
         if (gGameStatusPtr->isBattle == TRUE) {
-            effectArg0 = 3;
+            effectArg0 = FX_SHOCK_OVERLAY_LIGHTNING_BATTLE;
         } else {
-            effectArg0 = 1;
+            effectArg0 = FX_SHOCK_OVERLAY_LIGHTNING_WORLD;
         }
         flashing_box_shockwave_main(effectArg0, arg1, arg2, arg3, arg4, arg5);
     }

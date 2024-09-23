@@ -146,7 +146,7 @@ EvtScript N(EVS_Move_Charge) = {
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetActorVar, ACTOR_SELF, AVAR_IsCharged, LVar0)
     IfEq(LVar0, 0)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+        Call(UseBattleCamPreset, BTL_CAM_ACTOR)
         Call(BattleCamTargetActor, ACTOR_SELF)
         Call(MoveBattleCamOver, 20)
         Wait(20)
@@ -179,7 +179,7 @@ EvtScript N(EVS_Move_Charge) = {
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Loop(20)
         Call(SetActorDispOffset, ACTOR_SELF, 1, 0, 0)
         Wait(1)
@@ -202,7 +202,7 @@ EvtScript N(EVS_Move_Charge) = {
                     EndIf
                     Wait(1)
                 EndLoop
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_01)
+                Call(UseBattleCamPreset, BTL_CAM_INTERRUPT)
                 IfEq(LVarA, HIT_RESULT_LUCKY)
                     Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
                 EndIf
@@ -577,7 +577,7 @@ EvtScript N(EVS_Attack_Headbonk) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Goomba_Hyper_Run)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, 50, 0, 0)

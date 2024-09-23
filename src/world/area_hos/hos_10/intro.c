@@ -164,7 +164,7 @@ EvtScript N(EVS_Scene_UnusedWhiteScreen) = {
     Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(EnableModel, MODEL_nagare, FALSE)
     Exec(N(EVS_Scene_Unused_Impl))
@@ -178,7 +178,7 @@ EvtScript N(EVS_Scene_RisingAboveClouds) = {
     Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Exec(N(EVS_Scene_Rising_Impl))
     Return

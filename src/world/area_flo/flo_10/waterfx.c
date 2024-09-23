@@ -107,7 +107,7 @@ void N(UnkModelFunc001)(void) {
     f32 temp_f20;
     f32 temp_f22;
 
-    transform_point(camera->perspectiveMatrix,
+    transform_point(camera->mtxPerspective,
                     model->center.x - bbHalfX, model->center.y, model->center.z - bbHalfZ, 1.0f,
                     &outX, &outY, &outZ, &outW);
 
@@ -123,7 +123,7 @@ void N(UnkModelFunc001)(void) {
     temp_f20 = outX;
     temp_f22 = outY;
 
-    transform_point(camera->perspectiveMatrix,
+    transform_point(camera->mtxPerspective,
                     model->center.x - bbHalfX, model->center.y, model->center.z + bbHalfZ, 1.0f,
                     &outX, &outY, &outZ, &outW);
 
@@ -155,7 +155,7 @@ void N(UnkModelFunc001)(void) {
         temp_f22 = outY;
     }
 
-    transform_point(camera->perspectiveMatrix,
+    transform_point(camera->mtxPerspective,
                     model->center.x + bbHalfX, model->center.y, model->center.z + bbHalfZ, 1.0f,
                     &outX, &outY, &outZ, &outW);
 
@@ -185,7 +185,7 @@ void N(UnkModelFunc001)(void) {
         temp_f22 = outY;
     }
 
-    transform_point(camera->perspectiveMatrix,
+    transform_point(camera->mtxPerspective,
                     model->center.x + bbHalfX, model->center.y, model->center.z - bbHalfZ, 1.0f,
                     &outX, &outY, &outZ, &outW);
 

@@ -4,7 +4,7 @@
 /// Provide arg `TRUE` on `LVar1` to disable refunding.
 EvtScript N(UseItemWithEffect) = {
     IfEq(LVar1, 0)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_WISH)
         Wait(10)
         Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_USE_ITEM)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
@@ -45,10 +45,10 @@ EvtScript N(UseItemWithEffect) = {
 };
 
 EvtScript N(UseItem) = {
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -85, 1, 0)
-    Call(SetBattleCamOffsetZ, 41)
-    Call(SetBattleCamZoom, 248)
+    Call(SetBattleCamOffsetY, 41)
+    Call(SetBattleCamDist, 248)
     Call(MoveBattleCamOver, 30)
     Wait(10)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)

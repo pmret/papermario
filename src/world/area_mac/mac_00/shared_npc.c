@@ -30,13 +30,13 @@ EvtScript N(EVS_Scene_ToadTownGreeting) = {
     Call(SetPanTarget, CAM_DEFAULT, -225, 0, -300)
     Call(SetCamDistance, CAM_DEFAULT, Float(800.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         Wait(35 * DT)
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.1 / DT))
         Call(UseSettingsFrom, CAM_DEFAULT, -225, 0, -300)
         Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Wait(10 * DT)
         Call(InterpNpcYaw, NPC_Toad_04, 230, 0)
@@ -60,9 +60,9 @@ EvtScript N(EVS_Scene_ToadTownGreeting) = {
     Call(DisablePlayerInput, FALSE)
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Return
     End
 };

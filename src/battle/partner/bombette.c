@@ -433,7 +433,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseEq(EVENT_BURN_CONTACT)
             Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_61)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_HIT_SPIKE)
             Call(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             Sub(LVar0, 60)
             Add(LVar1, 40)
@@ -505,7 +505,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
             Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_62)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_HIT_HAZARD)
             Call(SetAnimation, ACTOR_PARTNER, -1, LVarA)
             Call(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             Sub(LVar0, 60)
@@ -691,9 +691,9 @@ EvtScript N(EVS_HandlePhase) = {
     End
 };
 
-EvtScript N(returnHome2) = {
+EvtScript N(EVS_ReturnHome_Success) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+    Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(MoveBattleCamOver, 10)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
     Call(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -733,9 +733,9 @@ EvtScript N(returnHome2) = {
     End
 };
 
-EvtScript N(EVS_ReturnHome) = {
+EvtScript N(EVS_ReturnHome_Miss) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
     Call(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Sub(LVar0, 40)
@@ -809,7 +809,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
     Call(action_command_body_slam_init)
     Call(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     Wait(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_48)
+    Call(UseBattleCamPreset, BTL_CAM_CLOSER_PARTNER_APPROACH)
     Call(InitTargetIterator)
     Call(SetGoalToTarget, ACTOR_PARTNER)
     Call(AddGoalPos, ACTOR_PARTNER, -40, 0, 0)
@@ -943,7 +943,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
         Call(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
         Call(RunToGoal, ACTOR_PARTNER, 0)
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Idle)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+        Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
         Thread
             Call(SetActorRotationOffset, ACTOR_PARTNER, 0, 15, 0)
             Set(LVar0, 0)
@@ -1006,11 +1006,11 @@ EvtScript N(EVS_Attack_BodySlam) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
     EndSwitch
     Return
@@ -1044,7 +1044,7 @@ EvtScript N(EVS_Attack_Bomb) = {
             Call(SetupMashMeter, 5, 35, 60, 80, 99, 100)
     EndSwitch
     Wait(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_48)
+    Call(UseBattleCamPreset, BTL_CAM_CLOSER_PARTNER_APPROACH)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar2)
         CaseEq(MOVE_BOMB)
@@ -1117,7 +1117,7 @@ EvtScript N(EVS_Attack_Bomb) = {
         Wait(1)
     EndLoop
     Call(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 8)
     Call(GetActionSuccessCopy, LVar0)
     Call(N(GetBombDamage), LVar0)
@@ -1296,10 +1296,10 @@ EvtScript N(EVS_Attack_Bomb) = {
                 EndIf
     EndSwitch
     IfGt(LF_MashEnded, 0)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+        Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
         Call(MoveBattleCamOver, 10)
     Else
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+        Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     EndIf
     Set(LVar0, 0)
     Switch(LVar0)
@@ -1349,7 +1349,7 @@ EvtScript N(EVS_Attack_FirstStrike) = {
     Set(LVar1, 0)
     Call(SetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LRAW_BOMBETTE_FUSE)
-    Call(UseBattleCamPresetImmediately, BTL_CAM_PRESET_11)
+    Call(UseBattleCamPresetImmediately, BTL_CAM_MIDPOINT_NORMAL)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 1)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AboutToExplode)
@@ -1367,7 +1367,7 @@ EvtScript N(EVS_Attack_FirstStrike) = {
     Set(LVarA, 0)
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Call(N(PlayExplosionFX), LVar0, LVar1, LVar2)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 8)
     Thread
         Call(StartRumble, BTL_RUMBLE_HIT_HEAVY)

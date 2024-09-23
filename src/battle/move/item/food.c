@@ -145,13 +145,13 @@ EvtScript N(EVS_UseOnPartner) = {
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetBattleCamTarget, -125, 1, 0)
-    Call(SetBattleCamOffsetZ, 41)
-    Call(SetBattleCamZoom, 248)
+    Call(SetBattleCamOffsetY, 41)
+    Call(SetBattleCamDist, 248)
     Call(MoveBattleCamOver, 25)
     Call(SetVirtualEntityJumpGravity, LVarA, Float(0.4))
     Add(LVar2, 5)
     Call(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 25)
-    Call(AddBattleCamZoom, 100)
+    Call(AddBattleCamDist, 100)
     Call(MoveBattleCamOver, 30)
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Add(LVar1, 25)
@@ -186,7 +186,7 @@ EvtScript N(EVS_UseItem) = {
     #define LV_IsDrink LVarD
     #define LV_NoRefund LVarE
     #define LV_IsHarmful LVarF
-    
+
     Set(LV_NoRefund, LVar1)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Set(LV_ItemID, LVar1)

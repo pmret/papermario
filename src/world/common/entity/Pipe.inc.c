@@ -189,7 +189,7 @@ EvtScript N(EVS_Pipe_EnterHorizontal) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar5, LVar6, LVar7)
     Call(SetPanTarget, CAM_DEFAULT, LVar5, LVar6, LVar7)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(GetCurrentPartnerID, LVar0)
     IfNe(LVar0, PARTNER_NONE)
         Call(DisablePartnerAI, 0)
@@ -225,7 +225,7 @@ EvtScript N(EVS_Pipe_EnterHorizontal) = {
     Call(ModifyColliderFlags, 1, LVarB, COLLIDER_FLAGS_UPPER_MASK)
     Call(DisablePlayerInput, FALSE)
     Call(DisablePlayerPhysics, FALSE)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Exec(LVarA)
     Return
     End

@@ -8,7 +8,7 @@ EvtScript N(EVS_ProvideDemoInputs) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(17.5), Float(-10.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(570.0), 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(60)
     Call(DemoJoystickXY, 10, 0)
     Wait(40)

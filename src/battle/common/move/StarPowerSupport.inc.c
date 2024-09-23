@@ -89,7 +89,7 @@ API_CALLABLE(N(SetStarSpiritSize)) {
 EvtScript N(EVS_StarPower_WishForSpirit) = {
     Call(GetOwnerID, LVarA)
     IfEq(LVarA, ACTOR_PLAYER)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_WISH)
         Wait(10)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
         Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -112,7 +112,7 @@ EvtScript N(EVS_StarPower_WishForSpirit) = {
         Wait(30)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
     Else
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_WISH)
         Wait(10)
         Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_WALK)
         Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -144,7 +144,7 @@ EvtScript N(EVS_StarPower_WishForSpirit) = {
 EvtScript N(EVS_StarPower_WishForBeam) = {
     Call(GetOwnerID, LVarA)
     IfEq(LVarA, ACTOR_PLAYER)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_WISH)
         Wait(10)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
         Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -167,7 +167,7 @@ EvtScript N(EVS_StarPower_WishForBeam) = {
         Wait(30)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
     Else
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_WISH)
         Wait(10)
         Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_WALK)
         Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -199,7 +199,7 @@ EvtScript N(EVS_StarPower_WishForBeam) = {
 EvtScript N(EVS_StarPower_SpiritSummoned) = {
     Wait(8)
     Call(SetForegroundModelsVisible, FALSE)
-    Call(UseBattleCamPresetImmediately, BTL_CAM_PRESET_73)
+    Call(UseBattleCamPresetImmediately, BTL_CAM_STAR_SPIRIT)
     Call(MoveBattleCamOver, 1)
     Call(PlaySound, SOUND_STAR_SPIRIT_APPEAR_A)
     Call(CreateNpc, NPC_BTL_SPIRIT, LVar0)
@@ -220,7 +220,7 @@ EvtScript N(EVS_StarPower_SpiritSummoned) = {
     Call(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
     Thread
         Wait(10)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_WISH)
     EndThread
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Add(LVar1, 50)

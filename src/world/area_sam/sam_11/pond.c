@@ -328,14 +328,14 @@ EvtScript N(EVS_DamageFrozenPond_After) = {
                 Call(UseSettingsFrom, CAM_DEFAULT, LVar3, LVar1, LVar5)
                 Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
                 Call(SetPanTarget, CAM_DEFAULT, LVar3, LVar1, LVar5)
-                Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
                 Wait(1)
             EndLoop
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, 0)
+            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         EndThread
     EndIf
     Call(PlaySoundAt, SOUND_SAM_POND_SHATTER, SOUND_SPACE_DEFAULT, 0, 60, 220)

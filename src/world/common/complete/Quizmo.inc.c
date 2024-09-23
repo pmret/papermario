@@ -595,7 +595,7 @@ EvtScript N(EVS_Quizmo_SetQuizCamera) = {
     SetF(LVar0, Float(13.0))
     SetF(LVar1, Float(-10.0))
     Call(SetCamPitch, 0, LVar0, LVar1)
-    Call(PanToTarget, 0, 0, 1)
+    Call(PanToTarget, 0, 0, TRUE)
     Call(SetCamLeadPlayer, 0, 0)
     Return
     End
@@ -621,7 +621,7 @@ EvtScript N(EVS_Quizmo_OtherCamScript) = {
 
 EvtScript N(EVS_Quizmo_ResetCamera) = {
     Call(N(Quizmo_SetCamVfov), 0, QUIZ_ARRAY_SAVED_FOV)
-    Call(PanToTarget, 0, 0, 0)
+    Call(PanToTarget, 0, 0, FALSE)
     Return
     End
 };

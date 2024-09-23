@@ -1,6 +1,17 @@
 #include "common.h"
 
-void update_camera_mode_unused(Camera* camera) {
+// implements CAM_UPDATE_UNUSED_AHEAD
+// this mode is completely unused in vanilla; it doesn't even have a case in update_cameras
+// seems to be based on CAM_UPDATE_NO_INTERP (the one used for battle cam)
+// tracks a point 400 units ahead of player position in the z-direction and 60 units above
+// defaults to a relatively short boom length and no pitch angle, resulting in a head-on direct view
+//
+// control parameters:
+// dist -- length of the camera boom arm
+// pitch -- rising angle of the boom arm, up toward the y-axis
+// yaw -- yaw angle for the boom arm in the xz-plane
+// skipRecalc -- do not calculate lookAt_obj and lookAt_eye from params
+void update_camera_unused_ahead(Camera* camera) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sinBoom;
     f32 cosBoom;
@@ -12,14 +23,14 @@ void update_camera_mode_unused(Camera* camera) {
     f32 deltaZ2;
     f32 boomYaw;
 
-    if (camera->needsInit || camera->isChangingMap) {
+    if (camera->needsInit || camera->needsReinit) {
         camera->needsInit = FALSE;
-        camera->isChangingMap = FALSE;
-        camera->auxPitch = 0;
-        camera->auxBoomLength = 100;
-        camera->lookAt_dist = 100;
-        camera->auxBoomPitch = 0;
-        camera->auxBoomYaw = 0;
+        camera->needsReinit = FALSE;
+        camera->params.basic.skipRecalc = FALSE;
+        camera->params.basic.dist = 100;
+        camera->params.basic.fovScale = 100;
+        camera->params.basic.pitch = 0;
+        camera->params.basic.yaw = 0;
         camera->lookAt_obj.x = camera->lookAt_obj_target.x;
         camera->lookAt_obj.y = camera->lookAt_obj_target.y;
         camera->lookAt_obj.z = camera->lookAt_obj_target.z;
@@ -31,15 +42,15 @@ void update_camera_mode_unused(Camera* camera) {
     camera->lookAt_obj_target.x = playerStatus->pos.x;
     camera->lookAt_obj_target.z = playerStatus->pos.z + 400.0f;
 
-    if (camera->auxPitch == 0) {
+    if (!camera->params.basic.skipRecalc) {
         camera->lookAt_obj.x = camera->lookAt_obj_target.x;
         camera->lookAt_obj.y = camera->lookAt_obj_target.y;
         camera->lookAt_obj.z = camera->lookAt_obj_target.z;
-        camera->trueRot.x = camera->auxBoomYaw;
-        camera->curBoomYaw = camera->auxBoomPitch;
-        camera->curBoomLength = camera->auxBoomLength;
-        camera->vfov = (10000 / camera->lookAt_dist) / 4;
-        boomYaw = DEG_TO_RAD(camera->curBoomYaw);
+        camera->curBoomYaw = camera->params.basic.yaw;
+        camera->curBoomPitch = camera->params.basic.pitch;
+        camera->curBoomLength = camera->params.basic.dist;
+        camera->vfov = (10000 / camera->params.basic.fovScale) / 4;
+        boomYaw = DEG_TO_RAD(camera->curBoomPitch);
         sinBoom = sin_rad(boomYaw);
         cosBoom = cos_rad(boomYaw);
         deltaX = 0.0f;
@@ -52,7 +63,7 @@ void update_camera_mode_unused(Camera* camera) {
         deltaX = deltaX2;
         deltaY = cosBoom * deltaY2 + deltaZ2 * sinBoom;
         deltaZ = sinBoom * boomYaw + deltaZ2 * cosBoom;
-        boomYaw = DEG_TO_RAD(camera->trueRot.x);
+        boomYaw = DEG_TO_RAD(camera->curBoomYaw);
         sinBoom = sin_rad(boomYaw);
         cosBoom = cos_rad(boomYaw);
         deltaZ2 = cosBoom * deltaX - deltaZ * sinBoom;
@@ -67,6 +78,6 @@ void update_camera_mode_unused(Camera* camera) {
     deltaX = camera->lookAt_obj.x - camera->lookAt_eye.x;
     deltaY = camera->lookAt_obj.y - camera->lookAt_eye.y;
     deltaZ = camera->lookAt_obj.z - camera->lookAt_eye.z;
-    camera->curBlendedYawNegated = -atan2(0.0f, 0.0f, deltaX, deltaZ);
-    camera->curPitch = atan2(0.0f, 0.0f, deltaY, -sqrtf(SQ(deltaX) + SQ(deltaZ)));
+    camera->lookAt_yaw = -atan2(0.0f, 0.0f, deltaX, deltaZ);
+    camera->lookAt_pitch = atan2(0.0f, 0.0f, deltaY, -sqrtf(SQ(deltaX) + SQ(deltaZ)));
 }

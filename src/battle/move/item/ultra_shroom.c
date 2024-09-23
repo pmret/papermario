@@ -33,7 +33,7 @@ API_CALLABLE(N(HealPlayer10)) {
 EvtScript N(EVS_UseItem) = {
     SetConst(LVarA, ITEM_SUPER_SHROOM)
     ExecWait(N(UseItemWithEffect))
-    Call(AddBattleCamZoom, 50)
+    Call(AddBattleCamDist, 50)
     Call(MoveBattleCamOver, 20)
     ExecWait(N(EatItem))
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)

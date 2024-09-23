@@ -94,12 +94,12 @@ EvtScript N(EVS_DemoDepartForMtRugged) = {
     Call(SetCamPosB, CAM_DEFAULT, Float(-100.0), Float(-50.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(-2.5), Float(-3.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(1)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Add(LVar0, 100)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Loop(1000)
@@ -111,7 +111,7 @@ EvtScript N(EVS_DemoDepartForMtRugged) = {
         EndLoop
     EndThread
     Wait(40)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     ExecGetTID(N(EVS_DemoFollowTrainCamera), LVar9)
     Wait(180)
     IfEq(GF_DemoSceneDone, TRUE)

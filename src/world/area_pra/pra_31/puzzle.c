@@ -327,7 +327,7 @@ EvtScript N(EVS_Scene_PuzzleSolved) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(323.3), Float(-66.5))
     Call(SetCamPosB, CAM_DEFAULT, Float(500.0), Float(296.8))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Wait(45)
@@ -391,7 +391,7 @@ EvtScript N(EVS_Scene_PuzzleSolved) = {
     Call(PlayModelAnimation, MDL_ANIMATOR_0, Ref(N(AS_Stairs_Unfold)))
     Wait(200)
     Set(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return
     End

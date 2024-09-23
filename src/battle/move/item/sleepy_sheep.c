@@ -290,10 +290,10 @@ EntityModelScript N(modelCommandList3) = {
 EvtScript N(EVS_UseItem) = {
     SetConst(LVarA, ITEM_SLEEPY_SHEEP)
     ExecWait(N(UseItemWithEffect))
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -67, -15, -5)
-    Call(SetBattleCamOffsetZ, 45)
-    Call(SetBattleCamZoom, 169)
+    Call(SetBattleCamOffsetY, 45)
+    Call(SetBattleCamDist, 169)
     Call(MoveBattleCamOver, 50)
     Thread
         Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SHEEP_STAMPEDE)
@@ -349,7 +349,7 @@ EvtScript N(EVS_UseItem) = {
     Call(SetActorJumpGravity, ACTOR_PLAYER, Float(1.8))
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    Call(func_80273444, 15, 0, 0)
+    Call(PlayerHopToGoal, 15, 0, 0)
     Thread
         Wait(5)
         Call(SetActorYaw, ACTOR_PLAYER, 150)
@@ -413,7 +413,7 @@ EvtScript N(EVS_UseItem) = {
         Call(DeleteVirtualEntity, LVarA)
     EndThread
     Wait(30)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 20)
     Call(InitTargetIterator)
     Label(0)

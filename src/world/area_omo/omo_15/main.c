@@ -22,7 +22,7 @@ EvtScript N(EVS_TrySpawningStarCard) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.5))
         Call(SetPanTarget, CAM_DEFAULT, -100, 30, 0)
         EVT_SPIRIT_ADJUST_CAM(10000)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(N(StarSpiritEffectFunc2), 3, 180, 215, 60, 0, -100, 85, 0, 30, 0)
         Thread
             Call(N(StarSpiritEffectFunc3))
@@ -57,7 +57,7 @@ EvtScript N(EVS_TrySpawningStarCard) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
         Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Call(DisablePlayerInput, FALSE)
     Else
         // just make the card spawn

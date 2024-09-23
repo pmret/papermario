@@ -194,7 +194,7 @@ EvtScript N(EVS_NpcDefeat_Fuzzipede) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -5, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -5, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(1)
     Call(SpeakToPlayer, NPC_SELF, ANIM_Fuzzipede_Anim24, ANIM_Fuzzipede_Anim04, 0, MSG_MAC_Port_009D)
     Wait(10)

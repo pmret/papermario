@@ -110,7 +110,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
         Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(20.0), Float(-6.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Run)
     Call(NpcMoveTo, NPC_SELF, LVar4, LVar5, 30)

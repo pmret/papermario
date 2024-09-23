@@ -14,7 +14,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
     Call(SetPanTarget, CAM_DEFAULT, 270, -200, 0)
     Call(SetCamDistance, CAM_DEFAULT, 400)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.5 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(SetNpcPos, NPC_SELF, 320, -220, 0)

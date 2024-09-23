@@ -121,7 +121,7 @@ EvtScript N(EVS_BlueStairs_FlipCCW) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -522, -310, -95)
     Call(SetPanTarget, CAM_DEFAULT, -522, -377, -92)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     ExecWait(N(EVS_FlipStairsCCW_BottomBlue))
     Call(ShakeCam, CAM_DEFAULT, 0, 3, Float(0.1))
@@ -132,7 +132,7 @@ EvtScript N(EVS_BlueStairs_FlipCCW) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return
     End
@@ -144,7 +144,7 @@ EvtScript N(EVS_BlueStairs_FlipCW) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -522, -310, -95)
     Call(SetPanTarget, CAM_DEFAULT, -522, -377, -92)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     ExecWait(N(EVS_FlipStairsCW_BottomBlue))
     Call(ShakeCam, CAM_DEFAULT, 0, 3, Float(0.1))
@@ -155,7 +155,7 @@ EvtScript N(EVS_BlueStairs_FlipCW) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return
     End
@@ -167,7 +167,7 @@ EvtScript N(EVS_RedStairs_FlipCCW) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -408, -310, -347)
     Call(SetPanTarget, CAM_DEFAULT, -408, -377, -347)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     ExecWait(N(EVS_FlipStairsCCW_BottomRed))
     Call(ShakeCam, CAM_DEFAULT, 0, 3, Float(0.1))
@@ -178,7 +178,7 @@ EvtScript N(EVS_RedStairs_FlipCCW) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return
     End
@@ -190,7 +190,7 @@ EvtScript N(EVS_RedStairs_FlipCW) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -408, -310, -347)
     Call(SetPanTarget, CAM_DEFAULT, -408, -377, -347)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     ExecWait(N(EVS_FlipStairsCW_BottomRed))
     Call(ShakeCam, CAM_DEFAULT, 0, 3, Float(0.1))
@@ -201,7 +201,7 @@ EvtScript N(EVS_RedStairs_FlipCW) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
     Return
     End

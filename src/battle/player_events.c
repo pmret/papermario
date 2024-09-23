@@ -77,7 +77,7 @@ API_CALLABLE(TryPlayerLucky) {
 
     show_action_rating(ACTION_RATING_LUCKY, player, player->curPos.x, player->curPos.y + 20.0f, player->curPos.z);
     sfx_play_sound(SOUND_LUCKY);
-    
+
     script->varTable[0] = FALSE;
     if (player->debuff == STATUS_KEY_FEAR
         || player->debuff == STATUS_KEY_DIZZY
@@ -241,7 +241,7 @@ API_CALLABLE(LifeShroomShroudWorld) {
     if (script->functionTemp[0] == 0) {
         return ApiStatus_DONE2;
     }
-    
+
     return ApiStatus_BLOCK;
 }
 
@@ -258,7 +258,7 @@ API_CALLABLE(LifeShroomRevealWorld) {
         mdl_set_shroud_tint_params(0, 0, 0, 0);
         return ApiStatus_DONE2;
     }
-    
+
     return ApiStatus_BLOCK;
 }
 
@@ -693,7 +693,7 @@ EvtScript EVS_MarioEnterStage = {
             Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
             Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_BeforeJump)
-            Call(func_80273444, 18, 0, 0)
+            Call(PlayerHopToGoal, 18, 0, 0)
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_BeforeJump)
             Wait(7)
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
@@ -867,7 +867,7 @@ EvtScript EVS_Player_HandleEvent = {
             Call(SetActorJumpGravity, ACTOR_PLAYER, Float(0.1))
             Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_HurtFoot, ANIM_Mario1_HurtFoot, ANIM_Mario1_HurtFoot)
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 5, 0, 1)
+            Call(PlayerHopToGoal, 5, 0, 1)
             SetConst(LVar1, ANIM_Mario1_HurtFoot)
             Set(LVar2, 0)
             ExecWait(EVS_Player_SimpleHit)
@@ -878,13 +878,13 @@ EvtScript EVS_Player_HandleEvent = {
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_PLAYER, Float(1.4))
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 10, 0, 2)
+            Call(PlayerHopToGoal, 10, 0, 2)
             Sub(LVar0, 20)
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 7, 0, 2)
+            Call(PlayerHopToGoal, 7, 0, 2)
             Sub(LVar0, 10)
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 4, 0, 2)
+            Call(PlayerHopToGoal, 4, 0, 2)
             IfEq(LVarF, 39)
                 Return
             EndIf
@@ -899,7 +899,7 @@ EvtScript EVS_Player_HandleEvent = {
             Call(SetActorJumpGravity, ACTOR_PLAYER, Float(0.1))
             Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MarioB3_BurnHurt, ANIM_MarioB3_BurnHurt, ANIM_MarioB3_BurnHurt)
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 5, 0, 1)
+            Call(PlayerHopToGoal, 5, 0, 1)
             ChildThread
                 Call(GetActorPos, ACTOR_PLAYER, LVar5, LVar6, LVar7)
                 Add(LVar5, 5)
@@ -923,13 +923,13 @@ EvtScript EVS_Player_HandleEvent = {
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_PLAYER, Float(1.4))
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 10, 0, 2)
+            Call(PlayerHopToGoal, 10, 0, 2)
             Sub(LVar0, 20)
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 7, 0, 2)
+            Call(PlayerHopToGoal, 7, 0, 2)
             Sub(LVar0, 10)
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 4, 0, 2)
+            Call(PlayerHopToGoal, 4, 0, 2)
             IfEq(LVarF, 36)
                 Return
             EndIf
@@ -944,7 +944,7 @@ EvtScript EVS_Player_HandleEvent = {
             Call(SetActorJumpGravity, ACTOR_PLAYER, Float(0.1))
             Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_HurtFoot, ANIM_Mario1_HurtFoot, ANIM_Mario1_HurtFoot)
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 5, 0, 1)
+            Call(PlayerHopToGoal, 5, 0, 1)
             Call(ShowShockEffect, ACTOR_SELF)
             SetConst(LVar1, ANIM_Mario1_HurtFoot)
             Set(LVar2, 0)
@@ -956,13 +956,13 @@ EvtScript EVS_Player_HandleEvent = {
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_PLAYER, Float(1.4))
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 10, 0, 2)
+            Call(PlayerHopToGoal, 10, 0, 2)
             Sub(LVar0, 20)
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 7, 0, 2)
+            Call(PlayerHopToGoal, 7, 0, 2)
             Sub(LVar0, 10)
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 4, 0, 2)
+            Call(PlayerHopToGoal, 4, 0, 2)
             IfEq(LVarF, 38)
                 Return
             EndIf
@@ -981,7 +981,7 @@ EvtScript EVS_Player_HandleEvent = {
             Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
             Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 15, 0, 0)
+            Call(PlayerHopToGoal, 15, 0, 0)
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             Call(SetGoalToHome, ACTOR_PLAYER)
             Call(SetActorSpeed, ACTOR_PLAYER, Float(4.0))
@@ -995,7 +995,7 @@ EvtScript EVS_Player_HandleEvent = {
             Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
             Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            Call(func_80273444, 15, 0, 0)
+            Call(PlayerHopToGoal, 15, 0, 0)
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             Call(SetGoalToHome, ACTOR_PLAYER)
             Call(SetActorSpeed, ACTOR_PLAYER, Float(4.0))
@@ -1044,7 +1044,7 @@ EvtScript EVS_Player_HandleEvent = {
             Call(GetActorPos, ACTOR_PLAYER, LVar7, LVar8, LVar9)
             Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_BeforeJump)
             Call(SetGoalPos, ACTOR_PLAYER, LVar7, LVar8, LVar9)
-            Call(func_80273444, 15, 0, 0)
+            Call(PlayerHopToGoal, 15, 0, 0)
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_BeforeJump)
         CaseDefault
     EndSwitch
@@ -1102,7 +1102,7 @@ EvtScript EVS_RunAwayNoCommand = {
     Call(SetActorJumpGravity, ACTOR_PLAYER, Float(1.8))
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
     Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    Call(func_80273444, 8, 0, 0)
+    Call(PlayerHopToGoal, 8, 0, 0)
     Call(DetermineAutoRunAwaySuccess)
     IfEq(LVar0, 1)
         Call(SetFledBattleFlag)
@@ -1215,7 +1215,7 @@ EvtScript EVS_RunAwayStart = {
     Call(SetActorJumpGravity, ACTOR_PLAYER, Float(1.8))
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
     Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    Call(func_80273444, 8, 0, 0)
+    Call(PlayerHopToGoal, 8, 0, 0)
     Call(GetActionSuccess, LVar0)
     Call(DetermineAutoRunAwaySuccess)
     IfEq(LVar0, 1)
@@ -1293,7 +1293,7 @@ EvtScript EVS_RunAwayFail = {
 EvtScript EVS_PlayerDies = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Dying)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_24)
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_DIES)
     Wait(15)
     Call(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_SPINNING)
@@ -1339,7 +1339,7 @@ EvtScript EVS_PlayerDies = {
 
 EvtScript D_80287404 = {
     IfEq(LVar1, 0)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        Call(UseBattleCamPreset, BTL_CAM_PLAYER_WISH)
         Wait(10)
         Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_USE_ITEM)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
@@ -1380,10 +1380,10 @@ EvtScript D_80287404 = {
 };
 
 EvtScript D_80287708 = {
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -85, 1, 0)
-    Call(SetBattleCamOffsetZ, 41)
-    Call(SetBattleCamZoom, 248)
+    Call(SetBattleCamOffsetY, 41)
+    Call(SetBattleCamDist, 248)
     Call(MoveBattleCamOver, 30)
     Wait(10)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
@@ -1412,7 +1412,7 @@ EvtScript D_80287834 = {
     End
 };
 
-EvtScript EVS_PlayEatFX = {
+EvtScript EVS_Unused_EatItem = {
     Thread
         Loop(4)
             Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
@@ -1425,7 +1425,7 @@ EvtScript EVS_PlayEatFX = {
     End
 };
 
-EvtScript EVS_PlayDrinkFX = {
+EvtScript EVS_Unused_DrinkItem = {
     Thread
         Loop(4)
             Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
@@ -1568,7 +1568,7 @@ EvtScript EVS_UseLifeShroom = {
     Set(LVar1, 0)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
     Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    Call(func_80273444, 20, 0, 0)
+    Call(PlayerHopToGoal, 20, 0, 0)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Land)
     Wait(4)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
@@ -1595,10 +1595,10 @@ EvtScript EVS_MerleeAttackBonus = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(BattleMerleeFadeStageToBlack)
     Wait(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 0, 80, 0)
-    Call(SetBattleCamOffsetZ, 0)
-    Call(SetBattleCamZoom, 246)
+    Call(SetBattleCamOffsetY, 0)
+    Call(SetBattleCamDist, 246)
     Call(MoveBattleCamOver, 20)
     Wait(10)
     Call(CreateNpc, NPC_BTL_MERLEE, ANIM_BattleMerlee_Gather)
@@ -1629,7 +1629,7 @@ EvtScript EVS_MerleeAttackBonus = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
     Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    Call(func_80273444, 18, 0, 0)
+    Call(PlayerHopToGoal, 18, 0, 0)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Land)
     Wait(4)
     Call(SetAnimation, ACTOR_SELF, 0, ANIM_Mario1_Idle)
@@ -1644,10 +1644,10 @@ EvtScript EVS_MerleeDefenseBonus = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(BattleMerleeFadeStageToBlack)
     Wait(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 0, 80, 0)
-    Call(SetBattleCamOffsetZ, 0)
-    Call(SetBattleCamZoom, 246)
+    Call(SetBattleCamOffsetY, 0)
+    Call(SetBattleCamDist, 246)
     Call(MoveBattleCamOver, 20)
     Wait(10)
     Call(CreateNpc, NPC_BTL_MERLEE, ANIM_BattleMerlee_Gather)
@@ -1682,7 +1682,7 @@ EvtScript EVS_MerleeDefenseBonus = {
         Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
         Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
         Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        Call(func_80273444, 18, 0, 0)
+        Call(PlayerHopToGoal, 18, 0, 0)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Land)
         Wait(4)
         Call(SetAnimation, ACTOR_SELF, 0, ANIM_Mario1_Idle)
@@ -1698,10 +1698,10 @@ EvtScript EVS_MerleeExpBonus = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(BattleMerleeFadeStageToBlack)
     Wait(10)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, 0, 80, 0)
-    Call(SetBattleCamOffsetZ, 0)
-    Call(SetBattleCamZoom, 246)
+    Call(SetBattleCamOffsetY, 0)
+    Call(SetBattleCamDist, 246)
     Call(MoveBattleCamOver, 20)
     Wait(10)
     Call(CreateNpc, NPC_BTL_MERLEE, ANIM_BattleMerlee_Gather)
@@ -1732,7 +1732,7 @@ EvtScript EVS_MerleeExpBonus = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
     Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    Call(func_80273444, 18, 0, 0)
+    Call(PlayerHopToGoal, 18, 0, 0)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Land)
     Wait(4)
     Call(SetAnimation, ACTOR_SELF, 0, ANIM_Mario1_Idle)

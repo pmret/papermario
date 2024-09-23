@@ -190,7 +190,7 @@ API_CALLABLE(N(UpdateMonstarImgFX)) {
     }
 
     return ApiStatus_BLOCK;
-    
+
     #undef RGBA_BUF_SIZE
 }
 
@@ -336,9 +336,9 @@ EvtScript N(EVS_ChargeUp) = {
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
     Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, TRUE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_13)
-    Call(SetBattleCamZoom, 10)
-    Call(SetBattleCamOffsetZ, 5)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_CLOSE)
+    Call(SetBattleCamDist, 10)
+    Call(SetBattleCamOffsetY, 5)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 30)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_GatherStrength1)
@@ -360,11 +360,11 @@ EvtScript N(EVS_Attack_StarStorm) = {
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
     Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, TRUE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    Call(SetBattleCamZoom, 250)
-    Call(SetBattleCamOffsetZ, 55)
+    Call(SetBattleCamDist, 250)
+    Call(SetBattleCamOffsetY, 55)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 30)
     Wait(30)
@@ -388,11 +388,11 @@ EvtScript N(EVS_Attack_StarStorm) = {
     EndThread
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BIG_POWER_UP)
     Call(N(StartRumbleWithParams), 80, 120)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    Call(SetBattleCamZoom, 100)
-    Call(SetBattleCamOffsetZ, 60)
+    Call(SetBattleCamDist, 100)
+    Call(SetBattleCamOffsetY, 60)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 60)
     Wait(60)
@@ -491,11 +491,11 @@ EvtScript N(EVS_HandlePhase) = {
 
 EvtScript N(EVS_TakeTurn) = {
     ExecWait(N(EVS_Attack_StarStorm))
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Add(LVar1, 72)
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    Call(SetBattleCamZoom, 340)
+    Call(SetBattleCamDist, 340)
     Call(MoveBattleCamOver, 20)
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
     Call(GetActorVar, ACTOR_SELF, AVAR_TurnCount, LVar0)

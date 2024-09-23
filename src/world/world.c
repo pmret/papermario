@@ -168,7 +168,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     sfx_clear_env_sounds(0);
     clear_worker_list();
     clear_script_list();
-    create_cameras_a();
+    create_cameras();
     spr_init_sprites(gGameStatusPtr->playerSpriteSet);
     clear_animator_list();
     clear_entity_models();
@@ -221,7 +221,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gCameras[CAM_DEFAULT].flags |= CAMERA_FLAG_DISABLED;
     gCameras[CAM_BATTLE].flags |= CAMERA_FLAG_DISABLED;
     gCameras[CAM_TATTLE].flags |= CAMERA_FLAG_DISABLED;
-    gCameras[CAM_3].flags |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_HUD].flags |= CAMERA_FLAG_DISABLED;
 
     if (gGameStatusPtr->introPart == INTRO_PART_NONE) {
         set_cam_viewport(CAM_DEFAULT, 12, 20, 296, 200);

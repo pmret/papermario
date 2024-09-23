@@ -32,7 +32,7 @@ API_CALLABLE(N(SpinCameraAround)) {
         script->functionTempF[0] = 0.0f;
     }
     script->functionTempF[0] += 10.0f;
-    guRotateF(camera->viewMtxShaking, script->functionTempF[0], 0.0f, 0.0f, -1.0f);
+    guRotateF(camera->mtxViewShaking, script->functionTempF[0], 0.0f, 0.0f, -1.0f);
 
     if (script->functionTempF[0] >= 360.0) {
         return ApiStatus_DONE2;
@@ -62,7 +62,7 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
     Call(SetCamDistance, CAM_DEFAULT, 350)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.5), Float(-10.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(N(MakeAllConsumablesItemList))
     Call(NpcFacePlayer, NPC_SELF, 1)
@@ -229,21 +229,21 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
             Call(SetCamDistance, CAM_DEFAULT, Float(420.0))
             Call(SetCamPitch, CAM_DEFAULT, Float(12.0), Float(-1.5))
             Call(SetCamSpeed, CAM_DEFAULT, Float(25.0 / DT))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Call(PlaySoundAtNpc, NPC_SELF, SOUND_GOURMET_GUY_SHOCK_1, SOUND_SPACE_DEFAULT)
             Wait(33 * DT)
             Call(SetCamDistance, CAM_DEFAULT, Float(320.0))
             Call(SetCamPitch, CAM_DEFAULT, Float(13.0), Float(-0.8))
             Call(SetCamSpeed, CAM_DEFAULT, Float(25.0 / DT))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Call(PlaySoundAtNpc, NPC_SELF, SOUND_GOURMET_GUY_SHOCK_2, SOUND_SPACE_DEFAULT)
             Wait(33 * DT)
             Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
             Call(SetCamPitch, CAM_DEFAULT, Float(14.0), Float(0.0))
             Call(SetCamSpeed, CAM_DEFAULT, Float(25.0 / DT))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Call(PlaySoundAtNpc, NPC_SELF, SOUND_GOURMET_GUY_SHOCK_3, SOUND_SPACE_DEFAULT)
             Wait(18 * DT)
@@ -254,12 +254,12 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
                 Call(SetCamDistance, CAM_DEFAULT, Float(320.0))
                 Call(SetCamPitch, CAM_DEFAULT, Float(14.0), Float(0.0))
                 Call(SetCamSpeed, CAM_DEFAULT, Float(15.0 / DT))
-                Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                 Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
                 Call(SetCamPitch, CAM_DEFAULT, Float(14.0), Float(0.0))
                 Call(SetCamSpeed, CAM_DEFAULT, Float(15.0 / DT))
-                Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             EndLoop
             Call(RotateModel, MODEL_o331, 105, 0, 1, 0)
@@ -276,7 +276,7 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
             Call(UseSettingsFrom, CAM_DEFAULT, -250, 0, 100)
             Call(SetPanTarget, CAM_DEFAULT, -250, 0, 100)
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(SetSelfVar, 0, 1)
             Thread
                 Label(19)
@@ -330,7 +330,7 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
                 Wait(15 * DT)
                 Call(SetCamPitch, CAM_DEFAULT, Float(-2.5), Float(-24.0))
                 Call(SetCamSpeed, CAM_DEFAULT, Float(1.5 / DT))
-                Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             EndThread
             Thread
                 Wait(15 * DT)

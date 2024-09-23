@@ -39,10 +39,10 @@ EvtScript N(EVS_Main) = {
         Call(UseSettingsFrom, CAM_DEFAULT, 500, -100, 0)
         Call(SetPanTarget, CAM_DEFAULT, 530, 0, 0)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Wait(1)
         Thread
-            Call(PanToTarget, CAM_DEFAULT, 0, 0)
+            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
             Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
         EndThread
     Else

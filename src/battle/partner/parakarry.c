@@ -878,9 +878,9 @@ EvtScript N(EVS_HandlePhase) = {
     End
 };
 
-EvtScript N(returnHome2) = {
+EvtScript N(EVS_ReturnHome_Success) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+    Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarA)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.4))
     Call(AddGoalPos, ACTOR_PARTNER, -50, 0, 0)
@@ -903,9 +903,9 @@ EvtScript N(returnHome2) = {
     End
 };
 
-EvtScript N(EVS_ReturnHome) = {
+EvtScript N(EVS_ReturnHome_Miss) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarA)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
     Call(AddGoalPos, ACTOR_PARTNER, -30, 0, 0)
@@ -936,7 +936,7 @@ EvtScript N(skyDive) = {
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(SetActionDifficultyTable, Ref(N(actionCommandTable)))
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_52)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(InitTargetIterator)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Run)
@@ -948,7 +948,7 @@ EvtScript N(skyDive) = {
     Wait(3)
     Call(action_command_jump_start, 32, 3)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_PARAKARRY_PREDIVE)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_52)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_FlyFast)
     Call(AddGoalPos, ACTOR_PARTNER, 0, 10, 0)
     Call(FlyToGoal, ACTOR_PARTNER, 5, 0, EASING_LINEAR)
@@ -957,7 +957,7 @@ EvtScript N(skyDive) = {
         Wait(3)
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_PreDive)
     EndChildThread
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_52)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
     Call(AddGoalPos, ACTOR_PARTNER, -26, 25, 0)
     Call(FlyToGoal, ACTOR_PARTNER, 20, -20, EASING_QUARTIC_OUT)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_PARAKARRY_DIVE)
@@ -999,12 +999,12 @@ EvtScript N(skyDive) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             SetConst(LVarA, ANIM_BattleParakarry_Think)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
             SetConst(LVarA, ANIM_BattleParakarry_Dive)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
@@ -1029,7 +1029,7 @@ EvtScript N(shellShot) = {
     EndIf
     Switch(LVar0)
         CaseEq(1)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_52)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
             Call(MoveBattleCamOver, 5)
             Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
             Call(SetGoalToTarget, ACTOR_PARTNER)
@@ -1037,7 +1037,7 @@ EvtScript N(shellShot) = {
             Call(FlyToGoal, ACTOR_PARTNER, 7, 0, EASING_LINEAR)
             Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
         CaseEq(-1)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_52)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
             Call(MoveBattleCamOver, 5)
             Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
             Call(SetGoalToTarget, ACTOR_PARTNER)
@@ -1046,7 +1046,7 @@ EvtScript N(shellShot) = {
             Call(FlyToGoal, ACTOR_PARTNER, 7, 0, 0x00000064)
             Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
         CaseEq(0)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_52)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
             Call(MoveBattleCamOver, 5)
             Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
             Call(SetGoalToTarget, ACTOR_PARTNER)
@@ -1055,7 +1055,7 @@ EvtScript N(shellShot) = {
             Call(FlyToGoal, ACTOR_PARTNER, 7, 0, EASING_LINEAR)
             Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
         CaseEq(-2)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_52)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
             Call(MoveBattleCamOver, 5)
             Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
             Call(SetGoalToTarget, ACTOR_PARTNER)
@@ -1082,12 +1082,12 @@ EvtScript N(shellShot) = {
             Else
                 SetConst(LVarA, ANIM_BattleParakarry_Think)
             EndIf
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
             SetConst(LVarA, ANIM_BattleParakarry_ShellFly)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
     EndSwitch
     Return
@@ -1105,8 +1105,8 @@ EvtScript N(airLift) = {
     Call(SetGoalToTarget, ACTOR_PARTNER)
     Call(GetDistanceToGoal, ACTOR_PARTNER, LVar0)
     Div(LVar0, 4)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_52)
-    Call(SetBattleCamOffsetZ, 8)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
+    Call(SetBattleCamOffsetY, 8)
     Call(MoveBattleCamOver, LVar0)
     Sub(LVar0, 12)
     IfLt(LVar0, 0)
@@ -1118,8 +1118,8 @@ EvtScript N(airLift) = {
     Call(FlyToGoal, ACTOR_PARTNER, 0, -4, EASING_COS_IN_OUT)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Idle)
     Wait(15)
-    Call(SetBattleCamOffsetZ, 0)
-    Call(AddBattleCamZoom, -160)
+    Call(SetBattleCamOffsetY, 0)
+    Call(AddBattleCamDist, -160)
     Call(MoveBattleCamOver, 20)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_LiftLight)
     Call(SetAnimationRate, ACTOR_PARTNER, 0, Float(2.0))
@@ -1127,7 +1127,7 @@ EvtScript N(airLift) = {
     Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     IfEq(LVar0, HIT_RESULT_MISS)
         Call(CloseActionCommandInfo)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+        Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
         Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         Add(LVar1, 20)
         Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -1160,8 +1160,8 @@ EvtScript N(airLift) = {
                 Set(LVar2, LVar1)
                 Mul(LVar2, 10)
                 IfGt(LVar0, LVar2)
-                    Call(SetBattleCamOffsetZ, 0)
-                    Call(AddBattleCamZoom, -2)
+                    Call(SetBattleCamOffsetY, 0)
+                    Call(AddBattleCamDist, -2)
                     Call(MoveBattleCamOver, 10)
                     Add(LVar1, 1)
                 EndIf
@@ -1176,7 +1176,7 @@ EvtScript N(airLift) = {
     EndIf
     Switch(LVar0)
         CaseEq(1)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+            Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
             Call(GetOwnerTarget, LVar0, LVar1)
             Call(DispatchEvent, LVar0, EVENT_BLOW_AWAY)
             Call(N(CarryAway), LVar0)
@@ -1187,7 +1187,7 @@ EvtScript N(airLift) = {
         CaseDefault
             Call(GetOwnerTarget, LVar0, LVar1)
             Call(DispatchEvent, LVar0, EVENT_AIR_LIFT_FAILED)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
             Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             Add(LVar1, 20)
             Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -1212,7 +1212,7 @@ EvtScript N(airRaid) = {
     Call(action_command_air_raid_init)
     Call(SetupMashMeter, 4, 25, 50, 75, 100, 0)
     Call(SetActionHudPrepareTime, 0)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 30)
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -1252,7 +1252,7 @@ EvtScript N(airRaid) = {
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_ShellFlyFastest)
     Call(N(FlyAround))
     Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 20)
     Call(GetActionQuality, LVar0)
     Call(N(GetAirRaidDamage))
@@ -1281,9 +1281,9 @@ EvtScript N(airRaid) = {
     Call(GetPartnerActionSuccess, LVar0)
     Switch(LVar0)
         CaseGt(99)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+            Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
         CaseDefault
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     EndSwitch
     ChildThread
         Wait(10)

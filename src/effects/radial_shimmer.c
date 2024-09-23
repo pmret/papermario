@@ -241,7 +241,7 @@ void radial_shimmer_update(EffectInstance* effect) {
 
     part->unk_1C = part->unk_20;
 
-    transform_point(&gCameras[gCurrentCameraID].perspectiveMatrix[0], part->unk_04, part->unk_08, part->unk_0C,
+    transform_point(&gCameras[gCurrentCameraID].mtxPerspective[0], part->unk_04, part->unk_08, part->unk_0C,
                          1.0f, &outX, &outY, &outZ, &outS);
 
     outS = 1.0f / outS;

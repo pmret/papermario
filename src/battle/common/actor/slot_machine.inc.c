@@ -342,10 +342,10 @@ EvtScript N(EVS_Idle) = {
     #if !VERSION_PAL
                     Call(FreezeBattleState, TRUE)
     #endif
-                    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+                    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
                     Call(SetBattleCamTarget, 0, 100, 0)
-                    Call(SetBattleCamOffsetZ, 0)
-                    Call(SetBattleCamZoom, 340)
+                    Call(SetBattleCamOffsetY, 0)
+                    Call(SetBattleCamDist, 340)
                     Call(MoveBattleCamOver, 10)
                     Switch(LVarA)
                         CaseEq(SYM_SHYGUY)

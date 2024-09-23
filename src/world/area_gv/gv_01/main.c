@@ -255,7 +255,7 @@ EvtScript N(EVS_Main) = {
         Call(UseSettingsFrom, CAM_DEFAULT, 0, 10, 0)
         Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.3))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Wait(94)
         Call(SetPanTarget, CAM_DEFAULT, 0, 0, 1000)
     EndThread
@@ -291,7 +291,7 @@ API_CALLABLE(N(ChangeStateToTitleScreen)) {
     clear_render_tasks();
     clear_worker_list();
     clear_script_list();
-    create_cameras_a();
+    create_cameras();
     spr_init_sprites(PLAYER_SPRITES_MARIO_WORLD);
     clear_entity_models();
     clear_animator_list();

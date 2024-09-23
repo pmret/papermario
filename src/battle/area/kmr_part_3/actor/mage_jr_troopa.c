@@ -215,10 +215,10 @@ EvtScript N(EVS_Transform) = {
 EvtScript N(EVS_Cam_FocusOnJrTroopa) = {
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_07)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_GOAL_SIMPLE)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamOffsetZ, 38)
-    Call(SetBattleCamZoom, 256)
+    Call(SetBattleCamOffsetY, 38)
+    Call(SetBattleCamDist, 256)
     Call(MoveBattleCamOver, 15)
     Return
     End
@@ -235,7 +235,7 @@ EvtScript N(EVS_Cam_ResetFocus) = {
 EvtScript N(EVS_Cam_FocusOnGoompa) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_SELF)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_55)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_GOOMPA)
     Call(MoveBattleCamOver, 30)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Return
@@ -589,9 +589,9 @@ EvtScript N(EVS_JrTroopa_Death) = {
     Call(PlaySound, SOUND_ACTOR_DEATH)
     Call(DropStarPoints, ACTOR_SELF)
     Call(SetActorYaw, ACTOR_SELF, 0)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
-    Call(SetBattleCamZoom, 260)
-    Call(SetBattleCamOffsetZ, 15)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR)
+    Call(SetBattleCamDist, 260)
+    Call(SetBattleCamOffsetY, 15)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 30)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_KNOCKOUT_CHIRPING)

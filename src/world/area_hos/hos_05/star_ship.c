@@ -9,10 +9,10 @@ API_CALLABLE(N(SwingCameraPitchUpward)) {
         script->functionTemp[0] = 40;
     }
     script->functionTemp[0]--;
-    if (camera->curController != NULL) {
-        camera->curController->viewPitch -= 1.0 - ((f32) (40 - script->functionTemp[0]) * 0.01);
-    } else if (camera->prevController != NULL) {
-        camera->prevController->viewPitch -= 1.0 - ((f32) (40 - script->functionTemp[0]) * 0.01);
+    if (camera->curSettings != NULL) {
+        camera->curSettings->viewPitch -= 1.0 - ((f32) (40 - script->functionTemp[0]) * 0.01);
+    } else if (camera->prevSettings != NULL) {
+        camera->prevSettings->viewPitch -= 1.0 - ((f32) (40 - script->functionTemp[0]) * 0.01);
     }
 
     if (script->functionTemp[0] == 0) {
@@ -139,7 +139,7 @@ EvtScript N(EVS_EnterStarship) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(550.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-35.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Set(MV_PlayerOnBoard, TRUE)
     Set(MV_PartnerOnBoard, TRUE)
     ExecGetTID(N(EVS_UpdatePassengers), LVar9)
@@ -152,7 +152,7 @@ EvtScript N(EVS_EnterStarship) = {
             DivF(LVar2, 10)
             Call(SetCamPitch, CAM_DEFAULT, Float(17.0), LVar2)
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Wait(1)
             IfEq(LVar1, 0)
                 BreakLoop

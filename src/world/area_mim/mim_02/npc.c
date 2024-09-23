@@ -36,7 +36,7 @@ EvtScript N(EVS_NpcInteract_Oaklie) = {
         Call(SetCamPitch, CAM_DEFAULT, Float(6.0), Float(-6.0))
         Call(SetCamDistance, CAM_DEFAULT, 250)
         Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Call(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
@@ -52,7 +52,7 @@ EvtScript N(EVS_NpcInteract_Oaklie) = {
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
     EndThread
     Thread
@@ -110,7 +110,7 @@ EvtScript N(EVS_NpcIdle_Oaklie) = {
             Call(SetCamPitch, CAM_DEFAULT, Float(6.0), Float(-6.0))
             Call(SetCamDistance, CAM_DEFAULT, 300)
             Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Call(SpeakToPlayer, NPC_Oaklie, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0003)
             Wait(10 * DT)
@@ -124,7 +124,7 @@ EvtScript N(EVS_NpcIdle_Oaklie) = {
                 Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
                 Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-                Call(PanToTarget, CAM_DEFAULT, 0, 0)
+                Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
                 Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
             EndThread
             Call(PlaySoundAtNpc, NPC_Oaklie, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)

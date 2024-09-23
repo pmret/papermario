@@ -1800,25 +1800,25 @@ enum Cams {
     CAM_DEFAULT      = 0,
     CAM_BATTLE       = 1,
     CAM_TATTLE       = 2,
-    CAM_3            = 3,
+    CAM_HUD          = 3,
 };
 
 enum CamShakeModes {
     CAM_SHAKE_CONSTANT_VERTICAL     = 0,
     CAM_SHAKE_ANGULAR_HORIZONTAL    = 1,
-    CAM_SHAKE_DECAYING_VERTICAL     = 2
+    CAM_SHAKE_DECAYING_VERTICAL     = 2,
 };
 
 // for use with SetBattleCamParam
-enum AuxCameraParams {
-    AUX_CAM_PARAM_1             = 1,
-    AUX_CAM_BOOM_LENGTH         = 2,
-    AUX_CAM_PARAM_3             = 3,
-    AUX_CAM_BOOM_PITCH          = 4,
-    AUX_CAM_BOOM_YAW            = 5,
-    AUX_CAM_BOOM_ZOFFSET        = 6,
-    AUX_CAM_PARAM_7             = 7,
-    AUX_CAM_ZOOM_PERCENT        = 8
+enum BasicCameraParams {
+    CAM_PARAM_SKIP_RECALC           = 1,
+    CAM_PARAM_BOOM_LENGTH           = 2,
+    CAM_PARAM_FOV_SCALE             = 3,
+    CAM_PARAM_BOOM_PITCH            = 4,
+    CAM_PARAM_BOOM_YAW              = 5,
+    CAM_PARAM_BOOM_Y_OFFSET         = 6,
+    CAM_PARAM_UNK_7                 = 7,
+    CAM_PARAM_ZOOM_PERCENT          = 8,
 };
 
 #include "item_enum.h"
@@ -4286,6 +4286,32 @@ enum DebuffTypes {
     DEBUFF_TYPE_INVISIBLE           = 0x04000000,
 };
 
+enum PlayerBasicJump {
+    PLAYER_BASIC_JUMP_0         = 0,
+    PLAYER_BASIC_JUMP_1         = 1,
+    PLAYER_BASIC_JUMP_2         = 2,
+    PLAYER_BASIC_JUMP_3         = 3,
+    PLAYER_BASIC_JUMP_4         = 4,
+};
+
+enum PlayerSuperJump {
+    PLAYER_SUPER_JUMP_0         = 0,
+    PLAYER_SUPER_JUMP_1         = 1,
+    PLAYER_SUPER_JUMP_2         = 2,
+    PLAYER_SUPER_JUMP_3         = 3,
+    PLAYER_SUPER_JUMP_4         = 4,
+    PLAYER_SUPER_JUMP_5         = 5,
+    PLAYER_SUPER_JUMP_6         = 6,
+};
+
+enum PlayerUltraJump {
+    PLAYER_ULTRA_JUMP_0         = 0,
+    PLAYER_ULTRA_JUMP_1         = 1,
+    PLAYER_ULTRA_JUMP_2         = 2,
+    PLAYER_ULTRA_JUMP_3         = 3,
+    PLAYER_ULTRA_JUMP_4         = 4,
+};
+
 enum GlobalOverrides {
     GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD           = 0x00000002,
     GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME             = 0x00000008,
@@ -4313,7 +4339,7 @@ enum GlobalOverrides {
     | MODEL_FLAG_20 \
     | MODEL_FLAG_IGNORE_FOG \
     | MODEL_FLAG_HAS_LOCAL_VERTEX_COPY \
-    | MODEL_FLAG_USE_CAMERA_UNK_MATRIX \
+    | MODEL_FLAG_BILLBOARD \
     | MODEL_FLAG_DO_BOUNDS_CULLING \
     | MODEL_FLAG_HAS_TRANSFORM \
     | MODEL_FLAG_HAS_TEX_PANNER \
@@ -4331,7 +4357,7 @@ enum ModelFlags {
     MODEL_FLAG_20                       = 0x0020,
     MODEL_FLAG_IGNORE_FOG               = 0x0040,
     MODEL_FLAG_HAS_LOCAL_VERTEX_COPY    = 0x0080,
-    MODEL_FLAG_USE_CAMERA_UNK_MATRIX    = 0x0100,
+    MODEL_FLAG_BILLBOARD                = 0x0100, // rotate to face the camera
     MODEL_FLAG_DO_BOUNDS_CULLING        = 0x0200,
     MODEL_FLAG_HAS_TRANSFORM            = 0x0400,
     MODEL_FLAG_HAS_TEX_PANNER           = 0x0800,
@@ -4698,14 +4724,51 @@ enum CameraMoveFlags {
     CAMERA_MOVE_ACCEL_INTERP_Y      = 0x00000004,
 };
 
-enum CameraUpdateType {
-    CAM_UPDATE_MODE_INIT            = 0,
-    CAM_UPDATE_UNUSED_1             = 1,
-    CAM_UPDATE_MODE_2               = 2,
+enum CameraUpdateMode {
+    // simple camera based on lookAt_eye and lookAt_obj with no blending or interpolation
+    // control this camera by directly setting these positions
+    // has no other control parameters
+    CAM_UPDATE_MINIMAL              = 0,
+
+    // this camera uses a set of control parameters to calculate its target lookAt_obj and lookAt_eye positions,
+    // then interpolates current positions toward those targets, moving up to half the remaining distance each frame
+    // the ultimate target is given by lookAt_obj_target
+    // mostly used for CAM_HUD
+    CAM_UPDATE_INTERP_POS           = 2,
+
+    // this camera samples camera zones below its targetPos and derives control parameters from their settings,
+    // interpolating its control parameters when changing zones. these control parameters determine the camera
+    // position and orientation just like other camera modes.
+    // note that this code does NOT directly reference the player position in any manner, it is only concerned
+    // with the camera's targetPos, which must be assigned elsewhere.
+    // this is the camera used during world gameplay
     CAM_UPDATE_FROM_ZONE            = 3,
-    CAM_UPDATE_UNUSED_4             = 4,
-    CAM_UPDATE_UNUSED_5             = 5,
-    CAM_UPDATE_MODE_6               = 6,
+
+    // this camera uses a set of control parameters to calculate its lookAt_obj and lookAt_eye positions,
+    // which are only updated if skipRecalc = FALSE
+    // the ultimate target is given by lookAt_obj_target, with an offset given by targetPos (?!)
+    // in practice, this is used for CAM_BATTLE and CAM_TATTLE, with skipRecalc almost always set to FALSE
+    CAM_UPDATE_NO_INTERP            = 6,
+
+    // this camera tracks lookAt_obj_target in a circular region centered on targetPos. the camera does not update
+    // unless lookAt_obj_target is greater than a minimum distance from targetPos to prevent wild movements.
+    CAM_UPDATE_UNUSED_RADIAL        = 1,
+
+    // this camera tracks targetPos, clamped within the rectangular region given by +/- xLimit and +/- zLimit
+    // y-position is drawn from lookAt_obj_target
+    // does not use easing or interpolation
+    CAM_UPDATE_UNUSED_CONFINED      = 4,
+
+    // this camera tracks player position and adds basic 'leading' in the x-direction only
+    // camera yaw is fixed at zero and the lead direction is determined by player world yaw
+    // thus, this only works for '2D' style maps where left is -x and right is +x
+    CAM_UPDATE_UNUSED_LEADING       = 5,
+
+    // this mode is completely unused in vanilla; it doesn't even have a case in update_cameras
+    // seems to be based on CAM_UPDATE_NO_INTERP (the one used for battle cam)
+    // tracks a point 400 units ahead of player position in the z-direction and 60 units above
+    // defaults to a relatively short boom length and no pitch angle, resulting in a head-on direct view
+    // CAM_UPDATE_UNUSED_AHEAD,
 };
 
 enum CameraControlType {
@@ -4745,93 +4808,93 @@ enum CameraControlType {
     CAM_CONTROL_CONSTAIN_BETWEEN_POINTS         = 6,
 };
 
-enum BtlCameraPreset {
-    BTL_CAM_PRESET_00               = 0,    // unused?
-    BTL_CAM_PRESET_01               = 1,    // STOP
-    BTL_CAM_DEFAULT                 = 2,
-    BTL_CAM_PRESET_03               = 3,
-    BTL_CAM_PRESET_04               = 4,
-    BTL_CAM_PRESET_05               = 5,
-    BTL_CAM_PRESET_06               = 6,   // unused?
-    BTL_CAM_PRESET_07               = 7,
-    BTL_CAM_PRESET_08               = 8,
-    BTL_CAM_PRESET_09               = 9,    // unused?
-    BTL_CAM_PRESET_10               = 10,
-    BTL_CAM_PRESET_11               = 11,
-    BTL_CAM_PRESET_12               = 12,   // unused?
-    BTL_CAM_PRESET_13               = 13,
-    BTL_CAM_PRESET_14               = 14,  // FOCUS_ON_TARGET?
-    BTL_CAM_PRESET_15               = 15,
-    BTL_CAM_PRESET_16               = 16,   // unused?
-    BTL_CAM_PRESET_17               = 17,   // unused?
-    BTL_CAM_PRESET_18               = 18,   // unused?
-    BTL_CAM_PRESET_19               = 19,
-    BTL_CAM_PRESET_20               = 20,   // unused?
-    BTL_CAM_PRESET_21               = 21,   // unused?
-    BTL_CAM_PLAYER_ENTRY            = 22,
-    BTL_CAM_VICTORY                 = 23,   // closeup on party while star points are tallied
-    BTL_CAM_PRESET_24               = 24,
-    BTL_CAM_PRESET_25               = 25,   // closeup on player used when running away or being defeated
-    BTL_CAM_PLAYER_ATTACK_APPROACH  = 26,
-    BTL_CAM_PRESET_27               = 27,
-    BTL_CAM_PRESET_28               = 28,
-    BTL_CAM_PRESET_29               = 29,
-    BTL_CAM_PLAYER_HIT_SPIKE        = 30,   // player hurt via spike contact
-    BTL_CAM_PLAYER_HIT_HAZARD       = 31,   // player hurt via burn or shock contact
-    BTL_CAM_PLAYER_CHARGE_UP        = 32,
-    BTL_CAM_PLAYER_STATUS_AFFLICTED = 33,
-    BTL_CAM_PRESET_34               = 34,
-    BTL_CAM_PRESET_35               = 35,
-    BTL_CAM_PRESET_36               = 36,   // unused?
-    BTL_CAM_PRESET_37               = 37,
-    BTL_CAM_PRESET_38               = 38,
-    BTL_CAM_PRESET_39               = 39,
-    BTL_CAM_PRESET_40               = 40,
-    BTL_CAM_PRESET_41               = 41,   // unused?
-    BTL_CAM_PRESET_42               = 42,   // unused?
-    BTL_CAM_PLAYER_AIM_HAMMER       = 43,
-    BTL_CAM_PLAYER_HAMMER_STRIKE    = 44,
-    BTL_CAM_PRESET_45               = 45,   // unused?
-    BTL_CAM_PRESET_46               = 46,
-    BTL_CAM_PARTNER_APPROACH        = 47,   // used by Goombario and Watt (power shock only)
-    BTL_CAM_PRESET_48               = 48,
-    BTL_CAM_PRESET_49               = 49,   // unused?
-    BTL_CAM_PRESET_50               = 50,
-    BTL_CAM_PRESET_51               = 51,
-    BTL_CAM_PRESET_52               = 52,
-    BTL_CAM_PRESET_53               = 53,
-    BTL_CAM_PARTNER_INJURED         = 54,   // closeup on partner after being injured
-    BTL_CAM_PRESET_55               = 55,
-    BTL_CAM_PRESET_56               = 56,   // unused?
-    BTL_CAM_PRESET_57               = 57,   // unused?
-    BTL_CAM_PRESET_58               = 58,   // unused?
-    BTL_CAM_PRESET_59               = 59,
-    BTL_CAM_PRESET_60               = 60,   // unused?
-    BTL_CAM_PRESET_61               = 61,
-    BTL_CAM_PRESET_62               = 62,
-    BTL_CAM_ENEMY_APPROACH          = 63,   // (very common)
-    BTL_CAM_PRESET_64               = 64,   // unused?
-    BTL_CAM_PRESET_65               = 65,   // unused?
-    BTL_CAM_PRESET_66               = 66,
-    BTL_CAM_PRESET_67               = 67,   // unused?
-    BTL_CAM_PRESET_68               = 68,   // unused?
-    BTL_CAM_PRESET_69               = 69,
-    BTL_CAM_PRESET_70               = 70,   // unused?
-    BTL_CAM_PRESET_71               = 71,   // unused?
-    BTL_CAM_PRESET_72               = 72,   // unused?
-    BTL_CAM_PRESET_73               = 73,
+enum BattleCamPreset {
+    BTL_CAM_RESET                           = 0x00,
+    BTL_CAM_INTERRUPT                       = 0x01, // forces camera motion to end
+    BTL_CAM_DEFAULT                         = 0x02, // wide shot of the entire arena
+    BTL_CAM_VIEW_ENEMIES                    = 0x03, // broad focus on enemy side of the field
+    BTL_CAM_RETURN_HOME                     = 0x04,
+    BTL_CAM_ACTOR_TARGET_MIDPOINT           = 0x05, // focus on midpoint between subject actor and its target
+    BTL_CAM_ACTOR_PART                      = 0x06, // unused
+    BTL_CAM_ACTOR_GOAL_SIMPLE               = 0x07,
+    BTL_CAM_ACTOR_SIMPLE                    = 0x08, // same as BTL_CAM_ACTOR, but does not change boom pitch, yaw, or y-offset
+    BTL_CAM_SLOW_DEFAULT                    = 0x09, // unused, same as BTL_CAM_DEFAULT but takes 4x as long
+    BTL_CAM_MIDPOINT_CLOSE                  = 0x0A,
+    BTL_CAM_MIDPOINT_NORMAL                 = 0x0B,
+    BTL_CAM_MIDPOINT_FAR                    = 0x0C, // unused
+    BTL_CAM_ACTOR_CLOSE                     = 0x0D, // focus on a targeted actor, closer than normal
+    BTL_CAM_ACTOR                           = 0x0E, // focus on a targeted actor using typical distance
+    BTL_CAM_ACTOR_FAR                       = 0x0F, // focus on a targeted actor, further away than normal
+    BTL_CAM_ACTOR_GOAL_NEAR                 = 0x10, // unused, focus on a targeted actor's goal, closer than normal
+    BTL_CAM_ACTOR_GOAL                      = 0x11, // unused, focus on a targeted actor's goal, using typical distance
+    BTL_CAM_ACTOR_GOAL_FAR                  = 0x12, // unused, focus on a targeted actor's goal, further away than normal
+    BTL_CAM_REPOSITION                      = 0x13, // generic reposition, lerp to target parameters over the next 20 frames
+    BTL_CAM_FOLLOW_ACTOR_Y                  = 0x14, // unused
+    BTL_CAM_FOLLOW_ACTOR_POS                = 0x15, // unused
+    BTL_CAM_PLAYER_ENTRY                    = 0x16,
+    BTL_CAM_VICTORY                         = 0x17, // closeup on party while star points are tallied
+    BTL_CAM_PLAYER_DIES                     = 0x18, // closeup on player dying
+    BTL_CAM_PLAYER_FLEE                     = 0x19, // closeup on player while running away
+    BTL_CAM_PLAYER_ATTACK_APPROACH          = 0x1A,
+    BTL_CAM_PLAYER_PRE_JUMP_FINISH          = 0x1B,
+    BTL_CAM_PLAYER_PRE_ULTRA_JUMP_FINISH    = 0x1C,
+    BTL_CAM_PLAYER_MISTAKE                  = 0x1D, // player missed a jump or hammer acion command
+    BTL_CAM_PLAYER_HIT_SPIKE                = 0x1E, // player hurt via spike contact
+    BTL_CAM_PLAYER_HIT_HAZARD               = 0x1F, // player hurt via burn or shock contact
+    BTL_CAM_PLAYER_CHARGE_UP                = 0x20,
+    BTL_CAM_PLAYER_STATUS_AFFLICTED         = 0x21,
+    BTL_CAM_PLAYER_JUMP_MIDAIR              = 0x22, // move through the air with the player mid-jump
+    BTL_CAM_PLAYER_JUMP_FINISH              = 0x23, // after a sucessful action command
+    BTL_CAM_PLAYER_JUMP_FINISH_CLOSE        = 0x24, // unused
+    BTL_CAM_PLAYER_SUPER_JUMP_MIDAIR        = 0x25, // alternate BTL_CAM_PLAYER_JUMP_MIDAIR associated with an unused script for Super Jump
+    BTL_CAM_PLAYER_ULTRA_JUMP_MIDAIR        = 0x26, // alternate BTL_CAM_PLAYER_JUMP_MIDAIR associated with an unused script for Ultra Jump
+    BTL_CAM_PLAYER_UNUSED_ULTRA_JUMP        = 0x27, // unused camera for followup hit of unused script for Ultra Jump
+    BTL_CAM_PLAYER_MULTIBOUNCE              = 0x28,
+    BTL_CAM_PRESET_UNUSED_29                = 0x29, // unused
+    BTL_CAM_PRESET_UNUSED_2A                = 0x2A, // unused
+    BTL_CAM_PLAYER_AIM_HAMMER               = 0x2B,
+    BTL_CAM_PLAYER_HAMMER_STRIKE            = 0x2C,
+    BTL_CAM_PRESET_UNUSED_2D                = 0x2D, // unused, alterative to BTL_CAM_PLAYER_HAMMER_QUAKE
+    BTL_CAM_PLAYER_HAMMER_QUAKE             = 0x2E, // slowly pan over the enemy side
+    BTL_CAM_PARTNER_APPROACH                = 0x2F, // used by Goombario and Watt (power shock only)
+    BTL_CAM_CLOSER_PARTNER_APPROACH         = 0x30,
+    BTL_CAM_PRESET_UNUSED_31                = 0x31, // unused
+    BTL_CAM_GOOMBARIO_BONK_FOLLOWUP_1       = 0x32, // goombario pre-jump 1
+    BTL_CAM_PARTNER_MISTAKE                 = 0x33,
+    BTL_CAM_PARTNER_MIDAIR                  = 0x34,
+    BTL_CAM_GOOMBARIO_BONK_FOLLOWUP_2       = 0x35, // goombario pre-jump 2
+    BTL_CAM_PARTNER_INJURED                 = 0x36, // closeup on partner after being injured
+    BTL_CAM_PARTNER_GOOMPA                  = 0x37, // focus on Goompa speaking or Goombario charging
+    BTL_CAM_PRESET_UNUSED_38                = 0x38, // unused
+    BTL_CAM_PRESET_UNUSED_39                = 0x39, // unused
+    BTL_CAM_PRESET_UNUSED_3A                = 0x3A, // unused
+    BTL_CAM_PARTNER_CLOSE_UP                = 0x3B, // close focus on partner, used when kooper or sushie are charging an attack
+    BTL_CAM_PRESET_UNUSED_3C                = 0x3C, // unused
+    BTL_CAM_PARTNER_HIT_SPIKE               = 0x3D, // partner hurt via spike contact
+    BTL_CAM_PARTNER_HIT_HAZARD              = 0x3E, // partner hurt via burn or shock contact
+    BTL_CAM_ENEMY_APPROACH                  = 0x3F, // (very common)
+    BTL_CAM_PRESET_UNUSED_40                = 0x40, // unused
+    BTL_CAM_SLOWER_DEFAULT                  = 0x41, // unused, same as BTL_CAM_DEFAULT but takes slightly longer
+    BTL_CAM_ENEMY_DIVE                      = 0x42, // used just before contact from dive attacks (paragoomba, para jr troopa, etc)
+    BTL_CAM_PRESET_UNUSED_43                = 0x43, // unused
+    BTL_CAM_PRESET_UNUSED_44                = 0x44, // unused
+    BTL_CAM_PLAYER_WISH                     = 0x45, // used for Focus and Star Spirit wishing
+    BTL_CAM_PRESET_UNUSED_46                = 0x46, // unused
+    BTL_CAM_PRESET_UNUSED_47                = 0x47, // unused
+    BTL_CAM_PRESET_UNUSED_48                = 0x48, // unused
+    BTL_CAM_STAR_SPIRIT                     = 0x49,
 };
 
-enum BattleCamXModes {
-    BTL_CAM_MODEX_0         = 0,
-    BTL_CAM_MODEX_1         = 1,
+enum BattleCamTargetAdjustX {
+    BTL_CAM_XADJ_NONE       = 0, // use actor X
+    BTL_CAM_XADJ_AVG        = 1, // use average
 };
 
-enum BattleCamYModes {
-    BTL_CAM_MODEY_MINUS_2   = -2,
-    BTL_CAM_MODEY_MINUS_1   = -1,
-    BTL_CAM_MODEY_0         = 0,
-    BTL_CAM_MODEY_1         = 1,
+enum BattleCamTargetAdjustY {
+    BTL_CAM_YADJ_SLIGHT     = -2, // target y position is weighted 75% actor and 25% target:
+    BTL_CAM_YADJ_TARGET     = -1, // use target Y
+    BTL_CAM_YADJ_NONE       = 0, // use actor Y
+    BTL_CAM_YADJ_AVG        = 1, // target y position is weighted 66% actor and 33% target:
 };
 
 enum ModelAnimatorFlags {

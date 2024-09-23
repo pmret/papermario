@@ -34,10 +34,10 @@ EvtScript N(EVS_Main) = {
             Call(SetPanTarget, CAM_DEFAULT, 425, -246, 0)
         EndIf
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Wait(2)
         Call(N(func_8024030C_C7E48C))
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     EndThread
     Set(LVar0, N(EVS_BindExitTriggers))
     Exec(EnterWalk)

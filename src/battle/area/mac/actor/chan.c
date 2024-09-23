@@ -585,7 +585,7 @@ EvtScript N(EVS_TakeTurn_Ceiling) = {
     Call(HPBarToHome, ACTOR_SELF)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Call(GetBattlePhase, LVar0)
     IfEq(LVar0, PHASE_FIRST_STRIKE)
         Call(SetGoalToTarget, ACTOR_SELF)
@@ -607,11 +607,11 @@ EvtScript N(EVS_TakeTurn_Ceiling) = {
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_FALL_QUICK, 0)
     Call(GetBattlePhase, LVar0)
     IfEq(LVar0, PHASE_FIRST_STRIKE)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_05)
-        Call(SetBattleCamZoom, 430)
-        Call(SetBattleCamOffsetZ, 20)
+        Call(UseBattleCamPreset, BTL_CAM_ACTOR_TARGET_MIDPOINT)
+        Call(SetBattleCamDist, 430)
+        Call(SetBattleCamOffsetY, 20)
         Call(MoveBattleCamOver, 10)
-        Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     EndIf
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, DMG_CEILING_DROP, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVar0)
@@ -742,7 +742,7 @@ EvtScript N(EVS_TakeTurn_Ground) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Chan_EnterShell)
     Wait(10)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Chan_ShellStill)
@@ -774,7 +774,7 @@ EvtScript N(EVS_TakeTurn_Ground) = {
                     EndIf
                     Wait(1)
                 EndLoop
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_01)
+                Call(UseBattleCamPreset, BTL_CAM_INTERRUPT)
                 IfEq(LVarA, HIT_RESULT_LUCKY)
                     Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
                 EndIf

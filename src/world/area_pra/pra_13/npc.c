@@ -94,7 +94,7 @@ EvtScript N(EVS_Scene_ImpostersCaught) = {
             Call(SpeakToPlayer, NPC_FakeMario, ANIM_Mario1_Flail, ANIM_Mario1_Flail, 0, MSG_CH7_0139)
             Call(SpeakToPlayer, NPC_FakeBombette, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH7_013A)
             Call(ResetCam, CAM_DEFAULT, Float(6.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, 0)
+            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
             Thread
                 Call(GetNpcPos, NPC_FakeMario, LVar0, LVar1, LVar2)
                 Call(SetNpcPos, NPC_FakeMario, NPC_DISPOSE_LOCATION)

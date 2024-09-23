@@ -417,7 +417,7 @@ void set_screen_overlay_center_worldpos(s32 layer, s32 posIdx, s32 worldPosX, s3
     switch (layer) {
         case SCREEN_LAYER_FRONT:
         case SCREEN_LAYER_BACK:
-            transform_point(camera->perspectiveMatrix, worldPosX, worldPosY, worldPosZ, 1.0f, &tx, &ty, &tz, &tw);
+            transform_point(camera->mtxPerspective, worldPosX, worldPosY, worldPosZ, 1.0f, &tx, &ty, &tz, &tw);
             tw = 1.0f / tw;
             tx *= tw;
             ty *= -tw;

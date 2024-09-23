@@ -371,7 +371,7 @@ EvtScript N(EVS_Inspect_HiddenButton_FirstTime) = {
             Call(SetPanTarget, CAM_DEFAULT, -120, 25, 0)
             Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
             Call(SetCamDistance, CAM_DEFAULT, 300)
-            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         EndIf
         ExecWait(N(EVS_OpenHiddenPassage))

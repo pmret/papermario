@@ -101,7 +101,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -310, 870, -15)
     Call(SetPanTarget, CAM_DEFAULT, -310, 870, -15)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(SetNpcSpeed, NPC_SELF, Float(4.0 / DT))
     Call(NpcMoveTo, NPC_SELF, -390, -15, 0)
     Call(SetNpcJumpscale, NPC_SELF, Float(1.5))

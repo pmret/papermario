@@ -215,7 +215,7 @@ EvtScript N(EVS_Scene_Chapter0) = {
         Call(SetCamPosA, CAM_DEFAULT, 338, 44)
         Call(SetCamPosB, CAM_DEFAULT, 413, -66)
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Wait(10 * DT)
@@ -277,14 +277,14 @@ EvtScript N(EVS_Scene_Chapter0) = {
         Call(func_802D1270, 420, 0, Float(2.0 / DT))
     EndThread
     Wait(10 * DT)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Wait(30 * DT)
     Call(UseSettingsFrom, CAM_DEFAULT, 370, 30, 0)
     Call(SetPanTarget, CAM_DEFAULT, 370, 30, 0)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(370.0), Float(32.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Loop(0)
         Wait(1)
@@ -374,7 +374,7 @@ EvtScript N(EVS_Scene_Chapter0) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(200.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-12.5))
     Call(SetPanTarget, CAM_DEFAULT, 365, 30, 17)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         Call(NpcFlyTo, NPC_PARTNER, 350, 50, -2, 30 * DT, -5, EASING_LINEAR)
     EndThread

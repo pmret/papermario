@@ -32,7 +32,7 @@ API_CALLABLE(N(AwaitFallDownHole)) {
 
 EvtScript N(EVS_SetupHoles) = {
     Call(N(AwaitFallInHole))
-    Call(func_802CA988, CAM_DEFAULT, LVar2, LVar3, LVar4, LVar5)
+    Call(GrabCamera, CAM_DEFAULT, LVar2, LVar3, LVar4, LVar5)
     Call(N(AwaitFallDownHole))
 #if VERSION_PAL
     Call(SetPlayerActionState, ACTION_STATE_IDLE)

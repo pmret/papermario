@@ -44,7 +44,7 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
         Call(UseSettingsFrom, CAM_DEFAULT, -50, 0, 180)
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
         Call(SetPanTarget, CAM_DEFAULT, -50, 0, 180)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Set(GB_ARN_Tubba_MapID, 15)
     Call(SetNpcPos, NPC_SELF, 0, 0, 88)
@@ -62,7 +62,7 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Call(DisablePlayerInput, FALSE)
     EndThread
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Tubba)))

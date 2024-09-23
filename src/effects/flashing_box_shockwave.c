@@ -12,16 +12,16 @@ void flashing_box_shockwave_render(EffectInstance* effect);
 void flashing_box_shockwave_appendGfx(void* effect);
 
 EffectInstance* flashing_box_shockwave_main(
-    s32 arg0,
-    f32 arg1,
-    f32 arg2,
-    f32 arg3,
-    f32 arg4,
-    f32 arg5
+    s32 type,
+    f32 posX,
+    f32 posY,
+    f32 posZ,
+    f32 sizeX,
+    f32 sizeY
 ) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    FlashingBoxShockwaveFXData* data;
+    ShockOverlayFXData* data;
     s32 numParts = 1;
 
     bp.init = flashing_box_shockwave_init;
@@ -36,41 +36,44 @@ EffectInstance* flashing_box_shockwave_main(
     data = effect->data.flashingBoxShockwave = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.flashingBoxShockwave != NULL);
 
-    data->unk_1C = 30;
+    data->type = type;
+    data->timeLeft = 30;
+    data->lifetime = 0;
+
     data->unk_10 = 255;
     data->unk_14 = 255;
     data->unk_18 = 255;
-    data->unk_00 = arg0;
-    data->unk_20 = 0;
-    data->pos.x = arg1;
-    data->pos.y = arg2;
-    data->pos.z = arg3;
-    if (arg0 == 2) {
+
+    data->pos.x = posX;
+    data->pos.y = posY;
+    data->pos.z = posZ;
+
+    if (type == FX_SHOCK_OVERLAY_MEGA_SHOCK) {
         data->unk_24 = 1.0f;
     } else {
-        data->unk_24 = 0;
+        data->unk_24 = 0.0f;
     }
-    data->unk_28 = arg4 * 0.5;
-    data->unk_2C = arg5 * 0.5;
+    data->scaleX = sizeX * 0.5;
+    data->scaleY = sizeY * 0.5;
 
-    switch (arg0) {
-        case 0:
-        case 1:
-        case 3:
-            data->unk_30 = 255;
-            data->unk_34 = 255;
-            data->unk_38 = 0;
-            data->unk_3C = 255;
-            data->unk_40 = 255;
-            data->unk_44 = 255;
+    switch (type) {
+        case FX_SHOCK_OVERLAY_SHOCK_HIT:
+        case FX_SHOCK_OVERLAY_LIGHTNING_WORLD:
+        case FX_SHOCK_OVERLAY_LIGHTNING_BATTLE:
+            data->primCol.r = 255;
+            data->primCol.g = 255;
+            data->primCol.b = 0;
+            data->envCol.r = 255;
+            data->envCol.g = 255;
+            data->envCol.b = 255;
             break;
         default:
-            data->unk_30 = 70;
-            data->unk_34 = 180;
-            data->unk_38 = 120;
-            data->unk_3C = 255;
-            data->unk_40 = 255;
-            data->unk_44 = 255;
+            data->primCol.r = 70;
+            data->primCol.g = 180;
+            data->primCol.b = 120;
+            data->envCol.r = 255;
+            data->envCol.g = 255;
+            data->envCol.b = 255;
             break;
     }
 
@@ -81,40 +84,41 @@ void flashing_box_shockwave_init(EffectInstance* effect) {
 }
 
 void flashing_box_shockwave_update(EffectInstance* effect) {
-    FlashingBoxShockwaveFXData* data = effect->data.flashingBoxShockwave;
-    s32 unk_00 = data->unk_00;
-    s32 unk_1C;
-    s32 unk_20;
+    ShockOverlayFXData* data = effect->data.flashingBoxShockwave;
+    s32 type = data->type;
+    s32 left;
+    s32 time;
 
-    if (data->unk_1C < 100) {
-        data->unk_1C--;
+    if (data->timeLeft < 100) {
+        data->timeLeft--;
     }
 
-    data->unk_20++;
+    data->lifetime++;
 
-    if (data->unk_1C < 0) {
+    if (data->timeLeft < 0) {
         remove_effect(effect);
         return;
     }
 
-    unk_1C = data->unk_1C;
-    unk_20 = data->unk_20;
+    left = data->timeLeft;
+    time = data->lifetime;
 
-    if (unk_00 == 2) {
-        if (unk_20 < 21) {
+    if (type == FX_SHOCK_OVERLAY_MEGA_SHOCK) {
+        if (time < 21) {
             data->unk_24 *= 1.1;
         }
     } else {
+        // interp toward 8.0
         data->unk_24 += (8.0 - data->unk_24) * 0.05;
     }
 
     data->unk_14 *= 0.9;
 
-    if (unk_1C < 5) {
+    if (left < 5) {
         data->unk_18 *= 0.8;
     }
 
-    if (unk_20 >= 7) {
+    if (time >= 7) {
         data->unk_10 -= 13;
         if (data->unk_10 < 0) {
             data->unk_10 = 0;
@@ -135,46 +139,46 @@ void flashing_box_shockwave_render(EffectInstance* effect) {
 }
 
 void flashing_box_shockwave_appendGfx(void* effect) {
-    FlashingBoxShockwaveFXData* data = ((EffectInstance*)effect)->data.flashingBoxShockwave;
-    s32 unk_00 = data->unk_00;
-    s32 unk_20 = data->unk_20;
-    Matrix4f sp18;
-    Matrix4f sp58;
-    Matrix4f sp98;
+    ShockOverlayFXData* data = ((EffectInstance*)effect)->data.flashingBoxShockwave;
+    s32 type = data->type;
+    s32 time = data->lifetime;
+    Matrix4f mtxTransform;
+    Matrix4f mtxUnkScale;
+    Matrix4f mtxCamRot;
 
-    guRotateF(sp98, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxCamRot, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
 
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    guMtxCatF(sp98, sp18, sp18);
-    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(mtxTransform, data->pos.x, data->pos.y, data->pos.z);
+    guMtxCatF(mtxCamRot, mtxTransform, mtxTransform);
+    guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_30, data->unk_34, data->unk_38, data->unk_18);
-    gDPSetEnvColor(gMainGfxPos++, data->unk_3C, data->unk_40, data->unk_44, 0);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primCol.r, data->primCol.g, data->primCol.b, data->unk_18);
+    gDPSetEnvColor(gMainGfxPos++, data->envCol.r, data->envCol.g, data->envCol.b, 0);
 
-    if ((unk_00 == 0 || unk_00 == 1) && unk_20 % 2) {
-        guScaleF(sp18, data->unk_28, data->unk_2C, 15.0f / 14);
-        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    if ((type == FX_SHOCK_OVERLAY_SHOCK_HIT || type == FX_SHOCK_OVERLAY_LIGHTNING_WORLD) && time % 2) {
+        guScaleF(mtxTransform, data->scaleX, data->scaleY, 15.0f / 14);
+        guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_09000600_3936A0);
-        gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, unk_20 * 8, unk_20 * 8, unk_20 * 8 + 128, unk_20 * 8 + 128);
+        gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, time * 8, time * 8, time * 8 + 128, time * 8 + 128);
         gSPDisplayList(gMainGfxPos++, D_090008E8_393988);
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    if (unk_00 >= 1 && unk_00 <= 3) {
-        if (unk_00 == 1) {
+    if (type == FX_SHOCK_OVERLAY_LIGHTNING_WORLD || type == FX_SHOCK_OVERLAY_MEGA_SHOCK || type == FX_SHOCK_OVERLAY_LIGHTNING_BATTLE) {
+        if (type == FX_SHOCK_OVERLAY_LIGHTNING_WORLD) {
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 0, data->unk_14);
         }
 
-        guTranslateF(sp18, 0.0f, data->unk_2C, 0.0f);
-        guScaleF(sp58, data->unk_24 * 0.25, data->unk_24 * 0.25, 1.0f);
-        guMtxCatF(sp58, sp18, sp18);
-        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(mtxTransform, 0.0f, data->scaleY, 0.0f);
+        guScaleF(mtxUnkScale, data->unk_24 * 0.25, data->unk_24 * 0.25, 1.0f);
+        guMtxCatF(mtxUnkScale, mtxTransform, mtxTransform);
+        guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_09000950_3939F0);

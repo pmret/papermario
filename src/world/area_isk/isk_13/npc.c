@@ -30,7 +30,7 @@ void N(func_80241610_990DF0)(void) {
     if (!(cam->flags & CAMERA_FLAG_ORTHO)) {
         gSPPerspNormalize(gMainGfxPos++, cam->perspNorm);
     }
-    guMtxF2L(cam->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCameraID]);
+    guMtxF2L(cam->mtxPerspective, &gDisplayContext->camPerspMatrix[gCurrentCameraID]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],
         G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);

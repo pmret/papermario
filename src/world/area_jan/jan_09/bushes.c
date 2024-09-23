@@ -157,14 +157,14 @@ EvtScript N(EVS_802440C0) = {
     EndLoop
     Call(UseSettingsFrom, CAM_DEFAULT, -25, 90, -330)
     Call(SetPanTarget, CAM_DEFAULT, -25, 90, -330)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(SetPlayerJumpscale, Float(0.296875))
     Call(PlayerJump, -25, 90, -330, 60)
     Call(SetPlayerPos, -25, 90, -330)
     Call(SetCamTarget, CAM_DEFAULT, -25, 90, -330)
     Call(DisablePlayerPhysics, FALSE)
     Call(DisablePlayerInput, FALSE)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Wait(100)
     Return
     End

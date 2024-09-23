@@ -397,9 +397,9 @@ EvtScript N(EVS_ExecuteAction) = {
     End
 };
 
-EvtScript N(returnHome2) = {
+EvtScript N(EVS_ReturnHome_Success) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+    Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)
     Thread
         Set(LVar0, 200)
@@ -426,9 +426,9 @@ EvtScript N(returnHome2) = {
     End
 };
 
-EvtScript N(EVS_ReturnHome) = {
+EvtScript N(EVS_ReturnHome_Miss) = {
     Call(PartnerYieldTurn)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+    Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)
     Thread
         Set(LVar0, 200)
@@ -502,12 +502,12 @@ EvtScript N(smack) = {
         Call(FlyToGoal, ACTOR_PARTNER, 15, 0, EASING_COS_IN_OUT)
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
     EndThread
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_13)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_CLOSE)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamZoom, 180)
+    Call(SetBattleCamDist, 180)
     Call(MoveBattleCamOver, 30)
-    Call(SetBattleCamOffsetZ, 9)
-    Call(func_8024EDA4)
+    Call(SetBattleCamOffsetY, 9)
+    Call(DisableBattleCamClampX)
     Wait(15)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_APPEAR_A)
     Set(LVar0, 55)
@@ -552,7 +552,7 @@ EvtScript N(smack) = {
         Call(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
         Wait(10)
-        ExecWait(N(EVS_ReturnHome))
+        ExecWait(N(EVS_ReturnHome_Miss))
         Return
     EndIf
     Add(LVarE, 1)
@@ -579,10 +579,10 @@ EvtScript N(smack) = {
     EndThread
     IfEq(LVarE, 1)
         Call(N(GetBowSize))
-        Call(AddBattleCamZoom, LVar0)
+        Call(AddBattleCamDist, LVar0)
         Call(MoveBattleCamOver, 5)
     Else
-        Call(AddBattleCamZoom, 25)
+        Call(AddBattleCamDist, 25)
         Call(MoveBattleCamOver, 5)
     EndIf
     Call(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_HURT, SOUND_BOW_SMACK, 0)
@@ -609,10 +609,10 @@ EvtScript N(smack) = {
     Label(2)
     IfEq(LVarE, 1)
         Call(N(GetBowSize))
-        Call(AddBattleCamZoom, LVar0)
+        Call(AddBattleCamDist, LVar0)
         Call(MoveBattleCamOver, 5)
     Else
-        Call(AddBattleCamZoom, 25)
+        Call(AddBattleCamDist, 25)
         Call(MoveBattleCamOver, 5)
     EndIf
     Call(SetActorScale, ACTOR_PARTNER, Float(1.4), Float(1.4), Float(1.0))
@@ -640,12 +640,12 @@ EvtScript N(smack) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
     EndSwitch
     Return
@@ -655,10 +655,10 @@ EvtScript N(smack) = {
 EvtScript N(outtaSight) = {
     Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, TRUE)
     Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_USING_IDLE_ANIM, FALSE)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -129, 28, 0)
-    Call(SetBattleCamOffsetZ, 15)
-    Call(SetBattleCamZoom, 260)
+    Call(SetBattleCamOffsetY, 15)
+    Call(SetBattleCamDist, 260)
     Call(MoveBattleCamOver, 40)
     Thread
         Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -758,12 +758,12 @@ EvtScript N(spook) = {
     Call(SetActionHudPrepareTime, 20)
     Wait(10)
     Thread
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_15)
+        Call(UseBattleCamPreset, BTL_CAM_ACTOR_FAR)
         Call(BattleCamTargetActor, ACTOR_SELF)
-        Call(SetBattleCamOffsetZ, 4)
-        Call(AddBattleCamZoom, -150)
+        Call(SetBattleCamOffsetY, 4)
+        Call(AddBattleCamDist, -150)
         Call(MoveBattleCamOver, 20)
-        Call(func_8024EDA4)
+        Call(DisableBattleCamClampX)
     EndThread
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Add(LVar0, 40)
@@ -804,58 +804,58 @@ EvtScript N(spook) = {
         Switch(LVar1)
             CaseGt(80)
                 IfEq(LVar2, 7)
-                    Call(AddBattleCamZoom, -20)
+                    Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
                     Set(LVar2, 8)
                 EndIf
             CaseGt(70)
                 IfEq(LVar2, 6)
-                    Call(AddBattleCamZoom, -20)
+                    Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
                     Set(LVar2, 7)
                 EndIf
             CaseGt(60)
                 IfEq(LVar2, 5)
-                    Call(AddBattleCamZoom, -20)
+                    Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
                     Set(LVar2, 6)
                 EndIf
             CaseGt(50)
                 IfEq(LVar2, 4)
-                    Call(AddBattleCamZoom, -20)
+                    Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
                     Set(LVar2, 5)
                 EndIf
             CaseGt(40)
                 IfEq(LVar2, 3)
-                    Call(AddBattleCamZoom, -20)
+                    Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
                     Set(LVar2, 4)
                 EndIf
             CaseGt(30)
                 IfEq(LVar2, 2)
-                    Call(AddBattleCamZoom, -20)
+                    Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
                     Set(LVar2, 3)
                 EndIf
             CaseGt(20)
                 IfEq(LVar2, 1)
-                    Call(AddBattleCamZoom, -20)
+                    Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
                     Set(LVar2, 2)
                 EndIf
             CaseGt(10)
                 IfEq(LVar2, 0)
-                    Call(AddBattleCamZoom, -20)
+                    Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
                     Set(LVar2, 1)
                 EndIf
         EndSwitch
@@ -869,7 +869,7 @@ EvtScript N(spook) = {
         Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
         Call(MoveBattleCamOver, 5)
         Wait(5)
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_01)
+        Call(UseBattleCamPreset, BTL_CAM_INTERRUPT)
         Loop(5)
             Call(SetBattleCamParam, 3, 110)
             Wait(2)
@@ -950,9 +950,9 @@ EvtScript N(spook) = {
     Call(GetPartnerActionSuccess, LVar0)
     Switch(LVar0)
         CaseGt(99)
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+            Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
         CaseDefault
-            Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+            Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
     EndSwitch
     Wait(30)
     Thread
@@ -1013,12 +1013,12 @@ EvtScript N(fanSmack) = {
         Call(AddGoalPos, ACTOR_PARTNER, -25, -10, 0)
         Call(FlyToGoal, ACTOR_PARTNER, 15, 0, EASING_COS_IN_OUT)
     EndThread
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_13)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_CLOSE)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamZoom, 180)
+    Call(SetBattleCamDist, 180)
     Call(MoveBattleCamOver, 30)
-    Call(SetBattleCamOffsetZ, 9)
-    Call(func_8024EDA4)
+    Call(SetBattleCamOffsetY, 9)
+    Call(DisableBattleCamClampX)
     Wait(15)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_APPEAR_A)
     Set(LVar0, 55)
@@ -1069,7 +1069,7 @@ EvtScript N(fanSmack) = {
         Call(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
         Wait(10)
-        ExecWait(N(EVS_ReturnHome))
+        ExecWait(N(EVS_ReturnHome_Miss))
         Return
     EndIf
     Add(LVarE, 1)
@@ -1096,10 +1096,10 @@ EvtScript N(fanSmack) = {
     EndThread
     IfEq(LVarE, 1)
         Call(N(GetBowSize))
-        Call(AddBattleCamZoom, LVar0)
+        Call(AddBattleCamDist, LVar0)
         Call(MoveBattleCamOver, 5)
     Else
-        Call(AddBattleCamZoom, 25)
+        Call(AddBattleCamDist, 25)
         Call(MoveBattleCamOver, 5)
     EndIf
     Call(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -1149,10 +1149,10 @@ EvtScript N(fanSmack) = {
     EndThread
     IfEq(LVarE, 1)
         Call(N(GetBowSize))
-        Call(AddBattleCamZoom, LVar0)
+        Call(AddBattleCamDist, LVar0)
         Call(MoveBattleCamOver, 5)
     Else
-        Call(AddBattleCamZoom, 25)
+        Call(AddBattleCamDist, 25)
         Call(MoveBattleCamOver, 5)
     EndIf
     Call(SetActorScale, ACTOR_PARTNER, Float(1.4), Float(1.4), Float(1.0))
@@ -1213,13 +1213,13 @@ EvtScript N(fanSmack) = {
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             Wait(10)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
-            ExecWait(N(EVS_ReturnHome))
+            ExecWait(N(EVS_ReturnHome_Miss))
         EndCaseGroup
         CaseOrEq(1)
         CaseOrEq(3)
             Wait(10)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
-            ExecWait(N(returnHome2))
+            ExecWait(N(EVS_ReturnHome_Success))
         EndCaseGroup
     EndSwitch
     Return

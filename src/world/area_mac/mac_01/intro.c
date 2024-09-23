@@ -21,7 +21,7 @@ EvtScript N(EVS_Scene_IntroWalking) = {
     Call(SetPanTarget, CAM_DEFAULT, -560, 0, 0)
     Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetNpcPos, NPC_Luigi, -460, 0, 0)
     Call(SetNpcYaw, NPC_Luigi, 90)
@@ -53,7 +53,7 @@ EvtScript N(EVS_Scene_IntroWalking) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Wait(75 * DT)
     Call(GotoMap, Ref("osr_00"), osr_00_ENTRY_4)
     Wait(100 * DT)

@@ -63,7 +63,7 @@ EvtScript N(EVS_UpdateEruption) = {
         Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(2.0))
         Call(SetPanTarget, CAM_DEFAULT, 170, 25, 0)
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.5))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(ShakeCam, CAM_DEFAULT, 0, 25, Float(2.0))
         Call(InterpPlayerYaw, 270, 0)
         Call(InterpNpcYaw, NPC_PARTNER, 270, 0)

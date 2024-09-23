@@ -40,7 +40,7 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
         Call(SetCamDistance, CAM_DEFAULT, 500)
         Call(SetCamPitch, CAM_DEFAULT, 16, Float(-6.0))
         Call(SetCamSpeed, CAM_DEFAULT, 3)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Yellow_Cry, ANIM_YoshiKid_Yellow_Cry, 5, MSG_CH5_00B5)
         Wait(10)
@@ -60,7 +60,7 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
     Call(SetPanTarget, CAM_DEFAULT, -20, 0, 20)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.5))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         Call(DisablePartnerAI, 0)
         Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
@@ -175,7 +175,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         Call(UseSettingsFrom, CAM_DEFAULT, -60, 0, 20)
         Call(SetPanTarget, CAM_DEFAULT, -50, 0, 20)
         Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     EndThread
     Thread
         Call(InterpNpcYaw, NPC_PutridPiranha_01, 270, 0)
@@ -258,7 +258,7 @@ EvtScript N(EVS_NpcDefeat_PutridPiranha) = {
     Call(SetPanTarget, CAM_DEFAULT, -20, 0, 20)
     Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)

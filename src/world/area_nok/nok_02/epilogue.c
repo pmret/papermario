@@ -8,7 +8,7 @@ EvtScript N(EVS_Scene_Epilogue) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(50)
     Call(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Talk)
     Wait(15)

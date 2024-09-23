@@ -57,7 +57,7 @@ s32 PressStart_Alpha = 0; // the opacity of "PRESS START" text
 b32 PressStart_IsVisible = FALSE; // toggles the visibility of "PRESS START"
 s32 PressStart_BlinkCounter = 0; // counts to 16, then toggles PressStart_IsVisible
 
-// controls whether the intro story or the demo will player after TITLE_STATE_HOLD is done 
+// controls whether the intro story or the demo will player after TITLE_STATE_HOLD is done
 // since this state is reached for the first time after the intro has already played once or was skipped,
 // this is initially false and the demo is will play first.
 s32 PlayIntroNext = FALSE;
@@ -141,8 +141,8 @@ void state_init_title_screen(void) {
     TitleScreen_ImgList_CopyrightPalette = (s32*)(TitleScreen_ImgList->copyrightPalette + (s32) TitleScreen_ImgList);
 #endif
 
-    create_cameras_a();
-    gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_MODE_6;
+    create_cameras();
+    gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_NO_INTERP;
     gCameras[CAM_DEFAULT].needsInit = TRUE;
     gCameras[CAM_DEFAULT].nearClip = CAM_NEAR_CLIP;
     gCameras[CAM_DEFAULT].farClip = CAM_FAR_CLIP;
@@ -151,17 +151,17 @@ void state_init_title_screen(void) {
     gCameras[CAM_DEFAULT].flags |= CAMERA_FLAG_DISABLED;
     gCameras[CAM_BATTLE].flags |= CAMERA_FLAG_DISABLED;
     gCameras[CAM_TATTLE].flags |= CAMERA_FLAG_DISABLED;
-    gCameras[CAM_3].flags |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_HUD].flags |= CAMERA_FLAG_DISABLED;
     set_cam_viewport(CAM_DEFAULT, 12, 28, 296, 184);
-    gCameras[CAM_DEFAULT].auxBoomLength = 40;
+    gCameras[CAM_DEFAULT].params.basic.dist = 40;
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
     gCameras[CAM_DEFAULT].bgColor[2] = 0;
     gCameras[CAM_DEFAULT].lookAt_obj_target.x = 25.0f;
     gCameras[CAM_DEFAULT].lookAt_obj_target.y = 25.0f;
-    gCameras[CAM_DEFAULT].auxPitch = 0;
-    gCameras[CAM_DEFAULT].lookAt_dist = 100;
-    gCameras[CAM_DEFAULT].auxBoomPitch = 0;
+    gCameras[CAM_DEFAULT].params.basic.skipRecalc = FALSE;
+    gCameras[CAM_DEFAULT].params.basic.fovScale = 100;
+    gCameras[CAM_DEFAULT].params.basic.pitch = 0;
     gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
     gCameras[CAM_DEFAULT].lookAt_eye.y = 1000.0f;
     gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
@@ -288,7 +288,7 @@ void state_step_title_screen(void) {
             }
             general_heap_create();
             clear_render_tasks();
-            create_cameras_a();
+            create_cameras();
             clear_entity_models();
             clear_animator_list();
             clear_npcs();

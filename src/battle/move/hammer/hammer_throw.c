@@ -175,7 +175,7 @@ EvtScript N(EVS_UseMove_Impl) = {
     EndSwitch
     Call(InitTargetIterator)
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_ATTACK_APPROACH)
-    Call(AddBattleCamZoom, 50)
+    Call(AddBattleCamDist, 50)
     Call(MoveBattleCamOver, 20)
     Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_WINDUP)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)

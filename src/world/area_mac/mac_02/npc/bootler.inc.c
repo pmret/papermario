@@ -47,7 +47,7 @@ EvtScript N(EVS_NpcIdle_Bootler) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(18.5), Float(-10.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetPlayerSpeed, Float(4.0 / DT))
     Call(PlayerMoveTo, 430, -40, 0)

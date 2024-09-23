@@ -85,7 +85,7 @@ EvtScript N(EVS_Scene_ReachedMansion) = {
     Call(SetCamPosB, CAM_DEFAULT, 89, 84)
     Call(SetCamPosC, CAM_DEFAULT, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 75, 0, 309)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(N(func_8024066C_BB76DC))
     Wait(30)
     ChildThread
@@ -194,7 +194,7 @@ EvtScript N(EVS_EnterMap) = {
                 Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
                 Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-                Call(PanToTarget, CAM_DEFAULT, 0, 0)
+                Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
                 Exec(N(EVS_BindExitTriggers))
             Else
                 Set(LVar0, Ref(N(EVS_BindExitTriggers)))

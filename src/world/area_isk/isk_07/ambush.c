@@ -39,7 +39,7 @@ EvtScript N(EVS_SetupSarcophagi) = {
         Call(UseSettingsFrom, CAM_DEFAULT, -151, -390, 576)
         Call(SetPanTarget, CAM_DEFAULT, -151, -390, 576)
         Wait(1)
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Exec(N(EVS_OpenSarcophagus1))
         Wait(15)
@@ -60,7 +60,7 @@ EvtScript N(EVS_SetupSarcophagi) = {
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Wait(1)
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Set(AF_ISK07_MummiesReleased, TRUE)
         Call(DisablePlayerInput, FALSE)
     Else

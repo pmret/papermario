@@ -36,7 +36,7 @@ EvtScript N(EVS_Scene_Arrival) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 0, -70, 0)
     Call(SetPanTarget, CAM_DEFAULT, 0, -70, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(PlaySound, SOUND_STARSHIP_FLY_AWAY)
     Call(LoadPath, 45, Ref(N(FlightPath_Arrival)), ARRAY_COUNT(N(FlightPath_Arrival)), EASING_LINEAR)
     Label(90)
@@ -86,7 +86,7 @@ EvtScript N(EVS_Scene_Departure) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 0, -70, 0)
     Call(SetPanTarget, CAM_DEFAULT, 0, -70, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         Call(PlaySound, SOUND_STARSHIP_FLY_TOWARD)
         Call(LoadPath, 45, Ref(N(FlightPath_Departure)), ARRAY_COUNT(N(FlightPath_Departure)), EASING_LINEAR)

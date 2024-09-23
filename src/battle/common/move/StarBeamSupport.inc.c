@@ -304,7 +304,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
                     }
                 }
 
-                btl_cam_use_preset(BTL_CAM_PRESET_03);
+                btl_cam_use_preset(BTL_CAM_VIEW_ENEMIES);
                 btl_cam_move(30);
                 script->functionTemp[FT_DELAY] = 15;
                 script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_MAKE_ADDITIONAL_EFFECTS;

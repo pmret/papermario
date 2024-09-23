@@ -23,7 +23,7 @@ API_CALLABLE(N(IncreaseTwinkDefense)) {
 }
 
 EvtScript N(EVS_UsePower) = {
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_WISH)
     Wait(10)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach1_Run)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -43,9 +43,9 @@ EvtScript N(EVS_UsePower) = {
     Call(SetActorYaw, ACTOR_PLAYER, 150)
     Wait(1)
     Call(SetActorYaw, ACTOR_PLAYER, 180)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -105, -7, 0)
-    Call(SetBattleCamZoom, 213)
+    Call(SetBattleCamDist, 213)
     Call(MoveBattleCamOver, 60)
     Wait(10)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach3_Pray)

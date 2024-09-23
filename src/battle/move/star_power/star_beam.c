@@ -9,7 +9,7 @@
 
 EvtScript N(EVS_UsePower) = {
     ExecWait(N(EVS_StarPower_WishForBeam))
-    Call(AddBattleCamZoom, 100)
+    Call(AddBattleCamDist, 100)
     Call(MoveBattleCamOver, 20)
     Call(InitTargetIterator)
     Call(SetGoalToTarget, ACTOR_SELF)

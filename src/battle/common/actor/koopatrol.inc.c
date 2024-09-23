@@ -694,7 +694,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
         EndIf
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(BattleCamTargetActor, ACTOR_SELF)
-        Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
         Wait(10)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Koopatrol_Anim07)
         Wait(10)
@@ -710,7 +710,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SHELL_SPIN)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Koopatrol_Anim06)
         Wait(10)
-        Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     EndIf
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SHELL_TOSS)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
@@ -725,11 +725,11 @@ EvtScript N(EVS_Attack_ShellToss) = {
             Call(RunToGoal, ACTOR_SELF, 0, FALSE)
             Call(GetBattlePhase, LVar0)
             IfEq(LVar0, PHASE_FIRST_STRIKE)
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_05)
-                Call(SetBattleCamZoom, 300)
-                Call(SetBattleCamOffsetZ, 20)
+                Call(UseBattleCamPreset, BTL_CAM_ACTOR_TARGET_MIDPOINT)
+                Call(SetBattleCamDist, 300)
+                Call(SetBattleCamOffsetY, 20)
                 Call(MoveBattleCamOver, 10)
-                Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+                Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
             EndIf
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -813,7 +813,7 @@ EvtScript N(EVS_Attack_ChargedToss) = {
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetActorVar, ACTOR_SELF, AVAR_State, LVar0)
     IfEq(LVar0, AVAL_State_Normal) // charge for attack
-        Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+        Call(UseBattleCamPreset, BTL_CAM_ACTOR)
         Call(BattleCamTargetActor, ACTOR_SELF)
         Call(MoveBattleCamOver, 20)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_POWER_UP)
@@ -852,7 +852,7 @@ EvtScript N(EVS_Attack_ChargedToss) = {
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
     Loop(20)
         Call(SetActorDispOffset, ACTOR_SELF, 1, 0, 0)
         Wait(1)
@@ -877,7 +877,7 @@ EvtScript N(EVS_Attack_ChargedToss) = {
                     EndIf
                     Wait(1)
                 EndLoop
-                Call(UseBattleCamPreset, BTL_CAM_PRESET_01)
+                Call(UseBattleCamPreset, BTL_CAM_INTERRUPT)
                 IfEq(LVarA, HIT_RESULT_LUCKY)
                     Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
                 EndIf
@@ -1056,7 +1056,7 @@ Formation N(BackupFormation) = {
 EvtScript N(EVS_Move_SummonBackup) = {
     Call(UseIdleAnimation, ACTOR_SELF, FALSE)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 20)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CALL_FOR_BACKUP)

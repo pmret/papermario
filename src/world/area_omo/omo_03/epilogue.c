@@ -20,7 +20,7 @@ EvtScript N(EVS_Scene_Epilogue) = {
     Call(SetCamDistance, CAM_DEFAULT, 350)
     Call(SetCamPitch, CAM_DEFAULT, Float(16.0), Float(-7.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim11)
     Call(SetNpcAnimation, NPC_ShyGuy_02, ANIM_ShyGuy_Red_Anim11)
     Call(SetNpcAnimation, NPC_ShyGuy_03, ANIM_ShyGuy_Red_Anim11)

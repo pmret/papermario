@@ -79,7 +79,7 @@ EvtScript N(EVS_Scene_PullBlueSwitch) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(517.4))
     Call(SetCamPosA, CAM_DEFAULT, Float(-180.0), Float(-322.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(25.0), Float(-6.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(20)
     Call(PlaySoundAt, SOUND_OMO_FLIP_TRAIN_TRACK, SOUND_SPACE_DEFAULT, -130, 0, -215)

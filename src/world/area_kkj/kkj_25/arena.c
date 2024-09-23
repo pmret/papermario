@@ -169,7 +169,7 @@ EvtScript N(EVS_Scene_BowserTrapsMario) = {
     Call(SetCamDistance, CAM_DEFAULT, 450)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-7.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10)
     Call(SpeakToPlayer, NPC_Bowser_01, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, MSG_CH8_007D)
@@ -181,7 +181,7 @@ EvtScript N(EVS_Scene_BowserTrapsMario) = {
     Call(SetCamPosA, CAM_DEFAULT, -480, -480)
     Call(SetCamPosB, CAM_DEFAULT, 0, 480)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -299,7 +299,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     Call(SetCamPosA, CAM_DEFAULT, -480, -480)
     Call(SetCamPosB, CAM_DEFAULT, 0, 480)
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(1)
     Thread
         Call(InterpPlayerYaw, 270, 0)
@@ -326,7 +326,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     Call(SetCamDistance, CAM_DEFAULT, 330)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(10)
     Call(SpeakToPlayer, NPC_Bowser_01, ANIM_WorldBowser_RearUpLaugh, ANIM_WorldBowser_RearUpLaugh, 0, MSG_CH8_007E)
     Thread
@@ -348,7 +348,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     Call(SetCamDistance, CAM_DEFAULT, 250)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-8.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_Idle)
     Wait(10)
@@ -389,7 +389,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     Call(SetCamDistance, CAM_DEFAULT, 400)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-10.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_Shock)
     Call(GetNpcPos, NPC_Bowser_01, LVar3, LVar4, LVar5)
@@ -430,7 +430,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     Call(SetCamDistance, CAM_DEFAULT, 500)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         Wait(8)
         Loop(4)

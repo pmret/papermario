@@ -53,7 +53,7 @@ EvtScript N(EVS_UseItem) = {
     Call(N(func_802A123C_72619C))
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Add(LVar1, 20)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_13)
+    Call(UseBattleCamPreset, BTL_CAM_ACTOR_CLOSE)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 20)
     Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HUSTLE_WHISTLE)

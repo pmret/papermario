@@ -109,7 +109,7 @@ EvtScript N(EVS_Scene_Ascending) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 600, 0, -15)
     Call(SetPanTarget, CAM_DEFAULT, 600, 0, -15)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Thread
         Call(SetPlayerJumpscale, 0)
         Loop(0)

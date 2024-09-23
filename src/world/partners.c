@@ -2475,10 +2475,10 @@ void partner_do_player_collision(Npc* partner) {
     f32 partnerScreenZ;
     f32 W;
 
-    transform_point(gCameras[CAM_DEFAULT].perspectiveMatrix,
+    transform_point(gCameras[CAM_DEFAULT].mtxPerspective,
                     playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z, 1.0f,
                     &playerScreenX, &playerScreenY, &playerScreenZ, &W);
-    transform_point(gCameras[CAM_DEFAULT].perspectiveMatrix, partner->pos.x, partner->pos.y, partner->pos.z, 1.0f,
+    transform_point(gCameras[CAM_DEFAULT].mtxPerspective, partner->pos.x, partner->pos.y, partner->pos.z, 1.0f,
                     &partnerScreenX, &partnerScreenY, &partnerScreenZ, &W);
     playerScreenX = fabsf(playerScreenX - partnerScreenX);
     playerScreenY = fabsf(playerScreenY - partnerScreenY);

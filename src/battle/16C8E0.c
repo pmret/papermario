@@ -854,7 +854,7 @@ void tattle_cam_pre_render(Camera* camera) {
 
     gDPPipeSync(gMainGfxPos++);
     gSPPerspNormalize(gMainGfxPos++, cam->perspNorm);
-    guMtxF2L(cam->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
+    guMtxF2L(cam->mtxPerspective, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 }
 

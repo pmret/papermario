@@ -26,7 +26,7 @@ EvtScript N(EVS_SetCam_ViewReels) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 535, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 535, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.5))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Return
     End
 };
@@ -37,7 +37,7 @@ EvtScript N(EVS_SetCam_ViewPayout) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(16.0), Float(-30.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End

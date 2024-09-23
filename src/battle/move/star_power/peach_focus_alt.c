@@ -27,7 +27,7 @@ API_CALLABLE(N(RestoreStarPower)) {
 }
 
 EvtScript N(EVS_UsePower) = {
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_WISH)
     Wait(10)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach2_SpreadArms)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)

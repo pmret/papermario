@@ -100,7 +100,7 @@ EvtScript N(EVS_SetCam_MeetingDoor) = {
     Call(SetCamPosA, CAM_DEFAULT, Float(88.0), Float(256.6))
     Call(SetCamPosB, CAM_DEFAULT, Float(195.0), Float(142.0))
     Call(SetCamPosC, CAM_DEFAULT, Float(0.0), Float(0.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -114,7 +114,7 @@ EvtScript N(EVS_SetCam_AfterBattle) = {
     Call(SetCamPosA, CAM_DEFAULT, Float(88.0), Float(256.6))
     Call(SetCamPosB, CAM_DEFAULT, Float(195.0), Float(142.0))
     Call(SetCamPosC, CAM_DEFAULT, Float(0.0), Float(0.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -128,7 +128,7 @@ EvtScript N(EVS_SetCam_AfterResult) = {
     Call(SetCamPosA, CAM_DEFAULT, Float(88.0), Float(256.6))
     Call(SetCamPosB, CAM_DEFAULT, Float(195.0), Float(142.0))
     Call(SetCamPosC, CAM_DEFAULT, Float(0.0), Float(0.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -141,7 +141,7 @@ EvtScript N(EVS_SetCam_AskQuestion) = {
     Call(SetCamPosA, CAM_DEFAULT, Float(88.0), Float(256.6))
     Call(SetCamPosB, CAM_DEFAULT, Float(195.0), Float(142.0))
     Call(SetCamPosC, CAM_DEFAULT, Float(0.0), Float(0.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -155,7 +155,7 @@ EvtScript N(EVS_SetCam_ViewRoom) = {
     Call(SetCamPosA, CAM_DEFAULT, Float(-2.5), Float(300.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(-2.5), Float(200.0))
     Call(SetCamPosC, CAM_DEFAULT, Float(0.0), Float(0.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -169,7 +169,7 @@ EvtScript N(EVS_SetCam_BeforeBattle) = {
     Call(SetCamPosA, CAM_DEFAULT, Float(50.0), Float(300.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(50.0), Float(200.0))
     Call(SetCamPosC, CAM_DEFAULT, Float(0.0), Float(0.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -1049,7 +1049,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     Else
         Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0030)
         Call(ResetCam, CAM_DEFAULT, Float(4.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
         Set(GF_KPA82_PassedThroughDoor, FALSE)
         Call(DisablePlayerInput, FALSE)
         Goto(1)
@@ -1186,7 +1186,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_003F)
     Label(40)
     Call(EnablePartnerAI)
-    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Set(GB_KPA82_BowserDoorState, 1)
     Call(DisablePlayerInput, FALSE)
     BindTrigger(Ref(N(EVS_ExitDoors_kpa_61_0)), TRIGGER_WALL_PRESS_A, COLLIDER_o166, 1, 0)

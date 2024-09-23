@@ -40,7 +40,7 @@ EvtScript N(EVS_UsePower) = {
     ExecWait(N(EVS_StarPower_SpiritSummoned))
     Call(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleMamar_Shout)
     Wait(16)
-    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Wait(15)
     Call(PlaySound, SOUND_LULLABY)
     Call(N(SpawnMusicNotesFX))

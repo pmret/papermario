@@ -35,7 +35,7 @@ EvtScript N(EVS_MonitorFallingStairs) = {
         Call(SetCamPitch, CAM_DEFAULT, Float(25.0), Float(-9.0))
         Call(SetCamPosA, CAM_DEFAULT, Float(-50.0), Float(25.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(1.5))
-        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Thread
             Wait(100)

@@ -229,7 +229,7 @@ EvtScript N(EVS_Merlon_ReadFortuneFX) = {
     Call(GetCamPitch, CAM_DEFAULT, LVar0, LVar1)
     SetF(LVar1, Float(-11.0))
     Call(SetCamPitch, CAM_DEFAULT, LVar0, LVar1)
-    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Set(ArrayVar(6), 1)
     PlayEffect(EFFECT_MERLIN_HOUSE_STARS, 0, -298, 21, -330)
