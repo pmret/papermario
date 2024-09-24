@@ -66,11 +66,13 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
         Goto(10)
     EndIf
     Call(DisablePlayerInput, TRUE)
+#if !VERSION_JP
     Call(GetPartnerInUse, LVar0)
     IfNe(LVar0, PARTNER_NONE)
         Call(InterruptUsePartner)
         Wait(20)
     EndIf
+#endif
     ExecWait(N(EVS_JrTroopaMusic))
     Call(GetPlayerPos, LVar1, LVar2, LVar3)
     Call(GetEntryID, LVar0)

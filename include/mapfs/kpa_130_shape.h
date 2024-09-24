@@ -1,3 +1,9 @@
+#if VERSION_JP
+#define MODEL_o455              0x13
+#define MODEL_o454              0x11
+#define MODEL_o11               0xF
+#define MODEL_o9                0xD
+#else
 #define MODEL_Root              0xB5
 #define MODEL_g128              0xB4
 #define MODEL_o464              0xB3
@@ -180,4 +186,5 @@
 #define MODEL_ew_hisi           0x2
 #define MODEL_ew_sai            0x1
 #define MODEL_ew_yuka           0x0
+#endif
 

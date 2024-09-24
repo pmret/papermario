@@ -1,3 +1,9 @@
+#if VERSION_JP
+#define COLLIDER_o90            0x12
+#define COLLIDER_o19            0x10
+#define COLLIDER_ttw            0x6
+#define COLLIDER_deilie         0x0
+#else
 #define COLLIDER_Root           0x13
 #define COLLIDER_move2          0x12
 #define COLLIDER_o90            0x11
@@ -18,6 +24,7 @@
 #define COLLIDER_ne             0x2
 #define COLLIDER_deilite        0x1
 #define COLLIDER_deilie         0x0
+#endif
 
 #define ZONE_Root               0x4
 #define ZONE_g14                0x3

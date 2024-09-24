@@ -377,7 +377,11 @@ EvtScript N(EVS_NpcInteract_Yoshi_03) = {
 
 EvtScript N(EVS_NpcIdle_Yoshi_03) = {
     Loop(0)
+#if VERSION_JP
+        Call(NpcMoveTo, NPC_SELF, -100, -80, 50)
+#else
         Call(NpcMoveTo, NPC_SELF, -105, -20, 50)
+#endif
         Call(NpcMoveTo, NPC_SELF, -190, -80, 50)
     EndLoop
     Return
@@ -548,7 +552,11 @@ EvtScript N(EVS_NpcInit_YoshiKid_04) = {
             Call(RemoveNpc, NPC_SELF)
             Return
         Else
+#if VERSION_JP
+            Call(SetNpcPos, NPC_SELF, -120, 0, -110)
+#else
             Call(SetNpcPos, NPC_SELF, -135, 0, -70)
+#endif
             Call(InterpNpcYaw, NPC_SELF, 270, 0)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_YoshiKid_04)))
         EndIf
@@ -1048,6 +1056,9 @@ NpcData N(NpcData_Ravens)[] = {
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
+#if VERSION_JP
+        .tattle = MSG_NpcTattle_0121,
+#endif
     },
     {
         .id = NPC_Raven_03,

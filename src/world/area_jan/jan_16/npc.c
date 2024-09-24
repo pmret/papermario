@@ -305,7 +305,11 @@ NpcData N(NpcData_RaphaelRaven)[] = {
             .anim_E = ANIM_Raven_Idle,
             .anim_F = ANIM_Raven_Idle,
         },
+#if VERSION_JP
+        .tattle = MSG_NpcTattle_0121,
+#else
         .tattle = MSG_NpcTattle_RavenB,
+#endif
     },
     {
         .id = NPC_Raven_03,

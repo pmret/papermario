@@ -296,7 +296,15 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
     Else
         Set(LVar0, -20)
     EndIf
+#if VERSION_JP
+    IfEq(AF_NOK_14, 0)
+        Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0136)
+    Else
+        Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0139)
+    EndIf
+#else
     Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0136)
+#endif
     Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim05)
     IfEq(AB_NOK_2, 0)
         Set(LVar0, 90)

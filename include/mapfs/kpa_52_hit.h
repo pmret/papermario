@@ -1,3 +1,8 @@
+#if VERSION_JP
+#define COLLIDER_tte2           0x1A
+#define COLLIDER_ttw            0x15
+#define COLLIDER_tte1           0x10
+#else
 #define COLLIDER_Root           0x1C
 #define COLLIDER_exit3          0x1B
 #define COLLIDER_ne2            0x1A
@@ -27,6 +32,7 @@
 #define COLLIDER_kaidann        0x2
 #define COLLIDER_o159           0x1
 #define COLLIDER_o158           0x0
+#endif
 
 #define ZONE_Root               0x4
 #define ZONE_g9                 0x3

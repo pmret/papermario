@@ -125,8 +125,13 @@ MenuWindowBP N(IngredientWindows)[] = {
     },
     {
         .windowID = WINDOW_ID_ITEM_INFO_DESC,
+#if VERSION_JP
+        .pos = { 39, 184 },
+        .width = 242,
+#else
         .pos = { 32, 184 },
         .width = 256,
+#endif
         .height = 32,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &N(draw_content_ingredient_desc),

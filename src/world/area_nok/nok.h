@@ -39,6 +39,7 @@ enum {
     AF_NOK_11               = AreaFlag(17),
     AF_NOK_12               = AreaFlag(18),
     AF_NOK_13               = AreaFlag(19),
+    AF_NOK_14               = AreaFlag(20),
     AF_NOK_15               = AreaFlag(21),
 };
 

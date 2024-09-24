@@ -164,8 +164,8 @@ s32 BattleMessages[] = {
     [BTL_MSG_NO_HAMMER_TARGET]      MSG_Menus_Battle_NoTarget_Hammer,
     [BTL_MSG_NO_ITEM_TARGET]        MSG_Menus_Battle_NoTarget_Item,
 #if VERSION_JP
-    [BTL_MSG_46]                    MSG_MENUS_00DB,
-    [BTL_MSG_47]                    MSG_MENUS_00DC,
+    [BTL_MSG_46]                    MSG_Menus_JP_00DB,
+    [BTL_MSG_47]                    MSG_Menus_JP_00DC,
 #else
     [BTL_MSG_46]                    MSG_NONE,
     [BTL_MSG_47]                    MSG_NONE,

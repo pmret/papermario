@@ -228,6 +228,30 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
             Set(GB_StoryProgress, STORY_CH1_DEFEATED_DUNGEON_GUARDS)
             Call(DoNpcDefeat)
         CaseEq(OUTCOME_PLAYER_LOST)
+#if VERSION_JP
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(DisablePlayerInput, TRUE)
+            Call(SetPlayerAnimation, ANIM_Mario1_Run)
+            Call(PlayerMoveTo, 82, 264, 20)
+            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+            Call(SpeakToPlayer, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Run, ANIM_KoopaTroopa_Idle, 0, MSG_CH1_013A)
+            Thread
+                Label(10)
+                Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                Wait(1)
+                IfLt(LVar2, 200)
+                    Goto(10)
+                EndIf
+                IfGt(LVar0, -120)
+                    Goto(10)
+                EndIf
+                Call(DisablePlayerInput, TRUE)
+                Call(SpeakToPlayer, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Run, ANIM_KoopaTroopa_Idle, 0, MSG_CH1_013B)
+                Call(DisablePlayerInput, FALSE)
+                Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+            EndThread
+            Call(DisablePlayerInput, FALSE)
+#endif
     EndSwitch
     Return
     End

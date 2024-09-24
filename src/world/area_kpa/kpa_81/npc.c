@@ -101,7 +101,9 @@ EvtScript N(EVS_NpcIdle_Door) = {
             Goto(100)
         EndIf
         Call(DisablePlayerInput, TRUE)
+#if !VERSION_JP
         ExecWait(N(EVS_EnsurePartnerNeutral))
+#endif
         Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0004)
         Call(DisablePlayerInput, FALSE)
         Call(AwaitPlayerApproach, 120, 150, 30)
@@ -115,7 +117,9 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EndIf
     Label(2)
     Call(DisablePlayerInput, TRUE)
+#if !VERSION_JP
     ExecWait(N(EVS_EnsurePartnerNeutral))
+#endif
     Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0001)
     Call(ShowChoice, MSG_Choice_0013)
     IfEq(LVar0, 0)

@@ -147,7 +147,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
 #if VERSION_PAL
     Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 1)
     Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 1)
-#else
+#elif VERSION_US || VERSION_IQUE
     ChildThread
         Loop(0)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)

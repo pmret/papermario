@@ -48,7 +48,7 @@ EvtScript N(EVS_UnkJP00) = {
     End
 };
 
-EvtScript N(EVS_UnkJP01) = {
+EvtScript N(EVS_Chest_ShowGotItem) = {
     SetGroup(EVT_GROUP_00)
     Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
     Wait(40)

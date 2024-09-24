@@ -1112,6 +1112,14 @@ EvtScript N(EVS_NpcInteract_GuardBoo) = {
             Else
                 Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0038)
             EndIf
+#if VERSION_JP
+        CaseEq(STORY_CH3_GOT_WEIGHT)
+            Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0105)
+            ExecWait(N(EVS_GuardBooVanish))
+        CaseGe(STORY_CH3_WEIGHED_DOWN_CHANDELIER)
+            Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0106)
+            ExecWait(N(EVS_GuardBooVanish))
+#endif
     EndSwitch
     Return
     End

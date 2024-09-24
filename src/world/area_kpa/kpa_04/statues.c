@@ -5,11 +5,13 @@
 
 EvtScript N(EVS_PushStatue_Impl) = {
     Loop(20)
+#if !VERSION_JP
         Call(GetPartnerInUse, LVarA)
         IfNe(LVarA, 0)
             Set(LVar9, 0)
             Return
         EndIf
+#endif
         Call(N(UnkFunc11), 25)
         IfEq(LVar0, 0)
             Set(LVar9, 0)
@@ -19,11 +21,13 @@ EvtScript N(EVS_PushStatue_Impl) = {
         EndIf
         Wait(1)
     EndLoop
+#if !VERSION_JP
     Call(GetPartnerInUse, LVarA)
     IfNe(LVarA, 0)
         Set(LVar9, 0)
         Return
     EndIf
+#endif
     Call(DisablePlayerInput, TRUE)
     Call(PlaySoundAtCollider, COLLIDER_o160, SOUND_LOOP_MOVE_STATUE, SOUND_SPACE_DEFAULT)
     Thread
@@ -48,7 +52,11 @@ EvtScript N(EVS_PushStatue_Impl) = {
         Call(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Set(LVar1, LVar0)
+#if VERSION_JP
+        Add(LVar1, LVarA)
+#else
         Add(LVar1, LVarB)
+#endif
         Call(MakeLerp, LVar0, LVar1, 100, EASING_LINEAR)
         Loop(0)
             Call(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
@@ -62,7 +70,11 @@ EvtScript N(EVS_PushStatue_Impl) = {
         Call(SetPlayerActionState, ACTION_STATE_IDLE)
         Call(DisablePlayerInput, FALSE)
     EndThread
+#if VERSION_JP
+    Call(MakeLerp, 0, LVarA, 100, EASING_LINEAR)
+#else
     Call(MakeLerp, 0, LVarB, 100, EASING_LINEAR)
+#endif
     Loop(0)
         Call(UpdateLerp)
         Call(TranslateGroup, MODEL_g20, LVar0, 0, 0)
@@ -93,11 +105,19 @@ EvtScript N(EVS_PushStatue_FromRight) = {
     EndIf
     IfGe(LVar0, 0)
         Set(LVar9, 1)
+#if VERSION_JP
+        Set(LVarA, -50)
+#else
         Set(LVarB, -50)
+#endif
         ExecWait(N(EVS_PushStatue_Impl))
     Else
         Set(LVar9, 2)
+#if VERSION_JP
+        Set(LVarA, 50)
+#else
         Set(LVarB, 50)
+#endif
         ExecWait(N(EVS_PushStatue_Impl))
     EndIf
     Set(GB_KPA04_StatuePosition, LVar9)

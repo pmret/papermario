@@ -8904,766 +8904,2181 @@ segments:
     subsegments:
     - [auto, c, main]
     - [auto, c, entity]
-  - type: bin
-    name: dro_01
+  - name: dro_01
+    dir: world/area_dro/dro_01
+    type: code
     start: 0x964580
     vram: 0x80240000
-  - type: bin
-    name: dro_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, shop]
+    - [auto, c, rooms]
+    - [auto, c, entity]
+    - [auto, c, foliage]
+  - name: dro_02
+    dir: world/area_dro/dro_02
+    type: code
     start: 0x972500
     vram: 0x80240000
-  - type: bin
-    name: isk_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, rooms]
+    - [auto, c, npc]
+    - start: 0x977298
+      type: .data
+      name: npc
+      subsegments:
+      - [0x977298]
+      - [0x979AA0, ci4, card, 32, 32]
+      - [0x979CA0, palette, card]
+      - [0x979CC0, vtx, card_1]
+      - [0x979D40, vtx, card_2]
+      - [0x979D80, gfx, card_setup]
+      - [0x979E70, gfx, card_1]
+      - [0x979EF0, gfx, card_2]
+      - [0x979F38]
+      - [0x97B290] # unmapped vtx/gfx for toad house blanket
+      - [0x97CDD8]
+    - [0x9813C8]
+  - name: isk_01
+    dir: world/area_isk/isk_01
+    type: code
     start: 0x981440
     vram: 0x80240000
-  - type: bin
-    name: isk_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, haze]
+    - [auto, c, entity]
+  - name: isk_02
+    dir: world/area_isk/isk_02
+    type: code
     start: 0x981A10
     vram: 0x80240000
-  - type: bin
-    name: isk_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, lock]
+    - [auto, c, ambush]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: isk_03
+    dir: world/area_isk/isk_03
+    type: code
     start: 0x983150
     vram: 0x80240000
-  - type: bin
-    name: isk_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, sand]
+    - [auto, c, entity]
+    - [auto, c, switch]
+  - name: isk_04
+    dir: world/area_isk/isk_04
+    type: code
     start: 0x984930
     vram: 0x80240000
-  - type: bin
-    name: isk_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, obstructions]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, demo]
+  - name: isk_05
+    dir: world/area_isk/isk_05
+    type: code
     start: 0x986DD0
     vram: 0x80240000
-  - type: bin
-    name: isk_06
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: isk_06
+    dir: world/area_isk/isk_06
+    type: code
     start: 0x989D20
     vram: 0x80240000
-  - type: bin
-    name: isk_07
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, sand]
+    - [auto, c, switch]
+  - name: isk_07
+    dir: world/area_isk/isk_07
+    type: code
     start: 0x98B740
     vram: 0x80240000
-  - type: bin
-    name: isk_08
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, stairs]
+    - [auto, c, lock]
+    - [auto, c, switch]
+    - [auto, c, ambush]
+  - name: isk_08
+    dir: world/area_isk/isk_08
+    type: code
     start: 0x98E130
     vram: 0x80240000
-  - type: bin
-    name: isk_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: isk_09
+    dir: world/area_isk/isk_09
+    type: code
     start: 0x98F7E0
     vram: 0x80240000
-  - type: bin
-    name: isk_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, stairs]
+    - [auto, c, switch]
+  - name: isk_10
+    dir: world/area_isk/isk_10
+    type: code
     start: 0x991E60
     vram: 0x80240000
-  - type: bin
-    name: isk_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, bombable]
+  - name: isk_11
+    dir: world/area_isk/isk_11
+    type: code
     start: 0x993D10
     vram: 0x80240000
-  - type: bin
-    name: isk_12
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, scene]
+    - [auto, c, puzzle]
+    - [auto, c, lock]
+  - name: isk_12
+    dir: world/area_isk/isk_12
+    type: code
     start: 0x996940
     vram: 0x80240000
-  - type: bin
-    name: isk_13
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, sand]
+    - [auto, c, switch]
+  - name: isk_13
+    dir: world/area_isk/isk_13
+    type: code
     start: 0x998AE0
     vram: 0x80240000
-  - type: bin
-    name: isk_14
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: isk_14
+    dir: world/area_isk/isk_14
+    type: code
     start: 0x99BA30
     vram: 0x80240000
-  - type: bin
-    name: isk_16
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: isk_16
+    dir: world/area_isk/isk_16
+    type: code
     start: 0x99E4F0
     vram: 0x80240000
-  - type: bin
-    name: isk_18
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, boss]
+    - [auto, c, entity]
+  - name: isk_18
+    dir: world/area_isk/isk_18
+    type: code
     start: 0x9A1270
     vram: 0x80240000
-  - type: bin
-    name: isk_19
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: isk_19
+    dir: world/area_isk/isk_19
+    type: code
     start: 0x9A2A40
     vram: 0x80240000
-  - type: bin
-    name: trd_00
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: trd_00
+    dir: world/area_trd/trd_00
+    type: code
     start: 0x9A2F70
     vram: 0x80240000
-  - type: bin
-    name: trd_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: trd_01
+    dir: world/area_trd/trd_01
+    type: code
     start: 0x9A5C90
     vram: 0x80240000
-  - type: bin
-    name: trd_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: trd_02
+    dir: world/area_trd/trd_02
+    type: code
     start: 0x9AA2E0
     vram: 0x80240000
-  - type: bin
-    name: trd_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: trd_03
+    dir: world/area_trd/trd_03
+    type: code
     start: 0x9AD950
     vram: 0x80240000
-  - type: bin
-    name: trd_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, puzzle]
+  - name: trd_04
+    dir: world/area_trd/trd_04
+    type: code
     start: 0x9B16F0
     vram: 0x80240000
-  - type: bin
-    name: trd_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: trd_05
+    dir: world/area_trd/trd_05
+    type: code
     start: 0x9B7A00
     vram: 0x80240000
-  - type: bin
-    name: trd_06
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, trap]
+    - [auto, c, npc]
+  - name: trd_06
+    dir: world/area_trd/trd_06
+    type: code
     start: 0x9BAA90
     vram: 0x80240000
-  - type: bin
-    name: trd_07
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, falling]
+    - [auto, c, npc_prisoners]
+    - [auto, c, npc_koopa_bros]
+    - [auto, c, entity]
+  - name: trd_07
+    dir: world/area_trd/trd_07
+    type: code
     start: 0x9BFDC0
     vram: 0x80240000
-  - type: bin
-    name: trd_08
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, magic_doors]
+  - name: trd_08
+    dir: world/area_trd/trd_08
+    type: code
     start: 0x9C46E0
     vram: 0x80240000
-  - type: bin
-    name: trd_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: trd_09
+    dir: world/area_trd/trd_09
+    type: code
     start: 0x9C6AA0
     vram: 0x80240000
-  - type: bin
-    name: trd_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, demo]
+  - name: trd_10
+    dir: world/area_trd/trd_10
+    type: code
     start: 0x9CBD50
     vram: 0x80240000
-  - type: bin
-    name: nok_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, fake_bowser]
+  - name: nok_01
+    dir: world/area_nok/nok_01
+    type: code
     start: 0x9CE820
     vram: 0x80240000
-  - type: bin
-    name: nok_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, shop]
+    - [auto, c, rooms]
+    - [auto, c, radio]
+    - [auto, c, foliage]
+  - name: nok_02
+    dir: world/area_nok/nok_02
+    type: code
     start: 0x9E0440
     vram: 0x80240000
-  - type: bin
-    name: nok_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, rooms]
+    - [auto, c, bookshelf]
+    - [auto, c, npc]
+    - [auto, c, demo]
+    - [auto, c, koot_favors]
+    - [auto, c, foliage]
+    - [auto, c, epilogue]
+  - name: nok_03
+    dir: world/area_nok/nok_03
+    type: code
     start: 0x9F4C10
     vram: 0x80240000
-  - type: bin
-    name: nok_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: nok_04
+    dir: world/area_nok/nok_04
+    type: code
     start: 0x9F7010
     vram: 0x80240000
-  - type: bin
-    name: nok_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, new_partner]
+  - name: nok_11
+    dir: world/area_nok/nok_11
+    type: code
     start: 0x9FDE60
     vram: 0x80240000
-  - type: bin
-    name: nok_12
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: nok_12
+    dir: world/area_nok/nok_12
+    type: code
     start: 0xA03C50
     vram: 0x80240000
-  - type: bin
-    name: nok_13
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, bridge]
+    - [auto, c, foliage]
+    - [auto, c, npc]
+    - [auto, c, demo]
+  - name: nok_13
+    dir: world/area_nok/nok_13
+    type: code
     start: 0xA09A60
     vram: 0x80240000
-  - type: bin
-    name: nok_14
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, musical_hill]
+  - name: nok_14
+    dir: world/area_nok/nok_14
+    type: code
     start: 0xA0BCA0
     vram: 0x80240000
-  - type: bin
-    name: nok_15
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, bridge]
+    - [auto, c, npc]
+  - name: nok_15
+    dir: world/area_nok/nok_15
+    type: code
     start: 0xA10360
     vram: 0x80240000
-  - type: bin
-    name: hos_00
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+  - name: hos_00
+    dir: world/area_hos/hos_00
+    type: code
     start: 0xA15150
     vram: 0x80240000
-  - type: bin
-    name: hos_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, unused]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, scenes]
+    - [auto, c, shade_gfx]
+  - name: hos_01
+    dir: world/area_hos/hos_01
+    type: code
     start: 0xA19CE0
     vram: 0x80240000
-  - type: bin
-    name: hos_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, model_fx]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, star_way]
+  - name: hos_02
+    dir: world/area_hos/hos_02
+    type: code
     start: 0xA1F680
     vram: 0x80240000
-  - type: bin
-    name: hos_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, model_fx]
+    - [auto, c, unused]
+    - [auto, c, npc]
+    - [auto, c, descent]
+  - name: hos_03
+    dir: world/area_hos/hos_03
+    type: code
     start: 0xA24560
     vram: 0x80240000
-  - type: bin
-    name: hos_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, model_fx]
+    - [auto, c, rooms]
+    - [auto, c, foliage]
+    - [auto, c, npc]
+    - [auto, c, shop]
+    - [auto, c, entity]
+  - name: hos_04
+    dir: world/area_hos/hos_04
+    type: code
     start: 0xA302F0
     vram: 0x80240000
-  - type: bin
-    name: hos_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, fountains]
+    - [auto, c, unused]
+    - [auto, c, intro]
+    - [auto, c, narrator]
+    - [auto, c, starship] # comes before narrator in other versions
+  - name: hos_05
+    dir: world/area_hos/hos_05
+    type: code
     start: 0xA336B0
     vram: 0x80240000
-  - type: bin
-    name: hos_06
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, misc]
+    - [auto, c, npc]
+    - [auto, c, intro]
+    - [auto, c, narrator]
+    - [auto, c, model_fx]
+    - [auto, c, star_ship]
+  - name: hos_06
+    dir: world/area_hos/hos_06
+    type: code
     start: 0xA428F0
     vram: 0x80240000
-  - type: bin
-    name: hos_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, merlow]
+    - [auto, c, rooms]
+    - [auto, c, merluvlee]
+    - [auto, c, chest]
+  - name: hos_10
+    dir: world/area_hos/hos_10
+    type: code
     start: 0xA48B10
     vram: 0x80240000
-  - type: bin
-    name: hos_20
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, npc1]
+    - [auto, c, npc2]
+    - [auto, c, main]
+    - [auto, c, intro]
+    - [auto, c, pre_title]
+    - [auto, c, narrator] # JP exclusive
+    - [auto, c, ending]
+  - name: hos_20
+    dir: world/area_hos/hos_20
+    type: code
     start: 0xA4F120
     vram: 0x80240000
-  - type: bin
-    name: kpa_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, starship]
+  - name: kpa_01
+    dir: world/area_kpa/kpa_01
+    type: code
     start: 0xA50750
     vram: 0x80240000
-  - type: bin
-    name: kpa_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: kpa_03
+    dir: world/area_kpa/kpa_03
+    type: code
     start: 0xA51DB0
     vram: 0x80240000
-  - type: bin
-    name: kpa_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: kpa_04
+    dir: world/area_kpa/kpa_04
+    type: code
     start: 0xA55750
     vram: 0x80240000
-  - type: bin
-    name: kpa_08
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, statues]
+  - name: kpa_08
+    dir: world/area_kpa/kpa_08
+    type: code
     start: 0xA56170
     vram: 0x80240000
-  - type: bin
-    name: kpa_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: kpa_09
+    dir: world/area_kpa/kpa_09
+    type: code
     start: 0xA58750
     vram: 0x80240000
-  - type: bin
-    name: kpa_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: kpa_10
+    dir: world/area_kpa/kpa_10
+    type: code
     start: 0xA5B0D0
     vram: 0x80240000
-  - type: bin
-    name: kpa_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: kpa_11
+    dir: world/area_kpa/kpa_11
+    type: code
     start: 0xA5C010
     vram: 0x80240000
-  - type: bin
-    name: kpa_12
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: kpa_12
+    dir: world/area_kpa/kpa_12
+    type: code
     start: 0xA5E0A0
     vram: 0x80240000
-  - type: bin
-    name: kpa_13
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, platforms]
+  - name: kpa_13
+    dir: world/area_kpa/kpa_13
+    type: code
     start: 0xA5F670
     vram: 0x80240000
-  - type: bin
-    name: kpa_14
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, platforms]
+  - name: kpa_14
+    dir: world/area_kpa/kpa_14
+    type: code
     start: 0xA60BE0
     vram: 0x80240000
-  - type: bin
-    name: kpa_15
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, platforms]
+  - name: kpa_15
+    dir: world/area_kpa/kpa_15
+    type: code
     start: 0xA62AC0
     vram: 0x80240000
-  - type: bin
-    name: kpa_16
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: kpa_16
+    dir: world/area_kpa/kpa_16
+    type: code
     start: 0xA637A0
     vram: 0x80240000
-  - type: bin
-    name: kpa_17
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: kpa_17
+    dir: world/area_kpa/kpa_17
+    type: code
     start: 0xA66190
     vram: 0x80240000
-  - type: bin
-    name: kpa_32
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kpa_32
+    dir: world/area_kpa/kpa_32
+    type: code
     start: 0xA67830
     vram: 0x80240000
-  - type: bin
-    name: kpa_33
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+  - name: kpa_33
+    dir: world/area_kpa/kpa_33
+    type: code
     start: 0xA687F0
     vram: 0x80240000
-  - type: bin
-    name: kpa_40
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+  - name: kpa_40
+    dir: world/area_kpa/kpa_40
+    type: code
     start: 0xA697B0
     vram: 0x80240000
-  - type: bin
-    name: kpa_41
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+  - name: kpa_41
+    dir: world/area_kpa/kpa_41
+    type: code
     start: 0xA69BE0
     vram: 0x80240000
-  - type: bin
-    name: kpa_50
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+  - name: kpa_50
+    dir: world/area_kpa/kpa_50
+    type: code
     start: 0xA6A140
     vram: 0x80240000
-  - type: bin
-    name: kpa_51
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kpa_51
+    dir: world/area_kpa/kpa_51
+    type: code
     start: 0xA6D800
     vram: 0x80240000
-  - type: bin
-    name: kpa_52
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kpa_52
+    dir: world/area_kpa/kpa_52
+    type: code
     start: 0xA70870
     vram: 0x80240000
-  - type: bin
-    name: kpa_53
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kpa_53
+    dir: world/area_kpa/kpa_53
+    type: code
     start: 0xA74410
     vram: 0x80240000
-  - type: bin
-    name: kpa_60
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: kpa_60
+    dir: world/area_kpa/kpa_60
+    type: code
     start: 0xA76270
     vram: 0x80240000
-  - type: bin
-    name: kpa_61
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, scenes]
+  - name: kpa_61
+    dir: world/area_kpa/kpa_61
+    type: code
     start: 0xA77B50
     vram: 0x80240000
-  - type: bin
-    name: kpa_62
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: kpa_62
+    dir: world/area_kpa/kpa_62
+    type: code
     start: 0xA7B990
     vram: 0x80240000
-  - type: bin
-    name: kpa_63
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+  - name: kpa_63
+    dir: world/area_kpa/kpa_63
+    type: code
     start: 0xA7CD20
     vram: 0x80240000
-  - type: bin
-    name: kpa_70
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, scenes]
+  - name: kpa_70
+    dir: world/area_kpa/kpa_70
+    type: code
     start: 0xA7DFE0
     vram: 0x80240000
-  - type: bin
-    name: kpa_81
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, chain_skele]
+    - [auto, c, chain_anim]
+  - name: kpa_81
+    dir: world/area_kpa/kpa_81
+    type: code
     start: 0xA81C30
     vram: 0x80240000
-  - type: bin
-    name: kpa_82
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kpa_82
+    dir: world/area_kpa/kpa_82
+    type: code
     start: 0xA83C50
     vram: 0x80240000
-  - type: bin
-    name: kpa_83
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kpa_83
+    dir: world/area_kpa/kpa_83
+    type: code
     start: 0xA8CBB0
     vram: 0x80240000
-  - type: bin
-    name: kpa_90
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kpa_90
+    dir: world/area_kpa/kpa_90
+    type: code
     start: 0xA8FED0
     vram: 0x80240000
-  - type: bin
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+  - name: kpa_91
+    dir: world/area_kpa/kpa_91
+    type: code
     name: kpa_91
     start: 0xA90170
     vram: 0x80240000
-  - type: bin
-    name: kpa_94
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: kpa_94
+    dir: world/area_kpa/kpa_94
+    type: code
     start: 0xA95EE0
     vram: 0x80240000
-  - type: bin
-    name: kpa_95
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+  - name: kpa_95
+    dir: world/area_kpa/kpa_95
+    type: code
     start: 0xA961A0
     vram: 0x80240000
-  - type: bin
-    name: kpa_96
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kpa_96
+    dir: world/area_kpa/kpa_96
+    type: code
     start: 0xA9BEE0
     vram: 0x80240000
-  - type: bin
-    name: kpa_100
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kpa_100
+    dir: world/area_kpa/kpa_100
+    type: code
     start: 0xA9C880
     vram: 0x80240000
-  - type: bin
-    name: kpa_101
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: kpa_101
+    dir: world/area_kpa/kpa_101
+    type: code
     start: 0xA9CB60
     vram: 0x80240000
-  - type: bin
-    name: kpa_102
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: kpa_102
+    dir: world/area_kpa/kpa_102
+    type: code
     start: 0xA9CE60
     vram: 0x80240000
-  - type: bin
-    name: kpa_111
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kpa_111
+    dir: world/area_kpa/kpa_111
+    type: code
     start: 0xAA2CB0
     vram: 0x80240000
-  - type: bin
-    name: kpa_112
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, statues]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: kpa_112
+    dir: world/area_kpa/kpa_112
+    type: code
     start: 0xAA6010
     vram: 0x80240000
-  - type: bin
-    name: kpa_113
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+  - name: kpa_113
+    dir: world/area_kpa/kpa_113
+    type: code
     start: 0xAA62B0
     vram: 0x80240000
-  - type: bin
-    name: kpa_114
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, statues]
+    - [auto, c, npc]
+  - name: kpa_114
+    dir: world/area_kpa/kpa_114
+    type: code
     start: 0xAA7F60
     vram: 0x80240000
-  - type: bin
-    name: kpa_115
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: kpa_115
+    dir: world/area_kpa/kpa_115
+    type: code
     start: 0xAA8320
     vram: 0x80240000
-  - type: bin
-    name: kpa_116
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, statues]
+    - [auto, c, npc]
+  - name: kpa_116
+    dir: world/area_kpa/kpa_116
+    type: code
     start: 0xAAB410
     vram: 0x80240000
-  - type: bin
-    name: kpa_117
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+  - name: kpa_117
+    dir: world/area_kpa/kpa_117
+    type: code
     start: 0xAAB6B0
     vram: 0x80240000
-  - type: bin
-    name: kpa_118
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+  - name: kpa_118
+    dir: world/area_kpa/kpa_118
+    type: code
     start: 0xAAB8F0
     vram: 0x80240000
-  - type: bin
-    name: kpa_119
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+  - name: kpa_119
+    dir: world/area_kpa/kpa_119
+    type: code
     start: 0xAABB90
     vram: 0x80240000
-  - type: bin
-    name: kpa_121
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+  - name: kpa_121
+    dir: world/area_kpa/kpa_121
+    type: code
     start: 0xAABE20
     vram: 0x80240000
-  - type: bin
-    name: kpa_130
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+  - name: kpa_130
+    dir: world/area_kpa/kpa_130
+    type: code
     start: 0xAAC250
     vram: 0x80240000
-  - type: bin
-    name: kpa_133
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kpa_133
+    dir: world/area_kpa/kpa_133
+    type: code
     start: 0xAB09B0
     vram: 0x80240000
-  - type: bin
-    name: kpa_134
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, water]
+    - [auto, c, ease]
+  - name: kpa_134
+    dir: world/area_kpa/kpa_134
+    type: code
     start: 0xAB24D0
     vram: 0x80240000
-  - type: bin
-    name: osr_00
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, chains]
+    - [auto, c, npc]
+    - [auto, c, panels]
+    - [auto, c, entity]
+  - name: osr_00
+    dir: world/area_osr/osr_00
+    type: code
     start: 0xAB5D60
     vram: 0x80240000
-  - type: bin
-    name: osr_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc_intro]
+    - [auto, c, npc_epilogue]
+    - [auto, c, scenes]
+  - name: osr_01
+    dir: world/area_osr/osr_01
+    type: code
     start: 0xAB9520
     vram: 0x80240000
-  - type: bin
-    name: osr_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: osr_02
+    dir: world/area_osr/osr_02
+    type: code
     start: 0xABB6A0
     vram: 0x80240000
-  - type: bin
-    name: osr_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, npc_peach]
+  - name: osr_03
+    dir: world/area_osr/osr_03
+    type: code
     start: 0xABF7C0
     vram: 0x80240000
-  - type: bin
-    name: osr_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, intro]
+    - [auto, c, starship]
+    - [auto, c, interlude]
+    - [auto, c, ending]
+  - name: osr_04
+    dir: world/area_osr/osr_04
+    type: code
     start: 0xAC27E0
     vram: 0x80240000
-  - type: bin
-    name: kkj_00
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, assault]
+  - name: kkj_00
+    dir: world/area_kkj/kkj_00
+    type: code
     start: 0xAC47C0
     vram: 0x80240000
-  - type: bin
-    name: kkj_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc_intro]
+    - [auto, c, scene_intro]
+    - [auto, c, npc_ending]
+    - [auto, c, scene_ending]
+  - name: kkj_01
+    dir: world/area_kkj/kkj_01
+    type: code
     start: 0xACE6A0
     vram: 0x80240000
-  - type: bin
-    name: kkj_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kkj_02
+    dir: world/area_kkj/kkj_02
+    type: code
     start: 0xAD2250
     vram: 0x80240000
-  - type: bin
-    name: kkj_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kkj_03
+    dir: world/area_kkj/kkj_03
+    type: code
     start: 0xAD2C40
     vram: 0x80240000
-  - type: bin
-    name: kkj_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, scenes]
+  - name: kkj_10
+    dir: world/area_kkj/kkj_10
+    type: code
     start: 0xAD4050
     vram: 0x80240000
-  - type: bin
-    name: kkj_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npcs_early]
+    - [auto, c, npcs_later]
+  - name: kkj_11
+    dir: world/area_kkj/kkj_11
+    type: code
     start: 0xAD7670
     vram: 0x80240000
-  - type: bin
-    name: kkj_12
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, scene]
+    - [auto, c, demo]
+    - [auto, c, npcs_early]
+    - [auto, c, npcs_later]
+  - name: kkj_12
+    dir: world/area_kkj/kkj_12
+    type: code
     start: 0xADD5C0
     vram: 0x80240000
-  - type: bin
-    name: kkj_13
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kkj_13
+    dir: world/area_kkj/kkj_13
+    type: code
     start: 0xADF400
     vram: 0x80240000
-  - type: bin
-    name: kkj_14
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npcs_finale]
+    - [auto, c, npcs_intro]
+    - [auto, c, intro_scenes]
+  - name: kkj_14
+    dir: world/area_kkj/kkj_14
+    type: code
     start: 0xAE4360
     vram: 0x80240000
-  - type: bin
-    name: kkj_15
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, interactables]
+    - [auto, c, npc_guards]
+    - [auto, c, npc_ch0]
+    - [auto, c, npc_ch2]
+    - [auto, c, npc_ch7]
+    - [auto, c, chapter0]
+    - [auto, c, chapter1]
+    - [auto, c, chapter2]
+    - [auto, c, chapter3]
+    - [auto, c, chapter4]
+    - [auto, c, chapter5]
+    - [auto, c, chapter6]
+    - [auto, c, chapter7]
+  - name: kkj_15
+    dir: world/area_kkj/kkj_15
+    type: code
     start: 0xAEEA50
     vram: 0x80240000
-  - type: bin
-    name: kkj_16
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, rotating_wall]
+    - [auto, c, chapter0]
+    - [auto, c, chapter1]
+    - [auto, c, chapter2]
+    - [auto, c, chapter3]
+    - [auto, c, npc_chapter0]
+    - [auto, c, npc_chapter1]
+    - [auto, c, npc_chapter3]
+  - name: kkj_16
+    dir: world/area_kkj/kkj_16
+    type: code
     start: 0xAF68D0
     vram: 0x80240000
-  - type: bin
-    name: kkj_17
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npcs_early]
+    - [auto, c, npcs_later]
+    - [auto, c, stealth]
+    - [auto, c, entity]
+  - name: kkj_17
+    dir: world/area_kkj/kkj_17
+    type: code
     start: 0xAFB120
     vram: 0x80240000
-  - type: bin
-    name: kkj_18
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, chest]
+  - name: kkj_18
+    dir: world/area_kkj/kkj_18
+    type: code
     start: 0xAFC160
     vram: 0x80240000
-  - type: bin
-    name: kkj_19
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, gourmet]
+  - name: kkj_19
+    dir: world/area_kkj/kkj_19
+    type: code
     start: 0xB00E10
     vram: 0x80240000
-  - type: bin
-    name: kkj_20
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npcs_intro]
+    - [auto, c, npcs_peach]
+    - [auto, c, baking]
+  - name: kkj_20
+    dir: world/area_kkj/kkj_20
+    type: code
     start: 0xB07000
     vram: 0x80240000
-  - type: bin
-    name: kkj_21
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: kkj_21
+    dir: world/area_kkj/kkj_21
+    type: code
     start: 0xB0B760
     vram: 0x80240000
-  - type: bin
-    name: kkj_22
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+  - name: kkj_22
+    dir: world/area_kkj/kkj_22
+    type: code
     start: 0xB0B9B0
     vram: 0x80240000
-  - type: bin
-    name: kkj_23
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+  - name: kkj_23
+    dir: world/area_kkj/kkj_23
+    type: code
     start: 0xB0BD40
     vram: 0x80240000
-  - type: bin
-    name: kkj_24
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npcs_finale]
+    - [auto, c, npcs_peach]
+    - [auto, c, scene]
+  - name: kkj_24
+    dir: world/area_kkj/kkj_24
+    type: code
     start: 0xB0FA30
     vram: 0x80240000
-  - type: bin
-    name: kkj_25
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: kkj_25
+    dir: world/area_kkj/kkj_25
+    type: code
     start: 0xB0FEC0
     vram: 0x80240000
-  - type: bin
-    name: kkj_26
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc_initial]
+    - [auto, c, npc_midpoint]
+    - [auto, c, npc_final]
+    - [auto, c, arena]
+    - [auto, c, peach_free]
+    - [auto, c, kammy_defeated]
+    - [auto, c, bowser_defeated]
+    - [auto, c, entity]
+  - name: kkj_26
+    dir: world/area_kkj/kkj_26
+    type: code
     start: 0xB1C5B0
     vram: 0x80240000
-  - type: bin
-    name: kkj_27
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, scenes]
+    - [auto, c, demo]
+  - name: kkj_27
+    dir: world/area_kkj/kkj_27
+    type: code
     start: 0xB1D200
     vram: 0x80240000
-  - type: bin
-    name: kkj_28
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, rotating_wall]
+  - name: kkj_28
+    dir: world/area_kkj/kkj_28
+    type: code
     start: 0xB1E330
     vram: 0x80240000
-  - type: bin
-    name: kkj_29
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+  - name: kkj_29
+    dir: world/area_kkj/kkj_29
+    type: code
     start: 0xB1E540
     vram: 0x80240000
-  - type: bin
-    name: tst_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, quiz]
+  - name: tst_01
+    dir: world/area_tst/tst_01
+    type: code
     start: 0xB23D90
     vram: 0x80240000
-  - type: bin
-    name: tst_02
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: tst_02
+    dir: world/area_tst/tst_02
+    type: code
     start: 0xB240C0
     vram: 0x80240000
-  - type: bin
-    name: tst_03
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: tst_03
+    dir: world/area_tst/tst_03
+    type: code
     start: 0xB24410
     vram: 0x80240000
-  - type: bin
-    name: tst_04
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: tst_04
+    dir: world/area_tst/tst_04
+    type: code
     start: 0xB24A00
     vram: 0x80240000
-  - type: bin
-    name: tst_10
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, reflection]
+    - [auto, c, npc]
+  - name: tst_10
+    dir: world/area_tst/tst_10
+    type: code
     start: 0xB259D0
     vram: 0x80240000
-  - type: bin
-    name: tst_11
+    subsegments:
+    - [auto, c, main]
+  - name: tst_11
+    dir: world/area_tst/tst_11
+    type: code
     start: 0xB25EE0
     vram: 0x80240000
-  - type: bin
-    name: tst_12
+    subsegments:
+    - [auto, c, main]
+    - [auto, c, extra]
+  - name: tst_12
+    dir: world/area_tst/tst_12
+    type: code
     start: 0xB26780
     vram: 0x80240000
-  - type: bin
-    name: tst_13
+    subsegments:
+    - [auto, c, main]
+  - name: tst_13
+    dir: world/area_tst/tst_13
+    type: code
     start: 0xB26BF0
     vram: 0x80240000
-  - type: bin
-    name: tst_20
+    subsegments:
+    - [auto, c, main]
+    - start: 0xB26FB0
+      type: .data
+      name: main
+      subsegments:
+      - [0xB26FB0]
+      - [0xB28EA0, vtx, shockwave]
+      - [0xB29450, gfx, shockwave]
+      - [0xB297E0]
+  - name: tst_20
+    dir: world/area_tst/tst_20
+    type: code
     start: 0xB29900
     vram: 0x80240000
-  - type: bin
-    name: jan_00
+    subsegments:
+    - [auto, c, main]
+  - name: jan_00
+    dir: world/area_jan/jan_00
+    type: code
     start: 0xB299D0
     vram: 0x80240000
-  - type: bin
-    name: jan_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, whale]
+    - [auto, c, foliage]
+  - name: jan_01
+    dir: world/area_jan/jan_01
+    type: code
     start: 0xB314C0
     vram: 0x80240000
-  - type: bin
-    name: jan_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, foliage]
+  - name: jan_02
+    dir: world/area_jan/jan_02
+    type: code
     start: 0xB35900
     vram: 0x80240000
-  - type: bin
-    name: jan_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, foliage]
+  - name: jan_03
+    dir: world/area_jan/jan_03
+    type: code
     start: 0xB3E010
     vram: 0x80240000
-  - type: bin
-    name: jan_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, shop]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, rooms]
+    - [auto, c, foliage]
+  - name: jan_04
+    dir: world/area_jan/jan_04
+    type: code
     start: 0xB4DB70
     vram: 0x80240000
-  - type: bin
-    name: jan_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, unused]
+    - [auto, c, trees]
+    - [auto, c, scenes]
+    - [auto, c, treasure]
+    - [auto, c, bushes]
+    - [auto, c, demo]
+  - name: jan_05
+    dir: world/area_jan/jan_05
+    type: code
     start: 0xB53E40
     vram: 0x80240000
-  - type: bin
-    name: jan_06
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, log]
+    - [auto, c, bushes]
+    - [auto, c, npc]
+    - [auto, c, trees]
+    - [auto, c, entity]
+  - name: jan_06
+    dir: world/area_jan/jan_06
+    type: code
     start: 0xB5BC00
     vram: 0x80240000
-  - type: bin
-    name: jan_07
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, statue]
+    - [auto, c, log]
+    - [auto, c, trees]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, bushes]
+  - name: jan_07
+    dir: world/area_jan/jan_07
+    type: code
     start: 0xB62C40
     vram: 0x80240000
-  - type: bin
-    name: jan_08
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, trees]
+    - [auto, c, bushes]
+  - name: jan_08
+    dir: world/area_jan/jan_08
+    type: code
     start: 0xB675C0
     vram: 0x80240000
-  - type: bin
-    name: jan_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, bushes]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, trees]
+  - name: jan_09
+    dir: world/area_jan/jan_09
+    type: code
     start: 0xB6EDC0
     vram: 0x80240000
-  - type: bin
-    name: jan_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, bushes]
+    - [auto, c, npc]
+    - [auto, c, trees]
+    - [auto, c, entity]
+  - name: jan_10
+    dir: world/area_jan/jan_10
+    type: code
     start: 0xB756A0
     vram: 0x80240000
-  - type: bin
-    name: jan_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, log]
+    - [auto, c, trees]
+    - [auto, c, bushes]
+    - [auto, c, entity]
+  - name: jan_11
+    dir: world/area_jan/jan_11
+    type: code
     start: 0xB79B70
     vram: 0x80240000
-  - type: bin
-    name: jan_12
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: jan_12
+    dir: world/area_jan/jan_12
+    type: code
     start: 0xB7C3C0
     vram: 0x80240000
-  - type: bin
-    name: jan_13
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, vines]
+    - [auto, c, trees]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: jan_13
+    dir: world/area_jan/jan_13
+    type: code
     start: 0xB7FAC0
     vram: 0x80240000
-  - type: bin
-    name: jan_14
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, puzzle]
+    - [auto, c, trees]
+    - [auto, c, entity]
+  - name: jan_14
+    dir: world/area_jan/jan_14
+    type: code
     start: 0xB83360
     vram: 0x80240000
-  - type: bin
-    name: jan_15
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, vines]
+    - [auto, c, trees]
+    - [auto, c, npc]
+  - name: jan_15
+    dir: world/area_jan/jan_15
+    type: code
     start: 0xB86C30
     vram: 0x80240000
-  - type: bin
-    name: jan_16
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, trees]
+    - [auto, c, entity]
+  - name: jan_16
+    dir: world/area_jan/jan_16
+    type: code
     start: 0xB89310
     vram: 0x80240000
-  - type: bin
-    name: jan_17
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, bushes]
+  - name: jan_17
+    dir: world/area_jan/jan_17
+    type: code
     start: 0xB8CAD0
     vram: 0x80240000
-  - type: bin
-    name: jan_18
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: jan_18
+    dir: world/area_jan/jan_18
+    type: code
     start: 0xB8CEA0
     vram: 0x80240000
-  - type: bin
-    name: jan_19
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: jan_19
+    dir: world/area_jan/jan_19
+    type: code
     start: 0xB8D170
     vram: 0x80240000
-  - type: bin
-    name: jan_22
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: jan_22
+    dir: world/area_jan/jan_22
+    type: code
     start: 0xB8D490
     vram: 0x80240000
-  - type: bin
-    name: jan_23
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, zipline]
+    - [auto, c, bushes]
+    - [auto, c, trees]
+  - name: jan_23
+    dir: world/area_jan/jan_23
+    type: code
     start: 0xB98FE0
     vram: 0x80240000
-  - type: bin
-    name: mim_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: mim_01
+    dir: world/area_mim/mim_01
+    type: code
     start: 0xB9C750
     vram: 0x80240000
-  - type: bin
-    name: mim_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, hint]
+    - [auto, c, gate]
+    - [auto, c, npc]
+  - name: mim_02
+    dir: world/area_mim/mim_02
+    type: code
     start: 0xBA0F10
     vram: 0x80240000
-  - type: bin
-    name: mim_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, gate]
+    - [auto, c, hint]
+  - name: mim_03
+    dir: world/area_mim/mim_03
+    type: code
     start: 0xBA4790
     vram: 0x80240000
-  - type: bin
-    name: mim_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, hint]
+    - [auto, c, gate]
+    - [auto, c, npc]
+  - name: mim_04
+    dir: world/area_mim/mim_04
+    type: code
     start: 0xBA6C70
     vram: 0x80240000
-  - type: bin
-    name: mim_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, hint]
+    - [auto, c, gate]
+    - [auto, c, npc]
+  - name: mim_05
+    dir: world/area_mim/mim_05
+    type: code
     start: 0xBA9A40
     vram: 0x80240000
-  - type: bin
-    name: mim_06
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, hint]
+    - [auto, c, gate]
+    - [auto, c, npc]
+  - name: mim_06
+    dir: world/area_mim/mim_06
+    type: code
     start: 0xBADA90
     vram: 0x80240000
-  - type: bin
-    name: mim_07
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, hint]
+    - [auto, c, gate]
+    - [auto, c, npc]
+  - name: mim_07
+    dir: world/area_mim/mim_07
+    type: code
     start: 0xBB3450
     vram: 0x80240000
-  - type: bin
-    name: mim_08
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, hint]
+    - [auto, c, gate]
+    - [auto, c, npc]
+  - name: mim_08
+    dir: world/area_mim/mim_08
+    type: code
     start: 0xBB6C10
     vram: 0x80240000
-  - type: bin
-    name: mim_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, gate]
+    - [auto, c, npc]
+  - name: mim_09
+    dir: world/area_mim/mim_09
+    type: code
     start: 0xBBC0D0
     vram: 0x80240000
-  - type: bin
-    name: mim_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, hint]
+    - [auto, c, gate]
+    - [auto, c, npc]
+  - name: mim_10
+    dir: world/area_mim/mim_10
+    type: code
     start: 0xBBECB0
     vram: 0x80240000
-  - type: bin
-    name: mim_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: mim_11
+    dir: world/area_mim/mim_11
+    type: code
     start: 0xBC0340
     vram: 0x80240000
-  - type: bin
-    name: mim_12
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, gate]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+  - name: mim_12
+    dir: world/area_mim/mim_12
+    type: code
     start: 0xBC4650
     vram: 0x80240000
-  - type: bin
-    name: obk_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, gate]
+  - name: obk_01
+    dir: world/area_obk/obk_01
+    type: code
     start: 0xBC6470
     vram: 0x80240000
-  - type: bin
-    name: obk_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, chandelier]
+    - [auto, c, portrait]
+    - [auto, c, jump_scare]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: obk_02
+    dir: world/area_obk/obk_02
+    type: code
     start: 0xBCBD60
     vram: 0x80240000
-  - type: bin
-    name: obk_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, bombable]
+    - [auto, c, clock]
+    - [auto, c, entity]
+  - name: obk_03
+    dir: world/area_obk/obk_03
+    type: code
     start: 0xBCD550
     vram: 0x80240000
-  - type: bin
-    name: obk_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, shop]
+    - [auto, c, entity]
+    - [auto, c, stairs]
+    - [auto, c, npc]
+    - [auto, c, rocking_chair]
+  - name: obk_04
+    dir: world/area_obk/obk_04
+    type: code
     start: 0xBD1130
     vram: 0x80240000
-  - type: bin
-    name: obk_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, main]
+    - [auto, c, hole]
+    - [auto, c, game]
+  - name: obk_05
+    dir: world/area_obk/obk_05
+    type: code
     start: 0xBD6330
     vram: 0x80240000
-  - type: bin
-    name: obk_06
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, rocking_chair]
+    - [auto, c, hole]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: obk_06
+    dir: world/area_obk/obk_06
+    type: code
     start: 0xBD7960
     vram: 0x80240000
-  - type: bin
-    name: obk_07
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, bombable]
+    - [auto, c, entity]
+  - name: obk_07
+    dir: world/area_obk/obk_07
+    type: code
     start: 0xBD7EC0
     vram: 0x80240000
-  - type: bin
-    name: obk_08
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, fireplace]
+    - [auto, c, npc]
+    - [auto, c, phonograph]
+  - name: obk_08
+    dir: world/area_obk/obk_08
+    type: code
     start: 0xBDCBB0
     vram: 0x80240000
-  - type: bin
-    name: obk_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, cabinets]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, game]
+  - name: obk_09
+    dir: world/area_obk/obk_09
+    type: code
     start: 0xBE3AF0
     vram: 0x80240000
-  - type: bin
-    name: arn_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, meet_bow]
+    - [auto, c, npc]
+    - [auto, c, new_partner]
+    - [auto, c, epilogue]
+  - name: arn_02
+    dir: world/area_arn/arn_02
+    type: code
     start: 0xBE64F0
     vram: 0x80240000
-  - type: bin
-    name: arn_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: arn_03
+    dir: world/area_arn/arn_03
+    type: code
     start: 0xBE80D0
     vram: 0x80240000
-  - type: bin
-    name: arn_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: arn_04
+    dir: world/area_arn/arn_04
+    type: code
     start: 0xBECAF0
     vram: 0x80240000
-  - type: bin
-    name: arn_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: arn_05
+    dir: world/area_arn/arn_05
+    type: code
     start: 0xBF0F20
     vram: 0x80240000
-  - type: bin
-    name: arn_07
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: arn_07
+    dir: world/area_arn/arn_07
+    type: code
     start: 0xBF6130
     vram: 0x80240000
-  - type: bin
-    name: arn_08
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, windmill]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: arn_08
+    dir: world/area_arn/arn_08
+    type: code
     start: 0xBFDAE0
     vram: 0x80240000
-  - type: bin
-    name: arn_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, well]
+    - [auto, c, gears]
+    - [auto, c, demo]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: arn_09
+    dir: world/area_arn/arn_09
+    type: code
     start: 0xBFF3A0
     vram: 0x80240000
-  - type: bin
-    name: arn_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, launch]
+    - [auto, c, npc]
+  - name: arn_10
+    dir: world/area_arn/arn_10
+    type: code
     start: 0xBFFD40
     vram: 0x80240000
-  - type: bin
-    name: arn_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: arn_11
+    dir: world/area_arn/arn_11
+    type: code
     start: 0xC009C0
     vram: 0x80240000
-  - type: bin
-    name: arn_12
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: arn_12
+    dir: world/area_arn/arn_12
+    type: code
     start: 0xC01AD0
     vram: 0x80240000
-  - type: bin
-    name: arn_13
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: arn_13
+    dir: world/area_arn/arn_13
+    type: code
     start: 0xC02750
     vram: 0x80240000
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
   - type: bin
     name: dgb_00
     start: 0xC033E0

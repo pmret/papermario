@@ -621,6 +621,9 @@ NpcData N(NpcData_Ravens)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
+#if VERSION_JP
+        .tattle = MSG_NpcTattle_0121,
+#endif
     },
     {
         .id = NPC_Raven_03,

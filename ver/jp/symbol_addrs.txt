@@ -4744,6 +4744,15 @@ D_80241D00 = 0x80241D00; // rom:0x909690
 kmr_22_lava_piranha_vine_gfx = 0x80241F00; // rom:0x909890
 iwa_01_splash_img = 0x802439C0; // type:func rom:0x91B910
 iwa_01_splash_gfx = 0x80243E00; // type:func rom:0x91BD50
+dro_02_card = 0x802475A0; // segment:dro_02 rom:0x979AA0
+dro_02_card_pal = 0x802477A0; // segment:dro_02 rom:0x979CA0
+dro_02_card_1_vtx = 0x802477C0; // segment:dro_02 rom:0x979CC0 size:0x80
+dro_02_card_2_vtx = 0x80247840; // segment:dro_02 rom:0x979D40 size:0x40
+dro_02_card_setup_gfx = 0x80247880; // rom:0x979D80
+dro_02_card_1_gfx = 0x80247970; // rom:0x979E70
+dro_02_card_2_gfx = 0x802479F0; // rom:0x979EF0
+tst_13_shockwave_vtx = 0x802422B0; // rom:0xB28EA0 segment:tst_13 size:0x5B0
+tst_13_shockwave_gfx = 0x80242860; // rom:0xB29450 segment:tst_13
 
 inspect_icon_img = 0x802B7A20; // rom:0xE299C0
 inspect_icon_gfx = 0x802B7C40; // rom:0xE29BE0

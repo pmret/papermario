@@ -34,6 +34,9 @@ EvtScript N(EVS_Main) = {
             Wait(30)
             Exec(N(EVS_Scene_PreTitle))
     EndSwitch
+#if VERSION_JP
+    Exec(N(EVS_SetupNarrator))
+#endif
     Return
     End
 };
