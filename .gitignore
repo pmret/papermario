@@ -58,3 +58,8 @@ build/
 *.crash
 
 /tools/n64crc
+
+# clangd
+.cache/clangd/
+# compile_commands.json requires hardcoded paths, so it can't be committed
+compile_commands.json
