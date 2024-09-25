@@ -9,9 +9,15 @@ s32 N(ShakeCamParams)[] = {
     22, Float(1.2),
     25, Float(1.05),
     24, Float(0.9),
+#if VERSION_JP
+    22, Float(0.75),
+    20, Float(0.6),
+    10, Float(1.5),
+#else
     25, Float(0.75),
     24, Float(0.6),
     10, Float(1.7),
+#endif
 };
 
 EvtScript N(EVS_MonitorFallingStairs) = {

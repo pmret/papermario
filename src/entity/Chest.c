@@ -4,11 +4,6 @@
 #include "entity.h"
 #include "sprite/player.h"
 
-#if VERSION_JP // TODO remove once segments are split
-extern Addr entity_model_Chest_ROM_END;
-extern Addr entity_model_Chest_ROM_START;
-#endif
-
 extern EntityScript Entity_Chest_ScriptOpened;
 
 extern Gfx Entity_Chest_RenderBox[];

@@ -87,8 +87,8 @@ EvtScript N(EVS_AnimatePlatforms) = {
             Set(LVarF, 0)
         EndIf
         SetF(LVar0, LVarA)
-        // the rest of the script is cut off halfway through the next SetF cmd
-    /*
+        // the rest of the script is cut off halfway through the next SetF cmd in other versions
+#if VERSION_JP
         SetF(LVar1, LVarB)
         SetF(LVar2, LVarC)
         SetF(LVar3, LVarD)
@@ -112,16 +112,18 @@ EvtScript N(EVS_AnimatePlatforms) = {
         Goto(0)
     Return
     End
-    */
+#endif
 };
 
+#if !VERSION_JP
 // half of SetF(LVar1, LVarB)
 s32 N(EVS_AnimatePlatforms_Fragment)[] = {
     EVT_OP_SETF, 2,
 };
+#endif
 
-// remaining data is truncated
-/*
+// remaining data is truncated in other versions
+#if VERSION_JP
 EvtScript N(EVS_AddPlayerWeight_Platform_01) = {
     Thread
         AddF(MV_Distortion_Platform_01, Float(-1.5))
@@ -167,10 +169,10 @@ EvtScript N(EVS_SetupClouds) = {
     Call(ParentColliderToModel, COLLIDER_o78, MODEL_g21)
     Call(ParentColliderToModel, COLLIDER_o76, MODEL_g22)
     Call(ParentColliderToModel, COLLIDER_o79, MODEL_g23)
-    Call(SetModelFlags, MODEL_g17, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
-    Call(SetModelFlags, MODEL_g21, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
-    Call(SetModelFlags, MODEL_g22, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
-    Call(SetModelFlags, MODEL_g23, MODEL_FLAG_USE_CAMERA_UNK_MATRIX, TRUE)
+    Call(SetModelFlags, MODEL_g17, MODEL_FLAG_BILLBOARD, TRUE)
+    Call(SetModelFlags, MODEL_g21, MODEL_FLAG_BILLBOARD, TRUE)
+    Call(SetModelFlags, MODEL_g22, MODEL_FLAG_BILLBOARD, TRUE)
+    Call(SetModelFlags, MODEL_g23, MODEL_FLAG_BILLBOARD, TRUE)
     Exec(N(EVS_AnimatePlatforms))
     BindTrigger(Ref(N(EVS_AddPlayerWeight_Platform_01)), TRIGGER_FLOOR_TOUCH, COLLIDER_o77, 1, 0)
     BindTrigger(Ref(N(EVS_AddPlayerWeight_Platform_02)), TRIGGER_FLOOR_TOUCH, COLLIDER_o78, 1, 0)
@@ -199,4 +201,4 @@ EvtScript N(EVS_SetupClouds) = {
     Return
     End
 };
-*/
+#endif

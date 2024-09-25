@@ -93,11 +93,13 @@ EvtScript N(EVS_EnterMap) = {
 
 EvtScript N(EVS_PushRightStatue_Impl) = {
     Loop(30)
+#if !VERSION_JP
         Call(GetPartnerInUse, LVarA)
         IfNe(LVarA, PARTNER_NONE)
             Set(LVar8, -1)
             Return
         EndIf
+#endif
         Call(N(UnkFunc11), LVar9)
         IfEq(LVar0, 0)
             Set(LVar8, -1)
@@ -107,11 +109,13 @@ EvtScript N(EVS_PushRightStatue_Impl) = {
         EndIf
         Wait(1)
     EndLoop
+#if !VERSION_JP
     Call(GetPartnerInUse, LVarA)
     IfNe(LVarA, PARTNER_NONE)
         Set(LVar8, -1)
         Return
     EndIf
+#endif
     Call(DisablePlayerInput, TRUE)
     Thread
         Call(ShakeCam, CAM_DEFAULT, 0, 100, Float(0.6))

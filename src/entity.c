@@ -20,15 +20,6 @@ extern Addr WorldEntityHeapBase;
 #define entity_default_VRAM (void*) 0x802BAE00
 #endif
 
-#if VERSION_JP // TODO remove once segments are split
-extern Addr entity_default_ROM_END;
-extern Addr entity_default_ROM_START;
-extern Addr entity_jan_iwa_ROM_END;
-extern Addr entity_jan_iwa_ROM_START;
-extern Addr entity_sbk_omo_ROM_END;
-extern Addr entity_sbk_omo_ROM_START;
-#endif
-
 s32 D_8014AFB0 = 255;
 
 s32 CreateEntityVarArgBuffer[4];

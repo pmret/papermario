@@ -5,7 +5,11 @@
 EvtScript N(D_8024262C_DEE4FC) = {
     Call(GetEntryID, LVar0)
     IfEq(LVar0, omo_16_ENTRY_0)
+#if VERSION_JP
+        Wait(200)
+#else
         Wait(140)
+#endif
         Switch(GB_OMO_TrainDestination)
             CaseEq(0)
                 IfEq(AB_OMO_6, 1)
@@ -25,7 +29,11 @@ EvtScript N(D_8024262C_DEE4FC) = {
                 EndIf
         EndSwitch
     Else
+#if VERSION_JP
+        Wait(200)
+#else
         Wait(140)
+#endif
         Switch(GB_OMO_TrainDestination)
             CaseEq(0)
                 IfEq(AB_OMO_6, 0)

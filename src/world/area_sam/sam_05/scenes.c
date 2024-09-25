@@ -43,7 +43,11 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
     DivF(LVar2, Float(2.0))
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+#if VERSION_JP
+    Call(SetCamDistance, CAM_DEFAULT, Float(375.0))
+#else
     Call(SetCamDistance, CAM_DEFAULT, Float(425.0))
+#endif
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-9.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
@@ -199,6 +203,9 @@ EvtScript N(EVS_StarKidsFlee) = {
             BreakLoop
         EndIf
         Call(SetNpcPos, LVar0, LVar1, LVar2, LVar3)
+#if VERSION_JP
+        Call(EnableNpcShadow, LVar0, TRUE)
+#endif
     EndLoop
     Call(PlaySoundAtNpc, NPC_Monstar, SOUND_MONSTAR_BREAKS_APART, SOUND_SPACE_DEFAULT)
     Thread
@@ -242,8 +249,10 @@ EvtScript N(EVS_StarKidsFlee) = {
 
 EvtScript N(EVS_Scene_MonstarDefeated) = {
     Call(ClearDefeatedEnemies)
+#if !VERSION_JP
     Call(SetNpcFlagBits, NPC_Monstar, NPC_FLAG_GRAVITY, FALSE)
     Call(SetNpcPos, NPC_Monstar, 615, 87, -4)
+#endif
     Call(SetNpcAnimation, NPC_SELF, ANIM_Monstar_Flail)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(GetNpcPos, NPC_Monstar, LVar3, LVar4, LVar5)

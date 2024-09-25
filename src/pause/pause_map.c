@@ -4,6 +4,9 @@
 #if VERSION_PAL
 #define MAP_TITLE_X 36
 #define MAP_TITLE_WIDTH 220
+#elif VERSION_JP
+#define MAP_TITLE_X 86
+#define MAP_TITLE_WIDTH 120
 #else
 #define MAP_TITLE_X 56
 #define MAP_TITLE_WIDTH 180

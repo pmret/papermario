@@ -364,7 +364,11 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     currentBadgeRow = gPauseBadgesSelectedIndex % currentPage->numCols;
 
     draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_15, baseX + 84, baseY, 0, width - 84, height, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+#if VERSION_JP
+    hud_element_set_render_pos(gPauseBadgesIconIDs[20], baseX + 215, baseY + 11);
+#else
     hud_element_set_render_pos(gPauseBadgesIconIDs[20], baseX + 241, baseY + 11);
+#endif
     palette = MSG_PAL_STANDARD;
     hud_element_draw_without_clipping(gPauseBadgesIconIDs[20]);
 
@@ -483,7 +487,11 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                                         badgeListY + pause_badges_scroll_offset_y(posY) + badgeEntryOffsetY, 255, palette, style);
                             }
                         }
+#if VERSION_JP
+                        draw_number(gMoveTable[gItemTable[badgeID].moveID].costBP, baseX + 211 + pause_badges_scroll_offset_x(posX),
+#else
                         draw_number(gMoveTable[gItemTable[badgeID].moveID].costBP, baseX + 235 + pause_badges_scroll_offset_x(posX),
+#endif
                                     baseY + 17 + pause_badges_scroll_offset_y(posY), DRAW_NUMBER_CHARSET_THIN, palette, 255, DRAW_NUMBER_STYLE_ALIGN_RIGHT | DRAW_NUMBER_STYLE_MONOSPACE);
                     }
                 }
@@ -537,12 +545,18 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                     if (isEquipped == 0) {
                         for (j = 0; j < numOrbs; j++) {
                             gDPSetPrimColor(gMainGfxPos++, 0, 0, 227, 227, 227, 255);
+#if VERSION_JP
+                            pause_badges_draw_bp_orbs(0,
+                                baseX + 211 + pause_badges_scroll_offset_x(posX) + 1 + (j % 10) * 6,
+                                baseY + 17 + pause_badges_scroll_offset_y(posY) + orbOffsetY + (j / 10) * 7);
+#else
                             orbX = baseX + 235 + pause_badges_scroll_offset_x(posX) + 1 + (j % 5) * 6;
                             orbY = baseY + 17 + pause_badges_scroll_offset_y(posY) + orbOffsetY;
                             if (numOrbs >= 5) {
                                 orbY += j / 5 * 6 - 3;
                             }
                             pause_badges_draw_bp_orbs(0, orbX, orbY);
+#endif
                         }
 
                         gDPPipeSync(gMainGfxPos++);
@@ -551,23 +565,35 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
 
                         for (j = 0; j < numOrbs; j++) {
                             if (j < bpAvailable) {
+#if VERSION_JP
+                                pause_badges_draw_bp_orbs(1,
+                                    baseX + 211 + pause_badges_scroll_offset_x(posX) + 1 + (j % 10) * 6,
+                                    baseY + 17 + pause_badges_scroll_offset_y(posY) + orbOffsetY + (j / 10) * 7);
+#else
                                 orbX = baseX + 235 + pause_badges_scroll_offset_x(posX) + 1 + (j % 5) * 6;
                                 orbY = baseY + 17 + pause_badges_scroll_offset_y(posY) + orbOffsetY;
                                 if (numOrbs >= 5) {
                                     orbY += j / 5 * 6 - 3;
                                 }
                                 pause_badges_draw_bp_orbs(1, orbX, orbY);
+#endif
                             }
                         }
                     } else {
                         gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 255, 100, 255);
                         for (j = 0; j < numOrbs; j++) {
+#if VERSION_JP
+                            pause_badges_draw_bp_orbs(2,
+                                baseX + 211 + pause_badges_scroll_offset_x(posX) + 1 + (j % 10) * 6,
+                                baseY + 17 + pause_badges_scroll_offset_y(posY) + orbOffsetY + (j / 10) * 7);
+#else
                             orbX = baseX + 235 + pause_badges_scroll_offset_x(posX) + 1 + (j % 5) * 6;
                             orbY = baseY + 17 + pause_badges_scroll_offset_y(posY) + orbOffsetY;
                             if (numOrbs >= 5) {
                                 orbY += j / 5 * 6 - 3;
                             }
                             pause_badges_draw_bp_orbs(2, orbX, orbY);
+#endif
                         }
                         gDPPipeSync(gMainGfxPos++);
                     }
@@ -624,13 +650,19 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     if (bpAmount < 10) {
         bpAvailOffsetX = -4;
     }
+#if VERSION_JP
+    pause_draw_menu_label(PAUSE_LBL_AVAILABLE, baseX + 15, baseY + 100 + bpAvailOffsetY);
+#else
     pause_draw_menu_label(PAUSE_LBL_AVAILABLE, baseX + 12, baseY + 100 + bpAvailOffsetY);
+#endif
 
 #if VERSION_PAL
     bpAmountX = baseX + (73 + bpAvailOffsetX);
     if (gCurrentLanguage == LANGUAGE_ES) {
         bpAmountX += 8;
     }
+#elif VERSION_JP
+    bpAmountX = baseX + 62 + bpAvailOffsetX;
 #else
     bpAmountX = baseX + 73 + bpAvailOffsetX;
 #endif
@@ -676,7 +708,11 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     }
 
     draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_13, gPauseBadgesCurrentTab == 0 ? baseX + 9 : baseX, baseY + 7, 0,
+#if VERSION_JP
+         87, 34, 255, gPauseBadgesCurrentTab == 1 ? 128 : 0, 0, 0,
+#else
          91, 34, 255, gPauseBadgesCurrentTab == 1 ? 128 : 0, 0, 0,
+#endif
          0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
 #if VERSION_PAL
@@ -728,6 +764,33 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     draw_msg(msg2, msgX, baseY + 42, gPauseBadgesCurrentTab == 0 ? 191 : 255, 0, 1);
 
     draw_msg(pause_get_menu_msg(PAUSE_MSG_BADGES), (gPauseBadgesCurrentTab == 1) ? baseX + D_PAL_80271B2C[gCurrentLanguage] + 9 :baseX + D_PAL_80271B2C[gCurrentLanguage], baseY + 52, gPauseBadgesCurrentTab == 0 ? 191 : 255, 0, 1);
+#elif VERSION_JP
+    msg = pause_get_menu_msg(PAUSE_MSG_ALL_BADGES);
+    msgX = baseX + 12;
+    if (gPauseBadgesCurrentTab == 0) {
+        msgX = baseX + 21;
+    }
+    msgOpacity = 255;
+    msgY = baseY + 17;
+    if (gPauseBadgesCurrentTab == 1) {
+        msgOpacity = 191;
+    }
+    draw_msg(msg, msgX, msgY, msgOpacity, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+
+    draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_13, gPauseBadgesCurrentTab == 1 ? baseX + 9 : baseX, baseY + 39, 0, 87, 34, 255,
+            gPauseBadgesCurrentTab == 0 ? 128 : 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+
+    msg = pause_get_menu_msg(PAUSE_MSG_ACTIVE);
+    msgX = baseX + 8;
+    if (gPauseBadgesCurrentTab == 1) {
+        msgX = baseX + 17;
+    }
+    msgY = baseY + 49;
+    msgOpacity = 255;
+    if (gPauseBadgesCurrentTab == 0) {
+        msgOpacity = 191;
+    }
+    draw_msg(msg, msgX, msgY, msgOpacity, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
 #else
     msg = pause_get_menu_msg(PAUSE_MSG_ALL_BADGES);
     msgX = baseX + 10;
@@ -801,6 +864,11 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                      0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
             draw_msg(pause_get_menu_msg(PAUSE_MSG_NOT_ENOUGH_BP), baseX + (292 - wid) / 2, baseY + 66, 255,
                      MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+#elif VERSION_JP
+            draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_13, baseX + 67, baseY + 60, 0, 137, 26, 255,
+                     0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+            draw_msg(pause_get_menu_msg(PAUSE_MSG_NOT_ENOUGH_BP), baseX + 78, baseY + 66, 255,
+                     MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
 #else
             draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_13, baseX + 67, baseY + 60, 0, 137, 26, 255,
                      0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
@@ -810,8 +878,13 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
         } else {
             draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_13, baseX + 67, baseY + 60, 0, 173, 26, 255,
                      0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+#if VERSION_JP
+            draw_msg(pause_get_menu_msg(PAUSE_MSG_DONT_WEAR_MORE), baseX + 78, baseY + 66, 255,
+                     MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+#else
             draw_msg(pause_get_menu_msg(PAUSE_MSG_DONT_WEAR_MORE), baseX + 90, baseY + 66, 255,
                      MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+#endif
         }
     }
 }

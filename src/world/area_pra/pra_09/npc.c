@@ -561,7 +561,9 @@ EvtScript N(EVS_ManageImpostersScene) = {
                         Call(EnablePartnerAI)
                         Call(DisablePlayerInput, FALSE)
                         Set(GB_StoryProgress, STORY_CH7_DEFEATED_BOMBETTE_DUPLIGHOSTS)
+#if !VERSION_JP
                         BindTrigger(Ref(N(EVS_ExitWalk_pra_11_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilise, 1, 0)
+#endif
                         BreakLoop
                     EndIf
                 EndIf
@@ -650,7 +652,9 @@ EvtScript N(EVS_NpcDefeat_Duplighost_05) = {
     Call(EnablePartnerAI)
     Call(DisablePlayerInput, FALSE)
     Set(GB_StoryProgress, STORY_CH7_DEFEATED_BOMBETTE_DUPLIGHOSTS)
+#if !VERSION_JP
     BindTrigger(Ref(N(EVS_ExitWalk_pra_11_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilise, 1, 0)
+#endif
     Return
     End
 };

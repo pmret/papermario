@@ -104,7 +104,9 @@ s32 N(Kolorado_Wander2)[] = {
 };
 
 EvtScript N(EVS_Kolorado_CalmIdle) = {
+#if !VERSION_JP
     SetGroup(EVT_GROUP_EF)
+#endif
     Label(0)
     Call(RandInt, 1, LVar1)
     IfEq(LVar1, 0)
@@ -112,7 +114,11 @@ EvtScript N(EVS_Kolorado_CalmIdle) = {
     Else
         UseBuf(N(Kolorado_Wander2))
     EndIf
+#if VERSION_JP
+    Label(0)
+#else
     Label(10)
+#endif
         BufRead3(LVar1, LVar2, LVar3)
         IfEq(LVar1, -1)
             Goto(0)
@@ -135,7 +141,11 @@ EvtScript N(EVS_Kolorado_CalmIdle) = {
             Wait(20)
         EndLoop
         Wait(LVar2)
+#if VERSION_JP
+    Goto(0)
+#else
     Goto(10)
+#endif
     Return
     End
 };

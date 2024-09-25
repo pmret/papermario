@@ -357,41 +357,61 @@ EvtScript N(EVS_GenericHitReaction) = {
 };
 
 EvtScript N(EVS_HitReaction_Magikoopa) = {
+#if VERSION_JP
+    Set(MV_ReactingNpc, 0)
+    ExecWait(N(EVS_GenericHitReaction))
+#else
     IfEq(MV_ReactingNpc, -1)
         Set(MV_ReactingNpc, 0)
         ExecWait(N(EVS_GenericHitReaction))
         Set(MV_ReactingNpc, -1)
     EndIf
+#endif
     Return
     End
 };
 
 EvtScript N(EVS_HitReaction_Lakitu_01) = {
+#if VERSION_JP
+    Set(MV_ReactingNpc, 1)
+    ExecWait(N(EVS_GenericHitReaction))
+#else
     IfEq(MV_ReactingNpc, -1)
         Set(MV_ReactingNpc, 1)
         ExecWait(N(EVS_GenericHitReaction))
         Set(MV_ReactingNpc, -1)
     EndIf
+#endif
     Return
     End
 };
 
 EvtScript N(EVS_HitReaction_Lakitu_02) = {
+#if VERSION_JP
+    Set(MV_ReactingNpc, 2)
+    ExecWait(N(EVS_GenericHitReaction))
+#else
     IfEq(MV_ReactingNpc, -1)
         Set(MV_ReactingNpc, 2)
         ExecWait(N(EVS_GenericHitReaction))
         Set(MV_ReactingNpc, -1)
     EndIf
+#endif
     Return
     End
 };
 
 EvtScript N(EVS_HitReaction_Lakitu_03) = {
+#if VERSION_JP
+    Set(MV_ReactingNpc, 3)
+    ExecWait(N(EVS_GenericHitReaction))
+#else
     IfEq(MV_ReactingNpc, -1)
         Set(MV_ReactingNpc, 3)
         ExecWait(N(EVS_GenericHitReaction))
         Set(MV_ReactingNpc, -1)
     EndIf
+#endif
     Return
     End
 };
@@ -422,45 +442,69 @@ EvtScript N(EVS_GenericBombReaction) = {
 };
 
 EvtScript N(EVS_BombReaction_Magikoopa) = {
+#if VERSION_JP
+    Set(MV_ReactingNpc, 0)
+    Call(GetNpcPos, NPC_Magikoopa, LVar0, LVar1, LVar2)
+    ExecWait(N(EVS_GenericBombReaction))
+#else
     IfEq(MV_ReactingNpc, -1)
         Set(MV_ReactingNpc, 0)
         Call(GetNpcPos, NPC_Magikoopa, LVar0, LVar1, LVar2)
         ExecWait(N(EVS_GenericBombReaction))
         Set(MV_ReactingNpc, -1)
     EndIf
+#endif
     Return
     End
 };
 
 EvtScript N(EVS_BombReaction_Lakitu_01) = {
+#if VERSION_JP
+    Set(MV_ReactingNpc, 1)
+    Call(GetNpcPos, NPC_Lakitu_01, LVar0, LVar1, LVar2)
+    ExecWait(N(EVS_GenericBombReaction))
+#else
     IfEq(MV_ReactingNpc, -1)
         Set(MV_ReactingNpc, 1)
         Call(GetNpcPos, NPC_Lakitu_01, LVar0, LVar1, LVar2)
         ExecWait(N(EVS_GenericBombReaction))
         Set(MV_ReactingNpc, -1)
     EndIf
+#endif
     Return
     End
 };
 
 EvtScript N(EVS_BombReaction_Lakitu_02) = {
+#if VERSION_JP
+    Set(MV_ReactingNpc, 2)
+    Call(GetNpcPos, NPC_Lakitu_02, LVar0, LVar1, LVar2)
+    ExecWait(N(EVS_GenericBombReaction))
+#else
     IfEq(MV_ReactingNpc, -1)
         Set(MV_ReactingNpc, 2)
         Call(GetNpcPos, NPC_Lakitu_02, LVar0, LVar1, LVar2)
         ExecWait(N(EVS_GenericBombReaction))
         Set(MV_ReactingNpc, -1)
     EndIf
+#endif
     Return
     End
 };
 
 EvtScript N(EVS_BombReaction_Lakitu_03) = {
+#if VERSION_JP
+    Set(MV_ReactingNpc, 3)
+    Call(GetNpcPos, NPC_Lakitu_03, LVar0, LVar1, LVar2)
+    ExecWait(N(EVS_GenericBombReaction))
+#else
     IfEq(MV_ReactingNpc, -1)
         Set(MV_ReactingNpc, 3)
         Call(GetNpcPos, NPC_Lakitu_03, LVar0, LVar1, LVar2)
         ExecWait(N(EVS_GenericBombReaction))
         Set(MV_ReactingNpc, -1)
     EndIf
+#endif
     Return
     End
 };
@@ -486,7 +530,9 @@ BombTrigger N(Npc_BombTrigger_04) = {
 };
 
 EvtScript N(EVS_SetupMachineDamageReactions) = {
+#if !VERSION_JP
     Set(MV_ReactingNpc, -1)
+#endif
     BindTrigger(Ref(N(EVS_HitReaction_Magikoopa)),  TRIGGER_WALL_HAMMER, COLLIDER_o174, 1, 0)
     BindTrigger(Ref(N(EVS_HitReaction_Magikoopa)),  TRIGGER_WALL_HAMMER, COLLIDER_o130, 1, 0)
     BindTrigger(Ref(N(EVS_BombReaction_Magikoopa)), TRIGGER_POINT_BOMB,  Ref(N(Npc_BombTrigger_02)), 1, 0)

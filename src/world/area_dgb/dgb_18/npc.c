@@ -405,7 +405,11 @@ EvtScript N(EVS_Scene_YakkeyShouts) = {
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Set(MF_Sync_YakkeyDialogue, FALSE)
+#if VERSION_JP
+        Call(ShowMessageAtScreenPos, MSG_CH3_00FA, 160, 40)
+#else
         Call(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 517, MSG_CH3_00FA)
+#endif
         Set(MF_Sync_YakkeyDialogue, TRUE)
     EndThread
     Call(GetPlayerPos, LVar0, LVar1, LVar2)

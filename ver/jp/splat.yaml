@@ -823,6 +823,14 @@ segments:
       - [0xE86A0, vtx, vtx/stencil2]
       - [0xE8820]
 
+  - name: heaps
+    type: code
+    start: 0xEB1A0
+    vram: 0x80197000
+    subalign: 0x1000
+    subsegments:
+    - [auto, c, heaps]
+
   - name: evt
     dir: evt
     type: code
@@ -959,6 +967,12 @@ segments:
       - [auto, palette, ui/msg/rewind_arrow]
       - [auto, rgba16, ui/msg/star, 16, 18]
       - [auto, i4, ui/msg/star_silhouette, 16, 20]
+  - type: code
+    name: heaps3
+    start: 0x10F330
+    vram: 0x802FB800
+    subsegments:
+    - [auto, c, heaps3]
   - type: code
     dir: charset
     vram: 0
@@ -1156,8 +1170,58 @@ segments:
     - [auto, ci4, ui/pause/unused_bubble, 56, 16]
     - [auto, palette, ui/pause/unused_bubble]
     - [auto, .data, menu_hud_scripts]
+  - type: code
+    dir: pause
+    start: 0x13E130
+    vram: 0x80242370
+    subsegments:
+    - [auto, c, pause_main]
+    - [auto, c, pause_tabs]
+    - [auto, c, pause_stats]
+    - [auto, c, pause_badges]
+    - [auto, c, pause_items]
+    - [auto, c, pause_partners]
+    - [auto, c, pause_spirits]
+    - [auto, c, pause_map]
+    - [auto, c, pause_gfx]
+    - [auto, c, pause_styles]
+    - start: 0x14BB90
+      type: .data
+      name: pause_gfx
+      subsegments:
+      - [0x14BB90, ia8,        image_1439F0, 16, 32]
+      - [0x14BD90, ia8,        image_143BF0, 16, 64]
+      - [0x14C190, ia8,        image_143FF0, 16, 64]
+      - [0x14C590, ci8,        world_map, 320, 320]
+      - [0x165590, palette,    world_map]
+      - [0x165790, ci4,        spirits_bg, 128, 110]
+      - [0x167310, palette,    spirits_bg]
+      - [0x167510, rgba16,     orbs, 8, 32]
+      - [0x167710, ia8,        map_location, 16, 16]
+      - [0x167810, ia8,        map_path_marker, 16, 16]
+      - [0x167910, ia4,        map_arrows, 16, 64]
+      - [0x167B10, ci4,        banner_hp, 64, 16]
+      - [0x167D10, palette,    banner_hp]
+      - [0x167F10, ci4,        banner_fp, 64, 16]
+      - [0x168110, palette,    banner_fp]
+      - [0x168310, ci4,        banner_bp, 64, 16]
+      - [0x168510, palette,    banner_bp]
+      - [0x168710, ci4,        banner_boots, 48, 16]
+      - [0x168890, palette,    banner_boots]
+      - [0x168A90, ci4,        banner_hammer, 48, 16]
+      - [0x168C10, palette,    banner_hammer]
+      - [0x168E10, ci4,        stats_bar, 160, 8]
+      - [0x169090, palette,    stats_bar]
+      - [0x169290, ci4,        banner_star_energy, 48, 16]
+      - [0x169410, palette,    banner_star_energy]
+      - [0x169610, ci4,        available, 64, 16]
+      - [0x169810, palette,    available]
+      - [0x169A10, ci4,        prompt_check_abilities, 128, 16]
+      - [0x169E10, palette,    prompt_check_abilities]
+      - [0x16A010, .data,      pause_gfx]
+    - [0x16B3F0]
 
-  - [0x13E130, bin]
+  - [0x16B550, bin]
 
   - name: battle_code
     type: code
@@ -1400,9 +1464,37 @@ segments:
     - ["flip_card_3", 0xC6150]
     - ["cymbal_crush", 0xCA380]
   - [0x31DF90, pm_sprite_shading_profiles, sprite_shading_profiles]
-
-  - [0x31EE00, bin]
-
+  - type: code
+    start: 0x31EE00
+    name: create_audio_system_obfuscated
+    vram: 0x80200000
+    subsegments:
+    - [auto, c, create_audio_system_obfuscated]
+  - type: code
+    start: 0x31EE80
+    vram: 0x80200080
+    name: load_engine_data_obfuscated
+    follows_vram: create_audio_system_obfuscated
+    subsegments:
+    - [auto, c, load_engine_data_obfuscated]
+  - type: code
+    start: 0x31F010
+    name: general_heap_create_obfuscated
+    vram: 0x802AE000
+    subsegments:
+    - [auto, c, general_heap_create_obfuscated]
+  - type: code
+    start: 0x31F1A0
+    name: battle_heap_create_obfuscated
+    vram: 0x802AE000
+    subsegments:
+    - [auto, c, battle_heap_create_obfuscated]
+  - type: code
+    start: 0x31F340
+    name: obfuscation_shims
+    vram: 0x802B2000
+    subsegments:
+    - [auto, c, obfuscation_shims]
   - type: code
     dir: world/partner
     name: world_partner_goombario
@@ -5541,8 +5633,12 @@ segments:
 #######################
 ### Action Commands ###
 #######################
-  - [0x41D750, bin]
-
+  - type: code
+    start: 0x41D750
+    vram: 0x802A1000
+    name: btl_states_menus
+    subsegments:
+    - [auto, c, battle/btl_states_menus]
   - type: code
     start: 0x429330
     vram: 0x802A9000
@@ -11079,504 +11175,1886 @@ segments:
     - [auto, c, main]
     - [auto, c, npc]
     - [auto, c, entity]
-  - type: bin
-    name: dgb_00
+  - name: dgb_00
+    dir: world/area_dgb/dgb_00
+    type: code
     start: 0xC033E0
     vram: 0x80240000
-  - type: bin
-    name: dgb_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: dgb_01
+    dir: world/area_dgb/dgb_01
+    type: code
     start: 0xC06BC0
     vram: 0x80240000
-  - [ 0xC2A280, bin ]
-  - type: bin
-    name: dgb_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, bridges]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, img0]
+    - [auto, c, img1]
+    - [auto, c, img2]
+    - [auto, c, img3]
+    - [auto, c, img4]
+    - [auto, c, img5]
+    - [auto, c, img6]
+    - [auto, c, img7]
+    - [auto, c, gfx]
+    - start: 0xC0DB30
+      type: .data
+      name: img0
+      subsegments:
+      - [0xC0DB30, rgba16, img0, 64, 32]
+      - [0xC0EB30, gfx, img0]
+    - start: 0xC0EBB0
+      type: .data
+      name: img1
+      subsegments:
+      - [0xC0EBB0, rgba16, img1, 64, 32]
+      - [0xC0FBB0, gfx, img1]
+    - start: 0xC0FC30
+      type: .data
+      name: img2
+      subsegments:
+      - [0xC0FC30, rgba16, img2, 32, 32]
+      - [0xC10430, gfx, img2]
+    - start: 0xC104B0
+      type: .data
+      name: img3
+      subsegments:
+      - [0xC104B0, rgba16, img3, 16, 32]
+      - [0xC108B0, gfx, img3]
+    - start: 0xC10930
+      type: .data
+      name: img4
+      subsegments:
+      - [0xC10930, rgba16, img4, 16, 32]
+      - [0xC10D30, gfx, img4]
+    - start: 0xC10DB0
+      type: .data
+      name: img5
+      subsegments:
+      - [0xC10DB0, rgba16, img5, 16, 32]
+      - [0xC111B0, gfx, img5]
+    - start: 0xC11230
+      type: .data
+      name: img6
+      subsegments:
+      - [0xC11230, rgba16, img6, 32, 32]
+      - [0xC11A30, gfx, img6]
+    - start: 0xC11AB0
+      type: .data
+      name: img7
+      subsegments:
+      - [0xC11AB0, rgba16, img7, 32, 32]
+      - [0xC122B0, gfx, img7]
+    - [0xC12330, .data, gfx] # TODO needs additional cleanup and gfx splitting
+    - [0xC29FB0]
+  - name: dgb_01_smash_bridges # DMAd at the beginning of tubba blubba's castle (bridge cutscene)
+    type: code
+    dir: world/area_dgb
+    start: 0xC2A280
+    vram: 0x80200000
+    subsegments:
+    - [auto, c, smash_bridges]
+    - start: 0xC2A280
+      type: .data
+      name: smash_bridges
+      subsegments:
+      - [0xC2A280, vtx, vtx/C20F40]
+      - [0xC2A440, vtx, vtx/C21100]
+      - [0xC2A470, vtx, vtx/C21130]
+      - [0xC2A520, vtx, vtx/C211E0]
+      - [0xC2A530, vtx, vtx/C211F0]
+      - [0xC2A580, vtx, vtx/C21240]
+      - [0xC2A6A0, vtx, vtx/C21360]
+      - [0xC2A700, vtx, vtx/C213C0]
+      - [0xC2A8E0, vtx, vtx/C215A0]
+      - [0xC2AA40, vtx, vtx/C21700]
+      - [0xC2AAB0, vtx, vtx/C21770]
+      - [0xC2AB50, vtx, vtx/C21810]
+      - [0xC2AC70, vtx, vtx/C21930]
+      - [0xC2AE20, vtx, vtx/C21AE0]
+      - [0xC2AE60, vtx, vtx/C21B20]
+      - [0xC2AF10, vtx, vtx/C21BD0]
+      - [0xC2AFD0, vtx, vtx/C21C90]
+      - [0xC2B070, vtx, vtx/C21D30]
+      - [0xC2B110, vtx, vtx/C21DD0]
+      - [0xC2B140, vtx, vtx/C21E00]
+      - [0xC2B270, vtx, vtx/C21F30]
+      - [0xC2B390, vtx, vtx/C22050]
+      - [0xC2B4D0, vtx, vtx/C22190]
+      - [0xC2B610, vtx, vtx/C222D0]
+      - [0xC2B670, vtx, vtx/C22330]
+      - [0xC2B7E0, vtx, vtx/C224A0]
+      - [0xC2B820, vtx, vtx/C224E0]
+      - [0xC2B850, vtx, vtx/C22510]
+      - [0xC2B960, vtx, vtx/C22620]
+      - [0xC2BAC0, vtx, vtx/C22780]
+      - [0xC2BB50, vtx, vtx/C22810]
+      - [0xC2BBB0, vtx, vtx/C22870]
+      - [0xC2BC30, vtx, vtx/C228F0]
+      - [0xC2BC90, vtx, vtx/C22950]
+      - [0xC2BD30, vtx, vtx/C229F0]
+      - [0xC2BE40, vtx, vtx/C22B00]
+      - [0xC2BF40, vtx, vtx/C22C00]
+      - [0xC2C140, vtx, vtx/C22E00]
+      - [0xC2C200, vtx, vtx/C22EC0]
+      - [0xC2C3E0, vtx, vtx/C230A0]
+      - [0xC2C580, vtx, vtx/C23240]
+      - [0xC2C5A0, vtx, vtx/C23260]
+      - [0xC2C5E0, vtx, vtx/C232A0]
+      - [0xC2C670, vtx, vtx/C23330]
+      - [0xC2C710, vtx, vtx/C233D0]
+      - [0xC2C7C0, vtx, vtx/C23480]
+      - [0xC2C7F0, vtx, vtx/C234B0]
+      - [0xC2C900, vtx, vtx/C235C0]
+      - [0xC2CA20, vtx, vtx/C236E0]
+      - [0xC2CB50, vtx, vtx/C23810]
+      - [0xC2CBF0, vtx, vtx/C238B0]
+      - [0xC2CD10, vtx, vtx/C239D0]
+      - [0xC2CDB0, vtx, vtx/C23A70]
+      - [0xC2CEB0, vtx, vtx/C23B70]
+      - [0xC2CEE0, vtx, vtx/C23BA0]
+      - [0xC2CFB0, vtx, vtx/C23C70]
+      - [0xC2CFD0, vtx, vtx/C23C90]
+      - [0xC2D020, vtx, vtx/C23CE0]
+      - [0xC2D060, vtx, vtx/C23D20]
+      - [0xC2D0A0, vtx, vtx/C23D60]
+      - [0xC2D110, vtx, vtx/C23DD0]
+      - [0xC2D140, vtx, vtx/C23E00]
+      - [0xC2D160, vtx, vtx/C23E20]
+      - [0xC2D190, vtx, vtx/C23E50]
+      - [0xC2D250, vtx, vtx/C23F10]
+      - [0xC2D310, vtx, vtx/C23FD0]
+      - [0xC2D410, vtx, vtx/C240D0]
+      - [0xC2D510, vtx, vtx/C241D0]
+      - [0xC2D690, vtx, vtx/C24350]
+      - [0xC2D850, vtx, vtx/C24510]
+      - [0xC2D880, vtx, vtx/C24540]
+      - [0xC2D940, vtx, vtx/C24600]
+      - [0xC2D9D0, vtx, vtx/C24690]
+      - [0xC2DA60, vtx, vtx/C24720]
+      - [0xC2DA70, vtx, vtx/C24730]
+      - [0xC2DB80, vtx, vtx/C24840]
+      - [0xC2DCA0, vtx, vtx/C24960]
+      - [0xC2DCC0, vtx, vtx/C24980]
+      - [0xC2DE10, vtx, vtx/C24AD0]
+      - [0xC2DE30, vtx, vtx/C24AF0]
+      - [0xC2E010, vtx, vtx/C24CD0]
+      - [0xC2E1F0, vtx, vtx/C24EB0]
+      - [0xC2E270, vtx, vtx/C24F30]
+      - [0xC2E2F0, vtx, vtx/C24FB0]
+      - [0xC2E390, vtx, vtx/C25050]
+      - [0xC2E590, vtx, vtx/C25250]
+      - [0xC2E650, vtx, vtx/C25310]
+      - [0xC2E690, vtx, vtx/C25350]
+      - [0xC2E840, vtx, vtx/C25500]
+      - [0xC2E940, vtx, vtx/C25600]
+      - [0xC2EA10, vtx, vtx/C256D0]
+      - [0xC2EA50, vtx, vtx/C25710]
+      - [0xC2EB10, vtx, vtx/C257D0]
+      - [0xC2EB30, vtx, vtx/C257F0]
+      - [0xC2EC40, vtx, vtx/C25900]
+      - [0xC2EC90, vtx, vtx/C25950]
+      - [0xC2ED70, vtx, vtx/C25A30]
+      - [0xC2EDF0, vtx, vtx/C25AB0]
+      - [0xC2EE70, vtx, vtx/C25B30]
+      - [0xC2EF10, vtx, vtx/C25BD0]
+      - [0xC2EF40, vtx, vtx/C25C00]
+      - [0xC2EF60, vtx, vtx/C25C20]
+      - [0xC2EFC0, vtx, vtx/C25C80]
+      - [0xC2F030, vtx, vtx/C25CF0]
+      - [0xC2F070, vtx, vtx/C25D30]
+      - [0xC2F0E0, vtx, vtx/C25DA0]
+      - [0xC2F110, vtx, vtx/C25DD0]
+      - [0xC2F1E0, vtx, vtx/C25EA0]
+      - [0xC2F240, vtx, vtx/C25F00]
+      - [0xC2F2D0, vtx, vtx/C25F90]
+      - [0xC2F380, vtx, vtx/C26040]
+      - [0xC2F3D0, vtx, vtx/C26090]
+      - [0xC2F470, vtx, vtx/C26130]
+      - [0xC2F590, vtx, vtx/C26250]
+      - [0xC2F5D0, vtx, vtx/C26290]
+      - [0xC2F610, vtx, vtx/C262D0]
+      - [0xC2F650, vtx, vtx/C26310]
+      - [0xC2F690, vtx, vtx/C26350]
+      - [0xC2F6D0, vtx, vtx/C26390]
+      - [0xC2F710, vtx, vtx/C263D0]
+      - [0xC2F750, vtx, vtx/C26410]
+      - [0xC2F790, vtx, vtx/C26450]
+      - [0xC2F7D0, vtx, vtx/C26490]
+      - [0xC2F810, vtx, vtx/C264D0]
+      - [0xC2F850, vtx, vtx/C26510]
+      - [0xC2F890, vtx, vtx/C26550]
+      - [0xC2F8D0, vtx, vtx/C26590]
+      - [0xC2F910, vtx, vtx/C265D0]
+      - [0xC2F950, vtx, vtx/C26610]
+      - [0xC2F990, vtx, vtx/C26650]
+      - [0xC2F9D0, vtx, vtx/C26690]
+      - [0xC2FA10, vtx, vtx/C266D0]
+      - [0xC2FA50, vtx, vtx/C26710]
+      - [0xC2FA90, vtx, vtx/C26750]
+      - [0xC2FBD0, vtx, vtx/C26890]
+      - [0xC2FDA0, vtx, vtx/C26A60]
+      - [0xC2FE20, vtx, vtx/C26AE0]
+      - [0xC30000, vtx, vtx/C26CC0]
+      - [0xC301F0, vtx, vtx/C26EB0]
+      - [0xC30280, vtx, vtx/C26F40]
+      - [0xC302F0, vtx, vtx/C26FB0]
+      - [0xC30450, vtx, vtx/C27110]
+      - [0xC304C0, vtx, vtx/C27180]
+      - [0xC30560, vtx, vtx/C27220]
+      - [0xC30640, vtx, vtx/C27300]
+      - [0xC306E0, vtx, vtx/C273A0]
+      - [0xC307A0, vtx, vtx/C27460]
+      - [0xC308C0, vtx, vtx/C27580]
+      - [0xC30A80, vtx, vtx/C27740]
+      - [0xC30AB0, vtx, vtx/C27770]
+      - [0xC30BC0, vtx, vtx/C27880]
+      - [0xC30D80, vtx, vtx/C27A40]
+      - [0xC30DB0, vtx, vtx/C27A70]
+      - [0xC30EC0, vtx, vtx/C27B80]
+      - [0xC310A0, vtx, vtx/C27D60]
+      - [0xC31260, vtx, vtx/C27F20]
+      - [0xC31300, vtx, vtx/C27FC0]
+      - [0xC31320, vtx, vtx/C27FE0]
+      - [0xC313C0, vtx, vtx/C28080]
+      - [0xC31450, vtx, vtx/C28110]
+      - [0xC314D0, vtx, vtx/C28190]
+      - [0xC314F0, vtx, vtx/C281B0]
+      - [0xC31520, vtx, vtx/C281E0]
+      - [0xC31610, vtx, vtx/C282D0]
+      - [0xC31630, vtx, vtx/C282F0]
+      - [0xC31650, vtx, vtx/C28310]
+      - [0xC31760, vtx, vtx/C28420]
+      - [0xC31830, vtx, vtx/C284F0]
+      - [0xC31890, vtx, vtx/C28550]
+      - [0xC319D0, vtx, vtx/C28690]
+      - [0xC31A60, vtx, vtx/C28720]
+      - [0xC31AE0, vtx, vtx/C287A0]
+      - [0xC31BD0, vtx, vtx/C28890]
+      - [0xC31CB0, vtx, vtx/C28970]
+      - [0xC31DB0, vtx, vtx/C28A70]
+      - [0xC31EF0, vtx, vtx/C28BB0]
+      - [0xC320D0, vtx, vtx/C28D90]
+      - [0xC322B0, vtx, vtx/C28F70]
+      - [0xC32490, vtx, vtx/C29150]
+      - [0xC32670, vtx, vtx/C29330]
+      - [0xC327B0, vtx, vtx/C29470]
+      - [0xC327E0, vtx, vtx/C294A0]
+      - [0xC32830, vtx, vtx/C294F0]
+      - [0xC32880, vtx, vtx/C29540]
+      - [0xC328B0, vtx, vtx/C29570]
+      - [0xC328F0, vtx, vtx/C295B0]
+      - [0xC32970, vtx, vtx/C29630]
+      - [0xC32990, vtx, vtx/C29650]
+      - [0xC32A00, vtx, vtx/C296C0]
+      - [0xC32A90, vtx, vtx/C29750]
+      - [0xC32B30, vtx, vtx/C297F0]
+      - [0xC32C20, vtx, vtx/C298E0]
+      - [0xC32D80, vtx, vtx/C29A40]
+      - [0xC32DF0, vtx, vtx/C29AB0]
+      - [0xC32EF0, vtx, vtx/C29BB0]
+      - [0xC33010, vtx, vtx/C29CD0]
+      - [0xC33140, vtx, vtx/C29E00]
+      - [0xC33290, vtx, vtx/C29F50]
+      - [0xC333C0, vtx, vtx/C2A080]
+      - [0xC334C0, vtx, vtx/C2A180]
+      - [0xC33600, vtx, vtx/C2A2C0]
+      - [0xC33700, vtx, vtx/C2A3C0]
+      - [0xC33880, vtx, vtx/C2A540]
+      - [0xC33A40, vtx, vtx/C2A700]
+      - [0xC33A80, vtx, vtx/C2A740]
+      - [0xC33AD0, vtx, vtx/C2A790]
+      - [0xC33C10, vtx, vtx/C2A8D0]
+      - [0xC33DF0, vtx, vtx/C2AAB0]
+      - [0xC33FD0, vtx, vtx/C2AC90]
+      - [0xC34060, vtx, vtx/C2AD20]
+      - [0xC340B0, vtx, vtx/C2AD70]
+      - [0xC34190, vtx, vtx/C2AE50]
+      - [0xC341B0, vtx, vtx/C2AE70]
+      - [0xC341F0, vtx, vtx/C2AEB0]
+      - [0xC342A0, vtx, vtx/C2AF60]
+      - [0xC342C0, vtx, vtx/C2AF80]
+      - [0xC34350, vtx, vtx/C2B010]
+      - [0xC34390, vtx, vtx/C2B050]
+      - [0xC34560, vtx, vtx/C2B220]
+      - [0xC34590, vtx, vtx/C2B250]
+      - [0xC34610, vtx, vtx/C2B2D0]
+      - [0xC34680, vtx, vtx/C2B340]
+      - [0xC34700, vtx, vtx/C2B3C0]
+      - [0xC34720, vtx, vtx/C2B3E0]
+      - [0xC34750, vtx, vtx/C2B410]
+      - [0xC348A0, vtx, vtx/C2B560]
+      - [0xC34A10, vtx, vtx/C2B6D0]
+      - [0xC34B40, vtx, vtx/C2B800]
+      - [0xC34B90, vtx, vtx/C2B850]
+      - [0xC34C20, vtx, vtx/C2B8E0]
+      - [0xC34CF0, vtx, vtx/C2B9B0]
+      - [0xC34D90, vtx, vtx/C2BA50]
+      - [0xC34E90, vtx, vtx/C2BB50]
+      - [0xC35090, vtx, vtx/C2BD50]
+      - [0xC35190, vtx, vtx/C2BE50]
+      - [0xC35290, vtx, vtx/C2BF50]
+      - [0xC352A0, vtx, vtx/C2BF60]
+      - [0xC35310, vtx, vtx/C2BFD0]
+      - [0xC353C0, vtx, vtx/C2C080]
+      - [0xC353F0, vtx, vtx/C2C0B0]
+      - [0xC35430, vtx, vtx/C2C0F0]
+      - [0xC35470, vtx, vtx/C2C130]
+      - [0xC35500, vtx, vtx/C2C1C0]
+      - [0xC35640, vtx, vtx/C2C300]
+      - [0xC35820, vtx, vtx/C2C4E0]
+      - [0xC35A00, vtx, vtx/C2C6C0]
+      - [0xC35BE0, vtx, vtx/C2C8A0]
+      - [0xC35D60, vtx, vtx/C2CA20]
+      - [0xC35EE0, vtx, vtx/C2CBA0]
+      - [0xC36060, vtx, vtx/C2CD20]
+      - [0xC361E0, vtx, vtx/C2CEA0]
+      - [0xC36210, vtx, vtx/C2CED0]
+      - [0xC36240, vtx, vtx/C2CF00]
+      - [0xC36300, vtx, vtx/C2CFC0]
+      - [0xC36480, vtx, vtx/C2D140]
+      - [0xC364B0, vtx, vtx/C2D170]
+      - [0xC364E0, vtx, vtx/C2D1A0]
+      - [0xC365A0, vtx, vtx/C2D260]
+      - [0xC36720, vtx, vtx/C2D3E0]
+      - [0xC36750, vtx, vtx/C2D410]
+      - [0xC36780, vtx, vtx/C2D440]
+      - [0xC36840, vtx, vtx/C2D500]
+      - [0xC368A0, vtx, vtx/C2D560]
+      - [0xC36900, vtx, vtx/C2D5C0]
+      - [0xC36960, vtx, vtx/C2D620]
+      - [0xC369A0, vtx, vtx/C2D660]
+      - [0xC369E0, vtx, vtx/C2D6A0]
+      - [0xC36A20, vtx, vtx/C2D6E0]
+      - [0xC36B70, vtx, vtx/C2D830]
+      - [0xC36C30, vtx, vtx/C2D8F0]
+      - [0xC36D60, vtx, vtx/C2DA20]
+      - [0xC36F20, vtx, vtx/C2DBE0]
+      - [0xC36FF0, vtx, vtx/C2DCB0]
+      - [0xC37090, vtx, vtx/C2DD50]
+      - [0xC370D0, vtx, vtx/C2DD90]
+      - [0xC371E0, vtx, vtx/C2DEA0]
+      - [0xC37300, vtx, vtx/C2DFC0]
+      - [0xC37360, vtx, vtx/C2E020]
+      - [0xC37520, vtx, vtx/C2E1E0]
+      - [0xC375F0, vtx, vtx/C2E2B0]
+      - [0xC376A0, vtx, vtx/C2E360]
+      - [0xC376D0, vtx, vtx/C2E390]
+      - [0xC377E0, vtx, vtx/C2E4A0]
+      - [0xC37910, vtx, vtx/C2E5D0]
+      - [0xC37960, vtx, vtx/C2E620]
+      - [0xC37AF0, vtx, vtx/C2E7B0]
+      - [0xC37B40, vtx, vtx/C2E800]
+      - [0xC37C00, vtx, vtx/C2E8C0]
+      - [0xC37CC0, vtx, vtx/C2E980]
+      - [0xC37DA0, vtx, vtx/C2EA60]
+  - name: dgb_02
+    dir: world/area_dgb/dgb_02
+    type: code
     start: 0xC37EE0
     vram: 0x80240000
-  - type: bin
-    name: dgb_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: dgb_03
+    dir: world/area_dgb/dgb_03
+    type: code
     start: 0xC3A820
     vram: 0x80240000
-  - type: bin
-    name: dgb_04
-    start: 0xC3F7C0
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, clock]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: dgb_04
+    dir: world/area_dgb/dgb_04
+    type: code
+    start: 0xC3F870
     vram: 0x80240000
-  - type: bin
-    name: dgb_05
-    start: 0xC43CA0
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: dgb_05
+    dir: world/area_dgb/dgb_05
+    type: code
+    start: 0xC43D50
     vram: 0x80240000
-  - type: bin
-    name: dgb_06
-    start: 0xC46310
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, hole]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: dgb_06
+    dir: world/area_dgb/dgb_06
+    type: code
+    start: 0xC463C0
     vram: 0x80240000
-  - type: bin
-    name: dgb_07
-    start: 0xC46E80
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: dgb_07
+    dir: world/area_dgb/dgb_07
+    type: code
+    start: 0xC46F30
     vram: 0x80240000
-  - type: bin
-    name: dgb_08
-    start: 0xC49040
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: dgb_08
+    dir: world/area_dgb/dgb_08
+    type: code
+    start: 0xC490F0
     vram: 0x80240000
-  - type: bin
-    name: dgb_09
-    start: 0xC4FE70
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: dgb_09
+    dir: world/area_dgb/dgb_09
+    type: code
+    start: 0xC4FF20
     vram: 0x80240000
-  - type: bin
-    name: dgb_10
-    start: 0xC55620
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, breakable]
+    - [auto, c, npc]
+  - name: dgb_10
+    dir: world/area_dgb/dgb_10
+    type: code
+    start: 0xC556D0
     vram: 0x80240000
-  - type: bin
-    name: dgb_11
-    start: 0xC56670
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, hole]
+    - [auto, c, entity]
+  - name: dgb_11
+    dir: world/area_dgb/dgb_11
+    type: code
+    start: 0xC56720
     vram: 0x80240000
-  - type: bin
-    name: dgb_12
-    start: 0xC57180
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: dgb_12
+    dir: world/area_dgb/dgb_12
+    type: code
+    start: 0xC57230
     vram: 0x80240000
-  - type: bin
-    name: dgb_13
-    start: 0xC57BF0
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, spikes]
+    - [auto, c, entity]
+  - name: dgb_13
+    dir: world/area_dgb/dgb_13
+    type: code
+    start: 0xC57CA0
     vram: 0x80240000
-  - type: bin
-    name: dgb_14
-    start: 0xC582C0
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, drawer]
+  - name: dgb_14
+    dir: world/area_dgb/dgb_14
+    type: code
+    start: 0xC58370
     vram: 0x80240000
-  - type: bin
-    name: dgb_15
-    start: 0xC587A0
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: dgb_15
+    dir: world/area_dgb/dgb_15
+    type: code
+    start: 0xC58850
     vram: 0x80240000
-  - type: bin
-    name: dgb_16
-    start: 0xC5B7D0
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: dgb_16
+    dir: world/area_dgb/dgb_16
+    type: code
+    start: 0xC5B880
     vram: 0x80240000
-  - type: bin
-    name: dgb_17
-    start: 0xC5ECF0
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: dgb_17
+    dir: world/area_dgb/dgb_17
+    type: code
+    start: 0xC5EDA0
     vram: 0x80240000
-  - type: bin
-    name: dgb_18
-    start: 0xC5F1D0
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: dgb_18
+    dir: world/area_dgb/dgb_18
+    type: code
+    start: 0xC5F280
     vram: 0x80240000
-  - type: bin
-    name: kzn_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: kzn_01
+    dir: world/area_kzn/kzn_01
+    type: code
     start: 0xC62C50
     vram: 0x80240000
-  - type: bin
-    name: kzn_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kzn_02
+    dir: world/area_kzn/kzn_02
+    type: code
     start: 0xC639C0
     vram: 0x80240000
-  - type: bin
-    name: kzn_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, platforms]
+    - [auto, c, npc]
+    - [auto, c, demo]
+  - name: kzn_03
+    dir: world/area_kzn/kzn_03
+    type: code
     start: 0xC69F90
     vram: 0x80240000
-  - type: bin
-    name: kzn_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, ziplines]
+  - name: kzn_04
+    dir: world/area_kzn/kzn_04
+    type: code
     start: 0xC713B0
     vram: 0x80240000
-  - type: bin
-    name: kzn_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: kzn_05
+    dir: world/area_kzn/kzn_05
+    type: code
     start: 0xC75350
     vram: 0x80240000
-  - type: bin
-    name: kzn_06
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+  - name: kzn_06
+    dir: world/area_kzn/kzn_06
+    type: code
     start: 0xC75BA0
     vram: 0x80240000
-  - type: bin
-    name: kzn_07
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, extra]
+  - name: kzn_07
+    dir: world/area_kzn/kzn_07
+    type: code
     start: 0xC775B0
     vram: 0x80240000
-  - type: bin
-    name: kzn_08
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: kzn_08
+    dir: world/area_kzn/kzn_08
+    type: code
     start: 0xC7A700
     vram: 0x80240000
-  - type: bin
-    name: kzn_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, extra]
+  - name: kzn_09
+    dir: world/area_kzn/kzn_09
+    type: code
     start: 0xC7FF60
     vram: 0x80240000
-  - type: bin
-    name: kzn_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, zipline]
+    - [auto, c, npc]
+  - name: kzn_10
+    dir: world/area_kzn/kzn_10
+    type: code
     start: 0xC87400
     vram: 0x80240000
-  - type: bin
-    name: kzn_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, tromp]
+  - name: kzn_11
+    dir: world/area_kzn/kzn_11
+    type: code
     start: 0xC89390
     vram: 0x80240000
-  - type: bin
-    name: kzn_17
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, platforms]
+    - [auto, c, npc]
+  - name: kzn_17
+    dir: world/area_kzn/kzn_17
+    type: code
     start: 0xC8ECA0
     vram: 0x80240000
-  - type: bin
-    name: kzn_18
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, tromp]
+  - name: kzn_18
+    dir: world/area_kzn/kzn_18
+    type: code
     start: 0xC95290
     vram: 0x80240000
-  - type: bin
-    name: kzn_19
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: kzn_19
+    dir: world/area_kzn/kzn_19
+    type: code
     start: 0xC96DA0
     vram: 0x80240000
-  - type: bin
-    name: kzn_20
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc_settings]
+    - [auto, c, npc]
+    - [auto, c, eruption]
+    - [auto, c, entity]
+    - start: 0xC99DE0
+      type: .data
+      name: npc
+      subsegments:
+      - [0xC99DE0]
+      - [0xC9A278, ci4, ../../lava_piranha/vine, 64, 32]
+      - [0xC9A678, palette, ../../lava_piranha/vine]
+      - [0xC9A878, gfx_common, ../../lava_piranha/vine]
+      - [0xC9A958]
+  - name: kzn_20
+    dir: world/area_kzn/kzn_20
+    type: code
     start: 0xC9F120
     vram: 0x80240000
-  - type: bin
-    name: kzn_22
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: kzn_22
+    dir: world/area_kzn/kzn_22
+    type: code
     start: 0xCA33E0
     vram: 0x80240000
-  - type: bin
-    name: kzn_23
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: kzn_23
+    dir: world/area_kzn/kzn_23
+    type: code
     start: 0xCA54E0
     vram: 0x80240000
-  - type: bin
-    name: flo_00
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: flo_00
+    dir: world/area_flo/flo_00
+    type: code
     start: 0xCA7100
     vram: 0x80240000
-  - type: bin
-    name: flo_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, epilogue]
+    - [auto, c, beanstalk]
+    - [auto, c, entity]
+  - name: flo_03
+    dir: world/area_flo/flo_03
+    type: code
     start: 0xCB0480
     vram: 0x80240000
-  - type: bin
-    name: flo_07
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+    - [auto, c, entity]
+  - name: flo_07
+    dir: world/area_flo/flo_07
+    type: code
     start: 0xCB53D0
     vram: 0x80240000
-  - type: bin
-    name: flo_08
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: flo_08
+    dir: world/area_flo/flo_08
+    type: code
     start: 0xCB7F20
     vram: 0x80240000
-  - type: bin
-    name: flo_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+    - [auto, c, vines]
+  - name: flo_09
+    dir: world/area_flo/flo_09
+    type: code
     start: 0xCBE1E0
     vram: 0x80240000
-  - type: bin
-    name: flo_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, vines]
+    - [auto, c, foliage]
+    - [auto, c, npc]
+  - name: flo_10
+    dir: world/area_flo/flo_10
+    type: code
     start: 0xCC23E0
     vram: 0x80240000
-  - type: bin
-    name: flo_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, fountain]
+    - [auto, c, npc]
+    - [auto, c, waterfx]
+    - [auto, c, foliage]
+  - name: flo_11
+    dir: world/area_flo/flo_11
+    type: code
     start: 0xCC6E50
     vram: 0x80240000
-  - type: bin
-    name: flo_12
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: flo_12
+    dir: world/area_flo/flo_12
+    type: code
     start: 0xCC9FB0
     vram: 0x80240000
-  - type: bin
-    name: flo_13
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: flo_13
+    dir: world/area_flo/flo_13
+    type: code
     start: 0xCCC990
     vram: 0x80240000
-  - type: bin
-    name: flo_14
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, new_partner]
+  - name: flo_14
+    dir: world/area_flo/flo_14
+    type: code
     start: 0xCD4490
     vram: 0x80240000
-  - type: bin
-    name: flo_15
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, bubbles]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, logs]
+  - name: flo_15
+    dir: world/area_flo/flo_15
+    type: code
     start: 0xCD9840
     vram: 0x80240000
-  - type: bin
-    name: flo_16
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, stairs]
+  - name: flo_16
+    dir: world/area_flo/flo_16
+    type: code
     start: 0xCDAFB0
     vram: 0x80240000
-  - type: bin
-    name: flo_17
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, vines]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, puzzle]
+  - name: flo_17
+    dir: world/area_flo/flo_17
+    type: code
     start: 0xCE0460
     vram: 0x80240000
-  - type: bin
-    name: flo_18
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, logs]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: flo_18
+    dir: world/area_flo/flo_18
+    type: code
     start: 0xCE5820
     vram: 0x80240000
-  - type: bin
-    name: flo_19
-    start: 0xCEC720
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, machine]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+  - name: flo_19
+    dir: world/area_flo/flo_19
+    type: code
+    start: 0xCEC870
     vram: 0x80240000
-  - type: bin
-    name: flo_21
-    start: 0xCEF730
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, clouds]
+    - [auto, c, beanstalk]
+  - name: flo_21
+    dir: world/area_flo/flo_21
+    type: code
+    start: 0xCEF880
     vram: 0x80240000
-  - type: bin
-    name: flo_22
-    start: 0xCF5310
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, clouds]
+    - [auto, c, npc]
+  - name: flo_22
+    dir: world/area_flo/flo_22
+    type: code
+    start: 0xCF53C0
     vram: 0x80240000
-  - type: bin
-    name: flo_23
-    start: 0xCF7330
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, well]
+    - [auto, c, foliage]
+  - name: flo_23
+    dir: world/area_flo/flo_23
+    type: code
+    start: 0xCF73E0
     vram: 0x80240000
-  - type: bin
-    name: flo_24
-    start: 0xCF9A10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: flo_24
+    dir: world/area_flo/flo_24
+    type: code
+    start: 0xCF9AC0
     vram: 0x80240000
-  - type: bin
-    name: flo_25
-    start: 0xCFBCA0
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, foliage]
+    - [auto, c, water]
+    - [auto, c, entity]
+  - name: flo_25
+    dir: world/area_flo/flo_25
+    type: code
+    start: 0xCFBD50
     vram: 0x80240000
-  - type: bin
-    name: sam_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, foliage]
+    - [auto, c, vine]
+  - name: sam_01
+    dir: world/area_sam/sam_01
+    type: code
     start: 0xD00C40
     vram: 0x80240000
-  - type: bin
-    name: sam_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, rooms]
+    - [auto, c, npc]
+    - [auto, c, scenes]
+    - [auto, c, entity]
+  - name: sam_02
+    dir: world/area_sam/sam_02
+    type: code
     start: 0xD0ED50
     vram: 0x80240000
-  - type: bin
-    name: sam_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, rooms]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, shop]
+  - name: sam_03
+    dir: world/area_sam/sam_03
+    type: code
     start: 0xD1A6A0
     vram: 0x80240000
-  - type: bin
-    name: sam_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc1]
+    - [auto, c, npc2]
+  - name: sam_04
+    dir: world/area_sam/sam_04
+    type: code
     start: 0xD1CBB0
     vram: 0x80240000
-  - type: bin
-    name: sam_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, snowmen]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: sam_05
+    dir: world/area_sam/sam_05
+    type: code
     start: 0xD21DC0
     vram: 0x80240000
-  - type: bin
-    name: sam_06
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, scenes]
+    - [auto, c, monstar_gfx]
+    - [auto, c, monstar_vtx]
+    - start: 0xD23EE0
+      type: .data
+      name: npc
+      subsegments:
+      - [0xD23EE0]
+      - [0xD24530, ci4, monstar, 32, 32]
+      - [0xD24730, ia4, monstar_blank1, 32, 32]
+      - [0xD24930, ia4, monstar_blank2, 32, 32]
+      - [0xD24B30, ia4, monstar_blank3, 32, 32]
+      - [0xD24D30, palette, monstar]
+      - [0xD24D50]
+    - start: 0xD28D40
+      type: .data
+      name: monstar_gfx
+      subsegments:
+      - [0xD28D40, gfx, monstar]
+    - start: 0xD28E50
+      type: .data
+      name: monstar_vtx
+      subsegments:
+      - [0xD28E50, vtx, monstar]
+    - [0xD29270]
+  - name: sam_06
+    dir: world/area_sam/sam_06
+    type: code
     start: 0xD29450
     vram: 0x80240000
-  - type: bin
-    name: sam_07
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, rooms]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: sam_07
+    dir: world/area_sam/sam_07
+    type: code
     start: 0xD35230
     vram: 0x80240000
-  - type: bin
-    name: sam_08
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, frozen_pit]
+    - [auto, c, npc]
+  - name: sam_08
+    dir: world/area_sam/sam_08
+    type: code
     start: 0xD39180
     vram: 0x80240000
-  - type: bin
-    name: sam_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, scenes]
+  - name: sam_09
+    dir: world/area_sam/sam_09
+    type: code
     start: 0xD3F7F0
     vram: 0x80240000
-  - type: bin
-    name: sam_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, sockets]
+  - name: sam_10
+    dir: world/area_sam/sam_10
+    type: code
     start: 0xD40D00
     vram: 0x80240000
-  - type: bin
-    name: sam_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, stairs]
+    - [auto, c, npc]
+  - name: sam_11
+    dir: world/area_sam/sam_11
+    type: code
     start: 0xD43AD0
     vram: 0x80240000
-  - type: bin
-    name: sam_12
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, rooms]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, pond]
+    - [auto, c, staircase]
+    - [auto, c, pond_anim]
+    - [auto, c, pond_skele]
+  - name: sam_12
+    dir: world/area_sam/sam_12
+    type: code
     start: 0xD54ED0
     vram: 0x80240000
-  - type: bin
-    name: pra_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, scenes]
+    - [auto, c, entity]
+  - name: pra_01
+    dir: world/area_pra/pra_01
+    type: code
     start: 0xD564F0
     vram: 0x80240000
-  - type: bin
-    name: pra_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: pra_02
+    dir: world/area_pra/pra_02
+    type: code
     start: 0xD594A0
     vram: 0x80240000
-  - type: bin
-    name: pra_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: pra_03
+    dir: world/area_pra/pra_03
+    type: code
     start: 0xD5D160
     vram: 0x80240000
-  - type: bin
-    name: pra_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: pra_04
+    dir: world/area_pra/pra_04
+    type: code
     start: 0xD5DB40
     vram: 0x80240000
-  - type: bin
-    name: pra_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: pra_05
+    dir: world/area_pra/pra_05
+    type: code
     start: 0xD5F060
     vram: 0x80240000
-  - type: bin
-    name: pra_06
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: pra_06
+    dir: world/area_pra/pra_06
+    type: code
     start: 0xD608E0
     vram: 0x80240000
-  - type: bin
-    name: pra_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: pra_09
+    dir: world/area_pra/pra_09
+    type: code
     start: 0xD61D40
     vram: 0x80240000
-  - type: bin
-    name: pra_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: pra_10
+    dir: world/area_pra/pra_10
+    type: code
     start: 0xD68710
     vram: 0x80240000
-  - type: bin
-    name: pra_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: pra_11
+    dir: world/area_pra/pra_11
+    type: code
     start: 0xD6A960
     vram: 0x80240000
-  - type: bin
-    name: pra_12
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: pra_12
+    dir: world/area_pra/pra_12
+    type: code
     start: 0xD6C170
     vram: 0x80240000
-  - type: bin
-    name: pra_13
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: pra_13
+    dir: world/area_pra/pra_13
+    type: code
     start: 0xD6DA40
     vram: 0x80240000
-  - type: bin
-    name: pra_14
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: pra_14
+    dir: world/area_pra/pra_14
+    type: code
     start: 0xD71160
     vram: 0x80240000
-  - type: bin
-    name: pra_15
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: pra_15
+    dir: world/area_pra/pra_15
+    type: code
     start: 0xD72C70
     vram: 0x80240000
-  - type: bin
-    name: pra_16
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: pra_16
+    dir: world/area_pra/pra_16
+    type: code
     start: 0xD72F80
     vram: 0x80240000
-  - type: bin
-    name: pra_18
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+  - name: pra_18
+    dir: world/area_pra/pra_18
+    type: code
     start: 0xD74A80
     vram: 0x80240000
-  - type: bin
-    name: pra_19
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: pra_19
+    dir: world/area_pra/pra_19
+    type: code
     start: 0xD77E10
     vram: 0x80240000
-  - type: bin
-    name: pra_20
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: pra_20
+    dir: world/area_pra/pra_20
+    type: code
     start: 0xD7F7B0
     vram: 0x80240000
-  - type: bin
-    name: pra_21
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+  - name: pra_21
+    dir: world/area_pra/pra_21
+    type: code
     start: 0xD81330
     vram: 0x80240000
-  - type: bin
-    name: pra_22
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: pra_22
+    dir: world/area_pra/pra_22
+    type: code
     start: 0xD81C90
     vram: 0x80240000
-  - type: bin
-    name: pra_27
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: pra_27
+    dir: world/area_pra/pra_27
+    type: code
     start: 0xD82D60
     vram: 0x80240000
-  - type: bin
-    name: pra_28
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: pra_28
+    dir: world/area_pra/pra_28
+    type: code
     start: 0xD84610
     vram: 0x80240000
-  - type: bin
-    name: pra_29
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: pra_29
+    dir: world/area_pra/pra_29
+    type: code
     start: 0xD85EC0
     vram: 0x80240000
-  - type: bin
-    name: pra_31
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, bridge]
+  - name: pra_31
+    dir: world/area_pra/pra_31
+    type: code
     start: 0xD880D0
     vram: 0x80240000
-  - type: bin
-    name: pra_32
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, npc]
+    - [auto, c, main]
+    - [auto, c, puzzle]
+    - [auto, c, texture_1]
+    - [auto, c, texture_2]
+    - [auto, c, texture_3]
+    - [auto, c, stairs_skele]
+    - [auto, c, stairs_anim]
+    - [auto, c, stairs_lights]
+    - [auto, c, stairs_vtx]
+    - start: 0xD8B560
+      type: .data
+      name: texture_1
+      subsegments:
+      - [0xD8B560, ci4, texture_1, 64, 64]
+      - [0xD8BD60, palette, texture_1]
+      - [0xD8BD80, gfx, texture_1]
+      - [0xD8BE38]
+    - start: 0xD8BE40
+      type: .data
+      name: texture_2
+      subsegments:
+      - [0xD8BE40, ci4, texture_2, 64, 64]
+      - [0xD8C640, palette, texture_2]
+      - [0xD8C660, gfx, texture_2]
+      - [0xD8C708]
+    - start: 0xD8C710
+      type: .data
+      name: texture_3
+      subsegments:
+      - [0xD8C710, rgba16, texture_3, 32, 32]
+      - [0xD8CF10, gfx, texture_3]
+      - [0xD8CF98]
+    - start: 0xD8CFA0
+      type: .data
+      name: stairs_skele
+      subsegments:
+      - [0xD8CFA0, gfx, unk_01]
+      - [0xD8D018, gfx, unk_02]
+      - [0xD8D050, gfx, unk_03]
+      - [0xD8D0B8, gfx, unk_04]
+      - [0xD8D0F0, gfx, unk_05]
+      - [0xD8D168, gfx, unk_06]
+      - [0xD8D1A0, gfx, unk_07]
+      - [0xD8D218, gfx, unk_08]
+      - [0xD8D250, gfx, unk_09]
+      - [0xD8D2B8, gfx, unk_10]
+      - [0xD8D2F0, gfx, unk_11]
+      - [0xD8D368, gfx, unk_12]
+      - [0xD8D3A0, gfx, unk_13]
+      - [0xD8D418, gfx, unk_14]
+      - [0xD8D450, gfx, unk_15]
+      - [0xD8D4B8, gfx, unk_16]
+      - [0xD8D4F0, gfx, unk_17]
+      - [0xD8D568, gfx, unk_18]
+      - [0xD8D5A0, gfx, unk_19]
+      - [0xD8D618, gfx, unk_20]
+      - [0xD8D650, gfx, unk_21]
+      - [0xD8D6B8, gfx, unk_22]
+      - [0xD8D6F0, gfx, unk_23]
+      - [0xD8D768, gfx, unk_24]
+      - [0xD8D7A0, gfx, unk_25]
+      - [0xD8D818, gfx, unk_26]
+      - [0xD8D850, gfx, unk_27]
+      - [0xD8D8B8, gfx, unk_28]
+      - [0xD8D918, gfx, unk_29]
+      - [0xD8D980, gfx, unk_30]
+      - [0xD8D9C8, gfx, unk_31]
+      - [0xD8DA58, gfx, unk_32]
+      - [0xD8DA80, gfx, unk_33]
+      - [0xD8DAA8, gfx, unk_34]
+      - [0xD8DAE0]
+    - start: 0xD8F790
+      type: .data
+      name: stairs_vtx
+      subsegments:
+      - [0xD8F790]
+      - [0xD8FB10, vtx, stairs]
+      - [0xD8FCD0]
+    - [0xD8FCD0]
+  - name: pra_32
+    dir: world/area_pra/pra_32
+    type: code
     start: 0xD8FCF0
     vram: 0x80240000
-  - type: bin
-    name: pra_33
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: pra_33
+    dir: world/area_pra/pra_33
+    type: code
     start: 0xD929D0
     vram: 0x80240000
-  - type: bin
-    name: pra_34
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: pra_34
+    dir: world/area_pra/pra_34
+    type: code
     start: 0xD946A0
     vram: 0x80240000
-  - type: bin
-    name: pra_35
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: pra_35
+    dir: world/area_pra/pra_35
+    type: code
     start: 0xD96540
     vram: 0x80240000
-  - type: bin
-    name: pra_36
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: pra_36
+    dir: world/area_pra/pra_36
+    type: code
     start: 0xD9A9F0
     vram: 0x80240000
-  - type: bin
-    name: pra_37
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: pra_37
+    dir: world/area_pra/pra_37
+    type: code
     start: 0xD9C230
     vram: 0x80240000
-  - type: bin
-    name: pra_38
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: pra_38
+    dir: world/area_pra/pra_38
+    type: code
     start: 0xD9E8E0
     vram: 0x80240000
-  - type: bin
-    name: pra_39
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: pra_39
+    dir: world/area_pra/pra_39
+    type: code
     start: 0xDA0B80
     vram: 0x80240000
-  - type: bin
-    name: pra_40
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: pra_40
+    dir: world/area_pra/pra_40
+    type: code
     start: 0xDA2CA0
     vram: 0x80240000
-  - type: bin
-    name: omo_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+  - name: omo_01
+    dir: world/area_omo/omo_01
+    type: code
     start: 0xDA41E0
     vram: 0x80240000
-  - type: bin
-    name: omo_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, gizmos]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: omo_02
+    dir: world/area_omo/omo_02
+    type: code
     start: 0xDA67C0
     vram: 0x80240000
-  - type: bin
-    name: omo_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, gizmos]
+    - [auto, c, barricade]
+    - [auto, c, npc]
+  - name: omo_03
+    dir: world/area_omo/omo_03
+    type: code
     start: 0xDAE530
     vram: 0x80240000
-  - type: bin
-    name: omo_04
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, gizmos]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, train]
+    - [auto, c, train_drop]
+    - [auto, c, epilogue]
+  - name: omo_04
+    dir: world/area_omo/omo_04
+    type: code
     start: 0xDB66F0
     vram: 0x80240000
-  - type: bin
-    name: omo_05
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, gizmos]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, scenes]
+  - name: omo_05
+    dir: world/area_omo/omo_05
+    type: code
     start: 0xDBB5B0
     vram: 0x80240000
-  - type: bin
-    name: omo_06
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, gizmos]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: omo_06
+    dir: world/area_omo/omo_06
+    type: code
     start: 0xDC0C00
     vram: 0x80240000
-  - type: bin
-    name: omo_07
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, gizmos]
+    - [auto, c, train]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: omo_07
+    dir: world/area_omo/omo_07
+    type: code
     start: 0xDC65A0
     vram: 0x80240000
-  - type: bin
-    name: omo_08
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, gizmos]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, scenes]
+  - name: omo_08
+    dir: world/area_omo/omo_08
+    type: code
     start: 0xDCD6C0
     vram: 0x80240000
-  - type: bin
-    name: omo_09
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, boxes]
+    - [auto, c, train]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: omo_09
+    dir: world/area_omo/omo_09
+    type: code
     start: 0xDD5FC0
     vram: 0x80240000
-  - type: bin
-    name: omo_10
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, conveyors]
+    - [auto, c, slot_machine]
+    - [auto, c, gizmos]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, scenes]
+  - name: omo_10
+    dir: world/area_omo/omo_10
+    type: code
     start: 0xDE0CA0
     vram: 0x80240000
-  - type: bin
-    name: omo_11
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, gizmos]
+    - [auto, c, train]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: omo_11
+    dir: world/area_omo/omo_11
+    type: code
     start: 0xDE5B20
     vram: 0x80240000
-  - type: bin
-    name: omo_12
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, gizmos]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: omo_12
+    dir: world/area_omo/omo_12
+    type: code
     start: 0xDE8600
     vram: 0x80240000
-  - type: bin
-    name: omo_13
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, new_partner]
+  - name: omo_13
+    dir: world/area_omo/omo_13
+    type: code
     start: 0xDEB780
     vram: 0x80240000
-  - type: bin
-    name: omo_14
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, gizmos]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: omo_14
+    dir: world/area_omo/omo_14
+    type: code
     start: 0xDEE9A0
     vram: 0x80240000
-  - type: bin
-    name: omo_15
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: omo_15
+    dir: world/area_omo/omo_15
+    type: code
     start: 0xDF1A60
     vram: 0x80240000
-  - type: bin
-    name: omo_16
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: omo_16
+    dir: world/area_omo/omo_16
+    type: code
     start: 0xDF51C0
     vram: 0x80240000
-  - type: bin
-    name: omo_17
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, train]
+    - [auto, c, npc]
+  - name: omo_17
+    dir: world/area_omo/omo_17
+    type: code
     start: 0xDF8190
     vram: 0x80240000
-  - type: bin
-    name: end_00
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, gizmos]
+    - [auto, c, train]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: end_00
+    dir: world/area_end/end_00
+    type: code
     start: 0xDFFCF0
     vram: 0x80240000
-  - type: bin
-    name: end_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, credits]
+    - [auto, c, parade_setup]
+    - [auto, c, allies]
+    - [auto, c, koopas]
+    - [auto, c, caravan]
+    - [auto, c, boos]
+    - [auto, c, yoshis]
+    - [auto, c, huff_n_puff]
+    - [auto, c, crystal_king]
+    - [auto, c, bowser]
+  - name: end_01
+    dir: world/area_end/end_01
+    type: code
     start: 0xE0E290
     vram: 0x80240000
-  - type: bin
-    name: mgm_00
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, credits]
+    - [auto, c, parade_setup]
+    - [auto, c, opera_float]
+    - [auto, c, flower_float]
+    - [auto, c, shyguy_float]
+    - [auto, c, peach_float]
+  - name: mgm_00
+    dir: world/area_mgm/mgm_00
+    type: code
     start: 0xE17630
     vram: 0x80240000
-  - type: bin
-    name: mgm_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, scoreboard]
+  - name: mgm_01
+    dir: world/area_mgm/mgm_01
+    type: code
     start: 0xE1B5F0
     vram: 0x80240000
-  - type: bin
-    name: mgm_02
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, images]
+    - start: 0xE1E2D0
+      type: .data
+      name: images
+      subsegments:
+      - [0xE1E2D0, ci4, panel_1_coin, 32, 32]
+      - [0xE1E4D0, palette, panel_1_coin]
+      - [0xE1E4F0, ci4, panel_5_coins, 32, 32]
+      - [0xE1E6F0, palette, panel_5_coins]
+      - [0xE1E710, ci4, panel_times_5, 32, 32]
+      - [0xE1E910, palette, panel_times_5]
+      - [0xE1E930, ci4, panel_bowser, 32, 32]
+      - [0xE1EB30, palette, panel_bowser]
+      - [0xE1EB50]
+  - name: mgm_02
+    dir: world/area_mgm/mgm_02
+    type: code
     start: 0xE1EC10
     vram: 0x80240000
-  - type: bin
-    name: mgm_03
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, images]
+    - start: 0xE26EB0
+      type: .data
+      name: images
+      subsegments:
+      - [0xE26EB0, ci4, panel_peach, 32, 32]
+      - [0xE270B0, palette, panel_peach]
+      - [0xE270D0]
+  - name: mgm_03
+    dir: world/area_mgm/mgm_03
+    type: code
     start: 0xE27210
     vram: 0x80240000
-  - type: bin
-    name: gv_01
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+  - name: gv_01
+    dir: world/area_gv/gv_01
+    type: code
     start: 0xE272F0
     vram: 0x80240000
-
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+  - name: heaps2
+    type: code
+    start: 0xE28FA0
+    vram: 0x80267FF0
+    subsegments:
+    - [auto, c, heaps2]
   - type: code
     name: inspect_icon
     start: 0xE28FA0
@@ -12931,7 +14409,338 @@ segments:
       - [0xEA7510, palette, BombableRock]
       - [0xEA7530]
 
-  - [ 0xEA7B50, bin ]
+#################
+### Dead maps ###
+#################
+  - [ 0xEA7B50, bin, dead_kzn_17_end ] # tail of dead kzn_17
+  - name: dead_kzn_18
+    dir: world/dead/area_kzn/kzn_18
+    type: code
+    start: 0xEADED0
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: dead_kzn_19
+    dir: world/dead/area_kzn/kzn_19
+    type: code
+    start: 0xEAF9E0
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc_settings]
+    - [auto, c, npc]
+    - [auto, c, eruption]
+    - [auto, c, entity]
+    - start: 0xEB2A20
+      type: .data
+      name: npc
+      subsegments:
+      - [0xEB2A20]
+      - [0xEB2EB8, ci4, ../../lava_piranha/vine, 64, 32]
+      - [0xEB32B8, palette, ../../lava_piranha/vine]
+      - [0xEB34B8, gfx_common, ../../lava_piranha/vine]
+      - [0xEB3598]
+  - name: dead_kzn_20
+    dir: world/dead/area_kzn/kzn_20
+    type: code
+    start: 0xEB7D60
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: dead_kzn_22
+    dir: world/dead/area_kzn/kzn_22
+    type: code
+    start: 0xEBC020
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, entity]
+    - [auto, c, npc]
+  - name: dead_kzn_23
+    dir: world/dead/area_kzn/kzn_23
+    type: code
+    start: 0xEBE120
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: dead_flo_00
+    dir: world/dead/area_flo/flo_00
+    type: code
+    start: 0xEBFD40
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, epilogue]
+    - [auto, c, beanstalk]
+    - [auto, c, entity]
+  - name: dead_flo_03
+    dir: world/dead/area_flo/flo_03
+    type: code
+    start: 0xEC90F0
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+    - [auto, c, entity]
+  - name: dead_flo_07
+    dir: world/dead/area_flo/flo_07
+    type: code
+    start: 0xECE020
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: dead_flo_08
+    dir: world/dead/area_flo/flo_08
+    type: code
+    start: 0xED0B70
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+    - [auto, c, vines]
+  - name: dead_flo_09
+    dir: world/dead/area_flo/flo_09
+    type: code
+    start: 0xED6E60
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, vines]
+    - [auto, c, foliage]
+    - [auto, c, npc]
+  - name: dead_flo_10
+    dir: world/dead/area_flo/flo_10
+    type: code
+    start: 0xEDB090
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, fountain]
+    - [auto, c, npc]
+    - [auto, c, waterfx]
+    - [auto, c, foliage]
+  - name: dead_flo_11
+    dir: world/dead/area_flo/flo_11
+    type: code
+    start: 0xEDFC30
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: dead_flo_12
+    dir: world/dead/area_flo/flo_12
+    type: code
+    start: 0xEE2DF0
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+  - name: dead_flo_13
+    dir: world/dead/area_flo/flo_13
+    type: code
+    start: 0xEE57D0
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, new_partner]
+  - name: dead_flo_14
+    dir: world/dead/area_flo/flo_14
+    type: code
+    start: 0xEED3C0
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, bubbles]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, logs]
+  - name: dead_flo_15
+    dir: world/dead/area_flo/flo_15
+    type: code
+    start: 0xEF27A0
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, stairs]
+  - name: dead_flo_16
+    dir: world/dead/area_flo/flo_16
+    type: code
+    start: 0xEF3F10
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, vines]
+    - [auto, c, entity]
+    - [auto, c, npc]
+    - [auto, c, puzzle]
+  - name: dead_flo_17
+    dir: world/dead/area_flo/flo_17
+    type: code
+    start: 0xEF9420
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, logs]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: dead_flo_18
+    dir: world/dead/area_flo/flo_18
+    type: code
+    start: 0xEFE890
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, machine]
+    - [auto, c, npc]
+    - [auto, c, foliage]
+  - name: dead_flo_19
+    dir: world/dead/area_flo/flo_19
+    type: code
+    start: 0xF057C0
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, entity]
+    - [auto, c, main]
+    - [auto, c, clouds]
+    - [auto, c, beanstalk]
+  - name: dead_flo_21
+    dir: world/dead/area_flo/flo_21
+    type: code
+    start: 0xF087D0
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, clouds]
+    - [auto, c, npc]
+  - name: dead_flo_22
+    dir: world/dead/area_flo/flo_22
+    type: code
+    start: 0xF0E3B0
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, well]
+    - [auto, c, foliage]
+  - name: dead_flo_23
+    dir: world/dead/area_flo/flo_23
+    type: code
+    start: 0xF103D0
+    vram: 0x80240000
+    dead_code: True
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+  - name: dead_flo_24
+    dir: world/dead/area_flo/flo_24
+    type: code
+    start: 0xF12AE0
+    vram: 0x80240000
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, foliage]
+    - [auto, c, water]
+    - [auto, c, entity]
+  - name: dead_flo_25
+    dir: world/dead/area_flo/flo_25
+    type: code
+    start: 0xF14D70
+    vram: 0x80240000
+    subsegments:
+    - [auto, c, settings]
+    - [auto, c, music]
+    - [auto, c, main]
+    - [auto, c, npc]
+    - [auto, c, entity]
+    - [auto, c, foliage]
+    - [auto, c, vine]
+
+  - [0xF19D60, bin]
 
   - start: 0xFC0000
     type: pm_sbn
