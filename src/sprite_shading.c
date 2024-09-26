@@ -37,7 +37,7 @@ void clear_sprite_shading_data(void) {
 }
 
 void init_sprite_shading_data(void) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->isBattle == MAIN_STATE_WORLD) {
         gSpriteShadingProfile = &wSpriteShadingProfile;
         gAuxSpriteShadingProfile = &wSpriteShadingProfileAux;
     } else {

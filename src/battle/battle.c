@@ -220,7 +220,7 @@ void load_demo_battle(u32 index) {
     gGameStatusPtr->demoBattleFlags = 0;
     gGameStatusPtr->areaID = 0;
     gGameStatusPtr->mapID = 0;
-    gGameStatusPtr->isBattle = FALSE;
+    gGameStatusPtr->isBattle = MAIN_STATE_WORLD;
 
     general_heap_create();
     clear_worker_list();

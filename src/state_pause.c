@@ -82,7 +82,7 @@ void state_step_pause(void) {
                     gGameStatusPtr->savedBackgroundDarkness = gGameStatusPtr->backgroundDarkness;
                     sfx_stop_env_sounds();
                     func_8003B1A8();
-                    gGameStatusPtr->isBattle = 2;
+                    gGameStatusPtr->isBattle = MAIN_STATE_PAUSE;
                     backup_map_collision_data();
                     battle_heap_create();
                     nuContRmbForceStop();
@@ -163,7 +163,7 @@ void state_step_unpause(void) {
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                     mapSettings = get_current_map_settings();
                     mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
-                    gGameStatusPtr->isBattle = FALSE;
+                    gGameStatusPtr->isBattle = MAIN_STATE_WORLD;
                     gGameStatusPtr->backgroundFlags &= ~BACKGROUND_RENDER_STATE_MASK;
                     func_8005AF84();
                     func_8002ACDC();

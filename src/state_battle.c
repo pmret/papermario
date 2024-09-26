@@ -57,7 +57,7 @@ void state_step_battle(void) {
         nuContRmbForceStopEnd();
         sfx_stop_env_sounds();
         func_8003B1A8();
-        gGameStatusPtr->isBattle = TRUE;
+        gGameStatusPtr->isBattle = MAIN_STATE_BATTLE;
         backup_map_collision_data();
 
 #if !VERSION_IQUE
@@ -146,7 +146,7 @@ void state_step_end_battle(void) {
             mapSettings = get_current_map_settings();
             mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
             btl_restore_world_cameras();
-            gGameStatusPtr->isBattle = FALSE;
+            gGameStatusPtr->isBattle = MAIN_STATE_WORLD;
             func_8005AF84();
             func_8002ACDC();
             sfx_clear_env_sounds(1);

@@ -3526,6 +3526,12 @@ enum EffectGfxDataFlags {
 
 #include "move_enum.h"
 
+enum MainState{
+    MAIN_STATE_WORLD        = 0,
+    MAIN_STATE_BATTLE       = 1,
+    MAIN_STATE_PAUSE        = 2,
+};
+
 enum DemoState {
     DEMO_STATE_NONE         = 0,
     DEMO_STATE_ACTIVE       = 1,

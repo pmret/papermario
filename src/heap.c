@@ -32,7 +32,7 @@ s32 func_8002ACDC(void) {
 }
 
 void* heap_malloc(s32 size) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->isBattle == MAIN_STATE_WORLD) {
         return general_heap_malloc(size);
     } else {
         return _heap_malloc(&heap_battleHead, size);
@@ -40,7 +40,7 @@ void* heap_malloc(s32 size) {
 }
 
 s32 heap_free(void* data) {
-    if (gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->isBattle != MAIN_STATE_WORLD) {
         return _heap_free(&heap_battleHead, data);
     } else {
         return general_heap_free(data);
@@ -55,7 +55,7 @@ s32 collision_heap_create(void) {
 }
 
 void* collision_heap_malloc(s32 size) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->isBattle == MAIN_STATE_WORLD) {
         return _heap_malloc(&heap_collisionHead, size);
     } else {
         return _heap_malloc(&heap_battleHead, size);
@@ -63,7 +63,7 @@ void* collision_heap_malloc(s32 size) {
 }
 
 s32 collision_heap_free(void* data) {
-    if (gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->isBattle != MAIN_STATE_WORLD) {
         return _heap_free(&heap_battleHead, data);
     } else {
         return _heap_free(&heap_collisionHead, data);
