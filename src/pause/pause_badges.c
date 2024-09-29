@@ -310,6 +310,38 @@ void pause_badges_draw_bp_orbs(s32 orbState, s32 x, s32 y) {
     }
 }
 
+#if VERSION_JP
+#define X_VAR1 215
+#define X_VAR2 211
+#define X_VAR3 15
+#define X_VAR4 62
+#define X_VAR5 12
+#define X_VAR6 21
+#define X_VAR7 8
+#define X_VAR8 17
+#define X_VAR9 78
+#define X_VAR10 78
+#define Y_VAR1 39
+#define Y_VAR2 49
+#define W_VAR1 87
+#define W_VAR2 87
+#else
+#define X_VAR1 241
+#define X_VAR2 235
+#define X_VAR3 12
+#define X_VAR4 73
+#define X_VAR5 10
+#define X_VAR6 19
+#define X_VAR7 12
+#define X_VAR8 21
+#define X_VAR9 86
+#define X_VAR10 90
+#define Y_VAR1 37
+#define Y_VAR2 42
+#define W_VAR1 91
+#define W_VAR2 91
+#endif
+
 void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 pageIndex, i;
     s32 badgeIndex;
@@ -364,11 +396,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     currentBadgeRow = gPauseBadgesSelectedIndex % currentPage->numCols;
 
     draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_15, baseX + 84, baseY, 0, width - 84, height, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-#if VERSION_JP
-    hud_element_set_render_pos(gPauseBadgesIconIDs[20], baseX + 215, baseY + 11);
-#else
-    hud_element_set_render_pos(gPauseBadgesIconIDs[20], baseX + 241, baseY + 11);
-#endif
+    hud_element_set_render_pos(gPauseBadgesIconIDs[20], baseX + X_VAR1, baseY + 11);
     palette = MSG_PAL_STANDARD;
     hud_element_draw_without_clipping(gPauseBadgesIconIDs[20]);
 
@@ -487,11 +515,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                                         badgeListY + pause_badges_scroll_offset_y(posY) + badgeEntryOffsetY, 255, palette, style);
                             }
                         }
-#if VERSION_JP
-                        draw_number(gMoveTable[gItemTable[badgeID].moveID].costBP, baseX + 211 + pause_badges_scroll_offset_x(posX),
-#else
-                        draw_number(gMoveTable[gItemTable[badgeID].moveID].costBP, baseX + 235 + pause_badges_scroll_offset_x(posX),
-#endif
+                        draw_number(gMoveTable[gItemTable[badgeID].moveID].costBP, baseX + X_VAR2 + pause_badges_scroll_offset_x(posX),
                                     baseY + 17 + pause_badges_scroll_offset_y(posY), DRAW_NUMBER_CHARSET_THIN, palette, 255, DRAW_NUMBER_STYLE_ALIGN_RIGHT | DRAW_NUMBER_STYLE_MONOSPACE);
                     }
                 }
@@ -650,21 +674,15 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     if (bpAmount < 10) {
         bpAvailOffsetX = -4;
     }
-#if VERSION_JP
-    pause_draw_menu_label(PAUSE_LBL_AVAILABLE, baseX + 15, baseY + 100 + bpAvailOffsetY);
-#else
-    pause_draw_menu_label(PAUSE_LBL_AVAILABLE, baseX + 12, baseY + 100 + bpAvailOffsetY);
-#endif
+    pause_draw_menu_label(PAUSE_LBL_AVAILABLE, baseX + X_VAR3, baseY + 100 + bpAvailOffsetY);
 
 #if VERSION_PAL
     bpAmountX = baseX + (73 + bpAvailOffsetX);
     if (gCurrentLanguage == LANGUAGE_ES) {
         bpAmountX += 8;
     }
-#elif VERSION_JP
-    bpAmountX = baseX + 62 + bpAvailOffsetX;
 #else
-    bpAmountX = baseX + 73 + bpAvailOffsetX;
+    bpAmountX = baseX + X_VAR4 + bpAvailOffsetX;
 #endif
 
     draw_number(bpAmount, bpAmountX, baseY + 100 + bpAvailOffsetY, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255,
@@ -708,11 +726,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     }
 
     draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_13, gPauseBadgesCurrentTab == 0 ? baseX + 9 : baseX, baseY + 7, 0,
-#if VERSION_JP
-         87, 34, 255, gPauseBadgesCurrentTab == 1 ? 128 : 0, 0, 0,
-#else
-         91, 34, 255, gPauseBadgesCurrentTab == 1 ? 128 : 0, 0, 0,
-#endif
+         W_VAR1, 34, 255, gPauseBadgesCurrentTab == 1 ? 128 : 0, 0, 0,
          0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
 #if VERSION_PAL
@@ -764,38 +778,11 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     draw_msg(msg2, msgX, baseY + 42, gPauseBadgesCurrentTab == 0 ? 191 : 255, 0, 1);
 
     draw_msg(pause_get_menu_msg(PAUSE_MSG_BADGES), (gPauseBadgesCurrentTab == 1) ? baseX + D_PAL_80271B2C[gCurrentLanguage] + 9 :baseX + D_PAL_80271B2C[gCurrentLanguage], baseY + 52, gPauseBadgesCurrentTab == 0 ? 191 : 255, 0, 1);
-#elif VERSION_JP
-    msg = pause_get_menu_msg(PAUSE_MSG_ALL_BADGES);
-    msgX = baseX + 12;
-    if (gPauseBadgesCurrentTab == 0) {
-        msgX = baseX + 21;
-    }
-    msgOpacity = 255;
-    msgY = baseY + 17;
-    if (gPauseBadgesCurrentTab == 1) {
-        msgOpacity = 191;
-    }
-    draw_msg(msg, msgX, msgY, msgOpacity, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-
-    draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_13, gPauseBadgesCurrentTab == 1 ? baseX + 9 : baseX, baseY + 39, 0, 87, 34, 255,
-            gPauseBadgesCurrentTab == 0 ? 128 : 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-
-    msg = pause_get_menu_msg(PAUSE_MSG_ACTIVE);
-    msgX = baseX + 8;
-    if (gPauseBadgesCurrentTab == 1) {
-        msgX = baseX + 17;
-    }
-    msgY = baseY + 49;
-    msgOpacity = 255;
-    if (gPauseBadgesCurrentTab == 0) {
-        msgOpacity = 191;
-    }
-    draw_msg(msg, msgX, msgY, msgOpacity, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
 #else
     msg = pause_get_menu_msg(PAUSE_MSG_ALL_BADGES);
-    msgX = baseX + 10;
+    msgX = baseX + X_VAR5;
     if (gPauseBadgesCurrentTab == 0) {
-        msgX = baseX + 19;
+        msgX = baseX + X_VAR6;
     }
     msgOpacity = 255;
     msgY = baseY + 17;
@@ -804,21 +791,23 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     }
     draw_msg(msg, msgX, msgY, msgOpacity, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
 
-    draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_13, gPauseBadgesCurrentTab == 1 ? baseX + 9 : baseX, baseY + 37, 0, 91, 34, 255,
+    draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_13, gPauseBadgesCurrentTab == 1 ? baseX + 9 : baseX, baseY + Y_VAR1, 0, W_VAR2, 34, 255,
             gPauseBadgesCurrentTab == 0 ? 128 : 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
     msg = pause_get_menu_msg(PAUSE_MSG_ACTIVE);
-    msgX = baseX + 12;
+    msgX = baseX + X_VAR7;
     if (gPauseBadgesCurrentTab == 1) {
-        msgX = baseX + 21;
+        msgX = baseX + X_VAR8;
     }
-    msgY = baseY + 42;
+    msgY = baseY + Y_VAR2;
     msgOpacity = 255;
     if (gPauseBadgesCurrentTab == 0) {
         msgOpacity = 191;
     }
     draw_msg(msg, msgX, msgY, msgOpacity, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+#endif
 
+#if VERSION_US || VERSION_IQUE
     msg = pause_get_menu_msg(PAUSE_MSG_BADGES);
     msgX = baseX + 26;
     if (gPauseBadgesCurrentTab == 1) {
@@ -864,27 +853,17 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                      0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
             draw_msg(pause_get_menu_msg(PAUSE_MSG_NOT_ENOUGH_BP), baseX + (292 - wid) / 2, baseY + 66, 255,
                      MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-#elif VERSION_JP
-            draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_13, baseX + 67, baseY + 60, 0, 137, 26, 255,
-                     0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-            draw_msg(pause_get_menu_msg(PAUSE_MSG_NOT_ENOUGH_BP), baseX + 78, baseY + 66, 255,
-                     MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
 #else
             draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_13, baseX + 67, baseY + 60, 0, 137, 26, 255,
                      0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-            draw_msg(pause_get_menu_msg(PAUSE_MSG_NOT_ENOUGH_BP), baseX + 86, baseY + 66, 255,
+            draw_msg(pause_get_menu_msg(PAUSE_MSG_NOT_ENOUGH_BP), baseX + X_VAR9, baseY + 66, 255,
                      MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
 #endif
         } else {
             draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_13, baseX + 67, baseY + 60, 0, 173, 26, 255,
                      0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-#if VERSION_JP
-            draw_msg(pause_get_menu_msg(PAUSE_MSG_DONT_WEAR_MORE), baseX + 78, baseY + 66, 255,
+            draw_msg(pause_get_menu_msg(PAUSE_MSG_DONT_WEAR_MORE), baseX + X_VAR10, baseY + 66, 255,
                      MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-#else
-            draw_msg(pause_get_menu_msg(PAUSE_MSG_DONT_WEAR_MORE), baseX + 90, baseY + 66, 255,
-                     MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-#endif
         }
     }
 }

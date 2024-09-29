@@ -470,6 +470,16 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     draw_box(0, &gPauseWS_21, baseX + 122, baseY + 16, 0, 166, 121, opacity, darkening, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, width, height, 0);
 }
 
+#if VERSION_JP
+#define OFFSET_1 32
+#define X_VAR1 76
+#define W_VAR1 8
+#else
+#define OFFSET_1 20
+#define X_VAR1 95
+#define W_VAR1 4
+#endif
+
 void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 msgID = gPartnerPopupProperties[gPausePartnersPartnerIDs[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].nameMsg;
     s32 level = get_player_data()->partners[gPausePartnersPartnerIDs[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].level;
@@ -479,47 +489,48 @@ void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     if (level == PARTNER_RANK_SUPER) {
         offset = 16;
     } else if (level == PARTNER_RANK_ULTRA) {
-#if VERSION_JP
-        offset = 32;
-#else
-        offset = 20;
-#endif
+        offset = OFFSET_1;
     } else {
         offset = 0;
     }
 
     if (offset != 0) {
-#if VERSION_JP
-        msgWidth += 8;
-#else
-        msgWidth += 4;
-#endif
+        msgWidth += W_VAR1;
     }
 
     draw_msg(msgID, baseX + ((width - offset - msgWidth) >> 1), baseY + 1, 255, MSG_PAL_WHITE, 0);
 
-#if VERSION_JP
     if (level == 1) {
-        hud_element_set_render_pos(gPausePartnersIconIDs[2], baseX + 76, baseY + 10);
+        hud_element_set_render_pos(gPausePartnersIconIDs[2], baseX + X_VAR1, baseY + 10);
         hud_element_draw_without_clipping(gPausePartnersIconIDs[2]);
     } else if (level == 2) {
+#if VERSION_JP
         hud_element_set_render_pos(gPausePartnersIconIDs[3], baseX + 88, baseY + 10);
         hud_element_draw_without_clipping(gPausePartnersIconIDs[3]);
         hud_element_set_render_pos(gPausePartnersIconIDs[2], baseX + 72, baseY + 10);
         hud_element_draw_without_clipping(gPausePartnersIconIDs[2]);
-    }
 #else
-    if (level == 1) {
-        hud_element_set_render_pos(gPausePartnersIconIDs[2], baseX + 95, baseY + 10);
-        hud_element_draw_without_clipping(gPausePartnersIconIDs[2]);
-    } else if (level == 2) {
         hud_element_set_render_pos(gPausePartnersIconIDs[2], baseX + 91, baseY + 10);
         hud_element_draw_without_clipping(gPausePartnersIconIDs[2]);
         hud_element_set_render_pos(gPausePartnersIconIDs[3], baseX + 101, baseY + 10);
         hud_element_draw_without_clipping(gPausePartnersIconIDs[3]);
-    }
 #endif
+    }
 }
+
+#if VERSION_JP
+#define X_VAR2 32
+#define X_VAR3 22
+#define X_VAR4 124
+#define X_VAR5 133
+#define X_VAR6 7
+#else
+#define X_VAR2 21
+#define X_VAR3 12
+#define X_VAR4 125
+#define X_VAR5 134
+#define X_VAR6 (-2)
+#endif
 
 void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 i;
@@ -538,11 +549,7 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         level = 2;
     }
     for (i = 0; i < 4; i++) {
-#if VERSION_JP
-        msgX = baseX + 32;
-#else
-        msgX = baseX + 21;
-#endif
+        msgX = baseX + X_VAR2;
         msgY = baseY + 22 + i * 13;
 
         if (i >= level) {
@@ -566,19 +573,11 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         draw_msg(moveNameID, msgX, msgY, 255, MSG_PAL_STANDARD, style);
         hud_element_set_scale(gPausePartnersIconIDs[i + 4], 0.5f);
         //TODO find better match
-#if VERSION_JP
-        hud_element_set_render_pos(gPausePartnersIconIDs[i + 4], 22 - (-baseX), baseY + 28 + i * 13);
-#else
-        hud_element_set_render_pos(gPausePartnersIconIDs[i + 4], 12 - (-baseX), baseY + 28 + i * 13);
-#endif
+        hud_element_set_render_pos(gPausePartnersIconIDs[i + 4], X_VAR3 - (-baseX), baseY + 28 + i * 13);
         hud_element_draw_without_clipping(gPausePartnersIconIDs[i + 4]);
 
         if (costFP != 0) {
-#if VERSION_JP
-            s32 xOffset = 124;
-#else
-            s32 xOffset = 125;
-#endif
+            s32 xOffset = X_VAR4;
 
 #if VERSION_PAL
             xOffset = D_PAL_80271B44[gCurrentLanguage];
@@ -588,10 +587,8 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
             if (costFP > 0) {
 #if VERSION_PAL
                 hud_element_set_render_pos(gPausePartnersIconIDs[0], baseX + D_PAL_80271B44[gCurrentLanguage] + 9, baseY + 29 + i * 13);
-#elif VERSION_JP
-                hud_element_set_render_pos(gPausePartnersIconIDs[0], baseX + 133, baseY + 29 + i * 13);
 #else
-                hud_element_set_render_pos(gPausePartnersIconIDs[0], baseX + 134, baseY + 29 + i * 13);
+                hud_element_set_render_pos(gPausePartnersIconIDs[0], baseX + X_VAR5, baseY + 29 + i * 13);
 #endif
                 hud_element_draw_without_clipping(gPausePartnersIconIDs[0]);
             }
@@ -599,13 +596,15 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     }
 
     if (gPauseMenuCurrentTab == 4 && gPausePartnersLevel == 1) {
-#if VERSION_JP
-        pause_set_cursor_pos(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, baseX + 7, baseY + 28 + gPausePartnersSelectedMove * 13);
-#else
-        pause_set_cursor_pos(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, baseX - 2, baseY + 28 + gPausePartnersSelectedMove * 13);
-#endif
+        pause_set_cursor_pos(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, baseX + X_VAR6, baseY + 28 + gPausePartnersSelectedMove * 13);
     }
 }
+
+#if VERSION_JP
+#define X_VAR7 24
+#else
+#define X_VAR7 12
+#endif
 
 void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 msgID = pause_get_menu_msg(PAUSE_MSG_PARTNER_ABILITIES);
@@ -613,10 +612,8 @@ void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s
 
 #if VERSION_PAL
     xOffset = D_PAL_80271B38[gCurrentLanguage];
-#elif VERSION_JP
-    xOffset = 24;
 #else
-    xOffset = 12;
+    xOffset = X_VAR7;
 #endif
 
     draw_msg(msgID, baseX + xOffset, baseY + 1, 255, -1, DRAW_MSG_STYLE_MENU);
