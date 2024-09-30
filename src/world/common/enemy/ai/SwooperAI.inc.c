@@ -24,7 +24,7 @@ API_CALLABLE(N(SwooperAI_Main)) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        enemy->aiFlags |= ENEMY_AI_FLAG_10;
+        enemy->aiFlags |= AI_FLAG_SKIP_IDLE_ANIM_AFTER_FLEE;
         hitDepth = 1000.0f;
         x = npc->pos.x;
         y = npc->pos.y;
@@ -33,9 +33,9 @@ API_CALLABLE(N(SwooperAI_Main)) {
         enemy->varTable[1] = y;
     }
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+    if (enemy->aiFlags & AI_FLAG_SUSPEND) {
         if (enemy->aiSuspendTime == 0) {
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+            enemy->aiFlags &= ~AI_FLAG_SUSPEND;
         } else {
             return ApiStatus_BLOCK;
         }

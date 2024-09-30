@@ -216,7 +216,7 @@ API_CALLABLE(N(ClubbaNappingAI_Main)) {
     territory.halfHeight = 40.0f;
     territory.detectFlags = 0;
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
+    if (isInitialCall || (enemy->aiFlags & AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_INIT;
         npc->duration = 30;
         npc->curAnim = enemy->animList[10];
@@ -227,12 +227,12 @@ API_CALLABLE(N(ClubbaNappingAI_Main)) {
         } else {
             npc->flags = (npc->flags & ~NPC_FLAG_GRAVITY) | NPC_FLAG_FLYING;
         }
-        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+        if (enemy->aiFlags & AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->AI_TEMP_STATE_AFTER_SUSPEND = AI_RETURN_HOME_INIT;
             npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+        enemy->aiFlags &= ~AI_FLAG_SUSPEND;
     }
 
     if (script->AI_TEMP_STATE >= AI_STATE_ALERT_INIT

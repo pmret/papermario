@@ -424,7 +424,7 @@ extern EncounterStatus gCurrentEncounter;
 
 #endif
 
-s32 basic_ai_check_player_dist(EnemyDetectVolume* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
+b32 basic_ai_check_player_dist(EnemyDetectVolume* arg0, Enemy* arg1, f32 arg2, f32 arg3, b8 arg4);
 
 /// The default Npc::onUpdate and Npc::onRender callback.
 void STUB_npc_callback(Npc*);

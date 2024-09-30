@@ -34,7 +34,7 @@ NpcSettings N(NpcSettings_Archeologist_Wander) = {
     .radius = 24,
     .ai = &N(EVS_NpcAI_Archeologist),
     .level = ACTOR_LEVEL_NONE,
-    .actionFlags = ENEMY_AI_FLAG_10,
+    .actionFlags = AI_FLAG_SKIP_IDLE_ANIM_AFTER_FLEE,
 };
 
 NpcSettings N(NpcSettings_Archeologist) = {

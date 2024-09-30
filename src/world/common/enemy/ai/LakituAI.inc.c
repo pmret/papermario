@@ -75,7 +75,7 @@ void N(LakituAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
         script->functionTemp[1]--;
     }
 
-    if (is_point_within_region(enemy->territory->wander.wanderShape, enemy->territory->wander.centerPos.x,
+    if (is_point_outside_territory(enemy->territory->wander.wanderShape, enemy->territory->wander.centerPos.x,
                                enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSize.x,
                                enemy->territory->wander.wanderSize.z) != 0) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
@@ -192,11 +192,11 @@ API_CALLABLE(N(LakituAI_Main)) {
     }
     npc->verticalRenderOffset = -3;
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+    if (enemy->aiFlags & AI_FLAG_SUSPEND) {
         if (enemy->aiSuspendTime != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+        enemy->aiFlags &= ~AI_FLAG_SUSPEND;
     }
 
     switch (script->AI_TEMP_STATE) {
@@ -283,7 +283,7 @@ API_CALLABLE(N(LakituAI_Main)) {
 
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         playerDist = dist2D(gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z, npc->pos.x, npc->pos.z);
-        if (!is_point_within_region(territoryPtr->shape,
+        if (!is_point_outside_territory(territoryPtr->shape,
                 territoryPtr->pointX, territoryPtr->pointZ,
                 npc->pos.x, npc->pos.z,
                 territoryPtr->sizeX, territoryPtr->sizeZ)) {

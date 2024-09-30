@@ -188,7 +188,7 @@ void N(CleftAI_Tackle)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     spawn_surface_effects(npc, SURFACE_INTERACT_RUN);
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
-    if (is_point_within_region(enemy->territory->wander.detectShape,
+    if (is_point_outside_territory(enemy->territory->wander.detectShape,
             enemy->territory->wander.detectPos.x, enemy->territory->wander.detectPos.z,
             npc->pos.x, npc->pos.z,
             enemy->territory->wander.detectSize.x, enemy->territory->wander.detectSize.z)) {
@@ -316,11 +316,11 @@ API_CALLABLE(N(CleftAI_Main)) {
         }
     }
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+    if (enemy->aiFlags & AI_FLAG_SUSPEND) {
         if (enemy->aiSuspendTime) {
             return ApiStatus_BLOCK;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+        enemy->aiFlags &= ~AI_FLAG_SUSPEND;
     }
 
     if (((script->AI_TEMP_STATE == AI_STATE_CLEFT_CHASE_INIT)

@@ -38,7 +38,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
 
     if (isInitialCall) {
         enemy->varTable[6] = npc->collisionHeight;
-        enemy->aiFlags |= ENEMY_AI_FLAG_8;
+        enemy->aiFlags |= AI_FLAG_SKIP_EMOTE_AFTER_FLEE;
     }
 
     if (isInitialCall || (enemy->varTable[10] == 100)) {
@@ -56,10 +56,10 @@ API_CALLABLE(N(SpinyAI_Main)) {
         npc->pos.z = NPC_DISPOSE_POS_Z;
     }
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+    if (enemy->aiFlags & AI_FLAG_SUSPEND) {
         npc->duration = 0;
         npc->collisionHeight = enemy->varTable[6];
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+        enemy->aiFlags &= ~AI_FLAG_SUSPEND;
         if (npc->flags & NPC_FLAG_JUMPING) {
             npc->curAnim = ANIM_Spiny_Anim18;
             npc->moveSpeed = 0.0f;

@@ -27,7 +27,7 @@ s32 ai_check_fwd_collisions(Npc* npc, f32 time, f32* outYaw, f32* outDistFwd, f3
     f32 cwHitDist = -1.0f;
     f32 ccwHitDist = -1.0f;
     f32 yaw;
-    s32 fwdHit;
+    b32 fwdHit;
 
     x1 = npc->pos.x;
     y1 = npc->pos.y;

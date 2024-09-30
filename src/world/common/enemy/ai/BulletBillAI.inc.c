@@ -49,18 +49,18 @@ API_CALLABLE(N(BulletBillAI_Main)) {
     if (isInitialCall || enemy->VAR_PROJECTILE_HITBOX_STATE == PROJECTILE_HITBOX_STATE_DONE) {
         script->AI_TEMP_STATE = AI_STATE_BULLET_INIT;
         npc->duration = 0;
-        enemy->aiFlags |= ENEMY_AI_FLAG_8;
+        enemy->aiFlags |= AI_FLAG_SKIP_EMOTE_AFTER_FLEE;
         enemy->flags |= ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN;
         npc->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
         enemy->VAR_PROJECTILE_HITBOX_STATE = PROJECTILE_HITBOX_STATE_NONE;
         enemy->AI_VAR_BULLET_BLASTER = -1;
     }
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+    if (enemy->aiFlags & AI_FLAG_SUSPEND) {
         if (enemy->aiSuspendTime != 0) {
             return 0;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+        enemy->aiFlags &= ~AI_FLAG_SUSPEND;
     }
 
     switch (script->AI_TEMP_STATE) {
@@ -172,12 +172,12 @@ API_CALLABLE(N(BillBlasterAI_Main)) {
         return ApiStatus_BLOCK;
     }
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+    if (enemy->aiFlags & AI_FLAG_SUSPEND) {
         npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         if (enemy->aiSuspendTime != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+        enemy->aiFlags &= ~AI_FLAG_SUSPEND;
     }
 
     switch (script->AI_TEMP_STATE) {

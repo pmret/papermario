@@ -60,7 +60,7 @@ void N(FlyingMagikoopaAI_15)(Evt* arg0, MobileAISettings* arg1, EnemyDetectVolum
     if (npc->duration <= 0) {
         randomDist = rand_int(30) + 180.0;
         isCCW = FALSE;
-        if (is_point_within_region(enemy->territory->wander.wanderShape, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
+        if (is_point_outside_territory(enemy->territory->wander.wanderShape, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
             npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z) - iterations;
             moveDist = dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
             if (randomDist > moveDist) {
@@ -307,11 +307,11 @@ API_CALLABLE(N(FlyingMagikoopaAI_Main)) {
 
     npc->verticalRenderOffset = -5;
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+    if (enemy->aiFlags & AI_FLAG_SUSPEND) {
         if (enemy->aiSuspendTime != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+        enemy->aiFlags &= ~AI_FLAG_SUSPEND;
     }
 
     switch (script->AI_TEMP_STATE) {

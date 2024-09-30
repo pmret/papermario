@@ -121,11 +121,11 @@ API_CALLABLE(N(ParatroopaAI_Main)) {
 
     npc->verticalRenderOffset = -3;
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+    if (enemy->aiFlags & AI_FLAG_SUSPEND) {
         if (enemy->aiSuspendTime != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+        enemy->aiFlags &= ~AI_FLAG_SUSPEND;
     }
 
     switch (script->AI_TEMP_STATE) {

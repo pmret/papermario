@@ -4562,14 +4562,14 @@ enum EnemyFlags {
 
 // used with enemy->aiFlags
 enum EnemyAIFlags {
-    ENEMY_AI_FLAG_1              = 0x00000001,
-    ENEMY_AI_FLAG_2              = 0x00000002, // do not move; do not sense player
-    ENEMY_AI_FLAG_SUSPEND        = 0x00000004,
-    ENEMY_AI_FLAG_8              = 0x00000008,
-    ENEMY_AI_FLAG_10             = 0x00000010,
-    ENEMY_AI_FLAG_20             = 0x00000020,
-    ENEMY_AI_FLAG_40             = 0x00000040,
-    ENEMY_AI_FLAG_80             = 0x00000080,
+    AI_FLAG_1                           = 0x00000001,
+    AI_FLAG_CANT_DETECT_PLAYER          = 0x00000002,
+    AI_FLAG_SUSPEND                     = 0x00000004,
+    AI_FLAG_SKIP_EMOTE_AFTER_FLEE       = 0x00000008,
+    AI_FLAG_SKIP_IDLE_ANIM_AFTER_FLEE   = 0x00000010,
+    AI_FLAG_OUTSIDE_TERRITORY           = 0x00000020,
+    AI_FLAG_NEEDS_HEADING               = 0x00000040,
+    AI_FLAG_80                          = 0x00000080,
 };
 
 enum EnemyAIStates {
@@ -4619,7 +4619,7 @@ enum EnemyDetectFlags {
     AI_DETECT_FLAG_8                = 0x08,
 };
 
-enum EnemyTerritoryFlags {
+enum TerritoryFlags {
     AI_TERRITORY_IGNORE_HIDING      = 0x01, // bow and sushi dont prevent enemy detection
     AI_TERRITORY_IGNORE_ELEVATION   = 0x02, // vertical size of detection volume is ignored
 };

@@ -164,7 +164,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
             }
         }
 
-        if (is_point_within_region(territory->shape, territory->pointX, territory->pointZ, npc->pos.x, npc->pos.z, territory->sizeX, territory->sizeZ)) {
+        if (is_point_outside_territory(territory->shape, territory->pointX, territory->pointZ, npc->pos.x, npc->pos.z, territory->sizeX, territory->sizeZ)) {
             switch (territory->shape) {
                 case SHAPE_CYLINDER:
                     sp38 = dist2D(npc->pos.x, npc->pos.z, territory->pointX, territory->pointZ);
@@ -319,16 +319,16 @@ API_CALLABLE(N(PiranhaPlantAI_Main)) {
     }
     #endif
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
+    if (isInitialCall || (enemy->aiFlags & AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = AI_STATE_PIRANHA_PLANT_00;
         npc->duration = 0;
         npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
 
         enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_NONE;
-        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+        if (enemy->aiFlags & AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = AI_STATE_PIRANHA_PLANT_00;
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+            enemy->aiFlags &= ~AI_FLAG_SUSPEND;
         }
     }
 
