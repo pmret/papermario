@@ -1526,7 +1526,7 @@ void imgfx_appendGfx_mesh_basic(ImgFXState* state, Matrix4f mtx) {
                 ) {
                     cam = &gCameras[gCurrentCamID];
 
-                    if (gGameStatusPtr->isBattle == MAIN_STATE_PAUSE) {
+                    if (gGameStatusPtr->context == CONTEXT_PAUSE) {
                         gSPViewport(gMainGfxPos++, &D_8014EE50);
                     } else {
                         gSPViewport(gMainGfxPos++, &cam->vpAlt);
@@ -1565,7 +1565,7 @@ void imgfx_appendGfx_mesh_basic(ImgFXState* state, Matrix4f mtx) {
                     alpha2 = 255;
                     cam = &gCameras[gCurrentCamID];
 
-                    if (gGameStatusPtr->isBattle == MAIN_STATE_PAUSE) {
+                    if (gGameStatusPtr->context == CONTEXT_PAUSE) {
                         gSPViewport(gMainGfxPos++, &D_8014EE50);
                     } else {
                         gSPViewport(gMainGfxPos++, &cam->vpAlt);
@@ -1620,7 +1620,7 @@ void imgfx_appendGfx_mesh_basic(ImgFXState* state, Matrix4f mtx) {
             && (state->flags & someFlags)
         ) {
             cam = &gCameras[gCurrentCamID];
-            if (gGameStatusPtr->isBattle == MAIN_STATE_PAUSE) {
+            if (gGameStatusPtr->context == CONTEXT_PAUSE) {
                 gSPViewport(gMainGfxPos++, &D_8014EE40);
                 D_8014EE50.vp.vtrans[0] = D_8014EE40.vp.vtrans[0] + gGameStatusPtr->altViewportOffset.x;
                 D_8014EE50.vp.vtrans[1] = D_8014EE40.vp.vtrans[1] + gGameStatusPtr->altViewportOffset.y;

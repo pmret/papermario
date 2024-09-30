@@ -3526,10 +3526,10 @@ enum EffectGfxDataFlags {
 
 #include "move_enum.h"
 
-enum MainState{
-    MAIN_STATE_WORLD        = 0,
-    MAIN_STATE_BATTLE       = 1,
-    MAIN_STATE_PAUSE        = 2,
+enum GameContext {
+    CONTEXT_WORLD       = 0,
+    CONTEXT_BATTLE      = 1,
+    CONTEXT_PAUSE       = 2,
 };
 
 enum DemoState {

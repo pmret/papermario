@@ -1052,7 +1052,7 @@ void check_for_pulse_stone(void) {
             return;
         }
 
-        if (gGameStatusPtr->areaID != AREA_SBK || gGameStatusPtr->isBattle != MAIN_STATE_WORLD) {
+        if (gGameStatusPtr->areaID != AREA_SBK || gGameStatusPtr->context != CONTEXT_WORLD) {
             return;
         }
 
@@ -1318,7 +1318,7 @@ void clear_interact_prompt(void) {
 void update_partner_timers(void) {
     PlayerData* playerData = &gPlayerData;
 
-    if (gGameStatusPtr->isBattle == MAIN_STATE_WORLD) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         s32 i;
 
         for (i = 1; i < ARRAY_COUNT(playerData->partnerUnlockedTime); i++) {

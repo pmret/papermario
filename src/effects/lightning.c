@@ -101,7 +101,7 @@ EffectInstance* lightning_main(
         s32 effectArg0;
 
         load_effect(EFFECT_FLASHING_BOX_SHOCKWAVE);
-        if (gGameStatusPtr->isBattle == MAIN_STATE_BATTLE) {
+        if (gGameStatusPtr->context == CONTEXT_BATTLE) {
             effectArg0 = FX_SHOCK_OVERLAY_LIGHTNING_BATTLE;
         } else {
             effectArg0 = FX_SHOCK_OVERLAY_LIGHTNING_WORLD;

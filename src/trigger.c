@@ -13,7 +13,7 @@ void clear_trigger_data(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     s32 i;
 
-    if (gGameStatusPtr->isBattle == MAIN_STATE_WORLD) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentTriggerListPtr = &wTriggerList;
     } else {
         gCurrentTriggerListPtr = &bTriggerList;
@@ -42,7 +42,7 @@ void clear_trigger_data(void) {
 }
 
 void init_trigger_list(void) {
-    if (gGameStatusPtr->isBattle == MAIN_STATE_WORLD) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentTriggerListPtr = &wTriggerList;
     } else {
         gCurrentTriggerListPtr = &bTriggerList;

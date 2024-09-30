@@ -479,7 +479,7 @@ void func_80138198(void) {
 void render_screen_overlay_frontUI(void) {
     if (screen_overlay_frontType != OVERLAY_NONE
         && screen_overlay_frontZoom != -1.0f
-        && gGameStatusPtr->isBattle != MAIN_STATE_PAUSE
+        && gGameStatusPtr->context != CONTEXT_PAUSE
     ) {
         _render_transition_stencil(screen_overlay_frontType, screen_overlay_frontZoom, &ScreenOverlays[0]);
     }
@@ -488,7 +488,7 @@ void render_screen_overlay_frontUI(void) {
 void render_screen_overlay_backUI(void) {
     if (screen_overlay_backType != OVERLAY_NONE
         && screen_overlay_backZoom != -1.0f
-        && gGameStatusPtr->isBattle != MAIN_STATE_PAUSE
+        && gGameStatusPtr->context != CONTEXT_PAUSE
     ) {
         _render_transition_stencil(screen_overlay_backType, screen_overlay_backZoom, &ScreenOverlays[1]);
     }
