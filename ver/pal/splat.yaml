@@ -1177,12 +1177,12 @@ segments:
 ###############
 ### Effects ###
 ###############
-  - name: 325AD0
+  - name: effect_globals
     type: code
     start: 0x34E890
     vram: 0xE0200000
     subsegments:
-    - [0x34E890, c, 325AD0]
+    - [0x34E890, c, effect_utils]
     - [0x34ECA0, pm_effect_shims, effect_shims]
     - [0x34EF20]
   - name: effect_gfx_big_smoke_puff
