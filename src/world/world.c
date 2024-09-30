@@ -37,6 +37,8 @@ s32 pad_map_table[] = { 0, 0 };
 #define ASSET_TABLE_ROM_START (s32) mapfs_ROM_START
 #elif VERSION_JP
 #define ASSET_TABLE_ROM_START 0x1E00000
+#elif VERSION_PAL
+#define ASSET_TABLE_ROM_START 0x2600000
 #else
 #define ASSET_TABLE_ROM_START 0x1E40000
 #endif

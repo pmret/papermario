@@ -607,13 +607,17 @@ class Configure:
             "move_data",
         )
 
+        item_table_data = Path("src/item_table.yaml")
+        if version == "pal":
+            item_table_data = Path("src/item_table_pal.yaml")
+
         build(
             [
                 self.build_path() / "include/item_data.inc.c",
                 self.build_path() / "include/item_enum.h",
             ],
             [
-                Path("src/item_table.yaml"),
+                item_table_data,
                 Path("src/item_entity_scripts.yaml"),
                 Path("src/item_hud_scripts.yaml"),
             ],

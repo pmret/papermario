@@ -53,7 +53,11 @@ void state_init_intro(void) {
             startup_set_fade_screen_alpha(0);
 
             IntroOverlayAlpha = 0;
+#if VERSION_PAL
+            IntroFrontFadeAlpha = 14;
+#else
             IntroFrontFadeAlpha = 12;
+#endif
             IntroOverlayDelta = 4;
             IntroOverlayType = OVERLAY_VIEWPORT_COLOR;
             IntroFadeColorR = 0;

@@ -2253,7 +2253,7 @@ typedef struct {
 
 #if VERSION_JP
 #define DISPLAYCONTEXT_GFX_COUNT 0x2000
-#elif VERSION_IQUE
+#elif VERSION_IQUE || VERSION_PAL
 #define DISPLAYCONTEXT_GFX_COUNT 0x2200
 #else
 #define DISPLAYCONTEXT_GFX_COUNT 0x2080
@@ -2265,10 +2265,6 @@ typedef struct {
     /* 0x00030 */ Mtx camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ Gfx mainGfx[DISPLAYCONTEXT_GFX_COUNT];
     /* 0x10630 */ Gfx backgroundGfx[0x200]; // used by gfx_task_background
-#if VERSION_PAL
-    // TODO: find where this space belongs to
-    s32 pad[0x300];
-#endif
     /* 0x11630 */ Mtx matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 

@@ -34,7 +34,435 @@ segments:
   - name: header
     type: header
     start: 0
-  - [0x40, bin]
+  - name: boot
+    type: code
+    start: 0x0040
+    vram: 0xA4000040
+    subsegments:
+    - [0x0040, hasm, boot/ipl3_boot]
+    - [0x0B70, bin, rspboot_font]
+  - name: main
+    type: code
+    start: 0x1000
+    vram: 0x80025C00
+    bss_size: 0x422F0
+    subsegments:
+    - [0x1000, hasm, boot/entry_point]
+    - [0x1060, c, is_debug, -g -fforce-addr]
+    - [0x1310, c, main_pre]
+    - [0x1310, c, main]
+    - [0x1AC0, c, main_loop]
+    - [0x2520, c, background_gfx]
+    - [0x3B70, c, input]
+    - [0x4260, c, rumble]
+    - [0x4370, c, 43F0]
+    - [0x5F80, c, heap]
+    - [0x61C0, asm, fio]  # modified
+    - [0x70A0, asm, curtains]  # modified; offset uncertain
+    - [0x7650, c, crash_screen]
+    - [0x8150, c, os/nusys/nusimgr]
+    - [0x8480, asm, os/nusys/nugfxtaskmgr]  # moved; is modified?
+    - [0x8880, c, load_obfuscation_shims]
+    - [0x8B20, c, cam_main]
+    - [0xA030, c, cam_mode_interp]
+    - [0xA9B0, c, cam_mode_unused_radial]
+    - [0xAF70, c, cam_mode_minimal]
+    - [0xB0B0, c, cam_mode_no_interp]
+    - [0xB400, c, cam_mode_unused_ahead]
+    - [0xB720, c, cam_mode_unused_leading]
+    - [0xBB70, c, cam_mode_zone_interp]
+    - [0xD930, c, cam_math]
+    - [0xEC10, c, game_modes]
+    - [0xEC60, asm, state_startup]  # modified
+    - [0xEF10, c, startup_screen_fading]
+    - [0xF010, c, state_battle]
+    - [0xF5B0, c, state_logos]
+    - [0x10080, asm, state_pause]  # modified
+    - [0x107B0, asm, state_file_select]  # modified; offset uncertain
+    - [0x11030, c, state_world]
+    - [0x110F0, c, 111f0_len_860]
+    - [0x11950, c, state_intro]
+    - [0x120F0, asm, state_title_screen]  # modified
+    - [0x13970, c, state_demo]
+    - [0x13D60, c, npc]
+    - [0x1A6E0, c, encounter]
+    - [0x1FA70, c, encounter_api]
+    - [0x213B0, asm, status_icons]  # modified
+    - [0x23C60, c, 23680]
+    - [0x260D0, c, 25AF0]
+    - [0x264E0, asm, audio/25f00_len_940]  # modified
+    - [0x26E20, c, audio/sfx_player]
+    - [0x28EF0, c, audio/28910_len_5090]
+    - [0x2C570, c, audio/2BF90]
+    - [0x2DF80, c, audio/2d9a0_len_890]
+    - [0x2E810, c, audio/2e230_len_2190]
+    - [0x309A0, c, audio/303c0_len_3e10]
+    - [0x30A30, c, audio/30450]
+    - [0x31C30, c, audio/31650]
+    - [0x33A30, c, audio/33450]
+    - [0x347B0, c, audio/tables]
+    - [0x347B0, c, audio/reverb]
+    - [0x35660, asm, effects]  # modified
+    - [0x361E0, c, world/world]
+    - [0x369C0, c, collision]
+    - [0x39620, c, 38F00]
+    - [0x39930, c, 39210_len_aa0]
+    - [0x3A3D0, asm, os/nusys/nuboot]  # modified?
+    - [0x3A4D0, asm, os/nusys/nusched]  # modified
+    - [0x3ACE0, asm, os/nusys/nugfxfuncset]
+    - [0x3AD20, asm, os/nusys/nugfxprenmifuncset]
+    - [0x3AD60, asm, os/nusys/nugfxtaskallendwait]  # modified
+    - [0x3AD80, asm, os/nusys/nugfxsetcfb]  # modified
+    - [0x3AEA0, asm, os/nusys/nugfxdisplayoff]
+    - [0x3AED0, asm, os/nusys/nugfxdisplayon]
+    - [0x3AEF0, asm, os/nusys/nupiinit]
+    - [0x3AF30, asm, os/nusys/nupireadrom]  # modified
+    - [0x3AFF0, asm, os/nusys/nugfxinit]  # modified
+    - [0x3B0B0, asm, os/nusys/nucontinit]
+    - [0x3B0F0, asm, os/nusys/nucontdataget]  # modified
+    - [0x3B150, asm, os/nusys/nucontpakmgr]  # modified
+    - [0x3B3D0, asm, os/nusys/nucontrmbmgr]  # modified
+    - [0x3B900, asm, os/nusys/nucontrmbstart]  # modified
+    - [0x3B960, asm, os/nusys/nucontrmbcheck]
+    - [0x3BA00, asm, os/nusys/nucontrmbmodeset]  # modified
+    - [0x3BAD0, asm, os/nusys/nucontrmbforcestop]
+    - [0x3BAF0, asm, os/nusys/nucontrmbforcestopend]
+    - [0x3BB10, asm, os/nusys/nupireadromoverlay]
+    - [0x3BC20, asm, os/nusys/nugfxthread]  # modified
+    - [0x3BD40, asm, os/nusys/nugfxswapcfbfuncset]
+    - [0x3BD80, asm, os/nusys/nugfxswapcfb]
+    - [0x3BDA0, asm, os/nusys/nugfxretracewait]
+    - [0x3BE20, asm, os/nusys/code_3BE20]  # unknown
+    - [0x3BE40, asm, os/nusys/nusicallbackadd]
+    - [0x3BEE0, asm, os/nusys/nusicallbackremove]
+    - [0x3BF60, asm, os/nusys/nucontmgr]  # modified
+    - [0x3C2A0, asm, os/nusys/nucontdatalock]
+    - [0x3C300, asm, os/nusys/nucontqueryread]
+    - [0x3C320, hasm, os/osSetIntMask]
+    - [0x3C3C0, c, os/pimgr, gcc_272 -O3]
+    - [0x3C550, asm, os/epirawdma, gcc_272 -O3]  # modified
+    - [0x3C8D0, c, os/epiwrite, gcc_272 -O3]
+    - [0x3C930, c, os/epiread, gcc_272 -O3]
+    - [0x3C990, c, os/epidma, gcc_272 -O3]
+    - [0x3CA30, c, os/epilinkhandle, gcc_272 -O3]
+    - [0x3CA80, c, os/cartrominit, gcc_272 -O3]
+    - [0x3CC00, c, os/devmgr, gcc_272 -O3]
+    - [0x3CFC0, c, os/piacs, gcc_272 -O3]
+    - [0x3D0B0, c, os/flashinit, gcc_272 -O3]
+    - [0x3D1C0, c, os/flashreadid, gcc_272 -O3]
+    - [0x3D2C0, c, os/flashsectorerase, gcc_272 -O3]
+    - [0x3D410, c, os/flashwritebuffer, gcc_272 -O3]
+    - [0x3D4B0, c, os/flashwritearray, gcc_272 -O3]
+    - [0x3D600, c, os/flashreadarray, gcc_272 -O3]
+    - [0x3D7B0, c, os/aigetlength, gcc_272 -O3]
+    - [0x3D7C0, c, os/aigetstatus, gcc_272 -O3]
+    - [0x3D7D0, c, os/aisetfrequency, gcc_272 -O3]
+    - [0x3D8F0, c, os/aisetnextbuf, gcc_272 -O3]
+    - [0x3D990, hasm, os/osInvalDCache]
+    - [0x3DA40, hasm, os/osInvalICache]
+    - [0x3DAC0, hasm, os/osWritebackDCache]
+    - [0x3DB40, hasm, os/osWritebackDCacheAll]
+    - [0x3DB70, c, os/contquery, gcc_272 -O3]
+    - [0x3DC10, c, os/contreaddata, gcc_272 -O3]
+    - [0x3DDF0, c, os/controller, gcc_272 -O3]
+    - [0x3E100, c, os/virtualtophysical, gcc_272 -O3]
+    - [0x3E160, c, os/sqrtf, -ffast-math]
+    - [0x3E170, c, os/coss, gcc_272 -O3]
+    - [0x3E1A0, c, os/frustum, gcc_272 -O3]
+    - [0x3E420, c, os/guLookAt, gcc_272 -O3]
+    - [0x3EB30, c, os/lookathil, gcc_272 -O3]
+    - [0x3F590, c, os/lookatref, gcc_272 -O3]
+    - [0x3FB80, c, os/guOrtho, gcc_272 -O3]
+    - [0x3FE00, c, os/perspective, gcc_272 -O3]
+    - [0x40180, c, os/position, gcc_272 -O3]
+    - [0x40540, c, os/rotateRPY, gcc_272 -O3]
+    - [0x40860, c, os/sins, gcc_272 -O3]
+    - [0x408C0, hasm, os/bcopy]
+    - [0x40BE0, hasm, os/bzero]
+    - [0x40C80, c, os/string, gcc_272 -O3]
+    - [0x40D10, c, os/xprintf, gcc_272 -O3]
+    - [0x41760, c, os/sprintf, gcc_272 -O3]
+    - [0x417F0, c, os/createmesgqueue]
+    - [0x41820, c, os/jammesg, gcc_272 -O3]
+    - [0x41960, c, os/recvmesg, gcc_272 -O3]
+    - [0x41A90, c, os/sendmesg, gcc_272 -O3]
+    - [0x41BC0, c, os/seteventmesg, gcc_272 -O3]
+    - [0x41C70, hasm, os/osGetCount]
+    - [0x41C80, c, os/sptask, gcc_272 -O3]
+    - [0x41EC0, c, os/sptaskyield, gcc_272 -O3]
+    - [0x41EE0, c, os/sptaskyielded, gcc_272 -O3]
+    - [0x41F30, c, os/sirawdma, gcc_272 -O3]
+    - [0x41FE0, c, os/siacs, gcc_272 -O3]
+    - [0x420D0, c, os/createthread, gcc_272 -O3]
+    - [0x421A0, c, os/getthreadpri, gcc_272 -O3]
+    - [0x421C0, c, os/setthreadpri, gcc_272 -O3]
+    - [0x42290, c, os/startthread, gcc_272 -O3]
+    - [0x423B0, c, os/stopthread, gcc_272 -O3]
+    - [0x42470, c, os/thread, gcc_272 -O3]
+    - [0x424B0, c, os/yieldthread, gcc_272 -O3]
+    - [0x42500, c, os/getactivequeue, gcc_272 -O3]
+    - [0x42510, c, os/gettime, gcc_272 -O3]
+    - [0x425A0, c, os/settime, gcc_272 -O3]
+    - [0x425C0, c, os/settimer, gcc_272 -O3]
+    - [0x426F0, c, os/timerintr, gcc_272 -O3]
+    - [0x42A10, hasm, os/osMapTLB]
+    - [0x42AD0, hasm, os/__osProbeTLB]
+    - [0x42B90, hasm, os/osUnmapTLB]
+    - [0x42BD0, hasm, os/osUnmapTLBAll]
+    - [0x42C20, c, os/vigetcurrframebuf, gcc_272 -O3]
+    - [0x42C60, c, os/vigetnextframebuf, gcc_272 -O3]
+    - [0x42CA0, c, os/vigetmode, gcc_272 -O3]
+    - [0x42CE0, c, os/vimgr, gcc_272 -O3]
+    - [0x43020, c, os/vitbl, gcc_272 -O3]
+    - [0x43020, c, os/visetevent, gcc_272 -O3]
+    - [0x43080, c, os/visetmode, gcc_272 -O3]
+    - [0x430D0, c, os/visetspecial, gcc_272 -O3]
+    - [0x43240, c, os/visetyscale, gcc_272 -O3]
+    - [0x43290, c, os/viswapbuf, gcc_272 -O3]
+    - [0x432E0, c, os/viswapcontext, gcc_272 -O3]
+    - [0x435F0, c, os/viblack, gcc_272 -O3]
+    - [0x43650, c, os/virepeatline, gcc_272 -O3]
+    - [0x436B0, c, os/vimodefpallpn1]
+    - [0x436B0, hasm, os/padding]
+    - [0x436C0, hasm, os/guMtxIdent]
+    - [0x43720, hasm, os/guMtxIdentF]
+    - [0x43780, hasm, os/guMtxF2L]
+    - [0x43800, hasm, os/guMtxL2F]
+    - [0x43880, hasm, os/guMtxCatF]
+    - [0x43980, hasm, os/guScale]
+    - [0x43A40, hasm, os/guScaleF]
+    - [0x43AA0, hasm, os/guTranslate]
+    - [0x43B80, hasm, os/guTranslateF]
+    - [0x43BE0, c, os/guMtxCat, gcc_272 -O3]
+    - [0x43C60, c, os/guMtxXFML, gcc_272 -O3]
+    - [0x43CF0, c, os/guMtxXFMF, gcc_272 -O3]
+    - [0x43DA0, c, os/guRotate, gcc_272 -O3]
+    - [0x44080, c, os/motor, gcc_272 -O3]
+    - [0x44410, c, os/pfsallocatefile, gcc_272 -O3]
+    - [0x44840, c, os/pfsdeletefile, gcc_272 -O3]
+    - [0x44A60, c, os/pfsreadwritefile, gcc_272 -O3]
+    - [0x44EA0, c, os/pfsfilestate, gcc_272 -O3]
+    - [0x45040, c, os/pfsfindfile, gcc_272 -O3]
+    - [0x45200, c, os/pfsfreeblocks, gcc_272 -O3]
+    - [0x45310, c, os/pfsnumfiles, gcc_272 -O3]
+    - [0x45410, c, os/pfsinitpak, gcc_272 -O3]
+    - [0x456E0, c, os/pfsrepairid, gcc_272 -O3]
+    - [0x45740, c, os/pfsgetstatus, gcc_272 -O3]
+    - [0x45950, c, os/pfsselectbank, gcc_272 -O3]
+    - [0x459C0, c, os/contpfs, gcc_272 -O3]
+    - [0x46450, c, os/contramread, gcc_272 -O3]
+    - [0x46640, c, os/contramwrite, gcc_272 -O3]
+    - [0x46850, hasm, os/parameters]
+    - [0x468B0, c, os/afterprenmi, gcc_272 -O3]
+    - [0x468D0, c, os/initialize, gcc_272 -O3]
+    - [0x46C70, hasm, os/exceptasm]
+    - [0x475E0, hasm, os/__osDisableInt]
+    - [0x47650, hasm, os/__osRestoreInt]
+    - [0x47670, c, os/setglobalintmask, gcc_272 -O3]
+    - [0x476B0, c, os/resetglobalintmask, gcc_272 -O3]
+    - [0x47700, c, os/pirawdma, gcc_272 -O3]
+    - [0x477D0, c, os/pigetcmdq, gcc_272 -O3]
+    - [0x477F0, c, os/epirawread, gcc_272 -O3]
+    - [0x47960, c, os/epirawwrite, gcc_272 -O3]
+    - [0x47AD0, c, os/flashgetaddr, gcc_272 -O3]
+    - [0x47AF0, c, os/flashreadstatus, gcc_272 -O3]
+    - [0x47B90, c, os/flashclearstatus, gcc_272 -O3]
+    - [0x47BF0, c, os/ai, gcc_272 -O3]
+    - [0x47C10, hasm, os/bcmp]
+    - [0x47D20, c, os/xlitob, gcc_272 -O3]
+    - [0x47F70, c, os/xldtob, gcc_272 -O3]
+    - [0x48A00, hasm, os/__osGetCause]
+    - [0x48A10, hasm, os/__osGetSR]
+    - [0x48A20, hasm, os/__osSetCompare]
+    - [0x48A30, hasm, os/setfpccsr]
+    - [0x48A40, hasm, os/setsr]
+    - [0x48A50, hasm, os/__osSetWatchLo]
+    - [0x48A60, c, os/sp, gcc_272 -O3]
+    - [0x48A80, c, os/spgetstat, gcc_272 -O3]
+    - [0x48A90, c, os/spsetstat, gcc_272 -O3]
+    - [0x48AA0, c, os/spsetpc, gcc_272 -O3]
+    - [0x48AD0, c, os/sprawdma, gcc_272 -O3]
+    - [0x48B60, c, os/sirawread, gcc_272 -O3]
+    - [0x48BB0, c, os/sirawwrite, gcc_272 -O3]
+    - [0x48C00, c, os/crc, gcc_272 -O3]
+    - [0x48CF0, c, os/destroythread, gcc_272 -O3]
+    - [0x48DD0, hasm, os/osMapTLBRdb]
+    - [0x48E30, c, os/vi, gcc_272 -O3]
+    - [0x48F40, c, os/vimodentsclan1]
+    - [0x48F40, c, os/vimodepallan1]
+    - [0x48F40, c, os/vimodempallan1]
+    - [0x48F40, c, os/vigetcurrcontext, gcc_272 -O3]
+    - [0x48F50, hasm, os/padding_alt]
+    - [0x48F60, hasm, os/guNormalize]
+    - [0x48FC0, c, os/pfschecker, gcc_272 -O3]
+    - [0x496E0, c, os/pfsisplug, gcc_272 -O3]
+    - [0x499C0, c, os/ldiv, gcc_272 -O3]
+    - [0x49B80, c, os/osSiDeviceBusy]
+    - [0x49BA0, c, gcc/divdi3, -g2]
+    - [0x4A160, c, gcc/moddi3, -g2]
+    - [0x4A6B0, c, gcc/udivdi3, -g2]
+    - [0x4AC10, c, gcc/umoddi3, -g2]
+    - [0x4B0E0, c, os/strcpy, gcc_272 -O1]
+    - [0x4B110, c, os/strcmp, gcc_272 -O1]
+    - [0x4B150, c, os/memset, gcc_272 -O1]
+    - [0x4B190, hasm, os/decode_yay0]
+    - [0x4B240, c, battle/battle]
+    - [0x4B8B0, bin, n_aspMain_text]
+    - [0x4C510, .data, main_pre]
+    - start: 0x4C510
+      type: .data
+      name: main_pre
+      subsegments:
+      - [0x4C510]
+      - [0x4C520, i4, reset_tiles, 128, 8]
+    - [0x4C720, .data, main]
+    - [0x4C730, .data, main_loop]
+    - [0x4C910, .data, background_gfx]
+    - [0x4C970, .data, rumble]
+    - [0x4C980, .data, 43F0]
+    - [0x4CCE0, data, fio]
+    - [0x4CCF0, data, curtains]  # modified
+    - [0x4E920, .data, crash_screen]
+    - [0x4EB00, .data, os/nusys/nusimgr]
+    - [0x4EB10, data, os/nusys/nugfxtaskmgr]  # new; is modified?
+    - [0x4EB30, .data, cam_math]
+    - [0x4EB40, .data, game_modes]
+    - [0x4EFC0, .data, state_battle]
+    - [0x4EFD0, .data, state_logos]
+    - [0x4F010, data, state_pause]  # modified
+    - [0x4F0D0, data, state_file_select]
+    - [0x4F110, data, state_title_screen]  # modified
+    - [0x4F280, .data, state_demo]
+    - [0x4F390, .data, npc]
+    - [0x4F3E0, .data, encounter]
+    - [0x4F900, data, status_icons]
+    - [0x4F910, data, audio/25f00_len_940]
+    - [0x4F930, .data, audio/sfx_player]
+    - [0x50550, .data, audio/30450]
+    - [0x505F0, .data, audio/31650]
+    - [0x50600, .data, audio/33450]
+    - [0x50700, .data, audio/tables]
+    - [0x56780, .data, audio/reverb]
+    - [0x569B0, data, effects]
+    - [0x576C0, .data, 5B320]
+    - [0x67700, .data, world/world]
+    - [0x6AE60, .data, 38F00]
+    - [0x6B320, data, os/nusys/nusched]
+    - [0x6B340, data, os/nusys/nugfxinit]
+    - [0x6B440, data, os/nusys/nucontpakmgr]
+    - [0x6B480, data, os/nusys/nucontrmbmgr]
+    - [0x6B4B0, data, os/nusys/nugfxthread]
+    - [0x6B4C0, data, os/nusys/nucontmgr]
+    - [0x6B4F0, .data, os/pimgr]
+    - [0x6B520, .data, os/cartrominit]
+    - [0x6B530, .data, os/piacs]
+    - [0x6B540, .data, os/aisetnextbuf]
+    - [0x6B550, .data, os/controller]
+    - [0x6B560, .data, os/position]
+    - [0x6B570, .data, os/rotateRPY]
+    - [0x6B580, .data, os/sins]
+    - [0x6BD80, .data, os/xprintf]
+    - [0x6BDD0, .data, os/seteventmesg]
+    - [0x6BDE0, .data, os/siacs]
+    - [0x6BDF0, .data, os/thread]
+    - [0x6BE10, .data, os/timerintr]
+    - [0x6BE20, .data, os/vimgr]
+    - [0x6BE40, .data, os/vitbl]
+    - [0x6CFC0, .data, os/vimodefpallpn1]
+    - [0x6D010, .data, os/guRotate]
+    - [0x6D020, .data, os/contpfs]
+    - [0x6D030, .data, os/contramread]
+    - [0x6D040, .data, os/initialize]
+    - [0x6D060, .data, os/exceptasm]
+    - [0x6D090, .data, os/xlitob]
+    - [0x6D0C0, .data, os/vi]
+    - [0x6D130, .data, os/vimodentsclan1]
+    - [0x6D180, .data, os/vimodepallan1]
+    - [0x6D1D0, .data, os/vimodempallan1]
+    - [0x6D220, .data, battle/battle]
+    - [0x6D820, bin, gspF3DEX2kawase_fifo_text]
+    - [0x6EE50, bin, gspF3DEX2kawase_fifo_data]
+    - [0x6F270, bin, n_aspMain_data]
+    - [0x6F520, .rodata, is_debug]
+    - [0x6F538, .rodata, main_loop]
+    - [0x6F550, .rodata, 43F0]
+    - [0x6F5F0, rodata, curtains]
+    - [0x6F620, .rodata, crash_screen]
+    - [0x6F9D0, .rodata, cam_main]
+    - [0x6FA00, .rodata, cam_mode_zone_interp]
+    - [0x6FA70, .rodata, cam_math]
+    - [0x6FA80, .rodata, state_logos]
+    - [0x6FAD8, rodata, state_file_select]  # modified?
+    - [0x6FAF8, .rodata, 111f0_len_860]
+    - [0x6FB28, .rodata, state_intro]
+    - [0x6FB68, rodata, state_title_screen]  # modified?
+    - [0x6FBD0, .rodata, state_demo]
+    - [0x6FC50, .rodata, npc]
+    - [0x6FDC0, .rodata, encounter]
+    - [0x6FE80, rodata, status_icons]
+    - [0x6FEE0, .rodata, 23680]
+    - [0x70090, .rodata, audio/28910_len_5090]
+    - [0x700C0, .rodata, audio/2e230_len_2190]
+    - [0x700D8, .rodata, audio/30450]
+    - [0x70100, .rodata, audio/33450]
+    - [0x70110, .rodata, audio/reverb]
+    - [0x70170, .rodata, 5B320]
+    - [0x701E0, .rodata, world/world]
+    - [0x71270, .rodata, os/osSetIntMask]
+    - [0x712F0, .rodata, os/devmgr]
+    - [0x71310, .rodata, os/aisetfrequency]
+    - [0x71320, .rodata, os/guLookAt]
+    - [0x71340, .rodata, os/lookathil]
+    - [0x71370, .rodata, os/lookatref]
+    - [0x71380, .rodata, os/perspective]
+    - [0x713C0, .rodata, os/xprintf]
+    - [0x71540, .rodata, os/viswapcontext]
+    - [0x71550, .rodata, os/exceptasm]
+    - [0x715A0, .rodata, os/xldtob]
+    - [0x71610, .rodata, gcc/divdi3]
+    - [0x71710, .rodata, gcc/moddi3]
+    - [0x71810, .rodata, gcc/udivdi3]
+    - [0x71910, .rodata, gcc/umoddi3]
+    - [0x71A10, .rodata, battle/battle]
+    - { type: bss, vram: 0x80096980, name: bss/main_pre_bss }  # modified
+    - { type: .bss, vram: 0x80096A70, name: main_loop }
+    - { type: .bss, vram: 0x80096A80, name: input }
+    - { type: bss, vram: 0x80096A90, name: fio }  # modified?
+    - { type: bss, vram: 0x80097E70, name: curtains }  # modified?
+    - { type: .bss, vram: 0x8009A290, name: crash_screen }
+    - { type: .bss, vram: 0x8009AC70, name: os/nusys/nusimgr }
+    - { type: bss, vram: 0x8009CE40, name: os/nusys/nugfxtaskmgr }
+    - { type: .bss, vram: 0x8009F020, name: cam_mode_zone_interp }
+    - { type: .bss, vram: 0x8009F050, name: game_modes }
+    - { type: .bss, vram: 0x8009F060, name: state_battle }
+    - { type: .bss, vram: 0x8009F070, name: state_logos }
+    - { type: bss, vram: 0x8009F080, name: state_pause }
+    - { type: bss, vram: 0x8009F090, name: state_file_select }
+    - { type: .bss, vram: 0x8009F0A0, name: 111f0_len_860 }
+    - { type: .bss, vram: 0x8009F0B0, name: state_intro }
+    - { type: bss, vram: 0x8009F0D0, name: state_title_screen }
+    - { type: .bss, vram: 0x8009F100, name: npc }
+    - { type: .bss, vram: 0x8009F310, name: encounter }
+    - { type: bss, vram: 0x8009F330, name: status_icons }
+    - { type: bss, vram: 0x8009F6C0, name: audio/25f00_len_940 }
+    - { type: .bss, vram: 0x800A2740, name: audio/28910_len_5090 }
+    - { type: .bss, vram: 0x800A2750, name: audio/31650 }
+    - { type: bss, vram: 0x800A2770, name: effects }
+    - { type: .bss, vram: 0x800A2950, name: world/world }
+    - { type: .bss, vram: 0x800A29A0, name: collision }
+    - { type: bss, vram: 0x800A29E0, name: os/nusys/nuboot }
+    - { type: bss, vram: 0x800A4D40, name: os/nusys/nusched }
+    - { type: bss, vram: 0x800AAD40, name: os/nusys/nupiinit }
+    - { type: bss, vram: 0x800AAE20, name: os/nusys/nugfxthread }
+    - { type: bss, vram: 0x800ACE40, name: os/nusys/nucontmgr }
+    - { type: .bss, vram: 0x800ACE50, name: os/pimgr }
+    - { type: .bss, vram: 0x800AE020, name: os/piacs }
+    - { type: .bss, vram: 0x800AE030, name: os/sptask }
+    - { type: .bss, vram: 0x800AE070, name: os/siacs }
+    - { type: .bss, vram: 0x800AE080, name: os/vimgr }
+    - { type: .bss, vram: 0x800AF2A0, name: os/motor }
+    - { type: bss, vram: 0x800AF3A0, name: bss/main_post_bss }
+    - { type: .bss, vram: 0x800D87D0, name: battle/battle_bss }
 
   - name: engine1
     type: code
@@ -645,7 +1073,10 @@ segments:
       - [0x10C870, i4, entity/shadow/circle_big, 32, 32]
       - [0x10CA70]
 
-  - [0x10E710, bin]
+  - name: font_width
+    type: bin
+    start: 0x10E710
+    vram: 0x802F16D0
 
   - type: code
     dir: charset
@@ -1034,11 +1465,20 @@ segments:
     - [0x179200, .data, filemenu_msg]
     - [0x179C30, .data, filemenu_styles]
 
-  - [0x17A160, bin]
+  - name: battle_code
+    type: bin
+    start: 0x17A160
+    vram: 0x8023E000
 
   - [0x1DA1E0, pm_icons, icon]
-  - [0x20C080, bin]
 
+  - dir: logos
+    type: code
+    start: 0x20C080
+    subsegments:
+    - [auto, rgba16,  logo_n64, 128, 112]
+    - [auto, rgba16,  logo_is, 256, 112]
+    - [auto, rgba16,  logo_nintendo, 256, 48]
   - [0x227080, ci8,     title/bg_1, 264, 162]
   - [0x231790, palette, title/bg_1]
 
@@ -1076,8 +1516,39 @@ segments:
     - ["cymbal_crush", 0xCA380]
 
   - [0x33A930, pm_sprite_shading_profiles, sprite_shading_profiles]
+  - type: code
+    start: 0x33B7A0
+    name: create_audio_system_obfuscated
+    vram: 0x80200000
+    subsegments:
+    - [auto, c, create_audio_system_obfuscated]
+  - type: code
+    start: 0x33B820
+    vram: 0x80200080
+    name: load_engine_data_obfuscated
+    follows_vram: create_audio_system_obfuscated
+    subsegments:
+    - [auto, c, load_engine_data_obfuscated]
+  - type: code
+    start: 0x33B9B0
+    name: general_heap_create_obfuscated
+    vram: 0x802AE000
+    subsegments:
+    - [auto, c, general_heap_create_obfuscated]
+  - type: code
+    start: 0x33BB40
+    name: battle_heap_create_obfuscated
+    vram: 0x802AE000
+    subsegments:
+    - [auto, c, battle_heap_create_obfuscated]
+  - type: code
+    start: 0x33BCE0
+    name: obfuscation_shims
+    vram: 0x802B2000
+    subsegments:
+    - [auto, c, obfuscation_shims]
 
-  - [0x33B7A0, bin]
+  - [0x33BDD0, bin]
 
   - type: code
     dir: world/partner
@@ -6802,8 +7273,10 @@ segments:
     vram: 0x80234000
     subsegments:
     - [0x84C440, c, "24"]
-
-  - [0x84CF10, bin]
+  - name: world_script_api
+    type: bin
+    start: 0x84CF10
+    vram: 0x80280000
 
 ############
 ### Maps ###

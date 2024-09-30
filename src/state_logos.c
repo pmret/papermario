@@ -33,6 +33,7 @@ enum LogoStates {
     LOGOS_STATE_CLEANUP             = 0x0000000B,
 };
 
+#if !VERSION_PAL
 s32 D_800778C0[] = { 0, 0 };
 
 Gfx D_800778C8[] = {
@@ -45,6 +46,7 @@ Gfx D_800778C8[] = {
     gsDPSetTextureFilter(G_TF_POINT),
     gsSPEndDisplayList(),
 };
+#endif
 
 Gfx D_80077908[] = {
     gsDPPipeSync(),
