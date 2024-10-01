@@ -848,16 +848,16 @@ API_CALLABLE(OnPlayerFled) {
     Bytecode* args = script->ptrReadPos;
     s32 skipReaction = evt_get_variable(script, *args++);
 
-    enemy->aiFlags |= ENEMY_AI_FLAG_SUSPEND;
+    enemy->aiFlags |= AI_FLAG_SUSPEND;
 
     if (!skipReaction) {
         EffectInstance* emoteEffect;
 
-        if (!(enemy->aiFlags & ENEMY_AI_FLAG_10)) {
+        if (!(enemy->aiFlags & AI_FLAG_SKIP_IDLE_ANIM_AFTER_FLEE)) {
             npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         }
 
-        if (!(enemy->aiFlags & ENEMY_AI_FLAG_8)) {
+        if (!(enemy->aiFlags & AI_FLAG_SKIP_EMOTE_AFTER_FLEE)) {
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 0.0f, -20.0f, 40, &emoteEffect);
         }
 

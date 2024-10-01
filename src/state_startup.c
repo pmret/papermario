@@ -20,7 +20,7 @@ void state_step_startup(void) {
 
     gOverrideFlags = 0;
     gGameStatusPtr->areaID = 0;
-    gGameStatusPtr->isBattle = 0;
+    gGameStatusPtr->context = CONTEXT_WORLD;
     gameStatus->prevArea = -1;
     gameStatus->mapID = 0;
     gameStatus->entryID = 0;

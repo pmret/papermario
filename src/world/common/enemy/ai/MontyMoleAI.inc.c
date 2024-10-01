@@ -27,7 +27,13 @@ enum AiStateMontyMole {
     AI_STATE_MOLE_BURROW        = 21,   // burrow underground
 };
 
-#define MONTY_MOLE_UNK_NPC_FLAGS 0x1F100000
+#define INTANGIBLE_MONTY_MOLE_NPC_FLAGS \
+    ENEMY_FLAG_100000 \
+    | ENEMY_FLAG_IGNORE_TOUCH \
+    | ENEMY_FLAG_IGNORE_JUMP \
+    | ENEMY_FLAG_IGNORE_HAMMER \
+    | ENEMY_FLAG_IGNORE_PARTNER \
+    | ENEMY_FLAG_CANT_INTERACT
 
 static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyDetectVolume* territory, f32 radius, f32 arg3) {
     Camera* cam;
@@ -74,7 +80,7 @@ static void N(MontyMoleAI_Init)(Evt* script, MobileAISettings* aiSettings, Enemy
     } else {
         npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
     }
-    enemy->flags |= MONTY_MOLE_UNK_NPC_FLAGS;
+    enemy->flags |= INTANGIBLE_MONTY_MOLE_NPC_FLAGS;
     npc->flags |= NPC_FLAG_INVISIBLE;
     script->functionTemp[1] = 0;
     script->AI_TEMP_STATE = AI_STATE_MOLE_WANDER;
@@ -86,7 +92,7 @@ static void N(MontyMoleAI_Wander)(Evt* script, MobileAISettings* aiSettings, Ene
     Npc dummyNpc;
     f32 hitDepth;
 
-    if (is_point_within_region(enemy->territory->wander.wanderShape,
+    if (is_point_outside_territory(enemy->territory->wander.wanderShape,
             enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z,
             npc->pos.x, npc->pos.z,
             enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
@@ -142,7 +148,7 @@ static void N(MontyMoleAI_Surface)(Evt* script, MobileAISettings* aiSettings, En
 
     npc->duration--;
     if (npc->duration == 2) {
-        enemy->flags &= ~MONTY_MOLE_UNK_NPC_FLAGS;
+        enemy->flags &= ~(INTANGIBLE_MONTY_MOLE_NPC_FLAGS);
     }
     if (npc->duration <= 0) {
         npc->curAnim = ANIM_MontyMole_Anim18; // get and throw rock
@@ -217,7 +223,7 @@ static void N(MontyMoleAI_Burrow)(Evt* script, MobileAISettings* aiSettings, Ene
 
     npc->duration--;
     if (npc->duration == 3) {
-        enemy->flags |= MONTY_MOLE_UNK_NPC_FLAGS;
+        enemy->flags |= INTANGIBLE_MONTY_MOLE_NPC_FLAGS;
     }
     if (npc->duration <= 0) {
         npc->flags |= NPC_FLAG_INVISIBLE;
@@ -246,12 +252,12 @@ API_CALLABLE(N(MontyMoleAI_Main)) {
         script->AI_TEMP_STATE = AI_STATE_MOLE_INIT;
         npc->duration = 0;
         npc->flags &= ~NPC_FLAG_JUMPING;
-        enemy->aiFlags |= (ENEMY_AI_FLAG_8 | ENEMY_AI_FLAG_10);
+        enemy->aiFlags |= (AI_FLAG_SKIP_EMOTE_AFTER_FLEE | AI_FLAG_SKIP_IDLE_ANIM_AFTER_FLEE);
     }
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+    if (enemy->aiFlags & AI_FLAG_SUSPEND) {
         if (enemy->aiSuspendTime == 0) {
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+            enemy->aiFlags &= ~AI_FLAG_SUSPEND;
         } else {
             return ApiStatus_BLOCK;
         }

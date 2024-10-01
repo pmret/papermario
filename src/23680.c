@@ -295,16 +295,16 @@ void spawn_drops(Enemy* enemy) {
 s32 get_coin_drop_amount(Enemy* enemy) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     EnemyDrops* enemyDrops = enemy->drops;
-    s32 maxCoinBonus = enemyDrops->maxCoinBonus;
+    s32 max = enemyDrops->maxCoinBonus;
     s32 amt = enemyDrops->minCoinBonus;
     s32 minTemp = enemyDrops->minCoinBonus;
 
-    if (maxCoinBonus < amt) {
+    if (max < amt) {
         amt = enemyDrops->maxCoinBonus;
-        maxCoinBonus = enemyDrops->minCoinBonus;
+        max = enemyDrops->minCoinBonus;
     }
 
-    minTemp = maxCoinBonus - amt;
+    minTemp = max - amt;
     if ((amt < 0) || (minTemp != 0)) {
         amt = rand_int(minTemp) - -amt;
     }
@@ -392,24 +392,24 @@ s32 func_80048F0C(void) {
     return 0;
 }
 
-s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 centerY, f32 sizeX, f32 sizeZ) {
+b32 is_point_outside_territory(s32 shape, f32 centerX, f32 centerZ, f32 pointX, f32 pointZ, f32 sizeX, f32 sizeZ) {
     f32 dist1;
     f32 dist2;
 
     switch (shape) {
-        case 0:
-            dist1 = dist2D(pointX, pointY, centerX, centerY);
+        case SHAPE_CYLINDER:
+            dist1 = dist2D(centerX, centerZ, pointX, pointZ);
             return (sizeX < dist1);
-        case 1:
-            dist1 = dist2D(pointX, 0, centerX, 0);
-            dist2 = dist2D(0, pointY, 0, centerY);
+        case SHAPE_RECT:
+            dist1 = dist2D(centerX, 0, pointX, 0);
+            dist2 = dist2D(0, centerZ, 0, pointZ);
             return ((sizeX < dist1) || (sizeZ < dist2));
         default:
             return FALSE;
     }
 }
 
-s32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 radius, f32 fwdPosOffset, s8 useWorldYaw) {
+b32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 radius, f32 fwdPosOffset, b8 useWorldYaw) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerStatus* partnerStatus;
@@ -417,7 +417,7 @@ s32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 r
     f32 dist;
     s32 skipCheckForPlayer;
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_2) {
+    if (enemy->aiFlags & AI_FLAG_CANT_DETECT_PLAYER) {
         return FALSE;
     }
 
@@ -441,7 +441,7 @@ s32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 r
         return FALSE;
     }
 
-    if (territory->sizeX | territory->sizeZ && is_point_within_region(territory->shape,
+    if (territory->sizeX | territory->sizeZ && is_point_outside_territory(territory->shape,
             territory->pointX, territory->pointZ,
             playerStatus->pos.x, playerStatus->pos.z,
             territory->sizeX, territory->sizeZ)) {
@@ -563,8 +563,8 @@ void basic_ai_wander_init(Evt* script, MobileAISettings* npcAISettings, EnemyDet
         npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
     }
 
-    enemy->aiFlags &= ~ENEMY_AI_FLAG_40;
-    enemy->aiFlags &= ~ENEMY_AI_FLAG_20;
+    enemy->aiFlags &= ~AI_FLAG_NEEDS_HEADING;
+    enemy->aiFlags &= ~AI_FLAG_OUTSIDE_TERRITORY;
     script->AI_TEMP_STATE = AI_STATE_WANDER;
 }
 
@@ -576,6 +576,7 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
     EffectInstance* sp34;
     f32 yaw;
 
+    // search for the player
     if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
             script->functionTemp[1] = aiSettings->playerSearchInterval;
@@ -588,8 +589,8 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
                     npc->yaw = yaw;
                     ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
                     fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp34);
-                    enemy->aiFlags &= ~ENEMY_AI_FLAG_40;
-                    enemy->aiFlags &= ~ENEMY_AI_FLAG_20;
+                    enemy->aiFlags &= ~AI_FLAG_NEEDS_HEADING;
+                    enemy->aiFlags &= ~AI_FLAG_OUTSIDE_TERRITORY;
 
                     if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
                         script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
@@ -603,37 +604,39 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
         script->functionTemp[1]--;
     }
 
-    // check if the wander we've reached the boundary of the territory
-    if (is_point_within_region(enemy->territory->wander.wanderShape,
+    // check if we've wandered beyond the boundary of the territory
+    if (is_point_outside_territory(enemy->territory->wander.wanderShape,
                                enemy->territory->wander.centerPos.x,
                                enemy->territory->wander.centerPos.z,
                                npc->pos.x,
                                npc->pos.z,
                                enemy->territory->wander.wanderSize.x,
                                enemy->territory->wander.wanderSize.z)
-        && npc->moveSpeed < dist2D(enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z)) {
-        if (!(enemy->aiFlags & ENEMY_AI_FLAG_20)) {
-            enemy->aiFlags |= (ENEMY_AI_FLAG_20 | ENEMY_AI_FLAG_40);
+        && npc->moveSpeed < dist2D(enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z, npc->pos.x, npc->pos.z)
+    ) {
+        if (!(enemy->aiFlags & AI_FLAG_OUTSIDE_TERRITORY)) {
+            enemy->aiFlags |= (AI_FLAG_OUTSIDE_TERRITORY | AI_FLAG_NEEDS_HEADING);
         }
 
-        if (enemy->aiFlags & ENEMY_AI_FLAG_40) {
+        if (enemy->aiFlags & AI_FLAG_NEEDS_HEADING) {
             npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_40;
+            enemy->aiFlags &= ~AI_FLAG_NEEDS_HEADING;
         }
 
+        // if current heading is deflected by a wall, recalculate yaw to continue pursuing centerPos
         x = npc->pos.x;
         y = npc->pos.y;
         z = npc->pos.z;
         if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, 2.0 * npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionDiameter)) {
             yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_40;
+            enemy->aiFlags &= ~AI_FLAG_NEEDS_HEADING;
             ai_check_fwd_collisions(npc, 5.0f, &yaw, NULL, NULL, NULL);
             npc->yaw = yaw;
         }
         stillWithinTerritory = TRUE;
-    } else if (enemy->aiFlags & ENEMY_AI_FLAG_20) {
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_20;
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_40;
+    } else if (enemy->aiFlags & AI_FLAG_OUTSIDE_TERRITORY) {
+        enemy->aiFlags &= ~AI_FLAG_OUTSIDE_TERRITORY;
+        enemy->aiFlags &= ~AI_FLAG_NEEDS_HEADING;
     }
 
     // perform the motion
@@ -853,7 +856,7 @@ API_CALLABLE(BasicAI_Main) {
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
 
-    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+    if (isInitialCall || enemy->aiFlags & AI_FLAG_SUSPEND) {
         script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         npc->duration = 0;
 
@@ -868,14 +871,14 @@ API_CALLABLE(BasicAI_Main) {
             npc->flags |= NPC_FLAG_FLYING;
         }
 
-        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+        if (enemy->aiFlags & AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = AI_STATE_WANDER_INIT;
         } else if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         }
 
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+        enemy->aiFlags &= ~AI_FLAG_SUSPEND;
         enemy->flags &= ~ENEMY_FLAG_BEGIN_WITH_CHASING;
     }
 

@@ -126,7 +126,7 @@ void state_init_title_screen(void) {
     sfx_set_reverb_mode(0);
     gGameStatusPtr->startupState = TITLE_STATE_INIT;
     gGameStatusPtr->logoTime = 0;
-    gGameStatusPtr->isBattle = FALSE;
+    gGameStatusPtr->context = CONTEXT_WORLD;
     gGameStatusPtr->introPart = INTRO_PART_NONE;
     startup_fade_screen_update();
     titleData = load_asset_by_name("title_data", &titleDataSize);

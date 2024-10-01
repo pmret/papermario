@@ -90,7 +90,7 @@ API_CALLABLE(N(SetTubbaPatrolTerritory)) {
 API_CALLABLE(N(SetTubbaPatrolMode)) {
     if (get_enemy_safe(NPC_Tubba)) {
         Enemy* enemy = get_enemy(NPC_Tubba);
-        enemy->aiFlags |= ENEMY_AI_FLAG_80;
+        enemy->aiFlags |= AI_FLAG_80;
         return ApiStatus_DONE2;
     }
 

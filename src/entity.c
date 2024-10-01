@@ -345,7 +345,7 @@ void render_entities(void) {
         Entity* entity = get_entity_by_index(i);
 
         if (entity != NULL) {
-            if (!gGameStatusPtr->isBattle) {
+            if (gGameStatusPtr->context == CONTEXT_WORLD) {
                 if (gEntityHideMode != ENTITY_HIDE_MODE_0 &&
                     !(entity->flags & ENTITY_FLAG_IGNORE_DISTANCE_CULLING) &&
                     dist2D(gPlayerStatusPtr->pos.x,
@@ -541,7 +541,7 @@ Shadow* get_shadow_by_index(s32 index) {
 EntityList* get_entity_list(void) {
     EntityList* ret;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         ret = &gWorldEntityList;
     } else {
         ret = &gBattleEntityList;
@@ -552,7 +552,7 @@ EntityList* get_entity_list(void) {
 ShadowList* get_shadow_list(void) {
     ShadowList* ret;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         ret = &gWorldShadowList;
     } else {
         ret = &gBattleShadowList;
@@ -795,7 +795,7 @@ void clear_entity_data(b32 arg0) {
     entity_updateCounter = 0;
     D_80151304 = 0;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gEntityHideMode = ENTITY_HIDE_MODE_0;
     }
 
@@ -807,7 +807,7 @@ void clear_entity_data(b32 arg0) {
     }
     D_8014AFB0 = 255;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         wEntityDataLoadedSize = 0;
         for (i = 0; i < MAX_ENTITIES; i++) {
             wEntityBlueprint[i] = NULL;
@@ -819,7 +819,7 @@ void clear_entity_data(b32 arg0) {
         }
     }
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gEntityHeapBottom = WORLD_ENTITY_HEAP_BOTTOM;
         gEntityHeapBase = WORLD_ENTITY_HEAP_BASE;
     } else {
@@ -840,7 +840,7 @@ void clear_entity_data(b32 arg0) {
 }
 
 void init_entity_data(void) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gEntityHeapBottom = WORLD_ENTITY_HEAP_BOTTOM;
         gEntityHeapBase = WORLD_ENTITY_HEAP_BASE;
         reload_world_entity_data();
@@ -957,7 +957,7 @@ s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* blueprint, s32* loade
     *loadedEnd = 0;
     ret = FALSE;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         blueprints = wEntityBlueprint;
     } else {
         blueprints = bEntityBlueprint;
@@ -1016,7 +1016,7 @@ void load_simple_entity_data(Entity* entity, EntityBlueprint* bp, s32 listIndex)
     s32 totalSize;
 
     entity->vertexSegment = 0xA;
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         totalSize = wEntityDataLoadedSize;
     } else {
         totalSize = bEntityDataLoadedSize;
@@ -1038,7 +1038,7 @@ void load_simple_entity_data(Entity* entity, EntityBlueprint* bp, s32 listIndex)
         get_entity_type(entity->listIndex);
     }
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         wEntityDataLoadedSize = totalSize;
     } else {
         bEntityDataLoadedSize = totalSize;
@@ -1091,7 +1091,7 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
             animBaseAddr = (void*)(gEntityHeapBottom + specialSize * 4 + dma1size * 4);
             swizzlePointers = TRUE;
         } else if (is_entity_data_loaded(entity, entityData, &loadedStart, &loadedEnd)) {
-            if (!gGameStatusPtr->isBattle) {
+            if (gGameStatusPtr->context == CONTEXT_WORLD) {
                 totalLoaded = wEntityDataLoadedSize;
             } else {
                 totalLoaded = bEntityDataLoadedSize;
@@ -1116,7 +1116,7 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
             totalLoaded += dma2size_2;
             get_entity_type(entity->listIndex);
 
-            if (!gGameStatusPtr->isBattle) {
+            if (gGameStatusPtr->context == CONTEXT_WORLD) {
                 wEntityDataLoadedSize = totalLoaded;
             } else {
                 bEntityDataLoadedSize = totalLoaded;
@@ -1688,7 +1688,7 @@ s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32*
 }
 
 void set_standard_shadow_scale(Shadow* shadow, f32 height) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         shadow->scale.x = 0.13 - (height / 2600.0f);
     } else {
         shadow->scale.x = 0.12 - (height / 3600.0f);
@@ -1701,7 +1701,7 @@ void set_standard_shadow_scale(Shadow* shadow, f32 height) {
 }
 
 void set_npc_shadow_scale(Shadow* shadow, f32 height, f32 npcRadius) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         shadow->scale.x = 0.13 - (height / 2600.0f);
     } else {
         shadow->scale.x = 0.12 - (height / 3600.0f);
@@ -1722,7 +1722,7 @@ void set_peach_shadow_scale(Shadow* shadow, f32 scale) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 phi_f2 = 0.12f;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         switch (playerStatus->anim) {
             case ANIM_Peach2_Carried:
             case ANIM_Peach2_Thrown:

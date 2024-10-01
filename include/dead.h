@@ -26,7 +26,7 @@
 #define cos_deg dead_cos_deg
 #define sin_cos_deg dead_sin_cos_deg
 #define gPlayerStatus dead_gPlayerStatus
-#define is_point_within_region dead_is_point_within_region
+#define is_point_outside_territory dead_is_point_outside_territory
 #define npc_raycast_down_sides dead_npc_raycast_down_sides
 #define basic_ai_check_player_dist dead_basic_ai_check_player_dist
 #define fx_emote dead_fx_emote

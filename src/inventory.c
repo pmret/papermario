@@ -465,7 +465,7 @@ void status_bar_draw_number(s32 iconID, s32 startX, s32 startY, s32 value, s32 n
     b32 keepDrawing;
     s32 digit;
     s32 i;
-    
+
     hud_element_set_script(iconID, TimesHudScript);
     drawX = startX + 8;
     drawY = startY + 8;
@@ -578,7 +578,7 @@ void update_status_bar(void) {
         return;
     }
 
-    if (!gGameStatusPtr->isBattle && playerData->coins != statusBar->displayCoins) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD && playerData->coins != statusBar->displayCoins) {
         status_bar_start_blinking_coins();
     }
 
@@ -626,7 +626,7 @@ void update_status_bar(void) {
 
     // sync displayed HP toward true HP
     if (statusBar->displayHP != playerData->curHP) {
-        if (!gGameStatusPtr->isBattle && playerData->curHP < statusBar->displayHP) {
+        if (gGameStatusPtr->context == CONTEXT_WORLD && playerData->curHP < statusBar->displayHP) {
             status_bar_start_blinking_hp();
         }
         if (statusBar->displayHP < playerData->curHP) {
@@ -645,7 +645,7 @@ void update_status_bar(void) {
 
     // sync displayed FP toward true FP
     if (statusBar->displayFP != playerData->curFP) {
-        if (!gGameStatusPtr->isBattle && playerData->curFP < statusBar->displayFP) {
+        if (gGameStatusPtr->context == CONTEXT_WORLD && playerData->curFP < statusBar->displayFP) {
             status_bar_start_blinking_fp();
         }
         if (statusBar->displayFP < playerData->curFP) {
@@ -700,7 +700,7 @@ void update_status_bar(void) {
                 } else {
                     if (!statusBar->ignoreChanges) {
                         if (!statusBar->unk_3B || playerStatus->actionState != ACTION_STATE_IDLE) {
-                            if (!gGameStatusPtr->isBattle) {
+                            if (gGameStatusPtr->context == CONTEXT_WORLD) {
                                 statusBar->hidden = TRUE;
                                 statusBar->showTimer = 0;
                                 statusBar->unk_3C = FALSE;
@@ -723,7 +723,7 @@ void update_status_bar(void) {
                         statusBar->showTimer++;
                     }
 
-                    if (statusBar->showTimer >= 240 && !gGameStatusPtr->isBattle) {
+                    if (statusBar->showTimer >= 240 && gGameStatusPtr->context == CONTEXT_WORLD) {
                         statusBar->showTimer = 210;
                         statusBar->hidden = FALSE;
                         statusBar->unk_3B = TRUE;
@@ -1372,7 +1372,7 @@ s32 is_status_bar_visible(void) {
 void status_bar_start_blinking_hp(void) {
     StatusBar* statusBar = &gStatusBar;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         statusBar->hpBlinkTimer = 120;
     }
 
@@ -1395,7 +1395,7 @@ void status_bar_stop_blinking_hp(void) {
 void status_bar_start_blinking_fp(void) {
     StatusBar* statusBar = &gStatusBar;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         statusBar->fpBlinkTimer = 120;
     }
 
@@ -1417,7 +1417,7 @@ void status_bar_stop_blinking_fp(void) {
 void status_bar_start_blinking_coins(void) {
     StatusBar* statusBar = &gStatusBar;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         statusBar->coinsBlinkTimer = 120;
     }
 

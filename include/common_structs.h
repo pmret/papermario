@@ -1427,7 +1427,7 @@ typedef struct GameStatus {
     /* 0x06A */ s8 demoStickX;
     /* 0x06B */ s8 demoStickY;
     /* 0x06C */ s32 mainScriptID;
-    /* 0x070 */ s8 isBattle;
+    /* 0x070 */ s8 context;
     /* 0x071 */ s8 demoState; // see DemoState enum
     /* 0x072 */ s8 nextDemoScene; /* which part of the demo to play next */
     /* 0x073 */ u8 contBitPattern;

@@ -282,7 +282,7 @@ API_CALLABLE(N(FadeToTitleScreen)) {
 }
 
 API_CALLABLE(N(ChangeStateToTitleScreen)) {
-    gGameStatusPtr->isBattle = FALSE;
+    gGameStatusPtr->context = CONTEXT_WORLD;
     gGameStatusPtr->debugUnused1 = FALSE;
     gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;
     gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;

@@ -149,7 +149,7 @@ API_CALLABLE(N(ProjectileAI_Main)) {
                 npc->verticalRenderOffset = npc->collisionHeight / 2;
             }
 
-            if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
+            if (isInitialCall || (enemy->aiFlags & AI_FLAG_SUSPEND)) {
                 script->functionTemp[0] = 0;
                 npc->duration = 0;
                 npc->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_INVISIBLE;
@@ -159,8 +159,8 @@ API_CALLABLE(N(ProjectileAI_Main)) {
                 enemy->flags |= ENEMY_FLAG_IGNORE_PARTNER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_HAMMER |
                                 ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN |
                                 ENEMY_FLAG_100000 | ENEMY_FLAG_PROJECTILE;
-                if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
-                    enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+                if (enemy->aiFlags & AI_FLAG_SUSPEND) {
+                    enemy->aiFlags &= ~AI_FLAG_SUSPEND;
                 }
             }
 

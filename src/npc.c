@@ -77,7 +77,7 @@ void mtx_ident_mirror_y(Matrix4f mtx) {
 void clear_npcs(void) {
     s32 i;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentNpcListPtr = &gWorldNpcList;
     } else {
         gCurrentNpcListPtr = &gBattleNpcList;
@@ -92,7 +92,7 @@ void clear_npcs(void) {
 }
 
 void init_npc_list(void) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentNpcListPtr = &gWorldNpcList;
     } else {
         gCurrentNpcListPtr = &gBattleNpcList;
@@ -207,7 +207,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->shadowIndex = create_shadow_type(SHADOW_VARYING_CIRCLE, npc->pos.x, npc->pos.y, npc->pos.z);
     npc->shadowScale = 1.0f;
 
-    if (gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context != CONTEXT_WORLD) {
         i |= BATTLE_NPC_ID_BIT;
     }
     return i;

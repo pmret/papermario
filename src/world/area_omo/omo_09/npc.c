@@ -406,7 +406,7 @@ NpcData N(NpcData_ShyGuy_Thief) = {
     .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = SHY_GUY_DROPS,
     .animations = YELLOW_SHY_GUY_ANIMS,
-    .aiFlags = ENEMY_AI_FLAG_1,
+    .aiFlags = AI_FLAG_1,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 

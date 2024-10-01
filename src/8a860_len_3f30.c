@@ -241,7 +241,7 @@ void destroy_popup_menu(void) {
          gPopupMenu->popupType == POPUP_TYPE_TRADE_FOR_BADGE ||
          gPopupMenu->popupType == POPUP_TYPE_UPGRADE_PARTNER ||
          gPopupMenu->popupType == POPUP_TYPE_USE_KEY
-        ) && !gGameStatusPtr->isBattle) {
+        ) && gGameStatusPtr->context == CONTEXT_WORLD) {
         if (!PopupMenu_WasStatusBarIgnoringChanges) {
             status_bar_respond_to_changes();
         }

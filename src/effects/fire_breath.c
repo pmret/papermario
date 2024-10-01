@@ -167,7 +167,7 @@ void fire_breath_render(EffectInstance* effect) {
     renderTask.appendGfx = fire_breath_appendGfx;
     renderTask.appendGfxArg = effect;
 
-    if (gGameStatusPtr->isBattle == TRUE) {
+    if (gGameStatusPtr->context == CONTEXT_BATTLE) {
         renderTask.dist = data->pos.z + 1000.0f;
     } else {
         renderTask.dist = 0;

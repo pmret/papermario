@@ -50,7 +50,7 @@ void render_animated_models(void) {
 // split here?
 
 API_CALLABLE(InitAnimatedModels) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentMeshAnimationListPtr = &gWorldMeshAnimationList;
     } else {
         gCurrentMeshAnimationListPtr = &gBattleMeshAnimationList;
@@ -258,7 +258,7 @@ API_CALLABLE(SetAnimatorFlags) {
 void reset_model_animators(void) {
     s32 i;
 
-    if (!gGameStatusPtr->isBattle ) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD ) {
         gCurrentMeshAnimationListPtr = &gWorldMeshAnimationList;
     } else {
         gCurrentMeshAnimationListPtr = &gBattleMeshAnimationList;
@@ -276,7 +276,7 @@ void reset_model_animators(void) {
 }
 
 void init_model_animators(void) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentMeshAnimationListPtr = &gWorldMeshAnimationList;
     } else {
         gCurrentMeshAnimationListPtr = &gBattleMeshAnimationList;

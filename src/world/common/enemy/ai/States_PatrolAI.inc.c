@@ -235,7 +235,7 @@ void N(PatrolAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
 
     npc->duration--;
     if (npc->duration == 0) {
-        if (enemy->aiFlags & ENEMY_AI_FLAG_80) {
+        if (enemy->aiFlags & AI_FLAG_80) {
             script->AI_TEMP_STATE = AI_STATE_PATROL_15;
         } else {
             script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;

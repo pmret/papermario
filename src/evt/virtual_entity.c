@@ -119,7 +119,7 @@ void virtual_entity_list_render_UI(void) {
 }
 
 API_CALLABLE(InitVirtualEntityList) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentVirtualEntityListPtr = &wWorldVirtualEntityList;
     } else {
         gCurrentVirtualEntityListPtr = &bBattleVirtualEntityList;
@@ -654,7 +654,7 @@ void virtual_entity_delete_by_ref(VirtualEntity* obj) {
 void clear_virtual_entity_list(void) {
     s32 i;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentVirtualEntityListPtr = &wWorldVirtualEntityList;
     } else {
         gCurrentVirtualEntityListPtr = &bBattleVirtualEntityList;
@@ -671,7 +671,7 @@ void clear_virtual_entity_list(void) {
 }
 
 void init_virtual_entity_list(void) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentVirtualEntityListPtr = &wWorldVirtualEntityList;
     } else {
         gCurrentVirtualEntityListPtr = &bBattleVirtualEntityList;

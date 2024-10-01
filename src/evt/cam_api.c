@@ -278,7 +278,7 @@ API_CALLABLE(ShakeCam) {
         *(f32*)&script->functionTemp[3] = 1.0f; //TODO functionTempF ?
         script->functionTemp[1] = duration;
 
-        if (!gGameStatusPtr->isBattle) {
+        if (gGameStatusPtr->context == CONTEXT_WORLD) {
             if (magnitude > 10.0f) {
                 magnitude = 10.0f;
             }

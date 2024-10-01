@@ -155,7 +155,7 @@ void lightning_bolt_render(EffectInstance *effect) {
 
     renderTask.appendGfx = lightning_bolt_appendGfx;
     renderTask.appendGfxArg = effect;
-    if (gGameStatusPtr->isBattle == TRUE) {
+    if (gGameStatusPtr->context == CONTEXT_BATTLE) {
         renderTask.dist = data->tipPos.z + 1000.0f;
     } else {
         renderTask.dist = 10;

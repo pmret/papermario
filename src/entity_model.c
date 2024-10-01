@@ -51,7 +51,7 @@ void free_entity_model_by_ref(EntityModel* entityModel);
 void clear_entity_models(void) {
     s32 i;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentEntityModelList = &gWorldEntityModelList;
     } else {
         gCurrentEntityModelList = &gBattleEntityModelList;
@@ -74,7 +74,7 @@ void clear_entity_models(void) {
 void init_entity_models(void) {
     s32 i;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentEntityModelList = &gWorldEntityModelList;
     } else {
         gCurrentEntityModelList = &gBattleEntityModelList;
@@ -121,7 +121,7 @@ s32 load_entity_model(EntityModelScript* cmdList) {
     newEntityModel->fpSetupGfxCallback = NULL;
     newEntityModel->cmdListSavedPos = newEntityModel->cmdListReadPos;
 
-    if (gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context != CONTEXT_WORLD) {
         i |= BATTLE_ENTITY_ID_BIT;
     }
     return i;
@@ -163,7 +163,7 @@ s32 ALT_load_entity_model(EntityModelScript* cmdList) {
     newEntityModel->fpSetupGfxCallback = NULL;
     newEntityModel->cmdListSavedPos = newEntityModel->cmdListReadPos;
 
-    if (gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context != CONTEXT_WORLD) {
         i |= BATTLE_ENTITY_ID_BIT;
     }
     return i;
@@ -172,7 +172,7 @@ s32 ALT_load_entity_model(EntityModelScript* cmdList) {
 void exec_entity_model_commandlist(s32 idx) {
     EntityModel* entityModel;
 
-    if (!gGameStatusPtr->isBattle || (idx & BATTLE_ENTITY_ID_BIT)) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD || (idx & BATTLE_ENTITY_ID_BIT)) {
         idx &= ~BATTLE_ENTITY_ID_BIT;
         entityModel = (*gCurrentEntityModelList)[idx];
         if (entityModel != NULL && (entityModel->flags)) {
@@ -412,7 +412,7 @@ void draw_entity_model_A(s32 modelIdx, Mtx* transformMtx) {
     f32 x, y, z, w;
     f32 inX, inY, inZ;
 
-    if ((!gGameStatusPtr->isBattle) || (modelIdx & BATTLE_ENTITY_ID_BIT)) {
+    if ((gGameStatusPtr->context == CONTEXT_WORLD) || (modelIdx & BATTLE_ENTITY_ID_BIT)) {
         modelIdx &= ~BATTLE_ENTITY_ID_BIT;
         model = (*gCurrentEntityModelList)[modelIdx];
 
@@ -450,7 +450,7 @@ void draw_entity_model_B(s32 modelIdx, Mtx* transformMtx, s32 vertexSegment, Vec
     f32 x, y, z, w;
     f32 inX, inY, inZ;
 
-    if ((!gGameStatusPtr->isBattle) || (modelIdx & BATTLE_ENTITY_ID_BIT)) {
+    if ((gGameStatusPtr->context == CONTEXT_WORLD) || (modelIdx & BATTLE_ENTITY_ID_BIT)) {
         modelIdx &= ~BATTLE_ENTITY_ID_BIT;
         model = (*gCurrentEntityModelList)[modelIdx];
 
@@ -485,7 +485,7 @@ void draw_entity_model_C(s32 modelIdx, Mtx* transformMtx) {
     RenderTask rt;
     RenderTask* rtPtr = &rt;
 
-    if ((!gGameStatusPtr->isBattle) || (modelIdx & BATTLE_ENTITY_ID_BIT)) {
+    if ((gGameStatusPtr->context == CONTEXT_WORLD) || (modelIdx & BATTLE_ENTITY_ID_BIT)) {
         modelIdx &= ~BATTLE_ENTITY_ID_BIT;
         model = (*gCurrentEntityModelList)[modelIdx];
 
@@ -515,7 +515,7 @@ void draw_entity_model_D(s32 modelIdx, Mtx* transformMtx, s32 arg2, Vec3s* verte
     RenderTask rt;
     RenderTask* rtPtr = &rt;
 
-    if ((!gGameStatusPtr->isBattle) || (modelIdx & BATTLE_ENTITY_ID_BIT)) {
+    if ((gGameStatusPtr->context == CONTEXT_WORLD) || (modelIdx & BATTLE_ENTITY_ID_BIT)) {
         modelIdx &= ~BATTLE_ENTITY_ID_BIT;
         model = (*gCurrentEntityModelList)[modelIdx];
 

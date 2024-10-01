@@ -139,7 +139,7 @@ void state_step_language_select(void) {
                     D_800A0930 = -1;
                     sfx_stop_env_sounds();
                     func_8003B1A8();
-                    gGameStatusPtr->isBattle = 2;
+                    gGameStatusPtr->context = CONTEXT_PAUSE;
                     backup_map_collision_data();
                     battle_heap_create();
                     sfx_clear_env_sounds(0);
@@ -292,7 +292,7 @@ void state_step_exit_language_select(void) {
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                     mapSettings = get_current_map_settings();
                     mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
-                    gGameStatusPtr->isBattle = FALSE;
+                    gGameStatusPtr->context = CONTEXT_WORLD;
                     func_8005AF84();
                     func_8002ACDC();
                     sfx_clear_env_sounds(1);

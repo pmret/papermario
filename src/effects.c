@@ -75,7 +75,7 @@ void update_effects(void) {
             if (effectInstance != NULL && (effectInstance->flags & FX_INSTANCE_FLAG_ENABLED)) {
                 effectInstance->graphics->flags &= ~FX_GRAPHICS_CAN_FREE;
 
-                if (gGameStatusPtr->isBattle) {
+                if (gGameStatusPtr->context != CONTEXT_WORLD) {
                     if (effectInstance->flags & FX_INSTANCE_FLAG_BATTLE) {
                         effectInstance->graphics->update(effectInstance);
                         effectInstance->flags |= FX_INSTANCE_FLAG_HAS_UPDATED;
@@ -118,7 +118,7 @@ void render_effects_world(void) {
         if (effectInstance != NULL) {
             if (effectInstance->flags & FX_INSTANCE_FLAG_ENABLED) {
                 if (effectInstance->flags & FX_INSTANCE_FLAG_HAS_UPDATED) {
-                    if (gGameStatusPtr->isBattle) {
+                    if (gGameStatusPtr->context != CONTEXT_WORLD) {
                         if (effectInstance->flags & FX_INSTANCE_FLAG_BATTLE) {
                             effectInstance->graphics->renderWorld(effectInstance);
                         }
@@ -145,11 +145,11 @@ void render_effects_UI(void) {
                 if (effectInstance->flags & FX_INSTANCE_FLAG_HAS_UPDATED) {
                     void (*renderUI)(EffectInstance* effect);
 
-                    if (gGameStatusPtr->isBattle && !(effectInstance->flags & FX_INSTANCE_FLAG_BATTLE)) {
+                    if (gGameStatusPtr->context != CONTEXT_WORLD && !(effectInstance->flags & FX_INSTANCE_FLAG_BATTLE)) {
                         continue;
                     }
 
-                    if (!gGameStatusPtr->isBattle && effectInstance->flags & FX_INSTANCE_FLAG_BATTLE) {
+                    if (gGameStatusPtr->context == CONTEXT_WORLD && effectInstance->flags & FX_INSTANCE_FLAG_BATTLE) {
                         continue;
                     }
 
@@ -245,7 +245,7 @@ EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
         effectBp->init(newEffectInst);
     }
 
-    if (gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context != CONTEXT_WORLD) {
         newEffectInst->flags |= FX_INSTANCE_FLAG_BATTLE;
     }
     return newEffectInst;
