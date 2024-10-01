@@ -52,8 +52,8 @@ obfuscated_obfuscation_shims_VRAM = 0x7599F6D8;
 obfuscated_obfuscation_shims_ROM_START = 0xF79E611F;
 
 // subsequent segments
-D_80197000 = 0x80197000;
-D_801A6000 = 0x801A6000;
+gEffectDataBuffer = 0x80197000;
+gEffectGlobals = 0x801A6000;
 AuHeapBase = 0x801AA000;
 D_80200000 = 0x80200000;
 gBackgroundImage = 0x80200000;
