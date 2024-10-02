@@ -97,7 +97,7 @@ EvtScript N(D_802448C4_856A34) = {
             Call(DisablePlayerPhysics, TRUE)
             Call(SetPlayerPos, -160, -10, 371)
             Call(SetNpcPos, NPC_PARTNER, -160, -10, 371)
-            Call(SetEnemyFlagBits, NPC_Whale, ENEMY_FLAG_CANT_INTERACT, 1)
+            Call(SetEnemyFlagBits, NPC_Whale, ENEMY_FLAG_CANT_INTERACT, TRUE)
             Call(DisablePartnerAI, 0)
             Call(InterruptUsePartner)
             Wait(10)
@@ -122,7 +122,7 @@ EvtScript N(D_802448C4_856A34) = {
             Set(LVar0, Ref(N(EVS_BindExitTriggers)))
             ExecWait(EnterWalk)
             Call(SetNpcPos, NPC_Whale, -220, 10, 372)
-            Call(SetEnemyFlagBits, NPC_Whale, ENEMY_FLAG_CANT_INTERACT, 0)
+            Call(SetEnemyFlagBits, NPC_Whale, ENEMY_FLAG_CANT_INTERACT, FALSE)
     EndSwitch
     Return
     End

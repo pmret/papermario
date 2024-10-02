@@ -47,7 +47,7 @@ void N(SentinelAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDet
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->flags &= ~NPC_FLAG_200000;
+        npc->flags &= ~NPC_FLAG_FLIP_INSTANTLY;
         npc->duration = aiSettings->chaseUpdateInterval / 2 + rand_int(aiSettings->chaseUpdateInterval / 2 + 1);
         npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
         npc->moveSpeed = aiSettings->chaseSpeed;
@@ -79,7 +79,7 @@ void N(SentinelAI_Chase)(Evt* script, MobileAISettings* aiSettings, EnemyDetectV
         } else {
             npc->duration--;
             if (npc->duration <= 0) {
-                npc->flags |= NPC_FLAG_200000;
+                npc->flags |= NPC_FLAG_FLIP_INSTANTLY;
                 script->AI_TEMP_STATE = AI_STATE_SENTINEL_CHASE_INIT;
             }
         }
@@ -121,7 +121,7 @@ void N(SentinelAI_Descend)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     if (!basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
         enemy->varTable[0] &= ~SENTINEL_AI_FLAG_CHASING;
         npc->rot.y = 0.0f;
-        npc->flags &= ~NPC_FLAG_200000;
+        npc->flags &= ~NPC_FLAG_FLIP_INSTANTLY;
         script->AI_TEMP_STATE = AI_STATE_SENTINEL_LOSE_PLAYER_INIT;
     } else {
         npc->pos.x = gPlayerStatusPtr->pos.x;
@@ -142,7 +142,7 @@ void N(SentinelAI_Descend)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
             npc->pos.y -= SENTINEL_AI_DESCEND_RATE;
         } else {
             npc->rot.y = 0.0f;
-            npc->flags &= ~NPC_FLAG_200000;
+            npc->flags &= ~NPC_FLAG_FLIP_INSTANTLY;
             if (gPartnerStatus.actingPartner != PARTNER_BOW) {
                 disable_player_input();
                 partner_disable_input();
@@ -224,7 +224,7 @@ void N(SentinelAI_ReturnHomeInit)(Evt* script, MobileAISettings* aiSettings, Ene
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     enemy->varTable[0] &= ~SENTINEL_AI_FLAG_CHASING;
-    npc->flags &= ~NPC_FLAG_200000;
+    npc->flags &= ~NPC_FLAG_FLIP_INSTANTLY;
     npc->moveSpeed = 2.0 * aiSettings->moveSpeed;
     enemy->varTable[2] = 0;
     enemy->varTable[4] = npc->pos.y * 100.0;

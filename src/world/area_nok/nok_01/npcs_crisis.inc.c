@@ -458,7 +458,7 @@ EvtScript N(EVS_NpcHit_FuzzyWithShell) = {
             Call(ResetCam, CAM_DEFAULT, 4)
         EndThread
         Call(DisablePlayerInput, FALSE)
-        Call(SetEnemyFlagBits, NPC_Koover, ENEMY_FLAG_400000, 0)
+        Call(SetEnemyFlagBits, NPC_Koover, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, FALSE)
     EndIf
     Return
     End
@@ -506,7 +506,7 @@ EvtScript N(EVS_NpcInit_Koover_Crisis) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Koover_Crisis)))
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Koover_Crisis)))
     IfEq(GF_NOK01_RecoveredShellA, TRUE)
-        Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 0)
+        Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, FALSE)
         Return
     EndIf
     IfGe(GB_StoryProgress, STORY_CH1_ARRIVED_AT_KOOPA_VILLAGE)

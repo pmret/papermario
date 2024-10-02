@@ -165,7 +165,7 @@ EvtScript N(EVS_Scene_DefeatImposters) = {
 };
 
 EvtScript N(EVS_NpcInit_FakeMario) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Mario1_Idle)
     Call(GetEntryID, LVar0)
     IfEq(LVar0, pra_13_ENTRY_2)
@@ -187,7 +187,7 @@ EvtScript N(EVS_NpcInit_FakeMario) = {
 EvtScript N(EVS_NpcInit_FakeBombette) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_Scene_ImpostersCaught)))
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_Scene_DefeatImposters)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
     Call(GetEntryID, LVar0)
     IfEq(LVar0, pra_13_ENTRY_2)
         IfLt(GB_StoryProgress, STORY_CH7_DEFEATED_MIRROR_DUPLIGHOSTS)
@@ -209,13 +209,13 @@ EvtScript N(EVS_NpcInit_FakeBombette) = {
 };
 
 EvtScript N(EVS_NpcInit_Duplighost_01) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Duplighost_02) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
     Return
     End
 };
@@ -226,7 +226,7 @@ NpcData N(NpcData_FakeMario) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_FakeMario),
     .settings = &N(NpcSettings_Player),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = BOMBETTE_ANIMS,
 };
@@ -238,7 +238,7 @@ NpcData N(NpcData_Imposters)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_FakeBombette),
         .settings = &N(NpcSettings_Player),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = BOMBETTE_ANIMS,
     },
@@ -248,7 +248,7 @@ NpcData N(NpcData_Imposters)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Duplighost_01),
         .settings = &N(NpcSettings_Player),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = DUPLIGHOST_ANIMS,
     },
@@ -258,7 +258,7 @@ NpcData N(NpcData_Imposters)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Duplighost_02),
         .settings = &N(NpcSettings_Player),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = DUPLIGHOST_ANIMS,
     },

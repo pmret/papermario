@@ -528,7 +528,7 @@ EvtScript N(EVS_Scene_JudgeCake) = {
         Call(DisablePlayerInput, FALSE)
         Return
     EndIf
-    Call(SetEnemyFlagBits, NPC_GourmetGuy, ENEMY_FLAG_CANT_INTERACT, 1)
+    Call(SetEnemyFlagBits, NPC_GourmetGuy, ENEMY_FLAG_CANT_INTERACT, TRUE)
     ExecWait(N(EVS_GourmetGuy_LovesCake))
     Call(SetNpcVar, NPC_GourmetGuy, 0, 1)
     Exec(N(EVS_GourmetGuy_RunAround))

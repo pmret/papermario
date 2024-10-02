@@ -589,7 +589,7 @@ EvtScript N(EVS_NpcIdle_MinhT) = {
             Add(LVar0, GF_MAC01_ChasedShyGuysFromGardenB)
             IfEq(LVar0, 2)
                 Call(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_400000, 0)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, 0)
                 Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_MinhT)))
                 BreakLoop
             EndIf
@@ -625,7 +625,7 @@ EvtScript N(EVS_NpcInit_MinhT) = {
     Switch(GB_StoryProgress)
         CaseRange(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
             Set(GF_MAC01_ShyGuysTramplingGarden, TRUE)
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_400000, 1)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, 1)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MinhT)))
     EndSwitch
     Call(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)

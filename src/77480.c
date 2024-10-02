@@ -1098,7 +1098,7 @@ s32 has_valid_conversation_npc(void) {
     s32 ret = FALSE;
     s32 cond;
 
-    if (npc != NULL && !(npc->flags & NPC_FLAG_10000000)) {
+    if (npc != NULL && !(npc->flags & NPC_FLAG_USE_INSPECT_ICON)) {
         cond = !(playerStatus->flags & PS_FLAG_INPUT_DISABLED) && (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC);
         ret = cond;
     }
@@ -1160,7 +1160,7 @@ s32 func_800E06D8(void) {
     if (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC
         && !(playerStatus->flags & PS_FLAG_INPUT_DISABLED)
         && npc != NULL
-        && npc->flags & NPC_FLAG_10000000
+        && npc->flags & NPC_FLAG_USE_INSPECT_ICON
     ) {
         playerStatus->interactingWithID = NO_COLLIDER;
         return TRUE;
@@ -1236,7 +1236,7 @@ void check_for_interactables(void) {
                 (!(playerStatus->flags & PS_FLAG_INPUT_DISABLED))
                 && (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC)
                 && (npc != NULL)
-                && (npc->flags & NPC_FLAG_10000000)
+                && (npc->flags & NPC_FLAG_USE_INSPECT_ICON)
             ) {
                 curInteraction = npc->npcID | COLLISION_WITH_NPC_BIT;
                 if (playerStatus->interactingWithID == curInteraction) {

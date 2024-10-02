@@ -101,7 +101,7 @@ EvtScript N(EVS_NpcDefeat_Bandit) = {
             Call(NpcMoveTo, NPC_SELF, LVar7, LVar9, 0)
             Set(HAS_COIN_FLAG, FALSE)
             Call(DisablePlayerInput, FALSE)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return

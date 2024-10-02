@@ -44,7 +44,7 @@ EvtScript N(EVS_NpcIdle_Goomba) = {
         IfEq(LVar0, 0)
             Goto(0)
         EndIf
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_200000, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_FLIP_INSTANTLY, TRUE)
     Wait(3)
     SetF(LVar0, Float(0.0))
     Loop(9)
@@ -72,7 +72,7 @@ EvtScript N(EVS_NpcIdle_Goomba) = {
     Call(NpcJump0, NPC_SELF, -35, 0, 30, 23)
     Call(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
     Call(InterpNpcYaw, NPC_SELF, 90, 0)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_200000, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_FLIP_INSTANTLY, FALSE)
     Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
     Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
     BindTrigger(Ref(N(EVS_OnReadBillboard)), TRIGGER_WALL_PRESS_A, COLLIDER_o78, 1, 0)

@@ -40,7 +40,7 @@ EvtScript N(EVS_NpcIdle_Bowser) = {
 #include "world/common/todo/UnkFunc1.inc.c"
 
 EvtScript N(EVS_NpcDefeat_Bowser) = {
-    Call(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_2, TRUE)
+    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, TRUE)
     Call(N(UnkFunc1))
     Set(GF_KKJ25_Defeated_Bowser, TRUE)
     // reload the map in the 'final' configuration
@@ -242,7 +242,7 @@ NpcData N(NpcData_Bowser) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Bowser),
     .settings = &N(NpcSettings_Bowser),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = BOWSER_ANIMS,
     .extraAnimations = N(ExtraAnims_Bowser),
@@ -267,7 +267,7 @@ NpcData N(NpcData_Kammy)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Kammy_Broom),
         .settings = &N(NpcSettings_Kammy_Flying),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_BattleKammy_Anim00,

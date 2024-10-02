@@ -159,7 +159,7 @@ EvtScript N(EVS_NpcInteract_Lily) = {
                 EndSwitch
                 Wait(10)
                 Set(GF_FLO10_LilyRequestedWaterStone, TRUE)
-                Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 0)
+                Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, FALSE)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Lily_TalkPlead, ANIM_Lily_IdlePlead, 5, MSG_CH6_007F)
             EndIf
@@ -188,7 +188,7 @@ EvtScript N(EVS_NpcInit_Lily) = {
             IfEq(GF_FLO10_LilyRequestedWaterStone, FALSE)
                 Call(SetNpcAnimation, NPC_SELF, ANIM_Lily_IdlePlead)
                 Call(InterpNpcYaw, NPC_SELF, 90, 1)
-                Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 1)
+                Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, TRUE)
             EndIf
         CaseEq(STORY_CH6_GOT_WATER_STONE)
             Call(InterpNpcYaw, NPC_SELF, 270, 1)

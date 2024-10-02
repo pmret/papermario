@@ -227,7 +227,7 @@ typedef struct Npc {
     /* 0x01C */ f32 jumpVel;
     /* 0x020 */ union {
                 void* any;
-                NpcMotionBlur* motion; ///< Null unless flag 0x100000 is set.
+                NpcMotionBlur* motion; ///< Null unless flag NPC_FLAG_MOTION_BLUR is set.
                 NpcChompBlur*  chomp;
                 NpcQuizmoBlur* quizmo;
                 NpcFollowData* followData;

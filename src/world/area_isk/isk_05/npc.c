@@ -287,7 +287,7 @@ NpcData N(NpcData_StoneChomp) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_StoneChomp),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE,
     .drops = STONE_CHOMP_DROPS,
     .animations = STONE_CHOMP_ANIMS,
 };

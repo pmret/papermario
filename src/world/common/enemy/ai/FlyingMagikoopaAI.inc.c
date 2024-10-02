@@ -296,7 +296,7 @@ API_CALLABLE(N(FlyingMagikoopaAI_Main)) {
     if (isInitialCall) {
         npc->flags &= ~NPC_FLAG_GRAVITY;
         npc->flags |= NPC_FLAG_FLYING;
-        npc->flags |= NPC_FLAG_200000;
+        npc->flags |= NPC_FLAG_FLIP_INSTANTLY;
         enemy->flags |= ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN;
         enemy->varTable[1] = npc->pos.y * 100.0;
         enemy->varTable[0] = 0;

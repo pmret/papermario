@@ -1472,7 +1472,7 @@ EvtScript N(EVS_NpcInit_Fishmael) = {
     IfLt(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
         Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Fuzzipede1)))
     Else
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_400000, 0)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, 0)
         Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Fishmael)))
     EndIf
     Return
@@ -1486,7 +1486,7 @@ EvtScript N(EVS_NpcInit_Fuzzipede) = {
         CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         CaseDefault
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_400000, 0)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, 0)
             Call(SetNpcPos, NPC_SELF, -575, 40, 120)
             Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Fuzzipede2)))
         CaseDefault
@@ -1989,7 +1989,7 @@ API_CALLABLE(N(func_8024335C_8554CC)) {
 
 EvtScript N(D_8024E23C_8603AC) = {
     Set(AF_JAN01_TreeDrop_StarPiece, TRUE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_400000 | ENEMY_FLAG_CANT_INTERACT, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_CANT_INTERACT, 1)
     Call(InterpNpcYaw, NPC_Chanterelle, 270, 0)
     Call(SetMusicTrack, 0, SONG_POP_DIVA_SONG, 1, 8)
     ChildThread
@@ -2011,7 +2011,7 @@ EvtScript N(D_8024E23C_8603AC) = {
     EndLoop
     Exec(N(EVS_802442E8))
     Call(SetNpcAnimation, NPC_Chanterelle, ANIM_Chanterelle_Idle)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_400000 | ENEMY_FLAG_CANT_INTERACT, 0)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_CANT_INTERACT, 0)
     Return
     End
 };
@@ -2134,7 +2134,7 @@ NpcData N(NpcData_Toad_01) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Toad_01),
     .settings = &N(NpcSettings_Whale),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_Whale,
@@ -2158,7 +2158,7 @@ NpcData N(NpcData_Fishmael) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Fishmael),
     .settings = &N(NpcSettings_Toad_Stationary),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Fishmael_Idle,
@@ -2181,7 +2181,7 @@ NpcData N(NpcData_Fuzzipede) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Fuzzipede),
     .settings = &N(NpcSettings_Toad_Stationary),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Fuzzipede_Anim04,
@@ -2213,7 +2213,7 @@ NpcData N(NpcData_JrTroopa_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_JrTroopa_01),
         .settings = &N(NpcSettings_JrTroopa_01),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_JrTroopa_Idle,
@@ -2242,7 +2242,7 @@ NpcData N(NpcData_JrTroopa_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_JrTroopa_02),
         .settings = &N(NpcSettings_JrTroopa_01),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_SPIN,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_SPIN,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_JrTroopa_Idle,
@@ -2515,7 +2515,7 @@ NpcData N(NpcData_Bartender)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_TradeEventToad),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_10000 | ENEMY_FLAG_SKIP_BATTLE,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Toad_Pink_Idle,

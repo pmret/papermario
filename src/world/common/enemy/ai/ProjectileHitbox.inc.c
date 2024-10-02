@@ -158,7 +158,7 @@ API_CALLABLE(N(ProjectileAI_Main)) {
                 enemy->varTable[0] = 0;
                 enemy->flags |= ENEMY_FLAG_IGNORE_PARTNER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_HAMMER |
                                 ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN |
-                                ENEMY_FLAG_100000 | ENEMY_FLAG_PROJECTILE;
+                                ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_PROJECTILE;
                 if (enemy->aiFlags & AI_FLAG_SUSPEND) {
                     enemy->aiFlags &= ~AI_FLAG_SUSPEND;
                 }

@@ -34,11 +34,10 @@ API_CALLABLE(N(SwooperAI_Main)) {
     }
 
     if (enemy->aiFlags & AI_FLAG_SUSPEND) {
-        if (enemy->aiSuspendTime == 0) {
-            enemy->aiFlags &= ~AI_FLAG_SUSPEND;
-        } else {
+        if (enemy->aiSuspendTime != 0) {
             return ApiStatus_BLOCK;
         }
+        enemy->aiFlags &= ~AI_FLAG_SUSPEND;
     }
 
     switch (script->functionTemp[0]) {

@@ -64,7 +64,7 @@ BSS OSPiHandle* nuPiCartHandle;
 #ifdef BBPLAYER
 BSS u32 __osBbVCountWraps;
 #endif
-BSS s8 D_8009A63C;
+BSS s8 PendingPartnerAbilityResume;
 BSS SoundManager* gSoundManager;
 BSS s32 D_8009A644;
 BSS s32 D_8009A648;
@@ -77,9 +77,9 @@ BSS u32 __osFinalrom;
 BSS BGMPlayer* gBGMPlayerA;
 BSS s16 gFirstStrikeMessagePos;
 BSS Gfx* gMainGfxPos;
-BSS s8 D_8009A670;
+BSS s8 LastBattleStartedBySpin;
 BSS DisplayContext* gDisplayContext;
-BSS s32 D_8009A678;
+BSS b32 EncounterStateChanged;
 BSS s32 D_8009A67C;
 #if VERSION_IQUE
 BSS s32 D_80099258[2];

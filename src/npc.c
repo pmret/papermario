@@ -817,7 +817,7 @@ f32 npc_get_render_yaw(Npc* npc) {
                 }
             }
 
-            if (npc->flags & NPC_FLAG_200000) {
+            if (npc->flags & NPC_FLAG_FLIP_INSTANTLY) {
                 npc->turnAroundYawAdjustment = 0;
             }
 
@@ -2446,7 +2446,7 @@ void init_encounter_status(void) {
         currentEncounter->encounterList[i] = 0;
     }
 
-    currentEncounter->flags = ENCOUNTER_STATUS_FLAG_0;
+    currentEncounter->flags = ENCOUNTER_FLAG_NONE;
     currentEncounter->numEncounters = 0;
     currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
     currentEncounter->hitType = 0;
@@ -2602,7 +2602,7 @@ void make_npcs(s32 flags, s32 mapID, s32* npcGroupList) {
 
     if (npcGroupList != NULL) {
         gEncounterState = ENCOUNTER_STATE_CREATE;
-        D_8009A678 = 1;
+        EncounterStateChanged = TRUE;
         gEncounterSubState = ENCOUNTER_SUBSTATE_CREATE_INIT;
     }
 }

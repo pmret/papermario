@@ -9,7 +9,7 @@ typedef struct MagikoopaTeleportAnim {
 } MagikoopaTeleportAnim;
 
 #define ENEMY_FLAG_COMBINATION (ENEMY_FLAG_IGNORE_PARTNER | ENEMY_FLAG_CANT_INTERACT | \
-    ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_100000)
+    ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_SKIP_BATTLE)
 
 extern MagikoopaTeleportAnim N(MagikoopaAI_TeleportAnim)[];
 
@@ -251,7 +251,7 @@ API_CALLABLE(N(MagikoopaAI_Main)) {
     if (isInitialCall || (enemy->aiFlags & AI_FLAG_SUSPEND)) {
         npc->curAnim = enemy->animList[0];
         npc->flags &= ~NPC_FLAG_JUMPING;
-        npc->flags |= NPC_FLAG_200000;
+        npc->flags |= NPC_FLAG_FLIP_INSTANTLY;
         enemy->flags |= ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN;
         npc->duration = 0;
         if (enemy->aiFlags & AI_FLAG_SUSPEND) {

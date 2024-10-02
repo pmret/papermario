@@ -243,10 +243,10 @@ void start_battle(Evt* script, s32 songID) {
     }
 
     currentEncounter->fadeOutAmount = 0;
-    currentEncounter->unk_94 = 0;
+    currentEncounter->substateDelay = 0;
     currentEncounter->scriptedBattle = TRUE;
     gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
-    D_8009A678 = 1;
+    EncounterStateChanged = TRUE;
     gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT;
 }
 
@@ -312,10 +312,10 @@ API_CALLABLE(StartBossBattle) {
     }
 
     currentEncounter->fadeOutAmount = 0;
-    currentEncounter->unk_94 = 0;
+    currentEncounter->substateDelay = 0;
     currentEncounter->scriptedBattle = TRUE;
     gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
-    D_8009A678 = 1;
+    EncounterStateChanged = TRUE;
     gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT;
 
     return ApiStatus_DONE1;
