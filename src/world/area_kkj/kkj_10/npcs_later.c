@@ -64,13 +64,13 @@ EvtScript N(EVS_NpcIdle_Koopatrol_01) = {
             IfEq(LVar2, 0)
                 Call(N(GetPeachDisguise), LVar1)
                 IfEq(LVar1, PEACH_DISGUISE_NONE)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, TRUE)
                     IfNe(LVar0, 0)
                         Call(BindNpcAI, NPC_SELF, Ref(N(EVS_CapturePeach)))
                         Set(LVar2, 1)
                     EndIf
                 Else
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
                 EndIf
             EndIf
             Wait(1)
@@ -103,13 +103,13 @@ EvtScript N(EVS_NpcIdle_Koopatrol_02) = {
             IfEq(LVar2, 0)
                 Call(N(GetPeachDisguise), LVar1)
                 IfEq(LVar1, PEACH_DISGUISE_NONE)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
                     IfNe(LVar0, 0)
                         Call(BindNpcAI, NPC_SELF, Ref(N(EVS_CapturePeach)))
                         Set(LVar2, 1)
                     EndIf
                 Else
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
                 EndIf
             EndIf
             Wait(1)

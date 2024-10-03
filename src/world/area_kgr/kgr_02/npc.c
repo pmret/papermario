@@ -114,11 +114,11 @@ EvtScript N(EVS_Fuzzipede_ReactToLight) = {
                 Set(LVarB, 1)
                 Call(DisablePlayerInput, FALSE)
             EndIf
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, 0)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, FALSE)
             Set(LVarA, 1)
         Else
             Call(N(AwaitPartnerNotWatt))
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, 1)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, TRUE)
             Set(LVarA, 0)
         EndIf
         Wait(1)
@@ -167,7 +167,7 @@ EvtScript N(EVS_NpcAI_Fuzzipede) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE, 0)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE, FALSE)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
     End

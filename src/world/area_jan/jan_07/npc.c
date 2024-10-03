@@ -145,18 +145,18 @@ EvtScript N(EVS_NpcInit_YoshiKid) = {
 
 EvtScript N(EVS_NpcIdle_PutridPiranha) = {
 #if VERSION_PAL
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 1)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, TRUE)
 #elif VERSION_US || VERSION_IQUE
     ChildThread
         Loop(0)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             IfLt(LVar0, -190)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 1)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 1)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, TRUE)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, TRUE)
             Else
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 0)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 0)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, FALSE)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, FALSE)
             EndIf
             Wait(1)
         EndLoop

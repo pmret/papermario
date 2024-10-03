@@ -80,7 +80,7 @@ EvtScript N(EVS_OnReadBillboard) = {
 EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
     Call(SetNpcAnimation, NPC_SELF, ANIM_Goomba_Still)
     Call(EnableNpcShadow, NPC_SELF, FALSE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, TRUE)
     Label(0)
     Call(GetSelfVar, 0, LVar0)
     IfEq(LVar0, 0)
@@ -112,8 +112,8 @@ EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_NO_SHADOW_RAYCAST, TRUE)
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, FALSE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
     BindTrigger(Ref(N(EVS_OnReadBillboard)), TRIGGER_WALL_PRESS_A, COLLIDER_kan, 1, 0)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Goomba_Wander)))
     Return

@@ -100,14 +100,14 @@ EvtScript N(EVS_WatchForPlayer) = {
     Loop(0)
         Call(N(GetPeachDisguise), LVar1)
         IfEq(LVar1, PEACH_DISGUISE_NONE)
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, TRUE)
             Call(N(UnkPhysicsFunc), LVar0, 85, 60, 38)
             IfNe(LVar0, 0)
                 Call(BindNpcAI, NPC_SELF, Ref(N(EVS_CapturePeach)))
                 Return
             EndIf
         Else
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
         EndIf
         Wait(1)
     EndLoop

@@ -25,7 +25,7 @@ API_CALLABLE(N(GetBulletBillVar)) {
 }
 
 EvtScript N(EVS_NpcAuxAI_BillBlaster) = {
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, TRUE)
     Return
     End
 };
@@ -390,7 +390,7 @@ EvtScript N(EVS_NpcAI_BillBlaster) = {
 };
 
 EvtScript N(EVS_NpcAI_BulletBill) = {
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, TRUE)
     Label(1)
         Call(SetSelfVar, 0, 0)
         Call(EnableNpcShadow, NPC_SELF, FALSE)

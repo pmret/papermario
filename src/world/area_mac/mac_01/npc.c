@@ -524,13 +524,13 @@ EvtScript N(EVS_MerlonBargeOut) = {
 
 EvtScript N(D_80250D14_811594) = {
     Call(AwaitPlayerApproach, -130, -110, 150)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, TRUE)
     Call(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
     Call(NpcMoveTo, NPC_Merlon, 0, 0, 0)
     Call(NpcMoveTo, NPC_Merlon, 410, 0, 0)
     Call(SetNpcPos, NPC_Merlon, 410, 0, 0)
     Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
     Call(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, FALSE)
     Return
     End
@@ -1936,7 +1936,7 @@ EvtScript N(EVS_NpcHit_ShyGuy_02) = {
     Set(GF_MAC01_ChasedShyGuyFromToadHouse, TRUE)
     Set(AF_MAC_43, TRUE)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy_02)))
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
     Return
     End
 };

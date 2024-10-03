@@ -39,7 +39,7 @@ MobileAISettings N(AISettings_MontyMole_WallAmbush) = {
 EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
     Call(func_800445D4, LVar0)
     IfEq(LVar0, 100)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, TRUE)
         Label(10)
         Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         Add(LVar2, 130)
@@ -66,9 +66,9 @@ EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
         Call(NpcJump0, NPC_SELF, LVar1, LVar2, LVar3, 20)
         Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, FALSE)
         Call(NpcFacePlayer, NPC_SELF, 0)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
     EndIf
     Call(BasicAI_Main, Ref(N(AISettings_MontyMole_WallAmbush)))
     Return

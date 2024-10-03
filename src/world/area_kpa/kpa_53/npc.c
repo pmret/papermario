@@ -234,7 +234,7 @@ EvtScript N(EVS_NpcHit_Guardian) = {
                         Call(SpeakToPlayer, NPC_Follower, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_002B)
                     Else
                         Call(SpeakToPlayer, NPC_Follower, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_002C)
-                        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
+                        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, TRUE)
                         Call(BindNpcAI, NPC_Duplighost, Ref(N(EVS_NpcAI_Duplighost_Caught)))
                     EndIf
             EndSwitch

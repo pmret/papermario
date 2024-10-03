@@ -65,7 +65,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy_01) = {
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
     Call(SetNpcJumpscale, NPC_SELF, Float(1.8))
     Call(NpcJump0, NPC_SELF, -341, 0, 23, 15)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Fuzzy_Wander)))
     Return
     End
@@ -83,7 +83,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy_02) = {
     Set(LVar1, 0)
     Call(SetNpcJumpscale, NPC_SELF, Float(3.0))
     Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 6)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Fuzzy_Wander)))
     Return
     End

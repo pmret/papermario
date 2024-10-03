@@ -1472,7 +1472,7 @@ EvtScript N(EVS_NpcInit_Fishmael) = {
     IfLt(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
         Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Fuzzipede1)))
     Else
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, 0)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, FALSE)
         Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Fishmael)))
     EndIf
     Return
@@ -1486,7 +1486,7 @@ EvtScript N(EVS_NpcInit_Fuzzipede) = {
         CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         CaseDefault
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, 0)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, FALSE)
             Call(SetNpcPos, NPC_SELF, -575, 40, 120)
             Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Fuzzipede2)))
         CaseDefault
@@ -1989,7 +1989,7 @@ API_CALLABLE(N(func_8024335C_8554CC)) {
 
 EvtScript N(D_8024E23C_8603AC) = {
     Set(AF_JAN01_TreeDrop_StarPiece, TRUE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_CANT_INTERACT, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_CANT_INTERACT, TRUE)
     Call(InterpNpcYaw, NPC_Chanterelle, 270, 0)
     Call(SetMusicTrack, 0, SONG_POP_DIVA_SONG, 1, 8)
     ChildThread
@@ -2011,7 +2011,7 @@ EvtScript N(D_8024E23C_8603AC) = {
     EndLoop
     Exec(N(EVS_802442E8))
     Call(SetNpcAnimation, NPC_Chanterelle, ANIM_Chanterelle_Idle)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_CANT_INTERACT, 0)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_CANT_INTERACT, FALSE)
     Return
     End
 };

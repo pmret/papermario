@@ -39,7 +39,7 @@ MobileAISettings N(AISettings_MontyMole_GroundAmbush) = {
 EvtScript N(EVS_NpcAI_MontyMole_GroundAmbush) = {
     Call(func_800445D4, LVar0)
     IfEq(LVar0, 100)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, TRUE)
         Label(10)
         Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         Call(IsPlayerWithin, LVar0, LVar2, 80, LVar3)
@@ -62,9 +62,9 @@ EvtScript N(EVS_NpcAI_MontyMole_GroundAmbush) = {
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
         Call(NpcJump0, NPC_SELF, LVar4, LVar5, LVar6, 20)
         Call(SetNpcPos, LVar0, NPC_DISPOSE_LOCATION)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, FALSE)
         Call(NpcFacePlayer, NPC_SELF, 0)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
         Call(BasicAI_Main, Ref(N(AISettings_MontyMole_GroundAmbush)))
         Return
         End

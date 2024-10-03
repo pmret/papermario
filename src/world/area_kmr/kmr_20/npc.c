@@ -596,7 +596,7 @@ EvtScript N(EVS_NpcInit_Luigi_1) = {
         CaseLt(STORY_EPILOGUE)
             Call(SetNpcPos, NPC_SELF, 306, 30, -145)
             Call(InterpNpcYaw, NPC_SELF, 39, 0)
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, 1)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, TRUE)
     EndSwitch
     Return
     End
@@ -696,7 +696,7 @@ EvtScript N(EVS_NpcHit_ShyGuy) = {
     Set(GF_KMR20_ChasedOffShyGuy, TRUE)
     Call(SetNpcVar, NPC_Luigi_1, 0, 1)
     Wait(2)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy)))
     Return
     End

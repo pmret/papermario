@@ -220,7 +220,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Crowd) = {
                 Call(InterpNpcYaw, NPC_SELF, 90, 0)
                 Wait(2)
             CaseEq(CROWD_STATE_RUN_AWAY)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_WORLD_COLLISION, 1)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_WORLD_COLLISION, TRUE)
                 Call(GetSelfNpcID, LVar0)
                 UseBuf(Ref(N(CrowdFleeScripts)))
                 Loop(LVar0)

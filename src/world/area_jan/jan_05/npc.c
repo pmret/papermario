@@ -31,7 +31,7 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy) = {
 
 EvtScript N(EVS_NpcInit_JungleFuzzy) = {
     Call(SetSelfVar, 7, 0)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, TRUE)
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_JungleFuzzy)))

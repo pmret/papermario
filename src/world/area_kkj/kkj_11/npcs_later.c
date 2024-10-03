@@ -97,7 +97,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_01) = {
     Exec(N(EVS_CheckForPeach_Koopatrol_01))
     Call(GetEntryID, LVar0)
     IfEq(LVar0, kkj_11_ENTRY_1)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, TRUE)
         Call(WaitForPlayerInputEnabled)
         Thread
             Call(DisablePlayerInput, TRUE)
@@ -110,7 +110,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_01) = {
         Call(NpcMoveTo, NPC_SELF, 0, -350, 0)
         Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim01)
         Call(InterpNpcYaw, NPC_SELF, 220, 5)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
     EndIf
     Loop(0)
         Wait(1)
@@ -123,7 +123,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_04) = {
     Exec(N(EVS_CheckForPeach_Koopatrol_01))
     Call(GetEntryID, LVar0)
     IfEq(LVar0, kkj_11_ENTRY_4)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, TRUE)
         Call(WaitForPlayerInputEnabled)
         Thread
             Call(DisablePlayerInput, TRUE)
@@ -136,7 +136,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_04) = {
         Call(NpcMoveTo, NPC_SELF, 0, -240, 0)
         Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim01)
         Call(InterpNpcYaw, NPC_SELF, 220, 5)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
     EndIf
     Loop(0)
         Wait(1)

@@ -1643,7 +1643,7 @@ EvtScript N(EVS_Toad_GovernGame) = {
         Call(SetNpcPos, NPC_Toad, 358, -20, 185)
         Call(EnableNpcShadow, NPC_Toad, TRUE)
         PlayEffect(EFFECT_WALKING_DUST, 1, 358, 5, 189)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 0)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, FALSE)
     EndThread
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(GetNpcPos, NPC_Toad, LVar3, LVar4, LVar5)

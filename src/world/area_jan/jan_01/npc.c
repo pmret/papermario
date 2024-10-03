@@ -162,11 +162,11 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy_01) = {
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Switch(LVar0)
                 CaseRange(LVar3, LVar4)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 0)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 0)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, FALSE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, FALSE)
                 CaseDefault
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 1)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 1)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, TRUE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, TRUE)
             EndSwitch
             Wait(1)
         EndLoop
