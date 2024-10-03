@@ -404,7 +404,7 @@ HitID player_test_lateral_overlap(s32 mode, PlayerStatus* playerStatus, f32* x, 
     hitDepth = length + radius;
     hitID = player_raycast_general(mode, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
 
-    if (mode == PLAYER_COLLISION_3) {
+    if (mode == PLAYER_COLLISION_HAMMER) {
         targetDx = 0.0f;
         targetDz = 0.0f;
     } else {
@@ -452,12 +452,12 @@ HitID player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 d
         } else {
             ret = entityID | COLLISION_WITH_ENTITY_BIT;
         }
-    } else if (mode == PLAYER_COLLISION_3) {
+    } else if (mode == PLAYER_COLLISION_HAMMER) {
         ret = test_ray_colliders(COLLIDER_FLAG_IGNORE_SHELL, startX, startY, startZ, dirX, dirY, dirZ,
             hitX, hitY, hitZ, hitDepth, hitNx, hitNy, hitNz);
     }
 
-    if (mode == PLAYER_COLLISION_1 || mode == PLAYER_COLLISION_3) {
+    if (mode == PLAYER_COLLISION_1 || mode == PLAYER_COLLISION_HAMMER) {
         return ret;
     }
 

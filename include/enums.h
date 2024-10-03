@@ -4713,7 +4713,7 @@ enum PlayerCollisionTests {
     PLAYER_COLLISION_0          = 0,
     PLAYER_COLLISION_1          = 1,
     PLAYER_COLLISION_2          = 2,
-    PLAYER_COLLISION_3          = 3,
+    PLAYER_COLLISION_HAMMER     = 3,
     PLAYER_COLLISION_4          = 4,
 };
 

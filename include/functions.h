@@ -141,7 +141,7 @@ void player_handle_floor_collider_type(s32 colliderID);
 f32 player_fall_distance(void);
 void func_800E4AD8(s32 arg0);
 f32 player_check_collision_below(f32, s32* colliderID);
-s32 can_trigger_loading_zone(void);
+b32 can_trigger_loading_zone(void);
 void update_damage_popups(void);
 void show_action_rating(s32, Actor*, f32, f32, f32);
 s32 render_with_adjusted_palettes(s32, ActorPart*, s32, Matrix4f, s32);
@@ -201,7 +201,7 @@ s32 get_model_list_index_from_tree_index(s32 treeIndex);
 s32 get_transform_group_index(s32);
 void get_model_center_and_size(u16 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
                                f32* sizeZ);
-s32 collision_main_above(void);
+HitID collision_main_above(void);
 void collision_lava_reset_check_additional_overlaps(void);
 s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
@@ -423,9 +423,9 @@ PlayerData* get_player_data(void);
 
 b32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 b32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth);
-s32 npc_raycast_up(s32, f32*, f32*, f32*, f32*);
+b32 npc_raycast_up(s32, f32*, f32*, f32*, f32*);
 HitID npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw, f32 radius);
-s32 player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32);
+HitID player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32);
 HitID player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32* outY, f32* outZ, f32* outLength,
                                       f32* hitRx, f32* hitRz, f32* hitDirX, f32* hitDirZ);
 b32 npc_test_move_taller_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);

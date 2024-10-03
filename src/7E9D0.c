@@ -678,7 +678,7 @@ s32 peach_disguise_check_overlaps(void) {
         f32 x = playerStatus->pos.x + (dx * radius);
         f32 y = playerStatus->pos.y + 4.0f;
         f32 z = playerStatus->pos.z - (dy * radius);
-        hitID = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
+        hitID = player_test_lateral_overlap(PLAYER_COLLISION_HAMMER, playerStatus, &x, &y, &z, 4.0f, yaw);
         if (hitID >= 0) {
             break;
         }

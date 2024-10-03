@@ -917,7 +917,7 @@ API_CALLABLE(N(UseAbility)) {
 
             yaw = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].curYaw;
 
-            if (player_raycast_up_corners(playerStatus, &x, &y, &z, &dist, yaw) >= 0) {
+            if (player_raycast_up_corners(playerStatus, &x, &y, &z, &dist, yaw) > NO_COLLIDER) {
                 N(AbilityState) = RIDE_STATE_FINISH_1;
                 break;
             }
@@ -925,7 +925,7 @@ API_CALLABLE(N(UseAbility)) {
             lakilester->jumpVel -= lakilester->jumpScale;
             add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, lakilester->moveSpeed, lakilester->yaw);
 
-            func_800E4AD8(0);
+            func_800E4AD8(PLAYER_COLLISION_0);
             if (N(test_dismount_height)(&y) > NO_COLLIDER) {
                 N(AbilityState) = RIDE_STATE_FINISH_1;
                 playerStatus->pos.y = y;
@@ -1045,7 +1045,7 @@ API_CALLABLE(N(PutAway)) {
             lakilester->jumpVel -= lakilester->jumpScale;
             add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z,
                             lakilester->moveSpeed, lakilester->yaw);
-            func_800E4AD8(0);
+            func_800E4AD8(PLAYER_COLLISION_0);
             if (lakilester->jumpVel <= 0.0f) {
                 playerStatus->flags |= PS_FLAG_FALLING;
                 if (lakilester->jumpVel < -10.0) {

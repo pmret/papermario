@@ -146,7 +146,7 @@ HitID action_hammer_test_swing_collision(void) {
         x = playerX + (outSinTheta * i);
         y = playerY;
         z = playerZ - (outCosTheta * i);
-        ret = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
+        ret = player_test_lateral_overlap(PLAYER_COLLISION_HAMMER, playerStatus, &x, &y, &z, 4.0f, yaw);
         if (ret > NO_COLLIDER) {
             HammerHit->hitPos.x = x;
             HammerHit->hitPos.y = y;
@@ -174,7 +174,7 @@ HitID action_hammer_test_swing_collision(void) {
             y = playerY;
             z = playerZ - (outCosTheta * i);
 
-            ret = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
+            ret = player_test_lateral_overlap(PLAYER_COLLISION_HAMMER, playerStatus, &x, &y, &z, 4.0f, yaw);
             if (ret > NO_COLLIDER) {
                 HammerHit->hitPos.x = x;
                 HammerHit->hitPos.y = y;
@@ -325,7 +325,7 @@ void action_hammer_end_swing(void) {
         x = playerX + (outSinTheta * i);
         y = playerY;
         z = playerZ - (outCosTheta * i);
-        result = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
+        result = player_test_lateral_overlap(PLAYER_COLLISION_HAMMER, playerStatus, &x, &y, &z, 4.0f, yaw);
         if (HammerHit->unk_14 == 0) {
             collisionStatus->lastWallHammered = result;
             if (result > NO_COLLIDER) {
@@ -357,7 +357,7 @@ void action_hammer_end_swing(void) {
             x = playerX + (outSinTheta * i);
             y = playerY;
             z = playerZ - (outCosTheta * i);
-            result = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
+            result = player_test_lateral_overlap(PLAYER_COLLISION_HAMMER, playerStatus, &x, &y, &z, 4.0f, yaw);
             if (HammerHit->unk_14 == 0) {
                 collisionStatus->lastWallHammered = result;
                 if (result > NO_COLLIDER) {

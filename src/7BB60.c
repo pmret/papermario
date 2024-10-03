@@ -10,15 +10,15 @@ f32 StepUpLastYaw;
 
 extern f32 GravityParamsStartJump[];
 
-s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 yaw);
-s32 phys_check_interactable_collision(void);
+HitID collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 yaw);
+HitID phys_check_interactable_collision(void);
 void phys_save_ground_pos(void);
 
 void record_jump_apex(void) {
     gPlayerStatus.jumpApexHeight = gPlayerStatus.pos.y;
 }
 
-s32 can_trigger_loading_zone(void) {
+b32 can_trigger_loading_zone(void) {
     PlayerData* playerData = &gPlayerData;
     s32 actionState = gPlayerStatusPtr->actionState;
     PartnerStatus* partnerStatus = &gPartnerStatus;
@@ -64,15 +64,15 @@ void move_player(s32 duration, f32 heading, f32 speed) {
     }
 }
 
-s32 collision_main_above(void) {
+HitID collision_main_above(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
+    HitID hitResult;
     f32 x, y, z;
     f32 new_var;
     f32 moveAngle;
     f32 moveMagnitude;
     f32 sp2C;
-    s32 hitResult;
     f32 phi_f2;
 
     new_var = sp2C = playerStatus->colliderHeight * 0.5f;
@@ -756,9 +756,9 @@ void collision_main_lateral(void) {
     }
 }
 
-s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 yaw) {
+HitID collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 yaw) {
+    HitID ret = NO_COLLIDER;
     f32 angle = 0.0f;
-    s32 ret = -1;
     s32 i;
 
     for (i = 0; i < 4; i++) {
@@ -791,16 +791,16 @@ s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 yaw) {
     return ret;
 }
 
-s32 func_800E4404(s32 mode, s32 arg1, f32 arg2, f32* outX, f32* outY, f32* outZ) {
+HitID func_800E4404(s32 mode, s32 offsetY, f32 arg2, f32* outX, f32* outY, f32* outZ) {
+    HitID ret = NO_COLLIDER;
     f32 angle = 0.0f;
-    s32 ret = -1;
     s32 i;
 
     for (i = 0; i < 4; i++) {
         f32 x = *outX;
-        f32 y = *outY + arg1;
+        f32 y = *outY + offsetY;
         f32 z = *outZ;
-        s32 hitID = player_test_lateral_overlap(mode, gPlayerStatusPtr, &x, &y, &z, 0, angle);
+        s32 hitID = player_test_lateral_overlap(mode, gPlayerStatusPtr, &x, &y, &z, 0.0f, angle);
 
         if (hitID > NO_COLLIDER) {
             ret = hitID;
@@ -989,80 +989,80 @@ void phys_main_collision_below(void) {
 }
 
 void func_800E4AD8(s32 mode) {
-    Camera* currentCamera = &gCameras[gCurrentCameraID];
+    f32 camYaw = gCameras[gCurrentCameraID].curYaw;
 
-    collision_check_player_intersecting_world(mode, 0, gPlayerStatus.spriteFacingAngle - 90.0f + currentCamera->curYaw);
+    collision_check_player_intersecting_world(mode, 0, gPlayerStatus.spriteFacingAngle - 90.0f + camYaw);
 }
 
-void func_800E4B40(s32 mode, f32* arg1, f32* arg2, f32* arg3) {
-    Camera* currentCamera = &gCameras[gCurrentCameraID];
+void func_800E4B40(s32 mode, f32* outX, f32* outY, f32* outZ) {
+    f32 camYaw = gCameras[gCurrentCameraID].curYaw;
 
-    func_800E4404(mode, 0, gPlayerStatus.spriteFacingAngle - 90.0f + currentCamera->curYaw, arg1, arg2, arg3);
+    func_800E4404(mode, 0, gPlayerStatus.spriteFacingAngle - 90.0f + camYaw, outX, outY, outZ);
 }
 
 void collision_lava_reset_check_additional_overlaps(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 x, y, z;
-    f32 temp_f0;
+    f32 yaw;
 
     if (playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS) {
         collision_lateral_peach();
         return;
     }
 
-    temp_f0 = clamp_angle(playerStatus->targetYaw - 30.0);
+    yaw = clamp_angle(playerStatus->targetYaw - 30.0);
     y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.75f);
     x = playerStatus->pos.x;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, yaw);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
 
-    temp_f0 = clamp_angle(playerStatus->targetYaw + 30.0);
+    yaw = clamp_angle(playerStatus->targetYaw + 30.0);
     y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.75f);
     x = playerStatus->pos.x;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, yaw);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
 
-    temp_f0 = clamp_angle(playerStatus->targetYaw - 30.0);
+    yaw = clamp_angle(playerStatus->targetYaw - 30.0);
     x = playerStatus->pos.x;
     y = playerStatus->pos.y;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, yaw);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
 
-    temp_f0 = clamp_angle(playerStatus->targetYaw + 30.0);
+    yaw = clamp_angle(playerStatus->targetYaw + 30.0);
     x = playerStatus->pos.x;
     y = playerStatus->pos.y;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, yaw);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
 
-    temp_f0 = clamp_angle(playerStatus->targetYaw + 90.0);
+    yaw = clamp_angle(playerStatus->targetYaw + 90.0);
     x = playerStatus->pos.x;
     y = playerStatus->pos.y;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, yaw);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
-    temp_f0 = clamp_angle(playerStatus->targetYaw - 90.0);
+    yaw = clamp_angle(playerStatus->targetYaw - 90.0);
 
     x = playerStatus->pos.x;
     y = playerStatus->pos.y;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, yaw);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
 
-    temp_f0 = clamp_angle(playerStatus->targetYaw + 180.0);
+    yaw = clamp_angle(playerStatus->targetYaw + 180.0);
     x = playerStatus->pos.x;
     y = playerStatus->pos.y;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, yaw);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
 }
@@ -1141,10 +1141,10 @@ void phys_update_interact_collider(void) {
     gCollisionStatus.curInspect = phys_check_interactable_collision();
 }
 
-s32 phys_check_interactable_collision(void) {
+HitID phys_check_interactable_collision(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
+    HitID ret = NO_COLLIDER;
     f32 x, y, z, yaw;
-    s32 ret = -1;
 
     if (playerStatus->flags & PS_FLAG_INPUT_DISABLED) {
         return ret;
