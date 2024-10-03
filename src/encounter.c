@@ -586,7 +586,7 @@ void update_encounters_neutral(void) {
                     set_script_flags(script, EVT_FLAG_SUSPENDED);
                 }
 
-                if (enemy->flags & ENEMY_FLAG_80000) {
+                if (enemy->flags & ENEMY_FLAG_DONT_SUSPEND_SCRIPTS) {
                     script = get_script_by_id(enemy->auxScriptID);
                     if (script != NULL) {
                         clear_script_flags(script, EVT_FLAG_SUSPENDED);
@@ -1781,7 +1781,7 @@ void update_encounters_post_battle(void) {
                     if (enemy == NULL) {
                         continue;
                     }
-                    if (enemy->flags & ENEMY_FLAG_4) {
+                    if (enemy->flags & ENEMY_FLAG_DO_NOT_KILL) {
                         continue;
                     }
                     if ((enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) && enemy != currentEncounter->curEnemy) {
@@ -2173,7 +2173,7 @@ void update_encounters_post_battle(void) {
                 }
 
                 enemy = currentEncounter->curEnemy;
-                if (!(enemy->flags & ENEMY_FLAG_4)) {
+                if (!(enemy->flags & ENEMY_FLAG_DO_NOT_KILL)) {
                     encounter = currentEncounter->curEncounter;
                     enemy->aiSuspendTime = 45;
                     playerStatus->blinkTimer = 45;
@@ -2306,26 +2306,26 @@ b32 check_conversation_trigger(void) {
     f32 npcX, npcY, npcZ;
     f32 angle;
     f32 deltaX, deltaZ;
-    Encounter* encounter;
+    Encounter* resultEncounter;
     f32 playerX, playerY, playerZ;
-    f32 playerColliderHeight;
-    f32 playerColliderRadius;
+    f32 playerHeight;
+    f32 playerRadius;
     f32 length;
-    f32 npcCollisionHeight;
-    f32 npcCollisionRadius;
-    Encounter* encounterTemp;
+    f32 npcHeight;
+    f32 npcRadius;
+    Encounter* encounter;
+    Npc* resultNpc;
     Npc* npc;
-    Npc* encounterNpc;
+    Enemy* resultEnemy;
     Enemy* enemy;
-    Enemy* encounterEnemy;
     f32 minLength;
-    f32 xTemp, yTemp, zTemp;
     s32 i, j;
+    f32 yaw;
 
     playerStatus->encounteredNPC = NULL;
     playerStatus->flags &= ~PS_FLAG_HAS_CONVERSATION_NPC;
-    playerColliderHeight = playerStatus->colliderHeight;
-    playerColliderRadius = playerStatus->colliderDiameter / 2;
+    playerHeight = playerStatus->colliderHeight;
+    playerRadius = playerStatus->colliderDiameter / 2;
     playerX = playerStatus->pos.x;
     playerY = playerStatus->pos.y;
     playerZ = playerStatus->pos.z;
@@ -2334,51 +2334,52 @@ b32 check_conversation_trigger(void) {
         return FALSE;
     }
 
-    encounter = NULL;
-    npc = NULL;
-    enemy = NULL;
+    resultEncounter = NULL;
+    resultNpc = NULL;
+    resultEnemy = NULL;
     minLength = 65535.0f;
 
     for (i = 0; i < encounterStatus->numEncounters; i++) {
-        encounterTemp = encounterStatus->encounterList[i];
+        encounter = encounterStatus->encounterList[i];
 
-        if (encounterTemp == NULL) {
+        if (encounter == NULL) {
             continue;
         }
 
-        for (j = 0; j < encounterTemp->count; j++) {
-            encounterEnemy = encounterTemp->enemy[j];
+        for (j = 0; j < encounter->count; j++) {
+            enemy = encounter->enemy[j];
 
-            if (encounterEnemy == NULL) {
+            if (enemy == NULL) {
                 continue;
             }
 
-            if (encounterEnemy->flags & (ENEMY_FLAG_SUSPENDED | ENEMY_FLAG_DISABLE_AI)) {
+            if (enemy->flags & (ENEMY_FLAG_SUSPENDED | ENEMY_FLAG_DISABLE_AI)) {
                 continue;
             }
 
-            if (!(encounterEnemy->flags & ENEMY_FLAG_PASSIVE)) {
+            if (!(enemy->flags & ENEMY_FLAG_PASSIVE)) {
                 continue;
             }
 
-            if ((encounterEnemy->flags & ENEMY_FLAG_CANT_INTERACT) || encounterEnemy->interactBytecode == NULL) {
+            if ((enemy->flags & ENEMY_FLAG_CANT_INTERACT) || enemy->interactBytecode == NULL) {
                 continue;
             }
 
-            encounterNpc = get_npc_unsafe(encounterEnemy->npcID);
+            npc = get_npc_unsafe(enemy->npcID);
 
-            npcX = encounterNpc->pos.x;
-            npcY = encounterNpc->pos.y;
-            npcZ = encounterNpc->pos.z;
+            npcX = npc->pos.x;
+            npcY = npc->pos.y;
+            npcZ = npc->pos.z;
             deltaX = npcX - playerX;
             deltaZ = npcZ - playerZ;
-            npcCollisionHeight = encounterNpc->collisionHeight;
-            npcCollisionRadius = encounterNpc->collisionDiameter;
+            npcHeight = npc->collisionHeight;
+            npcRadius = npc->collisionDiameter;
             length = sqrtf(SQ(deltaX) + SQ(deltaZ));
 
-            if ((playerColliderRadius + npcCollisionRadius <= length) ||
-                (npcY + npcCollisionHeight < playerY) ||
-                (playerY + playerColliderHeight < npcY)) {
+            // check cylinder-cylinder overlap
+            if ((playerRadius + npcRadius <= length) ||
+                (npcY + npcHeight < playerY) ||
+                (playerY + playerHeight < npcY)) {
                 continue;
             }
 
@@ -2394,41 +2395,42 @@ b32 check_conversation_trigger(void) {
                 }
             }
 
-            if (fabsf(get_clamped_angle_diff(angle, atan2(playerX, playerZ, npcX, npcZ))) > 90.0f) {
+            yaw = atan2(playerX, playerZ, npcX, npcZ);
+            if (fabsf(get_clamped_angle_diff(angle, yaw)) > 90.0f) {
                 continue;
             }
 
-            if (!(encounterEnemy->flags & ENEMY_FLAG_10000) && encounterNpc->flags & NPC_FLAG_20000000) {
-                xTemp = npcX;
-                yTemp = npcY;
-                zTemp = npcZ;
+            // only allow interact if line of sight exists
+            // @bug? flag combination does not make sense
+            if (!(enemy->flags & ENEMY_FLAG_RAYCAST_TO_INTERACT) && npc->flags & NPC_FLAG_RAYCAST_TO_INTERACT) {
+                f32 x = npcX;
+                f32 y = npcY;
+                f32 z = npcZ;
+                yaw = atan2(npcX, npcZ, playerX, playerZ);
 
-                if (npc_test_move_taller_with_slipping(0, &xTemp, &yTemp, &zTemp, length,
-                                                        atan2(npcX, npcZ, playerX, playerZ),
-                                                        npcCollisionHeight,
-                                                        2.0f * npcCollisionRadius)) {
+                if (npc_test_move_taller_with_slipping(0, &x, &y, &z, length, yaw, npcHeight, 2.0f * npcRadius)) {
                     continue;
                 }
             }
 
             if (length < minLength) {
                 minLength = length;
-                encounter = encounterTemp;
-                npc = encounterNpc;
-                enemy = encounterEnemy;
+                resultEncounter = encounter;
+                resultNpc = npc;
+                resultEnemy = enemy;
             }
         }
     }
 
-    if (!(playerStatus->animFlags & PA_FLAG_8BIT_MARIO) && npc != NULL && !is_picking_up_item()) {
-        playerStatus->encounteredNPC = npc;
+    if (!(playerStatus->animFlags & PA_FLAG_8BIT_MARIO) && resultNpc != NULL && !is_picking_up_item()) {
+        playerStatus->encounteredNPC = resultNpc;
         playerStatus->flags |= PS_FLAG_HAS_CONVERSATION_NPC;
         if (playerStatus->pressedButtons & BUTTON_A) {
             close_status_bar();
             gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_CONVERSATION;
-            enemy->encountered = ENCOUNTER_TRIGGER_CONVERSATION;
-            encounterStatus->curEncounter = encounter;
-            encounterStatus->curEnemy = enemy;
+            resultEnemy->encountered = ENCOUNTER_TRIGGER_CONVERSATION;
+            encounterStatus->curEncounter = resultEncounter;
+            encounterStatus->curEnemy = resultEnemy;
             encounterStatus->firstStrikeType = FIRST_STRIKE_PLAYER;
             return TRUE;
         }
@@ -2636,8 +2638,8 @@ void create_encounters(void) {
                     if (enemy->flags & ENEMY_FLAG_USE_INSPECT_ICON) {
                         newNpc->flags |= NPC_FLAG_USE_INSPECT_ICON;
                     }
-                    if (enemy->flags & ENEMY_FLAG_10000) {
-                        newNpc->flags |= NPC_FLAG_20000000;
+                    if (enemy->flags & ENEMY_FLAG_RAYCAST_TO_INTERACT) {
+                        newNpc->flags |= NPC_FLAG_RAYCAST_TO_INTERACT;
                     }
                     if (enemy->flags & ENEMY_FLAG_DONT_UPDATE_SHADOW_Y) {
                         newNpc->flags |= NPC_FLAG_DONT_UPDATE_SHADOW_Y;

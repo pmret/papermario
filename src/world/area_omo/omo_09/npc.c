@@ -249,7 +249,7 @@ NpcData N(NpcData_ShyGuy_01) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
     .settings = &N(NpcSettings_ShyGuy_Wander),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -272,7 +272,7 @@ NpcData N(NpcData_ShyGuy_02) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
     .settings = &N(NpcSettings_ShyGuy_Wander),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -295,7 +295,7 @@ NpcData N(NpcData_ShyGuy_03) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
     .settings = &N(NpcSettings_ShyGuy_Wander),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -318,7 +318,7 @@ NpcData N(NpcData_ShyGuy_04) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
     .settings = &N(NpcSettings_ShyGuy_Wander),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -341,7 +341,7 @@ NpcData N(NpcData_ShyGuy_05) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
     .settings = &N(NpcSettings_ShyGuy_Wander),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -362,7 +362,7 @@ NpcData N(NpcData_Kammy) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kammy),
     .settings = &N(NpcSettings_Kammy_Flying),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),

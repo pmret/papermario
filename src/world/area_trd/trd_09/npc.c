@@ -711,7 +711,7 @@ NpcData N(NpcData_BulletBill_Demo1) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_DONT_SUSPEND_SCRIPTS,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
@@ -761,7 +761,7 @@ NpcData N(NpcData_BulletBill_Demo2) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_DONT_SUSPEND_SCRIPTS,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
@@ -811,7 +811,7 @@ NpcData N(NpcData_BulletBill_Demo3) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_DONT_SUSPEND_SCRIPTS,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
@@ -861,7 +861,7 @@ NpcData N(NpcData_BulletBill_Demo4) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_DONT_SUSPEND_SCRIPTS,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
@@ -911,7 +911,7 @@ NpcData N(NpcData_BulletBill_Demo5) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_DONT_SUSPEND_SCRIPTS,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,

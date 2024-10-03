@@ -198,7 +198,7 @@ NpcData N(NpcData_Tubba) = {
     },
     .init = &N(EVS_NpcInit_Tubba),
     .settings = &N(NpcSettings_TubbaBlubba),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
     .drops = CLUBBA_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

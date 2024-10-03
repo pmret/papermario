@@ -167,7 +167,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
     Wait(1)
     Call(N(DestroyAmbushWorker))
     Call(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_4 | ENEMY_FLAG_SKIP_BATTLE, 0)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_SKIP_BATTLE, 0)
     Wait(3)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetNpcJumpscale, NPC_SELF, 1)

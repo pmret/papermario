@@ -2671,7 +2671,7 @@ void kill_enemy(Enemy* enemy) {
     }
 
     do {
-        if (!(enemy->flags & ENEMY_FLAG_4)
+        if (!(enemy->flags & ENEMY_FLAG_DO_NOT_KILL)
             && (!(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || (enemy == encounterStatus->curEnemy))
             && !(enemy->flags & ENEMY_FLAG_PASSIVE)
         ) {

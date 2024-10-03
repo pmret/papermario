@@ -3025,7 +3025,7 @@ enum NpcFlags {
     NPC_FLAG_PARTNER                        = 0x04000000,
     NPC_FLAG_WORLD_COLLISION_DIRTY          = 0x08000000,
     NPC_FLAG_USE_INSPECT_ICON               = 0x10000000, // Approaching this NPC will cause a red ! to appear.
-    NPC_FLAG_20000000                       = 0x20000000,
+    NPC_FLAG_RAYCAST_TO_INTERACT            = 0x20000000, // Intended to require a line of sight raycast before conversations can be triggered. Seems bugged.
     NPC_FLAG_NO_ANIMS_LOADED                = 0x40000000, // Npc has no animations loaded
     NPC_FLAG_SUSPENDED                      = 0x80000000,
 };
@@ -4520,8 +4520,8 @@ enum MapRoomNotifications {
 
 enum EnemyFlags {
     ENEMY_FLAG_PASSIVE                  = 0x00000001, // Not hostile; collision does not trigger battle
-    ENEMY_FLAG_2                        = 0x00000002, // Unused
-    ENEMY_FLAG_4                        = 0x00000004,
+    ENEMY_FLAG_UNUSED_2                 = 0x00000002, // Unused
+    ENEMY_FLAG_DO_NOT_KILL              = 0x00000004, // Enemy will not be killed after being defeated in battle
     ENEMY_FLAG_ENABLE_HIT_SCRIPT        = 0x00000008,
     ENEMY_FLAG_FLED                     = 0x00000010,
     ENEMY_FLAG_DISABLE_AI               = 0x00000020, // Disable movement AI and collision (idle animation plays)
@@ -4535,10 +4535,10 @@ enum EnemyFlags {
     ENEMY_FLAG_NO_SHADOW_RAYCAST        = 0x00002000,
     ENEMY_FLAG_HAS_NO_SPRITE            = 0x00004000,
     ENEMY_FLAG_USE_INSPECT_ICON         = 0x00008000, // Corresponds with NPC_FLAG_USE_INSPECT_ICON
-    ENEMY_FLAG_10000                    = 0x00010000, // Corresponds with NPC_FLAG_20000000
+    ENEMY_FLAG_RAYCAST_TO_INTERACT      = 0x00010000, // Intended to require a line of sight raycast before conversations can be triggered. Seems bugged. Corresponds with NPC_FLAG_RAYCAST_TO_INTERACT
     ENEMY_FLAG_USE_PLAYER_SPRITE        = 0x00020000, // Used for Peach NPCs
     ENEMY_FLAG_NO_DELAY_AFTER_FLEE      = 0x00040000,
-    ENEMY_FLAG_80000                    = 0x00080000,
+    ENEMY_FLAG_DONT_SUSPEND_SCRIPTS     = 0x00080000, // Do not suspend ai/aux scripts when aiSuspendTime != 0
     ENEMY_FLAG_SKIP_BATTLE              = 0x00100000,
     ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN   = 0x00200000,
     ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER  = 0x00400000,
