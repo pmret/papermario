@@ -20,6 +20,8 @@ API_CALLABLE(PlayMerleeOrbFX);
 
 b32 D_80077C40 = FALSE;
 
+b32 EncounterStateChanged;
+
 EvtScript EVS_MerleeDropCoins = {
     Wait(10)
     Call(FadeBackgroundDarken)
