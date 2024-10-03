@@ -174,7 +174,7 @@ NpcData N(NpcData_Bowser_Body) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Bowser_Body),
     .settings = &N(NpcSettings_Bowser),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_DO_NOT_KILL,
     .drops = NO_DROPS,
     .animations = BOWSER_ANIMS,
 };

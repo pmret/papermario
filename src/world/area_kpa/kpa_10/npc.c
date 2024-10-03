@@ -12,7 +12,7 @@ NpcData N(NpcData_Prisoners)[] = {
 #endif
         .yaw = 0,
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveToadA,
@@ -26,7 +26,7 @@ NpcData N(NpcData_Prisoners)[] = {
 #endif
         .yaw = 0,
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveToadB,
@@ -40,7 +40,7 @@ NpcData N(NpcData_Prisoners)[] = {
 #endif
         .yaw = 0,
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = TOAD_GUARD_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveSoldierA,

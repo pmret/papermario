@@ -686,7 +686,7 @@ NpcData N(NpcData_Bootler) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_Bootler),
     .settings = &N(NpcSettings_Boo),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_DO_NOT_KILL  | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Bootler_Idle,
@@ -797,7 +797,7 @@ NpcData N(NpcData_Skolar) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_Skolar),
     .settings = &N(NpcSettings_StarSpirit),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = BASE_PASSIVE_FLAGS,
     .drops = NO_DROPS,
     .animations = SKOLAR_ANIMS,
 };
