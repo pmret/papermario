@@ -1565,7 +1565,7 @@ void partner_walking_follow_player(Npc* partner) {
         case 15:
             switch (D_8010CFCE) {
                 case 0:
-                    angle = clamp_angle(func_800E5348() + 180.0f);
+                    angle = clamp_angle(player_get_side_angle() + 180.0f);
                     partner->moveToPos.x = playerStatus->pos.x;
                     partner->moveToPos.y = playerStatus->pos.y;
                     partner->moveToPos.z = playerStatus->pos.z;
@@ -2087,7 +2087,7 @@ void partner_flying_follow_player(Npc* partner) {
             if (!(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
                 switch (D_8010CFCE) {
                     case 0:
-                        temp_f0_15 = clamp_angle(func_800E5348() + 180.0f);
+                        temp_f0_15 = clamp_angle(player_get_side_angle() + 180.0f);
                         partner->moveToPos.x = playerStatus->pos.x;
                         partner->moveToPos.y = playerStatus->pos.y;
                         partner->moveToPos.z = playerStatus->pos.z;

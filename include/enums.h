@@ -2992,7 +2992,7 @@ enum NpcPalSwapState {
     NPC_PALSWAP_HOLDING_A           = 0,
     NPC_PALSWAP_FROM_A_TO_B         = 1,
     NPC_PALSWAP_HOLDING_B           = 2,
-    NPC_PALSWAP_FROM_B_TO_A         = 3
+    NPC_PALSWAP_FROM_B_TO_A         = 3,
 };
 
 enum NpcFlags {
@@ -4554,11 +4554,12 @@ enum EnemyFlags {
 };
 
 #define COMMON_PASSIVE_FLAGS \
-      ENEMY_FLAG_PASSIVE \
+    ( ENEMY_FLAG_PASSIVE \
     | ENEMY_FLAG_ENABLE_HIT_SCRIPT \
     | ENEMY_FLAG_IGNORE_WORLD_COLLISION \
     | ENEMY_FLAG_IGNORE_ENTITY_COLLISION \
-    | ENEMY_FLAG_FLYING
+    | ENEMY_FLAG_FLYING \
+    )
 
 // used with enemy->aiFlags
 enum EnemyAIFlags {

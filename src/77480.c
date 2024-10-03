@@ -404,7 +404,7 @@ HitID player_test_lateral_overlap(s32 mode, PlayerStatus* playerStatus, f32* x, 
     hitDepth = length + radius;
     hitID = player_raycast_general(mode, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
 
-    if (mode == 3) {
+    if (mode == PLAYER_COLLISION_3) {
         targetDx = 0.0f;
         targetDz = 0.0f;
     } else {

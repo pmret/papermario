@@ -73,7 +73,11 @@ void player_input_to_move_vector(f32* angle, f32* magnitude);
 void game_input_to_move_vector(f32* x, f32* y);
 void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3);
 void exec_ShakeCam1(s32 arg0, s32 arg1, s32 arg2);
-f32 func_800E5348(void);
+
+// returns the angle that the player *sprite* is facing in world-space, this is NOT the direction the player character
+// is facing, i.e. the direction of motion. think of this as the direction of a hammer impact relative to the center
+// of the player.
+f32 player_get_side_angle(void);
 
 void draw_number(s32 value, s32 x, s32 y, s32 variableWidthChars, s32 palette, s32 opacity, u16 style);
 

@@ -73,7 +73,7 @@ void entity_StarBoxLauncher_check_launch(Entity* entity) {
         z = playerStatus->pos.z;
         hitDepth = 10.0f;
 
-        add_vec2D_polar(&x, &z, 10.0f, func_800E5348());
+        add_vec2D_polar(&x, &z, 10.0f, player_get_side_angle());
         if (npc_raycast_down_sides(COLLIDER_FLAG_IGNORE_PLAYER, &x, &y, &z, &hitDepth) != 0) {
             if (NpcHitQueryColliderID & COLLISION_WITH_ENTITY_BIT) {
                 result = get_entity_type(NpcHitQueryColliderID) == ENTITY_TYPE_STAR_BOX_LAUNCHER;
