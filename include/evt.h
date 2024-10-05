@@ -125,8 +125,8 @@ enum EventCommandResults {
     EVT_CMD_RESULT_ERROR        = 1,
 };
 
-// EventGroupFlags define categories that determine when a script is paused and resumed.
-// Scripts are assigned groups consisting of flag combinations to only pause in certain circumstances.
+// EventGroupFlags determine when scripts are paused and resumed.
+// Each flag corresponds to a set of circumstances which may pause scripts independently of the others.
 // These group flags are inherited when one script launches another.
 enum EventGroupFlags {
     // Each flag represents a distinct condition for suspending or resuming script execution.
@@ -138,7 +138,7 @@ enum EventGroupFlags {
     EVT_GROUP_FLAG_BATTLE   = 0x10, // Suspended during battle entry and exit transitions.
 
     // Combinations of flags used to assign specific behaviors to scripts.
-    // These groups are named after their most common use-cases.
+    // These groups are named after their most common script use-cases.
     EVT_GROUP_NEVER_PAUSE   = 0x00, // Never paused; default for map scripts derived from the main script, which always uses this group.
     EVT_GROUP_PASSIVE_NPC   = EVT_GROUP_FLAG_MENUS | EVT_GROUP_FLAG_UNUSED, // 0xA -- Pauses similar to passive NPC scripts.
     EVT_GROUP_HOSTILE_NPC   = EVT_GROUP_FLAG_INTERACT | EVT_GROUP_FLAG_MENUS | EVT_GROUP_FLAG_UNUSED, // 0xB -- Pauses similar to hostile NPC scripts; used for platforms, machinery, etc.
