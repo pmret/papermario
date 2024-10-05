@@ -118,7 +118,7 @@ EvtScript N(EVS_BombWall_Cell) = {
 };
 
 EvtScript N(EVS_TexPan_Water) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_suimen, TEX_PANNER_1)
     Set(LVar0, 0)
     Set(LVar1, 0)

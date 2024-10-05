@@ -63,7 +63,7 @@ EvtScript N(EVS_ItemPrompt_Socket1) = {
         Unbind
         Return
     EndIf
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     IfNe(GB_ISK11_ItemSocket1, 0)
         Call(DisablePlayerInput, TRUE)
@@ -82,7 +82,7 @@ EvtScript N(EVS_ItemPrompt_Socket1) = {
             Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
         EndIf
         Call(DisablePlayerInput, FALSE)
-        Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+        Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf
     Call(ShowKeyChoicePopup)
@@ -91,11 +91,11 @@ EvtScript N(EVS_ItemPrompt_Socket1) = {
         CaseEq(0)
             Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_ChompStatue, 160, 40)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
         CaseEq(-1)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
     EndSwitch
     Set(GB_ISK11_ItemSocket1, LVar2)
@@ -104,7 +104,7 @@ EvtScript N(EVS_ItemPrompt_Socket1) = {
     Set(MV_Socket1_ItemEntity, LVar0)
     Call(CloseChoicePopup)
     Call(PlaySoundAtCollider, COLLIDER_o2087, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
 };
@@ -114,7 +114,7 @@ EvtScript N(EVS_ItemPrompt_Socket2) = {
         Unbind
         Return
     EndIf
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     IfNe(GB_ISK11_ItemSocket2, 0)
         Call(DisablePlayerInput, TRUE)
@@ -133,7 +133,7 @@ EvtScript N(EVS_ItemPrompt_Socket2) = {
             Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
         EndIf
         Call(DisablePlayerInput, FALSE)
-        Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+        Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf
     Call(ShowKeyChoicePopup)
@@ -142,11 +142,11 @@ EvtScript N(EVS_ItemPrompt_Socket2) = {
         CaseEq(0)
             Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_ChompStatue, 160, 40)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
         CaseEq(-1)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
     EndSwitch
     Set(GB_ISK11_ItemSocket2, LVar2)
@@ -154,7 +154,7 @@ EvtScript N(EVS_ItemPrompt_Socket2) = {
     Call(MakeItemEntity, GB_ISK11_ItemSocket2, -44, -508, 508, ITEM_SPAWN_MODE_DECORATION, 0)
     Set(MV_Socket2_ItemEntity, LVar0)
     Call(CloseChoicePopup)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Call(PlaySoundAtCollider, COLLIDER_o2091, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
     Return
     End
@@ -165,7 +165,7 @@ EvtScript N(EVS_ItemPrompt_Socket3) = {
         Unbind
         Return
     EndIf
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     IfNe(GB_ISK11_ItemSocket3, 0)
         Call(DisablePlayerInput, TRUE)
@@ -184,7 +184,7 @@ EvtScript N(EVS_ItemPrompt_Socket3) = {
             Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
         EndIf
         Call(DisablePlayerInput, FALSE)
-        Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+        Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf
     Call(ShowKeyChoicePopup)
@@ -193,11 +193,11 @@ EvtScript N(EVS_ItemPrompt_Socket3) = {
         CaseEq(0)
             Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_ChompStatue, 160, 40)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
         CaseEq(-1)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
     EndSwitch
     Set(GB_ISK11_ItemSocket3, LVar2)
@@ -205,7 +205,7 @@ EvtScript N(EVS_ItemPrompt_Socket3) = {
     Call(MakeItemEntity, GB_ISK11_ItemSocket3, 0, -508, 510, ITEM_SPAWN_MODE_DECORATION, 0)
     Set(MV_Socket3_ItemEntity, LVar0)
     Call(CloseChoicePopup)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Call(PlaySoundAtCollider, COLLIDER_o2090, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
     Return
     End
@@ -216,7 +216,7 @@ EvtScript N(EVS_ItemPrompt_Socket4) = {
         Unbind
         Return
     EndIf
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     IfNe(GB_ISK11_ItemSocket4, 0)
         Call(DisablePlayerInput, TRUE)
@@ -235,7 +235,7 @@ EvtScript N(EVS_ItemPrompt_Socket4) = {
             Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
         EndIf
         Call(DisablePlayerInput, FALSE)
-        Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+        Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf
     Call(ShowKeyChoicePopup)
@@ -244,11 +244,11 @@ EvtScript N(EVS_ItemPrompt_Socket4) = {
         CaseEq(0)
             Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_ChompStatue, 160, 40)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
         CaseEq(-1)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
     EndSwitch
     Set(GB_ISK11_ItemSocket4, LVar2)
@@ -256,7 +256,7 @@ EvtScript N(EVS_ItemPrompt_Socket4) = {
     Call(MakeItemEntity, GB_ISK11_ItemSocket4, 44, -508, 508, ITEM_SPAWN_MODE_DECORATION, 0)
     Set(MV_Socket4_ItemEntity, LVar0)
     Call(CloseChoicePopup)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Call(PlaySoundAtCollider, COLLIDER_o2089, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
     Return
     End
@@ -267,7 +267,7 @@ EvtScript N(EVS_ItemPrompt_Socket5) = {
         Unbind
         Return
     EndIf
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     IfNe(GB_ISK11_ItemSocket5, 0)
         Call(DisablePlayerInput, TRUE)
@@ -286,7 +286,7 @@ EvtScript N(EVS_ItemPrompt_Socket5) = {
             Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
         EndIf
         Call(DisablePlayerInput, FALSE)
-        Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+        Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf
     Call(ShowKeyChoicePopup)
@@ -295,11 +295,11 @@ EvtScript N(EVS_ItemPrompt_Socket5) = {
         CaseEq(0)
             Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_ChompStatue, 160, 40)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
         CaseEq(-1)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
     EndSwitch
     Set(GB_ISK11_ItemSocket5, LVar2)
@@ -307,7 +307,7 @@ EvtScript N(EVS_ItemPrompt_Socket5) = {
     Call(MakeItemEntity, GB_ISK11_ItemSocket5, 88, -508, 502, ITEM_SPAWN_MODE_DECORATION, 0)
     Set(MV_Socket5_ItemEntity, LVar0)
     Call(CloseChoicePopup)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Call(PlaySoundAtCollider, COLLIDER_o2088, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
     Return
     End

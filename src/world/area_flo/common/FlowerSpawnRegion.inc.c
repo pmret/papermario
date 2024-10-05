@@ -2,7 +2,7 @@
 #include "effects.h"
 
 EvtScript N(EVS_FlowerSpawnRegion) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     // save input args
     Set(LVarA, LVar0) // minX
     Set(LVarB, LVar1) // minZ

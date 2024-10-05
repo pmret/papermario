@@ -11,7 +11,7 @@ s32 N(map_init)(void) {
 #include "../common/Reflection.data.inc.c"
 
 EvtScript N(EVS_ExitDoors_pra_39_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_06_ENTRY_0)
     Set(LVar1, COLLIDER_deilittsw)

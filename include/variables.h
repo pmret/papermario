@@ -93,7 +93,7 @@ extern Vec3s StandardActorHomePositions[];
 extern SaveData gCurrentSaveFile;
 
 extern s32 gEncounterSubState;
-extern s32 timeFreezeMode;
+extern s32 gTimeFreezeMode;
 extern b32 EncounterStateChanged;
 
 extern u8 IntroMessageIdx;

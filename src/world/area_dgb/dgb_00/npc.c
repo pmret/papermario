@@ -200,7 +200,7 @@ EvtScript N(EVS_LeaderBooShivering) = {
 };
 
 EvtScript N(EVS_TubbaTaunting) = {
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
     Loop(0)
         Call(RandInt, 50 * DT, LVar0)
         Add(LVar0, 80 * DT)

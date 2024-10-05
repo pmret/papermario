@@ -9,11 +9,11 @@ API_CALLABLE(N(GetAmbushEnemy)) {
 }
 
 EvtScript N(EVS_OnReadBillboard) = {
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(DisablePlayerInput, TRUE)
     Call(ShowMessageAtScreenPos, MSG_Menus_Sign_EatMushroomsTrap, 160, 40)
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Set(LFlag0, FALSE)
     Call(N(GetAmbushEnemy))
     IfNe(LVar0, NULL)

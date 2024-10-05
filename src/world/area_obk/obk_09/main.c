@@ -25,7 +25,7 @@ EvtScript N(EVS_EnterMap) = {
 };
 
 EvtScript N(EVS_ExitDoors_obk_01_5) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, obk_09_ENTRY_0)
@@ -41,7 +41,7 @@ EvtScript N(EVS_ExitDoors_obk_01_5) = {
 };
 
 EvtScript N(EVS_ExitDoors_obk_01_6) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, obk_09_ENTRY_1)

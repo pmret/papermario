@@ -59,8 +59,8 @@ EvtScript N(D_80240B34_99A7A4) = {
 };
 
 EvtScript N(EVS_EnterMap) = {
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(GetLoadType, LVar1)
     IfEq(LVar1, 1)
         Exec(EnterSavePoint)
@@ -97,13 +97,13 @@ EvtScript N(EVS_EnterMap) = {
         CaseEq(trd_00_ENTRY_5)
             Exec(N(EVS_BindExitTriggers))
     EndSwitch
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Return
     End
 };
 
 EvtScript N(EVS_TexPan_WaterEdge) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_ue, TEX_PANNER_1)
     Set(LVar0, 0)
     Set(LVar1, 0)

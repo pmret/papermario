@@ -137,7 +137,7 @@ EvtScript N(EVS_Scene_DefeatImposters) = {
     Call(SetNpcPos, NPC_Duplighost_02, 370, 0, -70)
     Call(SetNpcAnimation, NPC_Duplighost_01, ANIM_Duplighost_Anim02)
     Call(SetNpcAnimation, NPC_Duplighost_02, ANIM_Duplighost_Anim02)
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(SetNpcPos, NPC_FakeBombette, NPC_DISPOSE_LOCATION)
     Wait(10)
@@ -157,8 +157,8 @@ EvtScript N(EVS_Scene_DefeatImposters) = {
     Call(NpcMoveTo, NPC_Duplighost_02, -30, -70, 45)
     Call(SetNpcPos, NPC_Duplighost_02, -30, -1000, 0)
     Set(GB_StoryProgress, STORY_CH7_DEFEATED_MIRROR_DUPLIGHOSTS)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-    SetGroup(EVT_GROUP_0B)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Call(DisablePlayerInput, FALSE)
     Return
     End

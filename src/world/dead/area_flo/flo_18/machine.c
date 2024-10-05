@@ -22,7 +22,7 @@ API_CALLABLE(N(SetMachineLightningColor)) {
 }
 
 EvtScript N(EVS_AnimateMachineLightning) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Loop(0)
         PlayEffect(EFFECT_LIGHTNING_BOLT, 0, Float(-16.0), Float(102.0), Float(-4.1), Float(80.9), Float(102.0), Float(-4.1), Float(0.5), 6)
         Call(N(SetMachineLightningColor))

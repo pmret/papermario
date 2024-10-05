@@ -4,7 +4,7 @@
 #include "world/common/todo/UnkFunc12.inc.c"
 
 EvtScript N(EVS_PushClock_Impl) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Loop(20)
         Call(GetPartnerInUse, LVarA)
         IfNe(LVarA, PARTNER_NONE)

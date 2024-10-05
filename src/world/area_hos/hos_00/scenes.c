@@ -572,7 +572,7 @@ EvtScript N(EVS_Scene_TwinkDeparts) = {
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Thread
         Set(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
-        Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+        Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
     EndThread
     Wait(10 * DT)

@@ -207,7 +207,7 @@ void entity_Tweester_idle(Entity* entity) {
     f32 delta;
     f32 targetRotationSpeed;
 
-    if (get_time_freeze_mode() == TIME_FREEZE_NORMAL &&
+    if (get_time_freeze_mode() == TIME_FREEZE_NONE &&
         !is_picking_up_item() &&
         !(playerStatus->flags & PS_FLAG_PAUSED) &&
         (playerData->curPartner != PARTNER_GOOMBARIO ||

@@ -199,7 +199,7 @@ void start_battle(Evt* script, s32 songID) {
     Encounter* encounter;
     s32 i;
 
-    resume_all_group(EVT_GROUP_01);
+    resume_all_group(EVT_GROUP_FLAG_INTERACT);
 
     currentEncounter->hitType = ENCOUNTER_TRIGGER_NONE;
     enemy->encountered = TRUE;
@@ -270,7 +270,7 @@ API_CALLABLE(StartBossBattle) {
     Encounter* encounter;
     s32 i;
 
-    resume_all_group(EVT_GROUP_01);
+    resume_all_group(EVT_GROUP_FLAG_INTERACT);
 
     currentEncounter->hitType = ENCOUNTER_TRIGGER_NONE;
     enemy->encountered = TRUE;
@@ -362,9 +362,9 @@ API_CALLABLE(BindNpcAI) {
     }
 
     if (enemy->flags & ENEMY_FLAG_PASSIVE) {
-        groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+        groupFlags = EVT_GROUP_PASSIVE_NPC;
     } else {
-        groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
+        groupFlags = EVT_GROUP_HOSTILE_NPC;
     }
 
     if (enemy->aiScript != NULL) {
@@ -415,9 +415,9 @@ API_CALLABLE(RestartNpcAI) {
     enemy = get_enemy(npcID);
 
     if (enemy->flags & ENEMY_FLAG_PASSIVE) {
-        groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+        groupFlags = EVT_GROUP_PASSIVE_NPC;
     } else {
-        groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
+        groupFlags = EVT_GROUP_HOSTILE_NPC;
     }
 
     if (enemy->aiScript != NULL) {
@@ -536,9 +536,9 @@ API_CALLABLE(RestartNpcAux) {
     enemy = get_enemy(npcID);
 
     if (enemy->flags & ENEMY_FLAG_PASSIVE) {
-        groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+        groupFlags = EVT_GROUP_PASSIVE_NPC;
     } else {
-        groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
+        groupFlags = EVT_GROUP_HOSTILE_NPC;
     }
 
     if (enemy->auxScript != NULL) {

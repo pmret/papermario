@@ -33,18 +33,18 @@ s32 N(missing_80244D70_4D70)[] = {
 };
 
 EvtScript N(EVS_UnlockUpperLeftDoors) = {
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(ShowKeyChoicePopup)
     IfEq(LVar0, 0)
         Call(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
         Call(CloseChoicePopup)
-        ResumeGroup(EVT_GROUP_01)
+        ResumeGroup(EVT_GROUP_FLAG_INTERACT)
         Return
     EndIf
     IfEq(LVar0, -1)
         Call(CloseChoicePopup)
-        ResumeGroup(EVT_GROUP_01)
+        ResumeGroup(EVT_GROUP_FLAG_INTERACT)
         Return
     EndIf
     Call(RemoveKeyItemAt, LVar1)
@@ -54,25 +54,25 @@ EvtScript N(EVS_UnlockUpperLeftDoors) = {
     Call(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     Set(LVar0, MV_Unk_00)
     Call(N(RemovePadlock))
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
     Return
     End
 };
 
 EvtScript N(EVS_UnlockLowerRightDoors) = {
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(ShowKeyChoicePopup)
     IfEq(LVar0, 0)
         Call(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
         Call(CloseChoicePopup)
-        ResumeGroup(EVT_GROUP_01)
+        ResumeGroup(EVT_GROUP_FLAG_INTERACT)
         Return
     EndIf
     IfEq(LVar0, -1)
         Call(CloseChoicePopup)
-        ResumeGroup(EVT_GROUP_01)
+        ResumeGroup(EVT_GROUP_FLAG_INTERACT)
         Return
     EndIf
     Call(RemoveKeyItemAt, LVar1)
@@ -82,7 +82,7 @@ EvtScript N(EVS_UnlockLowerRightDoors) = {
     Call(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     Set(LVar0, MV_Unk_01)
     Call(N(RemovePadlock))
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
     Return
     End

@@ -40,7 +40,7 @@ EvtScript N(EVS_UpdateEnounterStages) = {
 };
 
 EvtScript N(EVS_TexPan_Flowers) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_hana1, TEX_PANNER_0)
     Call(SetTexPanner, MODEL_hana2, TEX_PANNER_0)
     Call(SetTexPanner, MODEL_hana3, TEX_PANNER_0)
@@ -64,7 +64,7 @@ EvtScript N(EVS_TexPan_Flowers) = {
 };
 
 EvtScript N(EVS_TexPan_Water) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Thread
         Call(SetTexPanner, MODEL_suimen1, TEX_PANNER_1)
         Set(LVar0, 0)

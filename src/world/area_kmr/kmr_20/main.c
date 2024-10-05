@@ -16,7 +16,7 @@ EvtScript N(EVS_GotoMap_mac_00_4) = {
 };
 
 EvtScript N(EVS_ExitPipe_mac_00_4) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Set(LVarA, kmr_20_ENTRY_4)
     Set(LVarB, COLLIDER_o244)
     Set(LVarC, Ref(N(EVS_GotoMap_mac_00_4)))

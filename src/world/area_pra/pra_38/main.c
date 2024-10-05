@@ -11,7 +11,7 @@ s32 N(map_init)(void) {
 #include "../common/Reflection.data.inc.c"
 
 EvtScript N(EVS_ExitDoors_pra_03_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_38_ENTRY_0)
     Set(LVar1, COLLIDER_deilittsw)
@@ -28,7 +28,7 @@ EvtScript N(EVS_ExitDoors_pra_03_1) = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_05_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_38_ENTRY_1)
     Set(LVar1, COLLIDER_deilittse)

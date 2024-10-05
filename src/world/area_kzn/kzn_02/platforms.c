@@ -85,7 +85,7 @@ EvtScript N(EVS_KoloradoSinkingPlatform) = {
 };
 
 EvtScript N(EVS_UpdateSinkingPlatform) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Call(N(GetCurrentFloor), LVarA)
     SetF(LVar0, Float(0.0))
     Label(0)
@@ -273,7 +273,7 @@ EvtScript N(EVS_OnTouchSinkingPlatform6) = {
 };
 
 EvtScript N(EVS_UpdatePlatformBobbing) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Label(0)
         Call(MakeLerp, 0, -3, 30, EASING_LINEAR)
         Label(1)
@@ -361,7 +361,7 @@ EvtScript N(EVS_StartBobbingPlatform6) = {
 };
 
 EvtScript N(EVS_UpdateMovingPlatform) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Call(ParentColliderToModel, COLLIDER_o128, MODEL_o123)
     Call(ParentColliderToModel, COLLIDER_o129, MODEL_o124)
     Call(ParentColliderToModel, COLLIDER_o130, MODEL_o125)

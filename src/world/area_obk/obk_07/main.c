@@ -11,7 +11,7 @@ EvtScript N(EVS_EnterMap) = {
 };
 
 EvtScript N(EVS_ExitDoors_obk_01_3) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, obk_07_ENTRY_0)
     Set(LVar1, COLLIDER_tt1)

@@ -97,7 +97,7 @@ API_CALLABLE(N(AwaitPlayerNearPlatforms)) {
 }
 
 EvtScript N(EVS_Gizmos_MovingBlocks) = {
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
     Call(N(AwaitPlayerNearPlatforms))
     Wait(LVar9)
     Call(ParentColliderToModel, LVar6, LVar7)

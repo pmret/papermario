@@ -36,14 +36,14 @@ EvtScript N(EVS_OnInteract_WaterStoneSocket) = {
             Return
         EndIf
         Call(DisablePlayerInput, TRUE)
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
         Call(ShowKeyChoicePopup)
         Set(LVar2, LVar0)
         Switch(LVar2)
             CaseEq(-1)
                 Call(CloseChoicePopup)
-                Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+                Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
                 Wait(10 * DT)
                 Call(SpeakToPlayer, NPC_Lily, ANIM_Lily_TalkPlead, ANIM_Lily_IdlePlead, 0, MSG_CH6_0081)
             CaseDefault
@@ -59,7 +59,7 @@ EvtScript N(EVS_OnInteract_WaterStoneSocket) = {
                 Call(MakeItemEntity, ITEM_WATER_STONE, 0, -60, 6, ITEM_SPAWN_MODE_DECORATION, 0)
                 Set(LVarA, LVar0)
                 Call(CloseChoicePopup)
-                Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+                Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
                 ExecWait(N(EVS_Scene_ReleaseFountain))
         EndSwitch
         Call(DisablePlayerInput, FALSE)

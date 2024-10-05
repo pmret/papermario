@@ -37,7 +37,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_TexPan_Flowers) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_o312, TEX_PANNER_0)
     Call(SetTexPanner, MODEL_o460, TEX_PANNER_0)
     Call(SetTexPanner, MODEL_o461, TEX_PANNER_0)

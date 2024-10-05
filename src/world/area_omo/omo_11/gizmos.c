@@ -302,7 +302,7 @@ EvtScript N(EVS_UpdateBasicPlatform_Audible) = {
 };
 
 EvtScript N(EVS_SetupGizmos) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Call(ParentColliderToModel, COLLIDER_1_0, MODEL_1_0)
     Call(ParentColliderToModel, COLLIDER_fl, MODEL_fl)
     Call(ParentColliderToModel, COLLIDER_1_1, MODEL_1_1)

@@ -1,7 +1,7 @@
 #include "mim_02.h"
 
 EvtScript N(EVS_SetupExitHint) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Set(LVar0, 0)
     Call(EnableModel, MODEL_o414, TRUE)
     Call(EnableModel, MODEL_me, FALSE)

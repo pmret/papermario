@@ -285,7 +285,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
         case 5:
             playerStatus->animFlags &= ~PA_FLAG_RAISED_ARMS;
             enable_player_input();
-            set_time_freeze_mode(TIME_FREEZE_NORMAL);
+            set_time_freeze_mode(TIME_FREEZE_NONE);
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
             exec_entity_commandlist(entity);
             break;
@@ -380,7 +380,7 @@ void entity_HeartBlock_show_tutorial_message(Entity* entity) {
 void entity_HeartBlock_wait_for_close_tutorial(Entity* entity) {
     if (HeartBlockPrinterClosed) {
         exec_entity_commandlist(entity);
-        set_time_freeze_mode(TIME_FREEZE_NORMAL);
+        set_time_freeze_mode(TIME_FREEZE_NONE);
         gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
         enable_player_input();
     }

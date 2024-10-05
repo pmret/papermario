@@ -33,7 +33,7 @@ EVT_LETTER_PROMPT(Kolorado, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle
 EVT_LETTER_REWARD(Kolorado);
 
 EvtScript N(EVS_SpawnFallingDust) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Loop(0)
         Call(RandInt, 100, LVar0)
         Sub(LVar0, 100)
@@ -48,7 +48,7 @@ EvtScript N(EVS_SpawnFallingDust) = {
 };
 
 EvtScript N(EVS_ShakingWorld) = {
-    SetGroup(EVT_GROUP_0A)
+    SetGroup(EVT_GROUP_PASSIVE_NPC)
     IfGe(GB_StoryProgress, STORY_CH5_OPENED_ESCAPE_ROUTE)
         Exec(N(EVS_SpawnFallingDust))
     Else
@@ -104,38 +104,38 @@ s32 N(Kolorado_Wander2)[] = {
 };
 
 EvtScript N(EVS_Kolorado_CalmIdle) = {
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
     Label(0)
-    Call(RandInt, 1, LVar1)
-    IfEq(LVar1, 0)
-        UseBuf(N(Kolorado_Wander1))
-    Else
-        UseBuf(N(Kolorado_Wander2))
-    EndIf
-    Label(10)
-        BufRead3(LVar1, LVar2, LVar3)
-        IfEq(LVar1, -1)
-            Goto(0)
+        Call(RandInt, 1, LVar1)
+        IfEq(LVar1, 0)
+            UseBuf(N(Kolorado_Wander1))
+        Else
+            UseBuf(N(Kolorado_Wander2))
         EndIf
-        Call(SetNpcSpeed, NPC_Kolorado, LVar1)
-        Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Walk)
-        Call(NpcMoveTo, NPC_Kolorado, LVar2, LVar3, 0)
-        BufRead1(LVar2)
-        Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Idle)
-        Wait(5)
-        Call(RandInt, 2, LVar4)
-        Add(LVar4, 1)
-        Loop(LVar4)
-            Call(GetNpcYaw, NPC_Kolorado, LVar5)
-            Add(LVar5, 180)
-            IfGt(LVar5, 360)
-                Sub(LVar5, 360)
+        Label(10)
+            BufRead3(LVar1, LVar2, LVar3)
+            IfEq(LVar1, -1)
+                Goto(0)
             EndIf
-            Call(InterpNpcYaw, NPC_Kolorado, LVar5, 1)
-            Wait(20)
-        EndLoop
-        Wait(LVar2)
-    Goto(10)
+            Call(SetNpcSpeed, NPC_Kolorado, LVar1)
+            Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Walk)
+            Call(NpcMoveTo, NPC_Kolorado, LVar2, LVar3, 0)
+            BufRead1(LVar2)
+            Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Idle)
+            Wait(5)
+            Call(RandInt, 2, LVar4)
+            Add(LVar4, 1)
+            Loop(LVar4)
+                Call(GetNpcYaw, NPC_Kolorado, LVar5)
+                Add(LVar5, 180)
+                IfGt(LVar5, 360)
+                    Sub(LVar5, 360)
+                EndIf
+                Call(InterpNpcYaw, NPC_Kolorado, LVar5, 1)
+                Wait(20)
+            EndLoop
+            Wait(LVar2)
+        Goto(10)
     Return
     End
 };

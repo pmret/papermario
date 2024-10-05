@@ -223,7 +223,7 @@ EvtScript N(EVS_WhaleState_Walk) = {
 };
 
 EvtScript N(EVS_WhaleMain) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_karada, TRUE)
     Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(unkAngleFunc002)), NULL)
     Call(SetModelCustomGfx, MODEL_karada, CUSTOM_GFX_1, -1)

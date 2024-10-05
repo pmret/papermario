@@ -1,7 +1,7 @@
 #include "jan_15.h"
 
 EvtScript N(EVS_ExitWalk_jan_16) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, jan_15_ENTRY_1)
     Exec(ExitWalk)
     IfLt(GB_StoryProgress, STORY_CH5_REACHED_RAPHAELS_TREE)

@@ -316,7 +316,7 @@ EvtScript N(EVS_NpcIdle_Koover_Crisis) = {
 };
 
 EvtScript N(EVS_NpcIdle_FuzzyWithShell) = {
-    SetGroup(EVT_GROUP_0A)
+    SetGroup(EVT_GROUP_PASSIVE_NPC)
     IfEq(GF_NOK01_RecoveredShellA, TRUE)
         Call(SetNpcPos, NPC_FuzzyWithShell, NPC_DISPOSE_LOCATION)
         Call(SetNpcPos, NPC_KooversShell, NPC_DISPOSE_LOCATION)

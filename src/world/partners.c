@@ -651,7 +651,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript = start_script(wPartner->putAway, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_PASSIVE_NPC;
                     PartnerCommandState += 1;
                     set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                     break;
@@ -659,7 +659,7 @@ void _use_partner_ability(void) {
                     if (does_script_exist(wPartnerCurrentScriptID)) {
                         break;
                     }
-                    set_time_freeze_mode(TIME_FREEZE_NORMAL);
+                    set_time_freeze_mode(TIME_FREEZE_NONE);
                     partner_free_npc();
                     playerData->curPartner = wCurrentPartnerId = NextPartnerID;
                     create_partner_npc();
@@ -671,7 +671,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript = start_script(wPartner->takeOut, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_PASSIVE_NPC;
                     PartnerCommandState += 1;
                     set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                     break;
@@ -682,10 +682,10 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_PASSIVE_NPC;
                     PartnerCommand = PARTNER_CMD_INIT;
                     enable_player_input();
-                    set_time_freeze_mode(TIME_FREEZE_NORMAL);
+                    set_time_freeze_mode(TIME_FREEZE_NONE);
                     break;
             }
             break;
@@ -716,7 +716,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_PASSIVE_NPC;
                     PartnerCommand = PARTNER_CMD_INIT;
                     break;
             }
@@ -730,7 +730,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript = start_script(wPartner->putAway, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_PASSIVE_NPC;
                     PartnerCommandState += 1;
                     break;
                 case 1: // free old partner and resume game
@@ -766,7 +766,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript = start_script(wPartner->takeOut, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_PASSIVE_NPC;
                     PartnerCommandState += 1;
                     break;
                 case 2: // resume standard partner behaviour
@@ -776,7 +776,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_PASSIVE_NPC;
                     PartnerCommand = PARTNER_CMD_INIT;
                     enable_player_input();
                     break;
@@ -803,7 +803,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_PASSIVE_NPC;
                     PartnerCommand = PARTNER_CMD_INIT;
                     wPartnerNpc->curAnim = gPartnerAnimations[wCurrentPartnerId].fly;
                     enable_player_input();
@@ -817,7 +817,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript = start_script(wPartner->useAbility, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_PASSIVE_NPC;
                     PartnerCommandState += 1;
                     break;
                 case 1:
@@ -827,7 +827,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_PASSIVE_NPC;
                     PartnerCommand = PARTNER_CMD_INIT;
                     break;
             }
@@ -851,7 +851,7 @@ void _use_partner_ability(void) {
                         wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                         wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                         wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                        wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+                        wPartnerCurrentScript->groupFlags = EVT_GROUP_PASSIVE_NPC;
                     }
                     enable_player_input();
                     PartnerCommand = PARTNER_CMD_INIT;
@@ -1063,7 +1063,7 @@ void partner_handle_after_battle(void) {
         wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
         wPartnerCurrentScript->owner2.npc = wPartnerNpc;
         wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-        wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
+        wPartnerCurrentScript->groupFlags = EVT_GROUP_PASSIVE_NPC;
 
         NextPartnerCommand = PARTNER_CMD_INIT;
 

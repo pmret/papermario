@@ -5,7 +5,7 @@
 #include "world/common/atomic/ApplyTint.inc.c"
 
 EvtScript N(EVS_ExitWalk_sbk_36_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Set(GF_DRO01_HeardHintAboutSpinningRoof, 0)
     Call(UseExitHeading, 60, 0)
     Exec(ExitWalk)

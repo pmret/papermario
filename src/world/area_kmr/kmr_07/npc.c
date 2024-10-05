@@ -34,7 +34,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
             Goto(0)
         EndIf
     Call(SetMusicTrack, 0, SONG_MINIBOSS_BATTLE, 0, 8)
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
     Thread
         Wait(3)
         Call(DisablePlayerInput, TRUE)

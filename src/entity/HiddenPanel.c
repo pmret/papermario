@@ -238,7 +238,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
                 data->state = 0;
                 exec_entity_commandlist(entity);
                 if (data->unk_02) {
-                    set_time_freeze_mode(TIME_FREEZE_NORMAL);
+                    set_time_freeze_mode(TIME_FREEZE_NONE);
                     gPlayerStatusPtr->animFlags &= ~PA_FLAG_OPENED_HIDDEN_PANEL;
                 }
                 entity->flags &= ~ENTITY_FLAG_DISABLE_COLLISION;

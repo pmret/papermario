@@ -364,7 +364,7 @@ void state_step_exit_language_select(void) {
             }
             break;
         case 4:
-            set_time_freeze_mode(TIME_FREEZE_NORMAL);
+            set_time_freeze_mode(TIME_FREEZE_NONE);
             update_player();
             update_npcs();
             update_encounters();
@@ -407,7 +407,7 @@ void state_step_exit_file_select(void) {
             set_windows_visible(WINDOW_GROUP_ALL);
             D_800A0931 = 3;
         case 3:
-            set_time_freeze_mode(TIME_FREEZE_NORMAL);
+            set_time_freeze_mode(TIME_FREEZE_NONE);
             if (temp_s0 == 0) {
                 set_game_mode(GAME_MODE_TITLE_SCREEN);
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS;

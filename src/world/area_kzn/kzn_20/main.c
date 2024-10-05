@@ -14,7 +14,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_UpdateTexPan_Lava) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(EnableTexPanning, MODEL_yu, TRUE)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
@@ -77,7 +77,7 @@ EvtScript N(EVS_InterruptPartnersInLava) = {
 };
 
 EvtScript N(EVS_UpdateLavaWaves) = {
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
     Call(EnableModel, MODEL_yu, FALSE)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_yu, COLLIDER_FLAGS_UPPER_MASK)
     Call(ParentColliderToModel, COLLIDER_yu, MODEL_yu)

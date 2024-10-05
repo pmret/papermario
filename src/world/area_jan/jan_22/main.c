@@ -15,7 +15,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_TexPan_LavaFalls) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_o262, TEX_PANNER_1)
     Call(SetTexPanner, MODEL_o269, TEX_PANNER_1)
     Call(SetTexPanner, MODEL_o261, TEX_PANNER_1)
@@ -30,7 +30,7 @@ EvtScript N(EVS_TexPan_LavaFalls) = {
 };
 
 EvtScript N(EVS_TexPan_LavaSpread) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_o275, TEX_PANNER_2)
     Call(SetTexPanner, MODEL_o274, TEX_PANNER_2)
     Set(LVar0, 0)
@@ -44,7 +44,7 @@ EvtScript N(EVS_TexPan_LavaSpread) = {
 };
 
 EvtScript N(EVS_TexPan_LavaFlow) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_o263, TEX_PANNER_3)
     Call(SetTexPanner, MODEL_o271, TEX_PANNER_3)
     Set(LVar0, 0)
@@ -58,7 +58,7 @@ EvtScript N(EVS_TexPan_LavaFlow) = {
 };
 
 EvtScript N(EVS_TexPan_LavaGather) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_o267, TEX_PANNER_4)
     Call(SetTexPanner, MODEL_o272, TEX_PANNER_4)
     Set(LVar0, 0)

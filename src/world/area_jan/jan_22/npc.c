@@ -749,7 +749,7 @@ EvtScript N(EVS_NpcIdle_Kolorado_HeldCaptive) = {
                 Call(DisablePlayerInput, FALSE)
             EndIf
         CaseEq(1)
-            SetGroup(EVT_GROUP_00)
+            SetGroup(EVT_GROUP_NEVER_PAUSE)
             Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
             Call(func_802D2C14, 1)
             Wait(10 * DT)
@@ -760,8 +760,8 @@ EvtScript N(EVS_NpcIdle_Kolorado_HeldCaptive) = {
             EndIf
             Call(SetSelfVar, 0, 2)
             Call(func_802D2C14, 0)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-            SetGroup(EVT_GROUP_0B)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
+            SetGroup(EVT_GROUP_HOSTILE_NPC)
             Call(DisablePlayerInput, FALSE)
         CaseEq(2)
             Call(DisablePlayerInput, TRUE)

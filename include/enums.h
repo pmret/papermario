@@ -3462,7 +3462,7 @@ enum FirstStrikeType {
 };
 
 enum TimeFreezeMode {
-    TIME_FREEZE_NORMAL          = 0,
+    TIME_FREEZE_NONE            = 0,
     TIME_FREEZE_PARTIAL         = 1,
     TIME_FREEZE_FULL            = 2,
     TIME_FREEZE_POPUP_MENU      = 3,

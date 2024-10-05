@@ -36,7 +36,7 @@ EvtScript N(EVS_EndPeachChapter7) = {
 };
 
 EvtScript N(EVS_ExitDoor_GrandHall) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(AF_KKJ_13, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
@@ -57,7 +57,7 @@ EvtScript N(EVS_ExitDoor_GrandHall) = {
 };
 
 EvtScript N(EVS_ExitDoors_Balcony) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(AF_KKJ_13, FALSE)
     Call(UseDoorSounds, DOOR_SOUNDS_DOOR)
@@ -76,7 +76,7 @@ EvtScript N(EVS_ExitDoors_Balcony) = {
 };
 
 EvtScript N(EVS_ExitWalk_SecretPassage) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Set(AF_KKJ_13, FALSE)
     Call(UseExitHeading, 60, kkj_14_ENTRY_2)
     Exec(ExitWalk)

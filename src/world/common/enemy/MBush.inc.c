@@ -11,7 +11,7 @@ EvtScript N(EVS_NpcAI_MBush) = {
         Wait(1)
         Goto(0)
     EndIf
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(DisablePlayerInput, TRUE)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEARCH_BUSH, SOUND_SPACE_DEFAULT)
@@ -52,7 +52,7 @@ EvtScript N(EVS_NpcAI_MBush) = {
     Call(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim07)
     Wait(2)
     Call(SetPlayerAnimation, ANIM_Mario1_Flail)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Call(DisablePlayerInput, FALSE)
     Call(StartBattle)
 }; // fallthrough :(

@@ -99,7 +99,7 @@ void state_step_battle(void) {
         D_800A0904 = gPlayerStatusPtr->animFlags;
         gPlayerStatusPtr->animFlags &= ~PA_FLAG_PULSE_STONE_VISIBLE;
         D_800A0908 = get_time_freeze_mode();
-        set_time_freeze_mode(TIME_FREEZE_NORMAL);
+        set_time_freeze_mode(TIME_FREEZE_NONE);
         gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
 
         if (D_800A0900 >= 0) {

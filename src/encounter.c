@@ -1173,7 +1173,7 @@ START_BATTLE:
             gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT;
             break;
         case ENCOUNTER_TRIGGER_CONVERSATION:
-            suspend_all_group(EVT_GROUP_01);
+            suspend_all_group(EVT_GROUP_FLAG_INTERACT);
             enemy = currentEncounter->curEnemy;
             if (enemy != NULL && enemy->aiScript != NULL) {
                 suspend_all_script(enemy->aiScriptID);
@@ -1276,7 +1276,7 @@ void update_encounters_pre_battle(void) {
             currentEncounter->unk_08 = -1;
             HasPreBattleSongPushed = FALSE;
             D_80077C40 = FALSE;
-            suspend_all_group(EVT_GROUP_10);
+            suspend_all_group(EVT_GROUP_FLAG_BATTLE);
 
             // suspend all ai scripts
             for (i = 0; i < currentEncounter->numEncounters; i++) {
@@ -1674,7 +1674,7 @@ void update_encounters_post_battle(void) {
             if (currentEncounter->hasMerleeCoinBonus) {
                 if (get_coin_drop_amount(currentEncounter->curEnemy) != 0) {
                     MerleeDropCoinsEvt = start_script(&EVS_MerleeDropCoins, EVT_PRIORITY_A, 0);
-                    MerleeDropCoinsEvt->groupFlags = EVT_GROUP_00;
+                    MerleeDropCoinsEvt->groupFlags = EVT_GROUP_NEVER_PAUSE;
                     MerleeDropCoinsEvtID = MerleeDropCoinsEvt->id;
                 } else {
                     playerData->merleeTurnCount = 0;
@@ -1711,20 +1711,20 @@ void update_encounters_post_battle(void) {
                     continue;
                 }
                 if (enemy->defeatBytecode != NULL) {
-                    script = start_script_in_group(enemy->defeatBytecode, EVT_PRIORITY_A, 0, 0);
+                    script = start_script_in_group(enemy->defeatBytecode, EVT_PRIORITY_A, 0, EVT_GROUP_NEVER_PAUSE);
                     enemy->defeatScript = script;
                     enemy->defeatScriptID = script->id;
                     script->owner1.enemy = enemy;
                     script->owner2.npcID = enemy->npcID;
-                    script->groupFlags = EVT_GROUP_00;
+                    script->groupFlags = EVT_GROUP_NEVER_PAUSE;
                     currentEncounter->battleStartCountdown = 1;
                 } else {
-                    script = start_script_in_group(&EVS_NpcDefeat, EVT_PRIORITY_A, 0, 0);
+                    script = start_script_in_group(&EVS_NpcDefeat, EVT_PRIORITY_A, 0, EVT_GROUP_NEVER_PAUSE);
                     enemy->defeatScript = script;
                     enemy->defeatScriptID = script->id;
                     script->owner1.enemy = enemy;
                     script->owner2.npcID = enemy->npcID;
-                    script->groupFlags = EVT_GROUP_00;
+                    script->groupFlags = EVT_GROUP_NEVER_PAUSE;
                 }
             }
             if (!(currentEncounter->flags & ENCOUNTER_FLAG_THUMBS_UP)
@@ -1844,7 +1844,7 @@ void update_encounters_post_battle(void) {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
             }
             set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
-            resume_all_group(EVT_GROUP_10);
+            resume_all_group(EVT_GROUP_FLAG_BATTLE);
             gEncounterState = ENCOUNTER_STATE_NEUTRAL;
             EncounterStateChanged = TRUE;
             gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL;
@@ -1976,7 +1976,7 @@ void update_encounters_post_battle(void) {
             if (!PendingPartnerAbilityResume && playerStatus->anim == ANIM_MarioB3_Hustled) {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
             }
-            resume_all_group(EVT_GROUP_10);
+            resume_all_group(EVT_GROUP_FLAG_BATTLE);
             gEncounterState = ENCOUNTER_STATE_NEUTRAL;
             EncounterStateChanged = TRUE;
             gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL;
@@ -2068,7 +2068,7 @@ void update_encounters_post_battle(void) {
                     break;
                 }
             }
-            resume_all_group(EVT_GROUP_10);
+            resume_all_group(EVT_GROUP_FLAG_BATTLE);
             gEncounterState = ENCOUNTER_STATE_NEUTRAL;
             EncounterStateChanged = TRUE;
             gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL;
@@ -2096,7 +2096,7 @@ void update_encounters_post_battle(void) {
             enable_player_input();
             partner_enable_input();
             set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
-            resume_all_group(EVT_GROUP_10);
+            resume_all_group(EVT_GROUP_FLAG_BATTLE);
             gEncounterState = ENCOUNTER_STATE_NEUTRAL;
             EncounterStateChanged = TRUE;
             gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL;
@@ -2199,7 +2199,7 @@ void update_encounters_post_battle(void) {
                 enable_player_input();
                 partner_enable_input();
                 set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
-                resume_all_group(EVT_GROUP_10);
+                resume_all_group(EVT_GROUP_FLAG_BATTLE);
                 gEncounterState = ENCOUNTER_STATE_NEUTRAL;
                 EncounterStateChanged = TRUE;
                 gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL;
@@ -2274,7 +2274,7 @@ void update_encounters_conversation(void) {
             }
             break;
         case ENCOUNTER_SUBSTATE_CONVERSATION_END:
-            resume_all_group(EVT_GROUP_01);
+            resume_all_group(EVT_GROUP_FLAG_INTERACT);
 
             currentEnemy = encounter->curEnemy;
             if (currentEnemy != NULL && currentEnemy->aiScript != NULL) {
@@ -2290,7 +2290,7 @@ void update_encounters_conversation(void) {
 
             func_800EF3D4(0);
             encounter->hitType = 0;
-            resume_all_group(EVT_GROUP_10);
+            resume_all_group(EVT_GROUP_FLAG_BATTLE);
             gEncounterState = ENCOUNTER_STATE_NEUTRAL;
             EncounterStateChanged = TRUE;
             gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL;
@@ -2646,9 +2646,9 @@ void create_encounters(void) {
                     if (enemy->flags & ENEMY_FLAG_DONT_UPDATE_SHADOW_Y) {
                         newNpc->flags |= NPC_FLAG_DONT_UPDATE_SHADOW_Y;
                     }
-                    enemy->scriptGroup = EVT_GROUP_0B;
+                    enemy->scriptGroup = EVT_GROUP_HOSTILE_NPC;
                     if (enemy->flags & ENEMY_FLAG_PASSIVE) {
-                        enemy->scriptGroup = EVT_GROUP_0A;
+                        enemy->scriptGroup = EVT_GROUP_PASSIVE_NPC;
                     }
                     if (npcSettings->otherAI != NULL) {
                         script = start_script(npcSettings->otherAI, EVT_PRIORITY_A, 0);
@@ -2786,7 +2786,7 @@ void create_encounters(void) {
                     }
                 }
             }
-            resume_all_group(EVT_GROUP_10);
+            resume_all_group(EVT_GROUP_FLAG_BATTLE);
             gEncounterState = ENCOUNTER_STATE_NEUTRAL;
             EncounterStateChanged = TRUE;
             gEncounterSubState = ENCOUNTER_SUBSTATE_NEUTRAL;

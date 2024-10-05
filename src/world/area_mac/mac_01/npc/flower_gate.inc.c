@@ -637,7 +637,7 @@ EvtScript N(EVS_NpcInit_MinhT) = {
 // FLOWER GATE
 
 EvtScript N(EVS_ExitFlowerGate) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Wait(2)
     Call(GetPlayerActionState, LVar3)

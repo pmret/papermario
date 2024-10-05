@@ -3,7 +3,7 @@
 EvtScript N(EVS_ExitWalk_LowerLeft) = EVT_EXIT_WALK(60, kpa_41_ENTRY_0, "kpa_40", kpa_40_ENTRY_1);
 
 EvtScript N(EVS_ExitWalk_LowerRight) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, kpa_41_ENTRY_1)
     Exec(ExitWalk)
     Switch(AB_KPA_MazeProgress)
@@ -27,7 +27,7 @@ EvtScript N(EVS_ExitWalk_LowerRight) = {
 EvtScript N(EVS_ExitWalk_UpperLeft) = EVT_EXIT_WALK(60, kpa_41_ENTRY_3, "kpa_40", kpa_40_ENTRY_2);
 
 EvtScript N(EVS_ExitWalk_UpperRight) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, kpa_41_ENTRY_2)
     Exec(ExitWalk)
     Switch(AB_KPA_MazeProgress)

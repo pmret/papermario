@@ -27,7 +27,7 @@ BSS s32 gEncounterSubState;
 BSS u32 __osBbRCountWraps;
 #endif
 BSS void *CurrentSefCmdHandler;
-BSS s32 timeFreezeMode;
+BSS s32 gTimeFreezeMode;
 #ifdef BBPLAYER
 BSS u32 __osBbLastRCount;
 #endif

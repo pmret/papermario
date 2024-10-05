@@ -10,7 +10,7 @@ s32 N(map_init)(void) {
 EvtScript N(EVS_ExitWalk_arn_04_1) = EVT_EXIT_WALK(60, dgb_00_ENTRY_0, "arn_04", arn_04_ENTRY_1);
 
 EvtScript N(EVS_ExitDoors_dgb_01_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_00_ENTRY_1)

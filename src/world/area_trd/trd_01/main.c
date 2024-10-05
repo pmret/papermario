@@ -10,8 +10,8 @@ extern NpcGroupList N(DefaultNPCs);
 #include "world/common/atomic/TexturePan.inc.c"
 
 EvtScript N(EVS_EnterMap) = {
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(trd_01_ENTRY_0)
@@ -31,7 +31,7 @@ EvtScript N(EVS_EnterMap) = {
             Set(LVar3, MODEL_e4_doa2)
             ExecWait(EnterDoubleDoor)
     EndSwitch
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Return
     End
 };
@@ -44,7 +44,7 @@ EvtScript N(EVS_ExitDoors_trd_09_0) = EVT_EXIT_DOUBLE_DOOR(trd_01_ENTRY_3, "trd_
 EvtScript N(EVS_Scene_RaiseStairs) = {
     Call(DisablePlayerInput, TRUE)
     Set(GB_StoryProgress, STORY_CH1_RAISED_SUBMERGED_STAIRS)
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Wait(1)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Wait(20 * DT)
@@ -62,7 +62,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     Call(SetGroupVisibility, MODEL_move_saku, MODEL_GROUP_HIDDEN)
     Call(PlaySound, SOUND_LOOP_TRD_FLOWING_WATER)
     ChildThread
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Wait(4 * DT)
         Call(EnableModel, MODEL_sui1, TRUE)
         Call(EnableModel, MODEL_sui2, TRUE)
@@ -271,14 +271,14 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     Call(ResetCam, CAM_DEFAULT, Float(1.5 / DT))
     Call(StopSound, SOUND_LOOP_TRD_FLOWING_WATER)
     Call(DisablePlayerInput, FALSE)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Unbind
     Return
     End
 };
 
 EvtScript N(EVS_TexPan_Water) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_suimenn, TEX_PANNER_1)
     Set(LVar0, 0)
     Set(LVar1, 0)

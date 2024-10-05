@@ -51,7 +51,7 @@ enum {
 };
 
 EvtScript N(EVS_ManageLanternLight) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Label(0)
         Switch(AB_OMO12_LightSource)
             CaseEq(LIGHT_FROM_DEFAULT)

@@ -1,7 +1,7 @@
 #include "arn_08.h"
 
 EvtScript N(EVS_ExitDoor_arn_07_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(ClearDefeatedEnemies)
     Set(LVar0, arn_08_ENTRY_0)

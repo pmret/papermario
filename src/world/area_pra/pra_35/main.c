@@ -12,7 +12,7 @@ s32 N(RightDoorModelsL)[] = { MODEL_o861, MODEL_o862, -1 };
 s32 N(RightDoorModelsR)[] = { MODEL_o859, MODEL_o860, -1 };
 
 EvtScript N(EVS_ExitWalk_pra_33_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_35_ENTRY_0)
     Set(LVar1, COLLIDER_deilittsw)
@@ -27,7 +27,7 @@ EvtScript N(EVS_ExitWalk_pra_33_0) = {
 };
 
 EvtScript N(EVS_ExitWalk_pra_19_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_35_ENTRY_1)
     Set(LVar1, COLLIDER_deilittsw)

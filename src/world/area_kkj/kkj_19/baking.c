@@ -522,18 +522,18 @@ EvtScript N(EVS_ItemPrompt_AddIngredient) = {
     IfEq(AB_KKJ19_CurrentBakeStep, BAKE_STEP_DONE)
         Return
     EndIf
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(ShowKeyChoicePopup)
     Set(LVar2, LVar0)
     Switch(LVar2)
         CaseEq(0)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
         CaseEq(-1)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
     EndSwitch
     Call(RemoveKeyItemAt, LVar1)
@@ -603,7 +603,7 @@ EvtScript N(EVS_ItemPrompt_AddIngredient) = {
     EndSwitch
     Add(AB_KKJ19_BakeStepProgress, 1)
     Call(CloseChoicePopup)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
 };

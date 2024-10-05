@@ -228,7 +228,7 @@ void action_update_parasol(void) {
             break;
         case SUBSTATE_DISGUISE_DONE:
             if (--playerStatus->curStateTime == 0) {
-                set_time_freeze_mode(TIME_FREEZE_NORMAL);
+                set_time_freeze_mode(TIME_FREEZE_NONE);
                 disguiseNpc = get_npc_by_index(PeachDisguiseNpcIndex);
                 disguiseNpc->flags &= ~NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
                 playerStatus->flags &= ~PS_FLAG_ROTATION_LOCKED;
@@ -310,7 +310,7 @@ void action_update_parasol(void) {
             break;
         case SUBSTATE_REVERT_DONE:
             if (--playerStatus->curStateTime == 0) {
-                set_time_freeze_mode(TIME_FREEZE_NORMAL);
+                set_time_freeze_mode(TIME_FREEZE_NONE);
                 playerStatus->flags &= ~PS_FLAG_ROTATION_LOCKED;
                 set_action_state(ACTION_STATE_IDLE);
                 enable_player_static_collisions();

@@ -16,7 +16,7 @@ EvtScript N(EVS_GotoMap_ToadTown) = {
 };
 
 EvtScript N(EVS_OnEnterPipe_ToadTown) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Set(LVarA, mgm_00_ENTRY_0)
     Set(LVarB, COLLIDER_deili1)
     Set(LVarC, Ref(N(EVS_GotoMap_ToadTown)))
@@ -45,7 +45,7 @@ EvtScript N(EVS_GotoMap_SmashAttack) = {
 MAP_RODATA_PAD(1, unk);
 
 EvtScript N(EVS_OnEnterPipe_SmashAttack) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Set(LVarA, mgm_00_ENTRY_2)
     Set(LVarB, COLLIDER_deili3)
     Set(LVarC, Ref(N(EVS_GotoMap_SmashAttack)))

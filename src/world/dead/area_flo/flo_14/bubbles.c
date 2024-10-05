@@ -291,7 +291,7 @@ void N(gfx_build_bubble_flower)(void) {
 }
 
 EvtScript N(EVS_ManageBlownBubble) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Set(LVarF, LVar0)
     Label(0)
         IfEq(AF_FLO_PauseBlowingBubbles, TRUE)

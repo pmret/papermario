@@ -49,11 +49,11 @@ EvtScript N(EVS_UnkJP00) = {
 };
 
 EvtScript N(EVS_Chest_ShowGotItem) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
     Wait(40)
     Call(ShowGotItem, LVar0, FALSE, 0)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     Return
     End

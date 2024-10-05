@@ -119,7 +119,7 @@ void state_init_title_screen(void) {
     void* titleData;
 
     gOverrideFlags = 0;
-    timeFreezeMode = 0;
+    gTimeFreezeMode = TIME_FREEZE_NONE;
     D_8014C248 = TRUE;
     general_heap_create();
     clear_printers();

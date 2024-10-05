@@ -446,7 +446,7 @@ API_CALLABLE(N(SelectTattleMsg)) {
 API_CALLABLE(N(TattleEnd)) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
 
-    set_time_freeze_mode(TIME_FREEZE_NORMAL);
+    set_time_freeze_mode(TIME_FREEZE_NONE);
 
     if (N(IsTattleActive)) {
         N(IsTattleActive) = FALSE;
@@ -504,7 +504,7 @@ void N(pre_battle)(Npc* goombario) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE) {
-        set_time_freeze_mode(TIME_FREEZE_NORMAL);
+        set_time_freeze_mode(TIME_FREEZE_NONE);
         enable_player_input();
         cancel_current_message();
         partner_clear_player_tracking(goombario);

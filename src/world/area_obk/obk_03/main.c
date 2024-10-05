@@ -1,7 +1,7 @@
 #include "obk_03.h"
 
 EvtScript N(EVS_ExitDoor_obk_02_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, obk_03_ENTRY_0)
     Set(LVar1, COLLIDER_tt2)
@@ -17,7 +17,7 @@ EvtScript N(EVS_ExitDoor_obk_02_1) = {
 };
 
 EvtScript N(EVS_ExitDoor_obk_04_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, obk_03_ENTRY_1)
     Set(LVar1, COLLIDER_tt1)

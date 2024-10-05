@@ -6,7 +6,7 @@ LavaReset N(SafeFloorColliders)[] = {
 };
 
 EvtScript N(EVS_SetupSpikes) = {
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o202, SURFACE_TYPE_SPIKES)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o215, SURFACE_TYPE_SPIKES)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o216, SURFACE_TYPE_SPIKES)

@@ -8,18 +8,18 @@ s32 N(ItemList_RuinsKey)[] = {
 };
 
 EvtScript N(EVS_UnlockPrompt_RuinsDoor) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(ShowKeyChoicePopup)
     Switch(LVar0)
         CaseEq(0)
             Call(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
         CaseEq(-1)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
     EndSwitch
     Call(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, -300, -380, 530)
@@ -40,7 +40,7 @@ EvtScript N(EVS_UnlockPrompt_RuinsDoor) = {
     EndIf
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
     Call(CloseChoicePopup)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Unbind
     Return
     End

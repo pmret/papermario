@@ -2,7 +2,7 @@
 #include "sprite/player.h"
 
 EvtScript N(EVS_ExitDoors_dgb_03_3) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_14_ENTRY_1)
@@ -18,7 +18,7 @@ EvtScript N(EVS_ExitDoors_dgb_03_3) = {
 };
 
 EvtScript N(EVS_ExitDoors_dgb_15_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_14_ENTRY_0)

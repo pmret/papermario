@@ -40,7 +40,7 @@ void init_enter_world_shared(void) {
     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
 
     evt_set_variable(NULL, GB_Unused_EVT_01, gGameStatusPtr->unk_A9);
-    timeFreezeMode = 0;
+    gTimeFreezeMode = TIME_FREEZE_NONE;
 }
 
 void state_step_enter_world(void) {
@@ -61,7 +61,7 @@ void state_step_enter_world(void) {
             }
 
             gGameStatusPtr->prevArea = gGameStatusPtr->areaID;
-            set_time_freeze_mode(TIME_FREEZE_NORMAL);
+            set_time_freeze_mode(TIME_FREEZE_NONE);
             if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
                 disable_player_input();
             }
@@ -158,7 +158,7 @@ void state_step_change_map(void) {
                 gGameStatusPtr->context = CONTEXT_WORLD;
                 gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;
                 load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, LOAD_FROM_MAP);
-                set_time_freeze_mode(TIME_FREEZE_NORMAL);
+                set_time_freeze_mode(TIME_FREEZE_NONE);
                 nuContRmbForceStopEnd();
                 if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
                     disable_player_input();

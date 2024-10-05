@@ -61,8 +61,8 @@ EvtScript N(EVS_EnterMap) = {
         Exec(N(EVS_BindExitTriggers))
         Return
     EndIf
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(trd_04_ENTRY_0)
@@ -94,14 +94,14 @@ EvtScript N(EVS_EnterMap) = {
             ExecWait(EnterDoubleDoor)
             Exec(N(EVS_BindExitTriggers))
     EndSwitch
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Return
     End
 };
 
 EvtScript N(EVS_Scene_LowerStairs) = {
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Set(GB_StoryProgress, STORY_CH1_LOWERED_FIRST_STAIRS)
     Call(DisablePlayerInput, TRUE)
     Wait(30 * DT)
@@ -210,14 +210,14 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     Call(EnableModel, MODEL_o7, TRUE)
     Call(EnableModel, MODEL_bero2, TRUE)
     Call(DisablePlayerInput, FALSE)
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
     Return
     End
 };
 
 EvtScript N(EVS_TexPan_Water) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_suimen, TEX_PANNER_1)
     Set(LVar0, 0)
     Set(LVar1, 0)

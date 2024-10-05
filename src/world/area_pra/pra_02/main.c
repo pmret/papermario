@@ -38,7 +38,7 @@ s32 N(FarCenterDoorModels)[] = { MODEL_o774, -1 };
 s32 N(EmptyModelList)[] = { -1 };
 
 EvtScript N(EVS_ExitDoors_pra_01_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, pra_02_ENTRY_0)
@@ -59,7 +59,7 @@ EvtScript N(EVS_ExitDoors_pra_01_1) = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_03_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, pra_02_ENTRY_1)
@@ -80,7 +80,7 @@ EvtScript N(EVS_ExitDoors_pra_03_0) = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_16_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, pra_02_ENTRY_2)
@@ -101,7 +101,7 @@ EvtScript N(EVS_ExitDoors_pra_16_0) = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_13_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, pra_02_ENTRY_2)
@@ -122,7 +122,7 @@ EvtScript N(EVS_ExitDoors_pra_13_0) = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_16_3) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, pra_02_ENTRY_3)
@@ -143,7 +143,7 @@ EvtScript N(EVS_ExitDoors_pra_16_3) = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_13_3) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, pra_02_ENTRY_3)
@@ -165,7 +165,7 @@ End
 };
 
 EvtScript N(EVS_ExitDoors_pra_04_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, pra_02_ENTRY_4)
@@ -186,7 +186,7 @@ EvtScript N(EVS_ExitDoors_pra_04_0) = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_01_2) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, pra_02_ENTRY_5)

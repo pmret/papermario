@@ -44,7 +44,7 @@ EvtScript N(EVS_NpcAI_Sentinel) = {
     Call(DisablePlayerPhysics, TRUE)
     Call(InterruptUsePartner)
     Call(DisablePartnerAI, 0)
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Add(LVar1, 20)

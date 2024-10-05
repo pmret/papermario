@@ -138,7 +138,7 @@ EvtScript N(EVS_ExitWarp_osr_03_4) = {
 };
 
 EvtScript N(EVS_ExitWalk_mim_07_3) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, mim_11_ENTRY_0)
     Exec(ExitWalk)
     Set(GF_MIM_ChoosingPath, FALSE)
@@ -151,7 +151,7 @@ EvtScript N(EVS_ExitWalk_mim_07_3) = {
 EvtScript N(EVS_ExitWalk_mim_12_0) = EVT_EXIT_WALK(60, mim_11_ENTRY_1, "mim_12", mim_12_ENTRY_0);
 
 EvtScript N(EVS_ExitWalk_obk_01_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, mim_11_ENTRY_2)

@@ -6,7 +6,7 @@ s32 N(KeyList)[] = {
 };
 
 EvtScript N(EVS_ExitDoors_dgb_14_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_15_ENTRY_0)
@@ -22,7 +22,7 @@ EvtScript N(EVS_ExitDoors_dgb_14_1) = {
 };
 
 EvtScript N(EVS_ExitDoors_dgb_17_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_15_ENTRY_1)
@@ -38,7 +38,7 @@ EvtScript N(EVS_ExitDoors_dgb_17_0) = {
 };
 
 EvtScript N(EVS_ExitDoors_dgb_16_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, dgb_15_ENTRY_2)

@@ -15,7 +15,7 @@ EvtScript N(EVS_ExitWalk_sam_10_1) = EVT_EXIT_WALK(60, pra_01_ENTRY_0, "sam_10",
 EvtScript N(EVS_ExitWalk_pra_15_0) = EVT_EXIT_WALK(60, pra_01_ENTRY_3, "pra_15", pra_15_ENTRY_0);
 
 EvtScript N(EVS_ExitDoor_pra_02_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_01_ENTRY_1)
     Set(LVar1, COLLIDER_deilittse)
@@ -35,7 +35,7 @@ EvtScript N(EVS_ExitDoor_pra_02_0) = {
 };
 
 EvtScript N(EVS_ExitDoor_pra_02_5) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_01_ENTRY_2)
     Set(LVar1, COLLIDER_deilittse)

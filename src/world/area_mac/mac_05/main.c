@@ -12,7 +12,7 @@ API_CALLABLE(N(func_8024047C_8525EC)) {
 }
 
 EvtScript N(D_8024457C_8566EC) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Set(LVarC, 0)
     Label(0)
         IfGe(LVarC, 60)
@@ -57,7 +57,7 @@ EvtScript N(D_80244648_8567B8) = {
 EvtScript N(EVS_ExitWalk_mac_04_1) = EVT_EXIT_WALK(60, mac_05_ENTRY_0, "mac_04", mac_04_ENTRY_1);
 
 EvtScript N(D_80244810_856980) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, mac_05_ENTRY_3)
     Exec(ExitWalk)
     Set(GB_StoryProgress, STORY_CH5_ENTERED_WHALE)

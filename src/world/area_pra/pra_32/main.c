@@ -142,7 +142,7 @@ s32 N(DoorModelsR)[] = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_40_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_32_ENTRY_0)
     Set(LVar1, COLLIDER_deilittw)

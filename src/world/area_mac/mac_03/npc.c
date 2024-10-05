@@ -318,7 +318,7 @@ EvtScript N(EVS_NpcInit_Toad_02) = {
 };
 
 EvtScript N(EVS_NpcInteract_ToadKid_02) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
     Call(EnableNpcAI, NPC_ToadKid_01, FALSE)
     Call(EnableNpcAI, NPC_ToadKid_02, FALSE)
@@ -393,7 +393,7 @@ EvtScript N(EVS_NpcInteract_ToadKid_02) = {
     Call(SetNpcAnimation, NPC_ToadKid_02, LVar3)
     Call(EnableNpcAI, NPC_ToadKid_01, TRUE)
     Call(EnableNpcAI, NPC_ToadKid_02, TRUE)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
 };

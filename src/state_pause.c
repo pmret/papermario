@@ -240,7 +240,7 @@ void state_step_unpause(void) {
             }
             break;
         case 4:
-            set_time_freeze_mode(TIME_FREEZE_NORMAL);
+            set_time_freeze_mode(TIME_FREEZE_NONE);
             update_encounters();
             update_npcs();
             update_player();

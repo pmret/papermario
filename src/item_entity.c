@@ -1378,7 +1378,7 @@ b32 test_item_player_collision(ItemEntity* item) {
     }
 
     hammerHitboxHeight = tmpYTopThreshold;
-    if (get_time_freeze_mode() != TIME_FREEZE_NORMAL) {
+    if (get_time_freeze_mode() != TIME_FREEZE_NONE) {
         return FALSE;
     }
 
@@ -2036,7 +2036,7 @@ void update_item_entity_collectable(ItemEntity* item) {
             D_801565A8 = FALSE;
 #endif
             remove_item_entity_by_reference(item);
-            resume_all_group(EVT_GROUP_02);
+            resume_all_group(EVT_GROUP_FLAG_MENUS);
         }
     }
 
@@ -2364,7 +2364,7 @@ block_47: // TODO required to match
             }
         case ITEM_PICKUP_STATE_DONE:
             if (!(item->flags & ITEM_ENTITY_FLAG_2000000)) {
-                set_time_freeze_mode(TIME_FREEZE_NORMAL);
+                set_time_freeze_mode(TIME_FREEZE_NONE);
                 enable_player_input();
                 partner_enable_input();
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
@@ -2470,7 +2470,7 @@ block_47: // TODO required to match
             break;
         case ITEM_PICKUP_STATE_THROW_AWAY_DONE:
             suggest_player_anim_always_forward(ANIM_Mario1_Idle);
-            set_time_freeze_mode(TIME_FREEZE_NORMAL);
+            set_time_freeze_mode(TIME_FREEZE_NONE);
             enable_player_input();
             partner_enable_input();
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;

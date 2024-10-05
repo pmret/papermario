@@ -920,11 +920,11 @@ ApiStatus evt_handle_call(Evt* script) {
 
 ApiStatus evt_handle_exec1(Evt* script) {
     Bytecode* args = script->ptrReadPos;
+    EvtScript* newSource = (EvtScript*)evt_get_variable(script, *args++);
     Evt* newScript;
     s32 i;
 
-    newScript = start_script_in_group((EvtScript*)evt_get_variable(script, *args++), script->priority, 0,
-                                      script->groupFlags);
+    newScript = start_script_in_group(newSource, script->priority, 0, script->groupFlags);
 
     newScript->owner1 = script->owner1;
     newScript->owner2 = script->owner2;
@@ -947,7 +947,7 @@ ApiStatus evt_handle_exec1(Evt* script) {
 ApiStatus evt_handle_exec1_get_id(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     EvtScript* newSource = (EvtScript*)evt_get_variable(script, *args++);
-    Bytecode arg2 = *args++;
+    Bytecode outVar = *args++;
     Evt* newScript;
     s32 i;
 
@@ -967,15 +967,16 @@ ApiStatus evt_handle_exec1_get_id(Evt* script) {
     newScript->array = script->array;
     newScript->flagArray = script->flagArray;
 
-    evt_set_variable(script, arg2, newScript->id);
+    evt_set_variable(script, outVar, newScript->id);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus evt_handle_exec_wait(Evt* script) {
     Bytecode* args = script->ptrReadPos;
+    EvtScript* newSource = (EvtScript*)evt_get_variable(script, *args++);
 
-    start_child_script(script, (EvtScript*) evt_get_variable(script, *args++), 0);
+    start_child_script(script, newSource, 0);
     script->curOpcode = EVT_OP_INTERNAL_FETCH;
     return ApiStatus_FINISH;
 }

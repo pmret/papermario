@@ -38,7 +38,7 @@ API_CALLABLE(N(IsPartnerLakilester)) {
 }
 
 EvtScript N(EVS_SinkingPlatform_Update) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     SetF(LVar0, Float(0.0))
     Label(0)
         Call(TranslateGroup, LVar1, 0, LVar0, 0)
@@ -107,7 +107,7 @@ EvtScript N(EVS_Touch_SinkingPlatform4) = {
 };
 
 EvtScript N(EVS_SinkingPlatform_Idle) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Label(0)
         Call(MakeLerp, 0, -3, 20, EASING_LINEAR)
         Label(1)
@@ -153,7 +153,7 @@ EvtScript N(EVS_SetupSinkingPlatforms) = {
 };
 
 EvtScript N(EVS_SetupMovingPlatform) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Call(ParentColliderToModel, COLLIDER_o414, MODEL_o522)
     Set(LVar0, 0)
     Set(LVar3, 0)

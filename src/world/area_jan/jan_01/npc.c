@@ -91,7 +91,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                     Call(DisablePlayerInput, FALSE)
                 EndIf
             CaseEq(1)
-                SetGroup(EVT_GROUP_00)
+                SetGroup(EVT_GROUP_NEVER_PAUSE)
                 Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
                 Call(func_802D2C14, 1)
                 Wait(10 * DT)
@@ -101,8 +101,8 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                 Set(GB_StoryProgress, STORY_CH5_KOLORADO_ESCAPED_FUZZIES)
                 ExecWait(N(EVS_Kolorado_RunToVillage))
                 Call(func_802D2C14, 0)
-                Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-                SetGroup(EVT_GROUP_0B)
+                Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
+                SetGroup(EVT_GROUP_HOSTILE_NPC)
                 Call(DisablePlayerInput, FALSE)
         EndSwitch
         Call(GetSelfVar, 0, LVar0)

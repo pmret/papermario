@@ -3,7 +3,7 @@
 #include "world/common/atomic/TexturePan.inc.c"
 
 EvtScript N(EVS_UpdateTexPanner3) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, LVar0, TEX_PANNER_3)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_3)
@@ -17,7 +17,7 @@ EvtScript N(EVS_UpdateTexPanner3) = {
 };
 
 EvtScript N(EVS_UpdateTexPanner4) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, LVar0, TEX_PANNER_4)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_4)
@@ -53,7 +53,7 @@ EvtScript N(EVS_EnterMap) = {
 };
 
 EvtScript N(EVS_StartTexPanners_Lava) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(EnableTexPanning, MODEL_yougan1_1, TRUE)
     Call(EnableTexPanning, MODEL_yougan1_2, TRUE)
     Call(EnableTexPanning, MODEL_toro, TRUE)

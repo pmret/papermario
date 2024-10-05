@@ -11,7 +11,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_UpdateTexPan_LavaRiver) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(EnableTexPanning, MODEL_yougan1_1, TRUE)
     Set(LVar0, 0)
     Set(LVar1, 0)
@@ -29,7 +29,7 @@ EvtScript N(EVS_UpdateTexPan_LavaRiver) = {
 };
 
 EvtScript N(EVS_UpdateTexPan_LavaFall) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(EnableTexPanning, MODEL_yougan2_2, TRUE)
     Set(LVar0, 0)
     Set(LVar1, 0)
@@ -73,7 +73,7 @@ API_CALLABLE(N(GetFloorCollider1)) {
 }
 
 EvtScript N(EVS_UpdateLavaLevel) = {
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
     Call(SetTexPanner, MODEL_yu1, TEX_PANNER_2)
     Call(SetTexPanner, MODEL_yu, TEX_PANNER_2)
     Call(EnableModel, MODEL_yu, FALSE)

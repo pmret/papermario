@@ -25,7 +25,7 @@ API_CALLABLE(N(CosInterpAbsMinMax)) {
 }
 
 EvtScript N(EVS_AnimatePlatforms) = {
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
     Set(LVarF, 0)
     Label(0)
         SetF(LVar0, Float(-215.4375))

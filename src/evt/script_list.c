@@ -218,23 +218,21 @@ void init_script_list(void) {
     init_model_animators();
 }
 
+// enforces current gTimeFreezeMode on newly created script
 void suspend_frozen_scripts(Evt* script) {
-    s32 groupFlags;
-
-    switch (timeFreezeMode) {
+    switch (gTimeFreezeMode) {
         default:
-        case 0:
-        case 4:
+        case TIME_FREEZE_NONE:
+        case TIME_FREEZE_EXIT:
             return;
-        case 1:
-            groupFlags = EVT_GROUP_01;
-            break;
-        case 2:
-        case 3:
-            groupFlags = EVT_GROUP_02;
-            break;
+        case TIME_FREEZE_PARTIAL:
+            suspend_all_group(EVT_GROUP_FLAG_INTERACT);
+            return;
+        case TIME_FREEZE_FULL:
+        case TIME_FREEZE_POPUP_MENU:
+            suspend_all_group(EVT_GROUP_FLAG_MENUS);
+            return;
     }
-    suspend_all_group(groupFlags);
 }
 
 Evt* start_script(EvtScript* source, s32 priority, s32 flags) {
@@ -271,7 +269,7 @@ Evt* start_script(EvtScript* source, s32 priority, s32 flags) {
     newScript->owner2.npcID = -1;
     newScript->loopDepth = -1;
     newScript->switchDepth = -1;
-    newScript->groupFlags = ~EVT_GROUP_10;
+    newScript->groupFlags = EVT_GROUP_NOT_BATTLE;
     newScript->ptrSavedPos = NULL;
     newScript->frameCounter = 0.0f;
     newScript->unk_158 = 0;
@@ -593,7 +591,7 @@ void update_scripts(void) {
         if (script != NULL &&
             script->id == gScriptIdList[i] &&
             script->stateFlags != 0 &&
-            !(script->stateFlags & (EVT_FLAG_SUSPENDED | EVT_FLAG_BLOCKED_BY_CHILD | EVT_FLAG_SUSPENDED_IN_GROUP)))
+            !(script->stateFlags & (EVT_FLAG_SUSPENDED | EVT_FLAG_BLOCKED_BY_CHILD | EVT_FLAG_PAUSED)))
         {
             s32 stop = FALSE;
             s32 status;
@@ -801,7 +799,7 @@ void suspend_group_script(Evt* script, s32 groupFlags) {
     }
 
     if ((script->groupFlags & groupFlags) != 0) {
-        script->stateFlags |= EVT_FLAG_SUSPENDED_IN_GROUP;
+        script->stateFlags |= EVT_FLAG_PAUSED;
     }
 }
 
@@ -822,7 +820,7 @@ void resume_group_script(Evt* script, s32 groupFlags) {
     }
 
     if ((script->groupFlags & groupFlags) != 0) {
-        script->stateFlags &= ~EVT_FLAG_SUSPENDED_IN_GROUP;
+        script->stateFlags &= ~EVT_FLAG_PAUSED;
     }
 }
 
@@ -833,7 +831,7 @@ s32 suspend_all_script(s32 id) {
         Evt* scriptContextPtr = (*gCurrentScriptListPtr)[i];
 
         if (scriptContextPtr != NULL && scriptContextPtr->id == id) {
-            suspend_group_script(scriptContextPtr, 0xEF);
+            suspend_group_script(scriptContextPtr, EVT_GROUP_NOT_BATTLE);
         }
     }
 }
@@ -845,7 +843,7 @@ s32 resume_all_script(s32 id) {
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->id == id) {
-            resume_group_script(scriptContextPtr, 0xEF);
+            resume_group_script(scriptContextPtr, EVT_GROUP_NOT_BATTLE);
         }
     }
 }

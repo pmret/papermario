@@ -59,7 +59,7 @@ EvtScript N(EVS_EnterMap) = {
 };
 
 EvtScript N(EVS_TexPan_Flowers) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_o298, TEX_PANNER_0)
     Call(SetTexPanner, MODEL_o320, TEX_PANNER_0)
     Call(SetTexPanner, MODEL_o402, TEX_PANNER_0)

@@ -3,7 +3,7 @@
 #include "world/common/atomic/CreateDarkness.inc.c"
 
 EvtScript N(EVS_ExitDoor_kpa_14_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, kpa_01_ENTRY_0)
     Set(LVar1, COLLIDER_tte)

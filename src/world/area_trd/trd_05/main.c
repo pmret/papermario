@@ -26,8 +26,8 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_EnterMap) = {
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(trd_05_ENTRY_0)
@@ -49,7 +49,7 @@ EvtScript N(EVS_EnterMap) = {
             ExecWait(EnterDoubleDoor)
             Exec(N(EVS_BindExitTriggers))
     EndSwitch
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Return
     End
 };
@@ -61,8 +61,8 @@ BombTrigger N(BombPos_Wall) = {
 
 EvtScript N(EVS_BombWall) = {
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 29, 0, 1, 10, 30)
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(SetGroupVisibility, MODEL_ana2, MODEL_GROUP_VISIBLE)
     Loop(10)
         Call(SetGroupVisibility, MODEL_ana3, MODEL_GROUP_VISIBLE)
@@ -72,14 +72,14 @@ EvtScript N(EVS_BombWall) = {
     EndLoop
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tte, COLLIDER_FLAGS_UPPER_MASK)
     Set(GF_TRD05_BombedWall, TRUE)
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
     Return
     End
 };
 
 EvtScript N(EVS_TexPan_Water) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_suimen, TEX_PANNER_1)
     Set(LVar0, 0)
     Set(LVar1, 0)

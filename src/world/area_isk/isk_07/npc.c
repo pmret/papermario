@@ -62,7 +62,7 @@ EvtScript N(EVS_NpcDefeat_Pokey_01) = {
                         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
                         Wait(1)
                         Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-                        Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+                        Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
                         Call(DisablePlayerInput, FALSE)
                     EndIf
                 EndThread

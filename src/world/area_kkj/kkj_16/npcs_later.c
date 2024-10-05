@@ -69,7 +69,7 @@ EvtScript N(EVS_NpcInteract_HammerBros_03) = {
 EvtScript N(EVS_CapturePeach) = {
     Call(DisablePlayerInput, TRUE)
     Call(N(PreventNextPeachDisguise))
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)

@@ -360,7 +360,7 @@ Vec3f N(FlightPath)[] = {
 };
 
 EvtScript N(EVS_FlyingGull) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(CloneModel, MODEL_hontai, CLONED_MODEL_GULL)
     Set(LFlag0, TRUE)
     Set(LFlag1, FALSE)
