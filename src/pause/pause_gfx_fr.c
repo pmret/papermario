@@ -1,0 +1,17 @@
+#include "include_asset.h"
+INCLUDE_IMG("pause/banner_hp_fr.png", pause_banner_hp_fr_png);
+INCLUDE_PAL("pause/banner_hp_fr.pal", pause_banner_hp_fr_pal);
+INCLUDE_IMG("pause/banner_fp_fr.png", pause_banner_fp_fr_png);
+INCLUDE_PAL("pause/banner_fp_fr.pal", pause_banner_fp_fr_pal);
+INCLUDE_IMG("pause/banner_bp_fr.png", pause_banner_bp_fr_png);
+INCLUDE_PAL("pause/banner_bp_fr.pal", pause_banner_bp_fr_pal);
+INCLUDE_IMG("pause/banner_boots_fr.png", pause_banner_boots_fr_png);
+INCLUDE_PAL("pause/banner_boots_fr.pal", pause_banner_boots_fr_pal);
+INCLUDE_IMG("pause/banner_hammer_fr.png", pause_banner_hammer_fr_png);
+INCLUDE_PAL("pause/banner_hammer_fr.pal", pause_banner_hammer_fr_pal);
+INCLUDE_IMG("pause/banner_star_energy_fr.png", pause_banner_star_energy_fr_png);
+INCLUDE_PAL("pause/banner_star_energy_fr.pal", pause_banner_star_energy_fr_pal);
+INCLUDE_IMG("pause/available_fr.png", pause_available_fr_png);
+INCLUDE_PAL("pause/available_fr.pal", pause_available_fr_pal);
+INCLUDE_IMG("pause/prompt_check_abilities_fr.png", pause_prompt_check_abilities_fr_png);
+INCLUDE_PAL("pause/prompt_check_abilities_fr.pal", pause_prompt_check_abilities_fr_pal);

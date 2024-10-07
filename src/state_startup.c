@@ -80,6 +80,13 @@ void state_step_startup(void) {
         audio_set_mono();
     }
 
+#if VERSION_PAL
+    if (gSaveGlobals.language >= 4) {
+        gSaveGlobals.language = LANGUAGE_DEFAULT;
+    }
+    gCurrentLanguage = gSaveGlobals.language;
+#endif
+
     gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
     set_game_mode(GAME_MODE_LOGOS);
 }

@@ -12,7 +12,9 @@ void nuPiReadRom(u32 rom_addr, void* buf_ptr, u32 size) {
     ioMesg.hdr.pri = OS_MESG_PRI_NORMAL;
     ioMesg.hdr.retQueue = &queue;
     osInvalDCache(buf_ptr, size);
+#if !VERSION_PAL
     osInvalICache(buf_ptr, size);
+#endif
 
     while (size != 0) {
         mesgSize = size;

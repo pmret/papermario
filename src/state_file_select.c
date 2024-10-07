@@ -44,19 +44,51 @@ extern ShapeFile gMapShapeData;
 
 BSS s8 D_800A0930;
 BSS s8 D_800A0931;
-static s16 D_800A0932[1]; // TODO any possible workaround to make this visible?
+static s16 D_800A0932; // TODO any possible workaround to make this visible?
 
 void state_init_language_select(void) {
     D_800A0931 = 0;
-    D_800A0932[0] = 0;
+    D_800A0932 = 0;
     disable_player_input();
     set_time_freeze_mode(TIME_FREEZE_FULL);
-    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
+#if VERSION_PAL
+    general_heap_create();
+    hud_element_set_aux_cache(0, 0);
+    hud_element_clear_cache();
+    mdl_load_all_textures(NULL, 0, 0);
+    gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_NO_INTERP;
+    gCameras[CAM_DEFAULT].needsInit = TRUE;
+    gCameras[CAM_DEFAULT].nearClip = 16;
+    gCameras[CAM_DEFAULT].farClip = 4096;
+    gCameras[CAM_DEFAULT].flags |= CAMERA_FLAG_DISABLED;
+    gCurrentCameraID = CAM_DEFAULT;
+    gCameras[CAM_BATTLE].flags |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_TATTLE].flags |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_HUD].flags |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_DEFAULT].vfov = 25.0f;
+    set_cam_viewport(CAM_DEFAULT, 12, 28, 296, 184);
+    gCameras[CAM_DEFAULT].params.basic.dist = 40;
+    gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
+    gCameras[CAM_DEFAULT].lookAt_eye.y = 1000.0f;
+    gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.z = 150.0f;
+    gCameras[CAM_DEFAULT].bgColor[0] = 0;
+    gCameras[CAM_DEFAULT].bgColor[1] = 0;
+    gCameras[CAM_DEFAULT].bgColor[2] = 0;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.x = 25.0f;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.y = 25.0f;
+    gCameras[CAM_DEFAULT].params.basic.skipRecalc = FALSE;
+    gCameras[CAM_DEFAULT].params.basic.fovScale = 100;
+    gCameras[CAM_DEFAULT].params.basic.pitch = 0;
+    gOverrideFlags |= GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS;
+#else
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932);
+#endif
 }
 
 void state_init_file_select(void) {
     D_800A0931 = 0;
-    D_800A0932[0] = 0;
+    D_800A0932 = 0;
     disable_player_input();
     set_time_freeze_mode(TIME_FREEZE_FULL);
     general_heap_create();
@@ -91,6 +123,34 @@ void state_init_file_select(void) {
 }
 
 void state_step_language_select(void) {
+#if VERSION_PAL
+    switch (D_800A0931) {
+        case 0:
+            D_800A0931 = 1;
+            break;
+        case 1:
+            set_windows_visible(WINDOW_GROUP_FILE_MENU);
+            D_800A0930 = 1;
+            D_800A0931 = 2;
+            break;
+        case 2:
+            if (D_800A0930 >= 0) {
+                D_800A0930--;
+                if (D_800A0930 == 0) {
+                    D_800A0930 = -1;
+                    battle_heap_create();
+                    nuPiReadRomOverlay(&D_8007798C);
+                    filemenu_init(2);
+                }
+                if (D_800A0930 >= 0) {
+                    break;
+                }
+            }
+
+            filemenu_update();
+            break;
+    }
+#else
     switch (D_800A0931) {
         case 0:
             update_player();
@@ -98,14 +158,14 @@ void state_step_language_select(void) {
             update_encounters();
             update_effects();
 
-            if (D_800A0932[0] < 255) {
-                D_800A0932[0] += 20;
+            if (D_800A0932 < 255) {
+                D_800A0932 += 20;
 
-                if (D_800A0932[0] > 255) {
-                    D_800A0932[0] = 255;
+                if (D_800A0932 > 255) {
+                    D_800A0932 = 255;
                 }
-                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
-                if (D_800A0932[0] == 255) {
+                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932);
+                if (D_800A0932 == 255) {
 
                     D_800A0931 = 1;
                 }
@@ -169,13 +229,14 @@ void state_step_language_select(void) {
             }
 
             filemenu_update();
-            D_800A0932[0] -= 20;
-            if (D_800A0932[0] < 0) {
-                D_800A0932[0] = 0;
+            D_800A0932 -= 20;
+            if (D_800A0932 < 0) {
+                D_800A0932 = 0;
             }
-            set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
+            set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932);
             break;
     }
+#endif
 }
 
 void state_step_file_select(void) {
@@ -216,20 +277,27 @@ void state_drawUI_file_select(void) {
 }
 
 void state_init_exit_language_select(void) {
-    if (D_800A0932[0] > 0) {
+#if VERSION_PAL
+    D_800A0931 = 0;
+    D_800A0932 = 0;
+    D_800A0930 = 0;
+    set_map_transition_effect(TRANSITION_SLOW_FADE_TO_WHITE);
+#else
+    if (D_800A0932 > 0) {
         D_800A0931 = 0;
-        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932);
     } else {
         D_800A0931 = 1;
-        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932);
     }
     D_800A0930 = 1;
+#endif
     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
 }
 
 void state_init_exit_file_select(void) {
     D_800A0931 = 0;
-    D_800A0932[0] = 0;
+    D_800A0932 = 0;
     D_800A0930 = 0;
 
     if (filemenu_get_exit_mode() == 0) {
@@ -243,15 +311,47 @@ void state_init_exit_file_select(void) {
 }
 
 void state_step_exit_language_select(void) {
+#if VERSION_PAL
+    s32 flagSum;
+    int i;
+
+    filemenu_get_exit_mode();
     switch (D_800A0931) {
         case 0:
-            if (D_800A0932[0] != 0) {
-                D_800A0932[0] -= 20;
-                if (D_800A0932[0] < 0) {
-                    D_800A0932[0] = 0;
+            flagSum = 0;
+            for (i = 44; i < ARRAY_COUNT(gWindows); i++) {
+                Window *window = &gWindows[i];
+
+                if (window->parent == WINDOW_ID_FILEMENU_MAIN || window->parent == -1) {
+                    flagSum += window->flags & WINDOW_FLAG_INITIAL_ANIMATION;
                 }
-                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
-                if (D_800A0932[0] == 0) {
+            }
+
+            if (flagSum == 0) {
+                D_800A0931 = 2;
+            }
+            break;
+        case 2:
+            filemenu_cleanup();
+            set_windows_visible(WINDOW_GROUP_ALL);
+            D_800A0931 = 3;
+            /* fallthrough */
+        case 3:
+            set_time_freeze_mode(TIME_FREEZE_NORMAL);
+            set_game_mode(GAME_MODE_TITLE_SCREEN);
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS;
+            break;
+    }
+#else
+    switch (D_800A0931) {
+        case 0:
+            if (D_800A0932 != 0) {
+                D_800A0932 -= 20;
+                if (D_800A0932 < 0) {
+                    D_800A0932 = 0;
+                }
+                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932);
+                if (D_800A0932 == 0) {
                     D_800A0931 = 1;
                 }
             } else {
@@ -259,13 +359,13 @@ void state_step_exit_language_select(void) {
             }
             break;
         case 1:
-            if (D_800A0932[0] != 255) {
-                D_800A0932[0] += 20;
-                if (D_800A0932[0] > 255) {
-                    D_800A0932[0] = 255;
+            if (D_800A0932 != 255) {
+                D_800A0932 += 20;
+                if (D_800A0932 > 255) {
+                    D_800A0932 = 255;
                 }
-                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
-                if (D_800A0932[0] == 255) {
+                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932);
+                if (D_800A0932 == 255) {
                     D_800A0931 = 2;
                 }
             } else {
@@ -340,11 +440,11 @@ void state_step_exit_language_select(void) {
                 update_encounters();
                 update_effects();
 
-                D_800A0932[0] -= 20;
-                if (D_800A0932[0] < 0) {
-                    D_800A0932[0] = 0;
+                D_800A0932 -= 20;
+                if (D_800A0932 < 0) {
+                    D_800A0932 = 0;
                 }
-                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
+                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932);
             }
             break;
         case 3:
@@ -353,14 +453,14 @@ void state_step_exit_language_select(void) {
             update_encounters();
             update_effects();
 
-            if (D_800A0932[0] == 0) {
+            if (D_800A0932 == 0) {
                 D_800A0931 = 4;
             } else {
-                D_800A0932[0] -= 20;
-                if (D_800A0932[0] < 0) {
-                    D_800A0932[0] = 0;
+                D_800A0932 -= 20;
+                if (D_800A0932 < 0) {
+                    D_800A0932 = 0;
                 }
-                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
+                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932);
             }
             break;
         case 4:
@@ -373,7 +473,8 @@ void state_step_exit_language_select(void) {
             set_game_mode(GAME_MODE_WORLD);
             set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
             break;
-        }
+    }
+#endif
 }
 
 void state_step_exit_file_select(void) {
@@ -398,7 +499,7 @@ void state_step_exit_file_select(void) {
             }
             break;
         case 1:
-            if (exitMode == 0 || update_exit_map_screen_overlay(D_800A0932) != 0) {
+            if (exitMode == 0 || update_exit_map_screen_overlay(&D_800A0932) != 0) {
                 D_800A0931 = 2;
             }
             break;

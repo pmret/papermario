@@ -14,15 +14,23 @@ u16 nuContPakCompanyCode = 0;
 u32 nuContPakGameCode = 0;
 
 s32 (*D_80093CA8[])(NUSiCommonMesg*) = {
-    NULL, contPakOpen, contPakFree, contPakFileOpen, contPakFileReadWrite, contPakFileDelete, contPakFileState,
-    contPakFileNum, contPakRepairId, NULL
+    NULL,
+    contPakOpen,
+    contPakFree,
+    contPakFileOpen,
+    contPakFileReadWrite,
+    contPakFileDelete,
+    contPakFileState,
+    contPakFileNum,
+    contPakRepairId,
+    NULL
 };
 
 NUCallBackList nuContPakCallBack = {
-    NULL,
-    D_80093CA8,
-    0x200,
-    0
+    .next = NULL,
+    .func = D_80093CA8,
+    .majorNo = NU_SI_MAJOR_NO_PAK,
+    .funcNum = 0
 };
 
 void nuContPakMgrInit(void) {

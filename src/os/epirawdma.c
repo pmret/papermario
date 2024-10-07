@@ -3,12 +3,10 @@
 #include "PR/bcp.h"
 
 s32 __osEPiRawStartDma(OSPiHandle* pihandle, s32 direction, u32 devAddr, void* dramAddr, u32 size) {
-#ifdef BBPLAYER
-    u64 dummybuf[2];
-#endif
     u32 stat;
     u32 domain;
-#ifdef BBPLAYER
+#if defined(BBPLAYER) || VERSION_PAL
+    u64 dummybuf[2];
     u32 buffer;
     u32 pgsize;
     u16* adr;
@@ -17,7 +15,7 @@ s32 __osEPiRawStartDma(OSPiHandle* pihandle, s32 direction, u32 devAddr, void* d
 
     EPI_SYNC(pihandle, stat, domain);
 
-#ifdef BBPLAYER
+#if defined(BBPLAYER) || VERSION_PAL
     if (direction == OS_READ) {
         pgsize = 1;
 
@@ -29,7 +27,8 @@ s32 __osEPiRawStartDma(OSPiHandle* pihandle, s32 direction, u32 devAddr, void* d
             __osEPiRawReadIo(pihandle, devAddr - 2, &buffer);
 
             adr = (u16*)PHYS_TO_K1(dramAddr);
-            *(adr++) = (u16)buffer;
+            *adr = (u16)buffer;
+            adr++;
 
             devAddr += 2;
             dramAddr = adr;
@@ -40,7 +39,8 @@ s32 __osEPiRawStartDma(OSPiHandle* pihandle, s32 direction, u32 devAddr, void* d
 
                 adr = (u16*)dramAddr;
                 *(adr++) = buffer >> 16;
-                *(adr++) = (u16)buffer;
+                *adr = (u16)buffer;
+                adr++;
 
                 devAddr += 4;
                 dramAddr = adr;
@@ -50,7 +50,8 @@ s32 __osEPiRawStartDma(OSPiHandle* pihandle, s32 direction, u32 devAddr, void* d
                     __osEPiRawReadIo(pihandle, devAddr, &buffer);
 
                     adr = (u16*)PHYS_TO_K1(dramAddr);
-                    *(adr++) = buffer >> 16;
+                    *adr = buffer >> 16;
+                    adr++;
 
                     devAddr += 2;
                     dramAddr = adr;

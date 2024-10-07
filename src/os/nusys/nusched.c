@@ -1,13 +1,15 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-NOP_FIX
-
 NUSched nusched;
 NUScPreNMIFunc nuScPreNMIFunc = NULL;
 u8 nuScPreNMIFlag;
 
+#if VERSION_PAL
+char nusys_version[] = "NuSystem2.07";
+#else
 char nusys_version[] = "NuSystem2.05";
+#endif
 
 u32 nuScRetraceCounter = (u32) nusys_version;
 
@@ -67,6 +69,114 @@ void nuScCreateScheduler(u8 videoMode, u8 numFields) {
     osCreateThread(&nusched.graphicsThread,  17, (void(*)) nuScExecuteGraphics, &nusched,
                    nuScGraphicsStack + NU_SC_STACK_SIZE / sizeof(u64), NU_SC_GRAPHICS_PRI);
     osStartThread(&nusched.graphicsThread);
+}
+
+OSMesgQueue* nuScGetAudioMQ(void) {
+    return &nusched.audioRequestMQ;
+}
+
+OSMesgQueue* nuScGetGfxMQ(void) {
+    return &nusched.graphicsRequestMQ;
+}
+
+void nuScEventHandler(void) {
+    OSMesg  msg;
+    s32     beforeResetFrame;
+
+    nuScRetraceCounter = 0;
+
+    while (TRUE) {
+        osRecvMesg(&nusched.retraceMQ, &msg, OS_MESG_BLOCK);
+
+        switch ((s32) msg) {
+            case 666:
+                nuScRetraceCounter++;
+
+                nuScEventBroadcast(&nusched.retraceMsg);
+
+                if (nuScPreNMIFlag){
+                    if (beforeResetFrame){
+                        beforeResetFrame--;
+                    } else {
+                        nuScPreNMIFlag |= NU_SC_BEFORE_RESET;
+                        osAfterPreNMI();
+                        osViSetYScale(1.0);
+                        osViBlack(TRUE);
+                    }
+                }
+                break;
+            case 669:
+                nuScPreNMIFlag = NU_SC_PRENMI_GET;
+                nuScEventBroadcast(&nusched.prenmiMsg);
+
+                if (nuScPreNMIFunc != NULL){
+                    (*nuScPreNMIFunc)();
+                }
+
+                beforeResetFrame = (nusched.frameRate / 2) / nusched.retraceCount - 3;
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+void nuScAddClient(NUScClient* c, OSMesgQueue* mq, NUScMsg msgType) {
+    s32 mask;
+
+    mask = osSetIntMask(OS_IM_NONE);
+
+    c->msgQ = mq;
+    c->next = nusched.clientList;
+    c->msgType = msgType;
+
+    nusched.clientList = c;
+
+    if ((msgType & NU_SC_PRENMI_MSG) && nuScPreNMIFlag) {
+        osSendMesg(mq, &nusched.prenmiMsg, OS_MESG_NOBLOCK);
+    }
+
+    osSetIntMask(mask);
+}
+
+void nuScResetClientMesgType(NUScClient* client, NUScMsg msgType) {
+    s32 mask;
+
+    mask = osSetIntMask(OS_IM_NONE);
+    client->msgType = msgType;
+    osSetIntMask(mask);
+}
+
+void nuScRemoveClient(NUScClient* client) {
+    s32 mask = osSetIntMask(OS_IM_NONE);
+    NUScClient* clientList = nusched.clientList;
+    NUScClient* prev = NULL;
+
+    while (clientList != NULL) {
+        if (clientList == client) {
+            if (prev != NULL) {
+                prev->next = clientList->next;
+            } else {
+                nusched.clientList = clientList->next;
+            }
+            break;
+        }
+        prev = clientList;
+        clientList = clientList->next;
+    }
+
+    osSetIntMask(mask);
+}
+
+void nuScEventBroadcast(NUScMsg* msg) {
+    NUScClient* clientList = nusched.clientList;
+
+    while (clientList != NULL) {
+        if (clientList->msgType & *msg) {
+            osSendMesg(clientList->msgQ, msg, OS_MESG_NOBLOCK);
+        }
+        clientList = clientList->next;
+    }
 }
 
 void nuScExecuteAudio(void) {
@@ -160,164 +270,6 @@ void nuScExecuteGraphics(void) {
     }
 }
 
-void nuScAddClient(NUScClient* c, OSMesgQueue* mq, NUScMsg msgType) {
-    s32 mask;
-
-    mask = osSetIntMask(OS_IM_NONE);
-
-    c->msgQ = mq;
-    c->next = nusched.clientList;
-    c->msgType = msgType;
-
-    nusched.clientList = c;
-
-    if ((msgType & NU_SC_PRENMI_MSG) && nuScPreNMIFlag) {
-        osSendMesg(mq, &nusched.prenmiMsg, OS_MESG_NOBLOCK);
-    }
-
-    osSetIntMask(mask);
-}
-
-void nuScRemoveClient(NUScClient* client) {
-    s32 mask = osSetIntMask(OS_IM_NONE);
-    NUScClient* clientList = nusched.clientList;
-    NUScClient* prev = NULL;
-
-    while (clientList != NULL) {
-        if (clientList == client) {
-            if (prev != NULL) {
-                prev->next = clientList->next;
-            } else {
-                nusched.clientList = clientList->next;
-            }
-            break;
-        }
-        prev = clientList;
-        clientList = clientList->next;
-    }
-
-    osSetIntMask(mask);
-}
-
-void nuScResetClientMesgType(NUScClient* client, NUScMsg msgType) {
-    s32 mask;
-
-    mask = osSetIntMask(OS_IM_NONE);
-    client->msgType = msgType;
-    osSetIntMask(mask);
-}
-
-OSMesgQueue* nuScGetGfxMQ(void) {
-    return &nusched.graphicsRequestMQ;
-}
-
-OSMesgQueue* nuScGetAudioMQ(void) {
-    return &nusched.audioRequestMQ;
-}
-
-void nuScSetFrameBufferNum(u8 frameBufferNum) {
-    nusched.frameBufferNum = frameBufferNum;
-}
-
-s32 nuScGetFrameRate(void) {
-    return nusched.frameRate;
-}
-
-void nuScEventHandler(void) {
-    OSMesg  msg;
-    s32     beforeResetFrame;
-
-    nuScRetraceCounter = 0;
-
-    while (TRUE) {
-        osRecvMesg(&nusched.retraceMQ, &msg, OS_MESG_BLOCK);
-
-        switch ((s32) msg) {
-            case 666:
-                nuScRetraceCounter++;
-
-                nuScEventBroadcast(&nusched.retraceMsg);
-
-                if (nuScPreNMIFlag){
-                    if (beforeResetFrame){
-                        beforeResetFrame--;
-                    } else {
-                        nuScPreNMIFlag |= NU_SC_BEFORE_RESET;
-                        osAfterPreNMI();
-                        osViSetYScale(1.0);
-                        osViBlack(TRUE);
-                    }
-                }
-                break;
-            case 669:
-                nuScPreNMIFlag = NU_SC_PRENMI_GET;
-                nuScEventBroadcast(&nusched.prenmiMsg);
-
-                if (nuScPreNMIFunc != NULL){
-                    (*nuScPreNMIFunc)();
-                }
-
-                beforeResetFrame = (nusched.frameRate / 2) / nusched.retraceCount - 3;
-                break;
-            default:
-                break;
-        }
-    }
-}
-
-void nuScEventBroadcast(NUScMsg* msg) {
-    NUScClient* clientList = nusched.clientList;
-
-    while (clientList != NULL) {
-        if (clientList->msgType & *msg) {
-            osSendMesg(clientList->msgQ, msg, OS_MESG_NOBLOCK);
-        }
-        clientList = clientList->next;
-    }
-}
-
-// copy of nuScAddClient
-static inline void nuScAddClient_inline(NUScClient* c, OSMesgQueue* mq, NUScMsg msgType) {
-    s32 mask;
-
-    mask = osSetIntMask(OS_IM_NONE);
-
-    c->msgQ = mq;
-    c->next = nusched.clientList;
-    c->msgType = msgType;
-
-    nusched.clientList = c;
-
-    if ((msgType & NU_SC_PRENMI_MSG) && nuScPreNMIFlag) {
-        osSendMesg(mq, &nusched.prenmiMsg, OS_MESG_NOBLOCK);
-    }
-
-    osSetIntMask(mask);
-}
-
-// copy of nuScRemoveClient
-static inline void nuScRemoveClient_inline(NUScClient* client) {
-    s32 mask = osSetIntMask(OS_IM_NONE);
-    NUScClient* clientList = nusched.clientList;
-    NUScClient* prev = NULL;
-
-    while (clientList != NULL) {
-        if (clientList == client) {
-            if (prev != NULL) {
-                prev->next = clientList->next;
-            } else {
-                nusched.clientList = clientList->next;
-            }
-            break;
-        }
-        prev = clientList;
-        clientList = clientList->next;
-    }
-
-    osSetIntMask(mask);
-}
-
-// TODO: investigate why nuScAddClient and nuScRemoveClient were inlined
 void nuScWaitTaskReady(NUScTask* task) {
     NUScClient client;
     void* fb = task->framebuffer;
@@ -327,8 +279,16 @@ void nuScWaitTaskReady(NUScTask* task) {
     }
 
     while (osViGetCurrentFramebuffer() == fb || osViGetNextFramebuffer() == fb) {
-        nuScAddClient_inline(&client, &nusched.waitMQ, NU_SC_RETRACE_MSG);
+        nuScAddClient(&client, &nusched.waitMQ, NU_SC_RETRACE_MSG);
         osRecvMesg(&nusched.waitMQ, NULL, OS_MESG_BLOCK);
-        nuScRemoveClient_inline(&client);
+        nuScRemoveClient(&client);
     }
+}
+
+void nuScSetFrameBufferNum(u8 frameBufferNum) {
+    nusched.frameBufferNum = frameBufferNum;
+}
+
+s32 nuScGetFrameRate(void) {
+    return nusched.frameRate;
 }

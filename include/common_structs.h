@@ -2092,7 +2092,12 @@ typedef struct SaveGlobals {
     /* 0x34 */ s32 crc2;
     /* 0x38 */ s32 useMonoSound;
     /* 0x3C */ u32 lastFileSelected;
+#if VERSION_PAL
+    /* 0x40 */ u32 language;
+    /* 0x44 */ s8 reserved[60]; // TODO measure main_post_bss and verify
+#else
     /* 0x40 */ s8 reserved[64]; // unused
+#endif   
 } SaveGlobals; // size = 0x80
 
 typedef struct SaveMetadata {

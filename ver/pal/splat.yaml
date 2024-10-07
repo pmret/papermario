@@ -57,11 +57,11 @@ segments:
     - [0x4260, c, rumble]
     - [0x4370, c, 43F0]
     - [0x5F80, c, heap]
-    - [0x61C0, asm, fio]  # modified
-    - [0x70A0, asm, curtains]  # modified; offset uncertain
+    - [0x61C0, c, fio]
+    - [0x70A0, c, curtains]
     - [0x7650, c, crash_screen]
     - [0x8150, c, os/nusys/nusimgr]
-    - [0x8480, asm, os/nusys/nugfxtaskmgr]  # moved; is modified?
+    - [0x8480, c, os/nusys/nugfxtaskmgr, -fforce-addr]
     - [0x8880, c, load_obfuscation_shims]
     - [0x8B20, c, cam_main]
     - [0xA030, c, cam_mode_interp]
@@ -73,24 +73,24 @@ segments:
     - [0xBB70, c, cam_mode_zone_interp]
     - [0xD930, c, cam_math]
     - [0xEC10, c, game_modes]
-    - [0xEC60, asm, state_startup]  # modified
+    - [0xEC60, c, state_startup]
     - [0xEF10, c, startup_screen_fading]
     - [0xF010, c, state_battle]
     - [0xF5B0, c, state_logos]
-    - [0x10080, asm, state_pause]  # modified
-    - [0x107B0, asm, state_file_select]  # modified; offset uncertain
+    - [0x10080, c, state_pause]
+    - [0x107B0, c, state_file_select]
     - [0x11030, c, state_world]
     - [0x110F0, c, 111f0_len_860]
     - [0x11950, c, state_intro]
-    - [0x120F0, asm, state_title_screen]  # modified
+    - [0x120F0, c, state_title_screen]
     - [0x13970, c, state_demo]
     - [0x13D60, c, npc]
     - [0x1A6E0, c, encounter]
     - [0x1FA70, c, encounter_api]
-    - [0x213B0, asm, status_icons]  # modified
+    - [0x213B0, c, status_icons]
     - [0x23C60, c, 23680]
     - [0x260D0, c, 25AF0]
-    - [0x264E0, asm, audio/25f00_len_940]  # modified
+    - [0x264E0, c, audio/25f00_len_940]
     - [0x26E20, c, audio/sfx_player]
     - [0x28EF0, c, audio/28910_len_5090]
     - [0x2C570, c, audio/2BF90]
@@ -102,45 +102,45 @@ segments:
     - [0x33A30, c, audio/33450]
     - [0x347B0, c, audio/tables]
     - [0x347B0, c, audio/reverb]
-    - [0x35660, asm, effects]  # modified
+    - [0x35660, c, effects]
     - [0x361E0, c, world/world]
     - [0x369C0, c, collision]
     - [0x39620, c, 38F00]
     - [0x39930, c, 39210_len_aa0]
-    - [0x3A3D0, asm, os/nusys/nuboot]  # modified?
-    - [0x3A4D0, asm, os/nusys/nusched]  # modified
-    - [0x3ACE0, asm, os/nusys/nugfxfuncset]
-    - [0x3AD20, asm, os/nusys/nugfxprenmifuncset]
-    - [0x3AD60, asm, os/nusys/nugfxtaskallendwait]  # modified
-    - [0x3AD80, asm, os/nusys/nugfxsetcfb]  # modified
-    - [0x3AEA0, asm, os/nusys/nugfxdisplayoff]
-    - [0x3AED0, asm, os/nusys/nugfxdisplayon]
-    - [0x3AEF0, asm, os/nusys/nupiinit]
-    - [0x3AF30, asm, os/nusys/nupireadrom]  # modified
-    - [0x3AFF0, asm, os/nusys/nugfxinit]  # modified
-    - [0x3B0B0, asm, os/nusys/nucontinit]
-    - [0x3B0F0, asm, os/nusys/nucontdataget]  # modified
-    - [0x3B150, asm, os/nusys/nucontpakmgr]  # modified
-    - [0x3B3D0, asm, os/nusys/nucontrmbmgr]  # modified
-    - [0x3B900, asm, os/nusys/nucontrmbstart]  # modified
-    - [0x3B960, asm, os/nusys/nucontrmbcheck]
-    - [0x3BA00, asm, os/nusys/nucontrmbmodeset]  # modified
-    - [0x3BAD0, asm, os/nusys/nucontrmbforcestop]
-    - [0x3BAF0, asm, os/nusys/nucontrmbforcestopend]
-    - [0x3BB10, asm, os/nusys/nupireadromoverlay]
-    - [0x3BC20, asm, os/nusys/nugfxthread]  # modified
-    - [0x3BD40, asm, os/nusys/nugfxswapcfbfuncset]
-    - [0x3BD80, asm, os/nusys/nugfxswapcfb]
-    - [0x3BDA0, asm, os/nusys/nugfxretracewait]
-    - [0x3BE20, asm, os/nusys/code_3BE20]  # unknown
-    - [0x3BE40, asm, os/nusys/nusicallbackadd]
-    - [0x3BEE0, asm, os/nusys/nusicallbackremove]
-    - [0x3BF60, asm, os/nusys/nucontmgr]  # modified
-    - [0x3C2A0, asm, os/nusys/nucontdatalock]
-    - [0x3C300, asm, os/nusys/nucontqueryread]
+    - [0x3A3D0, c, os/nusys/nuboot]
+    - [0x3A4D0, c, os/nusys/nusched, -fforce-addr]
+    - [0x3ACE0, c, os/nusys/nugfxfuncset]
+    - [0x3AD20, c, os/nusys/nugfxprenmifuncset]
+    - [0x3AD60, c, os/nusys/nugfxtaskallendwait, -fforce-addr]
+    - [0x3AD80, c, os/nusys/nugfxsetcfb, -fforce-addr]
+    - [0x3AEA0, c, os/nusys/nugfxdisplayoff]
+    - [0x3AED0, c, os/nusys/nugfxdisplayon]
+    - [0x3AEF0, c, os/nusys/nupiinit]
+    - [0x3AF30, c, os/nusys/nupireadrom]
+    - [0x3AFF0, c, os/nusys/nugfxinit, -fforce-addr]
+    - [0x3B0B0, c, os/nusys/nucontinit]
+    - [0x3B0F0, c, os/nusys/nucontdataget, -fforce-addr]
+    - [0x3B150, c, os/nusys/nucontpakmgr, -fforce-addr]
+    - [0x3B3D0, c, os/nusys/nucontrmbmgr, -fforce-addr]
+    - [0x3B900, c, os/nusys/nucontrmbstart, -fforce-addr]
+    - [0x3B960, c, os/nusys/nucontrmbcheck]
+    - [0x3BA00, c, os/nusys/nucontrmbmodeset, -fforce-addr]
+    - [0x3BAD0, c, os/nusys/nucontrmbforcestop]
+    - [0x3BAF0, c, os/nusys/nucontrmbforcestopend]
+    - [0x3BB10, c, os/nusys/nupireadromoverlay]
+    - [0x3BC20, c, os/nusys/nugfxthread, -fforce-addr]
+    - [0x3BD40, c, os/nusys/nugfxswapcfbfuncset]
+    - [0x3BD80, c, os/nusys/nugfxswapcfb]
+    - [0x3BDA0, c, os/nusys/nugfxretracewait]
+    - [0x3BE20, c, os/nusys/nugfxsetucodefifo]
+    - [0x3BE40, c, os/nusys/nusicallbackadd]
+    - [0x3BEE0, c, os/nusys/nusicallbackremove]
+    - [0x3BF60, c, os/nusys/nucontmgr, -fforce-addr]
+    - [0x3C2A0, c, os/nusys/nucontdatalock]
+    - [0x3C300, c, os/nusys/nucontqueryread]
     - [0x3C320, hasm, os/osSetIntMask]
     - [0x3C3C0, c, os/pimgr, gcc_272 -O3]
-    - [0x3C550, asm, os/epirawdma, gcc_272 -O3]  # modified
+    - [0x3C550, c, os/epirawdma, gcc_272 -O3]
     - [0x3C8D0, c, os/epiwrite, gcc_272 -O3]
     - [0x3C930, c, os/epiread, gcc_272 -O3]
     - [0x3C990, c, os/epidma, gcc_272 -O3]
@@ -320,39 +320,58 @@ segments:
     - [0x4C910, .data, background_gfx]
     - [0x4C970, .data, rumble]
     - [0x4C980, .data, 43F0]
-    - [0x4CCE0, data, fio]
-    - [0x4CCF0, data, curtains]  # modified
+    - [0x4CCE0, .data, fio]
+    - [0x4CCF0, .data, curtains]
+    - start: 0x4CCF0
+      type: .data
+      name: curtains
+      subsegments:
+      - [0x4CCF0, i4, theater/walls, 16, 32]
+      - [0x4CDF0]
+      - [0x4CE40, rgba32, theater/curtains, 32, 32] #TODO: flip
+      - [0x4DE40]
+      - [0x4DE90, ci4, theater/floor, 32, 16] #TODO: flip
+      - [0x4DF90, palette, theater/floor]
+      - [0x4DFB0]
+      - [0x4E030, vtx, theater/left_wall_vtx]
+      - [0x4E090, vtx, theater/right_wall_vtx]
+      - [0x4E0F0, vtx, theater/floor_vtx]
+      - [0x4E280, vtx, theater/left_inset_shadow_vtx]
+      - [0x4E2C0, vtx, theater/right_inset_shadow_vtx]
+      - [0x4E300, vtx, theater/curtain_vtx]
+      - [0x4E4F0, vtx, theater/wall_shadows_vtx]
+      - [0x4E570]
     - [0x4E920, .data, crash_screen]
     - [0x4EB00, .data, os/nusys/nusimgr]
-    - [0x4EB10, data, os/nusys/nugfxtaskmgr]  # new; is modified?
+    - [0x4EB10, .data, os/nusys/nugfxtaskmgr]
     - [0x4EB30, .data, cam_math]
     - [0x4EB40, .data, game_modes]
     - [0x4EFC0, .data, state_battle]
     - [0x4EFD0, .data, state_logos]
-    - [0x4F010, data, state_pause]  # modified
-    - [0x4F0D0, data, state_file_select]
-    - [0x4F110, data, state_title_screen]  # modified
+    - [0x4F010, .data, state_pause]
+    - [0x4F0D0, .data, state_file_select]
+    - [0x4F110, .data, state_title_screen]
     - [0x4F280, .data, state_demo]
     - [0x4F390, .data, npc]
     - [0x4F3E0, .data, encounter]
-    - [0x4F900, data, status_icons]
-    - [0x4F910, data, audio/25f00_len_940]
+    - [0x4F900, .data, status_icons]
+    - [0x4F910, .data, audio/25f00_len_940]
     - [0x4F930, .data, audio/sfx_player]
     - [0x50550, .data, audio/30450]
     - [0x505F0, .data, audio/31650]
     - [0x50600, .data, audio/33450]
     - [0x50700, .data, audio/tables]
     - [0x56780, .data, audio/reverb]
-    - [0x569B0, data, effects]
+    - [0x569B0, .data, effects]
     - [0x576C0, .data, 5B320]
     - [0x67700, .data, world/world]
     - [0x6AE60, .data, 38F00]
-    - [0x6B320, data, os/nusys/nusched]
-    - [0x6B340, data, os/nusys/nugfxinit]
-    - [0x6B440, data, os/nusys/nucontpakmgr]
-    - [0x6B480, data, os/nusys/nucontrmbmgr]
-    - [0x6B4B0, data, os/nusys/nugfxthread]
-    - [0x6B4C0, data, os/nusys/nucontmgr]
+    - [0x6B320, .data, os/nusys/nusched]
+    - [0x6B340, .data, os/nusys/nugfxinit]
+    - [0x6B440, .data, os/nusys/nucontpakmgr]
+    - [0x6B480, .data, os/nusys/nucontrmbmgr]
+    - [0x6B4B0, .data, os/nusys/nugfxthread]
+    - [0x6B4C0, .data, os/nusys/nucontmgr]
     - [0x6B4F0, .data, os/pimgr]
     - [0x6B520, .data, os/cartrominit]
     - [0x6B530, .data, os/piacs]
@@ -386,20 +405,20 @@ segments:
     - [0x6F520, .rodata, is_debug]
     - [0x6F538, .rodata, main_loop]
     - [0x6F550, .rodata, 43F0]
-    - [0x6F5F0, rodata, curtains]
+    - [0x6F5F0, .rodata, curtains]
     - [0x6F620, .rodata, crash_screen]
     - [0x6F9D0, .rodata, cam_main]
     - [0x6FA00, .rodata, cam_mode_zone_interp]
     - [0x6FA70, .rodata, cam_math]
     - [0x6FA80, .rodata, state_logos]
-    - [0x6FAD8, rodata, state_file_select]  # modified?
+    - [0x6FAD8, .rodata, state_file_select]
     - [0x6FAF8, .rodata, 111f0_len_860]
     - [0x6FB28, .rodata, state_intro]
-    - [0x6FB68, rodata, state_title_screen]  # modified?
+    - [0x6FB68, .rodata, state_title_screen]
     - [0x6FBD0, .rodata, state_demo]
     - [0x6FC50, .rodata, npc]
     - [0x6FDC0, .rodata, encounter]
-    - [0x6FE80, rodata, status_icons]
+    - [0x6FE80, .rodata, status_icons]
     - [0x6FEE0, .rodata, 23680]
     - [0x70090, .rodata, audio/28910_len_5090]
     - [0x700C0, .rodata, audio/2e230_len_2190]
@@ -424,37 +443,37 @@ segments:
     - [0x71810, .rodata, gcc/udivdi3]
     - [0x71910, .rodata, gcc/umoddi3]
     - [0x71A10, .rodata, battle/battle]
-    - { type: bss, vram: 0x80096980, name: bss/main_pre_bss }  # modified
+    - { type: bss, vram: 0x80096980, name: bss/main_pre_bss }
     - { type: .bss, vram: 0x80096A70, name: main_loop }
     - { type: .bss, vram: 0x80096A80, name: input }
-    - { type: bss, vram: 0x80096A90, name: fio }  # modified?
-    - { type: bss, vram: 0x80097E70, name: curtains }  # modified?
+    - { type: .bss, vram: 0x80096A90, name: fio }
+    - { type: .bss, vram: 0x800991F0, name: curtains }
     - { type: .bss, vram: 0x8009A290, name: crash_screen }
     - { type: .bss, vram: 0x8009AC70, name: os/nusys/nusimgr }
-    - { type: bss, vram: 0x8009CE40, name: os/nusys/nugfxtaskmgr }
+    - { type: .bss, vram: 0x8009CE40, name: os/nusys/nugfxtaskmgr }
     - { type: .bss, vram: 0x8009F020, name: cam_mode_zone_interp }
     - { type: .bss, vram: 0x8009F050, name: game_modes }
     - { type: .bss, vram: 0x8009F060, name: state_battle }
     - { type: .bss, vram: 0x8009F070, name: state_logos }
-    - { type: bss, vram: 0x8009F080, name: state_pause }
-    - { type: bss, vram: 0x8009F090, name: state_file_select }
+    - { type: .bss, vram: 0x8009F080, name: state_pause }
+    - { type: .bss, vram: 0x8009F090, name: state_file_select }
     - { type: .bss, vram: 0x8009F0A0, name: 111f0_len_860 }
     - { type: .bss, vram: 0x8009F0B0, name: state_intro }
-    - { type: bss, vram: 0x8009F0D0, name: state_title_screen }
+    - { type: .bss, vram: 0x8009F0D0, name: state_title_screen }
     - { type: .bss, vram: 0x8009F100, name: npc }
     - { type: .bss, vram: 0x8009F310, name: encounter }
-    - { type: bss, vram: 0x8009F330, name: status_icons }
-    - { type: bss, vram: 0x8009F6C0, name: audio/25f00_len_940 }
+    - { type: .bss, vram: 0x8009F330, name: status_icons }
+    - { type: .bss, vram: 0x8009F6C0, name: audio/25f00_len_940 }
     - { type: .bss, vram: 0x800A2740, name: audio/28910_len_5090 }
     - { type: .bss, vram: 0x800A2750, name: audio/31650 }
-    - { type: bss, vram: 0x800A2770, name: effects }
+    - { type: .bss, vram: 0x800A2770, name: effects }
     - { type: .bss, vram: 0x800A2950, name: world/world }
     - { type: .bss, vram: 0x800A29A0, name: collision }
-    - { type: bss, vram: 0x800A29E0, name: os/nusys/nuboot }
-    - { type: bss, vram: 0x800A4D40, name: os/nusys/nusched }
-    - { type: bss, vram: 0x800AAD40, name: os/nusys/nupiinit }
-    - { type: bss, vram: 0x800AAE20, name: os/nusys/nugfxthread }
-    - { type: bss, vram: 0x800ACE40, name: os/nusys/nucontmgr }
+    - { type: .bss, vram: 0x800A29E0, name: os/nusys/nuboot }
+    - { type: .bss, vram: 0x800A4D40, name: os/nusys/nusched }
+    - { type: .bss, vram: 0x800AAD40, name: os/nusys/nupiinit }
+    - { type: .bss, vram: 0x800AAE20, name: os/nusys/nugfxthread }
+    - { type: .bss, vram: 0x800ACE40, name: os/nusys/nucontmgr }
     - { type: .bss, vram: 0x800ACE50, name: os/pimgr }
     - { type: .bss, vram: 0x800AE020, name: os/piacs }
     - { type: .bss, vram: 0x800AE030, name: os/sptask }
@@ -1411,6 +1430,7 @@ segments:
     start: 0x1672D0
     vram: 0x8027AA10
     subsegments:
+    - [auto, c, pause_gfx_en]
     - start: 0x1672D0
       type: .data
       name: pause_gfx_en
@@ -1431,10 +1451,91 @@ segments:
       - [0x168B50, palette,    available]
       - [0x168D50, ci4,        prompt_check_abilities, 128, 16]
       - [0x169150, palette,    prompt_check_abilities]
-      - [0x00169350]
-  - [0x169350, bin, pause_gfx_de] # TODO: German
-  - [0x16B3D0, bin, pause_gfx_fr] # TODO: French
-  - [0x16D450, bin, pause_gfx_es] # TODO: Spanish
+      - [0x169350]
+  - type: code
+    dir: pause
+    name: pause_gfx_de
+    start: 0x169350
+    vram: 0x8027AA10
+    subsegments:
+    - [auto, c, pause_gfx_de]
+    - start: 0x169350
+      type: .data
+      name: pause_gfx_de
+      subsegments:
+      - [0x169350, ci4,        banner_hp_de, 64, 16]
+      - [0x169550, palette,    banner_hp_de]
+      - [0x169750, ci4,        banner_fp_de, 64, 16]
+      - [0x169950, palette,    banner_fp_de]
+      - [0x169B50, ci4,        banner_bp_de, 64, 16]
+      - [0x169D50, palette,    banner_bp_de]
+      - [0x169F50, ci4,        banner_boots_de, 48, 16]
+      - [0x16A0D0, palette,    banner_boots_de]
+      - [0x16A2D0, ci4,        banner_hammer_de, 48, 16]
+      - [0x16A450, palette,    banner_hammer_de]
+      - [0x16A650, ci4,        banner_star_energy_de, 48, 16]
+      - [0x16A7D0, palette,    banner_star_energy_de]
+      - [0x16A9D0, ci4,        available_de, 64, 16]
+      - [0x16ABD0, palette,    available_de]
+      - [0x16ADD0, ci4,        prompt_check_abilities_de, 128, 16]
+      - [0x16B1D0, palette,    prompt_check_abilities_de]
+      - [0x16B3D0]
+  - type: code
+    dir: pause
+    name: pause_gfx_fr
+    start: 0x16B3D0
+    vram: 0x8027AA10
+    subsegments:
+    - [auto, c, pause_gfx_fr]
+    - start: 0x16B3D0
+      type: .data
+      name: pause_gfx_fr
+      subsegments:
+      - [0x16B3D0, ci4,        banner_hp_fr, 64, 16]
+      - [0x16B5D0, palette,    banner_hp_fr]
+      - [0x16B7D0, ci4,        banner_fp_fr, 64, 16]
+      - [0x16B9D0, palette,    banner_fp_fr]
+      - [0x16BBD0, ci4,        banner_bp_fr, 64, 16]
+      - [0x16BDD0, palette,    banner_bp_fr]
+      - [0x16BFD0, ci4,        banner_boots_fr, 48, 16]
+      - [0x16C150, palette,    banner_boots_fr]
+      - [0x16C350, ci4,        banner_hammer_fr, 48, 16]
+      - [0x16C4D0, palette,    banner_hammer_fr]
+      - [0x16C6D0, ci4,        banner_star_energy_fr, 48, 16]
+      - [0x16C850, palette,    banner_star_energy_fr]
+      - [0x16CA50, ci4,        available_fr, 64, 16]
+      - [0x16CC50, palette,    available_fr]
+      - [0x16CE50, ci4,        prompt_check_abilities_fr, 128, 16]
+      - [0x16D250, palette,    prompt_check_abilities_fr]
+      - [0x16D450]
+  - type: code
+    dir: pause
+    name: pause_gfx_es
+    start: 0x16D450
+    vram: 0x8027AA10
+    subsegments:
+    - [auto, c, pause_gfx_es]
+    - start: 0x16D450
+      type: .data
+      name: pause_gfx_es
+      subsegments:
+      - [0x16D450, ci4,        banner_hp_es, 64, 16]
+      - [0x16D650, palette,    banner_hp_es]
+      - [0x16D850, ci4,        banner_fp_es, 64, 16]
+      - [0x16DA50, palette,    banner_fp_es]
+      - [0x16DC50, ci4,        banner_bp_es, 64, 16]
+      - [0x16DE50, palette,    banner_bp_es]
+      - [0x16E050, ci4,        banner_boots_es, 48, 16]
+      - [0x16E1D0, palette,    banner_boots_es]
+      - [0x16E3D0, ci4,        banner_hammer_es, 48, 16]
+      - [0x16E550, palette,    banner_hammer_es]
+      - [0x16E750, ci4,        banner_star_energy_es, 48, 16]
+      - [0x16E8D0, palette,    banner_star_energy_es]
+      - [0x16EAD0, ci4,        available_es, 64, 16]
+      - [0x16ECD0, palette,    available_es]
+      - [0x16EED0, ci4,        prompt_check_abilities_es, 128, 16]
+      - [0x16F2D0, palette,    prompt_check_abilities_es]
+      - [0x16F4D0]
 
   - type: code
     dir: filemenu
@@ -1481,13 +1582,86 @@ segments:
     - [auto, rgba16,  logo_nintendo, 256, 48]
   - [0x227080, ci8,     title/bg_1, 264, 162]
   - [0x231790, palette, title/bg_1]
-
-  - [0x231990, bin]
-
-  - type: bin
-    name: titlemenu_flags
+  - [0x231990, ci8,     title/bg_2, 264, 162]
+  - [0x23C0A0, palette, title/bg_2]
+  - [0x23C2A0, ci8,     title/bg_3, 264, 162]
+  - [0x2469B0, palette, title/bg_3]
+  - [0x246BB0, ci8,     title/bg_4, 264, 162]
+  - [0x2512C0, palette, title/bg_4]
+  - [0x2514C0, ia8,     title/tape, 128, 128]
+  - [0x2554C0, ci8,     title/bowser_silhouette, 128, 128]
+  - [0x2594C0, palette, title/bowser_silhouette]
+  - name: titlemenu
+    type: code
+    vram: 0
+    start: 0x2596C0
+    subsegments:
+    - [auto, c, titlemenu]
+    - type: .data
+      name: titlemenu
+      subsegments:
+      - [0x2596E8, ia8, title/start_game, 96, 16]
+      - [0x259CE8]
+      - [0x259CF0, ia8, title/languages, 88, 16]
+      - [0x25A270]
+      - [0x25A278, ia8, title/start_game_de, 88, 16]
+      - [0x25A7F8]
+      - [0x25A800, ia8, title/languages_de, 80, 16]
+      - [0x25AD00]
+      - [0x25AD08, ia8, title/start_game_fr, 144, 16]
+      - [0x25B608]
+      - [0x25B610, ia8, title/languages_fr, 64, 16]
+      - [0x25BA10]
+      - [0x25BA18, ia8, title/start_game_es, 120, 16]
+      - [0x25C198]
+      - [0x25C1A0, ia8, title/languages_es, 64, 16]
+  # These imgs should be individually split as 16x16 each flag
+  # but for convenience we'll combine them seperate by frames
+  - name: titlemenu_flags
+    dir: title/flags
+    type: code
     start: 0x25C5A0
-    # TODO: split into images
+    subsegments:
+    - [auto, rgba16, flags_0, 16, 64]
+    - [auto, rgba16, flags_1, 16, 64]
+    - [auto, rgba16, flags_2, 16, 64]
+    - [auto, rgba16, flags_3, 16, 64]
+    - [auto, rgba16, flags_4, 16, 64]
+    - [auto, rgba16, flags_5, 16, 64]
+    - [auto, rgba16, flags_6, 16, 64]
+    - [auto, rgba16, flags_7, 16, 64]
+    - [auto, rgba16, flags_8, 16, 64]
+    - [auto, rgba16, flags_9, 16, 64]
+    - [auto, rgba16, flags_10, 16, 64]
+    - [auto, rgba16, flags_11, 16, 64]
+    - [auto, rgba16, flags_12, 16, 64]
+    - [auto, rgba16, flags_13, 16, 64]
+    - [auto, rgba16, flags_14, 16, 64]
+    - [auto, rgba16, flags_15, 16, 64]
+    - [auto, rgba16, flags_16, 16, 64]
+    - [auto, rgba16, flags_17, 16, 64]
+    - [auto, rgba16, flags_18, 16, 64]
+    - [auto, rgba16, flags_19, 16, 64]
+    - [auto, rgba16, flags_20, 16, 64]
+    - [auto, rgba16, flags_21, 16, 64]
+    - [auto, rgba16, flags_22, 16, 64]
+    - [auto, rgba16, flags_23, 16, 64]
+    - [auto, rgba16, flags_24, 16, 64]
+    - [auto, rgba16, flags_25, 16, 64]
+    - [auto, rgba16, flags_26, 16, 64]
+    - [auto, rgba16, flags_27, 16, 64]
+    - [auto, rgba16, flags_28, 16, 64]
+    - [auto, rgba16, flags_29, 16, 64]
+    - [auto, rgba16, flags_30, 16, 64]
+    - [auto, rgba16, flags_31, 16, 64]
+    - [auto, rgba16, flags_32, 16, 64]
+    - [auto, rgba16, flags_33, 16, 64]
+    - [auto, rgba16, flags_34, 16, 64]
+    - [auto, rgba16, flags_35, 16, 64]
+    - [auto, rgba16, flags_36, 16, 64]
+    - [auto, rgba16, flags_37, 16, 64]
+    - [auto, rgba16, flags_38, 16, 64]
+    - [auto, rgba16, flags_39, 16, 64]
 
   - start: 0x2705A0
     type: pm_imgfx_data
@@ -1548,7 +1722,10 @@ segments:
     subsegments:
     - [auto, c, obfuscation_shims]
 
-  - [0x33BDD0, bin]
+  - [0x33BDD0, ia8, ui/no_controller, 128, 32]
+  - [0x33CDD0, ia8, ui/no_controller_de, 128, 32]
+  - [0x33DDD0, ia8, ui/no_controller_fr, 128, 32]
+  - [0x33EDD0, ia8, ui/no_controller_es, 128, 32]
 
   - type: code
     dir: world/partner

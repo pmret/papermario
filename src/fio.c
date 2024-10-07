@@ -11,6 +11,9 @@ typedef struct SaveInfo {
 #define GLOBALS_PAGE_2 7
 
 BSS SaveData FetchSaveBuffer;
+#if VERSION_PAL
+BSS SaveData SaveCheckBuffer;
+#endif
 BSS SaveInfo LogicalSaveInfo[4];  // 4 save slots presented to the player
 BSS SaveInfo PhysicalSaveInfo[6]; // 6 saves as represented on the EEPROM
 BSS s32 NextAvailablePhysicalSave;
@@ -24,7 +27,37 @@ void fio_deserialize_state(void);
 void fio_serialize_state(void);
 b32 fio_read_flash(s32 pageNum, void* readBuffer, u32 numBytes);
 b32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes);
-void fio_erase_flash(s32 pageNum);
+s32 fio_erase_flash(s32 pageNum);
+
+#if VERSION_PAL
+b32 save_check_integrity(void) {
+    u32 i;
+    s32 *it = (s32*)&gCurrentSaveFile;
+    s32 *it2 = (s32*)&FetchSaveBuffer;
+
+    for (i = 0; i < sizeof(gCurrentSaveFile) / sizeof(*it); i++, it++, it2++) { 
+        if (*it != *it2) {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+b32 check_fetch_save_integrity(void) {
+    u32 i;
+    s32 *it = (s32*)&FetchSaveBuffer;
+    s32 *it2 = (s32*)&SaveCheckBuffer;
+
+    for (i = 0; i < sizeof(FetchSaveBuffer) / sizeof(*it); i++, it++, it2++) { 
+        if (*it != *it2) {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+#endif
 
 s32 get_spirits_rescued(void) {
     s32 storyProgress = evt_get_variable(NULL, GB_StoryProgress);
@@ -123,6 +156,9 @@ b32 fio_validate_file_checksum(SaveData* saveData) {
 
 b32 fio_fetch_saved_file_info(void) {
     SaveData* fetchBuf = &FetchSaveBuffer; // temps required to match
+#if VERSION_PAL
+    SaveData* checkBuf = &SaveCheckBuffer;
+#endif
     SaveData* validBuf = fetchBuf;
     s32 i, j, minSaveCount;
 
@@ -132,6 +168,27 @@ b32 fio_fetch_saved_file_info(void) {
     }
 
     for (i = 0; i < ARRAY_COUNT(PhysicalSaveInfo); i++) {
+#if VERSION_PAL
+        for (j = 0; j < 4; j++) {
+            fio_read_flash(i, fetchBuf, sizeof(SaveData));
+            fio_read_flash(i, checkBuf, sizeof(SaveData));
+            if (!check_fetch_save_integrity()) {
+                break;
+            }
+        }
+        if (fio_validate_file_checksum(fetchBuf) && j != 4) {
+            PhysicalSaveInfo[i].slot = validBuf->saveSlot;
+            PhysicalSaveInfo[i].count = validBuf->saveCount;
+            // logical saves only track the most recent physical save for each slot
+            if (LogicalSaveInfo[validBuf->saveSlot].count < validBuf->saveCount) {
+                LogicalSaveInfo[validBuf->saveSlot].slot = i;
+                LogicalSaveInfo[validBuf->saveSlot].count = validBuf->saveCount;
+            }
+        } else {
+            PhysicalSaveInfo[i].count = 0;
+            PhysicalSaveInfo[i].slot = 99;
+        }
+#else
         fio_read_flash(i, fetchBuf, sizeof(SaveData));
         if (fio_validate_file_checksum(fetchBuf)) {
             PhysicalSaveInfo[i].slot = validBuf->saveSlot;
@@ -142,6 +199,7 @@ b32 fio_fetch_saved_file_info(void) {
                 LogicalSaveInfo[validBuf->saveSlot].count = validBuf->saveCount;
             }
         }
+#endif
     }
 
     minSaveCount = 0x7FFFFFFF;
@@ -165,8 +223,34 @@ b32 fio_fetch_saved_file_info(void) {
 }
 
 b32 fio_load_game(s32 saveSlot) {
+#if VERSION_PAL
+    int i;
+    SaveData *saveData = &gCurrentSaveFile;
+    SaveData *temp = saveData;
+#endif
+
     gGameStatusPtr->saveSlot = saveSlot;
 
+#if VERSION_PAL
+    for (i = 0; i < 4; i++){
+        fio_fetch_saved_file_info();
+        if (LogicalSaveInfo[saveSlot].slot < 0) {
+            continue;
+        }
+        fio_read_flash(LogicalSaveInfo[saveSlot].slot, saveData, sizeof(SaveData));
+        if (fio_validate_file_checksum(saveData)) {
+            break;
+        }
+    }
+
+    if (i != 4) {
+        if (gGameStatusPtr->saveCount < temp->saveCount) {
+            gGameStatusPtr->saveCount = temp->saveCount;
+        }
+        fio_deserialize_state();
+        return TRUE;
+    }
+#else
     fio_fetch_saved_file_info();
     fio_read_flash(LogicalSaveInfo[saveSlot].slot, &gCurrentSaveFile, sizeof(SaveData));
 
@@ -177,29 +261,47 @@ b32 fio_load_game(s32 saveSlot) {
         fio_deserialize_state();
         return TRUE;
     }
+#endif
     return FALSE;
 }
 
 void fio_save_game(s32 saveSlot) {
+    SaveData* saveData = &gCurrentSaveFile;
+#if VERSION_PAL
+    int i;
+#endif
+
     fio_fetch_saved_file_info();
 
     gGameStatusPtr->saveSlot = saveSlot;
 
     fio_serialize_state();
 
-    strcpy(gCurrentSaveFile.magicString, MagicSaveString);
+    strcpy(saveData->magicString, MagicSaveString);
 
-    gCurrentSaveFile.saveSlot = saveSlot;
+    saveData->saveSlot = saveSlot;
     gGameStatusPtr->saveCount++;
-    gCurrentSaveFile.saveCount = gGameStatusPtr->saveCount;
+    saveData->saveCount = gGameStatusPtr->saveCount;
 
-    gCurrentSaveFile.crc1 = 0;
-    gCurrentSaveFile.crc2 = ~gCurrentSaveFile.crc1;
-    gCurrentSaveFile.crc1 = fio_calc_file_checksum(&gCurrentSaveFile);
-    gCurrentSaveFile.crc2 = ~gCurrentSaveFile.crc1;
+    saveData->crc1 = 0;
+    saveData->crc2 = ~saveData->crc1;
+    saveData->crc1 = fio_calc_file_checksum(saveData);
+    saveData->crc2 = ~saveData->crc1;
 
+#if VERSION_PAL
+    for (i = 0; i < 4; i++) {
+        fio_erase_flash(NextAvailablePhysicalSave);
+        fio_write_flash(NextAvailablePhysicalSave, (s8*)saveData, sizeof(SaveData));
+        fio_read_flash(NextAvailablePhysicalSave, (s8*)&FetchSaveBuffer, sizeof(SaveData));
+
+        if (!save_check_integrity()) {
+            break;
+        }
+    }
+#else
     fio_erase_flash(NextAvailablePhysicalSave);
-    fio_write_flash(NextAvailablePhysicalSave, (s8*)&gCurrentSaveFile, sizeof(SaveData));
+    fio_write_flash(NextAvailablePhysicalSave, (s8*)saveData, sizeof(SaveData));
+#endif
 }
 
 void fio_erase_game(s32 saveSlot) {
@@ -213,6 +315,10 @@ void fio_erase_game(s32 saveSlot) {
         }
     }
 }
+
+#if VERSION_PAL
+INCLUDE_ASM(s32, "fio", func_PAL_8002B574, void);
+#endif
 
 void fio_deserialize_state(void) {
     SaveData* saveData = &gCurrentSaveFile;
@@ -337,6 +443,21 @@ b32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes) {
     return TRUE;
 }
 
-void fio_erase_flash(s32 pageNum) {
+s32 fio_erase_flash(s32 pageNum) {
+#if VERSION_PAL
+    int i;
+    s32 success;
+
+    for (i = 0; i < 4; i++) {
+        success = osFlashSectorErase(pageNum * sizeof(SaveGlobals));
+
+        if (!success) {
+            break;
+        }
+    }
+
+    return success;
+#else
     osFlashSectorErase(pageNum * sizeof(SaveGlobals));
+#endif
 }
