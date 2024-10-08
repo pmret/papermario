@@ -216,7 +216,7 @@ EvtScript N(D_8024652C_B26A6C) = {
 };
 
 EvtScript N(EVS_802467AC) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_karada, TRUE)
     Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(unkAngleFunc002)), NULL)
     Call(SetModelCustomGfx, MODEL_karada, CUSTOM_GFX_1, -1)

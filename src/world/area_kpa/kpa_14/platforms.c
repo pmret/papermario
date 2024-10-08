@@ -44,7 +44,7 @@ API_CALLABLE(N(IsPartnerLakilester)) {
 }
 
 EvtScript N(EVS_SetupPlatforms) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Call(ParentColliderToModel, COLLIDER_o852, MODEL_o860)
     Set(LVar0, 0)
     Set(LVar3, 0)

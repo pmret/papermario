@@ -353,7 +353,7 @@ API_CALLABLE(N(UseAbility)) {
             y = playerStatus->pos.y + playerStatus->colliderHeight / 2.0f;
             z = playerStatus->pos.z;
             halfCollisionHeight = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].curYaw;
-            if (player_raycast_up_corners(playerStatus, &x, &y, &z, &length, halfCollisionHeight) >= 0) {
+            if (player_raycast_up_corners(playerStatus, &x, &y, &z, &length, halfCollisionHeight) > NO_COLLIDER) {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
                 N(AbilityState) = AIR_LIFT_DROP;
                 break;

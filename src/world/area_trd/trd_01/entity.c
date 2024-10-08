@@ -27,18 +27,18 @@ EvtScript N(EVS_FocusCamOnLock) = {
 #include "world/common/todo/GetEntityPosition.inc.c"
 
 EvtScript N(EVS_UnlockDoors) = {
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(ShowKeyChoicePopup)
     IfEq(LVar0, 0)
         Call(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
         Call(CloseChoicePopup)
-        ResumeGroup(EVT_GROUP_01)
+        ResumeGroup(EVT_GROUP_FLAG_INTERACT)
         Return
     EndIf
     IfEq(LVar0, -1)
         Call(CloseChoicePopup)
-        ResumeGroup(EVT_GROUP_01)
+        ResumeGroup(EVT_GROUP_FLAG_INTERACT)
         Return
     EndIf
     Call(FindKeyItem, ITEM_KOOPA_FORTRESS_KEY, LVar0)
@@ -50,7 +50,7 @@ EvtScript N(EVS_UnlockDoors) = {
     Set(LVar0, MV_Padlock_EntityIndex)
     Call(N(RemovePadlock))
     Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
     Return
     End

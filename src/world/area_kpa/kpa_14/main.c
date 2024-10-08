@@ -16,7 +16,7 @@ API_CALLABLE(N(GetActingPartner)) {
 EvtScript N(EVS_ExitWalk_kpa_13_1) = EVT_EXIT_WALK(60, kpa_14_ENTRY_0, "kpa_13", kpa_13_ENTRY_1);
 
 EvtScript N(EVS_ExitDoor_kpa_01_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, kpa_14_ENTRY_1)
     Set(LVar1, COLLIDER_deilitte)
@@ -126,7 +126,7 @@ EvtScript N(EVS_MakeSmokeEffects) = {
 };
 
 EvtScript N(EVS_SetupLavaFall) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Loop(0)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o854, COLLIDER_FLAGS_UPPER_MASK)
         Call(N(GetActingPartner))

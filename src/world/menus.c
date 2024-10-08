@@ -252,7 +252,7 @@ block_17:
                                 reset_outta_sight_alpha_on_menu_close();
                                 playerStatus->flags &= ~PS_FLAG_PAUSED;
                                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-                                set_time_freeze_mode(TIME_FREEZE_NORMAL);
+                                set_time_freeze_mode(TIME_FREEZE_NONE);
                             }
                         } else {
                             numEntries = setup_partner_popup(popup);
@@ -294,7 +294,7 @@ block_17:
                     reset_outta_sight_alpha_on_menu_close();
                     playerStatus->flags &= ~PS_FLAG_PAUSED;
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-                    set_time_freeze_mode(TIME_FREEZE_NORMAL);
+                    set_time_freeze_mode(TIME_FREEZE_NONE);
                 }
             } else {
                 WorldMenuDelay--;
@@ -374,7 +374,7 @@ block_17:
             reset_outta_sight_alpha_on_menu_close();
             playerStatus->flags &= ~PS_FLAG_PAUSED;
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-            set_time_freeze_mode(TIME_FREEZE_NORMAL);
+            set_time_freeze_mode(TIME_FREEZE_NONE);
             break;
         case WORLD_MENU_STATE_UNPAUSE:
             WorldMenuDelay--;

@@ -52,7 +52,7 @@ EvtScript N(EVS_Scene_MeetHeart) = {
 };
 
 EvtScript N(EVS_ExitDoor_arn_13_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, arn_11_ENTRY_0)
     Set(LVar1, COLLIDER_ttw)

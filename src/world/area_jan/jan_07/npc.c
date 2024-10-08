@@ -145,18 +145,18 @@ EvtScript N(EVS_NpcInit_YoshiKid) = {
 
 EvtScript N(EVS_NpcIdle_PutridPiranha) = {
 #if VERSION_PAL
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 1)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, TRUE)
 #elif VERSION_US || VERSION_IQUE
     ChildThread
         Loop(0)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             IfLt(LVar0, -190)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 1)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 1)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, TRUE)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, TRUE)
             Else
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 0)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 0)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, FALSE)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, FALSE)
             EndIf
             Wait(1)
         EndLoop
@@ -335,7 +335,7 @@ NpcData N(NpcData_PutridPiranhas)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_PutridPiranha),
         .settings = &N(NpcSettings_PutridPiranha),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
     },
@@ -344,7 +344,7 @@ NpcData N(NpcData_PutridPiranhas)[] = {
         .pos = { 80.0f, 0.0f, 20.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_PutridPiranha),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
     },
@@ -356,7 +356,7 @@ NpcData N(NpcData_YoshiKid) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_YoshiKid),
     .settings = &N(NpcSettings_YoshiKid),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = YOSHI_KID_YELLOW_ANIMS,
     .tattle = MSG_NpcTattle_YellowYoshiKid,

@@ -176,7 +176,7 @@ EvtScript N(EVS_RoomListener_MerlonHouse) = {
 };
 
 EvtScript N(EVS_SpinRoof) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Set(LVar0, 0)
     Label(0)
         AddF(LVar0, Float(3.0))

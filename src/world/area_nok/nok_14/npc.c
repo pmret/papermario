@@ -18,7 +18,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa_01) = {
         EndLoop
     EndThread
     Wait(5)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_200000, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_FLIP_INSTANTLY, TRUE)
     Thread
         Call(MakeLerp, 0, 360, 20, EASING_LINEAR)
         Label(1)
@@ -31,7 +31,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa_01) = {
     EndThread
     Call(SetNpcJumpscale, NPC_SELF, Float(0.6))
     Call(NpcJump0, NPC_SELF, -650, 75, -30, 20)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_200000, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_FLIP_INSTANTLY, FALSE)
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_KoopaTroopa_Wander)))
     Return

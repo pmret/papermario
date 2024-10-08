@@ -179,7 +179,7 @@ EvtScript N(EVS_SetupLavaPuzzle) = {
         SetF(MV_GlowIntensity, Float(0.5))
     EndIf
     Thread
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_1, NULL)
     EndThread
     Thread

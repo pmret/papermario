@@ -17,7 +17,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_TexPan_1) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Set(LVar0, 0)
     Set(LVar1, 0)
     Label(10)

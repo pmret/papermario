@@ -16,7 +16,7 @@ EvtScript N(EVS_NpcDefeat_Tutankoopa_01) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Call(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_1, TRUE)
+            Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_THUMBS_UP, TRUE)
             Call(InterpPlayerYaw, 90, 0)
             ExecWait(N(EVS_Scene_TutankoopaDefeated))
             Exec(N(EVS_SpawnStarCard))
@@ -72,7 +72,7 @@ NpcData N(NpcData_Tutankoopa)[] = {
         .initVarCount = 1,
         .initVar = { .value = 0 },
         .settings = &N(NpcSettings_Tutankoopa_01),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Tutankoopa_Idle,
@@ -98,7 +98,7 @@ NpcData N(NpcData_Tutankoopa)[] = {
         .pos = { 500.0f, -1300.0f, 316.0f },
         .yaw = 230,
         .settings = &N(NpcSettings_Tutankoopa_02),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Tutankoopa_Idle,
@@ -127,7 +127,7 @@ NpcData N(NpcData_ChainChomp) = {
     .yaw = 230,
     .init = &N(EVS_NpcInit_ChainChomp),
     .settings = &N(NpcSettings_ChainChomp),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_ChainChomp_Still,

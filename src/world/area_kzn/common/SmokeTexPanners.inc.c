@@ -3,7 +3,7 @@
 #include "world/common/atomic/TexturePan.inc.c"
 
 EvtScript N(EVS_StartTexPanner_SmokeLeft) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, LVar0, TEX_PANNER_3)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_3)
@@ -17,7 +17,7 @@ EvtScript N(EVS_StartTexPanner_SmokeLeft) = {
 };
 
 EvtScript N(EVS_StartTexPanner_SmokeRight) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, LVar0, TEX_PANNER_4)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_4)

@@ -450,7 +450,7 @@ EvtScript N(EVS_AnimBowser_DeathMain) = {
     UseArray(FakeBowserAnimState)
     Call(N(StartRumbleWithParams), 256, 30)
     Thread
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(ShakeCam, CAM_BATTLE, 0, 20, Float(3.0))
     EndThread
     Call(SetPartFlagBits, ACTOR_SELF, PRT_HEAD, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
@@ -476,35 +476,35 @@ EvtScript N(EVS_AnimBowser_DeathMain) = {
     Wait(30)
     Call(PlaySoundAtModel, MODEL_k1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
     Thread
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(ShakeCam, CAM_BATTLE, 0, 5, Float(1.0))
     EndThread
     Call(N(StartRumbleWithParams), 100, 20)
     Wait(20)
     Call(PlaySoundAtModel, MODEL_u1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
     Thread
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(ShakeCam, CAM_BATTLE, 0, 10, Float(1.5))
     EndThread
     Call(N(StartRumbleWithParams), 150, 20)
     Wait(30)
     Call(PlaySoundAtModel, MODEL_p1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
     Thread
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(ShakeCam, CAM_BATTLE, 0, 10, Float(1.0))
     EndThread
     Call(N(StartRumbleWithParams), 100, 20)
     Wait(30)
     Call(PlaySoundAtModel, MODEL_d1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
     Thread
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(ShakeCam, CAM_BATTLE, 0, 5, Float(0.7))
     EndThread
     Call(N(StartRumbleWithParams), 70, 20)
     Wait(20)
     Call(PlaySoundAtModel, MODEL_s1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
     Thread
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(ShakeCam, CAM_BATTLE, 0, 10, Float(1.0))
     EndThread
     Call(N(StartRumbleWithParams), 100, 20)
@@ -512,12 +512,12 @@ EvtScript N(EVS_AnimBowser_DeathMain) = {
     Call(PlaySoundAtModel, MODEL_km1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
     Call(N(StartRumbleWithParams), 60, 20)
     Thread
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(ShakeCam, CAM_BATTLE, 0, 5, Float(0.6))
     EndThread
     Wait(20)
     Thread
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(ShakeCam, CAM_BATTLE, 0, 5, Float(0.3))
     EndThread
     Call(N(StartRumbleWithParams), 30, 20)

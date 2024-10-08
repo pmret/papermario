@@ -127,9 +127,9 @@ EvtScript N(EVS_Starfall_Directed) = {
     #define LV_Time LVarD
     #define LV_SoundDelay LVarE
 #if VERSION_JP
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
 #else
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
 #endif
     Set(LV_Time, 0)
     Set(LV_SoundDelay, 0)
@@ -194,7 +194,7 @@ EvtScript N(EVS_Starfall_Directed) = {
 };
 
 EvtScript N(EVS_Starfall_Random) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Thread
         Label(0)
             Call(RandInt, 50, LVar0)

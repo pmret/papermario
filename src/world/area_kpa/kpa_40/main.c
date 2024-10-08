@@ -5,7 +5,7 @@ EvtScript N(EVS_ExitDoors_kpa_52_1) = EVT_EXIT_DOUBLE_DOOR(kpa_40_ENTRY_0, "kpa_
 EvtScript N(EVS_ExitWalk_kpa_40_3) = EVT_EXIT_WALK(60, kpa_40_ENTRY_1, "kpa_40", kpa_40_ENTRY_3);
 
 EvtScript N(EVS_ExitWalk_kpa_41_3) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, kpa_40_ENTRY_2)
     Exec(ExitWalk)
     Set(AB_KPA_MazeProgress, 1)

@@ -5,7 +5,7 @@
 
 EvtScript N(EVS_PushMiddleStatue_Impl) = {
 #if !VERSION_JP
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
 #endif
     Loop(20)
 #if !VERSION_JP

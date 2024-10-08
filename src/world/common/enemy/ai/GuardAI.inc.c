@@ -29,7 +29,7 @@ void N(GuardAI_IdleInit)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVo
     npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
     script->AI_TEMP_STATE = AI_STATE_GUARD_IDLE;
 
-    if (enemy->flags & ENEMY_FLAG_100000) {
+    if (enemy->flags & ENEMY_FLAG_SKIP_BATTLE) {
         npc->yaw = enemy->varTable[0];
     }
 

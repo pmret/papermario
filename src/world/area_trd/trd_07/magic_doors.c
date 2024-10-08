@@ -205,8 +205,8 @@ EvtScript N(EVS_RaiseMagicDoors) = {
             Wait(1)
             Goto(10)
         EndIf
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(DisablePlayerInput, TRUE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
@@ -243,8 +243,8 @@ EvtScript N(EVS_RaiseMagicDoors) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilite, COLLIDER_FLAGS_UPPER_MASK)
     Call(DisablePlayerInput, FALSE)
-    ResumeGroup(EVT_GROUP_01)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
 };
@@ -254,7 +254,7 @@ EvtScript N(EVS_LowerMagicDoors) = {
     Wait(15)
     Call(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
     Wait(15)
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     EVT_VEC3I_SET(LVar0, 220, 0, 0)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -286,7 +286,7 @@ EvtScript N(EVS_LowerMagicDoors) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilite, COLLIDER_FLAGS_UPPER_MASK)
     Call(DisablePlayerInput, FALSE)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
 };

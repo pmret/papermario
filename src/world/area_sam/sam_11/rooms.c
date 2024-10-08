@@ -116,18 +116,18 @@ s32 N(KeyList)[] = {
 #include "world/common/todo/GetEntityPosition.inc.c"
 
 EvtScript N(EVS_UnlockPrompt_LeftHouse) = {
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(ShowKeyChoicePopup)
     IfEq(LVar0, 0)
         Call(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
         Call(CloseChoicePopup)
-        ResumeGroup(EVT_GROUP_01)
+        ResumeGroup(EVT_GROUP_FLAG_INTERACT)
         Return
     EndIf
     IfEq(LVar0, -1)
         Call(CloseChoicePopup)
-        ResumeGroup(EVT_GROUP_01)
+        ResumeGroup(EVT_GROUP_FLAG_INTERACT)
         Return
     EndIf
     Call(RemoveKeyItemAt, LVar1)
@@ -137,7 +137,7 @@ EvtScript N(EVS_UnlockPrompt_LeftHouse) = {
     Call(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     Set(LVar0, MV_PadlockEntityID)
     Call(N(RemovePadlock))
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
     Return
     End

@@ -54,7 +54,7 @@ EvtScript N(EVS_TossTrainInToybox) = {
 };
 
 EvtScript N(EVS_ItemPrompt_ToyTrain) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(ShowKeyChoicePopup)
     Set(LVar2, LVar0)
@@ -63,7 +63,7 @@ EvtScript N(EVS_ItemPrompt_ToyTrain) = {
             Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_Toybox, 160, 40)
         EndIf
         Call(CloseChoicePopup)
-        Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+        Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf
     Call(DisablePlayerInput, TRUE)
@@ -97,7 +97,7 @@ EvtScript N(EVS_ItemPrompt_ToyTrain) = {
     Call(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_OMO_TOYBOX_LID, SOUND_SPACE_DEFAULT)
     Call(CloseChoicePopup)
     Set(GB_StoryProgress, STORY_CH4_RETURNED_TOY_TRAIN)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Unbind
     Call(GotoMap, Ref("omo_03"), omo_03_ENTRY_6)
     Wait(100)

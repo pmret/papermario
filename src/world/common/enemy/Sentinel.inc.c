@@ -5,7 +5,7 @@
 #include "world/common/enemy/ai/SentinelAI.inc.c"
 
 EvtScript N(EVS_NpcAuxAI_Sentinel) = {
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER | ENEMY_FLAG_IGNORE_SPIN, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER | ENEMY_FLAG_IGNORE_SPIN, TRUE)
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_DONT_UPDATE_SHADOW_Y | NPC_FLAG_JUMPING, TRUE)
     Return
     End
@@ -44,7 +44,7 @@ EvtScript N(EVS_NpcAI_Sentinel) = {
     Call(DisablePlayerPhysics, TRUE)
     Call(InterruptUsePartner)
     Call(DisablePartnerAI, 0)
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Add(LVar1, 20)

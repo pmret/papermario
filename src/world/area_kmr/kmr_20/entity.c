@@ -65,7 +65,7 @@ EvtScript N(EVS_UseSpring_Basement) = {
 
 EvtScript N(EVS_Luigi_JumpFromBlock) = {
     Call(DisablePlayerInput, TRUE)
-    Call(SetEnemyFlagBits, NPC_Luigi_1, ENEMY_FLAG_IGNORE_WORLD_COLLISION, 0)
+    Call(SetEnemyFlagBits, NPC_Luigi_1, ENEMY_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     Call(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_GRAVITY, TRUE)
     Call(SetNpcVar, NPC_Luigi_1, 0, 1)
     Call(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Jump)
@@ -81,7 +81,7 @@ EvtScript N(EVS_Luigi_JumpFromBlock) = {
 
 EvtScript N(EVS_Luigi_JumpFromHighBlock) = {
     Call(DisablePlayerInput, TRUE)
-    Call(SetEnemyFlagBits, NPC_Luigi_1, ENEMY_FLAG_IGNORE_WORLD_COLLISION, 0)
+    Call(SetEnemyFlagBits, NPC_Luigi_1, ENEMY_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     Call(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_GRAVITY, TRUE)
     Call(SetNpcVar, NPC_Luigi_1, 0, 1)
     Call(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Jump)

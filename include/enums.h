@@ -1904,7 +1904,7 @@ enum EncounterOutcomes {
     OUTCOME_PLAYER_LOST         = 1,
     OUTCOME_PLAYER_FLED         = 2,
     OUTCOME_ENEMY_FLED          = 3,
-    OUTCOME_4                   = 4,
+    OUTCOME_SKIP                = 4,
 };
 
 enum MerleeSpellType {
@@ -2992,11 +2992,11 @@ enum NpcPalSwapState {
     NPC_PALSWAP_HOLDING_A           = 0,
     NPC_PALSWAP_FROM_A_TO_B         = 1,
     NPC_PALSWAP_HOLDING_B           = 2,
-    NPC_PALSWAP_FROM_B_TO_A         = 3
+    NPC_PALSWAP_FROM_B_TO_A         = 3,
 };
 
 enum NpcFlags {
-    NPC_FLAG_ENABLED                        = 0x00000001, // Does nothing aside from making npc->flags !=
+    NPC_FLAG_ENABLED                        = 0x00000001, // Does nothing aside from making npc->flags != 0
     NPC_FLAG_INVISIBLE                      = 0x00000002, // NPC will not be drawn or cause surface effects while moving
     NPC_FLAG_INACTIVE                       = 0x00000004, // NPC will not render, move, or have collisions with other NPCs. They may still be interacted with.
     NPC_FLAG_FLYING                         = 0x00000008,
@@ -3017,15 +3017,15 @@ enum NpcFlags {
     NPC_FLAG_IGNORE_CAMERA_FOR_YAW          = 0x00040000, // Do not adjust renderYaw to face the camera
     NPC_FLAG_REFLECT_FLOOR                  = 0x00080000, // Mirror rendering across y=0
     NPC_FLAG_MOTION_BLUR                    = 0x00100000, // Gives motion blur effect as NPC moves. Set by enable_npc_blur
-    NPC_FLAG_200000                         = 0x00200000,
+    NPC_FLAG_FLIP_INSTANTLY                 = 0x00200000, // Flip instantly when changing facing direction
     NPC_FLAG_TOUCHES_GROUND                 = 0x00400000, // Can cause effects to play when touching special surface types
     NPC_FLAG_HIDING                         = 0x00800000,
     NPC_FLAG_HAS_NO_SPRITE                  = 0x01000000,
     NPC_FLAG_COLLIDING_WITH_NPC             = 0x02000000,
     NPC_FLAG_PARTNER                        = 0x04000000,
     NPC_FLAG_WORLD_COLLISION_DIRTY          = 0x08000000,
-    NPC_FLAG_10000000                       = 0x10000000,
-    NPC_FLAG_20000000                       = 0x20000000,
+    NPC_FLAG_USE_INSPECT_ICON               = 0x10000000, // Approaching this NPC will cause a red ! to appear.
+    NPC_FLAG_RAYCAST_TO_INTERACT            = 0x20000000, // Intended to require a line of sight raycast before conversations can be triggered. Seems bugged.
     NPC_FLAG_NO_ANIMS_LOADED                = 0x40000000, // Npc has no animations loaded
     NPC_FLAG_SUSPENDED                      = 0x80000000,
 };
@@ -3455,14 +3455,14 @@ enum AnyEnemyAnims {
     ENEMY_ANIM_F            = 0x210,
 };
 
-enum FirstStrikes {
+enum FirstStrikeType {
     FIRST_STRIKE_NONE           = 0,
     FIRST_STRIKE_PLAYER         = 1,
     FIRST_STRIKE_ENEMY          = 2,
 };
 
 enum TimeFreezeMode {
-    TIME_FREEZE_NORMAL          = 0,
+    TIME_FREEZE_NONE            = 0,
     TIME_FREEZE_PARTIAL         = 1,
     TIME_FREEZE_FULL            = 2,
     TIME_FREEZE_POPUP_MENU      = 3,
@@ -4520,8 +4520,8 @@ enum MapRoomNotifications {
 
 enum EnemyFlags {
     ENEMY_FLAG_PASSIVE                  = 0x00000001, // Not hostile; collision does not trigger battle
-    ENEMY_FLAG_2                        = 0x00000002, // Unused
-    ENEMY_FLAG_4                        = 0x00000004,
+    ENEMY_FLAG_UNUSED_2                 = 0x00000002, // Unused
+    ENEMY_FLAG_DO_NOT_KILL              = 0x00000004, // Enemy will not be killed after being defeated in battle
     ENEMY_FLAG_ENABLE_HIT_SCRIPT        = 0x00000008,
     ENEMY_FLAG_FLED                     = 0x00000010,
     ENEMY_FLAG_DISABLE_AI               = 0x00000020, // Disable movement AI and collision (idle animation plays)
@@ -4534,14 +4534,14 @@ enum EnemyFlags {
     ENEMY_FLAG_GRAVITY                  = 0x00001000,
     ENEMY_FLAG_NO_SHADOW_RAYCAST        = 0x00002000,
     ENEMY_FLAG_HAS_NO_SPRITE            = 0x00004000,
-    ENEMY_FLAG_8000                     = 0x00008000, // Corresponds with NPC_FLAG_10000000
-    ENEMY_FLAG_10000                    = 0x00010000, // Corresponds with NPC_FLAG_20000000
+    ENEMY_FLAG_USE_INSPECT_ICON         = 0x00008000, // Corresponds with NPC_FLAG_USE_INSPECT_ICON
+    ENEMY_FLAG_RAYCAST_TO_INTERACT      = 0x00010000, // Intended to require a line of sight raycast before conversations can be triggered. Seems bugged. Corresponds with NPC_FLAG_RAYCAST_TO_INTERACT
     ENEMY_FLAG_USE_PLAYER_SPRITE        = 0x00020000, // Used for Peach NPCs
-    ENEMY_FLAG_40000                    = 0x00040000,
-    ENEMY_FLAG_80000                    = 0x00080000,
-    ENEMY_FLAG_100000                   = 0x00100000,
+    ENEMY_FLAG_NO_DELAY_AFTER_FLEE      = 0x00040000,
+    ENEMY_FLAG_DONT_SUSPEND_SCRIPTS     = 0x00080000, // Do not suspend ai/aux scripts when aiSuspendTime != 0
+    ENEMY_FLAG_SKIP_BATTLE              = 0x00100000,
     ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN   = 0x00200000,
-    ENEMY_FLAG_400000                   = 0x00400000,
+    ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER  = 0x00400000,
     ENEMY_FLAG_NO_DROPS                 = 0x00800000, // Do not drop hearts, flowers, or coins on defeat
     ENEMY_FLAG_IGNORE_TOUCH             = 0x01000000,
     ENEMY_FLAG_IGNORE_JUMP              = 0x02000000,
@@ -4553,12 +4553,17 @@ enum EnemyFlags {
     ENEMY_FLAG_SUSPENDED                = 0x80000000,
 };
 
-#define COMMON_PASSIVE_FLAGS \
-      ENEMY_FLAG_PASSIVE \
-    | ENEMY_FLAG_ENABLE_HIT_SCRIPT \
+#define BASE_PASSIVE_FLAGS \
+    ( ENEMY_FLAG_PASSIVE \
     | ENEMY_FLAG_IGNORE_WORLD_COLLISION \
     | ENEMY_FLAG_IGNORE_ENTITY_COLLISION \
-    | ENEMY_FLAG_FLYING
+    | ENEMY_FLAG_FLYING \
+    )
+
+#define COMMON_PASSIVE_FLAGS \
+    ( BASE_PASSIVE_FLAGS \
+    | ENEMY_FLAG_ENABLE_HIT_SCRIPT \
+    )
 
 // used with enemy->aiFlags
 enum EnemyAIFlags {
@@ -4708,7 +4713,7 @@ enum PlayerCollisionTests {
     PLAYER_COLLISION_0          = 0,
     PLAYER_COLLISION_1          = 1,
     PLAYER_COLLISION_2          = 2,
-    PLAYER_COLLISION_3          = 3,
+    PLAYER_COLLISION_HAMMER     = 3,
     PLAYER_COLLISION_4          = 4,
 };
 
@@ -4978,50 +4983,21 @@ enum {
     SHOP_BUY_RESULT_NOT_ENOUGH_ROOM     = 5,
 };
 
-enum EncounterStatusFlags {
-    ENCOUNTER_STATUS_FLAG_0                 = 0x00000000,
-    ENCOUNTER_STATUS_FLAG_1                 = 0x00000001,
-    ENCOUNTER_STATUS_FLAG_2                 = 0x00000002,
-    ENCOUNTER_STATUS_FLAG_4                 = 0x00000004,
-    ENCOUNTER_STATUS_FLAG_8                 = 0x00000008,
-    ENCOUNTER_STATUS_FLAG_10                = 0x00000010,
-    ENCOUNTER_STATUS_FLAG_20                = 0x00000020,
-    ENCOUNTER_STATUS_FLAG_40                = 0x00000040,
-    ENCOUNTER_STATUS_FLAG_80                = 0x00000080,
-    ENCOUNTER_STATUS_FLAG_100               = 0x00000100,
-    ENCOUNTER_STATUS_FLAG_200               = 0x00000200,
-    ENCOUNTER_STATUS_FLAG_400               = 0x00000400,
-    ENCOUNTER_STATUS_FLAG_800               = 0x00000800,
-    ENCOUNTER_STATUS_FLAG_1000              = 0x00001000,
-    ENCOUNTER_STATUS_FLAG_2000              = 0x00002000,
-    ENCOUNTER_STATUS_FLAG_4000              = 0x00004000,
-    ENCOUNTER_STATUS_FLAG_8000              = 0x00008000,
-    ENCOUNTER_STATUS_FLAG_10000             = 0x00010000,
-    ENCOUNTER_STATUS_FLAG_20000             = 0x00020000,
-    ENCOUNTER_STATUS_FLAG_40000             = 0x00040000,
-    ENCOUNTER_STATUS_FLAG_80000             = 0x00080000,
-    ENCOUNTER_STATUS_FLAG_100000            = 0x00100000,
-    ENCOUNTER_STATUS_FLAG_200000            = 0x00200000,
-    ENCOUNTER_STATUS_FLAG_400000            = 0x00400000,
-    ENCOUNTER_STATUS_FLAG_800000            = 0x00800000,
-    ENCOUNTER_STATUS_FLAG_1000000           = 0x01000000,
-    ENCOUNTER_STATUS_FLAG_2000000           = 0x02000000,
-    ENCOUNTER_STATUS_FLAG_4000000           = 0x04000000,
-    ENCOUNTER_STATUS_FLAG_8000000           = 0x08000000,
-    ENCOUNTER_STATUS_FLAG_10000000          = 0x10000000,
-    ENCOUNTER_STATUS_FLAG_20000000          = 0x20000000,
-    ENCOUNTER_STATUS_FLAG_40000000          = 0x40000000,
-    ENCOUNTER_STATUS_FLAG_80000000          = 0x80000000,
+enum EncounterFlags {
+    ENCOUNTER_FLAG_NONE                 = 0x00000000,
+    ENCOUNTER_FLAG_THUMBS_UP            = 0x00000001, ///< Mario will do a 'thumbs up' animation after winning
+    ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY  = 0x00000002,
+    ENCOUNTER_FLAG_SKIP_FLEE_DROPS      = 0x00000004,
 };
 
 enum WindowFlags {
-    WINDOW_FLAG_INITIALIZED       = 0x00000001,
-    WINDOW_FLAG_FPUPDATE_CHANGED  = 0x00000002,
-    WINDOW_FLAG_HIDDEN            = 0x00000004, ///< Updated but not rendered
-    WINDOW_FLAG_INITIAL_ANIMATION = 0x00000008,
-    WINDOW_FLAG_HAS_CHILDREN      = 0x00000010,
-    WINDOW_FLAG_DISABLED          = 0x00000020, ///< Not updated or rendered
-    WINDOW_FLAG_40                = 0x00000040,
+    WINDOW_FLAG_INITIALIZED             = 0x00000001,
+    WINDOW_FLAG_FPUPDATE_CHANGED        = 0x00000002,
+    WINDOW_FLAG_HIDDEN                  = 0x00000004, ///< Updated but not rendered
+    WINDOW_FLAG_INITIAL_ANIMATION       = 0x00000008,
+    WINDOW_FLAG_HAS_CHILDREN            = 0x00000010,
+    WINDOW_FLAG_DISABLED                = 0x00000020, ///< Not updated or rendered
+    WINDOW_FLAG_40                      = 0x00000040,
 };
 
 enum DrawFlags {
@@ -6319,46 +6295,46 @@ enum EncounterStates {
 };
 
 enum EncounterCreateSubStates {
-    ENCOUNTER_SUBSTATE_CREATE_INIT = 0,
-    ENCOUNTER_SUBSTATE_CREATE_RUN_INIT_SCRIPT = 1,
-    ENCOUNTER_SUBSTATE_CREATE_RUN_AI = 2,
+    ENCOUNTER_SUBSTATE_CREATE_INIT                      = 0,
+    ENCOUNTER_SUBSTATE_CREATE_RUN_INIT_SCRIPT           = 1,
+    ENCOUNTER_SUBSTATE_CREATE_RUN_AI                    = 2,
 };
 
 enum EncounterNeutralSubStates {
-    ENCOUNTER_SUBSTATE_NEUTRAL = 0,
+    ENCOUNTER_SUBSTATE_NEUTRAL                          = 0,
 };
 
 enum EncounterPreBattleSubStates {
-    ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT = 0,
-    ENCOUNTER_SUBSTATE_PRE_BATTLE_LOAD_BATTLE = 1,
-    ENCOUNTER_SUBSTATE_PRE_BATTLE_AUTO_WIN = 2,
-    ENCOUNTER_SUBSTATE_PRE_BATTLE_3 = 3,
+    ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT                  = 0,
+    ENCOUNTER_SUBSTATE_PRE_BATTLE_LOAD                  = 1,
+    ENCOUNTER_SUBSTATE_PRE_BATTLE_AUTO_WIN              = 2,
+    ENCOUNTER_SUBSTATE_PRE_BATTLE_SKIP                  = 3,
 };
 
 enum EncounterConversationSubStates {
-    ENCOUNTER_SUBSTATE_CONVERSATION_INIT = 0,
-    ENCOUNTER_SUBSTATE_CONVERSATION_END = 1,
+    ENCOUNTER_SUBSTATE_CONVERSATION_INIT                = 0,
+    ENCOUNTER_SUBSTATE_CONVERSATION_END                 = 1,
 };
 
 enum EncounterPostBattleSubStates {
-    ENCOUNTER_SUBSTATE_POST_BATTLE_INIT = 0,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_WON_WAIT = 2,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_WON_KILL = 3,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_WON_TO_NEUTRAL = 4,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_WON_CHECK_MERLEE_BONUS = 10,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_PLAY_NPC_DEFEAT = 11,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_FLED_INIT = 100,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_FLED_WAIT = 101,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_102 = 102,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_103 = 103,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_LOST_INIT = 200,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_LOST_WAIT = 201,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_202 = 202,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_LOST_TO_NEUTRAL = 203,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_300 = 300,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_ENEMY_FLED_INIT = 400,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_ENEMY_FLED_WAIT = 401,
-    ENCOUNTER_SUBSTATE_POST_BATTLE_ENEMY_FLED_TO_NEUTRAL = 402,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_INIT                 = 0,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_WON_FADE_IN          = 2,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_WON_KILL             = 3,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_WON_RESUME           = 4,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_WON_CHECK_MERLEE     = 10,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_PLAY_NPC_DEFEAT      = 11,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_FLED_INIT            = 100,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_FLED_FADE_IN         = 101,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_FLED_RESUME          = 102,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_FLED_DELAY           = 103, // delay before battle can be retriggered
+    ENCOUNTER_SUBSTATE_POST_BATTLE_LOST_INIT            = 200,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_LOST_FADE_IN         = 201,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_LOST_RESUME          = 202,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_LOST_DELAY           = 203,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_SKIP                 = 300,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_ENEMY_FLED_INIT      = 400,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_ENEMY_FLED_FADE_IN   = 401,
+    ENCOUNTER_SUBSTATE_POST_BATTLE_ENEMY_FLED_RESUME    = 402,
 };
 
 enum PlayerSpriteSets {

@@ -297,7 +297,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Asleep) = {
 };
 
 EvtScript N(EVS_NpcAI_Tubba_WakeUp) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_SNORE_EXHALE, SOUND_SPACE_DEFAULT)
     Call(ShowSleepBubble, NPC_Tubba, 0, 50, 2, 552, 111, 128, 30, LVar0)
     Wait(360)
@@ -322,7 +322,7 @@ EvtScript N(EVS_NpcAI_Tubba_WakeUp) = {
 };
 
 EvtScript N(EVS_NpcAI_Tubba_Chase) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim0D)
     Thread
         Loop(0)
@@ -510,7 +510,7 @@ NpcData N(NpcData_Tubba) = {
     },
     .init = &N(EVS_NpcInit_Tubba),
     .settings = &N(NpcSettings_TubbaBlubba),
-    .flags = ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
 };

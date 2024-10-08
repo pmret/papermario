@@ -42,7 +42,7 @@ NpcData N(NpcData_WishSceneToads)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_WishingToadKid),
         .settings = &N(NpcSettings_Toad_Stationary_Wish),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
         .drops = NO_DROPS,
         .animations = TOAD_KID_RED_ANIMS,
     },

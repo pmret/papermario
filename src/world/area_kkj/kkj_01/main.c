@@ -1,7 +1,7 @@
 #include "kkj_01.h"
 
 EvtScript N(EVS_ExitDoors_kkj_00_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
     Set(LVar0, kkj_01_ENTRY_0)
@@ -17,7 +17,7 @@ EvtScript N(EVS_ExitDoors_kkj_00_1) = {
 };
 
 EvtScript N(EVS_ExitDoors_kkj_02_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
     Set(LVar0, kkj_01_ENTRY_1)
@@ -33,7 +33,7 @@ EvtScript N(EVS_ExitDoors_kkj_02_0) = {
 };
 
 EvtScript N(EVS_ExitDoors_kkj_14_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_01_ENTRY_4)

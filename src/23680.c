@@ -327,7 +327,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
 
     amt += currentEncounter->coinsEarned;
 
-    if (enemy->flags & (ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_40000)) {
+    if (enemy->flags & (ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_NO_DELAY_AFTER_FLEE)) {
         amt = 0;
     }
 

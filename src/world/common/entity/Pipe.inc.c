@@ -7,7 +7,7 @@
 
 #define EVT_EXIT_PIPE_HORIZONTAL(entry, collider, script) \
 { \
-    SetGroup(EVT_GROUP_1B) \
+    SetGroup(EVT_GROUP_EXIT_MAP) \
     Set(LVarA, entry) \
     Set(LVarB, collider) \
     Set(LVarC, Ref(script)) \
@@ -18,7 +18,7 @@
 
 #define EVT_EXIT_PIPE_VERTICAL(entry, collider, script) \
 { \
-    SetGroup(EVT_GROUP_1B) \
+    SetGroup(EVT_GROUP_EXIT_MAP) \
     Set(LVarA, entry) \
     Set(LVarB, collider) \
     Set(LVarC, Ref(script)) \
@@ -255,7 +255,7 @@ EvtScript N(EVS_Pipe_ExitVertical) = {
 
 EvtScript N(EVS_Pipe_ExitVertical_Impl) = {
     Call(N(Pipe_SetAnimFlag))
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerPhysics, TRUE)
     Call(HidePlayerShadow, TRUE)
     Set(LVar0, LVarA)
@@ -308,7 +308,7 @@ EvtScript N(EVS_Pipe_ExitHorizontal) = {
     Else
         Call(DisablePlayerInput, TRUE)
     EndIf
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(N(Pipe_SetAnimFlag))
     Call(DisablePlayerPhysics, TRUE)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVarB, COLLIDER_FLAGS_UPPER_MASK)

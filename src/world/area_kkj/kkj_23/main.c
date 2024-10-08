@@ -12,7 +12,7 @@ EvtScript N(EVS_EndPeachChapter6) = {
 }; //@bug script not properly terminated
 
 EvtScript N(EVS_ExitDoors_kkj_22_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, kkj_23_ENTRY_0)
     Set(LVar1, COLLIDER_tte)

@@ -32,7 +32,7 @@ EvtScript N(EVS_OnShakeTree_DropSwitch) = {
     IfLt(GB_StoryProgress, STORY_CH1_KNOCKED_SWITCH_FROM_TREE)
         Set(GB_StoryProgress, STORY_CH1_KNOCKED_SWITCH_FROM_TREE)
         Wait(15)
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
         Call(DisablePlayerInput, TRUE)
         Call(MakeLerp, 95, 0, 12, EASING_QUADRATIC_IN)
@@ -47,7 +47,7 @@ EvtScript N(EVS_OnShakeTree_DropSwitch) = {
         Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(1.0))
         Thread
             Wait(5)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         EndThread
         Call(DisablePlayerInput, FALSE)
     EndIf

@@ -3,7 +3,7 @@
 #include "world/common/atomic/TexturePan.inc.c"
 
 EvtScript N(EVS_TexPan_MotionLines) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(GetEntryID, LVar0)
     IfEq(LVar0, hos_20_ENTRY_2)
         Call(RotateModel, MODEL_h1, 180, 0, 0, 1)

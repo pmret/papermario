@@ -749,7 +749,7 @@ EvtScript N(EVS_NpcIdle_Kolorado_HeldCaptive) = {
                 Call(DisablePlayerInput, FALSE)
             EndIf
         CaseEq(1)
-            SetGroup(EVT_GROUP_00)
+            SetGroup(EVT_GROUP_NEVER_PAUSE)
             Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
             Call(func_802D2C14, 1)
             Wait(10 * DT)
@@ -760,8 +760,8 @@ EvtScript N(EVS_NpcIdle_Kolorado_HeldCaptive) = {
             EndIf
             Call(SetSelfVar, 0, 2)
             Call(func_802D2C14, 0)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-            SetGroup(EVT_GROUP_0B)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
+            SetGroup(EVT_GROUP_HOSTILE_NPC)
             Call(DisablePlayerInput, FALSE)
         CaseEq(2)
             Call(DisablePlayerInput, TRUE)
@@ -1064,11 +1064,11 @@ EvtScript N(EVS_NpcIdle_SpearGuy) = {
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Switch(LVar0)
                 CaseRange(LVar3, LVar4)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 0)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 0)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, FALSE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, FALSE)
                 CaseDefault
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 1)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 1)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, TRUE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, TRUE)
             EndSwitch
             Wait(1)
         EndLoop
@@ -1428,7 +1428,7 @@ NpcData N(NpcData_Kolorado)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Kolorado_HeldCaptive),
         .settings = &N(NpcSettings_Kolorado),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_SPIN,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_SPIN,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -1439,7 +1439,7 @@ NpcData N(NpcData_Kolorado)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Kolorado_WaitingToExplore),
         .settings = &N(NpcSettings_Kolorado),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -1450,7 +1450,7 @@ NpcData N(NpcData_Kolorado)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_ZiplineDummy),
         .settings = &N(NpcSettings_Dummy),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -1461,7 +1461,7 @@ NpcData N(NpcData_Kolorado)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_ZiplineDummy),
         .settings = &N(NpcSettings_Dummy),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -1489,7 +1489,7 @@ NpcData N(NpcData_SpearGuy) = {
     },
     .init = &N(EVS_NpcInit_SpearGuy),
     .settings = &N(NpcSettings_SpearGuy_Patrol),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = SPEAR_GUY_ANIMS,
 };
@@ -1501,7 +1501,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_RaphaelRaven),
         .settings = &N(NpcSettings_RaphaelRaven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
         .drops = NO_DROPS,
         .animations = RAPHAEL_RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RaphaelRaven,
@@ -1512,7 +1512,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Raven),
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenA,
@@ -1522,7 +1522,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
 #if VERSION_JP
@@ -1534,7 +1534,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenC,
@@ -1544,7 +1544,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenD,
@@ -1554,7 +1554,7 @@ NpcData N(NpcData_RaphaelRaven)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Raven),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
         .drops = NO_DROPS,
         .animations = RAVEN_ANIMS,
         .tattle = MSG_NpcTattle_RavenE,
@@ -1567,7 +1567,7 @@ NpcData N(NpcData_Misstar) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Misstar),
     .settings = &N(NpcSettings_StarSpirit),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = MISSTAR_ANIMS,
 };

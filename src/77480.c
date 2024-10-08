@@ -404,7 +404,7 @@ HitID player_test_lateral_overlap(s32 mode, PlayerStatus* playerStatus, f32* x, 
     hitDepth = length + radius;
     hitID = player_raycast_general(mode, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
 
-    if (mode == 3) {
+    if (mode == PLAYER_COLLISION_HAMMER) {
         targetDx = 0.0f;
         targetDz = 0.0f;
     } else {
@@ -452,12 +452,12 @@ HitID player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 d
         } else {
             ret = entityID | COLLISION_WITH_ENTITY_BIT;
         }
-    } else if (mode == PLAYER_COLLISION_3) {
+    } else if (mode == PLAYER_COLLISION_HAMMER) {
         ret = test_ray_colliders(COLLIDER_FLAG_IGNORE_SHELL, startX, startY, startZ, dirX, dirY, dirZ,
             hitX, hitY, hitZ, hitDepth, hitNx, hitNy, hitNz);
     }
 
-    if (mode == PLAYER_COLLISION_1 || mode == PLAYER_COLLISION_3) {
+    if (mode == PLAYER_COLLISION_1 || mode == PLAYER_COLLISION_HAMMER) {
         return ret;
     }
 
@@ -1098,7 +1098,7 @@ s32 has_valid_conversation_npc(void) {
     s32 ret = FALSE;
     s32 cond;
 
-    if (npc != NULL && !(npc->flags & NPC_FLAG_10000000)) {
+    if (npc != NULL && !(npc->flags & NPC_FLAG_USE_INSPECT_ICON)) {
         cond = !(playerStatus->flags & PS_FLAG_INPUT_DISABLED) && (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC);
         ret = cond;
     }
@@ -1160,7 +1160,7 @@ s32 func_800E06D8(void) {
     if (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC
         && !(playerStatus->flags & PS_FLAG_INPUT_DISABLED)
         && npc != NULL
-        && npc->flags & NPC_FLAG_10000000
+        && npc->flags & NPC_FLAG_USE_INSPECT_ICON
     ) {
         playerStatus->interactingWithID = NO_COLLIDER;
         return TRUE;
@@ -1236,7 +1236,7 @@ void check_for_interactables(void) {
                 (!(playerStatus->flags & PS_FLAG_INPUT_DISABLED))
                 && (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC)
                 && (npc != NULL)
-                && (npc->flags & NPC_FLAG_10000000)
+                && (npc->flags & NPC_FLAG_USE_INSPECT_ICON)
             ) {
                 curInteraction = npc->npcID | COLLISION_WITH_NPC_BIT;
                 if (playerStatus->interactingWithID == curInteraction) {

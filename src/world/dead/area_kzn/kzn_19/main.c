@@ -99,7 +99,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_StartTexPanners_Lava) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_yougan1_1, TEX_PANNER_2)
     Call(EnableTexPanning, MODEL_toro, TRUE)
     Call(EnableTexPanning, MODEL_poko, TRUE)
@@ -139,7 +139,7 @@ EvtScript N(EVS_StartTexPanners_Lava) = {
 };
 
 EvtScript N(EVS_UpdateLavaWaves) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Loop(0)
         Call(MakeLerp, 0, 180, 40, EASING_COS_IN)
         Loop(0)

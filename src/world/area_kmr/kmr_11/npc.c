@@ -63,7 +63,7 @@ EvtScript N(EVS_NpcIdle_GoombaKing) = {
 };
 
 EvtScript N(EVS_Scene_BossDefeated) = {
-    Call(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_2, TRUE)
+    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, TRUE)
     Call(N(SetupFog))
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -288,7 +288,7 @@ NpcSettings N(NpcSettings_Kammy) = {
     .otherAI = &N(EVS_NpcAuxAI_Kammy),
     .ai = &N(EVS_NpcAI_Kammy),
     .aux = &N(EVS_NpcAux_Kammy),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
 };
 
 NpcData N(NpcData_Enemies)[] = {
@@ -310,7 +310,7 @@ NpcData N(NpcData_Enemies)[] = {
         },
         .init = &N(EVS_NpcInit_GoombaBros_01),
         .settings = &N(NpcSettings_GoombaBros_Guard),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GoombaBros_Blue_Idle,
@@ -349,7 +349,7 @@ NpcData N(NpcData_Enemies)[] = {
         },
         .init = &N(EVS_NpcInit_GoombaBros_02),
         .settings = &N(NpcSettings_GoombaBros_Guard),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GoombaBros_Red_Idle,
@@ -388,7 +388,7 @@ NpcData N(NpcData_Enemies)[] = {
         },
         .init = &N(EVS_NpcInit_GoombaKing),
         .settings = &N(NpcSettings_GoombaBros_Guard),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_GoombaKing_Idle,

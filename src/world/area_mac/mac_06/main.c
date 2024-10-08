@@ -30,7 +30,7 @@ API_CALLABLE(N(GetWaveAmplitude)) {
 #include "world/common/todo/SpawnSunEffect.inc.c"
 
 EvtScript N(EVS_AnimateWaves) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Set(LVarC, 0)
     Label(0)
         IfGe(LVarC, 60)

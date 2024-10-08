@@ -3,7 +3,7 @@
 EvtScript N(EVS_ExitWalk_mac_02_1) = EVT_EXIT_WALK(60, mim_10_ENTRY_0, "mac_02", mac_02_ENTRY_1);
 
 EvtScript N(EVS_ExitWalk_mim_01_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, mim_10_ENTRY_1)
     Exec(ExitWalk)
     IfEq(GB_StoryProgress, STORY_CH3_INVITED_TO_BOOS_MANSION)

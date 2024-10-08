@@ -1,7 +1,7 @@
 #include "kkj_17.h"
 
 EvtScript N(EVS_ExitDoors_kkj_11_5) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, kkj_17_ENTRY_0)
     Set(LVar1, COLLIDER_ttw)

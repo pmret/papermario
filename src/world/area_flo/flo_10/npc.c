@@ -36,14 +36,14 @@ EvtScript N(EVS_OnInteract_WaterStoneSocket) = {
             Return
         EndIf
         Call(DisablePlayerInput, TRUE)
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
         Call(ShowKeyChoicePopup)
         Set(LVar2, LVar0)
         Switch(LVar2)
             CaseEq(-1)
                 Call(CloseChoicePopup)
-                Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+                Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
                 Wait(10 * DT)
                 Call(SpeakToPlayer, NPC_Lily, ANIM_Lily_TalkPlead, ANIM_Lily_IdlePlead, 0, MSG_CH6_0081)
             CaseDefault
@@ -59,7 +59,7 @@ EvtScript N(EVS_OnInteract_WaterStoneSocket) = {
                 Call(MakeItemEntity, ITEM_WATER_STONE, 0, -60, 6, ITEM_SPAWN_MODE_DECORATION, 0)
                 Set(LVarA, LVar0)
                 Call(CloseChoicePopup)
-                Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+                Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
                 ExecWait(N(EVS_Scene_ReleaseFountain))
         EndSwitch
         Call(DisablePlayerInput, FALSE)
@@ -159,7 +159,7 @@ EvtScript N(EVS_NpcInteract_Lily) = {
                 EndSwitch
                 Wait(10 * DT)
                 Set(GF_FLO10_LilyRequestedWaterStone, TRUE)
-                Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 0)
+                Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, FALSE)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Lily_TalkPlead, ANIM_Lily_IdlePlead, 5, MSG_CH6_007F)
             EndIf
@@ -188,7 +188,7 @@ EvtScript N(EVS_NpcInit_Lily) = {
             IfEq(GF_FLO10_LilyRequestedWaterStone, FALSE)
                 Call(SetNpcAnimation, NPC_SELF, ANIM_Lily_IdlePlead)
                 Call(InterpNpcYaw, NPC_SELF, 90, 1)
-                Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 1)
+                Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, TRUE)
             EndIf
         CaseEq(STORY_CH6_GOT_WATER_STONE)
             Call(InterpNpcYaw, NPC_SELF, 270, 1)
@@ -205,7 +205,7 @@ NpcData N(NpcData_Lily) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Lily),
     .settings = &N(NpcSettings_Lily),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = BASE_PASSIVE_FLAGS,
     .drops = NO_DROPS,
     .animations = LILY_ANIMS,
     .tattle = MSG_NpcTattle_Lily,

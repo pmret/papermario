@@ -46,7 +46,7 @@ EvtScript N(EVS_SpinyTromp_ShakeCam) = {
 };
 
 EvtScript N(EVS_SetupSpinyTromp) = {
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
     IfGe(GB_StoryProgress, STORY_CH5_HIDDEN_PASSAGE_OPEN)
         Call(SetGroupVisibility, MODEL_goron, MODEL_GROUP_HIDDEN)
         Call(EnableModel, MODEL_me, FALSE)

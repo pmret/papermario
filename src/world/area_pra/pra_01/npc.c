@@ -188,7 +188,7 @@ NpcData N(NpcData_Kalmar) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kalmar),
     .settings = &N(NpcSettings_StarSpirit),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = KALMAR_ANIMS,
 };

@@ -22,7 +22,7 @@ EvtScript N(EVS_ActivateSwitch) = {
     Set(AF_KPA09_PlatformRaised, TRUE)
     Call(N(EnableCameraFollowPlayerY))
     Thread
-        SetGroup(EVT_GROUP_EF)
+        SetGroup(EVT_GROUP_NOT_BATTLE)
         Call(PlaySoundAtCollider, COLLIDER_o19, SOUND_KPA_RAISE_STONE_PLATFORM, SOUND_SPACE_DEFAULT)
         Call(MakeLerp, -50, 0, 15, EASING_COS_IN_OUT)
         Loop(0)
@@ -50,7 +50,7 @@ EvtScript N(EVS_ActivateSwitch) = {
         EndLoop
     EndThread
     Thread
-        SetGroup(EVT_GROUP_EF)
+        SetGroup(EVT_GROUP_NOT_BATTLE)
         Call(DisablePlayerInput, TRUE)
         Call(PlaySoundAtCollider, COLLIDER_o106, SOUND_KPA_RAISE_STONE_PLATFORM, SOUND_SPACE_DEFAULT)
         Call(EnableGroup, MODEL_move2, TRUE)

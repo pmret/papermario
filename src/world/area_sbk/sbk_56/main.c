@@ -33,7 +33,7 @@ API_CALLABLE(N(StopOasisSongVariation)) {
 }
 
 EvtScript N(EVS_ExitWalk_sbk_55_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, sbk_56_ENTRY_0)
     Exec(ExitWalk)
     Call(N(StopOasisSongVariation))
@@ -44,7 +44,7 @@ EvtScript N(EVS_ExitWalk_sbk_55_1) = {
 };
 
 EvtScript N(EVS_ExitWalk_sbk_46_3) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, sbk_56_ENTRY_2)
     Exec(ExitWalk)
     Call(N(StopOasisSongVariation))
@@ -55,7 +55,7 @@ EvtScript N(EVS_ExitWalk_sbk_46_3) = {
 };
 
 EvtScript N(EVS_ExitWalk_sbk_66_2) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, sbk_56_ENTRY_3)
     Exec(ExitWalk)
     Call(N(StopOasisSongVariation))

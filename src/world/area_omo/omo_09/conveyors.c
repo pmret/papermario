@@ -105,7 +105,7 @@ API_CALLABLE(N(AddConveyorPush)) {
 }
 
 EvtScript N(EVS_SetupConveyors) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Call(EnableTexPanning, MODEL_1, TRUE)
     Call(EnableTexPanning, MODEL_3, TRUE)
     Call(EnableTexPanning, MODEL_4, TRUE)

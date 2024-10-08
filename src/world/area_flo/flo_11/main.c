@@ -16,7 +16,7 @@ EvtScript N(EVS_ExitWalk_flo_12_0) = EVT_EXIT_WALK(60, flo_11_ENTRY_1, "flo_12",
 // template for GotoMap exits used with pipes in the maze
 #define Goto_MAP(mapName, entry) \
 { \
-    SetGroup(EVT_GROUP_1B) \
+    SetGroup(EVT_GROUP_EXIT_MAP) \
     Call(GotoMap, Ref(mapName), entry) \
     Wait(100) \
     Return \

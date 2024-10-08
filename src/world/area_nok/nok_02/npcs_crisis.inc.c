@@ -244,7 +244,7 @@ EvtScript N(EVS_FuzzyThief_AvoidCapture) = {
 };
 
 EvtScript N(EVS_Koopa_01_ChaseThief) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Label(0)
         Call(GetNpcPos, NPC_KoopaShell_01, LVar0, LVar1, LVar2)
         Call(GetNpcAnimation, NPC_Koopa_01, LVarF)
@@ -270,7 +270,7 @@ EvtScript N(EVS_Koopa_01_FaceShell) = {
 };
 
 EvtScript N(D_8024BDB0_9E2DD0) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Set(LVar3, 0)
     Set(LVar4, 0)
     Loop(0)
@@ -433,10 +433,10 @@ EvtScript N(EVS_NpcHit_Fuzzy_Thief) = {
     Switch(LVar0)
         CaseEq(ENCOUNTER_TRIGGER_HAMMER)
             Set(GF_NOK02_RecoveredShellA, TRUE)
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, TRUE)
         CaseEq(ENCOUNTER_TRIGGER_JUMP)
             Set(GF_NOK02_RecoveredShellA, TRUE)
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, TRUE)
     EndSwitch
     Return
     End

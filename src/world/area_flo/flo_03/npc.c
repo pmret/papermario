@@ -233,11 +233,11 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Set(LVar4, Float(90.0))
             ExecWait(N(EVS_FocusCamBetween))
             Call(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0057)
-            Call(SetEnemyFlagBits, NPC_Dayzee, ENEMY_FLAG_PASSIVE, 0)
-            Call(SetEnemyFlagBits, NPC_MontyMole_01, ENEMY_FLAG_PASSIVE, 0)
-            Call(SetEnemyFlagBits, NPC_MontyMole_02, ENEMY_FLAG_PASSIVE, 0)
-            Call(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAG_PASSIVE, 0)
-            Call(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAG_PASSIVE, 0)
+            Call(SetEnemyFlagBits, NPC_Dayzee, ENEMY_FLAG_PASSIVE, FALSE)
+            Call(SetEnemyFlagBits, NPC_MontyMole_01, ENEMY_FLAG_PASSIVE, FALSE)
+            Call(SetEnemyFlagBits, NPC_MontyMole_02, ENEMY_FLAG_PASSIVE, FALSE)
+            Call(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAG_PASSIVE, FALSE)
+            Call(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAG_PASSIVE, FALSE)
             Call(BindNpcAI, NPC_Dayzee, Ref(N(EVS_NpcAI_Dayzee)))
             Set(MV_PauseBurrowing, FALSE)
             Set(MV_NextBurrowTriggerRadius, 60)
@@ -297,7 +297,7 @@ EvtScript N(EVS_NpcInit_Dayzee) = {
             Call(SetNpcPos, NPC_Dayzee, NPC_DISPOSE_LOCATION)
         CaseDefault
             IfEq(GF_FLO03_Defeated_Dayzee, FALSE)
-                Call(SetEnemyFlagBits, NPC_Dayzee, ENEMY_FLAG_PASSIVE, 0)
+                Call(SetEnemyFlagBits, NPC_Dayzee, ENEMY_FLAG_PASSIVE, FALSE)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcAI_Dayzee)))
             Else
                 Call(SetNpcPos, NPC_Dayzee, NPC_DISPOSE_LOCATION)
@@ -404,7 +404,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
                     Call(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
                     Call(ShowEmote, NPC_MontyMole_01, EMOTE_EXCLAMATION, 0, LVar1, EMOTER_NPC, 0, 0, 0, 0)
                     Wait(LVar1)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 1)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
                 EndIf
                 Call(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim11)
@@ -432,7 +432,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
                 Call(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim10)
                 Wait(10)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 0)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, FALSE)
                 Call(RandInt, 30, LVar0)
                 Add(LVar0, 60)
                 Set(MV_NextBurrowTime_Mole_01, LVar0)
@@ -483,7 +483,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
                     Call(PlaySoundAtNpc, NPC_MontyMole_02, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
                     Call(ShowEmote, NPC_MontyMole_02, EMOTE_EXCLAMATION, 0, LVar1, EMOTER_NPC, 0, 0, 0, 0)
                     Wait(LVar1)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 1)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
                 EndIf
                 Call(PlaySoundAtNpc, NPC_MontyMole_02, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim11)
@@ -511,7 +511,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
                 Call(PlaySoundAtNpc, NPC_MontyMole_02, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim10)
                 Wait(10)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 0)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, FALSE)
                 Call(RandInt, 35, LVar0)
                 Add(LVar0, 55)
                 Set(MV_NextBurrowTime_Mole_02, LVar0)
@@ -562,7 +562,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
                     Call(PlaySoundAtNpc, NPC_MontyMole_03, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
                     Call(ShowEmote, NPC_MontyMole_03, EMOTE_EXCLAMATION, 0, LVar1, EMOTER_NPC, 0, 0, 0, 0)
                     Wait(LVar1)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 1)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
                 EndIf
                 Call(PlaySoundAtNpc, NPC_MontyMole_03, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim11)
@@ -590,7 +590,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
                 Call(PlaySoundAtNpc, NPC_MontyMole_03, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim10)
                 Wait(10)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 0)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, FALSE)
                 Call(RandInt, 40, LVar0)
                 Add(LVar0, 50)
                 Set(MV_NextBurrowTime_Mole_03, LVar0)
@@ -641,7 +641,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
                     Call(PlaySoundAtNpc, NPC_MontyMole_04, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
                     Call(ShowEmote, NPC_MontyMole_04, EMOTE_EXCLAMATION, 0, LVar1, EMOTER_NPC, 0, 0, 0, 0)
                     Wait(LVar1)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 1)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
                 EndIf
                 Call(PlaySoundAtNpc, NPC_MontyMole_04, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim11)
@@ -669,7 +669,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
                 Call(PlaySoundAtNpc, NPC_MontyMole_04, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim10)
                 Wait(10)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 0)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, FALSE)
                 Call(RandInt, 45, LVar0)
                 Add(LVar0, 45)
                 Set(MV_NextBurrowTime_Mole_04, LVar0)
@@ -697,7 +697,7 @@ EvtScript N(EVS_NpcInit_MontyMole_01) = {
             IfEq(GF_FLO03_Defeated_MontyMoleA, FALSE)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_01)))
                 Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim10)
-                Call(SetEnemyFlagBits, NPC_MontyMole_01, ENEMY_FLAG_PASSIVE, 0)
+                Call(SetEnemyFlagBits, NPC_MontyMole_01, ENEMY_FLAG_PASSIVE, FALSE)
             Else
                 Call(SetNpcPos, NPC_MontyMole_01, NPC_DISPOSE_LOCATION)
             EndIf
@@ -720,7 +720,7 @@ EvtScript N(EVS_NpcInit_MontyMole_02) = {
             IfEq(GF_FLO03_Defeated_MontyMoleB, FALSE)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_02)))
                 Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim10)
-                Call(SetEnemyFlagBits, NPC_MontyMole_02, ENEMY_FLAG_PASSIVE, 0)
+                Call(SetEnemyFlagBits, NPC_MontyMole_02, ENEMY_FLAG_PASSIVE, FALSE)
             Else
                 Call(SetNpcPos, NPC_MontyMole_02, NPC_DISPOSE_LOCATION)
             EndIf
@@ -743,7 +743,7 @@ EvtScript N(EVS_NpcInit_MontyMole_03) = {
             IfEq(GF_FLO03_Defeated_MontyMoleC, FALSE)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_03)))
                 Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim10)
-                Call(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAG_PASSIVE, 0)
+                Call(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAG_PASSIVE, FALSE)
             Else
                 Call(SetNpcPos, NPC_MontyMole_03, NPC_DISPOSE_LOCATION)
             EndIf
@@ -766,7 +766,7 @@ EvtScript N(EVS_NpcInit_MontyMole_04) = {
             IfEq(GF_FLO03_Defeated_MontyMoleD, FALSE)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_04)))
                 Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim10)
-                Call(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAG_PASSIVE, 0)
+                Call(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAG_PASSIVE, FALSE)
             Else
                 Call(SetNpcPos, NPC_MontyMole_04, NPC_DISPOSE_LOCATION)
             EndIf
@@ -783,7 +783,7 @@ NpcData N(NpcData_Petunia) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Petunia),
     .settings = &N(NpcSettings_Petunia),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = BASE_PASSIVE_FLAGS,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Petunia_Idle,
@@ -812,7 +812,7 @@ NpcData N(NpcData_Dayzee) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Dayzee),
     .settings = &N(NpcSettings_Dayzee),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = BASE_PASSIVE_FLAGS,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Dayzee_Anim01,
@@ -840,7 +840,7 @@ NpcData N(NpcData_MontyMole_01) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_MontyMole_01),
     .settings = &N(NpcSettings_Dayzee),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_IGNORE_PLAYER_COLLISION,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_MontyMole_Dark_Anim01,
@@ -868,7 +868,7 @@ NpcData N(NpcData_MontyMole_02) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_MontyMole_02),
     .settings = &N(NpcSettings_Dayzee),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_IGNORE_PLAYER_COLLISION,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_MontyMole_Dark_Anim01,
@@ -896,7 +896,7 @@ NpcData N(NpcData_MontyMole_03) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_MontyMole_03),
     .settings = &N(NpcSettings_Dayzee),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_IGNORE_PLAYER_COLLISION,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_MontyMole_Dark_Anim01,
@@ -924,7 +924,7 @@ NpcData N(NpcData_MontyMole_04) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_MontyMole_04),
     .settings = &N(NpcSettings_Dayzee),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_IGNORE_PLAYER_COLLISION,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_MontyMole_Dark_Anim01,

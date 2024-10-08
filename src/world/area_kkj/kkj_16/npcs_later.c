@@ -69,7 +69,7 @@ EvtScript N(EVS_NpcInteract_HammerBros_03) = {
 EvtScript N(EVS_CapturePeach) = {
     Call(DisablePlayerInput, TRUE)
     Call(N(PreventNextPeachDisguise))
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
@@ -100,14 +100,14 @@ EvtScript N(EVS_WatchForPlayer) = {
     Loop(0)
         Call(N(GetPeachDisguise), LVar1)
         IfEq(LVar1, PEACH_DISGUISE_NONE)
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, TRUE)
             Call(N(UnkPhysicsFunc), LVar0, 85, 60, 38)
             IfNe(LVar0, 0)
                 Call(BindNpcAI, NPC_SELF, Ref(N(EVS_CapturePeach)))
                 Return
             EndIf
         Else
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
         EndIf
         Wait(1)
     EndLoop
@@ -193,7 +193,7 @@ NpcData N(NpcData_Minions)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_HammerBros_01),
         .settings = &N(NpcSettings_HammerBros),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
         .drops = NO_DROPS,
         .animations = HAMMER_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_HammerBros),
@@ -204,7 +204,7 @@ NpcData N(NpcData_Minions)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_HammerBros_02),
         .settings = &N(NpcSettings_HammerBros),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = HAMMER_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_HammerBros),
@@ -215,7 +215,7 @@ NpcData N(NpcData_Minions)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_HammerBros_03),
         .settings = &N(NpcSettings_HammerBros),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = HAMMER_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_HammerBros),

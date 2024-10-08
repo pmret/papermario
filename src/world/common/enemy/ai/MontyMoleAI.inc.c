@@ -28,7 +28,7 @@ enum AiStateMontyMole {
 };
 
 #define INTANGIBLE_MONTY_MOLE_NPC_FLAGS \
-    ENEMY_FLAG_100000 \
+    ENEMY_FLAG_SKIP_BATTLE \
     | ENEMY_FLAG_IGNORE_TOUCH \
     | ENEMY_FLAG_IGNORE_JUMP \
     | ENEMY_FLAG_IGNORE_HAMMER \
@@ -256,11 +256,10 @@ API_CALLABLE(N(MontyMoleAI_Main)) {
     }
 
     if (enemy->aiFlags & AI_FLAG_SUSPEND) {
-        if (enemy->aiSuspendTime == 0) {
-            enemy->aiFlags &= ~AI_FLAG_SUSPEND;
-        } else {
+        if (enemy->aiSuspendTime != 0) {
             return ApiStatus_BLOCK;
         }
+        enemy->aiFlags &= ~AI_FLAG_SUSPEND;
     }
 
     switch (script->AI_TEMP_STATE) {

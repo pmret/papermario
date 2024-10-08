@@ -341,7 +341,7 @@ EvtScript N(EVS_TouchFloor_LeftRoof) = {
 };
 
 EvtScript N(EVS_LandOnRightRoof) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     IfEq(MF_Unk_00, TRUE)
         Return
     EndIf

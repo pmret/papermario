@@ -9,7 +9,7 @@ API_CALLABLE(N(SetAvailableDisguise)) {
 }
 
 EvtScript N(EVS_ExitDoor_kpa_121_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_METAL)
     Set(LVar0, osr_02_ENTRY_0)
@@ -25,7 +25,7 @@ EvtScript N(EVS_ExitDoor_kpa_121_1) = {
 };
 
 EvtScript N(EVS_ExitDoor_kkj_10_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
     Set(LVar0, osr_02_ENTRY_1)

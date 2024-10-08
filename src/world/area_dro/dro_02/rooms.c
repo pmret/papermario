@@ -129,7 +129,7 @@ EvtScript N(EVS_RoomListener_Hideout) = {
 };
 
 EvtScript N(EVS_OpenSecretDoor_FromOutside) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(DisablePlayerInput, TRUE)
     Call(func_802D2C14, 1)
     Call(PlayerMoveTo, 230, 10, 20)
@@ -163,7 +163,7 @@ EvtScript N(EVS_OpenSecretDoor_FromOutside) = {
 };
 
 EvtScript N(EVS_OpenSecretDoor_FromInside) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(DisablePlayerInput, TRUE)
     Call(func_802D2C14, 1)
     Call(PlayerMoveTo, 230, -70, 20)

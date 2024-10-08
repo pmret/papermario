@@ -258,7 +258,7 @@ NpcData N(NpcData_Mamar) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_Mamar),
     .settings = &N(NpcSettings_StarSpirit),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = BASE_PASSIVE_FLAGS,
     .drops = NO_DROPS,
     .animations = MAMAR_ANIMS,
 };
@@ -269,7 +269,7 @@ NpcData N(NpcData_TradingToad) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_TradingToad),
     .settings = &N(NpcSettings_Toad_Stationary),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_10000 | ENEMY_FLAG_100000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_RAYCAST_TO_INTERACT | ENEMY_FLAG_SKIP_BATTLE,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Toad_Pink_Idle,

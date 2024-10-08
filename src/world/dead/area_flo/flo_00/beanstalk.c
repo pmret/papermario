@@ -466,7 +466,7 @@ EvtScript N(EVS_BeanPatch_ItemPrompt) = {
     Call(func_802CF56C, 2)
     Call(DisablePlayerInput, FALSE)
     IfEq(GF_FLO00_PlacedFertileSoil, FALSE)
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
         Label(10)
             Call(ShowKeyChoicePopup)
@@ -474,7 +474,7 @@ EvtScript N(EVS_BeanPatch_ItemPrompt) = {
             Switch(LVar2)
                 CaseLe(ITEM_NONE)
                     Call(CloseChoicePopup)
-                    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+                    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
                     Call(AwaitPlayerLeave, -85, 85, 28)
                     Return
                 CaseEq(ITEM_FERTILE_SOIL)
@@ -502,7 +502,7 @@ EvtScript N(EVS_BeanPatch_ItemPrompt) = {
         Set(GF_FLO00_PlacedFertileSoil, TRUE)
     EndIf
     IfEq(GF_FLO00_PlacedMagicalBean, FALSE)
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
         Label(20)
             Call(ShowKeyChoicePopup)
@@ -510,7 +510,7 @@ EvtScript N(EVS_BeanPatch_ItemPrompt) = {
             Switch(LVar2)
                 CaseLe(ITEM_NONE)
                     Call(CloseChoicePopup)
-                    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+                    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
                     Call(AwaitPlayerLeave, -85, 85, 28)
                     Return
                 CaseEq(ITEM_MAGICAL_BEAN)
@@ -539,7 +539,7 @@ EvtScript N(EVS_BeanPatch_ItemPrompt) = {
             EndIf
         Set(GF_FLO00_PlacedMagicalBean, TRUE)
     EndIf
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Label(30)
         Call(ShowKeyChoicePopup)
@@ -547,7 +547,7 @@ EvtScript N(EVS_BeanPatch_ItemPrompt) = {
         Switch(LVar2)
             CaseLe(ITEM_NONE)
                 Call(CloseChoicePopup)
-                Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+                Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
                 Call(AwaitPlayerLeave, -85, 85, 28)
                 Return
             CaseEq(ITEM_MIRACLE_WATER)

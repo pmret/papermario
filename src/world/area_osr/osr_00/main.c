@@ -41,7 +41,7 @@ EvtScript N(EVS_EnterMap) = {
 };
 
 EvtScript N(EVS_TexPan_Fountain) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_fw1, TEX_PANNER_1)
     Call(SetTexPanner, MODEL_w2, TEX_PANNER_2)
     Thread

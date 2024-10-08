@@ -320,7 +320,7 @@ EvtScript N(EVS_NpcInit_Whacka_01) = {
         Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Whacka_01)))
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Whacka_01)))
         Call(EnableNpcShadow, NPC_SELF, FALSE)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_200000, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLIP_INSTANTLY, TRUE)
     Else
         Call(RemoveNpc, NPC_SELF)
     EndIf
@@ -346,7 +346,7 @@ NpcData N(NpcData_Whacka)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Whacka_01),
         .settings = &N(NpcSettings_Whacka),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_400000,
+        .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
         .drops = NO_DROPS,
         .animations = WHACKA_ANIMS,
         .tattle = MSG_NpcTattle_Whacka,
@@ -357,7 +357,7 @@ NpcData N(NpcData_Whacka)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Whacka_02),
         .settings = &N(NpcSettings_Whacka),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = WHACKA_ANIMS,
         .tattle = MSG_NpcTattle_Whacka,

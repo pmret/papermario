@@ -65,7 +65,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy_01) = {
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
     Call(SetNpcJumpscale, NPC_SELF, Float(1.8))
     Call(NpcJump0, NPC_SELF, -341, 0, 23, 15)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Fuzzy_Wander)))
     Return
     End
@@ -83,7 +83,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy_02) = {
     Set(LVar1, 0)
     Call(SetNpcJumpscale, NPC_SELF, Float(3.0))
     Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 6)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Fuzzy_Wander)))
     Return
     End
@@ -143,7 +143,7 @@ NpcData N(NpcData_Fuzzy_01) = {
     },
     .init = &N(EVS_NpcInit_Fuzzy_01),
     .settings = &N(NpcSettings_Fuzzy_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = FUZZY_DROPS,
     .animations = FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -167,7 +167,7 @@ NpcData N(NpcData_Fuzzy_02) = {
     },
     .init = &N(EVS_NpcInit_Fuzzy_02),
     .settings = &N(NpcSettings_Fuzzy_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = FUZZY_DROPS,
     .animations = FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -192,7 +192,7 @@ NpcData N(NpcData_FuzzyBoss)[] = {
         },
         .init = &N(EVS_NpcInit_FuzzyBoss),
         .settings = &N(NpcSettings_Fuzzy),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
         .drops = FUZZY_DROPS,
         .animations = FUZZY_ANIMS,
     },
@@ -202,7 +202,7 @@ NpcData N(NpcData_FuzzyBoss)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_KoopersShell),
         .settings = &N(NpcSettings_Koopa),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
         .drops = FUZZY_DROPS,
         .animations = KOOPER_ANIMS,
     },

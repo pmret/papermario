@@ -21,7 +21,7 @@ s32 N(ModelListNone)[] = { -1 };
 EvtScript N(EVS_ExitWalk_pra_19_1) = EVT_EXIT_WALK(60, pra_20_ENTRY_0, "pra_19", pra_19_ENTRY_1);
 
 EvtScript N(EVS_ExitDoor_pra_21_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_20_ENTRY_1)
     Set(LVar1, COLLIDER_deilittssw)
@@ -41,7 +41,7 @@ EvtScript N(EVS_ExitDoor_pra_21_0) = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_29_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_20_ENTRY_2)
     Set(LVar1, COLLIDER_deilittse)
@@ -61,7 +61,7 @@ EvtScript N(EVS_ExitDoors_pra_29_0) = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_29_3) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_20_ENTRY_3)
     Set(LVar1, COLLIDER_deilittne)
@@ -81,7 +81,7 @@ EvtScript N(EVS_ExitDoors_pra_29_3) = {
 };
 
 EvtScript N(EVS_ExitDoor_pra_22_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_20_ENTRY_4)
     Set(LVar1, COLLIDER_deilittnnw)

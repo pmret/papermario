@@ -18,7 +18,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_StartTexPanners_Lava) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(EnableTexPanning, MODEL_yougan1_1, TRUE)
     Call(EnableTexPanning, MODEL_off1, TRUE)
     Call(EnableTexPanning, MODEL_toro, TRUE)

@@ -161,7 +161,7 @@ API_CALLABLE(N(CreateIngredientInfoWindows)) {
 }
 
 EvtScript N(EVS_ExitDoor_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, kkj_19_ENTRY_0)
     Set(LVar1, COLLIDER_ttse)

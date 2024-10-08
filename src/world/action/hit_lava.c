@@ -170,7 +170,7 @@ void action_update_hit_lava(void) {
             }
             playerStatus->pos.y = player_check_collision_below(player_fall_distance(), &completeAxes);
             if (completeAxes >= 0) {
-                exec_ShakeCamX(0, 2, 1, 0.8f);
+                exec_ShakeCamX(CAM_DEFAULT, CAM_SHAKE_DECAYING_VERTICAL, 1, 0.8f);
                 start_rumble(256, 50);
                 phys_adjust_cam_on_landing();
                 gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_NO_INTERP_Y;

@@ -23,7 +23,7 @@ API_CALLABLE(N(PausePlatformsDuringPound)) {
 }
 
 EvtScript N(EVS_UpdatePlatform) = {
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
     Call(ParentColliderToModel, LVarB, LVarA)
     SetF(LVar0, Float(0.0))
     SetF(LVarD, Float(-90.0))

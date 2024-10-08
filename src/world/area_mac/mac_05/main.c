@@ -12,7 +12,7 @@ API_CALLABLE(N(func_8024047C_8525EC)) {
 }
 
 EvtScript N(D_8024457C_8566EC) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Set(LVarC, 0)
     Label(0)
         IfGe(LVarC, 60)
@@ -57,7 +57,7 @@ EvtScript N(D_80244648_8567B8) = {
 EvtScript N(EVS_ExitWalk_mac_04_1) = EVT_EXIT_WALK(60, mac_05_ENTRY_0, "mac_04", mac_04_ENTRY_1);
 
 EvtScript N(D_80244810_856980) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, mac_05_ENTRY_3)
     Exec(ExitWalk)
     Set(GB_StoryProgress, STORY_CH5_ENTERED_WHALE)
@@ -97,7 +97,7 @@ EvtScript N(D_802448C4_856A34) = {
             Call(DisablePlayerPhysics, TRUE)
             Call(SetPlayerPos, -160, -10, 371)
             Call(SetNpcPos, NPC_PARTNER, -160, -10, 371)
-            Call(SetEnemyFlagBits, NPC_Whale, ENEMY_FLAG_CANT_INTERACT, 1)
+            Call(SetEnemyFlagBits, NPC_Whale, ENEMY_FLAG_CANT_INTERACT, TRUE)
             Call(DisablePartnerAI, 0)
             Call(InterruptUsePartner)
             Wait(10)
@@ -122,7 +122,7 @@ EvtScript N(D_802448C4_856A34) = {
             Set(LVar0, Ref(N(EVS_BindExitTriggers)))
             ExecWait(EnterWalk)
             Call(SetNpcPos, NPC_Whale, -220, 10, 372)
-            Call(SetEnemyFlagBits, NPC_Whale, ENEMY_FLAG_CANT_INTERACT, 0)
+            Call(SetEnemyFlagBits, NPC_Whale, ENEMY_FLAG_CANT_INTERACT, FALSE)
     EndSwitch
     Return
     End

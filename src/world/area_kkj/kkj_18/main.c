@@ -56,7 +56,7 @@ EvtScript N(EVS_UpdateClockPendulum) = {
 };
 
 EvtScript N(EVS_ExitDoor_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, kkj_18_ENTRY_0)
     Set(LVar1, COLLIDER_ttw)

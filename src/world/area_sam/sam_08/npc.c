@@ -130,7 +130,7 @@ NpcData N(NpcData_Ambush)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_TrueKooperA),
         .settings = &N(NpcSettings_Kooper),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
@@ -157,7 +157,7 @@ NpcData N(NpcData_Ambush)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_RealKooperA),
         .settings = &N(NpcSettings_Kooper),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
@@ -184,7 +184,7 @@ NpcData N(NpcData_Ambush)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Duplighost),
         .settings = &N(NpcSettings_Duplighost),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
@@ -219,7 +219,7 @@ EvtScript N(EVS_NpcIdle_TrueKooperB) = {
 
 EvtScript N(EVS_NpcInit_TrueKooperB) = {
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_PASSIVE, 0)
+    Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_PASSIVE, FALSE)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TrueKooperB)))
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_TrueKooperB)))
     IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
@@ -241,7 +241,7 @@ EvtScript N(EVS_NpcIdle_FakeKooperB) = {
 
 EvtScript N(EVS_NpcInit_FakeKooperB) = {
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_PASSIVE, 0)
+    Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_PASSIVE, FALSE)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_FakeKooperB)))
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_FakeKooperB)))
     IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
@@ -258,7 +258,7 @@ NpcData N(NpcData_Hittable)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_TrueKooperB),
         .settings = &N(NpcSettings_Kooper),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
@@ -285,7 +285,7 @@ NpcData N(NpcData_Hittable)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_FakeKooperB),
         .settings = &N(NpcSettings_Kooper),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,

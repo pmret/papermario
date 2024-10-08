@@ -1227,7 +1227,7 @@ NpcSettings N(NpcSettings_ChuckQuizmo) = {
     .otherAI = &N(EVS_Quizmo_NPC_OtherAI),
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .aux = &N(EVS_Quizmo_NPC_Aux),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = BASE_PASSIVE_FLAGS,
     .level = ACTOR_LEVEL_NONE,
 };
 

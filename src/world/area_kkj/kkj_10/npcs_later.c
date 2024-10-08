@@ -27,7 +27,7 @@ AnimID N(ExtraAnims_Koopatrol)[] = {
 
 EvtScript N(EVS_CapturePeach) = {
     Call(DisablePlayerInput, TRUE)
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(N(PreventNextPeachDisguise))
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
@@ -51,7 +51,7 @@ EvtScript N(EVS_CapturePeach) = {
     Call(GotoMapSpecial, Ref("kkj_14"), kkj_14_ENTRY_B, TRANSITION_PEACH_CAPTURED)
     Wait(100)
     Call(DisablePlayerInput, FALSE)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
 };
@@ -64,13 +64,13 @@ EvtScript N(EVS_NpcIdle_Koopatrol_01) = {
             IfEq(LVar2, 0)
                 Call(N(GetPeachDisguise), LVar1)
                 IfEq(LVar1, PEACH_DISGUISE_NONE)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, TRUE)
                     IfNe(LVar0, 0)
                         Call(BindNpcAI, NPC_SELF, Ref(N(EVS_CapturePeach)))
                         Set(LVar2, 1)
                     EndIf
                 Else
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
                 EndIf
             EndIf
             Wait(1)
@@ -103,13 +103,13 @@ EvtScript N(EVS_NpcIdle_Koopatrol_02) = {
             IfEq(LVar2, 0)
                 Call(N(GetPeachDisguise), LVar1)
                 IfEq(LVar1, PEACH_DISGUISE_NONE)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
                     IfNe(LVar0, 0)
                         Call(BindNpcAI, NPC_SELF, Ref(N(EVS_CapturePeach)))
                         Set(LVar2, 1)
                     EndIf
                 Else
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
                 EndIf
             EndIf
             Wait(1)
@@ -195,7 +195,7 @@ NpcData N(NpcData_Koopatrol)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Koopatrol_01),
         .settings = &N(NpcSettings_Koopatrol_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = KOOPATROL_ANIMS,
         .extraAnimations = N(ExtraAnims_Koopatrol),
@@ -206,7 +206,7 @@ NpcData N(NpcData_Koopatrol)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Koopatrol_02),
         .settings = &N(NpcSettings_Koopatrol_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = KOOPATROL_ANIMS,
         .extraAnimations = N(ExtraAnims_Koopatrol),

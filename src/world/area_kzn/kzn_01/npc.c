@@ -51,7 +51,7 @@ NpcData N(NpcPutridPiranha) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_PutridPiranha),
     .settings = &N(NpcSettings_PutridPiranhaSentinel),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = PIRANHA_NO_DROPS,
     .animations = PIRANHA_SENTINEL_ANIMS,
 };

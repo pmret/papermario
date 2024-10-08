@@ -57,7 +57,7 @@ Npc* parasol_get_npc(void) {
                         ret = NULL;
                     } else {
                         angle = clamp_angle(atan2(playerStatus->pos.x, playerStatus->pos.z, ret->pos.x, ret->pos.z));
-                        if (fabs(angle - func_800E5348()) > 30.0) {
+                        if (fabs(angle - player_get_side_angle()) > 30.0) {
                             ret = NULL;
                         }
                     }
@@ -228,7 +228,7 @@ void action_update_parasol(void) {
             break;
         case SUBSTATE_DISGUISE_DONE:
             if (--playerStatus->curStateTime == 0) {
-                set_time_freeze_mode(TIME_FREEZE_NORMAL);
+                set_time_freeze_mode(TIME_FREEZE_NONE);
                 disguiseNpc = get_npc_by_index(PeachDisguiseNpcIndex);
                 disguiseNpc->flags &= ~NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
                 playerStatus->flags &= ~PS_FLAG_ROTATION_LOCKED;
@@ -310,7 +310,7 @@ void action_update_parasol(void) {
             break;
         case SUBSTATE_REVERT_DONE:
             if (--playerStatus->curStateTime == 0) {
-                set_time_freeze_mode(TIME_FREEZE_NORMAL);
+                set_time_freeze_mode(TIME_FREEZE_NONE);
                 playerStatus->flags &= ~PS_FLAG_ROTATION_LOCKED;
                 set_action_state(ACTION_STATE_IDLE);
                 enable_player_static_collisions();

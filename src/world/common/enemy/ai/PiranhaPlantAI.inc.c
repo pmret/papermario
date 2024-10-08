@@ -57,7 +57,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     npc->duration--;
     if (enemy->varTable[9] >= npc->duration) {
-        enemy->flags |= (ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP |
+        enemy->flags |= (ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP |
                          ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER);
     }
 
@@ -225,7 +225,7 @@ void N(PiranhaPlantAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     npc->duration--;
     if (enemy->varTable[11] >= npc->duration) {
-        enemy->flags &= ~(ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER);
+        enemy->flags &= ~(ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER);
     }
     if (npc->duration == 0) {
         npc->curAnim = enemy->animList[10];
@@ -313,7 +313,7 @@ API_CALLABLE(N(PiranhaPlantAI_Main)) {
     #ifdef _DEAD_H_
     // this function doesn't seem to have a known counterpart, perhaps related to the difference in the Enemy struct
     func_8004D8E0(enemy);
-    if (enemy->flags & ENEMY_FLAG_100000) {
+    if (enemy->flags & ENEMY_FLAG_SKIP_BATTLE) {
         enemy->unk_114 = 10.0f;
         enemy->unk_118 = 0.7f;
     }

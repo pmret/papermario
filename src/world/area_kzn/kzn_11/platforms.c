@@ -40,7 +40,7 @@ API_CALLABLE(N(IsPartnerLakilester)) {
 }
 
 EvtScript N(EVS_UpdateLeftPlatform) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Call(ParentColliderToModel, COLLIDER_o67, MODEL_o67)
     Call(ParentColliderToModel, COLLIDER_o68, MODEL_o68)
     Call(ParentColliderToModel, COLLIDER_o69, MODEL_o69)
@@ -105,7 +105,7 @@ EvtScript N(EVS_UpdateLeftPlatform) = {
 };
 
 EvtScript N(EVS_UpdateRightPlatform) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Call(ParentColliderToModel, COLLIDER_o26, MODEL_o26)
     Call(ParentColliderToModel, COLLIDER_o27, MODEL_o27)
     Call(ParentColliderToModel, COLLIDER_o28, MODEL_o28)

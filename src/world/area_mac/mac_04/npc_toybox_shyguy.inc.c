@@ -125,7 +125,7 @@ EvtScript N(EVS_SuspiciousGuy_RunAway) = {
 };
 
 EvtScript N(EVS_HiddenRoom_WaitForOuttaSight) = {
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
     IfNe(GB_StoryProgress, STORY_CH4_MET_WITH_TWINK)
         Return
     EndIf

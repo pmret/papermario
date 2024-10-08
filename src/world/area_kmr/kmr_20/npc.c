@@ -596,7 +596,7 @@ EvtScript N(EVS_NpcInit_Luigi_1) = {
         CaseLt(STORY_EPILOGUE)
             Call(SetNpcPos, NPC_SELF, 306, 30, -145)
             Call(InterpNpcYaw, NPC_SELF, 39, 0)
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_400000, 1)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, TRUE)
     EndSwitch
     Return
     End
@@ -608,7 +608,7 @@ NpcData N(NpcData_Luigi_0) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Luigi_0),
     .settings = &N(NpcSettings_Luigi),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = BASE_PASSIVE_FLAGS,
     .drops = NO_DROPS,
     .animations = LUIGI_ANIMS,
     .tattle = MSG_NpcTattle_Luigi,
@@ -620,7 +620,7 @@ NpcData N(NpcData_Luigi_1) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Luigi_1),
     .settings = &N(NpcSettings_Luigi),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = BASE_PASSIVE_FLAGS,
     .drops = NO_DROPS,
     .animations = LUIGI_ANIMS,
     .tattle = MSG_NpcTattle_Luigi,
@@ -696,7 +696,7 @@ EvtScript N(EVS_NpcHit_ShyGuy) = {
     Set(GF_KMR20_ChasedOffShyGuy, TRUE)
     Call(SetNpcVar, NPC_Luigi_1, 0, 1)
     Wait(2)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy)))
     Return
     End
@@ -727,7 +727,7 @@ NpcData N(NpcData_ShyGuy) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_ShyGuy),
     .settings = &N(NpcSettings_ShyGuy_Stationary),
-    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_PARTNER,
+    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_PARTNER,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };

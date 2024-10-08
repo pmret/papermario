@@ -12,7 +12,7 @@ EvtScript N(EVS_SetupChainDrive) = {
 };
 
 EvtScript N(EVS_ExitDoors_kpa_62_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Wait(3)
     Set(LVar0, kpa_70_ENTRY_0)

@@ -124,7 +124,7 @@ EvtScript N(EVS_UpdateDripSplash) = {
 };
 
 EvtScript N(EVS_UpdateDripVolume) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     UseArray(LVarA)
     Set(LVar5, ArrayVar(5))
     Loop(5)
