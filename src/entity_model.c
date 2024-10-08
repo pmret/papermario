@@ -402,7 +402,6 @@ void appendGfx_entity_model(EntityModel* model) {
     gDPPipeSync(gMainGfxPos++);
 }
 
-
 void draw_entity_model_A(s32 modelIdx, Mtx* transformMtx) {
     EntityModel* model;
     RenderTask rt;

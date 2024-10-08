@@ -204,7 +204,6 @@ void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
         posX = mapSpace->pos.x;
         posY = mapSpace->pos.y;
 
-
         if (evt_get_variable(NULL, GF_MAP_ToadTown + i) == 0) {
             continue;
         }

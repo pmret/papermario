@@ -903,7 +903,6 @@ void appendGfx_npc(void* data) {
             guMtxCatF(mtx2, mtx1, mtx1);
         }
 
-
         if (npc->scale.x * SPRITE_WORLD_SCALE_D != 1.0f
             || (npc->scale.y * npc->verticalStretch) * SPRITE_WORLD_SCALE_D != 1.0f
             || npc->scale.z * SPRITE_WORLD_SCALE_D != 1.0f

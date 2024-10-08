@@ -398,7 +398,6 @@ Evt* start_child_script(Evt* parentScript, EvtScript* source, s32 flags) {
     child->stateFlags = flags | EVT_FLAG_ACTIVE;
     child->ptrCurLine = child->ptrFirstLine = child->ptrNextLine = (Bytecode*)source;
 
-
     child->curOpcode = EVT_OP_INTERNAL_FETCH;
     child->userData = NULL;
     child->blockingParent = parentScript;

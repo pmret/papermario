@@ -983,7 +983,6 @@ void btl_update_starpoints_display(void) {
             D_802809F5++;
         }
 
-
         if (cond) {
             s32 posX, posY;
             s32 tens, ones;

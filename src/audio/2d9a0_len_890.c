@@ -249,7 +249,6 @@ u8 au_voice_step(AuVoice* voice) {
     return op;
 }
 
-
 void au_voice_set_vol_changed(AuVoice* voice) {
     voice->envelopeFlags |= AU_VOICE_ENV_FLAG_VOL_CHANGED;
 }

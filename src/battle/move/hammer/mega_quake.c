@@ -212,5 +212,3 @@ EvtScript N(EVS_802A3238) = {
     Return
     End
 };
-
-

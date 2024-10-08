@@ -26,7 +26,6 @@ MusicProximityTrigger N(MusicMixTrigger3) = {
     .manualActivationFlag = MF_MusicMixTrigger3,
 };
 
-
 EvtScript N(EVS_SetupMusicMix) = {
     Call(SetMusicTrack, 0, SONG_TOAD_TOWN, 0, 8)
     Call(EnableMusicProximityMix, 0)

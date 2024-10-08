@@ -943,7 +943,6 @@ ApiStatus evt_handle_exec1(Evt* script) {
     return ApiStatus_DONE2;
 }
 
-
 ApiStatus evt_handle_exec1_get_id(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     EvtScript* newSource = (EvtScript*)evt_get_variable(script, *args++);

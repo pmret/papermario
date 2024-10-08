@@ -2240,7 +2240,6 @@ void btl_state_update_run_away(void) {
                         if (!(enemy->flags & ACTOR_FLAG_NO_DMG_APPLY)) {
                             f32 escapeChance = enemy->actorBlueprint->escapeChance;
 
-
                             if (enemy->debuff == STATUS_KEY_FEAR ||
                                 enemy->debuff == STATUS_KEY_DIZZY ||
                                 enemy->debuff == STATUS_KEY_PARALYZE ||

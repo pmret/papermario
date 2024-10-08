@@ -3111,7 +3111,6 @@ void make_texture_gfx(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_P
     auxFmt = header->auxFmt;
     auxBitDepth = header->auxBitDepth;
 
-
     if (extraTileType == EXTRA_TILE_AUX_INDEPENDENT) {
         if (palette != NULL) {
             auxPaletteIndex = 1;
@@ -4046,7 +4045,6 @@ void mdl_local_gfx_copy_vertices(Vtx* src, s32 num, Vtx* dest) {
         ((u8*)dest)[i] = ((u8*)src)[i];
     }
 }
-
 
 void mdl_make_local_vertex_copy(s32 copyIndex, u16 modelID, s32 isMakingCopy) {
     s32 numVertices;

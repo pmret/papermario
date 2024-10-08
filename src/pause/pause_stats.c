@@ -95,7 +95,6 @@ s8 gPauseStatsGridData[] = {
 #define COLLECTABLES_X 125
 #endif
 
-
 StatsEntryData gStatsMenuEntries[] = {
     { .cursorX =   9, .cursorY =  20, .baseMsgID = PAUSE_MSG_TIP_CONTROLS },
     { .cursorX =  17, .cursorY =  55, .baseMsgID = PAUSE_MSG_TIP_HP },
@@ -146,6 +145,7 @@ MenuWindowBP gStatsMenuWindowBPs[] = {
         .style = { .customStyle = &gPauseWS_12 }
     }
 };
+
 MenuPanel gPausePanelStats = {
     .initialized = FALSE,
     .col = 0,
@@ -161,7 +161,6 @@ MenuPanel gPausePanelStats = {
     .fpUpdate = NULL,
     .fpCleanup = &pause_stats_cleanup
 };
-
 
 #if VERSION_PAL
 INCLUDE_ASM(void, "pause/pause_stats", pause_stats_draw_contents);

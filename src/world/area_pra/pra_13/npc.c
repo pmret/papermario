@@ -269,5 +269,3 @@ NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_Imposters), BTL_PRA3_FORMATION_02, BTL_PRA3_STAGE_00),
     {}
 };
-
-

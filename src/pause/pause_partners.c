@@ -509,7 +509,6 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     s32 style;
     s32 level = get_player_data()->partners[gPausePartnersPartnerIDs[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].level;
 
-
     if (level == PARTNER_RANK_ULTRA) {
         level = 4;
     } else if (level == PARTNER_RANK_SUPER) {

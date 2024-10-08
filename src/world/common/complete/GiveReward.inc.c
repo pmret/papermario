@@ -80,7 +80,6 @@ EvtScript N(GiveCoinReward) = {
     ExecWait(N(GiveItemReward)) \
     Call(AddStarPieces, 1)
 
-
 #define EVT_GIVE_COIN() \
     Set(LVar0, ITEM_COIN) \
     Set(LVar1, 0) \

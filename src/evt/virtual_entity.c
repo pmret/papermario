@@ -401,7 +401,6 @@ API_CALLABLE(VirtualEntityJumpTo) {
         yTemp = virtualEntity->goalPos.y - yTemp;
         goalPosZ = virtualEntity->goalPos.z;
 
-
         virtualEntity->moveTime = moveTime;
         virtualEntity->moveAngle = atan2(xTemp, zTemp, goalPosX, goalPosZ);
         virtualEntity->moveDist = dist2D(xTemp, zTemp, goalPosX, goalPosZ);

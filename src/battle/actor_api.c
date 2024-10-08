@@ -179,7 +179,6 @@ API_CALLABLE(LoadBattleSection) {
     return ApiStatus_DONE1;
 }
 
-
 API_CALLABLE(GetBattlePhase) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.battlePhase);
     return ApiStatus_DONE2;

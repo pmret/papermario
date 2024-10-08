@@ -345,7 +345,6 @@ void N(card_worker_update)(void) {
             N(RitualCards)[1].rasterIndex = 48;
             N(RitualCards)[1].xoffset = 0;
 
-
             N(RitualCards)[2].spriteID = 8;
             N(RitualCards)[2].rasterIndex = 5;
             N(RitualCards)[2].unk_00 = 1;
@@ -761,7 +760,6 @@ EvtScript N(EVS_EndMerleeCamera) = {
     Return
     End
 };
-
 
 EvtScript N(EVS_NpcInteract_Merlee) = {
     Call(func_802D2C14, 1)

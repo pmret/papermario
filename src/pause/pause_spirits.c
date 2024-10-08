@@ -176,7 +176,6 @@ void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
     guMtxF2L(matrix1, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-
     for (i = 0; i < gPauseSpiritsNumSpirits; i++) {
         index = gPauseSpiritsDrawOrder[i];
         frameCounter = gGameStatusPtr->frameCounter * 4;

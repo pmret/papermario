@@ -39,7 +39,6 @@ void explosion_main(s32 type, f32 x, f32 y, f32 z) {
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_EXPLOSION;
 
-
     effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
     effect->data.explosion = data = general_heap_malloc(effect->numParts * sizeof(*data));
@@ -92,7 +91,6 @@ void explosion_main(s32 type, f32 x, f32 y, f32 z) {
 
 void explosion_init(EffectInstance* effect) {
 }
-
 
 EFFECT_DEF_SMOKE_RING(smoke_ring_main);
 EFFECT_DEF_CONFETTI(confetti_main);

@@ -127,5 +127,3 @@ EvtScript N(EVS_UseMove_Impl) = {
     Return
     End
 };
-
-

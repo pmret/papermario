@@ -2552,7 +2552,6 @@ void create_encounters(void) {
                     enemy->instigatorValue = 0;
                     enemy->aiDetectFlags = npcData->aiDetectFlags;
 
-
                     enemy->aiFlags = npcData->aiFlags;
                     enemy->unk_DC = 0;
                     enemy->aiSuspendTime = 0;

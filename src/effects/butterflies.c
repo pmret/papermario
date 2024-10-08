@@ -160,7 +160,6 @@ void butterflies_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
-
 void butterflies_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
     ButterfliesFXData* data = effectTemp->data.butterflies;

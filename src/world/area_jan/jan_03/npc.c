@@ -132,7 +132,6 @@ API_CALLABLE(N(CountFoodItems)) {
     return ApiStatus_DONE2;
 }
 
-
 EvtScript N(EVS_GetRescuedYoshiCount) = {
     Set(LVar0, 0)
     Add(LVar0, GF_JAN05_SavedYoshi)

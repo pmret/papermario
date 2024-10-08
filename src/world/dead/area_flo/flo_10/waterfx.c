@@ -75,7 +75,6 @@ void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {
                             //x1, y1 - 6 * i - 6, x2 - 1, y1 - 6 * i - 1, 0,
                             //G_TX_WRAP, G_TX_WRAP, 9, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-
             //gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(img));
             {
                 Gfx *_g = (Gfx *)(gMainGfxPos++);

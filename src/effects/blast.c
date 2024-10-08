@@ -92,7 +92,7 @@ void blast_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
-void blast_appendGfx(void *effect) {
+void blast_appendGfx(void* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
     Matrix4f sp98;

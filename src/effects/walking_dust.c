@@ -125,7 +125,6 @@ void walking_dust_appendGfx(void* effect) {
             break;
     }
 
-
     if ((data->unk_6C == 0 && temp_t4 == 6) || (data->unk_6C == 1 && temp_t4 == 7)) {
         cond = TRUE;
     }

@@ -307,7 +307,6 @@ void N(build_gfx_floor)(void) {
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
-
 s32 N(BetaPanelData)[] = {
     MODEL_point, COLLIDER_point, -35, 0, -45, ITEM_HEART
 };

@@ -532,7 +532,6 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
         }
     }
 
-
     if ((filemenu_pressedButtons & BUTTON_B) || ((filemenu_pressedButtons & BUTTON_A) && menu->selected == 0xC9)) {
         sfx_play_sound(SOUND_CREATE_FILE_BACKSPACE);
         filemenu_filename_pos--;

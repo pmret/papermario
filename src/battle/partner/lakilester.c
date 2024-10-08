@@ -1420,7 +1420,6 @@ API_CALLABLE(N(ProcessHurricane)) {
             hurricaneState->intensity = 0;
             hurricaneState->startingTotalPower = -1;
 
-
             sSavedHurricaneIntensity = 0;
             D_8023D278 = (1.0 - sin_rad(hurricaneState->intensity * PI_S * 0.5f / 750.0f)) * 8.0 + 13.0;
             sHuffPuffBreathState = -1;
@@ -1528,7 +1527,6 @@ API_CALLABLE(N(ProcessHurricane)) {
             set_actor_anim(ACTOR_PARTNER, -1, ANIM_BattleLakilester_HurricaneExhale);
             break;
     }
-
 
     if (gGameStatusPtr->frameCounter % (7 - sHurricaneIntensity / 2) == 0) {
         x = -220.0f;

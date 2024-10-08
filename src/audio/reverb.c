@@ -370,7 +370,6 @@ Acmd* au_pull_fx(AuFX* fx, Acmd* ptr, s16 outputBuf, s16 arg3) {
     return cmdBufPos;
 }
 
-
 #define INPUT_PARAM         0
 #define OUTPUT_PARAM        1
 #define FBCOEF_PARAM        2

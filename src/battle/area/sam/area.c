@@ -14,7 +14,6 @@ extern Stage A(sam_02c);
 extern Stage A(sam_02d);
 extern Stage A(sam_03);
 
-
 Vec3i A(pos_rocks_1)[] = {
     { -35, 0, -52 },
     { -20, 0, -50 },

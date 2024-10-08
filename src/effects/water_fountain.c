@@ -188,7 +188,6 @@ void water_fountain_update(EffectInstance* effect) {
     }
 }
 
-
 void water_fountain_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
@@ -205,7 +204,7 @@ void water_fountain_render(EffectInstance* effect) {
 void func_E00B8200(void) {
 }
 
-void water_fountain_appendGfx(void *effect) {
+void water_fountain_appendGfx(void* effect) {
     WaterFountainFXData* data = ((EffectInstance*)effect)->data.waterFountain;
     Camera* camera = &gCameras[gCurrentCameraID];
     s32 lifeTime = data->lifeTime;

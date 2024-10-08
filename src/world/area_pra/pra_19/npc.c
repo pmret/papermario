@@ -119,7 +119,6 @@ void N(appendGfx_example_player)(void* data) {
     spr_draw_player_sprite(PLAYER_SPRITE_AUX2, 0, 0, 0, mtxTransform);
 }
 
-
 API_CALLABLE(N(SetPlayerFacingAngle)) {
     gPlayerStatus.spriteFacingAngle = script->varTable[0];
     return ApiStatus_DONE2;
