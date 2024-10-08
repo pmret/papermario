@@ -28,7 +28,7 @@ EffectInstance* breaking_junk_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32
     bp.unk_00 = 0;
     bp.init = breaking_junk_init;
     bp.update = breaking_junk_update;
-    bp.renderWorld = breaking_junk_render;
+    bp.renderScene = breaking_junk_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_BREAKING_JUNK;
 
@@ -138,7 +138,7 @@ void breaking_junk_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_E01187C0[0]);
 
     for (i = 0; i < ((EffectInstance*)effect)->numParts; i++, data++) {

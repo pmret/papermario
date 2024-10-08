@@ -181,7 +181,7 @@ EffectInstance* chapter_change_main(s32 arg0, f32 posX, f32 posY, f32 arg3, f32 
 
     bp.init = chapter_change_init;
     bp.update = chapter_change_update;
-    bp.renderWorld = chapter_change_render;
+    bp.renderScene = chapter_change_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_CHAPTER_CHANGE;
@@ -268,7 +268,7 @@ void chapter_change_appendGfx(void* effect) {
     UnkStruct* ptr1;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     switch (unk_00) {
         case 1:

@@ -103,7 +103,7 @@ EffectInstance* confetti_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
 
     bpPtr->init = confetti_init;
     bpPtr->update = confetti_update;
-    bpPtr->renderWorld = confetti_render;
+    bpPtr->renderScene = confetti_render;
     bpPtr->unk_00 = 0;
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_CONFETTI;
@@ -267,7 +267,7 @@ void confetti_appendGfx(void* effect) {
     spA0 = D_E0088CC0[part->unk_00];
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_09000940_38C4E0);
 
     guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);

@@ -207,7 +207,7 @@ API_CALLABLE(N(CreateScoreDisplay)) {
     s32 hudElemA, hudElemMeter;
 
     if (isInitialCall) {
-        data->workerID = create_worker_world(NULL, &N(worker_draw_score));
+        data->workerID = create_worker_scene(NULL, &N(worker_draw_score));
 
         hudElemA = hud_element_create(&HES_AButton);
         data->hudElemID_AButton = hudElemA;

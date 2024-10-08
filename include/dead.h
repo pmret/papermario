@@ -122,7 +122,7 @@
 #define GetNextPathPos dead_GetNextPathPos
 #define queue_render_task dead_queue_render_task
 #define dma_copy dead_dma_copy
-#define create_worker_world dead_create_worker_world
+#define create_worker_scene dead_create_worker_scene
 #define GetEntryID dead_GetEntryID
 #define SetMusicTrack dead_SetMusicTrack
 #define FadeInMusic dead_FadeInMusic

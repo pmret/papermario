@@ -130,7 +130,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     IfEq(LVar0, HIT_RESULT_MISS)
-        ExecWait(N(EVS_Hammer_ReturnHome_C))
+        ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
     Set(LFlag0, FALSE)
@@ -164,11 +164,11 @@ EvtScript N(EVS_UseMove1_Impl) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(EVS_Hammer_ReturnHome_A))
+            ExecWait(N(EVS_HammerSupport_ReturnHome_SmashSuccess))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_Hammer_ReturnHome_C))
+            ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         EndCaseGroup
     EndSwitch
     Return

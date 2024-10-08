@@ -37,7 +37,7 @@ EffectInstance* effect_86_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
 
     bp.init = effect_86_init;
     bp.update = effect_86_update;
-    bp.renderWorld = effect_86_render;
+    bp.renderScene = effect_86_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_86;
@@ -116,7 +116,7 @@ void effect_86_appendGfx(void* effect) {
     s32 dlistIdx = part->unk_00;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp10, part->unk_04, part->unk_08, part->unk_0C);
     guScaleF(sp50, part->unk_34, part->unk_34, part->unk_34);

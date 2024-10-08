@@ -62,7 +62,7 @@ EffectInstance* lightning_bolt_main(
 
     bp.init = lightning_bolt_init;
     bp.update = lightning_bolt_update;
-    bp.renderWorld = lightning_bolt_render;
+    bp.renderScene = lightning_bolt_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_LIGHTNING_BOLT;
@@ -206,7 +206,7 @@ void lightning_bolt_appendGfx(void* effect) {
     widthScale = data->widthScale;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guScaleF(sp10, 0.1f, 0.1f, 0.1f);
     guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);

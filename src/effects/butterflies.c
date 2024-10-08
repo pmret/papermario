@@ -39,7 +39,7 @@ EffectInstance* butterflies_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.unk_00 = 0;
     bp.init = butterflies_init;
     bp.update = butterflies_update;
-    bp.renderWorld = butterflies_render;
+    bp.renderScene = butterflies_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_BUTTERFLIES;
 
@@ -171,7 +171,7 @@ void butterflies_appendGfx(void* effect) {
     s32 type = data->unk_00;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->shared->graphics));
 
     guTranslateF(sp18, data->unk_0C, data->unk_10 + D_E00AA6EC[data->unk_2C] * 0.3f, data->unk_14);
     guRotateF(sp58, data->unk_28, 0.0f, 1.0f, 0.0f);

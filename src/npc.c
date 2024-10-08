@@ -2467,7 +2467,7 @@ void init_encounter_status(void) {
 
     func_80045AC0();
     gEncounterState = ENCOUNTER_STATE_NONE;
-    create_worker_world(NULL, npc_render_worker_do_nothing);
+    create_worker_scene(NULL, npc_render_worker_do_nothing);
 }
 
 void clear_encounter_status(void) {
@@ -2506,7 +2506,7 @@ void clear_encounter_status(void) {
 
     func_80045AC0();
     gEncounterState = ENCOUNTER_STATE_NONE;
-    create_worker_world(NULL, npc_render_worker_do_nothing);
+    create_worker_scene(NULL, npc_render_worker_do_nothing);
 }
 
 void func_8003E50C(void) {

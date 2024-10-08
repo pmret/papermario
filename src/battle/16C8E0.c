@@ -206,9 +206,9 @@ void initialize_battle(void) {
         gBattleStatus.flags2 &= ~BS_FLAGS2_PEACH_BATTLE;
     }
 
-    create_worker_world(NULL, btl_render_actors);
+    create_worker_scene(NULL, btl_render_actors);
     btl_popup_messages_init();
-    func_80268E88();
+    create_action_command_ui_worker();
     set_windows_visible(WINDOW_GROUP_1);
     D_8029EFBC = hud_element_create(&HES_HPBar);
     hud_element_set_flags(D_8029EFBC, HUD_ELEMENT_FLAG_80);
@@ -1027,7 +1027,7 @@ void btl_update_starpoints_display(void) {
                 if (hud_element_get_script(id) != &HES_Item_StarPoint) {
                     hud_element_set_script(id, &HES_Item_StarPoint);
                 }
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                 hud_element_set_render_pos(id, posX, posY);
                 hud_element_draw_clipped(id);
 
@@ -1035,7 +1035,7 @@ void btl_update_starpoints_display(void) {
                 if (hud_element_get_script(id) != &HES_StatusSPShine) {
                     hud_element_set_script(id, &HES_StatusSPShine);
                 }
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                 hud_element_set_render_pos(id, posX, posY - 5);
                 hud_element_draw_clipped(id);
                 posX -= (one * 20.0f);
@@ -1060,7 +1060,7 @@ void btl_update_starpoints_display(void) {
                 if (hud_element_get_script(id) != &HES_SmallStarPoint) {
                     hud_element_set_script(id, &HES_SmallStarPoint);
                 }
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                 hud_element_set_render_pos(id, posX, posY);
                 hud_element_draw_clipped(id);
                 posX -= one * 10.0f;

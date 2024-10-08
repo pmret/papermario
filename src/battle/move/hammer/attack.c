@@ -89,7 +89,7 @@ EvtScript N(EVS_UseMove_Impl) = {
     Wait(1)
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     IfEq(LVar0, HIT_RESULT_MISS)
-        ExecWait(N(EVS_Hammer_ReturnHome_C))
+        ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
     Call(GetPlayerActionSuccess, LVar0)
@@ -120,11 +120,11 @@ EvtScript N(EVS_UseMove_Impl) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(EVS_Hammer_ReturnHome_A))
+            ExecWait(N(EVS_HammerSupport_ReturnHome_SmashSuccess))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_Hammer_ReturnHome_C))
+            ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         EndCaseGroup
     EndSwitch
     Return
@@ -188,7 +188,7 @@ EvtScript N(EVS_FirstStrike) = {
     Wait(1)
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     IfEq(LVar0, HIT_RESULT_MISS)
-        ExecWait(N(EVS_Hammer_ReturnHome_C))
+        ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -201,7 +201,7 @@ EvtScript N(EVS_FirstStrike) = {
             Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
     EndSwitch
     Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, SUPPRESS_EVENTS_HAMMER, 0, LVar9, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
-    ExecWait(N(EVS_Hammer_ReturnHome_A))
+    ExecWait(N(EVS_HammerSupport_ReturnHome_SmashSuccess))
     Return
     End
 };
@@ -263,7 +263,7 @@ EvtScript N(EVS_UseBerserker_Impl) = {
                 EndThread
         EndSwitch
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
-        ExecWait(N(EVS_Hammer_ReturnHome_C))
+        ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
     Call(GetActionSuccessCopy, LVar0)
@@ -311,7 +311,7 @@ EvtScript N(EVS_UseBerserker_Impl) = {
     Wait(1)
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     IfEq(LVar0, HIT_RESULT_MISS)
-        ExecWait(N(EVS_Hammer_ReturnHome_C))
+        ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
     Call(GetPlayerActionSuccess, LVar0)
@@ -342,11 +342,11 @@ EvtScript N(EVS_UseBerserker_Impl) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(EVS_Hammer_ReturnHome_A))
+            ExecWait(N(EVS_HammerSupport_ReturnHome_SmashSuccess))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_Hammer_ReturnHome_C))
+            ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         EndCaseGroup
     EndSwitch
     Return

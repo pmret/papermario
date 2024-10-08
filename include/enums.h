@@ -3518,10 +3518,9 @@ enum EffectInstanceFlags {
     FX_INSTANCE_FLAG_DISMISS            = 0x00000010, // effect should perform cleanup and self-delete
 };
 
-enum EffectGfxDataFlags {
-    FX_GRAPHICS_DISABLED                = 0x00000000,
-    FX_GRAPHICS_LOADED                  = 0x00000001,
-    FX_GRAPHICS_CAN_FREE                = 0x00000002,
+enum EffectSharedDataFlags {
+    FX_SHARED_DATA_LOADED       = 0x00000001,
+    FX_SHARED_DATA_CAN_FREE     = 0x00000002,
 };
 
 #include "move_enum.h"

@@ -255,48 +255,48 @@ void N(update)(void) {
             btl_set_popup_duration(99);
             id = actionCommandStatus->hudElements[0];
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(id, 255);
             id = actionCommandStatus->hudElements[1];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
             id = actionCommandStatus->hudElements[2];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
             id = actionCommandStatus->hudElements[3];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
             id = actionCommandStatus->hudElements[4];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
             id = actionCommandStatus->hudElements[10];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
             id = actionCommandStatus->hudElements[11];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
             id = actionCommandStatus->hudElements[12];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
             id = actionCommandStatus->hudElements[13];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
             actionCommandStatus->state = 1;
             break;
@@ -411,7 +411,7 @@ void N(update)(void) {
                     hud_element_set_script(id, &HES_TimingMiss);
                 }
                 hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 28, actionCommandStatus->hudPosY + 38);
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             if (actionCommandStatus->unk_5D == -5) {
@@ -422,7 +422,7 @@ void N(update)(void) {
                     hud_element_set_script(id, &HES_TimingMiss);
                 }
                 hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 28, actionCommandStatus->hudPosY + 38);
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                 hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButton);
             }
             actionCommandStatus->unk_5D--;
@@ -486,7 +486,7 @@ void N(update)(void) {
                     hud_element_set_script(id, &HES_TimingMiss);
                 }
                 hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 48, actionCommandStatus->hudPosY + 38);
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
             if (actionCommandStatus->unk_5D == -5) {
                 id = actionCommandStatus->hudElements[7];
@@ -496,7 +496,7 @@ void N(update)(void) {
                     hud_element_set_script(id, &HES_TimingMiss);
                 }
                 hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 48, actionCommandStatus->hudPosY + 38);
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                 hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButton);
             }
             actionCommandStatus->unk_5D--;
@@ -560,7 +560,7 @@ void N(update)(void) {
                         hud_element_set_script(id, &HES_TimingMiss);
                     }
                     hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 68, actionCommandStatus->hudPosY + 38);
-                    hud_element_clear_flags(id, 2);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                 }
             }
             if (actionCommandStatus->unk_5D == -5) {
@@ -571,7 +571,7 @@ void N(update)(void) {
                     hud_element_set_script(id, &HES_TimingMiss);
                 }
                 hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 68, actionCommandStatus->hudPosY + 38);
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                 hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButton);
                 actionCommandStatus->state = 16;
                 return;

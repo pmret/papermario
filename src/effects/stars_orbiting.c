@@ -31,7 +31,7 @@ void stars_orbiting_main(
 
     bp.init = stars_orbiting_init;
     bp.update = stars_orbiting_update;
-    bp.renderWorld = stars_orbiting_render;
+    bp.renderScene = stars_orbiting_render;
     bp.unk_00 = 0;
     bp.renderUI = func_E005E318;
     bp.effectID = EFFECT_STARS_ORBITING;
@@ -113,7 +113,7 @@ void func_E005E334(EffectInstance* effect) {
         Gfx* dlist2 = D_E005E674[0];
 
         gDPPipeSync(gMainGfxPos++);
-        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
         gSPDisplayList(gMainGfxPos++, dlist2);
 
         guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);

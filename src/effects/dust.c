@@ -28,7 +28,7 @@ EffectInstance* dust_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
 
     bp.init = dust_init;
     bp.update = dust_update;
-    bp.renderWorld = dust_render;
+    bp.renderScene = dust_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_DUST;
@@ -134,7 +134,7 @@ void dust_appendGfx(void* effect) {
     Mtx* matrix;
     s32 i;
 
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, part->unk_00 == 0 ? D_09000CC0_33FCC0 : D_09000D68_33FD68);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, part->unk_30, part->unk_34, part->unk_38, part->unk_18);
     gDPSetEnvColor(gMainGfxPos++, part->unk_3C, part->unk_40, part->unk_44, 0);

@@ -38,7 +38,7 @@ void big_smoke_puff_main(f32 x, f32 y, f32 z) {
     bp.unk_00 = 0;
     bp.init = big_smoke_puff_init;
     bp.update = big_smoke_puff_update;
-    bp.renderWorld = big_smoke_puff_render;
+    bp.renderScene = big_smoke_puff_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_BIG_SMOKE_PUFF;
 
@@ -126,7 +126,7 @@ void big_smoke_puff_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guPositionF(mtx, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, data->x, data->y, data->z);
     guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);

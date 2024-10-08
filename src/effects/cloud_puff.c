@@ -20,7 +20,7 @@ void cloud_puff_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.unk_00 = 0;
     bp.init = cloud_puff_init;
     bp.update = cloud_puff_update;
-    bp.renderWorld = cloud_puff_render;
+    bp.renderScene = cloud_puff_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_CLOUD_PUFF;
 
@@ -120,7 +120,7 @@ void cloud_puff_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_090000E0_32ED30);
 
     for (i = 0; i < effectTemp->numParts; i++, part++) {

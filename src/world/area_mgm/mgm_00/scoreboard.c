@@ -168,7 +168,7 @@ API_CALLABLE(N(UpdateRecordDisplay)) {
         script->functionTempPtr[0] = data;
         data->state = RECORD_START_SHOW;
         data->alpha = 255;
-        data->workerID = create_worker_world(NULL, &N(work_draw_record));
+        data->workerID = create_worker_scene(NULL, &N(work_draw_record));
         data->gameType = gameType;
         evt_set_variable(script, MV_RecordDisplayData, (s32)data);
     }

@@ -105,25 +105,25 @@ void N(update)(void) {
             id = actionCommandStatus->hudElements[0];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             id = actionCommandStatus->hudElements[1];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             id = actionCommandStatus->hudElements[2];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             id = actionCommandStatus->hudElements[3];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             actionCommandStatus->state = 1;

@@ -22,7 +22,7 @@ EffectInstance* balloon_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s
 
     bp.init = balloon_init;
     bp.update = balloon_update;
-    bp.renderWorld = balloon_render;
+    bp.renderScene = balloon_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_BALLOON;
@@ -90,7 +90,7 @@ void balloon_appendGfx(void* effect) {
     s32 idx = data->unk_00;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
     guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);

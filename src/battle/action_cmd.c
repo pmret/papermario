@@ -528,10 +528,10 @@ void action_command_free(void) {
     btl_set_popup_duration(0);
 }
 
-void func_80268E88(void) {
+void create_action_command_ui_worker(void) {
     ActionCommandStatus* actionCmdStatus = &gActionCommandStatus;
     actionCmdStatus->workerID = create_worker_frontUI(action_command_update, action_command_draw);
-    actionCmdStatus->actionCommandID = 0;
+    actionCmdStatus->actionCommandID = ACTION_COMMAND_NONE;
 }
 
 s32 check_block_input(s32 buttonMask) {

@@ -47,7 +47,7 @@ void stars_burst_main(
 
         bpPtr->init = stars_burst_init;
         bpPtr->update = stars_burst_update;
-        bpPtr->renderWorld = stars_burst_render;
+        bpPtr->renderScene = stars_burst_render;
         bpPtr->unk_00 = 0;
         bpPtr->renderUI = NULL;
         bpPtr->effectID = EFFECT_STARS_BURST;
@@ -138,7 +138,7 @@ void stars_burst_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_090004C0_343500);
 
     unk_2C = part->unk_2C;

@@ -26,7 +26,7 @@ void smoke_burst_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 time
 
     effectBp.init = smoke_burst_init;
     effectBp.update = smoke_burst_update;
-    effectBp.renderWorld = smoke_burst_render;
+    effectBp.renderScene = smoke_burst_render;
     effectBp.unk_00 = 0;
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_SMOKE_BURST;
@@ -110,7 +110,7 @@ void smoke_burst_appendGfx(void* effect) {
     Matrix4f sp60;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, dlist2);
 
     guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);

@@ -27,7 +27,7 @@ EffectInstance* fire_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg
     bp.unk_00 = 0;
     bp.init = fire_flower_init;
     bp.update = fire_flower_update;
-    bp.renderWorld = fire_flower_render;
+    bp.renderScene = fire_flower_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FIRE_FLOWER;
 
@@ -212,7 +212,7 @@ void fire_flower_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
     guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);

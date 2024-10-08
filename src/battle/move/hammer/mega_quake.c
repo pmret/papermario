@@ -207,7 +207,7 @@ EvtScript N(EVS_802A3238) = {
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EndThread
     Wait(10)
-    ExecWait(N(EVS_Hammer_ReturnHome_B))
+    ExecWait(N(EVS_HammerSupport_ReturnHome_Quake))
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Return
     End

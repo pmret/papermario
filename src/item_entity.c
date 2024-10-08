@@ -262,7 +262,7 @@ void clear_item_entity_data(void) {
         ItemEntityRenderGroup = 0;
     }
 
-    create_worker_world(NULL, draw_item_entities);
+    create_worker_scene(NULL, draw_item_entities);
     create_worker_frontUI(NULL, draw_ui_item_entities);
     isPickingUpItem = FALSE;
 #if !VERSION_JP

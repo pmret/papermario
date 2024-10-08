@@ -187,7 +187,7 @@ API_CALLABLE(N(CreateRitualCards)) {
     imgfx_update(imgfxIdx, IMGFX_SET_ANIM, IMGFX_ANIM_FLIP_CARD_3, 1, 1, 0, IMGFX_FLAG_800);
     evt_set_variable(script, RITUAL_VAR_FILP3_IMGFX, imgfxIdx);
 
-    evt_set_variable(script, RITUAL_VAR_WORKER, create_worker_world(
+    evt_set_variable(script, RITUAL_VAR_WORKER, create_worker_scene(
         N(card_worker_update),
         N(card_worker_render)));
     return ApiStatus_DONE2;

@@ -96,7 +96,7 @@ void landing_dust_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
 
     bpPtr->init = landing_dust_init;
     bpPtr->update = landing_dust_update;
-    bpPtr->renderWorld = landing_dust_render;
+    bpPtr->renderScene = landing_dust_render;
     bpPtr->unk_00 = 0;
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_LANDING_DUST;
@@ -280,7 +280,7 @@ void landing_dust_appendGfx(void* effect) {
     dlist2 = sDlists2[type];
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, dlist2);
 
     spD8 = temp_t0 & 7;

@@ -31,7 +31,7 @@ EffectInstance* green_impact_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     bpPtr->unk_00 = 0;
     bpPtr->init = green_impact_init;
     bpPtr->update = green_impact_update;
-    bpPtr->renderWorld = green_impact_render;
+    bpPtr->renderScene = green_impact_render;
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_GREEN_IMPACT;
 
@@ -160,7 +160,7 @@ void green_impact_appendGfx(void* effect) {
     envB = part->unk_53.b;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, dlist);
 
     guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, part->unk_04, part->unk_08, part->unk_0C);

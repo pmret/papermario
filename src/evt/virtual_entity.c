@@ -666,7 +666,7 @@ void clear_virtual_entity_list(void) {
         (*gCurrentVirtualEntityListPtr)[i]->entityModelIndex = -1;
     }
 
-    create_worker_world(virtual_entity_list_update, virtual_entity_list_render_world);
+    create_worker_scene(virtual_entity_list_update, virtual_entity_list_render_world);
     create_worker_backUI(NULL, virtual_entity_list_render_UI);
 }
 

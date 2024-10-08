@@ -17,7 +17,7 @@ EffectInstance* merlin_house_stars_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) 
 
     bp.init = merlin_house_stars_init;
     bp.update = merlin_house_stars_update;
-    bp.renderWorld = merlin_house_stars_render;
+    bp.renderScene = merlin_house_stars_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_MERLIN_HOUSE_STARS;
@@ -138,7 +138,7 @@ void merlin_house_stars_appendGfx(void* effect) {
     s32 ult;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp10, data->unk_0C, data->unk_10, data->unk_14);
     guScaleF(sp50, 0.96f, 0.96f, 0.96f);

@@ -128,7 +128,7 @@ void N(appendGfx_test_reflection_floor)(void* data) {
 API_CALLABLE(N(PartnerReflectTest)) {
     Npc* partner;
 
-    script->array[1] = create_worker_world(N(test_reflection_worker_partner), NULL);
+    script->array[1] = create_worker_scene(N(test_reflection_worker_partner), NULL);
     partner = get_npc_safe(NPC_PARTNER);
 
     if (partner == NULL) {

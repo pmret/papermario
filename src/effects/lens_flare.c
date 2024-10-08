@@ -31,7 +31,7 @@ void lens_flare_main(s32 type, f32 posX, f32 posY, f32 posZ, s32 duration) {
 
     bp.init = lens_flare_init;
     bp.update = lens_flare_update;
-    bp.renderWorld = lens_flare_render;
+    bp.renderScene = lens_flare_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_LENS_FLARE;
@@ -116,7 +116,7 @@ void lens_flare_appendGfx(void* effect) {
     Matrix4f mtxShared;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_E0034788[type]);
 
     guTranslateF(mtxTransform, data->pos.x, data->pos.y, data->pos.z);

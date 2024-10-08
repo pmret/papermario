@@ -50,7 +50,7 @@ EffectInstance* recover_main(s32 type, f32 posX, f32 posY, f32 posZ, s32 duratio
 
     bp.init = recover_init;
     bp.update = recover_update;
-    bp.renderWorld = recover_render;
+    bp.renderScene = recover_render;
     bp.renderUI = func_E008042C;
     bp.unk_00 = 0;
     bp.effectID = EFFECT_RECOVER;
@@ -174,7 +174,7 @@ void func_E0080448(EffectInstance* effect) {
     Matrix4f sp98;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
     guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);

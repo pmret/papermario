@@ -78,7 +78,7 @@ void sparkles_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
 
     bpPtr->init = sparkles_init;
     bpPtr->update = sparkles_update;
-    bpPtr->renderWorld = sparkles_render;
+    bpPtr->renderScene = sparkles_render;
     bpPtr->unk_00 = 0;
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_SPARKLES;
@@ -251,7 +251,7 @@ void sparkles_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_09000F20_338EE0);
 
     colorIdx = (part->unk_20 - 1) * 3;

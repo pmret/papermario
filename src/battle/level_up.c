@@ -780,7 +780,7 @@ void btl_state_update_celebration(void) {
 
                     id = LevelUpStatTextIDs[LVL_UP_FP][LVL_UP_NEXT_ONES];
                     hud_element_set_script(id, HES_LevelUpDigits[LVL_UP_FP][onesDigit]);
-                    hud_element_clear_flags(id, 2);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
                     hud_element_get_render_pos(id, &x, &y);
                     hud_element_set_render_pos(id, x + 2, y + 46);
                     CantLevelUpStat[MENU_FP] = TRUE;

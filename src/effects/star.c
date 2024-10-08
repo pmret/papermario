@@ -35,7 +35,7 @@ EffectInstance* star_main(s32 type, f32 startX, f32 startY, f32 startZ, f32 endX
     bp.unk_00 = 0;
     bp.init = star_init;
     bp.update = star_update;
-    bp.renderWorld = star_render;
+    bp.renderScene = star_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_STAR;
 
@@ -214,7 +214,7 @@ void star_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, scale, data->pos.x, data->pos.y, data->pos.z);
     guRotateF(sp60, data->starAngle, 0.0f, 0.0f, 1.0f);

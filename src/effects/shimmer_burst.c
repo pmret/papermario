@@ -41,7 +41,7 @@ EffectInstance* shimmer_burst_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
 
     bp.init = shimmer_burst_init;
     bp.update = shimmer_burst_update;
-    bp.renderWorld = shimmer_burst_render;
+    bp.renderScene = shimmer_burst_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SHIMMER_BURST;
@@ -211,7 +211,7 @@ void shimmer_burst_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp20, part->unk_04, part->unk_08, part->unk_0C);
     guScaleF(sp60, part->unk_60, part->unk_60, part->unk_60);

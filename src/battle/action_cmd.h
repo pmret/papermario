@@ -113,7 +113,7 @@ extern HudScript HES_TimingWait;
 
 void action_command_init_status(void);
 void action_command_free(void);
-void func_80268E88(void);
+void create_action_command_ui_worker(void);
 void func_80269118(void);
 void func_80269160(void);
 

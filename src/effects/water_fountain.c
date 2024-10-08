@@ -129,7 +129,7 @@ EffectInstance* water_fountain_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 
 
     effectBp.init = water_fountain_init;
     effectBp.update = water_fountain_update;
-    effectBp.renderWorld = water_fountain_render;
+    effectBp.renderScene = water_fountain_render;
     effectBp.unk_00 = 0;
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_WATER_FOUNTAIN;
@@ -236,7 +236,7 @@ void water_fountain_appendGfx(void *effect) {
     }
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
     guScaleF(sp58, data->unk_34, data->unk_34, data->unk_34);

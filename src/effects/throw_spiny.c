@@ -28,7 +28,7 @@ EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
 
     bp.init = throw_spiny_init;
     bp.update = throw_spiny_update;
-    bp.renderWorld = throw_spiny_render;
+    bp.renderScene = throw_spiny_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_THROW_SPINY;
@@ -166,7 +166,7 @@ void throw_spiny_appendGfx(void* effect) {
     f32 scale = data->unk_40 * SPRITE_WORLD_SCALE_D;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
     guScaleF(sp58, scale * data->xScale, scale * data->yScale, scale);

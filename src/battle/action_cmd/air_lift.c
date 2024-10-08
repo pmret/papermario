@@ -98,13 +98,13 @@ void N(update)(void) {
             id = actionCommandStatus->hudElements[0];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             id = actionCommandStatus->hudElements[1];
             hud_element_set_alpha(id, 255);
             if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             actionCommandStatus->state = 1;
@@ -177,7 +177,7 @@ void N(update)(void) {
                 actionCommandStatus->isBarFilled = TRUE;
                 id = actionCommandStatus->hudElements[2];
                 hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 50, actionCommandStatus->hudPosY + 28);
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             battleStatus->actionSuccess = actionCommandStatus->barFillLevel / 100;

@@ -76,7 +76,7 @@ EffectInstance* snowman_doll_main(
 
     bp.init = snowman_doll_init;
     bp.update = snowman_doll_update;
-    bp.renderWorld = snowman_doll_render;
+    bp.renderScene = snowman_doll_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SNOWMAN_DOLL;
@@ -296,7 +296,7 @@ void snowman_doll_appendGfx(void* effect) {
     Matrix4f sp58;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
     guScaleF(sp58, data->unk_28, data->unk_28, data->unk_28);

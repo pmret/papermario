@@ -174,7 +174,7 @@ void N(update)(void) {
                 actionCommandStatus->barFillLevel = 10000;
                 actionCommandStatus->isBarFilled = TRUE;
                 hud_element_set_render_pos(id, actionCommandStatus->hudPosX + 50, actionCommandStatus->hudPosY + 28);
-                hud_element_clear_flags(id, 2);
+                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             if (D_802A98C0 & BUTTON_STICK_LEFT) {

@@ -2606,14 +2606,14 @@ typedef union {
     struct PinkSparklesFXData*          pinkSparkles;
     struct StarOutlineFXData*           starOutline;
     struct Effect86FXData*              unk_86;
-} EffectData;
+} EffectInstanceDataPtr;
 
 typedef struct EffectInstance {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ s32 effectIndex;
+    /* 0x04 */ s32 effectID;
     /* 0x08 */ s32 numParts;
-    /* 0x0C */ EffectData data;
-    /* 0x10 */ struct EffectGraphics* graphics;
+    /* 0x0C */ EffectInstanceDataPtr data;
+    /* 0x10 */ struct EffectSharedData* shared;
 } EffectInstance; // size = 0x14
 
 // composite struct for watt effects -- NOT the same as StaticStatusFXData
@@ -2661,20 +2661,20 @@ typedef struct EffectBlueprint {
     /* 0x04 */ s32 effectID;
     /* 0x08 */ void (*init)(EffectInstance* effectInst);
     /* 0x0C */ void (*update)(EffectInstance* effectInst);
-    /* 0x10 */ void (*renderWorld)(EffectInstance* effectInst);
+    /* 0x10 */ void (*renderScene)(EffectInstance* effectInst);
     /* 0x14 */ void (*renderUI)(EffectInstance* effectInst);
 } EffectBlueprint; // size = 0x18
 
-typedef struct EffectGraphics {
+typedef struct EffectSharedData {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 instanceCounter;
     /* 0x0C */ s32 freeDelay;
     /* 0x10 */ void (*update)(EffectInstance* effectInst);
-    /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
+    /* 0x14 */ void (*renderScene)(EffectInstance* effectInst);
     /* 0x18 */ void (*renderUI)(EffectInstance* effectInst);
-    /* 0x1C */ s32* data;
-} EffectGraphics; // size = 0x20
+    /* 0x1C */ s32* graphics;
+} EffectSharedData; // size = 0x20
 
 typedef struct EffectTableEntry {
     /* 0x00 */ void (*entryPoint);

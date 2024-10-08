@@ -22,7 +22,7 @@ EffectInstance* effect_75_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 scale
 
     bp.init = effect_75_init;
     bp.update = effect_75_update;
-    bp.renderWorld = effect_75_render;
+    bp.renderScene = effect_75_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_75;
@@ -201,7 +201,7 @@ void effect_75_appendGfx(void* effect) {
     Matrix4f mtxTemp;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(mtxTransfrom, data->pos.x, data->pos.y, data->pos.z);
     guScaleF(mtxTemp, data->scale, data->scale, data->scale);

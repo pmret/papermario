@@ -24,7 +24,7 @@ EffectInstance* floating_rock_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 f
 
     bp.init = floating_rock_init;
     bp.update = floating_rock_update;
-    bp.renderWorld = floating_rock_render;
+    bp.renderScene = floating_rock_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FLOATING_ROCK;
@@ -115,7 +115,7 @@ void floating_rock_appendGfx(void* effect) {
     Matrix4f mtxTransform;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guPositionF(mtxTransform, data->rot.x, data->rot.z, data->rot.y, data->scale, data->pos.x, data->pos.y, data->pos.z);
     guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);

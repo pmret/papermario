@@ -89,7 +89,7 @@ void damage_indicator_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 starsRadi
 
     bp.init = damage_indicator_init;
     bp.update = damage_indicator_update;
-    bp.renderWorld = damage_indicator_render;
+    bp.renderScene = damage_indicator_render;
     bp.renderUI = damage_indicator_render_ui;
     bp.unk_00 = 0;
     bp.effectID = EFFECT_DAMAGE_INDICATOR;
@@ -202,7 +202,7 @@ void damage_indicator_render_impl(EffectInstance* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->shared->graphics));
 
     guTranslateF(mtxTransform, part->basePos.x, part->basePos.y, part->basePos.z);
     guRotateF(mtxTemp, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
