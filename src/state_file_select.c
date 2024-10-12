@@ -337,7 +337,7 @@ void state_step_exit_language_select(void) {
             D_800A0931 = 3;
             /* fallthrough */
         case 3:
-            set_time_freeze_mode(TIME_FREEZE_NORMAL);
+            set_time_freeze_mode(TIME_FREEZE_NONE);
             set_game_mode(GAME_MODE_TITLE_SCREEN);
             gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS;
             break;
