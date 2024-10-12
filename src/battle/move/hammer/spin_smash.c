@@ -61,7 +61,7 @@ EvtScript N(EVS_UseMove) = {
 
 EvtScript N(EVS_UseMove1_Impl) = {
     Call(LoadActionCommand, ACTION_COMMAND_SMASH)
-    Call(action_command_hammer_init)
+    Call(ActionCommandInitHammer)
     Call(InitTargetIterator)
     ExecWait(N(EVS_HammerSupport_SmashApproach))
     Set(LVar1, 0)
@@ -107,7 +107,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
             EndIf
         EndLoop
     EndIf
-    Call(action_command_hammer_start, 0, LVarD, 3)
+    Call(ActionCommandStartHammer, 0, LVarD, 3)
     Call(SetActionQuality, 0)
     Set(LVar1, 0)
     Loop(30)
@@ -184,7 +184,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
 
 EvtScript N(EVS_UseMove2_Impl) = {
     Call(LoadActionCommand, ACTION_COMMAND_SMASH)
-    Call(action_command_hammer_init)
+    Call(ActionCommandInitHammer)
     Call(InitTargetIterator)
     ExecWait(N(EVS_HammerSupport_SmashApproach))
     Set(LVar1, 0)
@@ -229,7 +229,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
             EndIf
         EndLoop
     EndIf
-    Call(action_command_hammer_start, 0, LVarD, 3)
+    Call(ActionCommandStartHammer, 0, LVarD, 3)
     Call(SetActionQuality, 0)
     Set(LVar1, 0)
     Loop(30)
@@ -306,7 +306,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
 
 EvtScript N(EVS_UseMove3_Impl) = {
     Call(LoadActionCommand, ACTION_COMMAND_SMASH)
-    Call(action_command_hammer_init)
+    Call(ActionCommandInitHammer)
     Call(InitTargetIterator)
     ExecWait(N(EVS_HammerSupport_SmashApproach))
     Set(LVar1, 0)
@@ -349,7 +349,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
             EndIf
         EndLoop
     EndIf
-    Call(action_command_hammer_start, 0, LVarD, 3)
+    Call(ActionCommandStartHammer, 0, LVarD, 3)
     Call(SetActionQuality, 0)
     Set(LVar1, 0)
     Loop(30)

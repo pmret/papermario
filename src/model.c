@@ -1296,7 +1296,7 @@ s32 RenderTaskBasePriorities[] = {
     [RENDER_MODE_CLOUD_NO_ZB]               =  700000,
 };
 
-b8 D_8014C248 = FALSE; // possibly a 'warm-up done' flag for boot. never read.
+s8 D_8014C248 = FALSE; // possibly a 'warm-up done' flag for boot. never read.
 
 ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
 ModelNode** gCurrentModelTreeRoot;

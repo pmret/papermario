@@ -11,16 +11,8 @@ enum HammerActionResult {
     HAMMER_RESULT_GOOD   = 1,
 };
 
-enum ActionCommandStates {
-    AC_STATE_INIT       = 0,  // create hud elements
-    AC_STATE_APPEAR     = 1,  // hud elements move into position
-    AC_STATE_START      = 10, // begin listening for input
-    AC_STATE_ACTIVE     = 11, // responding to player input
-    AC_STATE_DISPOSE    = 12, // delay and disappear
-};
-
 // indices into ActionCommandStatus::hudElements for this action command
-enum HamemrHudElements {
+enum {
     HIDX_BAR            = 0,
     HIDX_WAIT           = 1,
     HIDX_CHARGE_A       = 2,
@@ -30,7 +22,7 @@ enum HamemrHudElements {
     HIDX_RIGHT_ON       = 6,
 };
 
-API_CALLABLE(N(init)) {
+API_CALLABLE(ActionCommandInitHammer) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 id;
@@ -39,7 +31,7 @@ API_CALLABLE(N(init)) {
     battleStatus->actionCmdDifficultyTable = actionCmdTableHammer;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
 
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = HAMMER_RESULT_NONE;
         battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
@@ -99,12 +91,12 @@ API_CALLABLE(N(init)) {
 }
 
 // args: prep time, duration, difficulty
-API_CALLABLE(N(start)) {
+API_CALLABLE(ActionCommandStartHammer) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = HAMMER_RESULT_NONE;
         battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
@@ -128,7 +120,7 @@ API_CALLABLE(N(start)) {
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     actionCommandStatus->state = AC_STATE_START;
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
-    func_80269118();
+    increment_action_command_attempt_count();
     return ApiStatus_DONE2;
 }
 
@@ -222,7 +214,7 @@ void N(update)(void) {
             }
 
             actionCommandStatus->frameCounter = 0;
-            if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT) && battleStatus->actionCommandMode < ACTION_COMMAND_MODE_TUTORIAL) {
+            if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT) && battleStatus->actionCommandMode < AC_MODE_TUTORIAL) {
                 actionCommandStatus->hammerMissedStart = TRUE;
             }
             actionCommandStatus->state = AC_STATE_ACTIVE;
@@ -230,7 +222,7 @@ void N(update)(void) {
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(99);
 
-            if (battleStatus->actionCommandMode <= ACTION_COMMAND_MODE_TUTORIAL_BLOCK) {
+            if (battleStatus->actionCommandMode <= AC_MODE_TUTORIAL_BLOCK) {
                 return;
             }
 
@@ -284,7 +276,7 @@ void N(update)(void) {
             if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT)
                 && phi_s0 == 0
                 && actionCommandStatus->autoSucceed == 0
-                && battleStatus->actionCommandMode < ACTION_COMMAND_MODE_TUTORIAL
+                && battleStatus->actionCommandMode < AC_MODE_TUTORIAL
             ) {
                 battleStatus->actionSuccess = HAMMER_RESULT_FAILED;
                 battleStatus->actionResult = ACTION_RESULT_EARLY;
@@ -315,7 +307,7 @@ void N(update)(void) {
                     }
                 }
 
-                if (battleStatus->actionCommandMode < ACTION_COMMAND_MODE_TUTORIAL || actionCommandStatus->frameCounter != actionCommandStatus->duration) {
+                if (battleStatus->actionCommandMode < AC_MODE_TUTORIAL || actionCommandStatus->frameCounter != actionCommandStatus->duration) {
                     actionCommandStatus->frameCounter++;
                     if (actionCommandStatus->duration < actionCommandStatus->frameCounter) {
                         if (battleStatus->actionSuccess == HAMMER_RESULT_NONE) {
@@ -323,7 +315,7 @@ void N(update)(void) {
                         }
 
                         if (battleStatus->actionSuccess == HAMMER_RESULT_GOOD) {
-                            func_80269160();
+                            increment_action_command_success_count();
                         }
 
                         btl_set_popup_duration(0);

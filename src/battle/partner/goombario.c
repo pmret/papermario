@@ -50,7 +50,7 @@ API_CALLABLE(N(GetReturnMoveTime)) {
         script->varTable[0] = 20;
     }
 
-    if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode != AC_MODE_NOT_LEARNED) {
         if (script->varTable[0] < 10) {
             script->varTable[0] = 10;
         }
@@ -212,7 +212,7 @@ API_CALLABLE(N(JumpOnTarget)) {
             }
             break;
         case 2:
-            if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
+            if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
                 return ApiStatus_DONE2;
             }
             state->moveTime = 1;

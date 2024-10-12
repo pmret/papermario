@@ -547,7 +547,7 @@ EvtScript N(getShellTossMoveTime) = {
 
 EvtScript N(shellToss) = {
     Call(LoadActionCommand, ACTION_COMMAND_SMASH)
-    Call(action_command_hammer_init)
+    Call(ActionCommandInitHammer)
     Call(InitTargetIterator)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Add(LVar0, 30)
@@ -567,7 +567,7 @@ EvtScript N(shellToss) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(action_command_hammer_start, 0, 50 * DT - 3, 3)
+    Call(ActionCommandStartHammer, 0, 50 * DT - 3, 3)
     Call(SetActionQuality, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_KOOPER_SHELL_SPINUP)
@@ -704,7 +704,7 @@ EvtScript N(shellToss) = {
 
 EvtScript N(powerShell) = {
     Call(LoadActionCommand, ACTION_COMMAND_SMASH)
-    Call(action_command_hammer_init)
+    Call(ActionCommandInitHammer)
     Call(GetActorLevel, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
         CaseEq(0)
@@ -737,7 +737,7 @@ EvtScript N(powerShell) = {
         EndIf
     EndLoop
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_CLOSE_UP)
-    Call(action_command_hammer_start, 0, 47, 3)
+    Call(ActionCommandStartHammer, 0, 47, 3)
     Call(SetActionQuality, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_KOOPER_SHELL_SPINUP)

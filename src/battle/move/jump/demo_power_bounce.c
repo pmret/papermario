@@ -8,7 +8,7 @@
 
 #include "battle/common/move/JumpSupport.inc.c"
 
-s32 N(DifficultyTable)[] = {
+s32 N(DifficultyTable)[AC_DIFFICULTY_LEN] = {
     7, 6, 5, 4, 3, 2, 1, 0
 };
 

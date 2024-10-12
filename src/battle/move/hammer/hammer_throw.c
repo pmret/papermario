@@ -155,7 +155,7 @@ EvtScript N(EVS_802A4164) = {
 
 EvtScript N(EVS_UseMove_Impl) = {
     Call(LoadActionCommand, ACTION_COMMAND_SMASH)
-    Call(action_command_hammer_init)
+    Call(ActionCommandInitHammer)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Add(LVar0, 16)
@@ -206,7 +206,7 @@ EvtScript N(EVS_UseMove_Impl) = {
             EndLoop
         EndIf
         Add(LVarD, 6)
-        Call(action_command_hammer_start, 0, LVarD, 3)
+        Call(ActionCommandStartHammer, 0, LVarD, 3)
         Call(SetActionQuality, 0)
         Set(LVar1, 0)
         Loop(30)

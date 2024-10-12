@@ -765,7 +765,7 @@ void btl_update_message_popup(void* data) {
         case BTL_MSG_ACTION_TIP_NOT_USED_3:
             actionCommandMode = battleStatus->actionCommandMode;
             ActionCommandTipVisible = TRUE;
-            if (actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
+            if (actionCommandMode == AC_MODE_NOT_LEARNED) {
                 ActionCommandTipVisible = FALSE;
                 shouldDisposeWindow = TRUE;
                 break;
@@ -920,7 +920,7 @@ void btl_update_message_popup(void* data) {
                     }
 
                     if (!(gBattleStatus.flags1 & BS_FLAGS1_4000)
-                        && (actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL)
+                        && (actionCommandMode != AC_MODE_TUTORIAL)
                     ) {
                         set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW_TRANSPARENT);
                         switch (popup->messageIndex) {
@@ -999,7 +999,7 @@ void btl_update_message_popup(void* data) {
                     }
                     break;
                 case BTL_MSG_STATE_ACTION_TIP_DISPOSE:
-                    if ((actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL)
+                    if ((actionCommandMode != AC_MODE_TUTORIAL)
                         || (gBattleStatus.flags1 & BS_FLAGS1_10000)
                     ) {
                         s16* duration;

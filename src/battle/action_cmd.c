@@ -25,29 +25,29 @@ u8 mashMeter_cutOffColors[15] = {
     255, 255, 255,
 };
 
-s32 actionCmdTableJump[] = { 7, 6, 5, 4, 3, 2, 1, 0 };
-s32 actionCmdTableHammer[] = { 11, 10, 9, 8, 7, 6, 5, 4 };
-s32 actionCmdTableFlee[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableBreakFree[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableWhirlwind[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableStopLeech[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTable07[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableDizzyShell[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableFireShell[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTable0A[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableBomb[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableBodySlam[] = { 9, 8, 7, 6, 5, 4, 3, 2 };
-s32 actionCmdTableAirLift[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableAirRaid[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableSquirt[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTablePowerShock[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableMegaShock[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableSmack[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableSpinySurge[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableHurricane[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableSpook[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableWaterBlock[] = { 6, 3, 5, 3, 4, 3, 2, 3, 1, 3, 0, 3, 0, 2, 0, 1 };
-s32 actionCmdTableTidalWave[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableJump[AC_DIFFICULTY_LEN] = { 7, 6, 5, 4, 3, 2, 1, 0 };
+s32 actionCmdTableHammer[AC_DIFFICULTY_LEN] = { 11, 10, 9, 8, 7, 6, 5, 4 };
+s32 actionCmdTableFlee[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableBreakFree[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableWhirlwind[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableStopLeech[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTable07[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableDizzyShell[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableFireShell[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTable0A[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableBomb[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableBodySlam[AC_DIFFICULTY_LEN] = { 9, 8, 7, 6, 5, 4, 3, 2 };
+s32 actionCmdTableAirLift[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableAirRaid[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableSquirt[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTablePowerShock[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableMegaShock[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableSmack[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableSpinySurge[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableHurricane[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableSpook[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+s32 actionCmdTableWaterBlock[AC_DIFFICULTY_LEN][2] = { {6, 3}, {5, 3}, {4, 3}, {2, 3}, {1, 3}, {0, 3}, {0, 2}, {0, 1} };
+s32 actionCmdTableTidalWave[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
 
 #define AC_TBL_ENTRY(name) \
     action_cmd_ ## name ## _ROM_START, action_cmd_ ## name ## _ROM_END, action_cmd_ ## name ## _VRAM
@@ -548,12 +548,12 @@ s32 check_block_input(s32 buttonMask) {
 
     battleStatus->blockResult = BLOCK_RESULT_FAIL;
 
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL_BLOCK && (battleStatus->flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
+    if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL_BLOCK && (battleStatus->flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
         battleStatus->blockResult = BLOCK_RESULT_SUCCESS;
         return TRUE;
     }
 
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED || (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED)) {
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED || (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED)) {
         return FALSE;
     }
 
@@ -638,7 +638,7 @@ s32 check_block_input(s32 buttonMask) {
     return block;
 }
 
-void func_80269118(void) {
+void increment_action_command_attempt_count(void) {
     PlayerData* playerData = &gPlayerData;
     ActionCommandStatus *actionCommandStatus = &gActionCommandStatus;
 
@@ -652,7 +652,7 @@ void func_80269118(void) {
     }
 }
 
-void func_80269160(void) {
+void increment_action_command_success_count(void) {
     PlayerData* playerData = &gPlayerData;
 
     if (!gActionCommandStatus.autoSucceed && gActionCommandStatus.hitsTakenIsMax) {

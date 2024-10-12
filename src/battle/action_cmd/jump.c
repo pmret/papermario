@@ -5,14 +5,6 @@
 
 extern s32 actionCmdTableJump[];
 
-enum {
-    AC_JUMP_STATE_0         = 0,
-    AC_JUMP_STATE_1         = 1,
-    AC_JUMP_STATE_10        = 10,
-    AC_JUMP_STATE_11        = 11,
-    AC_JUMP_STATE_CLEANUP   = 12,
-};
-
 API_CALLABLE(N(init)) {
     s32 hudElement;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -21,7 +13,7 @@ API_CALLABLE(N(init)) {
     gBattleStatus.actionCmdDifficultyTable = actionCmdTableJump;
     gBattleStatus.actionResult = ACTION_RESULT_FAIL;
 
-    if (gBattleStatus.actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
+    if (gBattleStatus.actionCommandMode == AC_MODE_NOT_LEARNED) {
         gBattleStatus.actionSuccess = 0;
         return ApiStatus_DONE2;
     }
@@ -57,7 +49,7 @@ API_CALLABLE(N(start)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     } else {
@@ -77,8 +69,8 @@ API_CALLABLE(N(start)) {
             hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
         }
 
-        actionCommandStatus->state = AC_JUMP_STATE_10;
-        func_80269118();
+        actionCommandStatus->state = AC_STATE_START;
+        increment_action_command_attempt_count();
         btl_set_popup_duration(10);
         return ApiStatus_DONE2;
     }
@@ -91,14 +83,14 @@ void N(update)(void) {
     s32 successWindow;
 
     switch (actionCommandStatus->state) {
-        case AC_JUMP_STATE_0:
-            if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL) {
+        case AC_STATE_INIT:
+            if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL) {
                 btl_set_popup_duration(99);
             }
-            actionCommandStatus->state = AC_JUMP_STATE_1;
+            actionCommandStatus->state = AC_STATE_APPEAR;
             break;
-        case AC_JUMP_STATE_1:
-            if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL) {
+        case AC_STATE_APPEAR:
+            if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL) {
                 btl_set_popup_duration(99);
             }
 
@@ -122,8 +114,8 @@ void N(update)(void) {
                 }
             }
             break;
-        case AC_JUMP_STATE_10:
-            if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL) {
+        case AC_STATE_START:
+            if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL) {
                 btl_set_popup_duration(99);
             }
 
@@ -142,13 +134,13 @@ void N(update)(void) {
 
             actionCommandStatus->frameCounter = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];
             battleStatus->actionSuccess = -1;
-            actionCommandStatus->state = AC_JUMP_STATE_11;
+            actionCommandStatus->state = AC_STATE_ACTIVE;
             // fall through
-        case AC_JUMP_STATE_11:
-            if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL) {
+        case AC_STATE_ACTIVE:
+            if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL) {
                 btl_set_popup_duration(99);
             }
-            if (battleStatus->actionCommandMode >= ACTION_COMMAND_MODE_TUTORIAL) {
+            if (battleStatus->actionCommandMode >= AC_MODE_TUTORIAL) {
                 if (actionCommandStatus->frameCounter == 0) {
                     break;
                 }
@@ -173,18 +165,18 @@ void N(update)(void) {
 
             if (actionCommandStatus->frameCounter == 0) {
                 if (battleStatus->actionSuccess == 1) {
-                    func_80269160();
+                    increment_action_command_success_count();
                 }
-                if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL) {
+                if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL) {
                     btl_set_popup_duration(0);
                 }
                 actionCommandStatus->frameCounter = 5;
-                actionCommandStatus->state = AC_JUMP_STATE_CLEANUP;
+                actionCommandStatus->state = AC_STATE_DISPOSE;
                 break;
             }
             actionCommandStatus->frameCounter--;
             break;
-        case AC_JUMP_STATE_CLEANUP:
+        case AC_STATE_DISPOSE:
             if (actionCommandStatus->frameCounter != 0) {
                 actionCommandStatus->frameCounter--;
                 break;

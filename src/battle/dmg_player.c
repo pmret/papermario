@@ -1917,7 +1917,7 @@ API_CALLABLE(PlayerBasicJumpToGoal) {
             }
             break;
         case BASIC_STATE_02:
-            if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
+            if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
                 return ApiStatus_DONE2;
             }
             playerState->moveTime = 1;

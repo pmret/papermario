@@ -14,7 +14,7 @@ API_CALLABLE(N(init)) {
 
     battleStatus->unk_82 = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableHurricane;
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
@@ -24,7 +24,7 @@ API_CALLABLE(N(init)) {
     actionCommandStatus->actionCommandID = ACTION_COMMAND_HURRICANE;
     actionCommandStatus->hudPrepareTime = 30;
     actionCommandStatus->hudPosX = -48;
-    actionCommandStatus->state = 0;
+    actionCommandStatus->state = AC_STATE_INIT;
     actionCommandStatus->wrongButtonPressed = FALSE;
     actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->barFillWidth = 0;
@@ -59,39 +59,39 @@ API_CALLABLE(N(init)) {
 }
 
 API_CALLABLE(N(start)) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
 
     action_command_init_status();
 
-    actionCommandStatus->prepareTime = evt_get_variable(script, *args++);
-    actionCommandStatus->duration = evt_get_variable(script, *args++);
-    actionCommandStatus->difficulty = evt_get_variable(script, *args++);
-    actionCommandStatus->difficulty = adjust_action_command_difficulty(actionCommandStatus->difficulty);
-    actionCommandStatus->targetWeakness = evt_get_variable(script, *args++);
+    acs->prepareTime = evt_get_variable(script, *args++);
+    acs->duration = evt_get_variable(script, *args++);
+    acs->difficulty = evt_get_variable(script, *args++);
+    acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
+    acs->targetWeakness = evt_get_variable(script, *args++);
 
-    actionCommandStatus->wrongButtonPressed = FALSE;
-    actionCommandStatus->barFillLevel = 0;
-    actionCommandStatus->barFillWidth = 0;
+    acs->wrongButtonPressed = FALSE;
+    acs->barFillLevel = 0;
+    acs->barFillWidth = 0;
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
-    actionCommandStatus->state = 10;
+    acs->state = AC_STATE_START;
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
 
-    func_80269118();
+    increment_action_command_attempt_count();
 
     return ApiStatus_DONE2;
 }
 
 // Almost identical to action_command_mega_shock_update (mega_shock)
 void N(update)(void) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
 
     s32 buttonsPushed;
@@ -103,82 +103,79 @@ void N(update)(void) {
     s32 mashMeterCutoff;
     s8 adjustedFillLevel;
 
-    switch (actionCommandStatus->state) {
-        case 0:
+    switch (acs->state) {
+        case AC_STATE_INIT:
             btl_set_popup_duration(99);
 
-            hudElement = actionCommandStatus->hudElements[0];
-            if (actionCommandStatus->showHud) {
+            hudElement = acs->hudElements[0];
+            if (acs->showHud) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(hudElement, 255);
 
-            hudElement = actionCommandStatus->hudElements[2];
-            if (actionCommandStatus->showHud) {
+            hudElement = acs->hudElements[2];
+            if (acs->showHud) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(hudElement, 255);
 
-            hudElement = actionCommandStatus->hudElements[1];
+            hudElement = acs->hudElements[1];
             hud_element_set_alpha(hudElement, 255);
-            if (actionCommandStatus->showHud) {
+            if (acs->showHud) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            actionCommandStatus->state = 1;
+            acs->state = 1;
             break;
-        case 1:
+        case AC_STATE_APPEAR:
             btl_set_popup_duration(99);
-            if (actionCommandStatus->hudPrepareTime != 0) {
-                actionCommandStatus->hudPrepareTime--;
+            if (acs->hudPrepareTime != 0) {
+                acs->hudPrepareTime--;
                 break;
             }
 
-            actionCommandStatus->hudPosX += 20;
-            if (actionCommandStatus->hudPosX > 50) {
-                actionCommandStatus->hudPosX = 50;
+            acs->hudPosX += 20;
+            if (acs->hudPosX > 50) {
+                acs->hudPosX = 50;
             }
 
-            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudPosX - 17,
-                actionCommandStatus->hudPosY);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX + 23,
-                actionCommandStatus->hudPosY);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudPosX,
-                actionCommandStatus->hudPosY + 28);
+            hud_element_set_render_pos(acs->hudElements[0], acs->hudPosX - 17, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElements[2], acs->hudPosX + 23, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElements[1], acs->hudPosX, acs->hudPosY + 28);
             break;
-        case 10:
+        case AC_STATE_START:
             btl_set_popup_duration(99);
-            if (actionCommandStatus->prepareTime != 0) {
-                actionCommandStatus->prepareTime--;
+            if (acs->prepareTime != 0) {
+                acs->prepareTime--;
                 break;
             }
-            hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
-            hud_element_set_script(actionCommandStatus->hudElements[2], &HES_MashBButton1);
-            actionCommandStatus->barFillLevel = 0;
-            actionCommandStatus->unk_5C = 0;
-            actionCommandStatus->frameCounter = actionCommandStatus->duration;
-            actionCommandStatus->state = 11;
+            hud_element_set_script(acs->hudElements[0], &HES_MashAButton);
+            hud_element_set_script(acs->hudElements[2], &HES_MashBButton1);
+            acs->barFillLevel = 0;
+            acs->any.unk_5C = 0;
+            acs->frameCounter = acs->duration;
+            acs->state = 11;
             // fallthrough
-        case 11:
+        case AC_STATE_ACTIVE:
             btl_set_popup_duration(99);
-            if (!actionCommandStatus->isBarFilled) {
+            if (!acs->isBarFilled) {
                 s16 newFillLevel;
 
-                if (actionCommandStatus->targetWeakness != 0) {
-                    s8 mashMeterIntervals = actionCommandStatus->mashMeterIntervals;
-                    s16* mashMeterCutoffs = actionCommandStatus->mashMeterCutoffs;
+                if (acs->targetWeakness != 0) {
+                    s8 mashMeterIntervals = acs->mashMeterIntervals;
+                    s16* mashMeterCutoffs = acs->mashMeterCutoffs;
                     s32 index;
 
                     mashMeterCutoff = mashMeterCutoffs[mashMeterIntervals];
-                    index = actionCommandStatus->barFillLevel / mashMeterCutoff / 20;
-                    newFillLevel = actionCommandStatus->barFillLevel - D_802A98E0_42FFC0[index];
+                    index = acs->barFillLevel / mashMeterCutoff / 20;
+                    newFillLevel = acs->barFillLevel - D_802A98E0_42FFC0[index];
                 } else {
-                    newFillLevel = actionCommandStatus->barFillLevel - 10;
+                    newFillLevel = acs->barFillLevel - 10;
                 }
 
-                actionCommandStatus->barFillLevel = newFillLevel;
-                if (actionCommandStatus->barFillLevel < 0) {
-                    actionCommandStatus->barFillLevel = 0;
+                acs->barFillLevel = newFillLevel;
+                if (acs->barFillLevel < 0) {
+                    acs->barFillLevel = 0;
                 }
             }
 
@@ -202,11 +199,11 @@ void N(update)(void) {
 
             buttonsAB = BUTTON_A | BUTTON_B;
             if ((buttonsPushed & buttonsAB) == buttonsAB) {
-                if (actionCommandStatus->targetWeakness != 0) {
+                if (acs->targetWeakness != 0) {
                     s32 fillLevel;
 
-                    fillLevel = actionCommandStatus->targetWeakness * 650;
-                    fillLevel = fillLevel / 100 * battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];
+                    fillLevel = acs->targetWeakness * 650;
+                    fillLevel = fillLevel / 100 * battleStatus->actionCmdDifficultyTable[acs->difficulty];
 
                     // Perplexing reuse of buttonsPushed here, but it fixes register allocation. Likely another
                     // subexpression from above can be put into a variable and reused instead.
@@ -214,12 +211,12 @@ void N(update)(void) {
                     // TODO: Find a way to avoid reusing buttonsPushed.
                     buttonsPushed = fillLevel / 100;
 
-                    actionCommandStatus->barFillLevel += buttonsPushed;
+                    acs->barFillLevel += buttonsPushed;
                 } else {
-                    actionCommandStatus->barFillLevel += 100;
+                    acs->barFillLevel += 100;
 
-                    if (actionCommandStatus->barFillLevel >= 500) {
-                        actionCommandStatus->barFillLevel = 500;
+                    if (acs->barFillLevel >= 500) {
+                        acs->barFillLevel = 500;
                     }
                 }
 
@@ -240,27 +237,26 @@ void N(update)(void) {
                 }
             }
 
-            if (actionCommandStatus->barFillLevel > 10000) {
-                hudElement = actionCommandStatus->hudElements[4];
-                actionCommandStatus->barFillLevel = 10000;
-                actionCommandStatus->isBarFilled = TRUE;
-                hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX + 50,
-                    actionCommandStatus->hudPosY + 28);
+            if (acs->barFillLevel > 10000) {
+                hudElement = acs->hudElements[4];
+                acs->barFillLevel = 10000;
+                acs->isBarFilled = TRUE;
+                hud_element_set_render_pos(hudElement, acs->hudPosX + 50, acs->hudPosY + 28);
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            adjustedFillLevel = actionCommandStatus->barFillLevel / 100;
+            adjustedFillLevel = acs->barFillLevel / 100;
 
             battleStatus->actionQuality = adjustedFillLevel;
 
-            if (actionCommandStatus->frameCounter == 0) {
+            if (acs->frameCounter == 0) {
                 s16 threshold;
 
                 // Again, reusing buttonsPushed specifically for reg-alloc. See above.
                 //
                 // TODO: Find a way to avoid reusing buttonsPushed.
-                buttonsPushed = actionCommandStatus->barFillLevel;
-                if (actionCommandStatus->targetWeakness == 0) {
+                buttonsPushed = acs->barFillLevel;
+                if (acs->targetWeakness == 0) {
                     buttonsPushed = 0;
                 }
 
@@ -270,8 +266,8 @@ void N(update)(void) {
                     battleStatus->actionSuccess = buttonsPushed / 100;
                 }
 
-                mashMeterIndex = actionCommandStatus->mashMeterIntervals - 1;
-                mashMeterCutoff = actionCommandStatus->mashMeterCutoffs[mashMeterIndex];
+                mashMeterIndex = acs->mashMeterIntervals - 1;
+                mashMeterCutoff = acs->mashMeterCutoffs[mashMeterIndex];
                 threshold = mashMeterCutoff / 2;
 
                 if (battleStatus->actionQuality <= threshold) {
@@ -281,26 +277,26 @@ void N(update)(void) {
                 }
 
                 if (battleStatus->actionSuccess == 100) {
-                    func_80269160();
+                    increment_action_command_success_count();
                 }
 
                 btl_set_popup_duration(0);
-                actionCommandStatus->frameCounter = 5;
-                actionCommandStatus->state = 12;
+                acs->frameCounter = 5;
+                acs->state = 12;
             } else {
-                actionCommandStatus->frameCounter -= 1;
+                acs->frameCounter -= 1;
             }
             break;
-        case 12:
-            if (actionCommandStatus->targetWeakness == 0) {
-                actionCommandStatus->barFillLevel -= 100;
-                if (actionCommandStatus->barFillLevel < 0) {
-                    actionCommandStatus->barFillLevel = 0;
+        case AC_STATE_DISPOSE:
+            if (acs->targetWeakness == 0) {
+                acs->barFillLevel -= 100;
+                if (acs->barFillLevel < 0) {
+                    acs->barFillLevel = 0;
                 }
             }
 
-            if (actionCommandStatus->frameCounter != 0) {
-                actionCommandStatus->frameCounter -= 1;
+            if (acs->frameCounter != 0) {
+                acs->frameCounter -= 1;
             } else {
                 action_command_free();
             }

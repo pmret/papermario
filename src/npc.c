@@ -10,7 +10,7 @@ s16 gNpcCount;
 static NpcList gWorldNpcList;
 static NpcList gBattleNpcList;
 static NpcList* gCurrentNpcListPtr;
-static b8 gNpcPlayerCollisionsEnabled;
+static s8 gNpcPlayerCollisionsEnabled;
 
 #define PAL_ANIM_END 0xFF
 

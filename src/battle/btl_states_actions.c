@@ -263,12 +263,12 @@ void btl_state_update_normal_start(void) {
             battleStatus->incrementStarPointDelay = 0;
             battleStatus->damageTaken = 0;
             battleStatus->nextMerleeSpellType = MERLEE_SPELL_NONE;
-            battleStatus->actionCommandMode = ACTION_COMMAND_MODE_NOT_LEARNED;
+            battleStatus->actionCommandMode = AC_MODE_NOT_LEARNED;
             gCameras[CAM_DEFAULT].flags |= CAMERA_FLAG_DISABLED;
             gCameras[CAM_BATTLE].flags |= CAMERA_FLAG_DISABLED;
             gCameras[CAM_TATTLE].flags |= CAMERA_FLAG_DISABLED;
             if (is_ability_active(ABILITY_MYSTERY_SCROLL)) {
-                battleStatus->actionCommandMode = ACTION_COMMAND_MODE_LEARNED;
+                battleStatus->actionCommandMode = AC_MODE_LEARNED;
             }
             battleStatus->actionSuccess = 0;
             battleStatus->unk_82 = 0;

@@ -913,7 +913,7 @@ typedef struct BattleStatus {
     /* 0x07C */ s8 changePartnerAllowed;
     /* 0x07D */ s8 menuStatus[4]; ///< -1 = automatically pick the first move, 0 = disabled, 1 = enabled
     /* 0x081 */ s8 actionSuccess;
-    /* 0x082 */ char unk_82;
+    /* 0x082 */ u8 unk_82;
     /* 0x083 */ s8 actionCommandMode;
     /* 0x084 */ s8 actionQuality; // actionCommandVar1 ?
     /* 0x085 */ s8 unk_85; // actionCommandVar2 ?

@@ -1172,7 +1172,7 @@ EvtScript EVS_RunAwayNoCommand = {
 EvtScript EVS_RunAwayStart = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(GetActionCommandMode, LVar2)
-    IfEq(LVar2, ACTION_COMMAND_MODE_NOT_LEARNED)
+    IfEq(LVar2, AC_MODE_NOT_LEARNED)
         ExecWait(EVS_RunAwayNoCommand)
         Call(UseIdleAnimation, ACTOR_PLAYER, TRUE)
         Return

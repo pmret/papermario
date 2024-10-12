@@ -27,18 +27,28 @@
 #include "battle/action_cmd/water_block.h"
 #include "battle/action_cmd/tidal_wave.h"
 
+// standard states for action commands
+// used by every command except water block and tidal wave
+enum {
+    AC_STATE_INIT                   = 0,  // create hud elements
+    AC_STATE_APPEAR                 = 1,  // hud elements move into position
+    AC_STATE_START                  = 10, // begin listening for input
+    AC_STATE_ACTIVE                 = 11, // responding to player input
+    AC_STATE_DISPOSE                = 12, // delay and disappear
+};
+
 enum MashMeterColorModes {
-    MASH_METER_MODE_BLINK       = -1,
-    MASH_METER_MODE_MULTI_COLOR = 0,
-    MASH_METER_MODE_ONE_COLOR   = 1,
+    MASH_METER_MODE_BLINK           = -1,
+    MASH_METER_MODE_MULTI_COLOR     = 0,
+    MASH_METER_MODE_ONE_COLOR       = 1,
 };
 
 enum ActionCommandModes {
-    ACTION_COMMAND_MODE_TUTORIAL_BLOCK      = -1,
-    ACTION_COMMAND_MODE_NOT_LEARNED         = 0,
-    ACTION_COMMAND_MODE_LEARNED             = 1,
-    ACTION_COMMAND_MODE_TUTORIAL            = 2,
-    ACTION_COMMAND_MODE_TUTORIAL_WAIT_INPUT = 3,
+    AC_MODE_TUTORIAL_BLOCK          = -1,
+    AC_MODE_NOT_LEARNED             = 0,
+    AC_MODE_LEARNED                 = 1,
+    AC_MODE_TUTORIAL                = 2,
+    AC_MODE_TUTORIAL_WAIT_INPUT     = 3,
 };
 
 typedef struct ActionCommandStatus {
@@ -56,8 +66,23 @@ typedef struct ActionCommandStatus {
     /* 0x56 */ s16 hudPosX;
     /* 0x58 */ s16 hudPosY;
     /* 0x5A */ s16 unk_5A;
-    /* 0x5C */ s8 unk_5C;
-    /* 0x5D */ s8 unk_5D;
+    /* 0x5C */ union {
+                    struct {
+                        s8 unk_5C;
+                        s8 unk_5D;
+                    } any;
+                    struct {
+                        s8 dir;
+                    } flee;
+                    struct {
+                        b8 hadCorrectTiming;
+                        s8 unk_5D;
+                    } waterBlock;
+                    struct {
+                        s8 prevButton;
+                        s8 inputCount;
+                    } tidalWave;
+                };
     /* 0x5E */ s8 autoSucceed;
     /* 0x5F */ s8 hammerMissedStart;
     /* 0x60 */ s8 wrongButtonPressed;
@@ -114,8 +139,8 @@ extern HudScript HES_TimingWait;
 void action_command_init_status(void);
 void action_command_free(void);
 void create_action_command_ui_worker(void);
-void func_80269118(void);
-void func_80269160(void);
+void increment_action_command_attempt_count(void);
+void increment_action_command_success_count(void);
 
 void draw_mash_meter_multicolor_with_divisor(s32 posX, s32 posY, s32 fillValue, s32 divisor);
 void draw_mash_meter_blink(s32 posX, s32 posY, s32 fillValue);

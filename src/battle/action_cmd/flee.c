@@ -3,7 +3,7 @@
 
 #define NAMESPACE action_command_flee
 
-BSS s32 D_802A9920;
+BSS b32 FleeCommandStarted;
 
 extern s32 actionCmdTableFlee[];
 
@@ -17,20 +17,23 @@ API_CALLABLE(N(init)) {
     battleStatus->unk_82 = 0;
     battleStatus->actionCmdDifficultyTable = actionCmdTableFlee;
     battleStatus->actionResult = ACTION_RESULT_NONE;
+
     action_command_init_status();
+
     actionCommandStatus->unk_5A = evt_get_variable(script, *args++);
+
     actionCommandStatus->actionCommandID = ACTION_COMMAND_FLEE;
-    actionCommandStatus->state = 0;
+    actionCommandStatus->state = AC_STATE_INIT;
     actionCommandStatus->wrongButtonPressed = FALSE;
     actionCommandStatus->barFillLevel = actionCommandStatus->unk_5A * 100;
     actionCommandStatus->thresholdLevel = rand_int(50);
     actionCommandStatus->barFillWidth = 0;
-    actionCommandStatus->unk_5C = 1;
+    actionCommandStatus->flee.dir = 1;
     actionCommandStatus->unk_5A = rand_int(1);
     actionCommandStatus->isBarFilled = FALSE;
     battleStatus->actionSuccess = 0;
+    FleeCommandStarted = FALSE;
     actionCommandStatus->hudPosX = -48;
-    D_802A9920 = 0;
     actionCommandStatus->hudPosY = 80;
 
     hudElement = hud_element_create(&HES_AButton);
@@ -85,7 +88,7 @@ API_CALLABLE(N(start)) {
     battleStatus->actionResult = ACTION_RESULT_NONE;
     battleStatus->unk_82 = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
-    actionCommandStatus->state = 10;
+    actionCommandStatus->state = AC_STATE_START;
     return ApiStatus_DONE2;
 }
 
@@ -96,7 +99,7 @@ void N(update)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
     switch (actionCommandStatus->state) {
-        case 0:
+        case AC_STATE_INIT:
             hudElement = actionCommandStatus->hudElements[0];
             hud_element_set_alpha(hudElement, 0xFF);
             if (actionCommandStatus->showHud) {
@@ -121,9 +124,9 @@ void N(update)(void) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            actionCommandStatus->state = 1;
+            actionCommandStatus->state = AC_STATE_APPEAR;
             break;
-        case 1:
+        case AC_STATE_APPEAR:
             actionCommandStatus->hudPosX += 20;
             if (actionCommandStatus->hudPosX > 50) {
                 actionCommandStatus->hudPosX = 50;
@@ -131,18 +134,19 @@ void N(update)(void) {
             hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
             hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
             break;
-        case 10:
+        case AC_STATE_START:
             if (actionCommandStatus->prepareTime != 0) {
                 actionCommandStatus->prepareTime--;
                 break;
             }
 
             hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
-            D_802A9920 = 1;
-            actionCommandStatus->state = 11;
+            FleeCommandStarted = TRUE;
+            actionCommandStatus->state = AC_STATE_ACTIVE;
             actionCommandStatus->frameCounter = actionCommandStatus->duration;
-        case 11:
-            if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED && (battleStatus->curButtonsPressed & BUTTON_A)) {
+            // fallthrough
+        case AC_STATE_ACTIVE:
+            if (battleStatus->actionCommandMode != AC_MODE_NOT_LEARNED && (battleStatus->curButtonsPressed & BUTTON_A)) {
                 actionCommandStatus->barFillLevel += (battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 180 / 100);
             }
             if (actionCommandStatus->barFillLevel >= 10000) {
@@ -163,12 +167,12 @@ void N(update)(void) {
                     battleStatus->actionSuccess = -1;
                 }
                 actionCommandStatus->frameCounter = 20;
-                actionCommandStatus->state = 12;
+                actionCommandStatus->state = AC_STATE_DISPOSE;
             } else {
                 actionCommandStatus->frameCounter--;
             }
             break;
-        case 12:
+        case AC_STATE_DISPOSE:
             if (actionCommandStatus->frameCounter != 0) {
                 actionCommandStatus->frameCounter--;
                 break;
@@ -178,22 +182,22 @@ void N(update)(void) {
     }
 
     switch (actionCommandStatus->state) {
-        case 1:
-        case 10:
-        case 11:
+        case AC_STATE_APPEAR:
+        case AC_STATE_START:
+        case AC_STATE_ACTIVE:
             temp = actionCommandStatus->unk_5A == 0 ? 7 : 8;
-            if (actionCommandStatus->unk_5C == 0) {
+            if (actionCommandStatus->flee.dir == 0) {
                 actionCommandStatus->thresholdLevel += temp;
                 if (actionCommandStatus->thresholdLevel >= 100) {
                     actionCommandStatus->thresholdLevel = 100;
-                    actionCommandStatus->unk_5C = 1;
+                    actionCommandStatus->flee.dir = 1;
                 }
                 break;
             }
             actionCommandStatus->thresholdLevel -= temp;
             if (actionCommandStatus->thresholdLevel <= 0) {
                 actionCommandStatus->thresholdLevel = 0;
-                actionCommandStatus->unk_5C = 0;
+                actionCommandStatus->flee.dir = 0;
             }
     }
 }
@@ -215,7 +219,7 @@ void N(draw)(void) {
     hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudPosX - temp_a1, actionCommandStatus->hudPosY + 17);
     hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX + 31 - x, actionCommandStatus->hudPosY - 1);
 
-    if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode != AC_MODE_NOT_LEARNED) {
         hud_element_draw_clipped(actionCommandStatus->hudElements[0]);
     }
 
@@ -223,7 +227,7 @@ void N(draw)(void) {
     hud_element_draw_clipped(hudElement);
     hud_element_get_render_pos(hudElement, &x, &y);
 
-    if (D_802A9920 == 0) {
+    if (!FleeCommandStarted) {
         draw_mash_meter_multicolor_with_divisor(x, y, actionCommandStatus->barFillLevel / 100, 1);
     } else {
         if (!actionCommandStatus->isBarFilled) {

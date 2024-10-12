@@ -198,7 +198,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
 #endif
             battleStatus->actionResult = ACTION_RESULT_FAIL;
             action_command_init_status();
-            func_80269118();
+            increment_action_command_attempt_count();
             script->functionTemp[0] = 1;
             break;
         case 1:
@@ -276,7 +276,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             if (aimAngle < 7.0f) {
                 battleStatus->actionQuality = 1;
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
-                func_80269160();
+                increment_action_command_success_count();
             } else if (state->angle < state->bounceDivisor) {
                 battleStatus->actionQuality = -1;
             }

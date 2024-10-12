@@ -175,8 +175,8 @@ s32 gEncounterSubState;
 EncounterStatus gCurrentEncounter;
 
 s8 HasPreBattleSongPushed;
-b8 PendingPartnerAbilityResume;
-b8 LastBattleStartedBySpin;
+s8 PendingPartnerAbilityResume;
+s8 LastBattleStartedBySpin;
 s16 gFirstStrikeMessagePos;
 
 BSS s32 WorldMerleeEffectsTime;

@@ -15,14 +15,14 @@ API_CALLABLE(N(init)) {
 
     battleStatus->unk_82 = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableMegaShock;
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
     action_command_init_status();
 
     actionCommandStatus->actionCommandID = ACTION_COMMAND_MEGA_SHOCK;
-    actionCommandStatus->state = 0;
+    actionCommandStatus->state = AC_STATE_INIT;
     actionCommandStatus->hudPrepareTime = 30;
     actionCommandStatus->wrongButtonPressed = FALSE;
     actionCommandStatus->barFillLevel = 0;
@@ -66,7 +66,7 @@ API_CALLABLE(N(start)) {
     s16 arg;
     ApiStatus result;
 
-    if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode != AC_MODE_NOT_LEARNED) {
         action_command_init_status();
 
         actionCommandStatus->prepareTime = evt_get_variable(script, *readPos++);
@@ -82,10 +82,10 @@ API_CALLABLE(N(start)) {
 
         battleStatus->actionSuccess = 0;
         battleStatus->actionResult = ACTION_RESULT_FAIL;
-        actionCommandStatus->state = 10;
+        actionCommandStatus->state = AC_STATE_START;
         battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
 
-        func_80269118();
+        increment_action_command_attempt_count();
         result = ApiStatus_DONE2;
     } else {
         battleStatus->actionSuccess = 0;
@@ -109,7 +109,7 @@ void N(update)(void) {
     s8 adjustedFillLevel;
 
     switch (actionCommandStatus->state) {
-        case 0:
+        case AC_STATE_INIT:
             btl_set_popup_duration(99);
 
             hudElement = actionCommandStatus->hudElements[0];
@@ -130,9 +130,9 @@ void N(update)(void) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            actionCommandStatus->state = 1;
+            actionCommandStatus->state = AC_STATE_APPEAR;
             break;
-        case 1:
+        case AC_STATE_APPEAR:
             btl_set_popup_duration(99);
             if (actionCommandStatus->hudPrepareTime != 0) {
                 actionCommandStatus->hudPrepareTime--;
@@ -151,7 +151,7 @@ void N(update)(void) {
             hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudPosX,
                 actionCommandStatus->hudPosY + 28);
             break;
-        case 10:
+        case AC_STATE_START:
             btl_set_popup_duration(99);
             if (actionCommandStatus->prepareTime != 0) {
                 actionCommandStatus->prepareTime--;
@@ -160,11 +160,12 @@ void N(update)(void) {
             hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
             hud_element_set_script(actionCommandStatus->hudElements[2], &HES_MashBButton1);
             actionCommandStatus->barFillLevel = 0;
-            actionCommandStatus->unk_5C = 0;
+            actionCommandStatus->any.unk_5C = 0;
             actionCommandStatus->frameCounter = actionCommandStatus->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
-            actionCommandStatus->state = 11;
-        case 11:
+            actionCommandStatus->state = AC_STATE_ACTIVE;
+            // fallthrough
+        case AC_STATE_ACTIVE:
             btl_set_popup_duration(99);
             if (!actionCommandStatus->isBarFilled) {
                 s16 newFillLevel;
@@ -287,18 +288,18 @@ void N(update)(void) {
                 }
 
                 if (battleStatus->actionSuccess == 100) {
-                    func_80269160();
+                    increment_action_command_success_count();
                 }
 
                 sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
                 btl_set_popup_duration(0);
                 actionCommandStatus->frameCounter = 5;
-                actionCommandStatus->state = 12;
+                actionCommandStatus->state = AC_STATE_DISPOSE;
             } else {
                 actionCommandStatus->frameCounter -= 1;
             }
             break;
-        case 12:
+        case AC_STATE_DISPOSE:
             if (actionCommandStatus->targetWeakness == 0) {
                 actionCommandStatus->barFillLevel -= 100;
                 if (actionCommandStatus->barFillLevel < 0) {

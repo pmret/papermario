@@ -403,7 +403,7 @@ BSS s32 battle_menu_moveOptionActive;
 BSS s8 BattleSubmenuStratsState;
 BSS s8 StratsMenuPos;
 BSS s8 OldStratsMenuPos;
-BSS b8 ShowingErrorMessage;
+BSS s8 ShowingErrorMessage;
 BSS s8 D_802AD608;
 BSS s8 D_802AD609;
 BSS s8 StratsMenuLines;
@@ -2347,7 +2347,7 @@ void btl_state_update_player_menu(void) {
             BattleMenu_OptionEnabled[entryIdx] = TRUE;
             BattleMenu_HudScripts[entryIdx] = battle_menu_StrategiesHudScript.enabled;
             BattleMenu_TitleMessages[entryIdx] = BattleMenu_CenteredMessages[BTL_MENU_TYPE_STRATEGIES];
-            if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL || gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE) {
+            if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL || gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE) {
                 BattleMenu_TitleMessages[entryIdx] = MSG_Menus_EndTraining_Centered;
             }
             battle_menu_isMessageDisabled[entryIdx] = 0;
@@ -2658,7 +2658,7 @@ void btl_state_update_player_menu(void) {
                 btl_state_update_player_menu();
                 break;
             } else if (currentSubmenu == BTL_MENU_TYPE_STRATEGIES) {
-                if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
+                if (battleStatus->actionCommandMode != AC_MODE_TUTORIAL && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
                     gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_BUILD_STRATEGIES;
                     btl_state_update_player_menu();
                     btl_state_update_player_menu();

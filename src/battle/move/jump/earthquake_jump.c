@@ -15,7 +15,7 @@ API_CALLABLE(N(func_802A10E4_785C04)) {
 
 MATCHING_BSS(0x3CC0);
 
-s32 N(DifficultyTable)[] = {
+s32 N(DifficultyTable)[AC_DIFFICULTY_LEN] = {
     11, 10, 9, 8, 7, 6, 5, 4
 };
 

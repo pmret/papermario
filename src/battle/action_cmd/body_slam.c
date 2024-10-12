@@ -13,7 +13,7 @@ API_CALLABLE(N(init)) {
     battleStatus->unk_82 = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTableBodySlam;
     battleStatus->actionResult = ACTION_RESULT_NONE;
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
@@ -21,7 +21,7 @@ API_CALLABLE(N(init)) {
     action_command_init_status();
     actionCommandStatus->actionCommandID = ACTION_COMMAND_BODY_SLAM;
     actionCommandStatus->showHud = TRUE;
-    actionCommandStatus->state = 0;
+    actionCommandStatus->state = AC_STATE_INIT;
     actionCommandStatus->wrongButtonPressed = FALSE;
     actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->barFillWidth = 0;
@@ -56,7 +56,7 @@ API_CALLABLE(N(init)) {
     return ApiStatus_DONE2;
 }
 
-#include "common/MashActionCommandStart.inc.c"
+#include "common/MashCommandStart.inc.c"
 
 void N(update)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -65,7 +65,7 @@ void N(update)(void) {
     s32 phi_v0;
 
     switch (actionCommandStatus->state) {
-        case 0:
+        case AC_STATE_INIT:
             btl_set_popup_duration(99);
 
             id = actionCommandStatus->hudElements[0];
@@ -92,9 +92,9 @@ void N(update)(void) {
                 hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            actionCommandStatus->state = 1;
+            actionCommandStatus->state = AC_STATE_APPEAR;
             break;
-        case 1:
+        case AC_STATE_APPEAR:
             btl_set_popup_duration(99);
             actionCommandStatus->hudPosX += 20;
             if (actionCommandStatus->hudPosX > 50) {
@@ -105,7 +105,7 @@ void N(update)(void) {
             hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX + 41, actionCommandStatus->hudPosY + 22);
             hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudPosX + 42, actionCommandStatus->hudPosY + 24);
             break;
-        case 10:
+        case AC_STATE_START:
             btl_set_popup_duration(99);
             if (actionCommandStatus->prepareTime != 0) {
                 actionCommandStatus->prepareTime--;
@@ -116,8 +116,9 @@ void N(update)(void) {
             actionCommandStatus->thresholdLevel = 0;
             actionCommandStatus->frameCounter = actionCommandStatus->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
-            actionCommandStatus->state = 11;
-        case 11:
+            actionCommandStatus->state = AC_STATE_ACTIVE;
+            // fallthrough
+        case AC_STATE_ACTIVE:
             btl_set_popup_duration(99);
 
             if (battleStatus->curButtonsDown & BUTTON_A) {
@@ -156,14 +157,14 @@ void N(update)(void) {
 
             battleStatus->actionResult = ACTION_RESULT_FAIL;
             if (battleStatus->actionSuccess == 1) {
-                func_80269160();
+                increment_action_command_success_count();
             }
             btl_set_popup_duration(0);
             sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
             actionCommandStatus->frameCounter = 5;
-            actionCommandStatus->state = 12;
+            actionCommandStatus->state = AC_STATE_DISPOSE;
             break;
-        case 12:
+        case AC_STATE_DISPOSE:
             if (actionCommandStatus->frameCounter != 0) {
                 actionCommandStatus->frameCounter--;
                 return;

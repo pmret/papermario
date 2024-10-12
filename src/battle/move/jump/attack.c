@@ -53,11 +53,11 @@ EvtScript N(EVS_UseMove) = {
 EvtScript N(EVS_UseMove_Normal) = {
     ExecWait(N(EVS_JumpSupport_ApproachAndJump))
     Call(GetActionCommandMode, LVar0)
-    IfEq(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
-        Call(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL_WAIT_INPUT)
+    IfEq(LVar0, AC_MODE_TUTORIAL)
+        Call(SetActionCommandMode, AC_MODE_TUTORIAL_WAIT_INPUT)
         Loop(0)
             Call(GetActionCommandMode, LVar0)
-            IfLt(LVar0, ACTION_COMMAND_MODE_TUTORIAL)
+            IfLt(LVar0, AC_MODE_TUTORIAL)
                 BreakLoop
             EndIf
             Wait(1)
@@ -69,7 +69,7 @@ EvtScript N(EVS_UseMove_Normal) = {
         Return
     EndIf
     Call(GetActionCommandMode, LVar0)
-    IfGt(LVar0, ACTION_COMMAND_MODE_NOT_LEARNED)
+    IfGt(LVar0, AC_MODE_NOT_LEARNED)
         Wait(1)
     EndIf
     Call(GetPlayerActionSuccess, LVar0)
