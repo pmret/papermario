@@ -19,8 +19,13 @@ glabel entry_point
 /* 101C 80025C1C 2129FFF8 */  addi      $t1, $t1, -8
 /* 1020 80025C20 1520FFFB */  bnez      $t1, .L80025C10
 /* 1024 80025C24 00000000 */   nop
+#if VERSION_PAL
+/* 1028 80025C28 3C1D800B */  lui       $sp, %hi(nuMainStack + 0x2000)
+/* 102C 80025C2C 27BD6590 */  addiu     $sp, $sp, %lo(nuMainStack + 0x2000)
+#else
 /* 1028 80025C28 3C1D800B */  lui       $sp, %hi(nuBootStack + 0x2000)
 /* 102C 80025C2C 27BD6590 */  addiu     $sp, $sp, %lo(nuBootStack + 0x2000)
+#endif
 /* 1030 80025C30 3C0A8006 */  lui       $t2, %hi(nuBoot)
 /* 1034 80025C34 254AE8B0 */  addiu     $t2, $t2, %lo(nuBoot)
 /* 1038 80025C38 01400008 */  jr        $t2

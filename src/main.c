@@ -4,7 +4,9 @@
 // TODO move these somewhere else...
 u8 nuYieldBuf[NU_GFX_YIELD_BUF_SIZE];
 OSThread __osThreadSave;
+#if !VERSION_PAL
 u8 nuBootStack[0x2000] ALIGNED(8);
+#endif
 
 // used in effects/gfx/flame.c
 unsigned char D_800B32E0[0x800] ALIGNED(16);

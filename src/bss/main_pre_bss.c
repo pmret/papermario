@@ -15,7 +15,7 @@ BSS u8 nuScPreNMIFlag;
 BSS s32 D_8009A5B4;
 BSS s32 D_8009A5B8;
 BSS s32 D_8009A5BC;
-#if VERSION_IQUE
+#if VERSION_IQUE || VERSION_PAL
 BSS s32 __osFlashVersion;
 #endif
 BSS AuGlobals* gSoundGlobals;
@@ -43,7 +43,7 @@ BSS BGMPlayer* gBGMPlayerB;
 BSS s32 gEncounterState;
 BSS s16 gNpcCount;
 BSS u8 __osMaxControllers;
-#if VERSION_IQUE
+#if VERSION_IQUE || VERSION_PAL
 BSS OSMesg __osFlashMsgBuf;
 #endif
 BSS OSTime __osCurrentTime;
@@ -81,7 +81,7 @@ BSS s8 LastBattleStartedBySpin;
 BSS DisplayContext* gDisplayContext;
 BSS b32 EncounterStateChanged;
 BSS s32 D_8009A67C;
-#if VERSION_IQUE
+#if VERSION_IQUE || VERSION_PAL
 BSS s32 D_80099258[2];
 #endif
 BSS u16* ResetFrameBufferArray;

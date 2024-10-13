@@ -15,7 +15,7 @@
 // main segment COMMON/.scommon symbols
 //
 
-#if VERSION_IQUE
+#if VERSION_IQUE || VERSION_PAL
 BSS OSIoMesg __osFlashMsg OSALIGNED(8);
 #endif
 BSS char wMapTexName[0x18];
@@ -27,7 +27,7 @@ BSS OSPiHandle __Dom2SpeedParam OSALIGNED(8);
 BSS OSContStatus nuContStatus[NU_CONT_MAXCONTROLLERS];
 BSS OSThread D_800B1B90;
 BSS NUContRmbCtl nuContRmbCtl[NU_CONT_MAXCONTROLLERS];
-#if VERSION_IQUE
+#if VERSION_IQUE || VERSION_PAL
 BSS u32 __osFlashID[4] OSALIGNED(8);
 #endif
 BSS OSContPad nuContData[NU_CONT_MAXCONTROLLERS];
@@ -40,12 +40,14 @@ BSS OSPiHandle __CartRomHandle OSALIGNED(8);
 BSS OSMesgQueue __osPiAccessQueue OSALIGNED(8);
 BSS EffectInstance* gEffectInstances[96] ALIGNED(8);
 BSS OSPiHandle __Dom1SpeedParam OSALIGNED(8);
+#if !VERSION_PAL
 BSS u8 nuBootStack[0x2000] ALIGNED(8);
+#endif
 BSS u64 nuMainStack[NU_SC_STACK_SIZE / sizeof(u64)];
 BSS u8 nuYieldBuf[NU_GFX_YIELD_BUF_SIZE];
 BSS AuSynDriver auSynDriver;
 BSS s32 D_800B91D0[NU_GFX_RDP_OUTPUTBUFF_SIZE / sizeof(u32)] ALIGNED(16);
-#if VERSION_IQUE
+#if VERSION_IQUE || VERSION_PAL
 BSS OSPiHandle __osFlashHandler OSALIGNED(8);
 #endif
 BSS CollisionData gZoneCollisionData ALIGNED(8);
@@ -58,7 +60,7 @@ BSS OSMesgQueue	nuSiMgrMesgQ;
 BSS OSTimer __osBaseTimer;
 BSS char wMapShapeName[0x18];
 BSS ALHeap nuAuHeap;
-#if VERSION_IQUE
+#if VERSION_IQUE || VERSION_PAL
 BSS OSMesgQueue __osFlashMessageQ OSALIGNED(8);
 #endif
 BSS OSTimer __osEepromTimer;
