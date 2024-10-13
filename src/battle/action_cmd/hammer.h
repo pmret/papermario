@@ -3,8 +3,8 @@
 
 #include "common_structs.h"
 
-API_CALLABLE(ActionCommandInitHammer);
-API_CALLABLE(ActionCommandStartHammer);
+API_CALLABLE(action_command_hammer_init);
+API_CALLABLE(action_command_hammer_start);
 void action_command_hammer_update(void);
 void action_command_hammer_draw(void);
 void action_command_hammer_free(void);

@@ -87,7 +87,7 @@ void N(update)(void) {
 
     switch (acs->state) {
         case AC_STATE_INIT:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
 
             id = acs->hudElements[0];
             if (acs->showHud) {
@@ -104,20 +104,18 @@ void N(update)(void) {
             acs->state = AC_STATE_APPEAR;
             break;
         case AC_STATE_APPEAR:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
 
             acs->hudPosX += 20;
             if (acs->hudPosX > 50) {
                 acs->hudPosX = 50;
             }
 
-            hud_element_set_render_pos(acs->hudElements[0], acs->hudPosX,
-                acs->hudPosY);
-            hud_element_set_render_pos(acs->hudElements[1], acs->hudPosX,
-                acs->hudPosY + 28);
+            hud_element_set_render_pos(acs->hudElements[0], acs->hudPosX, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElements[1], acs->hudPosX, acs->hudPosY + 28);
             break;
         case AC_STATE_START:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
 
             if (acs->prepareTime != 0) {
                 acs->prepareTime--;
@@ -132,8 +130,8 @@ void N(update)(void) {
             acs->state = AC_STATE_ACTIVE;
             // fallthrough
         case AC_STATE_ACTIVE:
-            btl_set_popup_duration(99);
-            cutoff = acs->mashMeterCutoffs[acs->mashMeterIntervals];
+            btl_set_popup_duration(POPUP_MSG_ON);
+            cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
             temp = acs->barFillLevel / cutoff;
             if (acs->any.unk_5C == 0) {
                 if (!(battleStatus->curButtonsDown & BUTTON_A)) {
@@ -180,7 +178,7 @@ void N(update)(void) {
                 battleStatus->actionSuccess = battleStatus->actionQuality;
             }
 
-            cutoff = acs->mashMeterCutoffs[acs->mashMeterIntervals - 1];
+            cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
             if (cutoff / 2 < battleStatus->actionQuality) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             } else {
@@ -190,7 +188,7 @@ void N(update)(void) {
             if (battleStatus->actionSuccess == 100) {
                 increment_action_command_success_count();
             }
-            btl_set_popup_duration(0);
+            btl_set_popup_duration(POPUP_MSG_OFF);
             sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
             acs->frameCounter = 5;
             acs->state = AC_STATE_DISPOSE;

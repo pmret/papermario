@@ -6,7 +6,7 @@
 extern s32 actionCmdTableBreakFree[];
 
 API_CALLABLE(N(init)) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 id;
 
@@ -20,38 +20,38 @@ API_CALLABLE(N(init)) {
     }
 
     action_command_init_status();
-    actionCommandStatus->actionCommandID = ACTION_COMMAND_BREAK_FREE;
-    actionCommandStatus->showHud = TRUE;
-    actionCommandStatus->state = AC_STATE_INIT;
-    actionCommandStatus->wrongButtonPressed = FALSE;
-    actionCommandStatus->barFillLevel = 0;
-    actionCommandStatus->thresholdLevel = 0;
-    actionCommandStatus->barFillWidth = 0;
+    acs->actionCommandID = ACTION_COMMAND_BREAK_FREE;
+    acs->showHud = TRUE;
+    acs->state = AC_STATE_INIT;
+    acs->wrongButtonPressed = FALSE;
+    acs->barFillLevel = 0;
+    acs->thresholdLevel = 0;
+    acs->barFillWidth = 0;
     battleStatus->actionSuccess = 0;
-    actionCommandStatus->hudPosX = -48;
-    actionCommandStatus->hudPosY = 80;
+    acs->hudPosX = -48;
+    acs->hudPosY = 80;
 
     id = hud_element_create(&HES_AButton);
-    actionCommandStatus->hudElements[0] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
+    acs->hudElements[0] = id;
+    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     id = hud_element_create(&HES_BlueMeter);
-    actionCommandStatus->hudElements[1] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
+    acs->hudElements[1] = id;
+    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     id = hud_element_create(&HES_RunningAway);
-    actionCommandStatus->hudElements[2] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
+    acs->hudElements[2] = id;
+    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     id = hud_element_create(&HES_RunAwayOK);
-    actionCommandStatus->hudElements[3] = id;
-    hud_element_set_render_pos(id, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
+    acs->hudElements[3] = id;
+    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
@@ -72,7 +72,7 @@ API_CALLABLE(N(start)) {
 
     acs->prepareTime = evt_get_variable(script, *args++);
     acs->duration = evt_get_variable(script, *args++);
-    acs->unk_5A = evt_get_variable(script, *args++);
+    acs->effectiveness = evt_get_variable(script, *args++);
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
@@ -83,9 +83,9 @@ API_CALLABLE(N(start)) {
 
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
-    battleStatus->unk_82 = acs->mashMeterCutoffs[acs->mashMeterIntervals - 1];
+    battleStatus->unk_82 = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
 
-    acs->thresholdLevel = rand_int(acs->unk_5A);
+    acs->thresholdLevel = rand_int(acs->effectiveness);
     acs->any.unk_5C = 0;
     acs->state = AC_STATE_START;
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
@@ -96,40 +96,40 @@ API_CALLABLE(N(start)) {
 void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 id;
+    s32 hid;
 
     switch (acs->state) {
         case AC_STATE_INIT:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
 
-            id = acs->hudElements[0];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[0];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            id = acs->hudElements[1];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[1];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            id = acs->hudElements[2];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[2];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            id = acs->hudElements[3];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[3];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             acs->state = AC_STATE_APPEAR;
             break;
         case AC_STATE_APPEAR:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             acs->hudPosX += 20;
             if (acs->hudPosX > 50) {
                 acs->hudPosX = 50;
@@ -140,7 +140,7 @@ void N(update)(void) {
             hud_element_set_render_pos(acs->hudElements[3], acs->hudPosX + 31, acs->hudPosY + 17);
             break;
         case AC_STATE_START:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             if (acs->prepareTime != 0) {
                 acs->prepareTime--;
                 return;
@@ -150,11 +150,11 @@ void N(update)(void) {
             acs->frameCounter = acs->duration;
             // fallthrough
         case AC_STATE_ACTIVE:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             if (acs->any.unk_5C == 0) {
                 acs->thresholdLevel++;
-                if (acs->thresholdLevel >= acs->unk_5A) {
-                    acs->thresholdLevel = acs->unk_5A;
+                if (acs->thresholdLevel >= acs->effectiveness) {
+                    acs->thresholdLevel = acs->effectiveness;
                     acs->any.unk_5C = 1;
                 }
             } else {
@@ -167,17 +167,17 @@ void N(update)(void) {
 
             if (!acs->berserkerEnabled) {
                 s32 inputBufPos = battleStatus->inputBufferPos;
-                s32 temp_a2 = acs->duration - acs->frameCounter;
+                s32 windowLen = acs->duration - acs->frameCounter;
                 s32 i;
 
                 acs->barFillLevel = 0;
 
-                inputBufPos -= temp_a2;
+                inputBufPos -= windowLen;
                 if (inputBufPos < 0) {
                     inputBufPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
                 }
 
-                for (i = 0; i < temp_a2; i++, inputBufPos++) {
+                for (i = 0; i < windowLen; i++, inputBufPos++) {
                     if (inputBufPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                         inputBufPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                     }
@@ -196,7 +196,7 @@ void N(update)(void) {
                 return;
             }
 
-            if (battleStatus->actionSuccess >= acs->mashMeterCutoffs[acs->mashMeterIntervals] - acs->thresholdLevel) {
+            if (battleStatus->actionSuccess >= acs->mashMeterCutoffs[acs->mashMeterNumIntervals] - acs->thresholdLevel) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                 battleStatus->actionSuccess = 1;
             } else {
@@ -204,7 +204,7 @@ void N(update)(void) {
                 battleStatus->actionSuccess = -1;
             }
 
-            btl_set_popup_duration(0);
+            btl_set_popup_duration(POPUP_MSG_OFF);
             acs->frameCounter = 20;
             acs->state = AC_STATE_DISPOSE;
             break;
@@ -227,7 +227,7 @@ void N(draw)(void) {
     s16 mashMeterCutoff;
     s32 thirtyOne;
 
-    mashMeterCutoff = acs->mashMeterCutoffs[acs->mashMeterIntervals];
+    mashMeterCutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
     hudX = 60 - ((mashMeterCutoff - acs->thresholdLevel) * 60 / mashMeterCutoff);
 
     // Putting 31 into a variable manually fixes regalloc, so perhaps this was a constant defined somewhere?

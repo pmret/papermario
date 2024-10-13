@@ -31,11 +31,11 @@ EvtScript N(EVS_UseMove) = {
 EvtScript N(EVS_UseMove_ImplA) = {
     ExecWait(N(EVS_JumpSupport_ApproachAndJump))
     Call(GetActionCommandMode, LVar0)
-    IfEq(LVar0, 2)
-        Call(SetActionCommandMode, 3)
+    IfEq(LVar0, AC_MODE_TUTORIAL)
+        Call(SetActionCommandMode, AC_MODE_TUTORIAL_WAIT_INPUT)
         Loop(0)
             Call(GetActionCommandMode, LVar0)
-            IfLt(LVar0, 2)
+            IfLt(LVar0, AC_MODE_TUTORIAL)
                 BreakLoop
             EndIf
             Wait(1)

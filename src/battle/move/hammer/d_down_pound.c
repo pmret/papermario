@@ -6,16 +6,17 @@
 
 #include "battle/common/move/HammerSupport.inc.c"
 
-API_CALLABLE(func_802A10A4_74AE34) {
+API_CALLABLE(N(MakeGreenImpactFX)) {
     Bytecode* args = script->ptrReadPos;
-    s32 var0 = evt_get_variable(script, *args++);
-    s32 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
+    b32 success = script->varTable[10]; // value from GetPlayerActionSuccess
 
-    if (script->varTable[10] == 0) {
-        fx_green_impact(TRUE, var0 + 30, var1 + 25, var2, 45.0f);
+    if (!success) {
+        fx_green_impact(TRUE, x + 30, y + 25, z, 45.0f);
     } else {
-        fx_green_impact(FALSE, var0 + 30, var1 + 25, var2, 45.0f);
+        fx_green_impact(FALSE, x + 30, y + 25, z, 45.0f);
     }
 
     return ApiStatus_DONE2;
@@ -124,7 +125,7 @@ EvtScript N(UseMove_Impl) = {
     EndIf
     Call(GetPlayerActionSuccess, LVarA)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    Call(func_802A10A4_74AE34, LVar0, LVar1, LVar2)
+    Call(N(MakeGreenImpactFX), LVar0, LVar1, LVar2)
     Call(GetPlayerActionSuccess, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)

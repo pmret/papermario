@@ -509,11 +509,11 @@ EvtScript N(EVS_UseMove_Tutorial) = {
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
     Call(PlayerBasicJumpToGoal, LVarA, PLAYER_BASIC_JUMP_0)
     Call(GetActionCommandMode, LVar0)
-    IfEq(LVar0, 2)
-        Call(SetActionCommandMode, 3)
+    IfEq(LVar0, AC_MODE_TUTORIAL)
+        Call(SetActionCommandMode, AC_MODE_TUTORIAL_WAIT_INPUT)
         Loop(0)
             Call(GetActionCommandMode, LVar0)
-            IfLt(LVar0, 2)
+            IfLt(LVar0, AC_MODE_TUTORIAL)
                 BreakLoop
             EndIf
             Wait(1)
@@ -525,7 +525,7 @@ EvtScript N(EVS_UseMove_Tutorial) = {
         Return
     EndIf
     Call(GetActionCommandMode, LVar0)
-    IfGt(LVar0, 0)
+    IfGt(LVar0, AC_MODE_NOT_LEARNED)
         Wait(1)
     EndIf
     Call(GetPlayerActionSuccess, LVar0)

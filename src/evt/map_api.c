@@ -285,7 +285,7 @@ void apply_transform_to_children(ApiStatus (*apiFunc)(Evt*, s32), Evt* script) {
     ModelTreeInfo* childModelInfo;
     s32 parentModelID;
     s32 originalArg;
-    s32* argsPtr;
+    Bytecode* argsPtr;
     s32 modelIndex;
     s32 firstChild;
     s32 lastChild;

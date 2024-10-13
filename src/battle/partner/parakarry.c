@@ -291,7 +291,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
 
             hud_element_free(hudTarget);
             hud_element_free(hudStick);
-            btl_set_popup_duration(0);
+            btl_set_popup_duration(POPUP_MSG_OFF);
             return ApiStatus_DONE2;
     }
 
@@ -345,7 +345,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             }
 
             hud_element_set_render_pos(hudMarkers[i], screenX, screenY);
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
         }
     }
 

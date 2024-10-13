@@ -3,7 +3,7 @@
 
 #define NAMESPACE action_command_power_shock
 
-s32 D_802A9AA0_42D9B0[] = { 0, 25, 50, 75, 75, 0, 0, 0};
+s32 D_802A9AA0_42D9B0[AC_DIFFICULTY_LEN] = { 0, 25, 50, 75, 75, 0, 0, 0};
 
 BSS s32 D_802A9B00;
 
@@ -109,7 +109,7 @@ void N(update)(void) {
 
     switch (acs->state) {
         case AC_STATE_INIT:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             id = acs->hudElements[0];
             if (acs->showHud) {
                 hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
@@ -128,7 +128,7 @@ void N(update)(void) {
             acs->state = AC_STATE_APPEAR;
             break;
         case AC_STATE_APPEAR:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             if (acs->hudPrepareTime != 0) {
                 acs->hudPrepareTime--;
             } else {
@@ -145,7 +145,7 @@ void N(update)(void) {
             }
             break;
         case AC_STATE_START:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             if (acs->prepareTime != 0) {
                 acs->prepareTime--;
                 break;
@@ -159,11 +159,11 @@ void N(update)(void) {
             acs->state = AC_STATE_ACTIVE;
             // fallthrough
         case AC_STATE_ACTIVE:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
 
             if (!acs->isBarFilled) {
                 if (acs->targetWeakness != 0) {
-                    cutoff = acs->mashMeterCutoffs[acs->mashMeterIntervals];
+                    cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
                     acs->barFillLevel -= D_802A9AA0_42D9B0[acs->barFillLevel / cutoff / 20];
                     if (acs->barFillLevel < 0) {
                         acs->barFillLevel = 0;
@@ -217,7 +217,7 @@ void N(update)(void) {
                     battleStatus->actionSuccess = 0;
                 }
 
-                cutoff = acs->mashMeterCutoffs[acs->mashMeterIntervals - 1];
+                cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
                 if (cutoff / 2 < battleStatus->actionQuality) {
                     battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                 } else {
@@ -229,7 +229,7 @@ void N(update)(void) {
                 }
 
                 sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
-                btl_set_popup_duration(0);
+                btl_set_popup_duration(POPUP_MSG_OFF);
                 acs->frameCounter = 5;
                 acs->state = AC_STATE_DISPOSE;
             } else {
@@ -274,33 +274,33 @@ void N(update)(void) {
 }
 
 void N(draw)(void) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
     s32 y;
     s32 x;
     s32 id;
     s32 temp_a1;
     s32 temp_v0;
 
-    temp_v0 = actionCommandStatus->thresholdLevel * 60;
+    temp_v0 = acs->thresholdLevel * 60;
     x = 60 - temp_v0 / 100;
     temp_a1 = x - 31;
-    hud_element_set_render_pos(actionCommandStatus->hudElements[4], actionCommandStatus->hudPosX - temp_a1, actionCommandStatus->hudPosY + 17);
-    hud_element_draw_clipped(actionCommandStatus->hudElements[0]);
+    hud_element_set_render_pos(acs->hudElements[4], acs->hudPosX - temp_a1, acs->hudPosY + 17);
+    hud_element_draw_clipped(acs->hudElements[0]);
 
-    id = actionCommandStatus->hudElements[1];
+    id = acs->hudElements[1];
     hud_element_draw_clipped(id);
     hud_element_get_render_pos(id, &x, &y);
     // Redundant call, but needed to match.
     hud_element_get_render_pos(id, &x, &y);
 
     if (!D_802A9B00) {
-        draw_mash_meter_multicolor_with_divisor(x, y, actionCommandStatus->barFillLevel / 100, 1);
-    } else if (!actionCommandStatus->isBarFilled) {
-        draw_mash_meter_multicolor_with_divisor(x, y, actionCommandStatus->barFillLevel / 100, 4);
+        draw_mash_meter_multicolor_with_divisor(x, y, acs->barFillLevel / 100, 1);
+    } else if (!acs->isBarFilled) {
+        draw_mash_meter_multicolor_with_divisor(x, y, acs->barFillLevel / 100, 4);
     } else {
-        draw_mash_meter_blink_with_divisor(x, y, actionCommandStatus->barFillLevel / 100, 4);
+        draw_mash_meter_blink_with_divisor(x, y, acs->barFillLevel / 100, 4);
     }
-    id = actionCommandStatus->hudElements[3];
+    id = acs->hudElements[3];
     hud_element_draw_clipped(id);
 }
 

@@ -3,17 +3,27 @@
 
 #define NAMESPACE action_command_air_raid
 
-s32 D_802A9970_429C90[] = { 0, 25, 50, 75, 75 };
-s32 D_802A9984_429CA4[] = { 40, 70, 99, 200 };
-s32 D_802A9994_429CB4[] = { 35, 60, 80, 99, 200 };
-s32 D_802A99A8_429CC8[] = { 35, 35, 60, 80, 99, 200 };
-
 extern s32 actionCmdTableAirRaid[];
+
+// indices into ActionCommandStatus::hudElements for this action command
+enum {
+    HIDX_STICK          = 0,
+    HIDX_METER          = 1,
+    HIDX_100_PCT        = 2,
+};
+
+s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
+
+// threshold meter values; not used for anything
+// these correspond to values provided via SetupMashMeter
+s32 N(BasicThresholds)[] = { 40, 70, 99, 200 };
+s32 N(SuperThresholds)[] = { 35, 60, 80, 99, 200 };
+s32 N(UltraThresholds)[] = { 35, 35, 60, 80, 99, 200 };
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hudElement;
+    s32 hid;
 
     battleStatus->unk_82 = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTableAirRaid;
@@ -38,23 +48,23 @@ API_CALLABLE(N(init)) {
     acs->hudPosX = -48;
     acs->hudPosY = 80;
 
-    hudElement = hud_element_create(&HES_StickNeutral);
-    acs->hudElements[0] = hudElement;
-    hud_element_set_render_pos(hudElement, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_StickNeutral);
+    acs->hudElements[HIDX_STICK] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    hudElement = hud_element_create(&HES_BlueMeter);
-    acs->hudElements[1] = hudElement;
-    hud_element_set_render_pos(hudElement, acs->hudPosX, acs->hudPosY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_BlueMeter);
+    acs->hudElements[HIDX_METER] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    hudElement = hud_element_create(&HES_100pct);
-    acs->hudElements[2] = hudElement;
-    hud_element_set_render_pos(hudElement, acs->hudPosX, acs->hudPosY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_100pct);
+    acs->hudElements[HIDX_100_PCT] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     return ApiStatus_DONE2;
 }
@@ -65,29 +75,30 @@ void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
+    s32 hid;
     s32 cutoff;
-    s32 id;
+    s32 idx;
 
     switch (acs->state) {
         case AC_STATE_INIT:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
 
-            id = acs->hudElements[0];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[HIDX_STICK];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            id = acs->hudElements[1];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[HIDX_METER];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             acs->state = AC_STATE_APPEAR;
             break;
         case AC_STATE_APPEAR:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
 
             if (acs->hudPrepareTime != 0) {
                 acs->hudPrepareTime--;
@@ -99,92 +110,101 @@ void N(update)(void) {
                 acs->hudPosX = 50;
             }
 
-            hud_element_set_render_pos(acs->hudElements[0], acs->hudPosX, acs->hudPosY);
-            hud_element_set_render_pos(acs->hudElements[1], acs->hudPosX, acs->hudPosY + 28);
+            hud_element_set_render_pos(acs->hudElements[HIDX_STICK], acs->hudPosX, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElements[HIDX_METER], acs->hudPosX, acs->hudPosY + 28);
             break;
         case AC_STATE_START:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
 
             if (acs->prepareTime != 0) {
                 acs->prepareTime--;
                 return;
             }
 
-            hud_element_set_script(acs->hudElements[0], &HES_StickMashLeft);
+            hud_element_set_script(acs->hudElements[HIDX_STICK], &HES_StickMashLeft);
             acs->barFillLevel = 0;
-            battleStatus->unk_85 = 0;
-            acs->any.unk_5C = 0;
+            battleStatus->resultTier = 0;
+            acs->airRaid.holdingLeft = FALSE;
             acs->frameCounter = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
             // fallthrough
         case AC_STATE_ACTIVE:
-            btl_set_popup_duration(99);
-            if (!acs->isBarFilled) {
-                cutoff = acs->mashMeterCutoffs[acs->mashMeterIntervals];
+            btl_set_popup_duration(POPUP_MSG_ON);
 
-                acs->barFillLevel -= D_802A9970_429C90[acs->barFillLevel / cutoff / 20];
+            // bar can drain if it hasn't been fully filled
+            if (!acs->isBarFilled) {
+                cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
+                idx = (acs->barFillLevel / cutoff);
+                idx /= ONE_PCT_MASH / ARRAY_COUNT(N(DrainRateTable)); // = 20
+
+                acs->barFillLevel -= N(DrainRateTable)[idx];
                 if (acs->barFillLevel < 0) {
                     acs->barFillLevel = 0;
                 }
+            }
 
-                if (!acs->isBarFilled) {
-                    if (battleStatus->curButtonsDown & BUTTON_STICK_LEFT) {
-                        acs->any.unk_5C = 1;
-                    }
+            // check for bar-filling input
+            if (!acs->isBarFilled) {
+                if (battleStatus->curButtonsDown & BUTTON_STICK_LEFT) {
+                    acs->airRaid.holdingLeft = TRUE;
+                }
 
-                    if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT)) {
-                        if (acs->any.unk_5C != 0) {
-                            acs->barFillLevel += (battleStatus->actionCmdDifficultyTable[acs->difficulty] * 850) / 100;
-                            acs->any.unk_5C = 0;
-                        }
-                    }
-
-                    if (battleStatus->curButtonsPressed & BUTTON_STICK_RIGHT) {
-                        acs->barFillLevel -= (battleStatus->actionCmdDifficultyTable[acs->difficulty] * 850) / 100;
+                if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT)) {
+                    if (acs->airRaid.holdingLeft) {
+                        acs->barFillLevel += (battleStatus->actionCmdDifficultyTable[acs->difficulty] * 850) / 100;
+                        acs->airRaid.holdingLeft = FALSE;
                     }
                 }
+
+                // right stick inputs actively drain the bar
+                if (battleStatus->curButtonsPressed & BUTTON_STICK_RIGHT) {
+                    acs->barFillLevel -= (battleStatus->actionCmdDifficultyTable[acs->difficulty] * 850) / 100;
+                }
             }
+
 
             if (acs->barFillLevel < 0) {
                 acs->barFillLevel = 0;
             }
 
-            if (acs->barFillLevel > 10000) {
-                id = acs->hudElements[2];
-                acs->barFillLevel = 10000;
+            // handle bar reaching 100%
+            if (acs->barFillLevel > MAX_MASH_UNITS) {
+                acs->barFillLevel = MAX_MASH_UNITS;
                 acs->isBarFilled = TRUE;
-                hud_element_set_render_pos(id, acs->hudPosX + 50, acs->hudPosY + 28);
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hid = acs->hudElements[HIDX_100_PCT];
+                hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / 100;
+            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
             sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
 
+            // resultTier is not used by this move; uses actionQuality instead via the move script
             switch (partner->actorBlueprint->level) {
                 case PARTNER_RANK_NORMAL:
-                    if (battleStatus->actionQuality >= D_802A9984_429CA4[battleStatus->unk_85]) {
-                        battleStatus->unk_85++;
+                    if (battleStatus->actionQuality >= N(BasicThresholds)[battleStatus->resultTier]) {
+                        battleStatus->resultTier++;
                     }
 
-                    if (battleStatus->unk_85 > 0 && battleStatus->actionQuality < D_802A9984_429CA4[battleStatus->unk_85 - 1]) {
-                        battleStatus->unk_85--;
+                    if (battleStatus->resultTier > 0 && battleStatus->actionQuality < N(BasicThresholds)[battleStatus->resultTier - 1]) {
+                        battleStatus->resultTier--;
                     }
                     break;
                 case PARTNER_RANK_SUPER:
-                    if (battleStatus->actionQuality >= D_802A9994_429CB4[battleStatus->unk_85]) {
-                        battleStatus->unk_85++;
+                    if (battleStatus->actionQuality >= N(SuperThresholds)[battleStatus->resultTier]) {
+                        battleStatus->resultTier++;
                     }
-                    if (battleStatus->unk_85 > 0 && battleStatus->actionQuality < D_802A9994_429CB4[battleStatus->unk_85 - 1]) {
-                        battleStatus->unk_85--;
+                    if (battleStatus->resultTier > 0 && battleStatus->actionQuality < N(SuperThresholds)[battleStatus->resultTier - 1]) {
+                        battleStatus->resultTier--;
                     }
                     break;
                 case PARTNER_RANK_ULTRA:
-                    if (battleStatus->actionQuality >= D_802A99A8_429CC8[battleStatus->unk_85]) {
-                        battleStatus->unk_85++;
+                    if (battleStatus->actionQuality >= N(UltraThresholds)[battleStatus->resultTier]) {
+                        battleStatus->resultTier++;
                     }
-                    if (battleStatus->unk_85 > 0 && battleStatus->actionQuality < D_802A99A8_429CC8[battleStatus->unk_85 - 1]) {
-                        battleStatus->unk_85--;
+                    if (battleStatus->resultTier > 0 && battleStatus->actionQuality < N(UltraThresholds)[battleStatus->resultTier - 1]) {
+                        battleStatus->resultTier--;
                     }
                     break;
             }
@@ -197,21 +217,22 @@ void N(update)(void) {
             if (acs->barFillLevel == 0) {
                 battleStatus->actionSuccess = -1;
             } else {
-                battleStatus->actionSuccess = acs->barFillLevel / 100;
+                battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
             }
 
-            cutoff = acs->mashMeterCutoffs[acs->mashMeterIntervals - 1];
-            if (battleStatus->actionSuccess <= cutoff) {
-                battleStatus->actionResult = ACTION_RESULT_MINUS_2;
-            } else {
+            cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
+            if (battleStatus->actionSuccess > cutoff) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
+            } else {
+                battleStatus->actionResult = ACTION_RESULT_MINUS_2;
             }
 
             if (battleStatus->actionSuccess == 100) {
+                // only could 100% fill as success for this action command
                 increment_action_command_success_count();
             }
 
-            btl_set_popup_duration(0);
+            btl_set_popup_duration(POPUP_MSG_OFF);
             sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
             acs->frameCounter = 5;
             acs->state = AC_STATE_DISPOSE;

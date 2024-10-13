@@ -2,17 +2,14 @@
 
 void N(draw)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
-
-    s32 hudX;
-    s32 hudY;
-    s32 hudElement;
-    s32 barFillLevel;
+    s32 hudX, hudY;
+    s32 hid;
 
     hud_element_draw_clipped(acs->hudElements[0]);
 
-    hudElement = acs->hudElements[1];
-    hud_element_draw_clipped(hudElement);
-    hud_element_get_render_pos(hudElement, &hudX, &hudY);
+    hid = acs->hudElements[1];
+    hud_element_draw_clipped(hid);
+    hud_element_get_render_pos(hid, &hudX, &hudY);
 
     if (!acs->isBarFilled) {
         draw_mash_meter_multicolor(hudX, hudY, acs->barFillLevel / 100);

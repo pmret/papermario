@@ -734,7 +734,7 @@ EvtScript N(getJumpTime) = {
 
 EvtScript N(EVS_Move_BellyFlop) = {
     Call(LoadActionCommand, ACTION_COMMAND_SMASH)
-    Call(ActionCommandInitHammer)
+    Call(action_command_hammer_init)
     ExecWait(N(runToTarget))
     ExecWait(N(getJumpTime))
     Loop(30)
@@ -744,7 +744,7 @@ EvtScript N(EVS_Move_BellyFlop) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(ActionCommandStartHammer, 0, 57, 3)
+    Call(action_command_hammer_start, 0, 57, 3)
     Call(SetActionQuality, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Tense1)
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_CLOSE_UP)

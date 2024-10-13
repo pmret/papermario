@@ -113,7 +113,7 @@ void N(update)(void) {
 
     switch (acs->state) {
         case TIDAL_WAVE_STATE_INIT:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             id = acs->hudElements[0];
             if (acs->showHud) {
                 hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
@@ -122,7 +122,7 @@ void N(update)(void) {
             acs->state = TIDAL_WAVE_STATE_APPEAR;
             break;
         case TIDAL_WAVE_STATE_APPEAR:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             acs->hudPosX += 20;
             if (acs->hudPosX > 50) {
                 acs->hudPosX = 50;
@@ -130,7 +130,7 @@ void N(update)(void) {
             hud_element_set_render_pos(acs->hudElements[0], acs->hudPosX + 21, acs->hudPosY + 28);
             break;
         case TIDAL_WAVE_STATE_START:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             if (acs->prepareTime != 0) {
                 acs->prepareTime--;
                 break;
@@ -142,7 +142,7 @@ void N(update)(void) {
             acs->wrongInputFrameCounter = 0;
             // fallthrough
         case TIDAL_WAVE_STATE_NEXT_BUTTON:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
 
             // Pick a new button that doesn't match the old one.
             oldButton = acs->tidalWave.prevButton;
@@ -160,7 +160,7 @@ void N(update)(void) {
             acs->state = TIDAL_WAVE_STATE_AWAIT_INPUT;
             // fallthrough
         case TIDAL_WAVE_STATE_AWAIT_INPUT:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
 
             acs->frameCounter--;
             if (acs->frameCounter == 0) {
@@ -271,8 +271,7 @@ void N(update)(void) {
                         hud_element_set_scale(id, 0.5f);
                         hud_element_set_render_pos(id, acs->hudPosX + ((acs->tidalWave.inputCount - 1) * 20), acs->hudPosY + 7);
                         acs->tidalWave.inputCount++;
-                        acs->barFillLevel +=
-                            battleStatus->actionCmdDifficultyTable[acs->difficulty] * 0x12;
+                        acs->barFillLevel += battleStatus->actionCmdDifficultyTable[acs->difficulty] * 18;
                         if (acs->barFillLevel > 10000) {
                             acs->barFillLevel = 10000;
                         }
@@ -296,7 +295,7 @@ void N(update)(void) {
             if (battleStatus->actionSuccess >= 10) {
                 increment_action_command_success_count();
             }
-            btl_set_popup_duration(0);
+            btl_set_popup_duration(POPUP_MSG_OFF);
             acs->frameCounter = 5;
             acs->state = TIDAL_WAVE_STATE_DISPOSE;
             break;

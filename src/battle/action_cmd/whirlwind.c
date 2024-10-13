@@ -158,7 +158,7 @@ void N(update)(void) {
 
     switch (acs->state) {
         case AC_STATE_INIT:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
 
             id = acs->hudElements[0];
             if (acs->showHud) {
@@ -187,7 +187,7 @@ void N(update)(void) {
             acs->state = AC_STATE_APPEAR;
             break;
         case AC_STATE_APPEAR:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             acs->hudPosX += 20;
             if (acs->hudPosX > 50) {
                 acs->hudPosX = 50;
@@ -198,7 +198,7 @@ void N(update)(void) {
             hud_element_set_render_pos(acs->hudElements[3], acs->hudPosX + 60, acs->hudPosY + 23);
             break;
         case AC_STATE_START:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             if (acs->prepareTime != 0) {
                 acs->prepareTime--;
                 return;
@@ -209,8 +209,8 @@ void N(update)(void) {
             acs->frameCounter = acs->duration;
             // fallthrough
         case AC_STATE_ACTIVE:
-            btl_set_popup_duration(99);
-            cutoff = acs->mashMeterCutoffs[acs->mashMeterIntervals];
+            btl_set_popup_duration(POPUP_MSG_ON);
+            cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
             temp = acs->barFillLevel / cutoff;
             if (acs->targetWeakness == 0) {
                 amt = D_802AA844_4254B4[temp / 20];
@@ -254,7 +254,7 @@ void N(update)(void) {
             }
             battleStatus->actionResult = ACTION_RESULT_NONE;
             battleStatus->actionSuccess = battleStatus->actionQuality;
-            btl_set_popup_duration(0);
+            btl_set_popup_duration(POPUP_MSG_OFF);
             acs->frameCounter = 5;
             acs->state = AC_STATE_DISPOSE;
             break;

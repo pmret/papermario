@@ -3,16 +3,17 @@
 
 #include "common.h"
 #include "hud_element.h"
+#include "battle.h"
 #include "battle/action_cmd/jump.h"
 #include "battle/action_cmd/hammer.h"
 #include "battle/action_cmd/flee.h"
 #include "battle/action_cmd/break_free.h"
 #include "battle/action_cmd/whirlwind.h"
 #include "battle/action_cmd/stop_leech.h"
-#include "battle/action_cmd/07.h"
+#include "battle/action_cmd/unused_flee.h"
 #include "battle/action_cmd/dizzy_shell.h"
 #include "battle/action_cmd/fire_shell.h"
-#include "battle/action_cmd/0A.h"
+#include "battle/action_cmd/unused_0A.h"
 #include "battle/action_cmd/bomb.h"
 #include "battle/action_cmd/body_slam.h"
 #include "battle/action_cmd/air_lift.h"
@@ -51,10 +52,19 @@ enum ActionCommandModes {
     AC_MODE_TUTORIAL_WAIT_INPUT     = 3,
 };
 
+// mash meter has 100 units for each 1%
+#define ONE_PCT_MASH    100
+
+// mash meter goes up to 100%
+#define MAX_MASH_PCT    100
+
+// total number of units in the mash meter
+#define MAX_MASH_UNITS  (MAX_MASH_PCT * ONE_PCT_MASH)
+
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 workerID;
     /* 0x04 */ s32 hudElements[16];
-    /* 0x44 */ s16 barFillLevel; // full = 10000
+    /* 0x44 */ s16 barFillLevel; // 0 to MAX_MASH_UNITS
     /* 0x46 */ s16 thresholdLevel;
     /* 0x48 */ s16 barFillWidth; // X100
     /* 0x4A */ s16 actionCommandID;
@@ -65,15 +75,25 @@ typedef struct ActionCommandStatus {
     /* 0x54 */ s16 frameCounter;
     /* 0x56 */ s16 hudPosX;
     /* 0x58 */ s16 hudPosY;
-    /* 0x5A */ s16 unk_5A;
+    /* 0x5A */ s16 effectiveness; // used by air_lift (via AirLiftChance), break_free (30), and flee (random 0-1).
     /* 0x5C */ union {
                     struct {
                         s8 unk_5C;
                         s8 unk_5D;
                     } any;
                     struct {
+                        b8 holdingLeft;
+                    } airRaid;
+                    struct {
+                        b8 holdingLeft;
+                    } fireShell;
+                    struct {
                         s8 dir;
+                        s8 drainDelay; // only found in unused variant
                     } flee;
+                    struct {
+                        b8 holdingLeft;
+                    } smack;
                     struct {
                         b8 hadCorrectTiming;
                         s8 unk_5D;
@@ -89,7 +109,7 @@ typedef struct ActionCommandStatus {
     /* 0x61 */ s8 showHud;
     /* 0x62 */ s8 playHammerSounds;
     /* 0x63 */ s8 unk_63;
-    /* 0x64 */ s16 targetWeakness; // chance of applying special status, the more the easier it is to fill the bar
+    /* 0x64 */ s16 targetWeakness; // chance of applying special status; higher values make mashing easier
     /* 0x66 */ s16 thresholdMoveDir;
     /* 0x68 */ s16 isBarFilled;
     /* 0x6A */ s16 berserkerEnabled;
@@ -98,7 +118,7 @@ typedef struct ActionCommandStatus {
     /* 0x70 */ s16 lookBackCounter;
     /* 0x72 */ s16 wrongInputFrameCounter;
     /* 0x74 */ s16 mashMeterCutoffs[6]; // upper bounds for each interval
-    /* 0x80 */ s8 mashMeterIntervals;
+    /* 0x80 */ s8 mashMeterNumIntervals;
 } ActionCommandStatus;
 
 extern ActionCommandStatus gActionCommandStatus;

@@ -374,7 +374,7 @@ API_CALLABLE(N(SpinyFlipUpdatePopup)) {
     }
 
     if (!SpinyFlipTargetingDone) {
-        btl_set_popup_duration(99);
+        btl_set_popup_duration(POPUP_MSG_ON);
         return ApiStatus_BLOCK;
     } else {
         return ApiStatus_DONE2;
@@ -573,7 +573,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
                 id = hudAim[i];
                 hud_element_free(id);
             }
-            btl_set_popup_duration(0);
+            btl_set_popup_duration(POPUP_MSG_OFF);
             sfx_stop_sound(SOUND_AIM_SPINY_FLIP);
             return ApiStatus_DONE2;
     }
@@ -618,7 +618,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             break;
     }
 
-    btl_set_popup_duration(99);
+    btl_set_popup_duration(POPUP_MSG_ON);
     return ApiStatus_BLOCK;
 }
 

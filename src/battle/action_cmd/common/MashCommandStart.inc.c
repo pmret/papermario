@@ -3,7 +3,7 @@ API_CALLABLE(N(start)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    if (battleStatus->actionCommandMode == 0) {
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
@@ -21,7 +21,7 @@ API_CALLABLE(N(start)) {
     acs->barFillWidth = 0;
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
-    battleStatus->unk_82 = acs->mashMeterCutoffs[(acs->mashMeterIntervals - 1)];
+    battleStatus->unk_82 = acs->mashMeterCutoffs[(acs->mashMeterNumIntervals - 1)];
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     acs->state = AC_STATE_START;
 

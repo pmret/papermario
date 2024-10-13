@@ -211,7 +211,7 @@ void N(update)(void) {
 
     switch (acs->state) {
         case WATER_BLOCK_STATE_INIT:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             id = acs->hudElements[0];
             if (acs->showHud) {
                 hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
@@ -260,7 +260,7 @@ void N(update)(void) {
             acs->state = WATER_BLOCK_STATE_APPEAR;
             break;
         case WATER_BLOCK_STATE_APPEAR:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             if (acs->hudPrepareTime != 0) {
                 acs->hudPrepareTime--;
                 return;
@@ -293,7 +293,7 @@ void N(update)(void) {
             hud_element_set_render_pos(acs->hudElements[13], acs->hudPosX + 92, acs->hudPosY + 23);
             break;
         case WATER_BLOCK_STATE_START:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             if (acs->prepareTime != 0) {
                 acs->prepareTime--;
                 return;
@@ -306,7 +306,7 @@ void N(update)(void) {
             acs->state = WATER_BLOCK_STATE_PREFACE;
             // fallthrough
         case WATER_BLOCK_STATE_PREFACE:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             // first two minor ticks
             if (acs->frameCounter == 42) {
                 hud_element_set_script(acs->hudElements[11], &HES_TimingCharge3);
@@ -333,7 +333,7 @@ void N(update)(void) {
             }
             break;
         case WATER_BLOCK_STATE_FIRST_CHANCE:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             if (!acs->wrongButtonPressed
                 && !acs->waterBlock.hadCorrectTiming
                 && acs->waterBlock.unk_5D >= -5
@@ -405,7 +405,7 @@ void N(update)(void) {
             }
             break;
         case WATER_BLOCK_STATE_SECOND_CHANCE:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             if (!acs->wrongButtonPressed && !acs->waterBlock.hadCorrectTiming && (acs->waterBlock.unk_5D >= -5)) {
                 s32 (*difficultyVec)[2] = (s32 (*)[2])battleStatus->actionCmdDifficultyTable;
                 window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + 4;
@@ -477,7 +477,7 @@ void N(update)(void) {
             }
             break;
         case WATER_BLOCK_STATE_THIRD_CHANCE:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             if (!acs->wrongButtonPressed && !acs->waterBlock.hadCorrectTiming && (acs->waterBlock.unk_5D >= -5)) {
                 s32 (*difficultyVec)[2] = (s32 (*)[2])battleStatus->actionCmdDifficultyTable;
                 window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + 3;
@@ -549,7 +549,7 @@ void N(update)(void) {
             if (battleStatus->actionSuccess == 3) {
                 increment_action_command_success_count();
             }
-            btl_set_popup_duration(0);
+            btl_set_popup_duration(POPUP_MSG_OFF);
             acs->frameCounter = 5;
             acs->state = WATER_BLOCK_STATE_DISPOSE;
             break;

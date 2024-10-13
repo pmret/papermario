@@ -2560,7 +2560,7 @@ void btl_state_update_player_menu(void) {
                     if (battleStatus->submenuMoveCount == 1) {
                         battleStatus->submenuMoveCount = 0;
                     }
-                    if (battleStatus->actionCommandMode == 2) {
+                    if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL) {
                         battleStatus->submenuMoveCount = 0;
                     }
                     break;
@@ -2569,7 +2569,7 @@ void btl_state_update_player_menu(void) {
                     if (battleStatus->submenuMoveCount == 1) {
                         battleStatus->submenuMoveCount = 0;
                     }
-                    if (battleStatus->actionCommandMode == 2) {
+                    if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL) {
                         battleStatus->submenuMoveCount = 0;
                     }
                     break;

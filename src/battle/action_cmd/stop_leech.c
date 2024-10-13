@@ -76,21 +76,21 @@ void N(update)(void) {
 
     switch (acs->state) {
         case AC_STATE_INIT:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             hudElement = acs->hudElements[0];
             if (acs->showHud) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hud_element_set_alpha(hudElement, 0xFF);
+            hud_element_set_alpha(hudElement, 255);
             hudElement = acs->hudElements[1];
-            hud_element_set_alpha(hudElement, 0xFF);
+            hud_element_set_alpha(hudElement, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
             acs->state = AC_STATE_APPEAR;
             break;
         case AC_STATE_APPEAR:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             hudElementX = acs->hudPosX + 20;
             acs->hudPosX = hudElementX;
             if (hudElementX > 50) {
@@ -100,7 +100,7 @@ void N(update)(void) {
             hud_element_set_render_pos(acs->hudElements[1], acs->hudPosX, acs->hudPosY + 28);
             break;
         case AC_STATE_START:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             if (acs->prepareTime != 0) {
                 acs->prepareTime -= 1;
                 break;
@@ -111,7 +111,7 @@ void N(update)(void) {
             acs->frameCounter = acs->duration;
             // fallthrough
         case AC_STATE_ACTIVE:
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
             if (!acs->berserkerEnabled) {
                 if (battleStatus->curButtonsPressed & BUTTON_A) {
                     acs->barFillLevel += battleStatus->actionCmdDifficultyTable[acs->difficulty];
@@ -121,12 +121,12 @@ void N(update)(void) {
                 acs->barFillLevel += rand_int((battleStatus->actionCmdDifficultyTable[acs->difficulty]) / 6);
             }
             battleStatus->actionQuality = acs->barFillLevel / 100;
-            if (acs->mashMeterCutoffs[acs->mashMeterIntervals] <= battleStatus->actionQuality) {
+            if (acs->mashMeterCutoffs[acs->mashMeterNumIntervals] <= battleStatus->actionQuality) {
                 acs->frameCounter = 0;
             }
 
             if (acs->frameCounter == 0) {
-                btl_set_popup_duration(0);
+                btl_set_popup_duration(POPUP_MSG_OFF);
                 acs->frameCounter = 5;
                 acs->state = AC_STATE_DISPOSE;
                 break;

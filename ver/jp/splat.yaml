@@ -5611,9 +5611,9 @@ segments:
     start: 0x42D490
     vram: 0x802A9000
     dir: battle/action_cmd
-    name: action_cmd_07
+    name: action_cmd_unused_flee
     subsegments:
-    - [auto, c, "07"]
+    - [auto, c, unused_flee]
   - type: code
     start: 0x42DAB0
     vram: 0x802A9000
@@ -5632,9 +5632,9 @@ segments:
     start: 0x42ECF0
     vram: 0x802A9000
     dir: battle/action_cmd
-    name: action_cmd_0A
+    name: action_cmd_unused_0A
     subsegments:
-    - [auto, c, 0A]
+    - [auto, c, unused_0A]
   - type: code
     start: 0x42F3B0
     vram: 0x802A9000

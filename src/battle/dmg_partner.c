@@ -249,7 +249,7 @@ HitResult calc_partner_damage_enemy(void) {
             }
 
             sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-            
+
             if (gBattleStatus.flags1 & (BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)) {
                 return HIT_RESULT_NICE;
             } else {
@@ -1053,7 +1053,7 @@ API_CALLABLE(PartnerDamageEnemy) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* enemy = get_actor(script->owner1.enemyID);
-    s32 temp_s4 = *args++;
+    s32 retVar = *args++;
     s32 flags;
     s32 damageResult;
     u8 statusChance;
@@ -1119,7 +1119,7 @@ API_CALLABLE(PartnerDamageEnemy) {
         return ApiStatus_FINISH;
     }
 
-    evt_set_variable(script, temp_s4, damageResult);
+    evt_set_variable(script, retVar, damageResult);
 
     if (!does_script_exist_by_ref(script)) {
         return ApiStatus_FINISH;

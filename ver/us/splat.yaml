@@ -5774,9 +5774,9 @@ segments:
     start: 0x425B50
     vram_class: action_cmd
     dir: battle/action_cmd
-    name: action_cmd_07
+    name: action_cmd_unused_flee
     subsegments:
-    - [auto, c, "07"]
+    - [auto, c, unused_flee]
   - type: code
     start: 0x426170
     vram_class: action_cmd
@@ -5795,9 +5795,9 @@ segments:
     start: 0x4273B0
     vram_class: action_cmd
     dir: battle/action_cmd
-    name: action_cmd_0A
+    name: action_cmd_unused_0A
     subsegments:
-    - [auto, c, 0A]
+    - [auto, c, unused_0A]
   - type: code
     start: 0x427A70
     vram_class: action_cmd

@@ -155,7 +155,7 @@ EvtScript N(EVS_802A4164) = {
 
 EvtScript N(EVS_UseMove_Impl) = {
     Call(LoadActionCommand, ACTION_COMMAND_SMASH)
-    Call(ActionCommandInitHammer)
+    Call(action_command_hammer_init)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Add(LVar0, 16)
@@ -194,7 +194,7 @@ EvtScript N(EVS_UseMove_Impl) = {
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Hold1)
     EndSwitch
     Call(GetActionCommandMode, LVar0)
-    IfGt(LVar0, 0)
+    IfGt(LVar0, AC_MODE_NOT_LEARNED)
         Call(N(ShouldMovesAutoSucceed))
         IfEq(LVar0, 0)
             Loop(45)
@@ -206,7 +206,7 @@ EvtScript N(EVS_UseMove_Impl) = {
             EndLoop
         EndIf
         Add(LVarD, 6)
-        Call(ActionCommandStartHammer, 0, LVarD, 3)
+        Call(action_command_hammer_start, 0, LVarD, 3)
         Call(SetActionQuality, 0)
         Set(LVar1, 0)
         Loop(30)
@@ -245,7 +245,7 @@ EvtScript N(EVS_UseMove_Impl) = {
         Wait(30)
     EndIf
     Call(GetActionCommandMode, LVar0)
-    IfGt(LVar0, 0)
+    IfGt(LVar0, AC_MODE_NOT_LEARNED)
         Loop(0)
             Wait(1)
             Call(GetActionSuccess, LVar0)
