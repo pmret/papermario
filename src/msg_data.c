@@ -694,9 +694,15 @@ u8 MsgCharWidthNormal[] = {
     [MSG_CHAR_LOWER_E_ACUTE]          8,
     [MSG_CHAR_LOWER_E_CIRCUMFLEX]     8,
     [MSG_CHAR_LOWER_E_UMLAUT]         8,
+#if VERSION_PAL
+    [MSG_CHAR_LOWER_I_GRAVE]          4,
+    [MSG_CHAR_LOWER_I_ACUTE]          4,
+    [MSG_CHAR_LOWER_I_CIRCUMFLEX]     5,
+#else
     [MSG_CHAR_LOWER_I_GRAVE]          6,
     [MSG_CHAR_LOWER_I_ACUTE]          6,
     [MSG_CHAR_LOWER_I_CIRCUMFLEX]     6,
+#endif
     [MSG_CHAR_LOWER_I_UMLAUT]         7,
     [MSG_CHAR_LOWER_N_TILDE]          9,
     [MSG_CHAR_LOWER_O_GRAVE]          7,
