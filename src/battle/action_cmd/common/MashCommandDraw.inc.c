@@ -12,9 +12,9 @@ void N(draw)(void) {
     hud_element_get_render_pos(hid, &hudX, &hudY);
 
     if (!acs->isBarFilled) {
-        draw_mash_meter_multicolor(hudX, hudY, acs->barFillLevel / 100);
+        draw_mash_meter_multicolor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH);
     } else {
-        draw_mash_meter_blink(hudX, hudY, acs->barFillLevel / 100);
+        draw_mash_meter_blink(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH);
     }
 
     hud_element_draw_clipped(acs->hudElements[2]);

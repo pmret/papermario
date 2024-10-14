@@ -85,6 +85,9 @@ typedef struct ActionCommandStatus {
                         b8 holdingLeft;
                     } airRaid;
                     struct {
+                        s8 dir;
+                    } breakFree;
+                    struct {
                         b8 holdingLeft;
                     } fireShell;
                     struct {

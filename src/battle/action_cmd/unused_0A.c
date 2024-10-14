@@ -1,6 +1,7 @@
 #include "common.h"
 #include "battle/action_cmd.h"
 
+//TODO action command
 #define NAMESPACE action_command_unused_0A
 
 extern s32 actionCmdTable0A[];
@@ -15,7 +16,7 @@ enum {
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hudElement;
+    s32 hid;
 
     battleStatus->unk_82 = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTable0A;
@@ -39,23 +40,23 @@ API_CALLABLE(N(init)) {
     acs->hudPosX = -48;
     acs->hudPosY = 80;
 
-    hudElement = hud_element_create(&HES_AButton);
-    acs->hudElements[HIDX_BUTTON] = hudElement;
-    hud_element_set_render_pos(hudElement, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_AButton);
+    acs->hudElements[HIDX_BUTTON] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    hudElement = hud_element_create(&HES_BlueMeter);
-    acs->hudElements[HIDX_METER] = hudElement;
-    hud_element_set_render_pos(hudElement, acs->hudPosX, acs->hudPosY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_BlueMeter);
+    acs->hudElements[HIDX_METER] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    hudElement = hud_element_create(&HES_100pct);
-    acs->hudElements[HIDX_100_PCT] = hudElement;
-    hud_element_set_render_pos(hudElement, acs->hudPosX, acs->hudPosY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_100pct);
+    acs->hudElements[HIDX_100_PCT] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     return ApiStatus_DONE2;
 }
@@ -109,6 +110,7 @@ void N(update)(void) {
             acs->barFillLevel = 0;
             acs->state = AC_STATE_ACTIVE;
             acs->frameCounter = acs->duration;
+
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -117,15 +119,15 @@ void N(update)(void) {
                 acs->barFillLevel += battleStatus->actionCmdDifficultyTable[acs->difficulty] * 15;
             }
 
-            if (acs->barFillLevel >= 10000) {
-                acs->barFillLevel = 10000;
+            if (acs->barFillLevel >= MAX_MASH_UNITS) {
+                acs->barFillLevel = MAX_MASH_UNITS;
                 acs->isBarFilled = TRUE;
                 hid = acs->hudElements[HIDX_100_PCT];
                 hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / 100;
+            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
 
             if (acs->frameCounter != 0) {
                 acs->frameCounter--;
@@ -135,7 +137,7 @@ void N(update)(void) {
             if (acs->barFillLevel == 0) {
                 battleStatus->actionSuccess = -1;
             } else {
-                battleStatus->actionSuccess = acs->barFillLevel / 100;
+                battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
             }
 
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];

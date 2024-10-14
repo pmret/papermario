@@ -1,13 +1,14 @@
 #include "common.h"
 #include "battle/action_cmd.h"
 
+//TODO action command
 #define NAMESPACE action_command_jump
 
 extern s32 actionCmdTableJump[];
 
 API_CALLABLE(N(init)) {
-    s32 hudElement;
     ActionCommandStatus* acs = &gActionCommandStatus;
+    s32 hid;
 
     gBattleStatus.unk_82 = 1;
     gBattleStatus.actionCmdDifficultyTable = actionCmdTableJump;
@@ -25,29 +26,28 @@ API_CALLABLE(N(init)) {
     acs->wrongButtonPressed = FALSE;
     acs->hudPosY = 80;
 
-    hudElement = hud_element_create(&HES_AButton);
-    acs->hudElements[0] = hudElement;
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-    hud_element_set_render_pos(hudElement, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_alpha(hudElement, 255);
+    hid = hud_element_create(&HES_AButton);
+    acs->hudElements[0] = hid;
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_alpha(hid, 255);
 
-    hudElement = hud_element_create(&HES_RightOn);
-    acs->hudElements[1] = hudElement;
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-    hud_element_set_render_pos(hudElement, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_alpha(hudElement, 255);
+    hid = hud_element_create(&HES_RightOn);
+    acs->hudElements[1] = hid;
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_alpha(hid, 255);
 
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(start)) {
-    s32 hudElement;
-
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
+    s32 hid;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
@@ -60,13 +60,13 @@ API_CALLABLE(N(start)) {
         acs->wrongButtonPressed = FALSE;
         battleStatus->actionSuccess = 0;
 
-        hudElement = acs->hudElements[0];
+        hid = acs->hudElements[0];
         acs->hudPosX = 50;
         battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
         battleStatus->flags1 &= ~BS_FLAGS1_2000;
-        hud_element_set_render_pos(hudElement, acs->hudPosX, acs->hudPosY);
+        hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
         if (acs->showHud) {
-            hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
+            hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
         }
 
         acs->state = AC_STATE_START;
@@ -79,7 +79,7 @@ API_CALLABLE(N(start)) {
 void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hudElement;
+    s32 hid;
     s32 successWindow;
 
     switch (acs->state) {
@@ -99,17 +99,17 @@ void N(update)(void) {
                 acs->hudPosX = 50;
             }
 
-            hudElement = acs->hudElements[0];
-            hud_element_set_render_pos(hudElement, acs->hudPosX, acs->hudPosY);
+            hid = acs->hudElements[0];
+            hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
             if (acs->showHud) {
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             if (acs->autoSucceed) {
-                hudElement = acs->hudElements[1];
-                hud_element_set_render_pos(hudElement, acs->hudPosX + 50, acs->hudPosY);
+                hid = acs->hudElements[1];
+                hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY);
                 if (acs->showHud) {
-                    hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
+                    hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                     break;
                 }
             }
@@ -135,7 +135,8 @@ void N(update)(void) {
             acs->frameCounter = battleStatus->actionCmdDifficultyTable[acs->difficulty];
             battleStatus->actionSuccess = -1;
             acs->state = AC_STATE_ACTIVE;
-            // fall through
+
+            // fallthrough
         case AC_STATE_ACTIVE:
             if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL) {
                 btl_set_popup_duration(POPUP_MSG_ON);
@@ -146,9 +147,9 @@ void N(update)(void) {
                 }
             } else {
                 if (battleStatus->actionSuccess >= 0) {
-                    hudElement = acs->hudElements[0];
+                    hid = acs->hudElements[0];
                     if (acs->showHud) {
-                        hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
+                        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                     }
                 }
             }

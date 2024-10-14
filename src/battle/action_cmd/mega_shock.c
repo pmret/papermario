@@ -2,6 +2,7 @@
 #include "audio/public.h"
 #include "battle/action_cmd.h"
 
+//TODO action command
 #define NAMESPACE action_command_mega_shock
 
 s32 D_802A9930_42E340[AC_DIFFICULTY_LEN] = { 0, 25, 50, 75, 75, 0, 0, 0 };
@@ -103,7 +104,7 @@ void N(update)(void) {
     s32 frameCount;
     s32 buttonsAB;
     s32 bufferPos;
-    s32 hudElement;
+    s32 hid;
     s32 mashMeterIndex;
     s32 mashMeterCutoff;
     s8 adjustedFillLevel;
@@ -112,22 +113,22 @@ void N(update)(void) {
         case AC_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            hudElement = acs->hudElements[0];
+            hid = acs->hudElements[0];
             if (acs->showHud) {
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hud_element_set_alpha(hudElement, 255);
+            hud_element_set_alpha(hid, 255);
 
-            hudElement = acs->hudElements[2];
+            hid = acs->hudElements[2];
             if (acs->showHud) {
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hud_element_set_alpha(hudElement, 255);
+            hud_element_set_alpha(hid, 255);
 
-            hudElement = acs->hudElements[1];
-            hud_element_set_alpha(hudElement, 255);
+            hid = acs->hudElements[1];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             acs->state = AC_STATE_APPEAR;
@@ -161,6 +162,7 @@ void N(update)(void) {
             acs->frameCounter = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
+
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -219,7 +221,7 @@ void N(update)(void) {
 
                     acs->barFillLevel += buttonsPushed;
                 } else {
-                    acs->barFillLevel += 100;
+                    acs->barFillLevel += ONE_PCT_MASH;
 
                     if (acs->barFillLevel >= 500) {
                         acs->barFillLevel = 500;
@@ -243,15 +245,15 @@ void N(update)(void) {
                 }
             }
 
-            if (acs->barFillLevel > 10000) {
-                hudElement = acs->hudElements[4];
-                acs->barFillLevel = 10000;
+            if (acs->barFillLevel > MAX_MASH_UNITS) {
+                acs->barFillLevel = MAX_MASH_UNITS;
                 acs->isBarFilled = TRUE;
-                hud_element_set_render_pos(hudElement, acs->hudPosX + 50, acs->hudPosY + 28);
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
+                hid = acs->hudElements[4];
+                hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            adjustedFillLevel = acs->barFillLevel / 100;
+            adjustedFillLevel = acs->barFillLevel / ONE_PCT_MASH;
 
             battleStatus->actionQuality = adjustedFillLevel;
             sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, adjustedFillLevel * 12);
@@ -270,7 +272,7 @@ void N(update)(void) {
                 if (buttonsPushed == 0) {
                     battleStatus->actionSuccess = -1;
                 } else {
-                    battleStatus->actionSuccess = buttonsPushed / 100;
+                    battleStatus->actionSuccess = buttonsPushed / ONE_PCT_MASH;
                 }
 
                 mashMeterIndex = acs->mashMeterNumIntervals - 1;
@@ -297,7 +299,7 @@ void N(update)(void) {
             break;
         case AC_STATE_DISPOSE:
             if (acs->targetWeakness == 0) {
-                acs->barFillLevel -= 100;
+                acs->barFillLevel -= ONE_PCT_MASH;
                 if (acs->barFillLevel < 0) {
                     acs->barFillLevel = 0;
                 }
@@ -314,22 +316,21 @@ void N(update)(void) {
 
 void N(draw)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
-
-    s32 hudElement;
-    s32 hudElementX;
-    s32 hudElementY;
+    s32 hid;
+    s32 hudX;
+    s32 hudY;
 
     hud_element_draw_clipped(acs->hudElements[0]);
     hud_element_draw_clipped(acs->hudElements[2]);
 
-    hudElement = acs->hudElements[1];
-    hud_element_draw_clipped(hudElement);
-    hud_element_get_render_pos(hudElement, &hudElementX, &hudElementY);
+    hid = acs->hudElements[1];
+    hud_element_draw_clipped(hid);
+    hud_element_get_render_pos(hid, &hudX, &hudY);
 
     if (!acs->isBarFilled) {
-        draw_mash_meter_multicolor(hudElementX, hudElementY, acs->barFillLevel / 100);
+        draw_mash_meter_multicolor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH);
     } else {
-        draw_mash_meter_blink(hudElementX, hudElementY, acs->barFillLevel / 100);
+        draw_mash_meter_blink(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH);
     }
 
     hud_element_draw_clipped(acs->hudElements[4]);

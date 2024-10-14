@@ -118,6 +118,7 @@ void N(update)(void) {
             acs->frameCounter = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
+
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -216,7 +217,7 @@ void N(update)(void) {
             }
 
             if (battleStatus->actionSuccess == 100) {
-                // only could 100% fill as success for this action command
+                // only count 100% fill as success for this action command
                 increment_action_command_success_count();
             }
 

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "battle/action_cmd.h"
 
+//TODO action command
 #define NAMESPACE action_command_tidal_wave
 
 extern s32 actionCmdTableTidalWave[];
@@ -29,7 +30,7 @@ HudScript* HudButtonsDown[TIDAL_WAVE_INPUT_COUNT] = { &HES_AButtonDown, &HES_BBu
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 id;
+    s32 hid;
     s32 i;
 
     battleStatus->unk_82 = 5;
@@ -50,18 +51,18 @@ API_CALLABLE(N(init)) {
         acs->hudPosX = -48;
         acs->hudPosY = 80;
 
-        id = hud_element_create(&HES_BlueMeter);
-        acs->hudElements[0] = id;
-        hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY + 28);
-        hud_element_set_render_depth(id, 0);
-        hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+        hid = hud_element_create(&HES_BlueMeter);
+        acs->hudElements[0] = hid;
+        hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+        hud_element_set_render_depth(hid, 0);
+        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
         for (i = 1; i < ARRAY_COUNT(acs->hudElements) - 1; i++) {
-            id = hud_element_create(&HES_AButton);
-            acs->hudElements[i] = id;
-            hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-            hud_element_set_render_depth(id, 0);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+            hid = hud_element_create(&HES_AButton);
+            acs->hudElements[i] = hid;
+            hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+            hud_element_set_render_depth(hid, 0);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
         }
 
         return ApiStatus_DONE2;
@@ -102,7 +103,7 @@ API_CALLABLE(N(start)) {
 void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 id;
+    s32 hid;
     s8 oldButton;
     s8 newButton;
     s32 numLookbackFrames;
@@ -114,11 +115,11 @@ void N(update)(void) {
     switch (acs->state) {
         case TIDAL_WAVE_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
-            id = acs->hudElements[0];
+            hid = acs->hudElements[0];
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hud_element_set_alpha(id, 255);
+            hud_element_set_alpha(hid, 255);
             acs->state = TIDAL_WAVE_STATE_APPEAR;
             break;
         case TIDAL_WAVE_STATE_APPEAR:
@@ -140,6 +141,7 @@ void N(update)(void) {
             acs->tidalWave.prevButton = rand_int(TIDAL_WAVE_INPUT_COUNT - 1);
             acs->state = TIDAL_WAVE_STATE_NEXT_BUTTON;
             acs->wrongInputFrameCounter = 0;
+
             // fallthrough
         case TIDAL_WAVE_STATE_NEXT_BUTTON:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -151,13 +153,14 @@ void N(update)(void) {
                 acs->tidalWave.prevButton = newButton;
             } while (oldButton == newButton);
 
-            id = acs->hudElements[acs->tidalWave.inputCount];
-            hud_element_set_script(id, HudButtonsUp[newButton]);
-            hud_element_set_render_pos(id, acs->hudPosX + ((acs->tidalWave.inputCount - 1) * 20) + 16, acs->hudPosY);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+            hid = acs->hudElements[acs->tidalWave.inputCount];
+            hud_element_set_script(hid, HudButtonsUp[newButton]);
+            hud_element_set_render_pos(hid, acs->hudPosX + ((acs->tidalWave.inputCount - 1) * 20) + 16, acs->hudPosY);
+            hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             sfx_play_sound(SOUND_TIMING_BAR_TICK);
             acs->lookBackCounter = 1;
             acs->state = TIDAL_WAVE_STATE_AWAIT_INPUT;
+
             // fallthrough
         case TIDAL_WAVE_STATE_AWAIT_INPUT:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -266,14 +269,14 @@ void N(update)(void) {
 
                     if (success) {
                         // Correct; shrink button, set up next button press, etc.
-                        id = acs->hudElements[acs->tidalWave.inputCount];
-                        hud_element_set_script(id, HudButtonsDown[acs->tidalWave.prevButton]);
-                        hud_element_set_scale(id, 0.5f);
-                        hud_element_set_render_pos(id, acs->hudPosX + ((acs->tidalWave.inputCount - 1) * 20), acs->hudPosY + 7);
+                        hid = acs->hudElements[acs->tidalWave.inputCount];
+                        hud_element_set_script(hid, HudButtonsDown[acs->tidalWave.prevButton]);
+                        hud_element_set_scale(hid, 0.5f);
+                        hud_element_set_render_pos(hid, acs->hudPosX + ((acs->tidalWave.inputCount - 1) * 20), acs->hudPosY + 7);
                         acs->tidalWave.inputCount++;
                         acs->barFillLevel += battleStatus->actionCmdDifficultyTable[acs->difficulty] * 18;
-                        if (acs->barFillLevel > 10000) {
-                            acs->barFillLevel = 10000;
+                        if (acs->barFillLevel > MAX_MASH_UNITS) {
+                            acs->barFillLevel = MAX_MASH_UNITS;
                         }
                         acs->state = TIDAL_WAVE_STATE_NEXT_BUTTON;
                         battleStatus->actionQuality++;

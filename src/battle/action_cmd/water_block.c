@@ -2,6 +2,7 @@
 #include "battle/action_cmd.h"
 #include "include_asset.h"
 
+//TODO action command
 #define NAMESPACE action_command_water_block
 
 extern s32 actionCmdTableWaterBlock[][2];
@@ -70,7 +71,7 @@ API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
-    s32 id;
+    s32 hid;
 
     battleStatus->unk_82 = 5;
     battleStatus->actionCmdDifficultyTable = (s32*)actionCmdTableWaterBlock;
@@ -93,53 +94,53 @@ API_CALLABLE(N(init)) {
     acs->hudPosX = -48;
     acs->hudPosY = 80;
 
-    id = hud_element_create(&HES_AButton);
-    acs->hudElements[0] = id;
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(id, 0);
+    hid = hud_element_create(&HES_AButton);
+    acs->hudElements[0] = hid;
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
 
-    id = hud_element_create(&HES_TimingBar3Chances);
-    acs->hudElements[1] = id;
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY + 28);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_TimingBar3Chances);
+    acs->hudElements[1] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    id = hud_element_create(&HES_TimingWait);
-    acs->hudElements[2] = id;
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY + 28);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_TimingWait);
+    acs->hudElements[2] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    id = hud_element_create(&HES_TimingWait);
-    acs->hudElements[3] = id;
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY + 28);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_TimingWait);
+    acs->hudElements[3] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    id = hud_element_create(&HES_TimingWait);
-    acs->hudElements[4] = id;
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY + 28);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_TimingWait);
+    acs->hudElements[4] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    id = hud_element_create(&HES_TimingOK);
-    acs->hudElements[6] = id;
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_TimingOK);
+    acs->hudElements[6] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    id = hud_element_create(&HES_TimingOK);
-    acs->hudElements[7] = id;
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_TimingOK);
+    acs->hudElements[7] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    id = hud_element_create(&HES_TimingOK);
-    acs->hudElements[8] = id;
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_TimingOK);
+    acs->hudElements[8] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     acs->hudElements[10] = hud_element_create(WaterBlockDigitScripts[1]);
     hud_element_set_render_pos(acs->hudElements[10], acs->hudPosX, acs->hudPosY);
@@ -147,26 +148,26 @@ API_CALLABLE(N(init)) {
     acs->hudElements[11] = hud_element_create(&HES_TimingCharge4c);
     hud_element_set_render_pos(acs->hudElements[11], acs->hudPosX, acs->hudPosY);
 
-    id = hud_element_create(&HES_TimingCharge4b);
-    acs->hudElements[12] = id;
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
+    hid = hud_element_create(&HES_TimingCharge4b);
+    acs->hudElements[12] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
 
     switch (acs->targetWeakness) {
         case 0:
             acs->hudElements[13] = hud_element_create(&HES_WaterBlockBlock);
-            id = acs->hudElements[13];
+            hid = acs->hudElements[13];
             break;
         case 1:
             acs->hudElements[13] = hud_element_create(&HES_WaterBlockCircle);
-            id = acs->hudElements[13];
+            hid = acs->hudElements[13];
             break;
         case 2:
             acs->hudElements[13] = hud_element_create(&HES_WaterBlockCloud);
-            id = acs->hudElements[13];
+            hid = acs->hudElements[13];
             break;
     }
 
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     return ApiStatus_DONE2;
 }
 
@@ -207,55 +208,55 @@ void N(update)(void) {
     s32 pos;
     s32 i;
     s32 window;
-    s32 id;
+    s32 hid;
 
     switch (acs->state) {
         case WATER_BLOCK_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
-            id = acs->hudElements[0];
+            hid = acs->hudElements[0];
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hud_element_set_alpha(id, 255);
-            id = acs->hudElements[1];
-            hud_element_set_alpha(id, 255);
+            hud_element_set_alpha(hid, 255);
+            hid = acs->hudElements[1];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            id = acs->hudElements[2];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[2];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            id = acs->hudElements[3];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[3];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            id = acs->hudElements[4];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[4];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            id = acs->hudElements[10];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[10];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            id = acs->hudElements[11];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[11];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            id = acs->hudElements[12];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[12];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            id = acs->hudElements[13];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[13];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
             acs->state = WATER_BLOCK_STATE_APPEAR;
             break;
@@ -275,16 +276,16 @@ void N(update)(void) {
             hud_element_set_render_pos(acs->hudElements[3], acs->hudPosX + 41, acs->hudPosY + 24);
             hud_element_set_render_pos(acs->hudElements[4], acs->hudPosX + 61, acs->hudPosY + 24);
 
-            id = acs->hudElements[10];
+            hid = acs->hudElements[10];
             switch (acs->targetWeakness) {
                 case 0:
-                    hud_element_set_render_pos(id, acs->hudPosX + 91, acs->hudPosY + 7);
+                    hud_element_set_render_pos(hid, acs->hudPosX + 91, acs->hudPosY + 7);
                     break;
                 case 1:
-                    hud_element_set_render_pos(id, acs->hudPosX + 91, acs->hudPosY + 13);
+                    hud_element_set_render_pos(hid, acs->hudPosX + 91, acs->hudPosY + 13);
                     break;
                 case 2:
-                    hud_element_set_render_pos(id, acs->hudPosX + 91, acs->hudPosY + 13);
+                    hud_element_set_render_pos(hid, acs->hudPosX + 91, acs->hudPosY + 13);
                     break;
             }
 
@@ -304,6 +305,7 @@ void N(update)(void) {
                 acs->frameCounter = 42;
             }
             acs->state = WATER_BLOCK_STATE_PREFACE;
+
             // fallthrough
         case WATER_BLOCK_STATE_PREFACE:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -368,25 +370,25 @@ void N(update)(void) {
             }
 
             if ((acs->waterBlock.unk_5D >= -4) && (acs->wrongButtonPressed || acs->waterBlock.hadCorrectTiming)) {
-                id = acs->hudElements[6];
+                hid = acs->hudElements[6];
                 if (acs->waterBlock.hadCorrectTiming) {
-                    hud_element_set_script(id, &HES_TimingOK);
+                    hud_element_set_script(hid, &HES_TimingOK);
                 } else {
-                    hud_element_set_script(id, &HES_TimingMiss);
+                    hud_element_set_script(hid, &HES_TimingMiss);
                 }
-                hud_element_set_render_pos(id, acs->hudPosX + 28, acs->hudPosY + 38);
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_set_render_pos(hid, acs->hudPosX + 28, acs->hudPosY + 38);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             if (acs->waterBlock.unk_5D == -5) {
-                id = acs->hudElements[6];
+                hid = acs->hudElements[6];
                 if (acs->waterBlock.hadCorrectTiming) {
-                    hud_element_set_script(id, &HES_TimingOK);
+                    hud_element_set_script(hid, &HES_TimingOK);
                 } else {
-                    hud_element_set_script(id, &HES_TimingMiss);
+                    hud_element_set_script(hid, &HES_TimingMiss);
                 }
-                hud_element_set_render_pos(id, acs->hudPosX + 28, acs->hudPosY + 38);
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_set_render_pos(hid, acs->hudPosX + 28, acs->hudPosY + 38);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                 hud_element_set_script(acs->hudElements[0], &HES_AButton);
             }
             acs->waterBlock.unk_5D--;
@@ -441,24 +443,24 @@ void N(update)(void) {
             }
 
             if ((acs->waterBlock.unk_5D >= -4) && (acs->wrongButtonPressed || acs->waterBlock.hadCorrectTiming)) {
-                id = acs->hudElements[7];
+                hid = acs->hudElements[7];
                 if (acs->waterBlock.hadCorrectTiming) {
-                    hud_element_set_script(id, &HES_TimingOK);
+                    hud_element_set_script(hid, &HES_TimingOK);
                 } else {
-                    hud_element_set_script(id, &HES_TimingMiss);
+                    hud_element_set_script(hid, &HES_TimingMiss);
                 }
-                hud_element_set_render_pos(id, acs->hudPosX + 48, acs->hudPosY + 38);
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_set_render_pos(hid, acs->hudPosX + 48, acs->hudPosY + 38);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
             if (acs->waterBlock.unk_5D == -5) {
-                id = acs->hudElements[7];
+                hid = acs->hudElements[7];
                 if (acs->waterBlock.hadCorrectTiming) {
-                    hud_element_set_script(id, &HES_TimingOK);
+                    hud_element_set_script(hid, &HES_TimingOK);
                 } else {
-                    hud_element_set_script(id, &HES_TimingMiss);
+                    hud_element_set_script(hid, &HES_TimingMiss);
                 }
-                hud_element_set_render_pos(id, acs->hudPosX + 48, acs->hudPosY + 38);
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_set_render_pos(hid, acs->hudPosX + 48, acs->hudPosY + 38);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                 hud_element_set_script(acs->hudElements[0], &HES_AButton);
             }
             acs->waterBlock.unk_5D--;
@@ -514,25 +516,25 @@ void N(update)(void) {
             }
             if (acs->waterBlock.unk_5D >= -4) {
                 if (acs->wrongButtonPressed || acs->waterBlock.hadCorrectTiming) {
-                    id = acs->hudElements[8];
+                    hid = acs->hudElements[8];
                     if (acs->waterBlock.hadCorrectTiming) {
-                        hud_element_set_script(id, &HES_TimingOK);
+                        hud_element_set_script(hid, &HES_TimingOK);
                     } else {
-                        hud_element_set_script(id, &HES_TimingMiss);
+                        hud_element_set_script(hid, &HES_TimingMiss);
                     }
-                    hud_element_set_render_pos(id, acs->hudPosX + 68, acs->hudPosY + 38);
-                    hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                    hud_element_set_render_pos(hid, acs->hudPosX + 68, acs->hudPosY + 38);
+                    hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                 }
             }
             if (acs->waterBlock.unk_5D == -5) {
-                id = acs->hudElements[8];
+                hid = acs->hudElements[8];
                 if (acs->waterBlock.hadCorrectTiming) {
-                    hud_element_set_script(id, &HES_TimingOK);
+                    hud_element_set_script(hid, &HES_TimingOK);
                 } else {
-                    hud_element_set_script(id, &HES_TimingMiss);
+                    hud_element_set_script(hid, &HES_TimingMiss);
                 }
-                hud_element_set_render_pos(id, acs->hudPosX + 68, acs->hudPosY + 38);
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_set_render_pos(hid, acs->hudPosX + 68, acs->hudPosY + 38);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                 hud_element_set_script(acs->hudElements[0], &HES_AButton);
                 acs->state = WATER_BLOCK_STATE_WRAPUP;
                 return;
@@ -564,9 +566,9 @@ void N(update)(void) {
 }
 
 void N(draw)(void) {
-    s32 hudElement;
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
+    s32 hid;
 
     hud_element_draw_clipped(acs->hudElements[0]);
     hud_element_draw_clipped(acs->hudElements[1]);
@@ -578,12 +580,12 @@ void N(draw)(void) {
     hud_element_draw_clipped(acs->hudElements[8]);
     hud_element_draw_clipped(acs->hudElements[13]);
 
-    hudElement = acs->hudElements[10];
-    if (hud_element_get_script(hudElement) != WaterBlockDigitScripts[battleStatus->actionQuality]) {
-        hud_element_set_script(hudElement, WaterBlockDigitScripts[battleStatus->actionQuality]);
+    hid = acs->hudElements[10];
+    if (hud_element_get_script(hid) != WaterBlockDigitScripts[battleStatus->actionQuality]) {
+        hud_element_set_script(hid, WaterBlockDigitScripts[battleStatus->actionQuality]);
     }
 
-    hud_element_draw_clipped(hudElement);
+    hud_element_draw_clipped(hid);
     hud_element_draw_clipped(acs->hudElements[11]);
     hud_element_draw_clipped(acs->hudElements[12]);
 }

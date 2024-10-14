@@ -1,6 +1,7 @@
 #include "common.h"
 #include "battle/action_cmd.h"
 
+//TODO action command
 #define NAMESPACE action_command_squirt
 
 s32 D_802A9760_42A480[] = { 300, 300, 265, 220, 175, 175 };
@@ -11,7 +12,7 @@ extern s32 actionCmdTableSquirt[];
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 id;
+    s32 hid;
 
     battleStatus->unk_82 = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableSquirt;
@@ -32,17 +33,17 @@ API_CALLABLE(N(init)) {
     acs->any.unk_5C = 0;
     acs->hudPosY = 80;
 
-    id = hud_element_create(&HES_AButton);
-    acs->hudElements[0] = id;
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(id, 0);
+    hid = hud_element_create(&HES_AButton);
+    acs->hudElements[0] = hid;
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
 
-    id = hud_element_create(&HES_BlueMeter);
-    acs->hudElements[1] = id;
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY + 28);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_BlueMeter);
+    acs->hudElements[1] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     return ApiStatus_DONE2;
 }
@@ -80,7 +81,7 @@ API_CALLABLE(N(start)) {
 void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 id;
+    s32 hid;
     s32 mashMeterCutoff;
     s32 cutoff;
     s32 temp;
@@ -89,16 +90,16 @@ void N(update)(void) {
         case AC_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            id = acs->hudElements[0];
+            hid = acs->hudElements[0];
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hud_element_set_alpha(id, 255);
+            hud_element_set_alpha(hid, 255);
 
-            id = acs->hudElements[1];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[1];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             acs->state = AC_STATE_APPEAR;
@@ -128,6 +129,7 @@ void N(update)(void) {
             acs->frameCounter = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
+
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -141,8 +143,8 @@ void N(update)(void) {
                     }
                 } else {
                     acs->barFillLevel += D_802A9778_42A498[temp / 20] * battleStatus->actionCmdDifficultyTable[acs->difficulty] / 100;
-                    if (acs->barFillLevel > 10000) {
-                        acs->barFillLevel = 10000;
+                    if (acs->barFillLevel > MAX_MASH_UNITS) {
+                        acs->barFillLevel = MAX_MASH_UNITS;
                         acs->any.unk_5C = 1;
                     }
                 }
@@ -154,16 +156,16 @@ void N(update)(void) {
                 }
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / 100;
+            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
             sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
-            id = acs->hudElements[0];
+            hid = acs->hudElements[0];
             if (temp < 80) {
-                if (hud_element_get_script(id) != &HES_AButtonDown) {
-                    hud_element_set_script(id, &HES_AButtonDown);
+                if (hud_element_get_script(hid) != &HES_AButtonDown) {
+                    hud_element_set_script(hid, &HES_AButtonDown);
                 }
             } else {
-                if (hud_element_get_script(id) != &HES_PressAButton) {
-                    hud_element_set_script(id, &HES_PressAButton);
+                if (hud_element_get_script(hid) != &HES_PressAButton) {
+                    hud_element_set_script(hid, &HES_PressAButton);
                 }
             }
 
@@ -204,18 +206,18 @@ void N(update)(void) {
 }
 
 void N(draw)(void) {
-    s32 x, y;
-    s32 id;
+    s32 hudX, hudY;
+    s32 hid;
     ActionCommandStatus* acs = &gActionCommandStatus;
 
     hud_element_draw_clipped(acs->hudElements[0]);
-    id = acs->hudElements[1];
-    hud_element_draw_clipped(id);
-    hud_element_get_render_pos(id, &x, &y);
+    hid = acs->hudElements[1];
+    hud_element_draw_clipped(hid);
+    hud_element_get_render_pos(hid, &hudX, &hudY);
     if (acs->any.unk_5C == 0) {
-        draw_mash_meter_multicolor_with_divisor(x, y, acs->barFillLevel / 100, 1);
+        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 1);
     } else {
-        draw_mash_meter_mode_with_divisor(x, y, acs->barFillLevel / 100, 1, MASH_METER_MODE_ONE_COLOR);
+        draw_mash_meter_mode_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 1, MASH_METER_MODE_ONE_COLOR);
     }
 }
 

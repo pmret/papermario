@@ -13,6 +13,9 @@ enum {
     HIDX_100_PCT        = 2,
 };
 
+// how much to add to the meter per input if all modifiers are neutral
+#define BASE_FILL_RATE 820
+
 s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
 
 BSS b32 N(HasStarted);
@@ -151,6 +154,7 @@ void N(update)(void) {
             acs->frameCounter = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
+
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -179,7 +183,7 @@ void N(update)(void) {
                 if (acs->effectiveness != 0) {
                     // fill rate = 820 multiplied by two values expressed as percentages
                     s32 difficultyPct = battleStatus->actionCmdDifficultyTable[acs->difficulty];
-                    s32 effectivenessPct = acs->effectiveness * 820;
+                    s32 effectivenessPct = acs->effectiveness * BASE_FILL_RATE;
                     acs->barFillLevel += (difficultyPct * effectivenessPct) / (100 * 100);
                 } else {
                     acs->barFillLevel += ONE_PCT_MASH;

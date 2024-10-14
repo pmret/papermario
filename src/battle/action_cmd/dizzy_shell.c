@@ -2,16 +2,27 @@
 #include "audio/public.h"
 #include "battle/action_cmd.h"
 
+//TODO action command
 #define NAMESPACE action_command_dizzy_shell
 
 extern s32 actionCmdTableDizzyShell[];
 
-s32 D_802A9800_426970[AC_DIFFICULTY_LEN] = { 0, 25, 50, 75, 75, 0, 0, 0 };
+// indices into ActionCommandStatus::hudElements for this action command
+enum {
+    HIDX_BUTTON         = 0,
+    HIDX_METER          = 1,
+    HIDX_100_PCT        = 2,
+};
+
+// how much to add to the meter per input if all modifiers are neutral
+#define BASE_FILL_RATE 850
+
+s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 id;
+    s32 hid;
 
     battleStatus->unk_82 = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTableDizzyShell;
@@ -34,23 +45,23 @@ API_CALLABLE(N(init)) {
     acs->hudPosX = -48;
     acs->hudPosY = 80;
 
-    id = hud_element_create(&HES_AButton);
-    acs->hudElements[0] = id;
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_AButton);
+    acs->hudElements[HIDX_BUTTON] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    id = hud_element_create(&HES_BlueMeter);
-    acs->hudElements[1] = id;
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY + 28);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_BlueMeter);
+    acs->hudElements[HIDX_METER] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    id = hud_element_create(&HES_100pct);
-    acs->hudElements[2] = id;
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY + 28);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_100pct);
+    acs->hudElements[HIDX_100_PCT] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     return ApiStatus_DONE2;
 }
@@ -60,7 +71,7 @@ API_CALLABLE(N(init)) {
 void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 id;
+    s32 hid;
     s32 cutoff;
     s32 fillLevel;
 
@@ -68,16 +79,16 @@ void N(update)(void) {
         case AC_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            id = acs->hudElements[0];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[HIDX_BUTTON];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            id = acs->hudElements[1];
-            hud_element_set_alpha(id, 255);
+            hid = acs->hudElements[HIDX_METER];
+            hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             acs->state = AC_STATE_APPEAR;
@@ -88,8 +99,8 @@ void N(update)(void) {
             if (acs->hudPosX > 50) {
                 acs->hudPosX = 50;
             }
-            hud_element_set_render_pos(acs->hudElements[0], acs->hudPosX, acs->hudPosY);
-            hud_element_set_render_pos(acs->hudElements[1], acs->hudPosX, acs->hudPosY + 28);
+            hud_element_set_render_pos(acs->hudElements[HIDX_BUTTON], acs->hudPosX, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElements[HIDX_METER], acs->hudPosX, acs->hudPosY + 28);
             break;
         case AC_STATE_START:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -97,19 +108,24 @@ void N(update)(void) {
                 acs->prepareTime--;
                 return;
             }
-            hud_element_set_script(acs->hudElements[0], &HES_MashAButton);
+            hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
             acs->barFillLevel = 0;
             acs->frameCounter = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
+
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
+
+            // bar can drain if it hasn't been fully filled
             if (!acs->isBarFilled) {
                 if (acs->targetWeakness != 0) {
-                    cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
+                    s32 maxFillLevel = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
+                    s32 idx = (acs->barFillLevel / maxFillLevel);
+                    idx /= ONE_PCT_MASH / ARRAY_COUNT(N(DrainRateTable)); // = 20
 
-                    acs->barFillLevel -= D_802A9800_426970[acs->barFillLevel / cutoff / 20];
+                    acs->barFillLevel -= N(DrainRateTable)[idx];
                     if (acs->barFillLevel < 0) {
                         acs->barFillLevel = 0;
                     }
@@ -121,30 +137,32 @@ void N(update)(void) {
                 }
             }
 
+            // check for bar-filling input
             if (battleStatus->curButtonsPressed & BUTTON_A) {
-                s32 a = battleStatus->actionCmdDifficultyTable[acs->difficulty];
-                s32 b = acs->targetWeakness * 850;
-                s32 temp_v1_2 = (a * b) / 10000;
+                s32 difficultyPct = battleStatus->actionCmdDifficultyTable[acs->difficulty];
+                s32 effectivenessPct = acs->targetWeakness * BASE_FILL_RATE;
+                s32 fillAmt = (difficultyPct * effectivenessPct) / (100 * 100);
 
-                if (temp_v1_2 != 0) {
-                    acs->barFillLevel += temp_v1_2;
+                if (fillAmt != 0) {
+                    acs->barFillLevel += fillAmt;
                 } else {
-                    acs->barFillLevel += 100;
-                    if (acs->barFillLevel >= 500) {
-                        acs->barFillLevel = 500;
+                    acs->barFillLevel += ONE_PCT_MASH;
+                    if (acs->barFillLevel >= 5 * ONE_PCT_MASH) {
+                        acs->barFillLevel = 5 * ONE_PCT_MASH;
                     }
                 }
             }
 
-            if (acs->barFillLevel >= 10000) {
-                id = acs->hudElements[2];
-                acs->barFillLevel = 10000;
+            // handle bar reaching 100%
+            if (acs->barFillLevel >= MAX_MASH_UNITS) {
+                acs->barFillLevel = MAX_MASH_UNITS;
                 acs->isBarFilled = TRUE;
-                hud_element_set_render_pos(id, acs->hudPosX + 50, acs->hudPosY + 28);
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hid = acs->hudElements[HIDX_100_PCT];
+                hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / 100;
+            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
             sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
 
             if (acs->frameCounter != 0) {
@@ -160,7 +178,7 @@ void N(update)(void) {
             if (fillLevel == 0) {
                 battleStatus->actionSuccess = -1;
             } else {
-                battleStatus->actionSuccess = fillLevel / 100;
+                battleStatus->actionSuccess = fillLevel / ONE_PCT_MASH;
 
             }
 
@@ -172,6 +190,7 @@ void N(update)(void) {
             }
 
             if (battleStatus->actionSuccess == 100) {
+                // only could 100% fill as success for this action command
                 increment_action_command_success_count();
             }
             sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);

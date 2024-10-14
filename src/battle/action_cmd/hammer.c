@@ -1,6 +1,7 @@
 #include "common.h"
 #include "battle/action_cmd.h"
 
+//TODO action command
 #define NAMESPACE action_command_hammer
 
 extern s32 actionCmdTableHammer[];
@@ -25,7 +26,7 @@ enum {
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 id;
+    s32 hid;
 
     battleStatus->unk_82 = 1;
     battleStatus->actionCmdDifficultyTable = actionCmdTableHammer;
@@ -44,48 +45,48 @@ API_CALLABLE(N(init)) {
     acs->hudPosX = -48;
     acs->hudPosY = 96;
 
-    id = hud_element_create(&HES_TimingBar1Chance);
-    acs->hudElements[HIDX_BAR] = id;
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(id, 10);
+    hid = hud_element_create(&HES_TimingBar1Chance);
+    acs->hudElements[HIDX_BAR] = hid;
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 10);
 
-    id = hud_element_create(&HES_TimingWait);
-    acs->hudElements[HIDX_WAIT] = id;
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(id, 0);
+    hid = hud_element_create(&HES_TimingWait);
+    acs->hudElements[HIDX_WAIT] = hid;
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
 
-    id = hud_element_create(&HES_TimingCharge4a);
-    acs->hudElements[HIDX_CHARGE_A] = id;
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(id, 0);
+    hid = hud_element_create(&HES_TimingCharge4a);
+    acs->hudElements[HIDX_CHARGE_A] = hid;
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
 
-    id = hud_element_create(&HES_TimingCharge4b);
-    acs->hudElements[HIDX_CHARGE_B] = id;
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(id, 0);
+    hid = hud_element_create(&HES_TimingCharge4b);
+    acs->hudElements[HIDX_CHARGE_B] = hid;
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
 
-    id = hud_element_create(&HES_TimingCharge4c);
-    acs->hudElements[HIDX_CHARGE_C] = id;
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(id, 0);
+    hid = hud_element_create(&HES_TimingCharge4c);
+    acs->hudElements[HIDX_CHARGE_C] = hid;
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
 
-    id = hud_element_create(&HES_StickHoldLeft);
-    acs->hudElements[HIDX_STICK] = id;
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(id, 0);
+    hid = hud_element_create(&HES_StickHoldLeft);
+    acs->hudElements[HIDX_STICK] = hid;
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
 
-    id = hud_element_create(&HES_RightOn);
-    acs->hudElements[HIDX_RIGHT_ON] = id;
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-    hud_element_set_render_pos(id, acs->hudPosX, acs->hudPosY);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_alpha(id, 255);
+    hid = hud_element_create(&HES_RightOn);
+    acs->hudElements[HIDX_RIGHT_ON] = hid;
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_alpha(hid, 255);
 
     return ApiStatus_DONE2;
 }
@@ -128,7 +129,7 @@ void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
-    s32 id;
+    s32 hid;
     f32 oneThird;
     s32 phi_s0;
     s32 new_var;
@@ -138,41 +139,41 @@ void N(update)(void) {
         case AC_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            id = acs->hudElements[HIDX_BAR];
+            hid = acs->hudElements[HIDX_BAR];
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hud_element_set_alpha(id, 255);
+            hud_element_set_alpha(hid, 255);
 
-            id = acs->hudElements[HIDX_WAIT];
+            hid = acs->hudElements[HIDX_WAIT];
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hud_element_set_alpha(id, 255);
+            hud_element_set_alpha(hid, 255);
 
-            id = acs->hudElements[HIDX_CHARGE_A];
+            hid = acs->hudElements[HIDX_CHARGE_A];
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hud_element_set_alpha(id, 255);
+            hud_element_set_alpha(hid, 255);
 
-            id = acs->hudElements[HIDX_CHARGE_B];
+            hid = acs->hudElements[HIDX_CHARGE_B];
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hud_element_set_alpha(id, 255);
+            hud_element_set_alpha(hid, 255);
 
-            id = acs->hudElements[HIDX_CHARGE_C];
+            hid = acs->hudElements[HIDX_CHARGE_C];
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hud_element_set_alpha(id, 255);
+            hud_element_set_alpha(hid, 255);
 
-            id = acs->hudElements[HIDX_STICK];
+            hid = acs->hudElements[HIDX_STICK];
             if (acs->showHud) {
-                hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hud_element_set_alpha(id, 255);
+            hud_element_set_alpha(hid, 255);
 
             acs->state = AC_STATE_APPEAR;
             break;
@@ -189,10 +190,10 @@ void N(update)(void) {
             hud_element_set_render_pos(acs->hudElements[HIDX_CHARGE_C], acs->hudPosX - 19, acs->hudPosY + 1);
             hud_element_set_render_pos(acs->hudElements[HIDX_STICK], acs->hudPosX, acs->hudPosY - 23);
             if (acs->autoSucceed != 0) {
-                id = acs->hudElements[HIDX_RIGHT_ON];
-                hud_element_set_render_pos(id, acs->hudPosX + 50, acs->hudPosY);
+                hid = acs->hudElements[HIDX_RIGHT_ON];
+                hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY);
                 if (acs->showHud) {
-                    hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                    hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                     break;
                 }
             }
@@ -218,6 +219,7 @@ void N(update)(void) {
                 acs->hammerMissedStart = TRUE;
             }
             acs->state = AC_STATE_ACTIVE;
+
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);

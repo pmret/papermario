@@ -156,7 +156,7 @@ void N(update)(void) {
                         acs->smack.holdingLeft = FALSE;
                     }
                 }
-
+                // right stick inputs actively drain the bar
                 if (battleStatus->curButtonsPressed & BUTTON_STICK_RIGHT) {
                     acs->barFillLevel -= battleStatus->actionCmdDifficultyTable[acs->difficulty] * 11;
                 }
@@ -166,15 +166,16 @@ void N(update)(void) {
                 acs->barFillLevel = 0;
             }
 
-            if (acs->barFillLevel > 10000) {
-                hid = acs->hudElements[HIDX_100_PCT];
-                acs->barFillLevel = 10000;
+            // handle bar reaching 100%
+            if (acs->barFillLevel > MAX_MASH_UNITS) {
+                acs->barFillLevel = MAX_MASH_UNITS;
                 acs->isBarFilled = TRUE;
+                hid = acs->hudElements[HIDX_100_PCT];
                 hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / 100;
+            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
             sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
 
             switch (partnerActor->actorBlueprint->level) {
@@ -184,8 +185,7 @@ void N(update)(void) {
                     }
 
                     if (battleStatus->resultTier > 0) {
-                        s32 index = battleStatus->resultTier - 1;
-                        if (battleStatus->actionQuality < N(BasicHitThresholds)[index]) {
+                        if (battleStatus->actionQuality < N(BasicHitThresholds)[battleStatus->resultTier - 1]) {
                             battleStatus->resultTier--;
                         }
                     }
@@ -196,8 +196,7 @@ void N(update)(void) {
                     }
 
                     if (battleStatus->resultTier > 0) {
-                        s32 index = battleStatus->resultTier - 1;
-                        if (battleStatus->actionQuality < N(SuperHitThresholds)[index]) {
+                        if (battleStatus->actionQuality < N(SuperHitThresholds)[battleStatus->resultTier - 1]) {
                             battleStatus->resultTier--;
                         }
                     }
@@ -209,8 +208,7 @@ void N(update)(void) {
                         }
 
                         if (battleStatus->resultTier > 0) {
-                            s32 index = battleStatus->resultTier - 1;
-                            if (battleStatus->actionQuality < N(UltraHitThresholds)[index]) {
+                            if (battleStatus->actionQuality < N(UltraHitThresholds)[battleStatus->resultTier - 1]) {
                                 battleStatus->resultTier--;
                             }
                         }
@@ -220,8 +218,7 @@ void N(update)(void) {
                         }
 
                         if (battleStatus->resultTier > 0) {
-                            s32 index = battleStatus->resultTier - 1;
-                            if (battleStatus->actionQuality < N(FanHitThresholds)[index]) {
+                            if (battleStatus->actionQuality < N(FanHitThresholds)[battleStatus->resultTier - 1]) {
                                 battleStatus->resultTier--;
                             }
                         }
@@ -233,7 +230,7 @@ void N(update)(void) {
                 if (acs->barFillLevel == 0) {
                     battleStatus->actionSuccess = -1;
                 } else {
-                    battleStatus->actionSuccess = acs->barFillLevel / 100;
+                    battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
                 }
 
                 cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];

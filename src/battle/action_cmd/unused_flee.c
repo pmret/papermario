@@ -14,8 +14,6 @@
 
 void btl_message_unlock_box_pos(void);
 
-BSS b32 UnusedFleeCommandStarted;
-
 extern s32 actionCmdTable07[];
 
 // indices into ActionCommandStatus::hudElements for this action command
@@ -24,6 +22,8 @@ enum {
     HIDX_METER          = 1,
     HIDX_OK             = 2,
 };
+
+BSS b32 N(HasStarted);
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -42,7 +42,7 @@ API_CALLABLE(N(init)) {
     acs->barFillLevel = evt_get_variable(script, *args);
     acs->hudPosX = -48;
     acs->barFillWidth = 0;
-    UnusedFleeCommandStarted = FALSE;
+    N(HasStarted) = FALSE;
     acs->hudPosY = 80;
 
     hid = hud_element_create(&HES_AButton);
@@ -142,10 +142,11 @@ void N(update)(void) {
 
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
             battleStatus->actionSuccess = 0;
-            UnusedFleeCommandStarted = TRUE;
+            N(HasStarted) = TRUE;
             acs->flee.drainDelay = 0;
             acs->state = AC_STATE_ACTIVE;
             acs->frameCounter = acs->duration;
+
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -158,8 +159,8 @@ void N(update)(void) {
                 }
             }
 
-            if (acs->barFillLevel > 10000) {
-                acs->barFillLevel = 10000;
+            if (acs->barFillLevel > MAX_MASH_UNITS) {
+                acs->barFillLevel = MAX_MASH_UNITS;
                 acs->flee.drainDelay = 3;
             }
 
@@ -171,7 +172,7 @@ void N(update)(void) {
                 }
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / 100;
+            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
 
             if (acs->frameCounter != 0) {
                 acs->frameCounter--;
@@ -202,10 +203,10 @@ void N(draw)(void) {
     hud_element_draw_clipped(hid);
     hud_element_get_render_pos(hid, &hudX, &hudY);
 
-    if (!UnusedFleeCommandStarted) {
-        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / 100, 1);
+    if (!N(HasStarted)) {
+        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 1);
     } else {
-        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / 100, 2);
+        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 2);
     }
 
     hud_element_draw_clipped(acs->hudElements[HIDX_OK]);

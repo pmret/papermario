@@ -31,8 +31,8 @@ INCLUDE_PAL("ui/input/analog_stick_down.pal", ui_input_analog_stick_down_pal);
 INCLUDE_IMG("ui/input/analog_stick_up.png", ui_input_analog_stick_up_png);
 INCLUDE_PAL("ui/input/analog_stick_up.pal", ui_input_analog_stick_up_pal);
 
-INCLUDE_IMG("ui/unk_bar.png", ui_unk_bar_png);
-INCLUDE_PAL("ui/unk_bar.pal", ui_unk_bar_pal);
+INCLUDE_IMG("ui/input/mash_bar.png", ui_input_mash_bar_png);
+INCLUDE_PAL("ui/input/mash_bar.pal", ui_input_mash_bar_pal);
 
 INCLUDE_IMG("ui/ok.png", ui_ok_png);
 INCLUDE_PAL("ui/ok.pal", ui_ok_pal);
@@ -2308,7 +2308,7 @@ HudScript HES_Happy_es = HES_TEMPLATE_CI_ENUM_SIZE(ui_battle_status_happy_es, 40
 HudScript HES_HPDrain_es = HES_TEMPLATE_CI_ENUM_SIZE(ui_battle_status_hp_drain_es, 40, 16);
 #endif
 
-HudScript HES_BlueMeter = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_unk_bar, 72, 16);
+HudScript HES_BlueMeter = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_input_mash_bar, 72, 16);
 
 HudScript HES_AButton = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_input_a_button_unpressed, 48, 40);
 
