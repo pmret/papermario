@@ -285,6 +285,12 @@ def write_ninja_rules(
     )
 
     ninja.rule(
+        "msg_combine_noheader",
+        description="msg_combine $out",
+        command=f"$python {BUILD_TOOLS}/msg/combine.py --no-header $out $in",
+    )
+
+    ninja.rule(
         "mapfs",
         description="mapfs $out",
         command=f"$python {BUILD_TOOLS}/mapfs/combine.py $version $out $in",
@@ -993,14 +999,21 @@ class Configure:
                     msg_bins.append(bin_path)
                     build(bin_path, [msg_path], "msg")
 
-                build(
-                    [
-                        entry.object_path.with_suffix(".bin"),
-                        self.build_path() / "include" / "message_ids.h",
-                    ],
-                    msg_bins,
-                    "msg_combine",
-                )
+                if seg.generate_header:
+                    build(
+                        [
+                            entry.object_path.with_suffix(".bin"),
+                            self.build_path() / "include" / "message_ids.h",
+                        ],
+                        msg_bins,
+                        "msg_combine",
+                    )
+                else:
+                    build(
+                        [entry.object_path.with_suffix(".bin")],
+                        msg_bins,
+                        "msg_combine_noheader",
+                    )
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
 
             elif seg.type == "pm_icons":

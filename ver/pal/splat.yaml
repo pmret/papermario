@@ -14212,6 +14212,7 @@ segments:
   - start: 0x2030000
     name: msg_pal_en
     type: pm_msg
+    toc: msg_pal
     files:
       - 00_Intro
       - 01_Outro
@@ -14260,20 +14261,175 @@ segments:
       - 2C_QuizQuestions
       - 2D_QuizChoices
       - 2E_Credits
-  - [0x2132440, bin]
+  - [0x2132440, bin]  # 0xFF pad fill
 
   - start: 0x21B0000
     name: msg_pal_de
-    type: bin # TODO: turn into pm_msg
+    type: pm_msg
+    toc: msg_pal
+    generate_header: false
+    files:
+      - 00_Intro
+      - 01_Outro
+      - 02_ToadTownGate
+      - 03_ToadTownPlaza
+      - 04_ToadTownBridge
+      - 05_ToadTownStation
+      - 06_ToadTownHousing
+      - 07_ToadTownPort
+      - 08_Minigame
+      - 09_CastleGrounds
+      - 0A_ShootingStarSummit
+      - 0B_Prologue
+      - 0C_Chapter1
+      - 0D_Chapter2
+      - 0E_Chapter3
+      - 0F_Chapter4
+      - 10_Chapter5
+      - 11_Chapter6
+      - 12_Chapter7
+      - 13_Chapter8
+      - 14_Peach
+      - 15_KootFavors
+      - 16_RussTHints
+      - 17_NewsBoard
+      - 18_GossipBoard
+      - 19_MapTattles
+      - 1A_NpcTattles
+      - 1B_EntityTattles
+      - 1C_EnemyTattles
+      - 1D_Menus
+      - 1E_Choices
+      - 1F_MenuTips
+      - 20_Documents
+      - 21_MerlonHints
+      - 22_MerluvleeHints
+      - 23_ShortItemDesc
+      - 24_ShopItemDesc
+      - 25_FullItemDesc
+      - 26_ItemNames
+      - 27_Shops
+      - 28_PartnerDesc
+      - 29_EnemyNames
+      - 2A_PlayerMoves
+      - 2B_PartnerMoves
+      - 2C_QuizQuestions
+      - 2D_QuizChoices
+      - 2E_Credits
+  - [0x22D2220, bin]  # 0xFF pad fill
+
   - start: 0x2330000
     name: msg_pal_fr
-    type: bin # TODO: turn into pm_msg
+    type: pm_msg
+    toc: msg_pal
+    generate_header: false
+    files:
+      - 00_Intro
+      - 01_Outro
+      - 02_ToadTownGate
+      - 03_ToadTownPlaza
+      - 04_ToadTownBridge
+      - 05_ToadTownStation
+      - 06_ToadTownHousing
+      - 07_ToadTownPort
+      - 08_Minigame
+      - 09_CastleGrounds
+      - 0A_ShootingStarSummit
+      - 0B_Prologue
+      - 0C_Chapter1
+      - 0D_Chapter2
+      - 0E_Chapter3
+      - 0F_Chapter4
+      - 10_Chapter5
+      - 11_Chapter6
+      - 12_Chapter7
+      - 13_Chapter8
+      - 14_Peach
+      - 15_KootFavors
+      - 16_RussTHints
+      - 17_NewsBoard
+      - 18_GossipBoard
+      - 19_MapTattles
+      - 1A_NpcTattles
+      - 1B_EntityTattles
+      - 1C_EnemyTattles
+      - 1D_Menus
+      - 1E_Choices
+      - 1F_MenuTips
+      - 20_Documents
+      - 21_MerlonHints
+      - 22_MerluvleeHints
+      - 23_ShortItemDesc
+      - 24_ShopItemDesc
+      - 25_FullItemDesc
+      - 26_ItemNames
+      - 27_Shops
+      - 28_PartnerDesc
+      - 29_EnemyNames
+      - 2A_PlayerMoves
+      - 2B_PartnerMoves
+      - 2C_QuizQuestions
+      - 2D_QuizChoices
+      - 2E_Credits
+  - [0x242C180, bin]  # 0xFF pad fill
+
   - start: 0x24B0000
     name: msg_pal_es
-    type: bin # TODO: turn into pm_msg
+    type: pm_msg
+    toc: msg_pal
+    generate_header: false
+    files:
+      - 00_Intro
+      - 01_Outro
+      - 02_ToadTownGate
+      - 03_ToadTownPlaza
+      - 04_ToadTownBridge
+      - 05_ToadTownStation
+      - 06_ToadTownHousing
+      - 07_ToadTownPort
+      - 08_Minigame
+      - 09_CastleGrounds
+      - 0A_ShootingStarSummit
+      - 0B_Prologue
+      - 0C_Chapter1
+      - 0D_Chapter2
+      - 0E_Chapter3
+      - 0F_Chapter4
+      - 10_Chapter5
+      - 11_Chapter6
+      - 12_Chapter7
+      - 13_Chapter8
+      - 14_Peach
+      - 15_KootFavors
+      - 16_RussTHints
+      - 17_NewsBoard
+      - 18_GossipBoard
+      - 19_MapTattles
+      - 1A_NpcTattles
+      - 1B_EntityTattles
+      - 1C_EnemyTattles
+      - 1D_Menus
+      - 1E_Choices
+      - 1F_MenuTips
+      - 20_Documents
+      - 21_MerlonHints
+      - 22_MerluvleeHints
+      - 23_ShortItemDesc
+      - 24_ShopItemDesc
+      - 25_FullItemDesc
+      - 26_ItemNames
+      - 27_Shops
+      - 28_PartnerDesc
+      - 29_EnemyNames
+      - 2A_PlayerMoves
+      - 2B_PartnerMoves
+      - 2C_QuizQuestions
+      - 2D_QuizChoices
+      - 2E_Credits
+  - [0x25B11C0, bin]  # 0xFF pad fill
 
   - [0x2600000, pm_map_data, mapfs]
-  - [0x2FD7362, bin]
+  - [0x2FD7362, bin]  # more 0xFF pad fill
 
   - [0x3000000, bin] # Duplicate of 0x2000000-0x3000000
 
