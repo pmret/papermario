@@ -3,6 +3,9 @@
 
 #define NAMESPACE action_command_squirt
 
+s32 D_802A9760_42A480[] = { 300 / DT, 300 / DT, 265 / DT, 220 / DT, 175 / DT, 175 / DT };
+s32 D_802A9778_42A498[] = { 300 / DT, 300 / DT, 265 / DT, 220 / DT, 175 / DT, 175 / DT };
+
 extern s32 actionCmdTableSquirt[];
 
 // indices into ActionCommandStatus::hudElements for this action command

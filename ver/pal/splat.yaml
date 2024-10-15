@@ -897,6 +897,13 @@ segments:
     subalign: 0x1000
     subsegments:
     - [auto, c, heaps]
+  - name: heaps4
+    type: code
+    start: 0xE61D0
+    vram: 0x802C3000
+    subalign: 0x1000
+    subsegments:
+    - [auto, c, heaps4]
   - name: evt
     type: code
     dir: evt
@@ -1517,9 +1524,227 @@ segments:
     - [0x179C30, .data, filemenu_styles]
 
   - name: battle_code
-    type: bin
+    type: code
     start: 0x17A160
     vram: 0x8023E000
+    subsegments:
+    - [0x17A160, c, battle/16C8E0]
+    - [0x17CF60, c, battle/btl_states_actions]
+    - [0x184ED0, c, battle/camera]
+    - [0x18AEC0, c, battle/actors]
+    - [0x18AEC0, c, battle/popup_messages]
+    - [0x18D8F0, c, battle/entity_model_icons]
+    - [0x18D8F0, c, battle/partner_dma]
+    - [0x18D8F0, c, battle/dmg_item]
+    - [0x18F250, c, battle/181810]
+    - [0x190570, c, battle/actor_rendering]
+    - [0x19A1D0, c, battle/level_up_pal]  # modified
+    - [0x19CE80, c, battle/player_events]
+    - [0x19E690, c, battle/190A10]
+    - [0x19E7A0, c, battle/190B20]
+    - [0x1A4420, c, battle/use_items]
+    - [0x1A4680, c, battle/use_moves]
+    - [0x1A4710, c, battle/action_cmd]
+    - [0x1A5BB0, c, battle/actor_api]
+    - [0x1AD760, c, battle/dmg_player]
+    - [0x1B34A0, c, battle/1A5830]
+    - [0x1BA3D0, c, battle/dmg_partner]
+    - [0x1BCD90, c, battle/standard_events]
+    - [0x1BCEA0, c, battle/use_star_powers]
+    - [0x1BCF40, .data, battle/16C8E0]
+    - [0x1BD230, .data, battle/camera]
+    - [0x1BD510, .data, battle/actors]
+    - [0x1BFB20, .data, battle/popup_messages]
+    - [0x1BFF20, .data, battle/entity_model_icons]
+    - start: 0x1BFF20
+      type: .data
+      name: battle/entity_model_icons
+      subsegments:
+      - [0x1BFF20, ci4, ui/battle/cursor_hand, 32, 32]
+      - [0x1C0120, palette, ui/battle/cursor_hand]
+      - [0x1C0140]
+    - [0x1C0530, .data, battle/partner_dma]
+    - [0x1C0620, .data, battle/181810]
+    - [0x1C06A0, .data, battle/actor_rendering]
+    - [0x1C0770, .data, battle/level_up_pal]  # modified
+    - [0x1C1280, .data, battle/player_events]
+    - [0x1C5C60, .data, battle_ui_gfx]
+    - start: 0x1C5C60
+      type: .data
+      name: battle_ui_gfx
+      subsegments:
+      - [0x1C5C60, ci4, ui/battle/menu/unused, 32, 32]
+      - [0x1C5E60, palette, ui/battle/menu/unused]
+      - [0x1C5E80, palette, ui/battle/menu/unused.disabled]
+      - [0x1C5EA0, ci4, ui/battle/menu/flee, 32, 32]
+      - [0x1C60A0, palette, ui/battle/menu/flee]
+      - [0x1C60C0, palette, ui/battle/menu/flee.disabled]
+      - [0x1C60E0, ci4, ui/battle/menu/defend, 32, 32]
+      - [0x1C62E0, palette, ui/battle/menu/defend]
+      - [0x1C6300, palette, ui/battle/menu/defend.disabled]
+      - [0x1C6320, ci4, ui/battle/menu/strategies, 32, 32]
+      - [0x1C6520, palette, ui/battle/menu/strategies]
+      - [0x1C6540, palette, ui/battle/menu/strategies.disabled]
+      - [0x1C6560, ci4, ui/battle/menu/nothing, 32, 32]
+      - [0x1C6760, palette, ui/battle/menu/nothing]
+      - [0x1C6780, palette, ui/battle/menu/nothing.disabled]
+      - [0x1C67A0, ci4, ui/battle/menu/pouch, 32, 32]
+      - [0x1C69A0, palette, ui/battle/menu/pouch]
+      - [0x1C69C0, palette, ui/battle/menu/pouch.disabled]
+      - [0x1C69E0, ci4, ui/battle/swap_Z, 16, 16]
+      - [0x1C6A60, palette, ui/battle/swap_Z]
+      - [0x1C6A80, ci4, ui/battle/swap_arrow_left, 8, 16]
+      - [0x1C6AC0, palette, ui/battle/swap_arrow_left]
+      - [0x1C6AE0, ci4, ui/battle/swap_arrow_right, 8, 16]
+      - {start: 0x1C6B20, type: palette, name: ui/battle/swap_arrow_right, size: 0x190}
+      - [0x1C6CC0, ci4, ui/battle/menu/spirits, 32, 32]
+      - [0x1C6EC0, palette, ui/battle/menu/spirits]
+      - [0x1C6EE0, ci4, ui/battle/yellow_arrow, 16, 16]
+      - {start: 0x1C6F60, type: palette, name: ui/battle/yellow_arrow, size: 0x140}
+      - [0x1C70A0, ci4, ui/battle/hp_bar, 32, 16]
+      - [0x1C71A0, palette, ui/battle/hp_bar]
+      - [0x1C71C0, ci4, ui/battle/hp_0, 8, 8]
+      - [0x1C71E0, palette, ui/battle/hp_0]
+      - [0x1C7200, ci4, ui/battle/hp_1, 8, 8]
+      - [0x1C7220, palette, ui/battle/hp_1]
+      - [0x1C7240, ci4, ui/battle/hp_2, 8, 8]
+      - [0x1C7260, palette, ui/battle/hp_2]
+      - [0x1C7280, ci4, ui/battle/hp_3, 8, 8]
+      - [0x1C72A0, palette, ui/battle/hp_3]
+      - [0x1C72C0, ci4, ui/battle/hp_4, 8, 8]
+      - [0x1C72E0, palette, ui/battle/hp_4]
+      - [0x1C7300, ci4, ui/battle/hp_5, 8, 8]
+      - [0x1C7320, palette, ui/battle/hp_5]
+      - [0x1C7340, ci4, ui/battle/hp_6, 8, 8]
+      - [0x1C7360, palette, ui/battle/hp_6]
+      - [0x1C7380, ci4, ui/battle/hp_7, 8, 8]
+      - [0x1C73A0, palette, ui/battle/hp_7]
+      - [0x1C73C0, ci4, ui/battle/hp_8, 8, 8]
+      - [0x1C73E0, palette, ui/battle/hp_8]
+      - [0x1C7400, ci4, ui/battle/hp_9, 8, 8]
+      - [0x1C7420, palette, ui/battle/hp_9]
+      - [0x1C7440, ci4, ui/battle/cont/b_up, 48, 40]
+      - [0x1C7800, palette, ui/battle/cont/b_up]
+      - [0x1C7820, ci4, ui/battle/cont/b_down, 48, 40]
+      - [0x1C7BE0, palette, ui/battle/cont/b_down]
+      - [0x1C7C00, ci4, ui/battle/cont/c_left_up, 40, 34]
+      - [0x1C7EA8, palette, ui/battle/cont/c_left_up]
+      - [0x1C7EC8, ci4, ui/battle/cont/c_left_down, 40, 34]
+      - [0x1C8170, palette, ui/battle/cont/c_left_down]
+      - [0x1C8190, ci4, ui/battle/cont/c_right_up, 40, 34]
+      - [0x1C8438, palette, ui/battle/cont/c_right_up]
+      - [0x1C8458, ci4, ui/battle/cont/c_right_down, 40, 34]
+      - [0x1C8700, palette, ui/battle/cont/c_right_down]
+      - [0x1C8720, ci4, ui/battle/cont/c_up_up, 40, 34]
+      - [0x1C89C8, palette, ui/battle/cont/c_up_up]
+      - [0x1C89E8, ci4, ui/battle/cont/c_up_down, 40, 34]
+      - [0x1C8C90, palette, ui/battle/cont/c_up_down]
+      - [0x1C8CB0, ci4, ui/battle/cont/c_down_up, 40, 34]
+      - [0x1C8F58, palette, ui/battle/cont/c_down_up]
+      - [0x1C8F78, ci4, ui/battle/cont/c_down_down, 40, 34]
+      - [0x1C9220, palette, ui/battle/cont/c_down_down]
+      - [0x1C9240, ci4, ui/battle/cmd/timing_1_chance, 72, 24]
+      - [0x1C95A0, palette, ui/battle/cmd/timing_1_chance]
+      - [0x1C95C0, ci4, ui/battle/cmd/timing_ready, 16, 16]
+      - [0x1C9640, palette, ui/battle/cmd/timing_ready]
+      - [0x1C9660, ci4, ui/battle/cmd/timing_wait, 16, 16]
+      - [0x1C96E0, palette, ui/battle/cmd/timing_wait]
+      - [0x1C9700, ci4, ui/battle/cmd/charge_1, 8, 8]
+      - [0x1C9720, palette, ui/battle/cmd/charge_1]
+      - [0x1C9740, ci4, ui/battle/cmd/charge_2, 8, 8]
+      - [0x1C9760, palette, ui/battle/cmd/charge_2]
+      - [0x1C9780, ci4, ui/battle/cmd/charge_3, 8, 8]
+      - [0x1C97A0, palette, ui/battle/cmd/charge_3]
+      - [0x1C97C0, ci4, ui/battle/cmd/charge_4, 8, 8]
+      - [0x1C97E0, palette, ui/battle/cmd/charge_4]
+      - [0x1C9800, ci4, ui/battle/cmd/timing_3_chances, 96, 24]
+      - [0x1C9C80, palette, ui/battle/cmd/timing_3_chances]
+      - [0x1C9CA0, ci4, ui/battle/cmd/gauge_result, 32, 24]
+      - [0x1C9E20, palette, ui/battle/cmd/gauge_result]
+      - [0x1C9E40, ci4, ui/battle/cmd/timing_ok, 24, 24]
+      - [0x1C9F60, palette, ui/battle/cmd/timing_ok]
+      - [0x1C9F80, ci4, ui/battle/cmd/timing_miss, 24, 24]
+      - [0x1CA0A0, palette, ui/battle/cmd/timing_miss]
+      - [0x1CA0C0, ci4, ui/battle/cmd/flee_0, 16, 24]
+      - [0x1CA180, palette, ui/battle/cmd/flee_0]
+      - [0x1CA1A0, ci4, ui/battle/cmd/flee_1, 16, 24]
+      - [0x1CA260, palette, ui/battle/cmd/flee_1]
+      - [0x1CA280, ci4, ui/battle/cmd/flee_2, 16, 24]
+      - [0x1CA340, palette, ui/battle/cmd/flee_2]
+      - [0x1CA360, ci4, ui/battle/cmd/100pct, 64, 48]
+      - [0x1CA960, palette, ui/battle/cmd/100pct]
+      - [0x1CA980, ci4, ui/battle/cmd/right_on, 56, 24]
+      - [0x1CAC20, palette, ui/battle/cmd/right_on]
+      - [0x1CAC40, ci4, ui/battle/cmd/fill_result, 32, 24]
+      - [0x1CADC0, palette, ui/battle/cmd/fill_result]
+      - [0x1CADE0, ci4, ui/battle/cmd/aim/marker_0, 16, 16]
+      - [0x1CAE60, palette, ui/battle/cmd/aim/marker_0]
+      - [0x1CAE80, ci4, ui/battle/cmd/aim/marker_1, 16, 16]
+      - [0x1CAF00, palette, ui/battle/cmd/aim/marker_1]
+      - [0x1CAF20, ci4, ui/battle/cmd/aim/marker_2, 16, 16]
+      - [0x1CAFA0, palette, ui/battle/cmd/aim/marker_2]
+      - [0x1CAFC0, ci4, ui/battle/cmd/aim/marker_3, 16, 16]
+      - [0x1CB040, palette, ui/battle/cmd/aim/marker_3]
+      - [0x1CB060, ci4, ui/battle/cmd/aim/marker_4, 16, 16]
+      - [0x1CB0E0, palette, ui/battle/cmd/aim/marker_4]
+      - [0x1CB100, ci4, ui/battle/cmd/aim/marker_5, 16, 16]
+      - [0x1CB180, palette, ui/battle/cmd/aim/marker_5]
+      - [0x1CB1A0, ci4, ui/battle/cmd/aim/marker_6, 16, 16]
+      - [0x1CB220, palette, ui/battle/cmd/aim/marker_6]
+      - [0x1CB240, ci4, ui/battle/cmd/aim/marker_7, 16, 16]
+      - [0x1CB2C0, palette, ui/battle/cmd/aim/marker_7]
+      - [0x1CB2E0, ci4, ui/battle/cmd/aim/shimmer_0, 16, 16]
+      - [0x1CB360, palette, ui/battle/cmd/aim/shimmer_0]
+      - [0x1CB380, ci4, ui/battle/cmd/aim/shimmer_1, 16, 16]
+      - [0x1CB400, palette, ui/battle/cmd/aim/shimmer_1]
+      - [0x1CB420, ci4, ui/battle/cmd/aim/shimmer_2, 16, 16]
+      - [0x1CB4A0, palette, ui/battle/cmd/aim/shimmer_2]
+      - [0x1CB4C0, ci4, ui/battle/cmd/aim/shimmer_3, 16, 16]
+      - [0x1CB540, palette, ui/battle/cmd/aim/shimmer_3]
+      - [0x1CB560, ci4, ui/battle/cmd/aim/shimmer_4, 16, 16]
+      - [0x1CB5E0, palette, ui/battle/cmd/aim/shimmer_4]
+      - [0x1CB600, ci4, ui/battle/cmd/aim/shimmer_5, 16, 16]
+      - [0x1CB680, palette, ui/battle/cmd/aim/shimmer_5]
+      - [0x1CB6A0, ci4, ui/battle/cmd/aim/shimmer_6, 16, 16]
+      - [0x1CB720, palette, ui/battle/cmd/aim/shimmer_6]
+      - [0x1CB740, ci4, ui/battle/cmd/aim/shimmer_7, 16, 16]
+      - [0x1CB7C0, palette, ui/battle/cmd/aim/shimmer_7]
+      - [0x1CB7E0, ci4, ui/battle/cmd/aim/reticle_0, 32, 32]
+      - [0x1CB9E0, palette, ui/battle/cmd/aim/reticle_0]
+      - [0x1CBA00, ci4, ui/battle/cmd/aim/reticle_1, 32, 32]
+      - [0x1CBC00, palette, ui/battle/cmd/aim/reticle_1]
+      - [0x1CBC20, ci4, ui/battle/cmd/aim/target_0, 24, 24]
+      - [0x1CBD40, palette, ui/battle/cmd/aim/target_0]
+      - [0x1CBD60, ci4, ui/battle/cmd/aim/target_1, 24, 24]
+      - [0x1CBE80, palette, ui/battle/cmd/aim/target_1]
+      - [0x1CBEA0, ci4, ui/battle/solid_star, 32, 32]
+      - [0x1CC0A0, palette, ui/battle/solid_star]
+      - [0x1CC0C0, ia8, ui/battle/projector_spot, 32, 32]
+      - [0x1CC4C0, ia8, ui/battle/projector_beam, 64, 64]
+      - [0x1CD4C0, ia8, ui/battle/projector_reel, 64, 64]
+      - [0x1CE4C0, ia8, ui/battle/swap_background, 48, 16]
+      - [0x1CE7C0]
+    - [0x1D0060, .data, battle/190B20]
+    - [0x1D0330, .data, battle/use_items]
+    - [0x1D0630, .data, battle/use_moves]
+    - [0x1D0940, .data, battle/action_cmd]
+    - [0x1D0D90, .data, battle/dmg_player]
+    - [0x1D0E90, .data, battle/1A5830]
+    - [0x1D0ED0, .data, battle/standard_events]
+    - [0x1D8F80, .data, battle/use_star_powers]
+    - [0x1D9110, .rodata, battle/16C8E0]
+    - [0x1D9238, .rodata, battle/btl_states_actions]
+    - [0x1D93B0, .rodata, battle/camera]
+    - [0x1D9540, .rodata, battle/popup_messages]
+    - [0x1D9B00, .rodata, battle/actor_rendering]
+    - [0x1D9CA0, .rodata, battle/level_up_pal]
+    - [0x1D9D40, .rodata, battle/player_events]
+    - [0x1D9D50, .rodata, battle/190B20]
+    - [0x1D9E50, .rodata, battle/action_cmd]
+    - [0x1D9F70, .rodata, battle/actor_api]
+    - [0x1DA030, .rodata, battle/dmg_player]
+    - [0x1DA140, .rodata, battle/1A5830]
+    - [0x1DA1E0]
 
   - [0x1DA1E0, pm_icons, icon]
 
@@ -3686,6 +3911,7 @@ segments:
     type: code
     start: 0x3BAAF0
     vram: 0x09000000
+    symbol_name_format: PAL_$VRAM_$ROM
     subsegments:
     - [auto, c, attack_result_text_de]
     - start: 0x3BAAF0
@@ -3721,6 +3947,7 @@ segments:
     type: code
     start: 0x3BC450
     vram: 0x09000000
+    symbol_name_format: PAL_$VRAM_$ROM
     subsegments:
     - [auto, c, attack_result_text_fr]
     - start: 0x3BC450
@@ -3756,6 +3983,7 @@ segments:
     type: code
     start: 0x3BDDB0
     vram: 0x09000000
+    symbol_name_format: PAL_$VRAM_$ROM
     subsegments:
     - [auto, c, attack_result_text_es]
     - start: 0x3BDDB0
@@ -5411,6 +5639,7 @@ segments:
     type: code
     start: 0x425E60
     vram: 0x09000000
+    symbol_name_format: PAL_$VRAM_$ROM
     subsegments:
     - [auto, c, chapter_change_de]
     - start: 0x425E60
@@ -5457,6 +5686,7 @@ segments:
     type: code
     start: 0x4323F0
     vram: 0x09000000
+    symbol_name_format: PAL_$VRAM_$ROM
     subsegments:
     - [auto, c, chapter_change_fr]
     - start: 0x4323F0
@@ -5503,6 +5733,7 @@ segments:
     type: code
     start: 0x43E980
     vram: 0x09000000
+    symbol_name_format: PAL_$VRAM_$ROM
     subsegments:
     - [auto, c, chapter_change_es]
     - start: 0x43E980
@@ -6090,7 +6321,212 @@ segments:
 #######################
 ### Action Commands ###
 #######################
-  - [0x4688B0, bin]
+  - { start: 0x4688B0, type: bin, name: btl_states_menus, vram: 0x802A1000 }
+  - type: code
+    start: 0x474740
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_jump
+    subsegments:
+    - [auto, c, jump]
+  - type: code
+    start: 0x474D50
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_hammer
+    subsegments:
+    - [auto, c, hammer]
+  - type: code
+    start: 0x475820
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_flee
+    subsegments:
+    - [auto, c, flee]
+  - type: code
+    start: 0x476140
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_break_free
+    subsegments:
+    - [auto, c, break_free]
+  - type: code
+    start: 0x4769C0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_whirlwind
+    subsegments:
+    - [auto, c, whirlwind]
+    - start: 0x4772A0
+      type: .data
+      name: whirlwind
+      subsegments:
+      - [0x4772A0, ci4, whirlwind_1, 24, 24]
+      - [0x4773C0, palette, whirlwind_1]
+      - [0x4773E0, ci4, whirlwind_2, 24, 24]
+      - [0x477500, palette, whirlwind_2]
+      - [0x477520, ci4, whirlwind_3, 24, 24]
+      - [0x477640, palette, whirlwind_3]
+      - [0x477660, ci4, whirlwind_4, 24, 24]
+      - [0x477780, palette, whirlwind_4]
+      - [0x4777A0, ci4, whirlwind_5, 24, 24]
+      - [0x4778C0, palette, whirlwind_5]
+      - [0x4778E0, ci4, whirlwind_6, 24, 24]
+      - [0x477A00, palette, whirlwind_6]
+      - [0x477A20, ci4, whirlwind_7, 24, 24]
+      - [0x477B40, palette, whirlwind_7]
+      - [0x477B60, ci4, whirlwind_bubble, 56, 48]
+      - [0x4780A0, palette, whirlwind_bubble]
+      - [0x4780C0]
+    - [0x4782A0]
+  - type: code
+    start: 0x4782E0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_stop_leech
+    subsegments:
+    - [auto, c, stop_leech]
+  - type: code
+    start: 0x4788A0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_07
+    subsegments:
+    - [auto, c, "07"]
+  - type: code
+    start: 0x478EC0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_dizzy_shell
+    subsegments:
+    - [auto, c, dizzy_shell]
+  - type: code
+    start: 0x479720
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_fire_shell
+    subsegments:
+    - [auto, c, fire_shell]
+  - type: code
+    start: 0x47A100
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_0A
+    subsegments:
+    - [auto, c, 0A]
+  - type: code
+    start: 0x47A7C0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_bomb
+    subsegments:
+    - [auto, c, bomb]
+  - type: code
+    start: 0x47B030
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_body_slam
+    subsegments:
+    - [auto, c, body_slam]
+  - type: code
+    start: 0x47B7C0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_air_lift
+    subsegments:
+    - [auto, c, air_lift]
+  - type: code
+    start: 0x47C070
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_air_raid
+    subsegments:
+    - [auto, c, air_raid]
+  - type: code
+    start: 0x47CA70
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_squirt
+    subsegments:
+    - [auto, c, squirt]
+  - type: code
+    start: 0x47D240
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_water_block
+    subsegments:
+    - [auto, c, water_block]
+    - start: 0x47E3A0
+      type: .data
+      name: water_block
+      subsegments:
+      - [0x47E3A0, ci4, water_block_1, 24, 24]
+      - [0x47E4C0, palette, water_block_1]
+      - [0x47E4E0, ci4, water_block_2, 24, 24]
+      - [0x47E600, palette, water_block_2]
+      - [0x47E620, ci4, water_block_3, 24, 24]
+      - [0x47E740, palette, water_block_3]
+      - [0x47E760, ci4, water_block_0, 24, 24]
+      - [0x47E880, palette, water_block_0]
+      - [0x47E8A0, ci4, water_block_block, 32, 32]
+      - [0x47EAA0, palette, water_block_block]
+      - [0x47EAC0, ci4, water_block_circle, 40, 40]
+      - [0x47EDE0, palette, water_block_circle]
+      - [0x47EE00, ci4, water_block_cloud, 40, 40]
+      - [0x47F120, palette, water_block_cloud]
+      - [0x47F140, ci4, water_block_4, 24, 24]
+      - [0x47F260, palette, water_block_4]
+      - [0x47F280]
+    - [0x47F440]
+  - type: code
+    start: 0x47F440
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_tidal_wave
+    subsegments:
+    - [auto, c, tidal_wave]
+  - type: code
+    start: 0x47FC60
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_power_shock
+    subsegments:
+    - [auto, c, power_shock]
+  - type: code
+    start: 0x480760
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_mega_shock
+    subsegments:
+    - [auto, c, mega_shock]
+  - type: code
+    start: 0x4810F0
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_smack
+    subsegments:
+    - [auto, c, smack]
+  - type: code
+    start: 0x481B70
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_spiny_surge
+    subsegments:
+    - [auto, c, spiny_surge]
+  - type: code
+    start: 0x482430
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_hurricane
+    subsegments:
+    - [auto, c, hurricane]
+  - type: code
+    start: 0x482D70
+    vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_spook
+    subsegments:
+    - [auto, c, spook]
 
 ####################
 ### Battle Areas ###
@@ -7346,7 +7782,399 @@ segments:
     - [0x786CF0, c, food]
     - [0x7873A0]
 
-  - [0x788240, bin]
+####################
+### Battle Moves ###
+####################
+  - type: code
+    name: battle_move_hammer_attack
+    dir: battle/move/hammer
+    start: 0x788240
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, attack]
+  - type: code
+    name: battle_move_spin_smash
+    dir: battle/move/hammer
+    start: 0x78B530
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, spin_smash]
+  - type: code
+    name: battle_move_quake_hammer
+    dir: battle/move/hammer
+    start: 0x78EB70
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, quake_hammer]
+  - type: code
+    name: battle_move_jump_attack
+    dir: battle/move/jump
+    start: 0x791500
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, attack]
+  - type: code
+    name: battle_move_multibounce
+    dir: battle/move/jump
+    start: 0x794960
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, multibounce]
+  - type: code
+    name: battle_move_power_bounce
+    dir: battle/move/jump
+    start: 0x797A90
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, power_bounce]
+  - type: code
+    name: battle_move_sleep_stomp
+    dir: battle/move/jump
+    start: 0x79AAB0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, sleep_stomp]
+  - type: code
+    name: battle_move_dizzy_stomp
+    dir: battle/move/jump
+    start: 0x79CA70
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, dizzy_stomp]
+  - type: code
+    name: battle_move_d_down_pound
+    dir: battle/move/hammer
+    start: 0x79EA30
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, d_down_pound]
+  - type: code
+    name: battle_move_jump_charge_0
+    dir: battle/move/jump
+    start: 0x7A1210
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, jump_charge_0]
+  - type: code
+    name: battle_move_hammer_charge_0
+    dir: battle/move/hammer
+    start: 0x7A2DD0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, hammer_charge_0]
+  - type: code
+    name: battle_move_hammer_throw
+    dir: battle/move/hammer
+    start: 0x7A60F0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, hammer_throw]
+    - start: 0x7A61A0
+      type: .data
+      name: hammer_throw
+      subsegments:
+      - [0x7A61A0]
+      - [0x7A8138, ci4, dusty_hammer, 32, 32]
+      - [0x7A8338, palette, dusty_hammer]
+      - [0x7A8358, ci4, basic_hammer, 32, 32]
+      - [0x7A8558, palette, basic_hammer]
+      - [0x7A8578, ci4, super_hammer, 32, 32]
+      - [0x7A8778, palette, super_hammer]
+      - [0x7A8798, ci4, ultra_hammer, 32, 32]
+      - [0x7A8998, palette, ultra_hammer]
+      - [0x7A89B8, vtx, hammer_throw]
+      - [0x7A89F8, gfx, dusty_hammer]
+      - [0x7A8AE8, gfx, basic_hammer]
+      - [0x7A8BD8, gfx, super_hammer]
+      - [0x7A8CC8, gfx, ultra_hammer]
+      - [0x7A8DB8]
+  - type: code
+    name: battle_move_mega_quake
+    dir: battle/move/hammer
+    start: 0x7AA420
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, mega_quake]
+  - type: code
+    name: battle_move_hammer_charge_1
+    dir: battle/move/hammer
+    start: 0x7AD250
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, hammer_charge_1]
+  - type: code
+    name: battle_move_jump_charge_1
+    dir: battle/move/jump
+    start: 0x7B0620
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, jump_charge_1]
+  - type: code
+    name: battle_move_hammer_charge_2
+    dir: battle/move/hammer
+    start: 0x7B2270
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, hammer_charge_2]
+  - type: code
+    name: battle_move_jump_charge_2
+    dir: battle/move/jump
+    start: 0x7B55C0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, jump_charge_2]
+  - type: code
+    name: battle_move_auto_smash
+    dir: battle/move/hammer
+    start: 0x7B71E0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, auto_smash]
+  - type: code
+    name: battle_move_auto_jump
+    dir: battle/move/jump
+    start: 0x7B98C0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, auto_jump]
+  - type: code
+    name: battle_move_power_quake
+    dir: battle/move/hammer
+    start: 0x7BB930
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, power_quake]
+  - type: code
+    name: battle_move_auto_multibounce
+    dir: battle/move/jump
+    start: 0x7BE4D0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, auto_multibounce]
+  - type: code
+    name: battle_move_power_jump
+    dir: battle/move/jump
+    start: 0x7C1400
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, power_jump]
+  - type: code
+    name: battle_move_super_jump
+    dir: battle/move/jump
+    start: 0x7C2FD0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, super_jump]
+  - type: code
+    name: battle_move_mega_jump
+    dir: battle/move/jump
+    start: 0x7C4BD0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, mega_jump]
+  - type: code
+    name: battle_move_power_smash
+    dir: battle/move/hammer
+    start: 0x7C6840
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, power_smash]
+  - type: code
+    name: battle_move_super_smash
+    dir: battle/move/hammer
+    start: 0x7C8DA0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, super_smash]
+  - type: code
+    name: battle_move_mega_smash
+    dir: battle/move/hammer
+    start: 0x7CB330
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, mega_smash]
+  - type: code
+    name: battle_move_demo_power_bounce
+    dir: battle/move/jump
+    start: 0x7CD930
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, demo_power_bounce]
+  - type: code
+    name: battle_move_shrink_smash
+    dir: battle/move/hammer
+    start: 0x7D0820
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, shrink_smash]
+  - type: code
+    name: battle_move_shell_crack
+    dir: battle/move/hammer
+    start: 0x7D2EE0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, shell_crack]
+  - type: code
+    name: battle_move_d_down_jump
+    dir: battle/move/jump
+    start: 0x7D55C0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, d_down_jump]
+  - type: code
+    name: battle_move_shrink_stomp
+    dir: battle/move/jump
+    start: 0x7D7840
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, shrink_stomp]
+  - type: code
+    name: battle_move_earthquake_jump
+    dir: battle/move/jump
+    start: 0x7D97C0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, earthquake_jump]
+  - type: code
+    name: battle_move_focus
+    dir: battle/move/star_power
+    start: 0x7DDB00
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, focus]
+  - type: code
+    name: battle_move_refresh
+    dir: battle/move/star_power
+    start: 0x7DF2A0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, refresh]
+  - type: code
+    name: battle_move_lullaby
+    dir: battle/move/star_power
+    start: 0x7E0DF0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, lullaby]
+  - type: code
+    name: battle_move_star_storm
+    dir: battle/move/star_power
+    start: 0x7E2470
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, star_storm]
+  - type: code
+    name: battle_move_chill_out
+    dir: battle/move/star_power
+    start: 0x7E3D70
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, chill_out]
+  - type: code
+    name: battle_move_smooch
+    dir: battle/move/star_power
+    start: 0x7E5A30
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, smooch]
+  - type: code
+    name: battle_move_time_out
+    dir: battle/move/star_power
+    start: 0x7E79C0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, time_out]
+  - type: code
+    name: battle_move_up_and_away
+    dir: battle/move/star_power
+    start: 0x7E8F80
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, up_and_away]
+  - type: code
+    name: battle_move_star_beam
+    dir: battle/move/star_power
+    start: 0x7EAC60
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, star_beam]
+  - type: code
+    name: battle_move_peach_beam
+    dir: battle/move/star_power
+    start: 0x7ED450
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, peach_beam]
+  - type: code
+    name: battle_move_peach_focus
+    dir: battle/move/star_power
+    start: 0x7EFC40
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, peach_focus]
+  - type: code
+    name: battle_move_peach_focus_alt
+    dir: battle/move/star_power
+    start: 0x7F1540
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, peach_focus_alt]
+
+  - { start: 0x7F2BE0, type: bin, name: level_up, vram: 0x802A1000 }
+  - { start: 0x7F8000, type: bin, name: level_up_en_de, vram: 0x802A6420 }
+  - { start: 0x7FEAD0, type: bin, name: level_up_fr, vram: 0x802A6420 }
+  - { start: 0x806610, type: bin, name: level_up_es, vram: 0x802A6420 }
+
+  - { start: 0x80E070, type: bin, name: starpoint, vram: 0x802A1000 }
+  - { start: 0x818CF0, type: bin, name: starpoint_en, vram: 0x802ABC80 }
+  - { start: 0x81B030, type: bin, name: starpoint_de, vram: 0x802ABC80 }
+  - { start: 0x81D370, type: bin, name: starpoint_fr, vram: 0x802ABC80 }
+  - { start: 0x81F6B0, type: bin, name: starpoint_es, vram: 0x802ABC80 }
 
   - name: world_model_anim_kzn_01
     dir: world/model_anim/kzn
@@ -7608,9 +8436,21 @@ segments:
     subsegments:
     - [0x84C440, c, "24"]
   - name: world_script_api
-    type: bin
+    dir: world/script_api
+    type: code
     start: 0x84CF10
     vram: 0x80280000
+    subsegments:
+    - [auto, c, shops]
+    - [auto, c, rooms]
+    - [auto, c, push_blocks]
+    - [auto, c, enter_exit]
+  - name: texture_memory
+    type: code
+    start: 0x853440
+    vram: 0x8028E000
+    subsegments:
+    - [auto, c, texture_memory]
 
 ############
 ### Maps ###

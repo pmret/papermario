@@ -587,11 +587,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                                 printer->windowState = MSG_WINDOW_STATE_PRINTING;
                             }
 
-#if VERSION_PAL
-                            temp_f10 = ((f32) printer->fadeInCounter * (4.0 / 25.0)) + 0.2;
-#else
-                            temp_f10 = ((f32) printer->fadeInCounter * (2.0 / 15.0)) + 0.2;
-#endif
+                            temp_f10 = ((f32) printer->fadeInCounter * ((2.0 / 15.0) / DT64)) + 0.2;
 
                             z1 = printer->windowBasePos.x + (windowSizeX / 2);
                             z2 = printer->windowBasePos.y + (windowSizeY / 2);

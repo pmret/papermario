@@ -39,7 +39,7 @@ enum {
 };
 
 // input window before the light appears where A inputs cause timing test to fail
-#define ANTI_MASH_TIME 5
+#define ANTI_MASH_TIME (s32)(5 * DT)
 
 INCLUDE_IMG("battle/action_cmd/three_chances_1.png", battle_action_cmd_three_chances_1_png);
 INCLUDE_PAL("battle/action_cmd/three_chances_1.pal", battle_action_cmd_three_chances_1_pal);

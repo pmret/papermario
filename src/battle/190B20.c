@@ -247,9 +247,14 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
     // ------------------------------------------------------------------------
     // remove targets based on simple criteria (coarse pass)
 
+    // TODO find someway into removing this do-while loop hack
+#if VERSION_PAL
+    actor->selectedTargetIndex = 0;
+#else
     do {
         actor->selectedTargetIndex = 0;
     } while (0);
+#endif
     actor->targetListLength = numTargets;
 
     /// @bug this should be % 4
@@ -494,11 +499,25 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
 
     targetDataList = actor->targetData;
 
+#if VERSION_PAL
+    targetIndexList = actor->targetIndexList;
+    numTargets = actor->targetListLength;
+    {
+        s8* temp;
+
+        i = ARRAY_COUNT(actor->targetIndexList) - 1;
+        temp = &actor->targetIndexList[ARRAY_COUNT(actor->targetIndexList) - 1];
+
+        while (i >= 0)
+            *temp-- = i--;
+    }
+#else
     numTargets = actor->targetListLength;
     targetIndexList = actor->targetIndexList;
     for (i = 0; i < numTargets; i++) {
         targetIndexList[i] = i;
     }
+#endif
 
     // sort targets by priority
     for (i = 0; i < numTargets - 1; i++) {
@@ -3156,6 +3175,7 @@ EvtScript EVS_BattleRumble_PlayerMin = {
     End
 };
 
+#if !VERSION_PAL
 EvtScript EVS_BattleRumble_PlayerLight = {
     Call(N(StartRumbleWithParams), 150, 20)
     Return
@@ -3179,6 +3199,7 @@ EvtScript EVS_BattleRumble_PlayerMax = {
     Return
     End
 };
+#endif
 
 void start_rumble_type(u32 type) {
     if (bCurRumbleScript != 0) {
