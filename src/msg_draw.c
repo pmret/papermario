@@ -1562,7 +1562,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                 if (msg_drawState->printModeFlags & MSG_PRINT_FLAG_2) {
                     msg_drawState->printModeFlags &= ~MSG_PRINT_FLAG_2;
                 }
-                msg_drawState->visiblePrintedCount += 1;
+                msg_drawState->visiblePrintedCount++;
                 msg_drawState->nextPos[0] +=
 #if VERSION_IQUE
                     msg_drawState->msgScale.x * 14.0f;

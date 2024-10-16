@@ -14,7 +14,7 @@ enum {
 };
 
 // how much to add to the meter per input if all modifiers are neutral
-#define BASE_FILL_RATE 820
+#define METER_FILL_RATE 820
 
 s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
 
@@ -183,7 +183,8 @@ void N(update)(void) {
                 if (acs->effectiveness != 0) {
                     // fill rate = 820 multiplied by two values expressed as percentages
                     s32 difficultyPct = battleStatus->actionCmdDifficultyTable[acs->difficulty];
-                    s32 effectivenessPct = acs->effectiveness * BASE_FILL_RATE;
+                    s32 effectivenessPct = METER_FILL_RATE * acs->effectiveness;
+                    // divide by 100 for each percent-based multiplier
                     acs->barFillLevel += (difficultyPct * effectivenessPct) / (100 * 100);
                 } else {
                     acs->barFillLevel += ONE_PCT_MASH;
@@ -217,6 +218,7 @@ void N(update)(void) {
                 battleStatus->actionQuality = 0;
             }
 
+            // threshold for success is completely random, only guaranteed if the bar is 100% filled
             battleStatus->actionSuccess = battleStatus->actionQuality;
             if (rand_int(99) < battleStatus->actionSuccess) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;

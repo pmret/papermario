@@ -482,7 +482,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
@@ -1049,7 +1049,7 @@ EvtScript N(EVS_Move_WaterBlock) = {
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
     Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, 0)
+    Call(action_command_water_block_init, TIMING_BUFF_WATER_BLOCK)
     Call(SetActionHudPrepareTime, 0)
     Set(LVar0, 0)
     Loop(4)

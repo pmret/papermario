@@ -360,7 +360,7 @@ EvtScript N(EVS_JumpSupport_UnusedUltra) = {
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_MarioW2_Carried, ANIM_MarioB1_Stomp)
     Call(PlayerUltraJumpToGoal, LVarA, PLAYER_ULTRA_JUMP_0)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Set(LVar9, 0)
     Call(GetPlayerActionSuccess, LVar0)
     IfGt(LVar0, 0)

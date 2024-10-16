@@ -253,7 +253,7 @@ void N(update)(void) {
             battleStatus->actionQuality = adjustedFillLevel;
 
             if (acs->frameCounter != 0) {
-                acs->frameCounter -= 1;
+                acs->frameCounter--;
                 break;
             }
 
@@ -299,7 +299,7 @@ void N(update)(void) {
             }
 
             if (acs->frameCounter != 0) {
-                acs->frameCounter -= 1;
+                acs->frameCounter--;
             } else {
                 action_command_free();
             }

@@ -113,7 +113,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         Call(SetGoalToTarget, ACTOR_PLAYER)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
@@ -243,7 +243,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         Call(SetGoalToTarget, ACTOR_PLAYER)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
@@ -379,7 +379,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         Call(SetGoalToTarget, ACTOR_PLAYER)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)

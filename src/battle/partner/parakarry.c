@@ -712,7 +712,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
@@ -1126,7 +1126,7 @@ EvtScript N(airLift) = {
     Wait(2)
     Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     IfEq(LVar0, HIT_RESULT_MISS)
-        Call(CloseActionCommandInfo)
+        Call(InterruptActionCommand)
         Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
         Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         Add(LVar1, 20)
@@ -1171,7 +1171,7 @@ EvtScript N(airLift) = {
         Wait(90 * DT)
         Call(GetActionSuccessCopy, LVar0)
     Else
-        Call(CloseActionCommandInfo)
+        Call(InterruptActionCommand)
         Set(LVar0, 0)
     EndIf
     Switch(LVar0)

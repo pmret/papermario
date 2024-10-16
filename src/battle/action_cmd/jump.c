@@ -128,7 +128,7 @@ void N(update)(void) {
                 battleStatus->actionResult = ACTION_RESULT_EARLY;
             }
             if ((acs->prepareTime - successWindow) > 0) {
-                acs->prepareTime -= 1;
+                acs->prepareTime--;
                 break;
             }
 

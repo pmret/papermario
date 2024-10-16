@@ -279,7 +279,7 @@ void entity_MulticoinBlock_spawn_coin(Entity* entity) {
         }
         make_item_entity_nodelay(ITEM_COIN, entity->pos.x, entity->pos.y + 28.0, entity->pos.z,
             itemSpawnMode, flagIndex);
-        data->coinsLeft -= 1;
+        data->coinsLeft--;
     }
 
     if ((data->coinsLeft == 0) || (data->timeLeft == 0)) {
@@ -296,7 +296,7 @@ void entity_MulticoinBlock_update_timer(Entity* entity) {
 
     if (entity->type == ENTITY_TYPE_MULTI_COIN_BRICK) {
         if (data->coinsLeft != MULTICOIN_BLOCK_MAX_COINS) {
-            data->timeLeft -= 1;
+            data->timeLeft--;
             if (data->timeLeft < 0) {
                 data->timeLeft = 0;
                 data->coinsLeft = 1;

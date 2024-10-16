@@ -4,10 +4,19 @@
 //TODO action command
 #define NAMESPACE action_command_squirt
 
-s32 D_802A9760_42A480[] = { 300, 300, 265, 220, 175, 175 };
-s32 D_802A9778_42A498[] = { 300, 300, 265, 220, 175, 175 };
-
 extern s32 actionCmdTableSquirt[];
+
+// indices into ActionCommandStatus::hudElements for this action command
+enum {
+    HIDX_BUTTON         = 0,
+    HIDX_METER          = 1,
+};
+
+// how much to subtract from the meter per frame after overfilling it
+#define METER_DRAIN_RATE 250
+
+s32 N(DrainRateTable)[] = { 300, 300, 265, 220, 175, 175 };
+s32 N(FillRateTable)[] = { 300, 300, 265, 220, 175, 175 };
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -30,17 +39,17 @@ API_CALLABLE(N(init)) {
     acs->barFillWidth = 0;
     battleStatus->actionQuality = 0;
     acs->hudPosX = -48;
-    acs->any.unk_5C = 0;
+    acs->squirt.draining = FALSE;
     acs->hudPosY = 80;
 
     hid = hud_element_create(&HES_AButton);
-    acs->hudElements[0] = hid;
+    acs->hudElements[HIDX_BUTTON] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
 
     hid = hud_element_create(&HES_BlueMeter);
-    acs->hudElements[1] = hid;
+    acs->hudElements[HIDX_METER] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
@@ -84,19 +93,19 @@ void N(update)(void) {
     s32 hid;
     s32 mashMeterCutoff;
     s32 cutoff;
-    s32 temp;
+    s32 fillPct;
 
     switch (acs->state) {
         case AC_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            hid = acs->hudElements[0];
+            hid = acs->hudElements[HIDX_BUTTON];
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(hid, 255);
 
-            hid = acs->hudElements[1];
+            hid = acs->hudElements[HIDX_METER];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
@@ -112,8 +121,8 @@ void N(update)(void) {
                 acs->hudPosX = 50;
             }
 
-            hud_element_set_render_pos(acs->hudElements[0], acs->hudPosX, acs->hudPosY);
-            hud_element_set_render_pos(acs->hudElements[1], acs->hudPosX, acs->hudPosY + 28);
+            hud_element_set_render_pos(acs->hudElements[HIDX_BUTTON], acs->hudPosX, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElements[HIDX_METER], acs->hudPosX, acs->hudPosY + 28);
             break;
         case AC_STATE_START:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -123,9 +132,9 @@ void N(update)(void) {
                 break;
             }
 
-            hud_element_set_script(acs->hudElements[0], &HES_AButtonDown);
+            hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
             acs->barFillLevel = 0;
-            acs->any.unk_5C = 0;
+            acs->squirt.draining = FALSE;
             acs->frameCounter = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
@@ -134,32 +143,33 @@ void N(update)(void) {
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
-            temp = acs->barFillLevel / cutoff;
-            if (acs->any.unk_5C == 0) {
+            fillPct = acs->barFillLevel / cutoff;
+            if (!acs->squirt.draining) {
                 if (!(battleStatus->curButtonsDown & BUTTON_A)) {
-                    acs->barFillLevel -= D_802A9760_42A480[temp / 20];
+                    acs->barFillLevel -= N(DrainRateTable)[fillPct / 20];
                     if (acs->barFillLevel < 0) {
                         acs->barFillLevel = 0;
                     }
                 } else {
-                    acs->barFillLevel += D_802A9778_42A498[temp / 20] * battleStatus->actionCmdDifficultyTable[acs->difficulty] / 100;
+                    acs->barFillLevel += N(FillRateTable)[fillPct / 20] * battleStatus->actionCmdDifficultyTable[acs->difficulty] / 100;
                     if (acs->barFillLevel > MAX_MASH_UNITS) {
                         acs->barFillLevel = MAX_MASH_UNITS;
-                        acs->any.unk_5C = 1;
+                        acs->squirt.draining = TRUE;
                     }
                 }
             } else {
-                acs->barFillLevel -= 250;
+                acs->barFillLevel -= METER_DRAIN_RATE;
                 if (acs->barFillLevel <= 0) {
                     acs->barFillLevel = 0;
-                    acs->any.unk_5C = 0;
+                    acs->squirt.draining = FALSE;
                 }
             }
 
             battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
             sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
-            hid = acs->hudElements[0];
-            if (temp < 80) {
+
+            hid = acs->hudElements[HIDX_BUTTON];
+            if (fillPct < 80) {
                 if (hud_element_get_script(hid) != &HES_AButtonDown) {
                     hud_element_set_script(hid, &HES_AButtonDown);
                 }
@@ -188,8 +198,10 @@ void N(update)(void) {
             }
 
             if (battleStatus->actionSuccess == 100) {
+                // only count 100% fill as success for this action command
                 increment_action_command_success_count();
             }
+
             btl_set_popup_duration(POPUP_MSG_OFF);
             sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
             acs->frameCounter = 5;
@@ -210,11 +222,11 @@ void N(draw)(void) {
     s32 hid;
     ActionCommandStatus* acs = &gActionCommandStatus;
 
-    hud_element_draw_clipped(acs->hudElements[0]);
-    hid = acs->hudElements[1];
+    hud_element_draw_clipped(acs->hudElements[HIDX_BUTTON]);
+    hid = acs->hudElements[HIDX_METER];
     hud_element_draw_clipped(hid);
     hud_element_get_render_pos(hid, &hudX, &hudY);
-    if (acs->any.unk_5C == 0) {
+    if (!acs->squirt.draining) {
         draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 1);
     } else {
         draw_mash_meter_mode_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 1, MASH_METER_MODE_ONE_COLOR);
@@ -223,6 +235,6 @@ void N(draw)(void) {
 
 void N(free)(void) {
     sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
-    hud_element_free(gActionCommandStatus.hudElements[0]);
-    hud_element_free(gActionCommandStatus.hudElements[1]);
+    hud_element_free(gActionCommandStatus.hudElements[HIDX_BUTTON]);
+    hud_element_free(gActionCommandStatus.hudElements[HIDX_METER]);
 }

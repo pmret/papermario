@@ -113,7 +113,7 @@ void throw_spiny_update(EffectInstance* effectInstance) {
     if (state < 7) {
         spinyObject->xScale = D_E00C8718[state] * 0.01f;
         spinyObject->yScale = D_E00C8720[state] * 0.01f;
-        spinyObject->state += 1;
+        spinyObject->state++;
         spinyObject->yaw -= 40.0f;
     } else {
         spinyObject->gravity += -0.2f;

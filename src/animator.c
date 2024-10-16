@@ -286,7 +286,7 @@ s32 create_model_animator(s16* animPos) {
     ASSERT(i < ARRAY_COUNT(*gCurrentAnimMeshListPtr));
 
     (*gCurrentAnimMeshListPtr)[i] = animator = heap_malloc(sizeof(*animator));
-    gAnimCount += 1;
+    gAnimCount++;
 
     ASSERT(animator != NULL);
 
@@ -330,7 +330,7 @@ s32 create_mesh_animator(s16* animPos, s16* animBuffer) {
     ASSERT(i < ARRAY_COUNT(*gCurrentAnimMeshListPtr));
 
     (*gCurrentAnimMeshListPtr)[i] = animator = heap_malloc(sizeof(*animator));
-    gAnimCount += 1;
+    gAnimCount++;
 
     ASSERT(animator != NULL);
 

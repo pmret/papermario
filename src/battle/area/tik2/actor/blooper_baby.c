@@ -595,7 +595,7 @@ EvtScript N(EVS_TakeTurn) = {
         Else
             Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
             Call(DispatchEventPlayer, EVENT_66)
-            Call(func_80269470)
+            Call(InterruptLeechActionCommand)
             BreakLoop
         EndIf
         Call(SetActorScale, ACTOR_SELF, Float(0.7), Float(1.4), Float(1.0))
@@ -647,7 +647,7 @@ EvtScript N(EVS_TakeTurn) = {
         Call(GetPlayerHP, LVar1)
         IfEq(LVar1, 0)
             Call(DispatchEventPlayer, EVENT_66)
-            Call(func_80269470)
+            Call(InterruptLeechActionCommand)
             BreakLoop
         EndIf
         Set(LFlag0, FALSE)
@@ -665,7 +665,7 @@ EvtScript N(EVS_TakeTurn) = {
         EndIf
     EndLoop
     Call(DispatchEventPlayer, EVENT_66)
-    Call(func_80269470)
+    Call(InterruptLeechActionCommand)
     Call(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 20)

@@ -294,7 +294,7 @@ void N(update)(void) {
                 acs->frameCounter = 5;
                 acs->state = AC_STATE_DISPOSE;
             } else {
-                acs->frameCounter -= 1;
+                acs->frameCounter--;
             }
             break;
         case AC_STATE_DISPOSE:
@@ -306,7 +306,7 @@ void N(update)(void) {
             }
 
             if (acs->frameCounter != 0) {
-                acs->frameCounter -= 1;
+                acs->frameCounter--;
             } else {
                 action_command_free();
             }

@@ -1,14 +1,23 @@
 #include "common.h"
 #include "battle/action_cmd.h"
 
-//TODO action command
 #define NAMESPACE action_command_spiny_surge
 
-s32 D_802A9860_42F680[AC_DIFFICULTY_LEN] = { 0, 25, 50, 75, 75, 0, 0, 0 };
-
-BSS s32 D_802A98C0;
-
 extern s32 actionCmdTableSpinySurge[];
+
+// indices into ActionCommandStatus::hudElements for this action command
+enum {
+    HIDX_STICK          = 0,
+    HIDX_METER          = 1,
+    HIDX_100_PCT        = 2,
+};
+
+// how much to add to the meter per input
+#define METER_FILL_TICK 1250
+
+s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
+
+BSS s32 PrevButtons;
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -38,19 +47,19 @@ API_CALLABLE(N(init)) {
     acs->hudPosY = 80;
 
     hid = hud_element_create(&HES_StickNeutral);
-    acs->hudElements[0] = hid;
+    acs->hudElements[HIDX_STICK] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     hid = hud_element_create(&HES_BlueMeter);
-    acs->hudElements[1] = hid;
+    acs->hudElements[HIDX_METER] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     hid = hud_element_create(&HES_100pct);
-    acs->hudElements[2] = hid;
+    acs->hudElements[HIDX_100_PCT] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
@@ -92,18 +101,19 @@ void N(update)(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
     s32 cutoff;
+    s32 idx;
 
     switch (acs->state) {
         case AC_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            hid = acs->hudElements[0];
+            hid = acs->hudElements[HIDX_STICK];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            hid = acs->hudElements[1];
+            hid = acs->hudElements[HIDX_METER];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
@@ -124,8 +134,8 @@ void N(update)(void) {
                 acs->hudPosX = 50;
             }
 
-            hud_element_set_render_pos(acs->hudElements[0], acs->hudPosX, acs->hudPosY);
-            hud_element_set_render_pos(acs->hudElements[1], acs->hudPosX, acs->hudPosY + 28);
+            hud_element_set_render_pos(acs->hudElements[HIDX_STICK], acs->hudPosX, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElements[HIDX_METER], acs->hudPosX, acs->hudPosY + 28);
             break;
         case AC_STATE_START:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -135,9 +145,9 @@ void N(update)(void) {
                 break;
             }
 
-            hud_element_set_script(acs->hudElements[0], &HES_StickMashLeft);
-            acs->any.unk_5C = 0;
-            D_802A98C0 = 0;
+            hud_element_set_script(acs->hudElements[HIDX_STICK], &HES_StickMashLeft);
+            acs->spinySurge.tossState = SPINY_SURGE_NONE;
+            PrevButtons = 0;
             acs->frameCounter = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
@@ -145,21 +155,27 @@ void N(update)(void) {
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
+
+            // bar can drain if it hasn't been fully filled
             if (!acs->isBarFilled) {
                 cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
-                acs->barFillLevel -= D_802A9860_42F680[acs->barFillLevel / cutoff / 20];
+                idx = (acs->barFillLevel / cutoff);
+                idx /= ONE_PCT_MASH / ARRAY_COUNT(N(DrainRateTable)); // = 20
 
+                acs->barFillLevel -= N(DrainRateTable)[idx];
                 if (acs->barFillLevel < 0) {
                     acs->barFillLevel = 0;
                 }
+            }
 
-                if (!acs->isBarFilled) {
-                    if (battleStatus->curButtonsPressed & BUTTON_STICK_LEFT) {
-                        acs->barFillLevel += (battleStatus->actionCmdDifficultyTable[acs->difficulty] * 1250) / 100;
-                    }
-                    if (battleStatus->curButtonsPressed & BUTTON_STICK_RIGHT) {
-                        acs->barFillLevel -= (battleStatus->actionCmdDifficultyTable[acs->difficulty] * 1250) / 100;
-                    }
+            // check for bar-filling input
+            if (!acs->isBarFilled) {
+                if (battleStatus->curButtonsPressed & BUTTON_STICK_LEFT) {
+                    acs->barFillLevel += METER_FILL_TICK * battleStatus->actionCmdDifficultyTable[acs->difficulty] / 100;
+                }
+                // right stick inputs actively drain the bar
+                if (battleStatus->curButtonsPressed & BUTTON_STICK_RIGHT) {
+                    acs->barFillLevel -= METER_FILL_TICK * battleStatus->actionCmdDifficultyTable[acs->difficulty] / 100;
                 }
             }
 
@@ -167,30 +183,31 @@ void N(update)(void) {
                 acs->barFillLevel = 0;
             }
 
+            // handle bar reaching 100%
             if (acs->barFillLevel > MAX_MASH_UNITS) {
                 acs->barFillLevel = MAX_MASH_UNITS;
                 acs->isBarFilled = TRUE;
-                hid = acs->hudElements[2];
+                hid = acs->hudElements[HIDX_100_PCT];
                 hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            if (D_802A98C0 & BUTTON_STICK_LEFT) {
-                acs->any.unk_5C = 1;
+            // set signal value for the move script to play throwing animations
+            if (PrevButtons & BUTTON_STICK_LEFT) {
+                acs->spinySurge.tossState = SPINY_SURGE_HOLD;
             }
-            if (D_802A98C0 & BUTTON_STICK_RIGHT) {
-                acs->any.unk_5C = -1;
+            if (PrevButtons & BUTTON_STICK_RIGHT) {
+                acs->spinySurge.tossState = SPINY_SURGE_RESET;
             }
-
-            if (!(D_802A98C0 & BUTTON_STICK_LEFT) &&
-                !(battleStatus->curButtonsDown & BUTTON_STICK_RIGHT) &&
-                acs->any.unk_5C == 1)
-            {
-                acs->any.unk_5C = 2;
+            if (!(PrevButtons & BUTTON_STICK_LEFT)
+                && !(battleStatus->curButtonsDown & BUTTON_STICK_RIGHT)
+                && acs->spinySurge.tossState == SPINY_SURGE_HOLD
+            ) {
+                acs->spinySurge.tossState = SPINY_SURGE_THROW;
             }
             battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
-            D_802A98C0 = battleStatus->curButtonsDown;
-            battleStatus->actionQuality = acs->any.unk_5C;
+            PrevButtons = battleStatus->curButtonsDown;
+            battleStatus->actionQuality = acs->spinySurge.tossState;
 
             sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionSuccess * 12);
 
@@ -213,6 +230,7 @@ void N(update)(void) {
             }
 
             if (battleStatus->actionSuccess == 100) {
+                // only count 100% fill as success for this action command
                 increment_action_command_success_count();
             }
 

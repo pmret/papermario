@@ -1,8 +1,13 @@
 #include "common.h"
 #include "battle/action_cmd.h"
 
-//TODO action command
-#define NAMESPACE action_command_unused_0A
+/**
+ * A very simple "mash A to fill the meter" action command.
+ * The command is very easy, as each mash adds a large amount to the meter and the
+ * meter does not drain.
+ */
+
+#define NAMESPACE action_command_unused_mash_a
 
 extern s32 actionCmdTable0A[];
 
@@ -12,6 +17,9 @@ enum {
     HIDX_METER          = 1,
     HIDX_100_PCT        = 2,
 };
+
+// how much to add to the meter per input
+#define METER_FILL_TICK 1500
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -29,7 +37,7 @@ API_CALLABLE(N(init)) {
 
     action_command_init_status();
 
-    acs->actionCommandID = ACTION_COMMAND_0A;
+    acs->actionCommandID = ACTION_COMMAND_UNUSED_MASH_A;
     acs->showHud = TRUE;
     acs->state = AC_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
@@ -115,10 +123,12 @@ void N(update)(void) {
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
 
+            // check for bar-filling input
             if (battleStatus->curButtonsPressed & BUTTON_A) {
-                acs->barFillLevel += battleStatus->actionCmdDifficultyTable[acs->difficulty] * 15;
+                acs->barFillLevel += METER_FILL_TICK * battleStatus->actionCmdDifficultyTable[acs->difficulty] / 100;
             }
 
+            // handle bar reaching 100%
             if (acs->barFillLevel >= MAX_MASH_UNITS) {
                 acs->barFillLevel = MAX_MASH_UNITS;
                 acs->isBarFilled = TRUE;
@@ -148,6 +158,7 @@ void N(update)(void) {
             }
 
             if (battleStatus->actionSuccess == 100) {
+                // only count 100% fill as success for this action command
                 increment_action_command_success_count();
             }
 

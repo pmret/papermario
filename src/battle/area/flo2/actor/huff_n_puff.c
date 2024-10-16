@@ -3011,22 +3011,22 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
             Call(GetLastDamage, ACTOR_PLAYER, LVar0)
             IfEq(LVar0, 0)
                 IfGt(LVarD, 1)
-                    Call(func_80269470)
+                    Call(InterruptLeechActionCommand)
                     BreakLoop
                 EndIf
             EndIf
             Call(GetPlayerHP, LVar0)
             IfEq(LVar0, 0)
-                Call(func_80269470)
+                Call(InterruptLeechActionCommand)
                 BreakLoop
             EndIf
             IfGe(LVarD, 20)
-                Call(func_80269470)
+                Call(InterruptLeechActionCommand)
                 BreakLoop
             EndIf
             Wait(1)
         EndLoop
-        Call(func_80269470)
+        Call(InterruptLeechActionCommand)
     EndIf
     Switch(LVarA)
         CaseOrEq(HIT_RESULT_HIT)

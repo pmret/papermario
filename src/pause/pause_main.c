@@ -702,7 +702,7 @@ void pause_tutorial_input(s32 *pressed, s32 *held) {
         case 3:
             gPauseTutorialFrameCounter = 16;
             gPauseTutorialInputState = 4;
-            gPauseTutorialState += 1;
+            gPauseTutorialState++;
             pressedNew = 0;
             heldNew = 0;
             break;

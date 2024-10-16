@@ -151,7 +151,7 @@ EvtScript N(EVS_Idle) = {
 EvtScript N(EVS_HandleEvent) = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)

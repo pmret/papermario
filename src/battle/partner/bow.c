@@ -244,7 +244,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
@@ -538,7 +538,7 @@ EvtScript N(smack) = {
         Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
         IfEq(LVar0, HIT_RESULT_MISS)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapOnce)
-            Call(CloseActionCommandInfo)
+            Call(InterruptActionCommand)
             Set(LVar0, 0)
             Loop(20)
                 Add(LVar0, -45)
@@ -1050,7 +1050,7 @@ EvtScript N(fanSmack) = {
         Call(PartnerTestEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_ALT_SPIKY, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
         IfEq(LVar0, HIT_RESULT_MISS)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackOnce)
-            Call(CloseActionCommandInfo)
+            Call(InterruptActionCommand)
             Set(LVar0, 0)
             Loop(15)
                 Add(LVar0, -45)

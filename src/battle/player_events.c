@@ -242,7 +242,7 @@ API_CALLABLE(LifeShroomShroudWorld) {
 
     mdl_set_shroud_tint_params(0, 0, 0, ((20 - script->functionTemp[0]) * 12) & 0xFC);
 
-    script->functionTemp[0] -= 1;
+    script->functionTemp[0]--;
 
     if (script->functionTemp[0] == 0) {
         return ApiStatus_DONE2;
@@ -259,7 +259,7 @@ API_CALLABLE(LifeShroomRevealWorld) {
 
     mdl_set_shroud_tint_params(0, 0, 0, (script->functionTemp[0] * 12) & 0xFC);
 
-    script->functionTemp[0] -= 1;
+    script->functionTemp[0]--;
     if (script->functionTemp[0] == 0) {
         mdl_set_shroud_tint_params(0, 0, 0, 0);
         return ApiStatus_DONE2;
@@ -857,7 +857,7 @@ EvtScript EVS_Player_HandleEvent = {
         CaseNe(EVENT_32)
             Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EndSwitch
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     Call(func_802693F0)
     Call(ForceDisablePlayerBlurImmediately)

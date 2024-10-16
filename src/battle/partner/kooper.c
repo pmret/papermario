@@ -286,7 +286,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
@@ -902,7 +902,7 @@ EvtScript N(dizzyShell) = {
     Set(LVarD, 75 * DT)
     Set(LVarA, LVarD)
     Add(LVarA, -3)
-    Call(battle_partner_kooper_AverageTargetDizzyChance)
+    Call(N(AverageTargetDizzyChance))
     Call(action_command_dizzy_shell_start, 0, LVarA, 3, LVar0)
     Call(SetActionQuality, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)

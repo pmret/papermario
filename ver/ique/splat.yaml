@@ -5714,9 +5714,9 @@ segments:
     start: 0x46FE00
     vram: 0x802A9000
     dir: battle/action_cmd
-    name: action_cmd_unused_0A
+    name: action_cmd_unused_mash_a
     subsegments:
-    - [auto, c, unused_0A]
+    - [auto, c, unused_mash_a]
   - type: code
     start: 0x4704C0
     vram: 0x802A9000

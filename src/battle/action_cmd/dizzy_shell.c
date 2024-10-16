@@ -2,7 +2,6 @@
 #include "audio/public.h"
 #include "battle/action_cmd.h"
 
-//TODO action command
 #define NAMESPACE action_command_dizzy_shell
 
 extern s32 actionCmdTableDizzyShell[];
@@ -15,7 +14,7 @@ enum {
 };
 
 // how much to add to the meter per input if all modifiers are neutral
-#define BASE_FILL_RATE 850
+#define METER_FILL_TICK 850
 
 s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
 
@@ -34,6 +33,7 @@ API_CALLABLE(N(init)) {
     }
 
     action_command_init_status();
+
     acs->actionCommandID = ACTION_COMMAND_DIZZY_SHELL;
     acs->showHud = TRUE;
     acs->state = AC_STATE_INIT;
@@ -140,7 +140,8 @@ void N(update)(void) {
             // check for bar-filling input
             if (battleStatus->curButtonsPressed & BUTTON_A) {
                 s32 difficultyPct = battleStatus->actionCmdDifficultyTable[acs->difficulty];
-                s32 effectivenessPct = acs->targetWeakness * BASE_FILL_RATE;
+                s32 effectivenessPct = METER_FILL_TICK * acs->targetWeakness;
+                // divide by 100 for each percent-based multiplier
                 s32 fillAmt = (difficultyPct * effectivenessPct) / (100 * 100);
 
                 if (fillAmt != 0) {

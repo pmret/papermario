@@ -12,6 +12,9 @@ enum {
     HIDX_100_PCT        = 2,
 };
 
+// how much to add to the meter per input
+#define METER_FILL_TICK 950
+
 s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
 
 // threshold meter values; not used for anything
@@ -143,14 +146,14 @@ void N(update)(void) {
 
                 if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT)) {
                     if (acs->fireShell.holdingLeft != 0) {
-                        acs->barFillLevel += (battleStatus->actionCmdDifficultyTable[acs->difficulty] * 950) / 100;
+                        acs->barFillLevel += METER_FILL_TICK * battleStatus->actionCmdDifficultyTable[acs->difficulty] / 100;
                         acs->fireShell.holdingLeft = FALSE;
                     }
                 }
 
                 // right stick inputs actively drain the bar
                 if (battleStatus->curButtonsPressed & BUTTON_STICK_RIGHT) {
-                    acs->barFillLevel -= (battleStatus->actionCmdDifficultyTable[acs->difficulty] * 950) / 100;
+                    acs->barFillLevel -= METER_FILL_TICK * battleStatus->actionCmdDifficultyTable[acs->difficulty] / 100;
                 }
             }
 

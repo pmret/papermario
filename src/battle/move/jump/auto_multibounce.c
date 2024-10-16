@@ -83,7 +83,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     IfEq(LVarF, LVar0)
         Set(LFlag0, TRUE)
     EndIf
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     IfEq(LFlag0, TRUE)
@@ -225,7 +225,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     IfEq(LVarF, LVar0)
         Set(LFlag0, TRUE)
     EndIf
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     IfEq(LFlag0, TRUE)
@@ -372,7 +372,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     IfEq(LVarF, LVar0)
         Set(LFlag0, TRUE)
     EndIf
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     IfEq(LFlag0, TRUE)

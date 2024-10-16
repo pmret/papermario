@@ -9,4 +9,11 @@ void action_command_water_block_update(void);
 void action_command_water_block_draw(void);
 void action_command_water_block_free(void);
 
+// variants for this action command
+enum {
+    TIMING_BUFF_WATER_BLOCK     = 0,
+    TIMING_BUFF_TURBO_CHARGE    = 1,
+    TIMING_BUFF_CLOUD_NINE      = 2,
+};
+
 #endif

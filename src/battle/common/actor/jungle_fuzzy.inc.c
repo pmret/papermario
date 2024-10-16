@@ -169,7 +169,7 @@ EvtScript N(EVS_HandleEvent) = {
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
-            Call(func_80269470)
+            Call(InterruptLeechActionCommand)
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_Fuzzy_Jungle_HurtShock)
             ExecWait(EVS_Enemy_ShockHit)
@@ -183,7 +183,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.6))
             Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         CaseEq(EVENT_SHOCK_DEATH)
-            Call(func_80269470)
+            Call(InterruptLeechActionCommand)
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_Fuzzy_Jungle_HurtShock)
             ExecWait(EVS_Enemy_ShockHit)
@@ -590,7 +590,7 @@ EvtScript N(EVS_Attack_Leech) = {
             Else
                 Add(LVarD, 1)
                 IfGt(LVarD, 1)
-                    Call(func_80269470)
+                    Call(InterruptLeechActionCommand)
                     BreakLoop
                 EndIf
             EndIf
@@ -600,7 +600,7 @@ EvtScript N(EVS_Attack_Leech) = {
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jungle_Jump)
             Call(GetPlayerHP, LVar1)
             IfEq(LVar1, 0)
-                Call(func_80269470)
+                Call(InterruptLeechActionCommand)
                 BreakLoop
             EndIf
             Set(LFlag0, FALSE)
@@ -616,7 +616,7 @@ EvtScript N(EVS_Attack_Leech) = {
                 BreakLoop
             EndIf
         EndLoop
-        Call(func_80269470)
+        Call(InterruptLeechActionCommand)
         Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
         Call(SetActorDispOffset, ACTOR_SELF, 0, 8, 0)
         Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))

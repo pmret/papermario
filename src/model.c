@@ -3377,7 +3377,7 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTran
 
             (*gCurrentModelTreeNodeInfo)[TreeIterPos].modelIndex = -1;
             (*gCurrentModelTreeNodeInfo)[TreeIterPos].treeDepth = treeDepth;
-            TreeIterPos += 1;
+            TreeIterPos++;
             return;
         }
     }
@@ -3400,7 +3400,7 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTran
 
     mdl_create_model(modelBPptr, 4);
     (*gCurrentModelTreeNodeInfo)[TreeIterPos].treeDepth = treeDepth;
-    TreeIterPos += 1;
+    TreeIterPos++;
 }
 
 s32 get_model_list_index_from_tree_index(s32 treeIndex) {

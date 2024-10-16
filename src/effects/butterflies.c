@@ -91,7 +91,7 @@ void butterflies_update(EffectInstance* effect) {
     if (temp_s0->unk_04 < 1000) {
         temp_s0->unk_04--;
     }
-    temp_s0->unk_08 += 1;
+    temp_s0->unk_08++;
     if (temp_s0->unk_04 < 0) {
         remove_effect(effect);
         return;

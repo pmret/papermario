@@ -194,7 +194,7 @@ void disable_x_update(EffectInstance* effect) {
         if (unk_28 < 10) {
             data->alpha = unk_28 * 25;
         }
-        data->unk_28 += 1;
+        data->unk_28++;
     }
 }
 

@@ -186,7 +186,7 @@ void pink_sparkles_update(EffectInstance* effect) {
         part->unk_28 = (unk_20 + i + i) & 7;
 
         if (part->unk_1C < 0) {
-            count += 1;
+            count++;
         }
 
         part->unk_1C--;

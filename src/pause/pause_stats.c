@@ -435,7 +435,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         powIncIdx++;
 
         powIncIdx = 0;
-        powBarIdx += 1;
+        powBarIdx++;
         if (curIncrement >= powIncrements) {
             break;
         }

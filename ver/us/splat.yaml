@@ -5795,9 +5795,9 @@ segments:
     start: 0x4273B0
     vram_class: action_cmd
     dir: battle/action_cmd
-    name: action_cmd_unused_0A
+    name: action_cmd_unused_mash_a
     subsegments:
-    - [auto, c, unused_0A]
+    - [auto, c, unused_mash_a]
   - type: code
     start: 0x427A70
     vram_class: action_cmd

@@ -63,7 +63,7 @@ void* actionCommandDmaTable[] = {
     AC_TBL_ENTRY(unused_flee),
     AC_TBL_ENTRY(dizzy_shell),
     AC_TBL_ENTRY(fire_shell),
-    AC_TBL_ENTRY(unused_0A),
+    AC_TBL_ENTRY(unused_mash_a),
     AC_TBL_ENTRY(bomb),
     AC_TBL_ENTRY(body_slam),
     AC_TBL_ENTRY(air_lift),
@@ -312,7 +312,7 @@ void action_command_update(void) {
         case ACTION_COMMAND_STOP_LEECH:
             action_command_stop_leech_update();
             break;
-        case ACTION_COMMAND_07:
+        case ACTION_COMMAND_UNUSED_FLEE:
             action_command_unused_flee_update();
             break;
         case ACTION_COMMAND_DIZZY_SHELL:
@@ -321,8 +321,8 @@ void action_command_update(void) {
         case ACTION_COMMAND_FIRE_SHELL:
             action_command_fire_shell_update();
             break;
-        case ACTION_COMMAND_0A:
-            action_command_unused_0A_update();
+        case ACTION_COMMAND_UNUSED_MASH_A:
+            action_command_unused_mash_a_update();
             break;
         case ACTION_COMMAND_BOMB:
             action_command_bomb_update();
@@ -390,7 +390,7 @@ void action_command_draw(void) {
         case ACTION_COMMAND_STOP_LEECH:
             action_command_stop_leech_draw();
             break;
-        case ACTION_COMMAND_07:
+        case ACTION_COMMAND_UNUSED_FLEE:
             action_command_unused_flee_draw();
             break;
         case ACTION_COMMAND_DIZZY_SHELL:
@@ -399,8 +399,8 @@ void action_command_draw(void) {
         case ACTION_COMMAND_FIRE_SHELL:
             action_command_fire_shell_draw();
             break;
-        case ACTION_COMMAND_0A:
-            action_command_unused_0A_draw();
+        case ACTION_COMMAND_UNUSED_MASH_A:
+            action_command_unused_mash_a_draw();
             break;
         case ACTION_COMMAND_BOMB:
             action_command_bomb_draw();
@@ -467,7 +467,7 @@ void action_command_free(void) {
         case ACTION_COMMAND_STOP_LEECH:
             action_command_jump_draw();
             break;
-        case ACTION_COMMAND_07:
+        case ACTION_COMMAND_UNUSED_FLEE:
             action_command_unused_flee_free();
             break;
         case ACTION_COMMAND_DIZZY_SHELL:
@@ -476,8 +476,8 @@ void action_command_free(void) {
         case ACTION_COMMAND_FIRE_SHELL:
             action_command_fire_shell_free();
             break;
-        case ACTION_COMMAND_0A:
-            action_command_unused_0A_free();
+        case ACTION_COMMAND_UNUSED_MASH_A:
+            action_command_unused_mash_a_free();
             break;
         case ACTION_COMMAND_BOMB:
             action_command_bomb_free();
@@ -723,7 +723,7 @@ API_CALLABLE(func_802693F0) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(CloseActionCommandInfo) {
+API_CALLABLE(InterruptActionCommand) {
     ActionCommandStatus* acs = &gActionCommandStatus;
 
     if (isInitialCall) {
@@ -743,7 +743,7 @@ API_CALLABLE(CloseActionCommandInfo) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80269470) {
+API_CALLABLE(InterruptLeechActionCommand) {
     if (isInitialCall) {
         action_command_free();
         return ApiStatus_BLOCK;

@@ -86,7 +86,7 @@ ApiStatus evt_handle_end_loop(Evt* script) {
 ApiStatus evt_handle_break_loop(Evt* script) {
     ASSERT(script->loopDepth >= 0);
     script->ptrNextLine = evt_goto_end_loop(script);
-    script->loopDepth -= 1;
+    script->loopDepth--;
     return ApiStatus_DONE2;
 }
 
@@ -102,7 +102,7 @@ ApiStatus evt_handle_wait(Evt* script) {
         return ApiStatus_DONE2;
     }
 
-    script->functionTemp[0] -= 1;
+    script->functionTemp[0]--;
     return !script->functionTemp[0];
 }
 
@@ -537,7 +537,7 @@ ApiStatus evt_handle_end_switch(Evt* script) {
     ASSERT(switchDepth >= 0);
 
     script->switchBlockState[switchDepth] = 0;
-    script->switchDepth -= 1;
+    script->switchDepth--;
 
     return ApiStatus_DONE2;
 }

@@ -187,14 +187,14 @@ EvtScript N(EVS_Flying_HandleEvent) = {
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
-            Call(func_80269470)
+            Call(InterruptLeechActionCommand)
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_Swooper_Gray_Anim15)
             ExecWait(EVS_Enemy_ShockHit)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
-            Call(func_80269470)
+            Call(InterruptLeechActionCommand)
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_Swooper_Gray_Anim15)
             ExecWait(EVS_Enemy_ShockHit)
@@ -363,14 +363,14 @@ EvtScript N(EVS_HandleEvent) = {
             EndIf
             Return
         CaseEq(EVENT_SHOCK_HIT)
-            Call(func_80269470)
+            Call(InterruptLeechActionCommand)
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_Swooper_Gray_Anim15)
             ExecWait(EVS_Enemy_ShockHit_Impl)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
-            Call(func_80269470)
+            Call(InterruptLeechActionCommand)
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_Swooper_Gray_Anim15)
             ExecWait(EVS_Enemy_ShockHit_Impl)
@@ -857,13 +857,13 @@ EvtScript N(EVS_Flying_TakeTurn) = {
             Else
                 Add(LVarD, 1)
                 IfGt(LVarD, 1)
-                    Call(func_80269470)
+                    Call(InterruptLeechActionCommand)
                     BreakLoop
                 EndIf
             EndIf
             Call(GetPlayerHP, LVar1)
             IfEq(LVar1, 0)
-                Call(func_80269470)
+                Call(InterruptLeechActionCommand)
                 BreakLoop
             EndIf
             Set(LFlag0, FALSE)
@@ -879,7 +879,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
                 BreakLoop
             EndIf
         EndLoop
-        Call(func_80269470)
+        Call(InterruptLeechActionCommand)
         Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -1162,13 +1162,13 @@ EvtScript N(EVS_TakeTurn) = {
             Else
                 Add(LVarD, 1)
                 IfGt(LVarD, 1)
-                    Call(func_80269470)
+                    Call(InterruptLeechActionCommand)
                     BreakLoop
                 EndIf
             EndIf
             Call(GetPlayerHP, LVar1)
             IfEq(LVar1, 0)
-                Call(func_80269470)
+                Call(InterruptLeechActionCommand)
                 BreakLoop
             EndIf
             Set(LFlag0, FALSE)
@@ -1184,7 +1184,7 @@ EvtScript N(EVS_TakeTurn) = {
                 BreakLoop
             EndIf
         EndLoop
-        Call(func_80269470)
+        Call(InterruptLeechActionCommand)
         Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)

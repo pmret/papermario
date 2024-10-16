@@ -100,7 +100,7 @@ EvtScript N(EVS_UseMove_Normal) = {
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
     Call(GetActionResult, LVarF)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(ShowActionHud, FALSE)
@@ -151,7 +151,7 @@ EvtScript N(EVS_UseMove_Super) = {
         Call(SetGoalToTarget, ACTOR_PLAYER)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(ShowActionHud, FALSE)
@@ -206,7 +206,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
         Call(SetGoalToTarget, ACTOR_PLAYER)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(ShowActionHud, FALSE)
@@ -370,7 +370,7 @@ EvtScript N(EVS_UseBerserker_Normal) = {
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
     Call(GetActionResult, LVarF)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(ShowActionHud, FALSE)
@@ -421,7 +421,7 @@ EvtScript N(EVS_UseBerserker_Super) = {
         Call(SetGoalToTarget, ACTOR_PLAYER)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(ShowActionHud, FALSE)
@@ -478,7 +478,7 @@ EvtScript N(EVS_UseBerserker_Ultra) = {
         Call(SetGoalToTarget, ACTOR_PLAYER)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(ShowActionHud, FALSE)
@@ -554,7 +554,7 @@ EvtScript N(EVS_UseMove_Tutorial) = {
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
     Call(GetActionResult, LVarF)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(ShowActionHud, FALSE)

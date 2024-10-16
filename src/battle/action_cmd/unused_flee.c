@@ -7,7 +7,6 @@
  *
  * Unlike the normal flee command, the OK mark does not move and the command will only
  * succeed of the bar is filled. Once filled, it rapidly drains and must be refilled.
- * Each fill increments actionSuccess.
  */
 
 #define NAMESPACE action_command_unused_flee
@@ -36,7 +35,7 @@ API_CALLABLE(N(init)) {
     battleStatus->actionCmdDifficultyTable = actionCmdTable07;
 
     acs->autoSucceed = FALSE;
-    acs->actionCommandID = ACTION_COMMAND_07;
+    acs->actionCommandID = ACTION_COMMAND_UNUSED_FLEE;
     acs->state = AC_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = evt_get_variable(script, *args);
@@ -151,6 +150,7 @@ void N(update)(void) {
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
 
+            // check for bar-filling input
             if (battleStatus->curButtonsPressed & BUTTON_A) {
                 s32 fillAmt = battleStatus->actionCmdDifficultyTable[acs->difficulty] * 6;
 
@@ -159,11 +159,13 @@ void N(update)(void) {
                 }
             }
 
+            // handle bar reaching 100%
             if (acs->barFillLevel > MAX_MASH_UNITS) {
                 acs->barFillLevel = MAX_MASH_UNITS;
                 acs->flee.drainDelay = 3;
             }
 
+            // bar can reset if mashing stops after it's been fully filled
             if (acs->flee.drainDelay != 0) {
                 acs->flee.drainDelay--;
                 if (acs->flee.drainDelay == 0) {
@@ -194,8 +196,7 @@ void N(update)(void) {
 
 void N(draw)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
-    s32 hudX;
-    s32 hudY;
+    s32 hudX, hudY;
     s32 hid;
 
     hud_element_draw_clipped(acs->hudElements[HIDX_BUTTON]);

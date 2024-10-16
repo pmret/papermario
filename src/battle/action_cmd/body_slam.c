@@ -13,8 +13,8 @@ enum {
     HIDX_FRAME          = 3,
 };
 
-// how much to add to the meter per input if all modifiers are neutral
-#define BASE_FILL_RATE 154
+// how much to add to the meter per frame
+#define METER_FILL_RATE 154
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -134,8 +134,8 @@ void N(update)(void) {
 
             // check for bar-filling input
             if (battleStatus->curButtonsDown & BUTTON_A) {
-                acs->barFillLevel += BASE_FILL_RATE;
-                acs->thresholdLevel += BASE_FILL_RATE;
+                acs->barFillLevel += METER_FILL_RATE;
+                acs->thresholdLevel += METER_FILL_RATE;
             } else {
                 acs->frameCounter = 0;
             }
@@ -161,10 +161,14 @@ void N(update)(void) {
             do {
                 if (acs->thresholdLevel < MAX_MASH_UNITS) {
                     battleStatus->actionSuccess = -1;
-                } else if (acs->thresholdLevel - (battleStatus->actionCmdDifficultyTable[acs->difficulty] * BASE_FILL_RATE) >= 10309) {
-                    battleStatus->actionSuccess = -1;
                 } else {
-                    battleStatus->actionSuccess = 1;
+                    s32 window = battleStatus->actionCmdDifficultyTable[acs->difficulty] * METER_FILL_RATE;
+                    // release needs to be within 2 frames + modifier from difficulty table
+                    if (acs->thresholdLevel - window >= MAX_MASH_UNITS + 2 * METER_FILL_RATE + 1) {
+                        battleStatus->actionSuccess = -1;
+                    } else {
+                        battleStatus->actionSuccess = 1;
+                    }
                 }
             } while (0); // required to match
 
@@ -172,6 +176,7 @@ void N(update)(void) {
             if (battleStatus->actionSuccess == 1) {
                 increment_action_command_success_count();
             }
+
             btl_set_popup_duration(POPUP_MSG_OFF);
             sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
             acs->frameCounter = 5;

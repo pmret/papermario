@@ -193,7 +193,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
@@ -1009,18 +1009,18 @@ EvtScript N(EVS_Move_SpinySurge) = {
     Loop(LVarA)
         Call(GetActionQuality, LVar0)
         IfEq(LVar9, 2)
-            Set(LVar0, 3)
+            Set(LVar0, SPINY_SURGE_IGNORE)
         EndIf
         Switch(LVar0)
-            CaseEq(-1)
+            CaseEq(SPINY_SURGE_RESET)
                 Set(LVar9, 0)
-                Call(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                Call(SetPartFlagBits, ACTOR_PARTNER, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                 Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
-            CaseEq(1)
+            CaseEq(SPINY_SURGE_HOLD)
                 IfEq(LVar9, 1)
                     BreakSwitch
                 EndIf
-                Call(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+                Call(SetPartFlagBits, ACTOR_PARTNER, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
                 Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
                 Add(LVar0, 3)
                 Add(LVar1, 34)
@@ -1028,7 +1028,7 @@ EvtScript N(EVS_Move_SpinySurge) = {
                 Call(SetPartPos, ACTOR_PARTNER, 2, LVar0, LVar1, LVar2)
                 Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_LiftSpiny)
                 Set(LVar9, 1)
-            CaseEq(2)
+            CaseEq(SPINY_SURGE_THROW)
                 IfEq(LVar9, 0)
                     BreakSwitch
                 EndIf
@@ -1041,7 +1041,7 @@ EvtScript N(EVS_Move_SpinySurge) = {
                 EndIf
                 Call(N(ThrowSpinyFX))
                 Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_ThrowSpinyAlt)
-                Call(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                Call(SetPartFlagBits, ACTOR_PARTNER, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                 ChildThread
                     Call(GetActorVar, ACTOR_PARTNER, AVAR_Unk_0, LVar0)
                     Add(LVar0, 1)
@@ -1056,7 +1056,7 @@ EvtScript N(EVS_Move_SpinySurge) = {
         EndSwitch
         Wait(1)
     EndLoop
-    Call(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    Call(SetPartFlagBits, ACTOR_PARTNER, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
     Loop(0)
         Call(GetActorVar, ACTOR_PARTNER, AVAR_Unk_0, LVar0)
@@ -1120,7 +1120,7 @@ EvtScript N(cloudNine_normal) = {
     Call(SetBattleFlagBits, BS_FLAGS1_SHOW_PLAYER_DECORATIONS, FALSE)
     Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, TRUE)
     Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, 2)
+    Call(action_command_water_block_init, TIMING_BUFF_CLOUD_NINE)
     Call(SetActionHudPrepareTime, 50)
     Call(InitTargetIterator)
     Call(SetGoalToHome, ACTOR_PARTNER)
@@ -1239,7 +1239,7 @@ EvtScript N(cloudNine_normal) = {
 EvtScript N(cloudNine_immobile) = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, 2)
+    Call(action_command_water_block_init, TIMING_BUFF_CLOUD_NINE)
     Call(SetActionHudPrepareTime, 50)
     Call(N(RemoveCloudNineFX))
     Call(InitTargetIterator)
@@ -1672,7 +1672,7 @@ API_CALLABLE(N(BlowTargetAway)) {
             target->state.curPos.y = target->curPos.y;
             target->state.curPos.z = target->curPos.z;
             target->state.speed = 5.5f;
-            sNumEnemiesBeingBlown += 1;
+            sNumEnemiesBeingBlown++;
             battleStatus->curAttackElement = 0;
             dispatch_event_actor(target, EVENT_BLOW_AWAY);
             script->functionTemp[0] = 1;
@@ -1687,7 +1687,7 @@ API_CALLABLE(N(BlowTargetAway)) {
             target->yaw += 33.0f;
             target->yaw = clamp_angle(target->yaw);
             if (target->state.curPos.x > 240.0f) {
-                sNumEnemiesBeingBlown -= 1;
+                sNumEnemiesBeingBlown--;
                 return ApiStatus_DONE2;
             }
             break;

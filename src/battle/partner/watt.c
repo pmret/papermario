@@ -543,7 +543,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(N(WattFXDisableBounce))
     Call(N(WattFXEnable))
     Call(N(WattFXSetEffect), 0)
@@ -899,7 +899,7 @@ EvtScript N(EVS_Attack_ElectroDash) = {
     EndIf
     Label(10)
     Wait(2)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(N(ElectroDashFXDisable))
     Call(StopLoopingSoundAtActor, ACTOR_PARTNER, 0)
     Call(SetDamageSource, DMG_SRC_ELECTRO_DASH)
@@ -1089,7 +1089,7 @@ EvtScript N(EVS_Attack_PowerShock) = {
 
 EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
     Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, 1)
+    Call(action_command_water_block_init, TIMING_BUFF_TURBO_CHARGE)
     Call(SetActionHudPrepareTime, 0)
     Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, TRUE)
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
@@ -1174,7 +1174,7 @@ EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
 
 EvtScript N(EVS_TurboCharge_ImmobilePlayer) = {
     Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, 1)
+    Call(action_command_water_block_init, TIMING_BUFF_TURBO_CHARGE)
     Call(SetActionHudPrepareTime, 0)
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Wait(5)

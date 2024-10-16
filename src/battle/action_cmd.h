@@ -13,7 +13,7 @@
 #include "battle/action_cmd/unused_flee.h"
 #include "battle/action_cmd/dizzy_shell.h"
 #include "battle/action_cmd/fire_shell.h"
-#include "battle/action_cmd/unused_0A.h"
+#include "battle/action_cmd/unused_mash_a.h"
 #include "battle/action_cmd/bomb.h"
 #include "battle/action_cmd/body_slam.h"
 #include "battle/action_cmd/air_lift.h"
@@ -97,6 +97,15 @@ typedef struct ActionCommandStatus {
                     struct {
                         b8 holdingLeft;
                     } smack;
+                    struct {
+                        s8 tossState;
+                    } spinySurge;
+                    struct {
+                        b8 holdingLeft;
+                    } spook;
+                    struct {
+                        b8 draining;
+                    } squirt;
                     struct {
                         b8 hadCorrectTiming;
                         s8 unk_5D;
@@ -184,8 +193,8 @@ API_CALLABLE(SetActionHudPrepareTime);
 API_CALLABLE(GetCommandAutoSuccess);
 API_CALLABLE(SetCommandAutoSuccess);
 API_CALLABLE(func_802693F0);
-API_CALLABLE(CloseActionCommandInfo);
-API_CALLABLE(func_80269470);
+API_CALLABLE(InterruptActionCommand);
+API_CALLABLE(InterruptLeechActionCommand);
 API_CALLABLE(ShowActionHud);
 API_CALLABLE(GetActionSuccessCopy);
 API_CALLABLE(GetActionResult);

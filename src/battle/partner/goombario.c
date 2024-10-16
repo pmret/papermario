@@ -46,7 +46,7 @@ API_CALLABLE(N(GetReturnMoveTime)) {
 
     script->varTable[0] = (dist3D(posX, posY, posZ, goalX, goalY, goalZ) * 15.0f) / 100.0f;
 
-    if (script->varTable[0] >= 21) {
+    if (script->varTable[0] > 20) {
         script->varTable[0] = 20;
     }
 
@@ -574,7 +574,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
@@ -993,7 +993,7 @@ EvtScript N(EVS_Attack_Headbonk1) = {
         Call(UseBattleCamPreset, BTL_CAM_GOOMBARIO_BONK_FOLLOWUP_2)
     EndThread
     Call(GetActionResult, LVarF)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(ShowActionHud, FALSE)
@@ -1098,7 +1098,7 @@ EvtScript N(EVS_Attack_Headbonk2) = {
         Call(UseBattleCamPreset, BTL_CAM_GOOMBARIO_BONK_FOLLOWUP_2)
     EndThread
     Call(GetActionResult, LVarF)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(ShowActionHud, FALSE)
@@ -1205,7 +1205,7 @@ EvtScript N(EVS_Attack_Headbonk3) = {
         Call(UseBattleCamPreset, BTL_CAM_GOOMBARIO_BONK_FOLLOWUP_2)
     EndThread
     Call(GetActionResult, LVarF)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(ShowActionHud, FALSE)
@@ -1335,7 +1335,7 @@ EvtScript N(EVS_Move_Multibonk) = {
         Call(SetGoalToTarget, ACTOR_PARTNER)
         Call(UseBattleCamPreset, BTL_CAM_GOOMBARIO_BONK_FOLLOWUP_2)
     EndThread
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(SetActionDifficultyTable, Ref(N(actionCommandTable)))
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)

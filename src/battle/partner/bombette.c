@@ -351,7 +351,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(StopSound, SOUND_LRAW_BOMBETTE_FUSE)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
@@ -932,7 +932,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
     Label(10)
     Call(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
     Wait(2)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_ALT_SPIKY, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     IfEq(LVar0, HIT_RESULT_MISS)
         Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOMBETTE_BODY_SLAM)

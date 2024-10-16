@@ -2250,7 +2250,7 @@ void btl_state_update_run_away(void) {
                                 escapeChance = 100.0f;
                             }
                             totalEscapeChance += escapeChance;
-                            enemyCount += 1;
+                            enemyCount++;
                         }
                     }
                 }

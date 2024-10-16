@@ -236,7 +236,7 @@ EvtScript N(EVS_TakeTurn) = {
     EndIf
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_TRIGGER_EVENTS)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Set(LVarF, LVar0)
     Switch(LVarF)
         CaseOrEq(HIT_RESULT_HIT)

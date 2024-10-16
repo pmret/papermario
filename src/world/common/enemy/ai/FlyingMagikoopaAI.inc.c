@@ -105,7 +105,7 @@ void N(FlyingMagikoopaAI_15)(Evt* arg0, MobileAISettings* arg1, EnemyDetectVolum
                     isCCW = TRUE;
                 } else {
                     angleAdjust += 5;
-                    iterations += 1;
+                    iterations++;
                     isCCW = FALSE;
                 }
 

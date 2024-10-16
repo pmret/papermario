@@ -243,7 +243,7 @@ void filemenu_draw_contents_choose_name(
                             }
                         }
                         if (specialChar == 0xC6) {
-                            xOffset -= 1;
+                            xOffset--;
                         }
                         if (specialChar == 0xC9) {
 #if VERSION_PAL
@@ -264,7 +264,7 @@ void filemenu_draw_contents_choose_name(
 #endif
                         }
                         if (specialChar == 0xC6 || specialChar == 0xCA || specialChar == 0xC9) {
-                            yOffset -= 1;
+                            yOffset--;
                             xNudge = 9;
                         }
 #if VERSION_PAL
@@ -303,7 +303,7 @@ void filemenu_draw_contents_choose_name(
                         }
                     }
                     if (specialChar == 0xC6) {
-                        xOffset -= 1;
+                        xOffset--;
                     }
                     if (specialChar == 0xC9) {
                         xOffset += FILEMENU_C9_OFFSET;
@@ -320,7 +320,7 @@ void filemenu_draw_contents_choose_name(
 #endif
                     }
                     if (specialChar == 0xC6 || specialChar == 0xCA || specialChar == 0xC9) {
-                        yOffset -= 1;
+                        yOffset--;
                         xNudge = 9;
                     }
 #if VERSION_PAL
