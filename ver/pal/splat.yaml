@@ -15,6 +15,7 @@ options:
   symbol_addrs_path: ver/pal/symbol_addrs.txt
   ld_script_path: ver/pal/papermario.ld
   ld_symbol_header_path: ver/pal/build/include/ld_addrs.h
+  ld_generate_symbol_per_data_segment: True
   src_path: src
   asm_path: ver/pal/asm
   asset_path: assets/pal

@@ -8,20 +8,22 @@ options:
   platform: n64
   subalign: 8
 
+
   base_path: ../..
   target_path: ver/ique/baserom.z64
   extensions_path: tools/splat_ext
   symbol_addrs_path: ver/ique/symbol_addrs.txt
   ld_script_path: ver/ique/papermario.ld
   ld_symbol_header_path: ver/ique/build/include/ld_addrs.h
+  ld_generate_symbol_per_data_segment: True
   src_path: src
   asm_path: ver/ique/asm
   asset_path: assets/ique
   build_path: ver/ique/build
   cache_path: ver/ique/.splat_cache
   create_undefined_funcs_auto: False
-  undefined_funcs_auto_path: ver/ique/undefined_funcs_auto.txt
   create_undefined_syms_auto: False
+  undefined_funcs_auto_path: ver/ique/undefined_funcs_auto.txt
   undefined_syms_auto_path: ver/ique/undefined_syms_auto.txt
   symbol_name_format: IQUE_$VRAM
   symbol_name_format_no_rom: IQUE_$VRAM_$SEG
