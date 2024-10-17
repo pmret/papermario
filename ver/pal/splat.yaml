@@ -1420,22 +1420,22 @@ segments:
       type: .data
       name: pause_gfx_de
       subsegments:
-      - [0x169350, ci4,        banner_hp_de, 64, 16]
-      - [0x169550, palette,    banner_hp_de]
-      - [0x169750, ci4,        banner_fp_de, 64, 16]
-      - [0x169950, palette,    banner_fp_de]
-      - [0x169B50, ci4,        banner_bp_de, 64, 16]
-      - [0x169D50, palette,    banner_bp_de]
-      - [0x169F50, ci4,        banner_boots_de, 48, 16]
-      - [0x16A0D0, palette,    banner_boots_de]
-      - [0x16A2D0, ci4,        banner_hammer_de, 48, 16]
-      - [0x16A450, palette,    banner_hammer_de]
-      - [0x16A650, ci4,        banner_star_energy_de, 48, 16]
-      - [0x16A7D0, palette,    banner_star_energy_de]
-      - [0x16A9D0, ci4,        available_de, 64, 16]
-      - [0x16ABD0, palette,    available_de]
-      - [0x16ADD0, ci4,        prompt_check_abilities_de, 128, 16]
-      - [0x16B1D0, palette,    prompt_check_abilities_de]
+      - [0x169350, ci4,        de/banner_hp, 64, 16]
+      - [0x169550, palette,    de/banner_hp]
+      - [0x169750, ci4,        de/banner_fp, 64, 16]
+      - [0x169950, palette,    de/banner_fp]
+      - [0x169B50, ci4,        de/banner_bp, 64, 16]
+      - [0x169D50, palette,    de/banner_bp]
+      - [0x169F50, ci4,        de/banner_boots, 48, 16]
+      - [0x16A0D0, palette,    de/banner_boots]
+      - [0x16A2D0, ci4,        de/banner_hammer, 48, 16]
+      - [0x16A450, palette,    de/banner_hammer]
+      - [0x16A650, ci4,        de/banner_star_energy, 48, 16]
+      - [0x16A7D0, palette,    de/banner_star_energy]
+      - [0x16A9D0, ci4,        de/available, 64, 16]
+      - [0x16ABD0, palette,    de/available]
+      - [0x16ADD0, ci4,        de/prompt_check_abilities, 128, 16]
+      - [0x16B1D0, palette,    de/prompt_check_abilities]
       - [0x16B3D0]
   - type: code
     dir: pause
@@ -1448,22 +1448,22 @@ segments:
       type: .data
       name: pause_gfx_fr
       subsegments:
-      - [0x16B3D0, ci4,        banner_hp_fr, 64, 16]
-      - [0x16B5D0, palette,    banner_hp_fr]
-      - [0x16B7D0, ci4,        banner_fp_fr, 64, 16]
-      - [0x16B9D0, palette,    banner_fp_fr]
-      - [0x16BBD0, ci4,        banner_bp_fr, 64, 16]
-      - [0x16BDD0, palette,    banner_bp_fr]
-      - [0x16BFD0, ci4,        banner_boots_fr, 48, 16]
-      - [0x16C150, palette,    banner_boots_fr]
-      - [0x16C350, ci4,        banner_hammer_fr, 48, 16]
-      - [0x16C4D0, palette,    banner_hammer_fr]
-      - [0x16C6D0, ci4,        banner_star_energy_fr, 48, 16]
-      - [0x16C850, palette,    banner_star_energy_fr]
-      - [0x16CA50, ci4,        available_fr, 64, 16]
-      - [0x16CC50, palette,    available_fr]
-      - [0x16CE50, ci4,        prompt_check_abilities_fr, 128, 16]
-      - [0x16D250, palette,    prompt_check_abilities_fr]
+      - [0x16B3D0, ci4,        fr/banner_hp, 64, 16]
+      - [0x16B5D0, palette,    fr/banner_hp]
+      - [0x16B7D0, ci4,        fr/banner_fp, 64, 16]
+      - [0x16B9D0, palette,    fr/banner_fp]
+      - [0x16BBD0, ci4,        fr/banner_bp, 64, 16]
+      - [0x16BDD0, palette,    fr/banner_bp]
+      - [0x16BFD0, ci4,        fr/banner_boots, 48, 16]
+      - [0x16C150, palette,    fr/banner_boots]
+      - [0x16C350, ci4,        fr/banner_hammer, 48, 16]
+      - [0x16C4D0, palette,    fr/banner_hammer]
+      - [0x16C6D0, ci4,        fr/banner_star_energy, 48, 16]
+      - [0x16C850, palette,    fr/banner_star_energy]
+      - [0x16CA50, ci4,        fr/available, 64, 16]
+      - [0x16CC50, palette,    fr/available]
+      - [0x16CE50, ci4,        fr/prompt_check_abilities, 128, 16]
+      - [0x16D250, palette,    fr/prompt_check_abilities]
       - [0x16D450]
   - type: code
     dir: pause
@@ -1476,22 +1476,22 @@ segments:
       type: .data
       name: pause_gfx_es
       subsegments:
-      - [0x16D450, ci4,        banner_hp_es, 64, 16]
-      - [0x16D650, palette,    banner_hp_es]
-      - [0x16D850, ci4,        banner_fp_es, 64, 16]
-      - [0x16DA50, palette,    banner_fp_es]
-      - [0x16DC50, ci4,        banner_bp_es, 64, 16]
-      - [0x16DE50, palette,    banner_bp_es]
-      - [0x16E050, ci4,        banner_boots_es, 48, 16]
-      - [0x16E1D0, palette,    banner_boots_es]
-      - [0x16E3D0, ci4,        banner_hammer_es, 48, 16]
-      - [0x16E550, palette,    banner_hammer_es]
-      - [0x16E750, ci4,        banner_star_energy_es, 48, 16]
-      - [0x16E8D0, palette,    banner_star_energy_es]
-      - [0x16EAD0, ci4,        available_es, 64, 16]
-      - [0x16ECD0, palette,    available_es]
-      - [0x16EED0, ci4,        prompt_check_abilities_es, 128, 16]
-      - [0x16F2D0, palette,    prompt_check_abilities_es]
+      - [0x16D450, ci4,        es/banner_hp, 64, 16]
+      - [0x16D650, palette,    es/banner_hp]
+      - [0x16D850, ci4,        es/banner_fp, 64, 16]
+      - [0x16DA50, palette,    es/banner_fp]
+      - [0x16DC50, ci4,        es/banner_bp, 64, 16]
+      - [0x16DE50, palette,    es/banner_bp]
+      - [0x16E050, ci4,        es/banner_boots, 48, 16]
+      - [0x16E1D0, palette,    es/banner_boots]
+      - [0x16E3D0, ci4,        es/banner_hammer, 48, 16]
+      - [0x16E550, palette,    es/banner_hammer]
+      - [0x16E750, ci4,        es/banner_star_energy, 48, 16]
+      - [0x16E8D0, palette,    es/banner_star_energy]
+      - [0x16EAD0, ci4,        es/available, 64, 16]
+      - [0x16ECD0, palette,    es/available]
+      - [0x16EED0, ci4,        es/prompt_check_abilities, 128, 16]
+      - [0x16F2D0, palette,    es/prompt_check_abilities]
       - [0x16F4D0]
 
   - type: code
@@ -1528,34 +1528,30 @@ segments:
     start: 0x17A160
     vram: 0x8023E000
     subsegments:
-    - [0x17A160, c, battle/16C8E0]
-    - [0x17CF60, c, battle/btl_states_actions]
-    - [0x184ED0, c, battle/camera]
-    - [0x18AEC0, c, battle/actors]
-    - [0x18AEC0, c, battle/popup_messages]
-    - [0x18D8F0, c, battle/entity_model_icons]
-    - [0x18D8F0, c, battle/partner_dma]
-    - [0x18D8F0, c, battle/dmg_item]
-    - [0x18F250, c, battle/181810]
-    - [0x190570, c, battle/actor_rendering]
-    - [0x19A1D0, c, battle/level_up_pal]  # modified
-    - [0x19CE80, c, battle/player_events]
-    - [0x19E690, c, battle/190A10]
-    - [0x19E7A0, c, battle/190B20]
-    - [0x1A4420, c, battle/use_items]
-    - [0x1A4680, c, battle/use_moves]
-    - [0x1A4710, c, battle/action_cmd]
-    - [0x1A5BB0, c, battle/actor_api]
-    - [0x1AD760, c, battle/dmg_player]
-    - [0x1B34A0, c, battle/1A5830]
-    - [0x1BA3D0, c, battle/dmg_partner]
-    - [0x1BCD90, c, battle/standard_events]
-    - [0x1BCEA0, c, battle/use_star_powers]
-    - [0x1BCF40, .data, battle/16C8E0]
-    - [0x1BD230, .data, battle/camera]
-    - [0x1BD510, .data, battle/actors]
-    - [0x1BFB20, .data, battle/popup_messages]
-    - [0x1BFF20, .data, battle/entity_model_icons]
+    - [auto, c, battle/16C8E0]
+    - [auto, c, battle/btl_states_actions]
+    - [auto, c, battle/camera]
+    - [auto, c, battle/actors]
+    - [auto, c, battle/popup_messages]
+    - [auto, c, battle/entity_model_icons]
+    - [auto, c, battle/partner_dma]
+    - [auto, c, battle/dmg_item]
+    - [auto, c, battle/181810]
+    - [auto, c, battle/actor_rendering]
+    - [auto, c, battle/level_up]
+    - [auto, c, battle/player_events]
+    - [auto, c, battle_ui_gfx]
+    - [auto, c, battle/190A10]
+    - [auto, c, battle/190B20]
+    - [auto, c, battle/use_items]
+    - [auto, c, battle/use_moves]
+    - [auto, c, battle/action_cmd]
+    - [auto, c, battle/actor_api]
+    - [auto, c, battle/dmg_player]
+    - [auto, c, battle/1A5830]
+    - [auto, c, battle/dmg_partner]
+    - [auto, c, battle/standard_events]
+    - [auto, c, battle/use_star_powers]
     - start: 0x1BFF20
       type: .data
       name: battle/entity_model_icons
@@ -1563,12 +1559,6 @@ segments:
       - [0x1BFF20, ci4, ui/battle/cursor_hand, 32, 32]
       - [0x1C0120, palette, ui/battle/cursor_hand]
       - [0x1C0140]
-    - [0x1C0530, .data, battle/partner_dma]
-    - [0x1C0620, .data, battle/181810]
-    - [0x1C06A0, .data, battle/actor_rendering]
-    - [0x1C0770, .data, battle/level_up_pal]  # modified
-    - [0x1C1280, .data, battle/player_events]
-    - [0x1C5C60, .data, battle_ui_gfx]
     - start: 0x1C5C60
       type: .data
       name: battle_ui_gfx
@@ -1724,27 +1714,7 @@ segments:
       - [0x1CD4C0, ia8, ui/battle/projector_reel, 64, 64]
       - [0x1CE4C0, ia8, ui/battle/swap_background, 48, 16]
       - [0x1CE7C0]
-    - [0x1D0060, .data, battle/190B20]
-    - [0x1D0330, .data, battle/use_items]
-    - [0x1D0630, .data, battle/use_moves]
-    - [0x1D0940, .data, battle/action_cmd]
-    - [0x1D0D90, .data, battle/dmg_player]
-    - [0x1D0E90, .data, battle/1A5830]
-    - [0x1D0ED0, .data, battle/standard_events]
-    - [0x1D8F80, .data, battle/use_star_powers]
-    - [0x1D9110, .rodata, battle/16C8E0]
-    - [0x1D9238, .rodata, battle/btl_states_actions]
-    - [0x1D93B0, .rodata, battle/camera]
-    - [0x1D9540, .rodata, battle/popup_messages]
-    - [0x1D9B00, .rodata, battle/actor_rendering]
-    - [0x1D9CA0, .rodata, battle/level_up_pal]
-    - [0x1D9D40, .rodata, battle/player_events]
-    - [0x1D9D50, .rodata, battle/190B20]
-    - [0x1D9E50, .rodata, battle/action_cmd]
-    - [0x1D9F70, .rodata, battle/actor_api]
-    - [0x1DA030, .rodata, battle/dmg_player]
-    - [0x1DA140, .rodata, battle/1A5830]
-    - [0x1DA1E0]
+    - [0x1D0060]
 
   - [0x1DA1E0, pm_icons, icon]
 
@@ -1779,17 +1749,17 @@ segments:
       - [0x259CE8]
       - [0x259CF0, ia8, title/languages, 88, 16]
       - [0x25A270]
-      - [0x25A278, ia8, title/start_game_de, 88, 16]
+      - [0x25A278, ia8, de/title/start_game, 88, 16]
       - [0x25A7F8]
-      - [0x25A800, ia8, title/languages_de, 80, 16]
+      - [0x25A800, ia8, de/title/languages, 80, 16]
       - [0x25AD00]
-      - [0x25AD08, ia8, title/start_game_fr, 144, 16]
+      - [0x25AD08, ia8, fr/title/start_game, 144, 16]
       - [0x25B608]
-      - [0x25B610, ia8, title/languages_fr, 64, 16]
+      - [0x25B610, ia8, fr/title/languages, 64, 16]
       - [0x25BA10]
-      - [0x25BA18, ia8, title/start_game_es, 120, 16]
+      - [0x25BA18, ia8, es/title/start_game, 120, 16]
       - [0x25C198]
-      - [0x25C1A0, ia8, title/languages_es, 64, 16]
+      - [0x25C1A0, ia8, es/title/languages, 64, 16]
   # These imgs should be individually split as 16x16 each flag
   # but for convenience we'll combine them seperate by frames
   - name: titlemenu_flags
@@ -8165,16 +8135,398 @@ segments:
     subsegments:
     - [auto, c, peach_focus_alt]
 
-  - { start: 0x7F2BE0, type: bin, name: level_up, vram: 0x802A1000 }
-  - { start: 0x7F8000, type: bin, name: level_up_en_de, vram: 0x802A6420 }
-  - { start: 0x7FEAD0, type: bin, name: level_up_fr, vram: 0x802A6420 }
-  - { start: 0x806610, type: bin, name: level_up_es, vram: 0x802A6420 }
-
-  - { start: 0x80E070, type: bin, name: starpoint, vram: 0x802A1000 }
-  - { start: 0x818CF0, type: bin, name: starpoint_en, vram: 0x802ABC80 }
-  - { start: 0x81B030, type: bin, name: starpoint_de, vram: 0x802ABC80 }
-  - { start: 0x81D370, type: bin, name: starpoint_fr, vram: 0x802ABC80 }
-  - { start: 0x81F6B0, type: bin, name: starpoint_es, vram: 0x802ABC80 }
+  - type: code
+    name: level_up
+    start: 0x7F2BE0
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, level_up]
+    - start: 0x7F2BE0
+      type: .data
+      name: level_up
+      subsegments:
+      - [0x7F2BE0, ci4, level_up/heart, 40, 40]
+      - [0x7F2F00, palette, level_up/heart]
+      - [0x7F2F20, ci4, level_up/flower, 40, 40]
+      - [0x7F3240, palette, level_up/flower]
+      - [0x7F3260, ci4, level_up/leaves, 40, 40]
+      - [0x7F3580, palette, level_up/leaves]
+      - [0x7F35A0, ci4, level_up/badge, 40, 40]
+      - [0x7F38C0, palette, level_up/badge]
+      - [0x7F38E0, ci4, level_up/FP, 32, 24]
+      - [0x7F3A60, palette, level_up/FP]
+      - [0x7F3A80, ci4, level_up/BP, 32, 24]
+      - [0x7F3C00, palette, level_up/BP]
+      - [0x7F3C20, ci4, level_up/HP, 32, 24]
+      - [0x7F3DA0, palette, level_up/HP]
+      - [0x7F3DC0, ci4, de/level_up/FP, 32, 24]
+      - [0x7F3F40, palette, de/level_up/FP]
+      - [0x7F3F60, ci4, de/level_up/BP, 32, 24]
+      - [0x7F40E0, palette, de/level_up/BP]
+      - [0x7F4100, ci4, de/level_up/HP, 32, 24]
+      - [0x7F4280, palette, de/level_up/HP]
+      - [0x7F42A0, ci4, fr/level_up/FP, 32, 24]
+      - [0x7F4420, palette, fr/level_up/FP]
+      - [0x7F4440, ci4, fr/level_up/BP, 32, 24]
+      - [0x7F45C0, palette, fr/level_up/BP]
+      - [0x7F45E0, ci4, fr/level_up/HP, 32, 24]
+      - [0x7F4760, palette, fr/level_up/HP]
+      - [0x7F4780, ci4, es/level_up/FP, 32, 24]
+      - [0x7F4900, palette, es/level_up/FP]
+      - [0x7F4920, ci4, es/level_up/BP, 32, 24]
+      - [0x7F4AA0, palette, es/level_up/BP]
+      - [0x7F4AC0, ci4, es/level_up/HP, 32, 24]
+      - [0x7F4C40, palette, es/level_up/HP]
+      - [0x7F4C60, ci4, level_up/digit_0, 8, 16]
+      - [0x7F4CA0, palette, level_up/digit_0]
+      - [0x7F4CC0, ci4, level_up/digit_1, 8, 16]
+      - [0x7F4D00, palette, level_up/digit_1]
+      - [0x7F4D20, ci4, level_up/digit_2, 8, 16]
+      - [0x7F4D60, palette, level_up/digit_2]
+      - [0x7F4D80, ci4, level_up/digit_3, 8, 16]
+      - [0x7F4DC0, palette, level_up/digit_3]
+      - [0x7F4DE0, ci4, level_up/digit_4, 8, 16]
+      - [0x7F4E20, palette, level_up/digit_4]
+      - [0x7F4E40, ci4, level_up/digit_5, 8, 16]
+      - [0x7F4E80, palette, level_up/digit_5]
+      - [0x7F4EA0, ci4, level_up/digit_6, 8, 16]
+      - [0x7F4EE0, palette, level_up/digit_6]
+      - [0x7F4F00, ci4, level_up/digit_7, 8, 16]
+      - [0x7F4F40, palette, level_up/digit_7]
+      - [0x7F4F60, ci4, level_up/digit_8, 8, 16]
+      - [0x7F4FA0, palette, level_up/digit_8]
+      - [0x7F4FC0, ci4, level_up/digit_9, 8, 16]
+      - [0x7F5000, palette, level_up/digit_9]
+      - [0x7F5020, ci4, level_up/small_digit_0, 8, 8]
+      - [0x7F5040, palette, level_up/small_digit_0]
+      - [0x7F5060, ci4, level_up/small_digit_1, 8, 8]
+      - [0x7F5080, palette, level_up/small_digit_1]
+      - [0x7F50A0, ci4, level_up/small_digit_2, 8, 8]
+      - [0x7F50C0, palette, level_up/small_digit_2]
+      - [0x7F50E0, ci4, level_up/small_digit_3, 8, 8]
+      - [0x7F5100, palette, level_up/small_digit_3]
+      - [0x7F5120, ci4, level_up/small_digit_4, 8, 8]
+      - [0x7F5140, palette, level_up/small_digit_4]
+      - [0x7F5160, ci4, level_up/small_digit_5, 8, 8]
+      - [0x7F5180, palette, level_up/small_digit_5]
+      - [0x7F51A0, ci4, level_up/small_digit_6, 8, 8]
+      - [0x7F51C0, palette, level_up/small_digit_6]
+      - [0x7F51E0, ci4, level_up/small_digit_7, 8, 8]
+      - [0x7F5200, palette, level_up/small_digit_7]
+      - [0x7F5220, ci4, level_up/small_digit_8, 8, 8]
+      - [0x7F5240, palette, level_up/small_digit_8]
+      - [0x7F5260, ci4, level_up/small_digit_9, 8, 8]
+      - [0x7F5280, palette, level_up/small_digit_9]
+      - [0x7F52A0, ci4, level_up/small_arrow, 8, 8]
+      - [0x7F52C0, palette, level_up/small_arrow]
+      - [0x7F52E0, palette, level_up/digit_0.red]
+      - [0x7F5300, palette, level_up/digit_1.red]
+      - [0x7F5320, palette, level_up/digit_2.red]
+      - [0x7F5340, palette, level_up/digit_3.red]
+      - [0x7F5360, palette, level_up/digit_4.red]
+      - [0x7F5380, palette, level_up/digit_5.red]
+      - [0x7F53A0, palette, level_up/digit_6.red]
+      - [0x7F53C0, palette, level_up/digit_7.red]
+      - [0x7F53E0, palette, level_up/digit_8.red]
+      - [0x7F5400, palette, level_up/digit_9.red]
+      - [0x7F5420, palette, level_up/small_digit_0.red]
+      - [0x7F5440, palette, level_up/small_digit_1.red]
+      - [0x7F5460, palette, level_up/small_digit_2.red]
+      - [0x7F5480, palette, level_up/small_digit_3.red]
+      - [0x7F54A0, palette, level_up/small_digit_4.red]
+      - [0x7F54C0, palette, level_up/small_digit_5.red]
+      - [0x7F54E0, palette, level_up/small_digit_6.red]
+      - [0x7F5500, palette, level_up/small_digit_7.red]
+      - [0x7F5520, palette, level_up/small_digit_8.red]
+      - [0x7F5540, palette, level_up/small_digit_9.red]
+      - [0x7F5560, palette, level_up/small_arrow.red]
+      - [0x7F5580, palette, level_up/digit_0.blue]
+      - [0x7F55A0, palette, level_up/digit_1.blue]
+      - [0x7F55C0, palette, level_up/digit_2.blue]
+      - [0x7F55E0, palette, level_up/digit_3.blue]
+      - [0x7F5600, palette, level_up/digit_4.blue]
+      - [0x7F5620, palette, level_up/digit_5.blue]
+      - [0x7F5640, palette, level_up/digit_6.blue]
+      - [0x7F5660, palette, level_up/digit_7.blue]
+      - [0x7F5680, palette, level_up/digit_8.blue]
+      - [0x7F56A0, palette, level_up/digit_9.blue]
+      - [0x7F56C0, palette, level_up/small_digit_0.blue]
+      - [0x7F56E0, palette, level_up/small_digit_1.blue]
+      - [0x7F5700, palette, level_up/small_digit_2.blue]
+      - [0x7F5720, palette, level_up/small_digit_3.blue]
+      - [0x7F5740, palette, level_up/small_digit_4.blue]
+      - [0x7F5760, palette, level_up/small_digit_5.blue]
+      - [0x7F5780, palette, level_up/small_digit_6.blue]
+      - [0x7F57A0, palette, level_up/small_digit_7.blue]
+      - [0x7F57C0, palette, level_up/small_digit_8.blue]
+      - [0x7F57E0, palette, level_up/small_digit_9.blue]
+      - [0x7F5800, palette, level_up/small_arrow.blue]
+      - [0x7F5820, ci4, level_up/select_one_to_upgrade, 208, 16]
+      - [0x7F5EA0, palette, level_up/select_one_to_upgrade]
+      - [0x7F5EC0, ci4, de/level_up/select_one_to_upgrade, 208, 16]
+      - [0x7F6540, palette, de/level_up/select_one_to_upgrade]
+      - [0x7F6560, ci4, fr/level_up/select_one_to_upgrade, 208, 16]
+      - [0x7F6BE0, palette, fr/level_up/select_one_to_upgrade]
+      - [0x7F6C00, ci4, es/level_up/select_one_to_upgrade, 208, 16]
+      - [0x7F7280, palette, es/level_up/select_one_to_upgrade]
+      - [0x7F72A0]
+  - type: code
+    name: level_up_letters_en_de
+    start: 0x7F8000
+    vram: 0x802A6420
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [0x7F8000, c, level_up_letters_en_de]
+    - type: .data
+      name: level_up_letters_en_de
+      start: 0x7F8000
+      subsegments:
+      - [0x7F8000]
+      - [0x7F8018, vtx, level_up/draw_second_E]
+      - [0x7F8098, vtx, level_up/draw_V]
+      - [0x7F8118, vtx, level_up/draw_E]
+      - [0x7F8198, vtx, level_up/draw_second_L]
+      - [0x7F8218, vtx, level_up/draw_L]
+      - [0x7F8298, vtx, level_up/draw_P]
+      - [0x7F8318, vtx, level_up/draw_U]
+      - [0x7F8398, vtx, level_up/draw_exclamation_mark]
+      - [0x7F8418, ia8, level_up/big_V, 64, 64]
+      - [0x7F9418, gfx, level_up/big_V]
+      - [0x7F9490, ia8, level_up/big_P, 64, 64]
+      - [0x7FA490, gfx, level_up/big_P]
+      - [0x7FA508, ia8, level_up/big_exclamation_mark, 64, 64]
+      - [0x7FB508, gfx, level_up/big_exclamation_mark]
+      - [0x7FB580, ia8, level_up/big_U, 64, 64]
+      - [0x7FC580, gfx, level_up/big_U]
+      - [0x7FC5F8, ia8, level_up/big_L, 64, 64]
+      - [0x7FD5F8, gfx, level_up/big_L]
+      - [0x7FD670, ia8, level_up/big_E, 64, 64]
+      - [0x7FE670, gfx, level_up/big_E]
+      - [0x7FE6E8]
+  - type: code
+    name: level_up_letters_fr
+    start: 0x7FEAD0
+    vram: 0x802A6420
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [0x7FEAD0, c, level_up_letters_fr]
+    - type: .data
+      name: level_up_letters_fr
+      start: 0x7FEAD0
+      subsegments:
+      - [0x7FEAD0]
+      - [0x7FEAE8, vtx, fr/level_up/draw_NI]
+      - [0x7FEB68, vtx, fr/level_up/draw_VE]
+      - [0x7FEBE8, vtx, fr/level_up/draw_AU]
+      - [0x7FEC68, vtx, fr/level_up/draw_SU]
+      - [0x7FECE8, vtx, fr/level_up/draw_PE]
+      - [0x7FED68, vtx, fr/level_up/draw_RI]
+      - [0x7FEDE8, vtx, fr/level_up/draw_EU]
+      - [0x7FEE68, vtx, fr/level_up/draw_R_exclamation_mark]
+      - [0x7FEEE8, ia8, fr/level_up/big_NI, 64, 54]
+      - [0x7FFC68, ia8, fr/level_up/big_VE, 64, 52]
+      - [0x800968, ia8, fr/level_up/big_AU, 64, 55]
+      - [0x801728, ia8, fr/level_up/big_SU, 64, 55]
+      - [0x8024E8, ia8, fr/level_up/big_RI, 64, 55]
+      - [0x8032A8, ia8, fr/level_up/big_EU, 64, 55]
+      - [0x804068, ia8, fr/level_up/big_R_exclamation_mark, 64, 56]
+      - [0x804E68, ia16, fr/level_up/big_PE, 64, 32]
+      - [0x805E68, gfx, fr/level_up/big_NI]
+      - [0x805EE0, gfx, fr/level_up/big_VE]
+      - [0x805F58, gfx, fr/level_up/big_AU]
+      - [0x805FD0, gfx, fr/level_up/big_SU]
+      - [0x806048, gfx, fr/level_up/big_PE]
+      - [0x8060C0, gfx, fr/level_up/big_RI]
+      - [0x806138, gfx, fr/level_up/big_EU]
+      - [0x8061B0, gfx, fr/level_up/big_R_exclamation_mark]
+      - [0x806228]
+  - type: code
+    name: level_up_letters_es
+    start: 0x806610
+    vram: 0x802A6420
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [0x806610, c, level_up_letters_es]
+    - type: .data
+      name: level_up_letters_es
+      start: 0x806610
+      subsegments:
+      - [0x806610]
+      - [0x806628, vtx, es/level_up/draw_UB]
+      - [0x8066A8, vtx, es/level_up/draw_ES]
+      - [0x806728, vtx, es/level_up/draw_UN]
+      - [0x8067A8, vtx, es/level_up/draw_inverted_excl_mark_S]
+      - [0x806828, vtx, es/level_up/draw_NI]
+      - [0x8068A8, vtx, es/level_up/draw_L_exclamation_mark]
+      - [0x806928, vtx, es/level_up/draw_VE]
+      - [0x8069A8, ia8, es/level_up/big_inverted_excl_mark_S, 64, 64]
+      - [0x8079A8, gfx, es/level_up/big_inverted_excl_mark_S]
+      - [0x807A20, ia8, es/level_up/big_UB, 64, 64]
+      - [0x808A20, gfx, es/level_up/big_UB]
+      - [0x808A98, ia8, es/level_up/big_ES, 64, 64]
+      - [0x809A98, gfx, es/level_up/big_ES]
+      - [0x809B10, ia8, es/level_up/big_UN, 64, 64]
+      - [0x80AB10, gfx, es/level_up/big_UN]
+      - [0x80AB88, ia8, es/level_up/big_NI, 64, 64]
+      - [0x80BB88, gfx, es/level_up/big_NI]
+      - [0x80BC00, ia8, es/level_up/big_VE, 64, 64]
+      - [0x80CC00, gfx, es/level_up/big_VE]
+      - [0x80CC78, ia8, es/level_up/big_L_exclamation_mark, 64, 64]
+      - [0x80DC78, gfx, es/level_up/big_L_exclamation_mark]
+      - [0x80DCF0]
+  - type: code
+    name: starpoint
+    start: 0x80E070
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, starpoint]
+    - type: .data
+      name: starpoint
+      start: 0x80E070
+      subsegments:
+      - [0x80E070, vtx, starpoint/digit_0]
+      - [0x80E0B0, ia8, starpoint/digit_0, 64, 64]
+      - [0x80F0B0, gfx, starpoint/load_digit_0]
+      - [0x80F128, gfx, starpoint/__render_digit_0]
+      - [0x80F170, gfx, starpoint/_render_digit_0]
+      - [0x80F180, gfx, starpoint/render_digit_0]
+      - [0x80F190, vtx, starpoint/digit_1]
+      - [0x80F1D0, ia8, starpoint/digit_1, 64, 64]
+      - [0x8101D0, gfx, starpoint/load_digit_1]
+      - [0x810248, gfx, starpoint/__render_digit_1]
+      - [0x810290, gfx, starpoint/_render_digit_1]
+      - [0x8102A0, gfx, starpoint/render_digit_1]
+      - [0x8102B0, vtx, starpoint/digit_2]
+      - [0x8102F0, ia8, starpoint/digit_2, 64, 64]
+      - [0x8112F0, gfx, starpoint/load_digit_2]
+      - [0x811368, gfx, starpoint/__render_digit_2]
+      - [0x8113B0, gfx, starpoint/_render_digit_2]
+      - [0x8113C0, gfx, starpoint/render_digit_2]
+      - [0x8113D0, vtx, starpoint/digit_3]
+      - [0x811410, ia8, starpoint/digit_3, 64, 64]
+      - [0x812410, gfx, starpoint/load_digit_3]
+      - [0x812488, gfx, starpoint/__render_digit_3]
+      - [0x8124D0, gfx, starpoint/_render_digit_3]
+      - [0x8124E0, gfx, starpoint/render_digit_3]
+      - [0x8124F0, vtx, starpoint/digit_4]
+      - [0x812530, ia8, starpoint/digit_4, 64, 64]
+      - [0x813530, gfx, starpoint/load_digit_4]
+      - [0x8135A8, gfx, starpoint/__render_digit_4]
+      - [0x8135F0, gfx, starpoint/_render_digit_4]
+      - [0x813600, gfx, starpoint/render_digit_4]
+      - [0x813610, vtx, starpoint/digit_5]
+      - [0x813650, ia8, starpoint/digit_5, 64, 64]
+      - [0x814650, gfx, starpoint/load_digit_5]
+      - [0x8146C8, gfx, starpoint/__render_digit_5]
+      - [0x814710, gfx, starpoint/_render_digit_5]
+      - [0x814720, gfx, starpoint/render_digit_5]
+      - [0x814730, vtx, starpoint/digit_6]
+      - [0x814770, ia8, starpoint/digit_6, 64, 64]
+      - [0x815770, gfx, starpoint/load_digit_6]
+      - [0x8157E8, gfx, starpoint/__render_digit_6]
+      - [0x815830, gfx, starpoint/_render_digit_6]
+      - [0x815840, gfx, starpoint/render_digit_6]
+      - [0x815850, vtx, starpoint/digit_7]
+      - [0x815890, ia8, starpoint/digit_7, 64, 64]
+      - [0x816890, gfx, starpoint/load_digit_7]
+      - [0x816908, gfx, starpoint/__render_digit_7]
+      - [0x816950, gfx, starpoint/_render_digit_7]
+      - [0x816960, gfx, starpoint/render_digit_7]
+      - [0x816970, vtx, starpoint/digit_8]
+      - [0x8169B0, ia8, starpoint/digit_8, 64, 64]
+      - [0x8179B0, gfx, starpoint/load_digit_8]
+      - [0x817A28, gfx, starpoint/__render_digit_8]
+      - [0x817A70, gfx, starpoint/_render_digit_8]
+      - [0x817A80, gfx, starpoint/render_digit_8]
+      - [0x817A90, vtx, starpoint/digit_9]
+      - [0x817AD0, ia8, starpoint/digit_9, 64, 64]
+      - [0x818AD0, gfx, starpoint/load_digit_9]
+      - [0x818B48, gfx, starpoint/__render_digit_9]
+      - [0x818B90, gfx, starpoint/_render_digit_9]
+      - [0x818BA0, gfx, starpoint/render_digit_9]
+      - [0x818BB0]
+  - type: code
+    start: 0x818CF0
+    vram: 0x802ABC80
+    name: starpoint_en
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, starpoint_en]
+    - type: .data
+      name: starpoint_en
+      start: 0x818CF0
+      subsegments:
+      - [0x818CF0]
+      - [0x818D08, ia8, starpoint/starpoint, 128, 32]
+      - [0x819D08, gfx, starpoint/load_starpoint]
+      - [0x819D80, vtx, starpoint/starpoint]
+      - [0x819DC0]
+      - [0x819E88, vtx, starpoint/starpoints]
+      - [0x819EC8, ia8, starpoint/starpoints, 128, 32]
+      - [0x81AEC8, gfx, starpoint/load_starpoints]
+      - [0x81AF40]
+  - type: code
+    start: 0x81B030
+    vram: 0x802ABC80
+    name: starpoint_de
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, starpoint_de]
+    - start: 0x81B030
+      type: .data
+      name: starpoint_de
+      subsegments:
+      - [0x81B030]
+      - [0x81B048, ia8, de/starpoint/starpoint, 128, 32]
+      - [0x81C048, gfx, de/starpoint/load_starpoint]
+      - [0x81C0C0, vtx, de/starpoint/starpoint]
+      - [0x81C100]
+      - [0x81C1C8, ia8, de/starpoint/starpoints, 128, 32]
+      - [0x81D1C8, gfx, de/starpoint/load_starpoints]
+      - [0x81D240, vtx, de/starpoint/starpoints]
+      - [0x81D280]
+  - type: code
+    start: 0x81D370
+    vram: 0x802ABC80
+    name: starpoint_fr
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, starpoint_fr]
+    - start: 0x81D370
+      type: .data
+      name: starpoint_fr
+      subsegments:
+      - [0x81D370]
+      - [0x81D388, ia8, fr/starpoint/starpoint, 128, 32]
+      - [0x81E388, gfx, fr/starpoint/load_starpoint]
+      - [0x81E400, vtx, fr/starpoint/starpoint]
+      - [0x81E440]
+      - [0x81E508, ia8, fr/starpoint/starpoints, 128, 32]
+      - [0x81F508, gfx, fr/starpoint/load_starpoints]
+      - [0x81F580, vtx, fr/starpoint/starpoints]
+      - [0x81F5C0]
+  - type: code
+    start: 0x81F6B0
+    vram: 0x802ABC80
+    name: starpoint_es
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, starpoint_es]
+    - start: 0x81F6B0
+      type: .data
+      name: starpoint_es
+      subsegments:
+      - [0x81F6B0]
+      - [0x81F6C8, ia8, es/starpoint/starpoint, 128, 32]
+      - [0x8206C8, gfx, es/starpoint/load_starpoint]
+      - [0x820740, vtx, es/starpoint/starpoint]
+      - [0x820780]
+      - [0x820848, ia8, es/starpoint/starpoints, 128, 32]
+      - [0x821848, gfx, es/starpoint/load_starpoints]
+      - [0x8218C0, vtx, es/starpoint/starpoints]
+      - [0x821900]
 
   - name: world_model_anim_kzn_01
     dir: world/model_anim/kzn
@@ -15042,12 +15394,13 @@ segments:
       - [0xF0A780, ci4, BombableRock, 64, 64]
       - [0xF0AF80, palette, BombableRock]
       - [0xF0AFA0]
-  - [0xF0B5C0, bin]
+  - [0xF0B5C0, bin]  # 0xFF pad fill
 
   - [0x13A0000, pm_sbn, audio]
   - [0x1DE2C40, bin, 1942C40]
   - { start: 0x1DF0000, align: 8, type: pm_sprites, name: sprites }
-  - [0x202f208, bin] # end of sprite data - todo: figure out what this is
+  - [0x202f208, bin]  # zeros
+  - [0x202f210, bin]  # 0xFF pad fill
 
   - start: 0x2030000
     name: msg_pal_en

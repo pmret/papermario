@@ -41,17 +41,17 @@ Gfx titlemenu_pad_259CE8[] = { gsSPEndDisplayList(), };
 INCLUDE_IMG("title/languages.png", title_languages_png);
 
 Gfx titlemenu_pad_25A270[] = { gsSPEndDisplayList(), };
-INCLUDE_IMG("title/start_game_de.png", title_start_game_de_png);
+INCLUDE_IMG("de/title/start_game.png", title_start_game_de_png);
 Gfx titlemenu_pad_25A7F8[] = { gsSPEndDisplayList(), };
-INCLUDE_IMG("title/languages_de.png", title_languages_de_png);
+INCLUDE_IMG("de/title/languages.png", title_languages_de_png);
 
 Gfx titlemenu_pad_25AD00[] = { gsSPEndDisplayList(), };
-INCLUDE_IMG("title/start_game_fr.png", title_start_game_fr_png);
+INCLUDE_IMG("fr/title/start_game.png", title_start_game_fr_png);
 Gfx titlemenu_pad_25B608[] = { gsSPEndDisplayList(), };
-INCLUDE_IMG("title/languages_fr.png", title_languages_fr_png);
+INCLUDE_IMG("fr/title/languages.png", title_languages_fr_png);
 
 Gfx titlemenu_pad_25BA10[] = { gsSPEndDisplayList(), };
-INCLUDE_IMG("title/start_game_es.png", title_start_game_es_png);
+INCLUDE_IMG("es/title/start_game.png", title_start_game_es_png);
 Gfx titlemenu_pad_25C198[] = { gsSPEndDisplayList(), };
-INCLUDE_IMG("title/languages_es.png", title_languages_es_png);
+INCLUDE_IMG("es/title/languages.png", title_languages_es_png);
 

@@ -55,7 +55,9 @@ BSS HudElemID LevelUpSelectTextID;
 BSS s32 CelebrateSubstateTime;
 BSS s32 D_8029FB50;
 BSS s32 EndBattleRewardStep;
+#if !VERSION_PAL
 BSS s32 D_8029FB58[2]; // unused?
+#endif
 BSS s32 CantLevelUpStat[3];
 BSS s32 EndBattleRewardTotal;
 BSS s32 EndBattleRewardIncrement;
@@ -69,6 +71,14 @@ BSS s32 LevelUpSelectTextVelX;
 
 extern EntityModelScript EMS_starpoint_starpoint;
 extern EntityModelScript EMS_starpoint_starpoints;
+#if VERSION_PAL
+extern EntityModelScript EMS_starpoint_starpoint_de;
+extern EntityModelScript EMS_starpoint_starpoint_fr;
+extern EntityModelScript EMS_starpoint_starpoint_es;
+extern EntityModelScript EMS_starpoint_starpoints_de;
+extern EntityModelScript EMS_starpoint_starpoints_fr;
+extern EntityModelScript EMS_starpoint_starpoints_es;
+#endif
 extern EntityModelScript EMS_starpoint_digit_0;
 extern EntityModelScript EMS_starpoint_digit_1;
 extern EntityModelScript EMS_starpoint_digit_2;
@@ -82,6 +92,11 @@ extern EntityModelScript EMS_starpoint_digit_9;
 extern EntityModelScript EMS_starpoint_dummy;
 
 extern EntityModelScript EMS_level_up;
+#if VERSION_PAL
+extern EntityModelScript EMS_level_up_en_de;
+extern EntityModelScript EMS_level_up_fr;
+extern EntityModelScript EMS_level_up_es;
+#endif
 
 extern HudScript HES_level_up_flower;
 extern HudScript HES_level_up_leaves;
@@ -92,6 +107,17 @@ extern HudScript HES_level_up_badge;
 extern HudScript HES_level_up_FP;
 extern HudScript HES_level_up_HP;
 extern HudScript HES_level_up_BP;
+#if VERSION_PAL
+extern HudScript HES_level_up_FP_de;
+extern HudScript HES_level_up_FP_fr;
+extern HudScript HES_level_up_FP_es;
+extern HudScript HES_level_up_HP_de;
+extern HudScript HES_level_up_HP_fr;
+extern HudScript HES_level_up_HP_es;
+extern HudScript HES_level_up_BP_de;
+extern HudScript HES_level_up_BP_fr;
+extern HudScript HES_level_up_BP_es;
+#endif
 
 extern HudScript HES_level_up_green_digit_0;
 extern HudScript HES_level_up_green_digit_1;
@@ -159,8 +185,63 @@ extern HudScript HES_level_up_small_blue_digit_9;
 extern HudScript HES_level_up_small_blue_arrow;
 
 extern HudScript HES_level_up_select_one_to_upgrade;
+#if VERSION_PAL
+extern HudScript HES_level_up_select_one_to_upgrade_de;
+extern HudScript HES_level_up_select_one_to_upgrade_fr;
+extern HudScript HES_level_up_select_one_to_upgrade_es;
+#endif
 
 s32 bFadeToBlackAmt = 255;
+
+#if VERSION_PAL
+s16 D_PAL_80284614[] = { 28, 40 };
+s16 D_PAL_80284618[] = { 0, -2 };
+
+u8* LevelUpLetters_RomStart[] = {
+    level_up_letters_en_de_ROM_START,
+    level_up_letters_en_de_ROM_START,
+    level_up_letters_fr_ROM_START,
+    level_up_letters_es_ROM_START,
+};
+u8* LevelUpLetters_RomEnd[] = {
+    level_up_letters_en_de_ROM_END,
+    level_up_letters_en_de_ROM_END,
+    level_up_letters_fr_ROM_END,
+    level_up_letters_es_ROM_END,
+};
+u8* LevelUpLetters_Vram[] = {
+    level_up_letters_en_de_VRAM,
+    level_up_letters_en_de_VRAM,
+    level_up_letters_fr_VRAM,
+    level_up_letters_es_VRAM,
+};
+
+u8* StarpointText_RomStart[] = {
+    starpoint_en_ROM_START,
+    starpoint_de_ROM_START,
+    starpoint_fr_ROM_START,
+    starpoint_es_ROM_START,
+};
+u8* StarpointText_RomEnd[] = {
+    starpoint_en_ROM_END,
+    starpoint_de_ROM_END,
+    starpoint_fr_ROM_END,
+    starpoint_es_ROM_END,
+};
+u8* StarpointText_Vram[] = {
+    starpoint_en_VRAM,
+    starpoint_de_VRAM,
+    starpoint_fr_VRAM,
+    starpoint_es_VRAM,
+};
+
+HudScript* HES_LevelUpUpgradeLanguages[] = {
+    &HES_level_up_select_one_to_upgrade,
+    &HES_level_up_select_one_to_upgrade_de,
+    &HES_level_up_select_one_to_upgrade_fr,
+    &HES_level_up_select_one_to_upgrade_es,
+};
+#endif
 
 s32 D_80284154[] = {
     [PARTNER_NONE]          = 0,
@@ -193,11 +274,34 @@ EntityModelScript* starpoint_digit_scripts[] = {
 
 EntityModelScript* starpoint_space_script = &EMS_starpoint_dummy;
 
+#if VERSION_PAL
+HudScript* levelup_stat_scripts[][4] = {
+    {
+        &HES_level_up_FP,
+        &HES_level_up_FP_de,
+        &HES_level_up_FP_fr,
+        &HES_level_up_FP_es,
+    },
+    {
+        &HES_level_up_HP,
+        &HES_level_up_HP_de,
+        &HES_level_up_HP_fr,
+        &HES_level_up_HP_es,
+    },
+    {
+        &HES_level_up_BP,
+        &HES_level_up_BP_de,
+        &HES_level_up_BP_fr,
+        &HES_level_up_BP_es,
+    },
+};
+#else
 HudScript* levelup_stat_scripts[3] = {
     &HES_level_up_FP,
     &HES_level_up_HP,
     &HES_level_up_BP,
 };
+#endif
 
 HudScript* HES_LevelUpDigits[3][10] = {
     {
@@ -358,12 +462,38 @@ EvtScript EVS_ShowStarpoints = {
         Return
     EndIf
     IfLt(LVar0, 2)
+#if VERSION_PAL
+        Call(GetLanguage, LVar1)
+        Switch(LVar1)
+            CaseEq(LANGUAGE_EN)
+                Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoint))
+            CaseEq(LANGUAGE_DE)
+                Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoint_de))
+            CaseEq(LANGUAGE_FR)
+                Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoint_fr))
+            CaseEq(LANGUAGE_ES)
+                Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoint_es))
+        EndSwitch
+#else
         Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoint))
+#endif
         Call(SetVirtualEntityPosition, LVar6, -278, 68, 70)
         Call(SetVirtualEntityScale, LVar6, Float(0.5), Float(0.5), Float(0.5))
     Else
 #if VERSION_JP
         Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoint))
+#elif VERSION_PAL
+        Call(GetLanguage, LVar1)
+        Switch(LVar1)
+            CaseEq(LANGUAGE_EN)
+                Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoints))
+            CaseEq(LANGUAGE_DE)
+                Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoints_de))
+            CaseEq(LANGUAGE_FR)
+                Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoints_fr))
+            CaseEq(LANGUAGE_ES)
+                Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoints_es))
+        EndSwitch
 #else
         Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoints))
 #endif
@@ -460,7 +590,21 @@ EvtScript EVS_ShowStarpoints = {
 };
 
 EvtScript EVS_ShowLevelUp = {
+#if VERSION_PAL
+    Call(GetLanguage, LVar0)
+    Switch(LVar0)
+        CaseEq(0)
+            Call(CreateVirtualEntity, LVar9, Ref(EMS_level_up_en_de))
+        CaseEq(1)
+            Call(CreateVirtualEntity, LVar9, Ref(EMS_level_up_en_de))
+        CaseEq(2)
+            Call(CreateVirtualEntity, LVar9, Ref(EMS_level_up_fr))
+        CaseEq(3)
+            Call(CreateVirtualEntity, LVar9, Ref(EMS_level_up_es))
+    EndSwitch
+#else
     Call(CreateVirtualEntity, LVar9, Ref(EMS_level_up))
+#endif
     Call(SetVirtualEntityPosition, LVar9, 0, 210, 70)
     Call(InitLevelUpModelFlags)
     ChildThread
@@ -512,6 +656,9 @@ void btl_state_update_celebration(void) {
     s32 i;
     s32 j;
 
+#if VERSION_PAL
+    s32 numLines;
+#endif
     HudScript* new_var;
 
     switch (gBattleSubState) {
@@ -546,6 +693,9 @@ void btl_state_update_celebration(void) {
                 CelebrateSubstateTime--;
             } else if (btl_cam_is_moving_done()) {
                 DMA_COPY_SEGMENT(starpoint);
+#if VERSION_PAL
+                dma_copy(StarpointText_RomStart[gCurrentLanguage], StarpointText_RomEnd[gCurrentLanguage], StarpointText_Vram[gCurrentLanguage]);
+#endif
                 script = start_script(&EVS_ShowStarpoints, EVT_PRIORITY_A, 0);
                 EndBattleRewardsDone = FALSE;
                 // divide reward into 20 increments
@@ -631,6 +781,9 @@ void btl_state_update_celebration(void) {
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(5);
                 DMA_COPY_SEGMENT(level_up);
+#if VERSION_PAL
+                dma_copy(LevelUpLetters_RomStart[gCurrentLanguage], LevelUpLetters_RomEnd[gCurrentLanguage], LevelUpLetters_Vram[gCurrentLanguage]);
+#endif
                 sfx_play_sound(SOUND_LOOP_CHEERING);
                 CelebrateStateTime = 0;
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_BEGIN;
@@ -686,7 +839,11 @@ void btl_state_update_celebration(void) {
                 hud_element_set_render_pos(hid, 6, 140);
                 hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
 
+#if VERSION_PAL
+                hid = hud_element_create(levelup_stat_scripts[0][gCurrentLanguage]);
+#else
                 hid = hud_element_create(levelup_stat_scripts[0]);
+#endif
                 LevelUpStatTextIDs[LVL_UP_FP][LVL_UP_TITLE] = hid;
                 hud_element_set_render_pos(hid, 160, 317);
                 hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
@@ -698,7 +855,11 @@ void btl_state_update_celebration(void) {
                     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
                 }
 
+#if VERSION_PAL
+                hid = hud_element_create(levelup_stat_scripts[1][gCurrentLanguage]);
+#else
                 hid = hud_element_create(levelup_stat_scripts[1]);
+#endif
                 LevelUpStatTextIDs[LVL_UP_HP][LVL_UP_TITLE] = hid;
                 hud_element_set_render_pos(hid, 312, 117);
                 hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
@@ -710,7 +871,11 @@ void btl_state_update_celebration(void) {
                     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
                 }
 
+#if VERSION_PAL
+                hid = hud_element_create(levelup_stat_scripts[2][gCurrentLanguage]);
+#else
                 hid = hud_element_create(levelup_stat_scripts[2]);
+#endif
                 LevelUpStatTextIDs[LVL_UP_BP][LVL_UP_TITLE] = hid;
                 hud_element_set_render_pos(hid, 8, 117);
                 hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
@@ -932,7 +1097,11 @@ void btl_state_update_celebration(void) {
                 hud_element_set_alpha(hid, 200);
                 hud_element_set_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
 
+#if VERSION_PAL
+                LevelUpSelectTextID = hid = hud_element_create(HES_LevelUpUpgradeLanguages[gCurrentLanguage]);
+#else
                 LevelUpSelectTextID = hid = hud_element_create(&HES_level_up_select_one_to_upgrade);
+#endif
                 hud_element_set_render_pos(hid, 0, 0);
                 hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
                 battleStatus->curSubmenu = 1;
@@ -1142,10 +1311,19 @@ void btl_state_update_celebration(void) {
             gBattleSubState = BTL_SUBSTATE_END_BATTLE_EXEC_STAGE_SCRIPT;
             break;
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_INVALID:
+#if VERSION_PAL
+            width = get_msg_width(MSG_Menus_CantIncrease, 0) + 32;
+            numLines = get_msg_lines(MSG_Menus_CantIncrease) - 1;
+            x = 160 - (width / 2);
+            y = 80;
+            set_window_properties(WIN_BTL_POPUP, x, y, width, D_PAL_80284614[numLines],
+                WINDOW_PRIORITY_10, draw_content_cant_increase_popup, NULL, -1);
+#else
             width = get_msg_width(MSG_Menus_CantIncrease, 0) + 31;
             x = 160 - (width / 2);
             y = 80;
             set_window_properties(WIN_BTL_POPUP, x, y, width, 28, WINDOW_PRIORITY_10, draw_content_cant_increase_popup, NULL, -1);
+#endif
             set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
             CelebrateSubstateTime = 60;
             gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_INVALID_DELAY;
@@ -1516,5 +1694,9 @@ void draw_content_level_up_textbox(void* data, s32 posX, s32 posY) {
 }
 
 void draw_content_cant_increase_popup(void* data, s32 posX, s32 posY) {
+#if VERSION_PAL
+    draw_msg(MSG_Menus_CantIncrease, posX + 16, posY + 6 + D_PAL_80284618[get_msg_lines(MSG_Menus_CantIncrease) - 1], 255, MSG_PAL_0F, 0);
+#else
     draw_msg(MSG_Menus_CantIncrease, posX + 11, posY + 6, 255, MSG_PAL_0F, 0);
+#endif
 }

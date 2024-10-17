@@ -2,6 +2,8 @@
 #include "entity.h"
 #include "include_asset.h"
 
+#if !VERSION_PAL
+
 Lights1 starpoint_lights1 = gdSPDefLights1(0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 #if VERSION_JP
@@ -119,6 +121,8 @@ Gfx D_802A32D8_7AAC78[] = {
 };
 #endif
 
+#endif
+
 #include "starpoint/digit_0.vtx.inc.c"
 INCLUDE_IMG("starpoint/digit_0.png", D_802A3340_7AACE0);
 #include "starpoint/load_digit_0.gfx.inc.c"
@@ -189,12 +193,14 @@ INCLUDE_IMG("starpoint/digit_9.png", D_802ACD60_7B4700);
 #include "starpoint/_render_digit_9.gfx.inc.c"
 #include "starpoint/render_digit_9.gfx.inc.c"
 
+#if !VERSION_PAL
 #if VERSION_JP
 EntityModelScript EMS_starpoint_starpoint = STANDARD_ENTITY_MODEL_SCRIPT(D_802A2B98_7B2608, RENDER_MODE_CLOUD_NO_ZCMP);
 EntityModelScript EMS_starpoint_starpoints = STANDARD_ENTITY_MODEL_SCRIPT(D_802A2B98_7B2608, RENDER_MODE_CLOUD_NO_ZCMP);
 #else
 EntityModelScript EMS_starpoint_starpoint = STANDARD_ENTITY_MODEL_SCRIPT(D_802A2158_7A9AF8, RENDER_MODE_CLOUD_NO_ZCMP);
 EntityModelScript EMS_starpoint_starpoints = STANDARD_ENTITY_MODEL_SCRIPT(D_802A32D8_7AAC78, RENDER_MODE_CLOUD_NO_ZCMP);
+#endif
 #endif
 EntityModelScript EMS_starpoint_digit_0 = STANDARD_ENTITY_MODEL_SCRIPT(D_802A4410_7ABDB0, RENDER_MODE_CLOUD_NO_ZCMP);
 EntityModelScript EMS_starpoint_digit_1 = STANDARD_ENTITY_MODEL_SCRIPT(D_802A5530_7ACED0, RENDER_MODE_CLOUD_NO_ZCMP);
