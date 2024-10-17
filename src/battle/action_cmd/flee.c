@@ -15,7 +15,7 @@ enum {
 };
 
 // how much to add to the meter per input if all modifiers are neutral
-#define BASE_FILL_RATE 180
+#define METER_FILL_RATE 180
 
 BSS b32 N(HasStarted);
 
@@ -164,7 +164,7 @@ void N(update)(void) {
         case AC_STATE_ACTIVE:
             // check for bar-filling input
             if (battleStatus->actionCommandMode != AC_MODE_NOT_LEARNED && (battleStatus->curButtonsPressed & BUTTON_A)) {
-                acs->barFillLevel += (battleStatus->actionCmdDifficultyTable[acs->difficulty] * BASE_FILL_RATE) / 100;
+                acs->barFillLevel += SCALE_BY_PCT(METER_FILL_RATE, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
             }
 
             // handle bar reaching 100%

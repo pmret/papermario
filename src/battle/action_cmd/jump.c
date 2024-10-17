@@ -1,10 +1,15 @@
 #include "common.h"
 #include "battle/action_cmd.h"
 
-//TODO action command
 #define NAMESPACE action_command_jump
 
 extern s32 actionCmdTableJump[];
+
+// indices into ActionCommandStatus::hudElements for this action command
+enum {
+    HIDX_BUTTON         = 0,
+    HIDX_RIGHT_ON       = 1,
+};
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -27,14 +32,14 @@ API_CALLABLE(N(init)) {
     acs->hudPosY = 80;
 
     hid = hud_element_create(&HES_AButton);
-    acs->hudElements[0] = hid;
+    acs->hudElements[HIDX_BUTTON] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_alpha(hid, 255);
 
     hid = hud_element_create(&HES_RightOn);
-    acs->hudElements[1] = hid;
+    acs->hudElements[HIDX_RIGHT_ON] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
@@ -52,28 +57,29 @@ API_CALLABLE(N(start)) {
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
-    } else {
-        action_command_init_status();
-        acs->prepareTime = evt_get_variable(script, *args++);
-        acs->difficulty = evt_get_variable(script, *args++);
-        acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
-        acs->wrongButtonPressed = FALSE;
-        battleStatus->actionSuccess = 0;
-
-        hid = acs->hudElements[0];
-        acs->hudPosX = 50;
-        battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
-        battleStatus->flags1 &= ~BS_FLAGS1_2000;
-        hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
-        if (acs->showHud) {
-            hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
-        }
-
-        acs->state = AC_STATE_START;
-        increment_action_command_attempt_count();
-        btl_set_popup_duration(10);
-        return ApiStatus_DONE2;
     }
+
+    action_command_init_status();
+    acs->prepareTime = evt_get_variable(script, *args++);
+    acs->difficulty = evt_get_variable(script, *args++);
+    acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
+    acs->wrongButtonPressed = FALSE;
+    battleStatus->actionSuccess = 0;
+
+    hid = acs->hudElements[HIDX_BUTTON];
+    acs->hudPosX = 50;
+    battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
+    battleStatus->flags1 &= ~BS_FLAGS1_2000;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    if (acs->showHud) {
+        hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
+    }
+
+    acs->state = AC_STATE_START;
+    increment_action_command_attempt_count();
+    btl_set_popup_duration(10);
+
+    return ApiStatus_DONE2;
 }
 
 void N(update)(void) {
@@ -99,34 +105,38 @@ void N(update)(void) {
                 acs->hudPosX = 50;
             }
 
-            hid = acs->hudElements[0];
+            hid = acs->hudElements[HIDX_BUTTON];
             hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             if (acs->autoSucceed) {
-                hid = acs->hudElements[1];
+                hid = acs->hudElements[HIDX_RIGHT_ON];
                 hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY);
                 if (acs->showHud) {
                     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
-                    break;
                 }
             }
             break;
         case AC_STATE_START:
+            // this state is the time before valid input is allowed
+
             if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL) {
                 btl_set_popup_duration(POPUP_MSG_ON);
             }
 
+            // show the A button being pressed two frames before input is allowed
             successWindow = battleStatus->actionCmdDifficultyTable[acs->difficulty];
             if (((acs->prepareTime - successWindow) - 2) <= 0) {
-                hud_element_set_script(acs->hudElements[0], &HES_AButtonDown);
+                hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
             }
+            // inputs during this state will cause the action to fail
             if ((battleStatus->curButtonsPressed & BUTTON_A) && !acs->autoSucceed) {
                 acs->wrongButtonPressed = TRUE;
                 battleStatus->actionResult = ACTION_RESULT_EARLY;
             }
+            // continue until we begin the window for valid input
             if ((acs->prepareTime - successWindow) > 0) {
                 acs->prepareTime--;
                 break;
@@ -147,17 +157,16 @@ void N(update)(void) {
                 }
             } else {
                 if (battleStatus->actionSuccess >= 0) {
-                    hid = acs->hudElements[0];
+                    hid = acs->hudElements[HIDX_BUTTON];
                     if (acs->showHud) {
                         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                     }
                 }
             }
 
+            // valid input is allowed during this state
             if (battleStatus->actionSuccess < 0) {
-                if (((battleStatus->curButtonsPressed & BUTTON_A) &&
-                    !acs->wrongButtonPressed) ||
-                    acs->autoSucceed) {
+                if (((battleStatus->curButtonsPressed & BUTTON_A) && !acs->wrongButtonPressed) || acs->autoSucceed) {
                     battleStatus->actionSuccess = 1;
                     battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                     gBattleStatus.flags1 |= BS_FLAGS1_2000;
@@ -188,13 +197,13 @@ void N(update)(void) {
 }
 
 void N(draw)(void) {
-    hud_element_draw_clipped(gActionCommandStatus.hudElements[0]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_BUTTON]);
     if (!(gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED)) {
-        hud_element_draw_clipped(gActionCommandStatus.hudElements[1]);
+        hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_RIGHT_ON]);
     }
 }
 
 void N(free)(void) {
-    hud_element_free(gActionCommandStatus.hudElements[0]);
-    hud_element_free(gActionCommandStatus.hudElements[1]);
+    hud_element_free(gActionCommandStatus.hudElements[HIDX_BUTTON]);
+    hud_element_free(gActionCommandStatus.hudElements[HIDX_RIGHT_ON]);
 }

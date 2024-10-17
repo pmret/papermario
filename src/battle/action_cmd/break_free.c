@@ -14,7 +14,7 @@ enum {
 };
 
 // how much to add to the meter per input if all modifiers are neutral
-#define BASE_FILL_RATE 100
+#define METER_FILL_RATE 100
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -199,12 +199,12 @@ void N(update)(void) {
                         inputBufPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                     }
                     if (battleStatus->pushInputBuffer[inputBufPos] & BUTTON_A) {
-                        acs->barFillLevel += battleStatus->actionCmdDifficultyTable[acs->difficulty] * BASE_FILL_RATE / 100;
+                        acs->barFillLevel += SCALE_BY_PCT(METER_FILL_RATE, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                     }
                 }
             } else {
-                acs->barFillLevel += (battleStatus->actionCmdDifficultyTable[acs->difficulty]) * 25 / 100;
-                acs->barFillLevel += rand_int(battleStatus->actionCmdDifficultyTable[acs->difficulty] * 25 / 100);
+                acs->barFillLevel += SCALE_BY_PCT(25, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
+                acs->barFillLevel += rand_int(SCALE_BY_PCT(25, battleStatus->actionCmdDifficultyTable[acs->difficulty]));
             }
 
             battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;

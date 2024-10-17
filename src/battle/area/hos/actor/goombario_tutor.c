@@ -210,7 +210,7 @@ EvtScript N(EVS_TakeTurn) = {
         Call(action_command_jump_init)
         Call(ShowActionHud, TRUE)
         Wait(10)
-        Call(action_command_jump_start, 12, 3)
+        Call(action_command_jump_start, 12, AC_DIFFICULTY_3)
     EndThread
     Call(PlaySound, SOUND_ACTOR_JUMP)
     Call(JumpToGoal, ACTOR_SELF, 22, FALSE, TRUE, FALSE)

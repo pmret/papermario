@@ -1,12 +1,24 @@
 #include "common.h"
 #include "battle/action_cmd.h"
 
-//TODO action command
 #define NAMESPACE action_command_hurricane
 
-s32 D_802A98E0_42FFC0[AC_DIFFICULTY_LEN] = { 0, 25, 50, 75, 75, 0, 0, 0 };
-
 extern s32 actionCmdTableHurricane[];
+
+// indices into ActionCommandStatus::hudElements for this action command
+enum {
+    HIDX_A_BUTTON       = 0,
+    HIDX_METER          = 1,
+    HIDX_B_BUTTON       = 2,
+    HIDX_100_PCT        = 4,
+};
+
+// how much to add to the meter per input
+#define METER_FILL_TICK 650
+
+s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
+
+#define GET_DRAIN_RATE(pct) PCT_TO_TABLE_RATE(N(DrainRateTable), pct)
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -33,25 +45,25 @@ API_CALLABLE(N(init)) {
     acs->hudPosY = 80;
 
     hid = hud_element_create(&HES_AButton);
-    acs->hudElements[0] = hid;
+    acs->hudElements[HIDX_A_BUTTON] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
 
     hid = hud_element_create(&HES_BButton);
-    acs->hudElements[2] = hid;
+    acs->hudElements[HIDX_B_BUTTON] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
 
     hid = hud_element_create(&HES_BlueMeter);
-    acs->hudElements[1] = hid;
+    acs->hudElements[HIDX_METER] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     hid = hud_element_create(&HES_100pct);
-    acs->hudElements[4] = hid;
+    acs->hudElements[HIDX_100_PCT] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
@@ -75,6 +87,7 @@ API_CALLABLE(N(start)) {
     acs->duration = evt_get_variable(script, *args++);
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
+    // for this command, this is the average chance for enemies to be affected
     acs->targetWeakness = evt_get_variable(script, *args++);
 
     acs->wrongButtonPressed = FALSE;
@@ -90,38 +103,33 @@ API_CALLABLE(N(start)) {
     return ApiStatus_DONE2;
 }
 
-// Almost identical to action_command_mega_shock_update (mega_shock)
 void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-
-    s32 buttonsPushed;
-    s32 frameCount;
-    s32 buttonsAB;
-    s32 bufferPos;
     s32 hid;
-    s32 mashMeterIndex;
-    s32 mashMeterCutoff;
-    s8 adjustedFillLevel;
-    s16 threshold;
+    s32 cutoff;
+    s32 bufferPos;
+    s32 i;
+    s32 buttonsPushed;
+    s32 buttonsAB;
 
     switch (acs->state) {
         case AC_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            hid = acs->hudElements[0];
+            hid = acs->hudElements[HIDX_A_BUTTON];
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(hid, 255);
 
-            hid = acs->hudElements[2];
+            hid = acs->hudElements[HIDX_B_BUTTON];
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(hid, 255);
 
-            hid = acs->hudElements[1];
+            hid = acs->hudElements[HIDX_METER];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
@@ -141,9 +149,9 @@ void N(update)(void) {
                 acs->hudPosX = 50;
             }
 
-            hud_element_set_render_pos(acs->hudElements[0], acs->hudPosX - 17, acs->hudPosY);
-            hud_element_set_render_pos(acs->hudElements[2], acs->hudPosX + 23, acs->hudPosY);
-            hud_element_set_render_pos(acs->hudElements[1], acs->hudPosX, acs->hudPosY + 28);
+            hud_element_set_render_pos(acs->hudElements[HIDX_A_BUTTON], acs->hudPosX - 17, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElements[HIDX_B_BUTTON], acs->hudPosX + 23, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElements[HIDX_METER], acs->hudPosX, acs->hudPosY + 28);
             break;
         case AC_STATE_START:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -151,8 +159,8 @@ void N(update)(void) {
                 acs->prepareTime--;
                 break;
             }
-            hud_element_set_script(acs->hudElements[0], &HES_MashAButton);
-            hud_element_set_script(acs->hudElements[2], &HES_MashBButton1);
+            hud_element_set_script(acs->hudElements[HIDX_A_BUTTON], &HES_MashAButton);
+            hud_element_set_script(acs->hudElements[HIDX_B_BUTTON], &HES_MashBButton1);
             acs->barFillLevel = 0;
             acs->any.unk_5C = 0;
             acs->frameCounter = acs->duration;
@@ -161,27 +169,24 @@ void N(update)(void) {
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
+
+            // bar can drain if it hasn't been fully filled
             if (!acs->isBarFilled) {
-                s16 newFillLevel;
-
                 if (acs->targetWeakness != 0) {
-                    s8 mashMeterIntervals = acs->mashMeterNumIntervals;
-                    s16* mashMeterCutoffs = acs->mashMeterCutoffs;
-                    s32 index;
-
-                    mashMeterCutoff = mashMeterCutoffs[mashMeterIntervals];
-                    index = acs->barFillLevel / mashMeterCutoff / 20;
-                    newFillLevel = acs->barFillLevel - D_802A98E0_42FFC0[index];
+                    cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
+                    acs->barFillLevel -= GET_DRAIN_RATE(acs->barFillLevel / cutoff);
+                    if (acs->barFillLevel < 0) {
+                        acs->barFillLevel = 0;
+                    }
                 } else {
-                    newFillLevel = acs->barFillLevel - 10;
-                }
-
-                acs->barFillLevel = newFillLevel;
-                if (acs->barFillLevel < 0) {
-                    acs->barFillLevel = 0;
+                    acs->barFillLevel -= 10;
+                    if (acs->barFillLevel < 0) {
+                        acs->barFillLevel = 0;
+                    }
                 }
             }
 
+            // step back two frames in the input buffer
             bufferPos = battleStatus->inputBufferPos;
             bufferPos -= 2;
             if (bufferPos < 0) {
@@ -189,30 +194,29 @@ void N(update)(void) {
             }
 
             buttonsPushed = 0;
-            frameCount = 1;
 
-            while (frameCount >= 0) {
+            // get combined input during the last two frames
+            for (i = 1; i >= 0; i--) {
                 if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                     bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                 }
-
-                buttonsPushed |= battleStatus->pushInputBuffer[bufferPos++];
-                frameCount--;
+                buttonsPushed |= battleStatus->pushInputBuffer[bufferPos];
+                bufferPos++;
             }
 
             buttonsAB = BUTTON_A | BUTTON_B;
             if ((buttonsPushed & buttonsAB) == buttonsAB) {
                 if (acs->targetWeakness != 0) {
-                    s32 fillLevel;
+                    s32 amt;
 
-                    fillLevel = acs->targetWeakness * 650;
-                    fillLevel = fillLevel / 100 * battleStatus->actionCmdDifficultyTable[acs->difficulty];
+                    amt = SCALE_BY_PCT(METER_FILL_TICK, acs->targetWeakness);
+                    amt = SCALE_BY_PCT(amt, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
 
                     // Perplexing reuse of buttonsPushed here, but it fixes register allocation. Likely another
                     // subexpression from above can be put into a variable and reused instead.
                     //
                     // TODO: Find a way to avoid reusing buttonsPushed.
-                    buttonsPushed = fillLevel / 100;
+                    buttonsPushed = amt;
 
                     acs->barFillLevel += buttonsPushed;
                 } else {
@@ -223,34 +227,32 @@ void N(update)(void) {
                     }
                 }
 
+                // step back two frames in the input buffer
                 bufferPos = battleStatus->inputBufferPos;
                 bufferPos -= 2;
                 if (bufferPos < 0) {
                     bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
                 }
 
-                frameCount = 1;
-                while (frameCount >= 0) {
+                // clear buffer to be ready for the next input
+                for (i = 1; i >= 0; i--) {
                     if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                         bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                     }
-
                     battleStatus->pushInputBuffer[bufferPos++] = 0;
-                    frameCount--;
                 }
             }
 
+            // handle bar reaching 100%
             if (acs->barFillLevel > MAX_MASH_UNITS) {
                 acs->barFillLevel = MAX_MASH_UNITS;
                 acs->isBarFilled = TRUE;
-                hid = acs->hudElements[4];
+                hid = acs->hudElements[HIDX_100_PCT];
                 hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            adjustedFillLevel = acs->barFillLevel / ONE_PCT_MASH;
-
-            battleStatus->actionQuality = adjustedFillLevel;
+            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
 
             if (acs->frameCounter != 0) {
                 acs->frameCounter--;
@@ -271,17 +273,15 @@ void N(update)(void) {
                 battleStatus->actionSuccess = buttonsPushed / ONE_PCT_MASH;
             }
 
-            mashMeterIndex = acs->mashMeterNumIntervals - 1;
-            mashMeterCutoff = acs->mashMeterCutoffs[mashMeterIndex];
-            threshold = mashMeterCutoff / 2;
-
-            if (battleStatus->actionQuality <= threshold) {
+            cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
+            if (battleStatus->actionQuality <= cutoff / 2) {
                 battleStatus->actionResult = ACTION_RESULT_MINUS_4;
             } else {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             }
 
             if (battleStatus->actionSuccess == 100) {
+                // only count 100% fill as success for this action command
                 increment_action_command_success_count();
             }
 
@@ -312,10 +312,10 @@ void N(draw)(void) {
     s32 hudX, hudY;
     s32 hid;
 
-    hud_element_draw_clipped(acs->hudElements[0]);
-    hud_element_draw_clipped(acs->hudElements[2]);
+    hud_element_draw_clipped(acs->hudElements[HIDX_A_BUTTON]);
+    hud_element_draw_clipped(acs->hudElements[HIDX_B_BUTTON]);
 
-    hid = acs->hudElements[1];
+    hid = acs->hudElements[HIDX_METER];
     hud_element_draw_clipped(hid);
     hud_element_get_render_pos(hid, &hudX, &hudY);
 
@@ -325,12 +325,12 @@ void N(draw)(void) {
         draw_mash_meter_blink(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH);
     }
 
-    hud_element_draw_clipped(acs->hudElements[4]);
+    hud_element_draw_clipped(acs->hudElements[HIDX_100_PCT]);
 }
 
 void N(free)(void) {
-    hud_element_free(gActionCommandStatus.hudElements[0]);
-    hud_element_free(gActionCommandStatus.hudElements[1]);
-    hud_element_free(gActionCommandStatus.hudElements[2]);
-    hud_element_free(gActionCommandStatus.hudElements[4]);
+    hud_element_free(gActionCommandStatus.hudElements[HIDX_A_BUTTON]);
+    hud_element_free(gActionCommandStatus.hudElements[HIDX_METER]);
+    hud_element_free(gActionCommandStatus.hudElements[HIDX_B_BUTTON]);
+    hud_element_free(gActionCommandStatus.hudElements[HIDX_100_PCT]);
 }

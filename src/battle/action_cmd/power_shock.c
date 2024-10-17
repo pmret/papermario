@@ -4,7 +4,7 @@
 //TODO action command
 #define NAMESPACE action_command_power_shock
 
-s32 D_802A9AA0_42D9B0[AC_DIFFICULTY_LEN] = { 0, 25, 50, 75, 75, 0, 0, 0};
+s32 D_802A9AA0_42D9B0[] = { 0, 25, 50, 75, 75 };
 
 BSS s32 D_802A9B00;
 
@@ -179,11 +179,10 @@ void N(update)(void) {
             }
 
             if (battleStatus->curButtonsPressed & BUTTON_A) {
-                phi_a1 = acs->targetWeakness;
-                if (phi_a1 != 0) {
-                    s32 a = battleStatus->actionCmdDifficultyTable[acs->difficulty];
+                if (acs->targetWeakness != 0) {
+                    s32 difficultyPct = battleStatus->actionCmdDifficultyTable[acs->difficulty];
+                    phi_a1 = SCALE_BY_PCT(SCALE_BY_PCT(850, difficultyPct), acs->targetWeakness);
 
-                    phi_a1 = (((a * 850) / 100) * phi_a1) / 100;
                     acs->barFillLevel += phi_a1;
                 } else {
                     acs->barFillLevel += ONE_PCT_MASH;

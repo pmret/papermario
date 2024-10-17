@@ -18,6 +18,8 @@ enum {
 
 s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
 
+#define GET_DRAIN_RATE(pct) PCT_TO_TABLE_RATE(N(DrainRateTable), pct)
+
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
@@ -123,8 +125,7 @@ void N(update)(void) {
             if (!acs->isBarFilled) {
                 if (acs->targetWeakness != 0) {
                     cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
-
-                    acs->barFillLevel -= N(DrainRateTable)[acs->barFillLevel / cutoff / 20];
+                    acs->barFillLevel -= GET_DRAIN_RATE(acs->barFillLevel / cutoff);
                     if (acs->barFillLevel < 0) {
                         acs->barFillLevel = 0;
                     }

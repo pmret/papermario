@@ -93,7 +93,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     Call(SetGoalToTarget, ACTOR_PLAYER)
     ExecWait(N(EVS_JumpSupport_CalcJumpTime))
     Add(LVarA, 5)
-    Call(action_command_jump_start, LVarA, 3)
+    Call(action_command_jump_start, LVarA, AC_DIFFICULTY_3)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_SpinFall)
     IfEq(LVarF, 1)
@@ -232,7 +232,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         Call(ShowActionHud, FALSE)
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_MULTIBOUNCE)
-    Call(action_command_jump_start, 37, 3)
+    Call(action_command_jump_start, 37, AC_DIFFICULTY_3)
     Call(ChooseNextTarget, ITER_NEXT, LVar0)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_PLAYER)
@@ -379,7 +379,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         Call(ShowActionHud, FALSE)
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_MULTIBOUNCE)
-    Call(action_command_jump_start, 25, 3)
+    Call(action_command_jump_start, 25, AC_DIFFICULTY_3)
     Call(ChooseNextTarget, ITER_NEXT, LVar0)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_SpinFall)

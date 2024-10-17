@@ -6,14 +6,14 @@
 
 extern s32 actionCmdTableTidalWave[];
 
-// states for tidal wave
+// states for this action command
 enum {
     TIDAL_WAVE_STATE_INIT           = 0,  // create hud elements
     TIDAL_WAVE_STATE_APPEAR         = 1,  // hud elements move into position
     TIDAL_WAVE_STATE_START          = 10,
     TIDAL_WAVE_STATE_NEXT_BUTTON    = 11, // choose the next required input
     TIDAL_WAVE_STATE_AWAIT_INPUT    = 12, // wait for the player's response
-    WATER_BLOCK_STATE_WRAPUP        = 13, // tally overall success
+    TIDAL_WAVE_STATE_WRAPUP         = 13, // tally overall success
     TIDAL_WAVE_STATE_DISPOSE        = 14, // delay and disappear
 };
 
@@ -167,7 +167,7 @@ void N(update)(void) {
 
             acs->frameCounter--;
             if (acs->frameCounter == 0) {
-                acs->state = WATER_BLOCK_STATE_WRAPUP;
+                acs->state = TIDAL_WAVE_STATE_WRAPUP;
                 break;
             }
 
@@ -288,7 +288,7 @@ void N(update)(void) {
                 }
             }
             break;
-        case WATER_BLOCK_STATE_WRAPUP:
+        case TIDAL_WAVE_STATE_WRAPUP:
             if (battleStatus->actionQuality == 0) {
                 battleStatus->actionSuccess = -1;
             } else {

@@ -2,8 +2,7 @@
 #include "battle/action_cmd.h"
 #include "include_asset.h"
 
-//TODO action command
-#define NAMESPACE action_command_water_block
+#define NAMESPACE action_command_three_chances
 
 extern s32 actionCmdTableWaterBlock[][2];
 
@@ -14,75 +13,79 @@ enum {
     HIDX_LIGHT_1        = 2,
     HIDX_LIGHT_2        = 3,
     HIDX_LIGHT_3        = 4,
-    HIDX_05             = 5,
+    HIDX_05             = 5, // unused 4th light
     HIDX_RATING_1       = 6,
     HIDX_RATING_2       = 7,
     HIDX_RATING_3       = 8,
-    HIDX_09             = 9,
+    HIDX_09             = 9, // unused rating for 4th light
     HIDX_DIGIT          = 10,
     HIDX_TICK_1         = 11,
     HIDX_TICK_2         = 12,
     HIDX_BUFF_ICON      = 13,
 };
 
-// states for water block
+// states for this action command
 enum {
-    WATER_BLOCK_STATE_INIT              = 0,  // create hud elements
-    WATER_BLOCK_STATE_APPEAR            = 1,  // hud elements move into position
-    WATER_BLOCK_STATE_START             = 10, // begin the input-checking phase
-    WATER_BLOCK_STATE_PREFACE           = 11, // first two ticks light up
-    WATER_BLOCK_STATE_FIRST_CHANCE      = 12, // first window to match timing
-    WATER_BLOCK_STATE_SECOND_CHANCE     = 13, // second window to match timing
-    WATER_BLOCK_STATE_THIRD_CHANCE      = 14, // third window to match timing
-    WATER_BLOCK_STATE_WRAPUP            = 16, // tally overall success
-    WATER_BLOCK_STATE_DISPOSE           = 17, // delay and disappear
+    THREE_CHANCES_STATE_INIT            = 0,  // create hud elements
+    THREE_CHANCES_STATE_APPEAR          = 1,  // hud elements move into position
+    THREE_CHANCES_STATE_START           = 10, // begin the input-checking phase
+    THREE_CHANCES_STATE_PREFACE         = 11, // first two ticks light up
+    THREE_CHANCES_STATE_FIRST_CHANCE    = 12, // first window to match timing
+    THREE_CHANCES_STATE_SECOND_CHANCE   = 13, // second window to match timing
+    THREE_CHANCES_STATE_THIRD_CHANCE    = 14, // third window to match timing
+    THREE_CHANCES_STATE_UNUSED_CHANCE   = 15, // unimplemented fourth chance to match timing
+    THREE_CHANCES_STATE_WRAPUP          = 16, // tally overall success
+    THREE_CHANCES_STATE_DISPOSE         = 17, // delay and disappear
 };
 
-INCLUDE_IMG("battle/action_cmd/water_block_1.png", battle_action_cmd_water_block_1_png);
-INCLUDE_PAL("battle/action_cmd/water_block_1.pal", battle_action_cmd_water_block_1_pal);
+// input window before the light appears where A inputs cause timing test to fail
+#define ANTI_MASH_TIME 5
 
-INCLUDE_IMG("battle/action_cmd/water_block_2.png", battle_action_cmd_water_block_2_png);
-INCLUDE_PAL("battle/action_cmd/water_block_2.pal", battle_action_cmd_water_block_2_pal);
+INCLUDE_IMG("battle/action_cmd/three_chances_1.png", battle_action_cmd_three_chances_1_png);
+INCLUDE_PAL("battle/action_cmd/three_chances_1.pal", battle_action_cmd_three_chances_1_pal);
 
-INCLUDE_IMG("battle/action_cmd/water_block_3.png", battle_action_cmd_water_block_3_png);
-INCLUDE_PAL("battle/action_cmd/water_block_3.pal", battle_action_cmd_water_block_3_pal);
+INCLUDE_IMG("battle/action_cmd/three_chances_2.png", battle_action_cmd_three_chances_2_png);
+INCLUDE_PAL("battle/action_cmd/three_chances_2.pal", battle_action_cmd_three_chances_2_pal);
 
-INCLUDE_IMG("battle/action_cmd/water_block_0.png", battle_action_cmd_water_block_0_png);
-INCLUDE_PAL("battle/action_cmd/water_block_0.pal", battle_action_cmd_water_block_0_pal);
+INCLUDE_IMG("battle/action_cmd/three_chances_3.png", battle_action_cmd_three_chances_3_png);
+INCLUDE_PAL("battle/action_cmd/three_chances_3.pal", battle_action_cmd_three_chances_3_pal);
 
-INCLUDE_IMG("battle/action_cmd/water_block_block.png", battle_action_cmd_water_block_block_png);
-INCLUDE_PAL("battle/action_cmd/water_block_block.pal", battle_action_cmd_water_block_block_pal);
+INCLUDE_IMG("battle/action_cmd/three_chances_0.png", battle_action_cmd_three_chances_0_png);
+INCLUDE_PAL("battle/action_cmd/three_chances_0.pal", battle_action_cmd_three_chances_0_pal);
 
-INCLUDE_IMG("battle/action_cmd/water_block_circle.png", battle_action_cmd_water_block_circle_png);
-INCLUDE_PAL("battle/action_cmd/water_block_circle.pal", battle_action_cmd_water_block_circle_pal);
+INCLUDE_IMG("battle/action_cmd/three_chances_block.png", battle_action_cmd_three_chances_block_png);
+INCLUDE_PAL("battle/action_cmd/three_chances_block.pal", battle_action_cmd_three_chances_block_pal);
 
-INCLUDE_IMG("battle/action_cmd/water_block_cloud.png", battle_action_cmd_water_block_cloud_png);
-INCLUDE_PAL("battle/action_cmd/water_block_cloud.pal", battle_action_cmd_water_block_cloud_pal);
+INCLUDE_IMG("battle/action_cmd/three_chances_circle.png", battle_action_cmd_three_chances_circle_png);
+INCLUDE_PAL("battle/action_cmd/three_chances_circle.pal", battle_action_cmd_three_chances_circle_pal);
 
-INCLUDE_IMG("battle/action_cmd/water_block_4.png", battle_action_cmd_water_block_4_png);
-INCLUDE_PAL("battle/action_cmd/water_block_4.pal", battle_action_cmd_water_block_4_pal);
+INCLUDE_IMG("battle/action_cmd/three_chances_cloud.png", battle_action_cmd_three_chances_cloud_png);
+INCLUDE_PAL("battle/action_cmd/three_chances_cloud.pal", battle_action_cmd_three_chances_cloud_pal);
 
-HudScript HES_WaterBlock1 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_water_block_1, 24, 24);
-HudScript HES_WaterBlock2 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_water_block_2, 24, 24);
-HudScript HES_WaterBlock3 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_water_block_3, 24, 24);
-HudScript HES_WaterBlock0 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_water_block_0, 24, 24);
-HudScript HES_WaterBlock4 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_water_block_4, 24, 24);
+INCLUDE_IMG("battle/action_cmd/three_chances_4.png", battle_action_cmd_three_chances_4_png);
+INCLUDE_PAL("battle/action_cmd/three_chances_4.pal", battle_action_cmd_three_chances_4_pal);
 
-HudScript HES_WaterBlockBlock = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_water_block_block, 32, 32);
-HudScript HES_WaterBlockCircle = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_water_block_circle, 40, 40);
-HudScript HES_WaterBlockCloud = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_water_block_cloud, 40, 40);
+HudScript HES_Digit1 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_three_chances_1, 24, 24);
+HudScript HES_Digit2 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_three_chances_2, 24, 24);
+HudScript HES_Digit3 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_three_chances_3, 24, 24);
+HudScript HES_Digit0 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_three_chances_0, 24, 24);
+HudScript HES_Digit4 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_three_chances_4, 24, 24);
 
-HudScript* WaterBlockDigitScripts[] = {
-    &HES_WaterBlock0,
-    &HES_WaterBlock1,
-    &HES_WaterBlock2,
-    &HES_WaterBlock3,
-    &HES_WaterBlock4,
-    &HES_WaterBlock4,
-    &HES_WaterBlock4,
-    &HES_WaterBlock4,
-    &HES_WaterBlock4,
-    &HES_WaterBlock4,
+HudScript HES_WaterBlock = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_three_chances_block, 32, 32);
+HudScript HES_TurboCharge = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_three_chances_circle, 40, 40);
+HudScript HES_CloudNine = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_three_chances_cloud, 40, 40);
+
+HudScript* DigitScripts[] = {
+    &HES_Digit0,
+    &HES_Digit1,
+    &HES_Digit2,
+    &HES_Digit3,
+    &HES_Digit4,
+    &HES_Digit4,
+    &HES_Digit4,
+    &HES_Digit4,
+    &HES_Digit4,
+    &HES_Digit4,
 };
 
 API_CALLABLE(N(init)) {
@@ -101,8 +104,8 @@ API_CALLABLE(N(init)) {
 
     action_command_init_status();
 
-    acs->actionCommandID = ACTION_COMMAND_WATER_BLOCK;
-    acs->state = WATER_BLOCK_STATE_INIT;
+    acs->actionCommandID = ACTION_COMMAND_THREE_CHANCES;
+    acs->state = THREE_CHANCES_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
@@ -160,7 +163,7 @@ API_CALLABLE(N(init)) {
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    acs->hudElements[HIDX_DIGIT] = hud_element_create(WaterBlockDigitScripts[1]);
+    acs->hudElements[HIDX_DIGIT] = hud_element_create(DigitScripts[1]);
     hud_element_set_render_pos(acs->hudElements[HIDX_DIGIT], acs->hudPosX, acs->hudPosY);
 
     acs->hudElements[HIDX_TICK_1] = hud_element_create(&HES_TimingCharge4c);
@@ -171,16 +174,16 @@ API_CALLABLE(N(init)) {
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
 
     switch (acs->targetWeakness) {
-        case TIMING_BUFF_WATER_BLOCK:
-            acs->hudElements[HIDX_BUFF_ICON] = hud_element_create(&HES_WaterBlockBlock);
+        case ACV_THREE_CHANCES_WATER_BLOCK:
+            acs->hudElements[HIDX_BUFF_ICON] = hud_element_create(&HES_WaterBlock);
             hid = acs->hudElements[HIDX_BUFF_ICON];
             break;
-        case TIMING_BUFF_TURBO_CHARGE:
-            acs->hudElements[HIDX_BUFF_ICON] = hud_element_create(&HES_WaterBlockCircle);
+        case ACV_THREE_CHANCES_TURBO_CHARGE:
+            acs->hudElements[HIDX_BUFF_ICON] = hud_element_create(&HES_TurboCharge);
             hid = acs->hudElements[HIDX_BUFF_ICON];
             break;
-        case TIMING_BUFF_CLOUD_NINE:
-            acs->hudElements[HIDX_BUFF_ICON] = hud_element_create(&HES_WaterBlockCloud);
+        case ACV_THREE_CHANCES_CLOUD_NINE:
+            acs->hudElements[HIDX_BUFF_ICON] = hud_element_create(&HES_CloudNine);
             hid = acs->hudElements[HIDX_BUFF_ICON];
             break;
     }
@@ -229,7 +232,7 @@ void N(update)(void) {
     s32 hid;
 
     switch (acs->state) {
-        case WATER_BLOCK_STATE_INIT:
+        case THREE_CHANCES_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
             hid = acs->hudElements[HIDX_BUTTON];
             if (acs->showHud) {
@@ -276,9 +279,9 @@ void N(update)(void) {
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            acs->state = WATER_BLOCK_STATE_APPEAR;
+            acs->state = THREE_CHANCES_STATE_APPEAR;
             break;
-        case WATER_BLOCK_STATE_APPEAR:
+        case THREE_CHANCES_STATE_APPEAR:
             btl_set_popup_duration(POPUP_MSG_ON);
             if (acs->hudPrepareTime != 0) {
                 acs->hudPrepareTime--;
@@ -296,13 +299,13 @@ void N(update)(void) {
 
             hid = acs->hudElements[HIDX_DIGIT];
             switch (acs->targetWeakness) {
-                case TIMING_BUFF_WATER_BLOCK:
+                case ACV_THREE_CHANCES_WATER_BLOCK:
                     hud_element_set_render_pos(hid, acs->hudPosX + 91, acs->hudPosY + 7);
                     break;
-                case TIMING_BUFF_TURBO_CHARGE:
+                case ACV_THREE_CHANCES_TURBO_CHARGE:
                     hud_element_set_render_pos(hid, acs->hudPosX + 91, acs->hudPosY + 13);
                     break;
-                case TIMING_BUFF_CLOUD_NINE:
+                case ACV_THREE_CHANCES_CLOUD_NINE:
                     hud_element_set_render_pos(hid, acs->hudPosX + 91, acs->hudPosY + 13);
                     break;
             }
@@ -311,7 +314,7 @@ void N(update)(void) {
             hud_element_set_render_pos(acs->hudElements[HIDX_TICK_2], acs->hudPosX + 7, acs->hudPosY + 29);
             hud_element_set_render_pos(acs->hudElements[HIDX_BUFF_ICON], acs->hudPosX + 92, acs->hudPosY + 23);
             break;
-        case WATER_BLOCK_STATE_START:
+        case THREE_CHANCES_STATE_START:
             btl_set_popup_duration(POPUP_MSG_ON);
             if (acs->prepareTime != 0) {
                 acs->prepareTime--;
@@ -322,11 +325,12 @@ void N(update)(void) {
             if (acs->frameCounter < 42) {
                 acs->frameCounter = 42;
             }
-            acs->state = WATER_BLOCK_STATE_PREFACE;
+            acs->state = THREE_CHANCES_STATE_PREFACE;
 
             // fallthrough
-        case WATER_BLOCK_STATE_PREFACE:
+        case THREE_CHANCES_STATE_PREFACE:
             btl_set_popup_duration(POPUP_MSG_ON);
+
             // first two minor ticks
             if (acs->frameCounter == 42) {
                 hud_element_set_script(acs->hudElements[HIDX_TICK_1], &HES_TimingCharge3);
@@ -336,30 +340,36 @@ void N(update)(void) {
                 hud_element_set_script(acs->hudElements[HIDX_TICK_2], &HES_TimingCharge2);
                 sfx_play_sound(SOUND_TIMING_BAR_TICK);
             }
-            // light up first orb
+
+            // activate the first light
             if (acs->frameCounter == 2) {
                 hud_element_set_script(acs->hudElements[HIDX_LIGHT_1], &HES_TimingReady);
                 hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
                 sfx_play_sound(SOUND_TIMING_BAR_GO);
             }
+
             acs->frameCounter--;
+
             // prepare to listen for input
             if (acs->frameCounter == 0) {
                 acs->frameCounter = 20;
-                acs->waterBlock.unk_5D = 0;
-                acs->state = WATER_BLOCK_STATE_FIRST_CHANCE;
-                acs->waterBlock.hadCorrectTiming = FALSE;
+                acs->threeChances.time = 0;
+                acs->state = THREE_CHANCES_STATE_FIRST_CHANCE;
+                acs->threeChances.hadCorrectTiming = FALSE;
                 acs->wrongButtonPressed = FALSE;
             }
             break;
-        case WATER_BLOCK_STATE_FIRST_CHANCE:
+        case THREE_CHANCES_STATE_FIRST_CHANCE:
             btl_set_popup_duration(POPUP_MSG_ON);
-            if (!acs->wrongButtonPressed
-                && !acs->waterBlock.hadCorrectTiming
-                && acs->waterBlock.unk_5D >= -5
+            // in this state, test for input during the first six frames (threeChances.time >= -5), then display
+            // a verdict and wait until the full 20 frame state lifetime is complete before beginning the next one.
+
+            // first six frames, if no input has been received
+            if (!(acs->wrongButtonPressed || acs->threeChances.hadCorrectTiming)
+                && acs->threeChances.time >= -5
             ) {
                 s32 (*difficultyVec)[2] = (s32 (*)[2])battleStatus->actionCmdDifficultyTable;
-                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + 5;
+                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + ANTI_MASH_TIME;
                 pos = battleStatus->inputBufferPos;
                 pos -= window;
                 if (pos < 0) {
@@ -368,28 +378,30 @@ void N(update)(void) {
                 if (window == 0) {
                     window = 1;
                 }
-
+                // iterate through last N inputs looking for button presses
                 for (i = 0; i < window; pos++, i++) {
                     if (pos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                         pos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                     }
 
-                    if (i < 5 && (battleStatus->pushInputBuffer[pos] & BUTTON_A)) {
+                    if (i < ANTI_MASH_TIME && (battleStatus->pushInputBuffer[pos] & BUTTON_A)) {
                         acs->wrongButtonPressed = TRUE;
                     }
 
-                    if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !acs->wrongButtonPressed) ||
-                        acs->autoSucceed) {
-                        acs->waterBlock.hadCorrectTiming = TRUE;
+                    if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !acs->wrongButtonPressed) || acs->autoSucceed) {
+                        acs->threeChances.hadCorrectTiming = TRUE;
                         battleStatus->actionQuality++;
                         break;
                     }
                 }
             }
 
-            if ((acs->waterBlock.unk_5D >= -4) && (acs->wrongButtonPressed || acs->waterBlock.hadCorrectTiming)) {
+            // if an input is received, show an early verdict
+            if ((acs->threeChances.time > -5)
+                && (acs->wrongButtonPressed || acs->threeChances.hadCorrectTiming)
+            ) {
                 hid = acs->hudElements[HIDX_RATING_1];
-                if (acs->waterBlock.hadCorrectTiming) {
+                if (acs->threeChances.hadCorrectTiming) {
                     hud_element_set_script(hid, &HES_TimingOK);
                 } else {
                     hud_element_set_script(hid, &HES_TimingMiss);
@@ -398,9 +410,10 @@ void N(update)(void) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            if (acs->waterBlock.unk_5D == -5) {
+            // after six frames, show the verdict
+            if (acs->threeChances.time == -5) {
                 hid = acs->hudElements[HIDX_RATING_1];
-                if (acs->waterBlock.hadCorrectTiming) {
+                if (acs->threeChances.hadCorrectTiming) {
                     hud_element_set_script(hid, &HES_TimingOK);
                 } else {
                     hud_element_set_script(hid, &HES_TimingMiss);
@@ -409,26 +422,37 @@ void N(update)(void) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                 hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButton);
             }
-            acs->waterBlock.unk_5D--;
+
+            acs->threeChances.time--;
+
+            // activate the second light just before the next state begins
             if (acs->frameCounter == 2) {
                 hud_element_set_script(acs->hudElements[HIDX_LIGHT_2], &HES_TimingReady);
                 hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
                 sfx_play_sound(SOUND_TIMING_BAR_GO);
             }
+
             acs->frameCounter--;
+
             if (acs->frameCounter == 0) {
                 acs->frameCounter = 20;
-                acs->waterBlock.unk_5D = 0;
-                acs->state = WATER_BLOCK_STATE_SECOND_CHANCE;
-                acs->waterBlock.hadCorrectTiming = FALSE;
+                acs->threeChances.time = 0;
+                acs->state = THREE_CHANCES_STATE_SECOND_CHANCE;
+                acs->threeChances.hadCorrectTiming = FALSE;
                 acs->wrongButtonPressed = FALSE;
             }
             break;
-        case WATER_BLOCK_STATE_SECOND_CHANCE:
+        case THREE_CHANCES_STATE_SECOND_CHANCE:
             btl_set_popup_duration(POPUP_MSG_ON);
-            if (!acs->wrongButtonPressed && !acs->waterBlock.hadCorrectTiming && (acs->waterBlock.unk_5D >= -5)) {
+            // in this state, test for input during the first six frames (threeChances.time >= -5), then display
+            // a verdict and wait until the full 20 frame state lifetime is complete before beginning the next one.
+
+            // first six frames, if no input has been received
+            if (!(acs->wrongButtonPressed || acs->threeChances.hadCorrectTiming)
+                && acs->threeChances.time >= -5
+            ) {
                 s32 (*difficultyVec)[2] = (s32 (*)[2])battleStatus->actionCmdDifficultyTable;
-                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + 4;
+                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + ANTI_MASH_TIME - 1;
                 if (window < 6) {
                     window = 6;
                 }
@@ -440,29 +464,32 @@ void N(update)(void) {
                 if (window == 0) {
                     window = 1;
                 }
-
+                // iterate through last N inputs looking for button presses
                 for (i = 0; i < window; pos++, i++) {
                     if (pos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                         pos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                     }
 
-                    if (i < 5) {
+                    if (i < ANTI_MASH_TIME) {
                         if (battleStatus->pushInputBuffer[pos] & BUTTON_A) {
                             acs->wrongButtonPressed = TRUE;
                         }
                     }
 
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !acs->wrongButtonPressed) || acs->autoSucceed) {
-                        acs->waterBlock.hadCorrectTiming = TRUE;
+                        acs->threeChances.hadCorrectTiming = TRUE;
                         battleStatus->actionQuality++;
                         break;
                     }
                 }
             }
 
-            if ((acs->waterBlock.unk_5D >= -4) && (acs->wrongButtonPressed || acs->waterBlock.hadCorrectTiming)) {
+            // if an input is received, show an early verdict
+            if ((acs->threeChances.time > -5)
+                && (acs->wrongButtonPressed || acs->threeChances.hadCorrectTiming)
+            ) {
                 hid = acs->hudElements[HIDX_RATING_2];
-                if (acs->waterBlock.hadCorrectTiming) {
+                if (acs->threeChances.hadCorrectTiming) {
                     hud_element_set_script(hid, &HES_TimingOK);
                 } else {
                     hud_element_set_script(hid, &HES_TimingMiss);
@@ -470,9 +497,11 @@ void N(update)(void) {
                 hud_element_set_render_pos(hid, acs->hudPosX + 48, acs->hudPosY + 38);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            if (acs->waterBlock.unk_5D == -5) {
+
+            // after six frames, show the verdict
+            if (acs->threeChances.time == -5) {
                 hid = acs->hudElements[HIDX_RATING_2];
-                if (acs->waterBlock.hadCorrectTiming) {
+                if (acs->threeChances.hadCorrectTiming) {
                     hud_element_set_script(hid, &HES_TimingOK);
                 } else {
                     hud_element_set_script(hid, &HES_TimingMiss);
@@ -481,26 +510,37 @@ void N(update)(void) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                 hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButton);
             }
-            acs->waterBlock.unk_5D--;
+
+            acs->threeChances.time--;
+
+            // activate the third light just before the next state begins
             if (acs->frameCounter == 2) {
                 hud_element_set_script(acs->hudElements[HIDX_LIGHT_3], &HES_TimingReady);
                 hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
                 sfx_play_sound(SOUND_TIMING_BAR_GO);
             }
+
             acs->frameCounter--;
+
             if (acs->frameCounter == 0) {
                 acs->frameCounter = 20;
-                acs->waterBlock.unk_5D = 0;
-                acs->state = WATER_BLOCK_STATE_THIRD_CHANCE;
-                acs->waterBlock.hadCorrectTiming = FALSE;
+                acs->threeChances.time = 0;
+                acs->state = THREE_CHANCES_STATE_THIRD_CHANCE;
+                acs->threeChances.hadCorrectTiming = FALSE;
                 acs->wrongButtonPressed = FALSE;
             }
             break;
-        case WATER_BLOCK_STATE_THIRD_CHANCE:
+        case THREE_CHANCES_STATE_THIRD_CHANCE:
             btl_set_popup_duration(POPUP_MSG_ON);
-            if (!acs->wrongButtonPressed && !acs->waterBlock.hadCorrectTiming && (acs->waterBlock.unk_5D >= -5)) {
+            // in this state, test for input during the first six frames (threeChances.time >= -5), then display
+            // a verdict and begin wrapping up the action command.
+
+            // first six frames, if no input has been received
+            if (!(acs->wrongButtonPressed || acs->threeChances.hadCorrectTiming)
+                && acs->threeChances.time >= -5
+            ) {
                 s32 (*difficultyVec)[2] = (s32 (*)[2])battleStatus->actionCmdDifficultyTable;
-                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + 3;
+                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + ANTI_MASH_TIME - 2;
                 if (window < 6) {
                     window = 6;
                 }
@@ -512,13 +552,13 @@ void N(update)(void) {
                 if (window == 0) {
                     window = 1;
                 }
-
+                // iterate through last N inputs looking for button presses
                 for (i = 0; i < window; pos++, i++) {
                     if (pos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                         pos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                     }
 
-                    if (i < 5) {
+                    if (i < ANTI_MASH_TIME) {
                         if (battleStatus->pushInputBuffer[pos] & BUTTON_A) {
                             acs->wrongButtonPressed = TRUE;
                         }
@@ -526,27 +566,31 @@ void N(update)(void) {
 
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !acs->wrongButtonPressed) ||
                         acs->autoSucceed) {
-                        acs->waterBlock.hadCorrectTiming = TRUE;
+                        acs->threeChances.hadCorrectTiming = TRUE;
                         battleStatus->actionQuality++;
                         break;
                     }
                 }
             }
-            if (acs->waterBlock.unk_5D >= -4) {
-                if (acs->wrongButtonPressed || acs->waterBlock.hadCorrectTiming) {
-                    hid = acs->hudElements[HIDX_RATING_3];
-                    if (acs->waterBlock.hadCorrectTiming) {
-                        hud_element_set_script(hid, &HES_TimingOK);
-                    } else {
-                        hud_element_set_script(hid, &HES_TimingMiss);
-                    }
-                    hud_element_set_render_pos(hid, acs->hudPosX + 68, acs->hudPosY + 38);
-                    hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
-                }
-            }
-            if (acs->waterBlock.unk_5D == -5) {
+
+            // if an input is received, show an early verdict
+            if ((acs->threeChances.time > -5)
+                && (acs->wrongButtonPressed || acs->threeChances.hadCorrectTiming)
+            ) {
                 hid = acs->hudElements[HIDX_RATING_3];
-                if (acs->waterBlock.hadCorrectTiming) {
+                if (acs->threeChances.hadCorrectTiming) {
+                    hud_element_set_script(hid, &HES_TimingOK);
+                } else {
+                    hud_element_set_script(hid, &HES_TimingMiss);
+                }
+                hud_element_set_render_pos(hid, acs->hudPosX + 68, acs->hudPosY + 38);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
+            }
+
+            // after six frames, show the verdict
+            if (acs->threeChances.time == -5) {
+                hid = acs->hudElements[HIDX_RATING_3];
+                if (acs->threeChances.hadCorrectTiming) {
                     hud_element_set_script(hid, &HES_TimingOK);
                 } else {
                     hud_element_set_script(hid, &HES_TimingMiss);
@@ -554,12 +598,13 @@ void N(update)(void) {
                 hud_element_set_render_pos(hid, acs->hudPosX + 68, acs->hudPosY + 38);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                 hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButton);
-                acs->state = WATER_BLOCK_STATE_WRAPUP;
+                acs->state = THREE_CHANCES_STATE_WRAPUP;
                 return;
             }
-            acs->waterBlock.unk_5D--;
+
+            acs->threeChances.time--;
             break;
-        case WATER_BLOCK_STATE_WRAPUP:
+        case THREE_CHANCES_STATE_WRAPUP:
             if (battleStatus->actionQuality == 0) {
                 battleStatus->actionSuccess = -1;
             } else {
@@ -571,9 +616,9 @@ void N(update)(void) {
             }
             btl_set_popup_duration(POPUP_MSG_OFF);
             acs->frameCounter = 5;
-            acs->state = WATER_BLOCK_STATE_DISPOSE;
+            acs->state = THREE_CHANCES_STATE_DISPOSE;
             break;
-        case WATER_BLOCK_STATE_DISPOSE:
+        case THREE_CHANCES_STATE_DISPOSE:
             if (acs->frameCounter != 0) {
                 acs->frameCounter--;
                 return;
@@ -599,8 +644,8 @@ void N(draw)(void) {
     hud_element_draw_clipped(acs->hudElements[HIDX_BUFF_ICON]);
 
     hid = acs->hudElements[HIDX_DIGIT];
-    if (hud_element_get_script(hid) != WaterBlockDigitScripts[battleStatus->actionQuality]) {
-        hud_element_set_script(hid, WaterBlockDigitScripts[battleStatus->actionQuality]);
+    if (hud_element_get_script(hid) != DigitScripts[battleStatus->actionQuality]) {
+        hud_element_set_script(hid, DigitScripts[battleStatus->actionQuality]);
     }
 
     hud_element_draw_clipped(hid);

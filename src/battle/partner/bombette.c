@@ -1064,11 +1064,11 @@ EvtScript N(EVS_Attack_Bomb) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar2)
         CaseEq(MOVE_BOMB)
-            Call(action_command_bomb_start, 0, 57 * DT, 3, 0)
+            Call(action_command_bomb_start, 0, 57 * DT, 3, ACV_BOMB_BASIC)
         CaseEq(MOVE_POWER_BOMB)
-            Call(action_command_bomb_start, 0, 73 * DT - 1, 3, 1)
+            Call(action_command_bomb_start, 0, 73 * DT - 1, 3, ACV_BOMB_SUPER)
         CaseEq(MOVE_MEGA_BOMB)
-            Call(action_command_bomb_start, 0, 87 * DT, 3, 2)
+            Call(action_command_bomb_start, 0, 87 * DT, 3, ACV_BOMB_ULTRA)
     EndSwitch
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LRAW_BOMBETTE_FUSE)
     ChildThread

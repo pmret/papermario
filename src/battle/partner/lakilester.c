@@ -4,7 +4,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/BattleLakilester.h"
 #include "battle/action_cmd/spiny_surge.h"
-#include "battle/action_cmd/water_block.h"
+#include "battle/action_cmd/three_chances.h"
 #include "battle/action_cmd/hurricane.h"
 #include "hud_element.h"
 #include "sprite/player.h"
@@ -51,9 +51,9 @@ static s32 HudStickPosX;
 static s32 HudStickPosY;
 static b32 SpinyFlipTargetingDone;
 static s32 D_8023D2CC;
-static s32 sTargetStates[24];
-static s32 sNumEnemiesBeingBlown;
-static s32 sIsHurricaneActive;
+static s32 EnemyHurricaneChances[MAX_ENEMY_ACTORS];
+static s32 NumEnemiesBeingBlown;
+static s32 IsHurricaneActive;
 static s32 D_8023D338;
 
 enum N(ActorPartIDs) {
@@ -744,11 +744,11 @@ API_CALLABLE(N(InitHurricane)) {
     s32 avgHurricaneChance;
     s32 i;
 
-    sNumEnemiesBeingBlown = 0;
-    sIsHurricaneActive = FALSE;
+    NumEnemiesBeingBlown = 0;
+    IsHurricaneActive = FALSE;
 
     for (i = 0; i < partner->targetListLength; i++) {
-        sTargetStates[i] = 0;
+        EnemyHurricaneChances[i] = 0;
     }
 
     totalChance = 0;
@@ -780,7 +780,7 @@ API_CALLABLE(N(InitHurricane)) {
             }
             affectedTargets++;
         }
-        sTargetStates[targetIdx] = hurricaneChance;
+        EnemyHurricaneChances[targetIdx] = hurricaneChance;
         totalChance += hurricaneChance;
     }
 
@@ -797,9 +797,9 @@ API_CALLABLE(N(InitHurricane)) {
         actor = get_actor(target->actorID);
         part = get_actor_part(actor, target->partID);
         if (actor->transparentStatus == STATUS_KEY_TRANSPARENT || (part->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
-            sTargetStates[targetIdx] = -1;
-        } else if (sTargetStates[targetIdx] != 0) {
-            sTargetStates[targetIdx] = avgHurricaneChance;
+            EnemyHurricaneChances[targetIdx] = -1;
+        } else if (EnemyHurricaneChances[targetIdx] != 0) {
+            EnemyHurricaneChances[targetIdx] = avgHurricaneChance;
         }
     }
     return ApiStatus_DONE2;
@@ -809,7 +809,7 @@ API_CALLABLE(N(CanTargetBeBlown)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     s32 targetIdx = partner->targetIndexList[partner->selectedTargetIndex];
-    s32* hurricaneChance = &sTargetStates[targetIdx];
+    s32* hurricaneChance = &EnemyHurricaneChances[targetIdx];
     SelectableTarget* target = &partner->targetData[targetIdx];
 
     script->varTable[0] = *hurricaneChance;
@@ -1119,8 +1119,8 @@ EvtScript N(cloudNine_normal) = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(SetBattleFlagBits, BS_FLAGS1_SHOW_PLAYER_DECORATIONS, FALSE)
     Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, TRUE)
-    Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, TIMING_BUFF_CLOUD_NINE)
+    Call(LoadActionCommand, ACTION_COMMAND_THREE_CHANCES)
+    Call(action_command_three_chances_init, ACV_THREE_CHANCES_CLOUD_NINE)
     Call(SetActionHudPrepareTime, 50)
     Call(InitTargetIterator)
     Call(SetGoalToHome, ACTOR_PARTNER)
@@ -1161,7 +1161,7 @@ EvtScript N(cloudNine_normal) = {
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_FightingStance)
     Wait(3)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    Call(action_command_water_block_start, 0, 97, 3)
+    Call(action_command_three_chances_start, 0, 97, 3)
     Call(AddBattleCamDist, -75)
     Call(MoveBattleCamOver, 100)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
@@ -1238,8 +1238,8 @@ EvtScript N(cloudNine_normal) = {
 
 EvtScript N(cloudNine_immobile) = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, TIMING_BUFF_CLOUD_NINE)
+    Call(LoadActionCommand, ACTION_COMMAND_THREE_CHANCES)
+    Call(action_command_three_chances_init, ACV_THREE_CHANCES_CLOUD_NINE)
     Call(SetActionHudPrepareTime, 50)
     Call(N(RemoveCloudNineFX))
     Call(InitTargetIterator)
@@ -1276,7 +1276,7 @@ EvtScript N(cloudNine_immobile) = {
     Add(LVar1, 40)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Call(FlyToGoal, ACTOR_PARTNER, 20, 0, EASING_COS_IN_OUT)
-    Call(action_command_water_block_start, 0, 97, 3)
+    Call(action_command_three_chances_start, 0, 97, 3)
     Call(AddBattleCamDist, -75)
     Call(MoveBattleCamOver, 100)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
@@ -1400,7 +1400,7 @@ API_CALLABLE(N(ProcessHurricane)) {
             partner->state.angle = 0.0f;
             partner->state.moveTime = HURRICANE_PARTNER_MOVE_TIME;
             partner->state.moveArcAmplitude = 0;
-            sIsHurricaneActive = TRUE;
+            IsHurricaneActive = TRUE;
             D_8023D338 = 255;
             sHuffPuffBreathEffect = effect = fx_huff_puff_breath(0, NPC_DISPOSE_LOCATION, 0.0f, -2.0f, 0.6f, 0);
 
@@ -1438,7 +1438,7 @@ API_CALLABLE(N(ProcessHurricane)) {
 
             for (i = 0; i < partner->targetListLength; i++) {
                 targetIndex = partner->targetIndexList[i];
-                temp = sTargetStates[targetIndex];
+                temp = EnemyHurricaneChances[targetIndex];
                 if (temp != -1) {
                     if (temp != 0) {
                         target = &partner->targetData[targetIndex];
@@ -1455,7 +1455,7 @@ API_CALLABLE(N(ProcessHurricane)) {
 
             for (i = 0; i < partner->targetListLength; i++) {
                 targetIndex = partner->targetIndexList[i];
-                temp = sTargetStates[targetIndex];
+                temp = EnemyHurricaneChances[targetIndex];
                 if (temp != -1) {
                     if (temp != 0) {
                         target = &partner->targetData[targetIndex];
@@ -1465,7 +1465,7 @@ API_CALLABLE(N(ProcessHurricane)) {
                 }
             }
 
-            sIsHurricaneActive = FALSE;
+            IsHurricaneActive = FALSE;
             remove_effect(sHuffPuffBreathEffect);
             return ApiStatus_DONE2;
     }
@@ -1672,7 +1672,7 @@ API_CALLABLE(N(BlowTargetAway)) {
             target->state.curPos.y = target->curPos.y;
             target->state.curPos.z = target->curPos.z;
             target->state.speed = 5.5f;
-            sNumEnemiesBeingBlown++;
+            NumEnemiesBeingBlown++;
             battleStatus->curAttackElement = 0;
             dispatch_event_actor(target, EVENT_BLOW_AWAY);
             script->functionTemp[0] = 1;
@@ -1687,7 +1687,7 @@ API_CALLABLE(N(BlowTargetAway)) {
             target->yaw += 33.0f;
             target->yaw = clamp_angle(target->yaw);
             if (target->state.curPos.x > 240.0f) {
-                sNumEnemiesBeingBlown--;
+                NumEnemiesBeingBlown--;
                 return ApiStatus_DONE2;
             }
             break;
@@ -1699,14 +1699,14 @@ API_CALLABLE(N(BlowTargetAway)) {
 }
 
 API_CALLABLE(N(AllEnemiesBlownAway)) {
-    if (sNumEnemiesBeingBlown == 0) {
+    if (NumEnemiesBeingBlown == 0) {
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
 }
 
 API_CALLABLE(N(IsHurricaneActive)) {
-    script->varTable[0] = sIsHurricaneActive;
+    script->varTable[0] = IsHurricaneActive;
     return ApiStatus_DONE2;
 }
 
@@ -1729,7 +1729,7 @@ EvtScript N(EVS_Move_Hurricane) = {
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
     Wait(15)
     Call(N(InitHurricane))
-    Call(action_command_hurricane_start, 0, 147 * DT, 3, LVar0)
+    Call(action_command_hurricane_start, 0, 147 * DT, AC_DIFFICULTY_3, LVar0)
     Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     Call(SetActorRotationOffset, ACTOR_PARTNER, 0, 20, 0)
     Call(UseBattleCamPreset, BTL_CAM_REPOSITION)

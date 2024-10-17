@@ -489,7 +489,7 @@ EvtScript N(smack) = {
         Wait(10)
         Set(LVar0, LVarB)
         Add(LVar0, -3)
-        Call(action_command_smack_start, 0, LVar0, 3, 0)
+        Call(action_command_smack_start, 0, LVar0, 3, ACV_SMACK_HAND)
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EndThread
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)
@@ -1001,7 +1001,7 @@ EvtScript N(fanSmack) = {
         Wait(10)
         Set(LVar0, LVarB)
         Add(LVar0, -3)
-        Call(action_command_smack_start, 0, LVar0, 3, 1)
+        Call(action_command_smack_start, 0, LVar0, 3, ACV_SMACK_FAN)
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EndThread
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)

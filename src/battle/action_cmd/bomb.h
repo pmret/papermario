@@ -9,4 +9,11 @@ void action_command_bomb_update(void);
 void action_command_bomb_draw(void);
 void action_command_bomb_free(void);
 
+// variants for this action command
+enum {
+    ACV_BOMB_BASIC      = 0,
+    ACV_BOMB_SUPER      = 1,
+    ACV_BOMB_ULTRA      = 2,
+};
+
 #endif

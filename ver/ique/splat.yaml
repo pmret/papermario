@@ -5756,29 +5756,29 @@ segments:
     start: 0x472F40
     vram: 0x802A9000
     dir: battle/action_cmd
-    name: action_cmd_water_block
+    name: action_cmd_three_chances
     subsegments:
-    - [auto, c, water_block]
+    - [auto, c, three_chances]
     - start: 0x4740A0
       type: .data
-      name: water_block
+      name: three_chances
       subsegments:
-      - [0x4740A0, ci4, water_block_1, 24, 24]
-      - [0x4741C0, palette, water_block_1]
-      - [0x4741E0, ci4, water_block_2, 24, 24]
-      - [0x474300, palette, water_block_2]
-      - [0x474320, ci4, water_block_3, 24, 24]
-      - [0x474440, palette, water_block_3]
-      - [0x474460, ci4, water_block_0, 24, 24]
-      - [0x474580, palette, water_block_0]
-      - [0x4745A0, ci4, water_block_block, 32, 32]
-      - [0x4747A0, palette, water_block_block]
-      - [0x4747C0, ci4, water_block_circle, 40, 40]
-      - [0x474AE0, palette, water_block_circle]
-      - [0x474B00, ci4, water_block_cloud, 40, 40]
-      - [0x474E20, palette, water_block_cloud]
-      - [0x474E40, ci4, water_block_4, 24, 24]
-      - [0x474F60, palette, water_block_4]
+      - [0x4740A0, ci4, three_chances_1, 24, 24]
+      - [0x4741C0, palette, three_chances_1]
+      - [0x4741E0, ci4, three_chances_2, 24, 24]
+      - [0x474300, palette, three_chances_2]
+      - [0x474320, ci4, three_chances_3, 24, 24]
+      - [0x474440, palette, three_chances_3]
+      - [0x474460, ci4, three_chances_0, 24, 24]
+      - [0x474580, palette, three_chances_0]
+      - [0x4745A0, ci4, three_chances_block, 32, 32]
+      - [0x4747A0, palette, three_chances_block]
+      - [0x4747C0, ci4, three_chances_circle, 40, 40]
+      - [0x474AE0, palette, three_chances_circle]
+      - [0x474B00, ci4, three_chances_cloud, 40, 40]
+      - [0x474E20, palette, three_chances_cloud]
+      - [0x474E40, ci4, three_chances_4, 24, 24]
+      - [0x474F60, palette, three_chances_4]
       - [0x474F80]
     - [0x475140]
   - type: code

@@ -946,7 +946,7 @@ EvtScript N(skyDive) = {
     Call(FlyToGoal, ACTOR_PARTNER, 0, -10, EASING_COS_IN_OUT)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Still)
     Wait(3)
-    Call(action_command_jump_start, 32, 3)
+    Call(action_command_jump_start, 32, AC_DIFFICULTY_3)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_PARAKARRY_PREDIVE)
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_FlyFast)

@@ -4,7 +4,7 @@
 #include "script_api/battle.h"
 #include "battle/action_cmd/body_slam.h"
 #include "battle/action_cmd/power_shock.h"
-#include "battle/action_cmd/water_block.h"
+#include "battle/action_cmd/three_chances.h"
 #include "battle/action_cmd/mega_shock.h"
 #include "sprite/npc/BattleWatt.h"
 #include "sprite/player.h"
@@ -1088,8 +1088,8 @@ EvtScript N(EVS_Attack_PowerShock) = {
 };
 
 EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
-    Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, TIMING_BUFF_TURBO_CHARGE)
+    Call(LoadActionCommand, ACTION_COMMAND_THREE_CHANCES)
+    Call(action_command_three_chances_init, ACV_THREE_CHANCES_TURBO_CHARGE)
     Call(SetActionHudPrepareTime, 0)
     Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, TRUE)
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
@@ -1112,7 +1112,7 @@ EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
     Wait(1)
     Call(SetActorYaw, ACTOR_PARTNER, 180)
     Wait(10)
-    Call(action_command_water_block_start, 0, 100 * DT, 3)
+    Call(action_command_three_chances_start, 0, 100 * DT, 3)
     Call(AddBattleCamDist, -75)
     Call(MoveBattleCamOver, 100 * DT)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
@@ -1173,8 +1173,8 @@ EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
 };
 
 EvtScript N(EVS_TurboCharge_ImmobilePlayer) = {
-    Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, TIMING_BUFF_TURBO_CHARGE)
+    Call(LoadActionCommand, ACTION_COMMAND_THREE_CHANCES)
+    Call(action_command_three_chances_init, ACV_THREE_CHANCES_TURBO_CHARGE)
     Call(SetActionHudPrepareTime, 0)
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Wait(5)
@@ -1195,7 +1195,7 @@ EvtScript N(EVS_TurboCharge_ImmobilePlayer) = {
     Wait(1)
     Call(SetActorYaw, ACTOR_PARTNER, 180)
     Wait(10)
-    Call(action_command_water_block_start, 0, 100 * DT, 3)
+    Call(action_command_three_chances_start, 0, 100 * DT, 3)
     Call(AddBattleCamDist, -100)
     Call(MoveBattleCamOver, 100 * DT)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)

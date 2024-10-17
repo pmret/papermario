@@ -13,9 +13,11 @@ enum {
 };
 
 // how much to add to the meter per input if all modifiers are neutral
-#define BASE_FILL_RATE 850
+#define METER_FILL_RATE 850
 
 s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
+
+#define GET_DRAIN_RATE(pct) PCT_TO_TABLE_RATE(N(DrainRateTable), pct)
 
 // threshold meter values; not used for anything
 // these correspond to values provided via SetupMashMeter
@@ -80,7 +82,6 @@ void N(update)(void) {
     Actor* partner = battleStatus->partnerActor;
     s32 hid;
     s32 cutoff;
-    s32 idx;
 
     switch (acs->state) {
         case AC_STATE_INIT:
@@ -139,10 +140,7 @@ void N(update)(void) {
             // bar can drain if it hasn't been fully filled
             if (!acs->isBarFilled) {
                 cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
-                idx = (acs->barFillLevel / cutoff);
-                idx /= ONE_PCT_MASH / ARRAY_COUNT(N(DrainRateTable)); // = 20
-
-                acs->barFillLevel -= N(DrainRateTable)[idx];
+                acs->barFillLevel -= GET_DRAIN_RATE(acs->barFillLevel / cutoff);
                 if (acs->barFillLevel < 0) {
                     acs->barFillLevel = 0;
                 }
@@ -156,14 +154,14 @@ void N(update)(void) {
 
                 if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT)) {
                     if (acs->airRaid.holdingLeft) {
-                        acs->barFillLevel += (battleStatus->actionCmdDifficultyTable[acs->difficulty] * BASE_FILL_RATE) / 100;
+                        acs->barFillLevel += SCALE_BY_PCT(METER_FILL_RATE, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                         acs->airRaid.holdingLeft = FALSE;
                     }
                 }
 
                 // right stick inputs actively drain the bar
                 if (battleStatus->curButtonsPressed & BUTTON_STICK_RIGHT) {
-                    acs->barFillLevel -= (battleStatus->actionCmdDifficultyTable[acs->difficulty] * BASE_FILL_RATE) / 100;
+                    acs->barFillLevel -= SCALE_BY_PCT(METER_FILL_RATE, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                 }
             }
 

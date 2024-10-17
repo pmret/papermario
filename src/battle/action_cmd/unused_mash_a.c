@@ -125,7 +125,7 @@ void N(update)(void) {
 
             // check for bar-filling input
             if (battleStatus->curButtonsPressed & BUTTON_A) {
-                acs->barFillLevel += METER_FILL_TICK * battleStatus->actionCmdDifficultyTable[acs->difficulty] / 100;
+                acs->barFillLevel += SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
             }
 
             // handle bar reaching 100%

@@ -5,7 +5,7 @@
 //TODO action command
 #define NAMESPACE action_command_mega_shock
 
-s32 D_802A9930_42E340[AC_DIFFICULTY_LEN] = { 0, 25, 50, 75, 75, 0, 0, 0 };
+s32 D_802A9930_42E340[] = { 0, 25, 50, 75, 75 };
 
 extern s32 actionCmdTableMegaShock[];
 
@@ -208,16 +208,16 @@ void N(update)(void) {
             buttonsAB = BUTTON_A | BUTTON_B;
             if ((buttonsPushed & buttonsAB) == buttonsAB) {
                 if (acs->targetWeakness != 0) {
-                    s32 fillLevel;
+                    s32 amt;
 
-                    fillLevel = acs->targetWeakness * 780;
-                    fillLevel = fillLevel / 100 * battleStatus->actionCmdDifficultyTable[acs->difficulty];
+                    amt = SCALE_BY_PCT(780, acs->targetWeakness);
+                    amt = SCALE_BY_PCT(amt, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
 
                     // Perplexing reuse of buttonsPushed here, but it fixes register allocation. Likely another
                     // subexpression from above can be put into a variable and reused instead.
                     //
                     // TODO: Find a way to avoid reusing buttonsPushed.
-                    buttonsPushed = fillLevel / 100;
+                    buttonsPushed = amt;
 
                     acs->barFillLevel += buttonsPushed;
                 } else {

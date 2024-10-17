@@ -13,11 +13,13 @@ enum {
 };
 
 // how much to add to the meter per input if all modifiers are neutral
-#define FILL_RATE_1 940
-#define FILL_RATE_2 800
-#define FILL_RATE_3 740
+#define BASIC_FILL_TICK 940
+#define SUPER_FILL_TICK 800
+#define ULTRA_FILL_TICK 740
 
 s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
+
+#define GET_DRAIN_RATE(pct) PCT_TO_TABLE_RATE(N(DrainRateTable), pct)
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -74,7 +76,6 @@ void N(update)(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
     s32 cutoff;
-    s32 idx;
 
     switch (acs->state) {
         case AC_STATE_INIT:
@@ -125,10 +126,7 @@ void N(update)(void) {
             // bar can drain if it hasn't been fully filled
             if (!acs->isBarFilled) {
                 cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
-                idx = (acs->barFillLevel / cutoff);
-                idx /= ONE_PCT_MASH / ARRAY_COUNT(N(DrainRateTable)); // = 20
-
-                acs->barFillLevel -= N(DrainRateTable)[idx];
+                acs->barFillLevel -= GET_DRAIN_RATE(acs->barFillLevel / cutoff);
                 if (acs->barFillLevel < 0) {
                     acs->barFillLevel = 0;
                 }
@@ -137,14 +135,14 @@ void N(update)(void) {
             // check for bar-filling input
             if (battleStatus->curButtonsPressed & BUTTON_A) {
                 switch (acs->targetWeakness) {
-                    case 0:
-                        acs->barFillLevel += battleStatus->actionCmdDifficultyTable[acs->difficulty] * FILL_RATE_1 / 100;
+                    case ACV_BOMB_BASIC:
+                        acs->barFillLevel += SCALE_BY_PCT(BASIC_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                         break;
-                    case 1:
-                        acs->barFillLevel += battleStatus->actionCmdDifficultyTable[acs->difficulty] * FILL_RATE_2 / 100;
+                    case ACV_BOMB_SUPER:
+                        acs->barFillLevel += SCALE_BY_PCT(SUPER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                         break;
-                    case 2:
-                        acs->barFillLevel += battleStatus->actionCmdDifficultyTable[acs->difficulty] * FILL_RATE_3 / 100;
+                    case ACV_BOMB_ULTRA:
+                        acs->barFillLevel += SCALE_BY_PCT(ULTRA_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                         break;
                 }
             }

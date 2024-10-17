@@ -25,29 +25,29 @@ u8 mashMeter_cutOffColors[15] = {
     255, 255, 255,
 };
 
-s32 actionCmdTableJump[AC_DIFFICULTY_LEN] = { 7, 6, 5, 4, 3, 2, 1, 0 };
-s32 actionCmdTableHammer[AC_DIFFICULTY_LEN] = { 11, 10, 9, 8, 7, 6, 5, 4 };
-s32 actionCmdTableFlee[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableBreakFree[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableWhirlwind[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableStopLeech[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTable07[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableDizzyShell[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableFireShell[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTable0A[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableBomb[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableBodySlam[AC_DIFFICULTY_LEN] = { 9, 8, 7, 6, 5, 4, 3, 2 };
-s32 actionCmdTableAirLift[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableAirRaid[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableSquirt[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTablePowerShock[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableMegaShock[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableSmack[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableSpinySurge[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableHurricane[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableSpook[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableWaterBlock[AC_DIFFICULTY_LEN][2] = { {6, 3}, {5, 3}, {4, 3}, {2, 3}, {1, 3}, {0, 3}, {0, 2}, {0, 1} };
-s32 actionCmdTableTidalWave[AC_DIFFICULTY_LEN] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableJump = { 7, 6, 5, 4, 3, 2, 1, 0 };
+Difficulty1D actionCmdTableHammer = { 11, 10, 9, 8, 7, 6, 5, 4 };
+Difficulty1D actionCmdTableFlee = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableBreakFree = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableWhirlwind = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableStopLeech = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTable07 = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableDizzyShell = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableFireShell = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTable0A = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableBomb = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableBodySlam = { 9, 8, 7, 6, 5, 4, 3, 2 };
+Difficulty1D actionCmdTableAirLift = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableAirRaid = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableSquirt = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTablePowerShock = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableMegaShock = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableSmack = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableSpinySurge = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableHurricane = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableSpook = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty2D actionCmdTableWaterBlock = { {6, 3}, {5, 3}, {4, 3}, {2, 3}, {1, 3}, {0, 3}, {0, 2}, {0, 1} };
+Difficulty1D actionCmdTableTidalWave = { 130, 120, 110, 100, 90, 80, 70, 60 };
 
 #define AC_TBL_ENTRY(name) \
     action_cmd_ ## name ## _ROM_START, action_cmd_ ## name ## _ROM_END, action_cmd_ ## name ## _VRAM
@@ -75,7 +75,7 @@ void* actionCommandDmaTable[] = {
     AC_TBL_ENTRY(spiny_surge),
     AC_TBL_ENTRY(hurricane),
     AC_TBL_ENTRY(spook),
-    AC_TBL_ENTRY(water_block),
+    AC_TBL_ENTRY(three_chances),
     AC_TBL_ENTRY(tidal_wave),
 };
 
@@ -357,8 +357,8 @@ void action_command_update(void) {
         case ACTION_COMMAND_SPOOK:
             action_command_spook_update();
             break;
-        case ACTION_COMMAND_WATER_BLOCK:
-            action_command_water_block_update();
+        case ACTION_COMMAND_THREE_CHANCES:
+            action_command_three_chances_update();
             break;
         case ACTION_COMMAND_TIDAL_WAVE:
             action_command_tidal_wave_update();
@@ -435,8 +435,8 @@ void action_command_draw(void) {
         case ACTION_COMMAND_SPOOK:
             action_command_spook_draw();
             break;
-        case ACTION_COMMAND_WATER_BLOCK:
-            action_command_water_block_draw();
+        case ACTION_COMMAND_THREE_CHANCES:
+            action_command_three_chances_draw();
             break;
         case ACTION_COMMAND_TIDAL_WAVE:
             action_command_tidal_wave_draw();
@@ -512,8 +512,8 @@ void action_command_free(void) {
         case ACTION_COMMAND_SPOOK:
             action_command_spook_free();
             break;
-        case ACTION_COMMAND_WATER_BLOCK:
-            action_command_water_block_free();
+        case ACTION_COMMAND_THREE_CHANCES:
+            action_command_three_chances_free();
             break;
         case ACTION_COMMAND_TIDAL_WAVE:
             action_command_tidal_wave_free();

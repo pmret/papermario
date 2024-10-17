@@ -25,17 +25,28 @@
 #include "battle/action_cmd/spiny_surge.h"
 #include "battle/action_cmd/hurricane.h"
 #include "battle/action_cmd/spook.h"
-#include "battle/action_cmd/water_block.h"
+#include "battle/action_cmd/three_chances.h"
 #include "battle/action_cmd/tidal_wave.h"
 
 // standard states for action commands
-// used by every command except water block and tidal wave
+// used by every command except three_chances and tidal_wave
 enum {
     AC_STATE_INIT                   = 0,  // create hud elements
     AC_STATE_APPEAR                 = 1,  // hud elements move into position
     AC_STATE_START                  = 10, // begin listening for input
     AC_STATE_ACTIVE                 = 11, // responding to player input
     AC_STATE_DISPOSE                = 12, // delay and disappear
+};
+
+enum {
+    AC_DIFFICULTY_0                 = 0, // easiest
+    AC_DIFFICULTY_1                 = 1, // very easy
+    AC_DIFFICULTY_2                 = 2, // easy
+    AC_DIFFICULTY_3                 = 3, // standard
+    AC_DIFFICULTY_4                 = 4, // harder
+    AC_DIFFICULTY_5                 = 5, // hard
+    AC_DIFFICULTY_6                 = 6, // very hard
+    AC_DIFFICULTY_7                 = 7, // hardest
 };
 
 enum MashMeterColorModes {
@@ -60,6 +71,10 @@ enum ActionCommandModes {
 
 // total number of units in the mash meter
 #define MAX_MASH_UNITS  (MAX_MASH_PCT * ONE_PCT_MASH)
+
+#define SCALE_BY_PCT(x, pct)            ((x) * (pct) / 100)
+#define PCT_TO_TABLE_IDX(table, pct)    ((pct) / (ONE_PCT_MASH / ARRAY_COUNT(table)))
+#define PCT_TO_TABLE_RATE(table, pct)   (table[PCT_TO_TABLE_IDX(table, pct)])
 
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 workerID;
@@ -108,8 +123,8 @@ typedef struct ActionCommandStatus {
                     } squirt;
                     struct {
                         b8 hadCorrectTiming;
-                        s8 unk_5D;
-                    } waterBlock;
+                        s8 time;
+                    } threeChances;
                     struct {
                         s8 prevButton;
                         s8 inputCount;

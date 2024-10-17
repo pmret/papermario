@@ -4,7 +4,7 @@
 #include "script_api/battle.h"
 #include "battle/action_cmd/hammer.h"
 #include "battle/action_cmd/squirt.h"
-#include "battle/action_cmd/water_block.h"
+#include "battle/action_cmd/three_chances.h"
 #include "battle/action_cmd/tidal_wave.h"
 #include "sprite/npc/BattleSushie.h"
 
@@ -1048,8 +1048,8 @@ EvtScript N(EVS_Move_WaterBlock) = {
     Add(LVar0, 30)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
-    Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, TIMING_BUFF_WATER_BLOCK)
+    Call(LoadActionCommand, ACTION_COMMAND_THREE_CHANCES)
+    Call(action_command_three_chances_init, ACV_THREE_CHANCES_WATER_BLOCK)
     Call(SetActionHudPrepareTime, 0)
     Set(LVar0, 0)
     Loop(4)
@@ -1058,7 +1058,7 @@ EvtScript N(EVS_Move_WaterBlock) = {
         Wait(1)
     EndLoop
     Wait(4)
-    Call(action_command_water_block_start, 0, 100, 3)
+    Call(action_command_three_chances_start, 0, 100, 3)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_HoldWater)
     Wait(110)
     Call(GetPartnerActionSuccess, LVar0)

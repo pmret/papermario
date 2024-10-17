@@ -130,11 +130,11 @@ void N(update)(void) {
             // check for bar-filling input
             if (!acs->berserkerEnabled) {
                 if (battleStatus->curButtonsPressed & BUTTON_A) {
-                    acs->barFillLevel += METER_FILL_TICK * battleStatus->actionCmdDifficultyTable[acs->difficulty] / 100;
+                    acs->barFillLevel += SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                 }
             } else {
-                acs->barFillLevel += battleStatus->actionCmdDifficultyTable[acs->difficulty] * METER_FILL_TICK / 6 / 100;
-                acs->barFillLevel += rand_int((battleStatus->actionCmdDifficultyTable[acs->difficulty]) * METER_FILL_TICK / 6 / 100);
+                acs->barFillLevel += SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]) / 6;
+                acs->barFillLevel += rand_int(SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]) / 6);
             }
             battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
 

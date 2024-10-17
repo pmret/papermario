@@ -232,21 +232,21 @@ void N(update)(void) {
                     s32 amt;
 
                     if (acs->targetWeakness == 0) {
-                        amt = battleStatus->actionCmdDifficultyTable[acs->difficulty] * 5;
+                        amt = SCALE_BY_PCT(500, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                     } else {
-                        amt = battleStatus->actionCmdDifficultyTable[acs->difficulty] * 6;
+                        amt = SCALE_BY_PCT(600, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                     }
                     acs->barFillLevel += amt;
                 }
             } else {
-                acs->barFillLevel += battleStatus->actionCmdDifficultyTable[acs->difficulty] / 4;
-                acs->barFillLevel += rand_int(battleStatus->actionCmdDifficultyTable[acs->difficulty] / 4);
+                acs->barFillLevel += SCALE_BY_PCT(25, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
+                acs->barFillLevel += rand_int(SCALE_BY_PCT(25, battleStatus->actionCmdDifficultyTable[acs->difficulty]));
             }
 
             if (acs->barFillLevel > cutoff * 100) {
                 acs->barFillLevel = cutoff * 100;
             }
-            if (!acs->targetWeakness) {
+            if (acs->targetWeakness == 0) {
                 battleStatus->actionQuality = acs->barFillLevel / 2000;
             } else {
                 battleStatus->actionQuality = D_802AA8B4_425524[acs->barFillLevel / 1000];
@@ -288,7 +288,7 @@ void N(draw)(void) {
     draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 1);
     hud_element_draw_clipped(acs->hudElements[3]);
     hid = acs->hudElements[2];
-    if (!acs->targetWeakness) {
+    if (acs->targetWeakness == 0) {
         if (D_802AA888_4254F8[battleStatus->actionQuality] != hud_element_get_script(hid)) {
             hud_element_set_script(hid, D_802AA888_4254F8[battleStatus->actionQuality]);
         }

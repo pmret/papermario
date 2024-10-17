@@ -18,6 +18,10 @@ enum {
 s32 N(DrainRateTable)[] = { 300, 300, 265, 220, 175, 175 };
 s32 N(FillRateTable)[] = { 300, 300, 265, 220, 175, 175 };
 
+// bug: the sixth entry is not accessible due to the way idx is calculated in these macros
+#define GET_DRAIN_RATE(pct) (N(DrainRateTable)[((pct) / (ONE_PCT_MASH / 5))])
+#define GET_FILL_RATE(pct)  (N(FillRateTable)[((pct) / (ONE_PCT_MASH / 5))])
+
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
@@ -91,9 +95,9 @@ void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
-    s32 mashMeterCutoff;
-    s32 cutoff;
     s32 fillPct;
+    s32 cutoff;
+    s32 idx;
 
     switch (acs->state) {
         case AC_STATE_INIT:
@@ -146,12 +150,13 @@ void N(update)(void) {
             fillPct = acs->barFillLevel / cutoff;
             if (!acs->squirt.draining) {
                 if (!(battleStatus->curButtonsDown & BUTTON_A)) {
-                    acs->barFillLevel -= N(DrainRateTable)[fillPct / 20];
+                    acs->barFillLevel -= GET_DRAIN_RATE(fillPct);
                     if (acs->barFillLevel < 0) {
                         acs->barFillLevel = 0;
                     }
                 } else {
-                    acs->barFillLevel += N(FillRateTable)[fillPct / 20] * battleStatus->actionCmdDifficultyTable[acs->difficulty] / 100;
+                    s32 amt = GET_FILL_RATE(fillPct);
+                    acs->barFillLevel += SCALE_BY_PCT(amt, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                     if (acs->barFillLevel > MAX_MASH_UNITS) {
                         acs->barFillLevel = MAX_MASH_UNITS;
                         acs->squirt.draining = TRUE;

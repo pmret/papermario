@@ -3492,7 +3492,7 @@ enum ActionCommand {
     ACTION_COMMAND_SPINY_SURGE               = 0x00000013,
     ACTION_COMMAND_HURRICANE                 = 0x00000014,
     ACTION_COMMAND_SPOOK                     = 0x00000015,
-    ACTION_COMMAND_WATER_BLOCK               = 0x00000016,
+    ACTION_COMMAND_THREE_CHANCES             = 0x00000016,
     ACTION_COMMAND_TIDAL_WAVE                = 0x00000017,
 };
 

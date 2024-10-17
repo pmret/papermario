@@ -8,7 +8,7 @@
 
 #include "battle/common/move/JumpSupport.inc.c"
 
-s32 N(DifficultyTable)[AC_DIFFICULTY_LEN] = {
+Difficulty1D N(DifficultyTable) = {
     7, 6, 5, 4, 3, 2, 1, 0
 };
 
@@ -66,7 +66,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
     ExecWait(N(EVS_JumpSupport_Approach))
     ExecWait(N(EVS_JumpSupport_CalcJumpTime))
-    Call(action_command_jump_start, LVarA, 1)
+    Call(action_command_jump_start, LVarA, AC_DIFFICULTY_1)
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
@@ -120,15 +120,15 @@ EvtScript N(EVS_UseMove_ImplA) = {
     Set(LVarA, 24)
     Switch(LVarF)
         CaseEq(0)
-            Call(action_command_jump_start, LVarA, 1)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_1)
         CaseEq(1)
-            Call(action_command_jump_start, LVarA, 2)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_2)
         CaseEq(2)
-            Call(action_command_jump_start, LVarA, 3)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_3)
         CaseEq(3)
-            Call(action_command_jump_start, LVarA, 4)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_4)
         CaseDefault
-            Call(action_command_jump_start, LVarA, 5)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_5)
     EndSwitch
     Sub(LVarD, 1)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_SpinFall)
@@ -202,7 +202,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
     ExecWait(N(EVS_JumpSupport_Approach))
     ExecWait(N(EVS_JumpSupport_CalcJumpTime))
-    Call(action_command_jump_start, LVarA, 1)
+    Call(action_command_jump_start, LVarA, AC_DIFFICULTY_1)
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
@@ -250,15 +250,15 @@ EvtScript N(EVS_UseMove_ImplB) = {
     Set(LVarA, 37)
     Switch(LVarF)
         CaseEq(0)
-            Call(action_command_jump_start, LVarA, 1)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_1)
         CaseEq(1)
-            Call(action_command_jump_start, LVarA, 2)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_2)
         CaseEq(2)
-            Call(action_command_jump_start, LVarA, 3)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_3)
         CaseEq(3)
-            Call(action_command_jump_start, LVarA, 4)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_4)
         CaseDefault
-            Call(action_command_jump_start, LVarA, 5)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_5)
     EndSwitch
     Sub(LVarD, 1)
     Call(SetGoalToTarget, ACTOR_PLAYER)
@@ -338,7 +338,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
     ExecWait(N(EVS_JumpSupport_Approach))
     ExecWait(N(EVS_JumpSupport_CalcJumpTime))
-    Call(action_command_jump_start, LVarA, 1)
+    Call(action_command_jump_start, LVarA, AC_DIFFICULTY_1)
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
@@ -386,15 +386,15 @@ EvtScript N(EVS_UseMove_ImplC) = {
     Set(LVarA, 25)
     Switch(LVarF)
         CaseEq(0)
-            Call(action_command_jump_start, LVarA, 1)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_1)
         CaseEq(1)
-            Call(action_command_jump_start, LVarA, 2)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_2)
         CaseEq(2)
-            Call(action_command_jump_start, LVarA, 3)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_3)
         CaseEq(3)
-            Call(action_command_jump_start, LVarA, 4)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_4)
         CaseDefault
-            Call(action_command_jump_start, LVarA, 5)
+            Call(action_command_jump_start, LVarA, AC_DIFFICULTY_5)
     EndSwitch
     Sub(LVarD, 1)
     Call(SetGoalToTarget, ACTOR_PLAYER)

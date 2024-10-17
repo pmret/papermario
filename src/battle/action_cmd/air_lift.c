@@ -18,6 +18,8 @@ enum {
 
 s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
 
+#define GET_DRAIN_RATE(pct) PCT_TO_TABLE_RATE(N(DrainRateTable), pct)
+
 BSS b32 N(HasStarted);
 
 API_CALLABLE(N(init)) {
@@ -163,10 +165,7 @@ void N(update)(void) {
             if (!acs->isBarFilled) {
                 if (acs->effectiveness != 0) {
                     s32 maxFillLevel = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
-                    s32 idx = (acs->barFillLevel / maxFillLevel);
-                    idx /= ONE_PCT_MASH / ARRAY_COUNT(N(DrainRateTable)); // = 20
-
-                    acs->barFillLevel -= N(DrainRateTable)[idx];
+                    acs->barFillLevel -= GET_DRAIN_RATE(acs->barFillLevel / maxFillLevel);
                     if (acs->barFillLevel < 0) {
                         acs->barFillLevel = 0;
                     }
