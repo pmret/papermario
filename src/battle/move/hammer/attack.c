@@ -15,19 +15,19 @@ EvtScript N(EVS_UseMove) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
-            Set(LVarD, 45)
-            Set(LVarE, 1)
-            Set(LVarF, 2)
+            Set(LVarD, 45)// action command duration
+            Set(LVarE, 1) // bad input dmg
+            Set(LVarF, 2) // good input dmg
             ExecWait(N(EVS_UseMove_Impl))
         CaseEq(1)
-            Set(LVarD, 45)
-            Set(LVarE, 2)
-            Set(LVarF, 4)
+            Set(LVarD, 45)// action command duration
+            Set(LVarE, 2) // bad input dmg
+            Set(LVarF, 4) // good input dmg
             ExecWait(N(EVS_UseMove_Impl))
         CaseEq(2)
-            Set(LVarD, 45)
-            Set(LVarE, 3)
-            Set(LVarF, 6)
+            Set(LVarD, 45)// action command duration
+            Set(LVarE, 3) // bad input dmg
+            Set(LVarF, 6) // good input dmg
             ExecWait(N(EVS_UseMove_Impl))
     EndSwitch
     Return
@@ -213,19 +213,19 @@ EvtScript N(EVS_UseBerserker) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
-            Set(LVarD, 75)
-            Set(LVarE, 1)
-            Set(LVarF, 2)
+            Set(LVarD, 75) // action command duration
+            Set(LVarE, 1) // bad input dmg
+            Set(LVarF, 2) // good input dmg
             ExecWait(N(EVS_UseBerserker_Impl))
         CaseEq(1)
-            Set(LVarD, 66)
-            Set(LVarE, 2)
-            Set(LVarF, 4)
+            Set(LVarD, 66) // action command duration
+            Set(LVarE, 2) // bad input dmg
+            Set(LVarF, 4) // good input dmg
             ExecWait(N(EVS_UseBerserker_Impl))
         CaseEq(2)
-            Set(LVarD, 57)
-            Set(LVarE, 3)
-            Set(LVarF, 6)
+            Set(LVarD, 57) // action command duration
+            Set(LVarE, 3) // bad input dmg
+            Set(LVarF, 6) // good input dmg
             ExecWait(N(EVS_UseBerserker_Impl))
     EndSwitch
     Return

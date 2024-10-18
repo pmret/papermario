@@ -1,16 +1,9 @@
 #include "common.h"
 #include "battle/action_cmd.h"
 
-//TODO action command
 #define NAMESPACE action_command_hammer
 
 extern s32 actionCmdTableHammer[];
-
-enum HammerActionResult {
-    HAMMER_RESULT_FAILED = -1,
-    HAMMER_RESULT_NONE   = 0,
-    HAMMER_RESULT_GOOD   = 1,
-};
 
 // indices into ActionCommandStatus::hudElements for this action command
 enum {
@@ -33,7 +26,7 @@ API_CALLABLE(N(init)) {
     battleStatus->actionResult = ACTION_RESULT_FAIL;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = HAMMER_RESULT_NONE;
+        battleStatus->actionSuccess = 0;
         battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
@@ -91,14 +84,13 @@ API_CALLABLE(N(init)) {
     return ApiStatus_DONE2;
 }
 
-// args: prep time, duration, difficulty
 API_CALLABLE(N(start)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = HAMMER_RESULT_NONE;
+        battleStatus->actionSuccess = 0;
         battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
@@ -116,7 +108,7 @@ API_CALLABLE(N(start)) {
     }
 
     acs->hammerMissedStart = FALSE;
-    battleStatus->actionSuccess = HAMMER_RESULT_NONE;
+    battleStatus->actionSuccess = 0;
     battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = AC_STATE_START;
@@ -131,9 +123,10 @@ void N(update)(void) {
     Actor* partner = battleStatus->partnerActor;
     s32 hid;
     f32 oneThird;
-    s32 phi_s0;
+    s32 inputWindow;
+    s32 bufferPos;
+    s32 i;
     s32 new_var;
-    s32 a;
 
     switch (acs->state) {
         case AC_STATE_INIT:
@@ -228,15 +221,17 @@ void N(update)(void) {
                 return;
             }
 
-            phi_s0 = battleStatus->actionCmdDifficultyTable[acs->difficulty];
-            new_var = phi_s0 + 2;
+            inputWindow = battleStatus->actionCmdDifficultyTable[acs->difficulty];
+            new_var = inputWindow + 2;
             oneThird = (acs->duration - new_var) / 3;
 
             if (acs->frameCounter < oneThird) {
                 hud_element_set_script(acs->hudElements[HIDX_CHARGE_C], &HES_TimingCharge3);
                 battleStatus->actionQuality = 0;
-                if (acs->frameCounter == 0 && acs->playHammerSounds) {
-                    sfx_play_sound(SOUND_TIMING_BAR_TICK);
+                if (acs->frameCounter == 0) {
+                    if (acs->playHammerSounds) {
+                        sfx_play_sound(SOUND_TIMING_BAR_TICK);
+                    }
                 }
             } else if (acs->frameCounter < oneThird * 2) {
                 hud_element_set_script(acs->hudElements[HIDX_CHARGE_B], &HES_TimingCharge2);
@@ -256,7 +251,7 @@ void N(update)(void) {
                 }
             }
 
-            if (acs->frameCounter == (~phi_s0 + acs->duration)) {
+            if (acs->frameCounter == (~inputWindow + acs->duration)) {
                 battleStatus->actionQuality = 3;
                 hud_element_set_script(acs->hudElements[HIDX_WAIT], &HES_TimingReady);
                 hud_element_set_script(acs->hudElements[HIDX_STICK], &HES_StickTapNeutral);
@@ -268,62 +263,60 @@ void N(update)(void) {
                     acs->frameCounter = acs->duration - 4;
                 }
             }
-
-            a = acs->duration - acs->frameCounter;
-            phi_s0 = battleStatus->actionCmdDifficultyTable[acs->difficulty] - a + 3;
-            if (phi_s0 < 0) {
-                phi_s0 = 0;
+            inputWindow = battleStatus->actionCmdDifficultyTable[acs->difficulty] - (acs->duration - acs->frameCounter) + 3;
+            if (inputWindow < 0) {
+                inputWindow = 0;
             }
 
+            // has the stick been release too early?
             if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT)
-                && phi_s0 == 0
+                && inputWindow == 0
                 && acs->autoSucceed == 0
                 && battleStatus->actionCommandMode < AC_MODE_TUTORIAL
             ) {
-                battleStatus->actionSuccess = HAMMER_RESULT_FAILED;
+                battleStatus->actionSuccess = AC_ACTION_FAILED;
                 battleStatus->actionResult = ACTION_RESULT_EARLY;
                 action_command_free();
-            } else {
-                s32 i;
-                s32 bufferPos;
+                return;
+            }
 
-                bufferPos = battleStatus->inputBufferPos;
-                bufferPos -= phi_s0;
-                if (bufferPos < 0) {
-                    bufferPos += ARRAY_COUNT(battleStatus->holdInputBuffer);
-                }
+            // step back several frames in the input buffer
+            bufferPos = battleStatus->inputBufferPos;
+            bufferPos -= inputWindow;
+            if (bufferPos < 0) {
+                bufferPos += ARRAY_COUNT(battleStatus->holdInputBuffer);
+            }
 
-                if (battleStatus->actionSuccess == HAMMER_RESULT_NONE) {
-                    for (i = 0; i < phi_s0; i++, bufferPos++) {
-                        if (bufferPos >= ARRAY_COUNT(battleStatus->holdInputBuffer)) {
-                            bufferPos -= ARRAY_COUNT(battleStatus->holdInputBuffer);
-                        }
-
-                        if (!(battleStatus->holdInputBuffer[bufferPos] & BUTTON_STICK_LEFT) ||
-                            acs->autoSucceed != 0)
-                        {
-                            battleStatus->actionSuccess = HAMMER_RESULT_GOOD;
-                            battleStatus->actionResult = ACTION_RESULT_SUCCESS;
-                            gBattleStatus.flags1 |= BS_FLAGS1_2000;
-                        }
+            // has the stick been released within the window?
+            if (battleStatus->actionSuccess == 0) {
+                for (i = 0; i < inputWindow; i++) {
+                    if (bufferPos >= ARRAY_COUNT(battleStatus->holdInputBuffer)) {
+                        bufferPos -= ARRAY_COUNT(battleStatus->holdInputBuffer);
                     }
-                }
 
-                if (battleStatus->actionCommandMode < AC_MODE_TUTORIAL || acs->frameCounter != acs->duration) {
-                    acs->frameCounter++;
-                    if (acs->duration < acs->frameCounter) {
-                        if (battleStatus->actionSuccess == HAMMER_RESULT_NONE) {
-                            battleStatus->actionSuccess = HAMMER_RESULT_FAILED;
-                        }
-
-                        if (battleStatus->actionSuccess == HAMMER_RESULT_GOOD) {
-                            increment_action_command_success_count();
-                        }
-
-                        btl_set_popup_duration(POPUP_MSG_OFF);
-                        acs->frameCounter = 5;
-                        acs->state = AC_STATE_DISPOSE;
+                    if (!(battleStatus->holdInputBuffer[bufferPos] & BUTTON_STICK_LEFT) || acs->autoSucceed != 0) {
+                        battleStatus->actionSuccess = 1;
+                        battleStatus->actionResult = ACTION_RESULT_SUCCESS;
+                        gBattleStatus.flags1 |= BS_FLAGS1_2000;
                     }
+                    bufferPos++;
+                }
+            }
+
+            if (battleStatus->actionCommandMode < AC_MODE_TUTORIAL || acs->frameCounter != acs->duration) {
+                acs->frameCounter++;
+                if (acs->duration < acs->frameCounter) {
+                    if (battleStatus->actionSuccess == 0) {
+                        battleStatus->actionSuccess = AC_ACTION_FAILED;
+                    }
+
+                    if (battleStatus->actionSuccess == 1) {
+                        increment_action_command_success_count();
+                    }
+
+                    btl_set_popup_duration(POPUP_MSG_OFF);
+                    acs->frameCounter = 5;
+                    acs->state = AC_STATE_DISPOSE;
                 }
             }
             break;

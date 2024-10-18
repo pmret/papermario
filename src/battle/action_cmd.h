@@ -63,6 +63,8 @@ enum ActionCommandModes {
     AC_MODE_TUTORIAL_WAIT_INPUT     = 3,
 };
 
+#define AC_ACTION_FAILED -1
+
 // mash meter has 100 units for each 1%
 #define ONE_PCT_MASH    100
 
@@ -135,8 +137,11 @@ typedef struct ActionCommandStatus {
     /* 0x60 */ s8 wrongButtonPressed;
     /* 0x61 */ s8 showHud;
     /* 0x62 */ s8 playHammerSounds;
-    /* 0x63 */ s8 unk_63;
-    /* 0x64 */ s16 targetWeakness; // chance of applying special status; higher values make mashing easier
+    /* 0x63 */ char pad_63[1];
+    /* 0x64 */ union {
+                    s16 variant;
+                    s16 targetWeakness; // chance of applying special status; higher values make mashing easier
+               };
     /* 0x66 */ s16 thresholdMoveDir;
     /* 0x68 */ s16 isBarFilled;
     /* 0x6A */ s16 berserkerEnabled;

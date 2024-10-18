@@ -1819,11 +1819,11 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
         Call(ShowMessageBox, BTL_MSG_ACTION_TIP_MASH_BUTTON, 180)
         Call(ShowActionHud, TRUE)
         Call(LoadActionCommand, ACTION_COMMAND_WHIRLWIND)
-        Call(action_command_whirlwind_init, 0)
+        Call(action_command_whirlwind_init, ACV_WHIRLWIND_HUFF)
         Call(SetupMashMeter, 5, 20, 40, 60, 80, 100)
         Wait(10)
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-        Call(action_command_whirlwind_start, 0, 200 * DT, 3)
+        Call(action_command_whirlwind_start, 0, 200 * DT, AC_DIFFICULTY_3)
         Thread
             Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
             Set(LVar3, LVar2)

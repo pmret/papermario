@@ -143,7 +143,7 @@ void N(update)(void) {
             }
 
             acs->frameCounter = battleStatus->actionCmdDifficultyTable[acs->difficulty];
-            battleStatus->actionSuccess = -1;
+            battleStatus->actionSuccess = AC_ACTION_FAILED;
             acs->state = AC_STATE_ACTIVE;
 
             // fallthrough

@@ -232,7 +232,7 @@ void N(update)(void) {
 
             if (acs->frameCounter == 0) {
                 if (acs->barFillLevel == 0) {
-                    battleStatus->actionSuccess = -1;
+                    battleStatus->actionSuccess = AC_ACTION_FAILED;
                 } else {
                     battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
                 }

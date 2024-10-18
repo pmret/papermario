@@ -354,8 +354,8 @@ void init_all_status_icons(void) {
 void update_all_status_icons(void* data) {
     PopupMessage* popup = data;
     HudStatusIcon* icon;
-    int i;
     s32 elementID;
+    s32 i;
 
     for (i = 0, icon = D_800A0F44; i < MAX_ICONS; i++, icon++) {
         if (icon->flags == 0) {

@@ -989,7 +989,7 @@ EvtScript N(EVS_Attack_PowerShock) = {
     Call(MoveBattleCamOver, 80)
     Call(N(WattFXDisable))
     Call(N(TargetParalyzeChance))
-    Call(action_command_power_shock_start, 0, 75 * DT - 3, 3, LVar0)
+    Call(action_command_power_shock_start, 0, 75 * DT - 3, AC_DIFFICULTY_3, LVar0)
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Add(LVar1, 15)
     Add(LVar2, 5)
@@ -1283,7 +1283,7 @@ EvtScript N(EVS_Attack_MegaShock) = {
         EndLoop
     EndThread
     Call(N(AverageTargetParalyzeChance))
-    Call(action_command_mega_shock_start, 0, 87 * DT, 3, LVar0)
+    Call(action_command_mega_shock_start, 0, 87 * DT, AC_DIFFICULTY_3, LVar0)
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Add(LVar1, 15)
     Add(LVar2, 5)

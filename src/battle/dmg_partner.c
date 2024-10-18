@@ -1388,8 +1388,8 @@ API_CALLABLE(GetPartnerActionSuccess) {
     s32 actionSuccess = battleStatus->actionSuccess;
     s32 outVal = 0;
 
-    if (actionSuccess < outVal) {
-        actionSuccess = outVal;
+    if (actionSuccess < 0) {
+        actionSuccess = 0;
     }
 
     if (actionSuccess > outVal) {

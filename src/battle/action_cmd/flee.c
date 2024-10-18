@@ -183,7 +183,7 @@ void N(update)(void) {
                     battleStatus->actionSuccess = 1;
                 } else {
                     battleStatus->actionResult = ACTION_RESULT_MINUS_2;
-                    battleStatus->actionSuccess = -1;
+                    battleStatus->actionSuccess = AC_ACTION_FAILED;
                 }
                 acs->frameCounter = 20;
                 acs->state = AC_STATE_DISPOSE;

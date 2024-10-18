@@ -108,10 +108,10 @@ void N(update)(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
     s32 cutoff;
-    s32 bufferPos;
-    s32 i;
     s32 buttonsPushed;
     s32 buttonsAB;
+    s32 bufferPos;
+    s32 i;
 
     switch (acs->state) {
         case AC_STATE_INIT:
@@ -239,7 +239,8 @@ void N(update)(void) {
                     if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                         bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                     }
-                    battleStatus->pushInputBuffer[bufferPos++] = 0;
+                    battleStatus->pushInputBuffer[bufferPos] = 0;
+                    bufferPos++;
                 }
             }
 
@@ -268,7 +269,7 @@ void N(update)(void) {
             }
 
             if (buttonsPushed == 0) {
-                battleStatus->actionSuccess = -1;
+                battleStatus->actionSuccess = AC_ACTION_FAILED;
             } else {
                 battleStatus->actionSuccess = buttonsPushed / ONE_PCT_MASH;
             }

@@ -744,7 +744,7 @@ EvtScript N(EVS_Move_BellyFlop) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(action_command_hammer_start, 0, 57, 3)
+    Call(action_command_hammer_start, 0, 57, AC_DIFFICULTY_3)
     Call(SetActionQuality, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Tense1)
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_CLOSE_UP)
@@ -939,11 +939,11 @@ EvtScript N(EVS_Move_Squirt) = {
     Call(action_command_squirt_init)
     Call(GetActorLevel, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
-        CaseEq(0)
+        CaseEq(PARTNER_RANK_NORMAL)
             Call(SetupMashMeter, 3, 40, 75, 100, 0, 0)
-        CaseEq(1)
+        CaseEq(PARTNER_RANK_SUPER)
             Call(SetupMashMeter, 4, 35, 60, 80, 100, 0)
-        CaseEq(2)
+        CaseEq(PARTNER_RANK_ULTRA)
             Call(SetupMashMeter, 5, 20, 40, 60, 80, 100)
     EndSwitch
     Call(UseBattleCamPreset, BTL_CAM_ACTOR_CLOSE)
@@ -963,7 +963,7 @@ EvtScript N(EVS_Move_Squirt) = {
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Inhale)
     Call(AddBattleCamDist, -80)
     Call(MoveBattleCamOver, 90 * DT)
-    Call(action_command_squirt_start, 0, 87 * DT, 3)
+    Call(action_command_squirt_start, 0, 87 * DT, AC_DIFFICULTY_3)
     Loop(90 * DT)
         Call(GetActionQuality, LVar0)
         IfEq(LVar0, 0)

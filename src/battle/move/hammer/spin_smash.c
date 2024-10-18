@@ -107,7 +107,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
             EndIf
         EndLoop
     EndIf
-    Call(action_command_hammer_start, 0, LVarD, 3)
+    Call(action_command_hammer_start, 0, LVarD, AC_DIFFICULTY_3)
     Call(SetActionQuality, 0)
     Set(LVar1, 0)
     Loop(30)
@@ -229,7 +229,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
             EndIf
         EndLoop
     EndIf
-    Call(action_command_hammer_start, 0, LVarD, 3)
+    Call(action_command_hammer_start, 0, LVarD, AC_DIFFICULTY_3)
     Call(SetActionQuality, 0)
     Set(LVar1, 0)
     Loop(30)
@@ -349,7 +349,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
             EndIf
         EndLoop
     EndIf
-    Call(action_command_hammer_start, 0, LVarD, 3)
+    Call(action_command_hammer_start, 0, LVarD, AC_DIFFICULTY_3)
     Call(SetActionQuality, 0)
     Set(LVar1, 0)
     Loop(30)

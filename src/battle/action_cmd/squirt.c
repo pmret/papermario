@@ -1,7 +1,6 @@
 #include "common.h"
 #include "battle/action_cmd.h"
 
-//TODO action command
 #define NAMESPACE action_command_squirt
 
 extern s32 actionCmdTableSquirt[];
@@ -146,6 +145,8 @@ void N(update)(void) {
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
+
+            // bar filling and draining
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
             fillPct = acs->barFillLevel / cutoff;
             if (!acs->squirt.draining) {
@@ -190,11 +191,12 @@ void N(update)(void) {
             }
 
             if (acs->barFillLevel == 0) {
-                battleStatus->actionSuccess = -1;
+                battleStatus->actionSuccess = AC_ACTION_FAILED;
             } else {
                 battleStatus->actionSuccess = battleStatus->actionQuality;
             }
 
+            // a good result is filling the bar over halfway to the second-highest interval
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
             if (cutoff / 2 < battleStatus->actionQuality) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
@@ -223,9 +225,9 @@ void N(update)(void) {
 }
 
 void N(draw)(void) {
+    ActionCommandStatus* acs = &gActionCommandStatus;
     s32 hudX, hudY;
     s32 hid;
-    ActionCommandStatus* acs = &gActionCommandStatus;
 
     hud_element_draw_clipped(acs->hudElements[HIDX_BUTTON]);
     hid = acs->hudElements[HIDX_METER];

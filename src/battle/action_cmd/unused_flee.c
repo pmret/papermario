@@ -22,6 +22,9 @@ enum {
     HIDX_OK             = 2,
 };
 
+// how much to add to the meter per input if all modifiers are neutral
+#define METER_FILL_TICK 600
+
 BSS b32 N(HasStarted);
 
 API_CALLABLE(N(init)) {
@@ -152,7 +155,7 @@ void N(update)(void) {
 
             // check for bar-filling input
             if (battleStatus->curButtonsPressed & BUTTON_A) {
-                s32 fillAmt = battleStatus->actionCmdDifficultyTable[acs->difficulty] * 6;
+                s32 fillAmt = SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
 
                 if (acs->flee.drainDelay == 0) {
                     acs->barFillLevel += fillAmt;

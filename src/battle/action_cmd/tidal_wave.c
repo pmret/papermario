@@ -1,10 +1,16 @@
 #include "common.h"
 #include "battle/action_cmd.h"
 
-//TODO action command
 #define NAMESPACE action_command_tidal_wave
 
 extern s32 actionCmdTableTidalWave[];
+
+// indices into ActionCommandStatus::hudElements for this action command
+enum {
+    HIDX_METER          = 0,
+    HIDX_FIRST_BUTTON   = 1,
+    // remaining HIDX are for the sequence of buttons
+};
 
 // states for this action command
 enum {
@@ -39,34 +45,34 @@ API_CALLABLE(N(init)) {
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
-    } else {
-        action_command_init_status();
+    }
 
-        acs->actionCommandID = ACTION_COMMAND_TIDAL_WAVE;
-        acs->state = TIDAL_WAVE_STATE_INIT;
-        acs->wrongButtonPressed = FALSE;
-        acs->barFillLevel = 0;
-        acs->barFillWidth = 0;
-        battleStatus->actionQuality = 0;
-        acs->hudPosX = -48;
-        acs->hudPosY = 80;
+    action_command_init_status();
 
-        hid = hud_element_create(&HES_BlueMeter);
-        acs->hudElements[0] = hid;
-        hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    acs->actionCommandID = ACTION_COMMAND_TIDAL_WAVE;
+    acs->state = TIDAL_WAVE_STATE_INIT;
+    acs->wrongButtonPressed = FALSE;
+    acs->barFillLevel = 0;
+    acs->barFillWidth = 0;
+    battleStatus->actionQuality = 0;
+    acs->hudPosX = -48;
+    acs->hudPosY = 80;
+
+    hid = hud_element_create(&HES_BlueMeter);
+    acs->hudElements[HIDX_METER] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+
+    for (i = HIDX_FIRST_BUTTON; i < ARRAY_COUNT(acs->hudElements) - 1; i++) {
+        hid = hud_element_create(&HES_AButton);
+        acs->hudElements[i] = hid;
+        hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
         hud_element_set_render_depth(hid, 0);
         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-
-        for (i = 1; i < ARRAY_COUNT(acs->hudElements) - 1; i++) {
-            hid = hud_element_create(&HES_AButton);
-            acs->hudElements[i] = hid;
-            hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
-            hud_element_set_render_depth(hid, 0);
-            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-        }
-
-        return ApiStatus_DONE2;
     }
+
+    return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(start)) {
@@ -115,7 +121,7 @@ void N(update)(void) {
     switch (acs->state) {
         case TIDAL_WAVE_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
-            hid = acs->hudElements[0];
+            hid = acs->hudElements[HIDX_METER];
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
@@ -128,7 +134,7 @@ void N(update)(void) {
             if (acs->hudPosX > 50) {
                 acs->hudPosX = 50;
             }
-            hud_element_set_render_pos(acs->hudElements[0], acs->hudPosX + 21, acs->hudPosY + 28);
+            hud_element_set_render_pos(acs->hudElements[HIDX_METER], acs->hudPosX + 21, acs->hudPosY + 28);
             break;
         case TIDAL_WAVE_STATE_START:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -290,7 +296,7 @@ void N(update)(void) {
             break;
         case TIDAL_WAVE_STATE_WRAPUP:
             if (battleStatus->actionQuality == 0) {
-                battleStatus->actionSuccess = -1;
+                battleStatus->actionSuccess = AC_ACTION_FAILED;
             } else {
                 battleStatus->actionSuccess = battleStatus->actionQuality;
             }
@@ -315,7 +321,7 @@ void N(update)(void) {
 void N(draw)(void) {
     s32 i;
 
-    for (i = 1; i < ARRAY_COUNT(gActionCommandStatus.hudElements) - 1; i++) {
+    for (i = HIDX_FIRST_BUTTON; i < ARRAY_COUNT(gActionCommandStatus.hudElements) - 1; i++) {
         hud_element_draw_clipped(gActionCommandStatus.hudElements[i]);
     }
 }
@@ -323,9 +329,9 @@ void N(draw)(void) {
 void N(free)(void) {
     s32 i;
 
-    hud_element_free(gActionCommandStatus.hudElements[0]);
+    hud_element_free(gActionCommandStatus.hudElements[HIDX_METER]);
 
-    for (i = 1; i < ARRAY_COUNT(gActionCommandStatus.hudElements) - 1; i++) {
+    for (i = HIDX_FIRST_BUTTON; i < ARRAY_COUNT(gActionCommandStatus.hudElements) - 1; i++) {
         hud_element_free(gActionCommandStatus.hudElements[i]);
     }
 }

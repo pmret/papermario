@@ -160,12 +160,12 @@ void N(update)(void) {
 
             do {
                 if (acs->thresholdLevel < MAX_MASH_UNITS) {
-                    battleStatus->actionSuccess = -1;
+                    battleStatus->actionSuccess = AC_ACTION_FAILED;
                 } else {
                     s32 window = battleStatus->actionCmdDifficultyTable[acs->difficulty] * METER_FILL_RATE;
                     // release needs to be within 2 frames + modifier from difficulty table
                     if (acs->thresholdLevel - window >= MAX_MASH_UNITS + 2 * METER_FILL_RATE + 1) {
-                        battleStatus->actionSuccess = -1;
+                        battleStatus->actionSuccess = AC_ACTION_FAILED;
                     } else {
                         battleStatus->actionSuccess = 1;
                     }

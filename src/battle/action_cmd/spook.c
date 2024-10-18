@@ -205,7 +205,7 @@ void N(update)(void) {
             }
 
             if (fillLevel == 0) {
-                battleStatus->actionSuccess = -1;
+                battleStatus->actionSuccess = AC_ACTION_FAILED;
             } else {
                 battleStatus->actionSuccess = fillLevel / ONE_PCT_MASH;
 

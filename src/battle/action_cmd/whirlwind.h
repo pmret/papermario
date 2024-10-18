@@ -9,4 +9,9 @@ void action_command_whirlwind_update(void);
 void action_command_whirlwind_draw(void);
 void action_command_whirlwind_free(void);
 
+enum {
+    ACV_WHIRLWIND_HUFF      = 0,
+    ACV_WHIRLWIND_BUZZAR    = 1,
+};
+
 #endif

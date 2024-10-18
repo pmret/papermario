@@ -606,7 +606,7 @@ void N(update)(void) {
             break;
         case THREE_CHANCES_STATE_WRAPUP:
             if (battleStatus->actionQuality == 0) {
-                battleStatus->actionSuccess = -1;
+                battleStatus->actionSuccess = AC_ACTION_FAILED;
             } else {
                 battleStatus->actionSuccess = battleStatus->actionQuality;
             }

@@ -567,7 +567,7 @@ EvtScript N(shellToss) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(action_command_hammer_start, 0, 50 * DT - 3, 3)
+    Call(action_command_hammer_start, 0, 50 * DT - 3, AC_DIFFICULTY_3)
     Call(SetActionQuality, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_KOOPER_SHELL_SPINUP)
@@ -737,7 +737,7 @@ EvtScript N(powerShell) = {
         EndIf
     EndLoop
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_CLOSE_UP)
-    Call(action_command_hammer_start, 0, 47, 3)
+    Call(action_command_hammer_start, 0, 47, AC_DIFFICULTY_3)
     Call(SetActionQuality, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_KOOPER_SHELL_SPINUP)

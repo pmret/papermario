@@ -224,7 +224,7 @@ void N(update)(void) {
                 battleStatus->actionSuccess = 1;
             } else {
                 battleStatus->actionResult = ACTION_RESULT_MINUS_2;
-                battleStatus->actionSuccess = -1;
+                battleStatus->actionSuccess = AC_ACTION_FAILED;
             }
 
             if (battleStatus->actionSuccess == 1) {
