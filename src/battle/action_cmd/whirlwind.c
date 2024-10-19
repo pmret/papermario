@@ -77,7 +77,7 @@ API_CALLABLE(N(init)) {
     Bytecode* args = script->ptrReadPos;
     s32 hid;
 
-    battleStatus->unk_82 = 5;
+    battleStatus->maxActionSuccess = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableWhirlwind;
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
@@ -85,13 +85,13 @@ API_CALLABLE(N(init)) {
     }
 
     action_command_init_status();
-    acs->targetWeakness = evt_get_variable(script, *args++);
+    acs->variation = evt_get_variable(script, *args++);
     acs->actionCommandID = ACTION_COMMAND_WHIRLWIND;
     acs->state = AC_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    if (acs->targetWeakness == ACV_WHIRLWIND_HUFF) {
+    if (acs->variation == ACV_WHIRLWIND_HUFF) {
         battleStatus->actionQuality = 0;
     } else {
         battleStatus->actionQuality = 3;
@@ -148,7 +148,7 @@ API_CALLABLE(N(start)) {
     acs->barFillWidth = 0;
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
-    if (acs->targetWeakness == ACV_WHIRLWIND_HUFF) {
+    if (acs->variation == ACV_WHIRLWIND_HUFF) {
         battleStatus->actionQuality = 0;
     } else {
         battleStatus->actionQuality = 3;
@@ -226,7 +226,7 @@ void N(update)(void) {
             // apply bar draining every frame
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
             fillPct = acs->barFillLevel / cutoff;
-            if (acs->targetWeakness == ACV_WHIRLWIND_HUFF) {
+            if (acs->variation == ACV_WHIRLWIND_HUFF) {
                 amt = GET_DRAIN_RATE_HUFF(fillPct);
             } else {
                 amt = GET_DRAIN_RATE_BUZZAR(fillPct);
@@ -240,7 +240,7 @@ void N(update)(void) {
             // check for bar-filling input
             if (!acs->berserkerEnabled) {
                 if (battleStatus->curButtonsPressed & BUTTON_A) {
-                    if (acs->targetWeakness == ACV_WHIRLWIND_HUFF) {
+                    if (acs->variation == ACV_WHIRLWIND_HUFF) {
                         amt = SCALE_BY_PCT(HUFF_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                     } else {
                         amt = SCALE_BY_PCT(BUZZAR_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
@@ -257,7 +257,7 @@ void N(update)(void) {
                 acs->barFillLevel = cutoff * 100;
             }
 
-            if (acs->targetWeakness == ACV_WHIRLWIND_HUFF) {
+            if (acs->variation == ACV_WHIRLWIND_HUFF) {
                 battleStatus->actionQuality = (acs->barFillLevel / ONE_PCT_MASH) / 20;
             } else {
                 battleStatus->actionQuality = N(BuzzarQuality)[(acs->barFillLevel / ONE_PCT_MASH) / 10];
@@ -300,7 +300,7 @@ void N(draw)(void) {
     hud_element_draw_clipped(acs->hudElements[HIDX_BUBBLE]);
 
     hid = acs->hudElements[HIDX_DIGIT];
-    if (acs->targetWeakness == ACV_WHIRLWIND_HUFF) {
+    if (acs->variation == ACV_WHIRLWIND_HUFF) {
         if (N(HuffDigits)[battleStatus->actionQuality] != hud_element_get_script(hid)) {
             hud_element_set_script(hid, N(HuffDigits)[battleStatus->actionQuality]);
         }

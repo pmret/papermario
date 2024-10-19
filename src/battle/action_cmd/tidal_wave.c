@@ -39,7 +39,7 @@ API_CALLABLE(N(init)) {
     s32 hid;
     s32 i;
 
-    battleStatus->unk_82 = 5;
+    battleStatus->maxActionSuccess = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableTidalWave;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {

@@ -139,7 +139,7 @@ typedef struct ActionCommandStatus {
     /* 0x62 */ s8 playHammerSounds;
     /* 0x63 */ char pad_63[1];
     /* 0x64 */ union {
-                    s16 variant;
+                    s16 variation;
                     s16 targetWeakness; // chance of applying special status; higher values make mashing easier
                };
     /* 0x66 */ s16 thresholdMoveDir;

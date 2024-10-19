@@ -912,8 +912,8 @@ typedef struct BattleStatus {
     /* 0x07B */ u8 damageTaken;
     /* 0x07C */ s8 changePartnerAllowed;
     /* 0x07D */ s8 menuStatus[4]; ///< -1 = automatically pick the first move, 0 = disabled, 1 = enabled
-    /* 0x081 */ s8 actionSuccess;
-    /* 0x082 */ u8 unk_82;
+    /* 0x081 */ s8 actionSuccess; // degree of success for action command, -1 indicates failure, 0 is in progress, >0 is some degree of success
+    /* 0x082 */ s8 maxActionSuccess; // seems to indicate the maximum positive value for actionSuccess; never read and inconsistently used between various action commands
     /* 0x083 */ s8 actionCommandMode;
     /* 0x084 */ s8 actionQuality; // actionCommandVar1 ?
     /* 0x085 */ s8 resultTier;

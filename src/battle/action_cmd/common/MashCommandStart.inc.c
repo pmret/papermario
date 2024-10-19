@@ -21,7 +21,7 @@ API_CALLABLE(N(start)) {
     acs->barFillWidth = 0;
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
-    battleStatus->unk_82 = acs->mashMeterCutoffs[(acs->mashMeterNumIntervals - 1)];
+    battleStatus->maxActionSuccess = acs->mashMeterCutoffs[(acs->mashMeterNumIntervals - 1)];
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     acs->state = AC_STATE_START;
 

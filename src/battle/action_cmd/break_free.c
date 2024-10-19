@@ -21,7 +21,7 @@ API_CALLABLE(N(init)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
 
-    battleStatus->unk_82 = 0;
+    battleStatus->maxActionSuccess = 0;
     battleStatus->actionCmdDifficultyTable = actionCmdTableBreakFree;
     battleStatus->actionResult = ACTION_RESULT_NONE;
 
@@ -95,7 +95,7 @@ API_CALLABLE(N(start)) {
 
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
-    battleStatus->unk_82 = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
+    battleStatus->maxActionSuccess = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
 
     acs->thresholdLevel = rand_int(acs->effectiveness);
     acs->breakFree.dir = 0;

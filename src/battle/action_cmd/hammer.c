@@ -21,7 +21,7 @@ API_CALLABLE(N(init)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
 
-    battleStatus->unk_82 = 1;
+    battleStatus->maxActionSuccess = 1;
     battleStatus->actionCmdDifficultyTable = actionCmdTableHammer;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
 
@@ -113,7 +113,9 @@ API_CALLABLE(N(start)) {
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = AC_STATE_START;
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
+
     increment_action_command_attempt_count();
+
     return ApiStatus_DONE2;
 }
 

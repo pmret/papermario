@@ -25,7 +25,7 @@ API_CALLABLE(N(init)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
 
-    battleStatus->unk_82 = 100;
+    battleStatus->maxActionSuccess = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTableSpook;
     battleStatus->actionResult = ACTION_RESULT_NONE;
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
@@ -67,7 +67,39 @@ API_CALLABLE(N(init)) {
     return ApiStatus_DONE2;
 }
 
-#include "common/MashCommandStart.inc.c"
+API_CALLABLE(N(start)) {
+    ActionCommandStatus* acs = &gActionCommandStatus;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
+        battleStatus->actionSuccess = 0;
+        return ApiStatus_DONE2;
+    }
+
+    action_command_init_status();
+
+    acs->prepareTime = evt_get_variable(script, *args++);
+    acs->duration = evt_get_variable(script, *args++);
+    acs->difficulty = evt_get_variable(script, *args++);
+    acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
+    // for this command, this is the average chance for enemies to be affected
+    acs->targetWeakness = evt_get_variable(script, *args++);
+
+    acs->wrongButtonPressed = FALSE;
+    acs->barFillLevel = 0;
+    acs->barFillWidth = 0;
+    battleStatus->actionSuccess = 0;
+    battleStatus->actionResult = ACTION_RESULT_NONE;
+    battleStatus->maxActionSuccess = acs->mashMeterCutoffs[(acs->mashMeterNumIntervals - 1)];
+    battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
+    acs->state = AC_STATE_START;
+
+    increment_action_command_attempt_count();
+
+    return ApiStatus_DONE2;
+}
+
 
 void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;

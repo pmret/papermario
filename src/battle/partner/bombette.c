@@ -824,7 +824,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
     EndLoop
     Call(MoveBattleCamOver, 65)
     IfEq(LF_MashStarted, 1)
-        Call(action_command_body_slam_start, 0, 92, 3, 0)
+        Call(action_command_body_slam_start, 0, 92, AC_DIFFICULTY_3, ACV_SLAM_BOMBETTE)
         Set(LF_MashEnded, 0)
         ExecGetTID(N(runToTarget), LVarA)
         Loop(35)
@@ -875,7 +875,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             Call(CheckButtonDown, BUTTON_A, LVar0)
             IfNe(LVar0, FALSE)
                 IfEq(LF_MashStarted, 0)
-                    Call(action_command_body_slam_start, 0, 92, 3, 0)
+                    Call(action_command_body_slam_start, 0, 92, AC_DIFFICULTY_3, ACV_SLAM_BOMBETTE)
                     Set(LF_MashStarted, 1)
                 EndIf
             EndIf
@@ -897,7 +897,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             Call(CheckButtonDown, BUTTON_A, LVar0)
             IfNe(LVar0, FALSE)
                 IfEq(LF_MashStarted, 0)
-                    Call(action_command_body_slam_start, 0, 92, 3, 0)
+                    Call(action_command_body_slam_start, 0, 92, AC_DIFFICULTY_3, ACV_SLAM_BOMBETTE)
                     Set(LF_MashStarted, 1)
                 EndIf
             EndIf
@@ -1064,11 +1064,11 @@ EvtScript N(EVS_Attack_Bomb) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar2)
         CaseEq(MOVE_BOMB)
-            Call(action_command_bomb_start, 0, 57 * DT, 3, ACV_BOMB_BASIC)
+            Call(action_command_bomb_start, 0, 57 * DT, AC_DIFFICULTY_3, ACV_BOMB_BASIC)
         CaseEq(MOVE_POWER_BOMB)
-            Call(action_command_bomb_start, 0, 73 * DT - 1, 3, ACV_BOMB_SUPER)
+            Call(action_command_bomb_start, 0, 73 * DT - 1, AC_DIFFICULTY_3, ACV_BOMB_SUPER)
         CaseEq(MOVE_MEGA_BOMB)
-            Call(action_command_bomb_start, 0, 87 * DT, 3, ACV_BOMB_ULTRA)
+            Call(action_command_bomb_start, 0, 87 * DT, AC_DIFFICULTY_3, ACV_BOMB_ULTRA)
     EndSwitch
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LRAW_BOMBETTE_FUSE)
     ChildThread

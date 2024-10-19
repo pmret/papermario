@@ -3,7 +3,18 @@
 #include "battle/action_cmd/hammer.h"
 #include "sprite/player.h"
 
-#include "world/common/todo/IsBerserkerEquipped.inc.c"
+API_CALLABLE(N(IsBerserkerEquipped)) {
+    script->varTable[0] = gBattleStatus.actionCommandMode;
+    script->varTable[1] = 15;
+
+    if (is_ability_active(ABILITY_BERSERKER)) {
+        script->varTable[0] = AC_MODE_NOT_LEARNED;
+        script->varTable[1] = 40;
+    }
+
+    return ApiStatus_DONE2;
+}
+
 #include "world/common/todo/ShouldMovesAutoSucceed.inc.c"
 
 // Move the player into position 32 units to the left of the target enemy
@@ -237,7 +248,7 @@ EvtScript N(EVS_UseBasicHammer) = {
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_PullBack)
     Wait(4)
     Call(N(IsBerserkerEquipped))
-    IfNe(LVar0, HIT_RESULT_HIT)
+    IfNe(LVar0, FALSE)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Hold1)
         Call(GetActionCommandMode, LVar0)
         IfLt(LVar0, AC_MODE_TUTORIAL)

@@ -35,7 +35,7 @@ API_CALLABLE(N(init)) {
     s32 hid;
     s32 offsetX;
 
-    battleStatus->unk_82 = 100;
+    battleStatus->maxActionSuccess = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTablePowerShock;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
@@ -103,6 +103,7 @@ API_CALLABLE(N(start)) {
     acs->duration = evt_get_variable(script, *args++);
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
+    // for this command, this is the chance for enemy to be affected
     acs->targetWeakness = evt_get_variable(script, *args++);
 
     acs->wrongButtonPressed = FALSE;

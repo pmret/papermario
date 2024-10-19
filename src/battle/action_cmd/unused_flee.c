@@ -34,7 +34,7 @@ API_CALLABLE(N(init)) {
     s32 hid;
     s32 temp;
 
-    battleStatus->unk_82 = 5;
+    battleStatus->maxActionSuccess = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTable07;
 
     acs->autoSucceed = FALSE;

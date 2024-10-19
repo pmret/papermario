@@ -2987,7 +2987,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
         Call(SetupMashMeter, 1, 25, 0, 0, 0, 0)
         Wait(10)
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-        Call(action_command_stop_leech_start, 0, 32767, 3)
+        Call(action_command_stop_leech_start, 0, AC_LEECH_MAX_TIME, AC_DIFFICULTY_3)
         Set(LVarB, LVarA)
         Div(LVarB, 2)
         Wait(LVarB)

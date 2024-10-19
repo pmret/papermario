@@ -26,7 +26,7 @@ API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     s32 hid;
 
-    battleStatus->unk_82 = 5;
+    battleStatus->maxActionSuccess = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableMegaShock;
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
@@ -75,7 +75,7 @@ API_CALLABLE(N(init)) {
 API_CALLABLE(N(start)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    Bytecode* readPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
@@ -84,12 +84,12 @@ API_CALLABLE(N(start)) {
 
     action_command_init_status();
 
-    acs->prepareTime = evt_get_variable(script, *readPos++);
-    acs->duration = evt_get_variable(script, *readPos++);
-    acs->difficulty = evt_get_variable(script, *readPos++);
+    acs->prepareTime = evt_get_variable(script, *args++);
+    acs->duration = evt_get_variable(script, *args++);
+    acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
     // for this command, this is the average chance for enemies to be affected
-    acs->targetWeakness = evt_get_variable(script, *readPos++);
+    acs->targetWeakness = evt_get_variable(script, *args++);
 
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;

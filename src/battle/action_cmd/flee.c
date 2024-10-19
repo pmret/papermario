@@ -26,7 +26,7 @@ API_CALLABLE(N(init)) {
     s32 offsetX;
     s32 hid;
 
-    battleStatus->unk_82 = 0;
+    battleStatus->maxActionSuccess = 0;
     battleStatus->actionCmdDifficultyTable = actionCmdTableFlee;
     battleStatus->actionResult = ACTION_RESULT_NONE;
 
@@ -100,7 +100,7 @@ API_CALLABLE(N(start)) {
     acs->wrongButtonPressed = FALSE;
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
-    battleStatus->unk_82 = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
+    battleStatus->maxActionSuccess = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     acs->state = AC_STATE_START;
 

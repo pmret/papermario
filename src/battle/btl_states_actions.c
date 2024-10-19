@@ -271,7 +271,7 @@ void btl_state_update_normal_start(void) {
                 battleStatus->actionCommandMode = AC_MODE_LEARNED;
             }
             battleStatus->actionSuccess = 0;
-            battleStatus->unk_82 = 0;
+            battleStatus->maxActionSuccess = 0;
             battleStatus->enabledMenusFlags = -1;
             battleStatus->enabledStarPowersFlags = -1;
             battleStatus->itemUsesLeft = 0;

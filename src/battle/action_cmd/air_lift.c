@@ -29,7 +29,7 @@ API_CALLABLE(N(init)) {
     s32 hid;
 
     battleStatus->actionCmdDifficultyTable = actionCmdTableAirLift;
-    battleStatus->unk_82 = 0;
+    battleStatus->maxActionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
 
     action_command_init_status();
@@ -87,12 +87,12 @@ API_CALLABLE(N(start)) {
     acs->duration = evt_get_variable(script, *args++);
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
-    acs->targetWeakness = evt_get_variable(script, *args++);
+    acs->variation = evt_get_variable(script, *args++);
 
     acs->wrongButtonPressed = FALSE;
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
-    battleStatus->unk_82 = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
+    battleStatus->maxActionSuccess = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
 
     acs->any.unk_5C = 0;
 

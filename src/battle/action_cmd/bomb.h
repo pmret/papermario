@@ -3,8 +3,12 @@
 
 #include "common_structs.h"
 
+// args: none
 API_CALLABLE(action_command_bomb_init);
+
+// args: prep time, duration, difficulty, variation
 API_CALLABLE(action_command_bomb_start);
+
 void action_command_bomb_update(void);
 void action_command_bomb_draw(void);
 void action_command_bomb_free(void);

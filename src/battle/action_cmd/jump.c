@@ -15,7 +15,7 @@ API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     s32 hid;
 
-    gBattleStatus.unk_82 = 1;
+    gBattleStatus.maxActionSuccess = 1;
     gBattleStatus.actionCmdDifficultyTable = actionCmdTableJump;
     gBattleStatus.actionResult = ACTION_RESULT_FAIL;
 

@@ -26,7 +26,7 @@ API_CALLABLE(N(init)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
 
-    battleStatus->unk_82 = 5;
+    battleStatus->maxActionSuccess = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableSquirt;
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;

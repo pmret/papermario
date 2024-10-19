@@ -1148,7 +1148,7 @@ EvtScript N(airLift) = {
     Call(PartnerTestEnemy, LVar0, DAMAGE_TYPE_AIR_LIFT, SUPPRESS_EVENT_SPIKY_FRONT, 0, 0, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
     Call(N(AirLiftChance))
     IfNe(LVar0, -1)
-        Call(action_command_air_lift_start, 0, 87 * DT, 3, 0)
+        Call(action_command_air_lift_start, 0, 87 * DT, AC_DIFFICULTY_3, 0)
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
         ChildThread
             Wait(1)
@@ -1221,7 +1221,7 @@ EvtScript N(airRaid) = {
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Run)
     Call(FlyToGoal, ACTOR_PARTNER, 15, -2, EASING_LINEAR)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Idle)
-    Call(action_command_air_raid_start, 0, 90 * DT, 3)
+    Call(action_command_air_raid_start, 0, 90 * DT, AC_DIFFICULTY_3)
     Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     Wait(2)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_PreDive)

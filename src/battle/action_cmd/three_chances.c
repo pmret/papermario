@@ -94,7 +94,7 @@ API_CALLABLE(N(init)) {
     Bytecode* args = script->ptrReadPos;
     s32 hid;
 
-    battleStatus->unk_82 = 5;
+    battleStatus->maxActionSuccess = 5;
     battleStatus->actionCmdDifficultyTable = (s32*)actionCmdTableWaterBlock;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
@@ -109,7 +109,7 @@ API_CALLABLE(N(init)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    acs->targetWeakness = evt_get_variable(script, *args++);
+    acs->variation = evt_get_variable(script, *args++);
     battleStatus->actionQuality = 1;
     acs->hudPrepareTime = 30;
     acs->hudPosX = -48;
@@ -173,7 +173,7 @@ API_CALLABLE(N(init)) {
     acs->hudElements[HIDX_TICK_2] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
 
-    switch (acs->targetWeakness) {
+    switch (acs->variation) {
         case ACV_THREE_CHANCES_WATER_BLOCK:
             acs->hudElements[HIDX_BUFF_ICON] = hud_element_create(&HES_WaterBlock);
             hid = acs->hudElements[HIDX_BUFF_ICON];
@@ -298,7 +298,7 @@ void N(update)(void) {
             hud_element_set_render_pos(acs->hudElements[HIDX_LIGHT_3], acs->hudPosX + 61, acs->hudPosY + 24);
 
             hid = acs->hudElements[HIDX_DIGIT];
-            switch (acs->targetWeakness) {
+            switch (acs->variation) {
                 case ACV_THREE_CHANCES_WATER_BLOCK:
                     hud_element_set_render_pos(hid, acs->hudPosX + 91, acs->hudPosY + 7);
                     break;

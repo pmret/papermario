@@ -26,7 +26,7 @@ API_CALLABLE(N(init)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
 
-    battleStatus->unk_82 = 100;
+    battleStatus->maxActionSuccess = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTableBomb;
     battleStatus->actionResult = ACTION_RESULT_NONE;
 
@@ -134,7 +134,7 @@ void N(update)(void) {
 
             // check for bar-filling input
             if (battleStatus->curButtonsPressed & BUTTON_A) {
-                switch (acs->targetWeakness) {
+                switch (acs->variation) {
                     case ACV_BOMB_BASIC:
                         acs->barFillLevel += SCALE_BY_PCT(BASIC_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                         break;

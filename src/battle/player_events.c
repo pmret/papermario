@@ -1197,7 +1197,7 @@ EvtScript EVS_RunAwayStart = {
     Wait(1)
     Call(SetActorYaw, ACTOR_PLAYER, 180)
     Wait(5)
-    Call(action_command_flee_start, 0, 60, 3)
+    Call(action_command_flee_start, 0, 60, AC_DIFFICULTY_3)
     Call(func_80260E5C)
     Wait(5)
     Call(AddActorPos, ACTOR_PLAYER, 2, 0, 0)

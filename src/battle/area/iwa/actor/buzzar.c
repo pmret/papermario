@@ -952,7 +952,7 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
     Call(MoveBattleCamOver, 60)
     Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     Call(ShowActionHud, TRUE)
-    Call(action_command_break_free_start, 0, 60 * DT, 30, 3)
+    Call(action_command_break_free_start, 0, 60 * DT, 30, AC_DIFFICULTY_3)
     ExecGetTID(N(EVS_LiftMario), LVarA)
     Wait(62)
     Call(GetActionSuccessCopy, LVar0)

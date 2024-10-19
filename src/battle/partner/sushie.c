@@ -1058,7 +1058,7 @@ EvtScript N(EVS_Move_WaterBlock) = {
         Wait(1)
     EndLoop
     Wait(4)
-    Call(action_command_three_chances_start, 0, 100, 3)
+    Call(action_command_three_chances_start, 0, 100, AC_DIFFICULTY_3)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_HoldWater)
     Wait(110)
     Call(GetPartnerActionSuccess, LVar0)
@@ -1158,7 +1158,7 @@ EvtScript N(EVS_Move_TidalWave) = {
     Call(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_HoldWater)
-    Call(action_command_tidal_wave_start, 0, 100, 3)
+    Call(action_command_tidal_wave_start, 0, 100, AC_DIFFICULTY_3)
     Call(SetActorRotationOffset, ACTOR_PARTNER, 0, 12, 0)
     Thread
         Wait(54)

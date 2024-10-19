@@ -790,7 +790,7 @@ EvtScript N(EVS_Attack_ElectroDash) = {
     EndLoop
     Call(MoveBattleCamOver, 75)
     IfEq(LFlag2, TRUE)
-        Call(action_command_body_slam_start, 0, 102, 3, 1)
+        Call(action_command_body_slam_start, 0, 102, AC_DIFFICULTY_3, ACV_SLAM_WATT)
         Set(LFlag0, FALSE)
         ExecGetTID(N(dashToTarget), LVarA)
         Loop(20)
@@ -842,7 +842,7 @@ EvtScript N(EVS_Attack_ElectroDash) = {
             Call(CheckButtonDown, BUTTON_A, LVar0)
             IfNe(LVar0, 0)
                 IfEq(LFlag2, FALSE)
-                    Call(action_command_body_slam_start, 0, 92, 3, 1)
+                    Call(action_command_body_slam_start, 0, 92, AC_DIFFICULTY_3, ACV_SLAM_WATT)
                     Set(LFlag2, TRUE)
                 EndIf
             EndIf
@@ -865,7 +865,7 @@ EvtScript N(EVS_Attack_ElectroDash) = {
             Call(CheckButtonDown, BUTTON_A, LVar0)
             IfNe(LVar0, 0)
                 IfEq(LFlag2, FALSE)
-                    Call(action_command_body_slam_start, 0, 92, 3, 1)
+                    Call(action_command_body_slam_start, 0, 92, AC_DIFFICULTY_3, ACV_SLAM_WATT)
                     Set(LFlag2, TRUE)
                 EndIf
             EndIf
@@ -1112,7 +1112,7 @@ EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
     Wait(1)
     Call(SetActorYaw, ACTOR_PARTNER, 180)
     Wait(10)
-    Call(action_command_three_chances_start, 0, 100 * DT, 3)
+    Call(action_command_three_chances_start, 0, 100 * DT, AC_DIFFICULTY_3)
     Call(AddBattleCamDist, -75)
     Call(MoveBattleCamOver, 100 * DT)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
@@ -1195,7 +1195,7 @@ EvtScript N(EVS_TurboCharge_ImmobilePlayer) = {
     Wait(1)
     Call(SetActorYaw, ACTOR_PARTNER, 180)
     Wait(10)
-    Call(action_command_three_chances_start, 0, 100 * DT, 3)
+    Call(action_command_three_chances_start, 0, 100 * DT, AC_DIFFICULTY_3)
     Call(AddBattleCamDist, -100)
     Call(MoveBattleCamOver, 100 * DT)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
