@@ -32,16 +32,16 @@ API_CALLABLE(N(init)) {
 
     action_command_init_status();
 
-    acs->effectiveness = evt_get_variable(script, *args++);
+    acs->escapeChance = evt_get_variable(script, *args++);
 
     acs->actionCommandID = ACTION_COMMAND_FLEE;
     acs->state = AC_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = acs->effectiveness * 100;
-    acs->thresholdLevel = rand_int(50);
+    acs->barFillLevel = acs->escapeChance * 100;
+    acs->escapeThreshold = rand_int(50);
     acs->barFillWidth = 0;
     acs->flee.dir = 1;
-    acs->effectiveness = rand_int(1);
+    acs->escapeChance = rand_int(1);
     acs->isBarFilled = FALSE;
     battleStatus->actionSuccess = 0;
     N(HasStarted) = FALSE;
@@ -72,7 +72,7 @@ API_CALLABLE(N(init)) {
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    offsetX = 29 - ((100 - acs->thresholdLevel) * 60) / 100;
+    offsetX = 29 - ((100 - acs->escapeThreshold) * 60) / 100;
     hud_element_set_render_pos(acs->hudElements[HIDX_OK], acs->hudPosX - offsetX, acs->hudPosY + 17);
     hud_element_set_render_pos(acs->hudElements[HIDX_RUN_AWAY], acs->hudPosX - offsetX, acs->hudPosY - 1);
 
@@ -111,7 +111,7 @@ void N(update)(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     ActionCommandStatus* acs = &gActionCommandStatus;
     s32 hid;
-    s32 temp;
+    s32 escapeDelta;
 
     switch (acs->state) {
         case AC_STATE_INIT:
@@ -158,7 +158,7 @@ void N(update)(void) {
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
             N(HasStarted) = TRUE;
             acs->state = AC_STATE_ACTIVE;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
 
             // fallthrough
         case AC_STATE_ACTIVE:
@@ -177,23 +177,23 @@ void N(update)(void) {
             }
 
             battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
-            if (acs->frameCounter == 0) {
-                if (battleStatus->actionSuccess >= (100 - acs->thresholdLevel)) {
+            if (acs->stateTimer == 0) {
+                if (battleStatus->actionSuccess >= (100 - acs->escapeThreshold)) {
                     battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                     battleStatus->actionSuccess = 1;
                 } else {
                     battleStatus->actionResult = ACTION_RESULT_MINUS_2;
                     battleStatus->actionSuccess = AC_ACTION_FAILED;
                 }
-                acs->frameCounter = 20;
+                acs->stateTimer = 20;
                 acs->state = AC_STATE_DISPOSE;
             } else {
-                acs->frameCounter--;
+                acs->stateTimer--;
             }
             break;
         case AC_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 break;
             }
             action_command_free();
@@ -205,19 +205,19 @@ void N(update)(void) {
         case AC_STATE_APPEAR:
         case AC_STATE_START:
         case AC_STATE_ACTIVE:
-            temp = acs->effectiveness == 0 ? 7 : 8;
+            escapeDelta = acs->escapeChance == 0 ? 7 : 8;
             if (acs->flee.dir == 0) {
-                acs->thresholdLevel += temp;
-                if (acs->thresholdLevel >= 100) {
-                    acs->thresholdLevel = 100;
+                acs->escapeThreshold += escapeDelta;
+                if (acs->escapeThreshold >= 100) {
+                    acs->escapeThreshold = 100;
                     acs->flee.dir = 1;
                 }
-                break;
-            }
-            acs->thresholdLevel -= temp;
-            if (acs->thresholdLevel <= 0) {
-                acs->thresholdLevel = 0;
-                acs->flee.dir = 0;
+            } else {
+                acs->escapeThreshold -= escapeDelta;
+                if (acs->escapeThreshold <= 0) {
+                    acs->escapeThreshold = 0;
+                    acs->flee.dir = 0;
+                }
             }
             break;
     }
@@ -229,8 +229,8 @@ void N(draw)(void) {
     s32 hudX, hudY;
     s32 hid;
 
-    // equivalent to 60 * acs->thresholdLevel / 100
-    hudX = 60 - ((100 - acs->thresholdLevel) * 60 / 100);
+    // equivalent to 60 * acs->escapeThreshold / 100
+    hudX = 60 - ((100 - acs->escapeThreshold) * 60 / 100);
 
     hud_element_set_render_pos(acs->hudElements[HIDX_OK], acs->hudPosX + 31 - hudX, acs->hudPosY + 17);
     hud_element_set_render_pos(acs->hudElements[HIDX_RUN_AWAY], acs->hudPosX + 31 - hudX, acs->hudPosY - 1);

@@ -745,7 +745,7 @@ EvtScript N(EVS_Move_BellyFlop) = {
         EndIf
     EndLoop
     Call(action_command_hammer_start, 0, 57, AC_DIFFICULTY_3)
-    Call(SetActionQuality, 0)
+    Call(SetActionProgress, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Tense1)
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_CLOSE_UP)
     Set(LVar0, 30)
@@ -965,7 +965,7 @@ EvtScript N(EVS_Move_Squirt) = {
     Call(MoveBattleCamOver, 90 * DT)
     Call(action_command_squirt_start, 0, 87 * DT, AC_DIFFICULTY_3)
     Loop(90 * DT)
-        Call(GetActionQuality, LVar0)
+        Call(GetActionProgress, LVar0)
         IfEq(LVar0, 0)
             Call(GetActorScale, ACTOR_SELF, LVar0, LVar1, LVar2)
             SetF(LVar1, LVar0)
@@ -1009,7 +1009,7 @@ EvtScript N(EVS_Move_Squirt) = {
     Call(GetGoalPos, ACTOR_PARTNER, LVar3, LVar4, LVar5)
     PlayEffect(EFFECT_SQUIRT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, LVarE, 10, 0)
     Wait(10)
-    Call(GetActionQuality, LVar0)
+    Call(GetActionProgress, LVar0)
     Call(N(GetSquirtDamage))
     Switch(LVar0)
         CaseGt(0)
@@ -1183,7 +1183,7 @@ EvtScript N(EVS_Move_TidalWave) = {
         Call(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
     EndThread
     Loop(100)
-        Call(GetActionQuality, LVar0)
+        Call(GetActionProgress, LVar0)
         Call(N(SetScaleTidalWaveCharge))
         Wait(1)
     EndLoop

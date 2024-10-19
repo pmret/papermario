@@ -79,7 +79,7 @@ void* actionCommandDmaTable[] = {
     AC_TBL_ENTRY(tidal_wave),
 };
 
-BSS s32 sMashMeterSmoothDivisor;
+BSS s32 MashMeterSmoothDivisor;
 BSS s32 D_8029FBC4_pad[3];
 // TODO move to actor_api
 BSS s32 IsGroupHeal;
@@ -151,8 +151,8 @@ void draw_mash_meter(s32 posX, s32 posY, s32 fillValue, s32 colorMode) {
 
     //difference between current and previous filled value
     offsetX = width - acs->barFillWidth;
-    if (abs(offsetX) >= sMashMeterSmoothDivisor * 100) {
-        acs->barFillWidth += offsetX / sMashMeterSmoothDivisor;
+    if (abs(offsetX) >= MashMeterSmoothDivisor * 100) {
+        acs->barFillWidth += offsetX / MashMeterSmoothDivisor;
     } else {
         acs->barFillWidth = width;
     }
@@ -224,32 +224,32 @@ void draw_mash_meter(s32 posX, s32 posY, s32 fillValue, s32 colorMode) {
 }
 
 void draw_mash_meter_multicolor(s32 posX, s32 posY, s32 fillValue) {
-    sMashMeterSmoothDivisor = 2;
+    MashMeterSmoothDivisor = 2;
     draw_mash_meter(posX, posY, fillValue, MASH_METER_MODE_MULTI_COLOR);
 }
 
 void draw_mash_meter_multicolor_with_divisor(s32 posX, s32 posY, s32 fillValue, s32 divisor) {
-    sMashMeterSmoothDivisor = divisor;
+    MashMeterSmoothDivisor = divisor;
     draw_mash_meter(posX, posY, fillValue, MASH_METER_MODE_MULTI_COLOR);
 }
 
 void draw_mash_meter_mode(s32 posX, s32 posY, s32 fillValue, s32 colorMode) {
-    sMashMeterSmoothDivisor = 2;
+    MashMeterSmoothDivisor = 2;
     draw_mash_meter(posX, posY, fillValue, colorMode);
 }
 
 void draw_mash_meter_mode_with_divisor(s32 posX, s32 posY, s32 fillValue, s32 divisor, s32 colorMode) {
-    sMashMeterSmoothDivisor = divisor;
+    MashMeterSmoothDivisor = divisor;
     draw_mash_meter(posX, posY, fillValue, colorMode);
 }
 
 void draw_mash_meter_blink(s32 posX, s32 posY, s32 fillValue) {
-    sMashMeterSmoothDivisor = 2;
+    MashMeterSmoothDivisor = 2;
     draw_mash_meter(posX, posY, fillValue, MASH_METER_MODE_BLINK);
 }
 
 void draw_mash_meter_blink_with_divisor(s32 posX, s32 posY, s32 fillValue, s32 divisor) {
-    sMashMeterSmoothDivisor = divisor;
+    MashMeterSmoothDivisor = divisor;
     draw_mash_meter(posX, posY, fillValue, MASH_METER_MODE_BLINK);
 }
 
@@ -784,22 +784,22 @@ API_CALLABLE(GetBlockResult) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(GetActionQuality) {
-    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionQuality);
+API_CALLABLE(GetActionProgress) {
+    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionProgress);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(SetActionQuality) {
-    gBattleStatus.actionQuality = evt_get_variable(script, *script->ptrReadPos);
+API_CALLABLE(SetActionProgress) {
+    gBattleStatus.actionProgress = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80269600) {
+API_CALLABLE(GetActionResultTier) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.resultTier);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_8026962C) {
+API_CALLABLE(SetActionResultTier) {
     gBattleStatus.resultTier = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }

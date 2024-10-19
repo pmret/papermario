@@ -54,7 +54,7 @@ API_CALLABLE(N(init)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    battleStatus->actionQuality = 0;
+    battleStatus->actionProgress = 0;
     acs->hudPosX = -48;
     acs->hudPosY = 80;
 
@@ -96,7 +96,7 @@ API_CALLABLE(N(start)) {
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
     battleStatus->actionSuccess = 0;
-    battleStatus->actionQuality = 0;
+    battleStatus->actionProgress = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = TIDAL_WAVE_STATE_START;
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
@@ -143,7 +143,7 @@ void N(update)(void) {
                 break;
             }
             acs->tidalWave.inputCount = 1;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
             acs->tidalWave.prevButton = rand_int(TIDAL_WAVE_INPUT_COUNT - 1);
             acs->state = TIDAL_WAVE_STATE_NEXT_BUTTON;
             acs->wrongInputFrameCounter = 0;
@@ -171,8 +171,8 @@ void N(update)(void) {
         case TIDAL_WAVE_STATE_AWAIT_INPUT:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            acs->frameCounter--;
-            if (acs->frameCounter == 0) {
+            acs->stateTimer--;
+            if (acs->stateTimer == 0) {
                 acs->state = TIDAL_WAVE_STATE_WRAPUP;
                 break;
             }
@@ -285,7 +285,7 @@ void N(update)(void) {
                             acs->barFillLevel = MAX_MASH_UNITS;
                         }
                         acs->state = TIDAL_WAVE_STATE_NEXT_BUTTON;
-                        battleStatus->actionQuality++;
+                        battleStatus->actionProgress++;
                         sfx_play_sound(SOUND_APPROVE);
                         return;
                     }
@@ -295,22 +295,22 @@ void N(update)(void) {
             }
             break;
         case TIDAL_WAVE_STATE_WRAPUP:
-            if (battleStatus->actionQuality == 0) {
+            if (battleStatus->actionProgress == 0) {
                 battleStatus->actionSuccess = AC_ACTION_FAILED;
             } else {
-                battleStatus->actionSuccess = battleStatus->actionQuality;
+                battleStatus->actionSuccess = battleStatus->actionProgress;
             }
             battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             if (battleStatus->actionSuccess >= 10) {
                 increment_action_command_success_count();
             }
             btl_set_popup_duration(POPUP_MSG_OFF);
-            acs->frameCounter = 5;
+            acs->stateTimer = 5;
             acs->state = TIDAL_WAVE_STATE_DISPOSE;
             break;
         case TIDAL_WAVE_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
             } else {
                 action_command_free();
             }

@@ -207,11 +207,11 @@ EvtScript N(EVS_UseMove_Impl) = {
         EndIf
         Add(LVarD, 6)
         Call(action_command_hammer_start, 0, LVarD, AC_DIFFICULTY_3)
-        Call(SetActionQuality, 0)
+        Call(SetActionProgress, 0)
         Set(LVar1, 0)
         Loop(30)
             Wait(1)
-            Call(GetActionQuality, LVar0)
+            Call(GetActionProgress, LVar0)
             IfNe(LVar0, 0)
                 IfNe(LVar1, 1)
                     Call(GetMenuSelection, LVar3, LVar4, LVar5)

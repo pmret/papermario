@@ -27,7 +27,7 @@ API_CALLABLE(N(init)) {
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
-        battleStatus->actionQuality = 0;
+        battleStatus->actionProgress = 0;
         return ApiStatus_DONE2;
     }
 
@@ -91,7 +91,7 @@ API_CALLABLE(N(start)) {
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
-        battleStatus->actionQuality = 0;
+        battleStatus->actionProgress = 0;
         return ApiStatus_DONE2;
     }
 
@@ -109,7 +109,7 @@ API_CALLABLE(N(start)) {
 
     acs->hammerMissedStart = FALSE;
     battleStatus->actionSuccess = 0;
-    battleStatus->actionQuality = 0;
+    battleStatus->actionProgress = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = AC_STATE_START;
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
@@ -209,7 +209,7 @@ void N(update)(void) {
                 return;
             }
 
-            acs->frameCounter = 0;
+            acs->stateTimer = 0;
             if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT) && battleStatus->actionCommandMode < AC_MODE_TUTORIAL) {
                 acs->hammerMissedStart = TRUE;
             }
@@ -227,34 +227,34 @@ void N(update)(void) {
             new_var = inputWindow + 2;
             oneThird = (acs->duration - new_var) / 3;
 
-            if (acs->frameCounter < oneThird) {
+            if (acs->stateTimer < oneThird) {
                 hud_element_set_script(acs->hudElements[HIDX_CHARGE_C], &HES_TimingCharge3);
-                battleStatus->actionQuality = 0;
-                if (acs->frameCounter == 0) {
+                battleStatus->actionProgress = 0;
+                if (acs->stateTimer == 0) {
                     if (acs->playHammerSounds) {
                         sfx_play_sound(SOUND_TIMING_BAR_TICK);
                     }
                 }
-            } else if (acs->frameCounter < oneThird * 2) {
+            } else if (acs->stateTimer < oneThird * 2) {
                 hud_element_set_script(acs->hudElements[HIDX_CHARGE_B], &HES_TimingCharge2);
-                battleStatus->actionQuality = 1;
-                if (acs->frameCounter == oneThird) {
+                battleStatus->actionProgress = 1;
+                if (acs->stateTimer == oneThird) {
                     if (acs->playHammerSounds) {
                         sfx_play_sound(SOUND_TIMING_BAR_TICK);
                     }
                 }
-            } else if (acs->frameCounter < oneThird * 3) {
+            } else if (acs->stateTimer < oneThird * 3) {
                 hud_element_set_script(acs->hudElements[HIDX_CHARGE_A], &HES_TimingCharge1);
-                battleStatus->actionQuality = 2;
-                if (acs->frameCounter == oneThird * 2) {
+                battleStatus->actionProgress = 2;
+                if (acs->stateTimer == oneThird * 2) {
                     if (acs->playHammerSounds) {
                         sfx_play_sound(SOUND_TIMING_BAR_TICK);
                     }
                 }
             }
 
-            if (acs->frameCounter == (~inputWindow + acs->duration)) {
-                battleStatus->actionQuality = 3;
+            if (acs->stateTimer == (~inputWindow + acs->duration)) {
+                battleStatus->actionProgress = 3;
                 hud_element_set_script(acs->hudElements[HIDX_WAIT], &HES_TimingReady);
                 hud_element_set_script(acs->hudElements[HIDX_STICK], &HES_StickTapNeutral);
                 if (acs->playHammerSounds) {
@@ -262,10 +262,10 @@ void N(update)(void) {
                 }
                 if (acs->autoSucceed != 0 && acs->autoSucceed != 2) {
                     acs->autoSucceed = 2;
-                    acs->frameCounter = acs->duration - 4;
+                    acs->stateTimer = acs->duration - 4;
                 }
             }
-            inputWindow = battleStatus->actionCmdDifficultyTable[acs->difficulty] - (acs->duration - acs->frameCounter) + 3;
+            inputWindow = battleStatus->actionCmdDifficultyTable[acs->difficulty] - (acs->duration - acs->stateTimer) + 3;
             if (inputWindow < 0) {
                 inputWindow = 0;
             }
@@ -305,9 +305,9 @@ void N(update)(void) {
                 }
             }
 
-            if (battleStatus->actionCommandMode < AC_MODE_TUTORIAL || acs->frameCounter != acs->duration) {
-                acs->frameCounter++;
-                if (acs->duration < acs->frameCounter) {
+            if (battleStatus->actionCommandMode < AC_MODE_TUTORIAL || acs->stateTimer != acs->duration) {
+                acs->stateTimer++;
+                if (acs->duration < acs->stateTimer) {
                     if (battleStatus->actionSuccess == 0) {
                         battleStatus->actionSuccess = AC_ACTION_FAILED;
                     }
@@ -317,14 +317,14 @@ void N(update)(void) {
                     }
 
                     btl_set_popup_duration(POPUP_MSG_OFF);
-                    acs->frameCounter = 5;
+                    acs->stateTimer = 5;
                     acs->state = AC_STATE_DISPOSE;
                 }
             }
             break;
         case AC_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
             action_command_free();

@@ -69,7 +69,37 @@ API_CALLABLE(N(init)) {
     return ApiStatus_DONE2;
 }
 
-#include "common/MashCommandStart.inc.c"
+API_CALLABLE(N(start)) {
+    ActionCommandStatus* acs = &gActionCommandStatus;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
+        battleStatus->actionSuccess = 0;
+        return ApiStatus_DONE2;
+    }
+
+    action_command_init_status();
+
+    acs->prepareTime = evt_get_variable(script, *args++);
+    acs->duration = evt_get_variable(script, *args++);
+    acs->difficulty = evt_get_variable(script, *args++);
+    acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
+    acs->variation = evt_get_variable(script, *args++);
+
+    acs->wrongButtonPressed = FALSE;
+    acs->barFillLevel = 0;
+    acs->barFillWidth = 0;
+    battleStatus->actionSuccess = 0;
+    battleStatus->actionResult = ACTION_RESULT_NONE;
+    battleStatus->maxActionSuccess = acs->mashMeterCutoffs[(acs->mashMeterNumIntervals - 1)];
+    battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
+    acs->state = AC_STATE_START;
+
+    increment_action_command_attempt_count();
+
+    return ApiStatus_DONE2;
+}
 
 void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -115,7 +145,7 @@ void N(update)(void) {
 
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
             acs->barFillLevel = 0;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
 
@@ -156,11 +186,11 @@ void N(update)(void) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
+            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionProgress * 12);
 
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 break;
             }
 
@@ -184,12 +214,12 @@ void N(update)(void) {
 
             sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
             btl_set_popup_duration(POPUP_MSG_OFF);
-            acs->frameCounter = 5;
+            acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 break;
             }
             action_command_free();

@@ -38,7 +38,7 @@ API_CALLABLE(N(init)) {
     // the target actor's HP and status. this value will ONLY be zero if the target actor
     // is transparent, in which case a dummy version of the action command is played out
     // which is guaranteed to fail.
-    acs->effectiveness = evt_get_variable(script, *args++);
+    acs->escapeChance = evt_get_variable(script, *args++);
 
     acs->actionCommandID = ACTION_COMMAND_AIR_LIFT;
     acs->showHud = TRUE;
@@ -48,7 +48,7 @@ API_CALLABLE(N(init)) {
     acs->barFillWidth = 0;
     acs->isBarFilled = FALSE;
     battleStatus->actionSuccess = 0;
-    battleStatus->actionQuality = 0;
+    battleStatus->actionProgress = 0;
 
     N(HasStarted) = FALSE;
     acs->hudPrepareTime = 30;
@@ -153,7 +153,7 @@ void N(update)(void) {
 
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
             N(HasStarted) = TRUE;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
 
@@ -163,7 +163,7 @@ void N(update)(void) {
 
             // bar can drain if it hasn't been fully filled
             if (!acs->isBarFilled) {
-                if (acs->effectiveness != 0) {
+                if (acs->escapeChance != 0) {
                     s32 maxFillLevel = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
                     acs->barFillLevel -= GET_DRAIN_RATE(acs->barFillLevel / maxFillLevel);
                     if (acs->barFillLevel < 0) {
@@ -179,10 +179,10 @@ void N(update)(void) {
 
             // check for bar-filling input
             if (battleStatus->actionCommandMode != AC_MODE_NOT_LEARNED && (battleStatus->curButtonsPressed & BUTTON_A)) {
-                if (acs->effectiveness != 0) {
+                if (acs->escapeChance != 0) {
                     // fill rate = 820 multiplied by two values expressed as percentages
                     s32 difficultyPct = battleStatus->actionCmdDifficultyTable[acs->difficulty];
-                    s32 effectivenessPct = METER_FILL_RATE * acs->effectiveness;
+                    s32 effectivenessPct = METER_FILL_RATE * acs->escapeChance;
                     // divide by 100 for each percent-based multiplier
                     acs->barFillLevel += (difficultyPct * effectivenessPct) / (100 * 100);
                 } else {
@@ -203,22 +203,22 @@ void N(update)(void) {
             }
 
             battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
-            if (battleStatus->actionQuality < battleStatus->actionSuccess) {
-                battleStatus->actionQuality = battleStatus->actionSuccess;
+            if (battleStatus->actionProgress < battleStatus->actionSuccess) {
+                battleStatus->actionProgress = battleStatus->actionSuccess;
             }
             sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionSuccess * 12);
 
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
 
-            if (acs->effectiveness == 0) {
-                battleStatus->actionQuality = 0;
+            if (acs->escapeChance == 0) {
+                battleStatus->actionProgress = 0;
             }
 
             // threshold for success is completely random, only guaranteed if the bar is 100% filled
-            battleStatus->actionSuccess = battleStatus->actionQuality;
+            battleStatus->actionSuccess = battleStatus->actionProgress;
             if (rand_int(99) < battleStatus->actionSuccess) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                 battleStatus->actionSuccess = 1;
@@ -233,18 +233,18 @@ void N(update)(void) {
 
             btl_set_popup_duration(POPUP_MSG_OFF);
             sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
-            acs->frameCounter = 20;
+            acs->stateTimer = 20;
             acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
-            if (acs->effectiveness == 0) {
+            if (acs->escapeChance == 0) {
                 acs->barFillLevel -= ONE_PCT_MASH;
                 if (acs->barFillLevel < 0) {
                     acs->barFillLevel = 0;
                 }
             }
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
             action_command_free();

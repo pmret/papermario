@@ -430,7 +430,7 @@ EvtScript N(EVS_Attack_WindBlast) = {
                         EndThread
                     EndIf
                     Wait(90)
-                    Call(GetActionQuality, LVar1)
+                    Call(GetActionProgress, LVar1)
                     Call(ActorExists, ACTOR_PARTNER, LVar0)
                     IfEq(LVar0, TRUE)
                         Wait(3)
@@ -512,7 +512,7 @@ EvtScript N(EVS_Attack_WindBlast) = {
     EndIf
     Call(FreezeBattleState, TRUE)
     Wait(90)
-    Call(GetActionQuality, LVar1)
+    Call(GetActionProgress, LVar1)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_TRIGGER_EVENTS)

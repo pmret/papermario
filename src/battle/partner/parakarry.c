@@ -271,14 +271,14 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             } else {
                 battleStatus->actionResult = ACTION_RESULT_FAIL;
             }
-            battleStatus->actionQuality = 0;
+            battleStatus->actionProgress = 0;
 
             if (aimAngle < 7.0f) {
-                battleStatus->actionQuality = 1;
+                battleStatus->actionProgress = 1;
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                 increment_action_command_success_count();
             } else if (state->angle < state->bounceDivisor) {
-                battleStatus->actionQuality = -1;
+                battleStatus->actionProgress = -1;
             }
 
             for (i = 0; i < ARRAY_COUNT(hudMarkers); i++) {
@@ -448,7 +448,7 @@ API_CALLABLE(N(CarryAway)) {
             }
 
             if (parakarry->state.curPos.x > 240.0f) {
-                battleStatus->actionQuality = temp_s4;
+                battleStatus->actionProgress = temp_s4;
                 return ApiStatus_DONE2;
             }
             break;
@@ -1022,7 +1022,7 @@ EvtScript N(shellShot) = {
     Call(N(ShellShotActionCommand))
     Call(StopSound, SOUND_AIM_SHELL_SHOT)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_PARAKARRY_SHELL_SHOT)
-    Call(GetActionQuality, LVar0)
+    Call(GetActionProgress, LVar0)
     Call(PartnerTestEnemy, LVarA, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     IfEq(LVarA, HIT_RESULT_MISS)
         Set(LVar0, -2)
@@ -1152,11 +1152,11 @@ EvtScript N(airLift) = {
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
         ChildThread
             Wait(1)
-            Call(GetActionQuality, LVar1)
+            Call(GetActionProgress, LVar1)
             Div(LVar1, 10)
             Add(LVar1, 1)
             Loop(88 * DT)
-                Call(GetActionQuality, LVar0)
+                Call(GetActionProgress, LVar0)
                 Set(LVar2, LVar1)
                 Mul(LVar2, 10)
                 IfGt(LVar0, LVar2)
@@ -1254,7 +1254,7 @@ EvtScript N(airRaid) = {
     Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
     Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 20)
-    Call(GetActionQuality, LVar0)
+    Call(GetActionProgress, LVar0)
     Call(N(GetAirRaidDamage))
     Call(InitTargetIterator)
     Label(10)

@@ -568,7 +568,7 @@ EvtScript N(shellToss) = {
         EndIf
     EndLoop
     Call(action_command_hammer_start, 0, 50 * DT - 3, AC_DIFFICULTY_3)
-    Call(SetActionQuality, 0)
+    Call(SetActionProgress, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_KOOPER_SHELL_SPINUP)
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_CLOSE_UP)
@@ -599,7 +599,7 @@ EvtScript N(shellToss) = {
                 PlayEffect(EFFECT_SMOKE_IMPACT, 1, LVar4, LVar5, LVar6, 32, 4, 0, 10, 0)
         EndSwitch
         Add(LVar9, 1)
-        Call(GetActionQuality, LVar0)
+        Call(GetActionProgress, LVar0)
         IfNe(LVar0, 0)
             IfNe(LVar1, TRUE)
                 Set(LVar1, 1)
@@ -738,7 +738,7 @@ EvtScript N(powerShell) = {
     EndLoop
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_CLOSE_UP)
     Call(action_command_hammer_start, 0, 47, AC_DIFFICULTY_3)
-    Call(SetActionQuality, 0)
+    Call(SetActionProgress, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_KOOPER_SHELL_SPINUP)
     Set(LVar9, 0)
@@ -768,7 +768,7 @@ EvtScript N(powerShell) = {
                 PlayEffect(EFFECT_SMOKE_IMPACT, 1, LVar4, LVar5, LVar6, 32, 4, 0, 10, 0)
         EndSwitch
         Add(LVar9, 1)
-        Call(GetActionQuality, LVar0)
+        Call(GetActionProgress, LVar0)
         IfNe(LVar0, 0)
             IfNe(LVar1, TRUE)
                 Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
@@ -904,7 +904,7 @@ EvtScript N(dizzyShell) = {
     Add(LVarA, -3)
     Call(N(AverageTargetDizzyChance))
     Call(action_command_dizzy_shell_start, 0, LVarA, AC_DIFFICULTY_3, LVar0)
-    Call(SetActionQuality, 0)
+    Call(SetActionProgress, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_KOOPER_SHELL_SPINUP)
     Set(LVar9, 0)
@@ -915,7 +915,7 @@ EvtScript N(dizzyShell) = {
     Set(LVar9, 1)
     Loop(LVarD)
         Wait(1)
-        Call(GetActionQuality, LVar0)
+        Call(GetActionProgress, LVar0)
         Switch(LVar0)
             CaseLt(20 * DT)
                 Set(LVarA, Float(10.0))
@@ -997,7 +997,7 @@ EvtScript N(dizzyShell) = {
             EndSwitch
         EndIf
         Set(LFlag0, TRUE)
-        Call(GetActionQuality, LVarF)
+        Call(GetActionProgress, LVarF)
         Call(GetPartnerActionSuccess, LVar0)
         Switch(LVar0)
             CaseGt(0)
@@ -1093,7 +1093,7 @@ EvtScript N(fireShell) = {
     Set(LVar9, 30)
     Loop(LVarD)
         Wait(1)
-        Call(GetActionQuality, LVar0)
+        Call(GetActionProgress, LVar0)
         Switch(LVar0)
             CaseGe(80 * DT)
                 Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinFastest)
@@ -1243,7 +1243,7 @@ EvtScript N(fireShell) = {
             EndSwitch
         EndIf
         Set(LFlag0, TRUE)
-        Call(GetActionQuality, LVar0)
+        Call(GetActionProgress, LVar0)
         Call(GetPartnerActionSuccess, LVar0)
         Switch(LVar0)
             CaseGt(99)

@@ -87,8 +87,7 @@ API_CALLABLE(N(start)) {
     acs->duration = evt_get_variable(script, *args++);
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
-    // for this command, this is the average chance for enemies to be affected
-    acs->targetWeakness = evt_get_variable(script, *args++);
+    acs->statusChance = evt_get_variable(script, *args++); // average chance for enemies to be affected
 
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
@@ -163,7 +162,7 @@ void N(update)(void) {
             hud_element_set_script(acs->hudElements[HIDX_B_BUTTON], &HES_MashBButton1);
             acs->barFillLevel = 0;
             acs->any.unk_5C = 0;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
             acs->state = AC_STATE_ACTIVE;
 
             // fallthrough
@@ -172,7 +171,7 @@ void N(update)(void) {
 
             // bar can drain if it hasn't been fully filled
             if (!acs->isBarFilled) {
-                if (acs->targetWeakness != 0) {
+                if (acs->statusChance != 0) {
                     cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
                     acs->barFillLevel -= GET_DRAIN_RATE(acs->barFillLevel / cutoff);
                     if (acs->barFillLevel < 0) {
@@ -206,10 +205,10 @@ void N(update)(void) {
 
             buttonsAB = BUTTON_A | BUTTON_B;
             if ((buttonsPushed & buttonsAB) == buttonsAB) {
-                if (acs->targetWeakness != 0) {
+                if (acs->statusChance != 0) {
                     s32 amt;
 
-                    amt = SCALE_BY_PCT(METER_FILL_TICK, acs->targetWeakness);
+                    amt = SCALE_BY_PCT(METER_FILL_TICK, acs->statusChance);
                     amt = SCALE_BY_PCT(amt, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
 
                     // Perplexing reuse of buttonsPushed here, but it fixes register allocation. Likely another
@@ -253,10 +252,10 @@ void N(update)(void) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
+            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
 
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 break;
             }
 
@@ -264,7 +263,7 @@ void N(update)(void) {
             //
             // TODO: Find a way to avoid reusing buttonsPushed.
             buttonsPushed = acs->barFillLevel;
-            if (acs->targetWeakness == 0) {
+            if (acs->statusChance == 0) {
                 buttonsPushed = 0;
             }
 
@@ -275,7 +274,7 @@ void N(update)(void) {
             }
 
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
-            if (battleStatus->actionQuality <= cutoff / 2) {
+            if (battleStatus->actionProgress <= cutoff / 2) {
                 battleStatus->actionResult = ACTION_RESULT_MINUS_4;
             } else {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
@@ -287,20 +286,20 @@ void N(update)(void) {
             }
 
             btl_set_popup_duration(POPUP_MSG_OFF);
-            acs->frameCounter = 5;
+            acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;
 
             break;
         case AC_STATE_DISPOSE:
-            if (acs->targetWeakness == 0) {
+            if (acs->statusChance == 0) {
                 acs->barFillLevel -= ONE_PCT_MASH;
                 if (acs->barFillLevel < 0) {
                     acs->barFillLevel = 0;
                 }
             }
 
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
             } else {
                 action_command_free();
             }

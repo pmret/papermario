@@ -149,7 +149,7 @@ void N(update)(void) {
             hud_element_set_script(acs->hudElements[HIDX_STICK], &HES_StickMashLeft);
             acs->spinySurge.tossState = SPINY_SURGE_NONE;
             PrevButtons = 0;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
 
@@ -205,12 +205,12 @@ void N(update)(void) {
             }
             battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
             PrevButtons = battleStatus->curButtonsDown;
-            battleStatus->actionQuality = acs->spinySurge.tossState;
+            battleStatus->actionProgress = acs->spinySurge.tossState;
 
             sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionSuccess * 12);
 
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
 
@@ -234,12 +234,12 @@ void N(update)(void) {
 
             btl_set_popup_duration(POPUP_MSG_OFF);
             sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
-            acs->frameCounter = 5;
+            acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
             } else {
                 action_command_free();
             }

@@ -82,17 +82,17 @@ typedef struct ActionCommandStatus {
     /* 0x00 */ s32 workerID;
     /* 0x04 */ s32 hudElements[16];
     /* 0x44 */ s16 barFillLevel; // 0 to MAX_MASH_UNITS
-    /* 0x46 */ s16 thresholdLevel;
+    /* 0x46 */ s16 escapeThreshold;
     /* 0x48 */ s16 barFillWidth; // X100
     /* 0x4A */ s16 actionCommandID;
     /* 0x4C */ s16 state;
     /* 0x4E */ s16 prepareTime;
     /* 0x50 */ s16 difficulty; // values from 0 to 7
     /* 0x52 */ s16 duration;
-    /* 0x54 */ s16 frameCounter;
+    /* 0x54 */ s16 stateTimer;
     /* 0x56 */ s16 hudPosX;
     /* 0x58 */ s16 hudPosY;
-    /* 0x5A */ s16 effectiveness; // used by air_lift (via AirLiftChance), break_free (30), and flee (random 0-1).
+    /* 0x5A */ s16 escapeChance; // used by air_lift (via AirLiftChance), break_free (30), and flee (random 0-1).
     /* 0x5C */ union {
                     struct {
                         s8 unk_5C;
@@ -139,8 +139,8 @@ typedef struct ActionCommandStatus {
     /* 0x62 */ s8 playHammerSounds;
     /* 0x63 */ char pad_63[1];
     /* 0x64 */ union {
-                    s16 variation;
-                    s16 targetWeakness; // chance of applying special status; higher values make mashing easier
+                    s16 variation; // used to select different variants of an action command
+                    s16 statusChance; // chance of applying special status; higher values make mashing easier
                };
     /* 0x66 */ s16 thresholdMoveDir;
     /* 0x68 */ s16 isBarFilled;
@@ -220,9 +220,9 @@ API_CALLABLE(GetActionSuccessCopy);
 API_CALLABLE(GetActionResult);
 API_CALLABLE(SetActionResult);
 API_CALLABLE(GetBlockResult);
-API_CALLABLE(GetActionQuality);
-API_CALLABLE(SetActionQuality);
-API_CALLABLE(func_80269600);
-API_CALLABLE(func_8026962C);
+API_CALLABLE(GetActionProgress);
+API_CALLABLE(SetActionProgress);
+API_CALLABLE(GetActionResultTier);
+API_CALLABLE(SetActionResultTier);
 
 #endif

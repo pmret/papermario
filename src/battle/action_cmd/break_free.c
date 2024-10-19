@@ -37,7 +37,7 @@ API_CALLABLE(N(init)) {
     acs->state = AC_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
-    acs->thresholdLevel = 0;
+    acs->escapeThreshold = 0;
     acs->barFillWidth = 0;
     battleStatus->actionSuccess = 0;
     acs->hudPosX = -48;
@@ -84,20 +84,20 @@ API_CALLABLE(N(start)) {
 
     acs->prepareTime = evt_get_variable(script, *args++);
     acs->duration = evt_get_variable(script, *args++);
-    acs->effectiveness = evt_get_variable(script, *args++);
+    acs->escapeChance = evt_get_variable(script, *args++);
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
-    acs->thresholdLevel = 0;
+    acs->escapeThreshold = 0;
     acs->barFillWidth = 0;
 
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
     battleStatus->maxActionSuccess = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
 
-    acs->thresholdLevel = rand_int(acs->effectiveness);
+    acs->escapeThreshold = rand_int(acs->escapeChance);
     acs->breakFree.dir = 0;
     acs->state = AC_STATE_START;
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
@@ -159,7 +159,7 @@ void N(update)(void) {
             }
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
             acs->state = AC_STATE_ACTIVE;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
 
             // fallthrough
         case AC_STATE_ACTIVE:
@@ -167,15 +167,15 @@ void N(update)(void) {
 
             // update the position of the 'OK' tick
             if (acs->breakFree.dir == 0) {
-                acs->thresholdLevel++;
-                if (acs->thresholdLevel >= acs->effectiveness) {
-                    acs->thresholdLevel = acs->effectiveness;
+                acs->escapeThreshold++;
+                if (acs->escapeThreshold >= acs->escapeChance) {
+                    acs->escapeThreshold = acs->escapeChance;
                     acs->breakFree.dir = 1;
                 }
             } else {
-                acs->thresholdLevel--;
-                if (acs->thresholdLevel <= 0) {
-                    acs->thresholdLevel = 0;
+                acs->escapeThreshold--;
+                if (acs->escapeThreshold <= 0) {
+                    acs->escapeThreshold = 0;
                     acs->breakFree.dir = 0;
                 }
             }
@@ -184,7 +184,7 @@ void N(update)(void) {
             // instead we sum the total number of inputs during the last N frames of the input buffer
             if (!acs->berserkerEnabled) {
                 s32 inputBufPos = battleStatus->inputBufferPos;
-                s32 windowLen = acs->duration - acs->frameCounter;
+                s32 windowLen = acs->duration - acs->stateTimer;
                 s32 i;
 
                 acs->barFillLevel = 0;
@@ -208,12 +208,12 @@ void N(update)(void) {
             }
 
             battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
 
-            if (battleStatus->actionSuccess >= acs->mashMeterCutoffs[acs->mashMeterNumIntervals] - acs->thresholdLevel) {
+            if (battleStatus->actionSuccess >= acs->mashMeterCutoffs[acs->mashMeterNumIntervals] - acs->escapeThreshold) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                 battleStatus->actionSuccess = 1;
             } else {
@@ -222,12 +222,12 @@ void N(update)(void) {
             }
 
             btl_set_popup_duration(POPUP_MSG_OFF);
-            acs->frameCounter = 20;
+            acs->stateTimer = 20;
             acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
             action_command_free();
@@ -242,9 +242,9 @@ void N(draw)(void) {
     s32 hid;
     s16 maxMeterValue;
 
-    // equivalent to 60 * acs->thresholdLevel / maxMeterValue
+    // equivalent to 60 * acs->escapeThreshold / maxMeterValue
     maxMeterValue = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
-    hudX = 60 - ((maxMeterValue - acs->thresholdLevel) * 60 / maxMeterValue);
+    hudX = 60 - ((maxMeterValue - acs->escapeThreshold) * 60 / maxMeterValue);
 
     hud_element_set_render_pos(hudElements[HIDX_OK], acs->hudPosX + 31 - hudX, acs->hudPosY + 17);
     hud_element_set_render_pos(hudElements[HIDX_RUN_AWAY], acs->hudPosX + 31 - hudX, acs->hudPosY - 1);

@@ -1007,7 +1007,7 @@ EvtScript N(EVS_Move_SpinySurge) = {
     Set(LFlag2, FALSE)
     Set(LFlag3, FALSE)
     Loop(LVarA)
-        Call(GetActionQuality, LVar0)
+        Call(GetActionProgress, LVar0)
         IfEq(LVar9, 2)
             Set(LVar0, SPINY_SURGE_IGNORE)
         EndIf

@@ -108,11 +108,11 @@ EvtScript N(EVS_UseMove1_Impl) = {
         EndLoop
     EndIf
     Call(action_command_hammer_start, 0, LVarD, AC_DIFFICULTY_3)
-    Call(SetActionQuality, 0)
+    Call(SetActionProgress, 0)
     Set(LVar1, 0)
     Loop(30)
         Wait(1)
-        Call(GetActionQuality, LVar0)
+        Call(GetActionProgress, LVar0)
         IfNe(LVar0, 0)
             IfNe(LVar1, 1)
                 Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash1_Hold2)
@@ -230,11 +230,11 @@ EvtScript N(EVS_UseMove2_Impl) = {
         EndLoop
     EndIf
     Call(action_command_hammer_start, 0, LVarD, AC_DIFFICULTY_3)
-    Call(SetActionQuality, 0)
+    Call(SetActionProgress, 0)
     Set(LVar1, 0)
     Loop(30)
         Wait(1)
-        Call(GetActionQuality, LVar0)
+        Call(GetActionProgress, LVar0)
         IfNe(LVar0, 0)
             IfNe(LVar1, 1)
                 Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash2_Hold2)
@@ -350,11 +350,11 @@ EvtScript N(EVS_UseMove3_Impl) = {
         EndLoop
     EndIf
     Call(action_command_hammer_start, 0, LVarD, AC_DIFFICULTY_3)
-    Call(SetActionQuality, 0)
+    Call(SetActionProgress, 0)
     Set(LVar1, 0)
     Loop(30)
         Wait(1)
-        Call(GetActionQuality, LVar0)
+        Call(GetActionProgress, LVar0)
         IfNe(LVar0, 0)
             IfNe(LVar1, 1)
                 Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash3_Hold2)

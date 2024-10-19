@@ -50,7 +50,7 @@ API_CALLABLE(N(init)) {
     acs->barFillWidth = 0;
     acs->isBarFilled = FALSE;
     battleStatus->actionSuccess = 0;
-    battleStatus->actionQuality = 0;
+    battleStatus->actionProgress = 0;
     acs->hudPosX = -48;
     acs->hudPosY = 80;
 
@@ -75,7 +75,37 @@ API_CALLABLE(N(init)) {
     return ApiStatus_DONE2;
 }
 
-#include "common/MashCommandStart.inc.c"
+API_CALLABLE(N(start)) {
+    ActionCommandStatus* acs = &gActionCommandStatus;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
+        battleStatus->actionSuccess = 0;
+        return ApiStatus_DONE2;
+    }
+
+    action_command_init_status();
+
+    acs->prepareTime = evt_get_variable(script, *args++);
+    acs->duration = evt_get_variable(script, *args++);
+    acs->difficulty = evt_get_variable(script, *args++);
+    acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
+    acs->variation = evt_get_variable(script, *args++);
+
+    acs->wrongButtonPressed = FALSE;
+    acs->barFillLevel = 0;
+    acs->barFillWidth = 0;
+    battleStatus->actionSuccess = 0;
+    battleStatus->actionResult = ACTION_RESULT_NONE;
+    battleStatus->maxActionSuccess = acs->mashMeterCutoffs[(acs->mashMeterNumIntervals - 1)];
+    battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
+    acs->state = AC_STATE_START;
+
+    increment_action_command_attempt_count();
+
+    return ApiStatus_DONE2;
+}
 
 void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -125,7 +155,7 @@ void N(update)(void) {
             acs->barFillLevel = 0;
             battleStatus->resultTier = 0;
             acs->smack.holdingLeft = FALSE;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
 
@@ -150,7 +180,7 @@ void N(update)(void) {
 
                 if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT)) {
                     if (acs->smack.holdingLeft) {
-                        if (acs->targetWeakness == ACV_SMACK_HAND) {
+                        if (acs->variation == ACV_SMACK_HAND) {
                             // regular smack
                             acs->barFillLevel += SCALE_BY_PCT(HAND_METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                         } else {
@@ -179,50 +209,50 @@ void N(update)(void) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
+            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionProgress * 12);
 
             switch (partnerActor->actorBlueprint->level) {
                 case PARTNER_RANK_NORMAL:
-                    if (battleStatus->actionQuality >= N(BasicHitThresholds)[battleStatus->resultTier]) {
+                    if (battleStatus->actionProgress >= N(BasicHitThresholds)[battleStatus->resultTier]) {
                         battleStatus->resultTier++;
                     }
 
                     if (battleStatus->resultTier > 0) {
-                        if (battleStatus->actionQuality < N(BasicHitThresholds)[battleStatus->resultTier - 1]) {
+                        if (battleStatus->actionProgress < N(BasicHitThresholds)[battleStatus->resultTier - 1]) {
                             battleStatus->resultTier--;
                         }
                     }
                     break;
                 case PARTNER_RANK_SUPER:
-                    if (battleStatus->actionQuality >= N(SuperHitThresholds)[battleStatus->resultTier]) {
+                    if (battleStatus->actionProgress >= N(SuperHitThresholds)[battleStatus->resultTier]) {
                         battleStatus->resultTier++;
                     }
 
                     if (battleStatus->resultTier > 0) {
-                        if (battleStatus->actionQuality < N(SuperHitThresholds)[battleStatus->resultTier - 1]) {
+                        if (battleStatus->actionProgress < N(SuperHitThresholds)[battleStatus->resultTier - 1]) {
                             battleStatus->resultTier--;
                         }
                     }
                     break;
                 case PARTNER_RANK_ULTRA:
-                    if (acs->targetWeakness == ACV_SMACK_HAND) {
-                        if (battleStatus->actionQuality >= N(UltraHitThresholds)[battleStatus->resultTier]) {
+                    if (acs->variation == ACV_SMACK_HAND) {
+                        if (battleStatus->actionProgress >= N(UltraHitThresholds)[battleStatus->resultTier]) {
                             battleStatus->resultTier++;
                         }
 
                         if (battleStatus->resultTier > 0) {
-                            if (battleStatus->actionQuality < N(UltraHitThresholds)[battleStatus->resultTier - 1]) {
+                            if (battleStatus->actionProgress < N(UltraHitThresholds)[battleStatus->resultTier - 1]) {
                                 battleStatus->resultTier--;
                             }
                         }
                     } else {
-                        if (battleStatus->actionQuality >= N(FanHitThresholds)[battleStatus->resultTier]) {
+                        if (battleStatus->actionProgress >= N(FanHitThresholds)[battleStatus->resultTier]) {
                             battleStatus->resultTier++;
                         }
 
                         if (battleStatus->resultTier > 0) {
-                            if (battleStatus->actionQuality < N(FanHitThresholds)[battleStatus->resultTier - 1]) {
+                            if (battleStatus->actionProgress < N(FanHitThresholds)[battleStatus->resultTier - 1]) {
                                 battleStatus->resultTier--;
                             }
                         }
@@ -230,7 +260,7 @@ void N(update)(void) {
                     break;
             }
 
-            if (acs->frameCounter == 0) {
+            if (acs->stateTimer == 0) {
                 if (acs->barFillLevel == 0) {
                     battleStatus->actionSuccess = AC_ACTION_FAILED;
                 } else {
@@ -250,16 +280,16 @@ void N(update)(void) {
 
                 btl_set_popup_duration(POPUP_MSG_OFF);
                 sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
-                acs->frameCounter = 5;
+                acs->stateTimer = 5;
                 acs->state = AC_STATE_DISPOSE;
                 break;
             }
 
-            acs->frameCounter--;
+            acs->stateTimer--;
             break;
         case AC_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 break;
             }
             action_command_free();

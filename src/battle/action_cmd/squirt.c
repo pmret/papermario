@@ -40,7 +40,7 @@ API_CALLABLE(N(init)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    battleStatus->actionQuality = 0;
+    battleStatus->actionProgress = 0;
     acs->hudPosX = -48;
     acs->squirt.draining = FALSE;
     acs->hudPosY = 80;
@@ -138,7 +138,7 @@ void N(update)(void) {
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
             acs->barFillLevel = 0;
             acs->squirt.draining = FALSE;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
 
@@ -171,8 +171,8 @@ void N(update)(void) {
                 }
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
+            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionProgress * 12);
 
             hid = acs->hudElements[HIDX_BUTTON];
             if (fillPct < 80) {
@@ -185,20 +185,20 @@ void N(update)(void) {
                 }
             }
 
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
 
             if (acs->barFillLevel == 0) {
                 battleStatus->actionSuccess = AC_ACTION_FAILED;
             } else {
-                battleStatus->actionSuccess = battleStatus->actionQuality;
+                battleStatus->actionSuccess = battleStatus->actionProgress;
             }
 
             // a good result is filling the bar over halfway to the second-highest interval
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
-            if (cutoff / 2 < battleStatus->actionQuality) {
+            if (cutoff / 2 < battleStatus->actionProgress) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             } else {
                 battleStatus->actionResult = ACTION_RESULT_MINUS_4;
@@ -211,12 +211,12 @@ void N(update)(void) {
 
             btl_set_popup_duration(POPUP_MSG_OFF);
             sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
-            acs->frameCounter = 5;
+            acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
             } else {
                 action_command_free();
             }

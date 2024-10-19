@@ -147,7 +147,7 @@ void N(update)(void) {
             N(HasStarted) = TRUE;
             acs->flee.drainDelay = 0;
             acs->state = AC_STATE_ACTIVE;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
 
             // fallthrough
         case AC_STATE_ACTIVE:
@@ -177,19 +177,19 @@ void N(update)(void) {
                 }
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
+            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
 
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
             btl_set_popup_duration(POPUP_MSG_OFF);
-            acs->frameCounter = 5;
+            acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
             action_command_free();

@@ -1891,7 +1891,7 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
             IfEq(LVar1, 1)
                 Goto(10)
             EndIf
-        Call(GetActionQuality, LVar1)
+        Call(GetActionProgress, LVar1)
     Else
         Thread
             Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)

@@ -73,7 +73,38 @@ API_CALLABLE(N(init)) {
     return ApiStatus_DONE2;
 }
 
-#include "common/MashCommandStart.inc.c"
+API_CALLABLE(N(start)) {
+    ActionCommandStatus* acs = &gActionCommandStatus;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
+        battleStatus->actionSuccess = 0;
+        return ApiStatus_DONE2;
+    }
+
+    action_command_init_status();
+
+    acs->prepareTime = evt_get_variable(script, *args++);
+    acs->duration = evt_get_variable(script, *args++);
+    acs->difficulty = evt_get_variable(script, *args++);
+    acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
+    acs->statusChance = evt_get_variable(script, *args++); // unused
+
+    acs->wrongButtonPressed = FALSE;
+    acs->barFillLevel = 0;
+    acs->barFillWidth = 0;
+    battleStatus->actionSuccess = 0;
+    battleStatus->actionResult = ACTION_RESULT_NONE;
+    battleStatus->maxActionSuccess = acs->mashMeterCutoffs[(acs->mashMeterNumIntervals - 1)];
+    battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
+    acs->state = AC_STATE_START;
+
+    increment_action_command_attempt_count();
+
+    return ApiStatus_DONE2;
+}
+
 
 void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -119,7 +150,7 @@ void N(update)(void) {
             acs->barFillLevel = 0;
             battleStatus->resultTier = 0;
             acs->fireShell.holdingLeft = FALSE;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
 
@@ -170,39 +201,39 @@ void N(update)(void) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
+            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionProgress * 12);
 
-            // resultTier is not used by this move; uses actionQuality instead via the move script
+            // resultTier is not used by this move; uses actionProgress instead via the move script
             switch (partner->actorBlueprint->level) {
                 case PARTNER_RANK_NORMAL:
-                    if (battleStatus->actionQuality >= N(BasicThresholds)[battleStatus->resultTier]) {
+                    if (battleStatus->actionProgress >= N(BasicThresholds)[battleStatus->resultTier]) {
                         battleStatus->resultTier++;
                     }
-                    if (battleStatus->resultTier > 0 && (battleStatus->actionQuality < N(BasicThresholds)[battleStatus->resultTier - 1])) {
+                    if (battleStatus->resultTier > 0 && (battleStatus->actionProgress < N(BasicThresholds)[battleStatus->resultTier - 1])) {
                         battleStatus->resultTier--;
                     }
                     break;
                 case PARTNER_RANK_SUPER:
-                    if (battleStatus->actionQuality >= N(SuperThresholds)[battleStatus->resultTier]) {
+                    if (battleStatus->actionProgress >= N(SuperThresholds)[battleStatus->resultTier]) {
                         battleStatus->resultTier++;
                     }
-                    if (battleStatus->resultTier > 0 && (battleStatus->actionQuality < N(SuperThresholds)[battleStatus->resultTier - 1])) {
+                    if (battleStatus->resultTier > 0 && (battleStatus->actionProgress < N(SuperThresholds)[battleStatus->resultTier - 1])) {
                         battleStatus->resultTier--;
                     }
                     break;
                 case PARTNER_RANK_ULTRA:
-                    if (battleStatus->actionQuality >= N(UltraThresholds)[battleStatus->resultTier]) {
+                    if (battleStatus->actionProgress >= N(UltraThresholds)[battleStatus->resultTier]) {
                         battleStatus->resultTier++;
                     }
-                    if (battleStatus->resultTier > 0 && (battleStatus->actionQuality < N(UltraThresholds)[battleStatus->resultTier - 1])) {
+                    if (battleStatus->resultTier > 0 && (battleStatus->actionProgress < N(UltraThresholds)[battleStatus->resultTier - 1])) {
                         battleStatus->resultTier--;
                     }
                     break;
             }
 
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
 
@@ -226,12 +257,12 @@ void N(update)(void) {
 
             sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
             btl_set_popup_duration(POPUP_MSG_OFF);
-            acs->frameCounter = 5;
+            acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
             action_command_free();

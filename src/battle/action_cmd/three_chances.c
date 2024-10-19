@@ -110,7 +110,7 @@ API_CALLABLE(N(init)) {
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
     acs->variation = evt_get_variable(script, *args++);
-    battleStatus->actionQuality = 1;
+    battleStatus->actionProgress = 1;
     acs->hudPrepareTime = 30;
     acs->hudPosX = -48;
     acs->hudPosY = 80;
@@ -212,7 +212,7 @@ API_CALLABLE(N(start)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    battleStatus->actionQuality = 1;
+    battleStatus->actionProgress = 1;
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = 10;
@@ -321,9 +321,9 @@ void N(update)(void) {
                 return;
             }
 
-            acs->frameCounter = acs->duration - 60;
-            if (acs->frameCounter < 42) {
-                acs->frameCounter = 42;
+            acs->stateTimer = acs->duration - 60;
+            if (acs->stateTimer < 42) {
+                acs->stateTimer = 42;
             }
             acs->state = THREE_CHANCES_STATE_PREFACE;
 
@@ -332,27 +332,27 @@ void N(update)(void) {
             btl_set_popup_duration(POPUP_MSG_ON);
 
             // first two minor ticks
-            if (acs->frameCounter == 42) {
+            if (acs->stateTimer == 42) {
                 hud_element_set_script(acs->hudElements[HIDX_TICK_1], &HES_TimingCharge3);
                 sfx_play_sound(SOUND_TIMING_BAR_TICK);
             }
-            if (acs->frameCounter == 22) {
+            if (acs->stateTimer == 22) {
                 hud_element_set_script(acs->hudElements[HIDX_TICK_2], &HES_TimingCharge2);
                 sfx_play_sound(SOUND_TIMING_BAR_TICK);
             }
 
             // activate the first light
-            if (acs->frameCounter == 2) {
+            if (acs->stateTimer == 2) {
                 hud_element_set_script(acs->hudElements[HIDX_LIGHT_1], &HES_TimingReady);
                 hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
                 sfx_play_sound(SOUND_TIMING_BAR_GO);
             }
 
-            acs->frameCounter--;
+            acs->stateTimer--;
 
             // prepare to listen for input
-            if (acs->frameCounter == 0) {
-                acs->frameCounter = 20;
+            if (acs->stateTimer == 0) {
+                acs->stateTimer = 20;
                 acs->threeChances.time = 0;
                 acs->state = THREE_CHANCES_STATE_FIRST_CHANCE;
                 acs->threeChances.hadCorrectTiming = FALSE;
@@ -390,7 +390,7 @@ void N(update)(void) {
 
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !acs->wrongButtonPressed) || acs->autoSucceed) {
                         acs->threeChances.hadCorrectTiming = TRUE;
-                        battleStatus->actionQuality++;
+                        battleStatus->actionProgress++;
                         break;
                     }
                 }
@@ -426,16 +426,16 @@ void N(update)(void) {
             acs->threeChances.time--;
 
             // activate the second light just before the next state begins
-            if (acs->frameCounter == 2) {
+            if (acs->stateTimer == 2) {
                 hud_element_set_script(acs->hudElements[HIDX_LIGHT_2], &HES_TimingReady);
                 hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
                 sfx_play_sound(SOUND_TIMING_BAR_GO);
             }
 
-            acs->frameCounter--;
+            acs->stateTimer--;
 
-            if (acs->frameCounter == 0) {
-                acs->frameCounter = 20;
+            if (acs->stateTimer == 0) {
+                acs->stateTimer = 20;
                 acs->threeChances.time = 0;
                 acs->state = THREE_CHANCES_STATE_SECOND_CHANCE;
                 acs->threeChances.hadCorrectTiming = FALSE;
@@ -478,7 +478,7 @@ void N(update)(void) {
 
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !acs->wrongButtonPressed) || acs->autoSucceed) {
                         acs->threeChances.hadCorrectTiming = TRUE;
-                        battleStatus->actionQuality++;
+                        battleStatus->actionProgress++;
                         break;
                     }
                 }
@@ -514,16 +514,16 @@ void N(update)(void) {
             acs->threeChances.time--;
 
             // activate the third light just before the next state begins
-            if (acs->frameCounter == 2) {
+            if (acs->stateTimer == 2) {
                 hud_element_set_script(acs->hudElements[HIDX_LIGHT_3], &HES_TimingReady);
                 hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
                 sfx_play_sound(SOUND_TIMING_BAR_GO);
             }
 
-            acs->frameCounter--;
+            acs->stateTimer--;
 
-            if (acs->frameCounter == 0) {
-                acs->frameCounter = 20;
+            if (acs->stateTimer == 0) {
+                acs->stateTimer = 20;
                 acs->threeChances.time = 0;
                 acs->state = THREE_CHANCES_STATE_THIRD_CHANCE;
                 acs->threeChances.hadCorrectTiming = FALSE;
@@ -567,7 +567,7 @@ void N(update)(void) {
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !acs->wrongButtonPressed) ||
                         acs->autoSucceed) {
                         acs->threeChances.hadCorrectTiming = TRUE;
-                        battleStatus->actionQuality++;
+                        battleStatus->actionProgress++;
                         break;
                     }
                 }
@@ -605,22 +605,22 @@ void N(update)(void) {
             acs->threeChances.time--;
             break;
         case THREE_CHANCES_STATE_WRAPUP:
-            if (battleStatus->actionQuality == 0) {
+            if (battleStatus->actionProgress == 0) {
                 battleStatus->actionSuccess = AC_ACTION_FAILED;
             } else {
-                battleStatus->actionSuccess = battleStatus->actionQuality;
+                battleStatus->actionSuccess = battleStatus->actionProgress;
             }
             battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             if (battleStatus->actionSuccess == 3) {
                 increment_action_command_success_count();
             }
             btl_set_popup_duration(POPUP_MSG_OFF);
-            acs->frameCounter = 5;
+            acs->stateTimer = 5;
             acs->state = THREE_CHANCES_STATE_DISPOSE;
             break;
         case THREE_CHANCES_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
             action_command_free();
@@ -644,8 +644,8 @@ void N(draw)(void) {
     hud_element_draw_clipped(acs->hudElements[HIDX_BUFF_ICON]);
 
     hid = acs->hudElements[HIDX_DIGIT];
-    if (hud_element_get_script(hid) != DigitScripts[battleStatus->actionQuality]) {
-        hud_element_set_script(hid, DigitScripts[battleStatus->actionQuality]);
+    if (hud_element_get_script(hid) != DigitScripts[battleStatus->actionProgress]) {
+        hud_element_set_script(hid, DigitScripts[battleStatus->actionProgress]);
     }
 
     hud_element_draw_clipped(hid);

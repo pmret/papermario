@@ -121,7 +121,7 @@ void N(update)(void) {
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
             acs->barFillLevel = 0;
             acs->state = AC_STATE_ACTIVE;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
 
             // fallthrough
         case AC_STATE_ACTIVE:
@@ -136,24 +136,24 @@ void N(update)(void) {
                 acs->barFillLevel += SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]) / 6;
                 acs->barFillLevel += rand_int(SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]) / 6);
             }
-            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
+            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
 
             // handle filling the bar
-            if (acs->mashMeterCutoffs[acs->mashMeterNumIntervals] <= battleStatus->actionQuality) {
-                acs->frameCounter = 0;
+            if (acs->mashMeterCutoffs[acs->mashMeterNumIntervals] <= battleStatus->actionProgress) {
+                acs->stateTimer = 0;
             }
 
-            if (acs->frameCounter == 0) {
+            if (acs->stateTimer == 0) {
                 btl_set_popup_duration(POPUP_MSG_OFF);
-                acs->frameCounter = 5;
+                acs->stateTimer = 5;
                 acs->state = AC_STATE_DISPOSE;
                 break;
             }
-            acs->frameCounter--;
+            acs->stateTimer--;
             break;
         case AC_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 break;
             }
             battleStatus->actionSuccess = 1;

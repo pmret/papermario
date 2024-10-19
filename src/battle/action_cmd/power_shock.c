@@ -49,7 +49,7 @@ API_CALLABLE(N(init)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    acs->thresholdLevel = rand_int(100);
+    acs->escapeThreshold = rand_int(100);
     acs->hudPrepareTime = 30;
     acs->isBarFilled = FALSE;
     acs->thresholdMoveDir = 0;
@@ -82,7 +82,7 @@ API_CALLABLE(N(init)) {
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    offsetX = 29 - ((100 - acs->thresholdLevel) * 60) / 100;
+    offsetX = 29 - ((100 - acs->escapeThreshold) * 60) / 100;
     hud_element_set_render_pos(acs->hudElements[HIDX_100_PCT], acs->hudPosX - offsetX, acs->hudPosY + 17);
     return ApiStatus_DONE2;
 }
@@ -103,8 +103,7 @@ API_CALLABLE(N(start)) {
     acs->duration = evt_get_variable(script, *args++);
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
-    // for this command, this is the chance for enemy to be affected
-    acs->targetWeakness = evt_get_variable(script, *args++);
+    acs->statusChance = evt_get_variable(script, *args++); // chance for enemy to be affected
 
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
@@ -159,7 +158,7 @@ void N(update)(void) {
                 hud_element_set_render_pos(acs->hudElements[HIDX_BUTTON], acs->hudPosX, acs->hudPosY);
                 hud_element_set_render_pos(acs->hudElements[HIDX_METER], acs->hudPosX, acs->hudPosY + 28);
 
-                amt = 100 - acs->thresholdLevel;
+                amt = 100 - acs->escapeThreshold;
                 offsetX = 29 - (amt * 60) / 100;
                 hud_element_set_render_pos(acs->hudElements[HIDX_OK], acs->hudPosX - offsetX, acs->hudPosY + 17);
             }
@@ -174,7 +173,7 @@ void N(update)(void) {
             acs->barFillLevel = 0;
             acs->any.unk_5C = 0;
             N(HasStarted) = TRUE;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
 
@@ -184,7 +183,7 @@ void N(update)(void) {
 
             // bar can drain if it hasn't been fully filled
             if (!acs->isBarFilled) {
-                if (acs->targetWeakness != 0) {
+                if (acs->statusChance != 0) {
                     cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
                     acs->barFillLevel -= N(DrainRateTable)[acs->barFillLevel / cutoff / 20];
                     if (acs->barFillLevel < 0) {
@@ -200,9 +199,9 @@ void N(update)(void) {
 
             // check for bar-filling input
             if (battleStatus->curButtonsPressed & BUTTON_A) {
-                if (acs->targetWeakness != 0) {
+                if (acs->statusChance != 0) {
                     s32 difficultyPct = battleStatus->actionCmdDifficultyTable[acs->difficulty];
-                    amt = SCALE_BY_PCT(SCALE_BY_PCT(850, difficultyPct), acs->targetWeakness);
+                    amt = SCALE_BY_PCT(SCALE_BY_PCT(850, difficultyPct), acs->statusChance);
 
                     acs->barFillLevel += amt;
                 } else {
@@ -222,30 +221,30 @@ void N(update)(void) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
+            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionProgress * 12);
 
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 break;
             }
 
             amt = acs->barFillLevel;
-            if (acs->targetWeakness == 0) {
+            if (acs->statusChance == 0) {
                 amt = 0;
             }
 
-            battleStatus->actionQuality = amt / ONE_PCT_MASH;
+            battleStatus->actionProgress = amt / ONE_PCT_MASH;
             if (amt == 0) {
                 battleStatus->actionSuccess = AC_ACTION_FAILED;
-            } else if (battleStatus->actionQuality >= acs->thresholdLevel) {
+            } else if (battleStatus->actionProgress >= acs->escapeThreshold) {
                 battleStatus->actionSuccess = 1;
             } else {
                 battleStatus->actionSuccess = 0;
             }
 
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
-            if (cutoff / 2 < battleStatus->actionQuality) {
+            if (cutoff / 2 < battleStatus->actionProgress) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             } else {
                 battleStatus->actionResult = ACTION_RESULT_MINUS_4;
@@ -257,18 +256,18 @@ void N(update)(void) {
 
             sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
             btl_set_popup_duration(POPUP_MSG_OFF);
-            acs->frameCounter = 5;
+            acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
-            if (acs->targetWeakness == 0) {
+            if (acs->statusChance == 0) {
                 acs->barFillLevel -= ONE_PCT_MASH;
                 if (acs->barFillLevel < 0) {
                     acs->barFillLevel = 0;
                 }
             }
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 break;
             }
             action_command_free();
@@ -282,15 +281,15 @@ void N(update)(void) {
         case AC_STATE_START:
         case AC_STATE_ACTIVE:
             if (acs->thresholdMoveDir == 0) {
-                acs->thresholdLevel += 7;
-                if (acs->thresholdLevel >= 100) {
-                    acs->thresholdLevel = 100;
+                acs->escapeThreshold += 7;
+                if (acs->escapeThreshold >= 100) {
+                    acs->escapeThreshold = 100;
                     acs->thresholdMoveDir = 1;
                 }
             } else {
-                acs->thresholdLevel -= 7;
-                if (acs->thresholdLevel <= 0) {
-                    acs->thresholdLevel = 0;
+                acs->escapeThreshold -= 7;
+                if (acs->escapeThreshold <= 0) {
+                    acs->escapeThreshold = 0;
                     acs->thresholdMoveDir = 0;
                 }
             }
@@ -302,7 +301,7 @@ void N(draw)(void) {
     s32 hudX, hudY;
     s32 hid;
 
-    hudX = 60 - (acs->thresholdLevel * 60 / 100);
+    hudX = 60 - (acs->escapeThreshold * 60 / 100);
     hud_element_set_render_pos(acs->hudElements[HIDX_OK], acs->hudPosX + 31 - hudX, acs->hudPosY + 17);
     hud_element_draw_clipped(acs->hudElements[HIDX_BUTTON]);
 

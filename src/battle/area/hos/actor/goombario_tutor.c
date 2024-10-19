@@ -456,7 +456,7 @@ EvtScript N(EVS_ManageTutorial) = {
         Wait(1)
     EndLoop
     Loop(0)
-        Call(GetActionQuality, LVar0)
+        Call(GetActionProgress, LVar0)
         IfEq(LVar0, 3)
             BreakLoop
         EndIf

@@ -84,8 +84,7 @@ API_CALLABLE(N(start)) {
     acs->duration = evt_get_variable(script, *args++);
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
-    // for this command, this is the average chance for enemies to be affected
-    acs->targetWeakness = evt_get_variable(script, *args++);
+    acs->statusChance = evt_get_variable(script, *args++); // average chance for enemies to be affected
 
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
@@ -143,7 +142,7 @@ void N(update)(void) {
             }
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
             acs->barFillLevel = 0;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
 
@@ -153,7 +152,7 @@ void N(update)(void) {
 
             // bar can drain if it hasn't been fully filled
             if (!acs->isBarFilled) {
-                if (acs->targetWeakness != 0) {
+                if (acs->statusChance != 0) {
                     s32 maxFillLevel = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
                     acs->barFillLevel -= GET_DRAIN_RATE (acs->barFillLevel / maxFillLevel);
                     if (acs->barFillLevel < 0) {
@@ -170,7 +169,7 @@ void N(update)(void) {
             // check for bar-filling input
             if (battleStatus->curButtonsPressed & BUTTON_A) {
                 s32 difficultyPct = battleStatus->actionCmdDifficultyTable[acs->difficulty];
-                s32 effectivenessPct = METER_FILL_TICK * acs->targetWeakness;
+                s32 effectivenessPct = METER_FILL_TICK * acs->statusChance;
                 // divide by 100 for each percent-based multiplier
                 s32 fillAmt = (difficultyPct * effectivenessPct) / (100 * 100);
 
@@ -193,16 +192,16 @@ void N(update)(void) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
+            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionProgress * 12);
 
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
 
             fillLevel = acs->barFillLevel;
-            if (acs->targetWeakness == 0) {
+            if (acs->statusChance == 0) {
                 fillLevel = 0;
             }
 
@@ -226,19 +225,19 @@ void N(update)(void) {
             }
             sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
             btl_set_popup_duration(POPUP_MSG_OFF);
-            acs->frameCounter = 5;
+            acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
-            if (acs->targetWeakness == 0) {
+            if (acs->statusChance == 0) {
                 acs->barFillLevel -= 100;
                 if (acs->barFillLevel < 0) {
                     acs->barFillLevel = 0;
                 }
             }
 
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
             action_command_free();

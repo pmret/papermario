@@ -92,9 +92,9 @@ API_CALLABLE(N(init)) {
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
     if (acs->variation == ACV_WHIRLWIND_HUFF) {
-        battleStatus->actionQuality = 0;
+        battleStatus->actionProgress = 0;
     } else {
-        battleStatus->actionQuality = 3;
+        battleStatus->actionProgress = 3;
     }
     acs->hudPosX = -48;
     acs->hudPosY = 80;
@@ -149,9 +149,9 @@ API_CALLABLE(N(start)) {
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     if (acs->variation == ACV_WHIRLWIND_HUFF) {
-        battleStatus->actionQuality = 0;
+        battleStatus->actionProgress = 0;
     } else {
-        battleStatus->actionQuality = 3;
+        battleStatus->actionProgress = 3;
     }
     acs->state = AC_STATE_START;
     gBattleStatus.flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
@@ -217,7 +217,7 @@ void N(update)(void) {
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
             acs->barFillLevel = 0;
             acs->state = AC_STATE_ACTIVE;
-            acs->frameCounter = acs->duration;
+            acs->stateTimer = acs->duration;
 
             // fallthrough
         case AC_STATE_ACTIVE:
@@ -258,24 +258,24 @@ void N(update)(void) {
             }
 
             if (acs->variation == ACV_WHIRLWIND_HUFF) {
-                battleStatus->actionQuality = (acs->barFillLevel / ONE_PCT_MASH) / 20;
+                battleStatus->actionProgress = (acs->barFillLevel / ONE_PCT_MASH) / 20;
             } else {
-                battleStatus->actionQuality = N(BuzzarQuality)[(acs->barFillLevel / ONE_PCT_MASH) / 10];
+                battleStatus->actionProgress = N(BuzzarQuality)[(acs->barFillLevel / ONE_PCT_MASH) / 10];
             }
 
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
             battleStatus->actionResult = ACTION_RESULT_NONE;
-            battleStatus->actionSuccess = battleStatus->actionQuality;
+            battleStatus->actionSuccess = battleStatus->actionProgress;
             btl_set_popup_duration(POPUP_MSG_OFF);
-            acs->frameCounter = 5;
+            acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 return;
             }
             action_command_free();
@@ -301,12 +301,12 @@ void N(draw)(void) {
 
     hid = acs->hudElements[HIDX_DIGIT];
     if (acs->variation == ACV_WHIRLWIND_HUFF) {
-        if (N(HuffDigits)[battleStatus->actionQuality] != hud_element_get_script(hid)) {
-            hud_element_set_script(hid, N(HuffDigits)[battleStatus->actionQuality]);
+        if (N(HuffDigits)[battleStatus->actionProgress] != hud_element_get_script(hid)) {
+            hud_element_set_script(hid, N(HuffDigits)[battleStatus->actionProgress]);
         }
     } else {
-        if (N(BuzzarDigits)[battleStatus->actionQuality] != hud_element_get_script(hid)) {
-            hud_element_set_script(hid, N(BuzzarDigits)[battleStatus->actionQuality]);
+        if (N(BuzzarDigits)[battleStatus->actionProgress] != hud_element_get_script(hid)) {
+            hud_element_set_script(hid, N(BuzzarDigits)[battleStatus->actionProgress]);
         }
     }
     hud_element_draw_clipped(hid);

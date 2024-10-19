@@ -142,7 +142,7 @@ void N(update)(void) {
                 break;
             }
 
-            acs->frameCounter = battleStatus->actionCmdDifficultyTable[acs->difficulty];
+            acs->stateTimer = battleStatus->actionCmdDifficultyTable[acs->difficulty];
             battleStatus->actionSuccess = AC_ACTION_FAILED;
             acs->state = AC_STATE_ACTIVE;
 
@@ -152,7 +152,7 @@ void N(update)(void) {
                 btl_set_popup_duration(POPUP_MSG_ON);
             }
             if (battleStatus->actionCommandMode >= AC_MODE_TUTORIAL) {
-                if (acs->frameCounter == 0) {
+                if (acs->stateTimer == 0) {
                     break;
                 }
             } else {
@@ -173,22 +173,22 @@ void N(update)(void) {
                 }
             }
 
-            if (acs->frameCounter == 0) {
+            if (acs->stateTimer == 0) {
                 if (battleStatus->actionSuccess == 1) {
                     increment_action_command_success_count();
                 }
                 if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL) {
                     btl_set_popup_duration(POPUP_MSG_OFF);
                 }
-                acs->frameCounter = 5;
+                acs->stateTimer = 5;
                 acs->state = AC_STATE_DISPOSE;
                 break;
             }
-            acs->frameCounter--;
+            acs->stateTimer--;
             break;
         case AC_STATE_DISPOSE:
-            if (acs->frameCounter != 0) {
-                acs->frameCounter--;
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 break;
             }
             action_command_free();

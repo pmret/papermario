@@ -533,7 +533,7 @@ EvtScript N(smack) = {
         Wait(1)
     EndLoop
     Call(GetPartnerActionSuccess, LVarB)
-    Call(func_80269600, LVarD)
+    Call(GetActionResultTier, LVarD)
     Label(0)
         Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
         IfEq(LVar0, HIT_RESULT_MISS)
@@ -796,7 +796,7 @@ EvtScript N(spook) = {
     EndThread
     Call(N(AverageSpookChance))
     Call(action_command_spook_start, 0, 87 * DT, AC_DIFFICULTY_3, LVar0)
-    Call(GetActionQuality, LVar1)
+    Call(GetActionProgress, LVar1)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Conceal)
     Set(LVar1, 0)
     Set(LVar2, 0)
@@ -887,7 +887,7 @@ EvtScript N(spook) = {
     EndThread
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOW_SPOOK)
     SetF(LVar0, Float(1.0))
-    Call(GetActionQuality, LVar2)
+    Call(GetActionProgress, LVar2)
     Switch(LVar2)
         CaseLe(20)
             SetF(LVar1, Float(0.3))
@@ -926,7 +926,7 @@ EvtScript N(spook) = {
     PlayEffect(EFFECT_ENERGY_IN_OUT, 6, LVar0, LVar1, LVar2, Float(1.0), 45, 0)
     Wait(15)
     Call(InitTargetIterator)
-    Call(GetActionQuality, LVarF)
+    Call(GetActionProgress, LVarF)
     Loop(0)
         Call(SetGoalToTarget, ACTOR_SELF)
         Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS)
@@ -963,7 +963,7 @@ EvtScript N(spook) = {
             Wait(1)
         EndLoop
     EndThread
-    Call(GetActionQuality, LVar2)
+    Call(GetActionProgress, LVar2)
     Switch(LVar2)
         CaseLe(20)
             SetF(LVar1, Float(0.3))
@@ -1045,7 +1045,7 @@ EvtScript N(fanSmack) = {
         Wait(1)
     EndLoop
     Call(GetPartnerActionSuccess, LVarB)
-    Call(func_80269600, LVarD)
+    Call(GetActionResultTier, LVarD)
     Label(0)
         Call(PartnerTestEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_ALT_SPIKY, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
         IfEq(LVar0, HIT_RESULT_MISS)

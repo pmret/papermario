@@ -1056,7 +1056,7 @@ EvtScript N(EVS_Attack_PowerShock) = {
         ExecWait(N(EVS_ReturnHome_Miss))
         Return
     EndIf
-    Call(GetActionQuality, LVarF)
+    Call(GetActionProgress, LVarF)
     Call(GetPartnerActionSuccess, LVar0)
     Switch(LVar0)
         CaseGt(0)
@@ -1297,7 +1297,7 @@ EvtScript N(EVS_Attack_MegaShock) = {
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
     Call(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_ATTACK)
     Call(N(WattFXDisable))
-    Call(GetActionQuality, LVar1)
+    Call(GetActionProgress, LVar1)
     Wait(90 * DT)
     Call(N(SetBackgroundAlpha), 0)
     Thread
@@ -1341,7 +1341,7 @@ EvtScript N(EVS_Attack_MegaShock) = {
     Thread
         Call(N(PowerShockDischargeFX), 10)
     EndThread
-    Call(GetActionQuality, LVar0)
+    Call(GetActionProgress, LVar0)
     Call(GetActorPos, ACTOR_PARTNER, LVar1, LVar2, LVar3)
     Add(LVar2, 12)
     Call(N(MegaShockFX), LVar0, LVar1, LVar2, LVar3)
