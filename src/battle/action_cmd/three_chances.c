@@ -107,8 +107,8 @@ API_CALLABLE(N(init)) {
     acs->actionCommandID = ACTION_COMMAND_THREE_CHANCES;
     acs->state = THREE_CHANCES_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
     acs->variation = evt_get_variable(script, *args++);
     battleStatus->actionProgress = 1;
     acs->hudPrepareTime = 30;
@@ -210,8 +210,8 @@ API_CALLABLE(N(start)) {
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
     battleStatus->actionProgress = 1;
     battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;

@@ -150,11 +150,11 @@ void draw_mash_meter(s32 posX, s32 posY, s32 fillValue, s32 colorMode) {
     }
 
     //difference between current and previous filled value
-    offsetX = width - acs->barFillWidth;
+    offsetX = width - acs->meterFillWidth;
     if (abs(offsetX) >= MashMeterSmoothDivisor * 100) {
-        acs->barFillWidth += offsetX / MashMeterSmoothDivisor;
+        acs->meterFillWidth += offsetX / MashMeterSmoothDivisor;
     } else {
-        acs->barFillWidth = width;
+        acs->meterFillWidth = width;
     }
 
     offsetX = 0;
@@ -202,7 +202,7 @@ void draw_mash_meter(s32 posX, s32 posY, s32 fillValue, s32 colorMode) {
         }
 
         filledWidth = cutOff * 60 / maxCutOff - offsetX;
-        width = acs->barFillWidth / 100 - offsetX;
+        width = acs->meterFillWidth / 100 - offsetX;
 
         if (width < 0) {
             break;
@@ -737,7 +737,7 @@ API_CALLABLE(InterruptActionCommand) {
         }
     }
 
-    sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
+    sfx_stop_sound(SOUND_LOOP_CHARGE_METER);
     close_action_command_instruction_popup();
 
     return ApiStatus_DONE2;

@@ -6,7 +6,7 @@
  * The player must mash A to fill a meter up to an OK mark.
  *
  * Unlike the normal flee command, the OK mark does not move and the command will only
- * succeed of the bar is filled. Once filled, it rapidly drains and must be refilled.
+ * succeed of the meter is filled. Once filled, it rapidly drains and must be refilled.
  */
 
 #define NAMESPACE action_command_unused_flee
@@ -41,9 +41,9 @@ API_CALLABLE(N(init)) {
     acs->actionCommandID = ACTION_COMMAND_UNUSED_FLEE;
     acs->state = AC_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = evt_get_variable(script, *args);
+    acs->meterFillLevel = evt_get_variable(script, *args);
     acs->hudPosX = -48;
-    acs->barFillWidth = 0;
+    acs->meterFillWidth = 0;
     N(HasStarted) = FALSE;
     acs->hudPosY = 80;
 
@@ -153,31 +153,31 @@ void N(update)(void) {
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            // check for bar-filling input
+            // check for meter-filling input
             if (battleStatus->curButtonsPressed & BUTTON_A) {
                 s32 fillAmt = SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
 
                 if (acs->flee.drainDelay == 0) {
-                    acs->barFillLevel += fillAmt;
+                    acs->meterFillLevel += fillAmt;
                 }
             }
 
-            // handle bar reaching 100%
-            if (acs->barFillLevel > MAX_MASH_UNITS) {
-                acs->barFillLevel = MAX_MASH_UNITS;
+            // handle meter reaching 100%
+            if (acs->meterFillLevel > MAX_MASH_UNITS) {
+                acs->meterFillLevel = MAX_MASH_UNITS;
                 acs->flee.drainDelay = 3;
             }
 
-            // bar can reset if mashing stops after it's been fully filled
+            // meter can reset if mashing stops after it's been fully filled
             if (acs->flee.drainDelay != 0) {
                 acs->flee.drainDelay--;
                 if (acs->flee.drainDelay == 0) {
-                    acs->barFillLevel = 0;
+                    acs->meterFillLevel = 0;
                     battleStatus->actionQuality++;
                 }
             }
 
-            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
+            battleStatus->actionProgress = acs->meterFillLevel / ONE_PCT_MASH;
 
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
@@ -208,9 +208,9 @@ void N(draw)(void) {
     hud_element_get_render_pos(hid, &hudX, &hudY);
 
     if (!N(HasStarted)) {
-        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 1);
+        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH, 1);
     } else {
-        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 2);
+        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH, 2);
     }
 
     hud_element_draw_clipped(acs->hudElements[HIDX_OK]);

@@ -52,8 +52,8 @@ API_CALLABLE(N(init)) {
     acs->actionCommandID = ACTION_COMMAND_TIDAL_WAVE;
     acs->state = TIDAL_WAVE_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
     battleStatus->actionProgress = 0;
     acs->hudPosX = -48;
     acs->hudPosY = 80;
@@ -93,8 +93,8 @@ API_CALLABLE(N(start)) {
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
     battleStatus->actionQuality = 0;
     battleStatus->actionProgress = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
@@ -280,9 +280,9 @@ void N(update)(void) {
                         hud_element_set_scale(hid, 0.5f);
                         hud_element_set_render_pos(hid, acs->hudPosX + ((acs->tidalWave.inputCount - 1) * 20), acs->hudPosY + 7);
                         acs->tidalWave.inputCount++;
-                        acs->barFillLevel += battleStatus->actionCmdDifficultyTable[acs->difficulty] * 18;
-                        if (acs->barFillLevel > MAX_MASH_UNITS) {
-                            acs->barFillLevel = MAX_MASH_UNITS;
+                        acs->meterFillLevel += battleStatus->actionCmdDifficultyTable[acs->difficulty] * 18;
+                        if (acs->meterFillLevel > MAX_MASH_UNITS) {
+                            acs->meterFillLevel = MAX_MASH_UNITS;
                         }
                         acs->state = TIDAL_WAVE_STATE_NEXT_BUTTON;
                         battleStatus->actionProgress++;

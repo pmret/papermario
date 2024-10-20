@@ -38,7 +38,7 @@ enum {
     AC_STATE_DISPOSE                = 12, // delay and disappear
 };
 
-enum {
+enum ActionCommandDifficulty {
     AC_DIFFICULTY_0                 = 0, // easiest
     AC_DIFFICULTY_1                 = 1, // very easy
     AC_DIFFICULTY_2                 = 2, // easy
@@ -81,13 +81,13 @@ enum ActionCommandModes {
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 workerID;
     /* 0x04 */ s32 hudElements[16];
-    /* 0x44 */ s16 barFillLevel; // 0 to MAX_MASH_UNITS
+    /* 0x44 */ s16 meterFillLevel; // 0 to MAX_MASH_UNITS
     /* 0x46 */ s16 escapeThreshold;
-    /* 0x48 */ s16 barFillWidth; // X100
+    /* 0x48 */ s16 meterFillWidth; // X100
     /* 0x4A */ s16 actionCommandID;
     /* 0x4C */ s16 state;
     /* 0x4E */ s16 prepareTime;
-    /* 0x50 */ s16 difficulty; // values from 0 to 7
+    /* 0x50 */ s16 difficulty; // see enum: ActionCommandDifficulty
     /* 0x52 */ s16 duration;
     /* 0x54 */ s16 stateTimer;
     /* 0x56 */ s16 hudPosX;
@@ -133,20 +133,20 @@ typedef struct ActionCommandStatus {
                     } tidalWave;
                 };
     /* 0x5E */ s8 autoSucceed;
-    /* 0x5F */ s8 hammerMissedStart;
-    /* 0x60 */ s8 wrongButtonPressed;
-    /* 0x61 */ s8 showHud;
-    /* 0x62 */ s8 playHammerSounds;
+    /* 0x5F */ b8 hammerMissedStart;
+    /* 0x60 */ b8 wrongButtonPressed;
+    /* 0x61 */ b8 showHud;
+    /* 0x62 */ b8 playHammerSounds;
     /* 0x63 */ char pad_63[1];
     /* 0x64 */ union {
                     s16 variation; // used to select different variants of an action command
                     s16 statusChance; // chance of applying special status; higher values make mashing easier
                };
     /* 0x66 */ s16 thresholdMoveDir;
-    /* 0x68 */ s16 isBarFilled;
-    /* 0x6A */ s16 berserkerEnabled;
+    /* 0x68 */ b16 isMeterFilled;
+    /* 0x6A */ b16 berserkerEnabled;
     /* 0x6C */ s16 hudPrepareTime;
-    /* 0x6E */ s16 hitsTakenIsMax;
+    /* 0x6E */ b16 hitsTakenIsMax;
     /* 0x70 */ s16 lookBackCounter;
     /* 0x72 */ s16 wrongInputFrameCounter;
     /* 0x74 */ s16 mashMeterCutoffs[6]; // upper bounds for each interval

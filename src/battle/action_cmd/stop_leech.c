@@ -37,8 +37,8 @@ API_CALLABLE(N(init)) {
     acs->hudPosX = -48;
     acs->state = AC_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
     acs->hudPosY = 80;
 
     hid = hud_element_create(&HES_AButton);
@@ -73,8 +73,8 @@ API_CALLABLE(N(start)) {
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
     battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = AC_STATE_START;
@@ -119,7 +119,7 @@ void N(update)(void) {
                 break;
             }
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
-            acs->barFillLevel = 0;
+            acs->meterFillLevel = 0;
             acs->state = AC_STATE_ACTIVE;
             acs->stateTimer = acs->duration;
 
@@ -127,18 +127,18 @@ void N(update)(void) {
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            // check for bar-filling input
+            // check for meter-filling input
             if (!acs->berserkerEnabled) {
                 if (battleStatus->curButtonsPressed & BUTTON_A) {
-                    acs->barFillLevel += SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
+                    acs->meterFillLevel += SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                 }
             } else {
-                acs->barFillLevel += SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]) / 6;
-                acs->barFillLevel += rand_int(SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]) / 6);
+                acs->meterFillLevel += SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]) / 6;
+                acs->meterFillLevel += rand_int(SCALE_BY_PCT(METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]) / 6);
             }
-            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
+            battleStatus->actionProgress = acs->meterFillLevel / ONE_PCT_MASH;
 
-            // handle filling the bar
+            // handle filling the meter
             if (acs->mashMeterCutoffs[acs->mashMeterNumIntervals] <= battleStatus->actionProgress) {
                 acs->stateTimer = 0;
             }
@@ -176,7 +176,7 @@ void N(draw)(void) {
     hid = acs->hudElements[HIDX_METER];
     hud_element_draw_clipped(hid);
     hud_element_get_render_pos(hid, &hudX, &hudY);
-    draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 2);
+    draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH, 2);
 }
 
 void N(free)(void) {

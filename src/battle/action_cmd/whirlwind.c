@@ -89,8 +89,8 @@ API_CALLABLE(N(init)) {
     acs->actionCommandID = ACTION_COMMAND_WHIRLWIND;
     acs->state = AC_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
     if (acs->variation == ACV_WHIRLWIND_HUFF) {
         battleStatus->actionProgress = 0;
     } else {
@@ -144,8 +144,8 @@ API_CALLABLE(N(start)) {
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
     battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     if (acs->variation == ACV_WHIRLWIND_HUFF) {
@@ -215,7 +215,7 @@ void N(update)(void) {
                 return;
             }
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
-            acs->barFillLevel = 0;
+            acs->meterFillLevel = 0;
             acs->state = AC_STATE_ACTIVE;
             acs->stateTimer = acs->duration;
 
@@ -223,21 +223,21 @@ void N(update)(void) {
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            // apply bar draining every frame
+            // apply meter draining every frame
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
-            fillPct = acs->barFillLevel / cutoff;
+            fillPct = acs->meterFillLevel / cutoff;
             if (acs->variation == ACV_WHIRLWIND_HUFF) {
                 amt = GET_DRAIN_RATE_HUFF(fillPct);
             } else {
                 amt = GET_DRAIN_RATE_BUZZAR(fillPct);
             }
-            acs->barFillLevel -= amt;
+            acs->meterFillLevel -= amt;
 
-            if (acs->barFillLevel < 0) {
-                acs->barFillLevel = 0;
+            if (acs->meterFillLevel < 0) {
+                acs->meterFillLevel = 0;
             }
 
-            // check for bar-filling input
+            // check for meter-filling input
             if (!acs->berserkerEnabled) {
                 if (battleStatus->curButtonsPressed & BUTTON_A) {
                     if (acs->variation == ACV_WHIRLWIND_HUFF) {
@@ -245,22 +245,22 @@ void N(update)(void) {
                     } else {
                         amt = SCALE_BY_PCT(BUZZAR_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                     }
-                    acs->barFillLevel += amt;
+                    acs->meterFillLevel += amt;
                 }
             } else {
-                acs->barFillLevel += SCALE_BY_PCT(25, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
-                acs->barFillLevel += rand_int(SCALE_BY_PCT(25, battleStatus->actionCmdDifficultyTable[acs->difficulty]));
+                acs->meterFillLevel += SCALE_BY_PCT(25, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
+                acs->meterFillLevel += rand_int(SCALE_BY_PCT(25, battleStatus->actionCmdDifficultyTable[acs->difficulty]));
             }
 
-            // cap bar to maximum fill level
-            if (acs->barFillLevel > cutoff * 100) {
-                acs->barFillLevel = cutoff * 100;
+            // cap meter to maximum fill level
+            if (acs->meterFillLevel > cutoff * 100) {
+                acs->meterFillLevel = cutoff * 100;
             }
 
             if (acs->variation == ACV_WHIRLWIND_HUFF) {
-                battleStatus->actionProgress = (acs->barFillLevel / ONE_PCT_MASH) / 20;
+                battleStatus->actionProgress = (acs->meterFillLevel / ONE_PCT_MASH) / 20;
             } else {
-                battleStatus->actionProgress = N(BuzzarQuality)[(acs->barFillLevel / ONE_PCT_MASH) / 10];
+                battleStatus->actionProgress = N(BuzzarQuality)[(acs->meterFillLevel / ONE_PCT_MASH) / 10];
             }
 
             if (acs->stateTimer != 0) {
@@ -296,7 +296,7 @@ void N(draw)(void) {
     hud_element_draw_clipped(hid);
     hud_element_get_render_pos(hid, &hudX, &hudY);
 
-    draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 1);
+    draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH, 1);
     hud_element_draw_clipped(acs->hudElements[HIDX_BUBBLE]);
 
     hid = acs->hudElements[HIDX_DIGIT];

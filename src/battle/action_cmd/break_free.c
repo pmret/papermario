@@ -36,9 +36,9 @@ API_CALLABLE(N(init)) {
     acs->showHud = TRUE;
     acs->state = AC_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
+    acs->meterFillLevel = 0;
     acs->escapeThreshold = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillWidth = 0;
     battleStatus->actionQuality = 0;
     acs->hudPosX = -48;
     acs->hudPosY = 80;
@@ -89,9 +89,9 @@ API_CALLABLE(N(start)) {
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
+    acs->meterFillLevel = 0;
     acs->escapeThreshold = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillWidth = 0;
 
     battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
@@ -180,14 +180,14 @@ void N(update)(void) {
                 }
             }
 
-            // unlike most other mash inputs, this command doesn't just increment barFillLevel with inputs
+            // unlike most other mash inputs, this command doesn't just increment meterFillLevel with inputs
             // instead we sum the total number of inputs during the last N frames of the input buffer
             if (!acs->berserkerEnabled) {
                 s32 inputBufPos = battleStatus->inputBufferPos;
                 s32 windowLen = acs->duration - acs->stateTimer;
                 s32 i;
 
-                acs->barFillLevel = 0;
+                acs->meterFillLevel = 0;
 
                 inputBufPos -= windowLen;
                 if (inputBufPos < 0) {
@@ -199,15 +199,15 @@ void N(update)(void) {
                         inputBufPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                     }
                     if (battleStatus->pushInputBuffer[inputBufPos] & BUTTON_A) {
-                        acs->barFillLevel += SCALE_BY_PCT(METER_FILL_RATE, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
+                        acs->meterFillLevel += SCALE_BY_PCT(METER_FILL_RATE, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                     }
                 }
             } else {
-                acs->barFillLevel += SCALE_BY_PCT(25, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
-                acs->barFillLevel += rand_int(SCALE_BY_PCT(25, battleStatus->actionCmdDifficultyTable[acs->difficulty]));
+                acs->meterFillLevel += SCALE_BY_PCT(25, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
+                acs->meterFillLevel += rand_int(SCALE_BY_PCT(25, battleStatus->actionCmdDifficultyTable[acs->difficulty]));
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
+            battleStatus->actionQuality = acs->meterFillLevel / ONE_PCT_MASH;
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
                 break;
@@ -257,7 +257,7 @@ void N(draw)(void) {
     hud_element_draw_clipped(hid);
     hud_element_get_render_pos(hid, &hudX, &hudY);
 
-    draw_mash_meter_multicolor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH);
+    draw_mash_meter_multicolor(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH);
     hud_element_draw_clipped(hudElements[HIDX_RUN_AWAY]);
     hud_element_draw_clipped(hudElements[HIDX_OK]);
 }

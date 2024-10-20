@@ -1643,7 +1643,7 @@ enum SoundIDs {
     SOUND_LOOP_TIK_UNUSED3_FLOW3                = 0x8000003E, // #unused
     SOUND_LOOP_TIK_UNUSED3_FLOW2                = 0x8000003F, // #unused
     SOUND_LOOP_SAM_STAIRS_RISE                  = 0x80000040,
-    SOUND_LOOP_CHARGE_BAR                       = 0x80000041,
+    SOUND_LOOP_CHARGE_METER                     = 0x80000041,
     SOUND_LOOP_CRYSTAL_BALL_GLOW                = 0x80000042,
     SOUND_LOOP_TIK18_WATER                      = 0x80000043,
     SOUND_LOOP_TIK19_WATER                      = 0x80000044,

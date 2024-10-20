@@ -38,8 +38,8 @@ API_CALLABLE(N(init)) {
     acs->actionCommandID = ACTION_COMMAND_SQUIRT;
     acs->state = AC_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
     battleStatus->actionProgress = 0;
     acs->hudPosX = -48;
     acs->squirt.draining = FALSE;
@@ -78,8 +78,8 @@ API_CALLABLE(N(start)) {
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
     battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = AC_STATE_START;
@@ -136,43 +136,43 @@ void N(update)(void) {
             }
 
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
-            acs->barFillLevel = 0;
+            acs->meterFillLevel = 0;
             acs->squirt.draining = FALSE;
             acs->stateTimer = acs->duration;
-            sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_LOOP_CHARGE_METER, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
 
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            // bar filling and draining
+            // meter filling and draining
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
-            fillPct = acs->barFillLevel / cutoff;
+            fillPct = acs->meterFillLevel / cutoff;
             if (!acs->squirt.draining) {
                 if (!(battleStatus->curButtonsDown & BUTTON_A)) {
-                    acs->barFillLevel -= GET_DRAIN_RATE(fillPct);
-                    if (acs->barFillLevel < 0) {
-                        acs->barFillLevel = 0;
+                    acs->meterFillLevel -= GET_DRAIN_RATE(fillPct);
+                    if (acs->meterFillLevel < 0) {
+                        acs->meterFillLevel = 0;
                     }
                 } else {
                     s32 amt = GET_FILL_RATE(fillPct);
-                    acs->barFillLevel += SCALE_BY_PCT(amt, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
-                    if (acs->barFillLevel > MAX_MASH_UNITS) {
-                        acs->barFillLevel = MAX_MASH_UNITS;
+                    acs->meterFillLevel += SCALE_BY_PCT(amt, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
+                    if (acs->meterFillLevel > MAX_MASH_UNITS) {
+                        acs->meterFillLevel = MAX_MASH_UNITS;
                         acs->squirt.draining = TRUE;
                     }
                 }
             } else {
-                acs->barFillLevel -= METER_DRAIN_RATE;
-                if (acs->barFillLevel <= 0) {
-                    acs->barFillLevel = 0;
+                acs->meterFillLevel -= METER_DRAIN_RATE;
+                if (acs->meterFillLevel <= 0) {
+                    acs->meterFillLevel = 0;
                     acs->squirt.draining = FALSE;
                 }
             }
 
-            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionProgress * 12);
+            battleStatus->actionProgress = acs->meterFillLevel / ONE_PCT_MASH;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_METER, 0, 0, battleStatus->actionProgress * 12);
 
             hid = acs->hudElements[HIDX_BUTTON];
             if (fillPct < 80) {
@@ -190,13 +190,13 @@ void N(update)(void) {
                 break;
             }
 
-            if (acs->barFillLevel == 0) {
+            if (acs->meterFillLevel == 0) {
                 battleStatus->actionQuality = AC_QUALITY_FAILED;
             } else {
                 battleStatus->actionQuality = battleStatus->actionProgress;
             }
 
-            // a good result is filling the bar over halfway to the second-highest interval
+            // a good result is filling the meter over halfway to the second-highest interval
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
             if (battleStatus->actionProgress <= cutoff / 2) {
                 battleStatus->actionResult = ACTION_RESULT_METER_BELOW_HALF;
@@ -210,7 +210,7 @@ void N(update)(void) {
             }
 
             btl_set_popup_duration(POPUP_MSG_OFF);
-            sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
+            sfx_stop_sound(SOUND_LOOP_CHARGE_METER);
             acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;
             break;
@@ -234,14 +234,14 @@ void N(draw)(void) {
     hud_element_draw_clipped(hid);
     hud_element_get_render_pos(hid, &hudX, &hudY);
     if (!acs->squirt.draining) {
-        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 1);
+        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH, 1);
     } else {
-        draw_mash_meter_mode_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 1, MASH_METER_MODE_ONE_COLOR);
+        draw_mash_meter_mode_with_divisor(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH, 1, MASH_METER_MODE_ONE_COLOR);
     }
 }
 
 void N(free)(void) {
-    sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
+    sfx_stop_sound(SOUND_LOOP_CHARGE_METER);
     hud_element_free(gActionCommandStatus.hudElements[HIDX_BUTTON]);
     hud_element_free(gActionCommandStatus.hudElements[HIDX_METER]);
 }

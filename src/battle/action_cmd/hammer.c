@@ -7,7 +7,7 @@ extern s32 actionCmdTableHammer[];
 
 // indices into ActionCommandStatus::hudElements for this action command
 enum {
-    HIDX_BAR            = 0,
+    HIDX_FRAME          = 0,
     HIDX_WAIT           = 1,
     HIDX_CHARGE_A       = 2,
     HIDX_CHARGE_B       = 3,
@@ -39,7 +39,7 @@ API_CALLABLE(N(init)) {
     acs->hudPosY = 96;
 
     hid = hud_element_create(&HES_TimingBar1Chance);
-    acs->hudElements[HIDX_BAR] = hid;
+    acs->hudElements[HIDX_FRAME] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 10);
@@ -134,7 +134,7 @@ void N(update)(void) {
         case AC_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            hid = acs->hudElements[HIDX_BAR];
+            hid = acs->hudElements[HIDX_FRAME];
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
@@ -178,7 +178,7 @@ void N(update)(void) {
             if (acs->hudPosX > 50) {
                 acs->hudPosX = 50;
             }
-            hud_element_set_render_pos(acs->hudElements[HIDX_BAR], acs->hudPosX, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElements[HIDX_FRAME], acs->hudPosX, acs->hudPosY);
             hud_element_set_render_pos(acs->hudElements[HIDX_WAIT], acs->hudPosX + 21, acs->hudPosY - 3);
             hud_element_set_render_pos(acs->hudElements[HIDX_CHARGE_A], acs->hudPosX + 5, acs->hudPosY + 1);
             hud_element_set_render_pos(acs->hudElements[HIDX_CHARGE_B], acs->hudPosX - 7, acs->hudPosY + 1);
@@ -196,7 +196,7 @@ void N(update)(void) {
         case AC_STATE_START:
             btl_set_popup_duration(POPUP_MSG_ON);
             if (acs->prepareTime < 15) {
-                hud_element_set_alpha(acs->hudElements[HIDX_BAR], 255);
+                hud_element_set_alpha(acs->hudElements[HIDX_FRAME], 255);
                 hud_element_set_alpha(acs->hudElements[HIDX_WAIT], 255);
                 hud_element_set_alpha(acs->hudElements[HIDX_CHARGE_A], 255);
                 hud_element_set_alpha(acs->hudElements[HIDX_CHARGE_B], 255);
@@ -333,7 +333,7 @@ void N(update)(void) {
 }
 
 void N(draw)(void) {
-    hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_BAR]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_FRAME]);
     hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_WAIT]);
     hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_CHARGE_A]);
     hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_CHARGE_B]);
@@ -343,7 +343,7 @@ void N(draw)(void) {
 }
 
 void N(free)(void) {
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_BAR]);
+    hud_element_free(gActionCommandStatus.hudElements[HIDX_FRAME]);
     hud_element_free(gActionCommandStatus.hudElements[HIDX_WAIT]);
     hud_element_free(gActionCommandStatus.hudElements[HIDX_CHARGE_A]);
     hud_element_free(gActionCommandStatus.hudElements[HIDX_CHARGE_B]);

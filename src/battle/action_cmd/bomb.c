@@ -40,9 +40,9 @@ API_CALLABLE(N(init)) {
     acs->showHud = TRUE;
     acs->state = AC_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
-    acs->isBarFilled = FALSE;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
+    acs->isMeterFilled = FALSE;
     battleStatus->actionQuality = 0;
 
     acs->hudPosX = -48;
@@ -88,8 +88,8 @@ API_CALLABLE(N(start)) {
     acs->variation = evt_get_variable(script, *args++);
 
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
     battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
     battleStatus->maxActionQuality = acs->mashMeterCutoffs[(acs->mashMeterNumIntervals - 1)];
@@ -144,60 +144,60 @@ void N(update)(void) {
             }
 
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
-            acs->barFillLevel = 0;
+            acs->meterFillLevel = 0;
             acs->stateTimer = acs->duration;
-            sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_LOOP_CHARGE_METER, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
 
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            // bar can drain if it hasn't been fully filled
-            if (!acs->isBarFilled) {
+            // meter can drain if it hasn't been fully filled
+            if (!acs->isMeterFilled) {
                 cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
-                acs->barFillLevel -= GET_DRAIN_RATE(acs->barFillLevel / cutoff);
-                if (acs->barFillLevel < 0) {
-                    acs->barFillLevel = 0;
+                acs->meterFillLevel -= GET_DRAIN_RATE(acs->meterFillLevel / cutoff);
+                if (acs->meterFillLevel < 0) {
+                    acs->meterFillLevel = 0;
                 }
             }
 
-            // check for bar-filling input
+            // check for meter-filling input
             if (battleStatus->curButtonsPressed & BUTTON_A) {
                 switch (acs->variation) {
                     case ACV_BOMB_BASIC:
-                        acs->barFillLevel += SCALE_BY_PCT(BASIC_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
+                        acs->meterFillLevel += SCALE_BY_PCT(BASIC_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                         break;
                     case ACV_BOMB_SUPER:
-                        acs->barFillLevel += SCALE_BY_PCT(SUPER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
+                        acs->meterFillLevel += SCALE_BY_PCT(SUPER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                         break;
                     case ACV_BOMB_ULTRA:
-                        acs->barFillLevel += SCALE_BY_PCT(ULTRA_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
+                        acs->meterFillLevel += SCALE_BY_PCT(ULTRA_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                         break;
                 }
             }
 
-            // handle bar reaching 100%
-            if (acs->barFillLevel > MAX_MASH_UNITS) {
-                acs->barFillLevel = MAX_MASH_UNITS;
-                acs->isBarFilled = TRUE;
+            // handle meter reaching 100%
+            if (acs->meterFillLevel > MAX_MASH_UNITS) {
+                acs->meterFillLevel = MAX_MASH_UNITS;
+                acs->isMeterFilled = TRUE;
                 hid = acs->hudElements[HIDX_100_PCT];
                 hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionProgress * 12);
+            battleStatus->actionProgress = acs->meterFillLevel / ONE_PCT_MASH;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_METER, 0, 0, battleStatus->actionProgress * 12);
 
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
                 break;
             }
 
-            if (acs->barFillLevel == 0) {
+            if (acs->meterFillLevel == 0) {
                 battleStatus->actionQuality = AC_QUALITY_FAILED;
             } else {
-                battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
+                battleStatus->actionQuality = acs->meterFillLevel / ONE_PCT_MASH;
             }
 
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
@@ -212,7 +212,7 @@ void N(update)(void) {
                 increment_action_command_success_count();
             }
 
-            sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
+            sfx_stop_sound(SOUND_LOOP_CHARGE_METER);
             btl_set_popup_duration(POPUP_MSG_OFF);
             acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;

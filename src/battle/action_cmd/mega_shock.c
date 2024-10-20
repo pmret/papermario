@@ -41,9 +41,9 @@ API_CALLABLE(N(init)) {
     acs->state = AC_STATE_INIT;
     acs->hudPrepareTime = 30;
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
-    acs->isBarFilled = FALSE;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
+    acs->isMeterFilled = FALSE;
     acs->hudPosX = -48;
     acs->hudPosY = 80;
 
@@ -93,8 +93,8 @@ API_CALLABLE(N(start)) {
     acs->statusChance = evt_get_variable(script, *args++); // average chance for enemies to be affected
 
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
     battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = AC_STATE_START;
@@ -163,28 +163,28 @@ void N(update)(void) {
             }
             hud_element_set_script(acs->hudElements[HIDX_A_BUTTON], &HES_MashAButton);
             hud_element_set_script(acs->hudElements[HIDX_B_BUTTON], &HES_MashBButton1);
-            acs->barFillLevel = 0;
+            acs->meterFillLevel = 0;
             acs->any.unk_5C = 0;
             acs->stateTimer = acs->duration;
-            sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_LOOP_CHARGE_METER, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
 
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            // bar can drain if it hasn't been fully filled
-            if (!acs->isBarFilled) {
+            // meter can drain if it hasn't been fully filled
+            if (!acs->isMeterFilled) {
                 if (acs->statusChance != 0) {
                     cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
-                    acs->barFillLevel -= GET_DRAIN_RATE(acs->barFillLevel / cutoff);
-                    if (acs->barFillLevel < 0) {
-                        acs->barFillLevel = 0;
+                    acs->meterFillLevel -= GET_DRAIN_RATE(acs->meterFillLevel / cutoff);
+                    if (acs->meterFillLevel < 0) {
+                        acs->meterFillLevel = 0;
                     }
                 } else {
-                    acs->barFillLevel -= 10;
-                    if (acs->barFillLevel < 0) {
-                        acs->barFillLevel = 0;
+                    acs->meterFillLevel -= 10;
+                    if (acs->meterFillLevel < 0) {
+                        acs->meterFillLevel = 0;
                     }
                 }
             }
@@ -221,12 +221,12 @@ void N(update)(void) {
                     // TODO: Find a way to avoid reusing buttonsPushed.
                     buttonsPushed = amt;
 
-                    acs->barFillLevel += buttonsPushed;
+                    acs->meterFillLevel += buttonsPushed;
                 } else {
-                    acs->barFillLevel += ONE_PCT_MASH;
+                    acs->meterFillLevel += ONE_PCT_MASH;
 
-                    if (acs->barFillLevel >= 5 * ONE_PCT_MASH) {
-                        acs->barFillLevel = 5 * ONE_PCT_MASH;
+                    if (acs->meterFillLevel >= 5 * ONE_PCT_MASH) {
+                        acs->meterFillLevel = 5 * ONE_PCT_MASH;
                     }
                 }
 
@@ -247,16 +247,16 @@ void N(update)(void) {
                 }
             }
 
-            if (acs->barFillLevel > MAX_MASH_UNITS) {
-                acs->barFillLevel = MAX_MASH_UNITS;
-                acs->isBarFilled = TRUE;
+            if (acs->meterFillLevel > MAX_MASH_UNITS) {
+                acs->meterFillLevel = MAX_MASH_UNITS;
+                acs->isMeterFilled = TRUE;
                 hid = acs->hudElements[HIDX_100_PCT];
                 hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionProgress * 12);
+            battleStatus->actionProgress = acs->meterFillLevel / ONE_PCT_MASH;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_METER, 0, 0, battleStatus->actionProgress * 12);
 
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
@@ -266,7 +266,7 @@ void N(update)(void) {
             // Again, reusing buttonsPushed specifically for reg-alloc. See above.
             //
             // TODO: Find a way to avoid reusing buttonsPushed.
-            buttonsPushed = acs->barFillLevel;
+            buttonsPushed = acs->meterFillLevel;
             if (acs->statusChance == 0) {
                 buttonsPushed = 0;
             }
@@ -277,7 +277,7 @@ void N(update)(void) {
                 battleStatus->actionQuality = buttonsPushed / ONE_PCT_MASH;
             }
 
-            // a good result is filling the bar over halfway to the second-highest interval
+            // a good result is filling the meter over halfway to the second-highest interval
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
             if (battleStatus->actionProgress <= cutoff / 2) {
                 battleStatus->actionResult = ACTION_RESULT_METER_BELOW_HALF;
@@ -290,16 +290,16 @@ void N(update)(void) {
                 increment_action_command_success_count();
             }
 
-            sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
+            sfx_stop_sound(SOUND_LOOP_CHARGE_METER);
             btl_set_popup_duration(POPUP_MSG_OFF);
             acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
             if (acs->statusChance == 0) {
-                acs->barFillLevel -= ONE_PCT_MASH;
-                if (acs->barFillLevel < 0) {
-                    acs->barFillLevel = 0;
+                acs->meterFillLevel -= ONE_PCT_MASH;
+                if (acs->meterFillLevel < 0) {
+                    acs->meterFillLevel = 0;
                 }
             }
 
@@ -324,10 +324,10 @@ void N(draw)(void) {
     hud_element_draw_clipped(hid);
     hud_element_get_render_pos(hid, &hudX, &hudY);
 
-    if (!acs->isBarFilled) {
-        draw_mash_meter_multicolor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH);
+    if (!acs->isMeterFilled) {
+        draw_mash_meter_multicolor(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH);
     } else {
-        draw_mash_meter_blink(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH);
+        draw_mash_meter_blink(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH);
     }
 
     hud_element_draw_clipped(acs->hudElements[HIDX_100_PCT]);

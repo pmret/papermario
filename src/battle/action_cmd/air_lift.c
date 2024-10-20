@@ -44,9 +44,9 @@ API_CALLABLE(N(init)) {
     acs->showHud = TRUE;
     acs->state = AC_STATE_INIT;
     acs->wrongButtonPressed = FALSE;
-    acs->barFillLevel = 0;
-    acs->barFillWidth = 0;
-    acs->isBarFilled = FALSE;
+    acs->meterFillLevel = 0;
+    acs->meterFillWidth = 0;
+    acs->isMeterFilled = FALSE;
     battleStatus->actionQuality = 0;
     battleStatus->actionProgress = 0;
 
@@ -154,59 +154,59 @@ void N(update)(void) {
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
             N(HasStarted) = TRUE;
             acs->stateTimer = acs->duration;
-            sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_LOOP_CHARGE_METER, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
 
             // fallthrough
         case AC_STATE_ACTIVE:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            // bar can drain if it hasn't been fully filled
-            if (!acs->isBarFilled) {
+            // meter can drain if it hasn't been fully filled
+            if (!acs->isMeterFilled) {
                 if (acs->escapeChance != 0) {
                     s32 maxFillLevel = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
-                    acs->barFillLevel -= GET_DRAIN_RATE(acs->barFillLevel / maxFillLevel);
-                    if (acs->barFillLevel < 0) {
-                        acs->barFillLevel = 0;
+                    acs->meterFillLevel -= GET_DRAIN_RATE(acs->meterFillLevel / maxFillLevel);
+                    if (acs->meterFillLevel < 0) {
+                        acs->meterFillLevel = 0;
                     }
                 } else {
-                    acs->barFillLevel -= 10;
-                    if (acs->barFillLevel < 0) {
-                        acs->barFillLevel = 0;
+                    acs->meterFillLevel -= 10;
+                    if (acs->meterFillLevel < 0) {
+                        acs->meterFillLevel = 0;
                     }
                 }
             }
 
-            // check for bar-filling input
+            // check for meter-filling input
             if (battleStatus->actionCommandMode != AC_MODE_NOT_LEARNED && (battleStatus->curButtonsPressed & BUTTON_A)) {
                 if (acs->escapeChance != 0) {
                     // fill rate = 820 multiplied by two values expressed as percentages
                     s32 difficultyPct = battleStatus->actionCmdDifficultyTable[acs->difficulty];
                     s32 effectivenessPct = METER_FILL_RATE * acs->escapeChance;
                     // divide by 100 for each percent-based multiplier
-                    acs->barFillLevel += (difficultyPct * effectivenessPct) / (100 * 100);
+                    acs->meterFillLevel += (difficultyPct * effectivenessPct) / (100 * 100);
                 } else {
-                    acs->barFillLevel += ONE_PCT_MASH;
-                    if (acs->barFillLevel >= 5 * ONE_PCT_MASH) {
-                        acs->barFillLevel = 5 * ONE_PCT_MASH;
+                    acs->meterFillLevel += ONE_PCT_MASH;
+                    if (acs->meterFillLevel >= 5 * ONE_PCT_MASH) {
+                        acs->meterFillLevel = 5 * ONE_PCT_MASH;
                     }
                 }
             }
 
-            // handle bar reaching 100%
-            if (acs->barFillLevel > MAX_MASH_UNITS) {
-                acs->barFillLevel = MAX_MASH_UNITS;
-                acs->isBarFilled = TRUE;
+            // handle meter reaching 100%
+            if (acs->meterFillLevel > MAX_MASH_UNITS) {
+                acs->meterFillLevel = MAX_MASH_UNITS;
+                acs->isMeterFilled = TRUE;
                 hid = acs->hudElements[HIDX_100_PCT];
                 hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
+            battleStatus->actionQuality = acs->meterFillLevel / ONE_PCT_MASH;
             if (battleStatus->actionProgress < battleStatus->actionQuality) {
                 battleStatus->actionProgress = battleStatus->actionQuality;
             }
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_METER, 0, 0, battleStatus->actionQuality * 12);
 
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
@@ -217,7 +217,7 @@ void N(update)(void) {
                 battleStatus->actionProgress = 0;
             }
 
-            // threshold for success is completely random, only guaranteed if the bar is 100% filled
+            // threshold for success is completely random, only guaranteed if the meter is 100% filled
             battleStatus->actionQuality = battleStatus->actionProgress;
             if (rand_int(99) < battleStatus->actionQuality) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
@@ -232,15 +232,15 @@ void N(update)(void) {
             }
 
             btl_set_popup_duration(POPUP_MSG_OFF);
-            sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
+            sfx_stop_sound(SOUND_LOOP_CHARGE_METER);
             acs->stateTimer = 20;
             acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
             if (acs->escapeChance == 0) {
-                acs->barFillLevel -= ONE_PCT_MASH;
-                if (acs->barFillLevel < 0) {
-                    acs->barFillLevel = 0;
+                acs->meterFillLevel -= ONE_PCT_MASH;
+                if (acs->meterFillLevel < 0) {
+                    acs->meterFillLevel = 0;
                 }
             }
             if (acs->stateTimer != 0) {
@@ -266,11 +266,11 @@ void N(draw)(void) {
     hud_element_get_render_pos(hid, &hudX, &hudY);
 
     if (!N(HasStarted)) {
-        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 1);
-    } else if (!acs->isBarFilled) {
-        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 4);
+        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH, 1);
+    } else if (!acs->isMeterFilled) {
+        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH, 4);
     } else {
-        draw_mash_meter_blink_with_divisor(hudX, hudY, acs->barFillLevel / ONE_PCT_MASH, 4);
+        draw_mash_meter_blink_with_divisor(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH, 4);
     }
 
     hud_element_draw_clipped(acs->hudElements[HIDX_100_PCT]);
