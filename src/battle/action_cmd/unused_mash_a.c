@@ -24,7 +24,7 @@ enum {
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hid;
+    HudElemID hid;
 
     battleStatus->maxActionQuality = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTable0A;
@@ -49,19 +49,19 @@ API_CALLABLE(N(init)) {
     acs->hudPosY = 80;
 
     hid = hud_element_create(&HES_AButton);
-    acs->hudElements[HIDX_BUTTON] = hid;
+    acs->hudElemIDs[HIDX_BUTTON] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     hid = hud_element_create(&HES_BlueMeter);
-    acs->hudElements[HIDX_METER] = hid;
+    acs->hudElemIDs[HIDX_METER] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     hid = hud_element_create(&HES_100pct);
-    acs->hudElements[HIDX_100_PCT] = hid;
+    acs->hudElemIDs[HIDX_100_PCT] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
@@ -104,20 +104,20 @@ API_CALLABLE(N(start)) {
 void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hid;
+    HudElemID hid;
     s32 cutoff;
 
     switch (acs->state) {
         case AC_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            hid = acs->hudElements[HIDX_BUTTON];
+            hid = acs->hudElemIDs[HIDX_BUTTON];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            hid = acs->hudElements[HIDX_METER];
+            hid = acs->hudElemIDs[HIDX_METER];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
@@ -133,8 +133,8 @@ void N(update)(void) {
                 acs->hudPosX = 50;
             }
 
-            hud_element_set_render_pos(acs->hudElements[HIDX_BUTTON], acs->hudPosX, acs->hudPosY);
-            hud_element_set_render_pos(acs->hudElements[HIDX_METER], acs->hudPosX, acs->hudPosY + 28);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_BUTTON], acs->hudPosX, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_METER], acs->hudPosX, acs->hudPosY + 28);
             break;
         case AC_STATE_START:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -144,7 +144,7 @@ void N(update)(void) {
                 return;
             }
 
-            hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
+            hud_element_set_script(acs->hudElemIDs[HIDX_BUTTON], &HES_MashAButton);
             acs->meterFillLevel = 0;
             acs->state = AC_STATE_ACTIVE;
             acs->stateTimer = acs->duration;
@@ -162,7 +162,7 @@ void N(update)(void) {
             if (acs->meterFillLevel >= MAX_MASH_UNITS) {
                 acs->meterFillLevel = MAX_MASH_UNITS;
                 acs->isMeterFilled = TRUE;
-                hid = acs->hudElements[HIDX_100_PCT];
+                hid = acs->hudElemIDs[HIDX_100_PCT];
                 hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }

@@ -352,7 +352,7 @@ s32 popup_menu_update(void) {
     s32 posY;
     s32 width;
     s32 height;
-    s32 hid;
+    HudElemID hid;
     s32 cond;
     s32 buttons;
     s32 msgID;
@@ -2160,14 +2160,14 @@ void func_800F4C1C(s32* userData, s32 x, s32 y) {
 }
 
 void popup_draw_cost_icon(s32* userData, s32 x, s32 y) {
-    s32 hudElement;
+    HudElemID hid;
     s32 xPos;
     s32 yPos;
 
     switch (gPopupMenu->popupType) {
         case POPUP_TYPE_TRADE_FOR_BADGE:
             xPos = x + 16;
-            hudElement = PopupMenu_TitleIconHID;
+            hid = PopupMenu_TitleIconHID;
             yPos = y + 16;
             break;
 #if VERSION_JP
@@ -2177,16 +2177,16 @@ void popup_draw_cost_icon(s32* userData, s32 x, s32 y) {
 #endif
         case POPUP_TYPE_SELL_ITEM:
             xPos = x + 17;
-            hudElement = PopupMenu_TitleIconHID;
+            hid = PopupMenu_TitleIconHID;
             yPos = y + 17;
             break;
         default:
             return;
     }
 
-    hud_element_set_render_pos(hudElement, xPos, yPos);
-    hud_element_set_alpha(hudElement, PopupMenu_Alpha);
-    hud_element_draw_clipped(hudElement);
+    hud_element_set_render_pos(hid, xPos, yPos);
+    hud_element_set_alpha(hid, PopupMenu_Alpha);
+    hud_element_draw_clipped(hid);
 }
 
 void popup_draw_already_have_partner(s32* userData, s32 x, s32 y) {
@@ -2198,26 +2198,26 @@ void popup_draw_already_have_partner(s32* userData, s32 x, s32 y) {
 }
 
 void func_800F4D28(s32* userData, s32 x, s32 y) {
-    s32 hudElement = PopupMenu_TitleIconHID;
+    HudElemID hid = PopupMenu_TitleIconHID;
     PlayerData* playerData = &gPlayerData;
     s32 xPos = x + 14;
     s32 yPos = y + 9;
     s32 type;
 
-    hud_element_set_alpha(hudElement, PopupMenu_Alpha);
+    hud_element_set_alpha(hid, PopupMenu_Alpha);
 
     if (gPopupMenu->popupType == POPUP_TYPE_TRADE_FOR_BADGE) {
-        hud_element_set_render_pos(hudElement, xPos, yPos);
+        hud_element_set_render_pos(hid, xPos, yPos);
     } else {
-        hud_element_set_render_pos(hudElement, xPos, y + 10);
+        hud_element_set_render_pos(hid, xPos, y + 10);
     }
 
-    hud_element_draw_clipped(hudElement);
+    hud_element_draw_clipped(hid);
 
-    hudElement = PopupMenu_TimesHID;
-    hud_element_set_render_pos(hudElement, x + 26, y + 11);
-    hud_element_set_alpha(hudElement, PopupMenu_Alpha);
-    hud_element_draw_clipped(hudElement);
+    hid = PopupMenu_TimesHID;
+    hud_element_set_render_pos(hid, x + 26, y + 11);
+    hud_element_set_alpha(hid, PopupMenu_Alpha);
+    hud_element_draw_clipped(hid);
 
     type = gPopupMenu->popupType;
     if (type == POPUP_TYPE_TRADE_FOR_BADGE) {

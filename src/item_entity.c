@@ -44,7 +44,7 @@ BSS s16 D_801565A8;
 BSS s32 D_801565AC;
 #endif
 BSS PopupMenu ItemPickupMenu;
-BSS s32 ItemPickupIconID;
+BSS s32 ItemPickupIconHID;
 BSS s32 ItemPickupStateDelay;
 BSS s32 ThrowAwayMenuIdx;
 BSS s32 ThrowAwayItemID;
@@ -2152,9 +2152,9 @@ void update_item_entity_pickup(ItemEntity* item) {
                 }
             }
 
-            ItemPickupIconID = hud_element_create(gItemHudScripts[gItemTable[item->itemID].hudElemID].enabled);
-            hud_element_set_flags(ItemPickupIconID, HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(ItemPickupIconID, -100, -100);
+            ItemPickupIconHID = hud_element_create(gItemHudScripts[gItemTable[item->itemID].hudElemID].enabled);
+            hud_element_set_flags(ItemPickupIconHID, HUD_ELEMENT_FLAG_80);
+            hud_element_set_render_pos(ItemPickupIconHID, -100, -100);
             item->state = ITEM_PICKUP_STATE_SHOW_GOT_ITEM;
 
             if (!(item->flags & ITEM_ENTITY_FLAG_2000000)) {
@@ -2369,7 +2369,7 @@ block_47: // TODO required to match
                 partner_enable_input();
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
             }
-            hud_element_free(ItemPickupIconID);
+            hud_element_free(ItemPickupIconHID);
             remove_item_entity_by_reference(item);
             sort_items();
             decrement_status_bar_disabled();
@@ -2431,7 +2431,7 @@ block_47: // TODO required to match
                     ThrowAwayMenuIdx = 1;
                 }
                 ThrowAwayItemID = menu->userIndex[ThrowAwayMenuIdx - 1];
-                hud_element_set_script(ItemPickupIconID, menu->ptrIcon[ThrowAwayMenuIdx - 1]);
+                hud_element_set_script(ItemPickupIconHID, menu->ptrIcon[ThrowAwayMenuIdx - 1]);
 
                 get_item_entity(
                     make_item_entity_delayed(
@@ -2474,7 +2474,7 @@ block_47: // TODO required to match
             enable_player_input();
             partner_enable_input();
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-            hud_element_free(ItemPickupIconID);
+            hud_element_free(ItemPickupIconHID);
             remove_item_entity_by_reference(item);
             sort_items();
             decrement_status_bar_disabled();
@@ -2685,8 +2685,8 @@ void draw_content_pickup_item_header(ItemEntity* item, s32 posX, s32 posY) {
             } else {
                 draw_msg(itemMsg, posX + X_PICKUP_ITEM_2, posY + Y_PICKUP_ITEM_2, 255, MSG_PAL_2F, 0);
                 if (!(item->pickupMsgFlags & (ITEM_PICKUP_FLAG_1_COIN | ITEM_PICKUP_FLAG_3_STAR_PIECES))) {
-                    hud_element_set_render_pos(ItemPickupIconID, posX + 20, posY + 20);
-                    hud_element_draw_next(ItemPickupIconID);
+                    hud_element_set_render_pos(ItemPickupIconHID, posX + 20, posY + 20);
+                    hud_element_draw_next(ItemPickupIconHID);
                 }
             }
             break;
@@ -2694,8 +2694,8 @@ void draw_content_pickup_item_header(ItemEntity* item, s32 posX, s32 posY) {
         case ITEM_PICKUP_STATE_HIDE_THREW_AWAY:
             set_message_text_var(gItemTable[ThrowAwayItemID].nameMsg, 0);
             draw_msg(MSG_Menus_005F, posX + X_PICKUP_THREW, posY + Y_PICKUP_THREW, 255, MSG_PAL_2F, 0);
-            hud_element_set_render_pos(ItemPickupIconID, posX + 20, posY + 20);
-            hud_element_draw_next(ItemPickupIconID);
+            hud_element_set_render_pos(ItemPickupIconHID, posX + 20, posY + 20);
+            hud_element_draw_next(ItemPickupIconHID);
             break;
     }
 }

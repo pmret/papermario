@@ -601,10 +601,8 @@ void pause_stats_init(MenuPanel* panel) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPauseStatsIconIDs); i++) {
-        s32 iconID = hud_element_create(gStatsMenuElements[i]);
-
-        gPauseStatsIconIDs[i] = iconID;
-        hud_element_set_flags(iconID, HUD_ELEMENT_FLAG_80);
+        gPauseStatsIconIDs[i] = hud_element_create(gStatsMenuElements[i]);
+        hud_element_set_flags(gPauseStatsIconIDs[i], HUD_ELEMENT_FLAG_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gStatsMenuWindowBPs); i++) {

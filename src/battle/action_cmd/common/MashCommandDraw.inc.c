@@ -3,11 +3,11 @@
 void N(draw)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     s32 hudX, hudY;
-    s32 hid;
+    HudElemID hid;
 
-    hud_element_draw_clipped(acs->hudElements[0]);
+    hud_element_draw_clipped(acs->hudElemIDs[0]);
 
-    hid = acs->hudElements[1];
+    hid = acs->hudElemIDs[1];
     hud_element_draw_clipped(hid);
     hud_element_get_render_pos(hid, &hudX, &hudY);
 
@@ -17,5 +17,5 @@ void N(draw)(void) {
         draw_mash_meter_blink(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH);
     }
 
-    hud_element_draw_clipped(acs->hudElements[2]);
+    hud_element_draw_clipped(acs->hudElemIDs[2]);
 }

@@ -92,7 +92,7 @@ API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
-    s32 hid;
+    HudElemID hid;
 
     battleStatus->maxActionQuality = 5;
     battleStatus->actionCmdDifficultyTable = (s32*)actionCmdTableWaterBlock;
@@ -116,75 +116,75 @@ API_CALLABLE(N(init)) {
     acs->hudPosY = 80;
 
     hid = hud_element_create(&HES_AButton);
-    acs->hudElements[HIDX_BUTTON] = hid;
+    acs->hudElemIDs[HIDX_BUTTON] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
 
     hid = hud_element_create(&HES_TimingBar3Chances);
-    acs->hudElements[HIDX_FRAME] = hid;
+    acs->hudElemIDs[HIDX_FRAME] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     hid = hud_element_create(&HES_TimingWait);
-    acs->hudElements[HIDX_LIGHT_1] = hid;
+    acs->hudElemIDs[HIDX_LIGHT_1] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     hid = hud_element_create(&HES_TimingWait);
-    acs->hudElements[HIDX_LIGHT_2] = hid;
+    acs->hudElemIDs[HIDX_LIGHT_2] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     hid = hud_element_create(&HES_TimingWait);
-    acs->hudElements[HIDX_LIGHT_3] = hid;
+    acs->hudElemIDs[HIDX_LIGHT_3] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     hid = hud_element_create(&HES_TimingOK);
-    acs->hudElements[HIDX_RATING_1] = hid;
+    acs->hudElemIDs[HIDX_RATING_1] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     hid = hud_element_create(&HES_TimingOK);
-    acs->hudElements[HIDX_RATING_2] = hid;
+    acs->hudElemIDs[HIDX_RATING_2] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     hid = hud_element_create(&HES_TimingOK);
-    acs->hudElements[HIDX_RATING_3] = hid;
+    acs->hudElemIDs[HIDX_RATING_3] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    acs->hudElements[HIDX_DIGIT] = hud_element_create(DigitScripts[1]);
-    hud_element_set_render_pos(acs->hudElements[HIDX_DIGIT], acs->hudPosX, acs->hudPosY);
+    acs->hudElemIDs[HIDX_DIGIT] = hud_element_create(DigitScripts[1]);
+    hud_element_set_render_pos(acs->hudElemIDs[HIDX_DIGIT], acs->hudPosX, acs->hudPosY);
 
-    acs->hudElements[HIDX_TICK_1] = hud_element_create(&HES_TimingCharge4c);
-    hud_element_set_render_pos(acs->hudElements[HIDX_TICK_1], acs->hudPosX, acs->hudPosY);
+    acs->hudElemIDs[HIDX_TICK_1] = hud_element_create(&HES_TimingCharge4c);
+    hud_element_set_render_pos(acs->hudElemIDs[HIDX_TICK_1], acs->hudPosX, acs->hudPosY);
 
     hid = hud_element_create(&HES_TimingCharge4b);
-    acs->hudElements[HIDX_TICK_2] = hid;
+    acs->hudElemIDs[HIDX_TICK_2] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
 
     switch (acs->variation) {
         case ACV_THREE_CHANCES_WATER_BLOCK:
-            acs->hudElements[HIDX_BUFF_ICON] = hud_element_create(&HES_WaterBlock);
-            hid = acs->hudElements[HIDX_BUFF_ICON];
+            acs->hudElemIDs[HIDX_BUFF_ICON] = hud_element_create(&HES_WaterBlock);
+            hid = acs->hudElemIDs[HIDX_BUFF_ICON];
             break;
         case ACV_THREE_CHANCES_TURBO_CHARGE:
-            acs->hudElements[HIDX_BUFF_ICON] = hud_element_create(&HES_TurboCharge);
-            hid = acs->hudElements[HIDX_BUFF_ICON];
+            acs->hudElemIDs[HIDX_BUFF_ICON] = hud_element_create(&HES_TurboCharge);
+            hid = acs->hudElemIDs[HIDX_BUFF_ICON];
             break;
         case ACV_THREE_CHANCES_CLOUD_NINE:
-            acs->hudElements[HIDX_BUFF_ICON] = hud_element_create(&HES_CloudNine);
-            hid = acs->hudElements[HIDX_BUFF_ICON];
+            acs->hudElemIDs[HIDX_BUFF_ICON] = hud_element_create(&HES_CloudNine);
+            hid = acs->hudElemIDs[HIDX_BUFF_ICON];
             break;
     }
 
@@ -229,52 +229,52 @@ void N(update)(void) {
     s32 pos;
     s32 i;
     s32 window;
-    s32 hid;
+    HudElemID hid;
 
     switch (acs->state) {
         case THREE_CHANCES_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
-            hid = acs->hudElements[HIDX_BUTTON];
+            hid = acs->hudElemIDs[HIDX_BUTTON];
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(hid, 255);
-            hid = acs->hudElements[HIDX_FRAME];
+            hid = acs->hudElemIDs[HIDX_FRAME];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hid = acs->hudElements[HIDX_LIGHT_1];
+            hid = acs->hudElemIDs[HIDX_LIGHT_1];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hid = acs->hudElements[HIDX_LIGHT_2];
+            hid = acs->hudElemIDs[HIDX_LIGHT_2];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hid = acs->hudElements[HIDX_LIGHT_3];
+            hid = acs->hudElemIDs[HIDX_LIGHT_3];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hid = acs->hudElements[HIDX_DIGIT];
+            hid = acs->hudElemIDs[HIDX_DIGIT];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hid = acs->hudElements[HIDX_TICK_1];
+            hid = acs->hudElemIDs[HIDX_TICK_1];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hid = acs->hudElements[HIDX_TICK_2];
+            hid = acs->hudElemIDs[HIDX_TICK_2];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
-            hid = acs->hudElements[HIDX_BUFF_ICON];
+            hid = acs->hudElemIDs[HIDX_BUFF_ICON];
             hud_element_set_alpha(hid, 255);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
@@ -291,13 +291,13 @@ void N(update)(void) {
             if (acs->hudPosX > 50) {
                 acs->hudPosX = 50;
             }
-            hud_element_set_render_pos(acs->hudElements[HIDX_BUTTON], acs->hudPosX, acs->hudPosY);
-            hud_element_set_render_pos(acs->hudElements[HIDX_FRAME], acs->hudPosX + 28, acs->hudPosY + 28);
-            hud_element_set_render_pos(acs->hudElements[HIDX_LIGHT_1], acs->hudPosX + 21, acs->hudPosY + 24);
-            hud_element_set_render_pos(acs->hudElements[HIDX_LIGHT_2], acs->hudPosX + 41, acs->hudPosY + 24);
-            hud_element_set_render_pos(acs->hudElements[HIDX_LIGHT_3], acs->hudPosX + 61, acs->hudPosY + 24);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_BUTTON], acs->hudPosX, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_FRAME], acs->hudPosX + 28, acs->hudPosY + 28);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_LIGHT_1], acs->hudPosX + 21, acs->hudPosY + 24);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_LIGHT_2], acs->hudPosX + 41, acs->hudPosY + 24);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_LIGHT_3], acs->hudPosX + 61, acs->hudPosY + 24);
 
-            hid = acs->hudElements[HIDX_DIGIT];
+            hid = acs->hudElemIDs[HIDX_DIGIT];
             switch (acs->variation) {
                 case ACV_THREE_CHANCES_WATER_BLOCK:
                     hud_element_set_render_pos(hid, acs->hudPosX + 91, acs->hudPosY + 7);
@@ -310,9 +310,9 @@ void N(update)(void) {
                     break;
             }
 
-            hud_element_set_render_pos(acs->hudElements[HIDX_TICK_1], acs->hudPosX - 5, acs->hudPosY + 29);
-            hud_element_set_render_pos(acs->hudElements[HIDX_TICK_2], acs->hudPosX + 7, acs->hudPosY + 29);
-            hud_element_set_render_pos(acs->hudElements[HIDX_BUFF_ICON], acs->hudPosX + 92, acs->hudPosY + 23);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_TICK_1], acs->hudPosX - 5, acs->hudPosY + 29);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_TICK_2], acs->hudPosX + 7, acs->hudPosY + 29);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_BUFF_ICON], acs->hudPosX + 92, acs->hudPosY + 23);
             break;
         case THREE_CHANCES_STATE_START:
             btl_set_popup_duration(POPUP_MSG_ON);
@@ -333,18 +333,18 @@ void N(update)(void) {
 
             // first two minor ticks
             if (acs->stateTimer == 42) {
-                hud_element_set_script(acs->hudElements[HIDX_TICK_1], &HES_TimingCharge3);
+                hud_element_set_script(acs->hudElemIDs[HIDX_TICK_1], &HES_TimingCharge3);
                 sfx_play_sound(SOUND_TIMING_BAR_TICK);
             }
             if (acs->stateTimer == 22) {
-                hud_element_set_script(acs->hudElements[HIDX_TICK_2], &HES_TimingCharge2);
+                hud_element_set_script(acs->hudElemIDs[HIDX_TICK_2], &HES_TimingCharge2);
                 sfx_play_sound(SOUND_TIMING_BAR_TICK);
             }
 
             // activate the first light
             if (acs->stateTimer == 2) {
-                hud_element_set_script(acs->hudElements[HIDX_LIGHT_1], &HES_TimingReady);
-                hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
+                hud_element_set_script(acs->hudElemIDs[HIDX_LIGHT_1], &HES_TimingReady);
+                hud_element_set_script(acs->hudElemIDs[HIDX_BUTTON], &HES_AButtonDown);
                 sfx_play_sound(SOUND_TIMING_BAR_GO);
             }
 
@@ -400,7 +400,7 @@ void N(update)(void) {
             if ((acs->threeChances.time > -5)
                 && (acs->wrongButtonPressed || acs->threeChances.hadCorrectTiming)
             ) {
-                hid = acs->hudElements[HIDX_RATING_1];
+                hid = acs->hudElemIDs[HIDX_RATING_1];
                 if (acs->threeChances.hadCorrectTiming) {
                     hud_element_set_script(hid, &HES_TimingOK);
                 } else {
@@ -412,7 +412,7 @@ void N(update)(void) {
 
             // after six frames, show the verdict
             if (acs->threeChances.time == -5) {
-                hid = acs->hudElements[HIDX_RATING_1];
+                hid = acs->hudElemIDs[HIDX_RATING_1];
                 if (acs->threeChances.hadCorrectTiming) {
                     hud_element_set_script(hid, &HES_TimingOK);
                 } else {
@@ -420,15 +420,15 @@ void N(update)(void) {
                 }
                 hud_element_set_render_pos(hid, acs->hudPosX + 28, acs->hudPosY + 38);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
-                hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButton);
+                hud_element_set_script(acs->hudElemIDs[HIDX_BUTTON], &HES_AButton);
             }
 
             acs->threeChances.time--;
 
             // activate the second light just before the next state begins
             if (acs->stateTimer == 2) {
-                hud_element_set_script(acs->hudElements[HIDX_LIGHT_2], &HES_TimingReady);
-                hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
+                hud_element_set_script(acs->hudElemIDs[HIDX_LIGHT_2], &HES_TimingReady);
+                hud_element_set_script(acs->hudElemIDs[HIDX_BUTTON], &HES_AButtonDown);
                 sfx_play_sound(SOUND_TIMING_BAR_GO);
             }
 
@@ -488,7 +488,7 @@ void N(update)(void) {
             if ((acs->threeChances.time > -5)
                 && (acs->wrongButtonPressed || acs->threeChances.hadCorrectTiming)
             ) {
-                hid = acs->hudElements[HIDX_RATING_2];
+                hid = acs->hudElemIDs[HIDX_RATING_2];
                 if (acs->threeChances.hadCorrectTiming) {
                     hud_element_set_script(hid, &HES_TimingOK);
                 } else {
@@ -500,7 +500,7 @@ void N(update)(void) {
 
             // after six frames, show the verdict
             if (acs->threeChances.time == -5) {
-                hid = acs->hudElements[HIDX_RATING_2];
+                hid = acs->hudElemIDs[HIDX_RATING_2];
                 if (acs->threeChances.hadCorrectTiming) {
                     hud_element_set_script(hid, &HES_TimingOK);
                 } else {
@@ -508,15 +508,15 @@ void N(update)(void) {
                 }
                 hud_element_set_render_pos(hid, acs->hudPosX + 48, acs->hudPosY + 38);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
-                hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButton);
+                hud_element_set_script(acs->hudElemIDs[HIDX_BUTTON], &HES_AButton);
             }
 
             acs->threeChances.time--;
 
             // activate the third light just before the next state begins
             if (acs->stateTimer == 2) {
-                hud_element_set_script(acs->hudElements[HIDX_LIGHT_3], &HES_TimingReady);
-                hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
+                hud_element_set_script(acs->hudElemIDs[HIDX_LIGHT_3], &HES_TimingReady);
+                hud_element_set_script(acs->hudElemIDs[HIDX_BUTTON], &HES_AButtonDown);
                 sfx_play_sound(SOUND_TIMING_BAR_GO);
             }
 
@@ -577,7 +577,7 @@ void N(update)(void) {
             if ((acs->threeChances.time > -5)
                 && (acs->wrongButtonPressed || acs->threeChances.hadCorrectTiming)
             ) {
-                hid = acs->hudElements[HIDX_RATING_3];
+                hid = acs->hudElemIDs[HIDX_RATING_3];
                 if (acs->threeChances.hadCorrectTiming) {
                     hud_element_set_script(hid, &HES_TimingOK);
                 } else {
@@ -589,7 +589,7 @@ void N(update)(void) {
 
             // after six frames, show the verdict
             if (acs->threeChances.time == -5) {
-                hid = acs->hudElements[HIDX_RATING_3];
+                hid = acs->hudElemIDs[HIDX_RATING_3];
                 if (acs->threeChances.hadCorrectTiming) {
                     hud_element_set_script(hid, &HES_TimingOK);
                 } else {
@@ -597,7 +597,7 @@ void N(update)(void) {
                 }
                 hud_element_set_render_pos(hid, acs->hudPosX + 68, acs->hudPosY + 38);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
-                hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButton);
+                hud_element_set_script(acs->hudElemIDs[HIDX_BUTTON], &HES_AButton);
                 acs->state = THREE_CHANCES_STATE_WRAPUP;
                 return;
             }
@@ -631,39 +631,39 @@ void N(update)(void) {
 void N(draw)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hid;
+    HudElemID hid;
 
-    hud_element_draw_clipped(acs->hudElements[HIDX_BUTTON]);
-    hud_element_draw_clipped(acs->hudElements[HIDX_FRAME]);
-    hud_element_draw_clipped(acs->hudElements[HIDX_LIGHT_1]);
-    hud_element_draw_clipped(acs->hudElements[HIDX_LIGHT_2]);
-    hud_element_draw_clipped(acs->hudElements[HIDX_LIGHT_3]);
-    hud_element_draw_clipped(acs->hudElements[HIDX_RATING_1]);
-    hud_element_draw_clipped(acs->hudElements[HIDX_RATING_2]);
-    hud_element_draw_clipped(acs->hudElements[HIDX_RATING_3]);
-    hud_element_draw_clipped(acs->hudElements[HIDX_BUFF_ICON]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_BUTTON]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_FRAME]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_LIGHT_1]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_LIGHT_2]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_LIGHT_3]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_RATING_1]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_RATING_2]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_RATING_3]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_BUFF_ICON]);
 
-    hid = acs->hudElements[HIDX_DIGIT];
+    hid = acs->hudElemIDs[HIDX_DIGIT];
     if (hud_element_get_script(hid) != DigitScripts[battleStatus->actionProgress]) {
         hud_element_set_script(hid, DigitScripts[battleStatus->actionProgress]);
     }
 
     hud_element_draw_clipped(hid);
-    hud_element_draw_clipped(acs->hudElements[HIDX_TICK_1]);
-    hud_element_draw_clipped(acs->hudElements[HIDX_TICK_2]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_TICK_1]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_TICK_2]);
 }
 
 void N(free)(void) {
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_BUTTON]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_FRAME]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_LIGHT_1]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_LIGHT_2]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_LIGHT_3]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_RATING_1]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_RATING_2]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_RATING_3]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_DIGIT]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_TICK_1]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_TICK_2]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_BUFF_ICON]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_BUTTON]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_FRAME]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_LIGHT_1]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_LIGHT_2]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_LIGHT_3]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_RATING_1]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_RATING_2]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_RATING_3]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_DIGIT]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_TICK_1]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_TICK_2]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_BUFF_ICON]);
 }

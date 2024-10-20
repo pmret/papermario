@@ -33,8 +33,8 @@ extern HudScript HES_StickTapRight;
 static s32 sSavedHurricaneIntensity;
 static s32 sBreathSizeIncrease;
 static s32 sMaxPower;
-static s32 HID_AimReticle;
-static s32 HID_AimTarget;
+static HudElemID HID_AimReticle;
+static HudElemID HID_AimTarget;
 static s32 TargetMarkRotation;
 static s32 D_8023D294;
 static s32 AimingTime;
@@ -46,7 +46,7 @@ static f32 D_8023D2AC;
 static f32 D_8023D2B0;
 static f32 AimMoveAngle;
 static s32 hudAim[1];
-static s32 HID_AnalogStick;
+static HudElemID HID_AnalogStick;
 static s32 HudStickPosX;
 static s32 HudStickPosY;
 static b32 SpinyFlipTargetingDone;
@@ -392,7 +392,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
     f32 speed;
     f32 stickAngle;
     s32 stickMagnitude;
-    s32 id;
+    HudElemID hid;
     s32 i;
 
     f32 temp_f0_5;
@@ -406,7 +406,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
     s32 (*temp_a0)[0];
     s32 temp_a0_2;
     s32 temp_f10;
-    s32 idAim;
+    HudElemID hidAim;
     s32 temp_v1_2;
     s32* var_s0;
 
@@ -432,12 +432,12 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             hud_element_create_transform_A(HID_AimTarget);
             HudStickPosX = -48;
             HudStickPosY = 70;
-            HID_AnalogStick = id = hud_element_create(&HES_StickNeutral);
-            hud_element_set_render_pos(id, HudStickPosX, HudStickPosY);
-            hud_element_set_render_depth(id, 0);
+            HID_AnalogStick = hid = hud_element_create(&HES_StickNeutral);
+            hud_element_set_render_pos(hid, HudStickPosX, HudStickPosY);
+            hud_element_set_render_depth(hid, 0);
             for (i = 0; i < ARRAY_COUNT(N(AimDotHudScripts)); i++) {
-                hudAim[i] = idAim = hud_element_create(N(AimDotHudScripts)[i]);
-                hud_element_set_render_depth(idAim, 10);
+                hudAim[i] = hidAim = hud_element_create(N(AimDotHudScripts)[i]);
+                hud_element_set_render_depth(hidAim, 10);
             }
             partnerState->curPos.x = partner->curPos.x + 33.0f;
             partnerState->curPos.y = partner->curPos.y + 34.0f;
@@ -570,8 +570,8 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             hud_element_free(HID_AimReticle);
             hud_element_free(HID_AnalogStick);
             for (i = 0; i < ARRAY_COUNT(N(AimDotHudScripts)); i++) {
-                id = hudAim[i];
-                hud_element_free(id);
+                hid = hudAim[i];
+                hud_element_free(hid);
             }
             btl_set_popup_duration(POPUP_MSG_OFF);
             sfx_stop_sound(SOUND_AIM_SPINY_FLIP);
@@ -581,9 +581,9 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
     get_screen_coords(gCurrentCameraID,
                       partnerState->goalPos.x, partnerState->goalPos.y, partnerState->goalPos.z,
                       &screenX, &screenY, &screenZ);
-    id = HID_AimTarget;
-    hud_element_set_render_pos(id, screenX, screenY);
-    hud_element_set_transform_rotation(id, 0.0f, 0.0f, TargetMarkRotation);
+    hid = HID_AimTarget;
+    hud_element_set_render_pos(hid, screenX, screenY);
+    hud_element_set_transform_rotation(hid, 0.0f, 0.0f, TargetMarkRotation);
     TargetMarkRotation -= 10;
     TargetMarkRotation = clamp_angle(TargetMarkRotation);
     get_screen_coords(gCurrentCameraID,
@@ -612,8 +612,8 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             playerState->curPos.z = partnerState->curPos.z;
             for (i = 0; i < ARRAY_COUNT(N(AimDotHudScripts)); i++) {
                 get_screen_coords(gCurrentCameraID, playerState->curPos.x, playerState->curPos.y, playerState->curPos.z, &screenX, &screenY, &screenZ);
-                id = hudAim[i];
-                hud_element_set_render_pos(id, screenX, screenY);
+                hid = hudAim[i];
+                hud_element_set_render_pos(hid, screenX, screenY);
             }
             break;
     }

@@ -80,7 +80,7 @@ enum ActionCommandModes {
 
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 workerID;
-    /* 0x04 */ s32 hudElements[16];
+    /* 0x04 */ HudElemID hudElemIDs[16];
     /* 0x44 */ s16 meterFillLevel; // 0 to MAX_MASH_UNITS
     /* 0x46 */ s16 escapeThreshold;
     /* 0x48 */ s16 meterFillWidth; // X100

@@ -110,7 +110,7 @@ API_CALLABLE(N(func_802A13E4_72C994)) {
     s32 temp_v1_3;
     s32 var_v0_2;
     s32 var_v0_3;
-    s32 id;
+    HudElemID hid;
     s32 i;
 
     if (isInitialCall) {
@@ -135,9 +135,9 @@ API_CALLABLE(N(func_802A13E4_72C994)) {
             }
 
             for (i = 0; i < ARRAY_COUNT(D_802A25C8); i++) {
-                id = hud_element_create(gItemHudScripts[gItemTable[D_802A25FC[i]].hudElemID].enabled);
-                D_802A25C8[i] = id;
-                hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
+                hid = hud_element_create(gItemHudScripts[gItemTable[D_802A25FC[i]].hudElemID].enabled);
+                D_802A25C8[i] = hid;
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
             }
             D_802A25E4 = 1;
             return ApiStatus_BLOCK;

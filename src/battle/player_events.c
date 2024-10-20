@@ -23,10 +23,10 @@ BSS s32 BattleMerleeEffectsTime;
 BSS f32 BattleMerleeBasePosY;
 BSS EffectInstance* BattleMerleeOrbEffect;
 BSS EffectInstance* BattleMerleeWaveEffect;
-BSS s32 HID_Refund;
+BSS HudElemID HID_Refund;
 BSS s16 BattleMerleeEffectsState;
-BSS s32 HID_Happy;
-BSS s32 HID_HPDrain;
+BSS HudElemID HID_Happy;
+BSS HudElemID HID_HPDrain;
 BSS s32 D_8029FBB0[3];
 
 enum {

@@ -13,7 +13,7 @@ enum {
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
-    s32 hid;
+    HudElemID hid;
 
     gBattleStatus.maxActionQuality = 1;
     gBattleStatus.actionCmdDifficultyTable = actionCmdTableJump;
@@ -32,14 +32,14 @@ API_CALLABLE(N(init)) {
     acs->hudPosY = 80;
 
     hid = hud_element_create(&HES_AButton);
-    acs->hudElements[HIDX_BUTTON] = hid;
+    acs->hudElemIDs[HIDX_BUTTON] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
     hud_element_set_alpha(hid, 255);
 
     hid = hud_element_create(&HES_RightOn);
-    acs->hudElements[HIDX_RIGHT_ON] = hid;
+    acs->hudElemIDs[HIDX_RIGHT_ON] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
@@ -52,7 +52,7 @@ API_CALLABLE(N(start)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
-    s32 hid;
+    HudElemID hid;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
         battleStatus->actionQuality = 0;
@@ -66,7 +66,7 @@ API_CALLABLE(N(start)) {
     acs->wrongButtonPressed = FALSE;
     battleStatus->actionQuality = 0;
 
-    hid = acs->hudElements[HIDX_BUTTON];
+    hid = acs->hudElemIDs[HIDX_BUTTON];
     acs->hudPosX = 50;
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     battleStatus->flags1 &= ~BS_FLAGS1_2000;
@@ -85,7 +85,7 @@ API_CALLABLE(N(start)) {
 void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hid;
+    HudElemID hid;
     s32 successWindow;
 
     switch (acs->state) {
@@ -105,14 +105,14 @@ void N(update)(void) {
                 acs->hudPosX = 50;
             }
 
-            hid = acs->hudElements[HIDX_BUTTON];
+            hid = acs->hudElemIDs[HIDX_BUTTON];
             hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
             if (acs->autoSucceed) {
-                hid = acs->hudElements[HIDX_RIGHT_ON];
+                hid = acs->hudElemIDs[HIDX_RIGHT_ON];
                 hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY);
                 if (acs->showHud) {
                     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
@@ -129,7 +129,7 @@ void N(update)(void) {
             // show the A button being pressed two frames before input is allowed
             successWindow = battleStatus->actionCmdDifficultyTable[acs->difficulty];
             if (((acs->prepareTime - successWindow) - 2) <= 0) {
-                hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_AButtonDown);
+                hud_element_set_script(acs->hudElemIDs[HIDX_BUTTON], &HES_AButtonDown);
             }
             // inputs during this state will cause the action to fail
             if ((battleStatus->curButtonsPressed & BUTTON_A) && !acs->autoSucceed) {
@@ -157,7 +157,7 @@ void N(update)(void) {
                 }
             } else {
                 if (battleStatus->actionQuality >= 0) {
-                    hid = acs->hudElements[HIDX_BUTTON];
+                    hid = acs->hudElemIDs[HIDX_BUTTON];
                     if (acs->showHud) {
                         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                     }
@@ -197,13 +197,13 @@ void N(update)(void) {
 }
 
 void N(draw)(void) {
-    hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_BUTTON]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElemIDs[HIDX_BUTTON]);
     if (!(gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED)) {
-        hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_RIGHT_ON]);
+        hud_element_draw_clipped(gActionCommandStatus.hudElemIDs[HIDX_RIGHT_ON]);
     }
 }
 
 void N(free)(void) {
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_BUTTON]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_RIGHT_ON]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_BUTTON]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_RIGHT_ON]);
 }

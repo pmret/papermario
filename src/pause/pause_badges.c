@@ -917,10 +917,8 @@ void pause_badges_init(MenuPanel* panel) {
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseBadgesIconIDs); i++) {
-        s32 iconID = hud_element_create(gPauseBadgesElements[gCurrentLanguage][i]);
-
-        gPauseBadgesIconIDs[i] = iconID;
-        hud_element_set_flags(iconID, HUD_ELEMENT_FLAG_80);
+        gPauseBadgesIconIDs[i] = hud_element_create(gPauseBadgesElements[gCurrentLanguage][i]);
+        hud_element_set_flags(gPauseBadgesIconIDs[i], HUD_ELEMENT_FLAG_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseBadgesWindowBPs); i++) {

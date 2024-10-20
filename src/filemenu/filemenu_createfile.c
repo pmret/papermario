@@ -6,7 +6,7 @@ extern HudScript HES_FilenameCaret;
 extern HudScript HES_FilenameSpace;
 extern HudScript HES_134F60_135120;
 
-HudScript* filemenu_createfile_hudElemScripts[] = {
+HudScript* filemenu_createfile_hudScripts[] = {
     &HES_FilenameCaret, &HES_FilenameSpace, &HES_134F60_135120
 };
 
@@ -110,11 +110,11 @@ void filemenu_draw_contents_file_create_header(
 
     for (i = 0; i < ARRAY_COUNT(filemenu_filename); i++) {
         xOffset = temp_s2 + 6 + i * 11;
-        hud_element_set_render_pos(filemenu_createfile_hudElems[1], baseX + xOffset, baseY + yOffset);
+        hud_element_set_render_pos(filemenu_createfile_HIDs[1], baseX + xOffset, baseY + yOffset);
         if (i == 0) {
-            hud_element_draw_without_clipping(filemenu_createfile_hudElems[1]);
+            hud_element_draw_without_clipping(filemenu_createfile_HIDs[1]);
         } else {
-            hud_element_draw_next(filemenu_createfile_hudElems[1]);
+            hud_element_draw_next(filemenu_createfile_HIDs[1]);
         }
     }
 
@@ -125,8 +125,8 @@ void filemenu_draw_contents_file_create_header(
             xOffset = temp_s2 + 9 + filemenu_filename_pos * 11;
         }
         yOffset = 45;
-        hud_element_set_render_pos(filemenu_createfile_hudElems[0], baseX + xOffset, baseY + yOffset);
-        hud_element_draw_next(filemenu_createfile_hudElems[0]);
+        hud_element_set_render_pos(filemenu_createfile_HIDs[0], baseX + xOffset, baseY + yOffset);
+        hud_element_draw_next(filemenu_createfile_HIDs[0]);
     }
 #else
     s32 xOffset;
@@ -139,11 +139,11 @@ void filemenu_draw_contents_file_create_header(
     xOffset = 41;
 
     for (i = 0; i < ARRAY_COUNT(filemenu_filename); i++) {
-        hud_element_set_render_pos(filemenu_createfile_hudElems[1], baseX + 42 + (i * 11), baseY + xOffset);
+        hud_element_set_render_pos(filemenu_createfile_HIDs[1], baseX + 42 + (i * 11), baseY + xOffset);
         if (i == 0) {
-            hud_element_draw_without_clipping(filemenu_createfile_hudElems[1]);
+            hud_element_draw_without_clipping(filemenu_createfile_HIDs[1]);
         } else {
-            hud_element_draw_next(filemenu_createfile_hudElems[1]);
+            hud_element_draw_next(filemenu_createfile_HIDs[1]);
         }
     }
 
@@ -154,8 +154,8 @@ void filemenu_draw_contents_file_create_header(
         if (filemenu_filename_pos != tempAmt) {
             phi_v0 = (filemenu_filename_pos * 11) + 45;
         }
-        hud_element_set_render_pos(filemenu_createfile_hudElems[0], baseX + phi_v0, baseY + 45);
-        hud_element_draw_next(filemenu_createfile_hudElems[0]);
+        hud_element_set_render_pos(filemenu_createfile_HIDs[0], baseX + phi_v0, baseY + 45);
+        hud_element_draw_next(filemenu_createfile_HIDs[0]);
     }
 #endif
 }
@@ -237,8 +237,8 @@ void filemenu_draw_contents_choose_name(
                         specialChar = c;
                         if (c >= 0xA2 && c < 0xF0) {
                             if (c >= 0xC6) {
-                                hud_element_set_render_pos(filemenu_createfile_hudElems[2], baseX + xOffset + 22, baseY + yOffset + 8);
-                                hud_element_draw_without_clipping(filemenu_createfile_hudElems[2]);
+                                hud_element_set_render_pos(filemenu_createfile_HIDs[2], baseX + xOffset + 22, baseY + yOffset + 8);
+                                hud_element_draw_without_clipping(filemenu_createfile_HIDs[2]);
                                 flags = 0;
                             }
                         }
@@ -297,8 +297,8 @@ void filemenu_draw_contents_choose_name(
                     specialChar = c;
                     if (c >= 0xA2 && c < 0xF0) {
                         if (c >= 0xC6) {
-                            hud_element_set_render_pos(filemenu_createfile_hudElems[2], baseX + xOffset + 22, baseY + yOffset + 8);
-                            hud_element_draw_without_clipping(filemenu_createfile_hudElems[2]);
+                            hud_element_set_render_pos(filemenu_createfile_HIDs[2], baseX + xOffset + 22, baseY + yOffset + 8);
+                            hud_element_draw_without_clipping(filemenu_createfile_HIDs[2]);
                             flags = 0;
                         }
                     }
@@ -348,9 +348,9 @@ void filemenu_draw_contents_choose_name(
 void filemenu_choose_name_init(MenuPanel* menu) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(filemenu_createfile_hudElemScripts); i++) {
-        filemenu_createfile_hudElems[i] = hud_element_create(filemenu_createfile_hudElemScripts[i]);
-        hud_element_set_flags(filemenu_createfile_hudElems[i], HUD_ELEMENT_FLAG_80);
+    for (i = 0; i < ARRAY_COUNT(filemenu_createfile_hudScripts); i++) {
+        filemenu_createfile_HIDs[i] = hud_element_create(filemenu_createfile_hudScripts[i]);
+        hud_element_set_flags(filemenu_createfile_HIDs[i], HUD_ELEMENT_FLAG_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(filemenu_createfile_windowBPs); i++) {
@@ -614,6 +614,6 @@ void filemenu_choose_name_cleanup(MenuPanel* menu) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        hud_element_free(filemenu_createfile_hudElems[i]);
+        hud_element_free(filemenu_createfile_HIDs[i]);
     }
 }

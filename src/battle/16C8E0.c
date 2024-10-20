@@ -25,7 +25,7 @@ BSS Camera SavedWorldCameras[ARRAY_COUNT(gCameras)];
 BSS f32 SavedWorldPlayerPosX;
 BSS f32 SavedWorldPlayerPosY;
 BSS f32 SavedWorldPlayerPosZ;
-BSS s32 D_8029EFBC;
+BSS s32 HPBarHID;
 BSS s32 BtlStarPointTensHIDs[10];
 BSS s32 BtlStarPointShinesHIDs[10];
 BSS s32 BtlStarPointOnesHIDs[10];
@@ -163,7 +163,7 @@ void initialize_battle(void) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
     Camera* tattleCam = &gCameras[CAM_TATTLE];
-    s32 hudElemID;
+    HudElemID hid;
     s32 i;
 
     gBattleStatus.flags1 = 0;
@@ -210,25 +210,25 @@ void initialize_battle(void) {
     btl_popup_messages_init();
     create_action_command_ui_worker();
     set_windows_visible(WINDOW_GROUP_1);
-    D_8029EFBC = hud_element_create(&HES_HPBar);
-    hud_element_set_flags(D_8029EFBC, HUD_ELEMENT_FLAG_80);
+    HPBarHID = hud_element_create(&HES_HPBar);
+    hud_element_set_flags(HPBarHID, HUD_ELEMENT_FLAG_80);
 
     for (i = 0; i < ARRAY_COUNT(BtlStarPointTensHIDs); i++) {
-        hudElemID = BtlStarPointTensHIDs[i] = hud_element_create(&HES_Item_StarPoint);
-        hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-        hud_element_set_render_depth(hudElemID, 20);
+        hid = BtlStarPointTensHIDs[i] = hud_element_create(&HES_Item_StarPoint);
+        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+        hud_element_set_render_depth(hid, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(BtlStarPointShinesHIDs); i++) {
-        hudElemID = BtlStarPointShinesHIDs[i] = hud_element_create(&HES_StatusSPShine);
-        hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-        hud_element_set_render_depth(hudElemID, 20);
+        hid = BtlStarPointShinesHIDs[i] = hud_element_create(&HES_StatusSPShine);
+        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+        hud_element_set_render_depth(hid, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(BtlStarPointOnesHIDs); i++) {
-        hudElemID = BtlStarPointOnesHIDs[i] = hud_element_create(&HES_SmallStarPoint);
-        hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
-        hud_element_set_render_depth(hudElemID, 20);
+        hid = BtlStarPointOnesHIDs[i] = hud_element_create(&HES_SmallStarPoint);
+        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+        hud_element_set_render_depth(hid, 20);
     }
 
     tattleCam->fpDoPreRender = tattle_cam_pre_render;
@@ -907,36 +907,36 @@ void btl_draw_enemy_health_bars(void) {
 
                     if (enemy->healthBarPos.y >= -500) {
                         s32 screenX, screenY, screenZ;
-                        s32 id;
+                        HudElemID hid;
 
                         get_screen_coords(CAM_BATTLE, x, y, z, &screenX, &screenY, &screenZ);
                         screenY += 16;
-                        id = D_8029EFBC;
-                        hud_element_set_render_depth(id, 10);
-                        hud_element_set_script(id, &HES_HPBar);
-                        hud_element_set_render_pos(id, screenX, screenY);
-                        hud_element_draw_clipped(id);
+                        hid = HPBarHID;
+                        hud_element_set_render_depth(hid, 10);
+                        hud_element_set_script(hid, &HES_HPBar);
+                        hud_element_set_render_pos(hid, screenX, screenY);
+                        hud_element_draw_clipped(hid);
 
                         temp = currentHP / 10;
                         ones = currentHP % 10;
 
                         // tens digit
                         if (temp > 0) {
-                            id = D_8029EFBC;
-                            hud_element_set_render_depth(id, 10);
-                            hud_element_set_script(id, bHPDigitHudScripts[temp]);
+                            hid = HPBarHID;
+                            hud_element_set_render_depth(hid, 10);
+                            hud_element_set_script(hid, bHPDigitHudScripts[temp]);
                             btl_draw_prim_quad(0, 0, 0, 0, screenX, screenY + 2, 8, 8);
-                            hud_element_set_render_pos(id, screenX + 4, screenY + 6);
-                            hud_element_draw_next(id);
+                            hud_element_set_render_pos(hid, screenX + 4, screenY + 6);
+                            hud_element_draw_next(hid);
                         }
 
                         // ones digit
-                        id = D_8029EFBC;
-                        hud_element_set_render_depth(id, 10);
-                        hud_element_set_script(id, bHPDigitHudScripts[ones]);
+                        hid = HPBarHID;
+                        hud_element_set_render_depth(hid, 10);
+                        hud_element_set_script(hid, bHPDigitHudScripts[ones]);
                         btl_draw_prim_quad(0, 0, 0, 0, screenX + 6, screenY + 2, 8, 8);
-                        hud_element_set_render_pos(id, screenX + 10, screenY + 6);
-                        hud_element_draw_next(id);
+                        hud_element_set_render_pos(hid, screenX + 10, screenY + 6);
+                        hud_element_draw_next(hid);
 
                         temp = enemy->healthFraction;
                         temp = 25 - temp;

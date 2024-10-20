@@ -19,7 +19,7 @@ enum {
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hid;
+    HudElemID hid;
 
     battleStatus->maxActionQuality = 1;
     battleStatus->actionCmdDifficultyTable = actionCmdTableHammer;
@@ -39,43 +39,43 @@ API_CALLABLE(N(init)) {
     acs->hudPosY = 96;
 
     hid = hud_element_create(&HES_TimingBar1Chance);
-    acs->hudElements[HIDX_FRAME] = hid;
+    acs->hudElemIDs[HIDX_FRAME] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 10);
 
     hid = hud_element_create(&HES_TimingWait);
-    acs->hudElements[HIDX_WAIT] = hid;
+    acs->hudElemIDs[HIDX_WAIT] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
 
     hid = hud_element_create(&HES_TimingCharge4a);
-    acs->hudElements[HIDX_CHARGE_A] = hid;
+    acs->hudElemIDs[HIDX_CHARGE_A] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
 
     hid = hud_element_create(&HES_TimingCharge4b);
-    acs->hudElements[HIDX_CHARGE_B] = hid;
+    acs->hudElemIDs[HIDX_CHARGE_B] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
 
     hid = hud_element_create(&HES_TimingCharge4c);
-    acs->hudElements[HIDX_CHARGE_C] = hid;
+    acs->hudElemIDs[HIDX_CHARGE_C] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
 
     hid = hud_element_create(&HES_StickHoldLeft);
-    acs->hudElements[HIDX_STICK] = hid;
+    acs->hudElemIDs[HIDX_STICK] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
 
     hid = hud_element_create(&HES_RightOn);
-    acs->hudElements[HIDX_RIGHT_ON] = hid;
+    acs->hudElemIDs[HIDX_RIGHT_ON] = hid;
     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
     hud_element_set_render_depth(hid, 0);
@@ -123,7 +123,7 @@ void N(update)(void) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
-    s32 hid;
+    HudElemID hid;
     f32 oneThird;
     s32 inputWindow;
     s32 bufferPos;
@@ -134,37 +134,37 @@ void N(update)(void) {
         case AC_STATE_INIT:
             btl_set_popup_duration(POPUP_MSG_ON);
 
-            hid = acs->hudElements[HIDX_FRAME];
+            hid = acs->hudElemIDs[HIDX_FRAME];
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(hid, 255);
 
-            hid = acs->hudElements[HIDX_WAIT];
+            hid = acs->hudElemIDs[HIDX_WAIT];
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(hid, 255);
 
-            hid = acs->hudElements[HIDX_CHARGE_A];
+            hid = acs->hudElemIDs[HIDX_CHARGE_A];
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(hid, 255);
 
-            hid = acs->hudElements[HIDX_CHARGE_B];
+            hid = acs->hudElemIDs[HIDX_CHARGE_B];
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(hid, 255);
 
-            hid = acs->hudElements[HIDX_CHARGE_C];
+            hid = acs->hudElemIDs[HIDX_CHARGE_C];
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
             hud_element_set_alpha(hid, 255);
 
-            hid = acs->hudElements[HIDX_STICK];
+            hid = acs->hudElemIDs[HIDX_STICK];
             if (acs->showHud) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
@@ -178,14 +178,14 @@ void N(update)(void) {
             if (acs->hudPosX > 50) {
                 acs->hudPosX = 50;
             }
-            hud_element_set_render_pos(acs->hudElements[HIDX_FRAME], acs->hudPosX, acs->hudPosY);
-            hud_element_set_render_pos(acs->hudElements[HIDX_WAIT], acs->hudPosX + 21, acs->hudPosY - 3);
-            hud_element_set_render_pos(acs->hudElements[HIDX_CHARGE_A], acs->hudPosX + 5, acs->hudPosY + 1);
-            hud_element_set_render_pos(acs->hudElements[HIDX_CHARGE_B], acs->hudPosX - 7, acs->hudPosY + 1);
-            hud_element_set_render_pos(acs->hudElements[HIDX_CHARGE_C], acs->hudPosX - 19, acs->hudPosY + 1);
-            hud_element_set_render_pos(acs->hudElements[HIDX_STICK], acs->hudPosX, acs->hudPosY - 23);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_FRAME], acs->hudPosX, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_WAIT], acs->hudPosX + 21, acs->hudPosY - 3);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_CHARGE_A], acs->hudPosX + 5, acs->hudPosY + 1);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_CHARGE_B], acs->hudPosX - 7, acs->hudPosY + 1);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_CHARGE_C], acs->hudPosX - 19, acs->hudPosY + 1);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_STICK], acs->hudPosX, acs->hudPosY - 23);
             if (acs->autoSucceed != 0) {
-                hid = acs->hudElements[HIDX_RIGHT_ON];
+                hid = acs->hudElemIDs[HIDX_RIGHT_ON];
                 hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY);
                 if (acs->showHud) {
                     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
@@ -196,12 +196,12 @@ void N(update)(void) {
         case AC_STATE_START:
             btl_set_popup_duration(POPUP_MSG_ON);
             if (acs->prepareTime < 15) {
-                hud_element_set_alpha(acs->hudElements[HIDX_FRAME], 255);
-                hud_element_set_alpha(acs->hudElements[HIDX_WAIT], 255);
-                hud_element_set_alpha(acs->hudElements[HIDX_CHARGE_A], 255);
-                hud_element_set_alpha(acs->hudElements[HIDX_CHARGE_B], 255);
-                hud_element_set_alpha(acs->hudElements[HIDX_CHARGE_C], 255);
-                hud_element_set_alpha(acs->hudElements[HIDX_STICK], 255);
+                hud_element_set_alpha(acs->hudElemIDs[HIDX_FRAME], 255);
+                hud_element_set_alpha(acs->hudElemIDs[HIDX_WAIT], 255);
+                hud_element_set_alpha(acs->hudElemIDs[HIDX_CHARGE_A], 255);
+                hud_element_set_alpha(acs->hudElemIDs[HIDX_CHARGE_B], 255);
+                hud_element_set_alpha(acs->hudElemIDs[HIDX_CHARGE_C], 255);
+                hud_element_set_alpha(acs->hudElemIDs[HIDX_STICK], 255);
             }
 
             if (acs->prepareTime != 0) {
@@ -228,7 +228,7 @@ void N(update)(void) {
             oneThird = (acs->duration - new_var) / 3;
 
             if (acs->stateTimer < oneThird) {
-                hud_element_set_script(acs->hudElements[HIDX_CHARGE_C], &HES_TimingCharge3);
+                hud_element_set_script(acs->hudElemIDs[HIDX_CHARGE_C], &HES_TimingCharge3);
                 battleStatus->actionProgress = 0;
                 if (acs->stateTimer == 0) {
                     if (acs->playHammerSounds) {
@@ -236,7 +236,7 @@ void N(update)(void) {
                     }
                 }
             } else if (acs->stateTimer < oneThird * 2) {
-                hud_element_set_script(acs->hudElements[HIDX_CHARGE_B], &HES_TimingCharge2);
+                hud_element_set_script(acs->hudElemIDs[HIDX_CHARGE_B], &HES_TimingCharge2);
                 battleStatus->actionProgress = 1;
                 if (acs->stateTimer == oneThird) {
                     if (acs->playHammerSounds) {
@@ -244,7 +244,7 @@ void N(update)(void) {
                     }
                 }
             } else if (acs->stateTimer < oneThird * 3) {
-                hud_element_set_script(acs->hudElements[HIDX_CHARGE_A], &HES_TimingCharge1);
+                hud_element_set_script(acs->hudElemIDs[HIDX_CHARGE_A], &HES_TimingCharge1);
                 battleStatus->actionProgress = 2;
                 if (acs->stateTimer == oneThird * 2) {
                     if (acs->playHammerSounds) {
@@ -255,8 +255,8 @@ void N(update)(void) {
 
             if (acs->stateTimer == (~inputWindow + acs->duration)) {
                 battleStatus->actionProgress = 3;
-                hud_element_set_script(acs->hudElements[HIDX_WAIT], &HES_TimingReady);
-                hud_element_set_script(acs->hudElements[HIDX_STICK], &HES_StickTapNeutral);
+                hud_element_set_script(acs->hudElemIDs[HIDX_WAIT], &HES_TimingReady);
+                hud_element_set_script(acs->hudElemIDs[HIDX_STICK], &HES_StickTapNeutral);
                 if (acs->playHammerSounds) {
                     sfx_play_sound(SOUND_TIMING_BAR_GO);
                 }
@@ -333,21 +333,21 @@ void N(update)(void) {
 }
 
 void N(draw)(void) {
-    hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_FRAME]);
-    hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_WAIT]);
-    hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_CHARGE_A]);
-    hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_CHARGE_B]);
-    hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_CHARGE_C]);
-    hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_STICK]);
-    hud_element_draw_clipped(gActionCommandStatus.hudElements[HIDX_RIGHT_ON]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElemIDs[HIDX_FRAME]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElemIDs[HIDX_WAIT]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElemIDs[HIDX_CHARGE_A]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElemIDs[HIDX_CHARGE_B]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElemIDs[HIDX_CHARGE_C]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElemIDs[HIDX_STICK]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElemIDs[HIDX_RIGHT_ON]);
 }
 
 void N(free)(void) {
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_FRAME]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_WAIT]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_CHARGE_A]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_CHARGE_B]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_CHARGE_C]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_STICK]);
-    hud_element_free(gActionCommandStatus.hudElements[HIDX_RIGHT_ON]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_FRAME]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_WAIT]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_CHARGE_A]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_CHARGE_B]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_CHARGE_C]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_STICK]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_RIGHT_ON]);
 }
