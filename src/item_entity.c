@@ -44,7 +44,7 @@ BSS s16 D_801565A8;
 BSS s32 D_801565AC;
 #endif
 BSS PopupMenu ItemPickupMenu;
-BSS s32 ItemPickupIconHID;
+BSS HudElemID ItemPickupIconHID;
 BSS s32 ItemPickupStateDelay;
 BSS s32 ThrowAwayMenuIdx;
 BSS s32 ThrowAwayItemID;

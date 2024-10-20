@@ -24,7 +24,7 @@ BSS s32 gPauseHeldButtons;
 BSS s32 gPausePressedButtons;
 BSS s32 gPauseCurrentDescMsg;
 BSS HudScript* gPauseCurrentDescIconScript;
-BSS s32 gPauseCursorHID;
+BSS HudElemID gPauseCursorHID;
 BSS s8 gPauseMenuCurrentTab;
 BSS s8 D_802700D[7]; //padding
 
@@ -32,7 +32,7 @@ static s32 gPauseTutorialFrameCounter;
 #if !VERSION_IQUE
 static s32 D_802700E4;
 #endif
-static s32 gPauseCommonHIDs[8];
+static HudElemID gPauseCommonHIDs[8];
 static s32 gPauseShownDescMsg;
 static s32 gPauseDescTextMaxPos;
 static s32 gPauseDescTextPos;

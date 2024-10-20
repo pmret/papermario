@@ -2,6 +2,7 @@
 #define _FILEMENU_H_
 
 #include "common.h"
+#include "filemenu.h"
 
 enum {
   PAGE_0,
@@ -17,20 +18,20 @@ extern MenuPanel* filemenu_menus[];
 
 extern s32 filemenu_iterFileIdx;
 extern s32 filemenu_pressedButtons;
-extern s32 filemenu_cursorHID;
+extern HudElemID filemenu_cursorHID;
 extern s32 filemenu_heldButtons;
 extern s8 filemenu_filename_pos;
 extern s32 filemenu_loadedFileIdx;
 extern s8 filemenu_currentMenu;
 extern s32 filemenu_8024C09C;
-extern s32 filemenu_cursorHIDs[1];
+extern HudElemID filemenu_cursorHIDs[1];
 extern s32 filemenu_8024C0A4[3];
-extern s32 filemenu_hudElemIDs[20];
-extern s32 filemenu_createfile_HIDs[4];
+extern HudElemID filemenu_mainHIDs[20];
+extern HudElemID filemenu_createfile_HIDs[4];
 extern u8 filemenu_filename[8];
 
 #if VERSION_PAL
-extern s32 PauseLanguageHIDs[1];
+extern HudElemID PauseLanguageHIDs[1];
 extern s32 D_802517D4[1];
 extern u16 D_802517E0[2][0x400];
 extern u8 D_filemenu_8025095C[4];

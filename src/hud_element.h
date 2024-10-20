@@ -8,8 +8,6 @@
 
 typedef s32 HudScript[];
 
-typedef s32 HudElemID;
-
 enum {
     HUD_ELEMENT_OP_End,
     HUD_ELEMENT_OP_SetRGBA,
@@ -155,7 +153,7 @@ typedef struct Shop {
     /* 0x014 */ ShopItemLocation* itemDataPositions;
     /* 0x018 */ ShopItemData* staticInventory;
     /* 0x01C */ ShopSellPriceData* staticPriceList;
-    /* 0x020 */ s32 costHID;
+    /* 0x020 */ HudElemID costHID;
     /* 0x024 */ s32 inventoryItemFlags;
     /* 0x028 */ PopupMenu itemSelectMenu;
     /* 0x358 */ s32 unk_358;

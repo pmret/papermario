@@ -19,7 +19,7 @@ void pause_tabs_handle_input(MenuPanel* tab);
 void pause_tabs_update(MenuPanel* tab);
 void pause_tabs_cleanup(MenuPanel* tab);
 
-static s32 gPauseTabsHIDs[6];
+static HudElemID gPauseTabsHIDs[6];
 static s32 gPauseTabsPreviousTab;
 static s32 gPauseTabsHorizScrollPos;
 

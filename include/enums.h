@@ -1142,7 +1142,7 @@ enum SoundIDs {
     SOUND_FIRE_BAR_8_A                          = 0x0000033E,
     SOUND_FIRE_BAR_9_A                          = 0x0000033F,
     SOUND_FIRE_BAR_DEAD                         = 0x00000340,
-    SOUND_LRAW_CHARGE_BAR                       = 0x00000341,
+    SOUND_LRAW_CHARGE_METER                     = 0x00000341,
     SOUND_POKEY_SWAY                            = 0x00000342, // same as SOUND_POKEY_LEAN_BACK?
     SOUND_POKEY_WALK                            = 0x00000343,
     SOUND_POKEY_LEAN_FORWARD                    = 0x00000344,

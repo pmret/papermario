@@ -21,7 +21,7 @@ static s32 gPauseItemsTargetScrollPos;
 static s32 gPauseItemsTargetScrollIndex;
 static s32 gPauseItemsLevel;
 static s32 gPauseItemsCurrentTab;
-static s32 gPauseItemsHIDs[20];
+static HudElemID gPauseItemsHIDs[20];
 
 #define ITEM_NONE_STANDIN 0x7FFE
 #define ITEM_INVALID 0x7FFF

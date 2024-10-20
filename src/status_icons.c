@@ -33,8 +33,8 @@ typedef struct HudComplexStatusIcon {
     /* 0x3 */ s8 removingTask;
     /* 0x4 */ s8 unk_04;
     /* 0x5 */ s8 frameCounter;
-    /* 0x8 */ s32 activeElementHID;
-    /* 0xC */ s32 removingElementHID;
+    /* 0x8 */ HudElemID activeElementHID;
+    /* 0xC */ HudElemID removingElementHID;
 } HudComplexStatusIcon; // size = 0x10
 
 typedef struct HudSimpleStatusIcon {

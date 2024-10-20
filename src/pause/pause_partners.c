@@ -26,7 +26,7 @@ void pause_partners_handle_input(MenuPanel* panel);
 void pause_partners_update(MenuPanel* panel);
 void pause_partners_cleanup(MenuPanel* panel);
 
-static s32 gPausePartnersHIDs[8];
+static HudElemID gPausePartnersHIDs[8];
 static s32 gPausePartnersSpriteIDs[8];
 static s32 gPausePartnersPartnerIdx[8];
 static s32 gPausePartnersCurrentPartnerIdx;

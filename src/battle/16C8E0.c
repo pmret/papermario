@@ -25,10 +25,10 @@ BSS Camera SavedWorldCameras[ARRAY_COUNT(gCameras)];
 BSS f32 SavedWorldPlayerPosX;
 BSS f32 SavedWorldPlayerPosY;
 BSS f32 SavedWorldPlayerPosZ;
-BSS s32 HPBarHID;
-BSS s32 BtlStarPointTensHIDs[10];
-BSS s32 BtlStarPointShinesHIDs[10];
-BSS s32 BtlStarPointOnesHIDs[10];
+BSS HudElemID HPBarHID;
+BSS HudElemID BtlStarPointTensHIDs[10];
+BSS HudElemID BtlStarPointShinesHIDs[10];
+BSS HudElemID BtlStarPointOnesHIDs[10];
 BSS PAL_BIN gTattleBgPalette[0x100];
 
 extern HudScript HES_HPDigit0;

@@ -29,6 +29,7 @@ typedef s8 b8;
 
 typedef s32 HitID;
 typedef u32 AnimID;
+typedef s32 HudElemID;
 
 typedef struct {
     u8 r, g, b, a;
@@ -651,17 +652,17 @@ typedef struct MusicProximityTrigger {
 } MusicProximityTrigger; // size = 0x18
 
 typedef struct StatusBar {
-    /* 0x00 */ s32 hpIconHIDs[2];
-    /* 0x08 */ s32 fpIconHIDs[2];
-    /* 0x10 */ s32 coinIconHID;
-    /* 0x14 */ s32 coinSparkleHID;
-    /* 0x18 */ s32 spIconHID;
-    /* 0x1C */ s32 spShineHID;
-    /* 0x20 */ s32 hpTimesHID;
-    /* 0x24 */ s32 fpTimesHID;
-    /* 0x28 */ s32 spTimesHID;
-    /* 0x2C */ s32 coinTimesHID;
-    /* 0x30 */ s32 starIconHID;
+    /* 0x00 */ HudElemID hpIconHIDs[2];
+    /* 0x08 */ HudElemID fpIconHIDs[2];
+    /* 0x10 */ HudElemID coinIconHID;
+    /* 0x14 */ HudElemID coinSparkleHID;
+    /* 0x18 */ HudElemID spIconHID;
+    /* 0x1C */ HudElemID spShineHID;
+    /* 0x20 */ HudElemID hpTimesHID;
+    /* 0x24 */ HudElemID fpTimesHID;
+    /* 0x28 */ HudElemID spTimesHID;
+    /* 0x2C */ HudElemID coinTimesHID;
+    /* 0x30 */ HudElemID starIconHID;
     /* 0x34 */ s16 drawPosX; // base position of the whole bar
     /* 0x36 */ s16 drawPosY; // base position of the whole bar, animated when it appears
     /* 0x38 */ s16 showTimer;
@@ -696,10 +697,10 @@ typedef struct StatusBar {
     /* 0x59 */ s8 unk_59;
     /* 0x5A */ s8 spBarsToBlink; /* how many sp bars to blink */
     /* 0x5B */ char unk_5B;
-    /* 0x5C */ s32 coinCountTimesHID;
-    /* 0x60 */ s32 coinCountIconHID;
-    /* 0x64 */ s32 iconIndex12;
-    /* 0x68 */ s32 iconIndex13;
+    /* 0x5C */ HudElemID coinCountTimesHID;
+    /* 0x60 */ HudElemID coinCountIconHID;
+    /* 0x64 */ HudElemID iconIndex12;
+    /* 0x68 */ HudElemID iconIndex13;
     /* 0x6C */ s8 coinCounterHideTime;
     /* 0x6D */ s8 unk_6D;
     /* 0x6E */ s8 unk_6E;

@@ -161,19 +161,19 @@ extern Gfx D_8024B708[];
 
 BSS s32 filemenu_iterFileIdx;
 BSS s32 filemenu_pressedButtons;
-BSS s32 filemenu_cursorHID;
+BSS HudElemID filemenu_cursorHID;
 BSS s32 filemenu_heldButtons;
 BSS s8 filemenu_filename_pos;
 BSS s32 filemenu_loadedFileIdx;
 BSS s8 filemenu_currentMenu;
 BSS s32 filemenu_8024C09C;
-BSS s32 filemenu_cursorHIDs[1];
+BSS HudElemID filemenu_cursorHIDs[1];
 BSS s32 filemenu_8024C0A4[3];
-BSS s32 filemenu_hudElemIDs[20];
-BSS s32 filemenu_createfile_HIDs[4];
+BSS HudElemID filemenu_mainHIDs[20];
+BSS HudElemID filemenu_createfile_HIDs[4];
 
 #if VERSION_PAL
-BSS s32 PauseLanguageHIDs[1];
+BSS HudElemID PauseLanguageHIDs[1];
 BSS s32 D_802517D4[1];
 BSS u16 D_802517E0[2][0x400] ALIGNED(16);
 #endif

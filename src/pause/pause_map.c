@@ -21,7 +21,7 @@ void pause_map_handle_input(MenuPanel* tab);
 void pause_map_update(MenuPanel* tab);
 void pause_map_cleanup(MenuPanel* tab);
 
-static s32 PauseMapHIDs[1];
+static HudElemID PauseMapHIDs[1];
 static f32 PauseMapCameraX;
 static f32 PauseMapCameraY;
 static s32 PauseMapMarioX;
