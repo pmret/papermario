@@ -915,7 +915,7 @@ typedef struct BattleStatus {
     /* 0x081 */ s8 actionQuality; // degree of success for action command, -1 indicates failure, 0 is in progress, >0 is some degree of success
     /* 0x082 */ s8 maxActionQuality; // seems to indicate the maximum positive value for actionQuality; never read and inconsistently used between various action commands
     /* 0x083 */ s8 actionCommandMode;
-    /* 0x084 */ s8 actionProgress; // actionCommandVar1 ?
+    /* 0x084 */ s8 actionProgress;
     /* 0x085 */ s8 resultTier;
     /* 0x086 */ s8 actionResult; // see enum ActionResult
     /* 0x087 */ s8 blockResult; // see enum BlockResult
