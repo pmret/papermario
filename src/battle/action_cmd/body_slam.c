@@ -21,11 +21,11 @@ API_CALLABLE(N(init)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
 
-    battleStatus->maxActionSuccess = 100;
+    battleStatus->maxActionQuality = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTableBodySlam;
     battleStatus->actionResult = ACTION_RESULT_NONE;
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -37,7 +37,7 @@ API_CALLABLE(N(init)) {
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
     acs->isBarFilled = FALSE;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     acs->hudPosX = -48;
     acs->hudPosY = 80;
 
@@ -73,7 +73,7 @@ API_CALLABLE(N(start)) {
     Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -88,9 +88,9 @@ API_CALLABLE(N(start)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
-    battleStatus->maxActionSuccess = acs->mashMeterCutoffs[(acs->mashMeterNumIntervals - 1)];
+    battleStatus->maxActionQuality = acs->mashMeterCutoffs[(acs->mashMeterNumIntervals - 1)];
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     acs->state = AC_STATE_START;
 
@@ -190,20 +190,20 @@ void N(update)(void) {
 
             do {
                 if (acs->escapeThreshold < MAX_MASH_UNITS) {
-                    battleStatus->actionSuccess = AC_ACTION_FAILED;
+                    battleStatus->actionQuality = AC_QUALITY_FAILED;
                 } else {
                     s32 window = battleStatus->actionCmdDifficultyTable[acs->difficulty] * METER_FILL_RATE;
                     // release needs to be within 2 frames + modifier from difficulty table
                     if (acs->escapeThreshold - window >= MAX_MASH_UNITS + 2 * METER_FILL_RATE + 1) {
-                        battleStatus->actionSuccess = AC_ACTION_FAILED;
+                        battleStatus->actionQuality = AC_QUALITY_FAILED;
                     } else {
-                        battleStatus->actionSuccess = 1;
+                        battleStatus->actionQuality = 1;
                     }
                 }
             } while (0); // required to match
 
             battleStatus->actionResult = ACTION_RESULT_FAIL;
-            if (battleStatus->actionSuccess == 1) {
+            if (battleStatus->actionQuality == 1) {
                 increment_action_command_success_count();
             }
 

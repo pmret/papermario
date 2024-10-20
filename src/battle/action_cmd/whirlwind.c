@@ -77,10 +77,10 @@ API_CALLABLE(N(init)) {
     Bytecode* args = script->ptrReadPos;
     s32 hid;
 
-    battleStatus->maxActionSuccess = 5;
+    battleStatus->maxActionQuality = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableWhirlwind;
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -132,7 +132,7 @@ API_CALLABLE(N(start)) {
     Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -146,7 +146,7 @@ API_CALLABLE(N(start)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     if (acs->variation == ACV_WHIRLWIND_HUFF) {
         battleStatus->actionProgress = 0;
@@ -268,7 +268,7 @@ void N(update)(void) {
                 return;
             }
             battleStatus->actionResult = ACTION_RESULT_NONE;
-            battleStatus->actionSuccess = battleStatus->actionProgress;
+            battleStatus->actionQuality = battleStatus->actionProgress;
             btl_set_popup_duration(POPUP_MSG_OFF);
             acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;

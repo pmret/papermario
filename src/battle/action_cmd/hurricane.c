@@ -25,10 +25,10 @@ API_CALLABLE(N(init)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
 
-    battleStatus->maxActionSuccess = 5;
+    battleStatus->maxActionQuality = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableHurricane;
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -77,7 +77,7 @@ API_CALLABLE(N(start)) {
     Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -92,7 +92,7 @@ API_CALLABLE(N(start)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = AC_STATE_START;
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
@@ -268,19 +268,20 @@ void N(update)(void) {
             }
 
             if (buttonsPushed == 0) {
-                battleStatus->actionSuccess = AC_ACTION_FAILED;
+                battleStatus->actionQuality = AC_QUALITY_FAILED;
             } else {
-                battleStatus->actionSuccess = buttonsPushed / ONE_PCT_MASH;
+                battleStatus->actionQuality = buttonsPushed / ONE_PCT_MASH;
             }
 
+            // a good result is filling the bar over halfway to the second-highest interval
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
             if (battleStatus->actionProgress <= cutoff / 2) {
-                battleStatus->actionResult = ACTION_RESULT_MINUS_4;
+                battleStatus->actionResult = ACTION_RESULT_METER_BELOW_HALF;
             } else {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             }
 
-            if (battleStatus->actionSuccess == 100) {
+            if (battleStatus->actionQuality == 100) {
                 // only count 100% fill as success for this action command
                 increment_action_command_success_count();
             }
@@ -288,7 +289,6 @@ void N(update)(void) {
             btl_set_popup_duration(POPUP_MSG_OFF);
             acs->stateTimer = 5;
             acs->state = AC_STATE_DISPOSE;
-
             break;
         case AC_STATE_DISPOSE:
             if (acs->statusChance == 0) {
@@ -300,9 +300,9 @@ void N(update)(void) {
 
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
-            } else {
-                action_command_free();
+                break;
             }
+            action_command_free();
             break;
     }
 }

@@ -5,7 +5,7 @@
 
 #include "battle/common/move/HammerSupport.inc.c"
 
-extern EvtScript N(UseMove_Impl);
+extern EvtScript N(EVS_UseMove_Impl);
 
 EvtScript N(EVS_UseMove) = {
     Call(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
@@ -13,20 +13,20 @@ EvtScript N(EVS_UseMove) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
-            Set(LVarD, 45)
-            Set(LVarE, 3)
-            Set(LVarF, 4)
-            ExecWait(N(UseMove_Impl))
+            Set(LVarD, 45) // duration
+            Set(LVarE, BASIC_HAMMER_DMG_BAD + 2)
+            Set(LVarF, BASIC_HAMMER_DMG_GOOD + 2)
+            ExecWait(N(EVS_UseMove_Impl))
         CaseEq(1)
-            Set(LVarD, 45)
-            Set(LVarE, 4)
-            Set(LVarF, 6)
-            ExecWait(N(UseMove_Impl))
+            Set(LVarD, 45) // duration
+            Set(LVarE, SUPER_HAMMER_DMG_BAD + 2)
+            Set(LVarF, SUPER_HAMMER_DMG_GOOD + 2)
+            ExecWait(N(EVS_UseMove_Impl))
         CaseEq(2)
-            Set(LVarD, 45)
-            Set(LVarE, 5)
-            Set(LVarF, 8)
-            ExecWait(N(UseMove_Impl))
+            Set(LVarD, 45) // duration
+            Set(LVarE, ULTRA_HAMMER_DMG_BAD + 2)
+            Set(LVarF, ULTRA_HAMMER_DMG_GOOD + 2)
+            ExecWait(N(EVS_UseMove_Impl))
     EndSwitch
     Call(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     Return
@@ -45,7 +45,7 @@ EvtScript N(EVS_802A3188) = {
     End
 };
 
-EvtScript N(UseMove_Impl) = {
+EvtScript N(EVS_UseMove_Impl) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
@@ -65,7 +65,7 @@ EvtScript N(UseMove_Impl) = {
         ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)

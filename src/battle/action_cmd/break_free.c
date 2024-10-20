@@ -21,12 +21,12 @@ API_CALLABLE(N(init)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
 
-    battleStatus->maxActionSuccess = 0;
+    battleStatus->maxActionQuality = 0;
     battleStatus->actionCmdDifficultyTable = actionCmdTableBreakFree;
     battleStatus->actionResult = ACTION_RESULT_NONE;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -39,7 +39,7 @@ API_CALLABLE(N(init)) {
     acs->barFillLevel = 0;
     acs->escapeThreshold = 0;
     acs->barFillWidth = 0;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     acs->hudPosX = -48;
     acs->hudPosY = 80;
 
@@ -76,7 +76,7 @@ API_CALLABLE(N(start)) {
     Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -93,9 +93,9 @@ API_CALLABLE(N(start)) {
     acs->escapeThreshold = 0;
     acs->barFillWidth = 0;
 
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
-    battleStatus->maxActionSuccess = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
+    battleStatus->maxActionQuality = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
 
     acs->escapeThreshold = rand_int(acs->escapeChance);
     acs->breakFree.dir = 0;
@@ -207,18 +207,18 @@ void N(update)(void) {
                 acs->barFillLevel += rand_int(SCALE_BY_PCT(25, battleStatus->actionCmdDifficultyTable[acs->difficulty]));
             }
 
-            battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
+            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
-                return;
+                break;
             }
 
-            if (battleStatus->actionSuccess >= acs->mashMeterCutoffs[acs->mashMeterNumIntervals] - acs->escapeThreshold) {
+            if (battleStatus->actionQuality >= acs->mashMeterCutoffs[acs->mashMeterNumIntervals] - acs->escapeThreshold) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
-                battleStatus->actionSuccess = 1;
+                battleStatus->actionQuality = 1;
             } else {
-                battleStatus->actionResult = ACTION_RESULT_MINUS_2;
-                battleStatus->actionSuccess = AC_ACTION_FAILED;
+                battleStatus->actionResult = ACTION_RESULT_METER_NOT_ENOUGH;
+                battleStatus->actionQuality = AC_QUALITY_FAILED;
             }
 
             btl_set_popup_duration(POPUP_MSG_OFF);
@@ -228,7 +228,7 @@ void N(update)(void) {
         case AC_STATE_DISPOSE:
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
-                return;
+                break;
             }
             action_command_free();
             break;

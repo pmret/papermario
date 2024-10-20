@@ -677,13 +677,13 @@ API_CALLABLE(SetupMashMeter) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(GetActionSuccess) {
-    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionSuccess);
+API_CALLABLE(GetSmashActionQuality) {
+    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionQuality);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(SetActionSuccess) {
-    gBattleStatus.actionSuccess = evt_get_variable(script, *script->ptrReadPos);
+    gBattleStatus.actionQuality = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -764,12 +764,12 @@ API_CALLABLE(ShowActionHud) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(GetActionSuccessCopy) {
-    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionSuccess);
+API_CALLABLE(GetMashActionQuality) {
+    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionQuality);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(GetActionResult) {
+API_CALLABLE(GetJumpActionQuality) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionResult);
     return ApiStatus_DONE2;
 }

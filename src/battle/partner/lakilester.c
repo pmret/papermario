@@ -823,7 +823,7 @@ API_CALLABLE(N(CanTargetBeBlown)) {
     }
 
     get_actor(target->actorID);
-    if (rand_int(99) < battleStatus->actionSuccess) {
+    if (rand_int(99) < battleStatus->actionQuality) {
         *hurricaneChance = -1;
         script->varTable[0] = target->actorID;
     } else {
@@ -1079,7 +1079,7 @@ EvtScript N(EVS_Move_SpinySurge) = {
         IfEq(LVar0, HIT_RESULT_MISS)
             Goto(12)
         EndIf
-        Call(GetPartnerActionSuccess, LVarA)
+        Call(GetPartnerActionQuality, LVarA)
         Call(N(GetSpinySurgeDamage))
         Switch(LVar0)
             CaseGt(0)
@@ -1169,7 +1169,7 @@ EvtScript N(cloudNine_normal) = {
     Wait(3)
     Call(AddBattleCamDist, 50)
     Call(MoveBattleCamOver, 5)
-    Call(GetPartnerActionSuccess, LVarA)
+    Call(GetPartnerActionQuality, LVarA)
     IfGt(LVarA, 0)
         Call(N(RemoveCloudNineFX))
         Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_MAKE_CLOUD_NINE)
@@ -1284,7 +1284,7 @@ EvtScript N(cloudNine_immobile) = {
     Wait(3)
     Call(AddBattleCamDist, 50)
     Call(MoveBattleCamOver, 5)
-    Call(GetPartnerActionSuccess, LVarA)
+    Call(GetPartnerActionQuality, LVarA)
     IfGt(LVarA, 0)
         Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_MAKE_CLOUD_NINE)
         Call(N(SpawnCloudNineFX))
@@ -1748,14 +1748,14 @@ EvtScript N(EVS_Move_Hurricane) = {
         IfEq(LVar0, 0)
             BreakLoop
         EndIf
-        Call(GetActionSuccessCopy, LVar0)
+        Call(GetMashActionQuality, LVar0)
         IfEq(LVar0, 100)
             BreakLoop
         EndIf
         Wait(1)
     EndLoop
     Wait(15)
-    Call(GetActionSuccessCopy, LVar0)
+    Call(GetMashActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(99)
             Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)

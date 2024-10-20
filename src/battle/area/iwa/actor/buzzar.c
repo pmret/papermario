@@ -955,7 +955,7 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
     Call(action_command_break_free_start, 0, 60 * DT, 30, AC_DIFFICULTY_3)
     ExecGetTID(N(EVS_LiftMario), LVarA)
     Wait(62)
-    Call(GetActionSuccessCopy, LVar0)
+    Call(GetMashActionQuality, LVar0)
     IfGt(LVar0, 0)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Buzzar_Anim01)
         Wait(2)

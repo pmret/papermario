@@ -34,7 +34,7 @@ EvtScript N(EVS_UseMove_Basic) = {
         Return
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
@@ -59,7 +59,7 @@ EvtScript N(EVS_UseMove_Basic) = {
         Call(SetGoalToTarget, ACTOR_PLAYER)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
-    Call(GetActionResult, LVarF)
+    Call(GetJumpActionQuality, LVarF)
     Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
@@ -85,7 +85,7 @@ EvtScript N(EVS_UseMove_Super) = {
         Return
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_ACTOR_JUMPED_2)
@@ -104,7 +104,7 @@ EvtScript N(EVS_UseMove_Super) = {
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
         EndCaseGroup
     EndSwitch
-    Call(GetActionResult, LVarF)
+    Call(GetJumpActionQuality, LVarF)
     ChildThread
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_PRE_JUMP_FINISH)
         Wait(5)
@@ -140,7 +140,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
         Return
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_ACTOR_JUMPED_3)
@@ -159,7 +159,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
         EndCaseGroup
     EndSwitch
-    Call(GetActionResult, LVarF)
+    Call(GetJumpActionQuality, LVarF)
     ChildThread
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_PRE_ULTRA_JUMP_FINISH)
         Wait(5)

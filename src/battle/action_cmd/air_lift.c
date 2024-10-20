@@ -29,7 +29,7 @@ API_CALLABLE(N(init)) {
     s32 hid;
 
     battleStatus->actionCmdDifficultyTable = actionCmdTableAirLift;
-    battleStatus->maxActionSuccess = 0;
+    battleStatus->maxActionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
 
     action_command_init_status();
@@ -47,7 +47,7 @@ API_CALLABLE(N(init)) {
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
     acs->isBarFilled = FALSE;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionProgress = 0;
 
     N(HasStarted) = FALSE;
@@ -90,9 +90,9 @@ API_CALLABLE(N(start)) {
     acs->variation = evt_get_variable(script, *args++);
 
     acs->wrongButtonPressed = FALSE;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
-    battleStatus->maxActionSuccess = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
+    battleStatus->maxActionQuality = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
 
     acs->any.unk_5C = 0;
 
@@ -202,15 +202,15 @@ void N(update)(void) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
-            if (battleStatus->actionProgress < battleStatus->actionSuccess) {
-                battleStatus->actionProgress = battleStatus->actionSuccess;
+            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
+            if (battleStatus->actionProgress < battleStatus->actionQuality) {
+                battleStatus->actionProgress = battleStatus->actionQuality;
             }
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionSuccess * 12);
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
 
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
-                return;
+                break;
             }
 
             if (acs->escapeChance == 0) {
@@ -218,16 +218,16 @@ void N(update)(void) {
             }
 
             // threshold for success is completely random, only guaranteed if the bar is 100% filled
-            battleStatus->actionSuccess = battleStatus->actionProgress;
-            if (rand_int(99) < battleStatus->actionSuccess) {
+            battleStatus->actionQuality = battleStatus->actionProgress;
+            if (rand_int(99) < battleStatus->actionQuality) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
-                battleStatus->actionSuccess = 1;
+                battleStatus->actionQuality = 1;
             } else {
-                battleStatus->actionResult = ACTION_RESULT_MINUS_2;
-                battleStatus->actionSuccess = AC_ACTION_FAILED;
+                battleStatus->actionResult = ACTION_RESULT_METER_NOT_ENOUGH;
+                battleStatus->actionQuality = AC_QUALITY_FAILED;
             }
 
-            if (battleStatus->actionSuccess == 1) {
+            if (battleStatus->actionQuality == 1) {
                 increment_action_command_success_count();
             }
 
@@ -245,7 +245,7 @@ void N(update)(void) {
             }
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
-                return;
+                break;
             }
             action_command_free();
             break;

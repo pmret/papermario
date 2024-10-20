@@ -34,7 +34,7 @@ API_CALLABLE(N(init)) {
     s32 hid;
     s32 temp;
 
-    battleStatus->maxActionSuccess = 5;
+    battleStatus->maxActionQuality = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTable07;
 
     acs->autoSucceed = FALSE;
@@ -83,7 +83,7 @@ API_CALLABLE(N(start)) {
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
     acs->wrongButtonPressed = FALSE;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
 
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
@@ -143,7 +143,7 @@ void N(update)(void) {
             }
 
             hud_element_set_script(acs->hudElements[HIDX_BUTTON], &HES_MashAButton);
-            battleStatus->actionSuccess = 0;
+            battleStatus->actionQuality = 0;
             N(HasStarted) = TRUE;
             acs->flee.drainDelay = 0;
             acs->state = AC_STATE_ACTIVE;
@@ -173,7 +173,7 @@ void N(update)(void) {
                 acs->flee.drainDelay--;
                 if (acs->flee.drainDelay == 0) {
                     acs->barFillLevel = 0;
-                    battleStatus->actionSuccess++;
+                    battleStatus->actionQuality++;
                 }
             }
 

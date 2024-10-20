@@ -532,7 +532,7 @@ EvtScript N(smack) = {
         Call(SetActorDispOffset, ACTOR_PARTNER, Float(-0.5), 0, 0)
         Wait(1)
     EndLoop
-    Call(GetPartnerActionSuccess, LVarB)
+    Call(GetPartnerActionQuality, LVarB)
     Call(GetActionResultTier, LVarD)
     Label(0)
         Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
@@ -628,7 +628,7 @@ EvtScript N(smack) = {
     Wait(2)
     Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
     Call(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_HURT, SOUND_BOW_SMACK, 0)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(99)
             Call(PartnerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT, 0, LVarC, BS_FLAGS1_NICE_HIT | BS_FLAGS1_TRIGGER_EVENTS)
@@ -947,7 +947,7 @@ EvtScript N(spook) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(99)
             Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
@@ -1044,7 +1044,7 @@ EvtScript N(fanSmack) = {
         Call(SetActorDispOffset, ACTOR_PARTNER, Float(-0.5), 0, 0)
         Wait(1)
     EndLoop
-    Call(GetPartnerActionSuccess, LVarB)
+    Call(GetPartnerActionQuality, LVarB)
     Call(GetActionResultTier, LVarD)
     Label(0)
         Call(PartnerTestEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_ALT_SPIKY, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
@@ -1168,7 +1168,7 @@ EvtScript N(fanSmack) = {
     Wait(2)
     Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
     Call(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_HURT, SOUND_BOW_FAN_SMACK, 0)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(99)
             Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_ALT_SPIKY, 0, LVarC, BS_FLAGS1_NICE_HIT | BS_FLAGS1_TRIGGER_EVENTS)

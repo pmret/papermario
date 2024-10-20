@@ -1222,7 +1222,7 @@ EvtScript EVS_RunAwayStart = {
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
     Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Call(PlayerHopToGoal, 8, 0, 0)
-    Call(GetActionSuccess, LVar0)
+    Call(GetSmashActionQuality, LVar0)
     Call(DetermineAutoRunAwaySuccess)
     IfEq(LVar0, 1)
         Call(SetFledBattleFlag)

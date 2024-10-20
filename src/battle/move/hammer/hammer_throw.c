@@ -41,19 +41,19 @@ EvtScript N(EVS_UseMove) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
-            Set(LVarD, 50)
-            Set(LVarE, 1)
-            Set(LVarF, 2)
+            Set(LVarD, 50) // duration
+            Set(LVarE, BASIC_HAMMER_DMG_BAD)
+            Set(LVarF, BASIC_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove_Impl))
         CaseEq(1)
-            Set(LVarD, 50)
-            Set(LVarE, 2)
-            Set(LVarF, 4)
+            Set(LVarD, 50) // duration
+            Set(LVarE, SUPER_HAMMER_DMG_BAD)
+            Set(LVarF, SUPER_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove_Impl))
         CaseEq(2)
-            Set(LVarD, 50)
-            Set(LVarE, 3)
-            Set(LVarF, 6)
+            Set(LVarD, 50) // duration
+            Set(LVarE, ULTRA_HAMMER_DMG_BAD)
+            Set(LVarF, ULTRA_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove_Impl))
     EndSwitch
     Return
@@ -248,7 +248,7 @@ EvtScript N(EVS_UseMove_Impl) = {
     IfGt(LVar0, AC_MODE_NOT_LEARNED)
         Loop(0)
             Wait(1)
-            Call(GetActionSuccess, LVar0)
+            Call(GetSmashActionQuality, LVar0)
             IfNe(LVar0, 0)
                 BreakLoop
             EndIf
@@ -285,7 +285,7 @@ EvtScript N(EVS_UseMove_Impl) = {
     Call(InitTargetIterator)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(GetPlayerActionSuccess, LVar3)
+    Call(GetPlayerActionQuality, LVar3)
     Switch(LVar3)
         CaseGt(FALSE)
             Thread
@@ -321,7 +321,7 @@ EvtScript N(EVS_UseMove_Impl) = {
         Return
     EndIf
     Thread
-        Call(GetPlayerActionSuccess, LVar3)
+        Call(GetPlayerActionQuality, LVar3)
         Switch(LVar3)
             CaseGt(FALSE)
                 Call(SetVirtualEntityJumpGravity, LVarA, Float(1.4))
@@ -337,7 +337,7 @@ EvtScript N(EVS_UseMove_Impl) = {
                 Call(DeleteVirtualEntity, LVarA)
         EndSwitch
     EndThread
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -389,7 +389,7 @@ EvtScript N(EVS_UseMove_Impl) = {
         CaseEq(2)
             Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_D_DOWN_HIT_3)
     EndSwitch
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)

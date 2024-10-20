@@ -39,11 +39,11 @@ API_CALLABLE(N(init)) {
     s32 hid;
     s32 i;
 
-    battleStatus->maxActionSuccess = 5;
+    battleStatus->maxActionQuality = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableTidalWave;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -81,7 +81,7 @@ API_CALLABLE(N(start)) {
     Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -95,7 +95,7 @@ API_CALLABLE(N(start)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionProgress = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = TIDAL_WAVE_STATE_START;
@@ -296,12 +296,12 @@ void N(update)(void) {
             break;
         case TIDAL_WAVE_STATE_WRAPUP:
             if (battleStatus->actionProgress == 0) {
-                battleStatus->actionSuccess = AC_ACTION_FAILED;
+                battleStatus->actionQuality = AC_QUALITY_FAILED;
             } else {
-                battleStatus->actionSuccess = battleStatus->actionProgress;
+                battleStatus->actionQuality = battleStatus->actionProgress;
             }
             battleStatus->actionResult = ACTION_RESULT_SUCCESS;
-            if (battleStatus->actionSuccess >= 10) {
+            if (battleStatus->actionQuality >= 10) {
                 increment_action_command_success_count();
             }
             btl_set_popup_duration(POPUP_MSG_OFF);

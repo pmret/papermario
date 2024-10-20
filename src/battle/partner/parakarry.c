@@ -155,7 +155,6 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             state->bounceDivisor = state->angle;
             state->dist = 116.0f;
             state->unk_18.x = state->angle;
-            i = 0;
 
             for (i = 0; i < 30; i++) {
                 state->unk_18.x -= 1.0f;
@@ -172,7 +171,6 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             }
 
             state->unk_18.y = state->angle;
-            i = 0;
 
             for (i = 0; i < 30; i++) {
                 state->unk_18.y += 1.0f;
@@ -357,13 +355,13 @@ API_CALLABLE(N(GetShellShotDamage)) {
     s32 damage = 0;
 
     switch (battleStatus->partnerActor->actorBlueprint->level) {
-        case 0:
+        case PARTNER_RANK_NORMAL:
             damage = 5;
             break;
-        case 1:
+        case PARTNER_RANK_SUPER:
             damage = 6;
             break;
-        case 2:
+        case PARTNER_RANK_ULTRA:
             damage = 7;
             break;
     }
@@ -987,7 +985,7 @@ EvtScript N(skyDive) = {
     Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_PostDive)
     Wait(2)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             Call(PartnerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
@@ -1043,7 +1041,7 @@ EvtScript N(shellShot) = {
             Call(SetGoalToTarget, ACTOR_PARTNER)
             Call(AddGoalPos, ACTOR_PARTNER, 50, -50, 0)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_ShellFlyFastest)
-            Call(FlyToGoal, ACTOR_PARTNER, 7, 0, 0x00000064)
+            Call(FlyToGoal, ACTOR_PARTNER, 7, 0, 100)
             Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
         CaseEq(0)
             Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
@@ -1169,7 +1167,7 @@ EvtScript N(airLift) = {
             EndLoop
         EndChildThread
         Wait(90 * DT)
-        Call(GetActionSuccessCopy, LVar0)
+        Call(GetMashActionQuality, LVar0)
     Else
         Call(InterruptActionCommand)
         Set(LVar0, 0)
@@ -1263,7 +1261,7 @@ EvtScript N(airRaid) = {
     IfEq(LVar0, 6)
         Goto(11)
     EndIf
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(99)
             Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_ALT_SPIKY, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
@@ -1278,7 +1276,7 @@ EvtScript N(airRaid) = {
     IfNe(LVar0, ITER_NO_MORE)
         Goto(10)
     EndIf
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(99)
             Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)

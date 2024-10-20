@@ -3,6 +3,13 @@
 #include "battle/action_cmd/hammer.h"
 #include "sprite/player.h"
 
+#define BASIC_HAMMER_DMG_BAD  1
+#define BASIC_HAMMER_DMG_GOOD 2
+#define SUPER_HAMMER_DMG_BAD  2
+#define SUPER_HAMMER_DMG_GOOD 4
+#define ULTRA_HAMMER_DMG_BAD  3
+#define ULTRA_HAMMER_DMG_GOOD 6
+
 API_CALLABLE(N(IsBerserkerEquipped)) {
     script->varTable[0] = gBattleStatus.actionCommandMode;
     script->varTable[1] = 15;
@@ -285,7 +292,7 @@ EvtScript N(EVS_UseBasicHammer) = {
             Call(GetActionCommandMode, LVar0)
             IfLt(LVar0, AC_MODE_TUTORIAL)
                 Wait(1)
-                Call(GetActionSuccess, LVar0)
+                Call(GetSmashActionQuality, LVar0)
                 IfEq(LVar0, 0)
                     Goto(0)
                 EndIf
@@ -366,7 +373,7 @@ EvtScript N(EVS_UseSuperHammer) = {
         EndLoop
         Label(0)
             Wait(1)
-            Call(GetActionSuccess, LVar0)
+            Call(GetSmashActionQuality, LVar0)
             IfEq(LVar0, 0)
                 Goto(0)
             EndIf
@@ -435,7 +442,7 @@ EvtScript N(EVS_UseUltraHammer) = {
         EndLoop
         Label(0)
             Wait(1)
-            Call(GetActionSuccess, LVar0)
+            Call(GetSmashActionQuality, LVar0)
             IfEq(LVar0, 0)
                 Goto(0)
             EndIf
@@ -502,7 +509,7 @@ EvtScript N(EVS_Hammer_UseBasicQuake) = {
     EndLoop
     Label(0)
         Wait(1)
-        Call(GetActionSuccess, LVar0)
+        Call(GetSmashActionQuality, LVar0)
         IfEq(LVar0, 0)
             Goto(0)
         EndIf
@@ -551,7 +558,7 @@ EvtScript N(EVS_Hammer_UseSuperQuake) = {
     EndLoop
     Label(0)
         Wait(1)
-        Call(GetActionSuccess, LVar0)
+        Call(GetSmashActionQuality, LVar0)
         IfEq(LVar0, 0)
             Goto(0)
         EndIf
@@ -600,7 +607,7 @@ EvtScript N(EVS_Hammer_UseUltraQuake) = {
     EndLoop
     Label(0)
         Wait(1)
-        Call(GetActionSuccess, LVar0)
+        Call(GetSmashActionQuality, LVar0)
         IfEq(LVar0, 0)
             Goto(0)
         EndIf

@@ -1961,12 +1961,12 @@ typedef enum HitResult {
 } HitResult;
 
 typedef enum ActionResult {
-    ACTION_RESULT_NONE      = 127,
-    ACTION_RESULT_MINUS_4   = -4,
-    ACTION_RESULT_MINUS_2   = -2,
-    ACTION_RESULT_EARLY     = -1,
-    ACTION_RESULT_FAIL      = 0,
-    ACTION_RESULT_SUCCESS   = 1,
+    ACTION_RESULT_NONE              = 127,
+    ACTION_RESULT_METER_BELOW_HALF  = -4, // certain mashing comamnds fail with this value
+    ACTION_RESULT_METER_NOT_ENOUGH  = -2, // certain mashing comamnds fail with this value
+    ACTION_RESULT_EARLY             = -1, // timing commands too early fail with this value
+    ACTION_RESULT_FAIL              = 0,  // simple failure to complete action command
+    ACTION_RESULT_SUCCESS           = 1,
 } ActionResult;
 
 typedef enum BlockResult {

@@ -36,9 +36,9 @@ API_CALLABLE(N(GetHitChance)) {
     return ApiStatus_DONE2;
 }
 
-extern EvtScript N(EVS_UseMove_ImplA);
-extern EvtScript N(EVS_UseMove_ImplB);
-extern EvtScript N(EVS_UseMove_ImplC);
+extern EvtScript N(EVS_UseMove_Basic);
+extern EvtScript N(EVS_UseMove_Super);
+extern EvtScript N(EVS_UseMove_Ultra);
 
 EvtScript N(EVS_UseMove) = {
     Set(LFlagA, FALSE)
@@ -48,19 +48,19 @@ EvtScript N(EVS_UseMove) = {
     Switch(LVar1)
         CaseEq(0)
             Set(LVarC, 1)
-            ExecWait(N(EVS_UseMove_ImplA))
+            ExecWait(N(EVS_UseMove_Basic))
         CaseEq(1)
             Set(LVarC, 2)
-            ExecWait(N(EVS_UseMove_ImplB))
+            ExecWait(N(EVS_UseMove_Super))
         CaseEq(2)
             Set(LVarC, 3)
-            ExecWait(N(EVS_UseMove_ImplC))
+            ExecWait(N(EVS_UseMove_Ultra))
     EndSwitch
     Return
     End
 };
 
-EvtScript N(EVS_UseMove_ImplA) = {
+EvtScript N(EVS_UseMove_Basic) = {
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
@@ -77,7 +77,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         Return
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
@@ -102,7 +102,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         Call(SetGoalToTarget, ACTOR_PLAYER)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
-    Call(GetActionResult, LVarE)
+    Call(GetJumpActionQuality, LVarE)
     Set(LVarD, 0)
     Set(LVarF, 0)
     Set(LFlag0, FALSE)
@@ -149,7 +149,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         Set(LFlag0, TRUE)
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             IfEq(LFlag0, FALSE)
@@ -196,7 +196,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     End
 };
 
-EvtScript N(EVS_UseMove_ImplB) = {
+EvtScript N(EVS_UseMove_Super) = {
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
@@ -213,7 +213,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         Return
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
@@ -232,7 +232,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
         EndCaseGroup
     EndSwitch
-    Call(GetActionResult, LVarE)
+    Call(GetJumpActionQuality, LVarE)
     Set(LVarD, 0)
     Set(LVarF, 0)
     Set(LFlag0, FALSE)
@@ -285,7 +285,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         Set(LFlag0, TRUE)
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             IfEq(LFlag0, FALSE)
@@ -332,7 +332,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     End
 };
 
-EvtScript N(EVS_UseMove_ImplC) = {
+EvtScript N(EVS_UseMove_Ultra) = {
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
@@ -349,7 +349,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         Return
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
@@ -368,7 +368,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
         EndCaseGroup
     EndSwitch
-    Call(GetActionResult, LVarE)
+    Call(GetJumpActionQuality, LVarE)
     Set(LVarD, 0)
     Set(LVarF, 0)
     Set(LFlag0, FALSE)
@@ -417,7 +417,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         Set(LFlag0, TRUE)
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             IfEq(LFlag0, FALSE)

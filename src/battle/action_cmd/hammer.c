@@ -21,12 +21,12 @@ API_CALLABLE(N(init)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
 
-    battleStatus->maxActionSuccess = 1;
+    battleStatus->maxActionQuality = 1;
     battleStatus->actionCmdDifficultyTable = actionCmdTableHammer;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         battleStatus->actionProgress = 0;
         return ApiStatus_DONE2;
     }
@@ -90,7 +90,7 @@ API_CALLABLE(N(start)) {
     Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         battleStatus->actionProgress = 0;
         return ApiStatus_DONE2;
     }
@@ -108,7 +108,7 @@ API_CALLABLE(N(start)) {
     }
 
     acs->hammerMissedStart = FALSE;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionProgress = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = AC_STATE_START;
@@ -276,7 +276,7 @@ void N(update)(void) {
                 && acs->autoSucceed == 0
                 && battleStatus->actionCommandMode < AC_MODE_TUTORIAL
             ) {
-                battleStatus->actionSuccess = AC_ACTION_FAILED;
+                battleStatus->actionQuality = AC_QUALITY_FAILED;
                 battleStatus->actionResult = ACTION_RESULT_EARLY;
                 action_command_free();
                 return;
@@ -290,14 +290,14 @@ void N(update)(void) {
             }
 
             // has the stick been released within the window?
-            if (battleStatus->actionSuccess == 0) {
+            if (battleStatus->actionQuality == 0) {
                 for (i = 0; i < inputWindow; i++) {
                     if (bufferPos >= ARRAY_COUNT(battleStatus->holdInputBuffer)) {
                         bufferPos -= ARRAY_COUNT(battleStatus->holdInputBuffer);
                     }
 
                     if (!(battleStatus->holdInputBuffer[bufferPos] & BUTTON_STICK_LEFT) || acs->autoSucceed != 0) {
-                        battleStatus->actionSuccess = 1;
+                        battleStatus->actionQuality = 1;
                         battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                         gBattleStatus.flags1 |= BS_FLAGS1_2000;
                     }
@@ -308,11 +308,11 @@ void N(update)(void) {
             if (battleStatus->actionCommandMode < AC_MODE_TUTORIAL || acs->stateTimer != acs->duration) {
                 acs->stateTimer++;
                 if (acs->duration < acs->stateTimer) {
-                    if (battleStatus->actionSuccess == 0) {
-                        battleStatus->actionSuccess = AC_ACTION_FAILED;
+                    if (battleStatus->actionQuality == 0) {
+                        battleStatus->actionQuality = AC_QUALITY_FAILED;
                     }
 
-                    if (battleStatus->actionSuccess == 1) {
+                    if (battleStatus->actionQuality == 1) {
                         increment_action_command_success_count();
                     }
 

@@ -19,9 +19,9 @@ Difficulty1D N(DifficultyTable) = {
     11, 10, 9, 8, 7, 6, 5, 4
 };
 
-extern EvtScript N(EVS_UseMove_ImplA);
-extern EvtScript N(EVS_UseMove_ImplB);
-extern EvtScript N(EVS_UseMove_ImplC);
+extern EvtScript N(EVS_UseMove_Basic);
+extern EvtScript N(EVS_UseMove_Super);
+extern EvtScript N(EVS_UseMove_Ultra);
 
 EvtScript N(EVS_UseMove) = {
     Set(LFlagA, FALSE)
@@ -29,17 +29,17 @@ EvtScript N(EVS_UseMove) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
-            ExecWait(N(EVS_UseMove_ImplA))
+            ExecWait(N(EVS_UseMove_Basic))
         CaseEq(1)
-            ExecWait(N(EVS_UseMove_ImplB))
+            ExecWait(N(EVS_UseMove_Super))
         CaseEq(2)
-            ExecWait(N(EVS_UseMove_ImplC))
+            ExecWait(N(EVS_UseMove_Ultra))
     EndSwitch
     Return
     End
 };
 
-EvtScript N(EVS_UseMove_ImplA) = {
+EvtScript N(EVS_UseMove_Basic) = {
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(SetGoalToFirstTarget, ACTOR_SELF)
@@ -89,7 +89,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EndChildThread
     Wait(10)
     Call(InitTargetIterator)
-    Call(GetPlayerActionSuccess, LVarB)
+    Call(GetPlayerActionQuality, LVarB)
     Set(LVar9, 0)
     Label(1)
         Call(SetGoalToTarget, ACTOR_PLAYER)
@@ -128,7 +128,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         Call(SetGoalPos, ACTOR_PLAYER, 30, 0, 0)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
-    Call(GetActionResult, LVarE)
+    Call(GetJumpActionQuality, LVarE)
     Set(LVarF, 0)
     Set(LFlag0, FALSE)
     Label(10)
@@ -192,7 +192,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
             Set(LFlag0, TRUE)
         EndIf
         Call(InitTargetIterator)
-        Call(GetPlayerActionSuccess, LVarB)
+        Call(GetPlayerActionQuality, LVarB)
         Set(LVar9, 0)
         Label(11)
             Call(SetGoalToTarget, ACTOR_PLAYER)
@@ -257,7 +257,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     End
 };
 
-EvtScript N(EVS_UseMove_ImplB) = {
+EvtScript N(EVS_UseMove_Super) = {
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(SetGoalToFirstTarget, ACTOR_SELF)
@@ -309,7 +309,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EndChildThread
     Wait(10)
     Call(InitTargetIterator)
-    Call(GetPlayerActionSuccess, LVarB)
+    Call(GetPlayerActionQuality, LVarB)
     Set(LVar9, 0)
     Label(1)
         Call(SetGoalToTarget, ACTOR_PLAYER)
@@ -348,7 +348,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         Call(SetGoalPos, ACTOR_PLAYER, 30, 0, 0)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
-    Call(GetActionResult, LVarE)
+    Call(GetJumpActionQuality, LVarE)
     Set(LVarF, 0)
     Set(LFlag0, FALSE)
     Label(10)
@@ -418,7 +418,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
             Set(LFlag0, TRUE)
         EndIf
         Call(InitTargetIterator)
-        Call(GetPlayerActionSuccess, LVarB)
+        Call(GetPlayerActionQuality, LVarB)
         Set(LVar9, 0)
         Label(11)
             Call(SetGoalToTarget, ACTOR_PLAYER)
@@ -483,7 +483,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     End
 };
 
-EvtScript N(EVS_UseMove_ImplC) = {
+EvtScript N(EVS_UseMove_Ultra) = {
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(SetGoalToFirstTarget, ACTOR_SELF)
@@ -535,7 +535,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EndChildThread
     Wait(10)
     Call(InitTargetIterator)
-    Call(GetPlayerActionSuccess, LVarB)
+    Call(GetPlayerActionQuality, LVarB)
     Set(LVar9, 0)
     Label(1)
         Call(SetGoalToTarget, ACTOR_PLAYER)
@@ -574,7 +574,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         Call(SetGoalPos, ACTOR_PLAYER, 30, 0, 0)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_FINISH)
     EndChildThread
-    Call(GetActionResult, LVarE)
+    Call(GetJumpActionQuality, LVarE)
     Set(LVarF, 0)
     Set(LFlag0, FALSE)
     Label(10)
@@ -640,7 +640,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
             Set(LFlag0, TRUE)
         EndIf
         Call(InitTargetIterator)
-        Call(GetPlayerActionSuccess, LVarB)
+        Call(GetPlayerActionQuality, LVarB)
         Set(LVar9, 0)
         Label(11)
             Call(SetGoalToTarget, ACTOR_PLAYER)

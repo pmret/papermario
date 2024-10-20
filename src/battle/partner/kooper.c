@@ -628,7 +628,7 @@ EvtScript N(shellToss) = {
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinFastest)
     EndSwitch
     Add(LVar9, 1)
-    Call(GetActionSuccess, LVar0)
+    Call(GetSmashActionQuality, LVar0)
     IfEq(LVar0, 0)
         Goto(0)
     EndIf
@@ -680,7 +680,7 @@ EvtScript N(shellToss) = {
         Return
     EndIf
     Call(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             Call(PartnerDamageEnemy, LVar0, 0, SUPPRESS_EVENTS_KOOPER_DAMAGE, 0, LVarF, BS_FLAGS1_NICE_HIT | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
@@ -798,7 +798,7 @@ EvtScript N(powerShell) = {
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinFastest)
     EndSwitch
     Add(LVar9, 1)
-    Call(GetActionSuccess, LVar0)
+    Call(GetSmashActionQuality, LVar0)
     IfEq(LVar0, 0)
         Goto(0)
     EndIf
@@ -833,7 +833,7 @@ EvtScript N(powerShell) = {
             Goto(12)
         EndIf
         IfEq(LFlag0, FALSE)
-            Call(GetPartnerActionSuccess, LVar0)
+            Call(GetPartnerActionQuality, LVar0)
             Switch(LVar0)
                 CaseGt(0)
                     Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
@@ -842,7 +842,7 @@ EvtScript N(powerShell) = {
             EndSwitch
         EndIf
         Set(LFlag0, TRUE)
-        Call(GetPartnerActionSuccess, LVar0)
+        Call(GetPartnerActionQuality, LVar0)
         Switch(LVar0)
             CaseGt(0)
                 Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENTS_KOOPER_DAMAGE, 0, LVarF, BS_FLAGS1_NICE_HIT | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
@@ -856,7 +856,7 @@ EvtScript N(powerShell) = {
             Goto(10)
         EndIf
     IfEq(LFlag0, FALSE)
-        Call(GetPartnerActionSuccess, LVar0)
+        Call(GetPartnerActionQuality, LVar0)
         Switch(LVar0)
             CaseGt(0)
                 Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
@@ -870,7 +870,7 @@ EvtScript N(powerShell) = {
             Wait(1)
             Goto(11)
         EndIf
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             ExecWait(N(EVS_ReturnHome_Success))
@@ -988,7 +988,7 @@ EvtScript N(dizzyShell) = {
             Goto(12)
         EndIf
         IfEq(LFlag0, FALSE)
-            Call(GetPartnerActionSuccess, LVar0)
+            Call(GetPartnerActionQuality, LVar0)
             Switch(LVar0)
                 CaseGt(99)
                     Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
@@ -998,7 +998,7 @@ EvtScript N(dizzyShell) = {
         EndIf
         Set(LFlag0, TRUE)
         Call(GetActionProgress, LVarF)
-        Call(GetPartnerActionSuccess, LVar0)
+        Call(GetPartnerActionQuality, LVar0)
         Switch(LVar0)
             CaseGt(0)
                 IfEq(LVar9, 1)
@@ -1025,7 +1025,7 @@ EvtScript N(dizzyShell) = {
             Goto(10)
         EndIf
     IfEq(LFlag0, FALSE)
-        Call(GetPartnerActionSuccess, LVar0)
+        Call(GetPartnerActionQuality, LVar0)
         Switch(LVar0)
             CaseGt(99)
                 Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
@@ -1234,7 +1234,7 @@ EvtScript N(fireShell) = {
             Goto(12)
         EndIf
         IfEq(LFlag0, FALSE)
-            Call(GetPartnerActionSuccess, LVar0)
+            Call(GetPartnerActionQuality, LVar0)
             Switch(LVar0)
                 CaseGt(99)
                     Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)
@@ -1244,7 +1244,7 @@ EvtScript N(fireShell) = {
         EndIf
         Set(LFlag0, TRUE)
         Call(GetActionProgress, LVar0)
-        Call(GetPartnerActionSuccess, LVar0)
+        Call(GetPartnerActionQuality, LVar0)
         Switch(LVar0)
             CaseGt(99)
                 Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_FIRE | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENTS_KOOPER_DAMAGE, 0, LVarF, BS_FLAGS1_NICE_HIT | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
@@ -1258,7 +1258,7 @@ EvtScript N(fireShell) = {
             Goto(10)
         EndIf
     IfEq(LFlag0, FALSE)
-        Call(GetPartnerActionSuccess, LVar0)
+        Call(GetPartnerActionQuality, LVar0)
         Switch(LVar0)
             CaseGt(99)
                 Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)

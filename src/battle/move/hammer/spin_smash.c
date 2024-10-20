@@ -40,19 +40,19 @@ EvtScript N(EVS_UseMove) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
-            Set(LVarD, 60)
-            Set(LVarE, 1)
-            Set(LVarF, 2)
+            Set(LVarD, 60) // duration
+            Set(LVarE, BASIC_HAMMER_DMG_BAD)
+            Set(LVarF, BASIC_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove1_Impl))
         CaseEq(1)
-            Set(LVarD, 60)
-            Set(LVarE, 2)
-            Set(LVarF, 4)
+            Set(LVarD, 60) // duration
+            Set(LVarE, SUPER_HAMMER_DMG_BAD)
+            Set(LVarF, SUPER_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove2_Impl))
         CaseEq(2)
-            Set(LVarD, 60)
-            Set(LVarE, 3)
-            Set(LVarF, 6)
+            Set(LVarD, 60) // duration
+            Set(LVarE, ULTRA_HAMMER_DMG_BAD)
+            Set(LVarF, ULTRA_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove3_Impl))
     EndSwitch
     Return
@@ -126,7 +126,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
     EndLoop
     Label(0)
     Wait(1)
-    Call(GetActionSuccess, LVar0)
+    Call(GetSmashActionQuality, LVar0)
     IfEq(LVar0, 0)
         Goto(0)
     EndIf
@@ -145,7 +145,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
         ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(func_802A1000_737890)
@@ -248,7 +248,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
     EndLoop
     Label(0)
     Wait(1)
-    Call(GetActionSuccess, LVar0)
+    Call(GetSmashActionQuality, LVar0)
     IfEq(LVar0, 0)
         Goto(0)
     EndIf
@@ -267,7 +267,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
         ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(func_802A1000_737890)
@@ -368,7 +368,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
     EndLoop
     Label(0)
         Wait(1)
-        Call(GetActionSuccess, LVar0)
+        Call(GetSmashActionQuality, LVar0)
         IfEq(LVar0, 0)
             Goto(0)
         EndIf
@@ -387,7 +387,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
         ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(func_802A1000_737890)

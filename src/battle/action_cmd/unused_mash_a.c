@@ -26,12 +26,12 @@ API_CALLABLE(N(init)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
 
-    battleStatus->maxActionSuccess = 100;
+    battleStatus->maxActionQuality = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTable0A;
     battleStatus->actionResult = ACTION_RESULT_NONE;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -44,7 +44,7 @@ API_CALLABLE(N(init)) {
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
     acs->isBarFilled = FALSE;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     acs->hudPosX = -48;
     acs->hudPosY = 80;
 
@@ -75,7 +75,7 @@ API_CALLABLE(N(start)) {
     Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -90,9 +90,9 @@ API_CALLABLE(N(start)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
-    battleStatus->maxActionSuccess = acs->mashMeterCutoffs[(acs->mashMeterNumIntervals - 1)];
+    battleStatus->maxActionQuality = acs->mashMeterCutoffs[(acs->mashMeterNumIntervals - 1)];
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     acs->state = AC_STATE_START;
 
@@ -171,23 +171,23 @@ void N(update)(void) {
 
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
-                return;
+                break;
             }
 
             if (acs->barFillLevel == 0) {
-                battleStatus->actionSuccess = AC_ACTION_FAILED;
+                battleStatus->actionQuality = AC_QUALITY_FAILED;
             } else {
-                battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
+                battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
             }
 
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
-            if (battleStatus->actionSuccess >= cutoff) {
+            if (battleStatus->actionQuality >= cutoff) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             } else {
-                battleStatus->actionResult = ACTION_RESULT_MINUS_2;
+                battleStatus->actionResult = ACTION_RESULT_METER_NOT_ENOUGH;
             }
 
-            if (battleStatus->actionSuccess == 100) {
+            if (battleStatus->actionQuality == 100) {
                 // only count 100% fill as success for this action command
                 increment_action_command_success_count();
             }
@@ -199,7 +199,7 @@ void N(update)(void) {
         case AC_STATE_DISPOSE:
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
-                return;
+                break;
             }
             action_command_free();
             break;

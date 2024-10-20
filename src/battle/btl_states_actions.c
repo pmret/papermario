@@ -270,8 +270,8 @@ void btl_state_update_normal_start(void) {
             if (is_ability_active(ABILITY_MYSTERY_SCROLL)) {
                 battleStatus->actionCommandMode = AC_MODE_LEARNED;
             }
-            battleStatus->actionSuccess = 0;
-            battleStatus->maxActionSuccess = 0;
+            battleStatus->actionQuality = 0;
+            battleStatus->maxActionQuality = 0;
             battleStatus->enabledMenusFlags = -1;
             battleStatus->enabledStarPowersFlags = -1;
             battleStatus->itemUsesLeft = 0;
@@ -3598,7 +3598,7 @@ void btl_state_update_enemy_move(void) {
             }
             battleStatus->stateFreezeCount = 0;
             battleStatus->lastAttackDamage = 0;
-            battleStatus->actionSuccess = 0;
+            battleStatus->actionQuality = 0;
             battleStatus->actionResult = ACTION_RESULT_NONE;
             battleStatus->blockResult = BLOCK_RESULT_NONE;
             battleStatus->curDamageSource = DMG_SRC_DEFAULT;

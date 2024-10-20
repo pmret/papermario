@@ -20,27 +20,27 @@ API_CALLABLE(func_802A10A4_77F2E4) {
     return ApiStatus_DONE2;
 }
 
-extern EvtScript N(UseMove_Impl);
+extern EvtScript N(EVS_UseMove_Impl);
 
 EvtScript N(EVS_UseMove) = {
     Call(ShowActionHud, TRUE)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
-            Set(LVarD, 60)
-            Set(LVarE, 1)
-            Set(LVarF, 2)
-            ExecWait(N(UseMove_Impl))
+            Set(LVarD, 60) // duration
+            Set(LVarE, BASIC_HAMMER_DMG_BAD)
+            Set(LVarF, BASIC_HAMMER_DMG_GOOD)
+            ExecWait(N(EVS_UseMove_Impl))
         CaseEq(1)
-            Set(LVarD, 60)
-            Set(LVarE, 2)
-            Set(LVarF, 4)
-            ExecWait(N(UseMove_Impl))
+            Set(LVarD, 60) // duration
+            Set(LVarE, SUPER_HAMMER_DMG_BAD)
+            Set(LVarF, SUPER_HAMMER_DMG_GOOD)
+            ExecWait(N(EVS_UseMove_Impl))
         CaseEq(2)
-            Set(LVarD, 60)
-            Set(LVarE, 3)
-            Set(LVarF, 6)
-            ExecWait(N(UseMove_Impl))
+            Set(LVarD, 60) // duration
+            Set(LVarE, ULTRA_HAMMER_DMG_BAD)
+            Set(LVarF, ULTRA_HAMMER_DMG_GOOD)
+            ExecWait(N(EVS_UseMove_Impl))
     EndSwitch
     Return
     End
@@ -64,7 +64,7 @@ EvtScript N(EVS_802A3248) = {
     End
 };
 
-EvtScript N(UseMove_Impl) = {
+EvtScript N(EVS_UseMove_Impl) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
@@ -86,7 +86,7 @@ EvtScript N(UseMove_Impl) = {
         ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)

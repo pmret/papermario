@@ -26,7 +26,7 @@ API_CALLABLE(N(init)) {
     s32 offsetX;
     s32 hid;
 
-    battleStatus->maxActionSuccess = 0;
+    battleStatus->maxActionQuality = 0;
     battleStatus->actionCmdDifficultyTable = actionCmdTableFlee;
     battleStatus->actionResult = ACTION_RESULT_NONE;
 
@@ -43,7 +43,7 @@ API_CALLABLE(N(init)) {
     acs->flee.dir = 1;
     acs->escapeChance = rand_int(1);
     acs->isBarFilled = FALSE;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     N(HasStarted) = FALSE;
     acs->hudPosX = -48;
     acs->hudPosY = 80;
@@ -98,9 +98,9 @@ API_CALLABLE(N(start)) {
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
     acs->wrongButtonPressed = FALSE;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
-    battleStatus->maxActionSuccess = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
+    battleStatus->maxActionQuality = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     acs->state = AC_STATE_START;
 
@@ -176,20 +176,23 @@ void N(update)(void) {
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
-            if (acs->stateTimer == 0) {
-                if (battleStatus->actionSuccess >= (100 - acs->escapeThreshold)) {
-                    battleStatus->actionResult = ACTION_RESULT_SUCCESS;
-                    battleStatus->actionSuccess = 1;
-                } else {
-                    battleStatus->actionResult = ACTION_RESULT_MINUS_2;
-                    battleStatus->actionSuccess = AC_ACTION_FAILED;
-                }
-                acs->stateTimer = 20;
-                acs->state = AC_STATE_DISPOSE;
-            } else {
+            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
+
+            if (acs->stateTimer != 0) {
                 acs->stateTimer--;
+                break;
             }
+
+            if (battleStatus->actionQuality >= (100 - acs->escapeThreshold)) {
+                battleStatus->actionResult = ACTION_RESULT_SUCCESS;
+                battleStatus->actionQuality = 1;
+            } else {
+                battleStatus->actionResult = ACTION_RESULT_METER_NOT_ENOUGH;
+                battleStatus->actionQuality = AC_QUALITY_FAILED;
+            }
+
+            acs->stateTimer = 20;
+            acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
             if (acs->stateTimer != 0) {

@@ -964,7 +964,7 @@ EvtScript N(EVS_Attack_Headbonk1) = {
         Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
     EndChildThread
     Wait(1)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             Call(N(GetChargeAmount))
@@ -992,7 +992,7 @@ EvtScript N(EVS_Attack_Headbonk1) = {
         Call(SetGoalToTarget, ACTOR_PARTNER)
         Call(UseBattleCamPreset, BTL_CAM_GOOMBARIO_BONK_FOLLOWUP_2)
     EndThread
-    Call(GetActionResult, LVarF)
+    Call(GetJumpActionQuality, LVarF)
     Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
@@ -1069,7 +1069,7 @@ EvtScript N(EVS_Attack_Headbonk2) = {
         Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
     EndChildThread
     Wait(1)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             Call(N(GetChargeAmount))
@@ -1097,7 +1097,7 @@ EvtScript N(EVS_Attack_Headbonk2) = {
         Call(SetGoalToTarget, ACTOR_PARTNER)
         Call(UseBattleCamPreset, BTL_CAM_GOOMBARIO_BONK_FOLLOWUP_2)
     EndThread
-    Call(GetActionResult, LVarF)
+    Call(GetJumpActionQuality, LVarF)
     Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
@@ -1176,7 +1176,7 @@ EvtScript N(EVS_Attack_Headbonk3) = {
         Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
     EndChildThread
     Wait(1)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             Call(N(GetChargeAmount))
@@ -1204,7 +1204,7 @@ EvtScript N(EVS_Attack_Headbonk3) = {
         Call(SetGoalToTarget, ACTOR_PARTNER)
         Call(UseBattleCamPreset, BTL_CAM_GOOMBARIO_BONK_FOLLOWUP_2)
     EndThread
-    Call(GetActionResult, LVarF)
+    Call(GetJumpActionQuality, LVarF)
     Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
@@ -1296,7 +1296,7 @@ EvtScript N(EVS_Move_Multibonk) = {
         Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
     EndChildThread
     Wait(1)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             Call(N(GetChargeAmount))
@@ -1324,7 +1324,7 @@ EvtScript N(EVS_Move_Multibonk) = {
         Call(SetGoalToTarget, ACTOR_PARTNER)
         Call(UseBattleCamPreset, BTL_CAM_GOOMBARIO_BONK_FOLLOWUP_2)
     EndThread
-    Call(GetActionResult, LVarF)
+    Call(GetJumpActionQuality, LVarF)
     Set(LVarD, 0)
     Set(LVarF, 0)
     Set(LFlag0, FALSE)
@@ -1389,7 +1389,7 @@ EvtScript N(EVS_Move_Multibonk) = {
         Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
     EndChildThread
     Wait(1)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             IfEq(LFlag0, FALSE)

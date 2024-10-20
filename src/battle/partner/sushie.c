@@ -761,7 +761,7 @@ EvtScript N(EVS_Move_BellyFlop) = {
         EndIf
     EndLoop
     Thread
-        Call(GetPartnerActionSuccess, LVar0)
+        Call(GetPartnerActionQuality, LVar0)
         Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
         Call(MoveBattleCamOver, 20)
     EndThread
@@ -777,7 +777,7 @@ EvtScript N(EVS_Move_BellyFlop) = {
         Call(SetActorRotation, ACTOR_PARTNER, 0, 0, 20)
     EndThread
     Thread
-        Call(GetPartnerActionSuccess, LVar0)
+        Call(GetPartnerActionQuality, LVar0)
         IfGt(LVar0, 0)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
             Switch(LVar2)
@@ -856,7 +856,7 @@ EvtScript N(EVS_Move_BellyFlop) = {
     EndThread
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_SUSHIE_BELLY_FLOP)
     Call(SetGoalToTarget, ACTOR_PARTNER)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     IfGt(LVar0, 0)
         Thread
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Jump)
@@ -910,7 +910,7 @@ EvtScript N(EVS_Move_BellyFlop) = {
         Wait(3)
         Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
     EndThread
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, SUPPRESS_EVENT_SPIKY_FRONT, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
@@ -1061,7 +1061,7 @@ EvtScript N(EVS_Move_WaterBlock) = {
     Call(action_command_three_chances_start, 0, 100, AC_DIFFICULTY_3)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_HoldWater)
     Wait(110)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     IfEq(LVar0, 0)
         Set(LVarA, LVar0)
         Goto(10)
@@ -1105,7 +1105,7 @@ EvtScript N(EVS_Move_WaterBlock) = {
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Call(N(PlayWaterBlockFX), LVar0, LVar1, LVar2)
     Wait(30)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Call(N(ApplyWaterBlock))
     Set(LVarA, LVar0)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1197,7 +1197,7 @@ EvtScript N(EVS_Move_TidalWave) = {
     Wait(15)
     Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 20)
-    Call(GetActionSuccessCopy, LVar0)
+    Call(GetMashActionQuality, LVar0)
     Set(LVarE, LVar0)
     Set(LVarF, LVar0)
     Call(InitTargetIterator)

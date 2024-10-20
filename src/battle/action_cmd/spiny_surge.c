@@ -26,11 +26,11 @@ API_CALLABLE(N(init)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
 
-    battleStatus->maxActionSuccess = 16;
+    battleStatus->maxActionQuality = 16;
     battleStatus->actionCmdDifficultyTable = actionCmdTableSpinySurge;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -42,7 +42,7 @@ API_CALLABLE(N(init)) {
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
     acs->isBarFilled = FALSE;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->hudPrepareTime = 30;
     acs->hudPosX = -48;
@@ -75,7 +75,7 @@ API_CALLABLE(N(start)) {
     Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -89,7 +89,7 @@ API_CALLABLE(N(start)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     acs->state = AC_STATE_START;
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
 
@@ -203,31 +203,31 @@ void N(update)(void) {
             ) {
                 acs->spinySurge.tossState = SPINY_SURGE_THROW;
             }
-            battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
+            battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
             PrevButtons = battleStatus->curButtonsDown;
             battleStatus->actionProgress = acs->spinySurge.tossState;
 
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionSuccess * 12);
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
 
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
-                return;
+                break;
             }
 
             if (acs->barFillLevel == 0) {
-                battleStatus->actionSuccess = AC_ACTION_FAILED;
+                battleStatus->actionQuality = AC_QUALITY_FAILED;
             } else {
-                battleStatus->actionSuccess = acs->barFillLevel / ONE_PCT_MASH;
+                battleStatus->actionQuality = acs->barFillLevel / ONE_PCT_MASH;
             }
 
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
-            if (battleStatus->actionSuccess > cutoff) {
+            if (battleStatus->actionQuality > cutoff) {
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             } else {
-                battleStatus->actionResult = ACTION_RESULT_MINUS_2;
+                battleStatus->actionResult = ACTION_RESULT_METER_NOT_ENOUGH;
             }
 
-            if (battleStatus->actionSuccess == 100) {
+            if (battleStatus->actionQuality == 100) {
                 // only count 100% fill as success for this action command
                 increment_action_command_success_count();
             }
@@ -240,9 +240,9 @@ void N(update)(void) {
         case AC_STATE_DISPOSE:
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
-            } else {
-                action_command_free();
+                break;
             }
+            action_command_free();
             break;
     }
 }

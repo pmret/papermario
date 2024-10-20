@@ -24,10 +24,10 @@ API_CALLABLE(N(init)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hid;
 
-    battleStatus->maxActionSuccess = 5;
+    battleStatus->maxActionQuality = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableStopLeech;
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -61,7 +61,7 @@ API_CALLABLE(N(start)) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -75,7 +75,7 @@ API_CALLABLE(N(start)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = AC_STATE_START;
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
@@ -156,7 +156,7 @@ void N(update)(void) {
                 acs->stateTimer--;
                 break;
             }
-            battleStatus->actionSuccess = 1;
+            battleStatus->actionQuality = 1;
             battleStatus->actionResult = ACTION_RESULT_NONE;
             action_command_free();
         default:

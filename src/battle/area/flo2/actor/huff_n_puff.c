@@ -3004,7 +3004,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                 Call(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_NICE_HIT)
                 Add(LVarD, 1)
             EndIf
-            Call(GetActionSuccessCopy, LVar0)
+            Call(GetMashActionQuality, LVar0)
             IfEq(LVar0, 1)
                 BreakLoop
             EndIf

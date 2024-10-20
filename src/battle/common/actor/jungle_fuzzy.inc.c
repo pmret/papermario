@@ -455,7 +455,7 @@ EvtScript N(EVS_Attack_Leech) = {
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jungle_Bite)
             Set(LFlag0, FALSE)
             Loop(21)
-                Call(GetActionSuccessCopy, LVar1)
+                Call(GetMashActionQuality, LVar1)
                 IfEq(LVar1, 1)
                     Set(LFlag0, TRUE)
                     BreakLoop
@@ -473,7 +473,7 @@ EvtScript N(EVS_Attack_Leech) = {
             Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
             Set(LFlag0, FALSE)
             Loop(1)
-                Call(GetActionSuccessCopy, LVar1)
+                Call(GetMashActionQuality, LVar1)
                 IfEq(LVar1, 1)
                     Set(LFlag0, TRUE)
                     BreakLoop
@@ -487,7 +487,7 @@ EvtScript N(EVS_Attack_Leech) = {
             Call(SetActorScale, ACTOR_SELF, Float(0.9), Float(1.2), Float(1.0))
             Set(LFlag0, FALSE)
             Loop(1)
-                Call(GetActionSuccessCopy, LVar1)
+                Call(GetMashActionQuality, LVar1)
                 IfEq(LVar1, 1)
                     Set(LFlag0, TRUE)
                     BreakLoop
@@ -501,7 +501,7 @@ EvtScript N(EVS_Attack_Leech) = {
             Call(SetActorScale, ACTOR_SELF, Float(0.8), Float(1.3), Float(1.0))
             Set(LFlag0, FALSE)
             Loop(1)
-                Call(GetActionSuccessCopy, LVar1)
+                Call(GetMashActionQuality, LVar1)
                 IfEq(LVar1, 1)
                     Set(LFlag0, TRUE)
                     BreakLoop
@@ -515,7 +515,7 @@ EvtScript N(EVS_Attack_Leech) = {
             Call(SetActorScale, ACTOR_SELF, Float(0.7), Float(1.4), Float(1.0))
             Set(LFlag0, FALSE)
             Loop(1)
-                Call(GetActionSuccessCopy, LVar1)
+                Call(GetMashActionQuality, LVar1)
                 IfEq(LVar1, 1)
                     Set(LFlag0, TRUE)
                     BreakLoop
@@ -529,7 +529,7 @@ EvtScript N(EVS_Attack_Leech) = {
             Call(SetActorScale, ACTOR_SELF, Float(0.7), Float(1.5), Float(1.0))
             Set(LFlag0, FALSE)
             Loop(2)
-                Call(GetActionSuccessCopy, LVar1)
+                Call(GetMashActionQuality, LVar1)
                 IfEq(LVar1, 1)
                     Set(LFlag0, TRUE)
                     BreakLoop
@@ -543,7 +543,7 @@ EvtScript N(EVS_Attack_Leech) = {
             Call(SetActorScale, ACTOR_SELF, Float(0.6), Float(1.6), Float(1.0))
             Set(LFlag0, FALSE)
             Loop(10)
-                Call(GetActionSuccessCopy, LVar1)
+                Call(GetMashActionQuality, LVar1)
                 IfEq(LVar1, 1)
                     Set(LFlag0, TRUE)
                     BreakLoop
@@ -556,7 +556,7 @@ EvtScript N(EVS_Attack_Leech) = {
             EndIf
             Set(LFlag0, FALSE)
             Loop(2)
-                Call(GetActionSuccessCopy, LVar1)
+                Call(GetMashActionQuality, LVar1)
                 IfEq(LVar1, 1)
                     Set(LFlag0, TRUE)
                     BreakLoop
@@ -605,7 +605,7 @@ EvtScript N(EVS_Attack_Leech) = {
             EndIf
             Set(LFlag0, FALSE)
             Loop(35)
-                Call(GetActionSuccessCopy, LVar1)
+                Call(GetMashActionQuality, LVar1)
                 IfEq(LVar1, 1)
                     Set(LFlag0, TRUE)
                     BreakLoop

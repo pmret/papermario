@@ -44,7 +44,7 @@ EvtScript N(EVS_UseMove_Impl) = {
         CaseEq(2)
             ExecWait(N(EVS_UseUltraHammer))
     EndSwitch
-    Call(GetActionSuccessCopy, LVar0)
+    Call(GetMashActionQuality, LVar0) // incorrect use, should use GetSmashActionQuality
     Switch(LVar0)
         CaseGt(0)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -92,7 +92,7 @@ EvtScript N(EVS_UseMove_Impl) = {
         ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -266,7 +266,7 @@ EvtScript N(EVS_UseBerserker_Impl) = {
         ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
-    Call(GetActionSuccessCopy, LVar0)
+    Call(GetMashActionQuality, LVar0) // incorrect use, should use GetSmashActionQuality
     Switch(LVar0)
         CaseGt(0)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -314,7 +314,7 @@ EvtScript N(EVS_UseBerserker_Impl) = {
         ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)

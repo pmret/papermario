@@ -11,7 +11,7 @@ API_CALLABLE(N(MakeGreenImpactFX)) {
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
     s32 z = evt_get_variable(script, *args++);
-    b32 success = script->varTable[10]; // value from GetPlayerActionSuccess
+    b32 success = script->varTable[10]; // value from GetPlayerActionQuality
 
     if (!success) {
         fx_green_impact(TRUE, x + 30, y + 25, z, 45.0f);
@@ -22,7 +22,7 @@ API_CALLABLE(N(MakeGreenImpactFX)) {
     return ApiStatus_DONE2;
 }
 
-extern EvtScript N(UseMove_Impl);
+extern EvtScript N(EVS_UseMove_Impl);
 
 EvtScript N(EVS_UseMove) = {
     Call(ShowActionHud, TRUE)
@@ -30,26 +30,26 @@ EvtScript N(EVS_UseMove) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
-            Set(LVarD, 50)
-            Set(LVarE, 1)
-            Set(LVarF, 2)
-            ExecWait(N(UseMove_Impl))
+            Set(LVarD, 50) // duration
+            Set(LVarE, BASIC_HAMMER_DMG_BAD)
+            Set(LVarF, BASIC_HAMMER_DMG_GOOD)
+            ExecWait(N(EVS_UseMove_Impl))
         CaseEq(1)
-            Set(LVarD, 50)
-            Set(LVarE, 2)
-            Set(LVarF, 4)
-            ExecWait(N(UseMove_Impl))
+            Set(LVarD, 50) // duration
+            Set(LVarE, SUPER_HAMMER_DMG_BAD)
+            Set(LVarF, SUPER_HAMMER_DMG_GOOD)
+            ExecWait(N(EVS_UseMove_Impl))
         CaseEq(2)
-            Set(LVarD, 50)
-            Set(LVarE, 3)
-            Set(LVarF, 6)
-            ExecWait(N(UseMove_Impl))
+            Set(LVarD, 50) // duration
+            Set(LVarE, ULTRA_HAMMER_DMG_BAD)
+            Set(LVarF, ULTRA_HAMMER_DMG_GOOD)
+            ExecWait(N(EVS_UseMove_Impl))
     EndSwitch
     Return
     End
 };
 
-EvtScript N(UseMove_Impl) = {
+EvtScript N(EVS_UseMove_Impl) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
@@ -60,7 +60,7 @@ EvtScript N(UseMove_Impl) = {
             ExecWait(N(EVS_UseUltraHammer))
     EndSwitch
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_IGNORE_DEFENSE, 25, 0, LVar9, 16)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -101,7 +101,7 @@ EvtScript N(UseMove_Impl) = {
                     EndThread
             EndSwitch
     EndSwitch
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     IfGt(LVar0, FALSE)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
         Call(MoveBattleCamOver, 5)
@@ -123,10 +123,10 @@ EvtScript N(UseMove_Impl) = {
         ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
-    Call(GetPlayerActionSuccess, LVarA)
+    Call(GetPlayerActionQuality, LVarA)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Call(N(MakeGreenImpactFX), LVar0, LVar1, LVar2)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENTS_HAMMER, 0, LVarF, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)

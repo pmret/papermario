@@ -1382,21 +1382,21 @@ API_CALLABLE(DeletePartner) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(GetPartnerActionSuccess) {
-    BattleStatus* battleStatus = &gBattleStatus;
-    s32 var = *script->ptrReadPos;
-    s32 actionSuccess = battleStatus->actionSuccess;
-    s32 outVal = 0;
+API_CALLABLE(GetPartnerActionQuality) {
+    Bytecode* args = script->ptrReadPos;
+    s32 outVar = *args++;
+    s32 actionQuality = gBattleStatus.actionQuality;
+    s32 quality = 0;
 
-    if (actionSuccess < 0) {
-        actionSuccess = 0;
+    if (actionQuality < 0) {
+        actionQuality = 0;
     }
 
-    if (actionSuccess > outVal) {
-        outVal = actionSuccess;
+    if (quality < actionQuality) {
+        quality = actionQuality;
     }
 
-    evt_set_variable(script, var, outVal);
+    evt_set_variable(script, outVar, quality);
     return ApiStatus_DONE2;
 }
 

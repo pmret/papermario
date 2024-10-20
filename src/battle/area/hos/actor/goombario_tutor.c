@@ -506,7 +506,7 @@ EvtScript N(EVS_ManageTutorial) = {
     Call(SetActionCommandMode, AC_MODE_LEARNED)
     Call(WaitForState, BATTLE_STATE_BEGIN_PARTNER_TURN)
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    Call(GetActionResult, LVar0)
+    Call(GetJumpActionQuality, LVar0)
     Switch(LVar0)
         CaseEq(ACTION_RESULT_EARLY)
             Call(ActorSpeak, MSG_HOS_002A, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)

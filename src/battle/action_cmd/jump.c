@@ -15,12 +15,12 @@ API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     s32 hid;
 
-    gBattleStatus.maxActionSuccess = 1;
+    gBattleStatus.maxActionQuality = 1;
     gBattleStatus.actionCmdDifficultyTable = actionCmdTableJump;
     gBattleStatus.actionResult = ACTION_RESULT_FAIL;
 
     if (gBattleStatus.actionCommandMode == AC_MODE_NOT_LEARNED) {
-        gBattleStatus.actionSuccess = 0;
+        gBattleStatus.actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -55,7 +55,7 @@ API_CALLABLE(N(start)) {
     s32 hid;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -64,7 +64,7 @@ API_CALLABLE(N(start)) {
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
     acs->wrongButtonPressed = FALSE;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
 
     hid = acs->hudElements[HIDX_BUTTON];
     acs->hudPosX = 50;
@@ -143,7 +143,7 @@ void N(update)(void) {
             }
 
             acs->stateTimer = battleStatus->actionCmdDifficultyTable[acs->difficulty];
-            battleStatus->actionSuccess = AC_ACTION_FAILED;
+            battleStatus->actionQuality = AC_QUALITY_FAILED;
             acs->state = AC_STATE_ACTIVE;
 
             // fallthrough
@@ -156,7 +156,7 @@ void N(update)(void) {
                     break;
                 }
             } else {
-                if (battleStatus->actionSuccess >= 0) {
+                if (battleStatus->actionQuality >= 0) {
                     hid = acs->hudElements[HIDX_BUTTON];
                     if (acs->showHud) {
                         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
@@ -165,16 +165,16 @@ void N(update)(void) {
             }
 
             // valid input is allowed during this state
-            if (battleStatus->actionSuccess < 0) {
+            if (battleStatus->actionQuality < 0) {
                 if (((battleStatus->curButtonsPressed & BUTTON_A) && !acs->wrongButtonPressed) || acs->autoSucceed) {
-                    battleStatus->actionSuccess = 1;
+                    battleStatus->actionQuality = 1;
                     battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                     gBattleStatus.flags1 |= BS_FLAGS1_2000;
                 }
             }
 
             if (acs->stateTimer == 0) {
-                if (battleStatus->actionSuccess == 1) {
+                if (battleStatus->actionQuality == 1) {
                     increment_action_command_success_count();
                 }
                 if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL) {

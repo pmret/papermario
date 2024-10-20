@@ -56,19 +56,19 @@ EvtScript N(EVS_UseMove1) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
-            Set(LVarD, 65)
-            Set(LVarE, 1)
-            Set(LVarF, 2)
+            Set(LVarD, 65) // duration
+            Set(LVarE, BASIC_HAMMER_DMG_BAD)
+            Set(LVarF, BASIC_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove1_Impl))
         CaseEq(1)
-            Set(LVarD, 65)
-            Set(LVarE, 2)
-            Set(LVarF, 4)
+            Set(LVarD, 65) // duration
+            Set(LVarE, SUPER_HAMMER_DMG_BAD)
+            Set(LVarF, SUPER_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove1_Impl))
         CaseEq(2)
-            Set(LVarD, 65)
-            Set(LVarE, 4)
-            Set(LVarF, 6)
+            Set(LVarD, 65) // duration
+            Set(LVarE, ULTRA_HAMMER_DMG_BAD + 1)
+            Set(LVarF, ULTRA_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove1_Impl))
     EndSwitch
     Return
@@ -86,7 +86,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
             ExecWait(N(EVS_UseBasicHammer))
     EndSwitch
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVar9, 16)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -134,7 +134,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
         Return
     EndIf
     Set(LFlag0, FALSE)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)

@@ -63,7 +63,7 @@ enum ActionCommandModes {
     AC_MODE_TUTORIAL_WAIT_INPUT     = 3,
 };
 
-#define AC_ACTION_FAILED -1
+#define AC_QUALITY_FAILED -1
 
 // mash meter has 100 units for each 1%
 #define ONE_PCT_MASH    100
@@ -205,7 +205,7 @@ s32 check_block_input(s32 buttonMask);
 API_CALLABLE(LoadActionCommand);
 API_CALLABLE(SetActionDifficultyTable);
 API_CALLABLE(SetupMashMeter);
-API_CALLABLE(GetActionSuccess);
+API_CALLABLE(GetSmashActionQuality);
 API_CALLABLE(SetActionSuccess);
 API_CALLABLE(SetActionCommandMode);
 API_CALLABLE(GetActionCommandMode);
@@ -216,8 +216,8 @@ API_CALLABLE(func_802693F0);
 API_CALLABLE(InterruptActionCommand);
 API_CALLABLE(InterruptLeechActionCommand);
 API_CALLABLE(ShowActionHud);
-API_CALLABLE(GetActionSuccessCopy);
-API_CALLABLE(GetActionResult);
+API_CALLABLE(GetMashActionQuality);
+API_CALLABLE(GetJumpActionQuality);
 API_CALLABLE(SetActionResult);
 API_CALLABLE(GetBlockResult);
 API_CALLABLE(GetActionProgress);

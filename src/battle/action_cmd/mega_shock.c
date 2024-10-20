@@ -1,4 +1,6 @@
 #include "common.h"
+
+
 #include "audio/public.h"
 #include "battle/action_cmd.h"
 
@@ -15,7 +17,7 @@ enum {
 };
 
 // how much to add to the meter per input
-#define METER_FILL_TICK 650
+#define METER_FILL_TICK 780
 
 s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
 
@@ -26,10 +28,10 @@ API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
     s32 hid;
 
-    battleStatus->maxActionSuccess = 5;
+    battleStatus->maxActionQuality = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTableMegaShock;
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -78,7 +80,7 @@ API_CALLABLE(N(start)) {
     Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -93,7 +95,7 @@ API_CALLABLE(N(start)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = AC_STATE_START;
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
@@ -210,7 +212,7 @@ void N(update)(void) {
                 if (acs->statusChance != 0) {
                     s32 amt;
 
-                    amt = SCALE_BY_PCT(780, acs->statusChance);
+                    amt = SCALE_BY_PCT(METER_FILL_TICK, acs->statusChance);
                     amt = SCALE_BY_PCT(amt, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
 
                     // Perplexing reuse of buttonsPushed here, but it fixes register allocation. Likely another
@@ -256,39 +258,42 @@ void N(update)(void) {
             battleStatus->actionProgress = acs->barFillLevel / ONE_PCT_MASH;
             sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionProgress * 12);
 
-            if (acs->stateTimer == 0) {
-                // Again, reusing buttonsPushed specifically for reg-alloc. See above.
-                //
-                // TODO: Find a way to avoid reusing buttonsPushed.
-                buttonsPushed = acs->barFillLevel;
-                if (acs->statusChance == 0) {
-                    buttonsPushed = 0;
-                }
-
-                if (buttonsPushed == 0) {
-                    battleStatus->actionSuccess = AC_ACTION_FAILED;
-                } else {
-                    battleStatus->actionSuccess = buttonsPushed / ONE_PCT_MASH;
-                }
-
-                cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
-                if (battleStatus->actionProgress <= cutoff / 2) {
-                    battleStatus->actionResult = ACTION_RESULT_MINUS_4;
-                } else {
-                    battleStatus->actionResult = ACTION_RESULT_SUCCESS;
-                }
-
-                if (battleStatus->actionSuccess == 100) {
-                    increment_action_command_success_count();
-                }
-
-                sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
-                btl_set_popup_duration(POPUP_MSG_OFF);
-                acs->stateTimer = 5;
-                acs->state = AC_STATE_DISPOSE;
-            } else {
+            if (acs->stateTimer != 0) {
                 acs->stateTimer--;
+                break;
             }
+
+            // Again, reusing buttonsPushed specifically for reg-alloc. See above.
+            //
+            // TODO: Find a way to avoid reusing buttonsPushed.
+            buttonsPushed = acs->barFillLevel;
+            if (acs->statusChance == 0) {
+                buttonsPushed = 0;
+            }
+
+            if (buttonsPushed == 0) {
+                battleStatus->actionQuality = AC_QUALITY_FAILED;
+            } else {
+                battleStatus->actionQuality = buttonsPushed / ONE_PCT_MASH;
+            }
+
+            // a good result is filling the bar over halfway to the second-highest interval
+            cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
+            if (battleStatus->actionProgress <= cutoff / 2) {
+                battleStatus->actionResult = ACTION_RESULT_METER_BELOW_HALF;
+            } else {
+                battleStatus->actionResult = ACTION_RESULT_SUCCESS;
+            }
+
+            if (battleStatus->actionQuality == 100) {
+                // only count 100% fill as success for this action command
+                increment_action_command_success_count();
+            }
+
+            sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
+            btl_set_popup_duration(POPUP_MSG_OFF);
+            acs->stateTimer = 5;
+            acs->state = AC_STATE_DISPOSE;
             break;
         case AC_STATE_DISPOSE:
             if (acs->statusChance == 0) {
@@ -300,9 +305,9 @@ void N(update)(void) {
 
             if (acs->stateTimer != 0) {
                 acs->stateTimer--;
-            } else {
-                action_command_free();
+                break;
             }
+            action_command_free();
             break;
     }
 }

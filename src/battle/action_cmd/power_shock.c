@@ -25,7 +25,12 @@ enum {
     HIDX_OK             = 4,
 };
 
+// how much to add to the meter per input
+#define METER_FILL_TICK 850
+
 s32 N(DrainRateTable)[] = { 0, 25, 50, 75, 75 };
+
+#define GET_DRAIN_RATE(pct) (N(DrainRateTable)[((pct) / (ONE_PCT_MASH / 5))])
 
 BSS s32 N(HasStarted);
 
@@ -35,11 +40,11 @@ API_CALLABLE(N(init)) {
     s32 hid;
     s32 offsetX;
 
-    battleStatus->maxActionSuccess = 100;
+    battleStatus->maxActionQuality = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTablePowerShock;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -93,7 +98,7 @@ API_CALLABLE(N(start)) {
     Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
-        battleStatus->actionSuccess = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -108,7 +113,7 @@ API_CALLABLE(N(start)) {
     acs->wrongButtonPressed = FALSE;
     acs->barFillLevel = 0;
     acs->barFillWidth = 0;
-    battleStatus->actionSuccess = 0;
+    battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     acs->state = AC_STATE_START;
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
@@ -185,7 +190,7 @@ void N(update)(void) {
             if (!acs->isBarFilled) {
                 if (acs->statusChance != 0) {
                     cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
-                    acs->barFillLevel -= N(DrainRateTable)[acs->barFillLevel / cutoff / 20];
+                    acs->barFillLevel -= GET_DRAIN_RATE(acs->barFillLevel / cutoff);
                     if (acs->barFillLevel < 0) {
                         acs->barFillLevel = 0;
                     }
@@ -201,7 +206,7 @@ void N(update)(void) {
             if (battleStatus->curButtonsPressed & BUTTON_A) {
                 if (acs->statusChance != 0) {
                     s32 difficultyPct = battleStatus->actionCmdDifficultyTable[acs->difficulty];
-                    amt = SCALE_BY_PCT(SCALE_BY_PCT(850, difficultyPct), acs->statusChance);
+                    amt = SCALE_BY_PCT(SCALE_BY_PCT(METER_FILL_TICK, difficultyPct), acs->statusChance);
 
                     acs->barFillLevel += amt;
                 } else {
@@ -236,21 +241,22 @@ void N(update)(void) {
 
             battleStatus->actionProgress = amt / ONE_PCT_MASH;
             if (amt == 0) {
-                battleStatus->actionSuccess = AC_ACTION_FAILED;
+                battleStatus->actionQuality = AC_QUALITY_FAILED;
             } else if (battleStatus->actionProgress >= acs->escapeThreshold) {
-                battleStatus->actionSuccess = 1;
+                battleStatus->actionQuality = 1;
             } else {
-                battleStatus->actionSuccess = 0;
+                battleStatus->actionQuality = 0;
             }
 
+            // a good result is filling the bar over halfway to the second-highest interval
             cutoff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
-            if (cutoff / 2 < battleStatus->actionProgress) {
-                battleStatus->actionResult = ACTION_RESULT_SUCCESS;
+            if (battleStatus->actionProgress <= cutoff / 2) {
+                battleStatus->actionResult = ACTION_RESULT_METER_BELOW_HALF;
             } else {
-                battleStatus->actionResult = ACTION_RESULT_MINUS_4;
+                battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             }
 
-            if (battleStatus->actionSuccess == 1) {
+            if (battleStatus->actionQuality == 1) {
                 increment_action_command_success_count();
             }
 
