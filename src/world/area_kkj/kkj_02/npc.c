@@ -66,5 +66,3 @@ NpcGroupList N(DefaultNPCs) = {
     NPC_GROUP(N(NpcData_Toads)),
     {}
 };
-
-

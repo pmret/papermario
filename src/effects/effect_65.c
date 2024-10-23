@@ -29,7 +29,7 @@ EffectInstance* effect_65_main(
 
     bp.init = effect_65_init;
     bp.update = effect_65_update;
-    bp.renderWorld = effect_65_render;
+    bp.renderScene = effect_65_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_65;
@@ -248,7 +248,7 @@ void effect_65_appendGfx(void* effect) {
     scale = data->scale;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(mtx, 0.0f, 0.0f, 0.0f);
     guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
@@ -268,7 +268,7 @@ void effect_65_appendGfx(void* effect) {
     // reserve space in the display list for the vertices
     vtxBuffer = (Vtx_t*)gMainGfxPos;
     gMainGfxPos += VTX_BUF_SIZE;
-    
+
     firstPointIdx = -1;
     baseTexOffset = (lifeTime & 0x3F) << 5;
 

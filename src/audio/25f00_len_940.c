@@ -305,7 +305,7 @@ void nuAuCleanDMABuffers(void) {
 
         nuAuDmaNext = 0;
         frameCounter = &nuAuFrameCounter;
-        *frameCounter += 1;
+        (*frameCounter)++;
     } while (0);
 }
 

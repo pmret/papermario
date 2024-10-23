@@ -134,7 +134,6 @@ EvtScript N(EVS_NpcIdle_Koopatrol_02) = {
     End
 };
 
-
 EvtScript N(EVS_NpcInteract_Koopatrol_01) = {
     Call(DisablePlayerInput, TRUE)
     Call(GetSelfVar, 0, LVar0)

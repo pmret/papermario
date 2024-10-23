@@ -49,5 +49,3 @@ Stage NAMESPACE = {
     .preBattle = &N(EVS_PreBattle),
     .postBattle = &N(EVS_PostBattle),
 };
-
-

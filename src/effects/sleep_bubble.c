@@ -28,7 +28,7 @@ void sleep_bubble_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
     bp.unk_00 = 0;
     bp.init = sleep_bubble_init;
     bp.update = sleep_bubble_update;
-    bp.renderWorld = sleep_bubble_render;
+    bp.renderScene = sleep_bubble_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SLEEP_BUBBLE;
 
@@ -131,7 +131,7 @@ void sleep_bubble_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     timeLeft = data->timeLeft;
     if (timeLeft == 0) {

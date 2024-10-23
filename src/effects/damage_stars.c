@@ -86,7 +86,7 @@ void damage_stars_main(s32 type, f32 x, f32 y, f32 z, f32 rotAxisX, f32 rotAxisY
         bpPtr->unk_00 = 0;
         bpPtr->init = damage_stars_init;
         bpPtr->update = damage_stars_update;
-        bpPtr->renderWorld = damage_stars_render;
+        bpPtr->renderScene = damage_stars_render;
         bpPtr->renderUI = NULL;
         bpPtr->effectID = EFFECT_DAMAGE_STARS;
 
@@ -241,7 +241,7 @@ void damage_stars_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_090004C0_343500);
 
     baseIdx = (part->lifetime - 1) * 3;

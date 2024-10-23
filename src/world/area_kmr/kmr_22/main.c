@@ -11,7 +11,6 @@ BSS s32 N(ChapterEffectTime);
 #define CHUNK_SIZE (10)
 #endif
 
-
 s16 N(AnimTextOffsets)[CHUNK_SIZE * 2] = {
 #if VERSION_PAL
     310, 270, 240, 210,

@@ -34,7 +34,7 @@ void blast_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
 
     bp.init = blast_init;
     bp.update = blast_update;
-    bp.renderWorld = blast_render;
+    bp.renderScene = blast_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_BLAST;
@@ -92,7 +92,7 @@ void blast_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
-void blast_appendGfx(void *effect) {
+void blast_appendGfx(void* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
     Matrix4f sp98;
@@ -103,7 +103,7 @@ void blast_appendGfx(void *effect) {
     s32 envAlpha = (data->unk_20 - unk_20) * t;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_09001300_37ECD0);
     gSPDisplayList(gMainGfxPos++, D_E007C510[unk_20]);
 

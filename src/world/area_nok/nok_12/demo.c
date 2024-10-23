@@ -157,7 +157,6 @@ API_CALLABLE(N(SetupDemoScene1)) {
     return ApiStatus_BLOCK;
 }
 
-
 EvtScript N(EVS_PlayDemoScene1) = {
     Call(N(SetupDemoScene1))
     Set(GF_DemoSceneDone, FALSE)

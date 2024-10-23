@@ -161,19 +161,19 @@ extern Gfx D_8024B708[];
 
 BSS s32 filemenu_iterFileIdx;
 BSS s32 filemenu_pressedButtons;
-BSS s32 filemenu_cursorHudElem;
+BSS HudElemID filemenu_cursorHID;
 BSS s32 filemenu_heldButtons;
 BSS s8 filemenu_filename_pos;
 BSS s32 filemenu_loadedFileIdx;
 BSS s8 filemenu_currentMenu;
 BSS s32 filemenu_8024C09C;
-BSS s32 filemenu_cursorHudElemID[1];
+BSS HudElemID filemenu_cursorHIDs[1];
 BSS s32 filemenu_8024C0A4[3];
-BSS s32 filemenu_hudElemIDs[20];
-BSS s32 filemenu_createfile_hudElems[4];
+BSS HudElemID filemenu_mainHIDs[20];
+BSS HudElemID filemenu_createfile_HIDs[4];
 
 #if VERSION_PAL
-BSS s32 D_802517D0[1];
+BSS HudElemID PauseLanguageHIDs[1];
 BSS s32 D_802517D4[1];
 BSS u16 D_802517E0[2][0x400] ALIGNED(16);
 #endif
@@ -888,9 +888,9 @@ void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
         if (temp_a1 > 255) {
             temp_a1 = 255;
         }
-        hud_element_set_alpha(filemenu_cursorHudElemID[0], temp_a1);
-        hud_element_set_render_pos(filemenu_cursorHudElemID[0], baseX + filemenu_cursor_posX, baseY + filemenu_cursor_posY);
-        hud_element_draw_without_clipping(filemenu_cursorHudElemID[0]);
+        hud_element_set_alpha(filemenu_cursorHIDs[0], temp_a1);
+        hud_element_set_render_pos(filemenu_cursorHIDs[0], baseX + filemenu_cursor_posX, baseY + filemenu_cursor_posY);
+        hud_element_draw_without_clipping(filemenu_cursorHIDs[0]);
     }
 }
 
@@ -1023,12 +1023,12 @@ void filemenu_init(s32 arg0) {
 
     DMA_COPY_SEGMENT(ui_images_filemenu_pause);
 
-    for (i = 0; i < ARRAY_COUNT(filemenu_cursorHudElemID); i++) {
-        filemenu_cursorHudElemID[i] = hud_element_create(filemenu_cursor_hudElemScripts[i]);
-        hud_element_set_flags(filemenu_cursorHudElemID[i], HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
+    for (i = 0; i < ARRAY_COUNT(filemenu_cursorHIDs); i++) {
+        filemenu_cursorHIDs[i] = hud_element_create(filemenu_cursor_hudElemScripts[i]);
+        hud_element_set_flags(filemenu_cursorHIDs[i], HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
     }
 
-    filemenu_cursorHudElem = filemenu_cursorHudElemID[0];
+    filemenu_cursorHID = filemenu_cursorHIDs[0];
     if (arg0 == 0) {
         filemenu_common_windowBPs[0].style.customStyle->background.imgData = NULL; // ???
     }
@@ -1118,8 +1118,8 @@ void filemenu_cleanup(void) {
     MenuPanel** panelIt;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(filemenu_cursorHudElemID); i++) {
-        hud_element_free(filemenu_cursorHudElemID[i]);
+    for (i = 0; i < ARRAY_COUNT(filemenu_cursorHIDs); i++) {
+        hud_element_free(filemenu_cursorHIDs[i]);
     }
 
     panelIt = filemenu_menus;

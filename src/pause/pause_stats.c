@@ -95,7 +95,6 @@ s8 gPauseStatsGridData[] = {
 #define COLLECTABLES_X 125
 #endif
 
-
 StatsEntryData gStatsMenuEntries[] = {
     { .cursorX =   9, .cursorY =  20, .baseMsgID = PAUSE_MSG_TIP_CONTROLS },
     { .cursorX =  17, .cursorY =  55, .baseMsgID = PAUSE_MSG_TIP_HP },
@@ -146,6 +145,7 @@ MenuWindowBP gStatsMenuWindowBPs[] = {
         .style = { .customStyle = &gPauseWS_12 }
     }
 };
+
 MenuPanel gPausePanelStats = {
     .initialized = FALSE,
     .col = 0,
@@ -161,7 +161,6 @@ MenuPanel gPausePanelStats = {
     .fpUpdate = NULL,
     .fpCleanup = &pause_stats_cleanup
 };
-
 
 #if VERSION_PAL
 INCLUDE_ASM(void, "pause/pause_stats", pause_stats_draw_contents);
@@ -436,7 +435,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         powIncIdx++;
 
         powIncIdx = 0;
-        powBarIdx += 1;
+        powBarIdx++;
         if (curIncrement >= powIncrements) {
             break;
         }
@@ -602,10 +601,8 @@ void pause_stats_init(MenuPanel* panel) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPauseStatsIconIDs); i++) {
-        s32 iconID = hud_element_create(gStatsMenuElements[i]);
-
-        gPauseStatsIconIDs[i] = iconID;
-        hud_element_set_flags(iconID, HUD_ELEMENT_FLAG_80);
+        gPauseStatsIconIDs[i] = hud_element_create(gStatsMenuElements[i]);
+        hud_element_set_flags(gPauseStatsIconIDs[i], HUD_ELEMENT_FLAG_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gStatsMenuWindowBPs); i++) {

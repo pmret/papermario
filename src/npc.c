@@ -10,7 +10,7 @@ s16 gNpcCount;
 static NpcList gWorldNpcList;
 static NpcList gBattleNpcList;
 static NpcList* gCurrentNpcListPtr;
-static b8 gNpcPlayerCollisionsEnabled;
+static s8 gNpcPlayerCollisionsEnabled;
 
 #define PAL_ANIM_END 0xFF
 
@@ -902,7 +902,6 @@ void appendGfx_npc(void* data) {
             guRotateRPYF(mtx2, npc->rot.x, npc->rot.y, npc->rot.z);
             guMtxCatF(mtx2, mtx1, mtx1);
         }
-
 
         if (npc->scale.x * SPRITE_WORLD_SCALE_D != 1.0f
             || (npc->scale.y * npc->verticalStretch) * SPRITE_WORLD_SCALE_D != 1.0f
@@ -2467,7 +2466,7 @@ void init_encounter_status(void) {
 
     func_80045AC0();
     gEncounterState = ENCOUNTER_STATE_NONE;
-    create_worker_world(NULL, npc_render_worker_do_nothing);
+    create_worker_scene(NULL, npc_render_worker_do_nothing);
 }
 
 void clear_encounter_status(void) {
@@ -2506,7 +2505,7 @@ void clear_encounter_status(void) {
 
     func_80045AC0();
     gEncounterState = ENCOUNTER_STATE_NONE;
-    create_worker_world(NULL, npc_render_worker_do_nothing);
+    create_worker_scene(NULL, npc_render_worker_do_nothing);
 }
 
 void func_8003E50C(void) {

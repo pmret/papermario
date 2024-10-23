@@ -272,7 +272,7 @@ void reset_model_animators(void) {
         (*gCurrentMeshAnimationListPtr)[i]->animModelID = -1;
     }
 
-    create_worker_world(update_animated_models, render_animated_models);
+    create_worker_scene(update_animated_models, render_animated_models);
 }
 
 void init_model_animators(void) {

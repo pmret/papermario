@@ -20,7 +20,7 @@ EffectInstance* squirt_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f3
 
     bp.init = squirt_init;
     bp.update = squirt_update;
-    bp.renderWorld = squirt_render;
+    bp.renderScene = squirt_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SQUIRT;
@@ -173,7 +173,7 @@ void squirt_appendGfx(void* effect) {
     f32 theta;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp10, 0.0f, 0.0f, 0.0f);
     guScaleF(sp50, 0.05f, 0.05f, 0.05f);

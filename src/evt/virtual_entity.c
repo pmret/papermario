@@ -401,7 +401,6 @@ API_CALLABLE(VirtualEntityJumpTo) {
         yTemp = virtualEntity->goalPos.y - yTemp;
         goalPosZ = virtualEntity->goalPos.z;
 
-
         virtualEntity->moveTime = moveTime;
         virtualEntity->moveAngle = atan2(xTemp, zTemp, goalPosX, goalPosZ);
         virtualEntity->moveDist = dist2D(xTemp, zTemp, goalPosX, goalPosZ);
@@ -666,7 +665,7 @@ void clear_virtual_entity_list(void) {
         (*gCurrentVirtualEntityListPtr)[i]->entityModelIndex = -1;
     }
 
-    create_worker_world(virtual_entity_list_update, virtual_entity_list_render_world);
+    create_worker_scene(virtual_entity_list_update, virtual_entity_list_render_world);
     create_worker_backUI(NULL, virtual_entity_list_render_UI);
 }
 

@@ -67,7 +67,7 @@ EffectInstance* tattle_window_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, s32 
 
     bp.init = tattle_window_init;
     bp.update = tattle_window_update;
-    bp.renderWorld = tattle_window_render;
+    bp.renderScene = tattle_window_render;
     bp.renderUI = func_E00D8264;
     bp.unk_00 = 0;
     bp.effectID = EFFECT_TATTLE_WINDOW;
@@ -226,7 +226,7 @@ void func_E00D8630(EffectInstance* effect) {
     s32 flags;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     if (data->scale == 1.0f && data->rot.x == 0.0f && data->rot.y == 0.0f && data->rot.z == 0.0f) {
         flags = 0;

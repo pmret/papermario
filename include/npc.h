@@ -385,7 +385,7 @@ typedef struct EncounterStatus {
     /* 0x008 */ s8 unk_08;
     /* 0x009 */ s8 battleOutcome; // see enum: EncounterOutcomes
     /* 0x00A */ s8 battleTriggerCooldown; ///< set to 15 after victory, 45 after fleeing
-    /* 0x00B */ b8 hasMerleeCoinBonus; /* triple coins when TRUE */
+    /* 0x00B */ s8 hasMerleeCoinBonus; /* triple coins when TRUE */
     /* 0x00C */ u8 damageTaken; /* valid after battle */
     /* 0x00D */ char unk_0D;
     /* 0x00E */ s16 coinsEarned; /* valid after battle */
@@ -424,7 +424,7 @@ extern EncounterStatus gCurrentEncounter;
 
 #endif
 
-b32 basic_ai_check_player_dist(EnemyDetectVolume* arg0, Enemy* arg1, f32 arg2, f32 arg3, b8 arg4);
+b32 basic_ai_check_player_dist(EnemyDetectVolume* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
 
 /// The default Npc::onUpdate and Npc::onRender callback.
 void STUB_npc_callback(Npc*);

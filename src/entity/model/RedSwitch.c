@@ -47,7 +47,6 @@ Mtx Entity_RedSwitch_mtxRedBubble = RDP_MATRIX(
     0.000000, 0.000000, 0.000000,  1.000000
 );
 
-
 Gfx Entity_RedSwitch_RenderRedBubble[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),

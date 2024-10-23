@@ -55,7 +55,7 @@ void flower_trail_main(s32 triggeredByNpc, f32 posX, f32 posY, f32 posZ, f32 ang
 
     bp.init = flower_trail_init;
     bp.update = flower_trail_update;
-    bp.renderWorld = flower_trail_render;
+    bp.renderScene = flower_trail_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FLOWER_TRAIL;
@@ -165,7 +165,7 @@ void flower_trail_appendGfx(void* argEffect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->shared->graphics));
 
     for (i = 0; i < effect->numParts; i++, part++) {
         if (part->alive) {

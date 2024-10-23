@@ -24,7 +24,7 @@ API_CALLABLE(N(CalcJumpReboundTime)) {
         script->varTable[0] = 20;
     }
 
-    if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED) {
+    if (battleStatus->actionCommandMode != AC_MODE_NOT_LEARNED) {
         if (script->varTable[0] < 6) {
             script->varTable[0] = 6;
         }
@@ -311,7 +311,7 @@ EvtScript N(EVS_JumpSupport_ApproachAndJump) = {
     Call(action_command_jump_init)
     ExecWait(N(EVS_JumpSupport_Approach))
     ExecWait(N(EVS_JumpSupport_CalcJumpTime))
-    Call(action_command_jump_start, LVarA, 3)
+    Call(action_command_jump_start, LVarA, AC_DIFFICULTY_3)
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
@@ -329,13 +329,13 @@ EvtScript N(EVS_JumpSupport_UnusedSuper) = {
     Set(LVarB, LVarA)
     Add(LVarB, 14)
     Add(LVarB, -3)
-    Call(action_command_jump_start, LVarB, 3)
+    Call(action_command_jump_start, LVarB, AC_DIFFICULTY_3)
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_SUPER_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
     Call(PlayerSuperJumpToGoal, LVarA, PLAYER_SUPER_JUMP_0)
     Wait(7)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             Call(PlayerSuperJumpToGoal, 3, PLAYER_SUPER_JUMP_1)
@@ -355,14 +355,14 @@ EvtScript N(EVS_JumpSupport_UnusedUltra) = {
     Set(LVarB, LVarA)
     Sub(LVarB, 4)
     Add(LVarB, -3)
-    Call(action_command_jump_start, LVarB, 3)
+    Call(action_command_jump_start, LVarB, AC_DIFFICULTY_3)
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_ULTRA_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_MarioW2_Carried, ANIM_MarioB1_Stomp)
     Call(PlayerUltraJumpToGoal, LVarA, PLAYER_ULTRA_JUMP_0)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Set(LVar9, 0)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     IfGt(LVar0, 0)
         Set(LVar9, 1)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Stomp)
@@ -372,14 +372,14 @@ EvtScript N(EVS_JumpSupport_UnusedUltra) = {
         Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
         Call(LoadActionCommand, ACTION_COMMAND_JUMP)
         Call(action_command_jump_init)
-        Call(action_command_jump_start, 13, 3)
+        Call(action_command_jump_start, 13, AC_DIFFICULTY_3)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_UNUSED_ULTRA_JUMP)
         Call(PlayerUltraJumpToGoal, 15, PLAYER_ULTRA_JUMP_2)
         Goto(10)
     Else
         Call(LoadActionCommand, ACTION_COMMAND_JUMP)
         Call(action_command_jump_init)
-        Call(action_command_jump_start, 2, 3)
+        Call(action_command_jump_start, 2, AC_DIFFICULTY_3)
         Call(PlayerUltraJumpToGoal, 4, PLAYER_ULTRA_JUMP_1)
         Goto(10)
     EndIf

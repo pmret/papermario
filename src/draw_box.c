@@ -537,7 +537,6 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
                 masks = INTEGER_LOG2(cornerWidth);
                 maskt = INTEGER_LOG2(cornerHeight);
 
-
                 switch (cornersBitDepth) {
                     case G_IM_SIZ_4b:
                         gDPLoadMultiTile_4b(gMainGfxPos++, cornersImage, tmem, 1, cornersFmt, cornerWidth, cornerHeight, 0, 0, cornerWidth - 1, cornerHeight - 1, 0, G_TX_CLAMP, G_TX_CLAMP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
@@ -742,7 +741,6 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
                 quads[3].v.ob[0] = (-width / 2) + width;
                 quads[3].v.ob[1] = height / 2;
                 quads[3].v.ob[2] = 0;
-
 
                 quads[0].v.tc[0] = 0;
                 quads[0].v.tc[1] = 0;

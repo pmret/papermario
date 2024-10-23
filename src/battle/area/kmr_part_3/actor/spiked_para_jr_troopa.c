@@ -560,12 +560,12 @@ API_CALLABLE(N(ShowPointerHudElem)) {
     Bytecode* args = script->ptrReadPos;
     f32 posX = evt_get_float_variable(script, *args++);
     f32 posY = evt_get_float_variable(script, *args++);
-    s32 iconIdx = hud_element_create(&HES_AnimatedHandPointer);
+    HudElemID hid = hud_element_create(&HES_AnimatedHandPointer);
 
-    hud_element_set_render_pos(iconIdx, posX, posY);
-    hud_element_set_scale(iconIdx, 1.5f);
-    hud_element_clear_flags(iconIdx, HUD_ELEMENT_FLAG_200000 | HUD_ELEMENT_FLAG_DISABLED);
-    evt_set_variable(script, *args++, iconIdx);
+    hud_element_set_render_pos(hid, posX, posY);
+    hud_element_set_scale(hid, 1.5f);
+    hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_200000 | HUD_ELEMENT_FLAG_DISABLED);
+    evt_set_variable(script, *args++, hid);
     load_tattle_flags(ACTOR_TYPE_JR_TROOPA_4);
     return ApiStatus_DONE2;
 }

@@ -45,7 +45,7 @@ EffectInstance* partner_buff_main(s32 useRandomValues, f32 arg1, f32 arg2, f32 a
     bp.unk_00 = 0;
     bp.init = partner_buff_init;
     bp.update = partner_buff_update;
-    bp.renderWorld = partner_buff_render;
+    bp.renderScene = partner_buff_render;
     bp.renderUI = func_E011A3A0;
     bp.effectID = EFFECT_PARTNER_BUFF;
 
@@ -222,7 +222,7 @@ void func_E011A700(EffectInstance* effect) {
 
     if (data->visible) {
         gDPPipeSync(gMainGfxPos++);
-        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
         gSPDisplayList(gMainGfxPos++, D_E011AC20[0]);
 

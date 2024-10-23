@@ -106,7 +106,6 @@ EvtScript N(EVS_DropDoor_RightHouse) = {
     End
 };
 
-
 s32 N(KeyList)[] = {
     ITEM_WAREHOUSE_KEY,
     ITEM_NONE

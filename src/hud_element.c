@@ -726,7 +726,7 @@ s32 hud_element_create(HudScript* anim) {
     ASSERT(id < ARRAY_COUNT(*gHudElements));
 
     (*gHudElements)[id] = hudElement = heap_malloc(sizeof(*hudElement));
-    gHudElementsNumber += 1;
+    gHudElementsNumber++;
 
     ASSERT(hudElement != NULL);
 

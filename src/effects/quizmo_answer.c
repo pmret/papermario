@@ -11,7 +11,7 @@ EffectInstance* quizmo_answer_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.unk_00 = 0;
     bp.init = NULL;
     bp.update = NULL;
-    bp.renderWorld = NULL;
+    bp.renderScene = NULL;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_QUIZMO_ANSWER;
 
@@ -19,7 +19,7 @@ EffectInstance* quizmo_answer_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     effect->data.quizmoAnswer = NULL;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->shared->graphics));
 
     if (arg0 == 0) {
         gSPDisplayList(gMainGfxPos++, D_09000400_3A2840);

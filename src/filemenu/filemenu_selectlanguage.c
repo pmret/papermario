@@ -7,7 +7,7 @@
 
 extern HudScript HES_Spirit1;
 
-HudScript* D_filemenu_8024F120[] = { &HES_Spirit1 };
+HudScript* PauseLanguageHudScripts[] = { &HES_Spirit1 };
 
 u32 D_filemenu_8024F124 = 0x00000000;
 
@@ -207,9 +207,9 @@ void filemenu_selectlanguage_init(MenuPanel* menu) {
     s16* posXPtr;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_filemenu_8024F120); i++) {
-        D_802517D0[i] = hud_element_create(D_filemenu_8024F120[i]);
-        hud_element_set_flags(D_802517D0[i], HUD_ELEMENT_FLAG_80);
+    for (i = 0; i < ARRAY_COUNT(PauseLanguageHudScripts); i++) {
+        PauseLanguageHIDs[i] = hud_element_create(PauseLanguageHudScripts[i]);
+        hud_element_set_flags(PauseLanguageHIDs[i], HUD_ELEMENT_FLAG_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_filemenu_8024F1D8); i++) {
@@ -367,7 +367,7 @@ void filemenu_selectlanguage_update(MenuPanel* menu) {
 void filemenu_selectlanguage_cleanup(MenuPanel* arg0) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_802517D0); i++) {
-        hud_element_free(D_802517D0[i]);
+    for (i = 0; i < ARRAY_COUNT(PauseLanguageHIDs); i++) {
+        hud_element_free(PauseLanguageHIDs[i]);
     }
 }

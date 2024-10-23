@@ -32,7 +32,7 @@ EffectInstance* snowfall_main(s32 arg0, s32 arg1) {
 
     effectBp.init = snowfall_init;
     effectBp.update = snowfall_update;
-    effectBp.renderWorld = snowfall_render;
+    effectBp.renderScene = snowfall_render;
     effectBp.unk_00 = 0;
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_SNOWFALL;
@@ -184,7 +184,7 @@ void snowfall_appendGfx(void* effect) {
 
         if (unk_28 != 0) {
             gDPPipeSync(gMainGfxPos++);
-            gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+            gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
             gSPDisplayList(gMainGfxPos++, D_09000C00_38DC70);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, unk_28);

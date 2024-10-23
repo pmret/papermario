@@ -16,7 +16,6 @@ void clear_game_modes(void) {
     }
 }
 
-
 // Function is unused.
 GameMode* set_next_game_mode(GameMode* mode) {
     GameMode* gameMode;

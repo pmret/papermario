@@ -7,14 +7,6 @@
 #include "script_api/map.h"
 #include "npc.h"
 
-// temporary: some standard script names
-#define EVS_MakeEntities        EVS_MakeEntities
-#define EVS_SetupMusic          EVS_SetupMusic
-#define EVS_SetupRooms          EVS_SetupRooms
-#define EVS_SetupFoliage        EVS_SetupFoliage
-#define EVS_BindExitTriggers    EVS_BindExitTriggers
-#define EVS_EnterMap            EVS_EnterMap
-
 #define CLONED_MODEL(idx)       (10000+(idx))
 
 // TODO: consider moving Npc here

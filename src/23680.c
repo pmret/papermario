@@ -409,7 +409,7 @@ b32 is_point_outside_territory(s32 shape, f32 centerX, f32 centerZ, f32 pointX, 
     }
 }
 
-b32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 radius, f32 fwdPosOffset, b8 useWorldYaw) {
+b32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 radius, f32 fwdPosOffset, s8 useWorldYaw) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerStatus* partnerStatus;

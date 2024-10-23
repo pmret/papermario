@@ -18,7 +18,7 @@ void falling_leaves_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
 
     bp.init = falling_leaves_init;
     bp.update = falling_leaves_update;
-    bp.renderWorld = falling_leaves_render;
+    bp.renderScene = falling_leaves_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FALLING_LEAVES;
@@ -128,7 +128,7 @@ void falling_leaves_appendGfx(void* effect) {
     Matrix4f sp98;
     s32 i;
 
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_09001100_3601E0);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 20, 100, 20, part->unk_24);
 

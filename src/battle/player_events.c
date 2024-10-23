@@ -23,10 +23,10 @@ BSS s32 BattleMerleeEffectsTime;
 BSS f32 BattleMerleeBasePosY;
 BSS EffectInstance* BattleMerleeOrbEffect;
 BSS EffectInstance* BattleMerleeWaveEffect;
-BSS s32 HID_Refund;
+BSS HudElemID HID_Refund;
 BSS s16 BattleMerleeEffectsState;
-BSS s32 HID_Happy;
-BSS s32 HID_HPDrain;
+BSS HudElemID HID_Happy;
+BSS HudElemID HID_HPDrain;
 BSS s32 D_8029FBB0[3];
 
 enum {
@@ -242,7 +242,7 @@ API_CALLABLE(LifeShroomShroudWorld) {
 
     mdl_set_shroud_tint_params(0, 0, 0, ((20 - script->functionTemp[0]) * 12) & 0xFC);
 
-    script->functionTemp[0] -= 1;
+    script->functionTemp[0]--;
 
     if (script->functionTemp[0] == 0) {
         return ApiStatus_DONE2;
@@ -259,7 +259,7 @@ API_CALLABLE(LifeShroomRevealWorld) {
 
     mdl_set_shroud_tint_params(0, 0, 0, (script->functionTemp[0] * 12) & 0xFC);
 
-    script->functionTemp[0] -= 1;
+    script->functionTemp[0]--;
     if (script->functionTemp[0] == 0) {
         mdl_set_shroud_tint_params(0, 0, 0, 0);
         return ApiStatus_DONE2;
@@ -857,7 +857,7 @@ EvtScript EVS_Player_HandleEvent = {
         CaseNe(EVENT_32)
             Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EndSwitch
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     Call(func_802693F0)
     Call(ForceDisablePlayerBlurImmediately)
@@ -1172,7 +1172,7 @@ EvtScript EVS_RunAwayNoCommand = {
 EvtScript EVS_RunAwayStart = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(GetActionCommandMode, LVar2)
-    IfEq(LVar2, ACTION_COMMAND_MODE_NOT_LEARNED)
+    IfEq(LVar2, AC_MODE_NOT_LEARNED)
         ExecWait(EVS_RunAwayNoCommand)
         Call(UseIdleAnimation, ACTOR_PLAYER, TRUE)
         Return
@@ -1197,7 +1197,7 @@ EvtScript EVS_RunAwayStart = {
     Wait(1)
     Call(SetActorYaw, ACTOR_PLAYER, 180)
     Wait(5)
-    Call(action_command_flee_start, 0, 60, 3)
+    Call(action_command_flee_start, 0, 60, AC_DIFFICULTY_3)
     Call(func_80260E5C)
     Wait(5)
     Call(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
@@ -1222,7 +1222,7 @@ EvtScript EVS_RunAwayStart = {
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
     Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Call(PlayerHopToGoal, 8, 0, 0)
-    Call(GetActionSuccess, LVar0)
+    Call(GetSmashActionQuality, LVar0)
     Call(DetermineAutoRunAwaySuccess)
     IfEq(LVar0, 1)
         Call(SetFledBattleFlag)

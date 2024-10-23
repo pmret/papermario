@@ -60,7 +60,7 @@ enum MixingAnimStates {
 // basically the typical mash meter with the gauge removed
 API_CALLABLE(N(RunMixingMinigame)) {
     Bytecode* args = script->ptrReadPos;
-    s32 hudElemID;
+    HudElemID hid;
     s32 maxMashAmount;
     s32 i;
 
@@ -89,25 +89,25 @@ API_CALLABLE(N(RunMixingMinigame)) {
             N(MixingGameUIBaseX) = -48;
             N(MixingGameUIBaseY) = 64;
 
-            hudElemID = hud_element_create(&HES_AButton);
-            N(MixingGameHudElems)[0] = hudElemID;
-            hud_element_set_render_pos(hudElemID, N(MixingGameUIBaseX), N(MixingGameUIBaseY));
-            hud_element_set_render_depth(hudElemID, 0);
-            hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+            hid = hud_element_create(&HES_AButton);
+            N(MixingGameHudElems)[0] = hid;
+            hud_element_set_render_pos(hid, N(MixingGameUIBaseX), N(MixingGameUIBaseY));
+            hud_element_set_render_depth(hid, 0);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-            hudElemID = hud_element_create(&HES_BlueMeter);
-            N(MixingGameHudElems)[1] = hudElemID;
-            hud_element_set_render_pos(hudElemID, N(MixingGameUIBaseX), N(MixingGameUIBaseY) + 28);
-            hud_element_set_render_depth(hudElemID, 0);
-            hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+            hid = hud_element_create(&HES_BlueMeter);
+            N(MixingGameHudElems)[1] = hid;
+            hud_element_set_render_pos(hid, N(MixingGameUIBaseX), N(MixingGameUIBaseY) + 28);
+            hud_element_set_render_depth(hid, 0);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-            hudElemID = N(MixingGameHudElems)[0];
-            hud_element_set_alpha(hudElemID, 255);
-            hud_element_clear_flags(hudElemID, HUD_ELEMENT_FLAG_DISABLED);
+            hid = N(MixingGameHudElems)[0];
+            hud_element_set_alpha(hid, 255);
+            hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
 
-            hudElemID = N(MixingGameHudElems)[1];
-            hud_element_set_alpha(hudElemID, 255);
-            hud_element_clear_flags(hudElemID, HUD_ELEMENT_FLAG_DISABLED);
+            hid = N(MixingGameHudElems)[1];
+            hud_element_set_alpha(hid, 255);
+            hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
 
             N(MixingGameState) = MIXING_STATE_APPEAR;
             script->functionTemp[0] = 10;

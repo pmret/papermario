@@ -28,7 +28,7 @@ EffectInstance* quizmo_stage_main(s32 arg0, f32 posX, f32 posY, f32 posZ) {
 
     effectBp.init = quizmo_stage_init;
     effectBp.update = quizmo_stage_update;
-    effectBp.renderWorld = quizmo_stage_render;
+    effectBp.renderScene = quizmo_stage_render;
     effectBp.unk_00 = 0;
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_QUIZMO_STAGE;
@@ -112,7 +112,7 @@ void quizmo_stage_appendGfx(void* effect) {
     Matrix4f sp58;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp18, data->origin.x, data->origin.y, data->origin.z);
     guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);

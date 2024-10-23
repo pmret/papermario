@@ -64,7 +64,7 @@ EffectInstance* misc_particles_main(
 
     bp.init = misc_particles_init;
     bp.update = misc_particles_update;
-    bp.renderWorld = misc_particles_render;
+    bp.renderScene = misc_particles_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_MISC_PARTICLES;
@@ -307,7 +307,7 @@ void misc_particles_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gDPSetEnvColor(gMainGfxPos++, particle->glowColor.r, particle->glowColor.g, particle->glowColor.b, particle->glowColor.a);
     gSPDisplayList(gMainGfxPos++, D_E00E4DA8[variation]);
 

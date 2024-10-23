@@ -179,7 +179,6 @@ API_CALLABLE(LoadBattleSection) {
     return ApiStatus_DONE1;
 }
 
-
 API_CALLABLE(GetBattlePhase) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.battlePhase);
     return ApiStatus_DONE2;
@@ -235,7 +234,7 @@ API_CALLABLE(SetIdleGoalToHome) {
 }
 
 API_CALLABLE(SetGoalToIndex) {
-    s32* args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 index = evt_get_variable(script, *args++);
     Actor* actor;
@@ -2040,7 +2039,7 @@ API_CALLABLE(SetActorStatusOffsets) {
 
 API_CALLABLE(SummonEnemy) {
     BattleStatus* battleStatus = &gBattleStatus;
-    s32* args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     Actor* actor1;
     Actor* actor2;
     s16* enemyIDs;
@@ -2767,7 +2766,7 @@ API_CALLABLE(ModifyActorDecoration) {
 
 API_CALLABLE(UseIdleAnimation) {
     Actor* actor;
-    s32* args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 useIdle = evt_get_variable(script, *args++);
 
@@ -2940,7 +2939,7 @@ API_CALLABLE(RemovePlayerBuffs) {
 
 API_CALLABLE(SetPartAlpha) {
     Actor* actor;
-    s32* args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);
     s32 opacity = evt_get_variable(script, *args++);

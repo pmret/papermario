@@ -4,7 +4,7 @@
 #include "script_api/battle.h"
 #include "battle/action_cmd/body_slam.h"
 #include "battle/action_cmd/power_shock.h"
-#include "battle/action_cmd/water_block.h"
+#include "battle/action_cmd/three_chances.h"
 #include "battle/action_cmd/mega_shock.h"
 #include "sprite/npc/BattleWatt.h"
 #include "sprite/player.h"
@@ -543,7 +543,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(N(WattFXDisableBounce))
     Call(N(WattFXEnable))
     Call(N(WattFXSetEffect), 0)
@@ -790,7 +790,7 @@ EvtScript N(EVS_Attack_ElectroDash) = {
     EndLoop
     Call(MoveBattleCamOver, 75)
     IfEq(LFlag2, TRUE)
-        Call(action_command_body_slam_start, 0, 102, 3, 1)
+        Call(action_command_body_slam_start, 0, 102, AC_DIFFICULTY_3, ACV_SLAM_WATT)
         Set(LFlag0, FALSE)
         ExecGetTID(N(dashToTarget), LVarA)
         Loop(20)
@@ -842,7 +842,7 @@ EvtScript N(EVS_Attack_ElectroDash) = {
             Call(CheckButtonDown, BUTTON_A, LVar0)
             IfNe(LVar0, 0)
                 IfEq(LFlag2, FALSE)
-                    Call(action_command_body_slam_start, 0, 92, 3, 1)
+                    Call(action_command_body_slam_start, 0, 92, AC_DIFFICULTY_3, ACV_SLAM_WATT)
                     Set(LFlag2, TRUE)
                 EndIf
             EndIf
@@ -865,7 +865,7 @@ EvtScript N(EVS_Attack_ElectroDash) = {
             Call(CheckButtonDown, BUTTON_A, LVar0)
             IfNe(LVar0, 0)
                 IfEq(LFlag2, FALSE)
-                    Call(action_command_body_slam_start, 0, 92, 3, 1)
+                    Call(action_command_body_slam_start, 0, 92, AC_DIFFICULTY_3, ACV_SLAM_WATT)
                     Set(LFlag2, TRUE)
                 EndIf
             EndIf
@@ -899,7 +899,7 @@ EvtScript N(EVS_Attack_ElectroDash) = {
     EndIf
     Label(10)
     Wait(2)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(N(ElectroDashFXDisable))
     Call(StopLoopingSoundAtActor, ACTOR_PARTNER, 0)
     Call(SetDamageSource, DMG_SRC_ELECTRO_DASH)
@@ -942,7 +942,7 @@ EvtScript N(EVS_Attack_ElectroDash) = {
             Set(LVarE, 1)
             Set(LVarF, 5)
     EndSwitch
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_SHOCK_CONTACT | SUPPRESS_EVENT_ALT_SPIKY, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
@@ -989,7 +989,7 @@ EvtScript N(EVS_Attack_PowerShock) = {
     Call(MoveBattleCamOver, 80)
     Call(N(WattFXDisable))
     Call(N(TargetParalyzeChance))
-    Call(action_command_power_shock_start, 0, 75 * DT - 3, 3, LVar0)
+    Call(action_command_power_shock_start, 0, 75 * DT - 3, AC_DIFFICULTY_3, LVar0)
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Add(LVar1, 15)
     Add(LVar2, 5)
@@ -1056,8 +1056,8 @@ EvtScript N(EVS_Attack_PowerShock) = {
         ExecWait(N(EVS_ReturnHome_Miss))
         Return
     EndIf
-    Call(GetActionQuality, LVarF)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetActionProgress, LVarF)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             Call(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, DMG_STATUS_ALWAYS(STATUS_FLAG_PARALYZE, 3), 254, 0, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
@@ -1088,8 +1088,8 @@ EvtScript N(EVS_Attack_PowerShock) = {
 };
 
 EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
-    Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, 1)
+    Call(LoadActionCommand, ACTION_COMMAND_THREE_CHANCES)
+    Call(action_command_three_chances_init, ACV_THREE_CHANCES_TURBO_CHARGE)
     Call(SetActionHudPrepareTime, 0)
     Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, TRUE)
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
@@ -1112,7 +1112,7 @@ EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
     Wait(1)
     Call(SetActorYaw, ACTOR_PARTNER, 180)
     Wait(10)
-    Call(action_command_water_block_start, 0, 100 * DT, 3)
+    Call(action_command_three_chances_start, 0, 100 * DT, AC_DIFFICULTY_3)
     Call(AddBattleCamDist, -75)
     Call(MoveBattleCamOver, 100 * DT)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
@@ -1151,7 +1151,7 @@ EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 10)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_GROW)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Call(N(ApplyTurboCharge))
     Set(LVarE, LVarF)
     IfGt(LVarA, 0)
@@ -1173,8 +1173,8 @@ EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
 };
 
 EvtScript N(EVS_TurboCharge_ImmobilePlayer) = {
-    Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, 1)
+    Call(LoadActionCommand, ACTION_COMMAND_THREE_CHANCES)
+    Call(action_command_three_chances_init, ACV_THREE_CHANCES_TURBO_CHARGE)
     Call(SetActionHudPrepareTime, 0)
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Wait(5)
@@ -1195,7 +1195,7 @@ EvtScript N(EVS_TurboCharge_ImmobilePlayer) = {
     Wait(1)
     Call(SetActorYaw, ACTOR_PARTNER, 180)
     Wait(10)
-    Call(action_command_water_block_start, 0, 100 * DT, 3)
+    Call(action_command_three_chances_start, 0, 100 * DT, AC_DIFFICULTY_3)
     Call(AddBattleCamDist, -100)
     Call(MoveBattleCamOver, 100 * DT)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
@@ -1222,7 +1222,7 @@ EvtScript N(EVS_TurboCharge_ImmobilePlayer) = {
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 10)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_GROW)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Call(N(ApplyTurboCharge))
     Set(LVarE, LVarF)
     IfGt(LVarA, 0)
@@ -1283,7 +1283,7 @@ EvtScript N(EVS_Attack_MegaShock) = {
         EndLoop
     EndThread
     Call(N(AverageTargetParalyzeChance))
-    Call(action_command_mega_shock_start, 0, 87 * DT, 3, LVar0)
+    Call(action_command_mega_shock_start, 0, 87 * DT, AC_DIFFICULTY_3, LVar0)
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Add(LVar1, 15)
     Add(LVar2, 5)
@@ -1297,7 +1297,7 @@ EvtScript N(EVS_Attack_MegaShock) = {
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
     Call(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_ATTACK)
     Call(N(WattFXDisable))
-    Call(GetActionQuality, LVar1)
+    Call(GetActionProgress, LVar1)
     Wait(90 * DT)
     Call(N(SetBackgroundAlpha), 0)
     Thread
@@ -1341,13 +1341,13 @@ EvtScript N(EVS_Attack_MegaShock) = {
     Thread
         Call(N(PowerShockDischargeFX), 10)
     EndThread
-    Call(GetActionQuality, LVar0)
+    Call(GetActionProgress, LVar0)
     Call(GetActorPos, ACTOR_PARTNER, LVar1, LVar2, LVar3)
     Add(LVar2, 12)
     Call(N(MegaShockFX), LVar0, LVar1, LVar2, LVar3)
     Loop(0)
         Call(SetGoalToTarget, ACTOR_SELF)
-        Call(GetPartnerActionSuccess, LVarF)
+        Call(GetPartnerActionQuality, LVarF)
         Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
         IfEq(LVar0, HIT_RESULT_MISS)
             Goto(11)
@@ -1367,7 +1367,7 @@ EvtScript N(EVS_Attack_MegaShock) = {
     Call(N(WattFXEnable))
     Call(PartnerYieldTurn)
     Wait(30)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(99)
             ExecWait(N(EVS_ReturnHome_Success))

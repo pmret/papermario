@@ -101,8 +101,8 @@ typedef struct SmashGameData {
     /* 0x000 */ s32 workerID;
     /* 0x004 */ s32 found;
     /* 0x008 */ s32 timeLeft; // num frames at 30fps
-    /* 0x00C */ s32 hudElemID_AButton;
-    /* 0x010 */ s32 hudElemID_Meter;
+    /* 0x00C */ HudElemID buttonHID;
+    /* 0x010 */ HudElemID meterHID;
     /* 0x014 */ s32 windowA_posX;
     /* 0x018 */ s32 windowB_posX;
     /* 0x01C */ s32 signpostEntity;
@@ -123,20 +123,20 @@ typedef struct SmashGameData {
 void N(appendGfx_score_display)(void* renderData) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
     SmashGameData* data = scorekeeper->varTablePtr[SMASH_DATA_VAR_IDX];
-    s32 hudElemA;
-    s32 hudElemMeter;
+    HudElemID buttonHID;
+    HudElemID meterHID;
     s32 timeLeft;
     s32 seconds;
     s32 deciseconds;
 
     // show mash meter while grabbed by a fuzzy
     if (data->stunFlags & STUN_FLAG_GRABBED) {
-        hudElemA = data->hudElemID_AButton;
-        hud_element_set_render_pos(hudElemA, 90, 90);
-        hud_element_draw_clipped(hudElemA);
-        hudElemMeter = data->hudElemID_Meter;
-        hud_element_set_render_pos(hudElemMeter, 90, 120);
-        hud_element_draw_clipped(hudElemMeter);
+        buttonHID = data->buttonHID;
+        hud_element_set_render_pos(buttonHID, 90, 90);
+        hud_element_draw_clipped(buttonHID);
+        meterHID = data->meterHID;
+        hud_element_set_render_pos(meterHID, 90, 120);
+        hud_element_draw_clipped(meterHID);
         startup_draw_prim_rect_COPY(62, 116, 62 + (s32)(((f32)data->mashProgress / 12.0) * 59.0), 116 + 5, 0, 228, 134, 255);
     }
 
@@ -204,22 +204,23 @@ void N(worker_draw_score)(void) {
 
 API_CALLABLE(N(CreateScoreDisplay)) {
     SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
-    s32 hudElemA, hudElemMeter;
+    HudElemID hidButton;
+    HudElemID hidMeter;
 
     if (isInitialCall) {
-        data->workerID = create_worker_world(NULL, &N(worker_draw_score));
+        data->workerID = create_worker_scene(NULL, &N(worker_draw_score));
 
-        hudElemA = hud_element_create(&HES_AButton);
-        data->hudElemID_AButton = hudElemA;
-        hud_element_set_render_depth(hudElemA, 0);
-        hud_element_set_flags(hudElemA, HUD_ELEMENT_FLAG_80);
-        hud_element_set_tint(hudElemA, 255, 255, 255);
-        hud_element_set_script(hudElemA, &HES_AButton);
+        hidButton = hud_element_create(&HES_AButton);
+        data->buttonHID = hidButton;
+        hud_element_set_render_depth(hidButton, 0);
+        hud_element_set_flags(hidButton, HUD_ELEMENT_FLAG_80);
+        hud_element_set_tint(hidButton, 255, 255, 255);
+        hud_element_set_script(hidButton, &HES_AButton);
 
-        hudElemMeter = hud_element_create(&HES_BlueMeter);
-        data->hudElemID_Meter = hudElemMeter;
-        hud_element_set_render_depth(hudElemMeter, 0);
-        hud_element_set_flags(hudElemMeter, HUD_ELEMENT_FLAG_80);
+        hidMeter = hud_element_create(&HES_BlueMeter);
+        data->meterHID = hidMeter;
+        hud_element_set_render_depth(hidMeter, 0);
+        hud_element_set_flags(hidMeter, HUD_ELEMENT_FLAG_80);
     }
 
     return ApiStatus_BLOCK;
@@ -490,9 +491,9 @@ API_CALLABLE(N(RunMinigame)) {
                     }
                     break;
                 case BOX_STATE_FUZZY_HIT:
-                    hud_element_set_script(data->hudElemID_AButton, &HES_AButton);
-                    hud_element_set_alpha(data->hudElemID_AButton, 160);
-                    hud_element_set_alpha(data->hudElemID_Meter, 160);
+                    hud_element_set_script(data->buttonHID, &HES_AButton);
+                    hud_element_set_alpha(data->buttonHID, 160);
+                    hud_element_set_alpha(data->meterHID, 160);
                     data->mashProgress = 0;
                     data->stunFlags |= STUN_FLAG_GRABBED;
                     enable_npc_shadow(npc);
@@ -534,9 +535,9 @@ API_CALLABLE(N(RunMinigame)) {
                         npc->pos.x = gPlayerStatusPtr->pos.x;
                         npc->pos.y = gPlayerStatusPtr->pos.y + 28.0;
                         npc->pos.z = gPlayerStatusPtr->pos.z + 2.0;
-                        hud_element_set_script(data->hudElemID_AButton, &HES_MashAButton);
-                        hud_element_set_alpha(data->hudElemID_AButton, 255);
-                        hud_element_set_alpha(data->hudElemID_Meter, 255);
+                        hud_element_set_script(data->buttonHID, &HES_MashAButton);
+                        hud_element_set_alpha(data->buttonHID, 255);
+                        hud_element_set_alpha(data->meterHID, 255);
                         data->box[i].state = BOX_STATE_FUZZY_GRAB;
                     }
                     break;
@@ -551,9 +552,9 @@ API_CALLABLE(N(RunMinigame)) {
                         data->stunFlags |= STUN_FLAG_CHANGED;
                         data->box[i].state = BOX_STATE_FUZZY_DETACH;
                         npc->duration = 10;
-                        hud_element_set_script(data->hudElemID_AButton, &HES_AButton);
-                        hud_element_set_alpha(data->hudElemID_AButton, 160);
-                        hud_element_set_alpha(data->hudElemID_Meter, 160);
+                        hud_element_set_script(data->buttonHID, &HES_AButton);
+                        hud_element_set_alpha(data->buttonHID, 160);
+                        hud_element_set_alpha(data->meterHID, 160);
                         npc->curAnim = ANIM_Fuzzy_Hurt;
                         npc->pos.y += 3.0;
                     }
@@ -989,8 +990,8 @@ API_CALLABLE(N(DestroyMinigame)) {
     SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
 
     free_worker(data->workerID);
-    hud_element_free(data->hudElemID_AButton);
-    hud_element_free(data->hudElemID_Meter);
+    hud_element_free(data->buttonHID);
+    hud_element_free(data->meterHID);
 
     return ApiStatus_DONE2;
 }

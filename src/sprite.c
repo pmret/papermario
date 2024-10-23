@@ -945,7 +945,6 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* 
     D_802DFEA0[1] = yaw;
     D_802DFEA0[2] = 0;
 
-
     if (spriteInstanceID & DRAW_SPRITE_OVERRIDE_ALPHA) {
         alpha = alphaIn & 0xFF;
         if (alphaIn == 0) {

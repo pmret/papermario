@@ -96,7 +96,7 @@ API_CALLABLE(N(InitializeFallingSprite)) {
     falling->scale.z = SPRITE_WORLD_SCALE_F;
 
     falling->imgfxIdx = imgfx_get_free_instances(1);
-    falling->workerID = create_worker_world(0, &N(appendGfx_FallingSprite));
+    falling->workerID = create_worker_scene(NULL, &N(appendGfx_FallingSprite));
     return ApiStatus_DONE2;
 }
 

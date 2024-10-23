@@ -20,7 +20,7 @@ void windy_leaves_main(s32 type, f32 arg1, f32 arg2, f32 arg3) {
 
     bp.init = windy_leaves_init;
     bp.update = windy_leaves_update;
-    bp.renderWorld = windy_leaves_render;
+    bp.renderScene = windy_leaves_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_WINDY_LEAVES;
@@ -241,7 +241,7 @@ void windy_leaves_appendGfx(void* effect) {
         dlist = D_09001258_33E868;
     }
 
-    gSPSegment(gMainGfxPos++, 0x09, OS_K0_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, OS_K0_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_09001180_33E790);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 20, 100, 20, part->alpha);
     guTranslateF(sp18, part->unk_04.x, part->unk_04.y, part->unk_04.z);

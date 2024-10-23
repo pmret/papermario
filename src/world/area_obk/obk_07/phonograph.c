@@ -31,9 +31,9 @@ typedef struct PhonographData {
     /* 0x030 */ s32 state;
     /* 0x034 */ s32 hudBaseX;
     /* 0x038 */ s32 hudBaseY;
-    /* 0x03C */ s32 hudElemAButton;
-    /* 0x040 */ s32 hudElemBlueMeter;
-    /* 0x044 */ s32 hudElemOK;
+    /* 0x03C */ HudElemID buttonHID;
+    /* 0x040 */ HudElemID meterHID;
+    /* 0x044 */ HudElemID okHID;
     /* 0x048 */ char unk_48[0x4];
     /* 0x04C */ s32 updateScaleScriptID;
     /* 0x050 */ s32 updateCrankScriptID;
@@ -203,13 +203,13 @@ void N(worker_update_phonograph_hud)(void) {
 
     switch (data->state) {
         case PHONOGRAPH_HUD_STATE_INIT:
-            id = data->hudElemAButton;
+            id = data->buttonHID;
             hud_element_set_alpha(id, 255);
             hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
-            id = data->hudElemBlueMeter;
+            id = data->meterHID;
             hud_element_set_alpha(id, 255);
             hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
-            id = data->hudElemOK;
+            id = data->okHID;
             hud_element_set_alpha(id, 255);
             hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
             data->state = PHONOGRAPH_HUD_STATE_APPEAR;
@@ -219,12 +219,12 @@ void N(worker_update_phonograph_hud)(void) {
             if (data->hudBaseX > 50) {
                 data->hudBaseX = 50;
             }
-            hud_element_set_render_pos(data->hudElemAButton, data->hudBaseX, data->hudBaseY);
-            hud_element_set_render_pos(data->hudElemBlueMeter, data->hudBaseX, data->hudBaseY + 28);
-            hud_element_set_render_pos(data->hudElemOK, data->hudBaseX + 2, data->hudBaseY + 14);
+            hud_element_set_render_pos(data->buttonHID, data->hudBaseX, data->hudBaseY);
+            hud_element_set_render_pos(data->meterHID, data->hudBaseX, data->hudBaseY + 28);
+            hud_element_set_render_pos(data->okHID, data->hudBaseX + 2, data->hudBaseY + 14);
             break;
         case PHONOGRAPH_HUD_STATE_MASHING:
-            hud_element_set_script(data->hudElemAButton, &HES_SlowlyMashAButton);
+            hud_element_set_script(data->buttonHID, &HES_SlowlyMashAButton);
             data->state = PHONOGRAPH_HUD_STATE_FINAL;
             // fallthrough
         case PHONOGRAPH_HUD_STATE_FINAL:
@@ -290,19 +290,19 @@ API_CALLABLE(N(func_80240EF8_BCFAE8)) {
 
 void N(worker_draw_phonograph_hud)(void) {
     PhonographData* data = N(GetPhonographData)();
-    s32 hudElemIndex;
+    HudElemID hid;
     s32 x, y;
 
-    hudElemIndex = data->hudElemAButton;
-    hud_element_draw_clipped(hudElemIndex);
+    hid = data->buttonHID;
+    hud_element_draw_clipped(hid);
 
-    hudElemIndex = data->hudElemBlueMeter;
-    hud_element_draw_clipped(hudElemIndex);
-    hud_element_get_render_pos(hudElemIndex, &x, &y);
+    hid = data->meterHID;
+    hud_element_draw_clipped(hid);
+    hud_element_get_render_pos(hid, &x, &y);
     N(DrawMashMeterWithDivisor)(x, y, data->fillValue, 2);
 
-    hudElemIndex = data->hudElemOK;
-    hud_element_draw_clipped(hudElemIndex);
+    hid = data->okHID;
+    hud_element_draw_clipped(hid);
 }
 
 API_CALLABLE(N(GetSelectedRecordIndex)) {
@@ -324,7 +324,7 @@ API_CALLABLE(N(GetSelectedRecordIndex)) {
 
 API_CALLABLE(N(CreatePhonographHudData)) {
     PhonographData* data = N(GetPhonographData)();
-    s32 id;
+    HudElemID hid;
     s32 i;
 
     gOverrideFlags |= GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI;
@@ -352,20 +352,20 @@ API_CALLABLE(N(CreatePhonographHudData)) {
     data->timeScale = 1.0f;
     data->modelScale = 1.0f;
 
-    data->hudElemAButton = id = hud_element_create(&HES_AButton);
-    hud_element_set_render_pos(id, data->hudBaseX, data->hudBaseY);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    data->buttonHID = hid = hud_element_create(&HES_AButton);
+    hud_element_set_render_pos(hid, data->hudBaseX, data->hudBaseY);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    data->hudElemBlueMeter = id = hud_element_create(&HES_BlueMeter);
-    hud_element_set_render_pos(id, data->hudBaseX, data->hudBaseY + 28);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    data->meterHID = hid = hud_element_create(&HES_BlueMeter);
+    hud_element_set_render_pos(hid, data->hudBaseX, data->hudBaseY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    data->hudElemOK = id = hud_element_create(&HES_RunAwayOK);
-    hud_element_set_render_pos(id, data->hudBaseX, data->hudBaseY + 28);
-    hud_element_set_render_depth(id, 0);
-    hud_element_set_flags(id, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    data->okHID = hid = hud_element_create(&HES_RunAwayOK);
+    hud_element_set_render_pos(hid, data->hudBaseX, data->hudBaseY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     return ApiStatus_DONE2;
 }
 
@@ -390,9 +390,9 @@ API_CALLABLE(N(DestroyPhonographHudData)) {
 
     data->state = PHONOGRAPH_HUD_STATE_DESTROYED;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI;
-    hud_element_free(data->hudElemAButton);
-    hud_element_free(data->hudElemBlueMeter);
-    hud_element_free(data->hudElemOK);
+    hud_element_free(data->buttonHID);
+    hud_element_free(data->meterHID);
+    hud_element_free(data->okHID);
     free_worker(data->hudWorker);
     return ApiStatus_DONE2;
 }

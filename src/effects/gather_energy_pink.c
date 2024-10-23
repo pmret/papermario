@@ -28,7 +28,7 @@ void gather_energy_pink_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, 
     bp.unk_00 = 0;
     bp.init = gather_energy_pink_init;
     bp.update = gather_energy_pink_update;
-    bp.renderWorld = gather_energy_pink_render;
+    bp.renderScene = gather_energy_pink_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_GATHER_ENERGY_PINK;
 
@@ -172,7 +172,7 @@ void gather_energy_pink_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, dlist);
 
     guTranslateF(sp20, part->posB.x, part->posB.y, part->posB.z);

@@ -1819,11 +1819,11 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
         Call(ShowMessageBox, BTL_MSG_ACTION_TIP_MASH_BUTTON, 180)
         Call(ShowActionHud, TRUE)
         Call(LoadActionCommand, ACTION_COMMAND_WHIRLWIND)
-        Call(action_command_whirlwind_init, 0)
+        Call(action_command_whirlwind_init, ACV_WHIRLWIND_HUFF)
         Call(SetupMashMeter, 5, 20, 40, 60, 80, 100)
         Wait(10)
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-        Call(action_command_whirlwind_start, 0, 200 * DT, 3)
+        Call(action_command_whirlwind_start, 0, 200 * DT, AC_DIFFICULTY_3)
         Thread
             Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
             Set(LVar3, LVar2)
@@ -1891,7 +1891,7 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
             IfEq(LVar1, 1)
                 Goto(10)
             EndIf
-        Call(GetActionQuality, LVar1)
+        Call(GetActionProgress, LVar1)
     Else
         Thread
             Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
@@ -2987,7 +2987,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
         Call(SetupMashMeter, 1, 25, 0, 0, 0, 0)
         Wait(10)
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-        Call(action_command_stop_leech_start, 0, 32767, 3)
+        Call(action_command_stop_leech_start, 0, AC_LEECH_MAX_TIME, AC_DIFFICULTY_3)
         Set(LVarB, LVarA)
         Div(LVarB, 2)
         Wait(LVarB)
@@ -3004,29 +3004,29 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                 Call(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_NICE_HIT)
                 Add(LVarD, 1)
             EndIf
-            Call(GetActionSuccessCopy, LVar0)
+            Call(GetMashActionQuality, LVar0)
             IfEq(LVar0, 1)
                 BreakLoop
             EndIf
             Call(GetLastDamage, ACTOR_PLAYER, LVar0)
             IfEq(LVar0, 0)
                 IfGt(LVarD, 1)
-                    Call(func_80269470)
+                    Call(InterruptLeechActionCommand)
                     BreakLoop
                 EndIf
             EndIf
             Call(GetPlayerHP, LVar0)
             IfEq(LVar0, 0)
-                Call(func_80269470)
+                Call(InterruptLeechActionCommand)
                 BreakLoop
             EndIf
             IfGe(LVarD, 20)
-                Call(func_80269470)
+                Call(InterruptLeechActionCommand)
                 BreakLoop
             EndIf
             Wait(1)
         EndLoop
-        Call(func_80269470)
+        Call(InterruptLeechActionCommand)
     EndIf
     Switch(LVarA)
         CaseOrEq(HIT_RESULT_HIT)

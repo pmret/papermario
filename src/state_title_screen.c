@@ -24,7 +24,6 @@
 #define TITLE_NUM_TILES (TITLE_HEIGHT / TITLE_TILE_HEIGHT) // Number of tiles in the texture
 #define TITLE_TILE_PIXELS (TITLE_WIDTH * TITLE_TILE_HEIGHT) // Number of pixels in a single tile of the texture
 
-
 enum TitleScreenStates {
     TITLE_STATE_INIT            = 0x00000000,
     TITLE_STATE_APPEAR          = 0x00000001,

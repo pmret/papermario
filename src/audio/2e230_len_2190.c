@@ -1059,7 +1059,6 @@ s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, s32 bankGroup)
     readState = BK_READ_FETCH_HEADER;
     keepReading = TRUE;
 
-
     while (keepReading) {
         switch (readState) {
             case BK_READ_DONE:

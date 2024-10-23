@@ -76,7 +76,7 @@ void spiky_white_aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
 
             bpPtr->init = spiky_white_aura_init;
             bpPtr->update = spiky_white_aura_update;
-            bpPtr->renderWorld = spiky_white_aura_render;
+            bpPtr->renderScene = spiky_white_aura_render;
             bpPtr->unk_00 = 0;
             bpPtr->renderUI = NULL;
             bpPtr->effectID = EFFECT_SPIKY_WHITE_AURA;
@@ -181,7 +181,7 @@ void spiky_white_aura_appendGfx(void* effect) {
     Matrix4f sp58;
     s32 i;
 
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_09000440_34EBB0);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, part->unk_24);
 

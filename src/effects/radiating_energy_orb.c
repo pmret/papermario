@@ -36,7 +36,7 @@ EffectInstance* radiating_energy_orb_main(
     bp.unk_00 = 0;
     bp.init = radiating_energy_orb_init;
     bp.update = radiating_energy_orb_update;
-    bp.renderWorld = radiating_energy_orb_render;
+    bp.renderScene = radiating_energy_orb_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_RADIATING_ENERGY_ORB;
 
@@ -144,7 +144,7 @@ void radiating_energy_orb_appendGfx(void* effect) {
     }
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
     guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);

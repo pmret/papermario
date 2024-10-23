@@ -31,7 +31,7 @@ void rising_bubble_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4) {
     effectBp.unk_00 = 0;
     effectBp.init = rising_bubble_init;
     effectBp.update = rising_bubble_update;
-    effectBp.renderWorld = rising_bubble_render;
+    effectBp.renderScene = rising_bubble_render;
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_RISING_BUBBLE;
 
@@ -112,7 +112,7 @@ void rising_bubble_appendGfx(void* effect) {
     Matrix4f sp60;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     if (data->pos.y >= data->unk_24) {
         s32 uls;

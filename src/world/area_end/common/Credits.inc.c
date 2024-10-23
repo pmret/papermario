@@ -140,7 +140,6 @@ void N(CharAnim_FadeIn_0)(CreditsLine* line, CreditsChar* chr) {
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
-
 void N(CharAnim_FadeIn_1)(CreditsLine* line, CreditsChar* chr) {
     ImgFXTexture ifxImg;
     MesasgeFontGlyphData glyph;

@@ -1238,7 +1238,7 @@ API_CALLABLE(N(EnterMap)) {
             playerStatus->pos.z = lakilester->pos.z;
             playerStatus->targetYaw = lakilester->yaw;
             N(offset_player_from_camera)(2.0f);
-            script->functionTemp[1] -= 1;
+            script->functionTemp[1]--;
 
             if (script->functionTemp[1] == 0) {
                 if (script->varTable[12]) {

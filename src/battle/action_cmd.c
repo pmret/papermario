@@ -25,29 +25,29 @@ u8 mashMeter_cutOffColors[15] = {
     255, 255, 255,
 };
 
-s32 actionCmdTableJump[] = { 7, 6, 5, 4, 3, 2, 1, 0 };
-s32 actionCmdTableHammer[] = { 11, 10, 9, 8, 7, 6, 5, 4 };
-s32 actionCmdTableFlee[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableBreakFree[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableWhirlwind[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableStopLeech[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTable07[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableDizzyShell[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableFireShell[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTable0A[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableBomb[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableBodySlam[] = { 9, 8, 7, 6, 5, 4, 3, 2 };
-s32 actionCmdTableAirLift[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableAirRaid[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableSquirt[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTablePowerShock[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableMegaShock[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableSmack[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableSpinySurge[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableHurricane[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableSpook[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
-s32 actionCmdTableWaterBlock[] = { 6, 3, 5, 3, 4, 3, 2, 3, 1, 3, 0, 3, 0, 2, 0, 1 };
-s32 actionCmdTableTidalWave[] = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableJump = { 7, 6, 5, 4, 3, 2, 1, 0 };
+Difficulty1D actionCmdTableHammer = { 11, 10, 9, 8, 7, 6, 5, 4 };
+Difficulty1D actionCmdTableFlee = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableBreakFree = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableWhirlwind = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableStopLeech = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTable07 = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableDizzyShell = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableFireShell = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTable0A = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableBomb = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableBodySlam = { 9, 8, 7, 6, 5, 4, 3, 2 };
+Difficulty1D actionCmdTableAirLift = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableAirRaid = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableSquirt = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTablePowerShock = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableMegaShock = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableSmack = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableSpinySurge = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableHurricane = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty1D actionCmdTableSpook = { 130, 120, 110, 100, 90, 80, 70, 60 };
+Difficulty2D actionCmdTableWaterBlock = { {6, 3}, {5, 3}, {4, 3}, {2, 3}, {1, 3}, {0, 3}, {0, 2}, {0, 1} };
+Difficulty1D actionCmdTableTidalWave = { 130, 120, 110, 100, 90, 80, 70, 60 };
 
 #define AC_TBL_ENTRY(name) \
     action_cmd_ ## name ## _ROM_START, action_cmd_ ## name ## _ROM_END, action_cmd_ ## name ## _VRAM
@@ -60,10 +60,10 @@ void* actionCommandDmaTable[] = {
     AC_TBL_ENTRY(break_free),
     AC_TBL_ENTRY(whirlwind),
     AC_TBL_ENTRY(stop_leech),
-    AC_TBL_ENTRY(07),
+    AC_TBL_ENTRY(unused_flee),
     AC_TBL_ENTRY(dizzy_shell),
     AC_TBL_ENTRY(fire_shell),
-    AC_TBL_ENTRY(0A),
+    AC_TBL_ENTRY(unused_mash_a),
     AC_TBL_ENTRY(bomb),
     AC_TBL_ENTRY(body_slam),
     AC_TBL_ENTRY(air_lift),
@@ -75,11 +75,11 @@ void* actionCommandDmaTable[] = {
     AC_TBL_ENTRY(spiny_surge),
     AC_TBL_ENTRY(hurricane),
     AC_TBL_ENTRY(spook),
-    AC_TBL_ENTRY(water_block),
+    AC_TBL_ENTRY(three_chances),
     AC_TBL_ENTRY(tidal_wave),
 };
 
-BSS s32 sMashMeterSmoothDivisor;
+BSS s32 MashMeterSmoothDivisor;
 BSS s32 D_8029FBC4_pad[3];
 // TODO move to actor_api
 BSS s32 IsGroupHeal;
@@ -98,23 +98,23 @@ API_CALLABLE(LoadActionCommand) {
     return ApiStatus_DONE2;
 }
 
-s32 adjust_action_command_difficulty(s32 arg0) {
+s32 adjust_action_command_difficulty(s32 difficultyLevel) {
     if (!(gBattleStatus.flags1 & BS_FLAGS1_PARTNER_ACTING)) {
-        arg0 -= is_ability_active(ABILITY_DODGE_MASTER) * 3;
+        difficultyLevel -= is_ability_active(ABILITY_DODGE_MASTER) * 3;
     }
 
-    if (arg0 < 0) {
-        arg0 = 0;
+    if (difficultyLevel < 0) {
+        difficultyLevel = 0;
     }
-    if (arg0 > 7) {
-        arg0 = 7;
+    if (difficultyLevel > 7) {
+        difficultyLevel = 7;
     }
 
-    return arg0;
+    return difficultyLevel;
 }
 
 void draw_mash_meter(s32 posX, s32 posY, s32 fillValue, s32 colorMode) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
     s32 maxCutOff;
     s32 i;
     s32 cutOff;
@@ -123,22 +123,22 @@ void draw_mash_meter(s32 posX, s32 posY, s32 fillValue, s32 colorMode) {
     s32 filledWidth;
     s32 r, g, b;
 
-    if (!actionCommandStatus->showHud) {
+    if (!acs->showHud) {
         return;
     }
 
     posX -= 28;
     posY -= 4;
 
-    maxCutOff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals];
+    maxCutOff = acs->mashMeterCutoffs[acs->mashMeterNumIntervals];
 
     if (fillValue < 0) {
         fillValue = 0;
     }
 
     width = 0;
-    for (i = 0; i < actionCommandStatus->mashMeterIntervals; i++) {
-        cutOff = actionCommandStatus->mashMeterCutoffs[i + 1];
+    for (i = 0; i < acs->mashMeterNumIntervals; i++) {
+        cutOff = acs->mashMeterCutoffs[i + 1];
         if (cutOff > fillValue) {
             cutOff = fillValue;
         }
@@ -150,22 +150,22 @@ void draw_mash_meter(s32 posX, s32 posY, s32 fillValue, s32 colorMode) {
     }
 
     //difference between current and previous filled value
-    offsetX = width - actionCommandStatus->barFillWidth;
-    if (abs(offsetX) >= sMashMeterSmoothDivisor * 100) {
-        actionCommandStatus->barFillWidth += offsetX / sMashMeterSmoothDivisor;
+    offsetX = width - acs->meterFillWidth;
+    if (abs(offsetX) >= MashMeterSmoothDivisor * 100) {
+        acs->meterFillWidth += offsetX / MashMeterSmoothDivisor;
     } else {
-        actionCommandStatus->barFillWidth = width;
+        acs->meterFillWidth = width;
     }
 
     offsetX = 0;
-    for (i = 0; i < actionCommandStatus->mashMeterIntervals; i++) {
-        cutOff = actionCommandStatus->mashMeterCutoffs[i + 1];
+    for (i = 0; i < acs->mashMeterNumIntervals; i++) {
+        cutOff = acs->mashMeterCutoffs[i + 1];
         width = (cutOff * 60 / maxCutOff) - offsetX;
         r = mashMeter_bgColors[3 * i + 0];
         g = mashMeter_bgColors[3 * i + 1];
         b = mashMeter_bgColors[3 * i + 2];
         startup_draw_prim_rect_COPY(posX + offsetX, posY, posX + offsetX + width, posY + 5, r, g, b, 255);
-        if (i < actionCommandStatus->mashMeterIntervals - 1) {
+        if (i < acs->mashMeterNumIntervals - 1) {
             r = mashMeter_cutOffColors[3 * i + 0];
             g = mashMeter_cutOffColors[3 * i + 1];
             b = mashMeter_cutOffColors[3 * i + 2];
@@ -177,7 +177,7 @@ void draw_mash_meter(s32 posX, s32 posY, s32 fillValue, s32 colorMode) {
     }
 
     offsetX = 0;
-    for (i = 0; i < actionCommandStatus->mashMeterIntervals; i++) {
+    for (i = 0; i < acs->mashMeterNumIntervals; i++) {
         if (colorMode == 0) {
             r = mashMeter_fillColors[3 * i + 0];
             g = mashMeter_fillColors[3 * i + 1];
@@ -196,13 +196,13 @@ void draw_mash_meter(s32 posX, s32 posY, s32 fillValue, s32 colorMode) {
             b = 0;
         }
 
-        cutOff = actionCommandStatus->mashMeterCutoffs[i + 1];
+        cutOff = acs->mashMeterCutoffs[i + 1];
         if (cutOff > fillValue) {
             cutOff = fillValue;
         }
 
         filledWidth = cutOff * 60 / maxCutOff - offsetX;
-        width = actionCommandStatus->barFillWidth / 100 - offsetX;
+        width = acs->meterFillWidth / 100 - offsetX;
 
         if (width < 0) {
             break;
@@ -217,81 +217,81 @@ void draw_mash_meter(s32 posX, s32 posY, s32 fillValue, s32 colorMode) {
 
         startup_draw_prim_rect_COPY(posX + offsetX, posY, posX + offsetX + width, posY + 5, r, g, b, 255);
         offsetX += filledWidth;
-        if (i >= actionCommandStatus->mashMeterIntervals - 1) {
+        if (i >= acs->mashMeterNumIntervals - 1) {
             break;
         }
     }
 }
 
 void draw_mash_meter_multicolor(s32 posX, s32 posY, s32 fillValue) {
-    sMashMeterSmoothDivisor = 2;
+    MashMeterSmoothDivisor = 2;
     draw_mash_meter(posX, posY, fillValue, MASH_METER_MODE_MULTI_COLOR);
 }
 
 void draw_mash_meter_multicolor_with_divisor(s32 posX, s32 posY, s32 fillValue, s32 divisor) {
-    sMashMeterSmoothDivisor = divisor;
+    MashMeterSmoothDivisor = divisor;
     draw_mash_meter(posX, posY, fillValue, MASH_METER_MODE_MULTI_COLOR);
 }
 
 void draw_mash_meter_mode(s32 posX, s32 posY, s32 fillValue, s32 colorMode) {
-    sMashMeterSmoothDivisor = 2;
+    MashMeterSmoothDivisor = 2;
     draw_mash_meter(posX, posY, fillValue, colorMode);
 }
 
 void draw_mash_meter_mode_with_divisor(s32 posX, s32 posY, s32 fillValue, s32 divisor, s32 colorMode) {
-    sMashMeterSmoothDivisor = divisor;
+    MashMeterSmoothDivisor = divisor;
     draw_mash_meter(posX, posY, fillValue, colorMode);
 }
 
 void draw_mash_meter_blink(s32 posX, s32 posY, s32 fillValue) {
-    sMashMeterSmoothDivisor = 2;
+    MashMeterSmoothDivisor = 2;
     draw_mash_meter(posX, posY, fillValue, MASH_METER_MODE_BLINK);
 }
 
 void draw_mash_meter_blink_with_divisor(s32 posX, s32 posY, s32 fillValue, s32 divisor) {
-    sMashMeterSmoothDivisor = divisor;
+    MashMeterSmoothDivisor = divisor;
     draw_mash_meter(posX, posY, fillValue, MASH_METER_MODE_BLINK);
 }
 
 void action_command_init_status(void) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
 
-    actionCommandStatus->autoSucceed = FALSE;
-    actionCommandStatus->berserkerEnabled = FALSE;
+    acs->autoSucceed = FALSE;
+    acs->berserkerEnabled = FALSE;
 
     if (!(gBattleStatus.flags1 & BS_FLAGS1_PARTNER_ACTING)) {
         if (is_ability_active(ABILITY_RIGHT_ON)) {
-            actionCommandStatus->autoSucceed = TRUE;
+            acs->autoSucceed = TRUE;
         }
 
         if (!(gBattleStatus.flags1 & BS_FLAGS1_PARTNER_ACTING) && is_ability_active(ABILITY_BERSERKER)) {
-            actionCommandStatus->showHud = FALSE;
-            actionCommandStatus->berserkerEnabled = TRUE;
+            acs->showHud = FALSE;
+            acs->berserkerEnabled = TRUE;
 
             if (rand_int(100) < 25) {
-                actionCommandStatus->autoSucceed = TRUE;
+                acs->autoSucceed = TRUE;
             }
         }
     }
 
     if (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED) {
-        actionCommandStatus->autoSucceed = TRUE;
+        acs->autoSucceed = TRUE;
     }
 
     if (gBattleStatus.flags1 & BS_FLAGS1_AUTO_SUCCEED_ACTION) {
-        actionCommandStatus->autoSucceed = TRUE;
-        actionCommandStatus->showHud = FALSE;
+        acs->autoSucceed = TRUE;
+        acs->showHud = FALSE;
     }
 }
 
 void action_command_update(void) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
 
     if (gBattleStatus.flags1 & BS_FLAGS1_FREE_ACTION_COMMAND) {
         action_command_free();
     }
 
-    switch (actionCommandStatus->actionCommandID) {
+    switch (acs->actionCommandID) {
         case ACTION_COMMAND_NONE:
             break;
         case ACTION_COMMAND_JUMP:
@@ -312,8 +312,8 @@ void action_command_update(void) {
         case ACTION_COMMAND_STOP_LEECH:
             action_command_stop_leech_update();
             break;
-        case ACTION_COMMAND_07:
-            action_command_07_update();
+        case ACTION_COMMAND_UNUSED_FLEE:
+            action_command_unused_flee_update();
             break;
         case ACTION_COMMAND_DIZZY_SHELL:
             action_command_dizzy_shell_update();
@@ -321,8 +321,8 @@ void action_command_update(void) {
         case ACTION_COMMAND_FIRE_SHELL:
             action_command_fire_shell_update();
             break;
-        case ACTION_COMMAND_0A:
-            action_command_0A_update();
+        case ACTION_COMMAND_UNUSED_MASH_A:
+            action_command_unused_mash_a_update();
             break;
         case ACTION_COMMAND_BOMB:
             action_command_bomb_update();
@@ -357,8 +357,8 @@ void action_command_update(void) {
         case ACTION_COMMAND_SPOOK:
             action_command_spook_update();
             break;
-        case ACTION_COMMAND_WATER_BLOCK:
-            action_command_water_block_update();
+        case ACTION_COMMAND_THREE_CHANCES:
+            action_command_three_chances_update();
             break;
         case ACTION_COMMAND_TIDAL_WAVE:
             action_command_tidal_wave_update();
@@ -390,8 +390,8 @@ void action_command_draw(void) {
         case ACTION_COMMAND_STOP_LEECH:
             action_command_stop_leech_draw();
             break;
-        case ACTION_COMMAND_07:
-            action_command_07_draw();
+        case ACTION_COMMAND_UNUSED_FLEE:
+            action_command_unused_flee_draw();
             break;
         case ACTION_COMMAND_DIZZY_SHELL:
             action_command_dizzy_shell_draw();
@@ -399,8 +399,8 @@ void action_command_draw(void) {
         case ACTION_COMMAND_FIRE_SHELL:
             action_command_fire_shell_draw();
             break;
-        case ACTION_COMMAND_0A:
-            action_command_0A_draw();
+        case ACTION_COMMAND_UNUSED_MASH_A:
+            action_command_unused_mash_a_draw();
             break;
         case ACTION_COMMAND_BOMB:
             action_command_bomb_draw();
@@ -435,8 +435,8 @@ void action_command_draw(void) {
         case ACTION_COMMAND_SPOOK:
             action_command_spook_draw();
             break;
-        case ACTION_COMMAND_WATER_BLOCK:
-            action_command_water_block_draw();
+        case ACTION_COMMAND_THREE_CHANCES:
+            action_command_three_chances_draw();
             break;
         case ACTION_COMMAND_TIDAL_WAVE:
             action_command_tidal_wave_draw();
@@ -444,9 +444,9 @@ void action_command_draw(void) {
 }
 
 void action_command_free(void) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
 
-    switch (actionCommandStatus->actionCommandID) {
+    switch (acs->actionCommandID) {
         case ACTION_COMMAND_NONE:
             break;
         case ACTION_COMMAND_JUMP:
@@ -467,8 +467,8 @@ void action_command_free(void) {
         case ACTION_COMMAND_STOP_LEECH:
             action_command_jump_draw();
             break;
-        case ACTION_COMMAND_07:
-            action_command_07_free();
+        case ACTION_COMMAND_UNUSED_FLEE:
+            action_command_unused_flee_free();
             break;
         case ACTION_COMMAND_DIZZY_SHELL:
             action_command_dizzy_shell_free();
@@ -476,8 +476,8 @@ void action_command_free(void) {
         case ACTION_COMMAND_FIRE_SHELL:
             action_command_fire_shell_free();
             break;
-        case ACTION_COMMAND_0A:
-            action_command_0A_free();
+        case ACTION_COMMAND_UNUSED_MASH_A:
+            action_command_unused_mash_a_free();
             break;
         case ACTION_COMMAND_BOMB:
             action_command_bomb_free();
@@ -512,32 +512,32 @@ void action_command_free(void) {
         case ACTION_COMMAND_SPOOK:
             action_command_spook_free();
             break;
-        case ACTION_COMMAND_WATER_BLOCK:
-            action_command_water_block_free();
+        case ACTION_COMMAND_THREE_CHANCES:
+            action_command_three_chances_free();
             break;
         case ACTION_COMMAND_TIDAL_WAVE:
             action_command_tidal_wave_free();
             break;
     }
 
-    actionCommandStatus->actionCommandID = ACTION_COMMAND_NONE;
+    acs->actionCommandID = ACTION_COMMAND_NONE;
     gBattleStatus.flags1 &= ~BS_FLAGS1_2000;
     gBattleStatus.flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
     close_action_command_instruction_popup();
-    btl_set_popup_duration(0);
+    btl_set_popup_duration(POPUP_MSG_OFF);
 }
 
-void func_80268E88(void) {
+void create_action_command_ui_worker(void) {
     ActionCommandStatus* actionCmdStatus = &gActionCommandStatus;
     actionCmdStatus->workerID = create_worker_frontUI(action_command_update, action_command_draw);
-    actionCmdStatus->actionCommandID = 0;
+    actionCmdStatus->actionCommandID = ACTION_COMMAND_NONE;
 }
 
 s32 check_block_input(s32 buttonMask) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
     s32 mashWindow;
     s32 blockWindow;
     s32 block;
@@ -548,20 +548,20 @@ s32 check_block_input(s32 buttonMask) {
 
     battleStatus->blockResult = BLOCK_RESULT_FAIL;
 
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL_BLOCK && (battleStatus->flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
+    if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL_BLOCK && (battleStatus->flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
         battleStatus->blockResult = BLOCK_RESULT_SUCCESS;
         return TRUE;
     }
 
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED || (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED)) {
+    if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED || (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED)) {
         return FALSE;
     }
 
     if (playerData->hitsTaken < 9999) {
         playerData->hitsTaken++;
-        actionCommandStatus->hitsTakenIsMax = FALSE;
+        acs->hitsTakenIsMax = FALSE;
     } else {
-        actionCommandStatus->hitsTakenIsMax = TRUE;
+        acs->hitsTakenIsMax = TRUE;
     }
 
     block = FALSE;
@@ -631,28 +631,28 @@ s32 check_block_input(s32 buttonMask) {
             bufferPos++;
         }
     }
-    if (block && !actionCommandStatus->hitsTakenIsMax) {
+    if (block && !acs->hitsTakenIsMax) {
         playerData->hitsBlocked++;
     }
 
     return block;
 }
 
-void func_80269118(void) {
+void increment_action_command_attempt_count(void) {
     PlayerData* playerData = &gPlayerData;
-    ActionCommandStatus *actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus *acs = &gActionCommandStatus;
 
-    if (!actionCommandStatus->autoSucceed) {
+    if (!acs->autoSucceed) {
         if (playerData->actionCommandAttempts < 9999) {
             playerData->actionCommandAttempts++;
-            actionCommandStatus->hitsTakenIsMax = FALSE;
+            acs->hitsTakenIsMax = FALSE;
         } else {
-            actionCommandStatus->hitsTakenIsMax = TRUE;
+            acs->hitsTakenIsMax = TRUE;
         }
     }
 }
 
-void func_80269160(void) {
+void increment_action_command_success_count(void) {
     PlayerData* playerData = &gPlayerData;
 
     if (!gActionCommandStatus.autoSucceed && gActionCommandStatus.hitsTakenIsMax) {
@@ -667,7 +667,7 @@ API_CALLABLE(SetActionDifficultyTable) {
 
 API_CALLABLE(SetupMashMeter) {
     Bytecode* args = script->ptrReadPos;
-    gActionCommandStatus.mashMeterIntervals = evt_get_variable(script, *args++);
+    gActionCommandStatus.mashMeterNumIntervals = evt_get_variable(script, *args++);
     gActionCommandStatus.mashMeterCutoffs[1] = evt_get_variable(script, *args++);
     gActionCommandStatus.mashMeterCutoffs[2] = evt_get_variable(script, *args++);
     gActionCommandStatus.mashMeterCutoffs[3] = evt_get_variable(script, *args++);
@@ -677,13 +677,13 @@ API_CALLABLE(SetupMashMeter) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(GetActionSuccess) {
-    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionSuccess);
+API_CALLABLE(GetSmashActionQuality) {
+    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionQuality);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(SetActionSuccess) {
-    gBattleStatus.actionSuccess = evt_get_variable(script, *script->ptrReadPos);
+    gBattleStatus.actionQuality = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -708,12 +708,12 @@ API_CALLABLE(GetCommandAutoSuccess) {
 }
 
 API_CALLABLE(SetCommandAutoSuccess) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
 
     if (evt_get_variable(script, *script->ptrReadPos) != 0) {
-        actionCommandStatus->autoSucceed = TRUE;
+        acs->autoSucceed = TRUE;
     } else {
-        actionCommandStatus->autoSucceed = FALSE;
+        acs->autoSucceed = FALSE;
     }
     return ApiStatus_DONE2;
 }
@@ -723,11 +723,11 @@ API_CALLABLE(func_802693F0) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(CloseActionCommandInfo) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+API_CALLABLE(InterruptActionCommand) {
+    ActionCommandStatus* acs = &gActionCommandStatus;
 
     if (isInitialCall) {
-        switch (actionCommandStatus->actionCommandID) {
+        switch (acs->actionCommandID) {
             case ACTION_COMMAND_WHIRLWIND:
             case ACTION_COMMAND_STOP_LEECH:
                 return ApiStatus_DONE2;
@@ -737,13 +737,13 @@ API_CALLABLE(CloseActionCommandInfo) {
         }
     }
 
-    sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
+    sfx_stop_sound(SOUND_LOOP_CHARGE_METER);
     close_action_command_instruction_popup();
 
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80269470) {
+API_CALLABLE(InterruptLeechActionCommand) {
     if (isInitialCall) {
         action_command_free();
         return ApiStatus_BLOCK;
@@ -754,22 +754,22 @@ API_CALLABLE(func_80269470) {
 }
 
 API_CALLABLE(ShowActionHud) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
 
     if (evt_get_variable(script, *script->ptrReadPos) == 0) {
-        actionCommandStatus->showHud = FALSE;
+        acs->showHud = FALSE;
     } else {
-        actionCommandStatus->showHud = TRUE;
+        acs->showHud = TRUE;
     }
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(GetActionSuccessCopy) {
-    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionSuccess);
+API_CALLABLE(GetMashActionQuality) {
+    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionQuality);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(GetActionResult) {
+API_CALLABLE(GetJumpActionQuality) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionResult);
     return ApiStatus_DONE2;
 }
@@ -784,22 +784,22 @@ API_CALLABLE(GetBlockResult) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(GetActionQuality) {
-    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionQuality);
+API_CALLABLE(GetActionProgress) {
+    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionProgress);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(SetActionQuality) {
-    gBattleStatus.actionQuality = evt_get_variable(script, *script->ptrReadPos);
+API_CALLABLE(SetActionProgress) {
+    gBattleStatus.actionProgress = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80269600) {
-    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.unk_85);
+API_CALLABLE(GetActionResultTier) {
+    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.resultTier);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_8026962C) {
-    gBattleStatus.unk_85 = evt_get_variable(script, *script->ptrReadPos);
+API_CALLABLE(SetActionResultTier) {
+    gBattleStatus.resultTier = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }

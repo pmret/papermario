@@ -1524,7 +1524,6 @@ void render_player_model(void) {
             rtPtr->dist = -z;
             rtPtr->renderMode = playerStatus->renderMode;
 
-
             if (!(playerStatus->flags & PS_FLAG_SPINNING)) {
                 appendGfx = appendGfx_player;
             } else {

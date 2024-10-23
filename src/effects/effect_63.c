@@ -45,7 +45,7 @@ EffectInstance* effect_63_main(
 
     bpPtr->init = effect_63_init;
     bpPtr->update = effect_63_update;
-    bpPtr->renderWorld = effect_63_render;
+    bpPtr->renderScene = effect_63_render;
     bpPtr->unk_00 = 0;
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_63;
@@ -222,7 +222,7 @@ void effect_63_appendGfx(void* effect) {
 
     if (part->unk_00 != 0) {
         gDPPipeSync(gMainGfxPos++);
-        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
         gDPSetPrimColor(gMainGfxPos++, 0, 0, part->unk_28, part->unk_2C, part->unk_30, unk_34);
         gDPSetEnvColor(gMainGfxPos++, part->unk_38, part->unk_3C, part->unk_40, part->unk_44);
         gSPDisplayList(gMainGfxPos++, D_E00C6C9C[unk_00]);

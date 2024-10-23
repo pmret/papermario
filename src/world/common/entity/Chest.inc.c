@@ -48,7 +48,6 @@ EvtScript N(EVS_Chest_GetItem) = {
         End \
     }
 
-
 #define EVT_OPEN_CHEST_KEY(item, flag) \
     { \
         Set(LVarA, item) \

@@ -10,7 +10,7 @@
 
 #include "world/common/todo/IsJumpMaxCharged.inc.c"
 
-BSS s32 D_802A2C20;
+BSS b32 N(HasCharged);
 
 API_CALLABLE(N(func_802A1108_74D678)) {
     Bytecode* args = script->ptrReadPos;
@@ -21,10 +21,10 @@ API_CALLABLE(N(func_802A1108_74D678)) {
     s32* var4;
 
     fx_stat_change(2, var1, var2, var3, 1.0f, 60);
-    var4 = &D_802A2C20;
-    *var4 = 0;
+
+    N(HasCharged) = FALSE;
     if (battleStatus->jumpCharge > 0) {
-        *var4 = 1;
+        N(HasCharged) = TRUE;
     }
 
     battleStatus->jumpCharge += 3;
@@ -42,22 +42,22 @@ API_CALLABLE(N(func_802A1108_74D678)) {
 
 #include "world/common/todo/UnkMoveFunc3.inc.c"
 
-API_CALLABLE(N(func_802A133C_761C5C)) {
-    if (D_802A2C20 == 0) {
-        script->varTable[0] = 6;
+API_CALLABLE(N(GetChargeMessage)) {
+    if (!N(HasCharged)) {
+        script->varTable[0] = BTL_MSG_CHARGE_JUMP;
     } else {
-        script->varTable[0] = 7;
+        script->varTable[0] = BTL_MSG_CHARGE_JUMP_MORE;
     }
 
     return ApiStatus_DONE2;
 }
 
-EvtScript N(EVS_UseMove1) = {
+EvtScript N(EVS_UseMove_Unimplemented) = {
     Return
     End
 };
 
-EvtScript N(EVS_UseMove0) = {
+EvtScript N(EVS_UseMove) = {
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_CHARGE_UP)
     Wait(10)
     ChildThread
@@ -93,7 +93,7 @@ EvtScript N(EVS_UseMove0) = {
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Land)
         Wait(4)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-        Call(N(func_802A133C_761C5C))
+        Call(N(GetChargeMessage))
         Call(ShowVariableMessageBox, LVar0, 60, 3)
     Else
         Call(ShowMessageBox, BTL_MSG_CANT_CHARGE, 60)

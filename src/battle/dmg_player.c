@@ -1917,7 +1917,7 @@ API_CALLABLE(PlayerBasicJumpToGoal) {
             }
             break;
         case BASIC_STATE_02:
-            if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
+            if (battleStatus->actionCommandMode == AC_MODE_NOT_LEARNED) {
                 return ApiStatus_DONE2;
             }
             playerState->moveTime = 1;
@@ -2507,21 +2507,21 @@ API_CALLABLE(PlayerUltraJumpToGoal) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(GetPlayerActionSuccess) {
+API_CALLABLE(GetPlayerActionQuality) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
-    s32 actionSuccess = gBattleStatus.actionSuccess;
-    s32 actionSucceeded = 0;
+    s32 actionQuality = gBattleStatus.actionQuality;
+    s32 quality = 0;
 
-    if (actionSuccess < 0) {
-        actionSuccess = 0;
+    if (actionQuality < 0) {
+        actionQuality = 0;
     }
 
-    if (actionSucceeded < actionSuccess) {
-        actionSucceeded = actionSuccess;
+    if (quality < actionQuality) {
+        quality = actionQuality;
     }
 
-    evt_set_variable(script, outVar, actionSucceeded);
+    evt_set_variable(script, outVar, quality);
     return ApiStatus_DONE2;
 }
 

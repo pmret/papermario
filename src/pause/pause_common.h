@@ -103,7 +103,7 @@ extern s32 gPauseHeldButtons;
 extern s32 gPausePressedButtons;
 extern s32 gPauseCurrentDescMsg;
 extern HudScript* gPauseCurrentDescIconScript;
-extern s32 gPauseCursorIconID;
+extern HudElemID gPauseCursorHID;
 extern s8 gPauseMenuCurrentTab;
 
 void pause_update_tab_default(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,

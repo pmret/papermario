@@ -22,7 +22,7 @@ EffectInstance* gather_magic_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     bp.unk_00 = 0;
     bp.init = gather_magic_init;
     bp.update = gather_magic_update;
-    bp.renderWorld = gather_magic_render;
+    bp.renderScene = gather_magic_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_GATHER_MAGIC;
 
@@ -162,7 +162,7 @@ void gather_magic_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
     guRotateF(sp98, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);

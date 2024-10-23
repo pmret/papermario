@@ -15,7 +15,7 @@ extern EvtScript battle_move_auto_smash_EVS_UseMove;
 extern EvtScript battle_move_power_smash_EVS_UseMove;
 extern EvtScript battle_move_super_smash_EVS_UseMove;
 extern EvtScript battle_move_mega_smash_EVS_UseMove;
-extern EvtScript battle_move_quake_hammer_EVS_UseMove0;
+extern EvtScript battle_move_quake_hammer_EVS_UseMove;
 extern EvtScript battle_move_power_quake_EVS_UseMove;
 extern EvtScript battle_move_mega_quake_EVS_UseMove;
 extern EvtScript battle_move_hammer_throw_EVS_UseMove;
@@ -27,12 +27,12 @@ extern EvtScript battle_move_shell_crack_EVS_UseMove;
 extern EvtScript battle_move_jump_attack_EVS_UseMove;
 extern EvtScript battle_move_jump_attack_EVS_FirstStrike;
 extern EvtScript battle_move_jump_attack_EVS_UseBerserker;
-extern EvtScript battle_move_jump_charge_0_EVS_UseMove0;
-extern EvtScript battle_move_jump_charge_0_EVS_UseMove1;
-extern EvtScript battle_move_jump_charge_1_EVS_UseMove0;
-extern EvtScript battle_move_jump_charge_1_EVS_UseMove1;
-extern EvtScript battle_move_jump_charge_2_EVS_UseMove0;
-extern EvtScript battle_move_jump_charge_2_EVS_UseMove1;
+extern EvtScript battle_move_jump_charge_0_EVS_UseMove;
+extern EvtScript battle_move_jump_charge_0_EVS_UseMove_Unimplemented;
+extern EvtScript battle_move_jump_charge_1_EVS_UseMove;
+extern EvtScript battle_move_jump_charge_1_EVS_UseMove_Unimplemented;
+extern EvtScript battle_move_jump_charge_2_EVS_UseMove;
+extern EvtScript battle_move_jump_charge_2_EVS_UseMove_Unimplemented;
 extern EvtScript battle_move_auto_jump_EVS_UseMove;
 extern EvtScript battle_move_power_jump_EVS_UseMove;
 extern EvtScript battle_move_super_jump_EVS_UseMove;
@@ -56,7 +56,7 @@ BattleMoveEntry gMoveScriptTable[] = {
     [MOVE_FIRST_STRIKE_HAMMER]  BTL_MOVE(hammer_attack, EVS_FirstStrike),
     [MOVE_BERSERKER_HAMMER]     BTL_MOVE(hammer_attack, EVS_UseBerserker),
     [MOVE_SPIN_SMASH]           BTL_MOVE(spin_smash, EVS_UseMove),
-    [MOVE_QUAKE_HAMMER]         BTL_MOVE(quake_hammer, EVS_UseMove0),
+    [MOVE_QUAKE_HAMMER]         BTL_MOVE(quake_hammer, EVS_UseMove),
     [MOVE_D_DOWN_POUND]         BTL_MOVE(d_down_pound, EVS_UseMove),
     [MOVE_SMASH_CHARGE0]        BTL_MOVE(hammer_charge_0, EVS_UseMove0),
     [MOVE_UNUSED_HAMMER_0C]     BTL_MOVE(hammer_charge_0, EVS_UseMove1),
@@ -82,12 +82,12 @@ BattleMoveEntry gMoveScriptTable[] = {
     [MOVE_POWER_BOUNCE]         BTL_MOVE(power_bounce, EVS_UseMove),
     [MOVE_SLEEP_STOMP]          BTL_MOVE(sleep_stomp, EVS_UseMove),
     [MOVE_DIZZY_STOMP]          BTL_MOVE(dizzy_stomp, EVS_UseMove),
-    [MOVE_JUMP_CHARGE0]         BTL_MOVE(jump_charge_0, EVS_UseMove0),
-    [MOVE_UNUSED_24]            BTL_MOVE(jump_charge_0, EVS_UseMove1),
-    [MOVE_JUMP_CHARGE]          BTL_MOVE(jump_charge_1, EVS_UseMove0),
-    [MOVE_UNUSED_26]            BTL_MOVE(jump_charge_1, EVS_UseMove1),
-    [MOVE_SUPER_JUMP_CHARGE]    BTL_MOVE(jump_charge_2, EVS_UseMove0),
-    [MOVE_UNUSED_28]            BTL_MOVE(jump_charge_2, EVS_UseMove1),
+    [MOVE_JUMP_CHARGE0]         BTL_MOVE(jump_charge_0, EVS_UseMove),
+    [MOVE_UNUSED_24]            BTL_MOVE(jump_charge_0, EVS_UseMove_Unimplemented),
+    [MOVE_JUMP_CHARGE]          BTL_MOVE(jump_charge_1, EVS_UseMove),
+    [MOVE_UNUSED_26]            BTL_MOVE(jump_charge_1, EVS_UseMove_Unimplemented),
+    [MOVE_SUPER_JUMP_CHARGE]    BTL_MOVE(jump_charge_2, EVS_UseMove),
+    [MOVE_UNUSED_28]            BTL_MOVE(jump_charge_2, EVS_UseMove_Unimplemented),
     [MOVE_AUTO_JUMP]            BTL_MOVE(auto_jump, EVS_UseMove),
     [MOVE_AUTO_MULTIBOUNCE]     BTL_MOVE(auto_multibounce, EVS_UseMove),
     [MOVE_POWER_JUMP]           BTL_MOVE(power_jump, EVS_UseMove),

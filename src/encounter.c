@@ -175,8 +175,8 @@ s32 gEncounterSubState;
 EncounterStatus gCurrentEncounter;
 
 s8 HasPreBattleSongPushed;
-b8 PendingPartnerAbilityResume;
-b8 LastBattleStartedBySpin;
+s8 PendingPartnerAbilityResume;
+s8 LastBattleStartedBySpin;
 s16 gFirstStrikeMessagePos;
 
 BSS s32 WorldMerleeEffectsTime;
@@ -2551,7 +2551,6 @@ void create_encounters(void) {
                     enemy->hitboxIsActive = FALSE;
                     enemy->instigatorValue = 0;
                     enemy->aiDetectFlags = npcData->aiDetectFlags;
-
 
                     enemy->aiFlags = npcData->aiFlags;
                     enemy->unk_DC = 0;

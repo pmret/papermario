@@ -917,10 +917,8 @@ void pause_badges_init(MenuPanel* panel) {
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseBadgesIconIDs); i++) {
-        s32 iconID = hud_element_create(gPauseBadgesElements[gCurrentLanguage][i]);
-
-        gPauseBadgesIconIDs[i] = iconID;
-        hud_element_set_flags(iconID, HUD_ELEMENT_FLAG_80);
+        gPauseBadgesIconIDs[i] = hud_element_create(gPauseBadgesElements[gCurrentLanguage][i]);
+        hud_element_set_flags(gPauseBadgesIconIDs[i], HUD_ELEMENT_FLAG_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseBadgesWindowBPs); i++) {
@@ -994,16 +992,16 @@ void pause_badges_handle_input(MenuPanel* panel) {
 
             if (heldButtons & (BUTTON_STICK_UP | BUTTON_Z)) {
                 if (heldButtons & BUTTON_STICK_UP) {
-                    selectedRow -= 1;
+                    selectedRow--;
                     if (selectedRow < 0) {
                         selectedRow = 0;
                     }
                     if (selectedRow < gPauseBadgesPages[gPauseBadgesCurrentPage].listStart) {
-                        gPauseBadgesCurrentPage -= 1;
+                        gPauseBadgesCurrentPage--;
                     }
                 } else {
                     // Z button press
-                    gPauseBadgesCurrentPage -= 1;
+                    gPauseBadgesCurrentPage--;
                     if (gPauseBadgesCurrentPage < 0) {
                         gPauseBadgesCurrentPage = 0;
                     }
@@ -1021,8 +1019,8 @@ void pause_badges_handle_input(MenuPanel* panel) {
                     if (selectedRow >= (page->listStart + page->numRows)) {
                         gPauseBadgesCurrentPage += 1;
                         if (!gPauseBadgesPages[gPauseBadgesCurrentPage].enabled) {
-                            gPauseBadgesCurrentPage -= 1;
-                            selectedRow -= 1;
+                            gPauseBadgesCurrentPage--;
+                            selectedRow--;
                         }
                     }
                 } else {
@@ -1033,7 +1031,7 @@ void pause_badges_handle_input(MenuPanel* panel) {
                     newPage = &gPauseBadgesPages[gPauseBadgesCurrentPage];
 
                     if (!newPage->enabled) {
-                        gPauseBadgesCurrentPage -= 1;
+                        gPauseBadgesCurrentPage--;
                     } else {
                         selectedRow = newPage->listStart;
                     }
@@ -1043,7 +1041,7 @@ void pause_badges_handle_input(MenuPanel* panel) {
             newPageNumCols = gPauseBadgesPages[gPauseBadgesCurrentPage].numCols;
             if (gPauseBadgesItemIds[selectedRow * newPageNumCols] != BADGE_NONE_STANDIN) {
                 if (gPauseHeldButtons & BUTTON_STICK_LEFT) {
-                    selectedCol -= 1;
+                    selectedCol--;
                     if (selectedCol < 0) {
                         selectedCol = newPageNumCols - 1;
                     }

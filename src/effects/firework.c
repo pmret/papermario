@@ -57,7 +57,7 @@ EffectInstance* firework_main(
     bp.unk_00 = 0;
     bp.init = firework_init;
     bp.update = firework_update;
-    bp.renderWorld = firework_render;
+    bp.renderScene = firework_render;
     bp.renderUI = func_E0086398;
     bp.effectID = EFFECT_FIREWORK;
 
@@ -194,7 +194,7 @@ void func_E00863B4(EffectInstance* effect) {
         f32 unk_28;
 
         gDPPipeSync(gMainGfxPos++);
-        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->shared->graphics));
 
         unk_28 = part->unk_28;
 

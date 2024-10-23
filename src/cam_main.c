@@ -205,8 +205,8 @@ void render_frame(s32 isSecondPass) {
                 }
                 render_player();
                 render_npcs();
-                render_workers_world();
-                render_effects_world();
+                render_workers_scene();
+                render_effects_scene();
                 execute_render_tasks();
                 render_transformed_hud_elements();
             } else {
@@ -219,7 +219,7 @@ void render_frame(s32 isSecondPass) {
                 render_item_entities();
             }
         } else {
-            render_workers_world();
+            render_workers_scene();
             execute_render_tasks();
         }
 

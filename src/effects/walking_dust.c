@@ -28,7 +28,7 @@ void walking_dust_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
     bp.unk_00 = 0;
     bp.init = walking_dust_init;
     bp.update = walking_dust_update;
-    bp.renderWorld = walking_dust_render;
+    bp.renderScene = walking_dust_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_WALKING_DUST;
 
@@ -125,13 +125,12 @@ void walking_dust_appendGfx(void* effect) {
             break;
     }
 
-
     if ((data->unk_6C == 0 && temp_t4 == 6) || (data->unk_6C == 1 && temp_t4 == 7)) {
         cond = TRUE;
     }
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->shared->graphics));
     gSPDisplayList(gMainGfxPos++, dlist);
     gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, 127);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 230, 222, 222, 110);

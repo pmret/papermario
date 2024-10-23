@@ -98,7 +98,6 @@ API_CALLABLE(N(UpdateTrafficBooAlpha)) {
     return ApiStatus_DONE2;
 }
 
-
 EvtScript N(EVS_NpcIdle_TrafficBoo) = {
     Call(N(UpdateTrafficBooMotion))
     Return

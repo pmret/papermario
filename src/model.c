@@ -1296,7 +1296,7 @@ s32 RenderTaskBasePriorities[] = {
     [RENDER_MODE_CLOUD_NO_ZB]               =  700000,
 };
 
-b8 D_8014C248 = FALSE; // possibly a 'warm-up done' flag for boot. never read.
+s8 D_8014C248 = FALSE; // possibly a 'warm-up done' flag for boot. never read.
 
 ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
 ModelNode** gCurrentModelTreeRoot;
@@ -3111,7 +3111,6 @@ void make_texture_gfx(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_P
     auxFmt = header->auxFmt;
     auxBitDepth = header->auxBitDepth;
 
-
     if (extraTileType == EXTRA_TILE_AUX_INDEPENDENT) {
         if (palette != NULL) {
             auxPaletteIndex = 1;
@@ -3378,7 +3377,7 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTran
 
             (*gCurrentModelTreeNodeInfo)[TreeIterPos].modelIndex = -1;
             (*gCurrentModelTreeNodeInfo)[TreeIterPos].treeDepth = treeDepth;
-            TreeIterPos += 1;
+            TreeIterPos++;
             return;
         }
     }
@@ -3401,7 +3400,7 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTran
 
     mdl_create_model(modelBPptr, 4);
     (*gCurrentModelTreeNodeInfo)[TreeIterPos].treeDepth = treeDepth;
-    TreeIterPos += 1;
+    TreeIterPos++;
 }
 
 s32 get_model_list_index_from_tree_index(s32 treeIndex) {
@@ -4046,7 +4045,6 @@ void mdl_local_gfx_copy_vertices(Vtx* src, s32 num, Vtx* dest) {
         ((u8*)dest)[i] = ((u8*)src)[i];
     }
 }
-
 
 void mdl_make_local_vertex_copy(s32 copyIndex, u16 modelID, s32 isMakingCopy) {
     s32 numVertices;

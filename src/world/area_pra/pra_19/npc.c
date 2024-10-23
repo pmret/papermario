@@ -84,7 +84,7 @@ void N(appendGfx_example_player)(void* data);
 void N(worker_draw_example_player)(void);
 
 API_CALLABLE(N(CreateExamplePlayerRenderer)) {
-    script->array[0] = create_worker_world(NULL, N(worker_draw_example_player));
+    script->array[0] = create_worker_scene(NULL, N(worker_draw_example_player));
     return ApiStatus_DONE2;
 }
 
@@ -118,7 +118,6 @@ void N(appendGfx_example_player)(void* data) {
     spr_update_player_sprite(PLAYER_SPRITE_AUX2, npc->curAnim, 1.0f);
     spr_draw_player_sprite(PLAYER_SPRITE_AUX2, 0, 0, 0, mtxTransform);
 }
-
 
 API_CALLABLE(N(SetPlayerFacingAngle)) {
     gPlayerStatus.spriteFacingAngle = script->varTable[0];

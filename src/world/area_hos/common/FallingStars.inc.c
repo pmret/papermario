@@ -44,7 +44,6 @@ API_CALLABLE(N(SpawnRandomBackgroundShootingStarFX)) {
     return ApiStatus_DONE2;
 }
 
-
 API_CALLABLE(N(SpawnRandomForegroundShootingStarFX)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 yaw = gCameras[CAM_DEFAULT].curYaw / 180.0f * PI;

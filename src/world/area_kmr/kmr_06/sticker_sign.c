@@ -108,7 +108,7 @@ API_CALLABLE(N(CreateSticker)) {
         iconPal);
 
     sticker->imgfxIdx = imgfx_get_free_instances(1);
-    sticker->workerID = create_worker_world(NULL, N(worker_render_sticker));
+    sticker->workerID = create_worker_scene(NULL, N(worker_render_sticker));
     evt_set_variable(script, MV_StickerData, (s32) sticker);
     evt_set_variable(script, MV_StickerImage, (s32) iconImg);
     evt_set_variable(script, MV_StickerPalette, (s32) iconPal);

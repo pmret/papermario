@@ -22,7 +22,7 @@ EffectInstance* star_outline_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 ar
 
     effectBp.init = star_outline_init;
     effectBp.update = star_outline_update;
-    effectBp.renderWorld = star_outline_render;
+    effectBp.renderScene = star_outline_render;
     effectBp.unk_00 = 0;
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_STAR_OUTLINE;
@@ -207,7 +207,7 @@ void star_outline_appendGfx(void* effect) {
     }
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_E0126BC8[0]);
 
     if (unk_34 != 0) {

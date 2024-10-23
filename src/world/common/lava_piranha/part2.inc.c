@@ -291,6 +291,6 @@ API_CALLABLE(N(CreateVineRenderer)) {
     LavaPiranhaVine* data = heap_malloc(NUM_VINES * sizeof(*data));
     evt_set_variable(script, MV_VinesData, (s32) data);
     N(VineRenderState) = -1;
-    create_worker_world(NULL, &N(worker_render_piranha_vines));
+    create_worker_scene(NULL, &N(worker_render_piranha_vines));
     return ApiStatus_DONE2;
 }

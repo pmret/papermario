@@ -287,7 +287,7 @@ API_CALLABLE(N(ShowGameRecords)) {
         records = script->functionTempPtr[0] = heap_malloc(sizeof(*records));
         records->state = RECORDS_STATE_BEGIN_FADE_IN;
         records->alpha = 255;
-        records->workerID = create_worker_world(0, N(worker_draw_game_records));
+        records->workerID = create_worker_scene(NULL, N(worker_draw_game_records));
         evt_set_variable(script, MV_RecordsDataPtr, (s32) records);
         N(calculate_records)(records);
     }

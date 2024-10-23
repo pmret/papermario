@@ -44,7 +44,7 @@ EffectInstance* spirit_card_main(
 
     bp.init = spirit_card_init;
     bp.update = spirit_card_update;
-    bp.renderWorld = spirit_card_render;
+    bp.renderScene = spirit_card_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SPIRIT_CARD;
@@ -154,7 +154,7 @@ void spirit_card_appendGfx(void* effect) {
     s32 unk_00 = data->unk_00;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_090042E0_3FE790);
     gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, 255);
 

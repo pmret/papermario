@@ -109,6 +109,10 @@
 #define SP_PER_BAR 256
 #define SP_PER_SEG 32
 
+#define AC_DIFFICULTY_LEN 8
+typedef s32 Difficulty1D[AC_DIFFICULTY_LEN];
+typedef s32 Difficulty2D[AC_DIFFICULTY_LEN][2];
+
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 

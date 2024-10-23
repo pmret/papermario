@@ -20,7 +20,7 @@ void floating_flower_main(s32 type, f32 posX, f32 posY, f32 posZ, s32 duration) 
     bp.unk_00 = 0;
     bp.init = floating_flower_init;
     bp.update = floating_flower_update;
-    bp.renderWorld = floating_flower_render;
+    bp.renderScene = floating_flower_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FLOATING_FLOWER;
 
@@ -148,7 +148,7 @@ void floating_flower_appendGfx(void* effect) {
     u8 rgb, a;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->shared->graphics));
 
     guPositionF(mtxTransform, part->rot.x, part->rot.y, 0.0f, 1.0f, part->pos.x, part->pos.y, part->pos.z);
     guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);

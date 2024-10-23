@@ -147,7 +147,7 @@ EffectInstance* stat_change_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32 t
 
     bp.init = stat_change_init;
     bp.update = stat_change_update;
-    bp.renderWorld = stat_change_render;
+    bp.renderScene = stat_change_render;
     bp.renderUI = func_E00AC288;
     bp.unk_00 = 0;
     bp.effectID = EFFECT_STAT_CHANGE;
@@ -243,7 +243,7 @@ void func_E00AC2A4(EffectInstance* effect) {
 
     if (data->scaleX != 0.0f && data->scaleY != 0.0f) {
         gDPPipeSync(gMainGfxPos++);
-        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
         guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, data->scale, data->pos.x, data->pos.y, data->pos.z);
         guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);

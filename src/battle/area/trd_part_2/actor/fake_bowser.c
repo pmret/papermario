@@ -333,7 +333,6 @@ s32 N(IdleHeadAngles)[] = {
     255,            255,            255
 };
 
-
 EvtScript N(EVS_AnimBowser_IdleHead) = {
     UseArray(FakeBowserAnimState)
     UseFBuf(Ref(N(IdleHeadAngles)))

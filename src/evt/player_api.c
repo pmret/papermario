@@ -389,7 +389,7 @@ API_CALLABLE(InterpPlayerYaw) {
 
 API_CALLABLE(PlayerFaceNpc) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32* args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     f32* playerTargetYaw = &script->functionTempF[1];
     f32* angle = &script->functionTempF[2];
     s32* ft3 = &script->functionTemp[3];
