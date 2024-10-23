@@ -1189,7 +1189,7 @@ void update_coin_counter(void) {
             return;
         }
 
-        set_window_update(WINDOW_ID_CURRENCY_COUNTER, (s32)basic_hidden_window_update);
+        set_window_update(WIN_CURRENCY_COUNTER, (s32)basic_hidden_window_update);
         statusBar->coinCountDisposeTime = 15;
         ShowingCoinCounter = FALSE;
         HidingCoinCounter = TRUE;
@@ -1209,7 +1209,7 @@ void show_coin_counter(void) {
 
     // if a coin counter is already visible, dispose of previous counter and reset state
     if (ShowingCoinCounter || HidingCoinCounter) {
-        set_window_update(WINDOW_ID_CURRENCY_COUNTER, WINDOW_UPDATE_HIDE);
+        set_window_update(WIN_CURRENCY_COUNTER, WINDOW_UPDATE_HIDE);
         if (statusBar->iconIndex12 > -1) {
             hud_element_free(statusBar->coinCountTimesHID);
             hud_element_free(statusBar->coinCountIconHID);
@@ -1222,8 +1222,8 @@ void show_coin_counter(void) {
     }
 
     if (statusBar->coinCounterHideDelay == 0) {
-        set_window_properties(WINDOW_ID_CURRENCY_COUNTER, 32, 164, 64, 20, WINDOW_PRIORITY_21, coin_counter_draw_content, 0, -1);
-        set_window_update(WINDOW_ID_CURRENCY_COUNTER, (s32)basic_window_update);
+        set_window_properties(WIN_CURRENCY_COUNTER, 32, 164, 64, 20, WINDOW_PRIORITY_21, coin_counter_draw_content, 0, -1);
+        set_window_update(WIN_CURRENCY_COUNTER, (s32)basic_window_update);
         statusBar->coinCountTimesHID = hid = hud_element_create(&HES_MenuTimes);
         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
         hud_element_set_tint(hid, 255, 255, 255);

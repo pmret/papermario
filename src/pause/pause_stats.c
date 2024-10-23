@@ -131,7 +131,7 @@ s32 D_8024F46C[] = { -1, 1, 2, 4, 5, 7, 8 };
 
 MenuWindowBP gStatsMenuWindowBPs[] = {
     {
-        .windowID = WINDOW_ID_PAUSE_STATS,
+        .windowID = WIN_PAUSE_STATS,
         .unk_01 = 0,
         .pos = { .x = 3, .y = 16 },
         .width = 289,
@@ -139,7 +139,7 @@ MenuWindowBP gStatsMenuWindowBPs[] = {
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_stats_draw_contents,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_12 }
@@ -592,7 +592,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     if (gPauseMenuCurrentTab == 1) {
         StatsEntryData* entry = &gStatsMenuEntries[menu->selected];
 
-        pause_set_cursor_pos(WINDOW_ID_PAUSE_STATS, baseX + entry->cursorX, baseY + entry->cursorY);
+        pause_set_cursor_pos(WIN_PAUSE_STATS, baseX + entry->cursorX, baseY + entry->cursorY);
     }
 }
 #endif

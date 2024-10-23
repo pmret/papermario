@@ -248,7 +248,7 @@ void update_merlee_message(void* data) {
     }
 
     if (closeMessage) {
-        set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_HIDE);
+        set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_HIDE);
         D_800A0F40 = 0;
         dispose_merlee_message(popup);
     }
@@ -294,8 +294,8 @@ void draw_merlee_message(void* data) {
                 width = get_msg_width(messageID, 0) + 23;
                 xPos = 160 - (width / 2);
                 height = 45;
-                set_window_properties(WINDOW_ID_BATTLE_POPUP, xPos, 80, width, height, WINDOW_PRIORITY_0, draw_merlee_message_string, popup, -1);
-                set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
+                set_window_properties(WIN_BTL_POPUP, xPos, 80, width, height, WINDOW_PRIORITY_0, draw_merlee_message_string, popup, -1);
+                set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
             }
             break;
 
@@ -306,8 +306,8 @@ void draw_merlee_message(void* data) {
                 width = get_msg_width(messageID, 0) + 23;
                 xPos = 160 - (width / 2);
                 height = 28;
-                set_window_properties(WINDOW_ID_BATTLE_POPUP, xPos, 80, width, height, WINDOW_PRIORITY_0, draw_merlee_message_string, popup, -1);
-                set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
+                set_window_properties(WIN_BTL_POPUP, xPos, 80, width, height, WINDOW_PRIORITY_0, draw_merlee_message_string, popup, -1);
+                set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
             }
             break;
     }
@@ -322,8 +322,8 @@ void draw_merlee_message(void* data) {
         messageID = D_80078168[popup->messageIndex];
         width = get_msg_width(messageID, 0) + 30;
         xPos = 160 - (width / 2);
-        set_window_properties(WINDOW_ID_BATTLE_POPUP, xPos, 80, width, D_80078160[get_msg_lines(messageID) - 1], 0, draw_merlee_message_string, popup, -1);
-        set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
+        set_window_properties(WIN_BTL_POPUP, xPos, 80, width, D_80078160[get_msg_lines(messageID) - 1], 0, draw_merlee_message_string, popup, -1);
+        set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
     }
 #endif
 }

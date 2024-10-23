@@ -40,7 +40,7 @@ s32 D_8024FA34 = -1;
 s32 PauseMapArrowWobble[] = { 0, 2, 3, 3, 4, 4, 4, 4, 3, 2, 1, 0 };
 MenuWindowBP PauseMapWindowBPs[] = {
     {
-        .windowID = WINDOW_ID_PAUSE_MAP,
+        .windowID = WIN_PAUSE_MAP,
         .unk_01 = 0,
         .pos = { .x = 3, .y = 16 },
         .width = 289,
@@ -48,13 +48,13 @@ MenuWindowBP PauseMapWindowBPs[] = {
         .priority = WINDOW_PRIORITY_1,
         .fpDrawContents = &pause_map_draw_contents,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_26 }
     },
     {
-        .windowID = WINDOW_ID_PAUSE_MAP_TITLE,
+        .windowID = WIN_PAUSE_MAP_TITLE,
         .unk_01 = 0,
         .pos = { .x = MAP_TITLE_X, .y = 124 },
         .width = MAP_TITLE_WIDTH,
@@ -62,7 +62,7 @@ MenuWindowBP PauseMapWindowBPs[] = {
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_map_draw_title,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_MAP,
+        .parentID = WIN_PAUSE_MAP,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_28 }
@@ -242,7 +242,7 @@ void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
 
     currentTab = gPauseMenuCurrentTab;
     if (currentTab == 6) {
-        pause_set_cursor_pos(WINDOW_ID_PAUSE_MAP, mapULX + PauseMapTargetX - 8.0f, mapULY + PauseMapTargetY);
+        pause_set_cursor_pos(WIN_PAUSE_MAP, mapULX + PauseMapTargetX - 8.0f, mapULY + PauseMapTargetY);
 
         if (gPauseMenuCurrentTab == currentTab) {
             offset = PauseMapArrowWobble[gGameStatusPtr->frameCounter % 12];

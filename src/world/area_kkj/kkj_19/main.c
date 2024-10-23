@@ -42,11 +42,11 @@ API_CALLABLE(N(TryOpenIngredientWindows)) {
 
 void N(worker_update_ingredient_windows)(void) {
     if (N(IngredientWindowsOpen)) {
-        set_window_update(WINDOW_ID_ITEM_INFO_NAME, (s32)basic_window_update);
-        set_window_update(WINDOW_ID_ITEM_INFO_DESC, (s32)basic_window_update);
+        set_window_update(WIN_SHOP_ITEM_NAME, (s32)basic_window_update);
+        set_window_update(WIN_SHOP_ITEM_DESC, (s32)basic_window_update);
     } else {
-        set_window_update(WINDOW_ID_ITEM_INFO_NAME, (s32)basic_hidden_window_update);
-        set_window_update(WINDOW_ID_ITEM_INFO_DESC, (s32)basic_hidden_window_update);
+        set_window_update(WIN_SHOP_ITEM_NAME, (s32)basic_hidden_window_update);
+        set_window_update(WIN_SHOP_ITEM_DESC, (s32)basic_hidden_window_update);
     }
 
     if (N(IngredientWindowsDismissTime) > 0) {
@@ -111,7 +111,7 @@ WindowStyleCustom N(IngredientNameWS) = {
 
 MenuWindowBP N(IngredientWindows)[] = {
     {
-        .windowID = WINDOW_ID_ITEM_INFO_NAME,
+        .windowID = WIN_SHOP_ITEM_NAME,
         .pos = { 100, 66 },
         .width = 120,
         .height = 28,
@@ -124,7 +124,7 @@ MenuWindowBP N(IngredientWindows)[] = {
         .style = { .customStyle = &N(IngredientNameWS) },
     },
     {
-        .windowID = WINDOW_ID_ITEM_INFO_DESC,
+        .windowID = WIN_SHOP_ITEM_DESC,
 #if VERSION_JP
         .pos = { 39, 184 },
         .width = 242,

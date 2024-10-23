@@ -99,7 +99,7 @@ Vec2i gPauseSpiritsCursorPositions[] = {
 };
 MenuWindowBP gPauseSpiritsWindowsBPs[] = {
     {
-        .windowID = WINDOW_ID_PAUSE_SPIRITS,
+        .windowID = WIN_PAUSE_SPIRITS,
         .unk_01 = 0,
         .pos = { .x = 3, .y = 16 },
         .width = 289,
@@ -107,13 +107,13 @@ MenuWindowBP gPauseSpiritsWindowsBPs[] = {
         .priority = WINDOW_PRIORITY_1,
         .fpDrawContents = &pause_spirits_draw_contents,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_23 }
     },
     {
-        .windowID = WINDOW_ID_PAUSE_SPIRITS_TITLE,
+        .windowID = WIN_PAUSE_SPIRITS_TITLE,
         .unk_01 = 0,
         .pos = { .x = 86, .y = 124 },
         .width = 120,
@@ -121,7 +121,7 @@ MenuWindowBP gPauseSpiritsWindowsBPs[] = {
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_spirits_draw_title,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_SPIRITS,
+        .parentID = WIN_PAUSE_SPIRITS,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_24 }
@@ -239,7 +239,7 @@ void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
     draw_box(0, &gPauseWS_25, baseX + 7, baseY + 14, 0, 272, 126, opacity, darkening, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, width, height, 0);
 
     if (gPauseMenuCurrentTab == 5) {
-        pause_set_cursor_pos(WINDOW_ID_PAUSE_SPIRITS, baseX + gPauseSpiritsCursorPositions[menu->selected].x, baseY + gPauseSpiritsCursorPositions[menu->selected].y);
+        pause_set_cursor_pos(WIN_PAUSE_SPIRITS, baseX + gPauseSpiritsCursorPositions[menu->selected].x, baseY + gPauseSpiritsCursorPositions[menu->selected].y);
     }
 }
 

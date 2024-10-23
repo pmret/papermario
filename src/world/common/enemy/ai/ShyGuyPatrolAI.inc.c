@@ -18,7 +18,7 @@ void N(ShyGuyPatrolAI_15)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     Npc* npc = get_npc_unsafe((s32) enemy->npcID);
     f32 yaw = npc->yaw;
 
-    if (ai_check_fwd_collisions(npc, npc->moveSpeed, &yaw, NULL, NULL, NULL) == 0) {
+    if (!ai_check_fwd_collisions(npc, npc->moveSpeed, &yaw, NULL, NULL, NULL)) {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
 
@@ -37,7 +37,7 @@ void N(ShyGuyPatrolAI_16)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 yaw = npc->yaw;
 
-    if (ai_check_fwd_collisions(npc, npc->moveSpeed, &yaw, NULL, NULL, NULL) == 0) {
+    if (!ai_check_fwd_collisions(npc, npc->moveSpeed, &yaw, NULL, NULL, NULL)) {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
 

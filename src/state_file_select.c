@@ -126,7 +126,7 @@ void state_step_language_select(void) {
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                 } else {
                     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
-                    set_windows_visible(WINDOW_GROUP_FILE_MENU);
+                    set_windows_visible(WINDOW_GROUP_FILES);
                     D_800A0930 = 1;
                     D_800A0931 = 3;
                 }
@@ -183,7 +183,7 @@ void state_step_file_select(void) {
 
     switch (D_800A0931) {
         case 1:
-            set_windows_visible(WINDOW_GROUP_FILE_MENU);
+            set_windows_visible(WINDOW_GROUP_FILES);
             D_800A0930 = temp;
             D_800A0931 = 2;
             break;
@@ -388,7 +388,7 @@ void state_step_exit_file_select(void) {
             for (i = 44; i < ARRAY_COUNT(gWindows); i++) {
                 Window* window = &gWindows[i];
 
-                if (window->parent == WINDOW_ID_FILEMENU_MAIN || window->parent == -1) {
+                if (window->parent == WIN_FILES_MAIN || window->parent == -1) {
                     flagSum += window->flags & WINDOW_FLAG_INITIAL_ANIMATION;
                 }
             }

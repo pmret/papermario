@@ -132,7 +132,7 @@ Vp gPauseTutorialViewport = {
 s32 gPauseTutorialScrollPos = 0;
 MenuWindowBP gPauseCommonWindowsBPs[] = {
     {
-        .windowID = WINDOW_ID_PAUSE_MAIN,
+        .windowID = WIN_PAUSE_MAIN,
         .unk_01 = 0,
         .pos = { .x = 12, .y = 20 },
         .width = 296,
@@ -140,13 +140,13 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .priority = 0,
         .fpDrawContents = &pause_main_draw_contents,
         .tab = NULL,
-        .parentID = WINDOW_ID_NONE,
+        .parentID = WIN_NONE,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = WINDOW_FLAG_40,
         .style = { .customStyle = &gPauseWS_0 }
     },
     {
-        .windowID = WINDOW_ID_PAUSE_TUTORIAL,
+        .windowID = WIN_PAUSE_TUTORIAL,
         .unk_01 = 0,
         .pos = { .x = 0, .y = 138 },
         .width = 296,
@@ -154,13 +154,13 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .priority = 0,
         .fpDrawContents = &pause_tutorial_draw_contents,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_2 }
     },
     {
-        .windowID = WINDOW_ID_PAUSE_DECRIPTION,
+        .windowID = WIN_PAUSE_DECRIPTION,
         .unk_01 = 0,
         .pos = { .x = 20, .y = 164 },
         .width = 256,
@@ -168,13 +168,13 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .priority = 0,
         .fpDrawContents = &pause_textbox_draw_contents,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { .func = &basic_window_update },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_1 }
     },
     {
-        .windowID = WINDOW_ID_PAUSE_CURSOR,
+        .windowID = WIN_PAUSE_CURSOR,
         .unk_01 = 0,
         .pos = { .x = 0, .y = 0 },
         .width = SCREEN_WIDTH,
@@ -182,7 +182,7 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .priority = 0,
         .fpDrawContents = &pause_draw_cursor,
         .tab = NULL,
-        .parentID = WINDOW_ID_NONE,
+        .parentID = WIN_NONE,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_0 }
@@ -202,15 +202,15 @@ void pause_set_cursor_pos_immediate(s32 windowID, s32 posX, s32 posY) {
         if (D_8024EFB4 != 0) {
             s32 i;
 
-            for (i = WINDOW_ID_PAUSE_MAIN; i < WINDOW_ID_PAUSE_CURSOR; i++) {
+            for (i = WIN_PAUSE_MAIN; i < WIN_PAUSE_CURSOR; i++) {
                 Window* window = &gWindows[i];
                 s8 parent = window->parent;
 
-                if ((parent == WINDOW_ID_NONE || parent == WINDOW_ID_PAUSE_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
+                if ((parent == WIN_NONE || parent == WIN_PAUSE_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
                     break;
                 }
             }
-            if (i >= WINDOW_ID_PAUSE_CURSOR) {
+            if (i >= WIN_PAUSE_CURSOR) {
                 D_8024EFB4 = 0;
             }
         }
@@ -236,11 +236,11 @@ void pause_set_cursor_pos(s32 windowID, s32 posX, s32 posY) {
         if (D_8024EFB4 != 0) {
             s32 i;
 
-            for (i = WINDOW_ID_PAUSE_MAIN; i < WINDOW_ID_PAUSE_CURSOR; i++) {
+            for (i = WIN_PAUSE_MAIN; i < WIN_PAUSE_CURSOR; i++) {
                 Window* window = &gWindows[i];
                 s8 parent = window->parent;
 
-                if ((parent == -1 || parent == WINDOW_ID_PAUSE_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
+                if ((parent == -1 || parent == WIN_PAUSE_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
                     break;
                 }
             }
@@ -645,26 +645,26 @@ void pause_init(void) {
     posX = 225;
     for (i = 6; i > 0; i--) {
         if (!gPausePanels[i]->initialized) {
-            set_window_update(WINDOW_ID_PAUSE_TUTORIAL + i, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_PAUSE_TUTORIAL + i, WINDOW_UPDATE_HIDE);
         } else {
-            gWindows[WINDOW_ID_PAUSE_TUTORIAL + i].pos.x = posX + 14;
+            gWindows[WIN_PAUSE_TUTORIAL + i].pos.x = posX + 14;
             posX -= 45;
         }
     }
-    pauseWindows = &gWindows[WINDOW_ID_PAUSE_TAB_STATS];
+    pauseWindows = &gWindows[WIN_PAUSE_TAB_STATS];
     x = pauseWindows[gPausePanels[0]->col].pos.x;
-    gWindows[WINDOW_ID_PAUSE_TAB_INVIS].pos.x = x + 6;
+    gWindows[WIN_PAUSE_TAB_INVIS].pos.x = x + 6;
 
     if (evt_get_variable(NULL, GF_Tutorial_Badges)) {
         for (i = 0; i < ARRAY_COUNT(gPauseTutorialSpriteAnims); i++) {
             gPauseTutorialSprites[i] = spr_load_npc_sprite(gPauseTutorialSpriteAnims[i][0], gPauseTutorialSpriteAnims[i]);
         }
 
-        set_window_update(WINDOW_ID_PAUSE_TUTORIAL, WINDOW_UPDATE_SHOW);
+        set_window_update(WIN_PAUSE_TUTORIAL, WINDOW_UPDATE_SHOW);
         sfx_play_sound(SOUND_MENU_SHOW_CHOICE);
     }
 
-    update_window_hierarchy(WINDOW_ID_PAUSE_CURSOR, 64);
+    update_window_hierarchy(WIN_PAUSE_CURSOR, 64);
 }
 
 void pause_tutorial_input(s32 *pressed, s32 *held) {
@@ -820,10 +820,10 @@ void pause_cleanup(void) {
         }
     }
 
-    for (i = WINDOW_ID_PAUSE_MAIN; i < WINDOW_ID_PAUSE_CURSOR; i++)
+    for (i = WIN_PAUSE_MAIN; i < WIN_PAUSE_CURSOR; i++)
         set_window_update(i, WINDOW_UPDATE_HIDE);
 
-    set_window_update(WINDOW_ID_PAUSE_CURSOR, WINDOW_UPDATE_HIDE);
+    set_window_update(WIN_PAUSE_CURSOR, WINDOW_UPDATE_HIDE);
 }
 
 s32 pause_get_total_equipped_bp_cost(void) {
