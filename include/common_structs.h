@@ -685,7 +685,7 @@ typedef struct StatusBar {
     /* 0x4D */ b8 fpBlinking;
     /* 0x4E */ s8 fpBlinkAnimTime;
     /* 0x4F */ s8 fpBlinkTimeLeft;
-    /* 0x50 */ s8 starPowerBlinking;
+    /* 0x50 */ b8 starPowerBlinking;
     /* 0x51 */ s8 starPowerBlinkCounter;
     /* 0x52 */ b8 starpointsBlinking;
     /* 0x53 */ s8 starpointsBlinkAnimTime;
