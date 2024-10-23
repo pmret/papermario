@@ -62,7 +62,7 @@ API_CALLABLE(N(AnimateChestSize)) {
     entity->rot.y = (1.0f - cos_rad(entity->scale.y * PI)) * 990.0 / 2.0;
 
     script->functionTemp[1]--;
-    if (~script->functionTemp[1] == 0) { //TODO remove ~ optimization
+    if (script->functionTemp[1] == -1) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;

@@ -606,7 +606,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                             if (printer->fadeOutCounter >= 5) {
                                 printer->stateFlags |= MSG_STATE_FLAG_1;
                             }
-                            frameAlpha = ~(printer->fadeOutCounter * 0x2E);
+                            frameAlpha = -(printer->fadeOutCounter * 46) - 1;
                             sp8E = ((u8)frameAlpha) * 0.6;
                             frameFading = 1;
                             if (sp8E >= 32) {

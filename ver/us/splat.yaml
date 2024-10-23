@@ -397,7 +397,7 @@ segments:
     - [auto, c, world/partners]
     - [auto, c, global_hud_scripts]
     - [auto, c, 891b0_len_fb0]
-    - [auto, c, 8a160_len_700]
+    - [auto, c, status_star_shimmer]
     - [auto, c, 8a860_len_3f30]
     - [auto, c, draw_box]
     - [auto, c, bss/engine1_post_bss]
@@ -786,9 +786,9 @@ segments:
       - [0x9DE60]
     - start: 0xA2960
       type: .data
-      name: 8a160_len_700
+      name: status_star_shimmer
       subsegments:
-      - [0xA2960, ia8, A2960, 32, 16]
+      - [0xA2960, ia8, ui/status/shimmer_particle, 32, 16]
       - [0xA2B60] # Vp
       - [0xA2B70, vtx, A2B70]
       - [0xA2BC0, gfx, A2BC0]

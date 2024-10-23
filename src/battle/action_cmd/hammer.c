@@ -253,7 +253,7 @@ void N(update)(void) {
                 }
             }
 
-            if (acs->stateTimer == (~inputWindow + acs->duration)) {
+            if (acs->stateTimer == (-(inputWindow + 1) + acs->duration)) {
                 battleStatus->actionProgress = 3;
                 hud_element_set_script(acs->hudElemIDs[HIDX_WAIT], &HES_TimingReady);
                 hud_element_set_script(acs->hudElemIDs[HIDX_STICK], &HES_StickTapNeutral);

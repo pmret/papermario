@@ -191,7 +191,7 @@ void water_block_update(EffectInstance* effect) {
             data->unk_58[i] *= 0.97;
             data->unk_68[i] += (10.0f - data->unk_68[i]) * 0.1;
             if (data->unk_48[i] > 480.0f) {
-                data->unk_88[i] = ~rand_int(10);
+                data->unk_88[i] = -rand_int(10) - 1;
             }
         }
     }
