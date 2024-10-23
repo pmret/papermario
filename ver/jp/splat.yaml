@@ -108,7 +108,7 @@ segments:
     - [auto, c, world/world]
     - [auto, c, collision]
     - [auto, c, 38F00]
-    - [auto, c, 39210_len_aa0]
+    - [auto, c, npc_follow]
 
     - [auto, c, os/nusys/nuboot]
     - [auto, c, os/nusys/nusched]
@@ -354,7 +354,7 @@ segments:
     - [auto, c, world/actions] # DUMMY ROM
     - [auto, c, world/partners]
     - [auto, c, global_hud_scripts]
-    - [auto, c, 891b0_len_fb0]
+    - [auto, c, surfaces]
     - [auto, c, status_star_shimmer]
     - [auto, c, 8a860_len_3f30]
     - [auto, c, draw_box]
