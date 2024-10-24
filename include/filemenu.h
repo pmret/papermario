@@ -65,16 +65,6 @@ enum {
     FM_MAIN_OPT_CANCEL,
 };
 
-enum {
-  PAGE_0,
-  PAGE_1,
-#if !VERSION_PAL
-  PAGE_2,
-#endif
-  PAGE_3,
-  PAGE_4,
-};
-
 extern MenuPanel* filemenu_menus[];
 
 extern s32 filemenu_iterFileIdx;

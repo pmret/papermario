@@ -17,7 +17,6 @@ s32 D_8024A18C = -4;
 #define WINDOW_2_Y (55)
 #define WINDOW_2_HEIGHT (133)
 #define ROWS (8)
-#define INPUT_FINAL_PAGE (1)
 extern u8 D_filemenu_80250958[];
 extern u8 D_filemenu_80250960[];
 #else
@@ -25,7 +24,6 @@ extern u8 D_filemenu_80250960[];
 #define WINDOW_2_Y (67)
 #define WINDOW_2_HEIGHT (113)
 #define ROWS (6)
-#define INPUT_FINAL_PAGE (2)
 #endif
 
 MenuWindowBP filemenu_createfile_windowBPs[] = {
