@@ -806,7 +806,7 @@ void imgfx_update_cache(void);
 s32 imgfx_get_free_instances(s32);
 void free_worker(s32);
 
-s32 ai_check_fwd_collisions(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
+b32 ai_check_fwd_collisions(Npc* npc, f32 time, f32* outYaw, f32* outDistFwd, f32* outDistCW, f32* outDistCCW);
 void basic_ai_loiter_init(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
 void PatrolAI_LoiterInit(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
 
@@ -831,7 +831,7 @@ void* load_asset_by_name(const char* assetName, u32* decompressedSize);
 Gfx* mdl_get_copied_gfx(s32 copyIndex);
 void mdl_get_copied_vertices(s32 copyIndex, Vtx** firstVertex, Vtx** copiedVertices, s32* numCopied);
 void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
-s32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* screenY);
+b32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* screenY);
 void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z);
 void* mdl_get_next_texture_address(s32);
 s32 cancel_current_message(void);

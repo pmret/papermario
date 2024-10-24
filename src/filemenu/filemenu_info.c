@@ -25,7 +25,7 @@ u8 filemenu_info_gridData[] = {
 
 MenuWindowBP filemenu_info_windowBPs[] = {
     {
-        .windowID = WINDOW_ID_FILEMENU_INFO,
+        .windowID = WIN_FILES_MESSAGE,
         .unk_01 = 0,
         .pos = { .x = 0, .y = 0 },
         .width = 0,
@@ -159,18 +159,18 @@ void filemenu_info_handle_input(MenuPanel* menu) {
         switch (menu->page) {
             case PAGE_1:
                 menu->page = PAGE_0;
-                set_window_update(WINDOW_ID_FILEMENU_STEREO, (s32)filemenu_update_show_options_left);
-                set_window_update(WINDOW_ID_FILEMENU_MONO, (s32)filemenu_update_show_options_right);
-                set_window_update(WINDOW_ID_FILEMENU_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
-                set_window_update(WINDOW_ID_FILEMENU_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
+                set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_show_options_left);
+                set_window_update(WIN_FILES_MONO, (s32)filemenu_update_show_options_right);
+                set_window_update(WIN_FILES_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
+                set_window_update(WIN_FILES_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 0, 2);
                 break;
             case PAGE_4:
                 menu->page = PAGE_0;
-                set_window_update(WINDOW_ID_FILEMENU_STEREO, (s32)filemenu_update_show_options_left);
-                set_window_update(WINDOW_ID_FILEMENU_MONO, (s32)filemenu_update_show_options_right);
-                set_window_update(WINDOW_ID_FILEMENU_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
-                set_window_update(WINDOW_ID_FILEMENU_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
+                set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_show_options_left);
+                set_window_update(WIN_FILES_MONO, (s32)filemenu_update_show_options_right);
+                set_window_update(WIN_FILES_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
+                set_window_update(WIN_FILES_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 1, 2);
                 break;
 #if !VERSION_PAL
@@ -180,7 +180,7 @@ void filemenu_info_handle_input(MenuPanel* menu) {
                 break;
 #endif
         }
-        set_window_update(WINDOW_ID_FILEMENU_INFO, WINDOW_UPDATE_HIDE);
+        set_window_update(WIN_FILES_MESSAGE, WINDOW_UPDATE_HIDE);
     }
 }
 

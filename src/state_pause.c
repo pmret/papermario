@@ -49,7 +49,7 @@ void state_init_pause(void) {
     StepPauseAlpha = 0;
     disable_player_input();
     set_time_freeze_mode(TIME_FREEZE_POPUP_MENU);
-    set_windows_visible(WINDOW_GROUP_PAUSE_MENU);
+    set_windows_visible(WINDOW_GROUP_PAUSE);
 }
 
 extern Addr D_80200000;

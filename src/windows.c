@@ -126,10 +126,10 @@ u8 gWindowDisappearFlags[] = { DRAW_FLAG_ROTSCALE, DRAW_FLAG_ROTSCALE, DRAW_FLAG
                                DRAW_FLAG_ROTSCALE, DRAW_FLAG_ROTSCALE, 0 };
 
 WindowGroup gWindowGroups[] = {
-    { WINDOW_ID_0, WINDOW_ID_FILEMENU_FILE3_TITLE }, // all windows
-    { WINDOW_ID_8, WINDOW_ID_BATTLE_POPUP }, // battle ?
-    { WINDOW_ID_PAUSE_MAIN, WINDOW_ID_PAUSE_TAB_INVIS }, // pause menu
-    { WINDOW_ID_FILEMENU_MAIN, WINDOW_ID_FILEMENU_FILE3_TITLE } // file menu
+    { WIN_UNUSED_0, WIN_FILES_SLOT4_TITLE }, // all windows
+    { WIN_BTL_DESC_BOX, WIN_BTL_POPUP }, // battle ?
+    { WIN_PAUSE_MAIN, WIN_PAUSE_TAB_INVIS }, // pause menu
+    { WIN_FILES_MAIN, WIN_FILES_SLOT4_TITLE } // file menu
 };
 
 void clear_windows(void) {
@@ -375,7 +375,7 @@ void render_window_root(void) {
     gSPClipRatio(gMainGfxPos++, FRUSTRATIO_2);
     gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
     gDPPipeSync(gMainGfxPos++);
-    render_windows(priorityArray, WINDOW_ID_NONE, 0, 0, 0, 255, 0, NULL);
+    render_windows(priorityArray, WIN_NONE, 0, 0, 0, 255, 0, NULL);
 }
 
 void set_window_properties(s32 windowID, s32 posX, s32 posY, s32 width, s32 height, u8 priority, void* fpDrawContents, void* drawContentsArg0, s8 parent) {

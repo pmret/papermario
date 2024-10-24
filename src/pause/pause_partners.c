@@ -201,7 +201,7 @@ s32 gPausePartnersCurrentPortraitIndex = -1;
 s32 gPausePartnersNextPortraitIndex = -1;
 MenuWindowBP gPausePartnersWindowBPs[] = {
     {
-        .windowID = WINDOW_ID_PAUSE_PARTNERS,
+        .windowID = WIN_PAUSE_PARTNERS,
         .unk_01 = 0,
         .pos = { .x = 3, .y = 16 },
         .width = 289,
@@ -209,12 +209,12 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .priority = WINDOW_PRIORITY_1,
         .fpDrawContents = &pause_partners_draw_contents,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_20 }
     }, {
-        .windowID = WINDOW_ID_PAUSE_PARTNERS_TITLE,
+        .windowID = WIN_PAUSE_PARTNERS_TITLE,
         .unk_01 = 0,
         .pos = { .x = 8, .y = 103 },
         .width = 112,
@@ -222,12 +222,12 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_partners_draw_title,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_PARTNERS,
+        .parentID = WIN_PAUSE_PARTNERS,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_22 }
     }, {
-        .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
+        .windowID = WIN_PAUSE_PARTNERS_MOVELIST,
         .unk_01 = 0,
         .pos = { .x = 133, .y = 36 },
         .width = 140,
@@ -235,12 +235,12 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_partners_draw_movelist,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_PARTNERS,
+        .parentID = WIN_PAUSE_PARTNERS,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { -1 }
     }, {
-        .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE,
+        .windowID = WIN_PAUSE_PARTNERS_MOVELIST_TITLE,
         .unk_01 = 0,
         .pos = { .x = 12, .y = -6 },
         .width = 80,
@@ -248,12 +248,12 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_partners_draw_movelist_title,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
+        .parentID = WIN_PAUSE_PARTNERS_MOVELIST,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { -1 }
     }, {
-        .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_FLOWER,
+        .windowID = WIN_PAUSE_PARTNERS_MOVELIST_FLOWER,
         .unk_01 = 0,
         .pos = { .x = 102, .y = -12 },
         .width = 32,
@@ -261,7 +261,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_partners_draw_movelist_flower,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
+        .parentID = WIN_PAUSE_PARTNERS_MOVELIST,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { -1 }
@@ -380,7 +380,7 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     currentTab = gPauseMenuCurrentTab;
     if (currentTab == 4) {
         if (gPausePartnersLevel == 0) {
-            pause_set_cursor_pos(WINDOW_ID_PAUSE_PARTNERS, baseX + 42, baseY + 88);
+            pause_set_cursor_pos(WIN_PAUSE_PARTNERS, baseX + 42, baseY + 88);
         }
 
         if (gPauseMenuCurrentTab == currentTab && gPausePartnersLevel == 0) {
@@ -564,7 +564,7 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     }
 
     if (gPauseMenuCurrentTab == 4 && gPausePartnersLevel == 1) {
-        pause_set_cursor_pos(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, baseX - 2, baseY + 28 + gPausePartnersSelectedMove * 13);
+        pause_set_cursor_pos(WIN_PAUSE_PARTNERS_MOVELIST, baseX - 2, baseY + 28 + gPausePartnersSelectedMove * 13);
     }
 }
 
@@ -599,7 +599,7 @@ void pause_partners_init(MenuPanel* panel) {
     }
 
     if (gPausePartnersNumPartners == 0) {
-        set_window_update(WINDOW_ID_PAUSE_PARTNERS, WINDOW_UPDATE_HIDE);
+        set_window_update(WIN_PAUSE_PARTNERS, WINDOW_UPDATE_HIDE);
         panel->initialized = FALSE;
         return;
     }
@@ -619,11 +619,11 @@ void pause_partners_init(MenuPanel* panel) {
     setup_pause_menu_tab(gPausePartnersWindowBPs, ARRAY_COUNT(gPausePartnersWindowBPs));
 
 #if VERSION_PAL
-    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE].width = D_PAL_80271B50[gCurrentLanguage];
-    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE].pos.x = D_PAL_80271B4C[gCurrentLanguage];
-    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST].width = D_PAL_80271B40[gCurrentLanguage];
-    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST].pos.x = D_PAL_80271B3C[gCurrentLanguage];
-    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST_FLOWER].pos.x = D_PAL_80271B48[gCurrentLanguage];
+    gWindows[WIN_PAUSE_PARTNERS_MOVELIST_TITLE].width = D_PAL_80271B50[gCurrentLanguage];
+    gWindows[WIN_PAUSE_PARTNERS_MOVELIST_TITLE].pos.x = D_PAL_80271B4C[gCurrentLanguage];
+    gWindows[WIN_PAUSE_PARTNERS_MOVELIST].width = D_PAL_80271B40[gCurrentLanguage];
+    gWindows[WIN_PAUSE_PARTNERS_MOVELIST].pos.x = D_PAL_80271B3C[gCurrentLanguage];
+    gWindows[WIN_PAUSE_PARTNERS_MOVELIST_FLOWER].pos.x = D_PAL_80271B48[gCurrentLanguage];
 #endif
 
     gPausePartnersCurrentPartnerIdx = 0;
@@ -695,7 +695,7 @@ void pause_partners_handle_input(MenuPanel* panel) {
         level = 2;
     }
 
-    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST].height = level * 13 + 30;
+    gWindows[WIN_PAUSE_PARTNERS_MOVELIST].height = level * 13 + 30;
 
     if (gPausePartnersLevel == 1) {
         oldPos = gPausePartnersSelectedMove;
@@ -730,7 +730,7 @@ void pause_partners_handle_input(MenuPanel* panel) {
     if ((gPausePressedButtons & BUTTON_A) && gPausePartnersLevel == 0) {
         gPausePartnersLevel = 1;
         sfx_play_sound(SOUND_MENU_NEXT);
-        set_window_update(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, WINDOW_UPDATE_SHOW);
+        set_window_update(WIN_PAUSE_PARTNERS_MOVELIST, WINDOW_UPDATE_SHOW);
         return;
     }
 
@@ -742,7 +742,7 @@ void pause_partners_handle_input(MenuPanel* panel) {
         } else {
             gPausePartnersLevel = 0;
             sfx_play_sound(SOUND_MENU_BACK);
-            set_window_update(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_PAUSE_PARTNERS_MOVELIST, WINDOW_UPDATE_HIDE);
             return;
         }
     }

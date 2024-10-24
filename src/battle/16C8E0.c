@@ -209,7 +209,7 @@ void initialize_battle(void) {
     create_worker_scene(NULL, btl_render_actors);
     btl_popup_messages_init();
     create_action_command_ui_worker();
-    set_windows_visible(WINDOW_GROUP_1);
+    set_windows_visible(WINDOW_GROUP_BATTLE);
     HPBarHID = hud_element_create(&HES_HPBar);
     hud_element_set_flags(HPBarHID, HUD_ELEMENT_FLAG_80);
 

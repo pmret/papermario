@@ -35,7 +35,7 @@ HudScript* gPauseItemsHudScripts[] = {
 };
 MenuWindowBP gPauseItemsWindowBPs[] = {
     {
-        .windowID = WINDOW_ID_PAUSE_ITEMS,
+        .windowID = WIN_PAUSE_ITEMS,
         .unk_01 = 0,
         .pos = { .x = 3, .y = 16 },
         .width = 289,
@@ -43,7 +43,7 @@ MenuWindowBP gPauseItemsWindowBPs[] = {
         .priority = WINDOW_PRIORITY_1,
         .fpDrawContents = &pause_items_draw_contents,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_19 }
@@ -330,7 +330,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
     if (gPauseMenuCurrentTab == 3) {
          if (gPauseItemsLevel == 0) {
-             pause_set_cursor_pos(WINDOW_ID_PAUSE_ITEMS, baseX + 12, baseY + 26 + gPauseItemsCurrentTab * 32);
+             pause_set_cursor_pos(WIN_PAUSE_ITEMS, baseX + 12, baseY + 26 + gPauseItemsCurrentTab * 32);
          } else {
              selectedPosX = pause_items_get_pos_x(gPauseItemsCurrentPage, gPauseItemsSelectedIndex  - gPauseItemsPages[gPauseItemsCurrentPage].listStart * gPauseItemsPages[gPauseItemsCurrentPage].numCols);
              selectedPosY = pause_items_get_pos_y(gPauseItemsCurrentPage, gPauseItemsSelectedIndex  - gPauseItemsPages[gPauseItemsCurrentPage].listStart * gPauseItemsPages[gPauseItemsCurrentPage].numCols);
@@ -343,9 +343,9 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
              }
 
              if (gPauseItemsCurrentScrollPos  != gPauseItemsTargetScrollPos) {
-                 pause_set_cursor_pos_immediate(WINDOW_ID_PAUSE_ITEMS, baseX + 85 + cursorOffsetX, baseY + 23 + cursorOffsetY);
+                 pause_set_cursor_pos_immediate(WIN_PAUSE_ITEMS, baseX + 85 + cursorOffsetX, baseY + 23 + cursorOffsetY);
              } else {
-                 pause_set_cursor_pos(WINDOW_ID_PAUSE_ITEMS, baseX + 85 + cursorOffsetX, baseY + 23 + cursorOffsetY);
+                 pause_set_cursor_pos(WIN_PAUSE_ITEMS, baseX + 85 + cursorOffsetX, baseY + 23 + cursorOffsetY);
              }
          }
     }

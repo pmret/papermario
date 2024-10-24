@@ -79,7 +79,7 @@ segments:
     - [auto, c, state_pause]
     - [auto, c, state_file_select]
     - [auto, c, state_world]
-    - [auto, c, 111f0_len_860]
+    - [auto, c, state_map_transitions]
     - [auto, c, state_intro]
     - [auto, c, state_title_screen]
     - [auto, c, state_demo]
@@ -354,7 +354,7 @@ segments:
     - [auto, c, world/actions] # DUMMY ROM
     - [auto, c, world/partners]
     - [auto, c, global_hud_scripts]
-    - [auto, c, surfaces]
+    - [auto, c, world/surfaces]
     - [auto, c, status_star_shimmer]
     - [auto, c, 8a860_len_3f30]
     - [auto, c, draw_box]
