@@ -140,7 +140,7 @@ MenuPanel filemenu_selectlanguage_menuBP = {
     .col = 0,
     .row = 0,
     .selected = 0,
-    .page = 0,
+    .state = 0,
     .numCols =1,
     .numRows = 4,
     .numPages = 0,
@@ -226,10 +226,10 @@ void filemenu_selectlanguage_init(MenuPanel* menu) {
     gWindows[WIN_FILES_TITLE].height = 25;
 
     posXPtr = &gWindows[WIN_FILES_TITLE].pos.x;
-    if (gWindows[WIN_FILES_TITLE].parent != -1) {
+    if (gWindows[WIN_FILES_TITLE].parent != WIN_NONE) {
         x = (gWindows[gWindows[WIN_FILES_TITLE].parent].width / 2) - (gWindows[WIN_FILES_TITLE].width / 2);
     } else {
-        x = 64;
+        x = 64; // different from CENTER_WINDOW_X macro
     }
     *posXPtr = x;
 

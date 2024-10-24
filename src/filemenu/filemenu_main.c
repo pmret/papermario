@@ -328,7 +328,7 @@ MenuPanel filemenu_main_menuBP = {
     .col = 0,
     .row = 0,
     .selected = 0,
-    .page = 0,
+    .state = 0,
     .numCols = 3,
     .numRows = 3,
     .numPages = 0,
@@ -349,7 +349,7 @@ void filemenu_draw_contents_title(
     s32 xOffset;
     s32 yOffset;
 
-    switch (menu->page) {
+    switch (menu->state) {
         case PAGE_0:
             msgIdx = FILE_MESSAGE_SELECT_FILE_TO_START;
             xOffset = 9;
@@ -427,7 +427,7 @@ void filemenu_draw_contents_option_left(
     }
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + offset + OFFSET_WIDTH, baseY + 2, 255, 0, 1);
 #else
-    if (menu->page != 2) {
+    if (menu->state != 2) {
         if (menu->col == 0 && menu->row == 2) {
             filemenu_set_cursor_goal_pos(WIN_FILES_OPTION_LEFT, baseX, baseY + 8);
         }
@@ -447,7 +447,7 @@ void filemenu_draw_contents_option_center(
     s32 xOffset;
     s32 yOffset;
 
-    switch (menu->page) {
+    switch (menu->state) {
         case 1:
         case 2:
         case 3:
@@ -481,7 +481,7 @@ void filemenu_draw_contents_option_center(
     s32 xOffset;
     s32 yOffset;
 
-    switch (menu->page) {
+    switch (menu->state) {
         case 1:
         case 2:
         case 3:
@@ -521,7 +521,7 @@ void filemenu_draw_contents_option_right(
     }
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_CANCEL), baseX + offset, baseY + 2, 255, 0, 1);
 #else
-    if (menu->page != 2) {
+    if (menu->state != 2) {
         if (menu->col == 2 && menu->row == 2) {
             filemenu_set_cursor_goal_pos(WIN_FILES_OPTION_RIGHT, baseX + 8, baseY + 8);
         }
@@ -741,12 +741,8 @@ void filemenu_draw_contents_file_3_title(
     filemenu_draw_contents_file_title(3, menu, baseX, baseY, width, height, opacity, darkening);
 }
 
-// TODO figure out how to merge these nicer
-#if VERSION_PAL
 void filemenu_main_init(MenuPanel* menu) {
-    s32 halfWidth;
     s32 i;
-    s32 tmp;
 
     for (i = 0; i < ARRAY_COUNT(filemenu_mainHIDs); i++) {
         filemenu_mainHIDs[i] = hud_element_create(filemenu_main_hudScripts[gCurrentLanguage][i]);
@@ -760,53 +756,12 @@ void filemenu_main_init(MenuPanel* menu) {
     setup_pause_menu_tab(filemenu_main_windowBPs, ARRAY_COUNT(filemenu_main_windowBPs));
     menu->selected = MENU_PANEL_SELECTED_GRID_DATA(menu);
 
+#if VERSION_PAL
     gWindows[WIN_FILES_TITLE].pos.y = 1;
     gWindows[WIN_FILES_TITLE].width = 162;
     gWindows[WIN_FILES_TITLE].height = 25;
-
-    halfWidth = gWindows[WIN_FILES_TITLE].width / 2;
-
-    gWindows[WIN_FILES_TITLE].pos.x = gWindows[WIN_FILES_TITLE].parent != -1
-        ? (gWindows[gWindows[WIN_FILES_TITLE].parent].width / 2) - halfWidth
-        : SCREEN_WIDTH / 2 - halfWidth;
-
-    tmp = 1;
-    halfWidth = gWindows[WIN_FILES_OPTION_CENTER].width / 2;
-
-    gWindows[WIN_FILES_OPTION_CENTER].pos.x = gWindows[WIN_FILES_OPTION_CENTER].parent != -1
-        ? (gWindows[gWindows[WIN_FILES_OPTION_CENTER].parent].width / 2) - halfWidth
-        : SCREEN_WIDTH / 2 - halfWidth;
-
-    if (menu->page != 0) {
-        set_window_update(WIN_FILES_OPTION_LEFT, WINDOW_UPDATE_HIDE);
-        set_window_update(WIN_FILES_OPTION_RIGHT, WINDOW_UPDATE_HIDE);
-        set_window_update(WIN_FILES_STEREO, WINDOW_UPDATE_HIDE);
-        set_window_update(WIN_FILES_MONO, WINDOW_UPDATE_HIDE);
-    }
-    menu->initialized = tmp;
-}
 #else
-void filemenu_main_init(MenuPanel* menu) {
-    s32 halfWidth;
-    s32 halfWidth2;
-    s16* posXPtr;
-    s32 x;
-    s32 i;
-    s32 tmp;
-
-    for (i = 0; i < ARRAY_COUNT(filemenu_mainHIDs); i++) {
-        filemenu_mainHIDs[i] = hud_element_create(filemenu_main_hudScripts[gCurrentLanguage][i]);
-        hud_element_set_flags(filemenu_mainHIDs[i], HUD_ELEMENT_FLAG_80);
-    }
-
-    for (i = 0; i < ARRAY_COUNT(filemenu_main_windowBPs); i++) {
-        filemenu_main_windowBPs[i].tab = menu;
-    }
-
-    setup_pause_menu_tab(filemenu_main_windowBPs, ARRAY_COUNT(filemenu_main_windowBPs));
-    menu->selected = MENU_PANEL_SELECTED_GRID_DATA(menu);
-
-    if (menu->page == 2) {
+    if (menu->state == 2) {
         gWindows[WIN_FILES_TITLE].pos.y = 1;
         gWindows[WIN_FILES_TITLE].width = 211;
         gWindows[WIN_FILES_TITLE].height = 25;
@@ -815,34 +770,18 @@ void filemenu_main_init(MenuPanel* menu) {
         gWindows[WIN_FILES_TITLE].width = 162;
         gWindows[WIN_FILES_TITLE].height = 25;
     }
+#endif
+    gWindows[WIN_FILES_TITLE].pos.x = CENTER_WINDOW_X(WIN_FILES_TITLE);
+    gWindows[WIN_FILES_OPTION_CENTER].pos.x = CENTER_WINDOW_X(WIN_FILES_OPTION_CENTER);
 
-    halfWidth = gWindows[WIN_FILES_TITLE].width / 2;
-    posXPtr = &gWindows[WIN_FILES_TITLE].pos.x;
-    if (gWindows[WIN_FILES_TITLE].parent != -1) {
-        x = (gWindows[gWindows[WIN_FILES_TITLE].parent].width / 2) - halfWidth;
-    } else {
-        x = SCREEN_WIDTH / 2 - halfWidth;
-    }
-    *posXPtr = x;
-
-    halfWidth2 = gWindows[WIN_FILES_OPTION_CENTER].width / 2;
-    posXPtr = &gWindows[WIN_FILES_OPTION_CENTER].pos.x;
-    if (gWindows[WIN_FILES_OPTION_CENTER].parent != -1) {
-        x = (gWindows[gWindows[WIN_FILES_OPTION_CENTER].parent].width / 2) - halfWidth2;
-    } else {
-        x = SCREEN_WIDTH / 2 - halfWidth2;
-    }
-    *posXPtr = x;
-
-    if (menu->page != 0) {
+    if (menu->state != 0) {
         set_window_update(WIN_FILES_OPTION_LEFT, WINDOW_UPDATE_HIDE);
         set_window_update(WIN_FILES_OPTION_RIGHT, WINDOW_UPDATE_HIDE);
         set_window_update(WIN_FILES_STEREO, WINDOW_UPDATE_HIDE);
         set_window_update(WIN_FILES_MONO, WINDOW_UPDATE_HIDE);
     }
-    menu->initialized = 1;
+    menu->initialized = TRUE;
 }
-#endif
 
 #if VERSION_PAL
 INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_main_handle_input);
@@ -892,7 +831,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
         }
     }
 
-    switch (menu->page) {
+    switch (menu->state) {
         case 0:
             if (menu->col == 1 && (u8) menu->row < 2) {
                 menu->col = 0;
@@ -937,7 +876,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
         sfx_play_sound(SOUND_FILE_MENU_MOVE_CURSOR);
     }
 
-    if (menu->page == 0) {
+    if (menu->state == 0) {
         s32 originalOutputMode = gGameStatusPtr->soundOutputMode;
 
         if (filemenu_pressedButtons & BUTTON_Z) {
@@ -957,14 +896,14 @@ void filemenu_main_handle_input(MenuPanel* menu) {
         }
     }
 
-    if ((filemenu_pressedButtons & BUTTON_START) && menu->page == 0 && menu->selected < 4) {
+    if ((filemenu_pressedButtons & BUTTON_START) && menu->state == 0 && menu->selected < 4) {
         filemenu_pressedButtons = BUTTON_A;
     }
 
     if (filemenu_pressedButtons & BUTTON_A) {
         s32 cond = FALSE;
 
-        switch (menu->page) {
+        switch (menu->state) {
             case 0:
                 if (menu->selected < 4 && !gSaveSlotHasData[menu->selected]) {
                     cond = TRUE;
@@ -992,7 +931,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     sfx_play_sound(SOUND_MENU_NEXT);
                     filemenu_currentMenu = 3;
                     temp_a0 = filemenu_menus[filemenu_currentMenu];
-                    temp_a0->page = 0;
+                    temp_a0->state = 0;
                     filemenu_set_selected(temp_a0, 0, 0);
                     break;
                 }
@@ -1012,7 +951,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     set_game_mode(GAME_MODE_END_FILE_SELECT);
                 } else if (menu->selected == 4) {
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    menu->page = 1;
+                    menu->state = 1;
                     filemenu_set_selected(menu, 1, 2);
                     set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_hidden_options_left);
                     set_window_update(WIN_FILES_MONO, (s32)filemenu_update_hidden_options_right);
@@ -1020,7 +959,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     set_window_update(WIN_FILES_OPTION_RIGHT, (s32)filemenu_update_hidden_options_bottom);
                 } else if (menu->selected == 5) {
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    menu->page = 3;
+                    menu->state = 3;
                     filemenu_set_selected(menu, 1, 2);
                     set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_hidden_options_left);
                     set_window_update(WIN_FILES_MONO, (s32)filemenu_update_hidden_options_right);
@@ -1048,27 +987,23 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.y = 143;
                     gWindows[WIN_FILES_CONFIRM_OPTIONS].width = 69;
                     gWindows[WIN_FILES_CONFIRM_OPTIONS].height = 44;
-                    gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = ((gWindows[WIN_FILES_CONFIRM_OPTIONS].parent != -1)
-                                        ? (gWindows[gWindows[WIN_FILES_CONFIRM_OPTIONS].parent].width / 2)
-                                        : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_CONFIRM_OPTIONS].width / 2;
+                    gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_OPTIONS);
 
                     gWindows[WIN_FILES_CONFIRM_PROMPT].pos.y = -29;
                     gWindows[WIN_FILES_CONFIRM_PROMPT].width = 192;
                     gWindows[WIN_FILES_CONFIRM_PROMPT].height = 25;
-                    gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = ((gWindows[WIN_FILES_CONFIRM_PROMPT].parent != -1)
-                                         ? (gWindows[gWindows[WIN_FILES_CONFIRM_PROMPT].parent].width / 2)
-                                         : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_CONFIRM_PROMPT].width / 2;
+                    gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_PROMPT);
 
                     filemenu_currentMenu = 1;
                     temp_a0 = filemenu_menus[filemenu_currentMenu];
-                    temp_a0->page = 4;
+                    temp_a0->state = 4;
                     filemenu_set_selected(temp_a0, 0, 0);
                 }
                 break;
             case 1:
                 if (menu->selected == 6) {
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    menu->page = 0;
+                    menu->state = 0;
                     set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_show_options_left);
                     set_window_update(WIN_FILES_MONO, (s32)filemenu_update_show_options_right);
                     set_window_update(WIN_FILES_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
@@ -1084,20 +1019,16 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                         gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.y = 121;
                         gWindows[WIN_FILES_CONFIRM_OPTIONS].width = 69;
                         gWindows[WIN_FILES_CONFIRM_OPTIONS].height = 44;
-                        gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = ((gWindows[WIN_FILES_CONFIRM_OPTIONS].parent != -1)
-                                         ? (gWindows[gWindows[WIN_FILES_CONFIRM_OPTIONS].parent].width / 2)
-                                         : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_CONFIRM_OPTIONS].width / 2;
+                        gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_OPTIONS);
 
                         gWindows[WIN_FILES_CONFIRM_PROMPT].pos.y = -29;
                         gWindows[WIN_FILES_CONFIRM_PROMPT].width = 118;
                         gWindows[WIN_FILES_CONFIRM_PROMPT].height = 25;
-                        gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = ((gWindows[WIN_FILES_CONFIRM_PROMPT].parent != -1)
-                                         ? (gWindows[gWindows[WIN_FILES_CONFIRM_PROMPT].parent].width / 2)
-                                         : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_CONFIRM_PROMPT].width / 2;
+                        gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_PROMPT);
 
                         filemenu_currentMenu = 1;
                         temp_a0 = filemenu_menus[filemenu_currentMenu];
-                        temp_a0->page = 0;
+                        temp_a0->state = 0;
                         filemenu_set_selected(temp_a0, 0, 1);
                     } else {
                         sfx_play_sound(SOUND_MENU_ERROR);
@@ -1107,7 +1038,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
             case 3:
                 if (menu->selected == 6) {
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    menu->page = 0;
+                    menu->state = 0;
                     set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_show_options_left);
                     set_window_update(WIN_FILES_MONO, (s32)filemenu_update_show_options_right);
                     set_window_update(WIN_FILES_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
@@ -1116,7 +1047,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 } else if (menu->selected < 4) {
                     if (gSaveSlotHasData[menu->selected]) {
                         sfx_play_sound(SOUND_MENU_NEXT);
-                        menu->page = 4;
+                        menu->state = 4;
                         filemenu_loadedFileIdx = menu->selected;
                     } else {
                         sfx_play_sound(SOUND_MENU_ERROR);
@@ -1126,7 +1057,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
             case 4:
                 if (menu->selected == 6) {
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    menu->page = 3;
+                    menu->state = 3;
                     filemenu_set_selected(menu, 0, 2);
                 } else if (menu->selected < 4) {
                     if (filemenu_loadedFileIdx == menu->selected) {
@@ -1136,15 +1067,11 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                         if (!gSaveSlotHasData[menu->selected]) {
                             sfx_play_sound(SOUND_MENU_NEXT);
                             filemenu_currentMenu = 2;
-                            filemenu_menus[filemenu_currentMenu]->page = 2;
+                            filemenu_menus[filemenu_currentMenu]->state = 2;
                             gWindows[WIN_FILES_MESSAGE].width = 154;
                             gWindows[WIN_FILES_MESSAGE].height = 39;
-                            gWindows[WIN_FILES_MESSAGE].pos.x = ((gWindows[WIN_FILES_MESSAGE].parent != -1)
-                                         ? (gWindows[gWindows[WIN_FILES_MESSAGE].parent].width / 2)
-                                         : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_MESSAGE].width / 2;
-                            gWindows[WIN_FILES_MESSAGE].pos.y = ((gWindows[WIN_FILES_MESSAGE].parent != -1)
-                                         ? (gWindows[gWindows[WIN_FILES_MESSAGE].parent].height / 2)
-                                         : SCREEN_HEIGHT / 2) - gWindows[WIN_FILES_MESSAGE].height / 2;
+                            gWindows[WIN_FILES_MESSAGE].pos.x = CENTER_WINDOW_X(WIN_FILES_MESSAGE);
+                            gWindows[WIN_FILES_MESSAGE].pos.y = CENTER_WINDOW_Y(WIN_FILES_MESSAGE);
 
                             set_window_update(WIN_FILES_MESSAGE, WINDOW_UPDATE_SHOW);
                             set_window_update(WIN_FILES_CONFIRM_OPTIONS, WINDOW_UPDATE_HIDE);
@@ -1160,20 +1087,16 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                             gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.y = 121;
                             gWindows[WIN_FILES_CONFIRM_OPTIONS].width = 69;
                             gWindows[WIN_FILES_CONFIRM_OPTIONS].height = 44;
-                            gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = ((gWindows[WIN_FILES_CONFIRM_OPTIONS].parent != -1)
-                                         ? (gWindows[gWindows[WIN_FILES_CONFIRM_OPTIONS].parent].width / 2)
-                                         : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_CONFIRM_OPTIONS].width / 2;
+                            gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_OPTIONS);
 
                             gWindows[WIN_FILES_CONFIRM_PROMPT].pos.y = -43;
                             gWindows[WIN_FILES_CONFIRM_PROMPT].width = 182;
                             gWindows[WIN_FILES_CONFIRM_PROMPT].height = 39;
-                            gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = ((gWindows[WIN_FILES_CONFIRM_PROMPT].parent != -1)
-                                         ? (gWindows[gWindows[WIN_FILES_CONFIRM_PROMPT].parent].width / 2)
-                                         : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_CONFIRM_PROMPT].width / 2;
+                            gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_PROMPT);
 
                             filemenu_currentMenu = 1;
                             temp_a0 = filemenu_menus[filemenu_currentMenu];
-                            temp_a0->page = 3;
+                            temp_a0->state = 3;
                             filemenu_set_selected(temp_a0, 0, 1);
                         }
                     }
@@ -1187,7 +1110,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     if (!gSaveSlotHasData[menu->selected]) {
                         sfx_play_sound(SOUND_MENU_NEXT);
                         filemenu_currentMenu = 2;
-                        filemenu_menus[filemenu_currentMenu]->page = 1;
+                        filemenu_menus[filemenu_currentMenu]->state = 1;
                         set_window_update(WIN_FILES_MAIN, (s32)main_menu_window_update);
                         set_window_update(WIN_FILES_MESSAGE, WINDOW_UPDATE_SHOW);
                         set_window_update(WIN_FILES_CONFIRM_OPTIONS, WINDOW_UPDATE_HIDE);
@@ -1201,20 +1124,16 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                         gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.y = 127;
                         gWindows[WIN_FILES_CONFIRM_OPTIONS].width = 69;
                         gWindows[WIN_FILES_CONFIRM_OPTIONS].height = 44;
-                        gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = ((gWindows[WIN_FILES_CONFIRM_OPTIONS].parent != -1)
-                                         ? (gWindows[gWindows[WIN_FILES_CONFIRM_OPTIONS].parent].width / 2)
-                                         : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_CONFIRM_OPTIONS].width / 2;
+                        gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_OPTIONS);
 
                         gWindows[WIN_FILES_CONFIRM_PROMPT].pos.y = -50;
                         gWindows[WIN_FILES_CONFIRM_PROMPT].width = 148;
                         gWindows[WIN_FILES_CONFIRM_PROMPT].height = 38;
-                        gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = ((gWindows[WIN_FILES_CONFIRM_PROMPT].parent != -1)
-                                         ? (gWindows[gWindows[WIN_FILES_CONFIRM_PROMPT].parent].width / 2)
-                                         : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_CONFIRM_PROMPT].width / 2;
+                        gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_PROMPT);
 
                         filemenu_currentMenu = 1;
                         temp_a0 = filemenu_menus[filemenu_currentMenu];
-                        temp_a0->page = 1;
+                        temp_a0->state = 1;
                         filemenu_set_selected(temp_a0, 0, 1);
                     }
                 }
@@ -1223,7 +1142,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
     }
 
     if (filemenu_pressedButtons & BUTTON_B) {
-        switch (menu->page) {
+        switch (menu->state) {
             case 0:
                 filemenu_set_selected(menu, 2, 2);
                 break;
@@ -1241,7 +1160,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 break;
         }
 
-        switch (menu->page) {
+        switch (menu->state) {
             case 0:
                 set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_hidden_options_left);
                 set_window_update(WIN_FILES_MONO, (s32)filemenu_update_hidden_options_right);
@@ -1257,7 +1176,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 set_game_mode(GAME_MODE_END_FILE_SELECT);
                 break;
             case 1:
-                menu->page = 0;
+                menu->state = 0;
                 filemenu_set_selected(menu, 0, 2);
                 set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_show_options_left);
                 set_window_update(WIN_FILES_MONO, (s32)filemenu_update_show_options_right);
@@ -1266,7 +1185,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 sfx_play_sound(SOUND_MENU_BACK);
                 break;
             case 3:
-                menu->page = 0;
+                menu->state = 0;
                 filemenu_set_selected(menu, 1, 2);
                 set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_show_options_left);
                 set_window_update(WIN_FILES_MONO, (s32)filemenu_update_show_options_right);
@@ -1275,7 +1194,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 sfx_play_sound(SOUND_MENU_BACK);
                 break;
             case 4:
-                menu->page = 3;
+                menu->state = 3;
                 filemenu_set_selected(menu, (filemenu_loadedFileIdx % 2) * 2, filemenu_loadedFileIdx / 2);
                 sfx_play_sound(SOUND_MENU_BACK);
                 break;
@@ -1317,7 +1236,7 @@ void filemenu_main_update(MenuPanel* menu) {
             break;
     }
 
-    if (filemenu_menus[0]->page == PAGE_4) {
+    if (filemenu_menus[0]->state == PAGE_4) {
         switch (filemenu_loadedFileIdx) {
             case 0:
                 gWindowStyles[WIN_FILES_SLOT1_BODY].customStyle = &filemenu_windowStyles[16];

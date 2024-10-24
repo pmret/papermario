@@ -321,7 +321,7 @@ void render_windows(s32* windowsArray, s32 parent, s32 flags, s32 baseX, s32 bas
             posY += baseY;
         }
 
-        if (parent == -1) {
+        if (parent == WIN_NONE) {
             boxTranslateX = SCREEN_WIDTH;
         } else {
             boxTranslateX = window->width;

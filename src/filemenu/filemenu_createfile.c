@@ -64,7 +64,7 @@ MenuPanel filemenu_createfile_menuBP = {
     .col = 0,
     .row = 0,
     .selected = 0,
-    .page = 0,
+    .state = 0,
     .numCols = 13,
     .numRows = ROWS,
     .numPages = 0,
@@ -194,8 +194,8 @@ void filemenu_draw_contents_choose_name(
 
     if ((window->flags & WINDOW_FLAG_INITIAL_ANIMATION) && window->fpUpdate.func == filemenu_update_change_layout) {
         changeLayoutOffset = window->updateCounter * 2;
-        currentPage = menu->page;
-        previousPage = menu->page != 1;
+        currentPage = menu->state;
+        previousPage = menu->state != 1;
         if (changeLayoutOffset > 16) {
             changeLayoutOffset = 16;
         }
@@ -280,7 +280,7 @@ void filemenu_draw_contents_choose_name(
     } else {
         for (col = 0; col < menu->numCols; col++) {
             for (row = 0; row < menu->numRows; row++) {
-                c = menu->gridData[menu->page * menu->numCols * menu->numRows + menu->numCols * row + col];
+                c = menu->gridData[menu->state * menu->numCols * menu->numRows + menu->numCols * row + col];
                 if (c != 0xF7) {
                     if (col == menu->col && row == menu->row) {
                         flags = 8;
@@ -359,13 +359,8 @@ void filemenu_choose_name_init(MenuPanel* menu) {
 
     setup_pause_menu_tab(filemenu_createfile_windowBPs, ARRAY_COUNT(filemenu_createfile_windowBPs));
 
-    gWindows[WIN_FILES_INPUT_FIELD].pos.x = ((gWindows[WIN_FILES_INPUT_FIELD].parent != -1)
-                        ? (gWindows[gWindows[WIN_FILES_INPUT_FIELD].parent].width / 2)
-                        : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_INPUT_FIELD].width / 2;
-
-    gWindows[WIN_FILES_INPUT_KEYBOARD].pos.x = ((gWindows[WIN_FILES_INPUT_KEYBOARD].parent != -1)
-                        ? (gWindows[gWindows[WIN_FILES_INPUT_KEYBOARD].parent].width / 2)
-                        : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_INPUT_KEYBOARD].width / 2;
+    gWindows[WIN_FILES_INPUT_FIELD].pos.x = CENTER_WINDOW_X(WIN_FILES_INPUT_FIELD);
+    gWindows[WIN_FILES_INPUT_KEYBOARD].pos.x = CENTER_WINDOW_X(WIN_FILES_INPUT_KEYBOARD);
 
     menu->initialized = TRUE;
 }
@@ -377,13 +372,8 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
     s32 i;
 
 #if VERSION_PAL
-    s32 halfWidth;
-
     gWindows[WIN_FILES_INPUT_FIELD].width = D_filemenu_80250958[gCurrentLanguage];
-    halfWidth = gWindows[WIN_FILES_INPUT_FIELD].width / 2;
-    gWindows[WIN_FILES_INPUT_FIELD].pos.x = gWindows[WIN_FILES_INPUT_FIELD].parent != -1 ?
-        (gWindows[gWindows[WIN_FILES_INPUT_FIELD].parent].width / 2) - halfWidth :
-        SCREEN_WIDTH / 2 - halfWidth;
+    gWindows[WIN_FILES_INPUT_FIELD].pos.x = CENTER_WINDOW_X(WIN_FILES_INPUT_FIELD);
 #endif
 
     if (filemenu_heldButtons & BUTTON_STICK_LEFT) {
@@ -456,17 +446,17 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
             case 0xC9:
                 break;
             case 0xC7:
-                if (menu->page != 1) {
+                if (menu->state != 1) {
                     sfx_play_sound(SOUND_CREATE_FILE_CHANGE_CHARSET);
-                    menu->page = 1;
+                    menu->state = 1;
                     filemenu_set_selected(menu, menu->col, menu->row);
                     set_window_update(WIN_FILES_INPUT_KEYBOARD, (s32)filemenu_update_change_layout);
                 }
                 break;
             case 0xC8:
-                if (menu->page != 0) {
+                if (menu->state != 0) {
                     sfx_play_sound(SOUND_CREATE_FILE_CHANGE_CHARSET);
-                    menu->page = 0;
+                    menu->state = 0;
                     filemenu_set_selected(menu, menu->col, menu->row);
                     set_window_update(WIN_FILES_INPUT_KEYBOARD, (s32)filemenu_update_change_layout);
                 }
@@ -487,29 +477,22 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
                 gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.y = 121;
                 gWindows[WIN_FILES_CONFIRM_OPTIONS].width = 69;
                 gWindows[WIN_FILES_CONFIRM_OPTIONS].height = 44;
-                gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = ((gWindows[WIN_FILES_CONFIRM_OPTIONS].parent != -1)
-                                               ? (gWindows[gWindows[WIN_FILES_CONFIRM_OPTIONS].parent].width / 2)
-                                               : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_CONFIRM_OPTIONS].width / 2;
+                gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_OPTIONS);
 
                 gWindows[WIN_FILES_CONFIRM_PROMPT].pos.y = -70;
 #if VERSION_PAL
                 gWindows[WIN_FILES_CONFIRM_PROMPT].width = D_filemenu_80250960[gCurrentLanguage];
-                halfWidth = gWindows[WIN_FILES_CONFIRM_PROMPT].width / 2;
                 gWindows[WIN_FILES_CONFIRM_PROMPT].height = 62;
-                gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = gWindows[WIN_FILES_CONFIRM_PROMPT].parent != -1
-                    ? (gWindows[gWindows[WIN_FILES_CONFIRM_PROMPT].parent].width / 2) - halfWidth
-                    : SCREEN_WIDTH / 2 - halfWidth;
+                gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_PROMPT);
 #else
                 gWindows[WIN_FILES_CONFIRM_PROMPT].width = 164;
                 gWindows[WIN_FILES_CONFIRM_PROMPT].height = 62;
-                gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = ((gWindows[WIN_FILES_CONFIRM_PROMPT].parent != -1)
-                    ? (gWindows[gWindows[WIN_FILES_CONFIRM_PROMPT].parent].width / 2)
-                    : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_CONFIRM_PROMPT].width / 2;
+                gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_PROMPT);
 #endif
 
                 filemenu_currentMenu = 1;
                 newMenu = filemenu_menus[filemenu_currentMenu];
-                newMenu->page = INPUT_FINAL_PAGE;
+                newMenu->state = INPUT_FINAL_PAGE;
                 filemenu_set_selected(newMenu, 0, 0);
                 return;
             default:
@@ -550,7 +533,7 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
             set_window_update(WIN_FILES_SLOT2_BODY, (s32) &filemenu_update_show_with_rotation);
             set_window_update(WIN_FILES_SLOT3_BODY, (s32) &filemenu_update_show_with_rotation);
             set_window_update(WIN_FILES_SLOT4_BODY, (s32) &filemenu_update_show_with_rotation);
-            filemenu_currentMenu = 0;
+            filemenu_currentMenu = FILE_MENU_MAIN;
             return;
         }
 
@@ -577,30 +560,22 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
         gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.y = 121;
         gWindows[WIN_FILES_CONFIRM_OPTIONS].width = 69;
         gWindows[WIN_FILES_CONFIRM_OPTIONS].height = 44;
-        gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = ((gWindows[WIN_FILES_CONFIRM_OPTIONS].parent != -1)
-                            ? (gWindows[gWindows[WIN_FILES_CONFIRM_OPTIONS].parent].width / 2)
-                            : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_CONFIRM_OPTIONS].width / 2;
+        gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_OPTIONS);
 
         gWindows[WIN_FILES_CONFIRM_PROMPT].pos.y = -70;
 #if VERSION_PAL
         gWindows[WIN_FILES_CONFIRM_PROMPT].width = D_filemenu_80250960[gCurrentLanguage];
         gWindows[WIN_FILES_CONFIRM_PROMPT].height = 62;
-        halfWidth = gWindows[WIN_FILES_CONFIRM_PROMPT].width / 2;
-        gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = gWindows[WIN_FILES_CONFIRM_PROMPT].parent != -1
-            ? (gWindows[gWindows[WIN_FILES_CONFIRM_PROMPT].parent].width / 2) - halfWidth
-            : SCREEN_WIDTH / 2 - halfWidth;
+        gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_PROMPT);
 #else
-
         gWindows[WIN_FILES_CONFIRM_PROMPT].width = 164;
         gWindows[WIN_FILES_CONFIRM_PROMPT].height = 62;
-        gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = ((gWindows[WIN_FILES_CONFIRM_PROMPT].parent != -1)
-            ? (gWindows[gWindows[WIN_FILES_CONFIRM_PROMPT].parent].width / 2)
-            : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_CONFIRM_PROMPT].width / 2;
+        gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_PROMPT);
 #endif
 
         filemenu_currentMenu = 1;
         newMenu2 = filemenu_menus[filemenu_currentMenu];
-        newMenu2->page = INPUT_FINAL_PAGE;
+        newMenu2->state = INPUT_FINAL_PAGE;
         filemenu_set_selected(newMenu2, 0, 0);
     }
 }

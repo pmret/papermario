@@ -219,7 +219,7 @@ void pause_set_cursor_pos_immediate(s32 windowID, s32 posX, s32 posY) {
         gPauseCursorTargetPosY = posY;
         gPauseCursorPosY = posY;
 
-    } else if ((window->flags & WINDOW_FLAG_INITIAL_ANIMATION) == 0 && (window->parent == -1 || !(gWindows[window->parent].flags & WINDOW_FLAG_INITIAL_ANIMATION))) {
+    } else if ((window->flags & WINDOW_FLAG_INITIAL_ANIMATION) == 0 && (window->parent == WIN_NONE || !(gWindows[window->parent].flags & WINDOW_FLAG_INITIAL_ANIMATION))) {
         gPauseCursorTargetPosX = posX;
         gPauseCursorPosX = posX;
         gPauseCursorTargetPosY = posY;
@@ -240,7 +240,7 @@ void pause_set_cursor_pos(s32 windowID, s32 posX, s32 posY) {
                 Window* window = &gWindows[i];
                 s8 parent = window->parent;
 
-                if ((parent == -1 || parent == WIN_PAUSE_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
+                if ((parent == WIN_NONE || parent == WIN_PAUSE_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
                     break;
                 }
             }
@@ -252,7 +252,7 @@ void pause_set_cursor_pos(s32 windowID, s32 posX, s32 posY) {
         gPauseCursorPosX = posX;
         gPauseCursorTargetPosY = posY;
         gPauseCursorPosY = posY;
-    } else if ((window->flags & WINDOW_FLAG_INITIAL_ANIMATION) == 0 && (window->parent == -1 || !(gWindows[window->parent].flags & WINDOW_FLAG_INITIAL_ANIMATION))) {
+    } else if ((window->flags & WINDOW_FLAG_INITIAL_ANIMATION) == 0 && (window->parent == WIN_NONE || !(gWindows[window->parent].flags & WINDOW_FLAG_INITIAL_ANIMATION))) {
         gPauseCursorTargetPosX = posX;
         gPauseCursorTargetPosY = posY;
     }

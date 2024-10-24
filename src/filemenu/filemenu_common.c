@@ -195,7 +195,7 @@ void filemenu_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileIdx, s32 uls
 void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row) {
     menu->col = col;
     menu->row = row;
-    menu->selected = menu->gridData[(menu->page * menu->numCols * menu->numRows) +
+    menu->selected = menu->gridData[(menu->state * menu->numCols * menu->numRows) +
                                     (menu->numCols * menu->row) + menu->col];
 }
 
@@ -217,7 +217,7 @@ void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
                 Window* window = &gWindows[i];
                 s8 parent = window->parent;
 
-                if ((parent == -1 || parent == WIN_FILES_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
+                if ((parent == WIN_NONE || parent == WIN_FILES_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
                     break;
                 }
             }
@@ -230,7 +230,7 @@ void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
         filemenu_cursor_targetY = posY;
         filemenu_cursor_posY = posY;
     } else if (!(window->flags & WINDOW_FLAG_INITIAL_ANIMATION) &&
-                (window->parent == -1 || !(gWindows[window->parent].flags & WINDOW_FLAG_INITIAL_ANIMATION))) {
+                (window->parent == WIN_NONE || !(gWindows[window->parent].flags & WINDOW_FLAG_INITIAL_ANIMATION))) {
         filemenu_cursor_targetX = posX;
         filemenu_cursor_targetY = posY;
     }
@@ -272,7 +272,7 @@ void filemenu_update_cursor(void) {
         Window* window = &gWindows[i];
         s8 parent = window->parent;
 
-        if ((parent == -1 || parent == WIN_FILES_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
+        if ((parent == WIN_NONE || parent == WIN_FILES_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
             break;
         }
     }
@@ -309,7 +309,7 @@ void filemenu_update(void) {
     s32 i;
 
     for (i = WIN_FILES_MAIN; i < ARRAY_COUNT(gWindows); i++) {
-        if ((gWindows[i].parent == -1 || gWindows[i].parent == WIN_FILES_MAIN) &&
+        if ((gWindows[i].parent == WIN_NONE || gWindows[i].parent == WIN_FILES_MAIN) &&
             (gWindows[i].flags & WINDOW_FLAG_INITIAL_ANIMATION))
         {
             break;
@@ -909,7 +909,7 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
     f32 endX, endZ;
     f32 temp_f28;
 
-    if (menu0->page == PAGE_4 && menu0->selected < 4) {
+    if (menu0->state == PAGE_4 && menu0->selected < 4) {
         if (menu0->selected != filemenu_loadedFileIdx && filemenu_currentMenu != 2) {
             switch (filemenu_loadedFileIdx) {
                 case 0:
@@ -1036,12 +1036,12 @@ void filemenu_init(s32 arg0) {
 
 #if VERSION_PAL
     if (arg0 != 2) {
-        filemenu_currentMenu = 0;
+        filemenu_currentMenu = FILE_MENU_MAIN;
         menu = filemenu_menus[0];
-        menu->page = filemenu_currentMenu;
+        menu->state = filemenu_currentMenu;
         func_PAL_8002B574();
 
-        if (menu->page == 0) {
+        if (menu->state == 0) {
             fio_load_globals();
             if (gSaveGlobals.lastFileSelected >= 4) {
                 gSaveGlobals.lastFileSelected = 0;
@@ -1074,15 +1074,15 @@ void filemenu_init(s32 arg0) {
     }
 #else
     menu = filemenu_menus[0];
-    filemenu_currentMenu = 0;
+    filemenu_currentMenu = FILE_MENU_MAIN;
 
     if (arg0 == 0) {
-        menu->page = 0;
+        menu->state = 0;
     } else {
-        menu->page = 2;
+        menu->state = 2;
     }
 
-    if (menu->page == 0) {
+    if (menu->state == 0) {
         for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
             if (!fio_load_game(i)) {
                 gSaveSlotHasData[i] = FALSE;
@@ -1092,7 +1092,7 @@ void filemenu_init(s32 arg0) {
             }
         }
 
-        if (menu->page == 0) {
+        if (menu->state == 0) {
             fio_load_globals();
             if (gSaveGlobals.lastFileSelected >= 4) {
                 gSaveGlobals.lastFileSelected = 0;
@@ -1141,9 +1141,9 @@ void filemenu_cleanup(void) {
 }
 
 s32 func_80244BC4() {
-    if (filemenu_menus[0]->page == 0 && filemenu_currentMenu == 1 && filemenu_menus[1]->selected == 0) {
+    if (filemenu_menus[0]->state == 0 && filemenu_currentMenu == 1 && filemenu_menus[1]->selected == 0) {
         return 2;
-    } else if (filemenu_menus[0]->page == 0 && filemenu_menus[0]->selected < 4) {
+    } else if (filemenu_menus[0]->state == 0 && filemenu_menus[0]->selected < 4) {
         return 1;
     } else {
         return 0;

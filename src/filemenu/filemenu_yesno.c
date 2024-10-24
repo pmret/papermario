@@ -73,7 +73,7 @@ MenuPanel filemenu_yesno_menuBP = {
     .col = 0,
     .row = 0,
     .selected = 0,
-    .page = 0,
+    .state = 0,
     .numCols = 1,
     .numRows = 2,
     .numPages = 0,
@@ -97,7 +97,7 @@ void filemenu_yesno_draw_options_contents(
     s32 cursorGoalXOffset;
     s32 cursorGoalYOffset;
 
-    switch (menu->page) {
+    switch (menu->state) {
         case 0:
             xOffset1 = 28;
             yOffset1 = 4;
@@ -159,7 +159,7 @@ void filemenu_yesno_draw_prompt_contents(
     s32 xOffset;
     s32 i;
 
-    switch (menu->page) {
+    switch (menu->state) {
         case 0:
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE), baseX + DELETE_FILE_DELETE_X, baseY + 4, 0xFF, 0, 0);
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_22), baseX + DELETE_FILE_FILE_X, baseY + 4, 0xFF, 0, 0);
@@ -237,7 +237,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
         sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
     }
 
-    if ((filemenu_pressedButtons & BUTTON_START) && menu->page == 4) {
+    if ((filemenu_pressedButtons & BUTTON_START) && menu->state == 4) {
         filemenu_set_selected(menu, 0, 0);
         filemenu_pressedButtons = BUTTON_A;
     }
@@ -253,18 +253,14 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
 
         switch (menu->selected) {
             case 0:
-                switch (menu->page) {
+                switch (menu->state) {
                     case 0:
                         filemenu_currentMenu = 2;
-                        filemenu_menus[filemenu_currentMenu]->page = 0;
+                        filemenu_menus[filemenu_currentMenu]->state = 0;
                         gWindows[WIN_FILES_MESSAGE].width = 182;
                         gWindows[WIN_FILES_MESSAGE].height = 25;
-                        gWindows[WIN_FILES_MESSAGE].pos.x = ((gWindows[WIN_FILES_MESSAGE].parent != -1)
-                                            ? (gWindows[gWindows[WIN_FILES_MESSAGE].parent].width / 2)
-                                            : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_MESSAGE].width / 2;
-                        gWindows[WIN_FILES_MESSAGE].pos.y = ((gWindows[WIN_FILES_MESSAGE].parent != -1)
-                                            ? (gWindows[gWindows[WIN_FILES_MESSAGE].parent].height / 2)
-                                            : SCREEN_HEIGHT / 2) - gWindows[WIN_FILES_MESSAGE].height / 2;
+                        gWindows[WIN_FILES_MESSAGE].pos.x = CENTER_WINDOW_X(WIN_FILES_MESSAGE);
+                        gWindows[WIN_FILES_MESSAGE].pos.y = CENTER_WINDOW_Y(WIN_FILES_MESSAGE);
                         set_window_update(WIN_FILES_MESSAGE, WINDOW_UPDATE_SHOW);
                         set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32)filemenu_update_hidden_name_confirm);
 
@@ -280,15 +276,11 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         break;
                     case 3:
                         filemenu_currentMenu = 2;
-                        filemenu_menus[filemenu_currentMenu]->page = 2;
+                        filemenu_menus[filemenu_currentMenu]->state = 2;
                         gWindows[WIN_FILES_MESSAGE].width = 154;
                         gWindows[WIN_FILES_MESSAGE].height = 39;
-                        gWindows[WIN_FILES_MESSAGE].pos.x = ((gWindows[WIN_FILES_MESSAGE].parent != -1)
-                                             ? (gWindows[gWindows[WIN_FILES_MESSAGE].parent].width / 2)
-                                             : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_MESSAGE].width / 2;
-                        gWindows[WIN_FILES_MESSAGE].pos.y = ((gWindows[WIN_FILES_MESSAGE].parent != -1)
-                                             ? (gWindows[gWindows[WIN_FILES_MESSAGE].parent].height / 2)
-                                             : SCREEN_HEIGHT / 2) - gWindows[WIN_FILES_MESSAGE].height / 2;
+                        gWindows[WIN_FILES_MESSAGE].pos.x = CENTER_WINDOW_X(WIN_FILES_MESSAGE);
+                        gWindows[WIN_FILES_MESSAGE].pos.y = CENTER_WINDOW_Y(WIN_FILES_MESSAGE);
                         set_window_update(WIN_FILES_MESSAGE, WINDOW_UPDATE_SHOW);
                         set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32)filemenu_update_hidden_name_confirm);
                         fio_load_game(filemenu_loadedFileIdx);
@@ -298,15 +290,11 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         break;
                     case 1:
                         filemenu_currentMenu = 2;
-                        filemenu_menus[filemenu_currentMenu]->page = 1;
+                        filemenu_menus[filemenu_currentMenu]->state = 1;
                         gWindows[WIN_FILES_MESSAGE].width = 153;
                         gWindows[WIN_FILES_MESSAGE].height = 25;
-                        gWindows[WIN_FILES_MESSAGE].pos.x = ((gWindows[WIN_FILES_MESSAGE].parent != -1)
-                                             ? (gWindows[gWindows[WIN_FILES_MESSAGE].parent].width / 2)
-                                             : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_MESSAGE].width / 2;
-                        gWindows[WIN_FILES_MESSAGE].pos.y = ((gWindows[WIN_FILES_MESSAGE].parent != -1)
-                                             ? (gWindows[gWindows[WIN_FILES_MESSAGE].parent].height / 2)
-                                             : SCREEN_HEIGHT / 2) - gWindows[WIN_FILES_MESSAGE].height / 2;
+                        gWindows[WIN_FILES_MESSAGE].pos.x = CENTER_WINDOW_X(WIN_FILES_MESSAGE);
+                        gWindows[WIN_FILES_MESSAGE].pos.y = CENTER_WINDOW_Y(WIN_FILES_MESSAGE);
                         set_window_update(WIN_FILES_MESSAGE, WINDOW_UPDATE_SHOW);
                         set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32)filemenu_update_hidden_name_confirm);
                         gSaveSlotMetadata[filemenu_menus[0]->selected] = gSaveSlotMetadata[gGameStatusPtr->saveSlot];
@@ -342,15 +330,11 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         set_window_update(WIN_FILES_SLOT4_BODY, (s32)filemenu_update_show_with_rotation);
                         set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32)filemenu_update_hidden_name_confirm);
                         filemenu_currentMenu = 2;
-                        filemenu_menus[2]->page = 3;
+                        filemenu_menus[2]->state = 3;
                         gWindows[WIN_FILES_MESSAGE].width = 184;
                         gWindows[WIN_FILES_MESSAGE].height = 25;
-                        gWindows[WIN_FILES_MESSAGE].pos.x = ((gWindows[WIN_FILES_MESSAGE].parent != -1)
-                                             ? (gWindows[gWindows[WIN_FILES_MESSAGE].parent].width / 2)
-                                             : SCREEN_WIDTH / 2) - gWindows[WIN_FILES_MESSAGE].width / 2;
-                        gWindows[WIN_FILES_MESSAGE].pos.y = ((gWindows[WIN_FILES_MESSAGE].parent != -1)
-                                             ? (gWindows[gWindows[WIN_FILES_MESSAGE].parent].height / 2)
-                                             : SCREEN_HEIGHT / 2) - gWindows[WIN_FILES_MESSAGE].height / 2;
+                        gWindows[WIN_FILES_MESSAGE].pos.x = CENTER_WINDOW_X(WIN_FILES_MESSAGE);
+                        gWindows[WIN_FILES_MESSAGE].pos.y = CENTER_WINDOW_Y(WIN_FILES_MESSAGE);
                         set_window_update(WIN_FILES_MESSAGE, WINDOW_UPDATE_SHOW);
                         break;
                     case 4:
@@ -368,11 +352,11 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                 }
                 break;
             case 1:
-                switch (menu->page) {
+                switch (menu->state) {
                     case 0:
                     case 1:
                     case 3:
-                        filemenu_currentMenu = 0;
+                        filemenu_currentMenu = FILE_MENU_MAIN;
                         set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32)filemenu_update_hidden_name_confirm);
                         break;
                     case 2:
@@ -380,7 +364,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32)filemenu_update_hidden_name_confirm);
                         break;
                     case 4:
-                        filemenu_currentMenu = 0;
+                        filemenu_currentMenu = FILE_MENU_MAIN;
                         slot4 = filemenu_menus[0]->selected;
                         set_window_update(WIN_FILES_TITLE, (s32)filemenu_update_show_with_rotation);
                         set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_show_with_rotation);
@@ -407,11 +391,11 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
         sfx_play_sound(SOUND_MENU_BACK);
         filemenu_set_selected(menu, 0, 1);
 
-        switch (menu->page) {
+        switch (menu->state) {
             case 0:
             case 1:
             case 3:
-                filemenu_currentMenu = 0;
+                filemenu_currentMenu = FILE_MENU_MAIN;
                 set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32)filemenu_update_hidden_name_confirm);
                 break;
             case 2:
@@ -419,7 +403,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                 set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32)filemenu_update_hidden_name_confirm);
                 break;
             case 4:
-                filemenu_currentMenu = 0;
+                filemenu_currentMenu = FILE_MENU_MAIN;
                 slot = filemenu_menus[0]->selected;
                 set_window_update(WIN_FILES_TITLE, (s32)filemenu_update_show_with_rotation);
                 set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_show_with_rotation);

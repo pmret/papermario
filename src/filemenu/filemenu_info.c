@@ -45,7 +45,7 @@ MenuPanel filemenu_info_menuBP = {
     .col = 0,
     .row = 0,
     .selected = 0,
-    .page = 0,
+    .state = 0,
     .numCols = 1,
     .numRows = 1,
     .numPages = 0,
@@ -66,7 +66,7 @@ void filemenu_info_draw_message_contents(
     s32 xOffset;
 
     // TODO figure out FILE_MESSAGE constants
-    switch (menu->page) {
+    switch (menu->state) {
         case 0:
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_28), baseX + 10, baseY + 4, 255, 0, 0);
             xOffset = D_filemenu_80250934[gCurrentLanguage] + 10;
@@ -101,7 +101,7 @@ void filemenu_info_draw_message_contents(
             break;
     }
 #else
-    switch (menu->page) {
+    switch (menu->state) {
         case 0:
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 10, baseY + 4, 255, 0, 0);
             draw_number(filemenu_menus[0]->selected + 1, baseX + 48, baseY + 6 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_NORMAL, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
@@ -154,11 +154,11 @@ void filemenu_info_handle_input(MenuPanel* menu) {
     if (filemenu_pressedButtons & (BUTTON_A | BUTTON_B)) {
         MenuPanel* menu = filemenu_menus[0];
 
-        filemenu_currentMenu = 0;
+        filemenu_currentMenu = FILE_MENU_MAIN;
 
-        switch (menu->page) {
+        switch (menu->state) {
             case PAGE_1:
-                menu->page = PAGE_0;
+                menu->state = PAGE_0;
                 set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_show_options_left);
                 set_window_update(WIN_FILES_MONO, (s32)filemenu_update_show_options_right);
                 set_window_update(WIN_FILES_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
@@ -166,7 +166,7 @@ void filemenu_info_handle_input(MenuPanel* menu) {
                 filemenu_set_selected(menu, 0, 2);
                 break;
             case PAGE_4:
-                menu->page = PAGE_0;
+                menu->state = PAGE_0;
                 set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_show_options_left);
                 set_window_update(WIN_FILES_MONO, (s32)filemenu_update_show_options_right);
                 set_window_update(WIN_FILES_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
@@ -175,7 +175,7 @@ void filemenu_info_handle_input(MenuPanel* menu) {
                 break;
 #if !VERSION_PAL
             case PAGE_2:
-                menu->page = 2;
+                menu->state = 2;
                 filemenu_set_selected(menu, 1, 2);
                 break;
 #endif

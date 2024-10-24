@@ -388,7 +388,7 @@ void state_step_exit_file_select(void) {
             for (i = 44; i < ARRAY_COUNT(gWindows); i++) {
                 Window* window = &gWindows[i];
 
-                if (window->parent == WIN_FILES_MAIN || window->parent == -1) {
+                if (window->parent == WIN_FILES_MAIN || window->parent == WIN_NONE) {
                     flagSum += window->flags & WINDOW_FLAG_INITIAL_ANIMATION;
                 }
             }
