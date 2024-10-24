@@ -113,7 +113,7 @@ void pause_cleanup(void);
 void filemenu_init(s32 mode);
 void filemenu_cleanup(void);
 void filemenu_update(void);
-s32 func_80244BC4(void);
+s32 filemenu_get_exit_mode(void);
 void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row);
 void filemenu_set_cursor_alpha(s32 arg0);
 void filemenu_set_cursor_goal_pos(s32 windowIndex, s32 posX, s32 posY);

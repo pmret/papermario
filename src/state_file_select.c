@@ -232,7 +232,7 @@ void state_init_exit_file_select(void) {
     D_800A0932[0] = 0;
     D_800A0930 = 0;
 
-    if (func_80244BC4() == 0) {
+    if (filemenu_get_exit_mode() == 0) {
         set_map_transition_effect(TRANSITION_SLOW_FADE_TO_WHITE);
     } else {
         set_map_transition_effect(TRANSITION_ENTER_WORLD);
@@ -377,7 +377,7 @@ void state_step_exit_language_select(void) {
 }
 
 void state_step_exit_file_select(void) {
-    s32 temp_s0 = func_80244BC4();
+    s32 exitMode = filemenu_get_exit_mode();
     s32 flagSum;
     s32 i;
 
@@ -398,7 +398,7 @@ void state_step_exit_file_select(void) {
             }
             break;
         case 1:
-            if (temp_s0 == 0 || update_exit_map_screen_overlay(D_800A0932) != 0) {
+            if (exitMode == 0 || update_exit_map_screen_overlay(D_800A0932) != 0) {
                 D_800A0931 = 2;
             }
             break;
@@ -408,7 +408,7 @@ void state_step_exit_file_select(void) {
             D_800A0931 = 3;
         case 3:
             set_time_freeze_mode(TIME_FREEZE_NONE);
-            if (temp_s0 == 0) {
+            if (exitMode == 0) {
                 set_game_mode(GAME_MODE_TITLE_SCREEN);
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS;
             } else {

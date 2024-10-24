@@ -589,21 +589,21 @@ s32 filemenu_draw_char(s32 c, s32 x, s32 y, s32 flag1, s32 color, s32 flag2) {
     }
 #endif
 
-    if (c == 0xF7) {
+    if (c == MSG_CHAR_READ_SPACE) {
         return charWidth - 6;
     }
 
     switch (c) {
-        case 0xF3:
+        case MSG_CHAR_READ_VARIANT0:
             filemenu_charset_raster_id = 0;
             break;
-        case 0xF4:
+        case MSG_CHAR_READ_VARIANT1:
             filemenu_charset_raster_id = 1;
             break;
-        case 0xF5:
+        case MSG_CHAR_READ_VARIANT2:
             filemenu_charset_raster_id = 2;
             break;
-        case 0xF6:
+        case MSG_CHAR_READ_VARIANT3:
             filemenu_charset_raster_id = 3;
             break;
     }
@@ -637,7 +637,7 @@ void filemenu_draw_message(u8* message, s32 x, s32 y, s32 alpha, s32 color, u32 
         u8* tmp;
         filemenu_draw_char(0xF3, x, y, flag1, color, flag2);
         tmp = message;
-        while (*tmp != 0xFD) {
+        while (*tmp != MSG_CHAR_READ_END) {
 #if VERSION_IQUE
             int ord = *tmp;
             if (ord >= MSG_CHAR_MULTIBYTE_FIRST && ord <= MSG_CHAR_MULTIBYTE_LAST) {
@@ -671,7 +671,7 @@ void filemenu_draw_file_name(u8* filename, s32 length, s32 x, s32 y, s32 alpha, 
     for (i = 0; i < length; i++) {
         u32 c = filename[i];
 
-        if (c != 0xF7) {
+        if (c != MSG_CHAR_READ_SPACE) {
 #if VERSION_IQUE
             // Numerals get drawn one pixel lower than other characters
             if (c >= MSG_CHAR_DIGIT_0 && c <= MSG_CHAR_DIGIT_9) {

@@ -158,7 +158,7 @@ void filemenu_draw_pal_8024d6a0(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
 void func_filemenu_8024D710(s32 arg0, MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 var_a1;
 
-    if (filemenu_currentMenu == 4 && menu->selected == arg0) {
+    if (filemenu_currentMenu == FILE_MENU_SELECT_LANG && menu->selected == arg0) {
         filemenu_set_cursor_goal_pos(arg0 + 60, baseX + 4, baseY + 10);
     }
 

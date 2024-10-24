@@ -19,30 +19,38 @@ enum {
     FILE_MENU_CONFIRM       = 1, // confirmation prompt is open
     FILE_MENU_MESSAGE       = 2, // message is displayed, e.g. "File X has been deleted."
     FILE_MENU_INPUT_NAME    = 3, // "Enter a file name!" screen
+    FILE_MENU_SELECT_LANG   = 4, // PAL only
 };
 
 enum {
+    // states for main menu
     FM_MAIN_SELECT_FILE         = 0, // choose which file to load
     FM_MAIN_SELECT_DELETE, // choose which file to delete
 #if !VERSION_PAL
-    FM_MAIN_DUMMY_LANG_SELECT,
+    FM_MAIN_DUMMY_LANG_SELECT, // non-PAL versions have an unimplemented dummy language select
 #endif
     FM_MAIN_SELECT_COPY_FROM,
     FM_MAIN_SELECT_COPY_TO,
     FM_MAIN_PAL_LANG_SELECT,
 
+    // states for confirm submenu
     FM_CONFIRM_DELETE           = 0,
-    FM_CONFIRM_CREATE,
 #if !VERSION_PAL
-    FM_CONFIRM_DUMMY, // order??
+    FM_CONFIRM_DUMMY,
 #endif
+    FM_CONFIRM_CREATE,
     FM_CONFIRM_COPY, // unused
     FM_CONFIRM_START,
 
+    // states for message submenu
     FM_MESSAGE_DELETED          = 0,
+#if !VERSION_PAL
+    FM_MESSAGE_DUMMY,
+#endif
     FM_MESSAGE_COPIED,
     FM_MESSAGE_CREATED,
 
+    // states for input submenu
     FM_INPUT_CHARSET_A          = 0,
     FM_INPUT_CHARSET_B,
 };

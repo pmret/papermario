@@ -1047,10 +1047,10 @@ void filemenu_init(s32 mode) {
     if (mode != 2) {
         filemenu_currentMenu = FILE_MENU_MAIN;
         menu = filemenu_menus[FILE_MENU_MAIN];
-        menu->state = filemenu_currentMenu;
+        menu->state = FM_MAIN_SELECT_FILE;
         func_PAL_8002B574();
 
-        if (menu->state == 0) {
+        if (menu->state == FM_MAIN_SELECT_FILE) {
             fio_load_globals();
             if (gSaveGlobals.lastFileSelected >= 4) {
                 gSaveGlobals.lastFileSelected = 0;
@@ -1146,15 +1146,22 @@ void filemenu_cleanup(void) {
 
     set_window_update(WIN_PAUSE_TUTORIAL, WINDOW_UPDATE_HIDE);
     set_window_update(WIN_PAUSE_DECRIPTION, WINDOW_UPDATE_HIDE);
-    func_80244BC4();
+    filemenu_get_exit_mode(); // part of a conditional that optimized out?
 }
 
-s32 func_80244BC4() {
-    if (filemenu_menus[0]->state == 0 && filemenu_currentMenu == 1 && filemenu_menus[1]->selected == 0) {
+s32 filemenu_get_exit_mode() {
+    if (filemenu_menus[FILE_MENU_MAIN]->state == FM_MAIN_SELECT_FILE
+        && filemenu_currentMenu == FILE_MENU_CONFIRM
+        && filemenu_menus[FILE_MENU_CONFIRM]->selected == 0
+    ) {
         return 2;
-    } else if (filemenu_menus[0]->state == 0 && filemenu_menus[0]->selected < 4) {
-        return 1;
-    } else {
-        return 0;
     }
+
+    if (filemenu_menus[FILE_MENU_MAIN]->state == FM_MAIN_SELECT_FILE
+        && filemenu_menus[FILE_MENU_MAIN]->selected <= FM_MAIN_OPT_FILE_4
+    ) {
+        return 1;
+    }
+
+    return 0;
 }

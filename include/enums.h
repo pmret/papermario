@@ -5369,14 +5369,14 @@ enum FileMenuMessages {
     /* 31 */ FILE_MESSAGE_HAS_BEEN_CREATED,            // has been created.[End]
 #if VERSION_PAL
     // TODO: determine where these new entries should be placed
-    UNK1,
-    UNK2,
+    FILE_MESSAGE_PAL_UNK1,
+    FILE_MESSAGE_PAL_UNK2,
 #endif
     /* 32 */ FILE_MESSAGE_ENTER_A_FILE_NAME,           // Enter a file name![End]
     /* 33 */ FILE_MESSAGE_QUESTION,                    // ?[End]
     /* 34 */ FILE_MESSAGE_PERIOD_34,                   // .[End]
 #if VERSION_PAL
-    FILE_MESSAGE_BASE_UNK,
+    FILE_MESSAGE_PAL_UNK3,
 #endif
 };
 
@@ -6032,6 +6032,12 @@ enum MsgChars {
 #endif
 
     MSG_CHAR_UNK_C3                 = 0xC3,
+
+    MSG_CHAR_MENU_SPACE             = 0xC6,
+    MSG_CHAR_MENU_USE_CHARSET_B     = 0xC7,
+    MSG_CHAR_MENU_USE_CHARSET_A     = 0xC8,
+    MSG_CHAR_MENU_BACK              = 0xC9,
+    MSG_CHAR_MENU_END               = 0xCA,
 
     // special character codes used when reading from the source buffer
     MSG_CHAR_READ_ENDL              = 0xF0,
