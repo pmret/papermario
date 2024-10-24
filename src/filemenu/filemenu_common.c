@@ -880,143 +880,152 @@ void filemenu_selectlanguage_80248018(
 #endif
 
 void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
-    s32 temp_a1;
+    s32 alpha;
 
     filemenu_update_cursor();
-    temp_a1 = filemenu_cursor_alpha;
-    if (temp_a1 > 0) {
-        if (temp_a1 > 255) {
-            temp_a1 = 255;
+    alpha = filemenu_cursor_alpha;
+    if (alpha > 0) {
+        if (alpha > 255) {
+            alpha = 255;
         }
-        hud_element_set_alpha(filemenu_cursorHIDs[0], temp_a1);
+        hud_element_set_alpha(filemenu_cursorHIDs[0], alpha);
         hud_element_set_render_pos(filemenu_cursorHIDs[0], baseX + filemenu_cursor_posX, baseY + filemenu_cursor_posY);
         hud_element_draw_without_clipping(filemenu_cursorHIDs[0]);
     }
 }
 
-#if VERSION_PAL
-#define PAGE_4 (3)
-#else
-#define PAGE_4 (4)
-#endif
-
 void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity,
                                        s32 darkening)
 {
-    Matrix4f sp20, sp60;
-    MenuPanel* menu0 = filemenu_menus[0];
+    Matrix4f transformMtx, tempMtx;
     f32 startX, startZ;
     f32 endX, endZ;
-    f32 temp_f28;
+    f32 rotAngle;
 
-    if (menu0->state == PAGE_4 && menu0->selected < 4) {
-        if (menu0->selected != filemenu_loadedFileIdx && filemenu_currentMenu != 2) {
-            switch (filemenu_loadedFileIdx) {
-                case 0:
-                    startX = 130.0f;
-                    startZ = 90.0f;
-                    break;
-                case 1:
-                    startX = 190.0f;
-                    startZ = 90.0f;
-                    break;
-                case 2:
-                    startX = 130.0f;
-                    startZ = 150.0f;
-                    break;
-                default:
-                    startX = 190.0f;
-                    startZ = 150.0f;
-                    break;
-            }
-
-            switch (filemenu_menus[0]->selected) {
-                case 0:
-                    endX = 130.0f;
-                    endZ = 90.0f;
-                    break;
-                case 1:
-                    endX = 190.0f;
-                    endZ = 90.0f;
-                    break;
-                case 2:
-                    endX = 130.0f;
-                    endZ = 150.0f;
-                    break;
-                default:
-                    endX = 190.0f;
-                    endZ = 150.0f;
-                    break;
-            }
-
-            temp_f28 = -atan2(startX, startZ, endX, endZ) - 90.0f;
-
-            gSPViewport(gMainGfxPos++, &D_80249D60);
-
-            guOrthoF(sp20, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, -100.0f, 100.0f, 1.0f);
-            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-
-            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
-                      G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gSPDisplayList(gMainGfxPos++, filemenu_dl_copyarrow);
-            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 128);
-            gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, 0);
-
-            guTranslateF(sp20, startX + 4.0f, startZ + 4.0f, 0.0f);
-            guScaleF(sp60, -1.0f, 1.0f, 1.0f);
-            guMtxCatF(sp60, sp20, sp20);
-            guRotateF(sp60, temp_f28, 0.0f, 0.0f, 1.0f);
-            guMtxCatF(sp60, sp20, sp20);
-            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-
-            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
-                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(gMainGfxPos++, D_8024B6F0);
-            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
-
-            guTranslateF(sp60, D_80249D70[gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70)], 0.0f, 0.0f);
-            guMtxCatF(sp60, sp20, sp20);
-            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-
-            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
-                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetTileSize(gMainGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
-                                               ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
-            gSPDisplayList(gMainGfxPos++, D_8024B708);
-            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
-            gDPSetPrimColor(gMainGfxPos++, 0, 0, 230, 230, 230, 255);
-            gDPSetEnvColor(gMainGfxPos++, 232, 40, 160, 0);
-
-            guTranslateF(sp20, startX, startZ, 0.0f);
-            guScaleF(sp60, -1.0f, 1.0f, 1.0f);
-            guMtxCatF(sp60, sp20, sp20);
-            guRotateF(sp60, temp_f28, 0.0f, 0.0f, 1.0f);
-            guMtxCatF(sp60, sp20, sp20);
-            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-
-            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
-                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(gMainGfxPos++, D_8024B6F0);
-            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
-
-            guTranslateF(sp60, D_80249D70[(gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70))], 0.0f, 0.0f);
-            guMtxCatF(sp60, sp20, sp20);
-            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-
-            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
-                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetTileSize(gMainGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
-                                               ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
-            gSPDisplayList(gMainGfxPos++, D_8024B708);
-            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
-        }
+    if (filemenu_menus[FILE_MENU_MAIN]->state != FM_MAIN_SELECT_COPY_TO) {
+        return;
     }
+
+    // check for invalid selection
+    if (filemenu_menus[FILE_MENU_MAIN]->selected >= 4) {
+        return;
+    }
+
+    // check if different files are selected
+    if (filemenu_menus[FILE_MENU_MAIN]->selected == filemenu_loadedFileIdx) {
+        return;
+    }
+
+    // do not show while message menu is showing
+    if (filemenu_currentMenu == FILE_MENU_MESSAGE) {
+        return;
+    }
+
+    switch (filemenu_loadedFileIdx) {
+        case 0:
+            startX = 130.0f;
+            startZ = 90.0f;
+            break;
+        case 1:
+            startX = 190.0f;
+            startZ = 90.0f;
+            break;
+        case 2:
+            startX = 130.0f;
+            startZ = 150.0f;
+            break;
+        default:
+            startX = 190.0f;
+            startZ = 150.0f;
+            break;
+    }
+
+    switch (filemenu_menus[FILE_MENU_MAIN]->selected) {
+        case 0:
+            endX = 130.0f;
+            endZ = 90.0f;
+            break;
+        case 1:
+            endX = 190.0f;
+            endZ = 90.0f;
+            break;
+        case 2:
+            endX = 130.0f;
+            endZ = 150.0f;
+            break;
+        default:
+            endX = 190.0f;
+            endZ = 150.0f;
+            break;
+    }
+
+    rotAngle = -atan2(startX, startZ, endX, endZ) - 90.0f;
+
+    gSPViewport(gMainGfxPos++, &D_80249D60);
+
+    guOrthoF(transformMtx, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, -100.0f, 100.0f, 1.0f);
+    guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPDisplayList(gMainGfxPos++, filemenu_dl_copyarrow);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 128);
+    gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, 0);
+
+    guTranslateF(transformMtx, startX + 4.0f, startZ + 4.0f, 0.0f);
+    guScaleF(tempMtx, -1.0f, 1.0f, 1.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guRotateF(tempMtx, rotAngle, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_8024B6F0);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+
+    guTranslateF(tempMtx, D_80249D70[gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70)], 0.0f, 0.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetTileSize(gMainGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
+                                        ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
+    gSPDisplayList(gMainGfxPos++, D_8024B708);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 230, 230, 230, 255);
+    gDPSetEnvColor(gMainGfxPos++, 232, 40, 160, 0);
+
+    guTranslateF(transformMtx, startX, startZ, 0.0f);
+    guScaleF(tempMtx, -1.0f, 1.0f, 1.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guRotateF(tempMtx, rotAngle, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_8024B6F0);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+
+    guTranslateF(tempMtx, D_80249D70[(gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70))], 0.0f, 0.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetTileSize(gMainGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
+                                        ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
+    gSPDisplayList(gMainGfxPos++, D_8024B708);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+
 }
 
 void func_PAL_8002B574(void); // TODO identify
 
 // TODO bad match, look into
-void filemenu_init(s32 arg0) {
+void filemenu_init(s32 mode) {
     MenuPanel** panelIt;
     MenuPanel* menu;
     s32 i;
@@ -1029,15 +1038,15 @@ void filemenu_init(s32 arg0) {
     }
 
     filemenu_cursorHID = filemenu_cursorHIDs[0];
-    if (arg0 == 0) {
+    if (mode == 0) {
         filemenu_common_windowBPs[0].style.customStyle->background.imgData = NULL; // ???
     }
     setup_pause_menu_tab(filemenu_common_windowBPs, ARRAY_COUNT(filemenu_common_windowBPs));
 
 #if VERSION_PAL
-    if (arg0 != 2) {
+    if (mode != 2) {
         filemenu_currentMenu = FILE_MENU_MAIN;
-        menu = filemenu_menus[0];
+        menu = filemenu_menus[FILE_MENU_MAIN];
         menu->state = filemenu_currentMenu;
         func_PAL_8002B574();
 
@@ -1059,12 +1068,12 @@ void filemenu_init(s32 arg0) {
         }
         update_window_hierarchy(WIN_PAUSE_DECRIPTION, 64);
     } else {
-        filemenu_currentMenu = 4;
-        filemenu_set_selected(filemenu_menus[4], 0, gCurrentLanguage);
+        filemenu_currentMenu = FM_MAIN_PAL_LANG_SELECT;
+        filemenu_set_selected(filemenu_menus[FM_MAIN_PAL_LANG_SELECT], 0, gCurrentLanguage);
 
         panelIt = filemenu_menus;
         for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, panelIt++) {
-            if (i == 4) {
+            if (i == FM_MAIN_PAL_LANG_SELECT) {
                 if ((*panelIt)->fpInit != NULL) {
                     (*panelIt)->fpInit((*panelIt));
                 }
@@ -1073,16 +1082,16 @@ void filemenu_init(s32 arg0) {
         update_window_hierarchy(WIN_PAUSE_DECRIPTION, 64);
     }
 #else
-    menu = filemenu_menus[0];
     filemenu_currentMenu = FILE_MENU_MAIN;
+    menu = filemenu_menus[FILE_MENU_MAIN];
 
-    if (arg0 == 0) {
-        menu->state = 0;
+    if (mode == 0) {
+        menu->state = FM_MAIN_SELECT_FILE;
     } else {
-        menu->state = 2;
+        menu->state = FM_MAIN_DUMMY_LANG_SELECT;
     }
 
-    if (menu->state == 0) {
+    if (menu->state == FM_MAIN_SELECT_FILE) {
         for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
             if (!fio_load_game(i)) {
                 gSaveSlotHasData[i] = FALSE;
@@ -1092,7 +1101,7 @@ void filemenu_init(s32 arg0) {
             }
         }
 
-        if (menu->state == 0) {
+        if (menu->state == FM_MAIN_SELECT_FILE) {
             fio_load_globals();
             if (gSaveGlobals.lastFileSelected >= 4) {
                 gSaveGlobals.lastFileSelected = 0;

@@ -110,7 +110,7 @@ void pause_handle_input(s32 buttonsPressed, s32 buttonsHeld);
 void pause_cleanup(void);
 
 // file menu stuff
-void filemenu_init(s32);
+void filemenu_init(s32 mode);
 void filemenu_cleanup(void);
 void filemenu_update(void);
 s32 func_80244BC4(void);

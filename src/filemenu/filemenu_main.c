@@ -832,20 +832,12 @@ void filemenu_main_handle_input(MenuPanel* menu) {
     }
 
     switch (menu->state) {
-        case 0:
+        case FM_MAIN_SELECT_FILE:
             if (menu->col == 1 && (u8) menu->row < 2) {
                 menu->col = 0;
             }
             break;
-        case 1: // TODO required to duplicate cases 1-4 instead of using fallthrough
-            if (menu->col == 1 && (u8) menu->row < 2) {
-                menu->col = 0;
-            }
-            if (menu->row == 2) {
-                menu->col = 1;
-            }
-            break;
-        case 2:
+        case FM_MAIN_SELECT_DELETE: // TODO required to duplicate cases 1-4 instead of using fallthrough
             if (menu->col == 1 && (u8) menu->row < 2) {
                 menu->col = 0;
             }
@@ -853,7 +845,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 menu->col = 1;
             }
             break;
-        case 3:
+        case FM_MAIN_DUMMY_LANG_SELECT:
             if (menu->col == 1 && (u8) menu->row < 2) {
                 menu->col = 0;
             }
@@ -861,7 +853,15 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 menu->col = 1;
             }
             break;
-        case 4:
+        case FM_MAIN_SELECT_COPY_FROM:
+            if (menu->col == 1 && (u8) menu->row < 2) {
+                menu->col = 0;
+            }
+            if (menu->row == 2) {
+                menu->col = 1;
+            }
+            break;
+        case FM_MAIN_SELECT_COPY_TO:
             if (menu->col == 1 && (u8) menu->row < 2) {
                 menu->col = 0;
             }
@@ -896,7 +896,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
         }
     }
 
-    if ((filemenu_pressedButtons & BUTTON_START) && menu->state == 0 && menu->selected < 4) {
+    if ((filemenu_pressedButtons & BUTTON_START) && menu->state == 0 && menu->selected <= FM_MAIN_OPT_FILE_4) {
         filemenu_pressedButtons = BUTTON_A;
     }
 
@@ -904,15 +904,15 @@ void filemenu_main_handle_input(MenuPanel* menu) {
         s32 cond = FALSE;
 
         switch (menu->state) {
-            case 0:
-                if (menu->selected < 4 && !gSaveSlotHasData[menu->selected]) {
+            case FM_MAIN_SELECT_FILE:
+                if (menu->selected <= FM_MAIN_OPT_FILE_4 && !gSaveSlotHasData[menu->selected]) {
                     cond = TRUE;
                 }
 
                 if (cond) {
-                    MenuPanel* temp_a0;
+                    MenuPanel* inputMenu;
                     for (i = 0; i < ARRAY_COUNT(filemenu_filename); i++) {
-                        filemenu_filename[i] = 0xF7;
+                        filemenu_filename[i] = MSG_CHAR_READ_SPACE;
                     }
                     filemenu_filename_pos = 0;
                     set_window_update(WIN_FILES_INPUT_FIELD, (s32)filemenu_update_show_name_input);
@@ -929,14 +929,15 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     set_window_update(WIN_FILES_SLOT3_BODY, (s32)filemenu_update_hidden_with_rotation);
                     set_window_update(WIN_FILES_SLOT4_BODY, (s32)filemenu_update_hidden_with_rotation);
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    filemenu_currentMenu = 3;
-                    temp_a0 = filemenu_menus[filemenu_currentMenu];
-                    temp_a0->state = 0;
-                    filemenu_set_selected(temp_a0, 0, 0);
+                    filemenu_currentMenu = FILE_MENU_INPUT_NAME;
+                    inputMenu = filemenu_menus[FILE_MENU_INPUT_NAME];
+                    inputMenu->state = FM_INPUT_CHARSET_A;
+                    filemenu_set_selected(inputMenu, 0, 0);
                     break;
                 }
 
-                if (menu->selected == 6) {
+                if (menu->selected == FM_MAIN_OPT_CANCEL) {
+                    // selected "Cancel" button
                     set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_hidden_options_left);
                     set_window_update(WIN_FILES_MONO, (s32)filemenu_update_hidden_options_right);
                     set_window_update(WIN_FILES_OPTION_LEFT, (s32)filemenu_update_hidden_options_bottom);
@@ -949,24 +950,25 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     set_window_update(WIN_FILES_TITLE, (s32)filemenu_update_hidden_title);
                     sfx_play_sound(SOUND_FILE_MENU_OUT);
                     set_game_mode(GAME_MODE_END_FILE_SELECT);
-                } else if (menu->selected == 4) {
+                } else if (menu->selected == FM_MAIN_OPT_DELETE) {
+                    // selected "Delete File" button
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    menu->state = 1;
+                    menu->state = FM_MAIN_SELECT_DELETE;
                     filemenu_set_selected(menu, 1, 2);
                     set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_hidden_options_left);
                     set_window_update(WIN_FILES_MONO, (s32)filemenu_update_hidden_options_right);
                     set_window_update(WIN_FILES_OPTION_LEFT, (s32)filemenu_update_hidden_options_bottom);
                     set_window_update(WIN_FILES_OPTION_RIGHT, (s32)filemenu_update_hidden_options_bottom);
-                } else if (menu->selected == 5) {
+                } else if (menu->selected == FM_MAIN_OPT_COPY) {
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    menu->state = 3;
+                    menu->state = FM_MAIN_SELECT_COPY_FROM;
                     filemenu_set_selected(menu, 1, 2);
                     set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_hidden_options_left);
                     set_window_update(WIN_FILES_MONO, (s32)filemenu_update_hidden_options_right);
                     set_window_update(WIN_FILES_OPTION_LEFT, (s32)filemenu_update_hidden_options_bottom);
                     set_window_update(WIN_FILES_OPTION_RIGHT, (s32)filemenu_update_hidden_options_bottom);
-                } else if (menu->selected < 4) {
-                    MenuPanel* temp_a0;
+                } else if (menu->selected <= FM_MAIN_OPT_FILE_4) {
+                    MenuPanel* confirmMenu;
 
                     sfx_play_sound(SOUND_MENU_NEXT);
                     set_window_update(WIN_FILES_TITLE, (s32)filemenu_update_hidden_with_rotation);
@@ -994,24 +996,26 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     gWindows[WIN_FILES_CONFIRM_PROMPT].height = 25;
                     gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_PROMPT);
 
-                    filemenu_currentMenu = 1;
-                    temp_a0 = filemenu_menus[filemenu_currentMenu];
-                    temp_a0->state = 4;
-                    filemenu_set_selected(temp_a0, 0, 0);
+                    filemenu_currentMenu = FILE_MENU_CONFIRM;
+                    confirmMenu = filemenu_menus[FILE_MENU_CONFIRM];
+                    confirmMenu->state = FM_CONFIRM_START;
+                    filemenu_set_selected(confirmMenu, 0, 0);
                 }
                 break;
-            case 1:
-                if (menu->selected == 6) {
+            case FM_MAIN_SELECT_DELETE:
+                if (menu->selected == FM_MAIN_OPT_CANCEL) {
+                    // selected "Cancel" button
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    menu->state = 0;
+                    menu->state = FM_MAIN_SELECT_FILE;
                     set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_show_options_left);
                     set_window_update(WIN_FILES_MONO, (s32)filemenu_update_show_options_right);
                     set_window_update(WIN_FILES_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
                     set_window_update(WIN_FILES_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
                     filemenu_set_selected(menu, 0, 2);
-                } else if (menu->selected < 4) {
+                } else if (menu->selected <= FM_MAIN_OPT_FILE_4) {
+                    // selected a file
                     if (gSaveSlotHasData[menu->selected]) {
-                        MenuPanel* temp_a0;
+                        MenuPanel* confirmMenu;
 
                         sfx_play_sound(SOUND_MENU_NEXT);
                         set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32)filemenu_update_show_name_confirm);
@@ -1026,40 +1030,44 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                         gWindows[WIN_FILES_CONFIRM_PROMPT].height = 25;
                         gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_PROMPT);
 
-                        filemenu_currentMenu = 1;
-                        temp_a0 = filemenu_menus[filemenu_currentMenu];
-                        temp_a0->state = 0;
-                        filemenu_set_selected(temp_a0, 0, 1);
+                        filemenu_currentMenu = FILE_MENU_CONFIRM;
+                        confirmMenu = filemenu_menus[FILE_MENU_CONFIRM];
+                        confirmMenu->state = FM_CONFIRM_DELETE;
+                        filemenu_set_selected(confirmMenu, 0, 1);
                     } else {
                         sfx_play_sound(SOUND_MENU_ERROR);
                     }
                 }
                 break;
-            case 3:
-                if (menu->selected == 6) {
+            case FM_MAIN_SELECT_COPY_FROM:
+                if (menu->selected == FM_MAIN_OPT_CANCEL) {
+                    // selected "Cancel" button
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    menu->state = 0;
+                    menu->state = FM_MAIN_SELECT_FILE;
                     set_window_update(WIN_FILES_STEREO, (s32)filemenu_update_show_options_left);
                     set_window_update(WIN_FILES_MONO, (s32)filemenu_update_show_options_right);
                     set_window_update(WIN_FILES_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
                     set_window_update(WIN_FILES_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
                     filemenu_set_selected(menu, 0, 1);
-                } else if (menu->selected < 4) {
+                } else if (menu->selected <= FM_MAIN_OPT_FILE_4) {
+                    // selected a file
                     if (gSaveSlotHasData[menu->selected]) {
                         sfx_play_sound(SOUND_MENU_NEXT);
-                        menu->state = 4;
+                        menu->state = FM_MAIN_SELECT_COPY_TO;
                         filemenu_loadedFileIdx = menu->selected;
                     } else {
                         sfx_play_sound(SOUND_MENU_ERROR);
                     }
                 }
                 break;
-            case 4:
-                if (menu->selected == 6) {
+            case FM_MAIN_SELECT_COPY_TO:
+                if (menu->selected == FM_MAIN_OPT_CANCEL) {
+                    // selected "Cancel" button
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    menu->state = 3;
+                    menu->state = FM_MAIN_SELECT_COPY_FROM;
                     filemenu_set_selected(menu, 0, 2);
-                } else if (menu->selected < 4) {
+                } else if (menu->selected <= FM_MAIN_OPT_FILE_4) {
+                    // selected a file
                     if (filemenu_loadedFileIdx == menu->selected) {
                         sfx_play_sound(SOUND_MENU_ERROR);
                     } else {

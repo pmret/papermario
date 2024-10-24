@@ -23,31 +23,38 @@ enum {
 
 enum {
     FM_MAIN_SELECT_FILE         = 0, // choose which file to load
-    FM_MAIN_SELECT_DELETE       = 1, // choose which file to delete
-    FM_MAIN_SELECT_COPY_FROM    = 2,
-    FM_MAIN_SELECT_COPY_TO      = 3,
+    FM_MAIN_SELECT_DELETE, // choose which file to delete
+#if !VERSION_PAL
+    FM_MAIN_DUMMY_LANG_SELECT,
+#endif
+    FM_MAIN_SELECT_COPY_FROM,
+    FM_MAIN_SELECT_COPY_TO,
+    FM_MAIN_PAL_LANG_SELECT,
 
     FM_CONFIRM_DELETE           = 0,
-    FM_CONFIRM_CREATE           = 1,
-    FM_CONFIRM_COPY             = 2, // unused
-    FM_CONFIRM_START            = 3,
+    FM_CONFIRM_CREATE,
+#if !VERSION_PAL
+    FM_CONFIRM_DUMMY, // order??
+#endif
+    FM_CONFIRM_COPY, // unused
+    FM_CONFIRM_START,
 
     FM_MESSAGE_DELETED          = 0,
-    FM_MESSAGE_COPIED           = 1,
-    FM_MESSAGE_CREATED          = 2,
+    FM_MESSAGE_COPIED,
+    FM_MESSAGE_CREATED,
 
     FM_INPUT_CHARSET_A          = 0,
-    FM_INPUT_CHARSET_B          = 1,
+    FM_INPUT_CHARSET_B,
 };
 
 enum {
-    FM_MAIN_OPT_FILE_1          = 0,
-    FM_MAIN_OPT_FILE_2          = 1,
-    FM_MAIN_OPT_FILE_3          = 2,
-    FM_MAIN_OPT_FILE_4          = 3,
-    FM_MAIN_OPT_DELETE          = 4,
-    FM_MAIN_OPT_COPY            = 5,
-    FM_MAIN_OPT_CANCEL          = 6,
+    FM_MAIN_OPT_FILE_1,
+    FM_MAIN_OPT_FILE_2,
+    FM_MAIN_OPT_FILE_3,
+    FM_MAIN_OPT_FILE_4,
+    FM_MAIN_OPT_DELETE,
+    FM_MAIN_OPT_COPY,
+    FM_MAIN_OPT_CANCEL,
 };
 
 enum {
