@@ -67,7 +67,7 @@ API_CALLABLE(N(UpdateCameraScroll)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
     camera->panActive = TRUE;
-    camera->movePos.x += PARADE_SCROLL_RATE / DT;
+    camera->movePos.x += PARADE_SCROLL_RATE / (f32) DT;
     return ApiStatus_DONE2;
 }
 
@@ -79,7 +79,7 @@ API_CALLABLE(N(AddScrollToNpcPos)) {
         *npc = get_npc_unsafe(evt_get_variable(script, *args++));
     }
 
-    (*npc)->pos.x += PARADE_SCROLL_RATE / DT;
+    (*npc)->pos.x += PARADE_SCROLL_RATE / (f32) DT;
 
     return ApiStatus_BLOCK;
 }

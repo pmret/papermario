@@ -6291,7 +6291,13 @@ segments:
 #######################
 ### Action Commands ###
 #######################
-  - { start: 0x4688B0, type: bin, name: btl_states_menus, vram: 0x802A1000 }
+  - type: code
+    start: 0x4688B0
+    name: btl_states_menus
+    vram: 0x802A1000
+    symbol_name_format: PAL_$VRAM_$ROM
+    subsegments:
+    - [auto, c, battle/btl_states_menus]
   - type: code
     start: 0x474740
     vram: 0x802A9000

@@ -1,9 +1,13 @@
 // hard-coded things
 gBackgroundImage = 0x80200000; // hard-coded inside mapfs for now
+gMapShapeData = 0x80210000; // needs to be hard-coded atm due to pointers in shape data
 
 heap_battleHead = gFrameBuf2;
 
+overlays_start = 0x802DC500;
+
 fx_sun_undeclared = fx_sun;
+
 sprite_shading_profiles_data_ROM_START = sprite_shading_profiles_ROM_START + 0x1D0;
 
 // boot
@@ -36,26 +40,3 @@ obfuscated_load_engine_data = load_engine_data - 0x315;
 obfuscated_create_audio_system = create_audio_system - 0x7B;
 obfuscated_obfuscation_shims_VRAM = obfuscation_shims_VRAM - 0xA912928;
 obfuscated_obfuscation_shims_ROM_START = obfuscation_shims_ROM_START - 0x8939221;
-
-D_PAL_800714AC = 0x800714AC;
-func_PAL_8002B100 = 0x8002B100;
-func_PAL_8002BA9C = 0x8002BA9C;
-D_PAL_80099190 = 0x80099190;
-func_PAL_8002B15C = 0x8002B15C;
-D_PAL_80073D74 = 0x80073D74;
-D_PAL_80073D14 = 0x80073D14;
-D_PAL_800D7430 = 0x800D7430;
-D_PAL_800D871C = 0x800D871C;
-
-btl_state_draw_22 = 0x802AB4AC;
-btl_state_draw_select_target = 0x802AAE4C;
-btl_state_draw_player_menu = 0x802A82EC;
-btl_state_draw_peach_menu = 0x802AA1D0;
-btl_state_draw_twink_menu = 0x802AA7B4;
-btl_state_draw_partner_menu = 0x802A9C5C;
-btl_state_update_peach_menu = 0x802A9CB8;
-btl_state_update_partner_menu = 0x802A8334;
-btl_state_update_twink_menu = 0x802AA22C;
-btl_state_update_select_target = 0x802AA7FC;
-btl_state_update_player_menu = 0x802A5AF4;
-btl_state_update_22 = 0x802AB4A4;

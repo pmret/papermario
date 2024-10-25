@@ -35,7 +35,7 @@ b32 save_check_integrity(void) {
     s32 *it = (s32*)&gCurrentSaveFile;
     s32 *it2 = (s32*)&FetchSaveBuffer;
 
-    for (i = 0; i < sizeof(gCurrentSaveFile) / sizeof(*it); i++, it++, it2++) { 
+    for (i = 0; i < sizeof(gCurrentSaveFile) / sizeof(*it); i++, it++, it2++) {
         if (*it != *it2) {
             return TRUE;
         }
@@ -49,7 +49,7 @@ b32 check_fetch_save_integrity(void) {
     s32 *it = (s32*)&FetchSaveBuffer;
     s32 *it2 = (s32*)&SaveCheckBuffer;
 
-    for (i = 0; i < sizeof(FetchSaveBuffer) / sizeof(*it); i++, it++, it2++) { 
+    for (i = 0; i < sizeof(FetchSaveBuffer) / sizeof(*it); i++, it++, it2++) {
         if (*it != *it2) {
             return TRUE;
         }
@@ -317,7 +317,41 @@ void fio_erase_game(s32 saveSlot) {
 }
 
 #if VERSION_PAL
-INCLUDE_ASM(s32, "fio", func_PAL_8002B574, void);
+b32 func_PAL_8002B574(void) {
+    int i, j;
+    SaveData *saveData = &gCurrentSaveFile;
+    SaveData *temp = saveData;
+
+    fio_fetch_saved_file_info();
+
+    for (i = 0; i < ARRAY_COUNT(LogicalSaveInfo); i++) {
+        s32 new_var = FALSE;  // TODO this match doesn't satisfy me :(
+        if (LogicalSaveInfo[i].slot >= 0) {
+            for (j = 0; j < 4; j++) {
+                fio_read_flash(LogicalSaveInfo[i].slot, temp, sizeof(SaveData));
+                if (fio_validate_file_checksum(temp)) {
+                    break;
+                }
+            }
+            if (j != 4) {
+                goto SLOT_HAS_DATA;
+            }
+        }
+        gSaveSlotHasData[i] = new_var;
+        continue;
+
+SLOT_HAS_DATA:
+        do {
+            gSaveSlotMetadata[i] = gCurrentSaveFile.metadata;
+            gSaveSlotHasData[i] = TRUE;
+            if (gGameStatusPtr->saveCount < saveData->saveCount) {
+                gGameStatusPtr->saveCount = saveData->saveCount;
+            }
+        } while(0);
+    }
+
+    return TRUE;
+}
 #endif
 
 void fio_deserialize_state(void) {

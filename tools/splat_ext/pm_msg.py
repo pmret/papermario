@@ -3302,7 +3302,7 @@ class N64SegPm_msg(Segment):
             self.msg_names = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):
-        data = rom_bytes[self.rom_start : self.rom_end]
+        data = bytearray(rom_bytes[self.rom_start : self.rom_end])
 
         section_offsets = []
         pos = 0
