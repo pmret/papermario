@@ -95,7 +95,7 @@ extern u8 D_filemenu_8025095C[4];
     f32* scaleX, f32* scaleY,\
     f32* rotX, f32* rotY, f32* rotZ,\
     s32* darkening,\
-    s32* opacity);\
+    s32* opacity)
 
 WINDOW_UPDATE_FUNC(filemenu_update_show_name_input);
 WINDOW_UPDATE_FUNC(filemenu_update_show_options_left);
