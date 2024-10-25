@@ -173,8 +173,8 @@ void filemenu_info_handle_input(MenuPanel* menu) {
                 filemenu_set_selected(menu, 1, 2);
                 break;
 #if !VERSION_PAL
-            case FM_MAIN_DUMMY_LANG_SELECT:
-                menu->state = FM_MAIN_DUMMY_LANG_SELECT;
+            case FM_MAIN_SELECT_LANG_DUMMY:
+                menu->state = FM_MAIN_SELECT_LANG_DUMMY;
                 filemenu_set_selected(menu, 1, 2);
                 break;
 #endif

@@ -1068,12 +1068,12 @@ void filemenu_init(s32 mode) {
         }
         update_window_hierarchy(WIN_PAUSE_DECRIPTION, 64);
     } else {
-        filemenu_currentMenu = FM_MAIN_PAL_LANG_SELECT;
-        filemenu_set_selected(filemenu_menus[FM_MAIN_PAL_LANG_SELECT], 0, gCurrentLanguage);
+        filemenu_currentMenu = FM_MAIN_SELECT_LANG_PAL;
+        filemenu_set_selected(filemenu_menus[FM_MAIN_SELECT_LANG_PAL], 0, gCurrentLanguage);
 
         panelIt = filemenu_menus;
         for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, panelIt++) {
-            if (i == FM_MAIN_PAL_LANG_SELECT) {
+            if (i == FM_MAIN_SELECT_LANG_PAL) {
                 if ((*panelIt)->fpInit != NULL) {
                     (*panelIt)->fpInit((*panelIt));
                 }
@@ -1088,7 +1088,7 @@ void filemenu_init(s32 mode) {
     if (mode == 0) {
         menu->state = FM_MAIN_SELECT_FILE;
     } else {
-        menu->state = FM_MAIN_DUMMY_LANG_SELECT;
+        menu->state = FM_MAIN_SELECT_LANG_DUMMY;
     }
 
     if (menu->state == FM_MAIN_SELECT_FILE) {

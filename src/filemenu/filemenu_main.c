@@ -371,7 +371,7 @@ void filemenu_draw_contents_title(
             yOffset = 4;
             break;
 #if !VERSION_PAL
-        case FM_MAIN_DUMMY_LANG_SELECT:
+        case FM_MAIN_SELECT_LANG_DUMMY:
         default:
             msgIdx = FILE_MESSAGE_SELECT_FILE_TO_SAVE;
             xOffset = 10;
@@ -427,7 +427,7 @@ void filemenu_draw_contents_option_left(
     }
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + offset + OFFSET_WIDTH, baseY + 2, 255, 0, 1);
 #else
-    if (menu->state != FM_MAIN_DUMMY_LANG_SELECT) {
+    if (menu->state != FM_MAIN_SELECT_LANG_DUMMY) {
         if (menu->col == 0 && menu->row == 2) {
             filemenu_set_cursor_goal_pos(WIN_FILES_OPTION_LEFT, baseX, baseY + 8);
         }
@@ -483,7 +483,7 @@ void filemenu_draw_contents_option_center(
 
     switch (menu->state) {
         case FM_MAIN_SELECT_DELETE:
-        case FM_MAIN_DUMMY_LANG_SELECT:
+        case FM_MAIN_SELECT_LANG_DUMMY:
         case FM_MAIN_SELECT_COPY_FROM:
         case FM_MAIN_SELECT_COPY_TO:
             msgIdx = FILE_MESSAGE_CANCEL;
@@ -761,7 +761,7 @@ void filemenu_main_init(MenuPanel* menu) {
     gWindows[WIN_FILES_TITLE].width = 162;
     gWindows[WIN_FILES_TITLE].height = 25;
 #else
-    if (menu->state == FM_MAIN_DUMMY_LANG_SELECT) {
+    if (menu->state == FM_MAIN_SELECT_LANG_DUMMY) {
         gWindows[WIN_FILES_TITLE].pos.y = 1;
         gWindows[WIN_FILES_TITLE].width = 211;
         gWindows[WIN_FILES_TITLE].height = 25;
@@ -848,7 +848,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 menu->col = 1;
             }
             break;
-        case FM_MAIN_DUMMY_LANG_SELECT:
+        case FM_MAIN_SELECT_LANG_DUMMY:
             // force selection to column 0 when navigating up from bottom row
             if (menu->col == 1 && (u8) menu->row < 2) {
                 menu->col = 0;
@@ -1120,7 +1120,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     }
                 }
                 break;
-            case FM_MAIN_DUMMY_LANG_SELECT:
+            case FM_MAIN_SELECT_LANG_DUMMY:
                 if (menu->selected == FM_MAIN_OPT_CANCEL) {
                     // selected "Cancel" button
                     sfx_play_sound(SOUND_MENU_NEXT);
@@ -1169,7 +1169,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
             case FM_MAIN_SELECT_DELETE:
                 filemenu_set_selected(menu, 1, 2);
                 break;
-            case FM_MAIN_DUMMY_LANG_SELECT:
+            case FM_MAIN_SELECT_LANG_DUMMY:
                 filemenu_set_selected(menu, 1, 2);
                 break;
             case FM_MAIN_SELECT_COPY_FROM:
@@ -1218,7 +1218,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 filemenu_set_selected(menu, (filemenu_loadedFileIdx % 2) * 2, filemenu_loadedFileIdx / 2);
                 sfx_play_sound(SOUND_MENU_BACK);
                 break;
-            case FM_MAIN_DUMMY_LANG_SELECT:
+            case FM_MAIN_SELECT_LANG_DUMMY:
                 sfx_play_sound(SOUND_MENU_BACK);
                 set_game_mode(GAME_MODE_END_LANGUAGE_SELECT);
                 break;

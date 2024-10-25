@@ -27,11 +27,11 @@ enum {
     FM_MAIN_SELECT_FILE         = 0, // choose which file to load
     FM_MAIN_SELECT_DELETE, // choose which file to delete
 #if !VERSION_PAL
-    FM_MAIN_DUMMY_LANG_SELECT, // non-PAL versions have an unimplemented dummy language select
+    FM_MAIN_SELECT_LANG_DUMMY, // non-PAL versions have an unimplemented dummy language select
 #endif
     FM_MAIN_SELECT_COPY_FROM,
     FM_MAIN_SELECT_COPY_TO,
-    FM_MAIN_PAL_LANG_SELECT,
+    FM_MAIN_SELECT_LANG_PAL,
 
     // states for confirm submenu
     FM_CONFIRM_DELETE           = 0,
