@@ -80,7 +80,7 @@ segments:
     - [auto, c, state_pause]
     - [auto, c, state_file_select]
     - [auto, c, state_world]
-    - [auto, c, 111f0_len_860]
+    - [auto, c, state_map_transitions]
     - [auto, c, state_intro]
     - [auto, c, state_title_screen]
     - [auto, c, state_demo]
@@ -107,7 +107,7 @@ segments:
     - [auto, c, world/world]
     - [auto, c, collision]
     - [auto, c, 38F00]
-    - [auto, c, 39210_len_aa0]
+    - [auto, c, npc_follow]
     - [auto, c, os/nusys/nuboot]
     - [auto, c, os/nusys/nusched, -fforce-addr]
     - [auto, c, os/nusys/nugfxfuncset]
@@ -6366,9 +6366,9 @@ segments:
     start: 0x4788A0
     vram: 0x802A9000
     dir: battle/action_cmd
-    name: action_cmd_07
+    name: action_cmd_unused_flee
     subsegments:
-    - [auto, c, "07"]
+    - [auto, c, unused_flee]
   - type: code
     start: 0x478EC0
     vram: 0x802A9000
@@ -6387,9 +6387,9 @@ segments:
     start: 0x47A100
     vram: 0x802A9000
     dir: battle/action_cmd
-    name: action_cmd_0A
+    name: action_cmd_unused_mash_a
     subsegments:
-    - [auto, c, 0A]
+    - [auto, c, unused_mash_a]
   - type: code
     start: 0x47A7C0
     vram: 0x802A9000
@@ -6429,29 +6429,29 @@ segments:
     start: 0x47D240
     vram: 0x802A9000
     dir: battle/action_cmd
-    name: action_cmd_water_block
+    name: action_cmd_three_chances
     subsegments:
-    - [auto, c, water_block]
+    - [auto, c, three_chances]
     - start: 0x47E3A0
       type: .data
-      name: water_block
+      name: three_chances
       subsegments:
-      - [0x47E3A0, ci4, water_block_1, 24, 24]
-      - [0x47E4C0, palette, water_block_1]
-      - [0x47E4E0, ci4, water_block_2, 24, 24]
-      - [0x47E600, palette, water_block_2]
-      - [0x47E620, ci4, water_block_3, 24, 24]
-      - [0x47E740, palette, water_block_3]
-      - [0x47E760, ci4, water_block_0, 24, 24]
-      - [0x47E880, palette, water_block_0]
-      - [0x47E8A0, ci4, water_block_block, 32, 32]
-      - [0x47EAA0, palette, water_block_block]
-      - [0x47EAC0, ci4, water_block_circle, 40, 40]
-      - [0x47EDE0, palette, water_block_circle]
-      - [0x47EE00, ci4, water_block_cloud, 40, 40]
-      - [0x47F120, palette, water_block_cloud]
-      - [0x47F140, ci4, water_block_4, 24, 24]
-      - [0x47F260, palette, water_block_4]
+      - [0x47E3A0, ci4, three_chances_1, 24, 24]
+      - [0x47E4C0, palette, three_chances_1]
+      - [0x47E4E0, ci4, three_chances_2, 24, 24]
+      - [0x47E600, palette, three_chances_2]
+      - [0x47E620, ci4, three_chances_3, 24, 24]
+      - [0x47E740, palette, three_chances_3]
+      - [0x47E760, ci4, three_chances_0, 24, 24]
+      - [0x47E880, palette, three_chances_0]
+      - [0x47E8A0, ci4, three_chances_block, 32, 32]
+      - [0x47EAA0, palette, three_chances_block]
+      - [0x47EAC0, ci4, three_chances_circle, 40, 40]
+      - [0x47EDE0, palette, three_chances_circle]
+      - [0x47EE00, ci4, three_chances_cloud, 40, 40]
+      - [0x47F120, palette, three_chances_cloud]
+      - [0x47F140, ci4, three_chances_4, 24, 24]
+      - [0x47F260, palette, three_chances_4]
       - [0x47F280]
     - [0x47F440]
   - type: code

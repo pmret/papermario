@@ -3,6 +3,7 @@
 #include "hud_element.h"
 #include "sprite.h"
 #include "game_modes.h"
+#include "ld_addrs.h"
 
 #if VERSION_JP
 #define TITLE_WIDTH 272
@@ -24,6 +25,15 @@
 #define TITLE_NUM_TILES (TITLE_HEIGHT / TITLE_TILE_HEIGHT) // Number of tiles in the texture
 #define TITLE_TILE_PIXELS (TITLE_WIDTH * TITLE_TILE_HEIGHT) // Number of pixels in a single tile of the texture
 
+#if VERSION_PAL
+#define TITLE_LOGO_YOFFSET -110
+#define TITLE_START_TIME 400
+#else
+#define TITLE_LOGO_YOFFSET -100
+#define TITLE_START_TIME 480
+#endif
+
+
 enum TitleScreenStates {
     TITLE_STATE_INIT            = 0x00000000,
     TITLE_STATE_APPEAR          = 0x00000001,
@@ -39,6 +49,14 @@ enum {
     NEXT_STATE_INTRO            = 9,
     NEXT_STATE_FILE_SELECT      = 5,
     NEXT_STATE_NONE             = 0, // used only for the initial value
+};
+
+enum TitleMenuVisibilityStates {
+    TITLEMENU_STATE_FADE_IN,
+#if VERSION_PAL
+    TITLEMENU_STATE_VISIBLE,
+#endif
+    TITLEMENU_STATE_FADE_OUT,
 };
 
 s16 TitleScreenNextState = NEXT_STATE_NONE;
@@ -60,6 +78,11 @@ s32 PressStart_BlinkCounter = 0; // counts to 16, then toggles PressStart_IsVisi
 // since this state is reached for the first time after the intro has already played once or was skipped,
 // this is initially false and the demo is will play first.
 s32 PlayIntroNext = FALSE;
+
+#if VERSION_PAL
+s32 D_PAL_80073D88 = 0;
+s32 D_PAL_80073D8C = 0;
+#endif
 
 Lights1 D_80077A38 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
 
@@ -84,12 +107,24 @@ Gfx TitleSetupGfx[] = {
     gsSPEndDisplayList(),
 };
 
+#if VERSION_PAL
+s32 D_PAL_80073E38[] = { 96,   88,   144,  120 };
+s32 D_PAL_80073E48[] = { 88,   80,    64,   64 };
+s32 D_PAL_80073E58[] = { 116,  120,   88,  106 };
+s32 D_PAL_80073E68[] = { 121,  124,  130,  132 };
+#endif
+
 typedef struct TitleDataStruct {
     /* 0x0 */ s32 logo;
     /* 0x4 */ s32 copyright;
     /* 0x8 */ s32 pressStart;
     /* 0xC */ s32 copyrightPalette;
 } TitleDataStruct; // size = 0x10
+
+typedef struct TitleMenuDataStruct {
+    /* 0x0 */ IMG_BIN *startGame;
+    /* 0x4 */ IMG_BIN *languages;
+} TitleMenuDataStruct; // size = 0x8
 
 #if VERSION_JP
 #define COPYRIGHT_WIDTH 128
@@ -102,8 +137,17 @@ BSS TitleDataStruct* TitleScreen_ImgList;
 BSS s32* TitleScreen_ImgList_Logo;
 BSS u8 (*TitleScreen_ImgList_Copyright)[COPYRIGHT_WIDTH];
 BSS s32* TitleScreen_ImgList_PressStart;
+#if VERSION_PAL
+BSS TitleMenuDataStruct* TitleMenu_ImgList;
+BSS u8 *TitleMenu_ImgList_StartGame;
+BSS u8 *TitleMenu_ImgList_Languages;
+BSS s16 TitleScreen_TimeLeft;
+BSS s32 D_PAL_8009F0F4;
+BSS s32 D_PAL_8009F0F8;
+#else
 BSS s32* TitleScreen_ImgList_CopyrightPalette;
 BSS s16 TitleScreen_TimeLeft;
+#endif
 
 void appendGfx_title_screen(void);
 void draw_title_screen_NOP(void);
@@ -138,6 +182,12 @@ void state_init_title_screen(void) {
     TitleScreen_ImgList_PressStart = (s32*)(TitleScreen_ImgList->pressStart + (s32) TitleScreen_ImgList);
 #if VERSION_JP
     TitleScreen_ImgList_CopyrightPalette = (s32*)(TitleScreen_ImgList->copyrightPalette + (s32) TitleScreen_ImgList);
+#endif
+#if VERSION_PAL
+    TitleMenu_ImgList = heap_malloc((s32)titlemenu_DATA_SIZE);
+    dma_copy(titlemenu_ROM_START, titlemenu_ROM_END, TitleMenu_ImgList);
+    TitleMenu_ImgList_StartGame = (u8*)(TitleMenu_ImgList[gCurrentLanguage].startGame + (s32) TitleMenu_ImgList);
+    TitleMenu_ImgList_Languages = (u8*)(TitleMenu_ImgList[gCurrentLanguage].languages + (s32) TitleMenu_ImgList);
 #endif
 
     create_cameras();
@@ -183,7 +233,7 @@ void state_init_title_screen(void) {
     load_map_bg("title_bg");
     set_background(&gBackgroundImage);
     bgm_set_song(0, SONG_MAIN_THEME, 0, 500, 8);
-    TitleScreen_TimeLeft = 480;
+    TitleScreen_TimeLeft = TITLE_START_TIME;
 }
 
 void state_step_title_screen(void) {
@@ -222,6 +272,23 @@ void state_step_title_screen(void) {
             startup_fade_screen_update();
             break;
         case TITLE_STATE_HOLD:
+#if VERSION_PAL
+            if(gGameStatusPtr->pressedButtons[0] & BUTTON_STICK_DOWN) {
+                D_PAL_80073D8C = 1;
+            }
+
+            if(gGameStatusPtr->pressedButtons[0] & BUTTON_STICK_UP) {
+                D_PAL_80073D8C = 0;
+            }
+
+            if(D_PAL_80073D88 != D_PAL_80073D8C) {
+                D_PAL_80073D88 = D_PAL_80073D8C;
+                sfx_play_sound(SOUND_MENU_CHANGE_TAB);
+                if(TitleScreen_TimeLeft < 125) {
+                    TitleScreen_TimeLeft = 125;
+                }
+            }
+#endif
             if (PlayIntroNext && TitleScreen_TimeLeft == 120) {
                 bgm_set_song(0, -1, 0, 3900, 8);
             }
@@ -311,7 +378,15 @@ void state_step_title_screen(void) {
                     gGameStatusPtr->areaID = AREA_KMR;
                     gGameStatusPtr->mapID = 0xB; //TODO hardcoded map IDs
                     gGameStatusPtr->entryID = 0;
+#if VERSION_PAL
+                    if(D_PAL_80073D8C) {
+                        set_game_mode(GAME_MODE_LANGUAGE_SELECT);
+                    } else {
+                        set_game_mode(GAME_MODE_FILE_SELECT);
+                    }
+#else
                     set_game_mode(GAME_MODE_FILE_SELECT);
+#endif
                     break;
             }
             return;
@@ -329,6 +404,10 @@ void state_drawUI_title_screen(void) {
             PressStart_Alpha = 0;
             PressStart_IsVisible = FALSE;
             PressStart_BlinkCounter = 0;
+#if VERSION_PAL
+            D_PAL_8009F0F4 = 0;
+            D_PAL_8009F0F8 = 0;
+#endif
             draw_title_screen_NOP();
             break;
         case TITLE_STATE_HOLD:
@@ -339,8 +418,18 @@ void state_drawUI_title_screen(void) {
         case TITLE_STATE_UNUSED:
             break;
         case TITLE_STATE_APPEAR:
+#if VERSION_PAL
+            draw_title_screen_NOP();
+            break;
+#endif
         case TITLE_STATE_BEGIN_DISMISS:
         case TITLE_STATE_DISMISS:
+#if VERSION_PAL
+            if (gGameStatusPtr->contBitPattern & 1) {
+                PressStart_IsVisible = 2;
+            }
+            title_screen_draw_press_start();
+#endif
             draw_title_screen_NOP();
             break;
     }
@@ -412,7 +501,7 @@ void title_screen_draw_logo(f32 moveAlpha) {
 
     gSPDisplayList(gMainGfxPos++, TitleSetupGfx);
     gDPPipeSync(gMainGfxPos++);
-    yOffset = -100 * moveAlpha;
+    yOffset = TITLE_LOGO_YOFFSET * moveAlpha;
 
     for (i = 0; i < TITLE_NUM_TILES; i++) {
         // Load a tile from the logo texture
@@ -444,6 +533,54 @@ void title_screen_draw_logo(f32 moveAlpha) {
 #endif
 
 void title_screen_draw_press_start(void) {
+#if VERSION_PAL
+    switch (PressStart_IsVisible) {
+        case FALSE:
+            PressStart_Alpha += 80;
+            if (PressStart_Alpha > 255) {
+                PressStart_Alpha = 255;
+                PressStart_IsVisible = TRUE;
+            }
+            /* fallthrough */
+        case TRUE:
+            if (D_PAL_80073D8C == 0) {
+                D_PAL_8009F0F4 += 64;
+                D_PAL_8009F0F8 -= 64;
+                if (D_PAL_8009F0F4 > PressStart_Alpha) {
+                    D_PAL_8009F0F4 = PressStart_Alpha;
+                }
+                if (D_PAL_8009F0F8 < PressStart_Alpha * 0.5f) {
+                    D_PAL_8009F0F8 = PressStart_Alpha * 0.5f;
+                }
+            } else {
+                D_PAL_8009F0F8 += 64;
+                D_PAL_8009F0F4 -= 64;
+                if (D_PAL_8009F0F8 > PressStart_Alpha) {
+                    D_PAL_8009F0F8 = PressStart_Alpha;
+                }
+                if (D_PAL_8009F0F4 < PressStart_Alpha * 0.5f) {
+                    D_PAL_8009F0F4 = PressStart_Alpha * 0.5f;
+                }
+            }
+
+            break;
+        case 2:
+            PressStart_Alpha -= 64;
+            if (PressStart_Alpha < 0) {
+                PressStart_Alpha = 0;
+            }
+            break;
+    }
+    if (PressStart_IsVisible != 1) {
+        if (D_PAL_80073D8C == 0) {
+            D_PAL_8009F0F4 = PressStart_Alpha;
+            D_PAL_8009F0F8 = PressStart_Alpha * 0.5f;
+        } else {
+            D_PAL_8009F0F8 = PressStart_Alpha;
+            D_PAL_8009F0F4 = PressStart_Alpha * 0.5f;
+        }
+    }
+#else
     switch (PressStart_IsVisible) {
         case FALSE:
             PressStart_Alpha -= 128;
@@ -451,16 +588,16 @@ void title_screen_draw_press_start(void) {
                 PressStart_Alpha = 0;
             }
 
-            PressStart_BlinkCounter++;
-            if (PressStart_BlinkCounter >= 16) {
-                PressStart_BlinkCounter = 0;
-                PressStart_IsVisible = TRUE;
+            TitleMenu_BlinkCounter++;
+            if (TitleMenu_BlinkCounter >= 16) {
+                TitleMenu_BlinkCounter = 0;
+                TitleMenu_Visibility = TITLEMENU_STATE_FADE_OUT;
             }
             break;
-        case TRUE:
-            PressStart_Alpha += 128;
-            if (PressStart_Alpha > 255) {
-                PressStart_Alpha = 255;
+        case TITLEMENU_STATE_FADE_OUT:
+            TitleMenu_Alpha += 128;
+            if (TitleMenu_Alpha > 255) {
+                TitleMenu_Alpha = 255;
             }
 
             PressStart_BlinkCounter++;
@@ -469,15 +606,39 @@ void title_screen_draw_press_start(void) {
                 PressStart_IsVisible = FALSE;
             }
     }
+#endif
 
     gSPDisplayList(gMainGfxPos++, TitleSetupGfx);
     gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+#if VERSION_PAL
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 248, 240, 152, (u8)D_PAL_8009F0F4);
+    gDPPipeSync(gMainGfxPos++);
+
+    gDPLoadTextureBlock(gMainGfxPos++, TitleMenu_ImgList_StartGame, G_IM_FMT_IA, G_IM_SIZ_8b,
+                        D_PAL_80073E38[gCurrentLanguage], 16, 0,
+                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                        G_TX_NOLOD);
+    gSPTextureRectangle(gMainGfxPos++, D_PAL_80073E58[gCurrentLanguage] * 4, 149 * 4,
+                        (D_PAL_80073E58[gCurrentLanguage] + D_PAL_80073E38[gCurrentLanguage]) * 4, (149 + 16) * 4,
+                        G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 248, 240, 152, (u8)D_PAL_8009F0F8);
+    gDPPipeSync(gMainGfxPos++);
+
+    gDPLoadTextureBlock(gMainGfxPos++, TitleMenu_ImgList_Languages, G_IM_FMT_IA, G_IM_SIZ_8b,
+                        D_PAL_80073E48[gCurrentLanguage], 16, 0,
+                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                        G_TX_NOLOD);
+    gSPTextureRectangle(gMainGfxPos++, D_PAL_80073E68[gCurrentLanguage] * 4, 169 * 4,
+                        (D_PAL_80073E68[gCurrentLanguage] + D_PAL_80073E48[gCurrentLanguage]) * 4, (169 + 16) * 4,
+                        G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+#else
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 248, 240, 152, PressStart_Alpha);
     gDPPipeSync(gMainGfxPos++);
     gDPLoadTextureBlock(gMainGfxPos++, TitleScreen_ImgList_PressStart, G_IM_FMT_IA, G_IM_SIZ_8b, 128, VAR_1, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);
     gSPTextureRectangle(gMainGfxPos++, 384, 548, 896, VAR_2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+#endif
     gDPPipeSync(gMainGfxPos++);
 }
 

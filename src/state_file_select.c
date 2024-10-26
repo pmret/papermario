@@ -129,7 +129,7 @@ void state_step_language_select(void) {
             D_800A0931 = 1;
             break;
         case 1:
-            set_windows_visible(WINDOW_GROUP_FILE_MENU);
+            set_windows_visible(WINDOW_GROUP_FILES);
             D_800A0930 = 1;
             D_800A0931 = 2;
             break;
@@ -322,7 +322,7 @@ void state_step_exit_language_select(void) {
             for (i = 44; i < ARRAY_COUNT(gWindows); i++) {
                 Window *window = &gWindows[i];
 
-                if (window->parent == WINDOW_ID_FILEMENU_MAIN || window->parent == -1) {
+                if (window->parent == WIN_FILES_MAIN || window->parent == -1) {
                     flagSum += window->flags & WINDOW_FLAG_INITIAL_ANIMATION;
                 }
             }
