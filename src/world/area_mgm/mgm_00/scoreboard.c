@@ -30,13 +30,14 @@ EvtScript N(D_80243C40_E123E0) = {
 };
 
 #if VERSION_PAL
-s32  N(pal_unkdata)[] = {
+s32  N(RecordBox_Widths)[] = {
   230, 238, 234, 246,
 };
 
-s32 N(pal_unkdata_2)[] = {
+s32 N(RecordBox_OffsetsX)[] = {
     45, 41, 43, 37
 };
+#endif
 
 Gfx N(Gfx_RecordDisplay_Init)[] = {
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -47,60 +48,113 @@ Gfx N(Gfx_RecordDisplay_Init)[] = {
     gsDPSetCombineKey(G_CK_NONE),
     gsDPSetAlphaCompare(G_AC_NONE),
     gsDPNoOp(),
-    gsSPEndDisplayList(),
-};
-#else
-Gfx N(Gfx_RecordDisplay_Init)[] = {
-    gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
-    gsDPSetCombineMode(G_CC_PRIMITIVE, G_CC_PRIMITIVE),
-    gsDPSetColorDither(G_CD_DISABLE),
-    gsDPSetAlphaDither(G_AD_DISABLE),
-    gsDPSetCombineKey(G_CK_NONE),
-    gsDPSetAlphaCompare(G_AC_NONE),
-    gsDPNoOp(),
+#if !VERSION_PAL
     gsDPSetPrimColor(0, 0, 255, 0, 0, 0),
     gsDPFillRectangle(44, 49, 276, 51),
     gsDPFillRectangle(44, 49, 46, 133),
     gsDPFillRectangle(275, 49, 276, 133),
     gsDPFillRectangle(44, 132, 276, 133),
+#endif
     gsSPEndDisplayList(),
 };
-#endif
 
 #if VERSION_PAL
-void N(draw_record_display)(RecordDisplayData* data, s32 alpha);
-INCLUDE_ASM(void, "world/area_mgm/mgm_00/mgm_00_3_scoreboard", mgm_00_draw_record_display);
+#define RECORD_BOX_POSX        N(RecordBox_OffsetsX)[gCurrentLanguage]
+#define RECORD_BOX_WIDTH       N(RecordBox_Widths)[gCurrentLanguage]
+#define MSG_RESULT_JUMP_WIDTH  get_msg_width(MSG_MGM_001C, 0)
+#define MSG_RESULT_SMASH_WIDTH get_msg_width(MSG_MGM_001D, 0)
 #else
+#define RECORD_BOX_POSX        45
+#define RECORD_BOX_WIDTH       230
+#define MSG_RESULT_JUMP_WIDTH  188
+#define MSG_RESULT_SMASH_WIDTH 192
+#endif
+
 void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
+#if VERSION_PAL
+    s32 var_fp;
+    s32 GamePlaysMsg;
+    s32 GameTotalMsg;
+    s32 GameRecordMsg;
+#endif
+
     if (alpha > 0) {
         gSPDisplayList(gMainGfxPos++, N(Gfx_RecordDisplay_Init));
+#if VERSION_PAL
+        var_fp = gCurrentLanguage == LANGUAGE_FR ? 36 : 0;
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 0, 0, 0);
+        gDPFillRectangle(gMainGfxPos++, RECORD_BOX_POSX - 1,                 49, RECORD_BOX_POSX + RECORD_BOX_WIDTH + 1,  51);
+        gDPFillRectangle(gMainGfxPos++, RECORD_BOX_POSX - 1,                 49, RECORD_BOX_POSX + 1,                    133);
+        gDPFillRectangle(gMainGfxPos++, RECORD_BOX_POSX + RECORD_BOX_WIDTH,  49, RECORD_BOX_POSX + RECORD_BOX_WIDTH + 1, 133);
+        gDPFillRectangle(gMainGfxPos++, RECORD_BOX_POSX - 1,                132, RECORD_BOX_POSX + RECORD_BOX_WIDTH + 1, 133);
+#endif
         gDPPipeSync(gMainGfxPos++);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 16, 120, 24, alpha * 0.65);
-        gDPFillRectangle(gMainGfxPos++, 48, 53, 272, 129);
+        gDPFillRectangle(gMainGfxPos++, RECORD_BOX_POSX + 3, 53, RECORD_BOX_POSX + RECORD_BOX_WIDTH - 3, 129);
         gDPPipeSync(gMainGfxPos++);
-        msg_draw_frame(45, 50, 230, 82, MSG_STYLE_INSPECT, 0, 1, (s32)(alpha * 0.55), alpha); // cast needed if signature isn't present
+        msg_draw_frame(RECORD_BOX_POSX, 50, RECORD_BOX_WIDTH, 82, MSG_STYLE_INSPECT, 0, 1, (s32)(alpha * 0.55), alpha); // cast needed if signature isn't present
         if (data->gameType == MINIGAME_TYPE_JUMP) {
-            draw_msg(MSG_MGM_001C, 66, 57, alpha, MSG_PAL_TEAL, 0);
-            draw_number(gPlayerData.jumpGamePlays,   219, 78,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
-            draw_number(gPlayerData.jumpGameTotal,   219, 93,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
-            draw_number(gPlayerData.jumpGameRecord,  219, 108, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+#if VERSION_PAL
+            s32 posX = var_fp + 174;  //! required to match
+#else
+            s32 posX = 174;
+#endif
+
+            draw_msg(MSG_MGM_001C, RECORD_BOX_POSX + (RECORD_BOX_WIDTH - MSG_RESULT_JUMP_WIDTH) / 2, 57, alpha, MSG_PAL_TEAL, 0);
+            draw_number(gPlayerData.jumpGamePlays,   RECORD_BOX_POSX + posX, 78,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            draw_number(gPlayerData.jumpGameTotal,   RECORD_BOX_POSX + posX, 93,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            draw_number(gPlayerData.jumpGameRecord,  RECORD_BOX_POSX + posX, 108, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+
+#if VERSION_PAL
+            GamePlaysMsg  = gPlayerData.jumpGamePlays == 1 ? MSG_PAL_MGM_0024 : MSG_MGM_0023;
+            GameTotalMsg  = gPlayerData.jumpGameTotal == 1 ? MSG_PAL_MGM_0021 : MSG_MGM_0021;
+            GameRecordMsg = gPlayerData.jumpGameRecord == 1 ? MSG_PAL_MGM_0021 : MSG_MGM_0021;
+#endif
         } else {
-            draw_msg(MSG_MGM_001D, 64, 57, alpha, MSG_PAL_TEAL, 0);
-            draw_number(gPlayerData.smashGamePlays,  219, 78,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
-            draw_number(gPlayerData.smashGameTotal,  219, 93,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
-            draw_number(gPlayerData.smashGameRecord, 219, 108, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+#if VERSION_PAL
+            s32 posX = var_fp + 174;  //! required, cannot be merged to the same var above
+#else
+            s32 posX = 174;
+#endif
+
+            draw_msg(MSG_MGM_001D, RECORD_BOX_POSX + (RECORD_BOX_WIDTH - MSG_RESULT_SMASH_WIDTH) / 2, 57, alpha, MSG_PAL_TEAL, 0);
+            draw_number(gPlayerData.smashGamePlays,  RECORD_BOX_POSX + posX, 78,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            draw_number(gPlayerData.smashGameTotal,  RECORD_BOX_POSX + posX, 93,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            draw_number(gPlayerData.smashGameRecord, RECORD_BOX_POSX + posX, 108, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+
+#if VERSION_PAL
+            GamePlaysMsg  = gPlayerData.smashGamePlays == 1 ? MSG_PAL_MGM_0024 : MSG_MGM_0023;
+            GameTotalMsg  = gPlayerData.smashGameTotal == 1 ? MSG_PAL_MGM_0021 : MSG_MGM_0021;
+            GameRecordMsg = gPlayerData.smashGameRecord == 1 ? MSG_PAL_MGM_0021 : MSG_MGM_0021;
+#endif
         }
 
-        draw_msg(MSG_MGM_001E, 58,  78,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-        draw_msg(MSG_MGM_0023, 223, 78,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-        draw_msg(MSG_MGM_001F, 58,  93,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-        draw_msg(MSG_MGM_0021, 223, 93,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-        draw_msg(MSG_MGM_0020, 58,  108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
-        draw_msg(MSG_MGM_0021, 223, 108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+#if VERSION_PAL
+        draw_msg(MSG_MGM_001E, RECORD_BOX_POSX + 13,  78,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        if (gCurrentLanguage != LANGUAGE_FR) {
+            s32 width2 = var_fp + 178;  //! required to match and can't be merged with the same two below
+            draw_msg(GamePlaysMsg,   RECORD_BOX_POSX + width2,  78,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        }
+        draw_msg(MSG_MGM_001F, RECORD_BOX_POSX + 13,  93,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        if (gCurrentLanguage != LANGUAGE_FR) {
+            s32 width2 = var_fp + 178;
+            draw_msg(GameTotalMsg,   RECORD_BOX_POSX + width2,  93,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        }
+        draw_msg(MSG_MGM_0020, RECORD_BOX_POSX + 13,  108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        if (gCurrentLanguage != LANGUAGE_FR) {
+            s32 width2 = var_fp + 178;
+            draw_msg(GameRecordMsg,  RECORD_BOX_POSX + width2, 108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        }
+#else
+        draw_msg(MSG_MGM_001E, RECORD_BOX_POSX + 13,  78,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_0023, RECORD_BOX_POSX + 178,   78,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_001F, RECORD_BOX_POSX + 13,  93,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_0021, RECORD_BOX_POSX + 178,   93,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_0020, RECORD_BOX_POSX + 13,  108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_0021, RECORD_BOX_POSX + 178,   108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+#endif
     }
 }
-#endif
 
 void N(animate_and_draw_record)(void* renderData) {
     RecordDisplayData* data = (RecordDisplayData*)evt_get_variable(NULL, MV_RecordDisplayData);

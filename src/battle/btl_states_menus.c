@@ -1976,10 +1976,6 @@ void func_802A4A10(void) {
     BattleSubmenuStratsState = BTL_SUBMENU_STRATS_STATE_UNK_30;
 }
 
-#if VERSION_PAL
-s32 btl_update_strats_menu(void);
-INCLUDE_ASM(s32, "battle/btl_states_menus", btl_update_strats_menu);
-#else
 s32 btl_update_strats_menu(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     HudElemID hid;
@@ -2003,7 +1999,9 @@ s32 btl_update_strats_menu(void) {
 
             D_802AD618 = hid = hud_element_create(&HES_AnimatedHandPointer);
             hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(hid, D_802AD63C, D_802AD63E);
+            x = D_802AD63C; //! required to match
+            y = D_802AD63E;
+            hud_element_set_render_pos(hid, x, y);
 
             HID_GreenArrowUp = hid = hud_element_create(&HES_GreenArrowUp);
             hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
@@ -2016,8 +2014,16 @@ s32 btl_update_strats_menu(void) {
             D_802AD614 = MSG_PAL_STANDARD;
             x = D_802AD63C;
             y = D_802AD63E;
+#if VERSION_PAL
+            width = get_msg_width(MSG_Menus_Strategies, 0) + 32;
+            set_window_properties(WIN_BTL_STRATS_MENU, x, y, D_PAL_802AB4C8[gCurrentLanguage], (StratsMenuLines * 13) + 26,
+                0, btl_menu_strats_draw_content, NULL, -1);
+            set_window_properties(WIN_BTL_STRATS_TITLE, x + (D_PAL_802AB4C8[gCurrentLanguage] - width) / 2, y - 6, width, 16,
+                1, btl_menu_strats_show_title, NULL, -1);
+#else
             set_window_properties(WIN_BTL_STRATS_MENU, x, y, 144, (StratsMenuLines * 13) + 26, 0, btl_menu_strats_draw_content, NULL, -1);
             set_window_properties(WIN_BTL_STRATS_TITLE, x + 18, y - 6, 108, 16, 1, btl_menu_strats_show_title, NULL, -1);
+#endif
             x = 20;
             y = 186;
             set_window_properties(WIN_BTL_DESC_BOX, x, y, 280, 32, WINDOW_PRIORITY_20, btl_menu_strats_show_desc, NULL, -1);
@@ -2142,7 +2148,13 @@ s32 btl_update_strats_menu(void) {
                     break;
             }
             width = get_msg_width(msgID, 0) + 23;
-            set_window_properties(WIN_BTL_POPUP, (SCREEN_WIDTH / 2) - (width / 2), 80, width, 28, 20, btl_menu_strats_show_error, NULL, -1);
+            x = (SCREEN_WIDTH / 2) - (width / 2);
+#if VERSION_PAL
+            set_window_properties(WIN_BTL_POPUP, x, 80, width, D_802AB340[get_msg_lines(msgID) - 1],
+                20, btl_menu_strats_show_error, NULL, -1);
+#else
+            set_window_properties(WIN_BTL_POPUP, x, 80, width, 28, 20, btl_menu_strats_show_error, NULL, -1);
+#endif
             set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
             D_802AD612 = 60;
             BattleSubmenuStratsState = BTL_SUBMENU_STRATS_STATE_ERROR_DONE;
@@ -2164,7 +2176,6 @@ s32 btl_update_strats_menu(void) {
     }
     return 0;
 }
-#endif
 
 #if VERSION_IQUE
 #define STRATS_OPTION_Y 3

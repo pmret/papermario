@@ -343,10 +343,6 @@ void func_800F16CC(void) {
     gPopupState = POPUP_STATE_20;
 }
 
-#if VERSION_PAL
-s32 popup_menu_update(void);
-INCLUDE_ASM(s32, "8a860_len_3f30", popup_menu_update);
-#else
 s32 popup_menu_update(void) {
     s32 posX;
     s32 posY;
@@ -359,10 +355,11 @@ s32 popup_menu_update(void) {
     s32 one;
     s32 i;
 
+    s32 var_s6 = 0;
     s32 var_s5 = 0;
-    s32 var_s6 = 0; // maybe 6 before 5
     s32 msgWidth;
     s32 width2;
+    s32 height2;
     s32 posX2;
 
     switch (gPopupState) {
@@ -371,7 +368,6 @@ s32 popup_menu_update(void) {
             D_8010D67C = 32;
             D_8010D67E = 72;
             D_8010D680 = 32;
-            PopupMenu_StarPieceCounterPosX = 32;
 #else
             D_8010D67C = 20;
             D_8010D67E = 72;
@@ -380,9 +376,7 @@ s32 popup_menu_update(void) {
             D_8010D682 = 186;
             D_8010D684 = 16;
             D_8010D686 = 88;
-#if !VERSION_JP
             PopupMenu_StarPieceCounterPosX = 32;
-#endif
             PopupMenu_StarPieceCounterPosY = 164;
             if (PopupNotBattle) {
 #if VERSION_JP
@@ -601,12 +595,14 @@ s32 popup_menu_update(void) {
             set_window_properties(WIN_POPUP_CONTENT, posX, posY, var_s6, (PopupMenu_DisplayedEntryCount * LINE_HEIGHT) + 26,
                                   WINDOW_PRIORITY_20, popup_menu_draw_menu_contents, NULL, -1);
             if (gPopupMenu->unk_338 == 0) {
-                set_window_properties(WIN_POPUP_TITLE_A, posX2, -6, width2, 16, WINDOW_PRIORITY_21,
+                posX = posX2;  //! required to match
+                set_window_properties(WIN_POPUP_TITLE_A, posX, -6, width2, 16, WINDOW_PRIORITY_21,
                                       popup_menu_draw_title_contents, NULL, WIN_POPUP_CONTENT);
                 set_window_update(WIN_POPUP_TITLE_A, 1);
                 set_window_update(WIN_POPUP_TITLE_B, 2);
             } else {
-                set_window_properties(WIN_POPUP_TITLE_B, posX2, -6, width2, 16, WINDOW_PRIORITY_21,
+                posX = posX2;  //! required to match
+                set_window_properties(WIN_POPUP_TITLE_B, posX, -6, width2, 16, WINDOW_PRIORITY_21,
                                       popup_menu_draw_title_contents, NULL, WIN_POPUP_CONTENT);
                 set_window_update(WIN_POPUP_TITLE_A, 2);
                 set_window_update(WIN_POPUP_TITLE_B, 1);
@@ -804,11 +800,11 @@ s32 popup_menu_update(void) {
             posY = D_8010D686;
 
 #if VERSION_PAL
-            height = 32;
+            height2 = 32;
             if (get_msg_lines(gPopupMenu->unk_33C) == 2) {
-                height = 40;
+                height2 = 40;
             }
-            set_window_properties(WIN_POPUP_PROMPT, posX, posY, gPopupMenu->unk_340 + 144, height, WINDOW_PRIORITY_20, func_800F4944, NULL, -1);
+            set_window_properties(WIN_POPUP_PROMPT, posX, posY, gPopupMenu->unk_340 + 144, height2, WINDOW_PRIORITY_20, func_800F4944, NULL, -1);
 #else
             switch (gPopupMenu->popupType) {
 #if VERSION_JP
@@ -1388,7 +1384,6 @@ s32 popup_menu_update(void) {
     gPopupMenu->result = POPUP_RESULT_CHOOSING;
     return 0;
 }
-#endif
 
 void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 x, y;
