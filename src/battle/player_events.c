@@ -517,7 +517,7 @@ API_CALLABLE(SpawnTurnEndFX) {
     s32 screenX;
     s32 screenY;
     s32 screenZ;
-    s32 hudElemID;
+    HudElemID hid;
 
     get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
 
@@ -528,22 +528,22 @@ API_CALLABLE(SpawnTurnEndFX) {
 #if VERSION_PAL
         switch (gCurrentLanguage) {
             case LANGUAGE_EN:
-                HID_HPDrain = hudElemID = hud_element_create(&HES_HPDrain);
+                HID_HPDrain = hid = hud_element_create(&HES_HPDrain);
                 break;
             case LANGUAGE_DE:
-                HID_HPDrain = hudElemID = hud_element_create(&HES_HPDrain_de);
+                HID_HPDrain = hid = hud_element_create(&HES_HPDrain_de);
                 break;
             case LANGUAGE_FR:
-                HID_HPDrain = hudElemID = hud_element_create(&HES_HPDrain_fr);
+                HID_HPDrain = hid = hud_element_create(&HES_HPDrain_fr);
                 break;
             case LANGUAGE_ES:
-                HID_HPDrain = hudElemID = hud_element_create(&HES_HPDrain_es);
+                HID_HPDrain = hid = hud_element_create(&HES_HPDrain_es);
                 break;
         }
 #else
-        HID_HPDrain = hudElemID = hud_element_create(&HES_HPDrain);
+        HID_HPDrain = hid = hud_element_create(&HES_HPDrain);
 #endif
-        hud_element_set_render_pos(hudElemID, screenX, screenY);
+        hud_element_set_render_pos(hid, screenX, screenY);
         screenY += 9;
     }
 
@@ -551,22 +551,22 @@ API_CALLABLE(SpawnTurnEndFX) {
 #if VERSION_PAL
         switch (gCurrentLanguage) {
             case LANGUAGE_EN:
-                HID_Happy = hudElemID = hud_element_create(&HES_Happy);
+                HID_Happy = hid = hud_element_create(&HES_Happy);
                 break;
             case LANGUAGE_DE:
-                HID_Happy = hudElemID = hud_element_create(&HES_Happy_de);
+                HID_Happy = hid = hud_element_create(&HES_Happy_de);
                 break;
             case LANGUAGE_FR:
-                HID_Happy = hudElemID = hud_element_create(&HES_Happy_fr);
+                HID_Happy = hid = hud_element_create(&HES_Happy_fr);
                 break;
             case LANGUAGE_ES:
-                HID_Happy = hudElemID = hud_element_create(&HES_Happy_es);
+                HID_Happy = hid = hud_element_create(&HES_Happy_es);
                 break;
         }
 #else
-        HID_Happy = hudElemID = hud_element_create(&HES_Happy);
+        HID_Happy = hid = hud_element_create(&HES_Happy);
 #endif
-        hud_element_set_render_pos(hudElemID, screenX, screenY);
+        hud_element_set_render_pos(hid, screenX, screenY);
     }
     return ApiStatus_DONE2;
 }

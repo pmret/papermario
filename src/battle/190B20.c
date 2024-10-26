@@ -87,6 +87,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
     s32 sampleCol;
     s32 sampleRow;
     s32 removeTarget;
+    s8 *targetIndexIt;
 
     // a target has been manually selected
     if (battleStatus->curTargetListFlags & TARGET_FLAG_OVERRIDE) {
@@ -502,14 +503,12 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
 #if VERSION_PAL
     targetIndexList = actor->targetIndexList;
     numTargets = actor->targetListLength;
-    {
-        s8* temp;
 
-        i = ARRAY_COUNT(actor->targetIndexList) - 1;
-        temp = &actor->targetIndexList[ARRAY_COUNT(actor->targetIndexList) - 1];
+    i = ARRAY_COUNT(actor->targetIndexList) - 1;
+    targetIndexIt = &actor->targetIndexList[ARRAY_COUNT(actor->targetIndexList) - 1];
 
-        while (i >= 0)
-            *temp-- = i--;
+    while (i >= 0) {
+        *targetIndexIt-- = i--;
     }
 #else
     numTargets = actor->targetListLength;
