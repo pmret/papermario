@@ -444,11 +444,11 @@ BSS s32 D_802AD6D4;
 void create_battle_popup_menu(PopupMenu* popup);
 
 s32 get_player_anim_for_status(s32 animID);
-void func_802A3C98(void* data, s32 x, s32 y);
-void func_802A43DC(void* data, s32 x, s32 y);
-void func_802A4448(void* data, s32 x, s32 y);
-void func_802A4494(void* data, s32 x, s32 y);
-void func_802A4534(void* data, s32 x, s32 y);
+void btl_menu_moves_draw_content(void* data, s32 x, s32 y);
+void btl_menu_moves_show_title(void* data, s32 x, s32 y);
+void btl_menu_moves_show_icon(void* data, s32 x, s32 y);
+void btl_menu_moves_show_desc(void* data, s32 x, s32 y);
+void btl_menu_moves_show_error(void* data, s32 x, s32 y);
 void btl_menu_strats_draw_content(void* data, s32 x, s32 y);
 void btl_menu_strats_show_title(void* data, s32 x, s32 y);
 void btl_menu_strats_show_desc(void* data, s32 x, s32 y);
@@ -1191,21 +1191,21 @@ s32 btl_submenu_moves_update(void) {
             moveX = BattleMenu_Moves_PosX;
             moveY = BattleMenu_Moves_PosY;
             if (!BattleMenu_UsingSpiritsSubmenu) {
-                set_window_properties(1, moveX, moveY, 150, (D_802AD10E * 13) + 28, 0, func_802A3C98, NULL, -1);
-                set_window_properties(2, moveX + 16, moveY - 6, 90, 16, 1, func_802A43DC, NULL, -1);
-                set_window_properties(3, moveX + 114, moveY - 12, 32, 32, 1, func_802A4448, NULL, -1);
+                set_window_properties(WIN_BTL_MOVES_MENU, moveX, moveY, 150, (D_802AD10E * 13) + 28, 0, btl_menu_moves_draw_content, NULL, -1);
+                set_window_properties(WIN_BTL_MOVES_TITLE, moveX + 16, moveY - 6, 90, 16, 1, btl_menu_moves_show_title, NULL, -1);
+                set_window_properties(WIN_BTL_MOVES_ICON, moveX + 114, moveY - 12, 32, 32, 1, btl_menu_moves_show_icon, NULL, -1);
             } else {
                 s16 new_var;
 
-                set_window_properties(1, moveX, moveY, 144, (D_802AD10E * 13) + 28, 0, func_802A3C98, NULL, -1);
+                set_window_properties(WIN_BTL_MOVES_MENU, moveX, moveY, 144, (D_802AD10E * 13) + 28, 0, btl_menu_moves_draw_content, NULL, -1);
                 new_var = moveY; // todo required to match
-                set_window_properties(4, moveX + 10, new_var - 6, 100, 16, 1, func_802A43DC, 0, -1);
-                set_window_properties(5, moveX + 110, new_var - 12, 32, 35, 1, func_802A4448, 0, -1);
+                set_window_properties(WIN_BTL_SPIRITS_TITLE, moveX + 10, new_var - 6, 100, 16, 1, btl_menu_moves_show_title, 0, -1);
+                set_window_properties(WIN_BTL_SPIRITS_ICON, moveX + 110, new_var - 12, 32, 35, 1, btl_menu_moves_show_icon, 0, -1);
             }
 
             moveX = 20;
             moveY = BattleMenu_Moves_PosY;
-            set_window_properties(8, moveX, 186, 280, 32, WINDOW_PRIORITY_20, func_802A4494, NULL, -1);
+            set_window_properties(WIN_BTL_DESC_BOX, moveX, 186, 280, 32, WINDOW_PRIORITY_20, btl_menu_moves_show_desc, NULL, -1);
             set_window_update(WIN_BTL_MOVES_MENU, WINDOW_UPDATE_SHOW);
             if (!BattleMenu_UsingSpiritsSubmenu) {
                 set_window_update(WIN_BTL_MOVES_TITLE, WINDOW_UPDATE_SHOW);
@@ -1419,7 +1419,7 @@ s32 btl_submenu_moves_update(void) {
 
             msgWidth = get_msg_width(msgID, 0) + 23;
             moveX = (SCREEN_WIDTH / 2) - (msgWidth / 2);
-            set_window_properties(9, moveX, 80, msgWidth, D_802AB340[get_msg_lines(msgID) - 1], 20, func_802A4534, NULL, -1);
+            set_window_properties(WIN_BTL_POPUP, moveX, 80, msgWidth, D_802AB340[get_msg_lines(msgID) - 1], 20, btl_menu_moves_show_error, NULL, -1);
             set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
             D_802AD10B = 60;
             battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_2A;
@@ -1458,7 +1458,7 @@ s32 btl_submenu_moves_update(void) {
 #define X_VAR2 93
 #endif
 
-void func_802A3C98(void* data, s32 x, s32 y) {
+void btl_menu_moves_draw_content(void* data, s32 x, s32 y) {
     s32 var_t0;
     s32 temp_f6;
     s32 xPos, yPos;
@@ -1662,7 +1662,7 @@ void func_802A3C98(void* data, s32 x, s32 y) {
     }
 }
 
-void func_802A43DC(void* data, s32 x, s32 y) {
+void btl_menu_moves_show_title(void* data, s32 x, s32 y) {
     s32 msgID;
     s32 posX;
     s32 posY;
@@ -1685,7 +1685,7 @@ void func_802A43DC(void* data, s32 x, s32 y) {
     draw_msg(msgID, posX, posY, opacity, palette, DRAW_MSG_STYLE_MENU);
 }
 
-void func_802A4448(void* data, s32 x, s32 y) {
+void btl_menu_moves_show_icon(void* data, s32 x, s32 y) {
     s32 icon = BattleMenu_Moves_TitleID;
 
     hud_element_set_render_pos(icon, x + 16, y + 15);
@@ -1693,7 +1693,7 @@ void func_802A4448(void* data, s32 x, s32 y) {
     hud_element_draw_clipped(icon);
 }
 
-void func_802A4494(void* data, s32 x, s32 y) {
+void btl_menu_moves_show_desc(void* data, s32 x, s32 y) {
     switch (battle_menu_moveState) {
         case BTL_SUBMENU_MOVES_STATE_UNK_NEGATIVE_ONE:
         case BTL_SUBMENU_MOVES_STATE_UNK_1:
@@ -1708,7 +1708,7 @@ void func_802A4494(void* data, s32 x, s32 y) {
     }
 }
 
-void func_802A4534(void* data, s32 x, s32 y) {
+void btl_menu_moves_show_error(void* data, s32 x, s32 y) {
     s32 posY = y;
     s32 posX;
     s32 msgID;

@@ -81,7 +81,7 @@
 #define ITEM_MENU_PAGE(index) (&gPauseItemsPages[index])
 
 #define MENU_PANEL_SELECTED_GRID_DATA(panel) \
-    (panel)->gridData[(panel)->page * (panel)->numCols * (panel)->numRows + \
+    (panel)->gridData[(panel)->state * (panel)->numCols * (panel)->numRows + \
                       (panel)->numCols * (panel)->row + \
                       (panel)->col]
 

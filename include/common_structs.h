@@ -2164,7 +2164,7 @@ typedef struct MenuPanel {
     /* 0x01 */ s8 col;
     /* 0x02 */ s8 row;
     /* 0x03 */ u8 selected; // usually set to the current value from gridData
-    /* 0x04 */ s8 page; // filemenu: 0 = select, 1 = delete, 3 = copy from, 4 = copy to, all else = save
+    /* 0x04 */ s8 state; // filemenu: 0 = select, 1 = delete, 3 = copy from, 4 = copy to, all else = save
     /* 0x05 */ s8 numCols;
     /* 0x06 */ s8 numRows;
     /* 0x07 */ s8 numPages; // unsure
