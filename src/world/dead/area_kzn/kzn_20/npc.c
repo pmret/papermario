@@ -142,9 +142,9 @@ EvtScript N(EVS_Kolorado_CalmIdle) = {
         EndLoop
         Wait(LVar2)
 #if VERSION_JP
-    Goto(0)
+        Goto(0)
 #else
-    Goto(10)
+        Goto(10)
 #endif
     Return
     End

@@ -266,7 +266,7 @@ void pause_tabs_draw_badges(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s3
 void pause_tabs_draw_items(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     draw_msg(pause_get_menu_msg(PAUSE_MSG_19), baseX + 4, baseY + 1, 255.0 - darkening * 0.5, 0, 1);
     if (gPauseMenuCurrentTab == 0) {
-        if (gPauseTabsWindowIDs[menu->col] == WINDOW_ID_PAUSE_TAB_ITEMS) {
+        if (gPauseTabsWindowIDs[menu->col] == WIN_PAUSE_TAB_ITEMS) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX + TABS_CURSOR_OFFSET_X, baseY + 6);
         }
     }
@@ -275,7 +275,7 @@ void pause_tabs_draw_items(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32
 void pause_tabs_draw_party(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     draw_msg(pause_get_menu_msg(PAUSE_MSG_1A), baseX + 9, baseY + 1, 255.0 - darkening * 0.5, 0, 1);
     if (gPauseMenuCurrentTab == 0) {
-        if (gPauseTabsWindowIDs[menu->col] == WINDOW_ID_PAUSE_TAB_PARTY) {
+        if (gPauseTabsWindowIDs[menu->col] == WIN_PAUSE_TAB_PARTY) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX + TABS_CURSOR_OFFSET_X, baseY + 6);
         }
     }
@@ -321,15 +321,15 @@ void pause_tabs_draw_party(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32
 void pause_tabs_draw_spirits(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
 #if VERSION_JP
     if (darkening != 0) {
-        hud_element_set_flags(gPauseTabsIconIDs[0], HUD_ELEMENT_FLAG_TRANSPARENT);
-        hud_element_set_alpha(gPauseTabsIconIDs[0], 255.0 - darkening * 0.5);
+        hud_element_set_flags(gPauseTabsHIDs[0], HUD_ELEMENT_FLAG_TRANSPARENT);
+        hud_element_set_alpha(gPauseTabsHIDs[0], 255.0 - darkening * 0.5);
     } else {
-        hud_element_clear_flags(gPauseTabsIconIDs[0], HUD_ELEMENT_FLAG_TRANSPARENT);
-        hud_element_set_alpha(gPauseTabsIconIDs[0], 255);
+        hud_element_clear_flags(gPauseTabsHIDs[0], HUD_ELEMENT_FLAG_TRANSPARENT);
+        hud_element_set_alpha(gPauseTabsHIDs[0], 255);
     }
 
-    hud_element_set_render_pos(gPauseTabsIconIDs[0], baseX + 23, baseY + 7);
-    hud_element_draw_without_clipping(gPauseTabsIconIDs[0]);
+    hud_element_set_render_pos(gPauseTabsHIDs[0], baseX + 23, baseY + 7);
+    hud_element_draw_without_clipping(gPauseTabsHIDs[0]);
 #else
     if (darkening != 0) {
         hud_element_set_flags(gPauseTabsHIDs[4], HUD_ELEMENT_FLAG_TRANSPARENT);
@@ -341,6 +341,7 @@ void pause_tabs_draw_spirits(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
 
     hud_element_set_render_pos(gPauseTabsHIDs[4], baseX + 22, baseY + 7);
     hud_element_draw_without_clipping(gPauseTabsHIDs[4]);
+#endif
     if (gPauseMenuCurrentTab == 0) {
         if (gPauseTabsWindowIDs[menu->col] == WIN_PAUSE_TAB_SPIRITS) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX + TABS_CURSOR_OFFSET_X, baseY + 6);
@@ -351,15 +352,15 @@ void pause_tabs_draw_spirits(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
 void pause_tabs_draw_map(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
 #if VERSION_JP
     if (darkening != 0) {
-        hud_element_set_flags(gPauseTabsIconIDs[1], HUD_ELEMENT_FLAG_TRANSPARENT);
-        hud_element_set_alpha(gPauseTabsIconIDs[1], 255.0 - darkening * 0.5);
+        hud_element_set_flags(gPauseTabsHIDs[1], HUD_ELEMENT_FLAG_TRANSPARENT);
+        hud_element_set_alpha(gPauseTabsHIDs[1], 255.0 - darkening * 0.5);
     } else {
-        hud_element_clear_flags(gPauseTabsIconIDs[1], HUD_ELEMENT_FLAG_TRANSPARENT);
-        hud_element_set_alpha(gPauseTabsIconIDs[1], 255);
+        hud_element_clear_flags(gPauseTabsHIDs[1], HUD_ELEMENT_FLAG_TRANSPARENT);
+        hud_element_set_alpha(gPauseTabsHIDs[1], 255);
     }
 
-    hud_element_set_render_pos(gPauseTabsIconIDs[1], baseX + 23, baseY + 7);
-    hud_element_draw_without_clipping(gPauseTabsIconIDs[1]);
+    hud_element_set_render_pos(gPauseTabsHIDs[1], baseX + 23, baseY + 7);
+    hud_element_draw_without_clipping(gPauseTabsHIDs[1]);
 #else
     if (darkening != 0) {
         hud_element_set_flags(gPauseTabsHIDs[5], HUD_ELEMENT_FLAG_TRANSPARENT);

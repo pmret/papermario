@@ -87,7 +87,7 @@ dead_GetSelfNpcID = GetSelfNpcID + 0x3F50;
 dead_SetEnemyFlagBits = SetEnemyFlagBits + 0x3F50;
 dead_GetSelfAnimationFromTable = GetSelfAnimationFromTable + 0x3F50;
 dead_OnPlayerFled = OnPlayerFled + 0x3F50;
-dead_is_point_within_region = is_point_within_region + 0x3F90;
+dead_is_point_outside_territory = is_point_outside_territory + 0x3F90;
 dead_basic_ai_check_player_dist = basic_ai_check_player_dist + 0x3F90;
 dead_ai_enemy_play_sound = ai_enemy_play_sound + 0x41E0;
 dead_basic_ai_wander_init = basic_ai_wander_init + 0x42C0;
@@ -171,7 +171,7 @@ dead_set_aux_pan_v = set_aux_pan_v + 0xA418;
 dead_mdl_get_copied_vertices = mdl_get_copied_vertices + 0xA418;
 dead_mdl_get_copied_gfx = mdl_get_copied_gfx + 0xA418;
 dead_queue_render_task = queue_render_task + 0xABD0;
-dead_create_worker_world = create_worker_world + 0xADF0;
+dead_create_worker_scene = create_worker_scene + 0xADF0;
 dead_set_message_images = set_message_images + 0xB098;
 dead_set_message_text_var = set_message_text_var + 0xB098;
 dead_get_item_entity = get_item_entity + 0xBF80;
@@ -386,26 +386,9 @@ filemenu_BSS_END = 0x8024B8B0;
 sprite_shading_profiles_data_ROM_START = sprite_shading_profiles_ROM_START + 0x1D0;
 
 // subsequent segments
-// CHECK IF NECESSARY -----------------------------
-gEffectDataBuffer = 0x80197000;
-gEffectGlobals = 0x801A6000;
-AuHeapBase = 0x801AA000;
-D_80200000 = 0x80200000;
-// ------------------------------------
 gBackgroundImage = 0x80200000;
 filemenu_update = 0x80242970;
 filemenu_init = 0x802440B0;
 filemenu_cleanup = 0x802442D0;
-func_80244BC4 = 0x80244394;
-// CHECK IF NECESSARY ------------------------
 filemenu_get_exit_mode = 0x80244394;
-heap_collisionHead = 0x80268000;
-shim_create_audio_system_obfuscated = 0x802B2000;
-shim_load_engine_data_obfuscated = 0x802B203C;
-shim_general_heap_create_obfuscated = 0x802B2078;
-shim_battle_heap_create_obfuscated = 0x802B20B4;
-heap_generalHead = 0x802FB800;
-gFrameBuf0 = 0x8038F800;
-gFrameBuf1 = 0x803B5000;
-// ------------------------------------
 heap_battleHead = 0x803DA800;
