@@ -1,7 +1,7 @@
 #include "dgb_07.h"
 
 EvtScript N(EVS_ExitDoor_dgb_02_2) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, dgb_07_ENTRY_0)

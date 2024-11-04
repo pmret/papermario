@@ -13,7 +13,7 @@ API_CALLABLE(N(DisableAllLightSources)) {
 #include "../common/SetAvailableDisguise.inc.c"
 
 EvtScript N(EVS_ExitDoors_osr_02_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
     Set(LVar0, kkj_10_ENTRY_0)
@@ -29,7 +29,7 @@ EvtScript N(EVS_ExitDoors_osr_02_1) = {
 };
 
 EvtScript N(EVS_ExitDoors_kkj_11_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
     Set(LVar0, kkj_10_ENTRY_1)
@@ -45,7 +45,7 @@ EvtScript N(EVS_ExitDoors_kkj_11_0) = {
 };
 
 EvtScript N(EVS_ExitDoors_kkj_21_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_10_ENTRY_2)
@@ -61,7 +61,7 @@ EvtScript N(EVS_ExitDoors_kkj_21_0) = {
 };
 
 EvtScript N(EVS_ExitDoors_kkj_19_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_10_ENTRY_3)
@@ -77,7 +77,7 @@ EvtScript N(EVS_ExitDoors_kkj_19_0) = {
 };
 
 EvtScript N(EVS_ExitDoors_kkj_20_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_10_ENTRY_4)
@@ -93,7 +93,7 @@ EvtScript N(EVS_ExitDoors_kkj_20_0) = {
 };
 
 EvtScript N(EVS_ExitDoors_kkj_29_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_10_ENTRY_2)

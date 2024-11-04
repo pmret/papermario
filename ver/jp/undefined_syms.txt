@@ -386,9 +386,26 @@ filemenu_BSS_END = 0x8024B8B0;
 sprite_shading_profiles_data_ROM_START = sprite_shading_profiles_ROM_START + 0x1D0;
 
 // subsequent segments
+// CHECK IF NECESSARY -----------------------------
+gEffectDataBuffer = 0x80197000;
+gEffectGlobals = 0x801A6000;
+AuHeapBase = 0x801AA000;
+D_80200000 = 0x80200000;
+// ------------------------------------
 gBackgroundImage = 0x80200000;
 filemenu_update = 0x80242970;
 filemenu_init = 0x802440B0;
 filemenu_cleanup = 0x802442D0;
 func_80244BC4 = 0x80244394;
+// CHECK IF NECESSARY ------------------------
+filemenu_get_exit_mode = 0x80244394;
+heap_collisionHead = 0x80268000;
+shim_create_audio_system_obfuscated = 0x802B2000;
+shim_load_engine_data_obfuscated = 0x802B203C;
+shim_general_heap_create_obfuscated = 0x802B2078;
+shim_battle_heap_create_obfuscated = 0x802B20B4;
+heap_generalHead = 0x802FB800;
+gFrameBuf0 = 0x8038F800;
+gFrameBuf1 = 0x803B5000;
+// ------------------------------------
 heap_battleHead = 0x803DA800;

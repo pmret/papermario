@@ -106,7 +106,7 @@ f32 D_80249D70[15] = { 7.0f, 12.5f, 13.0f, 14.5f, 14.0f, 13.0f, 11.5f, 9.5f, 7.5
 
 MenuWindowBP filemenu_common_windowBPs[3] = {
     {
-        .windowID = WINDOW_ID_FILEMENU_MAIN,
+        .windowID = WIN_FILES_MAIN,
         .pos = {
             .x = 16,
             .y = 24,
@@ -122,7 +122,7 @@ MenuWindowBP filemenu_common_windowBPs[3] = {
         .style = { .customStyle = &filemenu_windowStyles[0] },
     },
     {
-        .windowID = WINDOW_ID_FILEMENU_COPYARROW,
+        .windowID = WIN_FILES_COPYARROW,
         .pos = {
             .x = 0,
             .y = 0,
@@ -132,13 +132,13 @@ MenuWindowBP filemenu_common_windowBPs[3] = {
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = filemenu_draw_contents_copy_arrow,
         .tab = NULL,
-        .parentID = WINDOW_ID_FILEMENU_MAIN,
+        .parentID = WIN_FILES_MAIN,
         .fpUpdate = { WINDOW_UPDATE_SHOW } ,
         .extraFlags = 0,
         .style = { .customStyle = &filemenu_windowStyles[1] },
     },
     {
-        .windowID = WINDOW_ID_FILEMENU_CURSOR,
+        .windowID = WIN_FILES_CURSOR,
         .pos = {
             .x = 0,
             .y = 0,
@@ -161,19 +161,19 @@ extern Gfx D_8024B708[];
 
 BSS s32 filemenu_iterFileIdx;
 BSS s32 filemenu_pressedButtons;
-BSS s32 filemenu_cursorHudElem;
+BSS HudElemID filemenu_cursorHID;
 BSS s32 filemenu_heldButtons;
 BSS s8 filemenu_filename_pos;
 BSS s32 filemenu_loadedFileIdx;
 BSS s8 filemenu_currentMenu;
 BSS s32 filemenu_8024C09C;
-BSS s32 filemenu_cursorHudElemID[1];
+BSS HudElemID filemenu_cursorHIDs[1];
 BSS s32 filemenu_8024C0A4[3];
-BSS s32 filemenu_hudElemIDs[20];
-BSS s32 filemenu_createfile_hudElems[4];
+BSS HudElemID filemenu_mainHIDs[20];
+BSS HudElemID filemenu_createfile_HIDs[4];
 
 #if VERSION_PAL
-BSS s32 D_802517D0[1];
+BSS HudElemID PauseLanguageHIDs[1];
 BSS s32 D_802517D4[1];
 BSS u16 D_802517E0[2][0x400] ALIGNED(16);
 #endif
@@ -195,7 +195,7 @@ void filemenu_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileIdx, s32 uls
 void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row) {
     menu->col = col;
     menu->row = row;
-    menu->selected = menu->gridData[(menu->page * menu->numCols * menu->numRows) +
+    menu->selected = menu->gridData[(menu->state * menu->numCols * menu->numRows) +
                                     (menu->numCols * menu->row) + menu->col];
 }
 
@@ -213,11 +213,11 @@ void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
         if (D_80249BB0) {
             s32 i;
 
-            for (i = WINDOW_ID_FILEMENU_MAIN; i < ARRAY_COUNT(gWindows); i++) {
+            for (i = WIN_FILES_MAIN; i < ARRAY_COUNT(gWindows); i++) {
                 Window* window = &gWindows[i];
                 s8 parent = window->parent;
 
-                if ((parent == -1 || parent == WINDOW_ID_FILEMENU_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
+                if ((parent == WIN_NONE || parent == WIN_FILES_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
                     break;
                 }
             }
@@ -230,7 +230,7 @@ void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
         filemenu_cursor_targetY = posY;
         filemenu_cursor_posY = posY;
     } else if (!(window->flags & WINDOW_FLAG_INITIAL_ANIMATION) &&
-                (window->parent == -1 || !(gWindows[window->parent].flags & WINDOW_FLAG_INITIAL_ANIMATION))) {
+                (window->parent == WIN_NONE || !(gWindows[window->parent].flags & WINDOW_FLAG_INITIAL_ANIMATION))) {
         filemenu_cursor_targetX = posX;
         filemenu_cursor_targetY = posY;
     }
@@ -268,11 +268,11 @@ void filemenu_update_cursor(void) {
         }
     }
 
-    for (i = WINDOW_ID_FILEMENU_MAIN; i < ARRAY_COUNT(gWindows); i++) {
+    for (i = WIN_FILES_MAIN; i < ARRAY_COUNT(gWindows); i++) {
         Window* window = &gWindows[i];
         s8 parent = window->parent;
 
-        if ((parent == -1 || parent == WINDOW_ID_FILEMENU_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
+        if ((parent == WIN_NONE || parent == WIN_FILES_MAIN) && (window->flags & WINDOW_FLAG_INITIAL_ANIMATION)) {
             break;
         }
     }
@@ -308,8 +308,8 @@ void filemenu_update(void) {
     MenuPanel** menuIt;
     s32 i;
 
-    for (i = WINDOW_ID_FILEMENU_MAIN; i < ARRAY_COUNT(gWindows); i++) {
-        if ((gWindows[i].parent == -1 || gWindows[i].parent == WINDOW_ID_FILEMENU_MAIN) &&
+    for (i = WIN_FILES_MAIN; i < ARRAY_COUNT(gWindows); i++) {
+        if ((gWindows[i].parent == WIN_NONE || gWindows[i].parent == WIN_FILES_MAIN) &&
             (gWindows[i].flags & WINDOW_FLAG_INITIAL_ANIMATION))
         {
             break;
@@ -795,16 +795,16 @@ void filemenu_update_pal_80247f40(
     s32 var_v1;
 
     switch (windowIndex) {
-        case WINDOW_ID_FILEMENU_FILE0_INFO:
+        case WIN_FILES_SLOT1_BODY:
             var_a3 = 0;
             break;
-        case WINDOW_ID_FILEMENU_FILE1_INFO:
+        case WIN_FILES_SLOT2_BODY:
             var_a3 = 1;
             break;
-        case WINDOW_ID_FILEMENU_FILE2_INFO:
+        case WIN_FILES_SLOT3_BODY:
             var_a3 = 2;
             break;
-        case WINDOW_ID_FILEMENU_FILE3_INFO:
+        case WIN_FILES_SLOT4_BODY:
             var_a3 = 3;
             break;
     }
@@ -842,16 +842,16 @@ void filemenu_selectlanguage_80248018(
     s32 var_v1;
 
     switch (windowIndex) {
-        case WINDOW_ID_FILEMENU_FILE0_INFO:
+        case WIN_FILES_SLOT1_BODY:
             var_a3 = 0;
             break;
-        case WINDOW_ID_FILEMENU_FILE1_INFO:
+        case WIN_FILES_SLOT2_BODY:
             var_a3 = 1;
             break;
-        case WINDOW_ID_FILEMENU_FILE2_INFO:
+        case WIN_FILES_SLOT3_BODY:
             var_a3 = 2;
             break;
-        case WINDOW_ID_FILEMENU_FILE3_INFO:
+        case WIN_FILES_SLOT4_BODY:
             var_a3 = 3;
             break;
     }
@@ -880,168 +880,177 @@ void filemenu_selectlanguage_80248018(
 #endif
 
 void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
-    s32 temp_a1;
+    s32 alpha;
 
     filemenu_update_cursor();
-    temp_a1 = filemenu_cursor_alpha;
-    if (temp_a1 > 0) {
-        if (temp_a1 > 255) {
-            temp_a1 = 255;
+    alpha = filemenu_cursor_alpha;
+    if (alpha > 0) {
+        if (alpha > 255) {
+            alpha = 255;
         }
-        hud_element_set_alpha(filemenu_cursorHudElemID[0], temp_a1);
-        hud_element_set_render_pos(filemenu_cursorHudElemID[0], baseX + filemenu_cursor_posX, baseY + filemenu_cursor_posY);
-        hud_element_draw_without_clipping(filemenu_cursorHudElemID[0]);
+        hud_element_set_alpha(filemenu_cursorHIDs[0], alpha);
+        hud_element_set_render_pos(filemenu_cursorHIDs[0], baseX + filemenu_cursor_posX, baseY + filemenu_cursor_posY);
+        hud_element_draw_without_clipping(filemenu_cursorHIDs[0]);
     }
 }
-
-#if VERSION_PAL
-#define PAGE_4 (3)
-#else
-#define PAGE_4 (4)
-#endif
 
 void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity,
                                        s32 darkening)
 {
-    Matrix4f sp20, sp60;
-    MenuPanel* menu0 = filemenu_menus[0];
+    Matrix4f transformMtx, tempMtx;
     f32 startX, startZ;
     f32 endX, endZ;
-    f32 temp_f28;
+    f32 rotAngle;
 
-    if (menu0->page == PAGE_4 && menu0->selected < 4) {
-        if (menu0->selected != filemenu_loadedFileIdx && filemenu_currentMenu != 2) {
-            switch (filemenu_loadedFileIdx) {
-                case 0:
-                    startX = 130.0f;
-                    startZ = 90.0f;
-                    break;
-                case 1:
-                    startX = 190.0f;
-                    startZ = 90.0f;
-                    break;
-                case 2:
-                    startX = 130.0f;
-                    startZ = 150.0f;
-                    break;
-                default:
-                    startX = 190.0f;
-                    startZ = 150.0f;
-                    break;
-            }
-
-            switch (filemenu_menus[0]->selected) {
-                case 0:
-                    endX = 130.0f;
-                    endZ = 90.0f;
-                    break;
-                case 1:
-                    endX = 190.0f;
-                    endZ = 90.0f;
-                    break;
-                case 2:
-                    endX = 130.0f;
-                    endZ = 150.0f;
-                    break;
-                default:
-                    endX = 190.0f;
-                    endZ = 150.0f;
-                    break;
-            }
-
-            temp_f28 = -atan2(startX, startZ, endX, endZ) - 90.0f;
-
-            gSPViewport(gMainGfxPos++, &D_80249D60);
-
-            guOrthoF(sp20, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, -100.0f, 100.0f, 1.0f);
-            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-
-            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
-                      G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gSPDisplayList(gMainGfxPos++, filemenu_dl_copyarrow);
-            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 128);
-            gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, 0);
-
-            guTranslateF(sp20, startX + 4.0f, startZ + 4.0f, 0.0f);
-            guScaleF(sp60, -1.0f, 1.0f, 1.0f);
-            guMtxCatF(sp60, sp20, sp20);
-            guRotateF(sp60, temp_f28, 0.0f, 0.0f, 1.0f);
-            guMtxCatF(sp60, sp20, sp20);
-            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-
-            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
-                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(gMainGfxPos++, D_8024B6F0);
-            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
-
-            guTranslateF(sp60, D_80249D70[gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70)], 0.0f, 0.0f);
-            guMtxCatF(sp60, sp20, sp20);
-            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-
-            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
-                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetTileSize(gMainGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
-                                               ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
-            gSPDisplayList(gMainGfxPos++, D_8024B708);
-            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
-            gDPSetPrimColor(gMainGfxPos++, 0, 0, 230, 230, 230, 255);
-            gDPSetEnvColor(gMainGfxPos++, 232, 40, 160, 0);
-
-            guTranslateF(sp20, startX, startZ, 0.0f);
-            guScaleF(sp60, -1.0f, 1.0f, 1.0f);
-            guMtxCatF(sp60, sp20, sp20);
-            guRotateF(sp60, temp_f28, 0.0f, 0.0f, 1.0f);
-            guMtxCatF(sp60, sp20, sp20);
-            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-
-            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
-                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(gMainGfxPos++, D_8024B6F0);
-            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
-
-            guTranslateF(sp60, D_80249D70[(gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70))], 0.0f, 0.0f);
-            guMtxCatF(sp60, sp20, sp20);
-            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-
-            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
-                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetTileSize(gMainGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
-                                               ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
-            gSPDisplayList(gMainGfxPos++, D_8024B708);
-            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
-        }
+    if (filemenu_menus[FILE_MENU_MAIN]->state != FM_MAIN_SELECT_COPY_TO) {
+        return;
     }
+
+    // check for invalid selection
+    if (filemenu_menus[FILE_MENU_MAIN]->selected >= 4) {
+        return;
+    }
+
+    // check if different files are selected
+    if (filemenu_menus[FILE_MENU_MAIN]->selected == filemenu_loadedFileIdx) {
+        return;
+    }
+
+    // do not show while message menu is showing
+    if (filemenu_currentMenu == FILE_MENU_MESSAGE) {
+        return;
+    }
+
+    switch (filemenu_loadedFileIdx) {
+        case 0:
+            startX = 130.0f;
+            startZ = 90.0f;
+            break;
+        case 1:
+            startX = 190.0f;
+            startZ = 90.0f;
+            break;
+        case 2:
+            startX = 130.0f;
+            startZ = 150.0f;
+            break;
+        default:
+            startX = 190.0f;
+            startZ = 150.0f;
+            break;
+    }
+
+    switch (filemenu_menus[FILE_MENU_MAIN]->selected) {
+        case 0:
+            endX = 130.0f;
+            endZ = 90.0f;
+            break;
+        case 1:
+            endX = 190.0f;
+            endZ = 90.0f;
+            break;
+        case 2:
+            endX = 130.0f;
+            endZ = 150.0f;
+            break;
+        default:
+            endX = 190.0f;
+            endZ = 150.0f;
+            break;
+    }
+
+    rotAngle = -atan2(startX, startZ, endX, endZ) - 90.0f;
+
+    gSPViewport(gMainGfxPos++, &D_80249D60);
+
+    guOrthoF(transformMtx, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, -100.0f, 100.0f, 1.0f);
+    guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPDisplayList(gMainGfxPos++, filemenu_dl_copyarrow);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 128);
+    gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, 0);
+
+    guTranslateF(transformMtx, startX + 4.0f, startZ + 4.0f, 0.0f);
+    guScaleF(tempMtx, -1.0f, 1.0f, 1.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guRotateF(tempMtx, rotAngle, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_8024B6F0);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+
+    guTranslateF(tempMtx, D_80249D70[gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70)], 0.0f, 0.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetTileSize(gMainGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
+                                        ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
+    gSPDisplayList(gMainGfxPos++, D_8024B708);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 230, 230, 230, 255);
+    gDPSetEnvColor(gMainGfxPos++, 232, 40, 160, 0);
+
+    guTranslateF(transformMtx, startX, startZ, 0.0f);
+    guScaleF(tempMtx, -1.0f, 1.0f, 1.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guRotateF(tempMtx, rotAngle, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_8024B6F0);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+
+    guTranslateF(tempMtx, D_80249D70[(gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70))], 0.0f, 0.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetTileSize(gMainGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
+                                        ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
+    gSPDisplayList(gMainGfxPos++, D_8024B708);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+
 }
 
 void func_PAL_8002B574(void); // TODO identify
 
 // TODO bad match, look into
-void filemenu_init(s32 arg0) {
+void filemenu_init(s32 mode) {
     MenuPanel** panelIt;
     MenuPanel* menu;
     s32 i;
 
     DMA_COPY_SEGMENT(ui_images_filemenu_pause);
 
-    for (i = 0; i < ARRAY_COUNT(filemenu_cursorHudElemID); i++) {
-        filemenu_cursorHudElemID[i] = hud_element_create(filemenu_cursor_hudElemScripts[i]);
-        hud_element_set_flags(filemenu_cursorHudElemID[i], HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
+    for (i = 0; i < ARRAY_COUNT(filemenu_cursorHIDs); i++) {
+        filemenu_cursorHIDs[i] = hud_element_create(filemenu_cursor_hudElemScripts[i]);
+        hud_element_set_flags(filemenu_cursorHIDs[i], HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
     }
 
-    filemenu_cursorHudElem = filemenu_cursorHudElemID[0];
-    if (arg0 == 0) {
+    filemenu_cursorHID = filemenu_cursorHIDs[0];
+    if (mode == 0) {
         filemenu_common_windowBPs[0].style.customStyle->background.imgData = NULL; // ???
     }
     setup_pause_menu_tab(filemenu_common_windowBPs, ARRAY_COUNT(filemenu_common_windowBPs));
 
 #if VERSION_PAL
-    if (arg0 != 2) {
-        filemenu_currentMenu = 0;
-        menu = filemenu_menus[0];
-        menu->page = filemenu_currentMenu;
+    if (mode != 2) {
+        filemenu_currentMenu = FILE_MENU_MAIN;
+        menu = filemenu_menus[FILE_MENU_MAIN];
+        menu->state = FM_MAIN_SELECT_FILE;
         func_PAL_8002B574();
 
-        if (menu->page == 0) {
+        if (menu->state == FM_MAIN_SELECT_FILE) {
             fio_load_globals();
             if (gSaveGlobals.lastFileSelected >= 4) {
                 gSaveGlobals.lastFileSelected = 0;
@@ -1057,32 +1066,32 @@ void filemenu_init(s32 arg0) {
                 (*panelIt)->fpInit((*panelIt));
             }
         }
-        update_window_hierarchy(WINDOW_ID_PAUSE_DECRIPTION, 64);
+        update_window_hierarchy(WIN_PAUSE_DECRIPTION, 64);
     } else {
-        filemenu_currentMenu = 4;
-        filemenu_set_selected(filemenu_menus[4], 0, gCurrentLanguage);
+        filemenu_currentMenu = FM_MAIN_SELECT_LANG_PAL;
+        filemenu_set_selected(filemenu_menus[FM_MAIN_SELECT_LANG_PAL], 0, gCurrentLanguage);
 
         panelIt = filemenu_menus;
         for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, panelIt++) {
-            if (i == 4) {
+            if (i == FM_MAIN_SELECT_LANG_PAL) {
                 if ((*panelIt)->fpInit != NULL) {
                     (*panelIt)->fpInit((*panelIt));
                 }
             }
         }
-        update_window_hierarchy(WINDOW_ID_PAUSE_DECRIPTION, 64);
+        update_window_hierarchy(WIN_PAUSE_DECRIPTION, 64);
     }
 #else
-    menu = filemenu_menus[0];
-    filemenu_currentMenu = 0;
+    filemenu_currentMenu = FILE_MENU_MAIN;
+    menu = filemenu_menus[FILE_MENU_MAIN];
 
-    if (arg0 == 0) {
-        menu->page = 0;
+    if (mode == 0) {
+        menu->state = FM_MAIN_SELECT_FILE;
     } else {
-        menu->page = 2;
+        menu->state = FM_MAIN_SELECT_LANG_DUMMY;
     }
 
-    if (menu->page == 0) {
+    if (menu->state == FM_MAIN_SELECT_FILE) {
         for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
             if (!fio_load_game(i)) {
                 gSaveSlotHasData[i] = FALSE;
@@ -1092,7 +1101,7 @@ void filemenu_init(s32 arg0) {
             }
         }
 
-        if (menu->page == 0) {
+        if (menu->state == FM_MAIN_SELECT_FILE) {
             fio_load_globals();
             if (gSaveGlobals.lastFileSelected >= 4) {
                 gSaveGlobals.lastFileSelected = 0;
@@ -1109,7 +1118,7 @@ void filemenu_init(s32 arg0) {
             (*panelIt)->fpInit((*panelIt));
         }
     }
-    update_window_hierarchy(WINDOW_ID_PAUSE_DECRIPTION, 64);
+    update_window_hierarchy(WIN_PAUSE_DECRIPTION, 64);
 #endif
 }
 
@@ -1118,8 +1127,8 @@ void filemenu_cleanup(void) {
     MenuPanel** panelIt;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(filemenu_cursorHudElemID); i++) {
-        hud_element_free(filemenu_cursorHudElemID[i]);
+    for (i = 0; i < ARRAY_COUNT(filemenu_cursorHIDs); i++) {
+        hud_element_free(filemenu_cursorHIDs[i]);
     }
 
     panelIt = filemenu_menus;
@@ -1131,21 +1140,28 @@ void filemenu_cleanup(void) {
         }
     }
 
-    for (i = WINDOW_ID_FILEMENU_MAIN; i < ARRAY_COUNT(gWindows); i++) {
+    for (i = WIN_FILES_MAIN; i < ARRAY_COUNT(gWindows); i++) {
         set_window_update(i, WINDOW_UPDATE_HIDE);
     }
 
-    set_window_update(WINDOW_ID_PAUSE_TUTORIAL, WINDOW_UPDATE_HIDE);
-    set_window_update(WINDOW_ID_PAUSE_DECRIPTION, WINDOW_UPDATE_HIDE);
-    func_80244BC4();
+    set_window_update(WIN_PAUSE_TUTORIAL, WINDOW_UPDATE_HIDE);
+    set_window_update(WIN_PAUSE_DECRIPTION, WINDOW_UPDATE_HIDE);
+    filemenu_get_exit_mode(); // part of a conditional that optimized out?
 }
 
-s32 func_80244BC4() {
-    if (filemenu_menus[0]->page == 0 && filemenu_currentMenu == 1 && filemenu_menus[1]->selected == 0) {
+s32 filemenu_get_exit_mode() {
+    if (filemenu_menus[FILE_MENU_MAIN]->state == FM_MAIN_SELECT_FILE
+        && filemenu_currentMenu == FILE_MENU_CONFIRM
+        && filemenu_menus[FILE_MENU_CONFIRM]->selected == 0
+    ) {
         return 2;
-    } else if (filemenu_menus[0]->page == 0 && filemenu_menus[0]->selected < 4) {
-        return 1;
-    } else {
-        return 0;
     }
+
+    if (filemenu_menus[FILE_MENU_MAIN]->state == FM_MAIN_SELECT_FILE
+        && filemenu_menus[FILE_MENU_MAIN]->selected <= FM_MAIN_OPT_FILE_4
+    ) {
+        return 1;
+    }
+
+    return 0;
 }

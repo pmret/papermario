@@ -10,7 +10,7 @@ void worker_delegate_do_nothing(void) {
 void clear_worker_list(void) {
     s32 i;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentWorkerListPtr = &gWorldWorkerList;
     } else {
         gCurrentWorkerListPtr = &gBattleWorkerList;
@@ -22,14 +22,14 @@ void clear_worker_list(void) {
 }
 
 void init_worker_list(void) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentWorkerListPtr = &gWorldWorkerList;
     } else {
         gCurrentWorkerListPtr = &gBattleWorkerList;
     }
 }
 
-s32 create_worker_world(void (*updateFunc)(void), void (*drawFunc)(void)) {
+s32 create_worker_scene(void (*updateFunc)(void), void (*renderFunc)(void)) {
     Worker* worker;
     s32 i;
 
@@ -49,12 +49,12 @@ s32 create_worker_world(void (*updateFunc)(void), void (*drawFunc)(void)) {
     if (updateFunc == NULL) {
         worker->update = worker_delegate_do_nothing;
     }
-    worker->draw = drawFunc;
-    if (drawFunc == NULL) {
+    worker->draw = renderFunc;
+    if (renderFunc == NULL) {
         worker->draw = worker_delegate_do_nothing;
     }
 
-    if (gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context != CONTEXT_WORLD) {
         i |= BATTLE_ENTITY_ID_BIT;
     }
     return i;
@@ -85,7 +85,7 @@ s32 create_worker_frontUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
         worker->draw = worker_delegate_do_nothing;
     }
 
-    if (gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context != CONTEXT_WORLD) {
         i |= BATTLE_ENTITY_ID_BIT;
     }
     return i;
@@ -116,7 +116,7 @@ s32 create_worker_backUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
         worker->draw = &worker_delegate_do_nothing;
     }
 
-    if (gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context != CONTEXT_WORLD) {
         i |= BATTLE_ENTITY_ID_BIT;
     }
     return i;
@@ -134,7 +134,7 @@ void update_workers(void) {
     }
 }
 
-void render_workers_world(void) {
+void render_workers_scene(void) {
     s32 i;
 
     for (i = 0; i < MAX_WORKERS; i++) {
@@ -174,7 +174,7 @@ void render_workers_backUI(void) {
 }
 
 void free_worker(s32 idx) {
-    if (!gGameStatusPtr->isBattle || (idx & BATTLE_ENTITY_ID_BIT)) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD || (idx & BATTLE_ENTITY_ID_BIT)) {
         idx &= ~BATTLE_ENTITY_ID_BIT;
         if ((*gCurrentWorkerListPtr)[idx] != NULL) {
             heap_free((*gCurrentWorkerListPtr)[idx]);

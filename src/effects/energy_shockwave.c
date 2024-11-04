@@ -24,7 +24,7 @@ void energy_shockwave_main(
 
     bp.init = energy_shockwave_init;
     bp.update = energy_shockwave_update;
-    bp.renderWorld = energy_shockwave_render;
+    bp.renderScene = energy_shockwave_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_ENERGY_SHOCKWAVE;
@@ -147,7 +147,7 @@ void energy_shockwave_appendGfx(void* effect) {
     s32 ult2;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_09000E60_376370);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 179, 30, data->unk_24);
     gDPSetEnvColor(gMainGfxPos++, data->unk_50, data->unk_51, data->unk_52, 128);

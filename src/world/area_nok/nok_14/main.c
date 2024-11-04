@@ -29,7 +29,7 @@ EvtScript N(EVS_ExitWalk_nok_13_2) = EVT_EXIT_WALK_NOK(60, nok_14_ENTRY_0, "nok_
 EvtScript N(EVS_ExitWalk_nok_15_0) = EVT_EXIT_WALK_NOK(60, nok_14_ENTRY_1, "nok_15", nok_15_ENTRY_0);
 
 EvtScript N(EVS_TexPan_Flowers) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_hana1, TEX_PANNER_0)
     Call(SetTexPanner, MODEL_hana3, TEX_PANNER_0)
     Call(SetTexPanner, MODEL_hana4, TEX_PANNER_0)
@@ -48,7 +48,7 @@ EvtScript N(EVS_TexPan_Flowers) = {
 };
 
 EvtScript N(EVS_TexPan_Water) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Thread
         Call(SetTexPanner, MODEL_suimen1, TEX_PANNER_1)
         Call(SetTexPanner, MODEL_suimen2, TEX_PANNER_1)

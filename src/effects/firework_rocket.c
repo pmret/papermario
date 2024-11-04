@@ -89,7 +89,7 @@ EffectInstance* firework_rocket_main(s32 variation, f32 centerX, f32 centerY, f3
 
     bp.init = firework_rocket_init;
     bp.update = firework_rocket_update;
-    bp.renderWorld = firework_rocket_render;
+    bp.renderScene = firework_rocket_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FIREWORK_ROCKET;
@@ -253,7 +253,7 @@ void firework_rocket_appendGfx(void* effect) {
     }
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     mtx_0_0 = camera->mtxPerspective[0][0];
     mtx_0_1 = camera->mtxPerspective[0][1];

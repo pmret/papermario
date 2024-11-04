@@ -40,10 +40,10 @@ API_CALLABLE(N(TackleAI_Main)) {
         enemy->varTable[6] = npc->collisionHeight;
         enemy->varTable[8] = 0;
         enemy->instigatorValue = 0;
-        enemy->aiFlags |= ENEMY_AI_FLAG_8;
+        enemy->aiFlags |= AI_FLAG_SKIP_EMOTE_AFTER_FLEE;
     }
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
+    if (isInitialCall || (enemy->aiFlags & AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = 0;
         npc->duration = 0;
         enemy->hitboxIsActive = FALSE;
@@ -60,13 +60,13 @@ API_CALLABLE(N(TackleAI_Main)) {
             npc->flags |= NPC_FLAG_FLYING;
         }
 
-        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+        if (enemy->aiFlags & AI_FLAG_SUSPEND) {
             EffectInstance* emoteTemp;
 
             script->AI_TEMP_STATE = 99;
             script->functionTemp[1] = 0;
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 40, &emoteTemp);
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+            enemy->aiFlags &= ~AI_FLAG_SUSPEND;
         } else if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {
             script->AI_TEMP_STATE = 12;
             enemy->flags &= ~ENEMY_FLAG_BEGIN_WITH_CHASING;

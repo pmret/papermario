@@ -86,7 +86,7 @@ void entity_SaveBlock_pause_game(void) {
 }
 
 void entity_SaveBlock_resume_game(void) {
-    set_time_freeze_mode(TIME_FREEZE_NORMAL);
+    set_time_freeze_mode(TIME_FREEZE_NONE);
     enable_player_input();
 }
 

@@ -23,7 +23,7 @@ void big_snowflakes_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.unk_00 = 0;
     bp.init = big_snowflakes_init;
     bp.update = big_snowflakes_update;
-    bp.renderWorld = big_snowflakes_render;
+    bp.renderScene = big_snowflakes_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_BIG_SNOWFLAKES;
 
@@ -115,7 +115,7 @@ void big_snowflakes_appendGfx(void* effect) {
     Gfx* dlist = D_E0060738[0];
     s32 i;
 
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, dlist);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 20, 100, 20, data->unk_24);
 

@@ -18,7 +18,7 @@ EffectInstance* whirlwind_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
 
     bp.init = whirlwind_init;
     bp.update = whirlwind_update;
-    bp.renderWorld = whirlwind_render;
+    bp.renderScene = whirlwind_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_WHIRLWIND;
@@ -172,7 +172,7 @@ void whirlwind_appendGfx(void* effect) {
     spB0 = data->unk_13C * 4.0f;
     spB4 = data->unk_140 * 4.0f;
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, OS_K0_TO_PHYSICAL(eff->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, OS_K0_TO_PHYSICAL(eff->shared->graphics));
 
     guTranslateF(sp20, 0.0f, 0.0f, 0.0f);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);

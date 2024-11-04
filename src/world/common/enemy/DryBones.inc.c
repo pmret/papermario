@@ -13,7 +13,7 @@ EvtScript N(EVS_NpcDefeat_ThrownBone) = {
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             Call(OnPlayerFled, 1)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return

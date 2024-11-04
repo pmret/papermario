@@ -35,10 +35,9 @@ void explosion_main(s32 type, f32 x, f32 y, f32 z) {
     bpPtr->unk_00 = 0;
     bpPtr->init = explosion_init;
     bpPtr->update = explosion_update;
-    bpPtr->renderWorld = explosion_render;
+    bpPtr->renderScene = explosion_render;
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_EXPLOSION;
-
 
     effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
@@ -92,7 +91,6 @@ void explosion_main(s32 type, f32 x, f32 y, f32 z) {
 
 void explosion_init(EffectInstance* effect) {
 }
-
 
 EFFECT_DEF_SMOKE_RING(smoke_ring_main);
 EFFECT_DEF_CONFETTI(confetti_main);
@@ -173,7 +171,7 @@ void explosion_appendGfx(void* effect) {
     s32 cond;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
     guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);

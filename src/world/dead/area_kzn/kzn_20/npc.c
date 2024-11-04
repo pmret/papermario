@@ -33,7 +33,7 @@ EVT_LETTER_PROMPT(Kolorado, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle
 EVT_LETTER_REWARD(Kolorado);
 
 EvtScript N(EVS_SpawnFallingDust) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Loop(0)
         Call(RandInt, 100, LVar0)
         Sub(LVar0, 100)
@@ -48,7 +48,7 @@ EvtScript N(EVS_SpawnFallingDust) = {
 };
 
 EvtScript N(EVS_ShakingWorld) = {
-    SetGroup(EVT_GROUP_0A)
+    SetGroup(EVT_GROUP_PASSIVE_NPC)
     IfGe(GB_StoryProgress, STORY_CH5_OPENED_ESCAPE_ROUTE)
         Exec(N(EVS_SpawnFallingDust))
     Else
@@ -105,7 +105,7 @@ s32 N(Kolorado_Wander2)[] = {
 
 EvtScript N(EVS_Kolorado_CalmIdle) = {
 #if !VERSION_JP
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
 #endif
     Label(0)
     Call(RandInt, 1, LVar1)
@@ -542,7 +542,7 @@ NpcData N(NpcData_Kolorado) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kolorado),
     .settings = &N(NpcSettings_Kolorado),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_RAYCAST_TO_INTERACT | ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,
@@ -554,7 +554,7 @@ NpcData N(NpcData_Misstar) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Misstar),
     .settings = &N(NpcSettings_StarSpirit),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = MISSTAR_ANIMS,
     .tattle = MSG_NpcTattle_Misstar,

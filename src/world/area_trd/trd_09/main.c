@@ -25,8 +25,8 @@ EvtScript N(EVS_EnterMap) = {
         Exec(N(EVS_BindExitTriggers))
         Return
     EndIf
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Exec(N(EVS_BindExitTriggers))
     Call(GetEntryID, LVar0)
     Switch(LVar0)
@@ -39,7 +39,7 @@ EvtScript N(EVS_EnterMap) = {
             Set(LVar3, MODEL_o65)
             ExecWait(EnterDoubleDoor)
     EndSwitch
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Return
     End
 };

@@ -13,35 +13,35 @@ extern Gfx D_09002428_37A3A8[];
 extern Gfx D_09002440_37A3C0[];
 extern Gfx D_09002458_37A3D8[];
 
-Gfx* D_E0076E90[] = { 
+Gfx* D_E0076E90[] = {
     [FX_AURA_CAPTURE]   D_090023E0_37A360,
     [FX_AURA_RED]       D_090023E0_37A360,
     [FX_AURA_BLUE]      D_09002440_37A3C0,
     [FX_AURA_GOLD]      D_09002440_37A3C0
 };
 
-Gfx* D_E0076EA0[] = { 
+Gfx* D_E0076EA0[] = {
     [FX_AURA_CAPTURE]   D_090023F8_37A378,
     [FX_AURA_RED]       D_090023F8_37A378,
     [FX_AURA_BLUE]      D_09002458_37A3D8,
     [FX_AURA_GOLD]      D_09002458_37A3D8
 };
 
-Gfx* D_E0076EB0[] = { 
+Gfx* D_E0076EB0[] = {
     [FX_AURA_CAPTURE]   D_090023B0_37A330,
     [FX_AURA_RED]       D_090023B0_37A330,
     [FX_AURA_BLUE]      D_09002410_37A390,
     [FX_AURA_GOLD]      D_09002410_37A390
 };
 
-Gfx* D_E0076EC0[] = { 
+Gfx* D_E0076EC0[] = {
     [FX_AURA_CAPTURE]   D_090023C8_37A348,
     [FX_AURA_RED]       D_090023C8_37A348,
     [FX_AURA_BLUE]      D_09002428_37A3A8,
     [FX_AURA_GOLD]      D_09002428_37A3A8
 };
 
-Gfx* D_E0076ED0[] = { 
+Gfx* D_E0076ED0[] = {
     [FX_AURA_CAPTURE]   D_09002000_379F80,
     [FX_AURA_RED]       D_09002000_379F80,
     [FX_AURA_BLUE]      D_090020E8_37A068,
@@ -63,7 +63,7 @@ void aura_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, EffectInstance
 
     bp.init = aura_init;
     bp.update = aura_update;
-    bp.renderWorld = aura_render;
+    bp.renderScene = aura_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_AURA;
@@ -300,7 +300,7 @@ void aura_appendGfx(void* argEffect) {
     s32 primA = data->primA;
     s32 v1, v2;
 
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_E0076ED0[type]);
 
     guTranslateF(translateMtx, data->posB.x, data->posB.y, data->posB.z);

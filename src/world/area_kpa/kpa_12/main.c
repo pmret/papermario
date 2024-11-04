@@ -3,7 +3,7 @@
 #include "world/common/atomic/TexturePan.inc.c"
 
 EvtScript N(EVS_ExitWalk_kpa_1X_Upper) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, kpa_12_ENTRY_0)
     Exec(ExitWalk)
     IfEq(GF_KPA16_ShutOffLava, FALSE)
@@ -17,7 +17,7 @@ EvtScript N(EVS_ExitWalk_kpa_1X_Upper) = {
 };
 
 EvtScript N(EVS_ExitWalk_kpa_1X_Lower) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, kpa_12_ENTRY_2)
     Exec(ExitWalk)
     IfEq(GF_KPA16_ShutOffLava, FALSE)

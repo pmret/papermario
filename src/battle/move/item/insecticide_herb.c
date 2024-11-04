@@ -92,7 +92,6 @@ Gfx N(displayList)[] = {
 
 EntityModelScript N(modelCommandList) = STANDARD_ENTITY_MODEL_SCRIPT(N(displayList), RENDER_MODE_ALPHATEST);
 
-
 EvtScript N(EVS_UseItem) = {
     SetConst(LVarA, ITEM_INSECTICIDE_HERB)
     ExecWait(N(UseItemWithEffect))

@@ -54,7 +54,7 @@ EvtScript N(EVS_UseMove_Basic) = {
     EndIf
     ExecWait(N(EVS_PlayQuakeFX))
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
@@ -82,7 +82,7 @@ EvtScript N(EVS_UseMove_Super) = {
     EndIf
     ExecWait(N(EVS_PlayQuakeFX))
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
@@ -110,7 +110,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
     EndIf
     ExecWait(N(EVS_PlayQuakeFX))
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)

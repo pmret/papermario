@@ -105,7 +105,7 @@ EvtScript N(EVS_Scene_MoveStatue) = {
 };
 
 EvtScript N(ItemPrompt_Statue) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(ShowKeyChoicePopup)
     IfLe(LVar0, 0)
@@ -113,7 +113,7 @@ EvtScript N(ItemPrompt_Statue) = {
             Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_RaphaelStatue, 160, 40)
         EndIf
         Call(CloseChoicePopup)
-        Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+        Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf
     Call(DisablePlayerInput, TRUE)
@@ -121,7 +121,7 @@ EvtScript N(ItemPrompt_Statue) = {
     Call(MakeItemEntity, ITEM_JADE_RAVEN, 0, 15, -400, ITEM_SPAWN_MODE_DECORATION, 0)
     Set(MV_JadeRavenItemIdx, LVar0)
     Call(CloseChoicePopup)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Call(SetPlayerAnimation, ANIM_MarioW1_PlaceItem | SPRITE_ID_BACK_FACING)
     Wait(20)
     Call(SetPlayerAnimation, ANIM_Mario1_Still)

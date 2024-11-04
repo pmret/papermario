@@ -29,7 +29,7 @@ s32 N(LeftDoorModels)[] = {
 EvtScript N(EVS_ExitDoors_kpa_113_1) = EVT_EXIT_DOUBLE_DOOR(kpa_82_ENTRY_0, "kpa_113", kpa_113_ENTRY_1, COLLIDER_deilittw, MODEL_o174, MODEL_o173);
 
 EvtScript N(EVS_ExitDoors_kpa_61_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, kpa_82_ENTRY_1)
     Set(LVar1, COLLIDER_o166)

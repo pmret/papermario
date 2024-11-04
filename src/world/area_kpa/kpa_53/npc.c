@@ -234,7 +234,7 @@ EvtScript N(EVS_NpcHit_Guardian) = {
                         Call(SpeakToPlayer, NPC_Follower, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_002B)
                     Else
                         Call(SpeakToPlayer, NPC_Follower, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_002C)
-                        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
+                        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, TRUE)
                         Call(BindNpcAI, NPC_Duplighost, Ref(N(EVS_NpcAI_Duplighost_Caught)))
                     EndIf
             EndSwitch
@@ -347,7 +347,7 @@ NpcData N(NpcData_Imposter)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Follower),
         .settings = &N(NpcSettings_Peach),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_USE_PLAYER_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_USE_PLAYER_SPRITE | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = PEACH_ANIMS,
         .tattle = MSG_NpcTattle_KPA_FakePrincessPeach,
@@ -358,7 +358,7 @@ NpcData N(NpcData_Imposter)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Guardian),
         .settings = &N(NpcSettings_Peach),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH,
+        .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH,
         .drops = NO_DROPS,
         .animations = PEACH_ANIMS,
         .tattle = MSG_NpcTattle_KPA_FakePrincessPeach,
@@ -369,7 +369,7 @@ NpcData N(NpcData_Imposter)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Duplighost),
         .settings = &N(NpcSettings_Duplighost),
-        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_NO_DROPS,
         .drops = {
             .dropFlags = NPC_DROP_FLAG_80,
             .itemDropChance = 5,

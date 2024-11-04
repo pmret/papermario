@@ -18,7 +18,7 @@ MapSettings N(settings) = {
     .background = &gBackgroundImage,
 };
 
-// note: sets DisablePlayerInput, but does not use EVT_GROUP_1B
+// note: sets DisablePlayerInput, but does not use EVT_GROUP_EXIT_MAP
 EvtScript N(EVS_ExitWalk_tst_10_2) = {
     Call(DisablePlayerInput, TRUE)
     Call(UseExitHeading, 60, tst_10_ENTRY_0)
@@ -29,7 +29,7 @@ EvtScript N(EVS_ExitWalk_tst_10_2) = {
     End
 };
 
-// note: sets DisablePlayerInput, but does not use EVT_GROUP_1B
+// note: sets DisablePlayerInput, but does not use EVT_GROUP_EXIT_MAP
 EvtScript N(EVS_ExitWalk_tst_10_3) = {
     Call(DisablePlayerInput, TRUE)
     Call(UseExitHeading, 60, tst_10_ENTRY_1)
@@ -40,7 +40,7 @@ EvtScript N(EVS_ExitWalk_tst_10_3) = {
     End
 };
 
-// note: sets DisablePlayerInput, but does not use EVT_GROUP_1B
+// note: sets DisablePlayerInput, but does not use EVT_GROUP_EXIT_MAP
 EvtScript N(EVS_ExitWalk_tst_10_0) = {
     Call(DisablePlayerInput, TRUE)
     Call(UseExitHeading, 60, tst_10_ENTRY_2)
@@ -51,7 +51,7 @@ EvtScript N(EVS_ExitWalk_tst_10_0) = {
     End
 };
 
-// note: sets DisablePlayerInput, but does not use EVT_GROUP_1B
+// note: sets DisablePlayerInput, but does not use EVT_GROUP_EXIT_MAP
 EvtScript N(EVS_ExitWalk_tst_10_1) = {
     Call(DisablePlayerInput, TRUE)
     Call(UseExitHeading, 60, tst_10_ENTRY_3)

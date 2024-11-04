@@ -36,7 +36,7 @@ EvtScript N(EVS_UpdateKooperFightSounds) = {
 };
 
 EvtScript N(EVS_PlayKooperVsFuzzyEffects) = {
-    SetGroup(EVT_GROUP_0A)
+    SetGroup(EVT_GROUP_PASSIVE_NPC)
     ExecGetTID(N(EVS_UpdateKooperFightSounds), MV_KooperFightSoundsScript)
     Label(0)
         Switch(GB_StoryProgress)

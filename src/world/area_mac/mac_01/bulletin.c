@@ -86,7 +86,6 @@ API_CALLABLE(N(SelectBulletinMessages)) {
     return ApiStatus_DONE2;
 }
 
-
 EvtScript N(EVS_ReadBulletin_News) = {
     Call(N(SelectBulletinMessages))
     Call(DisablePlayerInput, TRUE)

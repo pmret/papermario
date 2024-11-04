@@ -7,7 +7,7 @@ s32 NpcHitQueryAheadY;
 s32 NpcHitQueryBehindLeftY;
 s32 NpcHitQueryColliderID;
 
-PlayerStatus* gPlayerStatusPtr = &gPlayerStatus; // maybe wPlayerStatus
+PlayerStatus* gPlayerStatusPtr = &gPlayerStatus;
 
 // not used outside this file
 HitID npc_raycast_down(s32 ignoreFlags, f32* startX, f32* startY, f32* startZ, f32* hitDepth) {
@@ -275,7 +275,7 @@ b32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
     return FALSE;
 }
 
-s32 npc_raycast_up(s32 ignoreFlags, f32* startX, f32* startY, f32* startZ, f32* hitDepth) {
+b32 npc_raycast_up(s32 ignoreFlags, f32* startX, f32* startY, f32* startZ, f32* hitDepth) {
     f32 cHitX;
     f32 cHitY;
     f32 cHitZ;
@@ -331,7 +331,7 @@ s32 npc_raycast_up(s32 ignoreFlags, f32* startX, f32* startY, f32* startZ, f32* 
     }
 }
 
-s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length) {
+HitID npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length) {
     f32 hitX;
     f32 hitY;
     f32 hitZ;
@@ -343,7 +343,7 @@ s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length) 
     s32 entityID;
     f32 sx, sy, sz;
     f32 sx2, sy2, sz2;
-    s32 ret = NO_COLLIDER;
+    HitID ret = NO_COLLIDER;
 
     // needed to match
     sx2 = sx = *x;
@@ -444,9 +444,9 @@ HitID npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f
     return ret;
 }
 
-s32 npc_raycast_general(s32 flags, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX,
+HitID npc_raycast_general(s32 flags, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX,
                         f32* hitY, f32* hitZ, f32* outDepth, f32* hitNx, f32* hitNy, f32* hitNz) {
-    s32 ret;
+    HitID ret;
     s32 entityID;
 
     ret = NO_COLLIDER;

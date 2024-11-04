@@ -4,7 +4,7 @@ EvtScript N(EVS_ExitWalk_hos_03_1) = EVT_EXIT_WALK(60, hos_04_ENTRY_0, "hos_03",
 
 #if VERSION_JP
 EvtScript N(EVS_ExitWalk_hos_05_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o162, COLLIDER_FLAGS_UPPER_MASK)
     Call(UseExitHeading, 60, hos_04_ENTRY_1)
     Exec(ExitWalk)

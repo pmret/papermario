@@ -75,7 +75,7 @@ s32 LoopingSounds[] = {
     [SOUND_LOOP_IDX(SOUND_LOOP_TIK_UNUSED3_FLOW3)] SOUND_LRAW_WATER_FLOWING_3,
     [SOUND_LOOP_IDX(SOUND_LOOP_TIK_UNUSED3_FLOW2)] SOUND_LRAW_WATER_FLOWING_2,
     [SOUND_LOOP_IDX(SOUND_LOOP_SAM_STAIRS_RISE)] SOUND_LRAW_SAM_STAIRS_RISE,
-    [SOUND_LOOP_IDX(SOUND_LOOP_CHARGE_BAR)] SOUND_LRAW_CHARGE_BAR,
+    [SOUND_LOOP_IDX(SOUND_LOOP_CHARGE_METER)] SOUND_LRAW_CHARGE_METER,
     [SOUND_LOOP_IDX(SOUND_LOOP_CRYSTAL_BALL_GLOW)] SOUND_LRAW_CRYSTAL_BALL_GLOW,
     [SOUND_LOOP_IDX(SOUND_LOOP_TIK18_WATER)] SOUND_LRAW_TIK_WATER,
     [SOUND_LOOP_IDX(SOUND_LOOP_TIK19_WATER)] SOUND_LRAW_TIK_WATER,
@@ -311,7 +311,7 @@ void sfx_clear_sounds(void) {
 
 // name might be incorrect?
 void sfx_clear_env_sounds(s16 playSounds) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentEnvSounds = wEnvSounds;
     } else {
         gCurrentEnvSounds = bEnvSounds;
@@ -362,7 +362,7 @@ void sfx_stop_env_sounds(void) {
     SoundInstance* sound;
     s32 i;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gCurrentEnvSounds = wEnvSounds;
     } else {
         gCurrentEnvSounds = bEnvSounds;
@@ -619,7 +619,7 @@ void sfx_compute_spatialized_sound_params_ignore_depth(f32 x, f32 y, f32 z, s16*
         *volume = 1;
     }
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         // 25/75 at screen edge
         *pan = (screenX * 0.2f) + 32.0f;
     } else {

@@ -41,7 +41,7 @@ EffectInstance* radial_shimmer_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 
 
     bp.init = radial_shimmer_init;
     bp.update = radial_shimmer_update;
-    bp.renderWorld = radial_shimmer_render;
+    bp.renderScene = radial_shimmer_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_RADIAL_SHIMMER;
@@ -311,7 +311,7 @@ void radial_shimmer_appendGfx(void* effect) {
     dlist2 = D_E0066C50[temp_s5];
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp20, data->unk_10, data->unk_14, data->unk_18);
     guScaleF(sp60, data->unk_1C, data->unk_1C, 1.0f);

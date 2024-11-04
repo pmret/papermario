@@ -659,7 +659,7 @@
 
 #define EVT_EXIT_WALK(walkDistance, exitIdx, map, entryIdx) \
     { \
-        SetGroup(EVT_GROUP_1B) \
+        SetGroup(EVT_GROUP_EXIT_MAP) \
         Call(UseExitHeading, walkDistance, exitIdx) \
         Exec(ExitWalk) \
         Call(GotoMap, Ref(map), entryIdx) \
@@ -668,7 +668,7 @@
         End \
     }
 
-// alternate version of EVT_EXIT_WALK used on Pleasant Path which does not join EVT_GROUP_1B
+// alternate version of EVT_EXIT_WALK used on Pleasant Path which does not join EVT_GROUP_EXIT_MAP
 #define EVT_EXIT_WALK_NOK(walkDistance, exitIdx, map, entryIdx) \
     { \
         Call(UseExitHeading, walkDistance, exitIdx) \
@@ -682,7 +682,7 @@
 // alternate version of EVT_EXIT_WALK which includes a call to DisablePlayerInput
 #define EVT_EXIT_WALK_FIXED(walkDistance, exitIdx, map, entryIdx) \
     { \
-        SetGroup(EVT_GROUP_1B) \
+        SetGroup(EVT_GROUP_EXIT_MAP) \
         Call(DisablePlayerInput, TRUE) \
         Call(UseExitHeading, walkDistance, exitIdx) \
         Exec(ExitWalk) \
@@ -694,7 +694,7 @@
 
 #define EVT_EXIT_SINGLE_DOOR(exitIdx, map, entryIdx, colliderID, modelID, swingDir) \
     { \
-        SetGroup(EVT_GROUP_1B) \
+        SetGroup(EVT_GROUP_EXIT_MAP) \
         Call(DisablePlayerInput, TRUE) \
         Set(LVar0, exitIdx) \
         Set(LVar1, colliderID) \
@@ -710,7 +710,7 @@
 
 #define EVT_EXIT_SPLIT_SINGLE_DOOR(exitIdx, map, entryIdx, colliderID, topModelID, bottomModelID, swingDir) \
     { \
-        SetGroup(EVT_GROUP_1B) \
+        SetGroup(EVT_GROUP_EXIT_MAP) \
         Call(DisablePlayerInput, TRUE) \
         Set(LVar0, exitIdx) \
         Set(LVar1, colliderID) \
@@ -727,7 +727,7 @@
 
 #define EVT_EXIT_DOUBLE_DOOR(exitIdx, map, entryIdx, colliderID, leftDoorModelID, rightDoorModelID) \
     { \
-        SetGroup(EVT_GROUP_1B) \
+        SetGroup(EVT_GROUP_EXIT_MAP) \
         Call(DisablePlayerInput, TRUE) \
         Set(LVar0, exitIdx) \
         Set(LVar1, colliderID) \

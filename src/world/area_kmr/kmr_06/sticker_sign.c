@@ -108,7 +108,7 @@ API_CALLABLE(N(CreateSticker)) {
         iconPal);
 
     sticker->imgfxIdx = imgfx_get_free_instances(1);
-    sticker->workerID = create_worker_world(NULL, N(worker_render_sticker));
+    sticker->workerID = create_worker_scene(NULL, N(worker_render_sticker));
     evt_set_variable(script, MV_StickerData, (s32) sticker);
     evt_set_variable(script, MV_StickerImage, (s32) iconImg);
     evt_set_variable(script, MV_StickerPalette, (s32) iconPal);
@@ -218,8 +218,8 @@ API_CALLABLE(N(DeleteSticker)) {
 }
 
 EvtScript N(EVS_OnInspect_StickerSign) = {
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(DisablePlayerInput, TRUE)
     Call(ShowMessageAtScreenPos, MSG_Menus_Sign_EatMushroomsTip, 160, 40)
     IfEq(GF_KMR06_Item_Mushroom, FALSE)
@@ -244,7 +244,7 @@ EvtScript N(EVS_OnInspect_StickerSign) = {
             Wait(10)
         EndIf
     EndIf
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Call(DisablePlayerInput, FALSE)
     Return
     End

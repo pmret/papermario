@@ -155,14 +155,14 @@ API_CALLABLE(N(func_80241E24_97F8F4)) {
 }
 
 EvtScript N(EVS_NpcIdle_StoneChomp) = {
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, TRUE)
     Label(100)
     IfEq(GF_ISK05_Hammer2Block, FALSE)
         Wait(1)
         Goto(100)
     EndIf
     Call(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, FALSE)
     Thread
         Wait(5)
         Call(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_ISK_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
@@ -287,7 +287,7 @@ NpcData N(NpcData_StoneChomp) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_StoneChomp),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE,
     .drops = STONE_CHOMP_DROPS,
     .animations = STONE_CHOMP_ANIMS,
 };

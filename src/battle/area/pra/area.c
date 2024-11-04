@@ -18,7 +18,6 @@ extern Stage A(pra_03b);
 extern Stage A(pra_03c);
 extern Stage A(pra_04);
 
-
 Vec3i A(pos_swoopula)[] = {
     { 15, 133, -25 },
     { 55, 133, -25 },

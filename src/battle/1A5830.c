@@ -1578,7 +1578,7 @@ API_CALLABLE(RunToGoal) {
         if (actor->actorTypeData1b[0] >= 0) {
             actorState->dist = actor->actorTypeData1b[0] + 1;
         } else {
-            actorState->dist = ~actor->actorTypeData1b[0]; //TODO optimization?
+            actorState->dist = -(actor->actorTypeData1b[0] + 1);
         }
         if ((actor->actorTypeData1[0] != 0) && (actor->actorTypeData1[1] == 0)) {
             sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
@@ -1704,7 +1704,7 @@ API_CALLABLE(IdleRunToGoal) {
         if (actor->actorTypeData1b[0] >= 0) {
             movement->dist = actor->actorTypeData1b[0] + 1;
         } else {
-            movement->dist = ~actor->actorTypeData1b[0];
+            movement->dist = -(actor->actorTypeData1b[0] + 1);
         }
         script->functionTemp[0] = TRUE;
     }
@@ -2022,7 +2022,7 @@ API_CALLABLE(RunPartTo) {
         if (part->actorTypeData2b[0] >= 0) {
             movement->dist = part->actorTypeData2b[0] + 1;
         } else {
-            movement->dist = ~part->actorTypeData2b[0];
+            movement->dist = -(part->actorTypeData2b[0] + 1);
         }
         if (part->partTypeData[0] != 0 && part->partTypeData[1] == 0) {
             sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_DEFAULT, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
@@ -2219,7 +2219,7 @@ API_CALLABLE(FlyToGoal) {
         if (actor->actorTypeData1b[1] >= 0) {
             actorState->vel = actor->actorTypeData1b[1] + 1;
         } else {
-            actorState->vel = ~actor->actorTypeData1b[1];
+            actorState->vel = -(actor->actorTypeData1b[1] + 1);
         }
         if ((actor->actorTypeData1[2] != 0) && (actor->actorTypeData1[3] == 0)) {
             sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
@@ -2484,7 +2484,7 @@ API_CALLABLE(FlyPartTo) {
         if (part->actorTypeData2b[1] >= 0) {
             partMovement->unk_2C = actor->actorTypeData1b[1] + 1;
         } else {
-            partMovement->unk_2C = ~actor->actorTypeData1b[1];
+            partMovement->unk_2C = -(actor->actorTypeData1b[1] + 1);
         }
     }
 

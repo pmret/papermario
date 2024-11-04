@@ -16,7 +16,7 @@ s32 N(BothLeftDoorModelsL)[] = { MODEL_o772, MODEL_o844, MODEL_o859, MODEL_o860,
 s32 N(BothLeftDoorModelsR)[] = { MODEL_o768, MODEL_o846, MODEL_o861, MODEL_o862, -1 };
 
 EvtScript N(EVS_ExitDoors_pra_02_2) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, 0)
@@ -51,7 +51,7 @@ EvtScript N(EVS_Unused_2) = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_02_3) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, 3)

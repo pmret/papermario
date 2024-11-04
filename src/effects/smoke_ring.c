@@ -43,7 +43,7 @@ void smoke_ring_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
 
     bpPtr->init = smoke_ring_init;
     bpPtr->update = smoke_ring_update;
-    bpPtr->renderWorld = smoke_ring_render;
+    bpPtr->renderScene = smoke_ring_render;
     bpPtr->unk_00 = 0;
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_SMOKE_RING;
@@ -137,7 +137,7 @@ void smoke_ring_appendGfx(void* effect) {
     }
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_09002950_32B7F0);
 
     guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);

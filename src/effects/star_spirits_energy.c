@@ -100,7 +100,7 @@ EffectInstance* star_spirits_energy_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3,
 
     bp.init = star_spirits_energy_init;
     bp.update = star_spirits_energy_update;
-    bp.renderWorld = star_spirits_energy_render;
+    bp.renderScene = star_spirits_energy_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_STAR_SPIRITS_ENERGY;
@@ -343,7 +343,7 @@ void star_spirits_energy_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f,
                      data->unk_3C, data->unk_08, data->unk_0C, data->unk_10);

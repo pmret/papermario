@@ -155,7 +155,7 @@ void action_update_first_strike(void) {
 
     if (playerStatus->curStateTime != 0) {
         playerStatus->curStateTime--;
-    } else if (!gGameStatusPtr->isBattle) {
+    } else if (gGameStatusPtr->context == CONTEXT_WORLD) {
         set_action_state(ACTION_STATE_IDLE);
     }
 }

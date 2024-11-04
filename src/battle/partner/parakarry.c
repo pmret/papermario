@@ -68,7 +68,8 @@ API_CALLABLE(N(ShellShotActionCommand)) {
     s32 screenX, screenY, screenZ;
     f32 aimX, aimY, aimZ;
     f32 clampedAngleDiff, aimAngle;
-    s32 hudID, i;
+    HudElemID hid;
+    s32 i;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
@@ -76,68 +77,68 @@ API_CALLABLE(N(ShellShotActionCommand)) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            hudMarkers[0] = hudID = hud_element_create(&HES_AimMarkerF);
-            hud_element_set_render_depth(hudID, 10);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hudMarkers[0] = hid = hud_element_create(&HES_AimMarkerF);
+            hud_element_set_render_depth(hid, 10);
+            hud_element_set_render_pos(hid, -100, -100);
 
-            hudMarkers[1] = hudID = hud_element_create(&HES_AimMarkerE);
-            hud_element_set_render_depth(hudID, 10);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hudMarkers[1] = hid = hud_element_create(&HES_AimMarkerE);
+            hud_element_set_render_depth(hid, 10);
+            hud_element_set_render_pos(hid, -100, -100);
 
-            hudMarkers[2] = hudID = hud_element_create(&HES_AimMarkerD);
-            hud_element_set_render_depth(hudID, 10);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hudMarkers[2] = hid = hud_element_create(&HES_AimMarkerD);
+            hud_element_set_render_depth(hid, 10);
+            hud_element_set_render_pos(hid, -100, -100);
 
-            hudMarkers[3] = hudID = hud_element_create(&HES_AimMarkerC);
-            hud_element_set_render_depth(hudID, 10);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hudMarkers[3] = hid = hud_element_create(&HES_AimMarkerC);
+            hud_element_set_render_depth(hid, 10);
+            hud_element_set_render_pos(hid, -100, -100);
 
-            hudMarkers[4] = hudID = hud_element_create(&HES_AimMarkerB);
-            hud_element_set_render_depth(hudID, 10);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hudMarkers[4] = hid = hud_element_create(&HES_AimMarkerB);
+            hud_element_set_render_depth(hid, 10);
+            hud_element_set_render_pos(hid, -100, -100);
 
-            hudMarkers[5] = hudID = hud_element_create(&HES_AimMarkerA);
-            hud_element_set_render_depth(hudID, 10);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hudMarkers[5] = hid = hud_element_create(&HES_AimMarkerA);
+            hud_element_set_render_depth(hid, 10);
+            hud_element_set_render_pos(hid, -100, -100);
 
-            hudMarkers[6] = hudID = hud_element_create(&HES_AimReticle);
-            hud_element_set_render_depth(hudID, 10);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hudMarkers[6] = hid = hud_element_create(&HES_AimReticle);
+            hud_element_set_render_depth(hid, 10);
+            hud_element_set_render_pos(hid, -100, -100);
 
-            hudShimmers[0] = hudID = hud_element_create(&HES_AimShimmerF);
-            hud_element_set_render_depth(hudID, 9);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hudShimmers[0] = hid = hud_element_create(&HES_AimShimmerF);
+            hud_element_set_render_depth(hid, 9);
+            hud_element_set_render_pos(hid, -100, -100);
 
-            hudShimmers[1] = hudID = hud_element_create(&HES_AimShimmerE);
-            hud_element_set_render_depth(hudID, 9);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hudShimmers[1] = hid = hud_element_create(&HES_AimShimmerE);
+            hud_element_set_render_depth(hid, 9);
+            hud_element_set_render_pos(hid, -100, -100);
 
-            hudShimmers[2] = hudID = hud_element_create(&HES_AimShimmerD);
-            hud_element_set_render_depth(hudID, 9);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hudShimmers[2] = hid = hud_element_create(&HES_AimShimmerD);
+            hud_element_set_render_depth(hid, 9);
+            hud_element_set_render_pos(hid, -100, -100);
 
-            hudShimmers[3] = hudID = hud_element_create(&HES_AimShimmerC);
-            hud_element_set_render_depth(hudID, 9);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hudShimmers[3] = hid = hud_element_create(&HES_AimShimmerC);
+            hud_element_set_render_depth(hid, 9);
+            hud_element_set_render_pos(hid, -100, -100);
 
-            hudShimmers[4] = hudID = hud_element_create(&HES_AimShimmerB);
-            hud_element_set_render_depth(hudID, 9);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hudShimmers[4] = hid = hud_element_create(&HES_AimShimmerB);
+            hud_element_set_render_depth(hid, 9);
+            hud_element_set_render_pos(hid, -100, -100);
 
-            hudShimmers[5] = hudID = hud_element_create(&HES_AimShimmerA);
-            hud_element_set_render_depth(hudID, 9);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hudShimmers[5] = hid = hud_element_create(&HES_AimShimmerA);
+            hud_element_set_render_depth(hid, 9);
+            hud_element_set_render_pos(hid, -100, -100);
 
-            hudTarget = hudID = hud_element_create(&HES_AimTarget);
-            hud_element_set_render_depth(hudID, 10);
+            hudTarget = hid = hud_element_create(&HES_AimTarget);
+            hud_element_set_render_depth(hid, 10);
             hud_element_create_transform_A(hudTarget);
-            hud_element_set_render_pos(hudID, -100, -100);
+            hud_element_set_render_pos(hid, -100, -100);
             hudStickPosX = -48;
             hudStickPosY = 80;
 
-            hudStick = hudID = hud_element_create(&HES_StickHoldLeft);
-            hud_element_set_render_pos(hudID, hudStickPosX, hudStickPosY);
-            hud_element_set_render_depth(hudID, 0);
+            hudStick = hid = hud_element_create(&HES_StickHoldLeft);
+            hud_element_set_render_pos(hid, hudStickPosX, hudStickPosY);
+            hud_element_set_render_depth(hid, 0);
 
             set_goal_pos_to_part(state, parakarry->targetActorID, parakarry->targetPartID);
             targetActor = get_actor(parakarry->targetActorID);
@@ -155,7 +156,6 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             state->bounceDivisor = state->angle;
             state->dist = 116.0f;
             state->unk_18.x = state->angle;
-            i = 0;
 
             for (i = 0; i < 30; i++) {
                 state->unk_18.x -= 1.0f;
@@ -172,7 +172,6 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             }
 
             state->unk_18.y = state->angle;
-            i = 0;
 
             for (i = 0; i < 30; i++) {
                 state->unk_18.y += 1.0f;
@@ -198,7 +197,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
 #endif
             battleStatus->actionResult = ACTION_RESULT_FAIL;
             action_command_init_status();
-            func_80269118();
+            increment_action_command_attempt_count();
             script->functionTemp[0] = 1;
             break;
         case 1:
@@ -271,14 +270,14 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             } else {
                 battleStatus->actionResult = ACTION_RESULT_FAIL;
             }
-            battleStatus->actionQuality = 0;
+            battleStatus->actionProgress = 0;
 
             if (aimAngle < 7.0f) {
-                battleStatus->actionQuality = 1;
+                battleStatus->actionProgress = 1;
                 battleStatus->actionResult = ACTION_RESULT_SUCCESS;
-                func_80269160();
+                increment_action_command_success_count();
             } else if (state->angle < state->bounceDivisor) {
-                battleStatus->actionQuality = -1;
+                battleStatus->actionProgress = -1;
             }
 
             for (i = 0; i < ARRAY_COUNT(hudMarkers); i++) {
@@ -291,35 +290,35 @@ API_CALLABLE(N(ShellShotActionCommand)) {
 
             hud_element_free(hudTarget);
             hud_element_free(hudStick);
-            btl_set_popup_duration(0);
+            btl_set_popup_duration(POPUP_MSG_OFF);
             return ApiStatus_DONE2;
     }
 
     if (script->functionTemp[0] < 3) {
         if (script->functionTemp[0] > 0) {
-            hudID = hudStick;
+            hid = hudStick;
             targetActor = get_actor(parakarry->targetActorID);
             clampedAngleDiff = get_clamped_angle_diff(state->angle, state->bounceDivisor);
             aimAngle = fabsf(clampedAngleDiff) / state->unk_24 * targetActor->scalingFactor;
 
             if (aimAngle < 7.0f) {
-                hud_element_set_script(hudID, &HES_StickNeutral);
+                hud_element_set_script(hid, &HES_StickNeutral);
             } else {
-                hud_element_set_script(hudID, &HES_StickHoldLeft);
+                hud_element_set_script(hid, &HES_StickHoldLeft);
             }
 
             hudStickPosX += 20;
             if (hudStickPosX >= 51) {
                 hudStickPosX = 50;
             }
-            hud_element_set_render_pos(hudID, hudStickPosX, hudStickPosY);
+            hud_element_set_render_pos(hid, hudStickPosX, hudStickPosY);
         }
     }
 
     get_screen_coords(gCurrentCameraID, state->goalPos.x, state->goalPos.y, state->goalPos.z, &screenX, &screenY, &screenZ);
-    hudID = hudTarget;
-    hud_element_set_render_pos(hudID, screenX, screenY);
-    hud_element_set_transform_rotation(hudID, 0.0f, 0.0f, hudTargetRotation);
+    hid = hudTarget;
+    hud_element_set_render_pos(hid, screenX, screenY);
+    hud_element_set_transform_rotation(hid, 0.0f, 0.0f, hudTargetRotation);
     hudTargetRotation -= 10;
     hudTargetRotation = clamp_angle(hudTargetRotation);
 
@@ -340,12 +339,12 @@ API_CALLABLE(N(ShellShotActionCommand)) {
                 z += (aimZ - state->curPos.z) / 6.0f;
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
                 hud_element_set_render_pos(hudMarkers[i], screenX, screenY);
-                hudID = hudShimmers[i];
-                hud_element_set_render_pos(hudID, screenX, screenY);
+                hid = hudShimmers[i];
+                hud_element_set_render_pos(hid, screenX, screenY);
             }
 
             hud_element_set_render_pos(hudMarkers[i], screenX, screenY);
-            btl_set_popup_duration(99);
+            btl_set_popup_duration(POPUP_MSG_ON);
         }
     }
 
@@ -357,13 +356,13 @@ API_CALLABLE(N(GetShellShotDamage)) {
     s32 damage = 0;
 
     switch (battleStatus->partnerActor->actorBlueprint->level) {
-        case 0:
+        case PARTNER_RANK_NORMAL:
             damage = 5;
             break;
-        case 1:
+        case PARTNER_RANK_SUPER:
             damage = 6;
             break;
-        case 2:
+        case PARTNER_RANK_ULTRA:
             damage = 7;
             break;
     }
@@ -448,7 +447,7 @@ API_CALLABLE(N(CarryAway)) {
             }
 
             if (parakarry->state.curPos.x > 240.0f) {
-                battleStatus->actionQuality = temp_s4;
+                battleStatus->actionProgress = temp_s4;
                 return ApiStatus_DONE2;
             }
             break;
@@ -712,7 +711,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
@@ -946,7 +945,7 @@ EvtScript N(skyDive) = {
     Call(FlyToGoal, ACTOR_PARTNER, 0, -10, EASING_COS_IN_OUT)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Still)
     Wait(3)
-    Call(action_command_jump_start, 32, 3)
+    Call(action_command_jump_start, 32, AC_DIFFICULTY_3)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_PARAKARRY_PREDIVE)
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_FlyFast)
@@ -987,7 +986,7 @@ EvtScript N(skyDive) = {
     Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_PostDive)
     Wait(2)
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             Call(PartnerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
@@ -1022,7 +1021,7 @@ EvtScript N(shellShot) = {
     Call(N(ShellShotActionCommand))
     Call(StopSound, SOUND_AIM_SHELL_SHOT)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_PARAKARRY_SHELL_SHOT)
-    Call(GetActionQuality, LVar0)
+    Call(GetActionProgress, LVar0)
     Call(PartnerTestEnemy, LVarA, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     IfEq(LVarA, HIT_RESULT_MISS)
         Set(LVar0, -2)
@@ -1043,7 +1042,7 @@ EvtScript N(shellShot) = {
             Call(SetGoalToTarget, ACTOR_PARTNER)
             Call(AddGoalPos, ACTOR_PARTNER, 50, -50, 0)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_ShellFlyFastest)
-            Call(FlyToGoal, ACTOR_PARTNER, 7, 0, 0x00000064)
+            Call(FlyToGoal, ACTOR_PARTNER, 7, 0, 100)
             Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
         CaseEq(0)
             Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
@@ -1126,7 +1125,7 @@ EvtScript N(airLift) = {
     Wait(2)
     Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     IfEq(LVar0, HIT_RESULT_MISS)
-        Call(CloseActionCommandInfo)
+        Call(InterruptActionCommand)
         Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
         Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         Add(LVar1, 20)
@@ -1148,15 +1147,15 @@ EvtScript N(airLift) = {
     Call(PartnerTestEnemy, LVar0, DAMAGE_TYPE_AIR_LIFT, SUPPRESS_EVENT_SPIKY_FRONT, 0, 0, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
     Call(N(AirLiftChance))
     IfNe(LVar0, -1)
-        Call(action_command_air_lift_start, 0, 87 * DT, 3, 0)
+        Call(action_command_air_lift_start, 0, 87 * DT, AC_DIFFICULTY_3, 0)
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
         ChildThread
             Wait(1)
-            Call(GetActionQuality, LVar1)
+            Call(GetActionProgress, LVar1)
             Div(LVar1, 10)
             Add(LVar1, 1)
             Loop(88 * DT)
-                Call(GetActionQuality, LVar0)
+                Call(GetActionProgress, LVar0)
                 Set(LVar2, LVar1)
                 Mul(LVar2, 10)
                 IfGt(LVar0, LVar2)
@@ -1169,9 +1168,9 @@ EvtScript N(airLift) = {
             EndLoop
         EndChildThread
         Wait(90 * DT)
-        Call(GetActionSuccessCopy, LVar0)
+        Call(GetMashActionQuality, LVar0)
     Else
-        Call(CloseActionCommandInfo)
+        Call(InterruptActionCommand)
         Set(LVar0, 0)
     EndIf
     Switch(LVar0)
@@ -1221,7 +1220,7 @@ EvtScript N(airRaid) = {
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Run)
     Call(FlyToGoal, ACTOR_PARTNER, 15, -2, EASING_LINEAR)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Idle)
-    Call(action_command_air_raid_start, 0, 90 * DT, 3)
+    Call(action_command_air_raid_start, 0, 90 * DT, AC_DIFFICULTY_3)
     Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     Wait(2)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_PreDive)
@@ -1254,7 +1253,7 @@ EvtScript N(airRaid) = {
     Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
     Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(MoveBattleCamOver, 20)
-    Call(GetActionQuality, LVar0)
+    Call(GetActionProgress, LVar0)
     Call(N(GetAirRaidDamage))
     Call(InitTargetIterator)
     Label(10)
@@ -1263,7 +1262,7 @@ EvtScript N(airRaid) = {
     IfEq(LVar0, 6)
         Goto(11)
     EndIf
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(99)
             Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_ALT_SPIKY, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
@@ -1278,7 +1277,7 @@ EvtScript N(airRaid) = {
     IfNe(LVar0, ITER_NO_MORE)
         Goto(10)
     EndIf
-    Call(GetPartnerActionSuccess, LVar0)
+    Call(GetPartnerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(99)
             Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)

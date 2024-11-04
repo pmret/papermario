@@ -39,7 +39,7 @@ EffectInstance* motion_blur_flame_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f
 
     bp.init = motion_blur_flame_init;
     bp.update = motion_blur_flame_update;
-    bp.renderWorld = motion_blur_flame_render;
+    bp.renderScene = motion_blur_flame_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_MOTION_BLUR_FLAME;
@@ -154,7 +154,7 @@ void motion_blur_flame_appendGfx(void* effect) {
     s32 var_v1;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_E00A29D0[temp_a2]);
 
     for (i = 0; i < UNK_ARRAY_SIZE_1; i++) {

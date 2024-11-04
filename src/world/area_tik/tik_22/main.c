@@ -10,7 +10,7 @@ API_CALLABLE(N(ResetTrackVolumes)) {
 }
 
 EvtScript N(EVS_ExitDoors_tik_21_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(N(ResetTrackVolumes))
     Set(LVar0, tik_22_ENTRY_0)

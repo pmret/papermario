@@ -109,7 +109,7 @@ EvtScript N(EVS_EnterMap) = {
 };
 
 EvtScript N(EVS_ExitDoors_trd_09_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, trd_10_ENTRY_0)
     Set(LVar1, COLLIDER_ttw)

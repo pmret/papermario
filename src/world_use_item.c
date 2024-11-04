@@ -76,7 +76,7 @@ API_CALLABLE(WorldItem_PauseTime) {
 }
 
 API_CALLABLE(WorldItem_UnpauseTime) {
-    set_time_freeze_mode(TIME_FREEZE_NORMAL);
+    set_time_freeze_mode(TIME_FREEZE_NONE);
 #if !VERSION_JP
     gOverrideFlags &= ~GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS;
 #endif
@@ -110,7 +110,7 @@ API_CALLABLE(WorldItem_ConsumeItem) {
 }
 
 EvtScript EVS_WorldItem_ShowUsedItem = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetPlayerAnimation, ANIM_Mario1_UsePower)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Add(LVar1, 45)
@@ -152,7 +152,7 @@ EvtScript EVS_WorldItem_PlayDrinkingSounds = {
 };
 
 EvtScript EVS_World_UseItem = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(DisablePlayerInput, TRUE)
     Call(GetPartnerInUse, LVar0)
     IfNe(LVar0, 0)

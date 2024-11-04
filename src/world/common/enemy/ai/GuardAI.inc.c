@@ -29,7 +29,7 @@ void N(GuardAI_IdleInit)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVo
     npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
     script->AI_TEMP_STATE = AI_STATE_GUARD_IDLE;
 
-    if (enemy->flags & ENEMY_FLAG_100000) {
+    if (enemy->flags & ENEMY_FLAG_SKIP_BATTLE) {
         npc->yaw = enemy->varTable[0];
     }
 
@@ -205,7 +205,7 @@ API_CALLABLE(N(GuardAI_Main)) {
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
+    if (isInitialCall || (enemy->aiFlags & AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = AI_STATE_GUARD_IDLE_INIT;
         npc->duration = 0;
         enemy->varTable[0] = npc->yaw;
@@ -220,10 +220,10 @@ API_CALLABLE(N(GuardAI_Main)) {
             npc->flags |= NPC_FLAG_FLYING;
         }
 
-        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+        if (enemy->aiFlags & AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = 15;
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+            enemy->aiFlags &= ~AI_FLAG_SUSPEND;
         } else if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
             enemy->flags &= ~ENEMY_FLAG_BEGIN_WITH_CHASING;

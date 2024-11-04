@@ -35,7 +35,7 @@ EvtScript N(EVS_CloseHangerDoor) = {
 };
 
 EvtScript N(EVS_ExitDoor_kpa_62_3) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Exec(N(EVS_OpenHangerDoor))
     Wait(15)

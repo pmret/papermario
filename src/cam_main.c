@@ -205,8 +205,8 @@ void render_frame(s32 isSecondPass) {
                 }
                 render_player();
                 render_npcs();
-                render_workers_world();
-                render_effects_world();
+                render_workers_scene();
+                render_effects_scene();
                 execute_render_tasks();
                 render_transformed_hud_elements();
             } else {
@@ -219,7 +219,7 @@ void render_frame(s32 isSecondPass) {
                 render_item_entities();
             }
         } else {
-            render_workers_world();
+            render_workers_scene();
             execute_render_tasks();
         }
 
@@ -366,7 +366,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->lookAt_obj.x = 0;
     camera->lookAt_obj.y = 0;
     camera->lookAt_obj.z = -100.0f;
-    camera->curYaw = 0;
+    camera->curYaw = 0.0f;
     camera->curBoomLength = 0;
     camera->targetOffsetY = 0;
     camera->curBoomYaw = 0.0f;

@@ -161,7 +161,7 @@ NpcData N(NpcData_Prisoners)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Toad_01),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+        .flags = BASE_PASSIVE_FLAGS,
         .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_KPA_ToadHouseToadB,
@@ -172,7 +172,7 @@ NpcData N(NpcData_Prisoners)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Toad_02),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+        .flags = BASE_PASSIVE_FLAGS,
         .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveToadD,
@@ -183,7 +183,7 @@ NpcData N(NpcData_Prisoners)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_ToadGuard),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+        .flags = BASE_PASSIVE_FLAGS,
         .drops = NO_DROPS,
         .animations = TOAD_GUARD_RED_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveSoldierC,
@@ -194,7 +194,7 @@ NpcData N(NpcData_Prisoners)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Penguin),
         .settings = &N(NpcSettings_Penguin),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+        .flags = BASE_PASSIVE_FLAGS,
         .drops = NO_DROPS,
         .animations = PENGUIN_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptivePenguin,
@@ -214,7 +214,7 @@ EvtScript N(EVS_NpcDefeat_Koopatrol) = {
             Set(GF_KPA95_Defeated_Guard, TRUE)
             Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             Call(MakeItemEntity, ITEM_PRISON_KEY, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA95_Item_PrisonKey1)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -251,7 +251,7 @@ NpcData N(NpcData_Koopatrol) = {
     },
     .init = &N(EVS_NpcInit_Koopatrol),
     .settings = &N(NpcSettings_Koopatrol_Patrol),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = KOOPATROL_ANIMS,
 };

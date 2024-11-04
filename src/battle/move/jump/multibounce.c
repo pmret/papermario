@@ -7,7 +7,7 @@
 
 #include "battle/common/move/JumpSupport.inc.c"
 
-s32 N(DifficultyTable)[] = {
+Difficulty1D N(DifficultyTable) = {
     7, 6, 5, 4, 3, 2, 1, 0
 };
 
@@ -37,7 +37,7 @@ EvtScript N(EVS_UseMove_Basic) = {
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
     ExecWait(N(EVS_JumpSupport_Approach))
     ExecWait(N(EVS_JumpSupport_CalcJumpTime))
-    Call(action_command_jump_start, LVarA, 1)
+    Call(action_command_jump_start, LVarA, AC_DIFFICULTY_1)
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
@@ -53,7 +53,7 @@ EvtScript N(EVS_UseMove_Basic) = {
         Set(LFlag0, TRUE)
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(0)
             IfFalse(LFlag0)
@@ -86,7 +86,7 @@ EvtScript N(EVS_UseMove_Basic) = {
             EndIf
         EndCaseGroup
     EndSwitch
-    Call(GetActionResult, LVarE)
+    Call(GetJumpActionQuality, LVarE)
     Add(LVarF, 1)
     Set(LFlag0, FALSE)
     Label(10)
@@ -96,7 +96,7 @@ EvtScript N(EVS_UseMove_Basic) = {
     IfEq(LVarF, LVar0)
         Set(LFlag0, TRUE)
     EndIf
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     IfEq(LFlag0, TRUE)
@@ -106,7 +106,7 @@ EvtScript N(EVS_UseMove_Basic) = {
     Call(SetGoalToTarget, ACTOR_PLAYER)
     ExecWait(N(EVS_JumpSupport_CalcJumpTime))
     Add(LVarA, 5)
-    Call(action_command_jump_start, LVarA, 3)
+    Call(action_command_jump_start, LVarA, AC_DIFFICULTY_3)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_SpinFall)
     IfEq(LVarF, 1)
@@ -120,7 +120,7 @@ EvtScript N(EVS_UseMove_Basic) = {
         Return
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             IfEq(LFlag0, FALSE)
@@ -152,7 +152,7 @@ EvtScript N(EVS_UseMove_Basic) = {
             Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EndSwitch
     Call(SetActionResult, LVarE)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseOrEq(FALSE)
         CaseOrEq(2)
@@ -188,7 +188,7 @@ EvtScript N(EVS_UseMove_Super) = {
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
     ExecWait(N(EVS_JumpSupport_Approach))
     ExecWait(N(EVS_JumpSupport_CalcJumpTime))
-    Call(action_command_jump_start, LVarA, 1)
+    Call(action_command_jump_start, LVarA, AC_DIFFICULTY_1)
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
@@ -204,7 +204,7 @@ EvtScript N(EVS_UseMove_Super) = {
         Set(LFlag0, TRUE)
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             IfEq(LFlag0, FALSE)
@@ -237,7 +237,7 @@ EvtScript N(EVS_UseMove_Super) = {
             EndIf
         EndCaseGroup
     EndSwitch
-    Call(GetActionResult, LVarE)
+    Call(GetJumpActionQuality, LVarE)
     Set(LFlag0, FALSE)
     Set(LVarF, 0)
     Add(LVarF, 1)
@@ -247,14 +247,14 @@ EvtScript N(EVS_UseMove_Super) = {
     IfEq(LVarF, LVar0)
         Set(LFlag0, TRUE)
     EndIf
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     IfEq(LFlag0, TRUE)
         Call(ShowActionHud, FALSE)
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_MULTIBOUNCE)
-    Call(action_command_jump_start, 37, 3)
+    Call(action_command_jump_start, 37, AC_DIFFICULTY_3)
     Call(ChooseNextTarget, ITER_NEXT, LVar0)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_PLAYER)
@@ -276,7 +276,7 @@ EvtScript N(EVS_UseMove_Super) = {
         Return
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             IfEq(LFlag0, FALSE)
@@ -308,7 +308,7 @@ EvtScript N(EVS_UseMove_Super) = {
             Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EndSwitch
     Call(SetActionResult, LVarE)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseOrEq(FALSE)
         CaseOrEq(2)
@@ -344,7 +344,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
     Call(SetActionDifficultyTable, Ref(N(DifficultyTable)))
     ExecWait(N(EVS_JumpSupport_Approach))
     ExecWait(N(EVS_JumpSupport_CalcJumpTime))
-    Call(action_command_jump_start, LVarA, 1)
+    Call(action_command_jump_start, LVarA, AC_DIFFICULTY_1)
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_JUMP_MIDAIR)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
@@ -360,7 +360,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
         Set(LFlag0, TRUE)
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             IfEq(LFlag0, FALSE)
@@ -393,7 +393,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
             EndIf
         EndCaseGroup
     EndSwitch
-    Call(GetActionResult, LVarE)
+    Call(GetJumpActionQuality, LVarE)
     Set(LFlag0, FALSE)
     Set(LVarF, 0)
     Add(LVarF, 1)
@@ -403,14 +403,14 @@ EvtScript N(EVS_UseMove_Ultra) = {
     IfEq(LVarF, LVar0)
         Set(LFlag0, TRUE)
     EndIf
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     IfEq(LFlag0, TRUE)
         Call(ShowActionHud, FALSE)
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_MULTIBOUNCE)
-    Call(action_command_jump_start, 25, 3)
+    Call(action_command_jump_start, 25, AC_DIFFICULTY_3)
     Call(ChooseNextTarget, ITER_NEXT, LVar0)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_SpinFall)
@@ -425,7 +425,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
         Return
     EndIf
     Wait(1)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             IfEq(LFlag0, FALSE)
@@ -457,7 +457,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
             Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EndSwitch
     Call(SetActionResult, LVarE)
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseOrEq(FALSE)
         CaseOrEq(2)

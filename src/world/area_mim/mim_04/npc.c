@@ -71,7 +71,7 @@ NpcData N(NpcData_Fuzzy) = {
         }
     },
     .settings = &N(NpcSettings_ForestFuzzy_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = FOREST_FUZZY_DROPS,
     .animations = FOREST_FUZZY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

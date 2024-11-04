@@ -43,7 +43,7 @@ EffectInstance* attack_result_text_main(s32 type, f32 posX, f32 posY, f32 posZ, 
     bp.unk_00 = 0;
     bp.init = attack_result_text_init;
     bp.update = attack_result_text_update;
-    bp.renderWorld = attack_result_text_render;
+    bp.renderScene = attack_result_text_render;
     bp.renderUI = func_E0090428;
     bp.effectID = EFFECT_ATTACK_RESULT_TEXT;
 
@@ -183,7 +183,7 @@ void func_E0090444(EffectInstance* effect) {
     if (data->isVisible) {
         scale = data->scale;
         gDPPipeSync(gMainGfxPos++);
-        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->shared->graphics));
         gDPSetDepthSource(gMainGfxPos++, G_ZS_PRIM);
         z = 200 - unk_1C;
         if (z < 0) {

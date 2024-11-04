@@ -7,7 +7,7 @@
 EvtScript N(EVS_ExitWalk_tik_20_1) = EVT_EXIT_WALK(60, tik_21_ENTRY_0, "tik_20", tik_20_ENTRY_1);
 
 EvtScript N(EVS_ExitDoors_tik_22_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, tik_21_ENTRY_1)

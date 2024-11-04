@@ -17,7 +17,6 @@ void N(set_script_owner_npc_anim)(Evt* script, MobileAISettings* aiSettings, Ene
     script->AI_TEMP_STATE = 13;
 }
 
-
 ApiStatus N(UnkDistFunc)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);

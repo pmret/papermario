@@ -87,7 +87,7 @@ EffectInstance* purple_ring_main(
 
     bpPtr->init = purple_ring_init;
     bpPtr->update = purple_ring_update;
-    bpPtr->renderWorld = purple_ring_render;
+    bpPtr->renderScene = purple_ring_render;
     bpPtr->unk_00 = 0;
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_PURPLE_RING;
@@ -196,7 +196,7 @@ void purple_ring_appendGfx(void* effect) {
     Matrix4f sp50;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_09000200_352EE0);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_74, data->unk_75, data->unk_76, data->unk_68);
 

@@ -20,7 +20,7 @@ s32 N(BothRightDoorModelsL)[] = { MODEL_o874, MODEL_o875, MODEL_o880, MODEL_o881
 s32 N(BothRightDoorModelsR)[] = { MODEL_o876, MODEL_o877, MODEL_o878, MODEL_o879, -1 };
 
 EvtScript N(EVS_ExitDoors_pra_29_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_34_ENTRY_0)
     Set(LVar1, COLLIDER_deilittsw)
@@ -40,7 +40,7 @@ EvtScript N(EVS_ExitDoors_pra_29_1) = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_31_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_34_ENTRY_1)
     Set(LVar1, COLLIDER_deilittse)
@@ -60,7 +60,7 @@ EvtScript N(EVS_ExitDoors_pra_31_0) = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_31_2) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_34_ENTRY_2)
     Set(LVar1, COLLIDER_deilittne)
@@ -80,7 +80,7 @@ EvtScript N(EVS_ExitDoors_pra_31_2) = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_29_2) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_34_ENTRY_3)
     Set(LVar1, COLLIDER_deilittnw)
@@ -108,18 +108,18 @@ s32 N(PalaceKeyList)[] = {
 };
 
 EvtScript N(EVS_UnlockPrompt_Doors) = {
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(ShowKeyChoicePopup)
     IfEq(LVar0, 0)
         Call(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
         Call(CloseChoicePopup)
-        ResumeGroup(EVT_GROUP_01)
+        ResumeGroup(EVT_GROUP_FLAG_INTERACT)
         Return
     EndIf
     IfEq(LVar0, -1)
         Call(CloseChoicePopup)
-        ResumeGroup(EVT_GROUP_01)
+        ResumeGroup(EVT_GROUP_FLAG_INTERACT)
         Return
     EndIf
     Call(RemoveKeyItemAt, LVar1)
@@ -133,7 +133,7 @@ EvtScript N(EVS_UnlockPrompt_Doors) = {
     Call(N(RemovePadlock))
     Set(LVar0, MV_NearPadlockEntityID)
     Call(N(RemovePadlock))
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
     Return
     End

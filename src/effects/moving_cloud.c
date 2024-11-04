@@ -35,7 +35,7 @@ EffectInstance* moving_cloud_main(
 
     bp.init = moving_cloud_init;
     bp.update = moving_cloud_update;
-    bp.renderWorld = moving_cloud_render;
+    bp.renderScene = moving_cloud_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_MOVING_CLOUD;
@@ -184,7 +184,7 @@ void moving_cloud_appendGfx(void* effect) {
     Matrix4f sp50;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(sp10, data->unk_04, data->unk_08, data->unk_0C);
     guScaleF(sp50, data->unk_44, data->unk_44, data->unk_44);

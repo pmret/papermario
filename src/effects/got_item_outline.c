@@ -36,7 +36,7 @@ void got_item_outline_main(
 
     bp.init = got_item_outline_init;
     bp.update = got_item_outline_update;
-    bp.renderWorld = got_item_outline_render;
+    bp.renderScene = got_item_outline_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_GOT_ITEM_OUTLINE;
@@ -117,7 +117,7 @@ void got_item_outline_appendGfx(void* effect) {
 
     if (scale != 0.0f) {
         gDPPipeSync(gMainGfxPos++);
-        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
         gSPDisplayList(gMainGfxPos++, D_09008100_34DC40);
 
         if (type == 0) {

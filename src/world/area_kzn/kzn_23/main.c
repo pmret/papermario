@@ -24,7 +24,7 @@ EvtScript N(EVS_ModulateLavaLevel) = {
 
 EvtScript N(EVS_RaiseLava) = {
     Exec(N(EVS_ModulateLavaLevel))
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_yu, TEX_PANNER_0)
     Set(LVar0, 0)
     Set(LVar1, 0)

@@ -410,7 +410,6 @@ s32 draw_adjustable_tiled_image(IMG_PTR raster, u32 width, u32 height, u8 fmt, u
         drawRect.lry = drawRect.uly + lineHeight * scaleY;
         drawRect.lrx = (s16)(drawRect.ulx + width * scaleX);
 
-
         texOffsetX = texOffsetY = 0;
 
         if (drawRect.lry <= clipY) {

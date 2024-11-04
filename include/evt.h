@@ -125,29 +125,38 @@ enum EventCommandResults {
     EVT_CMD_RESULT_ERROR        = 1,
 };
 
+// EventGroupFlags determine when scripts are paused and resumed.
+// Each flag corresponds to a set of circumstances which may pause scripts independently of the others.
+// These group flags are inherited when one script launches another.
 enum EventGroupFlags {
-    EVT_GROUP_00    = 0x00,
-    EVT_GROUP_0A    = 0x0A, // 8 | 2
-    EVT_GROUP_0B    = 0x0B, // 8 | 4 | 1
-    EVT_GROUP_1B    = 0x1B, // 10 | 8 | 4 | 1
-    EVT_GROUP_EF    = 0xEF, // ~10
-    EVT_GROUP_01    = 0x01,
-    EVT_GROUP_02    = 0x02,
-    EVT_GROUP_SHAKE_CAM    = 0x04,
-    EVT_GROUP_08    = 0x08,
-    EVT_GROUP_10    = 0x10,
+    // Each flag represents a distinct condition for suspending or resuming script execution.
+    // These flags are named based on the scenarios that trigger suspension.
+    EVT_GROUP_FLAG_INTERACT = 0x01, // Suspended during certain scenes, interactions, and NPC dialogue.
+    EVT_GROUP_FLAG_MENUS    = 0x02, // Suspended when menus are open, during pause, item pickups, or "got item" scenes.
+    EVT_GROUP_FLAG_CAM      = 0x04, // Never suspended; used exclusively with camera shake (ShakeCam) scripts.
+    EVT_GROUP_FLAG_UNUSED   = 0x08, // Unused flag; its original purpose is unknown.
+    EVT_GROUP_FLAG_BATTLE   = 0x10, // Suspended during battle entry and exit transitions.
+
+    // Combinations of flags used to assign specific behaviors to scripts.
+    // These groups are named after their most common script use-cases.
+    EVT_GROUP_NEVER_PAUSE   = 0x00, // Never paused; default for map scripts derived from the main script, which always uses this group.
+    EVT_GROUP_PASSIVE_NPC   = EVT_GROUP_FLAG_MENUS | EVT_GROUP_FLAG_UNUSED, // 0xA -- Pauses similar to passive NPC scripts.
+    EVT_GROUP_HOSTILE_NPC   = EVT_GROUP_FLAG_INTERACT | EVT_GROUP_FLAG_MENUS | EVT_GROUP_FLAG_UNUSED, // 0xB -- Pauses similar to hostile NPC scripts; used for platforms, machinery, etc.
+    EVT_GROUP_EXIT_MAP      = EVT_GROUP_FLAG_INTERACT | EVT_GROUP_FLAG_MENUS | EVT_GROUP_FLAG_UNUSED | EVT_GROUP_FLAG_BATTLE, // 0x1B -- Used for exit map scripts.
+    EVT_GROUP_SHAKE_CAM     = EVT_GROUP_FLAG_CAM, // Only used by ShakeCam scripts.
+    EVT_GROUP_NOT_BATTLE    = 0xFF & ~EVT_GROUP_FLAG_BATTLE, // 0xEF -- Pauses from anything except battles; default for scripts started via start_script, common in many battle scripts.
 };
 
 enum EventPriority {
-    EVT_PRIORITY_0  = 0x00, // map main script
-    EVT_PRIORITY_1  = 0x01,
-    EVT_PRIORITY_A  = 0x0A,
-    EVT_PRIORITY_14 = 0x14,
+    EVT_PRIORITY_0          = 0x00, // map main script
+    EVT_PRIORITY_1          = 0x01,
+    EVT_PRIORITY_A          = 0x0A,
+    EVT_PRIORITY_14         = 0x14,
 };
 
 enum EventStateFlags {
     EVT_FLAG_ACTIVE             = 0x01,
-    EVT_FLAG_SUSPENDED_IN_GROUP = 0x02,
+    EVT_FLAG_PAUSED             = 0x02, ///< paused through suspend_group_script / resume_group_script
     EVT_FLAG_BLOCKED_BY_CHILD   = 0x10,
     EVT_FLAG_RUN_IMMEDIATELY    = 0x20, ///< don't wait for next `update_scripts` call
     EVT_FLAG_THREAD             = 0x40,

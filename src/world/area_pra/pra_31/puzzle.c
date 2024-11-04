@@ -398,7 +398,7 @@ EvtScript N(EVS_Scene_PuzzleSolved) = {
 };
 
 EvtScript N(EVS_UpdateStatuePositions) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(N(GetDinoStatuePosRot), NPC_AlbinoDino_01)
     Set(MV_StatueYaw_01, LVar2)
     Call(N(GetDinoStatuePosRot), NPC_AlbinoDino_02)

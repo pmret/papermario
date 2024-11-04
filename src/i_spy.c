@@ -159,5 +159,3 @@ void ispy_notification_update(void) {
             break;
     }
 }
-
-

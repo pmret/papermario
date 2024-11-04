@@ -64,7 +64,7 @@ void effect_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, 
                 bpPtr->unk_00 = 0;
                 bpPtr->init = effect_3D_init;
                 bpPtr->update = effect_3D_update;
-                bpPtr->renderWorld = effect_3D_render;
+                bpPtr->renderScene = effect_3D_render;
                 bpPtr->renderUI = NULL;
                 bpPtr->effectID = EFFECT_3D;
 
@@ -221,7 +221,7 @@ void effect_3D_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_09000240_37D3C0);
 
     guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);

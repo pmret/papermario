@@ -19,7 +19,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_SetupTexPanners) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_yougan,  TEX_PANNER_0)
     Call(SetTexPanner, MODEL_yougan1, TEX_PANNER_1)
     Call(SetTexPanner, MODEL_spot,    TEX_PANNER_1)
@@ -66,7 +66,7 @@ EvtScript N(EVS_Main) = {
     Exec(EnterWalk)
     Wait(1)
     Thread
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_0, NULL)
     EndThread
     Thread

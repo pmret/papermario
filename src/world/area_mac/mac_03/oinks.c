@@ -178,7 +178,7 @@ EvtScript N(EVS_TurnCrank) = {
     EndIf
     Call(PlaySound, SOUND_FLOOR_SWITCH_ACTIVATE)
     Call(DisablePlayerInput, TRUE)
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(AddCoin, -LIL_OINK_COIN_COST)
     Wait(20)
@@ -277,13 +277,13 @@ EvtScript N(EVS_TurnCrank) = {
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
 };
 
 EvtScript N(EVS_LilOinkExplanation) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetNpcSpeed, NPC_Toad_03, Float(4.0))
     Call(SetNpcAnimation, NPC_Toad_03, ANIM_Toad_Red_Run)
     Call(NpcMoveTo, NPC_Toad_03, 157, -310, 0)
@@ -393,7 +393,7 @@ EvtScript N(EVS_OpenCapsule) = {
         Return
     EndIf
     Call(DisablePlayerInput, TRUE)
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Set(MF_Unk_07, TRUE)
     SetF(LVar0, Float(1.0))
@@ -503,7 +503,7 @@ EvtScript N(EVS_OpenCapsule) = {
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Call(DisablePlayerInput, FALSE)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
 };
@@ -532,7 +532,7 @@ EvtScript N(EVS_LilOinkFlee) = {
 EvtScript N(EVS_EnterPen) = {
     Call(DisablePlayerInput, TRUE)
     Call(func_802D2C14, 1)
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deili, COLLIDER_FLAGS_UPPER_MASK)
     Call(PlaySoundAtCollider, COLLIDER_deili, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
@@ -557,7 +557,7 @@ EvtScript N(EVS_EnterPen) = {
     EndLoop
     Call(PlaySoundAtCollider, COLLIDER_deili, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deili, COLLIDER_FLAGS_UPPER_MASK)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Call(func_802D2C14, 0)
     Call(DisablePlayerInput, FALSE)
     IfEq(GB_MAC03_LilOinkCount, 0)
@@ -578,14 +578,14 @@ EvtScript N(EVS_EnterPen) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Call(DisablePlayerInput, FALSE)
     Return
     End
 };
 
 EvtScript N(EVS_ExitPen) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(DisablePlayerInput, TRUE)
     Call(func_802D2C14, 1)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deiliu, COLLIDER_FLAGS_UPPER_MASK)

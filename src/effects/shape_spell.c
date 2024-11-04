@@ -38,7 +38,7 @@ EffectInstance* shape_spell_main(s32 isChild, f32 x, f32 y, f32 z, f32 arg4, f32
 
     bp.init = shape_spell_init;
     bp.update = shape_spell_update;
-    bp.renderWorld = shape_spell_render;
+    bp.renderScene = shape_spell_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SHAPE_SPELL;
@@ -168,7 +168,7 @@ void shape_spell_appendGfx(void* effect) {
     s32 j;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_09001080_33AFE0);
 
     savedGfxPos = gMainGfxPos++;

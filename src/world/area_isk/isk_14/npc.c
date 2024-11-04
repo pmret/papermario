@@ -167,7 +167,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
     Wait(1)
     Call(N(DestroyAmbushWorker))
     Call(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_4 | ENEMY_FLAG_100000, 0)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_SKIP_BATTLE, FALSE)
     Wait(3)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetNpcJumpscale, NPC_SELF, 1)
@@ -236,7 +236,7 @@ NpcData N(NpcData_StoneChomp) = {
     .initVarCount = 1,
     .initVar = { .value = -780 },
     .settings = &N(NpcSettings_StoneChomp),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE,
     .drops = STONE_CHOMP_DROPS,
     .animations = STONE_CHOMP_ANIMS,
 };

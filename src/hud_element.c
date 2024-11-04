@@ -190,7 +190,7 @@ void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
                     if (entry->id == -1) {
                         entry->id = raster;
                         entry->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
-                        if (!gGameStatusPtr->isBattle) {
+                        if (gGameStatusPtr->context == CONTEXT_WORLD) {
                             capacity = gHudElementCacheCapacity;
                         } else {
                             capacity = gHudElementCacheCapacity / 2;
@@ -198,7 +198,7 @@ void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
                         ASSERT(capacity > *gHudElementCacheSize + gHudElementSizes[preset].size);
                         nuPiReadRom((s32)icon_ROM_START + raster, entry->data, gHudElementSizes[preset].size);
                         *gHudElementCacheSize += gHudElementSizes[preset].size;
-                        if (!gGameStatusPtr->isBattle) {
+                        if (gGameStatusPtr->context == CONTEXT_WORLD) {
                             *pos = i;
                         } else {
                             *pos = (u16)(*pos) | (i << 16);
@@ -206,7 +206,7 @@ void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
                         i++;
                         break;
                     } else if (entry->id == raster) {
-                        if (!gGameStatusPtr->isBattle) {
+                        if (gGameStatusPtr->context == CONTEXT_WORLD) {
                             *pos = i;
                         } else {
                             *pos = (u16)(*pos) | (i << 16);
@@ -226,7 +226,7 @@ void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
                     if (entry->id == -1) {
                         entry->id = palette;
                         entry->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
-                        if (!gGameStatusPtr->isBattle) {
+                        if (gGameStatusPtr->context == CONTEXT_WORLD) {
                             capacity = gHudElementCacheCapacity;
                         } else {
                             capacity = gHudElementCacheCapacity / 2;
@@ -234,7 +234,7 @@ void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
                         ASSERT(capacity > *gHudElementCacheSize + 32);
                         nuPiReadRom((s32)icon_ROM_START + palette, entry->data, 32);
                         *gHudElementCacheSize += 32;
-                        if (!gGameStatusPtr->isBattle) {
+                        if (gGameStatusPtr->context == CONTEXT_WORLD) {
                             *pos = i;
                         } else {
                             *pos = (u16)(*pos) | (i << 16);
@@ -242,7 +242,7 @@ void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
                         i++;
                         break;
                     } else if (entry->id == palette) {
-                        if (!gGameStatusPtr->isBattle) {
+                        if (gGameStatusPtr->context == CONTEXT_WORLD) {
                             *pos = i;
                         } else {
                             *pos = (u16)(*pos) | (i << 16);
@@ -610,7 +610,7 @@ void hud_element_clear_cache(void) {
     HudCacheEntry* entryRaster;
     HudCacheEntry* entryPalette;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gHudElements = &gHudElementsWorld;
         gHudElementCacheSize = &gHudElementCacheSizeWorld;
         gHudElementCacheTableRaster = gHudElementCacheTableRasterWorld;
@@ -622,7 +622,7 @@ void hud_element_clear_cache(void) {
         gHudElementCacheTablePalette = gHudElementCacheTablePaletteBattle;
     }
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         gHudElementCacheBuffer = general_heap_malloc(gHudElementCacheCapacity);
         ASSERT(gHudElementCacheBuffer);
         gHudElementCacheBufferWorld = gHudElementCacheBuffer;
@@ -664,7 +664,7 @@ extern Addr D_80200000;
 #endif
 
 void init_hud_element_list(void) {
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         if (gHudElementCacheBufferBattle != NULL) {
 #if VERSION_PAL
             if (gHudElementCacheBufferBattle != D_80200000) {
@@ -726,7 +726,7 @@ s32 hud_element_create(HudScript* anim) {
     ASSERT(id < ARRAY_COUNT(*gHudElements));
 
     (*gHudElements)[id] = hudElement = heap_malloc(sizeof(*hudElement));
-    gHudElementsNumber += 1;
+    gHudElementsNumber++;
 
     ASSERT(hudElement != NULL);
 
@@ -755,7 +755,7 @@ s32 hud_element_create(HudScript* anim) {
     hudElement->tint.g = 255;
     hudElement->tint.b = 255;
 
-    if (gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context != CONTEXT_WORLD) {
         hudElement->flags |= HUD_ELEMENT_FLAG_BATTLE;
         id |= HUD_ELEMENT_BATTLE_ID_MASK;
     }
@@ -2042,7 +2042,7 @@ void hud_element_clear_flags(s32 id, s32 flags) {
 void ALT_clear_hud_element_cache(void) {
     s32 i;
 
-    if (!gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context == CONTEXT_WORLD) {
         heap_free(gHudElementCacheBuffer);
         gHudElementCacheBuffer = heap_malloc(gHudElementCacheCapacity);
         ASSERT(gHudElementCacheBuffer);

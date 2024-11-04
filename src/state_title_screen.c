@@ -24,7 +24,6 @@
 #define TITLE_NUM_TILES (TITLE_HEIGHT / TITLE_TILE_HEIGHT) // Number of tiles in the texture
 #define TITLE_TILE_PIXELS (TITLE_WIDTH * TITLE_TILE_HEIGHT) // Number of pixels in a single tile of the texture
 
-
 enum TitleScreenStates {
     TITLE_STATE_INIT            = 0x00000000,
     TITLE_STATE_APPEAR          = 0x00000001,
@@ -119,14 +118,14 @@ void state_init_title_screen(void) {
     void* titleData;
 
     gOverrideFlags = 0;
-    timeFreezeMode = 0;
+    gTimeFreezeMode = TIME_FREEZE_NONE;
     D_8014C248 = TRUE;
     general_heap_create();
     clear_printers();
     sfx_set_reverb_mode(0);
     gGameStatusPtr->startupState = TITLE_STATE_INIT;
     gGameStatusPtr->logoTime = 0;
-    gGameStatusPtr->isBattle = FALSE;
+    gGameStatusPtr->context = CONTEXT_WORLD;
     gGameStatusPtr->introPart = INTRO_PART_NONE;
     startup_fade_screen_update();
     titleData = load_asset_by_name("title_data", &titleDataSize);

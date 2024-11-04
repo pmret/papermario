@@ -51,7 +51,7 @@ EvtScript N(EVS_SpinyTromp_ManageCamera) = {
 };
 
 EvtScript N(D_80241224_C7F3A4) = {
-    SetGroup(EVT_GROUP_0A)
+    SetGroup(EVT_GROUP_PASSIVE_NPC)
     Loop(5)
         PlayEffect(EFFECT_DUST, 1, -430, 100, 0, 30)
         Wait(2)
@@ -85,7 +85,7 @@ EvtScript N(EVS_SpinyTromp_ShakeCam) = {
 };
 
 EvtScript N(EVS_SetupSpinyTromp) = {
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
     Call(SetGroupVisibility, MODEL_goron, MODEL_GROUP_HIDDEN)
     Call(EnableModel, MODEL_me, FALSE)
     Call(TranslateGroup, MODEL_goron, 0, 0, 0)

@@ -3442,7 +3442,7 @@ void part_glow_on(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection) {
     }
 
     if (!isReflection) {
-        decorations->glowUnk3 -= 1;
+        decorations->glowUnk3--;
     }
 }
 

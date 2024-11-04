@@ -15,7 +15,7 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(D_80240050_B1D340) = {
-    SetGroup(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_HOSTILE_NPC)
     Set(LVarA, LVar0)
     Set(LVarB, LVar1)
     Set(LVarC, LVar2)

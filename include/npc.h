@@ -377,15 +377,15 @@ typedef struct FieldStatus {
 } FieldStatus;
 
 typedef struct EncounterStatus {
-    /* 0x000 */ s32 flags;
-    /* 0x004 */ s8 firstStrikeType; /* 0 = none, 1 = player, 2 = enemy */
-    /* 0x005 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
-    /* 0x006 */ s8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
+    /* 0x000 */ s32 flags; // see enum: EncounterFlags
+    /* 0x004 */ s8 firstStrikeType; // see enum: FirstStrikeType
+    /* 0x005 */ s8 hitType; // see enum: EncounterTriggers
+    /* 0x006 */ s8 hitTier; // 0 = normal, 1 = super, 2 = ultra
     /* 0x007 */ char unk_07;
     /* 0x008 */ s8 unk_08;
-    /* 0x009 */ s8 battleOutcome; /* 0 = won, 1 = lost */
+    /* 0x009 */ s8 battleOutcome; // see enum: EncounterOutcomes
     /* 0x00A */ s8 battleTriggerCooldown; ///< set to 15 after victory, 45 after fleeing
-    /* 0x00B */ b8 hasMerleeCoinBonus; /* triple coins when TRUE */
+    /* 0x00B */ s8 hasMerleeCoinBonus; /* triple coins when TRUE */
     /* 0x00C */ u8 damageTaken; /* valid after battle */
     /* 0x00D */ char unk_0D;
     /* 0x00E */ s16 coinsEarned; /* valid after battle */
@@ -394,7 +394,7 @@ typedef struct EncounterStatus {
     /* 0x012 */ s8 scriptedBattle; ///< battle started by StartBattle but not by encounter
     /* 0x013 */ s8 dropWhackaBump;
     /* 0x014 */ s32 songID;
-    /* 0x018 */ s32 unk_18;
+    /* 0x018 */ s32 unk_18; // unused, related to songID. perhaps was meant for variation, but not implemented.
     /* 0x01C */ s8 numEncounters; /* number of encounters for current map (in list) */
     /* 0x01D */ s8 curAreaIndex;
     /* 0x01E */ u8 curMapIndex;
@@ -407,7 +407,7 @@ typedef struct EncounterStatus {
     /* 0x088 */ Encounter* curEncounter;
     /* 0x08C */ Enemy* curEnemy;
     /* 0x090 */ s32 fadeOutAmount;
-    /* 0x094 */ s32 unk_94;
+    /* 0x094 */ s32 substateDelay;
     /* 0x098 */ s32 fadeOutAccel;
     /* 0x09C */ s32 battleStartCountdown;
     /* 0x0A0 */ FieldStatus dizzyAttack;
@@ -424,7 +424,7 @@ extern EncounterStatus gCurrentEncounter;
 
 #endif
 
-s32 basic_ai_check_player_dist(EnemyDetectVolume* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
+b32 basic_ai_check_player_dist(EnemyDetectVolume* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
 
 /// The default Npc::onUpdate and Npc::onRender callback.
 void STUB_npc_callback(Npc*);

@@ -3,245 +3,266 @@
 
 #define NAMESPACE action_command_flee
 
-BSS s32 D_802A9920;
-
 extern s32 actionCmdTableFlee[];
 
+// indices into ActionCommandStatus::hudElements for this action command
+enum {
+    HIDX_BUTTON         = 0,
+    HIDX_METER          = 1,
+    HIDX_RUN_AWAY       = 2,
+    HIDX_OK             = 3,
+    HIDX_100_PCT        = 4,
+};
+
+// how much to add to the meter per input if all modifiers are neutral
+#define METER_FILL_RATE 180
+
+BSS b32 N(HasStarted);
+
 API_CALLABLE(N(init)) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
-    s32 xOffset;
-    s32 hudElement;
+    s32 offsetX;
+    HudElemID hid;
 
-    battleStatus->unk_82 = 0;
+    battleStatus->maxActionQuality = 0;
     battleStatus->actionCmdDifficultyTable = actionCmdTableFlee;
     battleStatus->actionResult = ACTION_RESULT_NONE;
+
     action_command_init_status();
-    actionCommandStatus->unk_5A = evt_get_variable(script, *args++);
-    actionCommandStatus->actionCommandID = ACTION_COMMAND_FLEE;
-    actionCommandStatus->state = 0;
-    actionCommandStatus->wrongButtonPressed = FALSE;
-    actionCommandStatus->barFillLevel = actionCommandStatus->unk_5A * 100;
-    actionCommandStatus->thresholdLevel = rand_int(50);
-    actionCommandStatus->barFillWidth = 0;
-    actionCommandStatus->unk_5C = 1;
-    actionCommandStatus->unk_5A = rand_int(1);
-    actionCommandStatus->isBarFilled = FALSE;
-    battleStatus->actionSuccess = 0;
-    actionCommandStatus->hudPosX = -48;
-    D_802A9920 = 0;
-    actionCommandStatus->hudPosY = 80;
 
-    hudElement = hud_element_create(&HES_AButton);
-    actionCommandStatus->hudElements[0] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    acs->escapeChance = evt_get_variable(script, *args++);
 
-    hudElement = hud_element_create(&HES_BlueMeter);
-    actionCommandStatus->hudElements[1] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    acs->actionCommandID = ACTION_COMMAND_FLEE;
+    acs->state = AC_STATE_INIT;
+    acs->wrongButtonPressed = FALSE;
+    acs->meterFillLevel = acs->escapeChance * 100;
+    acs->escapeThreshold = rand_int(50);
+    acs->meterFillWidth = 0;
+    acs->flee.dir = 1;
+    acs->escapeChance = rand_int(1);
+    acs->isMeterFilled = FALSE;
+    battleStatus->actionQuality = 0;
+    N(HasStarted) = FALSE;
+    acs->hudPosX = -48;
+    acs->hudPosY = 80;
 
-    hudElement = hud_element_create(&HES_RunningAway);
-    actionCommandStatus->hudElements[2] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_AButton);
+    acs->hudElemIDs[HIDX_BUTTON] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    hudElement = hud_element_create(&HES_RunAwayOK);
-    actionCommandStatus->hudElements[3] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_BlueMeter);
+    acs->hudElemIDs[HIDX_METER] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    xOffset = 29 - ((100 - actionCommandStatus->thresholdLevel) * 60) / 100;
-    hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudPosX - xOffset, actionCommandStatus->hudPosY + 17);
-    hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX - xOffset, actionCommandStatus->hudPosY - 1);
+    hid = hud_element_create(&HES_RunningAway);
+    acs->hudElemIDs[HIDX_RUN_AWAY] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    hudElement = hud_element_create(&HES_100pct);
-    actionCommandStatus->hudElements[4] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hid = hud_element_create(&HES_RunAwayOK);
+    acs->hudElemIDs[HIDX_OK] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+
+    offsetX = 29 - ((100 - acs->escapeThreshold) * 60) / 100;
+    hud_element_set_render_pos(acs->hudElemIDs[HIDX_OK], acs->hudPosX - offsetX, acs->hudPosY + 17);
+    hud_element_set_render_pos(acs->hudElemIDs[HIDX_RUN_AWAY], acs->hudPosX - offsetX, acs->hudPosY - 1);
+
+    hid = hud_element_create(&HES_100pct);
+    acs->hudElemIDs[HIDX_100_PCT] = hid;
+    hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
+    hud_element_set_render_depth(hid, 0);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(start)) {
-    Bytecode* args = script->ptrReadPos;
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
 
     action_command_init_status();
-    actionCommandStatus->prepareTime = evt_get_variable(script, *args++);
-    actionCommandStatus->duration = evt_get_variable(script, *args++);
-    actionCommandStatus->difficulty = evt_get_variable(script, *args++);
-    actionCommandStatus->difficulty = adjust_action_command_difficulty(actionCommandStatus->difficulty);
-    actionCommandStatus->wrongButtonPressed = FALSE;
-    battleStatus->actionSuccess = 0;
+
+    acs->prepareTime = evt_get_variable(script, *args++);
+    acs->duration = evt_get_variable(script, *args++);
+    acs->difficulty = evt_get_variable(script, *args++);
+    acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
+
+    acs->wrongButtonPressed = FALSE;
+    battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
-    battleStatus->unk_82 = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
+    battleStatus->maxActionQuality = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
     battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
-    actionCommandStatus->state = 10;
+    acs->state = AC_STATE_START;
+
     return ApiStatus_DONE2;
 }
 
 void N(update)(void) {
-    s32 temp;
-    s32 hudElement;
     BattleStatus* battleStatus = &gBattleStatus;
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
+    HudElemID hid;
+    s32 escapeDelta;
 
-    switch (actionCommandStatus->state) {
-        case 0:
-            hudElement = actionCommandStatus->hudElements[0];
-            hud_element_set_alpha(hudElement, 0xFF);
-            if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
+    switch (acs->state) {
+        case AC_STATE_INIT:
+            hid = acs->hudElemIDs[HIDX_BUTTON];
+            hud_element_set_alpha(hid, 255);
+            if (acs->showHud) {
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            hudElement = actionCommandStatus->hudElements[1];
-            hud_element_set_alpha(hudElement, 0xFF);
-            if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
+            hid = acs->hudElemIDs[HIDX_METER];
+            hud_element_set_alpha(hid, 255);
+            if (acs->showHud) {
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            hudElement = actionCommandStatus->hudElements[2];
-            hud_element_set_alpha(hudElement, 0xFF);
-            if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
+            hid = acs->hudElemIDs[HIDX_RUN_AWAY];
+            hud_element_set_alpha(hid, 255);
+            if (acs->showHud) {
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            hudElement = actionCommandStatus->hudElements[3];
-            hud_element_set_alpha(hudElement, 0xFF);
-            if (actionCommandStatus->showHud) {
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
+            hid = acs->hudElemIDs[HIDX_OK];
+            hud_element_set_alpha(hid, 255);
+            if (acs->showHud) {
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            actionCommandStatus->state = 1;
+            acs->state = AC_STATE_APPEAR;
             break;
-        case 1:
-            actionCommandStatus->hudPosX += 20;
-            if (actionCommandStatus->hudPosX > 50) {
-                actionCommandStatus->hudPosX = 50;
+        case AC_STATE_APPEAR:
+            acs->hudPosX += 20;
+            if (acs->hudPosX > 50) {
+                acs->hudPosX = 50;
             }
-            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
-            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudPosX, actionCommandStatus->hudPosY + 28);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_BUTTON], acs->hudPosX, acs->hudPosY);
+            hud_element_set_render_pos(acs->hudElemIDs[HIDX_METER], acs->hudPosX, acs->hudPosY + 28);
             break;
-        case 10:
-            if (actionCommandStatus->prepareTime != 0) {
-                actionCommandStatus->prepareTime--;
+        case AC_STATE_START:
+            if (acs->prepareTime != 0) {
+                acs->prepareTime--;
                 break;
             }
 
-            hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
-            D_802A9920 = 1;
-            actionCommandStatus->state = 11;
-            actionCommandStatus->frameCounter = actionCommandStatus->duration;
-        case 11:
-            if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED && (battleStatus->curButtonsPressed & BUTTON_A)) {
-                actionCommandStatus->barFillLevel += (battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 180 / 100);
-            }
-            if (actionCommandStatus->barFillLevel >= 10000) {
-                hudElement = actionCommandStatus->hudElements[4];
-                actionCommandStatus->barFillLevel = 10000;
-                actionCommandStatus->isBarFilled = TRUE;
-                hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX + 50, actionCommandStatus->hudPosY + 28);
-                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
+            hud_element_set_script(acs->hudElemIDs[HIDX_BUTTON], &HES_MashAButton);
+            N(HasStarted) = TRUE;
+            acs->state = AC_STATE_ACTIVE;
+            acs->stateTimer = acs->duration;
+
+            // fallthrough
+        case AC_STATE_ACTIVE:
+            // check for meter-filling input
+            if (battleStatus->actionCommandMode != AC_MODE_NOT_LEARNED && (battleStatus->curButtonsPressed & BUTTON_A)) {
+                acs->meterFillLevel += SCALE_BY_PCT(METER_FILL_RATE, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
             }
 
-            battleStatus->actionSuccess = actionCommandStatus->barFillLevel / 100;
-            if (actionCommandStatus->frameCounter == 0) {
-                if (battleStatus->actionSuccess >= (100 - actionCommandStatus->thresholdLevel)) {
-                    battleStatus->actionResult = ACTION_RESULT_SUCCESS;
-                    battleStatus->actionSuccess = 1;
-                } else {
-                    battleStatus->actionResult = ACTION_RESULT_MINUS_2;
-                    battleStatus->actionSuccess = -1;
-                }
-                actionCommandStatus->frameCounter = 20;
-                actionCommandStatus->state = 12;
-            } else {
-                actionCommandStatus->frameCounter--;
+            // handle meter reaching 100%
+            if (acs->meterFillLevel >= MAX_MASH_UNITS) {
+                acs->meterFillLevel = MAX_MASH_UNITS;
+                acs->isMeterFilled = TRUE;
+                hid = acs->hudElemIDs[HIDX_100_PCT];
+                hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
+                hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
+
+            battleStatus->actionQuality = acs->meterFillLevel / ONE_PCT_MASH;
+
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
+                break;
+            }
+
+            if (battleStatus->actionQuality >= (100 - acs->escapeThreshold)) {
+                battleStatus->actionResult = ACTION_RESULT_SUCCESS;
+                battleStatus->actionQuality = 1;
+            } else {
+                battleStatus->actionResult = ACTION_RESULT_METER_NOT_ENOUGH;
+                battleStatus->actionQuality = AC_QUALITY_FAILED;
+            }
+
+            acs->stateTimer = 20;
+            acs->state = AC_STATE_DISPOSE;
             break;
-        case 12:
-            if (actionCommandStatus->frameCounter != 0) {
-                actionCommandStatus->frameCounter--;
+        case AC_STATE_DISPOSE:
+            if (acs->stateTimer != 0) {
+                acs->stateTimer--;
                 break;
             }
             action_command_free();
             break;
     }
 
-    switch (actionCommandStatus->state) {
-        case 1:
-        case 10:
-        case 11:
-            temp = actionCommandStatus->unk_5A == 0 ? 7 : 8;
-            if (actionCommandStatus->unk_5C == 0) {
-                actionCommandStatus->thresholdLevel += temp;
-                if (actionCommandStatus->thresholdLevel >= 100) {
-                    actionCommandStatus->thresholdLevel = 100;
-                    actionCommandStatus->unk_5C = 1;
+    // update the position of the 'OK' tick
+    switch (acs->state) {
+        case AC_STATE_APPEAR:
+        case AC_STATE_START:
+        case AC_STATE_ACTIVE:
+            escapeDelta = acs->escapeChance == 0 ? 7 : 8;
+            if (acs->flee.dir == 0) {
+                acs->escapeThreshold += escapeDelta;
+                if (acs->escapeThreshold >= 100) {
+                    acs->escapeThreshold = 100;
+                    acs->flee.dir = 1;
                 }
-                break;
+            } else {
+                acs->escapeThreshold -= escapeDelta;
+                if (acs->escapeThreshold <= 0) {
+                    acs->escapeThreshold = 0;
+                    acs->flee.dir = 0;
+                }
             }
-            actionCommandStatus->thresholdLevel -= temp;
-            if (actionCommandStatus->thresholdLevel <= 0) {
-                actionCommandStatus->thresholdLevel = 0;
-                actionCommandStatus->unk_5C = 0;
-            }
+            break;
     }
 }
 
 void N(draw)(void) {
-    s32 y;
-    s32 x;
-    s32 temp_a1;
-    s32 hudElement;
-    s32 temp_v1;
-
     BattleStatus* battleStatus = &gBattleStatus;
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* acs = &gActionCommandStatus;
+    s32 hudX, hudY;
+    HudElemID hid;
 
-    temp_v1 = (100 - actionCommandStatus->thresholdLevel) * 60;
-    x = 60 - temp_v1 / 100;
-    temp_a1 = x - 31;
+    // equivalent to 60 * acs->escapeThreshold / 100
+    hudX = 60 - ((100 - acs->escapeThreshold) * 60 / 100);
 
-    hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudPosX - temp_a1, actionCommandStatus->hudPosY + 17);
-    hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudPosX + 31 - x, actionCommandStatus->hudPosY - 1);
+    hud_element_set_render_pos(acs->hudElemIDs[HIDX_OK], acs->hudPosX + 31 - hudX, acs->hudPosY + 17);
+    hud_element_set_render_pos(acs->hudElemIDs[HIDX_RUN_AWAY], acs->hudPosX + 31 - hudX, acs->hudPosY - 1);
 
-    if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED) {
-        hud_element_draw_clipped(actionCommandStatus->hudElements[0]);
+    if (battleStatus->actionCommandMode != AC_MODE_NOT_LEARNED) {
+        hud_element_draw_clipped(acs->hudElemIDs[HIDX_BUTTON]);
     }
 
-    hudElement = actionCommandStatus->hudElements[1];
-    hud_element_draw_clipped(hudElement);
-    hud_element_get_render_pos(hudElement, &x, &y);
+    hid = acs->hudElemIDs[HIDX_METER];
+    hud_element_draw_clipped(hid);
+    hud_element_get_render_pos(hid, &hudX, &hudY);
 
-    if (D_802A9920 == 0) {
-        draw_mash_meter_multicolor_with_divisor(x, y, actionCommandStatus->barFillLevel / 100, 1);
+    if (!N(HasStarted)) {
+        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH, 1);
+    } else if (!acs->isMeterFilled) {
+        draw_mash_meter_multicolor_with_divisor(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH, 4);
     } else {
-        if (!actionCommandStatus->isBarFilled) {
-            draw_mash_meter_multicolor_with_divisor(x, y, actionCommandStatus->barFillLevel / 100, 4);
-        } else {
-            draw_mash_meter_blink(x, y, actionCommandStatus->barFillLevel / 100);
-        }
+        draw_mash_meter_blink(hudX, hudY, acs->meterFillLevel / ONE_PCT_MASH);
     }
 
-    hud_element_draw_clipped(actionCommandStatus->hudElements[2]);
-    hud_element_draw_clipped(actionCommandStatus->hudElements[3]);
-    hud_element_draw_clipped(actionCommandStatus->hudElements[4]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_RUN_AWAY]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_OK]);
+    hud_element_draw_clipped(acs->hudElemIDs[HIDX_100_PCT]);
 }
 
 void N(free)(void) {
-    hud_element_free(gActionCommandStatus.hudElements[0]);
-    hud_element_free(gActionCommandStatus.hudElements[1]);
-    hud_element_free(gActionCommandStatus.hudElements[2]);
-    hud_element_free(gActionCommandStatus.hudElements[3]);
-    hud_element_free(gActionCommandStatus.hudElements[4]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_BUTTON]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_METER]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_RUN_AWAY]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_OK]);
+    hud_element_free(gActionCommandStatus.hudElemIDs[HIDX_100_PCT]);
 }

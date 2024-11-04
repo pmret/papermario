@@ -79,7 +79,7 @@ EvtScript N(EVS_Scene_StarWayOpened) = {
     Call(ResetCam, CAM_DEFAULT, Float(5.0))
     Set(GB_StoryProgress, STORY_CH8_OPENED_PATH_TO_STAR_WAY)
     Call(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, 8)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Call(DisablePlayerInput, FALSE)
     Return
     End

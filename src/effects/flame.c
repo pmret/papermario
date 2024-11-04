@@ -78,7 +78,7 @@ void flame_main(
 
     bpPtr->init = flame_init;
     bpPtr->update = flame_update;
-    bpPtr->renderWorld = flame_render;
+    bpPtr->renderScene = flame_render;
     bpPtr->unk_00 = 0;
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_FLAME;
@@ -177,7 +177,7 @@ void flame_appendGfx(void* effect) {
     Matrix4f sp98;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     if (LastFlameRenderFrame != gGameStatusPtr->frameCounter) {
         LastFlameRenderFrame = gGameStatusPtr->frameCounter;

@@ -415,7 +415,7 @@ BSS s32 battle_menu_moveOptionActive;
 BSS s8 BattleSubmenuStratsState;
 BSS s8 StratsMenuPos;
 BSS s8 OldStratsMenuPos;
-BSS b8 ShowingErrorMessage;
+BSS s8 ShowingErrorMessage;
 BSS s8 D_802AD608;
 BSS s8 D_802AD609;
 BSS s8 StratsMenuLines;
@@ -426,8 +426,8 @@ BSS s16 D_802AD610;
 BSS s16 D_802AD612;
 BSS s8 D_802AD614;
 BSS s32 D_802AD618;
-BSS HudElemID GreenArrowUpID;
-BSS HudElemID GreenArrowDownID;
+BSS HudElemID HID_GreenArrowUp;
+BSS HudElemID HID_GreenArrowDown;
 BSS s32 D_802AD624;
 
 #if VERSION_IQUE
@@ -456,11 +456,11 @@ BSS s32 D_802AD6D4;
 void create_battle_popup_menu(PopupMenu* popup);
 
 s32 get_player_anim_for_status(s32 animID);
-void func_802A3C98(void* data, s32 x, s32 y);
-void func_802A43DC(void* data, s32 x, s32 y);
-void func_802A4448(void* data, s32 x, s32 y);
-void func_802A4494(void* data, s32 x, s32 y);
-void func_802A4534(void* data, s32 x, s32 y);
+void btl_menu_moves_draw_content(void* data, s32 x, s32 y);
+void btl_menu_moves_show_title(void* data, s32 x, s32 y);
+void btl_menu_moves_show_icon(void* data, s32 x, s32 y);
+void btl_menu_moves_show_desc(void* data, s32 x, s32 y);
+void btl_menu_moves_show_error(void* data, s32 x, s32 y);
 void btl_menu_strats_draw_content(void* data, s32 x, s32 y);
 void btl_menu_strats_show_title(void* data, s32 x, s32 y);
 void btl_menu_strats_show_desc(void* data, s32 x, s32 y);
@@ -531,7 +531,7 @@ void btl_main_menu_destroy(void) {
 s32 btl_main_menu_update(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     f32 theta;
-    s32 id;
+    HudElemID hid;
     s32 i;
     f32 x, y;
     s32 l, t;
@@ -549,85 +549,85 @@ s32 btl_main_menu_update(void) {
             BattleMenu_MaxIdx -= D_802AD0B0;
 
             for (i = 0; i < BattleMenu_NumOptions; i++) {
-                D_802AD010[i] = id = hud_element_create(BattleMenu_HudScripts[i]);
-                hud_element_set_render_depth(id, 5);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAG_DISABLED);
-                hud_element_set_scale(id, 0.75f);
+                D_802AD010[i] = hid = hud_element_create(BattleMenu_HudScripts[i]);
+                hud_element_set_render_depth(hid, 5);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_set_scale(hid, 0.75f);
 
-                D_802AD028[i] = id = hud_element_create(&HES_ProjectorSpot);
-                hud_element_create_transform_B(id);
-                hud_element_set_render_depth(id, 10);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                D_802AD028[i] = hid = hud_element_create(&HES_ProjectorSpot);
+                hud_element_create_transform_B(hid);
+                hud_element_set_render_depth(hid, 10);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            D_802AD040 = id = hud_element_create(&HES_ProjectorSpot);
-            hud_element_create_transform_B(id);
-            hud_element_set_render_depth(id, 7);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+            D_802AD040 = hid = hud_element_create(&HES_ProjectorSpot);
+            hud_element_create_transform_B(hid);
+            hud_element_set_render_depth(hid, 7);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
 
-            D_802AD044 = id = hud_element_create(&HES_ProjectorReel);
-            hud_element_create_transform_B(id);
-            hud_element_set_render_depth(id, 0);
-            hud_element_set_render_pos(id, 40, 212);
-            hud_element_set_tint(id, 0, 91, 127);
-            hud_element_set_transform_rotation_pivot(id, 16, -16);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
-            hud_element_set_alpha(id, 240);
+            D_802AD044 = hid = hud_element_create(&HES_ProjectorReel);
+            hud_element_create_transform_B(hid);
+            hud_element_set_render_depth(hid, 0);
+            hud_element_set_render_pos(hid, 40, 212);
+            hud_element_set_tint(hid, 0, 91, 127);
+            hud_element_set_transform_rotation_pivot(hid, 16, -16);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+            hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
+            hud_element_set_alpha(hid, 240);
 
-            D_802AD048 = id = hud_element_create(&HES_ProjectorReel);
-            hud_element_create_transform_B(id);
-            hud_element_set_render_depth(id, 2);
-            hud_element_set_render_pos(id, 39, 212);
-            hud_element_set_tint(id, 0, 91, 127);
-            hud_element_set_transform_rotation_pivot(id, 16, -16);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
-            hud_element_set_alpha(id, 240);
+            D_802AD048 = hid = hud_element_create(&HES_ProjectorReel);
+            hud_element_create_transform_B(hid);
+            hud_element_set_render_depth(hid, 2);
+            hud_element_set_render_pos(hid, 39, 212);
+            hud_element_set_tint(hid, 0, 91, 127);
+            hud_element_set_transform_rotation_pivot(hid, 16, -16);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+            hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
+            hud_element_set_alpha(hid, 240);
 
-            D_802AD04C = id = hud_element_create(&HES_ProjectorBeam);
-            hud_element_create_transform_B(id);
-            hud_element_set_render_depth(id, 20);
-            hud_element_set_render_pos(id, 78, 178);
-            hud_element_set_tint(id, 255, 255, 255);
-            hud_element_set_transform_rotation_pivot(id, 0, 0);
-            hud_element_set_transform_rotation(id, 0.0f, 0.0f, -45.0f);
-            hud_element_set_alpha(id, 200);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+            D_802AD04C = hid = hud_element_create(&HES_ProjectorBeam);
+            hud_element_create_transform_B(hid);
+            hud_element_set_render_depth(hid, 20);
+            hud_element_set_render_pos(hid, 78, 178);
+            hud_element_set_tint(hid, 255, 255, 255);
+            hud_element_set_transform_rotation_pivot(hid, 0, 0);
+            hud_element_set_transform_rotation(hid, 0.0f, 0.0f, -45.0f);
+            hud_element_set_alpha(hid, 200);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
 
-            D_802AD05C = id = hud_element_create(&HES_SwapBackground);
-            hud_element_set_render_depth(id, 0);
-            hud_element_set_render_pos(id, 97, 208);
-            hud_element_set_tint(id, 255, 255, 255);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
-            hud_element_set_alpha(id, 230);
+            D_802AD05C = hid = hud_element_create(&HES_SwapBackground);
+            hud_element_set_render_depth(hid, 0);
+            hud_element_set_render_pos(hid, 97, 208);
+            hud_element_set_tint(hid, 255, 255, 255);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+            hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
+            hud_element_set_alpha(hid, 230);
 
-            D_802AD050 = id = hud_element_create(&HES_SwapZ);
-            hud_element_set_render_depth(id, 5);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(id, 94, 209);
+            D_802AD050 = hid = hud_element_create(&HES_SwapZ);
+            hud_element_set_render_depth(hid, 5);
+            hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+            hud_element_set_render_pos(hid, 94, 209);
 
-            D_802AD054 = id = hud_element_create(&HES_SwapArrowLeft);
-            hud_element_set_render_depth(id, 5);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(id, 81, 210);
+            D_802AD054 = hid = hud_element_create(&HES_SwapArrowLeft);
+            hud_element_set_render_depth(hid, 5);
+            hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+            hud_element_set_render_pos(hid, 81, 210);
 
-            D_802AD058 = id = hud_element_create(&HES_SwapArrowRight);
-            hud_element_set_render_depth(id, 5);
-            hud_element_clear_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(id, 102, 210);
+            D_802AD058 = hid = hud_element_create(&HES_SwapArrowRight);
+            hud_element_set_render_depth(hid, 5);
+            hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+            hud_element_set_render_pos(hid, 102, 210);
             D_802AD00A = 100;
             D_802AD001 = 3;
             BattleMenuState = BTL_MENU_STATE_UNK_1;
@@ -639,8 +639,8 @@ s32 btl_main_menu_update(void) {
             switch (D_802AD001) {
                 case 1:
                     if (D_802AD001 == 1) {
-                        id = D_802AD04C;
-                        hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                        hid = D_802AD04C;
+                        hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                     }
                 default:
                     D_802AD001--;
@@ -656,14 +656,14 @@ s32 btl_main_menu_update(void) {
 
                         l = BattleMenu_BasePosX + x;
                         t = BattleMenu_BasePosY + y;
-                        id = D_802AD010[i];
-                        hud_element_set_render_pos(id, l, t);
-                        hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                        hid = D_802AD010[i];
+                        hud_element_set_render_pos(hid, l, t);
+                        hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
 
-                        id = D_802AD028[i];
-                        hud_element_set_render_pos(id, l, t);
-                        hud_element_set_alpha(id, 100);
-                        hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                        hid = D_802AD028[i];
+                        hud_element_set_render_pos(hid, l, t);
+                        hud_element_set_alpha(hid, 100);
+                        hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                     }
 
                     x = 0.0f;
@@ -673,11 +673,11 @@ s32 btl_main_menu_update(void) {
 
                     l = BattleMenu_BasePosX + x;
                     t = BattleMenu_BasePosY + y;
-                    id = D_802AD040;
-                    hud_element_set_render_pos(id, l, t);
-                    hud_element_set_alpha(id, 180);
-                    hud_element_set_scale(id, 0.85f);
-                    hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
+                    hid = D_802AD040;
+                    hud_element_set_render_pos(hid, l, t);
+                    hud_element_set_alpha(hid, 180);
+                    hud_element_set_scale(hid, 0.85f);
+                    hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                     BattleMenuState = BTL_MENU_STATE_ACCEPT_INPUT;
                     break;
             }
@@ -973,17 +973,17 @@ void func_802A27D0(void) {
 void func_802A27E4(void) {
     s32 i;
 
-    set_window_update(WINDOW_ID_1, WINDOW_UPDATE_HIDE);
+    set_window_update(WIN_BTL_MOVES_MENU, WINDOW_UPDATE_HIDE);
 
     if (!BattleMenu_UsingSpiritsSubmenu) {
-        set_window_update(WINDOW_ID_2, WINDOW_UPDATE_HIDE);
-        set_window_update(WINDOW_ID_3, WINDOW_UPDATE_HIDE);
+        set_window_update(WIN_BTL_MOVES_TITLE, WINDOW_UPDATE_HIDE);
+        set_window_update(WIN_BTL_MOVES_ICON, WINDOW_UPDATE_HIDE);
     } else {
-        set_window_update(WINDOW_ID_4, WINDOW_UPDATE_HIDE);
-        set_window_update(WINDOW_ID_5, WINDOW_UPDATE_HIDE);
+        set_window_update(WIN_BTL_SPIRITS_TITLE, WINDOW_UPDATE_HIDE);
+        set_window_update(WIN_BTL_SPIRITS_ICON, WINDOW_UPDATE_HIDE);
     }
 
-    set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
+    set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_HIDE);
 
     for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
         hud_element_free(BattleMenu_Moves_OptionIDs[i]);
@@ -1022,17 +1022,17 @@ void func_802A2910(void) {
     }
 
     hud_element_set_script(BattleMenu_Moves_CursorID, &HES_AnimatedHandPointer);
-    set_window_update(WINDOW_ID_1, WINDOW_UPDATE_TRANSPARENT);
+    set_window_update(WIN_BTL_MOVES_MENU, WINDOW_UPDATE_TRANSPARENT);
 
     if (!BattleMenu_UsingSpiritsSubmenu) {
-        set_window_update(WINDOW_ID_2, WINDOW_UPDATE_TRANSPARENT);
-        set_window_update(WINDOW_ID_3, WINDOW_UPDATE_TRANSPARENT);
+        set_window_update(WIN_BTL_MOVES_TITLE, WINDOW_UPDATE_TRANSPARENT);
+        set_window_update(WIN_BTL_MOVES_ICON, WINDOW_UPDATE_TRANSPARENT);
     } else {
-        set_window_update(WINDOW_ID_4, WINDOW_UPDATE_TRANSPARENT);
-        set_window_update(WINDOW_ID_5, WINDOW_UPDATE_TRANSPARENT);
+        set_window_update(WIN_BTL_SPIRITS_TITLE, WINDOW_UPDATE_TRANSPARENT);
+        set_window_update(WIN_BTL_SPIRITS_ICON, WINDOW_UPDATE_TRANSPARENT);
     }
 
-    set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
+    set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
     BattleMenu_Moves_TextColor = MSG_PAL_STANDARD;
     D_802AD10F = 1;
     BattleMenu_Moves_TextAlpha = 255;
@@ -1044,16 +1044,16 @@ void func_802A2AB8(void) {
     s32* moveOptionCostUnitIconIDs;
     s32 i;
 
-    set_window_update(WINDOW_ID_1, WINDOW_UPDATE_TRANSPARENT);
+    set_window_update(WIN_BTL_MOVES_MENU, WINDOW_UPDATE_TRANSPARENT);
 
     if (!BattleMenu_UsingSpiritsSubmenu) {
-        set_window_update(WINDOW_ID_2, WINDOW_UPDATE_TRANSPARENT);
-        set_window_update(WINDOW_ID_3, WINDOW_UPDATE_TRANSPARENT);
+        set_window_update(WIN_BTL_MOVES_TITLE, WINDOW_UPDATE_TRANSPARENT);
+        set_window_update(WIN_BTL_MOVES_ICON, WINDOW_UPDATE_TRANSPARENT);
     } else {
-        set_window_update(WINDOW_ID_4, WINDOW_UPDATE_TRANSPARENT);
-        set_window_update(WINDOW_ID_5, WINDOW_UPDATE_TRANSPARENT);
+        set_window_update(WIN_BTL_SPIRITS_TITLE, WINDOW_UPDATE_TRANSPARENT);
+        set_window_update(WIN_BTL_SPIRITS_ICON, WINDOW_UPDATE_TRANSPARENT);
     }
-    set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
+    set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
 
     moveOptionIconIDs = BattleMenu_Moves_OptionIDs;
 
@@ -1079,7 +1079,7 @@ void func_802A2AB8(void) {
 }
 
 void func_802A2C58(void) {
-    set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
+    set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
     battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_1E;
 }
 
@@ -1112,7 +1112,7 @@ s32 btl_submenu_moves_update(void) {
     s32 msgX;
     s32 msgID;
     s32 cond;
-    s32 id;
+    HudElemID hid;
     s32 i;
     s32 j;
 
@@ -1155,73 +1155,73 @@ s32 btl_submenu_moves_update(void) {
             }
 
             for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
-                id = hud_element_create(battle_menu_moveOptionIconScripts[BattleMenu_Moves_OptionIndexMap[i]]);
-                BattleMenu_Moves_OptionIDs[i] = id;
-                hud_element_set_scale(id, 0.45f);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                hid = hud_element_create(battle_menu_moveOptionIconScripts[BattleMenu_Moves_OptionIndexMap[i]]);
+                BattleMenu_Moves_OptionIDs[i] = hid;
+                hud_element_set_scale(hid, 0.45f);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
             }
 
-            id = hud_element_create(&HES_AnimatedHandPointer);
-            BattleMenu_Moves_CursorID = id;
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(id, BattleMenu_Moves_PosX, BattleMenu_Moves_PosY);
+            hid = hud_element_create(&HES_AnimatedHandPointer);
+            BattleMenu_Moves_CursorID = hid;
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
+            hud_element_set_render_pos(hid, BattleMenu_Moves_PosX, BattleMenu_Moves_PosY);
 
-            id = hud_element_create(&HES_GreenArrowUp);
-            BattleMenu_Moves_UpArrowID = id;
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(id, BattleMenu_Moves_PosX + 39, BattleMenu_Moves_PosY - 7);
+            hid = hud_element_create(&HES_GreenArrowUp);
+            BattleMenu_Moves_UpArrowID = hid;
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
+            hud_element_set_render_pos(hid, BattleMenu_Moves_PosX + 39, BattleMenu_Moves_PosY - 7);
 
-            id = hud_element_create(&HES_GreenArrowDown);
-            BattleMenu_Moves_DownArrowID = id;
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(id, BattleMenu_Moves_PosX + 39, BattleMenu_Moves_PosY + 78);
+            hid = hud_element_create(&HES_GreenArrowDown);
+            BattleMenu_Moves_DownArrowID = hid;
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
+            hud_element_set_render_pos(hid, BattleMenu_Moves_PosX + 39, BattleMenu_Moves_PosY + 78);
 
             if (!BattleMenu_UsingSpiritsSubmenu) {
-                id = hud_element_create(&HES_StatusFlower);
-                BattleMenu_Moves_TitleID = id;
-                hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
+                hid = hud_element_create(&HES_StatusFlower);
+                BattleMenu_Moves_TitleID = hid;
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
             } else {
-                id = hud_element_create(&HES_MenuStarPower);
-                BattleMenu_Moves_TitleID = id;
-                hud_element_set_scale(id, 0.75f);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
+                hid = hud_element_create(&HES_MenuStarPower);
+                BattleMenu_Moves_TitleID = hid;
+                hud_element_set_scale(hid, 0.75f);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
             }
-            hud_element_set_render_pos(id, BattleMenu_Moves_PosX + 56, BattleMenu_Moves_PosY);
+            hud_element_set_render_pos(hid, BattleMenu_Moves_PosX + 56, BattleMenu_Moves_PosY);
 
             for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
                 if (!BattleMenu_UsingSpiritsSubmenu) {
                     switch (battle_menu_moveOptionDisplayCostReductionColors[i]) {
                         case 0:
-                            id = hud_element_create(&HES_FPCost);
-                            BattleMenu_Moves_OptionCostUnitIDs[i] = id;
+                            hid = hud_element_create(&HES_FPCost);
+                            BattleMenu_Moves_OptionCostUnitIDs[i] = hid;
                             break;
                         case 1:
-                            id = hud_element_create(&HES_FPCostReduced);
-                            BattleMenu_Moves_OptionCostUnitIDs[i] = id;
+                            hid = hud_element_create(&HES_FPCostReduced);
+                            BattleMenu_Moves_OptionCostUnitIDs[i] = hid;
                             break;
                         default:
-                            id = hud_element_create(&HES_FPCostReducedTwice);
-                            BattleMenu_Moves_OptionCostUnitIDs[i] = id;
+                            hid = hud_element_create(&HES_FPCostReducedTwice);
+                            BattleMenu_Moves_OptionCostUnitIDs[i] = hid;
                             break;
                     }
                 } else {
                     switch (battle_menu_moveOptionDisplayCostReductionColors[i]) {
                         case 0:
-                            id = hud_element_create(&HES_POWCost);
-                            BattleMenu_Moves_OptionCostUnitIDs[i] = id;
+                            hid = hud_element_create(&HES_POWCost);
+                            BattleMenu_Moves_OptionCostUnitIDs[i] = hid;
                             break;
                         case 1:
-                            id = hud_element_create(&HES_POWCostReduced);
-                            BattleMenu_Moves_OptionCostUnitIDs[i] = id;
+                            hid = hud_element_create(&HES_POWCostReduced);
+                            BattleMenu_Moves_OptionCostUnitIDs[i] = hid;
                             break;
                         default:
-                            id = hud_element_create(&HES_POWCostReducedTwice);
-                            BattleMenu_Moves_OptionCostUnitIDs[i] = id;
+                            hid = hud_element_create(&HES_POWCostReducedTwice);
+                            BattleMenu_Moves_OptionCostUnitIDs[i] = hid;
                             break;
                     }
                 }
-                hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
-                hud_element_set_render_pos(id, BattleMenu_Moves_PosX + 56, BattleMenu_Moves_PosY);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_render_pos(hid, BattleMenu_Moves_PosX + 56, BattleMenu_Moves_PosY);
             }
 
             BattleMenu_Moves_TextColor = MSG_PAL_STANDARD;
@@ -1229,38 +1229,37 @@ s32 btl_submenu_moves_update(void) {
             moveX = BattleMenu_Moves_PosX;
             moveY = BattleMenu_Moves_PosY;
 #if VERSION_JP
-            set_window_properties(1, moveX, moveY, 140, (D_802AD10E * 13) + 28, 0, func_802A3C98, NULL, -1);
+            set_window_properties(WIN_BTL_MOVES_MENU, moveX, moveY, 140, (D_802AD10E * 13) + 28, 0, btl_menu_moves_draw_content, NULL, -1);
 #endif
             if (!BattleMenu_UsingSpiritsSubmenu) {
 #if !VERSION_JP
-                set_window_properties(1, moveX, moveY, 150, (D_802AD10E * 13) + 28, 0, func_802A3C98, NULL, -1);
+                set_window_properties(WIN_BTL_MOVES_MENU, moveX, moveY, 150, (D_802AD10E * 13) + 28, 0, btl_menu_moves_draw_content, NULL, -1);
 #endif
-                set_window_properties(2, moveX + OFFSET_X_1, moveY - 6, WIDTH_1, 16, 1, func_802A43DC, NULL, -1);
-                set_window_properties(3, moveX + OFFSET_X_2, moveY - 12, 32, 32, 1, func_802A4448, NULL, -1);
+                set_window_properties(WIN_BTL_MOVES_TITLE, moveX + OFFSET_X_1, moveY - 6, WIDTH_1, 16, 1, btl_menu_moves_show_title, NULL, -1);
+                set_window_properties(WIN_BTL_MOVES_ICON, moveX + OFFSET_X_2, moveY - 12, 32, 32, 1, btl_menu_moves_show_icon, NULL, -1);
             } else {
                 s16 new_var;
 
 #if !VERSION_JP
-                set_window_properties(1, moveX, moveY, 144, (D_802AD10E * 13) + 28, 0, func_802A3C98, NULL, -1);
+                set_window_properties(WIN_BTL_MOVES_MENU, moveX, moveY, 144, (D_802AD10E * 13) + 28, 0, btl_menu_moves_draw_content, NULL, -1);
 #endif
                 new_var = moveY; // todo required to match
-                set_window_properties(4, moveX + 10, new_var - 6, WIDTH_2, 16, 1, func_802A43DC, 0, -1);
-                set_window_properties(5, moveX + OFFSET_X_3, new_var - 12, 32, 35, 1, func_802A4448, 0, -1);
+                set_window_properties(WIN_BTL_SPIRITS_TITLE, moveX + 10, new_var - 6, WIDTH_2, 16, 1, btl_menu_moves_show_title, 0, -1);
+                set_window_properties(WIN_BTL_SPIRITS_ICON, moveX + OFFSET_X_3, new_var - 12, 32, 35, 1, btl_menu_moves_show_icon, 0, -1);
             }
 
             moveX = MOVE_X;
             moveY = BattleMenu_Moves_PosY;
-            set_window_properties(8, moveX, 186, WIDTH_3, 32, WINDOW_PRIORITY_20, func_802A4494, NULL, -1);
-
-            set_window_update(WINDOW_ID_1, WINDOW_UPDATE_SHOW);
+            set_window_properties(WIN_BTL_DESC_BOX, moveX, 186, WIDTH_3, 32, WINDOW_PRIORITY_20, btl_menu_moves_show_desc, NULL, -1);
+            set_window_update(WIN_BTL_MOVES_MENU, WINDOW_UPDATE_SHOW);
             if (!BattleMenu_UsingSpiritsSubmenu) {
-                set_window_update(WINDOW_ID_2, WINDOW_UPDATE_SHOW);
-                set_window_update(WINDOW_ID_3, WINDOW_UPDATE_SHOW);
+                set_window_update(WIN_BTL_MOVES_TITLE, WINDOW_UPDATE_SHOW);
+                set_window_update(WIN_BTL_MOVES_ICON, WINDOW_UPDATE_SHOW);
             } else {
-                set_window_update(WINDOW_ID_4, WINDOW_UPDATE_SHOW);
-                set_window_update(WINDOW_ID_5, WINDOW_UPDATE_SHOW);
+                set_window_update(WIN_BTL_SPIRITS_TITLE, WINDOW_UPDATE_SHOW);
+                set_window_update(WIN_BTL_SPIRITS_ICON, WINDOW_UPDATE_SHOW);
             }
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
 
             do {
                 cond = FALSE;
@@ -1355,8 +1354,8 @@ s32 btl_submenu_moves_update(void) {
             break;
         case BTL_SUBMENU_MOVES_STATE_UNK_NEGATIVE_ONE:
             for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
-                id = BattleMenu_Moves_OptionIDs[i];
-                hud_element_set_tint(id, 160, 160, 160);
+                hid = BattleMenu_Moves_OptionIDs[i];
+                hud_element_set_tint(hid, 160, 160, 160);
             }
             hud_element_set_tint(BattleMenu_Moves_CursorID, 160, 160, 160);
             hud_element_set_tint(BattleMenu_Moves_UpArrowID, 160, 160, 160);
@@ -1364,21 +1363,21 @@ s32 btl_submenu_moves_update(void) {
             hud_element_set_tint(BattleMenu_Moves_TitleID, 160, 160, 160);
 
             for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
-                id = BattleMenu_Moves_OptionCostUnitIDs[i];
-                hud_element_set_tint(id, 160, 160, 160);
+                hid = BattleMenu_Moves_OptionCostUnitIDs[i];
+                hud_element_set_tint(hid, 160, 160, 160);
             }
 
             hud_element_set_script(BattleMenu_Moves_CursorID, &HES_HandPointer);
             BattleMenu_Moves_TextColor = MSG_PAL_0D;
-            set_window_update(WINDOW_ID_1, WINDOW_UPDATE_DARKENED);
+            set_window_update(WIN_BTL_MOVES_MENU, WINDOW_UPDATE_DARKENED);
             if (!BattleMenu_UsingSpiritsSubmenu) {
-                set_window_update(WINDOW_ID_2, WINDOW_UPDATE_DARKENED);
-                set_window_update(WINDOW_ID_3, WINDOW_UPDATE_DARKENED);
+                set_window_update(WIN_BTL_MOVES_TITLE, WINDOW_UPDATE_DARKENED);
+                set_window_update(WIN_BTL_MOVES_ICON, WINDOW_UPDATE_DARKENED);
             } else {
-                set_window_update(WINDOW_ID_4, WINDOW_UPDATE_DARKENED);
-                set_window_update(WINDOW_ID_5, WINDOW_UPDATE_DARKENED);
+                set_window_update(WIN_BTL_SPIRITS_TITLE, WINDOW_UPDATE_DARKENED);
+                set_window_update(WIN_BTL_SPIRITS_ICON, WINDOW_UPDATE_DARKENED);
             }
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_HIDE);
             if (!BattleMenu_UsingSpiritsSubmenu) {
                 status_bar_stop_blinking_fp();
             } else {
@@ -1394,15 +1393,15 @@ s32 btl_submenu_moves_update(void) {
             }
             return 255;
         case BTL_SUBMENU_MOVES_STATE_UNK_A:
-            set_window_update(WINDOW_ID_1, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_MOVES_MENU, WINDOW_UPDATE_HIDE);
             if (!BattleMenu_UsingSpiritsSubmenu) {
-                set_window_update(WINDOW_ID_2, WINDOW_UPDATE_HIDE);
-                set_window_update(WINDOW_ID_3, WINDOW_UPDATE_HIDE);
+                set_window_update(WIN_BTL_MOVES_TITLE, WINDOW_UPDATE_HIDE);
+                set_window_update(WIN_BTL_MOVES_ICON, WINDOW_UPDATE_HIDE);
             } else {
-                set_window_update(WINDOW_ID_4, WINDOW_UPDATE_HIDE);
-                set_window_update(WINDOW_ID_5, WINDOW_UPDATE_HIDE);
+                set_window_update(WIN_BTL_SPIRITS_TITLE, WINDOW_UPDATE_HIDE);
+                set_window_update(WIN_BTL_SPIRITS_ICON, WINDOW_UPDATE_HIDE);
             }
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_HIDE);
             if (!BattleMenu_UsingSpiritsSubmenu) {
                 status_bar_stop_blinking_fp();
             } else {
@@ -1415,28 +1414,28 @@ s32 btl_submenu_moves_update(void) {
             battle_menu_moveOptionActive = battle_menu_moveCursorPos;
             return BattleMenu_Moves_OptionIndexMap[battle_menu_moveCursorPos] + 1;
         case BTL_SUBMENU_MOVES_STATE_UNK_14:
-            set_window_update(WINDOW_ID_1, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_MOVES_MENU, WINDOW_UPDATE_SHOW);
             if (!BattleMenu_UsingSpiritsSubmenu) {
-                set_window_update(WINDOW_ID_2, WINDOW_UPDATE_SHOW);
-                set_window_update(WINDOW_ID_3, WINDOW_UPDATE_SHOW);
+                set_window_update(WIN_BTL_MOVES_TITLE, WINDOW_UPDATE_SHOW);
+                set_window_update(WIN_BTL_MOVES_ICON, WINDOW_UPDATE_SHOW);
             } else {
-                set_window_update(WINDOW_ID_4, WINDOW_UPDATE_SHOW);
-                set_window_update(WINDOW_ID_5, WINDOW_UPDATE_SHOW);
+                set_window_update(WIN_BTL_SPIRITS_TITLE, WINDOW_UPDATE_SHOW);
+                set_window_update(WIN_BTL_SPIRITS_ICON, WINDOW_UPDATE_SHOW);
             }
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
             battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_1;
             battle_menu_moveOptionActive = battle_menu_moveCursorPos;
             return BattleMenu_Moves_OptionIndexMap[battle_menu_moveCursorPos] + 1;
         case BTL_SUBMENU_MOVES_STATE_UNK_1E:
-            set_window_update(WINDOW_ID_1, WINDOW_UPDATE_9);
+            set_window_update(WIN_BTL_MOVES_MENU, WINDOW_UPDATE_9);
             if (!BattleMenu_UsingSpiritsSubmenu) {
-                set_window_update(WINDOW_ID_2, WINDOW_UPDATE_9);
-                set_window_update(WINDOW_ID_3, WINDOW_UPDATE_9);
+                set_window_update(WIN_BTL_MOVES_TITLE, WINDOW_UPDATE_9);
+                set_window_update(WIN_BTL_MOVES_ICON, WINDOW_UPDATE_9);
             } else {
-                set_window_update(WINDOW_ID_4, WINDOW_UPDATE_9);
-                set_window_update(WINDOW_ID_5, WINDOW_UPDATE_9);
+                set_window_update(WIN_BTL_SPIRITS_TITLE, WINDOW_UPDATE_9);
+                set_window_update(WIN_BTL_SPIRITS_ICON, WINDOW_UPDATE_9);
             }
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_HIDE);
             battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_NEGATIVE_ONE;
             break;
         case BTL_SUBMENU_MOVES_STATE_UNK_28:
@@ -1444,15 +1443,15 @@ s32 btl_submenu_moves_update(void) {
             battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_29;
             return -1;
         case BTL_SUBMENU_MOVES_STATE_UNK_29:
-            set_window_update(WINDOW_ID_1, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_MOVES_MENU, WINDOW_UPDATE_HIDE);
             if (!BattleMenu_UsingSpiritsSubmenu) {
-                set_window_update(WINDOW_ID_2, WINDOW_UPDATE_HIDE);
-                set_window_update(WINDOW_ID_3, WINDOW_UPDATE_HIDE);
+                set_window_update(WIN_BTL_MOVES_TITLE, WINDOW_UPDATE_HIDE);
+                set_window_update(WIN_BTL_MOVES_ICON, WINDOW_UPDATE_HIDE);
             } else {
-                set_window_update(WINDOW_ID_4, WINDOW_UPDATE_HIDE);
-                set_window_update(WINDOW_ID_5, WINDOW_UPDATE_HIDE);
+                set_window_update(WIN_BTL_SPIRITS_TITLE, WINDOW_UPDATE_HIDE);
+                set_window_update(WIN_BTL_SPIRITS_ICON, WINDOW_UPDATE_HIDE);
             }
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_HIDE);
 
             msgID = MSG_Menus_Battle_CantSelectNow;
             if (D_802AD258 == 0) {
@@ -1466,11 +1465,11 @@ s32 btl_submenu_moves_update(void) {
             msgWidth = get_msg_width(msgID, 0) + 23;
             moveX = (SCREEN_WIDTH / 2) - (msgWidth / 2);
 #if VERSION_JP
-            set_window_properties(9, moveX, 80, msgWidth, 28, 20, func_802A4534, NULL, -1);
+            set_window_properties(WIN_BTL_POPUP, moveX, 80, msgWidth, 28, 20, btl_menu_moves_show_error, NULL, -1);
 #else
-            set_window_properties(9, moveX, 80, msgWidth, D_802AB340[get_msg_lines(msgID) - 1], 20, func_802A4534, NULL, -1);
+            set_window_properties(WIN_BTL_POPUP, moveX, 80, msgWidth, D_802AB340[get_msg_lines(msgID) - 1], 20, btl_menu_moves_show_error, NULL, -1);
 #endif
-            set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
             D_802AD10B = 60;
             battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_2A;
             return -1;
@@ -1482,16 +1481,16 @@ s32 btl_submenu_moves_update(void) {
                 D_802AD10B--;
                 return -1;
             }
-            set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_HIDE);
-            set_window_update(WINDOW_ID_1, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_MOVES_MENU, WINDOW_UPDATE_SHOW);
             if (!BattleMenu_UsingSpiritsSubmenu) {
-                set_window_update(WINDOW_ID_2, WINDOW_UPDATE_SHOW);
-                set_window_update(WINDOW_ID_3, WINDOW_UPDATE_SHOW);
+                set_window_update(WIN_BTL_MOVES_TITLE, WINDOW_UPDATE_SHOW);
+                set_window_update(WIN_BTL_MOVES_ICON, WINDOW_UPDATE_SHOW);
             } else {
-                set_window_update(WINDOW_ID_4, WINDOW_UPDATE_SHOW);
-                set_window_update(WINDOW_ID_5, WINDOW_UPDATE_SHOW);
+                set_window_update(WIN_BTL_SPIRITS_TITLE, WINDOW_UPDATE_SHOW);
+                set_window_update(WIN_BTL_SPIRITS_ICON, WINDOW_UPDATE_SHOW);
             }
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
             battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_1;
             break;
     }
@@ -1519,7 +1518,7 @@ s32 btl_submenu_moves_update(void) {
 #define X_VAR3 24
 #endif
 
-void func_802A3C98(void* data, s32 x, s32 y) {
+void btl_menu_moves_draw_content(void* data, s32 x, s32 y) {
     s32 var_t0;
     s32 temp_f6;
     s32 xPos, yPos;
@@ -1758,7 +1757,7 @@ void func_802A3C98(void* data, s32 x, s32 y) {
 #define X_VAR5 6
 #endif
 
-void func_802A43DC(void* data, s32 x, s32 y) {
+void btl_menu_moves_show_title(void* data, s32 x, s32 y) {
     s32 msgID;
     s32 posX;
     s32 posY;
@@ -1781,7 +1780,7 @@ void func_802A43DC(void* data, s32 x, s32 y) {
     draw_msg(msgID, posX, posY, opacity, palette, DRAW_MSG_STYLE_MENU);
 }
 
-void func_802A4448(void* data, s32 x, s32 y) {
+void btl_menu_moves_show_icon(void* data, s32 x, s32 y) {
     s32 icon = BattleMenu_Moves_TitleID;
 
     hud_element_set_render_pos(icon, x + 16, y + 15);
@@ -1789,7 +1788,7 @@ void func_802A4448(void* data, s32 x, s32 y) {
     hud_element_draw_clipped(icon);
 }
 
-void func_802A4494(void* data, s32 x, s32 y) {
+void btl_menu_moves_show_desc(void* data, s32 x, s32 y) {
     switch (battle_menu_moveState) {
         case BTL_SUBMENU_MOVES_STATE_UNK_NEGATIVE_ONE:
         case BTL_SUBMENU_MOVES_STATE_UNK_1:
@@ -1804,7 +1803,7 @@ void func_802A4494(void* data, s32 x, s32 y) {
     }
 }
 
-void func_802A4534(void* data, s32 x, s32 y) {
+void btl_menu_moves_show_error(void* data, s32 x, s32 y) {
 #if VERSION_JP
     s32 posX = x + 11;
     s32 posY = y + 6;
@@ -1884,17 +1883,17 @@ void func_802A4718(void) {
 void func_802A472C(void) {
     s32 i;
 
-    set_window_update(WINDOW_ID_6, WINDOW_UPDATE_HIDE);
-    set_window_update(WINDOW_ID_7, WINDOW_UPDATE_HIDE);
-    set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
+    set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_HIDE);
+    set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_HIDE);
+    set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_HIDE);
 
     for (i = 0; i < D_802AD66C; i++) {
         hud_element_free(D_802AD628[i]);
     }
 
     hud_element_free(D_802AD618);
-    hud_element_free(GreenArrowUpID);
-    hud_element_free(GreenArrowDownID);
+    hud_element_free(HID_GreenArrowUp);
+    hud_element_free(HID_GreenArrowDown);
 }
 
 void func_802A47E0(void) {
@@ -1905,12 +1904,12 @@ void func_802A47E0(void) {
     }
 
     hud_element_set_tint(D_802AD618, 255, 255, 255);
-    hud_element_set_tint(GreenArrowUpID, 255, 255, 255);
-    hud_element_set_tint(GreenArrowDownID, 255, 255, 255);
+    hud_element_set_tint(HID_GreenArrowUp, 255, 255, 255);
+    hud_element_set_tint(HID_GreenArrowDown, 255, 255, 255);
     hud_element_set_script(D_802AD618, &HES_AnimatedHandPointer);
-    set_window_update(WINDOW_ID_6, WINDOW_UPDATE_TRANSPARENT);
-    set_window_update(WINDOW_ID_7, WINDOW_UPDATE_TRANSPARENT);
-    set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
+    set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_TRANSPARENT);
+    set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_TRANSPARENT);
+    set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
     D_802AD614 = MSG_PAL_STANDARD;
     D_802AD60B = 1;
     D_802AD624 = 255;
@@ -1920,17 +1919,17 @@ void func_802A47E0(void) {
 void func_802A48FC(void) {
     s32 i;
 
-    set_window_update(WINDOW_ID_6, WINDOW_UPDATE_TRANSPARENT);
-    set_window_update(WINDOW_ID_7, WINDOW_UPDATE_TRANSPARENT);
-    set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
+    set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_TRANSPARENT);
+    set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_TRANSPARENT);
+    set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
 
     for (i = 0; i < D_802AD66C; i++) {
         hud_element_set_tint(D_802AD628[i], 255, 255, 255);
     }
 
     hud_element_set_tint(D_802AD618, 255, 255, 255);
-    hud_element_set_tint(GreenArrowUpID, 255, 255, 255);
-    hud_element_set_tint(GreenArrowDownID, 255, 255, 255);
+    hud_element_set_tint(HID_GreenArrowUp, 255, 255, 255);
+    hud_element_set_tint(HID_GreenArrowDown, 255, 255, 255);
     hud_element_set_script(D_802AD618, &HES_AnimatedHandPointer);
     D_802AD614 = MSG_PAL_STANDARD;
     D_802AD60B = 1;
@@ -1938,9 +1937,9 @@ void func_802A48FC(void) {
 }
 
 void func_802A4A10(void) {
-    set_window_update(WINDOW_ID_6, WINDOW_UPDATE_TRANSPARENT);
-    set_window_update(WINDOW_ID_7, WINDOW_UPDATE_TRANSPARENT);
-    set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
+    set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_TRANSPARENT);
+    set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_TRANSPARENT);
+    set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
     BattleSubmenuStratsState = BTL_SUBMENU_STRATS_STATE_UNK_30;
 }
 
@@ -1960,7 +1959,7 @@ void func_802A4A10(void) {
 
 s32 btl_update_strats_menu(void) {
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 id;
+    HudElemID hid;
     s32 x, y;
     s32 width;
     s32 msgID;
@@ -1978,34 +1977,34 @@ s32 btl_update_strats_menu(void) {
             D_802AD60E = (StratsMenuPos - D_802AD608) * 13;
 
             for (i = 0; i < D_802AD66C; i++) {
-                D_802AD628[i] = id = hud_element_create(D_802AD640[i]);
-                hud_element_set_scale(id, 0.45f);
-                hud_element_set_flags(id, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                D_802AD628[i] = hid = hud_element_create(D_802AD640[i]);
+                hud_element_set_scale(hid, 0.45f);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
             }
 
-            D_802AD618 = id = hud_element_create(&HES_AnimatedHandPointer);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(id, D_802AD63C, D_802AD63E);
+            D_802AD618 = hid = hud_element_create(&HES_AnimatedHandPointer);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
+            hud_element_set_render_pos(hid, D_802AD63C, D_802AD63E);
 
-            GreenArrowUpID = id = hud_element_create(&HES_GreenArrowUp);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(id, D_802AD63C + 39, D_802AD63E - 7);
+            HID_GreenArrowUp = hid = hud_element_create(&HES_GreenArrowUp);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
+            hud_element_set_render_pos(hid, D_802AD63C + 39, D_802AD63E - 7);
 
-            GreenArrowDownID = id = hud_element_create(&HES_GreenArrowDown);
-            hud_element_set_flags(id, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(id, D_802AD63C + 39, D_802AD63E + 78);
+            HID_GreenArrowDown = hid = hud_element_create(&HES_GreenArrowDown);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
+            hud_element_set_render_pos(hid, D_802AD63C + 39, D_802AD63E + 78);
 
             D_802AD614 = MSG_PAL_STANDARD;
             x = D_802AD63C;
             y = D_802AD63E;
-            set_window_properties(WINDOW_ID_6, x, y, W_VAR1, (StratsMenuLines * 13) + 26, 0, btl_menu_strats_draw_content, NULL, -1);
-            set_window_properties(WINDOW_ID_7, x + X_VAR6, y - 6, W_VAR2, 16, 1, btl_menu_strats_show_title, NULL, -1);
+            set_window_properties(WIN_BTL_STRATS_MENU, x, y, W_VAR1, (StratsMenuLines * 13) + 26, 0, btl_menu_strats_draw_content, NULL, -1);
+            set_window_properties(WIN_BTL_STRATS_TITLE, x + X_VAR6, y - 6, W_VAR2, 16, 1, btl_menu_strats_show_title, NULL, -1);
             x = X_VAR7;
             y = 186;
-            set_window_properties(WINDOW_ID_8, x, y, W_VAR3, 32, WINDOW_PRIORITY_20, btl_menu_strats_show_desc, NULL, -1);
-            set_window_update(WINDOW_ID_6, WINDOW_UPDATE_SHOW);
-            set_window_update(WINDOW_ID_7, WINDOW_UPDATE_SHOW);
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
+            set_window_properties(WIN_BTL_DESC_BOX, x, y, W_VAR3, 32, WINDOW_PRIORITY_20, btl_menu_strats_show_desc, NULL, -1);
+            set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
             BattleSubmenuStratsState = BTL_SUBMENU_STRATS_STATE_CHOOSE;
             return 0;
         case BTL_SUBMENU_STRATS_STATE_CHOOSE:
@@ -2074,34 +2073,34 @@ s32 btl_update_strats_menu(void) {
                 hud_element_set_tint(D_802AD628[i], 160, 160, 160);
             }
             hud_element_set_tint(D_802AD618, 160, 160, 160);
-            hud_element_set_tint(GreenArrowUpID, 160, 160, 160);
-            hud_element_set_tint(GreenArrowDownID, 160, 160, 160);
+            hud_element_set_tint(HID_GreenArrowUp, 160, 160, 160);
+            hud_element_set_tint(HID_GreenArrowDown, 160, 160, 160);
             hud_element_set_script(D_802AD618, &HES_HandPointer);
             D_802AD614 = MSG_PAL_0D;
-            set_window_update(WINDOW_ID_6, WINDOW_UPDATE_DARKENED);
-            set_window_update(WINDOW_ID_7, WINDOW_UPDATE_DARKENED);
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_DARKENED);
+            set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_DARKENED);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_HIDE);
             return StratsMenuPos + 1;
         case BTL_SUBMENU_STRATS_STATE_CANCEL:
             return 255;
         case 10:
-            set_window_update(WINDOW_ID_6, WINDOW_UPDATE_HIDE);
-            set_window_update(WINDOW_ID_7, WINDOW_UPDATE_HIDE);
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_HIDE);
             BattleSubmenuStratsState = BTL_SUBMENU_STRATS_STATE_UNK_11;
             return StratsMenuPos + 1;
         case 11:
             return StratsMenuPos + 1;
         case 20:
-            set_window_update(WINDOW_ID_6, WINDOW_UPDATE_SHOW);
-            set_window_update(WINDOW_ID_7, WINDOW_UPDATE_SHOW);
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
             BattleSubmenuStratsState = BTL_SUBMENU_STRATS_STATE_CHOOSE;
             return StratsMenuPos + 1;
         case 30:
-            set_window_update(WINDOW_ID_6, WINDOW_UPDATE_SHOW);
-            set_window_update(WINDOW_ID_7, WINDOW_UPDATE_SHOW);
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
             BattleSubmenuStratsState = BTL_SUBMENU_STRATS_STATE_SELECT;
             return 0;
         case BTL_SUBMENU_STRATS_STATE_ERROR_INIT:
@@ -2109,9 +2108,9 @@ s32 btl_update_strats_menu(void) {
             BattleSubmenuStratsState = BTL_SUBMENU_STRATS_STATE_ERROR_SHOW;
             return -1;
         case BTL_SUBMENU_STRATS_STATE_ERROR_SHOW:
-            set_window_update(WINDOW_ID_6, WINDOW_UPDATE_HIDE);
-            set_window_update(WINDOW_ID_7, WINDOW_UPDATE_HIDE);
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_HIDE);
             switch (D_802AD610) {
                 case 0:
                     msgID = MSG_Menus_Battle_CantSwitch2;
@@ -2124,8 +2123,8 @@ s32 btl_update_strats_menu(void) {
                     break;
             }
             width = get_msg_width(msgID, 0) + 23;
-            set_window_properties(WINDOW_ID_BATTLE_POPUP, (SCREEN_WIDTH / 2) - (width / 2), 80, width, 28, 20, btl_menu_strats_show_error, NULL, -1);
-            set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
+            set_window_properties(WIN_BTL_POPUP, (SCREEN_WIDTH / 2) - (width / 2), 80, width, 28, 20, btl_menu_strats_show_error, NULL, -1);
+            set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
             D_802AD612 = 60;
             BattleSubmenuStratsState = BTL_SUBMENU_STRATS_STATE_ERROR_DONE;
             return -1;
@@ -2137,10 +2136,10 @@ s32 btl_update_strats_menu(void) {
                 D_802AD612--;
                 return -1;
             }
-            set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_HIDE);
-            set_window_update(WINDOW_ID_6, WINDOW_UPDATE_SHOW);
-            set_window_update(WINDOW_ID_7, WINDOW_UPDATE_SHOW);
-            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_SHOW);
+            set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
             BattleSubmenuStratsState = BTL_SUBMENU_STRATS_STATE_CHOOSE;
             return 0;
     }
@@ -2236,13 +2235,13 @@ void btl_menu_strats_draw_content(void* data, s32 x, s32 y) {
             hud_element_draw_clipped(id);
 
             if (D_802AD608 > 0) {
-                id = GreenArrowUpID;
+                id = HID_GreenArrowUp;
                 hud_element_set_render_pos(id, x + 67, y + 16);
                 hud_element_set_alpha(id, D_802AD624);
                 hud_element_draw_clipped(id);
             }
             if (D_802AD609 < D_802AD66C) {
-                id = GreenArrowDownID;
+                id = HID_GreenArrowDown;
                 hud_element_set_render_pos(id, x + 67, y + 100);
                 hud_element_set_alpha(id, D_802AD624);
                 hud_element_draw_clipped(id);
@@ -2529,7 +2528,7 @@ void btl_state_update_player_menu(void) {
             BattleMenu_OptionEnabled[entryIdx] = TRUE;
             BattleMenu_HudScripts[entryIdx] = battle_menu_StrategiesHudScript.enabled;
             BattleMenu_TitleMessages[entryIdx] = BattleMenu_CenteredMessages[BTL_MENU_TYPE_STRATEGIES];
-            if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL || gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE) {
+            if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL || gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE) {
                 BattleMenu_TitleMessages[entryIdx] = MSG_Menus_EndTraining_Centered;
             }
             battle_menu_isMessageDisabled[entryIdx] = 0;
@@ -2742,7 +2741,7 @@ void btl_state_update_player_menu(void) {
                     if (battleStatus->submenuMoveCount == 1) {
                         battleStatus->submenuMoveCount = 0;
                     }
-                    if (battleStatus->actionCommandMode == 2) {
+                    if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL) {
                         battleStatus->submenuMoveCount = 0;
                     }
                     break;
@@ -2751,7 +2750,7 @@ void btl_state_update_player_menu(void) {
                     if (battleStatus->submenuMoveCount == 1) {
                         battleStatus->submenuMoveCount = 0;
                     }
-                    if (battleStatus->actionCommandMode == 2) {
+                    if (battleStatus->actionCommandMode == AC_MODE_TUTORIAL) {
                         battleStatus->submenuMoveCount = 0;
                     }
                     break;
@@ -2840,7 +2839,7 @@ void btl_state_update_player_menu(void) {
                 btl_state_update_player_menu();
                 break;
             } else if (currentSubmenu == BTL_MENU_TYPE_STRATEGIES) {
-                if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
+                if (battleStatus->actionCommandMode != AC_MODE_TUTORIAL && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
                     gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_BUILD_STRATEGIES;
                     btl_state_update_player_menu();
                     btl_state_update_player_menu();
@@ -3774,11 +3773,11 @@ void btl_state_update_player_menu(void) {
             btl_main_menu_destroy();
             break;
         case BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_7:
-            set_window_update(WINDOW_ID_6, WINDOW_UPDATE_HIDE);
-            set_window_update(WINDOW_ID_7, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_HIDE);
             if (popup->result != POPUP_RESULT_INVALID) {
-                set_window_update(WINDOW_ID_6, WINDOW_UPDATE_9);
-                set_window_update(WINDOW_ID_7, WINDOW_UPDATE_9);
+                set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_9);
+                set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_9);
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_2;
             }
             break;
@@ -4641,11 +4640,11 @@ void btl_state_update_partner_menu(void) {
         btl_main_menu_destroy();
         break;
     case BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_7:
-        set_window_update(WINDOW_ID_6, WINDOW_UPDATE_HIDE);
-        set_window_update(WINDOW_ID_7, WINDOW_UPDATE_HIDE);
+        set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_HIDE);
+        set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_HIDE);
         if (popupMenu->result != POPUP_RESULT_INVALID) {
-            set_window_update(WINDOW_ID_6, WINDOW_UPDATE_9);
-            set_window_update(WINDOW_ID_7, WINDOW_UPDATE_9);
+            set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_9);
+            set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_9);
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_2;
         }
         break;
@@ -5095,7 +5094,7 @@ void btl_state_update_select_target(void) {
     Actor* actor;
     s32 targetListLength;
     s32 selectedTargetIndex;
-    s32 id;
+    HudElemID hid;
     s8* targetIndexList;
     SelectableTarget* target;
     s32 i;
@@ -5187,10 +5186,10 @@ void btl_state_update_select_target(void) {
 
             // create the HUD elements for the target pointers
             for (i = 0; i < targetListLength; i++) {
-                id = hud_element_create(&HES_HandPointDownLoop);
-                BattleMenu_TargetHudElems[i] = id;
-                hud_element_set_render_depth(id, 0);
-                hud_element_set_render_pos(id, 0, -100);
+                hid = hud_element_create(&HES_HandPointDownLoop);
+                BattleMenu_TargetHudElems[i] = hid;
+                hud_element_set_render_depth(hid, 0);
+                hud_element_set_render_pos(hid, 0, -100);
             }
             gBattleSubState = BTL_SUBSTATE_SELECT_TARGET_CHOOSE;
             break;
@@ -5243,12 +5242,12 @@ void btl_state_update_select_target(void) {
 
                     target = &actor->targetData[targetIndexList[selectedTargetIndex]];
                     actorFlags = get_actor(target->actorID)->flags;
-                    id = BattleMenu_TargetHudElems[0];
+                    hid = BattleMenu_TargetHudElems[0];
 
                     if (actorFlags & ACTOR_FLAG_UPSIDE_DOWN) {
-                        hud_element_set_script(id, &HES_HandPointLeftLoop);
+                        hud_element_set_script(hid, &HES_HandPointLeftLoop);
                     } else {
-                        hud_element_set_script(id, &HES_HandPointDownLoop);
+                        hud_element_set_script(hid, &HES_HandPointDownLoop);
                     }
                     sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
                 }

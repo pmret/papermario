@@ -3,7 +3,7 @@
 #include "../common/FallingStars.inc.c"
 
 EvtScript N(EVS_ExitWalk_osr) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, hos_00_ENTRY_0)
     Exec(ExitWalk)
     Switch(GB_StoryProgress)
@@ -29,7 +29,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_TexPan_Unknown) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Set(LVar0, 0)
     Loop(0)
         Call(SetTexPanOffset, TEX_PANNER_D, TEX_PANNER_MAIN, LVar0, 0)

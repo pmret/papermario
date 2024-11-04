@@ -73,7 +73,7 @@ EvtScript N(EVS_Scene_RotatingWall) = {
 };
 
 EvtScript N(EVS_UseRotatingWall) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(PlayerMoveTo, -205, -10, 15 * DT)
     Call(InterpPlayerYaw, 270, 5)
@@ -93,7 +93,7 @@ EvtScript N(EVS_UseRotatingWall) = {
 };
 
 EvtScript N(EVS_UseRotatingWall_FirstTime) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Call(FacePlayerTowardPoint, -222, 0, 5)
     Wait(10 * DT)

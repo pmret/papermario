@@ -103,7 +103,6 @@ void N(PatrolAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     script->AI_TEMP_STATE = AI_STATE_LOITER;
 }
 
-
 void N(PatrolAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -235,7 +234,7 @@ void N(PatrolAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
 
     npc->duration--;
     if (npc->duration == 0) {
-        if (enemy->aiFlags & ENEMY_AI_FLAG_80) {
+        if (enemy->aiFlags & AI_FLAG_80) {
             script->AI_TEMP_STATE = AI_STATE_PATROL_15;
         } else {
             script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;

@@ -45,7 +45,7 @@ EffectInstance* lightning_main(
 
     bp.init = lightning_init;
     bp.update = lightning_update;
-    bp.renderWorld = lightning_render;
+    bp.renderScene = lightning_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_LIGHTNING;
@@ -101,7 +101,7 @@ EffectInstance* lightning_main(
         s32 effectArg0;
 
         load_effect(EFFECT_FLASHING_BOX_SHOCKWAVE);
-        if (gGameStatusPtr->isBattle == TRUE) {
+        if (gGameStatusPtr->context == CONTEXT_BATTLE) {
             effectArg0 = FX_SHOCK_OVERLAY_LIGHTNING_BATTLE;
         } else {
             effectArg0 = FX_SHOCK_OVERLAY_LIGHTNING_WORLD;
@@ -229,7 +229,7 @@ void lightning_appendGfx(void* effect) {
     u16 perspNorm;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     if (unk_00 != 1 || unk_18 >= 18) {
         s32 ult2;

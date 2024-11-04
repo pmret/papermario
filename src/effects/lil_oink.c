@@ -59,7 +59,7 @@ EffectInstance* lil_oink_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
     bp.unk_00 = 0;
     bp.init = lil_oink_init;
     bp.update = lil_oink_update;
-    bp.renderWorld = lil_oink_render;
+    bp.renderScene = lil_oink_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_LIL_OINK;
 
@@ -176,7 +176,7 @@ void lil_oink_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x9, VIRTUAL_TO_PHYSICAL(eff->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x9, VIRTUAL_TO_PHYSICAL(eff->shared->graphics));
 
     gSPDisplayList(gMainGfxPos++, D_09002D70_401FC0);
     gSPLookAt(gMainGfxPos++, &gDisplayContext->lookAt);

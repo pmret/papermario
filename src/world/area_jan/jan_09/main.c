@@ -9,7 +9,7 @@ EvtScript N(EVS_ExitWalk_jan_08_2) = EVT_EXIT_WALK(60, jan_09_ENTRY_0, "jan_08",
 EvtScript N(EVS_ExitWalk_jan_06_3) = EVT_EXIT_WALK(60, jan_09_ENTRY_1, "jan_06", jan_06_ENTRY_3);
 
 EvtScript N(EVS_GotoMap_jan_11_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(GotoMap, Ref("jan_11"), jan_11_ENTRY_0)
     Wait(100)
     Return
@@ -17,7 +17,7 @@ EvtScript N(EVS_GotoMap_jan_11_0) = {
 };
 
 EvtScript N(EVS_TouchFloor_Pipe) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Set(LVarA, LVar0)
     Set(LVarB, LVar1)
     Set(LVarC, LVar2)

@@ -55,7 +55,7 @@ void bulb_glow_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, EffectInst
 
     bp.init = bulb_glow_init;
     bp.update = bulb_glow_update;
-    bp.renderWorld = bulb_glow_render;
+    bp.renderScene = bulb_glow_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_BULB_GLOW;
@@ -183,7 +183,7 @@ void bulb_glow_appendGfx(void* effect) {
     }
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     temp_s1 = &D_E0078918[type];
     glowExtent = temp_s1->unk_10;

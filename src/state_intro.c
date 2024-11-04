@@ -156,7 +156,7 @@ void state_step_intro(void) {
             break;
         case INTRO_LOAD_MAP:
             set_curtain_draw_callback(NULL);
-            gGameStatusPtr->isBattle = FALSE;
+            gGameStatusPtr->context = CONTEXT_WORLD;
             gGameStatusPtr->debugUnused1 = FALSE;
             gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;
             gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;

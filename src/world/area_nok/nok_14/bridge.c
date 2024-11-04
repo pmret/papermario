@@ -4,7 +4,7 @@
 #include "world/common/EnableCameraLeadingPlayer.inc.c"
 
 EvtScript N(EVS_Scene_BuildBridge) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(DisablePlayerInput, TRUE)
     Wait(10)
@@ -120,7 +120,7 @@ EvtScript N(EVS_Scene_BuildBridge) = {
     Call(N(EnableCameraLeadingPlayer))
     Call(DisablePlayerPhysics, FALSE)
     Call(DisablePlayerInput, FALSE)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Unbind
     Return
     End

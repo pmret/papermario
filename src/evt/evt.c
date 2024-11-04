@@ -86,7 +86,7 @@ ApiStatus evt_handle_end_loop(Evt* script) {
 ApiStatus evt_handle_break_loop(Evt* script) {
     ASSERT(script->loopDepth >= 0);
     script->ptrNextLine = evt_goto_end_loop(script);
-    script->loopDepth -= 1;
+    script->loopDepth--;
     return ApiStatus_DONE2;
 }
 
@@ -102,7 +102,7 @@ ApiStatus evt_handle_wait(Evt* script) {
         return ApiStatus_DONE2;
     }
 
-    script->functionTemp[0] -= 1;
+    script->functionTemp[0]--;
     return !script->functionTemp[0];
 }
 
@@ -537,7 +537,7 @@ ApiStatus evt_handle_end_switch(Evt* script) {
     ASSERT(switchDepth >= 0);
 
     script->switchBlockState[switchDepth] = 0;
-    script->switchDepth -= 1;
+    script->switchDepth--;
 
     return ApiStatus_DONE2;
 }
@@ -920,34 +920,7 @@ ApiStatus evt_handle_call(Evt* script) {
 
 ApiStatus evt_handle_exec1(Evt* script) {
     Bytecode* args = script->ptrReadPos;
-    Evt* newScript;
-    s32 i;
-
-    newScript = start_script_in_group((EvtScript*)evt_get_variable(script, *args++), script->priority, 0,
-                                      script->groupFlags);
-
-    newScript->owner1 = script->owner1;
-    newScript->owner2 = script->owner2;
-
-    for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
-        newScript->varTable[i] = script->varTable[i];
-    }
-
-    for (i = 0; i < ARRAY_COUNT(script->varFlags); i++) {
-        newScript->varFlags[i] = script->varFlags[i];
-    }
-
-    newScript->array = script->array;
-    newScript->flagArray = script->flagArray;
-
-    return ApiStatus_DONE2;
-}
-
-
-ApiStatus evt_handle_exec1_get_id(Evt* script) {
-    Bytecode* args = script->ptrReadPos;
     EvtScript* newSource = (EvtScript*)evt_get_variable(script, *args++);
-    Bytecode arg2 = *args++;
     Evt* newScript;
     s32 i;
 
@@ -967,15 +940,42 @@ ApiStatus evt_handle_exec1_get_id(Evt* script) {
     newScript->array = script->array;
     newScript->flagArray = script->flagArray;
 
-    evt_set_variable(script, arg2, newScript->id);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus evt_handle_exec1_get_id(Evt* script) {
+    Bytecode* args = script->ptrReadPos;
+    EvtScript* newSource = (EvtScript*)evt_get_variable(script, *args++);
+    Bytecode outVar = *args++;
+    Evt* newScript;
+    s32 i;
+
+    newScript = start_script_in_group(newSource, script->priority, 0, script->groupFlags);
+
+    newScript->owner1 = script->owner1;
+    newScript->owner2 = script->owner2;
+
+    for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
+        newScript->varTable[i] = script->varTable[i];
+    }
+
+    for (i = 0; i < ARRAY_COUNT(script->varFlags); i++) {
+        newScript->varFlags[i] = script->varFlags[i];
+    }
+
+    newScript->array = script->array;
+    newScript->flagArray = script->flagArray;
+
+    evt_set_variable(script, outVar, newScript->id);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus evt_handle_exec_wait(Evt* script) {
     Bytecode* args = script->ptrReadPos;
+    EvtScript* newSource = (EvtScript*)evt_get_variable(script, *args++);
 
-    start_child_script(script, (EvtScript*) evt_get_variable(script, *args++), 0);
+    start_child_script(script, newSource, 0);
     script->curOpcode = EVT_OP_INTERNAL_FETCH;
     return ApiStatus_FINISH;
 }

@@ -21,7 +21,6 @@ extern Gfx Entity_Tweester_RenderInnerWhirl[];
 extern Gfx Entity_Tweester_RenderOuterWhirl[];
 extern Gfx Entity_Tweester_Render[];
 
-
 void entity_Tweester_render_inner_whirl(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
     TweesterData* data = entity->dataBuf.tweester;
@@ -108,7 +107,6 @@ void entity_Tweester_setupGfx(s32 entityIndex) {
     entity_Tweester_render_outer_whirl(entityIndex);
     entity_Tweester_render_face(entityIndex);
 }
-
 
 void entity_Tweester_update_face_anim(Entity* entity) {
     TweesterData* data = entity->dataBuf.tweester;
@@ -207,7 +205,7 @@ void entity_Tweester_idle(Entity* entity) {
     f32 delta;
     f32 targetRotationSpeed;
 
-    if (get_time_freeze_mode() == TIME_FREEZE_NORMAL &&
+    if (get_time_freeze_mode() == TIME_FREEZE_NONE &&
         !is_picking_up_item() &&
         !(playerStatus->flags & PS_FLAG_PAUSED) &&
         (playerData->curPartner != PARTNER_GOOMBARIO ||

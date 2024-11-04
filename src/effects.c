@@ -2,18 +2,24 @@
 #include "effects.h"
 #include "ld_addrs.h"
 
-typedef s32 TlbEntry[0x1000 / 4];
+typedef s8 TlbEntry[0x1000];
 typedef TlbEntry TlbMappablePage[15];
 
-BSS EffectGraphics gEffectGraphicsData[15];
+#define EFFECT_GLOBALS_TLB_IDX 0x10
+
+BSS EffectSharedData gEffectSharedData[15];
 EffectInstance* gEffectInstances[96];
 
-extern TlbMappablePage D_80197000;
-extern Addr D_801A6000;
+extern TlbMappablePage gEffectDataBuffer;
+extern Addr gEffectGlobals;
 
 #define FX_ENTRY(name, gfx_name) { \
-    name##_main, effect_##name##_ROM_START, effect_##name##_ROM_END, effect_##name##_VRAM, gfx_name##_ROM_START, \
-    gfx_name##_ROM_END \
+    .entryPoint = name##_main, \
+    .dmaStart = effect_##name##_ROM_START, \
+    .dmaEnd = effect_##name##_ROM_END, \
+    .dmaDest = effect_##name##_VRAM, \
+    .graphicsDmaStart = gfx_name##_ROM_START, \
+    .graphicsDmaEnd = gfx_name##_ROM_END, \
 }
 
 #include "effects/effect_table.c"
@@ -35,8 +41,8 @@ void set_effect_pos_offset(EffectInstance* effect, f32 x, f32 y, f32 z) {
 void clear_effect_data(void) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
-        gEffectGraphicsData[i].flags = 0;
+    for (i = 0; i < ARRAY_COUNT(gEffectSharedData); i++) {
+        gEffectSharedData[i].flags = 0;
     }
 
     for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
@@ -44,8 +50,8 @@ void clear_effect_data(void) {
     }
 
     osUnmapTLBAll();
-    osMapTLB(0x10, NULL, _325AD0_VRAM, (s32)&D_801A6000 & 0xFFFFFF, -1, -1);
-    DMA_COPY_SEGMENT(_325AD0);
+    osMapTLB(EFFECT_GLOBALS_TLB_IDX, OS_PM_4K, effect_globals_VRAM, (s32)&gEffectGlobals & 0xFFFFFF, -1, -1);
+    DMA_COPY_SEGMENT(effect_globals);
 }
 
 void func_80059D48(void) {
@@ -53,15 +59,15 @@ void func_80059D48(void) {
 
 void update_effects(void) {
     if (!(gOverrideFlags & (GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400))) {
-        EffectGraphics* effectGraphics;
+        EffectSharedData* sharedData;
         s32 i;
 
-        // reset free delay for each EffectGraphics touched in previous update
-        for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
-            if (effectGraphics->flags & FX_GRAPHICS_LOADED) {
-                if (!(effectGraphics->flags & FX_GRAPHICS_CAN_FREE)) {
-                    effectGraphics->flags |= FX_GRAPHICS_CAN_FREE;
-                    effectGraphics->freeDelay = 3;
+        // reset free delay for each EffectSharedData touched in previous update
+        for (i = 0, sharedData = gEffectSharedData; i < ARRAY_COUNT(gEffectSharedData); i++, sharedData++) {
+            if (sharedData->flags & FX_SHARED_DATA_LOADED) {
+                if (!(sharedData->flags & FX_SHARED_DATA_CAN_FREE)) {
+                    sharedData->flags |= FX_SHARED_DATA_CAN_FREE;
+                    sharedData->freeDelay = 3;
                 }
             }
         }
@@ -71,34 +77,34 @@ void update_effects(void) {
             EffectInstance* effectInstance = gEffectInstances[i];
 
             if (effectInstance != NULL && (effectInstance->flags & FX_INSTANCE_FLAG_ENABLED)) {
-                effectInstance->graphics->flags &= ~FX_GRAPHICS_CAN_FREE;
+                effectInstance->shared->flags &= ~FX_SHARED_DATA_CAN_FREE;
 
-                if (gGameStatusPtr->isBattle) {
+                if (gGameStatusPtr->context != CONTEXT_WORLD) {
                     if (effectInstance->flags & FX_INSTANCE_FLAG_BATTLE) {
-                        effectInstance->graphics->update(effectInstance);
+                        effectInstance->shared->update(effectInstance);
                         effectInstance->flags |= FX_INSTANCE_FLAG_HAS_UPDATED;
                     }
                 } else {
                     if (!(effectInstance->flags & FX_INSTANCE_FLAG_BATTLE)) {
-                        effectInstance->graphics->update(effectInstance);
+                        effectInstance->shared->update(effectInstance);
                         effectInstance->flags |= FX_INSTANCE_FLAG_HAS_UPDATED;
                     }
                 }
             }
         }
 
-        // free any EffectGraphics which haven't been used recently
-        for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
-            if (effectGraphics->flags & FX_GRAPHICS_LOADED) {
-                if (effectGraphics->flags & FX_GRAPHICS_CAN_FREE) {
-                    if (effectGraphics->freeDelay != 0) {
-                        effectGraphics->freeDelay--;
+        // free any EffectSharedData which haven't been used recently
+        for (i = 0, sharedData = gEffectSharedData; i < ARRAY_COUNT(gEffectSharedData); i++, sharedData++) {
+            if (sharedData->flags & FX_SHARED_DATA_LOADED) {
+                if (sharedData->flags & FX_SHARED_DATA_CAN_FREE) {
+                    if (sharedData->freeDelay != 0) {
+                        sharedData->freeDelay--;
                     } else {
-                        if (effectGraphics->data != NULL) {
-                            general_heap_free(effectGraphics->data);
-                            effectGraphics->data = NULL;
+                        if (sharedData->graphics != NULL) {
+                            general_heap_free(sharedData->graphics);
+                            sharedData->graphics = NULL;
                         }
-                        effectGraphics->flags = FX_GRAPHICS_DISABLED;
+                        sharedData->flags = 0;
                         osUnmapTLB(i);
                     }
                 }
@@ -107,7 +113,7 @@ void update_effects(void) {
     }
 }
 
-void render_effects_world(void) {
+void render_effects_scene(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
@@ -116,13 +122,13 @@ void render_effects_world(void) {
         if (effectInstance != NULL) {
             if (effectInstance->flags & FX_INSTANCE_FLAG_ENABLED) {
                 if (effectInstance->flags & FX_INSTANCE_FLAG_HAS_UPDATED) {
-                    if (gGameStatusPtr->isBattle) {
+                    if (gGameStatusPtr->context != CONTEXT_WORLD) {
                         if (effectInstance->flags & FX_INSTANCE_FLAG_BATTLE) {
-                            effectInstance->graphics->renderWorld(effectInstance);
+                            effectInstance->shared->renderScene(effectInstance);
                         }
                     } else {
                         if (!(effectInstance->flags & FX_INSTANCE_FLAG_BATTLE)) {
-                            effectInstance->graphics->renderWorld(effectInstance);
+                            effectInstance->shared->renderScene(effectInstance);
                         }
                     }
                 }
@@ -143,15 +149,15 @@ void render_effects_UI(void) {
                 if (effectInstance->flags & FX_INSTANCE_FLAG_HAS_UPDATED) {
                     void (*renderUI)(EffectInstance* effect);
 
-                    if (gGameStatusPtr->isBattle && !(effectInstance->flags & FX_INSTANCE_FLAG_BATTLE)) {
+                    if (gGameStatusPtr->context != CONTEXT_WORLD && !(effectInstance->flags & FX_INSTANCE_FLAG_BATTLE)) {
                         continue;
                     }
 
-                    if (!gGameStatusPtr->isBattle && effectInstance->flags & FX_INSTANCE_FLAG_BATTLE) {
+                    if (gGameStatusPtr->context == CONTEXT_WORLD && effectInstance->flags & FX_INSTANCE_FLAG_BATTLE) {
                         continue;
                     }
 
-                    renderUI = effectInstance->graphics->renderUI;
+                    renderUI = effectInstance->shared->renderUI;
                     if (renderUI != stub_effect_delegate) {
                         if (cond) {
                             Camera* camera = &gCameras[gCurrentCameraID];
@@ -187,7 +193,7 @@ void render_effects_UI(void) {
 
 EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
     EffectInstance* newEffectInst;
-    EffectGraphics* effectGraphics;
+    EffectSharedData* sharedData;
     s32 i;
 
     // Search for an unused instance
@@ -203,47 +209,47 @@ EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
     gEffectInstances[i] = newEffectInst = general_heap_malloc(sizeof(*newEffectInst));
     ASSERT(newEffectInst != NULL);
 
-    effectGraphics = &gEffectGraphicsData[0];
-    newEffectInst->effectIndex = effectBp->effectID;
+    sharedData = &gEffectSharedData[0];
+    newEffectInst->effectID = effectBp->effectID;
     newEffectInst->flags = FX_INSTANCE_FLAG_ENABLED;
 
     // Look for a loaded effect of the proper index
-    for (i = 0; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
-        if ((effectGraphics->flags & FX_GRAPHICS_LOADED) && (effectGraphics->effectIndex == effectBp->effectID)) {
+    for (i = 0; i < ARRAY_COUNT(gEffectSharedData); i++) {
+        if ((sharedData->flags & FX_SHARED_DATA_LOADED) && (sharedData->effectIndex == effectBp->effectID)) {
             break;
         }
-        effectGraphics++;
+        sharedData++;
     }
 
-    ASSERT(i < ARRAY_COUNT(gEffectGraphicsData));
+    ASSERT(i < ARRAY_COUNT(gEffectSharedData));
 
     // If this is the first new instance of the effect, initialize the function pointers
-    if (effectGraphics->instanceCounter == 0) {
-        effectGraphics->update = effectBp->update;
-        if (effectGraphics->update == NULL) {
-            effectGraphics->renderWorld = stub_effect_delegate;
+    if (sharedData->instanceCounter == 0) {
+        sharedData->update = effectBp->update;
+        if (sharedData->update == NULL) {
+            sharedData->renderScene = stub_effect_delegate;
         }
 
-        effectGraphics->renderWorld = effectBp->renderWorld;
+        sharedData->renderScene = effectBp->renderScene;
         /// @bug? null check for renderUI instead of renderWorld
-        if (effectGraphics->renderUI == NULL) {
-            effectGraphics->renderUI = stub_effect_delegate;
+        if (sharedData->renderUI == NULL) {
+            sharedData->renderUI = stub_effect_delegate;
         }
 
-        effectGraphics->renderUI = effectBp->renderUI;
-        if (effectGraphics->renderUI == NULL) {
-            effectGraphics->renderUI = stub_effect_delegate;
+        sharedData->renderUI = effectBp->renderUI;
+        if (sharedData->renderUI == NULL) {
+            sharedData->renderUI = stub_effect_delegate;
         }
     }
 
-    effectGraphics->instanceCounter++;
-    newEffectInst->graphics = effectGraphics;
+    sharedData->instanceCounter++;
+    newEffectInst->shared = sharedData;
 
     if (effectBp->init != NULL) {
         effectBp->init(newEffectInst);
     }
 
-    if (gGameStatusPtr->isBattle) {
+    if (gGameStatusPtr->context != CONTEXT_WORLD) {
         newEffectInst->flags |= FX_INSTANCE_FLAG_BATTLE;
     }
     return newEffectInst;
@@ -288,55 +294,53 @@ void remove_all_effects(void) {
 
 s32 load_effect(s32 effectIndex) {
     EffectTableEntry* effectEntry = &gEffectTable[effectIndex];
-    EffectGraphics* effectGraphics;
-    TlbMappablePage* tlbMappablePages;
+    EffectSharedData* sharedData;
     s32 i;
 
     // Look for a loaded effect matching the desired index
-    for (i = 0, effectGraphics = &gEffectGraphicsData[0]; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
-        if (effectGraphics->flags & FX_GRAPHICS_LOADED && effectGraphics->effectIndex == effectIndex) {
+    for (i = 0, sharedData = &gEffectSharedData[0]; i < ARRAY_COUNT(gEffectSharedData); i++) {
+        if (sharedData->flags & FX_SHARED_DATA_LOADED && sharedData->effectIndex == effectIndex) {
             break;
         }
-        effectGraphics++;
+        sharedData++;
     }
 
     // If an effect was found within the table, initialize it and return
-    if (i < ARRAY_COUNT(gEffectGraphicsData)) {
-        effectGraphics->effectIndex = effectIndex;
-        effectGraphics->instanceCounter = 0;
-        effectGraphics->flags = FX_GRAPHICS_LOADED;
+    if (i < ARRAY_COUNT(gEffectSharedData)) {
+        sharedData->effectIndex = effectIndex;
+        sharedData->instanceCounter = 0;
+        sharedData->flags = FX_SHARED_DATA_LOADED;
         return 1;
     }
 
     // If a loaded effect wasn't found, look for the first empty space
-    for (i = 0, effectGraphics = &gEffectGraphicsData[0]; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
-        if (!(effectGraphics->flags & FX_GRAPHICS_LOADED)) {
+    for (i = 0, sharedData = &gEffectSharedData[0]; i < ARRAY_COUNT(gEffectSharedData); i++) {
+        if (!(sharedData->flags & FX_SHARED_DATA_LOADED)) {
             break;
         }
-        effectGraphics++;
+        sharedData++;
     }
 
     // If no empty space was found, panic
-    ASSERT(i < ARRAY_COUNT(gEffectGraphicsData));
+    ASSERT(i < ARRAY_COUNT(gEffectSharedData));
 
     // Map space for the effect
-    tlbMappablePages = &D_80197000;
-    osMapTLB(i, OS_PM_4K, effectEntry->dmaDest, (s32)((*tlbMappablePages)[i]) & 0xFFFFFF, -1, -1);
+    osMapTLB(i, OS_PM_4K, effectEntry->dmaDest, (s32)(gEffectDataBuffer[i]) & 0xFFFFFF, -1, -1);
 
     // Copy the effect into the newly mapped space
     dma_copy(effectEntry->dmaStart, effectEntry->dmaEnd, effectEntry->dmaDest);
 
     // If there's graphics data for the effect, allocate space and copy into the new space
     if (effectEntry->graphicsDmaStart != NULL) {
-        void* effectDataBuf = general_heap_malloc(effectEntry->graphicsDmaEnd - effectEntry->graphicsDmaStart);
-        effectGraphics->data = effectDataBuf;
-        ASSERT(effectDataBuf != NULL);
-        dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, effectGraphics->data);
+        void* graphics = general_heap_malloc(effectEntry->graphicsDmaEnd - effectEntry->graphicsDmaStart);
+        sharedData->graphics = graphics;
+        ASSERT(graphics != NULL);
+        dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, sharedData->graphics);
     }
 
     // Initialize the newly loaded effect data
-    effectGraphics->effectIndex = effectIndex;
-    effectGraphics->instanceCounter = 0;
-    effectGraphics->flags = FX_GRAPHICS_LOADED;
+    sharedData->effectIndex = effectIndex;
+    sharedData->instanceCounter = 0;
+    sharedData->flags = FX_SHARED_DATA_LOADED;
     return 1;
 }

@@ -114,11 +114,11 @@ EvtScript N(EVS_Fuzzipede_ReactToLight) = {
                 Set(LVarB, 1)
                 Call(DisablePlayerInput, FALSE)
             EndIf
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, 0)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, FALSE)
             Set(LVarA, 1)
         Else
             Call(N(AwaitPartnerNotWatt))
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, 1)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, TRUE)
             Set(LVarA, 0)
         EndIf
         Wait(1)
@@ -167,7 +167,7 @@ EvtScript N(EVS_NpcAI_Fuzzipede) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000, 0)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE, FALSE)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
     End
@@ -292,7 +292,7 @@ NpcData N(NpcData_Fuzzipede) = {
     .pos = { 333.0f, -10.0f, -130.0f },
     .yaw = 90,
     .settings = &N(NpcSettings_Fuzzipede),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_USE_INSPECT_ICON | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Fuzzipede_Anim04,

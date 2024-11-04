@@ -9,7 +9,6 @@ EvtScript N(EVS_GotoMap_tik_08_4) = {
     End
 };
 
-
 API_CALLABLE(N(GiveInitialSpringBoost)) {
     f32 x = gPlayerStatus.curSpeed * 5.0f * sin_deg(gPlayerStatus.targetYaw);
     f32 z = gPlayerStatus.curSpeed * 5.0f * -cos_deg(gPlayerStatus.targetYaw);

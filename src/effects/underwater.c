@@ -21,7 +21,7 @@ EffectInstance* underwater_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
 
     bp.init = underwater_init;
     bp.update = underwater_update;
-    bp.renderWorld = underwater_render;
+    bp.renderScene = underwater_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_UNDERWATER;
@@ -163,7 +163,7 @@ void underwater_appendGfx(void* effect) {
     s32 i, j;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxZBuffer);
     gSPDisplayList(gMainGfxPos++, D_09000528_3B9F98);
 

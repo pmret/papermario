@@ -6,7 +6,7 @@
 
 EvtScript N(EVS_CloseGates) = {
     Call(DisablePlayerInput, TRUE)
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
     Call(PlaySoundAtCollider, COLLIDER_o59, SOUND_LARGE_GATE_OPEN, SOUND_SPACE_DEFAULT)
@@ -26,7 +26,7 @@ EvtScript N(EVS_CloseGates) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o59, COLLIDER_FLAGS_UPPER_MASK)
     Call(DisablePlayerInput, FALSE)
     Wait(1)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
 };

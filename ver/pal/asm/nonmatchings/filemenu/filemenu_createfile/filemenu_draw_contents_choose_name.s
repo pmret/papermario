@@ -228,16 +228,16 @@ glabel filemenu_draw_contents_choose_name
 /* 175270 8024C850 14400010 */  bnez       $v0, .Lfilemenu_8024C894
 /* 175274 8024C854 240A00C6 */   addiu     $t2, $zero, 0xC6
 /* 175278 8024C858 8FAA0084 */  lw         $t2, 0x84($sp)
-/* 17527C 8024C85C 3C048025 */  lui        $a0, %hi(filemenu_createfile_hudElems+0x8)
-/* 175280 8024C860 8C8417C8 */  lw         $a0, %lo(filemenu_createfile_hudElems+0x8)($a0)
+/* 17527C 8024C85C 3C048025 */  lui        $a0, %hi(filemenu_createfile_HIDs+0x8)
+/* 175280 8024C860 8C8417C8 */  lw         $a0, %lo(filemenu_createfile_HIDs+0x8)($a0)
 /* 175284 8024C864 8FA90088 */  lw         $t1, 0x88($sp)
 /* 175288 8024C868 01502821 */  addu       $a1, $t2, $s0
 /* 17528C 8024C86C 24A50016 */  addiu      $a1, $a1, 0x16
 /* 175290 8024C870 01333021 */  addu       $a2, $t1, $s3
 /* 175294 8024C874 0C050D4D */  jal        hud_element_set_render_pos
 /* 175298 8024C878 24C60008 */   addiu     $a2, $a2, 0x8
-/* 17529C 8024C87C 3C048025 */  lui        $a0, %hi(filemenu_createfile_hudElems+0x8)
-/* 1752A0 8024C880 8C8417C8 */  lw         $a0, %lo(filemenu_createfile_hudElems+0x8)($a0)
+/* 17529C 8024C87C 3C048025 */  lui        $a0, %hi(filemenu_createfile_HIDs+0x8)
+/* 1752A0 8024C880 8C8417C8 */  lw         $a0, %lo(filemenu_createfile_HIDs+0x8)($a0)
 /* 1752A4 8024C884 0C050CE4 */  jal        hud_element_draw_without_clipping
 /* 1752A8 8024C888 0000A02D */   daddu     $s4, $zero, $zero
 /* 1752AC 8024C88C 8FA80048 */  lw         $t0, 0x48($sp)
@@ -439,16 +439,16 @@ glabel filemenu_draw_contents_choose_name
 /* 175580 8024CB60 14400010 */  bnez       $v0, .Lfilemenu_8024CBA4
 /* 175584 8024CB64 240A00C6 */   addiu     $t2, $zero, 0xC6
 /* 175588 8024CB68 8FAA0084 */  lw         $t2, 0x84($sp)
-/* 17558C 8024CB6C 3C048025 */  lui        $a0, %hi(filemenu_createfile_hudElems+0x8)
-/* 175590 8024CB70 8C8417C8 */  lw         $a0, %lo(filemenu_createfile_hudElems+0x8)($a0)
+/* 17558C 8024CB6C 3C048025 */  lui        $a0, %hi(filemenu_createfile_HIDs+0x8)
+/* 175590 8024CB70 8C8417C8 */  lw         $a0, %lo(filemenu_createfile_HIDs+0x8)($a0)
 /* 175594 8024CB74 8FA90088 */  lw         $t1, 0x88($sp)
 /* 175598 8024CB78 01502821 */  addu       $a1, $t2, $s0
 /* 17559C 8024CB7C 24A50016 */  addiu      $a1, $a1, 0x16
 /* 1755A0 8024CB80 01333021 */  addu       $a2, $t1, $s3
 /* 1755A4 8024CB84 0C050D4D */  jal        hud_element_set_render_pos
 /* 1755A8 8024CB88 24C60008 */   addiu     $a2, $a2, 0x8
-/* 1755AC 8024CB8C 3C048025 */  lui        $a0, %hi(filemenu_createfile_hudElems+0x8)
-/* 1755B0 8024CB90 8C8417C8 */  lw         $a0, %lo(filemenu_createfile_hudElems+0x8)($a0)
+/* 1755AC 8024CB8C 3C048025 */  lui        $a0, %hi(filemenu_createfile_HIDs+0x8)
+/* 1755B0 8024CB90 8C8417C8 */  lw         $a0, %lo(filemenu_createfile_HIDs+0x8)($a0)
 /* 1755B4 8024CB94 0C050CE4 */  jal        hud_element_draw_without_clipping
 /* 1755B8 8024CB98 0000A02D */   daddu     $s4, $zero, $zero
 /* 1755BC 8024CB9C 8FA80048 */  lw         $t0, 0x48($sp)

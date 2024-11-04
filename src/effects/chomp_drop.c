@@ -20,7 +20,7 @@ EffectInstance* chomp_drop_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
 
     bp.init = chomp_drop_init;
     bp.update = chomp_drop_update;
-    bp.renderWorld = chomp_drop_render;
+    bp.renderScene = chomp_drop_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_CHOMP_DROP;
@@ -146,7 +146,7 @@ void chomp_drop_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effectTemp)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effectTemp)->shared->graphics));
 
     guScaleF(sp20, 0.01f, 0.01f, 0.01f);
     guPositionF(sp60, 0.0f, 0.0f, 0.0f, data->unk_24, data->unk_04 * 100.0f, data->unk_08 * 100.0f, data->unk_0C * 100.0f);

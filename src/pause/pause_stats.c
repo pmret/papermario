@@ -115,7 +115,6 @@ s8 gPauseStatsGridData[] = {
 #define COLLECTABLES_X 125
 #endif
 
-
 StatsEntryData gStatsMenuEntries[] = {
     { .cursorX =   9, .cursorY =  20, .baseMsgID = PAUSE_MSG_TIP_CONTROLS },
     { .cursorX =  17, .cursorY =  55, .baseMsgID = PAUSE_MSG_TIP_HP },
@@ -152,7 +151,7 @@ s32 D_8024F46C[] = { -1, 1, 2, 4, 5, 7, 8 };
 
 MenuWindowBP gStatsMenuWindowBPs[] = {
     {
-        .windowID = WINDOW_ID_PAUSE_STATS,
+        .windowID = WIN_PAUSE_STATS,
         .unk_01 = 0,
         .pos = { .x = 3, .y = 16 },
         .width = 289,
@@ -160,18 +159,19 @@ MenuWindowBP gStatsMenuWindowBPs[] = {
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_stats_draw_contents,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_12 }
     }
 };
+
 MenuPanel gPausePanelStats = {
     .initialized = FALSE,
     .col = 0,
     .row = 0,
     .selected = 0,
-    .page = 0,
+    .state = 0,
     .numCols = 2,
     .numRows = 7,
     .numPages = 0,
@@ -181,7 +181,6 @@ MenuPanel gPausePanelStats = {
     .fpUpdate = NULL,
     .fpCleanup = &pause_stats_cleanup
 };
-
 
 #if VERSION_PAL
 INCLUDE_ASM(void, "pause/pause_stats", pause_stats_draw_contents);
@@ -553,7 +552,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         powIncIdx++;
 
         powIncIdx = 0;
-        powBarIdx += 1;
+        powBarIdx++;
         if (curIncrement >= powIncrements) {
             break;
         }
@@ -742,7 +741,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     if (gPauseMenuCurrentTab == 1) {
         StatsEntryData* entry = &gStatsMenuEntries[menu->selected];
 
-        pause_set_cursor_pos(WINDOW_ID_PAUSE_STATS, baseX + entry->cursorX, baseY + entry->cursorY);
+        pause_set_cursor_pos(WIN_PAUSE_STATS, baseX + entry->cursorX, baseY + entry->cursorY);
     }
 }
 #endif
@@ -751,10 +750,8 @@ void pause_stats_init(MenuPanel* panel) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPauseStatsIconIDs); i++) {
-        s32 iconID = hud_element_create(gStatsMenuElements[i]);
-
-        gPauseStatsIconIDs[i] = iconID;
-        hud_element_set_flags(iconID, HUD_ELEMENT_FLAG_80);
+        gPauseStatsIconIDs[i] = hud_element_create(gStatsMenuElements[i]);
+        hud_element_set_flags(gPauseStatsIconIDs[i], HUD_ELEMENT_FLAG_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gStatsMenuWindowBPs); i++) {

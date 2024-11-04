@@ -29,7 +29,7 @@ API_CALLABLE(N(UpdateHouseShowHide)) {
     if (script->varTable[0] == 0) {
         alpha = script->functionTemp[0];
     } else {
-        alpha = ~script->functionTemp[0];
+        alpha = -script->functionTemp[0] - 1;
     }
     a = alpha;
     mdl_set_shroud_tint_params(0, 0, 0, a);
@@ -341,7 +341,7 @@ EvtScript N(EVS_TouchFloor_LeftRoof) = {
 };
 
 EvtScript N(EVS_LandOnRightRoof) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     IfEq(MF_Unk_00, TRUE)
         Return
     EndIf

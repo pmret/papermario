@@ -810,11 +810,11 @@ void draw_shop_items(void) {
     ShopItemEntity* shopItemEntities;
 
     if (shop->flags & SHOP_FLAG_SHOWING_ITEM_INFO) {
-        set_window_update(WINDOW_ID_ITEM_INFO_NAME, (s32) basic_window_update);
-        set_window_update(WINDOW_ID_ITEM_INFO_DESC, (s32) basic_window_update);
+        set_window_update(WIN_SHOP_ITEM_NAME, (s32) basic_window_update);
+        set_window_update(WIN_SHOP_ITEM_DESC, (s32) basic_window_update);
     } else {
-        set_window_update(WINDOW_ID_ITEM_INFO_NAME, (s32) basic_hidden_window_update);
-        set_window_update(WINDOW_ID_ITEM_INFO_DESC, (s32) basic_hidden_window_update);
+        set_window_update(WIN_SHOP_ITEM_NAME, (s32) basic_hidden_window_update);
+        set_window_update(WIN_SHOP_ITEM_DESC, (s32) basic_hidden_window_update);
     }
 
     if (shop->flags & SHOP_FLAG_SHOWING_ITEM_INFO) {
@@ -850,9 +850,9 @@ void draw_shop_items(void) {
                 }
 
                 if (i == shop->curItemSlot) {
-                    hud_element_set_render_pos(shop->costIconID, (xTemp + xOffset) - 6, yTemp + 5);
-                    hud_element_set_scale(shop->costIconID, 0.7f);
-                    hud_element_draw_clipped(shop->costIconID);
+                    hud_element_set_render_pos(shop->costHID, (xTemp + xOffset) - 6, yTemp + 5);
+                    hud_element_set_scale(shop->costHID, 0.7f);
+                    hud_element_draw_clipped(shop->costHID);
                 }
             }
         }
@@ -945,15 +945,15 @@ API_CALLABLE(MakeShop) {
         numShopItems++;
     }
 
-    shop->costIconID = hud_element_create(&HES_Item_Coin);
-    hud_element_set_flags(shop->costIconID, HUD_ELEMENT_FLAG_80);
-    hud_element_clear_flags(shop->costIconID, HUD_ELEMENT_FLAG_FILTER_TEX);
+    shop->costHID = hud_element_create(&HES_Item_Coin);
+    hud_element_set_flags(shop->costHID, HUD_ELEMENT_FLAG_80);
+    hud_element_clear_flags(shop->costHID, HUD_ELEMENT_FLAG_FILTER_TEX);
     get_worker(create_worker_frontUI(NULL, draw_shop_items));
-    set_window_properties(WINDOW_ID_ITEM_INFO_NAME, 100, 66, 120, 28, WINDOW_PRIORITY_0, shop_draw_item_name, NULL, -1);
+    set_window_properties(WIN_SHOP_ITEM_NAME, 100, 66, 120, 28, WINDOW_PRIORITY_0, shop_draw_item_name, NULL, -1);
 #if VERSION_JP
-    set_window_properties(WINDOW_ID_ITEM_INFO_DESC, 39, 184, 242, 32, WINDOW_PRIORITY_1, shop_draw_item_desc, NULL, -1);
+    set_window_properties(WIN_SHOP_ITEM_DESC, 39, 184, 242, 32, WINDOW_PRIORITY_1, shop_draw_item_desc, NULL, -1);
 #else
-    set_window_properties(WINDOW_ID_ITEM_INFO_DESC, 32, 184, 256, 32, WINDOW_PRIORITY_1, shop_draw_item_desc, NULL, -1);
+    set_window_properties(WIN_SHOP_ITEM_DESC, 32, 184, 256, 32, WINDOW_PRIORITY_1, shop_draw_item_desc, NULL, -1);
 #endif
     gWindowStyles[10].defaultStyleID = WINDOW_STYLE_9;
     gWindowStyles[11].defaultStyleID = WINDOW_STYLE_3;

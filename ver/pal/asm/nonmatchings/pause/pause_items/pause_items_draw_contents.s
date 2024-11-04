@@ -187,8 +187,8 @@ glabel pause_items_draw_contents
 /* 142BD0 8024DD90 184000D5 */  blez       $v0, .Lpause_8024E0E8
 /* 142BD4 8024DD94 0000902D */   daddu     $s2, $zero, $zero
 /* 142BD8 8024DD98 8FAA0054 */  lw         $t2, 0x54($sp)
-/* 142BDC 8024DD9C 3C0B8027 */  lui        $t3, %hi(gPauseItemsIconIDs)
-/* 142BE0 8024DDA0 256B29B8 */  addiu      $t3, $t3, %lo(gPauseItemsIconIDs)
+/* 142BDC 8024DD9C 3C0B8027 */  lui        $t3, %hi(gPauseItemsHIDs)
+/* 142BE0 8024DDA0 256B29B8 */  addiu      $t3, $t3, %lo(gPauseItemsHIDs)
 /* 142BE4 8024DDA4 000A1080 */  sll        $v0, $t2, 2
 /* 142BE8 8024DDA8 004B5821 */  addu       $t3, $v0, $t3
 /* 142BEC 8024DDAC AFAB0078 */  sw         $t3, 0x78($sp)
@@ -330,8 +330,8 @@ glabel pause_items_draw_contents
 /* 142DF0 8024DFB0 8FAB0074 */  lw         $t3, 0x74($sp)
 /* 142DF4 8024DFB4 11600005 */  beqz       $t3, .Lpause_8024DFCC
 /* 142DF8 8024DFB8 00000000 */   nop
-/* 142DFC 8024DFBC 3C118027 */  lui        $s1, %hi(gPauseItemsIconIDs+0x4C)
-/* 142E00 8024DFC0 8E312A04 */  lw         $s1, %lo(gPauseItemsIconIDs+0x4C)($s1)
+/* 142DFC 8024DFBC 3C118027 */  lui        $s1, %hi(gPauseItemsHIDs+0x4C)
+/* 142E00 8024DFC0 8E312A04 */  lw         $s1, %lo(gPauseItemsHIDs+0x4C)($s1)
 /* 142E04 8024DFC4 08093815 */  j          .Lpause_8024E054
 /* 142E08 8024DFC8 00000000 */   nop
 .Lpause_8024DFCC:
@@ -526,8 +526,8 @@ glabel pause_items_draw_contents
 /* 1430D0 8024E290 8E220000 */  lw         $v0, 0x0($s1)
 /* 1430D4 8024E294 1840000E */  blez       $v0, .Lpause_8024E2D0
 /* 1430D8 8024E298 24420001 */   addiu     $v0, $v0, 0x1
-/* 1430DC 8024E29C 3C108027 */  lui        $s0, %hi(gPauseItemsIconIDs)
-/* 1430E0 8024E2A0 261029B8 */  addiu      $s0, $s0, %lo(gPauseItemsIconIDs)
+/* 1430DC 8024E29C 3C108027 */  lui        $s0, %hi(gPauseItemsHIDs)
+/* 1430E0 8024E2A0 261029B8 */  addiu      $s0, $s0, %lo(gPauseItemsHIDs)
 /* 1430E4 8024E2A4 8FAB00AC */  lw         $t3, 0xAC($sp)
 /* 1430E8 8024E2A8 8E040040 */  lw         $a0, 0x40($s0)
 /* 1430EC 8024E2AC 8FAA00B0 */  lw         $t2, 0xB0($sp)
@@ -548,8 +548,8 @@ glabel pause_items_draw_contents
 /* 143124 8024E2E4 904228A0 */  lbu        $v0, %lo(gPauseItemsPages)($v0)
 /* 143128 8024E2E8 1040000C */  beqz       $v0, .Lpause_8024E31C
 /* 14312C 8024E2EC 00000000 */   nop
-/* 143130 8024E2F0 3C108027 */  lui        $s0, %hi(gPauseItemsIconIDs)
-/* 143134 8024E2F4 261029B8 */  addiu      $s0, $s0, %lo(gPauseItemsIconIDs)
+/* 143130 8024E2F0 3C108027 */  lui        $s0, %hi(gPauseItemsHIDs)
+/* 143134 8024E2F4 261029B8 */  addiu      $s0, $s0, %lo(gPauseItemsHIDs)
 /* 143138 8024E2F8 8FAB00AC */  lw         $t3, 0xAC($sp)
 /* 14313C 8024E2FC 8E040044 */  lw         $a0, 0x44($s0)
 /* 143140 8024E300 8FAA00B0 */  lw         $t2, 0xB0($sp)

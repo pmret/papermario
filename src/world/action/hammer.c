@@ -22,7 +22,7 @@ BSS HammerHitData D_802B6E90;
 
 HammerHitData* HammerHit = &D_802B6E90;
 
-void func_802B6820_E256F0(void);
+void action_hammer_end_swing(void);
 
 s32 action_hammer_is_swinging_away(s32 animID) {
     if (animID & SPRITE_ID_BACK_FACING) {
@@ -69,7 +69,7 @@ void action_hammer_play_hit_fx(s32 hitID) {
         soundID = SOUND_HAMMER_STRIKE_1;
     }
 
-    theta = DEG_TO_RAD(func_800E5348());
+    theta = DEG_TO_RAD(player_get_side_angle());
     sinTheta = sin_rad(theta) * 25.0f;
     cosTheta = cos_rad(theta) * -25.0f;
 
@@ -86,7 +86,7 @@ void action_hammer_play_hit_fx(s32 hitID) {
         radius = 1;
     }
 
-    exec_ShakeCamX(0, 2, time, shakeAmt);
+    exec_ShakeCamX(CAM_DEFAULT, CAM_SHAKE_DECAYING_VERTICAL, time, shakeAmt);
     fx_smoke_impact(0, x, y, z, radius, numParticles, 0, (time + 3) * 3);
 
     switch (is_ability_active(ABILITY_ATTACK_FX)) {
@@ -114,19 +114,19 @@ void action_hammer_play_hit_fx(s32 hitID) {
     start_rumble(256, 50);
 }
 
-s32 func_802B62A4_E25174(void) {
+HitID action_hammer_test_swing_collision(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
+    HitID ret;
     f32 yaw;
     f32 angle;
     f32 outSinTheta;
     f32 outCosTheta;
     f32 playerX, playerY, playerZ;
     f32 x, y, z;
-    s32 ret;
     s32 i;
 
     // first attempt
-    yaw = func_800E5348();
+    yaw = player_get_side_angle();
     if (action_hammer_is_swinging_away(playerStatus->trueAnimation)) {
         angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].curYaw);
         if (angle >= 90.0f && angle < 270.0f) {
@@ -141,11 +141,12 @@ s32 func_802B62A4_E25174(void) {
     playerY = playerStatus->pos.y;
     playerZ = playerStatus->pos.z;
 
+    // check collision along 16 points in a line away from the player
     for (i = 1; i < 16; i++) {
         x = playerX + (outSinTheta * i);
         y = playerY;
         z = playerZ - (outCosTheta * i);
-        ret = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
+        ret = player_test_lateral_overlap(PLAYER_COLLISION_HAMMER, playerStatus, &x, &y, &z, 4.0f, yaw);
         if (ret > NO_COLLIDER) {
             HammerHit->hitPos.x = x;
             HammerHit->hitPos.y = y;
@@ -156,7 +157,7 @@ s32 func_802B62A4_E25174(void) {
 
     // second attempt
     if (i >= 16) {
-        yaw = func_800E5348();
+        yaw = player_get_side_angle();
         if (!action_hammer_is_swinging_away(playerStatus->trueAnimation)) {
             angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].curYaw);
             if (angle >= 90.0f && angle < 270.0f) {
@@ -166,13 +167,14 @@ s32 func_802B62A4_E25174(void) {
             }
         }
 
+        // check collision along 16 points in a line away from the player
         sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
         for (i = 1; i < 16; i++) {
             x = playerX + (outSinTheta * i);
             y = playerY;
             z = playerZ - (outCosTheta * i);
 
-            ret = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
+            ret = player_test_lateral_overlap(PLAYER_COLLISION_HAMMER, playerStatus, &x, &y, &z, 4.0f, yaw);
             if (ret > NO_COLLIDER) {
                 HammerHit->hitPos.x = x;
                 HammerHit->hitPos.y = y;
@@ -240,7 +242,7 @@ void action_update_hammer(void) {
         playerStatus->actionSubstate = SUBSTATE_HAMMER_0;
         playerStatus->curSpeed = 0.0f;
         playerStatus->animNotifyValue = 0;
-        HammerHit->hitID = func_802B62A4_E25174();
+        HammerHit->hitID = action_hammer_test_swing_collision();
 
         if (gPlayerData.hammerLevel == 2) {
             soundID = SOUND_HAMMER_SWING_3;
@@ -278,11 +280,11 @@ void action_update_hammer(void) {
     } else if (HammerHit->timer < 2) {
         HammerHit->timer++;
     } else {
-        func_802B6820_E256F0();
+        action_hammer_end_swing();
     }
 }
 
-void func_802B6820_E256F0(void) {
+void action_hammer_end_swing(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus;
     f32 yaw;
@@ -303,7 +305,7 @@ void func_802B6820_E256F0(void) {
         collisionStatus = &gCollisionStatus;
     } while (0); // required to match;
 
-    yaw = func_800E5348();
+    yaw = player_get_side_angle();
     if (action_hammer_is_swinging_away(playerStatus->trueAnimation)) {
         angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].curYaw);
         if (angle >= 90.0f && angle < 270.0f) {
@@ -318,12 +320,12 @@ void func_802B6820_E256F0(void) {
     playerY = playerStatus->pos.y;
     playerZ = playerStatus->pos.z;
 
-    // check collision allong 16 points in a line away from the player
+    // check collision along 16 points in a line away from the player
     for (i = 1; i < 16; i++) {
         x = playerX + (outSinTheta * i);
         y = playerY;
         z = playerZ - (outCosTheta * i);
-        result = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
+        result = player_test_lateral_overlap(PLAYER_COLLISION_HAMMER, playerStatus, &x, &y, &z, 4.0f, yaw);
         if (HammerHit->unk_14 == 0) {
             collisionStatus->lastWallHammered = result;
             if (result > NO_COLLIDER) {
@@ -339,7 +341,7 @@ void func_802B6820_E256F0(void) {
     }
 
     if (i >= 16) {
-        yaw = func_800E5348();
+        yaw = player_get_side_angle();
         if (action_hammer_is_swinging_away(playerStatus->trueAnimation) == 0) {
             angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].curYaw);
             if (angle >= 90.0f && angle < 270.0f) {
@@ -350,11 +352,12 @@ void func_802B6820_E256F0(void) {
         }
         sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
 
+        // check collision along 16 points in a line away from the player
         for (i = 1; i < 16; i++) {
             x = playerX + (outSinTheta * i);
             y = playerY;
             z = playerZ - (outCosTheta * i);
-            result = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
+            result = player_test_lateral_overlap(PLAYER_COLLISION_HAMMER, playerStatus, &x, &y, &z, 4.0f, yaw);
             if (HammerHit->unk_14 == 0) {
                 collisionStatus->lastWallHammered = result;
                 if (result > NO_COLLIDER) {

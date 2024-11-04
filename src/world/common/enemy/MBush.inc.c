@@ -11,7 +11,7 @@ EvtScript N(EVS_NpcAI_MBush) = {
         Wait(1)
         Goto(0)
     EndIf
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(DisablePlayerInput, TRUE)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEARCH_BUSH, SOUND_SPACE_DEFAULT)
@@ -52,7 +52,7 @@ EvtScript N(EVS_NpcAI_MBush) = {
     Call(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim07)
     Wait(2)
     Call(SetPlayerAnimation, ANIM_Mario1_Flail)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Call(DisablePlayerInput, FALSE)
     Call(StartBattle)
 }; // fallthrough :(
@@ -79,7 +79,7 @@ EvtScript N(EVS_NpcDefeat_MBush) = {
             Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_MBush)))
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -96,5 +96,4 @@ NpcSettings N(NpcSettings_MBush) = {
 };
 
 #define MBUSH_FLAGS \
-    ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | \
-    ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000
+    BASE_PASSIVE_FLAGS | ENEMY_FLAG_USE_INSPECT_ICON | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER

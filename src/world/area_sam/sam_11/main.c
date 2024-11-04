@@ -54,7 +54,7 @@ EvtScript N(EVS_ExitWalk_sam_02_1) = {
     IfEq(MV_ThrownOut, 1)
         Return
     EndIf
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, sam_11_ENTRY_0)
     Exec(ExitWalk)
     Call(GotoMap, Ref("sam_02"), sam_02_ENTRY_1)
@@ -64,7 +64,7 @@ EvtScript N(EVS_ExitWalk_sam_02_1) = {
 };
 
 EvtScript N(EVS_ExitWalk_sam_03_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     IfLt(GB_StoryProgress, STORY_CH7_MAYOR_MURDER_SOLVED)
         Return
     EndIf

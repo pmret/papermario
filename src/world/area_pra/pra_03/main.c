@@ -1,7 +1,7 @@
 #include "pra_03.h"
 
 EvtScript N(EVS_ExitDoors_pra_02_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, pra_03_ENTRY_0)
     Set(LVar1, COLLIDER_deilittnnw)

@@ -21,7 +21,6 @@ extern EvtScript N(EVS_Attack_FireBreath);
 extern EvtScript N(EVS_UseStarRod);
 extern EvtScript N(EVS_StarRodCast);
 
-
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };

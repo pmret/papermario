@@ -64,7 +64,7 @@ void stars_shimmer_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, f32 arg5, s32 n
 
     bpPtr->init = stars_shimmer_init;
     bpPtr->update = stars_shimmer_update;
-    bpPtr->renderWorld = stars_shimmer_render;
+    bpPtr->renderScene = stars_shimmer_render;
     bpPtr->unk_00 = 0;
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_STARS_SHIMMER;
@@ -292,7 +292,7 @@ void stars_shimmer_appendGfx(void* effect) {
     state = data->state;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, D_09000F20_338EE0);
 
     temp_s4 = (data->lifeTime - 1) * 3;

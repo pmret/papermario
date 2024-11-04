@@ -19,15 +19,21 @@ extern EvtScript EVS_Player_NoDamageHit;
 
 extern PlayerCelebrationAnimOptions bPlayerCelebrations;
 
-BSS s32 D_8029FB90;
-BSS f32 D_8029FB94;
+BSS s32 BattleMerleeEffectsTime;
+BSS f32 BattleMerleeBasePosY;
 BSS EffectInstance* BattleMerleeOrbEffect;
 BSS EffectInstance* BattleMerleeWaveEffect;
-BSS s32 RefundHudElem;
-BSS s16 D_8029FBA4;
-BSS s32 D_8029FBA8;
-BSS s32 D_8029FBAC;
+BSS HudElemID HID_Refund;
+BSS s16 BattleMerleeEffectsState;
+BSS HudElemID HID_Happy;
+BSS HudElemID HID_HPDrain;
 BSS s32 D_8029FBB0[3];
+
+enum {
+    MERLEE_EFFECTS_HOLD     = 0, // effects appear and track Merlee's position
+    MERLEE_EFFECTS_RELEASE  = 1, // effects grow larger before vanishing
+    MERLEE_EFFECTS_DISMISS  = 2, // effects vanish and are dismissed
+};
 
 API_CALLABLE(ForceDisablePlayerBlurImmediately);
 
@@ -207,8 +213,8 @@ API_CALLABLE(GiveRefund) {
         posY = player->curPos.y;
         posZ = player->curPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        RefundHudElem = hud_element_create(&HES_Refund);
-        hud_element_set_render_pos(RefundHudElem, iconPosX + 36, iconPosY - 63);
+        HID_Refund = hud_element_create(&HES_Refund);
+        hud_element_set_render_pos(HID_Refund, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = delayTime;
@@ -220,7 +226,7 @@ API_CALLABLE(GiveRefundCleanup) {
     s32 sellValue = gItemTable[gBattleStatus.moveArgument].sellValue;
 
     if (player_team_is_ability_active(gBattleStatus.playerActor, ABILITY_REFUND) && sellValue > 0) {
-        hud_element_free(RefundHudElem);
+        hud_element_free(HID_Refund);
     }
 
     return ApiStatus_DONE2;
@@ -236,7 +242,7 @@ API_CALLABLE(LifeShroomShroudWorld) {
 
     mdl_set_shroud_tint_params(0, 0, 0, ((20 - script->functionTemp[0]) * 12) & 0xFC);
 
-    script->functionTemp[0] -= 1;
+    script->functionTemp[0]--;
 
     if (script->functionTemp[0] == 0) {
         return ApiStatus_DONE2;
@@ -253,7 +259,7 @@ API_CALLABLE(LifeShroomRevealWorld) {
 
     mdl_set_shroud_tint_params(0, 0, 0, (script->functionTemp[0] * 12) & 0xFC);
 
-    script->functionTemp[0] -= 1;
+    script->functionTemp[0]--;
     if (script->functionTemp[0] == 0) {
         mdl_set_shroud_tint_params(0, 0, 0, 0);
         return ApiStatus_DONE2;
@@ -410,14 +416,14 @@ API_CALLABLE(BattleMerleeUpdateFX) {
 
     if (isInitialCall) {
         script->functionTemp[1] = 0;
-        D_8029FB94 = merlee->pos.y;
+        BattleMerleeBasePosY = merlee->pos.y;
         BattleMerleeOrbEffect = fx_energy_orb_wave(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
         BattleMerleeWaveEffect = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
-        D_8029FBA4 = 0;
-        D_8029FB90 = 12;
+        BattleMerleeEffectsState = MERLEE_EFFECTS_HOLD;
+        BattleMerleeEffectsTime = 12;
         sfx_play_sound(SOUND_MAGIC_ASCENDING);
     }
-    merlee->pos.y = D_8029FB94 + (sin_rad(DEG_TO_RAD(script->functionTemp[1])) * 3.0f);
+    merlee->pos.y = BattleMerleeBasePosY + (sin_rad(DEG_TO_RAD(script->functionTemp[1])) * 3.0f);
 
     script->functionTemp[1] += 10;
     script->functionTemp[1] = clamp_angle(script->functionTemp[1]);
@@ -432,7 +438,7 @@ API_CALLABLE(BattleMerleeUpdateFX) {
     data->pos.y = merlee->pos.y + 16.0f;
     data->pos.z = merlee->pos.z + 5.0f;
 
-    if (D_8029FBA4 == 2) {
+    if (BattleMerleeEffectsState == MERLEE_EFFECTS_DISMISS) {
         BattleMerleeOrbEffect->data.energyOrbWave->scale = 0.00001f;
         BattleMerleeWaveEffect->data.energyOrbWave->scale = 0.00001f;
         BattleMerleeOrbEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
@@ -440,28 +446,28 @@ API_CALLABLE(BattleMerleeUpdateFX) {
         return ApiStatus_DONE1;
     }
 
-    if (D_8029FBA4 == 1) {
+    if (BattleMerleeEffectsState == MERLEE_EFFECTS_RELEASE) {
         data = BattleMerleeOrbEffect->data.energyOrbWave;
         data->scale += 0.35;
         if (data->scale > 3.5) {
-            data->scale = 3.5f;
+            data->scale = 3.5;
         }
 
-        if (D_8029FB90 != 0) {
-            D_8029FB90--;
+        if (BattleMerleeEffectsTime != 0) {
+            BattleMerleeEffectsTime--;
         } else {
             data = BattleMerleeWaveEffect->data.energyOrbWave;
             data->scale += 0.5;
             if (data->scale > 5.0) {
-                D_8029FBA4 = 2;
+                BattleMerleeEffectsState = MERLEE_EFFECTS_DISMISS;
             }
         }
     }
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(func_802619B4) {
-    D_8029FBA4 = 1;
+API_CALLABLE(BattleMerleeStopFX) {
+    BattleMerleeEffectsState = MERLEE_EFFECTS_RELEASE;
     return ApiStatus_DONE2;
 }
 
@@ -490,24 +496,24 @@ API_CALLABLE(SpawnTurnEndFX) {
     screenY -= 19;
 
     if (script->varTable[10] > 0) {
-        D_8029FBAC = hud_element_create(&HES_HPDrain);
-        hud_element_set_render_pos(D_8029FBAC, screenX, screenY);
+        HID_HPDrain = hud_element_create(&HES_HPDrain);
+        hud_element_set_render_pos(HID_HPDrain, screenX, screenY);
         screenY += 9;
     }
 
     if (script->varTable[11] > 0 || script->varTable[12] > 0) {
-        D_8029FBA8 = hud_element_create(&HES_Happy);
-        hud_element_set_render_pos(D_8029FBA8, screenX, screenY);
+        HID_Happy = hud_element_create(&HES_Happy);
+        hud_element_set_render_pos(HID_Happy, screenX, screenY);
     }
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(RemoveTurnEndFX) {
     if (script->varTable[10] > 0) {
-        hud_element_free(D_8029FBAC);
+        hud_element_free(HID_HPDrain);
     }
     if (script->varTable[11] > 0 || script->varTable[12] > 0) {
-        hud_element_free(D_8029FBA8);
+        hud_element_free(HID_Happy);
     }
     return ApiStatus_DONE2;
 }
@@ -851,7 +857,7 @@ EvtScript EVS_Player_HandleEvent = {
         CaseNe(EVENT_32)
             Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EndSwitch
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     Call(func_802693F0)
     Call(ForceDisablePlayerBlurImmediately)
@@ -1166,7 +1172,7 @@ EvtScript EVS_RunAwayNoCommand = {
 EvtScript EVS_RunAwayStart = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(GetActionCommandMode, LVar2)
-    IfEq(LVar2, ACTION_COMMAND_MODE_NOT_LEARNED)
+    IfEq(LVar2, AC_MODE_NOT_LEARNED)
         ExecWait(EVS_RunAwayNoCommand)
         Call(UseIdleAnimation, ACTOR_PLAYER, TRUE)
         Return
@@ -1191,7 +1197,7 @@ EvtScript EVS_RunAwayStart = {
     Wait(1)
     Call(SetActorYaw, ACTOR_PLAYER, 180)
     Wait(5)
-    Call(action_command_flee_start, 0, 60, 3)
+    Call(action_command_flee_start, 0, 60, AC_DIFFICULTY_3)
     Call(func_80260E5C)
     Wait(5)
     Call(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
@@ -1216,7 +1222,7 @@ EvtScript EVS_RunAwayStart = {
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
     Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Call(PlayerHopToGoal, 8, 0, 0)
-    Call(GetActionSuccess, LVar0)
+    Call(GetSmashActionQuality, LVar0)
     Call(DetermineAutoRunAwaySuccess)
     IfEq(LVar0, 1)
         Call(SetFledBattleFlag)
@@ -1611,7 +1617,7 @@ EvtScript EVS_MerleeAttackBonus = {
     Call(BattleFadeInMerlee)
     Wait(30)
     Call(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
-    Call(func_802619B4)
+    Call(BattleMerleeStopFX)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 4)
     Call(BattleMerleeFadeStageFromBlack)
@@ -1660,7 +1666,7 @@ EvtScript EVS_MerleeDefenseBonus = {
     Call(BattleFadeInMerlee)
     Wait(30)
     Call(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
-    Call(func_802619B4)
+    Call(BattleMerleeStopFX)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 4)
     Call(BattleMerleeFadeStageFromBlack)
@@ -1714,7 +1720,7 @@ EvtScript EVS_MerleeExpBonus = {
     Call(BattleFadeInMerlee)
     Wait(30)
     Call(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
-    Call(func_802619B4)
+    Call(BattleMerleeStopFX)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 4)
     Call(BattleMerleeFadeStageFromBlack)

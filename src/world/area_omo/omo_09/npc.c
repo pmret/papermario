@@ -75,7 +75,6 @@ EvtScript N(EVS_ShyGuy_CarryItem) = {
     End
 };
 
-
 EvtScript N(EVS_NpcDefeat_ShyGuy_Thief) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
@@ -216,9 +215,9 @@ NpcData N(NpcData_Pokey) = {
     .init = &N(EVS_NpcInit_Pokey),
     .settings = &N(NpcSettings_Pokey),
 #if VERSION_JP
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE,
 #else
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
 #endif
     .drops = NO_DROPS,
     .animations = POKEY_ANIMS,
@@ -231,9 +230,9 @@ NpcData N(NpcData_Koopatrol) = {
     .init = &N(EVS_NpcInit_Koopatrol),
     .settings = &N(NpcSettings_Koopatrol_Stationary),
 #if VERSION_JP
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE,
 #else
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
 #endif
     .drops = NO_DROPS,
     .animations = KOOPATROL_ANIMS,
@@ -257,7 +256,7 @@ NpcData N(NpcData_ShyGuy_01) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
     .settings = &N(NpcSettings_ShyGuy_Wander),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -280,7 +279,7 @@ NpcData N(NpcData_ShyGuy_02) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
     .settings = &N(NpcSettings_ShyGuy_Wander),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -303,7 +302,7 @@ NpcData N(NpcData_ShyGuy_03) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
     .settings = &N(NpcSettings_ShyGuy_Wander),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -326,7 +325,7 @@ NpcData N(NpcData_ShyGuy_04) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
     .settings = &N(NpcSettings_ShyGuy_Wander),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -349,7 +348,7 @@ NpcData N(NpcData_ShyGuy_05) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy_Jackpot),
     .settings = &N(NpcSettings_ShyGuy_Wander),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -370,7 +369,7 @@ NpcData N(NpcData_Kammy) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kammy),
     .settings = &N(NpcSettings_Kammy_Flying),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
+    .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),
@@ -414,7 +413,7 @@ NpcData N(NpcData_ShyGuy_Thief) = {
     .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = SHY_GUY_DROPS,
     .animations = YELLOW_SHY_GUY_ANIMS,
-    .aiFlags = ENEMY_AI_FLAG_1,
+    .aiFlags = AI_FLAG_1,
     .aiDetectFlags = AI_DETECT_SIGHT,
 };
 

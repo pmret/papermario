@@ -4,7 +4,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/BattleLakilester.h"
 #include "battle/action_cmd/spiny_surge.h"
-#include "battle/action_cmd/water_block.h"
+#include "battle/action_cmd/three_chances.h"
 #include "battle/action_cmd/hurricane.h"
 #include "hud_element.h"
 #include "sprite/player.h"
@@ -33,8 +33,8 @@ extern HudScript HES_StickTapRight;
 static s32 sSavedHurricaneIntensity;
 static s32 sBreathSizeIncrease;
 static s32 sMaxPower;
-static s32 HID_AimReticle;
-static s32 HID_AimTarget;
+static HudElemID HID_AimReticle;
+static HudElemID HID_AimTarget;
 static s32 TargetMarkRotation;
 static s32 D_8023D294;
 static s32 AimingTime;
@@ -46,14 +46,14 @@ static f32 D_8023D2AC;
 static f32 D_8023D2B0;
 static f32 AimMoveAngle;
 static s32 hudAim[1];
-static s32 HID_AnalogStick;
+static HudElemID HID_AnalogStick;
 static s32 HudStickPosX;
 static s32 HudStickPosY;
 static b32 SpinyFlipTargetingDone;
 static s32 D_8023D2CC;
-static s32 sTargetStates[24];
-static s32 sNumEnemiesBeingBlown;
-static s32 sIsHurricaneActive;
+static s32 EnemyHurricaneChances[MAX_ENEMY_ACTORS];
+static s32 NumEnemiesBeingBlown;
+static s32 IsHurricaneActive;
 static s32 D_8023D338;
 
 enum N(ActorPartIDs) {
@@ -193,7 +193,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    Call(CloseActionCommandInfo)
+    Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
@@ -374,7 +374,7 @@ API_CALLABLE(N(SpinyFlipUpdatePopup)) {
     }
 
     if (!SpinyFlipTargetingDone) {
-        btl_set_popup_duration(99);
+        btl_set_popup_duration(POPUP_MSG_ON);
         return ApiStatus_BLOCK;
     } else {
         return ApiStatus_DONE2;
@@ -392,7 +392,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
     f32 speed;
     f32 stickAngle;
     s32 stickMagnitude;
-    s32 id;
+    HudElemID hid;
     s32 i;
 
     f32 temp_f0_5;
@@ -406,7 +406,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
     s32 (*temp_a0)[0];
     s32 temp_a0_2;
     s32 temp_f10;
-    s32 idAim;
+    HudElemID hidAim;
     s32 temp_v1_2;
     s32* var_s0;
 
@@ -432,12 +432,12 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             hud_element_create_transform_A(HID_AimTarget);
             HudStickPosX = -48;
             HudStickPosY = 70;
-            HID_AnalogStick = id = hud_element_create(&HES_StickNeutral);
-            hud_element_set_render_pos(id, HudStickPosX, HudStickPosY);
-            hud_element_set_render_depth(id, 0);
+            HID_AnalogStick = hid = hud_element_create(&HES_StickNeutral);
+            hud_element_set_render_pos(hid, HudStickPosX, HudStickPosY);
+            hud_element_set_render_depth(hid, 0);
             for (i = 0; i < ARRAY_COUNT(N(AimDotHudScripts)); i++) {
-                hudAim[i] = idAim = hud_element_create(N(AimDotHudScripts)[i]);
-                hud_element_set_render_depth(idAim, 10);
+                hudAim[i] = hidAim = hud_element_create(N(AimDotHudScripts)[i]);
+                hud_element_set_render_depth(hidAim, 10);
             }
             partnerState->curPos.x = partner->curPos.x + 33.0f;
             partnerState->curPos.y = partner->curPos.y + 34.0f;
@@ -570,10 +570,10 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             hud_element_free(HID_AimReticle);
             hud_element_free(HID_AnalogStick);
             for (i = 0; i < ARRAY_COUNT(N(AimDotHudScripts)); i++) {
-                id = hudAim[i];
-                hud_element_free(id);
+                hid = hudAim[i];
+                hud_element_free(hid);
             }
-            btl_set_popup_duration(0);
+            btl_set_popup_duration(POPUP_MSG_OFF);
             sfx_stop_sound(SOUND_AIM_SPINY_FLIP);
             return ApiStatus_DONE2;
     }
@@ -581,9 +581,9 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
     get_screen_coords(gCurrentCameraID,
                       partnerState->goalPos.x, partnerState->goalPos.y, partnerState->goalPos.z,
                       &screenX, &screenY, &screenZ);
-    id = HID_AimTarget;
-    hud_element_set_render_pos(id, screenX, screenY);
-    hud_element_set_transform_rotation(id, 0.0f, 0.0f, TargetMarkRotation);
+    hid = HID_AimTarget;
+    hud_element_set_render_pos(hid, screenX, screenY);
+    hud_element_set_transform_rotation(hid, 0.0f, 0.0f, TargetMarkRotation);
     TargetMarkRotation -= 10;
     TargetMarkRotation = clamp_angle(TargetMarkRotation);
     get_screen_coords(gCurrentCameraID,
@@ -612,13 +612,13 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             playerState->curPos.z = partnerState->curPos.z;
             for (i = 0; i < ARRAY_COUNT(N(AimDotHudScripts)); i++) {
                 get_screen_coords(gCurrentCameraID, playerState->curPos.x, playerState->curPos.y, playerState->curPos.z, &screenX, &screenY, &screenZ);
-                id = hudAim[i];
-                hud_element_set_render_pos(id, screenX, screenY);
+                hid = hudAim[i];
+                hud_element_set_render_pos(hid, screenX, screenY);
             }
             break;
     }
 
-    btl_set_popup_duration(99);
+    btl_set_popup_duration(POPUP_MSG_ON);
     return ApiStatus_BLOCK;
 }
 
@@ -744,11 +744,11 @@ API_CALLABLE(N(InitHurricane)) {
     s32 avgHurricaneChance;
     s32 i;
 
-    sNumEnemiesBeingBlown = 0;
-    sIsHurricaneActive = FALSE;
+    NumEnemiesBeingBlown = 0;
+    IsHurricaneActive = FALSE;
 
     for (i = 0; i < partner->targetListLength; i++) {
-        sTargetStates[i] = 0;
+        EnemyHurricaneChances[i] = 0;
     }
 
     totalChance = 0;
@@ -780,7 +780,7 @@ API_CALLABLE(N(InitHurricane)) {
             }
             affectedTargets++;
         }
-        sTargetStates[targetIdx] = hurricaneChance;
+        EnemyHurricaneChances[targetIdx] = hurricaneChance;
         totalChance += hurricaneChance;
     }
 
@@ -797,9 +797,9 @@ API_CALLABLE(N(InitHurricane)) {
         actor = get_actor(target->actorID);
         part = get_actor_part(actor, target->partID);
         if (actor->transparentStatus == STATUS_KEY_TRANSPARENT || (part->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
-            sTargetStates[targetIdx] = -1;
-        } else if (sTargetStates[targetIdx] != 0) {
-            sTargetStates[targetIdx] = avgHurricaneChance;
+            EnemyHurricaneChances[targetIdx] = -1;
+        } else if (EnemyHurricaneChances[targetIdx] != 0) {
+            EnemyHurricaneChances[targetIdx] = avgHurricaneChance;
         }
     }
     return ApiStatus_DONE2;
@@ -809,7 +809,7 @@ API_CALLABLE(N(CanTargetBeBlown)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     s32 targetIdx = partner->targetIndexList[partner->selectedTargetIndex];
-    s32* hurricaneChance = &sTargetStates[targetIdx];
+    s32* hurricaneChance = &EnemyHurricaneChances[targetIdx];
     SelectableTarget* target = &partner->targetData[targetIdx];
 
     script->varTable[0] = *hurricaneChance;
@@ -823,7 +823,7 @@ API_CALLABLE(N(CanTargetBeBlown)) {
     }
 
     get_actor(target->actorID);
-    if (rand_int(99) < battleStatus->actionSuccess) {
+    if (rand_int(99) < battleStatus->actionQuality) {
         *hurricaneChance = -1;
         script->varTable[0] = target->actorID;
     } else {
@@ -999,7 +999,7 @@ EvtScript N(EVS_Move_SpinySurge) = {
     EndSwitch
     Set(LVarB, LVarA)
     Add(LVarB, -3)
-    Call(action_command_spiny_surge_start, 0, LVarB, 3)
+    Call(action_command_spiny_surge_start, 0, LVarB, AC_DIFFICULTY_3)
     Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     Call(InitTargetIterator)
     Call(SetActorVar, ACTOR_PARTNER, AVAR_Unk_0, 0)
@@ -1007,20 +1007,20 @@ EvtScript N(EVS_Move_SpinySurge) = {
     Set(LFlag2, FALSE)
     Set(LFlag3, FALSE)
     Loop(LVarA)
-        Call(GetActionQuality, LVar0)
+        Call(GetActionProgress, LVar0)
         IfEq(LVar9, 2)
-            Set(LVar0, 3)
+            Set(LVar0, SPINY_SURGE_IGNORE)
         EndIf
         Switch(LVar0)
-            CaseEq(-1)
+            CaseEq(SPINY_SURGE_RESET)
                 Set(LVar9, 0)
-                Call(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                Call(SetPartFlagBits, ACTOR_PARTNER, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                 Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
-            CaseEq(1)
+            CaseEq(SPINY_SURGE_HOLD)
                 IfEq(LVar9, 1)
                     BreakSwitch
                 EndIf
-                Call(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+                Call(SetPartFlagBits, ACTOR_PARTNER, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
                 Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
                 Add(LVar0, 3)
                 Add(LVar1, 34)
@@ -1028,7 +1028,7 @@ EvtScript N(EVS_Move_SpinySurge) = {
                 Call(SetPartPos, ACTOR_PARTNER, 2, LVar0, LVar1, LVar2)
                 Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_LiftSpiny)
                 Set(LVar9, 1)
-            CaseEq(2)
+            CaseEq(SPINY_SURGE_THROW)
                 IfEq(LVar9, 0)
                     BreakSwitch
                 EndIf
@@ -1041,7 +1041,7 @@ EvtScript N(EVS_Move_SpinySurge) = {
                 EndIf
                 Call(N(ThrowSpinyFX))
                 Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_ThrowSpinyAlt)
-                Call(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                Call(SetPartFlagBits, ACTOR_PARTNER, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                 ChildThread
                     Call(GetActorVar, ACTOR_PARTNER, AVAR_Unk_0, LVar0)
                     Add(LVar0, 1)
@@ -1056,7 +1056,7 @@ EvtScript N(EVS_Move_SpinySurge) = {
         EndSwitch
         Wait(1)
     EndLoop
-    Call(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    Call(SetPartFlagBits, ACTOR_PARTNER, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
     Loop(0)
         Call(GetActorVar, ACTOR_PARTNER, AVAR_Unk_0, LVar0)
@@ -1079,7 +1079,7 @@ EvtScript N(EVS_Move_SpinySurge) = {
         IfEq(LVar0, HIT_RESULT_MISS)
             Goto(12)
         EndIf
-        Call(GetPartnerActionSuccess, LVarA)
+        Call(GetPartnerActionQuality, LVarA)
         Call(N(GetSpinySurgeDamage))
         Switch(LVar0)
             CaseGt(0)
@@ -1119,8 +1119,8 @@ EvtScript N(cloudNine_normal) = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     Call(SetBattleFlagBits, BS_FLAGS1_SHOW_PLAYER_DECORATIONS, FALSE)
     Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, TRUE)
-    Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, 2)
+    Call(LoadActionCommand, ACTION_COMMAND_THREE_CHANCES)
+    Call(action_command_three_chances_init, ACV_THREE_CHANCES_CLOUD_NINE)
     Call(SetActionHudPrepareTime, 50)
     Call(InitTargetIterator)
     Call(SetGoalToHome, ACTOR_PARTNER)
@@ -1161,7 +1161,7 @@ EvtScript N(cloudNine_normal) = {
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_FightingStance)
     Wait(3)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    Call(action_command_water_block_start, 0, 97, 3)
+    Call(action_command_three_chances_start, 0, 97, AC_DIFFICULTY_3)
     Call(AddBattleCamDist, -75)
     Call(MoveBattleCamOver, 100)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
@@ -1169,7 +1169,7 @@ EvtScript N(cloudNine_normal) = {
     Wait(3)
     Call(AddBattleCamDist, 50)
     Call(MoveBattleCamOver, 5)
-    Call(GetPartnerActionSuccess, LVarA)
+    Call(GetPartnerActionQuality, LVarA)
     IfGt(LVarA, 0)
         Call(N(RemoveCloudNineFX))
         Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_MAKE_CLOUD_NINE)
@@ -1238,8 +1238,8 @@ EvtScript N(cloudNine_normal) = {
 
 EvtScript N(cloudNine_immobile) = {
     Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    Call(action_command_water_block_init, 2)
+    Call(LoadActionCommand, ACTION_COMMAND_THREE_CHANCES)
+    Call(action_command_three_chances_init, ACV_THREE_CHANCES_CLOUD_NINE)
     Call(SetActionHudPrepareTime, 50)
     Call(N(RemoveCloudNineFX))
     Call(InitTargetIterator)
@@ -1276,7 +1276,7 @@ EvtScript N(cloudNine_immobile) = {
     Add(LVar1, 40)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Call(FlyToGoal, ACTOR_PARTNER, 20, 0, EASING_COS_IN_OUT)
-    Call(action_command_water_block_start, 0, 97, 3)
+    Call(action_command_three_chances_start, 0, 97, AC_DIFFICULTY_3)
     Call(AddBattleCamDist, -75)
     Call(MoveBattleCamOver, 100)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
@@ -1284,7 +1284,7 @@ EvtScript N(cloudNine_immobile) = {
     Wait(3)
     Call(AddBattleCamDist, 50)
     Call(MoveBattleCamOver, 5)
-    Call(GetPartnerActionSuccess, LVarA)
+    Call(GetPartnerActionQuality, LVarA)
     IfGt(LVarA, 0)
         Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_MAKE_CLOUD_NINE)
         Call(N(SpawnCloudNineFX))
@@ -1400,7 +1400,7 @@ API_CALLABLE(N(ProcessHurricane)) {
             partner->state.angle = 0.0f;
             partner->state.moveTime = HURRICANE_PARTNER_MOVE_TIME;
             partner->state.moveArcAmplitude = 0;
-            sIsHurricaneActive = TRUE;
+            IsHurricaneActive = TRUE;
             D_8023D338 = 255;
             sHuffPuffBreathEffect = effect = fx_huff_puff_breath(0, NPC_DISPOSE_LOCATION, 0.0f, -2.0f, 0.6f, 0);
 
@@ -1420,7 +1420,6 @@ API_CALLABLE(N(ProcessHurricane)) {
             hurricaneState->intensity = 0;
             hurricaneState->startingTotalPower = -1;
 
-
             sSavedHurricaneIntensity = 0;
             D_8023D278 = (1.0 - sin_rad(hurricaneState->intensity * PI_S * 0.5f / 750.0f)) * 8.0 + 13.0;
             sHuffPuffBreathState = -1;
@@ -1439,7 +1438,7 @@ API_CALLABLE(N(ProcessHurricane)) {
 
             for (i = 0; i < partner->targetListLength; i++) {
                 targetIndex = partner->targetIndexList[i];
-                temp = sTargetStates[targetIndex];
+                temp = EnemyHurricaneChances[targetIndex];
                 if (temp != -1) {
                     if (temp != 0) {
                         target = &partner->targetData[targetIndex];
@@ -1456,7 +1455,7 @@ API_CALLABLE(N(ProcessHurricane)) {
 
             for (i = 0; i < partner->targetListLength; i++) {
                 targetIndex = partner->targetIndexList[i];
-                temp = sTargetStates[targetIndex];
+                temp = EnemyHurricaneChances[targetIndex];
                 if (temp != -1) {
                     if (temp != 0) {
                         target = &partner->targetData[targetIndex];
@@ -1466,7 +1465,7 @@ API_CALLABLE(N(ProcessHurricane)) {
                 }
             }
 
-            sIsHurricaneActive = FALSE;
+            IsHurricaneActive = FALSE;
             remove_effect(sHuffPuffBreathEffect);
             return ApiStatus_DONE2;
     }
@@ -1528,7 +1527,6 @@ API_CALLABLE(N(ProcessHurricane)) {
             set_actor_anim(ACTOR_PARTNER, -1, ANIM_BattleLakilester_HurricaneExhale);
             break;
     }
-
 
     if (gGameStatusPtr->frameCounter % (7 - sHurricaneIntensity / 2) == 0) {
         x = -220.0f;
@@ -1674,7 +1672,7 @@ API_CALLABLE(N(BlowTargetAway)) {
             target->state.curPos.y = target->curPos.y;
             target->state.curPos.z = target->curPos.z;
             target->state.speed = 5.5f;
-            sNumEnemiesBeingBlown += 1;
+            NumEnemiesBeingBlown++;
             battleStatus->curAttackElement = 0;
             dispatch_event_actor(target, EVENT_BLOW_AWAY);
             script->functionTemp[0] = 1;
@@ -1689,7 +1687,7 @@ API_CALLABLE(N(BlowTargetAway)) {
             target->yaw += 33.0f;
             target->yaw = clamp_angle(target->yaw);
             if (target->state.curPos.x > 240.0f) {
-                sNumEnemiesBeingBlown -= 1;
+                NumEnemiesBeingBlown--;
                 return ApiStatus_DONE2;
             }
             break;
@@ -1701,14 +1699,14 @@ API_CALLABLE(N(BlowTargetAway)) {
 }
 
 API_CALLABLE(N(AllEnemiesBlownAway)) {
-    if (sNumEnemiesBeingBlown == 0) {
+    if (NumEnemiesBeingBlown == 0) {
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
 }
 
 API_CALLABLE(N(IsHurricaneActive)) {
-    script->varTable[0] = sIsHurricaneActive;
+    script->varTable[0] = IsHurricaneActive;
     return ApiStatus_DONE2;
 }
 
@@ -1731,7 +1729,7 @@ EvtScript N(EVS_Move_Hurricane) = {
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
     Wait(15)
     Call(N(InitHurricane))
-    Call(action_command_hurricane_start, 0, 147 * DT, 3, LVar0)
+    Call(action_command_hurricane_start, 0, 147 * DT, AC_DIFFICULTY_3, LVar0)
     Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     Call(SetActorRotationOffset, ACTOR_PARTNER, 0, 20, 0)
     Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
@@ -1750,14 +1748,14 @@ EvtScript N(EVS_Move_Hurricane) = {
         IfEq(LVar0, 0)
             BreakLoop
         EndIf
-        Call(GetActionSuccessCopy, LVar0)
+        Call(GetMashActionQuality, LVar0)
         IfEq(LVar0, 100)
             BreakLoop
         EndIf
         Wait(1)
     EndLoop
     Wait(15)
-    Call(GetActionSuccessCopy, LVar0)
+    Call(GetMashActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(99)
             Call(UseBattleCamPreset, BTL_CAM_RETURN_HOME)

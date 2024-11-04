@@ -110,7 +110,7 @@ API_CALLABLE(N(UpdateTexturePanStepped)) {
 }
 
 EvtScript N(EVS_UpdateTexturePan) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     IfEq(LVar5, 1)
         IfEq(LVar6, 1)
             IfEq(LVar7, 1)

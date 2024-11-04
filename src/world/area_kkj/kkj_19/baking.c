@@ -60,7 +60,7 @@ enum MixingAnimStates {
 // basically the typical mash meter with the gauge removed
 API_CALLABLE(N(RunMixingMinigame)) {
     Bytecode* args = script->ptrReadPos;
-    s32 hudElemID;
+    HudElemID hid;
     s32 maxMashAmount;
     s32 i;
 
@@ -89,25 +89,25 @@ API_CALLABLE(N(RunMixingMinigame)) {
             N(MixingGameUIBaseX) = -48;
             N(MixingGameUIBaseY) = 64;
 
-            hudElemID = hud_element_create(&HES_AButton);
-            N(MixingGameHudElems)[0] = hudElemID;
-            hud_element_set_render_pos(hudElemID, N(MixingGameUIBaseX), N(MixingGameUIBaseY));
-            hud_element_set_render_depth(hudElemID, 0);
-            hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+            hid = hud_element_create(&HES_AButton);
+            N(MixingGameHudElems)[0] = hid;
+            hud_element_set_render_pos(hid, N(MixingGameUIBaseX), N(MixingGameUIBaseY));
+            hud_element_set_render_depth(hid, 0);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-            hudElemID = hud_element_create(&HES_BlueMeter);
-            N(MixingGameHudElems)[1] = hudElemID;
-            hud_element_set_render_pos(hudElemID, N(MixingGameUIBaseX), N(MixingGameUIBaseY) + 28);
-            hud_element_set_render_depth(hudElemID, 0);
-            hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+            hid = hud_element_create(&HES_BlueMeter);
+            N(MixingGameHudElems)[1] = hid;
+            hud_element_set_render_pos(hid, N(MixingGameUIBaseX), N(MixingGameUIBaseY) + 28);
+            hud_element_set_render_depth(hid, 0);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-            hudElemID = N(MixingGameHudElems)[0];
-            hud_element_set_alpha(hudElemID, 255);
-            hud_element_clear_flags(hudElemID, HUD_ELEMENT_FLAG_DISABLED);
+            hid = N(MixingGameHudElems)[0];
+            hud_element_set_alpha(hid, 255);
+            hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
 
-            hudElemID = N(MixingGameHudElems)[1];
-            hud_element_set_alpha(hudElemID, 255);
-            hud_element_clear_flags(hudElemID, HUD_ELEMENT_FLAG_DISABLED);
+            hid = N(MixingGameHudElems)[1];
+            hud_element_set_alpha(hid, 255);
+            hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
 
             N(MixingGameState) = MIXING_STATE_APPEAR;
             script->functionTemp[0] = 10;
@@ -522,18 +522,18 @@ EvtScript N(EVS_ItemPrompt_AddIngredient) = {
     IfEq(AB_KKJ19_CurrentBakeStep, BAKE_STEP_DONE)
         Return
     EndIf
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(ShowKeyChoicePopup)
     Set(LVar2, LVar0)
     Switch(LVar2)
         CaseEq(0)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
         CaseEq(-1)
             Call(CloseChoicePopup)
-            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Return
     EndSwitch
     Call(RemoveKeyItemAt, LVar1)
@@ -603,7 +603,7 @@ EvtScript N(EVS_ItemPrompt_AddIngredient) = {
     EndSwitch
     Add(AB_KKJ19_BakeStepProgress, 1)
     Call(CloseChoicePopup)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
 };
@@ -740,7 +740,7 @@ EvtScript N(EVS_FocusCam_Table) = {
 };
 
 EvtScript N(EVS_Twink_FlyToPlayer) = {
-    Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 1)
+    Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, TRUE)
     Call(SetNpcVar, NPC_Twink, 1, 0)
     Call(GetNpcPos, NPC_PARTNER, LVar3, LVar1, LVar2)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -936,7 +936,7 @@ EvtScript N(EVS_ManageBaking) = {
     Set(AF_KKJ_FinishedBakingCake, FALSE)
     Set(AF_KKJ19_FailedBakingTask, FALSE)
     Set(AB_KKJ19_HeldIngredient, PEACH_BAKING_NONE)
-    Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 1)
+    Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, TRUE)
     Call(SetNpcVar, NPC_Twink, 1, 0)
     IfEq(AB_KKJ_CompletedBakeStep, CAKE_TYPE_READY_TO_MIX)
         // resume mixing
@@ -999,7 +999,7 @@ EvtScript N(EVS_ManageBaking) = {
         Wait(20)
         Thread
             ExecWait(N(EVS_Twink_FlyToHighPos))
-            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 0)
+            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, FALSE)
             Call(SetNpcVar, NPC_Twink, 1, 1)
         EndThread
         Set(LVarA, 1)
@@ -1022,14 +1022,14 @@ EvtScript N(EVS_ManageBaking) = {
     Set(LVarA, 1)
     Thread
         ExecWait(N(EVS_Twink_FlyToHighPos))
-        Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 0)
+        Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, FALSE)
         Call(SetNpcVar, NPC_Twink, 1, 1)
     EndThread
     // wait for peach to tell twink shes done
     Label(LBL_ADD_SUGAR_EGGS_WAITING)
         Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
         IfEq(LVarA, 0)
-            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 0)
+            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, FALSE)
             Call(SetNpcVar, NPC_Twink, 1, 1)
         EndIf
         Call(DisablePlayerInput, FALSE)
@@ -1163,14 +1163,14 @@ EvtScript N(EVS_ManageBaking) = {
     Set(LVarA, 1)
     Thread
         ExecWait(N(EVS_Twink_FlyToHighPos))
-        Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 0)
+        Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, FALSE)
         Call(SetNpcVar, NPC_Twink, 1, 1)
     EndThread
     // wait for peach to tell twink shes done
     Label(LBL_ADD_FLOUR_BUTTER_WAITING)
         Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
         IfEq(LVarA, 0)
-            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 0)
+            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, FALSE)
             Call(SetNpcVar, NPC_Twink, 1, 1)
         EndIf
         Call(DisablePlayerInput, FALSE)
@@ -1380,7 +1380,7 @@ EvtScript N(EVS_ManageBaking) = {
     Label(LBL_DECORATE_WAITING)
         Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
         IfEq(LVarA, 0)
-            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, 0)
+            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, FALSE)
             Call(SetNpcVar, NPC_Twink, 1, 1)
         EndIf
         Call(DisablePlayerInput, FALSE)

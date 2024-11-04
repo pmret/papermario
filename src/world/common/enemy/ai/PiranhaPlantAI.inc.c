@@ -57,7 +57,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     npc->duration--;
     if (enemy->varTable[9] >= npc->duration) {
-        enemy->flags |= (ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP |
+        enemy->flags |= (ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP |
                          ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER);
     }
 
@@ -164,7 +164,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
             }
         }
 
-        if (is_point_within_region(territory->shape, territory->pointX, territory->pointZ, npc->pos.x, npc->pos.z, territory->sizeX, territory->sizeZ)) {
+        if (is_point_outside_territory(territory->shape, territory->pointX, territory->pointZ, npc->pos.x, npc->pos.z, territory->sizeX, territory->sizeZ)) {
             switch (territory->shape) {
                 case SHAPE_CYLINDER:
                     sp38 = dist2D(npc->pos.x, npc->pos.z, territory->pointX, territory->pointZ);
@@ -225,7 +225,7 @@ void N(PiranhaPlantAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     npc->duration--;
     if (enemy->varTable[11] >= npc->duration) {
-        enemy->flags &= ~(ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER);
+        enemy->flags &= ~(ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER);
     }
     if (npc->duration == 0) {
         npc->curAnim = enemy->animList[10];
@@ -313,22 +313,22 @@ API_CALLABLE(N(PiranhaPlantAI_Main)) {
     #ifdef _DEAD_H_
     // this function doesn't seem to have a known counterpart, perhaps related to the difference in the Enemy struct
     func_8004D8E0(enemy);
-    if (enemy->flags & ENEMY_FLAG_100000) {
+    if (enemy->flags & ENEMY_FLAG_SKIP_BATTLE) {
         enemy->unk_114 = 10.0f;
         enemy->unk_118 = 0.7f;
     }
     #endif
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
+    if (isInitialCall || (enemy->aiFlags & AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = AI_STATE_PIRANHA_PLANT_00;
         npc->duration = 0;
         npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
 
         enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_NONE;
-        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+        if (enemy->aiFlags & AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = AI_STATE_PIRANHA_PLANT_00;
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+            enemy->aiFlags &= ~AI_FLAG_SUSPEND;
         }
     }
 

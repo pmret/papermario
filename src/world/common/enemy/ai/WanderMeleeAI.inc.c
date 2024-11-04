@@ -38,7 +38,7 @@ API_CALLABLE(N(WanderMeleeAI_Main)) {
     enemy->unk_118 = 0.0001f;
     #endif
 
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
+    if (isInitialCall || (enemy->aiFlags & AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         npc->duration = 0;
         npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
@@ -52,10 +52,10 @@ API_CALLABLE(N(WanderMeleeAI_Main)) {
             npc->flags |= NPC_FLAG_FLYING;
         }
 
-        if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+        if (enemy->aiFlags & AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = AI_STATE_WANDER_INIT;
-            enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+            enemy->aiFlags &= ~AI_FLAG_SUSPEND;
         }
         enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_NONE;
     }

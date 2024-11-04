@@ -43,7 +43,7 @@ EffectInstance* energy_in_out_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
 
     bp.init = energy_in_out_init;
     bp.update = energy_in_out_update;
-    bp.renderWorld = energy_in_out_render;
+    bp.renderScene = energy_in_out_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_ENERGY_IN_OUT;
@@ -253,7 +253,7 @@ void energy_in_out_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, scale, part->pos.x, part->pos.y, part->pos.z);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);

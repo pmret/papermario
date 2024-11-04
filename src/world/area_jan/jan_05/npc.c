@@ -31,7 +31,7 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy) = {
 
 EvtScript N(EVS_NpcInit_JungleFuzzy) = {
     Call(SetSelfVar, 7, 0)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, 1)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, TRUE)
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_JungleFuzzy)))
@@ -226,7 +226,7 @@ NpcData N(NpcData_YoshiKid) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_YoshiKid),
     .settings = &N(NpcSettings_YoshiKid),
-    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_400000,
+    .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = YOSHI_KID_PURPLE_ANIMS,
     .tattle = MSG_NpcTattle_PurpleYoshiKid,
@@ -258,7 +258,7 @@ NpcData N(NpcData_JungleFuzzy) = {
     },
     .init = &N(EVS_NpcInit_JungleFuzzy),
     .settings = &N(NpcSettings_JungleFuzzy_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = JUNGLE_FUZZY_DROPS,
     .animations = JUNGLE_FUZZY_ANIMS,
     .extraAnimations = N(ExtraAnims_JungleFuzzy),
@@ -297,7 +297,7 @@ NpcData N(NpcData_HeartPlant) = {
     .pos = { 430.0f, 0.0f, 205.0f },
     .yaw = 270,
     .settings = &N(NpcSettings_HeartPlant),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_USE_INSPECT_ICON | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
@@ -320,7 +320,7 @@ NpcData N(NpcData_MBush) = {
     .pos = { 400.0f, 0.0f, -75.0f },
     .yaw = 90,
     .settings = &N(NpcSettings_MBush),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_USE_INSPECT_ICON | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = MBUSH_DROPS,
     .animations = MBUSH_ANIMS,
     .tattle = MSG_NpcTattle_MBush,

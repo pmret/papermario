@@ -23,7 +23,7 @@ API_CALLABLE(func_80240718_C71B98) {
 }
 
 EvtScript N(EVS_StartTexPanner_SmokeLeft) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, LVar0, TEX_PANNER_3)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_3)
@@ -37,7 +37,7 @@ EvtScript N(EVS_StartTexPanner_SmokeLeft) = {
 };
 
 EvtScript N(EVS_StartTexPanner_SmokeRight) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, LVar0, TEX_PANNER_4)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_4)
@@ -64,7 +64,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_StartTexPanner0) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_yougan1, TEX_PANNER_0)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_0)
@@ -78,7 +78,7 @@ EvtScript N(EVS_StartTexPanner0) = {
 };
 
 EvtScript N(EVS_StartTexPanner1) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_yougan, TEX_PANNER_1)
     Call(SetTexPanner, MODEL_o640, TEX_PANNER_1)
     Thread
@@ -158,7 +158,7 @@ EvtScript N(EVS_Main) = {
     Call(TranslateModel, MODEL_yougan, 0, 40, 0)
     Set(MV_GlowIntensity, 0)
     Thread
-        SetGroup(EVT_GROUP_00)
+        SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_2, NULL)
     EndThread
     Thread

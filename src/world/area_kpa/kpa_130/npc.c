@@ -60,7 +60,7 @@ EvtScript N(EVS_NpcDefeat_BombshellBlaster) = {
         CaseEq(OUTCOME_PLAYER_FLED)
             Call(OnPlayerFled, 0)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -95,7 +95,7 @@ EvtScript N(EVS_NpcDefeat_BombshellBill) = {
         CaseEq(OUTCOME_PLAYER_FLED)
             Call(OnPlayerFled, 0)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return

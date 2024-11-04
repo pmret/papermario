@@ -41,19 +41,19 @@ EvtScript N(EVS_UseMove) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
-            Set(LVarD, 50)
-            Set(LVarE, 1)
-            Set(LVarF, 2)
+            Set(LVarD, 50) // duration
+            Set(LVarE, BASIC_HAMMER_DMG_BAD)
+            Set(LVarF, BASIC_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove_Impl))
         CaseEq(1)
-            Set(LVarD, 50)
-            Set(LVarE, 2)
-            Set(LVarF, 4)
+            Set(LVarD, 50) // duration
+            Set(LVarE, SUPER_HAMMER_DMG_BAD)
+            Set(LVarF, SUPER_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove_Impl))
         CaseEq(2)
-            Set(LVarD, 50)
-            Set(LVarE, 3)
-            Set(LVarF, 6)
+            Set(LVarD, 50) // duration
+            Set(LVarE, ULTRA_HAMMER_DMG_BAD)
+            Set(LVarF, ULTRA_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove_Impl))
     EndSwitch
     Return
@@ -194,7 +194,7 @@ EvtScript N(EVS_UseMove_Impl) = {
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Hold1)
     EndSwitch
     Call(GetActionCommandMode, LVar0)
-    IfGt(LVar0, 0)
+    IfGt(LVar0, AC_MODE_NOT_LEARNED)
         Call(N(ShouldMovesAutoSucceed))
         IfEq(LVar0, 0)
             Loop(45)
@@ -206,12 +206,12 @@ EvtScript N(EVS_UseMove_Impl) = {
             EndLoop
         EndIf
         Add(LVarD, 6)
-        Call(action_command_hammer_start, 0, LVarD, 3)
-        Call(SetActionQuality, 0)
+        Call(action_command_hammer_start, 0, LVarD, AC_DIFFICULTY_3)
+        Call(SetActionProgress, 0)
         Set(LVar1, 0)
         Loop(30)
             Wait(1)
-            Call(GetActionQuality, LVar0)
+            Call(GetActionProgress, LVar0)
             IfNe(LVar0, 0)
                 IfNe(LVar1, 1)
                     Call(GetMenuSelection, LVar3, LVar4, LVar5)
@@ -245,10 +245,10 @@ EvtScript N(EVS_UseMove_Impl) = {
         Wait(30)
     EndIf
     Call(GetActionCommandMode, LVar0)
-    IfGt(LVar0, 0)
+    IfGt(LVar0, AC_MODE_NOT_LEARNED)
         Loop(0)
             Wait(1)
-            Call(GetActionSuccess, LVar0)
+            Call(GetSmashActionQuality, LVar0)
             IfNe(LVar0, 0)
                 BreakLoop
             EndIf
@@ -285,7 +285,7 @@ EvtScript N(EVS_UseMove_Impl) = {
     Call(InitTargetIterator)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(GetPlayerActionSuccess, LVar3)
+    Call(GetPlayerActionQuality, LVar3)
     Switch(LVar3)
         CaseGt(FALSE)
             Thread
@@ -317,11 +317,11 @@ EvtScript N(EVS_UseMove_Impl) = {
     IfEq(LVar3, HIT_RESULT_MISS)
         Call(VirtualEntityLandJump, LVarA)
         Call(DeleteVirtualEntity, LVarA)
-        ExecWait(N(EVS_Hammer_ReturnHome_C))
+        ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
     Thread
-        Call(GetPlayerActionSuccess, LVar3)
+        Call(GetPlayerActionQuality, LVar3)
         Switch(LVar3)
             CaseGt(FALSE)
                 Call(SetVirtualEntityJumpGravity, LVarA, Float(1.4))
@@ -337,7 +337,7 @@ EvtScript N(EVS_UseMove_Impl) = {
                 Call(DeleteVirtualEntity, LVarA)
         EndSwitch
     EndThread
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -389,7 +389,7 @@ EvtScript N(EVS_UseMove_Impl) = {
         CaseEq(2)
             Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_D_DOWN_HIT_3)
     EndSwitch
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -417,11 +417,11 @@ EvtScript N(EVS_UseMove_Impl) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(EVS_Hammer_ReturnHome_A))
+            ExecWait(N(EVS_HammerSupport_ReturnHome_SmashSuccess))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_Hammer_ReturnHome_C))
+            ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         EndCaseGroup
     EndSwitch
     Return

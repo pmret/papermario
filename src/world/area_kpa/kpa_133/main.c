@@ -47,8 +47,8 @@ BombTrigger N(BombPos_Wall) = {
 
 EvtScript N(EVS_BlastWall) = {
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 56, 56, 1, 10, 30)
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(EnableModel, MODEL_o235, TRUE)
     Loop(10)
         Call(EnableModel, MODEL_o477, TRUE)
@@ -60,7 +60,7 @@ EvtScript N(EVS_BlastWall) = {
     EndLoop
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ttae, COLLIDER_FLAGS_UPPER_MASK)
     Set(GF_KPA133_Item_BombedWall, TRUE)
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
     Return
     End

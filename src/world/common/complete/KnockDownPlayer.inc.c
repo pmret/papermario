@@ -74,7 +74,7 @@ API_CALLABLE(N(KnockdownCreate)) {
     data->scale.y = SPRITE_WORLD_SCALE_F;
     data->scale.z = SPRITE_WORLD_SCALE_F;
     data->imgfxIdx = imgfx_get_free_instances(1);
-    data->workerID = create_worker_world(0, N(gfx_build_knocked_down_player));
+    data->workerID = create_worker_scene(NULL, N(gfx_build_knocked_down_player));
     evt_set_variable(script, KNOCK_DOWN_MAP_VAR, (s32) data);
     return ApiStatus_DONE2;
 }

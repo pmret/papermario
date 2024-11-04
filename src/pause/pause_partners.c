@@ -26,7 +26,7 @@ void pause_partners_handle_input(MenuPanel* panel);
 void pause_partners_update(MenuPanel* panel);
 void pause_partners_cleanup(MenuPanel* panel);
 
-static s32 gPausePartnersIconIDs[8];
+static HudElemID gPausePartnersHIDs[8];
 static s32 gPausePartnersSpriteIDs[8];
 static s32 gPausePartnersPartnerIdx[8];
 static s32 gPausePartnersCurrentPartnerIdx;
@@ -49,7 +49,7 @@ extern u8 D_PAL_80271B4C[];
 extern u8 D_PAL_80271B50[];
 #endif
 
-HudScript* gPausePartnersIconScripts[][8] = {
+HudScript* gPausePartnersHudScripts[][8] = {
     [LANGUAGE_DEFAULT] = {
         &HES_FPCost, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
         &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
@@ -201,7 +201,7 @@ s32 gPausePartnersCurrentPortraitIndex = -1;
 s32 gPausePartnersNextPortraitIndex = -1;
 MenuWindowBP gPausePartnersWindowBPs[] = {
     {
-        .windowID = WINDOW_ID_PAUSE_PARTNERS,
+        .windowID = WIN_PAUSE_PARTNERS,
         .unk_01 = 0,
         .pos = { .x = 3, .y = 16 },
         .width = 289,
@@ -209,12 +209,12 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .priority = WINDOW_PRIORITY_1,
         .fpDrawContents = &pause_partners_draw_contents,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_20 }
     }, {
-        .windowID = WINDOW_ID_PAUSE_PARTNERS_TITLE,
+        .windowID = WIN_PAUSE_PARTNERS_TITLE,
         .unk_01 = 0,
         .pos = { .x = 8, .y = 103 },
         .width = 112,
@@ -222,12 +222,12 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_partners_draw_title,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_PARTNERS,
+        .parentID = WIN_PAUSE_PARTNERS,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_22 }
     }, {
-        .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
+        .windowID = WIN_PAUSE_PARTNERS_MOVELIST,
         .unk_01 = 0,
         .pos = { .x = 133, .y = 36 },
         .width = 140,
@@ -235,12 +235,12 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_partners_draw_movelist,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_PARTNERS,
+        .parentID = WIN_PAUSE_PARTNERS,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { -1 }
     }, {
-        .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE,
+        .windowID = WIN_PAUSE_PARTNERS_MOVELIST_TITLE,
         .unk_01 = 0,
         .pos = { .x = 12, .y = -6 },
         .width = 80,
@@ -248,12 +248,12 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_partners_draw_movelist_title,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
+        .parentID = WIN_PAUSE_PARTNERS_MOVELIST,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { -1 }
     }, {
-        .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_FLOWER,
+        .windowID = WIN_PAUSE_PARTNERS_MOVELIST_FLOWER,
         .unk_01 = 0,
         .pos = { .x = 102, .y = -12 },
         .width = 32,
@@ -261,7 +261,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_partners_draw_movelist_flower,
         .tab = NULL,
-        .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
+        .parentID = WIN_PAUSE_PARTNERS_MOVELIST,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { -1 }
@@ -273,7 +273,7 @@ MenuPanel gPausePanelPartners = {
     .col = 0,
     .row = 1,
     .selected = 0,
-    .page = 0,
+    .state = 0,
     .numCols = 4,
     .numRows = 2,
     .numPages = 0,
@@ -380,7 +380,7 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     currentTab = gPauseMenuCurrentTab;
     if (currentTab == 4) {
         if (gPausePartnersLevel == 0) {
-            pause_set_cursor_pos(WINDOW_ID_PAUSE_PARTNERS, baseX + 42, baseY + 88);
+            pause_set_cursor_pos(WIN_PAUSE_PARTNERS, baseX + 42, baseY + 88);
         }
 
         if (gPauseMenuCurrentTab == currentTab && gPausePartnersLevel == 0) {
@@ -501,19 +501,19 @@ void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     draw_msg(msgID, baseX + ((width - offset - msgWidth) >> 1), baseY + 1, 255, MSG_PAL_WHITE, 0);
 
     if (level == 1) {
-        hud_element_set_render_pos(gPausePartnersIconIDs[2], baseX + X_VAR1, baseY + 10);
-        hud_element_draw_without_clipping(gPausePartnersIconIDs[2]);
+        hud_element_set_render_pos(gPausePartnersHIDs[2], baseX + X_VAR1, baseY + 10);
+        hud_element_draw_without_clipping(gPausePartnersHIDs[2]);
     } else if (level == 2) {
 #if VERSION_JP
-        hud_element_set_render_pos(gPausePartnersIconIDs[3], baseX + 88, baseY + 10);
-        hud_element_draw_without_clipping(gPausePartnersIconIDs[3]);
-        hud_element_set_render_pos(gPausePartnersIconIDs[2], baseX + 72, baseY + 10);
-        hud_element_draw_without_clipping(gPausePartnersIconIDs[2]);
+        hud_element_set_render_pos(gPausePartnersHIDs[3], baseX + 88, baseY + 10);
+        hud_element_draw_without_clipping(gPausePartnersHIDs[3]);
+        hud_element_set_render_pos(gPausePartnersHIDs[2], baseX + 72, baseY + 10);
+        hud_element_draw_without_clipping(gPausePartnersHIDs[2]);
 #else
-        hud_element_set_render_pos(gPausePartnersIconIDs[2], baseX + 91, baseY + 10);
-        hud_element_draw_without_clipping(gPausePartnersIconIDs[2]);
-        hud_element_set_render_pos(gPausePartnersIconIDs[3], baseX + 101, baseY + 10);
-        hud_element_draw_without_clipping(gPausePartnersIconIDs[3]);
+        hud_element_set_render_pos(gPausePartnersHIDs[2], baseX + 91, baseY + 10);
+        hud_element_draw_without_clipping(gPausePartnersHIDs[2]);
+        hud_element_set_render_pos(gPausePartnersHIDs[3], baseX + 101, baseY + 10);
+        hud_element_draw_without_clipping(gPausePartnersHIDs[3]);
 #endif
     }
 }
@@ -539,7 +539,6 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     s32 msgX, msgY;
     s32 style;
     s32 level = get_player_data()->partners[gPausePartnersPartnerIDs[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].level;
-
 
     if (level == PARTNER_RANK_ULTRA) {
         level = 4;
@@ -571,10 +570,10 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         }
 
         draw_msg(moveNameID, msgX, msgY, 255, MSG_PAL_STANDARD, style);
-        hud_element_set_scale(gPausePartnersIconIDs[i + 4], 0.5f);
+        hud_element_set_scale(gPausePartnersHIDs[i + 4], 0.5f);
         //TODO find better match
-        hud_element_set_render_pos(gPausePartnersIconIDs[i + 4], X_VAR3 - (-baseX), baseY + 28 + i * 13);
-        hud_element_draw_without_clipping(gPausePartnersIconIDs[i + 4]);
+        hud_element_set_render_pos(gPausePartnersHIDs[i + 4], X_VAR3 - (-baseX), baseY + 28 + i * 13);
+        hud_element_draw_without_clipping(gPausePartnersHIDs[i + 4]);
 
         if (costFP != 0) {
             s32 xOffset = X_VAR4;
@@ -586,17 +585,17 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
             draw_number(costFP, baseX + xOffset, baseY + 22 + i * 13, style, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
             if (costFP > 0) {
 #if VERSION_PAL
-                hud_element_set_render_pos(gPausePartnersIconIDs[0], baseX + D_PAL_80271B44[gCurrentLanguage] + 9, baseY + 29 + i * 13);
+                hud_element_set_render_pos(gPausePartnersHIDs[0], baseX + D_PAL_80271B44[gCurrentLanguage] + 9, baseY + 29 + i * 13);
 #else
-                hud_element_set_render_pos(gPausePartnersIconIDs[0], baseX + X_VAR5, baseY + 29 + i * 13);
+                hud_element_set_render_pos(gPausePartnersHIDs[0], baseX + X_VAR5, baseY + 29 + i * 13);
 #endif
-                hud_element_draw_without_clipping(gPausePartnersIconIDs[0]);
+                hud_element_draw_without_clipping(gPausePartnersHIDs[0]);
             }
         }
     }
 
     if (gPauseMenuCurrentTab == 4 && gPausePartnersLevel == 1) {
-        pause_set_cursor_pos(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, baseX + X_VAR6, baseY + 28 + gPausePartnersSelectedMove * 13);
+        pause_set_cursor_pos(WIN_PAUSE_PARTNERS_MOVELIST, baseX + X_VAR6, baseY + 28 + gPausePartnersSelectedMove * 13);
     }
 }
 
@@ -620,8 +619,8 @@ void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s
 }
 
 void pause_partners_draw_movelist_flower(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
-    hud_element_set_render_pos(gPausePartnersIconIDs[1], baseX + 17, baseY + 16);
-    hud_element_draw_without_clipping(gPausePartnersIconIDs[1]);
+    hud_element_set_render_pos(gPausePartnersHIDs[1], baseX + 17, baseY + 16);
+    hud_element_draw_without_clipping(gPausePartnersHIDs[1]);
 }
 
 void pause_partners_init(MenuPanel* panel) {
@@ -637,7 +636,7 @@ void pause_partners_init(MenuPanel* panel) {
     }
 
     if (gPausePartnersNumPartners == 0) {
-        set_window_update(WINDOW_ID_PAUSE_PARTNERS, WINDOW_UPDATE_HIDE);
+        set_window_update(WIN_PAUSE_PARTNERS, WINDOW_UPDATE_HIDE);
         panel->initialized = FALSE;
         return;
     }
@@ -646,9 +645,9 @@ void pause_partners_init(MenuPanel* panel) {
         gPausePartnersSpriteIDs[i] = spr_load_npc_sprite(gPausePartnersSpriteAnims[i][0], gPausePartnersSpriteAnims[i]);
     }
 
-    for (i = 0; i < ARRAY_COUNT(gPausePartnersIconScripts[0]); i++) {
-        gPausePartnersIconIDs[i] = hud_element_create(gPausePartnersIconScripts[gCurrentLanguage][i]);
-        hud_element_set_flags(gPausePartnersIconIDs[i], HUD_ELEMENT_FLAG_80);
+    for (i = 0; i < ARRAY_COUNT(gPausePartnersHudScripts[0]); i++) {
+        gPausePartnersHIDs[i] = hud_element_create(gPausePartnersHudScripts[gCurrentLanguage][i]);
+        hud_element_set_flags(gPausePartnersHIDs[i], HUD_ELEMENT_FLAG_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPausePartnersWindowBPs); i++) {
@@ -657,11 +656,11 @@ void pause_partners_init(MenuPanel* panel) {
     setup_pause_menu_tab(gPausePartnersWindowBPs, ARRAY_COUNT(gPausePartnersWindowBPs));
 
 #if VERSION_PAL
-    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE].width = D_PAL_80271B50[gCurrentLanguage];
-    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE].pos.x = D_PAL_80271B4C[gCurrentLanguage];
-    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST].width = D_PAL_80271B40[gCurrentLanguage];
-    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST].pos.x = D_PAL_80271B3C[gCurrentLanguage];
-    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST_FLOWER].pos.x = D_PAL_80271B48[gCurrentLanguage];
+    gWindows[WIN_PAUSE_PARTNERS_MOVELIST_TITLE].width = D_PAL_80271B50[gCurrentLanguage];
+    gWindows[WIN_PAUSE_PARTNERS_MOVELIST_TITLE].pos.x = D_PAL_80271B4C[gCurrentLanguage];
+    gWindows[WIN_PAUSE_PARTNERS_MOVELIST].width = D_PAL_80271B40[gCurrentLanguage];
+    gWindows[WIN_PAUSE_PARTNERS_MOVELIST].pos.x = D_PAL_80271B3C[gCurrentLanguage];
+    gWindows[WIN_PAUSE_PARTNERS_MOVELIST_FLOWER].pos.x = D_PAL_80271B48[gCurrentLanguage];
 #endif
 
     gPausePartnersCurrentPartnerIdx = 0;
@@ -733,7 +732,7 @@ void pause_partners_handle_input(MenuPanel* panel) {
         level = 2;
     }
 
-    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST].height = level * 13 + 30;
+    gWindows[WIN_PAUSE_PARTNERS_MOVELIST].height = level * 13 + 30;
 
     if (gPausePartnersLevel == 1) {
         oldPos = gPausePartnersSelectedMove;
@@ -768,7 +767,7 @@ void pause_partners_handle_input(MenuPanel* panel) {
     if ((gPausePressedButtons & BUTTON_A) && gPausePartnersLevel == 0) {
         gPausePartnersLevel = 1;
         sfx_play_sound(SOUND_MENU_NEXT);
-        set_window_update(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, WINDOW_UPDATE_SHOW);
+        set_window_update(WIN_PAUSE_PARTNERS_MOVELIST, WINDOW_UPDATE_SHOW);
         return;
     }
 
@@ -780,7 +779,7 @@ void pause_partners_handle_input(MenuPanel* panel) {
         } else {
             gPausePartnersLevel = 0;
             sfx_play_sound(SOUND_MENU_BACK);
-            set_window_update(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, WINDOW_UPDATE_HIDE);
+            set_window_update(WIN_PAUSE_PARTNERS_MOVELIST, WINDOW_UPDATE_HIDE);
             return;
         }
     }
@@ -827,8 +826,8 @@ void pause_partners_update(MenuPanel* panel) {
 void pause_partners_cleanup(MenuPanel* panel) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gPausePartnersIconIDs); i++) {
-        hud_element_free(gPausePartnersIconIDs[i]);
+    for (i = 0; i < ARRAY_COUNT(gPausePartnersHIDs); i++) {
+        hud_element_free(gPausePartnersHIDs[i]);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPausePartnersSpriteIDs); i++) {

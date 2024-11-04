@@ -57,7 +57,7 @@ void shockwave_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
 
     bpPtr->init = shockwave_init;
     bpPtr->update = shockwave_update;
-    bpPtr->renderWorld = shockwave_render;
+    bpPtr->renderScene = shockwave_render;
     bpPtr->unk_00 = 0;
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_SHOCKWAVE;
@@ -306,7 +306,7 @@ void shockwave_appendGfx(void* effect) {
     }
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, dlist2);
 
     guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f,

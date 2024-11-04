@@ -15,6 +15,7 @@ options:
   symbol_addrs_path: ver/pal/symbol_addrs.txt
   ld_script_path: ver/pal/papermario.ld
   ld_symbol_header_path: ver/pal/build/include/ld_addrs.h
+  ld_generate_symbol_per_data_segment: True
   src_path: src
   asm_path: ver/pal/asm
   asset_path: assets/pal
@@ -51,8 +52,8 @@ segments:
     - [auto, c, world/actions] # DUMMY ROM
     - [auto, c, world/partners]
     - [auto, c, global_hud_scripts]
-    - [auto, c, 891b0_len_fb0]
-    - [auto, c, 8a160_len_700]
+    - [auto, c, world/surfaces]
+    - [auto, c, status_star_shimmer]
     - [auto, c, 8a860_len_3f30]
     - [auto, c, draw_box]
     - [auto, c, bss/engine1_post_bss]
@@ -78,8 +79,8 @@ segments:
       - [auto, palette, ui/input/analog_stick_down]
       - [auto, ci4,     ui/input/analog_stick_up, 32, 32]
       - [auto, palette, ui/input/analog_stick_up]
-      - [auto, ci4,     ui/unk_bar, 72, 16]
-      - [auto, palette, ui/unk_bar]
+      - [auto, ci4,     ui/input/mash_bar, 72, 16]
+      - [auto, palette, ui/input/mash_bar]
       - [auto, ci4,     ui/ok, 24, 16]
       - [auto, palette, ui/ok]
       - [auto, ci4,     ui/input/start_button, 48, 40]
@@ -513,9 +514,9 @@ segments:
       - [0x9BDB0]
     - start: 0xA1160
       type: .data
-      name: 8a160_len_700
+      name: status_star_shimmer
       subsegments:
-      - [0xA1160, ia8, A2960, 32, 16]
+      - [0xA1160, ia8, ui/status/shimmer_particle, 32, 16]
       - [0xA1360] # Vp
       - [0xA1370, vtx, A2B70]
       - [0xA13C0, gfx, A2BC0]
@@ -1177,12 +1178,12 @@ segments:
 ###############
 ### Effects ###
 ###############
-  - name: 325AD0
+  - name: effect_globals
     type: code
     start: 0x34E890
     vram: 0xE0200000
     subsegments:
-    - [0x34E890, c, 325AD0]
+    - [0x34E890, c, effect_utils]
     - [0x34ECA0, pm_effect_shims, effect_shims]
     - [0x34EF20]
   - name: effect_gfx_big_smoke_puff

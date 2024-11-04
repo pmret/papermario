@@ -20,7 +20,7 @@ void ring_blast_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 arg5)
 
     effectBp.init = ring_blast_init;
     effectBp.update = ring_blast_update;
-    effectBp.renderWorld = ring_blast_render;
+    effectBp.renderScene = ring_blast_render;
     effectBp.unk_00 = 0;
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_RING_BLAST;
@@ -95,7 +95,7 @@ void ring_blast_appendGfx(void* effect) {
     Matrix4f sp60;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     gSPDisplayList(gMainGfxPos++, dlist2);
 
     guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);

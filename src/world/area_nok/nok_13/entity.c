@@ -32,12 +32,12 @@ EvtScript N(EVS_BreakBlock_Third) = {
 };
 
 EvtScript N(EVS_ReadSign_Directions) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(DisablePlayerInput, TRUE)
     Call(ShowMessageAtScreenPos, MSG_Menus_0178, 160, 40)
     Call(DisablePlayerInput, FALSE)
-    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
 };

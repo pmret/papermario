@@ -8,8 +8,6 @@
 
 typedef s32 HudScript[];
 
-typedef s32 HudElemID;
-
 enum {
     HUD_ELEMENT_OP_End,
     HUD_ELEMENT_OP_SetRGBA,
@@ -122,7 +120,7 @@ typedef struct PopupMenu {
     /* 0x104 */ char unk_104[0x4];
     /* 0x108 */ s32 userIndex[32]; // used to map menu order to a user-ID for each item
     /* 0x188 */ char unk_188[0x4];
-    /* 0x18C */ s32 enabled[32];
+    /* 0x18C */ b32 enabled[32];
     /* 0x20C */ char unk_20C[0x4];
     /* 0x210 */ s32 value[32]; // sale price, etc
     /* 0x290 */ char unk_290[0x4];
@@ -155,7 +153,7 @@ typedef struct Shop {
     /* 0x014 */ ShopItemLocation* itemDataPositions;
     /* 0x018 */ ShopItemData* staticInventory;
     /* 0x01C */ ShopSellPriceData* staticPriceList;
-    /* 0x020 */ s32 costIconID;
+    /* 0x020 */ HudElemID costHID;
     /* 0x024 */ s32 inventoryItemFlags;
     /* 0x028 */ PopupMenu itemSelectMenu;
     /* 0x358 */ s32 unk_358;

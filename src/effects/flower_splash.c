@@ -53,7 +53,7 @@ void flower_splash_main(f32 posX, f32 posY, f32 posZ, f32 angle) {
 
     bp.init = flower_splash_init;
     bp.update = flower_splash_update;
-    bp.renderWorld = flower_splash_render;
+    bp.renderScene = flower_splash_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FLOWER_SPLASH;
@@ -148,7 +148,7 @@ void flower_splash_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->shared->graphics));
 
     for (i = 0; i < effectTemp->numParts; i++, data++) {
         if (data->alive) {

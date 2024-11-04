@@ -24,7 +24,7 @@ EvtScript N(EVS_GotoMap_tik_15_1) = {
 };
 
 EvtScript N(EVS_SetupPipe) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Set(LVarA, LVar0)
     Set(LVarB, LVar1)
     Set(LVarC, LVar2)

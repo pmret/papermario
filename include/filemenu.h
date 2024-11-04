@@ -2,35 +2,87 @@
 #define _FILEMENU_H_
 
 #include "common.h"
+#include "filemenu.h"
+
+#define CENTER_WINDOW_X(id) (((gWindows[id].parent != WIN_NONE) \
+    ? (gWindows[gWindows[id].parent].width / 2) \
+    : (SCREEN_WIDTH / 2)) \
+    - (gWindows[id].width / 2))
+
+#define CENTER_WINDOW_Y(id) (((gWindows[id].parent != WIN_NONE) \
+    ? (gWindows[gWindows[id].parent].height  / 2) \
+    : (SCREEN_HEIGHT / 2)) \
+    - (gWindows[id].height  / 2))
 
 enum {
-  PAGE_0,
-  PAGE_1,
+    FILE_MENU_MAIN          = 0, // file selection
+    FILE_MENU_CONFIRM       = 1, // confirmation prompt is open
+    FILE_MENU_MESSAGE       = 2, // message is displayed, e.g. "File X has been deleted."
+    FILE_MENU_INPUT_NAME    = 3, // "Enter a file name!" screen
+    FILE_MENU_SELECT_LANG   = 4, // PAL only
+};
+
+enum {
+    // states for main menu
+    FM_MAIN_SELECT_FILE         = 0, // choose which file to load
+    FM_MAIN_SELECT_DELETE, // choose which file to delete
 #if !VERSION_PAL
-  PAGE_2,
+    FM_MAIN_SELECT_LANG_DUMMY, // non-PAL versions have an unimplemented dummy language select
 #endif
-  PAGE_3,
-  PAGE_4,
+    FM_MAIN_SELECT_COPY_FROM,
+    FM_MAIN_SELECT_COPY_TO,
+    FM_MAIN_SELECT_LANG_PAL,
+
+    // states for confirm submenu
+    FM_CONFIRM_DELETE           = 0,
+#if !VERSION_PAL
+    FM_CONFIRM_DUMMY,
+#endif
+    FM_CONFIRM_CREATE,
+    FM_CONFIRM_COPY, // unused
+    FM_CONFIRM_START,
+
+    // states for message submenu
+    FM_MESSAGE_DELETED          = 0,
+#if !VERSION_PAL
+    FM_MESSAGE_DUMMY,
+#endif
+    FM_MESSAGE_COPIED,
+    FM_MESSAGE_CREATED,
+
+    // states for input submenu
+    FM_INPUT_CHARSET_A          = 0,
+    FM_INPUT_CHARSET_B,
+};
+
+enum {
+    FM_MAIN_OPT_FILE_1,
+    FM_MAIN_OPT_FILE_2,
+    FM_MAIN_OPT_FILE_3,
+    FM_MAIN_OPT_FILE_4,
+    FM_MAIN_OPT_DELETE,
+    FM_MAIN_OPT_COPY,
+    FM_MAIN_OPT_CANCEL,
 };
 
 extern MenuPanel* filemenu_menus[];
 
 extern s32 filemenu_iterFileIdx;
 extern s32 filemenu_pressedButtons;
-extern s32 filemenu_cursorHudElem;
+extern HudElemID filemenu_cursorHID;
 extern s32 filemenu_heldButtons;
 extern s8 filemenu_filename_pos;
 extern s32 filemenu_loadedFileIdx;
 extern s8 filemenu_currentMenu;
 extern s32 filemenu_8024C09C;
-extern s32 filemenu_cursorHudElemID[1];
+extern HudElemID filemenu_cursorHIDs[1];
 extern s32 filemenu_8024C0A4[3];
-extern s32 filemenu_hudElemIDs[20];
-extern s32 filemenu_createfile_hudElems[4];
+extern HudElemID filemenu_mainHIDs[20];
+extern HudElemID filemenu_createfile_HIDs[4];
 extern u8 filemenu_filename[8];
 
 #if VERSION_PAL
-extern s32 D_802517D0[1];
+extern HudElemID PauseLanguageHIDs[1];
 extern s32 D_802517D4[1];
 extern u16 D_802517E0[2][0x400];
 extern u8 D_filemenu_8025095C[4];
@@ -43,7 +95,7 @@ extern u8 D_filemenu_8025095C[4];
     f32* scaleX, f32* scaleY,\
     f32* rotX, f32* rotY, f32* rotZ,\
     s32* darkening,\
-    s32* opacity);\
+    s32* opacity)
 
 WINDOW_UPDATE_FUNC(filemenu_update_show_name_input);
 WINDOW_UPDATE_FUNC(filemenu_update_show_options_left);

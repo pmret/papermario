@@ -360,7 +360,7 @@ Vec3f N(FlightPath)[] = {
 };
 
 EvtScript N(EVS_FlyingGull) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(CloneModel, MODEL_hontai, CLONED_MODEL_GULL)
     Set(LFlag0, TRUE)
     Set(LFlag1, FALSE)
@@ -578,7 +578,7 @@ NpcData N(NpcData_JrTroopa) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_JrTroopa),
     .settings = &N(NpcSettings_JrTroopa),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_JrTroopa_Idle,

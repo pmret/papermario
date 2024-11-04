@@ -1,7 +1,7 @@
 #include "kpa_17.h"
 
 EvtScript N(EVS_ExitWalk_kpa_1X_2) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, kpa_17_ENTRY_1)
     Exec(ExitWalk)
     IfEq(GF_KPA16_ShutOffLava, FALSE)

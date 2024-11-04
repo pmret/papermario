@@ -42,7 +42,7 @@ EvtScript N(EVS_BadExit_kmr_24_0) = {
 };
 
 EvtScript N(EVS_ExitWalk_kmr_12_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, kmr_11_ENTRY_0)
     Exec(ExitWalk)
     Call(GotoMap, Ref("kmr_12"), kmr_12_ENTRY_1)
@@ -52,7 +52,7 @@ EvtScript N(EVS_ExitWalk_kmr_12_1) = {
 };
 
 EvtScript N(EVS_ExitWalk_kmr_10_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, kmr_11_ENTRY_1)
     Exec(ExitWalk)
     IfGe(GB_StoryProgress, STORY_CH0_KAMMY_RETURNED_TO_BOWSER)

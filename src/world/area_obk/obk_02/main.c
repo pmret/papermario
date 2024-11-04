@@ -9,7 +9,7 @@ enum {
 };
 
 EvtScript N(EVS_ExitDoor_obk_01_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, obk_02_ENTRY_0)
     Set(LVar1, COLLIDER_tt1)
@@ -24,7 +24,7 @@ EvtScript N(EVS_ExitDoor_obk_01_1) = {
 };
 
 EvtScript N(EVS_ExitDoor_obk_03_0) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(DisablePlayerInput, TRUE)
     Set(LVar0, obk_02_ENTRY_1)
     Set(LVar1, COLLIDER_tt2)

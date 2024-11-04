@@ -33,7 +33,7 @@ API_CALLABLE(N(SpawnSunEffect)) {
 }
 
 EvtScript N(EVS_ExitWalk_jan_01_1) = {
-    SetGroup(EVT_GROUP_1B)
+    SetGroup(EVT_GROUP_EXIT_MAP)
     Call(N(ClearTrackVols))
     Call(UseExitHeading, 60, jan_02_ENTRY_0)
     Exec(ExitWalk)

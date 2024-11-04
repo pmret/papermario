@@ -20,7 +20,7 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
         CaseEq(OUTCOME_PLAYER_FLED)
             Call(OnPlayerFled, 0)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -55,7 +55,7 @@ NpcData N(NpcData_KoopaTroopa) = {
     },
     .init = &N(EVS_NpcInit_KoopaTroopa),
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE,
     .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
 };
@@ -78,7 +78,7 @@ NpcData N(NpcData_ParaTroopa_01) = {
     },
     .init = &N(EVS_NpcInit_KoopaTroopa),
     .settings = &N(NpcSettings_ParaTroopa),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE,
     .drops = PARATROOPA_DROPS,
     .animations = PARATROOPA_ANIMS,
 };
@@ -101,7 +101,7 @@ NpcData N(NpcData_ParaTroopa_02) = {
     },
     .init = &N(EVS_NpcInit_KoopaTroopa),
     .settings = &N(NpcSettings_ParaTroopa),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE,
     .drops = PARATROOPA_DROPS,
     .animations = PARATROOPA_ANIMS,
 };

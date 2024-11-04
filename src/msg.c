@@ -482,7 +482,7 @@ s32 _update_message(MessagePrintState* printer) {
                 }
                 break;
             case MSG_WINDOW_STATE_B:
-                printer->unk_4CC += 1;
+                printer->unk_4CC++;
                 endPosDist = abs(printer->curLinePos - printer->lineEndPos[printer->unkArraySize]);
                 lineIncAmt = 2;
 
@@ -2184,7 +2184,7 @@ void msg_draw_choice_pointer(MessagePrintState* printer) {
         posY = baseY + (targetY - baseY) * moveToTargetAlpha;
     }
 
-    posY += 1;
+    posY++;
     posX += (cosine(posInterpPhase * 38 + 270) + 1.0) * 0.5 * 3.2;
     posX -= 2;
 

@@ -1,7 +1,7 @@
 #include "osr_04.h"
 
 EvtScript N(EVS_TexPan_Smoke) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_ke1, TEX_PANNER_0)
     Call(SetTexPanner, MODEL_ke2, TEX_PANNER_1)
     Call(SetTexPanner, MODEL_ke3, TEX_PANNER_2)

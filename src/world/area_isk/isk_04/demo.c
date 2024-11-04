@@ -136,7 +136,6 @@ API_CALLABLE(N(SetupDemoScene)) {
     return ApiStatus_BLOCK;
 }
 
-
 EvtScript N(EVS_SetupDemo) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, 530, 25, -50)

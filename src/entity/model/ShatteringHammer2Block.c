@@ -1308,5 +1308,3 @@ Gfx* Entity_ShatteringHammer2Block_FragmentsRender[] = {
     D_0A001D38_E373A8,
     D_0A001C30_E372A0,
 };
-
-

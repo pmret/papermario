@@ -20,7 +20,7 @@ void N(FlyingAI_WanderInit)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration = aiSettings->moveTime / 2 + rand_int(aiSettings->moveTime / 2 + 1);
-    if (is_point_within_region(enemy->territory->wander.wanderShape,
+    if (is_point_outside_territory(enemy->territory->wander.wanderShape,
             enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z,
             npc->pos.x, npc->pos.z,
             enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
@@ -151,7 +151,7 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
         enemy->varTable[9]--;
     }
 
-    if (is_point_within_region(enemy->territory->wander.wanderShape,
+    if (is_point_outside_territory(enemy->territory->wander.wanderShape,
                                enemy->territory->wander.centerPos.x,
                                enemy->territory->wander.centerPos.z,
                                npc->pos.x, npc->pos.z,
@@ -428,7 +428,7 @@ void N(FlyingAI_Init)(Npc* npc, Enemy* enemy, Evt* script, MobileAISettings* aiS
     enemy->varTable[3] = (depth * 100.0) + 0.5;
     enemy->varTable[7] = (posY * 100.0) + 0.5;
     script->functionTemp[1] = aiSettings->playerSearchInterval;
-    enemy->aiFlags |= ENEMY_AI_FLAG_10;
+    enemy->aiFlags |= AI_FLAG_SKIP_IDLE_ANIM_AFTER_FLEE;
 }
 
 API_CALLABLE(N(FlyingAI_Main)) {
@@ -466,11 +466,11 @@ API_CALLABLE(N(FlyingAI_Main)) {
 
     npc->verticalRenderOffset = -2;
 
-    if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
+    if (enemy->aiFlags & AI_FLAG_SUSPEND) {
         if (enemy->aiSuspendTime != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
+        enemy->aiFlags &= ~AI_FLAG_SUSPEND;
     }
 
     switch (script->AI_TEMP_STATE) {

@@ -34,7 +34,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
             Goto(0)
         EndIf
     Call(SetMusicTrack, 0, SONG_MINIBOSS_BATTLE, 0, 8)
-    SetGroup(EVT_GROUP_EF)
+    SetGroup(EVT_GROUP_NOT_BATTLE)
     Thread
         Wait(3)
         Call(DisablePlayerInput, TRUE)
@@ -226,7 +226,7 @@ NpcData N(NpcData_GoombaBros_Red)[] = {
         },
         .init = &N(EVS_NpcInit_GoombaBros_Red),
         .settings = &N(NpcSettings_GoombaBros_Guard),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = GOOMBA_BROS_RED_ANIMS,
     },
@@ -248,7 +248,7 @@ NpcData N(NpcData_GoombaBros_Red)[] = {
         },
         .init = &N(EVS_NpcInit_GoombaBros_Blue),
         .settings = &N(NpcSettings_GoombaBros_Guard),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = GOOMBA_BROS_BLUE_ANIMS,
     },

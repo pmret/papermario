@@ -11,19 +11,19 @@ EvtScript N(EVS_UseMove) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
-            Set(LVarD, 45)
-            Set(LVarE, 1)
-            Set(LVarF, 2)
+            Set(LVarD, 45) // duration
+            Set(LVarE, BASIC_HAMMER_DMG_BAD)
+            Set(LVarF, BASIC_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove_Impl))
         CaseEq(1)
-            Set(LVarD, 45)
-            Set(LVarE, 2)
-            Set(LVarF, 4)
+            Set(LVarD, 45) // duration
+            Set(LVarE, SUPER_HAMMER_DMG_BAD)
+            Set(LVarF, SUPER_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove_Impl))
         CaseEq(2)
-            Set(LVarD, 45)
-            Set(LVarE, 3)
-            Set(LVarF, 6)
+            Set(LVarD, 45) // duration
+            Set(LVarE, ULTRA_HAMMER_DMG_BAD)
+            Set(LVarF, ULTRA_HAMMER_DMG_GOOD)
             ExecWait(N(EVS_UseMove_Impl))
     EndSwitch
     Return
@@ -41,7 +41,7 @@ EvtScript N(EVS_UseMove_Impl) = {
             ExecWait(N(EVS_UseUltraHammer))
     EndSwitch
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
-    Call(GetActionSuccessCopy, LVar0)
+    Call(GetMashActionQuality, LVar0) // incorrect use, should use GetSmashActionQuality
     Switch(LVar0)
         CaseGt(0)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -86,10 +86,10 @@ EvtScript N(EVS_UseMove_Impl) = {
     Wait(1)
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     IfEq(LVar0, HIT_RESULT_MISS)
-        ExecWait(N(EVS_Hammer_ReturnHome_C))
+        ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
-    Call(GetPlayerActionSuccess, LVar0)
+    Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
         CaseGt(FALSE)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -117,15 +117,13 @@ EvtScript N(EVS_UseMove_Impl) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
         CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
-            ExecWait(N(EVS_Hammer_ReturnHome_A))
+            ExecWait(N(EVS_HammerSupport_ReturnHome_SmashSuccess))
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            ExecWait(N(EVS_Hammer_ReturnHome_C))
+            ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         EndCaseGroup
     EndSwitch
     Return
     End
 };
-
-

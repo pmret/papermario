@@ -73,7 +73,7 @@ EffectInstance* water_block_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, s32 du
 
     bpPtr->init = water_block_init;
     bpPtr->update = &water_block_update;
-    bpPtr->renderWorld = water_block_render;
+    bpPtr->renderScene = water_block_render;
     bpPtr->unk_00 = 0;
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_WATER_BLOCK;
@@ -191,7 +191,7 @@ void water_block_update(EffectInstance* effect) {
             data->unk_58[i] *= 0.97;
             data->unk_68[i] += (10.0f - data->unk_68[i]) * 0.1;
             if (data->unk_48[i] > 480.0f) {
-                data->unk_88[i] = ~rand_int(10);
+                data->unk_88[i] = -rand_int(10) - 1;
             }
         }
     }
@@ -213,7 +213,7 @@ void water_block_render(EffectInstance* effect) {
 void func_E00B4574(void) {
 }
 
-void water_block_appendGfx(void *effect) {
+void water_block_appendGfx(void* effect) {
     Matrix4f sp20;
     Matrix4f sp60;
     WaterBlockFXData* data = ((EffectInstance*)effect)->data.waterBlock;
@@ -226,7 +226,7 @@ void water_block_appendGfx(void *effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->shared->graphics));
     guTranslateF(sp20, data->pos.x, data->pos.y, data->pos.z);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 

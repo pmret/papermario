@@ -41,7 +41,7 @@ EvtScript N(EVS_Kolorado_TrompPanic) = {
 };
 
 EvtScript N(EVS_Kolorado_TrompImpact) = {
-    Call(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_400000, 1)
+    Call(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, TRUE)
     Call(SetNpcRotationPivot, NPC_Kolorado, 13)
     Call(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
     Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
@@ -66,7 +66,7 @@ EvtScript N(EVS_Kolorado_TrompImpact) = {
 EvtScript N(EVS_Kolorado_HurtInit) = {
     Call(SetNpcPos, NPC_Kolorado, 447, 0, 70)
     Call(SetNpcYaw, NPC_Kolorado, 270)
-    Call(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_400000, 1)
+    Call(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, TRUE)
     Call(SetNpcRotationPivot, NPC_Kolorado, 13)
     Call(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
     Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
@@ -139,7 +139,7 @@ NpcData N(NpcData_Kolorado) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kolorado),
     .settings = &N(NpcSettings_Kolorado),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_10000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_RAYCAST_TO_INTERACT | ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = KOLORADO_ANIMS,
     .tattle = MSG_NpcTattle_Kolorado,

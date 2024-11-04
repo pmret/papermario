@@ -187,7 +187,7 @@ API_CALLABLE(N(CreateRitualCards)) {
     imgfx_update(imgfxIdx, IMGFX_SET_ANIM, IMGFX_ANIM_FLIP_CARD_3, 1, 1, 0, IMGFX_FLAG_800);
     evt_set_variable(script, RITUAL_VAR_FILP3_IMGFX, imgfxIdx);
 
-    evt_set_variable(script, RITUAL_VAR_WORKER, create_worker_world(
+    evt_set_variable(script, RITUAL_VAR_WORKER, create_worker_scene(
         N(card_worker_update),
         N(card_worker_render)));
     return ApiStatus_DONE2;
@@ -344,7 +344,6 @@ void N(card_worker_update)(void) {
             N(RitualCards)[1].spriteID = 1;
             N(RitualCards)[1].rasterIndex = 48;
             N(RitualCards)[1].xoffset = 0;
-
 
             N(RitualCards)[2].spriteID = 8;
             N(RitualCards)[2].rasterIndex = 5;
@@ -761,7 +760,6 @@ EvtScript N(EVS_EndMerleeCamera) = {
     Return
     End
 };
-
 
 EvtScript N(EVS_NpcInteract_Merlee) = {
     Call(func_802D2C14, 1)

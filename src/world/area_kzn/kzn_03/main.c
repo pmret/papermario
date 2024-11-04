@@ -20,7 +20,7 @@ EvtScript N(EVS_BindTriggers) = {
 };
 
 EvtScript N(EVS_StartTexPanners_Lava) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(EnableTexPanning, MODEL_o112, TRUE)
     Call(EnableTexPanning, MODEL_o151, TRUE)
     Call(EnableTexPanning, MODEL_toro, TRUE)

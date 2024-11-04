@@ -19,8 +19,8 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_EnterMap) = {
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(trd_02_ENTRY_0)
@@ -47,15 +47,15 @@ EvtScript N(EVS_EnterMap) = {
             Set(LVar0, Ref(N(EVS_BindExitTriggers)))
             Exec(EnterWalk)
     EndSwitch
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Return
     End
 };
 
 EvtScript N(EVS_Scene_LowerStairs) = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, 0)
-    SuspendGroup(EVT_GROUP_01)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Call(DisablePlayerInput, TRUE)
     Wait(30)
     Call(SetGroupVisibility, MODEL_move_saku, MODEL_GROUP_HIDDEN)
@@ -112,7 +112,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     Set(GB_StoryProgress, STORY_CH1_LOWERED_SECOND_STAIRS)
     Call(DisablePlayerInput, FALSE)
     Call(SetTimeFreezeMode, 0)
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
     Return
     End
@@ -124,8 +124,8 @@ BombTrigger N(D_8024240C_9A33EC) = {
 };
 
 EvtScript N(D_8024241C_9A33FC) = {
-    SetGroup(EVT_GROUP_00)
-    SuspendGroup(EVT_GROUP_01)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
+    SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 17, 11, 1, 10, 30)
     Call(EnableModel, MODEL_anaaki, TRUE)
     Loop(10)
@@ -136,7 +136,7 @@ EvtScript N(D_8024241C_9A33FC) = {
     EndLoop
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tta, COLLIDER_FLAGS_UPPER_MASK)
     Set(GF_TRD02_BombedWall, TRUE)
-    ResumeGroup(EVT_GROUP_01)
+    ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
     Return
     End

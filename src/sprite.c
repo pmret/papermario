@@ -241,7 +241,7 @@ void spr_appendGfx_component_flat(
         gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 63 << 2, 0);
         if (gSpriteShadingProfile->flags & SPR_SHADING_FLAG_SET_VIEWPORT) {
             Camera* camera = &gCameras[gCurrentCamID];
-            if (gGameStatusPtr->isBattle == 2) {
+            if (gGameStatusPtr->context == CONTEXT_PAUSE) {
                 gSPViewport(gMainGfxPos++, &SprPauseVpAlt);
             } else {
                 gSPViewport(gMainGfxPos++, &camera->vpAlt);
@@ -268,7 +268,7 @@ void spr_appendGfx_component_flat(
                                  256, 256);
         if (gSpriteShadingProfile->flags & SPR_SHADING_FLAG_SET_VIEWPORT) {
             Camera* camera =  &gCameras[gCurrentCamID];
-            if (gGameStatusPtr->isBattle == 2) {
+            if (gGameStatusPtr->context == CONTEXT_PAUSE) {
                 gSPViewport(gMainGfxPos++, &SprPauseVpAlt);
             } else {
                 gSPViewport(gMainGfxPos++, &camera->vpAlt);
@@ -304,7 +304,7 @@ void spr_appendGfx_component_flat(
     if (gSpriteShadingProfile->flags & SPR_SHADING_FLAG_SET_VIEWPORT) {
         Camera* camera =  &gCameras[gCurrentCamID];
 
-        if (gGameStatusPtr->isBattle == 2) {
+        if (gGameStatusPtr->context == CONTEXT_PAUSE) {
             gSPViewport(gMainGfxPos++, &SprPauseVp);
             SprPauseVpAlt.vp.vtrans[0] = SprPauseVp.vp.vtrans[0] + gGameStatusPtr->altViewportOffset.x;
             SprPauseVpAlt.vp.vtrans[1] = SprPauseVp.vp.vtrans[1] + gGameStatusPtr->altViewportOffset.y;
@@ -944,7 +944,6 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* 
     D_802DFEA0[0] = 0;
     D_802DFEA0[1] = yaw;
     D_802DFEA0[2] = 0;
-
 
     if (spriteInstanceID & DRAW_SPRITE_OVERRIDE_ALPHA) {
         alpha = alphaIn & 0xFF;

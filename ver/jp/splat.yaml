@@ -15,6 +15,7 @@ options:
   symbol_addrs_path: ver/jp/symbol_addrs.txt
   ld_script_path: ver/jp/papermario.ld
   ld_symbol_header_path: ver/jp/build/include/ld_addrs.h
+  ld_generate_symbol_per_data_segment: True
   src_path: src
   asm_path: ver/jp/asm
   asset_path: assets/jp
@@ -78,7 +79,7 @@ segments:
     - [auto, c, state_pause]
     - [auto, c, state_file_select]
     - [auto, c, state_world]
-    - [auto, c, 111f0_len_860]
+    - [auto, c, state_map_transitions]
     - [auto, c, state_intro]
     - [auto, c, state_title_screen]
     - [auto, c, state_demo]
@@ -107,7 +108,7 @@ segments:
     - [auto, c, world/world]
     - [auto, c, collision]
     - [auto, c, 38F00]
-    - [auto, c, 39210_len_aa0]
+    - [auto, c, npc_follow]
 
     - [auto, c, os/nusys/nuboot]
     - [auto, c, os/nusys/nusched]
@@ -353,8 +354,8 @@ segments:
     - [auto, c, world/actions] # DUMMY ROM
     - [auto, c, world/partners]
     - [auto, c, global_hud_scripts]
-    - [auto, c, 891b0_len_fb0]
-    - [auto, c, 8a160_len_700]
+    - [auto, c, world/surfaces]
+    - [auto, c, status_star_shimmer]
     - [auto, c, 8a860_len_3f30]
     - [auto, c, draw_box]
     - [auto, c, bss/engine1_post_bss]
@@ -380,8 +381,8 @@ segments:
       - [auto, palette, ui/input/analog_stick_down]
       - [auto, ci4,     ui/input/analog_stick_up, 32, 32]
       - [auto, palette, ui/input/analog_stick_up]
-      - [auto, ci4,     ui/unk_bar, 72, 16]
-      - [auto, palette, ui/unk_bar]
+      - [auto, ci4,     ui/input/mash_bar, 72, 16]
+      - [auto, palette, ui/input/mash_bar]
       - [auto, ci4,     ui/ok, 24, 16]
       - [auto, palette, ui/ok]
       - [auto, ci4,     ui/input/start_button, 48, 40]
@@ -743,9 +744,9 @@ segments:
       - [0x9DFF0]
     - start: 0xA2AF0
       type: .data
-      name: 8a160_len_700
+      name: status_star_shimmer
       subsegments:
-      - [0xA2AF0, ia8, A2960, 32, 16]
+      - [0xA2AF0, ia8, ui/status/shimmer_particle, 32, 16]
       - [0xA2CF0] # Vp
       - [0xA2D00, vtx, A2B70]
       - [0xA2D50, gfx, A2BC0]
@@ -1582,12 +1583,12 @@ segments:
 ###############
 ### Effects ###
 ###############
-  - name: 325AD0
+  - name: effect_globals
     type: code
     start: 0x32DDD0
     vram: 0xE0200000
     subsegments:
-    - [0x32DDD0, c, 325AD0]
+    - [0x32DDD0, c, effect_utils]
     - [0x32E1E0, pm_effect_shims, effect_shims]
     - [0x32E460]
   - name: effect_gfx_big_smoke_puff
@@ -5707,9 +5708,9 @@ segments:
     start: 0x42D490
     vram: 0x802A9000
     dir: battle/action_cmd
-    name: action_cmd_07
+    name: action_cmd_unused_flee
     subsegments:
-    - [auto, c, "07"]
+    - [auto, c, unused_flee]
   - type: code
     start: 0x42DAB0
     vram: 0x802A9000
@@ -5728,9 +5729,9 @@ segments:
     start: 0x42ECF0
     vram: 0x802A9000
     dir: battle/action_cmd
-    name: action_cmd_0A
+    name: action_cmd_unused_mash_a
     subsegments:
-    - [auto, c, 0A]
+    - [auto, c, unused_mash_a]
   - type: code
     start: 0x42F3B0
     vram: 0x802A9000
@@ -5770,29 +5771,29 @@ segments:
     start: 0x431E30
     vram: 0x802A9000
     dir: battle/action_cmd
-    name: action_cmd_water_block
+    name: action_cmd_three_chances
     subsegments:
-    - [auto, c, water_block]
+    - [auto, c, three_chances]
     - start: 0x432F90
       type: .data
-      name: water_block
+      name: three_chances
       subsegments:
-      - [0x432F90, ci4, water_block_1, 24, 24]
-      - [0x4330B0, palette, water_block_1]
-      - [0x4330D0, ci4, water_block_2, 24, 24]
-      - [0x4331F0, palette, water_block_2]
-      - [0x433210, ci4, water_block_3, 24, 24]
-      - [0x433330, palette, water_block_3]
-      - [0x433350, ci4, water_block_0, 24, 24]
-      - [0x433470, palette, water_block_0]
-      - [0x433490, ci4, water_block_block, 32, 32]
-      - [0x433690, palette, water_block_block]
-      - [0x4336B0, ci4, water_block_circle, 40, 40]
-      - [0x4339D0, palette, water_block_circle]
-      - [0x4339F0, ci4, water_block_cloud, 40, 40]
-      - [0x433D10, palette, water_block_cloud]
-      - [0x433D30, ci4, water_block_4, 24, 24]
-      - [0x433E50, palette, water_block_4]
+      - [0x432F90, ci4, three_chances_1, 24, 24]
+      - [0x4330B0, palette, three_chances_1]
+      - [0x4330D0, ci4, three_chances_2, 24, 24]
+      - [0x4331F0, palette, three_chances_2]
+      - [0x433210, ci4, three_chances_3, 24, 24]
+      - [0x433330, palette, three_chances_3]
+      - [0x433350, ci4, three_chances_0, 24, 24]
+      - [0x433470, palette, three_chances_0]
+      - [0x433490, ci4, three_chances_block, 32, 32]
+      - [0x433690, palette, three_chances_block]
+      - [0x4336B0, ci4, three_chances_circle, 40, 40]
+      - [0x4339D0, palette, three_chances_circle]
+      - [0x4339F0, ci4, three_chances_cloud, 40, 40]
+      - [0x433D10, palette, three_chances_cloud]
+      - [0x433D30, ci4, three_chances_4, 24, 24]
+      - [0x433E50, palette, three_chances_4]
       - [0x433E70]
     - [0x434030]
   - type: code

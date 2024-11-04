@@ -54,7 +54,7 @@ EffectInstance* static_status_main(
 
     bp.init = static_status_init;
     bp.update = static_status_update;
-    bp.renderWorld = static_status_render;
+    bp.renderScene = static_status_render;
     bp.unk_00 = 0;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_STATIC_STATUS;
@@ -198,7 +198,7 @@ void static_status_appendGfx(void* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
 
     guTranslateF(mtxTransform, part->pos.x, part->pos.y, part->pos.z);
     guScaleF(mtxTemp, part->scale, part->scale, part->scale);

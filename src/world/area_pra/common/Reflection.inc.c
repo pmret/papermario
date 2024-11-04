@@ -66,7 +66,7 @@ s32 N(reflection_unk_change_anim_facing)(s32 playerAnim) {
 }
 
 API_CALLABLE(N(EnableWallReflection)){
-    script->array[0] = (s32) create_worker_world(NULL, N(worker_reflect_player_wall));
+    script->array[0] = (s32) create_worker_scene(NULL, N(worker_reflect_player_wall));
     return ApiStatus_DONE2;
 }
 
@@ -143,7 +143,7 @@ API_CALLABLE(N(EnableFloorReflection)){
     switch (script->varTable[0]) {
         case REFLECTION_FLOOR_WALL:
         case REFLECTION_FLOOR_ONLY:
-            script->array[0] = create_worker_world(NULL, N(worker_reflect_player_floor));
+            script->array[0] = create_worker_scene(NULL, N(worker_reflect_player_floor));
             gOverrideFlags |= GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
             break;
         case REFLECTION_WALL_ONLY:
@@ -323,20 +323,20 @@ API_CALLABLE(N(EnablePartnerReflection)){
     if (script->varTable[1] == FALSE) {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
-                script->array[1] = create_worker_world(N(worker_reflect_partner_all), NULL);
+                script->array[1] = create_worker_scene(N(worker_reflect_partner_all), NULL);
                 break;
             case REFLECTION_FLOOR_ONLY:
-                script->array[1] = create_worker_world(N(worker_reflect_partner_floor), NULL);
+                script->array[1] = create_worker_scene(N(worker_reflect_partner_floor), NULL);
                 break;
             case REFLECTION_WALL_ONLY:
-                script->array[1] = create_worker_world(N(worker_reflect_partner_wall), NULL);
+                script->array[1] = create_worker_scene(N(worker_reflect_partner_wall), NULL);
                 break;
         }
     } else {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
             case REFLECTION_FLOOR_ONLY:
-                script->array[1] = create_worker_world(N(worker_reflect_partner_floor), NULL);
+                script->array[1] = create_worker_scene(N(worker_reflect_partner_floor), NULL);
                 break;
             case REFLECTION_WALL_ONLY:
                 break;

@@ -23,7 +23,6 @@ API_CALLABLE(N(InitEntryFromTunnels)) {
     return ApiStatus_DONE2;
 }
 
-
 EvtScript N(EVS_SetDoorRot_TayceT) = {
     Call(RotateModel, MODEL_c_door, LVar0, 0, -1, 0)
     Return

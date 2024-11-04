@@ -43,7 +43,7 @@ EffectInstance* disable_x_main(s32 type, f32 x, f32 y, f32 z, s32 arg4) {
     bp.unk_00 = 0;
     bp.init = disable_x_init;
     bp.update = disable_x_update;
-    bp.renderWorld = disable_x_render;
+    bp.renderScene = disable_x_render;
     bp.renderUI = func_E0082528;
     bp.effectID = EFFECT_DISABLE_X;
 
@@ -194,7 +194,7 @@ void disable_x_update(EffectInstance* effect) {
         if (unk_28 < 10) {
             data->alpha = unk_28 * 25;
         }
-        data->unk_28 += 1;
+        data->unk_28++;
     }
 }
 
@@ -259,7 +259,7 @@ void func_E00828B4(EffectInstance* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->shared->graphics));
     func_E0082580(data);
     unk_38 = data->unk_38;
     type = data->type;
@@ -287,7 +287,7 @@ void func_E0082A84(EffectInstance* effect) {
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->shared->graphics));
     func_E0082580(data);
     unk_38 = data->unk_38;
 

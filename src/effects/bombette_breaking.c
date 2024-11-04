@@ -61,7 +61,7 @@ EffectInstance* bombette_breaking_main(s32 type, s32 modelID, s32 treeIndex, f32
     bp.unk_00 = 0;
     bp.init = bombette_breaking_init;
     bp.update = bombette_breaking_update;
-    bp.renderWorld = bombette_breaking_render;
+    bp.renderScene = bombette_breaking_render;
     bp.renderUI = NULL;
     bp.effectID = EFFECT_BOMBETTE_BREAKING;
 
@@ -217,7 +217,7 @@ void bombette_breaking_appendGfx(void* effect) {
     timeLeft *= 4;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->shared->graphics));
     guTranslateF(sp20, data->center.x, data->center.y, data->center.z);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);

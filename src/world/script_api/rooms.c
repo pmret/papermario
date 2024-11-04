@@ -574,7 +574,7 @@ EvtScript EVS_Default_AnimateDropDoor = {
 
 // executed from trigger activatation with MapRoom* stored in LVar1
 EvtScript EVS_EnterRoomDoor = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     // ensure valid player action state
     Call(GetPlayerActionState, LVar3)
     Set(LVar4, 0)
@@ -753,7 +753,7 @@ EvtScript EVS_EnterRoomDoor = {
 
 // executed from trigger activatation with MapRoom* stored in LVar1
 EvtScript EVS_ExitRoomDoor = {
-    SetGroup(EVT_GROUP_00)
+    SetGroup(EVT_GROUP_NEVER_PAUSE)
     // ensure valid player action state
     Call(GetPlayerActionState, LVar3)
     Set(LVar4, 0)
