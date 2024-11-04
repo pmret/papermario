@@ -12,7 +12,11 @@ EvtScript N(EVS_ExitWalk_flo_21_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, flo_19_ENTRY_1)
     Exec(ExitWalk)
+#if VERSION_JP
+    Call(GotoMap, Ref("flo_21"), flo_21_ENTRY_0)
+#else
     Call(GotoMap, 0x80243000, flo_21_ENTRY_0) // raw pointer to missing string "flo_21"
+#endif
     Wait(100)
     Return
     End

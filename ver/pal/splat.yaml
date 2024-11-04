@@ -10282,7 +10282,7 @@ segments:
       subsegments:
       - [0xC74670, rgba16, img7, 32, 32]
       - [0xC74E70, gfx, img7]
-    - [0xC74EF0, .data, gfx] # TODO needs additioanl cleanup and gfx splitting
+    - [0xC74EF0, .data, gfx] # TODO needs additional cleanup and gfx splitting
   - name: dgb_01_smash_bridges
     type: code
     dir: world/area_dgb

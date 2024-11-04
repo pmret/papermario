@@ -3,10 +3,6 @@
 #include "sprite.h"
 #include "imgfx.h"
 
-#if VERSION_JP // TODO remove once segments are split
-extern Addr imgfx_data_ROM_START;
-#endif
-
 typedef union ImgFXIntVars {
     s32 raw[2][4];
     struct {

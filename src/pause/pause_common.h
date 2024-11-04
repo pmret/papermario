@@ -226,7 +226,9 @@ enum PauseMenuMessages {
     /*      */ PAUSE_MSG_PAL_42,
 #endif
     /* 0x48 */ PAUSE_MSG_ACTIVE,
+#if !VERSION_JP
     /* 0x49 */ PAUSE_MSG_BADGES,
+#endif
     /* 0x4A */ PAUSE_MSG_NOT_ENOUGH_BP,
     /* 0x4B */ PAUSE_MSG_DONT_WEAR_MORE,
     /* 0x4C */ PAUSE_MSG_BAGDE_DESC_ALL,

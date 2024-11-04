@@ -3,6 +3,8 @@
 
 #if VERSION_PAL
 #define CREDITS_MESSAGE_BUFFER_COUNT (24)
+#elif VERSION_JP
+#define CREDITS_MESSAGE_BUFFER_COUNT (20)
 #else
 #define CREDITS_MESSAGE_BUFFER_COUNT (23)
 #endif
@@ -13,7 +15,7 @@ void dma_load_msg(u32 msgID, void* dest);
 
 BSS CreditsData N(CreditsData);
 BSS CreditsData* N(CreditsDataPtr);
-#if !VERSION_IQUE
+#if VERSION_US || VERSION_PAL
 BSS s32 N(BSS_PAD_1)[2];
 #endif
 BSS u8 N(CreditsMessageBuffers)[CREDITS_MESSAGE_BUFFER_COUNT][256];
@@ -556,9 +558,16 @@ void N(credits_update_line)(CreditsLine* line) {
                     i = 0;
 
                     if (curChar->font == MSG_FONT_SUBTITLE) {
+#if VERSION_JP
+                        // TODO: figure out enum value. MSG_CHAR_LPAREN is not 0x08 in JP.
+                        if (curMsgChar == 8 || nextMsgChar1 == 8) {
+                            msgWidth++;
+                        }
+#else
                         if (curMsgChar == MSG_CHAR_LPAREN || nextMsgChar1 == MSG_CHAR_LPAREN) {
                             msgWidth++;
                         }
+#endif
                     }
 
                     do {
@@ -694,9 +703,16 @@ void N(credits_update_line)(CreditsLine* line) {
                     i = 0;
 
                     if (curChar->font == MSG_FONT_SUBTITLE) {
+#if VERSION_JP
+                        // TODO: figure out enum value. MSG_CHAR_LPAREN is not 0x08 in JP.
+                        if (curMsgChar == 8 || nextMsgChar2 == 8) {
+                            posX++;
+                        }
+#else
                         if (curMsgChar == MSG_CHAR_LPAREN || nextMsgChar2 == MSG_CHAR_LPAREN) {
                             posX++;
                         }
+#endif
                     }
                     do {
                         if (curMsgChar == curPattern[i].firstChar && nextMsgChar2 == curPattern[i].secondChar) {

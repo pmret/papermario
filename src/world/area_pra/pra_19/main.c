@@ -26,9 +26,13 @@ EvtScript N(EVS_ExitWalk_pra_20_0) = EVT_EXIT_WALK(60, pra_19_ENTRY_1, "pra_20",
 
 EvtScript N(EVS_BindExitTriggers) = {
     BindTrigger(Ref(N(EVS_ExitDoor_pra_35_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittsw, 1, 0)
+#if VERSION_JP
+    BindTrigger(Ref(N(EVS_ExitWalk_pra_20_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilise, 1, 0)
+#else
     IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_KOOPER_DUPLIGHOSTS)
         BindTrigger(Ref(N(EVS_ExitWalk_pra_20_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilise, 1, 0)
     EndIf
+#endif
     Return
     End
 };

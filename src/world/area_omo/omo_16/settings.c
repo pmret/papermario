@@ -10,4 +10,7 @@ MapSettings N(settings) = {
     .entryList = &N(Entrances),
     .entryCount = ENTRY_COUNT(N(Entrances)),
     .background = &gBackgroundImage,
+#if VERSION_JP
+    .tattle = { MSG_MapTattle_018D },
+#endif
 };

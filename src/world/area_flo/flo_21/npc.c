@@ -489,6 +489,16 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     End
 };
 
+#if VERSION_JP
+EvtScript N(EVS_80243428) = {
+    Call(AdjustCam, CAM_DEFAULT, Float(90.0), 0, 300, Float(17.0), Float(-6.0))
+    Call(SpeakToPlayer, NPC_SELF, ANIM_HuffNPuff_Anim2D, ANIM_HuffNPuff_Anim02, 0x100, -30, 30, MSG_CH6_00E1)
+    Call(ResetCam, CAM_DEFAULT, Float(4.0))
+    Return
+    End
+};
+#endif
+
 EvtScript N(EVS_NpcIdle_HuffNPuff_01) = {
     Label(0)
         Call(SetSelfVar, 0, 0)
@@ -520,6 +530,11 @@ EvtScript N(EVS_NpcDefeat_HuffNPuff_Main) = {
             Wait(50)
             Set(MV_BossDefeated, TRUE)
             Exec(N(EVS_TrySpawningStarCard))
+#if VERSION_JP
+        CaseEq(OUTCOME_PLAYER_LOST)
+            ExecWait(N(EVS_80243428))
+        CaseEq(OUTCOME_PLAYER_FLED)
+#endif
     EndSwitch
     Return
     End

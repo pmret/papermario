@@ -11242,7 +11242,7 @@ segments:
       subsegments:
       - [0xC511A0, rgba16, img7, 32, 32]
       - [0xC519A0, gfx, img7]
-    - [0xC51A20, .data, gfx] # TODO needs additioanl cleanup and gfx splitting
+    - [0xC51A20, .data, gfx] # TODO needs additional cleanup and gfx splitting
     - [0xC696A0]
   - name: dgb_01_smash_bridges # DMAd at the beginning of tubba blubba's castle (bridge cutscene)
     type: code
