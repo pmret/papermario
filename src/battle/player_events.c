@@ -199,7 +199,7 @@ API_CALLABLE(GiveRefund) {
     f32 angle = 0.0f;
     s32 delayTime = 0;
     f32 posX, posY, posZ;
-    s32 hudElemId;
+    HudElemID hid;
     posY = player->curPos.y + player->size.y;
 
     if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
@@ -227,22 +227,22 @@ API_CALLABLE(GiveRefund) {
 #if VERSION_PAL
         switch (gCurrentLanguage) {
             case LANGUAGE_EN:
-                HID_Refund = hudElemId = hud_element_create(&HES_Refund);
+                HID_Refund = hid = hud_element_create(&HES_Refund);
                 break;
             case LANGUAGE_DE:
-                HID_Refund = hudElemId = hud_element_create(&HES_Refund_de);
+                HID_Refund = hid = hud_element_create(&HES_Refund_de);
                 break;
             case LANGUAGE_FR:
-                HID_Refund = hudElemId = hud_element_create(&HES_Refund_fr);
+                HID_Refund = hid = hud_element_create(&HES_Refund_fr);
                 break;
             case LANGUAGE_ES:
-                HID_Refund = hudElemId = hud_element_create(&HES_Refund_es);
+                HID_Refund = hid = hud_element_create(&HES_Refund_es);
                 break;
         }
 #else
-        HID_Refund = hudElemId = hud_element_create(&HES_Refund);
+        HID_Refund = hid = hud_element_create(&HES_Refund);
 #endif
-        hud_element_set_render_pos(hudElemId, iconPosX + 36, iconPosY - 63);
+        hud_element_set_render_pos(hid, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = delayTime;

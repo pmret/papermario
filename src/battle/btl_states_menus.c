@@ -1160,26 +1160,6 @@ void func_802A2C58(void) {
     battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_1E;
 }
 
-#if VERSION_JP
-#define POS_X 32
-#define OFFSET_X_1 10
-#define OFFSET_X_2 104
-#define OFFSET_X_3 104
-#define MOVE_X 32
-#define WIDTH_1 80
-#define WIDTH_2 80
-#define WIDTH_3 242
-#else
-#define POS_X 20
-#define OFFSET_X_1 16
-#define OFFSET_X_2 114
-#define OFFSET_X_3 110
-#define MOVE_X 20
-#define WIDTH_1 90
-#define WIDTH_2 100
-#define WIDTH_3 280
-#endif
-
 #if VERSION_PAL
 #define MOVES_OPTIONS_W D_PAL_802AB4E4[gCurrentLanguage]
 #define MOVES_TITLE_X D_PAL_802AB4EC[gCurrentLanguage]
@@ -1189,6 +1169,19 @@ void func_802A2C58(void) {
 #define STAR_SPIRITS_TITLE_X D_PAL_802AB4D8[gCurrentLanguage]
 #define STAR_SPIRITS_TITLE_W D_PAL_802AB4DC[gCurrentLanguage]
 #define STAR_SPIRITS_ICON_X 110 + D_PAL_802AB4D4[gCurrentLanguage]
+#define POS_X 20
+#define WIDTH_3 280
+#elif VERSION_JP
+#define MOVES_OPTIONS_W 150
+#define MOVES_TITLE_X 10
+#define MOVES_TITLE_W 80
+#define MOVES_ICON_X 104
+#define STAR_SPIRITS_OPTIONS_W 144
+#define STAR_SPIRITS_TITLE_X 10
+#define STAR_SPIRITS_TITLE_W 80
+#define STAR_SPIRITS_ICON_X 104
+#define POS_X 32
+#define WIDTH_3 242
 #else
 #define MOVES_OPTIONS_W 150
 #define MOVES_TITLE_X 16
@@ -1198,6 +1191,8 @@ void func_802A2C58(void) {
 #define STAR_SPIRITS_TITLE_X 10
 #define STAR_SPIRITS_TITLE_W 100
 #define STAR_SPIRITS_ICON_X 110
+#define POS_X 20
+#define WIDTH_3 280
 #endif
 
 s32 btl_submenu_moves_update(void) {
@@ -1364,13 +1359,8 @@ s32 btl_submenu_moves_update(void) {
 #if !VERSION_JP
                 set_window_properties(WIN_BTL_MOVES_MENU, moveX, moveY, MOVES_OPTIONS_W, (D_802AD10E * 13) + 28, 0, btl_menu_moves_draw_content, NULL, -1);
 #endif
-#if VERSION_JP
-                set_window_properties(WIN_BTL_MOVES_TITLE, moveX + OFFSET_X_1, moveY - 6, WIDTH_1, 16, 1, btl_menu_moves_show_title, NULL, -1);
-                set_window_properties(WIN_BTL_MOVES_ICON, moveX + OFFSET_X_2, moveY - 12, 32, 32, 1, btl_menu_moves_show_icon, NULL, -1);
-#else
                 set_window_properties(WIN_BTL_MOVES_TITLE, moveX + MOVES_TITLE_X, moveY - 6, MOVES_TITLE_W, 16, 1, btl_menu_moves_show_title, NULL, -1);
                 set_window_properties(WIN_BTL_MOVES_ICON, moveX + MOVES_ICON_X, moveY - 12, 32, 32, 1, btl_menu_moves_show_icon, NULL, -1);
-#endif
             } else {
                 s16 new_var;
 
@@ -1378,16 +1368,11 @@ s32 btl_submenu_moves_update(void) {
                 set_window_properties(WIN_BTL_MOVES_MENU, moveX, moveY, STAR_SPIRITS_OPTIONS_W, (D_802AD10E * 13) + 28, 0, btl_menu_moves_draw_content, NULL, -1);
 #endif
                 new_var = moveY; // todo required to match
-#if VERSION_JP
-                set_window_properties(WIN_BTL_SPIRITS_TITLE, moveX + 10, new_var - 6, WIDTH_2, 16, 1, btl_menu_moves_show_title, 0, -1);
-                set_window_properties(WIN_BTL_SPIRITS_ICON, moveX + OFFSET_X_3, new_var - 12, 32, 35, 1, btl_menu_moves_show_icon, 0, -1);
-#else
                 set_window_properties(WIN_BTL_SPIRITS_TITLE, moveX + STAR_SPIRITS_TITLE_X, new_var - 6, STAR_SPIRITS_TITLE_W, 16, 1, btl_menu_moves_show_title, 0, -1);
                 set_window_properties(WIN_BTL_SPIRITS_ICON, moveX + STAR_SPIRITS_ICON_X, new_var - 12, 32, 35, 1, btl_menu_moves_show_icon, 0, -1);
-#endif
             }
 
-            moveX = MOVE_X;
+            moveX = POS_X;
             moveY = BattleMenu_Moves_PosY;
             set_window_properties(WIN_BTL_DESC_BOX, moveX, 186, WIDTH_3, 32, WINDOW_PRIORITY_20, btl_menu_moves_show_desc, NULL, -1);
             set_window_update(WIN_BTL_MOVES_MENU, WINDOW_UPDATE_SHOW);
@@ -1660,16 +1645,12 @@ s32 btl_submenu_moves_update(void) {
 #define X_VAR3 24
 #elif VERSION_JP
 #define MOVE_TEXT_Y 0
-#define W_VAR254 139
+#define X_VAR254 139
 #define X_VAR255 35
-#define HUD_NOT_ENOUGH_FP &HES_NotEnoughFP
-#define HUD_FP_COST_X 116
-#define HUD_NOT_ENOUGH_POW &HES_NotEnoughPOW
-#define HUD_SP_COST_X 102
 #define X_VAR3 26
 #else
 #define MOVE_TEXT_Y 0
-#define W_VAR254 153
+#define X_VAR254 153
 #define X_VAR255 31
 #define FP_COST_X 108
 #define SP_COST_X 93
@@ -1915,7 +1896,7 @@ void btl_menu_moves_draw_content(void* data, s32 x, s32 y) {
 #if VERSION_PAL
 #define TEXT_ABILITIES_X D_PAL_802AB4F4[gCurrentLanguage]
 #define TEXT_STAR_SPIRITS_X D_PAL_802AB4E0[gCurrentLanguage]
-#elif VERSION_PAL
+#elif VERSION_JP
 #define TEXT_ABILITIES_X 28
 #define TEXT_STAR_SPIRITS_X 24
 #else
