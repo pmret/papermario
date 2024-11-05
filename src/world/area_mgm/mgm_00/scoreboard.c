@@ -48,12 +48,18 @@ Gfx N(Gfx_RecordDisplay_Init)[] = {
     gsDPSetCombineKey(G_CK_NONE),
     gsDPSetAlphaCompare(G_AC_NONE),
     gsDPNoOp(),
-#if !VERSION_PAL
+#if VERSION_US || VERSION_IQUE
     gsDPSetPrimColor(0, 0, 255, 0, 0, 0),
     gsDPFillRectangle(44, 49, 276, 51),
     gsDPFillRectangle(44, 49, 46, 133),
     gsDPFillRectangle(275, 49, 276, 133),
     gsDPFillRectangle(44, 132, 276, 133),
+#elif VERSION_JP
+    gsDPSetPrimColor(0, 0, 255, 0, 0, 0),
+    gsDPFillRectangle(64, 49, 256, 51),
+    gsDPFillRectangle(64, 49, 66, 133),
+    gsDPFillRectangle(255, 49, 256, 133),
+    gsDPFillRectangle(64, 132, 256, 133),
 #endif
     gsSPEndDisplayList(),
 };
@@ -90,6 +96,29 @@ void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
 #endif
         gDPPipeSync(gMainGfxPos++);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 16, 120, 24, alpha * 0.65);
+#if VERSION_JP
+        gDPFillRectangle(gMainGfxPos++, 68, 53, 252, 129);
+        gDPPipeSync(gMainGfxPos++);
+        msg_draw_frame(65, 50, 190, 82, MSG_STYLE_INSPECT, 0, 1, (s32)(alpha * 0.55), alpha); // cast needed if signature isn't present
+        if (data->gameType == MINIGAME_TYPE_JUMP) {
+            draw_msg(MSG_MGM_001C, 78, 57, alpha, MSG_PAL_TEAL, 0);
+            draw_number(gPlayerData.jumpGamePlays,   209, 78,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            draw_number(gPlayerData.jumpGameTotal,   209, 93,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            draw_number(gPlayerData.jumpGameRecord,  209, 108, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+        } else {
+            draw_msg(MSG_MGM_001D, 78, 57, alpha, MSG_PAL_TEAL, 0);
+            draw_number(gPlayerData.smashGamePlays,  209, 78,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            draw_number(gPlayerData.smashGameTotal,  209, 93,  DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            draw_number(gPlayerData.smashGameRecord, 209, 108, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+        }
+
+        draw_msg(MSG_MGM_001E, 87,  78,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_0023, 211, 78,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_001F, 87,  93,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_0021, 211, 93,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_0020, 87,  108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_MGM_0021, 211, 108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+#else
         gDPFillRectangle(gMainGfxPos++, RECORD_BOX_POSX + 3, 53, RECORD_BOX_POSX + RECORD_BOX_WIDTH - 3, 129);
         gDPPipeSync(gMainGfxPos++);
         msg_draw_frame(RECORD_BOX_POSX, 50, RECORD_BOX_WIDTH, 82, MSG_STYLE_INSPECT, 0, 1, (s32)(alpha * 0.55), alpha); // cast needed if signature isn't present
@@ -152,6 +181,7 @@ void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
         draw_msg(MSG_MGM_0021, RECORD_BOX_POSX + 178,   93,  alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
         draw_msg(MSG_MGM_0020, RECORD_BOX_POSX + 13,  108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
         draw_msg(MSG_MGM_0021, RECORD_BOX_POSX + 178,   108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+#endif
 #endif
     }
 }

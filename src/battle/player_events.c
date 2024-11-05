@@ -58,7 +58,7 @@ void btl_set_player_idle_anims(void) {
 }
 
 #if !VERSION_PAL
-API_CALLABLE(IsPartnerImmobile) {
+API_CALLABLE(IsPlayerImmobile) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     s32 isImmobile = playerActor->debuff == STATUS_KEY_FEAR

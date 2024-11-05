@@ -2521,10 +2521,16 @@ typedef struct CreditsChar {
     /* 0x18 */ s32 fadeInTime;
 } CreditsChar; // size = unk
 
+#if VERSION_JP
+#define MAX_CREDITS_LINES 30
+#else
+#define MAX_CREDITS_LINES 32
+#endif
+
 typedef struct CreditsData {
     /* 0x00 */ u32 workerID;
-    /* 0x04 */ CreditsLine lines[32];
-} CreditsData; // size = 0x74
+    /* 0x04 */ CreditsLine lines[MAX_CREDITS_LINES];
+} CreditsData; // size = 0xE84, JP size = 0xD9C
 
 typedef struct CreditsPairOffset {
     /* 0x00 */ u8 firstChar;

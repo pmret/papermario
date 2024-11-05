@@ -39,7 +39,11 @@ INCLUDE_IMG("world/lava_piranha/vine.png", dead_kzn_19_lava_piranha_vine_img);
 INCLUDE_PAL("world/lava_piranha/vine.pal", dead_kzn_19_lava_piranha_vine_pal);
 
 #include "world/lava_piranha/vine.gfx.inc.c"
+#if VERSION_JP
+#define DEAD_ROM_OFFSET (0x20FD50)
+#else
 #define DEAD_ROM_OFFSET (0x211EB0)
+#endif
 
 #define PIRANHA_DMA_ENTRY(name) \
     (s32) world_model_anim_kzn_##name##_ROM_START + DEAD_ROM_OFFSET,\

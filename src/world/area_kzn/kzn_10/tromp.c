@@ -93,6 +93,9 @@ EvtScript N(EVS_SetupSpinyTromp) = {
     Set(AF_KZN_Tromp1_ShakingDone, FALSE)
     Set(AF_KZN_TrompHitPlayer, FALSE)
     Set(AF_KZN_TrompRollingDone, FALSE)
+#if VERSION_JP
+    Call(AwaitPlayerApproach, -370, 0, 40)
+#else
     Call(GetEntryID, LVar3)
     Loop(0)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -108,6 +111,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
         Wait(1)
     EndLoop
     Call(InterruptUsePartner)
+#endif
     Call(SetGroupVisibility, MODEL_goron, MODEL_GROUP_VISIBLE)
     Call(EnableModel, MODEL_me, TRUE)
     Call(DisablePlayerInput, TRUE)

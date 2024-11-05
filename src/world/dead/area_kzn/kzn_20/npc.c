@@ -104,38 +104,48 @@ s32 N(Kolorado_Wander2)[] = {
 };
 
 EvtScript N(EVS_Kolorado_CalmIdle) = {
+#if !VERSION_JP
     SetGroup(EVT_GROUP_NOT_BATTLE)
+#endif
     Label(0)
-        Call(RandInt, 1, LVar1)
-        IfEq(LVar1, 0)
-            UseBuf(N(Kolorado_Wander1))
-        Else
-            UseBuf(N(Kolorado_Wander2))
+    Call(RandInt, 1, LVar1)
+    IfEq(LVar1, 0)
+        UseBuf(N(Kolorado_Wander1))
+    Else
+        UseBuf(N(Kolorado_Wander2))
+    EndIf
+#if VERSION_JP
+    Label(0)
+#else
+    Label(10)
+#endif
+        BufRead3(LVar1, LVar2, LVar3)
+        IfEq(LVar1, -1)
+            Goto(0)
         EndIf
-        Label(10)
-            BufRead3(LVar1, LVar2, LVar3)
-            IfEq(LVar1, -1)
-                Goto(0)
+        Call(SetNpcSpeed, NPC_Kolorado, LVar1)
+        Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Walk)
+        Call(NpcMoveTo, NPC_Kolorado, LVar2, LVar3, 0)
+        BufRead1(LVar2)
+        Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Idle)
+        Wait(5)
+        Call(RandInt, 2, LVar4)
+        Add(LVar4, 1)
+        Loop(LVar4)
+            Call(GetNpcYaw, NPC_Kolorado, LVar5)
+            Add(LVar5, 180)
+            IfGt(LVar5, 360)
+                Sub(LVar5, 360)
             EndIf
-            Call(SetNpcSpeed, NPC_Kolorado, LVar1)
-            Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Walk)
-            Call(NpcMoveTo, NPC_Kolorado, LVar2, LVar3, 0)
-            BufRead1(LVar2)
-            Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Idle)
-            Wait(5)
-            Call(RandInt, 2, LVar4)
-            Add(LVar4, 1)
-            Loop(LVar4)
-                Call(GetNpcYaw, NPC_Kolorado, LVar5)
-                Add(LVar5, 180)
-                IfGt(LVar5, 360)
-                    Sub(LVar5, 360)
-                EndIf
-                Call(InterpNpcYaw, NPC_Kolorado, LVar5, 1)
-                Wait(20)
-            EndLoop
-            Wait(LVar2)
+            Call(InterpNpcYaw, NPC_Kolorado, LVar5, 1)
+            Wait(20)
+        EndLoop
+        Wait(LVar2)
+#if VERSION_JP
+        Goto(0)
+#else
         Goto(10)
+#endif
     Return
     End
 };

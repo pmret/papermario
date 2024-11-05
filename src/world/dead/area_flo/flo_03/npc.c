@@ -373,8 +373,25 @@ EvtScript N(EVS_NpcHit_MontyMole) = {
     End
 };
 
+#if VERSION_JP
+EvtScript N(EVS_802421D4_ECB2C4) = {
+    Loop(0)
+        Wait(1)
+        IfEq(GB_StoryProgress, STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole)))
+    Return
+    End
+};
+#endif
+
 EvtScript N(EVS_NpcIdle_MontyMole_01) = {
     #define LV_ShouldBurrow LVar3
+#if VERSION_JP
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole)))
+#endif
     Loop(0)
         IfEq(MV_NextBurrowTime_Mole_01, 0)
             IfEq(AF_FLO_IsUnderground_Mole_01, TRUE)
@@ -386,10 +403,12 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
             Call(GetNpcPos, NPC_MontyMole_01, LVar0, LVar1, LVar2)
             Call(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LV_ShouldBurrow)
         EndIf
+#if !VERSION_JP
         Call(GetPartnerInUse, LVar9)
         IfEq(LVar9, PARTNER_BOW)
             Set(LVar3, FALSE)
         EndIf
+#endif
         IfEq(MV_PauseBurrowing, TRUE)
             Set(LV_ShouldBurrow, FALSE)
         EndIf
@@ -454,6 +473,9 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
 
 EvtScript N(EVS_NpcIdle_MontyMole_02) = {
      #define LV_ShouldBurrow LVar3
+#if VERSION_JP
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole)))
+#endif
     Loop(0)
         IfEq(MV_NextBurrowTime_Mole_02, 0)
             IfEq(AF_FLO_IsUnderground_Mole_02, TRUE)
@@ -465,10 +487,12 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
             Call(GetNpcPos, NPC_MontyMole_02, LVar0, LVar1, LVar2)
             Call(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LV_ShouldBurrow)
         EndIf
+#if !VERSION_JP
         Call(GetPartnerInUse, LVar9)
         IfEq(LVar9, PARTNER_BOW)
             Set(LV_ShouldBurrow, FALSE)
         EndIf
+#endif
         IfEq(MV_PauseBurrowing, TRUE)
             Set(LV_ShouldBurrow, FALSE)
         EndIf
@@ -533,6 +557,9 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
 
 EvtScript N(EVS_NpcIdle_MontyMole_03) = {
     #define LV_ShouldBurrow LVar3
+#if VERSION_JP
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole)))
+#endif
     Loop(0)
         IfEq(MV_NextBurrowTime_Mole_03, 0)
             IfEq(AF_FLO_IsUnderground_Mole_03, TRUE)
@@ -544,10 +571,12 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
             Call(GetNpcPos, NPC_MontyMole_03, LVar0, LVar1, LVar2)
             Call(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LV_ShouldBurrow)
         EndIf
+#if !VERSION_JP
         Call(GetPartnerInUse, LVar9)
         IfEq(LVar9, PARTNER_BOW)
             Set(LV_ShouldBurrow, FALSE)
         EndIf
+#endif
         IfEq(MV_PauseBurrowing, TRUE)
             Set(LV_ShouldBurrow, FALSE)
         EndIf
@@ -612,6 +641,9 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
 
 EvtScript N(EVS_NpcIdle_MontyMole_04) = {
     #define LV_ShouldBurrow LVar3
+#if VERSION_JP
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole)))
+#endif
     Loop(0)
         IfEq(MV_NextBurrowTime_Mole_04, 0)
             IfEq(AF_FLO_IsUnderground_Mole_04, TRUE)
@@ -623,10 +655,12 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
             Call(GetNpcPos, NPC_MontyMole_04, LVar0, LVar1, LVar2)
             Call(IsPlayerWithin, LVar0, LVar2, MV_NextBurrowTriggerRadius, LV_ShouldBurrow)
         EndIf
+#if !VERSION_JP
         Call(GetPartnerInUse, LVar9)
         IfEq(LVar9, PARTNER_BOW)
             Set(LV_ShouldBurrow, FALSE)
         EndIf
+#endif
         IfEq(MV_PauseBurrowing, TRUE)
             Set(LV_ShouldBurrow, FALSE)
         EndIf
@@ -690,7 +724,9 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
 };
 
 EvtScript N(EVS_NpcInit_MontyMole_01) = {
+#if !VERSION_JP
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole)))
+#endif
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_MontyMole)))
     Call(EnableNpcShadow, NPC_MontyMole_01, FALSE)
     Switch(GB_StoryProgress)
@@ -713,7 +749,9 @@ EvtScript N(EVS_NpcInit_MontyMole_01) = {
 };
 
 EvtScript N(EVS_NpcInit_MontyMole_02) = {
+#if !VERSION_JP
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole)))
+#endif
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_MontyMole)))
     Call(EnableNpcShadow, NPC_MontyMole_02, FALSE)
     Switch(GB_StoryProgress)
@@ -736,7 +774,9 @@ EvtScript N(EVS_NpcInit_MontyMole_02) = {
 };
 
 EvtScript N(EVS_NpcInit_MontyMole_03) = {
+#if !VERSION_JP
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole)))
+#endif
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_MontyMole)))
     Call(EnableNpcShadow, NPC_MontyMole_03, FALSE)
     Switch(GB_StoryProgress)
@@ -759,7 +799,9 @@ EvtScript N(EVS_NpcInit_MontyMole_03) = {
 };
 
 EvtScript N(EVS_NpcInit_MontyMole_04) = {
+#if !VERSION_JP
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole)))
+#endif
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_MontyMole)))
     Call(EnableNpcShadow, NPC_MontyMole_04, FALSE)
     Switch(GB_StoryProgress)

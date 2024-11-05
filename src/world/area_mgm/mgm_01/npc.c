@@ -122,6 +122,9 @@ void N(appendGfx_score_display) (void* renderData) {
         hid = data->hudElemID;
         hud_element_set_render_pos(hid, data->scoreWindowPosX + 15, 39);
         hud_element_draw_clipped(hid);
+#if VERSION_JP
+        draw_msg(MSG_MenuTip_JP_000C, data->scoreWindowPosX + 24, 30, 255, MSG_PAL_WHITE, 0);
+#endif
         if (data->curScore > data->targetScore) {
             data->curScore = data->targetScore;
         } else if (data->curScore < data->targetScore) {
@@ -663,7 +666,7 @@ API_CALLABLE(N(SetMsgVars_BlocksRemaining)) {
     set_message_int_var(remaining, 0);
 #if VERSION_PAL
     evt_set_variable(script, LVarD, remaining);
-#else
+#elif VERSION_US || VERSION_IQUE
     set_message_text_var((remaining == 1) ? (s32)&MessageSingular : (s32)&MessagePlural, 1);
 #endif
 

@@ -95,7 +95,11 @@ NpcData N(NpcData_Goomba) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Goomba),
     .settings = &N(NpcSettings_Goomba),
+#if VERSION_JP
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE,
+#else
     .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
+#endif
     .drops = NO_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -106,7 +110,11 @@ NpcData N(NpcData_Clubba) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Clubba),
     .settings = &N(NpcSettings_Clubba),
+#if VERSION_JP
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE,
+#else
     .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
+#endif
     .drops = NO_DROPS,
     .animations = CLUBBA_ANIMS_ALT,
 };

@@ -3,17 +3,6 @@
 #include "animation_script.h"
 #include "ld_addrs.h"
 
-#if VERSION_JP // TODO remove once segments are split
-extern Addr entity_model_ScriptSpring_anim_ROM_END;
-extern Addr entity_model_ScriptSpring_anim_ROM_START;
-extern Addr entity_model_ScriptSpring_gfx_ROM_END;
-extern Addr entity_model_ScriptSpring_gfx_ROM_START;
-extern Addr entity_model_SimpleSpring_anim_ROM_END;
-extern Addr entity_model_SimpleSpring_anim_ROM_START;
-extern Addr entity_model_SimpleSpring_gfx_ROM_END;
-extern Addr entity_model_SimpleSpring_gfx_ROM_START;
-#endif
-
 extern StaticAnimatorNode* Entity_ScriptSpring_Mesh[];
 extern AnimScript Entity_ScriptSpring_AnimLaunch;
 extern AnimScript Entity_ScriptSpring_AnimIdle;

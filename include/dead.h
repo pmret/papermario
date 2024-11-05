@@ -337,5 +337,14 @@
 #define GetAnimatedRotationByTreeIndex dead_GetAnimatedRotationByTreeIndex
 #define SetEncounterStatusFlags dead_SetEncounterStatusFlags
 #define Entity_YellowBlock dead_Entity_YellowBlock
+#if VERSION_JP
+#define osSyncPrintf dead_osSyncPrintf
+#define SetModelFlags dead_SetModelFlags
+#define SetNpcScale dead_SetNpcScale
+#define StartBattle dead_StartBattle
+#define Entity_BrickBlock dead_Entity_BrickBlock
+#define Entity_SimpleSpring dead_Entity_SimpleSpring
+#define MakeTransformGroup dead_MakeTransformGroup
+#endif
 
 #endif

@@ -154,6 +154,19 @@ EvtScript N(EVS_NpcIdle_AntiGuy) = {
             Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Anim02)
             Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             IfLt(LVar2, -60)
+#if VERSION_JP
+                IfLt(LVar0, 110)
+                    Add(LVar0, 40)
+                Else
+                    Add(LVar0, -40)
+                EndIf
+            Else
+                IfLt(LVar0, 110)
+                    Add(LVar0, -40)
+                Else
+                    Add(LVar0, 40)
+                EndIf
+#else
                 IfLt(LVar0, 110)
                     Add(LVar0, 60)
                 Else
@@ -165,9 +178,14 @@ EvtScript N(EVS_NpcIdle_AntiGuy) = {
                 Else
                     Add(LVar0, 60)
                 EndIf
+#endif
             EndIf
             Call(SetNpcSpeed, NPC_SELF, Float(3.0))
+#if VERSION_JP
+            Call(NpcMoveTo, NPC_SELF, LVar0, -135, 0)
+#else
             Call(NpcMoveTo, NPC_SELF, LVar0, -100, 0)
+#endif
             Call(InterpNpcYaw, NPC_SELF, 90, 0)
             Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Anim15)
             Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)

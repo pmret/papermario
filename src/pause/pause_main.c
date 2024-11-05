@@ -162,8 +162,13 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
     {
         .windowID = WIN_PAUSE_DECRIPTION,
         .unk_01 = 0,
+#if VERSION_JP
+        .pos = { .x = 27, .y = 164 },
+        .width = 242,
+#else
         .pos = { .x = 20, .y = 164 },
         .width = 256,
+#endif
         .height = 32,
         .priority = 0,
         .fpDrawContents = &pause_textbox_draw_contents,
@@ -758,9 +763,11 @@ void pause_handle_input(s32 pressed, s32 held) {
         gPauseDescTextOffset = 0;
         if (currentDescMsg != 0) {
             get_msg_properties(currentDescMsg, &height, &width, &maxLineChars, &numLines, NULL, NULL, 0);
+#if !VERSION_JP
             if (numLines % 2) {
                 numLines++;
             }
+#endif
             gPauseDescTextMaxPos = numLines - 2;
             if (gPauseDescTextMaxPos < 0) {
                 gPauseDescTextMaxPos = 0;

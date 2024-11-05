@@ -145,7 +145,11 @@ EvtScript N(EVS_YoshiKids) = {
     Wait(10 * DT)
     Thread
         Call(GetNpcPos, NPC_YoshiKidGreen, LVar0, LVar1, LVar2)
+#if VERSION_JP
+        Call(NpcJump0, NPC_YoshiKidGreen, LVar0, LVar1, LVar2, 10)
+#else
         Call(NpcJump0, NPC_YoshiKidGreen, LVar0, LVar1, LVar2, 7)
+#endif
         Call(SetNpcAnimation, NPC_YoshiKidGreen, ANIM_YoshiKid_Green_Run)
         Call(NpcMoveTo, NPC_YoshiKidGreen, 980, 0, 60 * DT)
         Call(SetNpcAnimation, NPC_YoshiKidGreen, ANIM_YoshiKid_Green_LookUp)
