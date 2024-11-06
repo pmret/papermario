@@ -14,8 +14,8 @@ static u64 GfxTaskMgrStack[NU_GFX_TASKMGR_STACK_SIZE / sizeof(u64)] ALIGNED(16);
 static OSMesg D_8009E6D0[NU_GFX_TASKMGR_MESGS];
 
 NUScTask nuGfxTask[NU_GFX_TASK_NUM];
-u64 D_800DA040[0x400 / sizeof(u64)];
-s32 D_800B91D0[NU_GFX_RDP_OUTPUTBUFF_SIZE / sizeof(u32)];
+u64 D_800DA040[0x400 / sizeof(u64)] ALIGNED(16);
+s32 D_800B91D0[NU_GFX_RDP_OUTPUTBUFF_SIZE / sizeof(u32)] ALIGNED(16);
 
 extern u8 rspbootUcodeBuffer[];
 

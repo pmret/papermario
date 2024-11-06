@@ -2,7 +2,7 @@
 #include "nu/nusys.h"
 
 // TODO move these somewhere else...
-u8 nuYieldBuf[NU_GFX_YIELD_BUF_SIZE];
+u8 nuYieldBuf[NU_GFX_YIELD_BUF_SIZE] ALIGNED(16);
 OSThread __osThreadSave;
 u8 nuBootStack[0x2000] ALIGNED(8);
 

@@ -31,6 +31,25 @@ static OSTask* _VirtualToPhysicalTask(OSTask* intp) {
 void osSpTaskLoad(OSTask *intp) {
     OSTask *tp;
 
+#ifdef _DEBUG
+    if ((intp->t.dram_stack != 0x0) && ((u32)intp->t.dram_stack & 0xf)) {
+        __osError(ERR_OSSPTASKLOAD_DRAM, 1, intp->t.dram_stack);
+        return;
+    }
+    if ((intp->t.output_buff != 0x0) && ((u32)intp->t.output_buff & 0xf)) {
+        __osError(ERR_OSSPTASKLOAD_OUT, 1, intp->t.output_buff);
+        return;
+    }
+    if ((intp->t.output_buff_size != 0x0) && ((u32)intp->t.output_buff_size & 0xf)) {
+        __osError(ERR_OSSPTASKLOAD_OUTSIZE, 1, intp->t.output_buff_size);
+        return;
+    }
+    if ((intp->t.yield_data_ptr != 0x0) && ((u32)intp->t.yield_data_ptr & 0xf)) {
+        __osError(ERR_OSSPTASKLOAD_YIELD, 1, intp->t.yield_data_ptr);
+        return;
+    }
+#endif
+
 #if VERSION_IQUE
     tp = _VirtualToPhysicalTask(intp);
 #else
