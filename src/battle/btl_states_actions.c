@@ -273,9 +273,9 @@ void btl_state_update_normal_start(void) {
             battleStatus->jumpCharge = 0;
             battleStatus->unk_98 = 0;
             battleStatus->hpDrainCount = 0;
-            gBattleStatus.flags2 |= BS_FLAGS2_CANT_FLEE;
-            if (currentEncounter->allowFleeing) {
-                gBattleStatus.flags2 &= ~BS_FLAGS2_CANT_FLEE;
+            gBattleStatus.flags2 |= BS_FLAGS2_CAN_FLEE;
+            if (currentEncounter->disallowFleeing) {
+                gBattleStatus.flags2 &= ~BS_FLAGS2_CAN_FLEE;
             }
             battleStatus->endBattleFadeOutRate = 10;
             battleStatus->waitForState = BATTLE_STATE_0;

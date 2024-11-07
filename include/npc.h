@@ -390,7 +390,7 @@ typedef struct EncounterStatus {
     /* 0x00D */ char unk_0D;
     /* 0x00E */ s16 coinsEarned; /* valid after battle */
     /* 0x010 */ s8 instigatorValue;
-    /* 0x011 */ s8 allowFleeing;
+    /* 0x011 */ s8 disallowFleeing;
     /* 0x012 */ s8 scriptedBattle; ///< battle started by StartBattle but not by encounter
     /* 0x013 */ s8 dropWhackaBump;
     /* 0x014 */ s32 songID;
