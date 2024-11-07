@@ -3606,7 +3606,7 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_PARTNER_TURN_USED             = 0x00000004, // set after partner has used their action for this turn
     BS_FLAGS2_OVERRIDE_INACTIVE_PLAYER      = 0x00000008, // override inactive player animations and effects
     BS_FLAGS2_OVERRIDE_INACTIVE_PARTNER     = 0x00000010, // override inactive partner animations and effects
-    BS_FLAGS2_CANT_FLEE                     = 0x00000020,
+    BS_FLAGS2_CAN_FLEE                      = 0x00000020,
     BS_FLAGS2_PEACH_BATTLE                  = 0x00000040,
     BS_FLAGS2_STORED_TURBO_CHARGE_TURN      = 0x00000100, // prevents turbo charge turns from decrementing on begin player turn
     BS_FLAGS2_DOING_JUMP_TUTORIAL           = 0x00000200,
