@@ -339,7 +339,7 @@ segments:
     - [auto, c, os/memset, gcc_272 -O1]
     - [auto, hasm, os/decode_yay0]
     - [auto, c, os/osFlash]
-    - [0x4AC90, pm_effect_loads, effect_loads]
+    - [auto, pm_effect_loads, effect_loads]
     - [auto, c, bss/main_post_bss]
     - [auto, c, battle/battle]
     - [auto, c, battle/battle_bss]
