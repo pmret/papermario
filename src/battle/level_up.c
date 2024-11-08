@@ -593,13 +593,13 @@ EvtScript EVS_ShowLevelUp = {
 #if VERSION_PAL
     Call(GetLanguage, LVar0)
     Switch(LVar0)
-        CaseEq(0)
+        CaseEq(LANGUAGE_EN)
             Call(CreateVirtualEntity, LVar9, Ref(EMS_level_up_en_de))
-        CaseEq(1)
+        CaseEq(LANGUAGE_DE)
             Call(CreateVirtualEntity, LVar9, Ref(EMS_level_up_en_de))
-        CaseEq(2)
+        CaseEq(LANGUAGE_FR)
             Call(CreateVirtualEntity, LVar9, Ref(EMS_level_up_fr))
-        CaseEq(3)
+        CaseEq(LANGUAGE_ES)
             Call(CreateVirtualEntity, LVar9, Ref(EMS_level_up_es))
     EndSwitch
 #else

@@ -40,7 +40,6 @@ enum {
 
 // input window before the light appears where A inputs cause timing test to fail
 #define ANTI_MASH_TIME 5
-#define PAL_DT_WRAP(x) (s32) ((x) * DT)
 
 INCLUDE_IMG("battle/action_cmd/three_chances_1.png", battle_action_cmd_three_chances_1_png);
 INCLUDE_PAL("battle/action_cmd/three_chances_1.pal", battle_action_cmd_three_chances_1_pal);
@@ -370,7 +369,7 @@ void N(update)(void) {
                 && acs->threeChances.time >= -5
             ) {
                 s32 (*difficultyVec)[2] = (s32 (*)[2])battleStatus->actionCmdDifficultyTable;
-                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + PAL_DT_WRAP(ANTI_MASH_TIME);
+                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + (s32)(ANTI_MASH_TIME * DT);
                 pos = battleStatus->inputBufferPos;
                 pos -= window;
                 if (pos < 0) {
@@ -453,7 +452,7 @@ void N(update)(void) {
                 && acs->threeChances.time >= -5
             ) {
                 s32 (*difficultyVec)[2] = (s32 (*)[2])battleStatus->actionCmdDifficultyTable;
-                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + PAL_DT_WRAP(ANTI_MASH_TIME - 1);
+                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + (s32)((ANTI_MASH_TIME - 1) * DT);
                 if (window < 6) {
                     window = 6;
                 }
@@ -541,7 +540,7 @@ void N(update)(void) {
                 && acs->threeChances.time >= -5
             ) {
                 s32 (*difficultyVec)[2] = (s32 (*)[2])battleStatus->actionCmdDifficultyTable;
-                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + PAL_DT_WRAP(ANTI_MASH_TIME - 2);
+                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + (s32)((ANTI_MASH_TIME - 2) * DT);
                 if (window < 6) {
                     window = 6;
                 }
