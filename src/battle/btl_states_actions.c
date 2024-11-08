@@ -274,7 +274,7 @@ void btl_state_update_normal_start(void) {
             battleStatus->unk_98 = 0;
             battleStatus->hpDrainCount = 0;
             gBattleStatus.flags2 |= BS_FLAGS2_CAN_FLEE;
-            if (currentEncounter->disallowFleeing) {
+            if (currentEncounter->forbidFleeing) {
                 gBattleStatus.flags2 &= ~BS_FLAGS2_CAN_FLEE;
             }
             battleStatus->endBattleFadeOutRate = 10;
