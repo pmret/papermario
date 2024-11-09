@@ -522,7 +522,7 @@ void update_encounters_neutral(void) {
     currentEncounter->songID = -1;
     currentEncounter->unk_18 = -1;
     currentEncounter->hitType = 0;
-    currentEncounter->allowFleeing = FALSE;
+    currentEncounter->forbidFleeing = FALSE;
     currentEncounter->dropWhackaBump = FALSE;
     currentEncounter->flags &= ~ENCOUNTER_FLAG_THUMBS_UP;
     currentEncounter->flags &= ~ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY;

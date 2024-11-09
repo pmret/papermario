@@ -3735,7 +3735,7 @@ void btl_state_update_player_menu(void) {
             D_802AD690[entryIdx] = 1;
             D_802AD658[entryIdx] = BattleMenu_LeftJustMessages[BTL_MENU_TYPE_RUN_AWAY];
             D_802AD6C0[entryIdx] = MSG_Menus_Action_RunAway;
-            if (!(gBattleStatus.flags2 & BS_FLAGS2_CANT_FLEE)) {
+            if (!(gBattleStatus.flags2 & BS_FLAGS2_CAN_FLEE)) {
                 D_802AD640[entryIdx] = battle_menu_FleeHudScripts.disabled;
                 D_802AD690[entryIdx] = 0;
                 D_802AD6A8[entryIdx] = 1;

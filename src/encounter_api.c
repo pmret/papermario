@@ -206,7 +206,7 @@ void start_battle(Evt* script, s32 songID) {
     currentEncounter->curEnemy = enemy;
     currentEncounter->curEncounter = currentEncounter->encounterList[enemy->encounterIndex];
     currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
-    currentEncounter->allowFleeing = FALSE;
+    currentEncounter->forbidFleeing = FALSE;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
 
@@ -277,7 +277,7 @@ API_CALLABLE(StartBossBattle) {
     currentEncounter->curEnemy = enemy;
     currentEncounter->curEncounter = currentEncounter->encounterList[enemy->encounterIndex];
     currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
-    currentEncounter->allowFleeing = TRUE;
+    currentEncounter->forbidFleeing = TRUE;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
 
@@ -326,7 +326,7 @@ API_CALLABLE(SetBattleMusic) {
     Bytecode songID = evt_get_variable(script, *args++);
     EncounterStatus* currentEncounter = &gCurrentEncounter;
 
-    currentEncounter->allowFleeing = TRUE;
+    currentEncounter->forbidFleeing = TRUE;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
     return ApiStatus_DONE2;
