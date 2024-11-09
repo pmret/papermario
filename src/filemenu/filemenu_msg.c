@@ -686,6 +686,13 @@ s32 filemenu_draw_char(s32 c, s32 x, s32 y, s32 flag1, s32 color, s32 flag2) {
     }
 #endif
 
+#if VERSION_JP // TODO ASDF
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+#endif
+
     if (c == MSG_CHAR_READ_SPACE) {
         return charWidth - 6;
     }

@@ -120,6 +120,7 @@ MenuPanel filemenu_yesno_menuBP = {
     .fpCleanup = &filemenu_yesno_cleanup
 };
 
+
 void filemenu_yesno_draw_options_contents(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -199,7 +200,9 @@ void filemenu_yesno_draw_prompt_contents(
             xOffset = DELETE_FILE_FILE_X;
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_22), baseX + xOffset, baseY + 4, 0xFF, 0, 0);
             xOffset += DELETE_FILE_NUMBER_X;
+#if !VERSION_JP // TODO ASDF
             draw_number(filemenu_menus[FILE_MENU_MAIN]->selected + 1, baseX + xOffset, baseY + 6 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_NORMAL, MSG_PAL_WHITE, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+#endif
             xOffset += DELETE_FILE_QMARK_X;
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_QUESTION), baseX + xOffset, baseY + 4, 0xFF, 0, 0);
             break;
@@ -248,7 +251,9 @@ void filemenu_yesno_draw_prompt_contents(
             }
 #endif
             xOffset += START_GAME_FILE_X;
+#if !VERSION_JP // TODO ASDF
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_22), baseX + xOffset, baseY + 4, 0xFF, 0, 0);
+#endif
             xOffset += START_GAME_NUMBER_X;
             draw_number(filemenu_menus[FILE_MENU_MAIN]->selected + 1, baseX + xOffset, baseY + 6 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_NORMAL, MSG_PAL_WHITE, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
             xOffset += START_GAME_QMARK_X;
@@ -259,6 +264,11 @@ void filemenu_yesno_draw_prompt_contents(
 #endif
             break;
     }
+
+#if VERSION_JP // TODO ASDF
+__asm__("nop");
+__asm__("nop");
+#endif
 }
 
 void filemenu_yesno_init(MenuPanel* tab) {

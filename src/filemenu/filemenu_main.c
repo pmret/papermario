@@ -659,6 +659,9 @@ void filemenu_draw_contents_file_title(
         }
 }
 #else
+// #if VERSION_JP
+// INCLUDE_ASM(s32, "filemenu/filemenu_main", filemenu_draw_contents_file_title);
+// #else
 void filemenu_draw_contents_file_title(
     s32 fileIdx,
     MenuPanel* menu,
@@ -672,6 +675,13 @@ void filemenu_draw_contents_file_title(
 
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + FILE_X, baseY + 1, 255, 0, 1);
 
+#if VERSION_JP // TODO ASDF
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+#endif
     if (!gSaveSlotHasData[fileIdx]) {
         draw_number(fileIdx + 1, baseX + FILE_NUMBER_X, baseY + 1 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE);
     } else {
@@ -683,6 +693,7 @@ void filemenu_draw_contents_file_title(
     }
 }
 #endif
+//#endif
 
 void filemenu_draw_contents_file_0_info(
     MenuPanel* menu,

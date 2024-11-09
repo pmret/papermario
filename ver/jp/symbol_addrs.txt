@@ -5300,3 +5300,6 @@ D_0A000000_E91890 = 0x0A000000; // rom:0xE9A710
 charset_peach_letter_png = 0x0000FC10; //rom:0x11EF40
 charset_postcard_png = 0x00013B98; //rom:0x122EC8
 charset_letter_content_1_png = 0x00015A80; //rom:0x124DB0
+
+// the below might be wrong cause it's not disassembling
+filemenu_draw_contents_file_title = 0x80242370; // type:func rom:0x16DDFC

@@ -340,6 +340,16 @@ void filemenu_draw_contents_choose_name(
                                      baseX + 2 + menu->col * 19,
                                      baseY + 13 + menu->row * FILEMENU_ROW_AMT);
     }
+
+#if VERSION_JP // TODO ASDF
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+#endif
 }
 
 void filemenu_choose_name_init(MenuPanel* menu) {
@@ -560,6 +570,7 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
         sfx_play_sound(SOUND_MENU_NEXT);
         set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32) filemenu_update_show_name_confirm);
 
+#if !VERSION_JP // TODO ASDF
         gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.y = 121;
         gWindows[WIN_FILES_CONFIRM_OPTIONS].width = 69;
         gWindows[WIN_FILES_CONFIRM_OPTIONS].height = 44;
@@ -580,6 +591,16 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
         confirmMenu = filemenu_menus[filemenu_currentMenu];
         confirmMenu->state = FM_CONFIRM_CREATE;
         filemenu_set_selected(confirmMenu, 0, 0);
+#else
+__asm__("nop");
+__asm__("nop");
+__asm__("nop");
+__asm__("nop");
+__asm__("nop");
+__asm__("nop");
+__asm__("nop");
+__asm__("nop");
+#endif
     }
 }
 

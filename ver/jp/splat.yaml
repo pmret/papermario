@@ -28,6 +28,7 @@ options:
   symbol_name_format: JP_$VRAM
   symbol_name_format_no_rom: JP_$VRAM_$SEG
   hasm_in_src_path: True
+  use_legacy_include_asm: True
 asset_stack:
   - jp
 segments:
@@ -1222,7 +1223,28 @@ segments:
       - [0x16A010, .data,      pause_gfx]
     - [0x16B3F0]
 
-  - [0x16B550, bin]
+  - type: code
+    dir: filemenu
+    start: 0x16B550
+    vram: 0x80242370
+    subsegments:
+    - [0x16B550, c, filemenu_common]
+    - [0x16D5E0, c, filemenu_main]
+    - [0x16F6C0, c, filemenu_yesno]
+    - [auto, c, filemenu_info]
+    - [auto, c, filemenu_createfile]
+    - [auto, c, filemenu_gfx]
+    - [auto, c, filemenu_msg]
+    - [auto, c, filemenu_styles]
+    - start: 0x172000
+      type: .data
+      name: filemenu_gfx
+      subsegments:
+      - [auto, ia4, copyarrow, 64, 16]
+      - [auto, rgba32, corners_yellow, 16, 64]
+      - [auto, ia8, corners_gray, 16, 32]
+      - [auto, .data, filemenu_gfx] ## ?????? this looks kinda borken
+  - [0x1749F0]
 
   - name: battle_code
     type: code
@@ -14743,9 +14765,8 @@ segments:
 
   - [0xF19D60, bin]
 
-  - start: 0xFC0000
-    type: pm_sbn
-    name: audio
+  - [0xFC0000, pm_sbn, audio]
+
   - [ 0x1A01AF0, bin ]
 
   - start: 0x1A40000
