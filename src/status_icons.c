@@ -114,6 +114,14 @@ extern HudScript HES_BoostPartner;
 extern HudScript HES_Surprise;
 extern HudScript HES_Peril;
 extern HudScript HES_Danger;
+#if VERSION_PAL
+extern HudScript HES_Peril_de;
+extern HudScript HES_Danger_de;
+extern HudScript HES_Peril_fr;
+extern HudScript HES_Danger_fr;
+extern HudScript HES_Peril_es;
+extern HudScript HES_Danger_es;
+#endif
 
 void update_merlee_message(void* popup);
 void draw_merlee_message(void* popup);
@@ -1299,7 +1307,24 @@ void create_status_icon_peril(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_PERIL;
     if (!statusIcon->peril.active) {
         statusIcon->peril.active = TRUE;
+#if VERSION_PAL
+        switch (gCurrentLanguage) {
+            case LANGUAGE_EN:
+                hid = hud_element_create(&HES_Peril);
+                break;
+            case LANGUAGE_DE:
+                hid = hud_element_create(&HES_Peril_de);
+                break;
+            case LANGUAGE_FR:
+                hid = hud_element_create(&HES_Peril_fr);
+                break;
+            case LANGUAGE_ES:
+                hid = hud_element_create(&HES_Peril_es);
+                break;
+        }
+#else
         hid = hud_element_create(&HES_Peril);
+#endif
         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
         statusIcon->peril.activeElementID = hid;
@@ -1328,7 +1353,24 @@ void create_status_icon_danger(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_DANGER;
     if (!statusIcon->danger.active) {
         statusIcon->danger.active = TRUE;
+#if VERSION_PAL
+        switch (gCurrentLanguage) {
+            case LANGUAGE_EN:
+                hid = hud_element_create(&HES_Danger);
+                break;
+            case LANGUAGE_DE:
+                hid = hud_element_create(&HES_Danger_de);
+                break;
+            case LANGUAGE_FR:
+                hid = hud_element_create(&HES_Danger_fr);
+                break;
+            case LANGUAGE_ES:
+                hid = hud_element_create(&HES_Danger_es);
+                break;
+        }
+#else
         hid = hud_element_create(&HES_Danger);
+#endif
         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
         statusIcon->danger.activeElementID = hid;

@@ -531,9 +531,9 @@ typedef s32 Difficulty2D[AC_DIFFICULTY_LEN][2];
 #endif
 
 #if VERSION_PAL
-#define DT (50.0f/60.0f)
+#define DT (50.0/60.0)
 #else
-#define DT (1.0f)
+#define DT (1.0)
 #endif
 
 #define DMA_COPY_SEGMENT(segment) dma_copy(segment##_ROM_START, segment##_ROM_END, segment##_VRAM)

@@ -39,6 +39,36 @@ s16 BattleMessage_TextOffsetsY[] = { 0, -2 };
 s16 BattleMessage_BoxOffsetsY[] = { 0, -12 };
 #endif
 
+#if VERSION_PAL
+s16 D_PAL_802839CC[] = { 0, -8 };
+
+u16 TipAction_PressBeforeLanding_X[] = { 65, 71, 112, 67 };
+u16 TipAction_HoldLeftTimed_X1[] = { 55, 71, 92, 88 };
+u16 TipAction_HoldLeftTimed_X2[] = { 73, 86, 160, 224 };
+u16 TipAction_PressBeforeStrike_X[] = { 64, 71, 113, 67 };
+u16 TipAction_MashButton_X[] = { 67, 75, 114, 71 };
+u16 TipAction_MashLeft_X[] = { 56, 73, 70, 88 };
+u16 TipAction_HoldLeftAim_X1[] = { 65, 72, 93, 88 };
+u16 TipAction_HoldLeftAim_X2[] = { 146, 86, 137, 221 };
+u16 TipAction_PressButtonsShown_X2[] = { 64, 71, 112, 67 };
+u16 TipAction_PressButtonsShown_X1[] = { 86, 93, 134, 89 };
+u16 TipAction_PressButtonsShown_X3[] = { 108, 115, 156, 111 };
+u16 TipAction_PressWithTiming_X1[] = { 105, 129, 23, 140 };
+u16 TipAction_PressWithTiming_X2[] = { 65, 72, 112, 67 };
+u16 TipAction_PressWithTiming_Y1[] = { 13, 13, 31, 13 };
+u16 TipAction_MashBoth_X1[] = { 65, 73, 113, 68 };
+u16 TipAction_MashBoth_X2[] = { 86, 94, 134, 89 };
+u16 TipAction_HoldToTap_X[] = { 124, 64, 226, 87 };
+u16 TipAction_HoldToRelease_X2[] = { 53, 61, 93, 79 };
+u16 TipAction_HoldToRelease_X1[] = { 56, 56, 136, 72 };
+u16 TipAction_MoveToAim_X3[] = { 56, 73, 88, 90 };
+u16 TipAction_MoveToAim_X1[] = { 107, 118, 142, 134 };
+u16 TipAction_MoveToAim_X2[] = { 210, 48, 99, 47 };
+u16 TipAction_MoveToAim_Y2[] = { 15, 32, 32, 32 };
+u16 TipAction_BreakFree_X[] = { 64, 72, 112, 67 };
+u16 TipAction_ReduceDamage_X[] = { 64, 72, 185, 67 };
+#endif
+
 //TODO Vec3f[]
 f32 D_802835DC[] = {
     0.0f, 4.5f, 0.0f,
@@ -1243,6 +1273,41 @@ void btl_update_message_popup(void* data) {
 #define TIP_Y_BF_RD 13
 #define TIP_SCALE1 0.8f
 #define TIP_SCALE2 0.8f
+#elif VERSION_PAL
+#define TIP_X_PRL TipAction_PressBeforeLanding_X[gCurrentLanguage]
+#define TIP_X_HLT1 TipAction_HoldLeftTimed_X1[gCurrentLanguage]
+#define TIP_X_HLT2 TipAction_HoldLeftTimed_X2[gCurrentLanguage]
+#define TIP_X_PBST TipAction_PressBeforeStrike_X[gCurrentLanguage]
+#define TIP_X_MB TipAction_MashButton_X[gCurrentLanguage]
+#define TIP_X_ML TipAction_MashLeft_X[gCurrentLanguage]
+#define TIP_X_HLA1 TipAction_HoldLeftAim_X1[gCurrentLanguage]
+#define TIP_X_HLA2 TipAction_HoldLeftAim_X2[gCurrentLanguage]
+#define TIP_X_PBS1 TipAction_PressButtonsShown_X1[gCurrentLanguage]
+#define TIP_X_PBS2 TipAction_PressButtonsShown_X2[gCurrentLanguage]
+#define TIP_X_PBS3 TipAction_PressButtonsShown_X3[gCurrentLanguage]
+#define TIP_X_PWT1 TipAction_PressWithTiming_X1[gCurrentLanguage]
+#define TIP_X_PWT2 TipAction_PressWithTiming_X2[gCurrentLanguage]
+#define TIP_X_MB1 TipAction_MashBoth_X1[gCurrentLanguage]
+#define TIP_X_MB2 TipAction_MashBoth_X2[gCurrentLanguage]
+#define TIP_X_HTT TipAction_HoldToTap_X[gCurrentLanguage]
+#define TIP_X_HTR1 TipAction_HoldToRelease_X1[gCurrentLanguage]
+#define TIP_X_HTR2 TipAction_HoldToRelease_X2[gCurrentLanguage]
+#define TIP_X_MTA1 TipAction_MoveToAim_X1[gCurrentLanguage]
+#define TIP_X_MTA2 TipAction_MoveToAim_X2[gCurrentLanguage]
+#define TIP_X_MTA3 TipAction_MoveToAim_X3[gCurrentLanguage]
+#define TIP_X_BF_RD TipAction_ReduceDamage_X[gCurrentLanguage]
+#define TIP_Y_HLT2 31
+#define TIP_Y_HLA2 32
+#define TIP_Y_PBS1 13
+#define TIP_Y_PBS2 13
+#define TIP_Y_PBS3 13
+#define TIP_Y_PWT1 TipAction_PressWithTiming_Y1[gCurrentLanguage]
+#define TIP_Y_HTR1 31
+#define TIP_Y_MTA1 13
+#define TIP_Y_MTA2 TipAction_MoveToAim_Y2[gCurrentLanguage]
+#define TIP_Y_BF_RD 13
+#define TIP_SCALE1 0.8f
+#define TIP_SCALE2 0.8f
 #else
 #define TIP_X_PRL 65
 #define TIP_X_HLT1 55
@@ -1385,10 +1450,19 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
         case BTL_MSG_JUMP_DISABLED_2:
         case BTL_MSG_JUMP_DISABLED_3:
         case BTL_MSG_ITEMS_DISABLED:
+#if VERSION_PAL
+            hud_element_set_render_pos(HID_BattleMessage1, x + 13, y + 14);
+            hud_element_draw_clipped(HID_BattleMessage1);
+            messageID = BattleMessages[popup->messageIndex];
+            msgLinesIdx = get_msg_lines(messageID) - 1;
+            y += D_PAL_802839CC[msgLinesIdx];
+            draw_msg(messageID, x + 29, y + 6, 255, MSG_PAL_0F, 0);
+#else
             messageID = BattleMessages[popup->messageIndex];
             draw_msg(messageID, x + 29, y + 6, 255, MSG_PAL_0F, 0);
             hud_element_set_render_pos(HID_BattleMessage1, x + 13, y + 14);
             hud_element_draw_clipped(HID_BattleMessage1);
+#endif
             break;
         case BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING:
         case BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED:
@@ -1610,6 +1684,13 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
                     break;
 #endif
                 case BTL_MSG_ACTION_TIP_BREAK_FREE:
+#if VERSION_PAL
+                    hud_element_set_render_pos(HID_BattleMessage1, x + TipAction_BreakFree_X[gCurrentLanguage], y + TIP_Y_BF_RD);
+                    hud_element_set_scale(HID_BattleMessage1, 0.5f);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
+                    break;
+#endif
                 case BTL_MSG_ACTION_TIP_REDUCE_DAMAGE:
                     hud_element_set_render_pos(HID_BattleMessage1, x + TIP_X_BF_RD, y + TIP_Y_BF_RD);
                     hud_element_set_scale(HID_BattleMessage1, 0.5f);

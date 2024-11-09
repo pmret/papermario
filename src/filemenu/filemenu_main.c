@@ -27,23 +27,36 @@ extern HudScript HES_OptionStereoOn;
 extern HudScript HES_OptionStereoOff;
 
 #if VERSION_PAL
-extern u8 D_filemenu_802508D0[4];
-extern u8 D_filemenu_802508D4[4];
-extern u8 D_filemenu_802508D8[4];
-extern u8 D_filemenu_802508DC[4];
-extern u8 D_filemenu_802508E0[4];
-extern u8 D_filemenu_802508E4[4];
-extern u8 D_filemenu_802508E8[4];
-extern u8 D_filemenu_802508EC[4];
-extern u8 D_filemenu_802508F0[4];
-extern u8 D_filemenu_802508F4[4];
-extern u8 D_filemenu_80250938[4];
-extern u8 D_filemenu_8025093C[4];
-#define COPY_OFFSET_X (D_filemenu_8025093C[gCurrentLanguage])
-#define SAVE_OFFSET_X (D_filemenu_80250938[gCurrentLanguage])
+extern u8   D_filemenu_802508D0[4];
+extern u8   D_filemenu_802508D4[4];
+extern u8   D_filemenu_802508D8[4];
+extern u8   D_filemenu_802508DC[4];
+extern u8   D_filemenu_802508E0[4];
+extern u8   D_filemenu_802508E4[4];
+extern u8   D_filemenu_802508E8[4];
+extern u8   D_filemenu_802508EC[4];
+extern u8   D_filemenu_802508F0[4];
+extern u8   D_filemenu_802508F4[4];
+extern u16  D_filemenu_80250900[4];
+extern u8   D_filemenu_80250910[16];
+extern u8   D_filemenu_80250920[4];
+extern u8   D_filemenu_80250938[4];
+extern u8   D_filemenu_8025093C[4];
+extern u16  D_filemenu_80250940[4];
+extern u8   D_filemenu_80250954[4];
+#define COPY_OFFSET_X                 (D_filemenu_8025093C[gCurrentLanguage])
+#define SAVE_OFFSET_X                 (D_filemenu_80250938[gCurrentLanguage])
+#define SELECT_CONFIRM_PROMPT_WIDTH   (D_filemenu_80250900[gCurrentLanguage])
+#define DELETE_CONFIRM_PROMPT_WIDTH   (D_filemenu_80250920[gCurrentLanguage])
+#define FILE_COPIED_MESSAGE_WIDTH     (D_filemenu_80250954[gCurrentLanguage])
+#define COPY_CONFIRM_PROMPT_WIDTH     (D_filemenu_80250940[gCurrentLanguage])
 #else
-#define SAVE_OFFSET_X 25
-#define COPY_OFFSET_X 16
+#define SAVE_OFFSET_X                 25
+#define COPY_OFFSET_X                 16
+#define SELECT_CONFIRM_PROMPT_WIDTH   192
+#define DELETE_CONFIRM_PROMPT_WIDTH   118
+#define FILE_COPIED_MESSAGE_WIDTH     154
+#define COPY_CONFIRM_PROMPT_WIDTH     182
 #endif
 
 BSS u8 filemenu_filename[8];
@@ -427,12 +440,14 @@ void filemenu_draw_contents_option_left(
     }
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + offset + OFFSET_WIDTH, baseY + 2, 255, 0, 1);
 #else
-    if (menu->state != FM_MAIN_SELECT_LANG_DUMMY) {
-        if (menu->col == 0 && menu->row == 2) {
-            filemenu_set_cursor_goal_pos(WIN_FILES_OPTION_LEFT, baseX, baseY + 8);
-        }
-        filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + 8 + OFFSET_WIDTH, baseY + 2, 255, 0, 1);
+    if (menu->state == FM_MAIN_SELECT_LANG_DUMMY) {
+        return;
     }
+
+    if (menu->col == 0 && menu->row == 2) {
+        filemenu_set_cursor_goal_pos(WIN_FILES_OPTION_LEFT, baseX, baseY + 8);
+    }
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + 8 + OFFSET_WIDTH, baseY + 2, 255, 0, 1);
 #endif
 }
 
@@ -623,15 +638,15 @@ void filemenu_draw_contents_file_title(
         filemenu_set_cursor_goal_pos(fileIdx + 60, baseX - 3, baseY + 8);
     }
 
-    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_OK), baseX + FILE_X, baseY + 1, 255, 0, 1);
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PAL_FILE_20), baseX + FILE_X, baseY + 1, 255, 0, 1);
 
     if (!gSaveSlotHasData[fileIdx]) {
-        filemenu_draw_message(filemenu_get_menu_message(fileIdx + FILE_MESSAGE_PAL_UNK3),
+        filemenu_draw_message(filemenu_get_menu_message(fileIdx + FILE_MESSAGE_PAL_FILENUM_1),
             baseX + D_filemenu_802508D0[gCurrentLanguage], baseY + 1, 255, 0, 1);
     } else {
         s32 tmp = D_filemenu_802508D0[gCurrentLanguage];
 
-        filemenu_draw_message(filemenu_get_menu_message(fileIdx + FILE_MESSAGE_PAL_UNK3),
+        filemenu_draw_message(filemenu_get_menu_message(fileIdx + FILE_MESSAGE_PAL_FILENUM_1),
             baseX + tmp, baseY + 1, 255, 0, 1);
 
         tmp += D_filemenu_802508D4[gCurrentLanguage];
@@ -783,9 +798,6 @@ void filemenu_main_init(MenuPanel* menu) {
     menu->initialized = TRUE;
 }
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_main_handle_input);
-#else
 void filemenu_main_handle_input(MenuPanel* menu) {
     s32 originalSelected = menu->selected;
     s32 i;
@@ -838,7 +850,8 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 menu->col = 0;
             }
             break;
-        case FM_MAIN_SELECT_DELETE: // TODO required to duplicate cases 1-4 instead of using fallthrough
+        case FM_MAIN_SELECT_DELETE:
+#if !VERSION_PAL
             // force selection to column 0 when navigating up from bottom row
             if (menu->col == 1 && (u8) menu->row < 2) {
                 menu->col = 0;
@@ -858,7 +871,9 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 menu->col = 1;
             }
             break;
+#endif
         case FM_MAIN_SELECT_COPY_FROM:
+#if !VERSION_PAL
             // force selection to column 0 when navigating up from bottom row
             if (menu->col == 1 && (u8) menu->row < 2) {
                 menu->col = 0;
@@ -868,6 +883,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 menu->col = 1;
             }
             break;
+#endif
         case FM_MAIN_SELECT_COPY_TO:
             // force selection to column 0 when navigating up from bottom row
             if (menu->col == 1 && (u8) menu->row < 2) {
@@ -1002,7 +1018,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_OPTIONS);
 
                     gWindows[WIN_FILES_CONFIRM_PROMPT].pos.y = -29;
-                    gWindows[WIN_FILES_CONFIRM_PROMPT].width = 192;
+                    gWindows[WIN_FILES_CONFIRM_PROMPT].width = SELECT_CONFIRM_PROMPT_WIDTH;
                     gWindows[WIN_FILES_CONFIRM_PROMPT].height = 25;
                     gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_PROMPT);
 
@@ -1013,6 +1029,9 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 }
                 break;
             case FM_MAIN_SELECT_DELETE:
+#if VERSION_PAL
+                gWindows[WIN_FILES_TITLE].width = 211;
+#endif
                 if (menu->selected == FM_MAIN_OPT_CANCEL) {
                     // selected "Cancel" button
                     sfx_play_sound(SOUND_MENU_NEXT);
@@ -1036,7 +1055,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                         gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_OPTIONS);
 
                         gWindows[WIN_FILES_CONFIRM_PROMPT].pos.y = -29;
-                        gWindows[WIN_FILES_CONFIRM_PROMPT].width = 118;
+                        gWindows[WIN_FILES_CONFIRM_PROMPT].width = DELETE_CONFIRM_PROMPT_WIDTH;
                         gWindows[WIN_FILES_CONFIRM_PROMPT].height = 25;
                         gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_PROMPT);
 
@@ -1086,17 +1105,25 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                             sfx_play_sound(SOUND_MENU_NEXT);
                             filemenu_currentMenu = FILE_MENU_MESSAGE;
                             filemenu_menus[filemenu_currentMenu]->state = FM_MESSAGE_COPIED;
-                            gWindows[WIN_FILES_MESSAGE].width = 154;
+                            gWindows[WIN_FILES_MESSAGE].width = FILE_COPIED_MESSAGE_WIDTH;
                             gWindows[WIN_FILES_MESSAGE].height = 39;
                             gWindows[WIN_FILES_MESSAGE].pos.x = CENTER_WINDOW_X(WIN_FILES_MESSAGE);
                             gWindows[WIN_FILES_MESSAGE].pos.y = CENTER_WINDOW_Y(WIN_FILES_MESSAGE);
 
                             set_window_update(WIN_FILES_MESSAGE, WINDOW_UPDATE_SHOW);
                             set_window_update(WIN_FILES_CONFIRM_OPTIONS, WINDOW_UPDATE_HIDE);
+#if VERSION_PAL
+                            if (fio_load_game(filemenu_loadedFileIdx)) {
+                                gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_loadedFileIdx];
+                                fio_save_game(filemenu_iterFileIdx);
+                                gSaveSlotHasData[filemenu_iterFileIdx] = TRUE;
+                            }
+#else
                             fio_load_game(filemenu_loadedFileIdx);
                             gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_loadedFileIdx];
                             fio_save_game(filemenu_iterFileIdx);
                             gSaveSlotHasData[filemenu_iterFileIdx] = TRUE;
+#endif
                         } else {
                             MenuPanel* confirmMenu;
 
@@ -1108,7 +1135,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                             gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_OPTIONS);
 
                             gWindows[WIN_FILES_CONFIRM_PROMPT].pos.y = -43;
-                            gWindows[WIN_FILES_CONFIRM_PROMPT].width = 182;
+                            gWindows[WIN_FILES_CONFIRM_PROMPT].width = COPY_CONFIRM_PROMPT_WIDTH;
                             gWindows[WIN_FILES_CONFIRM_PROMPT].height = 39;
                             gWindows[WIN_FILES_CONFIRM_PROMPT].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_PROMPT);
 
@@ -1120,6 +1147,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     }
                 }
                 break;
+#if !VERSION_PAL
             case FM_MAIN_SELECT_LANG_DUMMY:
                 if (menu->selected == FM_MAIN_OPT_CANCEL) {
                     // selected "Cancel" button
@@ -1158,6 +1186,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     }
                 }
                 break;
+#endif
         }
     }
 
@@ -1167,14 +1196,18 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 filemenu_set_selected(menu, 2, 2);
                 break;
             case FM_MAIN_SELECT_DELETE:
+#if !VERSION_PAL
                 filemenu_set_selected(menu, 1, 2);
                 break;
             case FM_MAIN_SELECT_LANG_DUMMY:
                 filemenu_set_selected(menu, 1, 2);
                 break;
+#endif
             case FM_MAIN_SELECT_COPY_FROM:
+#if !VERSION_PAL
                 filemenu_set_selected(menu, 1, 2);
                 break;
+#endif
             case FM_MAIN_SELECT_COPY_TO:
                 filemenu_set_selected(menu, 1, 2);
                 break;
@@ -1218,14 +1251,20 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 filemenu_set_selected(menu, (filemenu_loadedFileIdx % 2) * 2, filemenu_loadedFileIdx / 2);
                 sfx_play_sound(SOUND_MENU_BACK);
                 break;
+#if !VERSION_PAL
             case FM_MAIN_SELECT_LANG_DUMMY:
                 sfx_play_sound(SOUND_MENU_BACK);
                 set_game_mode(GAME_MODE_END_LANGUAGE_SELECT);
                 break;
+#endif
         }
     }
-}
+
+#if VERSION_PAL
+    gWindows[WIN_FILES_TITLE].width = D_filemenu_80250910[gCurrentLanguage + menu->state * 4];
+    gWindows[WIN_FILES_TITLE].pos.x = CENTER_WINDOW_X(WIN_FILES_TITLE);
 #endif
+}
 
 void filemenu_main_update(MenuPanel* menu) {
     // set default styles for all file slot panels

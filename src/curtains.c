@@ -173,7 +173,12 @@ Gfx TheaterInitGfx[] = {
     gsSPEndDisplayList(),
 };
 
+#if VERSION_PAL
+BSS IMG_BIN noControllerImgBuf[0x1000] ALIGNED(16);
+#define ui_no_controller_png noControllerImgBuf
+#else
 INCLUDE_IMG("ui/no_controller.png", ui_no_controller_png);
+#endif
 
 Gfx NoControllerSetupTexGfx[] = {
     gsDPPipeSync(),
@@ -207,6 +212,10 @@ BSS f32 gCurtainScaleGoal;
 BSS f32 gCurtainFade;
 BSS f32 gCurtainFadeGoal;
 BSS UNK_FUN_PTR(gCurtainDrawCallback);
+#if VERSION_PAL
+BSS s32 D_PAL_8009A204;
+BSS s32 D_PAL_8009A208;
+#endif
 BSS Mtx D_8009BAA8[2];
 
 void initialize_curtains(void) {
@@ -215,10 +224,16 @@ void initialize_curtains(void) {
     gCurtainScaleGoal = 2.0f;
     gCurtainFade = 0.0f;
     gCurtainFadeGoal = 0.0f;
+#if VERSION_PAL
+    D_PAL_8009A204 = 6;
+    D_PAL_8009A208 = 0;
+#endif
 }
 
 void update_curtains(void) {
 }
+
+#define UI_NO_CONTROLLER_SIZE (ui_no_controller_png_width * ui_no_controller_png_height)
 
 void render_curtains(void) {
     if (gCurtainScaleGoal != gCurtainScale) {
@@ -274,10 +289,34 @@ void render_curtains(void) {
                 alpha = 255;
             }
 
-            gSPDisplayList(gMainGfxPos++, &TheaterInitGfx);
-            gSPDisplayList(gMainGfxPos++, &NoControllerSetupTexGfx);
-            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0xFF, 0x20, 0x10, alpha);
-            gSPDisplayList(gMainGfxPos++, &NoControllerGfx);
+#if VERSION_PAL
+            if (alpha == 0) {
+                D_PAL_8009A204 = 6;
+            }
+
+            if (D_PAL_8009A204 == 0) {
+#endif
+                gSPDisplayList(gMainGfxPos++, &TheaterInitGfx);
+                gSPDisplayList(gMainGfxPos++, &NoControllerSetupTexGfx);
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, 0xFF, 0x20, 0x10, alpha);
+                gSPDisplayList(gMainGfxPos++, &NoControllerGfx);
+#if VERSION_PAL
+            }
+            
+            if (D_PAL_8009A204 == 3) {
+                u8* dmaStart = ui_no_controller_ROM_START + (D_PAL_8009A208 / 2) * UI_NO_CONTROLLER_SIZE;
+                u8* dmaEnd = ui_no_controller_ROM_START + (D_PAL_8009A208 / 2) * UI_NO_CONTROLLER_SIZE + UI_NO_CONTROLLER_SIZE;
+                dma_copy(dmaStart, dmaEnd, &noControllerImgBuf);
+
+                D_PAL_8009A208++;
+                if (D_PAL_8009A208 >= 8) {
+                    D_PAL_8009A208 = 0;
+                }
+            }
+            if (D_PAL_8009A204 != 0) {
+                D_PAL_8009A204--;
+            }
+#endif
         }
     }
 }

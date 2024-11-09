@@ -1,6 +1,11 @@
 #include "pause_common.h"
 #include "message_ids.h"
 
+#if VERSION_PAL
+extern u8 D_PAL_80271B30[4];
+extern u8 D_PAL_80271B34[4];
+#endif
+
 void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void pause_items_init(MenuPanel* panel);
 void pause_items_handle_input(MenuPanel* panel);
@@ -127,7 +132,6 @@ s32 pause_items_scroll_offset_x(s32 beforeX) {
 #define X_VAR3 9
 #define X_VAR4 18
 #define X_VAR5 18
-#define X_VAR6 27
 #define X_VAR7 77
 #define Y_VAR3 23
 #define Y_VAR4 28
@@ -140,8 +144,11 @@ s32 pause_items_scroll_offset_x(s32 beforeX) {
 #define X_VAR2 105
 #define X_VAR3 12
 #define X_VAR4 21
+#if VERSION_PAL
+#define X_VAR5 D_PAL_80271B34[gCurrentLanguage]
+#else
 #define X_VAR5 25
-#define X_VAR6 34
+#endif
 #define X_VAR7 85
 #define Y_VAR3 17
 #define Y_VAR4 23
@@ -151,9 +158,6 @@ s32 pause_items_scroll_offset_x(s32 beforeX) {
 #define W_VAR2 91
 #endif
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "pause/pause_items", pause_items_draw_contents);
-#else
 void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 i, pageIndex, itemIndex;
     s32 totalItemIndex;
@@ -175,6 +179,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     s32 msg, msgX, msgY, opacity1;
     s32 selectedPosX, selectedPosY;
     s32 cursorOffsetX, cursorOffsetY;
+    s32 msg2;
 
     style = DRAW_MSG_STYLE_MENU;
     palette = MSG_PAL_STANDARD;
@@ -347,6 +352,10 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
          W_VAR1, 34, 255, gPauseItemsCurrentTab == 1 ? 128 : 0, 0, 0,
          0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
+#if VERSION_PAL
+    if (gCurrentLanguage == LANGUAGE_EN) {
+#endif
+
     msg = pause_get_menu_msg(PAUSE_MSG_KEY_ITEMS);
     msgX = baseX + X_VAR3;
     if (gPauseItemsCurrentTab == 0) {
@@ -357,7 +366,37 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     if (gPauseItemsCurrentTab == 1) {
         opacity1 = 191;
     }
+
     draw_msg(msg, msgX, msgY, opacity1, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+
+#if VERSION_PAL
+    } else {
+        msg = pause_get_menu_msg(PAUSE_MSG_KEY_ITEMS);
+        msgX = baseX + 12;
+        if (gPauseItemsCurrentTab == 0) {
+            msgX = baseX + 21;
+        }
+        opacity1 = 255;
+        msgY = baseY + 12;
+        if (gPauseItemsCurrentTab == 1) {
+            opacity1 = 191;
+        }
+
+        draw_msg(msg, msgX, msgY, opacity1, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        msg2 = pause_get_menu_msg(PAUSE_MSG_PAL_4B);
+        msgX = baseX + D_PAL_80271B30[gCurrentLanguage];
+        if (gPauseItemsCurrentTab == 0) {
+            msgX = baseX + D_PAL_80271B30[gCurrentLanguage] + 9;
+        }
+        opacity1 = 255;
+        msgY = baseY + 22;
+        if (gPauseItemsCurrentTab == 1) {
+            opacity1 = 191;
+        }
+
+        draw_msg(msg2, msgX, msgY, opacity1, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+    }
+#endif
 
     draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_17, gPauseItemsCurrentTab == 1 ? baseX + 9 : baseX, baseY + 39, 0,
          W_VAR2, 34, 255, gPauseItemsCurrentTab == 0 ? 128 : 0, 0, 0,
@@ -366,7 +405,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     msg = pause_get_menu_msg(PAUSE_MSG_CONSUMABLES);
     msgX = baseX + X_VAR5;
     if (gPauseItemsCurrentTab == 1) {
-        msgX = baseX + X_VAR6;
+        msgX = baseX + X_VAR5 + 9;
     }
     opacity1 = 255;
     msgY = baseY + 49;
@@ -397,7 +436,6 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         }
     }
 }
-#endif
 
 #if VERSION_JP
 #define ROWS_COUNT 5

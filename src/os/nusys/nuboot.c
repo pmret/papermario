@@ -3,7 +3,9 @@
 #include "functions.h"
 #include "variables.h"
 
+#if !VERSION_PAL
 NOP_FIX
+#endif
 
 u64 nuMainStack[NU_SC_STACK_SIZE / sizeof(u64)];
 static OSThread IdleThread; // idle thread, id 1
@@ -11,9 +13,13 @@ static OSThread MainThread; // id 3
 static u64 IdleStack[NU_SC_STACK_SIZE / sizeof(u64)];
 
 void (*nuIdleFunc)(void);
+void __osInitialize_autodetect(void);
 
 void nuBoot(void) {
     osInitialize();
+#if VERSION_PAL
+    __osInitialize_autodetect();
+#endif
     osCreateThread(&IdleThread, NU_IDLE_THREAD_ID, boot_idle, NULL, &IdleStack[NU_SC_STACK_SIZE / sizeof(u64)], 10);
     osStartThread(&IdleThread);
 }

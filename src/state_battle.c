@@ -15,9 +15,11 @@ u16* bFrameBuffers[] = {
     gFrameBuf0, gFrameBuf1, gFrameBuf2
 };
 
+#if !VERSION_PAL
 s32 D_800778AC[] = {
     0x00000000, 0xFFFFFF00, 0xFFFFFF00, 0x00000000, 0x00000000
 };
+#endif
 
 BSS s8 D_800A0900;
 BSS s32 D_800A0904;

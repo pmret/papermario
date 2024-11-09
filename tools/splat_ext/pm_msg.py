@@ -3295,12 +3295,14 @@ class N64SegPm_msg(Segment):
         )
 
         self.files = yaml.get("files", []) if isinstance(yaml, dict) else []
+        self.generate_header = yaml.get("generate_header", True)
+        toc_file = yaml.get("toc", self.name) + ".yaml"
 
-        with (Path(__file__).parent / f"{self.name}.yaml").open("r") as f:
+        with (Path(__file__).parent / toc_file).open("r") as f:
             self.msg_names = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):
-        data = rom_bytes[self.rom_start : self.rom_end]
+        data = bytearray(rom_bytes[self.rom_start : self.rom_end])
 
         section_offsets = []
         pos = 0

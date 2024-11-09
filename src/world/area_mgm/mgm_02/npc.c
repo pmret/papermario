@@ -289,10 +289,6 @@ API_CALLABLE(N(OnHitBox)) {
     return ApiStatus_DONE2;
 }
 
-#if VERSION_PAL
-API_CALLABLE(N(SetBoxContents));
-INCLUDE_ASM(ApiResult, "world/area_mgm/mgm_02/mgm_02_2_npc", mgm_02_SetBoxContents);
-#else
 API_CALLABLE(N(SetBoxContents)) {
     s32 initialConfiguration;
     s32 configuration[NUM_BOXES];
@@ -302,9 +298,14 @@ API_CALLABLE(N(SetBoxContents)) {
     Enemy* enemy;
     Npc* npc;
 
-    SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
+    SmashGameData* data;
+
+#if VERSION_PAL
+    N(pal_variable) = 1;
+#endif
+    data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
     data->found = 0;
-    data->timeLeft = PLAY_TIME + 10;
+    data->timeLeft = PLAY_TIME + (s32)(10 * DT);
     data->curScore = 0;
     data->mashProgress = 0;
     data->stunFlags = 0;
@@ -415,12 +416,7 @@ API_CALLABLE(N(SetBoxContents)) {
     }
     return ApiStatus_DONE2;
 }
-#endif
 
-#if VERSION_PAL
-API_CALLABLE(N(RunMinigame));
-INCLUDE_ASM(ApiResult, "world/area_mgm/mgm_02/mgm_02_2_npc", mgm_02_RunMinigame);
-#else
 API_CALLABLE(N(RunMinigame)) {
     SmashGameData* data;
     Enemy* enemy;
@@ -771,31 +767,31 @@ API_CALLABLE(N(RunMinigame)) {
     if (data->timeLeft > 0) {
         if (data->found < NUM_PANELS) {
             data->timeLeft--;
-            if (data->timeLeft == 750) {
+            if (data->timeLeft == (s32)(750 * DT)) {
                 sfx_play_sound(SOUND_OMO_BOX_CHIME_1);
-            } else if (data->timeLeft == 600) {
+            } else if (data->timeLeft == (s32)(600 * DT)) {
                 sfx_play_sound(SOUND_OMO_BOX_CHIME_1);
-            } else if (data->timeLeft == 450) {
+            } else if (data->timeLeft == (s32)(450 * DT)) {
                 sfx_play_sound(SOUND_OMO_BOX_CHIME_1);
-            } else if (data->timeLeft == 300) {
+            } else if (data->timeLeft == (s32)(300 * DT)) {
                 sfx_play_sound(SOUND_OMO_BOX_CHIME_2);
-            } else if (data->timeLeft == 270) {
+            } else if (data->timeLeft == (s32)(270 * DT)) {
                 sfx_play_sound(SOUND_OMO_BOX_CHIME_2);
-            } else if (data->timeLeft == 240) {
+            } else if (data->timeLeft == (s32)(240 * DT)) {
                 sfx_play_sound(SOUND_OMO_BOX_CHIME_2);
-            } else if (data->timeLeft == 210) {
+            } else if (data->timeLeft == (s32)(210 * DT)) {
                 sfx_play_sound(SOUND_OMO_BOX_CHIME_2);
-            } else if (data->timeLeft == 180) {
+            } else if (data->timeLeft == (s32)(180 * DT)) {
                 sfx_play_sound(SOUND_OMO_BOX_CHIME_2);
-            } else if (data->timeLeft == 150) {
+            } else if (data->timeLeft == (s32)(150 * DT)) {
                 sfx_play_sound(SOUND_OMO_BOX_CHIME_3);
-            } else if (data->timeLeft == 120) {
+            } else if (data->timeLeft == (s32)(120 * DT)) {
                 sfx_play_sound(SOUND_OMO_BOX_CHIME_3);
-            } else if (data->timeLeft == 90) {
+            } else if (data->timeLeft == (s32)(90 * DT)) {
                 sfx_play_sound(SOUND_OMO_BOX_CHIME_3);
-            } else if (data->timeLeft == 60) {
+            } else if (data->timeLeft == (s32)(60 * DT)) {
                 sfx_play_sound(SOUND_OMO_BOX_CHIME_3);
-            } else if (data->timeLeft == 30) {
+            } else if (data->timeLeft == (s32)(30 * DT)) {
                 sfx_play_sound(SOUND_OMO_BOX_CHIME_3);
             }
         }
@@ -825,6 +821,9 @@ API_CALLABLE(N(RunMinigame)) {
         gameFinished = TRUE;
     }
     if (gameFinished) {
+#if VERSION_PAL
+        N(pal_variable) = 0;
+#endif
         if (data->stunFlags & STUN_FLAG_STUNNED) {
             enable_player_input();
             partner_enable_input();
@@ -845,7 +844,6 @@ API_CALLABLE(N(RunMinigame)) {
 
     return ApiStatus_BLOCK;
 }
-#endif
 
 API_CALLABLE(N(UpdateRecords)) {
     PlayerData* playerData = &gPlayerData;

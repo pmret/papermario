@@ -636,9 +636,6 @@ extern IMG_PTR MsgLetterRasterOffsets[];
 extern PAL_PTR MsgLetterPaletteOffsets[];
 extern MsgVoice MsgVoices[];
 
-#if VERSION_PAL
-INCLUDE_ASM(s32, "msg", msg_copy_to_print_buffer);
-#else
 void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     u8 arg;
     u8 argQ;
@@ -778,6 +775,11 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->windowBasePos.y = *srcBuf++;
                         printer->windowSize.x = *srcBuf++;
                         printer->windowSize.y = *srcBuf++;
+#if VERSION_PAL
+                        if (printer->windowSize.x == 255) {
+                            printer->windowSize.x = 276;
+                        }
+#endif
                         sfx_play_sound_with_params(SOUND_APPROVE, 0, 0, 0);
                         printer->windowState = MSG_WINDOW_STATE_OPENING;
                         printer->delayFlags |= MSG_DELAY_FLAG_1;
@@ -1304,7 +1306,6 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->srcBufferPos = (u16)(s32)(srcBuf - (s32)printer->srcBuffer);
     *printBuf = MSG_CHAR_PRINT_END;
 }
-#endif
 
 void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     s32 i;

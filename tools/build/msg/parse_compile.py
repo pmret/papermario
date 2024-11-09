@@ -3486,6 +3486,9 @@ if __name__ == "__main__":
                         elif arg_charset == 3:
                             charset = CHARSET_BUTTONS
 
+                    elif command == "variant0":
+                        message.bytes += [0xF3]
+
                     elif command == "inputoff":
                         message.bytes += [0xFF, 0x07]
                     elif command == "inputon":

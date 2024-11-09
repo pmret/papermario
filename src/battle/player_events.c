@@ -11,6 +11,14 @@
 
 extern HudScript HES_Happy;
 extern HudScript HES_HPDrain;
+#if VERSION_PAL
+extern HudScript HES_Happy_de;
+extern HudScript HES_Happy_fr;
+extern HudScript HES_Happy_es;
+extern HudScript HES_HPDrain_de;
+extern HudScript HES_HPDrain_fr;
+extern HudScript HES_HPDrain_es;
+#endif
 
 extern EvtScript EVS_Player_Celebrate;
 extern EvtScript EVS_Player_SimpleHit;
@@ -49,6 +57,7 @@ void btl_set_player_idle_anims(void) {
     }
 }
 
+#if !VERSION_PAL
 API_CALLABLE(IsPlayerImmobile) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
@@ -66,6 +75,7 @@ API_CALLABLE(IsPlayerImmobile) {
     script->varTable[0] = isImmobile;
     return ApiStatus_DONE2;
 }
+#endif
 
 API_CALLABLE(ActivateDefend) {
     ActorPart* actorPart = &gBattleStatus.playerActor->partsTable[0];
@@ -189,6 +199,7 @@ API_CALLABLE(GiveRefund) {
     f32 angle = 0.0f;
     s32 delayTime = 0;
     f32 posX, posY, posZ;
+    HudElemID hid;
     posY = player->curPos.y + player->size.y;
 
     if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
@@ -213,8 +224,25 @@ API_CALLABLE(GiveRefund) {
         posY = player->curPos.y;
         posZ = player->curPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        HID_Refund = hud_element_create(&HES_Refund);
-        hud_element_set_render_pos(HID_Refund, iconPosX + 36, iconPosY - 63);
+#if VERSION_PAL
+        switch (gCurrentLanguage) {
+            case LANGUAGE_EN:
+                HID_Refund = hid = hud_element_create(&HES_Refund);
+                break;
+            case LANGUAGE_DE:
+                HID_Refund = hid = hud_element_create(&HES_Refund_de);
+                break;
+            case LANGUAGE_FR:
+                HID_Refund = hid = hud_element_create(&HES_Refund_fr);
+                break;
+            case LANGUAGE_ES:
+                HID_Refund = hid = hud_element_create(&HES_Refund_es);
+                break;
+        }
+#else
+        HID_Refund = hid = hud_element_create(&HES_Refund);
+#endif
+        hud_element_set_render_pos(hid, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = delayTime;
@@ -489,6 +517,7 @@ API_CALLABLE(SpawnTurnEndFX) {
     s32 screenX;
     s32 screenY;
     s32 screenZ;
+    HudElemID hid;
 
     get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
 
@@ -496,14 +525,48 @@ API_CALLABLE(SpawnTurnEndFX) {
     screenY -= 19;
 
     if (script->varTable[10] > 0) {
-        HID_HPDrain = hud_element_create(&HES_HPDrain);
-        hud_element_set_render_pos(HID_HPDrain, screenX, screenY);
+#if VERSION_PAL
+        switch (gCurrentLanguage) {
+            case LANGUAGE_EN:
+                HID_HPDrain = hid = hud_element_create(&HES_HPDrain);
+                break;
+            case LANGUAGE_DE:
+                HID_HPDrain = hid = hud_element_create(&HES_HPDrain_de);
+                break;
+            case LANGUAGE_FR:
+                HID_HPDrain = hid = hud_element_create(&HES_HPDrain_fr);
+                break;
+            case LANGUAGE_ES:
+                HID_HPDrain = hid = hud_element_create(&HES_HPDrain_es);
+                break;
+        }
+#else
+        HID_HPDrain = hid = hud_element_create(&HES_HPDrain);
+#endif
+        hud_element_set_render_pos(hid, screenX, screenY);
         screenY += 9;
     }
 
     if (script->varTable[11] > 0 || script->varTable[12] > 0) {
-        HID_Happy = hud_element_create(&HES_Happy);
-        hud_element_set_render_pos(HID_Happy, screenX, screenY);
+#if VERSION_PAL
+        switch (gCurrentLanguage) {
+            case LANGUAGE_EN:
+                HID_Happy = hid = hud_element_create(&HES_Happy);
+                break;
+            case LANGUAGE_DE:
+                HID_Happy = hid = hud_element_create(&HES_Happy_de);
+                break;
+            case LANGUAGE_FR:
+                HID_Happy = hid = hud_element_create(&HES_Happy_fr);
+                break;
+            case LANGUAGE_ES:
+                HID_Happy = hid = hud_element_create(&HES_Happy_es);
+                break;
+        }
+#else
+        HID_Happy = hid = hud_element_create(&HES_Happy);
+#endif
+        hud_element_set_render_pos(hid, screenX, screenY);
     }
     return ApiStatus_DONE2;
 }

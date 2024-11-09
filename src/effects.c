@@ -335,7 +335,41 @@ s32 load_effect(s32 effectIndex) {
         void* graphics = general_heap_malloc(effectEntry->graphicsDmaEnd - effectEntry->graphicsDmaStart);
         sharedData->graphics = graphics;
         ASSERT(graphics != NULL);
-        dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, sharedData->graphics);
+
+#if VERSION_PAL
+        if (effectEntry->graphicsDmaStart == effect_gfx_attack_result_text_ROM_START) {
+            switch (gCurrentLanguage) {
+                case LANGUAGE_EN:
+                    dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, sharedData->graphics);
+                    break;
+                case LANGUAGE_DE:
+                    dma_copy(effect_gfx_attack_result_text_de_ROM_START, effect_gfx_attack_result_text_de_ROM_END, sharedData->graphics);
+                    break;
+                case LANGUAGE_FR:
+                    dma_copy(effect_gfx_attack_result_text_fr_ROM_START, effect_gfx_attack_result_text_fr_ROM_END, sharedData->graphics);
+                    break;
+                default:
+                    dma_copy(effect_gfx_attack_result_text_es_ROM_START, effect_gfx_attack_result_text_es_ROM_END, sharedData->graphics);
+                    break;
+            }
+        } else if (effectEntry->graphicsDmaStart == effect_gfx_chapter_change_ROM_START) {
+            switch (gCurrentLanguage) {
+                case LANGUAGE_EN:
+                    dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, sharedData->graphics);
+                    break;
+                case LANGUAGE_DE:
+                    dma_copy(effect_chapter_change_gfx_de_ROM_START, effect_chapter_change_gfx_de_ROM_END, sharedData->graphics);
+                    break;
+                case LANGUAGE_FR:
+                    dma_copy(effect_chapter_change_gfx_fr_ROM_START, effect_chapter_change_gfx_fr_ROM_END, sharedData->graphics);
+                    break;
+                default:
+                    dma_copy(effect_chapter_change_gfx_es_ROM_START, effect_chapter_change_gfx_es_ROM_END, sharedData->graphics);
+                    break;
+            }
+        } else
+#endif
+            dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, sharedData->graphics);
     }
 
     // Initialize the newly loaded effect data

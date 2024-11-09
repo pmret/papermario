@@ -680,6 +680,8 @@ extern u32		nuGfxDisplay;	/* Display on/off flag  */
 extern u32		nuGfxCfbCounter; /* For frame buffer swapping */
 //extern OSMesgQueue	nuGfxMesgQ;
 extern OSThread		nuGfxThread;			/* graphic thread */
+extern s32 nuGfxUcodeFifoSize;
+extern u64* nuGfxUcodeFifoPtr;
 
 /*--------------------------------------*/
 /*  controller  Manager variables 	*/
@@ -791,6 +793,7 @@ extern void nuGfxPreNMIFuncSet(NUGfxPreNMIFunc func);
 extern void nuGfxSwapCfbFuncSet(NUGfxSwapCfbFunc func);
 extern void nuGfxSetCfb(u16** framebuf, u32 framebufnum);
 extern void nuGfxSwapCfb(void* framebuffer);
+extern void nuGfxSetUcodeFifo(void* fifoBufPtr, s32 size);
 
 extern void nuGfxTaskEndFuncSet(NUGfxTaskEndFunc func);
 extern void nuGfxTaskAllEndWait(void);

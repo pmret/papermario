@@ -263,6 +263,7 @@ void btl_update(void) {
     s32 cond;
 
     if (battleStatus->inputBitmask != -1) {
+#if !VERSION_PAL
         if ((battleStatus->flags1 & BS_FLAGS1_PARTNER_ACTING) && gGameStatusPtr->multiplayerEnabled) {
             s32 inputBitmask = battleStatus->inputBitmask;
 
@@ -272,6 +273,7 @@ void btl_update(void) {
             battleStatus->stickX = gGameStatusPtr->stickX[1];
             battleStatus->stickY = gGameStatusPtr->stickY[1];
         } else {
+#endif
             s32 inputBitmask2 = battleStatus->inputBitmask;
 
             battleStatus->curButtonsDown = gGameStatusPtr->curButtons[0] & inputBitmask2;
@@ -279,7 +281,9 @@ void btl_update(void) {
             battleStatus->curButtonsHeld = gGameStatusPtr->heldButtons[0] & inputBitmask2;
             battleStatus->stickX = gGameStatusPtr->stickX[0];
             battleStatus->stickY = gGameStatusPtr->stickY[0];
+#if !VERSION_PAL
         }
+#endif
     }
 
     get_stick_input_radial(&outAngle, &outMagnitude);

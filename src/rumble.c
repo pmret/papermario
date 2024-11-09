@@ -45,6 +45,8 @@ void update_max_rumble_duration(void) {
 void reset_max_rumble_duration(void) {
 #if VERSION_JP
     rumbleMaxDuration = 600;
+#elif VERSION_PAL
+    rumbleMaxDuration = 360;
 #else
     rumbleMaxDuration = 300;
 #endif

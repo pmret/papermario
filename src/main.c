@@ -4,7 +4,9 @@
 // TODO move these somewhere else...
 u8 nuYieldBuf[NU_GFX_YIELD_BUF_SIZE] ALIGNED(16);
 OSThread __osThreadSave;
+#if !VERSION_PAL
 u8 nuBootStack[0x2000] ALIGNED(8);
+#endif
 
 // used in effects/gfx/flame.c
 unsigned char D_800B32E0[0x800] ALIGNED(16);
@@ -53,6 +55,16 @@ void boot_main(void* data) {
     } else {
         PANIC();
     }
+#elif VERSION_PAL
+    if (osTvType == OS_TV_PAL) {
+        osViSetMode(&osViModeFpalLpn1);
+        osViSetYScale(0.833f);
+        osViSetSpecialFeatures(OS_VI_GAMMA_OFF | OS_VI_GAMMA_DITHER_OFF | OS_VI_DIVOT_ON | OS_VI_DITHER_FILTER_ON);
+    } else {
+        PANIC();
+    }
+
+    nuGfxDisplayOff();
 #else // not VERSION_JP
     if (osTvType == OS_TV_NTSC) {
         osViSetMode(&osViModeNtscLan1);
@@ -68,7 +80,7 @@ void boot_main(void* data) {
     crash_screen_init();
 #endif
 
-#if !VERSION_IQUE
+#if !VERSION_IQUE && !VERSION_PAL
     is_debug_init();
 #endif
     nuGfxInit();

@@ -5352,31 +5352,43 @@ enum FileMenuMessages {
     /* 14 */ FILE_MESSAGE_YES,                         // Yes[End]
     /* 15 */ FILE_MESSAGE_NO,                          // No[End]
     /* 16 */ FILE_MESSAGE_DELETE,                      // Delete[End]
+#if !VERSION_PAL
     /* 17 */ FILE_MESSAGE_OVERRIDE_TO_NEW_DATA,        // Override to New Data[End]
     /* 18 */ FILE_MESSAGE_SAVE_OK,                     // Save OK?[End]
+#endif
     /* 19 */ FILE_MESSAGE_FILE_NAME_IS,                // File name is :[End]
     /* 20 */ FILE_MESSAGE_PERIOD_20,                   // .[End]
     /* 21 */ FILE_MESSAGE_OK,                          // OK?[End]
     /* 22 */ FILE_MESSAGE_FILE_22,                     // File[End]
+#if VERSION_PAL
+    FILE_MESSAGE_PAL_FILE_20,                          // File[End] / Dat.[End] / Fich.[End]
+#endif
     /* 23 */ FILE_MESSAGE_WILL_BE_DELETED,             // will be deleted.[End]
     /* 24 */ FILE_MESSAGE_OK_TO_COPY_TO_THIS_FILE,     // OK to copy to this file?[End]
     /* 25 */ FILE_MESSAGE_START_GAME_WITH,             // Start game with[End]
+#if VERSION_PAL
+    FILE_MESSAGE_PAL_QUESTION_24,                      // ?[End] / beginnen?[End]
+#endif
     /* 26 */ FILE_MESSAGE_FILE_26,                     // File[End]
     /* 27 */ FILE_MESSAGE_HAS_BEEN_DELETED,            // has been deleted.[End]
     /* 28 */ FILE_MESSAGE_28,                          // [End]
     /* 29 */ FILE_MESSAGE_COPY_FROM,                   // Copy from[End]
     /* 30 */ FILE_MESSAGE_TO,                          // to[End]
+#if VERSION_PAL
+    FILE_MESSAGE_PAL_PERIOD_30,                        // .[End] / kopieren.[End]
+#endif
     /* 31 */ FILE_MESSAGE_HAS_BEEN_CREATED,            // has been created.[End]
 #if VERSION_PAL
-    // TODO: determine where these new entries should be placed
-    FILE_MESSAGE_PAL_UNK1,
-    FILE_MESSAGE_PAL_UNK2,
+    FILE_MESSAGE_PAL_ARTICLE,                          // [End] / Le[End] / El[End]
 #endif
     /* 32 */ FILE_MESSAGE_ENTER_A_FILE_NAME,           // Enter a file name![End]
     /* 33 */ FILE_MESSAGE_QUESTION,                    // ?[End]
     /* 34 */ FILE_MESSAGE_PERIOD_34,                   // .[End]
 #if VERSION_PAL
-    FILE_MESSAGE_PAL_UNK3,
+    FILE_MESSAGE_PAL_FILENUM_1,
+    FILE_MESSAGE_PAL_FILENUM_2,
+    FILE_MESSAGE_PAL_FILENUM_3,
+    FILE_MESSAGE_PAL_FILENUM_4,
 #endif
 };
 

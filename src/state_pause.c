@@ -26,6 +26,56 @@ NUPiOverlaySegment PauseOverlaySegment = {
     .bssEnd = pause_BSS_END,
 };
 
+#if VERSION_PAL
+NUPiOverlaySegment PauseGfxOverlaySegment_en = {
+    .romStart = pause_gfx_en_ROM_START,
+    .romEnd = pause_gfx_en_ROM_END,
+    .ramStart = pause_gfx_en_VRAM,
+    .textStart = pause_gfx_en_TEXT_START,
+    .textEnd = pause_gfx_en_TEXT_END,
+    .dataStart = pause_gfx_en_DATA_START,
+    .dataEnd = pause_gfx_en_RODATA_END,
+    .bssStart = pause_gfx_en_BSS_START,
+    .bssEnd = pause_gfx_en_BSS_END,
+};
+
+NUPiOverlaySegment PauseGfxOverlaySegment_de = {
+    .romStart = pause_gfx_de_ROM_START,
+    .romEnd = pause_gfx_de_ROM_END,
+    .ramStart = pause_gfx_de_VRAM,
+    .textStart = pause_gfx_de_TEXT_START,
+    .textEnd = pause_gfx_de_TEXT_END,
+    .dataStart = pause_gfx_de_DATA_START,
+    .dataEnd = pause_gfx_de_RODATA_END,
+    .bssStart = pause_gfx_de_BSS_START,
+    .bssEnd = pause_gfx_de_BSS_END,
+};
+
+NUPiOverlaySegment PauseGfxOverlaySegment_fr = {
+    .romStart = pause_gfx_fr_ROM_START,
+    .romEnd = pause_gfx_fr_ROM_END,
+    .ramStart = pause_gfx_fr_VRAM,
+    .textStart = pause_gfx_fr_TEXT_START,
+    .textEnd = pause_gfx_fr_TEXT_END,
+    .dataStart = pause_gfx_fr_DATA_START,
+    .dataEnd = pause_gfx_fr_RODATA_END,
+    .bssStart = pause_gfx_fr_BSS_START,
+    .bssEnd = pause_gfx_fr_BSS_END,
+};
+
+NUPiOverlaySegment PauseGfxOverlaySegment_es = {
+    .romStart = pause_gfx_es_ROM_START,
+    .romEnd = pause_gfx_es_ROM_END,
+    .ramStart = pause_gfx_es_VRAM,
+    .textStart = pause_gfx_es_TEXT_START,
+    .textEnd = pause_gfx_es_TEXT_END,
+    .dataStart = pause_gfx_es_DATA_START,
+    .dataEnd = pause_gfx_es_RODATA_END,
+    .bssStart = pause_gfx_es_BSS_START,
+    .bssEnd = pause_gfx_es_BSS_END,
+};
+#endif
+
 BSS s8 StepPauseDelay;
 BSS s8 StepPauseState;
 BSS s16 StepPauseAlpha; // effectively unused, always zero
@@ -93,6 +143,22 @@ void state_step_pause(void) {
                     sfx_set_reverb_mode(0);
                     bgm_quiet_max_volume();
                     nuPiReadRomOverlay(&PauseOverlaySegment);
+#if VERSION_PAL
+                    switch (gCurrentLanguage) {
+                        case LANGUAGE_EN:
+                            nuPiReadRomOverlay(&PauseGfxOverlaySegment_en);
+                            break;
+                        case LANGUAGE_DE:
+                            nuPiReadRomOverlay(&PauseGfxOverlaySegment_de);
+                            break;
+                        case LANGUAGE_FR:
+                            nuPiReadRomOverlay(&PauseGfxOverlaySegment_fr);
+                            break;
+                        case LANGUAGE_ES:
+                            nuPiReadRomOverlay(&PauseGfxOverlaySegment_es);
+                            break;
+                    }
+#endif
                     pause_init();
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                 }

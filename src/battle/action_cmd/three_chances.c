@@ -369,7 +369,7 @@ void N(update)(void) {
                 && acs->threeChances.time >= -5
             ) {
                 s32 (*difficultyVec)[2] = (s32 (*)[2])battleStatus->actionCmdDifficultyTable;
-                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + ANTI_MASH_TIME;
+                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + (s32)(ANTI_MASH_TIME * DT);
                 pos = battleStatus->inputBufferPos;
                 pos -= window;
                 if (pos < 0) {
@@ -452,7 +452,7 @@ void N(update)(void) {
                 && acs->threeChances.time >= -5
             ) {
                 s32 (*difficultyVec)[2] = (s32 (*)[2])battleStatus->actionCmdDifficultyTable;
-                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + ANTI_MASH_TIME - 1;
+                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + (s32)((ANTI_MASH_TIME - 1) * DT);
                 if (window < 6) {
                     window = 6;
                 }
@@ -540,7 +540,7 @@ void N(update)(void) {
                 && acs->threeChances.time >= -5
             ) {
                 s32 (*difficultyVec)[2] = (s32 (*)[2])battleStatus->actionCmdDifficultyTable;
-                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + ANTI_MASH_TIME - 2;
+                window = difficultyVec[acs->difficulty][0] + difficultyVec[acs->difficulty][1] + (s32)((ANTI_MASH_TIME - 2) * DT);
                 if (window < 6) {
                     window = 6;
                 }

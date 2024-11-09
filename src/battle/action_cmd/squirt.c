@@ -14,8 +14,8 @@ enum {
 // how much to subtract from the meter per frame after overfilling it
 #define METER_DRAIN_RATE 250
 
-s32 N(DrainRateTable)[] = { 300, 300, 265, 220, 175, 175 };
-s32 N(FillRateTable)[] = { 300, 300, 265, 220, 175, 175 };
+s32 N(DrainRateTable)[] = { 300 / DT, 300 / DT, 265 / DT, 220 / DT, 175 / DT, 175 / DT };
+s32 N(FillRateTable)[] = { 300 / DT, 300 / DT, 265 / DT, 220 / DT, 175 / DT, 175 / DT };
 
 // bug: the sixth entry is not accessible due to the way idx is calculated in these macros
 #define GET_DRAIN_RATE(pct) (N(DrainRateTable)[((pct) / (ONE_PCT_MASH / 5))])
