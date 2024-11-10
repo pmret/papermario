@@ -10,12 +10,13 @@ extern MessageCharset* MsgCharsets[5];
 extern PAL_BIN D_802F4560[80][8];
 extern u8 filemenu_glyphBuffer[20][0x80];
 
-// 1742f0
 #if VERSION_JP
-u8 filemenu_msg_JP_1[0x50] = {0};
-#endif
-
-#if VERSION_IQUE
+u8 filemenu_msg_C6[] = { 0xF7, 0xF7, 0x84, 0x05, 0x62, 0x14, 0xFD };
+u8 filemenu_msg_C7[] = { 0xFD };
+u8 filemenu_msg_C8[] = { 0xFD };
+u8 filemenu_msg_C9[] = { 0x6C, 0x2B, 0x8D, 0x04, 0xFD };
+u8 filemenu_msg_CA[] = { 0x7C, 0x04, 0x7D, 0x04, 0xFD };
+#elif VERSION_IQUE
 u8 filemenu_msg_C6[] = { 0xF7, 0xF7, 0x84, 0x05, 0x62, 0x14, 0xFD };
 u8 filemenu_msg_C7[] = { 0xFD };
 u8 filemenu_msg_C8[] = { 0xFD };
@@ -47,6 +48,10 @@ u8* filemenu_specialSymbols[][5] = {
 };
 #else
 s32 filemenu_specialSymbols[] = { (s32)filemenu_msg_C6, (s32)filemenu_msg_C7, (s32)filemenu_msg_C8, (s32)filemenu_msg_C9, (s32)filemenu_msg_CA };
+#endif
+
+#if VERSION_JP
+u8 filemenu_msg_JP_1[0x40] = {0};
 #endif
 
 Gfx filemenu_dl_draw_char_init[] = {
@@ -691,15 +696,14 @@ s32 filemenu_draw_char(s32 c, s32 x, s32 y, s32 flag1, s32 color, s32 flag2) {
     }
 #endif
 
-#if VERSION_JP // TODO ASDF
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-#endif
-
     if (c == MSG_CHAR_READ_SPACE) {
+#if VERSION_JP
+        __asm__("nop");
+        __asm__("nop");
+        return charData->monospaceWidth;
+#else
         return charWidth - 6;
+#endif
     }
 
     switch (c) {
@@ -719,17 +723,27 @@ s32 filemenu_draw_char(s32 c, s32 x, s32 y, s32 flag1, s32 color, s32 flag2) {
     return 0;
 }
 
+#if VERSION_JP
+#define SOMETHING_1 0xC6
+#define SOMETHING_2 0x2A
+#else
+#define SOMETHING_1 0xA2
+#define SOMETHING_2 0x4E
+#endif
+
 void filemenu_draw_message(u8* message, s32 x, s32 y, s32 alpha, s32 color, u32 flags) {
     s32 flag1 = flags & 1;
     s32 flag2 = flags >> 3;
 
     flag2 &= 1;
+#if !VERSION_JP
     if (flag1 == 1) {
         y -= 2;
     }
+#endif
 
     if ((u32)message < 0x100) {
-        if ((u32)message - 0xA2 >= 0x4E) {
+        if ((u32)message - SOMETHING_1 >= SOMETHING_2) {
             filemenu_draw_char((s32)message, x, y, flag1, color, flag2);
             return;
         }
@@ -764,6 +778,11 @@ void filemenu_draw_message(u8* message, s32 x, s32 y, s32 alpha, s32 color, u32 
 #endif
         }
     }
+#if VERSION_JP
+    else {
+        draw_msg(message, x, y, alpha, color, flags);
+    }
+#endif
 }
 
 u8* filemenu_get_menu_message(s32 idx) {

@@ -83,11 +83,12 @@ BSS u8 filemenu_filename[8];
 #define FILE_NUMBER_X       33
 #define FILE_NAME_X         46
 #define NUMBER_OFFSET_Y     0
+#endif
+
 #if VERSION_JP
 #define WIN_FILES_TITLE_WIDTH 168
 #else
 #define WIN_FILES_TITLE_WIDTH 162
-#endif
 #endif
 
 extern HudScript HES_OptionMonoOn_de;

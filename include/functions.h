@@ -835,7 +835,7 @@ b32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* s
 void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z);
 void* mdl_get_next_texture_address(s32);
 s32 cancel_current_message(void);
-void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style);
+void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u16 style);
 void mdl_get_shroud_tint_params(u8* r, u8* g, u8* b, u8* a);
 
 s32 entity_base_block_idle(Entity* entity);
