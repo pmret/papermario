@@ -1710,6 +1710,207 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
     }
 }
 
+#if VERSION_JP
+void btl_show_message_popup(void* data) {
+    PopupMessage* popup = data;
+    s32 posX;
+    s32 posY = 80;
+    s32 width;
+    s32 msgWidth;
+    s32 height;
+    switch (popup->messageIndex) {
+        case BTL_MSG_MERLEE_DONE:
+        case BTL_MSG_CANT_CHARGE:
+        case BTL_MSG_ENEMY_MISSED:
+        case BTL_MSG_STAR_POWER_RECHARGED:
+        case BTL_MSG_STAR_POWER_MAXED:
+        case BTL_MSG_STAR_POWER_FILLED:
+        case BTL_MSG_PARTNER_INJURED:
+        case BTL_MSG_CHARGE_GOOMBARIO:
+        case BTL_MSG_CHARGE_GOOMBARIO_MORE:
+        case BTL_MSG_WATER_BLOCK_BEGIN:
+        case BTL_MSG_WATER_BLOCK_END:
+        case BTL_MSG_CLOUD_NINE_BEGIN:
+        case BTL_MSG_CLOUD_NINE_END:
+        case BTL_MSG_TURBO_CHARGE_BEGIN:
+        case BTL_MSG_TURBO_CHARGE_END:
+        case BTL_MSG_CHILL_OUT_BEGIN:
+        case BTL_MSG_UNUSED_CLOUD_NINE:
+        case BTL_MSG_NO_JUMP_TARGET:
+        case BTL_MSG_NO_HAMMER_TARGET:
+        case BTL_MSG_NO_ITEM_TARGET:
+        case BTL_MSG_46:
+        case BTL_MSG_47:
+        case BTL_MSG_CANT_SELECT_NOW:
+        case BTL_MSG_CANT_SWITCH_UNUSED:
+        case BTL_MSG_CANT_MOVE_UNUSED:
+        case BTL_MSG_CANT_SELECT_NOW_ALT:
+            if (popup->needsInit) {
+                popup->needsInit = FALSE;
+                msgWidth = get_msg_width(BattleMessages[popup->messageIndex], 0) + (31 + D_8028374C_1BA13C[popup->messageIndex][0]);
+                posX = 160 - (msgWidth / 2);
+                width = msgWidth;
+                height = 28 + D_8028374C_1BA13C[popup->messageIndex][1];
+                set_window_properties(WIN_BTL_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
+                set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
+            }
+            break;
+        case BTL_MSG_MERLEE_ATK_UP:
+        case BTL_MSG_MERLEE_DEF_UP:
+        case BTL_MSG_MERLEE_EXP_UP:
+        case BTL_MSG_CANT_SWITCH:
+            if (popup->needsInit) {
+                popup->needsInit = FALSE;
+                msgWidth = get_msg_width(BattleMessages[popup->messageIndex], 0) + (31 + D_8028374C_1BA13C[popup->messageIndex][0]);
+                posX = 160 - (msgWidth / 2);
+                width = msgWidth;
+                height = 45 + D_8028374C_1BA13C[popup->messageIndex][1];
+                set_window_properties(WIN_BTL_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
+                set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
+            }
+            break;
+        case BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING:
+        case BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED:
+        case BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE:
+        case BTL_MSG_ACTION_TIP_MASH_BUTTON:
+        case BTL_MSG_ACTION_TIP_MASH_LEFT:
+        case BTL_MSG_ACTION_TIP_HOLD_LEFT_AIM:
+        case BTL_MSG_ACTION_TIP_UNUSED_1:
+        case BTL_MSG_ACTION_TIP_UNUSED_2:
+        case BTL_MSG_ACTION_TIP_PRESS_BUTTONS_SHOWN:
+        case BTL_MSG_ACTION_TIP_NOT_USED_1:
+        case BTL_MSG_ACTION_TIP_PRESS_WITH_TIMING:
+        case BTL_MSG_ACTION_TIP_NOT_USED_2:
+        case BTL_MSG_ACTION_TIP_MASH_BOTH:
+        case BTL_MSG_ACTION_TIP_UNUSED_3:
+        case BTL_MSG_ACTION_TIP_HOLD_THEN_TAP:
+        case BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE:
+        case BTL_MSG_ACTION_TIP_MOVE_TO_AIM:
+        case BTL_MSG_ACTION_TIP_UNUSED_4:
+        case BTL_MSG_ACTION_TIP_BREAK_FREE:
+        case BTL_MSG_ACTION_TIP_REDUCE_DAMAGE:
+        case BTL_MSG_ACTION_TIP_NOT_USED_3:
+            if (popup->needsInit) {
+                popup->needsInit = FALSE;
+                msgWidth = get_msg_width(BattleMessages[popup->messageIndex], 0) + (31 + D_8028374C_1BA13C[popup->messageIndex][0]);
+                posX = 160 - (msgWidth / 2);
+                width = msgWidth;
+                posY = 192;
+                height = 28 + D_8028374C_1BA13C[popup->messageIndex][1];
+                if (popup->messageIndex == BTL_MSG_ACTION_TIP_UNUSED_3) {
+                    posY = 120;
+                    BattleMessage_BoxPosLocked = TRUE;
+                }
+                BattleMessage_CurBoxPosY = posY;
+                set_window_properties(WIN_BTL_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
+                if (popup->messageIndex == BTL_MSG_ACTION_TIP_UNUSED_3) {
+                    set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
+                } else {
+                    set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW_DARKENED);
+                }
+            }
+            break;
+        case BTL_MSG_HAMMER_DISABLED_1:
+        case BTL_MSG_HAMMER_DISABLED_2:
+        case BTL_MSG_HAMMER_DISABLED_3:
+        case BTL_MSG_JUMP_DISABLED_1:
+        case BTL_MSG_JUMP_DISABLED_2:
+        case BTL_MSG_JUMP_DISABLED_3:
+        case BTL_MSG_ITEMS_DISABLED:
+            if (popup->needsInit) {
+                popup->needsInit = FALSE;
+                msgWidth = get_msg_width(BattleMessages[popup->messageIndex], 0) + (55 + D_8028374C_1BA13C[popup->messageIndex][0]);
+                posX = 160 - (msgWidth / 2);
+                width = msgWidth;
+                height = 40 + D_8028374C_1BA13C[popup->messageIndex][1];
+                set_window_properties(WIN_BTL_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
+                set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
+            }
+            break;
+        case BTL_MSG_PLAYER_DAZED:
+        case BTL_MSG_PLAYER_ASLEEP:
+        case BTL_MSG_PLAYER_FROZEN:
+        case BTL_MSG_PLAYER_POISONED:
+        case BTL_MSG_PLAYER_SHRUNK:
+        case BTL_MSG_PLAYER_PARALYZED:
+        case BTL_MSG_PLAYER_CHARGED:
+        case BTL_MSG_PLAYER_TRANSPARENT:
+            if (popup->needsInit) {
+                popup->needsInit = FALSE;
+                msgWidth = get_msg_width(BattleMessages[popup->messageIndex], 0) + (31 + D_8028374C_1BA13C[popup->messageIndex][0]);
+                posX = 160 - (msgWidth / 2);
+                width = msgWidth;
+                if (D_80283B88_1BA578[popup->messageIndex - 10] != 0) {
+                    height = 45 + D_8028374C_1BA13C[popup->messageIndex][1];
+                } else {
+                    height = 28 + D_8028374C_1BA13C[popup->messageIndex][1];
+                }
+                set_window_properties(WIN_BTL_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
+                set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
+            }
+            break;
+        case BTL_MSG_ENEMY_DAZED:
+        case BTL_MSG_ENEMY_ASLEEP:
+        case BTL_MSG_ENEMY_FROZEN:
+        case BTL_MSG_ENEMY_POISONED:
+        case BTL_MSG_ENEMY_SHRUNK:
+        case BTL_MSG_ENEMY_PARALYZED:
+        case BTL_MSG_ENEMY_ELECTRIFIED:
+        case BTL_MSG_ENEMY_CANT_MOVE:
+            if (popup->needsInit) {
+                popup->needsInit = FALSE;
+                msgWidth = get_msg_width(BattleMessages[popup->messageIndex], 0) + (31 + D_8028374C_1BA13C[popup->messageIndex][0]);
+                posX = 160 - (msgWidth / 2);
+                width = msgWidth;
+                if (D_80283BA8_1BA598[popup->messageIndex - 18] != 0) {
+                    height = 45 + D_8028374C_1BA13C[popup->messageIndex][1];
+                } else {
+                    height = 28 + D_8028374C_1BA13C[popup->messageIndex][1];
+                }
+                set_window_properties(WIN_BTL_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
+                set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
+            }
+            break;
+        case BTL_MSG_CHARGE_HAMMER:
+        case BTL_MSG_CHARGE_HAMMER_MORE:
+        case BTL_MSG_CHARGE_JUMP:
+        case BTL_MSG_CHARGE_JUMP_MORE:
+        case BTL_MSG_ATTACK_UP:
+        case BTL_MSG_DEFENCE_UP:
+        case BTL_MSG_HEAL_ONE:
+        case BTL_MSG_HEAL_ALL:
+        case BTL_MSG_ENEMY_TRANSPARENT:
+        case BTL_MSG_ENEMY_CHARGED:
+            if (popup->needsInit) {
+                s32 messageID;
+                popup->needsInit = FALSE;
+                messageID = BattleMessages[popup->messageIndex];
+                set_message_int_var(BattlePopupMessageVar, 0);
+                msgWidth = get_msg_width(messageID, 0) + (31 + D_8028374C_1BA13C[popup->messageIndex][0]);
+                posX = 160 - (msgWidth / 2);
+                width = msgWidth;
+                height = 28 + D_8028374C_1BA13C[popup->messageIndex][1];
+                set_window_properties(WIN_BTL_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
+                set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
+            }
+            break;
+        case BTL_MSG_CANT_MOVE:
+            if (popup->needsInit) {
+                s32 messageID;
+                popup->needsInit = FALSE;
+                messageID = BattleMessages[popup->messageIndex];
+                set_message_text_var(bActorMessages[BattlePopupMessageVar], 0);
+                msgWidth = get_msg_width(messageID, 0) + (31 + D_8028374C_1BA13C[popup->messageIndex][0]);
+                posX = 160 - (msgWidth / 2);
+                width = msgWidth;
+                height = 28 + D_8028374C_1BA13C[popup->messageIndex][1];
+                set_window_properties(WIN_BTL_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
+                set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
+            }
+            break;
+    }
+}
+#else
 void btl_show_message_popup(void* data) {
     PopupMessage* popup = data;
     s32 numLines;
@@ -2087,6 +2288,7 @@ void btl_show_message_popup(void* data) {
     }
 #endif
 }
+#endif
 
 API_CALLABLE(ShowMessageBox) {
     Bytecode* args = script->ptrReadPos;

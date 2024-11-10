@@ -1236,7 +1236,7 @@ segments:
     - [auto, c, filemenu_gfx]
     - [auto, c, filemenu_msg]
     - [auto, c, filemenu_styles]
-    - start: 0x172000
+    - start: 0x172B20
       type: .data
       name: filemenu_gfx
       subsegments:

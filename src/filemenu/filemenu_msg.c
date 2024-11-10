@@ -10,6 +10,11 @@ extern MessageCharset* MsgCharsets[5];
 extern PAL_BIN D_802F4560[80][8];
 extern u8 filemenu_glyphBuffer[20][0x80];
 
+// 1742f0
+#if VERSION_JP
+u8 filemenu_msg_JP_1[0x50] = {0};
+#endif
+
 #if VERSION_IQUE
 u8 filemenu_msg_C6[] = { 0xF7, 0xF7, 0x84, 0x05, 0x62, 0x14, 0xFD };
 u8 filemenu_msg_C7[] = { 0xFD };

@@ -73,6 +73,12 @@ MenuPanel filemenu_createfile_menuBP = {
     .fpCleanup = &filemenu_choose_name_cleanup
 };
 
+#if VERSION_JP
+// s32 filemenu_jp_1[0x100 + (0xF20 / 4)] = {
+//     0
+// };
+#endif
+
 void filemenu_update_change_layout(
     s32 windowIdx,
     s32* flags,
