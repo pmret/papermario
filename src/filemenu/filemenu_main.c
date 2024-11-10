@@ -54,7 +54,11 @@ extern u8   D_filemenu_80250954[4];
 #define SAVE_OFFSET_X                 25
 #define COPY_OFFSET_X                 16
 #define SELECT_CONFIRM_PROMPT_WIDTH   192
+#if VERSION_JP
+#define DELETE_CONFIRM_PROMPT_WIDTH   192
+#else
 #define DELETE_CONFIRM_PROMPT_WIDTH   118
+#endif
 #define FILE_COPIED_MESSAGE_WIDTH     154
 #define COPY_CONFIRM_PROMPT_WIDTH     182
 #endif
@@ -79,6 +83,11 @@ BSS u8 filemenu_filename[8];
 #define FILE_NUMBER_X       33
 #define FILE_NAME_X         46
 #define NUMBER_OFFSET_Y     0
+#if VERSION_JP
+#define WIN_FILES_TITLE_WIDTH 168
+#else
+#define WIN_FILES_TITLE_WIDTH 162
+#endif
 #endif
 
 extern HudScript HES_OptionMonoOn_de;
@@ -659,9 +668,33 @@ void filemenu_draw_contents_file_title(
         }
 }
 #else
-// #if VERSION_JP
-// INCLUDE_ASM(s32, "filemenu/filemenu_main", filemenu_draw_contents_file_title);
-// #else
+#if VERSION_JP
+void filemenu_draw_contents_file_title(
+    s32 fileIdx,
+    MenuPanel* menu,
+    s32 baseX, s32 baseY,
+    s32 width, s32 height,
+    s32 opacity, s32 darkening)
+{
+    if (filemenu_currentMenu == FILE_MENU_MAIN && menu->selected == fileIdx) {
+        filemenu_set_cursor_goal_pos(fileIdx + 60, baseX - 4, baseY + 8);
+    }
+
+    if (!gSaveSlotHasData[fileIdx]) {
+        hud_element_set_render_pos(filemenu_mainHIDs[14], baseX + 18, baseY + 7);
+        hud_element_draw_without_clipping(filemenu_mainHIDs[14]);
+        draw_number(fileIdx + 1, baseX + 31, baseY + 1, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255,
+                    DRAW_NUMBER_STYLE_MONOSPACE);
+
+    } else {
+        hud_element_set_render_pos(filemenu_mainHIDs[14], baseX + 18, baseY + 7);
+        hud_element_draw_without_clipping(filemenu_mainHIDs[14]);
+        draw_number(fileIdx + 1, baseX + 31, baseY + 1, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255,
+                    DRAW_NUMBER_STYLE_MONOSPACE);
+        filemenu_draw_file_name(gSaveSlotMetadata[fileIdx].filename, 8, baseX + 43, baseY + 1, 255, 0, 1, 9);
+    }
+}
+#else
 void filemenu_draw_contents_file_title(
     s32 fileIdx,
     MenuPanel* menu,
@@ -675,17 +708,12 @@ void filemenu_draw_contents_file_title(
 
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + FILE_X, baseY + 1, 255, 0, 1);
 
-#if VERSION_JP // TODO ASDF
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-#endif
     if (!gSaveSlotHasData[fileIdx]) {
-        draw_number(fileIdx + 1, baseX + FILE_NUMBER_X, baseY + 1 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+        draw_number(fileIdx + 1, baseX + FILE_NUMBER_X, baseY + 1 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN,
+                    MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE);
     } else {
-        draw_number(fileIdx + 1, baseX + FILE_NUMBER_X, baseY + 1 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+        draw_number(fileIdx + 1, baseX + FILE_NUMBER_X, baseY + 1 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN,
+                    MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE);
         filemenu_draw_file_name(
             gSaveSlotMetadata[fileIdx].filename,
             ARRAY_COUNT(gSaveSlotMetadata[fileIdx].filename),
@@ -693,7 +721,7 @@ void filemenu_draw_contents_file_title(
     }
 }
 #endif
-//#endif
+#endif
 
 void filemenu_draw_contents_file_0_info(
     MenuPanel* menu,
@@ -793,7 +821,7 @@ void filemenu_main_init(MenuPanel* menu) {
         gWindows[WIN_FILES_TITLE].height = 25;
     } else {
         gWindows[WIN_FILES_TITLE].pos.y = 1;
-        gWindows[WIN_FILES_TITLE].width = 162;
+        gWindows[WIN_FILES_TITLE].width = WIN_FILES_TITLE_WIDTH;
         gWindows[WIN_FILES_TITLE].height = 25;
     }
 #endif
