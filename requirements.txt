@@ -11,6 +11,6 @@ intervaltree
 n64img
 python-githooks
 crunch64>=0.5.1
-spimdisasm>=1.30.0
-splat64>=0.27.2
+spimdisasm==1.31.0
+splat64==0.31.0
 requests
