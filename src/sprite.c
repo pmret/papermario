@@ -774,7 +774,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
     s32 i;
 
     spr_allocateBtlComponentsOnWorldHeap = FALSE;
-    _heap_create(&heap_spriteHead, 0x40000);
+    _heap_create(&heap_spriteHead, SPRITE_HEAP_SIZE);
     imgfx_init();
 
     for (i = 0; i < ARRAY_COUNT(spr_playerSprites); i++) {
