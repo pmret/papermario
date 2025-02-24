@@ -63,7 +63,7 @@ if cat /etc/os-release | grep -E ID=fedora &> /dev/null; then
         RETURNDIR="$(pwd)"
         cd "$(mktemp -d)"
 
-        wget ftp://ftp.gnu.org/gnu/binutils/binutils-2.35.tar.bz2
+        wget https://ftp.gnu.org/gnu/binutils/binutils-2.35.tar.bz2
         tar -xf binutils-2.35.tar.bz2
 
         cd binutils-2.35
@@ -197,7 +197,7 @@ if cat /etc/os-release | grep ID=alpine &> /dev/null; then
         RETURNDIR="$(pwd)"
         cd "$(mktemp -d)"
 
-        wget ftp://ftp.gnu.org/gnu/binutils/binutils-2.35.tar.bz2
+        wget https://ftp.gnu.org/gnu/binutils/binutils-2.35.tar.bz2
         tar -xf binutils-2.35.tar.bz2
 
         cd binutils-2.35
