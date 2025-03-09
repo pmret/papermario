@@ -32,6 +32,11 @@ def process_file(file_path):
         r'<Loop count="(\d+)" dest="Pos_(\d+)"/>', lambda m: f'<Loop count="{m.group(2)}" pos="{m.group(1)}"/>', content
     )
 
+    # Anim06 in Duplighost requires this
+    content = re.sub(
+        r'<Loop count="(\d+)" dest="Start"/>', lambda m: f'<Loop count="0" pos="{m.group(1)}"/>', content
+    )
+
     # SetParent used decimal instead of hex for its indices, conflicting with the policy of SetRaster and SetPalette
     content = re.sub(
         r'<SetParent index="(\d+)"/>', lambda m: f'<SetParent index="{hex(int(m.group(1)))[2:].upper()}"/>', content
