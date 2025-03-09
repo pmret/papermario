@@ -200,7 +200,7 @@ class SetParent(Animation):
 
     def get_attributes(self):
         return {
-            XML_ATTR_INDEX: str(self.index),
+            XML_ATTR_INDEX: f"{self.index:X}",
         }
 
 
@@ -212,11 +212,6 @@ class SetNotify(Animation):
         return {
             XML_ATTR_VALUE: str(self.v),
         }
-
-
-@dataclass
-class Keyframe(Animation):
-    pass
 
 
 @dataclass
@@ -255,7 +250,7 @@ class AnimComponent:
             elif cmd_op == CMD.SET_SCALE:
                 i += 1
             elif cmd_op == CMD.LOOP:
-                dest = command_list[i + 1]
+                dest = cmd_arg
                 if dest in boundaries and dest not in labels:
                     labels[dest] = f"Pos_{dest}"
                 i += 1
@@ -313,8 +308,8 @@ class AnimComponent:
                     palette = -1
                 ret.append(SetPalette(palette))
             elif cmd_op == CMD.LOOP:
-                count = cmd_arg
-                dest = command_list[i + 1]
+                dest = cmd_arg
+                count = command_list[i + 1]
                 if dest in labels:
                     lbl_name = labels[dest]
                     ret.append(Loop(count, lbl_name, 0))
@@ -349,18 +344,27 @@ class AnimComponent:
         return AnimComponent.parse_commands(self.commands)
 
     @staticmethod
-    def from_xml(xml: ET.Element):
+    def from_xml(xml: ET.Element, comp_map: Dict[str, int], image_map: Dict[str, int], palette_map: Dict[str, int]):
         commands: List[int] = []
         labels = {}
         for cmd in xml:
             if cmd.tag == "Label":
-                idx = len(commands)
-                labels[cmd.attrib[XML_ATTR_NAME]] = idx
+                labels[cmd.attrib[XML_ATTR_NAME]] = len(commands)
             elif cmd.tag == "Wait":
                 duration = int(cmd.attrib[XML_ATTR_DURATION])
                 commands.append(duration & 0xFFF)
             elif cmd.tag == "SetRaster":
-                raster = int(cmd.attrib[XML_ATTR_INDEX], 0x10)
+                raster = -1
+                # prioritize selecting rasters by name, falling back to hardcoded IDs if name attribute is missing
+                if XML_ATTR_NAME in cmd.attrib:
+                    img_name = cmd.attrib[XML_ATTR_NAME]
+                    if img_name != "":
+                        raster = image_map.get(img_name)
+                        if raster is None:
+                            raise Exception("Undefined raster name for SetRaster: " + img_name)
+                else:
+                    raster = int(cmd.attrib[XML_ATTR_INDEX], 0x10)
+                # why is this here? necessary?
                 if raster == -1:
                     raster = 0xFFF
                 commands.append(0x1000 + (raster & 0xFFF))
@@ -393,7 +397,17 @@ class AnimComponent:
                 commands.append(0x5000 + mode)
                 commands.append(percent)
             elif cmd.tag == "SetPalette":
-                palette = int(cmd.attrib[XML_ATTR_INDEX], 0x10)
+                palette = -1
+                # prioritize selecting palettes by name, falling back to hardcoded IDs if name attribute is missing
+                if XML_ATTR_NAME in cmd.attrib:
+                    pal_name = cmd.attrib[XML_ATTR_NAME]
+                    if pal_name != "":
+                        palette = palette_map.get(pal_name)
+                        if palette is None:
+                            raise Exception("Undefined palette name for SetPalette: " + pal_name)
+                else:
+                    palette = int(cmd.attrib[XML_ATTR_INDEX], 0x10)
+                # why is this here? necessary?
                 if palette == -1:
                     palette = 0xFFF
                 commands.append(0x6000 + (palette & 0xFFF))
@@ -408,14 +422,90 @@ class AnimComponent:
                     if not lbl_name in labels:
                         raise Exception("Label missing for Loop dest: " + lbl_name)
                     pos = labels[lbl_name]
-                commands.append(0x7000 + (count & 0xFFF))
-                commands.append(pos)
+                commands.append(0x7000 + (pos & 0xFFF))
+                commands.append(count)
             elif cmd.tag == "Unknown":
                 commands.append(0x8000 + (int(cmd.attrib[XML_ATTR_VALUE]) & 0xFF))
             elif cmd.tag == "SetParent":
-                commands.append(0x8100 + (int(cmd.attrib[XML_ATTR_INDEX]) & 0xFF))
+                parent = -1
+                # prioritize selecting palettes by name, falling back to hardcoded IDs if name attribute is missing
+                if XML_ATTR_NAME in cmd.attrib:
+                    par_name = cmd.attrib[XML_ATTR_NAME]
+                    if par_name != "":
+                        parent = comp_map.get(par_name)
+                        if parent is None:
+                            raise Exception("Undefined component name for SetParent: " + par_name)
+                else:
+                    parent = int(cmd.attrib[XML_ATTR_INDEX], 0x10)
+                if parent == -1:
+                    raise Exception("Invalid component for SetParent: " + par_name)
+                commands.append(0x8100 + (parent & 0xFF))
             elif cmd.tag == "SetNotify":
                 commands.append(0x8200 + (int(cmd.attrib[XML_ATTR_VALUE]) & 0xFF))
+            elif cmd.tag == "Keyframe":
+                # treat keyframes as labels
+                labels[cmd.attrib[XML_ATTR_NAME]] = len(commands)
+                # check for non-default transformations
+                duration = int(cmd.attrib[XML_ATTR_DURATION])
+                if duration > 0:
+                    if "pos" in cmd.attrib:
+                        dx, dy, dz = map(int, cmd.attrib["pos"].split(","))
+                        if dx != 0 or dy != 0 or dz != 0:
+                            commands.append(0x3000)
+                            commands.append(dx & 0xFFFF)
+                            commands.append(dy & 0xFFFF)
+                            commands.append(dz & 0xFFFF)
+                    if "rot" in cmd.attrib:
+                        rx, ry, rz = map(int, cmd.attrib["rot"].split(","))
+                        if rx != 0 or ry != 0 or rz != 0:
+                            commands.append(0x4000 + (rx & 0xFFF))
+                            commands.append(ry & 0xFFFF)
+                            commands.append(rz & 0xFFFF)
+                    if "scale" in cmd.attrib:
+                        sx, sy, sz = map(int, cmd.attrib["scale"].split(","))
+                        if sx != 100 or sy != 100 or sz != 100:
+                            # check for uniform scale before generating a command for each coord
+                            if sx == sy == sz:
+                                commands.append(0x5000)
+                                commands.append(sx)
+                            else:
+                                if sx != 100:
+                                    commands.append(0x5001)
+                                    commands.append(sx)
+                                if sy != 100:
+                                    commands.append(0x5002)
+                                    commands.append(sy)
+                                if sz != 100:
+                                    commands.append(0x5003)
+                                    commands.append(sz)
+                # check for img
+                img_name = cmd.attrib.get("img")
+                if img_name is not None:
+                    if img_name == "":
+                        raster = -1
+                    else:
+                        raster = image_map.get(img_name)
+                        if raster is None:
+                            raise Exception("Undefined raster for Keyframe: " + img_name)
+                    # why is this here? necessary?
+                    if raster == -1:
+                        raster = 0xFFF
+                    commands.append(0x1000 + (raster & 0xFFF))
+                # check for pal
+                pal_name = cmd.attrib.get("pal")
+                if pal_name is not None:
+                    if pal_name == "":
+                        palette = -1
+                    else:
+                        palette = palette_map.get(pal_name)
+                        if palette is None:
+                            raise Exception("Undefined palette for Keyframe: " + pal_name)
+                    # why is this here? necessary?
+                    if palette == -1:
+                        palette = 0xFFF
+                    commands.append(0x6000 + (palette & 0xFFF))
+                # append wait command
+                commands.append(duration & 0xFFF)
             elif cmd.tag == "Command":  # old Star Rod compatibility
                 commands.append(int(cmd.attrib["val"], 16))
             else:

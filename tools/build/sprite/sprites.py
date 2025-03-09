@@ -141,20 +141,31 @@ def player_raster_from_xml(xml: ET.Element, back: bool = False) -> PlayerRaster:
     )
 
 
-def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[bytes]:
+def player_xml_to_bytes(sprite_xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[bytes]:
     out_bytes = b""
     back_out_bytes = b""
 
-    max_components = int(xml.attrib[MAX_COMPONENTS_XML])
-    num_variations = int(xml.attrib[PALETTE_GROUPS_XML])
-    has_back = xml.attrib[HAS_BACK_XML] == "true"
+    max_components = int(sprite_xml.attrib[MAX_COMPONENTS_XML])
+    num_variations = int(sprite_xml.attrib[PALETTE_GROUPS_XML])
+    has_back = sprite_xml.attrib[HAS_BACK_XML] == "true"
+
+    anim_elems: List[ET.Element] = sprite_xml.findall("./AnimationList/Animation")
+    img_elems: List[ET.Element] = sprite_xml.findall("./RasterList/Raster")
+    pal_elems: List[ET.Element] = sprite_xml.findall("./PaletteList/Palette")
+
+    palette_map = {palette_xml.attrib["name"]: idx for idx, palette_xml in enumerate(pal_elems)}
+
+    image_map = {image_xml.attrib["name"]: idx for idx, image_xml in enumerate(img_elems)}
 
     # Animations
     animations: List[List[AnimComponent]] = []
-    for anim_xml in xml[2]:
+    for anim_xml in anim_elems:
+        # get a mapping of component names -> list indices
+        comp_map = {comp_xml.attrib["name"]: idx for idx, comp_xml in enumerate(anim_xml)}
+        # read each component
         comps: List[AnimComponent] = []
         for comp_xml in anim_xml:
-            comp: AnimComponent = AnimComponent.from_xml(comp_xml)
+            comp: AnimComponent = AnimComponent.from_xml(comp_xml, comp_map, image_map, palette_map)
             comps.append(comp)
         animations.append(comps)
 
@@ -216,7 +227,7 @@ def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[
     palette_list_start_back = len(back_out_bytes) + 0x10
     palette_bytes: bytes = b""
     palette_bytes_back: bytes = b""
-    for palette_xml in xml[0]:
+    for palette_xml in pal_elems:
         source = palette_xml.attrib["src"]
         front_only = bool(palette_xml.get("front_only", False))
         if source not in PALETTE_CACHE:
@@ -252,7 +263,7 @@ def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[
     raster_bytes: bytes = b""
     raster_bytes_back: bytes = b""
     raster_offset = 0
-    for raster_xml in xml[1]:
+    for raster_xml in img_elems:
         r = player_raster_from_xml(raster_xml, back=False)
         raster_bytes += struct.pack(">IBBBB", raster_offset, r.width, r.height, r.palette_idx, 0xFF)
 
@@ -260,7 +271,7 @@ def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[
 
     if has_back:
         raster_offset = 0
-        for raster_xml in xml[1]:
+        for raster_xml in img_elems:
             is_back = False
 
             r = player_raster_from_xml(raster_xml, back=is_back)
@@ -290,7 +301,7 @@ def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[
     # Raster file offsets
     raster_offsets_bytes = b""
     raster_offsets_bytes_back = b""
-    for i in range(len(xml[1])):
+    for i in range(len(img_elems)):
         raster_offsets_bytes += int.to_bytes(raster_list_start + i * 8, 4, "big")
         raster_offsets_bytes_back += int.to_bytes(raster_list_start_back + i * 8, 4, "big")
     raster_offsets_bytes += LIST_END_BYTES
@@ -304,7 +315,7 @@ def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[
     palette_list_offset_back = len(back_out_bytes) + 0x10
     palette_offsets_bytes = b""
     palette_offsets_bytes_back = b""
-    for i, palette_xml in enumerate(xml[0]):
+    for i, palette_xml in enumerate(pal_elems):
         palette_offsets_bytes += int.to_bytes(palette_list_start + i * 0x20, 4, "big")
         front_only = bool(palette_xml.attrib.get("front_only", False))
         if not front_only:
@@ -358,17 +369,21 @@ def write_player_sprite_header(
         sprite_xml = PLAYER_XML_CACHE[sprite_name]
         has_back = sprite_xml.attrib[HAS_BACK_XML] == "true"
 
+        anim_elems: List[ET.Element] = sprite_xml.findall("./AnimationList/Animation")
+        img_elems: List[ET.Element] = sprite_xml.findall("./RasterList/Raster")
+        pal_elems: List[ET.Element] = sprite_xml.findall("./PaletteList/Palette")
+
         player_sprites[f"SPR_{sprite_name}"] = sprite_id
         player_rasters[sprite_name] = {}
         player_palettes[sprite_name] = {}
         player_anims[sprite_name] = {}
 
-        for palette_xml in sprite_xml[0]:
+        for palette_xml in pal_elems:
             palette_id = int(palette_xml.attrib["id"], 0x10)
             palette_name = palette_xml.attrib["name"]
             player_palettes[sprite_name][f"SPR_PAL_{sprite_name}_{palette_name}"] = palette_id
 
-            for anim_id, anim_xml in enumerate(sprite_xml[2]):
+            for anim_id, anim_xml in enumerate(anim_elems):
                 anim_name = anim_xml.attrib["name"]
                 if palette_id > 0:
                     anim_name = f"{palette_name}_{anim_name}"
@@ -377,7 +392,7 @@ def write_player_sprite_header(
                 )
 
         max_size = 0
-        for raster_xml in sprite_xml[1]:
+        for raster_xml in img_elems:
             raster_id = int(raster_xml.attrib["id"], 0x10)
             raster_name = raster_xml.attrib["name"]
             player_rasters[sprite_name][f"SPR_IMG_{sprite_name}_{raster_name}"] = raster_id
@@ -393,7 +408,7 @@ def write_player_sprite_header(
             player_sprites[f"SPR_{sprite_name}_Back"] = sprite_id
 
             max_size = 0
-            for raster_xml in sprite_xml[1]:
+            for raster_xml in img_elems:
                 if "back" in raster_xml.attrib:
                     raster = RASTER_CACHE[raster_xml.attrib["back"][:-4]]
                     if max_size < raster.size:
@@ -513,8 +528,10 @@ def build_player_rasters(sprite_order: List[str], raster_order: List[str]) -> by
         sheet_rtes: List[RasterTableEntry] = []
         sheet_rtes_back: List[RasterTableEntry] = []
 
+        img_elems: List[ET.Element] = sprite_xml.findall("./RasterList/Raster")
+
         has_back = False
-        for raster_xml in sprite_xml[1]:
+        for raster_xml in img_elems:
             if "back" in raster_xml.attrib:
                 has_back = True
 

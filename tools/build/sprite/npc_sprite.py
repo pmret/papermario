@@ -3,7 +3,7 @@
 from math import floor
 from sys import argv, path
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Dict, Tuple
 import xml.etree.ElementTree as ET
 import png  # type: ignore
 
@@ -78,7 +78,9 @@ def from_dir(
 
     palettes = []
     palette_names: List[str] = []
-    for Palette in SpriteSheet.findall("./PaletteList/Palette"):
+    palette_map: Dict[str, int] = {}
+
+    for idx, Palette in enumerate(SpriteSheet.findall("./PaletteList/Palette")):
         if asset_stack is not None and load_images:
             img_name = Palette.attrib["src"]
             img_path = resolve_image_path(sprite_dir, "palettes", img_name, asset_stack)
@@ -91,11 +93,15 @@ def from_dir(
 
             palettes.append(palette)
 
-        palette_names.append(Palette.get("name", Palette.attrib["src"].split(".png")[0]))
+        pal_name = Palette.get("name", Palette.attrib["src"].split(".png")[0])
+        palette_names.append(pal_name)
+        palette_map[pal_name] = idx
 
     images = []
     image_names: List[str] = []
-    for Raster in SpriteSheet.findall("./RasterList/Raster"):
+    image_map: Dict[str, int] = {}
+
+    for idx, Raster in enumerate(SpriteSheet.findall("./RasterList/Raster")):
         if asset_stack is not None and load_images:
             img_name = Raster.attrib["src"]
             img_path = resolve_image_path(sprite_dir, "rasters", img_name, asset_stack)
@@ -109,14 +115,19 @@ def from_dir(
 
             images.append(image)
 
-        image_names.append(Raster.attrib["src"].split(".png")[0])
+        img_name = Raster.attrib["src"].split(".png")[0]
+        image_names.append(img_name)
+        image_map[img_name] = idx
 
     animations = []
     animation_names: List[str] = []
     for Animation in SpriteSheet.findall("./AnimationList/Animation"):
+        # get a mapping of component names -> list indices
+        comp_map = {comp_xml.attrib["name"]: idx for idx, comp_xml in enumerate(Animation)}
+        # read each component
         comps: List[AnimComponent] = []
         for comp_xml in Animation:
-            comp: AnimComponent = AnimComponent.from_xml(comp_xml)
+            comp: AnimComponent = AnimComponent.from_xml(comp_xml, comp_map, image_map, palette_map)
             comps.append(comp)
         animation_names.append(Animation.attrib["name"])
         animations.append(comps)
