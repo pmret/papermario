@@ -9,6 +9,19 @@ def process_file(file_path):
     with open(file_path, "r") as file:
         content = file.read()
 
+    # Skip files that already have fixed="true"
+    if 'fixed="true"' in content:
+        print(f"Skipped (already fixed): {file_path}")
+        return
+
+    # Add fixed="true" to the <SpriteSheet> tag
+    content = re.sub(
+        r'(<SpriteSheet[^>]*?)>',
+        lambda m: f'{m.group(1)} fixed="true">',
+        content,
+        count=1
+    )
+
     # Previous version mismatched loop iteration count and jump position, creating spurious labels in the process.
     # Switch them back and use pos attribute to force fixed jump positions; leave the extra labels alone.
     content = re.sub(
