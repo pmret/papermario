@@ -15,12 +15,7 @@ def process_file(file_path):
         return
 
     # Add fixed="true" to the <SpriteSheet> tag
-    content = re.sub(
-        r'(<SpriteSheet[^>]*?)>',
-        lambda m: f'{m.group(1)} fixed="true">',
-        content,
-        count=1
-    )
+    content = re.sub(r"(<SpriteSheet[^>]*?)>", lambda m: f'{m.group(1)} fixed="true">', content, count=1)
 
     # Previous version mismatched loop iteration count and jump position, creating spurious labels in the process.
     # Switch them back and use pos attribute to force fixed jump positions; leave the extra labels alone.
@@ -33,9 +28,7 @@ def process_file(file_path):
     )
 
     # Anim06 in Duplighost requires this
-    content = re.sub(
-        r'<Loop count="(\d+)" dest="Start"/>', lambda m: f'<Loop count="0" pos="{m.group(1)}"/>', content
-    )
+    content = re.sub(r'<Loop count="(\d+)" dest="Start"/>', lambda m: f'<Loop count="0" pos="{m.group(1)}"/>', content)
 
     # SetParent used decimal instead of hex for its indices, conflicting with the policy of SetRaster and SetPalette
     content = re.sub(
