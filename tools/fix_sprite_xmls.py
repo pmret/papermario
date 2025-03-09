@@ -25,6 +25,10 @@ def process_file(file_path):
     # Previous version mismatched loop iteration count and jump position, creating spurious labels in the process.
     # Switch them back and use pos attribute to force fixed jump positions; leave the extra labels alone.
     content = re.sub(
+        r'<Loop count="(\d+)" pos="(\d+)"/>', lambda m: f'<Loop count="{m.group(2)}" pos="{m.group(1)}"/>', content
+    )
+
+    content = re.sub(
         r'<Loop count="(\d+)" dest="Pos_(\d+)"/>', lambda m: f'<Loop count="{m.group(2)}" pos="{m.group(1)}"/>', content
     )
 
