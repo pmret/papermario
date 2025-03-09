@@ -153,24 +153,15 @@ def player_xml_to_bytes(sprite_xml: ET.Element, asset_stack: Tuple[Path, ...]) -
     img_elems: List[ET.Element] = sprite_xml.findall("./RasterList/Raster")
     pal_elems: List[ET.Element] = sprite_xml.findall("./PaletteList/Palette")
 
-    palette_map = {
-        palette_xml.attrib["name"]: idx
-        for idx, palette_xml in enumerate(pal_elems)
-    }
+    palette_map = {palette_xml.attrib["name"]: idx for idx, palette_xml in enumerate(pal_elems)}
 
-    image_map = {
-        image_xml.attrib["name"]: idx
-        for idx, image_xml in enumerate(img_elems)
-    }
+    image_map = {image_xml.attrib["name"]: idx for idx, image_xml in enumerate(img_elems)}
 
     # Animations
     animations: List[List[AnimComponent]] = []
     for anim_xml in anim_elems:
         # get a mapping of component names -> list indices
-        comp_map = {
-            comp_xml.attrib["name"]: idx
-            for idx, comp_xml in enumerate(anim_xml)
-        }
+        comp_map = {comp_xml.attrib["name"]: idx for idx, comp_xml in enumerate(anim_xml)}
         # read each component
         comps: List[AnimComponent] = []
         for comp_xml in anim_xml:

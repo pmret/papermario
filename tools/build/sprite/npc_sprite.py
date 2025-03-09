@@ -78,7 +78,7 @@ def from_dir(
 
     palettes = []
     palette_names: List[str] = []
-    palette_map: Dict[str,int] = {}
+    palette_map: Dict[str, int] = {}
 
     for idx, Palette in enumerate(SpriteSheet.findall("./PaletteList/Palette")):
         if asset_stack is not None and load_images:
@@ -99,7 +99,7 @@ def from_dir(
 
     images = []
     image_names: List[str] = []
-    image_map: Dict[str,int] = {}
+    image_map: Dict[str, int] = {}
 
     for idx, Raster in enumerate(SpriteSheet.findall("./RasterList/Raster")):
         if asset_stack is not None and load_images:
@@ -123,10 +123,7 @@ def from_dir(
     animation_names: List[str] = []
     for Animation in SpriteSheet.findall("./AnimationList/Animation"):
         # get a mapping of component names -> list indices
-        comp_map = {
-            comp_xml.attrib["name"]: idx
-            for idx, comp_xml in enumerate(Animation)
-        }
+        comp_map = {comp_xml.attrib["name"]: idx for idx, comp_xml in enumerate(Animation)}
         # read each component
         comps: List[AnimComponent] = []
         for comp_xml in Animation:

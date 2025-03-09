@@ -344,7 +344,7 @@ class AnimComponent:
         return AnimComponent.parse_commands(self.commands)
 
     @staticmethod
-    def from_xml(xml: ET.Element, comp_map: Dict[str,int], image_map: Dict[str,int], palette_map: Dict[str,int]):
+    def from_xml(xml: ET.Element, comp_map: Dict[str, int], image_map: Dict[str, int], palette_map: Dict[str, int]):
         commands: List[int] = []
         labels = {}
         for cmd in xml:
@@ -361,7 +361,7 @@ class AnimComponent:
                     if img_name != "":
                         raster = image_map.get(img_name)
                         if raster is None:
-                             raise Exception("Undefined raster name for SetRaster: " + img_name)
+                            raise Exception("Undefined raster name for SetRaster: " + img_name)
                 else:
                     raster = int(cmd.attrib[XML_ATTR_INDEX], 0x10)
                 # why is this here? necessary?
@@ -404,7 +404,7 @@ class AnimComponent:
                     if pal_name != "":
                         palette = palette_map.get(pal_name)
                         if palette is None:
-                             raise Exception("Undefined palette name for SetPalette: " + pal_name)
+                            raise Exception("Undefined palette name for SetPalette: " + pal_name)
                 else:
                     palette = int(cmd.attrib[XML_ATTR_INDEX], 0x10)
                 # why is this here? necessary?
@@ -434,7 +434,7 @@ class AnimComponent:
                     if par_name != "":
                         parent = comp_map.get(par_name)
                         if parent is None:
-                             raise Exception("Undefined component name for SetParent: " + par_name)
+                            raise Exception("Undefined component name for SetParent: " + par_name)
                 else:
                     parent = int(cmd.attrib[XML_ATTR_INDEX], 0x10)
                 if parent == -1:
@@ -486,7 +486,7 @@ class AnimComponent:
                     else:
                         raster = image_map.get(img_name)
                         if raster is None:
-                             raise Exception("Undefined raster for Keyframe: " + img_name)
+                            raise Exception("Undefined raster for Keyframe: " + img_name)
                     # why is this here? necessary?
                     if raster == -1:
                         raster = 0xFFF
@@ -499,7 +499,7 @@ class AnimComponent:
                     else:
                         palette = palette_map.get(pal_name)
                         if palette is None:
-                             raise Exception("Undefined palette for Keyframe: " + pal_name)
+                            raise Exception("Undefined palette for Keyframe: " + pal_name)
                     # why is this here? necessary?
                     if palette == -1:
                         palette = 0xFFF
