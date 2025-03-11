@@ -103,11 +103,11 @@ s32 adjust_action_command_difficulty(s32 difficultyLevel) {
         difficultyLevel -= is_ability_active(ABILITY_DODGE_MASTER) * 3;
     }
 
-    if (difficultyLevel < 0) {
-        difficultyLevel = 0;
+    if (difficultyLevel < AC_DIFFICULTY_EASIEST) {
+        difficultyLevel = AC_DIFFICULTY_EASIEST;
     }
-    if (difficultyLevel > 7) {
-        difficultyLevel = 7;
+    if (difficultyLevel > AC_DIFFICULTY_HARDEST) {
+        difficultyLevel = AC_DIFFICULTY_HARDEST;
     }
 
     return difficultyLevel;

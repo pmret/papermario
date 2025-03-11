@@ -489,7 +489,7 @@ EvtScript N(smack) = {
         Wait(10)
         Set(LVar0, LVarB)
         Add(LVar0, -3)
-        Call(action_command_smack_start, 0, LVar0, AC_DIFFICULTY_3, ACV_SMACK_HAND)
+        Call(action_command_smack_start, 0, LVar0, AC_DIFFICULTY_STANDARD, ACV_SMACK_HAND)
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EndThread
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)
@@ -795,7 +795,7 @@ EvtScript N(spook) = {
         Call(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
     EndThread
     Call(N(AverageSpookChance))
-    Call(action_command_spook_start, 0, 87 * DT, AC_DIFFICULTY_3, LVar0)
+    Call(action_command_spook_start, 0, 87 * DT, AC_DIFFICULTY_STANDARD, LVar0)
     Call(GetActionProgress, LVar1)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Conceal)
     Set(LVar1, 0)
@@ -1001,7 +1001,7 @@ EvtScript N(fanSmack) = {
         Wait(10)
         Set(LVar0, LVarB)
         Add(LVar0, -3)
-        Call(action_command_smack_start, 0, LVar0, AC_DIFFICULTY_3, ACV_SMACK_FAN)
+        Call(action_command_smack_start, 0, LVar0, AC_DIFFICULTY_STANDARD, ACV_SMACK_FAN)
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EndThread
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)

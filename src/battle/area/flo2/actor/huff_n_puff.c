@@ -1823,7 +1823,7 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
         Call(SetupMashMeter, 5, 20, 40, 60, 80, 100)
         Wait(10)
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-        Call(action_command_whirlwind_start, 0, 200 * DT, AC_DIFFICULTY_3)
+        Call(action_command_whirlwind_start, 0, 200 * DT, AC_DIFFICULTY_STANDARD)
         Thread
             Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
             Set(LVar3, LVar2)
@@ -2987,7 +2987,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
         Call(SetupMashMeter, 1, 25, 0, 0, 0, 0)
         Wait(10)
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-        Call(action_command_stop_leech_start, 0, AC_LEECH_MAX_TIME, AC_DIFFICULTY_3)
+        Call(action_command_stop_leech_start, 0, AC_LEECH_MAX_TIME, AC_DIFFICULTY_STANDARD)
         Set(LVarB, LVarA)
         Div(LVarB, 2)
         Wait(LVarB)
