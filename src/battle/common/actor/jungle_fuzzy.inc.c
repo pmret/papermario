@@ -446,7 +446,7 @@ EvtScript N(EVS_Attack_Leech) = {
         Call(SetupMashMeter, 1, 23, 0, 0, 0, 0)
         Wait(10)
         Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-        Call(action_command_stop_leech_start, 0, AC_LEECH_MAX_TIME, AC_DIFFICULTY_3)
+        Call(action_command_stop_leech_start, 0, AC_LEECH_MAX_TIME, AC_DIFFICULTY_STANDARD)
         Set(LVarD, 0)
         Loop(5)
             Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
