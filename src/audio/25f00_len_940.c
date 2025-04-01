@@ -50,8 +50,8 @@ void create_audio_system(void) {
     alHeapInit(&nuAuHeap, AuHeapBase, AUDIO_HEAP_SIZE);
     config.num_pvoice = 24;
     config.num_bus = 4;
-    outputRate = osAiSetFrequency(32000);
-    frameSize = (nusched.retraceCount * outputRate + (AUDIO_FRAMES_PER_SECOND - 1)) / AUDIO_FRAMES_PER_SECOND;
+    outputRate = osAiSetFrequency(HARDWARE_OUTPUT_RATE);
+    frameSize = (nusched.retraceCount * outputRate + (VIDEO_FRAMES_PER_SECOND - 1)) / VIDEO_FRAMES_PER_SECOND;
     config.outputRate = outputRate;
     config.unk_0C = 0;
     config.heap = &nuAuHeap;
@@ -190,7 +190,7 @@ void nuAuMgr(void* arg) {
     }
 }
 
-s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 arg3) {
+s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 auUnkDmaCallbackVal) {
     NUDMABuffer* dmaPtr;
     NUDMABuffer* freeBuffer;
     OSIoMesg* mesg;
@@ -199,7 +199,7 @@ s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 arg3) {
     s32 addrEnd, buffEnd;
     NUDMABuffer* lastDmaPtr;
 
-    if (arg3 == 0) {
+    if (auUnkDmaCallbackVal == 0) {
         return osVirtualToPhysical((void*)addr);
     }
 

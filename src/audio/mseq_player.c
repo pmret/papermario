@@ -5,10 +5,10 @@ extern u8 BlankMseqData[];
 #define TRACK_ID_DRUM 9
 
 enum AmbientMode {
-    AMB_MODE_NORMAL         = 0,
+    AMB_MODE_PLAYING        = 0,
     AMB_MODE_RESUMING       = 1,
     AMB_MODE_STOPPED        = 2,
-    AMB_MODE_PAUSING        = 3
+    AMB_MODE_PAUSING        = 3,
 };
 
 enum AmbientFadeState {
@@ -20,7 +20,11 @@ enum AmbientFadeState {
 enum AmbientPlayState {
     AMB_PLAYER_PLAYING      = 0,
     AMB_PLAYER_STOPPED      = 1,
-    AMB_PLAYER_STOPPING     = 2
+    AMB_PLAYER_STOPPING     = 2,
+};
+
+enum AmbientTrackFlags {
+    TRACK_FLAG_RESUMABLE    = 1,
 };
 
 enum MSEQCommand {
@@ -36,7 +40,7 @@ enum MSEQCommand {
     MSEQ_CMD_SUB_69_SET_RESUMABLE   = 0x69,
 };
 
-void au_amb_manager_init(AmbienceManager* manager, s8 priority, s8 busId, AuGlobals* globals) {
+void au_amb_manager_init(AmbienceManager* manager, s8 priority, s8 busID, AuGlobals* globals) {
     AmbiencePlayer* player;
     s32 i;
 
@@ -46,7 +50,7 @@ void au_amb_manager_init(AmbienceManager* manager, s8 priority, s8 busId, AuGlob
         player = &manager->players[i];
         player->id.playerIndex = i;
         player->delay = 1;
-        player->fadeVolume = 0x7F000000;
+        player->fadeVolume = AU_MAX_VOLUME_8 << 0x18;
     }
 
     manager->globals = globals;
@@ -54,7 +58,7 @@ void au_amb_manager_init(AmbienceManager* manager, s8 priority, s8 busId, AuGlob
     manager->nextUpdateCounter = 2;
     manager->nextUpdateInterval = 2;
     manager->priority = priority;
-    manager->busId = busId;
+    manager->busID = busID;
 }
 
 AuResult au_amb_check_player_index(u32 index) {
@@ -71,12 +75,12 @@ void au_amb_load_tracks_fade(s32 arg0, s32 arg1) {
 
 void au_amb_set_disabled(s32 index, s32 disable) {
     AmbienceManager* manager = gAuAmbienceManager;
-    AmbiencePlayer* ambPlayer = &manager->players[index];
+    AmbiencePlayer* player = &manager->players[index];
 
     if (!disable) {
-        ambPlayer->playState = AMB_PLAYER_PLAYING;
+        player->playState = AMB_PLAYER_PLAYING;
     } else {
-        ambPlayer->playState = AMB_PLAYER_STOPPING;
+        player->playState = AMB_PLAYER_STOPPING;
     }
 }
 
@@ -91,15 +95,15 @@ AuResult au_amb_start(s32 index, s32 time) {
             if (time != 0) {
                 player->fadeSettingsTime = time;
                 player->fadeSettingsInitial = 0;
-                player->fadeSettingsGoal = 127;
+                player->fadeSettingsGoal = AU_MAX_VOLUME_8;
                 player->fadeSettingsType = AMB_FADE_IN;
                 au_amb_fade_setup(player);
             }
         } else {
-            status = AU_AMBIENCE_ERROR_1;
+            status = AU_AMBIENCE_ERROR_PLAYER_BUSY;
         }
     } else {
-        status = AU_AMBIENCE_ERROR_2;
+        status = AU_AMBIENCE_ERROR_MSEQ_NOT_FOUND;
     }
     return status;
 }
@@ -114,7 +118,13 @@ void au_amb_fade_setup(AmbiencePlayer* player) {
     if (time >= SND_MIN_DURATION && time <= SND_MAX_DURATION) {
         player->fadeVolume = player->fadeSettingsInitial << 0x18;
         player->fadeGoal = player->fadeSettingsGoal;
-        player->fadeTime = (u32)(time * 10) / 115; // TODO figure out why is the ratio like this
+
+        // converts a fade time in milliseconds to the number of player update ticks needed to complete the fade
+        // the ambience manager updates every other audio frame, so given outputRate = 32000 and frameSize = 184,
+        // update ticks needed = (32000 / 184) / 2, and then we divide by 1000 (since fade time has units of ms).
+        // this reduces to 16/184, which is exactly 1.6 times 10/115
+        // why this odd reduction was chosen unstead of 16/184 is unknown
+        player->fadeTime = (u32)(time * 10) / 115;
         player->fadeStep = ((player->fadeSettingsGoal - player->fadeSettingsInitial) << 0x18) / ((s16)player->fadeTime & 0xFFFF);
     }
 
@@ -149,7 +159,7 @@ void au_amb_resume(s32 index, s32 time) {
             player->fadeSettingsTime = SND_MIN_DURATION;
         }
         player->fadeSettingsInitial = 0;
-        player->fadeSettingsGoal = SND_MAX_VOLUME_8;
+        player->fadeSettingsGoal = AU_MAX_VOLUME_8;
         player->fadeSettingsType = AMB_FADE_IN;
     }
 }
@@ -158,10 +168,10 @@ void au_amb_stop_quick(s32 index) {
     AmbiencePlayer* player = &gAuAmbienceManager->players[index];
 
     if (player->mseqReadStart != NULL && player->mseqReadPos != NULL) {
-        if (player->mode != AMB_MODE_NORMAL) {
+        if (player->mode != AMB_MODE_PLAYING) {
             player->mseqReadPos = NULL;
             player->mseqName = 0;
-            player->mode = AMB_MODE_NORMAL;
+            player->mode = AMB_MODE_PLAYING;
             return;
         }
         player->mseqReadPos = BlankMseqData;
@@ -189,8 +199,8 @@ void au_amb_set_volume(s32 index, s32 time, s32 volume) {
     if ((player->mseqReadStart != 0) && (player->mseqReadPos != 0)) {
         if (volume <= 0) {
             volume = 1;
-        } else if (volume > SND_MAX_VOLUME_8) {
-            volume = SND_MAX_VOLUME_8;
+        } else if (volume > AU_MAX_VOLUME_8) {
+            volume = AU_MAX_VOLUME_8;
         }
         if (time != 0) {
             player->fadeSettingsTime = time;
@@ -203,14 +213,14 @@ void au_amb_set_volume(s32 index, s32 time, s32 volume) {
     }
 }
 
-AuResult au_amb_is_stopped(s32 index) {
+AuResult au_amb_check_stopped(s32 index) {
     AmbiencePlayer* player = &gAuAmbienceManager->players[index];
     AuResult status = AU_RESULT_OK;
 
     if (player->mseqReadStart != NULL && player->mseqReadPos != NULL) {
-        status = AU_AMBIENCE_ERROR_1;
-        if (player->mode != AMB_MODE_NORMAL) {
-            status = AU_AMBIENCE_ERROR_2;
+        status = AU_AMBIENCE_STOP_ERROR_1;
+        if (player->mode != AMB_MODE_PLAYING) {
+            status = AU_AMBIENCE_STOP_ERROR_2;
         }
     }
     return status;
@@ -234,8 +244,8 @@ void au_amb_play_sequence(AmbienceManager* manager, MSEQHeader* mseqFile, s32 in
     player->mseqReadStart = readPos;
 
     player->delay = 1;
-    player->fadeVolume = 0x7F000000;
-    player->fadeGoal = 0x7F;
+    player->fadeVolume = AU_MAX_VOLUME_8 << 0x18;
+    player->fadeGoal = AU_MAX_VOLUME_8;
 
     player->mseqName = player->mseqFile->name;
     player->firstVoiceIdx = player->mseqFile->firstVoiceIdx;
@@ -246,19 +256,23 @@ void au_amb_play_sequence(AmbienceManager* manager, MSEQHeader* mseqFile, s32 in
     for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
         track = &player->tracks[i];
         track->instrument = manager->globals->defaultInstrument;
-        track->volumeLerp.current = 0x7FFFFFFF;
+        track->volumeLerp.current = AU_MAX_VOLUME_32;
         track->pan = 64;
     }
     player->resetRequired = TRUE;
 }
 
-void au_amb_manager_update(AmbienceManager* manager) {
+void au_amb_manager_audio_frame_update(AmbienceManager* manager) {
     u32 i;
     s32 j;
 
     for (i = 0; i < ARRAY_COUNT(manager->voiceStates); i++) {
         AmbienceVoiceState* voiceState = &manager->voiceStates[i];
 
+        // potential @bug, any voice which is not properly released via MSEQ_CMD_80_STOP_SOUND will eventaully
+        // end and set its priority to AU_PRIORITY_FREE, where another client can steal it and begin using it
+        // without it being considered 'free' by this AmbienceManager. this can be fixed by removing the check
+        // for released == TRUE from the conditional
         if (voiceState->info.released == TRUE && manager->globals->voices[i].priority != manager->priority) {
             voiceState->info.all = 0;
         }
@@ -274,20 +288,20 @@ void au_amb_manager_update(AmbienceManager* manager) {
             }
 
             mode = player->mode;
-            if (mode != AMB_MODE_NORMAL) {
+            if (mode != AMB_MODE_PLAYING) {
                 if (mode == AMB_MODE_PAUSING) {
                     player->mode = AMB_MODE_STOPPED;
                     au_amb_save_voices(manager, player);
                     au_amb_player_stop(manager, player);
                 } else if (player->mode == AMB_MODE_RESUMING) {
-                    player->mode = AMB_MODE_NORMAL;
+                    player->mode = AMB_MODE_PLAYING;
                     if (player->fadeSettingsTime != 0) {
                         au_amb_fade_setup(player);
                     }
                     au_amb_restore_voices(manager, player);
                 }
             } else {
-                // case AMB_MODE_NORMAL
+                // case AMB_MODE_PLAYING
                 if (player->fadeSettingsTime != 0) {
                     au_amb_fade_setup(player);
                 }
@@ -339,11 +353,11 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
     AuVoice* voice;
     BGMDrumInfo* drum;
     u32 trackIdx;
-    s32 temp;
+    s32 voiceSelector;
     s32 i;
     u16 bankPatch;
     u32 count;
-    s32 loopId;
+    s32 loopID;
     u8 op, arg1, arg2;
     AmbienceTrack* track;
 
@@ -387,11 +401,11 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
                 track->tuneLerp.current = track->tuneLerp.goal << 0x10;
             }
 
-            temp = player->id.all + (trackIdx << 0x10);
+            voiceSelector = player->id.all + (trackIdx << 0x10);
             for (i = player->firstVoiceIdx; i < player->lastVoiceIdx; i++) {
                 voiceState = &manager->voiceStates[i - player->firstVoiceIdx];
                 // update all voices belonging to current track
-                if ((voiceState->info.all & 0xFFFF0000) == temp) {
+                if ((voiceState->info.all & 0xFFFF0000) == voiceSelector) {
                     voice = &globals->voices[i];
                     if (voice->priority == manager->priority && trackIdx != TRACK_ID_DRUM) {
                         voice->pitchRatio = au_compute_pitch_ratio(voiceState->pitch + (track->tuneLerp.current >> 0x10)) * track->instrument->pitchRatio;
@@ -414,15 +428,15 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
                 track->volumeLerp.current = track->volumeLerp.goal << 0x10;
             }
 
-            temp = player->id.all + (trackIdx << 0x10);
+            voiceSelector = player->id.all + (trackIdx << 0x10);
             for (i = player->firstVoiceIdx; i < player->lastVoiceIdx; i++) {
                 voiceState = &manager->voiceStates[i - player->firstVoiceIdx];
                 // update all voices belonging to current track
-                if ((voiceState->info.all & 0xFFFF0000) == temp) {
+                if ((voiceState->info.all & 0xFFFF0000) == voiceSelector) {
                     voice = &globals->voices[i];
                     if (voice->priority == manager->priority) {
                         track = &player->tracks[voiceState->info.trackIndex];
-                        voice->clientVolume = ((player->fadeVolume >> 0x18) * (track->volumeLerp.current >> 0x10) * voiceState->volume) >> 0xE;
+                        voice->clientVolume = VOL_MULT_3(player->fadeVolume >> 0x18, track->volumeLerp.current >> 0x10, voiceState->volume);
                         voice->envelopeFlags |= AU_VOICE_ENV_FLAG_VOL_CHANGED;
                     }
                 }
@@ -464,10 +478,10 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
                 case MSEQ_CMD_80_STOP_SOUND:
                     // arg1: sound index
                     if (player->playState == AMB_PLAYER_PLAYING) {
-                        temp = player->id.all + (trackIdx << 0x10) + (arg1 << 8);
+                        voiceSelector = player->id.all + (trackIdx << 0x10) + (arg1 << 8);
                         for (i = player->firstVoiceIdx; i < player->lastVoiceIdx; i++) {
-                            if (manager->voiceStates[i - player->firstVoiceIdx].info.all == temp) {
-                                manager->voiceStates[i - player->firstVoiceIdx].info.released = 1;
+                            if (manager->voiceStates[i - player->firstVoiceIdx].info.all == voiceSelector) {
+                                manager->voiceStates[i - player->firstVoiceIdx].info.released = TRUE;
                                 voice = &globals->voices[i];
                                 if (voice->priority == manager->priority) {
                                     voice->envelopeFlags |= AU_VOICE_ENV_FLAG_KEY_RELEASED;
@@ -489,7 +503,7 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
                             }
                         }
                         if (i >= player->lastVoiceIdx) {
-                            // use another ambience voice
+                            // try stealing a voice from the current player (or one with the same priority)
                             for (i = player->firstVoiceIdx; i < player->lastVoiceIdx; i++) {
                                 voice = &globals->voices[i];
                                 if (voice->priority == manager->priority) {
@@ -499,7 +513,7 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
                             }
                         }
                         if (i >= player->lastVoiceIdx) {
-                            // try stealing voice with lower priority
+                            // try stealing a voice from a different player with a lower priority
                             for (i = player->firstVoiceIdx; i < player->lastVoiceIdx; i++) {
                                 voice = &globals->voices[i];
                                 if (voice->priority < manager->priority) {
@@ -514,13 +528,13 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
                             voiceState = &manager->voiceStates[i - player->firstVoiceIdx];
                             // set playerIndex, trackIndex and tune
                             voiceState->info.all = player->id.all + (trackIdx << 0x10) + (arg1 << 8);
-                            if (track->flags & 1) {
+                            if (track->flags & TRACK_FLAG_RESUMABLE) {
                                 voiceState->isResumable = TRUE;
                             } else {
                                 voiceState->isResumable = FALSE;
                             }
                             if (trackIdx != TRACK_ID_DRUM) {
-                                if (track->flags & 1) {
+                                if (track->flags & TRACK_FLAG_RESUMABLE) {
                                     voiceState->isResumable = TRUE;
                                 } else {
                                     voiceState->isResumable = FALSE;
@@ -528,12 +542,12 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
 
                                 voiceState->pitch = (arg1 & 0x7F) * 100 - track->instrument->keyBase;
                                 voiceState->volume = arg2 & 0x7F;
-                                voice->clientVolume = ((player->fadeVolume >> 0x18) * (track->volumeLerp.current >> 0x10) * voiceState->volume) >> 0xE;
+                                voice->clientVolume = VOL_MULT_3(player->fadeVolume >> 0x18, track->volumeLerp.current >> 0x10, voiceState->volume);
                                 voice->pitchRatio = au_compute_pitch_ratio(voiceState->pitch + (track->tuneLerp.current >> 0x10)) * track->instrument->pitchRatio;
                                 voice->pan = track->pan;
                                 voice->reverb = track->reverb;
                                 voice->instrument = track->instrument;
-                                voice->busId = manager->busId;
+                                voice->busID = manager->busID;
                                 voice->envelope.cmdListPress = track->envelope.cmdListPress;
                                 voice->envelope.cmdListRelease = track->envelope.cmdListRelease;
                             } else {
@@ -542,12 +556,12 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
                                 bankPatch = drum->bankPatch;
                                 voice->instrument = au_get_instrument(manager->globals, bankPatch >> 8, bankPatch & 0xFF, &voice->envelope);
                                 voiceState->pitch = drum->keyBase - voice->instrument->keyBase;
-                                voiceState->volume = ((arg2 & 0x7F) * drum->volume) >> 7;
-                                voice->clientVolume = ((player->fadeVolume >> 0x18) * (track->volumeLerp.current >> 0x10) * voiceState->volume) >> 0xE;
+                                voiceState->volume = VOL_MULT_2(arg2 & 0x7F, drum->volume);
+                                voice->clientVolume = VOL_MULT_3(player->fadeVolume >> 0x18, track->volumeLerp.current >> 0x10, voiceState->volume);
                                 voice->pitchRatio = au_compute_pitch_ratio(voiceState->pitch) * voice->instrument->pitchRatio;
                                 voice->pan = drum->pan;
                                 voice->reverb = drum->reverb;
-                                voice->busId = manager->busId;
+                                voice->busID = manager->busID;
                             }
                             voice->syncFlags = AU_VOICE_SYNC_FLAG_ALL;
                             voice->priority = manager->priority;
@@ -560,10 +574,10 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
                     // lower 7 bits: value
                     if (arg1 & 0x80) {
                         track->pan = arg1 & 0x7F;
-                        temp = player->id.all + (trackIdx << 0x10);
+                        voiceSelector = player->id.all + (trackIdx << 0x10);
                         for (i = player->firstVoiceIdx; i < player->lastVoiceIdx; i++) {
                             voiceState = &manager->voiceStates[i - player->firstVoiceIdx];
-                            if ((voiceState->info.all & 0xFFFF0000) == temp) {
+                            if ((voiceState->info.all & 0xFFFF0000) == voiceSelector) {
                                 voice = &globals->voices[i];
                                 if (voice->priority == manager->priority && trackIdx != TRACK_ID_DRUM) {
                                     voice->pan = track->pan;
@@ -576,13 +590,13 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
                         if (track->volumeLerp.current != 0) {
                             track->volumeLerp.current |= 0xFFFFFF;
                         }
-                        temp = player->id.all + (trackIdx << 0x10);
+                        voiceSelector = player->id.all + (trackIdx << 0x10);
                         for (i = player->firstVoiceIdx; i < player->lastVoiceIdx; i++) {
                             voiceState = &manager->voiceStates[i - player->firstVoiceIdx];
-                            if ((voiceState->info.all & 0xFFFF0000) == temp) {
+                            if ((voiceState->info.all & 0xFFFF0000) == voiceSelector) {
                                 voice = &globals->voices[i];
                                 if (voice->priority == manager->priority) {
-                                    voice->clientVolume = ((player->fadeVolume >> 0x18) * (track->volumeLerp.current >> 0x10) * voiceState->volume) >> 0xE;
+                                    voice->clientVolume = VOL_MULT_3(player->fadeVolume >> 0x18, track->volumeLerp.current >> 0x10, voiceState->volume);
                                     if (!isVolumeChanged[i - player->firstVoiceIdx]) {
                                         voice->envelopeFlags |= AU_VOICE_ENV_FLAG_VOL_CHANGED;
                                         isVolumeChanged[i - player->firstVoiceIdx] = TRUE;
@@ -604,24 +618,24 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
                         case MSEQ_CMD_SUB_67_END_LOOP:
                             // arg2 lower bit: loop id
                             // (arg2 & 0x7C) >> 2: loop count
-                            loopId = arg2 & 1;
+                            loopID = arg2 & 1;
                             count = (arg2 & 0x7C) >> 2;
                             if (count != 0) {
-                                if (player->loopCount[loopId] != 0) {
-                                    player->loopCount[loopId]--;
+                                if (player->loopCount[loopID] != 0) {
+                                    player->loopCount[loopID]--;
                                     // if it's the last iteration then don't jump to the loop start
-                                    if (player->loopCount[loopId] != 0) {
-                                        player->mseqReadPos = player->loopStartPos[loopId];
+                                    if (player->loopCount[loopID] != 0) {
+                                        player->mseqReadPos = player->loopStartPos[loopID];
                                     }
                                 } else {
                                     // first iteration, set loop counter
-                                    player->mseqReadPos = player->loopStartPos[loopId];
-                                    player->loopCount[loopId] = count;
+                                    player->mseqReadPos = player->loopStartPos[loopID];
+                                    player->loopCount[loopID] = count;
                                 }
                             } else {
                                 // infinite loop
-                                player->mseqReadPos = player->loopStartPos[loopId];
-                                player->loopCount[loopId] = 0;
+                                player->mseqReadPos = player->loopStartPos[loopID];
+                                player->loopCount[loopID] = 0;
                             }
                             break;
                         case MSEQ_CMD_SUB_68_SET_REVERB:
@@ -629,7 +643,7 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
                             break;
                         case MSEQ_CMD_SUB_69_SET_RESUMABLE:
                             if (arg2 == 1) {
-                                track->flags |= 1;
+                                track->flags |= TRACK_FLAG_RESUMABLE;
                             }
                             break;
                     }
@@ -646,10 +660,10 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
                     // arg1: coarse tune
                     // arg2: fine tune
                     track->tuneLerp.current = (arg1 << 0x18) + (au_amb_read_next(player) << 0x10);
-                    temp = player->id.all + (trackIdx << 0x10);
+                    voiceSelector = player->id.all + (trackIdx << 0x10);
                     for (i = player->firstVoiceIdx; i < player->lastVoiceIdx; i++) {
                         voiceState = &manager->voiceStates[i - player->firstVoiceIdx];
-                        if ((voiceState->info.all & 0xFFFF0000) == temp) {
+                        if ((voiceState->info.all & 0xFFFF0000) == voiceSelector) {
                             voice = &globals->voices[i];
                             if (voice->priority == manager->priority && trackIdx != TRACK_ID_DRUM) {
                                 voice->pitchRatio = au_compute_pitch_ratio(voiceState->pitch + (track->tuneLerp.current >> 0x10)) * track->instrument->pitchRatio;
@@ -672,7 +686,7 @@ void au_amb_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
                 voice = &globals->voices[i];
                 if (voice->priority == manager->priority && !isVolumeChanged[i - player->firstVoiceIdx]) {
                     track = &player->tracks[voiceState->info.trackIndex];
-                    voice->clientVolume = ((player->fadeVolume >> 0x18) * (track->volumeLerp.current >> 0x10) * voiceState->volume) >> 0xE;
+                    voice->clientVolume = VOL_MULT_3(player->fadeVolume >> 0x18, track->volumeLerp.current >> 0x10, voiceState->volume);
                     voice->envelopeFlags |= AU_VOICE_ENV_FLAG_VOL_CHANGED;
                 }
             }
@@ -702,13 +716,13 @@ void au_amb_player_stop(AmbienceManager* manager, AmbiencePlayer* player) {
     }
 }
 
-void au_amb_save_voices(AmbienceManager* arg0, AmbiencePlayer* player) {
+void au_amb_save_voices(AmbienceManager* manager, AmbiencePlayer* player) {
     AmbienceSavedVoice* savedVoice = player->savedVoices;
     u32 numSaved = 0;
     s32 i;
 
     for (i = player->firstVoiceIdx; i < player->lastVoiceIdx; i++) {
-        AmbienceVoiceState* voiceState = &arg0->voiceStates[i - player->firstVoiceIdx];
+        AmbienceVoiceState* voiceState = &manager->voiceStates[i - player->firstVoiceIdx];
 
         if (!voiceState->isResumable) {
             continue;
@@ -765,12 +779,12 @@ void au_amb_restore_voices(AmbienceManager* manager, AmbiencePlayer* player) {
                     voiceState->info.all = player->id.all + (savedVoice->trackIndex << 0x10) + (savedVoice->tune << 8);
                     voiceState->pitch = (savedVoice->tune & 0x7F) * 100 - track->instrument->keyBase;
                     voiceState->volume = savedVoice->volume & 0x7F;
-                    voice->clientVolume = ((player->fadeVolume >> 0x18) * (track->volumeLerp.current >> 0x10) * voiceState->volume) >> 0xE;
+                    voice->clientVolume = VOL_MULT_3(player->fadeVolume >> 0x18, track->volumeLerp.current >> 0x10, voiceState->volume);
                     voice->pitchRatio = au_compute_pitch_ratio(voiceState->pitch + (track->tuneLerp.current >> 0x10)) * track->instrument->pitchRatio;
                     voice->pan = track->pan;
                     voice->reverb = track->reverb;
                     voice->instrument = track->instrument;
-                    voice->busId = manager->busId;
+                    voice->busID = manager->busID;
                     voice->envelope.cmdListPress = track->envelope.cmdListPress;
                     voice->envelope.cmdListRelease = track->envelope.cmdListRelease;
                     voice->syncFlags = AU_VOICE_SYNC_FLAG_ALL;

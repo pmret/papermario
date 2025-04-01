@@ -53,7 +53,7 @@ EvtScript N(EVS_Main) = {
     Exec(N(EVS_FlyingGull))
     Exec(N(EVS_WhaleMain))
     Call(SetMusicTrack, 0, SONG_RIDING_THE_WHALE, 0, 8)
-    Call(PlayAmbientSounds, AMBIENT_BEACH)
+    Call(PlayAmbientSounds, AMBIENT_SEA)
     Exec(N(EVS_AnimateWaves))
     Call(SetTexPanner, MODEL_o214, TEX_PANNER_1)
     Call(N(SpawnSunEffect))

@@ -1755,9 +1755,11 @@ enum SoundTriggers {
 typedef enum AuResult {
     AU_RESULT_OK                        = 0,
     AU_ERROR_1                          = 1,
-    AU_AMBIENCE_ERROR_1                 = 1,
+    AU_AMBIENCE_STOP_ERROR_1            = 1,
+    AU_AMBIENCE_STOP_ERROR_2            = 2,
+    AU_AMBIENCE_ERROR_PLAYER_BUSY       = 1, // player already has an mseq playing
     AU_ERROR_SONG_NOT_PLAYING           = 2, // player not found for songName
-    AU_AMBIENCE_ERROR_2                 = 2,
+    AU_AMBIENCE_ERROR_MSEQ_NOT_FOUND    = 2, // mseq not found
     AU_ERROR_NULL_SONG_NAME             = 3, // songName is NULL
     AU_AMBIENCE_ERROR_3                 = 3,
     AU_ERROR_INVALID_SONG_DURATION      = 4, // duration out of bounds: (250,10000)
@@ -1795,6 +1797,18 @@ typedef enum MusicTrackVols {
     TRACK_VOLS_KPA_2        = 6,
     TRACK_VOLS_KPA_3        = 7
 } MusicTrackVols;
+
+typedef enum QuietLevel {
+    QUIET_LEVEL_0      = 0,
+    QUIET_LEVEL_1      = 1,
+    QUIET_LEVEL_2      = 2,
+    QUIET_LEVEL_3      = 3,
+    QUIET_LEVEL_4      = 4,
+    QUIET_LEVEL_5      = 5,
+    QUIET_LEVEL_6      = 6,
+    QUIET_LEVEL_7      = 7,
+    QUIET_LEVEL_8      = 8,
+} QuietLevel;
 
 enum Cams {
     CAM_DEFAULT      = 0,
@@ -1881,18 +1895,20 @@ enum ActorPartTargetFlags {
 enum AmbientSounds {
     AMBIENT_SPOOKY          = 0,
     AMBIENT_WIND            = 1,
-    AMBIENT_BEACH           = 2,
+    AMBIENT_SEA             = 2,
     AMBIENT_JUNGLE          = 3,
     AMBIENT_LAVA_1          = 4,
     AMBIENT_LAVA_2          = 5,
-    AMBIENT_SILENCE         = 6,
+    AMBIENT_LAVA_FADE_IN    = 6,
     AMBIENT_LAVA_3          = 7,
     AMBIENT_LAVA_4          = 8,
     AMBIENT_LAVA_5          = 9,
     AMBIENT_LAVA_6          = 10,
     AMBIENT_LAVA_7          = 11,
     AMBIENT_BIRDS           = 12,
-    AMBIENT_SEA             = 13,
+    AMBIENT_UNUSED_13       = 13, // copy of AMBIENT_SEA, available for replacement
+    AMBIENT_UNUSED_14       = 14, // copy of AMBIENT_SEA, available for replacement
+    AMBIENT_UNUSED_15       = 15, // copy of AMBIENT_SEA, available for replacement
     AMBIENT_RADIO           = 16, // radio songs for nok
     // the following 4 IDs are reserved for additional radio songs,
     // and no more are expected to follow after that

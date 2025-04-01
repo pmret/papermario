@@ -607,7 +607,7 @@ void update_messages(void);
 void update_entities(void);
 void func_80138198(void);
 void bgm_update_music_settings(void);
-s32 func_8014AD40(void);
+b32 bgm_is_any_song_playing(void);
 void update_ambient_sounds(void);
 void update_windows(void);
 void player_render_interact_prompts(void);

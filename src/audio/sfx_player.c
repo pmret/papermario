@@ -58,14 +58,14 @@ enum SoundEffectParamFlags {
     SFX_PARAM_FLAG_FIXED_REVERB     = 0x00000020
 };
 
-u16 DummyInstrumentPredictor[32] = {
+s16 DummyInstrumentCodebook[32] = {
     0xF803, 0x0125, 0x07D0, 0xFDBC, 0xF886, 0x0355, 0x06FC, 0xFBAB,
     0xFEDA, 0xF82D, 0x0245, 0x077D, 0xFCA9, 0xF901, 0x0456, 0x065D,
     0xFC33, 0xFBB2, 0xFCEF, 0xFE94, 0xFFD8, 0x0080, 0x00A4, 0x007D,
     0x090E, 0x0673, 0x02FF, 0x0053, 0xFEF2, 0xFEA7, 0xFEF9, 0xFF7B
 };
 
-u8 DummyInstrumentBase[190] = {
+u8 DummyInstrumentWavData[190] = {
     0xB1, 0x01, 0x11, 0x10, 0x00, 0xFF, 0xFE, 0x34, 0xBB, 0x90, 0xE2, 0x1E, 0x00, 0xFB, 0x10, 0xEF,
     0xF2, 0xD1, 0x80, 0xC4, 0xB3, 0xB1, 0xD3, 0xCF, 0xD1, 0xFD, 0xFE, 0x80, 0x1D, 0x2D, 0x3D, 0x3B,
     0x2C, 0x3B, 0xFC, 0x1D, 0x80, 0xDE, 0xF0, 0xD0, 0xD3, 0xD2, 0xB3, 0xD1, 0xF4, 0x80, 0xA2, 0x03,
@@ -274,7 +274,7 @@ s8 BgmDivisors[] = {
 };
 
 // --------------------------------------------
-// the following are only referenced in audio/2BF90
+// the following are only referenced in audio/mseq_player
 
 u8 BlankMseqData[] = {
     0x00, 0x00, 0x00, 0x00,
@@ -286,8 +286,17 @@ u8 BlankMseqData[] = {
 // --------------------------------------------
 // the following are only referenced in audio/2e230_len_2190
 
-s16 D_80078530[] = {
-    0x0000, 0x0200, 0x0800, 0x1200, 0x2000, 0x3200, 0x4800, 0x6200, 0x8000
+/// polynomial increase following 512*(x^2 - 2*x + 1), with x being the index from 1 to 9
+u16 VolumePresetMap[] = {
+    [QUIET_LEVEL_0] 0x0000, //   0.0 %
+    [QUIET_LEVEL_1] 0x0200, //   1.5625 %
+    [QUIET_LEVEL_2] 0x0800, //   6.25 %
+    [QUIET_LEVEL_3] 0x1200, //  14.0625 %
+    [QUIET_LEVEL_4] 0x2000, //  25.0 %
+    [QUIET_LEVEL_5] 0x3200, //  39.0625 %
+    [QUIET_LEVEL_6] 0x4800, //  56.25 %
+    [QUIET_LEVEL_7] 0x6200, //  76.5625 %
+    [QUIET_LEVEL_8] AU_MAX_BUS_VOLUME, // 100.0 %
 };
 
 // TODO: figure out how to make struct properly
@@ -333,10 +342,10 @@ u8 AmbientSoundIDtoMSEQFileIndex[] = {
 };
 
 // --------------------------------------------
-// the following are only referenced in audio/2d9a0_len_890
+// the following are only referenced in audio/voice_envelope
 
 // convert seconds to microseconds and round to number multiple to 5750
-#define SEC(x) ((s32)(x * 1000000) / AU_5750 * AU_5750)
+#define SEC(x) (((s32)(x * 1000000) / AU_FRAME_USEC) * AU_FRAME_USEC)
 
 s32 AuEnvelopeIntervals[] = {
     SEC(60),   SEC(55),   SEC(50),   SEC(45),   SEC(40),   SEC(35),   SEC(30),    SEC(27.5), SEC(25),    SEC(22.5),
@@ -347,9 +356,9 @@ s32 AuEnvelopeIntervals[] = {
     SEC(0.65), SEC(0.6),  SEC(0.55), SEC(0.5),  SEC(0.45), SEC(0.4),  SEC(0.375), SEC(0.35), SEC(0.325), SEC(0.3),
     SEC(0.29), SEC(0.28), SEC(0.27), SEC(0.26), SEC(0.25), SEC(0.24), SEC(0.23),  SEC(0.22), SEC(0.21),  SEC(0.2),
     SEC(0.19), SEC(0.18), SEC(0.17), SEC(0.16), SEC(0.15), SEC(0.14), SEC(0.13),  SEC(0.12), SEC(0.11),  SEC(0.1),
-    16 * AU_5750, 14 * AU_5750, 12 * AU_5750, 11 * AU_5750, 10 * AU_5750,
-     9 * AU_5750,  8 * AU_5750,  7 * AU_5750,  6 * AU_5750, 5 * AU_5750,
-     4 * AU_5750,  3 * AU_5750,  2 * AU_5750,  1 * AU_5750, 0, 0, 0, 0, 0, 0,
+    16 * AU_FRAME_USEC, 14 * AU_FRAME_USEC, 12 * AU_FRAME_USEC, 11 * AU_FRAME_USEC, 10 * AU_FRAME_USEC,
+     9 * AU_FRAME_USEC,  8 * AU_FRAME_USEC,  7 * AU_FRAME_USEC,  6 * AU_FRAME_USEC, 5 * AU_FRAME_USEC,
+     4 * AU_FRAME_USEC,  3 * AU_FRAME_USEC,  2 * AU_FRAME_USEC,  1 * AU_FRAME_USEC, 0, 0, 0, 0, 0, 0,
 };
 
 #undef SEC
@@ -358,7 +367,14 @@ s32 AuEnvelopeIntervals[] = {
 // the following are only referenced in audio/2e230_len_2190
 
 f32 AlTuneScaling[] = {
-    // TUNE_SCALING_ARR_AMPLIFY_FINE
+    // ---------------------------------------------------------
+    // TUNE_SCALING_ARR_AMPLIFY_FINE (offset 0, size 128)
+    // ---------------------------------------------------------
+    // Pitch scaling for fine positive tuning.
+    // Each increment represents a pitch increase of 1 cent (1/100 semitone).
+    //
+    // Formula: 2^((i / 100) / 12) = 2^(i / 1200)
+    // i.e., 1 semitone of amplification at i = 100 (2^(1/12) ~ 1.059463)
     1.00000000f, 1.00057781f, 1.00115597f, 1.00173450f, 1.00231326f, 1.00289237f, 1.00347185f, 1.00405169f,
     1.00463188f, 1.00521231f, 1.00579309f, 1.00637424f, 1.00695574f, 1.00753760f, 1.00811982f, 1.00870228f,
     1.00928509f, 1.00986826f, 1.01045179f, 1.01103568f, 1.01161981f, 1.01220429f, 1.01278913f, 1.01337433f,
@@ -375,12 +391,24 @@ f32 AlTuneScaling[] = {
     1.06191576f, 1.06252933f, 1.06314325f, 1.06375754f, 1.06437218f, 1.06498718f, 1.06560254f, 1.06621826f,
     1.06683433f, 1.06745076f, 1.06806755f, 1.06868470f, 1.06930220f, 1.06992006f, 1.07053828f, 1.07115686f,
     1.07177579f, 1.07239509f, 1.07301474f, 1.07363474f, 1.07425511f, 1.07487583f, 1.07549691f, 1.07611835f,
-    // TUNE_SCALING_ARR_AMPLIFY_COARSE
+    // ---------------------------------------------------------
+    // TUNE_SCALING_ARR_AMPLIFY_COARSE (offset 128, size 32)
+    // ---------------------------------------------------------
+    // Pitch scaling for coarse positive tuning.
+    // Each increment represents a pitch increase of 128 cents (1.28 semitones)
+    //
+    // Formula: 2^((128 * i / 100) / 12)
     1.00000000f, 1.07674015f, 1.15936935f, 1.24833953f, 1.34413731f, 1.44728661f, 1.55835164f, 1.67793977f,
     1.80670512f, 1.94535196f, 2.09463859f, 2.25538135f, 2.42845964f, 2.61482000f, 2.81548166f, 3.03154206f,
     3.26418304f, 3.51467681f, 3.78439355f, 4.07480860f, 4.38750982f, 4.72420788f, 5.08674431f, 5.47710180f,
     5.89741516f, 6.34998369f, 6.83728218f, 7.36197615f, 7.92693520f, 8.53524971f, 9.19024563f, 9.89550686f,
-    // TUNE_SCALING_ARR_ATTENUATE_FINE
+    // ---------------------------------------------------------
+    // TUNE_SCALING_ARR_ATTENUATE_FINE (offset 160, size 128)
+    // ---------------------------------------------------------
+    // Pitch scaling for fine downward tuning.
+    // Each increment represents a pitch decrease of 1 cent (1/100 semitone).
+    //
+    // Formula: 2^(-(i / 100) / 12)
     1.00000000f, 0.99942255f, 0.99884546f, 0.99826866f, 0.99769223f, 0.99711609f, 0.99654031f, 0.99596488f,
     0.99538976f, 0.99481499f, 0.99424052f, 0.99366641f, 0.99309260f, 0.99251914f, 0.99194598f, 0.99137318f,
     0.99080074f, 0.99022859f, 0.98965681f, 0.98908532f, 0.98851418f, 0.98794335f, 0.98737288f, 0.98680270f,
@@ -397,7 +425,13 @@ f32 AlTuneScaling[] = {
     0.94169647f, 0.94115269f, 0.94060922f, 0.94006604f, 0.93952322f, 0.93898070f, 0.93843848f, 0.93789655f,
     0.93735498f, 0.93681371f, 0.93627274f, 0.93573207f, 0.93519175f, 0.93465173f, 0.93411201f, 0.93357259f,
     0.93303353f, 0.93249476f, 0.93195629f, 0.93141812f, 0.93088025f, 0.93034273f, 0.92980552f, 0.92926860f,
-    // TUNE_SCALING_ARR_ATTENUATE_COARSE
+    // ---------------------------------------------------------
+    // TUNE_SCALING_ARR_ATTENUATE_COARSE (offset 288, size 128)
+    // ---------------------------------------------------------
+    // Pitch scaling for coarse downward tuning.
+    // Each increment represents a pitch decrease of 128 cents (1.28 semitones)
+    //
+    // Formula: 2^(-(128 * i / 100) / 12)
     1.00000000f, 0.92873198f, 0.86254311f, 0.80107135f, 0.74398059f, 0.69095856f, 0.64171529f, 0.59598154f,
     0.55350709f, 0.51405972f, 0.47742370f, 0.44339865f, 0.41179851f, 0.38245043f, 0.35519394f, 0.32987997f,
     0.30637008f, 0.28453568f, 0.26425737f, 0.24542427f, 0.22793336f, 0.21168900f, 0.19660234f, 0.18259089f,
@@ -420,16 +454,18 @@ extern s32* AU_FX_CUSTOM_PARAMS[0]; // points to 80078290
 
 void (*CurrentSefCmdHandler)(SoundManager*, SoundPlayer*);
 
-void au_sfx_init(SoundManager* manager, u8 priority, u8 busId, AuGlobals* globals, u8 minVoiceIdx) {
-    u32 i;
+void au_sfx_init(SoundManager* manager, u8 priority, u8 busID, AuGlobals* globals, u8 minVoiceIdx) {
+    // odd choice of parameters, perhaps chosen for a very large LCM (67934687500)?
+    // gives a pseudo-random sfx update pattern
     s32 c = 434782;
+    u32 i;
 
     manager->globals = globals;
     manager->nextUpdateStep = 312500;
     manager->nextUpdateCounter = c;
     manager->nextUpdateInterval = c;
     manager->priority = priority;
-    manager->busId = busId;
+    manager->busID = busID;
 
     if (minVoiceIdx > 16) {
         manager->sfxPlayerSelector = 16;
@@ -437,7 +473,7 @@ void au_sfx_init(SoundManager* manager, u8 priority, u8 busId, AuGlobals* global
         manager->sfxPlayerSelector = minVoiceIdx;
     }
 
-    manager->busVolume = 0x8000;
+    manager->busVolume = AU_MAX_BUS_VOLUME;
     manager->baseVolume = 0x8000;
     manager->playCounter = 0;
     manager->randomValue = 0;
@@ -479,7 +515,7 @@ void au_sfx_init(SoundManager* manager, u8 priority, u8 busId, AuGlobals* global
     au_sfx_set_state(manager, SND_MANAGER_STATE_ENABLED);
     au_sfx_clear_queue(manager);
     au_fade_init(&manager->fadeInfo, 0, 0x7FFF, 0x7FFF);
-    au_fade_set_volume(manager->busId, manager->fadeInfo.curVolume.u16, manager->busVolume);
+    au_fade_set_volume(manager->busID, manager->fadeInfo.curVolume.u16, manager->busVolume);
     manager->lastCustomEffectIdx = 0xFF;
 
     manager->customReverbParams[0] = CUSTOM_SMALL_ROOM_PARAMS;
@@ -566,7 +602,7 @@ void au_sfx_enqueue_event(SoundManager* manager, u32 soundID, s16 volume, s16 pi
     }
 }
 
-void au_sfx_update_main(SoundManager* manager) {
+void au_sfx_begin_video_frame(SoundManager* manager) {
     SoundSFXEntry newEntry;
     SoundSFXEntry* sfxEntry;
     u32 i, j, k;
@@ -1077,7 +1113,7 @@ static void au_sfx_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxE
     }
 }
 
-s16 au_sfx_manager_update(SoundManager* manager) {
+s16 au_sfx_manager_audio_frame_update(SoundManager* manager) {
     SoundPlayer* player;
     AuVoice* voice;
     u32 start;
@@ -1192,7 +1228,7 @@ static void au_sfx_update_basic(SoundManager* manager, SoundPlayer* player, AuVo
                 voice->syncFlags = AU_VOICE_SYNC_FLAG_ALL;
                 voice->priority = manager->priority;
                 voice->clientPriority = voice->priority;
-                voice->busId = manager->busId;
+                voice->busID = manager->busID;
             }
             player->state = SND_PLAYER_STATE_CONTINUE;
             break;
@@ -1308,7 +1344,7 @@ static void au_sfx_update_sequence(SoundManager* manager, SoundPlayer* player, A
                 }
 
                 voice->instrument = player->sfxInstrumentRef;
-                voice->busId = manager->busId;
+                voice->busID = manager->busID;
 
                 voice->priority = manager->priority;
                 voice->syncFlags = AU_VOICE_SYNC_FLAG_ALL;
@@ -1430,7 +1466,7 @@ static u8 au_sfx_get_random_pan(s32 seed, s32 pan, s32 amplitude) {
 static void au_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player) {
     player->sfxVolume = *player->sefDataReadPos++;
     if (player->sfxVolume != 0) {
-        player->sfxVolume = player->sfxVolume << 8 | 0xFF;
+        player->sfxVolume = AU_VOL_8_TO_16(player->sfxVolume);
     }
     player->changed.volume = TRUE;
 }
@@ -1444,7 +1480,7 @@ static void au_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player) {
 
 static void au_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* player) {
     AuFilePos buf = player->sefDataReadPos;
-    s32 bank = buf[0];
+    BankSetIndex bank = buf[0];
     s32 patch = buf[1];
     player->sefDataReadPos += 2;
 
@@ -1471,18 +1507,18 @@ static void au_SEFCmd_04_SetEnvelope(SoundManager* manager, SoundPlayer* player)
     player->envelopePreset = envelope & 0x7F;
     other = player->sfxInstrumentRef;
 
-    player->sfxInstrument.base = other->base;
+    player->sfxInstrument.wavData = other->wavData;
     player->sfxInstrument.wavDataLength = other->wavDataLength;
-    player->sfxInstrument.loopPredictor = other->loopPredictor;
+    player->sfxInstrument.loopState = other->loopState;
     player->sfxInstrument.loopStart = other->loopStart;
     player->sfxInstrument.loopEnd = other->loopEnd;
     player->sfxInstrument.loopCount = other->loopCount;
     player->sfxInstrument.predictor = other->predictor;
-    player->sfxInstrument.dc_bookSize = other->dc_bookSize;
+    player->sfxInstrument.codebookSize = other->codebookSize;
     player->sfxInstrument.keyBase = other->keyBase;
     player->sfxInstrument.pitchRatio = other->pitchRatio;
     player->sfxInstrument.type = other->type;
-    player->sfxInstrument.unk_25 = other->unk_25;
+    player->sfxInstrument.auUnkDmaCallbackVal = other->auUnkDmaCallbackVal;
 
     player->sfxInstrument.envelopes = SFXEnvelopePresets[player->envelopePreset];
     player->sfxInstrumentRef = &player->sfxInstrument;
@@ -1549,7 +1585,7 @@ static void au_SEFCmd_0C_SetCurrentVolume(SoundManager* manager, SoundPlayer* pl
     s32 vol = *player->sefDataReadPos++;
 
     if (vol != 0) {
-        vol = (vol << 0x18) | 0xFFFFFF;
+        vol = AU_VOL_8_TO_32(vol);
     }
     player->volumeLerp.current = vol;
     player->changed.volume = TRUE;
@@ -1563,7 +1599,7 @@ static void au_SEFCmd_0D_VolumeRamp(SoundManager* manager, SoundPlayer* player) 
     player->sefDataReadPos += 3;
 
     if (newValue != 0) {
-        newValue = (newValue << 8) | 0xFF;
+        newValue = AU_VOL_8_TO_16(newValue);
     }
     if (time <= 0) {
         time = 1;
@@ -1660,7 +1696,7 @@ static void au_SEFCmd_17_PlaySound(SoundManager* manager, SoundPlayer* player) {
 static void au_SEFCmd_18_SetAlternativeVolume(SoundManager* manager, SoundPlayer* player) {
     player->alternativeVolume = *player->sefDataReadPos++;
     if (player->alternativeVolume != 0) {
-        player->alternativeVolume = player->alternativeVolume << 8 | 0xFF;
+        player->alternativeVolume = AU_VOL_8_TO_16(player->alternativeVolume);
     }
 }
 
