@@ -34,13 +34,13 @@ let
   egcs-binutils = builtins.fetchurl {
     url =
       "https://github.com/decompals/mips-binutils-egcs-2.9.5/releases/latest/download/mips-binutils-egcs-2.9.5-linux.tar.gz";
-    sha256 = "04pdjk5n7xw7y4xamc4nisq0vdipsxgpq3jmd7j48gfn0hx9kz21";
+    sha256 = "1gxwgcr4jls6krrp5a63rwvn3ayn87zl1iz5il25d6dwryf29ssl";
   };
 
   egcs-gcc = builtins.fetchurl {
     url =
       "https://github.com/decompals/mips-gcc-egcs-2.91.66/releases/latest/download/mips-gcc-egcs-2.91.66-linux.tar.gz";
-    sha256 = "03v1ci7j0hi53z639rwj60xwz0zzi82a9azi0yiw818r754faql0";
+    sha256 = "1aqmlwkisyvd3nwkmaw3j5fqk9qxszs03yx3v90bm3yipb6czf27";
   };
 
   ido = builtins.fetchurl {
