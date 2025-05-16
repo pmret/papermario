@@ -564,7 +564,7 @@ MessageCharset MsgCharsetMenu2 = {
 #else
 u8 MsgCharWidthNormal[] = {
     [MSG_CHAR_NOTE]                  11,
-    [MSG_CHAR_EXCLAMTION]             8,
+    [MSG_CHAR_EXCLAMATION]            8,
     [MSG_CHAR_BACKSLASH]              8,
     [MSG_CHAR_HASH]                  10,
     [MSG_CHAR_DOLLAR]                 9,
@@ -713,7 +713,7 @@ u8 MsgCharWidthNormal[] = {
     [MSG_CHAR_LOWER_U_ACUTE]          8,
     [MSG_CHAR_LOWER_U_CIRCUMFLEX]     8,
     [MSG_CHAR_LOWER_U_UMLAUT]         8,
-    [MSG_CHAR_INVERTED_EXCLAMTION]    6,
+    [MSG_CHAR_INVERTED_EXCLAMATION]   6,
     [MSG_CHAR_INVERTED_QUESTION]      9,
     [MSG_CHAR_FEM_ORDINAL]            7,
     [MSG_CHAR_HEART]                 11,
