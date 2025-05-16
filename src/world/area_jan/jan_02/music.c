@@ -1,7 +1,7 @@
 #include "jan_02.h"
 
 API_CALLABLE(N(AdjustTrackVolumes)) {
-    bgm_set_track_volumes(0, TRACK_VOLS_0);
+    bgm_set_track_volumes(0, TRACK_VOLS_JAN_FULL);
     return ApiStatus_DONE2;
 }
 

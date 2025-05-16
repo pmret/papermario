@@ -533,14 +533,17 @@ enum SoundIDBits {
     SOUND_ID_SECTION_MASK           = 0x00000300, // corresponds to sections 0-3 for indices < 0xC0 and 4-7 for those above
     SOUND_ID_INDEX_MASK             = 0x000000FF,
     SOUND_ID_UNK_INDEX_MASK         = 0x000001FF, // indices for the special large section
+
+    SOUND_ID_UPPER_MASK             = 0x03FF0000,
+    SOUND_ID_TYPE_MASK              = 0x70000000,
+    SOUND_ID_TYPE_FLAG              = 0x80000000,
 };
 
 enum SoundType {
-    SOUND_TYPE_SPECIAL              = 0x80000000,
-    SOUND_TYPE_LOOPING              = 0, // 0x80000000 (with SOUND_TYPE_SPECIAL)
-    SOUND_TYPE_EXIT_DOOR            = 1, // 0x90000000 (with SOUND_TYPE_SPECIAL)
-    SOUND_TYPE_ROOM_DOOR            = 2, // 0xA0000000 (with SOUND_TYPE_SPECIAL)
-    SOUND_TYPE_ALTERNATING          = 3, // 0xB0000000 (with SOUND_TYPE_SPECIAL)
+    SOUND_TYPE_LOOPING              = 0, // 0x80000000 (with SOUND_ID_TYPE_FLAG)
+    SOUND_TYPE_EXIT_DOOR            = 1, // 0x90000000 (with SOUND_ID_TYPE_FLAG)
+    SOUND_TYPE_ROOM_DOOR            = 2, // 0xA0000000 (with SOUND_ID_TYPE_FLAG)
+    SOUND_TYPE_ALTERNATING          = 3, // 0xB0000000 (with SOUND_ID_TYPE_FLAG)
 };
 
 enum SoundIDs {
@@ -1788,27 +1791,27 @@ enum {
 };
 
 typedef enum MusicTrackVols {
-    TRACK_VOLS_0            = 0,
-    TRACK_VOLS_1            = 1,
-    TRACK_VOLS_2            = 2,
-    TRACK_VOLS_3            = 3,
+    TRACK_VOLS_JAN_FULL     = 0,
+    TRACK_VOLS_UNUSED_1     = 1,
+    TRACK_VOLS_TIK_SHIVER   = 2,
+    TRACK_VOLS_UNUSED_3     = 3,
     TRACK_VOLS_KPA_OUTSIDE  = 4,
     TRACK_VOLS_KPA_1        = 5,
     TRACK_VOLS_KPA_2        = 6,
     TRACK_VOLS_KPA_3        = 7
 } MusicTrackVols;
 
-typedef enum QuietLevel {
-    QUIET_LEVEL_0      = 0,
-    QUIET_LEVEL_1      = 1,
-    QUIET_LEVEL_2      = 2,
-    QUIET_LEVEL_3      = 3,
-    QUIET_LEVEL_4      = 4,
-    QUIET_LEVEL_5      = 5,
-    QUIET_LEVEL_6      = 6,
-    QUIET_LEVEL_7      = 7,
-    QUIET_LEVEL_8      = 8,
-} QuietLevel;
+typedef enum VolumeLevels {
+    VOL_LEVEL_MUTE      = 0,
+    VOL_LEVEL_1         = 1,
+    VOL_LEVEL_2         = 2,
+    VOL_LEVEL_3         = 3,
+    VOL_LEVEL_4         = 4,
+    VOL_LEVEL_5         = 5,
+    VOL_LEVEL_6         = 6,
+    VOL_LEVEL_7         = 7,
+    VOL_LEVEL_8         = 8,
+} VolumeLevels;
 
 enum Cams {
     CAM_DEFAULT      = 0,
@@ -6419,6 +6422,12 @@ enum WindowStyles {
     WINDOW_STYLE_21     = 21,
     WINDOW_STYLE_22     = 22,
     WINDOW_STYLE_MAX    = 22,
+};
+
+enum ThreadIDs {
+    THREAD_ID_PI        = 0,
+    THREAD_ID_CRASH     = 2,
+    THREAD_ID_AUDIO     = 3, // also = NU_MAIN_THREAD_ID
 };
 
 // LANGUAGE_DEFAULT as 0 will be the first index into several arrays containing data based on the current language.

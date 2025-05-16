@@ -9,26 +9,26 @@ u16 AmbienceRadioChannel = 0;
 
 // lists of data:
 //  u8 trackIdx
-//  u8 volume?
+//  u8 volume
 // repeated until idx = 0
-u8 D_80078DB8[] = {
+u8 TrackVols_JAN_Full[] = {
     2, 94,
     3, 80,
     4, 100,
     5, 84,
     0
 };
-u8 D_80078DC4[] = {
+u8 TrackVols_Unused1[] = {
     2, 100,
     3, 110,
     4, 90,
     0
 };
-u8 D_80078DCC[] = {
+u8 TrackVols_TIK_Shiver[] = {
     2, 95,
     0
 };
-u8 D_80078DD0[] = {
+u8 TrackVols_Unused3[] = {
     5, 70,
     6, 90,
     7, 90,
@@ -724,17 +724,17 @@ static u8* snd_song_get_track_volumes_set(MusicTrackVols trackVolSet) {
     u8* trackVols = NULL;
 
     switch (trackVolSet) {
-        case TRACK_VOLS_0:
-            trackVols = D_80078DB8;
+        case TRACK_VOLS_JAN_FULL:
+            trackVols = TrackVols_JAN_Full;
             break;
-        case TRACK_VOLS_1:
-            trackVols = D_80078DC4;
+        case TRACK_VOLS_UNUSED_1:
+            trackVols = TrackVols_Unused1;
             break;
-        case TRACK_VOLS_2:
-            trackVols = D_80078DCC;
+        case TRACK_VOLS_TIK_SHIVER:
+            trackVols = TrackVols_TIK_Shiver;
             break;
-        case TRACK_VOLS_3:
-            trackVols = D_80078DD0;
+        case TRACK_VOLS_UNUSED_3:
+            trackVols = TrackVols_Unused3;
             break;
         case TRACK_VOLS_KPA_OUTSIDE:
             trackVols = TrackVols_KPA_Outside;

@@ -1355,7 +1355,7 @@ API_CALLABLE(N(ManageFakeoutMusic)) {
     // play 'end battle' song
     if (isInitialCall) {
         sfx_play_sound(SOUND_JINGLE_WON_BATTLE);
-        bgm_set_song(0, SONG_BATTLE_END, 0, 500, QUIET_LEVEL_8);
+        bgm_set_song(0, SONG_BATTLE_END, 0, 500, VOL_LEVEL_8);
         return ApiStatus_BLOCK;
     }
 
@@ -1366,7 +1366,7 @@ API_CALLABLE(N(ManageFakeoutMusic)) {
             return ApiStatus_BLOCK;
         case 340:
             // restart the boss theme with the more intense variation
-            bgm_set_song(0, SONG_LAVA_PIRANHA_BATTLE, 1, 500, QUIET_LEVEL_8);
+            bgm_set_song(0, SONG_LAVA_PIRANHA_BATTLE, 1, 500, VOL_LEVEL_8);
             return ApiStatus_DONE2;
     }
 

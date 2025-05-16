@@ -67,15 +67,15 @@ void bgm_reset_sequence_players(void) {
         gMusicSettings[i] = BlankMusicSettings;
     }
 
-    MusicTargetVolume = QUIET_LEVEL_8;
-    MusicMaxVolume = QUIET_LEVEL_8;
-    MusicCurrentVolume = QUIET_LEVEL_8;
-    func_800561A4(QUIET_LEVEL_8);
+    MusicTargetVolume = VOL_LEVEL_8;
+    MusicMaxVolume = VOL_LEVEL_8;
+    MusicCurrentVolume = VOL_LEVEL_8;
+    func_800561A4(VOL_LEVEL_8);
 }
 
 void bgm_reset_volume(void) {
-    MusicTargetVolume = QUIET_LEVEL_8;
-    MusicMaxVolume = QUIET_LEVEL_8;
+    MusicTargetVolume = VOL_LEVEL_8;
+    MusicMaxVolume = VOL_LEVEL_8;
 }
 
 //TODO refactor out constants
@@ -314,8 +314,8 @@ AuResult bgm_set_variation(s32 playerIndex, s16 arg1) {
 }
 
 s32 bgm_init_music_players(void) {
-    bgm_set_song(0, -1, 0, 250, QUIET_LEVEL_8);
-    bgm_set_song(1, -1, 0, 250, QUIET_LEVEL_8);
+    bgm_set_song(0, -1, 0, 250, VOL_LEVEL_8);
+    bgm_set_song(1, -1, 0, 250, VOL_LEVEL_8);
 
     return 1;
 }
@@ -377,7 +377,7 @@ void bgm_pop_song(void) {
 
     if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
         musicSetting->flags |= MUSIC_SETTINGS_FLAG_8;
-        _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, QUIET_LEVEL_8);
+        _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, VOL_LEVEL_8);
     }
 }
 
@@ -389,7 +389,7 @@ void bgm_push_song(s32 songID, s32 variation) {
         musicSetting->savedVariation = musicSetting->variation;
         musicSetting->savedSongName = musicSetting->songName;
         musicSetting->flags |= MUSIC_SETTINGS_FLAG_4;
-        bgm_set_song(0, songID, variation, 500, QUIET_LEVEL_8);
+        bgm_set_song(0, songID, variation, 500, VOL_LEVEL_8);
     }
 }
 
@@ -401,7 +401,7 @@ void bgm_pop_battle_song(void) {
             gOverrideFlags &= ~GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE;
         } else {
             musicSetting->flags |= MUSIC_SETTINGS_FLAG_8;
-            _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, QUIET_LEVEL_8);
+            _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, VOL_LEVEL_8);
             snd_ambient_resume(0, 250);
         }
     }
@@ -417,7 +417,7 @@ void bgm_push_battle_song(void) {
             musicSetting->savedVariation = musicSetting->variation;
             musicSetting->savedSongName = musicSetting->songName;
             musicSetting->flags |= MUSIC_SETTINGS_FLAG_4;
-            bgm_set_song(0, musicSetting->battleSongID, musicSetting->battleVariation, 500, QUIET_LEVEL_8);
+            bgm_set_song(0, musicSetting->battleSongID, musicSetting->battleVariation, 500, VOL_LEVEL_8);
         }
     }
 }

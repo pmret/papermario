@@ -232,7 +232,7 @@ void state_init_title_screen(void) {
     game_mode_set_fpDrawAuxUI(0, appendGfx_title_screen);
     load_map_bg("title_bg");
     set_background(&gBackgroundImage);
-    bgm_set_song(0, SONG_MAIN_THEME, 0, 500, QUIET_LEVEL_8);
+    bgm_set_song(0, SONG_MAIN_THEME, 0, 500, VOL_LEVEL_8);
     TitleScreen_TimeLeft = TITLE_START_TIME;
 }
 
@@ -290,7 +290,7 @@ void state_step_title_screen(void) {
             }
 #endif
             if (PlayIntroNext && TitleScreen_TimeLeft == 120) {
-                bgm_set_song(0, -1, 0, 3900, QUIET_LEVEL_8);
+                bgm_set_song(0, -1, 0, 3900, VOL_LEVEL_8);
             }
             if (TitleScreen_TimeLeft == 0) {
                 gGameStatusPtr->startupState = TITLE_STATE_BEGIN_DISMISS;
@@ -306,7 +306,7 @@ void state_step_title_screen(void) {
                 gGameStatusPtr->startupState = TITLE_STATE_BEGIN_DISMISS;
                 TitleScreenNextState = NEXT_STATE_FILE_SELECT;
                 sfx_play_sound(SOUND_FILE_MENU_IN);
-                bgm_set_song(0, SONG_FILE_SELECT, 0, 500, QUIET_LEVEL_8);
+                bgm_set_song(0, SONG_FILE_SELECT, 0, 500, VOL_LEVEL_8);
                 return;
             }
             break;

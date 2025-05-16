@@ -305,7 +305,7 @@ void state_init_exit_file_select(void) {
     } else {
         set_map_transition_effect(TRANSITION_ENTER_WORLD);
         gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS;
-        bgm_set_song(0, -1, 0, 1000, QUIET_LEVEL_8);
+        bgm_set_song(0, -1, 0, 1000, VOL_LEVEL_8);
     }
     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
 }

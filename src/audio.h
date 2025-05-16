@@ -62,6 +62,8 @@ typedef u8* WaveData;
 #define AU_MAX_VOLUME_16 0x7FFF
 #define AU_MAX_VOLUME_32 0x7FFFFFFF
 
+#define AU_PAN_MID 64
+
 // only valid for vol != 0
 #define AU_VOL_8_TO_16(vol) (((vol) << 8) | 0xFF)
 // only valid for vol != 0
@@ -72,6 +74,8 @@ typedef u8* WaveData;
 
 #define SND_MIN_DURATION 250
 #define SND_MAX_DURATION 10000
+
+#define SFX_QUEUE_SIZE 16
 
 #define BGM_SEGMENT_LABEL 3
 
@@ -145,6 +149,15 @@ typedef enum SegmentControlCommands {
     BGM_SEGMENT_6                   = 6,
     BGM_SEGMENT_7                   = 7
 } SegmentControlCommands;
+
+typedef enum BGMSpecialSubops {
+    BGM_SPECIAL_1                   = 1,
+    BGM_SPECIAL_2                   = 2,
+    BGM_SPECIAL_3                   = 3,
+    BGM_SPECIAL_4                   = 4,
+    BGM_SPECIAL_TRIGGER_SOUND       = 5,
+    BGM_SPECIAL_6                   = 6,
+} BGMSpecialSubops;
 
 typedef enum FxBus {
     FX_BUS_BGMA_MAIN    = 0,
@@ -566,14 +579,14 @@ typedef struct AuSynDriver {
     /* 0x28 */ s32* wetAccumBuffer; // buffer to accumulate wet samples from each bus during audio rendering
 } AuSynDriver;
 
-typedef struct SoundSFXEntry {
+typedef struct SoundRequest {
     /* 0x0 */ u16 soundID;
-    /* 0x2 */ u16 upperSoundID;
+    /* 0x2 */ u16 toReplaceID; // if nonzero, the new sound will prefer stealing a voice from any player with this soundID
     /* 0x4 */ s16 volume;
     /* 0x6 */ s16 pitchShift;
     /* 0x8 */ s8 pan;
     /* 0x9 */ char unk_9[0x1];
-} SoundSFXEntry; // size = 0xA
+} SoundRequest; // size = 0xA
 
 typedef struct EnvelopeData {
     /* 0x00 */ u8* cmdListPress;
@@ -652,7 +665,7 @@ typedef struct SoundPlayer {
     /* 0x5E */ s16 alternativeVolume;
     /* 0x60 */ SoundLerp tuneLerp;
     /* 0x6C */ SoundLerp volumeLerp;
-    /* 0x78 */ u8 cmdList_mode2[8];
+    /* 0x78 */ u8 cmdListOneShot[8];
     /* 0x80 */ AuFilePos alternativeDataPos;
     /* 0x84 */ s8 alternativeType;
     /* 0x85 */ u8 triggers;
@@ -685,17 +698,16 @@ typedef struct SoundPlayer {
     /* 0xA9 */ char unk_AA[0x2];
 } SoundPlayer; // size = 0xAC
 
-typedef struct SoundManager90 {
+typedef struct SoundManagerMusicEvent {
     union {
-    /* 0x0 */ s32 s32;
+    /* 0x0 */ s32 raw;
         struct {
-    /* 0x0 */ u8 unk_0;
-    /* 0x1 */ u8 unk_1;
-    /* 0x2 */ u8 unk_2;
+    /* 0x0 */ u8 index;
+    /* 0x1 */ char pad_01[0x2];
     /* 0x3 */ u8 volume;
         };
     };
-} SoundManager90; // size = 4
+} SoundManagerMusicEvent; // size = 4
 
 typedef struct SoundManagerCustomCmdList {
     /* 0x0 */ u16 data[3];
@@ -707,7 +719,7 @@ typedef struct SoundManager {
     /* 0x008 */ u8* sefData;
     /* 0x00C */ s32* normalSounds[8];
     /* 0x02C */ s32* extraSounds;
-    /* 0x030 */ s32 playCounter; //?
+    /* 0x030 */ s32 frameCounter; ///< Number of video frame updates, used to update random numnber
     /* 0x034 */ s32 nextUpdateStep;
     /* 0x038 */ s32 nextUpdateInterval;
     /* 0x03C */ s32 nextUpdateCounter;
@@ -719,20 +731,20 @@ typedef struct SoundManager {
     /* 0x08C */ u8 lastCustomEffectIdx;
     /* 0x08D */ s8 defaultReverbAmt;
     /* 0x08E */ char unk_8E[0x2];
-    /* 0x090 */ SoundManager90 bgmSounds[4];
+    /* 0x090 */ SoundManagerMusicEvent bgmSounds[4];
     /* 0x0A0 */ SoundManagerCustomCmdList customCmdList[4];
     /* 0x0B8 */ u16 baseVolume;
-    /* 0x0BA */ s16 prevUpdateResult; // unused, may indicate error status
+    /* 0x0BA */ s16 prevUpdateResult; ///< Unused, may indicate error status
     /* 0x0BC */ u8 priority;
-    /* 0x0BD */ u8 sfxPlayerSelector;
+    /* 0x0BD */ u8 firstVoice;
     /* 0x0BE */ u8 busID;
     /* 0x0BF */ u8 curVoiceIndex;
     /* 0x0C0 */ u8 state;
     /* 0x0C1 */ char unk_C1[0x1];
-    /* 0x0C2 */ SoundSFXEntry soundQueue[16];
+    /* 0x0C2 */ SoundRequest soundQueue[SFX_QUEUE_SIZE]; ///< Lock-free ring buffer for queueing sound effects from game thread
     /* 0x162 */ s8 unk_162;
-    /* 0x163 */ u8 sfxQueuePosOffset;
-    /* 0x164 */ u8 sfxQueueNextPos;
+    /* 0x163 */ u8 sfxQueueReadPos; ///< Read index for the soundQueue ring buffer (audio thread)
+    /* 0x164 */ u8 sfxQueueWritePos; ///< Write index for the soundQueue ring buffer (game thread)
     /* 0x165 */ s8 unk_165;
     /* 0x166 */ char unk_166[0x2];
     /* 0x168 */ s32 resetPending;
@@ -1025,14 +1037,14 @@ typedef struct BGMPlayerTrack {
     /* 0x49 */ s8 segTrackVolume;
     /* 0x4A */ u8 subTrackPan;
     /* 0x4B */ u8 subTrackReverb;
-    /* 0x4C */ u8 unk_4C;
+    /* 0x4C */ u8 unkPressEnvOverride;
     /* 0x4D */ u8 unk_4D;
     /* 0x4E */ u8 unk_4E;
     /* 0x4F */ u8 unk_4F;
     /* 0x50 */ u8 unk_50;
     /* 0x51 */ u8 unk_51;
-    /* 0x52 */ u8 unk_52; // voice idx start
-    /* 0x53 */ u8 unk_53; // voice idx end
+    /* 0x52 */ u8 firstVoice; // voice idx start
+    /* 0x53 */ u8 lastVoice; // voice idx end, exclusive
     /* 0x54 */ u8 polyphonicIdx;
     /* 0x55 */ u8 trackTremoloSpeed;
     /* 0x56 */ u8 trackTremoloTime;
@@ -1248,12 +1260,6 @@ typedef struct AmbienceManager {
     /* 0x024 */ AmbiencePlayer players[4];
     /* 0x7B4 */ AmbienceVoiceState voiceStates[16];
 } AmbienceManager;
-
-typedef struct AlUnkGemini {
-    /* 0x00 */ u16 sound1;
-    /* 0x02 */ u16 sound2;
-    /* 0x04 */ u8 flags;
-} AlUnkGemini; // size = 0x5
 
 typedef struct ALConfig {
     /* 0x00 */ s32 num_pvoice;

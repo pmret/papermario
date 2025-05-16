@@ -92,7 +92,7 @@ segments:
     - [auto, c, 25AF0]
     - [auto, c, audio/25f00_len_940]
     - [auto, c, audio/sfx_player]
-    - [auto, c, audio/28910_len_5090]
+    - [auto, c, audio/bgm_player]
     - [auto, c, audio/mseq_player]
     - [auto, c, audio/voice_envelope]
     - [auto, c, audio/2e230_len_2190]

@@ -370,7 +370,7 @@ API_CALLABLE(N(CreatePhonographHudData)) {
 }
 
 API_CALLABLE(N(PlayRecordSong)) {
-    bgm_set_song(0, N(SongList)[evt_get_variable(script, GB_OBK07_SelectedRecord)], 0, 500, QUIET_LEVEL_8);
+    bgm_set_song(0, N(SongList)[evt_get_variable(script, GB_OBK07_SelectedRecord)], 0, 500, VOL_LEVEL_8);
     return ApiStatus_DONE2;
 }
 

@@ -140,7 +140,7 @@ void au_sfx_enqueue_event(SoundManager* manager, u32 soundID, s16 volume, s16 pi
 void au_sfx_begin_video_frame(SoundManager* manager);
 s32 au_sfx_set_reverb_type(SoundManager* manager, s32 arg1);
 void au_sfx_set_state(SoundManager* manager, s32 arg1);
-void au_sfx_load_sound(SoundManager* manager, SoundSFXEntry* entry, SoundManagerCustomCmdList*);
+void au_sfx_try_sound(SoundManager* manager, SoundRequest* request, SoundManagerCustomCmdList*);
 s16 au_sfx_manager_audio_frame_update(SoundManager* manager);
 
 // ----------------------------------------------------------------------------------

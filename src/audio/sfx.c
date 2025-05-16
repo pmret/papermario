@@ -462,12 +462,11 @@ void sfx_play_sound_with_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
         return;
     }
 
-    if (soundID & SOUND_TYPE_SPECIAL) {
+    if (soundID & SOUND_ID_TYPE_FLAG) {
         s32 soundIndex = soundID & 0xFF;
-        s32 soundType = (soundID & 0x70000000) >> 0x1C;
+        s32 soundType = (soundID & SOUND_ID_TYPE_MASK) >> 0x1C;
         switch (soundType) {
             case SOUND_TYPE_LOOPING:
-                // 0x8xxxxxxx
                 sfx_play_sound_looping(LoopingSounds[soundIndex], volume, pan, pitchShift);
                 return;
             case SOUND_TYPE_EXIT_DOOR:
@@ -477,7 +476,6 @@ void sfx_play_sound_with_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
                 soundID = OpenCloseSounds[gCurrentRoomDoorSounds][soundIndex];
                 break;
             case SOUND_TYPE_ALTERNATING:
-                // 0xBxxxxxxx
                 alternatingSet = &AlternatingSounds[soundIndex];
                 if (alternatingSet->curIndex >= alternatingSet->soundCount) {
                     alternatingSet->curIndex = 0;
@@ -492,7 +490,7 @@ void sfx_play_sound_with_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
 void sfx_adjust_env_sound_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
     SoundInstance* sound;
 
-    if (soundID & SOUND_TYPE_SPECIAL) {
+    if (soundID & SOUND_ID_TYPE_FLAG) {
         sound = sfx_get_env_sound_instance(LoopingSounds[soundID & 0xFFFF]);
         if (sound != NULL) {
             sound->volume = volume;
@@ -507,7 +505,7 @@ void sfx_adjust_env_sound_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift)
 void sfx_stop_sound(s32 soundID) {
     s32 sound = soundID;
 
-    if (sound & SOUND_TYPE_SPECIAL) {
+    if (sound & SOUND_ID_TYPE_FLAG) {
         snd_stop_tracking_env_sound_pos(LoopingSounds[sound & 0xFFFF], FALSE);
     } else {
         snd_stop_sound(sound);
@@ -533,7 +531,7 @@ void sfx_play_sound_at_npc(s32 soundID, s32 flags, s32 npcID) {
 }
 
 void sfx_play_sound_at_position(s32 soundID, s32 flags, f32 posX, f32 posY, f32 posZ) {
-    if ((soundID & 0xF0000000) == SOUND_TYPE_SPECIAL) {
+    if ((soundID & (SOUND_ID_TYPE_FLAG | SOUND_ID_TYPE_MASK)) == (SOUND_ID_TYPE_FLAG | SOUND_TYPE_LOOPING)) {
         s32 id = LoopingSounds[soundID & 0xFFFF];
 
         sfx_register_looping_sound_at_position(id, flags, posX, posY, posZ);

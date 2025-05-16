@@ -1,7 +1,7 @@
 #include "tik_22.h"
 
 API_CALLABLE(N(AdjustTrackVolumes)) {
-    bgm_set_track_volumes(0, TRACK_VOLS_2);
+    bgm_set_track_volumes(0, TRACK_VOLS_TIK_SHIVER);
     return ApiStatus_DONE2;
 }
 
