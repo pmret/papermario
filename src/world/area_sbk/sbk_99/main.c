@@ -49,7 +49,7 @@ EvtScript N(EVS_Main) = {
     Call(SetCamEnabled, CAM_DEFAULT, TRUE)
     Set(GF_MAP_DryDryDesert, TRUE)
     ExecWait(N(EVS_MakeEntities))
-    Call(SetMusicTrack, 0, SONG_MT_RUGGED, 0, 8)
+    Call(SetMusicTrack, 0, SONG_MT_RUGGED, 0, VOL_LEVEL_8)
     Exec(N(EVS_EnterMap))
     Wait(1)
     Return

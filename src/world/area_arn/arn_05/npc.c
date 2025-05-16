@@ -418,7 +418,7 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Call(CloseMessage)
     Call(ForceUsePartner)
     Wait(60 * DT)
-    Call(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 1, 8)
+    Call(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 1, VOL_LEVEL_8)
     Call(SetCamType, CAM_DEFAULT, 6, TRUE)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.5))

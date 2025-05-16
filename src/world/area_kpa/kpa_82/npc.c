@@ -1034,7 +1034,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     ExecWait(N(EVS_SetCam_MeetingDoor))
     Set(MF_Sync_MusicChange, FALSE)
     Thread
-        Call(SetMusicTrack, 0, SONG_FINAL_BOWSER_BATTLE, 1, 8)
+        Call(SetMusicTrack, 0, SONG_FINAL_BOWSER_BATTLE, 1, VOL_LEVEL_8)
         Wait(150 * DT)
         IfNe(MF_Sync_MusicChange, FALSE)
             Goto(5)
@@ -1096,7 +1096,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         ExecWait(N(EVS_SetCam_ViewRoom))
         Set(MF_Sync_MusicChange, TRUE)
         Wait(2)
-        Call(SetMusicTrack, 0, SONG_NORMAL_BATTLE, 0, 8)
+        Call(SetMusicTrack, 0, SONG_NORMAL_BATTLE, 0, VOL_LEVEL_8)
         ExecWait(N(EVS_SetDoorRots))
         ExecWait(N(EVS_Release_Wave))
         Wait(200 * DT)

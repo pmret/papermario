@@ -31,7 +31,7 @@ EvtScript N(EVS_NpcIdle_Bootler) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(SetMusicTrack, 0, SONG_BOOS_MANSION, 0, 8)
+    Call(SetMusicTrack, 0, SONG_BOOS_MANSION, 0, VOL_LEVEL_8)
     Call(DisablePlayerInput, TRUE)
     Call(ShowMessageAtScreenPos, MSG_MAC_Bridge_0022, 400, 100)
     Thread

@@ -17,11 +17,11 @@ MapSettings N(settings) = {
 EvtScript N(EVS_SetupMusic) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH1_DEFEATED_KOOPA_BROS)
-            Call(SetMusicTrack, 0, SONG_KOOPA_BROS_THEME, 1, 8)
+            Call(SetMusicTrack, 0, SONG_KOOPA_BROS_THEME, 1, VOL_LEVEL_8)
         CaseEq(STORY_CH1_DEFEATED_KOOPA_BROS)
             Call(FadeOutMusic, 0, 500)
         CaseDefault
-            Call(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, 8)
+            Call(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, VOL_LEVEL_8)
     EndSwitch
     Call(UseDoorSounds, DOOR_SOUNDS_METAL)
     Return

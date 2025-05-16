@@ -175,7 +175,7 @@ EvtScript N(EVS_Scene_RescuedMuskular) = {
     Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
     Wait(115 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
-    Call(SetMusicTrack, 0, SONG_TWINK_THEME, 0, 8)
+    Call(SetMusicTrack, 0, SONG_TWINK_THEME, 0, VOL_LEVEL_8)
     Call(SetPanTarget, CAM_DEFAULT, -450, 20, 250)
     Call(SetCamDistance, CAM_DEFAULT, -350)
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))

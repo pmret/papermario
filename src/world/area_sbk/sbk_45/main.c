@@ -57,7 +57,7 @@ EvtScript N(EVS_Main) = {
     SetUP_CAMERA_NO_LEAD()
     ExecWait(N(EVS_MakeEntities))
     Call(N(SpawnSunEffect))
-    Call(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
+    Call(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, VOL_LEVEL_8)
     Exec(N(EVS_EnterMap))
     Wait(1)
     Return

@@ -68,7 +68,7 @@ EvtScript N(EVS_Main) = {
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
     Exec(EnterWalk)
     Wait(1)
-    Call(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, 8)
+    Call(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, VOL_LEVEL_8)
     Exec(N(EVS_SetupRooms))
     Exec(N(EVS_TexPan_Stars))
     BindTrigger(Ref(N(EVS_AskForHint)), TRIGGER_WALL_PRESS_A, COLLIDER_o224, 1, 0)

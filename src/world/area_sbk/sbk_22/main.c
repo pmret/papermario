@@ -45,7 +45,7 @@ EvtScript N(EVS_Main) = {
     Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Call(N(SpawnSunEffect))
-    Call(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
+    Call(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, VOL_LEVEL_8)
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
     Exec(EnterWalk)
     Return

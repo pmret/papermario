@@ -122,7 +122,7 @@ EvtScript N(EVS_Twink_FlyAway) = {
 EvtScript N(EVS_Scene_ReturnStarRod) = {
     Call(DisablePlayerInput, TRUE)
     Call(DisablePartnerAI, 0)
-    Call(SetMusicTrack, 0, SONG_STAR_SPIRIT_THEME, 2, 8)
+    Call(SetMusicTrack, 0, SONG_STAR_SPIRIT_THEME, 2, VOL_LEVEL_8)
     Call(SetPlayerPos, 15, 0, 30)
     Call(InterpPlayerYaw, 90, 0)
     Call(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
@@ -307,7 +307,7 @@ EvtScript N(EVS_Scene_ReturnStarRod) = {
     ExecWait(N(EVS_StarSpirit_FlyAway))
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Wait(20)
-    Call(SetMusicTrack, 0, SONG_TWINK_THEME, 1, 8)
+    Call(SetMusicTrack, 0, SONG_TWINK_THEME, 1, VOL_LEVEL_8)
     Call(LoadPath, 30, Ref(N(FlightPath_TwinkStepForward)), ARRAY_COUNT(N(FlightPath_TwinkStepForward)), EASING_LINEAR)
     Loop(0)
         Call(GetNextPathPos)

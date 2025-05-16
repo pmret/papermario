@@ -12,7 +12,7 @@ EvtScript N(EVS_Scene_MeetingPeach) = {
     Call(DisablePlayerInput, TRUE)
     Call(FadeOutMusic, 0, 666)
     Wait(20 * DT)
-    Call(SetMusicTrack, 0, SONG_PRISONER_PEACH_THEME, 0, 8)
+    Call(SetMusicTrack, 0, SONG_PRISONER_PEACH_THEME, 0, VOL_LEVEL_8)
     Call(PlayerFaceNpc, NPC_Peach, FALSE)
     Call(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Walk)
     Call(SetNpcSpeed, NPC_Peach, Float(2.0 / DT))

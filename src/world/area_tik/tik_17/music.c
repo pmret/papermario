@@ -6,7 +6,7 @@ API_CALLABLE(N(AdjustTrackVolumes)) {
 }
 
 EvtScript N(EVS_SetupMusic) = {
-    Call(SetMusicTrack, 0, SONG_TOAD_TOWN_TUNNELS, 0, 8)
+    Call(SetMusicTrack, 0, SONG_TOAD_TOWN_TUNNELS, 0, VOL_LEVEL_8)
     Thread
         Wait(30)
         Call(N(AdjustTrackVolumes))

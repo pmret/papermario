@@ -122,7 +122,7 @@ EvtScript N(EVS_Main) = {
     IfLt(GB_StoryProgress, STORY_CH0_DEFEATED_GOOMBA_KING)
         IfEq(GF_KMR11_GoombaBrosFledToCastle, FALSE)
             Exec(N(EVS_BindExitTriggers))
-            Call(SetMusicTrack, 0, SONG_GOOMBA_BROS_RETREAT, 1, 8)
+            Call(SetMusicTrack, 0, SONG_GOOMBA_BROS_RETREAT, 1, VOL_LEVEL_8)
             ExecWait(N(EVS_Scene_MeetGoombaKing))
             Set(GF_KMR11_GoombaBrosFledToCastle, TRUE)
         Else

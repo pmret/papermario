@@ -18,7 +18,7 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
     Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
-    Call(SetMusicTrack, 0, SONG_MT_RUGGED, 0, 8)
+    Call(SetMusicTrack, 0, SONG_MT_RUGGED, 0, VOL_LEVEL_8)
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
     Exec(EnterWalk)
     Wait(1)

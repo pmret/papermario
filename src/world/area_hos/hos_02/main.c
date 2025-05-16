@@ -84,7 +84,7 @@ EvtScript N(EVS_EnterStarBeam) = {
     Call(EnablePartnerAI)
     Call(DisablePlayerPhysics, FALSE)
     Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(SetMusicTrack, 0, SONG_STAR_WAY_OPENS, 3, 8)
+    Call(SetMusicTrack, 0, SONG_STAR_WAY_OPENS, 3, VOL_LEVEL_8)
     Call(DisablePlayerInput, FALSE)
     Call(AwaitPlayerLeave, -1105, 225, 40)
     BindTrigger(Ref(N(EVS_ExitStarBeam)), TRIGGER_FLOOR_TOUCH, COLLIDER_deiliw, 1, 0)

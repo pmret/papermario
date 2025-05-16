@@ -59,7 +59,7 @@ EvtScript N(EVS_FadeInMusic) = {
 };
 
 EvtScript N(EVS_PlayRestingSong) = {
-    Call(SetMusicTrack, 0, SONG_TAKING_REST, 0, 8)
+    Call(SetMusicTrack, 0, SONG_TAKING_REST, 0, VOL_LEVEL_8)
     Return
     End
 };

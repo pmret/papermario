@@ -99,7 +99,7 @@ EvtScript N(EVS_Main) = {
     Call(N(SpawnSunEffect))
     Exec(N(EVS_TexPan_Water))
     Call(MakeTransformGroup, MODEL_sui)
-    Call(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
+    Call(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, VOL_LEVEL_8)
     Call(N(StartOasisSongVariation))
     Call(PlaySound, SOUND_LOOP_SBK_OASIS_WATER)
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))

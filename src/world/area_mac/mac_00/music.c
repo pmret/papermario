@@ -3,11 +3,11 @@
 EvtScript N(EVS_SetupMusic) = {
     Switch(GB_StoryProgress)
         CaseEq(STORY_INTRO)
-            Call(SetMusicTrack, 0, SONG_PEACHS_CASTLE_PARTY, 1, 8)
+            Call(SetMusicTrack, 0, SONG_PEACHS_CASTLE_PARTY, 1, VOL_LEVEL_8)
         CaseEq(STORY_EPILOGUE)
-            Call(SetMusicTrack, 0, SONG_PEACHS_CASTLE_PARTY, 0, 8)
+            Call(SetMusicTrack, 0, SONG_PEACHS_CASTLE_PARTY, 0, VOL_LEVEL_8)
         CaseRange(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
-            Call(SetMusicTrack, 0, SONG_SHY_GUY_INVASION, 0, 8)
+            Call(SetMusicTrack, 0, SONG_SHY_GUY_INVASION, 0, VOL_LEVEL_8)
         CaseDefault
             Exec(N(EVS_SetupMusicTriggers))
     EndSwitch

@@ -11,7 +11,7 @@ EvtScript N(EVS_Main) = {
     Thread
         Call(FadeOutMusic, 0, 0x00001388)
         Wait(390)
-        Call(SetMusicTrack, 0, SONG_THE_END, 0, 8)
+        Call(SetMusicTrack, 0, SONG_THE_END, 0, VOL_LEVEL_8)
     EndThread
     Exec(N(EVS_Scene_TheEnd))
     Return

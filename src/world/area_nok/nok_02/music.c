@@ -2,9 +2,9 @@
 
 EvtScript N(EVS_SetupMusic) = {
     IfLt(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-        Call(SetMusicTrack, 0, SONG_FUZZY_ATTACK, 0, 8)
+        Call(SetMusicTrack, 0, SONG_FUZZY_ATTACK, 0, VOL_LEVEL_8)
     Else
-        Call(SetMusicTrack, 0, SONG_KOOPA_VILLAGE, 0, 8)
+        Call(SetMusicTrack, 0, SONG_KOOPA_VILLAGE, 0, VOL_LEVEL_8)
     EndIf
     Return
     End

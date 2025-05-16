@@ -154,7 +154,7 @@ EvtScript N(EVS_Main) = {
     Call(EnableGroup, MODEL_g2, FALSE)
     Call(EnableGroup, MODEL_g51, FALSE)
     IfEq(GB_StoryProgress, STORY_INTRO)
-        Call(SetMusicTrack, 0, SONG_PEACHS_CASTLE_PARTY, 1, 8)
+        Call(SetMusicTrack, 0, SONG_PEACHS_CASTLE_PARTY, 1, VOL_LEVEL_8)
     Else
         Thread
             Wait(90)

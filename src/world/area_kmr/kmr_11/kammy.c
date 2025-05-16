@@ -8,7 +8,7 @@ Vec3f N(FlightPath_Away)[] = {
 };
 
 EvtScript N(EVS_Scene_KammyWatching) = {
-    Call(SetMusicTrack, 0, SONG_KAMMY_KOOPA_THEME, 0, 8)
+    Call(SetMusicTrack, 0, SONG_KAMMY_KOOPA_THEME, 0, VOL_LEVEL_8)
     Call(SetNpcVar, NPC_Kammy, 0, 1)
     Call(SetNpcPos, NPC_Kammy, 100, 182, -353)
     Call(UseSettingsFrom, CAM_DEFAULT, 100, 0, -220)

@@ -46,7 +46,7 @@ EvtScript N(EVS_Main) = {
         Set(MV_Unk_00, LVarF)
     EndIf
     IfEq(GB_StoryProgress, STORY_CH2_BEGAN_PEACH_MISSION)
-        Call(SetMusicTrack, 0, SONG_STAR_SPIRIT_THEME, 1, 8)
+        Call(SetMusicTrack, 0, SONG_STAR_SPIRIT_THEME, 1, VOL_LEVEL_8)
     Else
         Exec(N(EVS_SetupMusic))
     EndIf

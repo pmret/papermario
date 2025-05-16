@@ -1,7 +1,7 @@
 #include "kmr_09.h"
 
 EvtScript N(EVS_SetupMusic) = {
-    Call(SetMusicTrack, 0, SONG_PLEASANT_PATH, 0, 8)
+    Call(SetMusicTrack, 0, SONG_PLEASANT_PATH, 0, VOL_LEVEL_8)
     Return
     End
 };
