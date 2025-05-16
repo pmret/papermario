@@ -206,7 +206,7 @@ EvtScript N(EVS_UseMove_Impl) = {
             EndLoop
         EndIf
         Add(LVarD, 6)
-        Call(action_command_hammer_start, 0, LVarD, AC_DIFFICULTY_3)
+        Call(action_command_hammer_start, 0, LVarD, AC_DIFFICULTY_STANDARD)
         Call(SetActionProgress, 0)
         Set(LVar1, 0)
         Loop(30)

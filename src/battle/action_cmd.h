@@ -39,14 +39,14 @@ enum {
 };
 
 enum ActionCommandDifficulty {
-    AC_DIFFICULTY_0                 = 0, // easiest
-    AC_DIFFICULTY_1                 = 1, // very easy
-    AC_DIFFICULTY_2                 = 2, // easy
-    AC_DIFFICULTY_3                 = 3, // standard
-    AC_DIFFICULTY_4                 = 4, // harder
-    AC_DIFFICULTY_5                 = 5, // hard
-    AC_DIFFICULTY_6                 = 6, // very hard
-    AC_DIFFICULTY_7                 = 7, // hardest
+    AC_DIFFICULTY_EASIEST,
+    AC_DIFFICULTY_VERY_EASY,
+    AC_DIFFICULTY_EASY,
+    AC_DIFFICULTY_STANDARD,
+    AC_DIFFICULTY_HARDER,
+    AC_DIFFICULTY_HARD,
+    AC_DIFFICULTY_VERY_HARD,
+    AC_DIFFICULTY_HARDEST,
 };
 
 enum MashMeterColorModes {

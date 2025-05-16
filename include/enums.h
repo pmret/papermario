@@ -3608,7 +3608,7 @@ enum BattleStatusFlags1 {
     BS_FLAGS1_PLAYER_IN_BACK                = 0x00100000,
     BS_FLAGS1_YIELD_TURN                    = 0x00200000, // moves end either when their script is finished or this flag is set by calling YieldTurn
     BS_FLAGS1_PLAYER_DEFENDING              = 0x00400000,
-    BS_FLAGS1_NO_GAME_OVER                  = 0x00800000, // don’t game over on loss
+    BS_FLAGS1_NO_GAME_OVER                  = 0x00800000, // don't game over on loss
     BS_FLAGS1_STAR_POINTS_DROPPED           = 0x01000000,
     BS_FLAGS1_TUTORIAL_BATTLE               = 0x02000000, // prevent player from swapping to/from partner
     BS_FLAGS1_HUSTLED                       = 0x04000000,
@@ -5885,7 +5885,7 @@ enum MsgChars {
     MSG_CHAR_BUTTON_R               = 0x09,
 #else
     MSG_CHAR_NOTE                   = 0x00,
-    MSG_CHAR_EXCLAMTION             = 0x01,
+    MSG_CHAR_EXCLAMATION            = 0x01,
     MSG_CHAR_BACKSLASH              = 0x02,
     MSG_CHAR_HASH                   = 0x03,
     MSG_CHAR_DOLLAR                 = 0x04,
@@ -6025,7 +6025,7 @@ enum MsgChars {
     MSG_CHAR_LOWER_U_ACUTE          = 0x8A,
     MSG_CHAR_LOWER_U_CIRCUMFLEX     = 0x8B,
     MSG_CHAR_LOWER_U_UMLAUT         = 0x8C,
-    MSG_CHAR_INVERTED_EXCLAMTION    = 0x8D,
+    MSG_CHAR_INVERTED_EXCLAMATION   = 0x8D,
     MSG_CHAR_INVERTED_QUESTION      = 0x8E,
     MSG_CHAR_FEM_ORDINAL            = 0x8F,
     MSG_CHAR_HEART                  = 0x90,
