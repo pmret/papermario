@@ -1,8 +1,9 @@
 #include "common.h"
 #include "npc.h"
+#include "audio.h"
 
 void bgm_update_volume(void);
-void bgm_set_target_volume(s16 volume);
+void bgm_set_target_volume(s32 volume);
 
 BSS s16 MusicDefaultVolume;
 BSS s16 MusicTargetVolume;
@@ -13,7 +14,7 @@ MusicSettings gMusicSettings[2];
 
 MusicSettings BlankMusicSettings = {
     .flags = 0,
-    .state = 0,
+    .state = MUSIC_STATE_0,
     .fadeOutTime = -1,
     .fadeInTime = 0,
     .fadeStartVolume = 0,
@@ -70,7 +71,7 @@ void bgm_reset_sequence_players(void) {
     MusicTargetVolume = VOL_LEVEL_8;
     MusicMaxVolume = VOL_LEVEL_8;
     MusicCurrentVolume = VOL_LEVEL_8;
-    func_800561A4(VOL_LEVEL_8);
+    snd_set_bgm_volume(VOL_LEVEL_8);
 }
 
 void bgm_reset_volume(void) {
@@ -82,15 +83,15 @@ void bgm_reset_volume(void) {
 void bgm_update_music_settings(void) {
     MusicSettings* music = gMusicSettings;
     s32 i = 0;
-    s16 state2 = 2;
+    s16 state2 = MUSIC_STATE_2;
     s16 flag4 = MUSIC_SETTINGS_FLAG_4;
     s32 flags;
 
     for (i; i < ARRAY_COUNT(gMusicSettings); i++, music++) {
         switch (music->state) {
-        case 0:
+        case MUSIC_STATE_0:
             break;
-        case 1:
+        case MUSIC_STATE_1:
             if (music->flags & MUSIC_SETTINGS_FLAG_1) {
                 if (music->fadeOutTime < 250) {
                     if (!(music->flags & MUSIC_SETTINGS_FLAG_4)) {
@@ -116,31 +117,31 @@ void bgm_update_music_settings(void) {
                     music->flags |= MUSIC_SETTINGS_FLAG_10;
                 }
                 music->flags &= ~flag4;
-                music->state = 5;
+                music->state = MUSIC_STATE_5;
             }
             break;
-        case 2:
+        case MUSIC_STATE_2:
             flags = music->flags;
             music->flags &= ~flag4;
             if (flags & MUSIC_SETTINGS_FLAG_1) {
                 if (au_song_is_playing(music->songName) == AU_RESULT_OK) {
                     music->flags &= ~MUSIC_SETTINGS_FLAG_1;
-                    music->state = 3;
+                    music->state = MUSIC_STATE_DELAY_2;
                 }
             } else {
-                music->state = 5;
+                music->state = MUSIC_STATE_5;
             }
             break;
-        case 3:
-            music->state = 4;
+        case MUSIC_STATE_DELAY_2:
+            music->state = MUSIC_STATE_DELAY_1;
             break;
-        case 4:
-            music->state = 5;
+        case MUSIC_STATE_DELAY_1:
+            music->state = MUSIC_STATE_5;
             break;
-        case 5:
+        case MUSIC_STATE_5:
             if (!(music->flags & MUSIC_SETTINGS_FLAG_8)) {
-                if (music->songID < 0) {
-                    music->state = 0;
+                if (music->songID <= AU_SONG_NONE) {
+                    music->state = MUSIC_STATE_0;
                 } else {
                     music->songName = au_song_load(music->songID, i);
                     if (music->songName > 0xFFFFU) {
@@ -153,19 +154,19 @@ void bgm_update_music_settings(void) {
                         }
                         if (au_song_start_variation(music->songName, music->variation) == 0) {
                             music->flags |= MUSIC_SETTINGS_FLAG_1;
-                            music->state = 0;
+                            music->state = MUSIC_STATE_0;
                         }
                     }
                 }
             } else {
                 if (music->flags & MUSIC_SETTINGS_FLAG_10) {
-                    music->state = 0;
+                    music->state = MUSIC_STATE_0;
                     music->flags &= ~(MUSIC_SETTINGS_FLAG_10 | MUSIC_SETTINGS_FLAG_8);
                 } else if (func_80055B28(music->savedSongName) == 0) {
                     music->songID = music->savedSongID;
                     music->variation = music->savedVariation;
                     music->songName = music->savedSongName;
-                    music->state = 0;
+                    music->state = MUSIC_STATE_0;
                     music->flags |= MUSIC_SETTINGS_FLAG_1;
                     music->flags &= ~MUSIC_SETTINGS_FLAG_8;
                 }
@@ -213,7 +214,7 @@ s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s
     musicSetting->songID = songID;
     musicSetting->variation = variation;
     musicSetting->fadeOutTime = fadeOutTime;
-    musicSetting->state = 1;
+    musicSetting->state = MUSIC_STATE_1;
     musicSetting->flags &= ~MUSIC_SETTINGS_FLAG_ENABLE_PROXIMITY_MIX;
 
     return 1;
@@ -252,7 +253,7 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
     musicSetting->songID = songID;
     musicSetting->variation = variation;
     musicSetting->flags |= MUSIC_SETTINGS_FLAG_20;
-    musicSetting->state = 1;
+    musicSetting->state = MUSIC_STATE_1;
     musicSetting->flags &= ~MUSIC_SETTINGS_FLAG_ENABLE_PROXIMITY_MIX;
 
     return 1;
@@ -303,32 +304,32 @@ AuResult bgm_clear_track_volumes(s32 playerIndex, s16 trackVolSet) {
     return snd_song_clear_track_volumes(musicSetting->songName, trackVolSet);
 }
 
-AuResult bgm_set_variation(s32 playerIndex, s16 arg1) {
+AuResult bgm_set_variation(s32 playerIndex, s16 variation) {
     MusicSettings* musicSetting = &gMusicSettings[playerIndex];
 
     if (!(musicSetting->flags & MUSIC_SETTINGS_FLAG_1)) {
         return AU_RESULT_OK;
     }
 
-    return snd_set_song_variation(musicSetting->songName, arg1);
+    return snd_set_song_variation(musicSetting->songName, variation);
 }
 
 s32 bgm_init_music_players(void) {
-    bgm_set_song(0, -1, 0, 250, VOL_LEVEL_8);
-    bgm_set_song(1, -1, 0, 250, VOL_LEVEL_8);
+    bgm_set_song(0, AU_SONG_NONE, 0, 250, VOL_LEVEL_8);
+    bgm_set_song(1, AU_SONG_NONE, 0, 250, VOL_LEVEL_8);
 
     return 1;
 }
 
 void bgm_quiet_max_volume(void) {
-    MusicMaxVolume = 4;
+    MusicMaxVolume = VOL_LEVEL_4;
 }
 
 void bgm_reset_max_volume(void) {
-    MusicMaxVolume = 8;
+    MusicMaxVolume = VOL_LEVEL_8;
 }
 
-void bgm_set_target_volume(s16 volume) {
+void bgm_set_target_volume(s32 volume) {
     MusicTargetVolume = volume;
 }
 
@@ -351,7 +352,7 @@ void bgm_update_volume(void) {
         } else {
             MusicCurrentVolume++;
         }
-        func_800561A4(MusicCurrentVolume);
+        snd_set_bgm_volume(MusicCurrentVolume);
         NextVolumeUpdateTimer = 3;
     }
 }
@@ -429,5 +430,5 @@ void bgm_set_battle_song(s32 songID, s32 variation) {
     musicSetting->battleVariation = variation;
 }
 
-void func_8014AFA0(void) {
+void bgm_NOOP(void) {
 }

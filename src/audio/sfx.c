@@ -350,7 +350,7 @@ void sfx_update_env_sound_params(void) {
 }
 
 void sfx_set_reverb_mode(s32 mode) {
-    func_800561E4(mode);
+    snd_set_sfx_reverb_type(mode);
     SfxReverbMode = mode;
 }
 

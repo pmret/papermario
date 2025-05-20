@@ -74,10 +74,10 @@ void state_step_startup(void) {
 
     if (gSaveGlobals.useMonoSound == 0) {
         gGameStatusPtr->soundOutputMode = SOUND_OUT_STEREO;
-        audio_set_stereo();
+        snd_set_stereo();
     } else {
         gGameStatusPtr->soundOutputMode = SOUND_OUT_MONO;
-        audio_set_mono();
+        snd_set_mono();
     }
 
 #if VERSION_PAL

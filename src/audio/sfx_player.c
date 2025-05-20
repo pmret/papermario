@@ -255,7 +255,7 @@ void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*) = {
     au_BGMCmd_F1_TrackTremoloSpeed,
     au_BGMCmd_F2_TrackTremoloTime,
     au_BGMCmd_F3_TrackTremoloStop,
-    au_BGMCmd_F4,
+    au_BGMCmd_F4_SubTrackRandomPan,
     au_BGMCmd_F5_TrackVoice,
     au_BGMCmd_F6_TrackVolumeFade,
     au_BGMCmd_F7_SubTrackReverbType,
@@ -276,7 +276,7 @@ s8 SeqCmdArgCounts[] = {
     0, 0, 0, 0, 3, 3, 3, 3
 };
 
-s8 BgmDivisors[] = {
+s8 BgmTicksRates[] = {
     48, 24, 32, 40, 48, 56, 64, 48,
      0,  0,  0,  0,  0,  0,  0,  0
 };
@@ -292,18 +292,19 @@ u8 BlankMseqData[] = {
 };
 
 // --------------------------------------------
-// the following are only referenced in audio/2e230_len_2190
+// the following are only referenced in audio/core/engine
 
-/// polynomial increase following 512*(x^2 - 2*x + 1), with x being the index from 1 to 9
-u16 VolumePresetMap[] = {
-    [VOL_LEVEL_MUTE] 0x0000, //   0.0 %
-    [VOL_LEVEL_1] 0x0200, //   1.5625 %
-    [VOL_LEVEL_2] 0x0800, //   6.25 %
-    [VOL_LEVEL_3] 0x1200, //  14.0625 %
-    [VOL_LEVEL_4] 0x2000, //  25.0 %
-    [VOL_LEVEL_5] 0x3200, //  39.0625 %
-    [VOL_LEVEL_6] 0x4800, //  56.25 %
-    [VOL_LEVEL_7] 0x6200, //  76.5625 %
+/// Volume steps use squared values so each level represents linear power increase,
+/// matching loudness perception. This makes each step sound evenly spaced.
+u16 PerceptualVolumeLevels[] = {
+    [VOL_LEVEL_MUTE] 0, // 0.0 %
+    [VOL_LEVEL_1] AU_MAX_BUS_VOLUME * SQ(0.125), //  1.5625 %
+    [VOL_LEVEL_2] AU_MAX_BUS_VOLUME * SQ(0.250), //  6.25 %
+    [VOL_LEVEL_3] AU_MAX_BUS_VOLUME * SQ(0.375), // 14.0625 %
+    [VOL_LEVEL_4] AU_MAX_BUS_VOLUME * SQ(0.500), // 25.0 %
+    [VOL_LEVEL_5] AU_MAX_BUS_VOLUME * SQ(0.625), // 39.0625 %
+    [VOL_LEVEL_6] AU_MAX_BUS_VOLUME * SQ(0.750), // 56.25 %
+    [VOL_LEVEL_7] AU_MAX_BUS_VOLUME * SQ(0.875), // 76.5625 %
     [VOL_LEVEL_8] AU_MAX_BUS_VOLUME, // 100.0 %
 };
 
@@ -329,9 +330,9 @@ u8 EnvelopeReleaseDefaultFast[] = {
 };
 
 // --------------------------------------------
-// the following are only referenced in 28910_len_5090
+// the following are only referenced in audio/bgm_player
 
-s8 D_80078558[] = {
+s8 BgmCustomEnvLookup[] = {
     0x5E, 0x5D, 0x5C, 0x5B, 0x5A, 0x58, 0x56, 0x53,
     0x51, 0x4F, 0x4A, 0x45, 0x40, 0x3B, 0x37, 0x35,
     0x33, 0x31, 0x2F, 0x2D, 0x2B, 0x29, 0x27, 0x26,
@@ -340,7 +341,7 @@ s8 D_80078558[] = {
 };
 
 // --------------------------------------------
-// the following are only referenced in audio/2e230_len_2190
+// the following are only referenced in audio/core/engine
 
 u8 AmbientSoundIDtoMSEQFileIndex[] = {
     0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A,
@@ -372,7 +373,7 @@ s32 AuEnvelopeIntervals[] = {
 #undef SEC
 
 // --------------------------------------------
-// the following are only referenced in audio/2e230_len_2190
+// the following are only referenced in audio/core/engine
 
 f32 AlTuneScaling[] = {
     // ---------------------------------------------------------
@@ -1540,7 +1541,7 @@ static void au_SEFCmd_04_SetEnvelope(SoundManager* manager, SoundPlayer* player)
     player->sfxInstrument.keyBase = other->keyBase;
     player->sfxInstrument.pitchRatio = other->pitchRatio;
     player->sfxInstrument.type = other->type;
-    player->sfxInstrument.auUnkDmaCallbackVal = other->auUnkDmaCallbackVal;
+    player->sfxInstrument.useDma = other->useDma;
 
     player->sfxInstrument.envelopes = SFXEnvelopePresets[player->envelopePreset];
     player->sfxInstrumentRef = &player->sfxInstrument;

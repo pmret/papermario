@@ -46,7 +46,7 @@ u8 au_voice_step(AuVoice* voice);
 void au_voice_set_vol_changed(AuVoice* arg0);
 
 // ----------------------------------------------------------------------------------
-//2e230_len_2190.c
+//core/engine.c
 // ----------------------------------------------------------------------------------
 void au_release_voice(u8 index);
 void au_engine_init(s32 outputRate);
@@ -63,7 +63,7 @@ void au_update_clients_for_audio_frame(void);
 
 void au_syn_begin_audio_frame(AuGlobals* globals);
 void au_reset_nonfree_voice(AuVoice* arg0, u8 arg1);
-void au_reset_voice(AuVoice* arg0, u8 arg1);
+void au_reset_voice(AuVoice* voice, u8 voiceIdx);
 
 /**
  * @brief Converts a linear pitch value (in cents) into a frequency ratio suitable for adjusting playback speed.
@@ -82,18 +82,18 @@ void au_fade_init(Fade* fade, s32 time, s32 startValue, s32 endValue);
 void au_fade_clear(Fade* fade);
 void au_fade_update(Fade* fade);
 void au_fade_set_volume(u8 arg0, u16 arg1, s32 arg2);
-void func_80053AC8(Fade* fade);
+void au_unk_80053AC8(Fade* fade);
 void au_fade_set_vol_scale(Fade* fade, s16 value);
-void func_80053B04(Fade* fade, u32 arg1, s32 target);
-void func_80053BA8(Fade* fade);
+void au_unk_80053B04(Fade* fade, u32 arg1, s32 target);
+void au_unk_80053BA8(Fade* fade);
 Instrument* au_get_instrument(AuGlobals* globals, BankSetIndex bank, s32 patch, EnvelopeData* arg3);
 void au_get_bgm_player_and_file(u32 playerIndex, BGMHeader** outCurrentTrackData, BGMPlayer** outPlayer);
 void au_get_bgm_player(u32 playerIndex, BGMPlayer** outPlayer);
 AuResult au_load_song_files(u32 arg0, BGMHeader* arg1, BGMPlayer* arg2);
-AuResult func_80053E58(s32 songID, BGMHeader* arg1);
-BGMPlayer* func_80053F64(s32 arg0);
+AuResult au_unk_80053E58(s32 songID, BGMHeader* arg1);
+BGMPlayer* au_unk_80053F64(s32 arg0);
 AuResult au_ambient_load(u32 arg0);
-BGMPlayer* func_80054248(u8 arg0);
+BGMPlayer* au_unk_80054248(u8 arg0);
 void au_load_INIT(AuGlobals* arg0, s32 romAddr, ALHeap* heap);
 AuResult au_fetch_SBN_file(u32 fileIdx, AuFileFormat format, SBNFileEntry* arg2);
 void au_load_PER(AuGlobals* globals, s32 romAddr);
@@ -101,24 +101,24 @@ void au_load_PRG(AuGlobals* arg0, s32 romAddr);
 InstrumentBank* au_get_BK_instruments(BankSet bankSet, u32 bankIndex);
 BKFileBuffer* au_load_BK_to_bank(s32 bkFileOffset, BKFileBuffer* bkFile, s32 bankIndex, BankSet bankSet);
 void au_swizzle_BK_instruments(s32 bkFileOffset, BKFileBuffer* bkFile, InstrumentBank instruments, u32 instrumentCount, u8 arg4);
-s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, BankSet bankSet);
-s32 snd_load_aux_bank(s32 bkFileOffset, s32 bankIndex);
+BKFileBuffer* au_load_static_BK_to_bank(s32* bkFileOffset, void* vaddr, s32 bankIndex, BankSet bankSet);
+s32 au_load_aux_bank(s32 bkFileOffset, s32 bankIndex);
 void au_clear_instrument_group(s32 bankIndex, BankSet bankSet);
-void func_80054CE0(s32 arg0, u32 idx);
-s32 func_80054D74(s32 arg0, s32 arg1);
-void func_80054DA8(u32 arg0);
+void au_unk_80054CE0(s32 arg0, u32 idx);
+s32 au_unk_80054D74(s32 arg0, s32 arg1);
+void au_unk_80054DA8(u32 arg0);
 void au_read_rom(s32 romAddr, void* buffer, u32 size);
 void au_memset(void* dst, s32 size, u8 value);
 void au_copy_bytes(s8* src, s8* dest, s32 size);
 void au_copy_words(void* src, void* dst, s32 size);
 
 // ----------------------------------------------------------------------------------
-// 25f00_len_940.c
+// core/system.c
 // ----------------------------------------------------------------------------------
 void create_audio_system(void);
 //void nuAuPreNMIFuncSet(NUAuPreNMIFunc func);
 void nuAuMgr(void* arg);
-s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 arg3);
+s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 useDma);
 //ALDMAproc nuAuDmaNew(NUDMAState** state);
 //void nuAuCleanDMABuffers(void);
 //void nuAuPreNMIProc(NUScMsg mesg_type, u32 frameCounter);
@@ -152,7 +152,7 @@ AuResult au_bgm_dispatch_player_event(SongUpdateEvent* event);
 AuResult au_bgm_stop_song(s32 songName);
 void au_bgm_stop_all(void);
 AuResult au_bgm_is_song_playing(s32 songName);
-s32 func_8004DB28(BGMPlayer* player);
+b32 au_bgm_player_is_active(BGMPlayer* player);
 AuResult func_8004DB4C(SongUpdateEvent* s);
 AuResult func_8004DC80(s32 songName);
 AuResult func_8004DCB8(SongUpdateEvent* update, s32 clearChanged);
@@ -162,11 +162,11 @@ AuResult func_8004E0F4(SongUpdateEvent* update);
 void au_bgm_player_init(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3);
 void au_bgm_set_effect_indices(BGMPlayer* player, u8* list);
 void au_bgm_update_fade(BGMPlayer* player);
-void func_8004E444(BGMPlayer* arg0);
+void au_bgm_update_bus_volumes(BGMPlayer* arg0);
 s32 au_bgm_player_audio_frame_update(BGMPlayer* player);
 void au_bgm_player_initialize(BGMPlayer* player);
-void func_8004E844(BGMPlayer* player, s32 arg1);
-void func_8004E880(BGMPlayer* player, s32 sampleRate, s32 divisor);
+void bgm_clear_custom_note_press(BGMPlayer* player, s32 arg1);
+void bgm_set_tick_resolution(BGMPlayer* player, s32 sampleRate, s32 divisor);
 void au_bgm_player_read_segment(BGMPlayer* player);
 void au_bgm_end_segment_loop(BGMPlayer* player, u32 cmd);
 void au_bgm_load_subsegment(BGMPlayer* player, u32 cmd);
@@ -192,7 +192,7 @@ void au_BGMCmd_F0_TrackTremolo(BGMPlayer* player, BGMPlayerTrack* track);
 void au_BGMCmd_F1_TrackTremoloSpeed(BGMPlayer* player, BGMPlayerTrack* track);
 void au_BGMCmd_F2_TrackTremoloTime(BGMPlayer* player, BGMPlayerTrack* track);
 void au_BGMCmd_F3_TrackTremoloStop(BGMPlayer* player, BGMPlayerTrack* track);
-void au_BGMCmd_F4(BGMPlayer* player, BGMPlayerTrack* track);
+void au_BGMCmd_F4_SubTrackRandomPan(BGMPlayer* player, BGMPlayerTrack* track);
 void au_BGMCmd_F5_TrackVoice(BGMPlayer* player, BGMPlayerTrack* track);
 void au_BGMCmd_F7_SubTrackReverbType(BGMPlayer* player, BGMPlayerTrack* track);
 void au_BGMCmd_FD_EventTrigger(BGMPlayer* player, BGMPlayerTrack* track);
@@ -205,8 +205,8 @@ void au_bgm_set_playback_rate(BGMPlayer* player, f32 arg1);
 void au_bgm_player_set_detune(BGMPlayer* player, s32 arg1);
 void au_bgm_change_track_volume(BGMPlayer* player, s32 trackIdx, s16 arg2, u8 arg3);
 void au_bgm_set_track_volumes(BGMPlayer* player, u8* arg1, s32 arg2);
-void func_80050888(BGMPlayer* player, BGMPlayerTrack* track, s32 target, s32 duration);
-void func_80050900(BGMPlayer* player);
+void au_bgm_set_prox_mix_fade(BGMPlayer* player, BGMPlayerTrack* track, s32 target, s32 duration);
+void au_bgm_reset_all_voices(BGMPlayer* player);
 AuResult func_80050970(SongUpdateEvent* arg0);
 
 // 30450.c
@@ -239,13 +239,13 @@ void snd_ambient_radio_setup(s32 arg0);
 AuResult snd_ambient_radio_stop(s32 arg0);
 AuResult snd_ambient_radio_select(s32 arg0);
 AuResult au_song_load(s32 songID, s32 playerIndex);
-AuResult au_song_start(s32 songName);
+AuResult au_song_start_default(s32 songName);
 AuResult au_song_start_variation(s32 songName, s32 variation);
 AuResult au_song_stop(s32 songName);
 void au_stop_songs(void);
 AuResult au_song_is_playing(s32 songName);
 AuResult snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume);
-AuResult snd_set_song_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume);
+AuResult snd_set_song_default_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume);
 AuResult snd_set_song_variation_fade_time(s32 songName, s32 fadeTime, s32 variation);
 AuResult func_80055AF0(s32 songName);
 AuResult func_80055B28(s32 songName);
@@ -278,23 +278,23 @@ void func_8005610C(void);
 */
 void au_register_callback(AuCallback arg0, s32 arg1);
 /*
-void audio_set_stereo(void);
-void audio_set_mono(void);
-void func_800561A4(s32 arg0);
-void func_800561C4(s32 arg0);
-void func_800561E4(s32 arg0);
+void snd_set_stereo(void);
+void snd_set_mono(void);
+void snd_set_bgm_volume(s32 arg0);
+void snd_set_sfx_volume(s32 arg0);
+void snd_set_sfx_reverb_type(s32 arg0);
 void enable_sounds(void);
 void disable_sounds(void);
 */
 
-// 31650.c
+// core/syn_driver.c
 void au_driver_init(AuSynDriver* driver, ALConfig* config);
 void au_driver_release(void);
 //Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen);
 void au_use_global_volume(void);
 void au_set_global_volume(s16 arg0);
 s16 au_get_global_volume(void);
-void func_80056D5C(u8 arg0);
+void func_80056D5C(b8 arg0);
 void au_bus_set_volume(u8 busID, u16 value);
 u16 au_bus_get_volume(u8 busID);
 void au_bus_set_effect(u8 busID, u8 effectID);
@@ -328,10 +328,10 @@ void au_init_delay_channel(s16 arg0);
 #undef alHeapAlloc
 void* alHeapAlloc(ALHeap* heap, s32 count, s32 size);
 
-// 33450.c
+// core/pull_voice.c
 Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos);
 
-// reverb.c
+// core/reverb.c
 void au_fx_create(AuFX* fx, u8 mode, ALHeap* heap);
 void au_filter_create(AuFilter* kappa, ALHeap* heap);
 void au_filter_init(AuFilter* kappa, s16 arg1, s16 arg2, s16 fc);

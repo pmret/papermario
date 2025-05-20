@@ -1,4 +1,5 @@
 #include "common.h"
+#include "audio.h"
 #include "script_api/battle.h"
 #include "ld_addrs.h"
 #include "effects.h"
@@ -1926,7 +1927,7 @@ void btl_state_update_victory(void) {
             }
             if (gBattleStatus.flags1 & BS_FLAGS1_DISABLE_CELEBRATION) {
                 if (!(gBattleStatus.flags2 & BS_FLAGS2_DONT_STOP_MUSIC)) {
-                    bgm_set_song(0, -1, 0, 1500, VOL_LEVEL_8);
+                    bgm_set_song(0, AU_SONG_NONE, 0, 1500, VOL_LEVEL_8);
                 }
                 btl_set_state(BATTLE_STATE_END_BATTLE);
             } else {
@@ -2044,7 +2045,7 @@ void btl_state_update_end_training_battle(void) {
             }
             encounterStatus->battleOutcome = OUTCOME_ENEMY_FLED;
             if (!(gBattleStatus.flags2 & BS_FLAGS2_DONT_STOP_MUSIC)) {
-                bgm_set_song(0, -1, 0, 1500, VOL_LEVEL_8);
+                bgm_set_song(0, AU_SONG_NONE, 0, 1500, VOL_LEVEL_8);
             }
             btl_set_state(BATTLE_STATE_END_BATTLE);
             break;
@@ -2330,7 +2331,7 @@ void btl_state_update_run_away(void) {
     if (gBattleSubState == BTL_SUBSTATE_RUN_AWAY_DONE) {
         playerData->battlesFled++;
         if (!(gBattleStatus.flags2 & BS_FLAGS2_DONT_STOP_MUSIC)) {
-            bgm_set_song(0, -1, 0, 1500, VOL_LEVEL_8);
+            bgm_set_song(0, AU_SONG_NONE, 0, 1500, VOL_LEVEL_8);
         }
         btl_set_state(BATTLE_STATE_END_BATTLE);
     }
@@ -2442,7 +2443,7 @@ void btl_state_update_defeat(void) {
     if (gBattleSubState == BTL_SUBSTATE_DEFEAT_DONE) {
         currentEncounter->battleOutcome = OUTCOME_PLAYER_LOST;
         if (!(gBattleStatus.flags2 & BS_FLAGS2_DONT_STOP_MUSIC)) {
-            bgm_set_song(0, -1, 0, 1500, VOL_LEVEL_8);
+            bgm_set_song(0, AU_SONG_NONE, 0, 1500, VOL_LEVEL_8);
         }
         btl_set_state(BATTLE_STATE_END_BATTLE);
     }

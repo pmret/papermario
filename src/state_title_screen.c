@@ -1,4 +1,5 @@
 #include "common.h"
+#include "audio.h"
 #include "nu/nusys.h"
 #include "hud_element.h"
 #include "sprite.h"
@@ -290,7 +291,7 @@ void state_step_title_screen(void) {
             }
 #endif
             if (PlayIntroNext && TitleScreen_TimeLeft == 120) {
-                bgm_set_song(0, -1, 0, 3900, VOL_LEVEL_8);
+                bgm_set_song(0, AU_SONG_NONE, 0, 3900, VOL_LEVEL_8);
             }
             if (TitleScreen_TimeLeft == 0) {
                 gGameStatusPtr->startupState = TITLE_STATE_BEGIN_DISMISS;

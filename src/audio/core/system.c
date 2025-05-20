@@ -190,7 +190,8 @@ void nuAuMgr(void* arg) {
     }
 }
 
-s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 auUnkDmaCallbackVal) {
+/// DMA callback for audio sample streaming; manages a DMA buffer cache.
+s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 useDma) {
     NUDMABuffer* dmaPtr;
     NUDMABuffer* freeBuffer;
     OSIoMesg* mesg;
@@ -199,7 +200,7 @@ s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 auUnkDmaCallbackVal) {
     s32 addrEnd, buffEnd;
     NUDMABuffer* lastDmaPtr;
 
-    if (auUnkDmaCallbackVal == 0) {
+    if (!useDma) {
         return osVirtualToPhysical((void*)addr);
     }
 
@@ -259,6 +260,8 @@ s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 auUnkDmaCallbackVal) {
     return osVirtualToPhysical(freeBuffer) + delta;
 }
 
+/// Initializes the audio DMA state and returns the DMA callback.
+/// Called once per AuPVoice initialization in au_driver_init to assign callbacks to them.
 ALDMAproc nuAuDmaNew(NUDMAState** state) {
     if (!nuAuDmaState.initialized) {
         nuAuDmaState.firstFree = &nuAuDmaBufList[0];
@@ -271,6 +274,7 @@ ALDMAproc nuAuDmaNew(NUDMAState** state) {
     return (ALDMAproc)nuAuDmaCallBack;
 }
 
+/// Recycles DMA buffers which are no longer in use (based on frame count).
 void nuAuCleanDMABuffers(void) {
     NUDMAState* state = &nuAuDmaState;
     NUDMABuffer* dmaPtr = state->firstUsed;
@@ -291,12 +295,12 @@ void nuAuCleanDMABuffers(void) {
 
                 alUnlink(&dmaPtr->node);
 
-                if (state->firstFree != 0) {
+                if (state->firstFree != NULL) {
                     alLink(&dmaPtr->node, &state->firstFree->node);
                 } else {
                     state->firstFree = dmaPtr;
-                    dmaPtr->node.next = 0;
-                    dmaPtr->node.prev = 0;
+                    dmaPtr->node.next = NULL;
+                    dmaPtr->node.prev = NULL;
                 }
             }
 
@@ -309,6 +313,7 @@ void nuAuCleanDMABuffers(void) {
     } while (0);
 }
 
+/// Handles global audio fade-out during system resets (NMI).
 void nuAuPreNMIProc(NUScMsg mesg_type, u32 frameCounter) {
     s16 maxVol;
     s32 vol;
@@ -336,6 +341,7 @@ void nuAuPreNMIProc(NUScMsg mesg_type, u32 frameCounter) {
     }
 }
 
+/// Links a new element into a doubly-linked list.
 void alLink(ALLink* element, ALLink* after) {
     element->next = after->next;
     element->prev = after;
@@ -346,6 +352,7 @@ void alLink(ALLink* element, ALLink* after) {
     after->next = element;
 }
 
+/// Unlinks a list element from a doubly-linked list.
 void alUnlink(ALLink* element) {
     if (element->next != NULL) {
         element->next->prev = element->prev;

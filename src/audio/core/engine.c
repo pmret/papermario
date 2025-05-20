@@ -10,7 +10,7 @@ AuGlobals* gSoundGlobals;
 AmbienceManager* gAuAmbienceManager;
 
 // data
-extern u16 VolumePresetMap[9];
+extern u16 PerceptualVolumeLevels[9];
 extern u8 EnvelopePressDefault[];
 extern u8 EnvelopeReleaseDefault[];
 extern f32 AlTuneScaling[];
@@ -168,7 +168,7 @@ static void au_reset_instrument(Instrument* instrument) {
     instrument->loopEnd = 0;
     instrument->loopCount = 0;
     instrument->type = 0;
-    instrument->auUnkDmaCallbackVal = 0;
+    instrument->useDma = FALSE;
     instrument->envelopes = &DummyInstrumentEnvelope;
     instrument->unused_26 = 0;
     instrument->unused_27 = 0;
@@ -257,9 +257,9 @@ void au_update_clients_for_audio_frame(void) {
         }
         bgmPlayer = gBGMPlayerA;
         if (bgmPlayer->fadeInfo.volScaleTime != 0) {
-            func_80053BA8(&bgmPlayer->fadeInfo);
+            au_unk_80053BA8(&bgmPlayer->fadeInfo);
             if (bgmPlayer->fadeInfo.fadeTime == 0) {
-                func_8004E444(bgmPlayer);
+                au_bgm_update_bus_volumes(bgmPlayer);
             } else {
                 au_bgm_update_fade(bgmPlayer);
             }
@@ -451,7 +451,7 @@ void au_fade_set_volume(u8 busID, u16 volume, s32 busVolume) {
     au_bus_set_volume(busID, (u32)(volume * busVolume) / AU_MAX_BUS_VOLUME);
 }
 
-void func_80053AC8(Fade* fade) {
+void au_unk_80053AC8(Fade* fade) {
     if (fade->fadeTime == 0) {
         fade->fadeTime = 1;
         fade->fadeStep = 0;
@@ -466,7 +466,7 @@ void au_fade_set_vol_scale(Fade* fade, s16 value) {
     fade->volScaleStep = 0;
 }
 
-void func_80053B04(Fade* fade, u32 arg1, s32 target) {
+void au_unk_80053B04(Fade* fade, u32 arg1, s32 target) {
     s16 time;
     s32 delta;
 
@@ -483,7 +483,7 @@ void func_80053B04(Fade* fade, u32 arg1, s32 target) {
     }
 }
 
-void func_80053BA8(Fade* fade) {
+void au_unk_80053BA8(Fade* fade) {
     fade->volScaleTime--;
 
     if (fade->volScaleTime != 0) {
@@ -558,64 +558,62 @@ AuResult au_load_song_files(u32 songID, BGMHeader* bgmFile, BGMPlayer* player) {
     SBNFileEntry fileEntry;
     SBNFileEntry fileEntry2;
     SBNFileEntry* bkFileEntry;
-    AuGlobals* soundData;
+    AuGlobals* globals = gSoundGlobals;
     InitSongEntry* songInfo;
     s32 i;
     u16 bkFileIndex;
     s32 bgmFileIndex;
     u32 data;
     u32 offset;
-    BGMPlayer* arg2_copy;
-    BGMHeader* arg1_copy;
+    BGMPlayer* playerCopy;
+    BGMHeader* fileCopy;
     s32 cond;
 
-    soundData = gSoundGlobals;
-
     // needed to match
-    cond = songID < soundData->songListLength;
-    arg2_copy = player;
-    arg1_copy = bgmFile;
+    cond = songID < globals->songListLength;
+    playerCopy = player;
+    fileCopy = bgmFile;
 
     if (cond) {
-        songInfo = &soundData->songList[songID];
+        songInfo = &globals->songList[songID];
         status = au_fetch_SBN_file(songInfo->bgmFileIndex, AU_FMT_BGM, &fileEntry);
         if (status != AU_RESULT_OK) {
             return status;
         }
 
-        if (func_8004DB28(arg2_copy)) {
+        if (au_bgm_player_is_active(playerCopy)) {
             return AU_ERROR_201;
         }
 
-        au_read_rom(fileEntry.offset, arg1_copy, fileEntry.data & 0xFFFFFF);
+        au_read_rom(fileEntry.offset, fileCopy, fileEntry.data & 0xFFFFFF);
 
         for (i = 0; i < ARRAY_COUNT(songInfo->bkFileIndex); i++) {
             bkFileIndex = songInfo->bkFileIndex[i];
             if (bkFileIndex != 0) {
-                bkFileEntry = &soundData->sbnFileList[bkFileIndex];
+                bkFileEntry = &globals->sbnFileList[bkFileIndex];
 
-                offset = (bkFileEntry->offset & 0xFFFFFF) + soundData->baseRomOffset;
+                offset = (bkFileEntry->offset & 0xFFFFFF) + globals->baseRomOffset;
                 fileEntry2.offset = offset;
 
                 data = bkFileEntry->data;
                 fileEntry2.data = data;
 
                 if ((data >> 0x18) == AU_FMT_BK) {
-                    snd_load_aux_bank(offset, i);
+                    au_load_aux_bank(offset, i);
                 }
             }
         }
         bgmFileIndex = songInfo->bgmFileIndex;
-        arg2_copy->songID = songID;
-        arg2_copy->bgmFile = bgmFile;
-        arg2_copy->bgmFileIndex = bgmFileIndex;
-        return arg1_copy->name;
+        playerCopy->songID = songID;
+        playerCopy->bgmFile = bgmFile;
+        playerCopy->bgmFileIndex = bgmFileIndex;
+        return fileCopy->name;
     } else {
         return AU_ERROR_151;
     }
 }
 
-AuResult func_80053E58(s32 songID, BGMHeader* bgmFile) {
+AuResult au_unk_80053E58(s32 songID, BGMHeader* bgmFile) {
     AuResult status;
     SBNFileEntry fileEntry;
     SBNFileEntry sbnEntry;
@@ -640,7 +638,7 @@ AuResult func_80053E58(s32 songID, BGMHeader* bgmFile) {
                 fileEntry.data = bkFileEntry->data;
 
                 if ((fileEntry.data >> 0x18) == AU_FMT_BK) {
-                    snd_load_aux_bank(fileEntry.offset, i);
+                    au_load_aux_bank(fileEntry.offset, i);
                 } else {
                     status = AU_ERROR_SBN_FORMAT_MISMATCH;
                 }
@@ -651,7 +649,7 @@ AuResult func_80053E58(s32 songID, BGMHeader* bgmFile) {
     return status;
 }
 
-BGMPlayer* func_80053F64(s32 variation) {
+BGMPlayer* au_unk_80053F64(s32 variation) {
     if (variation == 0) {
         return gSoundGlobals->unk_globals_6C[0].bgmPlayer;
     }
@@ -716,7 +714,7 @@ AuResult au_ambient_load(u32 ambSoundID) {
                             // the index here corresponds to an entry in gSoundGlobals->banks
                             // 0-2 are used for the extra banks which may be loaded for BGM files
                             // there exists an unused 4th entry this could plausibly be intended for
-                            snd_load_aux_bank(fileEntry.offset, 2);
+                            au_load_aux_bank(fileEntry.offset, 2);
                         }
                     }
                 }
@@ -727,7 +725,7 @@ AuResult au_ambient_load(u32 ambSoundID) {
     return AU_RESULT_OK;
 }
 
-BGMPlayer* func_80054248(u8 arg0) {
+BGMPlayer* au_unk_80054248(u8 arg0) {
     switch (arg0) {
         case 1:
             return gBGMPlayerA;
@@ -877,7 +875,7 @@ s32 snd_load_BGM(s32 arg0) {
                     fileEntry.offset = (bkFileEntry->offset & 0xFFFFFF) + globals->baseRomOffset;
                     fileEntry.data = bkFileEntry->data;
                     if ((fileEntry.data >> 0x18) == AU_FMT_BK) {
-                        snd_load_aux_bank(fileEntry.offset, i);
+                        au_load_aux_bank(fileEntry.offset, i);
                     } else {
                         ret = AU_ERROR_SBN_FORMAT_MISMATCH;
                     }
@@ -939,15 +937,18 @@ enum BKParseState {
 #define AL_HEADER_SIG_DR 0x4452
 #define AL_HEADER_SIG_SR 0x5352
 
+/// Loads an instrument bank file from ROM, allocates memory if needed, and sets up instrument pointers.
+/// Instruments in the bank will be configured to use DMA streaming for sample/codebook data.
+/// This is the standard loader for streamed instrument banks.
 BKFileBuffer* au_load_BK_to_bank(s32 bkFileOffset, BKFileBuffer* bkFile, s32 bankIndex, BankSet bankSet) {
     ALHeap* heap = gSynDriverPtr->heap;
-    BKHeader bkHeader;
-    BKHeader* header = &bkHeader;
-    u16 keepReading;
-    u16 readState;
+    BKHeader localHeader;
+    BKHeader* header = &localHeader;
     InstrumentBank* group;
     Instrument** inst;
     s32 instrumentCount;
+    u16 keepReading;
+    u16 readState;
     s32 size;
     u32 i;
 
@@ -1013,7 +1014,7 @@ BKFileBuffer* au_load_BK_to_bank(s32 bkFileOffset, BKFileBuffer* bkFile, s32 ban
                 }
                 break;
             case BK_READ_SWIZZLE_CR:
-                au_swizzle_BK_instruments(bkFileOffset, bkFile, *group, 16, 1);
+                au_swizzle_BK_instruments(bkFileOffset, bkFile, *group, 16, TRUE);
                 readState = BK_READ_DONE;
                 break;
 
@@ -1031,7 +1032,10 @@ BKFileBuffer* au_load_BK_to_bank(s32 bkFileOffset, BKFileBuffer* bkFile, s32 ban
     return bkFile;
 }
 
-void au_swizzle_BK_instruments(s32 bkFileOffset, BKFileBuffer* file, InstrumentBank instruments, u32 instrumentCount, u8 auUnkDmaCallbackVal) {
+/// Fixes up (swizzles) instrument pointers in a loaded bank, converting file-relative offsets to valid RAM pointers.
+/// Sets whether each instrument uses DMA streaming or not, and updates pitch ratios to match output rate.
+/// Replaces NULL instruments with a default instrument to ensure all loaded patches point to valid data.
+void au_swizzle_BK_instruments(s32 bkFileOffset, BKFileBuffer* file, InstrumentBank instruments, u32 instrumentCount, u8 useDma) {
     Instrument* defaultInstrument = gSoundGlobals->defaultInstrument;
     BKHeader* header = &file->header;
     f32 outputRate = gSoundGlobals->outputRate;
@@ -1054,7 +1058,7 @@ void au_swizzle_BK_instruments(s32 bkFileOffset, BKFileBuffer* file, InstrumentB
                 if (instrument->envelopes != NULL) {
                     instrument->envelopes = AU_FILE_RELATIVE(file, instrument->envelopes);
                 }
-                instrument->auUnkDmaCallbackVal = auUnkDmaCallbackVal;
+                instrument->useDma = useDma;
                 instrument->pitchRatio = instrument->sampleRate / outputRate;
             } else {
                 instruments[i] = defaultInstrument;
@@ -1064,20 +1068,23 @@ void au_swizzle_BK_instruments(s32 bkFileOffset, BKFileBuffer* file, InstrumentB
     }
 }
 
-s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, BankSet bankSet) {
+/// UNUSED
+/// Loads an instrument bank file from ROM to a given buffer (allocates if needed), and sets up instrument pointers.
+/// Instruments are configured to always bypass DMA: sample and codebook data is assumed to be already present in RAM.
+/// Use this only for banks whose sample data is guaranteed to be preloaded, not for standard streaming.
+BKFileBuffer* au_load_static_BK_to_bank(s32* inAddr, void* outAddr, s32 bankIndex, BankSet bankSet) {
     ALHeap* heap = gSynDriverPtr->heap;
+    BKFileBuffer* bkFile = outAddr;
     BKHeader localHeader;
-    void* fileData = vaddr;
     BKHeader* header = &localHeader;
     InstrumentBank* group;
     Instrument* instruments;
     Instrument** inst;
-    u32 instrCount;
+    s32 instrumentCount;
+    u32 keepReading;
     u32 readState;
-    s32 keepReading;
-
     u32 i;
-    s32 dmaCallbackArg = 0;
+    s32 useDma = FALSE;
 
     readState = BK_READ_FETCH_HEADER;
     keepReading = TRUE;
@@ -1088,7 +1095,7 @@ s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, BankSet bankSe
                 keepReading = FALSE;
                 break;
             case BK_READ_FETCH_HEADER:
-                au_read_rom(*bkFileOffset, &localHeader, sizeof(localHeader));
+                au_read_rom(*inAddr, &localHeader, sizeof(localHeader));
                 if (header->signature != AL_HEADER_SIG_BK) {
                     keepReading = FALSE;
                 } else if (header->size == 0) {
@@ -1100,32 +1107,32 @@ s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, BankSet bankSe
                 }
                 break;
             case BK_READ_FETCH_DATA:
-                if (fileData == NULL) {
-                    fileData = alHeapAlloc(heap, 1, header->size);
+                if (bkFile == NULL) {
+                    bkFile = alHeapAlloc(heap, 1, header->size);
                 }
-                au_read_rom(*bkFileOffset, fileData, header->size);
+                au_read_rom(*inAddr, bkFile, header->size);
 
-                instrCount = 0;
+                instrumentCount = 0;
                 group = au_get_BK_instruments(bankSet, bankIndex);
                 inst = (*group);
-                for(i = 0; i < ARRAY_COUNT(header->instruments); inst++, i++) {
+                for (i = 0; i < ARRAY_COUNT(header->instruments); inst++, i++) {
                     u16 instOffset = header->instruments[i];
-                    if(instOffset != 0) {
-                        instrCount++;
-                        *inst = AU_FILE_RELATIVE(fileData, instOffset);
+                    if (instOffset != 0) {
+                        instrumentCount++;
+                        *inst = AU_FILE_RELATIVE(bkFile, instOffset);
                     } else {
                         *inst =  NULL;
                     }
                 }
 
-                if (instrCount != 0) {
+                if (instrumentCount != 0) {
                     readState = BK_READ_SWIZZLE;
                 } else {
                     keepReading = FALSE;
                 }
                 break;
             case BK_READ_SWIZZLE:
-                au_swizzle_BK_instruments((s32)fileData, fileData, *group, 16, dmaCallbackArg);
+                au_swizzle_BK_instruments((s32)bkFile, bkFile, *group, 16, useDma);
                 readState = BK_READ_DONE;
                 break;
             default:
@@ -1133,20 +1140,20 @@ s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, BankSet bankSe
                 break;
         }
     }
-    return fileData;
+    return bkFile;
 }
 
-s32 snd_load_aux_bank(s32 bkFileOffset, s32 bankIndex) {
+s32 au_load_aux_bank(s32 bkFileOffset, s32 bankIndex) {
     au_load_BK_to_bank(bkFileOffset, gSoundGlobals->auxBanks[bankIndex], bankIndex, BANK_SET_AUX);
     return AU_RESULT_OK;
 }
 
 /// unused. resets all instruments in (bankIndex, bankSet) to default
 void au_clear_instrument_group(s32 bankIndex, BankSet bankSet) {
-    u32 i;
     Instrument* instrument = gSoundGlobals->defaultInstrument;
     InstrumentBank* group =  au_get_BK_instruments(bankSet, bankIndex);
     Instrument** ptr = *group;
+    u32 i;
 
     if (group != NULL) {
         for (i = 0; i < ARRAY_COUNT(*group); i++) {
@@ -1155,30 +1162,30 @@ void au_clear_instrument_group(s32 bankIndex, BankSet bankSet) {
     }
 }
 
-void func_80054CE0(s32 soundTypeFlags, u32 volPreset) {
-    if (volPreset < ARRAY_COUNT(VolumePresetMap)) {
-        s32 vol = VolumePresetMap[volPreset];
+void au_unk_80054CE0(s32 soundTypeFlags, u32 volPreset) {
+    if (volPreset < ARRAY_COUNT(PerceptualVolumeLevels)) {
+        s32 vol = PerceptualVolumeLevels[volPreset];
         if (soundTypeFlags & AUDIO_TYPE_BGM) {
             gBGMPlayerA->busVolume = vol;
-            func_80053AC8(&gBGMPlayerA->fadeInfo);
+            au_unk_80053AC8(&gBGMPlayerA->fadeInfo);
             gBGMPlayerB->busVolume = vol;
-            func_80053AC8(&gBGMPlayerB->fadeInfo);
+            au_unk_80053AC8(&gBGMPlayerB->fadeInfo);
         }
         if (soundTypeFlags & AUDIO_TYPE_SFX) {
             gSoundManager->busVolume = vol;
-            func_80053AC8(&gSoundManager->fadeInfo);
+            au_unk_80053AC8(&gSoundManager->fadeInfo);
         }
     }
 }
 
-s32 func_80054D74(s32 soundTypeFlags, s32 reverbType) {
+s32 au_unk_80054D74(s32 soundTypeFlags, s32 reverbType) {
     if (soundTypeFlags & AUDIO_TYPE_SFX) {
         return au_sfx_set_reverb_type(gSoundManager, reverbType);
     }
     return 0;
 }
 
-void func_80054DA8(u32 bMonoSound) {
+void au_unk_80054DA8(u32 bMonoSound) {
     if (bMonoSound % 2 == 1) {
         // mono sound
         if (gSoundGlobals->unk_130C == 0) {

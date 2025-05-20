@@ -445,7 +445,7 @@ AuResult au_song_load(s32 songID, s32 playerIndex) {
     }
 }
 
-AuResult au_song_start(s32 songName) {
+AuResult au_song_start_default(s32 songName) {
     AuResult status;
     SongUpdateEvent s;
 
@@ -508,7 +508,7 @@ AuResult snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime
     return status;
 }
 
-AuResult snd_set_song_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume) {
+AuResult snd_set_song_default_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume) {
     AuResult status;
     SongUpdateEvent s;
 
@@ -835,26 +835,26 @@ void au_register_callback(AuCallback func, s32 index) {
     gSoundGlobals->audioThreadCallbacks[index] = func;
 }
 
-void audio_set_stereo(void) {
+void snd_set_stereo(void) {
     func_80056D5C(1);
-    func_80054DA8(0);
+    au_unk_80054DA8(0);
 }
 
-void audio_set_mono(void) {
+void snd_set_mono(void) {
     func_80056D5C(0);
-    func_80054DA8(1);
+    au_unk_80054DA8(1);
 }
 
-void func_800561A4(s32 volPreset) {
-    func_80054CE0(AUDIO_TYPE_BGM, volPreset);
+void snd_set_bgm_volume(VolumeLevels volume) {
+    au_unk_80054CE0(AUDIO_TYPE_BGM, volume);
 }
 
-void func_800561C4(s32 volPreset) {
-    func_80054CE0(AUDIO_TYPE_SFX, volPreset);
+void snd_set_sfx_volume(VolumeLevels volume) {
+    au_unk_80054CE0(AUDIO_TYPE_SFX, volume);
 }
 
-void func_800561E4(s32 reverbType) {
-    func_80054D74(AUDIO_TYPE_SFX, reverbType);
+void snd_set_sfx_reverb_type(s32 reverbType) {
+    au_unk_80054D74(AUDIO_TYPE_SFX, reverbType);
 }
 
 void enable_sounds(void) {

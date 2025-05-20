@@ -281,7 +281,7 @@ s16 au_get_global_volume(void) {
     return AuGlobalVolume;
 }
 
-void func_80056D5C(u8 bStereoSound) {
+void func_80056D5C(b8 bStereoSound) {
     AuSynUseStereo = bStereoSound;
     AuSynStereoDirty = TRUE;
 }

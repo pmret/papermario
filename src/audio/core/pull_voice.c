@@ -194,7 +194,7 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
                 nSam = decoder->loop.end - decoder->sample;
                 nbytes = nSam << 1;
                 if (nSam > 0) {
-                    dramLoc = decoder->dmaFunc(decoder->memin, nbytes, decoder->dmaState, decoder->instrument->auUnkDmaCallbackVal);
+                    dramLoc = decoder->dmaFunc(decoder->memin, nbytes, decoder->dmaState, decoder->instrument->useDma);
                     dramAlign = dramLoc & 7;
                     nbytes += dramAlign;
                     n_aLoadBuffer(ptr++, nbytes + 8 - (nbytes & 7), outp, dramLoc - dramAlign);
@@ -213,7 +213,7 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
                     }
                     nSam = MIN(outCount, decoder->loop.end - decoder->loop.start);
                     nbytes = nSam << 1;
-                    dramLoc = decoder->dmaFunc(decoder->memin, nbytes, decoder->dmaState, decoder->instrument->auUnkDmaCallbackVal);
+                    dramLoc = decoder->dmaFunc(decoder->memin, nbytes, decoder->dmaState, decoder->instrument->useDma);
                     dramAlign = dramLoc & 7;
                     nbytes += dramAlign;
                     if ((op & 7) != 0) {
@@ -243,7 +243,7 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
                 if (overFlow < nbytes) {
                     if (outCount > 0) {
                         nbytes -= overFlow;
-                        dramLoc = decoder->dmaFunc(decoder->memin, nbytes, decoder->dmaState, decoder->instrument->auUnkDmaCallbackVal);
+                        dramLoc = decoder->dmaFunc(decoder->memin, nbytes, decoder->dmaState, decoder->instrument->useDma);
                         dramAlign = dramLoc & 7;
                         nbytes += dramAlign;
                         n_aLoadBuffer(ptr++, nbytes + 8 - (nbytes & 7), outp, dramLoc - dramAlign);
@@ -322,7 +322,7 @@ static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* filter, s32 tsam, s32 n
     s32 paddedSize;
 
     if (nbytes > 0) {
-        endAddr = filter->dmaFunc((s32) filter->memin, nbytes, filter->dmaState, filter->instrument->auUnkDmaCallbackVal);
+        endAddr = filter->dmaFunc((s32) filter->memin, nbytes, filter->dmaState, filter->instrument->useDma);
         endAlign = endAddr & 7;
         nbytes += endAlign;
         paddedSize = nbytes + 8 - (nbytes & 7);

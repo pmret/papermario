@@ -1801,6 +1801,8 @@ typedef enum MusicTrackVols {
     TRACK_VOLS_KPA_3        = 7
 } MusicTrackVols;
 
+/// Perceptual volume levels, 0 (mute) to 8 (max).
+/// Only attenuates, never amplifies.
 typedef enum VolumeLevels {
     VOL_LEVEL_MUTE      = 0,
     VOL_LEVEL_1         = 1,

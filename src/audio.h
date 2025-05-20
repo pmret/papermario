@@ -75,6 +75,8 @@ typedef u8* WaveData;
 #define SND_MIN_DURATION 250
 #define SND_MAX_DURATION 10000
 
+#define AU_SONG_NONE -1
+
 #define SFX_QUEUE_SIZE 16
 
 #define BGM_SEGMENT_LABEL 3
@@ -132,6 +134,22 @@ typedef enum AuEffectType {
     AU_FX_OTHER_BIGROOM = 10
 } AuEffectType;
 
+typedef enum MusicState {
+    MUSIC_STATE_0               = 0,
+    MUSIC_STATE_1               = 1,
+    MUSIC_STATE_2               = 2,
+    MUSIC_STATE_DELAY_2         = 3,
+    MUSIC_STATE_DELAY_1         = 4,
+    MUSIC_STATE_5               = 5,
+} MusicState;
+
+typedef enum BGMVariation {
+    BGM_VARIATION_0                 = 0,
+    BGM_VARIATION_1                 = 1,
+    BGM_VARIATION_2                 = 2,
+    BGM_VARIATION_3                 = 3,
+} BGMVariation;
+
 typedef enum BGMPlayerState {
     BGM_PLAY_STATE_IDLE             = 0,
     BGM_STATE_PLAY_SUBSEG           = 1,
@@ -151,10 +169,10 @@ typedef enum SegmentControlCommands {
 } SegmentControlCommands;
 
 typedef enum BGMSpecialSubops {
-    BGM_SPECIAL_1                   = 1,
-    BGM_SPECIAL_2                   = 2,
-    BGM_SPECIAL_3                   = 3,
-    BGM_SPECIAL_4                   = 4,
+    BGM_SPECIAL_SET_STEREO_DELAY    = 1, // sets delay to desync the left or right channel
+    BGM_SPECIAL_SEEK_CUSTOM_ENV     = 2, // set active custom envelope index for writing
+    BGM_SPECIAL_WRITE_CUSTOM_ENV    = 3, // write custom envelope data
+    BGM_SPECIAL_USE_CUSTOM_ENV      = 4, // select which custom envelope to use
     BGM_SPECIAL_TRIGGER_SOUND       = 5,
     BGM_SPECIAL_6                   = 6,
 } BGMSpecialSubops;
@@ -165,7 +183,6 @@ typedef enum FxBus {
     FX_BUS_BGMB         = 2,
     FX_BUS_BGMA_AUX     = 3,
 } FxBus;
-
 
 typedef enum DelayChannel {
     AU_DELAY_CHANNEL_NONE   = 0,
@@ -420,9 +437,9 @@ typedef union SeqArgs {
         u8 length;
     } Detour;
     struct { // cmd FF
-        u8 unk_00;
-        u8 unk_01;
-        u8 unk_02;
+        u8 type;
+        u8 arg1;
+        u8 arg2;
     } UnkCmdFF;
 } SeqArgs;
 
@@ -503,7 +520,8 @@ typedef struct AuFxBus {
     /* 0x14 */ struct AuPVoice* tail;
 } AuFxBus; // size = 0x18
 
- // ALDMAproc in PM supposedly has an extra arg added, so that's why we have ALDMAproc2 and ALDMANew2
+ // ALDMAproc in PM has an extra arg added for bypassing DMA transfers for static audio data
+ // (which is always available in RAM), so we have ALDMAproc2 and ALDMANew2.
 typedef s32 (*ALDMAproc2)(s32 addr, s32 len, void *state, u8 arg3);
 typedef ALDMAproc2 (*ALDMANew2)(void *state);
 
@@ -620,7 +638,7 @@ typedef struct Instrument {
                     s32 sampleRate;
                };
     /* 0x24 */ u8 type;
-    /* 0x25 */ s8 auUnkDmaCallbackVal;
+    /* 0x25 */ b8 useDma; // set to FALSE to bypass DMA transfer while loading data -- only do this if the audio samples/codebook are static
     /* 0x26 */ s8 unused_26;
     /* 0x27 */ s8 unused_27;
     /* 0x28 */ s8 unused_28;
@@ -801,7 +819,7 @@ typedef struct AuVoice {
 } AuVoice; // size = 0x48
 
 typedef struct BGMFileInfo {
-    /* 0x10 */ u8 numSegments;
+    /* 0x10 */ u8 timingPreset;
     /* 0x11 */ char pad_11[3];
     /* 0x14 */ u16 segments[4];
     /* 0x1C */ u16 drums;
@@ -1022,10 +1040,10 @@ typedef struct BGMPlayerTrack {
     /* 0x24 */ s32 subTrackVolumeTime;
     /* 0x28 */ s32 delayTime;
     //TODO Fade struct?
-    /* 0x2C */ s16_16 unkVolume;
-    /* 0x30 */ s16_16 unkVolumeStep;
-    /* 0x34 */ s16 unkVolumeTarget;
-    /* 0x36 */ s16 unkVolumeTime;
+    /* 0x2C */ s16_16 proxVolume;
+    /* 0x30 */ s16_16 proxVolumeStep;
+    /* 0x34 */ s16 proxVolumeTarget;
+    /* 0x36 */ s16 proxVolumeTime;
     /* 0x38 */ s16 segTrackTune;
     /* 0x3A */ s16 trackTremoloAmount;
     /* 0x3C */ char unk_3C[0x2];
@@ -1037,7 +1055,7 @@ typedef struct BGMPlayerTrack {
     /* 0x49 */ s8 segTrackVolume;
     /* 0x4A */ u8 subTrackPan;
     /* 0x4B */ u8 subTrackReverb;
-    /* 0x4C */ u8 unkPressEnvOverride;
+    /* 0x4C */ u8 envelopeOverride;
     /* 0x4D */ u8 unk_4D;
     /* 0x4E */ u8 unk_4E;
     /* 0x4F */ u8 unk_4F;
@@ -1048,7 +1066,7 @@ typedef struct BGMPlayerTrack {
     /* 0x54 */ u8 polyphonicIdx;
     /* 0x55 */ u8 trackTremoloSpeed;
     /* 0x56 */ u8 trackTremoloTime;
-    /* 0x57 */ u8 unk_57;
+    /* 0x57 */ u8 randomPanAmount;
     /* 0x58 */ u8 isDrumTrack;
     /* 0x59 */ u8 parentTrackIdx;
     /* 0x5A */ u8 unk_5A;
@@ -1092,7 +1110,7 @@ typedef struct BGMPlayer {
     /* 0x05A */ s16 unk_5A;
     /* 0x05C */ s16 prevUpdateResult; // unused, may indicate error status
     /* 0x05E */ char pad5E[2];
-    /* 0x060 */ u32 curSegmentID;
+    /* 0x060 */ s32 curVariation;
     /* 0x064 */ struct BGMHeader* bgmFile;
     /* 0x068 */ SegData* segmentReadPos;
     /* 0x06C */ SegData* segmentStartPos;
@@ -1118,15 +1136,15 @@ typedef struct BGMPlayer {
     /* 0x170 */ u8 proxMixID;
     /* 0x171 */ u8 proxMixVolume;
     /* 0x172 */ char unk_172[0x2];
-    /* 0x174 */ s16 unk_174[8][9];
+    /* 0x174 */ s16 customPressEnvelopes[8][9]; /// Dynamically customizable press envelopes
     /* 0x204 */ u8* trackVolsConfig;
     /* 0x208 */ u16 masterTempoBPM;
     /* 0x20A */ u16 maxTempo;
     /* 0x20C */ u16 masterPitchShift;
     /* 0x20E */ s16 detune;
     /* 0x210 */ u8 segLoopDepth;
-    /* 0x211 */ u8 unk_211;
-    /* 0x212 */ u8 unk_212[8];
+    /* 0x211 */ u8 writingCustomEnvelope; /// Currently active (for writing) custom envelope
+    /* 0x212 */ u8 customEnvelopeWritePos[8]; /// Current write position for each custom envelope
     /* 0x21A */ s8 volumeChanged;
     /* 0x21B */ u8 unk_21B;
     /* 0x21C */ u8 bgmDrumCount;
@@ -1151,7 +1169,7 @@ typedef struct BGMPlayer {
     /* 0x25A */ u8 unk_25A;
     /* 0x25B */ u8 unk_25B;
     /* 0x25C */ BGMPlayerTrack tracks[16];
-    /* 0x85C */ SeqNote notes[24];
+    /* 0x85C */ SeqNote notes[24]; /// Currently playing notes
 } BGMPlayer; // size = 0xA9C
 
 typedef struct MSEQTrackData {
