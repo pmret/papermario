@@ -1,5 +1,5 @@
-#include "common.h"
 #include "audio.h"
+#include "audio/core.h"
 
 #define LFSAMPLES       4
 #define AUEQPOWER_LENGTH 128
@@ -286,8 +286,8 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
         envMixer->lratm = _getRate(envMixer->cvolL, envMixer->ltgt, envMixer->segEnd, &envMixer->lratl);
         envMixer->rratm = _getRate(envMixer->cvolR, envMixer->rtgt, envMixer->segEnd, &envMixer->rratl);
         n_aSetVolume(ptr++, A_RATE, envMixer->ltgt, envMixer->lratm, envMixer->lratl);
-        n_aSetVolume(ptr++, A_LEFT  | A_VOL, envMixer->cvolL, envMixer->dryamt, envMixer->wetamt);
-        n_aSetVolume(ptr++, A_RIGHT | A_VOL, envMixer->rtgt, envMixer->rratm, envMixer->rratl);
+        n_aSetVolume(ptr++, A_VOL | A_LEFT, envMixer->cvolL, envMixer->dryamt, envMixer->wetamt);
+        n_aSetVolume(ptr++, A_VOL | A_RIGHT, envMixer->rtgt, envMixer->rratm, envMixer->rratl);
         n_aEnvMixer(ptr++, A_INIT, envMixer->cvolR, osVirtualToPhysical(envMixer->state));
     } else {
         n_aEnvMixer(ptr++, A_CONTINUE, 0, osVirtualToPhysical(envMixer->state));

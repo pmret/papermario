@@ -77,9 +77,10 @@ typedef u8* WaveData;
 
 #define AU_SONG_NONE -1
 
+#define MUS_QUEUE_SIZE 16
 #define SFX_QUEUE_SIZE 16
 
-#define BGM_SEGMENT_LABEL 3
+#define BGM_COMP_LABEL 3
 
 #define AU_SEMITONE 100 // cents
 #define AU_OCTAVE (12 * AU_SEMITONE)
@@ -152,20 +153,20 @@ typedef enum BGMVariation {
 
 typedef enum BGMPlayerState {
     BGM_PLAY_STATE_IDLE             = 0,
-    BGM_STATE_PLAY_SUBSEG           = 1,
-    BGM_PLAY_STATE_NEXT_SUBSEG      = 2,
+    BGM_PLAY_STATE_ACTIVE           = 1,
+    BGM_PLAY_STATE_FETCH            = 2,
     BGM_PLAY_STATE_INIT             = 3,
     BGM_PLAY_STATE_STOP             = 4
 } BGMPlayerState;
 
 typedef enum SegmentControlCommands {
-    BGM_SEGMENT_END                 = 0,
-    BGM_SEGMENT_SUBSEG              = 1,
-    BGM_SEGMENT_START_LOOP          = 3,
-    BGM_SEGMENT_WAIT                = 4,
-    BGM_SEGMENT_END_LOOP            = 5,
-    BGM_SEGMENT_6                   = 6,
-    BGM_SEGMENT_7                   = 7
+    BGM_COMP_END                 = 0,
+    BGM_COMP_PLAY_PHRASE         = 1,
+    BGM_COMP_START_LOOP          = 3,
+    BGM_COMP_WAIT                = 4,
+    BGM_COMP_END_LOOP            = 5,
+    BGM_COMP_6                   = 6,
+    BGM_COMP_7                   = 7
 } SegmentControlCommands;
 
 typedef enum BGMSpecialSubops {
@@ -399,16 +400,16 @@ typedef union SeqArgs {
         u16 value;
     } SegTrackTune;
     struct { // cmd F0
-        u8 amount;
+        u8 delay;
         u8 speed;
-        u8 time;
+        u8 depth;
     } TrackTremolo;
     struct { // cmd F1
         u8 value;
-    } TrackTremoloSpeed;
+    } TrackTremoloRate;
     struct { // cmd F2
-        u8 time;
-    } TrackTremoloTime;
+        u8 value;
+    } TrackTremoloDepth;
     // no args for F3 (TrackTremoloStop)
     struct { // cmd F4
         u8 pan0;
@@ -821,7 +822,7 @@ typedef struct AuVoice {
 typedef struct BGMFileInfo {
     /* 0x10 */ u8 timingPreset;
     /* 0x11 */ char pad_11[3];
-    /* 0x14 */ u16 segments[4];
+    /* 0x14 */ u16 compositions[4];
     /* 0x1C */ u16 drums;
     /* 0x1E */ u16 drumCount;
     /* 0x20 */ u16 instruments;
@@ -1034,7 +1035,7 @@ typedef struct BGMPlayerTrack {
     /* 0x08 */ AuFilePos prevReadPos;
     /* 0x0C */ Instrument* instrument;
     /* 0x10 */ EnvelopeData envelope;
-    /* 0x18 */ s16_16 subTrackVolume; // stored as 16.16, but used as 11.21 (>> 21) or 8.24 (>> 24) depending on context
+    /* 0x18 */ s8_24 subTrackVolume;
     /* 0x1C */ s16_16 subTrackVolumeStep;
     /* 0x20 */ s16_16 subTrackVolumeTarget;
     /* 0x24 */ s32 subTrackVolumeTime;
@@ -1045,7 +1046,7 @@ typedef struct BGMPlayerTrack {
     /* 0x34 */ s16 proxVolumeTarget;
     /* 0x36 */ s16 proxVolumeTime;
     /* 0x38 */ s16 segTrackTune;
-    /* 0x3A */ s16 trackTremoloAmount;
+    /* 0x3A */ s16 tremoloDelay;
     /* 0x3C */ char unk_3C[0x2];
     /* 0x3E */ s16 detourLength;
     /* 0x40 */ SoundPlayChange changed;
@@ -1060,17 +1061,17 @@ typedef struct BGMPlayerTrack {
     /* 0x4E */ u8 unk_4E;
     /* 0x4F */ u8 unk_4F;
     /* 0x50 */ u8 unk_50;
-    /* 0x51 */ u8 unk_51;
-    /* 0x52 */ u8 firstVoice; // voice idx start
-    /* 0x53 */ u8 lastVoice; // voice idx end, exclusive
+    /* 0x51 */ u8 polyVoiceCount; /// number of polyphonic voices for this track
+    /* 0x52 */ u8 firstVoice; /// voice idx start
+    /* 0x53 */ u8 lastVoice; /// voice idx end, exclusive
     /* 0x54 */ u8 polyphonicIdx;
-    /* 0x55 */ u8 trackTremoloSpeed;
-    /* 0x56 */ u8 trackTremoloTime;
+    /* 0x55 */ u8 tremoloRate;
+    /* 0x56 */ u8 tremoloDepth;
     /* 0x57 */ u8 randomPanAmount;
     /* 0x58 */ u8 isDrumTrack;
-    /* 0x59 */ u8 parentTrackIdx;
-    /* 0x5A */ u8 unk_5A;
-    /* 0x5B */ s8 subtrackBusID;
+    /* 0x59 */ u8 linkedTrackID;
+    /* 0x5A */ u8 muted; /// prevents notes from this track from being assigned voices, implemented for linked track pairs
+    /* 0x5B */ s8 busID;
     /* 0x5C */ u8 index;
     /* 0x5D */ char unk_5D[0x3];
 } BGMPlayerTrack; // size = 0x60;
@@ -1079,14 +1080,14 @@ typedef struct SeqNote {
     /* 0x00 */ Instrument* ins;
     /* 0x00 */ f32 pitchRatio;
     /* 0x08 */ s16 volume;
-    /* 0x0A */ s16 adjustedPitch;
-    /* 0x0C */ s32 noteLength;
-    /* 0x10 */ u16 tremoloAmount;
-    /* 0x12 */ u8 tremoloTime;
-    /* 0x12 */ u8 unk_13;
-    /* 0x14 */ s16 unk_14;
-    /* 0x16 */ u8 noteVelocity;
-    /* 0x17 */ u8 unk_note_17;
+    /* 0x0A */ s16 detune;
+    /* 0x0C */ s32 length; /// attack + sustain time
+    /* 0x10 */ u16 tremoloDelay;
+    /* 0x12 */ u8 tremoloDepth;
+    /* 0x12 */ u8 tremoloPhase;
+    /* 0x14 */ s16 randDetune;
+    /* 0x16 */ u8 velocity;
+    /* 0x17 */ u8 pendingTick;
 } SeqNote; // size = 0x18;
 
 typedef struct BGMPlayer {
@@ -1112,9 +1113,9 @@ typedef struct BGMPlayer {
     /* 0x05E */ char pad5E[2];
     /* 0x060 */ s32 curVariation;
     /* 0x064 */ struct BGMHeader* bgmFile;
-    /* 0x068 */ SegData* segmentReadPos;
-    /* 0x06C */ SegData* segmentStartPos;
-    /* 0x070 */ SegData* subSegmentStartPos;
+    /* 0x068 */ SegData* compReadPos;
+    /* 0x06C */ SegData* compStartPos;
+    /* 0x070 */ SegData* phraseStartPos;
     /* 0x074 */ s32 unk_74;
     /* 0x078 */ BGMDrumInfo* drumsInfo;
     /* 0x07C */ BGMInstrumentInfo* instrumentsInfo;
@@ -1129,9 +1130,9 @@ typedef struct BGMPlayer {
     /* 0x0CC */ s32 masterVolumeTime;
     /* 0x0D0 */ f32 playbackRate;
     /* 0x0D4 */ SeqArgs seqCmdArgs;
-    /* 0x0D8 */ SegData* segLoopStartLabels[32];
-    /* 0x158 */ SegData* segActiveLoopEndPos[4];
-    /* 0x168 */ u8 segLoopCounters[4];
+    /* 0x0D8 */ SegData* compLoopStartLabels[32];
+    /* 0x158 */ SegData* compActiveLoopEndPos[4];
+    /* 0x168 */ u8 compLoopCounters[4];
     /* 0x16C */ s32 proxMixValue;
     /* 0x170 */ u8 proxMixID;
     /* 0x171 */ u8 proxMixVolume;
@@ -1142,11 +1143,11 @@ typedef struct BGMPlayer {
     /* 0x20A */ u16 maxTempo;
     /* 0x20C */ u16 masterPitchShift;
     /* 0x20E */ s16 detune;
-    /* 0x210 */ u8 segLoopDepth;
+    /* 0x210 */ u8 compLoopDepth;
     /* 0x211 */ u8 writingCustomEnvelope; /// Currently active (for writing) custom envelope
     /* 0x212 */ u8 customEnvelopeWritePos[8]; /// Current write position for each custom envelope
     /* 0x21A */ s8 volumeChanged;
-    /* 0x21B */ u8 unk_21B;
+    /* 0x21B */ u8 totalVoices;
     /* 0x21C */ u8 bgmDrumCount;
     /* 0x21D */ u8 bgmInstrumentCount;
     /* 0x21E */ u8 unk_21E;
@@ -1159,15 +1160,15 @@ typedef struct BGMPlayer {
     /* 0x227 */ char unk_228[0x2];
     /* 0x22A */ u8 unk_22A[8];
     /* 0x232 */ u8 bFadeConfigSetsVolume;
-    /* 0x233 */ u8 unk_233;
+    /* 0x233 */ u8 initLinkMute; /// Used to mute any linked tracks after the first one encountered.
     /* 0x234 */ u8 priority;
     /* 0x235 */ u8 busID;
     /* 0x236 */ char unk_236[0x2];
-    /* 0x238 */ s32 unk_238[8];
-    /* 0x258 */ u8 unk_258;
-    /* 0x259 */ u8 unk_259;
-    /* 0x25A */ u8 unk_25A;
-    /* 0x25B */ u8 unk_25B;
+    /* 0x238 */ s32 cmdBufData[8]; /// Buffer for an unused (legacy) system for controlling the BGMPlayer from the main thread
+    /* 0x258 */ u8 cmdBufPending;
+    /* 0x259 */ u8 cmdBufReadPos;
+    /* 0x25A */ u8 cmdBufWritePos;
+    /* 0x25B */ u8 cmdBufOverflows;
     /* 0x25C */ BGMPlayerTrack tracks[16];
     /* 0x85C */ SeqNote notes[24]; /// Currently playing notes
 } BGMPlayer; // size = 0xA9C

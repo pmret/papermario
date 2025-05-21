@@ -1,7 +1,5 @@
-#include "common.h"
-#include "nu/nusys.h"
-#include "nu/nualsgi.h"
 #include "audio.h"
+#include "audio/core.h"
 
 NOP_FIX
 

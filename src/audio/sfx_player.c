@@ -1,5 +1,5 @@
-#include "common.h"
 #include "audio.h"
+#include "audio/core.h"
 
 static void au_sfx_play_sound(SoundManager* manager, SoundPlayer* player, s8* readPos, SoundRequest* request, s32 priority, s32 exclusiveID);
 static void au_sfx_set_triggers(SoundManager* manager, u32 soundID);
@@ -11,7 +11,7 @@ static void au_sfx_set_player_modifiers(SoundPlayer* player, SoundRequest* reque
 static void au_sfx_update_basic(SoundManager* manager, SoundPlayer* player, AuVoice* arg2, u8 arg3);
 static s16 au_sfx_get_scaled_volume(SoundManager* manager, SoundPlayer* player);
 static void au_sfx_update_sequence(SoundManager* manager, SoundPlayer* player, AuVoice* arg2, u8 arg3);
-static void snd_set_voice_volume(AuVoice* voice, SoundManager* manager, SoundPlayer* player);
+static void au_sfx_set_voice_volume(AuVoice* voice, SoundManager* manager, SoundPlayer* player);
 static u8 au_sfx_get_random_pan(s32 arg0, s32 arg1, s32 arg2);
 static s32 au_sfx_get_random_pitch(s32 arg0, s32 arg1, s32 arg2);
 static u8 au_sfx_get_random_vol(s32 arg0, s32 arg1, s32 arg2);
@@ -252,8 +252,8 @@ void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*) = {
     au_BGMCmd_EE_SubTrackFineTune,
     au_BGMCmd_EF_SegTrackTune,
     au_BGMCmd_F0_TrackTremolo,
-    au_BGMCmd_F1_TrackTremoloSpeed,
-    au_BGMCmd_F2_TrackTremoloTime,
+    au_BGMCmd_F1_TrackTremoloRate,
+    au_BGMCmd_F2_TrackTremoloDepth,
     au_BGMCmd_F3_TrackTremoloStop,
     au_BGMCmd_F4_SubTrackRandomPan,
     au_BGMCmd_F5_TrackVoice,
@@ -1357,7 +1357,7 @@ static void au_sfx_update_sequence(SoundManager* manager, SoundPlayer* player, A
                 }
 
                 voice->reverb = player->reverb;
-                snd_set_voice_volume(voice, manager, player);
+                au_sfx_set_voice_volume(voice, manager, player);
                 if (player->envelopCustomPressProfile == NULL) {
                     voice->envelope.cmdListPress = player->envelope.cmdListPress;
                     voice->envelope.cmdListRelease = player->envelope.cmdListRelease;
@@ -1419,7 +1419,7 @@ static void au_sfx_update_sequence(SoundManager* manager, SoundPlayer* player, A
         }
     }
     if (player->changed.volume && voice->priority == manager->priority) {
-        snd_set_voice_volume(voice, manager, player);
+        au_sfx_set_voice_volume(voice, manager, player);
         voice->envelopeFlags |= AU_VOICE_ENV_FLAG_VOL_CHANGED;
     }
     if (player->changed.tune) {
@@ -1441,7 +1441,7 @@ static void au_sfx_update_sequence(SoundManager* manager, SoundPlayer* player, A
     player->changed.all = 0;
 }
 
-static void snd_set_voice_volume(AuVoice* voice, SoundManager* manager, SoundPlayer* player) {
+static void au_sfx_set_voice_volume(AuVoice* voice, SoundManager* manager, SoundPlayer* player) {
     s32 x = ((((manager->baseVolume
         * player->sfxVolume) >> 0xF)
         * player->playVelocity) >> 7)

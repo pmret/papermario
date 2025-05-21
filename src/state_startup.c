@@ -1,5 +1,6 @@
 #include "common.h"
 #include "hud_element.h"
+#include "audio/public.h"
 #include "fio.h"
 #include "sprite.h"
 #include "game_modes.h"

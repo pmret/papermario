@@ -1,5 +1,6 @@
 #include "common.h"
 #include "nu/nusys.h"
+#include "audio/public.h"
 #include "ld_addrs.h"
 #include "hud_element.h"
 #include "sprite.h"

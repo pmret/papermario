@@ -1,5 +1,5 @@
-#include "common.h"
 #include "audio.h"
+#include "audio/core.h"
 
 void au_load_BK_headers(AuGlobals* globals, ALHeap* heap) {
     SBNFileEntry fileEntry;

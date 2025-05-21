@@ -1,5 +1,6 @@
 #include "common.h"
 #include "audio.h"
+#include "audio/public.h"
 #include "ld_addrs.h"
 #include "nu/nusys.h"
 #include "camera.h"

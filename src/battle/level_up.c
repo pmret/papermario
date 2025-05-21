@@ -1,5 +1,6 @@
 #include "common.h"
 #include "audio.h"
+#include "audio/public.h"
 #include "effects.h"
 #include "hud_element.h"
 #include "message_ids.h"

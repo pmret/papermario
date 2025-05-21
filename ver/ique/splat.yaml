@@ -91,7 +91,7 @@ segments:
     - [auto, c, audio/core/voice]
     - [auto, c, audio/core/engine]
     - [auto, c, audio/load_banks]
-    - [auto, c, audio/30450]
+    - [auto, c, audio/snd_interface]
     - [auto, c, audio/core/syn_driver]
     - [auto, c, audio/core/pull_voice]
     - [auto, c, audio/core/tables]
@@ -795,7 +795,7 @@ segments:
     - [auto, c, windows]
     - [auto, c, sprite_shading]
     - [auto, c, audio/sfx]
-    - [auto, c, audio/e0b30_len_b80]
+    - [auto, c, audio/bgm_control]
     - [auto, c, bss/engine2_post_bss]
     - start: 0xE1D60
       type: .data

@@ -21,7 +21,7 @@ API_CALLABLE(PollMusicEvents) {
     u32 count;
     s32 i;
 
-    bgm_poll_music_events(&list, &count);
+    snd_song_poll_music_events(&list, &count);
 
     for (i = 0; i < count; i++, list++) {
         MusicEvent* cur = MusicEventList;
@@ -47,7 +47,7 @@ API_CALLABLE(PollMusicEvents) {
             }
         }
     }
-    bgm_flush_music_events();
+    snd_song_flush_music_events();
     MusicEventPollCount++;
     return ApiStatus_BLOCK;
 }
@@ -103,7 +103,7 @@ API_CALLABLE(FadeInMusic) {
     s16 fadeStartVolume = evt_get_variable(script, *args++);
     s16 fadeEndVolume = evt_get_variable(script, *args++);
 
-    if (func_8014A964(musicPlayer, songID, variation, fadeTime, fadeStartVolume, fadeEndVolume)) {
+    if (bgm_fade_in_song(musicPlayer, songID, variation, fadeTime, fadeStartVolume, fadeEndVolume)) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;
@@ -232,7 +232,7 @@ API_CALLABLE(StopTrackingSoundPos) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
 
-    snd_stop_tracking_env_sound_pos(soundID, TRUE);
+    sfx_stop_tracking_env_sound_pos(soundID, TRUE);
     return ApiStatus_DONE2;
 }
 

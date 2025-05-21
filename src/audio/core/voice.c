@@ -1,5 +1,5 @@
-#include "common.h"
 #include "audio.h"
+#include "audio/core.h"
 
 // unused
 void au_update_stopped_voices(AuGlobals* globals) {

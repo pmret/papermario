@@ -1,4 +1,5 @@
 #include "audio.h"
+#include "audio/core.h"
 #include "ld_addrs.h"
 
 AuCallback BeginSoundUpdateCallback;
@@ -66,12 +67,12 @@ void au_engine_init(s32 outputRate) {
     globals->defaultInstrument = alHeapAlloc(alHeap, 1, sizeof(Instrument));
     globals->dataPER = alHeapAlloc(alHeap, 1, 6 * sizeof(PEREntry));
     globals->dataPRG = alHeapAlloc(alHeap, 1, 64 * sizeof(BGMInstrumentInfo));
-    globals->musicEventQueue = alHeapAlloc(alHeap, 1, 16 * sizeof(MusicEventTrigger));
+    globals->musicEventQueue = alHeapAlloc(alHeap, 1, MUS_QUEUE_SIZE * sizeof(MusicEventTrigger));
     globals->outputRate = outputRate;
     au_reset_instrument(globals->defaultInstrument);
     au_reset_drum_entry(&globals->defaultDrumEntry);
     au_reset_instrument_entry(&globals->defaultPRGEntry);
-    bgm_clear_music_events();
+    snd_song_clear_music_events();
 
     globals->audioThreadCallbacks[0] = NULL;
     globals->audioThreadCallbacks[1] = NULL;
@@ -124,7 +125,7 @@ void au_engine_init(s32 outputRate) {
     au_bgm_set_effect_indices(gBGMPlayerB, effects);
 
     au_sfx_init(gSoundManager, AU_PRIORITY_SFX_MANAGER, FX_BUS_SOUND, globals, 16);
-    au_amb_manager_init(gAuAmbienceManager, AU_PRIORITY_MSEQ_MANAGER, FX_BUS_SOUND, globals);
+    au_mseq_manager_init(gAuAmbienceManager, AU_PRIORITY_MSEQ_MANAGER, FX_BUS_SOUND, globals);
     au_init_voices(globals);
     au_load_BK_headers(globals, alHeap);
     if (au_fetch_SBN_file(globals->extraFileList[0], AU_FMT_SEF, &fileEntry) == AU_RESULT_OK) {
@@ -218,7 +219,7 @@ void au_update_clients_for_audio_frame(void) {
     ambManager->nextUpdateCounter -= ambManager->nextUpdateStep;
     if (ambManager->nextUpdateCounter <= 0) {
         ambManager->nextUpdateCounter += ambManager->nextUpdateInterval;
-        au_amb_manager_audio_frame_update(ambManager);
+        au_mseq_manager_audio_frame_update(ambManager);
     }
 
      // Update volume fade for SFX bus
@@ -285,7 +286,7 @@ void au_update_clients_for_video_frame(void) {
     SoundManager* manager = gSoundManager;
 
     if (globals->flushMusicEventQueue) {
-        bgm_clear_music_events();
+        snd_song_clear_music_events();
     }
 
     BeginSoundUpdateCallback = globals->audioThreadCallbacks[0];
@@ -854,7 +855,7 @@ void au_load_PRG(AuGlobals* globals, s32 romAddr) {
     }
 }
 
-s32 snd_load_BGM(s32 arg0) {
+s32 au_load_BGM(s32 arg0) {
     AuGlobals* globals = gSoundGlobals;
     InitSongEntry* song = globals->songList;
     s32 ret = AU_RESULT_OK;
@@ -1162,7 +1163,7 @@ void au_clear_instrument_group(s32 bankIndex, BankSet bankSet) {
     }
 }
 
-void au_unk_80054CE0(s32 soundTypeFlags, u32 volPreset) {
+void au_set_bus_volume_level(s32 soundTypeFlags, u32 volPreset) {
     if (volPreset < ARRAY_COUNT(PerceptualVolumeLevels)) {
         s32 vol = PerceptualVolumeLevels[volPreset];
         if (soundTypeFlags & AUDIO_TYPE_BGM) {
@@ -1178,7 +1179,7 @@ void au_unk_80054CE0(s32 soundTypeFlags, u32 volPreset) {
     }
 }
 
-s32 au_unk_80054D74(s32 soundTypeFlags, s32 reverbType) {
+s32 au_set_reverb_type(s32 soundTypeFlags, s32 reverbType) {
     if (soundTypeFlags & AUDIO_TYPE_SFX) {
         return au_sfx_set_reverb_type(gSoundManager, reverbType);
     }

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "audio.h"
+#include "audio/public.h"
 #include "script_api/battle.h"
 #include "ld_addrs.h"
 #include "effects.h"
