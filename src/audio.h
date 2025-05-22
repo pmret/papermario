@@ -338,8 +338,6 @@ struct BGMPlayer;
 struct AuGlobals;
 struct AuVoice;
 
-typedef void (*AuCallback)(void);
-
 typedef union SeqArgs {
     u8 raw[4];
     struct { // cmd E0
@@ -443,10 +441,7 @@ typedef struct Fade {
     /* 0x4 */ s32 baseStep;
     /* 0x8 */ s16 baseTarget;
     /* 0xA */ s16 baseTicks;
-              union {
     /* 0xC */ AuCallback onCompleteCallback;
-    /* 0xC */ s32 variation;
-              };
     /* 0x10 */ s16_16 envelopeVolume;
     /* 0x14 */ s32 envelopeStep;
     /* 0x18 */ s16 envelopeTarget;
@@ -1158,6 +1153,59 @@ typedef struct BGMPlayer {
     /* 0x25C */ BGMPlayerTrack tracks[16];
     /* 0x85C */ SeqNote notes[24]; /// Currently playing notes
 } BGMPlayer; // size = 0xA9C
+
+//TODO these are probably one struct with a union at offset 0x10
+
+typedef struct SongUpdateEventA {
+    /* 0x00 */ s32 songName;
+    /* 0x04 */ s32 duration;
+    /* 0x08 */ s32 startVolume;
+    /* 0x0C */ s32 finalVolume;
+    /* 0x10 */ s32 variation;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ char pad_18[8];
+} SongUpdateEventA; // size = 0x1C or 0x20
+
+typedef struct SongUpdateEventB {
+    /* 0x00 */ s32 songName;
+    /* 0x04 */ s32 duration;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 finalVolume;
+    /* 0x10 */ AuCallback callback;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ char pad_18[8];
+} SongUpdateEventB; // size = 0x1C or 0x20
+
+typedef struct SongUpdateEventC {
+    /* 0x00 */ s32 songName;
+    /* 0x04 */ s32 duration;
+    /* 0x08 */ s32 startVolume;
+    /* 0x0C */ s32 finalVolume;
+    /* 0x10 */ s32 index;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ char pad_18[8];
+} SongUpdateEventC; // size = 0x1C or 0x20
+
+typedef struct SongUpdateEventD {
+    /* 0x00 */ s32 songName;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 mode; // 0 or 1
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ char pad_18[8];
+} SongUpdateEventD; // size = 0x1C or 0x20
+
+// might be same as SongUpdateEventC
+typedef struct SongUpdateEventE {
+    /* 0x00 */ s32 songName;
+    /* 0x04 */ s32 duration;
+    /* 0x08 */ s32 startVolume;
+    /* 0x0C */ s32 finalVolume;
+    /* 0x10 */ s32 index;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ char pad_18[8];
+} SongUpdateEventE; // size = 0x1C or 0x20
 
 typedef struct MSEQTrackData {
     /* 0x0 */ u8 trackIndex;

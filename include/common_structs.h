@@ -14,6 +14,7 @@ typedef ApiStatus(*ApiFunc)(struct Evt*, s32);
 typedef Bytecode EvtScript[];
 
 typedef void NoArgCallback(void*);
+typedef void (*AuCallback)(void);
 
 #define MSG_PTR u8*
 #define IMG_PTR u8*
@@ -2436,17 +2437,6 @@ typedef struct ImgFXWorkingTexture {
     /* 0x20 */ char unk_20[0x4];
     /* 0x24 */ u8 alphaMultiplier;
 } ImgFXWorkingTexture; // size = 0x25
-
-typedef struct SongUpdateEvent {
-    /* 0x00 */ s32 songName;
-    /* 0x04 */ s32 duration;
-    /* 0x08 */ s32 startVolume;
-    /* 0x0C */ s32 finalVolume;
-    /* 0x10 */ s32 variation;
-    /* 0x14 */ s32 unk14;
-    /* 0x18 */ s32 unk18;
-    /* 0x1C */ s32 unk1C; // may be fake
-} SongUpdateEvent; // size = 0x1C or 0x20
 
 // unfortunately, cant use bitfield for this
 // format: ABCC00DD

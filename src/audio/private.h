@@ -48,17 +48,17 @@ s16 au_sfx_manager_audio_frame_update(SoundManager* manager);
 // ----------------------------------------------------------------------------------
 void au_bgm_begin_video_frame(BGMPlayer* player);
 BGMPlayer* au_bgm_get_player_with_song_name(s32 songString);
-AuResult au_bgm_dispatch_player_event(SongUpdateEvent* event);
+AuResult au_bgm_dispatch_player_event(SongUpdateEventA* event);
 AuResult au_bgm_stop_song(s32 songName);
 void au_bgm_stop_all(void);
 AuResult au_bgm_is_song_playing(s32 songName);
 b32 au_bgm_player_is_active(BGMPlayer* player);
-AuResult func_8004DB4C(SongUpdateEvent* s);
+AuResult func_8004DB4C(SongUpdateEventB* s);
 AuResult func_8004DC80(s32 songName);
-AuResult func_8004DCB8(SongUpdateEvent* update, s32 clearChanged);
-AuResult func_8004DE2C(SongUpdateEvent* update);
+AuResult func_8004DCB8(SongUpdateEventC* update, s32 clearChanged);
+AuResult func_8004DE2C(SongUpdateEventE* update);
 void func_8004DFD4(AuGlobals* globals);
-AuResult au_bgm_adjust_volume(SongUpdateEvent* update);
+AuResult au_bgm_adjust_volume(SongUpdateEventA* update);
 void au_bgm_player_init(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3);
 void au_bgm_set_effect_indices(BGMPlayer* player, u8* list);
 void au_bgm_update_fade(BGMPlayer* player);
@@ -107,7 +107,7 @@ void au_bgm_change_track_volume(BGMPlayer* player, s32 trackIdx, s16 arg2, u8 ar
 void au_bgm_set_track_volumes(BGMPlayer* player, u8* arg1, s32 arg2);
 void au_bgm_set_prox_mix_fade(BGMPlayer* player, BGMPlayerTrack* track, s32 target, s32 duration);
 void au_bgm_reset_all_voices(BGMPlayer* player);
-AuResult au_bgm_set_linked_tracks(SongUpdateEvent* arg0);
+AuResult au_bgm_set_linked_tracks(SongUpdateEventD* arg0);
 
 // ----------------------------------------------------------------------------------
 // snd_interface.c
@@ -147,7 +147,7 @@ void snd_song_stop_all(void);
 AuResult snd_song_is_playing(s32 songName);
 AuResult snd_song_set_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume);
 AuResult snd_song_set_default_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume);
-AuResult snd_song_set_variation_fade_time(s32 songName, s32 fadeTime, s32 variation);
+AuResult snd_song_set_variation_fade_time(s32 songName, s32 fadeTime, AuCallback callback);
 AuResult func_80055AF0(s32 songName);
 AuResult func_80055B28(s32 songName);
 AuResult func_80055B80(s32 songName);

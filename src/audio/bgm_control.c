@@ -100,11 +100,11 @@ void bgm_update_music_settings(void) {
                             }
                         } else {
                             if (func_80055AF0(music->songName) == AU_RESULT_OK) {
-                            music->state = state2;
+                                music->state = state2;
                             }
                         }
                     } else if (!(music->flags & MUSIC_SETTINGS_FLAG_4)) {
-                        if (snd_song_set_variation_fade_time(music->songName, music->fadeOutTime, 0) == 0) {
+                        if (snd_song_set_variation_fade_time(music->songName, music->fadeOutTime, NULL) == AU_RESULT_OK) {
                             music->state = state2;
                         }
                     } else {

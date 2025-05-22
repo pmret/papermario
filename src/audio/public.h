@@ -39,7 +39,7 @@ void snd_song_stop_all(void);
 AuResult snd_song_is_playing(s32 songName);
 AuResult snd_song_set_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume);
 AuResult snd_song_set_default_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume);
-AuResult snd_song_set_variation_fade_time(s32 songName, s32 fadeTime, s32 variation);
+AuResult snd_song_set_variation_fade_time(s32 songName, s32 fadeTime, AuCallback callback);
 AuResult func_80055AF0(s32 songName);
 AuResult func_80055B28(s32 songName);
 AuResult func_80055B80(s32 songName);

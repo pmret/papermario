@@ -132,7 +132,7 @@ BGMPlayer* au_bgm_get_player_with_song_name(s32 songString) {
     return NULL;
 }
 
-AuResult au_bgm_dispatch_player_event(SongUpdateEvent* event) {
+AuResult au_bgm_dispatch_player_event(SongUpdateEventA* event) {
     BGMPlayer* player;
     BGMFileInfo* fileInfo;
     s32 songName;
@@ -281,7 +281,7 @@ b32 au_bgm_player_is_active(BGMPlayer* player) {
     }
 }
 
-AuResult func_8004DB4C(SongUpdateEvent* s) {
+AuResult func_8004DB4C(SongUpdateEventB* s) {
     AuResult status;
     BGMPlayer* player;
     u32 songName = s->songName;
@@ -299,8 +299,8 @@ AuResult func_8004DB4C(SongUpdateEvent* s) {
                             player->fadeInfo.baseTarget = volume;
                             player->fadeInfo.baseTicks = (duration * 1000) / AU_FRAME_USEC;
                             player->fadeInfo.baseStep = ((volume << 0x10) - player->fadeInfo.baseVolume) / player->fadeInfo.baseTicks;
-                            player->fadeInfo.variation = s->variation;
-                            if (s->unk14 == 1) {
+                            player->fadeInfo.onCompleteCallback = s->callback;
+                            if (s->unk_14 == 1) {
                                 player->fadeSongName = songName;
                             }
                         }
@@ -319,35 +319,36 @@ AuResult func_8004DB4C(SongUpdateEvent* s) {
 }
 
 AuResult func_8004DC80(s32 songName) {
-    SongUpdateEvent s;
+    SongUpdateEventC s;
 
     s.songName = songName;
     s.duration = 0;
     s.startVolume = 0;
     s.finalVolume = 0;
-    s.variation = 0;
-    s.unk14 = 0;
+    s.index = 0;
+    s.unk_14 = 0;
+
     return func_8004DCB8(&s, 0);
 }
 
-AuResult func_8004DCB8(SongUpdateEvent* update, s32 clearChanged) {
+AuResult func_8004DCB8(SongUpdateEventC* update, s32 clearChanged) {
     AuResult status;
     BGMPlayer* playerA;
     BGMPlayer* playerB;
     s32 songName;
-    s32 notVariation; //TODO
+    s32 index; //TODO
     u32 i;
     u32 j;
 
     songName = update->songName;
-    notVariation = update->variation;
+    index = update->index;
     status = AU_RESULT_OK;
 
     if (songName != 0) {
         playerA = au_bgm_get_player_with_song_name(songName);
         if (playerA != NULL) {
-            if (update->unk14 == 0) {
-                playerB = au_unk_80053F64(notVariation);
+            if (update->unk_14 == 0) {
+                playerB = au_unk_80053F64(index);
                 if (playerB != NULL) {
                     if (songName == playerA->songName) {
                         if (!clearChanged) {
@@ -360,8 +361,8 @@ AuResult func_8004DCB8(SongUpdateEvent* update, s32 clearChanged) {
                                 }
                             }
                         }
-                        playerA->globals->unk_globals_6C[notVariation].unk_5 = playerA->priority;
-                        playerA->globals->unk_globals_6C[notVariation].unk_4 = 1;
+                        playerA->globals->unk_globals_6C[index].unk_5 = playerA->priority;
+                        playerA->globals->unk_globals_6C[index].unk_4 = 1;
                         playerA->fadeSongName = 0;
                         au_copy_words(playerA, playerB, sizeof(*playerA));
                         if (clearChanged == 0) {
@@ -388,25 +389,25 @@ AuResult func_8004DCB8(SongUpdateEvent* update, s32 clearChanged) {
     return status;
 }
 
-AuResult func_8004DE2C(SongUpdateEvent* update) {
+AuResult func_8004DE2C(SongUpdateEventE* update) {
     AuResult status;
     BGMPlayer* playerA;
     BGMPlayer* playerB;
-    s32 variation;
+    s32 index;
     s32 songName;
     s32 volume0;
     s32 volume1;
     s32 duration;
 
     songName = update->songName;
-    variation = update->variation;
+    index = update->index;
     status = AU_RESULT_OK;
 
     if (songName != 0) {
-        if (update->unk14 == 0) {
-            playerA = au_unk_80053F64(variation);
-            if (playerA != NULL && playerA->globals->unk_globals_6C[variation].unk_4 == 1) {
-                playerB = au_unk_80054248(playerA->globals->unk_globals_6C[variation].unk_5);
+        if (update->unk_14 == 0) {
+            playerA = au_unk_80053F64(index);
+            if (playerA != NULL && playerA->globals->unk_globals_6C[index].unk_4 == 1) {
+                playerB = au_unk_80054248(playerA->globals->unk_globals_6C[index].unk_5);
                 if (playerB != NULL) {
                     if (!au_bgm_player_is_active(playerB)) {
                         status = au_unk_80053E58(playerA->songID, playerA->bgmFile);
@@ -498,7 +499,7 @@ void func_8004DFD4(AuGlobals* globals) {
     globals->unk_80 = 0;
 }
 
-AuResult au_bgm_adjust_volume(SongUpdateEvent* update) {
+AuResult au_bgm_adjust_volume(SongUpdateEventA* update) {
     BGMPlayer* player;
     AuResult status = AU_RESULT_OK;
 
@@ -2052,7 +2053,7 @@ void au_bgm_reset_all_voices(BGMPlayer* player) {
     }
 }
 
-AuResult au_bgm_set_linked_tracks(SongUpdateEvent* update) {
+AuResult au_bgm_set_linked_tracks(SongUpdateEventD* update) {
     BGMPlayer* player;
     BGMPlayerTrack* track;
     BGMPlayerTrack* linkTrack;
@@ -2062,7 +2063,7 @@ AuResult au_bgm_set_linked_tracks(SongUpdateEvent* update) {
     s8 oldVolume;
 
     s32 songName = update->songName;
-    s32 linkIndex = update->variation; // 0 or 1
+    s32 linkIndex = update->mode;
     AuResult status = AU_RESULT_OK;
 
     if (songName != 0) {
