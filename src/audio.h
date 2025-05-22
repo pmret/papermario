@@ -444,7 +444,7 @@ typedef union VolumeField {
 
 /// Structure for volume fading for SFX and BGM. Has independent controls for base and envelope volumes.
 typedef struct Fade {
-    /* 0x0 */ VolumeField baseVolume;
+    /* 0x0 */ s16_16 baseVolume;
     /* 0x4 */ s32 baseStep;
     /* 0x8 */ s16 baseTarget;
     /* 0xA */ s16 baseTicks;

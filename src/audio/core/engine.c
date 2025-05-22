@@ -225,7 +225,7 @@ void au_update_clients_for_audio_frame(void) {
      // Update volume fade for SFX bus
     if (sfxManager->fadeInfo.baseTicks != 0) {
         au_fade_update(&sfxManager->fadeInfo);
-        au_fade_set_volume(sfxManager->busID, sfxManager->fadeInfo.baseVolume.u16, sfxManager->busVolume);
+        au_fade_set_volume(sfxManager->busID, sfxManager->fadeInfo.baseVolume >> 16, sfxManager->busVolume);
     }
 
     // Periodic SFX manager update
@@ -413,12 +413,12 @@ f32 au_compute_pitch_ratio(s32 tuning) {
 }
 
 void au_fade_init(Fade* fade, s32 time, s32 startValue, s32 endValue) {
-    fade->baseVolume.s32 = startValue << 16;
+    fade->baseVolume = startValue << 16;
     fade->baseTarget = endValue;
 
     if (time != 0) {
         fade->baseTicks = (time * 1000) / AU_FRAME_USEC;
-        fade->baseStep = ((endValue << 16) - fade->baseVolume.s32) / fade->baseTicks;
+        fade->baseStep = ((endValue << 16) - fade->baseVolume) / fade->baseTicks;
     } else {
         fade->baseTicks = 1;
         fade->baseStep = 0;
@@ -436,10 +436,10 @@ void au_fade_clear(Fade* fade) {
 void au_fade_update(Fade* fade) {
     fade->baseTicks--;
 
-    if ((fade->baseTicks << 0x10) != 0) {
-        fade->baseVolume.s32 += fade->baseStep;
+    if ((fade->baseTicks << 16) != 0) {
+        fade->baseVolume += fade->baseStep;
     } else {
-        fade->baseVolume.s32 = fade->baseTarget << 0x10;
+        fade->baseVolume = fade->baseTarget << 16;
         if (fade->onCompleteCallback != NULL) {
             fade->onCompleteCallback();
             fade->baseStep = 0;
@@ -456,7 +456,7 @@ void au_fade_flush(Fade* fade) {
     if (fade->baseTicks == 0) {
         fade->baseTicks = 1;
         fade->baseStep = 0;
-        fade->baseTarget = fade->baseVolume.u16;
+        fade->baseTarget = ((u32)fade->baseVolume >> 16);
     }
 }
 

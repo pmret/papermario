@@ -298,7 +298,7 @@ AuResult func_8004DB4C(SongUpdateEvent* s) {
                         if (!player->unk_220) {
                             player->fadeInfo.baseTarget = volume;
                             player->fadeInfo.baseTicks = (duration * 1000) / AU_FRAME_USEC;
-                            player->fadeInfo.baseStep = ((volume << 0x10) - player->fadeInfo.baseVolume.s32) / player->fadeInfo.baseTicks;
+                            player->fadeInfo.baseStep = ((volume << 0x10) - player->fadeInfo.baseVolume) / player->fadeInfo.baseTicks;
                             player->fadeInfo.variation = s->variation;
                             if (s->unk14 == 1) {
                                 player->fadeSongName = songName;
@@ -619,9 +619,9 @@ void au_bgm_update_fade(BGMPlayer* player) {
     player->fadeInfo.baseTicks--;
 
     if (player->fadeInfo.baseTicks != 0) {
-        player->fadeInfo.baseVolume.s32 += player->fadeInfo.baseStep;
+        player->fadeInfo.baseVolume += player->fadeInfo.baseStep;
     } else {
-        player->fadeInfo.baseVolume.s32 = player->fadeInfo.baseTarget << 16;
+        player->fadeInfo.baseVolume = player->fadeInfo.baseTarget << 16;
 
         if (player->fadeInfo.onCompleteCallback != NULL) {
             player->fadeInfo.onCompleteCallback();
@@ -629,7 +629,7 @@ void au_bgm_update_fade(BGMPlayer* player) {
 
         if (player->fadeSongName != 0) {
             func_8004DC80(player->fadeSongName);
-        } else if (player->fadeInfo.baseVolume.s32 == 0) {
+        } else if (player->fadeInfo.baseVolume == 0) {
             au_bgm_stop_player(player);
         }
     }
@@ -637,7 +637,7 @@ void au_bgm_update_fade(BGMPlayer* player) {
 }
 
 void au_bgm_update_bus_volumes(BGMPlayer* player) {
-    u16 volume = (player->fadeInfo.baseVolume.u16 * player->fadeInfo.envelopeVolume.u16) >> 15;
+    u16 volume = (((u32)player->fadeInfo.baseVolume >> 16) * player->fadeInfo.envelopeVolume.u16) >> 15;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(player->effectIndices); i++) {
@@ -1837,7 +1837,7 @@ void au_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
                     if ((player->soundManager->bgmSounds[i].index) == 0) {
                         player->soundManager->bgmSounds[i].index = arg1;
                         player->soundManager->bgmSounds[i].volume =
-                            ((player->fadeInfo.baseVolume.u16 * player->fadeInfo.envelopeVolume.u16) + AU_MAX_VOLUME_16) >> 0x17;
+                            ((s32)(((u32)player->fadeInfo.baseVolume >> 16) * player->fadeInfo.envelopeVolume.u16) + AU_MAX_VOLUME_16) >> 0x17;
                         break;
                     }
                 }
