@@ -176,8 +176,8 @@ AuResult au_bgm_dispatch_player_event(SongUpdateEvent* event) {
             }
 
             au_fade_init(&player->fadeInfo, duration, volume0, volume1);
-            player->fadeInfo.targetVolScale = AU_MAX_VOLUME_16;
-            player->fadeInfo.volScaleTime = 1;
+            player->fadeInfo.envelopeTarget = AU_MAX_VOLUME_16;
+            player->fadeInfo.envelopeTicks = 1;
             au_bgm_set_tick_resolution(player, BGM_SAMPLE_RATE, BgmTicksRates[fileInfo->timingPreset & 7]);
 
             if (variation < BGM_VARIATION_0 || variation > BGM_VARIATION_3 || fileInfo->compositions[variation] == 0) {
@@ -296,9 +296,9 @@ AuResult func_8004DB4C(SongUpdateEvent* s) {
                 if (player->songName == songName) {
                     if (player->masterState != BGM_PLAY_STATE_IDLE) {
                         if (!player->unk_220) {
-                            player->fadeInfo.targetVolume = volume;
-                            player->fadeInfo.fadeTicks = (duration * 1000) / AU_FRAME_USEC;
-                            player->fadeInfo.fadeStep = ((volume << 0x10) - player->fadeInfo.curVolume.s32) / player->fadeInfo.fadeTicks;
+                            player->fadeInfo.baseTarget = volume;
+                            player->fadeInfo.baseTicks = (duration * 1000) / AU_FRAME_USEC;
+                            player->fadeInfo.baseStep = ((volume << 0x10) - player->fadeInfo.baseVolume.s32) / player->fadeInfo.baseTicks;
                             player->fadeInfo.variation = s->variation;
                             if (s->unk14 == 1) {
                                 player->fadeSongName = songName;
@@ -498,7 +498,7 @@ void func_8004DFD4(AuGlobals* globals) {
     globals->unk_80 = 0;
 }
 
-AuResult func_8004E0F4(SongUpdateEvent* update) {
+AuResult au_bgm_adjust_volume(SongUpdateEvent* update) {
     BGMPlayer* player;
     AuResult status = AU_RESULT_OK;
 
@@ -616,12 +616,12 @@ void au_bgm_set_effect_indices(BGMPlayer* player, u8* list) {
 }
 
 void au_bgm_update_fade(BGMPlayer* player) {
-    player->fadeInfo.fadeTicks--;
+    player->fadeInfo.baseTicks--;
 
-    if (player->fadeInfo.fadeTicks != 0) {
-        player->fadeInfo.curVolume.s32 += player->fadeInfo.fadeStep;
+    if (player->fadeInfo.baseTicks != 0) {
+        player->fadeInfo.baseVolume.s32 += player->fadeInfo.baseStep;
     } else {
-        player->fadeInfo.curVolume.s32 = player->fadeInfo.targetVolume << 16;
+        player->fadeInfo.baseVolume.s32 = player->fadeInfo.baseTarget << 16;
 
         if (player->fadeInfo.onCompleteCallback != NULL) {
             player->fadeInfo.onCompleteCallback();
@@ -629,7 +629,7 @@ void au_bgm_update_fade(BGMPlayer* player) {
 
         if (player->fadeSongName != 0) {
             func_8004DC80(player->fadeSongName);
-        } else if (player->fadeInfo.curVolume.s32 == 0) {
+        } else if (player->fadeInfo.baseVolume.s32 == 0) {
             au_bgm_stop_player(player);
         }
     }
@@ -637,7 +637,7 @@ void au_bgm_update_fade(BGMPlayer* player) {
 }
 
 void au_bgm_update_bus_volumes(BGMPlayer* player) {
-    u16 mult = (player->fadeInfo.curVolume.u16 * player->fadeInfo.volScale.u16) >> 15;
+    u16 volume = (player->fadeInfo.baseVolume.u16 * player->fadeInfo.envelopeVolume.u16) >> 15;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(player->effectIndices); i++) {
@@ -646,7 +646,7 @@ void au_bgm_update_bus_volumes(BGMPlayer* player) {
         if (busID < 0) {
             return;
         }
-        au_fade_set_volume(busID, mult, player->busVolume);
+        au_fade_set_volume(busID, volume, player->busVolume);
     }
 }
 
@@ -1837,7 +1837,7 @@ void au_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
                     if ((player->soundManager->bgmSounds[i].index) == 0) {
                         player->soundManager->bgmSounds[i].index = arg1;
                         player->soundManager->bgmSounds[i].volume =
-                            ((player->fadeInfo.curVolume.u16 * player->fadeInfo.volScale.u16) + AU_MAX_VOLUME_16) >> 0x17;
+                            ((player->fadeInfo.baseVolume.u16 * player->fadeInfo.envelopeVolume.u16) + AU_MAX_VOLUME_16) >> 0x17;
                         break;
                     }
                 }

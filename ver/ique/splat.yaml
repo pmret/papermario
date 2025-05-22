@@ -794,7 +794,7 @@ segments:
     - [auto, c, audio/ambience]
     - [auto, c, windows]
     - [auto, c, sprite_shading]
-    - [auto, c, audio/sfx]
+    - [auto, c, audio/sfx_control]
     - [auto, c, audio/bgm_control]
     - [auto, c, bss/engine2_post_bss]
     - start: 0xE1D60

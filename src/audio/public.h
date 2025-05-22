@@ -1,11 +1,15 @@
 #ifndef _AUDIO_PUBLIC_H_
 #define _AUDIO_PUBLIC_H_
 
-// 30450.c
-void func_80055050(ALHeap* heap);
-void func_80055068(u32 arg0);
+#include "audio.h"
+
+// ----------------------------------------------------------------------------------
+// snd_interface.c
+// ----------------------------------------------------------------------------------
+void snd_notify_engine_ready(ALHeap* heap);
+void snd_legacy_sound_dispatch(u32 id);
 //void snd_bgm_clear_legacy_commands(BGMPlayer* player);
-//void snd_bgm_enqueue_legacy_command(u32 arg0);
+void snd_bgm_enqueue_legacy_command(u32 cmd);
 void snd_start_sound(s32 soundID, u8 volume, u8 pan);
 void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
 void snd_adjust_sound(s32 soundID, u8 volume, u8 pan);
@@ -42,8 +46,8 @@ AuResult func_80055B80(s32 songName);
 AuResult func_80055BB8(s32 songName, s32 fadeTime);
 AuResult func_80055BF0(s32 songName);
 AuResult func_80055C2C(s32 songName);
-AuResult func_80055C64(s32 songName);
-AuResult func_80055C94(s32 songName);
+AuResult snd_song_set_volume_quiet(s32 songName);
+AuResult snd_song_set_volume_full(s32 songName);
 AuResult snd_song_set_linked_mode(s32 songName, s32 mode);
 //AuResult snd_song_get_playing_info(s32 songName, BGMHeader** outTrackData, BGMPlayer** outPlayer);
 AuResult snd_song_set_playback_rate(s32 songName, f32 arg1);
@@ -62,7 +66,7 @@ void snd_song_poll_music_events(u32** arg0, s32* arg1);
 void snd_song_flush_music_events(void);
 void snd_song_trigger_music_event(s32 playerID, s32 trackIndex, s32 eventInfo);
 void snd_song_clear_music_events(void);
-//void func_80056144(AuCallback arg0, s32 arg1);
+//void snd_register_callback(AuCallback func, s32 index);
 void snd_set_stereo(void);
 void snd_set_mono(void);
 void snd_set_bgm_volume(VolumeLevels volume);
@@ -71,10 +75,12 @@ void snd_set_sfx_reverb_type(s32 arg0);
 void snd_enable_sfx(void);
 void snd_disable_sfx(void);
 
-
-enum AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet);
-enum AuResult bgm_clear_track_volumes(s32 playerIndex, s16 trackVolSet);
-enum AuResult bgm_set_linked_mode(s32 playerIndex, s16 mode);
+// ----------------------------------------------------------------------------------
+// bgm_control.c
+// ----------------------------------------------------------------------------------
+AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet);
+AuResult bgm_clear_track_volumes(s32 playerIndex, s16 trackVolSet);
+AuResult bgm_set_linked_mode(s32 playerIndex, s16 mode);
 void bgm_quiet_max_volume(void);
 void bgm_reset_max_volume(void);
 void bgm_reset_volume(void);
@@ -83,7 +89,6 @@ s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s1
 void bgm_set_battle_song(s32, s32);
 void bgm_push_battle_song(void);
 s32 bgm_adjust_proximity(s32 playerIndex, s32 arg1, s16 arg2);
-void func_801491E4(Matrix4f mtx, s32, s32, s32, s32, s32 alpha);
 s32 bgm_fade_in_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5);
 
 void bgm_update_music_settings(void);
@@ -93,7 +98,9 @@ void bgm_pop_song(void);
 void bgm_push_song(s32 songID, s32 variation);
 void bgm_pop_battle_song(void);
 
-// sfx.h
+// ----------------------------------------------------------------------------------
+// sfx_control.c
+// ----------------------------------------------------------------------------------
 void sfx_reset_door_sounds(void);
 void sfx_clear_sounds(void);
 void sfx_clear_env_sounds(s16 playSounds);

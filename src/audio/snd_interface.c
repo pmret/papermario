@@ -5,7 +5,7 @@
 static u8* snd_song_get_track_volumes_set(MusicTrackVols arg0);
 
 s32 PreventBGMPlayerUpdate = FALSE;
-u16 D_80078DB4 = 0;
+u16 SoundEngineReady = 0;
 u16 AmbienceRadioChannel = 0;
 
 // lists of data:
@@ -101,32 +101,32 @@ u8 TrackVols_KPA_3[] = {
     0
 };
 
-void func_80055050(ALHeap* heap) {
-    D_80078DB4 = 1;
+void snd_notify_engine_ready(ALHeap* heap) {
+    SoundEngineReady = 1;
     PreventBGMPlayerUpdate = FALSE;
 }
 
 /// Unused
 /// Seems to be an early function that accepts a command to play any kind of audio asset,
 // but only BGM and SFX are supported.
-void func_80055068(u32 arg0) {
-    u16 temp_a0 = D_80078DB4;
-    u32 temp_v1 = arg0 & 0xF;
+void snd_legacy_sound_dispatch(u32 id) {
+    u16 ready = SoundEngineReady;
+    u32 type = id & 0xF;
 
-    if (temp_a0 == 1) {
-        switch (temp_v1) {
+    if (ready == 1) {
+        switch (type) {
             case 2:
             case 3:
                 break;
             case 4:
-                snd_start_sound_with_shift(arg0 >> 4, 0, 0, 0);
+                snd_start_sound_with_shift(id >> 4, 0, 0, 0);
                 break;
             case 1:
-                if (temp_v1 == 1) {
-                    s32 filename = snd_song_load((arg0 >> 4) & 0xFF, 0);
+                if (type == 1) {
+                    s32 filename = snd_song_load((id >> 4) & 0xFF, 0);
 
                     if (filename > ASCII_TO_U32('0', ' ', ' ', '\0')) {
-                        snd_song_start_variation(filename, (arg0 >> 0xC) & 3);
+                        snd_song_start_variation(filename, (id >> 0xC) & 3);
                     }
                 }
                 break;
@@ -617,20 +617,20 @@ AuResult func_80055C2C(s32 songName) {
     return func_8004DE2C(&s);
 }
 
-AuResult func_80055C64(s32 songName) {
+AuResult snd_song_set_volume_quiet(s32 songName) {
     SongUpdateEvent s;
     s.songName = songName;
     s.duration = 500;
-    s.finalVolume = 0x2000;
-    return func_8004E0F4(&s);
+    s.finalVolume = 0.25001 * AU_MAX_VOLUME_16;
+    return au_bgm_adjust_volume(&s);
 }
 
-AuResult func_80055C94(s32 songName) {
+AuResult snd_song_set_volume_full(s32 songName) {
     SongUpdateEvent s;
     s.songName = songName;
     s.duration = 500;
     s.finalVolume = AU_MAX_VOLUME_16;
-    return func_8004E0F4(&s);
+    return au_bgm_adjust_volume(&s);
 }
 
 AuResult snd_song_set_linked_mode(s32 songName, s32 mode) {

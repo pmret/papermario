@@ -483,7 +483,7 @@ void au_sfx_init(SoundManager* manager, u8 priority, u8 busID, AuGlobals* global
     }
 
     manager->busVolume = AU_MAX_BUS_VOLUME;
-    manager->baseVolume = 0x8000;
+    manager->baseVolume = AU_MAX_BUS_VOLUME;
     manager->frameCounter = 0;
     manager->randomValue = 0;
 
@@ -524,7 +524,7 @@ void au_sfx_init(SoundManager* manager, u8 priority, u8 busID, AuGlobals* global
     au_sfx_set_state(manager, SND_MANAGER_STATE_ENABLED);
     au_sfx_clear_queue(manager);
     au_fade_init(&manager->fadeInfo, 0, AU_MAX_VOLUME_16, AU_MAX_VOLUME_16);
-    au_fade_set_volume(manager->busID, manager->fadeInfo.curVolume.u16, manager->busVolume);
+    au_fade_set_volume(manager->busID, manager->fadeInfo.baseVolume.u16, manager->busVolume);
     manager->lastCustomEffectIdx = 0xFF;
 
     manager->customReverbParams[0] = CUSTOM_SMALL_ROOM_PARAMS;

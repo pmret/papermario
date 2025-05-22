@@ -442,21 +442,20 @@ typedef union VolumeField {
     s32 s32;
 } VolumeField;
 
-// envelope related?
+/// Structure for volume fading for SFX and BGM. Has independent controls for base and envelope volumes.
 typedef struct Fade {
-    /* 0x0 */ VolumeField curVolume;
-    /* 0x4 */ s32 fadeStep;
-    /* 0x8 */ s16 targetVolume;
-    /* 0xA */ s16 fadeTicks;
+    /* 0x0 */ VolumeField baseVolume;
+    /* 0x4 */ s32 baseStep;
+    /* 0x8 */ s16 baseTarget;
+    /* 0xA */ s16 baseTicks;
               union {
     /* 0xC */ AuCallback onCompleteCallback;
     /* 0xC */ s32 variation;
               };
-    // fields below are envelope?
-    /* 0x10 */ VolumeField volScale;
-    /* 0x14 */ s32 volScaleStep;
-    /* 0x18 */ s16 targetVolScale;
-    /* 0x1A */ s16 volScaleTime;
+    /* 0x10 */ VolumeField envelopeVolume;
+    /* 0x14 */ s32 envelopeStep;
+    /* 0x18 */ s16 envelopeTarget;
+    /* 0x1A */ s16 envelopeTicks;
 } Fade; // size = 0x10
 
 typedef struct AuDelay {
@@ -735,7 +734,7 @@ typedef struct SoundManager {
     /* 0x034 */ s32 nextUpdateStep;
     /* 0x038 */ s32 nextUpdateInterval;
     /* 0x03C */ s32 nextUpdateCounter;
-    /* 0x040 */ struct Fade fadeInfo;
+    /* 0x040 */ Fade fadeInfo;
     /* 0x05C */ s32 busVolume;
     /* 0x060 */ s32 randomValue;
     /* 0x064 */ s32* customReverbParams[8];
@@ -1033,7 +1032,6 @@ typedef struct BGMPlayerTrack {
     /* 0x20 */ s16_16 subTrackVolumeTarget;
     /* 0x24 */ s32 subTrackVolumeTime;
     /* 0x28 */ s32 delayTime;
-    //TODO Fade struct?
     /* 0x2C */ s16_16 proxVolume;
     /* 0x30 */ s16_16 proxVolumeStep;
     /* 0x34 */ s16 proxVolumeTarget;
