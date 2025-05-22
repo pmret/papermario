@@ -461,7 +461,7 @@ void au_fade_flush(Fade* fade) {
 }
 
 void au_fade_set_vol_scale(Fade* fade, s16 value) {
-    fade->envelopeVolume.s32 = value << 16;
+    fade->envelopeVolume = value << 16;
     fade->envelopeTarget = value;
     fade->envelopeTicks = 0;
     fade->envelopeStep = 0;
@@ -473,7 +473,7 @@ void au_unk_80053B04(Fade* fade, u32 duration, s32 target) {
 
     if (duration >= 250 && duration <= 100000) {
         ticks = (s32)(duration * 1000) / AU_FRAME_USEC;
-        delta = (target << 16) - fade->envelopeVolume.s32;
+        delta = (target << 16) - fade->envelopeVolume;
 
         fade->envelopeTarget = target;
         fade->envelopeTicks = ticks;
@@ -488,10 +488,10 @@ void au_fade_update_envelope(Fade* fade) {
     fade->envelopeTicks--;
 
     if (fade->envelopeTicks != 0) {
-        fade->envelopeVolume.s32 += fade->envelopeStep;
+        fade->envelopeVolume += fade->envelopeStep;
     } else {
         fade->envelopeStep = 0;
-        fade->envelopeVolume.s32 = fade->envelopeTarget << 16;
+        fade->envelopeVolume = fade->envelopeTarget << 16;
     }
 }
 

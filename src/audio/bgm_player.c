@@ -637,7 +637,10 @@ void au_bgm_update_fade(BGMPlayer* player) {
 }
 
 void au_bgm_update_bus_volumes(BGMPlayer* player) {
-    u16 volume = (((u32)player->fadeInfo.baseVolume >> 16) * player->fadeInfo.envelopeVolume.u16) >> 15;
+    u16 volume = (
+            ((u32)player->fadeInfo.baseVolume >> 16) *
+            ((u32)player->fadeInfo.envelopeVolume >> 16)
+        ) >> 15;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(player->effectIndices); i++) {
@@ -1837,7 +1840,10 @@ void au_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
                     if ((player->soundManager->bgmSounds[i].index) == 0) {
                         player->soundManager->bgmSounds[i].index = arg1;
                         player->soundManager->bgmSounds[i].volume =
-                            ((s32)(((u32)player->fadeInfo.baseVolume >> 16) * player->fadeInfo.envelopeVolume.u16) + AU_MAX_VOLUME_16) >> 0x17;
+                            ((s32)(
+                                ((u32)player->fadeInfo.baseVolume >> 16) *
+                                ((u32)player->fadeInfo.envelopeVolume >> 16)
+                            ) + AU_MAX_VOLUME_16) >> 0x17;
                         break;
                     }
                 }

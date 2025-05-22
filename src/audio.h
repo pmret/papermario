@@ -437,11 +437,6 @@ typedef union SeqArgs {
     } UnkCmdFF;
 } SeqArgs;
 
-typedef union VolumeField {
-    u16 u16;
-    s32 s32;
-} VolumeField;
-
 /// Structure for volume fading for SFX and BGM. Has independent controls for base and envelope volumes.
 typedef struct Fade {
     /* 0x0 */ s16_16 baseVolume;
@@ -452,7 +447,7 @@ typedef struct Fade {
     /* 0xC */ AuCallback onCompleteCallback;
     /* 0xC */ s32 variation;
               };
-    /* 0x10 */ VolumeField envelopeVolume;
+    /* 0x10 */ s16_16 envelopeVolume;
     /* 0x14 */ s32 envelopeStep;
     /* 0x18 */ s16 envelopeTarget;
     /* 0x1A */ s16 envelopeTicks;
