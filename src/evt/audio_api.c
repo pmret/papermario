@@ -73,7 +73,7 @@ API_CALLABLE(FadeOutMusic) {
     s32 musicPlayer = evt_get_variable(script, *args++);
     s32 fadeTime = evt_get_variable(script, *args++);
 
-    if (bgm_set_song(musicPlayer, AU_SONG_NONE, 0, fadeTime, VOL_LEVEL_8)) {
+    if (bgm_set_song(musicPlayer, AU_SONG_NONE, 0, fadeTime, VOL_LEVEL_FULL)) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;

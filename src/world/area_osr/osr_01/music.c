@@ -15,7 +15,7 @@ EvtScript N(EVS_SetupMusic) = {
 EvtScript N(EVS_PlaySong_Starship) = {
     Call(GetEntryID, LVar0)
     IfEq(LVar0, osr_01_ENTRY_3)
-        Call(SetMusicTrack, 0, SONG_STARSHIP_THEME, 0, VOL_LEVEL_8)
+        Call(SetMusicTrack, 0, SONG_STARSHIP_THEME, 0, VOL_LEVEL_FULL)
     Else
         Exec(N(EVS_SetupMusic))
     EndIf

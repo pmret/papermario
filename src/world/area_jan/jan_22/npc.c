@@ -939,7 +939,7 @@ EvtScript N(EVS_NpcInteract_Kolorado_Before) = {
     Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00C2)
     Call(InterpPlayerYaw, 90, 3)
     Call(InterpNpcYaw, NPC_SELF, 90, 3)
-    Call(SetMusicTrack, 0, SONG_MT_LAVALAVA, 1, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_MT_LAVALAVA, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 200, 0)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)

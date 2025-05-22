@@ -213,7 +213,7 @@ EvtScript N(EVS_Main) = {
         Return
     EndIf
     IfLt(GB_StoryProgress, STORY_CH8_REACHED_PEACHS_CASTLE)
-        Call(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, VOL_LEVEL_8)
+        Call(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, VOL_LEVEL_FULL)
     EndIf
     Exec(N(EVS_BindExitTriggers))
     Exec(N(EVS_EnterMap))

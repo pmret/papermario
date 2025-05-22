@@ -305,7 +305,7 @@ u16 PerceptualVolumeLevels[] = {
     [VOL_LEVEL_5] AU_MAX_BUS_VOLUME * SQ(0.625), // 39.0625 %
     [VOL_LEVEL_6] AU_MAX_BUS_VOLUME * SQ(0.750), // 56.25 %
     [VOL_LEVEL_7] AU_MAX_BUS_VOLUME * SQ(0.875), // 76.5625 %
-    [VOL_LEVEL_8] AU_MAX_BUS_VOLUME, // 100.0 %
+    [VOL_LEVEL_FULL] AU_MAX_BUS_VOLUME, // 100.0 %
 };
 
 // TODO: figure out how to make struct properly

@@ -31,11 +31,11 @@ AuResult snd_song_load(s32 songID, s32 playerIndex);
 AuResult snd_song_start_default(s32 songName);
 AuResult snd_song_start_variation(s32 songName, s32 variation);
 AuResult snd_song_stop(s32 songName);
-void snd_stop_songs(void);
+void snd_song_stop_all(void);
 AuResult snd_song_is_playing(s32 songName);
-AuResult snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume);
-AuResult snd_set_song_default_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume);
-AuResult snd_set_song_variation_fade_time(s32 songName, s32 fadeTime, s32 variation);
+AuResult snd_song_set_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume);
+AuResult snd_song_set_default_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume);
+AuResult snd_song_set_variation_fade_time(s32 songName, s32 fadeTime, s32 variation);
 AuResult func_80055AF0(s32 songName);
 AuResult func_80055B28(s32 songName);
 AuResult func_80055B80(s32 songName);
@@ -44,7 +44,7 @@ AuResult func_80055BF0(s32 songName);
 AuResult func_80055C2C(s32 songName);
 AuResult func_80055C64(s32 songName);
 AuResult func_80055C94(s32 songName);
-AuResult snd_set_song_linked_mode(s32 songName, s32 mode);
+AuResult snd_song_set_linked_mode(s32 songName, s32 mode);
 //AuResult snd_song_get_playing_info(s32 songName, BGMHeader** outTrackData, BGMPlayer** outPlayer);
 AuResult snd_song_set_playback_rate(s32 songName, f32 arg1);
 /*
@@ -60,7 +60,7 @@ void snd_song_set_proximity_mix_full(s32 songName, s32 mix);
 */
 void snd_song_poll_music_events(u32** arg0, s32* arg1);
 void snd_song_flush_music_events(void);
-void snd_song_trigger_music_event(s32 arg0, s32 arg1, s32 arg2);
+void snd_song_trigger_music_event(s32 playerID, s32 trackIndex, s32 eventInfo);
 void snd_song_clear_music_events(void);
 //void func_80056144(AuCallback arg0, s32 arg1);
 void snd_set_stereo(void);
@@ -68,8 +68,8 @@ void snd_set_mono(void);
 void snd_set_bgm_volume(VolumeLevels volume);
 void snd_set_sfx_volume(VolumeLevels volume);
 void snd_set_sfx_reverb_type(s32 arg0);
-void enable_sounds(void);
-void disable_sounds(void);
+void snd_enable_sfx(void);
+void snd_disable_sfx(void);
 
 
 enum AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet);

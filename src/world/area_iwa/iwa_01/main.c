@@ -58,7 +58,7 @@ EvtScript N(EVS_Main) = {
     ExecWait(N(EVS_MakeSplashes))
     Exec(N(EVS_BindSlideTriggers2))
     Exec(N(EVS_BindSlideTriggers1))
-    Call(SetMusicTrack, 0, SONG_MT_RUGGED, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_MT_RUGGED, 0, VOL_LEVEL_FULL)
     Call(PlaySoundAtF, SOUND_LOOP_IWA01_FLOW1, SOUND_SPACE_WITH_DEPTH, -570, -180, 425)
     Call(PlaySoundAtF, SOUND_LOOP_IWA01_FLOW2, SOUND_SPACE_WITH_DEPTH, 740, -170, 330)
     Call(GetLoadType, LVar1)

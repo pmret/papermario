@@ -236,7 +236,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
         Call(SetNpcRotation, NPC_Twink, 0, 0, 0)
     EndThread
     Call(ShowMessageAtScreenPos, MSG_HOS_000D, 160, 40)
-    Call(SetMusicTrack, 0, SONG_TWINK_THEME, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_TWINK_THEME, 0, VOL_LEVEL_FULL)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Call(SetNpcAnimation, NPC_Twink, ANIM_Twink_Idle)
     Call(NpcFacePlayer, NPC_Twink, 0)
@@ -458,7 +458,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
 
 EvtScript N(EVS_Scene_TwinkDeparts) = {
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    Call(SetMusicTrack, 0, SONG_TWINK_THEME, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_TWINK_THEME, 0, VOL_LEVEL_FULL)
     Wait(60 * DT)
     Call(SetCamLeadPlayer, CAM_DEFAULT, TRUE)
     Call(GetNpcPos, NPC_Twink, LVar3, LVar1, LVar2)

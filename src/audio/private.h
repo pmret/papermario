@@ -144,11 +144,11 @@ AuResult snd_song_load(s32 songID, s32 playerIndex);
 AuResult snd_song_start_default(s32 songName);
 AuResult snd_song_start_variation(s32 songName, s32 variation);
 AuResult snd_song_stop(s32 songName);
-void snd_stop_songs(void);
+void snd_song_stop_all(void);
 AuResult snd_song_is_playing(s32 songName);
-AuResult snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume);
-AuResult snd_set_song_default_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume);
-AuResult snd_set_song_variation_fade_time(s32 songName, s32 fadeTime, s32 variation);
+AuResult snd_song_set_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume);
+AuResult snd_song_set_default_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume);
+AuResult snd_song_set_variation_fade_time(s32 songName, s32 fadeTime, s32 variation);
 AuResult func_80055AF0(s32 songName);
 AuResult func_80055B28(s32 songName);
 AuResult func_80055B80(s32 songName);
@@ -157,7 +157,7 @@ AuResult func_80055BF0(s32 songName);
 AuResult func_80055C2C(s32 songName);
 AuResult func_80055C64(s32 songName);
 AuResult func_80055C94(s32 songName);
-AuResult snd_set_song_linked_mode(s32 songName, s32 mode);
+AuResult snd_song_set_linked_mode(s32 songName, s32 mode);
 */
 AuResult snd_song_get_playing_info(s32 songName, BGMHeader** outTrackData, BGMPlayer** outPlayer);
 /*
@@ -176,8 +176,8 @@ void snd_song_set_proximity_mix_full(s32 songName, s32 mix);
 /*
 void snd_song_poll_music_events(u32** arg0, s32* arg1);
 void snd_song_flush_music_events(void);
-void music_event_trigger(s32 arg0, s32 arg1, s32 arg2);
-void func_8005610C(void);
+void snd_song_trigger_music_event(s32 playerID, s32 trackIndex, s32 eventInfo);
+void snd_song_clear_music_events(void);
 */
 void snd_register_callback(AuCallback arg0, s32 arg1);
 /*
@@ -186,8 +186,8 @@ void snd_set_mono(void);
 void snd_set_bgm_volume(s32 arg0);
 void snd_set_sfx_volume(s32 arg0);
 void snd_set_sfx_reverb_type(s32 arg0);
-void enable_sounds(void);
-void disable_sounds(void);
+void snd_enable_sfx(void);
+void snd_disable_sfx(void);
 */
 
 // sfx.c

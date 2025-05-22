@@ -93,7 +93,7 @@ EvtScript N(EVS_Main) = {
     EndIf
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_DEFEATED_TUTANKOOPA)
-            Call(SetMusicTrack, 0, SONG_TUTANKOOPA_REVEALED, 0, VOL_LEVEL_8)
+            Call(SetMusicTrack, 0, SONG_TUTANKOOPA_REVEALED, 0, VOL_LEVEL_FULL)
         CaseEq(STORY_CH2_DEFEATED_TUTANKOOPA)
             Call(FadeOutMusic, 0, 500)
         CaseGt(STORY_CH2_DEFEATED_TUTANKOOPA)

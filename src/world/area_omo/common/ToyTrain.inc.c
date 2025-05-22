@@ -378,7 +378,7 @@ EvtScript N(EVS_TrainUnk_D) = {
     Call(InterpNpcYaw, NPC_Conductor, LVarA, 0)
     Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 5, MSG_CH4_0009)
     Call(PlaySound, SOUND_LRAW_TOYBOX_TRAIN_GEAR)
-    Call(SetMusicTrack, 0, SONG_TOYBOX_TRAIN, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_TOYBOX_TRAIN, 0, VOL_LEVEL_FULL)
     Wait(10)
     Return
     End
@@ -442,7 +442,7 @@ EvtScript N(EVS_TrainUnk_AltD) = {
     Call(InterpNpcYaw, NPC_Conductor, LVarA, 0)
     Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 5, MSG_CH4_0009)
     Call(PlaySound, SOUND_LRAW_TOYBOX_TRAIN_GEAR)
-    Call(SetMusicTrack, 0, SONG_TOYBOX_TRAIN, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_TOYBOX_TRAIN, 0, VOL_LEVEL_FULL)
     Wait(10)
     Return
     End
@@ -451,7 +451,7 @@ EvtScript N(EVS_TrainUnk_AltD) = {
 
 EvtScript N(EVS_TrainUnk_E) = {
     Call(StopSound, SOUND_LRAW_TOYBOX_TRAIN_GEAR)
-    Call(SetMusicTrack, 0, SONG_SHY_GUY_TOYBOX, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_SHY_GUY_TOYBOX, 0, VOL_LEVEL_FULL)
     Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     SetF(LVar0, MV_TrainPos)
@@ -498,7 +498,7 @@ EvtScript N(EVS_TrainUnk_E) = {
 #ifdef INCLUDE_ALTERNATES
 EvtScript N(EVS_TrainUnk_AltE) = {
     Call(StopSound, SOUND_LRAW_TOYBOX_TRAIN_GEAR)
-    Call(SetMusicTrack, 0, SONG_SHY_GUY_TOYBOX, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_SHY_GUY_TOYBOX, 0, VOL_LEVEL_FULL)
     Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     Set(AF_OMO_06, TRUE)

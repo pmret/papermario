@@ -82,7 +82,7 @@ EvtScript N(EVS_Main) = {
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
     Exec(EnterWalk)
     Exec(N(EVS_SetupLogs))
-    Call(SetMusicTrack, 0, SONG_JADE_JUNGLE, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_JADE_JUNGLE, 0, VOL_LEVEL_FULL)
     Call(ClearAmbientSounds, 250)
     Call(MakeTransformGroup, MODEL_g14)
     Call(EnableTexPanning, MODEL_o61, TRUE)

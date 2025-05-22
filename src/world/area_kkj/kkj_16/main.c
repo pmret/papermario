@@ -57,7 +57,7 @@ EvtScript N(EVS_Main) = {
     EndSwitch
     ExecWait(N(EVS_MakeEntities))
     IfLt(GB_StoryProgress, STORY_CH8_REACHED_PEACHS_CASTLE)
-        Call(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, VOL_LEVEL_8)
+        Call(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, VOL_LEVEL_FULL)
     EndIf
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     BindTrigger(Ref(N(EVS_ExitDoor_kkj_11_2)), TRIGGER_WALL_PRESS_A, COLLIDER_tte, 1, 0)

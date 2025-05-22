@@ -297,8 +297,8 @@ AuResult func_8004DB4C(SongUpdateEvent* s) {
                     if (player->masterState != BGM_PLAY_STATE_IDLE) {
                         if (!player->unk_220) {
                             player->fadeInfo.targetVolume = volume;
-                            player->fadeInfo.fadeTime = (duration * 1000) / AU_FRAME_USEC;
-                            player->fadeInfo.fadeStep = ((volume << 0x10) - player->fadeInfo.curVolume.s32) / player->fadeInfo.fadeTime;
+                            player->fadeInfo.fadeTicks = (duration * 1000) / AU_FRAME_USEC;
+                            player->fadeInfo.fadeStep = ((volume << 0x10) - player->fadeInfo.curVolume.s32) / player->fadeInfo.fadeTicks;
                             player->fadeInfo.variation = s->variation;
                             if (s->unk14 == 1) {
                                 player->fadeSongName = songName;
@@ -616,9 +616,9 @@ void au_bgm_set_effect_indices(BGMPlayer* player, u8* list) {
 }
 
 void au_bgm_update_fade(BGMPlayer* player) {
-    player->fadeInfo.fadeTime--;
+    player->fadeInfo.fadeTicks--;
 
-    if (player->fadeInfo.fadeTime != 0) {
+    if (player->fadeInfo.fadeTicks != 0) {
         player->fadeInfo.curVolume.s32 += player->fadeInfo.fadeStep;
     } else {
         player->fadeInfo.curVolume.s32 = player->fadeInfo.targetVolume << 16;

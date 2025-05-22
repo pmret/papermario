@@ -144,7 +144,7 @@ EvtScript N(EVS_Starship_Depart) = {
         Call(DisablePlayerInput, FALSE)
         Return
     EndIf
-    Call(SetMusicTrack, 0, SONG_STARSHIP_THEME, 1, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_STARSHIP_THEME, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Thread
         Call(PlaySoundAtPlayer, SOUND_STARSHIP_TAKEOFF_SHORT, SOUND_SPACE_DEFAULT)
         Set(LVar2, MV_Starship_PosY)
@@ -229,7 +229,7 @@ EvtScript N(EVS_Starship_Arrive) = {
     IfLt(GB_StoryProgress, STORY_CH8_REACHED_BOWSERS_CASTLE)
         Set(GB_StoryProgress, STORY_CH8_REACHED_BOWSERS_CASTLE)
     EndIf
-    Call(SetMusicTrack, 0, SONG_BOWSERS_CASTLE, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_BOWSERS_CASTLE, 0, VOL_LEVEL_FULL)
     Thread
         Wait(30)
         Call(SetMusicTrackVolumes, TRACK_VOLS_KPA_OUTSIDE)

@@ -144,13 +144,6 @@ typedef enum MusicState {
     MUSIC_STATE_5               = 5,
 } MusicState;
 
-typedef enum BGMVariation {
-    BGM_VARIATION_0                 = 0,
-    BGM_VARIATION_1                 = 1,
-    BGM_VARIATION_2                 = 2,
-    BGM_VARIATION_3                 = 3,
-} BGMVariation;
-
 typedef enum BGMPlayerState {
     BGM_PLAY_STATE_IDLE             = 0,
     BGM_PLAY_STATE_ACTIVE           = 1,
@@ -454,7 +447,7 @@ typedef struct Fade {
     /* 0x0 */ VolumeField curVolume;
     /* 0x4 */ s32 fadeStep;
     /* 0x8 */ s16 targetVolume;
-    /* 0xA */ s16 fadeTime;
+    /* 0xA */ s16 fadeTicks;
               union {
     /* 0xC */ AuCallback onCompleteCallback;
     /* 0xC */ s32 variation;

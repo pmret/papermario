@@ -64,7 +64,7 @@ EvtScript N(EVS_Main) = {
         Exec(N(EVS_Pipe_EnterVertical))
         Wait(1)
     EndIf
-    Call(SetMusicTrack, 0, SONG_JADE_JUNGLE, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_JADE_JUNGLE, 0, VOL_LEVEL_FULL)
     Call(ClearAmbientSounds, 250)
     Call(MakeTransformGroup, MODEL_g51)
     Call(EnableTexPanning, MODEL_o180, TRUE)

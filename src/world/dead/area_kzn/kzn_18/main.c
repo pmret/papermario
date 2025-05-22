@@ -76,7 +76,7 @@ EvtScript N(EVS_Main) = {
     Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_EnterMap))
-    Call(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, VOL_LEVEL_FULL)
     Call(PlayAmbientSounds, AMBIENT_LAVA_1)
     IfLt(GB_StoryProgress, STORY_CH5_OPENED_ESCAPE_ROUTE)
         Call(EnableModel, MODEL_off1, FALSE)

@@ -68,15 +68,15 @@ void bgm_reset_sequence_players(void) {
         gMusicSettings[i] = BlankMusicSettings;
     }
 
-    MusicTargetVolume = VOL_LEVEL_8;
-    MusicMaxVolume = VOL_LEVEL_8;
-    MusicCurrentVolume = VOL_LEVEL_8;
-    snd_set_bgm_volume(VOL_LEVEL_8);
+    MusicTargetVolume = VOL_LEVEL_FULL;
+    MusicMaxVolume = VOL_LEVEL_FULL;
+    MusicCurrentVolume = VOL_LEVEL_FULL;
+    snd_set_bgm_volume(VOL_LEVEL_FULL);
 }
 
 void bgm_reset_volume(void) {
-    MusicTargetVolume = VOL_LEVEL_8;
-    MusicMaxVolume = VOL_LEVEL_8;
+    MusicTargetVolume = VOL_LEVEL_FULL;
+    MusicMaxVolume = VOL_LEVEL_FULL;
 }
 
 //TODO refactor out constants
@@ -89,89 +89,89 @@ void bgm_update_music_settings(void) {
 
     for (i; i < ARRAY_COUNT(gMusicSettings); i++, music++) {
         switch (music->state) {
-        case MUSIC_STATE_0:
-            break;
-        case MUSIC_STATE_1:
-            if (music->flags & MUSIC_SETTINGS_FLAG_1) {
-                if (music->fadeOutTime < 250) {
-                    if (!(music->flags & MUSIC_SETTINGS_FLAG_4)) {
-                        if (snd_song_stop(music->songName) == AU_RESULT_OK) {
+            case MUSIC_STATE_0:
+                break;
+            case MUSIC_STATE_1:
+                if (music->flags & MUSIC_SETTINGS_FLAG_1) {
+                    if (music->fadeOutTime < 250) {
+                        if (!(music->flags & MUSIC_SETTINGS_FLAG_4)) {
+                            if (snd_song_stop(music->songName) == AU_RESULT_OK) {
+                                music->state = state2;
+                            }
+                        } else {
+                            if (func_80055AF0(music->songName) == AU_RESULT_OK) {
+                            music->state = state2;
+                            }
+                        }
+                    } else if (!(music->flags & MUSIC_SETTINGS_FLAG_4)) {
+                        if (snd_song_set_variation_fade_time(music->songName, music->fadeOutTime, 0) == 0) {
                             music->state = state2;
                         }
                     } else {
-                        if (func_80055AF0(music->songName) == AU_RESULT_OK) {
-                           music->state = state2;
+                        if (func_80055BB8(music->songName, 250) == AU_RESULT_OK) {
+                            music->state = state2;
                         }
                     }
-                } else if (!(music->flags & MUSIC_SETTINGS_FLAG_4)) {
-                    if (snd_set_song_variation_fade_time(music->songName, music->fadeOutTime, 0) == 0) {
-                        music->state = state2;
-                    }
                 } else {
-                    if (func_80055BB8(music->songName, 250) == AU_RESULT_OK) {
-                        music->state = state2;
+                    if (music->flags & MUSIC_SETTINGS_FLAG_4) {
+                        music->flags |= MUSIC_SETTINGS_FLAG_10;
                     }
+                    music->flags &= ~flag4;
+                    music->state = MUSIC_STATE_5;
                 }
-            } else {
-                if (music->flags & MUSIC_SETTINGS_FLAG_4) {
-                    music->flags |= MUSIC_SETTINGS_FLAG_10;
-                }
+                break;
+            case MUSIC_STATE_2:
+                flags = music->flags;
                 music->flags &= ~flag4;
-                music->state = MUSIC_STATE_5;
-            }
-            break;
-        case MUSIC_STATE_2:
-            flags = music->flags;
-            music->flags &= ~flag4;
-            if (flags & MUSIC_SETTINGS_FLAG_1) {
-                if (snd_song_is_playing(music->songName) == AU_RESULT_OK) {
-                    music->flags &= ~MUSIC_SETTINGS_FLAG_1;
-                    music->state = MUSIC_STATE_DELAY_2;
-                }
-            } else {
-                music->state = MUSIC_STATE_5;
-            }
-            break;
-        case MUSIC_STATE_DELAY_2:
-            music->state = MUSIC_STATE_DELAY_1;
-            break;
-        case MUSIC_STATE_DELAY_1:
-            music->state = MUSIC_STATE_5;
-            break;
-        case MUSIC_STATE_5:
-            if (!(music->flags & MUSIC_SETTINGS_FLAG_8)) {
-                if (music->songID <= AU_SONG_NONE) {
-                    music->state = MUSIC_STATE_0;
+                if (flags & MUSIC_SETTINGS_FLAG_1) {
+                    if (snd_song_is_playing(music->songName) == AU_RESULT_OK) {
+                        music->flags &= ~MUSIC_SETTINGS_FLAG_1;
+                        music->state = MUSIC_STATE_DELAY_2;
+                    }
                 } else {
-                    music->songName = snd_song_load(music->songID, i);
-                    if (music->songName > 0xFFFFU) {
-                        if ((music->flags & MUSIC_SETTINGS_FLAG_20)) {
-                            snd_set_song_variation_fade(music->songName, music->variation,
-                                music->fadeInTime, music->fadeStartVolume, music->fadeEndVolume);
-                            music->flags &= ~MUSIC_SETTINGS_FLAG_20;
-                        } else {
-                            bgm_set_target_volume(MusicDefaultVolume);
-                        }
-                        if (snd_song_start_variation(music->songName, music->variation) == 0) {
-                            music->flags |= MUSIC_SETTINGS_FLAG_1;
-                            music->state = MUSIC_STATE_0;
+                    music->state = MUSIC_STATE_5;
+                }
+                break;
+            case MUSIC_STATE_DELAY_2:
+                music->state = MUSIC_STATE_DELAY_1;
+                break;
+            case MUSIC_STATE_DELAY_1:
+                music->state = MUSIC_STATE_5;
+                break;
+            case MUSIC_STATE_5:
+                if (!(music->flags & MUSIC_SETTINGS_FLAG_8)) {
+                    if (music->songID <= AU_SONG_NONE) {
+                        music->state = MUSIC_STATE_0;
+                    } else {
+                        music->songName = snd_song_load(music->songID, i);
+                        if (music->songName > 0xFFFFU) {
+                            if ((music->flags & MUSIC_SETTINGS_FLAG_20)) {
+                                snd_song_set_variation_fade(music->songName, music->variation,
+                                    music->fadeInTime, music->fadeStartVolume, music->fadeEndVolume);
+                                music->flags &= ~MUSIC_SETTINGS_FLAG_20;
+                            } else {
+                                bgm_set_target_volume(MusicDefaultVolume);
+                            }
+                            if (snd_song_start_variation(music->songName, music->variation) == 0) {
+                                music->flags |= MUSIC_SETTINGS_FLAG_1;
+                                music->state = MUSIC_STATE_0;
+                            }
                         }
                     }
+                } else {
+                    if (music->flags & MUSIC_SETTINGS_FLAG_10) {
+                        music->state = MUSIC_STATE_0;
+                        music->flags &= ~(MUSIC_SETTINGS_FLAG_10 | MUSIC_SETTINGS_FLAG_8);
+                    } else if (func_80055B28(music->savedSongName) == AU_RESULT_OK) {
+                        music->songID = music->savedSongID;
+                        music->variation = music->savedVariation;
+                        music->songName = music->savedSongName;
+                        music->state = MUSIC_STATE_0;
+                        music->flags |= MUSIC_SETTINGS_FLAG_1;
+                        music->flags &= ~MUSIC_SETTINGS_FLAG_8;
+                    }
                 }
-            } else {
-                if (music->flags & MUSIC_SETTINGS_FLAG_10) {
-                    music->state = MUSIC_STATE_0;
-                    music->flags &= ~(MUSIC_SETTINGS_FLAG_10 | MUSIC_SETTINGS_FLAG_8);
-                } else if (func_80055B28(music->savedSongName) == AU_RESULT_OK) {
-                    music->songID = music->savedSongID;
-                    music->variation = music->savedVariation;
-                    music->songName = music->savedSongName;
-                    music->state = MUSIC_STATE_0;
-                    music->flags |= MUSIC_SETTINGS_FLAG_1;
-                    music->flags &= ~MUSIC_SETTINGS_FLAG_8;
-                }
-            }
-            break;
+                break;
         }
     }
     bgm_update_volume();
@@ -311,12 +311,12 @@ AuResult bgm_set_linked_mode(s32 playerIndex, s16 mode) {
         return AU_RESULT_OK;
     }
 
-    return snd_set_song_linked_mode(musicSetting->songName, mode);
+    return snd_song_set_linked_mode(musicSetting->songName, mode);
 }
 
 s32 bgm_init_music_players(void) {
-    bgm_set_song(0, AU_SONG_NONE, 0, 250, VOL_LEVEL_8);
-    bgm_set_song(1, AU_SONG_NONE, 0, 250, VOL_LEVEL_8);
+    bgm_set_song(0, AU_SONG_NONE, 0, 250, VOL_LEVEL_FULL);
+    bgm_set_song(1, AU_SONG_NONE, 0, 250, VOL_LEVEL_FULL);
 
     return 1;
 }
@@ -326,7 +326,7 @@ void bgm_quiet_max_volume(void) {
 }
 
 void bgm_reset_max_volume(void) {
-    MusicMaxVolume = VOL_LEVEL_8;
+    MusicMaxVolume = VOL_LEVEL_FULL;
 }
 
 void bgm_set_target_volume(s32 volume) {
@@ -378,7 +378,7 @@ void bgm_pop_song(void) {
 
     if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
         musicSetting->flags |= MUSIC_SETTINGS_FLAG_8;
-        _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, VOL_LEVEL_8);
+        _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, VOL_LEVEL_FULL);
     }
 }
 
@@ -390,7 +390,7 @@ void bgm_push_song(s32 songID, s32 variation) {
         musicSetting->savedVariation = musicSetting->variation;
         musicSetting->savedSongName = musicSetting->songName;
         musicSetting->flags |= MUSIC_SETTINGS_FLAG_4;
-        bgm_set_song(0, songID, variation, 500, VOL_LEVEL_8);
+        bgm_set_song(0, songID, variation, 500, VOL_LEVEL_FULL);
     }
 }
 
@@ -402,7 +402,7 @@ void bgm_pop_battle_song(void) {
             gOverrideFlags &= ~GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE;
         } else {
             musicSetting->flags |= MUSIC_SETTINGS_FLAG_8;
-            _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, VOL_LEVEL_8);
+            _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, VOL_LEVEL_FULL);
             snd_ambient_resume(0, 250);
         }
     }
@@ -418,7 +418,7 @@ void bgm_push_battle_song(void) {
             musicSetting->savedVariation = musicSetting->variation;
             musicSetting->savedSongName = musicSetting->songName;
             musicSetting->flags |= MUSIC_SETTINGS_FLAG_4;
-            bgm_set_song(0, musicSetting->battleSongID, musicSetting->battleVariation, 500, VOL_LEVEL_8);
+            bgm_set_song(0, musicSetting->battleSongID, musicSetting->battleVariation, 500, VOL_LEVEL_FULL);
         }
     }
 }

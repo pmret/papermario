@@ -492,7 +492,7 @@ AuResult snd_song_stop(s32 songName) {
     return au_bgm_stop_song(songName);
 }
 
-void snd_stop_songs(void) {
+void snd_song_stop_all(void) {
     au_bgm_stop_all();
 }
 
@@ -500,7 +500,7 @@ AuResult snd_song_is_playing(s32 songName) {
     return au_bgm_is_song_playing(songName);
 }
 
-AuResult snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume) {
+AuResult snd_song_set_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume) {
     AuResult status;
     SongUpdateEvent s;
 
@@ -517,7 +517,7 @@ AuResult snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime
     return status;
 }
 
-AuResult snd_set_song_default_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume) {
+AuResult snd_song_set_default_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume) {
     AuResult status;
     SongUpdateEvent s;
 
@@ -534,7 +534,7 @@ AuResult snd_set_song_default_fade(s32 songName, s32 fadeInTime, s32 startVolume
     return status;
 }
 
-AuResult snd_set_song_variation_fade_time(s32 songName, s32 fadeTime, s32 variation) {
+AuResult snd_song_set_variation_fade_time(s32 songName, s32 fadeTime, s32 variation) {
     SongUpdateEvent s;
     s.songName = songName;
     s.duration = fadeTime;
@@ -633,7 +633,7 @@ AuResult func_80055C94(s32 songName) {
     return func_8004E0F4(&s);
 }
 
-AuResult snd_set_song_linked_mode(s32 songName, s32 mode) {
+AuResult snd_song_set_linked_mode(s32 songName, s32 mode) {
     SongUpdateEvent s;
     s.songName = songName;
     s.variation = mode;
@@ -762,8 +762,6 @@ static u8* snd_song_get_track_volumes_set(MusicTrackVols trackVolSet) {
     return trackVols;
 }
 
-static const f32 padding[] = {0.0f};
-
 static AuResult snd_song_change_track_volume(s32 songName, u32 trackIdx, u32 volume) {
     BGMPlayer* bgmPlayer;
     BGMHeader* bgmFile;
@@ -840,6 +838,8 @@ void snd_song_clear_music_events(void) {
     globals->musicEventQueuePos = globals->musicEventQueue;
 }
 
+static const f32 padding[] = {0.0f};
+
 void snd_register_callback(AuCallback func, s32 index) {
     gSoundGlobals->audioThreadCallbacks[index] = func;
 }
@@ -866,10 +866,10 @@ void snd_set_sfx_reverb_type(s32 reverbType) {
     au_set_reverb_type(AUDIO_TYPE_SFX, reverbType);
 }
 
-void enable_sounds(void) {
+void snd_enable_sfx(void) {
     au_sfx_set_state(gSoundManager, SND_MANAGER_STATE_ENABLED);
 }
 
-void disable_sounds(void) {
+void snd_disable_sfx(void) {
     au_sfx_set_state(gSoundManager, SND_MANAGER_STATE_DISABLED);
 }

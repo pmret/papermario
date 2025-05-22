@@ -151,7 +151,7 @@ void state_init_demo(void) {
     gGameStatusPtr->demoStickX = 0;
     gGameStatusPtr->demoStickY = 0;
 
-    disable_sounds();
+    snd_disable_sfx();
     set_map_transition_effect(TRANSITION_END_DEMO_SCENE_BLACK);
     set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, 255.0f);
     clear_saved_variables();
@@ -190,7 +190,7 @@ void state_step_demo(void) {
                 gGameStatusPtr->nextDemoScene = 0;
                 gGameStatusPtr->demoState = DEMO_STATE_NONE;
                 gGameStatusPtr->peachFlags = 0;
-                enable_sounds();
+                snd_enable_sfx();
                 gGameStatusPtr->context = CONTEXT_WORLD;
                 gGameStatusPtr->debugUnused1 = FALSE;
                 gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;

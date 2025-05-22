@@ -19,7 +19,7 @@ EvtScript N(EVS_PlayMusicByPosition) = {
         EndCaseGroup
         CaseOrEq(hos_00_ENTRY_1)
         CaseOrEq(hos_00_ENTRY_2)
-            Call(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, VOL_LEVEL_8)
+            Call(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, VOL_LEVEL_FULL)
         EndCaseGroup
     EndSwitch
     IfNe(LVar0, 0)
@@ -31,7 +31,7 @@ EvtScript N(EVS_PlayMusicByPosition) = {
         IfGt(LVar1, 210)
             Call(FadeOutMusic, 0, 833)
             Wait(25)
-            Call(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, VOL_LEVEL_8)
+            Call(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, VOL_LEVEL_FULL)
             Wait(30)
             Goto(20)
         EndIf
@@ -57,7 +57,7 @@ EvtScript N(EVS_PlayMusicByPosition) = {
 EvtScript N(EVS_SetupMusic) = {
     Call(GetEntryID, LVar0)
     IfEq(LVar0, hos_00_ENTRY_3)
-        Call(SetMusicTrack, 0, SONG_STARSHIP_THEME, 0, VOL_LEVEL_8)
+        Call(SetMusicTrack, 0, SONG_STARSHIP_THEME, 0, VOL_LEVEL_FULL)
     Else
         Exec(N(EVS_PlayMusicByPosition))
     EndIf
@@ -66,7 +66,7 @@ EvtScript N(EVS_SetupMusic) = {
 };
 
 EvtScript N(EVS_PlayKammyKoopaSong) = {
-    Call(SetMusicTrack, 0, SONG_KAMMY_KOOPA_THEME, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_KAMMY_KOOPA_THEME, 0, VOL_LEVEL_FULL)
     Return
     End
 };

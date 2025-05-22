@@ -15,7 +15,7 @@ EvtScript N(EVS_Main) = {
     Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_BindSlideTriggers))
-    Call(SetMusicTrack, 0, SONG_MT_RUGGED, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_MT_RUGGED, 0, VOL_LEVEL_FULL)
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
     Exec(EnterWalk)
     Wait(1)

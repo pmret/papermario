@@ -677,9 +677,9 @@ void btl_state_update_celebration(void) {
 
                 prevSP = playerData->starPoints + battleStatus->totalStarPoints;
                 if (prevSP > 99) {
-                    bgm_set_song(0, SONG_LEVEL_UP, 0, 250, VOL_LEVEL_8);
+                    bgm_set_song(0, SONG_LEVEL_UP, 0, 250, VOL_LEVEL_FULL);
                 } else {
-                    bgm_set_song(0, SONG_BATTLE_END, 0, 250, VOL_LEVEL_8);
+                    bgm_set_song(0, SONG_BATTLE_END, 0, 250, VOL_LEVEL_FULL);
                 }
 
                 CelebrateStateTime = 0;
@@ -1253,7 +1253,7 @@ void btl_state_update_celebration(void) {
                 script->owner1.actorID = ACTOR_PARTNER;
             }
             if (!(gBattleStatus.flags2 & BS_FLAGS2_DONT_STOP_MUSIC)) {
-                bgm_set_song(0, AU_SONG_NONE, 0, 2000, VOL_LEVEL_8);
+                bgm_set_song(0, AU_SONG_NONE, 0, 2000, VOL_LEVEL_FULL);
             }
             bFadeToBlackAmt = 0;
             gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_FADE_OUT;
@@ -1350,7 +1350,7 @@ void btl_state_update_celebration(void) {
             }
             if (CelebrateStateTime >= 99) {
                 if (!(gBattleStatus.flags2 & BS_FLAGS2_DONT_STOP_MUSIC)) {
-                    bgm_set_song(0, AU_SONG_NONE, 0, 1500, VOL_LEVEL_8);
+                    bgm_set_song(0, AU_SONG_NONE, 0, 1500, VOL_LEVEL_FULL);
                 }
                 bFadeToBlackAmt = 0;
                 btl_cam_set_params(TRUE, 270, 100, 8, 0, 0x2400, 0, 100);

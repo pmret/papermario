@@ -22,7 +22,7 @@ EvtScript N(EVS_RotateHillTowardPlayer) = {
 };
 
 EvtScript N(EVS_PlaySong) = {
-    Call(SetMusicTrack, 0, LVar0, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, LVar0, 0, VOL_LEVEL_FULL)
     Return
     End
 };

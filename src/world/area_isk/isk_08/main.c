@@ -22,15 +22,15 @@ EvtScript N(EVS_Main) = {
     ExecWait(N(EVS_SetupFlames))
     ExecWait(N(EVS_SetupBombableWall))
 #if VERSION_PAL
-    Call(SetMusicTrack, 0, SONG_DRY_DRY_RUINS, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_DRY_DRY_RUINS, 0, VOL_LEVEL_FULL)
 #else
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_SOLVED_ARTIFACT_PUZZLE)
-            Call(SetMusicTrack, 0, SONG_DRY_DRY_RUINS, 0, VOL_LEVEL_8)
+            Call(SetMusicTrack, 0, SONG_DRY_DRY_RUINS, 0, VOL_LEVEL_FULL)
         CaseLt(STORY_CH2_DEFEATED_TUTANKOOPA)
-            Call(SetMusicTrack, 0, SONG_RUINS_BASEMENT, 0, VOL_LEVEL_8)
+            Call(SetMusicTrack, 0, SONG_RUINS_BASEMENT, 0, VOL_LEVEL_FULL)
         CaseGe(STORY_CH2_DEFEATED_TUTANKOOPA)
-            Call(SetMusicTrack, 0, SONG_DRY_DRY_RUINS, 0, VOL_LEVEL_8)
+            Call(SetMusicTrack, 0, SONG_DRY_DRY_RUINS, 0, VOL_LEVEL_FULL)
     EndSwitch
 #endif
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))

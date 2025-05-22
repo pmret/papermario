@@ -151,7 +151,7 @@ EvtScript N(EVS_ManageSneakingScenes) = {
     Call(DisablePlayerPhysics, TRUE)
     Call(DisablePartnerAI, 0)
     Thread
-        Call(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, VOL_LEVEL_8)
+        Call(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, VOL_LEVEL_FULL)
         Wait(3)
         Call(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, VOL_LEVEL_7)
         Wait(3)

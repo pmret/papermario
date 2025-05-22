@@ -13,7 +13,7 @@ EvtScript N(EVS_SetupMusic) = {
         CaseGe(STORY_CH5_MT_LAVA_LAVA_ERUPTING)
             Call(PlaySound, SOUND_LOOP_RUMBLE)
     EndSwitch
-    Call(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, VOL_LEVEL_8)
+    Call(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, VOL_LEVEL_FULL)
     Call(PlayAmbientSounds, AMBIENT_LAVA_1)
     Return
     End

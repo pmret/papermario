@@ -223,7 +223,7 @@ void au_update_clients_for_audio_frame(void) {
     }
 
      // Update volume fade for SFX bus
-    if (sfxManager->fadeInfo.fadeTime != 0) {
+    if (sfxManager->fadeInfo.fadeTicks != 0) {
         au_fade_update(&sfxManager->fadeInfo);
         au_fade_set_volume(sfxManager->busID, sfxManager->fadeInfo.curVolume.u16, sfxManager->busVolume);
     }
@@ -238,7 +238,7 @@ void au_update_clients_for_audio_frame(void) {
     // update gBGMPlayerB
     if (!PreventBGMPlayerUpdate) {
         bgmPlayer = gBGMPlayerB;
-        if (bgmPlayer->fadeInfo.fadeTime != 0) {
+        if (bgmPlayer->fadeInfo.fadeTicks != 0) {
             au_bgm_update_fade(bgmPlayer);
         }
         if (bgmPlayer->songName != 0) {
@@ -259,12 +259,12 @@ void au_update_clients_for_audio_frame(void) {
         bgmPlayer = gBGMPlayerA;
         if (bgmPlayer->fadeInfo.volScaleTime != 0) {
             au_unk_80053BA8(&bgmPlayer->fadeInfo);
-            if (bgmPlayer->fadeInfo.fadeTime == 0) {
+            if (bgmPlayer->fadeInfo.fadeTicks == 0) {
                 au_bgm_update_bus_volumes(bgmPlayer);
             } else {
                 au_bgm_update_fade(bgmPlayer);
             }
-        } else if (bgmPlayer->fadeInfo.fadeTime != 0) {
+        } else if (bgmPlayer->fadeInfo.fadeTicks != 0) {
             au_bgm_update_fade(bgmPlayer);
         }
         if (bgmPlayer->songName != 0) {
@@ -417,10 +417,10 @@ void au_fade_init(Fade* fade, s32 time, s32 startValue, s32 endValue) {
     fade->targetVolume = endValue;
 
     if (time != 0) {
-        fade->fadeTime = (time * 1000) / AU_FRAME_USEC;
-        fade->fadeStep = ((endValue << 16) - fade->curVolume.s32) / fade->fadeTime;
+        fade->fadeTicks = (time * 1000) / AU_FRAME_USEC;
+        fade->fadeStep = ((endValue << 16) - fade->curVolume.s32) / fade->fadeTicks;
     } else {
-        fade->fadeTime = 1;
+        fade->fadeTicks = 1;
         fade->fadeStep = 0;
     }
 
@@ -428,15 +428,15 @@ void au_fade_init(Fade* fade, s32 time, s32 startValue, s32 endValue) {
 }
 
 void au_fade_clear(Fade* fade) {
-    fade->fadeTime = 0;
+    fade->fadeTicks = 0;
     fade->fadeStep = 0;
     fade->onCompleteCallback = NULL;
 }
 
 void au_fade_update(Fade* fade) {
-    fade->fadeTime--;
+    fade->fadeTicks--;
 
-    if ((fade->fadeTime << 0x10) != 0) {
+    if ((fade->fadeTicks << 0x10) != 0) {
         fade->curVolume.s32 += fade->fadeStep;
     } else {
         fade->curVolume.s32 = fade->targetVolume << 0x10;
@@ -453,8 +453,8 @@ void au_fade_set_volume(u8 busID, u16 volume, s32 busVolume) {
 }
 
 void au_unk_80053AC8(Fade* fade) {
-    if (fade->fadeTime == 0) {
-        fade->fadeTime = 1;
+    if (fade->fadeTicks == 0) {
+        fade->fadeTicks = 1;
         fade->fadeStep = 0;
         fade->targetVolume = fade->curVolume.u16;
     }
