@@ -4,7 +4,11 @@
 
 static u8* snd_song_get_track_volumes_set(MusicTrackVols arg0);
 
+/// While TRUE, the audio thread skips BGM player updates.
+/// Used by the game thread to lock out BGM updates while modifying player state,
+/// to prevent race conditions.
 s32 PreventBGMPlayerUpdate = FALSE;
+
 u16 SoundEngineReady = 0;
 u16 AmbienceRadioChannel = 0;
 
@@ -126,7 +130,7 @@ void snd_legacy_sound_dispatch(u32 id) {
                     s32 filename = snd_song_load((id >> 4) & 0xFF, 0);
 
                     if (filename > ASCII_TO_U32('0', ' ', ' ', '\0')) {
-                        snd_song_start_variation(filename, (id >> 0xC) & 3);
+                        snd_song_request_play(filename, (id >> 0xC) & 3);
                     }
                 }
                 break;
@@ -135,7 +139,7 @@ void snd_legacy_sound_dispatch(u32 id) {
 }
 
 /// Part of an unused system for inter-thread communication with a BGM player using commands.
-/// Use functions in bgm_control to manipualte gMusicSettings instead.
+/// Use functions in bgm_control to manipualte gMusicControlData instead.
 void snd_bgm_clear_legacy_commands(BGMPlayer* player) {
     s32 i;
 
@@ -151,7 +155,7 @@ void snd_bgm_clear_legacy_commands(BGMPlayer* player) {
 
 /// Unused
 /// Part of an unused system for inter-thread communication with a BGM player using commands.
-/// Use functions in bgm_control to manipualte gMusicSettings instead.
+/// Use functions in bgm_control to manipualte gMusicControlData instead.
 void snd_bgm_enqueue_legacy_command(u32 cmd) {
     BGMPlayer* player = NULL;
     u32 playerID = cmd & 0xF;
@@ -454,26 +458,28 @@ AuResult snd_song_load(s32 songID, s32 playerIndex) {
     }
 }
 
-AuResult snd_song_start_default(s32 songName) {
+/// Unused -- snd_song_request_play but always uses BGM_VARIATION_0
+AuResult snd_song_request_play_default(s32 songName) {
     AuResult status;
-    SongUpdateEventA s;
+    SongUpdateRequestA s;
 
     PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
     s.duration = 0;
     s.startVolume = AU_MAX_VOLUME_8;
     s.finalVolume = AU_MAX_VOLUME_8;
-    s.variation = 0;
+    s.variation = BGM_VARIATION_0;
     s.unk_14 = 0;
-    status = au_bgm_dispatch_player_event(&s);
+    status = au_bgm_process_init_song(&s);
     PreventBGMPlayerUpdate = FALSE;
 
     return status;
 }
 
-AuResult snd_song_start_variation(s32 songName, s32 variation) {
+/// Called from bgm_control to start playing a particular song + variation
+AuResult snd_song_request_play(s32 songName, s32 variation) {
     AuResult status;
-    SongUpdateEventA s;
+    SongUpdateRequestA s;
 
     PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
@@ -482,7 +488,7 @@ AuResult snd_song_start_variation(s32 songName, s32 variation) {
     s.finalVolume = AU_MAX_VOLUME_8;
     s.variation = variation;
     s.unk_14 = 0;
-    status = au_bgm_dispatch_player_event(&s);
+    status = au_bgm_process_init_song(&s);
     PreventBGMPlayerUpdate = FALSE;
 
     return status;
@@ -500,9 +506,10 @@ AuResult snd_song_is_playing(s32 songName) {
     return au_bgm_is_song_playing(songName);
 }
 
-AuResult snd_song_set_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume) {
+/// Called from bgm_control to fade in a particular song + variation
+AuResult snd_song_request_fade_in(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume) {
     AuResult status;
-    SongUpdateEventA s;
+    SongUpdateRequestA s;
 
     PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
@@ -511,15 +518,16 @@ AuResult snd_song_set_variation_fade(s32 songName, s32 variation, s32 fadeInTime
     s.finalVolume = endVolume;
     s.variation = variation;
     s.unk_14 = 0;
-    status = au_bgm_dispatch_player_event(&s);
+    status = au_bgm_process_init_song(&s);
     PreventBGMPlayerUpdate = FALSE;
 
     return status;
 }
 
-AuResult snd_song_set_default_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume) {
+/// Unused
+AuResult snd_song_request_fade_in_default(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume) {
     AuResult status;
-    SongUpdateEventA s;
+    SongUpdateRequestA s;
 
     PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
@@ -528,109 +536,109 @@ AuResult snd_song_set_default_fade(s32 songName, s32 fadeInTime, s32 startVolume
     s.finalVolume = endVolume;
     s.variation = 0;
     s.unk_14 = 0;
-    status = au_bgm_dispatch_player_event(&s);
+    status = au_bgm_process_init_song(&s);
     PreventBGMPlayerUpdate = FALSE;
 
     return status;
 }
 
-AuResult snd_song_set_variation_fade_time(s32 songName, s32 fadeTime, AuCallback callback) {
-    SongUpdateEventB s;
+AuResult snd_song_request_fade_out(s32 songName, s32 fadeTime, AuCallback callback) {
+    SongUpdateRequestB s;
 
     s.songName = songName;
     s.duration = fadeTime;
     s.unk_08 = 0;
     s.finalVolume = 0;
     s.callback = callback;
-    s.unk_14 = 0;
+    s.onPush = 0;
 
-    return func_8004DB4C(&s);
+    return au_bgm_process_fade_out(&s);
 }
 
-AuResult func_80055AF0(s32 songName) {
-    SongUpdateEventC s;
+AuResult snd_song_UNK_push_stop(s32 songName) {
+    SongUpdateRequestC s;
 
     s.songName = songName;
     s.duration = 0;
     s.startVolume = 0;
     s.finalVolume = 0;
-    s.index = 0;
-    s.unk_14 = 0;
+    s.index = MUSIC_CROSS_FADE;
+    s.pauseMode = FALSE;
 
-    return func_8004DCB8(&s, 0);
+    return au_bgm_process_suspend(&s, 0);
 }
 
-AuResult func_80055B28(s32 songName) {
+AuResult snd_song_UNK_request_pop(s32 songName) {
     AuResult status;
-    SongUpdateEventE s;
+    SongUpdateRequestE s;
 
     PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
     s.duration = 2000;
     s.startVolume = 1;
     s.finalVolume = AU_MAX_VOLUME_8;
-    s.index = 0;
-    s.unk_14 = 0;
-    status = func_8004DE2C(&s);
+    s.index = MUSIC_CROSS_FADE;
+    s.pauseMode = FALSE;
+    status = au_bgm_process_resume(&s);
     PreventBGMPlayerUpdate = FALSE;
 
     return status;
 }
 
 AuResult func_80055B80(s32 songName) {
-    SongUpdateEventC s;
+    SongUpdateRequestC s;
 
     s.songName = songName;
     s.duration = 0;
     s.startVolume = 0;
     s.finalVolume = 0;
-    s.index = 0;
-    s.unk_14 = 0;
+    s.index = MUSIC_CROSS_FADE;
+    s.pauseMode = FALSE;
 
-    return func_8004DCB8(&s, 1);
+    return au_bgm_process_suspend(&s, 1);
 }
 
-AuResult func_80055BB8(s32 songName, s32 fadeTime) {
-    SongUpdateEventB s;
+AuResult snd_song_UNK_request_push_fade_out(s32 songName, s32 fadeTime) {
+    SongUpdateRequestB s;
 
     s.songName = songName;
     s.duration = fadeTime;
     s.unk_08 = 0;
     s.finalVolume = 0;
     s.callback = NULL;
-    s.unk_14 = 1;
+    s.onPush = 1;
 
-    return func_8004DB4C(&s);
+    return au_bgm_process_fade_out(&s);
 }
 
-AuResult func_80055BF0(s32 songName) {
-    SongUpdateEventC s;
+AuResult snd_song_request_pause(s32 songName) {
+    SongUpdateRequestC s;
 
     s.songName = songName;
     s.duration = 0;
     s.startVolume = 0;
     s.finalVolume = 0;
-    s.index = 0;
-    s.unk_14 = 1;
+    s.index = MUSIC_CROSS_FADE;
+    s.pauseMode = TRUE;
 
-    return func_8004DCB8(&s, 0);
+    return au_bgm_process_suspend(&s, 0);
 }
 
-AuResult func_80055C2C(s32 songName) {
-    SongUpdateEventE s;
+AuResult snd_song_request_unpause(s32 songName) {
+    SongUpdateRequestE s;
 
     s.songName = songName;
     s.duration = 0;
     s.startVolume = 0;
     s.finalVolume = 0;
-    s.index = 0;
-    s.unk_14 = 1;
+    s.index = MUSIC_CROSS_FADE;
+    s.pauseMode = TRUE;
 
-    return func_8004DE2C(&s);
+    return au_bgm_process_resume(&s);
 }
 
 AuResult snd_song_set_volume_quiet(s32 songName) {
-    SongUpdateEventA s;
+    SongUpdateRequestA s;
 
     s.songName = songName;
     s.duration = 500;
@@ -640,7 +648,7 @@ AuResult snd_song_set_volume_quiet(s32 songName) {
 }
 
 AuResult snd_song_set_volume_full(s32 songName) {
-    SongUpdateEventA s;
+    SongUpdateRequestA s;
 
     s.songName = songName;
     s.duration = 500;
@@ -650,7 +658,7 @@ AuResult snd_song_set_volume_full(s32 songName) {
 }
 
 AuResult snd_song_set_linked_mode(s32 songName, s32 mode) {
-    SongUpdateEventD s;
+    SongUpdateRequestD s;
 
     s.songName = songName;
     s.mode = mode;

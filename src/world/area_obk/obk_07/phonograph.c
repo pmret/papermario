@@ -381,7 +381,7 @@ API_CALLABLE(N(SavePhonographUpdateScriptIDs)) {
     data->updateScaleScriptID = evt_get_variable(NULL, MV_UpdateScaleScript);
     data->updateCrankScriptID = evt_get_variable(NULL, MV_UpdateCrankScript);
     data->updateRecordScriptID = evt_get_variable(NULL, MV_UpdateRecordScript);
-    data->songName = gMusicSettings->songName;
+    data->songName = gMusicControlData->songName;
     return ApiStatus_DONE2;
 }
 

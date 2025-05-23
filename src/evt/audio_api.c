@@ -114,7 +114,7 @@ API_CALLABLE(EnableMusicProximityMix) {
     Bytecode* args = script->ptrReadPos;
     s32 playerIndex = evt_get_variable(script, *args++);
 
-    gMusicSettings[playerIndex].flags |= MUSIC_SETTINGS_FLAG_ENABLE_PROXIMITY_MIX;
+    gMusicControlData[playerIndex].flags |= MUSIC_FLAG_ENABLE_PROX_MIX;
     return ApiStatus_DONE2;
 }
 

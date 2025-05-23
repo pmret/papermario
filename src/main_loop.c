@@ -90,7 +90,7 @@ void step_game_loop(void) {
     step_current_game_mode();
     update_entities();
     func_80138198();
-    bgm_update_music_settings();
+    bgm_update_music_control();
     update_ambient_sounds();
     sfx_update_env_sound_params();
     update_windows();

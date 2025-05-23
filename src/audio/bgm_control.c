@@ -10,16 +10,16 @@ BSS s16 MusicTargetVolume;
 BSS s16 MusicMaxVolume;
 BSS s16 MusicCurrentVolume;
 
-MusicSettings gMusicSettings[2];
+MusicControlData gMusicControlData[2];
 
-MusicSettings BlankMusicSettings = {
+MusicControlData BlankMusicControlData = {
     .flags = 0,
-    .state = MUSIC_STATE_0,
+    .state = MUSIC_STATE_IDLE,
     .fadeOutTime = -1,
     .fadeInTime = 0,
     .fadeStartVolume = 0,
     .fadeEndVolume = 0,
-    .songID = AU_SONG_NONE,
+    .requestedSongID = AU_SONG_NONE,
     .variation = -1,
     .songName = -1,
     .battleSongID = 0,
@@ -64,8 +64,8 @@ s32 bgm_get_map_default_variation(s32 songID) {
 void bgm_reset_sequence_players(void) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMusicSettings); i++) {
-        gMusicSettings[i] = BlankMusicSettings;
+    for (i = 0; i < ARRAY_COUNT(gMusicControlData); i++) {
+        gMusicControlData[i] = BlankMusicControlData;
     }
 
     MusicTargetVolume = VOL_LEVEL_FULL;
@@ -80,95 +80,103 @@ void bgm_reset_volume(void) {
 }
 
 //TODO refactor out constants
-void bgm_update_music_settings(void) {
-    MusicSettings* music = gMusicSettings;
+void bgm_update_music_control(void) {
+    MusicControlData* music = gMusicControlData;
     s32 i = 0;
-    s16 state2 = MUSIC_STATE_2;
-    s16 flag4 = MUSIC_SETTINGS_FLAG_4;
+    s16 stateFadeOut = MUSIC_STATE_AWAIT_FADEOUT;
+    s16 pushedFlag = MUSIC_FLAG_PUSHING;
     s32 flags;
 
-    for (i; i < ARRAY_COUNT(gMusicSettings); i++, music++) {
+    for (i; i < ARRAY_COUNT(gMusicControlData); i++, music++) {
         switch (music->state) {
-            case MUSIC_STATE_0:
+            case MUSIC_STATE_IDLE:
                 break;
-            case MUSIC_STATE_1:
-                if (music->flags & MUSIC_SETTINGS_FLAG_1) {
+            case MUSIC_STATE_STOP_CURRENT:
+                if (music->flags & MUSIC_FLAG_PLAYING) {
                     if (music->fadeOutTime < 250) {
-                        if (!(music->flags & MUSIC_SETTINGS_FLAG_4)) {
+                        if (!(music->flags & MUSIC_FLAG_PUSHING)) {
                             if (snd_song_stop(music->songName) == AU_RESULT_OK) {
-                                music->state = state2;
+                                music->state = stateFadeOut;
                             }
                         } else {
-                            if (func_80055AF0(music->songName) == AU_RESULT_OK) {
-                                music->state = state2;
+                            if (snd_song_UNK_push_stop(music->songName) == AU_RESULT_OK) {
+                                music->state = stateFadeOut;
                             }
                         }
-                    } else if (!(music->flags & MUSIC_SETTINGS_FLAG_4)) {
-                        if (snd_song_set_variation_fade_time(music->songName, music->fadeOutTime, NULL) == AU_RESULT_OK) {
-                            music->state = state2;
+                    } else if (!(music->flags & MUSIC_FLAG_PUSHING)) {
+                        if (snd_song_request_fade_out(music->songName, music->fadeOutTime, NULL) == AU_RESULT_OK) {
+                            music->state = stateFadeOut;
                         }
                     } else {
-                        if (func_80055BB8(music->songName, 250) == AU_RESULT_OK) {
-                            music->state = state2;
+                        if (snd_song_UNK_request_push_fade_out(music->songName, 250) == AU_RESULT_OK) {
+                            music->state = stateFadeOut;
                         }
                     }
                 } else {
-                    if (music->flags & MUSIC_SETTINGS_FLAG_4) {
-                        music->flags |= MUSIC_SETTINGS_FLAG_10;
+                    if (music->flags & MUSIC_FLAG_PUSHING) {
+                        // nothing was playing in this case, so remember to skip the next pop
+                        music->flags |= MUSIC_FLAG_IGNORE_POP;
                     }
-                    music->flags &= ~flag4;
-                    music->state = MUSIC_STATE_5;
+                    music->flags &= ~pushedFlag;
+                    music->state = MUSIC_STATE_PLAY_NEXT;
                 }
                 break;
-            case MUSIC_STATE_2:
+            case MUSIC_STATE_AWAIT_FADEOUT:
                 flags = music->flags;
-                music->flags &= ~flag4;
-                if (flags & MUSIC_SETTINGS_FLAG_1) {
+                music->flags &= ~pushedFlag;
+                if (flags & MUSIC_FLAG_PLAYING) {
                     if (snd_song_is_playing(music->songName) == AU_RESULT_OK) {
-                        music->flags &= ~MUSIC_SETTINGS_FLAG_1;
+                        music->flags &= ~MUSIC_FLAG_PLAYING;
                         music->state = MUSIC_STATE_DELAY_2;
                     }
                 } else {
-                    music->state = MUSIC_STATE_5;
+                    music->state = MUSIC_STATE_PLAY_NEXT;
                 }
                 break;
             case MUSIC_STATE_DELAY_2:
                 music->state = MUSIC_STATE_DELAY_1;
                 break;
             case MUSIC_STATE_DELAY_1:
-                music->state = MUSIC_STATE_5;
+                music->state = MUSIC_STATE_PLAY_NEXT;
                 break;
-            case MUSIC_STATE_5:
-                if (!(music->flags & MUSIC_SETTINGS_FLAG_8)) {
-                    if (music->songID <= AU_SONG_NONE) {
-                        music->state = MUSIC_STATE_0;
+            case MUSIC_STATE_PLAY_NEXT:
+                if (!(music->flags & MUSIC_FLAG_POPPING)) {
+                    if (music->requestedSongID <= AU_SONG_NONE) {
+                        // new song is AU_SONG_NONE, play nothing
+                        music->state = MUSIC_STATE_IDLE;
                     } else {
-                        music->songName = snd_song_load(music->songID, i);
+                        music->songName = snd_song_load(music->requestedSongID, i);
+                        // snd_song_lond may return either songName or an AuResult error code.
+                        // since song names are 4-character big-endian identifiers packed into an s32, we require
+                        // the upper half of the return value to be nonzero for songs which loaded without error.
+                        // this reserves return values from 0 to 0xFFFF for AuResult codes.
                         if (music->songName > 0xFFFFU) {
-                            if ((music->flags & MUSIC_SETTINGS_FLAG_20)) {
-                                snd_song_set_variation_fade(music->songName, music->variation,
+                            if ((music->flags & MUSIC_FLAG_FADE_IN_NEXT)) {
+                                snd_song_request_fade_in(music->songName, music->variation,
                                     music->fadeInTime, music->fadeStartVolume, music->fadeEndVolume);
-                                music->flags &= ~MUSIC_SETTINGS_FLAG_20;
+                                music->flags &= ~MUSIC_FLAG_FADE_IN_NEXT;
                             } else {
+                                // if we aren't fading in, just start at the default volume level
                                 bgm_set_target_volume(MusicDefaultVolume);
                             }
-                            if (snd_song_start_variation(music->songName, music->variation) == 0) {
-                                music->flags |= MUSIC_SETTINGS_FLAG_1;
-                                music->state = MUSIC_STATE_0;
+                            /// @bug this is called even if we are trying to fade in, immediately overriding any fade parameters
+                            if (snd_song_request_play(music->songName, music->variation) == AU_RESULT_OK) {
+                                music->flags |= MUSIC_FLAG_PLAYING;
+                                music->state = MUSIC_STATE_IDLE;
                             }
                         }
                     }
                 } else {
-                    if (music->flags & MUSIC_SETTINGS_FLAG_10) {
-                        music->state = MUSIC_STATE_0;
-                        music->flags &= ~(MUSIC_SETTINGS_FLAG_10 | MUSIC_SETTINGS_FLAG_8);
-                    } else if (func_80055B28(music->savedSongName) == AU_RESULT_OK) {
-                        music->songID = music->savedSongID;
+                    if (music->flags & MUSIC_FLAG_IGNORE_POP) {
+                        music->state = MUSIC_STATE_IDLE;
+                        music->flags &= ~(MUSIC_FLAG_IGNORE_POP | MUSIC_FLAG_POPPING);
+                    } else if (snd_song_UNK_request_pop(music->savedSongName) == AU_RESULT_OK) {
+                        music->requestedSongID = music->savedSongID;
                         music->variation = music->savedVariation;
                         music->songName = music->savedSongName;
-                        music->state = MUSIC_STATE_0;
-                        music->flags |= MUSIC_SETTINGS_FLAG_1;
-                        music->flags &= ~MUSIC_SETTINGS_FLAG_8;
+                        music->state = MUSIC_STATE_IDLE;
+                        music->flags |= MUSIC_FLAG_PLAYING;
+                        music->flags &= ~MUSIC_FLAG_POPPING;
                     }
                 }
                 break;
@@ -178,19 +186,18 @@ void bgm_update_music_settings(void) {
 }
 
 s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume) {
-    MusicSettings* musicSetting;
+    MusicControlData* music;
     s32 mapSongVariation;
 
     if (gGameStatusPtr->demoState != DEMO_STATE_NONE) {
         return 1;
     }
 
-    musicSetting = &gMusicSettings[playerIndex];
+    music = &gMusicControlData[playerIndex];
 
     if (!gGameStatusPtr->musicEnabled) {
-        snd_song_stop(musicSetting->songName);
-        musicSetting->flags &= ~MUSIC_SETTINGS_FLAG_1;
-
+        snd_song_stop(music->songName);
+        music->flags &= ~MUSIC_FLAG_PLAYING;
         return 1;
     }
 
@@ -199,47 +206,47 @@ s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s
         variation = mapSongVariation;
     }
 
-    if (musicSetting->songID == songID && musicSetting->variation == variation) {
+    if (music->requestedSongID == songID && music->variation == variation) {
         bgm_set_target_volume(volume);
 
-        if (musicSetting->flags & MUSIC_SETTINGS_FLAG_4) {
-            func_80055B80(musicSetting->songName);
-            musicSetting->flags &= ~MUSIC_SETTINGS_FLAG_4;
+        if (music->flags & MUSIC_FLAG_PUSHING) {
+            func_80055B80(music->songName);
+            music->flags &= ~MUSIC_FLAG_PUSHING;
         }
 
         return 2;
     }
 
     MusicDefaultVolume = volume;
-    musicSetting->songID = songID;
-    musicSetting->variation = variation;
-    musicSetting->fadeOutTime = fadeOutTime;
-    musicSetting->state = MUSIC_STATE_1;
-    musicSetting->flags &= ~MUSIC_SETTINGS_FLAG_ENABLE_PROXIMITY_MIX;
+    music->requestedSongID = songID;
+    music->variation = variation;
+    music->fadeOutTime = fadeOutTime;
+    music->state = MUSIC_STATE_STOP_CURRENT;
+    music->flags &= ~MUSIC_FLAG_ENABLE_PROX_MIX;
 
     return 1;
 }
 
 s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume) {
-    gMusicSettings[playerIndex].flags &= ~MUSIC_SETTINGS_FLAG_8;
+    gMusicControlData[playerIndex].flags &= ~MUSIC_FLAG_POPPING;
 
     return _bgm_set_song(playerIndex, songID, variation, fadeOutTime, volume);
 }
 
-s32 bgm_fade_in_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 fadeStartVolume, s16 fadeEndVolume) {
-    MusicSettings* musicSetting;
+b32 bgm_fade_in_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 fadeStartVolume, s16 fadeEndVolume) {
+    MusicControlData* music;
     s32 mapSongVariation;
 
     if (gGameStatusPtr->demoState) {
-        return 1;
+        return TRUE;
     }
 
-    musicSetting = &gMusicSettings[playerIndex];
+    music = &gMusicControlData[playerIndex];
 
     if (!gGameStatusPtr->musicEnabled) {
-        snd_song_stop(musicSetting->songName);
-        musicSetting->flags &= ~MUSIC_SETTINGS_FLAG_1;
-        return 1;
+        snd_song_stop(music->songName);
+        music->flags &= ~MUSIC_FLAG_PLAYING;
+        return TRUE;
     }
 
     mapSongVariation = bgm_get_map_default_variation(songID);
@@ -247,71 +254,71 @@ s32 bgm_fade_in_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime,
         variation = mapSongVariation;
     }
 
-    musicSetting->fadeInTime = fadeInTime;
-    musicSetting->fadeStartVolume = fadeStartVolume;
-    musicSetting->fadeEndVolume = fadeEndVolume;
-    musicSetting->songID = songID;
-    musicSetting->variation = variation;
-    musicSetting->flags |= MUSIC_SETTINGS_FLAG_20;
-    musicSetting->state = MUSIC_STATE_1;
-    musicSetting->flags &= ~MUSIC_SETTINGS_FLAG_ENABLE_PROXIMITY_MIX;
+    music->fadeInTime = fadeInTime;
+    music->fadeStartVolume = fadeStartVolume;
+    music->fadeEndVolume = fadeEndVolume;
+    music->requestedSongID = songID;
+    music->variation = variation;
+    music->flags |= MUSIC_FLAG_FADE_IN_NEXT;
+    music->state = MUSIC_STATE_STOP_CURRENT;
+    music->flags &= ~MUSIC_FLAG_ENABLE_PROX_MIX;
 
-    return 1;
+    return TRUE;
 }
 
 s32 bgm_adjust_proximity(s32 playerIndex, s32 mix, s16 state) {
-    MusicSettings* musicSetting = &gMusicSettings[playerIndex];
+    MusicControlData* music = &gMusicControlData[playerIndex];
 
-    if (!(musicSetting->flags & MUSIC_SETTINGS_FLAG_1)) {
+    if (!(music->flags & MUSIC_FLAG_PLAYING)) {
         return FALSE;
     }
 
-    if (!(musicSetting->flags & MUSIC_SETTINGS_FLAG_ENABLE_PROXIMITY_MIX)) {
+    if (!(music->flags & MUSIC_FLAG_ENABLE_PROX_MIX)) {
         return FALSE;
     }
 
     switch (state) {
         case MUSIC_PROXIMITY_FAR:
-            snd_song_set_proximity_mix_far(musicSetting->songName, mix);
+            snd_song_set_proximity_mix_far(music->songName, mix);
             break;
         case MUSIC_PROXIMITY_NEAR:
-            snd_song_set_proximity_mix_near(musicSetting->songName, mix);
+            snd_song_set_proximity_mix_near(music->songName, mix);
             break;
         case MUSIC_PROXIMITY_FULL:
-            snd_song_set_proximity_mix_full(musicSetting->songName, mix);
+            snd_song_set_proximity_mix_full(music->songName, mix);
             break;
     }
     return TRUE;
 }
 
 AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet) {
-    MusicSettings* musicSetting = &gMusicSettings[playerIndex];
+    MusicControlData* music = &gMusicControlData[playerIndex];
 
-    if (!(musicSetting->flags & MUSIC_SETTINGS_FLAG_1)) {
+    if (!(music->flags & MUSIC_FLAG_PLAYING)) {
         return AU_RESULT_OK;
     }
 
-    return snd_song_set_track_volumes(musicSetting->songName, trackVolSet);
+    return snd_song_set_track_volumes(music->songName, trackVolSet);
 }
 
 AuResult bgm_clear_track_volumes(s32 playerIndex, s16 trackVolSet) {
-    MusicSettings* musicSetting = &gMusicSettings[playerIndex];
+    MusicControlData* music = &gMusicControlData[playerIndex];
 
-    if (!(musicSetting->flags & MUSIC_SETTINGS_FLAG_1)) {
+    if (!(music->flags & MUSIC_FLAG_PLAYING)) {
         return AU_RESULT_OK;
     }
 
-    return snd_song_clear_track_volumes(musicSetting->songName, trackVolSet);
+    return snd_song_clear_track_volumes(music->songName, trackVolSet);
 }
 
 AuResult bgm_set_linked_mode(s32 playerIndex, s16 mode) {
-    MusicSettings* musicSetting = &gMusicSettings[playerIndex];
+    MusicControlData* music = &gMusicControlData[playerIndex];
 
-    if (!(musicSetting->flags & MUSIC_SETTINGS_FLAG_1)) {
+    if (!(music->flags & MUSIC_FLAG_PLAYING)) {
         return AU_RESULT_OK;
     }
 
-    return snd_song_set_linked_mode(musicSetting->songName, mode);
+    return snd_song_set_linked_mode(music->songName, mode);
 }
 
 s32 bgm_init_music_players(void) {
@@ -358,76 +365,74 @@ void bgm_update_volume(void) {
 }
 
 b32 bgm_is_any_song_playing(void) {
-    MusicSettings* settings = gMusicSettings;
+    MusicControlData* music = gMusicControlData;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMusicSettings); i++, settings++) {
-        if (!(settings->flags & MUSIC_SETTINGS_FLAG_1)) {
-            continue;
-        }
-
-        if (snd_song_is_playing(settings->songName)) {
-            return TRUE;
+    for (i = 0; i < ARRAY_COUNT(gMusicControlData); i++, music++) {
+        if (music->flags & MUSIC_FLAG_PLAYING) {
+            if (snd_song_is_playing(music->songName)) {
+                return TRUE;
+            }
         }
     }
     return FALSE;
 }
 
 void bgm_pop_song(void) {
-    MusicSettings* musicSetting = gMusicSettings;
+    MusicControlData* music = gMusicControlData;
 
     if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
-        musicSetting->flags |= MUSIC_SETTINGS_FLAG_8;
-        _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, VOL_LEVEL_FULL);
+        music->flags |= MUSIC_FLAG_POPPING;
+        _bgm_set_song(0, music->savedSongID, music->savedVariation, 0, VOL_LEVEL_FULL);
     }
 }
 
 void bgm_push_song(s32 songID, s32 variation) {
-    MusicSettings* musicSetting = gMusicSettings;
+    MusicControlData* music = gMusicControlData;
 
     if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
-        musicSetting->savedSongID = musicSetting->songID;
-        musicSetting->savedVariation = musicSetting->variation;
-        musicSetting->savedSongName = musicSetting->songName;
-        musicSetting->flags |= MUSIC_SETTINGS_FLAG_4;
+        music->savedSongID = music->requestedSongID;
+        music->savedVariation = music->variation;
+        music->savedSongName = music->songName;
+        music->flags |= MUSIC_FLAG_PUSHING;
         bgm_set_song(0, songID, variation, 500, VOL_LEVEL_FULL);
     }
 }
 
 void bgm_pop_battle_song(void) {
-    MusicSettings* musicSetting = gMusicSettings;
+    MusicControlData* music = gMusicControlData;
 
     if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
         if (gOverrideFlags & GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE) {
             gOverrideFlags &= ~GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE;
         } else {
-            musicSetting->flags |= MUSIC_SETTINGS_FLAG_8;
-            _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, VOL_LEVEL_FULL);
+            music->flags |= MUSIC_FLAG_POPPING;
+            _bgm_set_song(0, music->savedSongID, music->savedVariation, 0, VOL_LEVEL_FULL);
             snd_ambient_resume(0, 250);
         }
     }
 }
 
 void bgm_push_battle_song(void) {
-    MusicSettings* musicSetting = gMusicSettings;
+    MusicControlData* music = gMusicControlData;
 
     if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
         if (!(gOverrideFlags & GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE)) {
             snd_ambient_pause(0, 250);
-            musicSetting->savedSongID = musicSetting->songID;
-            musicSetting->savedVariation = musicSetting->variation;
-            musicSetting->savedSongName = musicSetting->songName;
-            musicSetting->flags |= MUSIC_SETTINGS_FLAG_4;
-            bgm_set_song(0, musicSetting->battleSongID, musicSetting->battleVariation, 500, VOL_LEVEL_FULL);
+            music->savedSongID = music->requestedSongID;
+            music->savedVariation = music->variation;
+            music->savedSongName = music->songName;
+            music->flags |= MUSIC_FLAG_PUSHING;
+            bgm_set_song(0, music->battleSongID, music->battleVariation, 500, VOL_LEVEL_FULL);
         }
     }
 }
 
 void bgm_set_battle_song(s32 songID, s32 variation) {
-    MusicSettings* musicSetting = gMusicSettings;
+    MusicControlData* music = gMusicControlData;
 
-    musicSetting->battleSongID = songID;
-    musicSetting->battleVariation = variation;
+    music->battleSongID = songID;
+    music->battleVariation = variation;
 }
 
 void bgm_NOOP(void) {

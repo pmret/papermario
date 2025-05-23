@@ -78,8 +78,8 @@ void au_engine_init(s32 outputRate) {
     globals->audioThreadCallbacks[1] = NULL;
 
     for (i = 0; i < ARRAY_COUNT(globals->unk_globals_6C); i++) {
-        globals->unk_globals_6C[i].unk_4 = 0;
-        globals->unk_globals_6C[i].unk_5 = 0;
+        globals->unk_globals_6C[i].assigned = 0;
+        globals->unk_globals_6C[i].priority = 0;
     }
 
     for (i = 0; i < ARRAY_COUNT(globals->effectChanges); i++) {
@@ -460,14 +460,14 @@ void au_fade_flush(Fade* fade) {
     }
 }
 
-void au_fade_set_vol_scale(Fade* fade, s16 value) {
+void au_fade_set_envelope(Fade* fade, s16 value) {
     fade->envelopeVolume = value << 16;
     fade->envelopeTarget = value;
     fade->envelopeTicks = 0;
     fade->envelopeStep = 0;
 }
 
-void au_unk_80053B04(Fade* fade, u32 duration, s32 target) {
+void au_fade_calc_envelope(Fade* fade, u32 duration, s32 target) {
     s16 ticks;
     s32 delta;
 
@@ -619,23 +619,25 @@ AuResult au_unk_80053E58(s32 songID, BGMHeader* bgmFile) {
     SBNFileEntry fileEntry;
     SBNFileEntry sbnEntry;
     SBNFileEntry* bkFileEntry;
-    AuGlobals* soundData;
+    AuGlobals* globals;
     InitSongEntry* songInfo;
     s32 i;
     u16 bkFileIndex;
 
-    soundData = gSoundGlobals;
-    songInfo = &soundData->songList[songID];
-    status =  au_fetch_SBN_file(songInfo[0].bgmFileIndex, AU_FMT_BGM, &sbnEntry);
+    globals = gSoundGlobals;
+    songInfo = &globals->songList[songID];
+    status = au_fetch_SBN_file(songInfo->bgmFileIndex, AU_FMT_BGM, &sbnEntry);
     if (status == AU_RESULT_OK) {
+        // load BGM file
         au_read_rom(sbnEntry.offset, bgmFile, sbnEntry.data & 0xFFFFFF);
 
+        // load any auxiliary banks required by this BGM
         for (i = 0; i < ARRAY_COUNT(songInfo->bkFileIndex); i++) {
             bkFileIndex = songInfo->bkFileIndex[i];
             if (bkFileIndex != 0) {
-                bkFileEntry = &soundData->sbnFileList[bkFileIndex];
+                bkFileEntry = &globals->sbnFileList[bkFileIndex];
 
-                fileEntry.offset = (bkFileEntry->offset & 0xFFFFFF) + soundData->baseRomOffset;
+                fileEntry.offset = (bkFileEntry->offset & 0xFFFFFF) + globals->baseRomOffset;
                 fileEntry.data = bkFileEntry->data;
 
                 if ((fileEntry.data >> 0x18) == AU_FMT_BK) {
@@ -650,9 +652,9 @@ AuResult au_unk_80053E58(s32 songID, BGMHeader* bgmFile) {
     return status;
 }
 
-BGMPlayer* au_unk_80053F64(s32 variation) {
-    if (variation == 0) {
-        return gSoundGlobals->unk_globals_6C[0].bgmPlayer;
+BGMPlayer* au_unk_get_temp_player_for_index(s32 index) {
+    if (index == MUSIC_CROSS_FADE) {
+        return gSoundGlobals->unk_globals_6C[MUSIC_CROSS_FADE].bgmPlayer;
     }
     return NULL;
 }
@@ -726,13 +728,13 @@ AuResult au_ambient_load(u32 ambSoundID) {
     return AU_RESULT_OK;
 }
 
-BGMPlayer* au_unk_80054248(u8 arg0) {
-    switch (arg0) {
-        case 1:
+BGMPlayer* au_get_client_by_priority(u8 priority) {
+    switch (priority) {
+        case AU_PRIORITY_BGM_PLAYER_MAIN:
             return gBGMPlayerA;
-        case 2:
+        case AU_PRIORITY_BGM_PLAYER_AUX:
             return gBGMPlayerB;
-        case 4:
+        case AU_PRIORITY_SFX_MANAGER:
             return (BGMPlayer*)gSoundManager; // TODO: why return pointer to SoundManager?
         default:
             return NULL;

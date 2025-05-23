@@ -4684,15 +4684,6 @@ enum ProjectileHitboxAttackStates {
     PROJECTILE_HITBOX_STATE_DONE        = 100
 };
 
-enum MusicSettingsFlags {
-    MUSIC_SETTINGS_FLAG_1                 = 0x00000001,
-    MUSIC_SETTINGS_FLAG_ENABLE_PROXIMITY_MIX   = 0x00000002,
-    MUSIC_SETTINGS_FLAG_4                 = 0x00000004,
-    MUSIC_SETTINGS_FLAG_8                 = 0x00000008,
-    MUSIC_SETTINGS_FLAG_10                = 0x00000010,
-    MUSIC_SETTINGS_FLAG_20                = 0x00000020,
-};
-
 // the lower byte of ColliderFlags
 enum SurfaceType {
     SURFACE_TYPE_DEFAULT            = 0,

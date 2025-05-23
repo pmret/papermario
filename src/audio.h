@@ -122,34 +122,47 @@ enum AuVoiceSyncFlags {
 };
 
 typedef enum AuEffectType {
-    AU_FX_NONE          = 0,
-    AU_FX_SMALLROOM     = 1,
-    AU_FX_BIGROOM       = 2,
-    AU_FX_CHORUS        = 3,
-    AU_FX_FLANGE        = 4,
-    AU_FX_ECHO          = 5,
-    AU_FX_CUSTOM_0      = 6,
-    AU_FX_CUSTOM_1      = 7,
-    AU_FX_CUSTOM_2      = 8,
-    AU_FX_CUSTOM_3      = 9,
-    AU_FX_OTHER_BIGROOM = 10
+    AU_FX_NONE                  = 0,
+    AU_FX_SMALLROOM             = 1,
+    AU_FX_BIGROOM               = 2,
+    AU_FX_CHORUS                = 3,
+    AU_FX_FLANGE                = 4,
+    AU_FX_ECHO                  = 5,
+    AU_FX_CUSTOM_0              = 6,
+    AU_FX_CUSTOM_1              = 7,
+    AU_FX_CUSTOM_2              = 8,
+    AU_FX_CUSTOM_3              = 9,
+    AU_FX_OTHER_BIGROOM         = 10,
 } AuEffectType;
 
 typedef enum MusicState {
-    MUSIC_STATE_0               = 0,
-    MUSIC_STATE_1               = 1,
-    MUSIC_STATE_2               = 2,
+    MUSIC_STATE_IDLE            = 0,
+    MUSIC_STATE_STOP_CURRENT    = 1,
+    MUSIC_STATE_AWAIT_FADEOUT   = 2,
     MUSIC_STATE_DELAY_2         = 3,
     MUSIC_STATE_DELAY_1         = 4,
-    MUSIC_STATE_5               = 5,
+    MUSIC_STATE_PLAY_NEXT       = 5,
 } MusicState;
 
+enum MusicFlags {
+    MUSIC_FLAG_PLAYING              = 0x01,
+    MUSIC_FLAG_ENABLE_PROX_MIX      = 0x02,
+    MUSIC_FLAG_PUSHING              = 0x04,
+    MUSIC_FLAG_POPPING              = 0x08,
+    MUSIC_FLAG_IGNORE_POP           = 0x10,
+    MUSIC_FLAG_FADE_IN_NEXT         = 0x20,
+};
+
+enum MusicFades {
+    MUSIC_CROSS_FADE                = 0,
+};
+
 typedef enum BGMPlayerState {
-    BGM_PLAY_STATE_IDLE             = 0,
-    BGM_PLAY_STATE_ACTIVE           = 1,
-    BGM_PLAY_STATE_FETCH            = 2,
-    BGM_PLAY_STATE_INIT             = 3,
-    BGM_PLAY_STATE_STOP             = 4
+    BGM_PLAY_STATE_IDLE         = 0,
+    BGM_PLAY_STATE_ACTIVE       = 1,
+    BGM_PLAY_STATE_FETCH        = 2,
+    BGM_PLAY_STATE_INIT         = 3,
+    BGM_PLAY_STATE_STOP         = 4,
 } BGMPlayerState;
 
 typedef enum SegmentControlCommands {
@@ -159,7 +172,7 @@ typedef enum SegmentControlCommands {
     BGM_COMP_WAIT                = 4,
     BGM_COMP_END_LOOP            = 5,
     BGM_COMP_6                   = 6,
-    BGM_COMP_7                   = 7
+    BGM_COMP_7                   = 7,
 } SegmentControlCommands;
 
 typedef enum BGMSpecialSubops {
@@ -954,8 +967,8 @@ typedef struct AuEffectChange {
 
 typedef struct SndGlobalsSub6C {
     /* 0x00 */ struct BGMPlayer* bgmPlayer;
-    /* 0x04 */ u8 unk_4;
-    /* 0x05 */ u8 unk_5;
+    /* 0x04 */ u8 assigned;
+    /* 0x05 */ u8 priority;
 } SndGlobalsSub6C;
 
 // found at 801D57A0
@@ -1133,7 +1146,7 @@ typedef struct BGMPlayer {
     /* 0x21D */ u8 bgmInstrumentCount;
     /* 0x21E */ u8 unk_21E;
     /* 0x21F */ char unk_21F[0x1];
-    /* 0x220 */ u8 unk_220;
+    /* 0x220 */ u8 paused;
     /* 0x221 */ u8 masterState;
     /* 0x222 */ u8 unk_222;
     /* 0x223 */ u8 unk_223;
@@ -1155,8 +1168,9 @@ typedef struct BGMPlayer {
 } BGMPlayer; // size = 0xA9C
 
 //TODO these are probably one struct with a union at offset 0x10
+// keep them separated so that only the "correct" element of the union can be used with functions taking these
 
-typedef struct SongUpdateEventA {
+typedef struct SongUpdateRequestA {
     /* 0x00 */ s32 songName;
     /* 0x04 */ s32 duration;
     /* 0x08 */ s32 startVolume;
@@ -1164,29 +1178,29 @@ typedef struct SongUpdateEventA {
     /* 0x10 */ s32 variation;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ char pad_18[8];
-} SongUpdateEventA; // size = 0x1C or 0x20
+} SongUpdateRequestA; // size = 0x1C or 0x20
 
-typedef struct SongUpdateEventB {
+typedef struct SongUpdateRequestB {
     /* 0x00 */ s32 songName;
     /* 0x04 */ s32 duration;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 finalVolume;
     /* 0x10 */ AuCallback callback;
-    /* 0x14 */ s32 unk_14;
+    /* 0x14 */ s32 onPush;
     /* 0x18 */ char pad_18[8];
-} SongUpdateEventB; // size = 0x1C or 0x20
+} SongUpdateRequestB; // size = 0x1C or 0x20
 
-typedef struct SongUpdateEventC {
+typedef struct SongUpdateRequestC {
     /* 0x00 */ s32 songName;
     /* 0x04 */ s32 duration;
     /* 0x08 */ s32 startVolume;
     /* 0x0C */ s32 finalVolume;
     /* 0x10 */ s32 index;
-    /* 0x14 */ s32 unk_14;
+    /* 0x14 */ s32 pauseMode;
     /* 0x18 */ char pad_18[8];
-} SongUpdateEventC; // size = 0x1C or 0x20
+} SongUpdateRequestC; // size = 0x1C or 0x20
 
-typedef struct SongUpdateEventD {
+typedef struct SongUpdateRequestD {
     /* 0x00 */ s32 songName;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 unk_08;
@@ -1194,18 +1208,18 @@ typedef struct SongUpdateEventD {
     /* 0x10 */ s32 mode; // 0 or 1
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ char pad_18[8];
-} SongUpdateEventD; // size = 0x1C or 0x20
+} SongUpdateRequestD; // size = 0x1C or 0x20
 
-// might be same as SongUpdateEventC
-typedef struct SongUpdateEventE {
+// might be same as SongUpdateRequestC
+typedef struct SongUpdateRequestE {
     /* 0x00 */ s32 songName;
     /* 0x04 */ s32 duration;
     /* 0x08 */ s32 startVolume;
     /* 0x0C */ s32 finalVolume;
     /* 0x10 */ s32 index;
-    /* 0x14 */ s32 unk_14;
+    /* 0x14 */ s32 pauseMode;
     /* 0x18 */ char pad_18[8];
-} SongUpdateEventE; // size = 0x1C or 0x20
+} SongUpdateRequestE; // size = 0x1C or 0x20
 
 typedef struct MSEQTrackData {
     /* 0x0 */ u8 trackIndex;
