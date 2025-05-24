@@ -390,7 +390,6 @@ void au_reset_nonfree_voice(AuVoice* voice, u8 index) {
     }
 }
 
-// uncertain name
 void au_reset_voice(AuVoice* voice, u8 voiceIdx) {
     voice->cmdPtr = NULL;
     voice->stopPending = TRUE;

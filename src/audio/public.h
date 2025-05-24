@@ -24,7 +24,7 @@ AuResult snd_ambient_stop_slow(s32 arg0, s32 arg1);
 AuResult snd_ambient_pause(s32 arg0, s32 arg1);
 AuResult snd_ambient_resume(s32 arg0, s32 arg1);
 AuResult snd_ambient_is_stopped(s32 arg0);
-AuResult snd_ambient_mute(s32 arg0, s32 arg1);
+AuResult snd_ambient_fade_out(s32 arg0, s32 arg1);
 AuResult snd_ambient_set_volume(s32 arg0, s32 arg1, s32 arg2);
 AuResult snd_ambient_disable(s32 arg0);
 AuResult snd_ambient_enable(s32 arg0);
@@ -49,7 +49,7 @@ AuResult snd_song_request_pause(s32 songName);
 AuResult snd_song_request_unpause(s32 songName);
 AuResult snd_song_set_volume_quiet(s32 songName);
 AuResult snd_song_set_volume_full(s32 songName);
-AuResult snd_song_set_linked_mode(s32 songName, s32 mode);
+AuResult snd_song_set_linked_mode(s32 songName, b32 mode);
 //AuResult snd_song_get_playing_info(s32 songName, BGMHeader** outTrackData, BGMPlayer** outPlayer);
 AuResult snd_song_set_playback_rate(s32 songName, f32 arg1);
 /*
@@ -81,7 +81,7 @@ void snd_disable_sfx(void);
 // ----------------------------------------------------------------------------------
 AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet);
 AuResult bgm_clear_track_volumes(s32 playerIndex, s16 trackVolSet);
-AuResult bgm_set_linked_mode(s32 playerIndex, s16 mode);
+AuResult bgm_set_linked_mode(s32 playerIndex, b16 mode);
 void bgm_quiet_max_volume(void);
 void bgm_reset_max_volume(void);
 void bgm_reset_volume(void);

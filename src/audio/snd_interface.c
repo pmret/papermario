@@ -344,8 +344,7 @@ AuResult snd_ambient_is_stopped(s32 index) {
     return au_mseq_check_stopped(index);
 }
 
-// TODO perhaps inaccurate name
-AuResult snd_ambient_mute(s32 index, s32 arg1) {
+AuResult snd_ambient_fade_out(s32 index, s32 arg1) {
     AuResult status = au_mseq_check_player_index(index);
 
     if (status == AU_RESULT_OK) {
@@ -461,7 +460,7 @@ AuResult snd_song_load(s32 songID, s32 playerIndex) {
 /// Unused -- snd_song_request_play but always uses BGM_VARIATION_0
 AuResult snd_song_request_play_default(s32 songName) {
     AuResult status;
-    SongUpdateRequestA s;
+    SongStartRequest s;
 
     PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
@@ -469,7 +468,7 @@ AuResult snd_song_request_play_default(s32 songName) {
     s.startVolume = AU_MAX_VOLUME_8;
     s.finalVolume = AU_MAX_VOLUME_8;
     s.variation = BGM_VARIATION_0;
-    s.unk_14 = 0;
+    s.unused_14 = 0;
     status = au_bgm_process_init_song(&s);
     PreventBGMPlayerUpdate = FALSE;
 
@@ -479,7 +478,7 @@ AuResult snd_song_request_play_default(s32 songName) {
 /// Called from bgm_control to start playing a particular song + variation
 AuResult snd_song_request_play(s32 songName, s32 variation) {
     AuResult status;
-    SongUpdateRequestA s;
+    SongStartRequest s;
 
     PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
@@ -487,7 +486,7 @@ AuResult snd_song_request_play(s32 songName, s32 variation) {
     s.startVolume = AU_MAX_VOLUME_8;
     s.finalVolume = AU_MAX_VOLUME_8;
     s.variation = variation;
-    s.unk_14 = 0;
+    s.unused_14 = 0;
     status = au_bgm_process_init_song(&s);
     PreventBGMPlayerUpdate = FALSE;
 
@@ -509,7 +508,7 @@ AuResult snd_song_is_playing(s32 songName) {
 /// Called from bgm_control to fade in a particular song + variation
 AuResult snd_song_request_fade_in(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume) {
     AuResult status;
-    SongUpdateRequestA s;
+    SongStartRequest s;
 
     PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
@@ -517,7 +516,7 @@ AuResult snd_song_request_fade_in(s32 songName, s32 variation, s32 fadeInTime, s
     s.startVolume = startVolume;
     s.finalVolume = endVolume;
     s.variation = variation;
-    s.unk_14 = 0;
+    s.unused_14 = 0;
     status = au_bgm_process_init_song(&s);
     PreventBGMPlayerUpdate = FALSE;
 
@@ -527,7 +526,7 @@ AuResult snd_song_request_fade_in(s32 songName, s32 variation, s32 fadeInTime, s
 /// Unused
 AuResult snd_song_request_fade_in_default(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume) {
     AuResult status;
-    SongUpdateRequestA s;
+    SongStartRequest s;
 
     PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
@@ -535,7 +534,7 @@ AuResult snd_song_request_fade_in_default(s32 songName, s32 fadeInTime, s32 star
     s.startVolume = startVolume;
     s.finalVolume = endVolume;
     s.variation = 0;
-    s.unk_14 = 0;
+    s.unused_14 = 0;
     status = au_bgm_process_init_song(&s);
     PreventBGMPlayerUpdate = FALSE;
 
@@ -543,20 +542,20 @@ AuResult snd_song_request_fade_in_default(s32 songName, s32 fadeInTime, s32 star
 }
 
 AuResult snd_song_request_fade_out(s32 songName, s32 fadeTime, AuCallback callback) {
-    SongUpdateRequestB s;
+    SongFadeOutRequest s;
 
     s.songName = songName;
     s.duration = fadeTime;
-    s.unk_08 = 0;
+    s.unused_08 = 0;
     s.finalVolume = 0;
-    s.callback = callback;
-    s.onPush = 0;
+    s.doneCallback = callback;
+    s.onPush = FALSE;
 
     return au_bgm_process_fade_out(&s);
 }
 
 AuResult snd_song_push_stop(s32 songName) {
-    SongUpdateRequestC s;
+    SongSuspendRequest s;
 
     s.songName = songName;
     s.duration = 0;
@@ -570,7 +569,7 @@ AuResult snd_song_push_stop(s32 songName) {
 
 AuResult snd_song_request_pop(s32 songName) {
     AuResult status;
-    SongUpdateRequestE s;
+    SongResumeRequest s;
 
     PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
@@ -586,7 +585,7 @@ AuResult snd_song_request_pop(s32 songName) {
 }
 
 AuResult snd_song_request_snapshot(s32 songName) {
-    SongUpdateRequestC s;
+    SongSuspendRequest s;
 
     s.songName = songName;
     s.duration = 0;
@@ -599,20 +598,20 @@ AuResult snd_song_request_snapshot(s32 songName) {
 }
 
 AuResult snd_song_request_push_fade_out(s32 songName, s32 fadeTime) {
-    SongUpdateRequestB s;
+    SongFadeOutRequest s;
 
     s.songName = songName;
     s.duration = fadeTime;
-    s.unk_08 = 0;
+    s.unused_08 = 0;
     s.finalVolume = 0;
-    s.callback = NULL;
-    s.onPush = 1;
+    s.doneCallback = NULL;
+    s.onPush = TRUE;
 
     return au_bgm_process_fade_out(&s);
 }
 
 AuResult snd_song_request_pause(s32 songName) {
-    SongUpdateRequestC s;
+    SongSuspendRequest s;
 
     s.songName = songName;
     s.duration = 0;
@@ -625,7 +624,7 @@ AuResult snd_song_request_pause(s32 songName) {
 }
 
 AuResult snd_song_request_unpause(s32 songName) {
-    SongUpdateRequestE s;
+    SongResumeRequest s;
 
     s.songName = songName;
     s.duration = 0;
@@ -638,7 +637,7 @@ AuResult snd_song_request_unpause(s32 songName) {
 }
 
 AuResult snd_song_set_volume_quiet(s32 songName) {
-    SongUpdateRequestA s;
+    SongStartRequest s;
 
     s.songName = songName;
     s.duration = 500;
@@ -648,7 +647,7 @@ AuResult snd_song_set_volume_quiet(s32 songName) {
 }
 
 AuResult snd_song_set_volume_full(s32 songName) {
-    SongUpdateRequestA s;
+    SongStartRequest s;
 
     s.songName = songName;
     s.duration = 500;
@@ -657,11 +656,11 @@ AuResult snd_song_set_volume_full(s32 songName) {
     return au_bgm_adjust_volume(&s);
 }
 
-AuResult snd_song_set_linked_mode(s32 songName, s32 mode) {
-    SongUpdateRequestD s;
+AuResult snd_song_set_linked_mode(s32 songName, b32 mode) {
+    SongSwapLinkedRequest s;
 
     s.songName = songName;
-    s.mode = mode;
+    s.enabled = mode;
 
     return au_bgm_set_linked_tracks(&s);
 }

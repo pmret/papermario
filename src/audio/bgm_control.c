@@ -311,7 +311,7 @@ AuResult bgm_clear_track_volumes(s32 playerIndex, s16 trackVolSet) {
     return snd_song_clear_track_volumes(music->songName, trackVolSet);
 }
 
-AuResult bgm_set_linked_mode(s32 playerIndex, s16 mode) {
+AuResult bgm_set_linked_mode(s32 playerIndex, b16 mode) {
     MusicControlData* music = &gMusicControlData[playerIndex];
 
     if (!(music->flags & MUSIC_FLAG_PLAYING)) {

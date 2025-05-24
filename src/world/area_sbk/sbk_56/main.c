@@ -23,12 +23,12 @@ MapSettings N(settings) = {
 #include "world/common/todo/SpawnSunEffect.inc.c"
 
 API_CALLABLE(N(StartOasisTracks)) {
-    bgm_set_linked_mode(0, 1);
+    bgm_set_linked_mode(0, TRUE);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(StopOasisTracks)) {
-    bgm_set_linked_mode(0, 0);
+    bgm_set_linked_mode(0, FALSE);
     return ApiStatus_DONE2;
 }
 

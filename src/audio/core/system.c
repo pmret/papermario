@@ -51,7 +51,7 @@ void create_audio_system(void) {
     outputRate = osAiSetFrequency(HARDWARE_OUTPUT_RATE);
     frameSize = (nusched.retraceCount * outputRate + (VIDEO_FRAMES_PER_SECOND - 1)) / VIDEO_FRAMES_PER_SECOND;
     config.outputRate = outputRate;
-    config.unk_0C = 0;
+    config.unused_0C = 0;
     config.heap = &nuAuHeap;
     config.dmaNew = nuAuDmaNew;
     AlFrameSize = ((frameSize / AUDIO_SAMPLES) + 1) * AUDIO_SAMPLES;

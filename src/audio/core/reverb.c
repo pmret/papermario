@@ -163,13 +163,13 @@ void au_filter_create(AuFilter* filter, ALHeap* heap) {
 }
 
 // no known entry point to this function, called only by au_filter_create
-void au_filter_init(AuFilter* filter, s16 arg1, s16 arg2, s16 fc) {
-    filter->unk_06 = arg1;
-    filter->unk_08 = arg2;
+void au_filter_init(AuFilter* filter, s16 arg1, s16 arg2, s16 cutoff) {
+    filter->unused_06 = arg1;
+    filter->unused_08 = arg2;
 
-    if (fc != 0) {
+    if (cutoff != 0) {
         filter->activeLowpass = filter->lowpassTemplate;
-        filter->activeLowpass->fc = fc;
+        filter->activeLowpass->fc = cutoff;
         _init_lpfilter(filter->activeLowpass);
         return;
     }

@@ -28,11 +28,11 @@ void au_init_voices(AuGlobals* globals) {
         AuVoice* voice = &globals->voices[i];
 
         voice->cmdPtr = NULL;
-        voice->unk_20 = 0;
+        voice->unused_20 = 0;
         voice->envDuration = 0;
         voice->envTimeLeft = 0;
         voice->envIntervalIndex = 0;
-        voice->unk_3C = 0;
+        voice->unused_3C = 0;
         voice->envelopeFlags = 0;
         voice->isRelativeRelease = FALSE;
         voice->envRelativeStart = ENV_VOL_MAX;

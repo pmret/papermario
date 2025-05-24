@@ -33,7 +33,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
     driver->num_pvoice = config->num_pvoice;
     driver->num_bus = config->num_bus;
     driver->curSamples = 0;
-    driver->unk_04 = 0;
+    driver->unused_04 = 0;
     driver->outputRate = config->outputRate;
     driver->dmaNew = config->dmaNew;
 
@@ -75,7 +75,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         voice->envMixer.delta = 0;
         voice->envMixer.segEnd = 0;
         voice->envMixer.pan = 64;
-        voice->unk_74 = 0;
+        voice->unused_74 = 0;
         voice->next = NULL;
         voice->busID = FX_BUS_BGMA_MAIN;
         voice->index = i;

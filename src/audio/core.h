@@ -156,8 +156,8 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos);
 // core/reverb.c
 // ----------------------------------------------------------------------------------
 void au_fx_create(AuFX* fx, u8 mode, ALHeap* heap);
-void au_filter_create(AuFilter* kappa, ALHeap* heap);
-void au_filter_init(AuFilter* kappa, s16 arg1, s16 arg2, s16 fc);
+void au_filter_create(AuFilter* filter, ALHeap* heap);
+void au_filter_init(AuFilter* filter, s16 arg1, s16 arg2, s16 fc);
 void au_fx_load_preset(AuFX* fx, u8 effectType);
 Acmd* au_pull_fx(AuFX* fx, Acmd* cmdBusPos, s16, s16);
 s32 au_fx_param_hdl(AuFX* fx, s16 index, s16 paramID, s32 value);

@@ -48,17 +48,17 @@ s16 au_sfx_manager_audio_frame_update(SoundManager* manager);
 // ----------------------------------------------------------------------------------
 void au_bgm_begin_video_frame(BGMPlayer* player);
 BGMPlayer* au_bgm_get_player_with_song_name(s32 songString);
-AuResult au_bgm_process_init_song(SongUpdateRequestA* event);
+AuResult au_bgm_process_init_song(SongStartRequest* event);
 AuResult au_bgm_stop_song(s32 songName);
 void au_bgm_stop_all(void);
 AuResult au_bgm_is_song_playing(s32 songName);
 b32 au_bgm_player_is_active(BGMPlayer* player);
-AuResult au_bgm_process_fade_out(SongUpdateRequestB* s);
+AuResult au_bgm_process_fade_out(SongFadeOutRequest* s);
 AuResult au_bgm_complete_push(s32 songName);
-AuResult au_bgm_process_suspend(SongUpdateRequestC* update, b32 skipStop);
-AuResult au_bgm_process_resume(SongUpdateRequestE* update);
+AuResult au_bgm_process_suspend(SongSuspendRequest* update, b32 skipStop);
+AuResult au_bgm_process_resume(SongResumeRequest* update);
 void au_bgm_restore_copied_player(AuGlobals* globals);
-AuResult au_bgm_adjust_volume(SongUpdateRequestA* update);
+AuResult au_bgm_adjust_volume(SongStartRequest* update);
 void au_bgm_player_init(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3);
 void au_bgm_set_effect_indices(BGMPlayer* player, u8* list);
 void au_bgm_update_fade(BGMPlayer* player);
@@ -98,7 +98,7 @@ void au_BGMCmd_F7_SubTrackReverbType(BGMPlayer* player, BGMPlayerTrack* track);
 void au_BGMCmd_FD_EventTrigger(BGMPlayer* player, BGMPlayerTrack* track);
 void au_BGMCmd_FE_Detour(BGMPlayer* player, BGMPlayerTrack* track);
 void au_BGMCmd_FC_Jump(BGMPlayer* player, BGMPlayerTrack* track);
-void au_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track);
+void au_BGMCmd_FF_Special(BGMPlayer* player, BGMPlayerTrack* track);
 void au_BGMCmd_NOP(BGMPlayer* player, BGMPlayerTrack* track);
 void au_bgm_set_proximity_mix(s32 songName, u32 mix);
 void au_bgm_set_playback_rate(BGMPlayer* player, f32 arg1);
@@ -107,7 +107,7 @@ void au_bgm_change_track_volume(BGMPlayer* player, s32 trackIdx, s16 arg2, u8 ar
 void au_bgm_set_track_volumes(BGMPlayer* player, u8* arg1, s32 arg2);
 void au_bgm_set_prox_mix_fade(BGMPlayer* player, BGMPlayerTrack* track, s32 target, s32 duration);
 void au_bgm_reset_all_voices(BGMPlayer* player);
-AuResult au_bgm_set_linked_tracks(SongUpdateRequestD* arg0);
+AuResult au_bgm_set_linked_tracks(SongSwapLinkedRequest* arg0);
 
 // ----------------------------------------------------------------------------------
 // snd_interface.c
@@ -132,7 +132,7 @@ AuResult snd_ambient_stop_slow(s32 arg0, s32 arg1);
 AuResult snd_ambient_pause(s32 arg0, s32 arg1);
 AuResult snd_ambient_resume(s32 arg0, s32 arg1);
 AuResult snd_ambient_is_stopped(s32 arg0);
-AuResult snd_ambient_mute(s32 arg0, s32 arg1);
+AuResult snd_ambient_fade_out(s32 arg0, s32 arg1);
 AuResult snd_ambient_set_volume(s32 arg0, s32 arg1, s32 arg2);
 AuResult snd_ambient_disable(s32 arg0);
 AuResult snd_ambient_enable(s32 arg0);
@@ -156,7 +156,7 @@ AuResult snd_song_request_pause(s32 songName);
 AuResult snd_song_request_unpause(s32 songName);
 AuResult snd_song_set_volume_quiet(s32 songName);
 AuResult snd_song_set_volume_full(s32 songName);
-AuResult snd_song_set_linked_mode(s32 songName, s32 mode);
+AuResult snd_song_set_linked_mode(s32 songName, b32 mode);
 */
 AuResult snd_song_get_playing_info(s32 songName, BGMHeader** outTrackData, BGMPlayer** outPlayer);
 /*

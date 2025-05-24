@@ -38,7 +38,7 @@ static void au_SEFCmd_11_Restart(SoundManager* manager, SoundPlayer* player);
 static void au_SEFCmd_12_NOP(SoundManager* manager, SoundPlayer* player);
 static void au_SEFCmd_13_SetRandomPitch(SoundManager* manager, SoundPlayer* player);
 static void au_SEFCmd_14_SetRandomVelocity(SoundManager* manager, SoundPlayer* player);
-static void au_SEFCmd_15_SetUnkA3(SoundManager* manager, SoundPlayer* player);
+static void au_SEFCmd_15_SetRandomUnused(SoundManager* manager, SoundPlayer* player);
 static void au_SEFCmd_16_SetEnvelopePress(SoundManager* manager, SoundPlayer* player);
 static void au_SEFCmd_17_PlaySound(SoundManager* manager, SoundPlayer* player);
 static void au_SEFCmd_18_SetAlternativeVolume(SoundManager* manager, SoundPlayer* player);
@@ -219,7 +219,7 @@ void (*SefCmdHandlers[])(SoundManager*, SoundPlayer*) = {
     au_SEFCmd_12_NOP,
     au_SEFCmd_13_SetRandomPitch,
     au_SEFCmd_14_SetRandomVelocity,
-    au_SEFCmd_15_SetUnkA3,
+    au_SEFCmd_15_SetRandomUnused,
     au_SEFCmd_16_SetEnvelopePress,
     au_SEFCmd_17_PlaySound,
     au_SEFCmd_18_SetAlternativeVolume
@@ -266,7 +266,7 @@ void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*) = {
     au_BGMCmd_FC_Jump,
     au_BGMCmd_FD_EventTrigger,
     au_BGMCmd_FE_Detour,
-    au_BGMCmd_FF,
+    au_BGMCmd_FF_Special,
 };
 
 s8 SeqCmdArgCounts[] = {
@@ -579,10 +579,10 @@ void au_sfx_clear_queue(SoundManager* manager) {
         manager->soundQueue[i].pan = 0;
     }
 
-    manager->unk_165 = 0;
+    manager->unused_165 = 0;
     manager->sfxQueueWritePos = 0;
     manager->sfxQueueReadPos = 0;
-    manager->unk_162 = 0;
+    manager->unused_162 = 0;
 }
 
 // Registers a new sound effect for playback from the main/game thread.
@@ -1015,10 +1015,10 @@ static void au_sfx_play_sound(SoundManager* manager, SoundPlayer* player, s8* re
         player->exclusiveID = exclusiveID;
         player->envelopCustomPressProfile = NULL;
         player->changed.all = 0;
-        player->unk_A0 = 0;
+        player->unused_A0 = 0;
         player->randomPitch = 0;
         player->randomVelocity = 0;
-        player->unk_A3 = 0;
+        player->randomUnused = 0;
         player->volumeLerp.current = AU_MAX_VOLUME_32;
         player->volumeLerp.time = 0;
         player->volumeLerp.step = 0;
@@ -1685,8 +1685,8 @@ static void au_SEFCmd_14_SetRandomVelocity(SoundManager* manager, SoundPlayer* p
     player->randomVelocity = *player->sefDataReadPos++;
 }
 
-static void au_SEFCmd_15_SetUnkA3(SoundManager* manager, SoundPlayer* player) {
-    player->unk_A3 = *player->sefDataReadPos++;;
+static void au_SEFCmd_15_SetRandomUnused(SoundManager* manager, SoundPlayer* player) {
+    player->randomUnused = *player->sefDataReadPos++;
 }
 
 static void au_SEFCmd_16_SetEnvelopePress(SoundManager* manager, SoundPlayer* player) {

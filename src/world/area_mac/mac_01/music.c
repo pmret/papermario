@@ -29,7 +29,7 @@ EvtScript N(EVS_ResetMusicAfterFortune) = {
             Call(SetMusicTrack, 0, SONG_TOAD_TOWN, 0, VOL_LEVEL_FULL)
             Wait(20)
             Call(EnableMusicProximityMix, 0)
-            Call(AdjustMusicProximityMix, 0, 2, 2)
+            Call(AdjustMusicProximityMix, 0, 2, MUSIC_PROXIMITY_FULL)
     EndSwitch
     Return
     End
