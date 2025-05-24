@@ -99,7 +99,7 @@ void bgm_update_music_control(void) {
                                 music->state = stateFadeOut;
                             }
                         } else {
-                            if (snd_song_UNK_push_stop(music->songName) == AU_RESULT_OK) {
+                            if (snd_song_push_stop(music->songName) == AU_RESULT_OK) {
                                 music->state = stateFadeOut;
                             }
                         }
@@ -108,7 +108,7 @@ void bgm_update_music_control(void) {
                             music->state = stateFadeOut;
                         }
                     } else {
-                        if (snd_song_UNK_request_push_fade_out(music->songName, 250) == AU_RESULT_OK) {
+                        if (snd_song_request_push_fade_out(music->songName, 250) == AU_RESULT_OK) {
                             music->state = stateFadeOut;
                         }
                     }
@@ -170,7 +170,7 @@ void bgm_update_music_control(void) {
                     if (music->flags & MUSIC_FLAG_IGNORE_POP) {
                         music->state = MUSIC_STATE_IDLE;
                         music->flags &= ~(MUSIC_FLAG_IGNORE_POP | MUSIC_FLAG_POPPING);
-                    } else if (snd_song_UNK_request_pop(music->savedSongName) == AU_RESULT_OK) {
+                    } else if (snd_song_request_pop(music->savedSongName) == AU_RESULT_OK) {
                         music->requestedSongID = music->savedSongID;
                         music->variation = music->savedVariation;
                         music->songName = music->savedSongName;
@@ -210,7 +210,7 @@ s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s
         bgm_set_target_volume(volume);
 
         if (music->flags & MUSIC_FLAG_PUSHING) {
-            func_80055B80(music->songName);
+            snd_song_request_snapshot(music->songName);
             music->flags &= ~MUSIC_FLAG_PUSHING;
         }
 

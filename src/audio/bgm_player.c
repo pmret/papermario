@@ -76,7 +76,7 @@ void au_bgm_begin_video_frame(BGMPlayer* player) {
                     }
                     player->bgmFile = bgmFile;
                     bgmData = &bgmFile->info;
-                    au_bgm_set_tick_resolution(player, BGM_SAMPLE_RATE, BgmTicksRates[((u8*)player->unk_74)[0] & 7]); //TODO revise unk_74 typing
+                    au_bgm_set_tick_resolution(player, BGM_SAMPLE_RATE, BgmTicksRates[*(player->tickRatePtr) & 7]);
 
                     compOffset = bgmData->compositions[compID];
                     if (compOffset == 0) {
@@ -109,7 +109,7 @@ void au_bgm_begin_video_frame(BGMPlayer* player) {
                     player->bgmInstrumentCount = 0;
                 }
             } else {
-                if (player->unk_58) {
+                if (player->unk_58 != 0) {
                     player->masterState = BGM_PLAY_STATE_STOP;
                     player->nextUpdateCounter = 1;
                     player->nextUpdateStep = 1;
@@ -304,7 +304,7 @@ AuResult au_bgm_process_fade_out(SongUpdateRequestB* request) {
                             player->fadeInfo.baseStep = ((volume << 0x10) - player->fadeInfo.baseVolume) / player->fadeInfo.baseTicks;
                             player->fadeInfo.onCompleteCallback = request->callback;
                             if (request->onPush == 1) {
-                                player->fadeSongName = songName;
+                                player->pushSongName = songName;
                             }
                         }
                     }
@@ -321,25 +321,25 @@ AuResult au_bgm_process_fade_out(SongUpdateRequestB* request) {
     return status;
 }
 
-AuResult func_8004DC80(s32 songName) {
+AuResult au_bgm_complete_push(s32 songName) {
     SongUpdateRequestC s;
 
     s.songName = songName;
     s.duration = 0;
     s.startVolume = 0;
     s.finalVolume = 0;
-    s.index = MUSIC_CROSS_FADE;
+    s.index = BGM_SNAPSHOT_0;
     s.pauseMode = FALSE;
 
-    return au_bgm_process_suspend(&s, 0);
+    return au_bgm_process_suspend(&s, 0); // force stop
 }
 
-AuResult au_bgm_process_suspend(SongUpdateRequestC* request, s32 clearChanged) {
+AuResult au_bgm_process_suspend(SongUpdateRequestC* request, b32 skipStop) {
     AuResult status;
-    BGMPlayer* playerA;
-    BGMPlayer* playerB;
+    BGMPlayer* player;
+    BGMPlayer* snapshot;
     s32 songName;
-    s32 index; //TODO
+    s32 index;
     u32 i;
     u32 j;
 
@@ -348,15 +348,15 @@ AuResult au_bgm_process_suspend(SongUpdateRequestC* request, s32 clearChanged) {
     status = AU_RESULT_OK;
 
     if (songName != 0) {
-        playerA = au_bgm_get_player_with_song_name(songName);
-        if (playerA != NULL) {
+        player = au_bgm_get_player_with_song_name(songName);
+        if (player != NULL) {
             if (!request->pauseMode) {
-                playerB = au_unk_get_temp_player_for_index(index);
-                if (playerB != NULL) {
-                    if (songName == playerA->songName) {
-                        if (!clearChanged) {
-                            for (i = 0; i < ARRAY_COUNT(playerA->tracks); i++) {
-                                BGMPlayerTrack* track = &playerA->tracks[i];
+                snapshot = au_get_snapshot_by_index(index);
+                if (snapshot != NULL) {
+                    if (songName == player->songName) {
+                        if (!skipStop) {
+                            for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
+                                BGMPlayerTrack* track = &player->tracks[i];
                                 if (track->bgmReadPos != NULL) {
                                     for (j = track->firstVoice; j < track->lastVoice; j++) {
                                         track->changed.all = 0;
@@ -364,22 +364,22 @@ AuResult au_bgm_process_suspend(SongUpdateRequestC* request, s32 clearChanged) {
                                 }
                             }
                         }
-                        playerA->globals->unk_globals_6C[index].priority = playerA->priority;
-                        playerA->globals->unk_globals_6C[index].assigned = 1;
-                        playerA->fadeSongName = 0;
-                        au_copy_words(playerA, playerB, sizeof(*playerA));
-                        if (clearChanged == 0) {
-                            au_bgm_stop_player(playerA);
+                        player->globals->snapshots[index].priority = player->priority;
+                        player->globals->snapshots[index].assigned = 1;
+                        player->pushSongName = 0;
+                        au_copy_words(player, snapshot, sizeof(*player));
+                        if (!skipStop) {
+                            au_bgm_stop_player(player);
                         }
                     }
                 } else {
                     status = AU_ERROR_INVALID_SONG_DURATION;
                 }
             } else {
-                if (songName == playerA->songName) {
-                    if (playerA->masterState != BGM_PLAY_STATE_IDLE) {
-                        playerA->paused = TRUE;
-                        au_bgm_reset_all_voices(playerA);
+                if (songName == player->songName) {
+                    if (player->masterState != BGM_PLAY_STATE_IDLE) {
+                        player->paused = TRUE;
+                        au_bgm_reset_all_voices(player);
                     }
                 }
             }
@@ -394,8 +394,8 @@ AuResult au_bgm_process_suspend(SongUpdateRequestC* request, s32 clearChanged) {
 
 AuResult au_bgm_process_resume(SongUpdateRequestE* request) {
     AuResult status;
-    BGMPlayer* playerA;
-    BGMPlayer* playerB;
+    BGMPlayer* player;
+    BGMPlayer* snapshot;
     s32 index;
     s32 songName;
     s32 volume0;
@@ -408,12 +408,12 @@ AuResult au_bgm_process_resume(SongUpdateRequestE* request) {
 
     if (songName != 0) {
         if (!request->pauseMode) {
-            playerA = au_unk_get_temp_player_for_index(index);
-            if (playerA != NULL && playerA->globals->unk_globals_6C[index].assigned == 1) {
-                playerB = au_get_client_by_priority(playerA->globals->unk_globals_6C[index].priority);
-                if (playerB != NULL) {
-                    if (!au_bgm_player_is_active(playerB)) {
-                        status = au_unk_80053E58(playerA->songID, playerA->bgmFile);
+            snapshot = au_get_snapshot_by_index(index);
+            if (snapshot != NULL && snapshot->globals->snapshots[index].assigned == 1) {
+                player = au_get_client_by_priority(snapshot->globals->snapshots[index].priority);
+                if (player != NULL) {
+                    if (!au_bgm_player_is_active(player)) {
+                        status = au_reload_song_files(snapshot->songID, snapshot->bgmFile);
                         duration = request->duration;
                         if (duration != 0) {
                             if (duration > SND_MAX_DURATION) {
@@ -438,13 +438,13 @@ AuResult au_bgm_process_resume(SongUpdateRequestE* request) {
                         } else {
                             volume1 = AU_MAX_VOLUME_16;
                         }
-                        playerB->globals->unk_74 = playerB;
-                        playerB->globals->unk_78 = playerA;
-                        playerB->globals->unkSongName = songName;
-                        playerB->globals->unkFadeTime = duration;
-                        playerB->globals->unkFadeStart = volume0;
-                        playerB->globals->unkFadeEnd = volume1;
-                        playerB->globals->unk_80 = 1;
+                        player->globals->resumeCopyTo = player;
+                        player->globals->resumeCopyFrom = snapshot;
+                        player->globals->resumeSongName = songName;
+                        player->globals->resumeFadeTime = duration;
+                        player->globals->resumeFadeStart = volume0;
+                        player->globals->resumeFadeEnd = volume1;
+                        player->globals->resumeRequested = TRUE;
                     } else {
                         status = AU_ERROR_7;
                     }
@@ -455,11 +455,11 @@ AuResult au_bgm_process_resume(SongUpdateRequestE* request) {
                status = AU_ERROR_INVALID_SONG_DURATION;
             }
         } else {
-            playerB = au_bgm_get_player_with_song_name(songName);
-            if (playerB != NULL) {
-                if (songName == playerB->songName) {
-                    if (playerB->paused) {
-                        playerB->paused = FALSE;
+            player = au_bgm_get_player_with_song_name(songName);
+            if (player != NULL) {
+                if (songName == player->songName) {
+                    if (player->paused) {
+                        player->paused = FALSE;
                     }
                 }
             }
@@ -470,7 +470,7 @@ AuResult au_bgm_process_resume(SongUpdateRequestE* request) {
     return status;
 }
 
-void func_8004DFD4(AuGlobals* globals) {
+void au_bgm_restore_copied_player(AuGlobals* globals) {
     BGMPlayer* player;
     BGMPlayerTrack* track;
     SeqNote* note;
@@ -478,9 +478,9 @@ void func_8004DFD4(AuGlobals* globals) {
     u32 j;
     s32 k;
 
-    player = globals->unk_74;
-    au_copy_words(globals->unk_78, globals->unk_74, sizeof(*player));
-    if (globals->unkSongName == player->songName) {
+    player = globals->resumeCopyTo;
+    au_copy_words(globals->resumeCopyFrom, globals->resumeCopyTo, sizeof(*player));
+    if (globals->resumeSongName == player->songName) {
         for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
             track = &player->tracks[i];
             if (track->bgmReadPos != NULL) {
@@ -497,9 +497,9 @@ void func_8004DFD4(AuGlobals* globals) {
                 au_BGMCmd_E6_MasterEffect(player, track);
             }
         }
-        au_fade_init(&player->fadeInfo, globals->unkFadeTime, globals->unkFadeStart, globals->unkFadeEnd);
+        au_fade_init(&player->fadeInfo, globals->resumeFadeTime, globals->resumeFadeStart, globals->resumeFadeEnd);
     }
-    globals->unk_80 = 0;
+    globals->resumeRequested = FALSE;
 }
 
 AuResult au_bgm_adjust_volume(SongUpdateRequestA* request) {
@@ -531,16 +531,16 @@ void au_bgm_player_init(BGMPlayer* player, s32 priority, s32 busID, AuGlobals* g
     player->updateCounter = 0;
     player->songPlayingCounter = 0;
     player->songName = 0;
-    player->fadeSongName = 0;
-    player->unk_58 = FALSE;
-    player->unk_5A = FALSE;
+    player->pushSongName = 0;
+    player->unk_58 = 0;
+    player->unk_5A = 0;
     player->compReadPos = NULL;
     player->compStartPos = NULL;
     player->phraseStartPos = 0;
-    player->masterTempoTime = 0;
+    player->masterTempoTicks = 0;
     player->masterTempoTarget = 0;
     player->masterTempoStep = 0;
-    player->masterVolumeTime = 0;
+    player->masterVolumeTicks = 0;
     player->masterVolumeTarget = 0;
     player->masterVolumeStep = 0;
     player->masterPitchShift = 0;
@@ -631,8 +631,9 @@ void au_bgm_update_fade(BGMPlayer* player) {
             player->fadeInfo.onCompleteCallback();
         }
 
-        if (player->fadeSongName != 0) {
-            func_8004DC80(player->fadeSongName);
+        // Was this fade tagged as a push?
+        if (player->pushSongName != 0) {
+            au_bgm_complete_push(player->pushSongName);
         } else if (player->fadeInfo.baseVolume == 0) {
             au_bgm_stop_player(player);
         }
@@ -725,10 +726,10 @@ void au_bgm_player_initialize(BGMPlayer* player) {
         track->tremoloRate = 0;
         track->subTrackVolumeStep = 0;
         track->subTrackVolumeTarget = 0;
-        track->subTrackVolumeTime = 0;
+        track->subTrackVolumeTicks = 0;
         track->proxVolumeStep = 0;
         track->proxVolumeTarget = 0;
-        track->proxVolumeTime = 0;
+        track->proxVolumeTicks = 0;
         track->unk_4D = FALSE;
         track->unk_4E = 0;
         track->unk_4F = 0;
@@ -759,12 +760,12 @@ void au_bgm_player_initialize(BGMPlayer* player) {
     player->masterTempoBPM = BGM_DEFAULT_TEMPO / 100;
     player->unk_21E = 0x80;
     player->masterVolume = AU_MAX_VOLUME_8 << 24;
-    player->fadeSongName = 0;
-    player->unk_74 = 0;
+    player->pushSongName = 0;
+    player->tickRatePtr = NULL;
     player->masterTempoTarget = 0;
     player->masterPitchShift = 0;
     player->detune = 0;
-    player->masterVolumeTime = 0;
+    player->masterVolumeTicks = 0;
     player->masterVolumeTarget = 0;
     player->masterVolumeStep = 0;
     player->proxMixValue = 0;
@@ -852,7 +853,7 @@ void au_bgm_player_read_composition(BGMPlayer* player) {
     u32 cmd;
 
     player->masterTempoStep = 0;
-    player->masterTempoTime = 0;
+    player->masterTempoTicks = 0;
 
     while (continueReading) {
         cmd = *player->compReadPos++;
@@ -995,9 +996,9 @@ void au_bgm_player_update_stop(BGMPlayer* player) {
 
     player->paused = FALSE;
     player->songName = 0;
-    player->fadeSongName = 0;
-    player->unk_58 = FALSE;
-    player->unk_5A = FALSE;
+    player->pushSongName = 0;
+    player->unk_58 = 0;
+    player->unk_5A = 0;
     for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
         player->tracks[i].bgmReadPos = NULL;
     }
@@ -1014,6 +1015,7 @@ if (track->detourLength != 0) {\
     }\
 }
 
+/// play next tick
 void au_bgm_player_update_playing(BGMPlayer *player) {
     s32 bVolumeFading;
     u8 sp1F;
@@ -1037,9 +1039,9 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
     bVolumeFading = FALSE;
     bFinished = FALSE;
 
-    if (player->masterTempoTime != 0) {
-        player->masterTempoTime--;
-        if (player->masterTempoTime == 0) {
+    if (player->masterTempoTicks != 0) {
+        player->masterTempoTicks--;
+        if (player->masterTempoTicks == 0) {
             player->masterTempo = player->masterTempoTarget;
             player->masterTempoTarget = 0;
             player->masterTempoStep = 0;
@@ -1048,9 +1050,9 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
         }
         player->nextUpdateStep = player->masterTempo * 10;
     }
-    if (player->masterVolumeTime != 0) {
-        player->masterVolumeTime--;
-        if (player->masterVolumeTime == 0) {
+    if (player->masterVolumeTicks != 0) {
+        player->masterVolumeTicks--;
+        if (player->masterVolumeTicks == 0) {
             player->masterVolume = player->masterVolumeTarget;
             player->masterVolumeTarget = 0;
             player->masterVolumeStep = 0;
@@ -1106,18 +1108,18 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
             } else {
                 track->changed.volume = FALSE;
             }
-            if (track->subTrackVolumeTime != 0) {
-                track->subTrackVolumeTime--;
-                if (track->subTrackVolumeTime == 0) {
+            if (track->subTrackVolumeTicks != 0) {
+                track->subTrackVolumeTicks--;
+                if (track->subTrackVolumeTicks == 0) {
                     track->subTrackVolume = track->subTrackVolumeTarget;
                 } else {
                     track->subTrackVolume += track->subTrackVolumeStep;
                 }
                 track->changed.volume = TRUE;
             }
-            if (track->proxVolumeTime != 0) {
-                track->proxVolumeTime--;
-                if (track->proxVolumeTime == 0) {
+            if (track->proxVolumeTicks != 0) {
+                track->proxVolumeTicks--;
+                if (track->proxVolumeTicks == 0) {
                     track->proxVolume = track->proxVolumeTarget << 16;
                 } else {
                     track->proxVolume += track->proxVolumeStep;
@@ -1325,7 +1327,7 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
                                     voice->reverb = track->subTrackReverb;
 
                                     if (track->envelopeOverride != 0) {
-                                        voice->envelope.cmdListPress = (u8*) player->customPressEnvelopes[track->envelopeOverride - 1]; //TODO ???
+                                        voice->envelope.cmdListPress = (u8*) player->customPressEnvelopes[track->envelopeOverride - 1];
                                     } else {
                                         voice->envelope.cmdListPress = track->envelope.cmdListPress;
                                     }
@@ -1503,7 +1505,7 @@ void au_BGMCmd_E0_MasterTempo(BGMPlayer* player, BGMPlayerTrack* track) {
     tempo = au_bgm_bpm_to_tempo(player, bpm);
     player->masterTempo = tempo;
     player->nextUpdateStep = tempo * 10;
-    player->masterTempoTime = 0;
+    player->masterTempoTicks = 0;
     player->masterTempoTarget = 0;
     player->masterTempoStep = 0;
 }
@@ -1531,7 +1533,7 @@ void au_BGMCmd_E1_MasterVolume(BGMPlayer* player, BGMPlayerTrack* track) {
     }
 
     player->masterVolume = volume;
-    player->masterVolumeTime = 0;
+    player->masterVolumeTicks = 0;
     player->masterVolumeTarget = 0;
     player->masterVolumeStep = 0;
     player->volumeChanged = TRUE;
@@ -1568,7 +1570,7 @@ void au_BGMCmd_E4_MasterTempoFade(BGMPlayer* player, BGMPlayerTrack* track) {
         time = 1;
     }
 
-    player->masterTempoTime = time;
+    player->masterTempoTicks = time;
     player->masterTempoTarget = tempo;
     player->masterTempoStep = (tempo - player->masterTempo) / time;
 }
@@ -1585,7 +1587,7 @@ void au_BGMCmd_E5_MasterVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
         time = 1;
     }
 
-    player->masterVolumeTime = time;
+    player->masterVolumeTicks = time;
     player->masterVolumeTarget = volume;
     player->masterVolumeStep = (volume - player->masterVolume) / time;
 }
@@ -1619,7 +1621,7 @@ void au_BGMCmd_F6_TrackVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
             time = 1;
         }
 
-        track->subTrackVolumeTime = time;
+        track->subTrackVolumeTicks = time;
         track->subTrackVolumeTarget = volume;
         track->subTrackVolumeStep = (volume - track->subTrackVolume) / time;
     }
@@ -1773,7 +1775,7 @@ void au_BGMCmd_FC_Jump(BGMPlayer* player, BGMPlayerTrack* track) {
     track->envelopeOverride = 0;
     track->segTrackTune = 0;
     track->tremoloDepth = 0;
-    track->subTrackVolumeTime = 0;
+    track->subTrackVolumeTicks = 0;
     track->randomPanAmount = 0;
     track->busID = player->busID;
 }
@@ -1784,9 +1786,9 @@ void au_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
     u8 delayTime;
     u32 i;
 
-    u32 type = player->seqCmdArgs.UnkCmdFF.type;
-    u32 arg1 = player->seqCmdArgs.UnkCmdFF.arg1;
-    u32 arg2 = player->seqCmdArgs.UnkCmdFF.arg2;
+    u32 type = player->seqCmdArgs.Special.type;
+    u32 arg1 = player->seqCmdArgs.Special.arg1;
+    u32 arg2 = player->seqCmdArgs.Special.arg2;
 
     switch (type) {
         case BGM_SPECIAL_SET_STEREO_DELAY:
@@ -1904,10 +1906,10 @@ static u8 au_bgm_get_random_pan(BGMPlayer* player, u8 pan, u8 amplitude) {
     } else {
         retPan = base - ((amplitude * random) >> 8);
     }
-    if (retPan < 0) {
-        retPan = 0;
-    } else if (retPan >= 0x80) {
-        retPan = 0x7F;
+    if (retPan < AU_PAN_MIN) {
+        retPan = AU_PAN_MIN;
+    } else if (retPan > AU_PAN_MAX) {
+        retPan = AU_PAN_MAX;
     }
     return retPan;
 }
@@ -1997,7 +1999,7 @@ void au_bgm_set_playback_rate(BGMPlayer* player, f32 rate) {
     player->playbackRate = rate;
     player->masterTempo = au_bgm_bpm_to_tempo(player, player->masterTempoBPM);
     player->nextUpdateStep = player->masterTempo * 10;
-    player->masterTempoTime = 0;
+    player->masterTempoTicks = 0;
     player->masterTempoTarget = 0;
     player->masterTempoStep = 0;
 }
@@ -2037,10 +2039,10 @@ void au_bgm_set_prox_mix_fade(BGMPlayer* player, BGMPlayerTrack* track, s32 targ
         duration = 1000;
     }
     if (target == track->proxVolume) {
-        track->proxVolumeTime = 0;
+        track->proxVolumeTicks = 0;
         return;
     }
-    track->proxVolumeTime = duration;
+    track->proxVolumeTicks = duration;
     track->proxVolumeTarget = target;
     track->proxVolumeStep = ((target << 0x10) - track->proxVolume) / duration;
 }

@@ -59,8 +59,8 @@ void au_engine_init(s32 outputRate) {
     globals->dataMSEQ[0] = (MSEQHeader*) &dummyTrackData[0x1C00];
     globals->dataMSEQ[1] = (MSEQHeader*) &dummyTrackData[0x1400];
 
-    for (i = 0; i < ARRAY_COUNT(globals->unk_globals_6C); i++) {
-        globals->unk_globals_6C[i].bgmPlayer = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
+    for (i = 0; i < ARRAY_COUNT(globals->snapshots); i++) {
+        globals->snapshots[i].bgmPlayer = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
     }
 
     globals->dataSEF = alHeapAlloc(alHeap, 1, 0x5200);
@@ -77,9 +77,9 @@ void au_engine_init(s32 outputRate) {
     globals->audioThreadCallbacks[0] = NULL;
     globals->audioThreadCallbacks[1] = NULL;
 
-    for (i = 0; i < ARRAY_COUNT(globals->unk_globals_6C); i++) {
-        globals->unk_globals_6C[i].assigned = 0;
-        globals->unk_globals_6C[i].priority = 0;
+    for (i = 0; i < ARRAY_COUNT(globals->snapshots); i++) {
+        globals->snapshots[i].assigned = 0;
+        globals->snapshots[i].priority = 0;
     }
 
     for (i = 0; i < ARRAY_COUNT(globals->effectChanges); i++) {
@@ -206,7 +206,7 @@ static void au_reset_instrument_entry(BGMInstrumentInfo* info) {
 }
 
 /// Called exactly once per audio frame (every 5.75ms at 32kHz).
-/// Updates synthesizer, ambience, SFX, and BGM players for the current audio frame.
+/// Updates MSEQ, SFX, and BGM players for the current audio frame.
 void au_update_clients_for_audio_frame(void) {
     AuGlobals* globals = gSoundGlobals;
     SoundManager* sfxManager = gSoundManager;
@@ -235,7 +235,7 @@ void au_update_clients_for_audio_frame(void) {
         sfxManager->prevUpdateResult = au_sfx_manager_audio_frame_update(sfxManager);
     }
 
-    // update gBGMPlayerB
+    // Update gBGMPlayerB
     if (!PreventBGMPlayerUpdate) {
         bgmPlayer = gBGMPlayerB;
         if (bgmPlayer->fadeInfo.baseTicks != 0) {
@@ -252,9 +252,10 @@ void au_update_clients_for_audio_frame(void) {
         }
     }
 
+    // Update gBGMPlayerA
     if (!PreventBGMPlayerUpdate) {
-        if (globals->unk_80 != 0) {
-            func_8004DFD4(globals);
+        if (globals->resumeRequested) {
+            au_bgm_restore_copied_player(globals);
         }
         bgmPlayer = gBGMPlayerA;
         if (bgmPlayer->fadeInfo.envelopeTicks != 0) {
@@ -277,6 +278,8 @@ void au_update_clients_for_audio_frame(void) {
             bgmPlayer->prevUpdateResult = au_bgm_player_audio_frame_update(bgmPlayer);
         }
     }
+
+    // With all clients updated, now update all voices
     au_update_voices(globals);
 }
 
@@ -305,12 +308,12 @@ void au_update_clients_for_video_frame(void) {
 void au_syn_begin_audio_frame(AuGlobals* globals) {
     u32 i;
 
-    if (globals->unk_130C == 2) {
-        globals->unk_130C = 1;
+    if (globals->channelDelayState == AU_DELAY_STATE_REQUEST_OFF) {
+        globals->channelDelayState = AU_DELAY_STATE_OFF;
         au_disable_channel_delay();
     }
 
-    if (globals->channelDelayPending && (globals->unk_130C == 0)) {
+    if (globals->channelDelayPending && (globals->channelDelayState == AU_DELAY_STATE_ON)) {
         switch (globals->channelDelaySide) {
             case AU_DELAY_CHANNEL_LEFT:
                 au_set_delay_time(globals->channelDelayTime);
@@ -495,7 +498,6 @@ void au_fade_update_envelope(Fade* fade) {
     }
 }
 
-//TODO cleanup and documentation
 /// Note that bank is supplied as BankSetIndex and not BankSet, which means it will be used to perform a raw
 /// access into AuGlobals::bankSets. This does not affect values above 3, but 1 and 2 differ.
 Instrument* au_get_instrument(AuGlobals* globals, BankSetIndex bank, s32 patch, EnvelopeData* envData) {
@@ -614,7 +616,7 @@ AuResult au_load_song_files(u32 songID, BGMHeader* bgmFile, BGMPlayer* player) {
     }
 }
 
-AuResult au_unk_80053E58(s32 songID, BGMHeader* bgmFile) {
+AuResult au_reload_song_files(s32 songID, BGMHeader* bgmFile) {
     AuResult status;
     SBNFileEntry fileEntry;
     SBNFileEntry sbnEntry;
@@ -652,9 +654,9 @@ AuResult au_unk_80053E58(s32 songID, BGMHeader* bgmFile) {
     return status;
 }
 
-BGMPlayer* au_unk_get_temp_player_for_index(s32 index) {
-    if (index == MUSIC_CROSS_FADE) {
-        return gSoundGlobals->unk_globals_6C[MUSIC_CROSS_FADE].bgmPlayer;
+BGMPlayer* au_get_snapshot_by_index(s32 index) {
+    if (index == BGM_SNAPSHOT_0) {
+        return gSoundGlobals->snapshots[BGM_SNAPSHOT_0].bgmPlayer;
     }
     return NULL;
 }
@@ -1188,17 +1190,17 @@ s32 au_set_reverb_type(s32 soundTypeFlags, s32 reverbType) {
     return 0;
 }
 
-void au_unk_80054DA8(u32 bMonoSound) {
+void au_sync_channel_delay_enabled(u32 bMonoSound) {
     if (bMonoSound % 2 == 1) {
         // mono sound
-        if (gSoundGlobals->unk_130C == 0) {
-            gSoundGlobals->unk_130C = 2;
+        if (gSoundGlobals->channelDelayState == AU_DELAY_STATE_ON) {
+            gSoundGlobals->channelDelayState = AU_DELAY_STATE_REQUEST_OFF;
         }
     } else {
         // stereo sound
-        if (gSoundGlobals->unk_130C != 0) {
+        if (gSoundGlobals->channelDelayState != AU_DELAY_STATE_ON) {
             gSoundGlobals->channelDelayPending = TRUE;
-            gSoundGlobals->unk_130C = 0;
+            gSoundGlobals->channelDelayState = AU_DELAY_STATE_ON;
         }
     }
 }

@@ -202,8 +202,8 @@ void snd_start_sound(s32 soundID, u8 volume, u8 pan) {
         vol |= 0xFF;
     }
 
-    if (pan > 0x7F) {
-        pan = 0x7F;
+    if (pan > AU_PAN_MAX) {
+        pan = AU_PAN_MAX;
     }
 
     au_sfx_enqueue_event(soundManager, soundID, vol, 0, pan);
@@ -217,8 +217,8 @@ void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
         vol |= 0xFF;
     }
 
-    if (pan > 0x7F) {
-        pan = 0x7F;
+    if (pan > AU_PAN_MAX) {
+        pan = AU_PAN_MAX;
     }
 
     if (pitchShift > 2 * AU_OCTAVE) {
@@ -238,8 +238,8 @@ void snd_adjust_sound(s32 soundID, u8 volume, u8 pan) {
         vol |= 0xFF;
     }
 
-    if (pan > 0x7F) {
-        pan = 0x7F;
+    if (pan > AU_PAN_MAX) {
+        pan = AU_PAN_MAX;
     }
 
     au_sfx_enqueue_event(soundManager, soundID | SOUND_ID_ADJUST, vol, 0, pan);
@@ -253,8 +253,8 @@ void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift)
         vol |= 0xFF;
     }
 
-    if (pan > 0x7F) {
-        pan = 0x7F;
+    if (pan > AU_PAN_MAX) {
+        pan = AU_PAN_MAX;
     }
 
     if (pitchShift > 2 * AU_OCTAVE) {
@@ -555,20 +555,20 @@ AuResult snd_song_request_fade_out(s32 songName, s32 fadeTime, AuCallback callba
     return au_bgm_process_fade_out(&s);
 }
 
-AuResult snd_song_UNK_push_stop(s32 songName) {
+AuResult snd_song_push_stop(s32 songName) {
     SongUpdateRequestC s;
 
     s.songName = songName;
     s.duration = 0;
     s.startVolume = 0;
     s.finalVolume = 0;
-    s.index = MUSIC_CROSS_FADE;
+    s.index = BGM_SNAPSHOT_0;
     s.pauseMode = FALSE;
 
-    return au_bgm_process_suspend(&s, 0);
+    return au_bgm_process_suspend(&s, 0); // force stop
 }
 
-AuResult snd_song_UNK_request_pop(s32 songName) {
+AuResult snd_song_request_pop(s32 songName) {
     AuResult status;
     SongUpdateRequestE s;
 
@@ -577,7 +577,7 @@ AuResult snd_song_UNK_request_pop(s32 songName) {
     s.duration = 2000;
     s.startVolume = 1;
     s.finalVolume = AU_MAX_VOLUME_8;
-    s.index = MUSIC_CROSS_FADE;
+    s.index = BGM_SNAPSHOT_0;
     s.pauseMode = FALSE;
     status = au_bgm_process_resume(&s);
     PreventBGMPlayerUpdate = FALSE;
@@ -585,20 +585,20 @@ AuResult snd_song_UNK_request_pop(s32 songName) {
     return status;
 }
 
-AuResult func_80055B80(s32 songName) {
+AuResult snd_song_request_snapshot(s32 songName) {
     SongUpdateRequestC s;
 
     s.songName = songName;
     s.duration = 0;
     s.startVolume = 0;
     s.finalVolume = 0;
-    s.index = MUSIC_CROSS_FADE;
+    s.index = BGM_SNAPSHOT_0;
     s.pauseMode = FALSE;
 
-    return au_bgm_process_suspend(&s, 1);
+    return au_bgm_process_suspend(&s, 1); // no stop
 }
 
-AuResult snd_song_UNK_request_push_fade_out(s32 songName, s32 fadeTime) {
+AuResult snd_song_request_push_fade_out(s32 songName, s32 fadeTime) {
     SongUpdateRequestB s;
 
     s.songName = songName;
@@ -618,10 +618,10 @@ AuResult snd_song_request_pause(s32 songName) {
     s.duration = 0;
     s.startVolume = 0;
     s.finalVolume = 0;
-    s.index = MUSIC_CROSS_FADE;
+    s.index = BGM_SNAPSHOT_0;
     s.pauseMode = TRUE;
 
-    return au_bgm_process_suspend(&s, 0);
+    return au_bgm_process_suspend(&s, 0); // force stop
 }
 
 AuResult snd_song_request_unpause(s32 songName) {
@@ -631,7 +631,7 @@ AuResult snd_song_request_unpause(s32 songName) {
     s.duration = 0;
     s.startVolume = 0;
     s.finalVolume = 0;
-    s.index = MUSIC_CROSS_FADE;
+    s.index = BGM_SNAPSHOT_0;
     s.pauseMode = TRUE;
 
     return au_bgm_process_resume(&s);
@@ -871,13 +871,13 @@ void snd_register_callback(AuCallback func, s32 index) {
 }
 
 void snd_set_stereo(void) {
-    func_80056D5C(1);
-    au_unk_80054DA8(0);
+    au_set_stereo_enabled(TRUE);
+    au_sync_channel_delay_enabled(0);
 }
 
 void snd_set_mono(void) {
-    func_80056D5C(0);
-    au_unk_80054DA8(1);
+    au_set_stereo_enabled(FALSE);
+    au_sync_channel_delay_enabled(1);
 }
 
 void snd_set_bgm_volume(VolumeLevels volume) {

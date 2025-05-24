@@ -14,7 +14,7 @@ BSS s32 AuDelayCount;
 AuSynDriver* gActiveSynDriverPtr = NULL;
 AuSynDriver* gSynDriverPtr = NULL;
 u8 AuUseGlobalVolume = FALSE;
-u16 AuGlobalVolume = 0x7FFF;
+u16 AuGlobalVolume = AU_MAX_VOLUME_16;
 u8 AuSynStereoDirty = FALSE;
 
 extern s16 AuEqPower[128];
@@ -40,7 +40,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
     gActiveSynDriverPtr = driver;
     gSynDriverPtr = driver;
     AuUseGlobalVolume = FALSE;
-    AuGlobalVolume = 0x7FFF;
+    AuGlobalVolume = AU_MAX_VOLUME_16;
     AuSynStereoDirty = TRUE;
 
     gSynDriverPtr->pvoices = alHeapAlloc(heap, config->num_pvoice, sizeof(*gSynDriverPtr->pvoices));
@@ -281,8 +281,8 @@ s16 au_get_global_volume(void) {
     return AuGlobalVolume;
 }
 
-void func_80056D5C(b8 bStereoSound) {
-    AuSynUseStereo = bStereoSound;
+void au_set_stereo_enabled(b8 enabled) {
+    AuSynUseStereo = enabled;
     AuSynStereoDirty = TRUE;
 }
 

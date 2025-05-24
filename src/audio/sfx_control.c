@@ -587,8 +587,8 @@ void sfx_get_spatialized_sound_params(f32 x, f32 y, f32 z, s16* volume, s16* pan
     if (*pan < 1) {
         *pan = 1;
     }
-    if (*pan > 127) {
-        *pan = 127;
+    if (*pan > AU_PAN_MAX) {
+        *pan = AU_PAN_MAX;
     }
 }
 

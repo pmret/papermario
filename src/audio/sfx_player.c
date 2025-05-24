@@ -1478,10 +1478,10 @@ static u8 au_sfx_get_random_pan(s32 seed, s32 pan, s32 amplitude) {
     } else {
         retPan = pan - (((amplitude & 0xFF) * random) >> 8);
     }
-    if (retPan < 0) {
-        retPan = 0;
-    } else if (retPan > 0x7F) {
-        retPan = 0x7F;
+    if (retPan < AU_PAN_MIN) {
+        retPan = AU_PAN_MIN;
+    } else if (retPan > AU_PAN_MAX) {
+        retPan = AU_PAN_MAX;
     }
     return retPan;
 }

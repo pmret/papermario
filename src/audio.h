@@ -62,7 +62,9 @@ typedef u8* WaveData;
 #define AU_MAX_VOLUME_16 0x7FFF
 #define AU_MAX_VOLUME_32 0x7FFFFFFF
 
+#define AU_PAN_MIN 0
 #define AU_PAN_MID 64
+#define AU_PAN_MAX 127
 
 // only valid for vol != 0
 #define AU_VOL_8_TO_16(vol) (((vol) << 8) | 0xFF)
@@ -144,18 +146,18 @@ typedef enum MusicState {
     MUSIC_STATE_PLAY_NEXT       = 5,
 } MusicState;
 
-enum MusicFlags {
+typedef enum MusicFlags {
     MUSIC_FLAG_PLAYING              = 0x01,
     MUSIC_FLAG_ENABLE_PROX_MIX      = 0x02,
     MUSIC_FLAG_PUSHING              = 0x04,
     MUSIC_FLAG_POPPING              = 0x08,
     MUSIC_FLAG_IGNORE_POP           = 0x10,
     MUSIC_FLAG_FADE_IN_NEXT         = 0x20,
-};
+} MusicFlags;
 
-enum MusicFades {
-    MUSIC_CROSS_FADE                = 0,
-};
+typedef enum BGMSnapshots {
+    BGM_SNAPSHOT_0              = 0,
+} BGMSnapshots;
 
 typedef enum BGMPlayerState {
     BGM_PLAY_STATE_IDLE         = 0,
@@ -196,6 +198,12 @@ typedef enum DelayChannel {
     AU_DELAY_CHANNEL_LEFT   = 1,
     AU_DELAY_CHANNEL_RIGHT  = 2,
 } DelayChannel;
+
+typedef enum DelayState {
+    AU_DELAY_STATE_ON           = 0, /// channel delay is enabled (though not necessarily applied)
+    AU_DELAY_STATE_OFF          = 1, /// channel delay is disabled
+    AU_DELAY_STATE_REQUEST_OFF  = 2, /// game thread has scheduled the channel delay to be disabled
+} DelayState;
 
 typedef enum EnvelopeCommand {
     ENV_CMD_END_LOOP        = 0xFB,
@@ -445,7 +453,7 @@ typedef union SeqArgs {
         u8 type;
         u8 arg1;
         u8 arg2;
-    } UnkCmdFF;
+    } Special;
 } SeqArgs;
 
 /// Structure for volume fading for SFX and BGM. Has independent controls for base and envelope volumes.
@@ -965,11 +973,11 @@ typedef struct AuEffectChange {
     /* 0x2 */ char unk_02[2];
 } AuEffectChange;
 
-typedef struct SndGlobalsSub6C {
+typedef struct BGMPlayerSnapshot {
     /* 0x00 */ struct BGMPlayer* bgmPlayer;
     /* 0x04 */ u8 assigned;
     /* 0x05 */ u8 priority;
-} SndGlobalsSub6C;
+} BGMPlayerSnapshot;
 
 // found at 801D57A0
 typedef struct AuGlobals {
@@ -995,14 +1003,14 @@ typedef struct AuGlobals {
     /* 0x0058 */ BGMInstrumentInfo* dataPRG;
     /* 0x005C */ struct BGMHeader* dataBGM[2];
     /* 0x0064 */ struct MSEQHeader* dataMSEQ[2];
-    /* 0x006C */ SndGlobalsSub6C unk_globals_6C[1];
-    /* 0x0074 */ struct BGMPlayer* unk_74;
-    /* 0x0078 */ struct BGMPlayer* unk_78;
-    /* 0x007C */ s32 unkSongName;
-    /* 0x0080 */ s32 unk_80;
-    /* 0x0084 */ s32 unkFadeTime;
-    /* 0x0088 */ s32 unkFadeStart;
-    /* 0x008C */ s32 unkFadeEnd;
+    /* 0x006C */ BGMPlayerSnapshot snapshots[1];
+    /* 0x0074 */ struct BGMPlayer* resumeCopyTo;
+    /* 0x0078 */ struct BGMPlayer* resumeCopyFrom;
+    /* 0x007C */ s32 resumeSongName;
+    /* 0x0080 */ b32 resumeRequested;
+    /* 0x0084 */ s32 resumeFadeTime;
+    /* 0x0088 */ s32 resumeFadeStart;
+    /* 0x008C */ s32 resumeFadeEnd;
     /* 0x0090 */ MusicEventTrigger* musicEventQueuePos;
     /* 0x0094 */ MusicEventTrigger* musicEventQueue;
     /* 0x0098 */ u32 musicEventQueueCount;
@@ -1017,7 +1025,7 @@ typedef struct AuGlobals {
     /* 0x0DEC */ InstrumentBank bankSet5[16];
     /* 0x11EC */ InstrumentBank bankSet6[4];
     /* 0x12EC */ InstrumentBank* bankSets[8];
-    /* 0x130C */ u8 unk_130C;
+    /* 0x130C */ u8 channelDelayState;
     /* 0x130D */ char unk_130D[3];
     /* 0x1310 */ BKFileBuffer* auxBanks[3];
     /* 0x131C */ char unk_131C[4];
@@ -1033,12 +1041,12 @@ typedef struct BGMPlayerTrack {
     /* 0x18 */ s8_24 subTrackVolume;
     /* 0x1C */ s16_16 subTrackVolumeStep;
     /* 0x20 */ s16_16 subTrackVolumeTarget;
-    /* 0x24 */ s32 subTrackVolumeTime;
+    /* 0x24 */ s32 subTrackVolumeTicks;
     /* 0x28 */ s32 delayTime;
     /* 0x2C */ s16_16 proxVolume;
     /* 0x30 */ s16_16 proxVolumeStep;
     /* 0x34 */ s16 proxVolumeTarget;
-    /* 0x36 */ s16 proxVolumeTime;
+    /* 0x36 */ s16 proxVolumeTicks;
     /* 0x38 */ s16 segTrackTune;
     /* 0x3A */ s16 tremoloDelay;
     /* 0x3C */ char unk_3C[0x2];
@@ -1093,7 +1101,7 @@ typedef struct BGMPlayer {
     /* 0x014 */ s32 updateCounter;
     /* 0x018 */ s32 songPlayingCounter;
     /* 0x01C */ s32 songName;
-    /* 0x020 */ s32 fadeSongName;
+    /* 0x020 */ s32 pushSongName;
     /* 0x024 */ s32 bgmFileIndex;
     /* 0x028 */ s32 songID;
     /* 0x02C */ Fade fadeInfo;
@@ -1101,27 +1109,27 @@ typedef struct BGMPlayer {
     /* 0x04C */ u8 effectIndices[4];
     /* 0x050 */ s32 randomValue1;
     /* 0x054 */ s32 randomValue2;
-    /* 0x058 */ u16 unk_58;
-    /* 0x05A */ s16 unk_5A;
+    /* 0x058 */ u16 unk_58; // related to legacy command system, unused
+    /* 0x05A */ u16 unk_5A; // related to legacy command system, unused
     /* 0x05C */ s16 prevUpdateResult; // unused, may indicate error status
-    /* 0x05E */ char pad5E[2];
+    /* 0x05E */ char pad_5E[2];
     /* 0x060 */ s32 curVariation;
     /* 0x064 */ struct BGMHeader* bgmFile;
     /* 0x068 */ SegData* compReadPos;
     /* 0x06C */ SegData* compStartPos;
     /* 0x070 */ SegData* phraseStartPos;
-    /* 0x074 */ s32 unk_74;
+    /* 0x074 */ u8* tickRatePtr; // related to legacy command system, unused
     /* 0x078 */ BGMDrumInfo* drumsInfo;
     /* 0x07C */ BGMInstrumentInfo* instrumentsInfo;
     /* 0x080 */ BGMDrumInfo* drums[12];
     /* 0x0B0 */ s32 masterTempo;
     /* 0x0B4 */ s32 masterTempoStep;
     /* 0x0B8 */ s32 masterTempoTarget;
-    /* 0x0BC */ s32 masterTempoTime;
+    /* 0x0BC */ s32 masterTempoTicks;
     /* 0x0C0 */ s8_24 masterVolume;
     /* 0x0C4 */ s32 masterVolumeStep;
     /* 0x0C8 */ s32 masterVolumeTarget;
-    /* 0x0CC */ s32 masterVolumeTime;
+    /* 0x0CC */ s32 masterVolumeTicks;
     /* 0x0D0 */ f32 playbackRate;
     /* 0x0D4 */ SeqArgs seqCmdArgs;
     /* 0x0D8 */ SegData* compLoopStartLabels[32];
@@ -1130,7 +1138,7 @@ typedef struct BGMPlayer {
     /* 0x16C */ s32 proxMixValue;
     /* 0x170 */ u8 proxMixID;
     /* 0x171 */ u8 proxMixVolume;
-    /* 0x172 */ char unk_172[0x2];
+    /* 0x172 */ char pad_172[2];
     /* 0x174 */ s16 customPressEnvelopes[8][9]; /// Dynamically customizable press envelopes
     /* 0x204 */ u8* trackVolsConfig;
     /* 0x208 */ u16 masterTempoBPM;
@@ -1145,19 +1153,19 @@ typedef struct BGMPlayer {
     /* 0x21C */ u8 bgmDrumCount;
     /* 0x21D */ u8 bgmInstrumentCount;
     /* 0x21E */ u8 unk_21E;
-    /* 0x21F */ char unk_21F[0x1];
+    /* 0x21F */ char pad_21F[1];
     /* 0x220 */ u8 paused;
     /* 0x221 */ u8 masterState;
     /* 0x222 */ u8 unk_222;
     /* 0x223 */ u8 unk_223;
     /* 0x224 */ u8 effectValues[4];
-    /* 0x227 */ char unk_228[0x2];
+    /* 0x227 */ char pad_228[2];
     /* 0x22A */ u8 unk_22A[8];
     /* 0x232 */ u8 bFadeConfigSetsVolume;
     /* 0x233 */ u8 initLinkMute; /// Used to mute any linked tracks after the first one encountered.
     /* 0x234 */ u8 priority;
     /* 0x235 */ u8 busID;
-    /* 0x236 */ char unk_236[0x2];
+    /* 0x236 */ char pad_236[2];
     /* 0x238 */ s32 cmdBufData[8]; /// Buffer for an unused (legacy) system for controlling the BGMPlayer from the main thread
     /* 0x258 */ u8 cmdBufPending;
     /* 0x259 */ u8 cmdBufReadPos;
@@ -1196,7 +1204,7 @@ typedef struct SongUpdateRequestC {
     /* 0x08 */ s32 startVolume;
     /* 0x0C */ s32 finalVolume;
     /* 0x10 */ s32 index;
-    /* 0x14 */ s32 pauseMode;
+    /* 0x14 */ s32 pauseMode; /// if true, the player is paused, else it will be saved to a snapshot
     /* 0x18 */ char pad_18[8];
 } SongUpdateRequestC; // size = 0x1C or 0x20
 
