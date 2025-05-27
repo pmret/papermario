@@ -82,8 +82,6 @@ typedef u8* WaveData;
 #define MUS_QUEUE_SIZE 16
 #define SFX_QUEUE_SIZE 16
 
-#define BGM_COMP_LABEL 3
-
 #define AU_SEMITONE 100 // cents
 #define AU_OCTAVE (12 * AU_SEMITONE)
 
@@ -400,28 +398,28 @@ typedef union SeqArgs {
     struct { // cmd E8
         u8 bank;
         u8 patch;
-    } TrackOverridePatch;
+    } OverridePatch;
     struct { // cmd E9
         u8 value;
-    } SubTrackVolume;
+    } InstrumentVolume;
     struct { // cmd EA
         u8 value;
-    } SubTrackPan;
+    } InstrumentPan;
     struct { // cmd EB
         u8 value;
-    } SubTrackReverb;
+    } InstrumentReverb;
     struct { // cmd EC
         u8 value;
-    } SegTrackVolume;
+    } TrackVolume;
     struct { // cmd ED
         u8 cent;
-    } SubTrackCoarseTune;
+    } InstrumentCoarseTune;
     struct { // cmd EE
         u8 value;
-    } SubTrackFineTune;
+    } InstrumentFineTune;
     struct { // cmd EF
-        u16 value;
-    } SegTrackTune;
+        u16 cents;
+    } TrackDetune;
     struct { // cmd F0
         u8 delay;
         u8 speed;
@@ -440,19 +438,19 @@ typedef union SeqArgs {
     } RandomPan;
     struct { // cmd F5
         u8 index;
-    } SetTrackVoice;
+    } UseInstrument;
     struct { // cmd F6
         u16 time;
         u8 value;
     } TrackVolumeFade;
     struct { // cmd F7
         u8 index;
-    } SubTrackReverbType;
+    } ReverbType;
     // commands F8-FB unused
     struct { // cmd FC
         u16 offset;
         u8 tableCount;
-    } Jump;
+    } Branch;
     struct { // cmd FD
         u32 eventInfo;
     } EventTrigger;
@@ -1048,26 +1046,26 @@ typedef struct BGMPlayerTrack {
     /* 0x08 */ AuFilePos prevReadPos;
     /* 0x0C */ Instrument* instrument;
     /* 0x10 */ EnvelopeData envelope;
-    /* 0x18 */ s8_24 subTrackVolume;
-    /* 0x1C */ s16_16 subTrackVolumeStep;
-    /* 0x20 */ s16_16 subTrackVolumeTarget;
-    /* 0x24 */ s32 subTrackVolumeTicks;
+    /* 0x18 */ s8_24 insVolume; /// volume for current instrument, reset if instrument is changed
+    /* 0x1C */ s16_16 insVolumeStep;
+    /* 0x20 */ s16_16 insVolumeTarget;
+    /* 0x24 */ s32 insVolumeTicks;
     /* 0x28 */ s32 delayTime;
     /* 0x2C */ s16_16 proxVolume;
     /* 0x30 */ s16_16 proxVolumeStep;
     /* 0x34 */ s16 proxVolumeTarget;
     /* 0x36 */ s16 proxVolumeTicks;
-    /* 0x38 */ s16 segTrackTune;
+    /* 0x38 */ s16 detune; /// live track detune, independent of instrument, instantly affects all active voices and subsequent notes played
     /* 0x3A */ s16 tremoloDelay;
     /* 0x3C */ char pad_3C[2];
     /* 0x3E */ s16 detourLength;
     /* 0x40 */ SoundPlayChange changed;
     /* 0x44 */ u16 patch;
-    /* 0x46 */ u16 subTrackCoarseTune;
-    /* 0x48 */ s8 subTrackFineTune;
-    /* 0x49 */ s8 segTrackVolume;
-    /* 0x4A */ u8 subTrackPan;
-    /* 0x4B */ u8 subTrackReverb;
+    /* 0x46 */ u16 insCoarseDetune; /// semitone detune for instrument, reset if instrument is changed
+    /* 0x48 */ s8 insFineDetune; /// cent detune for instrument, reset if instrument is changed
+    /* 0x49 */ s8 volume; /// track volume, independent of instrument,
+    /* 0x4A */ u8 insPan;
+    /* 0x4B */ u8 insReverb;
     /* 0x4C */ u8 pressOverride;
     /* 0x4D */ u8 proxMixSetChanged;
     /* 0x4E */ u8 proxMixValChanged;
