@@ -412,13 +412,13 @@ typedef union SeqArgs {
         u8 value;
     } TrackVolume;
     struct { // cmd ED
-        u8 cent;
+        s8 cent;
     } InstrumentCoarseTune;
     struct { // cmd EE
-        u8 value;
+        s8 cent;
     } InstrumentFineTune;
     struct { // cmd EF
-        u16 cents;
+        s16 cents;
     } TrackDetune;
     struct { // cmd F0
         u8 delay;

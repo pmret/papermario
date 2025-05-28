@@ -1644,11 +1644,11 @@ void au_BGMCmd_EC_TrackVolume(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void au_BGMCmd_ED_InstrumentCoarseTune(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->insCoarseDetune = (s8)player->seqCmdArgs.InstrumentCoarseTune.cent * 100;
+    track->insCoarseDetune = player->seqCmdArgs.InstrumentCoarseTune.cent * 100;
 }
 
 void au_BGMCmd_EE_InstrumentFineTune(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->insFineDetune = player->seqCmdArgs.InstrumentFineTune.value;
+    track->insFineDetune = player->seqCmdArgs.InstrumentFineTune.cent;
 }
 
 void au_BGMCmd_EC_TrackDetune(BGMPlayer* player, BGMPlayerTrack* track) {
@@ -1741,7 +1741,7 @@ void au_BGMCmd_FE_Detour(BGMPlayer* player, BGMPlayerTrack* track) {
     track->bgmReadPos = readPos;
 }
 
-// jump to another part of the track, selected by player->proxMixID
+// jump to another part of the track, selected by player->branchVar
 void au_BGMCmd_FC_Branch(BGMPlayer* player, BGMPlayerTrack* track) {
     AuFilePos args;
     u32 i;
