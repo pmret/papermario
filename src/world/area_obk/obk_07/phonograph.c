@@ -370,7 +370,7 @@ API_CALLABLE(N(CreatePhonographHudData)) {
 }
 
 API_CALLABLE(N(PlayRecordSong)) {
-    bgm_set_song(0, N(SongList)[evt_get_variable(script, GB_OBK07_SelectedRecord)], 0, 500, 8);
+    bgm_set_song(0, N(SongList)[evt_get_variable(script, GB_OBK07_SelectedRecord)], 0, 500, VOL_LEVEL_FULL);
     return ApiStatus_DONE2;
 }
 
@@ -381,7 +381,7 @@ API_CALLABLE(N(SavePhonographUpdateScriptIDs)) {
     data->updateScaleScriptID = evt_get_variable(NULL, MV_UpdateScaleScript);
     data->updateCrankScriptID = evt_get_variable(NULL, MV_UpdateCrankScript);
     data->updateRecordScriptID = evt_get_variable(NULL, MV_UpdateRecordScript);
-    data->songName = gMusicSettings->songName;
+    data->songName = gMusicControlData->songName;
     return ApiStatus_DONE2;
 }
 

@@ -34,7 +34,7 @@ enum {
     NPC_JrTroopa_02             = 5,
     NPC_ChuckQuizmo             = 6,
     NPC_Bartender               = 7,
-    NPC_Toad_02                 = 8,
+    NPC_WaiterToad              = 8,
     NPC_Chanterelle             = 9,
     NPC_ArtistToad              = 10,
     NPC_TradeEventToad          = 11,
@@ -46,7 +46,7 @@ enum {
 
 enum {
     MF_Unk_01       = MapFlag(1),
-    AF_JAN01_TreeDrop_StarPiece       = MapFlag(10),
+    MF_DivaSinging  = MapFlag(10),
 };
 
 #define NAMESPACE mac_05

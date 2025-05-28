@@ -10,7 +10,7 @@ API_CALLABLE(N(InitializeRadio)) {
 
     evt_get_variable(script, *args++);
     snd_load_ambient(AMBIENT_RADIO);
-    snd_ambient_80055760(4);
+    snd_ambient_radio_setup(4);
     snd_ambient_set_volume(0, 250, 1);
     return ApiStatus_DONE2;
 }
@@ -19,7 +19,7 @@ API_CALLABLE(N(SetRadioVolumeMax)) {
     Bytecode* args = script->ptrReadPos;
     s32 idx = evt_get_variable(script, *args++);
 
-    snd_ambient_play_only(N(StationMseqMapping)[idx]);
+    snd_ambient_radio_select(N(StationMseqMapping)[idx]);
     snd_ambient_set_volume(N(StationMseqMapping)[idx], 1500, 127);
     return ApiStatus_DONE2;
 }
@@ -32,13 +32,13 @@ API_CALLABLE(N(SetRadioVolumeMute)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_80242898_9C7C78)) {
-    snd_ambient_play_only(4);
+API_CALLABLE(N(MuteAllRadioStations)) {
+    snd_ambient_radio_select(4);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802428B8_9C7C98)) {
-    snd_ambient_stop_all(100);
+API_CALLABLE(N(StopAllRadioStations)) {
+    snd_ambient_radio_stop(100);
     return ApiStatus_DONE2;
 }
 
@@ -46,7 +46,7 @@ API_CALLABLE(N(SetRadioStation)) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
 
-    snd_ambient_play_only(N(StationMseqMapping)[index]);
+    snd_ambient_radio_select(N(StationMseqMapping)[index]);
     return ApiStatus_DONE2;
 }
 

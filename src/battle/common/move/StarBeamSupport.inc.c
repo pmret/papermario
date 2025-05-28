@@ -401,10 +401,10 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
                 script->functionTemp[FT_DELAY]--;
                 if (script->functionTemp[FT_DELAY] == 0) {
                     if (!script->functionTemp[FT_IS_PEACH_BEAM]) {
-                        snd_stop_tracking_env_sound_pos(SOUND_LRAW_USE_STAR_BEAM, TRUE);
+                        sfx_stop_tracking_env_sound_pos(SOUND_LRAW_USE_STAR_BEAM, TRUE);
                         sfx_play_sound(SOUND_LRAW_USE_STAR_BEAM | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     } else {
-                        snd_stop_tracking_env_sound_pos(SOUND_LRAW_USE_PEACH_BEAM, TRUE);
+                        sfx_stop_tracking_env_sound_pos(SOUND_LRAW_USE_PEACH_BEAM, TRUE);
                         sfx_play_sound(SOUND_LRAW_USE_PEACH_BEAM | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     }
                 }
@@ -444,9 +444,9 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             }
 
             if (!script->functionTemp[FT_IS_PEACH_BEAM]) {
-                snd_stop_tracking_env_sound_pos(SOUND_LRAW_USE_STAR_BEAM, FALSE);
+                sfx_stop_tracking_env_sound_pos(SOUND_LRAW_USE_STAR_BEAM, FALSE);
             } else {
-                snd_stop_tracking_env_sound_pos(SOUND_LRAW_USE_PEACH_BEAM, FALSE);
+                sfx_stop_tracking_env_sound_pos(SOUND_LRAW_USE_PEACH_BEAM, FALSE);
             }
             script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_SPIRITS_SCATTER;
             break;
