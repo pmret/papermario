@@ -82,7 +82,7 @@ EvtScript N(EVS_Scene_HuffNPuffAmbush) = {
     EndIf
     Call(AwaitPlayerApproach, 650, 0, 30)
     Call(DisablePlayerInput, TRUE)
-    Call(SetMusicTrack, 0, SONG_HUFF_N_PUFF_THEME, 0, VOL_LEVEL_FULL)
+    Call(SetMusic, 0, SONG_HUFF_N_PUFF_THEME, 0, VOL_LEVEL_FULL)
     ExecGetTID(N(EVS_PlayRumbleSounds), LVar9)
     Call(GetPartnerInUse, LVar0)
     IfNe(LVar0, PARTNER_NONE)

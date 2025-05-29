@@ -372,7 +372,7 @@ EvtScript N(EVS_NpcDefeat_GeneralGuy) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Call(SetMusicTrack, 0, SONG_SHY_GUY_TOYBOX, 0, VOL_LEVEL_FULL)
+            Call(SetMusic, 0, SONG_SHY_GUY_TOYBOX, 0, VOL_LEVEL_FULL)
             Call(GetSelfNpcID, LVar0)
             IfEq(LVar0, NPC_GeneralGuy)
                 Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, TRUE)

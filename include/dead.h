@@ -124,7 +124,7 @@
 #define dma_copy dead_dma_copy
 #define create_worker_scene dead_create_worker_scene
 #define GetEntryID dead_GetEntryID
-#define SetMusicTrack dead_SetMusicTrack
+#define SetMusic dead_SetMusic
 #define FadeInMusic dead_FadeInMusic
 #define RandInt dead_RandInt
 #define PlayEffect_impl dead_PlayEffect_impl

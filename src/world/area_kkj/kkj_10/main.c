@@ -177,9 +177,9 @@ EvtScript N(EVS_Main) = {
         Call(N(DisableAllLightSources))
     EndIf
     IfLt(GB_StoryProgress, STORY_CH8_REACHED_PEACHS_CASTLE)
-        Call(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, VOL_LEVEL_FULL)
+        Call(SetMusic, 0, SONG_PEACH_SNEAKING, 0, VOL_LEVEL_FULL)
     Else
-        Call(SetMusicTrack, 0, SONG_BOWSER_ATTACKS, BGM_VARIATION_1, VOL_LEVEL_FULL)
+        Call(SetMusic, 0, SONG_BOWSER_ATTACKS, BGM_VARIATION_1, VOL_LEVEL_FULL)
     EndIf
     Exec(N(EVS_BindExitTriggers))
     Exec(N(EVS_EnterMap))

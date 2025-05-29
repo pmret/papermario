@@ -41,7 +41,7 @@ EvtScript N(D_80252580_8646F0) = {
 EvtScript N(D_802525B0_864720) = {
     Switch(LVar0)
         CaseEq(0)
-            Call(SetMusicTrack, 0, SONG_CLUB64, 0, VOL_LEVEL_FULL)
+            Call(SetMusic, 0, SONG_CLUB64, 0, VOL_LEVEL_FULL)
             Call(StopSound, SOUND_LOOP_MAC_HARBOR_WATER)
 #if !VERSION_JP
             Call(StopTrackingSoundPos, SOUND_LRAW_MAC_HARBOR_WATER)

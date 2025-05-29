@@ -1028,7 +1028,7 @@ API_CALLABLE(RegisterMusicEvents);
 API_CALLABLE(FadeOutMusic);
 
 /// @evtapi
-API_CALLABLE(SetMusicTrack);
+API_CALLABLE(SetMusic);
 
 /// @evtapi
 API_CALLABLE(FadeInMusic);
@@ -1040,7 +1040,7 @@ API_CALLABLE(EnableMusicProximityMix);
 API_CALLABLE(AdjustMusicProximityMix);
 
 /// @evtapi
-API_CALLABLE(SetMusicTrackVolumes);
+API_CALLABLE(SetTrackVolumes);
 
 /// @evtapi
 API_CALLABLE(PopSong);

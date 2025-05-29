@@ -1972,7 +1972,7 @@ EvtScript N(EVS_NpcIdle_Twink) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(SetMusicTrack, 0, SONG_TWINK_THEME, 0, VOL_LEVEL_FULL)
+    Call(SetMusic, 0, SONG_TWINK_THEME, 0, VOL_LEVEL_FULL)
     Call(DisablePlayerInput, TRUE)
     Call(SetPlayerSpeed, Float(3.0 / DT))
     Call(PlayerMoveTo, 500, -20, 0)

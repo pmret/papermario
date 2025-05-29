@@ -80,7 +80,7 @@ API_CALLABLE(FadeOutMusic) {
     }
 }
 
-API_CALLABLE(SetMusicTrack) {
+API_CALLABLE(SetMusic) {
     Bytecode* args = script->ptrReadPos;
     s32 musicPlayer = evt_get_variable(script, *args++);
     s32 songID = evt_get_variable(script, *args++);
@@ -128,7 +128,7 @@ API_CALLABLE(AdjustMusicProximityMix) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(SetMusicTrackVolumes) {
+API_CALLABLE(SetTrackVolumes) {
     Bytecode* args = script->ptrReadPos;
     s16 trackVolSet = evt_get_variable(script, *args++);
 

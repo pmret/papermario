@@ -193,7 +193,7 @@ EvtScript N(EVS_Main) = {
     Call(DisablePlayerPhysics, TRUE)
     Wait(1)
     Exec(N(EVS_EnterMap))
-    Call(SetMusicTrack, 0, SONG_CHAPTER_START, 0, VOL_LEVEL_FULL)
+    Call(SetMusic, 0, SONG_CHAPTER_START, 0, VOL_LEVEL_FULL)
     Call(ClearAmbientSounds, 250)
     Return
     End

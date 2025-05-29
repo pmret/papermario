@@ -42,7 +42,7 @@ EvtScript N(EVS_Main) = {
     Set(LVar0, N(EVS_BindExitTriggers))
     Exec(EnterWalk)
     Wait(1)
-    Call(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, VOL_LEVEL_FULL)
+    Call(SetMusic, 0, SONG_MT_LAVALAVA, 0, VOL_LEVEL_FULL)
     Call(PlayAmbientSounds, AMBIENT_LAVA_1)
     Exec(N(EVS_SetupSpinyTromp))
     Set(LVar0, MODEL_kem1)

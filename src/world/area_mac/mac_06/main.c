@@ -52,7 +52,7 @@ EvtScript N(EVS_Main) = {
     Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
     Exec(N(EVS_FlyingGull))
     Exec(N(EVS_WhaleMain))
-    Call(SetMusicTrack, 0, SONG_RIDING_THE_WHALE, 0, VOL_LEVEL_FULL)
+    Call(SetMusic, 0, SONG_RIDING_THE_WHALE, 0, VOL_LEVEL_FULL)
     Call(PlayAmbientSounds, AMBIENT_SEA)
     Exec(N(EVS_AnimateWaves))
     Call(SetTexPanner, MODEL_o214, TEX_PANNER_1)

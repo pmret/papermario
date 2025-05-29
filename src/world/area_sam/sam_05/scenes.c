@@ -11,7 +11,7 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
     EndIf
     Call(DisablePlayerInput, TRUE)
     Call(InterruptUsePartner)
-    Call(SetMusicTrack, 0, SONG_MONSTAR_THEME, 0, VOL_LEVEL_FULL)
+    Call(SetMusic, 0, SONG_MONSTAR_THEME, 0, VOL_LEVEL_FULL)
     Call(ShowMessageAtScreenPos, MSG_CH7_00E0, 160, 40)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Monstar_Idle1)
     Call(SetNpcPos, NPC_Monstar, 635, 85, 0)
@@ -75,7 +75,7 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
         IfGt(LVar3, LVar0)
             Call(DisablePlayerInput, TRUE)
             Call(InterruptUsePartner)
-            Call(SetMusicTrack, 0, SONG_MONSTAR_THEME, 0, VOL_LEVEL_FULL)
+            Call(SetMusic, 0, SONG_MONSTAR_THEME, 0, VOL_LEVEL_FULL)
             Goto(2)
         EndIf
         IfGt(LVar3, 420)
