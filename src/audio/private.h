@@ -66,7 +66,7 @@ void au_bgm_update_bus_volumes(BGMPlayer* arg0);
 s32 au_bgm_player_audio_frame_update(BGMPlayer* player);
 void au_bgm_player_initialize(BGMPlayer* player);
 void au_bgm_clear_custom_note_press(BGMPlayer* player, s32 arg1);
-void au_bgm_set_tick_resolution(BGMPlayer* player, s32 sampleRate, s32 divisor);
+void au_bgm_set_tick_resolution(BGMPlayer* player, s32 sampleRate, u32 resolution);
 void au_bgm_player_read_composition(BGMPlayer* player);
 void au_bgm_end_composition_loop(BGMPlayer* player, u32 cmd);
 void au_bgm_load_phrase(BGMPlayer* player, u32 cmd);

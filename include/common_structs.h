@@ -648,7 +648,7 @@ typedef struct MusicProximityTrigger {
     /* 0x00 */ VecXZf pos;
     /* 0x08 */ f32 innerDist;
     /* 0x0C */ f32 outerDist;
-    /* 0x10 */ s32 unk;
+    /* 0x10 */ s32 mix; /// which branch value to switch to
     /* 0x14 */ s32 manualActivationFlag;
 } MusicProximityTrigger; // size = 0x18
 

@@ -34,7 +34,7 @@ void au_bgm_begin_video_frame(BGMPlayer* player) {
 
     compID = 0;
     unkType = -1;
-    player->updateCounter++;
+    player->frameCounter++;
 
     if (player->cmdBufPending != 0) {
         if (player->cmdBufPending < ARRAY_COUNT(player->cmdBufData)) {
@@ -68,7 +68,7 @@ void au_bgm_begin_video_frame(BGMPlayer* player) {
                     player->unk_58 = unkType & 0xFF;
                     player->unk_5A = unkType & 0xFF;
                     player->masterState = BGM_PLAY_STATE_INIT;
-                    player->nextUpdateStep = BGM_SAMPLE_RATE;
+                    player->nextUpdateStep = BGM_DEFAULT_UPDATE_STEP;
                     if (unkType == 2) {
                         bgmFile = player->globals->dataBGM[1];
                     } else {
@@ -76,7 +76,7 @@ void au_bgm_begin_video_frame(BGMPlayer* player) {
                     }
                     player->bgmFile = bgmFile;
                     bgmData = &bgmFile->info;
-                    au_bgm_set_tick_resolution(player, BGM_SAMPLE_RATE, BgmTicksRates[*(player->tickRatePtr) & 7]);
+                    au_bgm_set_tick_resolution(player, BGM_DEFAULT_UPDATE_STEP, BgmTicksRates[*(player->tickRatePtr) & 7]);
 
                     compOffset = bgmData->compositions[compID];
                     if (compOffset == 0) {
@@ -179,7 +179,7 @@ AuResult au_bgm_process_init_song(SongStartRequest* request) {
             au_fade_init(&player->fadeInfo, duration, volume0, volume1);
             player->fadeInfo.envelopeTarget = AU_MAX_VOLUME_16;
             player->fadeInfo.envelopeTicks = 1;
-            au_bgm_set_tick_resolution(player, BGM_SAMPLE_RATE, BgmTicksRates[fileInfo->timingPreset & 7]);
+            au_bgm_set_tick_resolution(player, BGM_DEFAULT_UPDATE_STEP, BgmTicksRates[fileInfo->timingPreset & 7]);
 
             if (variation < BGM_VARIATION_0 || variation > BGM_VARIATION_3 || fileInfo->compositions[variation] == 0) {
                 variation = BGM_VARIATION_0;
@@ -524,11 +524,11 @@ void au_bgm_player_init(BGMPlayer* player, s32 priority, s32 busID, AuGlobals* g
     s16 i;
 
     player->globals = globals;
-    au_bgm_set_tick_resolution(player, BGM_SAMPLE_RATE, 48);
+    au_bgm_set_tick_resolution(player, BGM_DEFAULT_UPDATE_STEP, BGM_DEFAULT_TICKS_PER_BEAT);
     player->busVolume = AU_MAX_BUS_VOLUME;
     player->masterTempo = BGM_DEFAULT_TEMPO;
     player->masterVolume = AU_MAX_VOLUME_8 << 24;
-    player->updateCounter = 0;
+    player->frameCounter = 0;
     player->songPlayingCounter = 0;
     player->songName = 0;
     player->pushSongName = 0;
@@ -663,8 +663,8 @@ s32 au_bgm_player_audio_frame_update(BGMPlayer* player) {
     s32 retVal = FALSE;
 
     // update pseudorandom numbers with fast 'good enough' method
-    player->randomValue1 = (player->randomValue1 & 0xFFFF) + (player->songPlayingCounter & 0xFFFF) + (player->updateCounter & 0xFFFF);
-    player->randomValue2 = (player->randomValue2 & 0xFFFF) + ((player->songPlayingCounter << 4) & 0xFFFF) + ((player->updateCounter >> 4) & 0xFFFF);
+    player->randomValue1 = (player->randomValue1 & 0xFFFF) + (player->songPlayingCounter & 0xFFFF) + (player->frameCounter & 0xFFFF);
+    player->randomValue2 = (player->randomValue2 & 0xFFFF) + ((player->songPlayingCounter << 4) & 0xFFFF) + ((player->frameCounter >> 4) & 0xFFFF);
     do {
         switch (player->masterState) {
             case BGM_PLAY_STATE_IDLE:
@@ -757,7 +757,7 @@ void au_bgm_player_initialize(BGMPlayer* player) {
     au_bgm_reset_all_voices(player);
     player->playbackRate = 128.0f; // set to 1.0 later om...
     player->masterTempo = BGM_DEFAULT_TEMPO;
-    player->masterTempoBPM = BGM_DEFAULT_TEMPO / 100;
+    player->masterTempoBPM = player->masterTempo / 100;
     player->unused_21E = 0x80;
     player->masterVolume = AU_MAX_VOLUME_8 << 24;
     player->pushSongName = 0;
@@ -824,27 +824,35 @@ void au_bgm_clear_custom_note_press(BGMPlayer* player, s32 index) {
     }
 }
 
-void au_bgm_set_tick_resolution(BGMPlayer* player, s32 sampleRate, s32 resolution) {
-    u32 samplesPerTick;
-
-    samplesPerTick = 10434782 / (u32)resolution;
+void au_bgm_set_tick_resolution(BGMPlayer* player, s32 mBeatsPerMinute, u32 ticksPerBeat) {
+    // compute how many audio frames before the next tick
+    u32 mFramesPerTick = BGM_MFRAMES_PER_MINUTE / ticksPerBeat;
 
     // Clamp samples per tick to stay in a valid range
-    if (samplesPerTick > 500000) {
-        samplesPerTick = 500000;
-    } else if (samplesPerTick < 80000) {
-        samplesPerTick = 80000;
+    if (mFramesPerTick > 500000) {
+        mFramesPerTick = 500000;
+    } else if (mFramesPerTick < 80000) {
+        mFramesPerTick = 80000;
     }
 
     // Clamp to sample rate
-    if (samplesPerTick < sampleRate) {
-        sampleRate = samplesPerTick;
+    if (mFramesPerTick < mBeatsPerMinute) {
+        mBeatsPerMinute = mFramesPerTick;
     }
 
-    player->nextUpdateStep = sampleRate;
-    player->nextUpdateInterval = samplesPerTick;
-    player->nextUpdateCounter = samplesPerTick;
-    player->maxTempo = samplesPerTick / 1000;
+    // breakdown of units:
+    //
+    //     tickUpdateInterval     /   nextUpdateStep   =  framesPerTick
+    //
+    //   1000 x frames    beat              min           frames
+    //   ------------- x ------   x   ---------------  =  ------
+    //       min          tick          1000 x beat        tick
+
+    player->nextUpdateStep = mBeatsPerMinute;
+    player->tickUpdateInterval = mFramesPerTick;
+    player->nextUpdateCounter = mFramesPerTick;
+
+    player->maxTempo = mFramesPerTick / BGM_UPDATE_SCALE;
 }
 
 // runs whenever a new composition begins playing
@@ -1004,7 +1012,7 @@ void au_bgm_player_update_stop(BGMPlayer* player) {
     }
     au_bgm_reset_all_voices(player);
     player->masterState = BGM_PLAY_STATE_IDLE;
-    player->nextUpdateStep = BGM_SAMPLE_RATE;
+    player->nextUpdateStep = BGM_DEFAULT_UPDATE_STEP;
 }
 
 #define POST_BGM_READ() \
@@ -1048,7 +1056,7 @@ void au_bgm_player_update_playing(BGMPlayer *player) {
         } else {
             player->masterTempo += player->masterTempoStep;
         }
-        player->nextUpdateStep = player->masterTempo * 10;
+        player->nextUpdateStep = BGM_TEMPO_TO_UPDATE_UNITS(player->masterTempo);
     }
     if (player->masterVolumeTicks != 0) {
         player->masterVolumeTicks--;
@@ -1504,7 +1512,7 @@ void au_BGMCmd_E0_MasterTempo(BGMPlayer* player, BGMPlayerTrack* track) {
     player->masterTempoBPM = bpm;
     tempo = au_bgm_bpm_to_tempo(player, bpm);
     player->masterTempo = tempo;
-    player->nextUpdateStep = tempo * 10;
+    player->nextUpdateStep = BGM_TEMPO_TO_UPDATE_UNITS(tempo);
     player->masterTempoTicks = 0;
     player->masterTempoTarget = 0;
     player->masterTempoStep = 0;
@@ -1999,7 +2007,7 @@ void au_bgm_set_playback_rate(BGMPlayer* player, f32 rate) {
 
     player->playbackRate = rate;
     player->masterTempo = au_bgm_bpm_to_tempo(player, player->masterTempoBPM);
-    player->nextUpdateStep = player->masterTempo * 10;
+    player->nextUpdateStep = BGM_TEMPO_TO_UPDATE_UNITS(player->masterTempo);
     player->masterTempoTicks = 0;
     player->masterTempoTarget = 0;
     player->masterTempoStep = 0;

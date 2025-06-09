@@ -66,13 +66,35 @@ typedef u8* WaveData;
 #define AU_PAN_MID 64
 #define AU_PAN_MAX 127
 
-// only valid for vol != 0
+// converts an 8-bit volume to a 16-bit volume. only valid for vol != 0.
 #define AU_VOL_8_TO_16(vol) (((vol) << 8) | 0xFF)
-// only valid for vol != 0
+// converts an 8-bit volume to a 32-bit volume. only valid for vol != 0.
 #define AU_VOL_8_TO_32(vol) (((vol) << 0x18) | 0xFFFFFF)
 
-#define BGM_SAMPLE_RATE 156250
-#define BGM_DEFAULT_TEMPO 15600
+#define BGM_DEFAULT_TICKS_PER_BEAT 48
+
+// fixed scale for update counter to avoid precision loss of fractional frames; 1 unit = 0.001 audio frame
+// (ie, prevent truncation when updating tick every 1.5 frames)
+#define BGM_UPDATE_SCALE (1000)
+// 1 unit = 0.01 BPM
+#define BGM_TEMPO_SCALE (100)
+
+// number of audio frames per minute x BGM_UPDATE_SCALE --> units = milli-frames per minute
+#define BGM_MFRAMES_PER_MINUTE (BGM_UPDATE_SCALE * (60 * HARDWARE_OUTPUT_RATE) / AUDIO_SAMPLES)
+
+// default BPM for BGMPlayer
+#define BGM_DEFAULT_BPM 156
+// default masterTempo for BGMPlayer, derived from BGM_DEFAULT_BPM
+#define BGM_DEFAULT_TEMPO (BGM_DEFAULT_BPM * BGM_TEMPO_SCALE)
+
+// just over 100x the default tempo, seemingly chosen for to make each tick = 256 audio samples
+// solves (AUDIO_SAMPLES * BGM_MFRAMES_PER_MINUTE) / (BGM_DEFAULT_TICKS_PER_BEAT * x) = 256
+//   -->  (184 * 10434782) / (48 * x) = 256
+//   -->  x = (184 * 10434782) / (48 * 256)
+#define BGM_DEFAULT_UPDATE_STEP 156250
+
+// converts a 'tempo' value from BGM command to units suitable for the player update counter
+#define BGM_TEMPO_TO_UPDATE_UNITS(tempo) (BGM_UPDATE_SCALE * (u32)(tempo) / BGM_TEMPO_SCALE)
 
 #define SND_MIN_DURATION 250
 #define SND_MAX_DURATION 10000
@@ -135,6 +157,11 @@ typedef enum AuEffectType {
     AU_FX_OTHER_BIGROOM         = 10,
 } AuEffectType;
 
+typedef enum MusicPlayer {
+    MUSIC_PLAYER_MAIN           = 0,
+    MUSIC_PLAYER_AUX            = 1,
+} MusicPlayer;
+
 typedef enum MusicState {
     MUSIC_STATE_IDLE            = 0,
     MUSIC_STATE_STOP_CURRENT    = 1,
@@ -192,7 +219,7 @@ typedef enum BGMSpecialSubops {
     BGM_SPECIAL_WRITE_CUSTOM_ENV    = 3, // write custom envelope data
     BGM_SPECIAL_USE_CUSTOM_ENV      = 4, // select which custom envelope to use
     BGM_SPECIAL_TRIGGER_SOUND       = 5,
-    BGM_SPECIAL_PROX_MIX_OVERRIDE                   = 6,
+    BGM_SPECIAL_PROX_MIX_OVERRIDE   = 6,
 } BGMSpecialSubops;
 
 typedef enum FxBus {
@@ -1103,10 +1130,10 @@ typedef struct SeqNote {
 typedef struct BGMPlayer {
     /* 0x000 */ AuGlobals* globals;
     /* 0x004 */ SoundManager* soundManager;
-    /* 0x008 */ s32 nextUpdateStep;
-    /* 0x00C */ s32 nextUpdateInterval;
-    /* 0x010 */ s32 nextUpdateCounter;
-    /* 0x014 */ s32 updateCounter;
+    /* 0x008 */ s32 nextUpdateStep; /// update counter amount to add per audio frame
+    /* 0x00C */ s32 tickUpdateInterval; /// update counter threshold for a single tick
+    /* 0x010 */ s32 nextUpdateCounter; /// current update counter value
+    /* 0x014 */ s32 frameCounter; /// video frames (60 fps)
     /* 0x018 */ s32 songPlayingCounter;
     /* 0x01C */ s32 songName;
     /* 0x020 */ s32 pushSongName;

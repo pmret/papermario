@@ -6,7 +6,7 @@ MusicProximityTrigger N(MusicMixTrigger1) = {
     .pos = { 15.0f, -400.0f },
     .innerDist = 90.0f,
     .outerDist = 120.0f,
-    .unk = 7,
+    .mix = 7,
     .manualActivationFlag = MF_MusicMixTrigger1,
 };
 
@@ -14,7 +14,7 @@ MusicProximityTrigger N(MusicMixTrigger2) = {
     .pos = { 445.0f, -307.0f },
     .innerDist = 90.0f,
     .outerDist = 110.0f,
-    .unk = 3,
+    .mix = 3,
     .manualActivationFlag = MF_MusicMixTrigger2,
 };
 

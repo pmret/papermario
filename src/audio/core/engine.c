@@ -247,7 +247,7 @@ void au_update_clients_for_audio_frame(void) {
 
         bgmPlayer->nextUpdateCounter -= bgmPlayer->nextUpdateStep;
         if (bgmPlayer->nextUpdateCounter <= 0) {
-            bgmPlayer->nextUpdateCounter += bgmPlayer->nextUpdateInterval;
+            bgmPlayer->nextUpdateCounter += bgmPlayer->tickUpdateInterval;
             bgmPlayer->prevUpdateResult = au_bgm_player_audio_frame_update(bgmPlayer);
         }
     }
@@ -274,7 +274,7 @@ void au_update_clients_for_audio_frame(void) {
 
         bgmPlayer->nextUpdateCounter -= bgmPlayer->nextUpdateStep;
         if (bgmPlayer->nextUpdateCounter <= 0) {
-            bgmPlayer->nextUpdateCounter += bgmPlayer->nextUpdateInterval;
+            bgmPlayer->nextUpdateCounter += bgmPlayer->tickUpdateInterval;
             bgmPlayer->prevUpdateResult = au_bgm_player_audio_frame_update(bgmPlayer);
         }
     }
