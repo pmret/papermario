@@ -757,7 +757,7 @@ void au_bgm_player_initialize(BGMPlayer* player) {
     au_bgm_reset_all_voices(player);
     player->playbackRate = 128.0f; // set to 1.0 later om...
     player->masterTempo = BGM_DEFAULT_TEMPO;
-    player->masterTempoBPM = player->masterTempo / 100;
+    player->masterTempoBPM = BGM_DEFAULT_BPM;
     player->unused_21E = 0x80;
     player->masterVolume = AU_MAX_VOLUME_8 << 24;
     player->pushSongName = 0;
@@ -1690,21 +1690,21 @@ void au_BGMCmd_F4_SubTrackRandomPan(BGMPlayer* player, BGMPlayerTrack* track) {
 void au_BGMCmd_F5_UseInstrument(BGMPlayer* player, BGMPlayerTrack* track) {
     BGMInstrumentInfo* instrument;
     s32 volume;
-    u32 voiceIndex;
+    u32 insIndex;
     u32 patch;
     u32 bank;
 
-    voiceIndex = player->seqCmdArgs.UseInstrument.index;
-    if (voiceIndex < 0x80) {
-        if (voiceIndex < player->bgmInstrumentCount) {
-            instrument = &player->instrumentsInfo[voiceIndex];
+    insIndex = player->seqCmdArgs.UseInstrument.index;
+    if (insIndex < BGM_MAX_INSTRUMNETS) {
+        if (insIndex < player->bgmInstrumentCount) {
+            instrument = &player->instrumentsInfo[insIndex];
         } else {
             instrument = &player->globals->defaultPRGEntry;
         }
     } else {
-        voiceIndex -= 0x80;
-        if (voiceIndex < 0x40) {
-            instrument = &player->globals->dataPRG[voiceIndex];
+        insIndex -= BGM_MAX_INSTRUMNETS;
+        if (insIndex < PRG_MAX_COUNT) {
+            instrument = &player->globals->dataPRG[insIndex];
         } else {
             instrument = &player->globals->defaultPRGEntry;
         }

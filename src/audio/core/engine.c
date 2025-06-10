@@ -66,7 +66,7 @@ void au_engine_init(s32 outputRate) {
     globals->dataSEF = alHeapAlloc(alHeap, 1, 0x5200);
     globals->defaultInstrument = alHeapAlloc(alHeap, 1, sizeof(Instrument));
     globals->dataPER = alHeapAlloc(alHeap, 1, 6 * sizeof(PEREntry));
-    globals->dataPRG = alHeapAlloc(alHeap, 1, 64 * sizeof(BGMInstrumentInfo));
+    globals->dataPRG = alHeapAlloc(alHeap, 1, PRG_MAX_COUNT * sizeof(BGMInstrumentInfo));
     globals->musicEventQueue = alHeapAlloc(alHeap, 1, MUS_QUEUE_SIZE * sizeof(MusicEventTrigger));
     globals->outputRate = outputRate;
     au_reset_instrument(globals->defaultInstrument);
@@ -845,12 +845,12 @@ void au_load_PRG(AuGlobals* globals, s32 romAddr) {
     au_read_rom(romAddr, &header, sizeof(header));
     dataRomAddr = romAddr + sizeof(header);
     size = header.mdata.size - sizeof(header);
-    if (size > 0x200) {
-        size = 0x200;
+    if (size > PRG_MAX_COUNT * sizeof(BGMInstrumentInfo)) {
+        size = PRG_MAX_COUNT * sizeof(BGMInstrumentInfo);
     }
     au_read_rom(dataRomAddr, globals->dataPRG, size);
     numItems = size / sizeof(BGMInstrumentInfo);
-    numItemsLeft = 0x40 - numItems;
+    numItemsLeft = PRG_MAX_COUNT - numItems;
     if (numItemsLeft > 0) {
         end = &globals->dataPRG[numItems];
         au_copy_words(&globals->defaultPRGEntry, end, sizeof(BGMInstrumentInfo));

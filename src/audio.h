@@ -71,6 +71,9 @@ typedef u8* WaveData;
 // converts an 8-bit volume to a 32-bit volume. only valid for vol != 0.
 #define AU_VOL_8_TO_32(vol) (((vol) << 0x18) | 0xFFFFFF)
 
+// maximum number of instrument presets for a BGM file
+#define BGM_MAX_INSTRUMNETS 0x80
+
 #define BGM_DEFAULT_TICKS_PER_BEAT 48
 
 // fixed scale for update counter to avoid precision loss of fractional frames; 1 unit = 0.001 audio frame
@@ -87,7 +90,7 @@ typedef u8* WaveData;
 // default masterTempo for BGMPlayer, derived from BGM_DEFAULT_BPM
 #define BGM_DEFAULT_TEMPO (BGM_DEFAULT_BPM * BGM_TEMPO_SCALE)
 
-// just over 100x the default tempo, seemingly chosen for to make each tick = 256 audio samples
+// just over 100x the default tempo, seemingly chosen to make each tick = 256 audio samples
 // solves (AUDIO_SAMPLES * BGM_MFRAMES_PER_MINUTE) / (BGM_DEFAULT_TICKS_PER_BEAT * x) = 256
 //   -->  (184 * 10434782) / (48 * x) = 256
 //   -->  x = (184 * 10434782) / (48 * 256)
@@ -109,6 +112,8 @@ typedef u8* WaveData;
 
 #define ENV_VOL_MAX     0x80    // for 7-bit volumes, 128 (1 << 7) represents full volume
 #define ENV_VOL_SHIFT   7       // Shift required to divide by 128 (normalize 7-bit volumes after a multiply)
+
+#define PRG_MAX_COUNT   0x40
 
 // Multiplies two 7-bit volume values and normalizes the result.
 #define VOL_MULT_2(a, b) ((a)*(b) >> ENV_VOL_SHIFT)
