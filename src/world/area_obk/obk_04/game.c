@@ -272,7 +272,7 @@ EvtScript N(EVS_SpawnGotSuperBootsFX) = {
 
 EvtScript N(EVS_Scene_BoosUnleashed) = {
     Call(DisablePlayerInput, TRUE)
-    Call(SetMusicTrack, 0, SONG_BOO_MINIGAME, 0, 8)
+    Call(SetMusic, 0, SONG_BOO_MINIGAME, 0, VOL_LEVEL_FULL)
     Exec(N(EVS_TetherItemToDummy))
     Wait(1)
     Exec(N(EVS_IntroduceAndHideBoots))

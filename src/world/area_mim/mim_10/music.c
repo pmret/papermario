@@ -3,9 +3,9 @@
 EvtScript N(EVS_SetToadTownMusic) = {
     Switch(GB_StoryProgress)
         CaseRange(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
-            Call(SetMusicTrack, 0, SONG_SHY_GUY_INVASION, 0, 8)
+            Call(SetMusic, 0, SONG_SHY_GUY_INVASION, 0, VOL_LEVEL_FULL)
         CaseDefault
-            Call(SetMusicTrack, 0, SONG_TOAD_TOWN, 0, 8)
+            Call(SetMusic, 0, SONG_TOAD_TOWN, 0, VOL_LEVEL_FULL)
     EndSwitch
     Return
     End
@@ -26,7 +26,7 @@ EvtScript N(EVS_SetupMusic) = {
         Exec(N(EVS_SetToadTownMusic))
         Wait(30)
     Else
-        Call(SetMusicTrack, 0, SONG_FOREVER_FOREST, 0, 8)
+        Call(SetMusic, 0, SONG_FOREVER_FOREST, 0, VOL_LEVEL_FULL)
         Wait(15)
         Call(ClearAmbientSounds, 250)
         Wait(15)
@@ -39,7 +39,7 @@ EvtScript N(EVS_SetupMusic) = {
         Call(FadeOutMusic, 0, 1000)
         Wait(15)
         Wait(15)
-        Call(SetMusicTrack, 0, SONG_FOREVER_FOREST, 0, 8)
+        Call(SetMusic, 0, SONG_FOREVER_FOREST, 0, VOL_LEVEL_FULL)
         Wait(30)
         Goto(20)
     EndIf

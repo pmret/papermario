@@ -198,7 +198,7 @@ EvtScript N(EVS_Inspect_BowsersDiary) = {
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_Fly)
     Call(NpcFlyTo, NPC_PARTNER, -180, 40, -100, 10 * DT, 0, EASING_LINEAR)
     Wait(10 * DT)
-    Call(SetMusicTrack, 0, SONG_BOWSER_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_BOWSER_THEME, 0, VOL_LEVEL_FULL)
     Call(SetPanTarget, CAM_DEFAULT, 237, 0, 37)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-12.0))
     Call(SetCamPosB, CAM_DEFAULT, 170, -20)

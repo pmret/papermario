@@ -10,7 +10,7 @@ API_CALLABLE(N(GetFloorCollider2)) {
 }
 
 API_CALLABLE(N(func_8024036C_C9A56C)) {
-    snd_ambient_mute(0, TRUE);
+    snd_ambient_fade_out(0, TRUE);
     return ApiStatus_DONE2;
 }
 

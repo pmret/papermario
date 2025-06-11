@@ -199,7 +199,7 @@ EvtScript N(EVS_8024134C) = {
 };
 
 EvtScript N(MV_Scene_CastleAscending) = {
-    Call(SetMusicTrack, 0, SONG_BOWSER_ATTACKS, 0, 8)
+    Call(SetMusic, 0, SONG_BOWSER_ATTACKS, 0, VOL_LEVEL_FULL)
     Call(DisablePlayerInput, TRUE)
     Call(DisablePlayerPhysics, TRUE)
     Call(SetPlayerPos, 0, 0, 2000)

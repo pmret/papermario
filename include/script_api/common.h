@@ -1028,7 +1028,13 @@ API_CALLABLE(RegisterMusicEvents);
 API_CALLABLE(FadeOutMusic);
 
 /// @evtapi
-API_CALLABLE(SetMusicTrack);
+/// Start playing a song.
+///
+/// @param playerID MusicPlayer to use, should almost always be 0 (MUSIC_PLAYER_MAIN).
+/// @param song Song from SongIDs.
+/// @param variation
+/// @param volumeLevel Perceptual loudness from VOL_LEVEL_MUTE to VOL_LEVEL_FULL.
+API_CALLABLE(SetMusic);
 
 /// @evtapi
 API_CALLABLE(FadeInMusic);
@@ -1040,7 +1046,7 @@ API_CALLABLE(EnableMusicProximityMix);
 API_CALLABLE(AdjustMusicProximityMix);
 
 /// @evtapi
-API_CALLABLE(SetMusicTrackVolumes);
+API_CALLABLE(SetTrackVolumes);
 
 /// @evtapi
 API_CALLABLE(PopSong);

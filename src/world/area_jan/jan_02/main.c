@@ -6,7 +6,7 @@
 extern s32 N(PrevPalmTreeVisibility);
 
 API_CALLABLE(N(ClearTrackVols)) {
-    bgm_clear_track_volumes(0, TRACK_VOLS_0);
+    bgm_clear_track_volumes(0, TRACK_VOLS_JAN_FULL);
     return ApiStatus_DONE2;
 }
 

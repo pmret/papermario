@@ -1057,7 +1057,7 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
     End
 };
 
-EvtScript N(EVS_NpcInit_Toad_01) = {
+EvtScript N(EVS_NpcInit_WhaleDummy) = {
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_01)))
     Call(SetNpcFlagBits, NPC_Whale, NPC_FLAG_HAS_NO_SPRITE, TRUE)
     Call(SetNpcFlagBits, NPC_Whale, NPC_FLAG_HAS_SHADOW, FALSE)
@@ -1907,18 +1907,18 @@ EvtScript N(EVS_NpcInteract_ArtistToad) = {
                 Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
                 Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-                Call(InterpNpcYaw, NPC_Toad_02, 90, 0)
+                Call(InterpNpcYaw, NPC_WaiterToad, 90, 0)
                 Call(InterpNpcYaw, NPC_ArtistToad, 270, 0)
                 Wait(60)
                 Exec(N(EVS_802442C4))
                 Call(SetPlayerAnimation, ANIM_Mario1_Pray)
-                Call(SetNpcAnimation, NPC_Toad_02, ANIM_Toad_Red_Disappointed)
+                Call(SetNpcAnimation, NPC_WaiterToad, ANIM_Toad_Red_Disappointed)
                 Call(SetNpcAnimation, NPC_ArtistToad, ANIM_Musician_Poet_Pensive)
                 Wait(30)
                 Call(SetNpcAnimation, NPC_Bartender, ANIM_Bartender_Talk)
                 Call(SetNpcAnimation, NPC_Chanterelle, ANIM_Chanterelle_Still)
                 Wait(30)
-                Call(SetMusicTrack, 0, SONG_POP_DIVA_SONG, 0, 8)
+                Call(SetMusic, 0, SONG_POP_DIVA_SONG, 0, VOL_LEVEL_FULL)
                 Call(SetNpcAnimation, NPC_Bartender, ANIM_Bartender_StrumGuitar)
                 Call(SetNpcAnimation, NPC_Chanterelle, ANIM_Chanterelle_Idle)
                 Wait(30 * DT)
@@ -1929,7 +1929,7 @@ EvtScript N(EVS_NpcInteract_ArtistToad) = {
                 Call(SetNpcAnimation, NPC_Chanterelle, ANIM_Chanterelle_Idle)
                 Call(SetNpcAnimation, NPC_Bartender, ANIM_Bartender_Idle)
                 Wait(40 * DT)
-                Call(SetNpcAnimation, NPC_Toad_02, ANIM_Toad_Red_Idle)
+                Call(SetNpcAnimation, NPC_WaiterToad, ANIM_Toad_Red_Idle)
                 Call(SetNpcAnimation, NPC_ArtistToad, ANIM_Musician_Poet_Idle)
                 Call(SetPlayerAnimation, ANIM_Mario1_Idle)
                 Wait(30 * DT)
@@ -1979,19 +1979,19 @@ EvtScript N(EVS_NpcInit_ArtistToad) = {
     End
 };
 
-API_CALLABLE(N(func_8024335C_8554CC)) {
-    if (func_8014AD40() == 0) {
-        return ApiStatus_DONE2;
-    } else {
+API_CALLABLE(N(AwaitSongFinished)) {
+    if (bgm_is_any_song_playing()) {
         return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE2;
     }
 }
 
-EvtScript N(D_8024E23C_8603AC) = {
-    Set(AF_JAN01_TreeDrop_StarPiece, TRUE)
+EvtScript N(EVS_Chanterelle_Sing) = {
+    Set(MF_DivaSinging, TRUE)
     Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_CANT_INTERACT, TRUE)
     Call(InterpNpcYaw, NPC_Chanterelle, 270, 0)
-    Call(SetMusicTrack, 0, SONG_POP_DIVA_SONG, 1, 8)
+    Call(SetMusic, 0, SONG_POP_DIVA_SONG, BGM_VARIATION_1, VOL_LEVEL_FULL)
     ChildThread
         Wait(30)
         Call(SetNpcAnimation, NPC_Chanterelle, ANIM_Chanterelle_Sing)
@@ -2000,11 +2000,11 @@ EvtScript N(D_8024E23C_8603AC) = {
     EndChildThread
     ChildThread
         Wait(30)
-        Call(N(func_8024335C_8554CC))
-        Set(AF_JAN01_TreeDrop_StarPiece, FALSE)
+        Call(N(AwaitSongFinished))
+        Set(MF_DivaSinging, FALSE)
     EndChildThread
     Loop(0)
-        IfEq(AF_JAN01_TreeDrop_StarPiece, FALSE)
+        IfEq(MF_DivaSinging, FALSE)
             BreakLoop
         EndIf
         Wait(1)
@@ -2048,7 +2048,7 @@ EvtScript N(EVS_NpcInteract_Chanterelle) = {
         Call(ContinueSpeech, NPC_SELF, ANIM_Chanterelle_Talk, ANIM_Chanterelle_Idle, 0, MSG_MAC_Port_006E)
     Else
         Call(ContinueSpeech, NPC_SELF, ANIM_Chanterelle_Talk, ANIM_Chanterelle_Idle, 0, MSG_MAC_Port_006F)
-        Exec(N(D_8024E23C_8603AC))
+        Exec(N(EVS_Chanterelle_Sing))
     EndIf
     Return
     End
@@ -2073,7 +2073,7 @@ API_CALLABLE(N(GetTradeEventItemCount)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(EVS_NpcInteract_Toad_03) = {
+EvtScript N(EVS_NpcInteract_TradeEventToad) = {
     Set(LVar0, 7)
     Call(N(CheckTradeEventTime))
     IfEq(LVar0, 0)
@@ -2120,7 +2120,7 @@ EvtScript N(EVS_NpcInteract_Toad_03) = {
 
 EvtScript N(EVS_NpcInit_TradeEventToad) = {
     IfNe(GF_TradingEvent3_Active, FALSE)
-        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_03)))
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_TradeEventToad)))
     Else
         Call(RemoveNpc, NPC_SELF)
     EndIf
@@ -2128,11 +2128,11 @@ EvtScript N(EVS_NpcInit_TradeEventToad) = {
     End
 };
 
-NpcData N(NpcData_Toad_01) = {
+NpcData N(NpcData_WhaleDummy) = {
     .id = NPC_Whale,
     .pos = { NPC_DISPOSE_LOCATION },
     .yaw = 270,
-    .init = &N(EVS_NpcInit_Toad_01),
+    .init = &N(EVS_NpcInit_WhaleDummy),
     .settings = &N(NpcSettings_Whale),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
@@ -2267,7 +2267,7 @@ NpcData N(NpcData_JrTroopa_01)[] = {
     },
 };
 
-NpcData N(NpcData_Toad_04)[] = {
+NpcData N(NpcData_Toads_Outside)[] = {
     {
         .id = NPC_Toad_04,
         .pos = { 320.0f, 0.0f, -300.0f },
@@ -2396,7 +2396,7 @@ NpcData N(NpcData_Toad_04)[] = {
     },
 };
 
-NpcData N(NpcData_Bartender)[] = {
+NpcData N(NpcData_Toads_Inside)[] = {
     {
         .id = NPC_Bartender,
         .pos = { -85.0f, 0.0f, -520.0f },
@@ -2426,7 +2426,7 @@ NpcData N(NpcData_Bartender)[] = {
         .tattle = MSG_NpcTattle_Club64_Bartender,
     },
     {
-        .id = NPC_Toad_02,
+        .id = NPC_WaiterToad,
         .pos = { 30.0f, 0.0f, -570.0f },
         .yaw = 270,
         .init = &N(EVS_NpcInit_Toad_02),
@@ -2572,9 +2572,9 @@ NpcData N(NpcData_ChuckQuizmo) = {
 NpcGroupList N(NpcSetA) = {
     NPC_GROUP(N(NpcData_Fuzzipede)),
     NPC_GROUP(N(NpcData_Fishmael)),
-    NPC_GROUP(N(NpcData_Bartender)),
-    NPC_GROUP(N(NpcData_Toad_04)),
-    NPC_GROUP(N(NpcData_Toad_01)),
+    NPC_GROUP(N(NpcData_Toads_Inside)),
+    NPC_GROUP(N(NpcData_Toads_Outside)),
+    NPC_GROUP(N(NpcData_WhaleDummy)),
     NPC_GROUP(N(NpcData_ChuckQuizmo)),
     {}
 };
@@ -2583,9 +2583,9 @@ NpcGroupList N(NpcSetB) = {
     NPC_GROUP(N(NpcData_Kolorado)),
     NPC_GROUP(N(NpcData_Fuzzipede)),
     NPC_GROUP(N(NpcData_Fishmael)),
-    NPC_GROUP(N(NpcData_Bartender)),
-    NPC_GROUP(N(NpcData_Toad_04)),
-    NPC_GROUP(N(NpcData_Toad_01)),
+    NPC_GROUP(N(NpcData_Toads_Inside)),
+    NPC_GROUP(N(NpcData_Toads_Outside)),
+    NPC_GROUP(N(NpcData_WhaleDummy)),
     {}
 };
 
@@ -2593,8 +2593,8 @@ NpcGroupList N(NpcSetC) = {
     NPC_GROUP(N(NpcData_JrTroopa_01), BTL_KMR_3_FORMATION_05),
     NPC_GROUP(N(NpcData_Kolorado)),
     NPC_GROUP(N(NpcData_Fishmael)),
-    NPC_GROUP(N(NpcData_Bartender)),
-    NPC_GROUP(N(NpcData_Toad_04)),
-    NPC_GROUP(N(NpcData_Toad_01)),
+    NPC_GROUP(N(NpcData_Toads_Inside)),
+    NPC_GROUP(N(NpcData_Toads_Outside)),
+    NPC_GROUP(N(NpcData_WhaleDummy)),
     {}
 };

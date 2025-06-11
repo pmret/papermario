@@ -94,7 +94,7 @@ EvtScript N(EVS_Scene_KammyDefeated) = {
     Call(SpeakToPlayer, NPC_Twink_01, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_CH8_009D)
     Wait(10)
     Call(StopSound, SOUND_LRAW_KPA_ARENA_ACTIVE)
-    Call(SetMusicTrack, 0, SONG_PEACH_WISHES, 0, 8)
+    Call(SetMusic, 0, SONG_PEACH_WISHES, 0, VOL_LEVEL_FULL)
     Call(InterpNpcYaw, NPC_Peach_01, 270, 0)
     Wait(10)
     Call(SpeakToPlayer, NPC_Peach_01, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 5, MSG_CH8_009E)

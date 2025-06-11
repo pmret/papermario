@@ -812,7 +812,7 @@ EvtScript N(EVS_NpcInteract_Merlee) = {
         Return
     EndIf
     Call(ContinueSpeech, -1, ANIM_WorldMerlee_Talk, ANIM_WorldMerlee_Idle, 0, MSG_CH2_00DA)
-    Call(SetMusicTrack, 0, SONG_MERLEE_SPELL, 0, 8)
+    Call(SetMusic, 0, SONG_MERLEE_SPELL, 0, VOL_LEVEL_FULL)
     Call(DisablePartnerAI, 0)
     Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     ExecGetTID(N(EVS_PerformRitual), LVar9)

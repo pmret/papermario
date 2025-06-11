@@ -914,9 +914,9 @@ void filemenu_main_handle_input(MenuPanel* menu) {
         if (originalOutputMode != gGameStatusPtr->soundOutputMode) {
             sfx_play_sound(SOUND_MENU_CHANGE_TAB);
             if (gGameStatusPtr->soundOutputMode != SOUND_OUT_MONO) {
-                audio_set_stereo();
+                snd_set_stereo();
             } else {
-                audio_set_mono();
+                snd_set_mono();
             }
         }
     }

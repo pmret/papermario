@@ -256,7 +256,7 @@ EvtScript N(EVS_NpcIdle_LavaPiranha) = {
         EndIf
     EndLoop
     Call(DisablePlayerInput, TRUE)
-    Call(SetMusicTrack, 0, SONG_LAVA_PIRANHA_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_LAVA_PIRANHA_THEME, 0, VOL_LEVEL_FULL)
     Call(LoadAnimatedModel, VINE_0, Ref(N(AnimModel_MainHeadVine)))
     Call(N(LoadAnimationFromTable), VINE_0, 0)
     Call(PlayModelAnimation, VINE_0, VINE_0_BASE)
@@ -544,7 +544,7 @@ EvtScript N(EVS_NpcDefeat_LavaPiranha) = {
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
             Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, TRUE)
-            Call(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
+            Call(SetMusic, 0, SONG_MT_LAVALAVA, 0, VOL_LEVEL_FULL)
             Call(SetPlayerPos, 125, 25, -35)
             Call(SetNpcPos, NPC_PARTNER, 100, 25, -35)
             Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)

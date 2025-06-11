@@ -21,7 +21,7 @@ EvtScript N(EVS_ToadHouse_SetDialogue) = {
 };
 
 EvtScript N(EVS_ToadHouse_GetInBed) = {
-    Call(SetMusicTrack, 0, SONG_TAKING_REST, 0, 8)
+    Call(SetMusic, 0, SONG_TAKING_REST, 0, VOL_LEVEL_FULL)
     Thread
         Wait(20)
         Call(N(ToadHouse_CamSetFOV), 0, 40)

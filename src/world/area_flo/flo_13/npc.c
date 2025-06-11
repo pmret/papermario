@@ -230,7 +230,7 @@ EvtScript N(EVS_NpcIdle_Lakilester) = {
     Call(AwaitPlayerApproach, 200, 20, 275)
     Call(DisablePlayerInput, TRUE)
     Call(SetNpcPos, NPC_Lakilester, -250, 120, 45)
-    Call(SetMusicTrack, 0, SONG_LAKILESTER_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_LAKILESTER_THEME, 0, VOL_LEVEL_FULL)
     Call(ShowMessageAtScreenPos, MSG_CH6_00A0, 160, 40)
     Call(InterruptUsePartner)
     Call(SetPlayerAnimation, ANIM_Mario1_LookUp)

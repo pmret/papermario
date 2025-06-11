@@ -11,8 +11,8 @@ API_CALLABLE(N(SetScreenBlackFadeAmount)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(MuteAmbience)) {
-    snd_ambient_mute(0, TRUE);
+API_CALLABLE(N(FadeOutAmbience)) {
+    snd_ambient_fade_out(0, TRUE);
     return ApiStatus_DONE2;
 }
 
@@ -49,7 +49,7 @@ EvtScript N(EVS_Scene_LavaShutoff) = {
     Call(SetPanTarget, CAM_DEFAULT, 330, 170, -150)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
-        Call(N(MuteAmbience))
+        Call(N(FadeOutAmbience))
         SetF(LVar2, 1)
         Call(MakeLerp, 0, -20, 100 * DT, EASING_LINEAR)
         Loop(0)

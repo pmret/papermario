@@ -191,7 +191,7 @@ EvtScript N(EVS_FocusCam_OnBowser) = {
 };
 
 EvtScript N(EVS_Scene_BowserAttacks) = {
-    Call(SetMusicTrack, 0, SONG_BOWSER_ATTACKS, 0, 8)
+    Call(SetMusic, 0, SONG_BOWSER_ATTACKS, 0, VOL_LEVEL_FULL)
     Call(DisablePlayerInput, TRUE)
     Call(SetNpcPos, NPC_Peach, 680, 0, -15)
     Call(UseSettingsFrom, CAM_DEFAULT, 600, 0, -15)
@@ -327,7 +327,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     Call(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Idle)
     Wait(30 * DT)
     Call(SetNpcPos, NPC_Bowser_Prop, NPC_DISPOSE_LOCATION)
-    Call(SetMusicTrack, 0, SONG_BOWSER_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_BOWSER_THEME, 0, VOL_LEVEL_FULL)
     Thread
         Wait(5)
         Call(SetNpcJumpscale, NPC_Bowser_Body, Float(0.0))

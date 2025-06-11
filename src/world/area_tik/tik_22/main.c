@@ -5,7 +5,7 @@
 #include "world/common/entity/Pipe.inc.c"
 
 API_CALLABLE(N(ResetTrackVolumes)) {
-    bgm_clear_track_volumes(0, TRACK_VOLS_2);
+    bgm_clear_track_volumes(0, TRACK_VOLS_TIK_SHIVER);
     return ApiStatus_DONE2;
 }
 

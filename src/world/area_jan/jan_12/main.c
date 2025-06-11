@@ -22,7 +22,7 @@ EvtScript N(EVS_Main) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitn, COLLIDER_FLAGS_UPPER_MASK)
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
     Exec(EnterWalk)
-    Call(SetMusicTrack, 0, SONG_DEEP_JUNGLE, 0, 8)
+    Call(SetMusic, 0, SONG_DEEP_JUNGLE, 0, VOL_LEVEL_FULL)
     Call(PlayAmbientSounds, AMBIENT_JUNGLE)
     Return
     End

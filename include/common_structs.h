@@ -14,6 +14,7 @@ typedef ApiStatus(*ApiFunc)(struct Evt*, s32);
 typedef Bytecode EvtScript[];
 
 typedef void NoArgCallback(void*);
+typedef void (*AuCallback)(void);
 
 #define MSG_PTR u8*
 #define IMG_PTR u8*
@@ -626,28 +627,28 @@ typedef struct Worker {
 
 typedef Worker* WorkerList[MAX_WORKERS];
 
-typedef struct MusicSettings {
+typedef struct MusicControlData {
     /* 0x00 */ u16 flags;
     /* 0x02 */ s16 state;
     /* 0x04 */ s32 fadeOutTime;
     /* 0x08 */ s32 fadeInTime;
     /* 0x0C */ s16 fadeStartVolume;
     /* 0x0E */ s16 fadeEndVolume;
-    /* 0x10 */ s32 songID;
+    /* 0x10 */ s32 requestedSongID;
     /* 0x14 */ s32 variation;
-    /* 0x18 */ s32 songName;
+    /* 0x18 */ s32 songName; /// name or handle of currently playing song
     /* 0x1C */ s32 battleSongID;
     /* 0x20 */ s32 battleVariation;
     /* 0x24 */ s32 savedSongID;
     /* 0x28 */ s32 savedVariation;
     /* 0x2C */ s32 savedSongName;
-} MusicSettings; // size = 0x30
+} MusicControlData; // size = 0x30
 
 typedef struct MusicProximityTrigger {
     /* 0x00 */ VecXZf pos;
     /* 0x08 */ f32 innerDist;
     /* 0x0C */ f32 outerDist;
-    /* 0x10 */ s32 unk;
+    /* 0x10 */ s32 mix; /// which branch value to switch to
     /* 0x14 */ s32 manualActivationFlag;
 } MusicProximityTrigger; // size = 0x18
 
@@ -2436,17 +2437,6 @@ typedef struct ImgFXWorkingTexture {
     /* 0x20 */ char unk_20[0x4];
     /* 0x24 */ u8 alphaMultiplier;
 } ImgFXWorkingTexture; // size = 0x25
-
-typedef struct SongUpdateEvent {
-    /* 0x00 */ s32 songName;
-    /* 0x04 */ s32 duration;
-    /* 0x08 */ s32 startVolume;
-    /* 0x0C */ s32 finalVolume;
-    /* 0x10 */ s32 variation;
-    /* 0x14 */ s32 unk14;
-    /* 0x18 */ s32 unk18;
-    /* 0x1C */ s32 unk1C; // may be fake
-} SongUpdateEvent; // size = 0x1C or 0x20
 
 // unfortunately, cant use bitfield for this
 // format: ABCC00DD

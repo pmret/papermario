@@ -183,7 +183,7 @@ EvtScript N(EVS_Main) = {
                 Call(SetPlayerAnimation, ANIM_Mario1_Fallen)
         EndSwitch
     EndThread
-    Call(SetMusicTrack, 0, SONG_GAME_OVER, 0, 8)
+    Call(SetMusic, 0, SONG_GAME_OVER, 0, VOL_LEVEL_FULL)
     Call(ClearAmbientSounds, 0)
     Thread
         Wait(200 * DT)

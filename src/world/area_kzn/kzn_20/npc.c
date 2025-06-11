@@ -174,7 +174,7 @@ EvtScript N(EVS_KoloradoBurned_PlayerReaction) = {
 };
 
 API_CALLABLE(N(func_80240A68_C96998)) {
-    snd_ambient_mute(0, TRUE);
+    snd_ambient_fade_out(0, TRUE);
     return ApiStatus_DONE2;
 }
 
@@ -252,7 +252,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                 EndThread
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_CH5_010C)
                 Set(AF_KZN_RumblingIntensified, TRUE)
-                Call(SetMusicTrack, 0, SONG_VOLCANO_ESCAPE, 0, 8)
+                Call(SetMusic, 0, SONG_VOLCANO_ESCAPE, 0, VOL_LEVEL_FULL)
                 Wait(20)
                 Thread
                     Call(SetPlayerAnimation, ANIM_Mario1_Flail)

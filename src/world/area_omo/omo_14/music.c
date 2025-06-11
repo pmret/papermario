@@ -1,7 +1,7 @@
 #include "omo_14.h"
 
 EvtScript N(EVS_SetupMusic) = {
-    Call(SetMusicTrack, 0, SONG_SHY_GUY_TOYBOX, 0, 8)
+    Call(SetMusic, 0, SONG_SHY_GUY_TOYBOX, 0, VOL_LEVEL_FULL)
     Return
     End
 };

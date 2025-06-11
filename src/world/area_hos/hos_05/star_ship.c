@@ -95,9 +95,9 @@ EvtScript N(EVS_Starship_Depart) = {
     EndIf
     Wait(20)
     IfLt(GB_StoryProgress, STORY_UNUSED_0000005D)
-        Call(SetMusicTrack, 0, SONG_STARSHIP_THEME, 0, 8)
+        Call(SetMusic, 0, SONG_STARSHIP_THEME, 0, VOL_LEVEL_FULL)
     Else
-        Call(SetMusicTrack, 0, SONG_STARSHIP_THEME, 1, 8)
+        Call(SetMusic, 0, SONG_STARSHIP_THEME, BGM_VARIATION_1, VOL_LEVEL_FULL)
     EndIf
     Thread
         Wait(25)
@@ -193,7 +193,7 @@ EvtScript N(EVS_EnterStarship) = {
         Call(EnablePartnerAI)
     EndThread
     Call(DisablePlayerPhysics, FALSE)
-    Call(SetMusicTrack, 0, SONG_STAR_SANCTUARY, 0, 8)
+    Call(SetMusic, 0, SONG_STAR_SANCTUARY, 0, VOL_LEVEL_FULL)
     Call(ResetCam, CAM_DEFAULT, Float(1.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.5))
     Call(DisablePlayerInput, FALSE)

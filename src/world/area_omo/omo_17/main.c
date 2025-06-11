@@ -21,7 +21,7 @@ EvtScript N(EVS_Main) = {
     Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     ExecWait(N(EVS_SetupGizmos))
-    Call(SetMusicTrack, 0, SONG_SHY_GUY_TOYBOX, 0, 8)
+    Call(SetMusic, 0, SONG_SHY_GUY_TOYBOX, 0, VOL_LEVEL_FULL)
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseRange(omo_17_ENTRY_4, omo_17_ENTRY_5)

@@ -189,7 +189,7 @@ EvtScript N(EVS_Scene_KammyUnmasksPeach) = {
     Call(DisablePlayerInput, TRUE)
     Call(DisablePlayerPhysics, TRUE)
     Call(DisablePartnerAI, 0)
-    Call(SetMusicTrack, 0, SONG_KAMMY_KOOPA_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_KAMMY_KOOPA_THEME, 0, VOL_LEVEL_FULL)
     Call(SetNpcVar, NPC_Koopatrol_01, 1, 0)
     Call(SetNpcFlagBits, NPC_Koopatrol_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     Call(SetNpcPos, NPC_Kammy, -50, 0, -50)

@@ -1101,7 +1101,7 @@ EvtScript N(EVS_ManageBaking) = {
     Call(RemoveItemEntity, AB_KKJ19_CookwareItemIdx)
     ExecGetTID(N(EVS_UpdatePeachMixingAnimations), LVarA)
     Wait(10 * DT)
-    Call(SetMusicTrack, 0, SONG_STIRRING_CAKE, 0, 8)
+    Call(SetMusic, 0, SONG_STIRRING_CAKE, 0, VOL_LEVEL_FULL)
     Call(PlaySound, SOUND_GENERAL_WHISTLE)
     Thread
         Call(AdjustCam, CAM_DEFAULT, Float(0.2 / DT), 0, 250, Float(17.0), Float(-7.0))

@@ -51,7 +51,7 @@ API_CALLABLE(N(MonitorMusicProximityTrigger)) {
     }
 
     if (cond) {
-        bgm_adjust_proximity(0, trigger->unk, script->functionTemp[1]);
+        bgm_adjust_proximity(0, trigger->mix, script->functionTemp[1]);
     }
 
     return ApiStatus_BLOCK;

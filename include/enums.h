@@ -533,14 +533,17 @@ enum SoundIDBits {
     SOUND_ID_SECTION_MASK           = 0x00000300, // corresponds to sections 0-3 for indices < 0xC0 and 4-7 for those above
     SOUND_ID_INDEX_MASK             = 0x000000FF,
     SOUND_ID_UNK_INDEX_MASK         = 0x000001FF, // indices for the special large section
+
+    SOUND_ID_UPPER_MASK             = 0x03FF0000,
+    SOUND_ID_TYPE_MASK              = 0x70000000,
+    SOUND_ID_TYPE_FLAG              = 0x80000000,
 };
 
 enum SoundType {
-    SOUND_TYPE_SPECIAL              = 0x80000000,
-    SOUND_TYPE_LOOPING              = 0, // 0x80000000 (with SOUND_TYPE_SPECIAL)
-    SOUND_TYPE_EXIT_DOOR            = 1, // 0x90000000 (with SOUND_TYPE_SPECIAL)
-    SOUND_TYPE_ROOM_DOOR            = 2, // 0xA0000000 (with SOUND_TYPE_SPECIAL)
-    SOUND_TYPE_ALTERNATING          = 3, // 0xB0000000 (with SOUND_TYPE_SPECIAL)
+    SOUND_TYPE_LOOPING              = 0, // 0x80000000 (with SOUND_ID_TYPE_FLAG)
+    SOUND_TYPE_EXIT_DOOR            = 1, // 0x90000000 (with SOUND_ID_TYPE_FLAG)
+    SOUND_TYPE_ROOM_DOOR            = 2, // 0xA0000000 (with SOUND_ID_TYPE_FLAG)
+    SOUND_TYPE_ALTERNATING          = 3, // 0xB0000000 (with SOUND_ID_TYPE_FLAG)
 };
 
 enum SoundIDs {
@@ -1755,9 +1758,11 @@ enum SoundTriggers {
 typedef enum AuResult {
     AU_RESULT_OK                        = 0,
     AU_ERROR_1                          = 1,
-    AU_AMBIENCE_ERROR_1                 = 1,
+    AU_AMBIENCE_STOP_ERROR_1            = 1,
+    AU_AMBIENCE_STOP_ERROR_2            = 2,
+    AU_AMBIENCE_ERROR_PLAYER_BUSY       = 1, // player already has an mseq playing
     AU_ERROR_SONG_NOT_PLAYING           = 2, // player not found for songName
-    AU_AMBIENCE_ERROR_2                 = 2,
+    AU_AMBIENCE_ERROR_MSEQ_NOT_FOUND    = 2, // mseq not found
     AU_ERROR_NULL_SONG_NAME             = 3, // songName is NULL
     AU_AMBIENCE_ERROR_3                 = 3,
     AU_ERROR_INVALID_SONG_DURATION      = 4, // duration out of bounds: (250,10000)
@@ -1786,15 +1791,36 @@ enum {
 };
 
 typedef enum MusicTrackVols {
-    TRACK_VOLS_0            = 0,
-    TRACK_VOLS_1            = 1,
-    TRACK_VOLS_2            = 2,
-    TRACK_VOLS_3            = 3,
+    TRACK_VOLS_JAN_FULL     = 0,
+    TRACK_VOLS_UNUSED_1     = 1,
+    TRACK_VOLS_TIK_SHIVER   = 2,
+    TRACK_VOLS_UNUSED_3     = 3,
     TRACK_VOLS_KPA_OUTSIDE  = 4,
     TRACK_VOLS_KPA_1        = 5,
     TRACK_VOLS_KPA_2        = 6,
     TRACK_VOLS_KPA_3        = 7
 } MusicTrackVols;
+
+typedef enum BGMVariation {
+    BGM_VARIATION_0                 = 0,
+    BGM_VARIATION_1                 = 1,
+    BGM_VARIATION_2                 = 2,
+    BGM_VARIATION_3                 = 3,
+} BGMVariation;
+
+/// Perceptual volume levels, 0 (mute) to 8 (max).
+/// Only attenuates, never amplifies.
+typedef enum VolumeLevels {
+    VOL_LEVEL_MUTE      = 0,
+    VOL_LEVEL_1         = 1,
+    VOL_LEVEL_2         = 2,
+    VOL_LEVEL_3         = 3,
+    VOL_LEVEL_4         = 4,
+    VOL_LEVEL_5         = 5,
+    VOL_LEVEL_6         = 6,
+    VOL_LEVEL_7         = 7,
+    VOL_LEVEL_FULL      = 8,
+} VolumeLevels;
 
 enum Cams {
     CAM_DEFAULT      = 0,
@@ -1881,18 +1907,20 @@ enum ActorPartTargetFlags {
 enum AmbientSounds {
     AMBIENT_SPOOKY          = 0,
     AMBIENT_WIND            = 1,
-    AMBIENT_BEACH           = 2,
+    AMBIENT_SEA             = 2,
     AMBIENT_JUNGLE          = 3,
     AMBIENT_LAVA_1          = 4,
     AMBIENT_LAVA_2          = 5,
-    AMBIENT_SILENCE         = 6,
+    AMBIENT_LAVA_FADE_IN    = 6,
     AMBIENT_LAVA_3          = 7,
     AMBIENT_LAVA_4          = 8,
     AMBIENT_LAVA_5          = 9,
     AMBIENT_LAVA_6          = 10,
     AMBIENT_LAVA_7          = 11,
     AMBIENT_BIRDS           = 12,
-    AMBIENT_SEA             = 13,
+    AMBIENT_UNUSED_13       = 13, // copy of AMBIENT_SEA, available for replacement
+    AMBIENT_UNUSED_14       = 14, // copy of AMBIENT_SEA, available for replacement
+    AMBIENT_UNUSED_15       = 15, // copy of AMBIENT_SEA, available for replacement
     AMBIENT_RADIO           = 16, // radio songs for nok
     // the following 4 IDs are reserved for additional radio songs,
     // and no more are expected to follow after that
@@ -4656,15 +4684,6 @@ enum ProjectileHitboxAttackStates {
     PROJECTILE_HITBOX_STATE_DONE        = 100
 };
 
-enum MusicSettingsFlags {
-    MUSIC_SETTINGS_FLAG_1                 = 0x00000001,
-    MUSIC_SETTINGS_FLAG_ENABLE_PROXIMITY_MIX   = 0x00000002,
-    MUSIC_SETTINGS_FLAG_4                 = 0x00000004,
-    MUSIC_SETTINGS_FLAG_8                 = 0x00000008,
-    MUSIC_SETTINGS_FLAG_10                = 0x00000010,
-    MUSIC_SETTINGS_FLAG_20                = 0x00000020,
-};
-
 // the lower byte of ColliderFlags
 enum SurfaceType {
     SURFACE_TYPE_DEFAULT            = 0,
@@ -6403,6 +6422,12 @@ enum WindowStyles {
     WINDOW_STYLE_21     = 21,
     WINDOW_STYLE_22     = 22,
     WINDOW_STYLE_MAX    = 22,
+};
+
+enum ThreadIDs {
+    THREAD_ID_PI        = 0,
+    THREAD_ID_CRASH     = 2,
+    THREAD_ID_AUDIO     = 3, // also = NU_MAIN_THREAD_ID
 };
 
 // LANGUAGE_DEFAULT as 0 will be the first index into several arrays containing data based on the current language.

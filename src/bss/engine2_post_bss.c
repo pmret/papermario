@@ -16,7 +16,7 @@ typedef struct {
     /* 0xC */ s32 unkC;
 } AmbientSoundSettings;
 
-BSS MusicSettings gMusicSettings[2];
+BSS MusicControlData gMusicControlData[2];
 BSS IMG_BIN D_80159B50[0x200];
 BSS Window gWindows[64];
 BSS CollisionStatus gCollisionStatus;

@@ -196,7 +196,7 @@ EvtScript N(EVS_ManageSecretPassage) = {
     Wait(1)
     Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
     Set(GB_StoryProgress, STORY_CH2_SOLVED_ARTIFACT_PUZZLE)
-    Call(SetMusicTrack, 0, SONG_RUINS_BASEMENT, 0, 8)
+    Call(SetMusic, 0, SONG_RUINS_BASEMENT, 0, VOL_LEVEL_FULL)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2186, COLLIDER_FLAGS_UPPER_MASK)
     Call(DisablePlayerPhysics, FALSE)
     Call(DisablePlayerInput, FALSE)

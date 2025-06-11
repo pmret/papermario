@@ -39,7 +39,7 @@ EvtScript N(EVS_Main) = {
     SetUP_CAMERA_NO_LEAD()
     Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
     Call(N(SpawnSunEffect))
-    Call(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
+    Call(SetMusic, 0, SONG_DRY_DRY_DESERT, 0, VOL_LEVEL_FULL)
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
     Exec(EnterWalk)
     Return

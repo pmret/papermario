@@ -253,7 +253,7 @@ EvtScript N(EVS_Exit_Beanstalk) = {
         Call(SetNpcJumpscale, NPC_PARTNER, Float(0.0))
         Call(NpcJump0, NPC_PARTNER, LVarC, LVarD, LVarE, 5)
         Call(PlaySound, SOUND_FLO_RIDE_BEANSTALK_UP_LOOP)
-        Call(SetMusicTrack, 0, SONG_MAGIC_BEANSTALK, 1, 8)
+        Call(SetMusic, 0, SONG_MAGIC_BEANSTALK, BGM_VARIATION_1, VOL_LEVEL_FULL)
         Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
         Call(SetPlayerAnimation, ANIM_Mario1_Walk)
         Call(N(GetPlayerAngles), LVar3, LVar4)

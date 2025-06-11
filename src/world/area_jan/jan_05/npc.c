@@ -188,7 +188,7 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
     Add(LVar0, GF_JAN10_SavedYoshi)
     Add(LVar0, GF_JAN11_SavedYoshi)
     IfEq(LVar0, 5)
-        Call(SetMusicTrack, 0, SONG_YOSHI_KIDS_FOUND, 0, 8)
+        Call(SetMusic, 0, SONG_YOSHI_KIDS_FOUND, 0, VOL_LEVEL_FULL)
         Set(GB_StoryProgress, STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED)
         Call(SetPlayerAnimation, ANIM_Mario1_ThumbsUp)
         Wait(120)

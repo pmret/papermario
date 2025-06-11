@@ -14,7 +14,7 @@ EvtScript N(EVS_SetupMusic) = {
             Call(FadeOutMusic, 0, 500)
         EndCaseGroup
         CaseDefault
-            Call(SetMusicTrack, 0, SONG_MARIO_BROS_HOUSE, 0, 8)
+            Call(SetMusic, 0, SONG_MARIO_BROS_HOUSE, 0, VOL_LEVEL_FULL)
     EndSwitch
     Thread
         Call(GetEntryID, LVar0)
@@ -31,7 +31,7 @@ EvtScript N(EVS_SetupMusic) = {
 };
 
 EvtScript N(EVS_PlayRestingSong) = {
-    Call(SetMusicTrack, 0, SONG_TAKING_REST, 0, 8)
+    Call(SetMusic, 0, SONG_TAKING_REST, 0, VOL_LEVEL_FULL)
     Return
     End
 };

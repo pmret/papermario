@@ -2,9 +2,9 @@
 
 EvtScript N(EVS_SetupMusic) = {
     IfLt(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-        Call(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
+        Call(SetMusic, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, VOL_LEVEL_FULL)
     Else
-        Call(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
+        Call(SetMusic, 0, SONG_FLOWER_FIELDS_SUNNY, 0, VOL_LEVEL_FULL)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH6_FILLED_SPRING_WITH_WATER)
         Call(PlaySound, SOUND_LOOP_FLO_WATER_FLOW_2)

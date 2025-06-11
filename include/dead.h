@@ -124,7 +124,7 @@
 #define dma_copy dead_dma_copy
 #define create_worker_scene dead_create_worker_scene
 #define GetEntryID dead_GetEntryID
-#define SetMusicTrack dead_SetMusicTrack
+#define SetMusic dead_SetMusic
 #define FadeInMusic dead_FadeInMusic
 #define RandInt dead_RandInt
 #define PlayEffect_impl dead_PlayEffect_impl
@@ -309,7 +309,7 @@
 #define SetTexPanner dead_SetTexPanner
 #define DismissEffect dead_DismissEffect
 #define Entity_Chest dead_Entity_Chest
-#define snd_ambient_mute dead_snd_ambient_mute
+#define snd_ambient_fade_out dead_snd_ambient_fade_out
 #define GetPlayerAnimation dead_GetPlayerAnimation
 #define SetPlayerSpeed dead_SetPlayerSpeed
 #define SetItemPos dead_SetItemPos

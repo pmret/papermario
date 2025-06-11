@@ -6,7 +6,7 @@ EvtScript N(EVS_SetupMusic) = {
         CaseOrEq(sbk_02_ENTRY_6)
         CaseOrEq(sbk_02_ENTRY_7)
         CaseDefault
-            Call(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
+            Call(SetMusic, 0, SONG_DRY_DRY_DESERT, 0, VOL_LEVEL_FULL)
         EndCaseGroup
     EndSwitch
     Return

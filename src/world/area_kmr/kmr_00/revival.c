@@ -332,7 +332,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     Wait(140 * DT)
     Call(N(func_80240584_8AC514))
     Wait(30 * DT)
-    Call(SetMusicTrack, 0, SONG_STAR_SPIRIT_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_STAR_SPIRIT_THEME, 0, VOL_LEVEL_FULL)
     Thread
         Call(N(func_80240000_8ABF90), 50, 50, 50, 0, 0, 0, 50 * DT)
     EndThread

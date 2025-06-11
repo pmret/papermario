@@ -21,7 +21,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
         EndIf
     Call(InterruptUsePartner)
     Call(DisablePlayerInput, TRUE)
-    Call(SetMusicTrack, 0, SONG_JR_TROOPA_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_JR_TROOPA_THEME, 0, VOL_LEVEL_FULL)
     Call(SpeakToPlayer, NPC_JrTroopa, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 0, MSG_CH7_00D8)
     Call(SetNpcJumpscale, NPC_JrTroopa, Float(1.0))
     Call(NpcJump0, NPC_JrTroopa, 520, 0, -68, 20 * DT)
