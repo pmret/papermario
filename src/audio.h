@@ -107,8 +107,11 @@ typedef u8* WaveData;
 #define MUS_QUEUE_SIZE 16
 #define SFX_QUEUE_SIZE 16
 
-#define AU_SEMITONE 100 // cents
-#define AU_OCTAVE (12 * AU_SEMITONE)
+// semitone pitch interval in cents
+#define AU_SEMITONE_CENTS 100
+
+// octave pitch interval in cents
+#define AU_OCTAVE_CENTS (12 * AU_SEMITONE_CENTS)
 
 #define ENV_VOL_MAX     0x80    // for 7-bit volumes, 128 (1 << 7) represents full volume
 #define ENV_VOL_SHIFT   7       // Shift required to divide by 128 (normalize 7-bit volumes after a multiply)
@@ -444,7 +447,7 @@ typedef union SeqArgs {
         u8 value;
     } TrackVolume;
     struct { // cmd ED
-        s8 cent;
+        s8 semitone;
     } InstrumentCoarseTune;
     struct { // cmd EE
         s8 cent;

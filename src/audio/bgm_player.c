@@ -1652,7 +1652,7 @@ void au_BGMCmd_EC_TrackVolume(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void au_BGMCmd_ED_InstrumentCoarseTune(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->insCoarseDetune = player->seqCmdArgs.InstrumentCoarseTune.cent * 100;
+    track->insCoarseDetune = player->seqCmdArgs.InstrumentCoarseTune.semitone * AU_SEMITONE_CENTS;
 }
 
 void au_BGMCmd_EE_InstrumentFineTune(BGMPlayer* player, BGMPlayerTrack* track) {
@@ -1720,7 +1720,7 @@ void au_BGMCmd_F5_UseInstrument(BGMPlayer* player, BGMPlayerTrack* track) {
     track->insVolume = volume;
     track->insPan = instrument->pan & 0x7F;
     track->insReverb = instrument->reverb & 0x7F;
-    track->insCoarseDetune = instrument->coarseTune * 100;
+    track->insCoarseDetune = instrument->coarseTune * AU_SEMITONE_CENTS;
     track->insFineDetune = instrument->fineTune;
     track->changed.all |= 0x10101; // volume, pan, and reverb
 }
@@ -2014,10 +2014,10 @@ void au_bgm_set_playback_rate(BGMPlayer* player, f32 rate) {
 }
 
 void au_bgm_player_set_detune(BGMPlayer* player, s32 detune) {
-    if (detune > AU_OCTAVE) {
-        detune = AU_OCTAVE;
-    } else if (detune < -2 * AU_OCTAVE) {
-        detune = -2 * AU_OCTAVE;
+    if (detune > AU_OCTAVE_CENTS) {
+        detune = AU_OCTAVE_CENTS;
+    } else if (detune < -2 * AU_OCTAVE_CENTS) {
+        detune = -2 * AU_OCTAVE_CENTS;
     }
 
     player->detune = detune;

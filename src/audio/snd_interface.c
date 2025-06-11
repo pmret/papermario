@@ -221,10 +221,10 @@ void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
         pan = AU_PAN_MAX;
     }
 
-    if (pitchShift > 2 * AU_OCTAVE) {
-        pitchShift = 2 * AU_OCTAVE;
-    } else if (pitchShift < -2 * AU_OCTAVE) {
-        pitchShift = -2 * AU_OCTAVE;
+    if (pitchShift > 2 * AU_OCTAVE_CENTS) {
+        pitchShift = 2 * AU_OCTAVE_CENTS;
+    } else if (pitchShift < -2 * AU_OCTAVE_CENTS) {
+        pitchShift = -2 * AU_OCTAVE_CENTS;
     }
 
     au_sfx_enqueue_event(soundManager, soundID, vol, pitchShift, pan);
@@ -257,10 +257,10 @@ void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift)
         pan = AU_PAN_MAX;
     }
 
-    if (pitchShift > 2 * AU_OCTAVE) {
-        pitchShift = 2 * AU_OCTAVE;
-    } else if (pitchShift < -2 * AU_OCTAVE) {
-        pitchShift = -2 * AU_OCTAVE;
+    if (pitchShift > 2 * AU_OCTAVE_CENTS) {
+        pitchShift = 2 * AU_OCTAVE_CENTS;
+    } else if (pitchShift < -2 * AU_OCTAVE_CENTS) {
+        pitchShift = -2 * AU_OCTAVE_CENTS;
     }
 
     au_sfx_enqueue_event(soundManager, soundID | SOUND_ID_ADJUST, vol, pitchShift, pan);
