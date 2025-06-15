@@ -49,7 +49,7 @@ EvtScript N(EVS_Scene_ShowInvitation) = {
     Call(SetCamDistance, CAM_DEFAULT, 775)
     Call(SetCamPitch, CAM_DEFAULT, 20, -19)
     Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
-    Call(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
+    Call(N(SetModelTintMode), APPLY_TINT_BG, nullptr, ENV_TINT_REMAP)
     Call(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
     Call(N(func_80240678_AACEA8), 200, 200, 200, 40, 40, 40)
     Call(N(func_802406E0_AACF10))

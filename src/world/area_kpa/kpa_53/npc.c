@@ -10,7 +10,7 @@ API_CALLABLE(N(UpdateFollowerPosition)) {
     Npc* npc = resolve_npc(script, npcID);
     u32 animID;
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 

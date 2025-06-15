@@ -30,13 +30,13 @@ EffectInstance* ice_shard_main(
     bp.update = ice_shard_update;
     bp.renderScene = ice_shard_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_ICE_SHARD;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.iceShard = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.iceShard != NULL);
+    ASSERT(effect->data.iceShard != nullptr);
 
     data->type = type;
     data->lifetime = 0;

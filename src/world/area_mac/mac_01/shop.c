@@ -9,10 +9,10 @@ API_CALLABLE(N(HideRowfBadge)) {
 
 API_CALLABLE(N(SetRowfBadgeBought)) {
     s32 itemIndex = evt_get_variable(script, *script->ptrReadPos);
-    s32* buyFlags = (s32*) evt_get_variable(NULL, MV_RowfShopBuyFlags);
+    s32* buyFlags = (s32*) evt_get_variable(nullptr, MV_RowfShopBuyFlags);
 
     set_item_entity_flags(gGameStatusPtr->shopItemEntities[itemIndex].index, ITEM_ENTITY_FLAG_HIDDEN);
-    evt_set_variable(NULL, buyFlags[itemIndex], TRUE);
+    evt_set_variable(nullptr, buyFlags[itemIndex], TRUE);
     return ApiStatus_DONE2;
 }
 
@@ -40,8 +40,8 @@ API_CALLABLE(N(CreateShopInventory)) {
     if (!evt_get_variable(script, GF_MAC01_RowfBadgesChosen)) {
         available = 0;
         for (i = 0; i < (u32) ARRAY_COUNT(options); i++) {
-            s32 isUnlocked = evt_get_variable(NULL, varBaseUnlocked + i);
-            s32 hasBought = evt_get_variable(NULL, varBaseHasBought + i);
+            s32 isUnlocked = evt_get_variable(nullptr, varBaseUnlocked + i);
+            s32 hasBought = evt_get_variable(nullptr, varBaseHasBought + i);
             if ((isUnlocked == 1) && (hasBought == 0)) {
                 options[available++] = i;
             }

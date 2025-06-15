@@ -39,7 +39,7 @@ API_CALLABLE(N(CheckDripCollisionWithNPC)) {
     for (i = 0; i < MAX_NPCS; i++) {
         Npc* npc = get_npc_safe(i);
 
-        if (npc != NULL) {
+        if (npc != nullptr) {
             xDiff = npc->pos.x - model->center.x;
             zDiff = npc->pos.z - model->center.z;
             yVal = npc->pos.y + npc->collisionHeight - 1.5f - model->center.y;

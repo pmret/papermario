@@ -83,7 +83,7 @@ EvtScript N(EVS_Main) = {
         Exec(N(EVS_UpdateTexturePan))
     EndThread
     Call(SetModelCustomGfx, MODEL_o685, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
-    Call(SetCustomGfx, CUSTOM_GFX_0, Ref(N(setup_gfx_candle_lights)), NULL)
+    Call(SetCustomGfx, CUSTOM_GFX_0, Ref(N(setup_gfx_candle_lights)), nullptr)
     Exec(N(EVS_SetupMusic))
     BindTrigger(Ref(N(EVS_ExitDoors_kkj_12_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilit1, 1, 0)
     BindTrigger(Ref(N(EVS_ExitDoors_kkj_22_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilit2, 1, 0)

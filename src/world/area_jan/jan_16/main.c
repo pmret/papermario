@@ -143,7 +143,7 @@ EvtScript N(EVS_Main) = {
     Exec(N(EVS_SetupBushes))
     Exec(N(EVS_SpawnButterflies))
     Call(N(SetModelTintMode), APPLY_TINT_MODELS, -1, 3)
-    Call(N(SetModelTintMode), APPLY_TINT_BG, NULL, 3)
+    Call(N(SetModelTintMode), APPLY_TINT_BG, nullptr, 3)
     Call(N(SetModelTintParams), ENV_TINT_REMAP, 255, 255, 255, 0, 0, 25, 0, 0, 0)
     Return
     End

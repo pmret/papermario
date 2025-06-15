@@ -125,7 +125,7 @@ API_CALLABLE(N(func_80240CF8_B21238)) {
             break;
         case 1:
             partner = get_npc_safe(NPC_PARTNER);
-            if (partner == NULL) {
+            if (partner == nullptr) {
                 return ApiStatus_DONE2;
             }
             partner->pos.x = x;

@@ -3,7 +3,7 @@
 
 API_CALLABLE(N(func_80240010_907A40)) {
     set_curtain_scale_goal(2.0f);
-    set_curtain_draw_callback(NULL);
+    set_curtain_draw_callback(nullptr);
     return ApiStatus_DONE2;
 }
 

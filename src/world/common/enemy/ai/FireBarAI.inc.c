@@ -110,7 +110,7 @@ API_CALLABLE(N(FireBarAI_Main)) {
         playerStatus->lastGoodPos.y = playerStatus->pos.y;
         playerStatus->lastGoodPos.z = playerStatus->pos.z;
         data->soundIndex = 0;
-        if (data->callback != NULL) {
+        if (data->callback != nullptr) {
             data->callback(data, FIRE_BAR_HIT);
         }
     } else if ((tempPlayerDist < distToNpc) && !(data->flags & 2)
@@ -119,7 +119,7 @@ API_CALLABLE(N(FireBarAI_Main)) {
             if (data->lastDeltaYaw < 0.0f) {
                 if (deltaYaw > 0.0f) {
                     data->soundIndex++;
-                    if (data->callback != NULL) {
+                    if (data->callback != nullptr) {
                         data->callback(data, FIRE_BAR_SPEED_UP);
                     }
             }
@@ -127,14 +127,14 @@ API_CALLABLE(N(FireBarAI_Main)) {
         } else if (data->lastDeltaYaw > 0.0f) {
             if (deltaYaw < 0.0f) {
                 data->soundIndex++;
-                if (data->callback != NULL) {
+                if (data->callback != nullptr) {
                     data->callback(data, FIRE_BAR_SPEED_UP);
                 }
             }
         }
     }
     data->lastDeltaYaw = deltaYaw;
-    if (data->callback != NULL) {
+    if (data->callback != nullptr) {
         data->callback(data, FIRE_BAR_SLOW_DOWN);
     }
     return ApiStatus_BLOCK;

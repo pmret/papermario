@@ -29,14 +29,14 @@ EffectInstance* ice_pillar_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32 ar
     effectBp.update = ice_pillar_update;
     effectBp.renderScene = ice_pillar_render;
     effectBp.unk_00 = 0;
-    effectBp.renderUI = NULL;
+    effectBp.renderUI = nullptr;
     effectBp.effectID = EFFECT_ICE_PILLAR;
 
     effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
 
     data = effect->data.icePillar = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(data != NULL);
+    ASSERT(data != nullptr);
 
     data->unk_00 = arg0;
     data->lifeTime = 0;

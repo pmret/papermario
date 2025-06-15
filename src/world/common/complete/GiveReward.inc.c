@@ -3,14 +3,14 @@
 
 #include "common.h"
 
-static s32** N(varStash) = NULL;
+static s32** N(varStash) = nullptr;
 
 // TODO extracted from world/common/todo/StashVars to reduce warnings (for now)
 API_CALLABLE(N(StashVars)) {
-    //static s32** varTable = NULL;
+    //static s32** varTable = nullptr;
     s32 i;
 
-    if (N(varStash) == NULL) {
+    if (N(varStash) == nullptr) {
         N(varStash) = heap_malloc(sizeof(script->varTable));
 
         for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
@@ -22,7 +22,7 @@ API_CALLABLE(N(StashVars)) {
         }
 
         heap_free(N(varStash));
-        N(varStash) = NULL;
+        N(varStash) = nullptr;
     }
 
     return ApiStatus_DONE2;

@@ -58,7 +58,7 @@ EffectInstance* recover_main(s32 type, f32 posX, f32 posY, f32 posZ, s32 duratio
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     part = effect->data.recover = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.recover != NULL);
+    ASSERT(effect->data.recover != nullptr);
 
     part->type = type;
     part->pos.x = posX;

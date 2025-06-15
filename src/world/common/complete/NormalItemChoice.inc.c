@@ -46,7 +46,7 @@ API_CALLABLE(N(BuildItemChoiceList)) {
     s32* allowedItemList = (s32*)evt_get_variable(script, *args++);
     s32 i;
 
-    if (allowedItemList != NULL) {
+    if (allowedItemList != nullptr) {
         for (i = 0; allowedItemList[i] != ITEM_NONE; i++) {
             N(ItemChoice_List)[i] = allowedItemList[i];
         }
@@ -93,7 +93,7 @@ EvtScript N(EVS_ChooseItem) = {
 };
 
 #define EVT_CHOOSE_ANY_CONSUMABLE(unkMode) \
-    Set(LVar0, NULL) \
+    Set(LVar0, nullptr) \
     Set(LVar1, unkMode) \
     ExecWait(N(EVS_ChooseItem))
 

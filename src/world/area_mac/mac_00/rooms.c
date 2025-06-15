@@ -205,7 +205,7 @@ EvtScript N(EVS_SetupRooms) = {
         PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_Shop)),
         Ref(N(EVS_SetWallRot_Shop)),
-        NULL,
+        nullptr,
         Ref(N(EVS_RoomListener_Shop)),
         COLLIDER_deilit5, COLLIDER_deilit5u, MODEL_omise, Ref(N(InteriorNPCs_Shop)))
     // the dojo
@@ -224,7 +224,7 @@ EvtScript N(EVS_SetupRooms) = {
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_Waterfront)),
         Ref(N(EVS_SetWallRot_Waterfront)),
-        NULL,
+        nullptr,
         Ref(N(EVS_RoomListener_Waterfront)),
         COLLIDER_deilit4,
         COLLIDER_deilit4u,

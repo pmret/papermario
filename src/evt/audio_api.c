@@ -33,14 +33,14 @@ API_CALLABLE(PollMusicEvents) {
             }
             cur++;
         }
-        /// @bug? can cur ever be NULL here?
+        /// @bug? can cur ever be nullptr here?
         /// condition should probably be if (cur->musicEventID != -1)
-        if (cur != NULL) {
+        if (cur != nullptr) {
             EvtScript* newSource = cur->scripts[scriptSelector];
-            if (RunningMusicEvents[musicEventID] != NULL) {
+            if (RunningMusicEvents[musicEventID] != nullptr) {
                 kill_script_by_ID(RunningMusicEventIDs[musicEventID]);
             }
-            if (newSource != NULL) {
+            if (newSource != nullptr) {
                 Evt* newEvt = start_script(newSource, EVT_PRIORITY_1, 0);
                 RunningMusicEvents[musicEventID] = newEvt;
                 RunningMusicEventIDs[musicEventID] = newEvt->id;
@@ -60,7 +60,7 @@ API_CALLABLE(RegisterMusicEvents) {
     MusicEventList = (MusicEvent*) evt_get_variable(script, *args++);
 
     for (i = 0; i < ARRAY_COUNT(RunningMusicEvents); i++) {
-        RunningMusicEvents[i] = NULL;
+        RunningMusicEvents[i] = nullptr;
         RunningMusicEventIDs[i] = 0;
     }
 

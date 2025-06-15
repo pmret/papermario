@@ -24,7 +24,7 @@ void big_snowflakes_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.init = big_snowflakes_init;
     bp.update = big_snowflakes_update;
     bp.renderScene = big_snowflakes_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_BIG_SNOWFLAKES;
 
     effect = create_effect_instance(&bp);
@@ -33,7 +33,7 @@ void big_snowflakes_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     data = general_heap_malloc(effect->numParts * sizeof(*data));
     effect->data.bigSnowflakes = data;
 
-    ASSERT(data != NULL);
+    ASSERT(data != nullptr);
 
     mem_clear(data, numParts * sizeof(*data));
     data->unk_00 = arg0;

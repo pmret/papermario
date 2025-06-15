@@ -341,7 +341,7 @@ API_CALLABLE(RestorePreDefeatState) {
 }
 
 API_CALLABLE(func_80261388) {
-    s32 partnerActorExists = gBattleStatus.partnerActor != NULL;
+    s32 partnerActorExists = gBattleStatus.partnerActor != nullptr;
 
     script->varTable[0] = FALSE;
     if (partnerActorExists) {

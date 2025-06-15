@@ -56,7 +56,7 @@ API_CALLABLE(N(BlockForever)) {
 #include "../common/IntroMathUtil.inc.c"
 
 f32 N(TargetBoomLengthPre) = 700;
-u16* N(ColorBufferPtr) = NULL;
+u16* N(ColorBufferPtr) = nullptr;
 
 API_CALLABLE(N(AnimateBoomLengthPreHeist)) {
     Camera* camera = &gCameras[gCurrentCameraID];

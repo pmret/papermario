@@ -41,12 +41,12 @@ EffectInstance* water_splash_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     bpPtr->update = water_splash_update;
     bpPtr->renderScene = water_splash_render;
     bpPtr->unk_00 = 0;
-    bpPtr->renderUI = NULL;
+    bpPtr->renderUI = nullptr;
     bpPtr->effectID = EFFECT_WATER_SPLASH;
     effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
     effect->data.waterSplash = part = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(part != NULL);
+    ASSERT(part != nullptr);
 
     part->unk_00 = arg0;
     part->unk_20 = 0;

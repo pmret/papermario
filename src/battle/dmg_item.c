@@ -16,12 +16,12 @@ HitResult calc_item_check_hit(void) {
     battleStatus->curTargetPart2 = currentTargetPartS8;
 
     actor = get_actor(actorID);
-    if (actor == NULL) {
+    if (actor == nullptr) {
         return HIT_RESULT_HIT;
     }
 
     actorPart = get_actor_part(actor, currentTargetPart);
-    ASSERT(actorPart != NULL);
+    ASSERT(actorPart != nullptr);
 
     if (actorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
         return HIT_RESULT_MISS;
@@ -78,12 +78,12 @@ HitResult calc_item_damage_enemy(void) {
     target = get_actor(currentTargetID);
     wasStatusInflicted = FALSE;
 
-    if (target == NULL) {
+    if (target == nullptr) {
         return HIT_RESULT_HIT;
     }
 
     targetPart = get_actor_part(target, currentTargetPartID);
-    if (targetPart == NULL) {
+    if (targetPart == nullptr) {
         PANIC();
     }
 

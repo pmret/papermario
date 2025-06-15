@@ -32,7 +32,7 @@ void footprint_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     bp.init = footprint_init;
     bp.update = footprint_update;
     bp.renderScene = footprint_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_FOOTPRINT;
 
     effect = create_effect_instance(&bp);
@@ -40,7 +40,7 @@ void footprint_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     part = general_heap_malloc(numParts * sizeof(*part));
     effect->data.footprint = part;
 
-    ASSERT(effect->data.footprint != NULL);
+    ASSERT(effect->data.footprint != nullptr);
 
     mem_clear(part, numParts * sizeof(*part));
 

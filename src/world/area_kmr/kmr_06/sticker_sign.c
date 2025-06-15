@@ -24,9 +24,9 @@ void N(appendGfx_sticker)(void* renderData) {
     Matrix4f mtxTransform;
     Matrix4f mtxTemp;
 
-    StickerData* sticker = (StickerData*) evt_get_variable(NULL, MV_StickerData);
-    IMG_PTR img = (IMG_PTR) evt_get_variable(NULL, MV_StickerImage);
-    PAL_PTR pal = (PAL_PTR) evt_get_variable(NULL, MV_StickerPalette);
+    StickerData* sticker = (StickerData*) evt_get_variable(nullptr, MV_StickerData);
+    IMG_PTR img = (IMG_PTR) evt_get_variable(nullptr, MV_StickerImage);
+    PAL_PTR pal = (PAL_PTR) evt_get_variable(nullptr, MV_StickerPalette);
     u32 imgfxFlags = IMGFX_FLAG_400;
 
     gDPPipeSync(gMainGfxPos++);
@@ -108,7 +108,7 @@ API_CALLABLE(N(CreateSticker)) {
         iconPal);
 
     sticker->imgfxIdx = imgfx_get_free_instances(1);
-    sticker->workerID = create_worker_scene(NULL, N(worker_render_sticker));
+    sticker->workerID = create_worker_scene(nullptr, N(worker_render_sticker));
     evt_set_variable(script, MV_StickerData, (s32) sticker);
     evt_set_variable(script, MV_StickerImage, (s32) iconImg);
     evt_set_variable(script, MV_StickerPalette, (s32) iconPal);
@@ -210,9 +210,9 @@ API_CALLABLE(N(DeleteSticker)) {
     heap_free(img);
     heap_free(pal);
 
-    evt_set_variable(script, MV_StickerData, NULL);
-    evt_set_variable(script, MV_StickerImage, NULL);
-    evt_set_variable(script, MV_StickerPalette, NULL);
+    evt_set_variable(script, MV_StickerData, nullptr);
+    evt_set_variable(script, MV_StickerImage, nullptr);
+    evt_set_variable(script, MV_StickerPalette, nullptr);
 
     return ApiStatus_DONE2;
 }

@@ -784,12 +784,12 @@ API_CALLABLE(N(Update)) {
     if (isInitialCall) {
         partner_walking_enable(sushie, 1);
         mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
-        TweesterTouchingPartner = NULL;
+        TweesterTouchingPartner = nullptr;
     }
 
     entity = TweesterTouchingPartner;
 
-    if (entity == NULL) {
+    if (entity == nullptr) {
         partner_walking_update_player_tracking(sushie);
         partner_walking_update_motion(sushie);
         return ApiStatus_BLOCK;
@@ -849,7 +849,7 @@ API_CALLABLE(N(Update)) {
 
             if (--N(TweesterPhysicsPtr)->countdown == 0) {
                 N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
-                TweesterTouchingPartner = NULL;
+                TweesterTouchingPartner = nullptr;
             }
             break;
     }
@@ -864,8 +864,8 @@ EvtScript EVS_WorldSushie_Update = {
 };
 
 void N(try_cancel_tweester)(Npc* sushie) {
-    if (TweesterTouchingPartner != NULL) {
-        TweesterTouchingPartner = NULL;
+    if (TweesterTouchingPartner != nullptr) {
+        TweesterTouchingPartner = nullptr;
         sushie->flags = N(TweesterPhysicsPtr)->prevFlags;
         N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(sushie);

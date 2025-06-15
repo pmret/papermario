@@ -47,7 +47,7 @@ MenuWindowBP gPauseItemsWindowBPs[] = {
         .height = 154,
         .priority = WINDOW_PRIORITY_1,
         .fpDrawContents = &pause_items_draw_contents,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
@@ -63,7 +63,7 @@ MenuPanel gPausePanelItems = {
     .numCols = 0,
     .numRows = 0,
     .numPages = 0,
-    .gridData = NULL,
+    .gridData = nullptr,
     .fpInit = &pause_items_init,
     .fpHandleInput = &pause_items_handle_input,
     .fpUpdate = &pause_items_update,
@@ -651,7 +651,7 @@ void pause_items_handle_input(MenuPanel* panel) {
             gPauseCurrentDescMsg = gItemTable[gPauseItemsSelectedItem].fullDescMsg;
         } else {
             gPauseCurrentDescMsg = MSG_NONE;
-            gPauseCurrentDescIconScript = NULL;
+            gPauseCurrentDescIconScript = nullptr;
         }
     } else {
         if (gPauseItemsCurrentTab == 1) {
@@ -660,7 +660,7 @@ void pause_items_handle_input(MenuPanel* panel) {
             gPauseCurrentDescMsg = pause_get_menu_msg(PAUSE_MSG_DESC_KEY_ITEMS);
         }
 
-        gPauseCurrentDescIconScript = NULL;
+        gPauseCurrentDescIconScript = nullptr;
     }
 
     if (gPausePressedButtons & BUTTON_B) {

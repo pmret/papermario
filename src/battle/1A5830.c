@@ -8,7 +8,7 @@ s32 has_enchanted_part(Actor* actor) {
     ActorPart* partIt = actor->partsTable;
     s32 ret = FALSE;
 
-    while (partIt != NULL) {
+    while (partIt != nullptr) {
         if (partIt->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)) {
             ret = TRUE;
             break;
@@ -103,7 +103,7 @@ void dispatch_event_actor(Actor* actor, s32 event) {
     Evt* handleEventScript = actor->handleEventScript;
     s32 onHitID = actor->handleEventScriptID;
 
-    if (actor->handleEventSource != NULL) {
+    if (actor->handleEventSource != nullptr) {
         Evt* newScript;
 
         actor->lastEventType = event;
@@ -113,13 +113,13 @@ void dispatch_event_actor(Actor* actor, s32 event) {
         newScript->owner1.actorID = actor->actorID;
     }
 
-    if (actor->takeTurnScript != NULL) {
+    if (actor->takeTurnScript != nullptr) {
         get_script_by_index(actor->takeTurnScriptID);
         kill_script_by_ID(actor->takeTurnScriptID);
-        actor->takeTurnScript = NULL;
+        actor->takeTurnScript = nullptr;
     }
 
-    if (handleEventScript != NULL) {
+    if (handleEventScript != nullptr) {
         kill_script_by_ID(onHitID);
     }
 }
@@ -139,12 +139,12 @@ HitResult calc_enemy_test_target(Actor* actor) {
     battleStatus->curTargetPart2 = battleStatus->curTargetPart;
 
     target = get_actor(targetID);
-    if (target == NULL) {
+    if (target == nullptr) {
         return HIT_RESULT_HIT;
     }
 
     targetPart = get_actor_part(target, targetPartIdx);
-    ASSERT(targetPart != NULL);
+    ASSERT(targetPart != nullptr);
 
     actorClass = targetID & ACTOR_CLASS_MASK;
     switch (actorClass) {
@@ -259,12 +259,12 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     battleStatus->curTargetPart2 = targetPartIdx;
 
     target = get_actor(targetID);
-    if (target == NULL) {
+    if (target == nullptr) {
         return HIT_RESULT_HIT;
     }
 
     targetPart = get_actor_part(target, targetPartIdx);
-    ASSERT(targetPart != NULL);
+    ASSERT(targetPart != nullptr);
 
     actorClass = targetID & ACTOR_CLASS_MASK;
     target->lastDamageTaken = 0;
@@ -975,7 +975,7 @@ API_CALLABLE(EnableIdleScript) {
     var1 = evt_get_variable(script, *args++);
     actor = get_actor(actorID);
 
-    if (actor->idleScript != NULL) {
+    if (actor->idleScript != nullptr) {
         switch (var1) {
             case IDLE_SCRIPT_RESTART:
                 restart_script(actor->idleScript);
@@ -2694,7 +2694,7 @@ API_CALLABLE(RemoveActor) {
     currentEncounter->coinsEarned += actor->extraCoinBonus;
     currentEncounter->coinsEarned += actor->actorBlueprint->coinReward;
     btl_delete_actor(actor);
-    battleStatus->enemyActors[actorID & 0xFF] = NULL;
+    battleStatus->enemyActors[actorID & 0xFF] = nullptr;
 
     return ApiStatus_DONE2;
 }
@@ -2936,7 +2936,7 @@ API_CALLABLE(EnemyFollowupAfflictTarget) {
     }
 
     evt_set_variable(script, outVar, hitResults);
-    if (does_script_exist_by_ref(script) == NULL) {
+    if (does_script_exist_by_ref(script) == nullptr) {
         return ApiStatus_FINISH;
     }
     return ApiStatus_DONE2;
@@ -3361,8 +3361,8 @@ API_CALLABLE(EnableActorGlow) {
     if (!flag) {
         ActorPart* it = actor->partsTable;
 
-        while (it != NULL) {
-            if (it->idleAnimations != NULL) {
+        while (it != nullptr) {
+            if (it->idleAnimations != nullptr) {
                 set_npc_imgfx_all(it->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
             }
             it = it->nextPart;

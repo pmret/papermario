@@ -305,12 +305,12 @@ EvtScript N(EVS_SetupRooms) = {
             PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
             Ref(N(EVS_SetDoorRot_KoloradoOffice)),
             Ref(N(EVS_SetWallRot_KoloradoOffice)),
-            NULL,
-            NULL,
+            nullptr,
+            nullptr,
             COLLIDER_o314,
             COLLIDER_o317,
             MODEL_o271,
-            NULL)
+            nullptr)
     Else
         IfEq(GF_NOK11_Defeated_KentC, TRUE)
             // kolorado house
@@ -329,12 +329,12 @@ EvtScript N(EVS_SetupRooms) = {
                 PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
                 Ref(N(EVS_SetDoorRot_KoloradoOffice)),
                 Ref(N(EVS_SetWallRot_KoloradoOffice)),
-                NULL,
-                NULL,
+                nullptr,
+                nullptr,
                 COLLIDER_o314,
                 COLLIDER_o317,
                 MODEL_o271,
-                NULL)
+                nullptr)
         Else
             // kolorado house
             Call(CreateMapRoom,
@@ -352,12 +352,12 @@ EvtScript N(EVS_SetupRooms) = {
                 PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
                 Ref(N(EVS_SetDoorRot_KoloradoOffice)),
                 Ref(N(EVS_SetWallRot_KoloradoOffice)),
-                NULL,
-                NULL,
+                nullptr,
+                nullptr,
                 COLLIDER_o314,
                 COLLIDER_o317,
                 MODEL_o271,
-                NULL)
+                nullptr)
         EndIf
     EndIf
     IfLt(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
@@ -366,7 +366,7 @@ EvtScript N(EVS_SetupRooms) = {
             PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             Ref(N(EVS_SetDoorRot_KooperFrontDoor)),
             Ref(N(EVS_SetWallRot_KooperHouse)),
-            NULL,
+            nullptr,
             Ref(N(EVS_RoomListener_KooperHouse)),
             COLLIDER_o284,
             COLLIDER_o287,
@@ -377,7 +377,7 @@ EvtScript N(EVS_SetupRooms) = {
             PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             Ref(N(EVS_SetDoorRot_KooperBackDoor)),
             Ref(N(EVS_SetWallRot_KooperHouse)),
-            NULL,
+            nullptr,
             Ref(N(EVS_RoomListener_KooperHouse)),
             COLLIDER_o302,
             COLLIDER_o299,
@@ -389,7 +389,7 @@ EvtScript N(EVS_SetupRooms) = {
             PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             Ref(N(EVS_SetDoorRot_KooperFrontDoor)),
             Ref(N(EVS_SetWallRot_KooperHouse)),
-            NULL,
+            nullptr,
             Ref(N(EVS_RoomListener_KooperHouse)),
             COLLIDER_o284,
             COLLIDER_o287,
@@ -400,7 +400,7 @@ EvtScript N(EVS_SetupRooms) = {
             PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT | ROOM_FLAG_CUSTOM_ANIM_WALL_ROT),
             Ref(N(EVS_SetDoorRot_KooperBackDoor)),
             Ref(N(EVS_SetWallRot_KooperHouse)),
-            NULL,
+            nullptr,
             Ref(N(EVS_RoomListener_KooperHouse)),
             COLLIDER_o302,
             COLLIDER_o299,

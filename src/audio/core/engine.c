@@ -29,7 +29,7 @@ extern f32 AlTuneScaling[];
 void au_release_voice(u8 index) {
     AuVoice* voice = &gSoundGlobals->voices[index];
 
-    voice->cmdPtr = NULL;
+    voice->cmdPtr = nullptr;
     voice->priority = AU_PRIORITY_FREE;
 }
 
@@ -74,8 +74,8 @@ void au_engine_init(s32 outputRate) {
     au_reset_instrument_entry(&globals->defaultPRGEntry);
     snd_song_clear_music_events();
 
-    globals->audioThreadCallbacks[0] = NULL;
-    globals->audioThreadCallbacks[1] = NULL;
+    globals->audioThreadCallbacks[0] = nullptr;
+    globals->audioThreadCallbacks[1] = nullptr;
 
     for (i = 0; i < ARRAY_COUNT(globals->snapshots); i++) {
         globals->snapshots[i].assigned = 0;
@@ -92,7 +92,7 @@ void au_engine_init(s32 outputRate) {
         au_pvoice_set_bus(i, FX_BUS_BGMA_MAIN);
         au_syn_set_wavetable(i, globals->defaultInstrument);
         voice = &globals->voices[i];
-        voice->instrument = NULL;
+        voice->instrument = nullptr;
         voice->pitchRatio = 0;
         voice->volume = -1;
         voice->pan = 0xFF;
@@ -164,7 +164,7 @@ static void au_reset_instrument(Instrument* instrument) {
     instrument->predictor = DummyInstrumentCodebook;
     instrument->codebookSize = sizeof(DummyInstrumentCodebook);
     instrument->keyBase = DEFAULT_KEYBASE;
-    instrument->loopState = NULL;
+    instrument->loopState = nullptr;
     instrument->loopStart = 0;
     instrument->loopEnd = 0;
     instrument->loopCount = 0;
@@ -293,7 +293,7 @@ void au_update_clients_for_video_frame(void) {
     }
 
     BeginSoundUpdateCallback = globals->audioThreadCallbacks[0];
-    if (BeginSoundUpdateCallback != NULL) {
+    if (BeginSoundUpdateCallback != nullptr) {
         BeginSoundUpdateCallback();
     }
 
@@ -357,7 +357,7 @@ void au_syn_begin_audio_frame(AuGlobals* globals) {
         if (voice->donePending) {
             au_syn_stop_voice(i);
             voice->donePending = FALSE;
-            voice->cmdPtr = NULL;
+            voice->cmdPtr = nullptr;
             voice->priority = AU_PRIORITY_FREE;
         }
 
@@ -383,7 +383,7 @@ void au_syn_begin_audio_frame(AuGlobals* globals) {
 
 void au_reset_nonfree_voice(AuVoice* voice, u8 index) {
     if (voice->priority != AU_PRIORITY_FREE) {
-        voice->cmdPtr = NULL;
+        voice->cmdPtr = nullptr;
         voice->donePending = TRUE;
         voice->syncFlags = 0;
         au_syn_set_volume_delta(index, 0, AUDIO_SAMPLES);
@@ -391,7 +391,7 @@ void au_reset_nonfree_voice(AuVoice* voice, u8 index) {
 }
 
 void au_reset_voice(AuVoice* voice, u8 voiceIdx) {
-    voice->cmdPtr = NULL;
+    voice->cmdPtr = nullptr;
     voice->donePending = TRUE;
     voice->syncFlags = 0;
     au_syn_set_volume_delta(voiceIdx, 0, AUDIO_SAMPLES);
@@ -426,13 +426,13 @@ void au_fade_init(Fade* fade, s32 time, s32 startValue, s32 endValue) {
         fade->baseStep = 0;
     }
 
-    fade->onCompleteCallback = NULL;
+    fade->onCompleteCallback = nullptr;
 }
 
 void au_fade_clear(Fade* fade) {
     fade->baseTicks = 0;
     fade->baseStep = 0;
-    fade->onCompleteCallback = NULL;
+    fade->onCompleteCallback = nullptr;
 }
 
 void au_fade_update(Fade* fade) {
@@ -442,10 +442,10 @@ void au_fade_update(Fade* fade) {
         fade->baseVolume += fade->baseStep;
     } else {
         fade->baseVolume = fade->baseTarget << 16;
-        if (fade->onCompleteCallback != NULL) {
+        if (fade->onCompleteCallback != nullptr) {
             fade->onCompleteCallback();
             fade->baseStep = 0;
-            fade->onCompleteCallback = NULL;
+            fade->onCompleteCallback = nullptr;
         }
     }
 }
@@ -532,8 +532,8 @@ void au_get_bgm_player_and_file(u32 playerIndex, BGMHeader** outFile, BGMPlayer*
             *outPlayer = gBGMPlayerA;
             break;
         default:
-            *outFile = NULL;
-            *outPlayer = NULL;
+            *outFile = nullptr;
+            *outPlayer = nullptr;
             break;
     }
 }
@@ -550,7 +550,7 @@ void au_get_bgm_player(u32 playerIndex, BGMPlayer** outPlayer) {
             *outPlayer = gBGMPlayerA;
             break;
         default:
-            *outPlayer = NULL;
+            *outPlayer = nullptr;
             break;
     }
 }
@@ -657,7 +657,7 @@ BGMPlayer* au_get_snapshot_by_index(s32 index) {
     if (index == BGM_SNAPSHOT_0) {
         return gSoundGlobals->snapshots[BGM_SNAPSHOT_0].bgmPlayer;
     }
-    return NULL;
+    return nullptr;
 }
 
 #define SBN_EXTRA_LOOKUP(i,fmt,e) (au_fetch_SBN_file(globals->extraFileList[AmbientSoundIDtoMSEQFileIndex[i]], fmt, &e))
@@ -677,7 +677,7 @@ AuResult au_ambient_load(u32 ambSoundID) {
                 au_read_rom(fileEntry.offset, globals->dataMSEQ[0], fileEntry.data & 0xFFFFFF);
                 manager->mseqFiles[0] = globals->dataMSEQ[0];
                 for (i = 1; i < ARRAY_COUNT(manager->mseqFiles); i++) {
-                    manager->mseqFiles[i] = NULL;
+                    manager->mseqFiles[i] = nullptr;
                 }
                 manager->numActivePlayers = 1;
             }
@@ -689,7 +689,7 @@ AuResult au_ambient_load(u32 ambSoundID) {
     ) {
         manager->numActivePlayers = 0;
         for (i = 0; i < ARRAY_COUNT(manager->mseqFiles); i++) {
-            manager->mseqFiles[i] = NULL;
+            manager->mseqFiles[i] = nullptr;
         }
 
         mseqFile = globals->dataMSEQ[1];
@@ -738,7 +738,7 @@ BGMPlayer* au_get_client_by_priority(u8 priority) {
         case AU_PRIORITY_SFX_MANAGER:
             return (BGMPlayer*)gSoundManager; // TODO: why return pointer to SoundManager?
         default:
-            return NULL;
+            return nullptr;
     }
 }
 
@@ -893,7 +893,7 @@ s32 au_load_BGM(s32 arg0) {
 }
 
 InstrumentBank* au_get_BK_instruments(BankSet bankSet, u32 bankIndex) {
-    InstrumentBank* ret = NULL;
+    InstrumentBank* ret = nullptr;
     AuGlobals* globals = gSoundGlobals;
 
     // TODO fake match - this multiplying the bankIndex by 16 and then dividing it right after is dumb
@@ -992,7 +992,7 @@ BKFileBuffer* au_load_BK_to_bank(s32 bkFileOffset, BKFileBuffer* bkFile, s32 ban
                     + ALIGN16_(header->predictorsLength)
                     + ALIGN16_(header->envelopesLength)
                     + sizeof(*header);
-                if (bkFile == NULL) {
+                if (bkFile == nullptr) {
                     bkFile = alHeapAlloc(heap, 1, size);
                 }
                 au_read_rom(bkFileOffset, bkFile, size);
@@ -1007,7 +1007,7 @@ BKFileBuffer* au_load_BK_to_bank(s32 bkFileOffset, BKFileBuffer* bkFile, s32 ban
                         instrumentCount++;
                         *inst = AU_FILE_RELATIVE(bkFile, instOffset);
                     } else {
-                        *inst = NULL;
+                        *inst = nullptr;
                     }
                 }
 
@@ -1038,7 +1038,7 @@ BKFileBuffer* au_load_BK_to_bank(s32 bkFileOffset, BKFileBuffer* bkFile, s32 ban
 
 /// Fixes up (swizzles) instrument pointers in a loaded bank, converting file-relative offsets to valid RAM pointers.
 /// Sets whether each instrument uses DMA streaming or not, and updates pitch ratios to match output rate.
-/// Replaces NULL instruments with a default instrument to ensure all loaded patches point to valid data.
+/// Replaces nullptr instruments with a default instrument to ensure all loaded patches point to valid data.
 void au_swizzle_BK_instruments(s32 bkFileOffset, BKFileBuffer* file, InstrumentBank instruments, u32 instrumentCount, u8 useDma) {
     Instrument* defaultInstrument = gSoundGlobals->defaultInstrument;
     BKHeader* header = &file->header;
@@ -1049,17 +1049,17 @@ void au_swizzle_BK_instruments(s32 bkFileOffset, BKFileBuffer* file, InstrumentB
         for (i = 0; i < instrumentCount; i++) {
             Instrument* instrument = instruments[i];
 
-            if (instrument != NULL) {
+            if (instrument != nullptr) {
                 if (instrument->wavData != 0) {
                     instrument->wavData += bkFileOffset;
                 }
-                if (instrument->loopState != NULL) {
+                if (instrument->loopState != nullptr) {
                     instrument->loopState = AU_FILE_RELATIVE(file, instrument->loopState);
                 }
-                if (instrument->predictor != NULL) {
+                if (instrument->predictor != nullptr) {
                     instrument->predictor = AU_FILE_RELATIVE(file, instrument->predictor);
                 }
-                if (instrument->envelopes != NULL) {
+                if (instrument->envelopes != nullptr) {
                     instrument->envelopes = AU_FILE_RELATIVE(file, instrument->envelopes);
                 }
                 instrument->useDma = useDma;
@@ -1111,7 +1111,7 @@ BKFileBuffer* au_load_static_BK_to_bank(s32* inAddr, void* outAddr, s32 bankInde
                 }
                 break;
             case BK_READ_FETCH_DATA:
-                if (bkFile == NULL) {
+                if (bkFile == nullptr) {
                     bkFile = alHeapAlloc(heap, 1, header->size);
                 }
                 au_read_rom(*inAddr, bkFile, header->size);
@@ -1125,7 +1125,7 @@ BKFileBuffer* au_load_static_BK_to_bank(s32* inAddr, void* outAddr, s32 bankInde
                         instrumentCount++;
                         *inst = AU_FILE_RELATIVE(bkFile, instOffset);
                     } else {
-                        *inst =  NULL;
+                        *inst =  nullptr;
                     }
                 }
 
@@ -1159,7 +1159,7 @@ void au_clear_instrument_group(s32 bankIndex, BankSet bankSet) {
     Instrument** ptr = *group;
     u32 i;
 
-    if (group != NULL) {
+    if (group != nullptr) {
         for (i = 0; i < ARRAY_COUNT(*group); i++) {
             *ptr++ = instrument;
         }

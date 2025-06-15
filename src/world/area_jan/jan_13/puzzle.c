@@ -666,7 +666,7 @@ EvtScript N(EVS_SetupPuzzle) = {
     Call(SetModelCustomGfx, MODEL_o75, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
     Call(SetModelCustomGfx, MODEL_o76, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
     Call(SetModelCustomGfx, MODEL_o71, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_0, Ref(N(setup_gfx_geyser)), NULL)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_0, Ref(N(setup_gfx_geyser)), nullptr)
     Set(LVar0, 0)
     Loop(0)
         Sub(LVar0, 2000)

@@ -6,9 +6,9 @@
 extern AnimScript Entity_ScriptSpring_AnimLaunch;
 
 API_CALLABLE(N(PlaySpringAnimation)) {
-    Entity* entity = get_entity_by_index(evt_get_variable(NULL, MV_SpringEntityID));
+    Entity* entity = get_entity_by_index(evt_get_variable(nullptr, MV_SpringEntityID));
 
-    if (entity == NULL) {
+    if (entity == nullptr) {
         return ApiStatus_BLOCK;
     }
 

@@ -37,13 +37,13 @@ EffectInstance* radiating_energy_orb_main(
     bp.init = radiating_energy_orb_init;
     bp.update = radiating_energy_orb_update;
     bp.renderScene = radiating_energy_orb_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_RADIATING_ENERGY_ORB;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     part = effect->data.radiatingEnergyOrb = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.radiatingEnergyOrb != NULL);
+    ASSERT(effect->data.radiatingEnergyOrb != nullptr);
 
     part->unk_04 = arg0;
     part->unk_1C = 0;

@@ -23,13 +23,13 @@ EffectInstance* underwater_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
     bp.update = underwater_update;
     bp.renderScene = underwater_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_UNDERWATER;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.underwater = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.underwater != NULL);
+    ASSERT(effect->data.underwater != nullptr);
 
     data->unk_00 = arg0;
     data->lifeTime = 0;

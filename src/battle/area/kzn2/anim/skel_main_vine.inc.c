@@ -81,5 +81,5 @@ StaticAnimatorNode* NAMESPACE[] = {
     &N(Node07),
     &N(Node08),
     &N(Node09),
-    NULL,
+    nullptr,
 };

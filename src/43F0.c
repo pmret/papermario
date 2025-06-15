@@ -67,7 +67,7 @@ HeapNode* _heap_create(HeapNode* addr, u32 size) {
         HeapNode* heapNode = (HeapNode*)ALIGN16((u32)addr);
 
         size -= ((u8*)heapNode - (u8*)addr);
-        heapNode->next = NULL;
+        heapNode->next = nullptr;
         heapNode->length = size - sizeof(HeapNode);
         heapNode->allocated = 0;
         heapNode->capacity = size;
@@ -77,7 +77,7 @@ HeapNode* _heap_create(HeapNode* addr, u32 size) {
 
 void* _heap_malloc(HeapNode* head, u32 size) {
     HeapNode* nextHeapNode;
-    HeapNode* pPrevHeapNode = NULL;
+    HeapNode* pPrevHeapNode = nullptr;
     u32 newBlockSize;
     u32 curBlockLength;
     HeapNode* curHeapNode;
@@ -88,11 +88,11 @@ void* _heap_malloc(HeapNode* head, u32 size) {
     // must allocate 16 bytes or more at minimum or fail
     size = ALIGN16(size);
     if (!size) {
-        return NULL;
+        return nullptr;
     }
 
     smallestBlockFound = 0;
-    nextHeapNode = NULL;
+    nextHeapNode = nullptr;
 
     // find the smallest block we can fit into in the free list
     for (curHeapNode = head; ; curHeapNode = curHeapNode->next) {
@@ -144,7 +144,7 @@ void* _heap_malloc(HeapNode* head, u32 size) {
         }
         return (u8*)pPrevHeapNode + sizeof(HeapNode);
     }
-    return NULL;
+    return nullptr;
 }
 
 void* _heap_malloc_tail(HeapNode* head, u32 size) {
@@ -155,15 +155,15 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
     HeapNode* nextNode;
 
     size = ALIGN16(size);
-    foundNode = NULL;
+    foundNode = nullptr;
 
     // make sure we have a size to allocate
     if (!size) {
-        return NULL;
+        return nullptr;
     }
 
     foundNodeLength = 0;
-    nextNode = NULL;
+    nextNode = nullptr;
 
     // find the smallest block we can fit into
     for (curNode = head; ; curNode = curNode->next) {
@@ -210,7 +210,7 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
     }
 
     // did not find a block
-    return NULL;
+    return nullptr;
 }
 
 u32 _heap_free(HeapNode* heapNodeList, void* addrToFree) {
@@ -221,7 +221,7 @@ u32 _heap_free(HeapNode* heapNodeList, void* addrToFree) {
     HeapNode* outNode;
 
     // if no address to free then return
-    if (addrToFree == NULL) {
+    if (addrToFree == nullptr) {
         return TRUE;
     }
 
@@ -291,7 +291,7 @@ void* _heap_realloc(HeapNode* heapNodeList, void* addr, u32 newSize) {
 
     // check if the realloc is on an allocated node otherwise fail
     if (!curHeapAlloc->allocated) {
-        return NULL;
+        return nullptr;
     }
 
     nextNode = curHeapAlloc->next;
@@ -310,8 +310,8 @@ void* _heap_realloc(HeapNode* heapNodeList, void* addr, u32 newSize) {
     if (newNodeLength < newSizeAligned) {
         // too small, allocatr a new node, copy data to it then free the current one
         curHeapAlloc = _heap_malloc(heapNodeList, newSizeAligned);
-        if (curHeapAlloc == NULL) {
-            return NULL;
+        if (curHeapAlloc == nullptr) {
+            return nullptr;
         }
 
         // minor interest note, copy the size of the newly allocated size

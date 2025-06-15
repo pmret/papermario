@@ -301,7 +301,7 @@ API_CALLABLE(N(GetTattleMessage)) {
 
     script->varTable[0] = *tattle;
 
-    if (script->varTable[0] == NULL) {
+    if (script->varTable[0] == nullptr) {
         script->varTable[0] = bActorTattles[0];
     }
 

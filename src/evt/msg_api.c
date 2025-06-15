@@ -48,7 +48,7 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 mode) {
     s32 animID;
     s32 ret;
 
-    targetNpc = NULL;
+    targetNpc = nullptr;
 
     if (isInitialCall) {
         D_802DB264 = 0;

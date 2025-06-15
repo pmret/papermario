@@ -219,7 +219,7 @@ BSS s32 D_PAL_8009A208;
 BSS Mtx D_8009BAA8[2];
 
 void initialize_curtains(void) {
-    gCurtainDrawCallback = NULL;
+    gCurtainDrawCallback = nullptr;
     gCurtainScale = 2.0f;
     gCurtainScaleGoal = 2.0f;
     gCurtainFade = 0.0f;
@@ -275,7 +275,7 @@ void render_curtains(void) {
         gDPPipeSync(gMainGfxPos++);
     }
 
-    if (gCurtainDrawCallback != NULL) {
+    if (gCurtainDrawCallback != nullptr) {
         gCurtainDrawCallback();
     }
 

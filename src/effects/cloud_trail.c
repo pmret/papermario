@@ -20,7 +20,7 @@ void cloud_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.init = cloud_trail_init;
     bp.update = cloud_trail_update;
     bp.renderScene = cloud_trail_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_CLOUD_TRAIL;
 
     effect = create_effect_instance(&bp);
@@ -28,7 +28,7 @@ void cloud_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     part = general_heap_malloc(numParts * sizeof(*part));
     effect->data.cloudTrail = part;
 
-    ASSERT(effect->data.cloudTrail != NULL);
+    ASSERT(effect->data.cloudTrail != nullptr);
 
     mem_clear(part, numParts * sizeof(*part));
 

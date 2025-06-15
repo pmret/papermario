@@ -9,7 +9,7 @@ EvtScript N(EVS_SetupHaze) = {
     Call(SetTexPanner, MODEL_o99, TEX_PANNER_2)
     Call(EnableTexPanning, MODEL_o99, TRUE)
     Set(LVar0, 0)
-    Call(SetCustomGfx, 0, Ref(N(HazePreGfx)), NULL)
+    Call(SetCustomGfx, 0, Ref(N(HazePreGfx)), nullptr)
     Call(SetModelFlags, MODEL_o99, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
     Label(0)
         Add(LVar0, 70)

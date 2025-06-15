@@ -17,7 +17,7 @@ API_CALLABLE(N(CheckDripCollisionWithActors)) {
     script->varTable[2] = 0;
 
     actor = battleStatus->playerActor;
-    if (actor != NULL) {
+    if (actor != nullptr) {
         xDiff = actor->curPos.x - model->center.x;
         yDiff = actor->curPos.y + actor->size.y - 1.5f - model->center.y;
         zDiff = actor->curPos.z - model->center.z;
@@ -30,7 +30,7 @@ API_CALLABLE(N(CheckDripCollisionWithActors)) {
     }
 
     actor = battleStatus->partnerActor;
-    if (actor != NULL) {
+    if (actor != nullptr) {
         xDiff = actor->curPos.x - model->center.x;
         yDiff = actor->curPos.y + actor->size.y - 1.5f - model->center.y;
         zDiff = actor->curPos.z - model->center.z;
@@ -47,7 +47,7 @@ API_CALLABLE(N(CheckDripCollisionWithActors)) {
 
         actor = battleStatus->enemyActors[i];
 
-        if (actor != NULL && !(actor->flags & ACTOR_FLAG_INVISIBLE)) {
+        if (actor != nullptr && !(actor->flags & ACTOR_FLAG_INVISIBLE)) {
             xDiff = actor->curPos.x - model->center.x;
             yDiff = actor->curPos.y + actor->size.y - 1.5f - model->center.y;
             zDiff = actor->curPos.z - model->center.z;
@@ -58,7 +58,7 @@ API_CALLABLE(N(CheckDripCollisionWithActors)) {
                 return ApiStatus_DONE2;
             }
 
-            for (part = actor->partsTable; part != NULL; part = part->nextPart) {
+            for (part = actor->partsTable; part != nullptr; part = part->nextPart) {
                 if (!(part->flags & ACTOR_PART_FLAG_INVISIBLE)) {
                     if (part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION) {
                         xDiff = part->curPos.x - model->center.x;

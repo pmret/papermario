@@ -479,7 +479,7 @@ void npc_move_heading(Npc* npc, f32 speed, f32 yaw);
 
 Npc* get_npc_unsafe(s32 npcID);
 
-/// @returns NULL if not found
+/// @returns nullptr if not found
 Npc* get_npc_safe(s32 npcID);
 
 void enable_npc_shadow(Npc* npc);
@@ -572,7 +572,7 @@ void npc__reset_current_decoration(Npc* npc, s32 idx);
 /// @param z        Z position
 /// @param radius   No NPCs further than this distance will be considered
 ///
-/// @returns NULL if there are no NPCs within radius
+/// @returns nullptr if there are no NPCs within radius
 Npc* npc_find_closest(f32 x, f32 y, f32 z, f32 radius);
 
 /// Finds the closest simple-hitbox NPC to a given point within a radius. Ignores Y position.
@@ -585,7 +585,7 @@ Npc* npc_find_closest(f32 x, f32 y, f32 z, f32 radius);
 /// @param z        Z position
 /// @param radius   No NPCs further than this distance will be considered
 ///
-/// @returns NULL if there are no NPCs within radius
+/// @returns nullptr if there are no NPCs within radius
 Npc* npc_find_closest_simple(f32 x, f32 y, f32 z, f32 radius);
 
 //s32 npc_find_standing_on_entity();
@@ -682,7 +682,7 @@ Enemy* get_enemy(s32 npcID);
 ///
 /// @param npcID   ID of the npc bound to the desired enemy.
 ///
-/// @returns pointer to Enemy struct, if one is found. Otherwise, NULL.
+/// @returns pointer to Enemy struct, if one is found. Otherwise, nullptr.
 Enemy* get_enemy_safe(s32 npcID);
 
 void set_npc_sprite(Npc* npc, s32 anim, AnimID* extraAnimList);

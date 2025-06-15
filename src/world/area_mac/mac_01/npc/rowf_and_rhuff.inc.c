@@ -4,7 +4,7 @@ API_CALLABLE(N(func_80244984_805204)) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(N(RowfBadgeInventory)); i++) {
-        if (evt_get_variable(NULL, flagBase + i) == 0) {
+        if (evt_get_variable(nullptr, flagBase + i) == 0) {
             count++;
         }
     }
@@ -13,8 +13,8 @@ API_CALLABLE(N(func_80244984_805204)) {
 }
 
 API_CALLABLE(N(RhuffUnravelUpdate)) {
-    s32 rugRotAngle = -evt_get_variable(NULL, MV_RowfRugRotateAngle);
-    s32 rugRippleAmt = evt_get_variable(NULL, MV_RowfRugRippleAmount);
+    s32 rugRotAngle = -evt_get_variable(nullptr, MV_RowfRugRotateAngle);
+    s32 rugRippleAmt = evt_get_variable(nullptr, MV_RowfRugRippleAmount);
     Npc* npc = script->varTablePtr[7];
     Enemy* enemy = get_enemy(NPC_Rhuff);
     f32 theta = (rugRotAngle / 180.0f) * PI;
@@ -47,7 +47,7 @@ API_CALLABLE(N(RhuffUnravelUpdate)) {
 }
 
 void N(gfx_build_rowf_rug_with_ripples)(void) {
-    s32 rippleAmt = evt_get_variable(NULL, MV_RowfRugRippleAmount);
+    s32 rippleAmt = evt_get_variable(nullptr, MV_RowfRugRippleAmount);
     Vtx* src;
     Vtx* copy;
     Vtx* vtx;
@@ -82,26 +82,26 @@ void N(gfx_build_rowf_rug_with_ripples)(void) {
 }
 
 API_CALLABLE(N(RevealRowfBadges)) {
-    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableA)) {
+    if (!evt_get_variable(nullptr, GF_MAC01_RowfBadgeAvailableA)) {
         clear_item_entity_flags(gGameStatusPtr->shopItemEntities[0].index, ITEM_ENTITY_FLAG_HIDDEN);
     }
-    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableB)) {
+    if (!evt_get_variable(nullptr, GF_MAC01_RowfBadgeAvailableB)) {
         clear_item_entity_flags(gGameStatusPtr->shopItemEntities[1].index, ITEM_ENTITY_FLAG_HIDDEN);
     }
-    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableC)) {
+    if (!evt_get_variable(nullptr, GF_MAC01_RowfBadgeAvailableC)) {
         clear_item_entity_flags(gGameStatusPtr->shopItemEntities[2].index, ITEM_ENTITY_FLAG_HIDDEN);
     }
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(HideRowfBadges)) {
-    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableA)) {
+    if (!evt_get_variable(nullptr, GF_MAC01_RowfBadgeAvailableA)) {
         set_item_entity_flags(gGameStatusPtr->shopItemEntities[0].index, ITEM_ENTITY_FLAG_HIDDEN);
     }
-    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableB)) {
+    if (!evt_get_variable(nullptr, GF_MAC01_RowfBadgeAvailableB)) {
         set_item_entity_flags(gGameStatusPtr->shopItemEntities[1].index, ITEM_ENTITY_FLAG_HIDDEN);
     }
-    if (!evt_get_variable(NULL, GF_MAC01_RowfBadgeAvailableC)) {
+    if (!evt_get_variable(nullptr, GF_MAC01_RowfBadgeAvailableC)) {
         set_item_entity_flags(gGameStatusPtr->shopItemEntities[2].index, ITEM_ENTITY_FLAG_HIDDEN);
     }
     return ApiStatus_DONE2;
@@ -631,7 +631,7 @@ EvtScript N(EVS_NpcInit_Rowf) = {
     Call(ScaleGroup, MODEL_jutan2, Float(1.3), 1, Float(1.3))
     Set(MV_RowfRugRotateAngle, 60)
     Call(MakeLocalVertexCopy, VTX_COPY_0, MODEL_ju_1, TRUE)
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_0, Ref(N(gfx_build_rowf_rug_with_ripples)), NULL)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_0, Ref(N(gfx_build_rowf_rug_with_ripples)), nullptr)
     Call(SetModelCustomGfx, MODEL_ju_1, CUSTOM_GFX_0, -1)
     IfEq(AF_MAC_40, TRUE)
         BindTrigger(Ref(N(EVS_EnterBadgeShop)), TRIGGER_FLOOR_TOUCH, COLLIDER_roten, 1, 0)

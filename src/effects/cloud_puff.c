@@ -21,14 +21,14 @@ void cloud_puff_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.init = cloud_puff_init;
     bp.update = cloud_puff_update;
     bp.renderScene = cloud_puff_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_CLOUD_PUFF;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     part = general_heap_malloc(numParts * sizeof(*part));
     effect->data.cloudPuff = part;
-    ASSERT(effect->data.cloudPuff != NULL);
+    ASSERT(effect->data.cloudPuff != nullptr);
 
     mem_clear(part, numParts * sizeof(*part));
 

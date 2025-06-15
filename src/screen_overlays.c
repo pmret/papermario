@@ -185,7 +185,7 @@ void _render_transition_stencil(u8 stencilType, f32 progress, ScreenOverlay* ove
         return;
     }
 
-    if (overlay != NULL) {
+    if (overlay != nullptr) {
         colR = overlay->color.r;
         colG = overlay->color.g;
         colB = overlay->color.b;

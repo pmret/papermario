@@ -102,14 +102,14 @@ API_CALLABLE(N(Update)) {
     if (isInitialCall) {
         partner_walking_enable(bombette, 1);
         mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
-        TweesterTouchingPartner = NULL;
+        TweesterTouchingPartner = nullptr;
     }
 
     playerData->partnerUsedTime[PARTNER_BOMBETTE]++;
     bombette->flags |= NPC_FLAG_DIRTY_SHADOW;
     entity = TweesterTouchingPartner;
 
-    if (entity == NULL) {
+    if (entity == nullptr) {
         partner_walking_update_player_tracking(bombette);
         partner_walking_update_motion(bombette);
         return ApiStatus_BLOCK;
@@ -170,7 +170,7 @@ API_CALLABLE(N(Update)) {
 
             if (--N(TweesterPhysicsPtr)->countdown == 0) {
                 N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
-                TweesterTouchingPartner = NULL;
+                TweesterTouchingPartner = nullptr;
             }
             break;
     }
@@ -184,8 +184,8 @@ EvtScript EVS_WorldBombette_Update = {
 };
 
 void N(try_cancel_tweester)(Npc* npc) {
-    if (TweesterTouchingPartner != NULL) {
-        TweesterTouchingPartner = NULL;
+    if (TweesterTouchingPartner != nullptr) {
+        TweesterTouchingPartner = nullptr;
         npc->flags = N(TweesterPhysicsPtr)->prevFlags;
         N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(npc);

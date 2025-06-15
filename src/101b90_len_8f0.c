@@ -201,7 +201,7 @@ IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID) {
     }
 
     if (idx == -1) {
-        return NULL;
+        return nullptr;
     }
 
     cacheEntry = &PlayerRasterCache[idx];

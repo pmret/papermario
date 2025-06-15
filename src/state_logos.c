@@ -218,7 +218,7 @@ void state_step_logos(void) {
                 if (gGameStatusPtr->logoTime == 0) {
                     gGameStatusPtr->startupState++;
                     set_curtain_scale_goal(1.0f);
-                    set_curtain_draw_callback(NULL);
+                    set_curtain_draw_callback(nullptr);
                     set_curtain_fade_goal(0.3f);
                 } else {
                     gGameStatusPtr->logoTime--;
@@ -239,7 +239,7 @@ void state_step_logos(void) {
                 break;
             case LOGOS_STATE_CLEANUP:
                 heap_free(gLogosImages);
-                gLogosImages = NULL;
+                gLogosImages = nullptr;
                 startup_set_fade_screen_alpha(255);
                 gGameStatusPtr->introPart = INTRO_PART_0;
                 set_game_mode(GAME_MODE_INTRO);

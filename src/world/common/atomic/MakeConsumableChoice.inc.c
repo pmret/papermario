@@ -5,7 +5,7 @@ API_CALLABLE(N(BuildItemChoiceList)) {
     s32* allowedItemList = (s32*)evt_get_variable(script, *args++);
     s32 i;
 
-    if (allowedItemList != NULL) {
+    if (allowedItemList != nullptr) {
         for (i = 0; allowedItemList[i] != ITEM_NONE; i++) {
             N(ItemChoiceList)[i] = allowedItemList[i];
         }

@@ -8,11 +8,11 @@ API_CALLABLE(N(GetDefeatedEnemyCount)) {
 
     for (i = 0; i < encounterStatus->numEncounters; i++) {
         Encounter* temp = encounterStatus->encounterList[i];
-        if (temp == NULL) {
+        if (temp == nullptr) {
             continue;
         }
         for (j = 0; j < temp->count; j++) {
-            if (temp->enemy[j] != NULL) {
+            if (temp->enemy[j] != nullptr) {
                 enemyCount++;
             }
         }

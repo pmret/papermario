@@ -136,10 +136,10 @@ void func_80045AC0(void) {
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
         PopupMessage* popup = &D_800A0BC0[i];
         popup->active = FALSE;
-        popup->message = NULL;
+        popup->message = nullptr;
     }
 
-    create_worker_scene(NULL, func_80045BC8);
+    create_worker_scene(nullptr, func_80045BC8);
     init_all_status_icons();
 }
 
@@ -148,7 +148,7 @@ void func_80045B10(void) {
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
         PopupMessage* popup = &D_800A0BC0[i];
-        if (popup->message != NULL) {
+        if (popup->message != nullptr) {
             heap_free(popup->message);
         }
         popup->active = FALSE;
@@ -160,7 +160,7 @@ void update_merlee_messages(void) {
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
         PopupMessage* popup = &D_800A0BC0[i];
-        if (popup->active && popup->updateFunc != NULL) {
+        if (popup->active && popup->updateFunc != nullptr) {
             popup->updateFunc(popup);
         }
     }
@@ -171,7 +171,7 @@ void func_80045BC8(void) {
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
         PopupMessage* popup = &D_800A0BC0[i];
-        if (popup->active && popup->renderWorldFunc != NULL) {
+        if (popup->active && popup->renderWorldFunc != nullptr) {
             popup->renderWorldFunc(popup);
         }
     }
@@ -182,7 +182,7 @@ void draw_merlee_messages(void) {
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
         PopupMessage* popup = &D_800A0BC0[i];
-        if (popup->active && popup->renderUIFunc != NULL) {
+        if (popup->active && popup->renderUIFunc != nullptr) {
             popup->renderUIFunc(popup);
         }
     }
@@ -199,13 +199,13 @@ PopupMessage* get_current_merlee_message(void) {
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void dispose_merlee_message(PopupMessage* popup) {
-    if (popup->message != NULL) {
+    if (popup->message != nullptr) {
         heap_free(popup->message);
-        popup->message = NULL;
+        popup->message = nullptr;
     }
     popup->active = FALSE;
 }
@@ -213,12 +213,12 @@ void dispose_merlee_message(PopupMessage* popup) {
 void show_merlee_message(s16 messageIndex, s16 duration) {
     PopupMessage* popup = get_current_merlee_message();
 
-    if (popup != NULL) {
+    if (popup != nullptr) {
         popup->updateFunc = update_merlee_message;
         popup->renderUIFunc = draw_merlee_message;
         popup->needsInit = TRUE;
         popup->unk_00 = 0;
-        popup->renderWorldFunc = NULL;
+        popup->renderWorldFunc = nullptr;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
         popup->showMsgState = BTL_MSG_STATE_INIT;
@@ -345,14 +345,14 @@ void init_all_status_icons(void) {
     HudStatusIcon* icons;
     PopupMessage* popup = get_current_merlee_message();
 
-    if (popup != NULL) {
+    if (popup != nullptr) {
         popup->updateFunc = update_all_status_icons;
         popup->unk_00 = 0;
-        popup->renderWorldFunc = NULL;
+        popup->renderWorldFunc = nullptr;
         popup->renderUIFunc = draw_all_status_icons;
         popup->message = general_heap_malloc(64 * sizeof(HudStatusIcon));
         icons = D_800A0F44 = (HudStatusIcon*)(popup->message);
-        ASSERT(icons != NULL);
+        ASSERT(icons != nullptr);
 
         for (i = 0; i < MAX_ICONS; i++, icons++)
             icons->flags = 0;

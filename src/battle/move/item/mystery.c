@@ -89,7 +89,7 @@ void N(func_802A123C_72C7EC(void)) {
 
     if (D_802A25E4 < 6) {
         if (D_802A25E4 > 0) {
-            draw_box(0, WINDOW_STYLE_7, 106, 86, 0, 36, 36, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+            draw_box(0, WINDOW_STYLE_7, 106, 86, 0, 36, 36, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, nullptr, nullptr, nullptr, SCREEN_WIDTH, SCREEN_HEIGHT, nullptr);
             gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 108, 90, 139, 118);
 
             for (i = 0; i < ARRAY_COUNT(D_802A25C8); i++) {
@@ -119,7 +119,7 @@ API_CALLABLE(N(func_802A13E4_72C994)) {
 
     switch (D_802A25E4) {
         case 0:
-            D_802A25F8 = create_worker_frontUI(NULL, N(func_802A123C_72C7EC));
+            D_802A25F8 = create_worker_frontUI(nullptr, N(func_802A123C_72C7EC));
             D_802A25EC = rand_int(18200);
             D_802A25F0 = 1000;
             D_802A25FC = N(D_802A227C_72D82C);

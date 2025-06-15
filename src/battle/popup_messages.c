@@ -107,7 +107,7 @@ Vec3f D_80283690[] = {
 };
 
 EntityModelScript* BonkModelScripts[] = {
-    NULL,
+    nullptr,
     &EMS_BonkIcon, &EMS_BonkIcon, &EMS_BonkIcon, &EMS_BonkIcon, &EMS_BonkIcon,
     &EMS_BonkIcon, &EMS_BonkIcon, &EMS_BonkIcon, &EMS_BonkIcon, &EMS_BonkIcon,
 };
@@ -238,7 +238,7 @@ s32 bActorMessages[] = {
     MSG_Menus_Party_Peach
 };
 
-PopupMessage* bPopupMessage = NULL;
+PopupMessage* bPopupMessage = nullptr;
 
 BSS PopupMessage popupMessages[32];
 BSS s16 BattlePopupMessageVar;
@@ -289,7 +289,7 @@ void btl_popup_messages_init(void) {
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
         PopupMessage* popup = &popupMessages[i];
         popup->active = FALSE;
-        popup->message = NULL;
+        popup->message = nullptr;
     }
 }
 
@@ -298,9 +298,9 @@ void btl_popup_messages_delete(void) {
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
         PopupMessage* popup = &popupMessages[i];
-        if (popup->message != NULL) {
+        if (popup->message != nullptr) {
             heap_free(popup->message);
-            popup->message = NULL;
+            popup->message = nullptr;
         }
         popup->active = FALSE;
     }
@@ -311,7 +311,7 @@ void btl_popup_messages_update(void) {
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
         PopupMessage* popup = &popupMessages[i];
-        if (popup->active && popup->updateFunc != NULL) {
+        if (popup->active && popup->updateFunc != nullptr) {
             popup->updateFunc(popup);
         }
     }
@@ -322,7 +322,7 @@ void btl_popup_messages_draw_world_geometry(void) {
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
         PopupMessage* popup = &popupMessages[i];
-        if (popup->active && popup->renderWorldFunc != NULL) {
+        if (popup->active && popup->renderWorldFunc != nullptr) {
             popup->renderWorldFunc(popup);
         }
     }
@@ -333,7 +333,7 @@ void btl_popup_messages_draw_ui(void) {
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
         PopupMessage* popup = &popupMessages[i];
-        if (popup->active && popup->renderUIFunc != NULL) {
+        if (popup->active && popup->renderUIFunc != nullptr) {
             popup->renderUIFunc(popup);
         }
     }
@@ -350,13 +350,13 @@ PopupMessage* btl_create_popup(void) {
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void free_popup(PopupMessage* popup) {
-    if (popup->message != NULL) {
+    if (popup->message != nullptr) {
         heap_free(popup->message);
-        popup->message = NULL;
+        popup->message = nullptr;
     }
     popup->active = FALSE;
 }
@@ -394,7 +394,7 @@ void show_immune_bonk(f32 x, f32 y, f32 z, s32 numStars, s32 arg4, s32 arg5) {
     }
 
     popup = btl_create_popup();
-    if (popup != NULL) {
+    if (popup != nullptr) {
         sign = 1;
         if (arg5 < 0) {
             arg5 = -arg5;
@@ -413,11 +413,11 @@ void show_immune_bonk(f32 x, f32 y, f32 z, s32 numStars, s32 arg4, s32 arg5) {
         popup->updateFunc = btl_bonk_update;
         popup->renderWorldFunc = btl_bonk_render;
         popup->unk_00 = FALSE;
-        popup->renderUIFunc = NULL;
+        popup->renderUIFunc = nullptr;
         popup->messageIndex = 1;
         popup->active |= 0x10;
         message = popup->message = heap_malloc(numStars * sizeof(*popup->message));
-        ASSERT (popup->message != NULL);
+        ASSERT (popup->message != nullptr);
 
         for (i = 0; i < numStars; i++, message++) {
             modelScript = &BonkModelScripts[numStars];
@@ -512,7 +512,7 @@ void btl_bonk_update(void* data) {
 
     if (!found) {
         heap_free(popup->message);
-        popup->message = NULL;
+        popup->message = nullptr;
         free_popup(popup);
     }
 }
@@ -607,16 +607,16 @@ API_CALLABLE(ForceImmuneBonkCleanup) {
 void btl_show_battle_message(s32 messageIndex, s32 duration) {
     PopupMessage* popup = btl_create_popup();
 
-    if (popup != NULL) {
+    if (popup != nullptr) {
         popup->updateFunc = btl_update_message_popup;
         popup->renderUIFunc = btl_show_message_popup;
         popup->unk_00 = FALSE;
-        popup->renderWorldFunc = NULL;
+        popup->renderWorldFunc = nullptr;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
         popup->showMsgState = BTL_MSG_STATE_INIT;
         popup->needsInit = TRUE;
-        popup->message = NULL;
+        popup->message = nullptr;
         BattlePopupMessageVar = 0;
         bPopupMessage = popup;
         ActionCommandTipVisible = FALSE;
@@ -632,16 +632,16 @@ void btl_show_battle_message(s32 messageIndex, s32 duration) {
 void btl_show_variable_battle_message(s32 messageIndex, s32 duration, s32 varValue) {
     PopupMessage* popup = btl_create_popup();
 
-    if (popup != NULL) {
+    if (popup != nullptr) {
         popup->updateFunc = btl_update_message_popup;
         popup->renderUIFunc = btl_show_message_popup;
         popup->unk_00 = FALSE;
-        popup->renderWorldFunc = NULL;
+        popup->renderWorldFunc = nullptr;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
         popup->showMsgState = BTL_MSG_STATE_INIT;
         popup->needsInit = TRUE;
-        popup->message = NULL;
+        popup->message = nullptr;
         BattlePopupMessageVar = varValue;
         bPopupMessage = popup;
         ActionCommandTipVisible = FALSE;
@@ -654,13 +654,13 @@ void btl_show_variable_battle_message(s32 messageIndex, s32 duration, s32 varVal
 }
 
 s32 btl_is_popup_displayed(void) {
-    return bPopupMessage != NULL;
+    return bPopupMessage != nullptr;
 }
 
 void btl_set_popup_duration(s32 duration) {
     PopupMessage* popup = bPopupMessage;
 
-    if (ActionCommandTipVisible && popup != NULL) {
+    if (ActionCommandTipVisible && popup != nullptr) {
         popup->duration = duration;
     }
 }
@@ -676,7 +676,7 @@ void btl_message_unlock_box_pos(void) {
 void close_action_command_instruction_popup(void) {
     PopupMessage* popup = bPopupMessage;
 
-    if (popup != NULL
+    if (popup != nullptr
         && popup->messageIndex <= BTL_MSG_LAST_ACTION_TIP
         && popup->messageIndex >= BTL_MSG_FIRST_ACTION_TIP
     ) {
@@ -1198,7 +1198,7 @@ void btl_update_message_popup(void* data) {
     }
     if (shouldDisposeWindow) {
         set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_HIDE);
-        bPopupMessage = NULL;
+        bPopupMessage = nullptr;
         free_popup(popup);
     }
 }
@@ -2120,7 +2120,7 @@ API_CALLABLE(WaitForMessageBoxDone) {
 }
 
 API_CALLABLE(ForceCloseMessageBox) {
-    if (bPopupMessage != NULL) {
+    if (bPopupMessage != nullptr) {
         bPopupMessage->duration = 0;
     }
     return ApiStatus_DONE2;
@@ -2144,9 +2144,9 @@ API_CALLABLE(UnlockMessageBoxPosition) {
 void apply_shock_effect(Actor* actor) {
     ActorPart* part = actor->partsTable;
 
-    while (part != NULL) {
+    while (part != nullptr) {
         if (!(part->flags & ACTOR_PART_FLAG_INVISIBLE)
-            && part->idleAnimations != NULL
+            && part->idleAnimations != nullptr
             && !(part->flags & ACTOR_PART_FLAG_SKIP_SHOCK_EFFECT)
         ) {
             f32 x = part->curPos.x;

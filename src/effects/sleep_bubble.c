@@ -29,14 +29,14 @@ void sleep_bubble_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
     bp.init = sleep_bubble_init;
     bp.update = sleep_bubble_update;
     bp.renderScene = sleep_bubble_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_SLEEP_BUBBLE;
 
     effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
     part = effect->data.sleepBubble = general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data.sleepBubble != NULL);
+    ASSERT(effect->data.sleepBubble != nullptr);
 
     part->unk_00 = arg0;
     part->pos.x = arg1;

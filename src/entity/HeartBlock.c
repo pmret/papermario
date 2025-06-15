@@ -410,7 +410,7 @@ EntityScript Entity_HeartBlockContent_Script = {
     es_SetCallback(entity_HeartBlockContent_anim_heal, 0)
     es_Call(entity_HeartBlock_show_tutorial_message)
     es_SetCallback(entity_HeartBlock_wait_for_close_tutorial, 0)
-    es_SetCallback(NULL, 60)
+    es_SetCallback(nullptr, 60)
     es_Restart
     es_End
 };
@@ -449,7 +449,7 @@ EntityBlueprint Entity_HeartBlockContent = {
     .modelAnimationNodes = 0,
     .fpInit = entity_HeartBlockContent_init,
     .updateEntityScript = Entity_HeartBlockContent_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dma = ENTITY_ROM(HeartBlockContent) },
     .entityType = ENTITY_TYPE_HEALING_BLOCK_CONTENT,
     .aabbSize = { 18, 6, 18 }

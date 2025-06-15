@@ -192,8 +192,8 @@ API_CALLABLE(N(func_802405F0_8AC580)) {
             }
             if (npc->moveToPos.y < 0.0f) {
 #if VERSION_PAL
-                var = evt_get_variable(NULL, MV_Unk_02);
-                evt_set_variable(NULL, MV_Unk_02, var + 1);
+                var = evt_get_variable(nullptr, MV_Unk_02);
+                evt_set_variable(nullptr, MV_Unk_02, var + 1);
 #endif
                 retVal = ApiStatus_DONE2;
             }
@@ -235,7 +235,7 @@ API_CALLABLE(N(func_80240BD8_8ACB68)) {
 
 #if VERSION_PAL
 API_CALLABLE(N(func_PAL_80240D08)) {
-    if (evt_get_variable(NULL, MV_Unk_02) == 7) {
+    if (evt_get_variable(nullptr, MV_Unk_02) == 7) {
         return ApiStatus_DONE2;
     }
 

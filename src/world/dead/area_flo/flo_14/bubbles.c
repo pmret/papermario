@@ -48,12 +48,12 @@ API_CALLABLE(N(SavePartnerFlags)) {
     }
 
     script->varTable[14] = TRUE;
-    evt_set_variable(NULL, MV_SavedPartnerFlags, get_npc_unsafe(NPC_PARTNER)->flags);
+    evt_set_variable(nullptr, MV_SavedPartnerFlags, get_npc_unsafe(NPC_PARTNER)->flags);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(RestorePartnerFlags)) {
-    get_npc_unsafe(NPC_PARTNER)->flags = evt_get_variable(NULL, MV_SavedPartnerFlags);
+    get_npc_unsafe(NPC_PARTNER)->flags = evt_get_variable(nullptr, MV_SavedPartnerFlags);
     return ApiStatus_DONE2;
 }
 
@@ -264,7 +264,7 @@ void N(gfx_build_bubble_flower)(void) {
 
     gSPDisplayList(gMainGfxPos++, mdl_get_copied_gfx(VTX_COPY_1));
 
-    if (evt_get_variable(NULL, AF_FLO_BlowingBigBubble)) {
+    if (evt_get_variable(nullptr, AF_FLO_BlowingBigBubble)) {
         if (N(FlowerPhase) > 90) {
             N(FlowerPhase) -= 360;
         }
@@ -387,7 +387,7 @@ EvtScript N(EVS_SetupBubbles) = {
     Set(LVar0, CLONED_MODEL(5))
     Exec(N(EVS_ManageBlownBubble))
     Call(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o167, TRUE)
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(gfx_build_big_bubble)), NULL)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(gfx_build_big_bubble)), nullptr)
     Call(SetModelCustomGfx, MODEL_o167, CUSTOM_GFX_1, -1)
     Call(SetModelCustomGfx, CLONED_MODEL(1), CUSTOM_GFX_1, -1)
     Call(SetModelCustomGfx, CLONED_MODEL(2), CUSTOM_GFX_1, -1)
@@ -395,7 +395,7 @@ EvtScript N(EVS_SetupBubbles) = {
     Call(SetModelCustomGfx, CLONED_MODEL(4), CUSTOM_GFX_1, -1)
     Call(SetModelCustomGfx, CLONED_MODEL(5), CUSTOM_GFX_1, -1)
     Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_o57, TRUE)
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_2, Ref(N(gfx_build_bubble_flower)), NULL)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_2, Ref(N(gfx_build_bubble_flower)), nullptr)
     Call(SetModelCustomGfx, MODEL_o57, CUSTOM_GFX_2, -1)
     Return
     End

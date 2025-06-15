@@ -61,7 +61,7 @@ EvtScript N(EVS_OnReadBillboard) = {
     ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Set(LFlag0, FALSE)
     Call(N(GetAmbushEnemy))
-    IfNe(LVar0, NULL)
+    IfNe(LVar0, nullptr)
         Call(GetNpcVar, NPC_Goomba_Ambush, 0, LVar0)
         IfEq(LVar0, 0)
             Call(SetNpcVar, NPC_Goomba_Ambush, 0, 1)

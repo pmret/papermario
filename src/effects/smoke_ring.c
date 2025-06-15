@@ -45,13 +45,13 @@ void smoke_ring_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bpPtr->update = smoke_ring_update;
     bpPtr->renderScene = smoke_ring_render;
     bpPtr->unk_00 = 0;
-    bpPtr->renderUI = NULL;
+    bpPtr->renderUI = nullptr;
     bpPtr->effectID = EFFECT_SMOKE_RING;
 
     effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
     part = effect->data.smokeRing = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.smokeRing != NULL);
+    ASSERT(effect->data.smokeRing != nullptr);
 
     mem_clear(part, numParts * sizeof(*part));
 

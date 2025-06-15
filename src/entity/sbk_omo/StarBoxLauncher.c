@@ -249,9 +249,9 @@ EntityScript Entity_StarBoxLauncher_Script = {
     es_SetCallback(entity_StarBoxLauncher_check_launch, 0)
     es_SetCallback(entity_StarBoxLauncher_shake_box, 4)
     es_Call(entity_StarBoxLauncher_restore_pos)
-    es_SetCallback(NULL, 3)
+    es_SetCallback(nullptr, 3)
     es_Call(entity_StarBoxLauncher_start_script)
-    es_SetCallback(NULL, 1)
+    es_SetCallback(nullptr, 1)
     es_SetCallback(entity_StarBoxLauncher_launch, 0)
     es_SetCallback(func_802BC99C_E312EC, 0)
     es_Restart
@@ -267,7 +267,7 @@ EntityBlueprint Entity_StarBoxLauncher = {
     .modelAnimationNodes = 0,
     .fpInit = entity_StarBoxLauncher_init,
     .updateEntityScript = Entity_StarBoxLauncher_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dma = ENTITY_ROM(StarBoxLauncher) },
     .entityType = ENTITY_TYPE_STAR_BOX_LAUNCHER,
     .aabbSize = { 35, 35, 35 }

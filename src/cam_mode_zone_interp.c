@@ -20,7 +20,7 @@ CameraControlSettings* test_ray_zone_aabb(f32 x, f32 y, f32 z) {
     s32 zoneID = test_ray_zones(x, y, z, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &nx, &ny, &nz);
 
     if (zoneID < 0) {
-        return NULL;
+        return nullptr;
     }
 
     return gZoneCollisionData.colliderList[zoneID].camSettings;
@@ -197,7 +197,7 @@ void update_camera_from_controller(
     y = tY;
     z = tZ;
 
-    if (controller == NULL) {
+    if (controller == nullptr) {
         configuration->targetPos.x = x;
         configuration->targetPos.y = y;
         configuration->targetPos.z = z;
@@ -626,8 +626,8 @@ void update_camera_zone_interp(Camera* camera) {
     changingZone = FALSE;
 
     if (camera->needsReinit) {
-        camera->curSettings = NULL;
-        camera->prevSettings = NULL;
+        camera->curSettings = nullptr;
+        camera->prevSettings = nullptr;
         camera->linearInterp = 0.0f;
         camera->yinterpGoal = 0.0f;
         camera->yinterpCur = targetY;
@@ -693,8 +693,8 @@ void update_camera_zone_interp(Camera* camera) {
         cond2 = FALSE;
         cs2 = cs;
         currentController = camera->curSettings;
-        if (cs != NULL
-            && currentController != NULL
+        if (cs != nullptr
+            && currentController != nullptr
             && cs->type == currentController->type
             && cs->flag == currentController->flag
             && cs->boomLength == currentController->boomLength

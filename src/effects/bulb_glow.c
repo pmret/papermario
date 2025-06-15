@@ -57,13 +57,13 @@ void bulb_glow_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, EffectInst
     bp.update = bulb_glow_update;
     bp.renderScene = bulb_glow_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_BULB_GLOW;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.bulbGlow = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.bulbGlow != NULL);
+    ASSERT(effect->data.bulbGlow != nullptr);
 
     data->type = arg0 & 255;
     if (arg0 < 256) {

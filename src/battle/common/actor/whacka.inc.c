@@ -102,7 +102,7 @@ ActorBlueprint NAMESPACE = {
 
 API_CALLABLE(N(IsHitEightTimes)) {
     script->varTable[0] = 0;
-    if (evt_get_variable(NULL, GB_IWA00_Whacka_HitCount) >= 8) {
+    if (evt_get_variable(nullptr, GB_IWA00_Whacka_HitCount) >= 8) {
         script->varTable[0] = 1;
     }
 

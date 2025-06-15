@@ -20,13 +20,13 @@ void drop_leaves_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
     bp.update = drop_leaves_update;
     bp.renderScene = drop_leaves_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_DROP_LEAVES;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     part = effect->data.dropLeaves = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.dropLeaves != NULL);
+    ASSERT(effect->data.dropLeaves != nullptr);
 
     part->unk_00 = arg0;
     part->unk_04 = arg1;

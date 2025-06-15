@@ -41,10 +41,10 @@ GameModeIncomplete GameModeStartup = {
     MODE_FLAG_NONE,
     state_init_startup,
     state_step_startup,
-    NULL,
+    nullptr,
     state_drawUI_startup,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -52,10 +52,10 @@ GameModeIncomplete GameModeLogos = {
     MODE_FLAG_NONE,
     state_init_logos,
     state_step_logos,
-    NULL,
+    nullptr,
     state_drawUI_logos,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -63,10 +63,10 @@ GameModeIncomplete GameModeTitleScreen = {
     MODE_FLAG_NONE,
     state_init_title_screen,
     state_step_title_screen,
-    NULL,
+    nullptr,
     state_drawUI_title_screen,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -74,10 +74,10 @@ GameModeIncomplete GameModeEnterDemoWorld = {
     MODE_FLAG_NONE,
     state_init_enter_demo,
     state_step_enter_world,
-    NULL,
+    nullptr,
     state_drawUI_enter_world,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -85,10 +85,10 @@ GameModeIncomplete GameModeChangeMap = {
     MODE_FLAG_NONE,
     state_init_change_map,
     state_step_change_map,
-    NULL,
+    nullptr,
     state_drawUI_change_map,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -96,10 +96,10 @@ GameModeIncomplete GameModeGameOver = {
     MODE_FLAG_NONE,
     state_init_game_over,
     state_step_game_over,
-    NULL,
+    nullptr,
     state_drawUI_game_over,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -107,10 +107,10 @@ GameModeIncomplete GameModeEnterWorld = {
     MODE_FLAG_NONE,
     state_init_enter_world,
     state_step_enter_world,
-    NULL,
+    nullptr,
     state_drawUI_enter_world,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -118,10 +118,10 @@ GameModeIncomplete GameModeWorld = {
     MODE_FLAG_NONE,
     state_init_world,
     state_step_world,
-    NULL,
+    nullptr,
     state_drawUI_world,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -129,10 +129,10 @@ GameModeIncomplete GameModeBattle = {
     MODE_FLAG_NONE,
     state_init_battle,
     state_step_battle,
-    NULL,
+    nullptr,
     state_drawUI_battle,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -140,10 +140,10 @@ GameModeIncomplete GameModeEndBattle = {
     MODE_FLAG_NONE,
     state_init_end_battle,
     state_step_end_battle,
-    NULL,
+    nullptr,
     state_drawUI_end_battle,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -151,10 +151,10 @@ GameModeIncomplete GameModePause = {
     MODE_FLAG_NONE,
     state_init_pause,
     state_step_pause,
-    NULL,
+    nullptr,
     state_drawUI_pause,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -162,10 +162,10 @@ GameModeIncomplete GameModeUnpause = {
     MODE_FLAG_NONE,
     state_init_unpause,
     state_step_unpause,
-    NULL,
+    nullptr,
     state_drawUI_unpause,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -173,10 +173,10 @@ GameModeIncomplete GameModeLanguageSelect = {
     MODE_FLAG_NONE,
     state_init_language_select,
     state_step_language_select,
-    NULL,
+    nullptr,
     state_drawUI_language_select,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -184,10 +184,10 @@ GameModeIncomplete GameModeEndLanguageSelect = {
     MODE_FLAG_NONE,
     state_init_exit_language_select,
     state_step_exit_language_select,
-    NULL,
+    nullptr,
     state_drawUI_exit_language_select,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -195,10 +195,10 @@ GameModeIncomplete GameModeFileSelect = {
     MODE_FLAG_NONE,
     state_init_file_select,
     state_step_file_select,
-    NULL,
+    nullptr,
     state_drawUI_file_select,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -206,10 +206,10 @@ GameModeIncomplete GameModeEndFileSelect = {
     MODE_FLAG_NONE,
     state_init_exit_file_select,
     state_step_exit_file_select,
-    NULL,
+    nullptr,
     state_drawUI_exit_file_select,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -217,10 +217,10 @@ GameModeIncomplete GameModeIntro = {
     MODE_FLAG_NONE,
     state_init_intro,
     state_step_intro,
-    NULL,
+    nullptr,
     state_drawUI_intro,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 
@@ -228,10 +228,10 @@ GameModeIncomplete GameModeDemo = {
     MODE_FLAG_NONE,
     state_init_demo,
     state_step_demo,
-    NULL,
+    nullptr,
     state_drawUI_demo,
     #ifdef AVOID_UB
-    NULL,
+    nullptr,
     #endif
 };
 

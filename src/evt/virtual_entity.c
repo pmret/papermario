@@ -46,7 +46,7 @@ void virtual_entity_list_update(void) {
     for (i = 0; i < ARRAY_COUNT(*gCurrentVirtualEntityListPtr); i++) {
         VirtualEntity* virtualEntity = (*gCurrentVirtualEntityListPtr)[i];
 
-        if (virtualEntity != NULL && virtualEntity->entityModelIndex >= 0) {
+        if (virtualEntity != nullptr && virtualEntity->entityModelIndex >= 0) {
             exec_entity_model_commandlist(virtualEntity->entityModelIndex);
         }
     }
@@ -67,7 +67,7 @@ void virtual_entity_list_render_world(void) {
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentVirtualEntityListPtr); i++) {
         virtualEntity = (*gCurrentVirtualEntityListPtr)[i];
-        if (virtualEntity != NULL) {
+        if (virtualEntity != nullptr) {
             if (!(virtualEntity->entityModelIndex < 0 || get_entity_model(virtualEntity->entityModelIndex)->flags & ENTITY_MODEL_FLAG_CAM3)) {
                 guTranslateF(translation, virtualEntity->pos.x, virtualEntity->pos.y, virtualEntity->pos.z);
                 guRotateF(xRot, virtualEntity->rot.x, 1.0f, 0.0f, 0.0f);
@@ -100,7 +100,7 @@ void virtual_entity_list_render_UI(void) {
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentVirtualEntityListPtr); i++) {
         virtualEntity = (*gCurrentVirtualEntityListPtr)[i];
-        if (virtualEntity != NULL) {
+        if (virtualEntity != nullptr) {
             if (!(virtualEntity->entityModelIndex < 0 || !(get_entity_model(virtualEntity->entityModelIndex)->flags & ENTITY_MODEL_FLAG_CAM3))) {
                 guTranslateF(translation, virtualEntity->pos.x, virtualEntity->pos.y, virtualEntity->pos.z);
                 guRotateF(xRot, virtualEntity->rot.x, 1.0f, 0.0f, 0.0f);
@@ -589,7 +589,7 @@ VirtualEntity* ALT_virtual_entity_create(EntityModelScript* cmdList) {
     }
 
     if (i >= ARRAY_COUNT(*gCurrentVirtualEntityListPtr)) {
-        return NULL;
+        return nullptr;
     }
 
     virtualEntity->entityModelIndex = ALT_load_entity_model(cmdList);
@@ -661,12 +661,12 @@ void clear_virtual_entity_list(void) {
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentVirtualEntityListPtr); i++) {
         (*gCurrentVirtualEntityListPtr)[i] = heap_malloc(sizeof(VirtualEntity));
-        ASSERT((*gCurrentVirtualEntityListPtr)[i] != NULL);
+        ASSERT((*gCurrentVirtualEntityListPtr)[i] != nullptr);
         (*gCurrentVirtualEntityListPtr)[i]->entityModelIndex = -1;
     }
 
     create_worker_scene(virtual_entity_list_update, virtual_entity_list_render_world);
-    create_worker_backUI(NULL, virtual_entity_list_render_UI);
+    create_worker_backUI(nullptr, virtual_entity_list_render_UI);
 }
 
 void init_virtual_entity_list(void) {

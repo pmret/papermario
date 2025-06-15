@@ -64,7 +64,7 @@ API_CALLABLE(N(CreatePhonographData)) {
 }
 
 PhonographData* N(GetPhonographData)(void) {
-    return (PhonographData*) evt_get_variable(NULL, MV_PhonographDataPtr);
+    return (PhonographData*) evt_get_variable(nullptr, MV_PhonographDataPtr);
 }
 
 u8 N(mashMeter_bgColors)[] = {
@@ -245,7 +245,7 @@ void N(worker_update_phonograph_hud)(void) {
                     mashInputsCount++;
                 }
             }
-            evt_set_variable(NULL, MV_MashInputsAmount, mashInputsCount * 1000);
+            evt_set_variable(nullptr, MV_MashInputsAmount, mashInputsCount * 1000);
             data->fillValue = (mashInputsCount * 100) / 22;
             if (data->fillValue < 0) {
                 data->fillValue = 0;
@@ -378,9 +378,9 @@ API_CALLABLE(N(SavePhonographUpdateScriptIDs)) {
     PhonographData* data = N(GetPhonographData)();
 
     data->state = PHONOGRAPH_HUD_STATE_MASHING;
-    data->updateScaleScriptID = evt_get_variable(NULL, MV_UpdateScaleScript);
-    data->updateCrankScriptID = evt_get_variable(NULL, MV_UpdateCrankScript);
-    data->updateRecordScriptID = evt_get_variable(NULL, MV_UpdateRecordScript);
+    data->updateScaleScriptID = evt_get_variable(nullptr, MV_UpdateScaleScript);
+    data->updateCrankScriptID = evt_get_variable(nullptr, MV_UpdateCrankScript);
+    data->updateRecordScriptID = evt_get_variable(nullptr, MV_UpdateRecordScript);
     data->songName = gMusicControlData->songName;
     return ApiStatus_DONE2;
 }

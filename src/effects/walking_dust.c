@@ -29,7 +29,7 @@ void walking_dust_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
     bp.init = walking_dust_init;
     bp.update = walking_dust_update;
     bp.renderScene = walking_dust_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_WALKING_DUST;
 
     effect = create_effect_instance(&bp);
@@ -37,7 +37,7 @@ void walking_dust_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
 
     data = general_heap_malloc(numParts * sizeof(*data));
     effect->data.walkingDust = data;
-    ASSERT(effect->data.walkingDust != NULL);
+    ASSERT(effect->data.walkingDust != nullptr);
 
     mem_clear(data, numParts * sizeof(*data));
     data->unk_6C = arg0 == 2;

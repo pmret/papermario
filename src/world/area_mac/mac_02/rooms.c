@@ -13,7 +13,7 @@ API_CALLABLE(N(InitEntryFromTunnels)) {
 
     for (i = 0; i < MAX_NPCS; i++) {
         npc = get_npc_by_index(i);
-        if (npc != NULL) {
+        if (npc != nullptr) {
             if (npc->flags != 0 && npc->npcID != NPC_PARTNER) {
                 npc->flags |= NPC_FLAG_HIDING;
             }
@@ -104,7 +104,7 @@ EvtScript N(EVS_SetupRooms) = {
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_TayceT)),
         Ref(N(EVS_SetWallRot_TayceT)),
-        NULL,
+        nullptr,
         Ref(N(EVS_RoomListener_TayceT)),
         COLLIDER_deilit1u,
         COLLIDER_deilit1,
@@ -115,7 +115,7 @@ EvtScript N(EVS_SetupRooms) = {
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_BlueHouse)),
         Ref(N(EVS_SetWallRot_BlueHouse)),
-        NULL,
+        nullptr,
         Ref(N(EVS_RoomListener_BlueHouse)),
         COLLIDER_deilit2,
         COLLIDER_deilit2u,

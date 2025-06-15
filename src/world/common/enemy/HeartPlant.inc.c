@@ -29,7 +29,7 @@ EvtScript N(EVS_NpcInteract_HeartPlant) = {
         Call(N(HeartPlant_SpawnHeart))
         Call(SetNpcAnimation, NPC_SELF, ANIM_HeartPlant_Anim01)
         Thread
-            Call(BindNpcInteract, NPC_SELF, NULL)
+            Call(BindNpcInteract, NPC_SELF, nullptr)
             Exec(N(EVS_HeartPlant_RebindInteractAfterDelay))
             Wait(45)
             Call(SetSelfVar, 1, 0)

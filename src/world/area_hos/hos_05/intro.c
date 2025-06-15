@@ -339,7 +339,7 @@ API_CALLABLE(N(SetLightRayPos)) {
 
 f32 N(StoryCameraAngle) = 240.0;
 
-u16* N(ColorBufPtr) = NULL;
+u16* N(ColorBufPtr) = nullptr;
 
 f32 IntroCamStateA_BoomLength = 130.4;
 f32 IntroCamStateA_BoomPitch = 12.4;
@@ -1362,7 +1362,7 @@ void N(appendGfx_image_strips)(s32 baseX, s32 baseY, IMG_PTR img, PAL_PTR pal, s
     gDPPipeSync(gMainGfxPos++);
     gSPDisplayList(gMainGfxPos++, N(gfx_setup_story_viewport));
 
-    if (pal != NULL) {
+    if (pal != nullptr) {
         gDPLoadTLUT_pal256(gMainGfxPos++, pal);
     } else {
         gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
@@ -1382,7 +1382,7 @@ void N(appendGfx_image_strips)(s32 baseX, s32 baseY, IMG_PTR img, PAL_PTR pal, s
     gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
 
     for (i = 0; i < height / lineHeight; i++) {
-        gDPLoadTextureTile(gMainGfxPos++, img, pal != NULL ? G_IM_FMT_CI : G_IM_FMT_IA, G_IM_SIZ_8b, width, height,
+        gDPLoadTextureTile(gMainGfxPos++, img, pal != nullptr ? G_IM_FMT_CI : G_IM_FMT_IA, G_IM_SIZ_8b, width, height,
                         0, i * lineHeight, width - 1, i * lineHeight + lineHeight - 1, 0,
                         G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
         gSPScisTextureRectangle(gMainGfxPos++, baseX * 4, (baseY + i * lineHeight) * 4, (baseX + width) * 4,
@@ -1395,7 +1395,7 @@ void N(appendGfx_image_strips)(s32 baseX, s32 baseY, IMG_PTR img, PAL_PTR pal, s
 void N(draw_background_tape)(void) {
     N(appendGfx_image_strips)(
         N(StoryGraphicsPtr)->tapePosX, N(StoryGraphicsPtr)->tapePosY,
-        N(StoryGraphicsPtr)->imgTape, NULL,
+        N(StoryGraphicsPtr)->imgTape, nullptr,
         N(StoryGraphicsPtr)->tapeAlpha, 128, 128, 32
     );
 }
@@ -1522,7 +1522,7 @@ API_CALLABLE(N(InitializeStoryGraphicsData)) {
     s32 tapeOffset;
     u8* it;
 
-    N(StoryGraphicsPtr)->workerID = create_worker_frontUI(NULL, N(worker_draw_story_graphics));
+    N(StoryGraphicsPtr)->workerID = create_worker_frontUI(nullptr, N(worker_draw_story_graphics));
     N(StoryGraphicsPtr)->imgFront = it = mdl_get_next_texture_address(
         (STORY_IMG_SIZE + PAL_256_SIZE) +
         (STORY_IMG_SIZE + PAL_256_SIZE) +

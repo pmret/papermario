@@ -71,7 +71,7 @@ API_CALLABLE(N(RunMixingMinigame)) {
     switch (N(MixingGameState)) {
         case MIXING_STATE_INIT:
             N(MixingGameTimeLeft) = evt_get_variable(script, *args++);
-            N(MixingGameUIRenderer) = create_worker_frontUI(NULL, N(worker_draw_mixing_game_ui));
+            N(MixingGameUIRenderer) = create_worker_frontUI(nullptr, N(worker_draw_mixing_game_ui));
             N(MixingGameInputs) = 0;
             N(MixingGameUnused) = 0;
             for (i = 0; i < ARRAY_COUNT(N(MixingGameInputBuffer)); i++) {

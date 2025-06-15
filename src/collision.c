@@ -149,7 +149,7 @@ void restore_map_collision_data(void) {
 }
 
 void load_battle_hit_asset(const char* hitName) {
-    if (hitName == NULL) {
+    if (hitName == nullptr) {
         gCollisionData.numColliders = 0;
     } else {
         u32 assetSize;
@@ -185,8 +185,8 @@ void load_hit_data(s32 idx, HitFile* hit) {
     s32 i,j;
     f32 e13_y, e21_z, e13_z, e21_y, e21_x, e13_x, normalX, normalY, normalZ, coeff;
 
-    assetCollisionData = NULL;
-    collisionData = NULL;
+    assetCollisionData = nullptr;
+    collisionData = nullptr;
 
     map = get_current_map_settings();
 
@@ -242,7 +242,7 @@ void load_hit_data(s32 idx, HitFile* hit) {
             collider->triangleTable = triangle = collision_heap_malloc(assetCollider->numTriangles * sizeof(ColliderTriangle));
 
             if (assetCollider->boundingBoxOffset < 0) {
-                collider->aabb = NULL;
+                collider->aabb = nullptr;
             } else {
                 collider->aabb = (ColliderBoundingBox*)((u32*)(collisionData->aabbs) + assetCollider->boundingBoxOffset);
 
@@ -386,7 +386,7 @@ void update_collider_transform(s16 colliderID) {
     collider = &gCollisionData.colliderList[colliderID];
     model = get_model_from_list_index(collider->parentModelIndex);
 
-    if (model->bakedMtx == NULL) {
+    if (model->bakedMtx == nullptr) {
         copy_matrix(model->userTransformMtx, matrix);
     } else {
         guMtxL2F(matrix, (Mtx*)model->bakedMtx);
@@ -872,7 +872,7 @@ s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 d
         if (collider->flags & COLLIDER_FLAG_IGNORE_PLAYER)
             continue;
 
-        if (collider->numTriangles == 0 || collider->aabb == NULL)
+        if (collider->numTriangles == 0 || collider->aabb == nullptr)
             continue;
 
         triangle = collider->triangleTable;
@@ -969,7 +969,7 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
     for (i = 0; i < MAX_ENTITIES; i++) {
         entity = get_entity_by_index(i);
 
-        if (entity == NULL || (entity->flags & (ENTITY_FLAG_SKIP_UPDATE | ENTITY_FLAG_DISABLE_COLLISION))) {
+        if (entity == nullptr || (entity->flags & (ENTITY_FLAG_SKIP_UPDATE | ENTITY_FLAG_DISABLE_COLLISION))) {
             continue;
         }
 

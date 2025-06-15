@@ -254,7 +254,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
 
     if (data->spawnedItemIndex >= 0) {
         ItemEntity* itemEntity = get_item_entity(data->spawnedItemIndex);
-        if (itemEntity != NULL) {
+        if (itemEntity != nullptr) {
             if (itemEntity->flags & ITEM_ENTITY_FLAG_10) {
                 data->spawnedItemPos.x = itemEntity->pos.x;
                 data->spawnedItemPos.y = itemEntity->pos.y;
@@ -275,7 +275,7 @@ s32 entity_HiddenPanel_is_item_on_top(Entity* entity) {
 
     if (data->spawnedItemIndex >= 0) {
         ItemEntity* itemEntity = get_item_entity(data->spawnedItemIndex);
-        if (itemEntity != NULL) {
+        if (itemEntity != nullptr) {
             if (itemEntity->flags & ITEM_ENTITY_FLAG_10) {
                 if (fabs(entity->pos.x - data->spawnedItemPos.x) <= 34.0)  {
                     if (fabs(entity->pos.z - data->spawnedItemPos.z) <= 34.0) {
@@ -364,7 +364,7 @@ EntityBlueprint Entity_HiddenPanel = {
     .modelAnimationNodes = 0,
     .fpInit = entity_HiddenPanel_init,
     .updateEntityScript = Entity_HiddenPanel_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dma = ENTITY_ROM(HiddenPanel) },
     .entityType = ENTITY_TYPE_HIDDEN_PANEL,
     .aabbSize = { 60, 0, 60 }

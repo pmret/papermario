@@ -3,6 +3,17 @@
 
 #include "ultra64.h"
 
+#if (defined(__cplusplus) && __cplusplus >= 201103L)
+    /* C++11 or later */
+    #include <cstddef>
+#elif (defined(__STDC__) && defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 202000L))
+    /* C23 or later */
+    #include <stddef.h>
+#else
+    #define nullptr (void*)0
+    typedef void* nullptr_t;
+#endif
+
 #define UNK_TYPE s32
 #define UNK_PTR void*
 #define UNK_RET void

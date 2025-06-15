@@ -11,7 +11,7 @@ typedef struct HudElementSize {
     s16 size;
 } HudElementSize;
 
-u8* gHudElementAuxCache = NULL;
+u8* gHudElementAuxCache = nullptr;
 s32 gHudElementCacheCapacity = 0x11000;
 
 HudScript HES_Empty = {
@@ -133,7 +133,7 @@ void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
     s32 i;
     s32 capacity;
 
-    if (pos == NULL) {
+    if (pos == nullptr) {
         return;
     }
 
@@ -634,7 +634,7 @@ void hud_element_clear_cache(void) {
             entryPalette[i].id = -1;
         }
     } else {
-        if (gHudElementAuxCache == NULL) {
+        if (gHudElementAuxCache == nullptr) {
             gHudElementCacheBuffer = general_heap_malloc(gHudElementCacheCapacity / 2);
             ASSERT(gHudElementCacheBuffer);
         } else {
@@ -651,7 +651,7 @@ void hud_element_clear_cache(void) {
     }
 
     for (i = 0; i < ARRAY_COUNT(*gHudElements); i++) {
-        (*gHudElements)[i] = NULL;
+        (*gHudElements)[i] = nullptr;
     }
 
     gHudElementsNumber = 0;
@@ -665,7 +665,7 @@ extern Addr D_80200000;
 
 void init_hud_element_list(void) {
     if (gGameStatusPtr->context == CONTEXT_WORLD) {
-        if (gHudElementCacheBufferBattle != NULL) {
+        if (gHudElementCacheBufferBattle != nullptr) {
 #if VERSION_PAL
             if (gHudElementCacheBufferBattle != D_80200000) {
                 general_heap_free(gHudElementCacheBufferBattle);
@@ -673,7 +673,7 @@ void init_hud_element_list(void) {
 #else
             general_heap_free(gHudElementCacheBufferBattle);
 #endif
-            gHudElementCacheBufferBattle = NULL;
+            gHudElementCacheBufferBattle = nullptr;
         }
 
         gHudElements = &gHudElementsWorld;
@@ -718,7 +718,7 @@ s32 hud_element_create(HudScript* anim) {
     s32 id;
 
     for (id = 0; id < ARRAY_COUNT(*gHudElements); id++) {
-        if ((*gHudElements)[id] == NULL) {
+        if ((*gHudElements)[id] == nullptr) {
             break;
         }
     }
@@ -728,11 +728,11 @@ s32 hud_element_create(HudScript* anim) {
     (*gHudElements)[id] = hudElement = heap_malloc(sizeof(*hudElement));
     gHudElementsNumber++;
 
-    ASSERT(hudElement != NULL);
+    ASSERT(hudElement != nullptr);
 
     hudElement->flags = HUD_ELEMENT_FLAG_INITIALIZED;
     hudElement->readPos = anim;
-    if (anim == NULL) {
+    if (anim == nullptr) {
         hudElement->readPos = &HES_Empty;
     }
     hudElement->updateTimer = 1;
@@ -773,11 +773,11 @@ void update_hud_elements(void) {
     for (i = 0; i < ARRAY_COUNT(*gHudElements);) {
         HudElement* elem = (*gHudElements)[i];
 
-        if (elem != NULL && elem->flags && !(elem->flags & HUD_ELEMENT_FLAG_DISABLED)) {
+        if (elem != nullptr && elem->flags && !(elem->flags & HUD_ELEMENT_FLAG_DISABLED)) {
             if (elem->flags & HUD_ELEMENT_FLAG_DELETE) {
                 hud_element_free(i);
                 i++;
-            } else if (elem->readPos != NULL) {
+            } else if (elem->readPos != nullptr) {
                 elem->updateTimer--;
                 if (elem->updateTimer == 0) {
                     while (hud_element_update(elem) != 0);
@@ -1192,7 +1192,7 @@ void render_hud_elements_backUI(void) {
     count = 0;
     for (i = 0; i < ARRAY_COUNT(*gHudElements); i++) {
         hudElement = (*gHudElements)[i];
-        if (hudElement != NULL) {
+        if (hudElement != nullptr) {
             s32 flags = hudElement->flags;
             if (flags && !(flags & HUD_ELEMENT_FLAG_DISABLED)) {
                 if (!(flags & (HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_TRANSFORM | HUD_ELEMENT_FLAG_200000 | HUD_ELEMENT_FLAG_10000000 | HUD_ELEMENT_FLAG_40000000))) {
@@ -1218,7 +1218,7 @@ void render_hud_elements_backUI(void) {
     for (i = 0; i < count; i++) {
         hudElement = (*gHudElements)[sortedElements[i]];
 
-        if (hudElement->readPos == NULL) {
+        if (hudElement->readPos == nullptr) {
             break;
         }
 
@@ -1312,7 +1312,7 @@ void render_hud_elements_frontUI(void) {
     count = 0;
     for (i = 0; i < ARRAY_COUNT(*gHudElements); i++) {
         hudElement = (*gHudElements)[i];
-        if (hudElement != NULL) {
+        if (hudElement != nullptr) {
             s32 flags = hudElement->flags;
             if (flags && !(flags & HUD_ELEMENT_FLAG_DISABLED)) {
                 if (!(flags & (HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_TRANSFORM | HUD_ELEMENT_FLAG_200000 | HUD_ELEMENT_FLAG_10000000))) {
@@ -1631,7 +1631,7 @@ void render_transformed_hud_elements(void) {
             if (gCurrentCamID == CAM_HUD) {
                 for (i = 0; i < ARRAY_COUNT(*gHudElements); i++) {
                     hudElement = (*gHudElements)[i];
-                    if (hudElement == NULL) {
+                    if (hudElement == nullptr) {
                         continue;
                     }
 
@@ -1693,7 +1693,7 @@ void render_transformed_hud_elements(void) {
             if (gCurrentCamID == CAM_BATTLE) {
                 for (i = 0; i < ARRAY_COUNT(*gHudElements); i++) {
                     hudElement = (*gHudElements)[i];
-                    if (hudElement == NULL) {
+                    if (hudElement == nullptr) {
                         continue;
                     }
 
@@ -1816,7 +1816,7 @@ void func_80143C48(s32 elemID, s32 arg1, s32 camID) {
         elemID &= ~HUD_ELEMENT_BATTLE_ID_MASK;
         elem = (*gHudElements)[elemID];
 
-        if (elem == NULL) {
+        if (elem == nullptr) {
             return;
         }
 
@@ -1973,7 +1973,7 @@ void hud_element_draw_without_clipping(s32 id) {
 void hud_element_set_script(s32 id, HudScript* anim) {
     HudElement* hudElement = (*gHudElements)[id & ~HUD_ELEMENT_BATTLE_ID_MASK];
 
-    if (anim == NULL) {
+    if (anim == nullptr) {
         anim = &HES_Empty;
     }
 
@@ -2009,7 +2009,7 @@ void hud_element_free(s32 id) {
     }
 
     heap_free((*gHudElements)[id & ~HUD_ELEMENT_BATTLE_ID_MASK]);
-    (*gHudElements)[id & ~HUD_ELEMENT_BATTLE_ID_MASK] = NULL;
+    (*gHudElements)[id & ~HUD_ELEMENT_BATTLE_ID_MASK] = nullptr;
     gHudElementsNumber--;
 }
 
@@ -2058,7 +2058,7 @@ void ALT_clear_hud_element_cache(void) {
             gHudElementCacheTablePaletteWorld[i].id = -1;
         }
     } else {
-        if (gHudElementAuxCache == NULL) {
+        if (gHudElementAuxCache == nullptr) {
             heap_free(gHudElementCacheBuffer);
             gHudElementCacheBuffer = heap_malloc(gHudElementCacheCapacity / 2);
             ASSERT(gHudElementCacheBuffer);
@@ -2161,7 +2161,7 @@ void hud_element_create_transform_A(s32 id) {
     HudTransform* transform = general_heap_malloc(sizeof(*transform));
 
     element->hudTransform = transform;
-    ASSERT(transform != NULL);
+    ASSERT(transform != nullptr);
     element->flags |= HUD_ELEMENT_FLAG_TRANSFORM;
     transform->imgfxIdx = imgfx_get_free_instances(1);
     transform->pos.x = 0.0f;
@@ -2183,7 +2183,7 @@ void hud_element_create_transform_B(s32 id) {
     HudTransform* transform = general_heap_malloc(sizeof(*transform));
 
     element->hudTransform = transform;
-    ASSERT(transform != NULL);
+    ASSERT(transform != nullptr);
     element->flags |= HUD_ELEMENT_FLAG_TRANSFORM | HUD_ELEMENT_FLAG_NO_FOLD;
     transform->imgfxIdx = 0;
     transform->pos.x = 0.0f;
@@ -2203,7 +2203,7 @@ void hud_element_create_transform_C(s32 id) {
     HudTransform* transform = general_heap_malloc(sizeof(*transform));
 
     element->hudTransform = transform;
-    ASSERT(transform != NULL);
+    ASSERT(transform != nullptr);
     element->flags |= HUD_ELEMENT_FLAG_40000000 | HUD_ELEMENT_FLAG_NO_FOLD | HUD_ELEMENT_FLAG_TRANSFORM;
     transform->imgfxIdx = 0;
     transform->pos.x = 0.0f;
@@ -2227,7 +2227,7 @@ void hud_element_free_transform(s32 id) {
     }
 
     heap_free(hudElement->hudTransform);
-    hudElement->hudTransform = NULL;
+    hudElement->hudTransform = nullptr;
     hudElement->flags &= ~(HUD_ELEMENT_FLAG_40000000 | HUD_ELEMENT_FLAG_NO_FOLD | HUD_ELEMENT_FLAG_TRANSFORM);
 }
 
@@ -2280,7 +2280,7 @@ void copy_world_hud_element_ref_to_battle(s32 worldID, s32 battleID) {
 
 void hud_element_set_aux_cache(void* base, s32 size) {
     gHudElementAuxCache = (u8*)base;
-    if (base == NULL) {
+    if (base == nullptr) {
         gHudElementCacheCapacity = 0x11000;
     } else {
         gHudElementCacheCapacity = size;

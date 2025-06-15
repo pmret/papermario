@@ -147,7 +147,7 @@ s32 phys_adjust_cam_on_landing(void) {
                         }
                     }
 
-                    if (evt_get_variable(NULL, GB_StoryProgress) >= STORY_CH2_DRAINED_THIRD_SAND_ROOM) {
+                    if (evt_get_variable(nullptr, GB_StoryProgress) >= STORY_CH2_DRAINED_THIRD_SAND_ROOM) {
                         ret = 2;
                     }
                     break;
@@ -214,7 +214,7 @@ void phys_reset_spin_history(void) {
     }
 
     D_8010C964 = 0;
-    D_8010C924 = NULL;
+    D_8010C924 = nullptr;
 }
 
 void phys_update_action_state(void) {
@@ -279,7 +279,7 @@ void phys_update_action_state(void) {
         if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
             void* dmaStart = PlayerActionsTable[playerStatus->actionState].dmaStart;
 
-            if (dmaStart != NULL && dmaStart != D_8010C924) {
+            if (dmaStart != nullptr && dmaStart != D_8010C924) {
                 D_8010C924 = dmaStart;
                 dma_copy(dmaStart, PlayerActionsTable[playerStatus->actionState].dmaEnd, PLAYER_ACTION_VRAM_DEF);
             }
@@ -302,7 +302,7 @@ void phys_peach_update(void) {
             Action* action = &PlayerActionsTable[playerStatus->actionState];
 
             if (action->flag) {
-                if (action->dmaStart != NULL && action->dmaStart != D_8010C924) {
+                if (action->dmaStart != nullptr && action->dmaStart != D_8010C924) {
                     D_8010C924 = action->dmaStart;
 
                     dma_copy(D_8010C924, PlayerActionsTable[playerStatus->actionState].dmaEnd, PLAYER_ACTION_VRAM_DEF);
@@ -404,9 +404,9 @@ void set_action_state(s32 actionState) {
         sfx_stop_sound(spinState->spinSoundID);
     }
 
-    if (playerStatus->specialDecorationEffect != NULL) {
+    if (playerStatus->specialDecorationEffect != nullptr) {
         playerStatus->specialDecorationEffect->data.spin->timeLeft = 10;
-        playerStatus->specialDecorationEffect = NULL;
+        playerStatus->specialDecorationEffect = nullptr;
     }
 }
 
@@ -589,7 +589,7 @@ void peach_check_for_parasol_input(void) {
                     gGameStatusPtr->peachFlags |= PEACH_FLAG_DISGUISED;
 
                     disguiseNpc = peach_make_disguise_npc(gGameStatusPtr->peachDisguise);
-                    if (disguiseNpc != NULL) {
+                    if (disguiseNpc != nullptr) {
                         disguiseNpc->flags &= ~NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
                     }
                 }
@@ -626,7 +626,7 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
     f32 yaw;
 
     if (peachDisguise == PEACH_DISGUISE_NONE) {
-        return NULL;
+        return nullptr;
     }
 
     playerStatus->colliderHeight = 37;
@@ -636,8 +636,8 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
 
     bpPtr->flags = NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
     bpPtr->initialAnim = BasicPeachDisguiseAnims[playerStatus->peachDisguise].idle;
-    bpPtr->onUpdate = NULL;
-    bpPtr->onRender = NULL;
+    bpPtr->onUpdate = nullptr;
+    bpPtr->onRender = nullptr;
 
     PeachDisguiseNpcIndex = create_standard_npc(bpPtr, PeachDisguiseExtraAnims[playerStatus->peachDisguise]);
     npc = get_npc_by_index(PeachDisguiseNpcIndex);

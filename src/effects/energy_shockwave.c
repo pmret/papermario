@@ -26,13 +26,13 @@ void energy_shockwave_main(
     bp.update = energy_shockwave_update;
     bp.renderScene = energy_shockwave_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_ENERGY_SHOCKWAVE;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.energyShockwave = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.energyShockwave != NULL);
+    ASSERT(effect->data.energyShockwave != nullptr);
 
     data->unk_00 = arg0;
     data->unk_04 = arg1;

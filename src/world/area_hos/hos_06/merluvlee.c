@@ -219,16 +219,16 @@ API_CALLABLE(N(ResetHintFlags)) {
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(N(BadgeHintData)); i++) {
-        evt_set_variable(NULL, AF_HOS06_BadgeHints + i, FALSE);
+        evt_set_variable(nullptr, AF_HOS06_BadgeHints + i, FALSE);
     }
     for (i = 0; i < ARRAY_COUNT(N(SuperBlockHintData)); i++) {
-        evt_set_variable(NULL, AF_HOS06_SuperBlocksHints + i, FALSE);
+        evt_set_variable(nullptr, AF_HOS06_SuperBlocksHints + i, FALSE);
     }
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(GetBadgeHint)) {
-    s32 storyProgress = evt_get_variable(NULL, GB_StoryProgress);
+    s32 storyProgress = evt_get_variable(nullptr, GB_StoryProgress);
     BadgeHint* hint;
     u32 count = 0;
     s32 selectedIdx;
@@ -239,7 +239,7 @@ API_CALLABLE(N(GetBadgeHint)) {
     for (i = 0, hint = N(BadgeHintData); i < ARRAY_COUNT(N(BadgeHintData)); i++, hint++) {
         if (storyProgress >= hint->requiredProgress
             && !N(PlayerHasBadge)(hint->itemID)
-            && !evt_get_variable(NULL, AF_HOS06_BadgeHints + i))
+            && !evt_get_variable(nullptr, AF_HOS06_BadgeHints + i))
         {
             count++;
         }
@@ -254,11 +254,11 @@ API_CALLABLE(N(GetBadgeHint)) {
         for (i = 0; i < ARRAY_COUNT(N(BadgeHintData)); i++, hint++) {
             if (storyProgress >= hint->requiredProgress
                 && !N(PlayerHasBadge)(hint->itemID)
-                && !evt_get_variable(NULL, AF_HOS06_BadgeHints + i))
+                && !evt_get_variable(nullptr, AF_HOS06_BadgeHints + i))
             {
                 if (count == selectedIdx) {
                     script->varTable[1] = hint->hintMsg;
-                    evt_set_variable(NULL, AF_HOS06_BadgeHints + i, TRUE);
+                    evt_set_variable(nullptr, AF_HOS06_BadgeHints + i, TRUE);
                     break;
                 }
                 count++;
@@ -271,7 +271,7 @@ API_CALLABLE(N(GetBadgeHint)) {
     for (i = 0, hint = N(BadgeHintData); i < ARRAY_COUNT(N(BadgeHintData)); i++, hint++) {
         if (hint->requiredProgress == BADGE_REQ_MERLOW_SHOP
             && !N(PlayerHasBadge)(hint->itemID)
-            && !evt_get_variable(NULL, AF_HOS06_BadgeHints + i))
+            && !evt_get_variable(nullptr, AF_HOS06_BadgeHints + i))
         {
             count++;
         }
@@ -287,11 +287,11 @@ API_CALLABLE(N(GetBadgeHint)) {
         for (; i < ARRAY_COUNT(N(BadgeHintData)); i++, hint++) {
             if (hint->requiredProgress == BADGE_REQ_MERLOW_SHOP
                 && !N(PlayerHasBadge)(hint->itemID)
-                && !evt_get_variable(NULL, AF_HOS06_BadgeHints + i))
+                && !evt_get_variable(nullptr, AF_HOS06_BadgeHints + i))
             {
                 if (count == selectedIdx) {
                     script->varTable[1] = hint->hintMsg;
-                    evt_set_variable(NULL, AF_HOS06_BadgeHints + i, 1);
+                    evt_set_variable(nullptr, AF_HOS06_BadgeHints + i, 1);
                     break;
                 }
                 count++;
@@ -302,7 +302,7 @@ API_CALLABLE(N(GetBadgeHint)) {
 }
 
 API_CALLABLE(N(GetSuperBlockHint)) {
-    s32 storyProgress = evt_get_variable(NULL, GB_StoryProgress);
+    s32 storyProgress = evt_get_variable(nullptr, GB_StoryProgress);
     GameFlagHint* hint;
     u32 count = 0;
     s32 selectedIdx;
@@ -314,8 +314,8 @@ API_CALLABLE(N(GetSuperBlockHint)) {
     hint = N(SuperBlockHintData);
     for (i = 0; i < ARRAY_COUNT(N(SuperBlockHintData)); i++, hint++) {
         if (storyProgress >= hint->requiredProgress
-            && !evt_get_variable(NULL, hint->doneFlag)
-            && !evt_get_variable(NULL, AF_HOS06_SuperBlocksHints + i))
+            && !evt_get_variable(nullptr, hint->doneFlag)
+            && !evt_get_variable(nullptr, AF_HOS06_SuperBlocksHints + i))
         {
             count++;
         }
@@ -329,12 +329,12 @@ API_CALLABLE(N(GetSuperBlockHint)) {
 
         for (i = 0; i < ARRAY_COUNT(N(SuperBlockHintData)); i++, hint++) {
             if (storyProgress >= hint->requiredProgress
-                && !evt_get_variable(NULL, hint->doneFlag)
-                && !evt_get_variable(NULL, AF_HOS06_SuperBlocksHints + i))
+                && !evt_get_variable(nullptr, hint->doneFlag)
+                && !evt_get_variable(nullptr, AF_HOS06_SuperBlocksHints + i))
             {
                 if (count == selectedIdx) {
                     script->varTable[1] = hint->hintMsg;
-                    evt_set_variable(NULL, AF_HOS06_SuperBlocksHints + i, TRUE);
+                    evt_set_variable(nullptr, AF_HOS06_SuperBlocksHints + i, TRUE);
                     break;
                 }
                 count++;
@@ -345,7 +345,7 @@ API_CALLABLE(N(GetSuperBlockHint)) {
 }
 
 API_CALLABLE(N(GetStarPieceHint)) {
-    s32 storyProgress = evt_get_variable(NULL, GB_StoryProgress);
+    s32 storyProgress = evt_get_variable(nullptr, GB_StoryProgress);
     GameFlagHint* hint;
     u32 count = 0;
     s32 selectedIdx;
@@ -357,8 +357,8 @@ API_CALLABLE(N(GetStarPieceHint)) {
     hint = N(StarPieceHintData);
     for (i = 0; i < ARRAY_COUNT(N(StarPieceHintData)); i++, hint++) {
         if (storyProgress >= hint->requiredProgress
-            && !evt_get_variable(NULL, hint->doneFlag)
-            && !evt_get_variable(NULL, AF_HOS06_StarPieceHints + i))
+            && !evt_get_variable(nullptr, hint->doneFlag)
+            && !evt_get_variable(nullptr, AF_HOS06_StarPieceHints + i))
         {
             count++;
         }
@@ -372,12 +372,12 @@ API_CALLABLE(N(GetStarPieceHint)) {
 
         for (i = 0; i < ARRAY_COUNT(N(StarPieceHintData)); i++, hint++) {
             if (storyProgress >= hint->requiredProgress
-                && !evt_get_variable(NULL, hint->doneFlag)
-                && !evt_get_variable(NULL, AF_HOS06_StarPieceHints + i))
+                && !evt_get_variable(nullptr, hint->doneFlag)
+                && !evt_get_variable(nullptr, AF_HOS06_StarPieceHints + i))
             {
                 if (count == selectedIdx) {
                     script->varTable[1] = hint->hintMsg;
-                    evt_set_variable(NULL, AF_HOS06_StarPieceHints + i, TRUE);
+                    evt_set_variable(nullptr, AF_HOS06_StarPieceHints + i, TRUE);
                     break;
                 }
                 count++;

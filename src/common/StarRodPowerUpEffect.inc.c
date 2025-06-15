@@ -22,7 +22,7 @@ API_CALLABLE(N(StarRodPowerUpEffect)) {
     s32 endedCount;
     StarOutlineState2* effectState;
 
-    if (actor == NULL) {
+    if (actor == nullptr) {
         return ApiStatus_DONE2;
     }
 

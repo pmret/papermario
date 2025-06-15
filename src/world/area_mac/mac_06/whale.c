@@ -225,10 +225,10 @@ EvtScript N(EVS_WhaleState_Walk) = {
 EvtScript N(EVS_WhaleMain) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_karada, TRUE)
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(unkAngleFunc002)), NULL)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(unkAngleFunc002)), nullptr)
     Call(SetModelCustomGfx, MODEL_karada, CUSTOM_GFX_1, -1)
     Call(MakeLocalVertexCopy, VTX_COPY_2, MODEL_onaka, TRUE)
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_2, Ref(N(unkAngleFunc003)), NULL)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_2, Ref(N(unkAngleFunc003)), nullptr)
     Call(SetModelCustomGfx, MODEL_onaka, CUSTOM_GFX_2, -1)
     Call(SetNpcVar, NPC_Whale, 0, 0)
     Thread

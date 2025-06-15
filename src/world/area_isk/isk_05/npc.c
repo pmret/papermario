@@ -100,7 +100,7 @@ API_CALLABLE(N(func_80241B28_97F5F8)) {
     ambush->alpha = 0.0f;
 
     ambush->imgfxIdx = 0;
-    ambush->workerID = create_worker_frontUI(NULL, N(func_80241610_97F0E0));
+    ambush->workerID = create_worker_frontUI(nullptr, N(func_80241610_97F0E0));
     return ApiStatus_DONE2;
 }
 

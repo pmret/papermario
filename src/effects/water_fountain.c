@@ -131,14 +131,14 @@ EffectInstance* water_fountain_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 
     effectBp.update = water_fountain_update;
     effectBp.renderScene = water_fountain_render;
     effectBp.unk_00 = 0;
-    effectBp.renderUI = NULL;
+    effectBp.renderUI = nullptr;
     effectBp.effectID = EFFECT_WATER_FOUNTAIN;
 
     effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
 
     data = effect->data.waterFountain = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(data != NULL);
+    ASSERT(data != nullptr);
 
     data->unk_00 = arg0;
     data->lifeTime = 0;

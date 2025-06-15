@@ -341,7 +341,7 @@ void render_windows(s32* windowsArray, s32 parent, s32 flags, s32 baseX, s32 bas
                     scaleX, scaleY, rotX, rotY, rotZ, fpDrawContents, drawContentsArg0, rotScaleMtx,
                     boxTranslateX, boxTranslateY, outMtx) == 0) {
             if (childFlags == 0 && rotScaleMtx == 0) {
-                outMtx = NULL;
+                outMtx = nullptr;
             }
 
             if (childWindow->flags & WINDOW_FLAG_HAS_CHILDREN) {
@@ -375,7 +375,7 @@ void render_window_root(void) {
     gSPClipRatio(gMainGfxPos++, FRUSTRATIO_2);
     gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
     gDPPipeSync(gMainGfxPos++);
-    render_windows(priorityArray, WIN_NONE, 0, 0, 0, 255, 0, NULL);
+    render_windows(priorityArray, WIN_NONE, 0, 0, 0, 255, 0, nullptr);
 }
 
 void set_window_properties(s32 windowID, s32 posX, s32 posY, s32 width, s32 height, u8 priority, void* fpDrawContents, void* drawContentsArg0, s8 parent) {

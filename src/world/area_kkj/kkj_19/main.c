@@ -28,7 +28,7 @@ API_CALLABLE(N(TryOpenIngredientWindows)) {
     s32 canCheck;
 
     N(IngredientWindowsIndex) = evt_get_variable(script, *args++);
-    canCheck = evt_get_variable(NULL, AF_KKJ19_CanTakeIngredients);
+    canCheck = evt_get_variable(nullptr, AF_KKJ19_CanTakeIngredients);
 
     if (canCheck == TRUE) {
         N(IngredientWindowsOpen) = TRUE;
@@ -117,7 +117,7 @@ MenuWindowBP N(IngredientWindows)[] = {
         .height = 28,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &N(draw_content_ingredient_name),
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = -1,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
@@ -135,7 +135,7 @@ MenuWindowBP N(IngredientWindows)[] = {
         .height = 32,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &N(draw_content_ingredient_desc),
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = -1,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
@@ -150,7 +150,7 @@ API_CALLABLE(N(CreateIngredientInfoWindows)) {
     N(IngredientWindowsDismissTime) = 0;
     N(IngredientWindowsIndex) = 0;
 
-    get_worker(create_worker_frontUI(N(worker_update_ingredient_windows), NULL));
+    get_worker(create_worker_frontUI(N(worker_update_ingredient_windows), nullptr));
     setup_pause_menu_tab(N(IngredientWindows), ARRAY_COUNT(N(IngredientWindows)));
 
     for (i = 0; i < ARRAY_COUNT(N(IngredientSources)); i++) {

@@ -21,14 +21,14 @@ void floating_flower_main(s32 type, f32 posX, f32 posY, f32 posZ, s32 duration) 
     bp.init = floating_flower_init;
     bp.update = floating_flower_update;
     bp.renderScene = floating_flower_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_FLOATING_FLOWER;
 
     effect = create_effect_instance(&bp);
     effect->numParts = 1;
     part = effect->data.floatingFlower = general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data.floatingFlower != NULL);
+    ASSERT(effect->data.floatingFlower != nullptr);
 
     part->type = type;
     part->pos.x = posX;

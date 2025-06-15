@@ -29,7 +29,7 @@ void N(appendGfx_fake_player)(void* data);
 void N(worker_draw_fake_player)(void);
 
 API_CALLABLE(N(CreateFakePlayerRenderer)) {
-    script->array[0] = create_worker_scene(NULL, N(worker_draw_fake_player));
+    script->array[0] = create_worker_scene(nullptr, N(worker_draw_fake_player));
     return ApiStatus_DONE2;
 }
 

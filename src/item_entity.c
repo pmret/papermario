@@ -249,7 +249,7 @@ void clear_item_entity_data(void) {
     }
 
     for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
-        gCurrentItemEntities[i] = NULL;
+        gCurrentItemEntities[i] = nullptr;
     }
 
     ItemEntitiesCreated = 0;
@@ -262,8 +262,8 @@ void clear_item_entity_data(void) {
         ItemEntityRenderGroup = 0;
     }
 
-    create_worker_scene(NULL, draw_item_entities);
-    create_worker_frontUI(NULL, draw_ui_item_entities);
+    create_worker_scene(nullptr, draw_item_entities);
+    create_worker_frontUI(nullptr, draw_ui_item_entities);
     isPickingUpItem = FALSE;
 #if !VERSION_JP
     D_801565A8 = FALSE;
@@ -421,7 +421,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     }
 
     for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
-        if (gCurrentItemEntities[i] == NULL) {
+        if (gCurrentItemEntities[i] == nullptr) {
             break;
         }
     }
@@ -431,7 +431,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     id = i;
     gCurrentItemEntities[id] = item = heap_malloc(sizeof(*item));
     ItemEntitiesCreated++;
-    ASSERT(item != NULL);
+    ASSERT(item != nullptr);
 
     item->renderGroup = (itemID & 0xF0000) >> 16;
     if (item->renderGroup == VIS_GROUP_5) {
@@ -452,7 +452,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     item->pickupMsgFlags = 0;
     item->boundVar = pickupFlagIndex;
     item->itemID = itemID;
-    item->physicsData = NULL;
+    item->physicsData = nullptr;
     item->pickupDelay = pickupDelay;
     item->scale = 1.0f;
     item->spawnAngle = angle;
@@ -698,7 +698,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     s32 id;
 
     for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
-        if (gCurrentItemEntities[i] == NULL) {
+        if (gCurrentItemEntities[i] == nullptr) {
             break;
         }
     }
@@ -707,7 +707,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
 
     gCurrentItemEntities[id] = item = heap_malloc(sizeof(*item));
     ItemEntitiesCreated++;
-    ASSERT(item != NULL);
+    ASSERT(item != nullptr);
 
     itemID &= 0xFFFF;
     item->renderGroup = -1;
@@ -732,7 +732,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     item->lastPos.z = -9999;
     item->scale = 1.0f;
     item->itemID = itemID;
-    item->physicsData = NULL;
+    item->physicsData = nullptr;
     item->pickupDelay = 0;
     item->spawnAngle = 0;
     item->flags |= ITEM_ENTITY_RESIZABLE;
@@ -829,7 +829,7 @@ void update_item_entities(void) {
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             item = gCurrentItemEntities[i];
 
-            if (item != NULL && item->flags != 0) {
+            if (item != nullptr && item->flags != 0) {
                 if (item->itemID == ITEM_COIN) {
                     if (rand_int(100) > 90) {
                         sparkle_script_init(item, &SparkleScript_Coin);
@@ -863,7 +863,7 @@ void update_item_entities(void) {
                 }
 
                 item = gCurrentItemEntities[i];
-                if (item != NULL) {
+                if (item != nullptr) {
                     s32 xs, ys, zs;
 
                     switch (item->spawnType) {
@@ -1061,7 +1061,7 @@ void draw_item_entities(void) {
     for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
         ItemEntity* item = gCurrentItemEntities[i];
 
-        if (item != NULL
+        if (item != nullptr
             && item->flags != 0
             && !(item->flags & ITEM_ENTITY_FLAG_HIDDEN)
             && (item->flags & (1 << gCurrentCamID))
@@ -1093,7 +1093,7 @@ void draw_ui_item_entities(void) {
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* item = gCurrentItemEntities[i];
 
-            if (item != NULL && item->flags != 0) {
+            if (item != nullptr && item->flags != 0) {
                 switch (item->spawnType) {
                     case ITEM_SPAWN_MODE_KEY:
                         draw_ui_item_entity_stationary(item);
@@ -1131,7 +1131,7 @@ void render_item_entities(void) {
     // needed to move 'i++' to the bottom
     for (i = 0; i < MAX_ITEM_ENTITIES;) {
         ItemEntity* item = gCurrentItemEntities[i];
-        if (item != NULL) {
+        if (item != nullptr) {
             if ((item->flags != 0)) {
                 if (!(item->flags & ITEM_ENTITY_FLAG_HIDDEN)) {
                     if ((item->flags & ITEM_ENTITY_FLAG_INVISIBLE)) {
@@ -1265,7 +1265,7 @@ void remove_item_entity_by_reference(ItemEntity* entity) {
     }
 
     if (index < MAX_ITEM_ENTITIES) {
-        if (entity->physicsData != NULL) {
+        if (entity->physicsData != nullptr) {
             heap_free(entity->physicsData);
         }
 
@@ -1282,7 +1282,7 @@ void remove_item_entity_by_reference(ItemEntity* entity) {
 
         heap_free(gCurrentItemEntities[index]);
         isPickingUpItem = FALSE;
-        gCurrentItemEntities[index] = NULL;
+        gCurrentItemEntities[index] = nullptr;
     }
 }
 
@@ -1301,7 +1301,7 @@ void remove_item_entity_by_index(s32 index) {
     }
 
     heap_free(gCurrentItemEntities[index]);
-    gCurrentItemEntities[index] = NULL;
+    gCurrentItemEntities[index] = nullptr;
     isPickingUpItem = FALSE;
 }
 
@@ -1499,7 +1499,7 @@ s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
     for (i = 0; i < MAX_ITEM_ENTITIES; i++){
         item = gCurrentItemEntities[i];
 
-        if (item == NULL) {
+        if (item == nullptr) {
             continue;
         }
 
@@ -1616,7 +1616,7 @@ void update_item_entity_collectable(ItemEntity* item) {
             reveal_item_entity(item);
             physData = heap_malloc(sizeof(*physData));
             item->physicsData = physData;
-            ASSERT(physData != NULL);
+            ASSERT(physData != nullptr);
 
             if (item->flags & ITEM_ENTITY_FLAG_TOSS_HIGHER) {
                 physData->verticalVel = 16.0f;
@@ -2330,15 +2330,15 @@ block_47: // TODO required to match
             break;
         case ITEM_PICKUP_STATE_CHECK_TUTORIALS:
             if ((gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_CONSUMABLE) &&
-                !evt_get_variable(NULL, GF_Tutorial_GotItem))
+                !evt_get_variable(nullptr, GF_Tutorial_GotItem))
             {
-                evt_set_variable(NULL, GF_Tutorial_GotItem, TRUE);
+                evt_set_variable(nullptr, GF_Tutorial_GotItem, TRUE);
                 item->state = ITEM_PICKUP_STATE_SHOW_TUTORIAL;
                 break;
             }
 
-            if (item->itemID == ITEM_STAR_PIECE && !evt_get_variable(NULL, GF_Tutorial_GotStarPiece)) {
-                evt_set_variable(NULL, GF_Tutorial_GotStarPiece, TRUE);
+            if (item->itemID == ITEM_STAR_PIECE && !evt_get_variable(nullptr, GF_Tutorial_GotStarPiece)) {
+                evt_set_variable(nullptr, GF_Tutorial_GotStarPiece, TRUE);
                 item->state = ITEM_PICKUP_STATE_SHOW_TUTORIAL;
                 break;
             }

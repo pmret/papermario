@@ -66,13 +66,13 @@ EffectInstance* misc_particles_main(
     bp.update = misc_particles_update;
     bp.renderScene = misc_particles_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_MISC_PARTICLES;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParticles;
     part = effect->data.miscParticles = general_heap_malloc(numParticles * sizeof(*part));
-    ASSERT(effect->data.miscParticles != NULL);
+    ASSERT(effect->data.miscParticles != nullptr);
 
     part->variation = variation;
     part->lifetime = 0;

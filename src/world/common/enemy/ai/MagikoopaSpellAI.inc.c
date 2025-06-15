@@ -63,7 +63,7 @@ API_CALLABLE(N(MagikoopaAI_SpellMain)) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            enemy->varTable[3] = NULL;
+            enemy->varTable[3] = nullptr;
             npc1->collisionDiameter = 20;
             npc1->collisionHeight = 20;
             npc1->pos.x = NPC_DISPOSE_POS_X;

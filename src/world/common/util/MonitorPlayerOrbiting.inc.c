@@ -64,7 +64,7 @@ API_CALLABLE(N(MonitorPlayerOrbiting)) {
                     curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                     deltaAngle = get_clamped_angle_diff(prevAngle, curAngle);
                     if (fabsf(deltaAngle) > 90.0f) {
-                        if (orbit->eventListener != NULL) {
+                        if (orbit->eventListener != nullptr) {
                             orbit->eventListener(orbit, PLAYER_ORBIT_BEGIN);
                         }
                         orbit->totalOrbitAngle += fabsf(deltaAngle);
@@ -83,7 +83,7 @@ API_CALLABLE(N(MonitorPlayerOrbiting)) {
                 curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 deltaAngle = get_clamped_angle_diff(prevAngle, curAngle);
                 if (orbit->direction != signF(deltaAngle)) {
-                    if (orbit->eventListener != NULL) {
+                    if (orbit->eventListener != nullptr) {
                         orbit->eventListener(orbit, PLAYER_ORBIT_CHANGE_DIRECTION);
                     }
                     orbit->state++;
@@ -91,17 +91,17 @@ API_CALLABLE(N(MonitorPlayerOrbiting)) {
                     orbit->totalOrbitAngle = orbit->totalOrbitAngle + fabsf(deltaAngle);
                     orbit->numRotations = orbit->totalOrbitAngle / 360;
                     if (orbit->numRotations != orbit->lastNumRotations) {
-                        if (orbit->eventListener != NULL) {
+                        if (orbit->eventListener != nullptr) {
                             orbit->eventListener(orbit, PLAYER_ORBIT_COMPLETE_ROTATION);
                         }
                         orbit->lastNumRotations = orbit->numRotations;
                     }
                 }
-                if (orbit->eventListener != NULL) {
+                if (orbit->eventListener != nullptr) {
                     orbit->eventListener(orbit, PLAYER_ORBIT_CONTINUE_ORBIT);
                 }
             } else {
-                if (orbit->eventListener != NULL) {
+                if (orbit->eventListener != nullptr) {
                     orbit->eventListener(orbit, PLAYER_ORBIT_LEFT_REGION);
                 }
                 orbit->state++;

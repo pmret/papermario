@@ -52,7 +52,7 @@ EffectInstance* attack_result_text_main(s32 type, f32 posX, f32 posY, f32 posZ, 
 
     data = effect->data.attackResultText = general_heap_malloc(effect->numParts * sizeof(*data));
 
-    ASSERT(data != NULL);
+    ASSERT(data != nullptr);
 
     data->isVisible = TRUE;
     data->unk_20 = 0;

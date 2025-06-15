@@ -172,7 +172,7 @@ void N(appendGfx_score_display)(void* renderData) {
         }
     }
 
-    draw_box(0, WINDOW_STYLE_9, data->windowA_posX, 23, 0, 80, 38, 180, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+    draw_box(0, WINDOW_STYLE_9, data->windowA_posX, 23, 0, 80, 38, 180, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, nullptr, nullptr, nullptr, SCREEN_WIDTH, SCREEN_HEIGHT, nullptr);
     draw_msg(MSG_MGM_0047, data->windowA_posX + 42, TEXT_POS_Y, 255, MSG_PAL_WHITE, 0);
     draw_number(NUM_PANELS - data->found, data->windowA_posX + 65, COUNT_POS_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
     draw_ci_image_with_clipping(&N(panel_peach_img), 32, 32, G_IM_FMT_CI, G_IM_SIZ_4b, &N(panel_peach_pal),
@@ -182,7 +182,7 @@ void N(appendGfx_score_display)(void* renderData) {
     deciseconds = ((f32)(timeLeft % FRAME_RATE) * 10.0) / FRAME_RATE;
     seconds = timeLeft / FRAME_RATE;
 
-    draw_box(0, WINDOW_STYLE_11, data->windowB_posX, 27, 0, 60, 20, 180, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+    draw_box(0, WINDOW_STYLE_11, data->windowB_posX, 27, 0, 60, 20, 180, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, nullptr, nullptr, nullptr, SCREEN_WIDTH, SCREEN_HEIGHT, nullptr);
     // draw whole seconds
     draw_number(seconds, data->windowB_posX + 29, 31, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
     // draw tenths of seconds
@@ -208,7 +208,7 @@ API_CALLABLE(N(CreateScoreDisplay)) {
     HudElemID hidMeter;
 
     if (isInitialCall) {
-        data->workerID = create_worker_scene(NULL, &N(worker_draw_score));
+        data->workerID = create_worker_scene(nullptr, &N(worker_draw_score));
 
         hidButton = hud_element_create(&HES_AButton);
         data->buttonHID = hidButton;

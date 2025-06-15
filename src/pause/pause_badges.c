@@ -100,7 +100,7 @@ MenuWindowBP gPauseBadgesWindowBPs[] = {
         .height = 154,
         .priority = WINDOW_PRIORITY_1,
         .fpDrawContents = &pause_badges_draw_contents,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
@@ -116,7 +116,7 @@ MenuPanel gPausePanelBadges = {
     .numCols = 0,
     .numRows = 0,
     .numPages = 0,
-    .gridData = NULL,
+    .gridData = nullptr,
     .fpInit = &pause_badges_init,
     .fpHandleInput = &pause_badges_handle_input,
     .fpUpdate = &pause_badges_update,
@@ -767,8 +767,8 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     }
 
     draw_box(4, &gPauseWS_13, gPauseBadgesCurrentTab == 1 ? baseX + 9 : baseX, baseY + 37, 0, 91, 34, 255,
-             gPauseBadgesCurrentTab != 0 ? 0 : 128, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
-             SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+             gPauseBadgesCurrentTab != 0 ? 0 : 128, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, nullptr, nullptr, nullptr,
+             SCREEN_WIDTH, SCREEN_HEIGHT, nullptr);
 
     msg2 = pause_get_menu_msg(PAUSE_MSG_ACTIVE);
     msgX = baseX + 12;
@@ -1121,11 +1121,11 @@ void pause_badges_handle_input(MenuPanel* panel) {
             gPauseCurrentDescMsg = gItemTable[itemID].fullDescMsg;
         } else {
             gPauseCurrentDescMsg = MSG_NONE;
-            gPauseCurrentDescIconScript = NULL;
+            gPauseCurrentDescIconScript = nullptr;
         }
     } else {
         gPauseCurrentDescMsg = pause_get_menu_msg(gPauseBadgesCurrentTab == 0 ? PAUSE_MSG_BAGDE_DESC_ALL : PAUSE_MSG_BAGDE_DESC_ACTIVE);
-        gPauseCurrentDescIconScript = NULL;
+        gPauseCurrentDescIconScript = nullptr;
     }
 
     if (gPausePressedButtons & BUTTON_B) {

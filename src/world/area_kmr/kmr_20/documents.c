@@ -149,21 +149,21 @@ API_CALLABLE(N(ReadLetters)){
                         }
                         break;
                     case STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY:
-                        if (evt_get_variable(NULL, GF_MAC02_TayceT_HasCookbook) != 0) {
+                        if (evt_get_variable(nullptr, GF_MAC02_TayceT_HasCookbook) != 0) {
                             cond = TRUE;
                         }
                         break;
                     case STORY_CH4_GOT_TAYCE_TS_CAKE:
                         temp = FALSE;
-                        if (evt_get_variable(NULL, GB_StoryProgress) >= STORY_CH4_BEGAN_PEACH_MISSION) {
-                            temp = (evt_get_variable(NULL, GF_MAC01_BoughtBadgeFromRowf) != 0);
+                        if (evt_get_variable(nullptr, GB_StoryProgress) >= STORY_CH4_BEGAN_PEACH_MISSION) {
+                            temp = (evt_get_variable(nullptr, GF_MAC01_BoughtBadgeFromRowf) != 0);
                         }
                         if (temp) {
                             cond = TRUE;
                         }
                         break;
                     default:
-                        if (evt_get_variable(NULL, GB_StoryProgress) >= storyReq) {
+                        if (evt_get_variable(nullptr, GB_StoryProgress) >= storyReq) {
                             cond = TRUE;
                         }
                         break;
@@ -223,7 +223,7 @@ API_CALLABLE(N(ReadLetters)){
                 flags = SET_PACKED_FLAG(GB_KMR20_MarioReadLetterFlags_00, userIndex);
                 set_global_byte(PACKED_BYTE(GB_KMR20_MarioReadLetterFlags_00, userIndex), flags);
                 if (userIndex == 3) {
-                    evt_set_variable(NULL, GF_KMR20_ReadThankYouLetterFromKoopaVillage, TRUE);
+                    evt_set_variable(nullptr, GF_KMR20_ReadThankYouLetterFromKoopaVillage, TRUE);
                 }
 
                 dma_copy(charset_ROM_START + (s32) N(LetterDmaOffsets)[0],
@@ -254,7 +254,7 @@ API_CALLABLE(N(ReadLetters)){
                 N(LetterImgData)[1].format = G_IM_FMT_CI;
                 N(LetterImgData)[1].bitDepth = G_IM_SIZ_8b;
 
-                N(LetterWorkerID) = create_worker_frontUI(NULL, N(worker_draw_letter));
+                N(LetterWorkerID) = create_worker_frontUI(nullptr, N(worker_draw_letter));
                 N(LetterAlpha) = 0;
                 return ApiStatus_DONE2;
             }
@@ -350,7 +350,7 @@ API_CALLABLE(N(ReadDiary)){
         case 0:
             numEntries = 0;
             for (i = 0; i < ARRAY_COUNT(N(DiaryStoryRequirements)); i++) {
-                if (evt_get_variable(NULL, GB_StoryProgress) >= N(DiaryStoryRequirements)[i]) {
+                if (evt_get_variable(nullptr, GB_StoryProgress) >= N(DiaryStoryRequirements)[i]) {
                     menu->ptrIcon[numEntries] = &HES_Item_EmptyBook;
                     menu->userIndex[numEntries] = i;
                     menu->enabled[numEntries] = TRUE;

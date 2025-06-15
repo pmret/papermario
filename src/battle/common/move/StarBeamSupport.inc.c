@@ -82,7 +82,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
 
     if (player->targetListLength == 1) {
         Actor* target = get_actor(player->targetActorID);
-        if (target == NULL) {
+        if (target == nullptr) {
             return ApiStatus_DONE2;
         }
         get_actor_part(target, player->targetPartID);

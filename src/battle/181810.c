@@ -12,7 +12,7 @@ BSS ActorPart* gSpeakingActorPart;
 
 #define ACTOR_TYPE_LIST_END 0xFF
 
-u8* gBattleDmaDest = NULL;
+u8* gBattleDmaDest = nullptr;
 
 u8 ActorTypesGhost[] = {
     ACTOR_TYPE_DUPLIGHOST,
@@ -108,7 +108,7 @@ u8* ActorTypesLists[] = {
     ActorTypesGrayMagikoopa,
     ActorTypesYellowMagikoopa,
     ActorTypesWhiteMagikoopa,
-    NULL,
+    nullptr,
 };
 
 API_CALLABLE(ActorSpeak) {
@@ -315,11 +315,11 @@ API_CALLABLE(LoadBattleDmaData) {
     BattleArea* battleArea = &gBattleAreas[UNPACK_BTL_AREA(gCurrentBattleID)];
     DmaTable* dmaEntry = &battleArea->dmaTable[dmaIndex];
 
-    if (dmaEntry == NULL) {
+    if (dmaEntry == nullptr) {
         return ApiStatus_DONE2;
     }
 
-    if (gBattleDmaDest == NULL) {
+    if (gBattleDmaDest == nullptr) {
         dma_copy(dmaEntry->start, dmaEntry->end, dmaEntry->dest);
     } else {
         dma_copy(dmaEntry->start, dmaEntry->end, gBattleDmaDest);
@@ -542,7 +542,7 @@ void save_tattle_flags(s32 actorType) {
 
     while (TRUE) {
         types = ActorTypesLists[i];
-        if (types == NULL) {
+        if (types == nullptr) {
             break;
         }
 
@@ -578,7 +578,7 @@ void load_tattle_flags(s32 actorType) {
 
     while (TRUE) {
         types = ActorTypesLists[i];
-        if (types == NULL) {
+        if (types == nullptr) {
             break;
         }
 

@@ -60,13 +60,13 @@ EffectInstance* lil_oink_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
     bp.init = lil_oink_init;
     bp.update = lil_oink_update;
     bp.renderScene = lil_oink_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_LIL_OINK;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.lilOink = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(data != NULL);
+    ASSERT(data != nullptr);
 
     data->lifetime = 0;
     data->timeLeft = 1000;

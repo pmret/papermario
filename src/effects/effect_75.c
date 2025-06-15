@@ -6,7 +6,7 @@ extern Gfx D_09001A00_3E4360[];
 extern Gfx D_09001A20_3E4380[];
 
 Gfx* D_E00EAA50[2] = { D_09001A00_3E4360, D_09001A20_3E4380 };
-Gfx* D_E00EAA58[2] = { D_09001910_3E4270, NULL };
+Gfx* D_E00EAA58[2] = { D_09001910_3E4270, nullptr };
 
 void effect_75_init(EffectInstance* effect);
 void effect_75_update(EffectInstance* effect);
@@ -24,13 +24,13 @@ EffectInstance* effect_75_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 scale
     bp.update = effect_75_update;
     bp.renderScene = effect_75_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_75;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.unk_75 = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.unk_75 != NULL);
+    ASSERT(effect->data.unk_75 != nullptr);
 
     data->type = arg0;
     data->unk_14 = 0;

@@ -20,13 +20,13 @@ void falling_leaves_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.update = falling_leaves_update;
     bp.renderScene = falling_leaves_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_FALLING_LEAVES;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     part = effect->data.fallingLeaves = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.fallingLeaves != NULL);
+    ASSERT(effect->data.fallingLeaves != nullptr);
 
     part->unk_00 = arg0;
     part->unk_04 = arg1;

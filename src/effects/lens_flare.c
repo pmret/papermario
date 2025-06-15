@@ -33,13 +33,13 @@ void lens_flare_main(s32 type, f32 posX, f32 posY, f32 posZ, s32 duration) {
     bp.update = lens_flare_update;
     bp.renderScene = lens_flare_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_LENS_FLARE;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.lensFlare = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.lensFlare != NULL);
+    ASSERT(effect->data.lensFlare != nullptr);
 
     data->type = type;
     data->pos.x = posX;

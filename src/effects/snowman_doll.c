@@ -78,13 +78,13 @@ EffectInstance* snowman_doll_main(
     bp.update = snowman_doll_update;
     bp.renderScene = snowman_doll_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_SNOWMAN_DOLL;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.snowmanDoll = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.snowmanDoll != NULL);
+    ASSERT(effect->data.snowmanDoll != nullptr);
 
     data->unk_00 = arg0;
     data->unk_14 = 0;

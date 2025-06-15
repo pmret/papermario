@@ -23,14 +23,14 @@ void sweat_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s32 
     effectBp.update = sweat_update;
     effectBp.renderScene = sweat_render;
     effectBp.unk_00 = 0;
-    effectBp.renderUI = NULL;
+    effectBp.renderUI = nullptr;
     effectBp.effectID = EFFECT_SWEAT;
 
     effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
 
     data = effect->data.sweat = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(data != NULL);
+    ASSERT(data != nullptr);
 
     data->unk_00 = arg0;
     guRotateF(matrix, -arg5, sin_deg(gCameras[gCurrentCameraID].curYaw), 0.0f, -cos_deg(gCameras[gCurrentCameraID].curYaw));

@@ -32,7 +32,7 @@ void spawn_drops(Enemy* enemy) {
 
     availableShadows = 0;
     for (i = 0; i < MAX_SHADOWS; i++) {
-        if (get_shadow_by_index(i) == NULL) {
+        if (get_shadow_by_index(i) == nullptr) {
             availableShadows++;
         }
     }
@@ -341,17 +341,17 @@ s32 get_coin_drop_amount(Enemy* enemy) {
 void func_80048E34(Enemy* enemy, s32 arg1, s32 arg2) {
     Evt* newScript;
 
-    if (enemy->aiScript != NULL) {
+    if (enemy->aiScript != nullptr) {
         kill_script_by_ID(enemy->aiScriptID);
-        enemy->aiScript = NULL;
+        enemy->aiScript = nullptr;
     }
 
-    if (enemy->unk_BC != NULL) {
+    if (enemy->unk_BC != nullptr) {
         kill_script_by_ID(enemy->unk_C0);
-        enemy->unk_BC = NULL;
+        enemy->unk_BC = nullptr;
     }
 
-    if (enemy->aiBytecode != NULL) {
+    if (enemy->aiBytecode != nullptr) {
         enemy->unk_C8 = arg2;
         newScript = start_script(enemy->aiBytecode, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
         enemy->aiScript = newScript;
@@ -360,7 +360,7 @@ void func_80048E34(Enemy* enemy, s32 arg1, s32 arg2) {
         newScript->owner1.enemy = enemy;
     }
 
-    if (enemy->unk_B8 != NULL) {
+    if (enemy->unk_B8 != nullptr) {
         enemy->unk_C4 = arg1;
         newScript = start_script(enemy->unk_B8, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
         enemy->unk_BC = newScript;
@@ -378,11 +378,11 @@ s32 func_80048F0C(void) {
     for (i = 0; i < currentEncounter->numEncounters; i++) {
         Encounter* encounter = currentEncounter->encounterList[i];
 
-        if (encounter != NULL) {
+        if (encounter != nullptr) {
             for (j = 0; j < encounter->count; j++) {
                 Enemy* enemy = encounter->enemy[j];
 
-                if (enemy != NULL && !(enemy->flags & ENEMY_FLAG_DISABLE_AI)) {
+                if (enemy != nullptr && !(enemy->flags & ENEMY_FLAG_DISABLE_AI)) {
                     get_npc_unsafe(enemy->npcID);
                 }
             }
@@ -630,7 +630,7 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
         if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, 2.0 * npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionDiameter)) {
             yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z));
             enemy->aiFlags &= ~AI_FLAG_NEEDS_HEADING;
-            ai_check_fwd_collisions(npc, 5.0f, &yaw, NULL, NULL, NULL);
+            ai_check_fwd_collisions(npc, 5.0f, &yaw, nullptr, nullptr, nullptr);
             npc->yaw = yaw;
         }
         stillWithinTerritory = TRUE;

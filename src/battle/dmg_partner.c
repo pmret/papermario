@@ -17,12 +17,12 @@ void dispatch_event_partner(s32 lastEventType) {
     partnerActor->handleEventScriptID = script->id;
     script->owner1.actorID = ACTOR_PARTNER;
 
-    if (partnerActor->takeTurnScript != NULL) {
+    if (partnerActor->takeTurnScript != nullptr) {
         kill_script_by_ID(partnerActor->takeTurnScriptID);
-        partnerActor->takeTurnScript = NULL;
+        partnerActor->takeTurnScript = nullptr;
     }
 
-    if (handleEventScript != NULL) {
+    if (handleEventScript != nullptr) {
         kill_script_by_ID(onHitID);
     }
 }
@@ -40,7 +40,7 @@ void dispatch_event_partner_continue_turn(s8 lastEventType) {
     partnerActor->handleEventScriptID = script->id;
     script->owner1.actorID = ACTOR_PARTNER;
 
-    if (handleEventScript != NULL) {
+    if (handleEventScript != nullptr) {
         kill_script_by_ID(onHitID);
     }
 }
@@ -59,12 +59,12 @@ HitResult calc_partner_test_enemy(void) {
     target = get_actor(currentTargetID);
     state = &partner->state;
 
-    if (target == NULL) {
+    if (target == nullptr) {
         return HIT_RESULT_HIT;
     }
 
     part = get_actor_part(target, currentTargetPart);
-    ASSERT(part != NULL);
+    ASSERT(part != nullptr);
 
     if (target->stoneStatus == STATUS_KEY_STONE) {
         return HIT_RESULT_IMMUNE;
@@ -188,13 +188,13 @@ HitResult calc_partner_damage_enemy(void) {
     target = get_actor(currentTargetID);
     state = &partner->state;
 
-    if (target == NULL) {
+    if (target == nullptr) {
         return HIT_RESULT_HIT;
     }
 
     targetPart = get_actor_part(target, currentTargetPartID);
 
-    ASSERT(targetPart != NULL);
+    ASSERT(targetPart != nullptr);
 
     target->lastDamageTaken = 0;
 

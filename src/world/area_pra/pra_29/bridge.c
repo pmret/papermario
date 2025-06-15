@@ -28,7 +28,7 @@ void N(setup_gfx_bridge)(s32 index) {
     Vtx* dest1;
     Vtx* dest2;
     s32 numVertices;
-    s32 extendAmt = evt_get_variable(NULL, MV_BridgeExtendAmt);
+    s32 extendAmt = evt_get_variable(nullptr, MV_BridgeExtendAmt);
     if (extendAmt <= 255) {
         mdl_get_copied_vertices(index * 3 + 0, &srcVtx1, &dest1, &numVertices);
         mdl_get_copied_vertices(index * 3 + 1, &srcVtx2, &dest2, &numVertices);
@@ -83,8 +83,8 @@ EvtScript N(EVS_SetupBridge) = {
         Call(SetModelCustomGfx, MODEL_s02, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
         Call(SetModelFlags, MODEL_u02, MODEL_FLAG_USES_CUSTOM_GFX, FALSE)
         Call(SetModelFlags, MODEL_s02, MODEL_FLAG_USES_CUSTOM_GFX, FALSE)
-        Call(SetCustomGfxBuilders, CUSTOM_GFX_0, Ref(N(setup_gfx_bridge)), NULL)
-        Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(setup_gfx_bridge)), NULL)
+        Call(SetCustomGfxBuilders, CUSTOM_GFX_0, Ref(N(setup_gfx_bridge)), nullptr)
+        Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(setup_gfx_bridge)), nullptr)
         Call(MakeLocalVertexCopy, VTX_COPY_0, MODEL_u02, TRUE)
         Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_u01, FALSE)
         Call(MakeLocalVertexCopy, VTX_COPY_2, MODEL_u03, FALSE)

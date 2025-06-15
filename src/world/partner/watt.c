@@ -31,16 +31,16 @@ enum {
 
 void N(create_static_effect)(Npc* npc) {
     if (!(npc->flags & NPC_FLAG_INVISIBLE)) {
-        if (N(StaticEffect) == NULL) {
+        if (N(StaticEffect) == nullptr) {
             N(StaticEffect) = fx_static_status(0, npc->pos.x, npc->pos.y + 13.0f, npc->pos.z, 0.9f, 5, 0);
         }
     }
 }
 
 void N(dispose_static_effect)(void) {
-    if (N(StaticEffect) != NULL) {
+    if (N(StaticEffect) != nullptr) {
         N(StaticEffect)->data.staticStatus->timeLeft = 1;
-        N(StaticEffect) = NULL;
+        N(StaticEffect) = nullptr;
     }
 }
 
@@ -70,7 +70,7 @@ void N(init)(Npc* npc) {
     N(D_802BE300) = FALSE;
     N(IsPlayerHolding) = FALSE;
     N(AbilityState) = SHINING_STATE_BEGIN;
-    N(StaticEffect) = NULL;
+    N(StaticEffect) = nullptr;
 }
 
 API_CALLABLE(N(TakeOut)) {
@@ -108,13 +108,13 @@ API_CALLABLE(N(Update)) {
         if (isInitialCall) {
             partner_flying_enable(watt, 1);
             mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
-            TweesterTouchingPartner = NULL;
+            TweesterTouchingPartner = nullptr;
         }
 
         entity = TweesterTouchingPartner;
         playerData->partnerUsedTime[PARTNER_WATT]++;
 
-        if (entity == NULL) {
+        if (entity == nullptr) {
             N(create_static_effect)(watt);
             partner_flying_update_player_tracking(watt);
             partner_flying_update_motion(watt);
@@ -131,7 +131,7 @@ API_CALLABLE(N(Update)) {
                     watt->curAnim = ANIM_WorldWatt_Idle;
                 }
             }
-            if (N(StaticEffect) != NULL) {
+            if (N(StaticEffect) != nullptr) {
                 N(StaticEffect)->data.staticStatus->pos.x = watt->pos.x;
                 N(StaticEffect)->data.staticStatus->pos.y = watt->pos.y + 13.0f;
                 N(StaticEffect)->data.staticStatus->pos.z = watt->pos.z;
@@ -191,12 +191,12 @@ API_CALLABLE(N(Update)) {
                 partner_flying_update_motion(watt);
                 if (--N(TweesterPhysicsPtr)->countdown == 0) {
                     N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
-                    TweesterTouchingPartner = NULL;
+                    TweesterTouchingPartner = nullptr;
                 }
                 break;
         }
 
-        if (N(StaticEffect) != NULL) {
+        if (N(StaticEffect) != nullptr) {
             N(StaticEffect)->data.staticStatus->pos.x = watt->pos.x;
             N(StaticEffect)->data.staticStatus->pos.y = watt->pos.y + 13.0f;
             N(StaticEffect)->data.staticStatus->pos.z = watt->pos.z;
@@ -212,8 +212,8 @@ EvtScript EVS_WorldWatt_Update = {
 };
 
 void N(try_cancel_tweester)(Npc* watt) {
-    if (TweesterTouchingPartner != NULL) {
-        TweesterTouchingPartner = NULL;
+    if (TweesterTouchingPartner != nullptr) {
+        TweesterTouchingPartner = nullptr;
         watt->flags = N(TweesterPhysicsPtr)->prevFlags;
         N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(watt);
@@ -422,7 +422,7 @@ API_CALLABLE(N(UseAbility)) {
     }
 #endif
 
-    if (N(StaticEffect) != NULL) {
+    if (N(StaticEffect) != nullptr) {
         N(StaticEffect)->data.staticStatus->pos.x = npc->pos.x;
         N(StaticEffect)->data.staticStatus->pos.y = npc->pos.y + 13.0f;
         N(StaticEffect)->data.staticStatus->pos.z = npc->pos.z;

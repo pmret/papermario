@@ -1353,19 +1353,19 @@ s32 btl_submenu_moves_update(void) {
             moveX = BattleMenu_Moves_PosX;
             moveY = BattleMenu_Moves_PosY;
 #if VERSION_JP
-            set_window_properties(WIN_BTL_MOVES_MENU, moveX, moveY, 140, (D_802AD10E * 13) + 28, 0, btl_menu_moves_draw_content, NULL, -1);
+            set_window_properties(WIN_BTL_MOVES_MENU, moveX, moveY, 140, (D_802AD10E * 13) + 28, 0, btl_menu_moves_draw_content, nullptr, -1);
 #endif
             if (!BattleMenu_UsingSpiritsSubmenu) {
 #if !VERSION_JP
-                set_window_properties(WIN_BTL_MOVES_MENU, moveX, moveY, MOVES_OPTIONS_W, (D_802AD10E * 13) + 28, 0, btl_menu_moves_draw_content, NULL, -1);
+                set_window_properties(WIN_BTL_MOVES_MENU, moveX, moveY, MOVES_OPTIONS_W, (D_802AD10E * 13) + 28, 0, btl_menu_moves_draw_content, nullptr, -1);
 #endif
-                set_window_properties(WIN_BTL_MOVES_TITLE, moveX + MOVES_TITLE_X, moveY - 6, MOVES_TITLE_W, 16, 1, btl_menu_moves_show_title, NULL, -1);
-                set_window_properties(WIN_BTL_MOVES_ICON, moveX + MOVES_ICON_X, moveY - 12, 32, 32, 1, btl_menu_moves_show_icon, NULL, -1);
+                set_window_properties(WIN_BTL_MOVES_TITLE, moveX + MOVES_TITLE_X, moveY - 6, MOVES_TITLE_W, 16, 1, btl_menu_moves_show_title, nullptr, -1);
+                set_window_properties(WIN_BTL_MOVES_ICON, moveX + MOVES_ICON_X, moveY - 12, 32, 32, 1, btl_menu_moves_show_icon, nullptr, -1);
             } else {
                 s16 new_var;
 
 #if !VERSION_JP
-                set_window_properties(WIN_BTL_MOVES_MENU, moveX, moveY, STAR_SPIRITS_OPTIONS_W, (D_802AD10E * 13) + 28, 0, btl_menu_moves_draw_content, NULL, -1);
+                set_window_properties(WIN_BTL_MOVES_MENU, moveX, moveY, STAR_SPIRITS_OPTIONS_W, (D_802AD10E * 13) + 28, 0, btl_menu_moves_draw_content, nullptr, -1);
 #endif
                 new_var = moveY; // todo required to match
                 set_window_properties(WIN_BTL_SPIRITS_TITLE, moveX + STAR_SPIRITS_TITLE_X, new_var - 6, STAR_SPIRITS_TITLE_W, 16, 1, btl_menu_moves_show_title, 0, -1);
@@ -1374,7 +1374,7 @@ s32 btl_submenu_moves_update(void) {
 
             moveX = POS_X;
             moveY = BattleMenu_Moves_PosY;
-            set_window_properties(WIN_BTL_DESC_BOX, moveX, 186, WIDTH_3, 32, WINDOW_PRIORITY_20, btl_menu_moves_show_desc, NULL, -1);
+            set_window_properties(WIN_BTL_DESC_BOX, moveX, 186, WIDTH_3, 32, WINDOW_PRIORITY_20, btl_menu_moves_show_desc, nullptr, -1);
             set_window_update(WIN_BTL_MOVES_MENU, WINDOW_UPDATE_SHOW);
             if (!BattleMenu_UsingSpiritsSubmenu) {
                 set_window_update(WIN_BTL_MOVES_TITLE, WINDOW_UPDATE_SHOW);
@@ -1589,9 +1589,9 @@ s32 btl_submenu_moves_update(void) {
             msgWidth = get_msg_width(msgID, 0) + 23;
             moveX = (SCREEN_WIDTH / 2) - (msgWidth / 2);
 #if VERSION_JP
-            set_window_properties(WIN_BTL_POPUP, moveX, 80, msgWidth, 28, 20, btl_menu_moves_show_error, NULL, -1);
+            set_window_properties(WIN_BTL_POPUP, moveX, 80, msgWidth, 28, 20, btl_menu_moves_show_error, nullptr, -1);
 #else
-            set_window_properties(WIN_BTL_POPUP, moveX, 80, msgWidth, D_802AB340[get_msg_lines(msgID) - 1], 20, btl_menu_moves_show_error, NULL, -1);
+            set_window_properties(WIN_BTL_POPUP, moveX, 80, msgWidth, D_802AB340[get_msg_lines(msgID) - 1], 20, btl_menu_moves_show_error, nullptr, -1);
 #endif
             set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
             D_802AD10B = 60;
@@ -2134,16 +2134,16 @@ s32 btl_update_strats_menu(void) {
 #if VERSION_PAL
             width = get_msg_width(MSG_Menus_Strategies, 0) + 32;
             set_window_properties(WIN_BTL_STRATS_MENU, x, y, D_PAL_802AB4C8[gCurrentLanguage], (StratsMenuLines * 13) + 26,
-                0, btl_menu_strats_draw_content, NULL, -1);
+                0, btl_menu_strats_draw_content, nullptr, -1);
             set_window_properties(WIN_BTL_STRATS_TITLE, x + (D_PAL_802AB4C8[gCurrentLanguage] - width) / 2, y - 6, width, 16,
-                1, btl_menu_strats_show_title, NULL, -1);
+                1, btl_menu_strats_show_title, nullptr, -1);
 #else
-            set_window_properties(WIN_BTL_STRATS_MENU, x, y, W_VAR1, (StratsMenuLines * 13) + 26, 0, btl_menu_strats_draw_content, NULL, -1);
-            set_window_properties(WIN_BTL_STRATS_TITLE, x + X_VAR6, y - 6, W_VAR2, 16, 1, btl_menu_strats_show_title, NULL, -1);
+            set_window_properties(WIN_BTL_STRATS_MENU, x, y, W_VAR1, (StratsMenuLines * 13) + 26, 0, btl_menu_strats_draw_content, nullptr, -1);
+            set_window_properties(WIN_BTL_STRATS_TITLE, x + X_VAR6, y - 6, W_VAR2, 16, 1, btl_menu_strats_show_title, nullptr, -1);
 #endif
             x = X_VAR7;
             y = 186;
-            set_window_properties(WIN_BTL_DESC_BOX, x, y, W_VAR3, 32, WINDOW_PRIORITY_20, btl_menu_strats_show_desc, NULL, -1);
+            set_window_properties(WIN_BTL_DESC_BOX, x, y, W_VAR3, 32, WINDOW_PRIORITY_20, btl_menu_strats_show_desc, nullptr, -1);
             set_window_update(WIN_BTL_STRATS_MENU, WINDOW_UPDATE_SHOW);
             set_window_update(WIN_BTL_STRATS_TITLE, WINDOW_UPDATE_SHOW);
             set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
@@ -2268,9 +2268,9 @@ s32 btl_update_strats_menu(void) {
             x = (SCREEN_WIDTH / 2) - (width / 2);
 #if VERSION_PAL
             set_window_properties(WIN_BTL_POPUP, x, 80, width, D_802AB340[get_msg_lines(msgID) - 1],
-                20, btl_menu_strats_show_error, NULL, -1);
+                20, btl_menu_strats_show_error, nullptr, -1);
 #else
-            set_window_properties(WIN_BTL_POPUP, x, 80, width, 28, 20, btl_menu_strats_show_error, NULL, -1);
+            set_window_properties(WIN_BTL_POPUP, x, 80, width, 28, 20, btl_menu_strats_show_error, nullptr, -1);
 #endif
             set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
             D_802AD612 = 60;
@@ -2658,7 +2658,7 @@ void btl_state_update_player_menu(void) {
             gBattleStatus.flags1 |= BS_FLAGS1_MENU_OPEN;
             playerActor->flags &= ~ACTOR_FLAG_USING_IDLE_ANIM;
             playerActor->flags |= ACTOR_FLAG_SHOW_STATUS_ICONS;
-            if (partnerActor != NULL) {
+            if (partnerActor != nullptr) {
                 partnerActor->flags |= ACTOR_FLAG_USING_IDLE_ANIM;
                 partnerActor->flags |= ACTOR_FLAG_SHOW_STATUS_ICONS;
             }
@@ -2828,7 +2828,7 @@ void btl_state_update_player_menu(void) {
                     battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_MAIN] = battle_menu_submenuIDs[BattleMenu_CurPos + BattleMenu_HomePos];
                     btl_main_menu_destroy();
                     btl_set_state(BATTLE_STATE_SWITCH_TO_PARTNER);
-                } else if (partnerActor != NULL && !(partnerActor->flags & BS_FLAGS1_YIELD_TURN) && battleStatus->hustleTurns != 1) {
+                } else if (partnerActor != nullptr && !(partnerActor->flags & BS_FLAGS1_YIELD_TURN) && battleStatus->hustleTurns != 1) {
                     sfx_play_sound(SOUND_MENU_ERROR);
                     gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_MAIN_SHOW_CANT_SWAP;
                 }
@@ -4928,7 +4928,7 @@ void btl_state_update_peach_menu(void) {
             gBattleStatus.flags1 |= BS_FLAGS1_MENU_OPEN;
             player->flags &= ~ACTOR_FLAG_USING_IDLE_ANIM;
             player->flags |= ACTOR_FLAG_SHOW_STATUS_ICONS;
-            if (partner != NULL) {
+            if (partner != nullptr) {
                 partner->flags |= ACTOR_FLAG_USING_IDLE_ANIM;
                 partner->flags |= ACTOR_FLAG_SHOW_STATUS_ICONS;
             }
@@ -5134,7 +5134,7 @@ void btl_state_update_twink_menu(void) {
             gBattleStatus.flags1 |= BS_FLAGS1_MENU_OPEN;
             player->flags &= ~ACTOR_FLAG_USING_IDLE_ANIM;
             player->flags |= ACTOR_FLAG_SHOW_STATUS_ICONS;
-            if (partner != NULL) {
+            if (partner != nullptr) {
                 partner->flags |= ACTOR_FLAG_USING_IDLE_ANIM;
                 partner->flags |= ACTOR_FLAG_SHOW_STATUS_ICONS;
             }
@@ -5612,7 +5612,7 @@ void btl_state_draw_select_target(void) {
 
     // draw target name box
     draw_box(0, WINDOW_STYLE_4, screenX + BattleMenu_TargetNameOffsetX, screenY, 0, nameWidth, 20, 255, 0,
-                0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+                0.0f, 0.0f, 0.0f, 0.0f, 0.0f, nullptr, nullptr, nullptr, SCREEN_WIDTH, SCREEN_HEIGHT, nullptr);
 
     // draw target name text
     screenX += 4;

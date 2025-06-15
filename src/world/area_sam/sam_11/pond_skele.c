@@ -295,5 +295,5 @@ StaticAnimatorNode* N(ShatterPondSkeleton)[] = {
     &N(D_80250EB8_D4B488),
     &N(D_80250E8C_D4B45C),
     &N(D_80250E60_D4B430),
-    NULL
+    nullptr
 };

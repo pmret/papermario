@@ -160,7 +160,7 @@ API_CALLABLE(N(UndarkenWorld)) {
         for (i = 0; i < MAX_NPCS; i++) {
             Npc* npc = get_npc_by_index(i);
 
-            if (npc != NULL && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != NPC_Merlee) {
+            if (npc != nullptr && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != NPC_Merlee) {
                 npc->flags &= ~NPC_FLAG_HIDING;
             }
         }

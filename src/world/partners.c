@@ -565,8 +565,8 @@ void create_partner_npc(void) {
 
     blueprint.flags = NPC_FLAG_PARTNER | NPC_FLAG_IGNORE_PLAYER_COLLISION;
     blueprint.initialAnim = (*partner)->idle;
-    blueprint.onUpdate = NULL;
-    blueprint.onRender = NULL;
+    blueprint.onUpdate = nullptr;
+    blueprint.onRender = nullptr;
     wPartnerNpcIndex = npcIndex = create_basic_npc(blueprintPtr);
 
     *partnerNpcPtr = get_npc_by_index(npcIndex);
@@ -588,7 +588,7 @@ void create_partner_npc(void) {
         npc->scale.z = 0.0f;
     }
 
-    TweesterTouchingPartner = NULL;
+    TweesterTouchingPartner = nullptr;
 }
 
 void partner_free_npc(void) {
@@ -938,8 +938,8 @@ s32 partner_use_ability(void) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (!is_starting_conversation()
-        && wPartner != NULL
-        && (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
+        && wPartner != nullptr
+        && (wPartner->canUseAbility == nullptr || wPartner->canUseAbility(wPartnerNpc)))
     {
         if (gGameStatusPtr->multiplayerEnabled && (partnerStatus->curButtons & BUTTON_B)) {
             sfx_play_sound(SOUND_MENU_ERROR);
@@ -954,8 +954,8 @@ s32 partner_use_ability(void) {
 }
 
 s32 partner_can_open_world_menus(void) {
-    if (wPartner != NULL
-        && wPartner->canPlayerOpenMenus != NULL
+    if (wPartner != nullptr
+        && wPartner->canPlayerOpenMenus != nullptr
         && !wPartner->canPlayerOpenMenus(wPartnerNpc)
     ) {
         return FALSE;
@@ -964,7 +964,7 @@ s32 partner_can_open_world_menus(void) {
 }
 
 s32 partner_can_use_ability(void) {
-    if (wPartner->canUseAbility != NULL && !wPartner->canUseAbility(wPartnerNpc)) {
+    if (wPartner->canUseAbility != nullptr && !wPartner->canUseAbility(wPartnerNpc)) {
         return TRUE;
     }
     return FALSE;
@@ -975,7 +975,7 @@ void partner_reset_data(void) {
     s32 currentPartner = gPlayerData.curPartner;
 
     mem_clear(&gPartnerStatus, sizeof(gPartnerStatus));
-    get_worker(create_worker_frontUI(_use_partner_ability, NULL));
+    get_worker(create_worker_frontUI(_use_partner_ability, nullptr));
 
     D_8010CFE0 = 1;
     NextPartnerCommand = PARTNER_CMD_RESET;
@@ -986,7 +986,7 @@ void partner_reset_data(void) {
         gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
     }
 
-    wPartner = NULL;
+    wPartner = nullptr;
     wSavedPartnerPosX = playerStatus->pos.x;
     wSavedPartnerPosY = playerStatus->pos.y;
     wSavedPartnerPosZ = playerStatus->pos.z;
@@ -1015,14 +1015,14 @@ void partner_initialize_data(void) {
     partnerStatus->partnerActionState = 0;
     partnerStatus->unk_358 = 0;
     partnerStatus->partnerAction_unk_2 = FALSE;
-    wPartner = NULL;
+    wPartner = nullptr;
     wSavedPartnerPosX = 0;
     wSavedPartnerPosY = 0;
     wSavedPartnerPosZ = 0;
 }
 
 s32 partner_test_enemy_collision(Npc* enemy) {
-    if (wCurrentPartnerId != PARTNER_NONE && wPartner->testFirstStrike != NULL) {
+    if (wCurrentPartnerId != PARTNER_NONE && wPartner->testFirstStrike != nullptr) {
         return wPartner->testFirstStrike(wPartnerNpc, enemy);
     }
     return FALSE;
@@ -1031,8 +1031,8 @@ s32 partner_test_enemy_collision(Npc* enemy) {
 EvtScript* partner_get_enter_map_script(void) {
     WorldPartner* partner = wPartner;
 
-    if (partner == NULL) {
-        return NULL;
+    if (partner == nullptr) {
+        return nullptr;
     }
     return partner->onEnterMap;
 }
@@ -1045,7 +1045,7 @@ void partner_handle_before_battle(void) {
             kill_script_by_ID(*scriptID);
         }
 
-        if (wPartner->preBattle != NULL) {
+        if (wPartner->preBattle != nullptr) {
             wPartner->preBattle(wPartnerNpc);
         }
     }
@@ -1073,7 +1073,7 @@ void partner_handle_after_battle(void) {
             partnerStatus->actingPartner = PARTNER_NONE;
         }
 
-        if (wPartner->postBattle != NULL) {
+        if (wPartner->postBattle != nullptr) {
             wPartner->postBattle(wPartnerNpc);
         }
     }
@@ -1088,7 +1088,7 @@ void partner_kill_ability_script(void) {
 }
 
 void partner_suspend_ability_script(void) {
-    if (wCurrentPartnerId != NULL) {
+    if (wCurrentPartnerId != nullptr) {
         if (does_script_exist(wPartnerCurrentScriptID)) {
             suspend_all_script(wPartnerCurrentScriptID);
         }
@@ -1096,7 +1096,7 @@ void partner_suspend_ability_script(void) {
 }
 
 void partner_resume_ability_script(void) {
-    if (wCurrentPartnerId != NULL) {
+    if (wCurrentPartnerId != nullptr) {
         if (does_script_exist(wPartnerCurrentScriptID)) {
             resume_all_script(wPartnerCurrentScriptID);
         }

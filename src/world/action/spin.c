@@ -51,7 +51,7 @@ void action_update_spin(void) {
         playerSpinState->bufferedStickAxis.x = 0;
         playerSpinState->bufferedStickAxis.y = 0;
         playerSpinState->spinSoundID = SOUND_NONE;
-        playerStatus->specialDecorationEffect = NULL;
+        playerStatus->specialDecorationEffect = nullptr;
         playerSpinState->initialSpinTime = 25;
         playerSpinState->fullSpeedSpinTime = 15;
         playerSpinState->spinRate = 40.0f;

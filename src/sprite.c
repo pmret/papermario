@@ -207,7 +207,7 @@ Quad* spr_get_quad_for_size(s32* quadIndex, s32 width, s32 height) {
             return quad;
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 void spr_clear_quad_cache(void) {
@@ -376,13 +376,13 @@ void spr_appendGfx_component(
     width = cache->width;
     height = cache->height;
     quadIndex = cache->quadCacheIndex;
-    quad = NULL;
+    quad = nullptr;
     if (!(D_802DF540 & SPR_IMGFX_FLAG_ALL)) {
         quad = spr_get_quad_for_size(&quadIndex, width, height);
         cache->quadCacheIndex = quadIndex;
     }
 
-    if (quad != NULL) {
+    if (quad != nullptr) {
         spr_appendGfx_component_flat(quad, cache->image, palette, width, height, rotY, mtxTransform, (u8) opacity);
     } else {
         ifxImg.raster  = cache->image;
@@ -799,19 +799,19 @@ void spr_init_sprites(s32 playerSpriteSet) {
     }
 
     for (i = 0; i < ARRAY_COUNT(spr_playerCurrentAnimInfo); i++) {
-        spr_playerCurrentAnimInfo[i].componentList = NULL;
+        spr_playerCurrentAnimInfo[i].componentList = nullptr;
         spr_playerCurrentAnimInfo[i].animID = -1;
     }
 
     for (i = 0; i < ARRAY_COUNT(NpcSpriteData); i++) {
-        NpcSpriteData[i] = NULL;
+        NpcSpriteData[i] = nullptr;
         NpcSpriteInstanceCount[i] = 0;
     }
 
     for (i = 0; i < ARRAY_COUNT(SpriteInstances); i++) {
         SpriteInstances[i].spriteIndex = 0;
-        SpriteInstances[i].componentList = NULL;
-        SpriteInstances[i].spriteData = NULL;
+        SpriteInstances[i].componentList = nullptr;
+        SpriteInstances[i].spriteData = nullptr;
         SpriteInstances[i].curAnimID = -1;
         SpriteInstances[i].notifyValue = 0;
     }
@@ -839,7 +839,7 @@ s32 spr_update_player_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
     s32 animIndex = animID & 0xFF;
     D_802DF57C = spriteId;
 
-    if (spr_playerCurrentAnimInfo[instanceIdx].componentList == NULL) {
+    if (spr_playerCurrentAnimInfo[instanceIdx].componentList == nullptr) {
         compList = spr_allocate_components(spr_playerMaxComponents);
         spr_playerCurrentAnimInfo[instanceIdx].componentList = compList;
         while (*compList != PTR_LIST_END) {
@@ -852,7 +852,7 @@ s32 spr_update_player_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
     spriteData = (u32*)spr_playerSprites[spriteId];
     compList = spr_playerCurrentAnimInfo[instanceIdx].componentList;
 
-    if (spriteData == NULL) {
+    if (spriteData == nullptr) {
         return 0;
     }
 
@@ -896,7 +896,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* 
 
     D_802DF57C = spriteId = ((animID >> 0x10) & 0xFF) - 1;
     spriteData = (u32*)spr_playerSprites[spriteId];
-    if (spriteData == NULL) {
+    if (spriteData == nullptr) {
         return FALSE;
     }
 
@@ -978,7 +978,7 @@ void set_player_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgFXType imgfx, s32 imgf
     SpriteComponent** componentListIt;
     s32 i;
 
-    if (spr_playerCurrentAnimInfo[spriteIdx].componentList != NULL) {
+    if (spr_playerCurrentAnimInfo[spriteIdx].componentList != nullptr) {
         componentListIt = spr_playerCurrentAnimInfo[spriteIdx].componentList;
         i = 0;
 
@@ -1010,7 +1010,7 @@ void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 r
 
     playerSpriteID--;
     sprite = spr_playerSprites[playerSpriteID];
-    if (sprite != NULL) {
+    if (sprite != nullptr) {
         paletteOffsetCopy = sprite->palettesOffset;
         cache = sprite->rastersOffset[rasterIndex];
         out->width = cache->width;
@@ -1023,8 +1023,8 @@ void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 r
 PAL_PTR* spr_get_player_palettes(s32 spriteIndex) {
     SpriteAnimData* sprites = spr_playerSprites[spriteIndex - 1];
 
-    if (sprites == NULL) {
-        return NULL;
+    if (sprites == nullptr) {
+        return nullptr;
     } else {
         return sprites->palettesOffset;
     }
@@ -1051,7 +1051,7 @@ s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList) {
         return -1;
     }
     listIndex = i;
-    if (NpcSpriteData[spriteIndex] != NULL) {
+    if (NpcSpriteData[spriteIndex] != nullptr) {
         NpcSpriteInstanceCount[spriteIndex]++;
         header = NpcSpriteData[spriteIndex];
         SpriteInstances[listIndex].spriteData = header;
@@ -1060,7 +1060,7 @@ s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList) {
         header = spr_load_sprite(spriteIndex - 1, FALSE, useTailAlloc);
         SpriteInstances[listIndex].spriteData = header;
         NpcSpriteData[spriteIndex] = header;
-        if (extraAnimList != NULL) {
+        if (extraAnimList != nullptr) {
             spr_load_npc_extra_anims(header, extraAnimList);
         }
     }
@@ -1202,7 +1202,7 @@ s32 spr_free_sprite(s32 spriteInstanceID) {
     compList = SpriteInstances[spriteInstanceID].componentList;
 
     if (NpcSpriteInstanceCount[spriteIndex] == 0) {
-        NpcSpriteData[spriteIndex] = NULL;
+        NpcSpriteData[spriteIndex] = nullptr;
         _heap_free(&heap_spriteHead, spriteData);
     }
 
@@ -1213,8 +1213,8 @@ s32 spr_free_sprite(s32 spriteInstanceID) {
     }
 
     SpriteInstances[spriteInstanceID].spriteIndex = 0;
-    SpriteInstances[spriteInstanceID].componentList = NULL;
-    SpriteInstances[spriteInstanceID].spriteData = NULL;
+    SpriteInstances[spriteInstanceID].componentList = nullptr;
+    SpriteInstances[spriteInstanceID].spriteData = nullptr;
     SpriteInstances[spriteInstanceID].curAnimID = -1;
     return 0;
 }
@@ -1222,7 +1222,7 @@ s32 spr_free_sprite(s32 spriteInstanceID) {
 s32 get_npc_comp_imgfx_idx(s32 spriteIdx, s32 compIdx) {
     SpriteComponent** componentList = SpriteInstances[spriteIdx].componentList;
 
-    if (componentList == NULL) {
+    if (componentList == nullptr) {
         return -1;
     } else {
         return componentList[compIdx]->imgfxIdx & 0xFF;
@@ -1234,7 +1234,7 @@ void set_npc_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgFXType imgfx, s32 imgfxAr
     SpriteComponent** componentList;
     s32 i;
 
-    if (sprite->componentList != NULL) {
+    if (sprite->componentList != nullptr) {
         componentList = sprite->componentList;
         i = 0;
 
@@ -1269,7 +1269,7 @@ s32 spr_get_comp_position(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, 
     s32 i;
     u32* spriteData;
 
-    if (sprite->componentList == NULL) {
+    if (sprite->componentList == nullptr) {
         return; // bug: does not return a value
     }
 
@@ -1308,7 +1308,7 @@ s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIn
     SpriteRasterCacheEntry* cache;
     PAL_PTR* paletteOffsetCopy;
 
-    if (sprite != NULL) {
+    if (sprite != nullptr) {
         paletteOffsetCopy = sprite->palettesOffset;
         cache = sprite->rastersOffset[rasterIndex];
         out->raster = cache->image;
@@ -1323,17 +1323,17 @@ s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIn
 PAL_PTR* spr_get_npc_palettes(s32 npcSpriteID) {
     SpriteAnimData* sprite = NpcSpriteData[npcSpriteID];
 
-    if (sprite != NULL) {
+    if (sprite != nullptr) {
         return sprite->palettesOffset;
     } else {
-        return NULL;
+        return nullptr;
     }
 }
 
 s32 spr_get_npc_color_variations(s32 npcSpriteID) {
     SpriteAnimData* sprite = NpcSpriteData[npcSpriteID];
 
-    if (sprite != NULL) {
+    if (sprite != nullptr) {
         return sprite->colorVariations;
     } else {
         return -1;

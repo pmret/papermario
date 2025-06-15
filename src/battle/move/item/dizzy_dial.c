@@ -26,7 +26,7 @@ API_CALLABLE(N(AnimateDizzyDialCameraFX)) {
             script->functionTemp[2] = 0;
             sfx_play_sound(SOUND_DIZZY_DIAL);
             camera->params.basic.skipRecalc = FALSE;
-            ScreenBlurWorkerID = create_worker_frontUI(NULL, N(worker_render_screen_blur));
+            ScreenBlurWorkerID = create_worker_frontUI(nullptr, N(worker_render_screen_blur));
             script->functionTemp[0] = 1;
         case 1:
             camera->flags |= CAMERA_FLAG_SHAKING;

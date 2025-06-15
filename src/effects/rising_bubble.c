@@ -32,13 +32,13 @@ void rising_bubble_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4) {
     effectBp.init = rising_bubble_init;
     effectBp.update = rising_bubble_update;
     effectBp.renderScene = rising_bubble_render;
-    effectBp.renderUI = NULL;
+    effectBp.renderUI = nullptr;
     effectBp.effectID = EFFECT_RISING_BUBBLE;
 
     effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
     data = effect->data.risingBubble = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(data != NULL);
+    ASSERT(data != nullptr);
 
     data->unk_00 = arg0;
     data->pos.x = posX;

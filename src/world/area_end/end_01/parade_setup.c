@@ -31,8 +31,8 @@ API_CALLABLE(N(CreateParadeNPC)) {
 
     bp.flags = NPC_FLAG_IGNORE_PLAYER_COLLISION;
     bp.initialAnim = npcInfo->initialAnim;
-    bp.onUpdate = NULL;
-    bp.onRender = NULL;
+    bp.onUpdate = nullptr;
+    bp.onRender = nullptr;
 
     spr_allocateBtlComponentsOnWorldHeap = TRUE;
 

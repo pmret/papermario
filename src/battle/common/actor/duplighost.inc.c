@@ -559,7 +559,7 @@ API_CALLABLE(N(GetPartnerAndLevel)) {
 API_CALLABLE(N(AdjustFormationPriority)) {
     s32 partnerID = evt_get_variable(script, *script->ptrReadPos);
     Actor* actor = get_actor(script->owner1.actorID);
-    FormationRow* formation = NULL;
+    FormationRow* formation = nullptr;
 
     switch (partnerID) {
         case PARTNER_GOOMBARIO:

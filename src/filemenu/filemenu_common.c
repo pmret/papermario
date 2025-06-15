@@ -114,8 +114,8 @@ MenuWindowBP filemenu_common_windowBPs[3] = {
         .width = 288,
         .height = 192,
         .priority = WINDOW_PRIORITY_0,
-        .fpDrawContents = NULL,
-        .tab = NULL,
+        .fpDrawContents = nullptr,
+        .tab = nullptr,
         .parentID = -1,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = WINDOW_FLAG_40,
@@ -131,7 +131,7 @@ MenuWindowBP filemenu_common_windowBPs[3] = {
         .height = 192,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = filemenu_draw_contents_copy_arrow,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_FILES_MAIN,
         .fpUpdate = { WINDOW_UPDATE_SHOW } ,
         .extraFlags = 0,
@@ -147,7 +147,7 @@ MenuWindowBP filemenu_common_windowBPs[3] = {
         .height = 240,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = filemenu_draw_cursor,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = -1,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
@@ -332,7 +332,7 @@ void filemenu_update(void) {
     }
 
     if (menu->initialized) {
-        if (menu->fpHandleInput != NULL) {
+        if (menu->fpHandleInput != nullptr) {
             menu->fpHandleInput(menu);
         }
     }
@@ -341,7 +341,7 @@ void filemenu_update(void) {
     menuIt = filemenu_menus;
     for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, menuIt++) {
         menu = *menuIt;
-        if (menu->initialized && menu->fpUpdate != NULL) {
+        if (menu->initialized && menu->fpUpdate != nullptr) {
             menu->fpUpdate(menu);
         }
     }
@@ -1037,7 +1037,7 @@ void filemenu_init(s32 mode) {
 
     filemenu_cursorHID = filemenu_cursorHIDs[0];
     if (mode == 0) {
-        filemenu_common_windowBPs[0].style.customStyle->background.imgData = NULL; // ???
+        filemenu_common_windowBPs[0].style.customStyle->background.imgData = nullptr; // ???
     }
     setup_pause_menu_tab(filemenu_common_windowBPs, ARRAY_COUNT(filemenu_common_windowBPs));
 
@@ -1060,7 +1060,7 @@ void filemenu_init(s32 mode) {
 
         panelIt = filemenu_menus;
         for (i = 0; i < ARRAY_COUNT(filemenu_menus) - 1; i++, panelIt++) {
-            if ((*panelIt)->fpInit != NULL) {
+            if ((*panelIt)->fpInit != nullptr) {
                 (*panelIt)->fpInit((*panelIt));
             }
         }
@@ -1072,7 +1072,7 @@ void filemenu_init(s32 mode) {
         panelIt = filemenu_menus;
         for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, panelIt++) {
             if (i == FM_MAIN_SELECT_LANG_PAL) {
-                if ((*panelIt)->fpInit != NULL) {
+                if ((*panelIt)->fpInit != nullptr) {
                     (*panelIt)->fpInit((*panelIt));
                 }
             }
@@ -1112,7 +1112,7 @@ void filemenu_init(s32 mode) {
 
     panelIt = filemenu_menus;
     for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, panelIt++) {
-        if ((*panelIt)->fpInit != NULL) {
+        if ((*panelIt)->fpInit != nullptr) {
             (*panelIt)->fpInit((*panelIt));
         }
     }
@@ -1132,7 +1132,7 @@ void filemenu_cleanup(void) {
     panelIt = filemenu_menus;
     for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, panelIt++) {
         if ((*panelIt)->initialized) {
-            if ((*panelIt)->fpCleanup != NULL) {
+            if ((*panelIt)->fpCleanup != nullptr) {
                 (*panelIt)->fpCleanup(*panelIt);
             }
         }

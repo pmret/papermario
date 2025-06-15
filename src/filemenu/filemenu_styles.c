@@ -6,7 +6,7 @@ extern u8 D_8024B400[];
 WindowStyleCustom filemenu_windowStyles[] = {
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -15,7 +15,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
             .size = 0
         },
         .corners = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .size1 = { .x = 0, .y = 0},
@@ -32,7 +32,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_I,
             .bitDepth = G_IM_SIZ_4b,
             .width = 16,
@@ -41,7 +41,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
             .size = 128
         },
         .corners = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_IA,
             .bitDepth = G_IM_SIZ_8b,
             .size1 = { .x = 8, .y = 8},
@@ -58,7 +58,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -67,7 +67,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
             .size = 0
         },
         .corners = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .size1 = { .x = 0, .y = 0},
@@ -84,7 +84,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -110,7 +110,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -136,7 +136,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -162,7 +162,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -188,7 +188,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -214,7 +214,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -240,7 +240,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -266,7 +266,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -292,7 +292,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -318,7 +318,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -344,7 +344,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -370,7 +370,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -396,7 +396,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -422,7 +422,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -448,7 +448,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -474,7 +474,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -500,7 +500,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -526,7 +526,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -552,7 +552,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,
@@ -578,7 +578,7 @@ WindowStyleCustom filemenu_windowStyles[] = {
     },
     {
         .background = {
-            .imgData = NULL,
+            .imgData = nullptr,
             .fmt = G_IM_FMT_RGBA,
             .bitDepth = G_IM_SIZ_4b,
             .width = 0,

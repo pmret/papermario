@@ -69,7 +69,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 50, 0 },
         .targetOffset = { -1, -30 },
         .opacity = 255,
-        .idleAnimations = NULL,
+        .idleAnimations = nullptr,
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ELECTRIFIED,
         .elementImmunityFlags = 0,
@@ -147,24 +147,24 @@ API_CALLABLE(N(WattFXUpdate)) {
     if (wattEffectData->isActive) {
         switch (wattEffectData->currentEffectIndex) {
             case 0:
-                if (wattEffectData->effect1 == NULL) {
+                if (wattEffectData->effect1 == nullptr) {
                     wattEffectData->effect1 = fx_static_status(0, x, y, z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
                 }
 
-                if (wattEffectData->effect2 != NULL) {
+                if (wattEffectData->effect2 != nullptr) {
                     wattEffectData->effect2->flags |= FX_INSTANCE_FLAG_DISMISS;
-                    wattEffectData->effect2 = NULL;
+                    wattEffectData->effect2 = nullptr;
                 }
                 wattEffectData->effect1->data.staticStatus->pos.x = x;
                 wattEffectData->effect1->data.staticStatus->pos.y = y;
                 wattEffectData->effect1->data.staticStatus->pos.z = z;
                 break;
             case 1:
-                if (wattEffectData->effect1 != NULL) {
+                if (wattEffectData->effect1 != nullptr) {
                     wattEffectData->effect1->flags |= FX_INSTANCE_FLAG_DISMISS;
-                    wattEffectData->effect1 = NULL;
+                    wattEffectData->effect1 = nullptr;
                 }
-                if (wattEffectData->effect2 == NULL) {
+                if (wattEffectData->effect2 == nullptr) {
                     wattEffectData->effect2 = fx_static_status(1, x, y, z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
 
                 }
@@ -174,23 +174,23 @@ API_CALLABLE(N(WattFXUpdate)) {
                 break;
         }
     } else {
-        if (wattEffectData->effect1 != NULL) {
+        if (wattEffectData->effect1 != nullptr) {
             wattEffectData->effect1->flags |= FX_INSTANCE_FLAG_DISMISS;
-            wattEffectData->effect1 = NULL;
+            wattEffectData->effect1 = nullptr;
         }
-        if (wattEffectData->effect2 != NULL) {
+        if (wattEffectData->effect2 != nullptr) {
             wattEffectData->effect2->flags |= FX_INSTANCE_FLAG_DISMISS;
-            wattEffectData->effect2 = NULL;
+            wattEffectData->effect2 = nullptr;
         }
     }
     if (wattEffectData->debuff != actor->debuff && wattEffectData->isActive) {
-        if (wattEffectData->effect1 != NULL) {
+        if (wattEffectData->effect1 != nullptr) {
             wattEffectData->effect1->flags |= FX_INSTANCE_FLAG_DISMISS;
-            wattEffectData->effect1 = NULL;
+            wattEffectData->effect1 = nullptr;
         }
-        if (wattEffectData->effect2 != NULL) {
+        if (wattEffectData->effect2 != nullptr) {
             wattEffectData->effect2->flags |= FX_INSTANCE_FLAG_DISMISS;
-            wattEffectData->effect2 = NULL;
+            wattEffectData->effect2 = nullptr;
         }
     }
     wattEffectData->debuff = actor->debuff;
@@ -209,11 +209,11 @@ API_CALLABLE(N(WattFXRemove)) {
 
     wattEffectData->initialized = FALSE;
 
-    if (wattEffectData->effect1 != NULL) {
+    if (wattEffectData->effect1 != nullptr) {
         wattEffectData->effect1->flags |= FX_INSTANCE_FLAG_DISMISS;
     }
 
-    if (wattEffectData->effect2 != NULL) {
+    if (wattEffectData->effect2 != nullptr) {
         wattEffectData->effect2->flags |= FX_INSTANCE_FLAG_DISMISS;
     }
 

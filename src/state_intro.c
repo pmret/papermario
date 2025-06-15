@@ -132,14 +132,14 @@ void state_step_intro(void) {
                 set_curtain_fade_goal(0.0f);
                 if (startup_fade_screen_out(IntroFrontFadeAlpha)) {
                     gGameStatusPtr->startupState = INTRO_DISABLE_DRAW_FRAME;
-                    set_curtain_draw_callback(NULL);
+                    set_curtain_draw_callback(nullptr);
                 }
             } else {
                 IntroOverlayAlpha += IntroFrontFadeAlpha;
                 if (IntroOverlayAlpha >= 255) {
                     IntroOverlayAlpha = 255;
                     gGameStatusPtr->startupState = INTRO_DISABLE_DRAW_FRAME;
-                    set_curtain_draw_callback(NULL);
+                    set_curtain_draw_callback(nullptr);
                 }
             }
             break;
@@ -159,7 +159,7 @@ void state_step_intro(void) {
             }
             break;
         case INTRO_LOAD_MAP:
-            set_curtain_draw_callback(NULL);
+            set_curtain_draw_callback(nullptr);
             gGameStatusPtr->context = CONTEXT_WORLD;
             gGameStatusPtr->debugUnused1 = FALSE;
             gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;

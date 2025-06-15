@@ -118,7 +118,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
             break;
     }
 
-    gGameStatusPtr->mapShop = NULL;
+    gGameStatusPtr->mapShop = nullptr;
 
     mapConfig = &gAreas[areaID].maps[mapID];
 
@@ -129,19 +129,19 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     sprintf(wMapTexName, "%s_tex", texStr);
 
     gMapConfig = mapConfig;
-    if (mapConfig->bgName != NULL) {
+    if (mapConfig->bgName != nullptr) {
         strcpy(wMapBgName, mapConfig->bgName);
     }
     load_map_script_lib();
 
-    if (mapConfig->dmaStart != NULL) {
+    if (mapConfig->dmaStart != nullptr) {
         dma_copy(mapConfig->dmaStart, mapConfig->dmaEnd, mapConfig->dmaDest);
     }
 
     gMapSettings = *mapConfig->settings;
 
     mapSettings = &gMapSettings;
-    if (mapConfig->init != NULL) {
+    if (mapConfig->init != nullptr) {
         skipLoadingAssets = mapConfig->init();
     }
 
@@ -158,7 +158,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         mapSettings->zoneNameList = shapeFile->header.zoneNames;
     }
 
-    if (mapConfig->bgName != NULL) {
+    if (mapConfig->bgName != nullptr) {
         load_map_bg(wMapBgName);
     }
 
@@ -208,12 +208,12 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     if (!skipLoadingAssets) {
         s32 texturesOffset = get_asset_offset(wMapTexName, &decompressedSize);
 
-        if (mapSettings->modelTreeRoot != NULL) {
+        if (mapSettings->modelTreeRoot != nullptr) {
             load_data_for_models(mapSettings->modelTreeRoot, texturesOffset, decompressedSize);
         }
     }
 
-    if (mapSettings->background != NULL) {
+    if (mapSettings->background != nullptr) {
         set_background(mapSettings->background);
     } else {
         set_background_size(296, 200, 12, 20);
@@ -251,7 +251,7 @@ s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID) {
     MapConfig* maps;
 
     // TODO: Potentially a fake match? Difficult to not set the temp in the for conditional.
-    for (i = 0; (maps = gAreas[i].maps) != NULL; i++) {
+    for (i = 0; (maps = gAreas[i].maps) != nullptr; i++) {
         for (j = 0; j < gAreas[i].mapCount; j++) {
             if (strcmp(maps[j].id, mapName) == 0) {
                 *areaID = i;

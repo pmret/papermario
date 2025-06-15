@@ -79,23 +79,23 @@ API_CALLABLE(N(WattFXUpdate)) {
     if (sWattEffectData_isActive) {
         switch (sWattEffectData_currentEffectIndex) {
             case 0:
-                if (sWattEffectData_effect1 == NULL) {
+                if (sWattEffectData_effect1 == nullptr) {
                     sWattEffectData_effect1 = fx_static_status(0, x, y, z, 1.0f, 5, 0);
                 }
-                if (sWattEffectData_effect2 != NULL) {
+                if (sWattEffectData_effect2 != nullptr) {
                     sWattEffectData_effect2->flags |= FX_INSTANCE_FLAG_DISMISS;
-                    sWattEffectData_effect2 = NULL;
+                    sWattEffectData_effect2 = nullptr;
                 }
                 sWattEffectData_effect1->data.staticStatus->pos.x = x;
                 sWattEffectData_effect1->data.staticStatus->pos.y = y;
                 sWattEffectData_effect1->data.staticStatus->pos.z = z;
                 break;
             case 1:
-                if (sWattEffectData_effect1 != NULL) {
+                if (sWattEffectData_effect1 != nullptr) {
                     sWattEffectData_effect1->flags |= FX_INSTANCE_FLAG_DISMISS;
-                    sWattEffectData_effect1 = NULL;
+                    sWattEffectData_effect1 = nullptr;
                 }
-                if (sWattEffectData_effect2 == NULL) {
+                if (sWattEffectData_effect2 == nullptr) {
                     sWattEffectData_effect2 = fx_static_status(1, x, y, z, 1.0f, 5, 0);
                 }
                 sWattEffectData_effect2->data.staticStatus->pos.x = x;
@@ -104,13 +104,13 @@ API_CALLABLE(N(WattFXUpdate)) {
                 break;
         }
     } else {
-        if (sWattEffectData_effect1 != NULL) {
+        if (sWattEffectData_effect1 != nullptr) {
             sWattEffectData_effect1->flags |= FX_INSTANCE_FLAG_DISMISS;
-            sWattEffectData_effect1 = NULL;
+            sWattEffectData_effect1 = nullptr;
         }
-        if (sWattEffectData_effect2 != NULL) {
+        if (sWattEffectData_effect2 != nullptr) {
             sWattEffectData_effect2->flags |= FX_INSTANCE_FLAG_DISMISS;
-            sWattEffectData_effect2 = NULL;
+            sWattEffectData_effect2 = nullptr;
         }
     }
 
@@ -119,10 +119,10 @@ API_CALLABLE(N(WattFXUpdate)) {
 
 API_CALLABLE(N(WattFXRemove)) {
     sWattEffectData_initialized = FALSE;
-    if (sWattEffectData_effect1 != NULL) {
+    if (sWattEffectData_effect1 != nullptr) {
         remove_effect(sWattEffectData_effect1);
     }
-    if (sWattEffectData_effect2 != NULL) {
+    if (sWattEffectData_effect2 != nullptr) {
         remove_effect(sWattEffectData_effect2);
     }
 
@@ -172,10 +172,10 @@ API_CALLABLE(N(ElectroDashFX)) {
 API_CALLABLE(N(ElectroDashFXDisable)) {
     EffectInstance* effect = N(radialShimmer);
 
-    if (effect != NULL) {
+    if (effect != nullptr) {
         effect->flags |= FX_INSTANCE_FLAG_DISMISS;
     }
-    N(radialShimmer) = NULL;
+    N(radialShimmer) = nullptr;
 
     return ApiStatus_DONE2;
 }
@@ -730,7 +730,7 @@ EvtScript N(EVS_ReturnHome_Miss) = {
     End
 };
 
-EffectInstance* N(radialShimmer) = NULL;
+EffectInstance* N(radialShimmer) = nullptr;
 
 EvtScript N(dashToTarget) = {
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)

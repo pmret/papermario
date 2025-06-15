@@ -81,7 +81,7 @@ API_CALLABLE(RemoveNpc) {
                 Evt* scriptTemp = script;
 
                 while (TRUE) {
-                    if (scriptTemp->blockingParent != NULL) {
+                    if (scriptTemp->blockingParent != nullptr) {
                         scriptTemp = scriptTemp->blockingParent;
                     } else {
                         break;
@@ -102,10 +102,10 @@ API_CALLABLE(RemoveNpc) {
     for (i = 0; i < currentEncounter->numEncounters; i++) {
         Encounter* encounter = currentEncounter->encounterList[i];
 
-        if (encounter != NULL) {
+        if (encounter != nullptr) {
             for (j = 0; j < encounter->count; j++) {
                 enemy = encounter->enemy[j];
-                if (enemy != NULL && enemy->npcID == id) {
+                if (enemy != nullptr && enemy->npcID == id) {
                     kill_enemy(enemy);
                     return ret;
                 }
@@ -134,10 +134,10 @@ API_CALLABLE(RemoveEncounter) {
     for (i = 0; i < currentEncounter->numEncounters; i++) {
         Encounter* encounter = currentEncounter->encounterList[i];
 
-        if (encounter != NULL) {
+        if (encounter != nullptr) {
             for (j = 0; j < encounter->count; j++) {
                 enemy = encounter->enemy[j];
-                if (enemy != NULL && enemy->npcID == id) {
+                if (enemy != nullptr && enemy->npcID == id) {
                     kill_encounter(enemy);
                     return ret;
                 }
@@ -210,11 +210,11 @@ void start_battle(Evt* script, s32 songID) {
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
 
-    if (enemy->aiScript != NULL) {
+    if (enemy->aiScript != nullptr) {
         suspend_all_script(enemy->aiScriptID);
     }
 
-    if (enemy->auxScript != NULL) {
+    if (enemy->auxScript != nullptr) {
         suspend_all_script(enemy->auxScriptID);
     }
 
@@ -224,8 +224,8 @@ void start_battle(Evt* script, s32 songID) {
     encounter = currentEncounter->curEncounter;
     for (i = 0; i < encounter->count; i++) {
         enemy = encounter->enemy[i];
-        if (enemy != NULL && (!(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || enemy == currentEncounter->curEnemy)) {
-            if (enemy->hitBytecode != NULL) {
+        if (enemy != nullptr && (!(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || enemy == currentEncounter->curEnemy)) {
+            if (enemy->hitBytecode != nullptr) {
                 Evt* hitEvtInstance;
                 enemy->encountered = TRUE;
 
@@ -281,11 +281,11 @@ API_CALLABLE(StartBossBattle) {
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
 
-    if (enemy->aiScript != NULL) {
+    if (enemy->aiScript != nullptr) {
         suspend_all_script(enemy->aiScriptID);
     }
 
-    if (enemy->auxScript != NULL) {
+    if (enemy->auxScript != nullptr) {
         suspend_all_script(enemy->auxScriptID);
     }
 
@@ -295,9 +295,9 @@ API_CALLABLE(StartBossBattle) {
     encounter = currentEncounter->curEncounter;
     for (i = 0; i < encounter->count; i++) {
         enemy = encounter->enemy[i];
-        if ((enemy != NULL && (
+        if ((enemy != nullptr && (
             !(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || enemy == currentEncounter->curEnemy)
-            ) && enemy->hitBytecode != NULL) {
+            ) && enemy->hitBytecode != nullptr) {
             enemy->encountered = TRUE;
 
             script = start_script(enemy->hitBytecode, EVT_PRIORITY_A, 0);
@@ -346,7 +346,7 @@ API_CALLABLE(BindNpcAI) {
         id = enemy->npcID;
 
         while (TRUE) {
-            if (scriptTemp->blockingParent != NULL) {
+            if (scriptTemp->blockingParent != nullptr) {
                 scriptTemp = scriptTemp->blockingParent;
             } else {
                 break;
@@ -367,7 +367,7 @@ API_CALLABLE(BindNpcAI) {
         groupFlags = EVT_GROUP_HOSTILE_NPC;
     }
 
-    if (enemy->aiScript != NULL) {
+    if (enemy->aiScript != nullptr) {
 #if VERSION_JP || VERSION_PAL
         groupFlags = enemy->aiScript->groupFlags;
 #endif
@@ -420,7 +420,7 @@ API_CALLABLE(RestartNpcAI) {
         groupFlags = EVT_GROUP_HOSTILE_NPC;
     }
 
-    if (enemy->aiScript != NULL) {
+    if (enemy->aiScript != nullptr) {
 #if VERSION_JP || VERSION_PAL
         groupFlags = enemy->aiScript->groupFlags;
 #endif
@@ -451,10 +451,10 @@ API_CALLABLE(EnableNpcAI) {
     npc = get_enemy(npcID);
 
     if (var2 != 0) {
-        if (npc->aiScript != NULL) {
+        if (npc->aiScript != nullptr) {
             resume_all_script(npc->aiScriptID);
         }
-    } else if (npc->aiScript != NULL) {
+    } else if (npc->aiScript != nullptr) {
         suspend_all_script(npc->aiScriptID);
     }
 
@@ -474,7 +474,7 @@ API_CALLABLE(SetNpcAux) {
         id = enemy->npcID;
 
         while (TRUE) {
-            if (scriptTemp->blockingParent != NULL) {
+            if (scriptTemp->blockingParent != nullptr) {
                 scriptTemp = scriptTemp->blockingParent;
             } else {
                 break;
@@ -490,11 +490,11 @@ API_CALLABLE(SetNpcAux) {
         auxScript = enemy->auxScript;
     }
 
-    if (auxScript != NULL) {
+    if (auxScript != nullptr) {
         kill_script_by_ID(enemy->auxScriptID);
     }
 
-    if (newScriptSource != NULL) {
+    if (newScriptSource != nullptr) {
         enemy->auxBytecode = newScriptSource;
         scriptTemp = start_script(newScriptSource, EVT_PRIORITY_A, 0);
         enemy->auxScript = scriptTemp;
@@ -541,7 +541,7 @@ API_CALLABLE(RestartNpcAux) {
         groupFlags = EVT_GROUP_HOSTILE_NPC;
     }
 
-    if (enemy->auxScript != NULL) {
+    if (enemy->auxScript != nullptr) {
 #if VERSION_JP || VERSION_PAL
         groupFlags = enemy->auxScript->groupFlags;
 #endif
@@ -571,10 +571,10 @@ API_CALLABLE(EnableNpcAux) {
     npc = get_enemy(npcID);
 
     if (var2 != 0) {
-        if (npc->auxScript != NULL) {
+        if (npc->auxScript != nullptr) {
             resume_all_script(npc->auxScriptID);
         }
-    } else if (npc->auxScript != NULL) {
+    } else if (npc->auxScript != nullptr) {
         suspend_all_script(npc->auxScriptID);
     }
 
@@ -593,7 +593,7 @@ API_CALLABLE(BindNpcInteract) {
 
     npc = get_enemy(npcID);
 
-    if (npc->interactScript != NULL) {
+    if (npc->interactScript != nullptr) {
         kill_script_by_ID(npc->interactScriptID);
     }
     npc->interactBytecode = interactBytecode;
@@ -613,7 +613,7 @@ API_CALLABLE(BindNpcHit) {
 
     npc = get_enemy(npcID);
 
-    if (npc->hitScript != NULL) {
+    if (npc->hitScript != nullptr) {
         kill_script_by_ID(npc->hitScriptID);
     }
     npc->hitBytecode = hitBytecode;
@@ -827,7 +827,7 @@ API_CALLABLE(func_80045838) {
     s32 upperSoundFLags = evt_get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 

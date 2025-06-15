@@ -222,7 +222,7 @@ EvtScript N(EVS_SetupRooms) = {
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_LARGE_DOOR_LEFT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_Verdana)),
         Ref(N(EVS_SetWallRot_Verdana)),
-        NULL,
+        nullptr,
         Ref(N(EVS_RoomListener_Verdana)),
         COLLIDER_deilit4,
         COLLIDER_deilit4_1,

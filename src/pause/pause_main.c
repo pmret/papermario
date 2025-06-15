@@ -139,7 +139,7 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .height = 200,
         .priority = 0,
         .fpDrawContents = &pause_main_draw_contents,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_NONE,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = WINDOW_FLAG_40,
@@ -153,7 +153,7 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .height = 63,
         .priority = 0,
         .fpDrawContents = &pause_tutorial_draw_contents,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
@@ -172,7 +172,7 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .height = 32,
         .priority = 0,
         .fpDrawContents = &pause_textbox_draw_contents,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { .func = &basic_window_update },
         .extraFlags = 0,
@@ -186,7 +186,7 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .height = SCREEN_HEIGHT,
         .priority = 0,
         .fpDrawContents = &pause_draw_cursor,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_NONE,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
@@ -541,7 +541,7 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     s32 margin, margin2;
     s32 state;
 
-    if (evt_get_variable(NULL, GF_Tutorial_Badges) == FALSE) {
+    if (evt_get_variable(nullptr, GF_Tutorial_Badges) == FALSE) {
         return;
     }
 
@@ -589,13 +589,13 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    get_msg_properties(pause_get_menu_msg(PAUSE_MSG_TUT_NAME_BADGES), &msgHeight, &msgWidth, &msgMaxLineChars, &msgNumLines, &msgMaxLinesPerPage, NULL, 1);
+    get_msg_properties(pause_get_menu_msg(PAUSE_MSG_TUT_NAME_BADGES), &msgHeight, &msgWidth, &msgMaxLineChars, &msgNumLines, &msgMaxLinesPerPage, nullptr, 1);
     margin = (s32)(width - msgWidth) >> 1;
     draw_msg(pause_get_menu_msg(PAUSE_MSG_TUT_NAME_BADGES), baseX + margin, baseY, 255, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
     gPauseTutorialScrollPos += pause_interp_text_scroll(gPauseTutorialState * 140 - gPauseTutorialScrollPos);
     gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, baseX + 1, baseY + 1, baseX + width - 1, baseY + height - 1);
     state = gPauseTutorialState;
-    get_msg_properties(pause_get_menu_msg(gPauseTutorialDescMessages[state]), &msgHeight2, &msgWidth2, &msgMaxLineChars2, &msgNumLines2, &msgMaxLinesPerPage2, NULL, 1);
+    get_msg_properties(pause_get_menu_msg(gPauseTutorialDescMessages[state]), &msgHeight2, &msgWidth2, &msgMaxLineChars2, &msgNumLines2, &msgMaxLinesPerPage2, nullptr, 1);
     margin2 = (s32)(width - msgWidth2) >> 1;
     draw_msg(pause_get_menu_msg(gPauseTutorialDescMessages[state]), baseX + margin2, baseY + 13 + state * 140 - gPauseTutorialScrollPos, 255, MSG_PAL_STANDARD, DRAW_MSG_STYLE_MENU);
     hud_element_set_render_pos(gPauseCommonHIDs[gPauseTutorialIconIDs[gPauseTutorialState]], baseX + width / 2 - 2, baseY + 52);
@@ -660,7 +660,7 @@ void pause_init(void) {
     x = pauseWindows[gPausePanels[0]->col].pos.x;
     gWindows[WIN_PAUSE_TAB_INVIS].pos.x = x + 6;
 
-    if (evt_get_variable(NULL, GF_Tutorial_Badges)) {
+    if (evt_get_variable(nullptr, GF_Tutorial_Badges)) {
         for (i = 0; i < ARRAY_COUNT(gPauseTutorialSpriteAnims); i++) {
             gPauseTutorialSprites[i] = spr_load_npc_sprite(gPauseTutorialSpriteAnims[i][0], gPauseTutorialSpriteAnims[i]);
         }
@@ -734,7 +734,7 @@ void pause_handle_input(s32 pressed, s32 held) {
     s32 currentDescMsg = gPauseCurrentDescMsg;
     MenuPanel* currentPanel = gPausePanels[gPauseMenuCurrentTab];
 
-    if (evt_get_variable(NULL, GF_Tutorial_Badges)) {
+    if (evt_get_variable(nullptr, GF_Tutorial_Badges)) {
         for (i = 0; i < ARRAY_COUNT(gPauseTutorialSprites); i++) {
             spr_update_sprite(gPauseTutorialSprites[i], gPauseTutorialSpriteAnims[i][1], 1.0f);
         }
@@ -742,7 +742,7 @@ void pause_handle_input(s32 pressed, s32 held) {
 
     gPausePressedButtons = pressed;
     gPauseHeldButtons = held;
-    if (evt_get_variable(NULL, GF_Tutorial_Badges)) {
+    if (evt_get_variable(nullptr, GF_Tutorial_Badges)) {
         pause_tutorial_input(&gPausePressedButtons, &gPauseHeldButtons);
     }
 
@@ -762,7 +762,7 @@ void pause_handle_input(s32 pressed, s32 held) {
         gPauseDescTextPos = 0;
         gPauseDescTextOffset = 0;
         if (currentDescMsg != 0) {
-            get_msg_properties(currentDescMsg, &height, &width, &maxLineChars, &numLines, NULL, NULL, 0);
+            get_msg_properties(currentDescMsg, &height, &width, &maxLineChars, &numLines, nullptr, nullptr, 0);
 #if !VERSION_JP
             if (numLines % 2) {
                 numLines++;
@@ -812,7 +812,7 @@ void pause_cleanup(void) {
         hud_element_free(gPauseCommonHIDs[i]);
     }
 
-    if (evt_get_variable(NULL, GF_Tutorial_Badges)) {
+    if (evt_get_variable(nullptr, GF_Tutorial_Badges)) {
         for (i = 0; i < ARRAY_COUNT(gPauseTutorialSprites); i++) {
             spr_free_sprite(gPauseTutorialSprites[i]);
         }

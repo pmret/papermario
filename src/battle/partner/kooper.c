@@ -94,7 +94,7 @@ API_CALLABLE(N(SetTargetsYaw)) {
             targetX = target->truePos.x;
             targetActor = get_actor(target->actorID);
 
-            if (targetActor != NULL) {
+            if (targetActor != nullptr) {
                 targetActorPart = get_actor_part(targetActor, target->partID);
 
                 if (targetActor->transparentStatus == 0) {

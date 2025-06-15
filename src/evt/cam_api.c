@@ -248,7 +248,7 @@ API_CALLABLE(InterpCamTargetPos) {
     data->time--;
     if (data->time == 0) {
         heap_free(script->userData);
-        script->userData = NULL;
+        script->userData = nullptr;
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
