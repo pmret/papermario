@@ -63,7 +63,7 @@ API_CALLABLE(N(MagikoopaAI_SpellMain)) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            enemy->varTable[3] = nullptr;
+            enemy->varTablePtr[3] = nullptr;
             npc1->collisionDiameter = 20;
             npc1->collisionHeight = 20;
             npc1->pos.x = NPC_DISPOSE_POS_X;
@@ -100,7 +100,7 @@ API_CALLABLE(N(MagikoopaAI_SpellMain)) {
                 if (duration <= 0) {
                     duration = 1;
                 }
-                enemy->varTable[3] = (s32)fx_shape_spell(0, npc1->pos.x, npc1->pos.y + 14.0f, npc1->pos.z,
+                enemy->varTablePtr[3] = fx_shape_spell(0, npc1->pos.x, npc1->pos.y + 14.0f, npc1->pos.z,
                                                     gPlayerStatusPtr->pos.x,
                                                     gPlayerStatusPtr->pos.y + 10.0f + 14.0f,
                                                     gPlayerStatusPtr->pos.z, duration);
