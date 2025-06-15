@@ -66,7 +66,7 @@ s32 N(reflection_unk_change_anim_facing)(s32 playerAnim) {
 }
 
 API_CALLABLE(N(EnableWallReflection)){
-    script->array[0] = (s32) create_worker_scene(NULL, N(worker_reflect_player_wall));
+    script->array[0] = (s32) create_worker_scene(nullptr, N(worker_reflect_player_wall));
     return ApiStatus_DONE2;
 }
 
@@ -136,14 +136,14 @@ void N(appendGfx_reflect_player_wall)(PlayerStatus* playerStatus) {
     guMtxCatF(main, scale, main);
     guTranslateF(translation, playerStatus->pos.x, playerStatus->pos.y, -playerStatus->pos.z - 3.0f);
     guMtxCatF(main, translation, main);
-    spr_draw_player_sprite(PLAYER_SPRITE_AUX2, 0, 0, NULL, main);
+    spr_draw_player_sprite(PLAYER_SPRITE_AUX2, 0, 0, nullptr, main);
 }
 
 API_CALLABLE(N(EnableFloorReflection)){
     switch (script->varTable[0]) {
         case REFLECTION_FLOOR_WALL:
         case REFLECTION_FLOOR_ONLY:
-            script->array[0] = create_worker_scene(NULL, N(worker_reflect_player_floor));
+            script->array[0] = create_worker_scene(nullptr, N(worker_reflect_player_floor));
             gOverrideFlags |= GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
             break;
         case REFLECTION_WALL_ONLY:
@@ -223,7 +223,7 @@ void N(appendGfx_reflect_player_floor_basic)(PlayerStatus* playerStatus) {
         spriteIdx = PLAYER_SPRITE_AUX1;
     }
 
-    spr_draw_player_sprite(spriteIdx, 0, 0, NULL, main);
+    spr_draw_player_sprite(spriteIdx, 0, 0, nullptr, main);
 }
 
 void N(appendGfx_reflect_player_floor_fancy)(PlayerStatus* playerStatus) {
@@ -311,7 +311,7 @@ void N(appendGfx_reflect_player_floor_fancy)(PlayerStatus* playerStatus) {
             spriteIdx = PLAYER_SPRITE_AUX1;
         }
 
-        spr_draw_player_sprite(spriteIdx, 0, 0, NULL, mtx);
+        spr_draw_player_sprite(spriteIdx, 0, 0, nullptr, mtx);
     }
 }
 
@@ -323,20 +323,20 @@ API_CALLABLE(N(EnablePartnerReflection)){
     if (script->varTable[1] == FALSE) {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
-                script->array[1] = create_worker_scene(N(worker_reflect_partner_all), NULL);
+                script->array[1] = create_worker_scene(N(worker_reflect_partner_all), nullptr);
                 break;
             case REFLECTION_FLOOR_ONLY:
-                script->array[1] = create_worker_scene(N(worker_reflect_partner_floor), NULL);
+                script->array[1] = create_worker_scene(N(worker_reflect_partner_floor), nullptr);
                 break;
             case REFLECTION_WALL_ONLY:
-                script->array[1] = create_worker_scene(N(worker_reflect_partner_wall), NULL);
+                script->array[1] = create_worker_scene(N(worker_reflect_partner_wall), nullptr);
                 break;
         }
     } else {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
             case REFLECTION_FLOOR_ONLY:
-                script->array[1] = create_worker_scene(N(worker_reflect_partner_floor), NULL);
+                script->array[1] = create_worker_scene(N(worker_reflect_partner_floor), nullptr);
                 break;
             case REFLECTION_WALL_ONLY:
                 break;
@@ -345,7 +345,7 @@ API_CALLABLE(N(EnablePartnerReflection)){
 
     partner = get_npc_safe(NPC_PARTNER);
 
-    if (partner == NULL) {
+    if (partner == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -378,7 +378,7 @@ API_CALLABLE(N(EnablePartnerReflection)){
 void N(worker_reflect_partner_all)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
-    if (partner != NULL) {
+    if (partner != nullptr) {
         partner->flags |= NPC_FLAG_REFLECT_WALL | NPC_FLAG_REFLECT_FLOOR;
     }
 }
@@ -386,7 +386,7 @@ void N(worker_reflect_partner_all)(void) {
 void N(worker_reflect_partner_floor)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
-    if (partner != NULL) {
+    if (partner != nullptr) {
         partner->flags |= NPC_FLAG_REFLECT_FLOOR;
     }
 }
@@ -394,7 +394,7 @@ void N(worker_reflect_partner_floor)(void) {
 void N(worker_reflect_partner_wall)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
-    if (partner != NULL) {
+    if (partner != nullptr) {
         partner->flags |= NPC_FLAG_REFLECT_WALL;
     }
 }

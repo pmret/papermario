@@ -159,7 +159,7 @@ EvtScript N(EVS_Main) = {
     Set(MV_GlowIntensity, 0)
     Thread
         SetGroup(EVT_GROUP_NEVER_PAUSE)
-        Call(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_2, NULL)
+        Call(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_2, nullptr)
     EndThread
     Thread
         Call(N(ClearLavaGlowLighting), Ref(N(LavaModelIDs)))

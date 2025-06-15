@@ -68,7 +68,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 35 },
         .opacity = 255,
-        .idleAnimations = NULL,
+        .idleAnimations = nullptr,
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -325,9 +325,9 @@ EvtScript N(EVS_Death) = {
     Call(EnableModel, MODEL_kyu3, FALSE)
     Call(EnableModel, MODEL_kyu1, FALSE)
     Call(GetActorVar, ACTOR_TANK, AVAR_Tank_BulbGlowEffect, LVar0)
-    IfNe(LVar0, NULL)
+    IfNe(LVar0, nullptr)
         Call(RemoveEffect, LVar0)
-        Call(SetActorVar, ACTOR_TANK, AVAR_Tank_BulbGlowEffect, NULL)
+        Call(SetActorVar, ACTOR_TANK, AVAR_Tank_BulbGlowEffect, nullptr)
     EndIf
     Call(RemoveActor, ACTOR_SELF)
     Return

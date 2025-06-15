@@ -166,26 +166,26 @@ API_CALLABLE(N(SpawnSpinEffect)) {
 
 Actor* N(GetKoopaBrosWithState)(s32 state) {
     Actor* actor = get_actor(GREEN_ACTOR);
-    if (actor != NULL && actor->state.varTable[AVAR_Koopa_State] == state) {
+    if (actor != nullptr && actor->state.varTable[AVAR_Koopa_State] == state) {
         return actor;
     }
 
     actor = get_actor(YELLOW_ACTOR);
-    if (actor != NULL && actor->state.varTable[AVAR_Koopa_State] == state) {
+    if (actor != nullptr && actor->state.varTable[AVAR_Koopa_State] == state) {
         return actor;
     }
 
     actor = get_actor(BLACK_ACTOR);
-    if (actor != NULL && actor->state.varTable[AVAR_Koopa_State] == state) {
+    if (actor != nullptr && actor->state.varTable[AVAR_Koopa_State] == state) {
         return actor;
     }
 
     actor = get_actor(RED_ACTOR);
-    if (actor != NULL && actor->state.varTable[AVAR_Koopa_State] == state) {
+    if (actor != nullptr && actor->state.varTable[AVAR_Koopa_State] == state) {
         return actor;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 API_CALLABLE(N(GetTowerFallPosition)) {

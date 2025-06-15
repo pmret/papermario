@@ -28,7 +28,7 @@ EffectInstance* fire_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg
     bp.init = fire_flower_init;
     bp.update = fire_flower_update;
     bp.renderScene = fire_flower_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_FIRE_FLOWER;
 
     effect = create_effect_instance(&bp);
@@ -36,7 +36,7 @@ EffectInstance* fire_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg
     part = general_heap_malloc(numParts * sizeof(*part));
     effect->data.fireFlower = part;
 
-    ASSERT(effect->data.fireFlower != NULL);
+    ASSERT(effect->data.fireFlower != nullptr);
 
     part->unk_04 = 0;
     part->unk_00 = arg0;

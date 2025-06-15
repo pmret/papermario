@@ -36,14 +36,14 @@ EffectInstance* star_main(s32 type, f32 startX, f32 startY, f32 startZ, f32 endX
     bp.init = star_init;
     bp.update = star_update;
     bp.renderScene = star_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_STAR;
 
     effect = create_effect_instance(&bp);
     effect->numParts = 1;
     part = effect->data.star = general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data.star != NULL);
+    ASSERT(effect->data.star != nullptr);
     part->canBounce = TRUE;
     part->pos.x = startX;
     part->pos.y = startY;

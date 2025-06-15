@@ -10,7 +10,7 @@ void au_flush_finished_voices(AuGlobals* globals) {
         if (voice->donePending) {
             au_syn_stop_voice(i);
             voice->donePending = FALSE;
-            voice->cmdPtr = NULL;
+            voice->cmdPtr = nullptr;
             voice->priority = AU_PRIORITY_FREE;
         }
     }
@@ -22,7 +22,7 @@ void au_init_voices(AuGlobals* globals) {
     for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
         AuVoice* voice = &globals->voices[i];
 
-        voice->cmdPtr = NULL;
+        voice->cmdPtr = nullptr;
         voice->unused_20 = 0;
         voice->envDuration = 0;
         voice->envTimeLeft = 0;
@@ -44,7 +44,7 @@ void au_update_voices(AuGlobals* globals) {
         voice = &globals->voices[i];
 
         // skip inactive voices
-        if (voice->cmdPtr == NULL) {
+        if (voice->cmdPtr == nullptr) {
             continue;
         }
 
@@ -112,7 +112,7 @@ void au_update_voices(AuGlobals* globals) {
                         if (voice->envelopeFlags & AU_VOICE_ENV_FLAG_RELEASING) {
                             // if we reached the end after key release, stop the voice completely
                             voice->envelopeFlags = 0;
-                            voice->cmdPtr = NULL;
+                            voice->cmdPtr = nullptr;
                             voice->donePending = TRUE;
                         } else {
                             // we reached the end of press cmdlist, keep the last volume until the key is released
@@ -191,7 +191,7 @@ void au_voice_start(AuVoice* voice, EnvelopeData* envData) {
     voice->cmdPtr = voice->envelope.cmdListPress;
     voice->envelope.cmdListRelease = envData->cmdListRelease;
     voice->envScale = ENV_VOL_MAX;
-    voice->loopStart = NULL;
+    voice->loopStart = nullptr;
 
     intervalIndex = au_voice_step(voice);
     voice->envelopeFlags = 0;

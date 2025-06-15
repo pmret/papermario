@@ -93,7 +93,7 @@ s32 N(ModelList_Translucent)[] = {
 };
 
 EvtScript N(EVS_DarkenEnvironment) = {
-    Call(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
+    Call(N(SetModelTintMode), APPLY_TINT_BG, nullptr, ENV_TINT_REMAP)
     Call(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
     Call(N(SetModelTintMode), APPLY_TINT_GROUPS, Ref(N(ModelList_Solid)), ENV_TINT_NONE)
     Call(N(SetModelTintMode), APPLY_TINT_MODELS, Ref(N(ModelList_Translucent)), ENV_TINT_NONE)
@@ -695,7 +695,7 @@ EvtScript N(EVS_Ruins_Arise_Continued) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
-    Call(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
+    Call(N(SetModelTintMode), APPLY_TINT_BG, nullptr, ENV_TINT_REMAP)
     Call(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
     Call(N(SetModelTintMode), APPLY_TINT_GROUPS, Ref(N(ModelList_Solid)), ENV_TINT_NONE)
     Call(N(SetModelTintMode), APPLY_TINT_MODELS, Ref(N(ModelList_Translucent)), ENV_TINT_NONE)

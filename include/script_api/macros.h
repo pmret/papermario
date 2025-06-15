@@ -52,7 +52,39 @@
 /// Progammatically converts f32 --> Float
 #define FLOAT_TO_FIXED(x) (((x) * 1024.0f) + -EVT_FIXED_OFFSET)
 
+// TODO(C23): use _Generic to convert float/double to fixed automatically
+#define BYTECODE_CAST(x) ((Bytecode)(x))
+
+// Utility macros used by EVT_CMD to BYTECODE_CAST all arguments
+#define EXPAND(x) x
+#define FOR_EACH_1(f, x) f(x)
+#define FOR_EACH_2(f, x, ...) f(x), EXPAND(FOR_EACH_1(f, __VA_ARGS__))
+#define FOR_EACH_3(f, x, ...) f(x), EXPAND(FOR_EACH_2(f, __VA_ARGS__))
+#define FOR_EACH_4(f, x, ...) f(x), EXPAND(FOR_EACH_3(f, __VA_ARGS__))
+#define FOR_EACH_5(f, x, ...) f(x), EXPAND(FOR_EACH_4(f, __VA_ARGS__))
+#define FOR_EACH_6(f, x, ...) f(x), EXPAND(FOR_EACH_5(f, __VA_ARGS__))
+#define FOR_EACH_7(f, x, ...) f(x), EXPAND(FOR_EACH_6(f, __VA_ARGS__))
+#define FOR_EACH_8(f, x, ...) f(x), EXPAND(FOR_EACH_7(f, __VA_ARGS__))
+#define FOR_EACH_9(f, x, ...) f(x), EXPAND(FOR_EACH_8(f, __VA_ARGS__))
+#define FOR_EACH_10(f, x, ...) f(x), EXPAND(FOR_EACH_9(f, __VA_ARGS__))
+#define FOR_EACH_11(f, x, ...) f(x), EXPAND(FOR_EACH_10(f, __VA_ARGS__))
+#define FOR_EACH_12(f, x, ...) f(x), EXPAND(FOR_EACH_11(f, __VA_ARGS__))
+#define FOR_EACH_13(f, x, ...) f(x), EXPAND(FOR_EACH_12(f, __VA_ARGS__))
+#define FOR_EACH_14(f, x, ...) f(x), EXPAND(FOR_EACH_13(f, __VA_ARGS__))
+#define FOR_EACH_15(f, x, ...) f(x), EXPAND(FOR_EACH_14(f, __VA_ARGS__))
+#define FOR_EACH_16(f, x, ...) f(x), EXPAND(FOR_EACH_15(f, __VA_ARGS__))
+#define GET_MACRO( \
+    _1,  _2,  _3,  _4,  _5,  _6,  _7,  _8, \
+    _9, _10, _11, _12, _13, _14, _15, _16, NAME, ...) NAME
+#define FOR_EACH(f, ...) \
+    EXPAND(GET_MACRO(__VA_ARGS__, \
+        FOR_EACH_16, FOR_EACH_15, FOR_EACH_14, FOR_EACH_13, \
+        FOR_EACH_12, FOR_EACH_11, FOR_EACH_10, FOR_EACH_9,  \
+        FOR_EACH_8,  FOR_EACH_7,  FOR_EACH_6,  FOR_EACH_5,  \
+        FOR_EACH_4,  FOR_EACH_3,  FOR_EACH_2,  FOR_EACH_1)(f, __VA_ARGS__))
+
 /// Address/pointer constant.
+/// @deprecated Use `&`.
 #define Ref(sym) ((Bytecode) &(sym))
 
 /// Local Word. A variable local to the current thread.
@@ -202,10 +234,10 @@
 
 #ifndef PERMUTER
 #ifndef M2CTX
-#define EVT_CMD(opcode, argv...) \
+#define EVT_CMD(opcode, ...) \
     opcode, \
-    (sizeof((Bytecode[]){argv})/sizeof(Bytecode)), \
-    ##argv
+    (sizeof((Bytecode[]){__VA_OPT__(FOR_EACH(BYTECODE_CAST, __VA_ARGS__))}) / sizeof(Bytecode)) \
+    __VA_OPT__(, FOR_EACH(BYTECODE_CAST, __VA_ARGS__))
 #else
 // This definition that passes in 0 for the number of args is used for pycparser since it can't handle varargs
 #define EVT_CMD(opcode, argv...) \
@@ -585,7 +617,7 @@
 ///     Call(ApiFunction)
 ///
 /// The given arguments can be accessed from the API function using `thread->ptrReadPos`.
-#define Call(FUNC, ARGS...)                     EVT_CMD(EVT_OP_CALL, (Bytecode) FUNC, ##ARGS),
+#define Call(FUNC, ARGS...)                     EVT_CMD(EVT_OP_CALL, FUNC, ##ARGS),
 
 /// Does nothing in release version
 #define EVT_DEBUG_LOG(STRING)                   EVT_CMD(EVT_OP_DEBUG_LOG, STRING),
@@ -662,7 +694,7 @@
         SetGroup(EVT_GROUP_EXIT_MAP) \
         Call(UseExitHeading, walkDistance, exitIdx) \
         Exec(ExitWalk) \
-        Call(GotoMap, Ref(map), entryIdx) \
+        Call(GotoMap, map, entryIdx) \
         Wait(100) \
         Return \
         End \
@@ -673,7 +705,7 @@
     { \
         Call(UseExitHeading, walkDistance, exitIdx) \
         Exec(ExitWalk) \
-        Call(GotoMap, Ref(map), entryIdx) \
+        Call(GotoMap, map, entryIdx) \
         Wait(100) \
         Return \
         End \
@@ -686,7 +718,7 @@
         Call(DisablePlayerInput, TRUE) \
         Call(UseExitHeading, walkDistance, exitIdx) \
         Exec(ExitWalk) \
-        Call(GotoMap, Ref(map), entryIdx) \
+        Call(GotoMap, map, entryIdx) \
         Wait(100) \
         Return \
         End \
@@ -702,7 +734,7 @@
         Set(LVar3, swingDir) \
         Exec(ExitSingleDoor) \
         Wait(17) \
-        Call(GotoMap, Ref(map), entryIdx) \
+        Call(GotoMap, map, entryIdx) \
         Wait(100) \
         Return \
         End \
@@ -719,7 +751,7 @@
         Set(LVar3, swingDir) \
         Exec(ExitSplitSingleDoor) \
         Wait(17) \
-        Call(GotoMap, Ref(map), entryIdx) \
+        Call(GotoMap, map, entryIdx) \
         Wait(100) \
         Return \
         End \
@@ -735,7 +767,7 @@
         Set(LVar3, rightDoorModelID) \
         Exec(ExitDoubleDoor) \
         Wait(17) \
-        Call(GotoMap, Ref(map), entryIdx) \
+        Call(GotoMap, map, entryIdx) \
         Wait(100) \
         Return \
         End \

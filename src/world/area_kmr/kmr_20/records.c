@@ -194,7 +194,7 @@ void N(appendGfx_records_impl)(GameRecords* records, s32 alpha) {
 }
 
 void N(appendGfx_records)(void* data) {
-    GameRecords* records = (GameRecords*) evt_get_variable(NULL, MV_RecordsDataPtr);
+    GameRecords* records = (GameRecords*) evt_get_variable(nullptr, MV_RecordsDataPtr);
 
     switch (records->state) {
         case RECORDS_STATE_BEGIN_FADE_IN:
@@ -244,7 +244,7 @@ void N(worker_draw_game_records)(void) {
     RenderTask rt;
 
     rt.renderMode = RENDER_MODE_CLOUD_NO_ZCMP;
-    rt.appendGfxArg = NULL;
+    rt.appendGfxArg = nullptr;
     rt.appendGfx = N(appendGfx_records);
     rt.dist = 0;
     queue_render_task(&rt);
@@ -266,7 +266,7 @@ void N(calculate_records)(GameRecords* records) {
     count = 0;
     for (i = 0; TRUE; i++) {
         if (N(RecipeFoundVars)[i] != 0) {
-            if (evt_get_variable(NULL, N(RecipeFoundVars)[i]) != 0) {
+            if (evt_get_variable(nullptr, N(RecipeFoundVars)[i]) != 0) {
                 count++;
             }
         } else {
@@ -275,7 +275,7 @@ void N(calculate_records)(GameRecords* records) {
     }
     records->totalRecipesCount = i;
     records->recipesFoundCount = count;
-    if (records->recipesFoundCount == 0 && evt_get_variable(NULL, GF_MAC02_DiscoveredRecipe_12)) {
+    if (records->recipesFoundCount == 0 && evt_get_variable(nullptr, GF_MAC02_DiscoveredRecipe_12)) {
         records->recipesFoundCount = -1;
     }
 }
@@ -287,7 +287,7 @@ API_CALLABLE(N(ShowGameRecords)) {
         records = script->functionTempPtr[0] = heap_malloc(sizeof(*records));
         records->state = RECORDS_STATE_BEGIN_FADE_IN;
         records->alpha = 255;
-        records->workerID = create_worker_scene(NULL, N(worker_draw_game_records));
+        records->workerID = create_worker_scene(nullptr, N(worker_draw_game_records));
         evt_set_variable(script, MV_RecordsDataPtr, (s32) records);
         N(calculate_records)(records);
     }

@@ -521,7 +521,7 @@ API_CALLABLE(ShowGotItem) {
             script->functionTemp[0] = 1;
             break;
         case 1:
-            if (get_item_entity(script->functionTemp[1]) == NULL) {
+            if (get_item_entity(script->functionTemp[1]) == nullptr) {
                 return ApiStatus_DONE2;
             }
             break;

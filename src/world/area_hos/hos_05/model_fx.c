@@ -166,7 +166,7 @@ EvtScript N(EVS_SetupLightBeam) = {
         Call(EnableModel, MODEL_o8, FALSE)
     Else
         Call(SetModelCustomGfx, MODEL_o8, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
-        Call(SetCustomGfxBuilders, CUSTOM_GFX_0, Ref(N(setup_gfx_light_beam)), NULL)
+        Call(SetCustomGfxBuilders, CUSTOM_GFX_0, Ref(N(setup_gfx_light_beam)), nullptr)
         Call(EnableModel, MODEL_o8, TRUE)
         Call(N(SetLightBeamAlpha), 127)
         Call(EnableGroup, MODEL_g277, TRUE)
@@ -183,7 +183,7 @@ EvtScript N(EVS_SetupLightBeam) = {
 EvtScript N(EVS_Starship_Summon) = {
     Call(DisablePlayerInput, TRUE)
     Thread
-        Call(N(SetModelTintMode_Starship), 2, NULL, ENV_TINT_REMAP)
+        Call(N(SetModelTintMode_Starship), 2, nullptr, ENV_TINT_REMAP)
         Call(N(SetModelTintMode_Starship), 1, Ref(N(MostSolidGeometry)), ENV_TINT_REMAP)
         Call(N(SetWorldColorParams_Starship), 255, 255, 255, 0, 0, 0, 0)
         Wait(1)
@@ -205,7 +205,7 @@ EvtScript N(EVS_Starship_Summon) = {
     PlayEffect(EFFECT_LIGHT_RAYS, 2, 0, 250, 0, 10, LVar9)
     Wait(20)
     Call(SetModelCustomGfx, MODEL_o646, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(setup_gfx_starship_shimmer)), NULL)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(setup_gfx_starship_shimmer)), nullptr)
     Call(EnableGroup, MODEL_g279, TRUE)
     Thread
         Call(MakeLerp, 0, 200, 75, EASING_QUADRATIC_IN)
@@ -220,7 +220,7 @@ EvtScript N(EVS_Starship_Summon) = {
     EndThread
     Wait(60)
     Call(SetModelCustomGfx, MODEL_o8, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_0, Ref(N(setup_gfx_light_beam)), NULL)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_0, Ref(N(setup_gfx_light_beam)), nullptr)
     Call(EnableModel, MODEL_o8, TRUE)
     Call(MakeLerp, 0, 127, 60, EASING_COS_IN_OUT)
     Loop(0)

@@ -128,7 +128,7 @@ EvtScript N(EVS_SetupCrystalBallGfx) = {
     Call(SetCustomGfxBuilders, CUSTOM_GFX_2, Ref(N(gfx_build_crystal_ball_pre)), Ref(N(gfx_build_crystal_ball_post)))
     Call(SetModelCustomGfx, MODEL_mirrorball, CUSTOM_GFX_2, -1)
     Call(EnableModel, MODEL_mirrorball, FALSE)
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_3, Ref(N(gfx_build_inside_crystal_ball)), NULL)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_3, Ref(N(gfx_build_inside_crystal_ball)), nullptr)
     Call(SetModelCustomGfx, MODEL_tama, CUSTOM_GFX_3, -1)
     Call(SetModelFlags, MODEL_tama, MODEL_FLAG_BILLBOARD, TRUE)
     Call(SetModelFlags, MODEL_ohosi, MODEL_FLAG_BILLBOARD, TRUE)

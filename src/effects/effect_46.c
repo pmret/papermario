@@ -32,13 +32,13 @@ EffectInstance* effect_46_main(s32 type, PlayerStatus* player, f32 scale, s32 du
     bp.update = effect_46_update;
     bp.renderScene = effect_46_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_46;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     part = effect->data.spin = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.spin != NULL);
+    ASSERT(effect->data.spin != nullptr);
 
     part->type = type;
     part->player = player;

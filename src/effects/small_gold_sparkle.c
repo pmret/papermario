@@ -35,7 +35,7 @@ EffectInstance* small_gold_sparkle_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, 
     bp.update = small_gold_sparkle_update;
     bp.renderScene = small_gold_sparkle_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_SMALL_GOLD_SPARKLE;
 
     effect = create_effect_instance(&bp);
@@ -45,7 +45,7 @@ EffectInstance* small_gold_sparkle_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, 
     effect->data.smallGoldSparkle = data;
     part = data;
 
-    ASSERT(data != NULL);
+    ASSERT(data != nullptr);
 
     part->unk_00 = arg0;
     part->unk_18 = 0;

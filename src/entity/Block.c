@@ -123,7 +123,7 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
         if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_CEILING) {
             if (!(playerStatus->flags & PS_FLAG_JUMPING)) {
                 Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
-                if (shadow != NULL) {
+                if (shadow != nullptr) {
                     f32 temp2 = entity->pos.y - shadow->pos.y;
 
                     if (entity->pos.y - temp2 <= playerStatus->colliderHeight + 1) {
@@ -138,7 +138,7 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
             do {} while (0); // needed to match
         } else {
             Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
-            if (shadow != NULL) {
+            if (shadow != nullptr) {
                 if (entity->pos.y <= shadow->pos.y) {
                     entity->pos.y = shadow->pos.y;
                     data->sinkingTimer = 1;
@@ -492,7 +492,7 @@ EntityScript Entity_BreakingBlock_Script = {
     es_SetFlags(ENTITY_FLAG_HIDDEN)
     es_SetFlags(ENTITY_FLAG_DISABLE_COLLISION)
     es_Call(entity_breakable_block_create_shattering_entity)
-    es_SetCallback(NULL, 1)
+    es_SetCallback(nullptr, 1)
     es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
@@ -503,7 +503,7 @@ EntityScript Entity_BrickBlock_Script = {
     es_SetFlags(ENTITY_FLAG_DISABLE_COLLISION)
     es_Call(entity_breakable_block_create_shattering_entity)
     es_PlaySound(SOUND_HIT_BLOCK)
-    es_SetCallback(NULL, 2)
+    es_SetCallback(nullptr, 2)
     es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };

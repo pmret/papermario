@@ -11,8 +11,8 @@ BSS u8 AuDelayedBusID;
 BSS s16 AuDelayedChannel;
 BSS s32 AuDelayCount;
 
-AuSynDriver* gActiveSynDriverPtr = NULL;
-AuSynDriver* gSynDriverPtr = NULL;
+AuSynDriver* gActiveSynDriverPtr = nullptr;
+AuSynDriver* gSynDriverPtr = nullptr;
 u8 AuUseGlobalVolume = FALSE;
 u16 AuGlobalVolume = AU_MAX_VOLUME_16;
 u8 AuSynStereoDirty = FALSE;
@@ -26,7 +26,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
     ALHeap* heap = config->heap;
     s32 i;
 
-    if (gActiveSynDriverPtr != NULL) {
+    if (gActiveSynDriverPtr != nullptr) {
         return;
     }
 
@@ -53,7 +53,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         voice->decoder.dmaFunc = gSynDriverPtr->dmaNew(&voice->decoder.dmaState);
         voice->decoder.lastsam = 0;
         voice->decoder.first = 1;
-        voice->decoder.memin = NULL;
+        voice->decoder.memin = nullptr;
         voice->resampler.state = alHeapAlloc(heap, 1, sizeof(*voice->resampler.state));
         voice->resampler.delta = 0;
         voice->resampler.first = TRUE;
@@ -76,7 +76,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         voice->envMixer.segEnd = 0;
         voice->envMixer.pan = 64;
         voice->unused_74 = 0;
-        voice->next = NULL;
+        voice->next = nullptr;
         voice->busID = FX_BUS_BGMA_MAIN;
         voice->index = i;
     }
@@ -85,8 +85,8 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
 
     for (i = 0; i < config->num_bus; i++) {
         AuFxBus* fxBus = &gSynDriverPtr->fxBus[i];
-        fxBus->head = NULL;
-        fxBus->tail = NULL;
+        fxBus->head = nullptr;
+        fxBus->tail = nullptr;
         fxBus->gain = 0x7FFF;
         fxBus->curEffectType = AU_FX_NONE;
         fxBus->fxL = alHeapAlloc(heap, 1, sizeof(*fxBus->fxL));
@@ -111,8 +111,8 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
 }
 
 void au_driver_release(void) {
-    if (gActiveSynDriverPtr != NULL) {
-        gActiveSynDriverPtr = NULL;
+    if (gActiveSynDriverPtr != nullptr) {
+        gActiveSynDriverPtr = nullptr;
     }
 }
 
@@ -127,7 +127,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
     b32 firstBus;
 
     // sanity check: ensure audio system is initialized
-    if (gActiveSynDriverPtr == NULL) {
+    if (gActiveSynDriverPtr == nullptr) {
         *cmdLen = 0;
         return cmdListPos;
     }
@@ -155,7 +155,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
 
             if ((pvoice->busID != 0xFF) && (pvoice->busID < gSynDriverPtr->num_bus)) {
                 fxBus = &gSynDriverPtr->fxBus[pvoice->busID];
-                if (fxBus->tail != NULL) {
+                if (fxBus->tail != nullptr) {
                     fxBus->tail->next = pvoice;
                 } else {
                     fxBus->head = pvoice;
@@ -168,21 +168,21 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
         firstBus = TRUE;
         for (busID = 0; busID < gSynDriverPtr->num_bus; busID++) {
             fxBus = &gSynDriverPtr->fxBus[busID];
-            if (fxBus->head != NULL) {
+            if (fxBus->head != nullptr) {
                 // clear all main and aux outputs (each is 2 * AUDIO_SAMPLES long, starting at N_AL_MAIN_L_OUT)
                 aClearBuffer(cmdListPos++, N_AL_MAIN_L_OUT, 8 * AUDIO_SAMPLES);
 
                 // render all voices for this bus
                 // these will implicitly accumulate dry to N_AL_MAIN_*_OUT and wet to N_AL_AUX_*_OUT
-                if (fxBus->head != NULL) {
+                if (fxBus->head != nullptr) {
                     AuPVoice* next;
                     do {
                         cmdListPos = au_pull_voice(fxBus->head, cmdListPos);
                         next = fxBus->head->next;
-                        fxBus->head->next = NULL;
+                        fxBus->head->next = nullptr;
                         fxBus->head = next;
-                    } while (next != NULL);
-                    fxBus->tail = NULL;
+                    } while (next != nullptr);
+                    fxBus->tail = nullptr;
                 }
 
                 // process fx for this bus
@@ -332,7 +332,7 @@ void au_syn_stop_voice(u8 voiceIdx) {
     decoder->lastsam = 0;
     decoder->first = TRUE;
     decoder->sample = 0;
-    if (decoder->instrument != NULL) {
+    if (decoder->instrument != nullptr) {
         decoder->memin = (s32)decoder->instrument->wavData;
         if (decoder->instrument->type == AL_ADPCM_WAVE) {
             if (decoder->instrument->loopEnd != 0){
@@ -763,7 +763,7 @@ void alHeapInit(ALHeap* hp, u8* base, s32 len) {
 }
 
 void* alHeapAlloc(ALHeap* heap, s32 count, s32 size) {
-    void* ret = NULL;
+    void* ret = nullptr;
     u8* newCur = &heap->cur[ALIGN16(count * size)];
 
     if (&heap->base[heap->len] >= newCur) {

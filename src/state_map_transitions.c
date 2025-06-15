@@ -39,7 +39,7 @@ void init_enter_world_shared(void) {
 
     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
 
-    evt_set_variable(NULL, GB_Unused_EVT_01, gGameStatusPtr->unk_A9);
+    evt_set_variable(nullptr, GB_Unused_EVT_01, gGameStatusPtr->unk_A9);
     gTimeFreezeMode = TIME_FREEZE_NONE;
 }
 

@@ -107,29 +107,29 @@ EvtScript N(EVS_SetupRooms) = {
         COLLIDER_o158,
         COLLIDER_o159,
         MODEL_g2,
-        NULL)
+        nullptr)
     // staircase
     Call(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_Downstairs)),
-        NULL,
-        NULL,
-        NULL,
+        nullptr,
+        nullptr,
+        nullptr,
         COLLIDER_o161,
         COLLIDER_o160,
         MODEL_o1,
-        NULL)
+        nullptr)
     // loft
     Call(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_IN),
         Ref(N(EVS_SetDoorRot_Upstairs)),
-        NULL,
-        NULL,
-        NULL,
+        nullptr,
+        nullptr,
+        nullptr,
         COLLIDER_o163,
         COLLIDER_o162,
         MODEL_o1,
-        NULL)
+        nullptr)
     Return
     End
 };

@@ -119,7 +119,7 @@ API_CALLABLE(CreateMapRoom) {
     triggerColliderID = evt_get_variable(script, *args++);
     room->modelID = evt_get_variable(script, *args++);
     room->npcList = (s32*) evt_get_variable(script, *args++);
-    if (dropDoorScript != NULL) {
+    if (dropDoorScript != nullptr) {
         roomFlags |= ROOM_FLAG_EXIT_DOOR_DROPS;
         room->flags = roomFlags;
     }
@@ -328,13 +328,13 @@ API_CALLABLE(HideRoomNPCs) {
     s32 mask;
     s32 i;
 
-    if (npcList == NULL) {
+    if (npcList == nullptr) {
         return ApiStatus_DONE2;
     }
 
     for (i = 0; i < MAX_NPCS; i++) {
         Npc* npc = get_npc_by_index(i);
-        if (npc != NULL) {
+        if (npc != nullptr) {
             if ((npc->flags != 0) && (npc->npcID != NPC_PARTNER)) {
                 npc->flags |= NPC_FLAG_HIDING;
             }
@@ -350,7 +350,7 @@ API_CALLABLE(HideRoomNPCs) {
             return ApiStatus_DONE2;
         }
         npc = get_npc_safe(*npcList++);
-        if (npc != NULL) {
+        if (npc != nullptr) {
             npc->flags &= mask;
         }
     } while (TRUE);
@@ -362,13 +362,13 @@ API_CALLABLE(RevealHiddenRoomNPCs) {
     MapRoom* door = script->functionTempPtr[1];
     s32 i;
 
-    if (door->npcList == NULL) {
+    if (door->npcList == nullptr) {
         return ApiStatus_DONE2;
     }
 
     for (i = 0; i < MAX_NPCS; i++) {
         Npc* npc = get_npc_by_index(i);
-        if (npc != NULL) {
+        if (npc != nullptr) {
             if (npc->flags != 0) {
                 npc->flags &= ~NPC_FLAG_HIDING;
             }
@@ -606,7 +606,7 @@ EvtScript EVS_EnterRoomDoor = {
     // notify listener ROOM_UPDATE_ENTER_BEGIN
     Call(GetDoorData)
     Set(LVar0, ROOM_UPDATE_ENTER_BEGIN)
-    IfNe(ROOM_DATA_EVT_LISTENER, NULL)
+    IfNe(ROOM_DATA_EVT_LISTENER, nullptr)
         ExecWait(ROOM_DATA_EVT_LISTENER)
     EndIf
     IfEq(LVar0, ROOM_UPDATE_REQUEST_CANCEL)
@@ -653,14 +653,14 @@ EvtScript EVS_EnterRoomDoor = {
     Call(GetDoorData)
     Set(LVar0, ROOM_MOVE_WALL_OPEN)
     BitwiseAndConst(ROOM_DATA_FLAGS, ROOM_FLAG_CUSTOM_ANIM_WALL_ROT)
-    IfNe(ROOM_DATA_EVT_MOVE_WALL, NULL)
+    IfNe(ROOM_DATA_EVT_MOVE_WALL, nullptr)
         IfNe(ROOM_DATA_FLAGS, 0)
             ExecGetTID(ROOM_DATA_EVT_MOVE_WALL, LVar5)
         Else
             ExecGetTID(EVS_Default_AnimateWallRot, LVar5)
         EndIf
     EndIf
-    IfNe(ROOM_DATA_EVT_MOVE_WALL, NULL)
+    IfNe(ROOM_DATA_EVT_MOVE_WALL, nullptr)
         Call(SaveUseDoorScript, ROOM_SCRIPT_IDX_0, LVar5)
     EndIf
 
@@ -705,7 +705,7 @@ EvtScript EVS_EnterRoomDoor = {
     // drop the door
     Set(LVar0, ROOM_DROP_DOOR_ENTER)
     BitwiseAndConst(ROOM_DATA_FLAGS, ROOM_FLAG_CUSTOM_ANIM_DROP_DOOR)
-    IfNe(ROOM_DATA_EVT_DROP_DOOR, NULL)
+    IfNe(ROOM_DATA_EVT_DROP_DOOR, nullptr)
         Call(AwaitUseDoorScript, ROOM_SCRIPT_IDX_3)
         IfNe(ROOM_DATA_FLAGS, 0)
             ExecGetTID(ROOM_DATA_EVT_DROP_DOOR, LVar5)
@@ -713,27 +713,27 @@ EvtScript EVS_EnterRoomDoor = {
             ExecGetTID(EVS_Default_AnimateDropDoor, LVar5)
         EndIf
     EndIf
-    IfNe(ROOM_DATA_EVT_DROP_DOOR, NULL)
+    IfNe(ROOM_DATA_EVT_DROP_DOOR, nullptr)
         Call(SaveUseDoorScript, ROOM_SCRIPT_IDX_1, LVar5)
     EndIf
 
     // notify listener ROOM_UPDATE_ENTER_DONE
     Set(LVar0, ROOM_UPDATE_ENTER_DONE)
-    IfNe(ROOM_DATA_EVT_LISTENER, NULL)
+    IfNe(ROOM_DATA_EVT_LISTENER, nullptr)
         ExecGetTID(ROOM_DATA_EVT_LISTENER, LVar5)
     EndIf
-    IfNe(ROOM_DATA_EVT_LISTENER, NULL)
+    IfNe(ROOM_DATA_EVT_LISTENER, nullptr)
         Call(SaveUseDoorScript, ROOM_SCRIPT_IDX_2, LVar5)
     EndIf
-    IfNe(ROOM_DATA_EVT_LISTENER, NULL)
+    IfNe(ROOM_DATA_EVT_LISTENER, nullptr)
         Call(AwaitUseDoorScript, ROOM_SCRIPT_IDX_2)
     EndIf
 
     // wait for all anim scripts
-    IfNe(ROOM_DATA_EVT_MOVE_WALL, NULL)
+    IfNe(ROOM_DATA_EVT_MOVE_WALL, nullptr)
         Call(AwaitUseDoorScript, ROOM_SCRIPT_IDX_0)
     EndIf
-    IfNe(ROOM_DATA_EVT_DROP_DOOR, NULL)
+    IfNe(ROOM_DATA_EVT_DROP_DOOR, nullptr)
         Call(AwaitUseDoorScript, ROOM_SCRIPT_IDX_1)
     EndIf
 
@@ -783,7 +783,7 @@ EvtScript EVS_ExitRoomDoor = {
     // notify listener ROOM_UPDATE_EXIT_BEGIN
     Call(GetDoorData)
     Set(LVar0, ROOM_UPDATE_EXIT_BEGIN)
-    IfNe(ROOM_DATA_EVT_LISTENER, NULL)
+    IfNe(ROOM_DATA_EVT_LISTENER, nullptr)
         ExecWait(ROOM_DATA_EVT_LISTENER)
     EndIf
     IfEq(LVar0, ROOM_UPDATE_REQUEST_CANCEL)
@@ -811,31 +811,31 @@ EvtScript EVS_ExitRoomDoor = {
     Call(GetDoorPtr)
     Set(LVar0, ROOM_MOVE_WALL_CLOSE)
     BitwiseAndConst(LVar2, ROOM_FLAG_CUSTOM_ANIM_WALL_ROT)
-    IfNe(ROOM_DATA_EVT_MOVE_WALL, NULL)
+    IfNe(ROOM_DATA_EVT_MOVE_WALL, nullptr)
         IfNe(LVar2, 0)
             ExecGetTID(ROOM_DATA_EVT_MOVE_WALL, LVar5)
         Else
             ExecGetTID(EVS_Default_AnimateWallRot, LVar5)
         EndIf
     EndIf
-    IfNe(ROOM_DATA_EVT_MOVE_WALL, NULL)
+    IfNe(ROOM_DATA_EVT_MOVE_WALL, nullptr)
         Call(SaveUseDoorScript, ROOM_SCRIPT_IDX_0, LVar5)
     EndIf
 
     // raise the door if its been dropped
     Set(LVar0, ROOM_DROP_DOOR_EXIT)
     BitwiseAndConst(LVar2, ROOM_FLAG_CUSTOM_ANIM_DROP_DOOR)
-    IfNe(ROOM_DATA_EVT_DROP_DOOR, NULL)
+    IfNe(ROOM_DATA_EVT_DROP_DOOR, nullptr)
         IfNe(LVar2, 0)
             ExecGetTID(ROOM_DATA_EVT_DROP_DOOR, LVar5)
         Else
             ExecGetTID(EVS_Default_AnimateDropDoor, LVar5)
         EndIf
     EndIf
-    IfNe(ROOM_DATA_EVT_DROP_DOOR, NULL)
+    IfNe(ROOM_DATA_EVT_DROP_DOOR, nullptr)
         Call(SaveUseDoorScript, ROOM_SCRIPT_IDX_1, LVar5)
     EndIf
-    IfNe(ROOM_DATA_EVT_DROP_DOOR, NULL)
+    IfNe(ROOM_DATA_EVT_DROP_DOOR, nullptr)
         Call(AwaitUseDoorScript, ROOM_SCRIPT_IDX_1)
     EndIf
 
@@ -892,7 +892,7 @@ EvtScript EVS_ExitRoomDoor = {
     // notify listener ROOM_UPDATE_EXIT_END
     Call(GetDoorData)
     Set(LVar0, ROOM_UPDATE_EXIT_END)
-    IfNe(ROOM_DATA_EVT_LISTENER, NULL)
+    IfNe(ROOM_DATA_EVT_LISTENER, nullptr)
         ExecWait(ROOM_DATA_EVT_LISTENER)
     EndIf
 

@@ -17,7 +17,7 @@ typedef struct IntroMessage {
 
 u32 N(IntroMessageState) = 0; // mode
 s32 N(IntroMessageAlpha) = 0; // alpha related
-IntroMessage* N(CurMessageList) = NULL;
+IntroMessage* N(CurMessageList) = nullptr;
 
 void N(UpdateIntroMessages)(IntroMessage** introMessageLists) {
     u8 type;
@@ -28,7 +28,7 @@ void N(UpdateIntroMessages)(IntroMessage** introMessageLists) {
     s32 yOffset;
     static s32 N(IntroMessageDelay);
 
-    if (N(CurMessageList) == NULL) {
+    if (N(CurMessageList) == nullptr) {
         N(CurMessageList) = introMessageLists[IntroMessageIdx];
     }
 

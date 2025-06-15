@@ -76,16 +76,16 @@ b32 ai_check_fwd_collisions(Npc* npc, f32 time, f32* outYaw, f32* outDistFwd, f3
         }
     }
 
-    if (outYaw != NULL) {
+    if (outYaw != nullptr) {
         *outYaw = clamp_angle(yaw);
     }
-    if (outDistFwd != NULL) {
+    if (outDistFwd != nullptr) {
         *outDistFwd = fwdHitDist;
     }
-    if (outDistCW != NULL) {
+    if (outDistCW != nullptr) {
         *outDistCW = cwHitDist;
     }
-    if (outDistCCW != NULL) {
+    if (outDistCCW != nullptr) {
         *outDistCCW = ccwHitDist;
     }
     return fwdHit;

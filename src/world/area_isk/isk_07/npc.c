@@ -11,10 +11,10 @@ API_CALLABLE(N(IsLastEnemy)) {
     livingEncounters = 0;
     for (i = 0; i < encounterStatus->numEncounters; i++) {
         Encounter* encounter = encounterStatus->encounterList[i];
-        if (encounter != NULL) {
+        if (encounter != nullptr) {
             s32 hasEnemy = FALSE;
             for (j = 0; j < encounter->count; j++) {
-                if (encounter->enemy[j] != NULL) {
+                if (encounter->enemy[j] != nullptr) {
                     hasEnemy = TRUE;
                 }
             }

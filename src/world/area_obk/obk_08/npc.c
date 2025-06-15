@@ -20,7 +20,7 @@ API_CALLABLE(N(func_802408A0_BD4110)) {
     s32* isGameStarted = heap_malloc(sizeof(s32)); // todo what is this
 
     npc->blur.keepAwayStarted = isGameStarted;
-    *isGameStarted = NULL;
+    *isGameStarted = nullptr;
     npc->planarFlyDist = 125.0f;
     npc->yaw = 0.0f;
     npc->pos.x = 0.0f;

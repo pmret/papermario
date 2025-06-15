@@ -14,6 +14,6 @@ void au_load_BK_headers(AuGlobals* globals, ALHeap* heap) {
         }
 
         au_fetch_SBN_file(buffer[i].fileIndex, AU_FMT_BK, &fileEntry);
-        au_load_BK_to_bank(fileEntry.offset, NULL, buffer[i].bankIndex, buffer[i].bankSet);
+        au_load_BK_to_bank(fileEntry.offset, nullptr, buffer[i].bankIndex, buffer[i].bankSet);
     }
 }

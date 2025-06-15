@@ -149,7 +149,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = NULL,
+        .idleAnimations = nullptr,
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -183,7 +183,7 @@ ActorBlueprint NAMESPACE = {
 EvtScript N(EVS_Init) = {
     UseArray(N(unusedArray))
     Call(SetActorVar, ACTOR_SELF, AVAR_Common_PiranhaState, PIRANHA_STATE_STUNNED)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, NULL)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, nullptr)
     Call(SetActorVar, ACTOR_SELF, AVAR_Bud_PetitCount, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_SummonDelayTurns, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_Common_StunTurnsLeft, 0)
@@ -584,9 +584,9 @@ EvtScript N(EVS_Death) = {
         ExecWait(N(EVS_PlayAnimForVine))
         Call(SetActorVar, ACTOR_SELF, AVAR_Common_StunTurnsLeft, 2)
         Call(GetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, LVar0)
-        IfNe(LVar0, NULL)
+        IfNe(LVar0, nullptr)
             Call(RemoveEffect, LVar0)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, NULL)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, nullptr)
         EndIf
         Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(StunnedAnims)))
         Call(SetDefenseTable, ACTOR_SELF, PRT_MAIN, Ref(N(StunnedDefense)))
@@ -734,9 +734,9 @@ EvtScript N(EVS_Hit) = {
                 ExecWait(N(EVS_PlayAnimForVine))
                 Call(SetActorVar, ACTOR_SELF, AVAR_Common_StunTurnsLeft, 2)
                 Call(GetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, LVar0)
-                IfNe(LVar0, NULL)
+                IfNe(LVar0, nullptr)
                     Call(RemoveEffect, LVar0)
-                    Call(SetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, NULL)
+                    Call(SetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, nullptr)
                     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     PlayEffect(EFFECT_COLD_BREATH, 0, LVar0, LVar1, LVar2, Float(2.0), 45, 0)
                 EndIf

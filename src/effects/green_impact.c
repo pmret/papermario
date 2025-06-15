@@ -32,13 +32,13 @@ EffectInstance* green_impact_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     bpPtr->init = green_impact_init;
     bpPtr->update = green_impact_update;
     bpPtr->renderScene = green_impact_render;
-    bpPtr->renderUI = NULL;
+    bpPtr->renderUI = nullptr;
     bpPtr->effectID = EFFECT_GREEN_IMPACT;
 
     effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
     part = effect->data.greenImpact = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.greenImpact != NULL);
+    ASSERT(effect->data.greenImpact != nullptr);
 
     mem_clear(part, numParts * sizeof(*part));
 

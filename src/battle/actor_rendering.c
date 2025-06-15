@@ -199,7 +199,7 @@ void enable_actor_blur(Actor* actor) {
     numParts = actor->numParts;
 
     for (i = 0; i < numParts; i++) {
-        if (partsTable->idleAnimations != NULL && !(partsTable->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
+        if (partsTable->idleAnimations != nullptr && !(partsTable->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
             decorations = partsTable->decorationTable;
             decorations->blurUnused = 0;
             decorations->blurBufferPos = 0;
@@ -223,7 +223,7 @@ void enable_actor_blur(Actor* actor) {
 void disable_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
 
-    if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
+    if ((actorPart->idleAnimations != nullptr) && !(actorPart->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
         DecorationTable* decorations = actorPart->decorationTable;
 
         if (decorations->blurEnableCount != 0) {
@@ -238,7 +238,7 @@ void disable_actor_blur(Actor* actor) {
 void reset_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
 
-    if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
+    if ((actorPart->idleAnimations != nullptr) && !(actorPart->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
         DecorationTable* decorations = actorPart->decorationTable;
 
         if (decorations->blurEnableCount != 0) {
@@ -254,7 +254,7 @@ void reset_actor_blur(Actor* actor) {
 void force_disable_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
 
-    if (actorPart->idleAnimations != NULL && !(actorPart->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
+    if (actorPart->idleAnimations != nullptr && !(actorPart->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
         DecorationTable* decorations = actorPart->decorationTable;
 
         decorations->blurEnableCount = 0;
@@ -354,7 +354,7 @@ void update_player_actor_blur_history(Actor* actor) {
     ActorPart* partsTable = actor->partsTable;
     DecorationTable* decorations = partsTable->decorationTable;
 
-    if (!(partsTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partsTable->idleAnimations != NULL) {
+    if (!(partsTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partsTable->idleAnimations != nullptr) {
         s32 i = decorations->blurBufferPos;
 
         decorations->posX[i] = partsTable->curPos.x;
@@ -407,7 +407,7 @@ void appendGfx_player_actor_blur(Actor* actor) {
         }
     }
 
-    if (!(partTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partTable->idleAnimations != NULL) {
+    if (!(partTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partTable->idleAnimations != nullptr) {
         bufPos = decorations->blurBufferPos;
         strideIdx = 0;
         drawIdx = 0;
@@ -492,7 +492,7 @@ void update_nonplayer_actor_blur_history(b32 isPartner, Actor* actor) {
     s32 i, j;
 
     for (i = 0; i < numParts; i++) {
-        if (partsTable->flags & ACTOR_PART_FLAG_INVISIBLE || partsTable->idleAnimations == NULL || partsTable->flags & ACTOR_PART_FLAG_NO_DECORATIONS) {
+        if (partsTable->flags & ACTOR_PART_FLAG_INVISIBLE || partsTable->idleAnimations == nullptr || partsTable->flags & ACTOR_PART_FLAG_NO_DECORATIONS) {
             partsTable = partsTable->nextPart;
         } else {
             decorations = partsTable->decorationTable;
@@ -553,7 +553,7 @@ void appendGfx_nonplayer_actor_blur(b32 isPartner, Actor* actor) {
     numParts = actor->numParts;
     partTable = actor->partsTable;
     for (i = 0; i < numParts; i++) {
-        if ((partTable->idleAnimations == NULL) || (partTable->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
+        if ((partTable->idleAnimations == nullptr) || (partTable->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
             partTable = partTable->nextPart;
             continue;
         }
@@ -702,7 +702,7 @@ void update_nonplayer_actor_shadow(b32 isPartner, Actor* actor) {
     f32 yaw;
     s32 i;
 
-    if (actor != NULL) {
+    if (actor != nullptr) {
         shadow = get_shadow_by_index(actor->shadow.id);
         shadow->flags |= ENTITY_FLAG_HIDDEN;
         if (!(actor->flags & ACTOR_FLAG_INVISIBLE)) {
@@ -726,7 +726,7 @@ void update_nonplayer_actor_shadow(b32 isPartner, Actor* actor) {
             actorPart = actor->partsTable;
 
             for (i = 0; i < numParts; i++) {
-                if (!(actorPart->flags & ACTOR_PART_FLAG_INVISIBLE) && actorPart->idleAnimations != NULL) {
+                if (!(actorPart->flags & ACTOR_PART_FLAG_INVISIBLE) && actorPart->idleAnimations != nullptr) {
                     spriteID = actorPart->spriteInstanceID;
                     if (spriteID >= 0) {
                         spr_update_sprite(spriteID, actorPart->curAnimation, actorPart->animationRate);
@@ -879,7 +879,7 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
     }
     if (actor->debuff == STATUS_KEY_FROZEN) {
         effect = actor->icePillarEffect;
-        if (actor->icePillarEffect != NULL) {
+        if (actor->icePillarEffect != nullptr) {
             if ((gBattleStatus.flags1 & BS_FLAGS1_SHOW_PLAYER_DECORATIONS) ||
                 (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (actor->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)))
             {
@@ -895,9 +895,9 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
         }
     } else {
         effect = actor->icePillarEffect;
-        if (effect != NULL) {
+        if (effect != nullptr) {
             effect->flags |= FX_INSTANCE_FLAG_DISMISS;
-            actor->icePillarEffect = NULL;
+            actor->icePillarEffect = nullptr;
         }
     }
     set_status_icons_properties(actor->hudElementDataIndex, actorPosX, actorPosY, actorPosZ,
@@ -988,7 +988,7 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
             part = part->nextPart;
             continue;
         }
-        if (part->idleAnimations == NULL) {
+        if (part->idleAnimations == nullptr) {
             part = part->nextPart;
             continue;
         }
@@ -1325,7 +1325,7 @@ void appendGfx_npc_actor_reflection(s32 flipYaw, Actor* actor) {
             part = part->nextPart;
             continue;
         }
-        if (part->idleAnimations == NULL) {
+        if (part->idleAnimations == nullptr) {
             part = part->nextPart;
             continue;
         }
@@ -1528,7 +1528,7 @@ void appendGfx_player_actor(void* arg0) {
     }
     if (player->debuff == STATUS_KEY_FROZEN) {
         effect = player->icePillarEffect;
-        if (player->icePillarEffect != NULL) {
+        if (player->icePillarEffect != nullptr) {
             if ((gBattleStatus.flags1 & BS_FLAGS1_SHOW_PLAYER_DECORATIONS) ||
                 (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)))
             {
@@ -1548,9 +1548,9 @@ void appendGfx_player_actor(void* arg0) {
         }
     } else {
         effect = player->icePillarEffect;
-        if (effect != NULL) {
+        if (effect != nullptr) {
             effect->flags |= FX_INSTANCE_FLAG_DISMISS;
-            player->icePillarEffect = NULL;
+            player->icePillarEffect = nullptr;
         }
     }
 
@@ -1632,10 +1632,10 @@ void appendGfx_player_actor(void* arg0) {
 
     if ((((!(gBattleStatus.flags2 & BS_FLAGS2_OVERRIDE_INACTIVE_PLAYER)
             && (gBattleStatus.flags2 & BS_FLAGS2_PLAYER_TURN_USED))
-                && (partner != NULL))
+                && (partner != nullptr))
             || (battleStatus->outtaSightActive > 0))
         && !(player->flags & ACTOR_FLAG_NO_INACTIVE_ANIM)
-        && !((partner != NULL) && (partner->flags & ACTOR_FLAG_NO_ATTACK))
+        && !((partner != nullptr) && (partner->flags & ACTOR_FLAG_NO_ATTACK))
     ) {
         if (!(gBattleStatus.flags2 & BS_FLAGS2_NO_PLAYER_PAL_ADJUST)) {
             if ((player->debuff != STATUS_KEY_FEAR)
@@ -1975,15 +1975,15 @@ s32 render_with_adjusted_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Mat
         }
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
             if (opacity == 255) {
-                spr_draw_player_sprite(PLAYER_SPRITE_MAIN, yaw, 0, NULL, mtx);
+                spr_draw_player_sprite(PLAYER_SPRITE_MAIN, yaw, 0, nullptr, mtx);
             } else {
-                spr_draw_player_sprite(PLAYER_SPRITE_MAIN | sprDrawOpts, yaw, opacity, NULL, mtx);
+                spr_draw_player_sprite(PLAYER_SPRITE_MAIN | sprDrawOpts, yaw, opacity, nullptr, mtx);
             }
         } else {
             if (opacity == 255) {
-                spr_draw_npc_sprite(part->spriteInstanceID, yaw, 0, NULL, mtx);
+                spr_draw_npc_sprite(part->spriteInstanceID, yaw, 0, nullptr, mtx);
             } else {
-                spr_draw_npc_sprite(part->spriteInstanceID | sprDrawOpts, yaw, opacity, NULL, mtx);
+                spr_draw_npc_sprite(part->spriteInstanceID | sprDrawOpts, yaw, opacity, nullptr, mtx);
             }
         }
         return 0;
@@ -2045,7 +2045,7 @@ void make_flash_palettes(ActorPart* part) {
     s32 i, j;
 
     for (i = 0; i < decorations->originalPalettesCount; i++) {
-        if (decorations->adjustedPalettes[i] != NULL) {
+        if (decorations->adjustedPalettes[i] != nullptr) {
             src = decorations->adjustedPalettes[i];
             dest = decorations->copiedPalettes[1][i];
 
@@ -2087,7 +2087,7 @@ void func_unkA_draw_npc(ActorPart* part, s32 yaw, Matrix4f mtx) {
         for (i = 0; i < decorations->originalPalettesCount; i++) {
             src = decorations->originalPalettesList[i];
             dest = decorations->copiedPalettes[0][i];
-            if (src != NULL) {
+            if (src != nullptr) {
                 for (j = 0; j < ARRAY_COUNT(decorations->copiedPalettes[0][i]); j++) {
                     *dest = *src;
                     src++;
@@ -2102,7 +2102,7 @@ void func_unkA_draw_npc(ActorPart* part, s32 yaw, Matrix4f mtx) {
 
         func_unkB_draw_npc(part, yaw, mtx);
     } else {
-        spr_draw_npc_sprite(part->spriteInstanceID | idMask, yaw, opacity, NULL, mtx);
+        spr_draw_npc_sprite(part->spriteInstanceID | idMask, yaw, opacity, nullptr, mtx);
     }
 }
 
@@ -2157,7 +2157,7 @@ void func_unkA_draw_player(ActorPart* part, s32 yaw, Matrix4f mtx) {
         for (i = 0; i < decorations->originalPalettesCount; i++) {
             src = decorations->originalPalettesList[i];
             dest = decorations->copiedPalettes[0][i];
-            if (decorations->originalPalettesList[i] != NULL) {
+            if (decorations->originalPalettesList[i] != nullptr) {
                 for (j = 0; j < ARRAY_COUNT(decorations->copiedPalettes[0][i]); j++) {
                     *dest = *src;
                     dest++;
@@ -2170,7 +2170,7 @@ void func_unkA_draw_player(ActorPart* part, s32 yaw, Matrix4f mtx) {
         }
         func_unkB_draw_player(part, yaw, mtx);
     } else {
-        spr_draw_player_sprite(PLAYER_SPRITE_MAIN | idMask, yaw, opacity, NULL, mtx);
+        spr_draw_player_sprite(PLAYER_SPRITE_MAIN | idMask, yaw, opacity, nullptr, mtx);
     }
 }
 
@@ -2240,7 +2240,7 @@ void render_with_sleep_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matri
         PAL_PTR palIn = decorations->originalPalettesList[i];
         PAL_PTR palOut = decorations->copiedPalettes[0][i];
         decorations->adjustedPalettes[i] = palOut;
-        if (palIn != NULL) {
+        if (palIn != nullptr) {
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 u8 r = UNPACK_PAL_R(*palIn);
                 u8 g = UNPACK_PAL_G(*palIn);
@@ -2297,7 +2297,7 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
         for (i = 0; i < decorations->originalPalettesCount; i++) {
             palIn = decorations->originalPalettesList[i];
             palOut = decorations->copiedPalettes[0][i];
-            if (palIn != NULL) {
+            if (palIn != nullptr) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *palOut++ = *palIn++;
                 }
@@ -2329,7 +2329,7 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
             for (i = 0; i < decorations->spriteColorVariations; i++) {
                 palIn = decorations->originalPalettesList[i];
                 palOut = decorations->copiedPalettes[0][i];
-                if (palIn != NULL) {
+                if (palIn != nullptr) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
                     }
@@ -2341,7 +2341,7 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
                 staticPalIdx = decorations->spriteColorVariations * STANDARD_PAL_STATIC + i;
                 palIn = decorations->originalPalettesList[staticPalIdx];
                 palOut = decorations->copiedPalettes[0][i];
-                if (palIn != NULL) {
+                if (palIn != nullptr) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
                     }
@@ -2352,7 +2352,7 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
             for (i = 0; i < decorations->spriteColorVariations; i++) {
                 palIn = decorations->originalPalettesList[i];
                 palOut = decorations->copiedPalettes[0][i];
-                if (palIn != NULL) {
+                if (palIn != nullptr) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         u8 r = UNPACK_PAL_R(*palIn);
                         u8 g = UNPACK_PAL_G(*palIn);
@@ -2418,7 +2418,7 @@ void render_with_fear_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix
         palIn = decorations->originalPalettesList[i];
         palOut = decorations->copiedPalettes[0][i];
         decorations->adjustedPalettes[i] = palOut;
-        if (palIn != NULL) {
+        if (palIn != nullptr) {
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 u8 r = UNPACK_PAL_R(*palIn);
                 u8 g = UNPACK_PAL_G(*palIn);
@@ -2487,7 +2487,7 @@ void render_with_poison_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
     for (i = 0; i < decorations->originalPalettesCount; i++) {
         palIn = decorations->originalPalettesList[i];
         palOut = decorations->copiedPalettes[0][i];
-        if (palIn != NULL) {
+        if (palIn != nullptr) {
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 *palOut++ = *palIn++;
             }
@@ -2496,7 +2496,7 @@ void render_with_poison_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
     for (i = 0; i < decorations->spriteColorVariations; i++) {
         palIn = decorations->originalPalettesList[decorations->spriteColorVariations + i];
         palOut = decorations->copiedPalettes[0][i];
-        if (palIn != NULL) {
+        if (palIn != nullptr) {
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 *palOut++ = *palIn++;
             }
@@ -2544,7 +2544,7 @@ void render_with_paralyze_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Ma
     for (i = 0; i < decorations->originalPalettesCount; i++) {
         palIn = decorations->originalPalettesList[i];
         palOut = decorations->copiedPalettes[0][i];
-        if (palIn != NULL) {
+        if (palIn != nullptr) {
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 u8 r = UNPACK_PAL_R(*palIn);
                 u8 g = UNPACK_PAL_G(*palIn);
@@ -2645,7 +2645,7 @@ void render_with_berserk_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Mat
     for (i = 0; i < decorations->originalPalettesCount; i++) {
         PAL_PTR palIn = decorations->originalPalettesList[i];
         PAL_PTR palOut = decorations->copiedPalettes[0][i];
-        if (palIn != NULL) {
+        if (palIn != nullptr) {
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 u8 r = UNPACK_PAL_R(*palIn);
                 u8 g = UNPACK_PAL_G(*palIn);
@@ -2702,7 +2702,7 @@ void render_with_watt_idle_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, M
         for (i = 0; i < decorations->originalPalettesCount; i++) {
             palIn = decorations->originalPalettesList[i];
             palOut = decorations->copiedPalettes[0][i];
-            if (palIn != NULL) {
+            if (palIn != nullptr) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *palOut++ = *palIn++;
                 }
@@ -2736,7 +2736,7 @@ void render_with_watt_idle_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, M
                 // use watt's base palettes
                 palIn = decorations->originalPalettesList[i];
                 palOut = decorations->copiedPalettes[0][i];
-                if (palIn != NULL) {
+                if (palIn != nullptr) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
                     }
@@ -2749,7 +2749,7 @@ void render_with_watt_idle_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, M
                 palIdx = decorations->spriteColorVariations * SPR_PAL_BattleWatt_Brightest + i;
                 palIn = decorations->originalPalettesList[palIdx];
                 palOut = decorations->copiedPalettes[0][i];
-                if (palIn != NULL) {
+                if (palIn != nullptr) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
                     }
@@ -2762,7 +2762,7 @@ void render_with_watt_idle_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, M
                 palIdx = decorations->spriteColorVariations * SPR_PAL_BattleWatt_Brighter + i;
                 palIn = decorations->originalPalettesList[palIdx];
                 palOut = decorations->copiedPalettes[0][i];
-                if (palIn != NULL) {
+                if (palIn != nullptr) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
                     }
@@ -2814,7 +2814,7 @@ void render_with_watt_attack_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw,
         for (i = 0; i < decorations->originalPalettesCount; i++) {
             palIn = decorations->originalPalettesList[i];
             palOut = decorations->copiedPalettes[0][i];
-            if (palIn != NULL) {
+            if (palIn != nullptr) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *palOut++ = *palIn++;
                 }
@@ -2847,7 +2847,7 @@ void render_with_watt_attack_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw,
             for (i = 0; i < decorations->spriteColorVariations; i++) {
                 palIn = decorations->originalPalettesList[i];
                 palOut = decorations->copiedPalettes[0][i];
-                if (palIn != NULL) {
+                if (palIn != nullptr) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
                     }
@@ -2860,7 +2860,7 @@ void render_with_watt_attack_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw,
                 palIdx = decorations->spriteColorVariations * SPR_PAL_BattleWatt_Brightest + i;
                 palIn = decorations->originalPalettesList[palIdx];
                 palOut = decorations->copiedPalettes[0][i];
-                if (palIn != NULL) {
+                if (palIn != nullptr) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
                     }
@@ -2873,7 +2873,7 @@ void render_with_watt_attack_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw,
                 palIdx = decorations->spriteColorVariations * SPR_PAL_BattleWatt_Brighter + i;
                 palIn = decorations->originalPalettesList[palIdx];
                 palOut = decorations->copiedPalettes[0][i];
-                if (palIn != NULL) {
+                if (palIn != nullptr) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
                     }
@@ -2939,7 +2939,7 @@ void render_with_player_debuff_palettes(b32 isNpcSprite, ActorPart* part, s32 ya
             color2 = decorations->originalPalettesList[i];
             color1 = decorations->copiedPalettes[0][i];
             decorations->adjustedPalettes[i] = color1;
-            if (color2 != NULL) {
+            if (color2 != nullptr) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *color1++ = *color2++;
                 }
@@ -3059,7 +3059,7 @@ void render_with_pal_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 has
             color2 = decorations->originalPalettesList[i];
             color1 = decorations->copiedPalettes[0][i];
             decorations->adjustedPalettes[i] = color1;
-            if (color2 != NULL) {
+            if (color2 != nullptr) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *color1++ = *color2++;
                 }
@@ -3234,7 +3234,7 @@ void render_with_palset_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
             color2 = decorations->originalPalettesList[i];
             color1 = decorations->copiedPalettes[0][i];
             decorations->adjustedPalettes[i] = color1;
-            if (color2 != NULL) {
+            if (color2 != nullptr) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *color1++ = *color2++;
                 }

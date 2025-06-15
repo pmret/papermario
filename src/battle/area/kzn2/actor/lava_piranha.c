@@ -250,7 +250,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 40 },
         .opacity = 255,
-        .idleAnimations = NULL,
+        .idleAnimations = nullptr,
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -543,7 +543,7 @@ API_CALLABLE(N(MarkVineInterpolationDirty)) {
 
 API_CALLABLE(N(CreateVineRenderer)) {
     N(VineRenderState) = VINE_RENDER_STATE_NONE;
-    create_worker_scene(NULL, &N(worker_render_piranha_vines));
+    create_worker_scene(nullptr, &N(worker_render_piranha_vines));
     return ApiStatus_DONE2;
 }
 
@@ -556,7 +556,7 @@ EvtScript N(EVS_Init) = {
     Call(EnableGroup, MODEL_ato, FALSE)
     Call(SetActorVar, ACTOR_SELF, AVAR_Boss_IsSecondPhase, FALSE)
     Call(SetActorVar, ACTOR_SELF, AVAR_Common_PiranhaState, PIRANHA_STATE_STUNNED)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, NULL)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, nullptr)
     Call(SetActorVar, ACTOR_SELF, AVAR_Common_StunTurnsLeft, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_Common_NextTwitchTime, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_Boss_Dying, FALSE)
@@ -964,7 +964,7 @@ EvtScript N(EVS_InitVines) = {
         // ---------------------------------------------------------------
         // set flame positions
         Call(GetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, LVar0)
-        IfNe(LVar0, NULL)
+        IfNe(LVar0, nullptr)
             Call(GetAnimatedPositionByTreeIndex, VINE_0, 10, LVar1, LVar2, LVar3)
             Call(GetAnimatedRotationByTreeIndex, VINE_0, 10, LVar4, LVar5, LVar6)
             Set(LVar7, 30)
@@ -973,7 +973,7 @@ EvtScript N(EVS_InitVines) = {
             Call(N(SetFlameProperties), LVar0, LVar1, LVar2, LVar6, LVar7, LVar8, LVar9)
         EndIf
         Call(GetActorVar, ACTOR_BUD_1, AVAR_Common_FlameEffect, LVar0)
-        IfNe(LVar0, NULL)
+        IfNe(LVar0, nullptr)
             Call(GetAnimatedPositionByTreeIndex, VINE_1, 8, LVar1, LVar2, LVar3)
             Call(GetAnimatedRotationByTreeIndex, VINE_1, 8, LVar4, LVar5, LVar6)
             Set(LVar7, 10)
@@ -982,7 +982,7 @@ EvtScript N(EVS_InitVines) = {
             Call(N(SetFlameProperties), LVar0, LVar1, LVar2, LVar6, LVar7, LVar8, LVar9)
         EndIf
         Call(GetActorVar, ACTOR_BUD_2, AVAR_Common_FlameEffect, LVar0)
-        IfNe(LVar0, NULL)
+        IfNe(LVar0, nullptr)
             Call(GetAnimatedPositionByTreeIndex, VINE_2, 8, LVar1, LVar2, LVar3)
             Call(GetAnimatedRotationByTreeIndex, VINE_2, 8, LVar4, LVar5, LVar6)
             Set(LVar7, 10)
@@ -1848,18 +1848,18 @@ EvtScript N(EVS_Death) = {
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_DEATH)
         Wait(15)
         Call(GetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, LVar0)
-        IfNe(LVar0, NULL)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, NULL)
+        IfNe(LVar0, nullptr)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, nullptr)
             Call(RemoveEffect, LVar0)
         EndIf
         Call(GetActorVar, ACTOR_BUD_1, AVAR_Common_FlameEffect, LVar0)
-        IfNe(LVar0, NULL)
-            Call(SetActorVar, ACTOR_BUD_1, AVAR_Common_FlameEffect, NULL)
+        IfNe(LVar0, nullptr)
+            Call(SetActorVar, ACTOR_BUD_1, AVAR_Common_FlameEffect, nullptr)
             Call(RemoveEffect, LVar0)
         EndIf
         Call(GetActorVar, ACTOR_BUD_2, AVAR_Common_FlameEffect, LVar0)
-        IfNe(LVar0, NULL)
-            Call(SetActorVar, ACTOR_BUD_2, AVAR_Common_FlameEffect, NULL)
+        IfNe(LVar0, nullptr)
+            Call(SetActorVar, ACTOR_BUD_2, AVAR_Common_FlameEffect, nullptr)
             Call(RemoveEffect, LVar0)
         EndIf
         Wait(5)
@@ -2091,9 +2091,9 @@ EvtScript N(EVS_Hit_Inner) = {
             Call(LoadBattleDmaData, VINE_ANIM_BOSS_HEAVY_HIT)
             Call(PlayModelAnimation, VINE_0, VINE_0_BASE)
             Call(GetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, LVar0)
-            IfNe(LVar0, NULL)
+            IfNe(LVar0, nullptr)
                 Call(RemoveEffect, LVar0)
-                Call(SetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, NULL)
+                Call(SetActorVar, ACTOR_SELF, AVAR_Common_FlameEffect, nullptr)
                 Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 PlayEffect(EFFECT_COLD_BREATH, 0, LVar0, LVar1, LVar2, Float(3.0), 50, 0)
             EndIf

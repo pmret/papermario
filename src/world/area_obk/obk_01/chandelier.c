@@ -594,7 +594,7 @@ EvtScript N(EVS_LaunchFromCouch_Crash) = {
 
 EvtScript N(EVS_SetupChandelier) = {
     MallocArray(3, LVarA)
-    Set(CONTROL_DATA_PTR, NULL)
+    Set(CONTROL_DATA_PTR, nullptr)
     Set(CONTROL_DATA_STATE, CONTROL_STATE_WAITING)
     Set(CONTROL_DATA_8, FALSE)
     Call(ParentColliderToModel, COLLIDER_o557, MODEL_hon1)

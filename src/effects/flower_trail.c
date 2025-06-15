@@ -57,14 +57,14 @@ void flower_trail_main(s32 triggeredByNpc, f32 posX, f32 posY, f32 posZ, f32 ang
     bp.update = flower_trail_update;
     bp.renderScene = flower_trail_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_FLOWER_TRAIL;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
 
     part = effect->data.flowerTrail = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.flowerTrail != NULL);
+    ASSERT(effect->data.flowerTrail != nullptr);
 
     mem_clear(part, numParts * sizeof(*part));
 

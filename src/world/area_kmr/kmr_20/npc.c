@@ -13,7 +13,7 @@ extern AnimScript Entity_SimpleSpring_AnimLaunch;
 API_CALLABLE(N(PlaySpringLaunchAnimation)) {
     Entity* entity = get_entity_by_index(0);
 
-    if (entity == NULL) {
+    if (entity == nullptr) {
         return ApiStatus_BLOCK;
     }
 

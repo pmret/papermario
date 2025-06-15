@@ -57,7 +57,7 @@ void state_init_language_select(void) {
     general_heap_create();
     hud_element_set_aux_cache(0, 0);
     hud_element_clear_cache();
-    mdl_load_all_textures(NULL, 0, 0);
+    mdl_load_all_textures(nullptr, 0, 0);
     gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_NO_INTERP;
     gCameras[CAM_DEFAULT].needsInit = TRUE;
     gCameras[CAM_DEFAULT].nearClip = 16;
@@ -96,7 +96,7 @@ void state_init_file_select(void) {
     general_heap_create();
     hud_element_set_aux_cache(0, 0);
     hud_element_clear_cache();
-    mdl_load_all_textures(NULL, 0, 0);
+    mdl_load_all_textures(nullptr, 0, 0);
     gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_NO_INTERP;
     gCameras[CAM_DEFAULT].needsInit = TRUE;
     gCameras[CAM_DEFAULT].nearClip = 16;
@@ -417,14 +417,14 @@ void state_step_exit_language_select(void) {
                     initialize_collision();
                     restore_map_collision_data();
 
-                    if (mapConfig->dmaStart != NULL) {
+                    if (mapConfig->dmaStart != nullptr) {
                         dma_copy(mapConfig->dmaStart, mapConfig->dmaEnd, mapConfig->dmaDest);
                     }
 
                     load_map_bg(mapConfig->bgName);
 
                     bgHeader = mapSettings->background;
-                    if (bgHeader != NULL) {
+                    if (bgHeader != nullptr) {
                         set_background(bgHeader);
                     } else {
                         set_background_size(296, 200, 12, 20);

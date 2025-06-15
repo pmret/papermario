@@ -64,13 +64,13 @@ EffectInstance* lightning_bolt_main(
     bp.update = lightning_bolt_update;
     bp.renderScene = lightning_bolt_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_LIGHTNING_BOLT;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.lightningBolt = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.lightningBolt != NULL);
+    ASSERT(effect->data.lightningBolt != nullptr);
 
     data->type = type;
     data->lifetime = 0;
@@ -105,7 +105,7 @@ EffectInstance* lightning_bolt_main(
 
         return effect;
     } else {
-        return NULL;
+        return nullptr;
     }
 }
 

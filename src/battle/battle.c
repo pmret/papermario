@@ -109,13 +109,13 @@ void reset_battle_status(void) {
     gLastDrawBattleState = BATTLE_STATE_0;
     D_800DC4F0 = 0;
     D_800DC4D4 = 0;
-    gCurrentBattlePtr = NULL;
+    gCurrentBattlePtr = nullptr;
     D_800DC4F8 = 0;
     gCurrentBattleID = 0;
-    gCurrentStagePtr = NULL;
+    gCurrentStagePtr = nullptr;
     D_800DC060 = 0;
     gCurrentStageID = 0;
-    gOverrideBattlePtr = NULL;
+    gOverrideBattlePtr = nullptr;
 }
 
 void ALT_reset_battle_status(void) {
@@ -135,7 +135,7 @@ void load_battle_section(void) {
     gCurrentBattlePtr = &(*battleArea->battles)[battleIdx];
 
     if (gCurrentStageID < 0) {
-        gCurrentStagePtr = NULL;
+        gCurrentStagePtr = nullptr;
     } else {
         gCurrentStagePtr = &(*battleArea->stages)[gCurrentStageID];
     }
@@ -324,7 +324,7 @@ void load_demo_battle(u32 index) {
             break;
     }
 
-    evt_set_variable(NULL, GF_Tutorial_SwapTurnOrder, 1);
+    evt_set_variable(nullptr, GF_Tutorial_SwapTurnOrder, 1);
     gCurrentEncounter.unk_07 = 0;
     gCurrentEncounter.instigatorValue = 0;
     set_battle_stage(BTL_STAGE_DEFAULT);

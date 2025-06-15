@@ -51,7 +51,7 @@ EffectInstance* disable_x_main(s32 type, f32 x, f32 y, f32 z, s32 arg4) {
     effect->numParts = numParts;
     data = general_heap_malloc(numParts * sizeof(*data));
     effect->data.disableX = data;
-    ASSERT(effect->data.disableX != NULL);
+    ASSERT(effect->data.disableX != nullptr);
 
     data->type = type;
     data->scale = 1.0f;

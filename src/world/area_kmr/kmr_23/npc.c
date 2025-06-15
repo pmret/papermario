@@ -55,7 +55,7 @@ s32 D_802417D0_909204 = 0;
 
 WindowStyleCustom D_802417D8_909208 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
     },
     .corners = {
         .imgData = N(window_ul_img),
@@ -110,7 +110,7 @@ API_CALLABLE(N(CreateEndChapterData)) {
         npc->curAnim = N(StarSpiritAnimations)[data->chapter][backFacing];
     }
 
-    if (data->spiritCardEffect != NULL) {
+    if (data->spiritCardEffect != nullptr) {
         data->spiritCardEffect->data.spiritCard->yaw = data->yaw;
         data->spiritCardEffect->data.spiritCard->pos.x = data->pos.x - 2.0f;
         data->spiritCardEffect->data.spiritCard->pos.y = data->pos.y + 15.0f;
@@ -232,7 +232,7 @@ API_CALLABLE(N(FlashScreenWhite)) {
             set_screen_overlay_params_front(OVERLAY_VIEWPORT_COLOR, data->screenWhiteness);
             if (data->screenWhiteness == 255) {
                 data->spiritCardEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
-                data->spiritCardEffect = NULL;
+                data->spiritCardEffect = nullptr;
                 gCameras->bgColor[0] = 208;
                 gCameras->bgColor[1] = 208;
                 gCameras->bgColor[2] = 208;
@@ -388,14 +388,14 @@ API_CALLABLE(N(func_80240CA8_9086D8)) {
 }
 
 API_CALLABLE(N(ShowMessagesInFrontOfCurtains)) {
-    EndChapter* data = (EndChapter*) evt_get_variable(NULL, MV_EndChapterDataPtr);
+    EndChapter* data = (EndChapter*) evt_get_variable(nullptr, MV_EndChapterDataPtr);
     data->unk1E = TRUE;
     gOverrideFlags |= GLOBAL_OVERRIDES_MESSAGES_OVER_CURTAINS;
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(ShowMessagesBehindCurtains)) {
-    EndChapter* data = (EndChapter*) evt_get_variable(NULL, MV_EndChapterDataPtr);
+    EndChapter* data = (EndChapter*) evt_get_variable(nullptr, MV_EndChapterDataPtr);
     data->unk1E = FALSE;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_MESSAGES_OVER_CURTAINS;
     return ApiStatus_DONE2;
@@ -406,7 +406,7 @@ void func_80240DA4_9087D4(void) {
     s32 fullHeight = 70;
     s32 baseX = SCREEN_WIDTH / 2 - fullWidth / 2;
     s32 baseY = 100;
-    EndChapter* data = (EndChapter*) evt_get_variable(NULL, MV_EndChapterDataPtr);
+    EndChapter* data = (EndChapter*) evt_get_variable(nullptr, MV_EndChapterDataPtr);
 
     switch (D_802417C8_9091F8) {
         case 0:
@@ -456,7 +456,7 @@ void func_80240DA4_9087D4(void) {
         f64 lry = baseY + (fullHeight * 0.5) + (D_802417D0_909200 * 0.5);
         gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
         draw_box(DRAW_FLAG_NO_CLIP, &D_802417D8_909208, ulx, uly, 0, D_802417CC_9091FC, D_802417D0_909200, 180, 0, 1.0f, 1.0f,
-                 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
+                 0.0f, 0.0f, 0.0f, nullptr, nullptr, nullptr, 320, 240, nullptr);
     }
 }
 

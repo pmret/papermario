@@ -33,18 +33,18 @@ GameMode* set_next_game_mode(GameMode* mode) {
     gameMode->init = mode->init;
     gameMode->step = mode->step;
     gameMode->render = mode->render;
-    gameMode->unusedFunc = NULL;
+    gameMode->unusedFunc = nullptr;
 
-    if (gameMode->init == NULL) {
+    if (gameMode->init == nullptr) {
         gameMode->init = mode_default_nop;
     }
-    if (gameMode->step == NULL) {
+    if (gameMode->step == nullptr) {
         gameMode->step = mode_default_nop;
     }
-    if (gameMode->unusedFunc == NULL) {
+    if (gameMode->unusedFunc == nullptr) {
         gameMode->unusedFunc = mode_default_nop;
     }
-    if (gameMode->render == NULL) {
+    if (gameMode->render == nullptr) {
         gameMode->render = mode_default_nop;
     }
 
@@ -63,11 +63,11 @@ GameMode* set_game_mode_slot(s32 i, GameMode* mode) {
     gameMode->init = mode->init;
     gameMode->step = mode->step;
     gameMode->render = mode->render;
-    gameMode->unusedFunc = NULL;
-    if (gameMode->init == NULL) gameMode->init = mode_default_nop;
-    if (gameMode->step == NULL) gameMode->step = mode_default_nop;
-    if (gameMode->unusedFunc == NULL) gameMode->unusedFunc = mode_default_nop;
-    if (gameMode->render == NULL) gameMode->render = mode_default_nop;
+    gameMode->unusedFunc = nullptr;
+    if (gameMode->init == nullptr) gameMode->init = mode_default_nop;
+    if (gameMode->step == nullptr) gameMode->step = mode_default_nop;
+    if (gameMode->unusedFunc == nullptr) gameMode->unusedFunc = mode_default_nop;
+    if (gameMode->render == nullptr) gameMode->render = mode_default_nop;
 
     gameMode->renderAux = mode_default_nop;
     gameMode->init();
@@ -83,7 +83,7 @@ void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void)) {
     gameMode->renderAux = fn;
     gameMode->flags |= MODE_FLAG_RENDER_AUX_SET;
 
-    if (fn == NULL) {
+    if (fn == nullptr) {
         gameMode->renderAux = mode_default_nop;
     }
 }

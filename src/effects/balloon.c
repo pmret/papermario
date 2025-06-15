@@ -24,7 +24,7 @@ EffectInstance* balloon_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s
     bp.update = balloon_update;
     bp.renderScene = balloon_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_BALLOON;
 
     effect = create_effect_instance(&bp);
@@ -34,7 +34,7 @@ EffectInstance* balloon_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s
     effect->data.balloon = data;
     part = data;
 
-    ASSERT(data != NULL);
+    ASSERT(data != nullptr);
 
     part->unk_00 = arg0;
     part->unk_04 = arg1;

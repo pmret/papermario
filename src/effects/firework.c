@@ -64,7 +64,7 @@ EffectInstance* firework_main(
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     part = effect->data.firework = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.firework != NULL);
+    ASSERT(effect->data.firework != nullptr);
 
     part->unk_00 = arg0;
     part->unk_04 = arg1;

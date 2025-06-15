@@ -157,7 +157,7 @@ void snd_bgm_clear_legacy_commands(BGMPlayer* player) {
 /// Part of an unused system for inter-thread communication with a BGM player using commands.
 /// Use functions in bgm_control to manipualte gMusicControlData instead.
 void snd_bgm_enqueue_legacy_command(u32 cmd) {
-    BGMPlayer* player = NULL;
+    BGMPlayer* player = nullptr;
     u32 playerID = cmd & 0xF;
 
     if (playerID == 0) {
@@ -168,7 +168,7 @@ void snd_bgm_enqueue_legacy_command(u32 cmd) {
         player = gBGMPlayerB;
     }
 
-    if (player != NULL) {
+    if (player != nullptr) {
         u32 pos;
 
         if (player->cmdBufPending < ARRAY_COUNT(player->cmdBufData)) {
@@ -450,7 +450,7 @@ AuResult snd_song_load(s32 songID, s32 playerIndex) {
 
     au_get_bgm_player_and_file(playerIndex, &bgmFile, &player);
 
-    if (bgmFile != NULL) {
+    if (bgmFile != nullptr) {
         return au_load_song_files(songID, bgmFile, player);
     } else {
         return AU_ERROR_NULL_SONG_NAME;
@@ -604,7 +604,7 @@ AuResult snd_song_request_push_fade_out(s32 songName, s32 fadeTime) {
     s.duration = fadeTime;
     s.unused_08 = 0;
     s.finalVolume = 0;
-    s.doneCallback = NULL;
+    s.doneCallback = nullptr;
     s.onPush = TRUE;
 
     return au_bgm_process_fade_out(&s);
@@ -724,7 +724,7 @@ AuResult snd_song_set_track_volumes(s32 songName, MusicTrackVols trackVolSet) {
     if (status == AU_RESULT_OK) {
         u8* trackVols = snd_song_get_track_volumes_set(trackVolSet);
 
-        if (trackVols != NULL) {
+        if (trackVols != nullptr) {
             au_bgm_set_track_volumes(bgmPlayer, trackVols, TRUE);
         } else {
             status = AU_ERROR_11;
@@ -744,7 +744,7 @@ AuResult snd_song_clear_track_volumes(s32 songName, MusicTrackVols trackVolSet) 
     if (status == AU_RESULT_OK) {
         u8* trackVols = snd_song_get_track_volumes_set(trackVolSet);
 
-        if (trackVols != NULL) {
+        if (trackVols != nullptr) {
             au_bgm_set_track_volumes(bgmPlayer, trackVols, FALSE);
         } else {
             status = AU_ERROR_11;
@@ -755,7 +755,7 @@ AuResult snd_song_clear_track_volumes(s32 songName, MusicTrackVols trackVolSet) 
 }
 
 static u8* snd_song_get_track_volumes_set(MusicTrackVols trackVolSet) {
-    u8* trackVols = NULL;
+    u8* trackVols = nullptr;
 
     switch (trackVolSet) {
         case TRACK_VOLS_JAN_FULL:

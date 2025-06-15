@@ -30,13 +30,13 @@ EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     bp.update = throw_spiny_update;
     bp.renderScene = throw_spiny_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_THROW_SPINY;
 
     effect = (EffectInstance*)create_effect_instance(bpPtr);
     effect->numParts = numParts;
     spinyObject = effect->data.throwSpiny = general_heap_malloc(numParts * sizeof(*spinyObject));
-    ASSERT(effect->data.throwSpiny != NULL);
+    ASSERT(effect->data.throwSpiny != nullptr);
     spinyObject->unk_00 = arg0;
     spinyObject->lifeDuration = 0;
 

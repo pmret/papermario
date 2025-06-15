@@ -94,7 +94,7 @@ API_CALLABLE(ShowEmote) {
         case EMOTER_NPC:
             // show emote from NPC
             npc = resolve_npc(script, npcID);
-            if (npc == NULL) {
+            if (npc == nullptr) {
                 return ApiStatus_DONE2;
             }
             x = 0.0f;
@@ -108,7 +108,7 @@ API_CALLABLE(ShowEmote) {
             y = dY;
             z = dZ;
             r = radius;
-            npc = NULL;
+            npc = nullptr;
             break;
     }
 
@@ -232,7 +232,7 @@ API_CALLABLE(ShowSweat) {
             break;
         case EMOTER_NPC:
             npc = resolve_npc(script, npcID);
-            if (npc == NULL) {
+            if (npc == nullptr) {
                 return ApiStatus_DONE2;
             }
             x = npc->pos.x;
@@ -277,7 +277,7 @@ API_CALLABLE(ShowSleepBubble) {
             break;
         case EMOTER_NPC:
             npc = resolve_npc(script, npcID);
-            if (npc == NULL) {
+            if (npc == nullptr) {
                 return ApiStatus_DONE2;
             }
             x = npc->pos.x;
@@ -313,7 +313,7 @@ API_CALLABLE(PlayEffect_impl) {
     Bytecode* args = script->ptrReadPos;
 
     s32 effectID = evt_get_variable(script, *intArgs++);
-    EffectInstance* effectRet = NULL;
+    EffectInstance* effectRet = nullptr;
     s32 new_var;
 
     s32 iVar1, iVar2, iVar3, iVar4, iVar5;
@@ -766,7 +766,7 @@ API_CALLABLE(PlayEffect_impl) {
             PANIC();
     }
 
-    if (effectRet != NULL) {
+    if (effectRet != nullptr) {
         evt_set_variable(script, LVarF, (s32) effectRet);
     }
 

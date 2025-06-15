@@ -82,7 +82,7 @@ MenuWindowBP filemenu_yesno_windowBPs[] = {
         .height = 0,
         .priority = WINDOW_PRIORITY_64,
         .fpDrawContents = &filemenu_yesno_draw_options_contents,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = -1,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
@@ -96,7 +96,7 @@ MenuWindowBP filemenu_yesno_windowBPs[] = {
         .height = 0,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &filemenu_yesno_draw_prompt_contents,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_FILES_CONFIRM_OPTIONS,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
@@ -375,7 +375,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         gGameStatusPtr->areaID = AREA_KMR;
                         gGameStatusPtr->mapID = 11; //TODO hardcoded area/map IDs
                         gGameStatusPtr->entryID = 0;
-                        evt_set_variable(NULL, GB_StoryProgress, STORY_INTRO);
+                        evt_set_variable(nullptr, GB_StoryProgress, STORY_INTRO);
 
                         slot2 = filemenu_menus[FILE_MENU_MAIN]->selected;
                         for (i = 0; i < ARRAY_COUNT(gSaveSlotMetadata->filename); i++) {

@@ -33,13 +33,13 @@ EffectInstance* fright_jar_main(
     bp.update = fright_jar_update;
     bp.renderScene = fright_jar_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_FRIGHT_JAR;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.frightJar = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.frightJar != NULL);
+    ASSERT(effect->data.frightJar != nullptr);
 
     data->unk_00 = arg0;
     data->unk_14 = 0;

@@ -46,13 +46,13 @@ EffectInstance* spirit_card_main(
     bp.update = spirit_card_update;
     bp.renderScene = spirit_card_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_SPIRIT_CARD;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.spiritCard = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.spiritCard != NULL);
+    ASSERT(effect->data.spiritCard != nullptr);
 
     data->unk_00 = arg0;
     data->unk_14 = 0;
@@ -78,7 +78,7 @@ EffectInstance* spirit_card_main(
         load_effect(EFFECT_MISC_PARTICLES);
         data->child = misc_particles_main(3, arg1, arg2 - arg4 * 30.0f, arg3, arg4 * 30.0f, arg4 * 50.0f, 1.0f, 16, 0);
     } else {
-        data->child = NULL;
+        data->child = nullptr;
     }
 
     return effect;
@@ -103,10 +103,10 @@ void spirit_card_update(EffectInstance* effect) {
 
     if (data->unk_10 < 0) {
         remove_effect(effect);
-        if (data->child != NULL) {
+        if (data->child != nullptr) {
             data->child->flags |= FX_INSTANCE_FLAG_DISMISS;
         }
-    } else if (data->unk_10 >= 16 && data->child != NULL) {
+    } else if (data->unk_10 >= 16 && data->child != nullptr) {
         data->child->data.miscParticles->scaleX = data->unk_18 * 30.0f;
         data->child->data.miscParticles->scaleY = data->unk_18 * 50.0f;
         data->child->data.miscParticles->pos.x = data->pos.x;

@@ -98,7 +98,7 @@ void damage_indicator_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 starsRadi
     effect->numParts = damageAmt;
 
     effect->data.damageIndicator = part = general_heap_malloc(damageAmt * sizeof(*part));
-    ASSERT(effect->data.damageIndicator != NULL);
+    ASSERT(effect->data.damageIndicator != nullptr);
 
     part->unk_00 = arg0;
     part->basePos.x = posX;

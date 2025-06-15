@@ -87,13 +87,13 @@ void damage_stars_main(s32 type, f32 x, f32 y, f32 z, f32 rotAxisX, f32 rotAxisY
         bpPtr->init = damage_stars_init;
         bpPtr->update = damage_stars_update;
         bpPtr->renderScene = damage_stars_render;
-        bpPtr->renderUI = NULL;
+        bpPtr->renderUI = nullptr;
         bpPtr->effectID = EFFECT_DAMAGE_STARS;
 
         effect = create_effect_instance(bpPtr);
         effect->numParts = number;
         part = effect->data.damageStars = general_heap_malloc(number * sizeof(*part));
-        ASSERT(effect->data.damageStars != NULL);
+        ASSERT(effect->data.damageStars != nullptr);
 
         for (i = 0; i < number; i++, part++) {
             part->type = type;

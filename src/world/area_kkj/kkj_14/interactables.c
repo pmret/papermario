@@ -402,7 +402,7 @@ EvtScript N(EVS_SetupInteractables) = {
         Call(EnableGroup, MODEL_g27, FALSE)
         Exec(N(EVS_TexPan_Fireplace))
         Call(SetModelCustomGfx, MODEL_o157, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
-        Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(setup_gfx_fireplace)), NULL)
+        Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(setup_gfx_fireplace)), nullptr)
         Switch(GB_StoryProgress)
             CaseLt(STORY_CH0_WAKE_UP)
             CaseLt(STORY_CH2_BEGAN_PEACH_MISSION)

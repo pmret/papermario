@@ -137,7 +137,7 @@ API_CALLABLE(N(SetRecipeDiscovered)) {
 
     for (i = 0; i < ARRAY_COUNT(CookableItemIDs); i++) {
         if (cookedItemID == cookedItems[i]) {
-            evt_set_variable(NULL, cookedFlags[i], TRUE);
+            evt_set_variable(nullptr, cookedFlags[i], TRUE);
             break;
         }
     }

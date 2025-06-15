@@ -65,7 +65,7 @@ void aura_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, EffectInstance
     bp.update = aura_update;
     bp.renderScene = aura_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_AURA;
 
     effect = create_effect_instance(bpPtr);
@@ -73,7 +73,7 @@ void aura_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, EffectInstance
 
     part = effect->data.aura = general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data.aura != NULL);
+    ASSERT(effect->data.aura != nullptr);
 
     part->renderYaw = 0.0f;
 

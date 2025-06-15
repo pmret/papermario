@@ -84,7 +84,7 @@ void clear_npcs(void) {
     }
 
     for (i = 0; i < MAX_NPCS; i++) {
-        (*gCurrentNpcListPtr)[i] = NULL;
+        (*gCurrentNpcListPtr)[i] = nullptr;
     }
 
     gNpcCount = 0;
@@ -117,7 +117,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     s32 j;
 
     for (i = 0; i < MAX_NPCS; i++) {
-        if ((*gCurrentNpcListPtr)[i] == NULL) {
+        if ((*gCurrentNpcListPtr)[i] == nullptr) {
             break;
         }
     }
@@ -125,7 +125,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
 
     (*gCurrentNpcListPtr)[i] = npc = heap_malloc(sizeof(*npc));
     gNpcCount++;
-    ASSERT(npc != NULL);
+    ASSERT(npc != nullptr);
 
     npc->flags = blueprint->flags | (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW | NPC_FLAG_ENABLED);
     if (isPeachNpc) {
@@ -135,7 +135,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->collisionDiameter = 32;
     npc->collisionHeight = 64;
     npc->renderMode = 13;
-    npc->blur.any = NULL;
+    npc->blur.any = nullptr;
     npc->yaw = 0.0f;
     npc->jumpVel = 0.0f;
     npc->pos.x = 0.0f;
@@ -183,12 +183,12 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     }
 
     npc->onUpdate = blueprint->onUpdate;
-    if (npc->onUpdate == NULL) {
+    if (npc->onUpdate == nullptr) {
         npc->onUpdate = &STUB_npc_callback;
     }
 
     npc->onRender = blueprint->onRender;
-    if (npc->onRender == NULL) {
+    if (npc->onRender == nullptr) {
         npc->onRender = &STUB_npc_callback;
     }
     if (!isPeachNpc) {
@@ -214,7 +214,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
 }
 
 s32 create_basic_npc(NpcBlueprint* blueprint) {
-    return create_npc_impl(blueprint, NULL, FALSE);
+    return create_npc_impl(blueprint, nullptr, FALSE);
 }
 
 s32 create_standard_npc(NpcBlueprint* blueprint, AnimID* animList) {
@@ -222,7 +222,7 @@ s32 create_standard_npc(NpcBlueprint* blueprint, AnimID* animList) {
 }
 
 s32 create_peach_npc(NpcBlueprint* blueprint) {
-    return create_npc_impl(blueprint, NULL, TRUE);
+    return create_npc_impl(blueprint, nullptr, TRUE);
 }
 
 void free_npc_by_index(s32 listIndex) {
@@ -232,11 +232,11 @@ void free_npc_by_index(s32 listIndex) {
     listIndex &= ~BATTLE_NPC_ID_BIT;
 
     npc = (*gCurrentNpcListPtr)[listIndex];
-    if (npc != NULL) {
+    if (npc != nullptr) {
         if (npc->flags) {
-            if (npc->blur.any != NULL) {
+            if (npc->blur.any != nullptr) {
                 heap_free(npc->blur.any);
-                npc->blur.any = NULL;
+                npc->blur.any = nullptr;
             }
 
             if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
@@ -254,7 +254,7 @@ void free_npc_by_index(s32 listIndex) {
             }
 
             heap_free((*gCurrentNpcListPtr)[listIndex]);
-            (*gCurrentNpcListPtr)[listIndex] = NULL;
+            (*gCurrentNpcListPtr)[listIndex] = nullptr;
             gNpcCount--;
         }
     }
@@ -263,9 +263,9 @@ void free_npc_by_index(s32 listIndex) {
 void free_npc(Npc* npc) {
     s32 i;
 
-    if (npc->blur.any != NULL) {
+    if (npc->blur.any != nullptr) {
         heap_free(npc->blur.any);
-        npc->blur.any = NULL;
+        npc->blur.any = nullptr;
     }
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
@@ -290,7 +290,7 @@ void free_npc(Npc* npc) {
         }
     }
 
-    (*gCurrentNpcListPtr)[i] = NULL;
+    (*gCurrentNpcListPtr)[i] = nullptr;
     gNpcCount--;
 }
 
@@ -425,7 +425,7 @@ void npc_do_other_npc_collision(Npc* npc) {
 
         for (i = 0; i < MAX_NPCS; i++) {
             otherNpc = get_npc_by_index(i);
-            if (otherNpc != NULL && npc != otherNpc) {
+            if (otherNpc != nullptr && npc != otherNpc) {
                 if (otherNpc->flags != 0 && !(otherNpc->flags & (NPC_FLAG_SUSPENDED | NPC_FLAG_IGNORE_PLAYER_COLLISION))) {
                     if (!(otherNpc->pos.y + otherNpc->collisionHeight < thisY) &&
                         !(thisY + npc->collisionHeight < otherNpc->pos.y))
@@ -652,7 +652,7 @@ void update_npcs(void) {
         for (i = 0; i < MAX_NPCS; i++) {
             Npc* npc = (*gCurrentNpcListPtr)[i];
 
-            if (npc != NULL) {
+            if (npc != nullptr) {
                 if (npc->flags != 0) {
                     if (npc->flags & (NPC_FLAG_SUSPENDED | NPC_FLAG_INACTIVE)) {
                         npc_do_world_collision(npc);
@@ -969,7 +969,7 @@ void render_npcs(void) {
 
     for (i = 0; i < MAX_NPCS; i++) {
         Npc* npc = (*gCurrentNpcListPtr)[i];
-        if ((npc != NULL)
+        if ((npc != nullptr)
             && (npc->flags != 0)
             && !(npc->flags & (NPC_FLAG_SUSPENDED | NPC_FLAG_HAS_NO_SPRITE | NPC_FLAG_INACTIVE | NPC_FLAG_INVISIBLE))
         ) {
@@ -1026,7 +1026,7 @@ Npc* get_npc_unsafe(s32 npcID) {
 
     for (i = 0; i < MAX_NPCS; i++) {
         npc = (*gCurrentNpcListPtr)[i];
-        if (npc != NULL && npc->flags != 0 && npc->npcID == npcID) {
+        if (npc != nullptr && npc->flags != 0 && npc->npcID == npcID) {
             break;
         }
     }
@@ -1041,12 +1041,12 @@ Npc* get_npc_safe(s32 npcID) {
 
     for (i = 0; i < MAX_NPCS; i++) {
         npc = (*gCurrentNpcListPtr)[i];
-        if (npc != NULL && npc->flags != 0 && npc->npcID == npcID) {
+        if (npc != nullptr && npc->flags != 0 && npc->npcID == npcID) {
             break;
         }
     }
     if (i >= MAX_NPCS) {
-        return NULL;
+        return nullptr;
     }
 
     return npc;
@@ -1101,7 +1101,7 @@ void enable_npc_blur(Npc* npc) {
 
         motionBlur = heap_malloc(sizeof(*motionBlur));
         npc->blur.motion = motionBlur;
-        ASSERT(motionBlur != NULL);
+        ASSERT(motionBlur != nullptr);
         motionBlur->unused = 0;
         motionBlur->index = 0;
 
@@ -1118,7 +1118,7 @@ void disable_npc_blur(Npc* npc) {
         npc->flags &= ~NPC_FLAG_MOTION_BLUR;
 
         heap_free(npc->blur.motion);
-        npc->blur.motion = NULL;
+        npc->blur.motion = nullptr;
     }
 }
 
@@ -1239,7 +1239,7 @@ void npc_reload_all(void) {
 
     for (i = 0; i < MAX_NPCS; i++) {
         Npc* npc = (*gCurrentNpcListPtr)[i];
-        if (npc != NULL) {
+        if (npc != nullptr) {
             if (npc->flags && !(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
                 if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE)) {
                     if (!(npc->flags & NPC_FLAG_PARTNER)) {
@@ -1362,7 +1362,7 @@ void npc_render_without_adjusted_palettes(Npc* npc, s32 arg1, Matrix4f mtx) {
         } else {
             mask = 0;
         }
-        spr_draw_npc_sprite(npc->spriteInstanceID | mask, arg1, alpha, NULL, mtx);
+        spr_draw_npc_sprite(npc->spriteInstanceID | mask, arg1, alpha, nullptr, mtx);
     } else {
         spr_draw_player_sprite(PLAYER_SPRITE_AUX1 | DRAW_SPRITE_OVERRIDE_YAW, arg1, 0, 0, mtx);
     }
@@ -1385,7 +1385,7 @@ s32 npc_render_with_watt_idle_palettes(Npc* npc, s32 arg1, Matrix4f mtx) {
         for (i = 0; i < npc->originalPalettesCount; i++) {
             dst = npc->copiedPalettes[i];
             src = npc->originalPalettesList[i];
-            if (src != NULL) {
+            if (src != nullptr) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *dst++ = *src++;
                 }
@@ -1415,7 +1415,7 @@ s32 npc_render_with_watt_idle_palettes(Npc* npc, s32 arg1, Matrix4f mtx) {
             for (i = 0; i < npc->spriteColorVariations; i++) {
                 dst = npc->copiedPalettes[i];
                 src = npc->originalPalettesList[i];
-                if (src != NULL) {
+                if (src != nullptr) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *dst++ = *src++;
                     }
@@ -1427,7 +1427,7 @@ s32 npc_render_with_watt_idle_palettes(Npc* npc, s32 arg1, Matrix4f mtx) {
                 // use watt's Brightest palettes
                 dst = npc->copiedPalettes[i];
                 src = npc->originalPalettesList[npc->spriteColorVariations * SPR_PAL_WorldWatt_Brightest + i];
-                if (src != NULL) {
+                if (src != nullptr) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *dst++ = *src++;
                     }
@@ -1439,7 +1439,7 @@ s32 npc_render_with_watt_idle_palettes(Npc* npc, s32 arg1, Matrix4f mtx) {
                 // use watt's Brighter palettes
                 dst = npc->copiedPalettes[i];
                 src = npc->originalPalettesList[npc->spriteColorVariations * SPR_PAL_WorldWatt_Brighter + i];
-                if (src != NULL) {
+                if (src != nullptr) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *dst++ = *src++;
                     }
@@ -1503,7 +1503,7 @@ s32 npc_render_with_single_pal_blending(Npc* npc, s32 yaw, b32 hasDifferentInter
             color1 = npc->copiedPalettes[i];
             color2 = npc->originalPalettesList[i];
             npc->adjustedPalettes[i] = color1;
-            if (color2 != NULL) {
+            if (color2 != nullptr) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *color1++ = *color2++;
                 }
@@ -1639,7 +1639,7 @@ s32 npc_render_with_double_pal_blending(Npc* npc, s32 yaw, Matrix4f mtx) {
             color1 = npc->copiedPalettes[i];
             color2 = npc->originalPalettesList[i];
             npc->adjustedPalettes[i] = color1;
-            if (color2 != NULL) {
+            if (color2 != nullptr) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *color1++ = *color2++;
                 }
@@ -2003,7 +2003,7 @@ void npc__reset_current_decoration(Npc* npc, s32 idx) {
 }
 
 Npc* npc_find_closest(f32 x, f32 y, f32 z, f32 radius) {
-    Npc* closestNpc = NULL;
+    Npc* closestNpc = nullptr;
     f32 closestDist = radius;
     f32 maxDist = radius;
     s32 i;
@@ -2011,7 +2011,7 @@ Npc* npc_find_closest(f32 x, f32 y, f32 z, f32 radius) {
     for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
         Npc* npc = (*gCurrentNpcListPtr)[i];
 
-        if (npc != NULL && npc->flags != 0 && !(npc->flags & NPC_FLAG_PARTNER)) {
+        if (npc != nullptr && npc->flags != 0 && !(npc->flags & NPC_FLAG_PARTNER)) {
             if (!(npc->flags & (NPC_FLAG_SUSPENDED | NPC_FLAG_INACTIVE))) {
                 f32 distance = fabsf(dist2D(npc->pos.x, npc->pos.z, x, z));
 
@@ -2029,7 +2029,7 @@ Npc* npc_find_closest(f32 x, f32 y, f32 z, f32 radius) {
 }
 
 Npc* npc_find_closest_simple(f32 x, f32 y, f32 z, f32 radius) {
-    Npc* closestNpc = NULL;
+    Npc* closestNpc = nullptr;
     f32 closestDist = radius;
     f32 maxDist = radius;
     s32 i;
@@ -2037,7 +2037,7 @@ Npc* npc_find_closest_simple(f32 x, f32 y, f32 z, f32 radius) {
     for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
         Npc* npc = (*gCurrentNpcListPtr)[i];
 
-        if (npc != NULL && npc->flags != 0 && (npc->flags & NPC_FLAG_PARTNER)) {
+        if (npc != nullptr && npc->flags != 0 && (npc->flags & NPC_FLAG_PARTNER)) {
             if (!(npc->flags & (NPC_FLAG_SUSPENDED | NPC_FLAG_INACTIVE))) {
                 f32 distance = fabsf(dist2D(npc->pos.x, npc->pos.z, x, z));
 
@@ -2066,7 +2066,7 @@ s32 npc_find_standing_on_entity(s32 entityIndex) {
     for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
         npc = (*gCurrentNpcListPtr)[i];
 
-        if (npc == NULL) {
+        if (npc == nullptr) {
             continue;
         }
         if (npc->flags == 0) {
@@ -2466,7 +2466,7 @@ void init_encounter_status(void) {
 
     func_80045AC0();
     gEncounterState = ENCOUNTER_STATE_NONE;
-    create_worker_scene(NULL, npc_render_worker_do_nothing);
+    create_worker_scene(nullptr, npc_render_worker_do_nothing);
 }
 
 void clear_encounter_status(void) {
@@ -2505,7 +2505,7 @@ void clear_encounter_status(void) {
 
     func_80045AC0();
     gEncounterState = ENCOUNTER_STATE_NONE;
-    create_worker_scene(NULL, npc_render_worker_do_nothing);
+    create_worker_scene(nullptr, npc_render_worker_do_nothing);
 }
 
 void func_8003E50C(void) {
@@ -2599,7 +2599,7 @@ void make_npcs(s32 flags, s32 mapID, s32* npcGroupList) {
         }
     }
 
-    if (npcGroupList != NULL) {
+    if (npcGroupList != nullptr) {
         gEncounterState = ENCOUNTER_STATE_CREATE;
         EncounterStateChanged = TRUE;
         gEncounterSubState = ENCOUNTER_SUBSTATE_CREATE_INIT;
@@ -2612,9 +2612,9 @@ s32 kill_encounter(Enemy* enemy) {
 
     for (i = 0; i < encounter->count; i++) {
         Enemy* currentEnemy = encounter->enemy[i];
-        if (currentEnemy != NULL) {
+        if (currentEnemy != nullptr) {
             kill_enemy(currentEnemy);
-            encounter->enemy[i] = NULL;
+            encounter->enemy[i] = nullptr;
         }
     }
 }
@@ -2632,40 +2632,40 @@ void kill_enemy(Enemy* enemy) {
         }
     }
 
-    if (enemy->initScript != NULL) {
+    if (enemy->initScript != nullptr) {
         kill_script_by_ID(enemy->initScriptID);
     }
-    if (enemy->interactScript != NULL) {
+    if (enemy->interactScript != nullptr) {
         kill_script_by_ID(enemy->interactScriptID);
     }
-    if (enemy->aiScript != NULL) {
+    if (enemy->aiScript != nullptr) {
         kill_script_by_ID(enemy->aiScriptID);
     }
-    if (enemy->hitScript != NULL) {
+    if (enemy->hitScript != nullptr) {
         kill_script_by_ID(enemy->hitScriptID);
     }
-    if (enemy->auxScript != NULL) {
+    if (enemy->auxScript != nullptr) {
         kill_script_by_ID(enemy->auxScriptID);
     }
-    if (enemy->defeatScript != NULL) {
+    if (enemy->defeatScript != nullptr) {
         kill_script_by_ID(enemy->defeatScriptID);
     }
 
-    enemy->interactBytecode = NULL;
-    enemy->aiBytecode = NULL;
-    enemy->hitBytecode = NULL;
-    enemy->auxBytecode = NULL;
-    enemy->defeatBytecode = NULL;
+    enemy->interactBytecode = nullptr;
+    enemy->aiBytecode = nullptr;
+    enemy->hitBytecode = nullptr;
+    enemy->auxBytecode = nullptr;
+    enemy->defeatBytecode = nullptr;
 
     free_npc(get_npc_unsafe(enemy->npcID));
 
-    if (enemy->unk_64 != NULL) {
+    if (enemy->unk_64 != nullptr) {
         heap_free(enemy->unk_64);
     }
 
     for (j = 0; j < ARRAY_COUNT(encounter->enemy); j++) {
         if (encounter->enemy[j] == enemy) {
-            encounter->enemy[j] = NULL;
+            encounter->enemy[j] = nullptr;
         }
     }
 
@@ -2687,7 +2687,7 @@ s32 bind_enemy_ai(Enemy* enemy, EvtScript* aiScriptBytecode) {
     Evt* aiScript;
     s32 id;
 
-    if (enemy->aiScript != NULL) {
+    if (enemy->aiScript != nullptr) {
         kill_script_by_ID(enemy->aiScript->id);
     }
     enemy->aiBytecode = aiScriptBytecode;
@@ -2701,7 +2701,7 @@ s32 bind_enemy_aux(Enemy* enemy, EvtScript* auxScriptBytecode) {
     Evt* auxScript;
     s32 id;
 
-    if (enemy->auxScript != NULL) {
+    if (enemy->auxScript != nullptr) {
         kill_script_by_ID(enemy->auxScript->id);
     }
     enemy->auxBytecode = auxScriptBytecode;
@@ -2715,7 +2715,7 @@ s32 bind_enemy_interact(Enemy* enemy, EvtScript* interactScriptBytecode) {
     Evt* interactScript;
     s32 id;
 
-    if (enemy->interactScript != NULL) {
+    if (enemy->interactScript != nullptr) {
         kill_script_by_ID(enemy->interactScript->id);
     }
     enemy->interactBytecode = interactScriptBytecode;
@@ -2732,10 +2732,10 @@ void bind_npc_ai(s32 npcID, EvtScript* npcAiBytecode) {
 
     for (i = 0; i < currentEncounterStatus->numEncounters; i++) {
         Encounter* currentEncounter = currentEncounterStatus->encounterList[i];
-        if (currentEncounter != NULL) {
+        if (currentEncounter != nullptr) {
             for (j = 0; j < currentEncounter->count; j++) {
                 Enemy* currentEnemy = currentEncounter->enemy[j];
-                if ((currentEnemy != NULL) && (currentEnemy->npcID == npcID)) {
+                if ((currentEnemy != nullptr) && (currentEnemy->npcID == npcID)) {
                     bind_enemy_ai(currentEnemy, npcAiBytecode);
                     break;
                 }
@@ -2751,10 +2751,10 @@ void bind_npc_aux(s32 npcID, EvtScript* npcAuxBytecode) {
 
     for (i = 0; i < currentEncounterStatus->numEncounters; i++) {
         Encounter* currentEncounter = currentEncounterStatus->encounterList[i];
-        if (currentEncounter != NULL) {
+        if (currentEncounter != nullptr) {
             for (j = 0; j < currentEncounter->count; j++) {
                 Enemy* currentEnemy = currentEncounter->enemy[j];
-                if ((currentEnemy != NULL) && (currentEnemy->npcID == npcID)) {
+                if ((currentEnemy != nullptr) && (currentEnemy->npcID == npcID)) {
                     bind_enemy_aux(currentEnemy, npcAuxBytecode);
                     break;
                 }
@@ -2770,10 +2770,10 @@ void bind_npc_interact(s32 npcID, EvtScript* npcInteractBytecode) {
 
     for (i = 0; i < currentEncounterStatus->numEncounters; i++) {
         Encounter* currentEncounter = currentEncounterStatus->encounterList[i];
-        if (currentEncounter != NULL) {
+        if (currentEncounter != nullptr) {
             for (j = 0; j < currentEncounter->count; j++) {
                 Enemy* currentEnemy = currentEncounter->enemy[j];
-                if ((currentEnemy != NULL) && (currentEnemy->npcID == npcID)) {
+                if ((currentEnemy != nullptr) && (currentEnemy->npcID == npcID)) {
                     bind_enemy_interact(currentEnemy, npcInteractBytecode);
                     break;
                 }
@@ -2789,10 +2789,10 @@ Enemy* get_enemy(s32 npcID) {
 
     for (i = 0; i < currentEncounterStatus->numEncounters; i++) {
         Encounter* currentEncounter = currentEncounterStatus->encounterList[i];
-        if (currentEncounter != NULL) {
+        if (currentEncounter != nullptr) {
             for (j = 0; j < currentEncounter->count; j++) {
                 Enemy* currentEnemy = currentEncounter->enemy[j];
-                if ((currentEnemy != NULL) && (currentEnemy->npcID == npcID)) {
+                if ((currentEnemy != nullptr) && (currentEnemy->npcID == npcID)) {
                     return currentEnemy;
                 }
             }
@@ -2809,14 +2809,14 @@ Enemy* get_enemy_safe(s32 npcID) {
     for (i = 0; i < currentEncounterStatus->numEncounters; i++) {
         Encounter* currentEncounter = currentEncounterStatus->encounterList[i];
 
-        if (currentEncounter != NULL) {
+        if (currentEncounter != nullptr) {
             for (j = 0; j < currentEncounter->count; j++) {
                 Enemy* currentEnemy = currentEncounter->enemy[j];
-                if ((currentEnemy != NULL) && (currentEnemy->npcID == npcID)) {
+                if ((currentEnemy != nullptr) && (currentEnemy->npcID == npcID)) {
                     return currentEnemy;
                 }
             }
         }
     }
-    return NULL;
+    return nullptr;
 }

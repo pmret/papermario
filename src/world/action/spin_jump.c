@@ -57,7 +57,7 @@ void action_update_spin_jump(void) {
                     playerStatus->pos.y += playerStatus->gravityIntegrator[0];
                 } else if (collisionStatus->curCeiling & COLLISION_WITH_ENTITY_BIT) {
                     entity = get_entity_by_index(collisionStatus->curCeiling);
-                    if (entity != NULL) {
+                    if (entity != nullptr) {
                         playerStatus->pos.y = entity->pos.y - (playerStatus->colliderHeight * 0.5);
                     }
                 }

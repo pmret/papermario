@@ -3,7 +3,7 @@
 #include "common/foliage.inc.c"
 
 API_CALLABLE(N(func_8024173C_8CF7AC)) {
-    if (get_enemy_safe(NPC_06) == NULL) {
+    if (get_enemy_safe(NPC_06) == nullptr) {
         script->varTable[0] = FALSE;
     } else {
         script->varTable[0] = TRUE;

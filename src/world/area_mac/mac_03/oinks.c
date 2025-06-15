@@ -30,14 +30,14 @@ API_CALLABLE(N(GetRollingCapsulePosition)) {
 
 API_CALLABLE(N(LoadLilOinks)) {
     s32 varBase = GB_MAC03_LilOink_00;
-    s32 numPigs = evt_get_variable(NULL, GB_MAC03_LilOinkCount);
+    s32 numPigs = evt_get_variable(nullptr, GB_MAC03_LilOinkCount);
     EffectInstance* effect = fx_lil_oink(0, 0.0f, 0.0f, 0.0f, 0.0f, 0);
     s32 i;
 
     evt_set_variable(script, MV_LilOinkEffect, (s32) effect);
 
     for (i = 0; i < numPigs; i++) {
-        effect->data.lilOink->type[i] = evt_get_variable(NULL, varBase + i);
+        effect->data.lilOink->type[i] = evt_get_variable(nullptr, varBase + i);
         effect->data.lilOink->x[i] = 300 + (i * 30);
         effect->data.lilOink->y[i] = 20.0f;
         effect->data.lilOink->z[i] = -180.0f;

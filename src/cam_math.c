@@ -10,12 +10,12 @@ CameraControlSettings* test_ray_zone(f32 posX, f32 posY, f32 posZ, Collider** zo
     hitDepth = 32767.0f;
     zoneID = test_ray_zones(posX, posY, posZ, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
     if (zoneID >= 0) {
-        if (zone != NULL) {
+        if (zone != nullptr) {
             *zone = &gZoneCollisionData.colliderList[zoneID];
         }
         return gZoneCollisionData.colliderList[zoneID].camSettings;
     } else {
-        return NULL;
+        return nullptr;
     }
 }
 
@@ -222,7 +222,7 @@ s32 func_800328A4(CameraControlSettings* camSettings, f32 Px, f32 Pz) {
     f32 product1, product2;
     f32 delta, dot1x, dot1z, dot2x, dot2z;
 
-    if (camSettings == NULL) {
+    if (camSettings == nullptr) {
         return 0;
     }
     if (camSettings->type != CAM_CONTROL_CONSTAIN_BETWEEN_POINTS) {
@@ -259,7 +259,7 @@ void update_camera_lead_amount(Camera* camera, f32 candidateLeadAmount) {
     s32 flags = camera->flags & CAMERA_FLAG_SUPRESS_LEADING;
     s32 ignoreStickInput = flags != 0;
 
-    if (camera->curSettings != NULL && camera->curSettings->type == CAM_CONTROL_FIXED_POS_AND_ORIENTATION) {
+    if (camera->curSettings != nullptr && camera->curSettings->type == CAM_CONTROL_FIXED_POS_AND_ORIENTATION) {
         ignoreStickInput = TRUE;
     }
 
@@ -383,10 +383,10 @@ void apply_constraints_to_lead_amount(Camera* camera) {
     newPosX = camera->targetPos.x + leadAmount * cos_rad(rotationRad);
     newPosZ = camera->targetPos.z + leadAmount * sin_rad(rotationRad);
     newPosY = camera->targetPos.y + 10.0f;
-    settings3 = settings = test_ray_zone(camera->targetPos.x, newPosY, camera->targetPos.z, NULL);
+    settings3 = settings = test_ray_zone(camera->targetPos.x, newPosY, camera->targetPos.z, nullptr);
 
     s2 = 0;
-    if (settings != NULL) {
+    if (settings != nullptr) {
         if (settings->type == CAM_CONTROL_CONSTRAIN_TO_LINE
             || settings->type == CAM_CONTROL_LOOK_AT_POINT_CONSTAIN_TO_LINE
             || (s2 = func_800328A4(settings, camera->targetPos.x, camera->targetPos.z)) != 0
@@ -407,11 +407,11 @@ void apply_constraints_to_lead_amount(Camera* camera) {
             } else {
                 CameraControlSettings* leadSettings = camera->prevLeadSettings;
 
-                if (leadSettings == NULL
+                if (leadSettings == nullptr
                     || !(leadSettings->type == CAM_CONTROL_CONSTRAIN_TO_LINE
                         || leadSettings->type == CAM_CONTROL_LOOK_AT_POINT_CONSTAIN_TO_LINE
                         || func_800328A4(settings, camera->prevLeadPosX, camera->prevLeadPosZ) != 0)) {
-                    if (leadSettings != NULL && s2 != 0) {
+                    if (leadSettings != nullptr && s2 != 0) {
                         camera->leadConstrainDir = s2;
                     } else {
                         f24 = cosYaw = camera->targetPos.x - camera->prevLeadPosX;
@@ -443,7 +443,7 @@ void apply_constraints_to_lead_amount(Camera* camera) {
     newPosZ = camera->targetPos.z + leadAmount * sin_rad(rotationRad);
     newPosY = camera->targetPos.y + 10.0f;
     settings = test_ray_zone(newPosX, newPosY, newPosZ, &zone);
-    if (settings != NULL) {
+    if (settings != nullptr) {
         if (settings->type == CAM_CONTROL_CONSTRAIN_TO_LINE
             || settings->type == CAM_CONTROL_LOOK_AT_POINT_CONSTAIN_TO_LINE
             || func_800328A4(camera->prevLeadSettings, newPosX, newPosZ) != 0
@@ -452,7 +452,7 @@ void apply_constraints_to_lead_amount(Camera* camera) {
             minDistSq = SQ(1000.0f);
 
             // clamp lead amount to the points when using CAM_CONTROL_CONSTAIN_BETWEEN_POINTS
-            if (camera->prevLeadSettings != NULL && camera->prevLeadSettings->type == CAM_CONTROL_CONSTAIN_BETWEEN_POINTS) {
+            if (camera->prevLeadSettings != nullptr && camera->prevLeadSettings->type == CAM_CONTROL_CONSTAIN_BETWEEN_POINTS) {
                 settings2 = camera->prevLeadSettings;
                 constrainToZoneTriangles = FALSE;
 

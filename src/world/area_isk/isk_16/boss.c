@@ -7,7 +7,7 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     Call(DisablePlayerInput, TRUE)
     Call(DisablePartnerAI, 0)
     Call(N(SetModelTintMode), APPLY_TINT_MODELS, -1, ENV_TINT_SHROUD)
-    Call(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_SHROUD)
+    Call(N(SetModelTintMode), APPLY_TINT_BG, nullptr, ENV_TINT_SHROUD)
     Call(N(SetModelTintParams), ENV_TINT_SHROUD, 0, 0, 0, 255, 0, 0, 0, 0, 0)
     Call(UseSettingsFrom, CAM_DEFAULT, 410, -910, 410)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))

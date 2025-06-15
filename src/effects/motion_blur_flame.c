@@ -41,13 +41,13 @@ EffectInstance* motion_blur_flame_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f
     bp.update = motion_blur_flame_update;
     bp.renderScene = motion_blur_flame_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_MOTION_BLUR_FLAME;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.motionBlurFlame = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.motionBlurFlame != NULL);
+    ASSERT(effect->data.motionBlurFlame != nullptr);
 
     data->unk_00 = arg0;
     if (arg5 < 0) {

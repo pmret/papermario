@@ -5,7 +5,7 @@
 #define NAME_SUFFIX
 
 API_CALLABLE(N(IsJungleFuzzyAlive)) {
-    if (get_enemy_safe(NPC_JungleFuzzy) == NULL) {
+    if (get_enemy_safe(NPC_JungleFuzzy) == nullptr) {
         script->varTable[0] = FALSE;
     } else {
         script->varTable[0] = TRUE;

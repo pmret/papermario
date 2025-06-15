@@ -207,7 +207,7 @@ void clear_printers(void) {
         gMessageMsgVars[i][0] = 0;
     }
 
-    D_80151338 = NULL;
+    D_80151338 = nullptr;
     gMsgGlobalWaveCounter = 0;
     load_font(0);
 }
@@ -544,21 +544,21 @@ s32 _update_message(MessagePrintState* printer) {
     if (printer->stateFlags & MSG_STATE_FLAG_1) {
         printer->windowState = MSG_WINDOW_STATE_DONE;
         printer->stateFlags = 0;
-        if (printer->letterBackgroundImg != NULL) {
+        if (printer->letterBackgroundImg != nullptr) {
             general_heap_free(printer->letterBackgroundImg);
         }
-        if (printer->letterBackgroundPal != NULL) {
+        if (printer->letterBackgroundPal != nullptr) {
             general_heap_free(printer->letterBackgroundPal);
         }
-        if (printer->letterContentImg != NULL) {
+        if (printer->letterContentImg != nullptr) {
             general_heap_free(printer->letterContentImg);
         }
-        if (printer->letterContentPal != NULL) {
+        if (printer->letterContentPal != nullptr) {
             general_heap_free(printer->letterContentPal);
         }
-        if (printer->closedWritebackBool != NULL) {
+        if (printer->closedWritebackBool != nullptr) {
             *printer->closedWritebackBool = TRUE;
-            printer->closedWritebackBool = NULL;
+            printer->closedWritebackBool = nullptr;
         }
     }
 
@@ -844,7 +844,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                 *printBuf++ = MSG_CHAR_PRINT_END;
                 if (printer->stateFlags & MSG_STATE_FLAG_800) {
                     if (printer->stateFlags & MSG_STATE_FLAG_1000) {
-                        if (printer->closedWritebackBool != NULL) {
+                        if (printer->closedWritebackBool != nullptr) {
                             *printer->closedWritebackBool = TRUE;
                         }
                     }
@@ -1315,7 +1315,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->printDelayTime = 1;
     printer->charsPerChunk = 1;
     printer->windowScrollRate = (s32)(6 / DT);
-    printer->srcBuffer = NULL;
+    printer->srcBuffer = nullptr;
     printer->msgID = 0;
     printer->curPrintDelay = 0;
     printer->windowOffsetPos.x = 0;
@@ -1336,7 +1336,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->windowState = MSG_WINDOW_STATE_DONE;
     printer->stateFlags = 0;
     printer->delayFlags = 0;
-    printer->closedWritebackBool = NULL;
+    printer->closedWritebackBool = nullptr;
     printer->printBufferPos = 0;
     printer->srcBufferPos = 0;
     printer->font = 0;
@@ -1375,10 +1375,10 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->varImgFinalAlpha = 255;
     printer->varImageDisplayState = 0;
     printer->varImageFadeTimer = 0;
-    printer->letterBackgroundImg = NULL;
-    printer->letterBackgroundPal = NULL;
-    printer->letterContentImg = NULL;
-    printer->letterContentPal = NULL;
+    printer->letterBackgroundImg = nullptr;
+    printer->letterBackgroundPal = nullptr;
+    printer->letterContentImg = nullptr;
+    printer->letterContentPal = nullptr;
     printer->sizeScale = 1.0f;
 }
 
@@ -1443,7 +1443,7 @@ MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWritebac
     s32 i;
 
     if (msgID == MSG_NONE) {
-        return NULL;
+        return nullptr;
     }
 
     srcBuffer = (s8*) msgID;
@@ -1460,7 +1460,7 @@ MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWritebac
             printer->srcBuffer = srcBuffer;
             printer->msgID = msgID;
             printer->stateFlags |= MSG_STATE_FLAG_2;
-            get_msg_properties(msgID, &height, &width, &maxLineChars, &numLines, &maxLinesPerPage, NULL, 0);
+            get_msg_properties(msgID, &height, &width, &maxLineChars, &numLines, &maxLinesPerPage, nullptr, 0);
             printer->msgHeight = height;
             printer->msgWidth = width;
             printer->maxLineChars = maxLineChars;
@@ -1468,14 +1468,14 @@ MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWritebac
             printer->maxLinesPerPage = maxLinesPerPage;
             printer->closedWritebackBool = donePrintingWriteback;
 
-            if (donePrintingWriteback != NULL) {
+            if (donePrintingWriteback != nullptr) {
                 *donePrintingWriteback = FALSE;
             }
             return printer;
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 s32 msg_printer_load_msg(s32 msgID, MessagePrintState* printer) {
@@ -1525,7 +1525,7 @@ void set_message_images(MessageImageData* images) {
 }
 
 void set_message_text_var(s32 msgID, s32 index) {
-    u8* mallocSpace = NULL;
+    u8* mallocSpace = nullptr;
     s32 i;
     u8* msgVars;
 
@@ -1549,7 +1549,7 @@ void set_message_text_var(s32 msgID, s32 index) {
         }
     }
 
-    if (mallocSpace != NULL) {
+    if (mallocSpace != nullptr) {
         general_heap_free(mallocSpace);
     }
 }
@@ -1604,7 +1604,7 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgS
     } else if (flags != 0) {
         u8* charWidthTable = MsgCharsets[charset]->rasters[variation].charWidthTable;
 
-        if (charWidthTable != NULL
+        if (charWidthTable != nullptr
                 && character != MSG_CHAR_READ_SPACE
                 && character != MSG_CHAR_READ_FULL_SPACE
                 && character != MSG_CHAR_READ_HALF_SPACE) {
@@ -1647,7 +1647,7 @@ s32 msg_get_draw_char_width(s32 character, s32 charset, s32 variation, f32 msgSc
     } else if (flags & MSG_PRINT_FLAG_100) {
         u8* charWidthTable = MsgCharsets[charset]->rasters[variation].charWidthTable;
 
-        if (charWidthTable != NULL
+        if (charWidthTable != nullptr
                 && character != MSG_CHAR_PRINT_SPACE
                 && character != MSG_CHAR_PRINT_FULL_SPACE
                 && character != MSG_CHAR_PRINT_HALF_SPACE) {
@@ -1712,7 +1712,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
     pageCount = 0;
     varIndex = 0;
     font = 0;
-    buffer = NULL;
+    buffer = nullptr;
     maxLineWidth = 0;
     maxCharsPerLine = 0;
     maxLinesOnPage = 0;
@@ -1932,7 +1932,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
         }
     } while (!stop);
 
-    if (buffer != NULL) {
+    if (buffer != nullptr) {
         general_heap_free(buffer);
     }
 
@@ -1955,22 +1955,22 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
         }
     }
 
-    if (width != NULL) {
+    if (width != nullptr) {
         *width = maxLineWidth;
     }
-    if (height != NULL) {
+    if (height != nullptr) {
         *height = lineCount * MsgCharsets[font]->newLineY;
     }
-    if (maxLineChars != NULL) {
+    if (maxLineChars != nullptr) {
         *maxLineChars = maxCharsPerLine;
     }
-    if (numLines != NULL) {
+    if (numLines != nullptr) {
         *numLines = lineCount;
     }
-    if (maxLinesPerPage != NULL) {
+    if (maxLinesPerPage != nullptr) {
         *maxLinesPerPage = maxLinesOnPage;
     }
-    if (numSpaces != NULL) {
+    if (numSpaces != nullptr) {
         *numSpaces = spaceCount;
     }
 }
@@ -1978,7 +1978,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
 s32 get_msg_width(s32 msgID, u16 charset) {
     s32 width;
 
-    get_msg_properties(msgID, NULL, &width, NULL, NULL, NULL, NULL, charset);
+    get_msg_properties(msgID, nullptr, &width, nullptr, nullptr, nullptr, nullptr, charset);
     return width;
 }
 
@@ -1986,7 +1986,7 @@ s32 get_msg_width(s32 msgID, u16 charset) {
 s32 get_msg_lines(s32 msgID) {
     s32 numLines;
 
-    get_msg_properties(msgID, NULL, NULL, NULL, &numLines, NULL, NULL, 0);
+    get_msg_properties(msgID, nullptr, nullptr, nullptr, &numLines, nullptr, nullptr, 0);
     return numLines;
 }
 #endif
@@ -2002,7 +2002,7 @@ void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style)
 
     flags = 0;
     bufferPos = 0;
-    mallocSpace = NULL;
+    mallocSpace = nullptr;
     charset = 0;
 
     if (msgID != 0) {
@@ -2059,7 +2059,7 @@ void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style)
         msg_copy_to_print_buffer(printer, 10000, 1);
         appendGfx_message(printer, (s16)posX, (s16)posY, 0, 0, flags, opacity & 0xFF);
 
-        if (mallocSpace != NULL) {
+        if (mallocSpace != nullptr) {
             general_heap_free(mallocSpace);
         }
     }

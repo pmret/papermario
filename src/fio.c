@@ -60,22 +60,22 @@ b32 check_fetch_save_integrity(void) {
 #endif
 
 s32 get_spirits_rescued(void) {
-    s32 storyProgress = evt_get_variable(NULL, GB_StoryProgress);
+    s32 storyProgress = evt_get_variable(nullptr, GB_StoryProgress);
     s32 ret = 7;
 
-    if (storyProgress < evt_get_variable(NULL, STORY_CH1_STAR_SPIRIT_RESCUED)) {
+    if (storyProgress < evt_get_variable(nullptr, STORY_CH1_STAR_SPIRIT_RESCUED)) {
         ret = 0;
-    } else if (storyProgress < evt_get_variable(NULL, STORY_CH2_STAR_SPIRIT_RESCUED)) {
+    } else if (storyProgress < evt_get_variable(nullptr, STORY_CH2_STAR_SPIRIT_RESCUED)) {
         ret = 1;
-    } else if (storyProgress < evt_get_variable(NULL, STORY_CH3_STAR_SPIRIT_RESCUED)) {
+    } else if (storyProgress < evt_get_variable(nullptr, STORY_CH3_STAR_SPIRIT_RESCUED)) {
         ret = 2;
-    } else if (storyProgress < evt_get_variable(NULL, STORY_CH4_STAR_SPIRIT_RESCUED)) {
+    } else if (storyProgress < evt_get_variable(nullptr, STORY_CH4_STAR_SPIRIT_RESCUED)) {
         ret = 3;
-    } else if (storyProgress < evt_get_variable(NULL, STORY_CH5_OPENED_ESCAPE_ROUTE)) {
+    } else if (storyProgress < evt_get_variable(nullptr, STORY_CH5_OPENED_ESCAPE_ROUTE)) {
         ret = 4;
-    } else if (storyProgress < evt_get_variable(NULL, STORY_CH6_STAR_SPIRIT_RESCUED)) {
+    } else if (storyProgress < evt_get_variable(nullptr, STORY_CH6_STAR_SPIRIT_RESCUED)) {
         ret = 5;
-    } else if (storyProgress < evt_get_variable(NULL, STORY_CH7_STAR_SPIRIT_RESCUED)) {
+    } else if (storyProgress < evt_get_variable(nullptr, STORY_CH7_STAR_SPIRIT_RESCUED)) {
         ret = 6;
     }
 
@@ -441,7 +441,7 @@ b32 fio_read_flash(s32 pageNum, void* readBuffer, u32 numBytes) {
         }
 
         osFlashReadArray(&mb, 0, pageNum * sizeof(SaveGlobals) + i, buf, 1, &mesgQueue);
-        osRecvMesg(&mesgQueue, NULL, 1);
+        osRecvMesg(&mesgQueue, nullptr, 1);
         i++;
         numBytes -= amt;
         buf += amt;
@@ -469,7 +469,7 @@ b32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes) {
 
         osFlashWriteBuffer(&mb, 0, readBuffer, &mesgQueue);
         osFlashWriteArray((pageNum * sizeof(SaveGlobals)) + i);
-        osRecvMesg(&mesgQueue, NULL, 1);
+        osRecvMesg(&mesgQueue, nullptr, 1);
         i++;
         numBytes -= amt;
         readBuffer += amt;

@@ -404,7 +404,7 @@ API_CALLABLE(PlayerFaceNpc) {
             npc = (Npc*)npcID;
         } else {
             npc = get_npc_safe(npcID);
-            if (npc == NULL) {
+            if (npc == nullptr) {
                 return ApiStatus_DONE2;
             }
         }

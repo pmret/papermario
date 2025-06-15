@@ -140,7 +140,7 @@ API_CALLABLE(N(ProjectileAI_Main)) {
     MobileAISettings* aiSettings;
     u32 vt0;
 
-    if (get_enemy_safe(enemy->npcID) != NULL) {
+    if (get_enemy_safe(enemy->npcID) != nullptr) {
         if (enemy->varTable[0] != 5) {
             aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
             npc = get_npc_unsafe(enemy->npcID);
@@ -282,7 +282,7 @@ API_CALLABLE(N(ProjectileAI_Reflect)) {
         script->functionTemp[0] = 0;
     }
 
-    if (get_enemy_safe(enemy->npcID) == NULL) {
+    if (get_enemy_safe(enemy->npcID) == nullptr) {
         evt_set_variable(script, LVar0, 0);
         return ApiStatus_DONE2;
     }
@@ -290,7 +290,7 @@ API_CALLABLE(N(ProjectileAI_Reflect)) {
         evt_set_variable(script, LVar0, 0);
         return ApiStatus_DONE2;
     }
-    if (get_enemy_safe(enemy->npcID) == NULL) {
+    if (get_enemy_safe(enemy->npcID) == nullptr) {
         evt_set_variable(script, LVar0, 0);
         return ApiStatus_DONE2;
     }

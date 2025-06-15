@@ -13,7 +13,7 @@ API_CALLABLE(N(SetNpcVarSafe)) {
     }
 
     enemy = get_enemy_safe(npcID);
-    if (enemy != NULL) {
+    if (enemy != nullptr) {
         enemy->varTable[varIdx] = val;
     }
 

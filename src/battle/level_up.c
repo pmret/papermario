@@ -742,7 +742,7 @@ void btl_state_update_celebration(void) {
                     if (EndBattleRewardStep == 0) {
                         EndBattleRewardsDone = TRUE;
                         player->flags &= ~(ACTOR_FLAG_USING_IDLE_ANIM | ACTOR_FLAG_SHOW_STATUS_ICONS);
-                        if (partner != NULL) {
+                        if (partner != nullptr) {
                             partner->flags &= ~(ACTOR_FLAG_USING_IDLE_ANIM | ACTOR_FLAG_SHOW_STATUS_ICONS);
                         }
                         battleStatus->battlePhase = PHASE_CELEBRATE;
@@ -750,7 +750,7 @@ void btl_state_update_celebration(void) {
                         player->takeTurnScript = script;
                         player->takeTurnScriptID = script->id;
                         script->owner1.actorID = ACTOR_PLAYER;
-                        if (partner != NULL) {
+                        if (partner != nullptr) {
                             script = start_script(partner->takeTurnSource, EVT_PRIORITY_A, 0);
                             partner->takeTurnScript = script;
                             partner->takeTurnScriptID = script->id;
@@ -1160,11 +1160,11 @@ void btl_state_update_celebration(void) {
 #if VERSION_JP
                 x = 32;
                 y = 186;
-                set_window_properties(WIN_BTL_DESC_BOX, 32, 186, 242, 32, WINDOW_PRIORITY_20, draw_content_level_up_textbox, NULL, -1);
+                set_window_properties(WIN_BTL_DESC_BOX, 32, 186, 242, 32, WINDOW_PRIORITY_20, draw_content_level_up_textbox, nullptr, -1);
 #else
                 x = 20;
                 y = 186;
-                set_window_properties(WIN_BTL_DESC_BOX, 20, 186, 280, 32, WINDOW_PRIORITY_20, draw_content_level_up_textbox, NULL, -1);
+                set_window_properties(WIN_BTL_DESC_BOX, 20, 186, 280, 32, WINDOW_PRIORITY_20, draw_content_level_up_textbox, nullptr, -1);
 #endif
                 set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_SHOW);
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CHOOSE;
@@ -1246,7 +1246,7 @@ void btl_state_update_celebration(void) {
 
             set_actor_anim(0, 0, ANIM_MarioB1_AdjustCap);
 
-            if (partner != NULL) {
+            if (partner != nullptr) {
                 script = start_script(partner->takeTurnSource, EVT_PRIORITY_A, 0);
                 partner->takeTurnScript = script;
                 partner->takeTurnScriptID = script->id;
@@ -1319,12 +1319,12 @@ void btl_state_update_celebration(void) {
             x = 160 - (width / 2);
             y = 80;
             set_window_properties(WIN_BTL_POPUP, x, y, width, D_PAL_80284614[numLines],
-                WINDOW_PRIORITY_10, draw_content_cant_increase_popup, NULL, -1);
+                WINDOW_PRIORITY_10, draw_content_cant_increase_popup, nullptr, -1);
 #else
             width = get_msg_width(MSG_Menus_CantIncrease, 0) + 31;
             x = 160 - (width / 2);
             y = 80;
-            set_window_properties(WIN_BTL_POPUP, x, y, width, 28, WINDOW_PRIORITY_10, draw_content_cant_increase_popup, NULL, -1);
+            set_window_properties(WIN_BTL_POPUP, x, y, width, 28, WINDOW_PRIORITY_10, draw_content_cant_increase_popup, nullptr, -1);
 #endif
             set_window_update(WIN_BTL_POPUP, WINDOW_UPDATE_SHOW);
             CelebrateSubstateTime = 60;
@@ -1355,7 +1355,7 @@ void btl_state_update_celebration(void) {
                 bFadeToBlackAmt = 0;
                 btl_cam_set_params(TRUE, 270, 100, 8, 0, 0x2400, 0, 100);
                 set_actor_anim(0, 0, ANIM_MarioB1_AdjustCap);
-                if (partner != NULL) {
+                if (partner != nullptr) {
                     set_actor_anim(ACTOR_PARTNER, 0, D_80284154[playerData->curPartner]);
                 }
                 CelebrateSubstateTime = 6;
@@ -1371,12 +1371,12 @@ void btl_state_update_celebration(void) {
                 }
             } else {
                 player->yaw = 0.0f;
-                if (partner != NULL) {
+                if (partner != nullptr) {
                     partner->yaw = 0.0f;
                 }
 
                 player->curPos.x += 4.0f;
-                if (partner != NULL) {
+                if (partner != nullptr) {
                     partner->curPos.x += 4.0f;
                 }
             }
@@ -1393,7 +1393,7 @@ void btl_state_update_celebration(void) {
             if (does_script_exist(player->takeTurnScriptID)) {
                 kill_script_by_ID(player->takeTurnScriptID);
             }
-            if (partner != NULL && does_script_exist(partner->takeTurnScriptID)) {
+            if (partner != nullptr && does_script_exist(partner->takeTurnScriptID)) {
                 kill_script_by_ID(partner->takeTurnScriptID);
             }
             btl_set_state(BATTLE_STATE_END_BATTLE);
@@ -1444,14 +1444,14 @@ void btl_draw_upgrade_windows(s32 phase) {
     }
 
     hud_element_get_render_pos(LevelUpStatEmblemIDs[0], &x, &y);
-    draw_box(0, WINDOW_STYLE_15, x - 22, y - 22, 0, 44, 44, 255, d1, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
-             SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+    draw_box(0, WINDOW_STYLE_15, x - 22, y - 22, 0, 44, 44, 255, d1, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, nullptr, nullptr, nullptr,
+             SCREEN_WIDTH, SCREEN_HEIGHT, nullptr);
     hud_element_get_render_pos(LevelUpStatEmblemIDs[3], &x, &y);
-    draw_box(0, WINDOW_STYLE_15, x - 22, y - 22, 0, 44, 44, 255, d2, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
-             SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+    draw_box(0, WINDOW_STYLE_15, x - 22, y - 22, 0, 44, 44, 255, d2, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, nullptr, nullptr, nullptr,
+             SCREEN_WIDTH, SCREEN_HEIGHT, nullptr);
     hud_element_get_render_pos(LevelUpStatEmblemIDs[2], &x, &y);
-    draw_box(0, WINDOW_STYLE_15, x - 22, y - 22, 0, 44, 44, 255, d3, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
-             SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+    draw_box(0, WINDOW_STYLE_15, x - 22, y - 22, 0, 44, 44, 255, d3, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, nullptr, nullptr, nullptr,
+             SCREEN_WIDTH, SCREEN_HEIGHT, nullptr);
 }
 
 void btl_state_draw_celebration(void) {

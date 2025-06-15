@@ -23,7 +23,7 @@ EffectInstance* debuff_main(s32 type, f32 x, f32 y, f32 z) {
     bp.init = debuff_init;
     bp.update = debuff_update;
     bp.renderScene = debuff_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_DEBUFF;
 
     effect = create_effect_instance(&bp);
@@ -31,7 +31,7 @@ EffectInstance* debuff_main(s32 type, f32 x, f32 y, f32 z) {
 
     effect->data.debuff = data = general_heap_malloc(numParts * sizeof(*data));
 
-    ASSERT(data != NULL);
+    ASSERT(data != nullptr);
 
     mem_clear(data, numParts * sizeof(*data));
 

@@ -296,7 +296,7 @@ void N(build_gfx_floor)(void) {
     guScaleF(sp50, x, y, z);
     guMtxCatF(sp50, sp10, sp10);
     guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
-    mdl_project_tex_coords(MODEL_o152, N(shockwave_gfx), sp10, NULL);
+    mdl_project_tex_coords(MODEL_o152, N(shockwave_gfx), sp10, nullptr);
 
     gDPPipeSync(gMainGfxPos++);
     gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);

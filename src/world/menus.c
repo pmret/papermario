@@ -86,7 +86,7 @@ b32 can_open_world_menu(s32 currentButtons, s32 pressedButtons) {
         && !(gPlayerStatus.flags & PS_FLAG_PAUSE_DISABLED)
         && !(currentButtons & (BUTTON_Z | BUTTON_R))
         && (pressedButtons & (BUTTON_START | BUTTON_C_LEFT | BUTTON_C_RIGHT))
-        && !((gGameStatusPtr->mapShop != NULL) && (gGameStatusPtr->mapShop->flags & SHOP_FLAG_SHOWING_ITEM_INFO))
+        && !((gGameStatusPtr->mapShop != nullptr) && (gGameStatusPtr->mapShop->flags & SHOP_FLAG_SHOWING_ITEM_INFO))
         && !(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_MENUS)
         && !is_picking_up_item()
     ) {
@@ -208,7 +208,7 @@ void check_input_open_menus(void) {
 
     if (gGameStatusPtr->debugScripts != DEBUG_SCRIPTS_NONE
         || (gGameStatusPtr->peachFlags & PEACH_FLAG_IS_PEACH)
-        || evt_get_variable(NULL, GB_StoryProgress) == STORY_INTRO
+        || evt_get_variable(nullptr, GB_StoryProgress) == STORY_INTRO
     ) {
         return;
     }
@@ -227,7 +227,7 @@ void check_input_open_menus(void) {
     partnerActionState = &partnerStatus->partnerActionState;
 
     // prevent opening popup menus during the epilogue
-    if (evt_get_variable(NULL, GB_StoryProgress) >= STORY_EPILOGUE) {
+    if (evt_get_variable(nullptr, GB_StoryProgress) >= STORY_EPILOGUE) {
         currentButtons &= ~(BUTTON_C_LEFT | BUTTON_C_RIGHT);
         pressedButtons &= ~(BUTTON_C_LEFT | BUTTON_C_RIGHT);
     }
@@ -394,7 +394,7 @@ void check_input_status_bar(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 pressedButtons;
 
-    if (evt_get_variable(NULL, GB_StoryProgress) < STORY_EPILOGUE) {
+    if (evt_get_variable(nullptr, GB_StoryProgress) < STORY_EPILOGUE) {
         if (playerStatus->actionState != ACTION_STATE_RIDE) {
             pressedButtons = playerStatus->pressedButtons;
         } else {

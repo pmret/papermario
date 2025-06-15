@@ -148,7 +148,7 @@ API_CALLABLE(N(func_802A1848_71EE98)) {
         SelectableTarget* target = &player->targetData[targetIdx];
         Actor* targetActor = get_actor(target->actorID);
 
-        if (targetActor != NULL) {
+        if (targetActor != nullptr) {
             ActorPart* targetPart = get_actor_part(targetActor, target->partID);
             if ((targetActor->transparentStatus == 0) && !(targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
                 if (targetActor->yaw < 360.0f) {

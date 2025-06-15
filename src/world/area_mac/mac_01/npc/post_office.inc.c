@@ -40,9 +40,9 @@ API_CALLABLE(N(func_80244E90_805710)) {
 
     for (i = 0; i < ARRAY_COUNT(N(PostOfficeLetters)); i++) {
         if (playerData->partners[N(PostOfficeLetters)[i].partnerID].enabled &&
-            evt_get_variable(NULL, GF_MAC01_UnlockedLetter_00 + i))
+            evt_get_variable(nullptr, GF_MAC01_UnlockedLetter_00 + i))
         {
-            if (!evt_get_variable(NULL, GF_MAC01_ReadLetter_00 + i)) {
+            if (!evt_get_variable(nullptr, GF_MAC01_ReadLetter_00 + i)) {
                 var_s2 = 1;
                 break;
             } else {
@@ -60,12 +60,12 @@ s32 func_80244F5C_8057DC(s32 partner) {
 
     for (i = 0; i < ARRAY_COUNT(N(PostOfficeLetters)); i++) {
         if (N(PostOfficeLetters)[i].partnerID == partner &&
-            evt_get_variable(NULL, GF_MAC01_UnlockedLetter_00 + i))
+            evt_get_variable(nullptr, GF_MAC01_UnlockedLetter_00 + i))
         {
             if (ret == 0) {
                 ret = 1;
             }
-            if (!evt_get_variable(NULL, GF_MAC01_ReadLetter_00 + i)) {
+            if (!evt_get_variable(nullptr, GF_MAC01_ReadLetter_00 + i)) {
                 ret = 2;
                 break;
             }
@@ -159,8 +159,8 @@ API_CALLABLE(N(func_8024522C_805AAC)) {
         numEntries = 0;
 
         for (i = 0; i < ARRAY_COUNT(N(PostOfficeLetters)); i++) {
-            isUnlocked = evt_get_variable(NULL, GF_MAC01_UnlockedLetter_00 + i);
-            hasRead = evt_get_variable(NULL, GF_MAC01_ReadLetter_00 + i);
+            isUnlocked = evt_get_variable(nullptr, GF_MAC01_UnlockedLetter_00 + i);
+            hasRead = evt_get_variable(nullptr, GF_MAC01_ReadLetter_00 + i);
             if (isUnlocked && vt10 == N(PostOfficeLetters)[i].partnerID) {
                 scriptPair = &gItemHudScripts[gItemTable[84].hudElemID];
                 menu->userIndex[numEntries] = i;
@@ -208,7 +208,7 @@ API_CALLABLE(N(func_8024522C_805AAC)) {
     letterIdx = menu->userIndex[script->functionTemp[1] - 1];
     script->varTable[1] = letterIdx;
     script->varTable[0] = N(PostOfficeLetters)[letterIdx].letterBodyMessage;
-    evt_set_variable(NULL, GF_MAC01_ReadLetter_00 + letterIdx, 1);
+    evt_set_variable(nullptr, GF_MAC01_ReadLetter_00 + letterIdx, 1);
     return ApiStatus_DONE2;
 }
 

@@ -117,7 +117,7 @@ void render_frame(s32 isSecondPass) {
 
         gCurrentCamID = camID;
 
-        if (camera->fpDoPreRender != NULL) {
+        if (camera->fpDoPreRender != nullptr) {
             camera->fpDoPreRender(camera);
         } else {
             s32 ulx;
@@ -223,7 +223,7 @@ void render_frame(s32 isSecondPass) {
             execute_render_tasks();
         }
 
-        if (camera->fpDoPostRender != NULL) {
+        if (camera->fpDoPostRender != nullptr) {
             camera->fpDoPostRender(camera);
         }
 
@@ -393,8 +393,8 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->targetPos.z = 0;
     camera->unk_98 = 0;
     camera->unk_9C = 0;
-    camera->fpDoPreRender = NULL;
-    camera->fpDoPostRender = NULL;
+    camera->fpDoPreRender = nullptr;
+    camera->fpDoPostRender = nullptr;
     camera->leadAmount = 0.0f;
     camera->targetLeadAmount = 0.0f;
     camera->leadInterpAlpha = 0.0f;
@@ -403,7 +403,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->prevLeadPosX = 0.0f;
     camera->prevLeadPosZ = 0.0f;
     camera->leadConstrainDir = 0;
-    camera->prevLeadSettings = NULL;
+    camera->prevLeadSettings = nullptr;
     camera->panActive = FALSE;
     camera->followPlayer = FALSE;
     camera->unk_C4 = 1000.0f;

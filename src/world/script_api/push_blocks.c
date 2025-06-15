@@ -108,7 +108,7 @@ API_CALLABLE(FinishPushBlockMotion) {
         }
     }
 
-    if (grid->dropCallback != NULL) {
+    if (grid->dropCallback != nullptr) {
         if (grid->dropCallback(block, script)) {
             i = (block->pos.x - grid->centerPos.x) / BLOCK_GRID_SIZE;
             j = (block->pos.z - grid->centerPos.z) / BLOCK_GRID_SIZE;
@@ -276,7 +276,7 @@ API_CALLABLE(IsEventForSourceRunning) {
     for (i = 0; i < MAX_SCRIPTS; i++) {
         Evt* iterScript = get_script_by_index(i);
 
-        if (iterScript != NULL) {
+        if (iterScript != nullptr) {
             if (iterScript->ptrFirstLine == sourceToFind) {
                 foundScript = TRUE;
                 break;
@@ -370,7 +370,7 @@ API_CALLABLE(CreatePushBlockGrid) {
 
     blockGrid->cells = general_heap_malloc(sizeNx*sizeNz);
 
-    if (inputGridData == NULL) {
+    if (inputGridData == nullptr) {
         for (i = 0; i < sizeNx*sizeNz; i++) {
             blockGrid->cells[i] = 0;
         }
@@ -386,7 +386,7 @@ API_CALLABLE(CreatePushBlockGrid) {
     blockGrid->centerPos.x = centerX;
     blockGrid->centerPos.y = centerY;
     blockGrid->centerPos.z = centerZ;
-    blockGrid->dropCallback = NULL;
+    blockGrid->dropCallback = nullptr;
 
     return ApiStatus_DONE2;
 }

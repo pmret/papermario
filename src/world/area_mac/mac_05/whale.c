@@ -229,10 +229,10 @@ EvtScript N(D_802516CC_86383C) = {
 EvtScript N(EVS_SetupWhale) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_karada, TRUE)
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(unkAngleFunc002)), NULL)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(unkAngleFunc002)), nullptr)
     Call(SetModelCustomGfx, MODEL_karada, CUSTOM_GFX_1, -1)
     Call(MakeLocalVertexCopy, VTX_COPY_2, MODEL_onaka, TRUE)
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_2, Ref(N(unkAngleFunc003)), NULL)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_2, Ref(N(unkAngleFunc003)), nullptr)
     Call(SetModelCustomGfx, MODEL_onaka, CUSTOM_GFX_2, -1)
     Thread
         Label(0)

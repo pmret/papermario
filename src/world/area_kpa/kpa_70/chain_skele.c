@@ -79,5 +79,5 @@ StaticAnimatorNode* N(ChainDriveSkeleton)[] = {
     &N(D_80241828_A76098),
     &N(D_802417FC_A7606C),
     &N(D_802417D0_A76040),
-    NULL
+    nullptr
 };

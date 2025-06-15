@@ -142,14 +142,14 @@ void dispatch_event_player(s32 eventType) {
     eventScript = start_script(&EVS_Player_HandleEvent, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
     player->handleEventScript = eventScript;
     player->handleEventScriptID = eventScript->id;
-    eventScript->owner1.actor = NULL;
+    eventScript->owner1.actor = nullptr;
 
-    if (player->takeTurnScript != NULL) {
+    if (player->takeTurnScript != nullptr) {
         kill_script_by_ID(player->takeTurnScriptID);
-        player->takeTurnScript = NULL;
+        player->takeTurnScript = nullptr;
     }
 
-    if (oldOnHitScript != NULL) {
+    if (oldOnHitScript != nullptr) {
         kill_script_by_ID(oldOnHitID);
     }
 }
@@ -168,9 +168,9 @@ void dispatch_event_player_continue_turn(s32 eventType) {
     eventScript = start_script(&EVS_Player_HandleEvent, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
     player->handleEventScript = eventScript;
     player->handleEventScriptID = eventScript->id;
-    eventScript->owner1.actor = NULL;
+    eventScript->owner1.actor = nullptr;
 
-    if (oldOnHitScript != NULL) {
+    if (oldOnHitScript != nullptr) {
         kill_script_by_ID(oldOnHitID);
     }
 }
@@ -189,12 +189,12 @@ HitResult calc_player_test_enemy(void) {
     battleStatus->curTargetPart2 = battleStatus->curTargetPart;
 
     target = get_actor(targetActorID);
-    if (target == NULL) {
+    if (target == nullptr) {
         return HIT_RESULT_HIT;
     }
 
     targetPart = get_actor_part(target, targetPartIdx);
-    ASSERT(targetPart != NULL);
+    ASSERT(targetPart != nullptr);
 
     if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
         return HIT_RESULT_MISS;
@@ -279,13 +279,13 @@ HitResult calc_player_damage_enemy(void) {
     target = get_actor(currentTargetID);
     state = &player->state;
 
-    if (target == NULL) {
+    if (target == nullptr) {
         return HIT_RESULT_HIT;
     }
 
     targetPart = get_actor_part(target, currentTargetPartID);
 
-    ASSERT(targetPart != NULL);
+    ASSERT(targetPart != nullptr);
 
     target->lastDamageTaken = 0;
 

@@ -199,7 +199,7 @@ EntityScript Entity_BellbellPlant_Script = {
     es_SetCallback(entity_BellbellPlant_idle, 0)
     es_ClearFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
     es_PlaySound(SOUND_PLANTS_BELL)
-    es_SetCallback(NULL, 60)
+    es_SetCallback(nullptr, 60)
     es_SetFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
     es_Restart
     es_End
@@ -209,19 +209,19 @@ EntityScript Entity_TrumpetPlant_Script = {
     es_SetCallback(entity_TrumpetPlant_idle, 0)
     es_ClearFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
     es_PlaySound(SOUND_PLANTS_TRUMPET)
-    es_SetCallback(NULL, 15)
+    es_SetCallback(nullptr, 15)
     es_Call(entity_TrumpetPlant_create_effect)
-    es_SetCallback(NULL, 3)
+    es_SetCallback(nullptr, 3)
     es_Call(entity_TrumpetPlant_create_effect)
-    es_SetCallback(NULL, 2)
+    es_SetCallback(nullptr, 2)
     es_Call(entity_TrumpetPlant_spawn_coin)
-    es_SetCallback(NULL, 3)
+    es_SetCallback(nullptr, 3)
     es_Call(entity_TrumpetPlant_create_effect)
-    es_SetCallback(NULL, 2)
+    es_SetCallback(nullptr, 2)
     es_Call(entity_TrumpetPlant_create_effect)
-    es_SetCallback(NULL, 3)
+    es_SetCallback(nullptr, 3)
     es_Call(entity_TrumpetPlant_create_effect)
-    es_SetCallback(NULL, 32)
+    es_SetCallback(nullptr, 32)
     es_SetFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
     es_Restart
     es_End
@@ -231,89 +231,89 @@ EntityScript Entity_Munchlesia_Script = {
     es_Call(func_802BC220_E2EB50)
     es_Label(1)
         es_SetCallback(func_802BC050_E2E980, 0)
-        es_SetCallback(NULL, 80)
+        es_SetCallback(nullptr, 80)
     es_Goto(1)
     es_End
 };
 
 EntityScript Entity_MunchlesiaReset_Script = {
-    es_SetCallback(NULL, 0)
+    es_SetCallback(nullptr, 0)
     es_Call(func_802BC0B8_E2E9E8)
-    es_SetCallback(NULL, 7)
+    es_SetCallback(nullptr, 7)
     es_Call(func_802BC250_E2EB80)
     es_PlaySound(SOUND_MUNCHLESIA_SUCTION)
     es_SetFlags(ENTITY_FLAG_HIDDEN)
-    es_SetCallback(NULL, 3)
+    es_SetCallback(nullptr, 3)
     es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
 EntityScript Entity_MunchlesiaGrab_Script = {
-    es_SetCallback(NULL, 3)
+    es_SetCallback(nullptr, 3)
     es_Call(func_802BC0F0_E2EA20)
     es_SetCallback(func_802BC17C_E2EAAC, 4)
     es_Call(func_802BC274_E2EBA4)
     es_SetFlags(ENTITY_FLAG_HIDDEN)
-    es_SetCallback(NULL, 3)
+    es_SetCallback(nullptr, 3)
     es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
 EntityScript Entity_MunchlesiaEnvelop_Script = {
-    es_SetCallback(NULL, 7)
+    es_SetCallback(nullptr, 7)
     es_Call(func_802BC2B4_E2EBE4)
     es_SetFlags(ENTITY_FLAG_HIDDEN)
-    es_SetCallback(NULL, 3)
+    es_SetCallback(nullptr, 3)
     es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
 EntityScript Entity_MunchlesiaBeginChew_Script = {
-    es_SetCallback(NULL, 8)
+    es_SetCallback(nullptr, 8)
     es_Call(func_802BC308_E2EC38)
     es_SetFlags(ENTITY_FLAG_HIDDEN)
-    es_SetCallback(NULL, 3)
+    es_SetCallback(nullptr, 3)
     es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
 EntityScript Entity_MunchlesiaChewing_Script = {
-    es_SetCallback(NULL, 1)
+    es_SetCallback(nullptr, 1)
     es_SetCallback(func_802BC3E4_E2ED14, 44)
-    es_SetCallback(NULL, 13)
+    es_SetCallback(nullptr, 13)
     es_Call(func_802BC32C_E2EC5C)
     es_SetFlags(ENTITY_FLAG_HIDDEN)
-    es_SetCallback(NULL, 3)
+    es_SetCallback(nullptr, 3)
     es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
 EntityScript Entity_MunchlesiaSpitOut_Script = {
-    es_SetCallback(NULL, 4)
+    es_SetCallback(nullptr, 4)
     es_Call(func_802BC3A0_E2ECD0)
     es_PlaySound(SOUND_MUNCHLESIA_SPIT)
-    es_SetCallback(NULL, 4)
+    es_SetCallback(nullptr, 4)
     es_Call(entity_Munchlesia_create_child_reset1)
     es_SetFlags(ENTITY_FLAG_HIDDEN)
-    es_SetCallback(NULL, 3)
+    es_SetCallback(nullptr, 3)
     es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
 EntityScript Entity_MunchlesiaReset1_Script = {
-    es_SetCallback(NULL, 8)
+    es_SetCallback(nullptr, 8)
     es_Call(entity_Munchlesia_create_child_reset2)
     es_SetFlags(ENTITY_FLAG_HIDDEN)
-    es_SetCallback(NULL, 3)
+    es_SetCallback(nullptr, 3)
     es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
 
 EntityScript Entity_MunchlesiaReset2_Script = {
-    es_SetCallback(NULL, 9)
+    es_SetCallback(nullptr, 9)
     es_Call(func_802BC220_E2EB50)
     es_SetFlags(ENTITY_FLAG_HIDDEN)
-    es_SetCallback(NULL, 10)
+    es_SetCallback(nullptr, 10)
     es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
     es_End
 };
@@ -333,9 +333,9 @@ EntityBlueprint Entity_BellbellPlant = {
     .typeDataSize = 0,
     .renderCommandList = Entity_BellbellPlant_AnimationIdle,
     .modelAnimationNodes = Entity_BellbellPlant_Mesh,
-    .fpInit = NULL,
+    .fpInit = nullptr,
     .updateEntityScript = Entity_BellbellPlant_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dmaList = Entity_BellbellPlant_dma },
     .entityType = ENTITY_TYPE_BELLBELL_PLANT,
     .aabbSize = { 30, 40, 30 }
@@ -346,9 +346,9 @@ EntityBlueprint Entity_TrumpetPlant = {
     .typeDataSize = sizeof(TrumpetPlantData),
     .renderCommandList = Entity_TrumpetPlant_AnimationIdle,
     .modelAnimationNodes = Entity_TrumpetPlant_Mesh,
-    .fpInit = NULL,
+    .fpInit = nullptr,
     .updateEntityScript = Entity_TrumpetPlant_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dmaList = Entity_TrumpetPlant_dma },
     .entityType = ENTITY_TYPE_TRUMPET_PLANT,
     .aabbSize = { 30, 40, 30 }
@@ -361,8 +361,8 @@ EntityBlueprint Entity_Munchlesia = {
     .modelAnimationNodes = 0,
     .fpInit = entity_Munchlesia_init,
     .updateEntityScript = Entity_Munchlesia_Script,
-    .fpHandleCollision = NULL,
-    { .dmaList = NULL },
+    .fpHandleCollision = nullptr,
+    { .dmaList = nullptr },
     .entityType = ENTITY_TYPE_MUNCHLESIA,
     .aabbSize = { 45, 20, 45 }
 };
@@ -372,9 +372,9 @@ EntityBlueprint Entity_MunchlesiaReset = {
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaReset_AnimationIdle,
     .modelAnimationNodes = Entity_MunchlesiaReset_Mesh,
-    .fpInit = NULL,
+    .fpInit = nullptr,
     .updateEntityScript = Entity_MunchlesiaReset_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dmaList = Entity_MunchlesiaReset_dma },
     .entityType = ENTITY_TYPE_RESET_MUNCHLESIA,
     .aabbSize = { 40, 20, 40 }
@@ -385,9 +385,9 @@ EntityBlueprint Entity_MunchlesiaGrab = {
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaGrab_Animation,
     .modelAnimationNodes = Entity_MunchlesiaGrab_Mesh,
-    .fpInit = NULL,
+    .fpInit = nullptr,
     .updateEntityScript = Entity_MunchlesiaGrab_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dmaList = Entity_MunchlesiaGrab_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_GRAB,
     .aabbSize = { 40, 20, 40 }
@@ -398,9 +398,9 @@ EntityBlueprint Entity_MunchlesiaEnvelop = {
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaEnvelop_Animation,
     .modelAnimationNodes = Entity_MunchlesiaEnvelop_Mesh,
-    .fpInit = NULL,
+    .fpInit = nullptr,
     .updateEntityScript = Entity_MunchlesiaEnvelop_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dmaList = Entity_MunchlesiaEnvelop_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_ENVELOP,
     .aabbSize = { 40, 20, 40 }
@@ -411,9 +411,9 @@ EntityBlueprint Entity_MunchlesiaBeginChew = {
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaBeginChew_Animation,
     .modelAnimationNodes = Entity_MunchlesiaBeginChew_Mesh,
-    .fpInit = NULL,
+    .fpInit = nullptr,
     .updateEntityScript = Entity_MunchlesiaBeginChew_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dmaList = Entity_MunchlesiaBeginChew_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_BEGIN_CHEW,
     .aabbSize = { 40, 20, 40 }
@@ -426,7 +426,7 @@ EntityBlueprint Entity_MunchlesiaChewing = {
     .modelAnimationNodes = Entity_MunchlesiaChewing_Mesh,
     .fpInit = entity_MunchlesiaChewing_init,
     .updateEntityScript = Entity_MunchlesiaChewing_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dmaList = Entity_MunchlesiaChewing_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_CHEWING,
     .aabbSize = { 40, 20, 40 }
@@ -437,9 +437,9 @@ EntityBlueprint Entity_MunchlesiaSpitOut = {
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaSpitOut_Animation,
     .modelAnimationNodes = Entity_MunchlesiaSpitOut_Mesh,
-    .fpInit = NULL,
+    .fpInit = nullptr,
     .updateEntityScript = Entity_MunchlesiaSpitOut_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dmaList = Entity_MunchlesiaSpitOut_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_SPIT_OUT,
     .aabbSize = { 40, 20, 40 }
@@ -450,9 +450,9 @@ EntityBlueprint Entity_MunchlesiaReset1 = {
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaReset1_Animation,
     .modelAnimationNodes = Entity_MunchlesiaReset1_Mesh,
-    .fpInit = NULL,
+    .fpInit = nullptr,
     .updateEntityScript = Entity_MunchlesiaReset1_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dmaList = Entity_MunchlesiaReset1_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_RESET1,
     .aabbSize = { 40, 20, 40 }
@@ -463,9 +463,9 @@ EntityBlueprint Entity_MunchlesiaReset2 = {
     .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaReset_AnimationIdle,
     .modelAnimationNodes = Entity_MunchlesiaReset_Mesh,
-    .fpInit = NULL,
+    .fpInit = nullptr,
     .updateEntityScript = Entity_MunchlesiaReset2_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dmaList = Entity_MunchlesiaReset_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_RESET2,
     .aabbSize = { 40, 20, 40 }

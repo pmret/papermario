@@ -65,7 +65,7 @@ s32 N(get_trigger_tattle)(s32 tattleColliderID) {
     for (i = 0; i < MAX_TRIGGERS; i++) {
         Trigger* trigger = get_trigger_by_id(i);
 
-        if (trigger != NULL
+        if (trigger != nullptr
             && trigger->flags & TRIGGER_WALL_PRESS_A
             && trigger->location.colliderID == tattleColliderID
         ) {
@@ -112,13 +112,13 @@ API_CALLABLE(N(Update)) {
     if (isInitialCall) {
         partner_walking_enable(npc, 1);
         mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
-        TweesterTouchingPartner = NULL;
+        TweesterTouchingPartner = nullptr;
     }
 
     playerData->partnerUsedTime[PARTNER_GOOMBARIO]++;
     entity = TweesterTouchingPartner;
 
-    if (entity == NULL) {
+    if (entity == nullptr) {
         partner_walking_update_player_tracking(npc);
         partner_walking_update_motion(npc);
         return 0;
@@ -179,7 +179,7 @@ API_CALLABLE(N(Update)) {
 
             if (--N(TweesterPhysicsPtr)->countdown == 0) {
                 N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
-                TweesterTouchingPartner = NULL;
+                TweesterTouchingPartner = nullptr;
             }
             break;
     }
@@ -188,7 +188,7 @@ API_CALLABLE(N(Update)) {
 
 void N(try_cancel_tweester)(Npc* goombario) {
     if (TweesterTouchingPartner) {
-        TweesterTouchingPartner = NULL;
+        TweesterTouchingPartner = nullptr;
         goombario->flags = N(TweesterPhysicsPtr)->prevFlags;
         N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking (goombario);

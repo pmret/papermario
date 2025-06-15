@@ -59,13 +59,13 @@ void shockwave_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bpPtr->update = shockwave_update;
     bpPtr->renderScene = shockwave_render;
     bpPtr->unk_00 = 0;
-    bpPtr->renderUI = NULL;
+    bpPtr->renderUI = nullptr;
     bpPtr->effectID = EFFECT_SHOCKWAVE;
 
     effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
     part = effect->data.shockwave = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.shockwave != NULL);
+    ASSERT(effect->data.shockwave != nullptr);
 
     mem_clear(part, numParts * sizeof(*part));
 

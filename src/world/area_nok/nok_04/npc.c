@@ -159,8 +159,8 @@ API_CALLABLE(N(InitThreadData)) {
     N(ThreadData).targetAngle = 0;
     N(ThreadData).curAngle = 0;
     N(ThreadData).overshootAngleVel = 0;
-    N(ThreadData).frontNpc = NULL;
-    N(ThreadData).backNpc = NULL;
+    N(ThreadData).frontNpc = nullptr;
+    N(ThreadData).backNpc = nullptr;
     N(ThreadData).time = 0;
     N(ThreadData).duration = 0;
     N(ThreadData).lengthStep = 0;
@@ -323,13 +323,13 @@ void N(build_gfx_thread)(void) {
     N(ThreadData).endPoint.y = y;
     N(ThreadData).endPoint.z = z;
 
-    if (N(ThreadData).frontNpc != NULL) {
+    if (N(ThreadData).frontNpc != nullptr) {
         N(ThreadData).frontNpc->pos.x = x;
         N(ThreadData).frontNpc->pos.y = y - 4.0f;
         N(ThreadData).frontNpc->pos.z = z + 6.0f;
     }
 
-    if (N(ThreadData).backNpc != NULL) {
+    if (N(ThreadData).backNpc != nullptr) {
         N(ThreadData).backNpc->pos.x = x;
         N(ThreadData).backNpc->pos.y = y - 4.0f;
         N(ThreadData).backNpc->pos.z = z + 3.0f;
@@ -583,8 +583,8 @@ EvtScript N(EVS_FuzzyBoss_TauntFromTree) = {
     Call(N(SetThreadTargetLengthAngle), 0, 0, 30 * DT)
     Wait(30 * DT)
     Call(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, FALSE)
-    Call(N(AttachThreadFrontNpc), NULL)
-    Call(N(AttachThreadBackNpc), NULL)
+    Call(N(AttachThreadFrontNpc), nullptr)
+    Call(N(AttachThreadBackNpc), nullptr)
     Exec(N(EVS_Scene_ShuffleFuzzyPositions))
     Return
     End
@@ -729,12 +729,12 @@ EvtScript N(EVS_NpcDefeat_WrongFuzzy) = {
     Sub(LVar1, 50)
     Call(GetNpcPointer, NPC_AmbushFuzzy, LVar3)
     Call(N(AttachThreadFrontNpc), LVar3)
-    Call(N(AttachThreadBackNpc), NULL)
+    Call(N(AttachThreadBackNpc), nullptr)
     Call(N(SetThreadTargetLengthAngle), LVar1, 0, -1)
     Call(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
     Call(N(SetThreadTargetLengthAngle), 0, 0, 30)
     Wait(30)
-    Call(N(AttachThreadFrontNpc), NULL)
+    Call(N(AttachThreadFrontNpc), nullptr)
     Call(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, FALSE)
     Set(MV_WrongAnswerBattle, 0)
     Return
@@ -1250,8 +1250,8 @@ EvtScript N(EVS_HitTree_Correct) = {
             Exec(N(EVS_MoveShellDown))
             Wait(1)
             Wait(30)
-            Call(N(AttachThreadFrontNpc), NULL)
-            Call(N(AttachThreadBackNpc), NULL)
+            Call(N(AttachThreadFrontNpc), nullptr)
+            Call(N(AttachThreadBackNpc), nullptr)
             Call(N(SetThreadTargetLengthAngle), 0, 0, -1)
             Call(N(SetThreadTargetLengthAngle), LVar3, 0, -1)
             Wait(1)
@@ -1270,7 +1270,7 @@ EvtScript N(EVS_HitTree_Correct) = {
             Set(LVarC, LVar9)
             Call(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
             Call(NpcJump0, NPC_BossFuzzy, LVarA, LVarB, LVarC, 30)
-            Call(N(AttachThreadFrontNpc), NULL)
+            Call(N(AttachThreadFrontNpc), nullptr)
             Call(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, FALSE)
             Add(MV_CorrectCount, 1)
             Exec(N(EVS_Scene_ShuffleFuzzyPositions))
@@ -1288,8 +1288,8 @@ EvtScript N(EVS_HitTree_Correct) = {
             Exec(N(EVS_MoveShellUp))
             Wait(1)
             Wait(30)
-            Call(N(AttachThreadFrontNpc), NULL)
-            Call(N(AttachThreadBackNpc), NULL)
+            Call(N(AttachThreadFrontNpc), nullptr)
+            Call(N(AttachThreadBackNpc), nullptr)
             Call(N(SetThreadTargetLengthAngle), 0, 0, -1)
             Call(N(SetThreadTargetLengthAngle), LVar3, 0, -1)
             Wait(1)
@@ -1308,7 +1308,7 @@ EvtScript N(EVS_HitTree_Correct) = {
             Set(LVarC, LVar9)
             Call(PlaySoundAtNpc, NPC_BossFuzzy, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
             Call(NpcJump0, NPC_BossFuzzy, LVarA, LVarB, LVarC, 30)
-            Call(N(AttachThreadFrontNpc), NULL)
+            Call(N(AttachThreadFrontNpc), nullptr)
             Call(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, FALSE)
             Add(MV_CorrectCount, 1)
             Exec(N(EVS_Scene_ShuffleFuzzyPositions))
@@ -1328,7 +1328,7 @@ EvtScript N(EVS_HitTree_Correct) = {
             Call(SetNpcAnimation, NPC_BossFuzzy, ANIM_Fuzzy_Anim09)
             Call(SpeakToPlayer, NPC_BossFuzzy, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 5, MSG_CH1_00C1)
             Wait(10 * DT)
-            Call(N(AttachThreadFrontNpc), NULL)
+            Call(N(AttachThreadFrontNpc), nullptr)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Add(LVar1, 40)
             Call(SetNpcJumpscale, NPC_KoopersShell, Float(0.6))
@@ -1471,7 +1471,7 @@ EvtScript N(EVS_SetupMinigame) = {
     Set(MV_CorrectTreeIndex, 2)
     Set(MV_LastCorrectTreeIndex, 2)
     Call(N(InitThreadData))
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_0, NULL, Ref(N(build_gfx_thread)))
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_0, nullptr, Ref(N(build_gfx_thread)))
     Call(SetNpcPos, NPC_BossFuzzy, -293, 0, 319)
     Call(SetNpcPos, NPC_KoopersShell, -293, 0, 322)
     Call(EnableNpcShadow, NPC_AmbushFuzzy, FALSE)

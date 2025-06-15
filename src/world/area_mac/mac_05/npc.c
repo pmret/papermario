@@ -230,7 +230,7 @@ API_CALLABLE(N(func_80242C78_854DE8)) {
             break;
         case 1:
             partner = get_npc_safe(NPC_PARTNER);
-            if (partner == NULL) {
+            if (partner == nullptr) {
                 return ApiStatus_DONE2;
             }
             partner->pos.x = x;
@@ -286,7 +286,7 @@ API_CALLABLE(N(func_80242E84_854FF4)) {
             }
             break;
         case 1:
-            if (evt_get_variable(NULL, MF_Unk_01)) {
+            if (evt_get_variable(nullptr, MF_Unk_01)) {
                 npc->pos.x += 3.0f;
                 script->functionTemp[1]--;
                 if (script->functionTemp[1] <= 0) {
@@ -1224,7 +1224,7 @@ API_CALLABLE(N(func_80243254_8553C4)) {
     f32 x;
     f32 z;
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 

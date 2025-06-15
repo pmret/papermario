@@ -15,7 +15,7 @@ extern IconHudScriptPair gItemHudScripts[];
 #include "world/common/todo/SomeItemEntityFunc.inc.c"
 #include "world/common/todo/IsItemBadge.inc.c"
 
-s32** N(varStash) = NULL;
+s32** N(varStash) = nullptr;
 
 EvtScript N(EVS_Chest_ShowGotItem) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
@@ -69,8 +69,8 @@ API_CALLABLE(N(ChestItemPrompt)) {
         menuIdx = 0;
         for (i = 0; i < ARRAY_COUNT(N(ChestItems)); i++) {
             // meaning of 'can use' and 'used before' depends on type of chest interaction
-            canUseItem = evt_get_variable(NULL, script->varTable[1] + i);
-            itemUsedBefore = evt_get_variable(NULL, script->varTable[2] + i);
+            canUseItem = evt_get_variable(nullptr, script->varTable[1] + i);
+            itemUsedBefore = evt_get_variable(nullptr, script->varTable[2] + i);
             if (canUseItem && !itemUsedBefore) {
                 ItemData* item = &gItemTable[N(ChestItems)[i]];
                 IconHudScriptPair* itemHudScripts = &gItemHudScripts[item->hudElemID];
@@ -116,7 +116,7 @@ API_CALLABLE(N(ChestItemPrompt)) {
         selectIdx = menu->userIndex[script->functionTemp[1] - 1];
         script->varTable[0] = N(ChestItems)[selectIdx];
         if (script->varTable[10] == 0) {
-            evt_set_variable(NULL, script->varTable[2] + selectIdx, 1);
+            evt_set_variable(nullptr, script->varTable[2] + selectIdx, 1);
         }
         heap_free(script->functionTempPtr[2]);
     }
@@ -139,7 +139,7 @@ API_CALLABLE(N(SetItemRetrieved)) {
     }
 
     if (found) {
-        evt_set_variable(NULL, GF_KKJ_Retrieved_PowerRush + i, TRUE);
+        evt_set_variable(nullptr, GF_KKJ_Retrieved_PowerRush + i, TRUE);
     }
 
     return ApiStatus_DONE2;

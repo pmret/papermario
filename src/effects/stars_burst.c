@@ -49,13 +49,13 @@ void stars_burst_main(
         bpPtr->update = stars_burst_update;
         bpPtr->renderScene = stars_burst_render;
         bpPtr->unk_00 = 0;
-        bpPtr->renderUI = NULL;
+        bpPtr->renderUI = nullptr;
         bpPtr->effectID = EFFECT_STARS_BURST;
 
         effect = create_effect_instance(bpPtr);
         effect->numParts = numParts;
         part = effect->data.starsBurst = general_heap_malloc(numParts * sizeof(*part));
-        ASSERT(effect->data.starsBurst != NULL);
+        ASSERT(effect->data.starsBurst != nullptr);
 
         part->unk_00 = arg0;
         part->unk_04 = arg1;

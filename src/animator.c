@@ -74,12 +74,12 @@ Vtx* animator_copy_vertices_to_buffer(ModelAnimator* animator, AnimatorNode* nod
     bufferMem = general_heap_malloc((vtxCount + overhead) * sizeof(*bufferMem));
     handle->addr = bufferMem;
 
-    ASSERT(bufferMem != NULL);
+    ASSERT(bufferMem != nullptr);
 
     handle->ttl = 3;
     nodeVtxList = &node->fcData.vtxList[startIdx];
 
-    if (animator->baseAddr != NULL) {
+    if (animator->baseAddr != nullptr) {
         i = ((s32)buffer & 0xFFFFFF); // needed to match
         buffer = (Vec3s*)(i + (s32)animator->baseAddr);
     }
@@ -136,17 +136,17 @@ AnimatorNode* get_animator_child_with_id(AnimatorNode* node, s32 id) {
     }
 
     for (i = 0; i < ARRAY_COUNT(node->children); i++) {
-        if (node->children[i] != NULL) {
+        if (node->children[i] != nullptr) {
             AnimatorNode* child = get_animator_child_with_id(node->children[i], id);
 
-            if (child != NULL) {
+            if (child != nullptr) {
                 return child;
             }
 
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 AnimatorNode* get_animator_child_for_model(AnimatorNode* node, s32 modelId) {
@@ -157,24 +157,24 @@ AnimatorNode* get_animator_child_for_model(AnimatorNode* node, s32 modelId) {
     }
 
     for (i = 0; i < ARRAY_COUNT(node->children); i++) {
-        if (node->children[i] != NULL) {
+        if (node->children[i] != nullptr) {
             AnimatorNode* child = get_animator_child_for_model(node->children[i], modelId);
 
-            if (child != NULL) {
+            if (child != nullptr) {
                 return child;
             }
 
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void free_animator_nodes(AnimatorNode* root) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(root->children); i++) {
-        if (root->children[i] != NULL) {
+        if (root->children[i] != nullptr) {
             free_animator_nodes(root->children[i]);
         }
     }
@@ -198,7 +198,7 @@ void clear_animator_list(void) {
     }
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentAnimMeshListPtr); i++) {
-        (*gCurrentAnimMeshListPtr)[i] = NULL;
+        (*gCurrentAnimMeshListPtr)[i] = nullptr;
     }
 
     gAnimModelFogR = 10;
@@ -234,9 +234,9 @@ void delete_model_animator_node(AnimatorNode* node) {
     node->flags = 0;
 
     for (i = 0; i < ARRAY_COUNT(node->children); i++) {
-        if (node->children[i] != NULL) {
+        if (node->children[i] != nullptr) {
             delete_model_animator_node(node->children[i]);
-            node->children[i] = NULL;
+            node->children[i] = nullptr;
         }
     }
 
@@ -246,9 +246,9 @@ void delete_model_animator_node(AnimatorNode* node) {
 void delete_model_animator_nodes(ModelAnimator* animator) {
     animator->nextUniqueID = 0;
 
-    if (animator->rootNode != NULL) {
+    if (animator->rootNode != nullptr) {
         delete_model_animator_node(animator->rootNode);
-        animator->rootNode = NULL;
+        animator->rootNode = nullptr;
     }
 }
 
@@ -257,13 +257,13 @@ void delete_model_animator(ModelAnimator* animator) {
 
     animator->nextUniqueID = 0;
 
-    if (animator->rootNode != NULL) {
+    if (animator->rootNode != nullptr) {
         delete_model_animator_node(animator->rootNode);
-        animator->rootNode = NULL;
+        animator->rootNode = nullptr;
 
         for (i = 0; i < ARRAY_COUNT(*gCurrentAnimMeshListPtr); i++) {
             if ((*gCurrentAnimMeshListPtr)[i] == animator) {
-                (*gCurrentAnimMeshListPtr)[i] = NULL;
+                (*gCurrentAnimMeshListPtr)[i] = nullptr;
                 break;
             }
         }
@@ -278,7 +278,7 @@ s32 create_model_animator(s16* animPos) {
     s32 i, j;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentAnimMeshListPtr); i++) {
-        if ((*gCurrentAnimMeshListPtr)[i] == NULL) {
+        if ((*gCurrentAnimMeshListPtr)[i] == nullptr) {
             break;
         }
     }
@@ -288,7 +288,7 @@ s32 create_model_animator(s16* animPos) {
     (*gCurrentAnimMeshListPtr)[i] = animator = heap_malloc(sizeof(*animator));
     gAnimCount++;
 
-    ASSERT(animator != NULL);
+    ASSERT(animator != nullptr);
 
     animator->flags = MODEL_ANIMATOR_FLAG_UPDATE_PENDING | MODEL_ANIMATOR_FLAG_ENABLED | MODEL_ANIMATOR_FLAG_CAM_2 | MODEL_ANIMATOR_FLAG_CAM_1 | MODEL_ANIMATOR_FLAG_CAM_0;
     animator->renderMode = RENDER_MODE_ALPHATEST;
@@ -296,15 +296,15 @@ s32 create_model_animator(s16* animPos) {
     animator->timeScale = 1.0f;
     animator->animReadPos = animPos;
 
-    if (animPos == NULL) {
+    if (animPos == nullptr) {
         animator->animReadPos = gAnimScriptDefault;
     }
 
     animator->savedReadPos = animPos;
-    animator->animationBuffer = NULL;
-    animator->baseAddr = NULL;
-    animator->fpRenderCallback = NULL;
-    animator->rootNode = NULL;
+    animator->animationBuffer = nullptr;
+    animator->baseAddr = nullptr;
+    animator->fpRenderCallback = nullptr;
+    animator->rootNode = nullptr;
     animator->nextUniqueID = 0;
 
     for (j = 0; j < ARRAY_COUNT(animator->staticNodeIDs); j++) {
@@ -322,7 +322,7 @@ s32 create_mesh_animator(s16* animPos, s16* animBuffer) {
     s32 i, j;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentAnimMeshListPtr); i++) {
-        if ((*gCurrentAnimMeshListPtr)[i] == NULL) {
+        if ((*gCurrentAnimMeshListPtr)[i] == nullptr) {
             break;
         }
     }
@@ -332,13 +332,13 @@ s32 create_mesh_animator(s16* animPos, s16* animBuffer) {
     (*gCurrentAnimMeshListPtr)[i] = animator = heap_malloc(sizeof(*animator));
     gAnimCount++;
 
-    ASSERT(animator != NULL);
+    ASSERT(animator != nullptr);
 
     animator->flags = MODEL_ANIMATOR_FLAG_UPDATE_PENDING | MODEL_ANIMATOR_FLAG_ENABLED | MODEL_ANIMATOR_FLAG_CAM_2 | MODEL_ANIMATOR_FLAG_CAM_1 | MODEL_ANIMATOR_FLAG_CAM_0;
     animator->renderMode = RENDER_MODE_ALPHATEST;
-    animator->baseAddr = NULL;
-    animator->fpRenderCallback = NULL;
-    animator->rootNode = NULL;
+    animator->baseAddr = nullptr;
+    animator->fpRenderCallback = nullptr;
+    animator->rootNode = nullptr;
     animator->nextUniqueID = 0;
     animator->animationBuffer = animBuffer;
     animator->nextUpdateTime = 1.0f;
@@ -365,7 +365,7 @@ AnimatorNode* add_anim_node(ModelAnimator* animator, s32 parentNodeID, AnimatorN
     s32 i;
 
     ret = heap_malloc(sizeof(*ret));
-    ASSERT(ret != NULL);
+    ASSERT(ret != nullptr);
 
     ret->flags = MODEL_ANIMATOR_FLAG_ENABLED;
     ret->displayList = nodeBP->displayList;
@@ -384,14 +384,14 @@ AnimatorNode* add_anim_node(ModelAnimator* animator, s32 parentNodeID, AnimatorN
     ret->vertexStartOffset = -1;
 
     for (i = 0; i < ARRAY_COUNT(ret->children); i++) {
-        ret->children[i] = NULL;
+        ret->children[i] = nullptr;
     }
 
     nextUniqueID = animator->nextUniqueID;
     nextUniqueID = nextUniqueID + 1;
 
     if (parentNodeID == 0) {
-        s32 nullRootNode = animator->rootNode == NULL; // todo ???
+        s32 nullRootNode = animator->rootNode == nullptr; // todo ???
 
         ret->uniqueIndex = nextUniqueID;
 
@@ -399,10 +399,10 @@ AnimatorNode* add_anim_node(ModelAnimator* animator, s32 parentNodeID, AnimatorN
             animator->rootNode = ret;
         } else {
             child = get_animator_child_with_id(animator->rootNode, 1);
-            ASSERT(child != NULL);
+            ASSERT(child != nullptr);
 
             for (i = 0; i < ARRAY_COUNT(child->children); i++) {
-                if (child->children[i] == NULL) {
+                if (child->children[i] == nullptr) {
                     child->children[i] = ret;
                     break;
                 }
@@ -413,10 +413,10 @@ AnimatorNode* add_anim_node(ModelAnimator* animator, s32 parentNodeID, AnimatorN
     } else {
         ret->uniqueIndex = nextUniqueID;
         child = get_animator_child_with_id(animator->rootNode, parentNodeID);
-        ASSERT(child != NULL);
+        ASSERT(child != nullptr);
 
         for (i = 0; i < ARRAY_COUNT(child->children); i++) {
-            if (child->children[i] == NULL) {
+            if (child->children[i] == nullptr) {
                 child->children[i] = ret;
                 break;
             }
@@ -441,7 +441,7 @@ void update_model_animator(s32 animatorID) {
     animatorID &= ~BATTLE_ID_BIT;
     animator = (*gCurrentAnimMeshListPtr)[animatorID];
 
-    if (animator == NULL || animator->flags == 0) {
+    if (animator == nullptr || animator->flags == 0) {
         return;
     }
 
@@ -470,7 +470,7 @@ void update_model_animator(s32 animatorID) {
         return;
     }
 
-    animator_update_model_transforms(animator, NULL);
+    animator_update_model_transforms(animator, nullptr);
 
     for (i = 0; i < ARRAY_COUNT(D_801533C0); i++) {
         if (D_801533C0[i].ttl >= 0) {
@@ -505,7 +505,7 @@ void update_model_animator_with_transform(s32 animatorID, Mtx* mtx) {
     animatorID &= ~BATTLE_ID_BIT;
     animator = (*gCurrentAnimMeshListPtr)[animatorID];
 
-    if (animator == NULL || animator->flags == 0) {
+    if (animator == nullptr || animator->flags == 0) {
         return;
     }
 
@@ -610,7 +610,7 @@ s32 step_model_animator(ModelAnimator* animator) {
             animator->animReadPos = args;
 
             node = get_animator_child_with_id(animator->rootNode, nodeId);
-            ASSERT(node != NULL);
+            ASSERT(node != nullptr);
             node->rot.x = x;
             node->rot.y = y;
             node->rot.z = z;
@@ -623,7 +623,7 @@ s32 step_model_animator(ModelAnimator* animator) {
             animator->animReadPos = args;
 
             node = get_animator_child_with_id(animator->rootNode, nodeId);
-            ASSERT(node != NULL);
+            ASSERT(node != nullptr);
             node->rot.x += x;
             node->rot.y += y;
             node->rot.z += z;
@@ -635,7 +635,7 @@ s32 step_model_animator(ModelAnimator* animator) {
             z = *args++;
             animator->animReadPos = args;
             node = get_animator_child_with_id(animator->rootNode, nodeId);
-            ASSERT(node != NULL);
+            ASSERT(node != nullptr);
             node->pos.x = x;
             node->pos.y = y;
             node->pos.z = z;
@@ -648,7 +648,7 @@ s32 step_model_animator(ModelAnimator* animator) {
             animator->animReadPos = args;
 
             node = get_animator_child_with_id(animator->rootNode, nodeId);
-            ASSERT(node != NULL);
+            ASSERT(node != nullptr);
             node->scale.x = x;
             node->scale.y = y;
             node->scale.z = z;
@@ -660,7 +660,7 @@ s32 step_model_animator(ModelAnimator* animator) {
 void animator_update_model_transforms(ModelAnimator* animator, Mtx* rootTransform) {
     Matrix4f flipMtx;
 
-    if (animator->rootNode != NULL) {
+    if (animator->rootNode != nullptr) {
         switch (animator->flags & (MODEL_ANIMATOR_FLAG_FLIP_Z | MODEL_ANIMATOR_FLAG_FLIP_Y | MODEL_ANIMATOR_FLAG_FLIP_X)) {
             case MODEL_ANIMATOR_FLAG_FLIP_Z:
                 animator_make_mirrorZ(flipMtx);
@@ -706,7 +706,7 @@ void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx
     }
 
     for (i = 0; i < ARRAY_COUNT(node->children); i++) {
-        if (node->children[i] != NULL) {
+        if (node->children[i] != nullptr) {
             animator_node_update_model_transform(animator, sp10, node->children[i], rootTransform);
         }
     }
@@ -724,7 +724,7 @@ void render_animated_model(s32 animatorID, Mtx* rootTransform) {
     animatorID &= ~BATTLE_ID_BIT;
     animator = (*gCurrentAnimMeshListPtr)[animatorID];
 
-    if (animator == NULL || animator->flags == 0) {
+    if (animator == nullptr || animator->flags == 0) {
         return;
     }
 
@@ -733,7 +733,7 @@ void render_animated_model(s32 animatorID, Mtx* rootTransform) {
         && !(animator->flags & MODEL_ANIMATOR_FLAG_HIDDEN)
     ) {
         animator->mtx = *rootTransform;
-        animator->baseAddr = NULL;
+        animator->baseAddr = nullptr;
         rtPtr->appendGfxArg = animator;
         rtPtr->appendGfx = (void (*)(void*))appendGfx_animator;
         rtPtr->dist = 0;
@@ -754,7 +754,7 @@ void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32
     animatorID &= ~BATTLE_ID_BIT;
     animator = (*gCurrentAnimMeshListPtr)[animatorID];
 
-    if (animator == NULL || animator->flags == 0) {
+    if (animator == nullptr || animator->flags == 0) {
         return;
     }
 
@@ -776,7 +776,7 @@ void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32
 void appendGfx_animator(ModelAnimator* animator) {
     Matrix4f sp10;
 
-    if (animator->baseAddr != NULL) {
+    if (animator->baseAddr != nullptr) {
         gSPSegment(gMainGfxPos++, gAnimVtxSegment, VIRTUAL_TO_PHYSICAL(animator->baseAddr));
     }
 
@@ -853,7 +853,7 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
 
     if (node->flags & MODEL_ANIMATOR_FLAG_HIDDEN) {
         for (i = 0; i < ARRAY_COUNT(node->children); i++) {
-            if (node->children[i] != NULL) {
+            if (node->children[i] != nullptr) {
                 guMtxCatF(node->mtx, mtx, node->mtx);
                 appendGfx_animator_node(animator, node->children[i], node->mtx);
             }
@@ -880,11 +880,11 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
     }
     gDPPipeSync(gMainGfxPos++);
 
-    if (animator->fpRenderCallback != NULL) animator->fpRenderCallback(animator->renderCallbackArg);
+    if (animator->fpRenderCallback != nullptr) animator->fpRenderCallback(animator->renderCallbackArg);
 
     gDPPipeSync(gMainGfxPos++);
 
-    if (node->displayList != NULL) {
+    if (node->displayList != nullptr) {
         if (node->vertexStartOffset < 0) {
             gSPDisplayList(gMainGfxPos++, node->displayList);
         } else {
@@ -916,7 +916,7 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
             ASSERT(k < ARRAY_COUNT(D_801536C0));
 
             bufferHandle->addr = gfxPos = general_heap_malloc(j * sizeof(Gfx));
-            ASSERT(gfxPos != NULL);
+            ASSERT(gfxPos != nullptr);
             bufferHandle->ttl = 3;
 
             vtxIdx = 0;
@@ -936,7 +936,7 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
 
                     startIdx -= vtxCount;
 
-                    if (node->fcData.vtxList == NULL) {
+                    if (node->fcData.vtxList == nullptr) {
                         newBuffer = &((Vtx*)w1)[node->vertexStartOffset + vtxIdx];
                         gSPVertex(gfxPos++, newBuffer, vtxCount, startIdx);
                     } else {
@@ -965,7 +965,7 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
     gDPPipeSync(gMainGfxPos++);
 
     for (i = 0; i < ARRAY_COUNT(node->children); i++) {
-        if (node->children[i] != NULL) {
+        if (node->children[i] != nullptr) {
             appendGfx_animator_node(animator, node->children[i], node->mtx);
         }
     }
@@ -1051,7 +1051,7 @@ void clear_animator_flags(s32 index, s32 bits) {
 void play_model_animation(s32 index, s16* animPos) {
     ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~BATTLE_ID_BIT];
 
-    if (animator->animationBuffer != NULL) {
+    if (animator->animationBuffer != nullptr) {
         animPos = (s16*) (((s32)animPos & 0xFFFFFF) + (s32)animator->animationBuffer); // TODO: array access? / cleanup
     }
     animator->animReadPos = animPos;
@@ -1065,7 +1065,7 @@ void play_model_animation_starting_from(s32 index, s16* animPos, s32 framesToSki
     ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[indexMasked];
     s32 i;
 
-    if (animator->animationBuffer != NULL) {
+    if (animator->animationBuffer != nullptr) {
         animPos = (s16*) (((s32)animPos & 0xFFFFFF) + (s32)animator->animationBuffer); // TODO: array access? / cleanup
     }
 
@@ -1085,7 +1085,7 @@ void load_model_animator_node(StaticAnimatorNode* node, ModelAnimator* animator,
     AnimatorNode* newNode;
     s32 i;
 
-    if (node != NULL) {
+    if (node != nullptr) {
         bpPtr->displayList = node->displayList;
         bpPtr->basePos.x = 0.0f;
         bpPtr->basePos.y = 0.0f;
@@ -1108,11 +1108,11 @@ void load_model_animator_node(StaticAnimatorNode* node, ModelAnimator* animator,
 
         treeIndexToNodeIDs[i] = newNode->uniqueIndex;
 
-        if (node->child != NULL) {
+        if (node->child != nullptr) {
             load_model_animator_node(node->child, animator, newNode->uniqueIndex, treeIndexToNodeIDs);
         }
 
-        if (node->sibling != NULL) {
+        if (node->sibling != nullptr) {
             load_model_animator_node(node->sibling, animator, parentNodeID, treeIndexToNodeIDs);
         }
     }
@@ -1122,7 +1122,7 @@ void load_model_animator_tree(s32 index, StaticAnimatorNode** tree) {
     ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~BATTLE_ID_BIT];
     s32 nodeIDs[ARRAY_COUNT(animator->staticNodeIDs)];
 
-    if (animator == NULL || animator->flags == 0) {
+    if (animator == nullptr || animator->flags == 0) {
         return;
     }
 
@@ -1132,15 +1132,15 @@ void load_model_animator_tree(s32 index, StaticAnimatorNode** tree) {
 }
 
 void load_mesh_animator_node(StaticAnimatorNode* node, ModelAnimator* animator, s32 parentNodeID, s32* treeIndexToNodeIDs) {
-    if (node != NULL) {
-        if (node->child != NULL && parentNodeID == 0) {
+    if (node != nullptr) {
+        if (node->child != nullptr && parentNodeID == 0) {
             load_mesh_animator_node(node->child, animator, 0, treeIndexToNodeIDs);
         } else {
             do {
                 animator->staticNodes[parentNodeID] = node;
                 node = node->sibling;
                 parentNodeID++;
-            } while (node != NULL);
+            } while (node != nullptr);
         }
     }
 }
@@ -1151,7 +1151,7 @@ void load_mesh_animator_tree(s32 index, StaticAnimatorNode** tree) {
     s32 nodeIDs[ARRAY_COUNT(animator->staticNodeIDs)];
     s32 i;
 
-    if (animator == NULL || animator->flags == 0) {
+    if (animator == nullptr || animator->flags == 0) {
         return;
     }
 
@@ -1166,7 +1166,7 @@ void load_mesh_animator_tree(s32 index, StaticAnimatorNode** tree) {
     animator->savedTreePos = 0;
 
     for (i = 0; i < ARRAY_COUNT(animator->staticNodes); i++) {
-        animator->staticNodes[i] = NULL;
+        animator->staticNodes[i] = nullptr;
     }
 
     load_mesh_animator_node(*gAnimTreeRoot, animator, 0, nodeIDs);
@@ -1179,7 +1179,7 @@ void reload_mesh_animator_node(StaticAnimatorNode* node, ModelAnimator* animator
     AnimatorNode* newNode;
     s32 i;
 
-    if (node != NULL) {
+    if (node != nullptr) {
         bpPtr->displayList = node->displayList;
         bpPtr->basePos.x = 0.0f;
         bpPtr->basePos.y = 0.0f;
@@ -1199,7 +1199,7 @@ void reload_mesh_animator_node(StaticAnimatorNode* node, ModelAnimator* animator
 
         treeIndexToNodeIDs[i] = newNode->uniqueIndex;
 
-        if (node->child != NULL) {
+        if (node->child != nullptr) {
             reload_mesh_animator_node(node->child, animator, newNode->uniqueIndex, treeIndexToNodeIDs);
         }
     }
@@ -1282,7 +1282,7 @@ s32 step_mesh_animator(ModelAnimator* animator) {
             animator->animReadPos = args;
             if (nodeId != 0xFF) {
                 node = get_animator_child_with_id(animator->rootNode, nodeId);
-                if (node != NULL) {
+                if (node != nullptr) {
                     node->rot.x = x;
                     node->rot.y = y;
                     node->rot.z = z;
@@ -1302,7 +1302,7 @@ s32 step_mesh_animator(ModelAnimator* animator) {
             animator->animReadPos = args;
             if (nodeId != 0xFF) {
                 node = get_animator_child_with_id(animator->rootNode, nodeId);
-                if (node != NULL) {
+                if (node != nullptr) {
                     node->rot.x += x;
                     node->rot.y += y;
                     node->rot.z += z;
@@ -1322,7 +1322,7 @@ s32 step_mesh_animator(ModelAnimator* animator) {
             animator->animReadPos = args;
             if (nodeId != 0xFF) {
                 node = get_animator_child_with_id(animator->rootNode, nodeId);
-                if (node != NULL) {
+                if (node != nullptr) {
                     node->pos.x = x;
                     node->pos.y = y;
                     node->pos.z = z;
@@ -1342,7 +1342,7 @@ s32 step_mesh_animator(ModelAnimator* animator) {
             animator->animReadPos = args;
             if (nodeId != 0xFF) {
                 node = get_animator_child_with_id(animator->rootNode, nodeId);
-                if (node != NULL) {
+                if (node != nullptr) {
                     node->scale.x = x;
                     node->scale.y = y;
                     node->scale.z = z;

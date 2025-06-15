@@ -216,7 +216,7 @@ EvtScript N(EVS_FadeInFlowerGateGlowAlpha) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_door_ura, COLLIDER_FLAGS_UPPER_MASK)
     Call(EnableModel, MODEL_pica, TRUE)
     Call(SetModelCustomGfx, MODEL_pica, CUSTOM_GFX_4, -1)
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_4, Ref(N(gfx_build_flower_gate_glow)), NULL)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_4, Ref(N(gfx_build_flower_gate_glow)), nullptr)
     Call(MakeLerp, 0, 255, 30, EASING_LINEAR)
     Loop(0)
         Call(UpdateLerp)
