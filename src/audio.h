@@ -859,7 +859,7 @@ typedef struct AuVoice {
     /* 0x3E */ b8 isRelativeRelease;
     /* 0x3F */ u8 envRelativeStart;
     /* 0x40 */ s16 clientVolume; // volume set by the client (BGM/MSEQ/Sound player) before any envelope is applied
-    /* 0x42 */ u8 stopPending;
+    /* 0x42 */ u8 donePending; // TRUE when a voice has completed its release phase and is ready for cleanup
     /* 0x43 */ u8 syncFlags;
     /* 0x44 */ s8 clientPriority;
     /* 0x45 */ u8 priority;

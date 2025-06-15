@@ -127,10 +127,31 @@ void* alHeapAlloc(ALHeap* heap, s32 count, s32 size);
 // ----------------------------------------------------------------------------------
 // core/voice.c
 // ----------------------------------------------------------------------------------
-void au_update_stopped_voices(AuGlobals* globals);
+
+/**
+ * (UNUSED)
+ * Immediately flush all voices which have finished playing.
+ * These are normally released automatically during the start of each audio frame.
+ */
+void au_flush_finished_voices(AuGlobals* globals);
+
+/**
+ * Initializes all voices in the audio system.
+ * Sets default values and clears previous envelope state.
+ */
 void au_init_voices(AuGlobals* globals);
+
+/**
+ * Main envelope system update, called once per frame.
+ * Progresses envelope state for all active voices.
+ */
 void au_update_voices(AuGlobals* globals);
-void au_voice_after_volume_change(AuVoice* arg0);
+
+/**
+ * Applies volume update after a client-side volume change.
+ * This is deferred to avoid modifying envelope state mid-step.
+ */
+void au_voice_after_volume_change(AuVoice* voice);
 
 /**
  * @brief Converts envelope step duration from microseconds to num samples delta.
@@ -141,11 +162,29 @@ void au_voice_after_volume_change(AuVoice* arg0);
  * @param msecs Time duration in microseconds.
  * @return Number of samples that should pass in this interval.
  */
-s32 au_voice_get_delta(s32 arg0);
+s32 au_voice_get_delta(s32 usecs);
 
-void au_voice_start(AuVoice* voice, EnvelopeData* arg1);
+/**
+ * @brief Starts a new voice with the given envelope data.
+ *
+ * Initializes envelope state and prepares the press phase for playback.
+ *
+ * @param voice Pointer to the voice being started.
+ * @param envData Envelope command lists (press and release) to use.
+ */
+void au_voice_start(AuVoice* voice, EnvelopeData* envData);
+
+/**
+ * Parses and executes envelope commands until a time interval is found.
+ * Commands include setting multipliers, loop control, etc.
+ */
 u8 au_voice_step(AuVoice* voice);
-void au_voice_set_vol_changed(AuVoice* arg0);
+
+/**
+ * (UNUSED)
+ * Force recalculation of voice envelope volume during next update.
+ */
+void au_voice_set_vol_changed(AuVoice* voice);
 
 // ----------------------------------------------------------------------------------
 // core/pull_voice.c

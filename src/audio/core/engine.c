@@ -98,7 +98,7 @@ void au_engine_init(s32 outputRate) {
         voice->pan = 0xFF;
         voice->reverb = 0xFF;
         voice->busID = 0;
-        voice->stopPending = FALSE;
+        voice->donePending = FALSE;
         voice->syncFlags = 0;
         voice->clientPriority = AU_PRIORITY_FREE;
         voice->priority = AU_PRIORITY_FREE;
@@ -354,9 +354,9 @@ void au_syn_begin_audio_frame(AuGlobals* globals) {
         AuVoice* voice = &globals->voices[i];
         u8 voiceUpdateFlags = voice->syncFlags;
 
-        if (voice->stopPending) {
+        if (voice->donePending) {
             au_syn_stop_voice(i);
-            voice->stopPending = FALSE;
+            voice->donePending = FALSE;
             voice->cmdPtr = NULL;
             voice->priority = AU_PRIORITY_FREE;
         }
@@ -384,7 +384,7 @@ void au_syn_begin_audio_frame(AuGlobals* globals) {
 void au_reset_nonfree_voice(AuVoice* voice, u8 index) {
     if (voice->priority != AU_PRIORITY_FREE) {
         voice->cmdPtr = NULL;
-        voice->stopPending = TRUE;
+        voice->donePending = TRUE;
         voice->syncFlags = 0;
         au_syn_set_volume_delta(index, 0, AUDIO_SAMPLES);
     }
@@ -392,7 +392,7 @@ void au_reset_nonfree_voice(AuVoice* voice, u8 index) {
 
 void au_reset_voice(AuVoice* voice, u8 voiceIdx) {
     voice->cmdPtr = NULL;
-    voice->stopPending = TRUE;
+    voice->donePending = TRUE;
     voice->syncFlags = 0;
     au_syn_set_volume_delta(voiceIdx, 0, AUDIO_SAMPLES);
 }

@@ -26,8 +26,8 @@ s16 AuEqPower[AUEQPOWER_LENGTH] = {
     2833,  2429,  2025,  1620,  1216,  810,   405,   0
 };
 
-static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* arg1, s32 count, s32 size, s16 arg4, s16 arg5, s32 flags);
-static s16 _getRate(f64 arg0, f64 arg1, s32 arg4, u16* arg5);
+static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* filter, s32 tsam, s32 nbytes, s16 output, s16 input, s32 flags);
+static s16 _getRate(f64 vol, f64 tgt, s32 count, u16* ratel);
 
 // decode, resample, and mix
 Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {

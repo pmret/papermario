@@ -1,26 +1,21 @@
 #include "audio.h"
 #include "audio/core.h"
 
-// unused
-void au_update_stopped_voices(AuGlobals* globals) {
+void au_flush_finished_voices(AuGlobals* globals) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
         AuVoice* voice = &globals->voices[i];
 
-        if (voice->stopPending) {
+        if (voice->donePending) {
             au_syn_stop_voice(i);
-            voice->stopPending = FALSE;
+            voice->donePending = FALSE;
             voice->cmdPtr = NULL;
             voice->priority = AU_PRIORITY_FREE;
         }
     }
 }
 
-/**
- * Initializes all voices in the audio system.
- * Sets default values and clears previous envelope state.
- */
 void au_init_voices(AuGlobals* globals) {
     s32 i;
 
@@ -39,10 +34,6 @@ void au_init_voices(AuGlobals* globals) {
     }
 }
 
-/**
- * Main envelope system update, called once per frame.
- * Progresses envelope state for all active voices.
- */
 void au_update_voices(AuGlobals* globals) {
     AuVoice* voice;
     s16 current;
@@ -122,7 +113,7 @@ void au_update_voices(AuGlobals* globals) {
                             // if we reached the end after key release, stop the voice completely
                             voice->envelopeFlags = 0;
                             voice->cmdPtr = NULL;
-                            voice->stopPending = TRUE;
+                            voice->donePending = TRUE;
                         } else {
                             // we reached the end of press cmdlist, keep the last volume until the key is released
                             voice->envTimeLeft = -1;
@@ -182,10 +173,6 @@ void au_update_voices(AuGlobals* globals) {
     }
 }
 
-/**
- * Applies volume update after a client-side volume change.
- * This is deferred to avoid modifying envelope state mid-step.
- */
 void au_voice_after_volume_change(AuVoice* voice) {
     voice->volume = VOL_MULT_4(voice->envTarget, voice->clientVolume, voice->envRelativeStart, voice->envScale);
     voice->delta = au_voice_get_delta(voice->envTimeLeft);
@@ -197,14 +184,6 @@ s32 au_voice_get_delta(s32 usecs) {
     return (usecs / AU_FRAME_USEC) * AUDIO_SAMPLES;
 }
 
-/**
- * @brief Starts a new voice with the given envelope data.
- *
- * Initializes envelope state and prepares the press phase for playback.
- *
- * @param voice Pointer to the voice being started.
- * @param envData Envelope command lists (press and release) to use.
- */
 void au_voice_start(AuVoice* voice, EnvelopeData* envData) {
     s32 intervalIndex;
 
@@ -233,10 +212,6 @@ void au_voice_start(AuVoice* voice, EnvelopeData* envData) {
     voice->envRelativeStart = ENV_VOL_MAX;
 }
 
-/**
- * Parses and executes envelope commands until a time interval is found.
- * Commands include setting multipliers, loop control, etc.
- */
 u8 au_voice_step(AuVoice* voice) {
     u32 op;
     u8 arg;
@@ -280,7 +255,6 @@ u8 au_voice_step(AuVoice* voice) {
     return op;
 }
 
-// unused
 void au_voice_set_vol_changed(AuVoice* voice) {
     voice->envelopeFlags |= AU_VOICE_ENV_FLAG_VOL_CHANGED;
 }
