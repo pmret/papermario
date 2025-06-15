@@ -31,7 +31,7 @@ EvtScript N(EVS_Scene_StarWayOpened) = {
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10)
     Call(ShowMessageAtScreenPos, MSG_HOS_005D, 160, 40)
-    Call(SetMusicTrack, 0, SONG_STAR_WAY_OPENS, 0, 8)
+    Call(SetMusic, 0, SONG_STAR_WAY_OPENS, 0, VOL_LEVEL_FULL)
 #if VERSION_PAL
     Wait(30)
 #else
@@ -78,7 +78,7 @@ EvtScript N(EVS_Scene_StarWayOpened) = {
     Call(ShowMessageAtScreenPos, MSG_HOS_005E, 160, 40)
     Call(ResetCam, CAM_DEFAULT, Float(5.0))
     Set(GB_StoryProgress, STORY_CH8_OPENED_PATH_TO_STAR_WAY)
-    Call(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, 8)
+    Call(SetMusic, 0, SONG_SHOOTING_STAR_SUMMIT, 0, VOL_LEVEL_FULL)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Call(DisablePlayerInput, FALSE)
     Return
@@ -94,7 +94,7 @@ EvtScript N(EVS_AscendStarBeam) = {
     Call(SetPlayerSpeed, Float(3.0))
     Call(PlayerMoveTo, -30, -160, 0)
     Call(InterpPlayerYaw, 90, 0)
-    Call(SetMusicTrack, 0, SONG_STAR_WAY_OPENS, 1, 8)
+    Call(SetMusic, 0, SONG_STAR_WAY_OPENS, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     Call(SetNpcJumpscale, NPC_PARTNER, Float(1.0))

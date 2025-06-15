@@ -4,7 +4,7 @@ EvtScript N(EVS_ExitWalk_nok_13_1) = {
     IfEq(GB_KootFavor_State, KOOT_FAVOR_STATE_2)
         Set(GF_KootFavor_LeftKoopaVillage, TRUE)
     EndIf
-    Call(N(func_802428B8_9C7C98))
+    Call(N(StopAllRadioStations))
     Call(ClearAmbientSounds, 250)
     Call(UseExitHeading, 60, nok_01_ENTRY_0)
     Exec(ExitWalk)
@@ -15,7 +15,7 @@ EvtScript N(EVS_ExitWalk_nok_13_1) = {
 };
 
 EvtScript N(EVS_ExitWalk_nok_02_0) = {
-    Call(N(func_802428B8_9C7C98))
+    Call(N(StopAllRadioStations))
     Call(ClearAmbientSounds, 250)
     Call(UseExitHeading, 60, nok_01_ENTRY_1)
     Exec(ExitWalk)

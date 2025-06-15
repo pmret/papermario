@@ -3,13 +3,13 @@
 EvtScript N(EVS_SetupMusic) = {
     Call(GetEntryID, LVar0)
     IfEq(LVar0, flo_07_ENTRY_1)
-        Call(SetMusicTrack, 0, SONG_SUNSHINE_RETURNS, 0, 8)
+        Call(SetMusic, 0, SONG_SUNSHINE_RETURNS, 0, VOL_LEVEL_FULL)
     Else
         Switch(GB_StoryProgress)
             CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-                Call(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
+                Call(SetMusic, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, VOL_LEVEL_FULL)
             CaseDefault
-                Call(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
+                Call(SetMusic, 0, SONG_FLOWER_FIELDS_SUNNY, 0, VOL_LEVEL_FULL)
         EndSwitch
     EndIf
     Call(PlaySound, SOUND_LOOP_FLO_WATER_FLOW_1)

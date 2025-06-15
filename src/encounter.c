@@ -1,5 +1,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
+#include "audio.h"
+#include "audio/public.h"
 #include "npc.h"
 #include "effects.h"
 #include "hud_element.h"
@@ -519,7 +521,7 @@ void update_encounters_neutral(void) {
         }
     } while (0);
 
-    currentEncounter->songID = -1;
+    currentEncounter->songID = AU_SONG_NONE;
     currentEncounter->unk_18 = -1;
     currentEncounter->hitType = 0;
     currentEncounter->forbidFleeing = FALSE;
@@ -1365,7 +1367,7 @@ void update_encounters_pre_battle(void) {
             }
 
             // start battle music
-            if (currentEncounter->songID < 0) {
+            if (currentEncounter->songID <= AU_SONG_NONE) {
                 switch (currentEncounter->firstStrikeType) {
                     case FIRST_STRIKE_NONE:
                         bgm_set_battle_song(SONG_NORMAL_BATTLE, FIRST_STRIKE_NONE);
@@ -1378,7 +1380,7 @@ void update_encounters_pre_battle(void) {
                         break;
                 }
             } else {
-                bgm_set_battle_song(currentEncounter->songID, FIRST_STRIKE_NONE);
+                bgm_set_battle_song(currentEncounter->songID, BGM_VARIATION_0);
             }
             bgm_push_battle_song();
             HasPreBattleSongPushed = TRUE;

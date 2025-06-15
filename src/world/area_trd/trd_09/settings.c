@@ -19,12 +19,12 @@ MapSettings N(settings) = {
 EvtScript N(EVS_SetupMusic) = {
     IfEq(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
         IfEq(GF_TRD09_Defeated_BillBlasters, FALSE)
-            Call(SetMusicTrack, 0, SONG_BULLET_BILL_ASSAULT, 0, 8)
+            Call(SetMusic, 0, SONG_BULLET_BILL_ASSAULT, 0, VOL_LEVEL_FULL)
         Else
-            Call(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, 8)
+            Call(SetMusic, 0, SONG_KOOPA_FORTRESS, 0, VOL_LEVEL_FULL)
         EndIf
     Else
-        Call(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, 8)
+        Call(SetMusic, 0, SONG_KOOPA_FORTRESS, 0, VOL_LEVEL_FULL)
     EndIf
     Call(UseDoorSounds, DOOR_SOUNDS_METAL)
     Return

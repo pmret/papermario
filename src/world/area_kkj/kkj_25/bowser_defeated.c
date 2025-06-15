@@ -301,7 +301,7 @@ EvtScript N(EVS_Scene_BowserDefeated) = {
     Call(FadeOutMusic, 0, 150)
     Call(ClearAmbientSounds, 150)
     Wait(10)
-    Call(SetMusicTrack, 0, SONG_RECOVERED_STAR_ROD, 0, 8)
+    Call(SetMusic, 0, SONG_RECOVERED_STAR_ROD, 0, VOL_LEVEL_FULL)
     Call(NpcJump0, NPC_StarRod, 230, 18, 0, 25 * DT)
     Call(NpcJump0, NPC_StarRod, 190, 18, 0, 20 * DT)
     Thread

@@ -49,7 +49,7 @@ EvtScript N(EVS_Scene_CrystalKingAppears) = {
     EndIf
     Call(DisablePlayerInput, TRUE)
     Call(InterruptUsePartner)
-    Call(SetMusicTrack, 0, SONG_CRYSTAL_KING_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_CRYSTAL_KING_THEME, 0, VOL_LEVEL_FULL)
     Call(ShowMessageAtScreenPos, MSG_CH7_016A, 160, 40)
     Call(SetNpcPos, NPC_CrystalKing_01, 588, 200, 116)
     Call(SetNpcImgFXParams, NPC_CrystalKing_01, IMGFX_SET_ALPHA, 0, 0, 0, 0)

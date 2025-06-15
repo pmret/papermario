@@ -4,11 +4,11 @@ EvtScript N(EVS_SetupMusic) = {
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseRange(jan_04_ENTRY_1, jan_04_ENTRY_2)
-            Call(SetMusicTrack, 0, SONG_VOLCANO_ESCAPE, 0, 8)
+            Call(SetMusic, 0, SONG_VOLCANO_ESCAPE, 0, VOL_LEVEL_FULL)
         CaseEq(jan_04_ENTRY_3)
             Call(FadeInMusic, 0, SONG_JADE_JUNGLE, 0, 3000, 0, 127)
         CaseDefault
-            Call(SetMusicTrack, 0, SONG_JADE_JUNGLE, 0, 8)
+            Call(SetMusic, 0, SONG_JADE_JUNGLE, 0, VOL_LEVEL_FULL)
     EndSwitch
     Call(ClearAmbientSounds, 250)
     Return

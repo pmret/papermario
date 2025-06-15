@@ -478,7 +478,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
         Wait(1)
     EndLoop
     Wait(60)
-    Call(SetMusicTrack, 0, SONG_JR_TROOPA_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_JR_TROOPA_THEME, 0, VOL_LEVEL_FULL)
     Call(PlaySound, SOUND_LOOP_JR_TROOPA_SWIM)
     Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ChargeTripped)
     Call(SetNpcPos, NPC_SELF, 250, -30, 500)

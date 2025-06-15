@@ -334,7 +334,7 @@ EvtScript N(D_80242FA8_B234E8) = {
     Call(NpcJump0, NPC_Whale, 158, -10, -38, 20)
     Call(InterpPlayerYaw, 270, 0)
     Call(SpeakToPlayer, NPC_Whale, ANIM_Kolorado_Walk, ANIM_Kolorado_Still, 5, MSG_CH5_0000)
-    Call(SetMusicTrack, 0, SONG_YOSHIS_VILLAGE, 0, 8)
+    Call(SetMusic, 0, SONG_YOSHIS_VILLAGE, 0, VOL_LEVEL_FULL)
     IfLt(GB_StoryProgress, STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
         Call(AdjustCam, CAM_DEFAULT, Float(5.0), 0, 300, 15, Float(-6.0))
         Call(InterpNpcYaw, NPC_Kolorado_02, 90, 0)
@@ -560,7 +560,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
     EndIf
     Call(SpeakToPlayer, NPC_SELF, 0xFFFFFFFF, 0xFFFFFFFF, 5, MSG_CH5_0008)
     ExecGetTID(N(D_802441C8_B24708), LVar9)
-    Call(SetMusicTrack, 0, SONG_JR_TROOPA_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_JR_TROOPA_THEME, 0, VOL_LEVEL_FULL)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_LOOP_JR_TROOPA_SWIM, SOUND_SPACE_DEFAULT)
     Thread
         Call(func_80241134_B21674)

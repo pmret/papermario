@@ -250,7 +250,7 @@ EvtScript N(EVS_AnimateSpinningRing) = {
 EvtScript N(EVS_LiftCastleUp) = {
     Thread
         Wait(120 * DT)
-        Call(SetMusicTrack, 0, SONG_BOWSER_ATTACKS, 0, 8)
+        Call(SetMusic, 0, SONG_BOWSER_ATTACKS, 0, VOL_LEVEL_FULL)
     EndThread
     Set(MV_CastleLiftDist, 0)
     Thread

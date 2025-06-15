@@ -116,7 +116,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     Call(SetNpcPos, NPC_Bootler, 200, 44, 0)
     Call(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     Set(MV_Unk_00, TRUE)
-    Call(SetMusicTrack, 0, SONG_BOOS_MANSION, 0, 8)
+    Call(SetMusic, 0, SONG_BOOS_MANSION, 0, VOL_LEVEL_FULL)
     Wait(20 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
     Wait(10 * DT)

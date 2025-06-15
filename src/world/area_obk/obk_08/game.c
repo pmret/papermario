@@ -166,7 +166,7 @@ EvtScript N(EVS_BooSpookAndVanish) = {
 EvtScript N(EVS_Scene_BoosUnleashed) = {
     Call(DisablePlayerInput, TRUE)
     Call(InterruptUsePartner)
-    Call(SetMusicTrack, 0, SONG_BOO_MINIGAME, 0, 8)
+    Call(SetMusic, 0, SONG_BOO_MINIGAME, 0, VOL_LEVEL_FULL)
     Wait(20)
     Call(InterpPlayerYaw, 90, 0)
     Wait(20)

@@ -258,7 +258,7 @@ EvtScript N(EVS_Scene_Chapter7) = {
     Call(DisablePlayerInput, TRUE)
     Call(DisablePlayerPhysics, TRUE)
     Call(DisablePartnerAI, 0)
-    Call(SetMusicTrack, 0, SONG_BOWSER_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_BOWSER_THEME, 0, VOL_LEVEL_FULL)
     Call(SetNpcPos, NPC_PARTNER, 440, 65, 0)
     Call(SetNpcYaw, NPC_PARTNER, 270)
     Call(RotateModel, MODEL_o83, 80, 0, -1, 0)

@@ -127,7 +127,7 @@ EvtScript N(EVS_NpcDefeat_KoopaBros_01) = {
     Call(SetNpcPos, NPC_KoopaBros_01, NPC_DISPOSE_LOCATION)
     Call(SetNpcFlagBits, NPC_KoopaBros_01, NPC_FLAG_INVISIBLE, FALSE)
     Call(SetNpcFlagBits, NPC_KoopaBros_01, NPC_FLAG_HAS_SHADOW, TRUE)
-    Call(SetMusicTrack, 0, SONG_KOOPA_BROS_INTERLUDE, 0, 8)
+    Call(SetMusic, 0, SONG_KOOPA_BROS_INTERLUDE, 0, VOL_LEVEL_FULL)
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)

@@ -373,7 +373,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     Wait(40)
     Call(SetCamProperties, CAM_DEFAULT, Float(4.0), 300, 0, 0, 1100, Float(7.0), Float(0.0))
     Wait(20)
-    Call(SetMusicTrack, 0, SONG_BOWSER_BATTLE, 0, 8)
+    Call(SetMusic, 0, SONG_BOWSER_BATTLE, 0, VOL_LEVEL_FULL)
     Exec(N(EVS_ArenaEyesFlash))
     Wait(30)
     Set(MV_ArenaState, ARENA_STATE_ACTIVATING)

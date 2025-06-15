@@ -38,7 +38,7 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
         Wait(1)
     EndLoop
     Call(DisablePlayerInput, TRUE)
-    Call(SetMusicTrack, 0, SONG_TUBBA_BLUBBA_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_TUBBA_BLUBBA_THEME, 0, VOL_LEVEL_FULL)
     Wait(15)
     Thread
         Call(UseSettingsFrom, CAM_DEFAULT, -50, 0, 180)
@@ -51,7 +51,7 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
     Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim09)
     Call(SetNpcYaw, NPC_SELF, 270)
     Call(NpcMoveTo, NPC_SELF, -53, 180, 60)
-    Call(SetMusicTrack, 0, SONG_TUBBA_BLUBBA_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_TUBBA_BLUBBA_THEME, 0, VOL_LEVEL_FULL)
     Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim06)
     Wait(15)
     Call(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim06, 0, MSG_CH3_00F3)

@@ -31,7 +31,7 @@ EvtScript N(EVS_Main) = {
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_TexPan_Water))
     Exec(N(EVS_BindSlideTriggers))
-    Call(SetMusicTrack, 0, SONG_MT_RUGGED, 0, 8)
+    Call(SetMusic, 0, SONG_MT_RUGGED, 0, VOL_LEVEL_FULL)
     Call(PlaySoundAtF, SOUND_LOOP_IWA00_FLOW3, SOUND_SPACE_WITH_DEPTH, 35, -80, -120)
     Call(PlaySoundAtF, SOUND_LOOP_IWA00_FLOW2, SOUND_SPACE_WITH_DEPTH, 500, 85, -120)
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))

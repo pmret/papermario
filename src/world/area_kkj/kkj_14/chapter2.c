@@ -80,7 +80,7 @@ EvtScript N(EVS_FocusCam_Door_Ch2) = {
 
 EvtScript N(EVS_Scene_Chapter2) = {
     Call(DisablePlayerInput, TRUE)
-    Call(SetMusicTrack, 0, SONG_BOWSER_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_BOWSER_THEME, 0, VOL_LEVEL_FULL)
     Call(DisablePartnerAI, 0)
     Call(SetNpcPos, NPC_PARTNER, 110, 0, -190)
     Call(SetNpcYaw, NPC_PARTNER, 270)
@@ -126,7 +126,7 @@ EvtScript N(EVS_Scene_Chapter2) = {
     ExecWait(N(EVS_FocusCam_Door_Ch2))
     Wait(5 * DT)
     Exec(N(EVS_OpenDoor_Ch2))
-    Call(SetMusicTrack, 0, SONG_KAMMY_KOOPA_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_KAMMY_KOOPA_THEME, 0, VOL_LEVEL_FULL)
     Call(SetNpcPos, NPC_Kammy, -470, 0, -30)
     Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim03)
     Call(SetNpcSpeed, NPC_Kammy, Float(5.0 / DT))
@@ -194,7 +194,7 @@ EvtScript N(EVS_Scene_Chapter2) = {
     EndLoop
     Exec(N(EVS_CloseDoor_Ch2))
     Wait(30 * DT)
-    Call(SetMusicTrack, 0, SONG_PRISONER_PEACH_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_PRISONER_PEACH_THEME, 0, VOL_LEVEL_FULL)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetCamDistance, CAM_DEFAULT, 300)
     Call(SetPanTarget, CAM_DEFAULT, 20, 0, 30)

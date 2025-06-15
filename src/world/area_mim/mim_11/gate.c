@@ -41,7 +41,7 @@ EvtScript N(D_80242560_BB95D0) = {
     Call(SetPanTarget, CAM_DEFAULT, 23, 0, -109)
     Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(SetMusicTrack, 0, SONG_BOOS_MANSION, 0, 8)
+    Call(SetMusic, 0, SONG_BOOS_MANSION, 0, VOL_LEVEL_FULL)
     Call(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_VANISH_A, SOUND_SPACE_DEFAULT)
     SetF(LVar0, Float(0.0))
     Loop(90 * DT)
@@ -50,7 +50,7 @@ EvtScript N(D_80242560_BB95D0) = {
         Wait(1)
     EndLoop
     Call(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Talk, ANIM_Bootler_Idle, 0, MSG_CH3_0028)
-    Call(SetMusicTrack, 0, SONG_BOOS_MANSION, 1, 8)
+    Call(SetMusic, 0, SONG_BOOS_MANSION, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Wait(10 * DT)
     Call(SetCamPitch, CAM_DEFAULT, Float(0.0), Float(-25.0))
     Call(SetCamDistance, CAM_DEFAULT, 550)

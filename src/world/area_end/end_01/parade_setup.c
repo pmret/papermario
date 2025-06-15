@@ -735,7 +735,7 @@ EvtScript N(EVS_ParadePhase_PlayCredits) = {
 EvtScript N(EVS_ManageParade) = {
     Call(DisablePlayerInput, TRUE)
     Call(DisablePlayerPhysics, TRUE)
-    Call(SetMusicTrack, 0, SONG_PARADE_NIGHT, 0, 8)
+    Call(SetMusic, 0, SONG_PARADE_NIGHT, 0, VOL_LEVEL_FULL)
     Exec(N(EVS_SetupInitialCamera))
     Exec(N(EVS_ManageNpcPool))
     ExecGetTID(N(EVS_ParadePhase_StarSpirits), LVarA)

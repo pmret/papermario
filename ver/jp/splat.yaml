@@ -90,18 +90,18 @@ segments:
     - [auto, c, 23680]
     - [auto, c, 25AF0]
 
-    - [auto, c, audio/25f00_len_940]
+    - [auto, c, audio/core/system]
     - [auto, c, audio/sfx_player]
-    - [auto, c, audio/28910_len_5090]
-    - [auto, c, audio/2BF90]
-    - [auto, c, audio/2d9a0_len_890]
-    - [auto, c, audio/2e230_len_2190]
-    - [auto, c, audio/303c0_len_3e10]
-    - [auto, c, audio/30450]
-    - [auto, c, audio/31650]
-    - [auto, c, audio/33450]
-    - [auto, c, audio/tables] # data only
-    - [auto, c, audio/reverb]
+    - [auto, c, audio/bgm_player]
+    - [auto, c, audio/mseq_player]
+    - [auto, c, audio/core/voice]
+    - [auto, c, audio/core/engine]
+    - [auto, c, audio/load_banks]
+    - [auto, c, audio/snd_interface]
+    - [auto, c, audio/core/syn_driver]
+    - [auto, c, audio/core/pull_voice]
+    - [auto, c, audio/core/tables] # data only
+    - [auto, c, audio/core/reverb]
 
     - [auto, c, effects]
     - [auto, c, 5B320] # data only
@@ -807,8 +807,8 @@ segments:
     - [auto, c, audio/ambience]
     - [auto, c, windows]
     - [auto, c, sprite_shading]
-    - [auto, c, audio/sfx]
-    - [auto, c, audio/e0b30_len_b80]
+    - [auto, c, audio/sfx_control]
+    - [auto, c, audio/bgm_control]
     - [auto, c, bss/engine2_post_bss]
     - start: 0xE6620
       type: .data

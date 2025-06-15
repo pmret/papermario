@@ -29,7 +29,7 @@ EvtScript N(EVS_ParadePhase_Luigi) = {
     Wait(30 * DT)
     Call(SetNpcAnimation, NPC_Luigi, ANIM_ParadeLuigi_MarchInPlace)
     Wait(7 * DT)
-    Call(SetMusicTrack, 0, SONG_PARADE_DAY, 0, 8)
+    Call(SetMusic, 0, SONG_PARADE_DAY, 0, VOL_LEVEL_FULL)
     Wait(120 * DT)
     Wait(100 * DT)
     Call(InterpNpcYaw, NPC_Luigi, 270, 0)

@@ -26,7 +26,7 @@ Vec3f N(TwinkApproachPath)[] = {
 EvtScript N(EVS_Scene_TossedBackInRoom) = {
     Call(DisablePlayerInput, TRUE)
     Call(DisablePlayerPhysics, TRUE)
-    Call(SetMusicTrack, 0, SONG_PEACH_CAUGHT, 0, 8)
+    Call(SetMusic, 0, SONG_PEACH_CAUGHT, 0, VOL_LEVEL_FULL)
     Call(SetPlayerPos, -480, 30, -30)
     Call(SetPlayerAnimation, ANIM_Peach2_Carried)
     Call(DisablePartnerAI, 0)

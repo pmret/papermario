@@ -33,7 +33,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
         IfLt(LVar0, 210)
             Goto(0)
         EndIf
-    Call(SetMusicTrack, 0, SONG_MINIBOSS_BATTLE, 0, 8)
+    Call(SetMusic, 0, SONG_MINIBOSS_BATTLE, 0, VOL_LEVEL_FULL)
     SetGroup(EVT_GROUP_NOT_BATTLE)
     Thread
         Wait(3)
@@ -109,7 +109,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
 EvtScript N(EVS_NpcDefeat_GoombaBros_Red) = {
     Thread
         Wait(5 * DT)
-        Call(SetMusicTrack, 0, SONG_GOOMBA_BROS_RETREAT, 0, 8)
+        Call(SetMusic, 0, SONG_GOOMBA_BROS_RETREAT, 0, VOL_LEVEL_FULL)
     EndThread
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)

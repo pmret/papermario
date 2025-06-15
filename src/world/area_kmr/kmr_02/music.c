@@ -9,7 +9,7 @@ EvtScript N(EVS_FadeOutMusic) = {
 
 EvtScript N(EVS_SetupMusic) = {
     IfGe(GB_StoryProgress, STORY_CH0_MET_INNKEEPER)
-        Call(SetMusicTrack, 0, SONG_GOOMBA_VILLAGE, 0, 8)
+        Call(SetMusic, 0, SONG_GOOMBA_VILLAGE, 0, VOL_LEVEL_FULL)
     EndIf
     Call(GetEntryID, LVar0)
     Switch(LVar0)
@@ -37,7 +37,7 @@ EvtScript N(EVS_PopSong) = {
 };
 
 EvtScript N(EVS_PlayRestingSong) = {
-    Call(SetMusicTrack, 0, SONG_TAKING_REST, 0, 8)
+    Call(SetMusic, 0, SONG_TAKING_REST, 0, VOL_LEVEL_FULL)
     Return
     End
 };

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "audio.h"
 
 API_CALLABLE(PollMusicEvents);
 
@@ -20,7 +21,7 @@ API_CALLABLE(PollMusicEvents) {
     u32 count;
     s32 i;
 
-    bgm_poll_music_events(&list, &count);
+    snd_song_poll_music_events(&list, &count);
 
     for (i = 0; i < count; i++, list++) {
         MusicEvent* cur = MusicEventList;
@@ -46,7 +47,7 @@ API_CALLABLE(PollMusicEvents) {
             }
         }
     }
-    bgm_flush_music_events();
+    snd_song_flush_music_events();
     MusicEventPollCount++;
     return ApiStatus_BLOCK;
 }
@@ -72,14 +73,14 @@ API_CALLABLE(FadeOutMusic) {
     s32 musicPlayer = evt_get_variable(script, *args++);
     s32 fadeTime = evt_get_variable(script, *args++);
 
-    if (bgm_set_song(musicPlayer, -1, 0, fadeTime, 8)) {
+    if (bgm_set_song(musicPlayer, AU_SONG_NONE, 0, fadeTime, VOL_LEVEL_FULL)) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;
     }
 }
 
-API_CALLABLE(SetMusicTrack) {
+API_CALLABLE(SetMusic) {
     Bytecode* args = script->ptrReadPos;
     s32 musicPlayer = evt_get_variable(script, *args++);
     s32 songID = evt_get_variable(script, *args++);
@@ -102,7 +103,7 @@ API_CALLABLE(FadeInMusic) {
     s16 fadeStartVolume = evt_get_variable(script, *args++);
     s16 fadeEndVolume = evt_get_variable(script, *args++);
 
-    if (func_8014A964(musicPlayer, songID, variation, fadeTime, fadeStartVolume, fadeEndVolume)) {
+    if (bgm_fade_in_song(musicPlayer, songID, variation, fadeTime, fadeStartVolume, fadeEndVolume)) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;
@@ -113,7 +114,7 @@ API_CALLABLE(EnableMusicProximityMix) {
     Bytecode* args = script->ptrReadPos;
     s32 playerIndex = evt_get_variable(script, *args++);
 
-    gMusicSettings[playerIndex].flags |= MUSIC_SETTINGS_FLAG_ENABLE_PROXIMITY_MIX;
+    gMusicControlData[playerIndex].flags |= MUSIC_FLAG_ENABLE_PROX_MIX;
     return ApiStatus_DONE2;
 }
 
@@ -127,7 +128,7 @@ API_CALLABLE(AdjustMusicProximityMix) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(SetMusicTrackVolumes) {
+API_CALLABLE(SetTrackVolumes) {
     Bytecode* args = script->ptrReadPos;
     s16 trackVolSet = evt_get_variable(script, *args++);
 
@@ -231,7 +232,7 @@ API_CALLABLE(StopTrackingSoundPos) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
 
-    snd_stop_tracking_env_sound_pos(soundID, TRUE);
+    sfx_stop_tracking_env_sound_pos(soundID, TRUE);
     return ApiStatus_DONE2;
 }
 

@@ -95,7 +95,7 @@ EvtScript N(EVS_CloseDoor_Ch0) = {
 EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     Call(DisablePlayerInput, TRUE)
     Call(DisablePlayerPhysics, TRUE)
-    Call(SetMusicTrack, 0, SONG_BOWSER_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_BOWSER_THEME, 0, VOL_LEVEL_FULL)
     Call(SetNpcPos, NPC_Bowser, -70, 0, -55)
     Call(InterpNpcYaw, NPC_Bowser, 90, 0)
     Call(SetNpcAnimation, NPC_Bowser, ANIM_WorldBowser_Idle)
@@ -173,7 +173,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     Wait(50 * DT)
     ExecWait(N(EVS_FocusCam_WholeRoom))
     Wait(20 * DT)
-    Call(SetMusicTrack, 0, SONG_KOOPA_BROS_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_KOOPA_BROS_THEME, 0, VOL_LEVEL_FULL)
     Call(ShowMessageAtScreenPos, MSG_Peach_CH1_KoopaBros_0008, 300, 20)
     Wait(20 * DT)
     Thread

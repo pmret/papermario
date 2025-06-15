@@ -103,7 +103,7 @@ EvtScript N(EVS_Scene_Chapter0) = {
     Wait(10 * DT)
     Call(InterpPlayerYaw, 270, 3)
     Wait(15 * DT)
-    Call(SetMusicTrack, 0, SONG_BOWSER_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_BOWSER_THEME, 0, VOL_LEVEL_FULL)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
     Call(SetPanTarget, CAM_DEFAULT, -330, 0, 0)
     Call(SetCamPosA, CAM_DEFAULT, -330, 32)
@@ -240,7 +240,7 @@ EvtScript N(EVS_Scene_Chapter0) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(SetMusicTrack, 0, SONG_TWINK_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_TWINK_THEME, 0, VOL_LEVEL_FULL)
     Thread
         Call(LoadPath, 100 * DT, Ref(N(TwinkEnterPath)), ARRAY_COUNT(N(TwinkEnterPath)), EASING_LINEAR)
         Loop(0)

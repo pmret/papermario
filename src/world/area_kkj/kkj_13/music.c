@@ -7,10 +7,10 @@ EvtScript N(EVS_SetupMusic) = {
             IfEq(GF_KKJ13_BowserTaunts, FALSE)
                 Thread
                     Wait(30)
-                    Call(SetMusicTrack, 0, SONG_BOWSER_THEME, 0, 8)
+                    Call(SetMusic, 0, SONG_BOWSER_THEME, 0, VOL_LEVEL_FULL)
                 EndThread
             Else
-                Call(SetMusicTrack, 0, SONG_BOWSER_THEME, 0, 8)
+                Call(SetMusic, 0, SONG_BOWSER_THEME, 0, VOL_LEVEL_FULL)
             EndIf
         CaseDefault
     EndSwitch

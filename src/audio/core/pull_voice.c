@@ -1,10 +1,11 @@
-#include "common.h"
 #include "audio.h"
+#include "audio/core.h"
 
 #define LFSAMPLES       4
 #define AUEQPOWER_LENGTH 128
 
-// values for cosine from 0 to pi/2 multiplied by 32767
+// lookup table for constant-power panning
+// these are values for cosine from 0 to pi/2 multiplied by 32767
 // called n_eqpower in libultra
 s16 AuEqPower[AUEQPOWER_LENGTH] = {
     32767, 32764, 32757, 32744, 32727, 32704, 32677, 32644,
@@ -25,10 +26,10 @@ s16 AuEqPower[AUEQPOWER_LENGTH] = {
     2833,  2429,  2025,  1620,  1216,  810,   405,   0
 };
 
-static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* arg1, s32 count, s32 size, s16 arg4, s16 arg5, s32 flags);
-static s16 _getRate(f64 arg0, f64 arg1, s32 arg4, u16* arg5);
+static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* filter, s32 tsam, s32 nbytes, s16 output, s16 input, s32 flags);
+static s16 _getRate(f64 vol, f64 tgt, s32 count, u16* ratel);
 
-// decode, resample and mix
+// decode, resample, and mix
 Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
     Acmd* ptr = cmdBufPos;
     AuLoadFilter* decoder;
@@ -45,19 +46,27 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
     resampler = &pvoice->resampler;
     decoder = &pvoice->decoder;
 
+    // return if voice is not playing
     if (envMixer->motion != AL_PLAYING) {
         return ptr;
     }
+
+    // buffer to store decoded (or raw) samples before mixing
     outp = N_AL_DECODER_OUT;
+
     if (resampler->ratio > MAX_RATIO) {
         resampler->ratio = MAX_RATIO;
     }
 
+    // convert pitch ratio to fixed-point resampling increment
     resampler->ratio = (s32)(resampler->ratio * UNITY_PITCH);
     resampler->ratio = resampler->ratio / UNITY_PITCH;
-    finCount = resampler->delta + resampler->ratio * (f32)184;
+
+    // determine how many output samples are needed for this frame
+    finCount = resampler->delta + resampler->ratio * (f32)AUDIO_SAMPLES;
     outCount = (s32) finCount;
     resampler->delta = finCount - (f32) outCount;
+
     if (outCount != 0) {
         if (decoder->instrument->type == AL_ADPCM_WAVE) {
             s32 nSam;
@@ -73,8 +82,10 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
             s32 looped = FALSE;
             inp = N_AL_DECODER_IN;
 
+            // load ADPCM predictor
             aLoadADPCM(ptr++, decoder->bookSize, K0_TO_PHYS(decoder->instrument->predictor));
 
+            // will loop be triggered during this frame? if so, only process up to loop end
             looped = (decoder->loop.end < outCount + decoder->sample) && (decoder->loop.count != 0);
 
             if (looped) {
@@ -82,17 +93,21 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
             } else {
                 nSam = outCount;
             }
+
             if (decoder->lastsam != 0) {
                 nLeft = ADPCMFSIZE - decoder->lastsam;
             } else {
                 nLeft = 0;
             }
+
             tsam = nSam - nLeft;
             if (tsam < 0) {
                 tsam = 0;
             }
+
             nframes = (tsam + ADPCMFSIZE - 1) >> LFSAMPLES;
             nbytes = nframes * ADPCMFBYTES;
+
             if (looped) {
                 ptr = _decodeChunk(ptr, decoder, tsam, nbytes, outp, inp, decoder->first);
                 if (decoder->lastsam != 0) {
@@ -102,12 +117,14 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
                 }
 
                 decoder->lastsam = decoder->loop.start & 0xF;
-                decoder->memin = (s32)decoder->instrument->base + ADPCMFBYTES * ((s32)(decoder->loop.start >> LFSAMPLES) + 1);
+                decoder->memin = (s32)decoder->instrument->wavData + ADPCMFBYTES * ((s32)(decoder->loop.start >> LFSAMPLES) + 1);
                 decoder->sample = decoder->loop.start;
+
+                // continue decoding looped portion if needed
                 bEnd = outp;
                 while (outCount > nSam) {
                     outCount -= nSam;
-                    op = (bEnd + ((nframes + 1) << (LFSAMPLES + 1)) + 16) & ~0x1f;
+                    op = (bEnd + ((nframes + 1) << (LFSAMPLES + 1)) + 16) & ~0x1F;
                     bEnd += nSam << 1;
                     if (decoder->loop.count != -1 && decoder->loop.count != 0) {
                         decoder->loop.count--;
@@ -127,7 +144,7 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
                 decoder->memin += ADPCMFBYTES * nframes;
             } else {
                 nSam = nframes << LFSAMPLES;
-                overFlow = decoder->memin + nbytes - ((s32)decoder->instrument->base + decoder->instrument->wavDataLength);
+                overFlow = decoder->memin + nbytes - ((s32)decoder->instrument->wavData + decoder->instrument->wavDataLength);
 
                 if (overFlow <= 0) {
                     overFlow = 0;
@@ -177,7 +194,7 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
                 nSam = decoder->loop.end - decoder->sample;
                 nbytes = nSam << 1;
                 if (nSam > 0) {
-                    dramLoc = decoder->dmaFunc(decoder->memin, nbytes, decoder->dmaState, decoder->instrument->unk_25);
+                    dramLoc = decoder->dmaFunc(decoder->memin, nbytes, decoder->dmaState, decoder->instrument->useDma);
                     dramAlign = dramLoc & 7;
                     nbytes += dramAlign;
                     n_aLoadBuffer(ptr++, nbytes + 8 - (nbytes & 7), outp, dramLoc - dramAlign);
@@ -185,7 +202,7 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
                     dramAlign = 0;
                 }
                 outp += dramAlign;
-                decoder->memin = (s32)decoder->instrument->base + (decoder->loop.start << 1);
+                decoder->memin = (s32)decoder->instrument->wavData + (decoder->loop.start << 1);
                 decoder->sample = decoder->loop.start;
                 op = outp;
                 while (outCount > nSam){
@@ -196,7 +213,7 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
                     }
                     nSam = MIN(outCount, decoder->loop.end - decoder->loop.start);
                     nbytes = nSam << 1;
-                    dramLoc = decoder->dmaFunc(decoder->memin, nbytes, decoder->dmaState, decoder->instrument->unk_25);
+                    dramLoc = decoder->dmaFunc(decoder->memin, nbytes, decoder->dmaState, decoder->instrument->useDma);
                     dramAlign = dramLoc & 7;
                     nbytes += dramAlign;
                     if ((op & 7) != 0) {
@@ -214,7 +231,7 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
                 decoder->memin += outCount << 1;
             } else {
                 nbytes = outCount << 1;
-                overFlow = decoder->memin + nbytes - ((s32)decoder->instrument->base + decoder->instrument->wavDataLength);
+                overFlow = decoder->memin + nbytes - ((s32)decoder->instrument->wavData + decoder->instrument->wavDataLength);
                 if (overFlow <= 0) {
                     overFlow = 0;
                 } else {
@@ -226,7 +243,7 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
                 if (overFlow < nbytes) {
                     if (outCount > 0) {
                         nbytes -= overFlow;
-                        dramLoc = decoder->dmaFunc(decoder->memin, nbytes, decoder->dmaState, decoder->instrument->unk_25);
+                        dramLoc = decoder->dmaFunc(decoder->memin, nbytes, decoder->dmaState, decoder->instrument->useDma);
                         dramAlign = dramLoc & 7;
                         nbytes += dramAlign;
                         n_aLoadBuffer(ptr++, nbytes + 8 - (nbytes & 7), outp, dramLoc - dramAlign);
@@ -250,12 +267,15 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
             }
         }
     }
+
+    // resample audio from source buffer to output buffer
     incr = (s32)(resampler->ratio * UNITY_PITCH);
     n_aResample(ptr++, osVirtualToPhysical(resampler->state), resampler->first, incr, outp, 0);
-    resampler->first = 0;
+    resampler->first = FALSE;
 
-    if (envMixer->first != 0) {
-        envMixer->first = 0;
+    // set up envelope mixing
+    if (envMixer->dirty) {
+        envMixer->dirty = FALSE;
         if (!AuSynUseStereo) {
             envMixer->ltgt = (envMixer->volume * AuEqPower[AUEQPOWER_LENGTH / 2]) >> 15;
             envMixer->rtgt = (envMixer->volume * AuEqPower[AUEQPOWER_LENGTH / 2]) >> 15;
@@ -266,39 +286,43 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
         envMixer->lratm = _getRate(envMixer->cvolL, envMixer->ltgt, envMixer->segEnd, &envMixer->lratl);
         envMixer->rratm = _getRate(envMixer->cvolR, envMixer->rtgt, envMixer->segEnd, &envMixer->rratl);
         n_aSetVolume(ptr++, A_RATE, envMixer->ltgt, envMixer->lratm, envMixer->lratl);
-        n_aSetVolume(ptr++, A_LEFT  | A_VOL, envMixer->cvolL, envMixer->dryamt, envMixer->wetamt);
-        n_aSetVolume(ptr++, A_RIGHT | A_VOL, envMixer->rtgt, envMixer->rratm, envMixer->rratl);
+        n_aSetVolume(ptr++, A_VOL | A_LEFT, envMixer->cvolL, envMixer->dryamt, envMixer->wetamt);
+        n_aSetVolume(ptr++, A_VOL | A_RIGHT, envMixer->rtgt, envMixer->rratm, envMixer->rratl);
         n_aEnvMixer(ptr++, A_INIT, envMixer->cvolR, osVirtualToPhysical(envMixer->state));
     } else {
         n_aEnvMixer(ptr++, A_CONTINUE, 0, osVirtualToPhysical(envMixer->state));
     }
 
+    // advance envelope segment
     envMixer->delta += AUDIO_SAMPLES;
     if (envMixer->segEnd < envMixer->delta) {
         envMixer->delta = envMixer->segEnd;
     }
+
+    // if stopped, reset state
     if (envMixer->motion == AL_STOPPED) {
-        envMixer->first = 1;
+        envMixer->dirty = TRUE;
         envMixer->volume = 1;
         resampler->delta = 0.0f;
-        resampler->first = 1;
+        resampler->first = TRUE;
         decoder->lastsam = 0;
         decoder->first = 1;
         decoder->sample = 0;
-        decoder->memin = (s32) decoder->instrument->base;
+        decoder->memin = (s32) decoder->instrument->wavData;
         decoder->loop.count = decoder->instrument->loopCount;
-        func_80052E30(pvoice->index);
+        au_release_voice(pvoice->index);
     }
     return ptr;
 }
 
+/// loads and decodes a chunk of ADPCM data into RSP memory
 static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* filter, s32 tsam, s32 nbytes, s16 output, s16 input, s32 flags) {
     s32 endAddr;
     s32 endAlign;
     s32 paddedSize;
 
     if (nbytes > 0) {
-        endAddr = filter->dmaFunc((s32) filter->memin, nbytes, filter->dmaState, filter->instrument->unk_25);
+        endAddr = filter->dmaFunc((s32) filter->memin, nbytes, filter->dmaState, filter->instrument->useDma);
         endAlign = endAddr & 7;
         nbytes += endAlign;
         paddedSize = nbytes + 8 - (nbytes & 7);
@@ -317,6 +341,8 @@ static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* filter, s32 tsam, s32 n
     return cmdBufPos;
 }
 
+// computes an audio volume ramp rate
+// used for smooth volume transitions in envelope segments
 static s16 _getRate(f64 vol, f64 tgt, s32 count, u16* ratel) {
     f64 inv;
     f64 a;

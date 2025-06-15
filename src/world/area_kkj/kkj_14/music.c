@@ -5,13 +5,13 @@ EvtScript N(EVS_SetupMusic) = {
         CaseOrEq(STORY_CH0_BEGAN_PEACH_MISSION)
         CaseOrEq(STORY_CH1_BEGAN_PEACH_MISSION)
         CaseOrEq(STORY_CH3_BEGAN_PEACH_MISSION)
-            Call(SetMusicTrack, 0, SONG_PRISONER_PEACH_THEME, 0, 8)
+            Call(SetMusic, 0, SONG_PRISONER_PEACH_THEME, 0, VOL_LEVEL_FULL)
         EndCaseGroup
         CaseOrEq(STORY_CH2_BEGAN_PEACH_MISSION)
         CaseOrEq(STORY_CH4_BEGAN_PEACH_MISSION)
         CaseOrEq(STORY_CH5_BEGAN_PEACH_MISSION)
         CaseOrEq(STORY_CH6_BEGAN_PEACH_MISSION)
-            Call(SetMusicTrack, 0, SONG_PEACH_MISSION, 0, 8)
+            Call(SetMusic, 0, SONG_PEACH_MISSION, 0, VOL_LEVEL_FULL)
         EndCaseGroup
     EndSwitch
     Return

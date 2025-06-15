@@ -10,7 +10,7 @@ EvtScript N(EVS_Scene_MeetBow) = {
     EndIf
     Set(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
     Call(DisablePlayerInput, TRUE)
-    Call(SetMusicTrack, 0, SONG_CHEERFUL_BOOS_MANSION, 0, 8)
+    Call(SetMusic, 0, SONG_CHEERFUL_BOOS_MANSION, 0, VOL_LEVEL_FULL)
     Thread
         Wait(10 * DT)
         Call(SetPlayerPos, -180, 0, 344)

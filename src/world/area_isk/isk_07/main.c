@@ -23,15 +23,15 @@ EvtScript N(EVS_Main) = {
     Exec(N(EVS_SetupSwitch))
     Exec(N(EVS_SetupSarcophagi))
 #if VERSION_PAL
-    Call(SetMusicTrack, 0, SONG_DRY_DRY_RUINS, 0, 8)
+    Call(SetMusic, 0, SONG_DRY_DRY_RUINS, 0, VOL_LEVEL_FULL)
 #else
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_SOLVED_ARTIFACT_PUZZLE)
-            Call(SetMusicTrack, 0, SONG_DRY_DRY_RUINS, 0, 8)
+            Call(SetMusic, 0, SONG_DRY_DRY_RUINS, 0, VOL_LEVEL_FULL)
         CaseLt(STORY_CH2_DEFEATED_TUTANKOOPA)
-            Call(SetMusicTrack, 0, SONG_RUINS_BASEMENT, 0, 8)
+            Call(SetMusic, 0, SONG_RUINS_BASEMENT, 0, VOL_LEVEL_FULL)
         CaseGe(STORY_CH2_DEFEATED_TUTANKOOPA)
-            Call(SetMusicTrack, 0, SONG_DRY_DRY_RUINS, 0, 8)
+            Call(SetMusic, 0, SONG_DRY_DRY_RUINS, 0, VOL_LEVEL_FULL)
     EndSwitch
 #endif
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))

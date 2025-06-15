@@ -197,7 +197,7 @@ EvtScript N(EVS_Scene_BeginGame) = {
     Call(DisablePlayerInput, TRUE)
     Thread
         Wait(5 * DT)
-        Call(SetMusicTrack, 0, SONG_MAIL_CALL, 0, 8)
+        Call(SetMusic, 0, SONG_MAIL_CALL, 0, VOL_LEVEL_FULL)
     EndThread
     Call(InterpPlayerYaw, 90, 0)
     Call(SetPlayerPos, -50, 30, -80)
@@ -383,7 +383,7 @@ EvtScript N(EVS_Scene_BeginGame) = {
     Call(SpeakToPlayer, NPC_Scene_Luigi, ANIM_Luigi_TalkRead, ANIM_Luigi_IdleRead, 0, MSG_Intro_0021)
     Call(SetNpcAnimation, NPC_Scene_Luigi, ANIM_Luigi_ReadLetter)
     Wait(10 * DT)
-    Call(SetMusicTrack, 0, SONG_PRISONER_PEACH_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_PRISONER_PEACH_THEME, 0, VOL_LEVEL_FULL)
     Wait(5 * DT)
     Call(ClearAmbientSounds, 250)
     Call(GotoMapSpecial, Ref("osr_00"), osr_00_ENTRY_3, TRANSITION_SLOW_FADE_TO_WHITE)
@@ -403,7 +403,7 @@ EvtScript N(EVS_Scene_SettingOff) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(60 * DT)
-    Call(SetMusicTrack, 0, SONG_PEACHS_CASTLE_PARTY, 1, 8)
+    Call(SetMusic, 0, SONG_PEACHS_CASTLE_PARTY, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Exec(N(EVS_OpenAndCloseDoor_Intro))
     Thread
         Wait(10 * DT)

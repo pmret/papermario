@@ -55,7 +55,7 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
     Set(GF_KZN06_Visited, TRUE)
     ExecWait(N(EVS_MakeEntities))
-    Call(SetMusicTrack, 0, SONG_MT_LAVALAVA, 0, 8)
+    Call(SetMusic, 0, SONG_MT_LAVALAVA, 0, VOL_LEVEL_FULL)
     IfLt(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)
         Call(PlayAmbientSounds, AMBIENT_LAVA_2)
     Else

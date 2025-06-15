@@ -78,7 +78,7 @@ EvtScript N(EVS_Main) = {
         Call(FadeOutMusic, 0, 150)
         Call(ClearAmbientSounds, 150)
         Wait(10)
-        Call(SetMusicTrack, 0, SONG_CHAPTER_END, 0, 8)
+        Call(SetMusic, 0, SONG_CHAPTER_END, 0, VOL_LEVEL_FULL)
     EndThread
     Wait(20)
     Return

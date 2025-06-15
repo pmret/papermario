@@ -8,9 +8,9 @@ EvtScript N(EVS_PlaySongForPlayerPos) = {
     Label(0)
         Switch(GB_StoryProgress)
             CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-                Call(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
+                Call(SetMusic, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, VOL_LEVEL_FULL)
             CaseDefault
-                Call(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
+                Call(SetMusic, 0, SONG_FLOWER_FIELDS_SUNNY, 0, VOL_LEVEL_FULL)
         EndSwitch
         Loop(0)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -22,9 +22,9 @@ EvtScript N(EVS_PlaySongForPlayerPos) = {
         Label(10)
         Switch(GB_StoryProgress)
             CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-                Call(SetMusicTrack, 0, SONG_SUN_TOWER_CLOUDY, 0, 8)
+                Call(SetMusic, 0, SONG_SUN_TOWER_CLOUDY, 0, VOL_LEVEL_FULL)
             CaseDefault
-                Call(SetMusicTrack, 0, SONG_SUN_TOWER_SUNNY, 0, 8)
+                Call(SetMusic, 0, SONG_SUN_TOWER_SUNNY, 0, VOL_LEVEL_FULL)
         EndSwitch
         Loop(0)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -45,7 +45,7 @@ EvtScript N(EVS_SetupMusic) = {
 };
 
 EvtScript N(EVS_PushPartnerSong) = {
-    Call(SetMusicTrack, 0, SONG_NEW_PARTNER, 0, 8)
+    Call(SetMusic, 0, SONG_NEW_PARTNER, 0, VOL_LEVEL_FULL)
     Return
     End
 };
@@ -53,7 +53,7 @@ EvtScript N(EVS_PushPartnerSong) = {
 EvtScript N(EVS_PopSong) = {
     Call(FadeOutMusic, 0, 500)
     Wait(15)
-    Call(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
+    Call(SetMusic, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, VOL_LEVEL_FULL)
     Return
     End
 };

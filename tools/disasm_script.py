@@ -556,7 +556,7 @@ replace_funcs = {
         3: "PlayerAnims",
         4: "PlayerAnims",
     },
-    "SetMusicTrack": {1: "SongIDs"},
+    "SetMusic": {1: "SongIDs"},
     "SetNpcAnimation": {0: "NpcIDs", 1: "CustomAnim"},
     "SetNpcAux": {0: "NpcIDs"},
     "SetNpcFlagBits": {0: "NpcIDs", 1: "NpcFlags", 2: "Bool"},

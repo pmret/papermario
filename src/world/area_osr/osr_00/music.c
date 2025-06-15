@@ -3,11 +3,11 @@
 EvtScript N(EVS_SetupMusic) = {
     Switch(GB_StoryProgress)
         CaseEq(STORY_INTRO)
-            Call(SetMusicTrack, 0, SONG_PEACHS_CASTLE_PARTY, 1, 8)
+            Call(SetMusic, 0, SONG_PEACHS_CASTLE_PARTY, BGM_VARIATION_1, VOL_LEVEL_FULL)
         CaseEq(STORY_EPILOGUE)
-            Call(SetMusicTrack, 0, SONG_PEACHS_CASTLE_PARTY, 0, 8)
+            Call(SetMusic, 0, SONG_PEACHS_CASTLE_PARTY, 0, VOL_LEVEL_FULL)
         CaseDefault
-            Call(SetMusicTrack, 0, SONG_TOAD_TOWN, 0, 8)
+            Call(SetMusic, 0, SONG_TOAD_TOWN, 0, VOL_LEVEL_FULL)
     EndSwitch
     Call(GetEntryID, LVar0)
     IfEq(LVar0, osr_00_ENTRY_3)

@@ -288,7 +288,7 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     Call(N(func_802420EC_8EDF0C))
     Call(N(SetAmbienceVolumeFull_Epilogue))
     Wait(30)
-    Call(SetMusicTrack, 0, SONG_PEACHS_CASTLE_PARTY, 0, 8)
+    Call(SetMusic, 0, SONG_PEACHS_CASTLE_PARTY, 0, VOL_LEVEL_FULL)
     Exec(N(EVS_OpenAndCloseDoor_Epilogue))
     Thread
         Wait(10)

@@ -1,7 +1,7 @@
 #include "sam_09.h"
 
 EvtScript N(EVS_SetupMusic) = {
-    Call(SetMusicTrack, 0, SONG_SHIVER_MOUNTAIN, 0, 8)
+    Call(SetMusic, 0, SONG_SHIVER_MOUNTAIN, 0, VOL_LEVEL_FULL)
     Return
     End
 };

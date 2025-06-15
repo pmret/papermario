@@ -4,7 +4,7 @@
 EvtScript N(EVS_Scene_WhereIsMario) = {
     Call(DisablePlayerInput, TRUE)
     Call(DisablePlayerPhysics, TRUE)
-    Call(SetMusicTrack, 0, SONG_PRISONER_PEACH_THEME, 1, 8)
+    Call(SetMusic, 0, SONG_PRISONER_PEACH_THEME, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Call(DisablePartnerAI, 0)
     Call(SetNpcPos, NPC_PARTNER, 0, -500, 0)
     Call(RotateModel, MODEL_o85, 80, 0, -1, 0)
@@ -37,7 +37,7 @@ EvtScript N(EVS_Scene_WhereIsMario) = {
 EvtScript N(EVS_Scene_AfterAllSpiritsRescued) = {
     Call(DisablePlayerInput, TRUE)
     Call(DisablePartnerAI, 0)
-    Call(SetMusicTrack, 0, SONG_PRISONER_PEACH_THEME, 1, 8)
+    Call(SetMusic, 0, SONG_PRISONER_PEACH_THEME, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Call(InterpPlayerYaw, 90, 0)
     Call(SetNpcPos, NPC_PARTNER, 500, 50, 0)
     Call(SetNpcYaw, NPC_PARTNER, 90)

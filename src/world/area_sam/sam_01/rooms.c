@@ -90,7 +90,7 @@ EvtScript N(EVS_RoomListener_MayorOffice) = {
             EndIf
         CaseEq(ROOM_UPDATE_ENTER_DONE)
             IfEq(GB_StoryProgress, STORY_CH7_HERRINGWAY_AT_MAYORS_HOUSE)
-                Call(SetMusicTrack, 0, SONG_PENGUIN_WHODUNIT, 1, 8)
+                Call(SetMusic, 0, SONG_PENGUIN_WHODUNIT, BGM_VARIATION_1, VOL_LEVEL_FULL)
             EndIf
             Set(AF_SAM_03, TRUE)
         CaseEq(ROOM_UPDATE_EXIT_END)

@@ -566,7 +566,7 @@ API_CALLABLE(N(func_80241F98_A3B478)) {
 }
 
 EvtScript N(EVS_PerformHintRitual) = {
-    Call(SetMusicTrack, 0, SONG_MERLEE_SPELL, 2, 8)
+    Call(SetMusic, 0, SONG_MERLEE_SPELL, BGM_VARIATION_2, VOL_LEVEL_FULL)
     Call(SetNpcAnimation, NPC_Merluvlee, ANIM_Merluvlee_Release)
     Call(GetModelCenter, MODEL_o100)
     Add(LVar1, 20)
@@ -642,7 +642,7 @@ EvtScript N(EVS_PerformHintRitual) = {
     Wait(46)
     Call(ResetCam, CAM_DEFAULT, Float(5.0))
     Call(SetNpcAnimation, NPC_Merluvlee, ANIM_Merluvlee_Idle)
-    Call(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, 8)
+    Call(SetMusic, 0, SONG_SHOOTING_STAR_SUMMIT, 0, VOL_LEVEL_FULL)
     Return
     End
 };

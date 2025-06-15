@@ -99,7 +99,7 @@ EvtScript N(EVS_EnterStarBeam) = {
     Call(EnablePartnerAI)
     Call(DisablePlayerPhysics, FALSE)
     Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, 8)
+    Call(SetMusic, 0, SONG_SHOOTING_STAR_SUMMIT, 0, VOL_LEVEL_FULL)
     Call(DisablePlayerInput, FALSE)
     Label(20)
         Call(N(GetFloorCollider), LVar0)

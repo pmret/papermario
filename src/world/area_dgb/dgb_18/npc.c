@@ -102,7 +102,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
             Wait(5)
         EndLoop
     EndThread
-    Call(SetMusicTrack, 0, SONG_TUBBA_BLUBBA_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_TUBBA_BLUBBA_THEME, 0, VOL_LEVEL_FULL)
     Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim09)
     Call(SetNpcPos, NPC_SELF, -210, 0, 180)
     Call(NpcMoveTo, NPC_SELF, -60, 180, 30)
@@ -427,7 +427,7 @@ EvtScript N(EVS_Scene_YakkeyShouts) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(SetMusicTrack, 0, SONG_TUBBA_ESCAPE, 0, 8)
+    Call(SetMusic, 0, SONG_TUBBA_ESCAPE, 0, VOL_LEVEL_FULL)
     Call(SetNpcVar, NPC_Tubba, 1, 1)
     Wait(15)
     Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim25)

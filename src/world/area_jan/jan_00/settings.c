@@ -18,7 +18,7 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(EVS_80241C10) = {
-    Call(SetMusicTrack, 0, SONG_YOSHIS_VILLAGE, 0, 8)
+    Call(SetMusic, 0, SONG_YOSHIS_VILLAGE, 0, VOL_LEVEL_FULL)
     Call(ClearAmbientSounds, 250)
     Return
     End

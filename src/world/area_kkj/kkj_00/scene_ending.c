@@ -100,7 +100,7 @@ EvtScript N(EVS_Scene_Ending) = {
     Call(SpeakToPlayer, NPC_ToadGuard_03, ANIM_ToadGuard_Red_Talk, ANIM_ToadGuard_Red_Idle, 5, MSG_Outro_0065)
     Call(InterpPlayerYaw, 0, 0)
     Wait(10)
-    Call(SetMusicTrack, 0, SONG_PEACH_APPEARS, 0, 8)
+    Call(SetMusic, 0, SONG_PEACH_APPEARS, 0, VOL_LEVEL_FULL)
     Exec(N(EVS_OpenAndClosePeachDoor))
     Thread
         Call(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Walk)
@@ -129,7 +129,7 @@ EvtScript N(EVS_Scene_Ending) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
     Wait(20)
-    Call(SetMusicTrack, 0, SONG_PEACH_APPEARS, 1, 8)
+    Call(SetMusic, 0, SONG_PEACH_APPEARS, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Call(SetNpcAnimation, NPC_Peach, ANIM_Peach2_RaiseArms)
     Wait(10)
     Call(SetNpcAnimation, NPC_Peach, ANIM_Peach2_TalkIdle)

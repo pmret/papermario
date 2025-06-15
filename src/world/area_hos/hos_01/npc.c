@@ -44,7 +44,7 @@ EvtScript N(EVS_MuteMusicOnPlayerApproach) = {
             Wait(1)
             Goto(20)
         Label(30)
-        Call(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, 8)
+        Call(SetMusic, 0, SONG_SHOOTING_STAR_SUMMIT, 0, VOL_LEVEL_FULL)
         Wait(30)
         Goto(0)
     Return
@@ -69,7 +69,7 @@ EvtScript N(EVS_Scene_StarSpiritsPlea) = {
         Call(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 15 * DT)
         Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EndThread
-    Call(SetMusicTrack, 0, SONG_STAR_SPIRIT_THEME, 1, 8)
+    Call(SetMusic, 0, SONG_STAR_SPIRIT_THEME, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Call(SpeakToPlayer, NPC_Eldstar, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 0, MSG_HOS_0000)
     Wait(10 * DT)
     Wait(1)

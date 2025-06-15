@@ -5,14 +5,14 @@ EvtScript N(EVS_SetupMusic) = {
     Switch(LVar0)
         CaseEq(flo_00_ENTRY_8)
             IfNe(AF_FLO_RidingBeanstalk, FALSE)
-                Call(SetMusicTrack, 0, SONG_MAGIC_BEANSTALK, 1, 8)
+                Call(SetMusic, 0, SONG_MAGIC_BEANSTALK, BGM_VARIATION_1, VOL_LEVEL_FULL)
             Else
-                Call(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
+                Call(SetMusic, 0, SONG_FLOWER_FIELDS_SUNNY, 0, VOL_LEVEL_FULL)
             EndIf
         CaseEq(flo_00_ENTRY_9)
-            Call(SetMusicTrack, 0, SONG_SUNSHINE_RETURNS, 0, 8)
+            Call(SetMusic, 0, SONG_SUNSHINE_RETURNS, 0, VOL_LEVEL_FULL)
         CaseEq(flo_00_ENTRY_A)
-            Call(SetMusicTrack, 0, SONG_STAR_SPIRIT_THEME, 1, 8)
+            Call(SetMusic, 0, SONG_STAR_SPIRIT_THEME, BGM_VARIATION_1, VOL_LEVEL_FULL)
             Thread
                 Loop(0)
                     Wait(1)
@@ -20,16 +20,16 @@ EvtScript N(EVS_SetupMusic) = {
                         BreakLoop
                     EndIf
                 EndLoop
-                Call(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
+                Call(SetMusic, 0, SONG_FLOWER_FIELDS_SUNNY, 0, VOL_LEVEL_FULL)
             EndThread
         CaseEq(flo_00_ENTRY_B)
             Call(FadeInMusic, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 3000, 0, 127)
         CaseDefault
             Switch(GB_StoryProgress)
                 CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-                    Call(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
+                    Call(SetMusic, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, VOL_LEVEL_FULL)
                 CaseDefault
-                    Call(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
+                    Call(SetMusic, 0, SONG_FLOWER_FIELDS_SUNNY, 0, VOL_LEVEL_FULL)
             EndSwitch
     EndSwitch
     Return

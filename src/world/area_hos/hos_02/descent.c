@@ -1,7 +1,7 @@
 #include "hos_02.h"
 
 EvtScript N(EVS_DescendStarBeam) = {
-    Call(SetMusicTrack, 0, SONG_STAR_WAY_OPENS, 2, 8)
+    Call(SetMusic, 0, SONG_STAR_WAY_OPENS, BGM_VARIATION_2, VOL_LEVEL_FULL)
     Call(N(func_80240F68_A17188), MV_StarBeamEffect)
     Call(SetPlayerSpeed, Float(3.0))
     Call(PlayerMoveTo, -1105, 230, 0)

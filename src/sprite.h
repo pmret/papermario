@@ -177,6 +177,8 @@ s32 spr_get_npc_color_variations(s32 npcSpriteID);
 
 void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s32 alpha, s32);
 
+void func_801491E4(Matrix4f mtx, s32, s32, s32, s32, s32 alpha);
+
 SpriteAnimData* spr_load_sprite(s32 idx, s32 arg1, s32 arg2);
 
 #endif

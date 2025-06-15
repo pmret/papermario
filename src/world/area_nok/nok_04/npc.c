@@ -579,7 +579,7 @@ EvtScript N(EVS_FuzzyBoss_TauntFromTree) = {
         Set(LVar0, MSG_CH1_00BD)
     EndIf
     Call(SpeakToPlayer, NPC_BossFuzzy, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 5, LVar0)
-    Call(SetMusicTrack, 0, SONG_PLAYROOM, 0, 8)
+    Call(SetMusic, 0, SONG_PLAYROOM, 0, VOL_LEVEL_FULL)
     Call(N(SetThreadTargetLengthAngle), 0, 0, 30 * DT)
     Wait(30 * DT)
     Call(SetModelFlags, MODEL_o177, MODEL_FLAG_USES_CUSTOM_GFX, FALSE)
@@ -1358,7 +1358,7 @@ EvtScript N(EVS_HitTree_Correct) = {
             Call(N(AttachThreadBackNpc), 0)
             Call(SetNpcPos, NPC_BossFuzzy, NPC_DISPOSE_LOCATION)
             Call(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
-            Call(SetMusicTrack, 0, SONG_KOOPA_VILLAGE, 0, 8)
+            Call(SetMusic, 0, SONG_KOOPA_VILLAGE, 0, VOL_LEVEL_FULL)
             Call(DisablePlayerPhysics, FALSE)
             Call(DisablePlayerInput, FALSE)
             Set(AF_NOK04_PlayingGame, FALSE)

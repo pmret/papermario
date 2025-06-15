@@ -126,7 +126,7 @@ EvtScript N(EVS_Scene_MysteryBegins) = {
     Call(SetNpcAnimation, NPC_MayorPenguinWife, ANIM_MayorPenguinWife_Inspect)
     Wait(35 * DT)
     Thread
-        Call(SetMusicTrack, 0, SONG_PENGUIN_WHODUNIT, 0, 8)
+        Call(SetMusic, 0, SONG_PENGUIN_WHODUNIT, 0, VOL_LEVEL_FULL)
         Call(SetNpcAnimation, NPC_MayorPenguinWife, ANIM_MayorPenguinWife_Horror)
         Set(MF_ContinueScene, FALSE)
         Call(SpeakToPlayer, NPC_MayorPenguinWife, ANIM_MayorPenguinWife_Horror, ANIM_MayorPenguinWife_Horror, 0, MSG_CH7_0006)
@@ -532,7 +532,7 @@ EvtScript N(EVS_Scene_MysterySolved) = {
     Call(SetNpcJumpscale, NPC_MayorPenguin, Float(1.0))
     Call(GetNpcPos, NPC_MayorPenguin, LVar0, LVar1, LVar2)
     Call(NpcJump0, NPC_MayorPenguin, LVar0, 0, LVar2, 10 * DT)
-    Call(SetMusicTrack, 0, SONG_PENGUIN_WAKES_UP, 0, 8)
+    Call(SetMusic, 0, SONG_PENGUIN_WAKES_UP, 0, VOL_LEVEL_FULL)
     Call(SpeakToPlayer, NPC_MayorPenguin, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_0027)
     Call(InterpNpcYaw, NPC_MayorPenguin, 0, 0)
     Wait(20 * DT)

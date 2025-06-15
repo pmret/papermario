@@ -403,7 +403,7 @@ EvtScript N(EVS_Scene_MeetGoombaKing_Impl) = {
     Set(LVar3, 8)
     Exec(N(EVS_BouncePlayerAndPartner))
     Wait(28 * DT)
-    Call(SetMusicTrack, 0, SONG_GOOMBA_KING_THEME, 0, 8)
+    Call(SetMusic, 0, SONG_GOOMBA_KING_THEME, 0, VOL_LEVEL_FULL)
     Wait(32 * DT)
     Call(SetNpcAnimation, NPC_BlueGoombaBro, ANIM_GoombaBros_Blue_Idle)
     Call(SetNpcAnimation, NPC_RedGoombaBro, ANIM_GoombaBros_Red_Idle)

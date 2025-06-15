@@ -593,7 +593,7 @@ EvtScript N(EVS_OnInteract_Pedestal) = {
     Call(CloseChoicePopup)
     Set(GB_StoryProgress, STORY_CH2_UNCOVERED_DRY_DRY_RUINS)
     Call(N(HideSun))
-    Call(SetMusicTrack, 0, SONG_DRY_DRY_RUINS_APPEAR, 1, 8)
+    Call(SetMusic, 0, SONG_DRY_DRY_RUINS_APPEAR, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 210, 0, 137)
     Call(SetCamPosA, CAM_DEFAULT, Float(150.0), Float(500.0))
