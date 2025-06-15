@@ -564,7 +564,7 @@ AuResult snd_song_push_stop(s32 songName) {
     s.index = BGM_SNAPSHOT_0;
     s.pauseMode = FALSE;
 
-    return au_bgm_process_suspend(&s, 0); // force stop
+    return au_bgm_process_suspend(&s, FALSE); // force stop
 }
 
 AuResult snd_song_request_pop(s32 songName) {
@@ -594,7 +594,7 @@ AuResult snd_song_request_snapshot(s32 songName) {
     s.index = BGM_SNAPSHOT_0;
     s.pauseMode = FALSE;
 
-    return au_bgm_process_suspend(&s, 1); // no stop
+    return au_bgm_process_suspend(&s, TRUE); // no stop
 }
 
 AuResult snd_song_request_push_fade_out(s32 songName, s32 fadeTime) {
@@ -620,7 +620,7 @@ AuResult snd_song_request_pause(s32 songName) {
     s.index = BGM_SNAPSHOT_0;
     s.pauseMode = TRUE;
 
-    return au_bgm_process_suspend(&s, 0); // force stop
+    return au_bgm_process_suspend(&s, FALSE); // force stop
 }
 
 AuResult snd_song_request_unpause(s32 songName) {
