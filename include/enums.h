@@ -1310,7 +1310,7 @@ enum SoundIDs {
     SOUND_LULLABY                               = 0x000003F4,
     SOUND_BUBBLES_RISING                        = 0x000003F5, // unused
     SOUND_DRIP                                  = 0x000003F6,
-    STONE_STONE_CHOMP_STEP                      = 0x000003F9,
+    SOUND_STONE_CHOMP_STEP,                     = 0x000003F9,
     SOUND_THROW                                 = 0x000003FA,
     SOUND_PLAYER_COLLAPSE                       = 0x000003FB,
     SOUND_LUCKY                                 = 0x000003FC,
