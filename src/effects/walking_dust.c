@@ -97,7 +97,7 @@ void walking_dust_appendGfx(void* effect) {
     WalkingDustFXData* data = effectTemp->data.walkingDust;
     s32 temp_t3 = data->unk_04;
     s32 temp_t4 = data->unk_74;
-    s32 cond = FALSE;
+    s32 cond = false;
     Matrix4f sp18;
     Matrix4f sp58;
     s32 temp_a0;
@@ -126,7 +126,7 @@ void walking_dust_appendGfx(void* effect) {
     }
 
     if ((data->unk_6C == 0 && temp_t4 == 6) || (data->unk_6C == 1 && temp_t4 == 7)) {
-        cond = TRUE;
+        cond = true;
     }
 
     gDPPipeSync(gMainGfxPos++);

@@ -103,25 +103,25 @@ void N(gfx_build_the_end)(void) {
 }
 
 EvtScript N(EVS_Scene_TheEnd) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(InterpPlayerYaw, 270, 0)
     Call(SetPlayerPos, 520, 0, -180)
     Call(SetNpcAnimation, NPC_ParadePeach, ANIM_ParadePeach_ShadeIdle)
     Call(SetNpcYaw, NPC_ParadePeach, 270)
     Call(SetNpcPos, NPC_ParadePeach, 560, 0, -180)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Call(SetNpcPos, NPC_PARTNER, 0, -500, 0)
-    Call(EnableGroup, MODEL_the_end, FALSE)
+    Call(EnableGroup, MODEL_the_end, false)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(SetCamPitch, CAM_DEFAULT, Float(8.0), Float(-11.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Call(SetNpcSpeed, NPC_ParadePeach, Float(2.0))
-        Call(SetNpcFlagBits, NPC_ParadePeach, NPC_FLAG_GRAVITY, TRUE)
-        Call(SetNpcFlagBits, NPC_ParadePeach, NPC_FLAG_FLYING, FALSE)
+        Call(SetNpcFlagBits, NPC_ParadePeach, NPC_FLAG_GRAVITY, true)
+        Call(SetNpcFlagBits, NPC_ParadePeach, NPC_FLAG_FLYING, false)
         Call(SetNpcAnimation, NPC_ParadePeach, ANIM_ParadePeach_ShadeWalk)
         Call(NpcMoveTo, NPC_ParadePeach, 450, -60, 0)
         Call(SetNpcAnimation, NPC_ParadePeach, ANIM_ParadePeach_ShadeWalkBack)
@@ -191,7 +191,7 @@ EvtScript N(EVS_Scene_TheEnd) = {
         EndLoop
     EndThread
     Wait(30)
-    Call(EnableGroup, MODEL_the_end, TRUE)
+    Call(EnableGroup, MODEL_the_end, true)
     Call(SetModelCustomGfx, MODEL_t, CUSTOM_GFX_1, -1)
     Call(SetModelCustomGfx, MODEL_h, CUSTOM_GFX_1, -1)
     Call(SetModelCustomGfx, MODEL_e, CUSTOM_GFX_1, -1)

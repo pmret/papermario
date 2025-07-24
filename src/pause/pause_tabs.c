@@ -198,9 +198,9 @@ s32 gPauseTabsMessages[] = {
     PAUSE_MSG_TAB_MAP,
 };
 u8 gPauseTabsInterpTable[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8 };
-s32 gPauseDoBasicWindowUpdate = TRUE; // TODO rename (eth name)
+s32 gPauseDoBasicWindowUpdate = true; // TODO rename (eth name)
 MenuPanel gPausePanelTabs = {
-    .initialized = FALSE,
+    .initialized = false,
     .col = 0,
     .row = 0,
     .selected = 0,
@@ -395,7 +395,7 @@ void pause_tabs_init(MenuPanel* tab) {
     setup_pause_menu_tab(gPauseTabsWindowBPs, ARRAY_COUNT(gPauseTabsWindowBPs));
     gWindows[WIN_PAUSE_TAB_INVIS].pos.y = 25;
     gPauseTabsHorizScrollPos = 0;
-    tab->initialized = TRUE;
+    tab->initialized = true;
     gPauseTabsPreviousTab = 5;
 }
 
@@ -411,7 +411,7 @@ void pause_tabs_handle_input(MenuPanel* tab) {
                     gPauseTabsHorizScrollPos += 1800;
                 }
             }
-        } while (gPausePanels[gPauseTabsPanelIDs[tab->col]]->initialized == FALSE);
+        } while (gPausePanels[gPauseTabsPanelIDs[tab->col]]->initialized == false);
     }
 
     if (gPauseHeldButtons & (BUTTON_STICK_RIGHT | BUTTON_R)) {
@@ -422,7 +422,7 @@ void pause_tabs_handle_input(MenuPanel* tab) {
                     gPauseTabsHorizScrollPos -= 1800;
                 }
             }
-        } while (gPausePanels[gPauseTabsPanelIDs[tab->col]]->initialized == FALSE);
+        } while (gPausePanels[gPauseTabsPanelIDs[tab->col]]->initialized == false);
     }
 
     if (tab->col != gPauseTabsCurrentTab) {
@@ -438,7 +438,7 @@ void pause_tabs_handle_input(MenuPanel* tab) {
         sfx_play_sound(SOUND_MENU_CHANGE_TAB);
     }
 
-    if ((gPausePressedButtons & BUTTON_A) && gPausePanels[gPauseTabsPanelIDs[tab->col]]->initialized == TRUE) {
+    if ((gPausePressedButtons & BUTTON_A) && gPausePanels[gPauseTabsPanelIDs[tab->col]]->initialized == true) {
         sfx_play_sound(SOUND_MENU_NEXT);
         gPauseMenuCurrentTab = gPauseTabsPanelIDs[tab->col];
     }
@@ -485,10 +485,10 @@ void pause_tabs_update(MenuPanel* tab) {
         fpUpdateInactive = pause_update_page_inactive_2;
     }
 
-    flag = FALSE;
+    flag = false;
     for (i = 0; i < ARRAY_COUNT(gPauseTabsPanelIDs); i++) {
         if (gPausePanels[gPauseTabsPanelIDs[i]]->initialized && (gWindows[gPauseTabsPageWindowIDs[i]].flags & 8)) {
-            flag = TRUE;
+            flag = true;
             break;
         }
     }
@@ -502,7 +502,7 @@ void pause_tabs_update(MenuPanel* tab) {
                                       fpUpdate.func == basic_window_update ||
                                       fpUpdate.i == 1)) {
                     set_window_update(gPauseTabsPageWindowIDs[i], (s32)fpUpdateInactive);
-                    flag = TRUE;
+                    flag = true;
                 }
             }
         }
@@ -513,7 +513,7 @@ void pause_tabs_update(MenuPanel* tab) {
                 gWindows[gPauseTabsPageWindowIDs[tab->col]].fpUpdate.i == 2) {
                 if (gPauseDoBasicWindowUpdate) {
                     fpUpdateActive = &basic_window_update;
-                    gPauseDoBasicWindowUpdate = FALSE;
+                    gPauseDoBasicWindowUpdate = false;
                 }
 
                 set_window_update(gPauseTabsPageWindowIDs[tab->col], (s32)fpUpdateActive);

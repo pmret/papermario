@@ -15,10 +15,10 @@ EvtScript N(EVS_NpcIdle_GoombaBros_02) = {
 EvtScript N(EVS_NpcIdle_GoombaKing) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH0_DEFEATED_GOOMBA_KING)
-            IfEq(GF_KMR11_GoombaBrosFledToCastle, TRUE)
+            IfEq(GF_KMR11_GoombaBrosFledToCastle, true)
                 Call(GetNpcPos, NPC_GoombaKing, LVar0, LVar1, LVar2)
                 Call(AwaitPlayerApproach, LVar0, LVar2, 300)
-                Call(DisablePlayerInput, TRUE)
+                Call(DisablePlayerInput, true)
                 Call(SetPlayerSpeed, Float(3.0 / DT))
                 Call(PlayerMoveTo, -564, -64, 0)
             Else
@@ -63,14 +63,14 @@ EvtScript N(EVS_NpcIdle_GoombaKing) = {
 };
 
 EvtScript N(EVS_Scene_BossDefeated) = {
-    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, TRUE)
+    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, true)
     Call(N(SetupFog))
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-8.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(N(SetCameraVFov), 25)
     Call(SpeakToPlayer, NPC_GoombaKing, ANIM_GoombaKing_Walk, ANIM_GoombaKing_Idle, 0, MSG_CH0_00D1)
@@ -122,11 +122,11 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_CH0_00D2)
     Call(EnablePartnerAI)
     Wait(10 * DT)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Thread
         Wait(40)
         Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndThread
     Call(SetNpcPos, NPC_BlueGoombaBro, NPC_DISPOSE_LOCATION)
     Call(SetNpcPos, NPC_RedGoombaBro, NPC_DISPOSE_LOCATION)
@@ -144,7 +144,7 @@ EvtScript N(EVS_NpcDefeat_GoombaKing) = {
             Call(SetPlayerSpeed, Float(6.0))
             Call(PlayerMoveTo, -954, -50, 0)
     EndSwitch
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -236,12 +236,12 @@ EvtScript N(EVS_NpcInit_GoombaBros_01) = {
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_GoombaBros_01)))
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH0_DEFEATED_GOOMBA_KING)
-            IfEq(GF_KMR11_GoombaBrosFledToCastle, TRUE)
+            IfEq(GF_KMR11_GoombaBrosFledToCastle, true)
                 Call(SetNpcPos, NPC_BlueGoombaBro, -432, 130, -146)
             EndIf
         CaseGe(STORY_CH0_DEFEATED_GOOMBA_KING)
             Call(SetNpcPos, NPC_BlueGoombaBro, NPC_DISPOSE_LOCATION)
-            Call(SetNpcFlagBits, NPC_BlueGoombaBro, NPC_FLAG_GRAVITY, FALSE)
+            Call(SetNpcFlagBits, NPC_BlueGoombaBro, NPC_FLAG_GRAVITY, false)
     EndSwitch
     Return
     End
@@ -252,12 +252,12 @@ EvtScript N(EVS_NpcInit_GoombaBros_02) = {
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_GoombaBros_02)))
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH0_DEFEATED_GOOMBA_KING)
-            IfEq(GF_KMR11_GoombaBrosFledToCastle, TRUE)
+            IfEq(GF_KMR11_GoombaBrosFledToCastle, true)
                 Call(SetNpcPos, NPC_RedGoombaBro, -412, 130, -35)
             EndIf
         CaseGe(STORY_CH0_DEFEATED_GOOMBA_KING)
             Call(SetNpcPos, NPC_RedGoombaBro, NPC_DISPOSE_LOCATION)
-            Call(SetNpcFlagBits, NPC_RedGoombaBro, NPC_FLAG_GRAVITY, FALSE)
+            Call(SetNpcFlagBits, NPC_RedGoombaBro, NPC_FLAG_GRAVITY, false)
     EndSwitch
     Return
     End
@@ -269,7 +269,7 @@ EvtScript N(EVS_NpcInit_GoombaKing) = {
     Call(SetNpcCollisionSize, NPC_SELF, 70, 50)
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH0_DEFEATED_GOOMBA_KING)
-            IfEq(GF_KMR11_GoombaBrosFledToCastle, TRUE)
+            IfEq(GF_KMR11_GoombaBrosFledToCastle, true)
                 Call(SetNpcPos, NPC_GoombaKing, -419, 119, -91)
             EndIf
         CaseLt(STORY_CH0_HIT_GATEHOUSE_SWITCH)
@@ -298,7 +298,7 @@ NpcData N(NpcData_Enemies)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = FALSE,
+                .isFlying = false,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 0, 0, 0 },
@@ -337,7 +337,7 @@ NpcData N(NpcData_Enemies)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = FALSE,
+                .isFlying = false,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 0, 0, 0 },
@@ -376,7 +376,7 @@ NpcData N(NpcData_Enemies)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = FALSE,
+                .isFlying = false,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 0, 0, 0 },

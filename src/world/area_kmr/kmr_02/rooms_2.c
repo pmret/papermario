@@ -31,11 +31,11 @@ EvtScript N(EVS_RoomListener_ToadHouse) = {
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
             Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+            Call(PanToTarget, CAM_DEFAULT, 0, false)
         CaseEq(ROOM_UPDATE_EXIT_END)
             Call(SetGroupVisibility, MODEL_kino_in, MODEL_GROUP_HIDDEN)
-            Call(EnableModel, MODEL_o422, TRUE)
-            Call(EnableModel, MODEL_o424, TRUE)
+            Call(EnableModel, MODEL_o422, true)
+            Call(EnableModel, MODEL_o424, true)
     EndSwitch
     Return
     End
@@ -47,7 +47,7 @@ EvtScript N(EVS_SetWallsDown_ToadHouse) = {
     Call(RotateModel, MODEL_k_k_2, 180, 0, 1, 0)
     Call(RotateModel, MODEL_k_k_3, 180, 0, 1, 0)
     Call(RotateModel, MODEL_o272, 180, 0, 1, 0)
-    Call(EnableModel, MODEL_o561, FALSE)
+    Call(EnableModel, MODEL_o561, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o767, COLLIDER_FLAGS_UPPER_MASK)
     Return
     End

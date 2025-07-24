@@ -184,21 +184,21 @@ BombTrigger N(BombPos_Barricade) = {
 };
 
 EvtScript N(EVS_Scene_BreakBarricade) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(EnableGroup, MODEL_hibi, FALSE)
+    Call(DisablePlayerInput, true)
+    Call(EnableGroup, MODEL_hibi, false)
     Thread
         Call(N(AnimateBarricadeParts))
         Loop(10)
             UseBuf(Ref(N(BarricadeModels)))
             Loop(ARRAY_COUNT(N(BarricadeModels)))
                 BufRead1(LVar0)
-                Call(EnableModel, LVar0, TRUE)
+                Call(EnableModel, LVar0, true)
             EndLoop
             Wait(2)
             UseBuf(Ref(N(BarricadeModels)))
             Loop(ARRAY_COUNT(N(BarricadeModels)))
                 BufRead1(LVar0)
-                Call(EnableModel, LVar0, FALSE)
+                Call(EnableModel, LVar0, false)
             EndLoop
             Wait(2)
         EndLoop
@@ -211,12 +211,12 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     Thread
         Wait(30)
         KillThread(MV_RestrictCamScript)
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
         Wait(1)
         Call(UseSettingsFrom, CAM_DEFAULT, -380, 0, 0)
         Call(SetPanTarget, CAM_DEFAULT, -380, 0, 0)
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Thread
@@ -364,7 +364,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -125, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -125, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(165)
     Call(PlaySound, SOUND_LRAW_SHY_GUY_CROWD_2 | SOUND_ID_TRIGGER_CHANGE_SOUND)
     Call(StopTrackingSoundPos, SOUND_LRAW_SHY_GUY_CROWD_2)
@@ -413,9 +413,9 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Set(GF_OMO02_BombedWall, TRUE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Set(GF_OMO02_BombedWall, true)
+    Call(DisablePlayerInput, false)
     Unbind
     Return
     End
@@ -437,14 +437,14 @@ EvtScript N(EVS_SetupBarricade) = {
     Call(ParentColliderToModel, COLLIDER_t3_3, MODEL_t3_3)
     Call(ParentColliderToModel, COLLIDER_t3_4, MODEL_t3_4)
     Call(ParentColliderToModel, COLLIDER_t3_5, MODEL_t3_5)
-    IfEq(GF_OMO02_BombedWall, FALSE)
+    IfEq(GF_OMO02_BombedWall, false)
         BindTrigger(Ref(N(EVS_Scene_BreakBarricade)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Barricade)), 1, 0)
     Else
-        Call(EnableGroup, MODEL_hibi, FALSE)
+        Call(EnableGroup, MODEL_hibi, false)
         UseBuf(Ref(N(BarricadeModels)))
         Loop(ARRAY_COUNT(N(BarricadeModels)))
             BufRead1(LVar0)
-            Call(EnableModel, LVar0, FALSE)
+            Call(EnableModel, LVar0, false)
         EndLoop
         UseBuf(Ref(N(BarricadeColliders)))
         Loop(ARRAY_COUNT(N(BarricadeColliders)))

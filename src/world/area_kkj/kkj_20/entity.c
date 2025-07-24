@@ -5,15 +5,15 @@
 
 EvtScript N(EVS_OpenChest_LastStand) = {
     Set(LVarA, ITEM_LAST_STAND)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, LVarA)
     ExecWait(N(EVS_Chest_ShowGotItem))
     IfGe(GB_StoryProgress, STORY_CH8_REACHED_PEACHS_CASTLE)
         Call(AddBadge, LVarA, LVar0)
     EndIf
-    Set(GF_KKJ20_Chest_LastStand, TRUE)
+    Set(GF_KKJ20_Chest_LastStand, true)
     Wait(15)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

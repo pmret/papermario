@@ -66,7 +66,7 @@ extern PartnerDMAData bPartnerDmaTable[];
 
 s32 get_npc_anim_for_status(AnimID*, s32);
 
-void create_target_list(Actor* actor, b32 targetHomePos) {
+void create_target_list(Actor* actor, bool targetHomePos) {
     s32 numTargets = 0;
     BattleStatus* battleStatus = &gBattleStatus;
     SelectableTarget* targetDataList = actor->targetData;
@@ -83,7 +83,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
     f32 f2, f12, f14;
     u8 overlayType;
     f32 overlayZoom;
-    s32 hiddenByDarkness = FALSE;
+    s32 hiddenByDarkness = false;
     s32 sampleCol;
     s32 sampleRow;
     s32 removeTarget;
@@ -278,7 +278,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
 
         // sanity check condition -- function should never reach this point with this flag set
         if (battleStatus->curTargetListFlags & TARGET_FLAG_OVERRIDE) {
-            removeTarget = TRUE;
+            removeTarget = true;
             goto FIRST_PASS_REMOVE;
         }
 
@@ -286,8 +286,8 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
         if (!(gBattleStatus.flags2 & BS_FLAGS2_IGNORE_DARKNESS) && battleStatus->darknessMode > 0) {
             get_screen_overlay_params(SCREEN_LAYER_BACK, &overlayType, &overlayZoom);
             if (overlayZoom >= 215.0f) {
-                removeTarget = TRUE;
-                hiddenByDarkness = TRUE;
+                removeTarget = true;
+                hiddenByDarkness = true;
                 goto FIRST_PASS_REMOVE;
             }
         }
@@ -298,13 +298,13 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
                 || targetActor->flags & ACTOR_FLAG_MINOR_TARGET
                 || targetPart->flags & ACTOR_PART_FLAG_MINOR_TARGET
             ) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto FIRST_PASS_REMOVE;
             }
         }
 
         // target passed all checks, do not remove
-        removeTarget = FALSE;
+        removeTarget = false;
 
         FIRST_PASS_REMOVE:
         if (removeTarget) {
@@ -330,44 +330,44 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
         }
         do {
             if ((battleStatus->curTargetListFlags & TARGET_FLAG_JUMP_LIKE) && (targetPart->targetFlags & ACTOR_PART_TARGET_NO_JUMP)) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         } while (0);
         do {
             if ((battleStatus->curTargetListFlags & TARGET_FLAG_SMASH_LIKE) && (targetPart->targetFlags & ACTOR_PART_TARGET_NO_SMASH)) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         } while (0);
         do {
             if ((battleStatus->curTargetListFlags & TARGET_FLAG_TATTLE) && ((targetActor->flags & ACTOR_FLAG_NO_TATTLE) || (targetPart->flags & ACTOR_PART_FLAG_NO_TATTLE))) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         } while (0);
         if ((battleStatus->curTargetListFlags & TARGET_FLAG_AIRLIFT) && (targetActor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
-            removeTarget = TRUE;
+            removeTarget = true;
             goto SECOND_PASS_REMOVE;
         }
         if (!(battleStatus->curTargetListFlags & TARGET_FLAG_ALLOW_TARGET_ONLY) && (targetActor->flags & ACTOR_FLAG_TARGET_ONLY)) {
-            removeTarget = TRUE;
+            removeTarget = true;
             goto SECOND_PASS_REMOVE;
         }
         if ((battleStatus->curTargetListFlags & TARGET_FLAG_NO_CEILING) && (targetActor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
-            removeTarget = TRUE;
+            removeTarget = true;
             goto SECOND_PASS_REMOVE;
         }
         if ((battleStatus->curTargetListFlags & TARGET_FLAG_GROUND) && target->row != 0) {
-            removeTarget = TRUE;
+            removeTarget = true;
             goto SECOND_PASS_REMOVE;
         }
         if ((battleStatus->curTargetListFlags & TARGET_FLAG_NOT_HIGH) && target->row >= 2) {
-            removeTarget = TRUE;
+            removeTarget = true;
             goto SECOND_PASS_REMOVE;
         }
         if ((battleStatus->curTargetListFlags & TARGET_FLAG_NOT_GROUND) && target->row <= 0) {
-            removeTarget = TRUE;
+            removeTarget = true;
             goto SECOND_PASS_REMOVE;
         }
 
@@ -376,7 +376,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
         ) {
             // search the target list for any targets below the current target (same column, higher row)
             // skip the current target if any are found
-            s32 foundAbove = FALSE;
+            s32 foundAbove = false;
 
             do {
                 for (j = 0; j < numTargets; j++) {
@@ -386,7 +386,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
                             && target->column == otherTarget->column
                             && target->row < otherTarget->row
                         ) {
-                            foundAbove = TRUE;
+                            foundAbove = true;
                             break;
                         }
                     }
@@ -394,7 +394,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
             } while (0);
 
             if (foundAbove) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         }
@@ -402,7 +402,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
         if (battleStatus->curTargetListFlags & TARGET_FLAG_NOT_BEHIND) {
             // search the target list for any targets in front of the current target (same row, lower column)
             // skip the current target if any are found
-            s32 foundInFront = FALSE;
+            s32 foundInFront = false;
 
             for (j = 0; j < numTargets; j++) {
                 otherTarget = &targetDataList[j];
@@ -411,75 +411,75 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
                         && target->row == otherTarget->row
                         && target->column > otherTarget->column
                     ) {
-                        foundInFront = TRUE;
+                        foundInFront = true;
                         break;
                     }
                 }
             }
 
             if (foundInFront) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         }
 
         do {
             if ((battleStatus->curTargetListFlags & TARGET_FLAG_NOT_FLYING) && (targetActor->flags & ACTOR_FLAG_FLYING)) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         } while (0);
         do {
             if ((battleStatus->curTargetListFlags & TARGET_FLAG_DIR_RIGHT) && target->row == sampleRow + 1) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         } while (0);
         do {
             if ((battleStatus->curTargetListFlags & TARGET_FLAG_DIR_LEFT) && target->row == sampleRow - 1) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         } while (0);
         do {
             if ((battleStatus->curTargetListFlags & TARGET_FLAG_DIR_BELOW) && target->column == sampleCol - 1) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         } while (0);
         do {
             if ((battleStatus->curTargetListFlags & TARGET_FLAG_DIR_ABOVE) && target->column == sampleCol + 1) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         } while (0);
         do {
             if ((battleStatus->curTargetListFlags & TARGET_FLAG_DIR_RIGHT) && target->row < sampleRow) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         } while (0);
         do {
             if ((battleStatus->curTargetListFlags & TARGET_FLAG_DIR_LEFT) && target->row > sampleRow) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         } while (0);
         do {
             if ((battleStatus->curTargetListFlags & TARGET_FLAG_DIR_BELOW) && target->column > sampleCol) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         } while (0);
         do {
             if ((battleStatus->curTargetListFlags & TARGET_FLAG_DIR_ABOVE) && target->column < sampleCol) {
-                removeTarget = TRUE;
+                removeTarget = true;
                 goto SECOND_PASS_REMOVE;
             }
         } while (0);
 
         // target passed all checks, do not remove
-        removeTarget = FALSE;
+        removeTarget = false;
 
         SECOND_PASS_REMOVE:
         if (removeTarget) {
@@ -536,14 +536,14 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
 void set_actor_pal_adjustment(Actor* actor, s32 palAdjust);
 
 void create_current_pos_target_list(Actor* actor) {
-    create_target_list(actor, FALSE);
+    create_target_list(actor, false);
 }
 
 void create_home_target_list(Actor* actor) {
-    create_target_list(actor, TRUE);
+    create_target_list(actor, true);
 }
 
-s32 func_80263064(Actor* actor, Actor* targetActor, b32 unused) {
+s32 func_80263064(Actor* actor, Actor* targetActor, bool unused) {
     s32 count = 0;
     SelectableTarget* target = actor->targetData;
     ActorPartBlueprint* partData;
@@ -622,11 +622,11 @@ s32 func_80263064(Actor* actor, Actor* targetActor, b32 unused) {
 }
 
 s32 func_80263230(Actor* actor, Actor* targetActor) {
-    return func_80263064(actor, targetActor, FALSE);
+    return func_80263064(actor, targetActor, false);
 }
 
 s32 func_8026324C(Actor* actor, Actor* targetActor) {
-    return func_80263064(actor, targetActor, TRUE);
+    return func_80263064(actor, targetActor, true);
 }
 
 void func_80263268(void) {
@@ -672,7 +672,7 @@ void func_80263300(void) {
     s32 i;
 
     battleStatus->menuStatus[0] = 0;
-    cond = FALSE;
+    cond = false;
 
     for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
         s16 itemID = playerData->invItems[i];
@@ -688,7 +688,7 @@ void func_80263300(void) {
 
                 if (player->targetListLength != 0) {
                     battleStatus->menuStatus[0]++;
-                    cond = TRUE;
+                    cond = true;
                 }
             }
         }
@@ -702,14 +702,14 @@ void func_80263300(void) {
 s32 btl_are_all_enemies_defeated(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* enemy;
-    s32 enemiesStillAlive = FALSE;
+    s32 enemiesStillAlive = false;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
         enemy = battleStatus->enemyActors[i];
         if (enemy != NULL) {
             if(!(enemy->flags & (ACTOR_FLAG_NO_DMG_APPLY | ACTOR_FLAG_TARGET_ONLY))) {
-                enemiesStillAlive = TRUE;
+                enemiesStillAlive = true;
             }
         }
     }
@@ -719,19 +719,19 @@ s32 btl_are_all_enemies_defeated(void) {
 s32 btl_check_enemies_defeated(void) {
     if (btl_are_all_enemies_defeated()) {
         btl_set_state(BATTLE_STATE_VICTORY);
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 s32 btl_check_player_defeated(void) {
     if (gPlayerData.curHP > 0) {
-        return FALSE;
+        return false;
     }
     gDefeatedBattleState = gBattleState;
     gDefeatedBattleSubstate = gBattleSubState;
     btl_set_state(BATTLE_STATE_DEFEAT);
-    return TRUE;
+    return true;
 }
 
 void btl_init_menu_boots(void) {
@@ -780,7 +780,7 @@ void btl_init_menu_boots(void) {
 
     battleStatus->submenuMoveCount = moveCount;
 
-    hasAnyBadgeMoves = FALSE;
+    hasAnyBadgeMoves = false;
     for (i = 0; i < battleStatus->submenuMoveCount; i++) {
         move = &gMoveTable[battleStatus->submenuMoves[i]];
 
@@ -802,7 +802,7 @@ void btl_init_menu_boots(void) {
 
         // If there are targets, enable the move
         if (player->targetListLength != 0) {
-            hasAnyBadgeMoves = TRUE;
+            hasAnyBadgeMoves = true;
             battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_ENABLED;
         }
 
@@ -874,7 +874,7 @@ void btl_init_menu_hammer(void) {
 
     battleStatus->submenuMoveCount = moveCount;
 
-    hasAnyBadgeMoves = FALSE;
+    hasAnyBadgeMoves = false;
     for (i = 0; i < battleStatus->submenuMoveCount; i++) {
         move = &gMoveTable[battleStatus->submenuMoves[i]];
 
@@ -896,7 +896,7 @@ void btl_init_menu_hammer(void) {
 
         // If there are targets, enable the move
         if (player->targetListLength != 0) {
-            hasAnyBadgeMoves = TRUE;
+            hasAnyBadgeMoves = true;
             battleStatus->submenuStatus[i] = 1;
         }
 
@@ -964,7 +964,7 @@ void btl_init_menu_partner(void) {
             + (i - 1);
     }
 
-    hasAnyBadgeMoves = FALSE;
+    hasAnyBadgeMoves = false;
     for (i = 0; i < battleStatus->submenuMoveCount; i++){
         MoveData* move = &gMoveTable[battleStatus->submenuMoves[i]];
 
@@ -983,7 +983,7 @@ void btl_init_menu_partner(void) {
         create_current_pos_target_list(partner);
 
         if (partner->targetListLength != 0){
-            hasAnyBadgeMoves = TRUE;
+            hasAnyBadgeMoves = true;
             battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_ENABLED;
         }
 
@@ -1360,7 +1360,7 @@ void load_player_actor(void) {
     player->koDuration = 0;
     player->transparentStatus = 0;
     player->transparentDuration = 0;
-    player->isGlowing = FALSE;
+    player->isGlowing = false;
     player->unk_21E = 0;
     player->disableDismissTimer = 0;
     player->attackBoost = 0;
@@ -1599,7 +1599,7 @@ void load_partner_actor(void) {
         partnerActor->koDuration = 0;
         partnerActor->transparentStatus = 0;
         partnerActor->transparentDuration = 0;
-        partnerActor->isGlowing = FALSE;
+        partnerActor->isGlowing = false;
         partnerActor->unk_21E = 0;
         partnerActor->disableDismissTimer = 0;
         partnerActor->attackBoost = 0;
@@ -1851,7 +1851,7 @@ Actor* create_actor(Formation formation) {
     actor->koDuration = 0;
     actor->transparentStatus = 0;
     actor->transparentDuration = 0;
-    actor->isGlowing = FALSE;
+    actor->isGlowing = false;
     actor->unk_21E = 0;
     actor->disableDismissTimer = 0;
     actor->attackBoost = 0;
@@ -2193,34 +2193,34 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                                                             target->curPos.z, 1.0f, 0);
                                 create_status_debuff(target->hudElementDataIndex, STATUS_KEY_FROZEN);
                             }
-                            return TRUE;
+                            return true;
                         case STATUS_KEY_SLEEP:
                             set_actor_pal_adjustment(target, ACTOR_PAL_ADJUST_SLEEP);
                             create_status_debuff(target->hudElementDataIndex, STATUS_KEY_SLEEP);
-                            return TRUE;
+                            return true;
                         case STATUS_KEY_PARALYZE:
                             set_actor_pal_adjustment(target, ACTOR_PAL_ADJUST_PARALYZE);
                             create_status_debuff(target->hudElementDataIndex, STATUS_KEY_PARALYZE);
-                            return TRUE;
+                            return true;
                         case STATUS_KEY_DIZZY:
                             create_status_debuff(target->hudElementDataIndex, STATUS_KEY_DIZZY);
-                            return TRUE;
+                            return true;
                         case STATUS_KEY_FEAR:
                             set_actor_pal_adjustment(target, ACTOR_PAL_ADJUST_FEAR);
                             create_status_debuff(target->hudElementDataIndex, STATUS_KEY_FEAR);
-                            return TRUE;
+                            return true;
                         case STATUS_KEY_POISON:
                             set_actor_pal_adjustment(target, ACTOR_PAL_ADJUST_POISON);
                             create_status_debuff(target->hudElementDataIndex, STATUS_KEY_POISON);
-                            return TRUE;
+                            return true;
                         case STATUS_KEY_SHRINK:
                             create_status_debuff(target->hudElementDataIndex, STATUS_KEY_SHRINK);
-                            return TRUE;
+                            return true;
                     }
                 }
-                return TRUE;
+                return true;
             } else {
-                return FALSE;
+                return false;
             }
             break;
         case STATUS_KEY_STATIC:
@@ -2234,7 +2234,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 set_actor_pal_adjustment(target, ACTOR_PAL_ADJUST_STATIC);
                 create_status_static(target->hudElementDataIndex, STATUS_KEY_STATIC);
             }
-            return TRUE;
+            return true;
         case STATUS_KEY_STONE:
             if (target->actorID != ACTOR_PARTNER) {
                 target->stoneStatus = STATUS_KEY_STONE;
@@ -2244,7 +2244,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 }
                 target->statusAfflicted = STATUS_KEY_STONE;
             }
-            return TRUE;
+            return true;
         case STATUS_KEY_DAZE:
             if (target->koStatus < statusTypeKey) {
                 target->koStatus = STATUS_KEY_DAZE;
@@ -2254,7 +2254,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 }
                 target->statusAfflicted = STATUS_KEY_DAZE;
             }
-            return TRUE;
+            return true;
         case STATUS_KEY_TRANSPARENT:
             if (target->actorID != ACTOR_PARTNER) {
                 target->transparentStatus = STATUS_KEY_TRANSPARENT;
@@ -2265,12 +2265,12 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 target->statusAfflicted = STATUS_KEY_TRANSPARENT;
                 create_status_transparent(target->hudElementDataIndex, STATUS_KEY_TRANSPARENT);
             }
-            return TRUE;
+            return true;
         case 0:
         case STATUS_KEY_NORMAL:
         case STATUS_KEY_DEFAULT:
         default:
-            return TRUE;
+            return true;
     }
 }
 
@@ -2287,7 +2287,7 @@ s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
         }
     }
 
-    return TRUE;
+    return true;
 }
 
 s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
@@ -2340,7 +2340,7 @@ s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
 }
 
 // refresh the first (primary) damage popup
-void show_primary_damage_popup(f32 posX, f32 posY, f32 posZ, s32 damageAmt, b32 angle) {
+void show_primary_damage_popup(f32 posX, f32 posY, f32 posZ, s32 damageAmt, bool angle) {
     s32 i;
 
     for (i = 0; i < 1; i++) {
@@ -2366,7 +2366,7 @@ void show_primary_damage_popup(f32 posX, f32 posY, f32 posZ, s32 damageAmt, b32 
 }
 
 // show another damage popup, if any are available
-void show_next_damage_popup(f32 posX, f32 posY, f32 posZ, s32 damageAmt, b32 angle) {
+void show_next_damage_popup(f32 posX, f32 posY, f32 posZ, s32 damageAmt, bool angle) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gDamageCountEffects); i++) {
@@ -2526,7 +2526,7 @@ void update_action_ratings(void) {
         if (actor != NULL) {
             if (actor->actionRatingTime == 60) {
                 if (actor->attackResultEffect != NULL) {
-                    actor->attackResultEffect->data.attackResultText->isVisible = FALSE;
+                    actor->attackResultEffect->data.attackResultText->isVisible = false;
                 }
             }
             if (actor->actionRatingTime == 5) {
@@ -2545,7 +2545,7 @@ void update_action_ratings(void) {
     if (actor != NULL) {
         if (actor->actionRatingTime == 60) {
             if (actor->attackResultEffect != NULL) {
-                actor->attackResultEffect->data.attackResultText->isVisible = FALSE;
+                actor->attackResultEffect->data.attackResultText->isVisible = false;
             }
         }
         if (actor->actionRatingTime == 5) {
@@ -2563,7 +2563,7 @@ void update_action_ratings(void) {
     if (actor != NULL) {
         if (actor->actionRatingTime == 60) {
             if (actor->attackResultEffect != NULL) {
-                actor->attackResultEffect->data.attackResultText->isVisible = FALSE;
+                actor->attackResultEffect->data.attackResultText->isVisible = false;
             }
         }
         if (actor->actionRatingTime == 5) {
@@ -2678,7 +2678,7 @@ void set_part_pal_adjustment(ActorPart* part, s32 palAdjust) {
         if (decorations->paletteAdjustment != palAdjust) {
             decorations->paletteAdjustment = palAdjust;
             decorations->palAnimState = 0;
-            decorations->resetPalAdjust = TRUE;
+            decorations->resetPalAdjust = true;
         }
     }
 }
@@ -2734,7 +2734,7 @@ void set_part_glow_pal(ActorPart* part, s32 glowState) {
         if (decorations->glowState != glowState) {
             decorations->glowState = glowState;
             decorations->glowUnk1 = 0;
-            decorations->glowStateChanged = TRUE;
+            decorations->glowStateChanged = true;
         }
     }
 }
@@ -2782,7 +2782,7 @@ void set_part_flash_mode(ActorPart* part, s32 flashState) {
         if (decorations->flashState != flashState) {
             decorations->flashState = flashState;
             decorations->flashMode = FLASH_MODE_LIGHT;
-            decorations->flashStateChanged = TRUE;
+            decorations->flashStateChanged = true;
         }
     }
 }
@@ -2830,7 +2830,7 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationTyp
 
         _remove_part_decoration(part, decorationIndex);
         decorations->type[decorationIndex] = decorationType;
-        decorations->changed[decorationIndex] = TRUE;
+        decorations->changed[decorationIndex] = true;
         decorations->state[decorationIndex] = 0;
         _add_part_decoration(part);
     }
@@ -2867,7 +2867,7 @@ void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
 
 s32 player_team_is_ability_active(Actor* actor, s32 ability) {
     s32 actorClass = actor->actorID & ACTOR_CLASS_MASK;
-    s32 hasAbility = FALSE;
+    s32 hasAbility = false;
 
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
@@ -2964,7 +2964,7 @@ void remove_player_buffs(s32 buffs) {
     }
 
     if (partner != NULL && (buffs & PLAYER_BUFF_PARTNER_GLOWING)) {
-        partner->isGlowing = FALSE;
+        partner->isGlowing = false;
         gBattleStatus.flags1 &= ~BS_FLAGS1_GOOMBARIO_CHARGED;
     }
 }

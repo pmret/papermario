@@ -8,7 +8,7 @@ EvtScript N(EVS_SearchBush) = {
     BufRead4(LVar1, LVar2, LVar3, LVar4)
     Call(GetPlayerPos, LVar5, LVarF, LVar7)
     Thread
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         IfNe(LVar1, 0)
             Loop(5)
                 UseBuf(LVar1)
@@ -16,8 +16,8 @@ EvtScript N(EVS_SearchBush) = {
                 Loop(LVar2)
                     BufRead1(LVar3)
                     Call(N(TransformFoliage), LVar3, Float(0.1), 1, LVarF, 0)
-                    IfEq(LFlag0, FALSE)
-                        Set(LFlag0, TRUE)
+                    IfEq(LFlag0, false)
+                        Set(LFlag0, true)
                         Call(PlaySoundAtModel, LVar3, SOUND_SEARCH_BUSH, SOUND_SPACE_DEFAULT)
                     EndIf
                 EndLoop
@@ -76,7 +76,7 @@ EvtScript N(EVS_ShakeTree) = {
     Call(PlaySound, SOUND_SMACK_TREE)
     Call(PlaySound, SOUND_SHAKE_TREE_LEAVES)
     Thread
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         IfNe(LVar1, 0)
             Wait(1)
             Loop(5)
@@ -85,8 +85,8 @@ EvtScript N(EVS_ShakeTree) = {
                 Loop(LVar2)
                     BufRead1(LVar3)
                     Call(N(TransformFoliage), LVar3, Float(0.1), Float(0.2), LVarF, 0)
-                    IfEq(LFlag0, FALSE)
-                        Set(LFlag0, TRUE)
+                    IfEq(LFlag0, false)
+                        Set(LFlag0, true)
                         Call(PlaySoundAtModel, LVar3, SOUND_SHAKE_TREE_LEAVES, SOUND_SPACE_DEFAULT)
                     EndIf
                 EndLoop
@@ -109,7 +109,7 @@ EvtScript N(EVS_ShakeTree) = {
         EndIf
     EndThread
     Thread
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         IfNe(LVar2, 0)
             Loop(5)
                 UseBuf(LVar2)
@@ -117,8 +117,8 @@ EvtScript N(EVS_ShakeTree) = {
                 Loop(LVar3)
                     BufRead1(LVar4)
                     Call(N(TransformFoliage), LVar4, Float(0.1), Float(0.2), LVarF, 0)
-                    IfEq(LFlag0, FALSE)
-                        Set(LFlag0, TRUE)
+                    IfEq(LFlag0, false)
+                        Set(LFlag0, true)
                         Call(PlaySoundAtModel, LVar4, SOUND_SMACK_TREE, SOUND_SPACE_DEFAULT)
                     EndIf
                 EndLoop

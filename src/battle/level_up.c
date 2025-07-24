@@ -394,7 +394,7 @@ API_CALLABLE(GetRemainingStarPointsReward) {
 }
 
 API_CALLABLE(GetStarPointDigitScripts) {
-    s32 levelUp = FALSE;
+    s32 levelUp = false;
 
     script->varTable[10] = gBattleStatus.totalStarPoints / 100; // star points in hundreds (levels to gain)
     script->varTable[11] = (gBattleStatus.totalStarPoints % 100) / 10; // star points in tens
@@ -402,7 +402,7 @@ API_CALLABLE(GetStarPointDigitScripts) {
 
     if (script->varTable[10] > 0) {
         script->varTablePtr[10] = starpoint_digit_scripts[script->varTable[10]];
-        levelUp = TRUE;
+        levelUp = true;
     } else {
         script->varTablePtr[10] = starpoint_space_script;
     }
@@ -501,7 +501,7 @@ EvtScript EVS_ShowStarpoints = {
 #endif
         Call(SetVirtualEntityPosition, LVar6, -278, 68, 70)
         Call(SetVirtualEntityScale, LVar6, Float(0.5), Float(0.5), Float(0.5))
-        Set(LFlag0, TRUE)
+        Set(LFlag0, true)
     EndIf
     Switch(LVar0)
         CaseGt(99)
@@ -699,7 +699,7 @@ void btl_state_update_celebration(void) {
                 dma_copy(StarpointText_RomStart[gCurrentLanguage], StarpointText_RomEnd[gCurrentLanguage], StarpointText_Vram[gCurrentLanguage]);
 #endif
                 script = start_script(&EVS_ShowStarpoints, EVT_PRIORITY_A, 0);
-                EndBattleRewardsDone = FALSE;
+                EndBattleRewardsDone = false;
                 // divide reward into 20 increments
                 EndBattleRewardStep = 20;
                 EndBattleRewardIncrement = EndBattleRewardTotal / EndBattleRewardStep;
@@ -740,7 +740,7 @@ void btl_state_update_celebration(void) {
                 }
                 if (battleStatus->totalStarPoints == 0) {
                     if (EndBattleRewardStep == 0) {
-                        EndBattleRewardsDone = TRUE;
+                        EndBattleRewardsDone = true;
                         player->flags &= ~(ACTOR_FLAG_USING_IDLE_ANIM | ACTOR_FLAG_SHOW_STATUS_ICONS);
                         if (partner != NULL) {
                             partner->flags &= ~(ACTOR_FLAG_USING_IDLE_ANIM | ACTOR_FLAG_SHOW_STATUS_ICONS);
@@ -889,9 +889,9 @@ void btl_state_update_celebration(void) {
                     hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
                 }
 
-                CantLevelUpStat[MENU_HP] = FALSE;
-                CantLevelUpStat[MENU_FP] = FALSE;
-                CantLevelUpStat[MENU_BP] = FALSE;
+                CantLevelUpStat[MENU_HP] = false;
+                CantLevelUpStat[MENU_FP] = false;
+                CantLevelUpStat[MENU_BP] = false;
 
                 if (playerData->hardMaxFP != 50) {
                     // current FP
@@ -950,7 +950,7 @@ void btl_state_update_celebration(void) {
                     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                     hud_element_get_render_pos(hid, &x, &y);
                     hud_element_set_render_pos(hid, x + 2, y + 46);
-                    CantLevelUpStat[MENU_FP] = TRUE;
+                    CantLevelUpStat[MENU_FP] = true;
                 }
 
                 if (is_ability_active(ABILITY_FP_PLUS)) {
@@ -1021,7 +1021,7 @@ void btl_state_update_celebration(void) {
                     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                     hud_element_get_render_pos(hid, &x, &y);
                     hud_element_set_render_pos(hid, x + 2, y + 46);
-                    CantLevelUpStat[MENU_HP] = TRUE;
+                    CantLevelUpStat[MENU_HP] = true;
                 }
 
                 if (is_ability_active(ABILITY_HP_PLUS)) {
@@ -1086,7 +1086,7 @@ void btl_state_update_celebration(void) {
                     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
                     hud_element_get_render_pos(hid, &x, &y);
                     hud_element_set_render_pos(hid, x + 2, y + 46);
-                    CantLevelUpStat[MENU_BP] = TRUE;
+                    CantLevelUpStat[MENU_BP] = true;
                 }
 
                 LevelUpSpotlightID = hid = hud_element_create(&HES_ProjectorBeam);
@@ -1353,7 +1353,7 @@ void btl_state_update_celebration(void) {
                     bgm_set_song(0, AU_SONG_NONE, 0, 1500, VOL_LEVEL_FULL);
                 }
                 bFadeToBlackAmt = 0;
-                btl_cam_set_params(TRUE, 270, 100, 8, 0, 0x2400, 0, 100);
+                btl_cam_set_params(true, 270, 100, 8, 0, 0x2400, 0, 100);
                 set_actor_anim(0, 0, ANIM_MarioB1_AdjustCap);
                 if (partner != NULL) {
                     set_actor_anim(ACTOR_PARTNER, 0, D_80284154[playerData->curPartner]);

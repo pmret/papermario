@@ -65,7 +65,7 @@ EvtScript N(EVS_NpcDefeat_Duplighost) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Call(SetNpcFlagBits, NPC_Duplighost, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_Duplighost, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Call(SetNpcSpeed, NPC_Duplighost, Float(3.0 / DT))
             Call(SetNpcJumpscale, NPC_Duplighost, Float(1.5))
             Call(SetNpcAnimation, NPC_Duplighost, ANIM_Duplighost_Anim04)
@@ -82,9 +82,9 @@ EvtScript N(EVS_NpcDefeat_Duplighost) = {
             Call(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
             Call(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 13 * DT)
             Set(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
-            Call(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, FALSE)
+            Call(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, false)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o47, COLLIDER_FLAGS_UPPER_MASK)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
             Add(LVar0, 50)
             Call(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
             Call(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 20 * DT)
@@ -218,8 +218,8 @@ EvtScript N(EVS_NpcIdle_TrueKooperB) = {
 };
 
 EvtScript N(EVS_NpcInit_TrueKooperB) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_PASSIVE, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_PASSIVE, false)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TrueKooperB)))
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_TrueKooperB)))
     IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
@@ -240,8 +240,8 @@ EvtScript N(EVS_NpcIdle_FakeKooperB) = {
 };
 
 EvtScript N(EVS_NpcInit_FakeKooperB) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_PASSIVE, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_PASSIVE, false)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_FakeKooperB)))
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_FakeKooperB)))
     IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
@@ -315,7 +315,7 @@ NpcData N(NpcData_FrostClubba)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -450, 0, -90 },

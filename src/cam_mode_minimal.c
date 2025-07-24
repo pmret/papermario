@@ -10,7 +10,7 @@ void update_camera_minimal(Camera* camera) {
     f32 dx, dy, dz;
 
     if (camera->needsInit) {
-        camera->needsInit = FALSE;
+        camera->needsInit = false;
 
         camera->lookAt_obj.x = 0.0f;
         camera->lookAt_obj.y = 0.0f;

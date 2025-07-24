@@ -70,7 +70,7 @@ SaveMetadata gSaveSlotMetadata[4] = {
     { .filename = { FILENAME_ERROR } },
 };
 
-u8 gSaveSlotHasData[4] = { TRUE, TRUE, TRUE, TRUE };
+u8 gSaveSlotHasData[4] = { true, true, true, true };
 
 s32 TitleMenu_Alpha = 0; // the opacity of "PRESS START" text
 s32 TitleMenu_Visibility = TITLEMENU_STATE_FADE_IN; // toggles the visibility of "PRESS START"
@@ -79,11 +79,11 @@ s32 TitleMenu_BlinkCounter = 0; // counts to 16, then toggles TitleMenu_Visibili
 // controls whether the intro story or the demo will player after TITLE_STATE_HOLD is done
 // since this state is reached for the first time after the intro has already played once or was skipped,
 // this is initially false and the demo is will play first.
-s32 PlayIntroNext = FALSE;
+s32 PlayIntroNext = false;
 
 #if VERSION_PAL
-b32 LanguageSelectedPrev = FALSE;
-b32 LanguageSelected = FALSE;
+bool LanguageSelectedPrev = false;
+bool LanguageSelected = false;
 #endif
 
 Lights1 D_80077A38 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
@@ -165,7 +165,7 @@ void state_init_title_screen(void) {
 
     gOverrideFlags = 0;
     gTimeFreezeMode = TIME_FREEZE_NONE;
-    D_8014C248 = TRUE;
+    D_8014C248 = true;
     general_heap_create();
     clear_printers();
     sfx_set_reverb_mode(0);
@@ -194,7 +194,7 @@ void state_init_title_screen(void) {
 
     create_cameras();
     gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_NO_INTERP;
-    gCameras[CAM_DEFAULT].needsInit = TRUE;
+    gCameras[CAM_DEFAULT].needsInit = true;
     gCameras[CAM_DEFAULT].nearClip = CAM_NEAR_CLIP;
     gCameras[CAM_DEFAULT].farClip = CAM_FAR_CLIP;
     gCurrentCameraID = CAM_DEFAULT;
@@ -210,7 +210,7 @@ void state_init_title_screen(void) {
     gCameras[CAM_DEFAULT].bgColor[2] = 0;
     gCameras[CAM_DEFAULT].lookAt_obj_target.x = 25.0f;
     gCameras[CAM_DEFAULT].lookAt_obj_target.y = 25.0f;
-    gCameras[CAM_DEFAULT].params.basic.skipRecalc = FALSE;
+    gCameras[CAM_DEFAULT].params.basic.skipRecalc = false;
     gCameras[CAM_DEFAULT].params.basic.fovScale = 100;
     gCameras[CAM_DEFAULT].params.basic.pitch = 0;
     gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
@@ -226,7 +226,7 @@ void state_init_title_screen(void) {
     clear_npcs();
     hud_element_clear_cache();
     reset_background_settings();
-    clear_entity_data(TRUE);
+    clear_entity_data(true);
     clear_effect_data();
     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD;
     clear_player_data();
@@ -276,11 +276,11 @@ void state_step_title_screen(void) {
         case TITLE_STATE_HOLD:
 #if VERSION_PAL
             if(gGameStatusPtr->pressedButtons[0] & BUTTON_STICK_DOWN) {
-                LanguageSelected = TRUE;
+                LanguageSelected = true;
             }
 
             if(gGameStatusPtr->pressedButtons[0] & BUTTON_STICK_UP) {
-                LanguageSelected = FALSE;
+                LanguageSelected = false;
             }
 
             if(LanguageSelectedPrev != LanguageSelected) {
@@ -362,7 +362,7 @@ void state_step_title_screen(void) {
             clear_npcs();
             hud_element_clear_cache();
             spr_init_sprites(PLAYER_SPRITES_MARIO_WORLD);
-            clear_entity_data(TRUE);
+            clear_entity_data(true);
             clear_windows();
             gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
             gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD;
@@ -485,8 +485,8 @@ void appendGfx_title_screen(void) {
     gDPSetTextureConvert(gMainGfxPos++, G_TC_FILT);
     gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
     gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
-    render_frame(FALSE);
-    render_frame(TRUE);
+    render_frame(false);
+    render_frame(true);
 }
 
 void draw_title_screen_NOP(void) {

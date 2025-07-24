@@ -40,8 +40,8 @@ EvtScript N(EVS_ParadePhase_Luigi) = {
 
 EvtScript N(EVS_ParadePhase_Partners) = {
     PlayEffect(EFFECT_CONFETTI, 3, -2545, 200, 0, 1, 800)
-    Call(EnableNpcShadow, NPC_Goombario, FALSE)
-    Call(EnableNpcShadow, NPC_Bombette, FALSE)
+    Call(EnableNpcShadow, NPC_Goombario, false)
+    Call(EnableNpcShadow, NPC_Bombette, false)
     ChildThread
         Loop(0)
             Wait(25)
@@ -70,7 +70,7 @@ EvtScript N(EVS_ParadePhase_Partners) = {
 };
 
 EvtScript N(EVS_Twirler) = {
-    Call(EnableNpcShadow, LVar1, FALSE)
+    Call(EnableNpcShadow, LVar1, false)
     Call(SetNpcJumpscale, LVar1, Float(0.5))
     Loop(0)
         Call(SetNpcAnimation, LVar0, ANIM_ParadeToad_Red_TwirlerWalk)

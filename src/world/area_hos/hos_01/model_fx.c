@@ -103,19 +103,19 @@ EvtScript N(EVS_SetupModelFX) = {
     Call(SetTexPanner, MODEL_o208, TEX_PANNER_5)
     Call(SetTexPanner, MODEL_o211, TEX_PANNER_5)
     IfLt(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        Call(EnableModel, MODEL_7, FALSE)
+        Call(EnableModel, MODEL_7, false)
         IfLt(GB_StoryProgress, STORY_CH6_STAR_SPIRIT_RESCUED)
-            Call(EnableModel, MODEL_6, FALSE)
+            Call(EnableModel, MODEL_6, false)
             IfLt(GB_StoryProgress, STORY_CH5_STAR_SPRIT_DEPARTED)
-                Call(EnableModel, MODEL_5, FALSE)
+                Call(EnableModel, MODEL_5, false)
                 IfLt(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
-                    Call(EnableModel, MODEL_4, FALSE)
+                    Call(EnableModel, MODEL_4, false)
                     IfLt(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
-                        Call(EnableModel, MODEL_3, FALSE)
+                        Call(EnableModel, MODEL_3, false)
                         IfLt(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
-                            Call(EnableModel, MODEL_2, FALSE)
+                            Call(EnableModel, MODEL_2, false)
                             IfLt(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
-                                Call(EnableModel, MODEL_1, FALSE)
+                                Call(EnableModel, MODEL_1, false)
                             EndIf
                         EndIf
                     EndIf
@@ -124,7 +124,7 @@ EvtScript N(EVS_SetupModelFX) = {
         EndIf
     EndIf
     IfLt(GB_StoryProgress, STORY_CH8_OPENED_PATH_TO_STAR_WAY)
-        Call(EnableModel, MODEL_power, FALSE)
+        Call(EnableModel, MODEL_power, false)
     Else
         PlayEffect(EFFECT_75, 0, -30, 250, -160, 1, -1)
         Set(MV_StarBeamFXPtr, LVarF)

@@ -79,19 +79,19 @@ API_CALLABLE(N(GetFoodParameters)) {
     Bytecode* args = script->ptrReadPos;
     s32 itemIdx = evt_get_variable(script, *args++);
     ItemData* item = &gItemTable[itemIdx];
-    b32 isHarmful;
+    bool isHarmful;
 
     script->varTable[11] = item->potencyA;
     script->varTable[12] = item->potencyB;
-    script->varTable[13] = FALSE;
+    script->varTable[13] = false;
 
     if (item->typeFlags & ITEM_TYPE_FLAG_USE_DRINK_ANIMATION) {
-        script->varTable[13] = TRUE;
+        script->varTable[13] = true;
     }
 
-    isHarmful = FALSE;
+    isHarmful = false;
     if ((script->varTable[11] < 0) || (script->varTable[11] <= 0 && script->varTable[12] < 0)) {
-        isHarmful = TRUE;
+        isHarmful = true;
     }
 
     script->varTable[15] = isHarmful;
@@ -199,12 +199,12 @@ EvtScript N(EVS_UseItem) = {
     EndIf
     Set(LVar1, LV_NoRefund)
     ExecWait(N(UseItemWithEffect))
-    IfEq(LV_IsDrink, FALSE)
+    IfEq(LV_IsDrink, false)
         ExecWait(N(EatItem))
     Else
         ExecWait(N(DrinkItem))
     EndIf
-    IfEq(LV_IsHarmful, TRUE)
+    IfEq(LV_IsHarmful, true)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_StickOutTongue)
     EndIf
     IfGt(LV_HPAmt, 0)
@@ -234,7 +234,7 @@ EvtScript N(EVS_UseItem) = {
     IfNe(LV_FPAmt, 0)
         Call(N(AddFP), LV_FPAmt)
     EndIf
-    IfEq(LV_IsHarmful, FALSE)
+    IfEq(LV_IsHarmful, false)
         Wait(10)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_ThumbsUp)
         Wait(30)

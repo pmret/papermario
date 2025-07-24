@@ -6,11 +6,11 @@
 
 s32 has_enchanted_part(Actor* actor) {
     ActorPart* partIt = actor->partsTable;
-    s32 ret = FALSE;
+    s32 ret = false;
 
     while (partIt != NULL) {
         if (partIt->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)) {
-            ret = TRUE;
+            ret = true;
             break;
         } else {
             partIt = partIt->nextPart;
@@ -237,21 +237,21 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     Actor* target;
     ActorPart* targetPart;
     s32 hitResult;
-    s32 one = TRUE;
-    s32 statusInflicted = FALSE;
-    s32 statusInflicted2 = FALSE;
-    s32 isFire = FALSE;
-    s32 isWater = FALSE;
-    s32 isIce = FALSE;
-    s32 isElectric = FALSE;
-    s32 madeElectricContact = FALSE;
+    s32 one = true;
+    s32 statusInflicted = false;
+    s32 statusInflicted2 = false;
+    s32 isFire = false;
+    s32 isWater = false;
+    s32 isIce = false;
+    s32 isElectric = false;
+    s32 madeElectricContact = false;
     s32 isPlayer;
     s32 defense;
     s32 event;
     s32 damage;
     Evt* script;
 
-    battleStatus->wasStatusInflicted = FALSE;
+    battleStatus->wasStatusInflicted = false;
     battleStatus->lastAttackDamage = 0;
 
     battleStatus->attackerActorID = attacker->actorID;
@@ -319,19 +319,19 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     }
     if (battleStatus->curAttackElement & DAMAGE_TYPE_FIRE) {
         fx_ring_blast(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 24);
-        isFire = TRUE;
+        isFire = true;
     }
     if (battleStatus->curAttackElement & DAMAGE_TYPE_SHOCK) {
         apply_shock_effect(target);
-        isElectric = TRUE;
+        isElectric = true;
     }
     if (battleStatus->curAttackElement & DAMAGE_TYPE_WATER) {
         fx_water_splash(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 24);
-        isWater = TRUE;
+        isWater = true;
     }
     if (battleStatus->curAttackElement & DAMAGE_TYPE_ICE) {
         fx_big_snowflakes(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f);
-        isIce = TRUE;
+        isIce = true;
     }
 
     if (!(attacker->staticStatus == STATUS_KEY_STATIC)
@@ -340,7 +340,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
         && !has_enchanted_part(attacker)) // enchanted attacks ignore electrified defenders
     {
-        madeElectricContact = TRUE;
+        madeElectricContact = true;
         gBattleStatus.flags1 |= BS_FLAGS1_TRIGGER_EVENTS;
     }
 
@@ -569,7 +569,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         if (event == EVENT_DEATH) {
             event = EVENT_FIRE_DEATH;
         }
-        isFire = TRUE;
+        isFire = true;
     }
 
     if (gBattleStatus.flags1 & BS_FLAGS1_ATK_BLOCKED) {
@@ -888,11 +888,11 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
 }
 
 s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event) {
-    return dispatch_damage_event_actor(actor, damageAmount, event, FALSE);
+    return dispatch_damage_event_actor(actor, damageAmount, event, false);
 }
 
 s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event) {
-    return dispatch_damage_event_actor(actor, damageAmount, event, TRUE);
+    return dispatch_damage_event_actor(actor, damageAmount, event, true);
 }
 
 API_CALLABLE(BindTakeTurn) {
@@ -1139,7 +1139,7 @@ API_CALLABLE(IdleJumpToGoal) {
     f32 moveDist;
 
     if (isInitialCall) {
-        script->functionTemp[0] = FALSE;
+        script->functionTemp[0] = false;
     }
 
     if (!script->functionTemp[0]) {
@@ -1188,7 +1188,7 @@ API_CALLABLE(IdleJumpToGoal) {
 
         movement->vel = (movement->acceleration * movement->flyTime * 0.5f) + (posY / movement->flyTime);
         movement->speed += moveDist / movement->flyTime;
-        script->functionTemp[0] = TRUE;
+        script->functionTemp[0] = true;
     }
 
     actor = script->functionTempPtr[1];
@@ -1227,7 +1227,7 @@ API_CALLABLE(JumpToGoalSimple2) {
     Actor* actor;
 
     if (isInitialCall) {
-        script->functionTemp[0] = FALSE;
+        script->functionTemp[0] = false;
     }
 
     if (!script->functionTemp[0]) {
@@ -1276,7 +1276,7 @@ API_CALLABLE(JumpToGoalSimple2) {
         if (actor->actorTypeData1[4] != 0) {
             sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
-        script->functionTemp[0] = TRUE;
+        script->functionTemp[0] = true;
     }
 
     actor = script->functionTempPtr[1];
@@ -1314,7 +1314,7 @@ API_CALLABLE(JumpWithBounce) {
     f32 moveDist;
 
     if (isInitialCall) {
-        script->functionTemp[0] = FALSE;
+        script->functionTemp[0] = false;
     }
 
     if (!script->functionTemp[0]) {
@@ -1364,7 +1364,7 @@ API_CALLABLE(JumpWithBounce) {
         if (actor->actorTypeData1[4] != 0) {
             sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
-        script->functionTemp[0] = TRUE;
+        script->functionTemp[0] = true;
     }
 
     actor = script->functionTempPtr[1];
@@ -1411,7 +1411,7 @@ API_CALLABLE(LandJump) {
     Actor* actor;
 
     if (isInitialCall) {
-        script->functionTemp[0] = FALSE;
+        script->functionTemp[0] = false;
     }
 
     if (!script->functionTemp[0]) {
@@ -1426,7 +1426,7 @@ API_CALLABLE(LandJump) {
         actor->state.curPos.x = actor->curPos.x;
         actor->state.curPos.y = actor->curPos.y;
         actor->state.curPos.z = actor->curPos.z;
-        script->functionTemp[0] = TRUE;
+        script->functionTemp[0] = true;
     }
 
     actor = script->functionTempPtr[1];
@@ -1533,7 +1533,7 @@ API_CALLABLE(RunToGoal) {
     f32 goalX, goalY, goalZ;
 
     if (isInitialCall) {
-        script->functionTemp[0] = FALSE;
+        script->functionTemp[0] = false;
     }
 
     if (!script->functionTemp[0]) {
@@ -1583,7 +1583,7 @@ API_CALLABLE(RunToGoal) {
         if ((actor->actorTypeData1[0] != 0) && (actor->actorTypeData1[1] == 0)) {
             sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
-        script->functionTemp[0] = TRUE;
+        script->functionTemp[0] = true;
     }
 
     actor = script->functionTempPtr[1];
@@ -1658,7 +1658,7 @@ API_CALLABLE(IdleRunToGoal) {
     s32 actorID;
 
     if (isInitialCall) {
-        script->functionTemp[0] = FALSE;
+        script->functionTemp[0] = false;
     }
 
     if (!script->functionTemp[0]) {
@@ -1706,7 +1706,7 @@ API_CALLABLE(IdleRunToGoal) {
         } else {
             movement->dist = -(actor->actorTypeData1b[0] + 1);
         }
-        script->functionTemp[0] = TRUE;
+        script->functionTemp[0] = true;
     }
 
     actor = script->functionTempPtr[1];
@@ -2177,11 +2177,11 @@ API_CALLABLE(FlyToGoal) {
         actorState->moveTime = evt_get_variable(script, *args++);
         actorState->moveArcAmplitude = evt_get_variable(script, *args++);
         script->functionTemp[3] = evt_get_variable(script, *args++);
-        actorState->functionTemp[0] = FALSE;
+        actorState->functionTemp[0] = false;
 
         if (script->functionTemp[3] >= 100) {
             script->functionTemp[3] -= 100;
-            actorState->functionTemp[0] = TRUE;
+            actorState->functionTemp[0] = true;
         }
 
         goalX = actorState->goalPos.x;
@@ -3461,7 +3461,7 @@ API_CALLABLE(ClearStatusEffects) {
     actor->disableEffect->data.disableX->koDuration = 0;
     actor->attackBoost = 0;
     actor->defenseBoost = 0;
-    actor->isGlowing = FALSE;
+    actor->isGlowing = false;
 
     return ApiStatus_DONE2;
 }

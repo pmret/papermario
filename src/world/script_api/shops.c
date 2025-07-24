@@ -202,7 +202,7 @@ s32 shop_owner_end_speech(void) {
 API_CALLABLE(CanInteractWithShopItem) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    script->varTable[2] = FALSE;
+    script->varTable[2] = false;
 
     if (playerStatus->actionState == ACTION_STATE_BOUNCE ||
         playerStatus->actionState == ACTION_STATE_FALLING) {
@@ -213,7 +213,7 @@ API_CALLABLE(CanInteractWithShopItem) {
         return ApiStatus_DONE2;
     }
 
-    script->varTable[2] = TRUE;
+    script->varTable[2] = true;
     return ApiStatus_DONE2;
 }
 
@@ -304,12 +304,12 @@ API_CALLABLE(ShowShopPurchaseDialog) {
         case PURCHASE_DIALOG_STATE_INIT:
             if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = PURCHASE_DIALOG_STATE_WAIT_FOR_SPEECH;
-                script->functionTemp[2] = FALSE;
+                script->functionTemp[2] = false;
                 D_80286528 = msg_get_printer_for_msg(MSG_Choice_0001, &script->functionTemp[2]);
             }
             break;
         case PURCHASE_DIALOG_STATE_WAIT_FOR_SPEECH:
-            if (script->functionTemp[2] == TRUE) {
+            if (script->functionTemp[2] == true) {
                 if (D_80286528->curOption == 0) {
                     if (playerData->coins < shopInventory->price) {
                         script->functionTemp[1] = shop_owner_continue_speech(SHOP_MSG_NOT_ENOUGH_COINS);
@@ -321,7 +321,7 @@ API_CALLABLE(ShowShopPurchaseDialog) {
                         playerData->coins -= shopInventory->price;
                         if (IS_BADGE(shopInventory->itemID)) {
                             add_badge(shopInventory->itemID);
-                            evt_set_variable(NULL, GF_MAC01_BoughtBadgeFromRowf, TRUE);
+                            evt_set_variable(NULL, GF_MAC01_BoughtBadgeFromRowf, true);
                         } else {
                             add_item(shopInventory->itemID);
                         }
@@ -435,7 +435,7 @@ void shop_open_item_select_popup(s32 mode) {
 
         menu->ptrIcon[numEntries] = gItemHudScripts[itemData->hudElemID].enabled;
         menu->userIndex[numEntries] = i;
-        menu->enabled[numEntries] = TRUE;
+        menu->enabled[numEntries] = true;
         menu->nameMsg[numEntries] = itemData->nameMsg;
         menu->descMsg[numEntries] = itemData->shortDescMsg;
         menu->value[numEntries] = shop_get_sell_price(itemID);

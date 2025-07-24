@@ -33,10 +33,10 @@ EvtScript N(EVS_EnterMap) = {
 };
 
 EvtScript N(EVS_TexPan_Clouds) = {
-    Call(EnableTexPanning, MODEL_kumo1, TRUE)
-    Call(EnableTexPanning, MODEL_kumo2, TRUE)
-    Call(EnableTexPanning, MODEL_kumo3, TRUE)
-    Call(EnableTexPanning, MODEL_kumo4, TRUE)
+    Call(EnableTexPanning, MODEL_kumo1, true)
+    Call(EnableTexPanning, MODEL_kumo2, true)
+    Call(EnableTexPanning, MODEL_kumo3, true)
+    Call(EnableTexPanning, MODEL_kumo4, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(  -90,    0,    0,    0)
@@ -73,7 +73,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_BOWSERS_CASTLE)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_EnterMap))
     Wait(1)

@@ -32,7 +32,7 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(ItemChoice_SelectedItemID) = evt_get_variable(script, *args++);
-    N(ItemChoice_HasSelectedItem) = TRUE;
+    N(ItemChoice_HasSelectedItem) = true;
     return ApiStatus_DONE2;
 }
 """

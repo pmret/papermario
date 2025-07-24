@@ -38,35 +38,35 @@ EvtScript N(EVS_TetherCamToPlayer) = {
 };
 
 EvtScript N(EVS_UseSpring_Basement) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_JUMP)
     Wait(1)
     ExecGetTID(N(EVS_TetherCamToPlayer), LVarA)
     Call(SetPlayerJumpscale, Float(0.7))
-    IfEq(AF_KMR_0B, FALSE)
+    IfEq(AF_KMR_0B, false)
         Call(PlayerJump, -110, -80, -35, 20)
-        Set(AF_KMR_0B, TRUE)
+        Set(AF_KMR_0B, true)
     Else
         Call(N(EnableCameraFollowPlayerY))
         Exec(N(EVS_SecretPanel_FlipBack))
         Call(PlayerJump, -150, 30, -90, 30)
         Call(InterpPlayerYaw, 180, 0)
-        Set(AF_KMR_0B, FALSE)
+        Set(AF_KMR_0B, false)
     EndIf
     Wait(30)
     KillThread(LVarA)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Return
     End
 };
 
 EvtScript N(EVS_Luigi_JumpFromBlock) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(SetEnemyFlagBits, NPC_Luigi_1, ENEMY_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    Call(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_GRAVITY, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(SetEnemyFlagBits, NPC_Luigi_1, ENEMY_FLAG_IGNORE_WORLD_COLLISION, false)
+    Call(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_GRAVITY, true)
     Call(SetNpcVar, NPC_Luigi_1, 0, 1)
     Call(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Jump)
     Call(SetNpcJumpscale, NPC_Luigi_1, 1)
@@ -74,15 +74,15 @@ EvtScript N(EVS_Luigi_JumpFromBlock) = {
     Call(NpcJump0, NPC_Luigi_1, LVar0, 0, LVar2, 25)
     Call(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Idle)
     Call(SetNpcVar, NPC_Luigi_1, 0, 2)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Luigi_JumpFromHighBlock) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(SetEnemyFlagBits, NPC_Luigi_1, ENEMY_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    Call(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_GRAVITY, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(SetEnemyFlagBits, NPC_Luigi_1, ENEMY_FLAG_IGNORE_WORLD_COLLISION, false)
+    Call(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_GRAVITY, true)
     Call(SetNpcVar, NPC_Luigi_1, 0, 1)
     Call(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Jump)
     Call(SetNpcJumpscale, NPC_Luigi_1, 1)
@@ -91,7 +91,7 @@ EvtScript N(EVS_Luigi_JumpFromHighBlock) = {
     Call(NpcJump0, NPC_Luigi_1, LVar0, 0, LVar2, 25)
     Call(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Idle)
     Call(SetNpcVar, NPC_Luigi_1, 0, 2)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

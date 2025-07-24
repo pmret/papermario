@@ -25,7 +25,7 @@ API_CALLABLE(N(GetBulletBillVar)) {
 }
 
 EvtScript N(EVS_NpcAuxAI_BillBlaster) = {
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, true)
     Return
     End
 };
@@ -100,7 +100,7 @@ EvtScript N(D_80240B80_9BE1E0) = {
             Call(DoNpcDefeat)
         CaseEq(OUTCOME_PLAYER_FLED)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -169,14 +169,14 @@ EvtScript N(EVS_NpcAI_KoopaBros_Red) = {
         IfLt(LVar0, -370)
             Goto(0)
         EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(20 * DT)
     Call(FadeOutMusic, 0, 2000 * DT)
     Call(UseSettingsFrom, CAM_DEFAULT, 1300, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 1490, 0, 0)
     Call(SetCamPosB, CAM_DEFAULT, 1466, Float(41.6))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.5 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(20 * DT)
     Call(SetCamPosB, CAM_DEFAULT, 1466, Float(41.6))
@@ -184,7 +184,7 @@ EvtScript N(EVS_NpcAI_KoopaBros_Red) = {
     Call(SetCamDistance, CAM_DEFAULT, 300)
     Call(SetCamPitch, CAM_DEFAULT, 25, -9)
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(20 * DT)
     Call(PlaySound, SOUND_METAL_DOOR_OPEN)
     Call(SetMusic, 0, SONG_KOOPA_BROS_THEME, 0, VOL_LEVEL_FULL)
@@ -211,7 +211,7 @@ EvtScript N(EVS_NpcAI_KoopaBros_Red) = {
     Call(SetCamPosB, CAM_DEFAULT, 1466, Float(41.6))
     Call(SetPanTarget, CAM_DEFAULT, 1250, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Land)
     Call(NpcJump0, NPC_SELF, 1440, 30, 0, 20 * DT)
     Call(NpcJump0, NPC_SELF, 1380, 0, 0, 20 * DT)
@@ -227,12 +227,12 @@ EvtScript N(EVS_NpcAI_KoopaBros_Red) = {
     Call(SetMusic, 0, SONG_BULLET_BILL_ASSAULT, 0, VOL_LEVEL_FULL)
     Wait(60 * DT)
     Call(UseSettingsFrom, CAM_DEFAULT, 1300, 0, 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.5 / DT))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
     Set(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(RotateModel, MODEL_o60, 0, 0, -1, 0)
     Call(RotateModel, MODEL_o65, 0, 0, 1, 0)
     Call(RemoveNpc, NPC_SELF)
@@ -390,12 +390,12 @@ EvtScript N(EVS_NpcAI_BillBlaster) = {
 };
 
 EvtScript N(EVS_NpcAI_BulletBill) = {
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, true)
     Label(1)
         Call(SetSelfVar, 0, 0)
-        Call(EnableNpcShadow, NPC_SELF, FALSE)
+        Call(EnableNpcShadow, NPC_SELF, false)
         Call(SelfEnemyOverrideSyncPos, 0)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
         Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         Label(2)
             Call(GetSelfVar, 0, LVar0)
@@ -405,8 +405,8 @@ EvtScript N(EVS_NpcAI_BulletBill) = {
             EndIf
         Wait(15)
         Call(SetNpcAnimation, NPC_SELF, ANIM_BulletBill_Fire)
-        Call(EnableNpcShadow, NPC_SELF, TRUE)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+        Call(EnableNpcShadow, NPC_SELF, true)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, false)
         Call(SelfEnemyOverrideSyncPos, 1)
         Call(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
         Call(GetNpcYaw, LVar0, LVar4)
@@ -452,7 +452,7 @@ EvtScript N(EVS_NpcDefeat_BulletBill) = {
         CaseEq(OUTCOME_PLAYER_WON)
             Thread
                 Wait(20)
-                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
                 Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
                 Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_BulletBill)))
             EndThread
@@ -527,14 +527,14 @@ NpcSettings N(NpcSettings_BulletBill) = {
 
 EvtScript N(EVS_NpcDefeat_BillBlaster) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o85, COLLIDER_FLAGS_UPPER_MASK)
-    Set(GF_TRD09_Defeated_BillBlasters, TRUE)
+    Set(GF_TRD09_Defeated_BillBlasters, true)
     Call(DoNpcDefeat)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_BillBlaster) = {
-    IfEq(GF_TRD09_Defeated_BillBlasters, FALSE)
+    IfEq(GF_TRD09_Defeated_BillBlasters, false)
         Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_BillBlaster)))
     Else
         Call(RemoveEncounter, NPC_SELF)
@@ -550,7 +550,7 @@ NpcData N(NpcData_BillBlasters)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 0, 0, 0 },
@@ -572,7 +572,7 @@ NpcData N(NpcData_BillBlasters)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 0, 0, 0 },
@@ -593,7 +593,7 @@ NpcData N(NpcData_BillBlasters)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 0, 0, 0 },
@@ -697,7 +697,7 @@ NpcData N(NpcData_BulletBill_Demo1) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },
@@ -747,7 +747,7 @@ NpcData N(NpcData_BulletBill_Demo2) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },
@@ -797,7 +797,7 @@ NpcData N(NpcData_BulletBill_Demo3) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },
@@ -847,7 +847,7 @@ NpcData N(NpcData_BulletBill_Demo4) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },
@@ -897,7 +897,7 @@ NpcData N(NpcData_BulletBill_Demo5) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },

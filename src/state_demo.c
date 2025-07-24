@@ -192,9 +192,9 @@ void state_step_demo(void) {
                 gGameStatusPtr->peachFlags = 0;
                 snd_enable_sfx();
                 gGameStatusPtr->context = CONTEXT_WORLD;
-                gGameStatusPtr->debugUnused1 = FALSE;
+                gGameStatusPtr->debugUnused1 = false;
                 gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;
-                gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
+                gGameStatusPtr->keepUsingPartnerOnMapChange = false;
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                 general_heap_create();
                 clear_render_tasks();
@@ -210,7 +210,7 @@ void state_step_demo(void) {
                 hud_element_clear_cache();
                 clear_trigger_data();
                 clear_printers();
-                clear_entity_data(FALSE);
+                clear_entity_data(false);
                 clear_screen_overlays();
                 clear_player_status();
                 clear_npcs();

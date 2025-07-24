@@ -30,10 +30,10 @@ EvtScript N(EVS_SetupSwitches) = {
 
 EvtScript N(EVS_OnTouch_BlueSwitchCenter) = {
     Call(IsPlayerOnValidFloor, LVar0)
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PlaySoundAtCollider, COLLIDER_o2096, SOUND_FLOOR_SWITCH_DEPRESS, SOUND_SPACE_DEFAULT)
     Call(MakeLerp, 0, -14, 30, EASING_LINEAR)
     Label(10)
@@ -45,10 +45,10 @@ EvtScript N(EVS_OnTouch_BlueSwitchCenter) = {
             Goto(10)
         EndIf
     Call(PlaySoundAtCollider, COLLIDER_o2096, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_DEFAULT)
-    Set(AF_ISK09_FlippingBlueStairs, TRUE)
+    Set(AF_ISK09_FlippingBlueStairs, true)
     Label(15)
         Wait(1)
-        IfEq(AF_ISK09_FlippingBlueStairs, TRUE)
+        IfEq(AF_ISK09_FlippingBlueStairs, true)
             Goto(15)
         EndIf
     Call(MakeLerp, -14, 0, 5, EASING_LINEAR)
@@ -67,10 +67,10 @@ EvtScript N(EVS_OnTouch_BlueSwitchCenter) = {
 
 EvtScript N(EVS_OnTouch_BlueSwitchMidLeft) = {
     Call(IsPlayerOnValidFloor, LVar0)
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PlaySoundAtCollider, COLLIDER_o2099, SOUND_FLOOR_SWITCH_DEPRESS, SOUND_SPACE_DEFAULT)
     Call(MakeLerp, 0, -14, 30, EASING_LINEAR)
     Label(10)
@@ -82,10 +82,10 @@ EvtScript N(EVS_OnTouch_BlueSwitchMidLeft) = {
             Goto(10)
         EndIf
     Call(PlaySoundAtCollider, COLLIDER_o2099, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_DEFAULT)
-    Set(AF_ISK09_FlippingBlueStairs, TRUE)
+    Set(AF_ISK09_FlippingBlueStairs, true)
     Label(15)
         Wait(1)
-        IfEq(AF_ISK09_FlippingBlueStairs, TRUE)
+        IfEq(AF_ISK09_FlippingBlueStairs, true)
             Goto(15)
         EndIf
     Call(MakeLerp, -14, 0, 5, EASING_LINEAR)
@@ -104,10 +104,10 @@ EvtScript N(EVS_OnTouch_BlueSwitchMidLeft) = {
 
 EvtScript N(EVS_OnTouch_BlueSwitchTopLeft) = {
     Call(IsPlayerOnValidFloor, LVar0)
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PlaySoundAtCollider, COLLIDER_o2102, SOUND_FLOOR_SWITCH_DEPRESS, SOUND_SPACE_DEFAULT)
     Call(MakeLerp, 0, -14, 30, EASING_LINEAR)
     Label(10)
@@ -119,10 +119,10 @@ EvtScript N(EVS_OnTouch_BlueSwitchTopLeft) = {
             Goto(10)
         EndIf
     Call(PlaySoundAtCollider, COLLIDER_o2102, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_DEFAULT)
-    Set(AF_ISK09_FlippingBlueStairs, TRUE)
+    Set(AF_ISK09_FlippingBlueStairs, true)
     Label(15)
         Wait(1)
-        IfEq(AF_ISK09_FlippingBlueStairs, TRUE)
+        IfEq(AF_ISK09_FlippingBlueStairs, true)
             Goto(15)
         EndIf
     Call(MakeLerp, -14, 0, 5, EASING_LINEAR)
@@ -141,10 +141,10 @@ EvtScript N(EVS_OnTouch_BlueSwitchTopLeft) = {
 
 EvtScript N(EVS_OnTouch_RedSwitch) = {
     Call(IsPlayerOnValidFloor, LVar0)
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PlaySoundAtCollider, COLLIDER_o2105, SOUND_FLOOR_SWITCH_DEPRESS, SOUND_SPACE_DEFAULT)
     Call(MakeLerp, 0, -14, 30, EASING_LINEAR)
     Label(10)
@@ -156,10 +156,10 @@ EvtScript N(EVS_OnTouch_RedSwitch) = {
             Goto(10)
         EndIf
     Call(PlaySoundAtCollider, COLLIDER_o2105, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_DEFAULT)
-    Set(AF_ISK09_FlippingRedStairs, TRUE)
+    Set(AF_ISK09_FlippingRedStairs, true)
     Label(15)
         Wait(1)
-        IfEq(AF_ISK09_FlippingRedStairs, TRUE)
+        IfEq(AF_ISK09_FlippingRedStairs, true)
             Goto(15)
         EndIf
     Call(MakeLerp, -14, 0, 5, EASING_LINEAR)

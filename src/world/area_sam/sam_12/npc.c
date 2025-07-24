@@ -5,7 +5,7 @@
 EvtScript N(EVS_NpcInit_Merlar) = {
     Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Merlar)))
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Merlar)))
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Return
     End
 };

@@ -33,7 +33,7 @@ void cloud_puff_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     mem_clear(part, numParts * sizeof(*part));
 
     for (i = 0; i < numParts; i++, part++) {
-        part->alive = TRUE;
+        part->alive = true;
         part->unk_40 = 0;
         part->unk_0C = arg0;
         part->unk_10 = arg1;
@@ -61,16 +61,16 @@ void cloud_puff_init(EffectInstance* effect) {
 
 void cloud_puff_update(EffectInstance* effect) {
     CloudPuffFXData* part = effect->data.cloudPuff;
-    s32 cond = FALSE;
+    s32 cond = false;
     s32 i;
 
     for (i = 0; i < effect->numParts; i++, part++) {
         if (part->alive) {
             part->timeLeft--;
             if (part->timeLeft <= 0) {
-                part->alive = FALSE;
+                part->alive = false;
             } else {
-                cond = TRUE;
+                cond = true;
                 part->unk_2C = clamp_angle(part->unk_2C + 12.0f);
                 part->unk_18 = part->unk_24 + sin_deg(part->unk_2C) * 0.1;
                 part->unk_1C = part->unk_28 + cos_deg(part->unk_2C) * 0.1;

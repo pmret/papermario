@@ -2,7 +2,7 @@
 #include "hud_element.h"
 
 s32 UniqueScriptCounter = 1;
-s32 IsUpdatingScripts = FALSE;
+s32 IsUpdatingScripts = false;
 f32 GlobalTimeRate = 1.0f;
 
 // script_list
@@ -186,7 +186,7 @@ void clear_script_list(void) {
 
     gNumScripts = 0;
     gScriptListCount = 0;
-    IsUpdatingScripts = FALSE;
+    IsUpdatingScripts = false;
 
     for (i = 0; i < MAX_MAPVARS; i++) {
         gMapVars[i] = 0;
@@ -212,7 +212,7 @@ void init_script_list(void) {
     }
 
     gNumScripts = 0;
-    IsUpdatingScripts = FALSE;
+    IsUpdatingScripts = false;
 
     init_virtual_entity_list();
     init_model_animators();
@@ -581,7 +581,7 @@ void update_scripts(void) {
         return;
     }
 
-    IsUpdatingScripts = TRUE;
+    IsUpdatingScripts = true;
     sort_scripts();
 
     for (i = 0; i < gScriptListCount; i++) {
@@ -592,7 +592,7 @@ void update_scripts(void) {
             script->stateFlags != 0 &&
             !(script->stateFlags & (EVT_FLAG_SUSPENDED | EVT_FLAG_BLOCKED_BY_CHILD | EVT_FLAG_PAUSED)))
         {
-            s32 stop = FALSE;
+            s32 stop = false;
             s32 status;
 
             script->frameCounter += script->timeScale;
@@ -607,7 +607,7 @@ void update_scripts(void) {
                 script->frameCounter -= 1.0;
                 status = evt_execute_next_command(script);
                 if (status == EVT_CMD_RESULT_ERROR) {
-                    stop = TRUE;
+                    stop = true;
                     break;
                 }
             } while (status != EVT_CMD_RESULT_YIELD);
@@ -617,7 +617,7 @@ void update_scripts(void) {
             }
         }
     }
-    IsUpdatingScripts = FALSE;
+    IsUpdatingScripts = false;
 }
 
 // Does nothing, is cursed
@@ -719,10 +719,10 @@ s32 does_script_exist(s32 id) {
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
         if (scriptContextPtr != NULL && scriptContextPtr->id == id) {
-            return TRUE;
+            return true;
         }
     }
-    return FALSE;
+    return false;
 }
 
 s32 does_script_exist_by_ref(Evt* script) {
@@ -730,10 +730,10 @@ s32 does_script_exist_by_ref(Evt* script) {
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         if (script == (*gCurrentScriptListPtr)[i]) {
-            return TRUE;
+            return true;
         }
     }
-    return FALSE;
+    return false;
 }
 
 void set_script_priority(Evt* script, s32 priority) {

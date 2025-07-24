@@ -2,8 +2,8 @@
 #include "sprite/player.h"
 
 EvtScript N(EVS_Scene_Chapter1) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Thread
         Call(AdjustCam, CAM_DEFAULT, Float(0.5 / DT), 20, 300, Float(17.0), Float(-11.0))
     EndThread
@@ -40,10 +40,10 @@ EvtScript N(EVS_Scene_Chapter1) = {
     Wait(10 * DT)
     Call(SetPlayerAnimation, ANIM_Peach1_Idle)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0038)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(EnablePartnerAI)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

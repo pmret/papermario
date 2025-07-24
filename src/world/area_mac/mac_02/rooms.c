@@ -5,7 +5,7 @@ API_CALLABLE(N(InitEntryFromTunnels)) {
     Npc* npc;
     s32 i;
 
-    mdl_group_set_custom_gfx(MODEL_souko, CUSTOM_GFX_NONE, ENV_TINT_SHROUD, TRUE);
+    mdl_group_set_custom_gfx(MODEL_souko, CUSTOM_GFX_NONE, ENV_TINT_SHROUD, true);
     mdl_set_shroud_tint_params(0, 0, 0, 255);
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
@@ -45,10 +45,10 @@ EvtScript N(EVS_RoomListener_TayceT) = {
     Switch(LVar0)
         CaseEq(ROOM_UPDATE_ENTER_BEGIN)
             Call(SetGroupVisibility, MODEL_cook_in, MODEL_GROUP_VISIBLE)
-            Set(MF_MusicMixTrigger1, TRUE)
+            Set(MF_MusicMixTrigger1, true)
         CaseEq(ROOM_UPDATE_EXIT_END)
             Call(SetGroupVisibility, MODEL_cook_in, MODEL_GROUP_HIDDEN)
-            Set(MF_MusicMixTrigger1, FALSE)
+            Set(MF_MusicMixTrigger1, false)
     EndSwitch
     Return
     End
@@ -71,14 +71,14 @@ EvtScript N(EVS_SetWallRot_BlueHouse) = {
 EvtScript N(EVS_RoomListener_BlueHouse) = {
     Switch(LVar0)
         CaseEq(ROOM_UPDATE_ENTER_BEGIN)
-            IfEq(GF_MAC02_UnlockedHouse, FALSE)
+            IfEq(GF_MAC02_UnlockedHouse, false)
                 Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_LockedFromInside, 160, 40)
                 Set(LVar0, -1)
                 Return
             EndIf
             Call(SetGroupVisibility, MODEL_souko_in, MODEL_GROUP_VISIBLE)
         CaseEq(ROOM_UPDATE_EXIT_BEGIN)
-            IfEq(GF_MAC02_UnlockedHouse, FALSE)
+            IfEq(GF_MAC02_UnlockedHouse, false)
                 Set(LVar0, -1)
                 Return
             EndIf

@@ -204,7 +204,7 @@ EvtScript N(EVS_PlayerFalling) = {
 };
 
 EvtScript N(EVS_PartnerFalling) = {
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Thread
         Wait(5)
         Call(PlaySound, SOUND_PAPER_GLIDE_2)
@@ -262,7 +262,7 @@ EvtScript N(EVS_PartnerFalling) = {
 };
 
 EvtScript N(EVS_OnHitTrapTrigger) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Label(10)
         Call(GetPlayerActionState, LVar0)
         Wait(1)
@@ -277,9 +277,9 @@ EvtScript N(EVS_OnHitTrapTrigger) = {
         Wait(1)
     EndLoop
     Wait(10)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Thread
         Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -289,9 +289,9 @@ EvtScript N(EVS_OnHitTrapTrigger) = {
         Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     EndThread
     Wait(10)
-    Call(EnableModel, MODEL_o101, FALSE)
-    Call(EnableModel, MODEL_o95, TRUE)
-    Call(EnableModel, MODEL_o96, TRUE)
+    Call(EnableModel, MODEL_o101, false)
+    Call(EnableModel, MODEL_o95, true)
+    Call(EnableModel, MODEL_o96, true)
     Call(SetGroupVisibility, MODEL_kesu, MODEL_GROUP_VISIBLE)
     Call(PlaySound, SOUND_OPEN_TRAPDOOR)
     Call(MakeLerp, 0, 90, 30, EASING_COS_SLOW_OVERSHOOT)
@@ -339,7 +339,7 @@ EvtScript N(EVS_OnHitTrapTrigger) = {
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     IfLt(GB_StoryProgress, STORY_CH1_MARIO_ACTIVATED_TRAP)
         Wait(60)
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Call(N(DeleteFallingSprite))
         Call(SetNpcPos, NPC_KoopaBros_01, -250, 240, -25)

@@ -54,7 +54,7 @@ EffectInstance* attack_result_text_main(s32 type, f32 posX, f32 posY, f32 posZ, 
 
     ASSERT(data != NULL);
 
-    data->isVisible = TRUE;
+    data->isVisible = true;
     data->unk_20 = 0;
     data->type = type;
     data->lifetime = 0;
@@ -105,7 +105,7 @@ void attack_result_text_update(EffectInstance* effect) {
     curTime = data->lifetime;
 
     if (data->timeLeft < 0) {
-        data->isVisible = FALSE;
+        data->isVisible = false;
         data->timeLeft = -1;
         remove_effect(effect);
         return;

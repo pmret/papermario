@@ -67,9 +67,9 @@ EvtScript N(EVS_DropDoor_RightHouse) = {
 
 EvtScript N(EVS_SetWallRot_RightHouse) = {
     IfEq(LVar0, 90)
-        Call(EnableModel, MODEL_nuno, FALSE)
+        Call(EnableModel, MODEL_nuno, false)
     Else
-        Call(EnableModel, MODEL_nuno, TRUE)
+        Call(EnableModel, MODEL_nuno, true)
     EndIf
     Set(LVar1, LVar0)
     Div(LVar1, 45)
@@ -91,9 +91,9 @@ EvtScript N(EVS_SetWallRot_RightHouse) = {
 EvtScript N(EVS_RoomListener_LeftHouse) = {
     Switch(LVar0)
         CaseEq(ROOM_UPDATE_ENTER_BEGIN)
-            Call(SetGroupVisibility, MODEL_ie_naka, TRUE)
+            Call(SetGroupVisibility, MODEL_ie_naka, true)
         CaseEq(ROOM_UPDATE_EXIT_END)
-            Call(SetGroupVisibility, MODEL_ie_naka, FALSE)
+            Call(SetGroupVisibility, MODEL_ie_naka, false)
     EndSwitch
     Return
     End

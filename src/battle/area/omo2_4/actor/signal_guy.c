@@ -100,7 +100,7 @@ EvtScript N(EVS_Init) = {
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim0F)
         Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
         Call(SetGoalPos, ACTOR_SELF, 0, 0, 0)
-        Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+        Call(RunToGoal, ACTOR_SELF, 0, false)
         Call(SetActorYaw, ACTOR_SELF, 180)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_GENERAL_WHISTLE)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim04)
@@ -122,7 +122,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
         CaseEq(EVENT_BEGIN_FIRST_STRIKE)
@@ -142,7 +142,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 35)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim02)
             Wait(24)
@@ -160,7 +160,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
             Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_STEAM_EMITTER)
             Call(SetGoalPos, ACTOR_SELF, -200, 0, 20)
-            Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+            Call(RunToGoal, ACTOR_SELF, 0, false)
             Call(RemoveActorDecoration, ACTOR_SELF, LVar0, 0)
             Call(RemoveActor, ACTOR_SELF)
             Return
@@ -187,7 +187,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
             Wait(20)
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

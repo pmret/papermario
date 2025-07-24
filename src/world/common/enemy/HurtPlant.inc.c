@@ -2,7 +2,7 @@
 #include "sprite/player.h"
 
 EvtScript N(EVS_NpcAI_HurtPlant) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetNpcAnimation, NPC_SELF, ANIM_HurtPlant_Anim01)
     Call(SetSelfVar, 0, 0)
     Label(0)
@@ -13,7 +13,7 @@ EvtScript N(EVS_NpcAI_HurtPlant) = {
     EndIf
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(NpcFacePlayer, NPC_SELF, 0)
     Call(SetNpcAnimation, NPC_SELF, ANIM_HurtPlant_Anim08)
     Wait(15)
@@ -22,7 +22,7 @@ EvtScript N(EVS_NpcAI_HurtPlant) = {
     Call(SetPlayerAnimation, ANIM_Mario1_Flail)
     Wait(5)
     Call(SetNpcAnimation, NPC_SELF, ANIM_HurtPlant_Anim02)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Call(StartBattle)
     Return
@@ -43,7 +43,7 @@ EvtScript N(EVS_NpcDefeat_HurtPlant) = {
         CaseEq(OUTCOME_PLAYER_FLED)
             Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_HurtPlant)))
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return

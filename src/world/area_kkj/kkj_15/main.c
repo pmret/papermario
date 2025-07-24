@@ -48,7 +48,7 @@ EvtScript N(EVS_EndPeachChapter3) = {
 
 EvtScript N(EVS_ExitDoor_kkj_11_3) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, kkj_15_ENTRY_0)
     Set(LVar1, COLLIDER_tte)
     Set(LVar2, MODEL_o2)
@@ -107,14 +107,14 @@ EvtScript N(EVS_Main) = {
     EndSwitch
     Switch(GB_StoryProgress)
         CaseEq(STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
-            Call(MakeNpcs, FALSE, Ref(N(Chapter0NPCs)))
+            Call(MakeNpcs, false, Ref(N(Chapter0NPCs)))
         CaseEq(STORY_CH1_BEGAN_PEACH_MISSION)
-            Call(MakeNpcs, FALSE, Ref(N(Chapter1NPCs)))
+            Call(MakeNpcs, false, Ref(N(Chapter1NPCs)))
         CaseEq(STORY_CH3_BEGAN_PEACH_MISSION)
-            Call(MakeNpcs, FALSE, Ref(N(Chapter3NPCs)))
+            Call(MakeNpcs, false, Ref(N(Chapter3NPCs)))
     EndSwitch
     IfNe(GB_StoryProgress, STORY_CH1_BEGAN_PEACH_MISSION)
-        Call(EnableModel, MODEL_o76, FALSE)
+        Call(EnableModel, MODEL_o76, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o76, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_g25, COLLIDER_FLAGS_UPPER_MASK)

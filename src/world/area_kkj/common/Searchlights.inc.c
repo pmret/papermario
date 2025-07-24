@@ -24,15 +24,15 @@ API_CALLABLE(N(UnkPhysicsFunc)) {
 
     if (npc->yaw == 90.0 || npc->yaw == 270.0) {
         if (xDist <= inDist1 && zDist <= inDist2) {
-            outVal = TRUE;
+            outVal = true;
         } else {
-            outVal = FALSE;
+            outVal = false;
         }
     } else {
         if (zDist <= inDist1 && xDist <= inDist2) {
-            outVal = TRUE;
+            outVal = true;
         } else {
-            outVal = FALSE;
+            outVal = false;
         }
     }
 
@@ -48,7 +48,7 @@ API_CALLABLE(N(UnkPhysicsFunc)) {
                     atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z),
                     npc->collisionDiameter, npc->collisionHeight))
         {
-            outVal = FALSE;
+            outVal = false;
         }
     }
     evt_set_variable(script, outVar, outVal);

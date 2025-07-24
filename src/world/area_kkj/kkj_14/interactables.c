@@ -5,11 +5,11 @@
 #include "world/common/todo/GetPeachDisguise.inc.c"
 
 EvtScript N(EVS_Inspect_Fireplace) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Switch(GB_StoryProgress)
         CaseEq(STORY_CH1_BEGAN_PEACH_MISSION)
-            IfEq(GF_KKJ14_RevealedButton, FALSE)
-                IfEq(AF_KKJ_14, FALSE)
+            IfEq(GF_KKJ14_RevealedButton, false)
+                IfEq(AF_KKJ_14, false)
                     Call(DisablePartnerAI, 0)
                     Call(SetPlayerAnimation, ANIM_Peach2_RaiseArms)
                     Wait(10)
@@ -20,7 +20,7 @@ EvtScript N(EVS_Inspect_Fireplace) = {
                     Call(SetPlayerAnimation, ANIM_Peach2_LowerArms)
                     Wait(10)
                     Call(SetPlayerAnimation, ANIM_Peach1_Idle)
-                    Set(AF_KKJ_14, TRUE)
+                    Set(AF_KKJ_14, true)
                     Call(EnablePartnerAI)
                 Else
                     Call(ShowMessageAtScreenPos, MSG_Peach_017B, 160, 40)
@@ -33,17 +33,17 @@ EvtScript N(EVS_Inspect_Fireplace) = {
         CaseDefault
             Call(ShowMessageAtScreenPos, MSG_Intro_0043, 160, 40)
     EndSwitch
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Inspect_Dresses) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Switch(GB_StoryProgress)
         CaseEq(STORY_CH1_BEGAN_PEACH_MISSION)
-            IfEq(GF_KKJ14_RevealedButton, FALSE)
-                IfEq(AF_KKJ_15, FALSE)
+            IfEq(GF_KKJ14_RevealedButton, false)
+                IfEq(AF_KKJ_15, false)
                     Call(DisablePartnerAI, 0)
                     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_003C)
                     Call(SetPlayerAnimation, ANIM_Peach2_RaiseArms)
@@ -53,7 +53,7 @@ EvtScript N(EVS_Inspect_Dresses) = {
                     Call(SetPlayerAnimation, ANIM_Peach2_LowerArms)
                     Wait(10)
                     Call(SetPlayerAnimation, ANIM_Peach1_Idle)
-                    Set(AF_KKJ_15, TRUE)
+                    Set(AF_KKJ_15, true)
                     Call(EnablePartnerAI)
                 Else
                     Call(ShowMessageAtScreenPos, MSG_Peach_017C, 160, 40)
@@ -66,13 +66,13 @@ EvtScript N(EVS_Inspect_Dresses) = {
         CaseDefault
             Call(ShowMessageAtScreenPos, MSG_Intro_0044, 160, 40)
     EndSwitch
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Inspect_Vanity) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Switch(GB_StoryProgress)
         CaseRange(STORY_CH1_BEGAN_PEACH_MISSION, STORY_CH7_BEGAN_PEACH_MISSION)
             Call(N(GetPeachDisguise), LVar0)
@@ -96,17 +96,17 @@ EvtScript N(EVS_Inspect_Vanity) = {
         CaseDefault
             Call(ShowMessageAtScreenPos, MSG_Intro_0045, 160, 40)
     EndSwitch
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Inspect_Photo) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Switch(GB_StoryProgress)
         CaseEq(STORY_CH1_BEGAN_PEACH_MISSION)
-            IfEq(GF_KKJ14_RevealedButton, FALSE)
-                IfEq(AF_KKJ_17, FALSE)
+            IfEq(GF_KKJ14_RevealedButton, false)
+                IfEq(AF_KKJ_17, false)
                     Call(DisablePartnerAI, 0)
                     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_003E)
                     Call(SetPlayerAnimation, ANIM_Peach2_RaiseArms)
@@ -116,7 +116,7 @@ EvtScript N(EVS_Inspect_Photo) = {
                     Call(SetPlayerAnimation, ANIM_Peach2_LowerArms)
                     Wait(10)
                     Call(SetPlayerAnimation, ANIM_Peach1_Idle)
-                    Set(AF_KKJ_17, TRUE)
+                    Set(AF_KKJ_17, true)
                     Call(EnablePartnerAI)
                 Else
                     Call(ShowMessageAtScreenPos, MSG_Peach_017D, 160, 40)
@@ -129,17 +129,17 @@ EvtScript N(EVS_Inspect_Photo) = {
         CaseDefault
             Call(ShowMessageAtScreenPos, MSG_Intro_0046, 160, 40)
     EndSwitch
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Inspect_Bed) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Switch(GB_StoryProgress)
         CaseEq(STORY_CH1_BEGAN_PEACH_MISSION)
-            IfEq(GF_KKJ14_RevealedButton, FALSE)
-                IfEq(AF_KKJ_18, FALSE)
+            IfEq(GF_KKJ14_RevealedButton, false)
+                IfEq(AF_KKJ_18, false)
                     Call(DisablePartnerAI, 0)
                     Call(SetPlayerAnimation, ANIM_Peach2_RaiseArms)
                     Wait(10)
@@ -149,7 +149,7 @@ EvtScript N(EVS_Inspect_Bed) = {
                     Call(SetPlayerAnimation, ANIM_Peach2_LowerArms)
                     Wait(10)
                     Call(SetPlayerAnimation, ANIM_Peach1_Idle)
-                    Set(AF_KKJ_18, TRUE)
+                    Set(AF_KKJ_18, true)
                     Call(EnablePartnerAI)
                 Else
                     Call(ShowMessageAtScreenPos, MSG_Peach_017E, 160, 40)
@@ -162,17 +162,17 @@ EvtScript N(EVS_Inspect_Bed) = {
         CaseDefault
             Call(ShowMessageAtScreenPos, MSG_Intro_0047, 160, 40)
     EndSwitch
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Inspect_Flowers) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Switch(GB_StoryProgress)
         CaseEq(STORY_CH1_BEGAN_PEACH_MISSION)
-            IfEq(GF_KKJ14_RevealedButton, FALSE)
-                IfEq(AF_KKJ_19, FALSE)
+            IfEq(GF_KKJ14_RevealedButton, false)
+                IfEq(AF_KKJ_19, false)
                     Call(DisablePartnerAI, 0)
                     Call(SetPlayerAnimation, ANIM_Peach2_RaiseArms)
                     Wait(10)
@@ -182,7 +182,7 @@ EvtScript N(EVS_Inspect_Flowers) = {
                     Call(SetPlayerAnimation, ANIM_Peach2_LowerArms)
                     Wait(10)
                     Call(SetPlayerAnimation, ANIM_Peach1_Idle)
-                    Set(AF_KKJ_19, TRUE)
+                    Set(AF_KKJ_19, true)
                     Call(EnablePartnerAI)
                 Else
                     Call(ShowMessageAtScreenPos, MSG_Peach_017F, 160, 40)
@@ -195,7 +195,7 @@ EvtScript N(EVS_Inspect_Flowers) = {
         CaseDefault
             Call(ShowMessageAtScreenPos, MSG_Intro_0048, 160, 40)
     EndSwitch
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -217,8 +217,8 @@ void N(setup_gfx_fireplace)(void) {
 }
 
 EvtScript N(EVS_TexPan_Fireplace) = {
-    Call(EnableTexPanning, MODEL_o42, TRUE)
-    Call(EnableTexPanning, MODEL_o157, TRUE)
+    Call(EnableTexPanning, MODEL_o42, true)
+    Call(EnableTexPanning, MODEL_o157, true)
     Set(LVar0, 0)
     Set(LVar1, 0)
     Set(LVar2, 0)
@@ -242,7 +242,7 @@ EvtScript N(EVS_RevealButton) = {
     Call(UpdateLerp)
     Call(RotateGroup, MODEL_g39, LVar0, 1, 0, 0)
     Wait(1)
-    Call(EnableModel, MODEL_o146, TRUE)
+    Call(EnableModel, MODEL_o146, true)
     Loop(0)
         Call(UpdateLerp)
         Call(RotateGroup, MODEL_g39, LVar0, 1, 0, 0)
@@ -251,17 +251,17 @@ EvtScript N(EVS_RevealButton) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(EnableModel, MODEL_o141, FALSE)
-    Call(EnableModel, MODEL_o143, FALSE)
-    Set(GF_KKJ14_RevealedButton, TRUE)
+    Call(EnableModel, MODEL_o141, false)
+    Call(EnableModel, MODEL_o143, false)
+    Set(GF_KKJ14_RevealedButton, true)
     Return
     End
 };
 
 EvtScript N(EVS_OpenHiddenPassage) = {
-    Call(EnableModel, MODEL_o35, FALSE)
-    Call(EnableModel, MODEL_o42, FALSE)
-    Call(EnableGroup, MODEL_g27, TRUE)
+    Call(EnableModel, MODEL_o35, false)
+    Call(EnableModel, MODEL_o42, false)
+    Call(EnableGroup, MODEL_g27, true)
     IfEq(GB_StoryProgress, STORY_CH1_BEGAN_PEACH_MISSION)
         Set(LVar0, 120 * DT)
     Else
@@ -277,8 +277,8 @@ EvtScript N(EVS_OpenHiddenPassage) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(EnableModel, MODEL_o157, FALSE)
-    Call(SetModelFlags, MODEL_o157, 16, FALSE)
+    Call(EnableModel, MODEL_o157, false)
+    Call(SetModelFlags, MODEL_o157, 16, false)
     Wait(10 * DT)
     Thread
         Wait(20 * DT)
@@ -297,16 +297,16 @@ EvtScript N(EVS_OpenHiddenPassage) = {
     Wait(10 * DT)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o129, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
-    Set(GF_KKJ14_OpenedPassage, TRUE)
+    Set(GF_KKJ14_OpenedPassage, true)
     Return
     End
 };
 
 EvtScript N(EVS_Inspect_HiddenButton) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
-    IfEq(GF_KKJ14_RevealedButton, FALSE)
+    IfEq(GF_KKJ14_RevealedButton, false)
         ExecWait(N(EVS_RevealButton))
     Else
         Call(FacePlayerTowardPoint, -29, -148, 5)
@@ -330,21 +330,21 @@ EvtScript N(EVS_Inspect_HiddenButton) = {
         Unbind
     EndIf
     Call(EnablePartnerAI)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Inspect_HiddenButton_FirstTime) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
-    IfEq(GF_KKJ14_RevealedButton, FALSE)
-        IfEq(AF_KKJ_04, FALSE)
+    IfEq(GF_KKJ14_RevealedButton, false)
+        IfEq(AF_KKJ_04, false)
             Call(NpcFacePlayer, NPC_PARTNER, 0)
             Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Shout, ANIM_Twink_Shout, 5, MSG_Peach_0046)
-            Set(AF_KKJ_04, TRUE)
+            Set(AF_KKJ_04, true)
         EndIf
         ExecWait(N(EVS_RevealButton))
     Else
@@ -365,41 +365,41 @@ EvtScript N(EVS_Inspect_HiddenButton_FirstTime) = {
         Call(SetPlayerAnimation, ANIM_Peach1_Idle)
         Call(InterpPlayerYaw, 225, 0)
         Call(InterpNpcYaw, NPC_PARTNER, 225, 0)
-        IfEq(AF_KKJ_05, FALSE)
+        IfEq(AF_KKJ_05, false)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
             Call(SetPanTarget, CAM_DEFAULT, -120, 25, 0)
             Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
             Call(SetCamDistance, CAM_DEFAULT, 300)
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         EndIf
         ExecWait(N(EVS_OpenHiddenPassage))
-        IfEq(AF_KKJ_05, FALSE)
+        IfEq(AF_KKJ_05, false)
             Call(ResetCam, CAM_DEFAULT, Float(3.0 / DT))
             Call(SetPlayerAnimation, ANIM_Peach2_Delighted)
             Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_ShoutJoy, ANIM_Twink_ShoutJoy, 5, MSG_Peach_0047)
-            Set(AF_KKJ_05, TRUE)
+            Set(AF_KKJ_05, true)
         EndIf
         Unbind
     EndIf
     Call(EnablePartnerAI)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_SetupInteractables) = {
-    IfEq(GF_KKJ14_RevealedButton, FALSE)
-        Call(EnableModel, MODEL_o146, FALSE)
+    IfEq(GF_KKJ14_RevealedButton, false)
+        Call(EnableModel, MODEL_o146, false)
     Else
-        Call(EnableModel, MODEL_o141, FALSE)
-        Call(EnableModel, MODEL_o143, FALSE)
+        Call(EnableModel, MODEL_o141, false)
+        Call(EnableModel, MODEL_o143, false)
         Call(RotateGroup, MODEL_g39, 180, 1, 0, 0)
     EndIf
-    IfEq(GF_KKJ14_OpenedPassage, FALSE)
-        Call(EnableGroup, MODEL_g27, FALSE)
+    IfEq(GF_KKJ14_OpenedPassage, false)
+        Call(EnableGroup, MODEL_g27, false)
         Exec(N(EVS_TexPan_Fireplace))
         Call(SetModelCustomGfx, MODEL_o157, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
         Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(setup_gfx_fireplace)), NULL)
@@ -415,7 +415,7 @@ EvtScript N(EVS_SetupInteractables) = {
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o129, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
         Call(RotateModel, MODEL_o39, -180, 1, 0, 0)
-        Call(EnableGroup, MODEL_g45, FALSE)
+        Call(EnableGroup, MODEL_g45, false)
     EndIf
     BindTrigger(Ref(N(EVS_Inspect_Fireplace)), TRIGGER_WALL_PRESS_A, COLLIDER_o129, 1, 0)
     BindTrigger(Ref(N(EVS_Inspect_Dresses)), TRIGGER_WALL_PRESS_A, COLLIDER_o143, 1, 0)

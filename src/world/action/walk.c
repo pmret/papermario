@@ -30,7 +30,7 @@ static void action_update_walk_peach(void);
 void action_update_walk(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
-    b32 firstFrame = FALSE;
+    bool firstFrame = false;
     f32 moveMag;
     f32 moveAngle;
     AnimID anim;
@@ -43,7 +43,7 @@ void action_update_walk(void) {
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(PS_FLAG_ACTION_STATE_CHANGED | PS_FLAG_SCRIPTED_FALL | PS_FLAG_ARMS_RAISED);
         playerStatus->unk_60 = 0;
-        firstFrame = TRUE;
+        firstFrame = true;
 
         if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
             playerStatus->curSpeed = playerStatus->walkSpeed;
@@ -111,7 +111,7 @@ void action_update_walk(void) {
 void action_update_run(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
-    b32 firstFrame = FALSE;
+    bool firstFrame = false;
     f32 moveAngle;
     f32 moveMag;
     AnimID anim;
@@ -126,7 +126,7 @@ void action_update_run(void) {
         playerStatus->flags &= ~(PS_FLAG_ACTION_STATE_CHANGED | PS_FLAG_SCRIPTED_FALL | PS_FLAG_ARMS_RAISED);
         PlayerRunStateTime = 0;
         playerStatus->unk_60 = 0;
-        firstFrame = TRUE;
+        firstFrame = true;
 
         if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
             playerStatus->curSpeed = playerStatus->runSpeed;

@@ -58,7 +58,7 @@ CameraControlSettings N(IntroCamSettings0) = {
     .boomPitch = 12.4,
     .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
     .viewPitch = -16.8,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings1) = {
@@ -67,7 +67,7 @@ CameraControlSettings N(IntroCamSettings1) = {
     .boomPitch = 12.4,
     .points = { .two = {  0.0, -1.0, 0.0, -433.0127, -1.0, -250.0 }},
     .viewPitch = -16.8,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings2) = {
@@ -76,7 +76,7 @@ CameraControlSettings N(IntroCamSettings2) = {
     .boomPitch = 2.7,
     .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
     .viewPitch = -7.4,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings3) = {
@@ -85,7 +85,7 @@ CameraControlSettings N(IntroCamSettings3) = {
     .boomPitch = -9.3,
     .points = { .two = {  0.0, -1.0, 0.0, 114.3, -1.0, 500.0 }},
     .viewPitch = 0.7,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings4) = {
@@ -94,7 +94,7 @@ CameraControlSettings N(IntroCamSettings4) = {
     .boomPitch = -9.3,
     .points = { .two = {  0.0, -1.0, 0.0, 114.3, -1.0, 500.0 }},
     .viewPitch = 0.7,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings5) = {
@@ -103,7 +103,7 @@ CameraControlSettings N(IntroCamSettings5) = {
     .boomPitch = 16.0,
     .points = { .two = {  0.0, -1.0, 0.0, 56.1, -1.0, -1.1 }},
     .viewPitch = -3.0,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings6) = {
@@ -112,7 +112,7 @@ CameraControlSettings N(IntroCamSettings6) = {
     .boomPitch = 12.4,
     .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
     .viewPitch = -10.7,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings7) = {
@@ -121,7 +121,7 @@ CameraControlSettings N(IntroCamSettings7) = {
     .boomPitch = 21.0,
     .points = { .two = {  0.0, -1.0, 0.0, 71.3, -1.0, 154.3 }},
     .viewPitch = -3.0,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings8) = {
@@ -130,7 +130,7 @@ CameraControlSettings N(IntroCamSettings8) = {
     .boomPitch = 0.0,
     .points = { .two = {  0.0, -1.0, 0.0, 24.4, -1.0, 154.3 }},
     .viewPitch = 0.0,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings9) = {
@@ -139,7 +139,7 @@ CameraControlSettings N(IntroCamSettings9) = {
     .boomPitch = 0.0,
     .points = { .two = {  0.0, -1.0, 0.0, 24.4, -1.0, 154.3 }},
     .viewPitch = 0.0,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings10) = {
@@ -148,7 +148,7 @@ CameraControlSettings N(IntroCamSettings10) = {
     .boomPitch = 9.7,
     .points = { .two = {  0.0, -1.0, 0.0, 6.9, -1.0, 168.8 }},
     .viewPitch = -3.0,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings11) = {
@@ -157,7 +157,7 @@ CameraControlSettings N(IntroCamSettings11) = {
     .boomPitch = 9.8,
     .points = { .two = {  0.0, -1.0, 0.0, 40.0, -1.0, 168.8 }},
     .viewPitch = -9.3,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings12) = {
@@ -166,7 +166,7 @@ CameraControlSettings N(IntroCamSettings12) = {
     .boomPitch = 9.8,
     .points = { .two = {  0.0, -1.0, 0.0, 40.0, -1.0, 168.8 }},
     .viewPitch = -9.3,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings13) = {
@@ -175,7 +175,7 @@ CameraControlSettings N(IntroCamSettings13) = {
     .boomPitch = -1.3,
     .points = { .two = {  0.0, -1.0, 0.0, 500.0, -1.0, 500.0 }},
     .viewPitch = 0.5,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings14) = {
@@ -184,7 +184,7 @@ CameraControlSettings N(IntroCamSettings14) = {
     .boomPitch = -1.3,
     .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, -500.0 }},
     .viewPitch = 0.5,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings15) = {
@@ -193,7 +193,7 @@ CameraControlSettings N(IntroCamSettings15) = {
     .boomPitch = 5.4,
     .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
     .viewPitch = -6.9,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(IntroCamSettings16) = {
@@ -202,7 +202,7 @@ CameraControlSettings N(IntroCamSettings16) = {
     .boomPitch = 5.4,
     .points = { .two = {  0.0, -1.0, 0.0, 0.0, -1.0, 500.0 }},
     .viewPitch = -6.9,
-    .flag = FALSE,
+    .flag = false,
 };
 
 API_CALLABLE(N(SetWorldFogParams)) {
@@ -366,7 +366,7 @@ API_CALLABLE(N(InitializeStoryCamera)) {
     camera->controlSettings.viewPitch = IntroCamStateA_ViewPitch;
     camera->controlSettings.points.two.Bx = sin_deg(N(StoryCameraAngle)) * 500.0f;
     camera->controlSettings.points.two.Bz = cos_deg(N(StoryCameraAngle)) * -500.0f;
-    camera->panActive = TRUE;
+    camera->panActive = true;
     return ApiStatus_DONE2;
 }
 
@@ -397,7 +397,7 @@ API_CALLABLE(N(UnusedInitializeStoryCamera)) {
     camera->controlSettings.viewPitch = IntroCamStateB_ViewPitch;
     camera->controlSettings.points.two.Bx = sin_deg(N(StoryCameraAngle)) * 500.0f;
     camera->controlSettings.points.two.Bz = cos_deg(N(StoryCameraAngle)) * -500.0f;
-    camera->panActive = TRUE;
+    camera->panActive = true;
     N(D_802498FC_A33B3C)++;
     if (N(StoryCameraAngle) == 0.0f) {
         N(D_802498F8_A33B38)++;
@@ -452,7 +452,7 @@ API_CALLABLE(N(StoryCameraShake2)) {
     guTranslateF(camera->mtxViewShaking, x, y, 0.0f);
     guRotateF(sp18, 20.0f, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp18, camera->mtxViewShaking, camera->mtxViewShaking);
-    camera->panActive = TRUE;
+    camera->panActive = true;
     if (N(StoryCameraShake2Angle) >= 10) {
         guRotateF(camera->mtxViewShaking, 20.0f, 0.0f, 0.0f, 1.0f);
         return ApiStatus_DONE1;
@@ -554,7 +554,7 @@ API_CALLABLE(N(UnusedStoryCameraZoom)) {
 
     N(lerp_value_with_max_step)(30.0f, 15.0f, N(UnusedStoryCameraZoomAmt), 1.0f, &N(UnusedStoryCameraZoomAmt));
     N(adjust_cam_vfov)(CAM_DEFAULT, N(UnusedStoryCameraZoomAmt));
-    camera->panActive = TRUE;
+    camera->panActive = true;
     if (N(UnusedStoryCameraZoomAmt) == 15.0f) {
         return ApiStatus_DONE1;
     }
@@ -696,7 +696,7 @@ API_CALLABLE(N(CamPushIn_BowserInhale)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
     N(interp_value_with_easing)(INTRO_MATH_EASING_LINEAR, 121.6f, 90.0f, N(CamMoveInhaleTime), 40.0f, &N(BoomLengthInhale));
-    camera->panActive = TRUE;
+    camera->panActive = true;
     camera->controlSettings.boomLength = N(BoomLengthInhale);
     if (N(CamMoveInhaleTime) % 5 == 0 && N(BoomLengthInhale) != 90.0f) {
         f32 temp_f4 = resolve_npc(script, NPC_Bowser_Body)->pos.y - 150.0f;
@@ -725,7 +725,7 @@ API_CALLABLE(N(CamPullBack_BowserExhale)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
     N(interp_value_with_easing)(INTRO_MATH_EASING_4, 90.0f, 474.7f, N(CamMoveExhaleTime), 20.0f, &N(BoomLengthExhale));
-    camera->panActive = TRUE;
+    camera->panActive = true;
     camera->controlSettings.boomLength = N(BoomLengthExhale);
     N(CamMoveExhaleTime)++;
     if (N(CamMoveExhaleTime) < (s32)(21 * DT)) {
@@ -816,7 +816,7 @@ API_CALLABLE(N(CamPullBack_BowserHoldingStarRod)) {
     N(interp_value_with_easing)(INTRO_MATH_EASING_4, 232.0f, 177.0f, N(HoldStarRodTime), 80.0f, &N(HoldStarRodCamY));
     N(interp_value_with_easing)(INTRO_MATH_EASING_4,   0.0f,   0.0f, N(HoldStarRodTime), 80.0f, &N(HoldStarRodCamZ));
     N(adjust_cam_vfov)(CAM_DEFAULT, N(HoldStarRodFov));
-    camera->panActive = TRUE;
+    camera->panActive = true;
     camera->controlSettings.boomLength = N(HoldStarRodBoomLength);
     camera->movePos.x = N(HoldStarRodCamX);
     camera->movePos.y = N(HoldStarRodCamY);
@@ -841,7 +841,7 @@ API_CALLABLE(N(CamPanAcrossRoom)) {
     N(interp_value_with_easing)(INTRO_MATH_EASING_LINEAR, 40.0f, -130.0f, N(PanAcrossRoomTime), 170.0f, &N(PanAcrossRoomCamX));
     N(interp_value_with_easing)(INTRO_MATH_EASING_LINEAR, -40.0f, 130.0f, N(PanAcrossRoomTime), 170.0f, &N(PanAcrossRoomCamZ));
     N(interp_value_with_easing)(INTRO_MATH_EASING_COS_IN_OUT, 45.0f, 25.0f, N(PanAcrossRoomTime), 170.0f, &N(PanAcrossRoomAngle));
-    camera->panActive = TRUE;
+    camera->panActive = true;
     camera->movePos.x = N(PanAcrossRoomCamX);
     camera->movePos.z = N(PanAcrossRoomCamZ);
     camera->controlSettings.points.two.Bx = sin_deg(N(PanAcrossRoomAngle)) * 500.0f;
@@ -870,7 +870,7 @@ API_CALLABLE(N(CamMove_OrbitKammy)) {
     camera->controlSettings.points.two.Bx = sin_deg(N(OrbitKammyAngle)) * 500.0f;
     camera->controlSettings.points.two.Bz = cos_deg(N(OrbitKammyAngle)) * 500.0f;
     N(adjust_cam_vfov)(CAM_DEFAULT, N(OrbitKammyFov));
-    camera->panActive = TRUE;
+    camera->panActive = true;
     camera->controlSettings.boomLength = N(OrbitKammyBoomLength);
     camera->movePos.y = N(OrbitKammyCamY);
 
@@ -1109,7 +1109,7 @@ EvtScript N(EVS_CaptureSpirits) = {
         Call(N(SetCardCaptureState1))
         Call(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Panic)
         Call(SetNpcImgFXParams, NPC_Klevar, IMGFX_CLEAR, 0, 0, 0, 0)
-        Call(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_INVISIBLE, TRUE)
+        Call(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_INVISIBLE, true)
         Call(DismissEffect, ArrayVar(13))
     EndThread
     Wait(20 * DT)
@@ -1137,7 +1137,7 @@ EvtScript N(EVS_CaptureSpirits) = {
         Call(N(SetCardCaptureState1))
         Call(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_IdleSad)
         Call(SetNpcImgFXParams, NPC_Skolar, IMGFX_CLEAR, 0, 0, 0, 0)
-        Call(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_INVISIBLE, TRUE)
+        Call(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_INVISIBLE, true)
         Call(DismissEffect, ArrayVar(10))
     EndThread
     Wait(20 * DT)
@@ -1165,7 +1165,7 @@ EvtScript N(EVS_CaptureSpirits) = {
         Call(N(SetCardCaptureState1))
         Call(SetNpcAnimation, NPC_Muskular, ANIM_WorldMuskular_Panic)
         Call(SetNpcImgFXParams, NPC_Muskular, IMGFX_CLEAR, 0, 0, 0, 0)
-        Call(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_INVISIBLE, TRUE)
+        Call(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_INVISIBLE, true)
         Call(DismissEffect, ArrayVar(11))
     EndThread
     Wait(20 * DT)
@@ -1193,7 +1193,7 @@ EvtScript N(EVS_CaptureSpirits) = {
         Call(N(SetCardCaptureState1))
         Call(SetNpcAnimation, NPC_Kalmar, ANIM_WorldKalmar_Panic)
         Call(SetNpcImgFXParams, NPC_Kalmar, IMGFX_CLEAR, 0, 0, 0, 0)
-        Call(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_INVISIBLE, TRUE)
+        Call(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_INVISIBLE, true)
         Call(DismissEffect, ArrayVar(14))
     EndThread
     Wait(20 * DT)
@@ -1221,7 +1221,7 @@ EvtScript N(EVS_CaptureSpirits) = {
         Call(N(SetCardCaptureState1))
         Call(SetNpcAnimation, NPC_Misstar, ANIM_WorldMisstar_Panic)
         Call(SetNpcImgFXParams, NPC_Misstar, IMGFX_CLEAR, 0, 0, 0, 0)
-        Call(SetNpcFlagBits, NPC_Misstar, NPC_FLAG_INVISIBLE, TRUE)
+        Call(SetNpcFlagBits, NPC_Misstar, NPC_FLAG_INVISIBLE, true)
         Call(DismissEffect, ArrayVar(12))
     EndThread
     Wait(20 * DT)
@@ -1249,7 +1249,7 @@ EvtScript N(EVS_CaptureSpirits) = {
         Call(N(SetCardCaptureState1))
         Call(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Panic)
         Call(SetNpcImgFXParams, NPC_Mamar, IMGFX_CLEAR, 0, 0, 0, 0)
-        Call(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_INVISIBLE, TRUE)
+        Call(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_INVISIBLE, true)
         Call(DismissEffect, ArrayVar(9))
     EndThread
     Wait(20 * DT)
@@ -1264,7 +1264,7 @@ API_CALLABLE(N(CamPullBack_Final)) {
 
     N(lerp_value_with_max_step)(N(IntroCamSettings15).boomLength, N(IntroCamSettings16).boomLength,
         N(FinalCamMoveBoomLength), 1.0f, &N(FinalCamMoveBoomLength));
-    camera->panActive = TRUE;
+    camera->panActive = true;
     camera->controlSettings.boomLength = N(FinalCamMoveBoomLength);
     if (N(FinalCamMoveBoomLength) == 700.0f) {
         return ApiStatus_DONE1;
@@ -1549,8 +1549,8 @@ API_CALLABLE(N(InitializeStoryGraphicsData)) {
     N(StoryGraphicsPtr)->tapePosX = 111;
     N(StoryGraphicsPtr)->tapePosY = 54;
 
-    N(load_story_image)(FALSE, STORY_PAGE_BLANK);
-    N(load_story_image)(TRUE, STORY_PAGE_STARRY_SKY);
+    N(load_story_image)(false, STORY_PAGE_BLANK);
+    N(load_story_image)(true, STORY_PAGE_STARRY_SKY);
 
     // load the tape and bowser silhouette images
     tapeOffset = TAPE_OFFSET;
@@ -1878,30 +1878,30 @@ extern EvtScript N(EVS_Scene_IntroStory);
 
 EvtScript N(EVS_Intro_Main) = {
     UseArray(Ref(N(D_8024F380)))
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(N(SetWorldFogParams), 0, 0, 0, 0, 0, 0, 0, 995, 1000)
     Call(N(InitWorldTintMode))
     Call(N(SetWorldColorParams), 255, 255, 255, 0, 0, 0, 0)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
     Call(N(AdjustCamVfov), 0, 62)
     Call(SetPanTarget, CAM_DEFAULT, 0, 157, 0)
     Call(LoadSettings, CAM_DEFAULT, Ref(N(IntroCamSettings1)))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(N(InitializeStoryGraphicsData))
     Thread
         Wait(2)
-        Call(SetCamEnabled, CAM_DEFAULT, FALSE)
+        Call(SetCamEnabled, CAM_DEFAULT, false)
     EndThread
-    Call(EnableTexPanning, MODEL_o33, FALSE)
-    Call(EnableTexPanning, MODEL_o34, FALSE)
-    Call(EnableGroup, MODEL_g271, FALSE)
-    Call(EnableGroup, MODEL_g272, FALSE)
-    Call(EnableGroup, MODEL_g273, FALSE)
+    Call(EnableTexPanning, MODEL_o33, false)
+    Call(EnableTexPanning, MODEL_o34, false)
+    Call(EnableGroup, MODEL_g271, false)
+    Call(EnableGroup, MODEL_g272, false)
+    Call(EnableGroup, MODEL_g273, false)
     Call(N(InitializeStoryCamera))
-    Call(EnableGroup, MODEL_g277, FALSE)
-    Call(EnableModel, MODEL_o8, FALSE)
+    Call(EnableGroup, MODEL_g277, false)
+    Call(EnableModel, MODEL_o8, false)
     Exec(N(EVS_Scene_IntroStory))
     Return
     End
@@ -1989,20 +1989,20 @@ EvtScript N(EVS_Scene_IntroStory) = {
     Call(SetNpcPaletteSwapping, NPC_Misstar, 0, 1, 25, 12, 4, 18, 0, 0)
     Call(SetNpcPaletteSwapping, NPC_Klevar, 0, 1, 25, 12, 4, 18, 0, 0)
     Call(SetNpcPaletteSwapping, NPC_Kalmar, 0, 1, 25, 12, 4, 18, 0, 0)
-    Call(SetNpcFlagBits, NPC_StarRod, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Call(SetNpcFlagBits, NPC_StarRod, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, true)
     Call(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarStill)
     Call(SetNpcAnimation, NPC_Bowser_Prop, ANIM_WorldBowser_ClownCarPropeller)
-    Call(EnableNpcShadow, NPC_Bowser_Body, FALSE)
-    Call(EnableNpcShadow, NPC_Bowser_Prop, FALSE)
-    Call(EnableNpcShadow, NPC_StarRod, FALSE)
-    Call(EnableNpcShadow, NPC_Eldstar, FALSE)
-    Call(EnableNpcShadow, NPC_Mamar, FALSE)
-    Call(EnableNpcShadow, NPC_Skolar, FALSE)
-    Call(EnableNpcShadow, NPC_Muskular, FALSE)
-    Call(EnableNpcShadow, NPC_Misstar, FALSE)
-    Call(EnableNpcShadow, NPC_Klevar, FALSE)
-    Call(EnableNpcShadow, NPC_Kalmar, FALSE)
-    Call(EnableNpcShadow, NPC_Kammy, FALSE)
+    Call(EnableNpcShadow, NPC_Bowser_Body, false)
+    Call(EnableNpcShadow, NPC_Bowser_Prop, false)
+    Call(EnableNpcShadow, NPC_StarRod, false)
+    Call(EnableNpcShadow, NPC_Eldstar, false)
+    Call(EnableNpcShadow, NPC_Mamar, false)
+    Call(EnableNpcShadow, NPC_Skolar, false)
+    Call(EnableNpcShadow, NPC_Muskular, false)
+    Call(EnableNpcShadow, NPC_Misstar, false)
+    Call(EnableNpcShadow, NPC_Klevar, false)
+    Call(EnableNpcShadow, NPC_Kalmar, false)
+    Call(EnableNpcShadow, NPC_Kammy, false)
     Thread
         Call(N(ForceStarRodAlwaysFaceCamera))
     EndThread
@@ -2091,8 +2091,8 @@ EvtScript N(EVS_Scene_IntroStory) = {
     Wait(3)
     Call(DismissEffect, ArrayVar(17))
     Thread
-        Call(EnableTexPanning, MODEL_o33, TRUE)
-        Call(EnableTexPanning, MODEL_o34, TRUE)
+        Call(EnableTexPanning, MODEL_o33, true)
+        Call(EnableTexPanning, MODEL_o34, true)
         Call(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Hurt)
         Call(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Hurt)
         Call(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_IdleSad)
@@ -2453,7 +2453,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
         Call(N(SetCardCaptureState1))
         Call(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Panic)
         Call(SetNpcImgFXParams, NPC_Eldstar, IMGFX_CLEAR, 0, 0, 0, 0)
-        Call(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_INVISIBLE, TRUE)
+        Call(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_INVISIBLE, true)
         Call(DismissEffect, ArrayVar(8))
     EndThread
     Wait(15 * DT)

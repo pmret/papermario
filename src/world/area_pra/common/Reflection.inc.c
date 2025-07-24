@@ -320,7 +320,7 @@ void N(appendGfx_reflect_player_floor_fancy)(PlayerStatus* playerStatus) {
 API_CALLABLE(N(EnablePartnerReflection)){
     Npc* partner;
 
-    if (script->varTable[1] == FALSE) {
+    if (script->varTable[1] == false) {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
                 script->array[1] = create_worker_scene(N(worker_reflect_partner_all), NULL);
@@ -349,7 +349,7 @@ API_CALLABLE(N(EnablePartnerReflection)){
         return ApiStatus_DONE2;
     }
 
-    if (script->varTable[1] == FALSE) {
+    if (script->varTable[1] == false) {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
                 partner->flags |= NPC_FLAG_REFLECT_WALL | NPC_FLAG_REFLECT_FLOOR;

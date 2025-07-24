@@ -4,7 +4,7 @@
 #include "world/common/todo/SwitchToPartner.inc.c"
 
 EvtScript N(EVS_ProvideDemoInputs) = {
-    Call(EnableWorldStatusBar, FALSE)
+    Call(EnableWorldStatusBar, false)
     Call(DemoSetButtons, BUTTON_C_DOWN)
     Wait(5)
     Call(DemoSetButtons, 0)
@@ -79,10 +79,10 @@ EvtScript N(EVS_ProvideDemoInputs) = {
     Call(DemoJoystickXY, 78, -1)
     Wait(2)
     Call(DemoJoystickXY, 78, 0)
-    IfEq(GF_DemoSceneDone, TRUE)
+    IfEq(GF_DemoSceneDone, true)
         Return
     EndIf
-    Set(GF_DemoSceneDone, TRUE)
+    Set(GF_DemoSceneDone, true)
     Call(GotoMapSpecial, Ref("isk_04"), isk_04_ENTRY_5, TRANSITION_END_DEMO_SCENE_BLACK)
     Wait(323)
     Return
@@ -98,10 +98,10 @@ EvtScript N(EVS_MonitorDemoState) = {
         EndIf
         Wait(1)
     EndLoop
-    IfEq(GF_DemoSceneDone, TRUE)
+    IfEq(GF_DemoSceneDone, true)
         Return
     EndIf
-    Set(GF_DemoSceneDone, TRUE)
+    Set(GF_DemoSceneDone, true)
     Call(GotoMapSpecial, Ref("isk_04"), isk_04_ENTRY_2, TRANSITION_END_DEMO_SCENE_WHITE)
     Wait(313)
     Return
@@ -142,7 +142,7 @@ EvtScript N(EVS_SetupDemo) = {
     Call(SetCamPitch, CAM_DEFAULT, 12, -3)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetPanTarget, CAM_DEFAULT, LVar0, 25, LVar2)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Wait(1)
         Loop(0)
@@ -154,7 +154,7 @@ EvtScript N(EVS_SetupDemo) = {
         EndLoop
     EndThread
     Call(N(SetupDemoScene))
-    Set(GF_DemoSceneDone, FALSE)
+    Set(GF_DemoSceneDone, false)
     Exec(N(EVS_MonitorDemoState))
     Exec(N(EVS_ProvideDemoInputs))
     Return

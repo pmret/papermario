@@ -24,9 +24,9 @@ void update_camera_unused_ahead(Camera* camera) {
     f32 boomYaw;
 
     if (camera->needsInit || camera->needsReinit) {
-        camera->needsInit = FALSE;
-        camera->needsReinit = FALSE;
-        camera->params.basic.skipRecalc = FALSE;
+        camera->needsInit = false;
+        camera->needsReinit = false;
+        camera->params.basic.skipRecalc = false;
         camera->params.basic.dist = 100;
         camera->params.basic.fovScale = 100;
         camera->params.basic.pitch = 0;

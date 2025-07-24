@@ -106,7 +106,7 @@ EffectInstance* firework_rocket_main(s32 variation, f32 centerX, f32 centerY, f3
     } else {
         data->timeLeft = duration + 32;
     }
-    data->isExploded = FALSE;
+    data->isExploded = false;
     data->minBlurAlpha = 255;
     data->pos.x = centerX;
     data->pos.y = centerY;
@@ -167,7 +167,7 @@ void firework_rocket_update(EffectInstance* effect) {
         data->minBlurAlpha = data->timeLeft * 8;
     }
 
-    if (data->isExploded == TRUE) {
+    if (data->isExploded == true) {
         factor = 0.95f;
         data->pos.x += data->vel.x;
         data->pos.y += data->vel.y;
@@ -200,7 +200,7 @@ void firework_rocket_update(EffectInstance* effect) {
     }
 
     if (lifeTime >= 32) {
-        data->isExploded = TRUE;
+        data->isExploded = true;
         data->lifeTime = 1;
     }
 }
@@ -280,7 +280,7 @@ void firework_rocket_appendGfx(void* effect) {
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->r, data->g, data->b, minBlurAlpha);
     gDPSetEnvColor(gMainGfxPos++, data->r, data->g, data->b, 0);
 
-    if (isExploded == TRUE) {
+    if (isExploded == true) {
         sparkDir = D_E010AF68[variation].sparks;
         numSparks = D_E010AF68[variation].num;
     } else {
@@ -289,7 +289,7 @@ void firework_rocket_appendGfx(void* effect) {
     }
 
     for (i = 0; i < numSparks; i++, sparkDir++) {
-        if (isExploded == TRUE) {
+        if (isExploded == true) {
             // create blinking effect
             if (rand_int(16) < 6) {
                 continue;

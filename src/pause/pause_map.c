@@ -77,7 +77,7 @@ MenuWindowBP PauseMapWindowBPs[] = {
     {}
 };
 MenuPanel gPausePanelMap = {
-    .initialized = FALSE,
+    .initialized = false,
     .col = 0,
     .row = 0,
     .selected = 0,
@@ -375,7 +375,7 @@ void pause_map_init(MenuPanel* tab) {
         PauseMapCameraY = -209.0f;
     }
 
-    tab->initialized = TRUE;
+    tab->initialized = true;
 }
 
 void pause_map_handle_input(MenuPanel* tab) {

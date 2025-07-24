@@ -332,16 +332,16 @@ EvtScript N(EVS_ParadePhase_HuffNPuff) = {
             EndIf
         EndLoop
         Wait(10 * DT)
-        Call(SetNpcFlagBits, NPC_HuffNPuffBody, NPC_FLAG_TOUCHES_GROUND, FALSE)
-        Call(SetNpcFlagBits, NPC_HuffNPuffFace, NPC_FLAG_TOUCHES_GROUND, FALSE)
-        Call(SetNpcFlagBits, NPC_HuffNPuffArms, NPC_FLAG_TOUCHES_GROUND, FALSE)
-        Call(SetNpcFlagBits, NPC_RuffPuff1, NPC_FLAG_TOUCHES_GROUND, FALSE)
-        Call(SetNpcFlagBits, NPC_RuffPuff2, NPC_FLAG_TOUCHES_GROUND, FALSE)
+        Call(SetNpcFlagBits, NPC_HuffNPuffBody, NPC_FLAG_TOUCHES_GROUND, false)
+        Call(SetNpcFlagBits, NPC_HuffNPuffFace, NPC_FLAG_TOUCHES_GROUND, false)
+        Call(SetNpcFlagBits, NPC_HuffNPuffArms, NPC_FLAG_TOUCHES_GROUND, false)
+        Call(SetNpcFlagBits, NPC_RuffPuff1, NPC_FLAG_TOUCHES_GROUND, false)
+        Call(SetNpcFlagBits, NPC_RuffPuff2, NPC_FLAG_TOUCHES_GROUND, false)
         Call(SetNpcScale, NPC_HuffNPuffBody, Float(0.75), Float(0.75), 1)
         Call(SetNpcScale, NPC_HuffNPuffFace, Float(0.75), Float(0.75), 1)
         Call(SetNpcScale, NPC_HuffNPuffArms, Float(0.75), Float(0.75), 1)
-        Call(EnableNpcShadow, NPC_HuffNPuffFace, FALSE)
-        Call(EnableNpcShadow, NPC_HuffNPuffArms, FALSE)
+        Call(EnableNpcShadow, NPC_HuffNPuffFace, false)
+        Call(EnableNpcShadow, NPC_HuffNPuffArms, false)
     EndThread
     Exec(N(EVS_YoshiKids))
     ExecGetTID(N(EVS_GourmetGuy_Enter), LVarB)

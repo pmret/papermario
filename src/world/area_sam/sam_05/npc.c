@@ -123,7 +123,7 @@ EvtScript N(EVS_NpcAux_Monstar) = {
 };
 
 EvtScript N(EVS_NpcInit_Monstar) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     Call(SetNpcVar, NPC_Monstar, 3, 255)
     Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Monstar)))
@@ -139,7 +139,7 @@ EvtScript N(EVS_NpcInit_Monstar) = {
 };
 
 EvtScript N(EVS_NpcInit_StarKid) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Twink_Shout)
     Return
     End
@@ -380,7 +380,7 @@ NpcData N(NpcData_Gulpit)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = FALSE,
+                .isFlying = false,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -75, 0, 0 },
@@ -407,7 +407,7 @@ NpcData N(NpcData_FrostPiranha_01)[] = {
         .yaw = 90,
         .territory = {
             .wander = {
-                .isFlying = FALSE,
+                .isFlying = false,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 100, 0, 50 },
@@ -434,7 +434,7 @@ NpcData N(NpcData_FrostPiranha_02)[] = {
         .yaw = 90,
         .territory = {
             .wander = {
-                .isFlying = FALSE,
+                .isFlying = false,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -400, 0, 0 },

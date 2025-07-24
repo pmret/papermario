@@ -101,7 +101,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
@@ -142,7 +142,7 @@ EvtScript N(EVS_HandleEvent) = {
             ExecWait(EVS_Partner_Recover)
         CaseDefault
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };

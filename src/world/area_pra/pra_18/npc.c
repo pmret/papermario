@@ -76,9 +76,9 @@ EvtScript N(EVS_NpcIdle_Clubba_01) = {
         EndIf
     EndLoop
     IfNe(LVar0, 2)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Anim05, ANIM_WorldClubba_Frost_Anim02, 0, MSG_CH7_0150)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndIf
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
@@ -99,9 +99,9 @@ EvtScript N(EVS_NpcIdle_Clubba_02) = {
         EndIf
     EndLoop
     IfNe(LVar0, 2)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Anim05, ANIM_WorldClubba_Frost_Anim02, 0, MSG_CH7_0151)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndIf
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
@@ -123,9 +123,9 @@ EvtScript N(EVS_NpcIdle_Clubba_03) = {
     EndLoop
     Call(GetSelfVar, 0, LVar0)
     IfNe(LVar0, 2)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Anim05, ANIM_WorldClubba_Frost_Anim02, 0, MSG_CH7_0152)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndIf
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
@@ -164,7 +164,7 @@ EvtScript N(EVS_PlayClubbaDefeatFX) = {
 
 EvtScript N(EVS_NpcDefeat_Clubba_01) = {
     Thread
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Wait(50)
         Loop(10)
             Wait(2)
@@ -174,7 +174,7 @@ EvtScript N(EVS_NpcDefeat_Clubba_01) = {
         EndLoop
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1176, COLLIDER_FLAGS_UPPER_MASK)
         Set(GB_PRA18_ClubbasDefeated, 1)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndThread
     Thread
         Wait(30)
@@ -190,7 +190,7 @@ EvtScript N(EVS_NpcDefeat_Clubba_01) = {
 
 EvtScript N(EVS_NpcDefeat_Clubba_02) = {
     Thread
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Wait(50)
         Loop(10)
             Wait(2)
@@ -200,7 +200,7 @@ EvtScript N(EVS_NpcDefeat_Clubba_02) = {
         EndLoop
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1175, COLLIDER_FLAGS_UPPER_MASK)
         Set(GB_PRA18_ClubbasDefeated, 2)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndThread
     Thread
         Wait(30)
@@ -216,7 +216,7 @@ EvtScript N(EVS_NpcDefeat_Clubba_02) = {
 
 EvtScript N(EVS_NpcDefeat_Clubba_03) = {
     Thread
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Wait(50)
         Loop(10)
             Wait(2)
@@ -227,7 +227,7 @@ EvtScript N(EVS_NpcDefeat_Clubba_03) = {
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1174, COLLIDER_FLAGS_UPPER_MASK)
         BindTrigger(Ref(N(EVS_ExitDoors_pra_33_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittne, 1, 0)
         Set(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndThread
     Thread
         Wait(30)
@@ -254,7 +254,7 @@ EvtScript N(EVS_NpcInit_Clubba_01) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Clubba_01)))
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Clubba_01)))
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Clubba_01)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, true)
     Return
     End
 };
@@ -272,7 +272,7 @@ EvtScript N(EVS_NpcInit_Clubba_02) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Clubba_02)))
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Clubba_02)))
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Clubba_02)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, true)
     Return
     End
 };
@@ -286,7 +286,7 @@ EvtScript N(EVS_NpcInit_Clubba_03) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Clubba_03)))
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Clubba_03)))
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Clubba_03)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, true)
     Return
     End
 };
@@ -300,7 +300,7 @@ EvtScript N(EVS_NpcInit_Clubba_01_Aux) = {
         Call(RemoveNpc, NPC_SELF)
         Return
     EndIf
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, true)
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Clubba_01_Aux)))
     Return
     End
@@ -315,7 +315,7 @@ EvtScript N(EVS_NpcInit_Clubba_02_Aux) = {
         Call(RemoveNpc, NPC_SELF)
         Return
     EndIf
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, true)
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Clubba_02_Aux)))
     Return
     End
@@ -326,7 +326,7 @@ EvtScript N(EVS_NpcInit_Clubba_03_Aux) = {
         Call(RemoveNpc, NPC_SELF)
         Return
     EndIf
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, true)
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Clubba_03_Aux)))
     Return
     End

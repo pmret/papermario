@@ -117,7 +117,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
         CaseEq(EVENT_HIT_COMBO)
@@ -156,7 +156,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseEq(EVENT_END_FIRST_STRIKE)
         CaseDefault
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -322,8 +322,8 @@ API_CALLABLE(N(SpawnShatterFX)) {
 EvtScript N(EVS_Death) = {
     Call(PlaySoundAtActor, ACTOR_BULB, SOUND_TANK_BULB_SHATTER)
     Call(N(SpawnShatterFX))
-    Call(EnableModel, MODEL_kyu3, FALSE)
-    Call(EnableModel, MODEL_kyu1, FALSE)
+    Call(EnableModel, MODEL_kyu3, false)
+    Call(EnableModel, MODEL_kyu1, false)
     Call(GetActorVar, ACTOR_TANK, AVAR_Tank_BulbGlowEffect, LVar0)
     IfNe(LVar0, NULL)
         Call(RemoveEffect, LVar0)

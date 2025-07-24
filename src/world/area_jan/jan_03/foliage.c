@@ -29,8 +29,8 @@ BombTrigger N(BombPos_Tree1) = {
 };
 
 EvtScript N(EVS_SetupFoliage) = {
-    Set(AF_JAN_16, FALSE)
-    Set(AF_JAN03_TreeDrop1, FALSE)
+    Set(AF_JAN_16, false)
+    Set(AF_JAN03_TreeDrop1, false)
     Set(LVar0, Ref(N(ShakeTree_Tree1)))
     BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o440, 1, 0)
     BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)

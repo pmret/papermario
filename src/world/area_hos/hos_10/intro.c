@@ -87,42 +87,42 @@ EvtScript N(EVS_Scene_Rising_Impl) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         Exec(N(EVS_UpdateTexturePan))
     EndThread
-    Call(EnableTexPanning, MODEL_k2, TRUE)
-    Call(EnableTexPanning, MODEL_k7, TRUE)
-    Call(EnableTexPanning, MODEL_k1, TRUE)
-    Call(EnableTexPanning, MODEL_k5, TRUE)
-    Call(EnableTexPanning, MODEL_k9, TRUE)
-    Call(EnableTexPanning, MODEL_k12, TRUE)
-    Call(EnableTexPanning, MODEL_s1, TRUE)
-    Call(EnableTexPanning, MODEL_s2, TRUE)
+    Call(EnableTexPanning, MODEL_k2, true)
+    Call(EnableTexPanning, MODEL_k7, true)
+    Call(EnableTexPanning, MODEL_k1, true)
+    Call(EnableTexPanning, MODEL_k5, true)
+    Call(EnableTexPanning, MODEL_k9, true)
+    Call(EnableTexPanning, MODEL_k12, true)
+    Call(EnableTexPanning, MODEL_s1, true)
+    Call(EnableTexPanning, MODEL_s2, true)
     Thread
         Wait(510)
         Call(N(MakeShootingStar))
     EndThread
-    Call(EnableModel, MODEL_nagare, FALSE)
+    Call(EnableModel, MODEL_nagare, false)
     Call(SetTexPanner, MODEL_nagare, 1)
     Thread
         Set(LVar0, 0)
         Call(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
         Wait(560)
-        Call(EnableModel, MODEL_nagare, TRUE)
+        Call(EnableModel, MODEL_nagare, true)
         Loop(32)
             Add(LVar0, 0x800)
             Call(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
             Wait(1)
         EndLoop
-        Call(EnableModel, MODEL_nagare, FALSE)
+        Call(EnableModel, MODEL_nagare, false)
         Call(TranslateModel, MODEL_nagare, -400, 100, 0)
         Set(LVar0, 0)
         Call(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
         Wait(100)
-        Call(EnableModel, MODEL_nagare, TRUE)
+        Call(EnableModel, MODEL_nagare, true)
         Loop(32)
             Add(LVar0, 0x800)
             Call(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
             Wait(1)
         EndLoop
-        Call(EnableModel, MODEL_nagare, FALSE)
+        Call(EnableModel, MODEL_nagare, false)
     EndThread
     Thread
         SetF(LVar0, -1125)
@@ -159,26 +159,26 @@ EvtScript N(EVS_Scene_Rising_Impl) = {
 };
 
 EvtScript N(EVS_Scene_UnusedWhiteScreen) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(EnableModel, MODEL_nagare, FALSE)
+    Call(EnableModel, MODEL_nagare, false)
     Exec(N(EVS_Scene_Unused_Impl))
     Return
     End
 };
 
 EvtScript N(EVS_Scene_RisingAboveClouds) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Exec(N(EVS_Scene_Rising_Impl))
     Return

@@ -36,16 +36,16 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     IfNe(LVar0, PARTNER_NONE)
         Call(InterruptUsePartner)
     EndIf
-    Call(DisablePlayerInput, TRUE)
-    Call(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(AdjustCam, CAM_DEFAULT, Float(3.0), 0, 400, Float(15.0), Float(-7.0))
     Call(SetSelfVar, 1, 1)
     Thread
         Wait(10 * DT)
         Loop(0)
             Wait(1)
-            Call(PlayerFaceNpc, NPC_SELF, FALSE)
+            Call(PlayerFaceNpc, NPC_SELF, false)
             Call(NpcFaceNpc, NPC_PARTNER, NPC_SELF, 0)
             Call(GetSelfVar, 1, LVar0)
             IfNe(LVar0, 1)
@@ -59,7 +59,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(SetNpcSpeed, NPC_PARTNER, Float(2.0))
         Add(LVar0, 20)
-        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
         Call(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 0)
         Call(NpcFacePlayer, NPC_PARTNER, 0)
         Call(EnablePartnerAI)
@@ -101,7 +101,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -310, 870, -15)
     Call(SetPanTarget, CAM_DEFAULT, -310, 870, -15)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetNpcSpeed, NPC_SELF, Float(4.0 / DT))
     Call(NpcMoveTo, NPC_SELF, -390, -15, 0)
     Call(SetNpcJumpscale, NPC_SELF, Float(1.5))
@@ -152,8 +152,8 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     Call(SetNpcJumpscale, NPC_SELF, Float(3.0))
     Call(NpcJump0, NPC_SELF, LVar3, 700, LVar5, 5)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_PLAYER_LONG_FALL, SOUND_SPACE_DEFAULT)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Call(SetSelfVar, 0, 0)
     Call(SetSelfVar, 1, 0)
     Wait(5 * DT)
@@ -180,7 +180,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     Call(SetSelfVar, 0, 0)
     Call(ResetCam, CAM_DEFAULT, Float(2.0 / DT))
     Set(GB_StoryProgress, STORY_CH5_KOLORADO_FELL_IN_PIT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -220,7 +220,7 @@ EvtScript N(EVS_SyncZiplineDummyNPC) = {
 };
 
 EvtScript N(EVS_Dummy_Init) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
     Call(SetNpcScale, NPC_SELF, Float(0.3), 1, Float(0.3))
     Return
     End
@@ -257,7 +257,7 @@ NpcData N(NpcData_SpikeTop) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -100, 350, 50 },
@@ -281,7 +281,7 @@ NpcData N(NpcData_PutridPiranha)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 200, 350, 100 },

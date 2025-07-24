@@ -18,7 +18,7 @@ NpcData N(NpcData_Cleft_01) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 526, 238, 69 },
@@ -41,7 +41,7 @@ NpcData N(NpcData_Cleft_02) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 450, 50, 215 },
@@ -64,7 +64,7 @@ NpcData N(NpcData_Cleft_03) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 90, 0, 160 },
@@ -88,7 +88,7 @@ NpcData N(NpcData_MontyMole_01)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = FALSE,
+                .isFlying = false,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 867, 0, 101 },
@@ -110,7 +110,7 @@ NpcData N(NpcData_MontyMole_01)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 0, 0, 0 },
@@ -129,12 +129,12 @@ NpcData N(NpcData_MontyMole_01)[] = {
 };
 
 EvtScript N(EVS_Bubulb_Conversation) = {
-    IfEq(AF_IWA_SpokeWithBubulb, FALSE)
+    IfEq(AF_IWA_SpokeWithBubulb, false)
         Set(LVar2, LVar0)
-        Set(AF_IWA_SpokeWithBubulb, TRUE)
+        Set(AF_IWA_SpokeWithBubulb, true)
     Else
         Set(LVar2, LVar1)
-        Set(AF_IWA_SpokeWithBubulb, FALSE)
+        Set(AF_IWA_SpokeWithBubulb, false)
     EndIf
     Call(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, LVar2)
     Return
@@ -142,7 +142,7 @@ EvtScript N(EVS_Bubulb_Conversation) = {
 };
 
 EvtScript N(EVS_NpcInteract_Bubulb) = {
-    IfEq(GF_IWA02_Gift_MagicalSeed2, FALSE)
+    IfEq(GF_IWA02_Gift_MagicalSeed2, false)
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
         Call(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Purple_PopUp)
@@ -154,7 +154,7 @@ EvtScript N(EVS_NpcInteract_Bubulb) = {
         EVT_GIVE_KEY_REWARD(ITEM_MAGICAL_SEED2)
         Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH2_0020)
         Call(ResetCam, CAM_DEFAULT, Float(10.0))
-        Set(GF_IWA02_Gift_MagicalSeed2, TRUE)
+        Set(GF_IWA02_Gift_MagicalSeed2, true)
         Call(SetTattleMessage, NPC_Bubulb, MSG_NpcTattle_IWA_Bubulb_Revealed)
     Else
         Switch(GB_StoryProgress)
@@ -176,7 +176,7 @@ EvtScript N(EVS_NpcInteract_Bubulb) = {
 
 EvtScript N(EVS_NpcInit_Bubulb) = {
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bubulb)))
-    IfEq(GF_IWA02_Gift_MagicalSeed2, FALSE)
+    IfEq(GF_IWA02_Gift_MagicalSeed2, false)
         Call(SetNpcCollisionSize, NPC_SELF, 25, 25)
         Call(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Purple_BuriedIdle)
         Call(SetTattleMessage, NPC_Bubulb, MSG_NpcTattle_IWA_Bubulb_Hidden)

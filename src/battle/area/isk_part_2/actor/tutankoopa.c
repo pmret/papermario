@@ -46,7 +46,7 @@ enum N(ActorVars) {
     AVAL_State_Stunned          = 2,
 
     AVAR_ShellsLeft             = 2,
-    AVAR_HasSummoned            = 3, // FALSE until a chomp has been summoned
+    AVAR_HasSummoned            = 3, // false until a chomp has been summoned
     AVAR_Dialogue_Recover       = 4,
     AVAR_GateOpenAmount         = 5,
     AVAR_DebrisDropState        = 6,
@@ -283,18 +283,18 @@ EvtScript N(EVS_Init) = {
     Call(SetPartPos, ACTOR_SELF, PRT_SHELL_1, 70, 70, 3)
     Call(SetPartPos, ACTOR_SELF, PRT_SHELL_2, 80, 70, -7)
     Call(SetPartPos, ACTOR_SELF, PRT_SHELL_3, 60, 70, -7)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Stunned, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Stunned, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Toss)
     Call(SetActorVar, ACTOR_SELF, AVAR_StunState, AVAL_State_Normal)
-    Call(SetActorVar, ACTOR_SELF, AVAR_HasSummoned, FALSE)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Dialogue_Recover, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HasSummoned, false)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Dialogue_Recover, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_ShellsLeft, 3)
     Call(SetActorVar, ACTOR_SELF, AVAR_DebrisDropState, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_Unknown, 0)
-    Call(SetActorVar, ACTOR_SELF, AVAR_DoneFirstStrike, FALSE)
-    Call(SetActorVar, ACTOR_SELF, AVAR_UsedSpikeTaunt, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_DoneFirstStrike, false)
+    Call(SetActorVar, ACTOR_SELF, AVAR_UsedSpikeTaunt, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_NextSummonTime, 0)
-    Call(SetActorVar, ACTOR_SELF, AVAR_HittingSelf, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HittingSelf, false)
     Return
     End
 };
@@ -326,7 +326,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
     Call(GetLastElement, LVarE)
@@ -343,7 +343,7 @@ EvtScript N(EVS_HandleEvent) = {
             // if damage is from "debris drop" backfiring, fall down and become stunned
             Call(GetActorVar, ACTOR_SELF, AVAR_HittingSelf, LVar2)
             IfTrue(LVar2)
-                Call(SetActorVar, ACTOR_SELF, AVAR_HittingSelf, FALSE)
+                Call(SetActorVar, ACTOR_SELF, AVAR_HittingSelf, false)
                 ExecWait(N(EVS_TemporaryKnockout))
             EndIf
         CaseEq(EVENT_BEGIN_FIRST_STRIKE)
@@ -371,18 +371,18 @@ EvtScript N(EVS_HandleEvent) = {
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_Tutankoopa_Hurt)
             ExecWait(EVS_Enemy_Knockback)
-            Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_Tutankoopa_Run)
             ExecWait(EVS_Enemy_ReturnHome)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.6))
-            Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
             Call(GetActorVar, ACTOR_SELF, AVAR_Stunned, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Call(GetActorVar, ACTOR_SELF, AVAR_StunState, LVar1)
                 IfNe(LVar1, AVAL_State_Normal)
                     SetConst(LVar1, ANIM_Tutankoopa_Dizzy)
@@ -399,8 +399,8 @@ EvtScript N(EVS_HandleEvent) = {
             IfEq(LVar1, AVAL_State_Normal)
                 IfFlag(LVarE, DAMAGE_TYPE_JUMP)
                     Call(GetActorVar, ACTOR_SELF, AVAR_UsedSpikeTaunt, LVar0)
-                    IfEq(LVar0, FALSE)
-                        Call(SetActorVar, ACTOR_SELF, AVAR_UsedSpikeTaunt, TRUE)
+                    IfEq(LVar0, false)
+                        Call(SetActorVar, ACTOR_SELF, AVAR_UsedSpikeTaunt, true)
                         Wait(60)
                     EndIf
                 EndIf
@@ -428,7 +428,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Run)
             Call(SetGoalToHome, ACTOR_SELF)
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
-            Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+            Call(RunToGoal, ACTOR_SELF, 0, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Idle)
         CaseEq(EVENT_BURN_CONTACT)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Hurt)
@@ -436,7 +436,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Run)
             Call(SetGoalToHome, ACTOR_SELF)
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
-            Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+            Call(RunToGoal, ACTOR_SELF, 0, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Idle)
         CaseEq(EVENT_END_FIRST_STRIKE)
             SetConst(LVar0, PRT_MAIN)
@@ -450,7 +450,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -462,22 +462,22 @@ EvtScript N(EVS_Tutankoopa_SpinSmashHit) = {
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Add(LVar1, 20)
     Call(SetGoalPos, ACTOR_SELF, 150, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 0, false, true, false)
     Sub(LVar1, 20)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.1))
     Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
     Call(SetGoalPos, ACTOR_SELF, 130, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Fall)
     Wait(15)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Levitate)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
     Call(SetGoalToHome, ACTOR_SELF)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Run)
-    Call(RunToGoal, ACTOR_SELF, 10, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 10, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Idle)
     Return
     End
@@ -485,7 +485,7 @@ EvtScript N(EVS_Tutankoopa_SpinSmashHit) = {
 
 EvtScript N(EVS_TemporaryKnockout) = {
     Call(GetActorVar, ACTOR_SELF, AVAR_Stunned, LVar0)
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Return
     EndIf
     Call(HideHealthBar, ACTOR_SELF)
@@ -497,7 +497,7 @@ EvtScript N(EVS_TemporaryKnockout) = {
     Set(LVar1, 0)
     Add(LVar2, 24)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 16, false, true, false)
     Thread
         Call(SetPartScale, ACTOR_SELF, PRT_MAIN, Float(1.1), Float(0.5), Float(1.0))
         Wait(1)
@@ -516,7 +516,7 @@ EvtScript N(EVS_TemporaryKnockout) = {
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_KNOCKOUT_CHIRPING)
     Wait(30)
     Call(RemoveEffect, LVarF)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Stunned, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Stunned, true)
     Call(SetActorVar, ACTOR_SELF, AVAR_Unknown, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_StunState, AVAL_State_Stunned)
     Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(FallenAnims)))
@@ -528,18 +528,18 @@ EvtScript N(EVS_TemporaryKnockout) = {
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Label(0)
         Call(GetActorVar, ACTOR_SELF, AVAR_Stunned, LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             Call(ActorExists, ACTOR_CHOMP, LVar0)
-            IfEq(LVar0, FALSE)
+            IfEq(LVar0, false)
                 Call(GetActorVar, ACTOR_SELF, AVAR_NextSummonTime, LVar0)
                 IfEq(LVar0, 0)
                     ExecWait(N(EVS_Move_SummonChomp))
                     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-                    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+                    Call(UseIdleAnimation, ACTOR_SELF, true)
                     Return
                 Else
                     Sub(LVar0, 1)
@@ -576,7 +576,7 @@ EvtScript N(EVS_TakeTurn) = {
                     ExecWait(N(EVS_Attack_DropDebris))
             EndSwitch
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         Else
             Call(SetActorVar, ACTOR_SELF, AVAR_Unknown, 0)
@@ -586,7 +586,7 @@ EvtScript N(EVS_TakeTurn) = {
             Goto(0)
         EndIf
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     Return
     End
@@ -618,7 +618,7 @@ EvtScript N(EVS_Attack_ThrowShell) = {
     Add(LVar0, 20)
     Sub(LVar2, 3)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 10, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 10, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Idle)
     Wait(10)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Lift)
@@ -627,7 +627,7 @@ EvtScript N(EVS_Attack_ThrowShell) = {
     Add(LVar0, 20)
     Add(LVar1, 40)
     Call(SetPartJumpGravity, ACTOR_SELF, LVar9, Float(0.8))
-    Call(JumpPartTo, ACTOR_SELF, LVar9, LVar0, LVar1, LVar2, 5, TRUE)
+    Call(JumpPartTo, ACTOR_SELF, LVar9, LVar0, LVar1, LVar2, 5, true)
     Wait(8)
     Call(SetAnimation, ACTOR_SELF, LVar9, ANIM_BuzzyBeetle_Anim05)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_TOSS)
@@ -651,13 +651,13 @@ EvtScript N(EVS_Attack_ThrowShell) = {
             Call(SetPartMoveSpeed, ACTOR_SELF, LVar9, Float(6.0))
             Call(SetPartJumpGravity, ACTOR_SELF, LVar9, Float(0.1))
             Call(FlyPartTo, ACTOR_SELF, LVar9, LVar0, LVar1, LVar2, 0, 15, EASING_LINEAR)
-            Call(SetPartFlagBits, ACTOR_SELF, LVar9, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            Call(SetPartFlagBits, ACTOR_SELF, LVar9, ACTOR_PART_FLAG_INVISIBLE, true)
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EndIf
             Call(SetGoalToHome, ACTOR_SELF)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Run)
-            Call(RunToGoal, ACTOR_SELF, 10, FALSE)
+            Call(RunToGoal, ACTOR_SELF, 10, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Idle)
             Return
     EndSwitch
@@ -680,7 +680,7 @@ EvtScript N(EVS_Attack_ThrowShell) = {
     Call(SetPartMoveSpeed, ACTOR_SELF, LVar9, Float(4.0))
     Sub(LVar0, 20)
     Call(FlyPartTo, ACTOR_SELF, LVar9, LVar0, LVar1, LVar2, 0, 21, EASING_LINEAR)
-    Call(SetPartFlagBits, ACTOR_SELF, LVar9, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, LVar9, ACTOR_PART_FLAG_INVISIBLE, true)
     Wait(19)
     IfEq(LVar8, HIT_RESULT_10)
         Return
@@ -689,7 +689,7 @@ EvtScript N(EVS_Attack_ThrowShell) = {
     Call(YieldTurn)
     Call(SetGoalToHome, ACTOR_SELF)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Run)
-    Call(RunToGoal, ACTOR_SELF, 10, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 10, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Idle)
     Return
     End
@@ -727,7 +727,7 @@ EvtScript N(EVS_Attack_DropDebris) = {
     Wait(15)
     Call(GetStatusFlags, ACTOR_PLAYER, LVar0)
     IfNotFlag(LVar0, STATUS_FLAGS_IMMOBILIZED | STATUS_FLAG_TRANSPARENT)
-        Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+        Call(UseIdleAnimation, ACTOR_PLAYER, false)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Flail)
         Wait(49)
         Call(PlaySound, SOUND_HEAVY_NPC_FALLING)
@@ -793,7 +793,7 @@ EvtScript N(EVS_DropDebris_Self) = {
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Set(LVar3, 170)
     Call(SetPartPos, ACTOR_SELF, PRT_DEBRIS_3, LVar0, LVar3, LVar2)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_3, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_3, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(SetAnimation, ACTOR_SELF, PRT_DEBRIS_3, ANIM_Tutankoopa_RockStill)
     Call(PlaySound, SOUND_TUTANKOOPA_DEBRIS_FALL)
     Call(SetPartMoveSpeed, ACTOR_SELF, PRT_DEBRIS_3, Float(8.0))
@@ -801,9 +801,9 @@ EvtScript N(EVS_DropDebris_Self) = {
     Call(FallPartTo, ACTOR_SELF, PRT_DEBRIS_3, LVar0, LVar1, LVar2, 20)
     Thread
         Loop(20)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_3, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_3, ACTOR_PART_FLAG_INVISIBLE, false)
             Wait(1)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_3, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_3, ACTOR_PART_FLAG_INVISIBLE, true)
             Wait(1)
         EndLoop
     EndThread
@@ -811,7 +811,7 @@ EvtScript N(EVS_DropDebris_Self) = {
     IfNotFlag(LVar0, STATUS_FLAGS_IMMOBILIZED)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_ThumbsUp)
     EndIf
-    Call(SetActorVar, ACTOR_SELF, AVAR_HittingSelf, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HittingSelf, true)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_DROP_DEBRIS_SELF, BS_FLAGS1_TRIGGER_EVENTS)
     Return
@@ -843,7 +843,7 @@ EvtScript N(EVS_DropDebris_Players) = {
                 CaseEq(HIT_RESULT_MISS)
                     Return
                 CaseDefault
-                    Call(FreezeBattleState, TRUE)
+                    Call(FreezeBattleState, true)
                     Thread
                         Call(PlaySound, SOUND_TUTANKOOPA_DEBRIS_FALL)
                         Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -853,7 +853,7 @@ EvtScript N(EVS_DropDebris_Players) = {
                         Set(LVar1, 0)
                         Set(LVar3, 170)
                         Call(SetPartPos, ACTOR_SELF, PRT_DEBRIS_1, LVar0, LVar3, LVar2)
-                        Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_1, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+                        Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_1, ACTOR_PART_FLAG_INVISIBLE, false)
                         Call(SetAnimation, ACTOR_SELF, PRT_DEBRIS_1, ANIM_Tutankoopa_RockStill)
                         Call(SetPartMoveSpeed, ACTOR_SELF, PRT_DEBRIS_1, Float(8.0))
                         Call(SetPartJumpGravity, ACTOR_SELF, PRT_DEBRIS_1, Float(0.3))
@@ -871,7 +871,7 @@ EvtScript N(EVS_DropDebris_Players) = {
                     Add(LVar5, 5)
                     Set(LVar7, 170)
                     Call(SetPartPos, ACTOR_SELF, PRT_DEBRIS_2, LVar4, LVar7, LVar6)
-                    Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+                    Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_2, ACTOR_PART_FLAG_INVISIBLE, false)
                     Call(SetAnimation, ACTOR_SELF, PRT_DEBRIS_2, ANIM_Tutankoopa_RockStill)
                     Call(PlaySound, SOUND_TUTANKOOPA_DEBRIS_FALL)
                     Call(SetPartMoveSpeed, ACTOR_SELF, PRT_DEBRIS_2, Float(8.0))
@@ -882,8 +882,8 @@ EvtScript N(EVS_DropDebris_Players) = {
                     Call(SetGoalToTarget, ACTOR_SELF)
                     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_DROP_DEBRIS_PARTNER, BS_FLAGS1_TRIGGER_EVENTS)
                     Wait(20)
-                    Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-                    Call(FreezeBattleState, FALSE)
+                    Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_2, ACTOR_PART_FLAG_INVISIBLE, true)
+                    Call(FreezeBattleState, false)
                     Return
             EndSwitch
             Return
@@ -902,7 +902,7 @@ EvtScript N(EVS_DropDebris_Players) = {
             Wait(LVar0)
         EndLoop
     EndThread
-    Call(FreezeBattleState, TRUE)
+    Call(FreezeBattleState, true)
     Thread
         Wait(25)
         Call(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
@@ -912,7 +912,7 @@ EvtScript N(EVS_DropDebris_Players) = {
         Add(LVar5, 5)
         Set(LVar7, 170)
         Call(SetPartPos, ACTOR_SELF, PRT_DEBRIS_2, LVar4, LVar7, LVar6)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_2, ACTOR_PART_FLAG_INVISIBLE, false)
         Call(SetAnimation, ACTOR_SELF, PRT_DEBRIS_2, ANIM_Tutankoopa_RockStill)
         Call(PlaySound, SOUND_TUTANKOOPA_DEBRIS_FALL)
         Call(SetPartMoveSpeed, ACTOR_SELF, PRT_DEBRIS_2, Float(8.0))
@@ -922,8 +922,8 @@ EvtScript N(EVS_DropDebris_Players) = {
         Call(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
         Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_DROP_DEBRIS_PARTNER, BS_FLAGS1_TRIGGER_EVENTS)
         Wait(20)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-        Call(FreezeBattleState, FALSE)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_2, ACTOR_PART_FLAG_INVISIBLE, true)
+        Call(FreezeBattleState, false)
     EndThread
     Call(PlaySound, SOUND_TUTANKOOPA_DEBRIS_FALL)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -933,7 +933,7 @@ EvtScript N(EVS_DropDebris_Players) = {
     Add(LVar1, 5)
     Set(LVar3, 170)
     Call(SetPartPos, ACTOR_SELF, PRT_DEBRIS_1, LVar0, LVar3, LVar2)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_1, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_1, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(SetAnimation, ACTOR_SELF, PRT_DEBRIS_1, ANIM_Tutankoopa_RockStill)
     Call(SetPartMoveSpeed, ACTOR_SELF, PRT_DEBRIS_1, Float(8.0))
     Call(SetPartJumpGravity, ACTOR_SELF, PRT_DEBRIS_1, Float(0.3))
@@ -943,7 +943,7 @@ EvtScript N(EVS_DropDebris_Players) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_DROP_DEBRIS_PLAYER, BS_FLAGS1_TRIGGER_EVENTS)
     Wait(19)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_1, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_1, ACTOR_PART_FLAG_INVISIBLE, true)
     IfEq(LVar0, HIT_RESULT_10)
         Return
     EndIf
@@ -979,13 +979,13 @@ EvtScript N(EVS_Move_SummonChomp) = {
     Call(GetActorVar, ACTOR_SELF, AVAR_Stunned, LVar0)
     IfEq(LVar0, 0)
         Call(UseBattleCamPreset, BTL_CAM_ACTOR_CLOSE)
-        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
         Call(SetBattleCamDist, 225)
         Call(SetBattleCamOffsetY, -30)
         Call(MoveBattleCamOver, 40)
     Else
         Call(UseBattleCamPreset, BTL_CAM_ACTOR_CLOSE)
-        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
         Call(SetBattleCamDist, 200)
         Call(SetBattleCamOffsetY, 35)
         Call(MoveBattleCamOver, 40)
@@ -1016,14 +1016,14 @@ EvtScript N(EVS_Move_SummonChomp) = {
     Call(StopSound, SOUND_LARGE_GATE_OPEN)
     Wait(10)
     // create the chomp and have him exit the gate
-    Call(SummonEnemy, Ref(N(SummonedChomp)), FALSE)
+    Call(SummonEnemy, Ref(N(SummonedChomp)), false)
     Set(LVarB, LVar0)
     Set(LVar0, 165)
     Set(LVar1, 0)
     Set(LVar2, -30)
     Call(SetActorPos, LVarB, LVar0, LVar1, LVar2)
     Call(SetActorDispOffset, LVarB, 0, 0, 0)
-    Call(UseIdleAnimation, LVarB, FALSE)
+    Call(UseIdleAnimation, LVarB, false)
     Call(EnableIdleScript, LVarB, IDLE_SCRIPT_DISABLE)
     Call(SetAnimation, LVarB, 1, ANIM_ChainChomp_SlowBite)
     Call(SetActorSpeed, LVarB, Float(6.0))
@@ -1058,12 +1058,12 @@ EvtScript N(EVS_Move_SummonChomp) = {
     Else
         Wait(8)
         Call(SetGoalPos, LVarB, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, LVarB, 8, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, LVarB, 8, false, true, false)
         Thread
             Call(ShakeCam, CAM_BATTLE, 0, 1, Float(0.5))
         EndThread
         Call(SetGoalPos, LVarB, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, LVarB, 8, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, LVarB, 8, false, true, false)
         Thread
             Call(ShakeCam, CAM_BATTLE, 0, 1, Float(0.5))
         EndThread
@@ -1086,7 +1086,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
     Call(SetActorSpeed, LVarB, Float(6.0))
     Call(SetActorJumpGravity, LVarB, Float(0.8))
     Call(EnableIdleScript, LVarB, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, LVarB, TRUE)
+    Call(UseIdleAnimation, LVarB, true)
     // close the gate
     Call(SetActorVar, ACTOR_SELF, AVAR_GateOpenAmount, 60)
     Thread
@@ -1113,7 +1113,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
     Call(StopSound, SOUND_LARGE_GATE_OPEN)
     Call(PlaySound, SOUND_LARGE_GATE_CLOSE)
     Call(ShakeCam, CAM_BATTLE, 0, 4, Float(0.5))
-    Call(SetActorVar, ACTOR_SELF, AVAR_HasSummoned, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HasSummoned, true)
     Return
     End
 };
@@ -1128,7 +1128,7 @@ EvtScript N(EVS_SummonedChompHop) = {
     Sub(LVar6, LVar0)
     IfLt(LVar6, LVar4)
         Call(SetGoalPos, LVarB, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, LVarB, LVar3, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, LVarB, LVar3, false, true, false)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
         Thread
             Call(ShakeCam, CAM_BATTLE, 0, 1, Float(0.5))
@@ -1136,7 +1136,7 @@ EvtScript N(EVS_SummonedChompHop) = {
     Else
         Sub(LVar5, LVar4)
         Call(SetGoalPos, LVarB, LVar5, LVar1, LVar2)
-        Call(JumpToGoal, LVarB, LVar3, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, LVarB, LVar3, false, true, false)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
         Thread
             Call(ShakeCam, CAM_BATTLE, 0, 1, Float(0.5))
@@ -1163,14 +1163,14 @@ EvtScript N(EVS_LevitateToHomePos) = {
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_TUTANKOOPA_LEVITATE)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.1))
     Call(SetGoalPos, ACTOR_SELF, 97, 70, 15)
-    Call(JumpToGoal, ACTOR_SELF, 45, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 45, false, true, false)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_STEP_A)
     Thread
         Wait(1)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_STEP_B)
     EndThread
     Wait(5)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Stunned, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Stunned, false)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(HPBarToHome, ACTOR_SELF)
@@ -1183,7 +1183,7 @@ EvtScript N(EVS_GetBackUp) = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_STEP_A)
     Thread
         Wait(1)
@@ -1199,7 +1199,7 @@ EvtScript N(EVS_GetBackUp) = {
         Call(MoveBattleCamOver, 20)
         Wait(20)
         Call(ActorSpeak, MSG_CH2_00E4, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Talk, ANIM_Tutankoopa_Idle)
-        Call(SetActorVar, ACTOR_SELF, AVAR_Dialogue_Recover, TRUE)
+        Call(SetActorVar, ACTOR_SELF, AVAR_Dialogue_Recover, true)
     EndIf
     Return
     End
@@ -1212,7 +1212,7 @@ EvtScript N(EVS_HandlePhase) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_DoneFirstStrike, LVar0)
             Switch(LVar0)
                 CaseEq(0)
-                    Call(SetActorVar, ACTOR_SELF, AVAR_DoneFirstStrike, TRUE)
+                    Call(SetActorVar, ACTOR_SELF, AVAR_DoneFirstStrike, true)
             EndSwitch
     EndSwitch
     Return
@@ -1222,13 +1222,13 @@ EvtScript N(EVS_HandlePhase) = {
 // kills the summoned chomp before dying
 EvtScript N(EVS_Tutankoopa_Death) = {
     Call(ActorExists, ACTOR_CHOMP, LVar2)
-    IfNe(LVar2, FALSE)
+    IfNe(LVar2, false)
         Call(GetActorHP, ACTOR_CHOMP, LVar2)
         IfNe(LVar2, 0)
             Thread
                 Call(HideHealthBar, ACTOR_CHOMP)
                 Call(EnableIdleScript, ACTOR_CHOMP, IDLE_SCRIPT_DISABLE)
-                Call(UseIdleAnimation, ACTOR_CHOMP, FALSE)
+                Call(UseIdleAnimation, ACTOR_CHOMP, false)
                 Call(SetAnimation, ACTOR_CHOMP, PRT_MAIN, ANIM_ChainChomp_Hurt)
                 Wait(10)
                 Set(LVar2, 0)
@@ -1255,7 +1255,7 @@ EvtScript N(EVS_Tutankoopa_Death) = {
     ExecWait(EVS_Enemy_DeathWithoutRemove)
     Label(0)
         Call(ActorExists, ACTOR_CHOMP, LVar0)
-        IfNe(LVar0, FALSE)
+        IfNe(LVar0, false)
             Wait(1)
             Goto(0)
         EndIf

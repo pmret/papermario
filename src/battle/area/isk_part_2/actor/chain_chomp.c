@@ -271,7 +271,7 @@ ActorBlueprint NAMESPACE = {
 #define CHOMP_CHAIN_FIRST_PART_IDX  PRT_CHAIN_1
 #define CHOMP_CHAIN_LAST_PART_IDX   PRT_CHAIN_8
 #define CHOMP_CHAIN_AVAR_SOUNDS     AVAR_EnableChainSounds
-#define CHOMP_CHAIN_UPDATE_Z        TRUE
+#define CHOMP_CHAIN_UPDATE_Z        true
 #include "common/battle/ChompChainSupport.inc.c"
 
 API_CALLABLE(func_8021866C_4EFB0C) {
@@ -283,7 +283,7 @@ API_CALLABLE(func_8021866C_4EFB0C) {
 }
 
 EvtScript N(EVS_Init) = {
-    Call(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, false)
     Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
     Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
@@ -421,7 +421,7 @@ EvtScript N(EVS_UpdateChain) = {
     Label(0)
         Wait(1)
         Call(ActorExists, ACTOR_CHOMP, LVar0)
-        IfEq(LVar0, TRUE)
+        IfEq(LVar0, true)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(N(ChompChainUpdate), LVar2)
             Goto(0)
@@ -432,7 +432,7 @@ EvtScript N(EVS_UpdateChain) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
     Call(GetLastEvent, ACTOR_SELF, LVar0)
@@ -468,7 +468,7 @@ EvtScript N(EVS_HandleEvent) = {
             SetConst(LVar1, ANIM_ChainChomp_Hurt)
             ExecWait(N(EVS_Chomp_SpinSmashHit))
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             SetConst(LVar0, PRT_MAIN)
@@ -483,21 +483,21 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.4))
             Call(AddGoalPos, ACTOR_SELF, 30, 0, 0)
-            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
             Call(AddGoalPos, ACTOR_SELF, 15, 0, 0)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
             Call(AddGoalPos, ACTOR_SELF, 5, 0, 0)
-            Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
-            Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_ChainChomp_SlowBite)
             ExecWait(N(EVS_Chomp_HopHome))
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.6))
-            Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
             Thread
                 Call(ShakeCam, CAM_BATTLE, 0, 1, Float(0.5))
@@ -505,7 +505,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetGoalToHome, ACTOR_SELF)
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetPartPos, ACTOR_SELF, PRT_TARGET, LVar0, LVar1, LVar2)
-            Call(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, FALSE)
+            Call(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, false)
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             Call(GetStatusFlags, ACTOR_SELF, LVar0)
             IfNotFlag(LVar0, STATUS_FLAGS_IMMOBILIZED)
@@ -524,7 +524,7 @@ EvtScript N(EVS_HandleEvent) = {
             SetConst(LVar1, ANIM_ChainChomp_Hurt)
             ExecWait(EVS_Enemy_AirLift)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_MAIN)
@@ -546,7 +546,7 @@ EvtScript N(EVS_HandleEvent) = {
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_ChainChomp_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
-            Call(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, FALSE)
+            Call(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, false)
             Wait(10)
             Call(SetActorVar, ACTOR_TUTANKOOPA, AVAR_Tutankoopa_NextSummonTime, 2)
             SetConst(LVar0, PRT_MAIN)
@@ -588,14 +588,14 @@ EvtScript N(EVS_HandleEvent) = {
         EndIf
     EndIf
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Chomp_SpinSmashHit) = {
     Call(ActorExists, ACTOR_TUTANKOOPA, LVar0)
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Goto(1)
     EndIf
     Call(GetActorVar, ACTOR_TUTANKOOPA, AVAR_Tutankoopa_Stunned, LVar0)
@@ -610,7 +610,7 @@ EvtScript N(EVS_Chomp_SpinSmashHit) = {
     Call(SetGoalPos, ACTOR_SELF, LVar0, 20, LVar2)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.1))
     Call(SetActorSpeed, ACTOR_SELF, Float(7.0))
-    Call(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 0, false, true, false)
     Thread
         Call(ShakeCam, CAM_BATTLE, 0, 2, Float(1.0))
     EndThread
@@ -620,7 +620,7 @@ EvtScript N(EVS_Chomp_SpinSmashHit) = {
     Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, 150, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 0, false, true, false)
     Thread
         Call(GetStatusFlags, ACTOR_SELF, LVar0)
         IfNotFlag(LVar0, STATUS_FLAG_SHRINK)
@@ -631,7 +631,7 @@ EvtScript N(EVS_Chomp_SpinSmashHit) = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
     Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
     Call(SetGoalPos, ACTOR_SELF, 130, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
     Thread
         Call(GetStatusFlags, ACTOR_SELF, LVar0)
         IfNotFlag(LVar0, STATUS_FLAG_SHRINK)
@@ -647,7 +647,7 @@ EvtScript N(EVS_Chomp_SpinSmashHit) = {
     Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, 135, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 0, false, true, false)
     Thread
         Call(GetStatusFlags, ACTOR_SELF, LVar0)
         IfNotFlag(LVar0, STATUS_FLAG_SHRINK)
@@ -658,7 +658,7 @@ EvtScript N(EVS_Chomp_SpinSmashHit) = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
     Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
     Call(SetGoalPos, ACTOR_SELF, 105, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
     Thread
         Call(GetStatusFlags, ACTOR_SELF, LVar0)
         IfNotFlag(LVar0, STATUS_FLAG_SHRINK)
@@ -677,19 +677,19 @@ EvtScript N(EVS_Chomp_SpinSmashHit) = {
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    Call(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, TRUE)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, true)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.5))
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Set(LVar1, 0)
     Add(LVar0, 45)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
     Thread
         Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -713,7 +713,7 @@ EvtScript N(EVS_TakeTurn) = {
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
             Thread
                 Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -725,7 +725,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 25)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
             Thread
                 Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -735,7 +735,7 @@ EvtScript N(EVS_TakeTurn) = {
             EndThread
             Sub(LVar0, 15)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 4, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
             Thread
                 Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -759,7 +759,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(HPBarToHome, ACTOR_SELF)
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(SetActorYaw, ACTOR_SELF, 0)
-            Call(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, FALSE)
+            Call(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, false)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
             Return
         EndCaseGroup
@@ -776,7 +776,7 @@ EvtScript N(EVS_TakeTurn) = {
     Set(LVar1, 27)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.2))
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
     Wait(2)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetPartPos, ACTOR_SELF, PRT_TARGET, LVar0, LVar1, LVar2)
@@ -791,7 +791,7 @@ EvtScript N(EVS_TakeTurn) = {
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
             Thread
                 Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -801,7 +801,7 @@ EvtScript N(EVS_TakeTurn) = {
             EndThread
             Add(LVar0, 30)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
             Thread
                 Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -811,7 +811,7 @@ EvtScript N(EVS_TakeTurn) = {
             EndThread
             Add(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
             Thread
                 Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -820,7 +820,7 @@ EvtScript N(EVS_TakeTurn) = {
                 EndIf
             EndThread
             Sub(LVar0, 10)
-            Call(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 4, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
             Thread
                 Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -842,10 +842,10 @@ EvtScript N(EVS_TakeTurn) = {
             ExecWait(N(EVS_Chomp_HopHome))
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ChainChomp_Idle)
     EndSwitch
-    Call(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, false)
     Call(HPBarToHome, ACTOR_SELF)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -889,7 +889,7 @@ EvtScript N(EVS_Chomp_HopToPos) = {
             Sub(LVar4, LVar3)
             IfLt(LVar4, 30)
                 Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+                Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
                 Thread
                     Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -901,7 +901,7 @@ EvtScript N(EVS_Chomp_HopToPos) = {
                 Set(LVar4, LVar3)
                 Add(LVar3, 30)
                 Call(SetGoalPos, ACTOR_SELF, LVar3, LVar1, LVar2)
-                Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+                Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
                 Thread
                     Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -915,7 +915,7 @@ EvtScript N(EVS_Chomp_HopToPos) = {
             Sub(LVar4, LVar0)
             IfLt(LVar4, 30)
                 Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+                Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
                 Thread
                     Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -926,7 +926,7 @@ EvtScript N(EVS_Chomp_HopToPos) = {
             Else
                 Sub(LVar3, 30)
                 Call(SetGoalPos, ACTOR_SELF, LVar3, LVar1, LVar2)
-                Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+                Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
                 Thread
                     Call(GetStatusFlags, ACTOR_SELF, LVar0)

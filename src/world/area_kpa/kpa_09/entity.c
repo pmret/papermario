@@ -16,10 +16,10 @@ API_CALLABLE(N(ElevatePlayer)) {
 }
 
 EvtScript N(EVS_ActivateSwitch) = {
-    IfNe(AF_KPA09_PlatformRaised, FALSE)
+    IfNe(AF_KPA09_PlatformRaised, false)
         Return
     EndIf
-    Set(AF_KPA09_PlatformRaised, TRUE)
+    Set(AF_KPA09_PlatformRaised, true)
     Call(N(EnableCameraFollowPlayerY))
     Thread
         SetGroup(EVT_GROUP_NOT_BATTLE)
@@ -51,9 +51,9 @@ EvtScript N(EVS_ActivateSwitch) = {
     EndThread
     Thread
         SetGroup(EVT_GROUP_NOT_BATTLE)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(PlaySoundAtCollider, COLLIDER_o106, SOUND_KPA_RAISE_STONE_PLATFORM, SOUND_SPACE_DEFAULT)
-        Call(EnableGroup, MODEL_move2, TRUE)
+        Call(EnableGroup, MODEL_move2, true)
         Call(MakeLerp, -50, 0, 15, EASING_COS_IN_OUT)
         Loop(0)
             Call(UpdateLerp)
@@ -65,7 +65,7 @@ EvtScript N(EVS_ActivateSwitch) = {
                 BreakLoop
             EndIf
         EndLoop
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Wait(80)
         Call(PlaySoundAtCollider, COLLIDER_o106, SOUND_KPA_LOWER_STONE_PLATFORM, SOUND_SPACE_DEFAULT)
         Call(MakeLerp, 0, -50, 15, EASING_COS_IN_OUT)
@@ -79,14 +79,14 @@ EvtScript N(EVS_ActivateSwitch) = {
                 BreakLoop
             EndIf
         EndLoop
-        Set(AF_KPA09_PlatformRaised, FALSE)
+        Set(AF_KPA09_PlatformRaised, false)
     EndThread
     Return
     End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    Set(AF_KPA09_PlatformRaised, FALSE)
+    Set(AF_KPA09_PlatformRaised, false)
     Call(MakeEntity, Ref(Entity_RedSwitch), -325, 0, -8, 0, MAKE_ENTITY_END)
     Call(AssignScript, Ref(N(EVS_ActivateSwitch)))
     Call(ParentColliderToModel, COLLIDER_o19, MODEL_m_yuka)

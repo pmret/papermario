@@ -13,7 +13,7 @@ EvtScript N(EVS_RestrictCamFromBarricade) = {
         Call(GetCamPosB, CAM_DEFAULT, LVar0, LVar1)
         Call(SetCamPosB, CAM_DEFAULT, Float(-600.0), LVar1)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Wait(1)
         Goto(0)
     Return
@@ -30,8 +30,8 @@ EvtScript N(EVS_PlayShyGuyRunSounds) = {
 };
 
 EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
-    IfEq(GF_OMO02_ShyGuyFledBehindWall, FALSE)
-        Call(DisablePlayerInput, TRUE)
+    IfEq(GF_OMO02_ShyGuyFledBehindWall, false)
+        Call(DisablePlayerInput, true)
         Wait(30 * DT)
         Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
         Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -39,7 +39,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
         Call(UseSettingsFrom, CAM_DEFAULT, -570, 0, 0)
         Call(SetPanTarget, CAM_DEFAULT, -570, 0, 0)
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         ExecGetTID(N(EVS_PlayShyGuyRunSounds), LVarA)
         Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
         Call(SetNpcSpeed, NPC_SELF, Float(6.0 / DT))
@@ -47,11 +47,11 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
         KillThread(LVarA)
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
         Call(NpcJump0, NPC_SELF, -460, 0, -20, 40 / DT)
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         ExecGetTID(N(EVS_RestrictCamFromBarricade), MV_RestrictCamScript)
-        Set(GF_OMO02_ShyGuyFledBehindWall, TRUE)
-        Call(DisablePlayerInput, FALSE)
+        Set(GF_OMO02_ShyGuyFledBehindWall, true)
+        Call(DisablePlayerInput, false)
     Else
         ExecGetTID(N(EVS_RestrictCamFromBarricade), MV_RestrictCamScript)
         Call(SetNpcPos, NPC_SELF, -575, 0, -20)
@@ -70,7 +70,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy_Loner) = {
-    IfEq(GF_OMO02_BombedWall, FALSE)
+    IfEq(GF_OMO02_BombedWall, false)
         Call(SetNpcPos, NPC_SELF, -800, 0, 0)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_ShyGuy_Loner)))
     Else
@@ -220,7 +220,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Crowd) = {
                 Call(InterpNpcYaw, NPC_SELF, 90, 0)
                 Wait(2)
             CaseEq(CROWD_STATE_RUN_AWAY)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_WORLD_COLLISION, true)
                 Call(GetSelfNpcID, LVar0)
                 UseBuf(Ref(N(CrowdFleeScripts)))
                 Loop(LVar0)
@@ -267,7 +267,7 @@ Vec3i N(InitialCrowdPositions)[] = {
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy_Crowd) = {
-    IfEq(GF_OMO02_BombedWall, FALSE)
+    IfEq(GF_OMO02_BombedWall, false)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_ShyGuy_Crowd)))
         Call(GetSelfNpcID, LVar0)
         Sub(LVar0, NPC_ShyGuy_01)
@@ -404,7 +404,7 @@ NpcData N(NpcData_SpyGuy)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 200, 0, 30 },

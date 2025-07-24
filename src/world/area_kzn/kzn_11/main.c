@@ -15,8 +15,8 @@ EvtScript N(EVS_BindExitTriggers) = {
 EvtScript N(EVS_StartTexPanners_Lava) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_yougan1_1, TEX_PANNER_2)
-    Call(EnableTexPanning, MODEL_toro, TRUE)
-    Call(EnableTexPanning, MODEL_poko, TRUE)
+    Call(EnableTexPanning, MODEL_toro, true)
+    Call(EnableTexPanning, MODEL_poko, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_2)
         TEX_PAN_PARAMS_STEP(  200,    0,  400, -100)
@@ -56,7 +56,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     Call(SetSpriteShading, SHADING_KZN_11)
     EVT_SETUP_CAMERA_DEFAULT()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     Call(SetMusic, 0, SONG_MT_LAVALAVA, 0, VOL_LEVEL_FULL)
     Call(PlayAmbientSounds, AMBIENT_LAVA_1)
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))

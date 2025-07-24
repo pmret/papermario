@@ -11,9 +11,9 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_OnReadPoster) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_017C, 160, 40)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -25,11 +25,11 @@ EvtScript N(EVS_EnterScene) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(200.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(13.0), Float(-10.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
     Call(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
     Call(N(SetModelTintParams), ENV_TINT_REMAP, 44, 32, 177, 0, 0, 0, 0, 0, 0)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Thread
         Call(ShakeCam, CAM_DEFAULT, 0, 300, Float(0.2))
     EndThread
@@ -51,7 +51,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_DRY_DRY_OUTPOST)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     Call(InitVirtualEntityList)
     ExecWait(N(EVS_MakeEntities))
     ExecWait(N(EVS_SetupRooms))
@@ -79,15 +79,15 @@ EvtScript N(EVS_Main) = {
             Wait(1)
             Goto(123)
     EndThread
-    Set(MF_Unk_00, FALSE)
+    Set(MF_Unk_00, false)
     BindTrigger(Ref(N(EVS_OnReadPoster)), TRIGGER_WALL_PRESS_A, COLLIDER_poster, 1, 0)
     Thread
         Loop(0)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             IfLt(LVar2, -200)
-                Call(EnableGroup, MODEL_mazinai, TRUE)
+                Call(EnableGroup, MODEL_mazinai, true)
             Else
-                Call(EnableGroup, MODEL_mazinai, FALSE)
+                Call(EnableGroup, MODEL_mazinai, false)
             EndIf
             Wait(1)
         EndLoop

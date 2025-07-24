@@ -50,15 +50,15 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
     Call(GetDemoState, LVar0)
     IfNe(LVar0, DEMO_STATE_NONE)
-        Call(MakeNpcs, TRUE, Ref(N(DemoNPCs)))
+        Call(MakeNpcs, true, Ref(N(DemoNPCs)))
         ExecWait(N(EVS_MakeEntities))
         ExecWait(N(EVS_PlayDemoScene))
         Return
     EndIf
     IfLe(GB_StoryProgress, STORY_CH1_DEFEATED_KOOPA_BROS)
-        Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+        Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     EndIf
-    IfEq(GF_TRD09_Defeated_BillBlasters, TRUE)
+    IfEq(GF_TRD09_Defeated_BillBlasters, true)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o85, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     ExecWait(N(EVS_MakeEntities))

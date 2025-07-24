@@ -24,7 +24,7 @@ EvtScript N(EVS_SpinKooperCeilingFan) = {
 
 EvtScript N(EVS_UpdateKooperFightSounds) = {
     Loop(0)
-        IfEq(GF_Quizmo_TakingQuiz, FALSE)
+        IfEq(GF_Quizmo_TakingQuiz, false)
             Call(PlaySoundAt, SOUND_NOK_HOUSE_CONFLICT, SOUND_SPACE_DEFAULT, 0, 0, -180)
         EndIf
         Call(RandInt, 30, LVar5)
@@ -44,7 +44,7 @@ EvtScript N(EVS_PlayKooperVsFuzzyEffects) = {
                 KillThread(MV_KooperFightSoundsScript)
                 Return
         EndSwitch
-        IfEq(GF_NOK02_ConfrontedBobombs, TRUE)
+        IfEq(GF_NOK02_ConfrontedBobombs, true)
             KillThread(MV_KooperFightSoundsScript)
             Return
         EndIf
@@ -53,15 +53,15 @@ EvtScript N(EVS_PlayKooperVsFuzzyEffects) = {
         Wait(LVar0)
         Call(RandInt, 10, LVar0)
         Add(LVar0, 5)
-        IfEq(GF_Quizmo_TakingQuiz, FALSE)
+        IfEq(GF_Quizmo_TakingQuiz, false)
             Call(N(SpawnKooperFightingDust))
         EndIf
         Loop(LVar0)
-            IfEq(AF_NOK_12, TRUE)
+            IfEq(AF_NOK_12, true)
                 KillThread(MV_KooperFightSoundsScript)
                 Call(TranslateGroup, MODEL_kameki, 0, 0, 0)
                 Label(10)
-                IfEq(AF_NOK_12, TRUE)
+                IfEq(AF_NOK_12, true)
                     Wait(1)
                     Goto(10)
                 EndIf
@@ -153,11 +153,11 @@ EvtScript N(EVS_SetWallsRot_KooperHouse) = {
     IfNe(LVar1, 0)
         Call(ScaleModel, MODEL_o308, 1, LVar1, 1)
         Call(ScaleModel, MODEL_o307, 1, LVar1, 1)
-        Call(EnableModel, MODEL_o308, TRUE)
-        Call(EnableModel, MODEL_o307, TRUE)
+        Call(EnableModel, MODEL_o308, true)
+        Call(EnableModel, MODEL_o307, true)
     Else
-        Call(EnableModel, MODEL_o308, FALSE)
-        Call(EnableModel, MODEL_o307, FALSE)
+        Call(EnableModel, MODEL_o308, false)
+        Call(EnableModel, MODEL_o307, false)
     EndIf
     Return
     End
@@ -211,7 +211,7 @@ EvtScript N(EVS_DropDoor_KootHouse) = {
 EvtScript N(EVS_RoomListener_KooperHouse) = {
     Switch(LVar0)
         CaseEq(ROOM_UPDATE_ENTER_BEGIN)
-            Set(AF_NOK_12, TRUE)
+            Set(AF_NOK_12, true)
             IfLt(GB_StoryProgress, STORY_CH1_PROMISED_TO_HELP_KOOPER)
                 ExecWait(N(EVS_Scene_MeetKooper))
                 Set(LVar0, ROOM_UPDATE_REQUEST_CANCEL)
@@ -220,11 +220,11 @@ EvtScript N(EVS_RoomListener_KooperHouse) = {
             Call(SetGroupVisibility, MODEL_g111, MODEL_GROUP_VISIBLE)
         CaseEq(ROOM_UPDATE_ENTER_DONE)
             Exec(N(EVS_FuzzyBoss_PlayerEntersKoopersHouse))
-            Set(AF_NOK_10, TRUE)
+            Set(AF_NOK_10, true)
         CaseEq(ROOM_UPDATE_EXIT_BEGIN)
-            Set(AF_NOK_10, FALSE)
+            Set(AF_NOK_10, false)
         CaseEq(ROOM_UPDATE_EXIT_END)
-            Set(AF_NOK_12, FALSE)
+            Set(AF_NOK_12, false)
             Call(SetGroupVisibility, MODEL_g111, MODEL_GROUP_HIDDEN)
     EndSwitch
     Return
@@ -312,7 +312,7 @@ EvtScript N(EVS_SetupRooms) = {
             MODEL_o271,
             NULL)
     Else
-        IfEq(GF_NOK11_Defeated_KentC, TRUE)
+        IfEq(GF_NOK11_Defeated_KentC, true)
             // kolorado house
             Call(CreateMapRoom,
                 PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),

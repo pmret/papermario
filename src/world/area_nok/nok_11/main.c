@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitWalk_mac_01_1) = {
     IfEq(GB_KootFavor_State, KOOT_FAVOR_STATE_2)
-        Set(GF_KootFavor_LeftKoopaArea, TRUE)
+        Set(GF_KootFavor_LeftKoopaArea, true)
     EndIf
     Call(UseExitHeading, 60, nok_11_ENTRY_0)
     Exec(ExitWalk)
@@ -81,18 +81,18 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_PLEASANT_PATH)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    Set(GF_MAP_PleasantPath, TRUE)
+    Set(GF_MAP_PleasantPath, true)
     IfEq(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
-        Call(MakeNpcs, FALSE, Ref(N(JrTroopaNPCs)))
+        Call(MakeNpcs, false, Ref(N(JrTroopaNPCs)))
     Else
         IfGe(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
-            IfEq(GF_NOK11_Defeated_KentC, FALSE)
-                Call(MakeNpcs, FALSE, Ref(N(KentCKoopaNPCs)))
+            IfEq(GF_NOK11_Defeated_KentC, false)
+                Call(MakeNpcs, false, Ref(N(KentCKoopaNPCs)))
             Else
-                Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+                Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
             EndIf
         Else
-            Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+            Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
         EndIf
     EndIf
     ExecWait(N(EVS_MakeEntities))

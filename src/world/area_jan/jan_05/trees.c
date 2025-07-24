@@ -6,9 +6,9 @@
 
 API_CALLABLE(N(func_8024268C_B4D0FC)) {
     if (get_enemy_safe(NPC_JungleFuzzy) == NULL) {
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
     } else {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
     return ApiStatus_DONE2;
 }

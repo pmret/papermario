@@ -206,7 +206,7 @@ s32 N(can_open_menus)(Npc* goombario) {
     s32 new_var;
 
     if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE) {
-        return FALSE;
+        return false;
     }
 
     if ((goombario->flags & (NPC_FLAG_GROUNDED | NPC_FLAG_JUMPING)) != NPC_FLAG_GROUNDED) {
@@ -214,7 +214,7 @@ s32 N(can_open_menus)(Npc* goombario) {
         do {} while (new_var); // why though
     }
 
-    return TRUE;
+    return true;
 }
 
 API_CALLABLE(N(SelectTattleMsg)) {
@@ -240,15 +240,15 @@ API_CALLABLE(N(SelectTattleMsg)) {
 
     if (isInitialCall) {
         N(try_cancel_tweester)(goombario);
-        N(IsTattleActive) = FALSE;
-        N(HadSpeechPrompt) = FALSE;
-        N(HadInteractPrompt) = FALSE;
+        N(IsTattleActive) = false;
+        N(HadSpeechPrompt) = false;
+        N(HadInteractPrompt) = false;
         if (playerStatus->animFlags & PA_FLAG_SPEECH_PROMPT_AVAILABLE) {
-            N(HadSpeechPrompt) = TRUE;
+            N(HadSpeechPrompt) = true;
             N(InteractNpc) = SpeechBubblePtr->encounteredNPC;
         }
         if (playerStatus->animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) {
-            N(HadInteractPrompt) = TRUE;
+            N(HadInteractPrompt) = true;
         }
         script->USE_STATE = USE_TATTLE_INIT;
     }
@@ -271,7 +271,7 @@ API_CALLABLE(N(SelectTattleMsg)) {
 #endif
             script->functionTemp[1] = 3;
             disable_player_input();
-            N(IsTattleActive) = TRUE;
+            N(IsTattleActive) = true;
             script->functionTemp[2] = playerStatus->inputDisabledCount;
             script->USE_STATE++;
             break;
@@ -282,7 +282,7 @@ API_CALLABLE(N(SelectTattleMsg)) {
                 if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
                     script->VAR_MSG = -1;
                     enable_player_input();
-                    N(IsTattleActive) = FALSE;
+                    N(IsTattleActive) = false;
                     return ApiStatus_DONE2;
                 }
                 script->USE_STATE = USE_TATTLE_FACE_PLAYER;
@@ -365,7 +365,7 @@ API_CALLABLE(N(SelectTattleMsg)) {
                     } else {
                         script->VAR_MSG = N(EntityTattles)[2 * i + 1];
                     }
-                    script->VAR_SKIP = FALSE;
+                    script->VAR_SKIP = false;
                     return ApiStatus_DONE2;
                 }
             }
@@ -380,7 +380,7 @@ API_CALLABLE(N(SelectTattleMsg)) {
                         script->VAR_MSG = ((s32(*)(void))msgID)();
                     } else {
                         script->VAR_MSG = msgID;
-                        script->VAR_SKIP = FALSE;
+                        script->VAR_SKIP = false;
                     }
                 }
                 return ApiStatus_DONE2;
@@ -389,7 +389,7 @@ API_CALLABLE(N(SelectTattleMsg)) {
             // generic interact tattle
             if (N(HadInteractPrompt)) {
                 script->VAR_MSG = MSG_EntityTattle_Interact;
-                script->VAR_SKIP = FALSE;
+                script->VAR_SKIP = false;
                 return ApiStatus_DONE2;
             }
 
@@ -408,12 +408,12 @@ API_CALLABLE(N(SelectTattleMsg)) {
                         script->VAR_MSG = ((s32(*)(void))msgID)();
                     } else {
                         script->VAR_MSG = msgID;
-                        script->VAR_SKIP = FALSE;
+                        script->VAR_SKIP = false;
                     }
                 }
             } else {
                 script->VAR_MSG = temp;
-                script->VAR_SKIP = TRUE;
+                script->VAR_SKIP = true;
             }
             return ApiStatus_DONE2;
     }
@@ -426,7 +426,7 @@ API_CALLABLE(N(SelectTattleMsg)) {
                     script->VAR_MSG = ((s32(*)(void))msgID)();
                 } else {
                     script->VAR_MSG = msgID;
-                    script->VAR_SKIP = FALSE;
+                    script->VAR_SKIP = false;
                 }
                 return ApiStatus_DONE2;
             }
@@ -435,7 +435,7 @@ API_CALLABLE(N(SelectTattleMsg)) {
             npcMsgID = get_enemy(N(InteractNpc)->npcID)->tattleMsg;
             if (npcMsgID != MSG_NONE) {
                 script->VAR_MSG = npcMsgID;
-                script->VAR_SKIP = FALSE;
+                script->VAR_SKIP = false;
                 return ApiStatus_DONE2;
             }
             break;
@@ -449,7 +449,7 @@ API_CALLABLE(N(TattleEnd)) {
     set_time_freeze_mode(TIME_FREEZE_NONE);
 
     if (N(IsTattleActive)) {
-        N(IsTattleActive) = FALSE;
+        N(IsTattleActive) = false;
         enable_player_input();
     }
 
@@ -469,8 +469,8 @@ EvtScript EVS_WorldGoombario_UseAbility = {
         Call(N(TattleEnd))
         Return
     EndIf
-    // show message if VAR_SKIP is FALSE
-    IfEq(LVar1, FALSE)
+    // show message if VAR_SKIP is false
+    IfEq(LVar1, false)
         Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, LVar0)
     EndIf
     Wait(1)

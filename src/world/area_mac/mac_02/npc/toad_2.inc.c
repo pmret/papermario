@@ -9,7 +9,7 @@ EvtScript N(EVS_NpcInteract_Toad_02) = {
             Set(LVar0, MSG_MAC_Bridge_009D)
 #endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Bridge_0057)
             Else
                 Set(LVar0, MSG_MAC_Bridge_0058)

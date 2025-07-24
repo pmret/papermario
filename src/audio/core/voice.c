@@ -9,7 +9,7 @@ void au_flush_finished_voices(AuGlobals* globals) {
 
         if (voice->donePending) {
             au_syn_stop_voice(i);
-            voice->donePending = FALSE;
+            voice->donePending = false;
             voice->cmdPtr = NULL;
             voice->priority = AU_PRIORITY_FREE;
         }
@@ -29,7 +29,7 @@ void au_init_voices(AuGlobals* globals) {
         voice->envIntervalIndex = 0;
         voice->unused_3C = 0;
         voice->envelopeFlags = 0;
-        voice->isRelativeRelease = FALSE;
+        voice->isRelativeRelease = false;
         voice->envRelativeStart = ENV_VOL_MAX;
     }
 }
@@ -74,7 +74,7 @@ void au_update_voices(AuGlobals* globals) {
             if (*(s8*)voice->cmdPtr++ < 0) {
                 // in this case release volumes are relative to last press volume
                 temp &= 0x7F;
-                voice->isRelativeRelease = TRUE;
+                voice->isRelativeRelease = true;
                 voice->envRelativeStart = voice->envInitial;
             }
             voice->envTarget = temp;
@@ -113,7 +113,7 @@ void au_update_voices(AuGlobals* globals) {
                             // if we reached the end after key release, stop the voice completely
                             voice->envelopeFlags = 0;
                             voice->cmdPtr = NULL;
-                            voice->donePending = TRUE;
+                            voice->donePending = true;
                         } else {
                             // we reached the end of press cmdlist, keep the last volume until the key is released
                             voice->envTimeLeft = -1;
@@ -208,7 +208,7 @@ void au_voice_start(AuVoice* voice, EnvelopeData* envData) {
     } else {
         voice->envDelta = 0.0f;
     }
-    voice->isRelativeRelease = FALSE;
+    voice->isRelativeRelease = false;
     voice->envRelativeStart = ENV_VOL_MAX;
 }
 
@@ -216,7 +216,7 @@ u8 au_voice_step(AuVoice* voice) {
     u32 op;
     u8 arg;
 
-    while (TRUE) {
+    while (true) {
         if ((s8)(op = *voice->cmdPtr++) >= 0) {
             break;
         }

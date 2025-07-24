@@ -131,14 +131,14 @@ EvtScript N(EVS_ReturnHome) = {
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Run)
     Call(SetGoalToHome, ACTOR_SELF)
     Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Idle)
     Return
     End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -227,7 +227,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -255,12 +255,12 @@ EvtScript N(EVS_AddWalkQuakeFX) = {
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     ExecGetTID(N(EVS_AddWalkQuakeFX), LVar9)
     Thread
         Loop(3)
@@ -280,7 +280,7 @@ EvtScript N(EVS_TakeTurn) = {
                 Call(SetGoalToTarget, ACTOR_SELF)
                 Call(AddGoalPos, ACTOR_SELF, -100, 0, 0)
                 Call(SetActorSpeed, ACTOR_SELF, Float(12.0))
-                Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+                Call(RunToGoal, ACTOR_SELF, 0, false)
                 KillThread(LVar9)
             EndThread
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -297,7 +297,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -309,7 +309,7 @@ EvtScript N(EVS_TakeTurn) = {
         Call(AddGoalPos, ACTOR_SELF, 30, 0, 0)
     EndIf
     Call(SetActorSpeed, ACTOR_SELF, Float(12.0))
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Thread
         Call(ShakeCam, CAM_BATTLE, 0, 4, Float(1.5))
     EndThread
@@ -326,7 +326,7 @@ EvtScript N(EVS_TakeTurn) = {
             Add(LVar0, 40)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_ALBINO_DINO_STEP_B)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Idle)
             Call(ShakeCam, CAM_BATTLE, 0, 3, Float(1.0))
@@ -336,7 +336,7 @@ EvtScript N(EVS_TakeTurn) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

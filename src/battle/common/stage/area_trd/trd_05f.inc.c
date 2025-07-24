@@ -10,14 +10,14 @@ EvtScript N(EVS_PreBattle) = {
     Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     Set(LVar0, MODEL_o318)
     Exec(N(EVS_AnimateWave))
-    Call(EnableModel, MODEL_mizu1, FALSE)
-    Call(EnableModel, MODEL_mizu2, FALSE)
-    Call(EnableModel, MODEL_mizu3, FALSE)
-    Call(EnableModel, MODEL_ori, FALSE)
-    Call(EnableModel, MODEL_saku1, FALSE)
-    Call(EnableModel, MODEL_saku2, FALSE)
-    Call(EnableModel, MODEL_mizu4, FALSE)
-    Call(EnableModel, MODEL_hako, FALSE)
+    Call(EnableModel, MODEL_mizu1, false)
+    Call(EnableModel, MODEL_mizu2, false)
+    Call(EnableModel, MODEL_mizu3, false)
+    Call(EnableModel, MODEL_ori, false)
+    Call(EnableModel, MODEL_saku1, false)
+    Call(EnableModel, MODEL_saku2, false)
+    Call(EnableModel, MODEL_mizu4, false)
+    Call(EnableModel, MODEL_hako, false)
     Return
     End
 };

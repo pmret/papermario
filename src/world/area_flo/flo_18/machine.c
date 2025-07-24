@@ -52,7 +52,7 @@ EvtScript N(EVS_AnimateMachineLightning) = {
 #include "common/CosInterpMinMax.inc.c"
 
 EvtScript N(EVS_UpdateSmokeParticle) = {
-    Call(EnableModel, LVarF, TRUE)
+    Call(EnableModel, LVarF, true)
     Set(LVarE, 159)
     Loop(LVarE)
         AddF(LVar3, 0)
@@ -76,7 +76,7 @@ EvtScript N(EVS_UpdateSmokeParticle) = {
         Call(RotateModel, LVarF, LVarA, 0, 0, 1)
         Wait(1)
     EndLoop
-    Call(EnableModel, LVarF, FALSE)
+    Call(EnableModel, LVarF, false)
     Return
     End
 };
@@ -111,10 +111,10 @@ EvtScript N(EVS_ManageSmoke) = {
 };
 
 EvtScript N(EVS_ShakeMachine) = {
-    IfEq(MF_MachineShaking, TRUE)
+    IfEq(MF_MachineShaking, true)
         Return
     EndIf
-    Set(MF_MachineShaking, TRUE)
+    Set(MF_MachineShaking, true)
     Set(LVarF, 0)
     Loop(12)
         Call(RandInt, 80, LVar0)
@@ -239,7 +239,7 @@ EvtScript N(EVS_ShakeMachine) = {
     Call(ScaleModel, MODEL_o91, LVar0, LVar1, LVar2)
     Call(ScaleModel, MODEL_o114, LVar0, LVar1, LVar2)
     Wait(1)
-    Set(MF_MachineShaking, FALSE)
+    Set(MF_MachineShaking, false)
     Return
     End
 };
@@ -511,14 +511,14 @@ EvtScript N(EVS_DamageMachine) = {
     ExecWait(N(EVS_ShakeMachine))
     Set(LVar0, LVarA)
     IfLt(GB_StoryProgress, STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS)
-        Set(MF_HitGuardedMachine, TRUE)
+        Set(MF_HitGuardedMachine, true)
         Return
     EndIf
-    IfEq(MF_MachineBeingDamaged, TRUE)
+    IfEq(MF_MachineBeingDamaged, true)
         Return
     EndIf
     // check damage type
-    Set(MF_MachineBeingDamaged, TRUE)
+    Set(MF_MachineBeingDamaged, true)
     IfGt(LVar0, DAMAGE_PART_PROTRUSTIONS)
         Goto(LABEL_DONE)
     EndIf
@@ -557,11 +557,11 @@ EvtScript N(EVS_DamageMachine) = {
     // check if machine is fully broken (2 damage to each side)
     IfEq(GB_FLO18_MachineDamage_Left, 2)
         IfEq(GB_FLO18_MachineDamage_Right, 2)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(UseSettingsFrom, CAM_DEFAULT, 40, 0, 0)
             Call(SetPanTarget, CAM_DEFAULT, 40, 0, 0)
             Call(SetCamSpeed, CAM_DEFAULT, Float(1.5))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Set(GB_FLO18_MachineDamage_Right, 3)
             ExecWait(N(EVS_ShakeMachine))
             ExecWait(N(EVS_ShakeMachine))
@@ -608,7 +608,7 @@ EvtScript N(EVS_DamageMachine) = {
             ExecWait(N(EVS_BreakSmokestack))
             Call(PlaySoundAtCollider, COLLIDER_o126, SOUND_LRAW_PUFF_PUFF_MACHINE | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_DEFAULT)
             Call(FadeOutMusic, 0, 1000)
-            Call(DisablePlayerPhysics, TRUE)
+            Call(DisablePlayerPhysics, true)
             Wait(30)
             ExecWait(N(EVS_BreakAntenna))
             Set(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
@@ -618,7 +618,7 @@ EvtScript N(EVS_DamageMachine) = {
         EndIf
     EndIf
     Label(LABEL_DONE)
-    Set(MF_MachineBeingDamaged, FALSE)
+    Set(MF_MachineBeingDamaged, false)
     Return
     End
 };
@@ -645,49 +645,49 @@ BombTrigger N(Machine_BombTrigger_04) = {
 
 EvtScript N(EVS_SetupMachine) = {
     IfGe(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-        Call(EnableModel, MODEL_o101, FALSE)
+        Call(EnableModel, MODEL_o101, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
-        Call(EnableModel, MODEL_o115, FALSE)
-        Call(EnableModel, MODEL_o116, FALSE)
-        Call(EnableModel, MODEL_o117, FALSE)
-        Call(EnableModel, MODEL_o118, FALSE)
-        Call(EnableModel, MODEL_o119, FALSE)
-        Call(EnableModel, MODEL_o120, FALSE)
-        Call(EnableModel, MODEL_o121, FALSE)
-        Call(EnableModel, MODEL_o122, FALSE)
-        Call(EnableModel, MODEL_o123, FALSE)
-        Call(EnableModel, MODEL_o124, FALSE)
-        Call(EnableModel, MODEL_o100, FALSE)
-        Call(EnableModel, MODEL_o99, FALSE)
-        Call(EnableModel, MODEL_o125, FALSE)
+        Call(EnableModel, MODEL_o115, false)
+        Call(EnableModel, MODEL_o116, false)
+        Call(EnableModel, MODEL_o117, false)
+        Call(EnableModel, MODEL_o118, false)
+        Call(EnableModel, MODEL_o119, false)
+        Call(EnableModel, MODEL_o120, false)
+        Call(EnableModel, MODEL_o121, false)
+        Call(EnableModel, MODEL_o122, false)
+        Call(EnableModel, MODEL_o123, false)
+        Call(EnableModel, MODEL_o124, false)
+        Call(EnableModel, MODEL_o100, false)
+        Call(EnableModel, MODEL_o99, false)
+        Call(EnableModel, MODEL_o125, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o131, COLLIDER_FLAGS_UPPER_MASK)
         Return
     EndIf
     Exec(N(EVS_AnimateMachineLightning))
-    Call(EnableModel, MODEL_o101, FALSE)
+    Call(EnableModel, MODEL_o101, false)
     IfGe(GB_FLO18_MachineDamage_Left, 1)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
-        Call(EnableModel, MODEL_o115, FALSE)
-        Call(EnableModel, MODEL_o116, FALSE)
+        Call(EnableModel, MODEL_o115, false)
+        Call(EnableModel, MODEL_o116, false)
     EndIf
     IfGe(GB_FLO18_MachineDamage_Right, 1)
-        Call(EnableModel, MODEL_o117, FALSE)
-        Call(EnableModel, MODEL_o118, FALSE)
+        Call(EnableModel, MODEL_o117, false)
+        Call(EnableModel, MODEL_o118, false)
     EndIf
     IfGe(GB_FLO18_MachineDamage_Left, 2)
-        Call(EnableModel, MODEL_o119, FALSE)
+        Call(EnableModel, MODEL_o119, false)
     EndIf
     IfGe(GB_FLO18_MachineDamage_Right, 2)
-        Call(EnableModel, MODEL_o120, FALSE)
-        Call(EnableModel, MODEL_o121, FALSE)
-        Call(EnableModel, MODEL_o122, FALSE)
-        Call(EnableModel, MODEL_o123, FALSE)
-        Call(EnableModel, MODEL_o124, FALSE)
+        Call(EnableModel, MODEL_o120, false)
+        Call(EnableModel, MODEL_o121, false)
+        Call(EnableModel, MODEL_o122, false)
+        Call(EnableModel, MODEL_o123, false)
+        Call(EnableModel, MODEL_o124, false)
     EndIf
     IfGe(GB_FLO18_MachineDamage_Right, 3)
-        Call(EnableModel, MODEL_o100, FALSE)
-        Call(EnableModel, MODEL_o99, FALSE)
-        Call(EnableModel, MODEL_o125, FALSE)
+        Call(EnableModel, MODEL_o100, false)
+        Call(EnableModel, MODEL_o99, false)
+        Call(EnableModel, MODEL_o125, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o131, COLLIDER_FLAGS_UPPER_MASK)
         Return
     EndIf
@@ -709,15 +709,15 @@ EvtScript N(EVS_SetupMachine) = {
         Add(LVar1, CLONED_MODEL(0))
         Add(LVar0, 1)
         Call(CloneModel, MODEL_o101, LVar1)
-        Call(EnableModel, LVar1, FALSE)
+        Call(EnableModel, LVar1, false)
     EndLoop
     Exec(N(EVS_ManageSmoke))
-    Call(EnableTexPanning, MODEL_o92, TRUE)
-    Call(EnableTexPanning, MODEL_o93, TRUE)
-    Call(EnableTexPanning, MODEL_o94, TRUE)
-    Call(EnableTexPanning, MODEL_o95, TRUE)
-    Call(EnableTexPanning, MODEL_o91, TRUE)
-    Call(EnableTexPanning, MODEL_o99, TRUE)
+    Call(EnableTexPanning, MODEL_o92, true)
+    Call(EnableTexPanning, MODEL_o93, true)
+    Call(EnableTexPanning, MODEL_o94, true)
+    Call(EnableTexPanning, MODEL_o95, true)
+    Call(EnableTexPanning, MODEL_o91, true)
+    Call(EnableTexPanning, MODEL_o99, true)
     Thread
         SetF(LVarE, Float(1.0))
         Label(0)

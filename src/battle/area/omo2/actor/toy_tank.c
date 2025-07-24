@@ -170,15 +170,15 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_ShouldTetherGeneral, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_ShouldTetherGeneral, true)
     Call(SetActorVar, ACTOR_SELF, AVAR_Tank_SquadPhase, AVAL_SquadPhase_Init)
     Call(SetActorVar, ACTOR_SELF, AVAR_Tank_StiltPhase, AVAL_StiltPhase_Init)
     Call(SetActorVar, ACTOR_SELF, AVAR_Tank_StackPhase, AVAL_StackPhase_Init)
     Call(SetActorVar, ACTOR_SELF, AVAR_Tank_UnusedPhase, AVAL_UnusedPhase_Init)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_UsingBulbAttack, TRUE)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_ModulateDarkness, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_UsingBulbAttack, true)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_ModulateDarkness, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_Tank_DarknessAmt, 0)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_HandlingEvent, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_HandlingEvent, false)
     Call(SetActorDispOffset, ACTOR_GENERAL, 0, 7, 0)
     Call(SetActorPos, ACTOR_SELF, 85, 0, 0)
     Call(SetHomePos, ACTOR_SELF, 85, 0, 0)
@@ -187,9 +187,9 @@ EvtScript N(EVS_Init) = {
     Call(SetPartPos, ACTOR_SELF, PRT_3, 80, 0, 0)
     Call(LoadAnimatedModel, 0, Ref(toy_tank_model))
     Call(PlayModelAnimation, 0, Ref(AS_ToyTank_Idle))
-    Call(EnableModel, MODEL_shy, FALSE)
+    Call(EnableModel, MODEL_shy, false)
     Call(SetAnimatedModelRootPosition, 0, 200, 0, 0)
-    Call(SetPartTargetFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_TARGET_NO_JUMP, TRUE)
+    Call(SetPartTargetFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_TARGET_NO_JUMP, true)
     Call(GetModelCenter, MODEL_kyu3)
     PlayEffect(EFFECT_BULB_GLOW, 2, LVar0, LVar1, LVar2, Float(1.0), LVar5, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_Tank_BulbGlowEffect, LVar5)
@@ -239,15 +239,15 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_HandlingEvent, TRUE)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_HandlingEvent, true)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
         CaseEq(EVENT_HIT_COMBO)
             ExecWait(N(EVS_Hit))
             Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
             Call(SetEnemyTargetOffset, ACTOR_SELF, PRT_2, 0, 35)
-            Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
             Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
             Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
         CaseOrEq(EVENT_HIT)
@@ -255,7 +255,7 @@ EvtScript N(EVS_HandleEvent) = {
             ExecWait(N(EVS_Hit))
             Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
             Call(SetEnemyTargetOffset, ACTOR_SELF, PRT_2, 0, 35)
-            Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
             Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
             Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
         EndCaseGroup
@@ -263,7 +263,7 @@ EvtScript N(EVS_HandleEvent) = {
             ExecWait(N(EVS_Hit))
             Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
             Call(SetEnemyTargetOffset, ACTOR_SELF, PRT_2, 0, 35)
-            Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
             Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
             Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
         CaseEq(EVENT_ZERO_DAMAGE)
@@ -294,8 +294,8 @@ EvtScript N(EVS_HandleEvent) = {
         CaseEq(EVENT_END_FIRST_STRIKE)
         CaseDefault
     EndSwitch
-    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_HandlingEvent, FALSE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_HandlingEvent, false)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -306,9 +306,9 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 EvtScript N(EVS_Hit) = {
-    Call(UseIdleAnimation, ACTOR_GENERAL, FALSE)
+    Call(UseIdleAnimation, ACTOR_GENERAL, false)
     Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim05)
-    Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(SetEnemyTargetOffset, ACTOR_SELF, PRT_2, 0, 50)
     ExecWait(N(EVS_ShakeTank))
     Call(GetActorVar, ACTOR_GENERAL, AVAR_General_Flags, LVar0)
@@ -356,7 +356,7 @@ EvtScript N(EVS_Hit) = {
                 Call(MoveBattleCamOver, 30)
             EndIf
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_GENERAL, TRUE)
+    Call(UseIdleAnimation, ACTOR_GENERAL, true)
     Return
     End
 };
@@ -378,7 +378,7 @@ EvtScript N(EVS_ManageTroopWaves) = {
     // monitor the shy squad phase, waiting for them to be defeated
     Label(LBL_SQUAD_PHASE)
         Call(ActorExists, ACTOR_TANK, LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             Goto(LBL_DONE)
         EndIf
         Call(GetActorVar, ACTOR_SELF, AVAR_Tank_SquadPhase, LVar0)
@@ -394,7 +394,7 @@ EvtScript N(EVS_ManageTroopWaves) = {
     // monitor the stilt guys phase, waiting for them to be defeated
     Label(LBL_PHASE_STILT)
         Call(ActorExists, ACTOR_TANK, LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             Goto(LBL_DONE)
         EndIf
         Call(GetActorVar, ACTOR_SELF, AVAR_Tank_StiltPhase, LVar0)
@@ -410,7 +410,7 @@ EvtScript N(EVS_ManageTroopWaves) = {
     // monitor the shy stacks phase, waiting for them to be defeated
     Label(LBL_PHASE_STACK)
         Call(ActorExists, ACTOR_TANK, LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             Goto(LBL_DONE)
         EndIf
         Call(GetActorVar, ACTOR_SELF, AVAR_Tank_StackPhase, LVar0)
@@ -429,7 +429,7 @@ EvtScript N(EVS_ManageTroopWaves) = {
     // a second stilt phase? but nothing is summoned and AVAR_Tank_StiltPhase == AVAL_StiltPhase_Defeated
     Label(LBL_PHASE_BROKEN)
         Call(ActorExists, ACTOR_TANK, LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             Goto(LBL_DONE)
         EndIf
         Call(GetActorVar, ACTOR_SELF, AVAR_Tank_StiltPhase, LVar0)
@@ -459,7 +459,7 @@ EvtScript N(EVS_ManageTroopWaves) = {
     // monitor the shy stacks phase, waiting for them to be defeated
     Label(LBL_PHASE_UNUSED)
         Call(ActorExists, ACTOR_TANK, LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             Goto(LBL_DONE)
         EndIf
         Call(GetActorVar, ACTOR_SELF, AVAR_Tank_UnusedPhase, LVar0)
@@ -491,7 +491,7 @@ EvtScript N(EVS_IncrementWavesDefeated) = {
 };
 
 EvtScript N(EVS_BeginWave_StiltGuys) = {
-    Call(EnableBattleStatusBar, FALSE)
+    Call(EnableBattleStatusBar, false)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 30)
     Wait(30)
@@ -502,7 +502,7 @@ EvtScript N(EVS_BeginWave_StiltGuys) = {
         Call(ActorSpeak, MSG_CH4_006A, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim0C, ANIM_GeneralGuy_Anim02)
     EndIf
     Call(LoadBattleSection, BTL_AREA_OMO2_4)
-    Call(SummonEnemy, Ref(N(SignalGuyFormation)), TRUE)
+    Call(SummonEnemy, Ref(N(SignalGuyFormation)), true)
     Wait(60)
     Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_MOVE1)
     Wait(5)
@@ -530,14 +530,14 @@ EvtScript N(EVS_BeginWave_StiltGuys) = {
     Call(HPBarToHome, ACTOR_GENERAL)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 30)
-    Call(EnableBattleStatusBar, TRUE)
-    Call(FreezeBattleState, FALSE)
+    Call(EnableBattleStatusBar, true)
+    Call(FreezeBattleState, false)
     Return
     End
 };
 
 EvtScript N(EVS_BeginWave_ShyStacks) = {
-    Call(EnableBattleStatusBar, FALSE)
+    Call(EnableBattleStatusBar, false)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_GENERAL)
     Call(MoveBattleCamOver, 40)
@@ -551,9 +551,9 @@ EvtScript N(EVS_BeginWave_ShyStacks) = {
     Call(MoveBattleCamOver, 30)
     Wait(10)
     Call(LoadBattleSection, BTL_AREA_OMO2_3)
-    Call(SummonEnemy, Ref(N(LeftShyStackFormation)), TRUE)
+    Call(SummonEnemy, Ref(N(LeftShyStackFormation)), true)
     Wait(124)
-    Call(SummonEnemy, Ref(N(RightShyStackFormation)), TRUE)
+    Call(SummonEnemy, Ref(N(RightShyStackFormation)), true)
     Wait(114)
     Call(PlayModelAnimation, 0, Ref(AS_ToyTank_Idle))
     Label(0)
@@ -574,8 +574,8 @@ EvtScript N(EVS_BeginWave_ShyStacks) = {
         Call(GetActorPos, ACTOR_WAVE_A, LVar0, LVar1, LVar2)
         Call(SetActorJumpGravity, ACTOR_WAVE_A, Float(1.5))
         Call(SetGoalPos, ACTOR_WAVE_A, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_WAVE_A, 10, FALSE, TRUE, FALSE)
-        Call(UseIdleAnimation, ACTOR_WAVE_A, FALSE)
+        Call(JumpToGoal, ACTOR_WAVE_A, 10, false, true, false)
+        Call(UseIdleAnimation, ACTOR_WAVE_A, false)
         Call(SetPartScale, ACTOR_WAVE_A, PRT_MAIN, Float(1.1), Float(0.9), Float(1.0))
         Wait(1)
         Call(SetPartScale, ACTOR_WAVE_A, PRT_MAIN, Float(1.2), Float(0.8), Float(1.0))
@@ -583,14 +583,14 @@ EvtScript N(EVS_BeginWave_ShyStacks) = {
         Call(SetPartScale, ACTOR_WAVE_A, PRT_MAIN, Float(1.1), Float(0.9), Float(1.0))
         Wait(1)
         Call(SetPartScale, ACTOR_WAVE_A, PRT_MAIN, Float(1.0), Float(1.0), Float(1.0))
-        Call(UseIdleAnimation, ACTOR_WAVE_A, TRUE)
+        Call(UseIdleAnimation, ACTOR_WAVE_A, true)
     EndThread
     Thread
         Call(GetActorPos, ACTOR_WAVE_B, LVar0, LVar1, LVar2)
         Call(SetActorJumpGravity, ACTOR_WAVE_B, Float(1.5))
         Call(SetGoalPos, ACTOR_WAVE_B, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_WAVE_B, 10, FALSE, TRUE, FALSE)
-        Call(UseIdleAnimation, ACTOR_WAVE_B, FALSE)
+        Call(JumpToGoal, ACTOR_WAVE_B, 10, false, true, false)
+        Call(UseIdleAnimation, ACTOR_WAVE_B, false)
         Call(SetPartScale, ACTOR_WAVE_B, PRT_MAIN, Float(1.1), Float(0.9), Float(1.0))
         Wait(1)
         Call(SetPartScale, ACTOR_WAVE_B, PRT_MAIN, Float(1.2), Float(0.8), Float(1.0))
@@ -598,14 +598,14 @@ EvtScript N(EVS_BeginWave_ShyStacks) = {
         Call(SetPartScale, ACTOR_WAVE_B, PRT_MAIN, Float(1.1), Float(0.9), Float(1.0))
         Wait(1)
         Call(SetPartScale, ACTOR_WAVE_B, PRT_MAIN, Float(1.0), Float(1.0), Float(1.0))
-        Call(UseIdleAnimation, ACTOR_WAVE_B, TRUE)
+        Call(UseIdleAnimation, ACTOR_WAVE_B, true)
     EndThread
     Call(ActorSpeak, MSG_CH4_0070, ACTOR_WAVE_B, PRT_MAIN, -1, -1)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 30)
     Wait(30)
-    Call(EnableBattleStatusBar, TRUE)
-    Call(FreezeBattleState, FALSE)
+    Call(EnableBattleStatusBar, true)
+    Call(FreezeBattleState, false)
     Return
     End
 };
@@ -615,7 +615,7 @@ EvtScript N(EVS_SummonStiltGuys) = {
     Call(BattleCamTargetActor, ACTOR_GENERAL)
     Call(MoveBattleCamOver, 40)
     Wait(40)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_AVG, false)
     Call(GetActorVar, ACTOR_GENERAL, AVAR_General_WavesDefeated, LVar0)
     IfEq(LVar0, 1)
         Call(ActorSpeak, MSG_CH4_006B, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim0C, ANIM_GeneralGuy_Anim02)
@@ -625,9 +625,9 @@ EvtScript N(EVS_SummonStiltGuys) = {
     Call(MoveBattleCamOver, 30)
     Wait(10)
     Call(LoadBattleSection, BTL_AREA_OMO2_2)
-    Call(SummonEnemy, Ref(N(LeftStiltGuyFormation)), TRUE)
+    Call(SummonEnemy, Ref(N(LeftStiltGuyFormation)), true)
     Wait(60)
-    Call(SummonEnemy, Ref(N(RightStiltGuyFormation)), TRUE)
+    Call(SummonEnemy, Ref(N(RightStiltGuyFormation)), true)
     Wait(60)
     Label(1)
         Call(GetActorVar, ACTOR_SELF, AVAR_Tank_SquadPhase, LVar0)
@@ -646,18 +646,18 @@ EvtScript N(EVS_SummonStiltGuys) = {
         Call(GetActorPos, ACTOR_WAVE_A, LVar0, LVar1, LVar2)
         Call(SetActorJumpGravity, ACTOR_WAVE_A, Float(1.5))
         Call(SetGoalPos, ACTOR_WAVE_A, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_WAVE_A, 10, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_WAVE_A, 10, false, true, false)
     EndThread
     Thread
         Call(GetActorPos, ACTOR_WAVE_B, LVar0, LVar1, LVar2)
         Call(SetActorJumpGravity, ACTOR_WAVE_B, Float(1.5))
         Call(SetGoalPos, ACTOR_WAVE_B, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_WAVE_B, 10, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_WAVE_B, 10, false, true, false)
     EndThread
     Call(ActorSpeak, MSG_CH4_006D, ACTOR_WAVE_B, PRT_MAIN, -1, -1)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 30)
-    Call(FreezeBattleState, FALSE)
+    Call(FreezeBattleState, false)
     Return
     End
 };
@@ -669,17 +669,17 @@ EvtScript N(EVS_BeginWave_ShySquadRedux) = {
     Wait(30)
     Call(SetActorYaw, ACTOR_GENERAL, 180)
     Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim03)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_UsingBulbAttack, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_UsingBulbAttack, false)
     Wait(10)
     Call(SetDarknessMode, BTL_DARKNESS_MODE_1)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_ModulateDarkness, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_ModulateDarkness, true)
     Exec(N(EVS_ManageDarkness))
     Wait(30)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_GENERAL)
     Call(MoveBattleCamOver, 40)
     Wait(20)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_AVG, false)
     Call(EndActorSpeech, ACTOR_GENERAL, PRT_MAIN, -1, -1)
     Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
     Call(SetActorYaw, ACTOR_GENERAL, 0)
@@ -689,7 +689,7 @@ EvtScript N(EVS_BeginWave_ShySquadRedux) = {
     Wait(30)
     Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
     Call(LoadBattleSection, BTL_AREA_OMO2_5)
-    Call(SummonEnemy, Ref(N(ShySquadReduxFormation)), TRUE)
+    Call(SummonEnemy, Ref(N(ShySquadReduxFormation)), true)
     Wait(155)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(SetBattleCamDist, 350)
@@ -729,13 +729,13 @@ EvtScript N(EVS_BeginWave_ShySquadRedux) = {
         Call(SetAnimation, ACTOR_WAVE_A, LVar0, ANIM_TankGuy_Anim01)
         Add(LVar0, 1)
     EndLoop
-    Call(FreezeBattleState, FALSE)
+    Call(FreezeBattleState, false)
     Return
     End
 };
 
 EvtScript N(EVS_BeginWave_Tank) = {
-    Call(EnableBattleStatusBar, FALSE)
+    Call(EnableBattleStatusBar, false)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_GENERAL)
     Call(MoveBattleCamOver, 60)
@@ -743,21 +743,21 @@ EvtScript N(EVS_BeginWave_Tank) = {
     Call(ActorSpeak, MSG_CH4_0071, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim00, ANIM_GeneralGuy_Anim00)
     Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim05)
     Call(EndActorSpeech, ACTOR_GENERAL, PRT_MAIN, -1, -1)
-    Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_NO_STATUS_ANIMS, FALSE)
-    Call(SetPartFlagBits, ACTOR_BULB, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    Call(SetPartFlagBits, ACTOR_TANK, PRT_2, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    Call(SetActorFlagBits, ACTOR_TANK, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
+    Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_NO_STATUS_ANIMS, false)
+    Call(SetPartFlagBits, ACTOR_BULB, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, false)
+    Call(SetPartFlagBits, ACTOR_TANK, PRT_2, ACTOR_PART_FLAG_NO_TARGET, false)
+    Call(SetActorFlagBits, ACTOR_TANK, ACTOR_FLAG_NO_HEALTH_BAR, false)
     Call(HPBarToHome, ACTOR_TANK)
-    Call(SetActorVar, ACTOR_GENERAL, AVAR_General_DoingTankPhase, TRUE)
+    Call(SetActorVar, ACTOR_GENERAL, AVAR_General_DoingTankPhase, true)
     Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
     Call(SetEnemyTargetOffset, ACTOR_SELF, PRT_2, 0, 35)
-    Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
     Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
     Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 30)
-    Call(EnableBattleStatusBar, TRUE)
-    Call(FreezeBattleState, FALSE)
+    Call(EnableBattleStatusBar, true)
+    Call(FreezeBattleState, false)
     Return
     End
 };
@@ -770,15 +770,15 @@ EvtScript N(EVS_Death) = {
     IfNe(LVar0, NULL)
         Call(RemoveEffect, LVar0)
         Call(SetActorVar, ACTOR_SELF, AVAR_Tank_BulbGlowEffect, NULL)
-        Call(SetActorVar, ACTOR_SELF, AVAR_Tank_UsingBulbAttack, FALSE)
+        Call(SetActorVar, ACTOR_SELF, AVAR_Tank_UsingBulbAttack, false)
     EndIf
     Wait(45)
     Wait(10)
-    Call(UseIdleAnimation, ACTOR_GENERAL, FALSE)
+    Call(UseIdleAnimation, ACTOR_GENERAL, false)
     Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim05)
     Wait(15)
     PlayEffect(EFFECT_EXPLOSION, 2, 102, 40, 0, 0)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_ShouldTetherGeneral, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Tank_ShouldTetherGeneral, false)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_GENERAL)
     Call(MoveBattleCamOver, 60)
@@ -793,7 +793,7 @@ EvtScript N(EVS_Death) = {
         Call(SetAnimatedModelRootPosition, 0, 380, 0, 0)
     EndThread
     Call(SetGoalPos, ACTOR_GENERAL, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_GENERAL, 50, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_GENERAL, 50, false, true, false)
     Call(PlaySoundAtActor, ACTOR_GENERAL, SOUND_ACTOR_COLLAPSE)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 30)
@@ -807,7 +807,7 @@ EvtScript N(EVS_Death) = {
     Call(SetActorJumpGravity, ACTOR_GENERAL, Float(1.0))
     Call(GetActorPos, ACTOR_GENERAL, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_GENERAL, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_GENERAL, 12, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_GENERAL, 12, false, true, false)
     Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim07)
     Call(ShakeCam, CAM_BATTLE, 0, 6, Float(1.0))
     Call(GetActorPos, ACTOR_GENERAL, LVar0, LVar1, LVar2)
@@ -819,10 +819,10 @@ EvtScript N(EVS_Death) = {
     Wait(30)
     Call(RemoveEffect, LVarF)
     Call(ActorExists, ACTOR_BULB, LVar0)
-    IfNe(LVar0, FALSE)
-        Call(SetActorFlagBits, ACTOR_BULB, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+    IfNe(LVar0, false)
+        Call(SetActorFlagBits, ACTOR_BULB, ACTOR_FLAG_NO_DMG_APPLY, true)
     EndIf
-    Call(SetActorFlagBits, ACTOR_GENERAL, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+    Call(SetActorFlagBits, ACTOR_GENERAL, ACTOR_FLAG_NO_DMG_APPLY, true)
     Call(RemoveActor, ACTOR_SELF)
     Return
     End
@@ -831,7 +831,7 @@ EvtScript N(EVS_Death) = {
 EvtScript N(EVS_ManageDarkness) = {
     Label(0)
         Call(ActorExists, ACTOR_SELF, LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             Return
         EndIf
         Call(GetDarknessStatus, LVar0, LVar1)

@@ -24,7 +24,7 @@ EvtScript N(EVS_UnlockPrompt_FrontDoor) = {
     Call(N(RemovePadlock))
     Wait(5)
     Call(RemoveKeyItemAt, LVar1)
-    Set(GF_KKJ10_UnlockedDoor, TRUE)
+    Set(GF_KKJ10_UnlockedDoor, true)
     Call(CloseChoicePopup)
     Unbind
     BindTrigger(Ref(N(EVS_ExitDoors_osr_02_1)), TRIGGER_WALL_PRESS_A, COLLIDER_tts, 1, 0)
@@ -34,7 +34,7 @@ EvtScript N(EVS_UnlockPrompt_FrontDoor) = {
 
 EvtScript N(EVS_MakeEntities) = {
     IfLe(GB_StoryProgress, STORY_CH6_BEGAN_PEACH_MISSION)
-        IfEq(GF_KKJ10_UnlockedDoor, FALSE)
+        IfEq(GF_KKJ10_UnlockedDoor, false)
             Call(MakeEntity, Ref(Entity_Padlock), 0, 10, 490, 180, MAKE_ENTITY_END)
             Set(MV_PadlockEntityIdx, LVar0)
             BindPadlock(Ref(N(EVS_UnlockPrompt_FrontDoor)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), Ref(N(PeachKeyList)), 0, 1)

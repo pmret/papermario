@@ -36,7 +36,7 @@ NpcSettings N(NpcSettings_PiranhaPlant) = {
 };
 
 EvtScript N(EVS_NpcAI_PiranhaPlant_Hitbox) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetSelfVar, 0, 10)
     Call(SetSelfVar, 1, 18)
     Call(SetSelfVar, 4, 3)

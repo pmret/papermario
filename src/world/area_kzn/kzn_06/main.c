@@ -53,7 +53,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     Call(SetSpriteShading, SHADING_KZN_06)
     EVT_SETUP_CAMERA_DEFAULT()
-    Set(GF_KZN06_Visited, TRUE)
+    Set(GF_KZN06_Visited, true)
     ExecWait(N(EVS_MakeEntities))
     Call(SetMusic, 0, SONG_MT_LAVALAVA, 0, VOL_LEVEL_FULL)
     IfLt(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)

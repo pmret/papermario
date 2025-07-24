@@ -88,7 +88,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
     Call(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVar9, 16)
     Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
-        CaseGt(FALSE)
+        CaseGt(false)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
             Switch(LVar1)
                 CaseEq(0)
@@ -133,10 +133,10 @@ EvtScript N(EVS_UseMove1_Impl) = {
         ExecWait(N(EVS_HammerSupport_ReturnHome_SmashMiss))
         Return
     EndIf
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
-        CaseGt(FALSE)
+        CaseGt(false)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
             Switch(LVar1)
                 CaseEq(0)
@@ -147,7 +147,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
                     Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
             EndSwitch
             Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, SUPPRESS_EVENTS_HAMMER, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
-            Set(LFlag0, TRUE)
+            Set(LFlag0, true)
         CaseDefault
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
             Switch(LVar1)
@@ -159,7 +159,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
                     Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
             EndSwitch
             Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, SUPPRESS_EVENTS_HAMMER, 0, LVarE, BS_FLAGS1_TRIGGER_EVENTS)
-            Set(LFlag0, FALSE)
+            Set(LFlag0, false)
     EndSwitch
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_NICE)
@@ -236,7 +236,7 @@ EvtScript N(EVS_802A39C8) = {
     Label(0)
     Wait(1)
     Call(IsMessageBoxDisplayed, LVar0)
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Goto(0)
     EndIf
     Return
@@ -286,7 +286,7 @@ EvtScript N(EVS_802A3CF4) = {
     Label(0)
     Wait(1)
     Call(IsMessageBoxDisplayed, LVar0)
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Goto(0)
     EndIf
     Return
@@ -336,7 +336,7 @@ EvtScript N(EVS_802A4020) = {
     Label(0)
     Wait(1)
     Call(IsMessageBoxDisplayed, LVar0)
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Goto(0)
     EndIf
     Return

@@ -81,10 +81,10 @@ EvtScript N(EVS_Bootler_SpookPlayer) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
         Loop(0)
             Call(SetCamDistance, CAM_DEFAULT, 400)
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Wait(1)
             Call(SetCamDistance, CAM_DEFAULT, 450)
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Wait(1)
         EndLoop
     EndChildThread
@@ -112,10 +112,10 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     Thread
         Call(N(DarkenBackground))
     EndThread
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetNpcPos, NPC_Bootler, 200, 44, 0)
     Call(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-    Set(MV_Unk_00, TRUE)
+    Set(MV_Unk_00, true)
     Call(SetMusic, 0, SONG_BOOS_MANSION, 0, VOL_LEVEL_FULL)
     Wait(20 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
@@ -141,16 +141,16 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     Call(SetPanTarget, CAM_DEFAULT, LVarA, LVarB, LVarC)
     Call(SetCamDistance, CAM_DEFAULT, 270)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Talk, ANIM_Bootler_Idle, 0, MSG_CH3_0000)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, true)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Wait(30 * DT)
     Call(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Talk, ANIM_Bootler_Idle, 0, MSG_CH3_0001)
     Call(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_APPEAR_A, SOUND_SPACE_DEFAULT)
@@ -177,9 +177,9 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     Call(PlaySoundAtNpc, NPC_Bootler, SOUND_BOOTLER_SPOOK, SOUND_SPACE_DEFAULT)
     ExecWait(N(EVS_Bootler_SpookPlayer))
     Call(SetCamDistance, CAM_DEFAULT, 450)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     SetF(LVar0, Float(240.0))
     Loop(20 * DT)
         SubF(LVar0, Float(VAR_1))
@@ -189,7 +189,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     Set(GB_StoryProgress, STORY_CH3_INVITED_TO_BOOS_MANSION)
     Exec(N(EVS_SetupMusic))
     Call(SetNpcPos, NPC_Bootler, NPC_DISPOSE_LOCATION)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -211,7 +211,7 @@ EvtScript N(EVS_NpcInit_Bootler) = {
         CaseLt(STORY_CH3_SAW_BOO_ENTER_FOREST)
             Call(RemoveNpc, NPC_SELF)
         CaseLt(STORY_CH3_INVITED_TO_BOOS_MANSION)
-            Set(GF_KMR20_ReunitedWithLuigi, TRUE)
+            Set(GF_KMR20_ReunitedWithLuigi, true)
         CaseGe(STORY_CH3_INVITED_TO_BOOS_MANSION)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
@@ -221,8 +221,8 @@ EvtScript N(EVS_NpcInit_Bootler) = {
 
 EvtScript N(EVS_NpcIdle_JrTroopa) = {
     Call(WaitForPlayerInputEnabled)
-    Call(DisablePlayerInput, TRUE)
-    Set(MV_Unk_00, TRUE)
+    Call(DisablePlayerInput, true)
+    Set(MV_Unk_00, true)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(SetCamProperties, CAM_DEFAULT, Float(3.0 / DT), LVar0, LVar1, LVar2, 300, 15, -7)
     Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 5, MSG_CH3_0023)
@@ -231,9 +231,9 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
     Sub(LVar0, 200)
     Call(NpcMoveTo, NPC_SELF, LVar0, LVar2, 25 * DT)
     Call(ResetCam, CAM_DEFAULT, Float(90.0))
-    Set(GF_MIM10_JrTroopaEscaped, TRUE)
-    Set(MV_Unk_00, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Set(GF_MIM10_JrTroopaEscaped, true)
+    Set(MV_Unk_00, false)
+    Call(DisablePlayerInput, false)
     Call(RemoveNpc, NPC_SELF)
     Return
     End
@@ -241,11 +241,11 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
 
 EvtScript N(EVS_NpcInit_JrTroopa) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_JrTroopa)))
-    IfEq(GF_MIM10_JrTroopaEscaped, TRUE)
+    IfEq(GF_MIM10_JrTroopaEscaped, true)
         Call(RemoveNpc, NPC_SELF)
         Return
     EndIf
-    IfEq(GF_MIM10_Defeated_JrTroopa, FALSE)
+    IfEq(GF_MIM10_Defeated_JrTroopa, false)
         Call(RemoveNpc, NPC_SELF)
         Return
     EndIf

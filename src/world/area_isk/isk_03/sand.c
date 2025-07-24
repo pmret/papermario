@@ -13,7 +13,7 @@ EvtScript N(EVS_TexPan_DrippingSand) = {
         IfLt(GB_StoryProgress, STORY_CH2_DRAINED_FIRST_SAND_ROOM)
             Goto(10)
         EndIf
-    Call(EnableModel, MODEL_o6000, FALSE)
+    Call(EnableModel, MODEL_o6000, false)
     Return
     End
 };
@@ -26,7 +26,7 @@ EvtScript N(EVS_Camera_LookAtDrain) = {
     Call(SetCamPosB, CAM_DEFAULT, 566, -50)
     Call(SetCamPitch, CAM_DEFAULT, Float(13.6), Float(-1.5))
     Call(SetPanTarget, CAM_DEFAULT, 429, 35, 278)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Return
     End
 };
@@ -46,7 +46,7 @@ EvtScript N(EVS_Camera_Reset) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Return
     End
 };
@@ -207,14 +207,14 @@ EvtScript N(EVS_LowerSandColumn) = {
 EvtScript N(EVS_Scene_DrainSand) = {
     Wait(5)
     Call(InterpPlayerYaw, 179, 0)
-    Call(EnableModel, MODEL_o1343, TRUE)
-    Call(EnableModel, MODEL_o1344, TRUE)
-    Call(EnableModel, MODEL_o1345, TRUE)
-    Call(EnableModel, MODEL_o1354, TRUE)
-    Call(EnableModel, MODEL_o1355, TRUE)
-    Call(EnableModel, MODEL_o1356, TRUE)
-    Call(EnableModel, MODEL_o1341, TRUE)
-    Call(EnableModel, MODEL_o1346, TRUE)
+    Call(EnableModel, MODEL_o1343, true)
+    Call(EnableModel, MODEL_o1344, true)
+    Call(EnableModel, MODEL_o1345, true)
+    Call(EnableModel, MODEL_o1354, true)
+    Call(EnableModel, MODEL_o1355, true)
+    Call(EnableModel, MODEL_o1356, true)
+    Call(EnableModel, MODEL_o1341, true)
+    Call(EnableModel, MODEL_o1346, true)
     Exec(N(EVS_Camera_LookAtDrain))
     Wait(30)
     Exec(N(EVS_TexPan_UpperSand))
@@ -233,61 +233,61 @@ EvtScript N(EVS_Scene_DrainSand) = {
     Exec(N(EVS_CollapseSandPile))
     Call(PlaySound, SOUND_ISK_DRAINING_SAND | SOUND_ID_TRIGGER_CHANGE_SOUND)
     Wait(10)
-    Call(EnableModel, MODEL_o1347, FALSE)
-    Call(EnableModel, MODEL_o1348, FALSE)
-    Call(EnableModel, MODEL_o1349, FALSE)
-    Call(EnableModel, MODEL_o1350, FALSE)
-    Call(EnableModel, MODEL_o1351, FALSE)
-    Call(EnableModel, MODEL_o1352, FALSE)
+    Call(EnableModel, MODEL_o1347, false)
+    Call(EnableModel, MODEL_o1348, false)
+    Call(EnableModel, MODEL_o1349, false)
+    Call(EnableModel, MODEL_o1350, false)
+    Call(EnableModel, MODEL_o1351, false)
+    Call(EnableModel, MODEL_o1352, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1350, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1351, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1352, COLLIDER_FLAGS_UPPER_MASK)
     Set(GB_StoryProgress, STORY_CH2_DRAINED_FIRST_SAND_ROOM)
-    Call(SetZoneEnabled, ZONE_o2008, FALSE)
-    Call(SetZoneEnabled, ZONE_o2023, TRUE)
+    Call(SetZoneEnabled, ZONE_o2008, false)
+    Call(SetZoneEnabled, ZONE_o2023, true)
     Wait(20)
     Exec(N(EVS_Camera_Reset))
     Wait(5)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Unbind
     Return
     End
 };
 
 EvtScript N(EVS_SetupSand) = {
-    Set(AF_ISK03_SandSwitchActivated, FALSE)
+    Set(AF_ISK03_SandSwitchActivated, false)
     Call(MakeTransformGroup, MODEL_g206)
     IfLt(GB_StoryProgress, STORY_CH2_DRAINED_FIRST_SAND_ROOM)
         BindTrigger(Ref(N(EVS_Scene_DrainSand)), TRIGGER_AREA_FLAG_SET, AF_ISK03_SandSwitchActivated, 1, 0)
-        Call(EnableModel, MODEL_o1343, FALSE)
-        Call(EnableModel, MODEL_o1344, FALSE)
-        Call(EnableModel, MODEL_o1345, FALSE)
-        Call(EnableModel, MODEL_o1354, FALSE)
-        Call(EnableModel, MODEL_o1355, FALSE)
-        Call(EnableModel, MODEL_o1356, FALSE)
-        Call(EnableModel, MODEL_o1341, FALSE)
-        Call(EnableModel, MODEL_o1346, FALSE)
+        Call(EnableModel, MODEL_o1343, false)
+        Call(EnableModel, MODEL_o1344, false)
+        Call(EnableModel, MODEL_o1345, false)
+        Call(EnableModel, MODEL_o1354, false)
+        Call(EnableModel, MODEL_o1355, false)
+        Call(EnableModel, MODEL_o1356, false)
+        Call(EnableModel, MODEL_o1341, false)
+        Call(EnableModel, MODEL_o1346, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1343, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1344, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1345, COLLIDER_FLAGS_UPPER_MASK)
         Exec(N(EVS_TexPan_DrippingSand))
     Else
-        Call(EnableModel, MODEL_o1347, FALSE)
-        Call(EnableModel, MODEL_o1348, FALSE)
-        Call(EnableModel, MODEL_o1349, FALSE)
-        Call(EnableModel, MODEL_o1350, FALSE)
-        Call(EnableModel, MODEL_o1351, FALSE)
-        Call(EnableModel, MODEL_o1352, FALSE)
-        Call(EnableModel, MODEL_o1341, FALSE)
-        Call(EnableModel, MODEL_o1346, FALSE)
-        Call(EnableModel, MODEL_o6000, FALSE)
+        Call(EnableModel, MODEL_o1347, false)
+        Call(EnableModel, MODEL_o1348, false)
+        Call(EnableModel, MODEL_o1349, false)
+        Call(EnableModel, MODEL_o1350, false)
+        Call(EnableModel, MODEL_o1351, false)
+        Call(EnableModel, MODEL_o1352, false)
+        Call(EnableModel, MODEL_o1341, false)
+        Call(EnableModel, MODEL_o1346, false)
+        Call(EnableModel, MODEL_o6000, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1350, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1351, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1352, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     IfLt(GB_StoryProgress, STORY_CH2_DRAINED_FIRST_SAND_ROOM)
     Else
-        Call(EnableModel, MODEL_o6000, FALSE)
+        Call(EnableModel, MODEL_o6000, false)
     EndIf
     Return
     End

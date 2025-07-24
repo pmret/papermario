@@ -4,7 +4,7 @@
 #include "world/common/atomic/ApplyTint.inc.c"
 
 EvtScript N(EVS_Scene_TutankoopaAppears) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(DisablePartnerAI, 0)
     Call(N(SetModelTintMode), APPLY_TINT_MODELS, -1, ENV_TINT_SHROUD)
     Call(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_SHROUD)
@@ -13,7 +13,7 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetPanTarget, CAM_DEFAULT, 336, -910, 467)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetPlayerPos, 279, -910, 520)
     Call(GetCurrentPartnerID, LVar0)
     IfEq(LVar0, PARTNER_PARAKARRY)
@@ -25,13 +25,13 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     Call(SetNpcYaw, NPC_PARTNER, 45)
     Call(ClearPartnerMoveHistory, NPC_PARTNER)
     Thread
-        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
         Wait(10 * DT)
         Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
         Call(SetNpcSpeed, NPC_PARTNER, Float(2.5 / DT))
         Call(NpcMoveTo, NPC_PARTNER, 311, 487, 0)
         Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
     EndThread
     Call(SetPlayerSpeed, Float(4.0 / DT))
     Call(PlayerMoveTo, 343, 460, 0)
@@ -75,7 +75,7 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     Call(N(SetModelTintParams), ENV_TINT_SHROUD, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     Call(SetCamDistance, CAM_DEFAULT, Float(530.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.5 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Wait(30 * DT)
         Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
@@ -128,12 +128,12 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(225.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(-7.5), Float(-7.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Tutankoopa_01, ANIM_Tutankoopa_Talk, ANIM_Tutankoopa_Idle, 0, MSG_CH2_00E3)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(EnablePartnerAI)
     Call(SetNpcVar, NPC_Tutankoopa_01, 0, 1)
     Return
@@ -170,9 +170,9 @@ EvtScript N(EVS_Scene_TutankoopaDefeated) = {
     Call(SetPanTarget, CAM_DEFAULT, 490, -910, 327)
     Call(SetCamDistance, CAM_DEFAULT, Float(200.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(EnableModel, MODEL_o2359, FALSE)
+    Call(EnableModel, MODEL_o2359, false)
     ExecGetTID(N(EVS_PlayChompSounds), LVarA)
     Call(SetNpcPos, NPC_ChainChomp, 516, -910, 263)
     Call(SetNpcSpeed, NPC_ChainChomp, Float(3.0 / DT))
@@ -183,8 +183,8 @@ EvtScript N(EVS_Scene_TutankoopaDefeated) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
-    Call(EnableModel, MODEL_o2359, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
+    Call(EnableModel, MODEL_o2359, true)
     Call(NpcFaceNpc, NPC_Tutankoopa_01, NPC_ChainChomp, 0)
     Call(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Hurt)
     Call(GetNpcPos, NPC_Tutankoopa_01, LVar0, LVar1, LVar2)
@@ -192,7 +192,7 @@ EvtScript N(EVS_Scene_TutankoopaDefeated) = {
     Call(NpcJump0, NPC_Tutankoopa_01, LVar0, LVar1, LVar2, 20 * DT)
     Call(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Idle)
     Call(SpeakToPlayer, NPC_Tutankoopa_01, ANIM_Tutankoopa_Talk, ANIM_Tutankoopa_Idle, 5, MSG_CH2_00E9)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Thread
         Call(SetNpcAnimation, NPC_ChainChomp, ANIM_ChainChomp_QuickBite)
         Call(SetNpcSpeed, NPC_ChainChomp, Float(8.0 / DT))
@@ -245,7 +245,7 @@ EvtScript N(EVS_Scene_TutankoopaDefeated) = {
         Wait(1)
     EndLoop
     Wait(10 * DT)
-    Set(GF_ISK16_Defeated_Tutankoopa, TRUE)
+    Set(GF_ISK16_Defeated_Tutankoopa, true)
     Call(FadeOutMusic, 0, 500)
     Return
     End

@@ -80,7 +80,7 @@ API_CALLABLE(RemoveNpc) {
             if (enemy->npcID == id) {
                 Evt* scriptTemp = script;
 
-                while (TRUE) {
+                while (true) {
                     if (scriptTemp->blockingParent != NULL) {
                         scriptTemp = scriptTemp->blockingParent;
                     } else {
@@ -202,11 +202,11 @@ void start_battle(Evt* script, s32 songID) {
     resume_all_group(EVT_GROUP_FLAG_INTERACT);
 
     currentEncounter->hitType = ENCOUNTER_TRIGGER_NONE;
-    enemy->encountered = TRUE;
+    enemy->encountered = true;
     currentEncounter->curEnemy = enemy;
     currentEncounter->curEncounter = currentEncounter->encounterList[enemy->encounterIndex];
     currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
-    currentEncounter->forbidFleeing = FALSE;
+    currentEncounter->forbidFleeing = false;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
 
@@ -227,7 +227,7 @@ void start_battle(Evt* script, s32 songID) {
         if (enemy != NULL && (!(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || enemy == currentEncounter->curEnemy)) {
             if (enemy->hitBytecode != NULL) {
                 Evt* hitEvtInstance;
-                enemy->encountered = TRUE;
+                enemy->encountered = true;
 
                 hitEvtInstance = start_script(enemy->hitBytecode, EVT_PRIORITY_A, 0);
 
@@ -244,9 +244,9 @@ void start_battle(Evt* script, s32 songID) {
 
     currentEncounter->fadeOutAmount = 0;
     currentEncounter->substateDelay = 0;
-    currentEncounter->scriptedBattle = TRUE;
+    currentEncounter->scriptedBattle = true;
     gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
-    EncounterStateChanged = TRUE;
+    EncounterStateChanged = true;
     gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT;
 }
 
@@ -273,11 +273,11 @@ API_CALLABLE(StartBossBattle) {
     resume_all_group(EVT_GROUP_FLAG_INTERACT);
 
     currentEncounter->hitType = ENCOUNTER_TRIGGER_NONE;
-    enemy->encountered = TRUE;
+    enemy->encountered = true;
     currentEncounter->curEnemy = enemy;
     currentEncounter->curEncounter = currentEncounter->encounterList[enemy->encounterIndex];
     currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
-    currentEncounter->forbidFleeing = TRUE;
+    currentEncounter->forbidFleeing = true;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
 
@@ -298,7 +298,7 @@ API_CALLABLE(StartBossBattle) {
         if ((enemy != NULL && (
             !(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || enemy == currentEncounter->curEnemy)
             ) && enemy->hitBytecode != NULL) {
-            enemy->encountered = TRUE;
+            enemy->encountered = true;
 
             script = start_script(enemy->hitBytecode, EVT_PRIORITY_A, 0);
             enemy->hitScript = script;
@@ -313,9 +313,9 @@ API_CALLABLE(StartBossBattle) {
 
     currentEncounter->fadeOutAmount = 0;
     currentEncounter->substateDelay = 0;
-    currentEncounter->scriptedBattle = TRUE;
+    currentEncounter->scriptedBattle = true;
     gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
-    EncounterStateChanged = TRUE;
+    EncounterStateChanged = true;
     gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT;
 
     return ApiStatus_DONE1;
@@ -326,7 +326,7 @@ API_CALLABLE(SetBattleMusic) {
     Bytecode songID = evt_get_variable(script, *args++);
     EncounterStatus* currentEncounter = &gCurrentEncounter;
 
-    currentEncounter->forbidFleeing = TRUE;
+    currentEncounter->forbidFleeing = true;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
     return ApiStatus_DONE2;
@@ -345,7 +345,7 @@ API_CALLABLE(BindNpcAI) {
     if ((s32)enemy != NPC_SELF && (id == NPC_SELF || enemy->npcID == id)) {
         id = enemy->npcID;
 
-        while (TRUE) {
+        while (true) {
             if (scriptTemp->blockingParent != NULL) {
                 scriptTemp = scriptTemp->blockingParent;
             } else {
@@ -473,7 +473,7 @@ API_CALLABLE(SetNpcAux) {
     if ((s32)enemy != NPC_SELF && (id == NPC_SELF || enemy->npcID == id)) {
         id = enemy->npcID;
 
-        while (TRUE) {
+        while (true) {
             if (scriptTemp->blockingParent != NULL) {
                 scriptTemp = scriptTemp->blockingParent;
             } else {
@@ -809,7 +809,7 @@ API_CALLABLE(SetOwnerInstigatorValue) {
 }
 
 API_CALLABLE(SetBattleAsScripted) {
-    gCurrentEncounter.scriptedBattle = TRUE;
+    gCurrentEncounter.scriptedBattle = true;
     return ApiStatus_DONE2;
 }
 

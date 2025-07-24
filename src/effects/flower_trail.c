@@ -69,7 +69,7 @@ void flower_trail_main(s32 triggeredByNpc, f32 posX, f32 posY, f32 posZ, f32 ang
     mem_clear(part, numParts * sizeof(*part));
 
     for (i = 0; i < numParts; i++, part++) {
-        part->alive = TRUE;
+        part->alive = true;
         part->triggeredByNpc = triggeredByNpc;
         part->unk_7C = 0.0f;
 
@@ -120,16 +120,16 @@ void flower_trail_init(EffectInstance* effect) {
 
 void flower_trail_update(EffectInstance* effect) {
     FlowerFXData* part = effect->data.flowerTrail;
-    s32 anyAlive = FALSE;
+    s32 anyAlive = false;
     s32 i;
 
     for (i = 0; i < effect->numParts; i++, part++) {
         if (part->alive) {
             part->timeLeft--;
             if (part->timeLeft <= 0) {
-                part->alive = FALSE;
+                part->alive = false;
             } else {
-                anyAlive = TRUE;
+                anyAlive = true;
                 flower_trail_update_part(part);
                 flower_trail_update_part_transform(part);
             }

@@ -51,11 +51,11 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
             Add(LVar7, -360)
         EndIf
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
     Call(NpcFacePlayer, NPC_SELF, 0)
     Wait(10)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetSelfVar, 0, 1)
     Thread
         Call(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
@@ -72,19 +72,19 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Panic, 512, MSG_CH5_00F3)
     Call(SetSelfVar, 0, 0)
     Wait(18)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInteract_Kolorado) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     IfLt(GB_StoryProgress, STORY_CH5_SMASHED_ULTRA_BLOCK)
-        IfEq(GF_KZN03_SpokeWithKolorado, FALSE)
+        IfEq(GF_KZN03_SpokeWithKolorado, false)
             Call(AdjustCam, CAM_DEFAULT, Float(3.3), 0, 350, Float(15.0), Float(-7.0))
             Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00F1)
-            Set(GF_KZN03_SpokeWithKolorado, TRUE)
+            Set(GF_KZN03_SpokeWithKolorado, true)
             Call(ResetCam, CAM_DEFAULT, Float(5.0))
         Else
             Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00F2)
@@ -107,7 +107,7 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
         Call(SetSelfVar, 0, 0)
         Wait(18)
     EndIf
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     EVT_LETTER_CHECK(Kolorado)
     Return
     End
@@ -116,7 +116,7 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
 EvtScript N(EVS_NpcInit_Kolorado) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH5_SMASHED_ULTRA_BLOCK)
-            IfEq(GF_KZN06_Visited, TRUE)
+            IfEq(GF_KZN06_Visited, true)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Kolorado)))
                 Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Kolorado)))
                 Return
@@ -151,7 +151,7 @@ EvtScript N(EVS_SyncZiplineDummyNPC2) = {
 };
 
 EvtScript N(EVS_NpcInit_ZiplineDummy) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
     Call(SetNpcScale, NPC_SELF, Float(0.3), 1, Float(0.3))
     Return
     End
@@ -199,7 +199,7 @@ NpcData N(NpcData_SpikeTop_01) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 140, 670, -20 },
@@ -222,7 +222,7 @@ NpcData N(NpcData_SpikeTop_02) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -200, 670, -35 },
@@ -245,7 +245,7 @@ NpcData N(NpcData_SpikeTop_03) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 30, 20, 320 },
@@ -269,7 +269,7 @@ NpcData N(NpcData_PutridPiranha)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 260, 20, 255 },

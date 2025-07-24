@@ -25,18 +25,18 @@ EvtScript N(EVS_LetterPrompt_MissT) = {
 };
 
 EvtScript N(EVS_Scene_ToadTownGreeting) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseSettingsFrom, CAM_DEFAULT, -225, 0, -300)
     Call(SetPanTarget, CAM_DEFAULT, -225, 0, -300)
     Call(SetCamDistance, CAM_DEFAULT, Float(800.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Wait(35 * DT)
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.1 / DT))
         Call(UseSettingsFrom, CAM_DEFAULT, -225, 0, -300)
         Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Wait(10 * DT)
         Call(InterpNpcYaw, NPC_Toad_04, 230, 0)
@@ -57,12 +57,12 @@ EvtScript N(EVS_Scene_ToadTownGreeting) = {
         Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
     EndThread
     Call(SpeakToPlayer, NPC_Toad_04, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MAC_Gate_007E)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Return
     End
 };
@@ -76,7 +76,7 @@ EvtScript N(EVS_NpcInteract_Toad_04) = {
         CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
             Set(LVar0, MSG_MAC_Gate_0081)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Gate_0082)
             Else
                 Set(LVar0, MSG_MAC_Gate_0083)
@@ -84,10 +84,10 @@ EvtScript N(EVS_NpcInteract_Toad_04) = {
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Gate_0084)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+            IfEq(GF_MAC00_DictionaryStolen, false)
                 Set(LVar0, MSG_MAC_Gate_0085)
             Else
-                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                IfEq(GF_MAC00_DictionaryReturned, false)
                     Set(LVar0, MSG_MAC_Gate_0086)
                 Else
                     Set(LVar0, MSG_MAC_Gate_0087)
@@ -116,14 +116,14 @@ EvtScript N(EVS_NpcInteract_Toad_04) = {
 };
 
 EvtScript N(EVS_Scene_CantLeaveTown) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(NpcFacePlayer, NPC_Toad_04, 0)
     Wait(5)
     Call(SpeakToPlayer, NPC_Toad_04, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_Outro_002D)
     Wait(10)
     Call(SetPlayerSpeed, Float(4.0))
     Call(PlayerMoveTo, -220, -250, 0)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -143,7 +143,7 @@ EvtScript N(EVS_NpcInteract_Toad_05) = {
         CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
             Set(LVar0, MSG_MAC_Gate_0091)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Gate_0092)
             Else
                 Set(LVar0, MSG_MAC_Gate_0093)
@@ -151,10 +151,10 @@ EvtScript N(EVS_NpcInteract_Toad_05) = {
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Gate_0094)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+            IfEq(GF_MAC00_DictionaryStolen, false)
                 Set(LVar0, MSG_MAC_Gate_0095)
             Else
-                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                IfEq(GF_MAC00_DictionaryReturned, false)
                     Set(LVar0, MSG_MAC_Gate_0096)
                 Else
                     Set(LVar0, MSG_MAC_Gate_0097)
@@ -191,7 +191,7 @@ EvtScript N(EVS_NpcInteract_Toad_06) = {
         CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
             Set(LVar0, MSG_MAC_Gate_00A1)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Gate_00A2)
             Else
                 Set(LVar0, MSG_MAC_Gate_00A3)
@@ -199,10 +199,10 @@ EvtScript N(EVS_NpcInteract_Toad_06) = {
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Gate_00A4)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+            IfEq(GF_MAC00_DictionaryStolen, false)
                 Set(LVar0, MSG_MAC_Gate_00A5)
             Else
-                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                IfEq(GF_MAC00_DictionaryReturned, false)
                     Set(LVar0, MSG_MAC_Gate_00A6)
                 Else
                     Set(LVar0, MSG_MAC_Gate_00A7)
@@ -242,7 +242,7 @@ EvtScript N(EVS_NpcInteract_Lovers) = {
             Set(LVar0, MSG_MAC_Gate_00B3)
             Set(LVar1, MSG_MAC_Gate_00B4)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Gate_00B5)
                 Set(LVar1, MSG_MAC_Gate_00B6)
             Else
@@ -253,11 +253,11 @@ EvtScript N(EVS_NpcInteract_Lovers) = {
             Set(LVar0, MSG_MAC_Gate_00B9)
             Set(LVar1, MSG_MAC_Gate_00BA)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_ShyGuyBlockingTracks, FALSE)
+            IfEq(GF_MAC03_ShyGuyBlockingTracks, false)
                 Set(LVar0, MSG_MAC_Gate_00BB)
                 Set(LVar1, MSG_MAC_Gate_00BC)
             Else
-                IfEq(GF_MAC03_ShyGuyChasedOff, FALSE)
+                IfEq(GF_MAC03_ShyGuyChasedOff, false)
                     Set(LVar0, MSG_MAC_Gate_00BD)
                     Set(LVar1, MSG_MAC_Gate_00BE)
                 Else
@@ -311,7 +311,7 @@ EvtScript N(EVS_NpcInteract_Toadette) = {
             Set(LVar1, MSG_MAC_Gate_00D6)
             Set(LVar2, MSG_MAC_Gate_00D7)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Gate_00D8)
                 Set(LVar1, MSG_MAC_Gate_00D9)
                 Set(LVar2, MSG_MAC_Gate_00DA)
@@ -325,7 +325,7 @@ EvtScript N(EVS_NpcInteract_Toadette) = {
             Set(LVar1, MSG_MAC_Gate_00DF)
             Set(LVar2, MSG_MAC_Gate_00E0)
         CaseLt(STORY_CH4_RETURNED_STOREROOM_KEY)
-            IfEq(GF_MAC04_StoreroomKeyStolen, FALSE)
+            IfEq(GF_MAC04_StoreroomKeyStolen, false)
                 Set(LVar0, MSG_MAC_Gate_00E1)
                 Set(LVar1, MSG_MAC_Gate_00E2)
                 Set(LVar2, MSG_MAC_Gate_00E3)
@@ -397,7 +397,7 @@ EvtScript N(EVS_NpcInteract_Toad_08) = {
         CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
             Set(LVar0, MSG_MAC_Gate_0105)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Gate_0106)
             Else
                 Set(LVar0, MSG_MAC_Gate_0107)
@@ -405,10 +405,10 @@ EvtScript N(EVS_NpcInteract_Toad_08) = {
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Gate_0108)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+            IfEq(GF_MAC00_DictionaryStolen, false)
                 Set(LVar0, MSG_MAC_Gate_0109)
             Else
-                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                IfEq(GF_MAC00_DictionaryReturned, false)
                     Set(LVar0, MSG_MAC_Gate_010A)
                 Else
                     Set(LVar0, MSG_MAC_Gate_010B)
@@ -591,7 +591,7 @@ NpcData N(NpcData_SharedTownsfolk)[] = {
         .yaw = 90,
         .territory = {
             .patrol = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .numPoints  = 5,
                 .points  = {
@@ -619,7 +619,7 @@ NpcData N(NpcData_SharedTownsfolk)[] = {
         .yaw = 90,
         .territory = {
             .patrol = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .numPoints  = 2,
                 .points  = {

@@ -42,37 +42,37 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetPlayerPos, LVar3, LVar4, LVar5)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar3, LVar4, LVar5)
     Call(SetPanTarget, CAM_DEFAULT, LVar3, LVar4, LVar5)
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00FD)
     Wait(15)
-    Set(MV_KoloradoJumpDone, FALSE)
+    Set(MV_KoloradoJumpDone, false)
     Thread
         Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         Call(SetNpcJumpscale, NPC_SELF, Float(2.0))
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
         Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10)
         Call(SetNpcYaw, NPC_SELF, 90)
-        Set(MV_KoloradoJumpDone, TRUE)
+        Set(MV_KoloradoJumpDone, true)
     EndThread
     Call(ContinueSpeech, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00FE)
     Loop(0)
         Wait(1)
-        IfEq(MV_KoloradoJumpDone, TRUE)
+        IfEq(MV_KoloradoJumpDone, true)
             BreakLoop
         EndIf
     EndLoop
     Call(UseSettingsFrom, CAM_DEFAULT, LVar3, LVar4, LVar5)
     Call(SetPanTarget, CAM_DEFAULT, 420, 250, -350)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Run)
     Call(SetNpcSpeed, NPC_SELF, Float(5.0))
     Call(NpcMoveTo, NPC_SELF, 530, -360, 0)
@@ -80,7 +80,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     Wait(15)
     Call(ResetCam, CAM_DEFAULT, Float(3.0))
     Set(GB_StoryProgress, STORY_CH5_KOLORADO_IN_TREASURE_ROOM)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -105,13 +105,13 @@ EvtScript N(EVS_NpcIdle_Piranha) = {
         IfLt(LVar0, 100)
             Goto(0)
         EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(N(DisableCameraLeadingPlayer))
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, 285, 25, 35)
     Call(SetCamDistance, CAM_DEFAULT, 400)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.5))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10)
     Call(SetNpcPos, NPC_SELF, 285, 25, 35)
@@ -127,14 +127,14 @@ EvtScript N(EVS_NpcIdle_Piranha) = {
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     Call(N(EnableCameraLeadingPlayer))
     Call(ResetCam, CAM_DEFAULT, Float(3.0))
-    Set(GF_KZN18_IntruderAlert, TRUE)
-    Call(DisablePlayerInput, FALSE)
+    Set(GF_KZN18_IntruderAlert, true)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Piranha) = {
-    IfEq(GF_KZN18_IntruderAlert, FALSE)
+    IfEq(GF_KZN18_IntruderAlert, false)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Piranha)))
     Else
         Call(RemoveNpc, NPC_SELF)

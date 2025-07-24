@@ -144,7 +144,7 @@ void func_802BB314_E2DC44(Entity* entity) {
 
 void func_802BB34C_E2DC7C(void) {
     sfx_play_sound(SOUND_LRAW_SPINNING_FLOWER | SOUND_ID_TRIGGER_CHANGE_SOUND);
-    sfx_stop_tracking_env_sound_pos(SOUND_LRAW_SPINNING_FLOWER, TRUE);
+    sfx_stop_tracking_env_sound_pos(SOUND_LRAW_SPINNING_FLOWER, true);
 }
 
 void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {

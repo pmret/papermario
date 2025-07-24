@@ -14,27 +14,27 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_SHY_GUYS_TOYBOX)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    IfEq(GF_OMO04_SpawnedPeachChoice1, FALSE)
-        Call(MakeNpcs, TRUE, Ref(N(KammySceneNPCs)))
+    IfEq(GF_OMO04_SpawnedPeachChoice1, false)
+        Call(MakeNpcs, true, Ref(N(KammySceneNPCs)))
     Else
-        IfEq(GF_OMO04_Item_Mushroom, FALSE)
+        IfEq(GF_OMO04_Item_Mushroom, false)
             Switch(GB_OMO_PeachChoice1)
                 CaseEq(0)
-                    Call(MakeNpcs, TRUE, Ref(N(GoombaAmbushNPCs)))
+                    Call(MakeNpcs, true, Ref(N(GoombaAmbushNPCs)))
                 CaseEq(1)
-                    Call(MakeNpcs, TRUE, Ref(N(ClubbaAmbushNPCs)))
+                    Call(MakeNpcs, true, Ref(N(ClubbaAmbushNPCs)))
                 CaseEq(2)
-                    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+                    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
                     Call(MakeItemEntity, ITEM_MUSHROOM, 1100, 0, 0, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_OMO04_Item_Mushroom)
             EndSwitch
         Else
-            Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+            Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
         EndIf
     EndIf
     ExecWait(N(EVS_MakeEntities))
     ExecWait(N(EVS_SetupGizmos))
     ExecWait(N(EVS_SetupMusic))
-    IfEq(GF_OMO04_SpawnedPeachChoice1, FALSE)
+    IfEq(GF_OMO04_SpawnedPeachChoice1, false)
         Exec(N(EVS_Scene_KammySetAmbush))
     Else
         Set(LVar0, Ref(N(EVS_BindExitTriggers)))

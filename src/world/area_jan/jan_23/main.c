@@ -10,13 +10,13 @@ EvtScript N(EVS_ExitFall_jan_16_4) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     SetF(MV_Unk_05, 0)
     Call(GetPartnerInUse, LVar0)
     IfNe(LVar0, 8)
         Thread
             Call(DisablePartnerAI, 0)
-            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
             IfEq(LVar0, 0)
                 Call(GetPlayerPos, LVar2, LVar3, LVar4)
                 Call(SetNpcJumpscale, NPC_PARTNER, Float(3.0))
@@ -47,12 +47,12 @@ EvtScript N(EVS_ExitFall_jan_16_4) = {
                     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, 250, 100)
                     Call(SetPanTarget, CAM_DEFAULT, LVar0, -100, LVar2)
                     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-                    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                    Call(PanToTarget, CAM_DEFAULT, 0, true)
                     Set(MV_Unk_05, -1)
                 CaseDefault
                     Wait(10)
             EndSwitch
-            Call(DisablePlayerPhysics, TRUE)
+            Call(DisablePlayerPhysics, true)
             Call(GetPlayerPos, LVar2, LVar3, LVar4)
             Call(MakeLerp, LVar3, -500, 15, EASING_LINEAR)
             Loop(0)
@@ -78,7 +78,7 @@ EvtScript N(EVS_ExitFall_jan_16_4) = {
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, 250, 100)
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndIf
     Wait(30)
     Call(GotoMap, Ref("jan_16"), jan_16_ENTRY_4)
@@ -98,7 +98,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_JADE_JUNGLE)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitw, COLLIDER_FLAGS_UPPER_MASK)
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
     Exec(EnterWalk)

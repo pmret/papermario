@@ -28,8 +28,8 @@ EvtScript N(EVS_ControlUpperVisibility) = {
                 Goto(10)
             CaseEq(COLLIDER_o235)
                 Label(10)
-                Call(EnableGroup, MODEL_g50, FALSE)
-                Call(EnableGroup, MODEL_g39, FALSE)
+                Call(EnableGroup, MODEL_g50, false)
+                Call(EnableGroup, MODEL_g39, false)
                 Wait(1)
                 Label(15)
                     Call(N(GetFloorCollider), LVar1)
@@ -41,8 +41,8 @@ EvtScript N(EVS_ControlUpperVisibility) = {
                     Wait(1)
                     Goto(15)
                 EndIf
-                Call(EnableGroup, MODEL_g50, TRUE) // house
-                Call(EnableGroup, MODEL_g39, TRUE) // shop
+                Call(EnableGroup, MODEL_g50, true) // house
+                Call(EnableGroup, MODEL_g39, true) // shop
         EndSwitch
         Wait(1)
         Goto(0)
@@ -57,8 +57,8 @@ EvtScript N(EVS_Main) = {
     IfEq(GB_StoryProgress, STORY_CH8_OPENED_PATH_TO_STAR_WAY)
         Set(GB_StoryProgress, STORY_CH8_REACHED_STAR_HAVEN)
     EndIf
-    Set(GF_MAP_StarHaven, TRUE)
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Set(GF_MAP_StarHaven, true)
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilite, COLLIDER_FLAGS_UPPER_MASK)
     Call(GetLoadType, LVar1)

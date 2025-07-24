@@ -12,19 +12,19 @@ API_CALLABLE(N(SetPortraitItemAlpha)) {
 
 EvtScript N(EVS_AnimateSpeakingPortrait) = {
     // hide empty frames
-    Call(EnableModel, MODEL_n1, FALSE)
-    Call(EnableModel, MODEL_n2, FALSE)
+    Call(EnableModel, MODEL_n1, false)
+    Call(EnableModel, MODEL_n2, false)
     Loop(0)
         // toggle different frames of the speaking 'animation'
-        Call(EnableModel, MODEL_u1, TRUE)
-        Call(EnableModel, MODEL_u2, TRUE)
-        Call(EnableModel, MODEL_si1, FALSE)
-        Call(EnableModel, MODEL_si2, FALSE)
+        Call(EnableModel, MODEL_u1, true)
+        Call(EnableModel, MODEL_u2, true)
+        Call(EnableModel, MODEL_si1, false)
+        Call(EnableModel, MODEL_si2, false)
         Wait(5)
-        Call(EnableModel, MODEL_u1, FALSE)
-        Call(EnableModel, MODEL_u2, FALSE)
-        Call(EnableModel, MODEL_si1, TRUE)
-        Call(EnableModel, MODEL_si2, TRUE)
+        Call(EnableModel, MODEL_u1, false)
+        Call(EnableModel, MODEL_u2, false)
+        Call(EnableModel, MODEL_si1, true)
+        Call(EnableModel, MODEL_si2, true)
         Wait(5)
         Sub(LVar0, 1)
         IfEq(LVar0, 0)
@@ -36,12 +36,12 @@ EvtScript N(EVS_AnimateSpeakingPortrait) = {
 };
 
 EvtScript N(EVS_Interact_LowerPortrait) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_GOT_BOO_PORTRAIT)
-            IfEq(GF_OBK01_Met_Portrait, FALSE)
+            IfEq(GF_OBK01_Met_Portrait, false)
                 Call(ShowMessageAtScreenPos, MSG_CH3_002B, 160, 40)
-                Set(GF_OBK01_Met_Portrait, TRUE)
+                Set(GF_OBK01_Met_Portrait, true)
             Else
                 Call(ShowMessageAtScreenPos, MSG_CH3_002C, 160, 40)
             EndIf
@@ -85,7 +85,7 @@ EvtScript N(EVS_Interact_LowerPortrait) = {
                     EndLoop
                     Wait(30 * DT)
                     Call(RemoveItemEntity, LVarA)
-                    IfEq(GF_OBK01_Met_Portrait, TRUE)
+                    IfEq(GF_OBK01_Met_Portrait, true)
                         Set(LVar0, 25)
                         Exec(N(EVS_AnimateSpeakingPortrait))
                         Call(ShowMessageAtScreenPos, MSG_CH3_002D, 160, 40)
@@ -97,7 +97,7 @@ EvtScript N(EVS_Interact_LowerPortrait) = {
                     Set(GB_StoryProgress, STORY_CH3_RESTORED_BOO_PORTRAIT)
             EndSwitch
         CaseDefault
-            Call(DisablePlayerPhysics, TRUE)
+            Call(DisablePlayerPhysics, true)
             Call(DisablePartnerAI, 0)
             Call(SetPlayerAnimation, SPRITE_ID_BACK_FACING | ANIM_Mario1_BeforeJump)
             Wait(3)
@@ -110,7 +110,7 @@ EvtScript N(EVS_Interact_LowerPortrait) = {
             Call(UseSettingsFrom, CAM_DEFAULT, 812, 0, 28)
             Call(SetPanTarget, CAM_DEFAULT, 812, 0, 28)
             Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Wait(10 * DT)
             Call(SetPlayerAnimation, ANIM_Mario1_Jump)
@@ -122,25 +122,25 @@ EvtScript N(EVS_Interact_LowerPortrait) = {
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
             Call(EnablePartnerAI)
-            IfEq(GF_OBK01_Portrait_Farewell, FALSE)
+            IfEq(GF_OBK01_Portrait_Farewell, false)
                 Wait(10 * DT)
                 Set(LVar0, 5)
                 Exec(N(EVS_AnimateSpeakingPortrait))
                 Call(ShowMessageAtScreenPos, MSG_CH3_002F, 160, 40)
-                Set(GF_OBK01_Portrait_Farewell, TRUE)
+                Set(GF_OBK01_Portrait_Farewell, true)
             EndIf
-            Call(DisablePlayerPhysics, FALSE)
+            Call(DisablePlayerPhysics, false)
             Wait(2)
-            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+            Call(PanToTarget, CAM_DEFAULT, 0, false)
     EndSwitch
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Interact_UpperPortrait) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
     Call(SetPlayerAnimation, SPRITE_ID_BACK_FACING | ANIM_Mario1_BeforeJump)
     Wait(3)
@@ -153,7 +153,7 @@ EvtScript N(EVS_Interact_UpperPortrait) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 812, -210, 28)
     Call(SetPanTarget, CAM_DEFAULT, 812, -210, 28)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_Jump)
@@ -164,18 +164,18 @@ EvtScript N(EVS_Interact_UpperPortrait) = {
     Call(SetPlayerActionState, ACTION_STATE_LAND)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(EnablePartnerAI)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerPhysics, false)
     Wait(2)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_PortraitFrame_ShakeWhenNear) = {
     Loop(0)
-        IfEq(AF_OBK01_IsPlayerNearPortrait, TRUE)
+        IfEq(AF_OBK01_IsPlayerNearPortrait, true)
             IfNe(AF_OBK01_WasPlayerNearPortrait, AF_OBK01_IsPlayerNearPortrait)
                 Loop(3)
                     Call(RotateModel, MODEL_n1, 5, 0, 0, 1)
@@ -199,12 +199,12 @@ EvtScript N(EVS_PortraitFrame_ShakeWhenNear) = {
 EvtScript N(EVS_PortraitFrame_MonitorPlayerPos) = {
     Loop(0)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
-        Set(AF_OBK01_IsPlayerNearPortrait, FALSE)
-        IfEq(GF_OBK01_Met_Portrait, FALSE)
+        Set(AF_OBK01_IsPlayerNearPortrait, false)
+        IfEq(GF_OBK01_Met_Portrait, false)
             IfGe(LVar1, -210)
                 IfLe(LVar1, -100)
                     IfGe(LVar0, 775)
-                        Set(AF_OBK01_IsPlayerNearPortrait, TRUE)
+                        Set(AF_OBK01_IsPlayerNearPortrait, true)
                     EndIf
                 EndIf
             EndIf
@@ -226,19 +226,19 @@ EvtScript N(EVS_SetupPortrait) = {
     Exec(N(EVS_PortraitFrame_MonitorPlayerPos))
     Exec(N(EVS_PortraitFrame_ShakeWhenNear))
     IfLt(GB_StoryProgress, STORY_CH3_RESTORED_BOO_PORTRAIT)
-        Call(EnableModel, MODEL_n1, TRUE)
-        Call(EnableModel, MODEL_u1, FALSE)
-        Call(EnableModel, MODEL_si1, FALSE)
-        Call(EnableModel, MODEL_n2, TRUE)
-        Call(EnableModel, MODEL_u2, FALSE)
-        Call(EnableModel, MODEL_si2, FALSE)
+        Call(EnableModel, MODEL_n1, true)
+        Call(EnableModel, MODEL_u1, false)
+        Call(EnableModel, MODEL_si1, false)
+        Call(EnableModel, MODEL_n2, true)
+        Call(EnableModel, MODEL_u2, false)
+        Call(EnableModel, MODEL_si2, false)
     Else
-        Call(EnableModel, MODEL_n1, FALSE)
-        Call(EnableModel, MODEL_n2, FALSE)
-        Call(EnableModel, MODEL_u1, TRUE)
-        Call(EnableModel, MODEL_u2, TRUE)
-        Call(EnableModel, MODEL_si1, FALSE)
-        Call(EnableModel, MODEL_si2, FALSE)
+        Call(EnableModel, MODEL_n1, false)
+        Call(EnableModel, MODEL_n2, false)
+        Call(EnableModel, MODEL_u1, true)
+        Call(EnableModel, MODEL_u2, true)
+        Call(EnableModel, MODEL_si1, false)
+        Call(EnableModel, MODEL_si2, false)
     EndIf
     Return
     End

@@ -70,7 +70,7 @@ EvtScript N(EVS_TwinkTappingOnGlassDoor) = {
 };
 
 EvtScript N(EVS_Scene_Chapter0) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(N(SetPeachDepressed))
     Call(SetPlayerAnimation, ANIM_Peach2_SadStill)
     Call(InterpPlayerYaw, 270, 0)
@@ -207,22 +207,22 @@ EvtScript N(EVS_Scene_Chapter0) = {
     Wait(10)
     Call(SetPlayerAnimation, ANIM_Peach2_TalkIdle)
     Call(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 5, MSG_Peach_0021)
-    Set(AF_KKJ_03, FALSE)
+    Set(AF_KKJ_03, false)
     ExecGetTID(N(EVS_TwinkTappingOnGlassDoor), LVarA)
     Thread
         Call(UseSettingsFrom, CAM_DEFAULT, 413, 0, -66)
-        Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+        Call(SetCamType, CAM_DEFAULT, 4, false)
         Call(SetCamPosA, CAM_DEFAULT, 338, 44)
         Call(SetCamPosB, CAM_DEFAULT, 413, -66)
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Wait(10 * DT)
     Call(SetPlayerSpeed, Float(3.0 / DT))
     Call(PlayerMoveTo, 179, -4, 0)
     Call(PlayerMoveTo, 439, -16, 0)
-    Set(AF_KKJ_03, TRUE)
+    Set(AF_KKJ_03, true)
     KillThread(LVarA)
     Call(InterpNpcYaw, NPC_PARTNER, 270, 0)
     Wait(15 * DT)
@@ -251,7 +251,7 @@ EvtScript N(EVS_Scene_Chapter0) = {
                 BreakLoop
             EndIf
         EndLoop
-        Set(AF_KKJ_03, FALSE)
+        Set(AF_KKJ_03, false)
     EndThread
     Thread
         Loop(0)
@@ -277,18 +277,18 @@ EvtScript N(EVS_Scene_Chapter0) = {
         Call(func_802D1270, 420, 0, Float(2.0 / DT))
     EndThread
     Wait(10 * DT)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Wait(30 * DT)
     Call(UseSettingsFrom, CAM_DEFAULT, 370, 30, 0)
     Call(SetPanTarget, CAM_DEFAULT, 370, 30, 0)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(370.0), Float(32.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Loop(0)
         Wait(1)
-        IfEq(AF_KKJ_03, FALSE)
+        IfEq(AF_KKJ_03, false)
             BreakLoop
         EndIf
     EndLoop
@@ -374,7 +374,7 @@ EvtScript N(EVS_Scene_Chapter0) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(200.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-12.5))
     Call(SetPanTarget, CAM_DEFAULT, 365, 30, 17)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Call(NpcFlyTo, NPC_PARTNER, 350, 50, -2, 30 * DT, -5, EASING_LINEAR)
     EndThread
@@ -423,7 +423,7 @@ EvtScript N(EVS_Scene_Chapter0) = {
         Wait(10 * DT)
         Call(SetPlayerAnimation, ANIM_Peach2_TalkIdle)
         Call(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 5, MSG_Peach_002E)
-        Set(AF_KKJ_03, TRUE)
+        Set(AF_KKJ_03, true)
     EndThread
     Thread
         Loop(0)
@@ -448,7 +448,7 @@ EvtScript N(EVS_Scene_Chapter0) = {
     Call(InterpNpcYaw, NPC_PARTNER, 270, 0)
     Loop(0)
         Wait(1)
-        IfEq(AF_KKJ_03, TRUE)
+        IfEq(AF_KKJ_03, true)
             BreakLoop
         EndIf
     EndLoop
@@ -480,7 +480,7 @@ EvtScript N(EVS_Scene_Chapter0) = {
     Call(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 10)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0031)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_Fly)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Call(InterpNpcYaw, NPC_PARTNER, 90, 5)
     Wait(10 * DT)
     Call(FadeOutMusic, 0, 2000 * DT)
@@ -488,7 +488,7 @@ EvtScript N(EVS_Scene_Chapter0) = {
     Wait(30 * DT)
     Call(GotoMap, Ref("kkj_26"), kkj_26_ENTRY_2)
     Wait(100 * DT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

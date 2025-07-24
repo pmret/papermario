@@ -3,18 +3,18 @@
 #include "sprite/player.h"
 
 EvtScript N(EVS_SetupLogObjects) = {
-    IfEq(GF_JAN06_CreateLogBridge, FALSE)
+    IfEq(GF_JAN06_CreateLogBridge, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o169, COLLIDER_FLAGS_UPPER_MASK)
-        Call(EnableModel, MODEL_o95, FALSE)
-        Call(EnableModel, MODEL_o96, FALSE)
+        Call(EnableModel, MODEL_o95, false)
+        Call(EnableModel, MODEL_o96, false)
         Call(TranslateGroup, MODEL_g20, 0, -150, 0)
         Call(TranslateGroup, MODEL_g21, 0, -150, 0)
     Else
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o167, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o168, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o169, COLLIDER_FLAGS_UPPER_MASK)
-        Call(EnableModel, MODEL_o95, TRUE)
-        Call(EnableModel, MODEL_o96, TRUE)
+        Call(EnableModel, MODEL_o95, true)
+        Call(EnableModel, MODEL_o96, true)
         Call(TranslateGroup, MODEL_g20, 0, 10, 0)
         Call(TranslateGroup, MODEL_g21, 0, 10, 0)
         Call(RotateGroup, MODEL_g20, -90, 0, 0, 1)
@@ -83,7 +83,7 @@ EvtScript N(EVS_LogAnim_FallDown) = {
 EvtScript N(EVS_LogAnim_FallOver) = {
     Thread
         Wait(50)
-        Set(MF_KillLogShadow, TRUE)
+        Set(MF_KillLogShadow, true)
     EndThread
     Call(MakeLerp, 0, -90, 60, EASING_CUBIC_IN)
     Loop(0)
@@ -106,8 +106,8 @@ EvtScript N(EVS_LogAnim_FallOver) = {
 
 EvtScript N(EVS_LogAnim_Split) = {
     Call(PlaySoundAtCollider, COLLIDER_o167, SOUND_JAN_LOG_SPLIT, 0)
-    Call(EnableModel, MODEL_o95, TRUE)
-    Call(EnableModel, MODEL_o96, TRUE)
+    Call(EnableModel, MODEL_o95, true)
+    Call(EnableModel, MODEL_o96, true)
     Call(MakeLerp, 0, 90, 30, EASING_COS_FAST_OVERSHOOT)
     Loop(0)
         Call(UpdateLerp)
@@ -129,8 +129,8 @@ EvtScript N(EVS_LogAnim_Split) = {
 };
 
 EvtScript N(EVS_Smash_BuriedLog) = {
-    Set(GF_JAN06_CreateLogBridge, TRUE)
-    Call(DisablePlayerInput, TRUE)
+    Set(GF_JAN06_CreateLogBridge, true)
+    Call(DisablePlayerInput, true)
     ExecWait(N(EVS_LogAnim_RiseUp))
     Wait(1)
     ExecWait(N(EVS_LogAnim_FallDown))
@@ -139,14 +139,14 @@ EvtScript N(EVS_Smash_BuriedLog) = {
     Wait(1)
     ExecWait(N(EVS_LogAnim_Split))
     Wait(1)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Exec(N(EVS_SetupLogObjects))
     Return
     End
 };
 
 EvtScript N(EVS_SetupLogs) = {
-    IfEq(GF_JAN06_CreateLogBridge, FALSE)
+    IfEq(GF_JAN06_CreateLogBridge, false)
         BindTrigger(Ref(N(EVS_Smash_BuriedLog)), TRIGGER_WALL_HAMMER, COLLIDER_o167, 1, 0)
     EndIf
     Exec(N(EVS_SetupLogObjects))

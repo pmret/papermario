@@ -14,7 +14,7 @@ EvtScript N(EVS_SpawnBzzap) = {
 };
 
 EvtScript N(EVS_OnShakeTree1) = {
-    IfEq(GF_FLO09_Item_HappyFlowerB, FALSE)
+    IfEq(GF_FLO09_Item_HappyFlowerB, false)
         IfEq(AB_FLO_TreePuzzle_SecondCorrect, 1)
             Call(MakeItemEntity, ITEM_HAPPY_FLOWER_B, -250, 100, 0, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_FLO09_Item_HappyFlowerB)
         Else
@@ -29,7 +29,7 @@ EvtScript N(EVS_OnShakeTree1) = {
 };
 
 EvtScript N(EVS_OnShakeTree2) = {
-    IfEq(GF_FLO09_Item_HappyFlowerB, FALSE)
+    IfEq(GF_FLO09_Item_HappyFlowerB, false)
         Set(AB_FLO_TreePuzzle_FirstCorrect, 1)
         Set(AB_FLO_TreePuzzle_SecondCorrect, 0)
     EndIf
@@ -38,7 +38,7 @@ EvtScript N(EVS_OnShakeTree2) = {
 };
 
 EvtScript N(EVS_OnShakeTree3) = {
-    IfEq(GF_FLO09_Item_HappyFlowerB, FALSE)
+    IfEq(GF_FLO09_Item_HappyFlowerB, false)
         IfEq(AB_FLO_TreePuzzle_FirstCorrect, 1)
             IfEq(AB_FLO_TreePuzzle_SecondCorrect, 0)
                 Set(AB_FLO_TreePuzzle_SecondCorrect, 1)

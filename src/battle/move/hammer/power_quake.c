@@ -9,7 +9,7 @@
 extern EvtScript N(EVS_802A3168);
 
 EvtScript N(EVS_UseMove) = {
-    Call(ShowActionHud, TRUE)
+    Call(ShowActionHud, true)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
@@ -55,7 +55,7 @@ EvtScript N(EVS_802A3168) = {
     EndThread
     Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
-        CaseGt(FALSE)
+        CaseGt(false)
             Call(StartRumble, BTL_RUMBLE_PLAYER_EXTREME)
             Thread
                 Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.24))
@@ -103,7 +103,7 @@ EvtScript N(EVS_802A3168) = {
             EndThread
     EndSwitch
     Call(GetPlayerActionQuality, LVar0)
-    IfGt(LVar0, FALSE)
+    IfGt(LVar0, false)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_QUAKE)
         Call(MoveBattleCamOver, 5)
     Else
@@ -139,7 +139,7 @@ EvtScript N(EVS_802A3168) = {
         EndIf
         Call(GetPlayerActionQuality, LVar0)
         Switch(LVar0)
-            CaseGt(FALSE)
+            CaseGt(false)
                 Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_QUAKE_HAMMER | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENTS_HAMMER, 0, LVarF, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
             CaseDefault
                 Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_QUAKE_HAMMER | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENTS_HAMMER, 0, LVarE, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)

@@ -2,7 +2,7 @@
 
 API_CALLABLE(N(HasBombetteExploded)) {
     if (gCollisionStatus.bombetteExploded >= 0) {
-        script->varTable[1] = TRUE;
+        script->varTable[1] = true;
     }
     return ApiStatus_DONE2;
 }
@@ -15,16 +15,16 @@ EvtScript N(EVS_MonitorFriendlyFire) = {
         Switch(LVar0)
             CaseEq(ACTION_STATE_HAMMER)
                 Wait(10)
-                Set(LVar1, TRUE)
+                Set(LVar1, true)
             CaseEq(ACTION_STATE_SPIN_POUND)
-                Set(LVar1, TRUE)
+                Set(LVar1, true)
         EndSwitch
         Call(N(HasBombetteExploded))
         IfNe(LVar1, 0)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(ShowMessageAtScreenPos, MSG_MAC_Port_0099, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 6)
             Set(LVar1, 0)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
         EndIf
         Wait(1)
     EndLoop

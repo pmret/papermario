@@ -141,9 +141,9 @@ EvtScript N(EVS_UsePower) = {
         Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EndThread
     Call(PlaySound, SOUND_REFRESH)
-    Call(EnableNpcBlur, NPC_BTL_SPIRIT, TRUE)
+    Call(EnableNpcBlur, NPC_BTL_SPIRIT, true)
     Call(N(FlyAroundPlayer), NPC_BTL_SPIRIT)
-    Call(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
+    Call(EnableNpcBlur, NPC_BTL_SPIRIT, false)
     Call(DeleteNpc, NPC_BTL_SPIRIT)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Add(LVar0, 0)

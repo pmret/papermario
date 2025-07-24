@@ -73,7 +73,7 @@
     .drops = BULLET_BILL_DROPS, \
     .territory = { \
         .wander = { \
-            .isFlying = TRUE, \
+            .isFlying = true, \
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED, \
             .wanderShape = SHAPE_CYLINDER, \
             .centerPos  = { 0, 0, 0 }, \

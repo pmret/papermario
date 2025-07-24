@@ -90,7 +90,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_PLEASANT_PATH)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_TexPan_Flowers))
     Exec(N(EVS_TexPan_Water))

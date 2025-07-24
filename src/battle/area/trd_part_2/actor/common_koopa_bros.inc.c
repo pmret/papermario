@@ -336,7 +336,7 @@ EvtScript N(HandleCommand) = {
     IfNe(LVar0, 0)
         Return
     EndIf
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Switch(LVarA)
         CaseEq(BOSS_CMD_STABLE)
             Call(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
@@ -432,17 +432,17 @@ EvtScript N(HandleCommand) = {
                 CaseOrEq(AVAL_Koopa_State_PosD)
                 CaseOrEq(AVAL_Koopa_State_PosC)
                 CaseOrEq(AVAL_Koopa_State_PosB)
-                    Set(LFlag0, FALSE)
+                    Set(LFlag0, false)
                     IfEq(LVar0, AVAL_Koopa_State_PosA)
-                        Set(LFlag0, TRUE)
+                        Set(LFlag0, true)
                     EndIf
                     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.6))
                     Call(N(GetTowerFallPosition), LVar0, LVar1, LVar2)
                     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_HURT_STILL)
                     Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(BasicHurtAnims)))
-                    Call(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-                    IfEq(LFlag0, TRUE)
+                    Call(JumpToGoal, ACTOR_SELF, 20, false, true, false)
+                    IfEq(LFlag0, true)
                         Call(N(StartRumbleWithParams), 256, 5)
                         Thread
                             Call(ShakeCam, CAM_BATTLE, 0, 5, Float(0.8))
@@ -450,10 +450,10 @@ EvtScript N(HandleCommand) = {
                     EndIf
                     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_TOPPLE_IDLE)
                     Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(BasicToppledAnims)))
-                    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-                    Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-                    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
-                    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, FALSE)
+                    Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
+                    Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
+                    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR, false)
+                    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, false)
                     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     Call(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     Call(HPBarToHome, ACTOR_SELF)
@@ -471,17 +471,17 @@ EvtScript N(HandleCommand) = {
                 CaseOrEq(AVAL_Koopa_State_PosD)
                 CaseOrEq(AVAL_Koopa_State_PosC)
                 CaseOrEq(AVAL_Koopa_State_PosB)
-                    Set(LFlag0, FALSE)
+                    Set(LFlag0, false)
                     IfEq(LVar0, AVAL_Koopa_State_PosA)
-                        Set(LFlag0, TRUE)
+                        Set(LFlag0, true)
                     EndIf
                     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.6))
                     Call(N(GetTowerFallPosition), LVar0, LVar1, LVar2)
                     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_BURN)
                     Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(BasicHurtAnims)))
-                    Call(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-                    IfEq(LFlag0, TRUE)
+                    Call(JumpToGoal, ACTOR_SELF, 20, false, true, false)
+                    IfEq(LFlag0, true)
                         Call(N(StartRumbleWithParams), 256, 5)
                         Thread
                             Call(ShakeCam, CAM_BATTLE, 0, 5, Float(0.8))
@@ -496,10 +496,10 @@ EvtScript N(HandleCommand) = {
                     PlayEffect(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
                     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_TOPPLE_IDLE)
                     Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(BasicToppledAnims)))
-                    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-                    Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-                    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
-                    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, FALSE)
+                    Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
+                    Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
+                    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR, false)
+                    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, false)
                     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     Call(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     Call(HPBarToHome, ACTOR_SELF)
@@ -541,7 +541,7 @@ EvtScript N(HandleCommand) = {
                         Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                         Call(SetActorJumpGravity, ACTOR_SELF, Float(3.0))
                         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                        Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
                         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_STEP_A)
                         Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
                         Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
@@ -619,7 +619,7 @@ EvtScript N(HandleCommand) = {
                     EndSwitch
                     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     Call(SetGoalPos, ACTOR_SELF, -160, LVar1, LVar2)
-                    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+                    Call(RunToGoal, ACTOR_SELF, 0, false)
                     Call(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK)
                     Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
                     Thread
@@ -650,7 +650,7 @@ EvtScript N(HandleCommand) = {
                             Call(AddGoalPos, ACTOR_SELF, 0, LVar0, -4)
                     EndSwitch
                     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.5))
-                    Call(JumpToGoal, ACTOR_SELF, 40, FALSE, TRUE, FALSE)
+                    Call(JumpToGoal, ACTOR_SELF, 40, false, true, false)
                     Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerHeight, LVar0)
                     Switch(LVar0)
                         CaseEq(4)
@@ -701,7 +701,7 @@ EvtScript N(HandleCommand) = {
                     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
                     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     Call(SetGoalPos, ACTOR_SELF, -160, LVar1, LVar2)
-                    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+                    Call(RunToGoal, ACTOR_SELF, 0, false)
                     Call(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK)
                     Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
                     Thread
@@ -737,7 +737,7 @@ EvtScript N(HandleCommand) = {
                             Call(AddGoalPos, ACTOR_SELF, 0, 0, 0)
                     EndSwitch
                     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.5))
-                    Call(JumpToGoal, ACTOR_SELF, 40, FALSE, TRUE, FALSE)
+                    Call(JumpToGoal, ACTOR_SELF, 40, false, true, false)
                     Call(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
                     Switch(LVar0)
                         CaseEq(AVAL_Koopa_State_PosD)
@@ -767,7 +767,7 @@ EvtScript N(HandleCommand) = {
                     Set(LVar2, 15)
                     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_RUN)
-                    Call(RunToGoal, ACTOR_SELF, 10, FALSE)
+                    Call(RunToGoal, ACTOR_SELF, 10, false)
                     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_ENTER_SHELL)
                     Wait(10)
                     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_KOOPA_BROS_SPINUP)
@@ -803,7 +803,7 @@ EvtScript N(HandleCommand) = {
                     Call(SetActorSpeed, ACTOR_SELF, Float(16.0))
                     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     Call(SetGoalPos, ACTOR_SELF, -160, LVar1, LVar2)
-                    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+                    Call(RunToGoal, ACTOR_SELF, 0, false)
                     Call(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK)
                     Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
                     Thread
@@ -821,7 +821,7 @@ EvtScript N(HandleCommand) = {
                     Set(LVar2, 15)
                     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.5))
-                    Call(JumpToGoal, ACTOR_SELF, 40, FALSE, TRUE, FALSE)
+                    Call(JumpToGoal, ACTOR_SELF, 40, false, true, false)
                     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     Call(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 30)
                     Wait(30)
@@ -837,7 +837,7 @@ EvtScript N(HandleCommand) = {
                     Wait(30)
                     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_RUN)
                     Call(SetGoalToHome, ACTOR_SELF)
-                    Call(RunToGoal, ACTOR_SELF, 10, FALSE)
+                    Call(RunToGoal, ACTOR_SELF, 10, false)
                     Call(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
                     BitwiseAndConst(LVar0, ~AFLAG_Boss_DoingSoloAttack)
                     Call(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
@@ -855,7 +855,7 @@ EvtScript N(EVS_Init) = {
     Call(SetActorPos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     Call(ForceHomePos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     Call(HPBarToHome, ACTOR_SELF)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, true)
     Call(SetActorVar, ACTOR_SELF, AVAR_Koopa_State, AVAL_Koopa_State_Ready)
     Call(SetActorVar, ACTOR_SELF, AVAR_Koopa_ToppleTurns, 0)
     Return
@@ -870,7 +870,7 @@ EvtScript N(EVS_Idle) = {
 s32 N(FlipPosOffsets)[] = { 9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0, 4, 6, 7, 6, 4, 0, 2, 0 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -975,7 +975,7 @@ EvtScript N(EVS_HandleEvent) = {
             EndIf
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

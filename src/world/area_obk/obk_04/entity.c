@@ -10,22 +10,22 @@ API_CALLABLE(N(SetItemAlpha)) {
 }
 
 EvtScript N(EVS_OnSmash_Floor) = {
-    Set(GF_OBK04_BoardedFloor, TRUE)
+    Set(GF_OBK04_BoardedFloor, true)
     Return
     End
 };
 
 EvtScript N(EVS_OnSmash_Unused) = {
-    Set(GF_OBK04_UnusedBoardedFloor, TRUE)
+    Set(GF_OBK04_UnusedBoardedFloor, true)
     Return
     End
 };
 
 EvtScript N(EVS_OpenGiantChest) = {
-    Call(DisablePlayerInput, TRUE)
-    Set(GF_OBK04_GiantChest, TRUE)
+    Call(DisablePlayerInput, true)
+    Set(GF_OBK04_GiantChest, true)
     Exec(N(EVS_Scene_BoosUnleashed))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
 EndIf
 Return
 End
@@ -38,7 +38,7 @@ EvtScript N(EVS_MakeEntities) = {
     Call(MakeItemEntity, ITEM_MENU_BOOTS2, NPC_DISPOSE_LOCATION, ITEM_SPAWN_MODE_DECORATION, 0)
     Call(N(SetItemAlpha))
     Set(MV_KeepAwayItem, LVar0)
-    IfEq(GF_OBK04_BoardedFloor, FALSE)
+    IfEq(GF_OBK04_BoardedFloor, false)
         Call(MakeEntity, Ref(Entity_BoardedFloor), 0, 0, 0, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnSmash_Floor)))
     EndIf

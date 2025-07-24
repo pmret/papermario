@@ -38,10 +38,10 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_TOAD_TOWN_TUNNELS)
     Call(SetSpriteShading, SHADING_TIK_04)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     Exec(N(EVS_SetupMusic))
     Exec(N(EVS_SetupDrips))
-    Call(EnableTexPanning, MODEL_mizu, TRUE)
+    Call(EnableTexPanning, MODEL_mizu, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_2)
         TEX_PAN_PARAMS_STEP(    0, -200, -100, -500)

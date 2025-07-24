@@ -285,7 +285,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
@@ -348,7 +348,7 @@ EvtScript N(EVS_HandleEvent) = {
         EndCaseGroup
         CaseDefault
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };
@@ -390,14 +390,14 @@ EvtScript N(runAway) = {
 };
 
 EvtScript N(runAwayFail) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetActorSpeed, ACTOR_PARTNER, Float(6.0))
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Run)
     Call(SetActorYaw, ACTOR_PARTNER, 0)
     Call(RunToGoal, ACTOR_PARTNER, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Idle)
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };
@@ -408,8 +408,8 @@ EvtScript N(EVS_HandlePhase) = {
 };
 
 EvtScript N(EVS_ExecuteAction) = {
-    Call(ShowActionHud, TRUE)
-    Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+    Call(ShowActionHud, true)
+    Call(SetBattleFlagBits, BS_FLAGS1_4000, false)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar0)
         CaseEq(BTL_MENU_TYPE_STAR_POWERS)
@@ -478,15 +478,15 @@ EvtScript N(EVS_ReturnHome_Miss) = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.4))
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 20, false, true, false)
     Sub(LVar0, 30)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 8, FALSE, FALSE, TRUE)
+    Call(JumpToGoal, ACTOR_PARTNER, 8, false, false, true)
     Sub(LVar0, 20)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 6, FALSE, FALSE, TRUE)
+    Call(JumpToGoal, ACTOR_PARTNER, 6, false, false, true)
     Sub(LVar0, 10)
-    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, FALSE, TRUE)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, false, false, true)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ExitShell)
     Wait(4)
     Call(SetGoalToHome, ACTOR_PARTNER)
@@ -507,15 +507,15 @@ EvtScript N(EVS_ReturnHome_Success) = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.1))
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
     Sub(LVar0, 20)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 8, FALSE, FALSE, TRUE)
+    Call(JumpToGoal, ACTOR_PARTNER, 8, false, false, true)
     Sub(LVar0, 10)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 6, FALSE, FALSE, TRUE)
+    Call(JumpToGoal, ACTOR_PARTNER, 6, false, false, true)
     Sub(LVar0, 10)
-    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, FALSE, TRUE)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, false, false, true)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ExitShell)
     Wait(4)
     Call(SetGoalToHome, ACTOR_PARTNER)
@@ -554,7 +554,7 @@ EvtScript N(shellToss) = {
     Call(SetActorSpeed, ACTOR_PARTNER, Float(4.0))
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Run)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_PARTNER, 0, FALSE)
+    Call(RunToGoal, ACTOR_PARTNER, 0, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Idle)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_EnterShell)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
@@ -563,7 +563,7 @@ EvtScript N(shellToss) = {
     Loop(30)
         Wait(1)
         Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        IfNe(LVar0, FALSE)
+        IfNe(LVar0, false)
             BreakLoop
         EndIf
     EndLoop
@@ -601,12 +601,12 @@ EvtScript N(shellToss) = {
         Add(LVar9, 1)
         Call(GetActionProgress, LVar0)
         IfNe(LVar0, 0)
-            IfNe(LVar1, TRUE)
+            IfNe(LVar1, true)
                 Set(LVar1, 1)
             EndIf
         EndIf
         Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             BreakLoop
         EndIf
     EndLoop
@@ -723,7 +723,7 @@ EvtScript N(powerShell) = {
     Call(SetActorSpeed, ACTOR_PARTNER, Float(4.0))
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Run)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_PARTNER, 0, FALSE)
+    Call(RunToGoal, ACTOR_PARTNER, 0, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Idle)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_EnterShell)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
@@ -732,7 +732,7 @@ EvtScript N(powerShell) = {
     Loop(30)
         Wait(1)
         Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        IfNe(LVar0, FALSE)
+        IfNe(LVar0, false)
             BreakLoop
         EndIf
     EndLoop
@@ -770,13 +770,13 @@ EvtScript N(powerShell) = {
         Add(LVar9, 1)
         Call(GetActionProgress, LVar0)
         IfNe(LVar0, 0)
-            IfNe(LVar1, TRUE)
+            IfNe(LVar1, true)
                 Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
                 Set(LVar1, 1)
             EndIf
         EndIf
         Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             BreakLoop
         EndIf
     EndLoop
@@ -819,7 +819,7 @@ EvtScript N(powerShell) = {
         Call(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
         Call(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 1)
     EndThread
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
         Label(10)
         Wait(1)
         Call(SetGoalToTarget, ACTOR_PARTNER)
@@ -832,7 +832,7 @@ EvtScript N(powerShell) = {
         IfEq(LVar0, 6)
             Goto(12)
         EndIf
-        IfEq(LFlag0, FALSE)
+        IfEq(LFlag0, false)
             Call(GetPartnerActionQuality, LVar0)
             Switch(LVar0)
                 CaseGt(0)
@@ -841,7 +841,7 @@ EvtScript N(powerShell) = {
                     Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
             EndSwitch
         EndIf
-        Set(LFlag0, TRUE)
+        Set(LFlag0, true)
         Call(GetPartnerActionQuality, LVar0)
         Switch(LVar0)
             CaseGt(0)
@@ -855,7 +855,7 @@ EvtScript N(powerShell) = {
         IfNe(LVar2, ITER_NO_MORE)
             Goto(10)
         EndIf
-    IfEq(LFlag0, FALSE)
+    IfEq(LFlag0, false)
         Call(GetPartnerActionQuality, LVar0)
         Switch(LVar0)
             CaseGt(0)
@@ -891,7 +891,7 @@ EvtScript N(dizzyShell) = {
     Call(SetActorSpeed, ACTOR_PARTNER, Float(4.0))
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Run)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_PARTNER, 0, FALSE)
+    Call(RunToGoal, ACTOR_PARTNER, 0, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Idle)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_EnterShell)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
@@ -974,7 +974,7 @@ EvtScript N(dizzyShell) = {
         Call(N(SetTargetsYaw))
     EndThread
     Call(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Label(10)
         Wait(1)
         Call(SetGoalToTarget, ACTOR_PARTNER)
@@ -987,7 +987,7 @@ EvtScript N(dizzyShell) = {
         IfEq(LVar0, HIT_RESULT_MISS)
             Goto(12)
         EndIf
-        IfEq(LFlag0, FALSE)
+        IfEq(LFlag0, false)
             Call(GetPartnerActionQuality, LVar0)
             Switch(LVar0)
                 CaseGt(99)
@@ -996,7 +996,7 @@ EvtScript N(dizzyShell) = {
                     Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
             EndSwitch
         EndIf
-        Set(LFlag0, TRUE)
+        Set(LFlag0, true)
         Call(GetActionProgress, LVarF)
         Call(GetPartnerActionQuality, LVar0)
         Switch(LVar0)
@@ -1024,7 +1024,7 @@ EvtScript N(dizzyShell) = {
         IfNe(LVar2, ITER_NO_MORE)
             Goto(10)
         EndIf
-    IfEq(LFlag0, FALSE)
+    IfEq(LFlag0, false)
         Call(GetPartnerActionQuality, LVar0)
         Switch(LVar0)
             CaseGt(99)
@@ -1063,7 +1063,7 @@ EvtScript N(fireShell) = {
     Call(SetActorSpeed, ACTOR_PARTNER, Float(4.0))
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Run)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_PARTNER, 0, FALSE)
+    Call(RunToGoal, ACTOR_PARTNER, 0, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Idle)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_EnterShell)
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
@@ -1086,7 +1086,7 @@ EvtScript N(fireShell) = {
     Call(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
     Call(SetActorPaletteEffect, ACTOR_PARTNER, -1, ACTOR_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
     Call(SetActorPaletteSwapParams, ACTOR_PARTNER, -1, SPR_PAL_BattleKooper, SPR_PAL_BattleKooper, 1, 10, 1000, 10, 0, 0)
-    Call(EnableActorPaletteEffects, ACTOR_PARTNER, 0, TRUE)
+    Call(EnableActorPaletteEffects, ACTOR_PARTNER, 0, true)
     Set(LVar6, SPR_PAL_BattleKooper)
     Set(LVar7, SPR_PAL_BattleKooper)
     Set(LVar8, 30)
@@ -1210,7 +1210,7 @@ EvtScript N(fireShell) = {
         Call(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 1)
         Wait(20)
         Call(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
-        Call(EnableActorPaletteEffects, ACTOR_PARTNER, 0, FALSE)
+        Call(EnableActorPaletteEffects, ACTOR_PARTNER, 0, false)
         Call(SetActorPos, ACTOR_PARTNER, -200, 0, 0)
         Call(SetGoalToHome, ACTOR_PARTNER)
         Call(AddGoalPos, ACTOR_PARTNER, 40, 0, 0)
@@ -1220,7 +1220,7 @@ EvtScript N(fireShell) = {
         Call(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
     EndThread
     Call(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Label(10)
         Wait(1)
         Call(SetGoalToTarget, ACTOR_PARTNER)
@@ -1233,7 +1233,7 @@ EvtScript N(fireShell) = {
         IfEq(LVar0, 6)
             Goto(12)
         EndIf
-        IfEq(LFlag0, FALSE)
+        IfEq(LFlag0, false)
             Call(GetPartnerActionQuality, LVar0)
             Switch(LVar0)
                 CaseGt(99)
@@ -1242,7 +1242,7 @@ EvtScript N(fireShell) = {
                     Call(UseBattleCamPreset, BTL_CAM_PARTNER_MISTAKE)
             EndSwitch
         EndIf
-        Set(LFlag0, TRUE)
+        Set(LFlag0, true)
         Call(GetActionProgress, LVar0)
         Call(GetPartnerActionQuality, LVar0)
         Switch(LVar0)
@@ -1257,7 +1257,7 @@ EvtScript N(fireShell) = {
         IfNe(LVar0, ITER_NO_MORE)
             Goto(10)
         EndIf
-    IfEq(LFlag0, FALSE)
+    IfEq(LFlag0, false)
         Call(GetPartnerActionQuality, LVar0)
         Switch(LVar0)
             CaseGt(99)
@@ -1362,15 +1362,15 @@ EvtScript N(shellTossOnFirstStrike) = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.1))
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
     Sub(LVar0, 30)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 8, FALSE, FALSE, TRUE)
+    Call(JumpToGoal, ACTOR_PARTNER, 8, false, false, true)
     Sub(LVar0, 20)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 6, FALSE, FALSE, TRUE)
+    Call(JumpToGoal, ACTOR_PARTNER, 6, false, false, true)
     Sub(LVar0, 10)
-    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, FALSE, TRUE)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, false, false, true)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ExitShell)
     Wait(15)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Idle)
@@ -1380,7 +1380,7 @@ EvtScript N(shellTossOnFirstStrike) = {
     Call(RunToGoal, ACTOR_PARTNER, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Idle)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

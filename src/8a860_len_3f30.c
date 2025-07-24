@@ -772,7 +772,7 @@ s32 popup_menu_update(void) {
             }
 
             do {
-                cond = FALSE;
+                cond = false;
                 if (PopupMenu_SelectedIndex >= PopupMenu_FirstDisplayIndex + PopupMenu_LastDisplayIndex - 1) {
                     PopupMenu_FirstDisplayIndex++;
                     if (PopupMenu_FirstDisplayIndex > gPopupMenu->numEntries - PopupMenu_MaxDisplayableEntryCount) {
@@ -781,7 +781,7 @@ s32 popup_menu_update(void) {
                             PopupMenu_FirstDisplayIndex = 0;
                         }
                     } else {
-                        cond = TRUE;
+                        cond = true;
                     }
                 }
             } while (cond);
@@ -2235,7 +2235,7 @@ void create_standard_popup_menu(PopupMenu* popup) {
     popup->dipMode = 0;
     popup->titleNumber = 0;
     PopupDipMode = 0;
-    PopupNotDipping = TRUE;
+    PopupNotDipping = true;
     if (popup->popupType >= POPUP_MENU_DOUBLE_DIP) {
         popup->popupType -= POPUP_MENU_DOUBLE_DIP;
         PopupDipMode = 1;
@@ -2243,10 +2243,10 @@ void create_standard_popup_menu(PopupMenu* popup) {
             popup->popupType -= POPUP_MENU_DOUBLE_DIP;
             PopupDipMode = 2;
         }
-        PopupNotDipping = FALSE;
+        PopupNotDipping = false;
     }
 
-    PopupNotBattle = TRUE;
+    PopupNotBattle = true;
     PopupMenu_MaxDisplayableEntryCount = 6;
     gPopupState = POPUP_STATE_INIT;
 
@@ -2284,7 +2284,7 @@ void create_shop_popup_menu(PopupMenu* popup) {
     popup->titleNumber = 0;
     PopupMenu_WasStatusBarIgnoringChanges = status_bar_is_ignoring_changes();
     PopupDipMode = 0;
-    PopupNotDipping = TRUE;
+    PopupNotDipping = true;
     if (gPopupMenu->popupType >= POPUP_MENU_DOUBLE_DIP) {
         gPopupMenu->popupType -= POPUP_MENU_DOUBLE_DIP;
         PopupDipMode = 1;
@@ -2292,10 +2292,10 @@ void create_shop_popup_menu(PopupMenu* popup) {
             gPopupMenu->popupType -= POPUP_MENU_DOUBLE_DIP;
             PopupDipMode = 2;
         }
-        PopupNotDipping = FALSE;
+        PopupNotDipping = false;
     }
 
-    PopupNotBattle = TRUE;
+    PopupNotBattle = true;
     PopupMenu_MaxDisplayableEntryCount = 6;
     gPopupState = POPUP_STATE_INIT;
     PopupMenu_SelectedIndex = gPopupMenu->initialPos;
@@ -2328,7 +2328,7 @@ void create_battle_popup_menu(PopupMenu* popup) {
     D_8010D693 = popup->titleNumber;
     PopupMenu_WasStatusBarIgnoringChanges = status_bar_is_ignoring_changes();
     PopupDipMode = 0;
-    PopupNotDipping = TRUE;
+    PopupNotDipping = true;
     if (gPopupMenu->popupType >= POPUP_MENU_DOUBLE_DIP) {
         gPopupMenu->popupType -= POPUP_MENU_DOUBLE_DIP;
         PopupDipMode = 1;
@@ -2336,10 +2336,10 @@ void create_battle_popup_menu(PopupMenu* popup) {
             gPopupMenu->popupType -= POPUP_MENU_DOUBLE_DIP;
             PopupDipMode = 2;
         }
-        PopupNotDipping = FALSE;
+        PopupNotDipping = false;
     }
 
-    PopupNotBattle = FALSE;
+    PopupNotBattle = false;
     PopupMenu_MaxDisplayableEntryCount = 6;
     gPopupState = POPUP_STATE_INIT;
     PopupMenu_SelectedIndex = gPopupMenu->initialPos;

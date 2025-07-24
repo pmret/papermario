@@ -72,10 +72,10 @@ EvtScript N(EVS_BetaBreakFloor_Touch) = {
     EndIf
     Loop(5)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, ArrayVar(0), COLLIDER_FLAGS_UPPER_MASK)
-        Call(EnableModel, ArrayVar(1), TRUE)
+        Call(EnableModel, ArrayVar(1), true)
         Wait(1)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, ArrayVar(0), COLLIDER_FLAGS_UPPER_MASK)
-        Call(EnableModel, ArrayVar(1), FALSE)
+        Call(EnableModel, ArrayVar(1), false)
         Wait(1)
     EndLoop
     IfNe(ArrayVar(5), 0)

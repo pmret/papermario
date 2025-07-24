@@ -710,7 +710,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
@@ -775,7 +775,7 @@ EvtScript N(EVS_HandleEvent) = {
         EndCaseGroup
         CaseDefault
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };
@@ -809,7 +809,7 @@ EvtScript N(EVS_Celebrate) = {
 };
 
 EvtScript N(EVS_ExecuteAction) = {
-    Call(ShowActionHud, TRUE)
+    Call(ShowActionHud, true)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar0)
         CaseEq(BTL_MENU_TYPE_STAR_POWERS)
@@ -820,22 +820,22 @@ EvtScript N(EVS_ExecuteAction) = {
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar2)
         CaseEq(MOVE_SKY_DIVE1)
-            Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+            Call(SetBattleFlagBits, BS_FLAGS1_4000, false)
             Set(LVarE, 1)
             Set(LVarF, 2)
             ExecWait(N(skyDive))
         CaseEq(MOVE_SKY_DIVE2)
-            Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+            Call(SetBattleFlagBits, BS_FLAGS1_4000, false)
             Set(LVarE, 2)
             Set(LVarF, 3)
             ExecWait(N(skyDive))
         CaseEq(MOVE_SKY_DIVE3)
-            Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+            Call(SetBattleFlagBits, BS_FLAGS1_4000, false)
             Set(LVarE, 4)
             Set(LVarF, 5)
             ExecWait(N(skyDive))
         CaseEq(MOVE_SHELL_SHOT)
-            Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+            Call(SetBattleFlagBits, BS_FLAGS1_4000, false)
             ExecWait(N(shellShot))
         CaseEq(MOVE_AIR_LIFT)
             ExecWait(N(airLift))
@@ -860,14 +860,14 @@ EvtScript N(runAway) = {
 };
 
 EvtScript N(runAwayFail) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetActorSpeed, ACTOR_PARTNER, Float(6.0))
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Run)
     Call(SetActorYaw, ACTOR_PARTNER, 0)
     Call(RunToGoal, ACTOR_PARTNER, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Walk)
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };
@@ -883,7 +883,7 @@ EvtScript N(EVS_ReturnHome_Success) = {
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarA)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.4))
     Call(AddGoalPos, ACTOR_PARTNER, -50, 0, 0)
-    Call(JumpToGoal, ACTOR_PARTNER, 15, FALSE, FALSE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 15, false, false, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Still)
     ChildThread
         Wait(4)
@@ -908,7 +908,7 @@ EvtScript N(EVS_ReturnHome_Miss) = {
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarA)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
     Call(AddGoalPos, ACTOR_PARTNER, -30, 0, 0)
-    Call(JumpToGoal, ACTOR_PARTNER, 15, FALSE, FALSE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 15, false, false, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Still)
     ChildThread
         Wait(4)
@@ -931,7 +931,7 @@ s32 N(actionCommandTable)[] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 
 EvtScript N(skyDive) = {
     Call(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
     Call(SetActionDifficultyTable, Ref(N(actionCommandTable)))
@@ -1007,13 +1007,13 @@ EvtScript N(skyDive) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };
 
 EvtScript N(shellShot) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_EnterShell)
     Wait(15)
     Call(InitTargetIterator)
@@ -1076,7 +1076,7 @@ EvtScript N(shellShot) = {
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
-            IfEq(LFlag0, TRUE)
+            IfEq(LFlag0, true)
                 SetConst(LVarA, ANIM_BattleParakarry_HurtStill)
             Else
                 SetConst(LVarA, ANIM_BattleParakarry_Think)
@@ -1148,7 +1148,7 @@ EvtScript N(airLift) = {
     Call(N(AirLiftChance))
     IfNe(LVar0, -1)
         Call(action_command_air_lift_start, 0, 87 * DT, AC_DIFFICULTY_STANDARD, 0)
-        Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+        Call(SetBattleFlagBits, BS_FLAGS1_4000, false)
         ChildThread
             Wait(1)
             Call(GetActionProgress, LVar1)
@@ -1181,7 +1181,7 @@ EvtScript N(airLift) = {
             Call(N(CarryAway), LVar0)
             Wait(30)
             Call(GetOwnerTarget, LVar0, LVar1)
-            Call(SetBattleFlagBits, BS_FLAGS1_STAR_POINTS_DROPPED, TRUE)
+            Call(SetBattleFlagBits, BS_FLAGS1_STAR_POINTS_DROPPED, true)
             Call(RemoveActor, LVar0)
         CaseDefault
             Call(GetOwnerTarget, LVar0, LVar1)
@@ -1221,7 +1221,7 @@ EvtScript N(airRaid) = {
     Call(FlyToGoal, ACTOR_PARTNER, 15, -2, EASING_LINEAR)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Idle)
     Call(action_command_air_raid_start, 0, 90 * DT, AC_DIFFICULTY_STANDARD)
-    Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+    Call(SetBattleFlagBits, BS_FLAGS1_4000, false)
     Wait(2)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_PreDive)
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)

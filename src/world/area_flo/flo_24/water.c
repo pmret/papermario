@@ -3,7 +3,7 @@
 #include "world/common/atomic/TexturePan.inc.c"
 
 EvtScript N(EVS_Scene_FillWithWater) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(TranslateGroup, MODEL_g73, 0, 45, 0)
     Call(UseSettingsFrom, CAM_DEFAULT, 170, 0, 160)
     Call(SetPanTarget, CAM_DEFAULT, 170, -90, 160)
@@ -12,7 +12,7 @@ EvtScript N(EVS_Scene_FillWithWater) = {
     Call(SetCamPosA, CAM_DEFAULT, Float(-300.0), Float(200.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(300.0), Float(-150.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(PlaySound, SOUND_LOOP_FLO_FILL_WATER_POOL)
     //@bug thread is never terminated
     Thread
@@ -48,24 +48,24 @@ EvtScript N(EVS_Scene_FillWithWater) = {
 
 EvtScript N(EVS_SetupWater) = {
     IfLt(GB_StoryProgress, STORY_CH6_FILLED_SPRING_WITH_WATER)
-        Call(EnableGroup, MODEL_water1, FALSE)
+        Call(EnableGroup, MODEL_water1, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_g58, COLLIDER_FLAGS_UPPER_MASK)
     Else
-        Call(EnableGroup, MODEL_g60, FALSE)
+        Call(EnableGroup, MODEL_g60, false)
     EndIf
     Call(GetEntryID, LVar0)
     IfNe(LVar0, flo_24_ENTRY_2)
-        Call(EnableGroup, MODEL_g67, FALSE)
+        Call(EnableGroup, MODEL_g67, false)
     EndIf
-    Call(EnableTexPanning, MODEL_o165, TRUE)
-    Call(EnableTexPanning, MODEL_o215, TRUE)
-    Call(EnableTexPanning, MODEL_o166, TRUE)
-    Call(EnableTexPanning, MODEL_o216, TRUE)
-    Call(EnableTexPanning, MODEL_o189, TRUE)
-    Call(EnableTexPanning, MODEL_o192, TRUE)
-    Call(EnableTexPanning, MODEL_o219, TRUE)
-    Call(EnableTexPanning, MODEL_o220, TRUE)
-    Call(EnableTexPanning, MODEL_o218, TRUE)
+    Call(EnableTexPanning, MODEL_o165, true)
+    Call(EnableTexPanning, MODEL_o215, true)
+    Call(EnableTexPanning, MODEL_o166, true)
+    Call(EnableTexPanning, MODEL_o216, true)
+    Call(EnableTexPanning, MODEL_o189, true)
+    Call(EnableTexPanning, MODEL_o192, true)
+    Call(EnableTexPanning, MODEL_o219, true)
+    Call(EnableTexPanning, MODEL_o220, true)
+    Call(EnableTexPanning, MODEL_o218, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(  140,  -80,  -70,  100)

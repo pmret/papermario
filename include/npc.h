@@ -223,7 +223,7 @@ typedef struct {
     /* 0x1C */ Vec3i detectPos;
     /* 0x28 */ VecXZi detectSize;
     /* 0x30 */ enum TerritoryShape detectShape;
-    /* 0x34 */ b32 isFlying;
+    /* 0x34 */ bool isFlying;
 } EnemyTerritoryWander; // size = 0x38
 
 typedef struct {
@@ -233,7 +233,7 @@ typedef struct {
     /* 0x80 */ Vec3i detectPos;
     /* 0x8C */ VecXZi detectSize;
     /* 0x94 */ enum TerritoryShape detectShape;
-    /* 0x98 */ b32 isFlying;
+    /* 0x98 */ bool isFlying;
 } EnemyTerritoryPatrol; // size = 0x9C
 
 typedef union {
@@ -385,7 +385,7 @@ typedef struct EncounterStatus {
     /* 0x008 */ s8 unk_08;
     /* 0x009 */ s8 battleOutcome; // see enum: EncounterOutcomes
     /* 0x00A */ s8 battleTriggerCooldown; ///< set to 15 after victory, 45 after fleeing
-    /* 0x00B */ s8 hasMerleeCoinBonus; /* triple coins when TRUE */
+    /* 0x00B */ s8 hasMerleeCoinBonus; /* triple coins when true */
     /* 0x00C */ u8 damageTaken; /* valid after battle */
     /* 0x00D */ char unk_0D;
     /* 0x00E */ s16 coinsEarned; /* valid after battle */
@@ -424,7 +424,7 @@ extern EncounterStatus gCurrentEncounter;
 
 #endif
 
-b32 basic_ai_check_player_dist(EnemyDetectVolume* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
+bool basic_ai_check_player_dist(EnemyDetectVolume* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
 
 /// The default Npc::onUpdate and Npc::onRender callback.
 void STUB_npc_callback(Npc*);
@@ -458,7 +458,7 @@ void npc_do_world_collision(Npc* npc);
 
 void npc_do_other_npc_collision(Npc* npc);
 
-/// @returns TRUE if a collision occurred
+/// @returns true if a collision occurred
 s32 npc_do_player_collision(Npc* npc);
 
 void npc_try_apply_gravity(Npc* npc);

@@ -14,7 +14,7 @@ EvtScript N(EVS_UsePower) = {
     Call(InitTargetIterator)
     Call(SetGoalToTarget, ACTOR_SELF)
     Thread
-        Call(N(ProcessPeachStarBeam), TRUE)
+        Call(N(ProcessPeachStarBeam), true)
     EndThread
     Wait(10)
     Loop(0)

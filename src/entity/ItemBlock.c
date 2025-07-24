@@ -205,9 +205,9 @@ void entity_HitItemBlock_hide(Entity* entity) {
 s32 entity_TriggerBlock_start_bound_script(Entity* entity) {
     if (entity->boundScriptBytecode != NULL) {
         entity->flags |= ENTITY_FLAG_BOUND_SCRIPT_DIRTY;
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 void entity_TriggerBlock_disable_player_input(void) {

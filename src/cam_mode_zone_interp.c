@@ -623,7 +623,7 @@ void update_camera_zone_interp(Camera* camera) {
     targetX = camera->targetPos.x;
     targetY = camera->targetPos.y;
     targetZ = camera->targetPos.z;
-    changingZone = FALSE;
+    changingZone = false;
 
     if (camera->needsReinit) {
         camera->curSettings = NULL;
@@ -636,8 +636,8 @@ void update_camera_zone_interp(Camera* camera) {
         camera->prevTargetPos.x = 0.0f;
         camera->prevTargetPos.y = 0.0f;
         camera->prevTargetPos.z = 0.0f;
-        camera->prevPrevFollowPlayer = FALSE;
-        camera->prevFollowPlayer = FALSE;
+        camera->prevPrevFollowPlayer = false;
+        camera->prevFollowPlayer = false;
         camera->interpEasingParameter = 0.0f;
         D_800A08DC = 0.0f;
         D_800A08E0 = 0.0f;
@@ -690,7 +690,7 @@ void update_camera_zone_interp(Camera* camera) {
             cs = test_ray_zone_aabb(targetX, targetY + 10.0f, targetZ);
         }
 
-        cond2 = FALSE;
+        cond2 = false;
         cs2 = cs;
         currentController = camera->curSettings;
         if (cs != NULL
@@ -708,7 +708,7 @@ void update_camera_zone_interp(Camera* camera) {
                         && cs->points.two.Bx == currentController->points.two.Bx
                         && cs->points.two.Bz == currentController->points.two.Bz
                     ) {
-                        cond2 = TRUE;
+                        cond2 = true;
                     }
                     break;
                 case CAM_CONTROL_LOOK_AT_POINT:
@@ -717,7 +717,7 @@ void update_camera_zone_interp(Camera* camera) {
                             if (cs->points.two.Ax == currentController->points.two.Ax
                                 && cs->points.two.Az == currentController->points.two.Az
                             ) {
-                                cond2 = TRUE;
+                                cond2 = true;
                             }
                             break;
                         case 1:
@@ -726,7 +726,7 @@ void update_camera_zone_interp(Camera* camera) {
                                 && cs->points.two.Bx == currentController->points.two.Bx
                                 && cs->points.two.Bz == currentController->points.two.Bz
                             ) {
-                                cond2 = TRUE;
+                                cond2 = true;
                             }
                             break;
                     }
@@ -739,7 +739,7 @@ void update_camera_zone_interp(Camera* camera) {
                         && cs2->points.two.Bx == currentController->points.two.Bx
                         && cs2->points.two.Bz == currentController->points.two.Bz
                     ) {
-                        cond2 = TRUE;
+                        cond2 = true;
                     }
                     break;
             }
@@ -751,12 +751,12 @@ void update_camera_zone_interp(Camera* camera) {
             } else {
                 camera->prevSettings = (CameraControlSettings*) CAMERA_SETTINGS_PTR_MINUS_1;
             }
-            changingZone = TRUE;
+            changingZone = true;
             camera->prevRig = CurrentCamRig;
             camera->curSettings = cs;
             camera->interpAlpha = 0.0f;
             camera->linearInterp = 0.0f;
-            camera->panActive = FALSE;
+            camera->panActive = false;
             camera->linearInterpRate = camera->moveSpeed;
             camera->prevPrevFollowPlayer = camera->prevFollowPlayer;
             camera->prevFollowPlayer = camera->followPlayer;
@@ -796,7 +796,7 @@ void update_camera_zone_interp(Camera* camera) {
 
     if (camera->needsReinit) {
         camera->prevRig = camera->nextRig;
-        camera->needsReinit = FALSE;
+        camera->needsReinit = false;
         camera->interpAlpha = 1.0f;
     }
 

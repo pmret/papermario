@@ -61,7 +61,7 @@ API_CALLABLE(SetPlayerPositionFromSaveData) {
         enable_partner_ai();
     }
 
-    camera->needsReinit = TRUE;
+    camera->needsReinit = true;
     return ApiStatus_DONE2;
 }
 
@@ -263,12 +263,12 @@ EvtScript EnterWalkCustom = {
 };
 
 EvtScript EnterPostPipe = {
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(ShortenPartnerTetherDistance)
     Call(CheckUsingRideablePartner)
     Call(EnterPlayerPostPipe)
     Call(ResetPartnerTetherDistance)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerPhysics, false)
     Return
     End
 };
@@ -283,7 +283,7 @@ EvtScript EnterSavePoint = {
 };
 
 EvtScript ExitWalk = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShortenPartnerTetherDistance)
     Call(CheckUsingRideablePartner)
     IfEq(LVarA, 0)
@@ -356,8 +356,8 @@ EvtScript EnterSplitDoubleDoor = {
 };
 
 EvtScript BaseExitDoor = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(ShortenPartnerTetherDistance)
     Set(LVar9, LVar0)
     Call(GetEntryCoords, LVar0, LVarC, LVarD, LVarE, LVarB)
@@ -399,14 +399,14 @@ EvtScript BaseExitDoor = {
         ExecWait(LVarB)
     EndIf
     Call(ResetPartnerTetherDistance)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript BaseEnterDoor = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShortenPartnerTetherDistance)
     UseBuf(LVar2)
     Loop(0)
@@ -464,7 +464,7 @@ EvtScript BaseEnterDoor = {
         Goto(0)
     EndIf
     Call(ResetPartnerTetherDistance)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

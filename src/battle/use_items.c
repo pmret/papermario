@@ -118,7 +118,7 @@ API_CALLABLE(LoadItemScript) {
     s32 i = 0;
     s32* itemPtr;
 
-    while (TRUE) {
+    while (true) {
         if (playerData->invItems[i] == itemID) {
             playerData->invItems[i] = ITEM_NONE;
             break;
@@ -157,7 +157,7 @@ API_CALLABLE(LoadItemScript) {
     dma_copy(gBattleItemTable[i].romStart, gBattleItemTable[i].romEnd, gBattleItemTable[i].vramStart);
 
     script->varTablePtr[0] = gBattleItemTable[i].mainScript;
-    script->varTable[1] = FALSE;
+    script->varTable[1] = false;
 
     return ApiStatus_DONE2;
 }
@@ -196,7 +196,7 @@ API_CALLABLE(LoadMysteryItemScript) {
 
     dma_copy(gBattleItemTable[i].romStart, gBattleItemTable[i].romEnd, gBattleItemTable[i].vramStart);
     script->varTablePtr[0] = gBattleItemTable[i].mainScript;
-    script->varTable[1] = TRUE;
+    script->varTable[1] = true;
     return ApiStatus_DONE2;
 }
 

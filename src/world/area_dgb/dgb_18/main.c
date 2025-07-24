@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitDoors_dgb_01_6) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_18_ENTRY_0)
     Set(LVar1, COLLIDER_deilittw)
@@ -35,7 +35,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_TUBBAS_MANOR)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
     BindTrigger(Ref(N(EVS_ExitDoors_dgb_01_6)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittw, 1, 0)

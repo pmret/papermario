@@ -4,8 +4,8 @@ EvtScript N(EVS_ExitWalk_iwa_10_1) = EVT_EXIT_WALK(60, iwa_00_ENTRY_0, "iwa_10",
 EvtScript N(EVS_ExitWalk_iwa_01_0) = EVT_EXIT_WALK(60, iwa_00_ENTRY_1, "iwa_01", iwa_01_ENTRY_0);
 
 EvtScript N(EVS_TexPan_Water) = {
-    Call(EnableTexPanning, MODEL_o949, TRUE)
-    Call(EnableTexPanning, MODEL_water, TRUE)
+    Call(EnableTexPanning, MODEL_o949, true)
+    Call(EnableTexPanning, MODEL_water, true)
     Set(LVar0, 0)
     Loop(0)
         Add(LVar0, 3000)
@@ -27,7 +27,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_MT_RUGGED)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_TexPan_Water))
     Exec(N(EVS_BindSlideTriggers))

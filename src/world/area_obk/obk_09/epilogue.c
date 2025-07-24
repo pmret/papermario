@@ -6,17 +6,17 @@ API_CALLABLE(N(SetInvitationLetterScale)) {
 }
 
 EvtScript N(EVS_Scene_Epilogue) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerPos, NPC_DISPOSE_LOCATION)
-    Call(SetCamType, CAM_DEFAULT, 4, TRUE)
+    Call(SetCamType, CAM_DEFAULT, 4, true)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-8.0))
     Call(SetCamDistance, CAM_DEFAULT, 450)
     Call(SetCamPosA, CAM_DEFAULT, -280, 234)
     Call(SetCamPosB, CAM_DEFAULT, -135, 105)
     Call(SetCamPosC, CAM_DEFAULT, 0, 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetNpcAnimation, NPC_Bootler, ANIM_Bootler_Walk)
     Call(NpcMoveTo, NPC_Bootler, -159, 158, 50)
     Call(SetNpcAnimation, NPC_Bootler, ANIM_Bootler_Idle)

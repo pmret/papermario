@@ -23,20 +23,20 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_GOOMBA_ROAD)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     Call(ClearDefeatedEnemies)
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
     ExecWait(N(EVS_SetupFoliage))
     IfEq(GB_StoryProgress, STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
-        IfEq(AF_KMR_0D, FALSE)
+        IfEq(AF_KMR_0D, false)
             Wait(50)
-            Set(AF_KMR_0D, TRUE)
+            Set(AF_KMR_0D, true)
         EndIf
     EndIf
     Exec(N(D_80240828_8D8CF8))
     Wait(1)
-    Set(GF_MAC01_RowfBadgesChosen, FALSE)
+    Set(GF_MAC01_RowfBadgesChosen, false)
     Return
     End
 };

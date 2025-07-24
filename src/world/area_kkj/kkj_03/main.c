@@ -49,8 +49,8 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_PEACH_CASTLE_GROUNDS)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
-    Call(EnableGroup, MODEL_g156, FALSE)
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
+    Call(EnableGroup, MODEL_g156, false)
     Call(SetTexPanner, MODEL_o715, TEX_PANNER_0)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_0)

@@ -481,7 +481,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
@@ -542,7 +542,7 @@ EvtScript N(EVS_HandleEvent) = {
         EndCaseGroup
         CaseDefault
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };
@@ -580,14 +580,14 @@ EvtScript N(runAway) = {
 };
 
 EvtScript N(runAwayFail) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetActorSpeed, ACTOR_PARTNER, Float(6.0))
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
     Call(SetActorYaw, ACTOR_PARTNER, 0)
     Call(RunToGoal, ACTOR_PARTNER, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };
@@ -598,8 +598,8 @@ EvtScript N(EVS_HandlePhase) = {
 };
 
 EvtScript N(EVS_ExecuteAction) = {
-    Call(ShowActionHud, TRUE)
-    Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+    Call(ShowActionHud, true)
+    Call(SetBattleFlagBits, BS_FLAGS1_4000, false)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar0)
         CaseEq(BTL_MENU_TYPE_STAR_POWERS)
@@ -635,15 +635,15 @@ EvtScript N(EVS_ReturnHome_BellyFlop_Success) = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.4))
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 20, false, true, false)
     Sub(LVar0, 30)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 8, false, true, false)
     Sub(LVar0, 20)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 6, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 6, false, true, false)
     Sub(LVar0, 10)
-    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
     Wait(15)
     Call(SetGoalToHome, ACTOR_PARTNER)
@@ -664,10 +664,10 @@ EvtScript N(EVS_ReturnHome_BellyFlop_Miss) = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.4))
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 8, false, true, false)
     Sub(LVar0, 5)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
     Wait(15)
     Call(SetGoalToHome, ACTOR_PARTNER)
@@ -864,7 +864,7 @@ EvtScript N(EVS_Move_BellyFlop) = {
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
         EndThread
         Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.6))
-        Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_PARTNER, 20, false, true, false)
     Else
         Thread
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Jump)
@@ -872,7 +872,7 @@ EvtScript N(EVS_Move_BellyFlop) = {
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
         EndThread
         Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
-        Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_PARTNER, 20, false, true, false)
     EndIf
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Land)
     Call(SetActorRotation, ACTOR_PARTNER, 0, 0, 0)
@@ -896,9 +896,9 @@ EvtScript N(EVS_Move_BellyFlop) = {
         Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         Call(AddGoalPos, ACTOR_PARTNER, 15, 0, 0)
-        Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_PARTNER, 20, false, true, false)
         Call(AddGoalPos, ACTOR_PARTNER, 10, 0, 0)
-        Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
         Wait(10)
         Call(SetGoalToHome, ACTOR_PARTNER)
         Call(SetActorSpeed, ACTOR_PARTNER, Float(6.0))
@@ -958,7 +958,7 @@ EvtScript N(EVS_Move_Squirt) = {
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
     Call(N(SetSquirtAngle))
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Inhale)
     Call(AddBattleCamDist, -80)
@@ -1034,7 +1034,7 @@ EvtScript N(EVS_Move_Squirt) = {
 };
 
 EvtScript N(EVS_Move_WaterBlock) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(InitTargetIterator)
     Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -95, 26, 10)
@@ -1047,7 +1047,7 @@ EvtScript N(EVS_Move_WaterBlock) = {
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Add(LVar0, 30)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
     Call(LoadActionCommand, ACTION_COMMAND_THREE_CHANCES)
     Call(action_command_three_chances_init, ACV_THREE_CHANCES_WATER_BLOCK)
     Call(SetActionHudPrepareTime, 0)
@@ -1121,7 +1121,7 @@ EvtScript N(EVS_Move_WaterBlock) = {
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
-    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
     Set(LVar1, 180)
     Loop(4)
         Sub(LVar1, 45)
@@ -1138,7 +1138,7 @@ EvtScript N(EVS_Move_WaterBlock) = {
 };
 
 EvtScript N(EVS_Move_TidalWave) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(LoadActionCommand, ACTION_COMMAND_TIDAL_WAVE)
     Call(action_command_tidal_wave_init)
     Call(SetupMashMeter, 5, 20, 30, 60, 80, 100)
@@ -1152,10 +1152,10 @@ EvtScript N(EVS_Move_TidalWave) = {
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.5))
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 5, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 5, false, true, false)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
     Call(AddGoalPos, ACTOR_PARTNER, 30, 40, 0)
-    Call(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 15, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_HoldWater)
     Call(action_command_tidal_wave_start, 0, 100, AC_DIFFICULTY_STANDARD)
@@ -1229,10 +1229,10 @@ EvtScript N(EVS_Move_TidalWave) = {
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
-    Call(JumpToGoal, ACTOR_PARTNER, 40, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 40, false, true, false)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.7))
-    Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
-    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 20, false, true, false)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
     Return
     End
 };

@@ -3,7 +3,7 @@
 
 EvtScript N(EVS_MakeEntities) = {
     Call(MakeEntity, Ref(Entity_BrickBlock), 20, 60, 370, 0, MAKE_ENTITY_END)
-    IfEq(GF_NOK01_RecoveredBlockShell, FALSE)
+    IfEq(GF_NOK01_RecoveredBlockShell, false)
         Call(AssignScript, Ref(N(EVS_BreakBlock_DropShell)))
     EndIf
     Call(MakeEntity, Ref(Entity_SavePoint), 425, 60, 125, 0, MAKE_ENTITY_END)

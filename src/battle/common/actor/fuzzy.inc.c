@@ -115,7 +115,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
     Call(GetLastEvent, ACTOR_SELF, LVar0)
@@ -165,12 +165,12 @@ EvtScript N(EVS_HandleEvent) = {
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_Fuzzy_HurtShock)
             ExecWait(EVS_Enemy_Knockback)
-            Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_Fuzzy_Run)
             ExecWait(EVS_Enemy_HopHome)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.6))
-            Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
         CaseEq(EVENT_SHOCK_DEATH)
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_Fuzzy_HurtShock)
@@ -228,7 +228,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -236,12 +236,12 @@ EvtScript N(EVS_HandleEvent) = {
 #include "common/SpawnEnemyDrainFX.inc.c"
 
 EvtScript N(EVS_TakeTurn) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(GetBattlePhase, LVar0)
     IfEq(LVar0, PHASE_FIRST_STRIKE)
         Call(SetGoalToTarget, ACTOR_SELF)
@@ -280,19 +280,19 @@ EvtScript N(EVS_TakeTurn) = {
             Call(SetActorJumpGravity, ACTOR_SELF, Float(3.0))
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jump)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 11, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 11, false, true, false)
             Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Anim09)
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 20)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(3.0))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 15)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(3.0))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Wait(4)
             Wait(5)
@@ -313,28 +313,28 @@ EvtScript N(EVS_TakeTurn) = {
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
         CaseEq(HIT_RESULT_HIT_STATIC)
             Call(GetStatusFlags, ACTOR_SELF, LVar0)
             IfFlag(LVar0, STATUS_FLAG_STATIC)
-                Set(LFlag0, FALSE)
+                Set(LFlag0, false)
             Else
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
     EndSwitch
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, -3, -12, -15)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(3.0))
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jump)
-    Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-    IfEq(LFlag0, TRUE)
+    Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
+    IfEq(LFlag0, true)
         Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_TRIGGER_EVENTS)
         Return
     EndIf
     Wait(10)
-    Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PLAYER, false)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Leeching)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LEECH)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Bite)
@@ -410,7 +410,7 @@ EvtScript N(EVS_TakeTurn) = {
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
             Call(SetActorScale, ACTOR_SELF, Float(1.4), Float(0.2), Float(1.0))
             Wait(1)
             Thread
@@ -433,7 +433,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Add(LVar0, 30)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             Wait(5)
             Call(YieldTurn)
             Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
@@ -447,7 +447,7 @@ EvtScript N(EVS_TakeTurn) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

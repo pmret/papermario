@@ -117,11 +117,11 @@ EvtScript N(EVS_Main) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o304, COLLIDER_FLAGS_UPPER_MASK)
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH5_RAPHAEL_MOVED_ROOT)
-            Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+            Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
         CaseEq(STORY_CH5_BEGAN_PEACH_MISSION)
-            Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+            Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
         CaseDefault
-            Call(MakeNpcs, FALSE, Ref(N(RavenNPCs)))
+            Call(MakeNpcs, false, Ref(N(RavenNPCs)))
     EndSwitch
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupZiplines))

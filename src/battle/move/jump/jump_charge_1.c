@@ -10,7 +10,7 @@
 
 #include "world/common/todo/IsJumpMaxCharged.inc.c"
 
-BSS b32 N(HasCharged);
+BSS bool N(HasCharged);
 
 API_CALLABLE(N(func_802A1108_74D678)) {
     Bytecode* args = script->ptrReadPos;
@@ -21,9 +21,9 @@ API_CALLABLE(N(func_802A1108_74D678)) {
 
     fx_stat_change(1, var1, var2, var3, 1.0f, 60);
 
-    N(HasCharged) = FALSE;
+    N(HasCharged) = false;
     if (battleStatus->jumpCharge > 0) {
-        N(HasCharged) = TRUE;
+        N(HasCharged) = true;
     }
 
     battleStatus->jumpCharge += 2;
@@ -92,7 +92,7 @@ EvtScript N(EVS_UseMove) = {
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Land)
         Wait(4)
         Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-        Call(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+        Call(UseIdleAnimation, ACTOR_PLAYER, true)
         Call(N(GetChargeMessage))
         Call(ShowVariableMessageBox, LVar0, 60, 2)
     Else
@@ -101,10 +101,10 @@ EvtScript N(EVS_UseMove) = {
     Label(0)
     Wait(1)
     Call(IsMessageBoxDisplayed, LVar0)
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Goto(0)
     EndIf
-    Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PLAYER, false)
     Call(SetGoalToHome, ACTOR_PLAYER)
     Call(SetActorSpeed, ACTOR_PLAYER, Float(8.0))
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)

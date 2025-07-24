@@ -201,12 +201,12 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 EvtScript N(EVS_ManageTutorial) = {
-    Call(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, TRUE)
+    Call(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, true)
     Call(N(ClearPlayerMenuSelections))
     Call(WaitForState, BATTLE_STATE_PLAYER_MENU)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     Wait(15)
-    Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PLAYER, false)
     Call(ActorSpeak, MSG_CH1_0114, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     Thread
         Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
@@ -246,7 +246,7 @@ EvtScript N(EVS_ManageTutorial) = {
         Wait(1)
     EndLoop
     Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 0)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
     Thread
         Call(N(func_80218170_4CF320))
     EndThread
@@ -261,10 +261,10 @@ EvtScript N(EVS_ManageTutorial) = {
         Wait(1)
     EndLoop
     Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 255)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, false)
     Call(ActorSpeak, MSG_CH1_0117, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     Wait(10)
-    Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PLAYER, false)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
     Call(N(StartBlinkingSP))
     Wait(120)
@@ -277,7 +277,7 @@ EvtScript N(EVS_ManageTutorial) = {
     Wait(20)
     Call(ActorSpeak, MSG_CH1_0119, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     Wait(10)
-    Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PLAYER, false)
     Thread
         Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
         Call(SetGoalPos, ACTOR_SELF, -110, 100, 0)
@@ -314,7 +314,7 @@ EvtScript N(EVS_ManageTutorial) = {
         Wait(1)
     EndLoop
     Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 0)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
     Thread
         Call(N(func_80218170_4CF320))
     EndThread
@@ -329,10 +329,10 @@ EvtScript N(EVS_ManageTutorial) = {
         Wait(1)
     EndLoop
     Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 255)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, false)
     Call(ActorSpeak, MSG_CH1_011C, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     Wait(10)
-    Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PLAYER, false)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
     Call(N(StartBlinkingSP))
     Wait(120)

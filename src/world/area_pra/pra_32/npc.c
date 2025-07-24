@@ -28,7 +28,7 @@ EvtScript N(EVS_AnimateCam_CrystalKing) = {
             Call(SetPanTarget, CAM_DEFAULT, 588, LVar5, 116)
             Call(SetCamDistance, CAM_DEFAULT, MV_CamDistance)
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
         EndIf
         Wait(1)
         IfEq(LVar1, 0)
@@ -40,14 +40,14 @@ EvtScript N(EVS_AnimateCam_CrystalKing) = {
 };
 
 EvtScript N(EVS_Scene_CrystalKingAppears) = {
-    Call(EnableNpcShadow, NPC_CrystalKing_01, FALSE)
+    Call(EnableNpcShadow, NPC_CrystalKing_01, false)
     Label(0)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Wait(1)
     IfLt(LVar0, 377)
         Goto(0)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(InterruptUsePartner)
     Call(SetMusic, 0, SONG_CRYSTAL_KING_THEME, 0, VOL_LEVEL_FULL)
     Call(ShowMessageAtScreenPos, MSG_CH7_016A, 160, 40)
@@ -60,13 +60,13 @@ EvtScript N(EVS_Scene_CrystalKingAppears) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
     Call(SetCamPitch, CAM_DEFAULT, Float(12.0), Float(-10.0))
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(30 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
     Call(SetPlayerPos, 475, 100, 116)
     Call(DisablePartnerAI, 0)
     Call(PartnerIsFlying, LVar4)
-    IfEq(LVar4, FALSE)
+    IfEq(LVar4, false)
         Call(SetNpcPos, NPC_PARTNER, 452, 116, 120)
     Else
         Call(SetNpcPos, NPC_PARTNER, 452, 100, 120)
@@ -101,7 +101,7 @@ EvtScript N(EVS_Scene_CrystalKingAppears) = {
     IfEq(LVar1, 1)
         Goto(5)
     EndIf
-    Call(EnableNpcShadow, NPC_CrystalKing_01, TRUE)
+    Call(EnableNpcShadow, NPC_CrystalKing_01, true)
     Wait(30 * DT)
     ExecWait(N(EVS_AnimateCam_CrystalKing))
     Wait(20 * DT)
@@ -114,7 +114,7 @@ EvtScript N(EVS_Scene_CrystalKingAppears) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_CrystalKing_01, ANIM_CrystalKing_Anim09, ANIM_CrystalKing_Anim09, 0, MSG_CH7_016B)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(SetPlayerAnimation, ANIM_Mario1_Run)
     Call(SetPlayerSpeed, Float(2.5 / DT))
     Thread
@@ -132,7 +132,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
         Wait(2)
         Call(FadeOutMusic, 0, 500)
     EndThread
-    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_THUMBS_UP, TRUE)
+    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_THUMBS_UP, true)
     Call(SetPlayerPos, 475, 100, 116)
     Call(DisablePartnerAI, 0)
     Call(GetNpcPos, NPC_CrystalKing_01, LVar0, LVar1, LVar2)
@@ -141,7 +141,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(12.0), Float(-10.0))
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_CrystalKing_01, ANIM_CrystalKing_Anim09, ANIM_CrystalKing_Anim09, 0, MSG_CH7_016C)
     Thread
@@ -200,10 +200,10 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     Call(SetNpcPos, NPC_CrystalKing_01, NPC_DISPOSE_LOCATION)
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     Wait(75 * DT)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1309, SURFACE_TYPE_SNOW)
     Wait(25)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(EnablePartnerAI)
     Exec(N(EVS_SpawnStarCard))
     Set(GB_StoryProgress, STORY_CH7_DEFEATED_CRYSTAL_KING)
@@ -220,8 +220,8 @@ EvtScript N(EVS_NpcInit_CrystalKing) = {
             Exec(N(EVS_RespawnStarCard))
         CaseGt(STORY_CH7_DEFEATED_CRYSTAL_KING)
     EndSwitch
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_USE_INSPECT_ICON, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_USE_INSPECT_ICON, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, false)
     Call(SetNpcYaw, NPC_CrystalKing_01, 270)
     Return
     End

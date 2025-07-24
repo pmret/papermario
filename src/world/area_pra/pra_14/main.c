@@ -32,18 +32,18 @@ BombTrigger N(BombPos_WallB) = {
 };
 
 EvtScript N(EVS_BlastWallA) = {
-    Call(EnableModel, MODEL_g289, FALSE)
+    Call(EnableModel, MODEL_g289, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittsw, COLLIDER_FLAGS_UPPER_MASK)
-    Set(GF_PRA13_BombedWallA, TRUE)
+    Set(GF_PRA13_BombedWallA, true)
     Unbind
     Return
     End
 };
 
 EvtScript N(EVS_BlastWallB) = {
-    Call(EnableModel, MODEL_g260, FALSE)
+    Call(EnableModel, MODEL_g260, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittnw, COLLIDER_FLAGS_UPPER_MASK)
-    Set(GF_PRA13_BombedWallB, TRUE)
+    Set(GF_PRA13_BombedWallB, true)
     Unbind
     Return
     End
@@ -54,8 +54,8 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(SetCamBGColor, CAM_DEFAULT, 24, 24, 40)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
     Set(LVar0, 40)
@@ -63,20 +63,20 @@ EvtScript N(EVS_Main) = {
     Set(LVar2, TEX_PANNER_0)
     Exec(N(EVS_GlassShimmer))
     Set(LVar0, REFLECTION_WALL_ONLY)
-    Set(LVar1, TRUE) // always disable reflections in this room
+    Set(LVar1, true) // always disable reflections in this room
     Exec(N(EVS_SetupReflections))
     Exec(N(EVS_EnterMap))
     Wait(1)
-    IfEq(GF_PRA13_BombedWallA, FALSE)
+    IfEq(GF_PRA13_BombedWallA, false)
         BindTrigger(Ref(N(EVS_BlastWallA)), TRIGGER_POINT_BOMB, Ref(N(BombPos_WallA)), 1, 0)
     Else
-        Call(EnableModel, MODEL_g289, FALSE)
+        Call(EnableModel, MODEL_g289, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittsw, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
-    IfEq(GF_PRA13_BombedWallB, FALSE)
+    IfEq(GF_PRA13_BombedWallB, false)
         BindTrigger(Ref(N(EVS_BlastWallB)), TRIGGER_POINT_BOMB, Ref(N(BombPos_WallB)), 1, 0)
     Else
-        Call(EnableModel, MODEL_g260, FALSE)
+        Call(EnableModel, MODEL_g260, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittnw, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     Return

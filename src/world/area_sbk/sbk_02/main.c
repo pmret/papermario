@@ -36,10 +36,10 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_DRY_DRY_DESERT)
     Call(SetSpriteShading, SHADING_NONE)
     IfEq(GB_StoryProgress, STORY_CH2_GOT_PULSE_STONE)
-        Call(DisablePulseStone, FALSE)
+        Call(DisablePulseStone, false)
     EndIf
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     IfLt(GB_StoryProgress, STORY_CH2_UNCOVERED_DRY_DRY_RUINS)
         PlayEffect(EFFECT_SUN, 0, 0, 0, 0, 0, 0, 0)

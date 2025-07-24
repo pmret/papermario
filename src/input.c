@@ -31,14 +31,14 @@ void func_80028838(void) {
 
 void update_input(void) {
     OSContPad* contData = &D_8009A5B8;
-    s16 handleInput = FALSE;
+    s16 handleInput = false;
     s16 cond1;
     s32 buttons;
     s16 stickX;
     s16 stickY;
 
     if (gGameStatusPtr->contBitPattern & 1) {
-        handleInput = TRUE;
+        handleInput = true;
         nuContDataGet(contData, 0);
     }
 
@@ -52,7 +52,7 @@ void update_input(void) {
         contData->button = gGameStatusPtr->demoButtonInput;
         contData->stick_x = gGameStatusPtr->demoStickX;
         contData->stick_y = gGameStatusPtr->demoStickY;
-        handleInput = TRUE;
+        handleInput = true;
     }
 
     if (!handleInput) {
@@ -91,9 +91,9 @@ void update_input(void) {
     gGameStatusPtr->stickY[0] = stickY;
 
     buttons = contData->button;
-    cond1 = FALSE;
+    cond1 = false;
     if (stickX > 0x20) {
-        cond1 = TRUE;
+        cond1 = true;
         buttons |= BUTTON_STICK_RIGHT;
         if (!(gGameStatusPtr->prevButtons[0] & BUTTON_STICK_RIGHT)) {
             D_8009A6A0 = stickX;
@@ -109,7 +109,7 @@ void update_input(void) {
     }
 
     if (stickX < -0x20) {
-        cond1 = TRUE;
+        cond1 = true;
         buttons |= BUTTON_STICK_LEFT;
         if (!(gGameStatusPtr->prevButtons[0] & BUTTON_STICK_LEFT)) {
             D_8009A6A0 = stickX;
@@ -130,9 +130,9 @@ void update_input(void) {
         D_8009A6A0 = stickX;
     }
 
-    cond1 = FALSE;
+    cond1 = false;
     if (stickY > 0x20) {
-        cond1 = TRUE;
+        cond1 = true;
         buttons |= BUTTON_STICK_UP;
         if (!(gGameStatusPtr->prevButtons[0] & BUTTON_STICK_UP)) {
             D_8009A6A2 = stickY;
@@ -148,7 +148,7 @@ void update_input(void) {
     }
 
     if (stickY < -0x20) {
-        cond1 = TRUE;
+        cond1 = true;
         buttons |= BUTTON_STICK_DOWN;
         if (!(gGameStatusPtr->prevButtons[0] & BUTTON_STICK_DOWN)) {
             D_8009A6A2 = stickY;

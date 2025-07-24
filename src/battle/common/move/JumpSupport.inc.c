@@ -39,7 +39,7 @@ EvtScript N(EVS_CheckForAPress) = {
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_BeforeJump)
     Loop(5)
         Call(CheckButtonPress, BUTTON_A, LVar0)
-        IfEq(LVar0, TRUE)
+        IfEq(LVar0, true)
             BreakLoop
         EndIf
         Wait(1)
@@ -128,7 +128,7 @@ EvtScript N(EVS_JumpSupport_CalcJumpTime_Alt2) = {
 
 EvtScript N(EVS_JumpSupport_Rebound) = {
     Call(PlayerYieldTurn)
-    Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
+    Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, false)
     Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(func_802693F0)
     Call(SetGoalToHome, ACTOR_PLAYER)
@@ -157,7 +157,7 @@ EvtScript N(EVS_JumpSupport_Rebound) = {
 
 EvtScript N(EVS_JumpSupport_F) = {
     Call(PlayerYieldTurn)
-    Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
+    Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, false)
     Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(func_802693F0)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -186,7 +186,7 @@ EvtScript N(EVS_JumpSupport_F) = {
 
 EvtScript N(EVS_JumpSupport_G) = {
     Call(PlayerYieldTurn)
-    Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
+    Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, false)
     Call(UseBattleCamPreset, BTL_CAM_PLAYER_MISTAKE)
     Call(func_802693F0)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -215,7 +215,7 @@ EvtScript N(EVS_JumpSupport_G) = {
 
 EvtScript N(EVS_JumpSupport_UnusedRebound) = {
     Call(PlayerYieldTurn)
-    Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
+    Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, false)
     Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(func_802693F0)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -244,7 +244,7 @@ EvtScript N(EVS_JumpSupport_UnusedRebound) = {
 
 EvtScript N(EVS_JumpSupport_BouncingRebound) = {
     Call(PlayerYieldTurn)
-    Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
+    Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, false)
     Call(EnablePlayerBlur, ACTOR_BLUR_RESET)
     Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(func_802693F0)
@@ -291,7 +291,7 @@ EvtScript N(EVS_JumpSupport_Miss) = {
     Wait(10)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_DustOff)
     Wait(20)
-    Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
+    Call(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, false)
     Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
     Call(func_802693F0)
     Call(EnablePlayerBlur, ACTOR_BLUR_RESET)

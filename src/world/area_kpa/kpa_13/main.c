@@ -51,20 +51,20 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
     ExecWait(N(EVS_MakeEntities))
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
-        Call(EnableGroup, MODEL_after, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
+        Call(EnableGroup, MODEL_after, false)
         Exec(N(EVS_TexPan_Lava))
     Else
-        Call(EnableGroup, MODEL_before, FALSE)
+        Call(EnableGroup, MODEL_before, false)
     EndIf
     Exec(N(EVS_SetupMusic))
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
     Exec(EnterWalk)
     Wait(1)
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
         Exec(N(EVS_SetupPlatforms))
     EndIf
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
         Thread
             Wait(2)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1039, SURFACE_TYPE_LAVA)

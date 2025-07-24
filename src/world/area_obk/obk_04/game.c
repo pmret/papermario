@@ -101,15 +101,15 @@ API_CALLABLE(N(GetPlayerPosOutsideKeepAwayRing)) {
     s32 gt, lt;
 
     if (!(dist > 90.0f)) {
-        gt = FALSE;
+        gt = false;
     } else {
-        gt = TRUE;
+        gt = true;
     }
 
     if (!(dist < 150.0f)) {
-        lt = FALSE;
+        lt = false;
     } else {
-        lt = TRUE;
+        lt = true;
     }
 
     if (gt | lt) {
@@ -214,7 +214,7 @@ EvtScript N(EVS_BooAppear) = {
 };
 
 EvtScript N(EVS_BooSpookAndVanish) = {
-    Call(SetNpcFlagBits, LVarA, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, FALSE)
+    Call(SetNpcFlagBits, LVarA, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, false)
     Call(NpcFacePlayer, LVarA, 0)
     Wait(5)
     Call(SetNpcAnimation, LVarA, ANIM_Boo_Spook)
@@ -256,7 +256,7 @@ EvtScript N(EVS_SpawnGotSuperBootsFX) = {
     EndThread
     Loop(0)
         Wait(1)
-        IfEq(MF_WaitForUpgradeDone, TRUE)
+        IfEq(MF_WaitForUpgradeDone, true)
             BreakLoop
         EndIf
     EndLoop
@@ -271,12 +271,12 @@ EvtScript N(EVS_SpawnGotSuperBootsFX) = {
 };
 
 EvtScript N(EVS_Scene_BoosUnleashed) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetMusic, 0, SONG_BOO_MINIGAME, 0, VOL_LEVEL_FULL)
     Exec(N(EVS_TetherItemToDummy))
     Wait(1)
     Exec(N(EVS_IntroduceAndHideBoots))
-    Set(MV_KeepAwayStarted, TRUE)
+    Set(MV_KeepAwayStarted, true)
     Wait(30)
     Call(SetPlayerAnimation, ANIM_Mario1_Flail)
     Wait(20)
@@ -385,8 +385,8 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
             EndIf
         EndLoop
         Call(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 5, MSG_CH3_003C)
-        Call(DisablePlayerInput, FALSE)
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+        Call(DisablePlayerInput, false)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
         Loop(0)
             Wait(1)
             IfNe(MV_KeepAwayResult, KEEP_AWAY_WAITING)
@@ -394,7 +394,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
             EndIf
         EndLoop
         Set(MV_KeepAwayMovement, KEEP_AWAY_STOP)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         IfEq(MV_KeepAwayResult, KEEP_AWAY_WRONG)
             // player hit the wrong Boo, begin another round
             Wait(20)
@@ -449,13 +449,13 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
     Wait(10)
     Call(SetNpcPos, NPC_DummyBoo, NPC_DISPOSE_LOCATION)
     Wait(1)
-    Set(MF_WaitForUpgradeDone, FALSE)
+    Set(MF_WaitForUpgradeDone, false)
     Exec(N(EVS_PlayUpgradeSong))
     Exec(N(EVS_SpawnGotSuperBootsFX))
     Call(N(UpgradeBootsToSuper))
     Wait(30)
     Call(ShowMessageAtScreenPos, MSG_Menus_0180, 160, 40)
-    Set(MF_WaitForUpgradeDone, TRUE)
+    Set(MF_WaitForUpgradeDone, true)
     Wait(30)
     Call(N(GetPlayerPosOutsideKeepAwayRing))
     Call(SetPlayerSpeed, Float(4.0))
@@ -466,14 +466,14 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_003D)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(20)
     Thread
@@ -509,12 +509,12 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Wait(20)
     Set(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

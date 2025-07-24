@@ -29,9 +29,9 @@ API_CALLABLE(N(IsPeachBattle)) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     } else {
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
     }
 
     return ApiStatus_DONE2;
@@ -117,8 +117,8 @@ EvtScript N(EVS_Init) = {
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
     Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_HandlePhase)))
     Call(N(IsPeachBattle))
-    IfNe(LVar0, TRUE)
-        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_ATTACK, TRUE)
+    IfNe(LVar0, true)
+        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_ATTACK, true)
     EndIf
     Call(SetActorVar, ACTOR_SELF, AVAR_Twink_PowerLevel, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_Twink_DefensePtr, Ref(N(DefenseTable)))
@@ -149,8 +149,8 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PLAYER, false)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
@@ -171,8 +171,8 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach1_Walk)
         EndCaseGroup
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    Call(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
+    Call(UseIdleAnimation, ACTOR_PLAYER, true)
     Return
     End
 };
@@ -211,14 +211,14 @@ EvtScript N(EVS_RunAway) = {
 };
 
 EvtScript N(EVS_RunAwayFail) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetActorSpeed, ACTOR_PARTNER, Float(6.0))
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Angry)
     Call(SetActorYaw, ACTOR_PARTNER, 0)
     Call(RunToGoal, ACTOR_PARTNER, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Idle)
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };
@@ -230,7 +230,7 @@ EvtScript N(EVS_HandlePhase) = {
 
 EvtScript N(EVS_ExecuteAction) = {
     Call(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_FLY, SOUND_TWINK_FLY_A, SOUND_TWINK_FLY_B)
     Call(UseBattleCamPreset, BTL_CAM_PARTNER_MIDAIR)
     Call(BattleCamTargetActor, ACTOR_SELF)
@@ -287,7 +287,7 @@ EvtScript N(EVS_ExecuteAction) = {
     Call(SetActorSpeed, ACTOR_PARTNER, Float(8.0))
     Call(FlyToGoal, ACTOR_PARTNER, 0, -20, EASING_COS_IN_OUT)
     Call(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };

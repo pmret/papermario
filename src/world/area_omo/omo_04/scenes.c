@@ -39,7 +39,7 @@ EvtScript N(EVS_NpcIdle_Kammy) = {
 #include "world/common/util/GetKammyBroomEmitterPos.inc.c"
 
 EvtScript N(EVS_NpcAux_Kammy) = {
-    Set(MF_KammyFlying, FALSE)
+    Set(MF_KammyFlying, false)
     Call(GetNpcPos, NPC_Kammy, LVar6, LVar7, LVar8)
     Loop(0)
         Call(N(GetKammyBroomEmitterPos), MF_KammyFlying)
@@ -98,8 +98,8 @@ EvtScript N(EVS_PlayKammyFlightSounds) = {
 };
 
 EvtScript N(EVS_Scene_KammySetAmbush) = {
-    Call(DisablePlayerInput, TRUE)
-    Set(GF_OMO04_SpawnedPeachChoice1, TRUE)
+    Call(DisablePlayerInput, true)
+    Set(GF_OMO04_SpawnedPeachChoice1, true)
     Set(AB_OMO_CurrentPeachChoice, GB_OMO_PeachChoice1)
     Switch(AB_OMO_CurrentPeachChoice)
         CaseEq(0)
@@ -120,11 +120,11 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(60 * DT)
     ExecGetTID(N(EVS_PlayKammyFlightSounds), MV_FlightSoundsScriptID)
-    Set(MF_KammyFlying, TRUE)
+    Set(MF_KammyFlying, true)
     Thread
         Wait(100 * DT)
         Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
@@ -133,7 +133,7 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
 #else
         Call(SetCamSpeed, CAM_DEFAULT, 2)
 #endif
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Call(LoadPath, 150 * DT, Ref(N(FlightPath_Kammy1)), ARRAY_COUNT(N(FlightPath_Kammy1)), EASING_LINEAR)
     Loop(0)
@@ -144,7 +144,7 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
             BreakLoop
         EndIf
     EndLoop
-    Set(MF_KammyFlying, FALSE)
+    Set(MF_KammyFlying, false)
     KillThread(MV_FlightSoundsScriptID)
     Call(PlaySoundAtNpc, NPC_Kammy, SOUND_SKID, SOUND_SPACE_DEFAULT)
     Thread
@@ -220,9 +220,9 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     Call(SetNpcVar, NPC_Kammy, 0, 0)
     Wait(5 * DT)
     Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     ExecGetTID(N(EVS_PlayKammyFlightSounds), MV_FlightSoundsScriptID)
-    Set(MF_KammyFlying, TRUE)
+    Set(MF_KammyFlying, true)
     Thread
         Call(LoadPath, 130 * DT, Ref(N(FlightPath_Kammy3)), ARRAY_COUNT(N(FlightPath_Kammy3)), EASING_LINEAR)
         Loop(0)

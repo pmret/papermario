@@ -202,36 +202,36 @@ void underwater_appendGfx(void* effect) {
 
     for (j = 0; j < 12; j++) {
         y = j * 16 + 24;
-        edgeY = FALSE;
+        edgeY = false;
 
         if (j == 0) {
             dyTop = -4;
-            edgeY = TRUE;
+            edgeY = true;
         } else {
             dyTop = 0;
         }
 
         if (j == 11) {
             dyBottom = 4;
-            edgeY = TRUE;
+            edgeY = true;
         } else {
             dyBottom = 0;
         }
 
         for (i = 0; i < 18; i++) {
             x = i * 16 + 16;
-            edgeX = FALSE;
+            edgeX = false;
 
             if (i == 0) {
                 dxLeft = -4;
-                edgeX = TRUE;
+                edgeX = true;
             } else {
                 dxLeft = 0;
             }
 
             if (i == 17) {
                 dxRight = 4;
-                edgeX = TRUE;
+                edgeX = true;
             } else {
                 dxRight = 0;
             }

@@ -106,7 +106,7 @@ API_CALLABLE(N(init)) {
 
     acs->actionCommandID = ACTION_COMMAND_THREE_CHANCES;
     acs->state = THREE_CHANCES_STATE_INIT;
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     acs->meterFillLevel = 0;
     acs->meterFillWidth = 0;
     acs->variation = evt_get_variable(script, *args++);
@@ -209,7 +209,7 @@ API_CALLABLE(N(start)) {
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     acs->meterFillLevel = 0;
     acs->meterFillWidth = 0;
     battleStatus->actionProgress = 1;
@@ -355,8 +355,8 @@ void N(update)(void) {
                 acs->stateTimer = 20;
                 acs->threeChances.time = 0;
                 acs->state = THREE_CHANCES_STATE_FIRST_CHANCE;
-                acs->threeChances.hadCorrectTiming = FALSE;
-                acs->wrongButtonPressed = FALSE;
+                acs->threeChances.hadCorrectTiming = false;
+                acs->wrongButtonPressed = false;
             }
             break;
         case THREE_CHANCES_STATE_FIRST_CHANCE:
@@ -385,11 +385,11 @@ void N(update)(void) {
                     }
 
                     if (i < ANTI_MASH_TIME && (battleStatus->pushInputBuffer[pos] & BUTTON_A)) {
-                        acs->wrongButtonPressed = TRUE;
+                        acs->wrongButtonPressed = true;
                     }
 
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !acs->wrongButtonPressed) || acs->autoSucceed) {
-                        acs->threeChances.hadCorrectTiming = TRUE;
+                        acs->threeChances.hadCorrectTiming = true;
                         battleStatus->actionProgress++;
                         break;
                     }
@@ -438,8 +438,8 @@ void N(update)(void) {
                 acs->stateTimer = 20;
                 acs->threeChances.time = 0;
                 acs->state = THREE_CHANCES_STATE_SECOND_CHANCE;
-                acs->threeChances.hadCorrectTiming = FALSE;
-                acs->wrongButtonPressed = FALSE;
+                acs->threeChances.hadCorrectTiming = false;
+                acs->wrongButtonPressed = false;
             }
             break;
         case THREE_CHANCES_STATE_SECOND_CHANCE:
@@ -472,12 +472,12 @@ void N(update)(void) {
 
                     if (i < ANTI_MASH_TIME) {
                         if (battleStatus->pushInputBuffer[pos] & BUTTON_A) {
-                            acs->wrongButtonPressed = TRUE;
+                            acs->wrongButtonPressed = true;
                         }
                     }
 
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !acs->wrongButtonPressed) || acs->autoSucceed) {
-                        acs->threeChances.hadCorrectTiming = TRUE;
+                        acs->threeChances.hadCorrectTiming = true;
                         battleStatus->actionProgress++;
                         break;
                     }
@@ -526,8 +526,8 @@ void N(update)(void) {
                 acs->stateTimer = 20;
                 acs->threeChances.time = 0;
                 acs->state = THREE_CHANCES_STATE_THIRD_CHANCE;
-                acs->threeChances.hadCorrectTiming = FALSE;
-                acs->wrongButtonPressed = FALSE;
+                acs->threeChances.hadCorrectTiming = false;
+                acs->wrongButtonPressed = false;
             }
             break;
         case THREE_CHANCES_STATE_THIRD_CHANCE:
@@ -560,13 +560,13 @@ void N(update)(void) {
 
                     if (i < ANTI_MASH_TIME) {
                         if (battleStatus->pushInputBuffer[pos] & BUTTON_A) {
-                            acs->wrongButtonPressed = TRUE;
+                            acs->wrongButtonPressed = true;
                         }
                     }
 
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !acs->wrongButtonPressed) ||
                         acs->autoSucceed) {
-                        acs->threeChances.hadCorrectTiming = TRUE;
+                        acs->threeChances.hadCorrectTiming = true;
                         battleStatus->actionProgress++;
                         break;
                     }

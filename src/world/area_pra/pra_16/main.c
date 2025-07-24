@@ -22,11 +22,11 @@ s32 N(BothLeftDoorModelsR)[] = { MODEL_o876, MODEL_o877, MODEL_o878, MODEL_o879,
 
 EvtScript N(EVS_ExitDoors_pra_02_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, pra_16_ENTRY_0)
     Set(LVar1, COLLIDER_deilittsw)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothRightDoorModelsL)))
         Set(LVar3, Ref(N(BothRightDoorModelsR)))
     Else
@@ -43,11 +43,11 @@ EvtScript N(EVS_ExitDoors_pra_02_2) = {
 
 EvtScript N(EVS_ExitDoors_pra_18_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, pra_16_ENTRY_1)
     Set(LVar1, COLLIDER_deilittse)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothLeftDoorModelsL)))
         Set(LVar3, Ref(N(BothLeftDoorModelsR)))
     Else
@@ -64,11 +64,11 @@ EvtScript N(EVS_ExitDoors_pra_18_0) = {
 
 EvtScript N(EVS_ExitDoors_pra_18_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, pra_16_ENTRY_2)
     Set(LVar1, COLLIDER_deilittne)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothLeftDoorModelsL)))
         Set(LVar3, Ref(N(BothLeftDoorModelsR)))
     Else
@@ -85,11 +85,11 @@ EvtScript N(EVS_ExitDoors_pra_18_2) = {
 
 EvtScript N(EVS_ExitDoors_pra_02_3) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, pra_16_ENTRY_3)
     Set(LVar1, COLLIDER_deilittnw)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothRightDoorModelsL)))
         Set(LVar3, Ref(N(BothRightDoorModelsR)))
     Else
@@ -118,7 +118,7 @@ EvtScript N(EVS_EnterMap) = {
     Switch(LVar0)
         CaseEq(pra_16_ENTRY_0)
             Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothRightDoorModelsL)))
                 Set(LVar3, Ref(N(BothRightDoorModelsR)))
             Else
@@ -127,7 +127,7 @@ EvtScript N(EVS_EnterMap) = {
             EndIf
         CaseEq(pra_16_ENTRY_1)
             Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothLeftDoorModelsL)))
                 Set(LVar3, Ref(N(BothLeftDoorModelsR)))
             Else
@@ -136,7 +136,7 @@ EvtScript N(EVS_EnterMap) = {
             EndIf
         CaseEq(pra_16_ENTRY_2)
             Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothLeftDoorModelsL)))
                 Set(LVar3, Ref(N(BothLeftDoorModelsR)))
             Else
@@ -145,7 +145,7 @@ EvtScript N(EVS_EnterMap) = {
             EndIf
         CaseEq(pra_16_ENTRY_3)
             Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothRightDoorModelsL)))
                 Set(LVar3, Ref(N(BothRightDoorModelsR)))
             Else
@@ -164,8 +164,8 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(SetCamBGColor, CAM_DEFAULT, 24, 24, 40)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
     Exec(N(EVS_SetupMusic))
     Set(LVar0, MODEL_o945)
     Set(LVar1, MODEL_o947)

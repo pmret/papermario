@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitWalk_nok_13_1) = {
     IfEq(GB_KootFavor_State, KOOT_FAVOR_STATE_2)
-        Set(GF_KootFavor_LeftKoopaVillage, TRUE)
+        Set(GF_KootFavor_LeftKoopaVillage, true)
     EndIf
     Call(N(StopAllRadioStations))
     Call(ClearAmbientSounds, 250)
@@ -40,17 +40,17 @@ EvtScript N(EVS_EnterMap) = {
         Return
     EndIf
     Call(GetEntryID, LVar0)
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     IfEq(LVar0, nok_01_ENTRY_0)
         IfLt(GB_StoryProgress, STORY_CH1_ARRIVED_AT_KOOPA_VILLAGE)
-            Set(LFlag0, TRUE)
+            Set(LFlag0, true)
             Thread
                 Wait(30)
                 Exec(N(EVS_BindExitTriggers))
             EndThread
         EndIf
     EndIf
-    IfEq(LFlag0, FALSE)
+    IfEq(LFlag0, false)
         Set(LVar0, Ref(N(EVS_BindExitTriggers)))
         Exec(EnterWalk)
     EndIf
@@ -91,21 +91,21 @@ EvtScript N(EVS_Main) = {
     Call(GetLanguage, LVar0)
     Call(SetModelTexVariant, MODEL_o340, LVar0)
 #endif
-    Set(GF_MAP_KoopaVillage, TRUE)
-    Set(AF_NOK01_Dialogue_RelaxedKoopa, FALSE)
-    Set(AF_NOK01_Dialogue_Bobomb_01_Crisis, FALSE)
-    Set(AF_NOK01_Dialogue_Bobomb_02, FALSE)
-    Set(AF_NOK_0E, FALSE)
-    Set(GF_NOK01_Bush4_KoopaLeaf, FALSE)
+    Set(GF_MAP_KoopaVillage, true)
+    Set(AF_NOK01_Dialogue_RelaxedKoopa, false)
+    Set(AF_NOK01_Dialogue_Bobomb_01_Crisis, false)
+    Set(AF_NOK01_Dialogue_Bobomb_02, false)
+    Set(AF_NOK_0E, false)
+    Set(GF_NOK01_Bush4_KoopaLeaf, false)
     IfGe(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-        Set(GF_NOK01_RecoveredShellA, TRUE)
-        Set(GF_NOK01_RecoveredBlockShell, TRUE)
-        Set(GF_NOK01_RecoveredTreeShell, TRUE)
+        Set(GF_NOK01_RecoveredShellA, true)
+        Set(GF_NOK01_RecoveredBlockShell, true)
+        Set(GF_NOK01_RecoveredTreeShell, true)
     EndIf
     IfLt(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-        Call(MakeNpcs, FALSE, Ref(N(CrisisNPCs)))
+        Call(MakeNpcs, false, Ref(N(CrisisNPCs)))
     Else
-        Call(MakeNpcs, FALSE, Ref(N(NormalNPCs)))
+        Call(MakeNpcs, false, Ref(N(NormalNPCs)))
     EndIf
     Call(ClearDefeatedEnemies)
     Exec(N(EVS_SetupShop))

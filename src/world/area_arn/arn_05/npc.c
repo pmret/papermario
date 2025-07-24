@@ -24,12 +24,12 @@ API_CALLABLE(N(AwaitCDownPress)) {
 EvtScript N(EVS_NpcInteract_Boo_01) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
-            IfEq(AF_ARN_06, FALSE)
+            IfEq(AF_ARN_06, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0092)
-                Set(AF_ARN_06, TRUE)
+                Set(AF_ARN_06, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0093)
-                Set(AF_ARN_06, FALSE)
+                Set(AF_ARN_06, false)
             EndIf
         CaseLt(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0095)
@@ -53,12 +53,12 @@ EvtScript N(EVS_NpcInteract_Boo_01_Mourning) = {
 EvtScript N(EVS_NpcInteract_Boo_02) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
-            IfEq(AF_ARN_07, FALSE)
+            IfEq(AF_ARN_07, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0099)
-                Set(AF_ARN_07, TRUE)
+                Set(AF_ARN_07, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_009A)
-                Set(AF_ARN_07, FALSE)
+                Set(AF_ARN_07, false)
             EndIf
         CaseLt(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_009C)
@@ -87,8 +87,8 @@ EvtScript N(EVS_NpcInteract_Boo_03) = {
         CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00A9)
         CaseGe(STORY_CH5_STAR_SPRIT_DEPARTED)
-            IfEq(GF_ARN05_GaveGiftAdvice, TRUE)
-                IfEq(AF_ARN_09, TRUE)
+            IfEq(GF_ARN05_GaveGiftAdvice, true)
+                IfEq(AF_ARN_09, true)
                     Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Wave, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00AE)
                 Else
                     Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00B0)
@@ -106,14 +106,14 @@ EvtScript N(EVS_NpcInteract_Boo_03) = {
                         Call(SetNpcAnimation, NPC_SELF, ANIM_Boo_Tan_Wave)
                         Call(ContinueSpeech, NPC_SELF, ANIM_Boo_Tan_Wave, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00AD)
                         Call(SetNpcAnimation, NPC_SELF, ANIM_Boo_Tan_Idle)
-                        Set(GF_ARN05_GaveGiftAdvice, TRUE)
-                        Set(AF_ARN_09, TRUE)
+                        Set(GF_ARN05_GaveGiftAdvice, true)
+                        Set(AF_ARN_09, true)
                     CaseEq(1)
                         Call(SetNpcAnimation, NPC_SELF, ANIM_Boo_Tan_Wave)
                         Call(ContinueSpeech, NPC_SELF, ANIM_Boo_Tan_Wave, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00AD)
                         Call(SetNpcAnimation, NPC_SELF, ANIM_Boo_Tan_Idle)
-                        Set(GF_ARN05_GaveGiftAdvice, TRUE)
-                        Set(AF_ARN_09, TRUE)
+                        Set(GF_ARN05_GaveGiftAdvice, true)
+                        Set(AF_ARN_09, true)
                     CaseEq(2)
                         Call(ContinueSpeech, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00AF)
                 EndSwitch
@@ -140,12 +140,12 @@ EvtScript N(EVS_NpcInteract_Boo_04) = {
 EvtScript N(EVS_NpcInteract_Boo_05) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
-            IfEq(AF_ARN_08, FALSE)
+            IfEq(AF_ARN_08, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00B3)
-                Set(AF_ARN_08, TRUE)
+                Set(AF_ARN_08, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00B4)
-                Set(AF_ARN_08, FALSE)
+                Set(AF_ARN_08, false)
             EndIf
         CaseLt(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00B6)
@@ -185,7 +185,7 @@ EvtScript N(EVS_NpcInit_Boo_03) = {
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Boo_03)))
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_SAW_TUBBA_EAT_BOO)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         CaseLt(STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
             Call(RemoveNpc, NPC_SELF)
         CaseLt(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
@@ -235,7 +235,7 @@ NpcData N(NpcData_Boo_01)[] = {
         .yaw = 270,
         .territory = {
             .patrol = {
-                .isFlying = FALSE,
+                .isFlying = false,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .numPoints  = 2,
                 .points  = {
@@ -293,7 +293,7 @@ NpcData N(NpcData_Boo_01)[] = {
         .yaw = 270,
         .territory = {
             .patrol = {
-                .isFlying = FALSE,
+                .isFlying = false,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .numPoints  = 2,
                 .points  = {
@@ -325,7 +325,7 @@ EvtScript N(EVS_TubbaWalking) = {
 };
 
 EvtScript N(EVS_Scene_TubbaRaid) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(NpcFacePlayer, NPC_Boo_03, 1)
     Call(PlaySoundAtNpc, NPC_Boo_03, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(ShowEmote, NPC_Boo_03, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
@@ -341,13 +341,13 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Sub(LVar4, LVar1)
     Sub(LVar5, LVar2)
     Call(NpcMoveTo, NPC_Boo_03, LVar3, LVar5, 30)
-    Call(SetCamType, CAM_DEFAULT, 6, TRUE)
+    Call(SetCamType, CAM_DEFAULT, 6, true)
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, 350)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Boo_03, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00A0)
     Call(PlaySoundAt, SOUND_HEAVY_NPC_STEP_C, SOUND_SPACE_DEFAULT, 450, 200, 160)
@@ -378,9 +378,9 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Call(SetNpcPos, NPC_Boo_01, 420, 300, 220)
     Call(SetNpcPos, NPC_Boo_02, 460, 250, 210)
     Call(SetNpcPos, NPC_Boo_05, NPC_DISPOSE_LOCATION)
-    Call(EnableNpcShadow, NPC_Boo_01, FALSE)
-    Call(EnableNpcShadow, NPC_Boo_02, FALSE)
-    Call(EnableNpcShadow, NPC_Boo_05, FALSE)
+    Call(EnableNpcShadow, NPC_Boo_01, false)
+    Call(EnableNpcShadow, NPC_Boo_02, false)
+    Call(EnableNpcShadow, NPC_Boo_05, false)
     Call(PlaySound, SOUND_BOO_VANISH_A)
     SetF(LVar0, Float(0.0))
     Loop(20 * DT)
@@ -419,7 +419,7 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Call(ForceUsePartner)
     Wait(60 * DT)
     Call(SetMusic, 0, SONG_TUBBAS_MANOR, BGM_VARIATION_1, VOL_LEVEL_FULL)
-    Call(SetCamType, CAM_DEFAULT, 6, TRUE)
+    Call(SetCamType, CAM_DEFAULT, 6, true)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.5))
     Call(SetCamDistance, CAM_DEFAULT, 450)
@@ -427,9 +427,9 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Call(SetCamPosB, CAM_DEFAULT, 530, 206)
     Call(SetCamPosC, CAM_DEFAULT, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 426, 190, 194)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(SetNpcFlagBits, NPC_Tubba, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_Tubba, NPC_FLAG_GRAVITY, true)
     Call(SetNpcSpeed, NPC_Tubba, Float(2.5 / DT))
     Call(SetNpcPos, NPC_Tubba, 675, 200, 180)
     Call(NpcFaceNpc, NPC_Boo_01, NPC_Tubba, 1)
@@ -465,7 +465,7 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Call(SetCamPosB, CAM_DEFAULT, 530, 206)
     Call(SetCamPosC, CAM_DEFAULT, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 426, 190, 194)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(30 * DT)
     Set(MV_Unk_01, 0)
     Thread
@@ -485,7 +485,7 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Call(SetCamPosB, CAM_DEFAULT, 530, 206)
     Call(SetCamPosC, CAM_DEFAULT, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 240, 169, 206)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Boo_03, ANIM_Boo_Tan_Flail, ANIM_Boo_Tan_Flail, 0, MSG_CH3_00A4)
     Wait(15 * DT)
@@ -506,7 +506,7 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Call(SpeakToPlayer, NPC_Tubba, ANIM_WorldTubba_Anim1E, ANIM_WorldTubba_Anim1E, 5, MSG_CH3_00A6)
     Call(SetNpcPos, NPC_Boo_03, 303, 237, 228)
     Call(SetNpcAnimation, NPC_Boo_03, ANIM_Boo_Tan_Flail)
-    Call(EnableNpcShadow, NPC_Boo_03, FALSE)
+    Call(EnableNpcShadow, NPC_Boo_03, false)
     Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim1F)
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-17.0))
@@ -515,7 +515,7 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Call(SetCamPosB, CAM_DEFAULT, 530, 206)
     Call(SetCamPosC, CAM_DEFAULT, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 280, 169, 206)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Wait(50 * DT)
         Call(PlaySoundAtNpc, NPC_Tubba, SOUND_TUBBA_GULP, SOUND_SPACE_DEFAULT)
@@ -531,7 +531,7 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Call(SetCamPosB, CAM_DEFAULT, 530, 206)
     Call(SetCamPosC, CAM_DEFAULT, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 240, 169, 206)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim06)
     Wait(15 * DT)
@@ -553,14 +553,14 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Call(NpcMoveTo, NPC_Tubba, 550, 196, 0)
     Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim06)
     Call(SetNpcPos, NPC_Tubba, NPC_DISPOSE_LOCATION)
-    Call(SetNpcFlagBits, NPC_Tubba, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_Tubba, NPC_FLAG_GRAVITY, false)
     Call(NpcFacePlayer, NPC_Boo_01, 3)
     Call(SetNpcPos, NPC_Boo_01, 55, 195, 160)
     Call(SetNpcPos, NPC_Boo_02, 160, 191, 250)
     Call(SetNpcPos, NPC_Boo_05, 350, 185, 197)
-    Call(EnableNpcShadow, NPC_Boo_01, TRUE)
-    Call(EnableNpcShadow, NPC_Boo_02, TRUE)
-    Call(EnableNpcShadow, NPC_Boo_05, TRUE)
+    Call(EnableNpcShadow, NPC_Boo_01, true)
+    Call(EnableNpcShadow, NPC_Boo_02, true)
+    Call(EnableNpcShadow, NPC_Boo_05, true)
     Call(PlaySound, SOUND_BOO_VANISH_A)
     SetF(LVar0, Float(0.0))
     Loop(20 * DT)
@@ -574,16 +574,16 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Call(SetNpcImgFXParams, NPC_Boo_02, IMGFX_CLEAR, 0, 0, 0, 0)
     Call(SetNpcImgFXParams, NPC_Boo_05, IMGFX_CLEAR, 0, 0, 0, 0)
     Wait(10 * DT)
-    Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+    Call(SetCamType, CAM_DEFAULT, 4, false)
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(SpeakToPlayer, NPC_Boo_05, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_00A8)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -672,28 +672,28 @@ EvtScript N(EVS_NpcIdle_Boo_06) = {
 
 EvtScript N(EVS_NpcInit_Boo_06) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Boo_06)))
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Boo_07) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Boo_06)))
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Boo_08) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Boo_06)))
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Boo_09) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Boo_06)))
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Return
     End
 };

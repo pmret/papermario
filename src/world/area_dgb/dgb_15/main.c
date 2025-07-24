@@ -7,7 +7,7 @@ s32 N(KeyList)[] = {
 
 EvtScript N(EVS_ExitDoors_dgb_14_1) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_15_ENTRY_0)
     Set(LVar1, COLLIDER_deilittw)
@@ -23,7 +23,7 @@ EvtScript N(EVS_ExitDoors_dgb_14_1) = {
 
 EvtScript N(EVS_ExitDoors_dgb_17_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_15_ENTRY_1)
     Set(LVar1, COLLIDER_deilitte)
@@ -39,7 +39,7 @@ EvtScript N(EVS_ExitDoors_dgb_17_0) = {
 
 EvtScript N(EVS_ExitDoors_dgb_16_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, dgb_15_ENTRY_2)
     Set(LVar1, COLLIDER_deilittne)
@@ -58,7 +58,7 @@ MAP_RODATA_PAD(1, strings);
 EvtScript N(EVS_BindExitTriggers) = {
     BindTrigger(Ref(N(EVS_ExitDoors_dgb_14_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittw, 1, 0)
     BindTrigger(Ref(N(EVS_ExitDoors_dgb_16_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittne, 1, 0)
-    IfEq(GF_DGB15_UnlockedUpperFoyer, FALSE)
+    IfEq(GF_DGB15_UnlockedUpperFoyer, false)
         BindPadlock(Ref(N(EVS_UnlockPrompt_Door)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), Ref(N(KeyList)), 0, 1)
     Else
         BindTrigger(Ref(N(EVS_ExitDoors_dgb_17_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilitte, 1, 0)
@@ -94,10 +94,10 @@ EvtScript N(EVS_EnterMap) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_TUBBAS_MANOR)
     Call(SetSpriteShading, SHADING_NONE)
-    Set(AF_DGB_01, FALSE)
+    Set(AF_DGB_01, false)
     SetUP_CAMERA_NO_LEAD()
-    IfEq(GF_DGB16_EscapedFromTubba, FALSE)
-        Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    IfEq(GF_DGB16_EscapedFromTubba, false)
+        Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     EndIf
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))

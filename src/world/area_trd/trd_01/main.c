@@ -42,7 +42,7 @@ EvtScript N(EVS_ExitDoors_trd_02_2) = EVT_EXIT_DOUBLE_DOOR(trd_01_ENTRY_2, "trd_
 EvtScript N(EVS_ExitDoors_trd_09_0) = EVT_EXIT_DOUBLE_DOOR(trd_01_ENTRY_3, "trd_09", trd_09_ENTRY_0, COLLIDER_tte3, MODEL_e4_doa, MODEL_e4_doa2);
 
 EvtScript N(EVS_Scene_RaiseStairs) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(GB_StoryProgress, STORY_CH1_RAISED_SUBMERGED_STAIRS)
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Wait(1)
@@ -55,7 +55,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamPitch, CAM_DEFAULT, 18, 12)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.4 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o162, COLLIDER_FLAGS_UPPER_MASK)
@@ -64,11 +64,11 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     ChildThread
         SetGroup(EVT_GROUP_NEVER_PAUSE)
         Wait(4 * DT)
-        Call(EnableModel, MODEL_sui1, TRUE)
-        Call(EnableModel, MODEL_sui2, TRUE)
-        Call(EnableTexPanning, MODEL_sui1, TRUE)
-        Call(EnableTexPanning, MODEL_sui2, TRUE)
-        Call(EnableTexPanning, MODEL_o145, TRUE)
+        Call(EnableModel, MODEL_sui1, true)
+        Call(EnableModel, MODEL_sui2, true)
+        Call(EnableTexPanning, MODEL_sui1, true)
+        Call(EnableTexPanning, MODEL_sui2, true)
+        Call(EnableTexPanning, MODEL_o145, true)
         Set(LVar0, 0)
         Set(LVar1, 0)
         Set(LVar2, 0)
@@ -142,7 +142,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EndThread
     Thread
         Wait(210 * DT)
-        Set(NPC_KoopaTroopa_02_DonePanic, TRUE)
+        Set(NPC_KoopaTroopa_02_DonePanic, true)
     EndThread
     Thread
         Call(GetNpcPos, NPC_KoopaTroopa_03, LVar4, LVar5, LVar6)
@@ -173,7 +173,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EndThread
     Thread
         Wait(180 * DT)
-        Set(NPC_KoopaTroopa_03_DonePanic, TRUE)
+        Set(NPC_KoopaTroopa_03_DonePanic, true)
     EndThread
     Call(MakeLerp, -450, 0, 300 * DT, EASING_COS_IN_OUT)
     Label(0)
@@ -185,17 +185,17 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     Set(LVar2, LVar0)
     Add(LVar2, 400)
     IfGe(LVar2, -20)
-        IfEq(LFlag0, FALSE)
-            Set(LFlag0, TRUE)
+        IfEq(LFlag0, false)
+            Set(LFlag0, true)
             Call(PlaySound, SOUND_TRD_WATER_SPLASH)
-            Call(EnableModel, MODEL_o145, TRUE)
+            Call(EnableModel, MODEL_o145, true)
         EndIf
     EndIf
     Set(LVar2, LVar0)
     Add(LVar2, 375)
     IfGe(LVar2, -20)
-        IfEq(LFlag1, FALSE)
-            Set(LFlag1, TRUE)
+        IfEq(LFlag1, false)
+            Set(LFlag1, true)
             Call(PlaySound, SOUND_TRD_WATER_SPLASH)
             Call(TranslateModel, MODEL_o145, 50, 0, 0)
         EndIf
@@ -203,8 +203,8 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     Set(LVar2, LVar0)
     Add(LVar2, 350)
     IfGe(LVar2, -20)
-        IfEq(LFlag2, FALSE)
-            Set(LFlag2, TRUE)
+        IfEq(LFlag2, false)
+            Set(LFlag2, true)
             Call(PlaySound, SOUND_TRD_WATER_SPLASH)
             Call(TranslateModel, MODEL_o145, 100, 0, 0)
         EndIf
@@ -212,8 +212,8 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     Set(LVar2, LVar0)
     Add(LVar2, 325)
     IfGe(LVar2, -20)
-        IfEq(LFlag3, FALSE)
-            Set(LFlag3, TRUE)
+        IfEq(LFlag3, false)
+            Set(LFlag3, true)
             Call(PlaySound, SOUND_TRD_WATER_SPLASH)
             Call(TranslateModel, MODEL_o145, 150, 0, 0)
         EndIf
@@ -221,8 +221,8 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     Set(LVar2, LVar0)
     Add(LVar2, 299)
     IfGe(LVar2, -20)
-        IfEq(LFlag4, FALSE)
-            Set(LFlag4, TRUE)
+        IfEq(LFlag4, false)
+            Set(LFlag4, true)
             Call(PlaySound, SOUND_TRD_WATER_SPLASH)
             Call(TranslateModel, MODEL_o145, 200, 0, 0)
         EndIf
@@ -230,8 +230,8 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     Set(LVar2, LVar0)
     Add(LVar2, 273)
     IfGe(LVar2, -20)
-        IfEq(LFlag5, FALSE)
-            Set(LFlag5, TRUE)
+        IfEq(LFlag5, false)
+            Set(LFlag5, true)
             Call(PlaySound, SOUND_TRD_WATER_SPLASH)
             Call(TranslateModel, MODEL_o145, 250, 0, 0)
         EndIf
@@ -239,8 +239,8 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     Set(LVar2, LVar0)
     Add(LVar2, 245)
     IfGe(LVar2, -20)
-        IfEq(LFlag6, FALSE)
-            Set(LFlag6, TRUE)
+        IfEq(LFlag6, false)
+            Set(LFlag6, true)
             Call(PlaySound, SOUND_TRD_WATER_SPLASH)
             Call(TranslateModel, MODEL_o145, 300, 0, 0)
         EndIf
@@ -248,10 +248,10 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     Set(LVar2, LVar0)
     Add(LVar2, 220)
     IfGe(LVar2, -20)
-        IfEq(LFlag7, FALSE)
-            Set(LFlag7, TRUE)
+        IfEq(LFlag7, false)
+            Set(LFlag7, true)
             Call(PlaySound, SOUND_TRD_WATER_SPLASH)
-            Call(EnableModel, MODEL_o145, FALSE)
+            Call(EnableModel, MODEL_o145, false)
         EndIf
     EndIf
     Wait(1)
@@ -262,15 +262,15 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     Wait(30 * DT)
     Thread
         Wait(28 * DT)
-        Call(EnableModel, MODEL_sui1, FALSE)
-        Call(EnableModel, MODEL_sui2, FALSE)
+        Call(EnableModel, MODEL_sui1, false)
+        Call(EnableModel, MODEL_sui2, false)
     EndThread
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 220, 255)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(1)
     Call(ResetCam, CAM_DEFAULT, Float(1.5 / DT))
     Call(StopSound, SOUND_LOOP_TRD_FLOWING_WATER)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Unbind
     Return
@@ -302,11 +302,11 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_KOOPA_BROS_FORTRESS)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_TexPan_Water))
     BindTrigger(Ref(N(EVS_ExitDoors_trd_00_1)), TRIGGER_WALL_PRESS_A, COLLIDER_ttw, 1, 0)
-    IfEq(GF_TRD01_UnlockedDoor, FALSE)
+    IfEq(GF_TRD01_UnlockedDoor, false)
         BindPadlock(Ref(N(EVS_UnlockDoors)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), Ref(N(KeyList)), 0, 1)
     Else
         BindTrigger(Ref(N(EVS_ExitDoors_trd_02_0)), TRIGGER_WALL_PRESS_A, COLLIDER_tte, 1, 0)
@@ -314,7 +314,7 @@ EvtScript N(EVS_Main) = {
     BindTrigger(Ref(N(EVS_ExitDoors_trd_02_2)), TRIGGER_WALL_PRESS_A, COLLIDER_tte2, 1, 0)
     BindTrigger(Ref(N(EVS_ExitDoors_trd_09_0)), TRIGGER_WALL_PRESS_A, COLLIDER_tte3, 1, 0)
     Exec(N(EVS_SetupMusic))
-    Set(AF_TRD01_RaiseStairs, FALSE)
+    Set(AF_TRD01_RaiseStairs, false)
     Call(ParentColliderToModel, COLLIDER_o158, MODEL_dan)
     IfLt(GB_StoryProgress, STORY_CH1_RAISED_SUBMERGED_STAIRS)
         Set(LVar0, -450)
@@ -327,12 +327,12 @@ EvtScript N(EVS_Main) = {
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o162, COLLIDER_FLAGS_UPPER_MASK)
         Call(SetGroupVisibility, MODEL_move_saku, MODEL_GROUP_HIDDEN)
     EndIf
-    Call(EnableModel, MODEL_sui1, FALSE)
-    Call(EnableModel, MODEL_sui2, FALSE)
-    Call(EnableModel, MODEL_o145, FALSE)
+    Call(EnableModel, MODEL_sui1, false)
+    Call(EnableModel, MODEL_sui2, false)
+    Call(EnableModel, MODEL_o145, false)
     Exec(N(EVS_EnterMap))
     Wait(1)
-    Call(EnableTexPanning, MODEL_suimenn, TRUE)
+    Call(EnableTexPanning, MODEL_suimenn, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(    0,   90,  -60,  -70)

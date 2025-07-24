@@ -43,24 +43,24 @@ API_CALLABLE(N(GetCamPointsNearPlayer)) {
 }
 
 EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(FindKeyItem, ITEM_STAR_STONE, LVar0)
     IfNe(LVar0, -1)
         Call(ShowKeyChoicePopup)
         Call(CloseChoicePopup)
         Switch(LVar0)
             CaseEq(0)
-                Call(DisablePlayerInput, FALSE)
+                Call(DisablePlayerInput, false)
                 Return
             CaseEq(-1)
-                Call(DisablePlayerInput, FALSE)
+                Call(DisablePlayerInput, false)
                 Return
             CaseDefault
                 Call(RemoveKeyItemAt, LVar1)
         EndSwitch
     Else
         Call(ShowMessageAtScreenPos, MSG_Menus_SAM10_PlaceItemTip, 160, 40)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Return
     EndIf
     Call(SetItemPos, MV_StarStoneItemID, -117, 179, -32)
@@ -95,7 +95,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
     Call(N(GetCamPointsNearPlayer))
     Call(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
     Call(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(30)
     Call(PlaySound, SOUND_SAM_STAIRS_LOUD_THUD)
@@ -167,7 +167,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
     Call(SetPanTarget, CAM_DEFAULT, 140, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Call(MakeLerp, 150, 1050, 200, EASING_LINEAR)
@@ -190,7 +190,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_m1_kabe, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_m2_kabe, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_m2_yuka, COLLIDER_FLAGS_UPPER_MASK)
@@ -199,7 +199,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
     Call(SetGroupVisibility, MODEL_move2, MODEL_GROUP_HIDDEN)
     Call(SetGroupVisibility, MODEL_move3, MODEL_GROUP_VISIBLE)
     Set(GB_StoryProgress, STORY_CH7_RAISED_FROZEN_STAIRS)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Unbind
     Return
     End
@@ -212,17 +212,17 @@ BombTrigger N(BombPos_Wall) = {
 
 EvtScript N(EVS_BlastWall) = {
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 2, 135, 11, 1, 10, 30)
-    Call(EnableModel, MODEL_a_oku, TRUE)
+    Call(EnableModel, MODEL_a_oku, true)
     Loop(10)
-        Call(EnableModel, MODEL_a_kabe, TRUE)
-        Call(EnableModel, MODEL_a_hibi, TRUE)
+        Call(EnableModel, MODEL_a_kabe, true)
+        Call(EnableModel, MODEL_a_hibi, true)
         Wait(1)
-        Call(EnableModel, MODEL_a_kabe, FALSE)
-        Call(EnableModel, MODEL_a_hibi, FALSE)
+        Call(EnableModel, MODEL_a_kabe, false)
+        Call(EnableModel, MODEL_a_hibi, false)
         Wait(1)
     EndLoop
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tta, COLLIDER_FLAGS_UPPER_MASK)
-    Set(GF_SAM10_BombedWall, TRUE)
+    Set(GF_SAM10_BombedWall, true)
     Unbind
     Return
     End
@@ -264,14 +264,14 @@ EvtScript N(EVS_SetupStairs) = {
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_m1_kabe, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH7_GOT_STAR_STONE)
-        Set(GF_SAM10_BombedWall, TRUE)
+        Set(GF_SAM10_BombedWall, true)
     EndIf
-    IfEq(GF_SAM10_BombedWall, FALSE)
-        Call(EnableModel, MODEL_a_oku, FALSE)
+    IfEq(GF_SAM10_BombedWall, false)
+        Call(EnableModel, MODEL_a_oku, false)
         BindTrigger(Ref(N(EVS_BlastWall)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Wall)), 1, 0)
     Else
-        Call(EnableModel, MODEL_a_kabe, FALSE)
-        Call(EnableModel, MODEL_a_hibi, FALSE)
+        Call(EnableModel, MODEL_a_kabe, false)
+        Call(EnableModel, MODEL_a_hibi, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tta, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     Return

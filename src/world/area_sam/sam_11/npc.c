@@ -115,7 +115,7 @@ EvtScript N(EVS_NpcInteract_PenguinSentry) = {
         CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00C8)
         CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
-            IfEq(GF_SAM11_LeftTown, FALSE)
+            IfEq(GF_SAM11_LeftTown, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00C9)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00CA)
@@ -163,9 +163,9 @@ EvtScript N(EVS_NpcInteract_Herringway) = {
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
             Call(SetCamPosA, CAM_DEFAULT, Float(-224.0), Float(-132.0))
             Call(SetCamPosB, CAM_DEFAULT, Float(-127.0), Float(-314.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(SetPlayerPos, -137, 150, -340)
-            Call(PlayerFaceNpc, NPC_SELF, FALSE)
+            Call(PlayerFaceNpc, NPC_SELF, false)
             Call(SetNpcPos, NPC_PARTNER, -170, 150, -350)
             Call(NpcFaceNpc, NPC_PARTNER, NPC_SELF, 0)
             Call(NpcFacePlayer, NPC_SELF, 0)
@@ -182,24 +182,24 @@ EvtScript N(EVS_NpcInteract_Herringway) = {
             Thread
                 Call(SetPlayerAnimation, ANIM_Mario1_Idle)
                 Loop(30)
-                    Call(PlayerFaceNpc, NPC_Herringway, FALSE)
+                    Call(PlayerFaceNpc, NPC_Herringway, false)
                     Wait(1)
                 EndLoop
             EndThread
-            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, false)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Call(SetNpcSpeed, NPC_SELF, Float(3.0 / DT))
             Call(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Walk)
             Call(NpcMoveTo, NPC_SELF, -235, -355, 0)
             Call(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Idle)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
             Wait(20 * DT)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D1)
             Wait(15 * DT)
             Call(ShakeCam, CAM_DEFAULT, 0, 20, Float(0.5))
             ExecWait(N(EVS_LowerStaircase))
             Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D2)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
             Call(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Walk)
             Call(NpcMoveTo, NPC_SELF, -215, -245, 0)
             Thread
@@ -295,7 +295,7 @@ EvtScript N(EVS_NpcInteract_Penguin_04) = {
                     Set(MV_DialogueState_Penguin4, 0)
             EndSwitch
         CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
-            IfEq(GF_SAM11_UnlockedDoor, FALSE)
+            IfEq(GF_SAM11_UnlockedDoor, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A2)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A3)
@@ -459,7 +459,7 @@ EvtScript N(EVS_NpcInit_Herringway) = {
         CaseLt(STORY_CH7_SPOKE_WITH_HERRINGWAY)
             Call(SetNpcPos, NPC_SELF, -110, 150, -323)
         CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, true)
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
             Call(SetNpcPos, NPC_SELF, -110, 150, -323)
@@ -473,7 +473,7 @@ EvtScript N(EVS_NpcInit_Penguin_02) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
         CaseDefault
-            IfEq(GF_SAM11_LeftTown, FALSE)
+            IfEq(GF_SAM11_LeftTown, false)
                 Call(RemoveNpc, NPC_SELF)
             EndIf
     EndSwitch
@@ -486,7 +486,7 @@ EvtScript N(EVS_NpcInit_Penguin_03) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
         CaseDefault
-            IfEq(GF_SAM11_LeftTown, FALSE)
+            IfEq(GF_SAM11_LeftTown, false)
                 Call(RemoveNpc, NPC_SELF)
             EndIf
     EndSwitch
@@ -604,7 +604,7 @@ NpcData N(NpcData_Townsfolk)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 320, 0, 280 },
@@ -630,7 +630,7 @@ NpcData N(NpcData_PondPenginsBefore)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -100, -10, 180 },
@@ -653,7 +653,7 @@ NpcData N(NpcData_PondPenginsBefore)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 57, -10, 194 },
@@ -679,7 +679,7 @@ NpcData N(NpcData_PondPenginsAfter)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -323, 0, 160 },
@@ -702,7 +702,7 @@ NpcData N(NpcData_PondPenginsAfter)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 363, 0, 213 },
@@ -823,7 +823,7 @@ EvtScript N(EVS_Scene_EpilogueDelivery) = {
         Call(SetCamDistance, CAM_DEFAULT, Float(-300.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Call(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Walk)
     Call(NpcFlyTo, NPC_Parakarry, 270, 15, 26, 50, 0, EASING_LINEAR)
@@ -896,7 +896,7 @@ EvtScript N(EVS_Scene_EpilogueDelivery) = {
         Call(SetCamDistance, CAM_DEFAULT, Float(-450.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Thread
         Call(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Walk)
@@ -959,18 +959,18 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
     Call(SetNpcPos, NPC_Kolorado, 120, 0, 70)
     Call(SetNpcPos, NPC_Archeologist_01, 120, 0, 70)
     Call(SetNpcPos, NPC_Archeologist_02, 120, 0, 70)
-    Call(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Archeologist_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Archeologist_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_Archeologist_01, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_Archeologist_02, NPC_FLAG_GRAVITY, FALSE)
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Archeologist_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Archeologist_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_Archeologist_01, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_Archeologist_02, NPC_FLAG_GRAVITY, false)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerPos, NPC_DISPOSE_LOCATION)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_Scene_EpilogueDelivery)))
     Return

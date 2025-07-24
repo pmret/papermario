@@ -28,7 +28,7 @@ EvtScript N(EVS_Reflection_Unk) = {
 // LVar1 disable wall flag (reflections wont show if false)
 EvtScript N(EVS_SetupReflections) = {
     MallocArray(16, LVarA)
-    IfEq(LVar1, FALSE)
+    IfEq(LVar1, false)
         Switch(LVar0)
             CaseEq(REFLECTION_FLOOR_WALL)
                 Call(N(EnableWallReflection))

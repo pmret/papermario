@@ -9,7 +9,7 @@
 EvtScript N(EVS_PreBattle) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    Call(EnableBattleFloorReflections, TRUE)
+    Call(EnableBattleFloorReflections, true)
     Set(LVar0, MODEL_o412)
     Set(LVar1, TEX_PANNER_0)
     Set(LVar2, 3000)

@@ -10,21 +10,21 @@ BombTrigger N(BombPos_Wall) = {
 EvtScript N(EVS_OnBlast_Wall) = {
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 18, 0, 1, 10, 30)
     Loop(10)
-        Call(EnableModel, MODEL_a_kabe, TRUE)
+        Call(EnableModel, MODEL_a_kabe, true)
         Wait(1)
-        Call(EnableModel, MODEL_a_kabe, FALSE)
+        Call(EnableModel, MODEL_a_kabe, false)
         Wait(1)
     EndLoop
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tte, COLLIDER_FLAGS_UPPER_MASK)
-    Set(GF_TIK14_BombedWall, TRUE)
+    Set(GF_TIK14_BombedWall, true)
     Unbind
     Return
     End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_TIK14_BombedWall, TRUE)
-        Call(EnableModel, MODEL_a_kabe, FALSE)
+    IfEq(GF_TIK14_BombedWall, true)
+        Call(EnableModel, MODEL_a_kabe, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tte, COLLIDER_FLAGS_UPPER_MASK)
     Else
         BindTrigger(Ref(N(EVS_OnBlast_Wall)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Wall)), 1, 0)

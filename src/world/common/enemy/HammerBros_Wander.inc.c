@@ -14,7 +14,7 @@ EvtScript N(EVS_NpcDefeat_HammerBros_Hammer) = {
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             Call(OnPlayerFled, 1)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return

@@ -42,13 +42,13 @@ API_CALLABLE(N(init)) {
     }
     action_command_init_status();
     acs->actionCommandID = ACTION_COMMAND_SMACK;
-    acs->showHud = TRUE;
+    acs->showHud = true;
     acs->hudPrepareTime = 30;
     acs->state = AC_STATE_INIT;
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     acs->meterFillLevel = 0;
     acs->meterFillWidth = 0;
-    acs->isMeterFilled = FALSE;
+    acs->isMeterFilled = false;
     battleStatus->actionQuality = 0;
     battleStatus->actionProgress = 0;
     acs->hudPosX = -48;
@@ -93,7 +93,7 @@ API_CALLABLE(N(start)) {
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
     acs->variation = evt_get_variable(script, *args++);
 
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     acs->meterFillLevel = 0;
     acs->meterFillWidth = 0;
     battleStatus->actionQuality = 0;
@@ -154,7 +154,7 @@ void N(update)(void) {
             hud_element_set_script(acs->hudElemIDs[HIDX_STICK], &HES_StickMashLeft);
             acs->meterFillLevel = 0;
             battleStatus->resultTier = 0;
-            acs->smack.holdingLeft = FALSE;
+            acs->smack.holdingLeft = false;
             acs->stateTimer = acs->duration;
             sfx_play_sound_with_params(SOUND_LOOP_CHARGE_METER, 0, 0, 0);
             acs->state = AC_STATE_ACTIVE;
@@ -175,7 +175,7 @@ void N(update)(void) {
             // check for meter-filling input
             if (!acs->isMeterFilled) {
                 if (battleStatus->curButtonsDown & BUTTON_STICK_LEFT) {
-                    acs->smack.holdingLeft = TRUE;
+                    acs->smack.holdingLeft = true;
                 }
 
                 if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT)) {
@@ -187,7 +187,7 @@ void N(update)(void) {
                             // fan smack
                             acs->meterFillLevel += SCALE_BY_PCT(FAN_METER_FILL_TICK, battleStatus->actionCmdDifficultyTable[acs->difficulty]);
                         }
-                        acs->smack.holdingLeft = FALSE;
+                        acs->smack.holdingLeft = false;
                     }
                 }
                 // right stick inputs actively drain the meter
@@ -203,7 +203,7 @@ void N(update)(void) {
             // handle meter reaching 100%
             if (acs->meterFillLevel > MAX_MASH_UNITS) {
                 acs->meterFillLevel = MAX_MASH_UNITS;
-                acs->isMeterFilled = TRUE;
+                acs->isMeterFilled = true;
                 hid = acs->hudElemIDs[HIDX_100_PCT];
                 hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);

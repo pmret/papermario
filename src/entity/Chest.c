@@ -18,7 +18,7 @@ EvtScript Entity_Chest_AdjustCam_ISK = {
         Call(SetCamDistance, 0, Float(290.0))
         Call(SetCamPitch, 0, Float(20.0), Float(-10.0))
         Call(SetCamSpeed, 0, Float(8.0))
-        Call(PanToTarget, 0, 0, TRUE)
+        Call(PanToTarget, 0, 0, true)
         Call(WaitForCam, 0, Float(1.0))
     EndThread
     Return

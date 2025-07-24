@@ -31,8 +31,8 @@ EvtScript N(EVS_TetherCameraToPlayer) = {
 };
 
 EvtScript N(EVS_UseSpringA) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Wait(1)
     Call(SetPlayerActionState, ACTION_STATE_LAUNCH)
@@ -41,9 +41,9 @@ EvtScript N(EVS_UseSpringA) = {
     ExecGetTID(N(EVS_TetherCameraToPlayer), LVarA)
     Call(SetPlayerJumpscale, Float(0.7))
     Call(PlayerJump, 335, 290, 360, 40)
-    Call(SetPlayerFlagBits, PS_FLAG_FLYING, TRUE)
+    Call(SetPlayerFlagBits, PS_FLAG_FLYING, true)
     Call(SetPlayerActionState, ACTION_STATE_FALLING)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerPhysics, false)
     KillThread(LVarA)
     Call(N(DisableCameraFollowPlayerY))
     Return
@@ -51,7 +51,7 @@ EvtScript N(EVS_UseSpringA) = {
 };
 
 EvtScript N(EVS_UseSpringB) = {
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Wait(1)
     Call(SetPlayerActionState, ACTION_STATE_JUMP)
@@ -61,8 +61,8 @@ EvtScript N(EVS_UseSpringB) = {
     Call(SetPlayerJumpscale, Float(0.7))
     Call(PlayerJump, 350, 470, 210, 40)
     Call(SetPlayerActionState, ACTION_STATE_LAND)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     KillThread(LVarA)
     Call(N(DisableCameraFollowPlayerY))
     Return
@@ -70,8 +70,8 @@ EvtScript N(EVS_UseSpringB) = {
 };
 
 EvtScript N(EVS_UseSpringC) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Wait(1)
     Call(SetPlayerActionState, ACTION_STATE_JUMP)
@@ -86,8 +86,8 @@ EvtScript N(EVS_UseSpringC) = {
         Call(PlayerJump, -384, 870, -22, 40)
     EndIf
     Call(SetPlayerActionState, ACTION_STATE_LAND)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     KillThread(LVarA)
     Call(N(DisableCameraFollowPlayerY))
     Return

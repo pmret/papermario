@@ -25,14 +25,14 @@ EvtScript N(EVS_Scene_TreeOrbitReaction) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(func_802CF56C, 1)
     Thread
         Wait(20)
         Call(func_802CF56C, 0)
         Call(NpcFacePlayer, NPC_PARTNER, 0)
     EndThread
-    Call(PlayerFaceNpc, NPC_Dryite_03, FALSE)
+    Call(PlayerFaceNpc, NPC_Dryite_03, false)
     Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0078)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(GetNpcPos, NPC_Dryite_03, LVar3, LVar4, LVar5)
@@ -46,7 +46,7 @@ EvtScript N(EVS_Scene_TreeOrbitReaction) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(-300.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0079)
@@ -57,12 +57,12 @@ EvtScript N(EVS_Scene_TreeOrbitReaction) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(N(SaveSpinningRoofHintTime))
-    Set(GF_DRO01_HeardHintAboutSpinningRoof, TRUE)
-    Call(DisablePlayerInput, FALSE)
+    Set(GF_DRO01_HeardHintAboutSpinningRoof, true)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -97,9 +97,9 @@ API_CALLABLE(N(HasBeenHalfHourSinceTreeOrbit)) {
     s32 minutes = (playerData->frameCounter - playerData->droTreeHintTime) / 3600;
 
     if (minutes < 30) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     } else {
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
     }
 
     return ApiStatus_DONE2;
@@ -113,11 +113,11 @@ PlayerOrbitTarget N(RunAroundTarget) = {
 };
 
 EvtScript N(EVS_NpcInteract_HintDryite) = {
-    IfEq(GF_MAC01_Merlon_HeardAboutDream, TRUE)
-        IfEq(GF_DRO01_HeardHintAboutSpinningRoof, TRUE)
+    IfEq(GF_MAC01_Merlon_HeardAboutDream, true)
+        IfEq(GF_DRO01_HeardHintAboutSpinningRoof, true)
             // in case the player forgets, remind them after a half hour
             Call(N(HasBeenHalfHourSinceTreeOrbit))
-            IfEq(LVar0, TRUE)
+            IfEq(LVar0, true)
                 Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_007B)
                 Return
             EndIf
@@ -125,16 +125,16 @@ EvtScript N(EVS_NpcInteract_HintDryite) = {
     EndIf
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(AF_DRO_01, FALSE)
+            IfEq(AF_DRO_01, false)
                 Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_006C)
                 Call(SpeakToPlayer, NPC_Dryite_04, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_006D)
                 Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_006E)
-                Set(AF_DRO_01, TRUE)
+                Set(AF_DRO_01, true)
             Else
                 Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_006F)
                 Call(SpeakToPlayer, NPC_Dryite_04, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0070)
                 Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0071)
-                Set(AF_DRO_01, FALSE)
+                Set(AF_DRO_01, false)
             EndIf
         CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
             Call(SpeakToPlayer, NPC_Dryite_03, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_0072)
@@ -159,7 +159,7 @@ EvtScript N(EVS_NpcInit_HintDryite) = {
         EndCaseGroup
     EndSwitch
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_HintDryite)))
-    IfEq(GF_MAC01_Merlon_HeardAboutDream, TRUE)
+    IfEq(GF_MAC01_Merlon_HeardAboutDream, true)
         Thread
             Call(N(MonitorPlayerOrbiting), Ref(N(RunAroundTarget)))
         EndThread

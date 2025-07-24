@@ -14,7 +14,7 @@ EvtScript N(EVS_Chest_ShowGotItem) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
     Wait(40)
-    Call(ShowGotItem, LVar0, FALSE, 0)
+    Call(ShowGotItem, LVar0, false, 0)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     Return
@@ -41,7 +41,7 @@ EvtScript N(EVS_UnlockPrompt_Door) = {
         Return
     EndIf
     Call(RemoveKeyItemAt, LVar1)
-    Set(GF_KPA14_UnlockedDoor, TRUE)
+    Set(GF_KPA14_UnlockedDoor, true)
     Call(N(GetEntityPosition), MV_PadlockEntityID, LVar0, LVar1, LVar2)
     Call(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     Set(LVar0, MV_PadlockEntityID)
@@ -56,7 +56,7 @@ EvtScript N(EVS_UnlockPrompt_Door) = {
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_KPA14_UnlockedDoor, FALSE)
+    IfEq(GF_KPA14_UnlockedDoor, false)
         Call(MakeEntity, Ref(Entity_Padlock), 1995, 40, -162, 270, MAKE_ENTITY_END)
         Set(MV_PadlockEntityID, LVar0)
         BindPadlock(Ref(N(EVS_UnlockPrompt_Door)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), Ref(N(KeyList_BowsersCastle)), 0, 1)

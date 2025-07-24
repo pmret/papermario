@@ -56,7 +56,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, 0)
     SuspendGroup(EVT_GROUP_FLAG_INTERACT)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(30)
     Call(SetGroupVisibility, MODEL_move_saku, MODEL_GROUP_HIDDEN)
     Call(PlaySound, SOUND_LOOP_TRD_02_LOWER_STAIRS)
@@ -110,7 +110,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     Call(StopSound, SOUND_LOOP_TRD_02_LOWER_STAIRS)
     Call(PlaySound, SOUND_TRD_02_STAIRS_LOWERED)
     Set(GB_StoryProgress, STORY_CH1_LOWERED_SECOND_STAIRS)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(SetTimeFreezeMode, 0)
     ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
@@ -127,7 +127,7 @@ EvtScript N(D_8024241C_9A33FC) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 17, 11, 1, 10, 30)
-    Call(EnableModel, MODEL_anaaki, TRUE)
+    Call(EnableModel, MODEL_anaaki, true)
     Loop(10)
         Call(SetGroupVisibility, MODEL_g14, MODEL_GROUP_VISIBLE)
         Wait(1)
@@ -135,7 +135,7 @@ EvtScript N(D_8024241C_9A33FC) = {
         Wait(1)
     EndLoop
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tta, COLLIDER_FLAGS_UPPER_MASK)
-    Set(GF_TRD02_BombedWall, TRUE)
+    Set(GF_TRD02_BombedWall, true)
     ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
     Return
@@ -151,25 +151,25 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_KOOPA_BROS_FORTRESS)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     BindTrigger(Ref(N(EVS_ExitDoors_trd_01_1)), TRIGGER_WALL_PRESS_A, COLLIDER_ttw, 1, 0)
     BindTrigger(Ref(N(EVS_ExitDoors_trd_03_0)), TRIGGER_WALL_PRESS_A, COLLIDER_tte, 1, 0)
-    IfEq(GF_TRD02_UnlockedDoor, FALSE)
+    IfEq(GF_TRD02_UnlockedDoor, false)
         BindPadlock(Ref(N(D_80242890_9A3870)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), Ref(N(D_8024252C_9A350C)), 0, 1)
     Else
         BindTrigger(Ref(N(EVS_ExitDoors_trd_01_2)), TRIGGER_WALL_PRESS_A, COLLIDER_ttw2, 1, 0)
     EndIf
     BindTrigger(Ref(N(EVS_ExitDoors_trd_03_2)), TRIGGER_WALL_PRESS_A, COLLIDER_tte2, 1, 0)
-    IfEq(GF_TRD02_BombedWall, FALSE)
-        Call(EnableModel, MODEL_anaaki, FALSE)
+    IfEq(GF_TRD02_BombedWall, false)
+        Call(EnableModel, MODEL_anaaki, false)
         BindTrigger(Ref(N(D_8024241C_9A33FC)), TRIGGER_POINT_BOMB, Ref(N(D_8024240C_9A33EC)), 1, 0)
     Else
         Call(SetGroupVisibility, MODEL_g14, MODEL_GROUP_HIDDEN)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tta, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     Exec(N(EVS_SetupMusic))
-    Set(AF_TRD02_LowerStairs, FALSE)
+    Set(AF_TRD02_LowerStairs, false)
     Call(ParentColliderToModel, COLLIDER_o55, MODEL_dan)
     Call(ParentColliderToModel, COLLIDER_o54, MODEL_k_soku)
     Call(ParentColliderToModel, COLLIDER_o65, MODEL_kusari)

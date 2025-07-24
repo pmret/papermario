@@ -54,7 +54,7 @@ EvtScript N(EVS_NpcAux_Skolar) = {
 EvtScript N(EVS_NpcInit_Skolar) = {
     Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Skolar)))
     Call(SetNpcPos, NPC_SELF, 0, -1000, -100)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     IfNe(GB_StoryProgress, STORY_CH3_DEFEATED_TUBBA_BLUBBA)
         Call(RemoveNpc, NPC_SELF)
     EndIf
@@ -65,7 +65,7 @@ EvtScript N(EVS_NpcInit_Skolar) = {
 EvtScript N(EVS_NpcInit_Bootler) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_OPENED_BOOS_MANSION_GATE)
-            Call(EnableNpcShadow, NPC_SELF, FALSE)
+            Call(EnableNpcShadow, NPC_SELF, false)
             Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, 0, 0, 0, 0)
         CaseDefault
             Call(RemoveNpc, NPC_SELF)

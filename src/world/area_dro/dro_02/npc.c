@@ -81,7 +81,7 @@ EvtScript N(EVS_LetterPrompt_MrE) = {
 EvtScript N(EVS_NpcInteract_Archeologist) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, TRUE)
+            IfEq(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, true)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B2)
             Else
                 Switch(AB_DRO_3)
@@ -115,7 +115,7 @@ EvtScript N(EVS_NpcInit_Archeologist) = {
 EvtScript N(EVS_NpcInteract_MrE) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_DRO02_Sheek_AskedAboutDesert, FALSE)
+            IfEq(GF_DRO02_Sheek_AskedAboutDesert, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0091)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0092)
@@ -142,12 +142,12 @@ EvtScript N(EVS_NpcInit_MrE) = {
 EvtScript N(EVS_NpcInteract_Dryite_02) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(AF_DRO_03, FALSE)
+            IfEq(AF_DRO_03, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A1)
-                Set(AF_DRO_03, TRUE)
+                Set(AF_DRO_03, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A2)
-                Set(AF_DRO_03, FALSE)
+                Set(AF_DRO_03, false)
             EndIf
         CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A3)
@@ -179,28 +179,28 @@ EvtScript N(EVS_NpcInit_Dryite_03) = {
 EvtScript N(EVS_NpcInteract_Mouser_01) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(AF_DRO_04, FALSE)
+            IfEq(AF_DRO_04, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A5)
-                Set(AF_DRO_04, TRUE)
+                Set(AF_DRO_04, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A6)
-                Set(AF_DRO_04, FALSE)
+                Set(AF_DRO_04, false)
             EndIf
         CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
-            IfEq(AF_DRO_04, FALSE)
+            IfEq(AF_DRO_04, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A7)
-                Set(AF_DRO_04, TRUE)
+                Set(AF_DRO_04, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A8)
-                Set(AF_DRO_04, FALSE)
+                Set(AF_DRO_04, false)
             EndIf
         CaseDefault
-            IfEq(AF_DRO_04, FALSE)
+            IfEq(AF_DRO_04, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A9)
-                Set(AF_DRO_04, TRUE)
+                Set(AF_DRO_04, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AA)
-                Set(AF_DRO_04, FALSE)
+                Set(AF_DRO_04, false)
             EndIf
     EndSwitch
     Return
@@ -216,12 +216,12 @@ EvtScript N(EVS_NpcInit_Mouser_01) = {
 EvtScript N(EVS_NpcInteract_Mouser_02) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(AF_DRO_05, FALSE)
+            IfEq(AF_DRO_05, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AB)
-                Set(AF_DRO_05, TRUE)
+                Set(AF_DRO_05, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AC)
-                Set(AF_DRO_05, FALSE)
+                Set(AF_DRO_05, false)
             EndIf
         CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AD)
@@ -265,10 +265,10 @@ EvtScript N(EVS_NpcIdle_Mouser_03) = {
     Label(20)
     Call(SetNpcAnimation, NPC_DisguisedMoustafa, ANIM_DisguisedMoustafa_Idle)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Run)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Run)
     Call(NpcMoveTo, NPC_SELF, 150, 18, 20)
-    Call(EnableNpcBlur, NPC_SELF, TRUE)
+    Call(EnableNpcBlur, NPC_SELF, true)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_RUN_AWAY, SOUND_SPACE_DEFAULT)
     Call(NpcMoveTo, NPC_SELF, -83, 11, 20 * DT)
     Call(NpcMoveTo, NPC_SELF, -239, 5, 20 * DT)
@@ -306,18 +306,18 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
     Thread
         Wait(15)
         Call(N(ToadHouse_CamSetFOV), 0, 40)
-        Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+        Call(SetCamType, CAM_DEFAULT, 4, false)
         Call(SetCamPitch, CAM_DEFAULT, 95, -61)
         Call(SetCamDistance, CAM_DEFAULT, 108)
         Call(SetCamPosA, CAM_DEFAULT, 202, 62)
         Call(SetCamPosB, CAM_DEFAULT, -89, -141)
         Call(SetCamPosC, CAM_DEFAULT, 0, 0)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Call(PlayerMoveTo, -187, -267, 0)
     Call(InterpPlayerYaw, 230, 1)
-    Call(HidePlayerShadow, TRUE)
+    Call(HidePlayerShadow, true)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Call(SetPlayerImgFXFlags, IMGFX_FLAG_800)
     Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
@@ -332,14 +332,14 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Wait(1)
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
     EndThread
     Return
     End
 };
 
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
-    Call(HidePlayerShadow, FALSE)
+    Call(HidePlayerShadow, false)
     Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
     Call(SetPlayerPos, -187, 0, -240)
     Call(SetPlayerSpeed, Float(3.0))
@@ -362,7 +362,7 @@ NpcData N(PassiveNPCs)[] = {
         .yaw = 90,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { -303, 0, 22 },
@@ -402,7 +402,7 @@ NpcData N(PassiveNPCs)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -20, 0, 40 },

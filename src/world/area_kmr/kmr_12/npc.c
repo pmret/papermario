@@ -11,21 +11,21 @@ API_CALLABLE(N(GetAmbushEnemy)) {
 EvtScript N(EVS_OnReadBillboard) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     SuspendGroup(EVT_GROUP_FLAG_INTERACT)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_Sign_EatMushroomsTrap, 160, 40)
     ResumeGroup(EVT_GROUP_FLAG_INTERACT)
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Call(N(GetAmbushEnemy))
     IfNe(LVar0, NULL)
         Call(GetNpcVar, NPC_Goomba_Ambush, 0, LVar0)
         IfEq(LVar0, 0)
             Call(SetNpcVar, NPC_Goomba_Ambush, 0, 1)
-            Set(LFlag0, TRUE)
+            Set(LFlag0, true)
             Wait(10)
         EndIf
     EndIf
-    Call(DisablePlayerInput, FALSE)
-    IfEq(LFlag0, TRUE)
+    Call(DisablePlayerInput, false)
+    IfEq(LFlag0, true)
         Unbind
     EndIf
     End
@@ -36,15 +36,15 @@ EvtScript N(EVS_NpcIdle_Goomba) = {
     Wait(1)
     Call(SetSelfVar, 0, 0)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Goomba_FakeMushroom)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, false)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, true)
     Label(0)
         Call(GetSelfVar, 0, LVar0)
         Wait(1)
         IfEq(LVar0, 0)
             Goto(0)
         EndIf
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_FLIP_INSTANTLY, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_FLIP_INSTANTLY, true)
     Wait(3)
     SetF(LVar0, Float(0.0))
     Loop(9)
@@ -67,14 +67,14 @@ EvtScript N(EVS_NpcIdle_Goomba) = {
     Wait(12)
     Wait(5)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, true)
     Call(SetNpcJumpscale, NPC_SELF, Float(0.6))
     Call(NpcJump0, NPC_SELF, -35, 0, 30, 23)
     Call(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
     Call(InterpNpcYaw, NPC_SELF, 90, 0)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_FLIP_INSTANTLY, FALSE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, FALSE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_FLIP_INSTANTLY, false)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, false)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, true)
     BindTrigger(Ref(N(EVS_OnReadBillboard)), TRIGGER_WALL_PRESS_A, COLLIDER_o78, 1, 0)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Goomba_Wander)))
     Return
@@ -93,7 +93,7 @@ NpcData N(NpcData_Goomba) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_RECT,
             .centerPos  = { -33, 0, 30 },

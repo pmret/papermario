@@ -3,13 +3,13 @@
 #include "effects.h"
 
 EvtScript N(EVS_SmashBlock_Stone) = {
-    Set(GF_ISK12_Hammer2Block, TRUE)
+    Set(GF_ISK12_Hammer2Block, true)
     Return
     End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_ISK12_Hammer2Block, FALSE)
+    IfEq(GF_ISK12_Hammer2Block, false)
         Call(MakeEntity, Ref(Entity_Hammer2Block), 627, -840, 135, 75, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_SmashBlock_Stone)))
     EndIf

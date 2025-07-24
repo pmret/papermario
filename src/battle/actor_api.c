@@ -1193,7 +1193,7 @@ API_CALLABLE(FreezeBattleState) {
     BattleStatus* battleStatus = &gBattleStatus;
     BattleStatus* battleStatus2 = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
-    b32 increaseFreeze = evt_get_variable(script, *args++);
+    bool increaseFreeze = evt_get_variable(script, *args++);
 
     if (increaseFreeze) {
         battleStatus->stateFreezeCount++;
@@ -2145,7 +2145,7 @@ API_CALLABLE(ActorExists) {
     Actor* partner = gBattleStatus.partnerActor;
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    b32 exists;
+    bool exists;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -2153,7 +2153,7 @@ API_CALLABLE(ActorExists) {
 
     exists = get_actor(actorID) != NULL;
     if ((actorID == ACTOR_PARTNER) && (partner == NULL)) {
-        exists = FALSE;
+        exists = false;
     }
 
     evt_set_variable(script, *args++, exists);
@@ -3238,7 +3238,7 @@ API_CALLABLE(BoostAttack) {
         if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
             btl_cam_set_zoffset(0);
         }
-        ApplyingBuff = TRUE;
+        ApplyingBuff = true;
         script->functionTemp[3] = 5;
         script->functionTemp[0] = 1;
     }
@@ -3285,7 +3285,7 @@ API_CALLABLE(BoostAttack) {
                 dispatch_event_actor(actor, EVENT_RECEIVE_BUFF);
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
-                actor->isGlowing = TRUE;
+                actor->isGlowing = true;
                 actor->attackBoost += attackBoost;
                 if (actor->attackBoost > 20) {
                     actor->attackBoost = 20;
@@ -3322,7 +3322,7 @@ API_CALLABLE(BoostAttack) {
             if ((actor->handleEventScript != NULL) && does_script_exist(actor->handleEventScriptID)) {
                 break;
             }
-            ApplyingBuff = FALSE;
+            ApplyingBuff = false;
             return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
@@ -3362,7 +3362,7 @@ API_CALLABLE(BoostDefense) {
             btl_cam_set_zoffset(0);
         }
 
-        ApplyingBuff = TRUE;
+        ApplyingBuff = true;
         script->functionTemp[3] = 5;
         script->functionTemp[0] = 1;
     }
@@ -3409,7 +3409,7 @@ API_CALLABLE(BoostDefense) {
                 dispatch_event_actor(actor, EVENT_RECEIVE_BUFF);
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
-                actor->isGlowing = TRUE;
+                actor->isGlowing = true;
                 actor->defenseBoost += defenseBoost;
                 if (actor->defenseBoost > 20) {
                     actor->defenseBoost = 20;
@@ -3446,7 +3446,7 @@ API_CALLABLE(BoostDefense) {
             if ((actor->handleEventScript != NULL) && does_script_exist(actor->handleEventScriptID)) {
                 break;
             }
-            ApplyingBuff = FALSE;
+            ApplyingBuff = false;
             return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
@@ -3484,7 +3484,7 @@ API_CALLABLE(VanishActor) {
             btl_cam_set_zoffset(0);
         }
 
-        ApplyingBuff = TRUE;
+        ApplyingBuff = true;
         script->functionTemp[3] = 5;
         script->functionTemp[0] = 1;
     }
@@ -3552,7 +3552,7 @@ API_CALLABLE(VanishActor) {
             if ((actor->handleEventScript != NULL) && does_script_exist(actor->handleEventScriptID)) {
                 break;
             }
-            ApplyingBuff = FALSE;
+            ApplyingBuff = false;
             return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
@@ -3590,7 +3590,7 @@ API_CALLABLE(ElectrifyActor) {
             btl_cam_set_zoffset(0);
         }
 
-        ApplyingBuff = TRUE;
+        ApplyingBuff = true;
         script->functionTemp[3] = 5;
         script->functionTemp[0] = 1;
     }
@@ -3658,7 +3658,7 @@ API_CALLABLE(ElectrifyActor) {
             if ((actor->handleEventScript != NULL) && does_script_exist(actor->handleEventScriptID)) {
                 break;
             }
-            ApplyingBuff = FALSE;
+            ApplyingBuff = false;
             return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
@@ -3696,7 +3696,7 @@ API_CALLABLE(HealActor) {
         btl_cam_move(10);
         btl_cam_disable_clamp_x();
 
-        ApplyingBuff = TRUE;
+        ApplyingBuff = true;
         script->functionTemp[3] = 5;
         script->functionTemp[0] = 1;
     }
@@ -3782,7 +3782,7 @@ API_CALLABLE(HealActor) {
             if ((actor->handleEventScript != NULL) && does_script_exist(actor->handleEventScriptID)) {
                 break;
             }
-            ApplyingBuff = FALSE;
+            ApplyingBuff = false;
             return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;

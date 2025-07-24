@@ -20,7 +20,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_JADE_JUNGLE)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o79, SURFACE_TYPE_DOCK_WALL)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o81, SURFACE_TYPE_DOCK_WALL)
@@ -37,7 +37,7 @@ EvtScript N(EVS_Main) = {
     Exec(EnterWalk)
     Exec(N(EVS_SetupMusic))
     Call(MakeTransformGroup, MODEL_g40)
-    Call(EnableTexPanning, MODEL_o111, TRUE)
+    Call(EnableTexPanning, MODEL_o111, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(  -80,  140,   80, -100)

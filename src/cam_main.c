@@ -373,14 +373,14 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->targetBoomYaw = 0.0f;
     camera->unk_8C = 0.0f;
     camera->updateMode = initData->updateMode;
-    camera->needsInit = TRUE;
+    camera->needsInit = true;
     camera->nearClip = initData->nearClip;
     camera->farClip = initData->farClip;
     camera->vfov = initData->vfov;
     camera->params.world.zoomPercent = 100;
     set_cam_viewport(camID, initData->viewStartX, initData->viewStartY, initData->viewWidth, initData->viewHeight);
     camera->unk_212 = -1;
-    camera->needsInitialConstrainDir = TRUE;
+    camera->needsInitialConstrainDir = true;
     camera->bgColor[0] = 0;
     camera->bgColor[1] = 0;
     camera->bgColor[2] = 0;
@@ -399,13 +399,13 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->targetLeadAmount = 0.0f;
     camera->leadInterpAlpha = 0.0f;
     camera->accumulatedStickLead = 0.0f;
-    camera->increasingLeadInterp = FALSE;
+    camera->increasingLeadInterp = false;
     camera->prevLeadPosX = 0.0f;
     camera->prevLeadPosZ = 0.0f;
     camera->leadConstrainDir = 0;
     camera->prevLeadSettings = NULL;
-    camera->panActive = FALSE;
-    camera->followPlayer = FALSE;
+    camera->panActive = false;
+    camera->followPlayer = false;
     camera->unk_C4 = 1000.0f;
     camera->leadAmtScale = 0.2f;
     camera->moveSpeed = 1.0f;
@@ -483,15 +483,15 @@ s32 is_outside_cam_viewport_bounds(s32 camID, s32 x, s32 y) {
     s32 endY = startY + gCameras[camID].viewportH;
 
     if (x < startX) {
-        return TRUE;
+        return true;
     } else if (x > endX) {
-        return TRUE;
+        return true;
     } else if (y < startY) {
-        return TRUE;
+        return true;
     } else if (y > endY) {
-        return TRUE;
+        return true;
     } else {
-        return FALSE;
+        return false;
     }
 }
 

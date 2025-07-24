@@ -33,8 +33,8 @@ s32 N(EVS_TrainPath_RightToLeft)[] = {
 EvtScript N(EVS_EnterTrain) = {
     Call(ParentColliderToModel, COLLIDER_p1, MODEL_o1)
     Call(ParentColliderToModel, COLLIDER_pp1, MODEL_o1)
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
     Exec(N(D_80245CEC_DF4B8C))
     Call(GetEntryID, LVar0)
@@ -44,7 +44,7 @@ EvtScript N(EVS_EnterTrain) = {
             Set(MV_TrainUnk_01, Ref(N(EVS_TrainPath_LeftToRight)))
             Set(MV_TrainUnk_02, 0)
             Exec(N(EVS_Scene_RideTrain))
-            Set(MF_TrainUnk_00, TRUE)
+            Set(MF_TrainUnk_00, true)
             Thread
                 Label(10)
                 IfLt(MV_TrainPos, 600)
@@ -59,7 +59,7 @@ EvtScript N(EVS_EnterTrain) = {
             Set(MV_TrainUnk_01, Ref(N(EVS_TrainPath_RightToLeft)))
             Set(MV_TrainUnk_02, 0)
             Exec(N(EVS_Scene_RideTrain))
-            Set(MF_TrainUnk_00, TRUE)
+            Set(MF_TrainUnk_00, true)
             Thread
                 Label(20)
                 IfGt(MV_TrainPos, -600)

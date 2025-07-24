@@ -34,7 +34,7 @@ API_CALLABLE(N(CreateParadeNPC)) {
     bp.onUpdate = NULL;
     bp.onRender = NULL;
 
-    spr_allocateBtlComponentsOnWorldHeap = TRUE;
+    spr_allocateBtlComponentsOnWorldHeap = true;
 
     npc = get_npc_by_index(create_standard_npc(&bp, npcInfo->animList));
     npc->npcID = npcID;
@@ -66,7 +66,7 @@ API_CALLABLE(N(ParadeSpriteHeapFree)) {
 API_CALLABLE(N(UpdateCameraScroll)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    camera->panActive = TRUE;
+    camera->panActive = true;
     camera->movePos.x += PARADE_SCROLL_RATE / (f32) DT;
     return ApiStatus_DONE2;
 }
@@ -97,7 +97,7 @@ EvtScript N(EVS_SetupInitialCamera) = {
     Call(UseSettingsFrom, CAM_DEFAULT, PARADE_START, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, PARADE_START, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Return
     End
 };
@@ -116,31 +116,31 @@ EvtScript N(EVS_UpdateScrollPos) = {
 };
 
 EvtScript N(EVS_UpdateTexPan_Ground) = {
-    Call(EnableTexPanning, MODEL_o145, TRUE)
-    Call(EnableTexPanning, MODEL_o146, TRUE)
-    Call(EnableTexPanning, MODEL_j2, TRUE)
-    Call(EnableTexPanning, MODEL_o152, TRUE)
-    Call(EnableTexPanning, MODEL_o153, TRUE)
-    Call(EnableTexPanning, MODEL_o154, TRUE)
-    Call(EnableTexPanning, MODEL_o166, TRUE)
-    Call(EnableTexPanning, MODEL_o157, TRUE)
-    Call(EnableTexPanning, MODEL_o159, TRUE)
-    Call(EnableTexPanning, MODEL_o160, TRUE)
-    Call(EnableTexPanning, MODEL_o161, TRUE)
-    Call(EnableTexPanning, MODEL_o162, TRUE)
-    Call(EnableTexPanning, MODEL_o195, TRUE)
-    Call(EnableTexPanning, MODEL_o196, TRUE)
-    Call(EnableTexPanning, MODEL_o197, TRUE)
-    Call(EnableTexPanning, MODEL_o198, TRUE)
-    Call(EnableTexPanning, MODEL_o260, TRUE)
-    Call(EnableTexPanning, MODEL_o201, TRUE)
-    Call(EnableTexPanning, MODEL_o202, TRUE)
-    Call(EnableTexPanning, MODEL_o203, TRUE)
-    Call(EnableTexPanning, MODEL_o204, TRUE)
-    Call(EnableTexPanning, MODEL_o275, TRUE)
-    Call(EnableTexPanning, MODEL_o276, TRUE)
-    Call(EnableTexPanning, MODEL_o277, TRUE)
-    Call(EnableTexPanning, MODEL_o278, TRUE)
+    Call(EnableTexPanning, MODEL_o145, true)
+    Call(EnableTexPanning, MODEL_o146, true)
+    Call(EnableTexPanning, MODEL_j2, true)
+    Call(EnableTexPanning, MODEL_o152, true)
+    Call(EnableTexPanning, MODEL_o153, true)
+    Call(EnableTexPanning, MODEL_o154, true)
+    Call(EnableTexPanning, MODEL_o166, true)
+    Call(EnableTexPanning, MODEL_o157, true)
+    Call(EnableTexPanning, MODEL_o159, true)
+    Call(EnableTexPanning, MODEL_o160, true)
+    Call(EnableTexPanning, MODEL_o161, true)
+    Call(EnableTexPanning, MODEL_o162, true)
+    Call(EnableTexPanning, MODEL_o195, true)
+    Call(EnableTexPanning, MODEL_o196, true)
+    Call(EnableTexPanning, MODEL_o197, true)
+    Call(EnableTexPanning, MODEL_o198, true)
+    Call(EnableTexPanning, MODEL_o260, true)
+    Call(EnableTexPanning, MODEL_o201, true)
+    Call(EnableTexPanning, MODEL_o202, true)
+    Call(EnableTexPanning, MODEL_o203, true)
+    Call(EnableTexPanning, MODEL_o204, true)
+    Call(EnableTexPanning, MODEL_o275, true)
+    Call(EnableTexPanning, MODEL_o276, true)
+    Call(EnableTexPanning, MODEL_o277, true)
+    Call(EnableTexPanning, MODEL_o278, true)
     Thread
         Set(LVar0, 0)
         Set(LVar1, 0)
@@ -733,8 +733,8 @@ EvtScript N(EVS_ParadePhase_PlayCredits) = {
 };
 
 EvtScript N(EVS_ManageParade) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetMusic, 0, SONG_PARADE_NIGHT, 0, VOL_LEVEL_FULL)
     Exec(N(EVS_SetupInitialCamera))
     Exec(N(EVS_ManageNpcPool))

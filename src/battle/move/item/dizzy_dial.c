@@ -25,7 +25,7 @@ API_CALLABLE(N(AnimateDizzyDialCameraFX)) {
             script->functionTemp[1] = 0;
             script->functionTemp[2] = 0;
             sfx_play_sound(SOUND_DIZZY_DIAL);
-            camera->params.basic.skipRecalc = FALSE;
+            camera->params.basic.skipRecalc = false;
             ScreenBlurWorkerID = create_worker_frontUI(NULL, N(worker_render_screen_blur));
             script->functionTemp[0] = 1;
         case 1:
@@ -37,7 +37,7 @@ API_CALLABLE(N(AnimateDizzyDialCameraFX)) {
             if (script->functionTemp[2] <= 90) {
                 return ApiStatus_BLOCK;
             }
-            camera->params.basic.skipRecalc = FALSE;
+            camera->params.basic.skipRecalc = false;
             camera->flags &= ~CAMERA_FLAG_SHAKING;
             free_worker(ScreenBlurWorkerID);
             return ApiStatus_DONE2;
@@ -58,11 +58,11 @@ EvtScript N(EVS_UseItem) = {
         Wait(5)
         Call(AddBattleCamDist, -250)
         Call(MoveBattleCamOver, 80)
-        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, true)
         Wait(80)
         Call(AddBattleCamDist, 250)
         Call(MoveBattleCamOver, 3)
-        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, true)
     EndThread
     Call(N(AnimateDizzyDialCameraFX))
     Thread
@@ -76,7 +76,7 @@ EvtScript N(EVS_UseItem) = {
         Wait(10)
         Call(UseBattleCamPreset, BTL_CAM_VIEW_ENEMIES)
         Call(MoveBattleCamOver, 10)
-        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, false)
     EndThread
     Call(InitTargetIterator)
     Label(0)

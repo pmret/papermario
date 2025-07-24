@@ -13,7 +13,7 @@ API_CALLABLE(N(SetBlueSwitchPosition)) {
 }
 
 EvtScript N(EVS_Scene_OverhearEnemies) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetNpcPos, NPC_GoombaKing, LVar0, LVar1, LVar2)
     Call(SetNpcPos, NPC_RedGoombaBro, LVar0, LVar1, LVar2)
     Call(SetNpcPos, NPC_BlueGoombaBro, LVar0, LVar1, LVar2)
@@ -24,7 +24,7 @@ EvtScript N(EVS_Scene_OverhearEnemies) = {
     Call(SpeakToPlayer, NPC_RedGoombaBro, ANIM_GoombaBros_Red_Talk, ANIM_GoombaBros_Red_Idle, 0, MSG_CH0_00D7)
     Call(SetNpcPos, NPC_RedGoombaBro, NPC_DISPOSE_LOCATION)
     Call(SetNpcPos, NPC_BlueGoombaBro, NPC_DISPOSE_LOCATION)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -45,9 +45,9 @@ EvtScript N(EVS_Interact_SwitchBush) = {
     IfGe(GB_StoryProgress, STORY_CH0_FOUND_GATEHOUSE_SWITCH)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetNpcPos, NPC_BlueGoombaBro, -377, -8, 81)
-    Call(SetNpcFlagBits, NPC_BlueGoombaBro, NPC_FLAG_HAS_NO_SPRITE, TRUE)
+    Call(SetNpcFlagBits, NPC_BlueGoombaBro, NPC_FLAG_HAS_NO_SPRITE, true)
     ExecGetTID(N(EVS_TetherSwitchToBlueGoomba), LVarB)
     Call(SetNpcJumpscale, NPC_BlueGoombaBro, Float(2.0))
     Call(NpcJump0, NPC_BlueGoombaBro, -445, 0, 92, 15 * DT)
@@ -57,7 +57,7 @@ EvtScript N(EVS_Interact_SwitchBush) = {
     KillThread(LVarB)
     Call(SetNpcPos, NPC_BlueGoombaBro, NPC_DISPOSE_LOCATION)
     Set(GB_StoryProgress, STORY_CH0_FOUND_GATEHOUSE_SWITCH)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -89,7 +89,7 @@ EvtScript N(EVS_MakeEntities) = {
         EndIf
     EndIf
     Call(MakeEntity, Ref(Entity_BrickBlock), 625, -25, 110, 45, MAKE_ENTITY_END)
-    IfEq(GF_KMR11_ItemBlock_SuperShroom, FALSE)
+    IfEq(GF_KMR11_ItemBlock_SuperShroom, false)
         Call(AssignScript, Ref(N(EVS_OnBreak_SpecialBrick)))
     Else
         Call(MakeEntity, Ref(Entity_YellowBlock), 665, 35, 70, 45, ITEM_SUPER_SHROOM, MAKE_ENTITY_END)

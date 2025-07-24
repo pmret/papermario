@@ -7,7 +7,7 @@
 #include "world/common/complete/GiveReward.inc.c"
 
 EvtScript N(EVS_NpcInteract_Bubulb) = {
-    IfEq(GF_MIM04_Gift_MagicalSeed3, FALSE)
+    IfEq(GF_MIM04_Gift_MagicalSeed3, false)
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
         Call(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Green_PopUp)
@@ -17,7 +17,7 @@ EvtScript N(EVS_NpcInteract_Bubulb) = {
         Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH3_000F)
         EVT_GIVE_KEY_REWARD(ITEM_MAGICAL_SEED3)
         Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH3_0010)
-        Set(GF_MIM04_Gift_MagicalSeed3, TRUE)
+        Set(GF_MIM04_Gift_MagicalSeed3, true)
         Call(SetTattleMessage, NPC_Bubulb, MSG_NpcTattle_MIM_Bubulb_Revealed)
     Else
         Switch(GB_StoryProgress)
@@ -31,12 +31,12 @@ EvtScript N(EVS_NpcInteract_Bubulb) = {
                 Set(LVar0, MSG_CH3_0015)
                 Set(LVar1, MSG_CH3_0016)
         EndSwitch
-        IfEq(AF_MIM04_Bubulb_DialogueToggle, FALSE)
+        IfEq(AF_MIM04_Bubulb_DialogueToggle, false)
             Call(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, LVar0)
-            Set(AF_MIM04_Bubulb_DialogueToggle, TRUE)
+            Set(AF_MIM04_Bubulb_DialogueToggle, true)
         Else
             Call(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, LVar1)
-            Set(AF_MIM04_Bubulb_DialogueToggle, FALSE)
+            Set(AF_MIM04_Bubulb_DialogueToggle, false)
         EndIf
     EndIf
     Return
@@ -45,7 +45,7 @@ EvtScript N(EVS_NpcInteract_Bubulb) = {
 
 EvtScript N(EVS_NpcInit_Bubulb) = {
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bubulb)))
-    IfEq(GF_MIM04_Gift_MagicalSeed3, FALSE)
+    IfEq(GF_MIM04_Gift_MagicalSeed3, false)
         Call(SetNpcCollisionSize, NPC_SELF, 25, 25)
         Call(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Green_BuriedIdle)
         Call(SetTattleMessage, NPC_Bubulb, MSG_NpcTattle_MIM_Bubulb_Hidden)
@@ -60,7 +60,7 @@ NpcData N(NpcData_Fuzzy) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 240, 0, -240 },

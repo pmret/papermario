@@ -330,7 +330,7 @@ EvtScript N(EVS_Cam_FocusOnJrTroopa) = {
 };
 
 EvtScript N(EVS_Cam_ResetFocus) = {
-    Call(EnableBattleStatusBar, TRUE)
+    Call(EnableBattleStatusBar, true)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 12)
     Return
@@ -355,7 +355,7 @@ s32 N(BaseDefeatedAnims)[] = {
 EvtScript N(EVS_JrTroopa_BaseDeath) = {
     Set(LVarA, LVar0)
     Call(HideHealthBar, ACTOR_SELF)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(SetAnimation, ACTOR_SELF, LVarA, LVar1)
     Wait(10)
     Call(GetDamageSource, LVar5)
@@ -398,13 +398,13 @@ EvtScript N(EVS_JrTroopa_BaseDeath) = {
     Call(SetAnimation, ACTOR_SELF, LVarA, ANIM_JrTroopa_Defeated)
     Call(SetIdleAnimations, ACTOR_SELF, LVarA, Ref(N(BaseDefeatedAnims)))
     Wait(60)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, true)
     Return
     End
 };
 
 EvtScript N(EVS_Init) = {
-    Call(SetActorVar, ACTOR_SELF, AVAR_UnusedBrag, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_UnusedBrag, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_DialogueFlags, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_SpookReact, AVAL_SpookReact_None)
     Call(SetActorVar, ACTOR_SELF, AVAR_Form, AVAL_Form_Base)
@@ -442,7 +442,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVarA)
     Switch(LVarA)
@@ -568,7 +568,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -651,17 +651,17 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 EvtScript N(EVS_Transform_Flying) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 20)
     Call(ActorSpeak, MSG_CH8_005E, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_TiredTalk, ANIM_JrTroopa_TiredTalk)
     ExecWait(N(EVS_TransformFX))
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_BASE, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, TRUE)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_BASE, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_BASE, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, true)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_BASE, ACTOR_PART_FLAG_PRIMARY_TARGET, false)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, false)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_PRIMARY_TARGET, true)
     Wait(10)
     Call(SetActorSpeed, ACTOR_SELF, Float(2.0))
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.2))
@@ -673,13 +673,13 @@ EvtScript N(EVS_Transform_Flying) = {
     Call(HPBarToHome, ACTOR_SELF)
     Call(SetActorVar, ACTOR_SELF, AVAR_Form, AVAL_Form_Flying)
     Call(SetStatusTable, ACTOR_SELF, Ref(N(FlyingStatusTable)))
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, TRUE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, true)
     Return
     End
 };
 
 EvtScript N(EVS_Transform_Mage) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_SELF)
@@ -688,10 +688,10 @@ EvtScript N(EVS_Transform_Mage) = {
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 120)
     ExecWait(N(EVS_TransformFX))
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, TRUE)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAGE, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAGE, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, true)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_PRIMARY_TARGET, false)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAGE, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, false)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAGE, ACTOR_PART_FLAG_PRIMARY_TARGET, true)
     Call(SetActorSpeed, ACTOR_SELF, Float(2.0))
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -704,26 +704,26 @@ EvtScript N(EVS_Transform_Mage) = {
     Call(HPBarToHome, ACTOR_SELF)
     Call(SetActorVar, ACTOR_SELF, AVAR_Form, AVAL_Form_Mage)
     Call(SetStatusTable, ACTOR_SELF, Ref(N(MageStatusTable)))
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, FALSE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, false)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_Leap) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 20)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Run)
     Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Set(LVar0, 20)
     Call(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 8, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVarF)
         CaseEq(HIT_RESULT_LUCKY)
@@ -737,7 +737,7 @@ EvtScript N(EVS_Attack_Leap) = {
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 30)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
             Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Trip)
             Thread
                 Wait(3)
@@ -757,12 +757,12 @@ EvtScript N(EVS_Attack_Leap) = {
             Call(AddActorDecoration, ACTOR_SELF, PRT_BASE, 0, ACTOR_DECORATION_SWEAT)
             Call(SetActorSpeed, ACTOR_SELF, Float(7.0))
             Call(SetGoalToHome, ACTOR_SELF)
-            Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+            Call(RunToGoal, ACTOR_SELF, 0, false)
             Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Idle)
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_BASE, 0)
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         CaseEq(HIT_RESULT_MISS)
             Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Run)
@@ -771,7 +771,7 @@ EvtScript N(EVS_Attack_Leap) = {
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Add(LVar0, 50)
             Call(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
-            Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+            Call(RunToGoal, ACTOR_SELF, 0, false)
             Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_JR_TOOPA_JUMP, 0)
             Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Jump)
             Wait(2)
@@ -787,23 +787,23 @@ EvtScript N(EVS_Attack_Leap) = {
                 Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Fall)
             EndThread
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 18, false, true, false)
             Call(ResetAllActorSounds, ACTOR_SELF)
             Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_PanicFast)
             Sub(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             Sub(LVar0, 10)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Run)
             Call(SetActorSpeed, ACTOR_SELF, Float(7.0))
             Call(SetGoalToHome, ACTOR_SELF)
-            Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+            Call(RunToGoal, ACTOR_SELF, 0, false)
             Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Idle)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
     EndSwitch
     Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Run)
@@ -812,7 +812,7 @@ EvtScript N(EVS_Attack_Leap) = {
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Add(LVar0, 50)
     Call(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_JR_TOOPA_JUMP, 0)
     Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Jump)
     Wait(2)
@@ -823,7 +823,7 @@ EvtScript N(EVS_Attack_Leap) = {
         Wait(8)
         Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Fall)
     EndThread
-    Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_LEAP, BS_FLAGS1_TRIGGER_EVENTS)
     Call(ResetAllActorSounds, ACTOR_SELF)
@@ -833,35 +833,35 @@ EvtScript N(EVS_Attack_Leap) = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
     Add(LVar0, 30)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
     Add(LVar0, 20)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
     Sub(LVar0, 10)
-    Call(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 4, false, true, false)
     Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Idle)
     Wait(8)
     Call(SetGoalToHome, ACTOR_SELF)
     Call(SetActorSpeed, ACTOR_SELF, Float(7.0))
     Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Run)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Idle)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_Swoop) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SpikedParaJrTroopa_FlyFast)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, 50, 0, 0)
@@ -873,7 +873,7 @@ EvtScript N(EVS_Attack_Swoop) = {
         CaseOrEq(HIT_RESULT_LUCKY)
             Wait(10)
             Call(UseBattleCamPreset, BTL_CAM_ENEMY_DIVE)
-            Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+            Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
             Call(BattleCamTargetActor, ACTOR_SELF)
             Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_PARAGOOMBA_PREDIVE, 0)
             Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
@@ -881,7 +881,7 @@ EvtScript N(EVS_Attack_Swoop) = {
             Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SpikedParaJrTroopa_FlyFast)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
             Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAGOOMBA_DIVE)
             Call(SetGoalToTarget, ACTOR_SELF)
@@ -913,7 +913,7 @@ EvtScript N(EVS_Attack_Swoop) = {
     EndSwitch
     Wait(10)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_DIVE)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_PARAGOOMBA_PREDIVE, 0)
     Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
@@ -921,7 +921,7 @@ EvtScript N(EVS_Attack_Swoop) = {
     Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SpikedParaJrTroopa_FlyFast)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAGOOMBA_DIVE)
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -945,13 +945,13 @@ EvtScript N(EVS_Attack_Swoop) = {
     Call(FlyToGoal, ACTOR_SELF, 0, 1, EASING_LINEAR)
     Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SpikedParaJrTroopa_Idle)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_SpikeDive) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
@@ -979,7 +979,7 @@ EvtScript N(EVS_Attack_SpikeDive) = {
                 Sub(LVar0, 10)
                 Set(LVar1, 12)
                 Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                Call(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
+                Call(JumpToGoal, ACTOR_SELF, 20, false, true, false)
             EndThread
             Set(LVar0, 0)
             Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
@@ -1001,7 +1001,7 @@ EvtScript N(EVS_Attack_SpikeDive) = {
                 Sub(LVar1, 40)
                 Set(LVar2, 10)
                 Call(SetGoalPos, ACTOR_SELF, LVar1, LVar2, LVar3)
-                Call(JumpToGoal, ACTOR_SELF, 14, FALSE, TRUE, FALSE)
+                Call(JumpToGoal, ACTOR_SELF, 14, false, true, false)
             EndThread
             Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
             Loop(14)
@@ -1029,7 +1029,7 @@ EvtScript N(EVS_Attack_SpikeDive) = {
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_FLYING, 0)
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
         CaseDefault
@@ -1039,7 +1039,7 @@ EvtScript N(EVS_Attack_SpikeDive) = {
         Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
         Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
         Call(SetGoalToTarget, ACTOR_SELF)
-        Call(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 20, false, true, false)
     EndThread
     Set(LVar0, 0)
     Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
@@ -1061,7 +1061,7 @@ EvtScript N(EVS_Attack_SpikeDive) = {
         Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
         Add(LVar1, 40)
         Call(SetGoalPos, ACTOR_SELF, LVar1, LVar2, LVar3)
-        Call(JumpToGoal, ACTOR_SELF, 14, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 14, false, true, false)
     EndThread
     Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     Loop(14)
@@ -1085,7 +1085,7 @@ EvtScript N(EVS_Attack_SpikeDive) = {
     Call(SetGoalToHome, ACTOR_SELF)
     Call(FlyToGoal, ACTOR_SELF, 0, -5, EASING_LINEAR)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -1093,7 +1093,7 @@ EvtScript N(EVS_Attack_SpikeDive) = {
 #include "common/CalculateArcsinDeg.inc.c"
 
 EvtScript N(EVS_Attack_MagicSpell) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -1141,7 +1141,7 @@ EvtScript N(EVS_Attack_MagicSpell) = {
             PlayEffect(EFFECT_SHAPE_SPELL, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 30, 0)
             Wait(35)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         CaseEq(HIT_RESULT_LUCKY)
             Thread
@@ -1162,7 +1162,7 @@ EvtScript N(EVS_Attack_MagicSpell) = {
             Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             Wait(40)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
     EndSwitch
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST2)
@@ -1186,7 +1186,7 @@ EvtScript N(EVS_Attack_MagicSpell) = {
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT), 0, 0, DMG_SPELL, BS_FLAGS1_TRIGGER_EVENTS)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -1198,7 +1198,7 @@ EvtScript N(EVS_Attack_MagicSpell) = {
 #include "common/SetBackgroundAlpha.inc.c"
 
 EvtScript N(EVS_Attack_LightningBolt) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -1256,7 +1256,7 @@ EvtScript N(EVS_Attack_LightningBolt) = {
                 EndIf
             Wait(20)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         CaseEq(HIT_RESULT_LUCKY)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1294,7 +1294,7 @@ EvtScript N(EVS_Attack_LightningBolt) = {
                 EndIf
             Wait(20)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
     EndSwitch
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -1313,13 +1313,13 @@ EvtScript N(EVS_Attack_LightningBolt) = {
         EndIf
     Wait(20)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Move_HealSelf) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -1369,19 +1369,19 @@ EvtScript N(EVS_Move_HealSelf) = {
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_STAR_BOUNCE_A)
     EndThread
     Thread
-        Call(FreezeBattleState, TRUE)
-        Call(HealActor, ACTOR_SELF, LVar0, FALSE)
-        Call(FreezeBattleState, FALSE)
+        Call(FreezeBattleState, true)
+        Call(HealActor, ACTOR_SELF, LVar0, false)
+        Call(FreezeBattleState, false)
     EndThread
     Wait(30)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_HandlePhase) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetBattlePhase, LVar0)
     Switch(LVar0)
@@ -1401,7 +1401,7 @@ EvtScript N(EVS_HandlePhase) = {
         CaseEq(PHASE_PLAYER_BEGIN) //@bug duplicate case, should be PHASE_PLAYER_END
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -1486,7 +1486,7 @@ EvtScript N(EVS_JrTroopa_Death) = {
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.2))
             Call(FallToGoal, ACTOR_SELF, 10)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             Call(HPBarToCurrent, ACTOR_SELF)
             Call(ShowHealthBar, ACTOR_SELF)
             Label(0)
@@ -1499,8 +1499,8 @@ EvtScript N(EVS_JrTroopa_Death) = {
                     Wait(3)
                 EndLoop
             EndThread
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_BASE, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE, true)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_BASE, ACTOR_PART_FLAG_INVISIBLE, false)
             Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_DefeatedBegin)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 5)
@@ -1517,11 +1517,11 @@ EvtScript N(EVS_JrTroopa_Death) = {
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_KNOCKOUT_CHIRPING)
             Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Defeated)
             Wait(60)
-            Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+            Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, true)
             Return
         CaseEq(AVAL_Form_Mage)
             Call(HideHealthBar, ACTOR_SELF)
-            Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+            Call(UseIdleAnimation, ACTOR_SELF, false)
             Call(GetDamageSource, LVar5)
             Switch(LVar5)
                 CaseOrEq(DMG_SRC_NEXT_SLAP_LEFT)
@@ -1552,8 +1552,8 @@ EvtScript N(EVS_JrTroopa_Death) = {
                     Wait(3)
                 EndLoop
             EndThread
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_MAGE, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_BASE, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_MAGE, ACTOR_PART_FLAG_INVISIBLE, true)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_BASE, ACTOR_PART_FLAG_INVISIBLE, false)
             Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_DefeatedBegin)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 5)
@@ -1571,7 +1571,7 @@ EvtScript N(EVS_JrTroopa_Death) = {
             Call(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Defeated)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_BASE, Ref(N(DefeatedAnims)))
             Wait(60)
-            Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+            Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, true)
             Return
         CaseDefault
             Set(LVar1, FORM_ANIM_HURT)
@@ -1622,7 +1622,7 @@ EvtScript N(EVS_TryFearReaction) = {
                 Call(ActorSpeak, MSG_Menus_019A, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle)
         EndSwitch
         Call(GetActorVar, ACTOR_SELF, AVAR_UnusedBrag, LVar0)
-        IfNe(LVar0, TRUE)
+        IfNe(LVar0, true)
             ExecWait(N(EVS_Cam_ResetFocus))
         EndIf
     EndIf

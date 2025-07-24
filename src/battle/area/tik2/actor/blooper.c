@@ -286,7 +286,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -363,7 +363,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -392,7 +392,7 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 EvtScript N(EVS_Attack_SpinDrop) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -433,7 +433,7 @@ EvtScript N(EVS_Attack_SpinDrop) = {
             Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.5))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 16, false, true, false)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(MoveBattleCamOver, 20)
             IfEq(LVarF, HIT_RESULT_LUCKY)
@@ -441,13 +441,13 @@ EvtScript N(EVS_Attack_SpinDrop) = {
             EndIf
             Add(LVar0, 30)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 12, false, true, false)
             Add(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             ExecWait(N(EVS_FloatToHome))
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -465,7 +465,7 @@ EvtScript N(EVS_Attack_SpinDrop) = {
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Add(LVar1, 30)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 16, false, true, false)
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_SPIN_DROP, BS_FLAGS1_TRIGGER_EVENTS)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -481,10 +481,10 @@ EvtScript N(EVS_Attack_SpinDrop) = {
     Sub(LVar1, 15)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.2))
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
     ExecWait(N(EVS_FloatToHome))
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -493,7 +493,7 @@ EvtScript N(EVS_Attack_SpinDrop) = {
 #include "common/SpitInk.inc.c"
 
 EvtScript N(EVS_Attack_InkBlast) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -575,7 +575,7 @@ EvtScript N(EVS_Attack_InkBlast) = {
             Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             ExecWait(N(EVS_FloatToHome))
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -589,7 +589,7 @@ EvtScript N(EVS_Attack_InkBlast) = {
     Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
     ExecWait(N(EVS_FloatToHome))
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

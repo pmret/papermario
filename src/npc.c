@@ -88,7 +88,7 @@ void clear_npcs(void) {
     }
 
     gNpcCount = 0;
-    gNpcPlayerCollisionsEnabled = TRUE;
+    gNpcPlayerCollisionsEnabled = true;
 }
 
 void init_npc_list(void) {
@@ -99,7 +99,7 @@ void init_npc_list(void) {
     }
 
     gNpcCount = 0;
-    gNpcPlayerCollisionsEnabled = TRUE;
+    gNpcPlayerCollisionsEnabled = true;
 }
 
 void npc_iter_no_op(void) {
@@ -107,7 +107,7 @@ void npc_iter_no_op(void) {
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
         // Needed to avoid loop optimization.
-        do {} while (FALSE);
+        do {} while (false);
     }
 }
 
@@ -166,7 +166,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->imgfxType = IMGFX_CLEAR;
     npc->imgfxFlags = 0;
     npc->collisionChannel = COLLIDER_FLAG_IGNORE_NPC;
-    npc->isFacingAway = FALSE;
+    npc->isFacingAway = false;
     npc->yawCamOffset = 0;
     npc->turnAroundYawAdjustment = 0;
     npc->curFloor = NO_COLLIDER;
@@ -214,15 +214,15 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
 }
 
 s32 create_basic_npc(NpcBlueprint* blueprint) {
-    return create_npc_impl(blueprint, NULL, FALSE);
+    return create_npc_impl(blueprint, NULL, false);
 }
 
 s32 create_standard_npc(NpcBlueprint* blueprint, AnimID* animList) {
-    return create_npc_impl(blueprint, animList, FALSE);
+    return create_npc_impl(blueprint, animList, false);
 }
 
 s32 create_peach_npc(NpcBlueprint* blueprint) {
-    return create_npc_impl(blueprint, NULL, TRUE);
+    return create_npc_impl(blueprint, NULL, true);
 }
 
 void free_npc_by_index(s32 listIndex) {
@@ -438,13 +438,13 @@ void npc_do_other_npc_collision(Npc* npc) {
                         dist = sqrtf(SQ(xDiff) + SQ(zDiff));
 
                         if (!(thisBuf + otherBuf <= dist)) {
-                            collision = FALSE;
+                            collision = false;
                             if (npc->flags & NPC_FLAG_PARTNER) {
                                 collision = gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE;
                             } else if (!(otherNpc->flags & NPC_FLAG_PARTNER) ||
                                         gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE)
                             {
-                                collision = TRUE;
+                                collision = true;
                             }
 
                             if (collision) {
@@ -476,23 +476,23 @@ s32 npc_do_player_collision(Npc* npc) {
     f32 deltaX, deltaZ;
 
     if (npc->flags & NPC_FLAG_IGNORE_PLAYER_COLLISION) {
-        return FALSE;
+        return false;
     }
 
     if (npc->flags & NPC_FLAG_PARTNER) {
-        return FALSE;
+        return false;
     }
 
     if (!gNpcPlayerCollisionsEnabled) {
-        return FALSE;
+        return false;
     }
 
     if (playerStatus->pos.y + playerStatus->colliderHeight < npc->pos.y) {
-        return FALSE;
+        return false;
     }
 
     if (npc->pos.y + npc->collisionHeight < playerStatus->pos.y) {
-        return FALSE;
+        return false;
     }
 
     playerX = playerStatus->pos.x;
@@ -510,7 +510,7 @@ s32 npc_do_player_collision(Npc* npc) {
     distToNpc = sqrtf(SQ(deltaX) + SQ(deltaZ));
     colDist = npcColRadius + playerColRadius;
     if (colDist < distToNpc) {
-        return FALSE;
+        return false;
     }
 
     playerStatus->animFlags |= PA_FLAG_NPC_COLLIDED;
@@ -559,7 +559,7 @@ s32 npc_do_player_collision(Npc* npc) {
     npc->pos.x = npc->colliderPos.x;
     npc->pos.y = npc->colliderPos.y;
     npc->pos.z = npc->colliderPos.z;
-    return TRUE;
+    return true;
 }
 
 // update NPC position using gravitational acceleration = 1.0
@@ -610,12 +610,12 @@ s32 npc_try_snap_to_ground(Npc* npc, f32 velocity) {
     s32 hitID;
 
     if (npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_FLYING)) {
-        return FALSE;
+        return false;
     }
 
     if (npc->flags & NPC_FLAG_JUMPING) {
         npc->flags &= ~NPC_FLAG_GROUNDED;
-        return FALSE;
+        return false;
     }
 
     length = testLength = fabsf(velocity) + 16;
@@ -633,11 +633,11 @@ s32 npc_try_snap_to_ground(Npc* npc, f32 velocity) {
         npc->pos.y = y;
         npc->curFloor = NpcHitQueryColliderID;
         npc->flags |= NPC_FLAG_GROUNDED;
-        return TRUE;
+        return true;
     }
 
     npc->flags &= ~NPC_FLAG_GROUNDED;
-    return FALSE;
+    return false;
 }
 
 void update_npcs(void) {
@@ -1153,7 +1153,7 @@ void appendGfx_npc_blur(void* data) {
     blur = npc->blur.motion;
     bufPos = blur->index;
 
-    while (TRUE) {
+    while (true) {
         bufPos--;
         strideIdx++;
 
@@ -1223,11 +1223,11 @@ void appendGfx_npc_blur(void* data) {
 }
 
 void npc_enable_collisions(void) {
-    gNpcPlayerCollisionsEnabled = TRUE;
+    gNpcPlayerCollisionsEnabled = true;
 }
 
 void npc_disable_collisions(void) {
-    gNpcPlayerCollisionsEnabled = FALSE;
+    gNpcPlayerCollisionsEnabled = false;
 }
 
 void func_8003B1A8(void) {
@@ -1276,10 +1276,10 @@ void set_npc_yaw(Npc* npc, f32 yaw) {
 
     if (get_clamped_angle_diff(gCameras[gCurrentCameraID].curYaw, yaw) >= 0.0f) {
         npc->yawCamOffset = 180;
-        npc->isFacingAway = TRUE;
+        npc->isFacingAway = true;
     } else {
         npc->yawCamOffset = 0;
-        npc->isFacingAway = FALSE;
+        npc->isFacingAway = false;
     }
 }
 
@@ -1335,10 +1335,10 @@ void npc_draw_with_palswap(Npc* npc, s32 yaw, Matrix4f mtx) {
             npc_render_with_watt_idle_palettes(npc, yaw, mtx);
             break;
         case NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS:
-            npc_render_with_single_pal_blending(npc, yaw, FALSE, mtx);
+            npc_render_with_single_pal_blending(npc, yaw, false, mtx);
             break;
         case NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS:
-            npc_render_with_single_pal_blending(npc, yaw, TRUE, mtx);
+            npc_render_with_single_pal_blending(npc, yaw, true, mtx);
             break;
         case NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES:
             npc_render_with_double_pal_blending(npc, yaw, mtx);
@@ -1473,7 +1473,7 @@ u16 npc_blend_palette_colors(u16 colorA, u16 colorB, s32 lerpAlpha) {
     return PACK_PAL_RGBA(r, g, b, a);
 }
 
-s32 npc_render_with_single_pal_blending(Npc* npc, s32 yaw, b32 hasDifferentIntervals, Matrix4f mtx) {
+s32 npc_render_with_single_pal_blending(Npc* npc, s32 yaw, bool hasDifferentIntervals, Matrix4f mtx) {
     PAL_PTR color1;
     PAL_PTR color2;
     PAL_PTR outColor;
@@ -2248,7 +2248,7 @@ void spawn_default_surface_effects(Npc* npc, SurfaceInteractMode mode) {
     f32 sinTheta;
     f32 cosTheta;
 
-    mapIsStarWay = FALSE;
+    mapIsStarWay = false;
     if (gGameStatusPtr->areaID == AREA_HOS) {
         mapIsStarWay = gGameStatusPtr->mapID == 2; //TODO hard-coded map ID
     }
@@ -2452,7 +2452,7 @@ void init_encounter_status(void) {
     currentEncounter->battleTriggerCooldown = 0;
     currentEncounter->npcGroupList = 0;
     currentEncounter->unk_08 = 0;
-    currentEncounter->dropWhackaBump = FALSE;
+    currentEncounter->dropWhackaBump = false;
 
     for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
         for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[i]); j++) {
@@ -2501,7 +2501,7 @@ void clear_encounter_status(void) {
     currentEncounter->curEntryIndex = gGameStatusPtr->entryID;
     currentEncounter->npcGroupList = 0;
     currentEncounter->unk_08 = 0;
-    currentEncounter->scriptedBattle = FALSE;
+    currentEncounter->scriptedBattle = false;
 
     func_80045AC0();
     gEncounterState = ENCOUNTER_STATE_NONE;
@@ -2601,7 +2601,7 @@ void make_npcs(s32 flags, s32 mapID, s32* npcGroupList) {
 
     if (npcGroupList != NULL) {
         gEncounterState = ENCOUNTER_STATE_CREATE;
-        EncounterStateChanged = TRUE;
+        EncounterStateChanged = true;
         gEncounterSubState = ENCOUNTER_SUBSTATE_CREATE_INIT;
     }
 }

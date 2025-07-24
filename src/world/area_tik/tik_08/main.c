@@ -29,14 +29,14 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_TOAD_TOWN_TUNNELS)
     Call(SetSpriteShading, SHADING_TIK_08)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
     Call(PlaySound, SOUND_LOOP_TIK08_WATER)
     Call(PlaySoundAtF, SOUND_LOOP_TIK08_FLOW1, SOUND_SPACE_WITH_DEPTH, -30, -30, -85)
     Exec(N(EVS_SetupDrips))
-    Call(EnableTexPanning, MODEL_nagare1, TRUE)
-    Call(EnableTexPanning, MODEL_o92, TRUE)
+    Call(EnableTexPanning, MODEL_nagare1, true)
+    Call(EnableTexPanning, MODEL_o92, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(   70,  100,  100,  130)
@@ -44,7 +44,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         Exec(N(EVS_UpdateTexturePan))
     EndThread
-    Call(EnableTexPanning, MODEL_taki, TRUE)
+    Call(EnableTexPanning, MODEL_taki, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_4)
         TEX_PAN_PARAMS_STEP(  -50, -900,  -70,-1200)
@@ -52,7 +52,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         Exec(N(EVS_UpdateTexturePan))
     EndThread
-    Call(EnableTexPanning, MODEL_takib, TRUE)
+    Call(EnableTexPanning, MODEL_takib, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_5)
         TEX_PAN_PARAMS_STEP(    0,-1400,-2600,  -60)

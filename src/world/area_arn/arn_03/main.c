@@ -41,15 +41,15 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_GUSTY_GULCH)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    Set(AF_ARN_03, FALSE)
-    Set(AF_ARN_04, FALSE)
-    Set(AF_ARN_05, FALSE)
+    Set(AF_ARN_03, false)
+    Set(AF_ARN_04, false)
+    Set(AF_ARN_05, false)
     IfLt(GB_StoryProgress, STORY_CH3_DEFEATED_TUBBA_BLUBBA)
-        Call(MakeNpcs, FALSE, Ref(N(BeforeNPCs)))
+        Call(MakeNpcs, false, Ref(N(BeforeNPCs)))
     Else
-        Call(MakeNpcs, FALSE, Ref(N(AfterNPCs)))
+        Call(MakeNpcs, false, Ref(N(AfterNPCs)))
     EndIf
-    IfEq(GF_ARN03_WaitingForPackage, TRUE)
+    IfEq(GF_ARN03_WaitingForPackage, true)
         Set(MV_Unk_00, 450)
         Set(MV_Unk_01, 450)
     EndIf

@@ -2,7 +2,7 @@
 #include "effects.h"
 
 EvtScript N(EVS_TexPan_FlowerFloat_Base) = {
-    Call(EnableTexPanning, MODEL_flo1, TRUE)
+    Call(EnableTexPanning, MODEL_flo1, true)
     Set(LVar0, 0)
     Loop(0)
         Add(LVar0, 0x2000)
@@ -14,8 +14,8 @@ EvtScript N(EVS_TexPan_FlowerFloat_Base) = {
 };
 
 EvtScript N(EVS_TexPan_FlowerFloat_WisterwoodBody) = {
-    Call(EnableTexPanning, MODEL_flo2, TRUE)
-    Call(EnableTexPanning, MODEL_flo4, TRUE)
+    Call(EnableTexPanning, MODEL_flo2, true)
+    Call(EnableTexPanning, MODEL_flo4, true)
     Set(LVar0, 0)
     Loop(0)
         Add(LVar0, 0x400)
@@ -27,7 +27,7 @@ EvtScript N(EVS_TexPan_FlowerFloat_WisterwoodBody) = {
 };
 
 EvtScript N(EVS_TexPan_FlowerFloat_WisterwoodBlink) = {
-    Call(EnableTexPanning, MODEL_flo3, TRUE)
+    Call(EnableTexPanning, MODEL_flo3, true)
     Call(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0x8000, 0)
     Loop(0)
         Call(RandInt, 30, LVar0)

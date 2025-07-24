@@ -22,8 +22,8 @@ EvtScript N(EVS_EnterMap) = {
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(sbk_30_ENTRY_0)
-            IfEq(GF_SBK30_Visited, FALSE)
-                Set(GF_SBK30_Visited, TRUE)
+            IfEq(GF_SBK30_Visited, false)
+                Set(GF_SBK30_Visited, true)
                 Set(GB_StoryProgress, STORY_CH2_ARRIVED_AT_DRY_DRY_DESERT)
             EndIf
         CaseEq(sbk_30_ENTRY_1)
@@ -43,11 +43,11 @@ EvtScript N(EVS_Scene_RuinsRising) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 193, 0, -237)
     Call(SetPanTarget, CAM_DEFAULT, 193, 0, -237)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
     Call(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
     Call(N(SetModelTintParams), ENV_TINT_REMAP, 44, 32, 177, 0, 0, 0, 0, 0, 0)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Thread
         Call(ShakeCam, CAM_DEFAULT, 0, 300, Float(0.25))
     EndThread
@@ -71,17 +71,17 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_DRY_DRY_DESERT)
     Call(SetSpriteShading, SHADING_NONE)
     IfEq(GB_StoryProgress, STORY_CH2_GOT_PULSE_STONE)
-        Call(DisablePulseStone, FALSE)
+        Call(DisablePulseStone, false)
     EndIf
     SetUP_CAMERA_NO_LEAD()
     IfLt(GB_StoryProgress, STORY_UNUSED_FFFFFFCC)
-        Call(EnableGroup, MODEL_g28, FALSE)
-        Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+        Call(EnableGroup, MODEL_g28, false)
+        Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     Else
-        Call(EnableGroup, MODEL_g23, FALSE)
-        Call(EnableGroup, MODEL_sakji_tent, FALSE)
+        Call(EnableGroup, MODEL_g23, false)
+        Call(EnableGroup, MODEL_sakji_tent, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_Default, COLLIDER_FLAGS_UPPER_MASK)
-        Call(SetZoneEnabled, ZONE_o25, FALSE)
+        Call(SetZoneEnabled, ZONE_o25, false)
     EndIf
     Exec(N(EVS_SetupMusic))
     Exec(N(EVS_EnterMap))

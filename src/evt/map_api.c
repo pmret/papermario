@@ -333,7 +333,7 @@ void apply_transform_to_children(ApiStatus (*apiFunc)(Evt*, s32), Evt* script) {
         localEvt.ptrReadPos = argsPtr;
         *argsPtr = model->modelID;
 
-        apiFunc(&localEvt, TRUE);
+        apiFunc(&localEvt, true);
     }
 
     *argsPtr = originalArg;
@@ -576,7 +576,7 @@ API_CALLABLE(ResetFromLava) {
     if (isInitialCall) {
         lavaReset = gLavaResetList = (LavaReset*)evt_get_variable(script, *args++);
 
-        while (TRUE) {
+        while (true) {
             if (lavaReset->colliderID == -1) {
                 break;
             }
@@ -615,7 +615,7 @@ s32 get_lava_reset_pos(f32* outX, f32* outY, f32* outZ) {
         return -1;
     }
 
-    while (TRUE) {
+    while (true) {
         if (lavaReset->colliderID == -1) {
             break;
         }
@@ -689,10 +689,10 @@ API_CALLABLE(SetZoneEnabled) {
     }
 
     switch (enabled) {
-        case FALSE:
+        case false:
             zone->flags |= TEMP_SET_ZONE_ENABLED_FLAG_10000;
             break;
-        case TRUE:
+        case true:
             zone->flags &= ~TEMP_SET_ZONE_ENABLED_FLAG_10000;
             break;
     }

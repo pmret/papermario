@@ -5,8 +5,8 @@
 #include "world/common/atomic/TexturePan.inc.c"
 
 EvtScript N(EVS_GotoMap_sam_02_2) = {
-    IfEq(GF_StartedChapter7, FALSE)
-        Set(GF_StartedChapter7, TRUE)
+    IfEq(GF_StartedChapter7, false)
+        Set(GF_StartedChapter7, true)
         Call(FadeOutMusic, 0, 1500)
         Call(GotoMapSpecial, Ref("kmr_22"), kmr_22_ENTRY_7, TRANSITION_BEGIN_OR_END_CHAPTER)
         Wait(100)

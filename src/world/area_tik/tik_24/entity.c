@@ -2,14 +2,14 @@
 #include "entity.h"
 
 EvtScript N(EVS_OnSmashBlock) = {
-    Set(GF_TIK24_Hammer3Block, TRUE)
+    Set(GF_TIK24_Hammer3Block, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o44, COLLIDER_FLAGS_UPPER_MASK)
     Return
     End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_TIK24_Hammer3Block, FALSE)
+    IfEq(GF_TIK24_Hammer3Block, false)
         Call(MakeEntity, Ref(Entity_Hammer3Block), -240, -10, 0, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnSmashBlock)))
     Else

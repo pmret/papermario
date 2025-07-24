@@ -15,7 +15,7 @@ EvtScript N(EVS_NpcInteract_ToadKids) = {
             Set(LVar2, MSG_MAC_Housing_00E8)
 #endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Housing_003A)
                 Set(LVar1, MSG_MAC_Housing_003B)
                 Set(LVar2, MSG_MAC_Housing_003C)
@@ -29,7 +29,7 @@ EvtScript N(EVS_NpcInteract_ToadKids) = {
             Set(LVar1, MSG_MAC_Housing_0041)
             Set(LVar2, MSG_MAC_Housing_0042)
         CaseLt(STORY_CH4_RETURNED_STOREROOM_KEY)
-            IfEq(GF_MAC04_StoreroomKeyStolen, FALSE)
+            IfEq(GF_MAC04_StoreroomKeyStolen, false)
                 Set(LVar0, MSG_MAC_Housing_0043)
                 Set(LVar1, MSG_MAC_Housing_0044)
                 Set(LVar2, MSG_MAC_Housing_0045)

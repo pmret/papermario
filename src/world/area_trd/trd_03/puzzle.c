@@ -31,7 +31,7 @@ EvtScript N(EVS_InitializePlatforms) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o75, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o74, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o73, COLLIDER_FLAGS_UPPER_MASK)
-    Set(MV_PlatformsExtended, FALSE)
+    Set(MV_PlatformsExtended, false)
     Return
     End
 };
@@ -69,7 +69,7 @@ EvtScript N(EVS_ExtendPlatform) = {
 };
 
 EvtScript N(EVS_TogglePlatforms_LeftSwitch) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Label(123)
     Call(GetPlayerActionState, LVar0)
     Wait(1)
@@ -82,10 +82,10 @@ EvtScript N(EVS_TogglePlatforms_LeftSwitch) = {
     Call(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
     Call(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.5 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(15 * DT)
-    IfEq(MV_PlatformsExtended, FALSE)
+    IfEq(MV_PlatformsExtended, false)
         Set(LVar7, COLLIDER_o73)
         Set(LVar8, WALL_RETRACT_LENGTH)
         Set(LVar9, MODEL_7)
@@ -121,7 +121,7 @@ EvtScript N(EVS_TogglePlatforms_LeftSwitch) = {
         Set(LVar9, MODEL_5)
         Exec(N(EVS_ExtendPlatform))
         Wait(9 * DT)
-        Set(MV_PlatformsExtended, TRUE)
+        Set(MV_PlatformsExtended, true)
     Else
         Set(LVar7, COLLIDER_o75)
         Set(LVar8, WALL_RETRACT_LENGTH)
@@ -158,20 +158,20 @@ EvtScript N(EVS_TogglePlatforms_LeftSwitch) = {
         Set(LVar9, MODEL_7)
         Exec(N(EVS_RetractPlatform))
         Wait(9 * DT)
-        Set(MV_PlatformsExtended, FALSE)
+        Set(MV_PlatformsExtended, false)
     EndIf
     Wait(10)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.5 / DT))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_TogglePlatforms_RightSwitch) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Label(123)
     Call(GetPlayerActionState, LVar0)
     Wait(1)
@@ -184,10 +184,10 @@ EvtScript N(EVS_TogglePlatforms_RightSwitch) = {
     Call(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
     Call(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.5 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(15 * DT)
-    IfEq(MV_PlatformsExtended, FALSE)
+    IfEq(MV_PlatformsExtended, false)
         Set(LVar7, COLLIDER_o75)
         Set(LVar8, WALL_RETRACT_LENGTH)
         Set(LVar9, MODEL_5)
@@ -223,7 +223,7 @@ EvtScript N(EVS_TogglePlatforms_RightSwitch) = {
         Set(LVar9, MODEL_7)
         Exec(N(EVS_ExtendPlatform))
         Wait(9 * DT)
-        Set(MV_PlatformsExtended, TRUE)
+        Set(MV_PlatformsExtended, true)
     Else
         Set(LVar7, COLLIDER_o73)
         Set(LVar8, WALL_RETRACT_LENGTH)
@@ -260,14 +260,14 @@ EvtScript N(EVS_TogglePlatforms_RightSwitch) = {
         Set(LVar9, MODEL_5)
         Exec(N(EVS_RetractPlatform))
         Wait(9 * DT)
-        Set(MV_PlatformsExtended, FALSE)
+        Set(MV_PlatformsExtended, false)
     EndIf
     Wait(10)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.5 / DT))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

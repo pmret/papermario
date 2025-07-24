@@ -7,7 +7,7 @@
 #define NAME_SUFFIX
 
 API_CALLABLE(N(func_80242030_8EDE50)) {
-    mdl_group_set_custom_gfx(MODEL_g62, CUSTOM_GFX_NONE, ENV_TINT_NONE, TRUE);
+    mdl_group_set_custom_gfx(MODEL_g62, CUSTOM_GFX_NONE, ENV_TINT_NONE, true);
     mdl_set_shroud_tint_params(0, 0, 0, 0);
 
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
@@ -120,19 +120,19 @@ EvtScript N(EVS_CloseFrontDoor) = {
 };
 
 EvtScript N(EVS_OpenAndCloseDoor_Epilogue) = {
-    Call(EnableGroup, MODEL_g72, TRUE)
+    Call(EnableGroup, MODEL_g72, true)
     ExecWait(N(EVS_OpenFrontDoor))
     Wait(30)
     ExecWait(N(EVS_CloseFrontDoor))
-    Call(EnableGroup, MODEL_g72, TRUE)
+    Call(EnableGroup, MODEL_g72, true)
     Return
     End
 };
 
 EvtScript N(EVS_Player_EnterPipe_Epilogue) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
-    Call(HidePlayerShadow, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
+    Call(HidePlayerShadow, true)
     Set(LVar0, 4)
     Call(N(Pipe_GetEntryPos_Epilogue))
     Call(PlayerMoveTo, LVar1, LVar3, 3)
@@ -158,9 +158,9 @@ EvtScript N(EVS_Player_EnterPipe_Epilogue) = {
 };
 
 EvtScript N(EVS_Luigi_EnterPipe_Epilogue) = {
-    Call(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_FLYING, TRUE)
-    Call(EnableNpcShadow, NPC_Luigi_1, FALSE)
+    Call(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_Luigi_1, NPC_FLAG_FLYING, true)
+    Call(EnableNpcShadow, NPC_Luigi_1, false)
     Set(LVar0, 4)
     Call(N(Pipe_GetEntryPos_Epilogue))
     Call(NpcMoveTo, NPC_Luigi_1, LVar1, LVar3, 3)
@@ -188,7 +188,7 @@ EvtScript N(EVS_Luigi_EnterPipe_Epilogue) = {
 };
 
 EvtScript N(EVS_Scene_BeginEpilogue) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(N(SetAmbienceVolumeHalf_Epilogue))
     Call(SetPlayerAnimation, ANIM_MarioW2_SitIdle)
     Call(SetPlayerPos, 95, 44, -40)
@@ -196,7 +196,7 @@ EvtScript N(EVS_Scene_BeginEpilogue) = {
     Call(SetPanTarget, CAM_DEFAULT, 150, 44, -40)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-6.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(30)
     Call(SpeakToPlayer, NPC_Luigi_1, ANIM_Luigi_TalkSit, ANIM_Luigi_IdleSit, 0, MSG_Outro_000D)
     Call(SetPlayerAnimation, ANIM_MarioW2_SitNodYes)
@@ -210,7 +210,7 @@ EvtScript N(EVS_Scene_BeginEpilogue) = {
 };
 
 EvtScript N(EVS_Scene_EpilogueGetLetter) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(N(SetAmbienceVolumeHalf_Epilogue))
     Call(SetPlayerPos, 95, 44, -40)
     Call(SetPlayerAnimation, ANIM_MarioW2_SitIdle)
@@ -218,7 +218,7 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     Call(SetPanTarget, CAM_DEFAULT, 150, 44, -40)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-6.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(35)
     Call(PlaySoundAt, SOUNC_CHECK_MAILBOX, SOUND_SPACE_DEFAULT, 430, 0, -185)
     Wait(25)
@@ -268,19 +268,19 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     Call(SpeakToPlayer, NPC_Luigi_1, ANIM_Luigi_TalkLetter, ANIM_Luigi_IdleLetter, 0, MSG_Outro_0022)
     Wait(30)
     Call(N(func_80242084_8EDEA4))
-    Call(EnableGroup, MODEL_g20, FALSE)
-    Call(EnableGroup, MODEL_g21, FALSE)
-    Call(EnableGroup, MODEL_g49, FALSE)
-    Call(EnableModel, MODEL_g56, FALSE)
+    Call(EnableGroup, MODEL_g20, false)
+    Call(EnableGroup, MODEL_g21, false)
+    Call(EnableGroup, MODEL_g49, false)
+    Call(EnableModel, MODEL_g56, false)
     Call(N(func_80242030_8EDE50))
     Call(RotateGroup, MODEL_g60, 0, 1, 0, 0)
     Call(RotateGroup, MODEL_g34, 0, -1, 0, 0)
-    Call(EnableGroup, MODEL_g60, TRUE)
-    Call(EnableGroup, MODEL_g34, TRUE)
+    Call(EnableGroup, MODEL_g60, true)
+    Call(EnableGroup, MODEL_g34, true)
     Call(UseSettingsFrom, CAM_DEFAULT, 340, 30, -70)
     Call(SetPanTarget, CAM_DEFAULT, 340, 30, -70)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetPlayerPos, 240, 30, -75)
     Call(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Idle)
     Call(SetNpcPos, NPC_Luigi_1, 200, 30, -75)
@@ -302,7 +302,7 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
         KillThread(LVarA)
     EndThread
     Call(func_802D1270, 320, -70, Float(3.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(func_802D1270, 460, -70, Float(3.0))
     Call(func_802D1270, 570, -170, Float(3.0))
     Call(SetPlayerJumpscale, Float(1.0))
@@ -324,7 +324,7 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     Exec(N(EVS_FadeOutAmbientSounds))
     Call(GotoMap, Ref("mac_00"), mac_00_ENTRY_7)
     Wait(100)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

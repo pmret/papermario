@@ -104,23 +104,23 @@ EvtScript N(D_80245F6C_B264AC) = {
 EvtScript N(D_80245F7C_B264BC) = {
     IfGe(LVarC, 0)
         IfLe(LVarC, 2)
-            Call(EnableModel, MODEL_o170, FALSE)
-            Call(EnableModel, MODEL_o183, TRUE)
+            Call(EnableModel, MODEL_o170, false)
+            Call(EnableModel, MODEL_o183, true)
             Return
         EndIf
     EndIf
     IfEq(LVarC, 15)
-        Call(EnableModel, MODEL_o170, FALSE)
-        Call(EnableModel, MODEL_o183, TRUE)
+        Call(EnableModel, MODEL_o170, false)
+        Call(EnableModel, MODEL_o183, true)
         Return
     EndIf
     IfEq(LVarC, 22)
-        Call(EnableModel, MODEL_o170, FALSE)
-        Call(EnableModel, MODEL_o183, TRUE)
+        Call(EnableModel, MODEL_o170, false)
+        Call(EnableModel, MODEL_o183, true)
         Return
     EndIf
-    Call(EnableModel, MODEL_o170, TRUE)
-    Call(EnableModel, MODEL_o183, FALSE)
+    Call(EnableModel, MODEL_o170, true)
+    Call(EnableModel, MODEL_o183, false)
     Return
     End
 };
@@ -217,10 +217,10 @@ EvtScript N(D_8024652C_B26A6C) = {
 
 EvtScript N(EVS_802467AC) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
-    Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_karada, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_karada, true)
     Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(unkAngleFunc002)), NULL)
     Call(SetModelCustomGfx, MODEL_karada, CUSTOM_GFX_1, -1)
-    Call(MakeLocalVertexCopy, VTX_COPY_2, MODEL_onaka, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_2, MODEL_onaka, true)
     Call(SetCustomGfxBuilders, CUSTOM_GFX_2, Ref(N(unkAngleFunc003)), NULL)
     Call(SetModelCustomGfx, MODEL_onaka, CUSTOM_GFX_2, -1)
     Thread
@@ -279,8 +279,8 @@ EvtScript N(EVS_802467AC) = {
         IfNe(LVar0, LVarB)
             Set(LVarB, LVar0)
             Set(LVarC, 0)
-            Call(EnableModel, MODEL_o170, TRUE)
-            Call(EnableModel, MODEL_o183, FALSE)
+            Call(EnableModel, MODEL_o170, true)
+            Call(EnableModel, MODEL_o183, false)
             Switch(LVarB)
                 CaseEq(0x00B60003)
                     Set(LVarD, Ref(N(D_80245C10_B26150)))
@@ -294,16 +294,16 @@ EvtScript N(EVS_802467AC) = {
                     Set(LVarD, Ref(N(D_8024652C_B26A6C)))
                 CaseEq(0x00B60005)
                     Set(LVarD, Ref(N(D_80245E5C_B2639C)))
-                    Call(EnableModel, MODEL_o170, FALSE)
-                    Call(EnableModel, MODEL_o183, FALSE)
+                    Call(EnableModel, MODEL_o170, false)
+                    Call(EnableModel, MODEL_o183, false)
                 CaseEq(0x00B60006)
                     Set(LVarD, Ref(N(D_802460A4_B265E4)))
-                    Call(EnableModel, MODEL_o170, FALSE)
-                    Call(EnableModel, MODEL_o183, FALSE)
+                    Call(EnableModel, MODEL_o170, false)
+                    Call(EnableModel, MODEL_o183, false)
                 CaseEq(0x00B60007)
                     Set(LVarD, Ref(N(D_8024620C_B2674C)))
-                    Call(EnableModel, MODEL_o170, FALSE)
-                    Call(EnableModel, MODEL_o183, FALSE)
+                    Call(EnableModel, MODEL_o170, false)
+                    Call(EnableModel, MODEL_o183, false)
                 CaseEq(0x00B60008)
                     Set(LVarD, Ref(N(D_8024634C_B2688C)))
                 CaseEq(0x00B60009)

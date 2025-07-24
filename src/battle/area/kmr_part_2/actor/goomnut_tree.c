@@ -170,7 +170,7 @@ EvtScript N(EVS_Init) = {
     Call(SetActorVar, ACTOR_SELF, AVAR_Unused_2, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_Unused_3, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_Unused_4, 0)
-    Call(SetActorVar, ACTOR_SELF, AVAR_BigNutDropped, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_BigNutDropped, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_TREE_DELAY, 1)
     Call(SetPartPos, ACTOR_SELF, PRT_BIG_NUT, 10, 140, 10)
     Call(SetPartPos, ACTOR_SELF, PRT_TREE_NUT_1, -95, 140, 10)
@@ -179,7 +179,7 @@ EvtScript N(EVS_Init) = {
     Call(SetPartScale, ACTOR_SELF, PRT_TREE_NUT_1, Float(0.5), Float(0.5), Float(1.0))
     Call(SetPartScale, ACTOR_SELF, PRT_TREE_NUT_2, Float(0.5), Float(0.5), Float(1.0))
     Call(SetPartScale, ACTOR_SELF, PRT_TREE_NUT_3, Float(0.5), Float(0.5), Float(1.0))
-    Call(SetPartTargetFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_TARGET_NO_DAMAGE, TRUE)
+    Call(SetPartTargetFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_TARGET_NO_DAMAGE, true)
     Return
     End
 };
@@ -190,7 +190,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastElement, LVarE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
@@ -217,7 +217,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -233,7 +233,7 @@ EvtScript N(EVS_TakeTurn) = {
         CaseEq(10)
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -249,7 +249,7 @@ EvtScript N(EVS_ShakeTree) = {
     Call(PlaySound, SOUND_SMACK_TREE)
     Call(PlaySound, SOUND_SHAKE_TREE_LEAVES)
     Thread
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         IfNe(LVar1, 0)
             Wait(1)
             Loop(5)
@@ -258,8 +258,8 @@ EvtScript N(EVS_ShakeTree) = {
                 Loop(LVar2)
                     BufRead1(LVar3)
                     Call(N(TransformFoliage), LVar3, Float(0.1), Float(0.2), LVarF, 0)
-                    IfEq(LFlag0, FALSE)
-                        Set(LFlag0, TRUE)
+                    IfEq(LFlag0, false)
+                        Set(LFlag0, true)
                         Call(PlaySoundAtModel, LVar3, SOUND_SHAKE_TREE_LEAVES, SOUND_SPACE_DEFAULT)
                     EndIf
                 EndLoop
@@ -282,7 +282,7 @@ EvtScript N(EVS_ShakeTree) = {
         EndIf
     EndThread
     Thread
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         IfNe(LVar2, 0)
             Loop(5)
                 UseBuf(LVar2)
@@ -290,8 +290,8 @@ EvtScript N(EVS_ShakeTree) = {
                 Loop(LVar3)
                     BufRead1(LVar4)
                     Call(N(TransformFoliage), LVar4, Float(0.1), Float(0.2), LVarF, 0)
-                    IfEq(LFlag0, FALSE)
-                        Set(LFlag0, TRUE)
+                    IfEq(LFlag0, false)
+                        Set(LFlag0, true)
                         Call(PlaySoundAtModel, LVar4, SOUND_SMACK_TREE, SOUND_SPACE_DEFAULT)
                     EndIf
                 EndLoop
@@ -355,27 +355,27 @@ EvtScript N(EVS_TriggerTreeShake) = {
 EvtScript N(EVS_DropNutOnGoombas) = {
     PlayEffect(EFFECT_DROP_LEAVES, 0, -25, 120, 0, 90, 0)
     Call(GetActorVar, ACTOR_SELF, AVAR_BigNutDropped, LVar0)
-    IfNe(LVar0, FALSE)
+    IfNe(LVar0, false)
         Return
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_ACTOR_FAR)
     Call(BattleCamTargetActor, ACTOR_KING)
     Wait(20)
-    Call(SetActorVar, ACTOR_SELF, AVAR_BigNutDropped, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_BigNutDropped, true)
     Call(ActorExists, ACTOR_KING, LVar0)
     IfEq(LVar0, 0)
         Call(SetGoalPos, ACTOR_SELF, 10, 0, 10)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, false)
         Call(PlaySoundAtPart, ACTOR_SELF, PRT_BIG_NUT, SOUND_FALL_QUICK)
         Call(SetPartJumpGravity, ACTOR_SELF, PRT_BIG_NUT, Float(0.8))
         Call(SetPartMoveSpeed, ACTOR_SELF, PRT_BIG_NUT, Float(4.0))
         Call(FallPartTo, ACTOR_SELF, PRT_BIG_NUT, 10, 20, 10, 20)
-        Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, 30, 20, 10, 10, TRUE)
-        Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, 40, 20, 10, 5, TRUE)
+        Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, 30, 20, 10, 10, true)
+        Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, 40, 20, 10, 5, true)
         Loop(20)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, false)
             Wait(1)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, true)
             Wait(1)
         EndLoop
         Return
@@ -400,13 +400,13 @@ EvtScript N(EVS_DropNutOnGoombas) = {
         Add(LVar0, 65)
         Set(LVar1, 20)
         Call(SetPartJumpGravity, ACTOR_SELF, PRT_BIG_NUT, Float(0.7))
-        Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 20, TRUE)
+        Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 20, true)
         Add(LVar0, 12)
-        Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 8, TRUE)
+        Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 8, true)
         Loop(20)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, false)
             Wait(1)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, true)
             Wait(1)
         EndLoop
         Return
@@ -419,7 +419,7 @@ EvtScript N(EVS_DropNutOnGoombas) = {
         Add(LVar1, 20)
     EndIf
     Call(SetPartJumpGravity, ACTOR_SELF, PRT_BIG_NUT, Float(0.7))
-    Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 20, TRUE)
+    Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 20, true)
     Call(SetOwnerTarget, ACTOR_RED_GOOMBA, PRT_MAIN)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, ((DAMAGE_TYPE_IGNORE_DEFENSE)), 0, 0, DMG_TO_RED_GOOMBA, BS_FLAGS1_TRIGGER_EVENTS)
@@ -429,13 +429,13 @@ EvtScript N(EVS_DropNutOnGoombas) = {
         Add(LVar0, 35)
         Set(LVar1, 20)
         Call(SetPartJumpGravity, ACTOR_SELF, PRT_BIG_NUT, Float(0.7))
-        Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 20, TRUE)
+        Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 20, true)
         Add(LVar0, 12)
-        Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 8, TRUE)
+        Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 8, true)
         Loop(20)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, false)
             Wait(1)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, true)
             Wait(1)
         EndLoop
         Return
@@ -448,7 +448,7 @@ EvtScript N(EVS_DropNutOnGoombas) = {
         Add(LVar1, 20)
     EndIf
     Call(SetPartJumpGravity, ACTOR_SELF, PRT_BIG_NUT, Float(0.7))
-    Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 20, TRUE)
+    Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 20, true)
     Call(SetOwnerTarget, ACTOR_BLUE_GOOMBA, PRT_MAIN)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, ((DAMAGE_TYPE_IGNORE_DEFENSE)), 0, 0, DMG_TO_BLUE_GOOMBA, BS_FLAGS1_TRIGGER_EVENTS)
@@ -456,13 +456,13 @@ EvtScript N(EVS_DropNutOnGoombas) = {
     Add(LVar0, 20)
     Set(LVar1, 20)
     Call(SetPartJumpGravity, ACTOR_SELF, PRT_BIG_NUT, Float(0.7))
-    Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 20, TRUE)
+    Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 20, true)
     Add(LVar0, 12)
-    Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 8, TRUE)
+    Call(JumpPartTo, ACTOR_SELF, PRT_BIG_NUT, LVar0, LVar1, LVar2, 8, true)
     Loop(20)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, false)
         Wait(1)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_BIG_NUT, ACTOR_PART_FLAG_INVISIBLE, true)
         Wait(1)
     EndLoop
     Return

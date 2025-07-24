@@ -1296,7 +1296,7 @@ s32 RenderTaskBasePriorities[] = {
     [RENDER_MODE_CLOUD_NO_ZB]               =  700000,
 };
 
-s8 D_8014C248 = FALSE; // possibly a 'warm-up done' flag for boot. never read.
+s8 D_8014C248 = false; // possibly a 'warm-up done' flag for boot. never read.
 
 ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
 ModelNode** gCurrentModelTreeRoot;
@@ -2407,7 +2407,7 @@ void clear_model_data(void) {
     }
 
     *gBackgroundTintModePtr = ENV_TINT_NONE;
-    gFogSettings->enabled = FALSE;
+    gFogSettings->enabled = false;
     gFogSettings->color.r = 10;
     gFogSettings->color.g = 10;
     gFogSettings->color.b = 10;
@@ -2801,14 +2801,14 @@ void render_models(void) {
         // for models that are small enough to do bounds culling, only render if at least one
         // corner of its boundary box is visible
         if (model->flags & MODEL_FLAG_DO_BOUNDS_CULLING) {
-            notVisible = FALSE;
+            notVisible = false;
             boundingBox = (ModelBoundingBox*) model->modelNode->propertyList;
             bbx = boundingBox->halfSizeX;
             bby = boundingBox->halfSizeY;
             bbz = boundingBox->halfSizeZ;
 
-            while (TRUE) {
-                if (TRUE) {
+            while (true) {
+                if (true) {
                     xComp = centerX - bbx;
                     yComp = centerY - bby;
                     zComp = centerZ - bbz;
@@ -2863,7 +2863,7 @@ void render_models(void) {
                     zComp = centerZ + bbz;
                     TEST_POINT_VISIBILITY;
                 }
-                notVisible = TRUE;
+                notVisible = true;
                 break;
             }
             // no points of the models bounding box were visible
@@ -3701,7 +3701,7 @@ void mdl_group_set_visibility(u16 treeIndex, s32 flags, s32 mode) {
     }
 }
 
-void mdl_group_set_custom_gfx(u16 groupModelID, s32 customGfxIndex, s32 tintType, b32 invertSelection) {
+void mdl_group_set_custom_gfx(u16 groupModelID, s32 customGfxIndex, s32 tintType, bool invertSelection) {
     s32 maxGroupIndex = -1;
     s32 i;
     s32 minGroupIndex;
@@ -3783,11 +3783,11 @@ void mdl_reset_transform_flags(void) {
 }
 
 void enable_world_fog(void) {
-    gFogSettings->enabled = TRUE;
+    gFogSettings->enabled = true;
 }
 
 void disable_world_fog(void) {
-    gFogSettings->enabled = FALSE;
+    gFogSettings->enabled = false;
 }
 
 void set_world_fog_dist(s32 start, s32 end) {
@@ -3891,25 +3891,25 @@ void build_custom_gfx(void) {
 }
 
 // weird temps necessary to match
-/// @returns TRUE if mtx is NULL or identity.
+/// @returns true if mtx is NULL or identity.
 s32 is_identity_fixed_mtx(Mtx* mtx) {
     s32* mtxIt = (s32*)mtx;
     s32* identityIt;
     s32 i;
 
     if (mtx == NULL) {
-        return TRUE;
+        return true;
     }
 
     identityIt = (s32*)&ReferenceIdentityMtx;
 
     for (i = 0; i < 16; i++, mtxIt++, identityIt++) {
         if (*mtxIt != *identityIt) {
-            return FALSE;
+            return false;
         }
     }
 
-    return TRUE;
+    return true;
 }
 
 void mdl_set_shroud_tint_params(u8 r, u8 g, u8 b, u8 a) {
@@ -4150,7 +4150,7 @@ void mdl_project_tex_coords(s32 modelID, Gfx* outGfx, Matrix4f arg2, Vtx* arg3) 
     model = get_model_from_list_index(listIndex);
     dlist = model->modelNode->displayData->displayList;
 
-    while (TRUE) {
+    while (true) {
         cmd = dlist->words.w0 >> 0x18;
         tempVert = (Vtx*)dlist->words.w1;
         if (cmd == G_ENDDL) {
@@ -4297,14 +4297,14 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
 
     // If an invalid depth query id was provided, return false.
     if (depthQueryID >= ARRAY_COUNT(DepthCopyBuffer)) {
-        return FALSE;
+        return false;
     }
     // Transform the model's center into clip space.
     transform_point(camera->mtxPerspective, model->center.x, model->center.y, model->center.z, 1.0f, &outX, &outY, &outZ, &outW);
     if (outW == 0.0f) {
         *screenX = 0.0f;
         *screenY = 0.0f;
-        return TRUE;
+        return true;
     }
     // Perform the perspective divide (divide xyz by w) to convert to normalized device coords.
     // Normalized device coords have a range of (-1, 1) on each axis.
@@ -4326,9 +4326,9 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
     // If a depth query wasn't requested, simply check if the point is within the view frustum.
     if (depthQueryID < 0) {
         if (outZ > 0.0f) {
-            return FALSE;
+            return false;
         } else {
-            return TRUE;
+            return true;
         }
     }
     if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
@@ -4379,7 +4379,7 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
         // Convert the calculated screen depth into viewport depth.
         scaledDepth = outZ * MAX_VIEWPORT_DEPTH;
         if (decodedDepth < scaledDepth) {
-            return FALSE;
+            return false;
         }
     }
     return outZ > 0.0f;
@@ -4392,7 +4392,7 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
 // Every nonnegative value of `depthQueryID` must be unique within a frame, otherwise the result will corrupt the data
 //   of the previous query that shared the same ID.
 // Occlusion visibility checks are always one frame out of date, as they reference the previous frame's depth buffer.
-b32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* screenY) {
+bool is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* screenY) {
     Camera* camera = &gCameras[gCurrentCameraID];
     f32 outX;
     f32 outY;
@@ -4407,14 +4407,14 @@ b32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* s
 
     // If an invalid depth query id was provided, return false.
     if (depthQueryID >= ARRAY_COUNT(DepthCopyBuffer)) {
-        return FALSE;
+        return false;
     }
     // Transform the point into clip space.
     transform_point(camera->mtxPerspective, x, y, z, 1.0f, &outX, &outY, &outZ, &outW);
     if (outW == 0.0f) {
         *screenX = 0.0f;
         *screenY = 0.0f;
-        return TRUE;
+        return true;
     }
     // Perform the perspective divide (divide xyz by w) to convert to normalized device coords.
     // Normalized device coords have a range of (-1, 1) on each axis.
@@ -4485,7 +4485,7 @@ b32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* s
         // Convert the calculated screen depth into viewport depth.
         scaledDepth = outZ * MAX_VIEWPORT_DEPTH;
         if (decodedDepth < scaledDepth) {
-            return FALSE;
+            return false;
         }
     }
     return outZ > 0.0f;

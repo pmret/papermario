@@ -61,7 +61,7 @@ EvtScript N(EVS_Gizmos_Clocks) = {
 };
 
 EvtScript N(EVS_Scene_PullBlueSwitch) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(MakeLerp, 0, 70, 30, EASING_COS_IN_OUT)
     Label(0)
         Call(UpdateLerp)
@@ -79,7 +79,7 @@ EvtScript N(EVS_Scene_PullBlueSwitch) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(517.4))
     Call(SetCamPosA, CAM_DEFAULT, Float(-180.0), Float(-322.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(25.0), Float(-6.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(20)
     Call(PlaySoundAt, SOUND_OMO_FLIP_TRAIN_TRACK, SOUND_SPACE_DEFAULT, -130, 0, -215)
@@ -98,10 +98,10 @@ EvtScript N(EVS_Scene_PullBlueSwitch) = {
     Call(GetModelCenter, MODEL_o932)
     PlayEffect(EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0)
     Wait(30)
-    Set(GF_OMO03_BlueSwitchActivated, TRUE)
+    Set(GF_OMO03_BlueSwitchActivated, true)
     Call(SetNpcAnimation, NPC_Conductor, ANIM_TrainToad_Idle)
     Call(ResetCam, CAM_DEFAULT, Float(90.0))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Unbind
     Return
     End
@@ -112,7 +112,7 @@ EvtScript N(EVS_SetupGizmos) = {
     Exec(N(EVS_Gizmos_Shutters))
     Exec(N(EVS_Gizmos_Clocks))
     Call(ParentColliderToModel, COLLIDER_bou1, MODEL_bou1)
-    IfEq(GF_OMO03_BlueSwitchActivated, FALSE)
+    IfEq(GF_OMO03_BlueSwitchActivated, false)
         BindTrigger(Ref(N(EVS_Scene_PullBlueSwitch)), TRIGGER_WALL_PRESS_A, COLLIDER_o801, 1, 0)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o978, COLLIDER_FLAGS_UPPER_MASK)
     Else

@@ -6,7 +6,7 @@
 
 API_CALLABLE(N(DismissGotItem)) {
     Entity* bigChest = get_entity_by_index(script->varTable[0]);
-    bigChest->dataBuf.chest->gotItemDone = TRUE;
+    bigChest->dataBuf.chest->gotItemDone = true;
     return ApiStatus_DONE2;
 }
 
@@ -25,16 +25,16 @@ EvtScript N(EVS_SetChestCollisionOpened) = {
 };
 
 EvtScript N(EVS_SetupGiantChest_SuperHammer) = {
-    IfEq(GF_ISK09_GiantChest, FALSE)
+    IfEq(GF_ISK09_GiantChest, false)
         ExecWait(N(EVS_SetChestCollisionClosed))
         Loop(0)
-            IfEq(GF_ISK09_GiantChest, TRUE)
+            IfEq(GF_ISK09_GiantChest, true)
                 BreakLoop
             EndIf
             Wait(1)
         EndLoop
         Call(PartnerIsFlying, LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             Thread
                 Call(DisablePartnerAI, 0)
                 Call(NpcFlyTo, NPC_PARTNER, -222, -347, -531, 20, 0, EASING_LINEAR)
@@ -62,7 +62,7 @@ EvtScript N(EVS_SetupGiantChest_SuperHammer) = {
 EvtScript N(EVS_OpenChest_SlowGo) = EVT_OPEN_CHEST_BADGE(ITEM_SLOW_GO, GF_ISK09_Chest_SlowGo);
 
 EvtScript N(EVS_SmashBlock_Stone) = {
-    Set(GF_ISK09_Hammer2Block, TRUE)
+    Set(GF_ISK09_Hammer2Block, true)
     Return
     End
 };
@@ -71,7 +71,7 @@ EvtScript N(EVS_MakeEntities) = {
     Call(MakeEntity, Ref(Entity_GiantChest), -158, -358, -562, 283, ITEM_SUPER_HAMMER, MAKE_ENTITY_END)
     Call(AssignChestFlag, GF_ISK09_GiantChest)
     Exec(N(EVS_SetupGiantChest_SuperHammer))
-    IfEq(GF_ISK09_Hammer2Block, FALSE)
+    IfEq(GF_ISK09_Hammer2Block, false)
         Call(MakeEntity, Ref(Entity_Hammer2Block), -274, -390, -517, 115, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_SmashBlock_Stone)))
     EndIf

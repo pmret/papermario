@@ -69,7 +69,7 @@ EvtScript N(EVS_ManageEvilTree) = {
 EvtScript N(EVS_SetupExitHint) = {
     Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(gfx_build_evil_tree_face)), NULL)
     Call(SetModelCustomGfx, MODEL_kao, CUSTOM_GFX_1, -1)
-    Call(SetModelFlags, MODEL_kao, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
+    Call(SetModelFlags, MODEL_kao, MODEL_FLAG_USES_CUSTOM_GFX, true)
     Wait(20)
     Exec(N(EVS_ManageEvilTree))
     Thread

@@ -34,7 +34,7 @@ EvtScript N(EVS_OnShakeTree_DropSwitch) = {
         Wait(15)
         SetGroup(EVT_GROUP_NEVER_PAUSE)
         Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(MakeLerp, 95, 0, 12, EASING_QUADRATIC_IN)
         Label(0)
             Call(UpdateLerp)
@@ -49,7 +49,7 @@ EvtScript N(EVS_OnShakeTree_DropSwitch) = {
             Wait(5)
             Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         EndThread
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndIf
     Return
     End

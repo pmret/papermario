@@ -192,7 +192,7 @@ void bulb_glow_appendGfx(void* effect) {
     isPointVisible = is_point_visible(data->pos.x, data->pos.y, data->pos.z, data->depthQueryID, &centerX, &centerY);
 
     if (type == 5) {
-        isPointVisible = TRUE;
+        isPointVisible = true;
     }
 
     if (!isPointVisible || centerX < 0.0f || centerY < 0.0f || centerX >= SCREEN_WIDTH || centerY >= SCREEN_HEIGHT) {

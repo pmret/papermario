@@ -11,7 +11,7 @@
 extern EvtScript N(EVS_UseMove_Impl);
 
 EvtScript N(EVS_UseMove) = {
-    Call(ShowActionHud, TRUE)
+    Call(ShowActionHud, true)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
@@ -94,7 +94,7 @@ EvtScript N(EVS_UseMove_Impl) = {
     EndIf
     Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
-        CaseGt(FALSE)
+        CaseGt(false)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
             Switch(LVar1)
                 CaseEq(0)
@@ -209,7 +209,7 @@ EvtScript N(EVS_FirstStrike) = {
 extern EvtScript N(EVS_UseBerserker_Impl);
 
 EvtScript N(EVS_UseBerserker) = {
-    Call(ShowActionHud, TRUE)
+    Call(ShowActionHud, true)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
@@ -316,7 +316,7 @@ EvtScript N(EVS_UseBerserker_Impl) = {
     EndIf
     Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
-        CaseGt(FALSE)
+        CaseGt(false)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
             Switch(LVar1)
                 CaseEq(0)

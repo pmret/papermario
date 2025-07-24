@@ -5,7 +5,7 @@
 #include "world/area_flo/common/FlowerSpawnRegion.inc.c"
 #include "world/area_flo/common/DroppingVine.inc.c"
 
-s32 N(BlowingBubbles) = FALSE;
+s32 N(BlowingBubbles) = false;
 
 EvtScript N(EVS_BubbleUpdateCamera) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -29,7 +29,7 @@ EvtScript N(EVS_BubbleUpdateCamera) = {
 };
 
 EvtScript N(EVS_TetherParterToPlayer) = {
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Loop(0)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Add(LVar1, 20)
@@ -43,11 +43,11 @@ EvtScript N(EVS_TetherParterToPlayer) = {
 
 API_CALLABLE(N(SavePartnerFlags)) {
     if (gPlayerData.curPartner == PARTNER_NONE) {
-        script->varTable[14] = FALSE;
+        script->varTable[14] = false;
         return ApiStatus_DONE2;
     }
 
-    script->varTable[14] = TRUE;
+    script->varTable[14] = true;
     evt_set_variable(NULL, MV_SavedPartnerFlags, get_npc_unsafe(NPC_PARTNER)->flags);
     return ApiStatus_DONE2;
 }
@@ -108,16 +108,16 @@ EvtScript N(EVS_RideBigBubble) = {
     IfEq(LVar0, 0)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetPartnerInUse, LVar0)
     IfNe(LVar0, PARTNER_NONE)
         Call(InterruptUsePartner)
         Wait(20)
     EndIf
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(GetModelCenter, MODEL_o167)
     Thread
         Add(LVar2, -10)
@@ -146,13 +146,13 @@ EvtScript N(EVS_RideBigBubble) = {
     PlayEffect(EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, 2, 0)
     Call(PlaySoundAt, SOUND_BUBBLE_BURST, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     Call(ClearPartnerMoveHistory, NPC_PARTNER)
-    Call(EnableModel, MODEL_o167, FALSE)
-    Set(AF_FLO_BigBubbleReady, FALSE)
+    Call(EnableModel, MODEL_o167, false)
+    Set(AF_FLO_BigBubbleReady, false)
     KillThread(MV_BubbleCamScript)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, true)
     Call(EnablePartnerAI)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Unbind
     Return
     End
@@ -160,7 +160,7 @@ EvtScript N(EVS_RideBigBubble) = {
 
 EvtScript N(EVS_BlowBigBubble) = {
     Call(PlaySoundAt, SOUND_FLO_BLOW_BUBBLE, SOUND_SPACE_DEFAULT, 591, 55, 121)
-    Call(EnableModel, MODEL_o167, TRUE)
+    Call(EnableModel, MODEL_o167, true)
     SetF(LVar2, Float(1.0))
     SetF(LVar4, Float(0.0))
     SetF(LVar5, Float(0.0))
@@ -195,8 +195,8 @@ EvtScript N(EVS_BlowBigBubble) = {
         AddF(LVar6, LVar8)
         Wait(1)
     EndLoop
-    Set(AF_FLO_BlowingBigBubble, FALSE)
-    Set(AF_FLO_BigBubbleReady, TRUE)
+    Set(AF_FLO_BlowingBigBubble, false)
+    Set(AF_FLO_BigBubbleReady, true)
     Return
     End
 };
@@ -278,9 +278,9 @@ void N(gfx_build_bubble_flower)(void) {
         }
     } else {
         if (N(FlowerPhase) > 140 && N(FlowerPhase) < 260) {
-            N(BlowingBubbles) = TRUE;
+            N(BlowingBubbles) = true;
         } else {
-            N(BlowingBubbles) = FALSE;
+            N(BlowingBubbles) = false;
         }
         N(FlowerPhase) += 5;
     }
@@ -294,19 +294,19 @@ EvtScript N(EVS_ManageBlownBubble) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Set(LVarF, LVar0)
     Label(0)
-        IfEq(AF_FLO_PauseBlowingBubbles, TRUE)
+        IfEq(AF_FLO_PauseBlowingBubbles, true)
             Wait(10)
             Goto(0)
         EndIf
         UseBuf(Ref(N(BlowingBubbles)))
         BufRead1(LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             Call(RandInt, 10, LVar0)
             Add(LVar0, 1)
             Wait(LVar0)
             Goto(0)
         EndIf
-        Call(EnableModel, LVarF, TRUE)
+        Call(EnableModel, LVarF, true)
         Call(RandInt, 4, LVar0)
         AddF(LVar0, Float(4.0))
         MulF(LVar0, Float(-1.0))
@@ -343,7 +343,7 @@ EvtScript N(EVS_ManageBlownBubble) = {
             Call(ScaleModel, LVarF, LVar9, LVar9, LVar9)
             Wait(1)
         EndLoop
-        Call(EnableModel, LVarF, FALSE)
+        Call(EnableModel, LVarF, false)
         Goto(0)
     Return
     End
@@ -369,13 +369,13 @@ EvtScript N(EVS_SetupBubbles) = {
     Call(CloneModel, MODEL_o169, CLONED_MODEL(3))
     Call(CloneModel, MODEL_o169, CLONED_MODEL(4))
     Call(CloneModel, MODEL_o169, CLONED_MODEL(5))
-    Call(EnableModel, MODEL_o167, FALSE)
-    Call(EnableModel, MODEL_o169, FALSE)
-    Call(EnableModel, CLONED_MODEL(1), FALSE)
-    Call(EnableModel, CLONED_MODEL(2), FALSE)
-    Call(EnableModel, CLONED_MODEL(3), FALSE)
-    Call(EnableModel, CLONED_MODEL(4), FALSE)
-    Call(EnableModel, CLONED_MODEL(5), FALSE)
+    Call(EnableModel, MODEL_o167, false)
+    Call(EnableModel, MODEL_o169, false)
+    Call(EnableModel, CLONED_MODEL(1), false)
+    Call(EnableModel, CLONED_MODEL(2), false)
+    Call(EnableModel, CLONED_MODEL(3), false)
+    Call(EnableModel, CLONED_MODEL(4), false)
+    Call(EnableModel, CLONED_MODEL(5), false)
     Set(LVar0, CLONED_MODEL(1))
     Exec(N(EVS_ManageBlownBubble))
     Set(LVar0, CLONED_MODEL(2))
@@ -386,7 +386,7 @@ EvtScript N(EVS_SetupBubbles) = {
     Exec(N(EVS_ManageBlownBubble))
     Set(LVar0, CLONED_MODEL(5))
     Exec(N(EVS_ManageBlownBubble))
-    Call(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o167, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o167, true)
     Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(gfx_build_big_bubble)), NULL)
     Call(SetModelCustomGfx, MODEL_o167, CUSTOM_GFX_1, -1)
     Call(SetModelCustomGfx, CLONED_MODEL(1), CUSTOM_GFX_1, -1)
@@ -394,7 +394,7 @@ EvtScript N(EVS_SetupBubbles) = {
     Call(SetModelCustomGfx, CLONED_MODEL(3), CUSTOM_GFX_1, -1)
     Call(SetModelCustomGfx, CLONED_MODEL(4), CUSTOM_GFX_1, -1)
     Call(SetModelCustomGfx, CLONED_MODEL(5), CUSTOM_GFX_1, -1)
-    Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_o57, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_o57, true)
     Call(SetCustomGfxBuilders, CUSTOM_GFX_2, Ref(N(gfx_build_bubble_flower)), NULL)
     Call(SetModelCustomGfx, MODEL_o57, CUSTOM_GFX_2, -1)
     Return

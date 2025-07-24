@@ -32,7 +32,7 @@ void entity_upgrade_block_hide_content(s32 entityIndex) {
     if (data->childEntityIndex >= 0) {
         Entity* childEntity = get_entity_by_index(data->childEntityIndex);
         SuperBlockContentData* childEntityData = childEntity->dataBuf.superBlockContent;
-        childEntityData->isHidden = TRUE;
+        childEntityData->isHidden = true;
     }
 }
 

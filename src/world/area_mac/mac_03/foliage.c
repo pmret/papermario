@@ -3,21 +3,21 @@
 #include "common/foliage.inc.c"
 
 EvtScript N(EVS_OnShakeTree3) = {
-    IfEq(GF_MAC03_UnlockedPlayroom, TRUE)
+    IfEq(GF_MAC03_UnlockedPlayroom, true)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
-    Set(GF_MAC03_UnlockedPlayroom, TRUE)
+    Call(DisablePlayerInput, true)
+    Set(GF_MAC03_UnlockedPlayroom, true)
     Wait(10)
     Call(UseSettingsFrom, CAM_DEFAULT, -128, 20, -555)
     Call(SetPanTarget, CAM_DEFAULT, -128, 20, -555)
     Call(SetCamDistance, CAM_DEFAULT, Float(330.0))
     Call(SetCamSpeed, CAM_DEFAULT, 3)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(5)
     Call(PlaySoundWithVolume, SOUND_GROW, 0)
-    Call(EnableModel, MODEL_o241, TRUE)
+    Call(EnableModel, MODEL_o241, true)
     Set(LVar0, -30)
     Loop(30)
         Add(LVar0, 1)
@@ -33,10 +33,10 @@ EvtScript N(EVS_OnShakeTree3) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

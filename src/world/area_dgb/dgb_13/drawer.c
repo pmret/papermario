@@ -61,12 +61,12 @@ EvtScript N(EVS_CloseUpperDrawer) = {
 };
 
 EvtScript N(EVS_Interact_LowerDrawer) = {
-    IfEq(MV_LowerDrawerOpen, FALSE)
+    IfEq(MV_LowerDrawerOpen, false)
         ExecWait(N(EVS_OpenLowerDrawer))
-        Set(MV_LowerDrawerOpen, TRUE)
+        Set(MV_LowerDrawerOpen, true)
     Else
         ExecWait(N(EVS_CloseLowerDrawer))
-        Set(MV_LowerDrawerOpen, FALSE)
+        Set(MV_LowerDrawerOpen, false)
     EndIf
     Unbind
     Return

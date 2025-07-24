@@ -29,7 +29,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_WINDY_MILL)
     Call(SetSpriteShading, SHADING_ARN_09)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_EnterMap))
     Exec(N(EVS_LaunchPlayer))

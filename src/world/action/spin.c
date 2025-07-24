@@ -32,7 +32,7 @@ void action_update_spin(void) {
     s32 spinFlags, nonDizzyFlags;
     s32 effectType;
     AnimID anim;
-    s32 firstCall = FALSE;
+    s32 firstCall = false;
 
     // initialization
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
@@ -43,7 +43,7 @@ void action_update_spin(void) {
         playerStatus->curStateTime = 0;
         playerStatus->actionSubstate = SUBSTATE_SPIN_0;
         playerSpinState->stopSoundTimer = 0;
-        playerSpinState->hasBufferedSpin = FALSE;
+        playerSpinState->hasBufferedSpin = false;
         playerSpinState->spinDirectionMagnitude = 0.0f;
         playerSpinState->spinDirection.x = 0.0f;
         playerSpinState->spinDirection.y = 0.0f;
@@ -59,7 +59,7 @@ void action_update_spin(void) {
         playerSpinState->frictionScale = 0.5f;
         playerSpinState->spinCountdown = playerSpinState->initialSpinTime;
         spinFlags = SPIN_TYPE_DEFAULT;
-        firstCall = TRUE;
+        firstCall = true;
 
         if (is_ability_active(ABILITY_SPIN_ATTACK)) {
             spinFlags |= SPIN_TYPE_ATTACK;
@@ -153,7 +153,7 @@ void action_update_spin(void) {
 
     // check for buffered next spin
     if (playerSpinState->spinCountdown < 11 && playerStatus->pressedButtons & BUTTON_Z) {
-        playerSpinState->hasBufferedSpin = TRUE;
+        playerSpinState->hasBufferedSpin = true;
         playerSpinState->prevActionState = playerStatus->prevActionState;
         playerSpinState->bufferedStickAxis.x = playerStatus->stickAxis[0];
         playerSpinState->bufferedStickAxis.y = playerStatus->stickAxis[1];

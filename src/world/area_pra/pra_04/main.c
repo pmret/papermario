@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitDoor_pra_02_4) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_04_ENTRY_0)
     Set(LVar1, COLLIDER_deilittssw)
     Set(LVar2, MODEL_o847)
@@ -54,14 +54,14 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(SetCamBGColor, CAM_DEFAULT, 24, 24, 40)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
-    IfEq(GF_PRA04_BoardedFloor, TRUE)
+    IfEq(GF_PRA04_BoardedFloor, true)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitts, COLLIDER_FLAGS_UPPER_MASK)
-        Call(EnableModel, MODEL_o994, FALSE)
+        Call(EnableModel, MODEL_o994, false)
     EndIf
     Exec(N(EVS_EnterMap))
     Wait(1)

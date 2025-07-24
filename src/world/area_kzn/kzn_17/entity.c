@@ -9,73 +9,73 @@ s32 N(Unused_80243610_3610)[] = {
 };
 
 EvtScript N(EVS_OnBreakBlockA) = {
-    Set(GF_KZN17_Hammer3BlockA, TRUE)
+    Set(GF_KZN17_Hammer3BlockA, true)
     Return
     End
 };
 
 EvtScript N(EVS_OnBreakBlockB) = {
-    Set(GF_KZN17_Hammer3BlockB, TRUE)
+    Set(GF_KZN17_Hammer3BlockB, true)
     Return
     End
 };
 
 EvtScript N(EVS_OnBreakBlockC) = {
-    Set(GF_KZN17_Hammer3BlockC, TRUE)
+    Set(GF_KZN17_Hammer3BlockC, true)
     Return
     End
 };
 
 EvtScript N(EVS_OnBreakBlockD) = {
-    Set(GF_KZN17_Hammer3BlockD, TRUE)
+    Set(GF_KZN17_Hammer3BlockD, true)
     Return
     End
 };
 
 EvtScript N(EVS_OnBreakBlockE) = {
-    Set(GF_KZN17_Hammer3BlockE, TRUE)
+    Set(GF_KZN17_Hammer3BlockE, true)
     Return
     End
 };
 
 EvtScript N(EVS_OnBreakBlockF) = {
-    Set(GF_KZN17_Hammer3BlockF, TRUE)
+    Set(GF_KZN17_Hammer3BlockF, true)
     Return
     End
 };
 
 EvtScript N(EVS_OnBreakBlockG) = {
-    Set(GF_KZN17_Hammer3BlockG, TRUE)
+    Set(GF_KZN17_Hammer3BlockG, true)
     Return
     End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_KZN17_Hammer3BlockA, FALSE)
+    IfEq(GF_KZN17_Hammer3BlockA, false)
         Call(MakeEntity, Ref(Entity_Hammer3Block), -195, 50, 27, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnBreakBlockA)))
     EndIf
-    IfEq(GF_KZN17_Hammer3BlockB, FALSE)
+    IfEq(GF_KZN17_Hammer3BlockB, false)
         Call(MakeEntity, Ref(Entity_Hammer3Block), -245, 60, 27, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnBreakBlockB)))
     EndIf
-    IfEq(GF_KZN17_Hammer3BlockC, FALSE)
+    IfEq(GF_KZN17_Hammer3BlockC, false)
         Call(MakeEntity, Ref(Entity_Hammer3Block), -295, 70, 27, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnBreakBlockC)))
     EndIf
-    IfEq(GF_KZN17_Hammer3BlockD, FALSE)
+    IfEq(GF_KZN17_Hammer3BlockD, false)
         Call(MakeEntity, Ref(Entity_Hammer3Block), -345, 80, 27, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnBreakBlockD)))
     EndIf
-    IfEq(GF_KZN17_Hammer3BlockE, FALSE)
+    IfEq(GF_KZN17_Hammer3BlockE, false)
         Call(MakeEntity, Ref(Entity_Hammer3Block), -395, 90, 27, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnBreakBlockE)))
     EndIf
-    IfEq(GF_KZN17_Hammer3BlockF, FALSE)
+    IfEq(GF_KZN17_Hammer3BlockF, false)
         Call(MakeEntity, Ref(Entity_Hammer3Block), -445, 100, 27, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnBreakBlockF)))
     EndIf
-    IfEq(GF_KZN17_Hammer3BlockG, FALSE)
+    IfEq(GF_KZN17_Hammer3BlockG, false)
         Call(MakeEntity, Ref(Entity_Hammer3Block), -495, 110, 27, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnBreakBlockG)))
     EndIf

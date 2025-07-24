@@ -37,7 +37,7 @@ NpcSettings N(NpcSettings_Gulpit) = {
 };
 
 EvtScript N(EVS_NpcAI_Gulpit_Hitbox) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetSelfVar, 0, 6)
     Call(SetSelfVar, 1, 28)
     Call(SetSelfVar, 2, 55)

@@ -52,11 +52,11 @@ s32 calculate_segment_intersection(f32 A1x, f32 A1z, f32 A2x, f32 A2z, f32 B1x, 
 
     // if distance between points on the line is 0
     if (dx12_copy == 0.0f && dz12 == 0.0f) {
-        return FALSE;
+        return false;
     }
     // if length of second segment is 0
     if (dx34 == 0.0f && dz34 == 0.0f) {
-        return FALSE;
+        return false;
     }
 
     B1_side_ = minus_dz12 * dx13 + dx12_copy * dz13;
@@ -80,7 +80,7 @@ s32 calculate_segment_intersection(f32 A1x, f32 A1z, f32 A2x, f32 A2z, f32 B1x, 
 
     // B1 and B2 are on the same side relative to the line: no intersection
     if (B1_side_ == B2_side) {
-        return FALSE;
+        return false;
     }
 
     if (fabsf(dx12) > fabsf(dx34)) {
@@ -123,7 +123,7 @@ s32 calculate_segment_intersection(f32 A1x, f32 A1z, f32 A2x, f32 A2z, f32 B1x, 
     }
     // (P - A1) * (P - A2) > 0 when P is outside of segment A1-A2
     if ((x - A1x) * (x - A2x) + (z - A1z) * (z - A2z) > 0.0f) {
-        return FALSE;
+        return false;
     }
 
     dx = x - B1x;
@@ -132,7 +132,7 @@ s32 calculate_segment_intersection(f32 A1x, f32 A1z, f32 A2x, f32 A2z, f32 B1x, 
     *interZ = z;
     // distance between P and B1
     *squared_dist = SQ(dx) + SQ(dz);
-    return TRUE;
+    return true;
 }
 
 s32 calculate_line_segment_intersection(f32 A1x, f32 A1z, f32 A2x, f32 A2z, f32 B1x, f32 B1z, f32 B2x, f32 B2z, f32* interX, f32* interZ, f32* squared_dist) {
@@ -167,10 +167,10 @@ s32 calculate_line_segment_intersection(f32 A1x, f32 A1z, f32 A2x, f32 A2z, f32 
     dz34 = B2z - B1z;
 
     if (dx12_copy == 0.0f && dz12 == 0.0f) {
-        return FALSE;
+        return false;
     }
     if (dx34 == 0.0f && dz34 == 0.0f) {
-        return FALSE;
+        return false;
     }
 
     B1_side_ = minus_dz12 * dx13 + dx12_copy * dz13;
@@ -193,7 +193,7 @@ s32 calculate_line_segment_intersection(f32 A1x, f32 A1z, f32 A2x, f32 A2z, f32 
     }
 
     if (B1_side_ == B2_side) {
-        return FALSE;
+        return false;
     }
 
     if (fabsf(dx12) > fabsf(dx34)) {
@@ -215,7 +215,7 @@ s32 calculate_line_segment_intersection(f32 A1x, f32 A1z, f32 A2x, f32 A2z, f32 
     *interX = x;
     *interZ = z;
     *squared_dist = SQ(dx) + SQ(dz);
-    return TRUE;
+    return true;
 }
 
 s32 func_800328A4(CameraControlSettings* camSettings, f32 Px, f32 Pz) {
@@ -260,12 +260,12 @@ void update_camera_lead_amount(Camera* camera, f32 candidateLeadAmount) {
     s32 ignoreStickInput = flags != 0;
 
     if (camera->curSettings != NULL && camera->curSettings->type == CAM_CONTROL_FIXED_POS_AND_ORIENTATION) {
-        ignoreStickInput = TRUE;
+        ignoreStickInput = true;
     }
 
     if (ignoreStickInput) {
         stickX = 0.0f;
-        camera->increasingLeadInterp = TRUE;
+        camera->increasingLeadInterp = true;
         camera->leadInterpAlpha = 1.0f;
         camera->targetLeadAmount = 0.0f;
     } else {
@@ -292,7 +292,7 @@ void update_camera_lead_amount(Camera* camera, f32 candidateLeadAmount) {
             }
             if (camera->accumulatedStickLead <= -300.0f) {
                 // max accumulation
-                camera->increasingLeadInterp = TRUE;
+                camera->increasingLeadInterp = true;
                 if (camera->targetLeadAmount > 0.0f) {
                     camera->leadInterpAlpha = 0.0f;
                 }
@@ -308,7 +308,7 @@ void update_camera_lead_amount(Camera* camera, f32 candidateLeadAmount) {
             }
             if (camera->accumulatedStickLead >= 300.0f) {
                 // max accumulation
-                camera->increasingLeadInterp = TRUE;
+                camera->increasingLeadInterp = true;
                 if (camera->targetLeadAmount < 0.0f) {
                     camera->leadInterpAlpha = 0.0f;
                 }
@@ -328,7 +328,7 @@ void update_camera_lead_amount(Camera* camera, f32 candidateLeadAmount) {
     // determine ratio to interp leadAmount by
     if (camera->targetLeadAmount - camera->leadAmount == 0.0f) {
         camera->leadInterpAlpha = 0.0f;
-        camera->increasingLeadInterp = FALSE;
+        camera->increasingLeadInterp = false;
     }
 
     deltaLeadAmount = (camera->targetLeadAmount - camera->leadAmount) * camera->leadInterpAlpha;
@@ -403,7 +403,7 @@ void apply_constraints_to_lead_amount(Camera* camera) {
                 W = 1.0f / W;
                 X *= W;
                 camera->leadConstrainDir = (X > 0.0f) ? 1 : (X < 0.0f) ? -1 : 0;
-                camera->needsInitialConstrainDir = FALSE;
+                camera->needsInitialConstrainDir = false;
             } else {
                 CameraControlSettings* leadSettings = camera->prevLeadSettings;
 
@@ -448,13 +448,13 @@ void apply_constraints_to_lead_amount(Camera* camera) {
             || settings->type == CAM_CONTROL_LOOK_AT_POINT_CONSTAIN_TO_LINE
             || func_800328A4(camera->prevLeadSettings, newPosX, newPosZ) != 0
         ) {
-            constrainToZoneTriangles = TRUE;
+            constrainToZoneTriangles = true;
             minDistSq = SQ(1000.0f);
 
             // clamp lead amount to the points when using CAM_CONTROL_CONSTAIN_BETWEEN_POINTS
             if (camera->prevLeadSettings != NULL && camera->prevLeadSettings->type == CAM_CONTROL_CONSTAIN_BETWEEN_POINTS) {
                 settings2 = camera->prevLeadSettings;
-                constrainToZoneTriangles = FALSE;
+                constrainToZoneTriangles = false;
 
                 deltaPosX = settings2->points.two.Bx - settings2->points.two.Ax;
                 deltaPosZ = settings2->points.two.Bz - settings2->points.two.Az;

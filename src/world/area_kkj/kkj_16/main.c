@@ -13,7 +13,7 @@ EvtScript N(EVS_EndPeachChapter2) = {
 
 EvtScript N(EVS_ExitDoor_kkj_11_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, kkj_16_ENTRY_0)
     Set(LVar1, COLLIDER_tte)
     Set(LVar2, MODEL_o43)
@@ -49,11 +49,11 @@ EvtScript N(EVS_Main) = {
         CaseOrEq(STORY_CH2_BEGAN_PEACH_MISSION)
         CaseOrEq(STORY_CH4_BEGAN_PEACH_MISSION)
         CaseOrEq(STORY_CH5_BEGAN_PEACH_MISSION)
-            Call(MakeNpcs, FALSE, Ref(N(EarlyNPCs)))
+            Call(MakeNpcs, false, Ref(N(EarlyNPCs)))
         EndCaseGroup
         CaseEq(STORY_CH6_BEGAN_PEACH_MISSION)
             Call(N(SetAvailableDisguise), PEACH_DISGUISE_HAMMER_BROS)
-            Call(MakeNpcs, FALSE, Ref(N(LaterNPCs)))
+            Call(MakeNpcs, false, Ref(N(LaterNPCs)))
     EndSwitch
     ExecWait(N(EVS_MakeEntities))
     IfLt(GB_StoryProgress, STORY_CH8_REACHED_PEACHS_CASTLE)

@@ -19,7 +19,7 @@ IngredientSouce N(IngredientSources)[] = {
     { ITEM_BAKING_MILK,         COLLIDER_o110, MSG_NONE },
 };
 
-s32 N(IngredientWindowsOpen) = FALSE;
+s32 N(IngredientWindowsOpen) = false;
 s32 N(IngredientWindowsDismissTime) = 0;
 s32 N(IngredientWindowsIndex) = 0;
 
@@ -30,11 +30,11 @@ API_CALLABLE(N(TryOpenIngredientWindows)) {
     N(IngredientWindowsIndex) = evt_get_variable(script, *args++);
     canCheck = evt_get_variable(NULL, AF_KKJ19_CanTakeIngredients);
 
-    if (canCheck == TRUE) {
-        N(IngredientWindowsOpen) = TRUE;
+    if (canCheck == true) {
+        N(IngredientWindowsOpen) = true;
         N(IngredientWindowsDismissTime) = 5;
     } else {
-        N(IngredientWindowsOpen) = FALSE;
+        N(IngredientWindowsOpen) = false;
     }
 
     return ApiStatus_DONE2;
@@ -52,7 +52,7 @@ void N(worker_update_ingredient_windows)(void) {
     if (N(IngredientWindowsDismissTime) > 0) {
         N(IngredientWindowsDismissTime)--;
     } else {
-        N(IngredientWindowsOpen) = FALSE;
+        N(IngredientWindowsOpen) = false;
     }
 }
 
@@ -146,7 +146,7 @@ MenuWindowBP N(IngredientWindows)[] = {
 API_CALLABLE(N(CreateIngredientInfoWindows)) {
     s32 i;
 
-    N(IngredientWindowsOpen) = FALSE;
+    N(IngredientWindowsOpen) = false;
     N(IngredientWindowsDismissTime) = 0;
     N(IngredientWindowsIndex) = 0;
 
@@ -162,7 +162,7 @@ API_CALLABLE(N(CreateIngredientInfoWindows)) {
 
 EvtScript N(EVS_ExitDoor_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, kkj_19_ENTRY_0)
     Set(LVar1, COLLIDER_ttse)
     Set(LVar2, MODEL_o95)
@@ -205,9 +205,9 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
     Switch(GB_StoryProgress)
         CaseEq(STORY_INTRO)
-            Call(MakeNpcs, FALSE, Ref(N(IntroNPCs)))
+            Call(MakeNpcs, false, Ref(N(IntroNPCs)))
         CaseEq(STORY_CH4_BEGAN_PEACH_MISSION)
-            Call(MakeNpcs, FALSE, Ref(N(PeachNPCs)))
+            Call(MakeNpcs, false, Ref(N(PeachNPCs)))
     EndSwitch
     Exec(N(EVS_SetupMusic))
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)

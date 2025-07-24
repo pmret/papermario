@@ -104,9 +104,9 @@ EvtScript N(EVS_NpcInteract_Merle) = {
         CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
             Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F5)
         CaseGe(STORY_CH7_STAR_SPRIT_DEPARTED)
-            IfEq(GF_SAM06_Merle_HeardLongerMessage, FALSE)
+            IfEq(GF_SAM06_Merle_HeardLongerMessage, false)
                 Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F6)
-                Set(GF_SAM06_Merle_HeardLongerMessage, TRUE)
+                Set(GF_SAM06_Merle_HeardLongerMessage, true)
             Else
                 Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F7)
             EndIf
@@ -169,10 +169,10 @@ EvtScript N(EVS_Scene_Merle_Greeting) = {
         Call(InterruptUsePartner)
         Call(WaitForPlayerTouchingFloor)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetPlayerSpeed, Float(3.0 / DT))
     Call(PlayerMoveTo, -240, 300, 0)
-    Call(PlayerFaceNpc, NPC_Merle, FALSE)
+    Call(PlayerFaceNpc, NPC_Merle, false)
     Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00E9)
     Call(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -180,13 +180,13 @@ EvtScript N(EVS_Scene_Merle_Greeting) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EA)
     Call(UseSettingsFrom, CAM_DEFAULT, -250, 0, 300)
     Call(SetPanTarget, CAM_DEFAULT, -250, 0, 300)
     Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
     Call(SetNpcSpeed, NPC_Merle, Float(3.0 / DT))
@@ -195,15 +195,15 @@ EvtScript N(EVS_Scene_Merle_Greeting) = {
     Call(GetAngleToPlayer, NPC_Merle, LVar0)
     Call(InterpNpcYaw, NPC_Merle, LVar0, 0)
     Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EB)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Set(AF_SAM_05, TRUE)
+    Set(AF_SAM_05, true)
     Set(GB_StoryProgress, STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
-    Call(DisablePlayerInput, FALSE)
-    Set(MF_MerleReady, FALSE)
+    Call(DisablePlayerInput, false)
+    Set(MF_MerleReady, false)
     Thread
         Call(BindNpcInteract, NPC_Merle, 0)
-        Call(SetNpcFlagBits, NPC_Merle, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_Merle, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
         Call(SetNpcSpeed, NPC_Merle, Float(2.0 / DT))
         Call(NpcMoveTo, NPC_Merle, -78, 287, 0)
@@ -218,7 +218,7 @@ EvtScript N(EVS_Scene_Merle_Greeting) = {
         Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
         Call(NpcMoveTo, NPC_Merle, -90, 190, 0)
         Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-        Set(MF_MerleReady, TRUE)
+        Set(MF_MerleReady, true)
     EndThread
     Return
     End
@@ -249,18 +249,18 @@ EvtScript N(EVS_Scene_Merle_WaitingOnHill) = {
         Call(InterruptUsePartner)
         Call(WaitForPlayerTouchingFloor)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Loop(0)
         Wait(1)
-        IfEq(MF_MerleReady, TRUE)
+        IfEq(MF_MerleReady, true)
             BreakLoop
         EndIf
     EndLoop
-    Call(PlayerFaceNpc, NPC_Merle, FALSE)
+    Call(PlayerFaceNpc, NPC_Merle, false)
     Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EC)
     Set(GB_StoryProgress, STORY_CH7_MERLE_APOLOGIZED)
-    Call(DisablePlayerInput, FALSE)
-    Set(MF_MerleReady, FALSE)
+    Call(DisablePlayerInput, false)
+    Set(MF_MerleReady, false)
     Thread
         Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
         Call(NpcMoveTo, NPC_Merle, -110, 145, 0)
@@ -275,7 +275,7 @@ EvtScript N(EVS_Scene_Merle_WaitingOnHill) = {
         Call(NpcMoveTo, NPC_Merle, 0, -143, 0)
         Call(InterpNpcYaw, NPC_Merle, 270, 0)
         Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Idle)
-        Set(MF_MerleReady, TRUE)
+        Set(MF_MerleReady, true)
     EndThread
     Return
     End
@@ -286,7 +286,7 @@ API_CALLABLE(N(func_80242538_D223C8)) {
 
     if (isInitialCall) {
         if (script->varTable[0] == 0) {
-            mdl_group_set_custom_gfx(script->varTable[15], CUSTOM_GFX_NONE, ENV_TINT_SHROUD, TRUE);
+            mdl_group_set_custom_gfx(script->varTable[15], CUSTOM_GFX_NONE, ENV_TINT_SHROUD, true);
         }
         script->functionTemp[0] = 0;
     }
@@ -309,7 +309,7 @@ API_CALLABLE(N(func_80242538_D223C8)) {
 
     if (script->functionTemp[0] >= 255) {
         if (script->varTable[0] == 3) {
-            mdl_group_set_custom_gfx(script->varTable[15], CUSTOM_GFX_NONE, ENV_TINT_NONE, TRUE);
+            mdl_group_set_custom_gfx(script->varTable[15], CUSTOM_GFX_NONE, ENV_TINT_NONE, true);
         }
         return ApiStatus_DONE2;
     }
@@ -324,14 +324,14 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
         Call(WaitForPlayerTouchingFloor)
     EndIf
     Call(WaitForPlayerTouchingFloor)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Loop(0)
         Wait(1)
-        IfEq(MF_MerleReady, TRUE)
+        IfEq(MF_MerleReady, true)
             BreakLoop
         EndIf
     EndLoop
-    Set(MF_MerleReady, FALSE)
+    Set(MF_MerleReady, false)
     Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00ED)
     Thread
         Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
@@ -350,7 +350,7 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
         IfEq(LVar1, 1)
             Goto(70)
         EndIf
-    Set(AF_SAM_Snowing, FALSE)
+    Set(AF_SAM_Snowing, false)
     Call(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_VISIBLE)
     Thread
         Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
@@ -365,8 +365,8 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
     Thread
         Set(LVar0, 0)
         Set(LVarF, MODEL_k)
-        Call(SetNpcFlagBits, NPC_Merle, NPC_FLAG_HIDING, FALSE)
-        Call(SetNpcFlagBits, NPC_StarKid_03, NPC_FLAG_HIDING, TRUE)
+        Call(SetNpcFlagBits, NPC_Merle, NPC_FLAG_HIDING, false)
+        Call(SetNpcFlagBits, NPC_StarKid_03, NPC_FLAG_HIDING, true)
         Call(N(func_80242538_D223C8))
     EndThread
     Thread
@@ -403,11 +403,11 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
     Call(SetCamPosB, CAM_DEFAULT, Float(0.7), Float(-321.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(21.0), Float(-14.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(5 * DT)
     Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00EF)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F0)
@@ -419,7 +419,7 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
     Call(SetCamPosB, CAM_DEFAULT, Float(0.7), Float(-250.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(21.0), Float(-14.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetNpcSpeed, NPC_Merle, Float(2.0 / DT))
     Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
     ExecGetTID(N(EVS_Merle_CarryScarf), LVarA)
@@ -437,7 +437,7 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
     Call(SetCamPosA, CAM_DEFAULT, Float(200.7), Float(-321.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(0.7), Float(-321.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.7))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetNpcSpeed, NPC_Merle, Float(2.0 / DT))
     Call(SetNpcAnimation, NPC_Merle, ANIM_Merle_Walk)
     Call(NpcMoveTo, NPC_Merle, 0, -330, 0)
@@ -451,12 +451,12 @@ EvtScript N(EVS_Scene_Merle_EnterHouse) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(BindNpcInteract, NPC_Merle, Ref(N(EVS_NpcInteract_Merle)))
-    Call(SetNpcFlagBits, NPC_Merle, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(SetNpcFlagBits, NPC_Merle, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -472,7 +472,7 @@ EvtScript N(EVS_NpcIdle_Merle) = {
     IfEq(GB_StoryProgress, STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
         Call(SetNpcPos, NPC_Merle, -90, 45, 190)
         Call(InterpNpcYaw, NPC_Merle, 270, 0)
-        Set(MF_MerleReady, TRUE)
+        Set(MF_MerleReady, true)
         ExecWait(N(EVS_Scene_Merle_WaitingOnHill))
         ExecWait(N(EVS_Scene_Merle_EnterHouse))
         Return
@@ -480,7 +480,7 @@ EvtScript N(EVS_NpcIdle_Merle) = {
     IfEq(GB_StoryProgress, STORY_CH7_MERLE_APOLOGIZED)
         Call(SetNpcPos, NPC_Merle, 0, 90, -143)
         Call(InterpNpcYaw, NPC_Merle, 270, 0)
-        Set(MF_MerleReady, TRUE)
+        Set(MF_MerleReady, true)
         ExecWait(N(EVS_Scene_Merle_EnterHouse))
         Return
     EndIf
@@ -528,7 +528,7 @@ EvtScript N(EVS_Scene_Merle_OneLastThing) = {
     Call(PlaySoundAtCollider, COLLIDER_k_d1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     Call(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_HIDDEN)
     Call(GetNpcPos, NPC_Merle, LVar0, LVar1, LVar2)
-    Call(PlayerFaceNpc, NPC_Merle, FALSE)
+    Call(PlayerFaceNpc, NPC_Merle, false)
 #if !VERSION_JP
     Call(DisablePartnerAI, 0)
     Call(NpcFaceNpc, NPC_PARTNER, NPC_Merle, 0)
@@ -538,7 +538,7 @@ EvtScript N(EVS_Scene_Merle_OneLastThing) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Merle, ANIM_Merle_Talk, ANIM_Merle_Idle, 0, MSG_CH7_00F3)
     Call(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_VISIBLE)
@@ -572,11 +572,11 @@ EvtScript N(EVS_Scene_Merle_OneLastThing) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
-    Set(AF_SAM_05, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
+    Set(AF_SAM_05, false)
     Set(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_SCARF)
     Return
     End
@@ -686,8 +686,8 @@ EvtScript N(EVS_NpcInteract_StarKid_02) = {
 };
 
 EvtScript N(EVS_NpcInteract_StarKid_03) = {
-    IfEq(GF_SAM06_FoundSidewaysStarKid, FALSE)
-        Set(GF_SAM06_FoundSidewaysStarKid, TRUE)
+    IfEq(GF_SAM06_FoundSidewaysStarKid, false)
+        Set(GF_SAM06_FoundSidewaysStarKid, true)
         Call(MakeLerp, 90, 360, 20, EASING_LINEAR)
         Loop(0)
             Call(UpdateLerp)
@@ -758,18 +758,18 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
     Thread
         Wait(15)
         Call(N(ToadHouse_CamSetFOV), 0, Float(40.0))
-        Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+        Call(SetCamType, CAM_DEFAULT, 4, false)
         Call(SetCamPitch, CAM_DEFAULT, Float(50.0), Float(-16.0))
         Call(SetCamDistance, CAM_DEFAULT, Float(111.0))
         Call(SetCamPosA, CAM_DEFAULT, Float(-92.0), Float(94.0))
         Call(SetCamPosB, CAM_DEFAULT, Float(-318.1), Float(-35.5))
         Call(SetCamPosC, CAM_DEFAULT, Float(-641.0), Float(122.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Call(PlayerMoveTo, -347, -114, 0)
     Call(InterpPlayerYaw, 229, 1)
-    Call(HidePlayerShadow, TRUE)
+    Call(HidePlayerShadow, true)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Call(SetPlayerImgFXFlags, IMGFX_FLAG_800)
     Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
@@ -784,7 +784,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Wait(1)
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
     EndThread
     Return
     End
@@ -792,7 +792,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
 
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
     Exec(N(EVS_SetupMusic))
-    Call(HidePlayerShadow, FALSE)
+    Call(HidePlayerShadow, false)
     Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
     Call(PlayerMoveTo, -347, -114, 0)
     Call(SetPlayerSpeed, Float(3.0))
@@ -871,7 +871,7 @@ EvtScript N(EVS_NpcInit_StarKid_02) = {
 
 EvtScript N(EVS_NpcInit_StarKid_03) = {
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_StarKid_03)))
-    IfEq(GF_SAM06_FoundSidewaysStarKid, FALSE)
+    IfEq(GF_SAM06_FoundSidewaysStarKid, false)
         Call(SetNpcRotation, NPC_SELF, 0, 90, 0)
     EndIf
     Return
@@ -965,7 +965,7 @@ NpcData N(NpcData_Merle)[] = {
         .yaw = 180,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 208, 80, 150 },
@@ -1033,7 +1033,7 @@ NpcData N(NpcData_Merle)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -99, 90, -90 },
@@ -1073,7 +1073,7 @@ NpcData N(NpcData_Merle)[] = {
         .yaw = 180,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -48, 0, 400 },
@@ -1169,7 +1169,7 @@ NpcData N(NpcData_Merle)[] = {
         .yaw = 180,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -166, 10, 390 },

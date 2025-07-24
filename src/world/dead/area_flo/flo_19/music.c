@@ -11,7 +11,7 @@ EvtScript N(EVS_SetupMusic) = {
         CaseOrEq(7)
         EndCaseGroup
         CaseEq(flo_19_ENTRY_3)
-            IfNe(AF_FLO_RidingBeanstalk, FALSE)
+            IfNe(AF_FLO_RidingBeanstalk, false)
             Else
                 Call(FadeOutMusic, 1, 3000)
                 Call(FadeInMusic, 0, SONG_CLOUDY_CLIMB, 0, 3000, 0, 127)

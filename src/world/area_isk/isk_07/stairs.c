@@ -40,22 +40,22 @@ EvtScript N(EVS_FlipRedStairs) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 369, -349, 369)
     Call(SetPanTarget, CAM_DEFAULT, 369, -349, 369)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    IfEq(MF_StairsFlipped, FALSE)
+    IfEq(MF_StairsFlipped, false)
         ExecWait(N(EVS_RedStairs_FlipCCW))
-        Set(MF_StairsFlipped, TRUE)
+        Set(MF_StairsFlipped, true)
     Else
         ExecWait(N(EVS_RedStairs_FlipCW))
-        Set(MF_StairsFlipped, FALSE)
+        Set(MF_StairsFlipped, false)
     EndIf
     Call(ShakeCam, CAM_DEFAULT, 0, 3, Float(0.1))
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
-    Set(AF_ISK07_FlippingRedStairs, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
+    Set(AF_ISK07_FlippingRedStairs, false)
     Return
     End
 };
@@ -63,7 +63,7 @@ EvtScript N(EVS_FlipRedStairs) = {
 EvtScript N(EVS_SetupStairs) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o1994, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2000, COLLIDER_FLAGS_UPPER_MASK)
-    Set(MF_StairsFlipped, FALSE)
+    Set(MF_StairsFlipped, false)
     BindTrigger(Ref(N(EVS_FlipRedStairs)), TRIGGER_AREA_FLAG_SET, AF_ISK07_FlippingRedStairs, 1, 0)
     Return
     End

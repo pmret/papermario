@@ -129,18 +129,18 @@ EvtScript N(EVS_SetupIcebergs) = {
 };
 
 EvtScript N(EVS_DamageFrozenPond_Before) = {
-    IfEq(MV_CantDamagePond, TRUE)
+    IfEq(MV_CantDamagePond, true)
         Return
     EndIf
-    Set(MV_CantDamagePond, TRUE)
+    Set(MV_CantDamagePond, true)
     Add(GB_SAM11_FrozenPondDamage, 1)
     Switch(GB_SAM11_FrozenPondDamage)
         CaseEq(1)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(PlaySoundAtCollider, COLLIDER_suimen, SOUND_SAM_POND_CRACK_1, 0)
-            Call(EnableModel, MODEL_ice01, FALSE)
-            Call(EnableModel, MODEL_ice02, TRUE)
-            Call(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
+            Call(EnableModel, MODEL_ice01, false)
+            Call(EnableModel, MODEL_ice02, true)
+            Call(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, true)
             Call(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Run)
             Call(GetNpcPos, NPC_PenguinPatrol, LVar7, LVar8, LVar9)
             Call(SetNpcSpeed, NPC_PenguinPatrol, Float(9.0))
@@ -149,24 +149,24 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             Call(GetPlayerPos, LVar1, LVar2, LVar3)
             Call(AddVectorPolar, LVar1, LVar3, Float(40.0), LVar0)
             Call(NpcMoveTo, NPC_PenguinPatrol, LVar1, LVar3, 0)
-            Call(PlayerFaceNpc, NPC_PenguinPatrol, FALSE)
+            Call(PlayerFaceNpc, NPC_PenguinPatrol, false)
             Call(SpeakToPlayer, NPC_PenguinPatrol, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00B6)
             Call(NpcMoveTo, NPC_PenguinPatrol, -207, 110, 0)
             Call(NpcMoveTo, NPC_PenguinPatrol, LVar7, LVar9, 0)
             Call(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Idle)
-            Call(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, FALSE)
-            Call(DisablePlayerInput, FALSE)
+            Call(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, false)
+            Call(DisablePlayerInput, false)
         CaseEq(2)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(InterruptUsePartner)
             Call(PlaySoundAtCollider, COLLIDER_suimen, SOUND_SAM_POND_CRACK_2, 0)
-            Call(EnableModel, MODEL_ice02, FALSE)
-            Call(EnableModel, MODEL_ice03, TRUE)
+            Call(EnableModel, MODEL_ice02, false)
+            Call(EnableModel, MODEL_ice03, true)
             Thread
                 Wait(10)
                 Call(PlaySoundAtNpc, NPC_PenguinPatrol, SOUND_PENGUIN_WHISTLE, SOUND_SPACE_DEFAULT)
             EndThread
-            Call(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
+            Call(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, true)
             Call(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Run)
             Call(GetNpcPos, NPC_PenguinPatrol, LVar7, LVar8, LVar9)
             Call(SetNpcSpeed, NPC_PenguinPatrol, Float(9.0))
@@ -176,21 +176,21 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             Call(AddVectorPolar, LVar1, LVar3, Float(40.0), LVar0)
             Call(NpcMoveTo, NPC_PenguinPatrol, LVar1, LVar3, 0)
             Call(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Idle)
-            Call(PlayerFaceNpc, NPC_PenguinPatrol, FALSE)
+            Call(PlayerFaceNpc, NPC_PenguinPatrol, false)
             Call(SpeakToPlayer, NPC_PenguinPatrol, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00B7)
-            Call(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
+            Call(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, true)
             Call(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Walk)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Sub(LVar0, 20)
             Call(NpcMoveTo, NPC_PenguinPatrol, LVar0, LVar2, 0)
             Thread
-                Call(DisablePlayerPhysics, TRUE)
+                Call(DisablePlayerPhysics, true)
                 Call(PlaySoundAtPlayer, SOUND_DRAG_PLAYER, SOUND_SPACE_DEFAULT)
                 Call(InterpPlayerYaw, 90, 0)
                 Call(SetPlayerAnimation, ANIM_MarioW2_Thrown)
-                Set(MF_Unk_01, FALSE)
+                Set(MF_Unk_01, false)
                 Loop(0)
-                    IfEq(MF_Unk_01, TRUE)
+                    IfEq(MF_Unk_01, true)
                         BreakLoop
                     EndIf
                     Call(GetAngleToPlayer, NPC_PenguinPatrol, LVar0)
@@ -206,7 +206,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             Call(SetNpcSpeed, NPC_PenguinPatrol, Float(3.8))
             Call(NpcMoveTo, NPC_PenguinPatrol, -207, 110, 0)
             Call(NpcMoveTo, NPC_PenguinPatrol, -450, 0, 0)
-            Set(MF_Unk_01, TRUE)
+            Set(MF_Unk_01, true)
             Call(StopSound, SOUND_DRAG_PLAYER)
             Call(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Idle)
             Call(SetPlayerAnimation, ANIM_MarioW2_Surprise)
@@ -228,7 +228,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
                 Call(PlayerJump1, -680, 50, 0, 30)
             EndThread
             Call(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Idle)
-            Call(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, FALSE)
+            Call(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, false)
             Wait(15)
             Set(GB_SAM11_FrozenPondDamage, 0)
             Call(GotoMap, Ref("sam_02"), sam_02_ENTRY_3)
@@ -257,7 +257,7 @@ EvtScript N(EVS_BlastPond_Before) = {
     EndIf
     ExecWait(N(EVS_DamageFrozenPond_Before))
     Wait(60)
-    Set(MV_CantDamagePond, FALSE)
+    Set(MV_CantDamagePond, false)
     Return
     End
 };
@@ -276,31 +276,31 @@ EvtScript N(EVS_TouchPond_Before) = {
         IfNe(LVar0, ACTION_STATE_IDLE)
             Goto(0)
         EndIf
-    Set(MV_CantDamagePond, FALSE)
+    Set(MV_CantDamagePond, false)
     Return
     End
 };
 
 EvtScript N(EVS_DamageFrozenPond_After) = {
-    IfEq(MV_CantDamagePond, TRUE)
+    IfEq(MV_CantDamagePond, true)
         Return
     EndIf
-    Set(MV_CantDamagePond, TRUE)
+    Set(MV_CantDamagePond, true)
     Add(GB_SAM11_FrozenPondDamage, 1)
     IfNe(GB_SAM11_FrozenPondDamage, 3)
         Switch(GB_SAM11_FrozenPondDamage)
             CaseEq(1)
                 Call(PlaySoundAtCollider, COLLIDER_suimen, SOUND_SAM_POND_CRACK_1, 0)
-                Call(EnableModel, MODEL_ice01, FALSE)
-                Call(EnableModel, MODEL_ice02, TRUE)
+                Call(EnableModel, MODEL_ice01, false)
+                Call(EnableModel, MODEL_ice02, true)
             CaseEq(2)
                 Call(PlaySoundAtCollider, COLLIDER_suimen, SOUND_SAM_POND_CRACK_2, 0)
-                Call(EnableModel, MODEL_ice02, FALSE)
-                Call(EnableModel, MODEL_ice03, TRUE)
+                Call(EnableModel, MODEL_ice02, false)
+                Call(EnableModel, MODEL_ice03, true)
         EndSwitch
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(InterruptUsePartner)
     Call(ShakeCam, CAM_DEFAULT, 0, 20, Float(1.0))
     Call(IsPlayerWithin, 0, 210, 240, LVarA)
@@ -328,23 +328,23 @@ EvtScript N(EVS_DamageFrozenPond_After) = {
                 Call(UseSettingsFrom, CAM_DEFAULT, LVar3, LVar1, LVar5)
                 Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
                 Call(SetPanTarget, CAM_DEFAULT, LVar3, LVar1, LVar5)
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
                 Wait(1)
             EndLoop
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+            Call(PanToTarget, CAM_DEFAULT, 0, false)
         EndThread
     EndIf
     Call(PlaySoundAt, SOUND_SAM_POND_SHATTER, SOUND_SPACE_DEFAULT, 0, 60, 220)
     Call(N(SpawnIceShards))
-    Call(EnableModel, MODEL_ice03, FALSE)
+    Call(EnableModel, MODEL_ice03, false)
     Call(SetGroupVisibility, MODEL_ice04, MODEL_GROUP_VISIBLE)
-    Call(EnableGroup, MODEL_sui, TRUE)
-    Call(EnableGroup, MODEL_g279, TRUE)
-    Call(EnableTexPanning, MODEL_o583, TRUE)
+    Call(EnableGroup, MODEL_sui, true)
+    Call(EnableGroup, MODEL_g279, true)
+    Call(EnableTexPanning, MODEL_o583, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(   70,   60,   60, -100)
@@ -381,7 +381,7 @@ EvtScript N(EVS_DamageFrozenPond_After) = {
         Call(SetPlayerAnimation, ANIM_Mario1_Idle)
         Wait(1)
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -406,7 +406,7 @@ EvtScript N(EVS_BlastPond_After) = {
     EndIf
     ExecWait(N(EVS_DamageFrozenPond_After))
     Wait(60)
-    Set(MV_CantDamagePond, FALSE)
+    Set(MV_CantDamagePond, false)
     Return
     End
 };
@@ -428,7 +428,7 @@ EvtScript N(EVS_TouchPond_After) = {
         IfNe(LVar0, ACTION_STATE_IDLE)
             Goto(0)
         EndIf
-    Set(MV_CantDamagePond, FALSE)
+    Set(MV_CantDamagePond, false)
     Return
     End
 };
@@ -439,12 +439,12 @@ BombTrigger N(BombTrigger_Pond) = {
 };
 
 EvtScript N(EVS_SetupPond) = {
-    Call(EnableGroup, MODEL_sui, FALSE)
-    Call(EnableGroup, MODEL_g279, FALSE)
-    Call(EnableModel, MODEL_ice00, FALSE)
-    Call(EnableModel, MODEL_ice01, FALSE)
-    Call(EnableModel, MODEL_ice02, FALSE)
-    Call(EnableModel, MODEL_ice03, FALSE)
+    Call(EnableGroup, MODEL_sui, false)
+    Call(EnableGroup, MODEL_g279, false)
+    Call(EnableModel, MODEL_ice00, false)
+    Call(EnableModel, MODEL_ice01, false)
+    Call(EnableModel, MODEL_ice02, false)
+    Call(EnableModel, MODEL_ice03, false)
     Call(SetGroupVisibility, MODEL_ice04, MODEL_GROUP_HIDDEN)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o657, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o658, COLLIDER_FLAGS_UPPER_MASK)
@@ -456,20 +456,20 @@ EvtScript N(EVS_SetupPond) = {
         Switch(GB_SAM11_FrozenPondDamage)
             CaseEq(0)
                 Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ike, COLLIDER_FLAGS_UPPER_MASK)
-                Call(EnableModel, MODEL_ice01, TRUE)
+                Call(EnableModel, MODEL_ice01, true)
             CaseEq(1)
                 Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ike, COLLIDER_FLAGS_UPPER_MASK)
-                Call(EnableModel, MODEL_ice02, TRUE)
+                Call(EnableModel, MODEL_ice02, true)
             CaseEq(2)
                 Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ike, COLLIDER_FLAGS_UPPER_MASK)
-                Call(EnableModel, MODEL_ice03, TRUE)
+                Call(EnableModel, MODEL_ice03, true)
             CaseEq(3)
                 Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ike, COLLIDER_FLAGS_UPPER_MASK)
                 Call(SetGroupVisibility, MODEL_ice04, MODEL_GROUP_VISIBLE)
             CaseEq(4)
-                Call(EnableGroup, MODEL_sui, TRUE)
-                Call(EnableGroup, MODEL_g279, TRUE)
-                Call(EnableTexPanning, MODEL_o583, TRUE)
+                Call(EnableGroup, MODEL_sui, true)
+                Call(EnableGroup, MODEL_g279, true)
+                Call(EnableTexPanning, MODEL_o583, true)
                 Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(   70,   60,   60, -100)
@@ -486,9 +486,9 @@ EvtScript N(EVS_SetupPond) = {
                 Exec(N(EVS_SetupIcebergs))
         EndSwitch
     Else
-        Call(EnableGroup, MODEL_sui, TRUE)
-        Call(EnableGroup, MODEL_g279, TRUE)
-        Call(EnableTexPanning, MODEL_o583, TRUE)
+        Call(EnableGroup, MODEL_sui, true)
+        Call(EnableGroup, MODEL_g279, true)
+        Call(EnableTexPanning, MODEL_o583, true)
         Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(   70,   60,   60, -100)

@@ -51,8 +51,8 @@ API_CALLABLE(SetCamPerspective) {
     Camera* camera = &gCameras[id];
 
     camera->updateMode = mode;
-    camera->needsInit = TRUE;
-    camera->needsReinit = TRUE;
+    camera->needsInit = true;
+    camera->needsReinit = true;
 
     camera->vfov = vfov;
     camera->farClip = farClip;
@@ -67,7 +67,7 @@ API_CALLABLE(SetCamUpdateMode) {
     Camera* camera = &gCameras[id];
 
     camera->updateMode = mode;
-    camera->needsInit = FALSE;
+    camera->needsInit = false;
     return ApiStatus_DONE2;
 }
 
@@ -81,7 +81,7 @@ API_CALLABLE(GrabCamera) {
     f32 dx, dy, dz;
 
     gCameras[id].updateMode = CAM_UPDATE_INTERP_POS;
-    gCameras[id].needsInit = FALSE;
+    gCameras[id].needsInit = false;
     gCameras[id].params.interp.pitch = -round(gCameras[id].lookAt_pitch);
     gCameras[id].params.interp.yaw = -gCameras[id].lookAt_yaw;
 
@@ -377,12 +377,12 @@ API_CALLABLE(PanToTarget) {
     s32 targetType = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
 
-    camera->panActive = TRUE;
+    camera->panActive = true;
     if (targetType != 0) {
-        camera->followPlayer = TRUE;
+        camera->followPlayer = true;
         camera->interpEasingParameter = panPhase;
     } else {
-        camera->followPlayer = FALSE;
+        camera->followPlayer = false;
         camera->interpEasingParameter = 0.0f;
         camera->moveSpeed = 1.0f;
     }
@@ -499,7 +499,7 @@ API_CALLABLE(SetPanTarget) {
     camera->movePos.x = x;
     camera->movePos.y = y;
     camera->movePos.z = z;
-    camera->panActive = TRUE;
+    camera->panActive = true;
     return ApiStatus_DONE2;
 }
 
@@ -636,8 +636,8 @@ API_CALLABLE(SetCamProperties) {
         camera->controlSettings.boomPitch = boomPitch;
         camera->controlSettings.viewPitch = viewPitch;
         camera->moveSpeed = moveSpeed;
-        camera->panActive = TRUE;
-        camera->followPlayer = TRUE;
+        camera->panActive = true;
+        camera->followPlayer = true;
         camera->interpEasingParameter = 0.0f;
         return ApiStatus_BLOCK;
     }
@@ -679,8 +679,8 @@ API_CALLABLE(AdjustCam) {
         camera->controlSettings.boomPitch = boomPitch;
         camera->controlSettings.viewPitch = viewPitch;
         camera->moveSpeed = moveSpeed;
-        camera->panActive = TRUE;
-        camera->followPlayer = TRUE;
+        camera->panActive = true;
+        camera->followPlayer = true;
         camera->interpEasingParameter = 0.0f;
         return ApiStatus_BLOCK;
     }
@@ -719,15 +719,15 @@ API_CALLABLE(ResetCam) {
         camera->movePos.y = y;
         camera->movePos.z = z;
         camera->moveSpeed = moveSpeed;
-        camera->panActive = TRUE;
-        camera->followPlayer = TRUE;
+        camera->panActive = true;
+        camera->followPlayer = true;
         camera->interpEasingParameter = 0.0f;
         return ApiStatus_BLOCK;
     }
 
     if (camera->interpAlpha >= 1.0f) {
-        camera->panActive = TRUE;
-        camera->followPlayer = FALSE;
+        camera->panActive = true;
+        camera->followPlayer = false;
         camera->moveSpeed = 1.0f;
         camera->interpEasingParameter = 0.0f;
         return ApiStatus_DONE2;

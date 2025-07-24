@@ -164,7 +164,7 @@ EvtScript N(EVS_ReturnHome) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -253,18 +253,18 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_Lick) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(GetBattlePhase, LVar0)
     IfEq(LVar0, PHASE_FIRST_STRIKE)
         Call(SetGoalToTarget, ACTOR_SELF)
@@ -282,7 +282,7 @@ EvtScript N(EVS_Attack_Lick) = {
         Call(AddGoalPos, ACTOR_SELF, 20, 0, 0)
     EndIf
     Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim01)
     Wait(10)
     Thread
@@ -308,7 +308,7 @@ EvtScript N(EVS_Attack_Lick) = {
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -324,26 +324,26 @@ EvtScript N(EVS_Attack_Lick) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_SpitRock) = {
     Set(LVarA, LVar0)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
     Add(LVar0, 20)
     Sub(LVar2, 1)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim02)
     Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim01)
     Wait(10)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_GULPIT_LICK)
@@ -376,7 +376,7 @@ EvtScript N(EVS_Attack_SpitRock) = {
         CaseOrEq(HIT_RESULT_LUCKY)
             Set(LVar9, LVar0)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            Call(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+            Call(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, false)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Add(LVar1, 20)
             Add(LVar2, 2)
@@ -386,8 +386,8 @@ EvtScript N(EVS_Attack_SpitRock) = {
             Call(SetPartMoveSpeed, ACTOR_SELF, LVarA, Float(14.0))
             Call(SetPartJumpGravity, ACTOR_SELF, LVarA, Float(0.01))
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpPartTo, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2, 0, TRUE)
-            Call(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            Call(JumpPartTo, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2, 0, true)
+            Call(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, true)
             IfEq(LVar9, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EndIf
@@ -397,11 +397,11 @@ EvtScript N(EVS_Attack_SpitRock) = {
             ExecWait(N(EVS_ReturnHome))
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
-    Call(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    Call(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Add(LVar1, 20)
     Add(LVar2, 2)
@@ -410,7 +410,7 @@ EvtScript N(EVS_Attack_SpitRock) = {
     Call(SetPartMoveSpeed, ACTOR_SELF, LVarA, Float(14.0))
     Call(SetPartJumpGravity, ACTOR_SELF, LVarA, Float(0.01))
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpPartTo, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2, 0, TRUE)
+    Call(JumpPartTo, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2, 0, true)
     Switch(LVarA)
         CaseEq(PRT_BIG_ROCK)
             Wait(2)
@@ -427,15 +427,15 @@ EvtScript N(EVS_Attack_SpitRock) = {
             Call(GetPartOffset, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2)
             Add(LVar0, -100)
             Call(SetPartJumpGravity, ACTOR_SELF, LVarA, Float(1.0))
-            Call(JumpPartTo, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2, 25, TRUE)
-            Call(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            Call(JumpPartTo, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2, 25, true)
+            Call(SetPartFlagBits, ACTOR_SELF, LVarA, ACTOR_PART_FLAG_INVISIBLE, true)
             Wait(10)
             Call(YieldTurn)
             ExecWait(N(EVS_ReturnHome))
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

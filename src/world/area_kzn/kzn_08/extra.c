@@ -11,7 +11,7 @@ API_CALLABLE(N(func_80243EE0_C75360)) {
 
     if (isInitialCall) {
         script->functionTemp[0] = 255;
-        script->functionTemp[1] = FALSE;
+        script->functionTemp[1] = false;
     }
 
     set_screen_overlay_center_worldpos(SCREEN_LAYER_BACK, 1,
@@ -35,7 +35,7 @@ API_CALLABLE(N(func_80243EE0_C75360)) {
     if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
         if (playerData->curPartner == PARTNER_WATT) {
             if (!script->functionTemp[1]) {
-                script->functionTemp[1] = TRUE;
+                script->functionTemp[1] = true;
                 sfx_play_sound(SOUND_WATT_REPEL_DARKNESS);
             }
             script->functionTemp[0] -= 8;
@@ -45,7 +45,7 @@ API_CALLABLE(N(func_80243EE0_C75360)) {
         }
     } else if (playerData->curPartner == PARTNER_WATT) {
         if (script->functionTemp[1]) {
-            script->functionTemp[1] = FALSE;
+            script->functionTemp[1] = false;
             if (script->functionTemp[0] < 255) {
                 sfx_play_sound(SOUND_WATT_RESUME_DARKNESS);
             }

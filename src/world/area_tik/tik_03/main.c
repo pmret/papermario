@@ -41,7 +41,7 @@ EvtScript N(EVS_Main) = {
     SetUP_CAMERA_NO_LEAD()
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupDrips))
-    Call(EnableTexPanning, MODEL_nagare, TRUE)
+    Call(EnableTexPanning, MODEL_nagare, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(   50,  200,  110,  500)
@@ -49,7 +49,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         Exec(N(EVS_UpdateTexturePan))
     EndThread
-    Call(EnableTexPanning, MODEL_mizu, TRUE)
+    Call(EnableTexPanning, MODEL_mizu, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_2)
         TEX_PAN_PARAMS_STEP(    0, -200, -100, -500)
@@ -57,7 +57,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         Exec(N(EVS_UpdateTexturePan))
     EndThread
-    Call(EnableTexPanning, MODEL_mizu2, TRUE)
+    Call(EnableTexPanning, MODEL_mizu2, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_3)
         TEX_PAN_PARAMS_STEP(    0, -250, -100, -500)
@@ -65,7 +65,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         Exec(N(EVS_UpdateTexturePan))
     EndThread
-    Call(EnableTexPanning, MODEL_taki, TRUE)
+    Call(EnableTexPanning, MODEL_taki, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_4)
         TEX_PAN_PARAMS_STEP(  -50, -900,  -70,-1200)

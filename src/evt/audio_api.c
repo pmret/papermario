@@ -232,7 +232,7 @@ API_CALLABLE(StopTrackingSoundPos) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
 
-    sfx_stop_tracking_env_sound_pos(soundID, TRUE);
+    sfx_stop_tracking_env_sound_pos(soundID, true);
     return ApiStatus_DONE2;
 }
 

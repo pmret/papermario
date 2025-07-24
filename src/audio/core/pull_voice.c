@@ -78,8 +78,8 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
             s32 bEnd;
             s32 nOver;
             s32 overFlow;
-            s32 decoded = FALSE;
-            s32 looped = FALSE;
+            s32 decoded = false;
+            s32 looped = false;
             inp = N_AL_DECODER_IN;
 
             // load ADPCM predictor
@@ -157,7 +157,7 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
                 }
                 nbytes -= overFlow;
                 if (nOver - (nOver & 0xF) < outCount) {
-                    decoded = TRUE;
+                    decoded = true;
                     ptr = _decodeChunk(ptr, decoder, nSam - nOver, nbytes, outp, inp, decoder->first);
                     if (decoder->lastsam != 0) {
                         outp += decoder->lastsam << 1;
@@ -271,11 +271,11 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
     // resample audio from source buffer to output buffer
     incr = (s32)(resampler->ratio * UNITY_PITCH);
     n_aResample(ptr++, osVirtualToPhysical(resampler->state), resampler->first, incr, outp, 0);
-    resampler->first = FALSE;
+    resampler->first = false;
 
     // set up envelope mixing
     if (envMixer->dirty) {
-        envMixer->dirty = FALSE;
+        envMixer->dirty = false;
         if (!AuSynUseStereo) {
             envMixer->ltgt = (envMixer->volume * AuEqPower[AUEQPOWER_LENGTH / 2]) >> 15;
             envMixer->rtgt = (envMixer->volume * AuEqPower[AUEQPOWER_LENGTH / 2]) >> 15;
@@ -301,10 +301,10 @@ Acmd* au_pull_voice(AuPVoice* pvoice, Acmd* cmdBufPos) {
 
     // if stopped, reset state
     if (envMixer->motion == AL_STOPPED) {
-        envMixer->dirty = TRUE;
+        envMixer->dirty = true;
         envMixer->volume = 1;
         resampler->delta = 0.0f;
-        resampler->first = TRUE;
+        resampler->first = true;
         decoder->lastsam = 0;
         decoder->first = 1;
         decoder->sample = 0;

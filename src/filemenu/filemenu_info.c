@@ -41,7 +41,7 @@ MenuWindowBP filemenu_info_windowBPs[] = {
 };
 
 MenuPanel filemenu_info_menuBP = {
-    .initialized = FALSE,
+    .initialized = false,
     .col = 0,
     .row = 0,
     .selected = 0,
@@ -146,7 +146,7 @@ void filemenu_info_init(MenuPanel* tab) {
     }
 
     setup_pause_menu_tab(filemenu_info_windowBPs, ARRAY_COUNT(filemenu_info_windowBPs));
-    tab->initialized = TRUE;
+    tab->initialized = true;
 }
 
 void filemenu_info_handle_input(MenuPanel* menu) {

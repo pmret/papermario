@@ -16,10 +16,10 @@ EvtScript N(EVS_ExitWalk_pra_15_0) = EVT_EXIT_WALK(60, pra_01_ENTRY_3, "pra_15",
 
 EvtScript N(EVS_ExitDoor_pra_02_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_01_ENTRY_1)
     Set(LVar1, COLLIDER_deilittse)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothDoorModelsL)))
         Set(LVar3, Ref(N(BothDoorModelsR)))
     Else
@@ -36,10 +36,10 @@ EvtScript N(EVS_ExitDoor_pra_02_0) = {
 
 EvtScript N(EVS_ExitDoor_pra_02_5) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_01_ENTRY_2)
     Set(LVar1, COLLIDER_deilittse)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothDoorModelsL)))
         Set(LVar3, Ref(N(BothDoorModelsR)))
     Else
@@ -70,7 +70,7 @@ EvtScript N(EVS_EnterMap) = {
             Set(LVar0, Ref(N(EVS_BindExitTriggers)))
             Exec(EnterWalk)
         CaseEq(pra_01_ENTRY_1)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothDoorModelsL)))
                 Set(LVar3, Ref(N(BothDoorModelsR)))
             Else
@@ -80,7 +80,7 @@ EvtScript N(EVS_EnterMap) = {
             ExecWait(BaseEnterDoor)
             Exec(N(EVS_BindExitTriggers))
         CaseEq(pra_01_ENTRY_2)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothDoorModelsL)))
                 Set(LVar3, Ref(N(BothDoorModelsR)))
             Else
@@ -115,9 +115,9 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_SHIVER_MOUNTAIN)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Set(GF_MAP_CrystalPalace, TRUE)
+    Set(GF_MAP_CrystalPalace, true)
     IfEq(GB_StoryProgress, STORY_CH7_BEGAN_PEACH_MISSION)
-        Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+        Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     EndIf
     ExecWait(N(EVS_MakeEntities))
     ExecWait(N(EVS_SetupMusic))

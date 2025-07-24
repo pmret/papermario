@@ -18,7 +18,7 @@ API_CALLABLE(N(PlaySpringAnimation)) {
 }
 
 EvtScript N(EVS_NpcIdle_TubbasHeart) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
     Call(SetNpcJumpscale, NPC_SELF, Float(2.5))
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)

@@ -71,7 +71,7 @@ void state_init_logos(void) {
     general_heap_create();
     gGameStatusPtr->startupState = LOGOS_STATE_N64_FADE_IN;
     gGameStatusPtr->logoTime = 0;
-    gGameStatusPtr->skipLogos = FALSE;
+    gGameStatusPtr->skipLogos = false;
     startup_set_fade_screen_alpha(255);
     startup_set_fade_screen_color(0);
 
@@ -87,7 +87,7 @@ void state_init_logos(void) {
     nuContRmbForceStop();
     create_cameras();
     gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_NO_INTERP;
-    gCameras[CAM_DEFAULT].needsInit = TRUE;
+    gCameras[CAM_DEFAULT].needsInit = true;
     gCameras[CAM_DEFAULT].nearClip = 16;
     gCameras[CAM_DEFAULT].farClip = 4096;
     gCurrentCameraID = CAM_DEFAULT;
@@ -103,7 +103,7 @@ void state_init_logos(void) {
     gCameras[CAM_DEFAULT].bgColor[2] = 0;
     gCameras[CAM_DEFAULT].lookAt_obj_target.x = 25.0f;
     gCameras[CAM_DEFAULT].lookAt_obj_target.y = 25.0f;
-    gCameras[CAM_DEFAULT].params.basic.skipRecalc = FALSE;
+    gCameras[CAM_DEFAULT].params.basic.skipRecalc = false;
     gCameras[CAM_DEFAULT].params.basic.fovScale = 100;
     gCameras[CAM_DEFAULT].params.basic.pitch = 0;
     gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
@@ -119,7 +119,7 @@ void state_init_logos(void) {
     clear_npcs();
     hud_element_clear_cache();
     reset_background_settings();
-    clear_entity_data(TRUE);
+    clear_entity_data(true);
     clear_effect_data();
     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD;
     startup_fade_screen_update();
@@ -152,7 +152,7 @@ void state_step_logos(void) {
             && (pressedButtons & (BUTTON_START | BUTTON_Z | BUTTON_A))
         ) {
             startup_set_fade_screen_color(208);
-            gGameStatusPtr->skipLogos = TRUE;
+            gGameStatusPtr->skipLogos = true;
         }
 #endif
 

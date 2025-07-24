@@ -15,8 +15,8 @@ TweesterPath* N(TweesterPaths)[] = {
 };
 
 EvtScript N(D_8024047C_936B5C) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(GotoMap, Ref("sbk_05"), sbk_05_ENTRY_4)
     Wait(100)
     Return

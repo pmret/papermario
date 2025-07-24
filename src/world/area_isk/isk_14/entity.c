@@ -3,7 +3,7 @@
 #include "effects.h"
 
 EvtScript N(EVS_OnSmash_Block) = {
-    Set(GF_ISK14_Hammer2Block, TRUE)
+    Set(GF_ISK14_Hammer2Block, true)
     Call(SetNpcVar, NPC_StoneChomp, 1, 1)
     Return
     End
@@ -11,7 +11,7 @@ EvtScript N(EVS_OnSmash_Block) = {
 
 EvtScript N(EVS_MakeEntities) = {
     Call(MakeItemEntity, ITEM_DIAMOND_STONE, -389, -698, -424, ITEM_SPAWN_MODE_KEY, GF_ISK14_Item_DiamondStone)
-    IfEq(GF_ISK14_Hammer2Block, FALSE)
+    IfEq(GF_ISK14_Hammer2Block, false)
         Call(MakeEntity, Ref(Entity_Hammer2BlockWideX), -507, -780, -396, 143, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnSmash_Block)))
     EndIf

@@ -48,31 +48,31 @@ EvtScript N(EVS_EnterMap) = {
         CaseEq(kmr_02_ENTRY_2)
             Set(LVar0, Ref(N(EVS_BindExitTriggers)))
             Exec(EnterWalk)
-            IfEq(GF_KMR02_ReturnedWithGoompa, FALSE)
-                Call(DisablePlayerInput, TRUE)
+            IfEq(GF_KMR02_ReturnedWithGoompa, false)
+                Call(DisablePlayerInput, true)
                 Wait(20 * DT)
                 Call(DisablePartnerAI, 0)
                 Call(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 4, MSG_CH0_001C)
                 Call(EnablePartnerAI)
-                Set(GF_KMR02_ReturnedWithGoompa, TRUE)
-                Call(DisablePlayerInput, FALSE)
+                Set(GF_KMR02_ReturnedWithGoompa, true)
+                Call(DisablePlayerInput, false)
             EndIf
         CaseEq(kmr_02_ENTRY_3)
-            IfEq(GF_KMR02_WarpPipe, FALSE)
-                Call(DisablePlayerInput, TRUE)
-                Call(DisablePlayerPhysics, TRUE)
+            IfEq(GF_KMR02_WarpPipe, false)
+                Call(DisablePlayerInput, true)
+                Call(DisablePlayerPhysics, true)
                 Call(GetPlayerPos, LVar0, LVar1, LVar2)
                 Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
                 Call(SetPlayerPos, LVar0, NPC_DISPOSE_POS_Y, LVar2)
                 Wait(30)
                 Call(PlaySound, SOUND_GROW)
-                Set(GF_KMR02_WarpPipe, TRUE)
+                Set(GF_KMR02_WarpPipe, true)
                 Wait(30)
                 Call(SetPlayerActionState, ACTION_STATE_IDLE)
                 Call(SetPlayerPos, LVar0, LVar1, LVar2)
                 Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-                Call(DisablePlayerPhysics, FALSE)
-                Call(DisablePlayerInput, FALSE)
+                Call(DisablePlayerPhysics, false)
+                Call(DisablePlayerInput, false)
             EndIf
             Set(LVarA, Ref(N(EVS_BindExitTriggers)))
             ExecWait(N(EVS_Pipe_EnterVertical))
@@ -92,15 +92,15 @@ EvtScript N(EVS_EnterMap) = {
 };
 
 EvtScript N(EVS_ShowMessage_ItsLocked) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_OpenGoombaRoadGate) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PlaySoundAtCollider, COLLIDER_tt2, SOUND_GOOMBA_GATE_OPEN, SOUND_SPACE_DEFAULT)
     Call(MakeLerp, 0, 120, 20, EASING_COS_IN_OUT)
     Label(0)
@@ -113,7 +113,7 @@ EvtScript N(EVS_OpenGoombaRoadGate) = {
         EndIf
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt2, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o757, COLLIDER_FLAGS_UPPER_MASK)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -136,17 +136,17 @@ EvtScript N(EVS_Main) = {
     IfNe(LVar0, kmr_02_ENTRY_4)
         Goto(10)
     EndIf
-    Call(MakeNpcs, FALSE, Ref(N(EpilogueNPCs)))
+    Call(MakeNpcs, false, Ref(N(EpilogueNPCs)))
     Exec(N(EVS_FadeOutMusic))
     Return
     Label(10)
     Switch(GB_StoryProgress)
         CaseEq(STORY_UNUSED_FFFFFF8C)
-            Call(MakeNpcs, FALSE, Ref(N(NpcGroup1)))
+            Call(MakeNpcs, false, Ref(N(NpcGroup1)))
         CaseLt(STORY_UNUSED_FFFFFF8C)
-            Call(MakeNpcs, FALSE, Ref(N(PrologueNPCs)))
+            Call(MakeNpcs, false, Ref(N(PrologueNPCs)))
         CaseDefault
-            Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+            Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     EndSwitch
     Label(20)
     Call(ClearDefeatedEnemies)
@@ -164,14 +164,14 @@ EvtScript N(EVS_Main) = {
     EndSwitch
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH0_GATE_CRUSHED)
-            Call(EnableGroup, MODEL_2, FALSE)
-            Call(EnableGroup, MODEL_4, FALSE)
+            Call(EnableGroup, MODEL_2, false)
+            Call(EnableGroup, MODEL_4, false)
         CaseLt(STORY_CH0_TWINK_GAVE_LUCKY_STAR)
-            Call(EnableGroup, MODEL_1, FALSE)
-            Call(EnableGroup, MODEL_4, FALSE)
+            Call(EnableGroup, MODEL_1, false)
+            Call(EnableGroup, MODEL_4, false)
         CaseDefault
-            Call(EnableGroup, MODEL_1, FALSE)
-            Call(EnableGroup, MODEL_2, FALSE)
+            Call(EnableGroup, MODEL_1, false)
+            Call(EnableGroup, MODEL_2, false)
     EndSwitch
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o757, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)

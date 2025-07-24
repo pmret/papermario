@@ -108,7 +108,7 @@ EvtScript N(EVS_NpcInit_Skolar) = {
     Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Skolar)))
     Call(SetNpcAnimation, NPC_SELF, ANIM_WorldSkolar_IdleSad)
     Call(SetNpcPos, NPC_SELF, 0, NPC_DISPOSE_POS_Y, -100)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, 170, 0, 0, 0)
     IfGe(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
         Call(RemoveNpc, NPC_SELF)

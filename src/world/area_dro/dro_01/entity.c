@@ -6,7 +6,7 @@
 #define NAMESPACE dro_01
 
 EvtScript N(EVS_WarpPipeExit) = {
-    Set(GF_DRO01_HeardHintAboutSpinningRoof, FALSE)
+    Set(GF_DRO01_HeardHintAboutSpinningRoof, false)
     Call(GotoMap, Ref("tik_01"), tik_01_ENTRY_4)
     Wait(100)
     Return
@@ -15,11 +15,11 @@ EvtScript N(EVS_WarpPipeExit) = {
 
 EvtScript N(EVS_MakeEntities) = {
     Call(MakeEntity, Ref(Entity_SavePoint), -211, 60, -50, 30, MAKE_ENTITY_END)
-    IfEq(GF_DRO01_WarpPipe, FALSE)
-        IfEq(GF_TIK01_WarpPipes, TRUE)
+    IfEq(GF_DRO01_WarpPipe, false)
+        IfEq(GF_TIK01_WarpPipes, true)
             Call(GetEntryID, LVar0)
             IfNe(LVar0, dro_01_ENTRY_2)
-                Set(GF_DRO01_WarpPipe, TRUE)
+                Set(GF_DRO01_WarpPipe, true)
             EndIf
         EndIf
     EndIf
