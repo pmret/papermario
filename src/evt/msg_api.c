@@ -5,7 +5,7 @@ extern s32 ShowMessageScreenOffsetY;
 extern s32 D_802DAE58[2]; // unused?
 extern char D_802DAE60[0x400]; // unused?
 extern MessagePrintState* gCurrentPrintContext;
-extern s32 D_802DB264;
+extern bool D_802DB264;
 extern MessagePrintState* D_802DB268;
 
 ApiStatus _show_message(Evt* script, s32 isInitialCall, s32 mode);
@@ -51,7 +51,7 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 mode) {
     targetNpc = NULL;
 
     if (isInitialCall) {
-        D_802DB264 = 0;
+        D_802DB264 = false;
         speakerNpcID = evt_get_variable(script, *args++);
         script->varTable[13] = evt_get_variable(script, *args++);
         script->varTable[14] = evt_get_variable(script, *args++);
@@ -169,7 +169,7 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 mode) {
         return true;
     }
 
-    if (D_802DB264 != 1) {
+    if (D_802DB264 != true) {
         return false;
     }
 
@@ -193,9 +193,9 @@ API_CALLABLE(ShowMessageAtScreenPos) {
         s32 msgID = evt_get_variable(script, *args++);
         s32 x = evt_get_variable(script, *args++);
         s32 y = evt_get_variable(script, *args++);
-        s32* temp802DB264 = &D_802DB264;
+        bool* temp802DB264 = &D_802DB264;
 
-        *temp802DB264 = 0;
+        *temp802DB264 = false;
         gCurrentPrintContext = msg_get_printer_for_msg(msgID, temp802DB264);
         msg_printer_set_origin_pos(gCurrentPrintContext, x, y);
     }
@@ -204,7 +204,7 @@ API_CALLABLE(ShowMessageAtScreenPos) {
         return ApiStatus_DONE1;
     }
 
-    if (D_802DB264 != 1) {
+    if (D_802DB264 != true) {
         return ApiStatus_BLOCK;
     }
 
@@ -225,9 +225,9 @@ API_CALLABLE(ShowMessageAtWorldPos) {
         s32 x2;
         s32 y2;
         s32 z2;
-        s32* temp802DB264 = &D_802DB264;
+        bool* temp802DB264 = &D_802DB264;
 
-        *temp802DB264 = 0;
+        *temp802DB264 = false;
         currentPrintContext = &gCurrentPrintContext;
         *currentPrintContext = msg_get_printer_for_msg(msgID, temp802DB264);
         get_screen_coords(*currentCameraID, x, y, z, &x2, &y2, &z2);
@@ -238,7 +238,7 @@ API_CALLABLE(ShowMessageAtWorldPos) {
         return ApiStatus_DONE1;
     }
 
-    if (D_802DB264 != 1) {
+    if (D_802DB264 != true) {
         return ApiStatus_BLOCK;
     }
 
@@ -253,7 +253,7 @@ API_CALLABLE(CloseMessage) {
 
     if (gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_40) {
         return ApiStatus_DONE1;
-    } else if (D_802DB264 != 1) {
+    } else if (D_802DB264 != true) {
         return ApiStatus_BLOCK;
     } else {
         script->varTable[0] = gCurrentPrintContext->curOption;
@@ -270,7 +270,7 @@ API_CALLABLE(SwitchMessage) {
 
     if (gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_40) {
         return ApiStatus_DONE1;
-    } else if (D_802DB264 != 1) {
+    } else if (D_802DB264 != true) {
         return ApiStatus_BLOCK;
     } else {
         script->varTable[0] = gCurrentPrintContext->curOption;
@@ -285,8 +285,8 @@ API_CALLABLE(ShowChoice) {
     if (isInitialCall) {
         s32 msgID = evt_get_variable(script, *args++);
 
-        script->functionTemp[1] = 0;
-        D_802DB268 = msg_get_printer_for_msg(msgID, &script->functionTemp[1]);
+        script->functionTempBool[1] = false;
+        D_802DB268 = msg_get_printer_for_msg(msgID, &script->functionTempBool[1]);
     }
 
     temp802DB268 = &D_802DB268;
@@ -296,7 +296,7 @@ API_CALLABLE(ShowChoice) {
         return ApiStatus_DONE1;
     }
 
-    return script->functionTemp[1] == 1;
+    return script->functionTempBool[1] == true;
 }
 
 API_CALLABLE(CloseChoice) {

@@ -281,7 +281,7 @@ API_CALLABLE(ShowShopPurchaseDialog) {
 
     // functionTemp[0] is PurchaseDialogState
     // functionTemp[1] is speech script ID
-    // functionTemp[2] is speech printer isClosed writeback
+    // functionTempBool[2] is speech printer isClosed writeback
 
     shop->flags &= ~SHOP_FLAG_SHOWING_ITEM_INFO;
     status_bar_always_show_off();
@@ -304,12 +304,12 @@ API_CALLABLE(ShowShopPurchaseDialog) {
         case PURCHASE_DIALOG_STATE_INIT:
             if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = PURCHASE_DIALOG_STATE_WAIT_FOR_SPEECH;
-                script->functionTemp[2] = false;
-                D_80286528 = msg_get_printer_for_msg(MSG_Choice_0001, &script->functionTemp[2]);
+                script->functionTempBool[2] = false;
+                D_80286528 = msg_get_printer_for_msg(MSG_Choice_0001, &script->functionTempBool[2]);
             }
             break;
         case PURCHASE_DIALOG_STATE_WAIT_FOR_SPEECH:
-            if (script->functionTemp[2] == true) {
+            if (script->functionTempBool[2] == true) {
                 if (D_80286528->curOption == 0) {
                     if (playerData->coins < shopInventory->price) {
                         script->functionTemp[1] = shop_owner_continue_speech(SHOP_MSG_NOT_ENOUGH_COINS);
@@ -542,12 +542,12 @@ API_CALLABLE(ShowShopOwnerDialog) {
         case DIALOG_STATE_AWAIT_GREETING:
             if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = DIALOG_STATE_AWAIT_MAIN_MENU;
-                script->functionTemp[2] = 0;
-                ShopOwnerPrintState = msg_get_printer_for_msg(MSG_Choice_0003, &script->functionTemp[2]);
+                script->functionTempBool[2] = false;
+                ShopOwnerPrintState = msg_get_printer_for_msg(MSG_Choice_0003, &script->functionTempBool[2]);
             }
             break;
         case DIALOG_STATE_AWAIT_MAIN_MENU:
-            if (script->functionTemp[2] == 1) {
+            if (script->functionTempBool[2] == true) {
                 switch (ShopOwnerPrintState->curOption) {
                     case 0:
                         script->functionTemp[1] = shop_owner_continue_speech(SHOP_MSG_INSTRUCTIONS);
@@ -628,12 +628,12 @@ API_CALLABLE(ShowShopOwnerDialog) {
         case DIALOG_STATE_AWAIT_SELL_CONFIRM:
             if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = DIALOG_STATE_HANDLE_SELL_CHOICE;
-                script->functionTemp[2] = 0;
-                ShopOwnerPrintState = msg_get_printer_for_msg(MSG_Choice_0002, &script->functionTemp[2]);
+                script->functionTempBool[2] = false;
+                ShopOwnerPrintState = msg_get_printer_for_msg(MSG_Choice_0002, &script->functionTempBool[2]);
             }
             break;
         case DIALOG_STATE_HANDLE_SELL_CHOICE:
-            if (script->functionTemp[2] == 1) {
+            if (script->functionTempBool[2] == true) {
                 if (ShopOwnerPrintState->curOption == 0) {
                     add_coins(shop_get_sell_price(playerData->invItems[shop->selectedStoreItemSlot]));
                     playerData->invItems[shop->selectedStoreItemSlot] = ITEM_NONE;
@@ -655,12 +655,12 @@ API_CALLABLE(ShowShopOwnerDialog) {
         case DIALOG_STATE_INIT_SELL_MORE_CHOICE:
             if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = DIALOG_STATE_AWAIT_SELL_MORE_CHOICE;
-                script->functionTemp[2] = 0;
-                ShopOwnerPrintState = msg_get_printer_for_msg(MSG_Choice_0004, &script->functionTemp[2]);
+                script->functionTempBool[2] = false;
+                ShopOwnerPrintState = msg_get_printer_for_msg(MSG_Choice_0004, &script->functionTempBool[2]);
             }
             break;
         case DIALOG_STATE_AWAIT_SELL_MORE_CHOICE:
-            if (script->functionTemp[2] == 1) {
+            if (script->functionTempBool[2] == true) {
                 if (ShopOwnerPrintState->curOption == 0) {
                     script->functionTemp[1] = shop_owner_end_speech();
                     script->functionTemp[0] = DIALOG_STATE_INIT_SELL_CHOICE;
@@ -710,12 +710,12 @@ API_CALLABLE(ShowShopOwnerDialog) {
         case DIALOG_STATE_INIT_CHECK_MORE_CHOICE:
             if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = DIALOG_STATE_AWAIT_CHECK_MORE_CHOICE;
-                script->functionTemp[2] = 0;
-                ShopOwnerPrintState = msg_get_printer_for_msg(MSG_Choice_0005, &script->functionTemp[2]);
+                script->functionTempBool[2] = false;
+                ShopOwnerPrintState = msg_get_printer_for_msg(MSG_Choice_0005, &script->functionTempBool[2]);
             }
             break;
         case DIALOG_STATE_AWAIT_CHECK_MORE_CHOICE:
-            if (script->functionTemp[2] == 1) {
+            if (script->functionTempBool[2] == true) {
                 if (ShopOwnerPrintState->curOption == 0) {
                     script->functionTemp[1] = shop_owner_end_speech();
                     script->functionTemp[0] = DIALOG_STATE_INIT_CHECK_CHOICE;
@@ -763,12 +763,12 @@ API_CALLABLE(ShowShopOwnerDialog) {
         case DIALOG_STATE_INIT_CLAIM_MORE_CHOICE:
             if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = DIALOG_STATE_AWAIT_CLAIM_MORE_CHOICE;
-                script->functionTemp[2] = 0;
-                ShopOwnerPrintState = msg_get_printer_for_msg(MSG_Choice_0005, &script->functionTemp[2]);
+                script->functionTempBool[2] = false;
+                ShopOwnerPrintState = msg_get_printer_for_msg(MSG_Choice_0005, &script->functionTempBool[2]);
             }
             break;
         case DIALOG_STATE_AWAIT_CLAIM_MORE_CHOICE:
-            if (script->functionTemp[2] == 1) {
+            if (script->functionTempBool[2] == true) {
                 if (ShopOwnerPrintState->curOption == 0) {
                     script->functionTemp[1] = shop_owner_end_speech();
                     script->functionTemp[0] = DIALOG_STATE_INIT_CLAIM_CHOICE;

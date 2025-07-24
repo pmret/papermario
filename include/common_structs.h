@@ -435,6 +435,7 @@ typedef struct Evt {
     /*       */     s32 functionTemp[4];
     /*       */     f32 functionTempF[4];
     /*       */     void* functionTempPtr[4];
+    /*       */     bool functionTempBool[4];
     /*       */ };
     /* 0x080 */ ApiFunc callFunction;
     /* 0x084 */ union {
@@ -1263,7 +1264,7 @@ typedef struct MessagePrintState {
     /* 0x4FC */ s32 stateFlags;
     /* 0x500 */ s16 delayFlags; // ?
     /* 0x502 */ char unk_502[0x2];
-    /* 0x504 */ s32* closedWritebackBool; // if not null, writes 1 here when message closes
+    /* 0x504 */ bool* closedWritebackBool; // if not null, writes 1 here when message closes
     /* 0x508 */ u8 style;
     /* 0x509 */ u8 fadeInCounter;
     /* 0x50A */ Vec2s initOpenPos; // where the message originates from, in screen-space coords

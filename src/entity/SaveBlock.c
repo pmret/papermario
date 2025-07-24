@@ -11,8 +11,8 @@ extern Gfx Entity_SaveBlock_RenderNone[];
 
 extern s32 Entity_SaveBlock_ScriptResume[];
 
-BSS s32 SaveBlockTutorialPrinterClosed;
-BSS s32 SaveBlockResultPrinterClosed;
+BSS bool SaveBlockTutorialPrinterClosed;
+BSS bool SaveBlockResultPrinterClosed;
 BSS MessagePrintState* SaveBlockTutorialPrinter;
 BSS MessagePrintState* SaveBlockResultPrinter;
 

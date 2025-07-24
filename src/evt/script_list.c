@@ -44,7 +44,7 @@ BSS s32 ShowMessageScreenOffsetY;
 BSS s32 D_802DAE58[2]; // unused?
 BSS char D_802DAE60[0x400]; // unused?
 BSS MessagePrintState* gCurrentPrintContext;
-BSS s32 D_802DB264;
+BSS bool D_802DB264;
 BSS MessagePrintState* D_802DB268;
 BSS s32 D_802DB26C; // unused?
 

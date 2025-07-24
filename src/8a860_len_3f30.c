@@ -118,7 +118,7 @@ BSS s8 PopupDipMode;
 BSS s8 PopupMenu_WasStatusBarIgnoringChanges;
 BSS PopupMenu* gPopupMenu;
 BSS MessagePrintState* D_8010D6A0;
-BSS s32 D_8010D6A4;
+BSS bool D_8010D6A4;
 
 s8 status_bar_is_ignoring_changes(void);
 
@@ -1317,7 +1317,7 @@ s32 popup_menu_update(void) {
             gPopupState = POPUP_STATE_CANCEL_DIP_AWAIT_CHOICE;
             break;
         case POPUP_STATE_CANCEL_DIP_AWAIT_CHOICE:
-            if (D_8010D6A4 == 1) {
+            if (D_8010D6A4 == true) {
                 set_window_update(WIN_POPUP_PROMPT, WINDOW_UPDATE_HIDE);
                 switch (D_8010D6A0->curOption) {
                     case 0:

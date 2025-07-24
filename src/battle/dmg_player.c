@@ -1121,7 +1121,7 @@ bool dispatch_damage_event_player(s32 damageAmount, s32 event, bool noHitSound) 
 }
 
 // damage received from "damage over time" effects (only used for poison)
-bool dispatch_damage_tick_event_player(s32 damageAmount, s32 event) {
+s32 dispatch_damage_tick_event_player(s32 damageAmount, s32 event) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->curAttackElement = ELEMENT_END;

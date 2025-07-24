@@ -4,7 +4,7 @@ BSS char D_8029F660[0x400]; // unused?
 
 BSS MessagePrintState* gSpeakingActorPrintCtx;
 BSS MessagePrintState* D_8029FA64;
-BSS s32 gSpeakingActorPrintIsDone; // unk_08
+BSS bool gSpeakingActorPrintIsDone; // unk_08
 BSS s32 gSpeakingActorTalkAnim;
 BSS s32 gSpeakingActorIdleAnim;
 BSS Actor* gSpeakingActor;
@@ -277,11 +277,11 @@ API_CALLABLE(ShowBattleChoice) {
     if (isInitialCall) {
         s32 msgID = evt_get_variable(script, *args);
 
-        script->functionTemp[1] = 0;
-        D_8029FA64 = msg_get_printer_for_msg(msgID, &script->functionTemp[1]);
+        script->functionTempBool[1] = false;
+        D_8029FA64 = msg_get_printer_for_msg(msgID, &script->functionTempBool[1]);
     }
 
-    if (script->functionTemp[1] == 1) {
+    if (script->functionTempBool[1] == true) {
         u8 currentOption = D_8029FA64->curOption;
 
         gSpeakingActorPrintCtx->curOption = D_8029FA64->curOption;

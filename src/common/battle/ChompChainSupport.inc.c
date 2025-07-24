@@ -97,7 +97,7 @@ API_CALLABLE(N(ChompChainUpdate)) {
         return ApiStatus_BLOCK;
     }
 
-    #if CHOMP_CHAIN_UPDATE_Z == true
+    #if CHOMP_CHAIN_UPDATE_Z == TRUE
     posZ = evt_get_variable(script, *args++);
     #endif
 
@@ -180,7 +180,7 @@ API_CALLABLE(N(ChompChainUpdate)) {
             chain->settleAmt = 4.0f;
         }
 
-        #if CHOMP_CHAIN_UPDATE_Z == true
+        #if CHOMP_CHAIN_UPDATE_Z == TRUE
         chain->curPos.z = posZ;
         #endif
 

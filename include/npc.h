@@ -518,7 +518,7 @@ s32 npc_render_with_watt_idle_palettes(Npc*, s32, Matrix4f mtx);
 
 u16 npc_blend_palette_colors(u16 colorA, u16 colorB, s32 lerpAlpha);
 
-s32 npc_render_with_single_pal_blending(Npc*, s32, s32, Matrix4f mtx);
+s32 npc_render_with_single_pal_blending(Npc* npc, s32 yaw, bool hasDifferentIntervals, Matrix4f mtx);
 
 s32 npc_render_with_double_pal_blending(Npc*, s32, Matrix4f mtx);
 

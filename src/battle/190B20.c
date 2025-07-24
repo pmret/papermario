@@ -2340,7 +2340,8 @@ s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
 }
 
 // refresh the first (primary) damage popup
-void show_primary_damage_popup(f32 posX, f32 posY, f32 posZ, s32 damageAmt, bool angle) {
+// TODO: make last parameter an enum
+void show_primary_damage_popup(f32 posX, f32 posY, f32 posZ, s32 damageAmt, s32 angle) {
     s32 i;
 
     for (i = 0; i < 1; i++) {
@@ -2366,7 +2367,8 @@ void show_primary_damage_popup(f32 posX, f32 posY, f32 posZ, s32 damageAmt, bool
 }
 
 // show another damage popup, if any are available
-void show_next_damage_popup(f32 posX, f32 posY, f32 posZ, s32 damageAmt, bool angle) {
+// TODO: make last parameter an enum
+void show_next_damage_popup(f32 posX, f32 posY, f32 posZ, s32 damageAmt, s32 angle) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gDamageCountEffects); i++) {

@@ -104,7 +104,7 @@ u8 WattAttackPalettesAnim[] = {
 s16 SparkleSpawnIntervals[] = { -1, 15, 10, 7, 5, 3, 2, 1 };
 
 void update_player_actor_shadow(void);
-void appendGfx_npc_actor(s32 isPartner, s32 actorIndex);
+void appendGfx_npc_actor(bool isPartner, s32 actorIndex);
 
 void create_status_chill_out(s32 iconID);
 void enable_status_static(s32 iconID);
@@ -153,8 +153,8 @@ void render_with_paralyze_palettes(bool arg0, ActorPart* part, s32 yaw, Matrix4f
 void render_with_berserk_palettes(bool arg0, ActorPart* part, s32 yaw, Matrix4f mtx, bool skipAnimation);
 void render_with_watt_idle_palettes(bool arg0, ActorPart* part, s32 yaw, Matrix4f mtx, bool skipAnimation);
 void render_with_watt_attack_palettes(bool arg0, ActorPart* part, s32 yaw, Matrix4f mtx, bool skipAnimation);
-void render_with_player_debuff_palettes(bool arg0, ActorPart* part, s32 yaw, Matrix4f mtx, bool skipAnimation, s32 isPoison);
-void render_with_pal_blending(bool arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 skipAnimation);
+void render_with_player_debuff_palettes(bool isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, bool skipAnimation, bool isPoison);
+void render_with_pal_blending(bool isNpcSprite, ActorPart* part, s32 yaw, bool hasDifferentIntervals, Matrix4f mtx, bool skipAnimation);
 void render_with_palset_blending(bool arg0, ActorPart* part, s32 yaw, Matrix4f mtx, bool skipAnimation);
 s32 update_part_glow(bool isNpcSprite, ActorPart* part, s32 yaw, bool isReflection);
 s32 update_part_flash(bool isNpcSprite, ActorPart* part, s32 yaw, bool isReflection);

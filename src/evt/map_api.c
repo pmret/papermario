@@ -279,7 +279,7 @@ API_CALLABLE(SetModelFlags) {
     return ApiStatus_DONE2;
 }
 
-void apply_transform_to_children(ApiStatus (*apiFunc)(Evt*, s32), Evt* script) {
+void apply_transform_to_children(ApiStatus (*apiFunc)(Evt*, bool), Evt* script) {
     Evt localEvt;
     ModelTreeInfo* parentModelInfo;
     ModelTreeInfo* childModelInfo;

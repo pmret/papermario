@@ -182,7 +182,7 @@ s32 draw_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32
 s32 _update_message(MessagePrintState* printer);
 void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2);
 void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2);
-MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback, s32 arg2);
+MessagePrintState* _msg_get_printer_for_msg(s32 msgID, bool* donePrintingWriteback, s32 arg2);
 void msg_update_rewind_arrow(s32);
 void msg_draw_rewind_arrow(s32);
 void msg_draw_choice_pointer(MessagePrintState* printer);
@@ -1428,11 +1428,11 @@ s8* load_message_to_buffer(s32 msgID) {
     return prevBufferPos;
 }
 
-MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback) {
+MessagePrintState* msg_get_printer_for_msg(s32 msgID, bool* donePrintingWriteback) {
     return _msg_get_printer_for_msg(msgID, donePrintingWriteback, 0);
 }
 
-MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback, s32 arg2) {
+MessagePrintState* _msg_get_printer_for_msg(s32 msgID, bool* donePrintingWriteback, s32 arg2) {
     MessagePrintState* printer;
     s8* srcBuffer;
     s32 height;

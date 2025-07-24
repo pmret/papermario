@@ -56,7 +56,7 @@ void item_entity_update(ItemEntity*);
 void appendGfx_item_entity(void*);
 void draw_item_entities(void);
 void draw_ui_item_entities(void);
-s32 test_item_player_collision(ItemEntity*);
+bool test_item_player_collision(ItemEntity*);
 void update_item_entity_collectable(ItemEntity*);
 void draw_ui_item_entity_collectable(ItemEntity*);
 void update_item_entity_stationary(ItemEntity*);

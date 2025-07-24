@@ -49,7 +49,7 @@ Shadow* get_shadow_by_index(s32 index);
 s32 get_time_freeze_mode(void);
 void render_player_model(void);
 s16 get_game_mode(void);
-s32 is_picking_up_item(void);
+bool is_picking_up_item(void);
 
 f32 integrate_gravity(void);
 void gravity_use_fall_parms(void);
@@ -145,7 +145,7 @@ f32 player_check_collision_below(f32, s32* colliderID);
 bool can_trigger_loading_zone(void);
 void update_damage_popups(void);
 void show_action_rating(s32, Actor*, f32, f32, f32);
-s32 render_with_adjusted_palettes(s32, ActorPart*, s32, Matrix4f, s32);
+s32 render_with_adjusted_palettes(bool isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, bool skipAnimation);
 
 HeapNode* general_heap_create(void);
 void* general_heap_malloc(s32 size);
@@ -188,7 +188,7 @@ void entity_HugeBlueSwitch_init(Entity* entity);
 s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
 
 // Text
-MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* a1);
+MessagePrintState* msg_get_printer_for_msg(s32 msgID, bool* donePrintingWriteback);
 s32 msg_printer_load_msg(s32 msgID, MessagePrintState* printer);
 void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s32 x, s32 y);
 
@@ -629,7 +629,7 @@ void exec_entity_commandlist(Entity* entity);
 void show_start_recovery_shimmer(f32 x, f32 y, f32 z, s32 arg3);
 void show_recovery_shimmer(f32 x, f32 y, f32 z, s32 arg3);
 
-void show_next_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount, s32);
+void show_next_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount, s32 angle);
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void add_xz_vec3f_copy1(Vec3f* vector, f32 speed, f32 angleDeg);
 void add_xz_vec3f_copy2(Vec3f* vector, f32 speed, f32 angleDeg);
@@ -831,7 +831,7 @@ void partner_init_after_battle(s32 arg0);
 void load_map_script_lib(void);
 void remove_item_entity_by_index(s32 index);
 void set_entity_commandlist(Entity* entity, s32* entityScript);
-s32 is_player_dismounted(void);
+bool is_player_dismounted(void);
 void func_800EF300(void);
 void func_800EF314(void);
 void func_800EF43C(void);
@@ -947,13 +947,13 @@ void set_message_int_var(s32 value, s32 index);
 s32 store_item(s32 itemID);
 void open_status_bar_quickly(void);
 void show_immune_bonk(f32 x, f32 y, f32 z, s32, s32, s32);
-void show_primary_damage_popup(f32 x, f32 y, f32 z, s32 attack, s32 a);
+void show_primary_damage_popup(f32 x, f32 y, f32 z, s32 attack, s32 angle);
 s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion);
 void disable_actor_blur(Actor*);
 void reset_actor_blur(Actor*);
 void enable_actor_blur(Actor*);
 void apply_shock_effect(Actor*);
-void part_glow_off(s32, ActorPart*, s32 yaw, bool arg3);
+void part_glow_off(bool isNpcSprite, ActorPart* part, s32 yaw, bool isReflection);
 void part_flash_off(bool isNpcSprite, ActorPart* part, s32 yaw, bool isReflection);
 void part_flash_on(bool isNpcSprite, ActorPart* part, s32 yaw, bool isReflection);
 void _add_part_decoration(ActorPart*);
