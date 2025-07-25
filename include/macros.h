@@ -538,9 +538,7 @@ typedef s32 Difficulty2D[AC_DIFFICULTY_LEN][2];
 
 #define DMA_COPY_SEGMENT(segment) dma_copy(segment##_ROM_START, segment##_ROM_END, segment##_VRAM)
 
-#if __STDC_VERSION__ >= 202311L
-#include <stdbool.h>
-#else
+#if __STDC_VERSION__ < 202311L
 typedef enum {
     false,
     true
