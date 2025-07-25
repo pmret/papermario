@@ -128,7 +128,7 @@ EvtScript N(EVS_ReturnHome) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
@@ -224,13 +224,13 @@ EvtScript N(EVS_HandleEvent) = {
             Return
         CaseDefault
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_Sing) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(GetBattlePhase, LVar0)
     IfEq(LVar0, PHASE_FIRST_STRIKE)
@@ -239,37 +239,37 @@ EvtScript N(EVS_Attack_Sing) = {
     Else
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(BattleCamTargetActor, ACTOR_SELF)
-        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
         Call(MoveBattleCamOver, 70)
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         Label(0)
-        IfEq(LFlag0, FALSE)
+        IfEq(LFlag0, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim0E)
-            Set(LFlag0, TRUE)
+            Set(LFlag0, true)
         Else
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim0F)
-            Set(LFlag0, FALSE)
+            Set(LFlag0, false)
         EndIf
         Wait(1)
         Call(SetActorJumpGravity, ACTOR_SELF, Float(0.5))
         Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         Sub(LVar0, 20)
         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
         IfGt(LVar0, 0)
             Goto(0)
         EndIf
-        IfEq(LFlag0, FALSE)
+        IfEq(LFlag0, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim0E)
-            Set(LFlag0, TRUE)
+            Set(LFlag0, true)
         Else
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim0F)
-            Set(LFlag0, FALSE)
+            Set(LFlag0, false)
         EndIf
         Wait(1)
         Call(SetActorJumpGravity, ACTOR_SELF, Float(0.5))
         Call(SetGoalPos, ACTOR_SELF, -35, 0, 10)
-        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
     EndIf
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim01)
     Wait(10)
@@ -308,7 +308,7 @@ EvtScript N(EVS_Attack_Sing) = {
             ExecWait(N(EVS_ReturnHome))
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(SetActorYaw, ACTOR_SELF, 0)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -326,13 +326,13 @@ EvtScript N(EVS_Attack_Sing) = {
             ExecWait(N(EVS_ReturnHome))
         EndCaseGroup
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Move_Flee) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamDist, 300)
     Call(SetBattleCamOffsetY, 30)
@@ -347,7 +347,7 @@ EvtScript N(EVS_Move_Flee) = {
     Call(SetActorSpeed, ACTOR_SELF, Float(1.0))
     Sub(LVar0, 20)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Wait(20)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
@@ -355,10 +355,10 @@ EvtScript N(EVS_Move_Flee) = {
     Call(SetActorSpeed, ACTOR_SELF, Float(12.0))
     Add(LVar0, 200)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
-    Call(SetBattleFlagBits, BS_FLAGS1_BATTLE_FLED, TRUE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(SetBattleFlagBits, BS_FLAGS1_BATTLE_FLED, true)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Call(RemoveActor, ACTOR_SELF)
     Return
     End

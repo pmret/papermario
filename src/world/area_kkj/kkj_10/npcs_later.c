@@ -26,7 +26,7 @@ AnimID N(ExtraAnims_Koopatrol)[] = {
 #include "../common/ApproachPlayer100Units.inc.c"
 
 EvtScript N(EVS_CapturePeach) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(N(PreventNextPeachDisguise))
@@ -34,7 +34,7 @@ EvtScript N(EVS_CapturePeach) = {
     Call(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     Call(NpcFacePlayer, NPC_SELF, 5)
     Wait(20)
-    Call(PlayerFaceNpc, NPC_SELF, FALSE)
+    Call(PlayerFaceNpc, NPC_SELF, false)
     Call(SetPlayerAnimation, ANIM_Peach2_Gasp)
     Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim02)
     Call(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim09, ANIM_WorldKoopatrol_Anim02, 0, MSG_Peach_0174)
@@ -50,7 +50,7 @@ EvtScript N(EVS_CapturePeach) = {
     Wait(20)
     Call(GotoMapSpecial, Ref("kkj_14"), kkj_14_ENTRY_B, TRANSITION_PEACH_CAPTURED)
     Wait(100)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
@@ -64,13 +64,13 @@ EvtScript N(EVS_NpcIdle_Koopatrol_01) = {
             IfEq(LVar2, 0)
                 Call(N(GetPeachDisguise), LVar1)
                 IfEq(LVar1, PEACH_DISGUISE_NONE)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, TRUE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, true)
                     IfNe(LVar0, 0)
                         Call(BindNpcAI, NPC_SELF, Ref(N(EVS_CapturePeach)))
                         Set(LVar2, 1)
                     EndIf
                 Else
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, false)
                 EndIf
             EndIf
             Wait(1)
@@ -103,13 +103,13 @@ EvtScript N(EVS_NpcIdle_Koopatrol_02) = {
             IfEq(LVar2, 0)
                 Call(N(GetPeachDisguise), LVar1)
                 IfEq(LVar1, PEACH_DISGUISE_NONE)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, false)
                     IfNe(LVar0, 0)
                         Call(BindNpcAI, NPC_SELF, Ref(N(EVS_CapturePeach)))
                         Set(LVar2, 1)
                     EndIf
                 Else
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, FALSE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, false)
                 EndIf
             EndIf
             Wait(1)
@@ -135,7 +135,7 @@ EvtScript N(EVS_NpcIdle_Koopatrol_02) = {
 };
 
 EvtScript N(EVS_NpcInteract_Koopatrol_01) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetSelfVar, 0, LVar0)
     IfEq(LVar0, 0)
         Call(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim09, ANIM_WorldKoopatrol_Anim02, 5, MSG_Peach_013C)
@@ -144,13 +144,13 @@ EvtScript N(EVS_NpcInteract_Koopatrol_01) = {
         Call(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim09, ANIM_WorldKoopatrol_Anim02, 5, MSG_Peach_013D)
         Call(SetSelfVar, 0, 0)
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInteract_Koopatrol_02) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(N(GetPeachDisguise), LVar0)
     IfEq(LVar0, PEACH_DISGUISE_CLUBBA)
         Call(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim09, ANIM_WorldKoopatrol_Anim02, 5, MSG_Peach_0140)
@@ -164,7 +164,7 @@ EvtScript N(EVS_NpcInteract_Koopatrol_02) = {
             Call(SetSelfVar, 0, 0)
         EndIf
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

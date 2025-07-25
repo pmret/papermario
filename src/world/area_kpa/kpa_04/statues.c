@@ -28,13 +28,13 @@ EvtScript N(EVS_PushStatue_Impl) = {
         Return
     EndIf
 #endif
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PlaySoundAtCollider, COLLIDER_o160, SOUND_LOOP_MOVE_STATUE, SOUND_SPACE_DEFAULT)
     Thread
         Call(ShakeCam, CAM_DEFAULT, 0, 100, Float(0.6))
     EndThread
     Thread
-        Call(EnableGroup, MODEL_g22, TRUE)
+        Call(EnableGroup, MODEL_g22, true)
         Call(MakeLerp, 6, 100, 100, EASING_LINEAR)
         Loop(0)
             Call(UpdateLerp)
@@ -68,7 +68,7 @@ EvtScript N(EVS_PushStatue_Impl) = {
             EndIf
         EndLoop
         Call(SetPlayerActionState, ACTION_STATE_IDLE)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndThread
 #if VERSION_JP
     Call(MakeLerp, 0, LVarA, 100, EASING_LINEAR)
@@ -122,8 +122,8 @@ EvtScript N(EVS_PushStatue_FromRight) = {
     EndIf
     Set(GB_KPA04_StatuePosition, LVar9)
     IfNe(GB_KPA04_StatuePosition, 0)
-        Call(EnableModel, MODEL_o187, TRUE)
-        Call(EnableModel, MODEL_o180, TRUE)
+        Call(EnableModel, MODEL_o187, true)
+        Call(EnableModel, MODEL_o180, true)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitts, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     Return
@@ -135,7 +135,7 @@ EvtScript N(EVS_SetupStatues) = {
     Switch(GB_KPA04_StatuePosition)
         CaseEq(0)
             BindTrigger(Ref(N(EVS_PushStatue_FromRight)), TRIGGER_WALL_PUSH, COLLIDER_o160, 1, 0)
-            Call(EnableGroup, MODEL_g22, FALSE)
+            Call(EnableGroup, MODEL_g22, false)
         CaseEq(1)
             Call(TranslateGroup, MODEL_g20, -50, 0, 0)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitts, COLLIDER_FLAGS_UPPER_MASK)

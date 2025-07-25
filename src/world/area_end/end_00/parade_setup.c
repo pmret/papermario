@@ -38,7 +38,7 @@ API_CALLABLE(N(CreateParadeNPC)) {
     bp.onUpdate = NULL;
     bp.onRender = NULL;
 
-    spr_allocateBtlComponentsOnWorldHeap = TRUE;
+    spr_allocateBtlComponentsOnWorldHeap = true;
 
     npc = get_npc_by_index(create_standard_npc(&bp, npcInfo->animList));
     npc->npcID = npcID;
@@ -70,7 +70,7 @@ API_CALLABLE(N(ParadeSpriteHeapFree)) {
 API_CALLABLE(N(UpdateCameraScroll)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    camera->panActive = TRUE;
+    camera->panActive = true;
     camera->movePos.x += PARADE_SCROLL_RATE / (f32) DT;
     return ApiStatus_DONE2;
 }
@@ -101,7 +101,7 @@ EvtScript N(EVS_SetupInitialCamera) = {
     Call(UseSettingsFrom, CAM_DEFAULT, PARADE_START, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, PARADE_START, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Return
     End
 };
@@ -121,7 +121,7 @@ EvtScript N(EVS_UpdateScrollPos) = {
 
 EvtScript N(EVS_SetNpcShadowScale) = {
     Call(N(SetNpcShadowScale), LVar0, LVar2)
-    Call(SetNpcFlagBits, LVar0, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    Call(SetNpcFlagBits, LVar0, NPC_FLAG_DIRTY_SHADOW, true)
     Return
     End
 };
@@ -133,33 +133,33 @@ EvtScript N(EVS_OffsetNpcScroll) = {
 };
 
 EvtScript N(EVS_UpdateTexPan_Ground) = {
-    Call(EnableTexPanning, MODEL_j1, TRUE)
-    Call(EnableTexPanning, MODEL_j2, TRUE)
-    Call(EnableTexPanning, MODEL_j3, TRUE)
-    Call(EnableTexPanning, MODEL_j4, TRUE)
-    Call(EnableTexPanning, MODEL_j5, TRUE)
-    Call(EnableTexPanning, MODEL_j6, TRUE)
-    Call(EnableTexPanning, MODEL_j7, TRUE)
-    Call(EnableTexPanning, MODEL_j8, TRUE)
-    Call(EnableTexPanning, MODEL_j9, TRUE)
-    Call(EnableTexPanning, MODEL_j10, TRUE)
-    Call(EnableTexPanning, MODEL_j11, TRUE)
-    Call(EnableTexPanning, MODEL_j12, TRUE)
-    Call(EnableTexPanning, MODEL_j13, TRUE)
-    Call(EnableTexPanning, MODEL_j14, TRUE)
-    Call(EnableTexPanning, MODEL_j15, TRUE)
-    Call(EnableTexPanning, MODEL_j16, TRUE)
-    Call(EnableTexPanning, MODEL_j17, TRUE)
-    Call(EnableTexPanning, MODEL_j18, TRUE)
-    Call(EnableTexPanning, MODEL_j19, TRUE)
-    Call(EnableTexPanning, MODEL_j20, TRUE)
-    Call(EnableTexPanning, MODEL_j21, TRUE)
-    Call(EnableTexPanning, MODEL_j22, TRUE)
-    Call(EnableTexPanning, MODEL_j23, TRUE)
-    Call(EnableTexPanning, MODEL_j24, TRUE)
-    Call(EnableTexPanning, MODEL_j25, TRUE)
-    Call(EnableTexPanning, MODEL_j26, TRUE)
-    Call(EnableTexPanning, MODEL_j27, TRUE)
+    Call(EnableTexPanning, MODEL_j1, true)
+    Call(EnableTexPanning, MODEL_j2, true)
+    Call(EnableTexPanning, MODEL_j3, true)
+    Call(EnableTexPanning, MODEL_j4, true)
+    Call(EnableTexPanning, MODEL_j5, true)
+    Call(EnableTexPanning, MODEL_j6, true)
+    Call(EnableTexPanning, MODEL_j7, true)
+    Call(EnableTexPanning, MODEL_j8, true)
+    Call(EnableTexPanning, MODEL_j9, true)
+    Call(EnableTexPanning, MODEL_j10, true)
+    Call(EnableTexPanning, MODEL_j11, true)
+    Call(EnableTexPanning, MODEL_j12, true)
+    Call(EnableTexPanning, MODEL_j13, true)
+    Call(EnableTexPanning, MODEL_j14, true)
+    Call(EnableTexPanning, MODEL_j15, true)
+    Call(EnableTexPanning, MODEL_j16, true)
+    Call(EnableTexPanning, MODEL_j17, true)
+    Call(EnableTexPanning, MODEL_j18, true)
+    Call(EnableTexPanning, MODEL_j19, true)
+    Call(EnableTexPanning, MODEL_j20, true)
+    Call(EnableTexPanning, MODEL_j21, true)
+    Call(EnableTexPanning, MODEL_j22, true)
+    Call(EnableTexPanning, MODEL_j23, true)
+    Call(EnableTexPanning, MODEL_j24, true)
+    Call(EnableTexPanning, MODEL_j25, true)
+    Call(EnableTexPanning, MODEL_j26, true)
+    Call(EnableTexPanning, MODEL_j27, true)
     Thread
         Set(LVar0, 0)
         Set(LVar1, 0)
@@ -177,7 +177,7 @@ EvtScript N(EVS_UpdateTexPan_Ground) = {
 };
 
 EvtScript N(EVS_TexPan_Clouds) = {
-    Call(EnableTexPanning, MODEL_cloud, TRUE)
+    Call(EnableTexPanning, MODEL_cloud, true)
     Set(LVar0, 0)
     Loop(0)
         Add(LVar0, 0x8000)
@@ -189,7 +189,7 @@ EvtScript N(EVS_TexPan_Clouds) = {
 };
 
 EvtScript N(EVS_TexPan_Water) = {
-    Call(EnableTexPanning, MODEL_umi, TRUE)
+    Call(EnableTexPanning, MODEL_umi, true)
     Set(LVar0, 0)
     Set(LVar1, 0)
     Set(LVar2, 0)
@@ -982,7 +982,7 @@ EvtScript N(EVS_ManageNpcPool) = {
     Call(N(CreateParadeNPC), NPC_Boo3)
     Call(N(CreateParadeNPC), NPC_TubbasBody)
     Call(N(SetNpcShadowScale), NPC_TubbasBody, Float(4.0))
-    Call(SetNpcFlagBits, NPC_TubbasBody, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    Call(SetNpcFlagBits, NPC_TubbasBody, NPC_FLAG_DIRTY_SHADOW, true)
     Loop(0)
         Wait(1)
         Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1003,7 +1003,7 @@ EvtScript N(EVS_ManageNpcPool) = {
     Call(N(CreateParadeNPC), NPC_BlueGoombaBros)
     Call(N(ParadeSpriteHeapFree), LVar0)
     Call(N(SetNpcShadowScale), NPC_GoombaKing, Float(3.0))
-    Call(SetNpcFlagBits, NPC_GoombaKing, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    Call(SetNpcFlagBits, NPC_GoombaKing, NPC_FLAG_DIRTY_SHADOW, true)
     Loop(0)
         Wait(1)
         Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1064,9 +1064,9 @@ EvtScript N(EVS_ManageNpcPool) = {
     Call(N(CreateParadeNPC), NPC_RuffPuff1)
     Call(N(CreateParadeNPC), NPC_RuffPuff2)
     Call(N(SetNpcShadowScale), 69, Float(6.0))
-    Call(SetNpcFlagBits, NPC_HuffNPuffBody, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    Call(SetNpcFlagBits, NPC_HuffNPuffBody, NPC_FLAG_DIRTY_SHADOW, true)
     Call(N(SetNpcShadowScale), 74, Float(3.0))
-    Call(SetNpcFlagBits, NPC_GourmetGuy, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    Call(SetNpcFlagBits, NPC_GourmetGuy, NPC_FLAG_DIRTY_SHADOW, true)
     Loop(0)
         Wait(1)
         Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1088,9 +1088,9 @@ EvtScript N(EVS_ManageNpcPool) = {
     Call(N(CreateParadeNPC), NPC_CrystalBit3)
     Call(N(ParadeSpriteHeapFree), LVar0)
     Call(N(SetNpcShadowScale), NPC_TrueCrystalKing, Float(2.0))
-    Call(SetNpcFlagBits, NPC_TrueCrystalKing, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    Call(SetNpcFlagBits, NPC_TrueCrystalKing, NPC_FLAG_DIRTY_SHADOW, true)
     Call(N(SetNpcShadowScale), NPC_FakeCrystalKing, Float(2.0))
-    Call(SetNpcFlagBits, NPC_FakeCrystalKing, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    Call(SetNpcFlagBits, NPC_FakeCrystalKing, NPC_FLAG_DIRTY_SHADOW, true)
     Loop(0)
         Wait(1)
         Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1141,11 +1141,11 @@ EvtScript N(EVS_ManageNpcPool) = {
     Call(N(CreateParadeNPC), NPC_BurntBowser)
     Call(N(CreateParadeNPC), NPC_BurntBowserPropeller)
     Call(N(SetNpcShadowScale), NPC_Bowser, Float(3.0))
-    Call(SetNpcFlagBits, NPC_Bowser, NPC_FLAG_DIRTY_SHADOW, TRUE)
+    Call(SetNpcFlagBits, NPC_Bowser, NPC_FLAG_DIRTY_SHADOW, true)
     Call(N(SetNpcShadowScale), NPC_BurntBowser, Float(3.0))
-    Call(SetNpcFlagBits, NPC_BurntBowser, NPC_FLAG_DIRTY_SHADOW, TRUE)
-    Call(EnableNpcShadow, NPC_BowserPropeller, FALSE)
-    Call(EnableNpcShadow, NPC_BurntBowserPropeller, FALSE)
+    Call(SetNpcFlagBits, NPC_BurntBowser, NPC_FLAG_DIRTY_SHADOW, true)
+    Call(EnableNpcShadow, NPC_BowserPropeller, false)
+    Call(EnableNpcShadow, NPC_BurntBowserPropeller, false)
     Return
     End
 };
@@ -1165,8 +1165,8 @@ EvtScript N(EVS_ParadePhase_PlayCredits) = {
 };
 
 EvtScript N(EVS_ManageParade) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Thread
         Label(0)
         Call(SetPlayerPos, NPC_DISPOSE_LOCATION)

@@ -85,7 +85,7 @@ EvtScript N(EVS_Misstar_Bobbing) = {
 
 EvtScript N(EVS_NpcAI_Misstar) = {
     ExecGetTID(N(EVS_Misstar_Bobbing), LVarA)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(AwaitPlayerApproach, LVar0, LVar2, 60)
     Call(N(MisstarFlyAway))

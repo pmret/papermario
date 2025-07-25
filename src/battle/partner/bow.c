@@ -93,7 +93,7 @@ API_CALLABLE(N(IsPlayerImmobile)) {
                      || playerActor->debuff == STATUS_KEY_STOP;
 
     if (playerActor->stoneStatus == STATUS_KEY_STONE) {
-        isImmobile = TRUE;
+        isImmobile = true;
     }
 
     script->varTable[0] = isImmobile;
@@ -243,7 +243,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(InterruptActionCommand)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
     Switch(LVar0)
@@ -304,7 +304,7 @@ EvtScript N(EVS_HandleEvent) = {
         EndCaseGroup
         CaseDefault
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };
@@ -342,14 +342,14 @@ EvtScript N(runAway) = {
 };
 
 EvtScript N(runAwayFail) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetActorSpeed, ACTOR_PARTNER, Float(6.0))
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Run)
     Call(SetActorYaw, ACTOR_PARTNER, 0)
     Call(RunToGoal, ACTOR_PARTNER, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };
@@ -368,7 +368,7 @@ EvtScript N(EVS_HandlePhase) = {
 };
 
 EvtScript N(EVS_ExecuteAction) = {
-    Call(ShowActionHud, TRUE)
+    Call(ShowActionHud, true)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar0)
         CaseEq(BTL_MENU_TYPE_STAR_POWERS)
@@ -385,10 +385,10 @@ EvtScript N(EVS_ExecuteAction) = {
         CaseEq(MOVE_SMACK3)
             ExecWait(N(smack))
         CaseEq(MOVE_OUTTA_SIGHT)
-            Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+            Call(SetBattleFlagBits, BS_FLAGS1_4000, false)
             ExecWait(N(outtaSight))
         CaseEq(MOVE_SPOOK)
-            Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+            Call(SetBattleFlagBits, BS_FLAGS1_4000, false)
             ExecWait(N(spook))
         CaseEq(MOVE_FAN_SMACK)
             ExecWait(N(fanSmack))
@@ -490,7 +490,7 @@ EvtScript N(smack) = {
         Set(LVar0, LVarB)
         Add(LVar0, -3)
         Call(action_command_smack_start, 0, LVar0, AC_DIFFICULTY_STANDARD, ACV_SMACK_HAND)
-        Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+        Call(SetBattleFlagBits, BS_FLAGS1_4000, false)
     EndThread
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)
     Call(SetPartAlpha, ACTOR_PARTNER, -1, 55)
@@ -523,7 +523,7 @@ EvtScript N(smack) = {
     Set(LVarF, 0)
     Set(LVarE, 0)
     Set(LVarD, 0)
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Call(InitTargetIterator)
     Call(SetGoalToTarget, ACTOR_SELF)
     Loop(15)
@@ -560,13 +560,13 @@ EvtScript N(smack) = {
             Goto(2)
         EndIf
         Call(SetActorScale, ACTOR_PARTNER, Float(1.4), Float(1.4), Float(1.0))
-        IfEq(LFlag0, FALSE)
+        IfEq(LFlag0, false)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapOnce)
-            Set(LFlag0, TRUE)
+            Set(LFlag0, true)
             Call(SetDamageSource, DMG_SRC_NEXT_SLAP_LEFT)
         Else
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapBack)
-            Set(LFlag0, FALSE)
+            Set(LFlag0, false)
             Call(SetDamageSource, DMG_SRC_NEXT_SLAP_RIGHT)
         EndIf
         Wait(2)
@@ -616,13 +616,13 @@ EvtScript N(smack) = {
         Call(MoveBattleCamOver, 5)
     EndIf
     Call(SetActorScale, ACTOR_PARTNER, Float(1.4), Float(1.4), Float(1.0))
-    IfEq(LFlag0, FALSE)
+    IfEq(LFlag0, false)
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapOnce)
-        Set(LFlag0, TRUE)
+        Set(LFlag0, true)
         Call(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
     Else
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapBack)
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         Call(SetDamageSource, DMG_SRC_LAST_SLAP_RIGHT)
     EndIf
     Wait(2)
@@ -653,8 +653,8 @@ EvtScript N(smack) = {
 };
 
 EvtScript N(outtaSight) = {
-    Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, TRUE)
-    Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_USING_IDLE_ANIM, FALSE)
+    Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, true)
+    Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_USING_IDLE_ANIM, false)
     Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -129, 28, 0)
     Call(SetBattleCamOffsetY, 15)
@@ -714,7 +714,7 @@ EvtScript N(outtaSight) = {
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 30)
     Call(N(ApplyOuttaSight))
-    Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, FALSE)
+    Call(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, false)
     Return
     End
 };
@@ -806,56 +806,56 @@ EvtScript N(spook) = {
                 IfEq(LVar2, 7)
                     Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, true)
                     Set(LVar2, 8)
                 EndIf
             CaseGt(70)
                 IfEq(LVar2, 6)
                     Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, true)
                     Set(LVar2, 7)
                 EndIf
             CaseGt(60)
                 IfEq(LVar2, 5)
                     Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, true)
                     Set(LVar2, 6)
                 EndIf
             CaseGt(50)
                 IfEq(LVar2, 4)
                     Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, true)
                     Set(LVar2, 5)
                 EndIf
             CaseGt(40)
                 IfEq(LVar2, 3)
                     Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, true)
                     Set(LVar2, 4)
                 EndIf
             CaseGt(30)
                 IfEq(LVar2, 2)
                     Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, true)
                     Set(LVar2, 3)
                 EndIf
             CaseGt(20)
                 IfEq(LVar2, 1)
                     Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, true)
                     Set(LVar2, 2)
                 EndIf
             CaseGt(10)
                 IfEq(LVar2, 0)
                     Call(AddBattleCamDist, -20)
                     Call(MoveBattleCamOver, 20)
-                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, TRUE)
+                    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_NONE, BTL_CAM_XADJ_NONE, true)
                     Set(LVar2, 1)
                 EndIf
         EndSwitch
@@ -1002,7 +1002,7 @@ EvtScript N(fanSmack) = {
         Set(LVar0, LVarB)
         Add(LVar0, -3)
         Call(action_command_smack_start, 0, LVar0, AC_DIFFICULTY_STANDARD, ACV_SMACK_FAN)
-        Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+        Call(SetBattleFlagBits, BS_FLAGS1_4000, false)
     EndThread
     Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)
     Call(SetPartAlpha, ACTOR_PARTNER, -1, 55)
@@ -1034,7 +1034,7 @@ EvtScript N(fanSmack) = {
     Set(LVarF, 0)
     Set(LVarE, 0)
     Set(LVarD, 0)
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Call(InitTargetIterator)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_CelebrateFast)
@@ -1077,13 +1077,13 @@ EvtScript N(fanSmack) = {
             Goto(2)
         EndIf
         Call(SetActorScale, ACTOR_PARTNER, Float(1.4), Float(1.4), Float(1.0))
-        IfEq(LFlag0, FALSE)
+        IfEq(LFlag0, false)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackOnce)
-            Set(LFlag0, TRUE)
+            Set(LFlag0, true)
             Call(SetDamageSource, DMG_SRC_NEXT_FAN_SMACK_LEFT)
         Else
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackBack)
-            Set(LFlag0, FALSE)
+            Set(LFlag0, false)
             Call(SetDamageSource, DMG_SRC_NEXT_FAN_SMACK_RIGHT)
         EndIf
         Wait(2)
@@ -1156,13 +1156,13 @@ EvtScript N(fanSmack) = {
         Call(MoveBattleCamOver, 5)
     EndIf
     Call(SetActorScale, ACTOR_PARTNER, Float(1.4), Float(1.4), Float(1.0))
-    IfEq(LFlag0, FALSE)
+    IfEq(LFlag0, false)
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackOnce)
-        Set(LFlag0, TRUE)
+        Set(LFlag0, true)
         Call(SetDamageSource, DMG_SRC_LAST_FAN_SMACK_LEFT)
     Else
         Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackBack)
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         Call(SetDamageSource, DMG_SRC_LAST_FAN_SMACK_RIGHT)
     EndIf
     Wait(2)

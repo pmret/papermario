@@ -10,7 +10,7 @@ API_CALLABLE(N(GetFloorCollider2)) {
 }
 
 API_CALLABLE(N(func_8024036C_C9A56C)) {
-    snd_ambient_fade_out(0, TRUE);
+    snd_ambient_fade_out(0, true);
     return ApiStatus_DONE2;
 }
 
@@ -35,15 +35,15 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
             Goto(0)
         EndIf
     // start scene (but wait for player to stop being hurt if they fell in the lava)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetPlayerAnimation, LVar0)
     IfEq(LVar0, ANIM_MarioW2_Thrown)
         Wait(35)
     EndIf
     Wait(10)
 EndIf //@bug unmatched endif
-    Call(PlayerFaceNpc, NPC_Kolorado, FALSE)
-    Set(AF_KZN23_SceneStarted, TRUE)
+    Call(PlayerFaceNpc, NPC_Kolorado, false)
+    Set(AF_KZN23_SceneStarted, true)
     Thread
         Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
         Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -52,7 +52,7 @@ EndIf //@bug unmatched endif
             Call(SetNpcJumpscale, NPC_SELF, Float(2.0))
             Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
             Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 15)
-            IfEq(AF_KZN23_GrabbedKolorado, FALSE)
+            IfEq(AF_KZN23_GrabbedKolorado, false)
                 Wait(1)
                 Goto(1)
             EndIf
@@ -65,7 +65,7 @@ EndIf //@bug unmatched endif
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-4.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(480.0), Float(299.6))
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Call(SetPlayerSpeed, Float(3.0))
@@ -74,7 +74,7 @@ EndIf //@bug unmatched endif
     Wait(20)
     Call(ShowMessageAtWorldPos, MSG_CH5_0116, 440, 240, 165)
     Wait(20)
-    Set(AF_KZN23_MessageClosed, TRUE)
+    Set(AF_KZN23_MessageClosed, true)
     Return
     End
 };
@@ -124,25 +124,25 @@ EvtScript N(EVS_ControlCamera) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(390.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-9.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Label(10)
         Wait(1)
-        IfEq(AF_KZN23_GrabbedKolorado, FALSE)
+        IfEq(AF_KZN23_GrabbedKolorado, false)
             Goto(10)
         EndIf
     Call(SetPanTarget, CAM_DEFAULT, 300, 150, 170)
     Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.3))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Label(20)
         Wait(1)
-        IfEq(AF_KZN22_FlewAway, FALSE)
+        IfEq(AF_KZN22_FlewAway, false)
             Goto(20)
         EndIf
     Call(SetPanTarget, CAM_DEFAULT, 368, 310, 170)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.8))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -153,7 +153,7 @@ EvtScript N(EVS_SetCharacterPositions) = {
     Add(LVar4, 10)
     Sub(LVar3, 5)
     Call(SetNpcPos, NPC_Kolorado, LVar4, LVar2, LVar3)
-    IfEq(AF_KZN23_GrabbedPlayer, TRUE)
+    IfEq(AF_KZN23_GrabbedPlayer, true)
         Sub(LVar4, 20)
         Add(LVar3, 10)
         Call(SetPlayerPos, LVar4, LVar2, LVar3)
@@ -168,15 +168,15 @@ EvtScript N(EVS_SetCharacterPositions) = {
 EvtScript N(EVS_Scene_Misstar) = {
     Loop(0)
         Wait(1)
-        IfNe(AF_KZN23_MessageClosed, FALSE)
+        IfNe(AF_KZN23_MessageClosed, false)
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Exec(N(EVS_ControlCamera))
     Call(SetNpcJumpscale, NPC_SELF, Float(3.0))
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -191,7 +191,7 @@ EvtScript N(EVS_Scene_Misstar) = {
         IfEq(LVar0, 1)
             Goto(10)
         EndIf
-    Set(AF_KZN23_GrabbedKolorado, TRUE)
+    Set(AF_KZN23_GrabbedKolorado, true)
     Call(SetNpcRotationPivot, NPC_Kolorado, 10)
     Call(SetNpcRotation, NPC_Kolorado, 0, 0, 180)
     Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Panic)
@@ -214,12 +214,12 @@ EvtScript N(EVS_Scene_Misstar) = {
         IfEq(LVar0, 1)
             Goto(20)
         EndIf
-    Set(AF_KZN23_GrabbedPlayer, TRUE)
+    Set(AF_KZN23_GrabbedPlayer, true)
     Wait(1)
     Call(SetPlayerAnimation, ANIM_MarioW2_Carried)
     Thread
         Wait(25)
-        Set(AF_KZN22_FlewAway, TRUE)
+        Set(AF_KZN22_FlewAway, true)
         Call(N(func_8024036C_C9A56C))
     EndThread
     Call(InterpNpcYaw, NPC_SELF, 90, 0)
@@ -253,11 +253,11 @@ EvtScript N(EVS_Scene_Misstar) = {
 EvtScript N(EVS_NpcInit_Misstar) = {
     Call(SetNpcPos, NPC_SELF, 300, 180, 80)
     Call(SetNpcAnimation, NPC_SELF, ANIM_WorldMisstar_IdleAngry)
-    Set(AF_KZN23_SceneStarted, FALSE)
-    Set(AF_KZN23_MessageClosed, FALSE)
-    Set(AF_KZN23_GrabbedKolorado, FALSE)
-    Set(AF_KZN23_GrabbedPlayer, FALSE)
-    Set(AF_KZN22_FlewAway, FALSE)
+    Set(AF_KZN23_SceneStarted, false)
+    Set(AF_KZN23_MessageClosed, false)
+    Set(AF_KZN23_GrabbedKolorado, false)
+    Set(AF_KZN23_GrabbedPlayer, false)
+    Set(AF_KZN22_FlewAway, false)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_Scene_Misstar)))
     Return
     End

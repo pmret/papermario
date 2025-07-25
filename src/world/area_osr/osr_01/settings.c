@@ -4,7 +4,7 @@ s32 N(map_init)(void) {
     if (gGameStatusPtr->entryID == osr_01_ENTRY_3) {
         sprintf(wMapBgName, "hos_bg");
     }
-    return FALSE;
+    return false;
 }
 
 EntryList N(Entrances) = {

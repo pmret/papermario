@@ -32,7 +32,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_PEACH_CASTLE_GROUNDS)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     Exec(N(EVS_SetupMusic))
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
     Exec(N(EVS_BindExitTriggers))

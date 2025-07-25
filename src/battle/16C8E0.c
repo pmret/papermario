@@ -301,7 +301,7 @@ void btl_update(void) {
         battleStatus->preUpdateCallback();
     }
 
-    cond = TRUE;
+    cond = true;
     if (battleStatus->waitForState == BATTLE_STATE_0 || battleStatus->waitForState != gBattleState) {
         switch (gBattleState) {
             case BATTLE_STATE_NEGATIVE_1:
@@ -309,7 +309,7 @@ void btl_update(void) {
                 return;
             case BATTLE_STATE_NORMAL_START:
                 btl_state_update_normal_start();
-                cond = FALSE;
+                cond = false;
                 break;
             case BATTLE_STATE_BEGIN_PLAYER_TURN:
                 btl_state_update_begin_player_turn();
@@ -409,7 +409,7 @@ void btl_update(void) {
                 break;
             case BATTLE_STATE_END_DEMO_BATTLE:
                 btl_state_update_end_demo_battle();
-                cond = FALSE;
+                cond = false;
                 break;
         }
     }
@@ -491,7 +491,7 @@ void btl_update(void) {
 }
 
 void btl_draw_ui(void) {
-    s32 changed = FALSE;
+    s32 changed = false;
     s32 state;
 
     do {} while (0); // TODO required to match (probably can be removed with some sort of control flow inversion)
@@ -501,7 +501,7 @@ void btl_draw_ui(void) {
     if (gBattleState != gLastDrawBattleState) {
         state = gLastDrawBattleState;
         gLastDrawBattleState = gBattleState;
-        changed = TRUE;
+        changed = true;
     } else {
         switch (state) {
             case BATTLE_STATE_NEGATIVE_1:
@@ -731,7 +731,7 @@ u16 blend_tattle_background_channel(u16 a, s32 b, s32 alpha) {
 
 void tattle_cam_pre_render(Camera* camera) {
     Camera* cam = &gCameras[gCurrentCamID];
-    s32 fogEnabled = FALSE;
+    s32 fogEnabled = false;
     u8 r1, g1, b1, a1;
     s32 fogR, fogG, fogB, fogA;
     s32 i;
@@ -747,7 +747,7 @@ void tattle_cam_pre_render(Camera* camera) {
     hide_foreground_models_unchecked();
 
     if (is_world_fog_enabled()) {
-        fogEnabled = TRUE;
+        fogEnabled = true;
         get_world_fog_color(&fogR, &fogG, &fogB, &fogA);
         fogA = gGameStatusPtr->backgroundDarkness;
         mdl_get_shroud_tint_params(&r1, &g1, &b1, &a1);
@@ -975,11 +975,11 @@ void btl_update_starpoints_display(void) {
             }
         }
 
-        cond = TRUE;
+        cond = true;
         if (D_802809F4 != 0) {
             if (D_802809F5 > 8) {
                 if (D_802809F5 <= 12) {
-                    cond = FALSE;
+                    cond = false;
                 } else {
                     D_802809F5 = 0;
                 }
@@ -1168,7 +1168,7 @@ void btl_delete_actor(Actor* actor) {
     remove_effect(actor->disableEffect);
 
     if (actor->attackResultEffect != NULL) {
-        actor->attackResultEffect->data.attackResultText->isVisible = FALSE;
+        actor->attackResultEffect->data.attackResultText->isVisible = false;
     }
 
     battleStatus = &gBattleStatus;
@@ -1211,7 +1211,7 @@ void btl_delete_player_actor(Actor* player) {
     remove_effect(player->disableEffect);
 
     if (player->attackResultEffect != NULL) {
-        player->attackResultEffect->data.attackResultText->isVisible = FALSE;
+        player->attackResultEffect->data.attackResultText->isVisible = false;
     }
 
     heap_free(movement);

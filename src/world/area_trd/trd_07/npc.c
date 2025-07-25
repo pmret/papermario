@@ -13,14 +13,14 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
         CaseEq(OUTCOME_PLAYER_WON)
             Call(N(GetDefeatedEnemyCount), LVar0)
             IfEq(LVar0, 1) // ???
-                Set(GF_TRD07_Defeated_DungeonAmbush, TRUE)
+                Set(GF_TRD07_Defeated_DungeonAmbush, true)
                 Exec(N(EVS_RestoreMagicDoors))
             EndIf
             Call(DoNpcDefeat)
         CaseEq(OUTCOME_PLAYER_FLED)
             Call(OnPlayerFled, 0)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -30,7 +30,7 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
 EvtScript N(EVS_NpcInit_KoopaTroopa) = {
     Call(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_KoopaTroopa)))
-    IfEq(GF_TRD07_Defeated_DungeonAmbush, TRUE)
+    IfEq(GF_TRD07_Defeated_DungeonAmbush, true)
         Call(RemoveNpc, NPC_SELF)
     EndIf
     Return
@@ -43,7 +43,7 @@ NpcData N(NpcData_KoopaTroopa) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -75, 0, -30 },
@@ -66,7 +66,7 @@ NpcData N(NpcData_ParaTroopa_01) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 50, 30 },
@@ -89,7 +89,7 @@ NpcData N(NpcData_ParaTroopa_02) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 75, 50, -30 },

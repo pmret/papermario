@@ -19,7 +19,7 @@ EvtScript N(EVS_DroppingVine) = {
     Set(LVar5, LVar2)
     Set(LVar4, LVar1)
     Set(LVar3, LVar0)
-    Call(EnableModel, LVar6, FALSE)
+    Call(EnableModel, LVar6, false)
     Label(0)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(N(CheckVineTriggerDist))
@@ -29,7 +29,7 @@ EvtScript N(EVS_DroppingVine) = {
         EndIf
     Thread
         Wait(5)
-        Call(EnableModel, LVar6, TRUE)
+        Call(EnableModel, LVar6, true)
     EndThread
     IfNe(LVarA, 0)
         Thread
@@ -58,7 +58,7 @@ EvtScript N(EVS_DroppingVine) = {
             Wait(1)
             Goto(1)
         EndIf
-    Call(EnableModel, LVar7, FALSE)
+    Call(EnableModel, LVar7, false)
     Return
     End
 };

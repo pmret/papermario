@@ -311,7 +311,7 @@ void crash_screen_thread_entry(void* unused) {
     osStopThread(faultedThread);
     crash_screen_draw(faultedThread);
 
-    while (TRUE) {}
+    while (true) {}
 }
 
 void crash_screen_set_draw_info(u16* frameBufPtr, s16 width, s16 height) {

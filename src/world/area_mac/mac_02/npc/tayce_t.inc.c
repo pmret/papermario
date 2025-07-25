@@ -137,7 +137,7 @@ API_CALLABLE(N(SetRecipeDiscovered)) {
 
     for (i = 0; i < ARRAY_COUNT(CookableItemIDs); i++) {
         if (cookedItemID == cookedItems[i]) {
-            evt_set_variable(NULL, cookedFlags[i], TRUE);
+            evt_set_variable(NULL, cookedFlags[i], true);
             break;
         }
     }
@@ -172,7 +172,7 @@ API_CALLABLE(N(TayceT_MakeItemList)) {
 }
 
 EvtScript N(EVS_Scene_TayceTCooking) = {
-    Call(SetNpcFlagBits, NPC_TayceT, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_TayceT, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetNpcAnimation, NPC_TayceT, ANIM_TayceT_Walk)
     Call(NpcMoveTo, NPC_TayceT, -186, -381, 20 * DT)
     Call(NpcMoveTo, NPC_TayceT, -220, -425, 30 * DT)
@@ -187,7 +187,7 @@ EvtScript N(EVS_Scene_TayceTCooking) = {
     Call(NpcMoveTo, NPC_TayceT, -186, -381, 20 * DT)
     Call(NpcMoveTo, NPC_TayceT, -236, -318, 20 * DT)
     Call(SetNpcAnimation, NPC_TayceT, ANIM_TayceT_Idle)
-    Call(SetNpcFlagBits, NPC_TayceT, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_TayceT, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Return
     End
 };
@@ -198,7 +198,7 @@ s32 N(ItemList_FryingPan)[] = {
 };
 
 EvtScript N(EVS_TayceT_FryingPanAndCake) = {
-    IfEq(GF_MAC02_TayceT_HoldingCake, TRUE)
+    IfEq(GF_MAC02_TayceT_HoldingCake, true)
         Call(N(CheckItemsHasRoom), LVar0)
         IfNe(LVar0, 0)
             Call(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_001A)
@@ -207,7 +207,7 @@ EvtScript N(EVS_TayceT_FryingPanAndCake) = {
             Set(GB_StoryProgress, STORY_CH4_GOT_TAYCE_TS_CAKE)
         Else
             Call(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_001C)
-            Set(GF_MAC02_TayceT_HoldingCake, TRUE)
+            Set(GF_MAC02_TayceT_HoldingCake, true)
         EndIf
         Return
     EndIf
@@ -228,7 +228,7 @@ EvtScript N(EVS_TayceT_FryingPanAndCake) = {
                 Set(GB_StoryProgress, STORY_CH4_GOT_TAYCE_TS_CAKE)
             Else
                 Call(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_001C)
-                Set(GF_MAC02_TayceT_HoldingCake, TRUE)
+                Set(GF_MAC02_TayceT_HoldingCake, true)
             EndIf
     EndSwitch
     Return
@@ -241,12 +241,12 @@ s32 N(ItemList_Cookbook)[] = {
 };
 
 EvtScript N(EVS_TayceT_RequestCookbook) = {
-    IfEq(AF_MAC_01, FALSE)
+    IfEq(AF_MAC_01, false)
         Call(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_001D)
-        Set(AF_MAC_01, TRUE)
+        Set(AF_MAC_01, true)
     Else
         Call(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_001E)
-        Set(AF_MAC_01, FALSE)
+        Set(AF_MAC_01, false)
     EndIf
     Set(LVar0, Ref(N(ItemList_Cookbook)))
     Set(LVar1, 0)
@@ -256,7 +256,7 @@ EvtScript N(EVS_TayceT_RequestCookbook) = {
             Call(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_001F)
         CaseDefault
             Call(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0020)
-            Set(GF_MAC02_TayceT_HasCookbook, TRUE)
+            Set(GF_MAC02_TayceT_HasCookbook, true)
     EndSwitch
     Return
     End
@@ -270,15 +270,15 @@ EvtScript N(EVS_TayceT_Cook) = {
     #define LABEL_DONE 9
 
    // greeting and opening choice
-    Call(DisablePlayerInput, TRUE)
-    IfEq(GF_MAC02_Met_TayceT, FALSE)
-        Set(GF_MAC02_Met_TayceT, TRUE)
-        Set(AF_MAC_01, TRUE)
+    Call(DisablePlayerInput, true)
+    IfEq(GF_MAC02_Met_TayceT, false)
+        Set(GF_MAC02_Met_TayceT, true)
+        Set(AF_MAC_01, true)
         Call(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0000)
     Else
-        IfEq(AF_MAC_01, FALSE)
+        IfEq(AF_MAC_01, false)
             Call(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0001)
-            Set(AF_MAC_01, TRUE)
+            Set(AF_MAC_01, true)
         Else
             Call(SpeakToPlayer, NPC_TayceT, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_MAC_Bridge_0002)
         EndIf
@@ -322,7 +322,7 @@ EvtScript N(EVS_TayceT_Cook) = {
     IfEq(LVar3, 1)
         Goto(LABEL_CHOOSE_FIRST)
     EndIf
-    IfEq(GF_MAC02_TayceT_HasCookbook, FALSE)
+    IfEq(GF_MAC02_TayceT_HasCookbook, false)
         Goto(LABEL_CONFIRM_ONE)
     EndIf
     Call(N(GetItemCount), LVar0)
@@ -426,7 +426,7 @@ EvtScript N(EVS_TayceT_Cook) = {
 
     // end the script
     Label(LABEL_DONE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -455,13 +455,13 @@ EvtScript N(EVS_NpcInit_TayceT) = {
     Call(SetNpcAnimation, NPC_SELF, ANIM_TayceT_Idle)
     IfGe(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
         IfLt(GB_StoryProgress, STORY_CH4_GOT_TAYCE_TS_CAKE)
-            IfNe(GF_MAC02_TayceT_HoldingCake, TRUE)
+            IfNe(GF_MAC02_TayceT_HoldingCake, true)
                 Call(SetNpcAnimation, NPC_SELF, ANIM_TayceT_IdleSad)
                 Return
             EndIf
         EndIf
     EndIf
-    Set(AF_MAC_01, FALSE)
+    Set(AF_MAC_01, false)
     Return
     End
 };

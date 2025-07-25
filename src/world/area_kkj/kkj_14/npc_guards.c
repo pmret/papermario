@@ -24,8 +24,8 @@ Vec3f N(TwinkApproachPath)[] = {
 };
 
 EvtScript N(EVS_Scene_TossedBackInRoom) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetMusic, 0, SONG_PEACH_CAUGHT, 0, VOL_LEVEL_FULL)
     Call(SetPlayerPos, -480, 30, -30)
     Call(SetPlayerAnimation, ANIM_Peach2_Carried)
@@ -38,7 +38,7 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -300, 0, -30)
     Call(SetPanTarget, CAM_DEFAULT, -300, 0, -30)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(30 * DT)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)
@@ -160,7 +160,7 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
         Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0159)
         Call(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_ArmsCrossedTalk, ANIM_Peach2_ArmsCrossedIdle, 5, MSG_Peach_015A)
         IfLt(GB_KKJ_CaughtCount, 3)
-            IfEq(AF_KKJ_13, FALSE)
+            IfEq(AF_KKJ_13, false)
                 Set(LVar0, MSG_Peach_015B)
             Else
                 Set(LVar0, MSG_Peach_015D)
@@ -173,7 +173,7 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
         Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0176)
         Call(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_ArmsCrossedTalk, ANIM_Peach2_ArmsCrossedIdle, 5, MSG_Peach_0177)
         IfLt(GB_KKJ_CaughtCount, 3)
-            IfEq(AF_KKJ_13, FALSE)
+            IfEq(AF_KKJ_13, false)
                 Set(LVar0, MSG_Peach_0178)
             Else
                 Set(LVar0, MSG_Peach_017A)
@@ -186,8 +186,8 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
     Exec(N(EVS_SetupMusic))
     Call(ResetCam, CAM_DEFAULT, Float(1.0 / DT))
     Call(EnablePartnerAI)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

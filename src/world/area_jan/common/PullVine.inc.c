@@ -65,8 +65,8 @@ EvtScript N(EVS_PullVine_Manage) = {
             Set(LVar0, 0)
         EndIf
         IfEq(LVar0, 1)
-            Call(DisablePlayerInput, TRUE)
-            Call(DisablePlayerPhysics, TRUE)
+            Call(DisablePlayerInput, true)
+            Call(DisablePlayerPhysics, true)
             Call(GetModelCenter, LVarD)
             Call(PlaySoundAt, SOUND_PULL_VINE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
             SetF(LVar0, Float(0.0))
@@ -183,8 +183,8 @@ EvtScript N(EVS_PullVine_Manage) = {
                     Wait(1)
                 EndLoop
             EndThread
-            Call(DisablePlayerPhysics, FALSE)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerPhysics, false)
+            Call(DisablePlayerInput, false)
             Return
         EndIf
         Wait(1)

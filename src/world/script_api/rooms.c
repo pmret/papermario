@@ -257,7 +257,7 @@ API_CALLABLE(RoomVisibilityToggleImpl) {
 
     if (isInitialCall) {
         if (script->varTable[0] == ROOM_VISIBILITY_SHOW) {
-            mdl_group_set_custom_gfx(script->varTable[15], CUSTOM_GFX_NONE, ENV_TINT_SHROUD, TRUE);
+            mdl_group_set_custom_gfx(script->varTable[15], CUSTOM_GFX_NONE, ENV_TINT_SHROUD, true);
         }
         script->functionTemp[1] = 0;
     }
@@ -281,7 +281,7 @@ API_CALLABLE(RoomVisibilityToggleImpl) {
     if (script->functionTemp[1] >= 255) {
         if (script->varTable[0] == ROOM_VISIBILITY_HIDE) {
             // ROOM_DATA_MODEL_ID
-            mdl_group_set_custom_gfx(script->varTable[15], CUSTOM_GFX_NONE, ENV_TINT_NONE, TRUE);
+            mdl_group_set_custom_gfx(script->varTable[15], CUSTOM_GFX_NONE, ENV_TINT_NONE, true);
         }
         return ApiStatus_DONE2;
     } else {
@@ -353,7 +353,7 @@ API_CALLABLE(HideRoomNPCs) {
         if (npc != NULL) {
             npc->flags &= mask;
         }
-    } while (TRUE);
+    } while (true);
 
     return ApiStatus_DONE2;
 }
@@ -600,8 +600,8 @@ EvtScript EVS_EnterRoomDoor = {
     Call(SetDoorState, ROOM_STATE_ENTERING)
     Call(HideRoomNPCs)
     Call(UseRoomItemVisGroup)
-    Call(DisablePlayerPhysics, TRUE)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, true)
+    Call(DisablePlayerInput, true)
 
     // notify listener ROOM_UPDATE_ENTER_BEGIN
     Call(GetDoorData)
@@ -673,7 +673,7 @@ EvtScript EVS_EnterRoomDoor = {
         ExecGetTID(EVS_Default_AnimateDoorRot, LVar5)
     EndIf
     Call(SaveUseDoorScript, ROOM_SCRIPT_IDX_3, LVar5)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Call(AwaitUseDoorScript, ROOM_SCRIPT_IDX_3)
 
     // move party through the doorway
@@ -687,9 +687,9 @@ EvtScript EVS_EnterRoomDoor = {
 
     // allow input when movement is done
     Call(AwaitUseDoorScript, ROOM_SCRIPT_IDX_3)
-    Call(DisablePlayerInput, FALSE)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(DisablePlayerInput, false)
+    Call(DisablePlayerPhysics, false)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
     Call(ResetPartnerMovement)
 
     // close the door
@@ -745,8 +745,8 @@ EvtScript EVS_EnterRoomDoor = {
     Label(1)
     Call(SetDoorState, ROOM_STATE_IDLE)
     Label(0)
-    Call(DisablePlayerInput, FALSE)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, false)
+    Call(DisablePlayerPhysics, false)
     Return
     End
 };
@@ -777,8 +777,8 @@ EvtScript EVS_ExitRoomDoor = {
         Return
     EndIf
     Call(SetDoorState, ROOM_STATE_EXITING)
-    Call(DisablePlayerPhysics, TRUE)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, true)
+    Call(DisablePlayerInput, true)
 
     // notify listener ROOM_UPDATE_EXIT_BEGIN
     Call(GetDoorData)
@@ -852,7 +852,7 @@ EvtScript EVS_ExitRoomDoor = {
 
     // move party through the doorway
     Call(GetDoorPtr)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Call(SaveDoorPtr)
     Call(GetDoorData)
     Call(MovePartnerThroughDoor, ROOM_DATA_EXIT_POS_BX, ROOM_DATA_EXIT_POS_BZ)
@@ -874,9 +874,9 @@ EvtScript EVS_ExitRoomDoor = {
 
     // allow input when movement is done
     Call(AwaitUseDoorScript, ROOM_SCRIPT_IDX_1)
-    Call(DisablePlayerInput, FALSE)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(DisablePlayerInput, false)
+    Call(DisablePlayerPhysics, false)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
     Call(ResetPartnerMovement)
 
     // close the door
@@ -906,8 +906,8 @@ EvtScript EVS_ExitRoomDoor = {
     Label(1)
     Call(SetDoorState, ROOM_STATE_IDLE)
     Label(0)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

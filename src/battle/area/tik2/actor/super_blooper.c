@@ -282,7 +282,7 @@ EvtScript N(EVS_Init) = {
     Call(ForceHomePos, ACTOR_SELF, 90, 45, -10)
     Call(HPBarToHome, ACTOR_SELF)
     Call(SetActorScale, ACTOR_SELF, Float(2.0), Float(2.0), Float(2.0))
-    Call(SetActorVar, ACTOR_SELF, AVAR_Enraged, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Enraged, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Basic)
     Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
     Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
@@ -356,7 +356,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -446,7 +446,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -513,7 +513,7 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 EvtScript N(EVS_Attack_SpinDrop) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -538,19 +538,19 @@ EvtScript N(EVS_Attack_SpinDrop) = {
             Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.5))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 16, false, true, false)
             IfEq(LVarF, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EndIf
             Add(LVar0, 30)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 12, false, true, false)
             Add(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             ExecWait(N(EVS_FloatToHome))
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -568,7 +568,7 @@ EvtScript N(EVS_Attack_SpinDrop) = {
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Add(LVar1, 30)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 16, false, true, false)
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_SPIN_DROP, BS_FLAGS1_TRIGGER_EVENTS)
     Call(GetStatusFlags, ACTOR_PLAYER, LVar0)
@@ -582,16 +582,16 @@ EvtScript N(EVS_Attack_SpinDrop) = {
     Sub(LVar1, 15)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.2))
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
     ExecWait(N(EVS_FloatToHome))
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_InkBlast) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -663,7 +663,7 @@ EvtScript N(EVS_Attack_InkBlast) = {
             Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             ExecWait(N(EVS_FloatToHome))
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -677,13 +677,13 @@ EvtScript N(EVS_Attack_InkBlast) = {
     Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
     ExecWait(N(EVS_FloatToHome))
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Move_MakeBabies) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -735,25 +735,25 @@ EvtScript N(EVS_Move_MakeBabies) = {
     Call(ActorExists, ACTOR_ENEMY1, LVar1)
     IfFalse(LVar1)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LIGHT_THROW)
-        Call(SummonEnemy, Ref(N(BabyFormation1)), FALSE)
+        Call(SummonEnemy, Ref(N(BabyFormation1)), false)
     EndIf
     Call(ActorExists, ACTOR_ENEMY2, LVar1)
     IfFalse(LVar1)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LIGHT_THROW)
-        Call(SummonEnemy, Ref(N(BabyFormation2)), FALSE)
+        Call(SummonEnemy, Ref(N(BabyFormation2)), false)
     EndIf
     Wait(2)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0C)
     Call(N(FadeBackgroundLighten))
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     Return
     End
 };
 
 EvtScript N(EVS_Move_Enrage) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -780,14 +780,14 @@ EvtScript N(EVS_Move_Enrage) = {
     Call(MoveBattleCamOver, 30)
     Call(N(FadeBackgroundLighten))
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     Return
     End
 };
 
 EvtScript N(EVS_Attack_RageDrop) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -812,20 +812,20 @@ EvtScript N(EVS_Attack_RageDrop) = {
             Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.5))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 16, false, true, false)
             ExecWait(N(EVS_LoseRage))
             IfEq(LVarF, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EndIf
             Add(LVar0, 30)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 12, false, true, false)
             Add(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             ExecWait(N(EVS_FloatToHome))
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -843,7 +843,7 @@ EvtScript N(EVS_Attack_RageDrop) = {
     Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     Add(LVar1, 30)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 16, false, true, false)
     Call(GetStatusFlags, ACTOR_PLAYER, LVarE)
     IfFlag(LVarE, STATUS_FLAG_STONE)
         Goto(0)
@@ -865,7 +865,7 @@ EvtScript N(EVS_Attack_RageDrop) = {
     EndThread
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.4))
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 20, false, true, false)
     Label(0)
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_RAGE_DROP, BS_FLAGS1_TRIGGER_EVENTS)
@@ -881,31 +881,31 @@ EvtScript N(EVS_Attack_RageDrop) = {
     Sub(LVar1, 15)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.2))
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
     ExecWait(N(EVS_LoseRage))
     ExecWait(N(EVS_FloatToHome))
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Enrage) = {
-    Call(SetActorVar, ACTOR_SELF, AVAR_Enraged, TRUE)
-    Call(EnableActorPaletteEffects, ACTOR_SELF, PRT_MAIN, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Enraged, true)
+    Call(EnableActorPaletteEffects, ACTOR_SELF, PRT_MAIN, true)
     Call(SetActorPaletteSwapParams, ACTOR_SELF, PRT_MAIN, SPR_PAL_Blooper, SPR_PAL_Blooper_Supercharged, 0, 6, 12, 6, 0, 0)
     Call(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
     Call(SetStatusTable, ACTOR_SELF, Ref(N(EnragedStatusTable)))
-    Call(SetPartEventBits, ACTOR_SELF, PRT_TARGET, ACTOR_EVENT_FLAG_ATTACK_CHARGED, TRUE)
+    Call(SetPartEventBits, ACTOR_SELF, PRT_TARGET, ACTOR_EVENT_FLAG_ATTACK_CHARGED, true)
     Return
     End
 };
 
 EvtScript N(EVS_LoseRage) = {
-    Call(SetActorVar, ACTOR_SELF, AVAR_Enraged, FALSE)
-    Call(EnableActorPaletteEffects, ACTOR_SELF, PRT_MAIN, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Enraged, false)
+    Call(EnableActorPaletteEffects, ACTOR_SELF, PRT_MAIN, false)
     Call(SetStatusTable, ACTOR_SELF, Ref(N(StatusTable)))
-    Call(SetPartEventBits, ACTOR_SELF, PRT_TARGET, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
+    Call(SetPartEventBits, ACTOR_SELF, PRT_TARGET, ACTOR_EVENT_FLAG_ATTACK_CHARGED, false)
     Return
     End
 };

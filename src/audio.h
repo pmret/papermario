@@ -217,8 +217,8 @@ typedef enum BGMCompositionCommands {
     BGM_COMP_START_LOOP             = 3,
     BGM_COMP_WAIT                   = 4,
     BGM_COMP_END_LOOP               = 5,
-    BGM_COMP_END_COND_LOOP_FALSE    = 6,
-    BGM_COMP_END_COND_LOOP_TRUE     = 7,
+    BGM_COMP_END_COND_LOOP_false    = 6,
+    BGM_COMP_END_COND_LOOP_true     = 7,
 } BGMCompositionCommands;
 
 typedef enum BGMSpecialSubops {
@@ -593,7 +593,7 @@ typedef struct AuResampler {
     /* 0x00 */ RESAMPLE_STATE* state;
     /* 0x04 */ f32 ratio;
     /* 0x08 */ f32 delta;
-    /* 0x0C */ b32 first;
+    /* 0x0C */ bool first;
 } AuResampler; // size = 0x10
 
 // envelope mixer -- based on ALEnvMixer
@@ -613,7 +613,7 @@ typedef struct AuEnvMixer {
     /* 0x1A */ s16 rtgt;
     /* 0x1C */ s32 delta;
     /* 0x20 */ s32 segEnd;
-    /* 0x24 */ b32 dirty;
+    /* 0x24 */ bool dirty;
     /* 0x28 */ s32 motion;
 } AuEnvMixer; // size = 0x2C
 
@@ -686,7 +686,7 @@ typedef struct Instrument {
                     s32 sampleRate;
                };
     /* 0x24 */ u8 type;
-    /* 0x25 */ b8 useDma; // set to FALSE to bypass DMA transfer while loading data -- only do this if the audio samples/codebook are static
+    /* 0x25 */ b8 useDma; // set to false to bypass DMA transfer while loading data -- only do this if the audio samples/codebook are static
     /* 0x26 */ s8 unused_26;
     /* 0x27 */ s8 unused_27;
     /* 0x28 */ s8 unused_28;
@@ -859,7 +859,7 @@ typedef struct AuVoice {
     /* 0x3E */ b8 isRelativeRelease;
     /* 0x3F */ u8 envRelativeStart;
     /* 0x40 */ s16 clientVolume; // volume set by the client (BGM/MSEQ/Sound player) before any envelope is applied
-    /* 0x42 */ u8 donePending; // TRUE when a voice has completed its release phase and is ready for cleanup
+    /* 0x42 */ u8 donePending; // true when a voice has completed its release phase and is ready for cleanup
     /* 0x43 */ u8 syncFlags;
     /* 0x44 */ s8 clientPriority;
     /* 0x45 */ u8 priority;
@@ -1050,7 +1050,7 @@ typedef struct AuGlobals {
     /* 0x0074 */ struct BGMPlayer* resumeCopyTo;
     /* 0x0078 */ struct BGMPlayer* resumeCopyFrom;
     /* 0x007C */ s32 resumeSongName;
-    /* 0x0080 */ b32 resumeRequested;
+    /* 0x0080 */ bool resumeRequested;
     /* 0x0084 */ s32 resumeFadeTime;
     /* 0x0088 */ s32 resumeFadeStart;
     /* 0x008C */ s32 resumeFadeEnd;
@@ -1266,7 +1266,7 @@ typedef struct SongSwapLinkedRequest {
     /* 0x04 */ char unused_04[4];
     /* 0x08 */ char unused_08[4];
     /* 0x0C */ char unused_0C[4];
-    /* 0x10 */ b32 enabled; // 0 or 1
+    /* 0x10 */ bool enabled; // 0 or 1
     /* 0x18 */ char pad_14[0xC];
 } SongSwapLinkedRequest; // size = 0x1C or 0x20
 
@@ -1322,7 +1322,7 @@ typedef union AmbVoiceStateInfo {
         u8 playerIndex;     /// Index of the owning ambience player
         u8 trackIndex;      ///< Track index within the player (0–9)
         u8 tune;            ///< Note or drum ID used to differentiate voices on the same track
-        u8 released;        ///< Set to TRUE when the voice should be released/stopped
+        u8 released;        ///< Set to true when the voice should be released/stopped
     };
     s32 all;
 } AmbVoiceStateInfo;

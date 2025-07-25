@@ -22,10 +22,10 @@ EvtScript N(EVS_SetWallRot_ToadHouse) = {
 EvtScript N(EVS_RoomListener_ToadHouse) = {
     Switch(LVar0)
         CaseEq(ROOM_UPDATE_ENTER_BEGIN)
-            Set(AF_SAM_Snowing, FALSE)
+            Set(AF_SAM_Snowing, false)
             Call(SetGroupVisibility, MODEL_kh_naiso, MODEL_GROUP_VISIBLE)
         CaseEq(ROOM_UPDATE_EXIT_END)
-            Set(AF_SAM_Snowing, TRUE)
+            Set(AF_SAM_Snowing, true)
             Call(SetGroupVisibility, MODEL_kh_naiso, MODEL_GROUP_HIDDEN)
     EndSwitch
     Return
@@ -54,15 +54,15 @@ EvtScript N(EVS_SetWallRot_MerleHouse) = {
 EvtScript N(EVS_RoomListener_MerleHouse) = {
     Switch(LVar0)
         CaseEq(ROOM_UPDATE_ENTER_BEGIN)
-            Set(AF_SAM_Snowing, FALSE)
+            Set(AF_SAM_Snowing, false)
             Call(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_VISIBLE)
-            Call(EnableModel, MODEL_k_naiso, TRUE)
+            Call(EnableModel, MODEL_k_naiso, true)
         CaseEq(ROOM_UPDATE_EXIT_BEGIN)
             IfLt(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_SCARF)
-                Call(DisablePlayerInput, TRUE)
+                Call(DisablePlayerInput, true)
             EndIf
         CaseEq(ROOM_UPDATE_EXIT_END)
-            Set(AF_SAM_Snowing, TRUE)
+            Set(AF_SAM_Snowing, true)
             Call(SetGroupVisibility, MODEL_k_naiso, MODEL_GROUP_HIDDEN)
             IfLt(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_SCARF)
                 ExecWait(N(EVS_Scene_Merle_OneLastThing))
@@ -84,18 +84,18 @@ EvtScript N(EVS_SetWallRot_CookHouse) = {
     IfGt(LVar0, 89)
         Call(SetGroupVisibility, MODEL_hm_sita, MODEL_GROUP_HIDDEN)
         Call(SetGroupVisibility, MODEL_hm_yane, MODEL_GROUP_HIDDEN)
-        Call(EnableModel, MODEL_h_yuki1, FALSE)
-        Call(EnableModel, MODEL_h_yuki2, FALSE)
-        Call(EnableModel, MODEL_hm_entotu, FALSE)
-        Call(EnableModel, MODEL_hm_ento2, FALSE)
+        Call(EnableModel, MODEL_h_yuki1, false)
+        Call(EnableModel, MODEL_h_yuki2, false)
+        Call(EnableModel, MODEL_hm_entotu, false)
+        Call(EnableModel, MODEL_hm_ento2, false)
     EndIf
     IfLt(LVar0, 89)
         Call(SetGroupVisibility, MODEL_hm_sita, MODEL_GROUP_VISIBLE)
         Call(SetGroupVisibility, MODEL_hm_yane, MODEL_GROUP_VISIBLE)
-        Call(EnableModel, MODEL_h_yuki1, TRUE)
-        Call(EnableModel, MODEL_h_yuki2, TRUE)
-        Call(EnableModel, MODEL_hm_entotu, TRUE)
-        Call(EnableModel, MODEL_hm_ento2, TRUE)
+        Call(EnableModel, MODEL_h_yuki1, true)
+        Call(EnableModel, MODEL_h_yuki2, true)
+        Call(EnableModel, MODEL_hm_entotu, true)
+        Call(EnableModel, MODEL_hm_ento2, true)
     EndIf
     Return
     End
@@ -104,10 +104,10 @@ EvtScript N(EVS_SetWallRot_CookHouse) = {
 EvtScript N(EVS_RoomListener_CookHouse) = {
     Switch(LVar0)
         CaseEq(ROOM_UPDATE_ENTER_BEGIN)
-            Set(AF_SAM_Snowing, FALSE)
+            Set(AF_SAM_Snowing, false)
             Call(SetGroupVisibility, MODEL_h_naiso, MODEL_GROUP_VISIBLE)
         CaseEq(ROOM_UPDATE_EXIT_END)
-            Set(AF_SAM_Snowing, TRUE)
+            Set(AF_SAM_Snowing, true)
             Call(SetGroupVisibility, MODEL_h_naiso, MODEL_GROUP_HIDDEN)
     EndSwitch
     Return

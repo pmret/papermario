@@ -27,7 +27,7 @@ EvtScript N(EVS_Scene_RideTrain) = {
     SetF(ArrayVar(14), Float(0.0))
     SetF(ArrayVar(15), Float(0.0))
     SetF(ArrayVar(16), Float(0.0))
-    Set(AF_OMO_03, FALSE)
+    Set(AF_OMO_03, false)
     Label(0)
         Switch(MV_TrainUnk_00)
             CaseEq(0)
@@ -62,7 +62,7 @@ EvtScript N(EVS_Scene_RideTrain) = {
                 SetF(ArrayVar(10), Float(0.0))
                 SetF(ArrayVar(13), Float(0.0))
                 Set(ArrayVar(18), 0)
-                IfEq(MF_TrainUnk_00, TRUE)
+                IfEq(MF_TrainUnk_00, true)
                     Set(MV_TrainUnk_00, 1)
                 EndIf
             CaseEq(1)
@@ -71,7 +71,7 @@ EvtScript N(EVS_Scene_RideTrain) = {
                 BufRead2(LVar0, LVar1)
                 IfEq(LVar0, -1)
                     Set(MV_TrainUnk_00, 100)
-                    Set(MF_TrainUnk_00, FALSE)
+                    Set(MF_TrainUnk_00, false)
                 Else
                     SetF(ArrayVar(2), LVar0)
                     SetF(ArrayVar(3), LVar1)
@@ -114,8 +114,8 @@ EvtScript N(EVS_Scene_RideTrain) = {
                     Add(ArrayVar(4), 1)
                     IfEq(ArrayVar(2), -1)
                         Set(MV_TrainUnk_00, 100)
-                        Set(MF_TrainUnk_00, FALSE)
-                        Set(LFlag1, TRUE)
+                        Set(MF_TrainUnk_00, false)
+                        Set(LFlag1, true)
                     Else
                         Call(N(SetAngleClamped), LVar0, ArrayVar(0), ArrayVar(1), ArrayVar(2), ArrayVar(3))
                         Call(AddVectorPolar, ArrayVar(0), ArrayVar(1), LVar1, LVar0)
@@ -137,15 +137,15 @@ EvtScript N(EVS_Scene_RideTrain) = {
                     Add(ArrayVar(9), 1)
                     IfEq(ArrayVar(7), -1)
                         Set(MV_TrainUnk_00, 100)
-                        Set(MF_TrainUnk_00, FALSE)
-                        Set(LFlag1, FALSE)
+                        Set(MF_TrainUnk_00, false)
+                        Set(LFlag1, false)
                     Else
                         Call(N(SetAngleClamped), LVar0, ArrayVar(5), ArrayVar(6), ArrayVar(7), ArrayVar(8))
                         Call(AddVectorPolar, ArrayVar(5), ArrayVar(6), LVar1, LVar0)
                     EndIf
                 EndIf
                 IfEq(MV_TrainUnk_00, 100)
-                    IfEq(LFlag1, TRUE)
+                    IfEq(LFlag1, true)
                         Call(N(SetAngleClamped), LVar0, ArrayVar(0), ArrayVar(1), ArrayVar(5), ArrayVar(6))
                         SetF(ArrayVar(5), ArrayVar(0))
                         SetF(ArrayVar(6), ArrayVar(1))
@@ -171,7 +171,7 @@ EvtScript N(EVS_Scene_RideTrain) = {
                 AddF(ArrayVar(13), LVar3)
                 SetF(ArrayVar(14), ArrayVar(13))
                 MulF(ArrayVar(14), Float(1.432))
-                IfEq(LFlag0, FALSE)
+                IfEq(LFlag0, false)
                     SetF(LVar0, ArrayVar(10))
                     IfLt(LVar0, 1)
                         SetF(LVar0, Float(1.0))
@@ -180,8 +180,8 @@ EvtScript N(EVS_Scene_RideTrain) = {
                     SubF(ArrayVar(15), LVar0)
                     IfLt(ArrayVar(15), -10)
                         SetF(ArrayVar(15), Float(-10.0))
-                        Set(LFlag0, TRUE)
-                        IfEq(AF_OMO_03, FALSE)
+                        Set(LFlag0, true)
+                        IfEq(AF_OMO_03, false)
                             Call(PlaySound, SOUND_OMO_TOY_TRAIN_WHISTLE_A)
                         Else
                             Call(PlaySound, SOUND_OMO_TOY_TRAIN_WHISTLE_B)
@@ -196,13 +196,13 @@ EvtScript N(EVS_Scene_RideTrain) = {
                     AddF(ArrayVar(15), LVar0)
                     IfGt(ArrayVar(15), 10)
                         SetF(ArrayVar(15), Float(10.0))
-                        Set(LFlag0, FALSE)
-                        IfEq(AF_OMO_03, FALSE)
+                        Set(LFlag0, false)
+                        IfEq(AF_OMO_03, false)
                             Call(PlaySound, SOUND_OMO_TOY_TRAIN_CLICK)
-                            Set(AF_OMO_03, TRUE)
+                            Set(AF_OMO_03, true)
                         Else
                             Call(PlaySound, SOUND_OMO_TOY_TRAIN_CLICK)
-                            Set(AF_OMO_03, FALSE)
+                            Set(AF_OMO_03, false)
                         EndIf
                     EndIf
                 EndIf
@@ -328,8 +328,8 @@ EvtScript N(EVS_TrainUnk_C) = {
 };
 
 EvtScript N(EVS_TrainUnk_D) = {
-    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Thread
         UseBuf(LVar0)
         BufRead3(LVar1, LVar2, LVar3)
@@ -386,9 +386,9 @@ EvtScript N(EVS_TrainUnk_D) = {
 
 #ifdef INCLUDE_ALTERNATES
 EvtScript N(EVS_TrainUnk_AltD) = {
-    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Set(AF_OMO_06, FALSE)
+    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Set(AF_OMO_06, false)
     Call(GetPlayerPos, LVar1, LVar2, LVar3)
     IfLt(LVar2, 50)
         UseBuf(LVar9)
@@ -452,8 +452,8 @@ EvtScript N(EVS_TrainUnk_AltD) = {
 EvtScript N(EVS_TrainUnk_E) = {
     Call(StopSound, SOUND_LRAW_TOYBOX_TRAIN_GEAR)
     Call(SetMusic, 0, SONG_SHY_GUY_TOYBOX, 0, VOL_LEVEL_FULL)
-    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     SetF(LVar0, MV_TrainPos)
     SetF(LVar1, MV_TrainUnk_0C)
     SetF(LVar2, MV_TrainUnk_0D)
@@ -473,7 +473,7 @@ EvtScript N(EVS_TrainUnk_E) = {
         Call(NpcMoveTo, NPC_Conductor, LVar3, LVar4, 0)
         Call(SetNpcAnimation, NPC_Conductor, ANIM_TrainToad_Idle)
         Call(InterpNpcYaw, NPC_Conductor, 270, 15)
-        Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     EndThread
     Wait(10)
     Thread
@@ -490,7 +490,7 @@ EvtScript N(EVS_TrainUnk_E) = {
     Call(SetNpcSpeed, NPC_PARTNER, Float(2.5))
     Call(NpcMoveTo, NPC_PARTNER, LVar0, LVar1, 0)
     Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Return
     End
 };
@@ -499,9 +499,9 @@ EvtScript N(EVS_TrainUnk_E) = {
 EvtScript N(EVS_TrainUnk_AltE) = {
     Call(StopSound, SOUND_LRAW_TOYBOX_TRAIN_GEAR)
     Call(SetMusic, 0, SONG_SHY_GUY_TOYBOX, 0, VOL_LEVEL_FULL)
-    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Set(AF_OMO_06, TRUE)
+    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Set(AF_OMO_06, true)
     SetF(LVar0, MV_TrainPos)
     SetF(LVar1, MV_TrainUnk_0C)
     SetF(LVar2, MV_TrainUnk_0D)
@@ -513,7 +513,7 @@ EvtScript N(EVS_TrainUnk_AltE) = {
         Call(NpcMoveTo, NPC_Conductor, LVar3, LVar4, 0)
         Call(SetNpcAnimation, NPC_Conductor, ANIM_TrainToad_SadIdle)
         Call(InterpNpcYaw, NPC_Conductor, 90, 0)
-        Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     EndThread
     Wait(10)
     Thread
@@ -531,7 +531,7 @@ EvtScript N(EVS_TrainUnk_AltE) = {
     Call(SetNpcSpeed, NPC_PARTNER, Float(2.5))
     Call(NpcMoveTo, NPC_PARTNER, LVar0, LVar1, 0)
     Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Return
     End
 };
@@ -571,7 +571,7 @@ EvtScript N(EVS_TrainUnk_G) = {
                 CaseEq(0)
                     Call(GotoMapSpecial, Ref("omo_03"), omo_03_ENTRY_2, TRANSITION_TOY_TRAIN)
                 CaseEq(1)
-                    IfEq(GF_OMO03_BlueSwitchActivated, TRUE)
+                    IfEq(GF_OMO03_BlueSwitchActivated, true)
                         Call(GotoMapSpecial, Ref("omo_06"), omo_06_ENTRY_2, TRANSITION_TOY_TRAIN)
                     Else
                         Call(GotoMapSpecial, Ref("omo_03"), omo_03_ENTRY_2, TRANSITION_TOY_TRAIN)
@@ -584,13 +584,13 @@ EvtScript N(EVS_TrainUnk_G) = {
                 CaseEq(0)
                     Call(GotoMapSpecial, Ref("omo_03"), omo_03_ENTRY_2, TRANSITION_TOY_TRAIN)
                 CaseEq(1)
-                    IfEq(GF_OMO03_BlueSwitchActivated, TRUE)
+                    IfEq(GF_OMO03_BlueSwitchActivated, true)
                         Call(GotoMapSpecial, Ref("omo_06"), omo_06_ENTRY_2, TRANSITION_TOY_TRAIN)
                     Else
                         Call(GotoMapSpecial, Ref("omo_03"), omo_03_ENTRY_2, TRANSITION_TOY_TRAIN)
                     EndIf
                 CaseEq(2)
-                    IfEq(GF_OMO03_BlueSwitchActivated, TRUE)
+                    IfEq(GF_OMO03_BlueSwitchActivated, true)
                         Call(GotoMapSpecial, Ref("omo_08"), omo_08_ENTRY_1, TRANSITION_TOY_TRAIN)
                     Else
                         Call(GotoMapSpecial, Ref("omo_03"), omo_03_ENTRY_2, TRANSITION_TOY_TRAIN)
@@ -609,7 +609,7 @@ EvtScript N(EVS_TrainUnk_H) = {
         IfNe(LVar0, 1)
             Goto(10)
         EndIf
-    IfEq(AF_OMO_UsingRightSwitch, FALSE)
+    IfEq(AF_OMO_UsingRightSwitch, false)
         ExecWait(N(EVS_TrainUnk_F))
     Else
         ExecWait(N(EVS_TrainUnk_G))

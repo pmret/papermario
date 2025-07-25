@@ -61,7 +61,7 @@ EvtScript N(EVS_GotHammer) = {
     EndThread
     Loop(0)
         Wait(1)
-        IfEq(MF_Unk_12, TRUE)
+        IfEq(MF_Unk_12, true)
             BreakLoop
         EndIf
     EndLoop
@@ -74,13 +74,13 @@ EvtScript N(EVS_GotHammer) = {
 
 EvtScript N(EVS_OnSearch_HammerBush) = {
     Call(AdjustCam, CAM_DEFAULT, Float(8.0), 0, Float(300.0), Float(19.0), Float(-9.0))
-    Set(MF_Unk_12, FALSE)
+    Set(MF_Unk_12, false)
     Exec(N(EVS_GotHammer))
     Call(N(GiveWoodenHammer))
     Wait(30 * DT)
     Call(N(SetMessageImage_HammerBlock))
     Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_FoundHammer, 160, 40)
-    Set(MF_Unk_12, TRUE)
+    Set(MF_Unk_12, true)
     Call(DisablePartnerAI, 0)
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00AA)
@@ -103,9 +103,9 @@ EvtScript N(EVS_OnSearchBush7) = {
     IfGe(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     ExecWait(N(EVS_OnSearch_HammerBush))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -114,7 +114,7 @@ EvtScript N(EVS_OnSearchBush8) = {
     IfGe(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(MakeLerp, 0, 85, 20 * DT, EASING_COS_IN_OUT)
     Label(0)
     Call(UpdateLerp)
@@ -132,7 +132,7 @@ EvtScript N(EVS_OnSearchBush8) = {
     IfEq(LVar1, 1)
         Goto(10)
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -404,30 +404,30 @@ BombTrigger N(BombPos_Tree2) = {
 };
 
 EvtScript N(EVS_OnShakeTree3) = {
-    IfEq(GF_KMR04_Tree3_Dolly, TRUE)
+    IfEq(GF_KMR04_Tree3_Dolly, true)
         Return
     EndIf
-    IfEq(AF_KMR_09, TRUE)
+    IfEq(AF_KMR_09, true)
         Return
     EndIf
     Wait(15)
     Call(MakeItemEntity, ITEM_DOLLY, 250, 132, -100, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_KMR04_Tree3_Dolly)
-    Set(AF_KMR_09, TRUE)
+    Set(AF_KMR_09, true)
     Thread
         Label(10)
-        IfEq(GF_KMR04_Tree3_Dolly, FALSE)
+        IfEq(GF_KMR04_Tree3_Dolly, false)
             Wait(1)
             Goto(10)
         EndIf
         Call(GetCurrentPartnerID, LVar0)
         IfEq(LVar0, PARTNER_GOOMPA)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Wait(5)
             Call(DisablePartnerAI, 0)
             Call(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00AB)
             Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
             Call(EnablePartnerAI)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
         EndIf
     EndThread
     Return

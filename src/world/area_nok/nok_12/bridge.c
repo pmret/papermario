@@ -4,9 +4,9 @@
 #include "world/common/EnableCameraLeadingPlayer.inc.c"
 
 EvtScript N(EVS_Scene_BuildBridge) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(20)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(N(DisableCameraLeadingPlayer))
@@ -92,8 +92,8 @@ EvtScript N(EVS_Scene_BuildBridge) = {
     Call(InterpCamTargetPos, CAM_DEFAULT, 1, LVar0, LVar1, LVar2, 10)
     Call(N(EnableCameraLeadingPlayer))
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Set(GB_StoryProgress, STORY_CH1_MADE_FIRST_BRIDGE)
     Call(SetGroupVisibility, MODEL_off, MODEL_GROUP_HIDDEN)
     Unbind

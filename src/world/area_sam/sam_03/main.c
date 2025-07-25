@@ -15,13 +15,13 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_SHIVER_SNOWFIELD)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    Set(GF_MAP_ShiverSnowfield, TRUE)
-    Call(EnableModel, MODEL_o44, FALSE)
+    Set(GF_MAP_ShiverSnowfield, true)
+    Call(EnableModel, MODEL_o44, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o44, COLLIDER_FLAGS_UPPER_MASK)
     IfLt(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        Call(MakeNpcs, FALSE, Ref(N(BeforeNPCs)))
+        Call(MakeNpcs, false, Ref(N(BeforeNPCs)))
     Else
-        Call(MakeNpcs, FALSE, Ref(N(AfterNPCs)))
+        Call(MakeNpcs, false, Ref(N(AfterNPCs)))
     EndIf
     ExecWait(N(EVS_SetupMusic))
     PlayEffect(EFFECT_SNOWFALL, 0, 32)

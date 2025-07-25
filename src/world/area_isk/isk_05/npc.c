@@ -155,14 +155,14 @@ API_CALLABLE(N(func_80241E24_97F8F4)) {
 }
 
 EvtScript N(EVS_NpcIdle_StoneChomp) = {
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, true)
     Label(100)
-    IfEq(GF_ISK05_Hammer2Block, FALSE)
+    IfEq(GF_ISK05_Hammer2Block, false)
         Wait(1)
         Goto(100)
     EndIf
     Call(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, FALSE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, false)
     Thread
         Wait(5)
         Call(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_ISK_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
@@ -177,7 +177,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
         Call(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_ISK_DOOR_SLAM, SOUND_SPACE_DEFAULT)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
     EndThread
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(5)
     Call(N(func_80241B28_97F5F8))
     Call(MakeLerp, 0, 255, 30, EASING_LINEAR)
@@ -214,24 +214,24 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
     EndIf
     Call(N(func_80241E24_97F8F4))
     Wait(5)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, false)
+    Call(EnableNpcShadow, NPC_SELF, true)
     Wait(1)
     Call(N(DestroyAmbushWorker))
     Call(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_StoneChomp)))
     Return
     End
 };
 
 EvtScript N(EVS_NpcDefeat_StoneChomp_Override) = {
-    Set(GF_ISK05_Defeated_StoneChomp, TRUE)
+    Set(GF_ISK05_Defeated_StoneChomp, true)
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Set(GF_ISK05_Defeated_StoneChomp, TRUE)
-            Set(AF_ISK05_StoneChompDefeated, TRUE)
+            Set(GF_ISK05_Defeated_StoneChomp, true)
+            Set(AF_ISK05_StoneChompDefeated, true)
             Call(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_ISK_DOOR_OPEN, SOUND_SPACE_DEFAULT)
             Thread
                 Wait(5)
@@ -255,14 +255,14 @@ EvtScript N(EVS_NpcDefeat_StoneChomp_Override) = {
 };
 
 EvtScript N(EVS_NpcInit_StoneChomp) = {
-    IfEq(GF_ISK05_Defeated_StoneChomp, TRUE)
+    IfEq(GF_ISK05_Defeated_StoneChomp, true)
         Call(RemoveNpc, NPC_SELF)
         Return
     EndIf
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_StoneChomp)))
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_StoneChomp_Override)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Return
     End
 };
@@ -273,7 +273,7 @@ NpcData N(NpcData_StoneChomp) = {
     .yaw = 320,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 468, 0, -378 },

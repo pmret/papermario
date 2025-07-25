@@ -66,7 +66,7 @@ EvtScript N(EVS_InitiateTradingEvent) = {
                 EndIf
             Else
                 Call(SwitchMessage, MSG_CH1_002A)
-                Set(GF_TradingEvent1_Active, TRUE)
+                Set(GF_TradingEvent1_Active, true)
                 Call(N(SetTradeEventStartTime))
             EndIf
         CaseEq(1)
@@ -74,7 +74,7 @@ EvtScript N(EVS_InitiateTradingEvent) = {
                 Call(SwitchMessage, MSG_CH1_002E)
             Else
                 Call(SwitchMessage, MSG_CH1_002B)
-                Set(GF_TradingEvent2_Active, TRUE)
+                Set(GF_TradingEvent2_Active, true)
                 Call(N(SetTradeEventStartTime))
             EndIf
         CaseEq(2)
@@ -82,7 +82,7 @@ EvtScript N(EVS_InitiateTradingEvent) = {
                 Call(SwitchMessage, MSG_CH1_002E)
             Else
                 Call(SwitchMessage, MSG_CH1_002C)
-                Set(GF_TradingEvent3_Active, TRUE)
+                Set(GF_TradingEvent3_Active, true)
                 Call(N(SetTradeEventStartTime))
             EndIf
         CaseEq(3)
@@ -93,7 +93,7 @@ EvtScript N(EVS_InitiateTradingEvent) = {
 };
 
 EvtScript N(EVS_Interact_Radio) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Wait(2)
     Call(SetPlayerAnimation, ANIM_MarioW2_RideLaki)
@@ -103,7 +103,7 @@ EvtScript N(EVS_Interact_Radio) = {
     IfGe(AB_NOK_0, 4)
         Set(AB_NOK_0, 0)
     EndIf
-    IfNe(GF_MAC05_SimonGotMelody, TRUE)
+    IfNe(GF_MAC05_SimonGotMelody, true)
         IfEq(AB_NOK_0, 2)
             Add(AB_NOK_0, 1)
         EndIf
@@ -120,7 +120,7 @@ EvtScript N(EVS_Interact_Radio) = {
             Call(ShowMessageAtScreenPos, MSG_CH1_0032, 160, 40)
             ExecWait(N(EVS_InitiateTradingEvent))
     EndSwitch
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

@@ -40,7 +40,7 @@ EvtScript N(EVS_Cam_FocusOnStairs) = {
     Sub(LVar1, 15)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Return
     End
 };
@@ -50,9 +50,9 @@ EvtScript N(EVS_Cam_ResetFocus) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Return
     End
 };
@@ -126,17 +126,17 @@ EvtScript N(EVS_Cam_ResetFocus) = {
     ExecWait(N(EVS_DropStep)) \
 
 EvtScript N(EVS_Scene_DropSteps) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(EnableModel, MODEL_yk1, FALSE)
+    Call(DisablePlayerInput, true)
+    Call(EnableModel, MODEL_yk1, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt3, COLLIDER_FLAGS_UPPER_MASK)
-    Call(EnableModel, MODEL_k1, TRUE)
-    Call(EnableModel, MODEL_k2, TRUE)
-    Call(EnableModel, MODEL_k3, TRUE)
-    Call(EnableModel, MODEL_k4, TRUE)
-    Call(EnableModel, MODEL_k5, TRUE)
-    Call(EnableModel, MODEL_k6, TRUE)
-    Call(EnableModel, MODEL_k7, TRUE)
-    Call(EnableModel, MODEL_k8, TRUE)
+    Call(EnableModel, MODEL_k1, true)
+    Call(EnableModel, MODEL_k2, true)
+    Call(EnableModel, MODEL_k3, true)
+    Call(EnableModel, MODEL_k4, true)
+    Call(EnableModel, MODEL_k5, true)
+    Call(EnableModel, MODEL_k6, true)
+    Call(EnableModel, MODEL_k7, true)
+    Call(EnableModel, MODEL_k8, true)
     Call(TranslateModel, MODEL_k1, 0, 180, 0)
     Call(TranslateModel, MODEL_k2, 0, 155, 0)
     Call(TranslateModel, MODEL_k3, 0, 130, 0)
@@ -153,8 +153,8 @@ EvtScript N(EVS_Scene_DropSteps) = {
     EVT_DROP_STEP_N (25,  -60, 188, 14,  50, MODEL_k6)
     EVT_DROP_STEP_N(-25,  -35, 188,  9,  25, MODEL_k7)
     EVT_DROP_STEP_L(-75,  -10, 188,  4,   0, MODEL_k8)
-    Call(EnableModel, MODEL_kage, TRUE)
-    Call(EnableModel, MODEL_kage_no, FALSE)
+    Call(EnableModel, MODEL_kage, true)
+    Call(EnableModel, MODEL_kage_no, false)
     Wait(30 * DT)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k1, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k2, COLLIDER_FLAGS_UPPER_MASK)
@@ -165,23 +165,23 @@ EvtScript N(EVS_Scene_DropSteps) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k7, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_kaidan, COLLIDER_FLAGS_UPPER_MASK)
     ExecWait(N(EVS_Cam_ResetFocus))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_SetupStairs) = {
     IfLt(GB_StoryProgress, STORY_CH3_HIT_HUGE_BLUE_SWITCH)
-        Call(EnableModel, MODEL_k1, FALSE)
-        Call(EnableModel, MODEL_k2, FALSE)
-        Call(EnableModel, MODEL_k3, FALSE)
-        Call(EnableModel, MODEL_k4, FALSE)
-        Call(EnableModel, MODEL_k5, FALSE)
-        Call(EnableModel, MODEL_k6, FALSE)
-        Call(EnableModel, MODEL_k7, FALSE)
-        Call(EnableModel, MODEL_k8, FALSE)
-        Call(EnableModel, MODEL_kage, FALSE)
-        Call(EnableModel, MODEL_kage_no, TRUE)
+        Call(EnableModel, MODEL_k1, false)
+        Call(EnableModel, MODEL_k2, false)
+        Call(EnableModel, MODEL_k3, false)
+        Call(EnableModel, MODEL_k4, false)
+        Call(EnableModel, MODEL_k5, false)
+        Call(EnableModel, MODEL_k6, false)
+        Call(EnableModel, MODEL_k7, false)
+        Call(EnableModel, MODEL_k8, false)
+        Call(EnableModel, MODEL_kage, false)
+        Call(EnableModel, MODEL_kage_no, true)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k1, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k2, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k3, COLLIDER_FLAGS_UPPER_MASK)
@@ -191,9 +191,9 @@ EvtScript N(EVS_SetupStairs) = {
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_k7, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_kaidan, COLLIDER_FLAGS_UPPER_MASK)
     Else
-        Call(EnableModel, MODEL_yk1, FALSE)
-        Call(EnableModel, MODEL_kage, TRUE)
-        Call(EnableModel, MODEL_kage_no, FALSE)
+        Call(EnableModel, MODEL_yk1, false)
+        Call(EnableModel, MODEL_kage, true)
+        Call(EnableModel, MODEL_kage_no, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt3, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     Return

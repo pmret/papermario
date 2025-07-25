@@ -5,7 +5,7 @@
 
 EvtScript N(EVS_ExitDoors_pra_04_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_10_ENTRY_0)
     Set(LVar1, COLLIDER_deilittsw)
     Set(LVar2, MODEL_o772)
@@ -22,7 +22,7 @@ EvtScript N(EVS_ExitDoors_pra_04_2) = {
 
 EvtScript N(EVS_ExitDoors_pra_12_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_10_ENTRY_1)
     Set(LVar1, COLLIDER_deilittse)
     Set(LVar2, MODEL_o1019)
@@ -69,7 +69,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_CRYSTAL_PALACE)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     Exec(N(EVS_SetupMusic))
     Set(LVar0, REFLECTION_FLOOR_ONLY)
     Set(LVar1, GF_PRA_BrokeIllusion)

@@ -242,7 +242,7 @@ EvtScript N(EVS_Idle) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar1)
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVar2)
             Call(ActorExists, LVar1, LVar3)
-            IfEq(LVar3, TRUE)
+            IfEq(LVar3, true)
                 Call(N(CosInterpMinMax), LVarF, LVar4, Float(128.0), Float(254.0), 20, 0, 0)
                 Set(LVar4, LVar4)
                 Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar4)
@@ -331,7 +331,7 @@ EvtScript N(EVS_UpdateHovering) = {
 
 EvtScript N(EVS_RemoveClone) = {
     Call(EnableActorBlur, LVar9, ACTOR_BLUR_ENABLE)
-    Call(SetActorFlagBits, LVar9, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+    Call(SetActorFlagBits, LVar9, ACTOR_FLAG_NO_DMG_APPLY, true)
     Thread
         Call(N(GetActorPartOpacity), LVar9, PRT_MAIN, LVar3)
         Call(MakeLerp, LVar3, 0, 20, EASING_QUADRATIC_IN)
@@ -389,19 +389,19 @@ EvtScript N(EVS_OnHit) = {
             IfFlag(LVar0, STATUS_FLAGS_IMMOBILIZED | STATUS_FLAG_SHRINK)
                 Call(GetActorVar, ACTOR_SELF, AVAR_King_CubeBitID, LVar0)
                 Call(ActorExists, LVar0, LVar1)
-                IfEq(LVar1, TRUE)
+                IfEq(LVar1, true)
                     Call(SetDamageSource, DMG_SRC_DEFAULT)
                     Call(DispatchEvent, LVar0, EVENT_DEATH)
                 EndIf
                 Call(GetActorVar, ACTOR_SELF, AVAR_King_SphereBitID, LVar0)
                 Call(ActorExists, LVar0, LVar1)
-                IfEq(LVar1, TRUE)
+                IfEq(LVar1, true)
                     Call(SetDamageSource, DMG_SRC_DEFAULT)
                     Call(DispatchEvent, LVar0, EVENT_DEATH)
                 EndIf
                 Call(GetActorVar, ACTOR_SELF, AVAR_King_PrismBitID, LVar0)
                 Call(ActorExists, LVar0, LVar1)
-                IfEq(LVar1, TRUE)
+                IfEq(LVar1, true)
                     Call(SetDamageSource, DMG_SRC_DEFAULT)
                     Call(DispatchEvent, LVar0, EVENT_DEATH)
                 EndIf
@@ -422,14 +422,14 @@ EvtScript N(EVS_OnHit) = {
     EndIf
     Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar9)
     Call(ActorExists, LVar9, LVarA)
-    IfEq(LVarA, TRUE)
+    IfEq(LVarA, true)
         Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar9)
         Exec(N(EVS_RemoveClone))
         Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVar9)
         ExecGetTID(N(EVS_RemoveClone), LVar0)
         Label(1)
             IsThreadRunning(LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Wait(1)
                 Goto(1)
             EndIf
@@ -445,24 +445,24 @@ EvtScript N(EVS_OnHit) = {
         Set(LVar1, 0)
         Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
         Call(N(StartRumbleWithParams), 150, 10)
         Thread
             Call(ShakeCam, CAM_BATTLE, 0, 5, Float(0.7))
         EndThread
         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
         Wait(15)
-        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, FALSE)
+        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, false)
     EndIf
     Call(GetStatusFlags, ACTOR_SELF, LVar0)
     IfNotFlag(LVar0, STATUS_FLAGS_IMMOBILIZED)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim0E)
         Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
         Call(SetGoalPos, ACTOR_SELF, 70, 0, 5)
-        Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+        Call(RunToGoal, ACTOR_SELF, 0, false)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim09)
     EndIf
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -485,23 +485,23 @@ EvtScript N(EVS_Death) = {
         CaseOrEq(AVAL_Move_AttackWithBits)
             Call(GetActorVar, ACTOR_SELF, AVAR_King_CubeBitID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Call(SetDamageSource, DMG_SRC_DEFAULT)
-                Call(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+                Call(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_DMG_APPLY, true)
                 Call(DispatchEvent, LVar0, EVENT_DEATH)
             EndIf
             Call(GetActorVar, ACTOR_SELF, AVAR_King_SphereBitID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Call(SetDamageSource, DMG_SRC_DEFAULT)
-                Call(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+                Call(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_DMG_APPLY, true)
                 Call(DispatchEvent, LVar0, EVENT_DEATH)
             EndIf
             Call(GetActorVar, ACTOR_SELF, AVAR_King_PrismBitID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Call(SetDamageSource, DMG_SRC_DEFAULT)
-                Call(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+                Call(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_DMG_APPLY, true)
                 Call(DispatchEvent, LVar0, EVENT_DEATH)
             EndIf
             Return
@@ -520,19 +520,19 @@ EvtScript N(EVS_Death) = {
     EndIf
     Call(GetActorVar, ACTOR_SELF, AVAR_HoveringScriptID, LVarA)
     IsThreadRunning(LVarA, LVar0)
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         KillThread(LVarA)
     EndIf
     Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar9)
     Call(ActorExists, LVar9, LVarA)
-    IfEq(LVarA, TRUE)
+    IfEq(LVarA, true)
         Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar9)
         Exec(N(EVS_RemoveClone))
         Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVar9)
         ExecGetTID(N(EVS_RemoveClone), LVar0)
         Label(1)
             IsThreadRunning(LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Wait(1)
                 Goto(1)
             EndIf
@@ -542,7 +542,7 @@ EvtScript N(EVS_Death) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetActorVar, ACTOR_KING, AVAR_Flags, LVar0)
     BitwiseOrConst(LVar0, AVAL_Flag_SuspendHover)
@@ -556,7 +556,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetActorVar, ACTOR_KING, AVAR_Flags, LVar0)
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Thread
                     Call(SetOwnerID, LVar0)
                     SetConst(LVar0, PRT_MAIN)
@@ -567,7 +567,7 @@ EvtScript N(EVS_HandleEvent) = {
             EndIf
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Thread
                     Call(SetOwnerID, LVar0)
                     SetConst(LVar0, PRT_MAIN)
@@ -582,7 +582,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseEq(EVENT_HIT)
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Thread
                     Call(SetOwnerID, LVar0)
                     SetConst(LVar0, PRT_MAIN)
@@ -593,7 +593,7 @@ EvtScript N(EVS_HandleEvent) = {
             EndIf
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Thread
                     Call(SetOwnerID, LVar0)
                     SetConst(LVar0, PRT_MAIN)
@@ -609,7 +609,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseEq(EVENT_BURN_HIT)
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Thread
                     Call(SetOwnerID, LVar0)
                     SetConst(LVar0, PRT_MAIN)
@@ -620,7 +620,7 @@ EvtScript N(EVS_HandleEvent) = {
             EndIf
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Thread
                     Call(SetOwnerID, LVar0)
                     SetConst(LVar0, PRT_MAIN)
@@ -657,7 +657,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseEq(EVENT_DEATH)
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Thread
                     Call(SetOwnerID, LVar0)
                     SetConst(LVar0, PRT_MAIN)
@@ -667,7 +667,7 @@ EvtScript N(EVS_HandleEvent) = {
             EndIf
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Thread
                     Call(SetOwnerID, LVar0)
                     SetConst(LVar0, PRT_MAIN)
@@ -686,7 +686,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseEq(EVENT_BURN_DEATH)
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Thread
                     Call(SetOwnerID, LVar0)
                     SetConst(LVar0, PRT_MAIN)
@@ -697,7 +697,7 @@ EvtScript N(EVS_HandleEvent) = {
             EndIf
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Thread
                     Call(SetOwnerID, LVar0)
                     SetConst(LVar0, PRT_MAIN)
@@ -729,12 +729,12 @@ EvtScript N(EVS_HandleEvent) = {
                             AddF(LVar0, LVar1)
                             Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVarA)
                             Call(ActorExists, LVarA, LVarB)
-                            IfEq(LVarB, TRUE)
+                            IfEq(LVarB, true)
                                 Call(SetPartScale, LVarA, PRT_MAIN, LVar0, LVar0, LVar0)
                             EndIf
                             Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVarA)
                             Call(ActorExists, LVarA, LVarB)
-                            IfEq(LVarB, TRUE)
+                            IfEq(LVarB, true)
                                 Call(SetPartScale, LVarA, PRT_MAIN, LVar0, LVar0, LVar0)
                             EndIf
                             Wait(1)
@@ -750,17 +750,17 @@ EvtScript N(EVS_HandleEvent) = {
                             AddF(LVar0, LVar1)
                             Call(GetActorVar, ACTOR_SELF, AVAR_King_CubeBitID, LVarA)
                             Call(ActorExists, LVarA, LVarB)
-                            IfEq(LVarB, TRUE)
+                            IfEq(LVarB, true)
                                 Call(SetPartScale, LVarA, PRT_MAIN, LVar0, LVar0, LVar0)
                             EndIf
                             Call(GetActorVar, ACTOR_SELF, AVAR_King_SphereBitID, LVarA)
                             Call(ActorExists, LVarA, LVarB)
-                            IfEq(LVarB, TRUE)
+                            IfEq(LVarB, true)
                                 Call(SetPartScale, LVarA, PRT_MAIN, LVar0, LVar0, LVar0)
                             EndIf
                             Call(GetActorVar, ACTOR_SELF, AVAR_King_PrismBitID, LVarA)
                             Call(ActorExists, LVarA, LVarB)
-                            IfEq(LVarB, TRUE)
+                            IfEq(LVarB, true)
                                 Call(SetPartScale, LVarA, PRT_MAIN, LVar0, LVar0, LVar0)
                             EndIf
                             Wait(1)
@@ -776,7 +776,7 @@ EvtScript N(EVS_HandleEvent) = {
                 Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim0E)
                 Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
                 Call(SetGoalPos, ACTOR_SELF, 70, 0, 5)
-                Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+                Call(RunToGoal, ACTOR_SELF, 0, false)
                 Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim09)
             EndIf
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -796,7 +796,7 @@ EvtScript N(EVS_HandleEvent) = {
     BitwiseAndConst(LVar0, ~AVAL_Flag_SuspendHover)
     Call(SetActorVar, ACTOR_KING, AVAR_Flags, LVar0)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -808,7 +808,7 @@ EvtScript N(EVS_TakeTurn) = {
         BitwiseOrConst(LVar0, AVAL_Flag_HadLowHP)
         Call(SetActorVar, ACTOR_KING, AVAR_Flags, LVar0)
     EndIf
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Call(GetActorHP, ACTOR_SELF, LVar0)
     Call(GetEnemyMaxHP, ACTOR_SELF, LVar1)
     Mul(LVar0, 100)
@@ -821,7 +821,7 @@ EvtScript N(EVS_TakeTurn) = {
             IfLe(LVar0, 100)
                 Call(GetActorVar, ACTOR_SELF, AVAR_HealCount, LVar0)
                 IfLt(LVar0, 2)
-                    Set(LFlag0, TRUE)
+                    Set(LFlag0, true)
                 EndIf
             EndIf
         CaseLt(40)
@@ -831,7 +831,7 @@ EvtScript N(EVS_TakeTurn) = {
             IfLe(LVar0, 30)
                 Call(GetActorVar, ACTOR_SELF, AVAR_HealCount, LVar0)
                 IfLt(LVar0, 2)
-                    Set(LFlag0, TRUE)
+                    Set(LFlag0, true)
                 EndIf
             EndIf
         CaseLt(55)
@@ -841,11 +841,11 @@ EvtScript N(EVS_TakeTurn) = {
             IfLe(LVar0, 10)
                 Call(GetActorVar, ACTOR_SELF, AVAR_HealCount, LVar0)
                 IfLt(LVar0, 2)
-                    Set(LFlag0, TRUE)
+                    Set(LFlag0, true)
                 EndIf
             EndIf
     EndSwitch
-    IfEq(LFlag0, TRUE)
+    IfEq(LFlag0, true)
         Call(GetActorVar, ACTOR_SELF, AVAR_HealCount, LVar0)
         Add(LVar0, 1)
         Call(SetActorVar, ACTOR_SELF, AVAR_HealCount, LVar0)
@@ -933,7 +933,7 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 EvtScript N(EVS_Attack_IcyBreath) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
@@ -990,7 +990,7 @@ EvtScript N(EVS_Attack_IcyBreath) = {
             Wait(20)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
     EndSwitch
     Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -1024,13 +1024,13 @@ EvtScript N(EVS_Attack_IcyBreath) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_IceBolt) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
@@ -1099,7 +1099,7 @@ EvtScript N(EVS_Attack_IceBolt) = {
             Wait(20)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
     EndSwitch
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1151,7 +1151,7 @@ EvtScript N(EVS_Attack_IceBolt) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -1224,23 +1224,23 @@ Formation N(CloneFormation) = {
 };
 
 EvtScript N(EVS_Move_MakeClones) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 15)
     Wait(15)
     Call(GetActorHP, ACTOR_SELF, LVarA)
-    Call(SummonEnemy, Ref(N(CloneFormation)), FALSE)
-    Call(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_SHADOW, TRUE)
+    Call(SummonEnemy, Ref(N(CloneFormation)), false)
+    Call(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_SHADOW, true)
     Call(SetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar0)
-    Call(SetPartEventBits, LVar0, PRT_MAIN, ACTOR_EVENT_FLAG_ILLUSORY, TRUE)
+    Call(SetPartEventBits, LVar0, PRT_MAIN, ACTOR_EVENT_FLAG_ILLUSORY, true)
     Call(SetEnemyHP, LVar0, LVarA)
     Call(CopyStatusEffects, ACTOR_SELF, LVar0)
     Call(CopyBuffs, ACTOR_SELF, LVar0)
-    Call(SummonEnemy, Ref(N(CloneFormation)), FALSE)
-    Call(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_SHADOW, TRUE)
+    Call(SummonEnemy, Ref(N(CloneFormation)), false)
+    Call(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_SHADOW, true)
     Call(SetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVar0)
-    Call(SetPartEventBits, LVar0, PRT_MAIN, ACTOR_EVENT_FLAG_ILLUSORY, TRUE)
+    Call(SetPartEventBits, LVar0, PRT_MAIN, ACTOR_EVENT_FLAG_ILLUSORY, true)
     Call(SetEnemyHP, LVar0, LVarA)
     Call(CopyStatusEffects, ACTOR_SELF, LVar0)
     Call(CopyBuffs, ACTOR_SELF, LVar0)
@@ -1260,11 +1260,11 @@ EvtScript N(EVS_Move_MakeClones) = {
             Goto(10)
         EndIf
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim09)
-        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, TRUE)
+        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, true)
         Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar0)
-        Call(SetActorFlagBits, LVar0, ACTOR_FLAG_FLYING, TRUE)
+        Call(SetActorFlagBits, LVar0, ACTOR_FLAG_FLYING, true)
         Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVar0)
-        Call(SetActorFlagBits, LVar0, ACTOR_FLAG_FLYING, TRUE)
+        Call(SetActorFlagBits, LVar0, ACTOR_FLAG_FLYING, true)
         ExecGetTID(N(EVS_UpdateHovering), LVar0)
         Call(SetActorVar, ACTOR_SELF, AVAR_HoveringScriptID, LVar0)
     EndIf
@@ -1278,15 +1278,15 @@ EvtScript N(EVS_Move_MakeClones) = {
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim00)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim09)
     Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar0)
-    Call(UseIdleAnimation, LVar0, FALSE)
+    Call(UseIdleAnimation, LVar0, false)
     Call(SetAnimation, LVar0, PRT_MAIN, ANIM_CrystalKing_Anim00)
     Call(SetAnimation, LVar0, PRT_MAIN, ANIM_CrystalKing_Anim09)
-    Call(UseIdleAnimation, LVar0, TRUE)
+    Call(UseIdleAnimation, LVar0, true)
     Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVar0)
-    Call(UseIdleAnimation, LVar0, FALSE)
+    Call(UseIdleAnimation, LVar0, false)
     Call(SetAnimation, LVar0, PRT_MAIN, ANIM_CrystalKing_Anim00)
     Call(SetAnimation, LVar0, PRT_MAIN, ANIM_CrystalKing_Anim09)
-    Call(UseIdleAnimation, LVar0, TRUE)
+    Call(UseIdleAnimation, LVar0, true)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SUMMON_CRYSTAL_CLONES)
     Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
     Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVar0)
@@ -1339,9 +1339,9 @@ EvtScript N(EVS_Move_MakeClones) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVarB)
             Set(LVarC, ACTOR_SELF)
     EndSwitch
-    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, FALSE)
-    Call(SetActorFlagBits, LVarB, ACTOR_FLAG_NO_SHADOW, FALSE)
-    Call(SetActorFlagBits, LVarC, ACTOR_FLAG_NO_SHADOW, FALSE)
+    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, false)
+    Call(SetActorFlagBits, LVarB, ACTOR_FLAG_NO_SHADOW, false)
+    Call(SetActorFlagBits, LVarC, ACTOR_FLAG_NO_SHADOW, false)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 150)
     Thread
@@ -1410,7 +1410,7 @@ EvtScript N(EVS_Move_MakeClones) = {
     BitwiseAndConst(LVar0, ~AVAR_Flag_HitCombo)
     Call(SetActorVar, ACTOR_KING, AVAR_Flags, LVar0)
     Wait(20)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -1484,7 +1484,7 @@ EvtScript N(EVS_SummonBit) = {
 };
 
 EvtScript N(EVS_Move_SummonBits) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_SELF)
@@ -1492,11 +1492,11 @@ EvtScript N(EVS_Move_SummonBits) = {
     Wait(15)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim1E)
     Wait(20)
-    Call(SummonEnemy, Ref(N(CubeBitFormation)), FALSE)
+    Call(SummonEnemy, Ref(N(CubeBitFormation)), false)
     Call(SetActorVar, ACTOR_SELF, AVAR_King_CubeBitID, LVar0)
-    Call(SummonEnemy, Ref(N(SphereBitFormation)), FALSE)
+    Call(SummonEnemy, Ref(N(SphereBitFormation)), false)
     Call(SetActorVar, ACTOR_SELF, AVAR_King_SphereBitID, LVar0)
-    Call(SummonEnemy, Ref(N(PrismBitFormation)), FALSE)
+    Call(SummonEnemy, Ref(N(PrismBitFormation)), false)
     Call(SetActorVar, ACTOR_SELF, AVAR_King_PrismBitID, LVar0)
     Call(GetStatusFlags, ACTOR_SELF, LVar0)
     IfFlag(LVar0, STATUS_FLAG_SHRINK)
@@ -1541,7 +1541,7 @@ EvtScript N(EVS_Move_SummonBits) = {
     Call(HPBarToHome, LVar0)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -1549,9 +1549,9 @@ EvtScript N(EVS_Move_SummonBits) = {
 EvtScript N(EVS_Attack_CloneBreath) = {
     Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVarA)
     Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVarB)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
-    Call(UseIdleAnimation, LVarA, FALSE)
-    Call(UseIdleAnimation, LVarB, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
+    Call(UseIdleAnimation, LVarA, false)
+    Call(UseIdleAnimation, LVarB, false)
     Call(GetActorVar, ACTOR_KING, AVAR_Flags, LVar0)
     BitwiseOrConst(LVar0, AVAL_Flag_SuspendHover)
     Call(SetActorVar, ACTOR_KING, AVAR_Flags, LVar0)
@@ -1668,9 +1668,9 @@ EvtScript N(EVS_Attack_CloneBreath) = {
             Call(GetActorVar, ACTOR_KING, AVAR_Flags, LVar0)
             BitwiseAndConst(LVar0, ~AVAL_Flag_SuspendHover)
             Call(SetActorVar, ACTOR_KING, AVAR_Flags, LVar0)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
-            Call(UseIdleAnimation, LVarA, TRUE)
-            Call(UseIdleAnimation, LVarB, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
+            Call(UseIdleAnimation, LVarA, true)
+            Call(UseIdleAnimation, LVarB, true)
             Return
     EndSwitch
     Call(GetActorFlags, ACTOR_SELF, LVar0)
@@ -1735,9 +1735,9 @@ EvtScript N(EVS_Attack_CloneBreath) = {
     Call(GetActorVar, ACTOR_KING, AVAR_Flags, LVar0)
     BitwiseAndConst(LVar0, ~AVAL_Flag_SuspendHover)
     Call(SetActorVar, ACTOR_KING, AVAR_Flags, LVar0)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
-    Call(UseIdleAnimation, LVarA, TRUE)
-    Call(UseIdleAnimation, LVarB, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
+    Call(UseIdleAnimation, LVarA, true)
+    Call(UseIdleAnimation, LVarB, true)
     Return
     End
 };
@@ -1747,7 +1747,7 @@ EvtScript N(EVS_Attack_CloneBreath) = {
 EvtScript N(EVS_InhaleBit) = {
     Set(LVarA, LVar0)
     Set(LVarB, LVar1)
-    Call(UseIdleAnimation, LVarA, FALSE)
+    Call(UseIdleAnimation, LVarA, false)
     Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
     Call(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
     Call(GetStatusFlags, ACTOR_SELF, LVar9)
@@ -1767,8 +1767,8 @@ EvtScript N(EVS_InhaleBit) = {
         IfEq(LVar0, 1)
             Goto(0)
         EndIf
-    Call(SetPartFlagBits, LVarA, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, TRUE)
+    Call(SetPartFlagBits, LVarA, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
+    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, true)
     Return
     End
 };
@@ -1776,8 +1776,8 @@ EvtScript N(EVS_InhaleBit) = {
 EvtScript N(EVS_RemoveBit) = {
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LIGHT_THROW)
     Set(LVarA, LVar0)
-    Call(SetPartFlagBits, LVarA, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, FALSE)
+    Call(SetPartFlagBits, LVarA, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, false)
+    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, false)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, -150, 0, 0)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1810,8 +1810,8 @@ EvtScript N(EVS_RemoveBit) = {
 EvtScript N(EVS_SpitSingleBit) = {
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LIGHT_THROW)
     Set(LVarA, LVar0)
-    Call(SetPartFlagBits, LVarA, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, FALSE)
+    Call(SetPartFlagBits, LVarA, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, false)
+    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, false)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(GetActorPos, LVarA, LVar3, LVar4, LVar5)
@@ -1841,7 +1841,7 @@ EvtScript N(EVS_SpitSingleBit) = {
     Call(RandInt, 50, LVar4)
     Add(LVar2, LVar4)
     Call(SetGoalPos, LVarA, LVar1, LVar2, LVar3)
-    Call(JumpToGoal, LVarA, 20, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, LVarA, 20, false, true, false)
     Call(GetActorVar, LVarA, AVAR_Bit_ParticlesEffect, LVarF)
     Call(RemoveEffect, LVarF)
     Call(RemoveActor, LVarA)
@@ -1850,7 +1850,7 @@ EvtScript N(EVS_SpitSingleBit) = {
 };
 
 EvtScript N(EVS_Attack_SpitBits) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
@@ -1864,19 +1864,19 @@ EvtScript N(EVS_Attack_SpitBits) = {
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CRYSTAL_KING_INHALE)
     Call(GetActorVar, ACTOR_SELF, AVAR_King_CubeBitID, LVar0)
     Call(ActorExists, LVar0, LVar1)
-    IfEq(LVar1, TRUE)
+    IfEq(LVar1, true)
         Set(LVar1, &N(BitSuctionPaths)[0])
         ExecGetTID(N(EVS_InhaleBit), LVarA)
     EndIf
     Call(GetActorVar, ACTOR_SELF, AVAR_King_SphereBitID, LVar0)
     Call(ActorExists, LVar0, LVar1)
-    IfEq(LVar1, TRUE)
+    IfEq(LVar1, true)
         Set(LVar1, &N(BitSuctionPaths)[1])
         ExecGetTID(N(EVS_InhaleBit), LVarA)
     EndIf
     Call(GetActorVar, ACTOR_SELF, AVAR_King_PrismBitID, LVar0)
     Call(ActorExists, LVar0, LVar1)
-    IfEq(LVar1, TRUE)
+    IfEq(LVar1, true)
         Set(LVar1, &N(BitSuctionPaths)[2])
         ExecGetTID(N(EVS_InhaleBit), LVarA)
     EndIf
@@ -1897,7 +1897,7 @@ EvtScript N(EVS_Attack_SpitBits) = {
             Set(LVar9, LVar0)
             Call(GetActorVar, ACTOR_SELF, AVAR_King_CubeBitID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim1C)
                 ExecGetTID(N(EVS_RemoveBit), LVarA)
                 Wait(4)
@@ -1906,7 +1906,7 @@ EvtScript N(EVS_Attack_SpitBits) = {
             EndIf
             Call(GetActorVar, ACTOR_SELF, AVAR_King_SphereBitID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim1C)
                 ExecGetTID(N(EVS_RemoveBit), LVarA)
                 Wait(4)
@@ -1915,7 +1915,7 @@ EvtScript N(EVS_Attack_SpitBits) = {
             EndIf
             Call(GetActorVar, ACTOR_SELF, AVAR_King_PrismBitID, LVar0)
             Call(ActorExists, LVar0, LVar1)
-            IfEq(LVar1, TRUE)
+            IfEq(LVar1, true)
                 Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim1C)
                 ExecGetTID(N(EVS_RemoveBit), LVarA)
                 Wait(4)
@@ -1933,12 +1933,12 @@ EvtScript N(EVS_Attack_SpitBits) = {
             EndIf
             Wait(30)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
     EndSwitch
     Call(GetActorVar, ACTOR_SELF, AVAR_King_CubeBitID, LVar0)
     Call(ActorExists, LVar0, LVar1)
-    IfEq(LVar1, TRUE)
+    IfEq(LVar1, true)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim1C)
         ExecGetTID(N(EVS_SpitSingleBit), LVarA)
         Wait(4)
@@ -1947,7 +1947,7 @@ EvtScript N(EVS_Attack_SpitBits) = {
     EndIf
     Call(GetActorVar, ACTOR_SELF, AVAR_King_SphereBitID, LVar0)
     Call(ActorExists, LVar0, LVar1)
-    IfEq(LVar1, TRUE)
+    IfEq(LVar1, true)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim1C)
         ExecGetTID(N(EVS_SpitSingleBit), LVarA)
         Wait(4)
@@ -1956,7 +1956,7 @@ EvtScript N(EVS_Attack_SpitBits) = {
     EndIf
     Call(GetActorVar, ACTOR_SELF, AVAR_King_PrismBitID, LVar0)
     Call(ActorExists, LVar0, LVar1)
-    IfEq(LVar1, TRUE)
+    IfEq(LVar1, true)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim1C)
         ExecGetTID(N(EVS_SpitSingleBit), LVarA)
         Wait(4)
@@ -1970,13 +1970,13 @@ EvtScript N(EVS_Attack_SpitBits) = {
             Goto(4)
         EndIf
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Move_Recover) = {
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Call(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
     Switch(LVar0)
         CaseOrEq(AVAL_Move_AttackWithClones)
@@ -1984,17 +1984,17 @@ EvtScript N(EVS_Move_Recover) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone1_ID, LVarA)
             Call(GetActorVar, ACTOR_SELF, AVAR_Clone2_ID, LVarB)
             Call(ActorExists, LVarA, LVar0)
-            IfEq(LVar0, TRUE)
-                Set(LFlag0, TRUE)
+            IfEq(LVar0, true)
+                Set(LFlag0, true)
             EndIf
         EndCaseGroup
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    IfEq(LFlag0, TRUE)
-        Call(UseIdleAnimation, LVarA, FALSE)
+    IfEq(LFlag0, true)
+        Call(UseIdleAnimation, LVarA, false)
         Call(EnableIdleScript, LVarA, IDLE_SCRIPT_DISABLE)
-        Call(UseIdleAnimation, LVarB, FALSE)
+        Call(UseIdleAnimation, LVarB, false)
         Call(EnableIdleScript, LVarB, IDLE_SCRIPT_DISABLE)
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
@@ -2009,7 +2009,7 @@ EvtScript N(EVS_Move_Recover) = {
     Call(MoveBattleCamOver, 20)
     Wait(20)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim1D)
-    IfEq(LFlag0, TRUE)
+    IfEq(LFlag0, true)
         Call(SetAnimation, LVarA, PRT_MAIN, ANIM_CrystalKing_Anim1D)
         Call(SetAnimation, LVarB, PRT_MAIN, ANIM_CrystalKing_Anim1D)
     EndIf
@@ -2021,7 +2021,7 @@ EvtScript N(EVS_Move_Recover) = {
         Wait(30)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_STAR_BOUNCE_A)
     EndThread
-    IfEq(LFlag0, TRUE)
+    IfEq(LFlag0, true)
         Thread
             Wait(5)
             Call(PlaySoundAtActor, LVarA, SOUND_RECOVER_HEART)
@@ -2037,27 +2037,27 @@ EvtScript N(EVS_Move_Recover) = {
             Call(PlaySoundAtActor, LVarB, SOUND_STAR_BOUNCE_A)
         EndThread
     EndIf
-    IfEq(LFlag0, FALSE)
+    IfEq(LFlag0, false)
         Thread
-            Call(FreezeBattleState, TRUE)
-            Call(HealActor, ACTOR_SELF, 20, FALSE)
-            Call(FreezeBattleState, FALSE)
+            Call(FreezeBattleState, true)
+            Call(HealActor, ACTOR_SELF, 20, false)
+            Call(FreezeBattleState, false)
         EndThread
     Else
         Thread
-            Call(FreezeBattleState, TRUE)
-            Call(HealActor, ACTOR_SELF, 20, TRUE)
-            Call(FreezeBattleState, FALSE)
+            Call(FreezeBattleState, true)
+            Call(HealActor, ACTOR_SELF, 20, true)
+            Call(FreezeBattleState, false)
         EndThread
         Thread
-            Call(FreezeBattleState, TRUE)
-            Call(HealActor, LVarA, 20, TRUE)
-            Call(FreezeBattleState, FALSE)
+            Call(FreezeBattleState, true)
+            Call(HealActor, LVarA, 20, true)
+            Call(FreezeBattleState, false)
         EndThread
         Thread
-            Call(FreezeBattleState, TRUE)
-            Call(HealActor, LVarB, 20, TRUE)
-            Call(FreezeBattleState, FALSE)
+            Call(FreezeBattleState, true)
+            Call(HealActor, LVarB, 20, true)
+            Call(FreezeBattleState, false)
         EndThread
         Call(SetAnimation, LVarA, PRT_MAIN, ANIM_CrystalKing_Anim09)
         Call(SetAnimation, LVarB, PRT_MAIN, ANIM_CrystalKing_Anim09)
@@ -2065,12 +2065,12 @@ EvtScript N(EVS_Move_Recover) = {
     Call(WaitForBuffDone)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
-    IfEq(LFlag0, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
+    IfEq(LFlag0, true)
         Call(EnableIdleScript, LVarA, IDLE_SCRIPT_ENABLE)
-        Call(UseIdleAnimation, LVarA, TRUE)
+        Call(UseIdleAnimation, LVarA, true)
         Call(EnableIdleScript, LVarA, IDLE_SCRIPT_ENABLE)
-        Call(UseIdleAnimation, LVarA, TRUE)
+        Call(UseIdleAnimation, LVarA, true)
     EndIf
     Return
     End

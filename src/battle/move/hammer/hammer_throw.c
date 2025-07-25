@@ -37,7 +37,7 @@ EntityModelScript N(EMS_UltraHammer) = STANDARD_ENTITY_MODEL_SCRIPT(N(ultra_hamm
 extern EvtScript N(EVS_UseMove_Impl);
 
 EvtScript N(EVS_UseMove) = {
-    Call(ShowActionHud, TRUE)
+    Call(ShowActionHud, true)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
         CaseEq(0)
@@ -66,7 +66,7 @@ EvtScript N(EVS_802A3E5C) = {
     Set(LVar1, 0)
     Loop(10)
         Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        IfEq(LVar0, TRUE)
+        IfEq(LVar0, true)
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             BreakLoop
         EndIf
@@ -97,7 +97,7 @@ EvtScript N(EVS_802A3FE0) = {
     Set(LVar1, 0)
     Loop(10)
         Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        IfEq(LVar0, TRUE)
+        IfEq(LVar0, true)
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             BreakLoop
         EndIf
@@ -128,7 +128,7 @@ EvtScript N(EVS_802A4164) = {
     Set(LVar1, 0)
     Loop(10)
         Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        IfEq(LVar0, TRUE)
+        IfEq(LVar0, true)
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             BreakLoop
         EndIf
@@ -200,7 +200,7 @@ EvtScript N(EVS_UseMove_Impl) = {
             Loop(45)
                 Wait(1)
                 Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-                IfNe(LVar0, FALSE)
+                IfNe(LVar0, false)
                     BreakLoop
                 EndIf
             EndLoop
@@ -227,7 +227,7 @@ EvtScript N(EVS_UseMove_Impl) = {
                 EndIf
             EndIf
             Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-            IfEq(LVar0, FALSE)
+            IfEq(LVar0, false)
                 BreakLoop
             EndIf
         EndLoop
@@ -287,7 +287,7 @@ EvtScript N(EVS_UseMove_Impl) = {
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(GetPlayerActionQuality, LVar3)
     Switch(LVar3)
-        CaseGt(FALSE)
+        CaseGt(false)
             Thread
                 Set(LVar0, 0)
                 Loop(9)
@@ -323,7 +323,7 @@ EvtScript N(EVS_UseMove_Impl) = {
     Thread
         Call(GetPlayerActionQuality, LVar3)
         Switch(LVar3)
-            CaseGt(FALSE)
+            CaseGt(false)
                 Call(SetVirtualEntityJumpGravity, LVarA, Float(1.4))
                 Add(LVar0, 60)
                 Add(LVar1, 0)
@@ -339,7 +339,7 @@ EvtScript N(EVS_UseMove_Impl) = {
     EndThread
     Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
-        CaseGt(FALSE)
+        CaseGt(false)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
             Switch(LVar1)
                 CaseEq(0)
@@ -391,7 +391,7 @@ EvtScript N(EVS_UseMove_Impl) = {
     EndSwitch
     Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
-        CaseGt(FALSE)
+        CaseGt(false)
             Call(GetMenuSelection, LVar0, LVar1, LVar2)
             Switch(LVar1)
                 CaseEq(0)

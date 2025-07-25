@@ -33,23 +33,23 @@ s32 N(D_802460D0_DAB310)[] = {
 };
 
 EvtScript N(EVS_80246108) = {
-    IfEq(GF_OMO03_BlueSwitchActivated, FALSE)
-        Call(DisablePlayerInput, TRUE)
+    IfEq(GF_OMO03_BlueSwitchActivated, false)
+        Call(DisablePlayerInput, true)
         Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_SadTalk, ANIM_TrainToad_SadIdle, 0, MSG_CH4_0014)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Return
     Else
-        Call(DisablePlayerInput, TRUE)
-        Call(DisablePlayerPhysics, TRUE)
+        Call(DisablePlayerInput, true)
+        Call(DisablePlayerPhysics, true)
         Call(DisablePartnerAI, 0)
         Thread
-            Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Call(SetNpcJumpscale, NPC_Conductor, Float(1.0))
             Call(GetNpcPos, NPC_Conductor, LVar0, LVar1, LVar2)
             Loop(2)
                 Call(NpcJump1, NPC_Conductor, LVar0, LVar1, LVar2, 15)
             EndLoop
-            Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
         EndThread
         Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0015)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o939, COLLIDER_FLAGS_UPPER_MASK)
@@ -62,9 +62,9 @@ EvtScript N(EVS_80246108) = {
             Set(MV_TrainUnk_00, 0)
             Set(MV_TrainUnk_01, Ref(N(D_802460A0_DAB2E0)))
             Set(MV_TrainUnk_02, 3)
-            Set(MF_TrainUnk_00, TRUE)
+            Set(MF_TrainUnk_00, true)
             Label(20)
-            IfEq(MF_TrainUnk_00, TRUE)
+            IfEq(MF_TrainUnk_00, true)
                 Wait(1)
                 Goto(20)
             EndIf
@@ -77,14 +77,14 @@ EvtScript N(EVS_80246108) = {
             Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_000E)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o939, COLLIDER_FLAGS_UPPER_MASK)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o941, COLLIDER_FLAGS_UPPER_MASK)
-            Call(DisablePlayerPhysics, FALSE)
+            Call(DisablePlayerPhysics, false)
             Call(EnablePartnerAI)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
         Else
             Set(MV_TrainUnk_00, 0)
             Set(MV_TrainUnk_01, Ref(N(D_802460D0_DAB310)))
             Set(MV_TrainUnk_02, 1)
-            Set(MF_TrainUnk_00, TRUE)
+            Set(MF_TrainUnk_00, true)
             Wait(1)
             Exec(N(EVS_TrainUnk_H))
             Label(30)
@@ -111,11 +111,11 @@ s32 N(D_80246510_DAB750)[] = {
 
 EvtScript N(D_80246538_DAB778) = {
     Call(FadeOutMusic, 0, 3000)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(DisablePartnerAI, 0)
     Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     Wait(10)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o939, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o941, COLLIDER_FLAGS_UPPER_MASK)
     Exec(N(EVS_TrainUnk_C))
@@ -125,7 +125,7 @@ EvtScript N(D_80246538_DAB778) = {
     Set(MV_TrainUnk_00, 0)
     Set(MV_TrainUnk_01, Ref(N(D_80246510_DAB750)))
     Set(MV_TrainUnk_02, 1)
-    Set(MF_TrainUnk_00, TRUE)
+    Set(MF_TrainUnk_00, true)
     Label(10)
     IfLt(MV_TrainPos, 350)
         Wait(1)
@@ -148,11 +148,11 @@ s32 N(D_802466C0_DAB900)[] = {
 
 EvtScript N(D_802466F8_DAB938) = {
     Call(FadeOutMusic, 0, 3000)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(DisablePartnerAI, 0)
     Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     Wait(10)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o939, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o941, COLLIDER_FLAGS_UPPER_MASK)
     Exec(N(EVS_TrainUnk_C))
@@ -162,7 +162,7 @@ EvtScript N(D_802466F8_DAB938) = {
     Set(MV_TrainUnk_00, 0)
     Set(MV_TrainUnk_01, Ref(N(D_802466C0_DAB900)))
     Set(MV_TrainUnk_02, 1)
-    Set(MF_TrainUnk_00, TRUE)
+    Set(MF_TrainUnk_00, true)
     Label(10)
     IfGt(MV_TrainPos, -350)
         Wait(1)
@@ -192,8 +192,8 @@ s32 N(D_802468B0_DABAF0)[] = {
 };
 
 EvtScript N(D_802468F8_DABB38) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAND)
     Call(DisablePartnerAI, 0)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o939, COLLIDER_FLAGS_UPPER_MASK)
@@ -203,11 +203,11 @@ EvtScript N(D_802468F8_DABB38) = {
         Set(MV_TrainUnk_01, Ref(N(D_80246880_DABAC0)))
         Set(MV_TrainUnk_02, 2)
         Exec(N(EVS_Scene_RideTrain))
-        Set(MF_TrainUnk_00, TRUE)
+        Set(MF_TrainUnk_00, true)
         Wait(1)
         ExecGetTID(N(EVS_TrainUnk_A), LVarB)
         Label(10)
-        IfEq(MF_TrainUnk_00, TRUE)
+        IfEq(MF_TrainUnk_00, true)
             Wait(1)
             Goto(10)
         EndIf
@@ -220,16 +220,16 @@ EvtScript N(D_802468F8_DABB38) = {
         Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_000E)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o939, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o941, COLLIDER_FLAGS_UPPER_MASK)
-        Call(DisablePlayerPhysics, FALSE)
+        Call(DisablePlayerPhysics, false)
         Call(EnablePartnerAI)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     Else
         Exec(N(EVS_TrainUnk_A))
         Set(MV_TrainUnk_00, 0)
         Set(MV_TrainUnk_01, Ref(N(D_802468B0_DABAF0)))
         Set(MV_TrainUnk_02, 0)
         Exec(N(EVS_Scene_RideTrain))
-        Set(MF_TrainUnk_00, TRUE)
+        Set(MF_TrainUnk_00, true)
         Wait(1)
         Exec(N(EVS_TrainUnk_H))
         Label(20)
@@ -270,14 +270,14 @@ s32 N(D_80246C40_DABE80)[] = {
 };
 
 EvtScript N(D_80246C80_DABEC0) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAND)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o939, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o941, COLLIDER_FLAGS_UPPER_MASK)
-    IfEq(GF_OMO03_BlueSwitchActivated, FALSE)
+    IfEq(GF_OMO03_BlueSwitchActivated, false)
         Set(MV_TrainUnk_01, Ref(N(D_80246C18_DABE58)))
     Else
         IfEq(AB_OMO_6, 0)
@@ -289,11 +289,11 @@ EvtScript N(D_80246C80_DABEC0) = {
     Set(MV_TrainUnk_00, 0)
     Set(MV_TrainUnk_02, 2)
     Exec(N(EVS_Scene_RideTrain))
-    Set(MF_TrainUnk_00, TRUE)
+    Set(MF_TrainUnk_00, true)
     Wait(1)
     ExecGetTID(N(EVS_TrainUnk_A), LVarB)
     Label(10)
-    IfEq(MF_TrainUnk_00, TRUE)
+    IfEq(MF_TrainUnk_00, true)
         Wait(1)
         Goto(10)
     EndIf
@@ -301,7 +301,7 @@ EvtScript N(D_80246C80_DABEC0) = {
     KillThread(LVarB)
     Exec(N(EVS_TrainUnk_B))
     Call(N(EnableCameraFollowPlayerY))
-    IfEq(GF_OMO03_BlueSwitchActivated, TRUE)
+    IfEq(GF_OMO03_BlueSwitchActivated, true)
         Set(LVar9, Ref(N(D_80246080_DAB2C0)))
         ExecWait(N(EVS_TrainUnk_E))
         Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_000E)
@@ -312,10 +312,10 @@ EvtScript N(D_80246C80_DABEC0) = {
     EndIf
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o939, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o941, COLLIDER_FLAGS_UPPER_MASK)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, true)
+    Call(DisablePlayerPhysics, false)
     Call(EnablePartnerAI)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     Label(15)
     Exec(N(EVS_TrainUnk_A))
@@ -323,7 +323,7 @@ EvtScript N(D_80246C80_DABEC0) = {
     Set(MV_TrainUnk_01, Ref(N(D_80246C40_DABE80)))
     Set(MV_TrainUnk_02, 0)
     Exec(N(EVS_Scene_RideTrain))
-    Set(MF_TrainUnk_00, TRUE)
+    Set(MF_TrainUnk_00, true)
     Wait(1)
     Exec(N(EVS_TrainUnk_H))
     Label(20)
@@ -347,11 +347,11 @@ s32 N(D_80247050_DAC290)[] = {
 };
 
 EvtScript N(EVS_8024705C) = {
-    IfEq(MF_EitherSwitchPressed, FALSE)
+    IfEq(MF_EitherSwitchPressed, false)
         Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0006)
     Else
-        IfEq(AF_OMO_UsingRightSwitch, FALSE)
-            IfEq(GF_OMO03_BlueSwitchActivated, FALSE)
+        IfEq(AF_OMO_UsingRightSwitch, false)
+            IfEq(GF_OMO03_BlueSwitchActivated, false)
                 Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_SadTalk, ANIM_TrainToad_SadIdle, 5, MSG_CH4_0012)
             Else
                 Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0007)
@@ -428,9 +428,9 @@ s32 N(D_80247454_DAC694)[] = {
 
 EvtScript N(EVS_8024746C) = {
     ExecWait(N(EVS_SetupSwitches))
-    Call(EnableGroup, MODEL_po, FALSE)
+    Call(EnableGroup, MODEL_po, false)
     IfLt(GB_StoryProgress, STORY_CH4_RETURNED_TOY_TRAIN)
-        Call(EnableGroup, MODEL_popo, FALSE)
+        Call(EnableGroup, MODEL_popo, false)
     Else
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_eki1, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
@@ -440,7 +440,7 @@ EvtScript N(EVS_8024746C) = {
         Set(MV_TrainUnk_01, Ref(N(D_80247454_DAC694)))
         Set(MV_TrainUnk_02, 0)
         Exec(N(EVS_Scene_RideTrain))
-        Set(MF_TrainUnk_00, TRUE)
+        Set(MF_TrainUnk_00, true)
     Else
         Call(GetEntryID, LVar0)
         Switch(LVar0)
@@ -449,14 +449,14 @@ EvtScript N(EVS_8024746C) = {
             CaseEq(omo_03_ENTRY_3)
                 Exec(N(D_802468F8_DABB38))
             CaseEq(omo_03_ENTRY_6)
-                Call(EnableGroup, MODEL_popo, FALSE)
-                Call(EnableGroup, MODEL_po, TRUE)
+                Call(EnableGroup, MODEL_popo, false)
+                Call(EnableGroup, MODEL_po, true)
             CaseDefault
                 Set(MV_TrainUnk_00, 0)
                 Set(MV_TrainUnk_01, Ref(N(D_80247454_DAC694)))
                 Set(MV_TrainUnk_02, 0)
                 Exec(N(EVS_Scene_RideTrain))
-                Set(MF_TrainUnk_00, TRUE)
+                Set(MF_TrainUnk_00, true)
         EndSwitch
     EndIf
     Return

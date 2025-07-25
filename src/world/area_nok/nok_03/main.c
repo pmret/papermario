@@ -62,7 +62,7 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
     IfLt(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-        Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+        Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     EndIf
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_TexPan_Flowers))

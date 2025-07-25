@@ -10,17 +10,17 @@ API_CALLABLE(N(AwaitPlayerMummyAmbush)) {
     f32 y = evt_get_variable(script, *args++);
 
     if (dist2D(x, y, gPlayerStatus.pos.x, gPlayerStatus.pos.z) > 250.0f) {
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
     } else {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
     return ApiStatus_DONE2;
 }
 
 EvtScript N(EVS_SetupSarcophagi) = {
-    Set(AF_ISK02_OpeningSarcophagus1, FALSE)
-    Set(AF_ISK02_OpeningSarcophagus2, FALSE)
-    Set(AF_ISK02_OpeningSarcophagus3, FALSE)
+    Set(AF_ISK02_OpeningSarcophagus1, false)
+    Set(AF_ISK02_OpeningSarcophagus2, false)
+    Set(AF_ISK02_OpeningSarcophagus3, false)
     Exec(N(EVS_ManageSarcophagus1))
     Exec(N(EVS_ManageSarcophagus2))
     Exec(N(EVS_ManageSarcophagus3))
@@ -58,7 +58,7 @@ EvtScript N(EVS_OpenSarcophagus) = {
 };
 
 EvtScript N(EVS_ManageSarcophagus1) = {
-    IfEq(AF_ISK02_Sarcophagus1Opened, FALSE)
+    IfEq(AF_ISK02_Sarcophagus1Opened, false)
         Label(5)
             Call(N(AwaitPlayerMummyAmbush), -210, 580)
             Wait(1)
@@ -66,21 +66,21 @@ EvtScript N(EVS_ManageSarcophagus1) = {
                 Goto(5)
             EndIf
     EndIf
-    Set(AF_ISK02_OpeningSarcophagus1, TRUE)
-    Call(SetNpcFlagBits, NPC_Pokey_01, NPC_FLAG_INVISIBLE, FALSE)
+    Set(AF_ISK02_OpeningSarcophagus1, true)
+    Call(SetNpcFlagBits, NPC_Pokey_01, NPC_FLAG_INVISIBLE, false)
     Set(LVar0, AF_ISK02_Sarcophagus1Opened)
     Set(LVar3, MODEL_g346)
     ExecWait(N(EVS_OpenSarcophagus))
-    Set(AF_ISK02_OpeningSarcophagus1, FALSE)
+    Set(AF_ISK02_OpeningSarcophagus1, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h1c, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_h1o, COLLIDER_FLAGS_UPPER_MASK)
-    Set(AF_ISK02_Sarcophagus1Opened, TRUE)
+    Set(AF_ISK02_Sarcophagus1Opened, true)
     Return
     End
 };
 
 EvtScript N(EVS_ManageSarcophagus2) = {
-    IfEq(AF_ISK02_Sarcophagus2Opened, FALSE)
+    IfEq(AF_ISK02_Sarcophagus2Opened, false)
         Label(5)
             Call(N(AwaitPlayerMummyAmbush), -30, 670)
             Wait(1)
@@ -89,21 +89,21 @@ EvtScript N(EVS_ManageSarcophagus2) = {
             EndIf
     EndIf
     Call(MakeItemEntity, ITEM_SPIKE_SHIELD, -133, 1, 500, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_ISK02_Item_SpikeShield)
-    Set(AF_ISK02_OpeningSarcophagus2, TRUE)
-    Call(SetNpcFlagBits, NPC_Pokey_02, NPC_FLAG_INVISIBLE, FALSE)
+    Set(AF_ISK02_OpeningSarcophagus2, true)
+    Call(SetNpcFlagBits, NPC_Pokey_02, NPC_FLAG_INVISIBLE, false)
     Set(LVar0, AF_ISK02_Sarcophagus2Opened)
     Set(LVar3, MODEL_g348)
     ExecWait(N(EVS_OpenSarcophagus))
-    Set(AF_ISK02_OpeningSarcophagus2, FALSE)
+    Set(AF_ISK02_OpeningSarcophagus2, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h2c, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_h2o, COLLIDER_FLAGS_UPPER_MASK)
-    Set(AF_ISK02_Sarcophagus2Opened, TRUE)
+    Set(AF_ISK02_Sarcophagus2Opened, true)
     Return
     End
 };
 
 EvtScript N(EVS_ManageSarcophagus3) = {
-    IfEq(AF_ISK02_Sarcophagus3Opened, FALSE)
+    IfEq(AF_ISK02_Sarcophagus3Opened, false)
         Label(5)
             Call(N(AwaitPlayerMummyAmbush), 220, 600)
             Wait(1)
@@ -111,15 +111,15 @@ EvtScript N(EVS_ManageSarcophagus3) = {
                 Goto(5)
             EndIf
     EndIf
-    Set(AF_ISK02_OpeningSarcophagus3, TRUE)
-    Call(SetNpcFlagBits, NPC_Pokey_03, NPC_FLAG_INVISIBLE, FALSE)
+    Set(AF_ISK02_OpeningSarcophagus3, true)
+    Call(SetNpcFlagBits, NPC_Pokey_03, NPC_FLAG_INVISIBLE, false)
     Set(LVar0, AF_ISK02_Sarcophagus3Opened)
     Set(LVar3, MODEL_g350)
     ExecWait(N(EVS_OpenSarcophagus))
-    Set(AF_ISK02_OpeningSarcophagus3, FALSE)
+    Set(AF_ISK02_OpeningSarcophagus3, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h3c, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_h3o, COLLIDER_FLAGS_UPPER_MASK)
-    Set(AF_ISK02_Sarcophagus3Opened, TRUE)
+    Set(AF_ISK02_Sarcophagus3Opened, true)
     Return
     End
 };

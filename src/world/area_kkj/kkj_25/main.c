@@ -12,8 +12,8 @@ EvtScript N(EVS_EnterMap) = {
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(kkj_25_ENTRY_0)
-            IfEq(GF_KKJ25_Visited, FALSE)
-                Call(DisablePlayerInput, TRUE)
+            IfEq(GF_KKJ25_Visited, false)
+                Call(DisablePlayerInput, true)
                 Call(SetPlayerPos, -645, 0, 0)
 #if VERSION_JP
                 Call(SetNpcPos, NPC_PARTNER, -645, 0, 0)
@@ -42,12 +42,12 @@ EvtScript N(EVS_EnterMap) = {
 #if VERSION_JP
                 Call(SetNpcPos, NPC_PARTNER, -605, 0, 0)
 #endif
-                Call(DisablePlayerInput, FALSE)
-                Call(SetZoneEnabled, ZONE_o15, FALSE)
+                Call(DisablePlayerInput, false)
+                Call(SetZoneEnabled, ZONE_o15, false)
                 Call(ResetCam, CAM_DEFAULT, Float(90.0))
-                Set(GF_KKJ25_Visited, TRUE)
+                Set(GF_KKJ25_Visited, true)
             Else
-                Call(SetZoneEnabled, ZONE_o15, FALSE)
+                Call(SetZoneEnabled, ZONE_o15, false)
                 Call(ResetCam, CAM_DEFAULT, Float(90.0))
             EndIf
             Set(LVar0, 0)
@@ -95,26 +95,26 @@ EvtScript N(EVS_Main) = {
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(1)
-            Set(GF_KKJ25_Defeated_Kammy, TRUE)
+            Set(GF_KKJ25_Defeated_Kammy, true)
         CaseEq(2)
-            Set(GF_KKJ25_Defeated_Kammy, TRUE)
-            Set(GF_KKJ25_Defeated_Bowser, TRUE)
+            Set(GF_KKJ25_Defeated_Kammy, true)
+            Set(GF_KKJ25_Defeated_Bowser, true)
     EndSwitch
     Set(GB_WorldLocation, LOCATION_PEACHS_CASTLE)
     Call(SetSpriteShading, SHADING_KKJ_25)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
     EVT_SETUP_CAMERA_DEFAULT()
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.75))
-    IfEq(GF_KKJ25_Defeated_Bowser, FALSE)
-        IfEq(GF_KKJ25_Defeated_Kammy, FALSE)
-            Call(MakeNpcs, FALSE, Ref(N(InitialNpcs)))
+    IfEq(GF_KKJ25_Defeated_Bowser, false)
+        IfEq(GF_KKJ25_Defeated_Kammy, false)
+            Call(MakeNpcs, false, Ref(N(InitialNpcs)))
         Else
-            Call(MakeNpcs, FALSE, Ref(N(MidpointNpcs)))
-            Call(EnableGroup, MODEL_g30, FALSE)
+            Call(MakeNpcs, false, Ref(N(MidpointNpcs)))
+            Call(EnableGroup, MODEL_g30, false)
         EndIf
     Else
-        Call(MakeNpcs, FALSE, Ref(N(FinaleNpcs)))
-        Call(EnableGroup, MODEL_g30, FALSE)
+        Call(MakeNpcs, false, Ref(N(FinaleNpcs)))
+        Call(EnableGroup, MODEL_g30, false)
     EndIf
     ExecWait(N(EVS_MakeEntities))
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
@@ -125,7 +125,7 @@ EvtScript N(EVS_Main) = {
     Thread
         Set(MV_ArenaState, ARENA_STATE_IDLE)
         IfEq(LVar0, kkj_25_ENTRY_0)
-            Call(EnableModel, MODEL_o122, FALSE)
+            Call(EnableModel, MODEL_o122, false)
             Loop(0)
                 Wait(1)
                 IfEq(MV_ArenaState, ARENA_STATE_ACTIVATING)

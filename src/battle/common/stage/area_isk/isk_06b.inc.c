@@ -20,7 +20,7 @@ EvtScript N(EVS_PreBattle) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     Call(N(CreateTorchFX))
-    Call(EnableModel, MODEL_kesu, FALSE)
+    Call(EnableModel, MODEL_kesu, false)
     Return
     End
 };

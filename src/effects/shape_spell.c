@@ -111,7 +111,7 @@ void shape_spell_update(EffectInstance* effect) {
         newPart->unk_28 = part->unk_28;
     }
 
-    if (isChild == TRUE) {
+    if (isChild == true) {
         part->unk_34 = part->unk_34 * 0.9;
         part->unk_1C = part->unk_1C * 0.83;
     }

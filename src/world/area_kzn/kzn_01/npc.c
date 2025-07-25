@@ -9,12 +9,12 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         Wait(1)
         Goto(0)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, 270, -200, 0)
     Call(SetCamDistance, CAM_DEFAULT, 400)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.5 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(SetNpcPos, NPC_SELF, 320, -220, 0)
@@ -29,14 +29,14 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
     Wait(25 * DT)
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     Call(ResetCam, CAM_DEFAULT, Float(3.0 / DT))
-    Set(GF_KZN01_IntruderAlert, TRUE)
-    Call(DisablePlayerInput, FALSE)
+    Set(GF_KZN01_IntruderAlert, true)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_PutridPiranha) = {
-    IfEq(GF_KZN01_IntruderAlert, FALSE)
+    IfEq(GF_KZN01_IntruderAlert, false)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_PutridPiranha)))
     Else
         Call(RemoveNpc, NPC_SELF)

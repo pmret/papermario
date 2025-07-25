@@ -89,7 +89,7 @@ API_CALLABLE(N(CreateEndChapterData)) {
         data->yaw = 0.0f;
         data->unk1C = 0;
         data->screenWhiteness = 0;
-        data->unk1E = FALSE;
+        data->unk1E = false;
         npc->alpha = 0;
         npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
         data->spiritCardEffect = fx_spirit_card(1, data->pos.x, data->pos.y, data->pos.z, 1.0f, 0);
@@ -102,10 +102,10 @@ API_CALLABLE(N(CreateEndChapterData)) {
     npc->pos.y = data->pos.y;
     npc->pos.z = data->pos.z + 10.0f;
     npc->rot.y = data->yaw;
-    backFacing = FALSE;
+    backFacing = false;
     if (!evt_get_variable(script, MF_Unk_0B)) {
         if ((data->yaw > 90.0f) && (data->yaw < 270.0f)) {
-            backFacing = TRUE;
+            backFacing = true;
         }
         npc->curAnim = N(StarSpiritAnimations)[data->chapter][backFacing];
     }
@@ -124,7 +124,7 @@ API_CALLABLE(N(AddCardAngularVelocity)) {
     EndChapter* data = (EndChapter*) evt_get_variable(script, MV_EndChapterDataPtr);
 
     if (isInitialCall) {
-        data->stopAccelerating = FALSE;
+        data->stopAccelerating = false;
         data->angularVelocity = evt_get_float_variable(script, *args++);
     }
 
@@ -273,7 +273,7 @@ API_CALLABLE(N(SpinDownStarSpirit)) {
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
-        data->stopAccelerating = TRUE;
+        data->stopAccelerating = true;
         script->functionTemp[1] = evt_get_variable(script, *args++);
         script->functionTemp[2] = evt_get_variable(script, *args++);
         data->startYaw = data->yaw;
@@ -358,7 +358,7 @@ API_CALLABLE(N(func_80240BB4_9085E4)) {
         script->functionTemp[1] = evt_get_variable(script, *args++);
         script->functionTemp[2] = evt_get_variable(script, *args++);
         script->functionTemp[3] = evt_get_variable(script, *args++);
-        data->unk1E = TRUE;
+        data->unk1E = true;
     }
 
     data->unk0C = update_lerp(EASING_LINEAR,
@@ -389,14 +389,14 @@ API_CALLABLE(N(func_80240CA8_9086D8)) {
 
 API_CALLABLE(N(ShowMessagesInFrontOfCurtains)) {
     EndChapter* data = (EndChapter*) evt_get_variable(NULL, MV_EndChapterDataPtr);
-    data->unk1E = TRUE;
+    data->unk1E = true;
     gOverrideFlags |= GLOBAL_OVERRIDES_MESSAGES_OVER_CURTAINS;
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(ShowMessagesBehindCurtains)) {
     EndChapter* data = (EndChapter*) evt_get_variable(NULL, MV_EndChapterDataPtr);
-    data->unk1E = FALSE;
+    data->unk1E = false;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_MESSAGES_OVER_CURTAINS;
     return ApiStatus_DONE2;
 }
@@ -462,7 +462,7 @@ void func_80240DA4_9087D4(void) {
 
 EvtScript N(EVS_Scene_EndOfChapter) = {
     Thread
-        Set(MF_Unk_0B, FALSE)
+        Set(MF_Unk_0B, false)
         Call(GetEntryID, LVar0)
         Call(GetNpcPos, NPC_StarSpirit, LVar1, LVar2, LVar3)
         Call(N(CreateEndChapterData), LVar0, LVar1, LVar2, LVar3)
@@ -490,7 +490,7 @@ EvtScript N(EVS_Scene_EndOfChapter) = {
         Call(N(AddCardAngularVelocity), 0)
     EndThread
     Wait(60 * DT)
-    Set(MF_Unk_0B, TRUE)
+    Set(MF_Unk_0B, true)
     Wait(1)
     Call(SetNpcAnimation, NPC_StarSpirit, ENEMY_ANIM_8)
     Call(N(ShowMessagesInFrontOfCurtains))
@@ -520,7 +520,7 @@ EvtScript N(EVS_Scene_EndOfChapter) = {
     Call(ShowMessageAtScreenPos, LVar1, 160, 40)
     Call(N(ShowMessagesBehindCurtains))
     Wait(15 * DT)
-    Set(AF_JAN01_TreeDrop_StarPiece, TRUE)
+    Set(AF_JAN01_TreeDrop_StarPiece, true)
     Return
     End
 };
@@ -528,8 +528,8 @@ EvtScript N(EVS_Scene_EndOfChapter) = {
 EvtScript N(EVS_NpcInit_Eldstar_01) = {
     Call(SetNpcScale, NPC_SELF, Float(0.85), Float(0.85), Float(0.85))
     Call(SetNpcPos, NPC_SELF, 0, 0, 20)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, true)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Exec(N(EVS_Scene_EndOfChapter))
     Return
     End
@@ -539,7 +539,7 @@ EvtScript N(EVS_NpcInit_Eldstar_02) = {
     Call(SetNpcAnimation, NPC_SELF, ENEMY_ANIM_8)
     Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_TINT, 0, 0, 0, 0)
     Call(SetNpcPos, NPC_SELF, 0, 94, 0)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Return
     End
 };

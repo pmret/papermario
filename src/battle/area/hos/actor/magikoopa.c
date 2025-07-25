@@ -273,7 +273,7 @@ EvtScript N(EVS_KnockDownCheck) = {
     Call(GetBattleFlags, LVar0)
     IfNotFlag(LVar0, BS_FLAGS1_PARTNER_ACTING)
         IfFlag(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
-            Call(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, TRUE)
+            Call(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, true)
         EndIf
     Else
         Call(N(GetSelectedMoveID), LVar0)
@@ -284,7 +284,7 @@ EvtScript N(EVS_KnockDownCheck) = {
             CaseOrEq(MOVE_MULTIBONK)
                 Call(GetBattleFlags, LVar0)
                 IfFlag(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
-                    Call(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, TRUE)
+                    Call(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, true)
                 EndIf
             EndCaseGroup
         EndSwitch
@@ -314,12 +314,12 @@ EvtScript N(EVS_KnockDown) = {
     IfFlag(LVar0, STATUS_FLAG_SHRINK)
         Call(SetPartScale, ACTOR_SELF, PRT_BROOM, Float(0.4), Float(0.4), Float(0.4))
     EndIf
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, TRUE)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_PRIMARY_TARGET, true)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, false)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, true)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_PRIMARY_TARGET, false)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, true)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Sub(LVar2, 1)
     Call(SetPartPos, ACTOR_SELF, PRT_BROOM, LVar0, LVar1, LVar2)
@@ -328,7 +328,7 @@ EvtScript N(EVS_KnockDown) = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
     Call(N(StartRumbleWithParams), 150, 10)
     Thread
         Call(ShakeCam, CAM_BATTLE, 0, 5, Float(0.7))
@@ -342,29 +342,29 @@ EvtScript N(EVS_KnockDown) = {
         PlayEffect(EFFECT_SMOKE_BURST, 0, LVar3, LVar4, LVar5, Float(1.0), 10, 0)
     EndIf
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
     Loop(20)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_INVISIBLE, true)
         Wait(1)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_INVISIBLE, false)
         Wait(1)
     EndLoop
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_INVISIBLE, true)
     Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Anim01)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, FALSE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, false)
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
     Call(SetActorType, ACTOR_SELF, ACTOR_TYPE_MAGIKOOPA_BOSS)
     Call(SetStatusTable, ACTOR_SELF, Ref(N(StatusTable)))
     Call(N(SetAbsoluteStatusOffsets), -10, 20, 10, 32)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, true)
     Call(ResetAllActorSounds, ACTOR_SELF)
     Call(GetIndexFromPos, ACTOR_SELF, LVar0)
     Mod(LVar0, 4)
     Call(SetGoalToIndex, ACTOR_SELF, LVar0)
     Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(HPBarToHome, ACTOR_SELF)
@@ -373,7 +373,7 @@ EvtScript N(EVS_KnockDown) = {
 };
 
 EvtScript N(EVS_Flee) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(HideHealthBar, ACTOR_SELF)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
@@ -388,7 +388,7 @@ EvtScript N(EVS_Flee) = {
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Add(LVar0, 20)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Wait(10)
     Call(SetActorYaw, ACTOR_SELF, 180)
     Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
@@ -396,7 +396,7 @@ EvtScript N(EVS_Flee) = {
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Add(LVar0, 200)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(YieldTurn)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     ExecWait(EVS_ForceNextTarget)
@@ -424,8 +424,8 @@ EvtScript N(EVS_Init) = {
         Call(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, -1)
     EndIf
     Call(SetActorVar, ACTOR_SELF, AVAR_HitTypeFlags, 0)
-    Call(SetActorVar, ACTOR_SELF, AVAR_IsClone, FALSE)
-    Call(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_IsClone, false)
+    Call(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_HealAllCount, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_HealOneCount, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_AttackBoostCount, 0)
@@ -433,7 +433,7 @@ EvtScript N(EVS_Init) = {
     Call(SetActorVar, ACTOR_SELF, AVAR_ElectrifyCount, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_TransparifyCount, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_CloneActorID, -1)
-    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_LastMove, AVAL_LastMove_None)
     Return
     End
@@ -448,8 +448,8 @@ EvtScript N(EVS_Flying_Init) = {
         Call(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, -1)
     EndIf
     Call(SetActorVar, ACTOR_SELF, AVAR_HitTypeFlags, 0)
-    Call(SetActorVar, ACTOR_SELF, AVAR_IsClone, FALSE)
-    Call(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_IsClone, false)
+    Call(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_HealAllCount, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_HealOneCount, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_AttackBoostCount, 0)
@@ -457,7 +457,7 @@ EvtScript N(EVS_Flying_Init) = {
     Call(SetActorVar, ACTOR_SELF, AVAR_ElectrifyCount, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_TransparifyCount, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_CloneActorID, -1)
-    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_LastMove, AVAL_LastMove_None)
     Return
     End
@@ -473,7 +473,7 @@ EvtScript N(EVS_RemoveClone) = {
     IfEq(LVar1, 0)
         Return
     EndIf
-    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, false)
     Call(GetLastElement, LVarA)
     IfFlag(LVarA, DAMAGE_TYPE_MULTIPLE_POPUPS)
         Label(0)
@@ -487,9 +487,9 @@ EvtScript N(EVS_RemoveClone) = {
     Call(SetActorVar, ACTOR_SELF, AVAR_CloneActorID, -1)
     Call(GetActorFlags, ACTOR_SELF, LVarA)
     IfFlag(LVarA, ACTOR_FLAG_FLYING)
-        Call(SetPartEventBits, ACTOR_SELF, PRT_FLYING, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
+        Call(SetPartEventBits, ACTOR_SELF, PRT_FLYING, ACTOR_EVENT_FLAG_ATTACK_CHARGED, false)
     Else
-        Call(SetPartEventBits, ACTOR_SELF, PRT_GROUND, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
+        Call(SetPartEventBits, ACTOR_SELF, PRT_GROUND, ACTOR_EVENT_FLAG_ATTACK_CHARGED, false)
     EndIf
     Call(GetActorPos, LVar0, LVar1, LVar2, LVar3)
     Call(RemoveActor, LVar0)
@@ -505,7 +505,7 @@ EvtScript N(EVS_RemoveClone) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetPartAlpha, ACTOR_SELF, PRT_GROUND, 255)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
@@ -591,7 +591,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.5))
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
             Wait(15)
             Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Anim02)
             ExecWait(N(EVS_Flee))
@@ -626,13 +626,13 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Flying_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetPartAlpha, ACTOR_SELF, PRT_FLYING, 255)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
@@ -740,7 +740,7 @@ EvtScript N(EVS_Flying_HandleEvent) = {
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.5))
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
             Wait(15)
             Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Anim02)
             ExecWait(N(EVS_Flee))
@@ -775,17 +775,17 @@ EvtScript N(EVS_Flying_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 // (in) LVarB: actorID to heal
 EvtScript N(EVS_Move_HealOne) = {
-    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_LastMove, AVAL_LastMove_HealOne)
     Call(AddActorVar, ACTOR_SELF, AVAR_HealOneCount, 1)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
@@ -846,9 +846,9 @@ EvtScript N(EVS_Move_HealOne) = {
         Call(PlaySoundAtActor, LVarB, SOUND_STAR_BOUNCE_A)
     EndThread
     Thread
-        Call(FreezeBattleState, TRUE)
-        Call(HealActor, LVarB, HEAL_AMT_ONE, FALSE)
-        Call(FreezeBattleState, FALSE)
+        Call(FreezeBattleState, true)
+        Call(HealActor, LVarB, HEAL_AMT_ONE, false)
+        Call(FreezeBattleState, false)
     EndThread
     Call(WaitForBuffDone)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -856,16 +856,16 @@ EvtScript N(EVS_Move_HealOne) = {
     Wait(10)
     Call(YieldTurn)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Move_HealAll) = {
-    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_LastMove, AVAL_LastMove_HealAll)
     Call(AddActorVar, ACTOR_SELF, AVAR_HealAllCount, 1)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
@@ -921,16 +921,16 @@ EvtScript N(EVS_Move_HealAll) = {
     Call(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     Call(InitTargetIterator)
     Label(0)
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         Call(GetOwnerTarget, LVar0, LVar1)
         Call(GetOriginalActorType, LVar0, LVar1)
         IfEq(LVar1, ACTOR_TYPE_DRY_BONES)
             Call(GetActorVar, LVar0, AVAR_DryBones_Collapsed, LVar1)
             IfEq(LVar1, 1)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
-        IfEq(LFlag0, FALSE)
+        IfEq(LFlag0, false)
             Thread
                 Wait(5)
                 Call(PlaySoundAtActor, LVar0, SOUND_RECOVER_HEART)
@@ -939,9 +939,9 @@ EvtScript N(EVS_Move_HealAll) = {
                 Call(PlaySoundAtActor, LVar0, SOUND_STAR_BOUNCE_A)
             EndThread
             Thread
-                Call(FreezeBattleState, TRUE)
-                Call(HealActor, LVar0, HEAL_AMT_ALL, TRUE)
-                Call(FreezeBattleState, FALSE)
+                Call(FreezeBattleState, true)
+                Call(HealActor, LVar0, HEAL_AMT_ALL, true)
+                Call(FreezeBattleState, false)
             EndThread
         EndIf
         Call(ChooseNextTarget, ITER_NEXT, LVar0)
@@ -955,27 +955,27 @@ EvtScript N(EVS_Move_HealAll) = {
     Wait(10)
     Call(YieldTurn)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_MagicBlast) = {
     Call(SetActorVar, ACTOR_SELF, AVAR_LastMove, AVAL_LastMove_MagicBlast)
-    Set(LFlag0, FALSE)
-    Set(LFlag1, FALSE)
+    Set(LFlag0, false)
+    Set(LFlag1, false)
     Call(GetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, LVar0)
     IfEq(LVar0, 1)
-        Set(LFlag0, TRUE)
+        Set(LFlag0, true)
         Call(GetActorVar, ACTOR_SELF, AVAR_CloneActorID, LVarA)
     EndIf
     Call(GetActorFlags, ACTOR_SELF, LVar0)
     IfFlag(LVar0, ACTOR_FLAG_FLYING)
-        Set(LFlag1, TRUE)
+        Set(LFlag1, true)
     EndIf
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
-    IfEq(LFlag0, TRUE)
-        Call(UseIdleAnimation, LVarA, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
+    IfEq(LFlag0, true)
+        Call(UseIdleAnimation, LVarA, false)
     EndIf
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(GetBattlePhase, LVar0)
@@ -987,8 +987,8 @@ EvtScript N(EVS_Attack_MagicBlast) = {
         Call(MoveBattleCamOver, 10)
     EndIf
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST1)
-    IfEq(LFlag1, FALSE)
-        IfEq(LFlag0, TRUE)
+    IfEq(LFlag1, false)
+        IfEq(LFlag0, true)
             Call(SetAnimation, LVarA, 1, ANIM_Magikoopa_Anim02)
             Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
             Sub(LVar0, 17)
@@ -1007,7 +1007,7 @@ EvtScript N(EVS_Attack_MagicBlast) = {
         EndIf
         PlayEffect(EFFECT_GATHER_MAGIC, 0, LVar0, LVar1, LVar2, Float(0.5), 30, 0)
     Else
-        IfEq(LFlag0, TRUE)
+        IfEq(LFlag0, true)
             Call(SetAnimation, LVarA, 1, ANIM_FlyingMagikoopa_Anim02)
             Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
             Sub(LVar0, 30)
@@ -1031,17 +1031,17 @@ EvtScript N(EVS_Attack_MagicBlast) = {
     Switch(LVar9)
         CaseOrEq(HIT_RESULT_MISS)
         CaseOrEq(HIT_RESULT_LUCKY)
-            IfEq(LFlag0, TRUE)
+            IfEq(LFlag0, true)
                 Call(PlaySoundAtActor, LVarA, SOUND_SPELL_CAST2)
             EndIf
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST2)
-            IfEq(LFlag1, FALSE)
-                IfEq(LFlag0, TRUE)
+            IfEq(LFlag1, false)
+                IfEq(LFlag0, true)
                     Call(SetAnimation, LVarA, 1, ANIM_Magikoopa_Anim03)
                 EndIf
                 Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Anim03)
             Else
-                IfEq(LFlag0, TRUE)
+                IfEq(LFlag0, true)
                     Call(SetAnimation, LVarA, 1, ANIM_FlyingMagikoopa_Anim03)
                 EndIf
                 Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Anim03)
@@ -1051,8 +1051,8 @@ EvtScript N(EVS_Attack_MagicBlast) = {
             Call(GetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
             Sub(LVar4, 50)
             Set(LVar5, 0)
-            IfEq(LFlag1, FALSE)
-                IfEq(LFlag0, TRUE)
+            IfEq(LFlag1, false)
+                IfEq(LFlag0, true)
                     Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
                     Sub(LVar0, 20)
                     Add(LVar1, 20)
@@ -1069,7 +1069,7 @@ EvtScript N(EVS_Attack_MagicBlast) = {
                 EndIf
                 Call(N(ShrinkActor), LVar0, LVar1, LVar6, LVar4, LVar5, LVar6, 30)
             Else
-                IfEq(LFlag0, TRUE)
+                IfEq(LFlag0, true)
                     Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
                     Sub(LVar0, 20)
                     Add(LVar1, 20)
@@ -1092,24 +1092,24 @@ EvtScript N(EVS_Attack_MagicBlast) = {
             EndIf
             Wait(15)
             Call(YieldTurn)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
-            IfEq(LFlag0, TRUE)
-                Call(UseIdleAnimation, LVarA, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
+            IfEq(LFlag0, true)
+                Call(UseIdleAnimation, LVarA, true)
             EndIf
             Return
         EndCaseGroup
     EndSwitch
-    IfEq(LFlag0, TRUE)
+    IfEq(LFlag0, true)
         Call(PlaySoundAtActor, LVarA, SOUND_SPELL_CAST2)
     EndIf
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST2)
-    IfEq(LFlag1, FALSE)
-        IfEq(LFlag0, TRUE)
+    IfEq(LFlag1, false)
+        IfEq(LFlag0, true)
             Call(SetAnimation, LVarA, 1, ANIM_Magikoopa_Anim03)
         EndIf
         Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Anim03)
     Else
-        IfEq(LFlag0, TRUE)
+        IfEq(LFlag0, true)
             Call(SetAnimation, LVarA, 1, ANIM_FlyingMagikoopa_Anim03)
         EndIf
         Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Anim03)
@@ -1117,8 +1117,8 @@ EvtScript N(EVS_Attack_MagicBlast) = {
     Wait(5)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-    IfEq(LFlag1, FALSE)
-        IfEq(LFlag0, TRUE)
+    IfEq(LFlag1, false)
+        IfEq(LFlag0, true)
             Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
             Sub(LVar0, 20)
             Add(LVar1, 20)
@@ -1135,7 +1135,7 @@ EvtScript N(EVS_Attack_MagicBlast) = {
         EndIf
         Call(N(ShrinkActor), LVar0, LVar1, LVar6, LVar4, LVar5, LVar6, 20)
     Else
-        IfEq(LFlag0, TRUE)
+        IfEq(LFlag0, true)
             Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
             Sub(LVar0, 20)
             Add(LVar1, 20)
@@ -1153,7 +1153,7 @@ EvtScript N(EVS_Attack_MagicBlast) = {
         Call(N(ShrinkActor), LVar0, LVar1, LVar6, LVar4, LVar5, LVar6, 20)
     EndIf
     Wait(18)
-    IfEq(LFlag0, TRUE)
+    IfEq(LFlag0, true)
         Wait(2)
         Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, 0, BS_FLAGS1_TRIGGER_EVENTS)
     Else
@@ -1167,9 +1167,9 @@ EvtScript N(EVS_Attack_MagicBlast) = {
             Call(YieldTurn)
         EndCaseGroup
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
-    IfEq(LFlag0, TRUE)
-        Call(UseIdleAnimation, LVarA, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
+    IfEq(LFlag0, true)
+        Call(UseIdleAnimation, LVarA, true)
     EndIf
     Return
     End
@@ -1184,13 +1184,13 @@ EvtScript N(EVS_GetAvailableColumn) = {
         Mod(LVar1, 4)
         Switch(LVar1)
             CaseEq(0)
-                Set(LFlagB, TRUE)
+                Set(LFlagB, true)
             CaseEq(1)
-                Set(LFlagC, TRUE)
+                Set(LFlagC, true)
             CaseEq(2)
-                Set(LFlagD, TRUE)
+                Set(LFlagD, true)
             CaseEq(3)
-                Set(LFlagE, TRUE)
+                Set(LFlagE, true)
         EndSwitch
         Call(ChooseNextTarget, ITER_NEXT, LVar0)
         IfNe(LVar0, ITER_NO_MORE)
@@ -1201,25 +1201,25 @@ EvtScript N(EVS_GetAvailableColumn) = {
     Mod(LVar1, 4)
     Switch(LVar1)
         CaseEq(0)
-            IfEq(LFlagC, FALSE)
+            IfEq(LFlagC, false)
                 Set(LVar0, 1)
             EndIf
         CaseEq(1)
-            IfEq(LFlagB, FALSE)
+            IfEq(LFlagB, false)
                 Set(LVar0, 0)
             EndIf
-            IfEq(LFlagD, FALSE)
+            IfEq(LFlagD, false)
                 Set(LVar0, 2)
             EndIf
         CaseEq(2)
-            IfEq(LFlagC, FALSE)
+            IfEq(LFlagC, false)
                 Set(LVar0, 1)
             EndIf
-            IfEq(LFlagE, FALSE)
+            IfEq(LFlagE, false)
                 Set(LVar0, 3)
             EndIf
         CaseEq(3)
-            IfEq(LFlagD, FALSE)
+            IfEq(LFlagD, false)
                 Set(LVar0, 2)
             EndIf
     EndSwitch
@@ -1240,14 +1240,14 @@ EvtScript N(EVS_Clone_HandleEvent) = {
 
 EvtScript N(EVS_Clone_Init) = {
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_Clone_HandleEvent)))
-    Call(SetActorVar, ACTOR_SELF, AVAR_IsClone, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_IsClone, true)
     Return
     End
 };
 
 EvtScript N(EVS_FlyingClone_Init) = {
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_Clone_HandleEvent)))
-    Call(SetActorVar, ACTOR_SELF, AVAR_IsClone, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_IsClone, true)
     Return
     End
 };
@@ -1404,31 +1404,31 @@ EvtScript N(EVS_Move_MakeClone) = {
         ExecWait(N(EVS_Flee))
         Return
     EndIf
-    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, true)
     Call(SetActorVar, ACTOR_SELF, AVAR_LastMove, AVAL_LastMove_MakeClone)
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Call(GetActorFlags, ACTOR_SELF, LVar0)
     IfFlag(LVar0, ACTOR_FLAG_FLYING)
-        Set(LFlag0, TRUE)
+        Set(LFlag0, true)
     EndIf
-    IfEq(LFlag0, FALSE)
-        Call(SummonEnemy, Ref(N(CloneFormation)), FALSE)
+    IfEq(LFlag0, false)
+        Call(SummonEnemy, Ref(N(CloneFormation)), false)
     Else
-        Call(SummonEnemy, Ref(N(FlyingCloneFormation)), FALSE)
+        Call(SummonEnemy, Ref(N(FlyingCloneFormation)), false)
     EndIf
     Call(SetActorVar, ACTOR_SELF, AVAR_CloneActorID, LVar0)
     Set(LVarA, LVar0)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(EnableIdleScript, LVarA, IDLE_SCRIPT_DISABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
-    Call(UseIdleAnimation, LVarA, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
+    Call(UseIdleAnimation, LVarA, false)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 25)
     Wait(25)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST3)
-    IfEq(LFlag0, FALSE)
+    IfEq(LFlag0, false)
         Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Anim02)
         Call(SetAnimation, LVarA, 1, ANIM_Magikoopa_Anim02)
         Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1453,7 +1453,7 @@ EvtScript N(EVS_Move_MakeClone) = {
     Call(MoveBattleCamOver, 30)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST4)
     Call(PlaySoundAtActor, LVar9, SOUND_SPELL_CAST4)
-    Call(SetPartFlagBits, LVar9, 1, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
+    Call(SetPartFlagBits, LVar9, 1, ACTOR_PART_FLAG_PRIMARY_TARGET, false)
     Call(RandInt, 1000, LVar0)
     IfLt(LVar0, 500)
         Call(SetActorSpeed, ACTOR_SELF, Float(2.0))
@@ -1466,7 +1466,7 @@ EvtScript N(EVS_Move_MakeClone) = {
         Call(SetGoalToIndex, LVar9, LVar0)
         Call(FlyToGoal, LVar9, 0, 0, EASING_LINEAR)
     EndIf
-    Call(SetPartFlagBits, LVar9, 1, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
+    Call(SetPartFlagBits, LVar9, 1, ACTOR_PART_FLAG_PRIMARY_TARGET, true)
     Call(GetActorHP, ACTOR_SELF, LVar0)
     Call(SetEnemyHP, LVar9, LVar0)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1475,20 +1475,20 @@ EvtScript N(EVS_Move_MakeClone) = {
     Call(GetActorPos, LVar9, LVar0, LVar1, LVar2)
     Call(ForceHomePos, LVar9, LVar0, LVar1, LVar2)
     Call(HPBarToHome, LVar9)
-    IfEq(LFlag0, FALSE)
-        Call(SetPartEventBits, ACTOR_SELF, PRT_GROUND, ACTOR_EVENT_FLAG_ATTACK_CHARGED, TRUE)
+    IfEq(LFlag0, false)
+        Call(SetPartEventBits, ACTOR_SELF, PRT_GROUND, ACTOR_EVENT_FLAG_ATTACK_CHARGED, true)
     Else
-        Call(SetPartEventBits, ACTOR_SELF, PRT_FLYING, ACTOR_EVENT_FLAG_ATTACK_CHARGED, TRUE)
+        Call(SetPartEventBits, ACTOR_SELF, PRT_FLYING, ACTOR_EVENT_FLAG_ATTACK_CHARGED, true)
     EndIf
-    IfEq(LFlag0, FALSE)
+    IfEq(LFlag0, false)
         Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Anim01)
         Call(SetAnimation, LVar9, 1, ANIM_Magikoopa_Anim01)
     Else
         Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Anim01)
         Call(SetAnimation, LVar9, 1, ANIM_FlyingMagikoopa_Anim01)
     EndIf
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
-    Call(UseIdleAnimation, LVar9, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
+    Call(UseIdleAnimation, LVar9, true)
     Return
     End
 };
@@ -1496,7 +1496,7 @@ EvtScript N(EVS_Move_MakeClone) = {
 #include "common/battle/CheckMagikoopaCastTarget.inc.c"
 
 EvtScript N(EVS_Move_TryBoostAttack) = {
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Label(10)
         Call(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
         Call(InitTargetIterator)
@@ -1519,8 +1519,8 @@ EvtScript N(EVS_Move_TryBoostAttack) = {
             IfNe(LVar0, ITER_NO_MORE)
                 Goto(0)
             EndIf
-        IfEq(LFlag0, FALSE)
-            Set(LFlag0, TRUE)
+        IfEq(LFlag0, false)
+            Set(LFlag0, true)
             Call(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, -1)
             Goto(10)
         EndIf
@@ -1533,10 +1533,10 @@ EvtScript N(EVS_Move_TryBoostAttack) = {
     Return
     // found target
     Label(100)
-    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_LastMove, AVAL_LastMove_BoostAttack)
     Call(AddActorVar, ACTOR_SELF, AVAR_AttackBoostCount, 1)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
@@ -1594,22 +1594,22 @@ EvtScript N(EVS_Move_TryBoostAttack) = {
         Call(PlaySoundAtActor, LVar8, SOUND_MAGIKOOPA_POWER_UP)
     EndThread
     Thread
-        Call(FreezeBattleState, TRUE)
+        Call(FreezeBattleState, true)
         Call(BoostAttack, LVar8, ATTACK_BOOST_AMT)
-        Call(FreezeBattleState, FALSE)
+        Call(FreezeBattleState, false)
     EndThread
     Call(WaitForBuffDone)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Wait(10)
     Call(YieldTurn)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Move_TryBoostDefense) = {
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Label(10)
         Call(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
         Call(InitTargetIterator)
@@ -1632,8 +1632,8 @@ EvtScript N(EVS_Move_TryBoostDefense) = {
             IfNe(LVar0, ITER_NO_MORE)
                 Goto(0)
             EndIf
-        IfEq(LFlag0, FALSE)
-            Set(LFlag0, TRUE)
+        IfEq(LFlag0, false)
+            Set(LFlag0, true)
             Call(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, -1)
             Goto(10)
         EndIf
@@ -1646,10 +1646,10 @@ EvtScript N(EVS_Move_TryBoostDefense) = {
     Return
     // found target
     Label(100)
-    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_LastMove, AVAL_LastMove_BoostDefense)
     Call(AddActorVar, ACTOR_SELF, AVAR_DefenseBoostCount, 1)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
@@ -1707,22 +1707,22 @@ EvtScript N(EVS_Move_TryBoostDefense) = {
         Call(PlaySoundAtActor, LVar8, SOUND_MAGIKOOPA_POWER_UP)
     EndThread
     Thread
-        Call(FreezeBattleState, TRUE)
+        Call(FreezeBattleState, true)
         Call(BoostDefense, LVar8, DEFENSE_BOOST_AMT)
-        Call(FreezeBattleState, FALSE)
+        Call(FreezeBattleState, false)
     EndThread
     Call(WaitForBuffDone)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Wait(10)
     Call(YieldTurn)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Move_TryElectrify) = {
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Label(10)
         Call(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
         Call(InitTargetIterator)
@@ -1745,8 +1745,8 @@ EvtScript N(EVS_Move_TryElectrify) = {
             IfNe(LVar0, ITER_NO_MORE)
                 Goto(0)
             EndIf
-        IfEq(LFlag0, FALSE)
-            Set(LFlag0, TRUE)
+        IfEq(LFlag0, false)
+            Set(LFlag0, true)
             Call(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, -1)
             Goto(10)
         EndIf
@@ -1759,10 +1759,10 @@ EvtScript N(EVS_Move_TryElectrify) = {
     Return
     // found target
     Label(100)
-    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_LastMove, AVAL_LastMove_Electrify)
     Call(AddActorVar, ACTOR_SELF, AVAR_ElectrifyCount, 1)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
@@ -1825,22 +1825,22 @@ EvtScript N(EVS_Move_TryElectrify) = {
         EndLoop
     EndThread
     Thread
-        Call(FreezeBattleState, TRUE)
+        Call(FreezeBattleState, true)
         Call(ElectrifyActor, LVar8, ELECTRIFY_TURNS)
-        Call(FreezeBattleState, FALSE)
+        Call(FreezeBattleState, false)
     EndThread
     Call(WaitForBuffDone)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Wait(10)
     Call(YieldTurn)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Move_TryTransparent) = {
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Label(10)
         Call(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
         Call(InitTargetIterator)
@@ -1863,8 +1863,8 @@ EvtScript N(EVS_Move_TryTransparent) = {
             IfNe(LVar0, ITER_NO_MORE)
                 Goto(0)
             EndIf
-        IfEq(LFlag0, FALSE)
-            Set(LFlag0, TRUE)
+        IfEq(LFlag0, false)
+            Set(LFlag0, true)
             Call(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, -1)
             Goto(10)
         EndIf
@@ -1877,10 +1877,10 @@ EvtScript N(EVS_Move_TryTransparent) = {
     Return
     // found target
     Label(100)
-    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_MadeCloneLastTurn, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_LastMove, AVAL_LastMove_Transparify)
     Call(AddActorVar, ACTOR_SELF, AVAR_TransparifyCount, 1)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
@@ -1938,16 +1938,16 @@ EvtScript N(EVS_Move_TryTransparent) = {
         Call(PlaySoundAtActor, LVar8, SOUND_MAGIKOOPA_VANISH)
     EndThread
     Thread
-        Call(FreezeBattleState, TRUE)
+        Call(FreezeBattleState, true)
         Call(VanishActor, LVar8, TRANSPARIFY_TURNS)
-        Call(FreezeBattleState, FALSE)
+        Call(FreezeBattleState, false)
     EndThread
     Call(WaitForBuffDone)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Wait(10)
     Call(YieldTurn)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -1974,20 +1974,20 @@ EvtScript N(EVS_TakeTurn) = {
     Call(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     Call(InitTargetIterator)
     Label(LBL_LOOP_COUNT_INJURED_1)
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         Call(GetOwnerTarget, LVar0, LVar1)
         Call(GetOriginalActorType, LVar0, LVar1)
         IfEq(LVar1, ACTOR_TYPE_DRY_BONES)
             Call(GetActorVar, LVar0, AVAR_DryBones_Collapsed, LVar1)
             IfEq(LVar1, 1)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
         Call(GetActorHP, LVar0, LVar2)
         Call(GetEnemyMaxHP, LVar0, LVar3)
         MulF(LVar2, Float(100.0))
         DivF(LVar2, LVar3)
-        IfEq(LFlag0, FALSE) // collapsed dry bones check
+        IfEq(LFlag0, false) // collapsed dry bones check
             IfLe(LVar2, HEAL_THRESHOLD_1) // HP% check
                 Call(RandInt, 99, LVar4)
                 Add(LVar4, 1)
@@ -2009,20 +2009,20 @@ EvtScript N(EVS_TakeTurn) = {
     Call(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     Call(InitTargetIterator)
     Label(LBL_LOOP_COUNT_INJURED_2)
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         Call(GetOwnerTarget, LVar0, LVar1)
         Call(GetOriginalActorType, LVar0, LVar1)
         IfEq(LVar1, ACTOR_TYPE_DRY_BONES)
             Call(GetActorVar, LVar0, AVAR_DryBones_Collapsed, LVar1)
             IfEq(LVar1, 1)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
         Call(GetActorHP, LVar0, LVar2)
         Call(GetEnemyMaxHP, LVar0, LVar3)
         MulF(LVar2, Float(100.0))
         DivF(LVar2, LVar3)
-        IfEq(LFlag0, FALSE) // collapsed dry bones check
+        IfEq(LFlag0, false) // collapsed dry bones check
             IfLe(LVar2, HEAL_THRESHOLD_2) // HP% check
                 Call(RandInt, 99, LVar4)
                 Add(LVar4, 1)
@@ -2044,20 +2044,20 @@ EvtScript N(EVS_TakeTurn) = {
     Call(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     Call(InitTargetIterator)
     Label(LBL_LOOP_COUNT_INJURED_3)
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         Call(GetOwnerTarget, LVar0, LVar1)
         Call(GetOriginalActorType, LVar0, LVar1)
         IfEq(LVar1, ACTOR_TYPE_DRY_BONES)
             Call(GetActorVar, LVar0, AVAR_DryBones_Collapsed, LVar1)
             IfEq(LVar1, 1)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
         Call(GetActorHP, LVar0, LVar2)
         Call(GetEnemyMaxHP, LVar0, LVar3)
         MulF(LVar2, Float(100.0))
         DivF(LVar2, LVar3)
-        IfEq(LFlag0, FALSE) // collapsed dry bones check
+        IfEq(LFlag0, false) // collapsed dry bones check
             IfLe(LVar2, HEAL_THRESHOLD_3) // HP% check
                 Call(RandInt, 99, LVar4)
                 Add(LVar4, 1)
@@ -2118,20 +2118,20 @@ EvtScript N(EVS_TakeTurn) = {
                 Call(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
                 Call(InitTargetIterator)
                 Label(LBL_LOOP_CHOOSE_BEST_HEAL)
-                    Set(LFlag0, FALSE)
+                    Set(LFlag0, false)
                     Call(GetOwnerTarget, LVar0, LVar1)
                     Call(GetOriginalActorType, LVar0, LVar1)
                     IfEq(LVar1, ACTOR_TYPE_DRY_BONES)
                         Call(GetActorVar, LVar0, AVAR_DryBones_Collapsed, LVar1)
                         IfEq(LVar1, 1)
-                            Set(LFlag0, TRUE)
+                            Set(LFlag0, true)
                         EndIf
                     EndIf
                     Call(GetActorHP, LVar0, LVar2)
                     Call(GetEnemyMaxHP, LVar0, LVar3)
                     MulF(LVar2, Float(100.0))
                     DivF(LVar2, LVar3)
-                    IfEq(LFlag0, FALSE)
+                    IfEq(LFlag0, false)
                         IfLe(LVar2, LVar9)
                             SetF(LVar9, LVar2)
                             Set(LVarB, LVar0)

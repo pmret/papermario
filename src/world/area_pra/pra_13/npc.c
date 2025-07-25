@@ -81,7 +81,7 @@ EvtScript N(EVS_Scene_ImpostersCaught) = {
     Call(GetEntryID, LVar0)
     IfEq(LVar0, pra_13_ENTRY_2)
         IfLt(GB_StoryProgress, STORY_CH7_DEFEATED_MIRROR_DUPLIGHOSTS)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Wait(10)
             Call(SetNpcYaw, NPC_FakeMario, 90)
             Thread
@@ -94,19 +94,19 @@ EvtScript N(EVS_Scene_ImpostersCaught) = {
             Call(SpeakToPlayer, NPC_FakeMario, ANIM_Mario1_Flail, ANIM_Mario1_Flail, 0, MSG_CH7_0139)
             Call(SpeakToPlayer, NPC_FakeBombette, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH7_013A)
             Call(ResetCam, CAM_DEFAULT, Float(6.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+            Call(PanToTarget, CAM_DEFAULT, 0, false)
             Thread
                 Call(GetNpcPos, NPC_FakeMario, LVar0, LVar1, LVar2)
                 Call(SetNpcPos, NPC_FakeMario, NPC_DISPOSE_LOCATION)
                 Call(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
                 Call(SetNpcPos, NPC_Duplighost_01, LVar0, LVar1, LVar2)
                 Call(PlaySoundAtNpc, NPC_Duplighost_01, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
-                Call(SetNpcFlagBits, NPC_Duplighost_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+                Call(SetNpcFlagBits, NPC_Duplighost_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
                 Set(LVar4, 2)
                 Call(SetNpcYaw, NPC_Duplighost_01, 90)
                 ExecWait(N(EVS_ImposterSpin))
                 Call(SetNpcAnimation, NPC_Duplighost_01, ANIM_Duplighost_Anim04)
-                Call(SetNpcFlagBits, NPC_Duplighost_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+                Call(SetNpcFlagBits, NPC_Duplighost_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
                 Call(NpcMoveTo, NPC_Duplighost_01, 430, -70, 15)
             EndThread
             Thread
@@ -115,13 +115,13 @@ EvtScript N(EVS_Scene_ImpostersCaught) = {
                 Call(SetNpcPos, NPC_FakeBombette, 389, 0, -61)
                 Call(SetNpcPos, NPC_Duplighost_02, LVar0, LVar1, LVar2)
                 Call(PlaySoundAtNpc, NPC_Duplighost_02, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
-                Call(SetNpcFlagBits, NPC_FakeBombette, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_HAS_NO_SPRITE, TRUE)
-                Call(SetNpcFlagBits, NPC_Duplighost_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+                Call(SetNpcFlagBits, NPC_FakeBombette, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_HAS_NO_SPRITE, true)
+                Call(SetNpcFlagBits, NPC_Duplighost_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
                 Set(LVar4, 3)
                 Call(SetNpcYaw, NPC_Duplighost_02, 90)
                 ExecWait(N(EVS_ImposterSpin))
                 Call(SetNpcAnimation, NPC_Duplighost_02, ANIM_Duplighost_Anim04)
-                Call(SetNpcFlagBits, NPC_Duplighost_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+                Call(SetNpcFlagBits, NPC_Duplighost_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
                 Call(NpcMoveTo, NPC_Duplighost_02, 420, -70, 15)
             EndThread
             Wait(35)
@@ -159,13 +159,13 @@ EvtScript N(EVS_Scene_DefeatImposters) = {
     Set(GB_StoryProgress, STORY_CH7_DEFEATED_MIRROR_DUPLIGHOSTS)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     SetGroup(EVT_GROUP_HOSTILE_NPC)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_FakeMario) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, true)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Mario1_Idle)
     Call(GetEntryID, LVar0)
     IfEq(LVar0, pra_13_ENTRY_2)
@@ -173,7 +173,7 @@ EvtScript N(EVS_NpcInit_FakeMario) = {
             Call(SetNpcPos, NPC_SELF, 375, 0, -59)
         EndIf
     Else
-        IfEq(GF_PRA_BrokeIllusion, TRUE)
+        IfEq(GF_PRA_BrokeIllusion, true)
             IfLt(GB_StoryProgress, STORY_CH7_DEFEATED_MIRROR_DUPLIGHOSTS)
                 Call(SetNpcPos, NPC_SELF, 465, 0, -59)
                 Call(InterpNpcYaw, NPC_SELF, 270, 0)
@@ -187,7 +187,7 @@ EvtScript N(EVS_NpcInit_FakeMario) = {
 EvtScript N(EVS_NpcInit_FakeBombette) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_Scene_ImpostersCaught)))
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_Scene_DefeatImposters)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, true)
     Call(GetEntryID, LVar0)
     IfEq(LVar0, pra_13_ENTRY_2)
         IfLt(GB_StoryProgress, STORY_CH7_DEFEATED_MIRROR_DUPLIGHOSTS)
@@ -196,7 +196,7 @@ EvtScript N(EVS_NpcInit_FakeBombette) = {
             Call(N(CreateFakePlayerRenderer))
         EndIf
     Else
-        IfEq(GF_PRA_BrokeIllusion, TRUE)
+        IfEq(GF_PRA_BrokeIllusion, true)
             IfLt(GB_StoryProgress, STORY_CH7_DEFEATED_MIRROR_DUPLIGHOSTS)
                 Call(SetNpcPos, NPC_SELF, 435, 0, -59)
                 MallocArray(16, LVarA)
@@ -209,13 +209,13 @@ EvtScript N(EVS_NpcInit_FakeBombette) = {
 };
 
 EvtScript N(EVS_NpcInit_Duplighost_01) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, true)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Duplighost_02) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_USE_INSPECT_ICON, true)
     Return
     End
 };

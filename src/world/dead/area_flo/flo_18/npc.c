@@ -55,7 +55,7 @@ Vec3f N(RetreatPath_Lakitu_03)[] = {
 };
 
 EvtScript N(EVS_Scene_LakilesterLikesBeingGood) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(DisablePartnerAI, 0)
     Call(SetPlayerPos, 30, 0, 50)
     Call(InterpPlayerYaw, 90, 0)
@@ -72,7 +72,7 @@ EvtScript N(EVS_Scene_LakilesterLikesBeingGood) = {
         Add(LVar3, 20)
         Call(NpcJump0, NPC_PARTNER, LVar1, LVar2, LVar3, 30)
     EndIf
-    Call(PlayerFaceNpc, NPC_PARTNER, FALSE)
+    Call(PlayerFaceNpc, NPC_PARTNER, false)
     Call(NpcFacePlayer, NPC_PARTNER, 0)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 5, MSG_CH6_00C9)
     Call(SetPlayerAnimation, ANIM_Mario1_NodYes)
@@ -82,7 +82,7 @@ EvtScript N(EVS_Scene_LakilesterLikesBeingGood) = {
     Call(EnablePartnerAI)
     Call(PutPartnerAway)
     Call(ResetCam, CAM_DEFAULT, Float(4.0))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -90,7 +90,7 @@ EvtScript N(EVS_Scene_LakilesterLikesBeingGood) = {
 EvtScript N(EVS_GangRetreat) = {
     Thread
         Call(PlaySoundAtNpc, NPC_FlyingMagikoopa, SOUND_FLO_MAGIKOOPA_FLY_AWAY, SOUND_SPACE_DEFAULT)
-        Call(SetNpcFlagBits, NPC_FlyingMagikoopa, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_FlyingMagikoopa, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(InterpNpcYaw, NPC_FlyingMagikoopa, 270, 0)
         Call(LoadPath, 60, Ref(N(RetreatPath_Magikoopa)), ARRAY_COUNT(N(RetreatPath_Magikoopa)), EASING_LINEAR)
         Loop(0)
@@ -105,7 +105,7 @@ EvtScript N(EVS_GangRetreat) = {
     Wait(15)
     Thread
         Call(PlaySoundAtNpc, NPC_Lakitu_01, SOUND_FLO_LAKITU_FLY_AWAY, SOUND_SPACE_DEFAULT)
-        Call(SetNpcFlagBits, NPC_Lakitu_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_Lakitu_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(InterpNpcYaw, NPC_Lakitu_01, 270, 0)
         Call(LoadPath, 60, Ref(N(RetreatPath_Lakitu_01)), ARRAY_COUNT(N(RetreatPath_Lakitu_01)), EASING_LINEAR)
         Loop(0)
@@ -118,7 +118,7 @@ EvtScript N(EVS_GangRetreat) = {
         EndLoop
     EndThread
     Thread
-        Call(SetNpcFlagBits, NPC_Lakitu_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_Lakitu_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(InterpNpcYaw, NPC_Lakitu_02, 270, 0)
         Call(LoadPath, 70, Ref(N(RetreatPath_Lakitu_02)), ARRAY_COUNT(N(RetreatPath_Lakitu_02)), EASING_LINEAR)
         Loop(0)
@@ -131,7 +131,7 @@ EvtScript N(EVS_GangRetreat) = {
         EndLoop
     EndThread
     Call(PlaySoundAtNpc, NPC_Lakitu_03, SOUND_FLO_LAKITU_FLY_AWAY, SOUND_SPACE_DEFAULT)
-    Call(SetNpcFlagBits, NPC_Lakitu_03, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Lakitu_03, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(InterpNpcYaw, NPC_Lakitu_03, 270, 0)
     Call(LoadPath, 80, Ref(N(RetreatPath_Lakitu_03)), ARRAY_COUNT(N(RetreatPath_Lakitu_03)), EASING_LINEAR)
     Loop(0)
@@ -159,15 +159,15 @@ EvtScript N(EVS_ChargeAtPlayer) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     IfGt(LVar2, -61)
         ChildThread
-            Call(SetNpcFlagBits, NPC_Lakitu_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_Lakitu_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Call(NpcMoveTo, NPC_Lakitu_01, LVar0, 55, LVar3)
         EndChildThread
         ChildThread
-            Call(SetNpcFlagBits, NPC_Lakitu_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_Lakitu_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Call(NpcMoveTo, NPC_Lakitu_02, LVar0, 55, LVar3)
         EndChildThread
         ChildThread
-            Call(SetNpcFlagBits, NPC_Lakitu_03, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_Lakitu_03, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Call(NpcMoveTo, NPC_Lakitu_03, LVar0, 55, LVar3)
         EndChildThread
         Wait(LVar4)
@@ -177,7 +177,7 @@ EvtScript N(EVS_ChargeAtPlayer) = {
 };
 
 EvtScript N(EVS_Scene_GangDefeated) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(DisablePartnerAI, 0)
     Call(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
     Call(SetNpcPos, NPC_PARTNER, 65, LVar1, 80)
@@ -206,9 +206,9 @@ EvtScript N(EVS_Scene_GangDefeated) = {
     Call(PutPartnerAway)
     Call(ResetCam, CAM_DEFAULT, Float(4.0))
     Set(GB_StoryProgress, STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(AwaitPlayerApproach, -250, 0, 50)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetCurrentPartnerID, LVar0)
     Call(BringPartnerOut, PARTNER_LAKILESTER)
     IfNe(LVar0, PARTNER_LAKILESTER)
@@ -219,14 +219,14 @@ EvtScript N(EVS_Scene_GangDefeated) = {
         Add(LVar3, 20)
         Call(NpcJump0, NPC_PARTNER, LVar1, LVar2, LVar3, 30)
     EndIf
-    Call(PlayerFaceNpc, NPC_PARTNER, FALSE)
+    Call(PlayerFaceNpc, NPC_PARTNER, false)
     Call(NpcFacePlayer, NPC_PARTNER, 0)
     Call(DisablePartnerAI, 0)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 5, MSG_CH6_00C2)
     Call(EnablePartnerAI)
     Call(PutPartnerAway)
     Call(ResetCam, CAM_DEFAULT, Float(4.0))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -239,7 +239,7 @@ EvtScript N(EVS_NpcIdle_Magikoopa) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(10)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -247,8 +247,8 @@ EvtScript N(EVS_NpcIdle_Magikoopa) = {
     Call(SetCamDistance, CAM_DEFAULT, 1000)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-6.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
+    Call(DisablePlayerInput, false)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
     End
@@ -337,9 +337,9 @@ EvtScript N(EVS_GenericHitReaction) = {
     IfGe(GB_StoryProgress, STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(func_802D2C14, 1)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(AdjustCam, CAM_DEFAULT, Float(8.0), 0, 300, Float(17.0), Float(-6.0))
     ExecWait(N(EVS_ReactionFacePlayer))
     Switch(AB_FLO_GuardedMachineHitCount)
@@ -351,7 +351,7 @@ EvtScript N(EVS_GenericHitReaction) = {
             ExecWait(N(EVS_SecondReactionDialogue))
     EndSwitch
     Call(func_802D2C14, 0)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -420,13 +420,13 @@ EvtScript N(EVS_GenericBombReaction) = {
     IfGe(GB_StoryProgress, STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(8.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-6.0))
     Call(SetCamDistance, CAM_DEFAULT, 300)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     ExecWait(N(EVS_ReactionFacePlayer))
     IfEq(AB_FLO_GuardedMachineHitCount, 0)
@@ -436,7 +436,7 @@ EvtScript N(EVS_GenericBombReaction) = {
     Else
         ExecWait(N(EVS_SecondReactionDialogue))
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

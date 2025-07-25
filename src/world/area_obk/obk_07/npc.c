@@ -42,7 +42,7 @@ NpcData N(NpcData_TrafficBoo2) = {
 
 EvtScript N(EVS_NpcInit_GuardBoo) = {
     IfGe(GB_StoryProgress, STORY_CH3_GOT_WEIGHT)
-        Set(MV_GuardDeparted, TRUE)
+        Set(MV_GuardDeparted, true)
         Call(RemoveNpc, NPC_SELF)
     Else
         ExecWait(N(EVS_SetupGuardBoo))

@@ -50,7 +50,7 @@ API_CALLABLE(N(RestoreBackground)) {
 API_CALLABLE(N(ShouldTargetBeCaptured)) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
 
-    script->varTable[0] = FALSE;
+    script->varTable[0] = false;
 
     if (targetActor->flags & ACTOR_FLAG_TARGET_ONLY) {
         return ApiStatus_DONE2;
@@ -67,7 +67,7 @@ API_CALLABLE(N(ShouldTargetBeCaptured)) {
     if (targetActor->actorBlueprint->upAndAwayChance != 0
         && rand_int(100) <= targetActor->actorBlueprint->upAndAwayChance
     ) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
 
     return ApiStatus_DONE2;
@@ -95,11 +95,11 @@ EvtScript N(EVS_UsePower) = {
     Label(0)
         Call(SetGoalToTarget, ACTOR_SELF)
         Call(N(ShouldTargetBeCaptured))
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         Call(ItemCheckHit, LVar1, 0, 0, 0, 0)
         IfEq(LVar1, HIT_RESULT_MISS)
             Set(LVar0, 0)
-            Set(LFlag0, TRUE)
+            Set(LFlag0, true)
         EndIf
         Switch(LVar0)
             CaseGt(0)
@@ -144,7 +144,7 @@ EvtScript N(EVS_UsePower) = {
                 Thread
                     Call(PlaySound, SOUND_UP_AND_AWAY_CAPTURE)
                     Call(GetOwnerTarget, LVarA, LVar1)
-                    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, TRUE)
+                    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, true)
                     SetF(LVar0, Float(1.0))
                     Loop(18)
                         SubF(LVar0, Float(0.05))
@@ -158,11 +158,11 @@ EvtScript N(EVS_UsePower) = {
                         Add(LVar1, 30)
                         Wait(5)
                     EndLoop
-                    Call(SetBattleFlagBits, BS_FLAGS1_STAR_POINTS_DROPPED, TRUE)
+                    Call(SetBattleFlagBits, BS_FLAGS1_STAR_POINTS_DROPPED, true)
                     Call(RemoveActor, LVarA)
                 EndThread
             CaseDefault
-                IfEq(LFlag0, FALSE)
+                IfEq(LFlag0, false)
                     Call(PlayerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 0, BS_FLAGS1_FORCE_IMMUNE_HIT | BS_FLAGS1_TRIGGER_EVENTS)
                 EndIf
         EndSwitch

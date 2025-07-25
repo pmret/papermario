@@ -432,7 +432,7 @@ s32 sfx_adjust_env_sound_pos(s32 soundID, s32 sourceFlags, f32 x, f32 y, f32 z) 
     SoundInstance* sound = sfx_get_env_sound_instance(soundID);
 
     if (sound == NULL) {
-        return FALSE;
+        return false;
     }
 
     sound->sourceFlags = sourceFlags;
@@ -441,7 +441,7 @@ s32 sfx_adjust_env_sound_pos(s32 soundID, s32 sourceFlags, f32 x, f32 y, f32 z) 
     sound->pos.z = z;
     sound->soundID = soundID;
     sound->flags |= SOUND_INSTANCE_FLAG_ACTIVE | SOUND_INSTANCE_FLAG_POSITION_CHANGED;
-    return TRUE;
+    return true;
 }
 
 void sfx_stop_tracking_env_sound_pos(s32 soundID, s32 keepPlaying) {
@@ -506,7 +506,7 @@ void sfx_stop_sound(s32 soundID) {
     s32 sound = soundID;
 
     if (sound & SOUND_ID_TYPE_FLAG) {
-        sfx_stop_tracking_env_sound_pos(LoopingSounds[sound & 0xFFFF], FALSE);
+        sfx_stop_tracking_env_sound_pos(LoopingSounds[sound & 0xFFFF], false);
     } else {
         snd_stop_sound(sound);
     }

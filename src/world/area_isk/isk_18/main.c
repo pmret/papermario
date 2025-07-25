@@ -14,7 +14,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_DRY_DRY_RUINS)
     Call(SetSpriteShading, SHADING_ISK_18)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_SetupFlames))
 #if VERSION_PAL
     Call(SetMusic, 0, SONG_DRY_DRY_RUINS, 0, VOL_LEVEL_FULL)
@@ -29,9 +29,9 @@ EvtScript N(EVS_Main) = {
     EndSwitch
 #endif
     IfLt(GB_StoryProgress, STORY_CH2_DRAINED_THIRD_SAND_ROOM)
-        Call(EnableModel, MODEL_o1956, FALSE)
-        Call(EnableModel, MODEL_o1957, FALSE)
-        Call(EnableModel, MODEL_o1958, FALSE)
+        Call(EnableModel, MODEL_o1956, false)
+        Call(EnableModel, MODEL_o1957, false)
+        Call(EnableModel, MODEL_o1958, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitte, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))

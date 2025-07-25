@@ -144,8 +144,8 @@ EvtScript N(EVS_BreakIce) = {
         Call(SetGroupVisibility, MODEL_move1, MODEL_GROUP_VISIBLE)
         Wait(1)
         Call(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
-        Call(EnableModel, MODEL_m1_yuka, TRUE)
-        Call(EnableModel, MODEL_m1_kabe, TRUE)
+        Call(EnableModel, MODEL_m1_yuka, true)
+        Call(EnableModel, MODEL_m1_kabe, true)
         Wait(1)
     EndLoop
     Return
@@ -159,10 +159,10 @@ EvtScript N(EVS_TouchFloor_FragileIce) = {
             Return
         EndIf
     EndIf
-    IfEq(GF_SAM07_IceBroken, TRUE)
+    IfEq(GF_SAM07_IceBroken, true)
         Return
     EndIf
-    Set(GF_SAM07_IceBroken, TRUE)
+    Set(GF_SAM07_IceBroken, true)
     Wait(5)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o116, COLLIDER_FLAGS_UPPER_MASK)
     Exec(N(EVS_BreakIce))
@@ -172,10 +172,10 @@ EvtScript N(EVS_TouchFloor_FragileIce) = {
 };
 
 EvtScript N(EVS_Blast_FragileIce) = {
-    IfEq(GF_SAM07_IceBroken, TRUE)
+    IfEq(GF_SAM07_IceBroken, true)
         Return
     EndIf
-    Set(GF_SAM07_IceBroken, TRUE)
+    Set(GF_SAM07_IceBroken, true)
     Wait(5)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o116, COLLIDER_FLAGS_UPPER_MASK)
     Exec(N(EVS_BreakIce))
@@ -185,9 +185,9 @@ EvtScript N(EVS_Blast_FragileIce) = {
 };
 
 EvtScript N(EVS_UseGreenSwitch) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(N(GetEntityPosition), MV_SwitchEntityID, LVar7, LVar8, LVar9)
-    IfEq(GF_SAM07_FloorRaised, FALSE)
+    IfEq(GF_SAM07_FloorRaised, false)
         Call(PlaySoundAtCollider, COLLIDER_m1_yuka, SOUND_SAM07_RAISE_FLOOR, 0)
         Sub(LVar8, -180)
         Call(MakeLerp, -180, 0, 120, EASING_COS_IN_OUT)
@@ -204,12 +204,12 @@ EvtScript N(EVS_UseGreenSwitch) = {
             IfEq(LVar1, 1)
                 Goto(0)
             EndIf
-        Call(EnableModel, MODEL_o135, TRUE)
-        Call(EnableModel, MODEL_o137, FALSE)
-        Set(GF_SAM07_FloorRaised, TRUE)
+        Call(EnableModel, MODEL_o135, true)
+        Call(EnableModel, MODEL_o137, false)
+        Set(GF_SAM07_FloorRaised, true)
     Else
-        Call(EnableModel, MODEL_o137, TRUE)
-        Call(EnableModel, MODEL_o135, FALSE)
+        Call(EnableModel, MODEL_o137, true)
+        Call(EnableModel, MODEL_o135, false)
         Call(PlaySoundAtCollider, COLLIDER_m1_yuka, SOUND_SAM07_LOWER_FLOOR, 0)
         Call(MakeLerp, 0, -180, 120, EASING_COS_IN_OUT)
         Label(1)
@@ -225,9 +225,9 @@ EvtScript N(EVS_UseGreenSwitch) = {
             IfEq(LVar1, 1)
                 Goto(1)
             EndIf
-        Set(GF_SAM07_FloorRaised, FALSE)
+        Set(GF_SAM07_FloorRaised, false)
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -238,12 +238,12 @@ BombTrigger N(BombPos_Ice) = {
 };
 
 EvtScript N(EVS_SetupPit) = {
-    Call(EnableGroup, MODEL_g72, TRUE)
+    Call(EnableGroup, MODEL_g72, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_m1_kabe, COLLIDER_FLAGS_UPPER_MASK)
     Call(ParentColliderToModel, COLLIDER_m1_yuka, MODEL_m1_yuka)
     Call(ParentColliderToModel, COLLIDER_o116, MODEL_m1_yuka)
-    IfEq(GF_SAM07_IceBroken, FALSE)
-        Call(EnableModel, MODEL_o137, TRUE)
+    IfEq(GF_SAM07_IceBroken, false)
+        Call(EnableModel, MODEL_o137, true)
         Call(TranslateGroup, MODEL_move1, 0, -180, 0)
         Call(UpdateColliderTransform, COLLIDER_m1_yuka)
         Call(UpdateColliderTransform, COLLIDER_o116)
@@ -252,15 +252,15 @@ EvtScript N(EVS_SetupPit) = {
     Else
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o116, COLLIDER_FLAGS_UPPER_MASK)
         Call(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
-        Call(EnableModel, MODEL_m1_yuka, TRUE)
-        Call(EnableModel, MODEL_m1_kabe, TRUE)
-        Call(EnableModel, MODEL_o135, TRUE)
-        IfEq(GF_SAM07_FloorRaised, FALSE)
-            Call(EnableModel, MODEL_o137, TRUE)
+        Call(EnableModel, MODEL_m1_yuka, true)
+        Call(EnableModel, MODEL_m1_kabe, true)
+        Call(EnableModel, MODEL_o135, true)
+        IfEq(GF_SAM07_FloorRaised, false)
+            Call(EnableModel, MODEL_o137, true)
             Call(TranslateGroup, MODEL_move1, 0, -180, 0)
             Call(UpdateColliderTransform, COLLIDER_m1_yuka)
         Else
-            Call(EnableModel, MODEL_o135, TRUE)
+            Call(EnableModel, MODEL_o135, true)
         EndIf
     EndIf
     Return

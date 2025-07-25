@@ -62,10 +62,10 @@ EvtScript N(EVS_BindExitTriggers) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_FLOWER_FIELDS)
     Call(SetSpriteShading, SHADING_NONE)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
     EVT_SETUP_CAMERA_DEFAULT()
     Call(func_80044238, 7)
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitw, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilite, COLLIDER_FLAGS_UPPER_MASK)

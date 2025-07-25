@@ -30,7 +30,7 @@ s32 filemenu_cursor_targetX = SCREEN_WIDTH / 2;
 s32 filemenu_cursor_targetY = -SCREEN_HEIGHT / 2;
 s32 filemenu_cursorGoalAlpha = 0;
 s32 filemenu_cursorGoalAlpha2 = 0;
-s32 D_80249BB0 = TRUE;
+s32 D_80249BB0 = true;
 #if !VERSION_PAL
 s32 D_80249BB4 = 0;
 #endif
@@ -222,7 +222,7 @@ void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
                 }
             }
             if (i >= ARRAY_COUNT(gWindows)) {
-                D_80249BB0 = FALSE;
+                D_80249BB0 = false;
             }
         }
         filemenu_cursor_targetX = posX;
@@ -1092,10 +1092,10 @@ void filemenu_init(s32 mode) {
     if (menu->state == FM_MAIN_SELECT_FILE) {
         for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
             if (!fio_load_game(i)) {
-                gSaveSlotHasData[i] = FALSE;
+                gSaveSlotHasData[i] = false;
             } else {
                 gSaveSlotMetadata[i] = gCurrentSaveFile.metadata;
-                gSaveSlotHasData[i] = TRUE;
+                gSaveSlotHasData[i] = true;
             }
         }
 

@@ -6,7 +6,7 @@
 EvtScript N(EVS_OpenChest_FryingPan) = {
     Set(LVarA, ITEM_FRYING_PAN)
     Set(LVarB, ITEM_TYPE_KEY)
-    Set(GF_OMO07_Chest_FryingPan, TRUE)
+    Set(GF_OMO07_Chest_FryingPan, true)
     Set(GB_StoryProgress, STORY_CH4_GOT_FRYING_PAN)
     ExecWait(N(EVS_Chest_GetItem))
     Return
@@ -37,8 +37,8 @@ Vec3i N(StarBoxLaunchTargets)[] = {
 };
 
 EvtScript N(EVS_StarBoxLaunch_Impl) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     UseBuf(Ref(N(StarBoxLaunchTargets)))
     Loop(LVar0)
         BufRead3(LVar7, LVar8, LVar9)
@@ -58,8 +58,8 @@ EvtScript N(EVS_StarBoxLaunch_Impl) = {
     Wait(3)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Call(N(DisableCameraFollowPlayerY))
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

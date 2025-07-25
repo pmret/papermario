@@ -11,9 +11,9 @@ EvtScript N(EVS_BindExitTriggers) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_FLOWER_FIELDS)
     Call(SetSpriteShading, SHADING_NONE)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
     EVT_SETUP_CAMERA_DEFAULT()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Call(GetEntryID, LVar0)
     IfEq(LVar0, flo_15_ENTRY_1)

@@ -78,7 +78,7 @@ EvtScript N(EVS_Pedestal_Sink) = {
         EndIf
     EndLoop
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_iwa, COLLIDER_FLAGS_UPPER_MASK)
-    Call(EnableModel, MODEL_point_iwa, FALSE)
+    Call(EnableModel, MODEL_point_iwa, false)
     Call(PlaySound, SOUND_LOOP_SBK_RUINS_WHIRLWIND)
     Return
     End
@@ -106,8 +106,8 @@ EvtScript N(EVS_DarkenEnvironment) = {
 
 EvtScript N(EVS_TexPan_SandRing) = {
     Call(SetRenderMode, MODEL_o225, RENDER_MODE_SURFACE_XLU_LAYER2)
-    Call(EnableTexPanning, MODEL_o225, TRUE)
-    Call(EnableTexPanning, CLONED_MODEL(0), TRUE)
+    Call(EnableTexPanning, MODEL_o225, true)
+    Call(EnableTexPanning, CLONED_MODEL(0), true)
     Set(LVar0, 0)
     Set(LVar1, 0)
     Set(LVar2, 0)
@@ -133,7 +133,7 @@ EvtScript N(EVS_TexPan_SandRing) = {
 };
 
 EvtScript N(EVS_SandRing_Appear) = {
-    Call(EnableModel, MODEL_o225, TRUE)
+    Call(EnableModel, MODEL_o225, true)
     Set(LVar2, 0)
     Set(LVar0, -100)
     Loop(100)
@@ -155,7 +155,7 @@ EvtScript N(EVS_SandRing_Appear) = {
 
 EvtScript N(EVS_SandRingClone_Appear) = {
     Wait(10)
-    Call(EnableModel, CLONED_MODEL(0), TRUE)
+    Call(EnableModel, CLONED_MODEL(0), true)
     Set(LVar2, 0)
     Set(LVar0, -100)
     Loop(100)
@@ -176,7 +176,7 @@ EvtScript N(EVS_SandRingClone_Appear) = {
 };
 
 EvtScript N(EVS_SandRing_Vanish) = {
-    Call(EnableModel, MODEL_o225, TRUE)
+    Call(EnableModel, MODEL_o225, true)
     Set(LVar0, 0)
     Set(LVar2, 100)
     SetF(LVar3, Float(1.25))
@@ -193,14 +193,14 @@ EvtScript N(EVS_SandRing_Vanish) = {
         Add(LVar2, 5)
         Wait(1)
     EndLoop
-    Call(EnableModel, MODEL_o225, FALSE)
+    Call(EnableModel, MODEL_o225, false)
     Return
     End
 };
 
 EvtScript N(EVS_SandRingClone_Vanish) = {
     Wait(10)
-    Call(EnableModel, CLONED_MODEL(0), TRUE)
+    Call(EnableModel, CLONED_MODEL(0), true)
     Set(LVar0, 0)
     Set(LVar2, 100)
     SetF(LVar3, Float(0.909))
@@ -217,14 +217,14 @@ EvtScript N(EVS_SandRingClone_Vanish) = {
         Add(LVar2, 5)
         Wait(1)
     EndLoop
-    Call(EnableModel, CLONED_MODEL(0), FALSE)
+    Call(EnableModel, CLONED_MODEL(0), false)
     Return
     End
 };
 
 EvtScript N(EVS_LightRays_Appear) = {
     ChildThread
-        Call(EnableTexPanning, MODEL_upper_light, TRUE)
+        Call(EnableTexPanning, MODEL_upper_light, true)
         Set(LVar0, 0)
         Loop(0)
             Call(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
@@ -235,7 +235,7 @@ EvtScript N(EVS_LightRays_Appear) = {
             Wait(1)
         EndLoop
     EndChildThread
-    Call(EnableModel, MODEL_upper_light, TRUE)
+    Call(EnableModel, MODEL_upper_light, true)
     Set(LVar0, -200)
     Set(LVar1, 0)
     Loop(200)
@@ -252,7 +252,7 @@ EvtScript N(EVS_LightRays_Appear) = {
 
 EvtScript N(EVS_LightRays_Vanish) = {
     ChildThread
-        Call(EnableTexPanning, MODEL_upper_light, TRUE)
+        Call(EnableTexPanning, MODEL_upper_light, true)
         Set(LVar0, 0)
         Loop(0)
             Call(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, 0)
@@ -263,7 +263,7 @@ EvtScript N(EVS_LightRays_Vanish) = {
             Wait(1)
         EndLoop
     EndChildThread
-    Call(EnableModel, MODEL_upper_light, TRUE)
+    Call(EnableModel, MODEL_upper_light, true)
     Set(LVar0, 0)
     Call(TranslateModel, MODEL_upper_light, 0, LVar0, 0)
     Wait(10)
@@ -278,9 +278,9 @@ EvtScript N(EVS_LightRays_Vanish) = {
 
 EvtScript N(EVS_Ruins_Arise) = {
     Call(MakeTransformGroup, MODEL_ruins)
-    Call(EnableGroup, MODEL_ruins, TRUE)
+    Call(EnableGroup, MODEL_ruins, true)
     Thread
-        Call(EnableTexPanning, MODEL_o232, TRUE)
+        Call(EnableTexPanning, MODEL_o232, true)
         Set(LVar0, 0)
         Set(LVar1, 0)
         Set(LVar2, 0)
@@ -292,7 +292,7 @@ EvtScript N(EVS_Ruins_Arise) = {
             Add(LVar2,  700)
             Wait(1)
         EndLoop
-        Call(EnableModel, MODEL_o232, FALSE)
+        Call(EnableModel, MODEL_o232, false)
     EndThread
     Thread
         Wait(20)
@@ -346,9 +346,9 @@ EvtScript N(EVS_Ruins_Arise) = {
 
 EvtScript N(EVS_Ruins_FinishRising) = {
     Call(MakeTransformGroup, MODEL_ruins)
-    Call(EnableGroup, MODEL_ruins, TRUE)
+    Call(EnableGroup, MODEL_ruins, true)
     Thread
-        Call(EnableTexPanning, MODEL_o232, TRUE)
+        Call(EnableTexPanning, MODEL_o232, true)
         Set(LVar0,  60000)
         Set(LVar1, -60000)
         Set(LVar2, 210000)
@@ -360,7 +360,7 @@ EvtScript N(EVS_Ruins_FinishRising) = {
             Add(LVar2,  700)
             Wait(1)
         EndLoop
-        Call(EnableModel, MODEL_o232, FALSE)
+        Call(EnableModel, MODEL_o232, false)
     EndThread
     Thread
         Loop(10)
@@ -523,7 +523,7 @@ EvtScript N(EVS_Doors_Open) = {
 };
 
 EvtScript N(EVS_Steps_Arise) = {
-    Call(EnableGroup, MODEL_step, TRUE)
+    Call(EnableGroup, MODEL_step, true)
     Call(MakeLerp, -310, 0, 310, EASING_LINEAR)
     Loop(0)
         Call(UpdateLerp)
@@ -538,7 +538,7 @@ EvtScript N(EVS_Steps_Arise) = {
 };
 
 EvtScript N(EVS_Steps_FinishRising) = {
-    Call(EnableGroup, MODEL_step, TRUE)
+    Call(EnableGroup, MODEL_step, true)
     Call(MakeLerp, -20, 0, 20, EASING_LINEAR)
     Loop(0)
         Call(UpdateLerp)
@@ -580,14 +580,14 @@ EvtScript N(EVS_Steps_Unfold) = {
 };
 
 EvtScript N(EVS_OnInteract_Pedestal) = {
-    Call(DisablePulseStone, TRUE)
+    Call(DisablePulseStone, true)
     Call(ShowKeyChoicePopup)
     IfLe(LVar0, 0)
         Call(CloseChoicePopup)
-        Call(DisablePulseStone, FALSE)
+        Call(DisablePulseStone, false)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(func_802CF56C, 1)
     Call(RemoveKeyItemAt, LVar1)
     Call(CloseChoicePopup)
@@ -601,7 +601,7 @@ EvtScript N(EVS_OnInteract_Pedestal) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
     Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.2))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(10)
     Set(LVar0, 180)
     ExecWait(N(EVS_SetChompStatueRotation))
@@ -615,10 +615,10 @@ EvtScript N(EVS_OnInteract_Pedestal) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     IfLt(LVar0, 0)
         Set(LVar0, -80)
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
     Else
         Set(LVar0, 80)
-        Set(LFlag0, TRUE)
+        Set(LFlag0, true)
     EndIf
     Thread
         Wait(10)
@@ -640,12 +640,12 @@ EvtScript N(EVS_OnInteract_Pedestal) = {
     Wait(100)
     Call(SetCamPitch, CAM_DEFAULT, Float(8.0), Float(-9.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.2))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(80)
     Exec(N(EVS_InterpChompStatueRotation))
     Wait(60)
     Wait(50)
-    IfEq(LFlag0, FALSE)
+    IfEq(LFlag0, false)
         Call(GotoMap, Ref("sbk_30"), sbk_30_ENTRY_4)
     Else
         Call(GotoMap, Ref("sbk_30"), sbk_30_ENTRY_5)
@@ -658,32 +658,32 @@ EvtScript N(EVS_OnInteract_Pedestal) = {
 EvtScript N(EVS_SetupRuins) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_GOT_PULSE_STONE)
-            Call(EnableGroup, MODEL_day_version, FALSE)
+            Call(EnableGroup, MODEL_day_version, false)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ruin, COLLIDER_FLAGS_UPPER_MASK)
         CaseLt(STORY_CH2_UNCOVERED_DRY_DRY_RUINS)
-            Call(EnableGroup, MODEL_day_version, FALSE)
+            Call(EnableGroup, MODEL_day_version, false)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ruin, COLLIDER_FLAGS_UPPER_MASK)
             BindPadlock(Ref(N(EVS_OnInteract_Pedestal)), TRIGGER_WALL_PRESS_A, COLLIDER_iwa, Ref(N(PedestalKeyList)), 0, 1)
         CaseDefault
-            Call(EnableModel, MODEL_point_iwa, FALSE)
+            Call(EnableModel, MODEL_point_iwa, false)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_pikapika, COLLIDER_FLAGS_UPPER_MASK)
     EndSwitch
-    Call(EnableGroup, MODEL_ruins, FALSE)
-    Call(EnableGroup, MODEL_step, FALSE)
-    Call(EnableModel, MODEL_upper_light, FALSE)
-    Call(EnableModel, MODEL_o225, FALSE)
+    Call(EnableGroup, MODEL_ruins, false)
+    Call(EnableGroup, MODEL_step, false)
+    Call(EnableModel, MODEL_upper_light, false)
+    Call(EnableModel, MODEL_o225, false)
     Return
     End
 };
 
 EvtScript N(EVS_Ruins_Arise_Continued) = {
     Call(PlaySound, SOUND_SBK_RUINS_FINISH_RISING)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(func_802CF56C, 1)
     Call(FacePlayerTowardPoint, 0, 0, 0)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_iwa, COLLIDER_FLAGS_UPPER_MASK)
-    Call(EnableModel, MODEL_point_iwa, FALSE)
-    Call(EnableGroup, MODEL_day_version, FALSE)
+    Call(EnableModel, MODEL_point_iwa, false)
+    Call(EnableGroup, MODEL_day_version, false)
     Thread
         Call(ShakeCam, CAM_DEFAULT, 0, 400, Float(0.2))
     EndThread
@@ -694,7 +694,7 @@ EvtScript N(EVS_Ruins_Arise_Continued) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(8.0), Float(-9.0))
     Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
     Call(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
     Call(N(SetModelTintMode), APPLY_TINT_GROUPS, Ref(N(ModelList_Solid)), ENV_TINT_NONE)
@@ -714,7 +714,7 @@ EvtScript N(EVS_Ruins_Arise_Continued) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(4.0), Float(-6.5))
     Call(SetCamDistance, CAM_DEFAULT, Float(790.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.2))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(100)
     Exec(N(EVS_Doors_Open))
     Wait(100)
@@ -727,9 +727,9 @@ EvtScript N(EVS_Ruins_Arise_Continued) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(func_802CF56C, 0)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

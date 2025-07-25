@@ -98,7 +98,7 @@ EvtScript N(EVS_Fuzzipede_ReactToLight) = {
         IfEq(LVarA, 0)
             Call(N(AwaitPartnerWatt))
             IfEq(LVarB, 0)
-                Call(DisablePlayerInput, TRUE)
+                Call(DisablePlayerInput, true)
                 Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
                 Call(GetPlayerPos, LVar0, LVar1, LVar2)
                 IfLt(LVar0, 0)
@@ -112,13 +112,13 @@ EvtScript N(EVS_Fuzzipede_ReactToLight) = {
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Fuzzipede_Anim24, ANIM_Fuzzipede_Anim04, 0, MSG_MAC_Port_009B)
                 Call(SetSelfVar, 0, 1)
                 Set(LVarB, 1)
-                Call(DisablePlayerInput, FALSE)
+                Call(DisablePlayerInput, false)
             EndIf
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, FALSE)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, false)
             Set(LVarA, 1)
         Else
             Call(N(AwaitPartnerNotWatt))
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, TRUE)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP, true)
             Set(LVarA, 0)
         EndIf
         Wait(1)
@@ -167,14 +167,14 @@ EvtScript N(EVS_NpcAI_Fuzzipede) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE, FALSE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE, false)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
     End
 };
 
 EvtScript N(EVS_NpcHit_Fuzzipede) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetSelfVar, 3, LVar0)
     KillThread(LVar0)
     Call(SetSelfVar, 1, 1)
@@ -183,18 +183,18 @@ EvtScript N(EVS_NpcHit_Fuzzipede) = {
 };
 
 EvtScript N(EVS_NpcDefeat_Fuzzipede) = {
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAND)
     Call(SetPlayerPos, -40, 0, 0)
-    Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
+    Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, true)
     Call(InterpPlayerYaw, 90, 0)
-    Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, FALSE)
+    Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, false)
     Call(SetNpcPos, NPC_SELF, 30, 0, 0)
     Call(SetNpcYaw, NPC_SELF, 270)
     Call(UseSettingsFrom, CAM_DEFAULT, -5, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -5, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(1)
     Call(SpeakToPlayer, NPC_SELF, ANIM_Fuzzipede_Anim24, ANIM_Fuzzipede_Anim04, 0, MSG_MAC_Port_009D)
     Wait(10)
@@ -231,8 +231,8 @@ EvtScript N(EVS_NpcDefeat_Fuzzipede) = {
     EndThread
     Thread
         Wait(20)
-        Call(HidePlayerShadow, TRUE)
-        Call(EnableNpcShadow, NPC_PARTNER, FALSE)
+        Call(HidePlayerShadow, true)
+        Call(EnableNpcShadow, NPC_PARTNER, false)
         Call(SetPlayerAnimation, ANIM_MarioW2_Flail)
         Call(GetPlayerPos, LVar1, LVar0, LVar3)
         Loop(150)
@@ -243,7 +243,7 @@ EvtScript N(EVS_NpcDefeat_Fuzzipede) = {
     EndThread
     Thread
         Wait(20)
-        Call(EnableNpcShadow, NPC_SELF, FALSE)
+        Call(EnableNpcShadow, NPC_SELF, false)
         Call(GetNpcPos, NPC_Fuzzipede, LVar1, LVar0, LVar3)
         Loop(150)
             Add(LVar0, 1)
@@ -263,8 +263,8 @@ EvtScript N(EVS_NpcDefeat_Fuzzipede) = {
     Call(GotoMap, Ref("mac_05"), mac_05_ENTRY_2)
     Wait(100)
     Call(InterruptUsePartner)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

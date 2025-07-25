@@ -4774,9 +4774,9 @@ enum CameraUpdateMode {
     CAM_UPDATE_FROM_ZONE            = 3,
 
     // this camera uses a set of control parameters to calculate its lookAt_obj and lookAt_eye positions,
-    // which are only updated if skipRecalc = FALSE
+    // which are only updated if skipRecalc = false
     // the ultimate target is given by lookAt_obj_target, with an offset given by targetPos (?!)
-    // in practice, this is used for CAM_BATTLE and CAM_TATTLE, with skipRecalc almost always set to FALSE
+    // in practice, this is used for CAM_BATTLE and CAM_TATTLE, with skipRecalc almost always set to false
     CAM_UPDATE_NO_INTERP            = 6,
 
     // this camera tracks lookAt_obj_target in a circular region centered on targetPos. the camera does not update

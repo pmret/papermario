@@ -37,73 +37,73 @@ s32 N(BlueBoxInfo)[] = {
 };
 
 EvtScript N(EVS_GreenLightOff) = {
-    Call(EnableModel, MODEL_bm1_1, TRUE)
-    Call(EnableModel, MODEL_b1_1, TRUE)
-    Call(EnableModel, MODEL_bm1_2, FALSE)
-    Call(EnableModel, MODEL_b1_2, FALSE)
+    Call(EnableModel, MODEL_bm1_1, true)
+    Call(EnableModel, MODEL_b1_1, true)
+    Call(EnableModel, MODEL_bm1_2, false)
+    Call(EnableModel, MODEL_b1_2, false)
     Return
     End
 };
 
 EvtScript N(EVS_YellowLightOff) = {
-    Call(EnableModel, MODEL_bm2_1, TRUE)
-    Call(EnableModel, MODEL_b2_1, TRUE)
-    Call(EnableModel, MODEL_bm2_2, FALSE)
-    Call(EnableModel, MODEL_b2_2, FALSE)
+    Call(EnableModel, MODEL_bm2_1, true)
+    Call(EnableModel, MODEL_b2_1, true)
+    Call(EnableModel, MODEL_bm2_2, false)
+    Call(EnableModel, MODEL_b2_2, false)
     Return
     End
 };
 
 EvtScript N(EVS_RedLightOff) = {
-    Call(EnableModel, MODEL_bm3_1, TRUE)
-    Call(EnableModel, MODEL_b3_1, TRUE)
-    Call(EnableModel, MODEL_bm3_2, FALSE)
-    Call(EnableModel, MODEL_b3_2, FALSE)
+    Call(EnableModel, MODEL_bm3_1, true)
+    Call(EnableModel, MODEL_b3_1, true)
+    Call(EnableModel, MODEL_bm3_2, false)
+    Call(EnableModel, MODEL_b3_2, false)
     Return
     End
 };
 
 EvtScript N(EVS_BlueLightOff) = {
-    Call(EnableModel, MODEL_bm4_1, TRUE)
-    Call(EnableModel, MODEL_b4_1, TRUE)
-    Call(EnableModel, MODEL_bm4_2, FALSE)
-    Call(EnableModel, MODEL_b4_2, FALSE)
+    Call(EnableModel, MODEL_bm4_1, true)
+    Call(EnableModel, MODEL_b4_1, true)
+    Call(EnableModel, MODEL_bm4_2, false)
+    Call(EnableModel, MODEL_b4_2, false)
     Return
     End
 };
 
 EvtScript N(EVS_GreenLightOn) = {
-    Call(EnableModel, MODEL_bm1_1, FALSE)
-    Call(EnableModel, MODEL_b1_1, FALSE)
-    Call(EnableModel, MODEL_bm1_2, TRUE)
-    Call(EnableModel, MODEL_b1_2, TRUE)
+    Call(EnableModel, MODEL_bm1_1, false)
+    Call(EnableModel, MODEL_b1_1, false)
+    Call(EnableModel, MODEL_bm1_2, true)
+    Call(EnableModel, MODEL_b1_2, true)
     Return
     End
 };
 
 EvtScript N(EVS_YellowLightOn) = {
-    Call(EnableModel, MODEL_bm2_1, FALSE)
-    Call(EnableModel, MODEL_b2_1, FALSE)
-    Call(EnableModel, MODEL_bm2_2, TRUE)
-    Call(EnableModel, MODEL_b2_2, TRUE)
+    Call(EnableModel, MODEL_bm2_1, false)
+    Call(EnableModel, MODEL_b2_1, false)
+    Call(EnableModel, MODEL_bm2_2, true)
+    Call(EnableModel, MODEL_b2_2, true)
     Return
     End
 };
 
 EvtScript N(EVS_RedLightOn) = {
-    Call(EnableModel, MODEL_bm3_1, FALSE)
-    Call(EnableModel, MODEL_b3_1, FALSE)
-    Call(EnableModel, MODEL_bm3_2, TRUE)
-    Call(EnableModel, MODEL_b3_2, TRUE)
+    Call(EnableModel, MODEL_bm3_1, false)
+    Call(EnableModel, MODEL_b3_1, false)
+    Call(EnableModel, MODEL_bm3_2, true)
+    Call(EnableModel, MODEL_b3_2, true)
     Return
     End
 };
 
 EvtScript N(EVS_BlueLightOn) = {
-    Call(EnableModel, MODEL_bm4_1, FALSE)
-    Call(EnableModel, MODEL_b4_1, FALSE)
-    Call(EnableModel, MODEL_bm4_2, TRUE)
-    Call(EnableModel, MODEL_b4_2, TRUE)
+    Call(EnableModel, MODEL_bm4_1, false)
+    Call(EnableModel, MODEL_b4_1, false)
+    Call(EnableModel, MODEL_bm4_2, true)
+    Call(EnableModel, MODEL_b4_2, true)
     Return
     End
 };
@@ -177,20 +177,20 @@ EvtScript N(EVS_ResetBoxesAfterAmbush) = {
     EndLoop
     Set(MV_BoxHitSequence, 0)
     Set(MV_BoxHitCount, 0)
-    Call(EnableModel, MODEL_bm1_2, FALSE)
-    Call(EnableModel, MODEL_b1_2, FALSE)
+    Call(EnableModel, MODEL_bm1_2, false)
+    Call(EnableModel, MODEL_b1_2, false)
     Set(LVar0, Ref(N(GreenBoxInfo)))
     BindTrigger(Ref(N(EVS_HitBox)), TRIGGER_WALL_HAMMER, COLLIDER_o907, 1, 0)
-    Call(EnableModel, MODEL_bm2_2, FALSE)
-    Call(EnableModel, MODEL_b2_2, FALSE)
+    Call(EnableModel, MODEL_bm2_2, false)
+    Call(EnableModel, MODEL_b2_2, false)
     Set(LVar0, Ref(N(YellowBoxInfo)))
     BindTrigger(Ref(N(EVS_HitBox)), TRIGGER_WALL_HAMMER, COLLIDER_o911, 1, 0)
-    Call(EnableModel, MODEL_bm3_2, FALSE)
-    Call(EnableModel, MODEL_b3_2, FALSE)
+    Call(EnableModel, MODEL_bm3_2, false)
+    Call(EnableModel, MODEL_b3_2, false)
     Set(LVar0, Ref(N(RedBoxInfo)))
     BindTrigger(Ref(N(EVS_HitBox)), TRIGGER_WALL_HAMMER, COLLIDER_o915, 1, 0)
-    Call(EnableModel, MODEL_bm4_2, FALSE)
-    Call(EnableModel, MODEL_b4_2, FALSE)
+    Call(EnableModel, MODEL_bm4_2, false)
+    Call(EnableModel, MODEL_b4_2, false)
     Set(LVar0, Ref(N(BlueBoxInfo)))
     BindTrigger(Ref(N(EVS_HitBox)), TRIGGER_WALL_HAMMER, COLLIDER_o918, 1, 0)
     Return
@@ -305,7 +305,7 @@ EvtScript N(EVS_BoxResult_GiveCoins) = {
 };
 
 EvtScript N(EVS_BoxResult_RepairTrack) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Loop(4)
         Exec(N(EVS_GreenLightOff))
         Wait(3)
@@ -333,7 +333,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     Call(SetCamDistance, CAM_DEFAULT, 700)
     Call(SetCamPitch, CAM_DEFAULT, 40, Float(-4.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(30)
     Thread
         Call(MakeLerp, 0, 90, 40, EASING_CUBIC_IN)
@@ -404,7 +404,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     Call(SetCamDistance, CAM_DEFAULT, -450)
     Call(SetCamPitch, CAM_DEFAULT, 16, Float(-6.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(10)
     Thread
         Call(GetModelCenter, MODEL_b1_1)
@@ -500,7 +500,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     Wait(20)
     Call(ResetCam, CAM_DEFAULT, 2)
     Set(GB_StoryProgress, STORY_CH4_SOLVED_COLOR_PUZZLE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -564,7 +564,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
         Call(SetNpcJumpscale, NPC_ShyGuy_01, Float(1.0))
         Add(LVar2, 60)
         Call(NpcJump0, NPC_ShyGuy_01, LVar0, 0, LVar2, 20)
-        Call(SetNpcFlagBits, NPC_ShyGuy_01, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_ShyGuy_01, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
     EndThread
     Wait(3)
     Thread
@@ -584,7 +584,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
         Call(SetNpcJumpscale, NPC_ShyGuy_02, Float(1.0))
         Add(LVar2, 60)
         Call(NpcJump0, NPC_ShyGuy_02, LVar0, 0, LVar2, 20)
-        Call(SetNpcFlagBits, NPC_ShyGuy_02, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_ShyGuy_02, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
     EndThread
     Wait(3)
     Thread
@@ -604,7 +604,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
         Call(SetNpcJumpscale, NPC_ShyGuy_03, Float(1.0))
         Add(LVar2, 60)
         Call(NpcJump0, NPC_ShyGuy_03, LVar0, 0, LVar2, 20)
-        Call(SetNpcFlagBits, NPC_ShyGuy_03, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_ShyGuy_03, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
     EndThread
     Wait(3)
     Thread
@@ -624,7 +624,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
         Call(SetNpcJumpscale, NPC_ShyGuy_04, Float(1.0))
         Add(LVar2, 60)
         Call(NpcJump0, NPC_ShyGuy_04, LVar0, 0, LVar2, 20)
-        Call(SetNpcFlagBits, NPC_ShyGuy_04, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_ShyGuy_04, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
         Call(ResetCam, CAM_DEFAULT, 1)
         Exec(N(EVS_ResetBoxesAfterAmbush))
     EndThread
@@ -647,29 +647,29 @@ EvtScript N(EVS_HitBox) = {
     BufRead1(LVar1)
     BufRead4(LVar2, LVar3, LVar4, LVar5)
     Loop(5)
-        Call(EnableModel, LVar2, FALSE)
-        Call(EnableModel, LVar3, FALSE)
-        Call(EnableModel, LVar4, TRUE)
-        Call(EnableModel, LVar5, TRUE)
+        Call(EnableModel, LVar2, false)
+        Call(EnableModel, LVar3, false)
+        Call(EnableModel, LVar4, true)
+        Call(EnableModel, LVar5, true)
         Wait(1)
-        Call(EnableModel, LVar2, TRUE)
-        Call(EnableModel, LVar3, TRUE)
-        Call(EnableModel, LVar4, FALSE)
-        Call(EnableModel, LVar5, FALSE)
+        Call(EnableModel, LVar2, true)
+        Call(EnableModel, LVar3, true)
+        Call(EnableModel, LVar4, false)
+        Call(EnableModel, LVar5, false)
         Wait(1)
     EndLoop
     Mul(MV_BoxHitSequence, 4) // shift left by 2
     BitwiseOr(MV_BoxHitSequence, LVar1)
     Add(MV_BoxHitCount, 1)
     IfEq(MV_BoxHitCount, 4)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Wait(5)
         Call(UseSettingsFrom, CAM_DEFAULT, 100, 0, 370)
         Call(SetPanTarget, CAM_DEFAULT, 100, 0, 370)
         Call(SetCamDistance, CAM_DEFAULT, -450)
         Call(SetCamPitch, CAM_DEFAULT, 16, Float(-6.0))
         Call(SetCamSpeed, CAM_DEFAULT, 1)
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Wait(30)
         Switch(MV_BoxHitSequence)
             CaseEq(BOX_SEQUENCE(BOX_COLOR_GREEN, BOX_COLOR_YELLOW, BOX_COLOR_RED, BOX_COLOR_BLUE))
@@ -679,19 +679,19 @@ EvtScript N(EVS_HitBox) = {
             CaseDefault
                 ExecWait(N(EVS_BoxResult_ReleaseShyGuys))
         EndSwitch
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     Else
         Thread
             Label(10)
-            Call(EnableModel, LVar2, FALSE)
-            Call(EnableModel, LVar3, FALSE)
-            Call(EnableModel, LVar4, TRUE)
-            Call(EnableModel, LVar5, TRUE)
+            Call(EnableModel, LVar2, false)
+            Call(EnableModel, LVar3, false)
+            Call(EnableModel, LVar4, true)
+            Call(EnableModel, LVar5, true)
             Wait(5)
-            Call(EnableModel, LVar2, TRUE)
-            Call(EnableModel, LVar3, TRUE)
-            Call(EnableModel, LVar4, FALSE)
-            Call(EnableModel, LVar5, FALSE)
+            Call(EnableModel, LVar2, true)
+            Call(EnableModel, LVar3, true)
+            Call(EnableModel, LVar4, false)
+            Call(EnableModel, LVar5, false)
             Wait(10)
             IfNe(MV_BoxHitCount, 4)
                 Goto(10)
@@ -707,20 +707,20 @@ EvtScript N(EVS_SetupBoxes) = {
     IfLt(GB_StoryProgress, STORY_CH4_SOLVED_COLOR_PUZZLE)
         Set(MV_BoxHitSequence, 0)
         Set(MV_BoxHitCount, 0)
-        Call(EnableModel, MODEL_bm1_2, FALSE)
-        Call(EnableModel, MODEL_b1_2, FALSE)
+        Call(EnableModel, MODEL_bm1_2, false)
+        Call(EnableModel, MODEL_b1_2, false)
         Set(LVar0, Ref(N(GreenBoxInfo)))
         BindTrigger(Ref(N(EVS_HitBox)), TRIGGER_WALL_HAMMER, COLLIDER_o907, 1, 0)
-        Call(EnableModel, MODEL_bm2_2, FALSE)
-        Call(EnableModel, MODEL_b2_2, FALSE)
+        Call(EnableModel, MODEL_bm2_2, false)
+        Call(EnableModel, MODEL_b2_2, false)
         Set(LVar0, Ref(N(YellowBoxInfo)))
         BindTrigger(Ref(N(EVS_HitBox)), TRIGGER_WALL_HAMMER, COLLIDER_o911, 1, 0)
-        Call(EnableModel, MODEL_bm3_2, FALSE)
-        Call(EnableModel, MODEL_b3_2, FALSE)
+        Call(EnableModel, MODEL_bm3_2, false)
+        Call(EnableModel, MODEL_b3_2, false)
         Set(LVar0, Ref(N(RedBoxInfo)))
         BindTrigger(Ref(N(EVS_HitBox)), TRIGGER_WALL_HAMMER, COLLIDER_o915, 1, 0)
-        Call(EnableModel, MODEL_bm4_2, FALSE)
-        Call(EnableModel, MODEL_b4_2, FALSE)
+        Call(EnableModel, MODEL_bm4_2, false)
+        Call(EnableModel, MODEL_b4_2, false)
         Set(LVar0, Ref(N(BlueBoxInfo)))
         BindTrigger(Ref(N(EVS_HitBox)), TRIGGER_WALL_HAMMER, COLLIDER_o918, 1, 0)
     Else

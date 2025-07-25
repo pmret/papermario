@@ -17,7 +17,7 @@ enum {
 // how much to add to the meter per input if all modifiers are neutral
 #define METER_FILL_RATE 180
 
-BSS b32 N(HasStarted);
+BSS bool N(HasStarted);
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -36,15 +36,15 @@ API_CALLABLE(N(init)) {
 
     acs->actionCommandID = ACTION_COMMAND_FLEE;
     acs->state = AC_STATE_INIT;
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     acs->meterFillLevel = acs->escapeChance * 100;
     acs->escapeThreshold = rand_int(50);
     acs->meterFillWidth = 0;
     acs->flee.dir = 1;
     acs->escapeChance = rand_int(1);
-    acs->isMeterFilled = FALSE;
+    acs->isMeterFilled = false;
     battleStatus->actionQuality = 0;
-    N(HasStarted) = FALSE;
+    N(HasStarted) = false;
     acs->hudPosX = -48;
     acs->hudPosY = 80;
 
@@ -97,7 +97,7 @@ API_CALLABLE(N(start)) {
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
     battleStatus->maxActionQuality = acs->mashMeterCutoffs[acs->mashMeterNumIntervals - 1];
@@ -156,7 +156,7 @@ void N(update)(void) {
             }
 
             hud_element_set_script(acs->hudElemIDs[HIDX_BUTTON], &HES_MashAButton);
-            N(HasStarted) = TRUE;
+            N(HasStarted) = true;
             acs->state = AC_STATE_ACTIVE;
             acs->stateTimer = acs->duration;
 
@@ -170,7 +170,7 @@ void N(update)(void) {
             // handle meter reaching 100%
             if (acs->meterFillLevel >= MAX_MASH_UNITS) {
                 acs->meterFillLevel = MAX_MASH_UNITS;
-                acs->isMeterFilled = TRUE;
+                acs->isMeterFilled = true;
                 hid = acs->hudElemIDs[HIDX_100_PCT];
                 hud_element_set_render_pos(hid, acs->hudPosX + 50, acs->hudPosY + 28);
                 hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_DISABLED);

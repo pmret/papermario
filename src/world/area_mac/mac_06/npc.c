@@ -192,8 +192,8 @@ EvtScript N(EVS_NpcIdle_Whale) = {
         Wait(150)
         Call(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_Idle)
         Call(NpcFlyTo, NPC_Whale, 500, LVar1, 500, 120, 0, EASING_COS_IN)
-        IfEq(GF_StartedChapter5, FALSE)
-            Set(GF_StartedChapter5, TRUE)
+        IfEq(GF_StartedChapter5, false)
+            Set(GF_StartedChapter5, true)
             Call(FadeOutMusic, 0, 1500)
             Call(GotoMapSpecial, Ref("kmr_22"), kmr_22_ENTRY_5, TRANSITION_BEGIN_OR_END_CHAPTER)
         Else
@@ -202,7 +202,7 @@ EvtScript N(EVS_NpcIdle_Whale) = {
     Else
         Call(GetNpcPos, NPC_Whale, LVar0, LVar1, LVar2)
         IfGe(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
-            IfEq(GF_MAC01_Defeated_JrTroopa4, FALSE)
+            IfEq(GF_MAC01_Defeated_JrTroopa4, false)
                 Call(NpcFlyTo, NPC_Whale, -550, LVar1, 500, 240, 0, EASING_LINEAR)
                 Call(SetNpcVar, NPC_JrTroopa, 0, 1)
                 Return
@@ -232,8 +232,8 @@ API_CALLABLE(N(SeagullYawInterp)) {
     if (evt_get_variable(script, LFlag0)) {
         evt_set_float_variable(script, LVar6, 0.0f);
         evt_set_float_variable(script, LVar7, 0.0f);
-        evt_set_variable(script, LFlag0, FALSE);
-        evt_set_variable(script, LFlag1, TRUE);
+        evt_set_variable(script, LFlag0, false);
+        evt_set_variable(script, LFlag1, true);
         return ApiStatus_DONE2;
     }
 
@@ -245,7 +245,7 @@ API_CALLABLE(N(SeagullYawInterp)) {
         newYaw = atan2(-x1, y1, -x2, y2);
         evt_set_float_variable(script, LVar6, newYaw);
         evt_set_float_variable(script, LVar7, newYaw);
-        evt_set_variable(script, LFlag1, FALSE);
+        evt_set_variable(script, LFlag1, false);
         return ApiStatus_DONE2;
     }
 
@@ -278,8 +278,8 @@ API_CALLABLE(N(MakeJrTroopaBubbles)) {
 }
 
 EvtScript N(EVS_NpcInit_Whale) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_NO_SPRITE, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_NO_SPRITE, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, false)
     Call(GetEntryID, LVar0)
     IfEq(LVar0, mac_06_ENTRY_0)
         Call(InterpPlayerYaw, 90, 0)
@@ -296,11 +296,11 @@ EvtScript N(EVS_NpcInit_Whale) = {
     EndIf
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Whale)))
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-    Call(DisablePlayerPhysics, TRUE)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, true)
+    Call(DisablePlayerInput, true)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     Thread
         Call(N(func_80240E80_8659C0), 0)
@@ -320,7 +320,7 @@ EvtScript N(EVS_NpcInit_Whale) = {
         Return
     EndIf
     IfGe(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
-        IfEq(GF_MAC01_Defeated_JrTroopa4, FALSE)
+        IfEq(GF_MAC01_Defeated_JrTroopa4, false)
             Return
         EndIf
     EndIf
@@ -362,8 +362,8 @@ Vec3f N(FlightPath)[] = {
 EvtScript N(EVS_FlyingGull) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(CloneModel, MODEL_hontai, CLONED_MODEL_GULL)
-    Set(LFlag0, TRUE)
-    Set(LFlag1, FALSE)
+    Set(LFlag0, true)
+    Set(LFlag1, false)
     SetF(LVar7, 0)
     Label(10)
         Call(LoadPath, 500, Ref(N(FlightPath)), ARRAY_COUNT(N(FlightPath)), EASING_LINEAR)
@@ -391,8 +391,8 @@ EvtScript N(EVS_FlyingGull) = {
 EvtScript N(EVS_UnusedGull) = {
     Call(CloneModel, MODEL_hontai, LVar0)
     Set(LVarF, LVar0)
-    Set(LFlag0, TRUE)
-    Set(LFlag1, FALSE)
+    Set(LFlag0, true)
+    Set(LFlag1, false)
     SetF(LVar7, 0)
     Set(LVar8, 0)
     Set(LVar9, 0)
@@ -499,7 +499,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
 
 EvtScript N(EVS_NpcInit_JrTroopa) = {
     IfGe(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
-        IfEq(GF_MAC01_Defeated_JrTroopa4, FALSE)
+        IfEq(GF_MAC01_Defeated_JrTroopa4, false)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_JrTroopa)))
             Return
         EndIf

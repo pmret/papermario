@@ -29,22 +29,22 @@ API_CALLABLE(N(UpdateDaisPlayerPos)) {
 }
 
 EvtScript N(EVS_ActivateSwitch) = {
-    IfEq(AF_PRA33_FlippingWall, TRUE)
+    IfEq(AF_PRA33_FlippingWall, true)
         Return
     EndIf
-    Set(AF_PRA33_FlippingWall, TRUE)
+    Set(AF_PRA33_FlippingWall, true)
     // set wall orientation
-    IfEq(MV_WallFlipped, FALSE)
-        Set(MV_WallFlipped, TRUE)
+    IfEq(MV_WallFlipped, false)
+        Set(MV_WallFlipped, true)
     Else
-        Set(MV_WallFlipped, FALSE)
+        Set(MV_WallFlipped, false)
     EndIf
     Call(PlaySoundAtCollider, COLLIDER_o1063, SOUND_PRA_FLIP_WALL, SOUND_SPACE_DEFAULT)
     Call(N(CheckPlayerOnDais))
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o1063, COLLIDER_FLAGS_UPPER_MASK)
     Call(N(GetDaisRelativePlayerPos))
     // prepare the lerp
-    IfEq(MV_WallFlipped, FALSE)
+    IfEq(MV_WallFlipped, false)
         Set(LVar2, 180)
         Call(MakeLerp, 180, 360, 15, EASING_LINEAR)
     Else
@@ -57,7 +57,7 @@ EvtScript N(EVS_ActivateSwitch) = {
         Call(RotateGroup, MODEL_g260, LVar0, 0, 1, 0)
         Call(UpdateColliderTransform, COLLIDER_o1045)
         Call(N(CheckPlayerOnDais))
-        IfEq(LVarA, TRUE)
+        IfEq(LVarA, true)
             Set(LVar3, LVar2)
             Sub(LVar3, LVar0)
             Set(LVar2, LVar0)
@@ -69,7 +69,7 @@ EvtScript N(EVS_ActivateSwitch) = {
             BreakLoop
         EndIf
     EndLoop
-    Set(AF_PRA33_FlippingWall, FALSE)
+    Set(AF_PRA33_FlippingWall, false)
     Call(N(CheckPlayerOnDais))
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1063, COLLIDER_FLAGS_UPPER_MASK)
     Return
@@ -77,8 +77,8 @@ EvtScript N(EVS_ActivateSwitch) = {
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    Set(GF_PRA33_Unused, FALSE)
-    Set(AF_PRA33_FlippingWall, FALSE)
+    Set(GF_PRA33_Unused, false)
+    Set(AF_PRA33_FlippingWall, false)
     Call(MakeEntity, Ref(Entity_RedSwitch), 310, 0, 110, 0, MAKE_ENTITY_END)
     Call(AssignScript, Ref(N(EVS_ActivateSwitch)))
     Call(MakeEntity, Ref(Entity_RedSwitch), 310, 0, -110, 0, MAKE_ENTITY_END)

@@ -23,7 +23,7 @@ enum N(ActorPartIDs) {
 };
 
 enum N(ActorVars) {
-    AVAR_Charged        = 0, // EVS_ChargeUp; never set TRUE
+    AVAR_Charged        = 0, // EVS_ChargeUp; never set true
     AVAR_HoverPaused    = 1,
     AVAR_TurnCount      = 3,
 };
@@ -137,8 +137,8 @@ EvtScript N(EVS_Init) = {
     Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
     Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_HandlePhase)))
-    Call(SetActorVar, ACTOR_SELF, AVAR_Charged, FALSE)
-    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Charged, false)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_TurnCount, 0)
     Return
     End
@@ -243,8 +243,8 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
-    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, true)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
@@ -325,16 +325,16 @@ EvtScript N(EVS_HandleEvent) = {
             EndSwitch
             ExecWait(EVS_Enemy_NoDamageHit)
     EndSwitch
-    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, FALSE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, false)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 // unused
 EvtScript N(EVS_ChargeUp) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
-    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, true)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR_CLOSE)
     Call(SetBattleCamDist, 10)
@@ -350,15 +350,15 @@ EvtScript N(EVS_ChargeUp) = {
     Wait(75)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 20)
-    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, FALSE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, false)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_StarStorm) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
-    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, true)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -453,8 +453,8 @@ EvtScript N(EVS_Attack_StarStorm) = {
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EndIf
             Wait(20)
-            Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, FALSE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, false)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -478,8 +478,8 @@ EvtScript N(EVS_Attack_StarStorm) = {
             Wait(20)
         EndCaseGroup
     EndSwitch
-    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, FALSE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HoverPaused, false)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -497,7 +497,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
     Call(SetBattleCamDist, 340)
     Call(MoveBattleCamOver, 20)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(GetActorVar, ACTOR_SELF, AVAR_TurnCount, LVar0)
     Switch(LVar0)
         CaseEq(0)
@@ -510,7 +510,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
     EndSwitch
     Call(AddActorVar, ACTOR_SELF, AVAR_TurnCount, 1)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 20)
     Return
@@ -519,7 +519,7 @@ EvtScript N(EVS_TakeTurn) = {
 
 EvtScript N(EVS_Death) = {
     Call(HideHealthBar, ACTOR_SELF)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     IfNe(LVar1, -1)
         Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
         Wait(10)
@@ -537,7 +537,7 @@ EvtScript N(EVS_Death) = {
         CaseOrEq(DMG_SRC_SPIN_SMASH)
         EndCaseGroup
         CaseDefault
-            Set(LFlag0, FALSE)
+            Set(LFlag0, false)
             Call(GetOriginalActorType, ACTOR_SELF, LVar1)
             Switch(LVar1)
                 CaseOrEq(ACTOR_TYPE_BOB_OMB)
@@ -591,7 +591,7 @@ EvtScript N(EVS_BurnHit) = {
                     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.01))
                     Add(LVar5, 55)
                     Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                    Call(JumpToGoal, ACTOR_SELF, 8, FALSE, FALSE, FALSE)
+                    Call(JumpToGoal, ACTOR_SELF, 8, false, false, false)
             EndSwitch
             Set(LVar7, 0)
             Loop(30)
@@ -610,18 +610,18 @@ EvtScript N(EVS_BurnHit) = {
                     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
                     IfEq(LVar5, 0)
                         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
                         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
                         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
                     Else
                         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, FALSE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 15, false, false, false)
                         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        Call(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 10, false, false, false)
                         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        Call(JumpToGoal, ACTOR_SELF, 5, FALSE, FALSE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 5, false, false, false)
                     EndIf
             EndSwitch
         CaseDefault

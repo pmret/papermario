@@ -15,7 +15,7 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(N(LoadSmashBridgesGraphics))
     Call(InitAnimatedModels)
     Wait(1)
@@ -46,7 +46,7 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(20.0), Float(-11.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(500.0), Float(0.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Set(GB_ARN_Tubba_MapID, 1)
     Call(SetNpcVar, NPC_Tubba, 0, 1)
@@ -97,7 +97,7 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
         Call(PlaySound, SOUND_DGB_SMALL_THUD)
     EndThread
     Thread
-        Call(DisablePlayerPhysics, TRUE)
+        Call(DisablePlayerPhysics, true)
         Wait(1)
         Call(SetGroupVisibility, MODEL_g96, MODEL_GROUP_HIDDEN)
         Call(SetGroupVisibility, MODEL_g87, MODEL_GROUP_HIDDEN)
@@ -114,7 +114,7 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
         Call(InterpPlayerYaw, 270, 0)
         Call(SetPlayerAnimation, ANIM_Mario1_Idle)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_after, COLLIDER_FLAGS_UPPER_MASK)
-        Call(DisablePlayerPhysics, FALSE)
+        Call(DisablePlayerPhysics, false)
     EndThread
     Thread
         Call(DisablePartnerAI, 0)
@@ -147,7 +147,7 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Set(GB_StoryProgress, STORY_CH3_TUBBA_SMASHED_THE_BRIDGES)
     Call(SetGroupVisibility, MODEL_g240, MODEL_GROUP_VISIBLE)
     Call(DeleteAnimatedModel, 0)
@@ -171,7 +171,7 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
     EndThread
     Call(SetPlayerSpeed, Float(3.0))
     Call(PlayerMoveTo, 470, 0, 0)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Exec(N(EVS_ExitDoors_dgb_08_1))
     Return
     End

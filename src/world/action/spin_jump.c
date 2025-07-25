@@ -43,7 +43,7 @@ void action_update_spin_jump(void) {
         sfx_play_sound_at_player(SOUND_SPIN_JUMP, SOUND_SPACE_DEFAULT);
     }
 
-    landed = FALSE;
+    landed = false;
     switch (playerStatus->actionSubstate) {
         case SUBSTATE_SPIN:
             RotationRate = 40.0f;
@@ -141,7 +141,7 @@ void action_update_spin_jump(void) {
                         sfx_play_sound_at_player(SOUND_LAND_SPIN_JUMP, SOUND_SPACE_DEFAULT);
                         start_rumble(128, 25);
                         panels = &gCurrentHiddenPanels;
-                        panels->tryFlipTrigger = TRUE;
+                        panels->tryFlipTrigger = true;
                         panels->flipTriggerPosY = playerStatus->pos.y;
                         playerStatus->flags |= PS_FLAG_SPECIAL_LAND;
                     }
@@ -151,7 +151,7 @@ void action_update_spin_jump(void) {
         case SUBSTATE_IMPACT:
             velocity = integrate_gravity();
             if (velocity == 0.0f) {
-                landed = TRUE;
+                landed = true;
             } else {
                 if (playerStatus->gravityIntegrator[0] > 0.0f) {
                     playerStatus->pos.y += velocity;
@@ -175,7 +175,7 @@ void action_update_spin_jump(void) {
             // fallthrough
         case SUBSTATE_ABORT:
             if (--playerStatus->poundImpactDelay <= 0) {
-                landed = TRUE;
+                landed = true;
             }
             break;
         case SUBSTATE_HIT_SWITCH:

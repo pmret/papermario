@@ -5,7 +5,7 @@
 
 EvtScript N(EVS_SpawnSwitch) = {
     Call(AwaitPlayerLeave, -10, 10, 50)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetPartnerInUse, LVar0)
     IfNe(LVar0, 8)
         Loop(0)
@@ -16,7 +16,7 @@ EvtScript N(EVS_SpawnSwitch) = {
             EndIf
         EndLoop
     EndIf
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(InterpCamTargetPos, 0, 1, -10, -10, 10, 20)
     Call(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
     Call(PlaySoundAt, SOUND_FALL_QUICK, SOUND_SPACE_DEFAULT, -10, 200, 10)
@@ -34,8 +34,8 @@ EvtScript N(EVS_SpawnSwitch) = {
     Wait(10)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(InterpCamTargetPos, 0, 1, LVar0, LVar1, LVar2, 20)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -50,19 +50,19 @@ EvtScript N(EVS_GotoMap_mim_11_3) = {
 EvtScript N(EVS_PlayRisingPipeSound) = {
     Wait(10)
     Call(PlaySound, SOUND_GROW)
-    Set(GF_TIK09_WarpPipe, TRUE)
+    Set(GF_TIK09_WarpPipe, true)
     Unbind
     Return
     End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_TIK09_WarpPipe, FALSE)
+    IfEq(GF_TIK09_WarpPipe, false)
         Call(MakeEntity, Ref(Entity_BlueSwitch), NPC_DISPOSE_LOCATION, 0, MAKE_ENTITY_END)
         Call(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_TIK_05))
         Set(MV_Unk_00, LVar0)
         BindTrigger(Ref(N(EVS_PlayRisingPipeSound)), TRIGGER_AREA_FLAG_SET, AF_TIK_05, 1, 0)
-        IfEq(GF_TIK09_Defeated_Ambush, TRUE)
+        IfEq(GF_TIK09_Defeated_Ambush, true)
             Call(N(SetEntityPosition), MV_Unk_00, -10, -10, 10)
         EndIf
     EndIf

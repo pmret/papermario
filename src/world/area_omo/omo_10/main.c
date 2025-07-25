@@ -48,7 +48,7 @@ EvtScript N(EVS_Main) = {
         Call(SetModelTexVariant, MODEL_o, LVar0)
         Call(SetModelTexVariant, MODEL_n, LVar0)
 #endif
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     ExecWait(N(EVS_SetupGizmos))
     ExecWait(N(EVS_SetupMusic))

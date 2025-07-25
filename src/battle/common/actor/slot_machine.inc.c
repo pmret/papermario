@@ -151,9 +151,9 @@ ActorBlueprint N(slot_machine_start) = {
 };
 
 API_CALLABLE(N(IsDemoBattle)) {
-    script->varTable[0] = FALSE;
+    script->varTable[0] = false;
     if (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
 
     return ApiStatus_DONE2;
@@ -190,7 +190,7 @@ EvtScript N(EVS_Init) = {
     Mul(LVar0, 45)
     Set(BUF_ReelAngle3, LVar0)
     Call(N(IsDemoBattle))
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Set(BUF_GameState, SLOTS_STATE_ACTIVE)
         Set(BUF_ReelState1, REEL_STATE_SPIN)
         Set(BUF_ReelState2, REEL_STATE_SPIN)
@@ -202,7 +202,7 @@ EvtScript N(EVS_Init) = {
 
 EvtScript N(EVS_Idle) = {
     UseArray(N(SharedSlotMachineData))
-    Call(EnableTexPanning, MODEL_o424, TRUE)
+    Call(EnableTexPanning, MODEL_o424, true)
     Set(LVarE, 0)
     Set(LVarF, 0)
     Label(0)
@@ -340,7 +340,7 @@ EvtScript N(EVS_Idle) = {
                 EndIf
                 Thread
     #if !VERSION_PAL
-                    Call(FreezeBattleState, TRUE)
+                    Call(FreezeBattleState, true)
     #endif
                     Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
                     Call(SetBattleCamTarget, 0, 100, 0)
@@ -390,7 +390,7 @@ EvtScript N(EVS_Idle) = {
                     Set(BUF_ReelState2, REEL_STATE_INERT)
                     Set(BUF_ReelState3, REEL_STATE_INERT)
     #if !VERSION_PAL
-                    Call(FreezeBattleState, FALSE)
+                    Call(FreezeBattleState, false)
     #endif
                 EndThread
     #if VERSION_PAL
@@ -403,7 +403,7 @@ EvtScript N(EVS_Idle) = {
                 BreakLoop
             EndLoop
     #if VERSION_PAL
-            Call(FreezeBattleState, FALSE)
+            Call(FreezeBattleState, false)
     #endif
         EndIf
         Label(1)
@@ -415,7 +415,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     UseArray(N(SharedSlotMachineData))
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
@@ -458,7 +458,7 @@ EvtScript N(EVS_HandleEvent) = {
                     Call(TranslateModel, MODEL_o409, 0, 0, 0)
                     IfEq(BUF_ReelState1, REEL_STATE_SPIN)
 #if VERSION_PAL
-                        Call(FreezeBattleState, TRUE)
+                        Call(FreezeBattleState, true)
 #endif
                         Set(BUF_ReelLeft1, 100)
                         Set(BUF_ReelLeft2, 150)
@@ -483,7 +483,7 @@ EvtScript N(EVS_HandleEvent) = {
                     Call(TranslateModel, MODEL_o409, 0, 0, 0)
                     IfEq(BUF_ReelState2, REEL_STATE_SPIN)
 #if VERSION_PAL
-                        Call(FreezeBattleState, TRUE)
+                        Call(FreezeBattleState, true)
 #endif
                         Set(BUF_ReelLeft1, 150)
                         Set(BUF_ReelLeft2, 100)
@@ -508,7 +508,7 @@ EvtScript N(EVS_HandleEvent) = {
                     Call(TranslateModel, MODEL_o409, 0, 0, 0)
                     IfEq(BUF_ReelState3, REEL_STATE_SPIN)
 #if VERSION_PAL
-                        Call(FreezeBattleState, TRUE)
+                        Call(FreezeBattleState, true)
 #endif
                         Set(BUF_ReelLeft1, 200)
                         Set(BUF_ReelLeft2, 150)
@@ -533,7 +533,7 @@ EvtScript N(EVS_HandleEvent) = {
             // do nothing
         EndCaseGroup
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

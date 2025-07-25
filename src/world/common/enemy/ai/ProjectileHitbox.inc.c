@@ -326,7 +326,7 @@ API_CALLABLE(N(ProjectileAI_Reflect)) {
                 phi_s4 = 1;
             }
 
-            cond = FALSE;
+            cond = false;
             if (npc->jumpVel < 0.0) {
                 x = npc->pos.x;
                 y = npc->pos.y + 13.0;
@@ -335,7 +335,7 @@ API_CALLABLE(N(ProjectileAI_Reflect)) {
                 if ((npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &hitDepth) != 0) &&
                     (hitDepth <= (fabsf(npc->jumpVel) + 13.0)))
                 {
-                    cond = TRUE;
+                    cond = true;
                 }
             }
 

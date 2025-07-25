@@ -138,12 +138,12 @@ EvtScript N(EVS_NpcDefeat_Tubba) = {
 EvtScript N(EVS_NpcInit_Tubba) = {
     IfLt(GB_StoryProgress, STORY_CH3_TUBBA_SMASHED_THE_BRIDGES)
         Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, true)
         Return
     EndIf
     IfGe(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
         Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, true)
         Return
     EndIf
     Call(SetNpcScale, NPC_SELF, Float(1.25), Float(1.25), Float(1.25))
@@ -153,7 +153,7 @@ EvtScript N(EVS_NpcInit_Tubba) = {
         CaseEq(dgb_08_ENTRY_0)
             IfNe(GB_ARN_Tubba_MapID, 8)
                 Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, true)
             Else
                 Call(SetNpcPos, NPC_SELF, -130, 0, 200)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcAI_Tubba)))
@@ -176,7 +176,7 @@ NpcData N(NpcData_Tubba) = {
     .yaw = 270,
     .territory = {
         .patrol = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 10,
             .points  = {
@@ -211,7 +211,7 @@ NpcData N(NpcData_Clubba_01)[] = {
         .yaw = 90,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -250, 0, 135 },
@@ -238,7 +238,7 @@ NpcData N(NpcData_Clubba_02)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 220, 0, 155 },
@@ -265,7 +265,7 @@ NpcData N(NpcData_Clubba_03)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 825, 100, 200 },
@@ -291,7 +291,7 @@ NpcData N(NpcData_Sentinel_01) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 75, 310, 85 },
@@ -313,7 +313,7 @@ NpcData N(NpcData_Sentinel_02) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -451, 310, 81 },
@@ -400,7 +400,7 @@ NpcData N(NpcData_LastClubba) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },
@@ -437,7 +437,7 @@ NpcData N(NpcData_Clubba_Unused) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -250, 0, 135 },

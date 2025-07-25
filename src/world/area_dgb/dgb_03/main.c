@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitDoors_dgb_02_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_03_ENTRY_1)
     Set(LVar1, COLLIDER_deilittse)
@@ -18,7 +18,7 @@ EvtScript N(EVS_ExitDoors_dgb_02_0) = {
 
 EvtScript N(EVS_ExitDoors_dgb_09_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_03_ENTRY_4)
     Set(LVar1, COLLIDER_deilittne)
@@ -34,7 +34,7 @@ EvtScript N(EVS_ExitDoors_dgb_09_0) = {
 
 EvtScript N(EVS_ExitDoors_dgb_04_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_03_ENTRY_0)
     Set(LVar1, COLLIDER_deilittsw)
@@ -52,7 +52,7 @@ EvtScript N(EVS_ExitWalk_dgb_13_0) = EVT_EXIT_WALK(26, dgb_03_ENTRY_2, "dgb_13",
 
 EvtScript N(EVS_ExitDoors_dgb_05_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, dgb_03_ENTRY_2)
     Set(LVar1, COLLIDER_deilitts)
@@ -68,7 +68,7 @@ EvtScript N(EVS_ExitDoors_dgb_05_0) = {
 
 EvtScript N(EVS_ExitDoors_dgb_14_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_03_ENTRY_3)
     Set(LVar1, COLLIDER_deilittnw)
@@ -140,7 +140,7 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
     IfLt(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
-        Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+        Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     EndIf
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupClock))
@@ -148,7 +148,7 @@ EvtScript N(EVS_Main) = {
     BindTrigger(Ref(N(EVS_ExitDoors_dgb_09_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittne, 1, 0)
     BindTrigger(Ref(N(EVS_ExitDoors_dgb_04_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittsw, 1, 0)
     BindTrigger(Ref(N(EVS_ExitDoors_dgb_05_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilitts, 1, 0)
-    IfEq(GF_DGB03_UnlockedThirdFloor, FALSE)
+    IfEq(GF_DGB03_UnlockedThirdFloor, false)
         BindPadlock(Ref(N(EVS_UnlockPrompt_UpperDoor)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), Ref(N(KeyList_UpperDoor)), 0, 1)
     Else
         BindTrigger(Ref(N(EVS_ExitDoors_dgb_14_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittnw, 1, 0)

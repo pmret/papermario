@@ -115,23 +115,23 @@ EvtScript N(D_8025110C_86327C) = {
 EvtScript N(D_8025111C_86328C) = {
     IfGe(LVarC, 0)
         IfLe(LVarC, 2)
-            Call(EnableModel, MODEL_o170, FALSE)
-            Call(EnableModel, MODEL_o183, TRUE)
+            Call(EnableModel, MODEL_o170, false)
+            Call(EnableModel, MODEL_o183, true)
             Return
         EndIf
     EndIf
     IfEq(LVarC, 15)
-        Call(EnableModel, MODEL_o170, FALSE)
-        Call(EnableModel, MODEL_o183, TRUE)
+        Call(EnableModel, MODEL_o170, false)
+        Call(EnableModel, MODEL_o183, true)
         Return
     EndIf
     IfEq(LVarC, 22)
-        Call(EnableModel, MODEL_o170, FALSE)
-        Call(EnableModel, MODEL_o183, TRUE)
+        Call(EnableModel, MODEL_o170, false)
+        Call(EnableModel, MODEL_o183, true)
         Return
     EndIf
-    Call(EnableModel, MODEL_o170, TRUE)
-    Call(EnableModel, MODEL_o183, FALSE)
+    Call(EnableModel, MODEL_o170, true)
+    Call(EnableModel, MODEL_o183, false)
     Return
     End
 };
@@ -228,10 +228,10 @@ EvtScript N(D_802516CC_86383C) = {
 
 EvtScript N(EVS_SetupWhale) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
-    Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_karada, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_karada, true)
     Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(unkAngleFunc002)), NULL)
     Call(SetModelCustomGfx, MODEL_karada, CUSTOM_GFX_1, -1)
-    Call(MakeLocalVertexCopy, VTX_COPY_2, MODEL_onaka, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_2, MODEL_onaka, true)
     Call(SetCustomGfxBuilders, CUSTOM_GFX_2, Ref(N(unkAngleFunc003)), NULL)
     Call(SetModelCustomGfx, MODEL_onaka, CUSTOM_GFX_2, -1)
     Thread
@@ -291,8 +291,8 @@ EvtScript N(EVS_SetupWhale) = {
             Set(LVarB, LVar0)
             Set(LVarC, 0)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_tt9, COLLIDER_FLAGS_UPPER_MASK)
-            Call(EnableModel, MODEL_o170, TRUE)
-            Call(EnableModel, MODEL_o183, FALSE)
+            Call(EnableModel, MODEL_o170, true)
+            Call(EnableModel, MODEL_o183, false)
             IfNe(LVarB, ANIM_Kolorado_Shout)
                 Call(GetNpcVar, NPC_Whale, 0, LVar0)
                 IfNe(LVar0, 0)
@@ -317,16 +317,16 @@ EvtScript N(EVS_SetupWhale) = {
                     Set(LVarD, Ref(N(D_802516CC_86383C)))
                 CaseEq(ANIM_Kolorado_WalkSad)
                     Set(LVarD, Ref(N(D_80250FA4_863114)))
-                    Call(EnableModel, MODEL_o170, FALSE)
-                    Call(EnableModel, MODEL_o183, FALSE)
+                    Call(EnableModel, MODEL_o170, false)
+                    Call(EnableModel, MODEL_o183, false)
                 CaseEq(ANIM_Kolorado_Run)
                     Set(LVarD, Ref(N(D_80251244_8633B4)))
-                    Call(EnableModel, MODEL_o170, FALSE)
-                    Call(EnableModel, MODEL_o183, FALSE)
+                    Call(EnableModel, MODEL_o170, false)
+                    Call(EnableModel, MODEL_o183, false)
                 CaseEq(ANIM_Kolorado_Panic)
                     Set(LVarD, Ref(N(D_802513AC_86351C)))
-                    Call(EnableModel, MODEL_o170, FALSE)
-                    Call(EnableModel, MODEL_o183, FALSE)
+                    Call(EnableModel, MODEL_o170, false)
+                    Call(EnableModel, MODEL_o183, false)
                 CaseEq(ANIM_Kolorado_Talk)
                     Set(LVarD, Ref(N(D_802514EC_86365C)))
                 CaseEq(ANIM_Kolorado_Shout)

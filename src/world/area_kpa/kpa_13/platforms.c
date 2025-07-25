@@ -30,9 +30,9 @@ API_CALLABLE(N(AddPlatformPushVelocity)) {
 
 API_CALLABLE(N(IsPartnerLakilester)) {
     if (gPartnerStatus.actingPartner == PARTNER_LAKILESTER) {
-        script->varTable[9] = TRUE;
+        script->varTable[9] = true;
     } else {
-        script->varTable[9] = FALSE;
+        script->varTable[9] = false;
     }
     return ApiStatus_DONE2;
 }
@@ -43,15 +43,15 @@ EvtScript N(EVS_SetupPlatforms) = {
         Call(ParentColliderToModel, COLLIDER_o1070, MODEL_o1083)
         Call(TranslateGroup, MODEL_dai05, 125, 0, 0)
         Call(UpdateColliderTransform, COLLIDER_o1070)
-        IfEq(GF_KPA13_BlueSwitchA, FALSE)
+        IfEq(GF_KPA13_BlueSwitchA, false)
             Label(11)
-            IfEq(AF_KPA13_HitSwitchA, FALSE)
+            IfEq(AF_KPA13_HitSwitchA, false)
                 Wait(1)
                 Goto(11)
             EndIf
             Wait(20)
             Call(ShakeCam, CAM_DEFAULT, 0, 30, Float(0.5))
-            Set(GF_KPA13_BlueSwitchA, TRUE)
+            Set(GF_KPA13_BlueSwitchA, true)
         EndIf
         Set(LVar0, 125)
         Set(LVar3, -100)
@@ -113,9 +113,9 @@ EvtScript N(EVS_SetupPlatforms) = {
     Call(ParentColliderToModel, COLLIDER_o1072, MODEL_o1087)
     Call(TranslateGroup, MODEL_dai06, 75, 0, 0)
     Call(UpdateColliderTransform, COLLIDER_o1072)
-    IfEq(GF_KPA13_BlueSwitchB, FALSE)
+    IfEq(GF_KPA13_BlueSwitchB, false)
         Label(12)
-        IfEq(AF_KPA13_HitSwitchB, FALSE)
+        IfEq(AF_KPA13_HitSwitchB, false)
             Wait(1)
             Goto(12)
         EndIf
@@ -123,7 +123,7 @@ EvtScript N(EVS_SetupPlatforms) = {
         Wait(20)
         Call(ShakeCam, CAM_DEFAULT, 0, 30, Float(0.5))
 #endif
-        Set(GF_KPA13_BlueSwitchB, TRUE)
+        Set(GF_KPA13_BlueSwitchB, true)
     EndIf
     Set(LVar0, 75)
     Set(LVar3, -100)

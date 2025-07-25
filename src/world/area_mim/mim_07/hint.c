@@ -113,7 +113,7 @@ EvtScript N(EVS_OnInspectEvilRock) = {
 EvtScript N(EVS_SetupExitHint) = {
     Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(gfx_build_evil_rock_face)), NULL)
     Call(SetModelCustomGfx, MODEL_o440, CUSTOM_GFX_1, -1)
-    Call(SetModelFlags, MODEL_o440, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
+    Call(SetModelFlags, MODEL_o440, MODEL_FLAG_USES_CUSTOM_GFX, true)
     BindTrigger(Ref(N(EVS_OnInspectEvilRock)), TRIGGER_WALL_PRESS_A, COLLIDER_o491, 1, 0)
     Call(SetTexPanner, MODEL_o440, TEX_PANNER_0)
     Return

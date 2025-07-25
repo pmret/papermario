@@ -4,9 +4,9 @@ extern EvtScript N(EVS_BossDefeated);
 
 API_CALLABLE(N(IsPartnerBombette)) {
     if (gPlayerData.curPartner == PARTNER_BOMBETTE) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     } else {
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
     }
     return ApiStatus_DONE2;
 }
@@ -26,21 +26,21 @@ EvtScript N(EVS_NpcAux_KoopaBros_01) = {
 };
 
 EvtScript N(EVS_NpcAI_KoopaBros_01) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetPlayerPos, -333, 0, 0)
     Call(SetNpcPos, NPC_PARTNER, -363, 0, 0)
     Call(UseSettingsFrom, CAM_DEFAULT, -240, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -240, -170, 0)
     Call(SetCamPitch, CAM_DEFAULT, 18, -3)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(1)
     Call(UseSettingsFrom, CAM_DEFAULT, -240, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -240, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.2 / DT))
     Call(PanToTarget, CAM_DEFAULT, Float(0.5), 1)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(PlaySound, SOUND_METAL_DOOR_OPEN)
     Call(MakeLerp, 0, 80, 10, EASING_LINEAR)
     Label(10)
@@ -81,8 +81,8 @@ EvtScript N(EVS_NpcAI_KoopaBros_01) = {
     Call(NpcMoveTo, NPC_KoopaBros_01, 0, 0, 10 * DT)
     Wait(30 * DT)
     Call(SetNpcPos, NPC_KoopaBros_01, NPC_DISPOSE_LOCATION)
-    Call(SetNpcFlagBits, NPC_KoopaBros_01, NPC_FLAG_INVISIBLE, TRUE)
-    Call(SetNpcFlagBits, NPC_KoopaBros_01, NPC_FLAG_HAS_SHADOW, FALSE)
+    Call(SetNpcFlagBits, NPC_KoopaBros_01, NPC_FLAG_INVISIBLE, true)
+    Call(SetNpcFlagBits, NPC_KoopaBros_01, NPC_FLAG_HAS_SHADOW, false)
     Call(SetNpcPos, NPC_KoopaBros_02, NPC_DISPOSE_LOCATION)
     Call(SetNpcPos, NPC_KoopaBros_03, NPC_DISPOSE_LOCATION)
     Call(SetNpcPos, NPC_KoopaBros_04, NPC_DISPOSE_LOCATION)
@@ -101,10 +101,10 @@ EvtScript N(EVS_NpcAI_KoopaBros_01) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -160, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -160, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.2 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
-    Set(AF_TRD_FakeBowserRevealed, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
+    Set(AF_TRD_FakeBowserRevealed, true)
     Wait(60 * DT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(SetNpcPos, NPC_KoopaBros_01, -155, 0, 0)
     Call(StartBossBattle, SONG_FAKE_BOWSER_BATTLE)
     Return
@@ -122,18 +122,18 @@ EvtScript N(EVS_NpcInteract_KoopaBros_01) = {
 };
 
 EvtScript N(EVS_NpcDefeat_KoopaBros_01) = {
-    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, TRUE)
-    Call(DisablePlayerInput, TRUE)
+    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, true)
+    Call(DisablePlayerInput, true)
     Call(SetNpcPos, NPC_KoopaBros_01, NPC_DISPOSE_LOCATION)
-    Call(SetNpcFlagBits, NPC_KoopaBros_01, NPC_FLAG_INVISIBLE, FALSE)
-    Call(SetNpcFlagBits, NPC_KoopaBros_01, NPC_FLAG_HAS_SHADOW, TRUE)
+    Call(SetNpcFlagBits, NPC_KoopaBros_01, NPC_FLAG_INVISIBLE, false)
+    Call(SetNpcFlagBits, NPC_KoopaBros_01, NPC_FLAG_HAS_SHADOW, true)
     Call(SetMusic, 0, SONG_KOOPA_BROS_INTERLUDE, 0, VOL_LEVEL_FULL)
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+            Call(PanToTarget, CAM_DEFAULT, 0, false)
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-            Call(EnableGroup, MODEL_nise_koppa, FALSE)
+            Call(EnableGroup, MODEL_nise_koppa, false)
             Call(SetNpcPos, NPC_KoopaBros_01, -170, 30, -55)
             Call(SetNpcPos, NPC_KoopaBros_02, -150, 30, 55)
             Call(SetNpcPos, NPC_KoopaBros_03, -130, 30, -55)
@@ -167,13 +167,13 @@ EvtScript N(EVS_NpcDefeat_KoopaBros_01) = {
                 Wait(165 * DT)
                 Exec(N(EVS_BossDefeated))
                 Wait(1)
-                Call(DisablePlayerInput, FALSE)
+                Call(DisablePlayerInput, false)
             EndThread
             Wait(120)
             Call(PlaySoundAt, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT, 0, 0, 0)
             Call(ShakeCam, CAM_DEFAULT, 0, 15, Float(0.5))
             Wait(15)
-            Set(GF_TRD10_Defeated_KoopaBros, TRUE)
+            Set(GF_TRD10_Defeated_KoopaBros, true)
         CaseEq(OUTCOME_PLAYER_LOST)
         CaseEq(OUTCOME_PLAYER_FLED)
     EndSwitch

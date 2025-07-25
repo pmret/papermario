@@ -14,7 +14,7 @@ API_CALLABLE(N(UpdateHouseShowHide)) {
     s32 temp_a2;
 
     if (isInitialCall) {
-        mdl_group_set_custom_gfx(script->varTable[1], CUSTOM_GFX_NONE, ENV_TINT_SHROUD, TRUE);
+        mdl_group_set_custom_gfx(script->varTable[1], CUSTOM_GFX_NONE, ENV_TINT_SHROUD, true);
         script->functionTemp[0] = 0;
         mdl_get_shroud_tint_params(&r, &g, &b, &a);
         if ((script->varTable[0] == 0 && a == 255) || (script->varTable[0] == 1 && a == 0)) {
@@ -41,7 +41,7 @@ API_CALLABLE(N(UpdateHouseShowHide)) {
     gCameras[CAM_DEFAULT].bgColor[2] = b;
     if (script->functionTemp[0] >= 255) {
         if (script->varTable[0] == 1) {
-            mdl_group_set_custom_gfx(script->varTable[1], CUSTOM_GFX_NONE, ENV_TINT_NONE, TRUE);
+            mdl_group_set_custom_gfx(script->varTable[1], CUSTOM_GFX_NONE, ENV_TINT_NONE, true);
         }
 
         return ApiStatus_DONE2;
@@ -98,9 +98,9 @@ API_CALLABLE(N(MovePlayerAlongRoofSlide)) {
 
 API_CALLABLE(N(IsPlayerInputDisabled)) {
     if (gPlayerStatus.flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     } else {
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
     }
     return ApiStatus_DONE2;
 }
@@ -176,11 +176,11 @@ EvtScript N(EVS_TetherCamToPlayerCappedY) = {
 
 EvtScript N(EVS_TouchFloor_RightRoof) = {
     Call(N(IsPlayerInputDisabled))
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(GetPartnerInUse, LVar0)
     IfNe(LVar0, PARTNER_NONE)
         Call(InterruptUsePartner)
@@ -190,10 +190,10 @@ EvtScript N(EVS_TouchFloor_RightRoof) = {
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Wait(1)
     Call(SetPlayerAnimation, ANIM_Mario1_SpinJump)
-    Call(SetZoneEnabled, ZONE_s, FALSE)
+    Call(SetZoneEnabled, ZONE_s, false)
     Wait(1)
-    Call(SetZoneEnabled, ZONE_gon, FALSE)
-    Call(SetZoneEnabled, ZONE_sou, FALSE)
+    Call(SetZoneEnabled, ZONE_gon, false)
+    Call(SetZoneEnabled, ZONE_sou, false)
     Call(N(EnableCameraFollowPlayerY))
     Set(LVar3, 500)
     ExecGetTID(N(EVS_TetherCamToPlayerCappedY), LVarA)
@@ -203,13 +203,13 @@ EvtScript N(EVS_TouchFloor_RightRoof) = {
     Call(SetPlayerJumpscale, Float(0.5))
     Call(PlayerJump, -150, 325, -300, 40)
     Call(ShakeCam, CAM_DEFAULT, 1, 5, Float(1.0))
-    Call(SetZoneEnabled, ZONE_s, TRUE)
-    Call(SetZoneEnabled, ZONE_gon, TRUE)
-    Call(SetZoneEnabled, ZONE_sou, TRUE)
+    Call(SetZoneEnabled, ZONE_s, true)
+    Call(SetZoneEnabled, ZONE_gon, true)
+    Call(SetZoneEnabled, ZONE_sou, true)
     Call(N(DisableCameraFollowPlayerY))
     KillThread(LVarA)
-    Call(DisablePlayerInput, FALSE)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, false)
+    Call(DisablePlayerPhysics, false)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Return
     End
@@ -255,12 +255,12 @@ EvtScript N(EVS_TouchFloor_LeftRoof) = {
         Return
     EndIf
     Call(N(IsPlayerInputDisabled))
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Return
     EndIf
     // fall down the chimney
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(GetPartnerInUse, LVar0)
     IfNe(LVar0, PARTNER_NONE)
         Call(InterruptUsePartner)
@@ -300,14 +300,14 @@ EvtScript N(EVS_TouchFloor_LeftRoof) = {
     Call(SetCamPosA, CAM_DEFAULT, Float(-165.0), Float(-140.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-12.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(40)
     IfGe(GB_StoryProgress, STORY_CH7_SPOKE_WITH_HERRINGWAY)
         Call(SetPlayerAnimation, ANIM_Mario1_Idle)
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-        Call(DisablePlayerPhysics, FALSE)
-        Call(DisablePlayerInput, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
+        Call(DisablePlayerPhysics, false)
+        Call(DisablePlayerInput, false)
         Call(EnablePartnerAI)
         Return
     EndIf
@@ -321,7 +321,7 @@ EvtScript N(EVS_TouchFloor_LeftRoof) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-9.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Herringway, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH7_00CD)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -330,9 +330,9 @@ EvtScript N(EVS_TouchFloor_LeftRoof) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
+    Call(DisablePlayerPhysics, false)
     Call(EnablePartnerAI)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
@@ -342,10 +342,10 @@ EvtScript N(EVS_TouchFloor_LeftRoof) = {
 
 EvtScript N(EVS_LandOnRightRoof) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
-    IfEq(MF_Unk_00, TRUE)
+    IfEq(MF_Unk_00, true)
         Return
     EndIf
-    Set(MF_Unk_00, TRUE)
+    Set(MF_Unk_00, true)
     Label(10)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(GetPlayerActionState, LVar3)
@@ -368,28 +368,28 @@ EvtScript N(EVS_LandOnRightRoof) = {
         IfGe(LVar2, -303)
             Goto(10)
         EndIf
-        IfEq(MF_UsingSpring, FALSE)
+        IfEq(MF_UsingSpring, false)
             Goto(10)
         EndIf
     ExecWait(N(EVS_SetEntityHideMode_LeftHouse))
     Exec(N(EVS_OnExitRightHouse))
-    Set(MF_Unk_00, FALSE)
+    Set(MF_Unk_00, false)
     Return
     End
 };
 
 EvtScript N(EVS_UseSpring) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAUNCH)
     IfEq(MV_CurrentFloor, 1)
         Set(LVar3, 500)
         ExecGetTID(N(EVS_TetherCamToPlayerCappedY), LVarA)
         ExecWait(N(EVS_SetEntityHideMode_Outside))
-        Set(MF_UsingSpring, FALSE)
+        Set(MF_UsingSpring, false)
         Call(SetPlayerJumpscale, Float(0.5))
         Call(PlayerJump, 175, 385, -310, 35)
-        Set(MF_UsingSpring, TRUE)
+        Set(MF_UsingSpring, true)
         Exec(N(EVS_LandOnRightRoof))
         ExecWait(N(EVS_OnEnterRightHouse))
     Else
@@ -404,21 +404,21 @@ EvtScript N(EVS_UseSpring) = {
     IfEq(MV_CurrentFloor, 1)
         ExecWait(N(EVS_HideRightHouse))
     EndIf
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Interact_Padlock) = {
     ExecWait(N(EVS_SetupLockedHouse))
-    Set(GF_SAM11_UnlockedDoor, TRUE)
+    Set(GF_SAM11_UnlockedDoor, true)
     Return
     End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_SAM11_UnlockedDoor, FALSE)
+    IfEq(GF_SAM11_UnlockedDoor, false)
         Call(MakeEntity, Ref(Entity_Padlock), 153, 8, -145, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_Interact_Padlock)))
         Set(MV_PadlockEntityID, LVar0)
@@ -429,7 +429,7 @@ EvtScript N(EVS_MakeEntities) = {
     Call(MakeEntity, Ref(Entity_ScriptSpring), 224, 150, -328, 0, MAKE_ENTITY_END)
     Call(AssignScript, Ref(N(EVS_UseSpring)))
     Call(SetEntityCullMode, 1)
-    Set(MF_Unk_00, FALSE)
+    Set(MF_Unk_00, false)
     BindTrigger(Ref(N(EVS_TouchFloor_RightRoof)), TRIGGER_FLOOR_TOUCH, COLLIDER_o570, 1, 0)
     BindTrigger(Ref(N(EVS_TouchFloor_LeftRoof)), TRIGGER_FLOOR_TOUCH, COLLIDER_g_yuki2, 1, 0)
     Call(MakeItemEntity, ITEM_WAREHOUSE_KEY, 0, -60, 220, ITEM_SPAWN_MODE_KEY, GF_SAM11_Item_WarehouseKey)

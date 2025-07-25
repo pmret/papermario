@@ -14,14 +14,14 @@ void get_npc_pos(s32 npcID, f32* outX, f32* outY, f32* outZ, s32* outAirborne) {
     *outX = 0.0f;
     *outY = 0.0f;
     *outZ = 0.0f;
-    *outAirborne = FALSE;
+    *outAirborne = false;
 
     if (npcID == NPC_SELF) {
         *outX = playerStatus->pos.x;
         *outY = playerStatus->pos.y;
         *outZ = playerStatus->pos.z;
         if (playerStatus->flags & (PS_FLAG_FALLING | PS_FLAG_JUMPING)) {
-            *outAirborne = TRUE;
+            *outAirborne = true;
         }
     } else {
         npc = get_npc_unsafe(npcID);
@@ -29,7 +29,7 @@ void get_npc_pos(s32 npcID, f32* outX, f32* outY, f32* outZ, s32* outAirborne) {
         *outY = npc->pos.y;
         *outZ = npc->pos.z;
         if (npc->flags & NPC_FLAG_JUMPING) {
-            *outAirborne = TRUE;
+            *outAirborne = true;
         }
     }
 
@@ -47,7 +47,7 @@ void npc_follow_init(Npc* npc, s32 targetNpcID, FollowAnims* anims, f32 walkSpee
         followData->moveHistory[i].pos.x = playerStatus->pos.x;
         followData->moveHistory[i].pos.y = playerStatus->pos.y;
         followData->moveHistory[i].pos.z = playerStatus->pos.z;
-        followData->moveHistory[i].isAirborne = FALSE;
+        followData->moveHistory[i].isAirborne = false;
     }
     followData->lastPointIdx = 0;
     followData->targetPointIdx = 0;
@@ -74,7 +74,7 @@ void npc_update_npc_tracking(Npc* npc) {
 
     get_npc_pos(followData->targetNpcID, &x, &y, &z, &airborne);
     historyPoint = &followData->moveHistory[followData->lastPointIdx];
-    isAirborne = airborne != FALSE;
+    isAirborne = airborne != false;
 
     if (historyPoint->isAirborne && isAirborne) {
         return;
@@ -134,7 +134,7 @@ void npc_follow_npc(Npc* npc) {
                 npc->curAnim = followData->anims->fall;
             }
 
-            while (TRUE) {
+            while (true) {
                 dist = dist2D(currentX, currentZ, targetX, targetZ);
                 yaw = atan2(currentX, currentZ, targetX, targetZ);
                 if (dist > npc->moveSpeed) {
@@ -272,7 +272,7 @@ void npc_follow_npc(Npc* npc) {
                 break;
             }
 
-            while (TRUE) {
+            while (true) {
                 if (historyPoint->isAirborne) {
                     break;
                 }
@@ -301,7 +301,7 @@ void npc_follow_npc(Npc* npc) {
                 return;
             }
 
-            while (TRUE) {
+            while (true) {
                 if (!historyPoint->isAirborne) {
                     break;
                 }

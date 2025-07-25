@@ -11,8 +11,8 @@ extern Gfx Entity_SaveBlock_RenderNone[];
 
 extern s32 Entity_SaveBlock_ScriptResume[];
 
-BSS s32 SaveBlockTutorialPrinterClosed;
-BSS s32 SaveBlockResultPrinterClosed;
+BSS bool SaveBlockTutorialPrinterClosed;
+BSS bool SaveBlockResultPrinterClosed;
 BSS MessagePrintState* SaveBlockTutorialPrinter;
 BSS MessagePrintState* SaveBlockResultPrinter;
 
@@ -99,7 +99,7 @@ void entity_SaveBlock_save_data(void) {
 
 void entity_SaveBlock_show_tutorial_message(Entity* entity) {
     if (!get_global_flag(GF_Tutorial_SaveBlock)) {
-        SaveBlockTutorialPrinterClosed = FALSE;
+        SaveBlockTutorialPrinterClosed = false;
         msg_get_printer_for_msg(MSG_Menus_Tutorial_SaveBlock, &SaveBlockTutorialPrinterClosed);
         set_global_flag(GF_Tutorial_SaveBlock);
         return;
@@ -116,8 +116,8 @@ void entity_SaveBlock_wait_for_close_tutorial(Entity* entity) {
 }
 
 void entity_SaveBlock_show_choice_message(void) {
-    SaveBlockTutorialPrinterClosed = FALSE;
-    SaveBlockResultPrinterClosed = FALSE;
+    SaveBlockTutorialPrinterClosed = false;
+    SaveBlockResultPrinterClosed = false;
     SaveBlockResultPrinter = msg_get_printer_for_msg(MSG_Menus_SavePrompt, &SaveBlockResultPrinterClosed);
     SaveBlockTutorialPrinter = msg_get_printer_for_msg(MSG_Choice_000A, &SaveBlockTutorialPrinterClosed);
 }

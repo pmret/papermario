@@ -80,7 +80,7 @@ void N(appendGfx_FallingSprite)(void) {
 
 API_CALLABLE(N(InitializeFallingSprite)) {
     FallingSprite* falling = &N(Falling);
-    falling->animationEnabled = FALSE;
+    falling->animationEnabled = false;
     falling->rasterID = 0;
     falling->playerSpriteID = 1;
     falling->width  = gPlayerStatus.colliderHeight;
@@ -140,7 +140,7 @@ API_CALLABLE(N(SetFallingSpriteRot)) {
 }
 
 API_CALLABLE(N(EnableFallingAnimation)) {
-    N(Falling).animationEnabled = TRUE;
+    N(Falling).animationEnabled = true;
     return ApiStatus_DONE2;
 }
 
@@ -288,29 +288,29 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
     Call(SetCamPosA, CAM_DEFAULT, 300, -500)
     Call(SetCamPosB, CAM_DEFAULT, -100, 0)
     Call(SetCamDistance, CAM_DEFAULT, 360)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(DisablePartnerAI, 0)
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Call(InterpPlayerYaw, 270, 1)
     Call(SetPlayerPos, 0, 300, 0)
     Call(SetNpcPos, NPC_PARTNER, 0, 300, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_INACTIVE, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_INACTIVE, true)
     Wait(30)
     Call(N(InitializeFallingSprite))
     ExecWait(N(EVS_PlayerFalling))
     Call(InterpNpcYaw, NPC_Bombette, 90, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_INACTIVE | NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_INACTIVE | NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     ExecWait(N(EVS_PartnerFalling))
     Call(InterpNpcYaw, NPC_Bombette, 270, 0)
     Wait(20)
     Call(InterpNpcYaw, NPC_Bombette, 90, 0)
     Call(SpeakToPlayer, NPC_Bombette, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_00D8)
     Call(N(EnableFallingAnimation))
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, true)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Call(N(DeleteFallingSprite))
     Thread
         Call(SetNpcRotation, NPC_PARTNER, 0, 0, 0)
@@ -325,7 +325,7 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
     Call(PlayerJump, LVar0, 0, LVar2, 10)
     Wait(15)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerPhysics, false)
     IfLt(GB_StoryProgress, STORY_CH1_BOMBETTE_JOINED_PARTY)
         Call(SetCamSpeed, CAM_DEFAULT, 3)
         Call(SetCamDistance, CAM_DEFAULT, 300)
@@ -347,13 +347,13 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
             Call(SetPlayerAnimation, ANIM_Mario1_Idle)
         EndThread
         Call(EndSpeech, NPC_Bombette, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0)
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Call(SetNpcVar, NPC_Bombette, 0, 1)
     EndIf
     Call(EnablePartnerAI)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

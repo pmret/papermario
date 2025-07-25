@@ -5,7 +5,7 @@ s32 N(DoorModelsR)[] = { MODEL_o976, -1 };
 
 EvtScript N(EVS_ExitDoor_pra_20_1) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_21_ENTRY_0)
     Set(LVar1, COLLIDER_deilittnnw)
     Set(LVar2, MODEL_o774)
@@ -20,7 +20,7 @@ EvtScript N(EVS_ExitDoor_pra_20_1) = {
 
 EvtScript N(EVS_ExitDoors_pra_36_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_21_ENTRY_1)
     Set(LVar1, COLLIDER_deilittnne)
     Set(LVar2, Ref(N(DoorModelsL)))
@@ -62,8 +62,8 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(SetCamBGColor, CAM_DEFAULT, 24, 24, 40)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
     IfLt(GB_StoryProgress, STORY_CH7_FOUND_HIDDEN_ROOM_UNDER_STATUE)

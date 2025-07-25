@@ -18,7 +18,7 @@ EvtScript N(EVS_SetupMusic) = {
             CaseRange(STORY_CH5_RAPHAEL_MOVED_ROOT, STORY_CH5_RAPHAEL_WAITING_FOR_MARIO)
                 IfNe(LVar0, jan_22_ENTRY_1)
                     Call(SetMusic, 0, SONG_RAPHAEL_RAVEN, 0, VOL_LEVEL_FULL)
-                    Set(AF_JAN_03, FALSE)
+                    Set(AF_JAN_03, false)
                 EndIf
                 Thread
                     Loop(0)
@@ -28,7 +28,7 @@ EvtScript N(EVS_SetupMusic) = {
                         EndIf
                     EndLoop
                     Call(SetMusic, 0, SONG_DEEP_JUNGLE, 0, VOL_LEVEL_FULL)
-                    Set(AF_JAN_03, FALSE)
+                    Set(AF_JAN_03, false)
                 EndThread
             CaseDefault
                 Call(SetMusic, 0, SONG_DEEP_JUNGLE, 0, VOL_LEVEL_FULL)

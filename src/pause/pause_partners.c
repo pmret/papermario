@@ -269,7 +269,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
 };
 u8 gPausePartnersPortraitScrollInterpTable[] = {0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8 };
 MenuPanel gPausePanelPartners = {
-    .initialized = FALSE,
+    .initialized = false,
     .col = 0,
     .row = 1,
     .selected = 0,
@@ -637,7 +637,7 @@ void pause_partners_init(MenuPanel* panel) {
 
     if (gPausePartnersNumPartners == 0) {
         set_window_update(WIN_PAUSE_PARTNERS, WINDOW_UPDATE_HIDE);
-        panel->initialized = FALSE;
+        panel->initialized = false;
         return;
     }
 
@@ -675,7 +675,7 @@ void pause_partners_init(MenuPanel* panel) {
     gPausePartnersLevel = 0;
     gPausePartnersRotAngle = gPausePartnersCurrentPartnerIdx * 360 / gPausePartnersNumPartners;
     pause_partners_load_portrait(0);
-    panel->initialized = TRUE;
+    panel->initialized = true;
 }
 
 void pause_partners_handle_input(MenuPanel* panel) {

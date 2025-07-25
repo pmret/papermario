@@ -50,7 +50,7 @@ EvtScript N(EVS_Gizmos_Shutters) = {
 };
 
 EvtScript N(EVS_Scene_PullPinkSwitch) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(MakeLerp, 0, 70, 30 * DT, EASING_COS_IN_OUT)
     Label(0)
         Call(UpdateLerp)
@@ -67,7 +67,7 @@ EvtScript N(EVS_Scene_PullPinkSwitch) = {
     Call(SetPanTarget, CAM_DEFAULT, 223, 10, -165)
     Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(-500.0), Float(-200.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(20 * DT)
     Call(PlaySoundAt, SOUND_OMO_FLIP_TRAIN_TRACK, SOUND_SPACE_DEFAULT, 265, 0, -235)
@@ -88,7 +88,7 @@ EvtScript N(EVS_Scene_PullPinkSwitch) = {
     Wait(30 * DT)
     Set(GB_StoryProgress, STORY_CH4_PULLED_SWITCH_SWITCH)
     Call(ResetCam, CAM_DEFAULT, Float(90.0))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Unbind
     Return
     End

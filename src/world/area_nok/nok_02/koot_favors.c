@@ -205,9 +205,9 @@ API_CALLABLE(N(IsFourthMultipleFavor)) {
     s32 favorIdx = evt_get_variable(script, *args++);
 
     if ((favorIdx % 4) != 0) {
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
     } else {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
     return ApiStatus_DONE2;
 }
@@ -271,7 +271,7 @@ API_CALLABLE(N(GiveUpFavor)) {
     s32 randomIdx;
     u32 i;
 
-    evt_set_variable(script, N(KootFavorData)[favorIdx].gaveUpFlag, TRUE);
+    evt_set_variable(script, N(KootFavorData)[favorIdx].gaveUpFlag, true);
 
     for (i = 0; i < ARRAY_COUNT(N(KootFavorData)); i++, it++) {
         if (evt_get_variable(script, it->unlockedFlag) && !evt_get_variable(script, it->completeFlag)) {
@@ -329,7 +329,7 @@ API_CALLABLE(N(SetFavorComplete)) {
     s32 favorIdx = evt_get_variable(script, *args++) - 1;
     KootFavor* favor = &N(KootFavorData)[favorIdx];
 
-    evt_set_variable(script, favor->completeFlag, TRUE);
+    evt_set_variable(script, favor->completeFlag, true);
     return ApiStatus_DONE2;
 }
 
@@ -357,7 +357,7 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
         Goto(90)
     EndIf
     IfEq(GB_KootFavor_State, KOOT_FAVOR_STATE_2)
-        IfEq(GF_MAC02_KootFavor_CurrentComplete, FALSE)
+        IfEq(GF_MAC02_KootFavor_CurrentComplete, false)
             Call(N(MakeFavorItemList), GB_KootFavor_Current)
             IfEq(LVar0, 0)
                 Set(LVar0, Ref(N(FavorItemList)))
@@ -367,7 +367,7 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
                     CaseEq(-1)
                     CaseEq(0)
                     CaseDefault
-                        Set(GF_MAC02_KootFavor_CurrentComplete, TRUE)
+                        Set(GF_MAC02_KootFavor_CurrentComplete, true)
                 EndSwitch
             Else
                 Set(LVar0, Ref(N(FavorItemList)))
@@ -377,11 +377,11 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
                     CaseEq(-1)
                     CaseEq(0)
                     CaseDefault
-                        Set(GF_MAC02_KootFavor_CurrentComplete, TRUE)
+                        Set(GF_MAC02_KootFavor_CurrentComplete, true)
                 EndSwitch
             EndIf
         EndIf
-        IfEq(GF_MAC02_KootFavor_CurrentComplete, TRUE)
+        IfEq(GF_MAC02_KootFavor_CurrentComplete, true)
             Call(N(SetFavorComplete), GB_KootFavor_Current)
             Add(GB_KootFavor_Completed, 1)
             Call(N(IsFourthMultipleFavor), GB_KootFavor_Completed)
@@ -396,7 +396,7 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
                 Call(N(GetFavorMessages), GB_KootFavor_Current)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar2)
                 Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B1)
-                Call(ShowGotItem, ITEM_STAR_PIECE, TRUE, ITEM_PICKUP_FLAG_3_STAR_PIECES)
+                Call(ShowGotItem, ITEM_STAR_PIECE, true, ITEM_PICKUP_FLAG_3_STAR_PIECES)
                 Call(AddStarPieces, 3)
             EndIf
             Switch(GB_KootFavor_Completed)
@@ -415,7 +415,7 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
             Goto(90)
         EndIf
         // ask about current favor progress
-        IfEq(GF_KootFavor_LeftKoopaArea, TRUE)
+        IfEq(GF_KootFavor_LeftKoopaArea, true)
             Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AD)
             Call(ShowChoice, MSG_Choice_0012)
             Switch(LVar0)
@@ -436,7 +436,7 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
                     Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar0)
             EndSwitch
         Else
-            IfEq(GF_KootFavor_LeftKoopaVillage, FALSE)
+            IfEq(GF_KootFavor_LeftKoopaVillage, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AA)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AB)
@@ -445,7 +445,7 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
             IfEq(LVar0, 0)
                 Call(N(GetFavorMessages), GB_KootFavor_Current)
                 Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar0)
-                Set(GF_KootFavor_LeftKoopaVillage, FALSE)
+                Set(GF_KootFavor_LeftKoopaVillage, false)
             Else
                 Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AC)
             EndIf
@@ -462,9 +462,9 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
         Goto(90)
     Else
         IfEq(GB_KootFavor_State, KOOT_FAVOR_STATE_0)
-            IfEq(GF_NOK02_Met_KoopaKoot, FALSE)
+            IfEq(GF_NOK02_Met_KoopaKoot, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A3)
-                Set(GF_NOK02_Met_KoopaKoot, TRUE)
+                Set(GF_NOK02_Met_KoopaKoot, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A4)
             EndIf
@@ -479,9 +479,9 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
         Call(N(GetFavorMessages), GB_KootFavor_Current)
         Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar0)
         Set(GB_KootFavor_State, KOOT_FAVOR_STATE_2)
-        Set(GF_KootFavor_LeftKoopaVillage, FALSE)
-        Set(GF_MAC02_KootFavor_CurrentComplete, FALSE)
-        Set(GF_KootFavor_LeftKoopaArea, FALSE)
+        Set(GF_KootFavor_LeftKoopaVillage, false)
+        Set(GF_MAC02_KootFavor_CurrentComplete, false)
+        Set(GF_KootFavor_LeftKoopaArea, false)
     Else
         Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A8)
         Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaKoot_SwingCane)
@@ -522,34 +522,34 @@ EvtScript N(EVS_SetupKootFavors) = {
     IfLt(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
         Goto(30)
     EndIf
-    Set(GF_NOK02_KootFavor14_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor14_Unlocked, true)
     Label(20)
-    Set(GF_NOK02_KootFavor13_Unlocked, TRUE)
-    Set(GF_NOK02_KootFavor12_Unlocked, TRUE)
-    Set(GF_NOK02_KootFavor11_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor13_Unlocked, true)
+    Set(GF_NOK02_KootFavor12_Unlocked, true)
+    Set(GF_NOK02_KootFavor11_Unlocked, true)
     Label(30)
-    Set(GF_NOK02_KootFavor10_Unlocked, TRUE)
-    Set(GF_NOK02_KootFavor0F_Unlocked, TRUE)
-    Set(GF_NOK02_KootFavor0E_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor10_Unlocked, true)
+    Set(GF_NOK02_KootFavor0F_Unlocked, true)
+    Set(GF_NOK02_KootFavor0E_Unlocked, true)
     Label(40)
-    Set(GF_NOK02_KootFavor0D_Unlocked, TRUE)
-    Set(GF_NOK02_KootFavor0C_Unlocked, TRUE)
-    Set(GF_NOK02_KootFavor0B_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor0D_Unlocked, true)
+    Set(GF_NOK02_KootFavor0C_Unlocked, true)
+    Set(GF_NOK02_KootFavor0B_Unlocked, true)
     Label(50)
-    Set(GF_NOK02_KootFavor0A_Unlocked, TRUE)
-    Set(GF_NOK02_KootFavor09_Unlocked, TRUE)
-    Set(GF_NOK02_KootFavor08_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor0A_Unlocked, true)
+    Set(GF_NOK02_KootFavor09_Unlocked, true)
+    Set(GF_NOK02_KootFavor08_Unlocked, true)
     Label(60)
-    Set(GF_NOK02_KootFavor07_Unlocked, TRUE)
-    Set(GF_NOK02_KootFavor06_Unlocked, TRUE)
-    Set(GF_NOK02_KootFavor05_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor07_Unlocked, true)
+    Set(GF_NOK02_KootFavor06_Unlocked, true)
+    Set(GF_NOK02_KootFavor05_Unlocked, true)
     Label(70)
-    Set(GF_NOK02_KootFavor04_Unlocked, TRUE)
-    Set(GF_NOK02_KootFavor03_Unlocked, TRUE)
-    Set(GF_NOK02_KootFavor02_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor04_Unlocked, true)
+    Set(GF_NOK02_KootFavor03_Unlocked, true)
+    Set(GF_NOK02_KootFavor02_Unlocked, true)
     Label(75)
-    Set(GF_NOK02_KootFavor01_Unlocked, TRUE)
-    Set(GF_NOK02_KootFavor00_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor01_Unlocked, true)
+    Set(GF_NOK02_KootFavor00_Unlocked, true)
     Label(80)
     Return
     End

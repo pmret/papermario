@@ -104,12 +104,12 @@ EvtScript N(EVS_WiggleTongue) = {
 EvtScript N(EVS_StartTongueWiggle) = {
     Call(CloneModel, MODEL_sita, TONGUE_COPY_MODEL_ID)
     Call(ParentColliderToModel, COLLIDER_sita, TONGUE_COPY_MODEL_ID)
-    Call(EnableModel, TONGUE_COPY_MODEL_ID, FALSE)
+    Call(EnableModel, TONGUE_COPY_MODEL_ID, false)
     Exec(N(EVS_WiggleTongue))
-    Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_sita, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_sita, true)
     Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(make_tongue_gfx)), NULL)
     Call(SetModelCustomGfx, MODEL_sita, CUSTOM_GFX_1, -1)
-    Call(HidePlayerShadow, TRUE)
+    Call(HidePlayerShadow, true)
     Return
     End
 };

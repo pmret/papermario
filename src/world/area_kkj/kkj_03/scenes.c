@@ -9,11 +9,11 @@ EvtScript N(EVS_Scene_MeetingPeach) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(FadeOutMusic, 0, 666)
     Wait(20 * DT)
     Call(SetMusic, 0, SONG_PRISONER_PEACH_THEME, 0, VOL_LEVEL_FULL)
-    Call(PlayerFaceNpc, NPC_Peach, FALSE)
+    Call(PlayerFaceNpc, NPC_Peach, false)
     Call(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Walk)
     Call(SetNpcSpeed, NPC_Peach, Float(2.0 / DT))
     Call(NpcMoveTo, NPC_Peach, 625, 0, 0)
@@ -72,13 +72,13 @@ EvtScript N(EVS_Scene_MeetingPeach) = {
     Wait(60 * DT)
     Call(GotoMap, Ref("osr_04"), osr_04_ENTRY_0)
     Wait(100 * DT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_TexPan_Clouds) = {
-    Call(EnableTexPanning, MODEL_o718, TRUE)
+    Call(EnableTexPanning, MODEL_o718, true)
     Set(LVar0, 0)
     Loop(0)
         Add(LVar0, -200)
@@ -101,15 +101,15 @@ EvtScript N(EVS_MoveClouds) = {
 };
 
 EvtScript N(EVS_Scene_Ascending) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetNpcPos, NPC_Peach, 680, 0, -15)
-    Call(EnableGroup, MODEL_g156, TRUE)
+    Call(EnableGroup, MODEL_g156, true)
     Exec(N(EVS_TexPan_Clouds))
     Exec(N(EVS_MoveClouds))
     Call(UseSettingsFrom, CAM_DEFAULT, 600, 0, -15)
     Call(SetPanTarget, CAM_DEFAULT, 600, 0, -15)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Call(SetPlayerJumpscale, 0)
         Loop(0)
@@ -141,7 +141,7 @@ EvtScript N(EVS_Scene_Ascending) = {
     Wait(100 * DT)
     Call(GotoMap, Ref("osr_03"), osr_03_ENTRY_1)
     Wait(100 * DT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

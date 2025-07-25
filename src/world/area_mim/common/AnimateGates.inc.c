@@ -39,7 +39,7 @@ EvtScript N(EVS_UseGate) = {
             EndIf
             Exec(N(EVS_ResetGates))
             Set(AB_MIM_1, 1)
-            Set(GF_MIM_ChoosingPath, TRUE)
+            Set(GF_MIM_ChoosingPath, true)
         CaseEq(1)
             Thread
                 Call(MakeLerp, 360, 270, 10, EASING_QUADRATIC_IN)

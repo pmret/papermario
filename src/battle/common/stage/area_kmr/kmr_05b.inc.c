@@ -7,8 +7,8 @@
 
 EvtScript N(EVS_PreBattle) = {
     Call(SetSpriteShading, SHADING_NONE)
-    Call(EnableModel, MODEL_yuka, FALSE)
-    Call(EnableModel, MODEL_o303, FALSE)
+    Call(EnableModel, MODEL_yuka, false)
+    Call(EnableModel, MODEL_o303, false)
     Return
     End
 };

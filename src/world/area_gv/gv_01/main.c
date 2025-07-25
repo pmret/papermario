@@ -156,17 +156,17 @@ EvtScript N(EVS_E8CA04) = {
 #endif
 
 EvtScript N(EVS_Main) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ModifyGlobalOverrideFlags, 0, GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE)
     SetUP_CAMERA_NO_LEAD()
     Thread
         Call(GetCurrentPartnerID, LVar0)
         IfNe(LVar0, PARTNER_NONE)
             Call(DisablePartnerAI, 0)
-            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
             Call(SetNpcPos, NPC_PARTNER, NPC_DISPOSE_LOCATION)
         EndIf
-        Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
+        Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, true)
         Call(InterpPlayerYaw, 90, 0)
         Wait(2)
         Call(RandInt, 4, LVar0)
@@ -255,7 +255,7 @@ EvtScript N(EVS_Main) = {
         Call(UseSettingsFrom, CAM_DEFAULT, 0, 10, 0)
         Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.3))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Wait(94)
         Call(SetPanTarget, CAM_DEFAULT, 0, 0, 1000)
     EndThread
@@ -283,9 +283,9 @@ API_CALLABLE(N(FadeToTitleScreen)) {
 
 API_CALLABLE(N(ChangeStateToTitleScreen)) {
     gGameStatusPtr->context = CONTEXT_WORLD;
-    gGameStatusPtr->debugUnused1 = FALSE;
+    gGameStatusPtr->debugUnused1 = false;
     gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;
-    gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
+    gGameStatusPtr->keepUsingPartnerOnMapChange = false;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
     general_heap_create();
     clear_render_tasks();
@@ -301,7 +301,7 @@ API_CALLABLE(N(ChangeStateToTitleScreen)) {
     hud_element_clear_cache();
     clear_trigger_data();
     clear_printers();
-    clear_entity_data(FALSE);
+    clear_entity_data(false);
     clear_screen_overlays();
     clear_player_status();
     clear_npcs();

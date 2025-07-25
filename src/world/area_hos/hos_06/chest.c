@@ -22,7 +22,7 @@ EvtScript N(EVS_Chest_ShowGotItem) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
     Wait(40)
-    Call(ShowGotItem, LVar0, FALSE, 0)
+    Call(ShowGotItem, LVar0, false, 0)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     Return
@@ -77,7 +77,7 @@ API_CALLABLE(N(ChestItemPrompt)) {
                 IconHudScriptPair* itemHudScripts = &gItemHudScripts[item->hudElemID];
                 menu->ptrIcon[menuIdx] = itemHudScripts->enabled;
                 menu->userIndex[menuIdx] = i;
-                menu->enabled[menuIdx] = TRUE;
+                menu->enabled[menuIdx] = true;
                 menu->nameMsg[menuIdx] = item->nameMsg;
                 menu->descMsg[menuIdx] = item->shortDescMsg;
                 menuIdx++;
@@ -127,20 +127,20 @@ API_CALLABLE(N(ChestItemPrompt)) {
 
 // assumes itemID on LVar0, sets GF_KKJ_Retrieved_* based on item list position
 API_CALLABLE(N(SetItemRetrieved)) {
-    s32 found = FALSE;
+    s32 found = false;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(N(ChestItems)); i++) {
         s32 listItemID = N(ChestItems)[i];
 
         if (script->varTable[0] == listItemID) {
-            found = TRUE;
+            found = true;
             break;
         }
     }
 
     if (found) {
-        evt_set_variable(NULL, GF_KKJ_Retrieved_PowerRush + i, TRUE);
+        evt_set_variable(NULL, GF_KKJ_Retrieved_PowerRush + i, true);
     }
 
     return ApiStatus_DONE2;
@@ -179,7 +179,7 @@ EvtScript N(EVS_CloseChest) = {
 };
 
 EvtScript N(EVS_Interact_MagicChest_Mario) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     ExecWait(N(EVS_OpenChest))
     Set(LVar0, 1)
     Call(N(ChestItemPrompt))
@@ -192,7 +192,7 @@ EvtScript N(EVS_Interact_MagicChest_Mario) = {
         CaseOrEq(ITEM_LAST_STAND)
             SetGroup(EVT_GROUP_NEVER_PAUSE)
             Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
-            Call(ShowGotItem, LVar0, FALSE, 0)
+            Call(ShowGotItem, LVar0, false, 0)
             Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             Call(AddBadge, LVar0, LVar1)
             Call(N(SetItemRetrieved))
@@ -202,13 +202,13 @@ EvtScript N(EVS_Interact_MagicChest_Mario) = {
             IfLe(LVar1, 0)
                 Call(ShowMessageAtScreenPos, MSG_Menus_00D5, 160, 40)
             Else
-                Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_ANIMS)
+                Call(ShowGotItem, LVar0, false, ITEM_PICKUP_FLAG_NO_ANIMS)
                 Call(AddItem, LVar0, LVar1)
                 Call(N(SetItemRetrieved))
             EndIf
     EndSwitch
     ExecWait(N(EVS_CloseChest))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

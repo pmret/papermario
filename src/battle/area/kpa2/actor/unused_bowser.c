@@ -137,7 +137,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(GetLastElement, LVarE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -194,7 +194,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
             Wait(20)
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -276,7 +276,7 @@ EvtScript N(EVS_UseAttack) = {
 };
 
 EvtScript N(EVS_Attack_ClawSwipe) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(SetBattleCamDist, 150)
@@ -287,10 +287,10 @@ EvtScript N(EVS_Attack_ClawSwipe) = {
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, 40, 0, 0)
     Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_RearUpMock)
     Wait(25)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Swipe)
     Wait(3)
     Call(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
@@ -332,13 +332,13 @@ EvtScript N(EVS_Attack_ClawSwipe) = {
             ExecWait(N(EVS_ReturnHome))
         EndCaseGroup
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_BodySlam) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(SetBattleCamDist, 150)
@@ -349,8 +349,8 @@ EvtScript N(EVS_Attack_BodySlam) = {
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, 80, 0, 0)
     Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
     Wait(15)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PreJump)
@@ -366,13 +366,13 @@ EvtScript N(EVS_Attack_BodySlam) = {
             Sub(LVar0, 30)
             Set(LVar1, 0)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 28, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 28, false, true, false)
             Thread
                 Call(ShakeCam, CAM_BATTLE, 0, 4, Float(3.0))
             EndThread
             Sub(LVar0, 35)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 14, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 14, false, true, false)
             Thread
                 Call(ShakeCam, CAM_BATTLE, 0, 4, Float(2.0))
             EndThread
@@ -393,7 +393,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
     EndSwitch
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.5))
     Call(SetGoalToTarget, ACTOR_SELF)
-    Call(JumpToGoal, ACTOR_SELF, 24, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 24, false, true, false)
     Thread
         Call(ShakeCam, CAM_BATTLE, 0, 4, Float(3.0))
     EndThread
@@ -409,7 +409,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             Add(LVar0, 40)
             Set(LVar1, 0)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 18, false, true, false)
             Thread
                 Call(ShakeCam, CAM_BATTLE, 0, 4, Float(3.0))
             EndThread
@@ -426,13 +426,13 @@ EvtScript N(EVS_Attack_BodySlam) = {
             ExecWait(N(EVS_ReturnHome))
         EndCaseGroup
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_FireBreath) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
@@ -492,7 +492,7 @@ EvtScript N(EVS_Attack_FireBreath) = {
             EndIf
         EndCaseGroup
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -501,7 +501,7 @@ EvtScript N(EVS_Attack_FireBreath) = {
 #include "common/FadeBackgroundLighten.inc.c"
 
 EvtScript N(EVS_UseDrainingShockwave) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR_CLOSE)
@@ -539,14 +539,14 @@ EvtScript N(EVS_UseDrainingShockwave) = {
             Wait(30)
             Return
         CaseEq(HIT_RESULT_LUCKY)
-            Call(FreezeBattleState, TRUE)
+            Call(FreezeBattleState, true)
             Thread
                 Wait(2)
                 Call(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                 Call(SetGoalToTarget, ACTOR_SELF)
                 Call(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                 Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC, 0, 0, DMG_SHOCKWAVE_P, BS_FLAGS1_TRIGGER_EVENTS)
-                Call(FreezeBattleState, FALSE)
+                Call(FreezeBattleState, false)
             EndThread
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
             Wait(15)
@@ -558,14 +558,14 @@ EvtScript N(EVS_UseDrainingShockwave) = {
             Return
         CaseDefault
     EndSwitch
-    Call(FreezeBattleState, TRUE)
+    Call(FreezeBattleState, true)
     Thread
         Wait(2)
         Call(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
         Call(SetGoalToTarget, ACTOR_SELF)
         Call(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
         Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC, 0, 0, DMG_SHOCKWAVE_P, BS_FLAGS1_TRIGGER_EVENTS)
-        Call(FreezeBattleState, FALSE)
+        Call(FreezeBattleState, false)
     EndThread
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC, 0, STATUS_FLAG_POISON, DMG_SHOCKWAVE, BS_FLAGS1_TRIGGER_EVENTS)
@@ -582,7 +582,7 @@ EvtScript N(EVS_UseDrainingShockwave) = {
             EndIf
         EndCaseGroup
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -600,7 +600,7 @@ EvtScript N(EVS_ReturnHome) = {
     Call(GetDist2D, LVar9, LVarA, LVarC, LVarD, LVarF)
     IfGe(LVar9, Float(4.0))
         Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-        Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+        Call(RunToGoal, ACTOR_SELF, 0, false)
     EndIf
     Call(SetActorYaw, ACTOR_SELF, 0)
     Return

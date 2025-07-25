@@ -6,16 +6,16 @@
 #include "world/common/complete/LetterDelivery.inc.c"
 
 EvtScript N(EVS_Scene_Wishing) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAND)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 400)
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 400)
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(3.0), Float(-10.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(30)
     Call(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_HOS_006F)
@@ -40,7 +40,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
         CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
             Set(LVar0, MSG_OSR_0002)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_OSR_0003)
             Else
                 Set(LVar0, MSG_OSR_0004)
@@ -48,10 +48,10 @@ EvtScript N(EVS_NpcInteract_Toad) = {
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_OSR_0005)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC01_MailbagStolen, FALSE)
+            IfEq(GF_MAC01_MailbagStolen, false)
                 Set(LVar0, MSG_OSR_0006)
             Else
-                IfEq(GF_MAC01_MailbagReturned, FALSE)
+                IfEq(GF_MAC01_MailbagReturned, false)
                     Set(LVar0, MSG_OSR_0007)
                 Else
                     Set(LVar0, MSG_OSR_0008)

@@ -48,9 +48,9 @@ EvtScript N(EVS_Main) = {
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(jan_04_ENTRY_0)
-            Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+            Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
         CaseEq(jan_04_ENTRY_3)
-            Call(MakeNpcs, FALSE, Ref(N(EpilogueNPCs)))
+            Call(MakeNpcs, false, Ref(N(EpilogueNPCs)))
     EndSwitch
     Exec(N(EVS_MakeEntities))
     Exec(N(EVS_SetupTrees))
@@ -64,7 +64,7 @@ EvtScript N(EVS_Main) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o54, COLLIDER_FLAG_DOCK_WALL)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1, SURFACE_TYPE_WATER)
     Call(MakeTransformGroup, MODEL_g12)
-    Call(EnableTexPanning, MODEL_o61, TRUE)
+    Call(EnableTexPanning, MODEL_o61, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(  -80,  140,   80, -100)

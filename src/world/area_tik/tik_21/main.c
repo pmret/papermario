@@ -8,8 +8,8 @@ EvtScript N(EVS_ExitWalk_tik_20_1) = EVT_EXIT_WALK(60, tik_21_ENTRY_0, "tik_20",
 
 EvtScript N(EVS_ExitDoors_tik_22_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerInput, true)
     Set(LVar0, tik_21_ENTRY_1)
     Set(LVar1, COLLIDER_tte)
     Set(LVar2, MODEL_o46)
@@ -32,9 +32,9 @@ EvtScript N(EVS_GotoMap_tik_14_0) = {
 EvtScript N(EVS_ExitPipe_tik_14_0) = EVT_EXIT_PIPE_VERTICAL(tik_21_ENTRY_2, COLLIDER_o49, N(EVS_GotoMap_tik_14_0));
 
 EvtScript N(EVS_ShowMessage_DoorLocked) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_0177, 160, 40)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

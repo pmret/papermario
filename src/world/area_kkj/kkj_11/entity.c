@@ -24,7 +24,7 @@ EvtScript N(EVS_ItemPrompt_Lock) = {
     Call(N(RemovePadlock))
     Wait(5)
     Call(RemoveKeyItemAt, LVar1)
-    Set(GF_KKJ11_UnlockedKitchen, TRUE)
+    Set(GF_KKJ11_UnlockedKitchen, true)
     Call(CloseChoicePopup)
     Unbind
     BindTrigger(Ref(N(EVS_ExitDoors_kkj_10_1)), TRIGGER_WALL_PRESS_A, COLLIDER_tts, 1, 0)
@@ -34,7 +34,7 @@ EvtScript N(EVS_ItemPrompt_Lock) = {
 
 EvtScript N(EVS_MakeEntities) = {
     IfLe(GB_StoryProgress, STORY_CH4_BEGAN_PEACH_MISSION)
-        IfEq(GF_KKJ11_UnlockedKitchen, FALSE)
+        IfEq(GF_KKJ11_UnlockedKitchen, false)
             Call(MakeEntity, Ref(Entity_Padlock), 0, 10, 490, 180, MAKE_ENTITY_END)
             Set(MV_PadlockEntityIdx, LVar0)
             BindPadlock(Ref(N(EVS_ItemPrompt_Lock)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), Ref(N(PeachKeyList)), 0, 1)

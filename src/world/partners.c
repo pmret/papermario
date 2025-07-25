@@ -170,7 +170,7 @@ WorldPartner wPartners[] = {
         .dmaStart = &world_partner_goombario_ROM_START,
         .dmaEnd = &world_partner_goombario_ROM_END,
         .dmaDest = &world_partner_goombario_VRAM,
-        .isFlying = FALSE,
+        .isFlying = false,
         .init = world_goombario_init,
         .takeOut = &EVS_WorldGoombario_TakeOut,
         .update = &EVS_WorldGoombario_Update,
@@ -185,7 +185,7 @@ WorldPartner wPartners[] = {
         .dmaStart = &world_partner_kooper_ROM_START,
         .dmaEnd = &world_partner_kooper_ROM_END,
         .dmaDest = &world_partner_kooper_VRAM,
-        .isFlying = FALSE,
+        .isFlying = false,
         .init = world_kooper_init,
         .takeOut = &EVS_WorldKooper_TakeOut,
         .update = &EVS_WorldKooper_Update,
@@ -202,7 +202,7 @@ WorldPartner wPartners[] = {
         .dmaStart = &world_partner_bombette_ROM_START,
         .dmaEnd = &world_partner_bombette_ROM_END,
         .dmaDest = &world_partner_bombette_VRAM,
-        .isFlying = FALSE,
+        .isFlying = false,
         .init = world_bombette_init,
         .takeOut = &EVS_WorldBombette_TakeOut,
         .update = &EVS_WorldBombette_Update,
@@ -218,7 +218,7 @@ WorldPartner wPartners[] = {
         .dmaStart = &world_partner_parakarry_ROM_START,
         .dmaEnd = &world_partner_parakarry_ROM_END,
         .dmaDest = &world_partner_parakarry_VRAM,
-        .isFlying = TRUE,
+        .isFlying = true,
         .init = world_parakarry_init,
         .takeOut = &EVS_WorldParakarry_TakeOut,
         .update = &EVS_WorldParakarry_Update,
@@ -233,7 +233,7 @@ WorldPartner wPartners[] = {
         .dmaStart = &world_partner_goompa_ROM_START,
         .dmaEnd = &world_partner_goompa_ROM_END,
         .dmaDest = &world_partner_goompa_VRAM,
-        .isFlying = FALSE,
+        .isFlying = false,
         .init = world_goompa_init,
         .takeOut = &EVS_WorldGoompa_TakeOut,
         .update = &EVS_WorldGoompa_Update,
@@ -245,7 +245,7 @@ WorldPartner wPartners[] = {
         .dmaStart = &world_partner_watt_ROM_START,
         .dmaEnd = &world_partner_watt_ROM_END,
         .dmaDest = &world_partner_watt_VRAM,
-        .isFlying = TRUE,
+        .isFlying = true,
         .init = world_watt_init,
         .takeOut = &EVS_WorldWatt_TakeOut,
         .update = &EVS_WorldWatt_Update,
@@ -261,7 +261,7 @@ WorldPartner wPartners[] = {
         .dmaStart = &world_partner_sushie_ROM_START,
         .dmaEnd = &world_partner_sushie_ROM_END,
         .dmaDest = &world_partner_sushie_VRAM,
-        .isFlying = FALSE,
+        .isFlying = false,
         .init = world_sushie_init,
         .takeOut = &EVS_WorldSushie_TakeOut,
         .update = &EVS_WorldSushie_Update,
@@ -277,7 +277,7 @@ WorldPartner wPartners[] = {
         .dmaStart = &world_partner_lakilester_ROM_START,
         .dmaEnd = &world_partner_lakilester_ROM_END,
         .dmaDest = &world_partner_lakilester_VRAM,
-        .isFlying = TRUE,
+        .isFlying = true,
         .init = world_lakilester_init,
         .takeOut = &EVS_WorldLakilester_TakeOut,
         .update = &EVS_WorldLakilester_Update,
@@ -293,7 +293,7 @@ WorldPartner wPartners[] = {
         .dmaStart = &world_partner_bow_ROM_START,
         .dmaEnd = &world_partner_bow_ROM_END,
         .dmaDest = &world_partner_bow_VRAM,
-        .isFlying = TRUE,
+        .isFlying = true,
         .init = world_bow_init,
         .takeOut = &EVS_WorldBow_TakeOut,
         .update = &EVS_WorldBow_Update,
@@ -308,7 +308,7 @@ WorldPartner wPartners[] = {
         .dmaStart = &world_partner_goombaria_ROM_START,
         .dmaEnd = &world_partner_goombaria_ROM_END,
         .dmaDest = &world_partner_goombaria_VRAM,
-        .isFlying = FALSE,
+        .isFlying = false,
         .init = world_goombaria_init,
         .takeOut = &EVS_WorldGoombaria_TakeOut,
         .update = &EVS_WorldGoombaria_Update,
@@ -322,7 +322,7 @@ WorldPartner wPartners[] = {
         .dmaStart = &world_partner_twink_ROM_START,
         .dmaEnd = &world_partner_twink_ROM_END,
         .dmaDest = &world_partner_twink_VRAM,
-        .isFlying = TRUE,
+        .isFlying = true,
         .init = world_twink_init,
         .takeOut = &EVS_WorldTwink_TakeOut,
         .update = &EVS_WorldTwink_Update,
@@ -468,7 +468,7 @@ PartnerAnimations gPartnerAnimations[] = {
 f32 D_800F84F8 = 0.0f;
 
 s32 func_800EA4B0(s32 collisionID) {
-    s32 ret = TRUE;
+    s32 ret = true;
 
     if (collisionID >= 0) {
         if (collisionID & COLLISION_WITH_ENTITY_BIT) {
@@ -488,10 +488,10 @@ s32 func_800EA4B0(s32 collisionID) {
                 case ENTITY_TYPE_SPINNING_FLOWER:
                 case ENTITY_TYPE_3B:
                 case ENTITY_TYPE_TWEESTER:
-                    ret = FALSE;
+                    ret = false;
                     break;
                 default:
-                    ret = TRUE;
+                    ret = true;
                     break;
             }
         }
@@ -504,16 +504,16 @@ s32 partner_is_idle(Npc* partner) {
 }
 
 s32 world_partner_can_open_menus_default(Npc* partner) {
-    return TRUE;
+    return true;
 }
 
 s32 func_800EA52C(s32 partnerID) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     u32 playerActionState = playerStatus->actionState;
-    s32 ret = FALSE;
+    s32 ret = false;
 
     if (playerStatus->flags & PS_FLAG_HIT_FIRE) {
-        return FALSE;
+        return false;
     }
 
     // any partner
@@ -521,13 +521,13 @@ s32 func_800EA52C(s32 partnerID) {
      || playerActionState == ACTION_STATE_WALK
      || playerActionState == ACTION_STATE_RUN
     ) {
-        ret = TRUE;
+        ret = true;
     }
 
     // check specific partners
     if (partnerID == PARTNER_BOW) {
         if (playerActionState == ACTION_STATE_RIDE) {
-            ret = TRUE;
+            ret = true;
         }
     } else if (partnerID == PARTNER_PARAKARRY) {
         if (playerActionState == ACTION_STATE_RIDE
@@ -535,7 +535,7 @@ s32 func_800EA52C(s32 partnerID) {
          || playerActionState == ACTION_STATE_WALK
          || playerActionState == ACTION_STATE_RUN
         ) {
-            ret = TRUE;
+            ret = true;
         }
     }
 
@@ -904,7 +904,7 @@ void partner_init_after_battle(s32 partnerID) {
         D_8010CFE0 = 1;
         NextPartnerID = partnerID;
         partnerStatus->partnerActionState = 0;
-        partnerStatus->shouldResumeAbility = FALSE;
+        partnerStatus->shouldResumeAbility = false;
 
         if (wCurrentPartnerId != PARTNER_NONE && partnerID != PARTNER_NONE) {
             NextPartnerCommand = PARTNER_CMD_INSTA_SWITCH;
@@ -947,10 +947,10 @@ s32 partner_use_ability(void) {
             D_8010CFE0 = 1;
             NextPartnerCommand = PARTNER_CMD_USE_ABILITY;
             _use_partner_ability();
-            return TRUE;
+            return true;
         }
     }
-    return FALSE;
+    return false;
 }
 
 s32 partner_can_open_world_menus(void) {
@@ -958,16 +958,16 @@ s32 partner_can_open_world_menus(void) {
         && wPartner->canPlayerOpenMenus != NULL
         && !wPartner->canPlayerOpenMenus(wPartnerNpc)
     ) {
-        return FALSE;
+        return false;
     }
-    return TRUE;
+    return true;
 }
 
 s32 partner_can_use_ability(void) {
     if (wPartner->canUseAbility != NULL && !wPartner->canUseAbility(wPartnerNpc)) {
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 void partner_reset_data(void) {
@@ -983,7 +983,7 @@ void partner_reset_data(void) {
 
     if (gGameStatusPtr->keepUsingPartnerOnMapChange) {
         gPartnerStatus.partnerActionState = PARTNER_ACTION_USE;
-        gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
+        gGameStatusPtr->keepUsingPartnerOnMapChange = false;
     }
 
     wPartner = NULL;
@@ -1011,10 +1011,10 @@ void partner_initialize_data(void) {
     D_8010CFC4 = 0;
     partnerStatus->actingPartner = 0;
     partnerStatus->inputDisabledCount = 0;
-    partnerStatus->shouldResumeAbility = FALSE;
+    partnerStatus->shouldResumeAbility = false;
     partnerStatus->partnerActionState = 0;
     partnerStatus->unk_358 = 0;
-    partnerStatus->partnerAction_unk_2 = FALSE;
+    partnerStatus->partnerAction_unk_2 = false;
     wPartner = NULL;
     wSavedPartnerPosX = 0;
     wSavedPartnerPosY = 0;
@@ -1025,7 +1025,7 @@ s32 partner_test_enemy_collision(Npc* enemy) {
     if (wCurrentPartnerId != PARTNER_NONE && wPartner->testFirstStrike != NULL) {
         return wPartner->testFirstStrike(wPartnerNpc, enemy);
     }
-    return FALSE;
+    return false;
 }
 
 EvtScript* partner_get_enter_map_script(void) {
@@ -1116,7 +1116,7 @@ void partner_walking_enable(Npc* partner, s32 val) {
         it->pos.x = playerStatus->pos.x;
         it->pos.y = playerStatus->pos.y;
         it->pos.z = playerStatus->pos.z;
-        it->isJumping = FALSE;
+        it->isJumping = false;
     }
 
     gPlayerMoveHistoryIndex = 0;
@@ -1153,7 +1153,7 @@ void partner_walking_update_player_tracking(Npc* partner) {
     if (playerStatus->flags & (PS_FLAG_FALLING | PS_FLAG_JUMPING)) {
         isPlayerJumping = (playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_STEP_DOWN) ^ 1;
     } else {
-        isPlayerJumping = FALSE;
+        isPlayerJumping = false;
     }
     currentSnapshot = &gPlayerMoveHistory[gPlayerMoveHistoryIndex];
     if ((!currentSnapshot->isJumping || !isPlayerJumping) &&
@@ -1182,7 +1182,7 @@ void partner_walking_update_motion(Npc* partner) {
             partner_walking_follow_player(partner);
         }
         if (partnerStatus->pressedButtons & (BUTTON_Z | BUTTON_B | BUTTON_C_LEFT | BUTTON_C_DOWN)) {
-            partnerStatus->partnerAction_unk_2 = FALSE;
+            partnerStatus->partnerAction_unk_2 = false;
         }
     }
 
@@ -1235,7 +1235,7 @@ void partner_walking_follow_player(Npc* partner) {
             if (!(partner->flags & NPC_FLAG_GROUNDED)) {
                 partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fall;
             }
-            while (TRUE) {
+            while (true) {
                 distance = dist2D(x, z, moveHistoryX, moveHistoryZ);
                 yaw = atan2(x, z, moveHistoryX, moveHistoryZ);
                 if (partner->moveSpeed < distance) {
@@ -1516,7 +1516,7 @@ void partner_walking_follow_player(Npc* partner) {
                     D_8010CFCA = 2;
                 }
             } else {
-                while (TRUE) {
+                while (true) {
                     if (currentSnapshot->isJumping) {
                         break;
                     }
@@ -1539,7 +1539,7 @@ void partner_walking_follow_player(Npc* partner) {
                     wPartnerFollowState = 0;
                     return;
                 }
-                while (TRUE) {
+                while (true) {
                     if (!currentSnapshot->isJumping) {
                         break;
                     }
@@ -1626,7 +1626,7 @@ void partner_walking_follow_player(Npc* partner) {
             }
             break;
         case 20:
-            partner_move_to_goal(partner, FALSE);
+            partner_move_to_goal(partner, false);
             break;
         case 40:
             if (partner->flags & NPC_FLAG_GROUNDED) {
@@ -1689,7 +1689,7 @@ void partner_flying_enable(Npc* partner, s32 val) {
         it->pos.x = wSavedPartnerPosX;
         it->pos.y = wSavedPartnerPosY;
         it->pos.z = wSavedPartnerPosZ;
-        it->isJumping = FALSE;
+        it->isJumping = false;
     }
 
     gPlayerMoveHistoryIndex = 0;
@@ -1725,7 +1725,7 @@ void partner_flying_update_player_tracking(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerPathElement* currentSnapshot;
     f32 effectiveY;
-    s32 isPlayerJumping = FALSE;
+    s32 isPlayerJumping = false;
 
     effectiveY = playerStatus->pos.y;
     if ((playerStatus->actionState == ACTION_STATE_HIT_LAVA) || (playerStatus->actionState == ACTION_STATE_HIT_FIRE)) {
@@ -1763,7 +1763,7 @@ void partner_flying_update_motion(Npc* partner) {
             partner_flying_follow_player(partner);
         }
         if (partnerStatus->pressedButtons & (BUTTON_B | BUTTON_Z | BUTTON_C_DOWN | BUTTON_C_LEFT)) {
-            partnerStatus->partnerAction_unk_2 = FALSE;
+            partnerStatus->partnerAction_unk_2 = false;
         }
     }
     if (wPartnerFollowState != 50 && fabsf(partner->pos.y - playerStatus->pos.y) > 1000.0f) {
@@ -1872,7 +1872,7 @@ void partner_flying_follow_player(Npc* partner) {
                 partner->moveSpeed = 4.0f;
             }
 
-            while (TRUE) {
+            while (true) {
                 yaw = atan2(x, z, moveHistoryX, moveHistoryZ);
                 distance = dist2D(x, z, moveHistoryX, moveHistoryZ);
                 if (partner->moveSpeed < distance) {
@@ -2062,7 +2062,7 @@ void partner_flying_follow_player(Npc* partner) {
 
             distance = dist2D(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             if (!(distance <= wPartnerTetherDistance)) {
-                while (TRUE) {
+                while (true) {
                     if (!currentSnapshot->isJumping) {
                         yaw = atan2(partner->pos.x, partner->pos.z, moveHistoryX, moveHistoryZ);
                         if (!(fabsf(get_clamped_angle_diff(yaw, atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z))) < 90.0f)) {
@@ -2138,7 +2138,7 @@ void partner_flying_follow_player(Npc* partner) {
             }
             break;
         case 20:
-            partner_move_to_goal(partner, TRUE);
+            partner_move_to_goal(partner, true);
             break;
         case 40:
             partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
@@ -2217,9 +2217,9 @@ s32 partner_put_away(Npc* partner) {
             partner->jumpVel = 0.0f;
             partner->pos.y = partner->moveToPos.y;
             disable_npc_blur(partner);
-            return TRUE;
+            return true;
     }
-    return FALSE;
+    return false;
 }
 
 s32 partner_init_get_out(Npc* npc) {
@@ -2347,9 +2347,9 @@ s32 partner_get_out(Npc* partner) {
                     spawn_surface_effects(partner, SURFACE_INTERACT_LAND);
                 }
             }
-            return TRUE;
+            return true;
     }
-    return FALSE;
+    return false;
 }
 
 void func_800EF300(void) {
@@ -2365,9 +2365,9 @@ void enable_partner_ai(void) {
     partner_clear_player_tracking(wPartnerNpc);
 
     if (!wPartner->isFlying) {
-        partner_walking_enable(wPartnerNpc, FALSE);
+        partner_walking_enable(wPartnerNpc, false);
     } else {
-        partner_flying_enable(wPartnerNpc, FALSE);
+        partner_flying_enable(wPartnerNpc, false);
     }
 }
 
@@ -2418,7 +2418,7 @@ void partner_clear_player_tracking(Npc* partner) {
         it->pos.x = wSavedPartnerPosX;
         it->pos.y = wSavedPartnerPosY;
         it->pos.z = wSavedPartnerPosZ;
-        it->isJumping = FALSE;
+        it->isJumping = false;
     }
 }
 
@@ -2431,18 +2431,18 @@ s32 partner_force_player_flip_done(void) {
 
     if (playerStatus->flipYaw[CAM_DEFAULT] == 0.0f) {
         if (!(playerStatus->spriteFacingAngle >= 90.0f) || !(playerStatus->spriteFacingAngle < 270.0f)) {
-            isFacingLeft = TRUE;
+            isFacingLeft = true;
             playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].curYaw - 90.0f);
         } else {
-            isFacingLeft = FALSE;
+            isFacingLeft = false;
             playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].curYaw + 90.0f);
         }
     } else if (get_clamped_angle_diff(cameras[CAM_DEFAULT].curYaw, playerStatus->targetYaw) < 0.0f) {
-        isFacingLeft = TRUE;
+        isFacingLeft = true;
         playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].curYaw - 90.0f);
 
     } else {
-        isFacingLeft = FALSE;
+        isFacingLeft = false;
         playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].curYaw + 90.0f);
     }
 

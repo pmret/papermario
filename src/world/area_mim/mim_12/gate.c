@@ -225,25 +225,25 @@ EvtScript N(EVS_LeaveForest) = {
 };
 
 EvtScript N(EVS_CantOpenGateMessage) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_00D9, 160, 40)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_UseGate) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(InterruptUsePartner)
-    IfEq(AF_MIM12_BackgroundLitUp, FALSE)
+    IfEq(AF_MIM12_BackgroundLitUp, false)
         ExecWait(N(EVS_LeaveForest))
-        Set(AF_MIM12_BackgroundLitUp, TRUE)
+        Set(AF_MIM12_BackgroundLitUp, true)
     Else
         ExecWait(N(EVS_EnterForest))
-        Set(AF_MIM12_BackgroundLitUp, FALSE)
+        Set(AF_MIM12_BackgroundLitUp, false)
     EndIf
     Wait(20)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -262,7 +262,7 @@ EvtScript N(EVS_FlyDownToGate) = {
 
 EvtScript N(EVS_HaveBoosOpenGate) = {
     Thread
-        Call(SetNpcFlagBits, NPC_GateBoo_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_GateBoo_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Set(LVar0, NPC_GateBoo_02)
         Set(LVar1, -66)
         Set(LVar2, -66)
@@ -271,7 +271,7 @@ EvtScript N(EVS_HaveBoosOpenGate) = {
         Set(LVar5, 30)
         Call(N(MoveNpcAlongArc))
     EndThread
-    Call(SetNpcFlagBits, NPC_GateBoo_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_GateBoo_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Set(LVar0, NPC_GateBoo_01)
     Set(LVar1, -135)
     Set(LVar2, 59)
@@ -285,7 +285,7 @@ EvtScript N(EVS_HaveBoosOpenGate) = {
 
 EvtScript N(EVS_HaveBoosCloseGate) = {
     Thread
-        Call(SetNpcFlagBits, NPC_GateBoo_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_GateBoo_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Set(LVar0, NPC_GateBoo_02)
         Set(LVar1, -66)
         Set(LVar2, -66)
@@ -294,7 +294,7 @@ EvtScript N(EVS_HaveBoosCloseGate) = {
         Set(LVar5, 30)
         Call(N(MoveNpcAlongArc))
     EndThread
-    Call(SetNpcFlagBits, NPC_GateBoo_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_GateBoo_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Set(LVar0, NPC_GateBoo_01)
     Set(LVar1, -135)
     Set(LVar2, 59)
@@ -307,7 +307,7 @@ EvtScript N(EVS_HaveBoosCloseGate) = {
 };
 
 EvtScript N(EVS_Scene_UnlockGate) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(20 * DT)
     Call(GetCurrentPartnerID, LVar6)
     Call(BringPartnerOut, PARTNER_BOW)
@@ -371,18 +371,18 @@ EvtScript N(EVS_Scene_UnlockGate) = {
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_006D)
     Call(EnablePartnerAI)
     Wait(5 * DT)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerAnimation, ANIM_Mario1_Jump)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPlayerJumpscale, Float(1.5))
     Call(PlayerJump, LVar0, LVar1, LVar2, 14 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_Land)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerPhysics, false)
     Wait(10 * DT)
     Set(GB_StoryProgress, STORY_CH3_UNLOCKED_GUSTY_GULCH)
     Call(PutPartnerAway)
-    Call(DisablePlayerInput, FALSE)
-    Set(AF_MIM12_BackgroundLitUp, TRUE)
+    Call(DisablePlayerInput, false)
+    Set(AF_MIM12_BackgroundLitUp, true)
     BindTrigger(Ref(N(EVS_UseGate)), TRIGGER_WALL_PRESS_A, COLLIDER_o67, 1, 0)
     Return
     End
@@ -406,12 +406,12 @@ EvtScript N(EVS_SetupForestGate) = {
         CaseGe(STORY_CH3_UNLOCKED_GUSTY_GULCH)
             Call(GetEntryID, LVar0)
             IfEq(LVar0, mim_12_ENTRY_0)
-                Set(AF_MIM12_BackgroundLitUp, FALSE)
+                Set(AF_MIM12_BackgroundLitUp, false)
                 Call(N(InitializeForestFogProperties))
             Else
-                Set(AF_MIM12_BackgroundLitUp, TRUE)
+                Set(AF_MIM12_BackgroundLitUp, true)
                 Call(N(InitializeGustyFogProperties))
-                Call(EnableSpriteShading, FALSE)
+                Call(EnableSpriteShading, false)
             EndIf
             BindTrigger(Ref(N(EVS_UseGate)), TRIGGER_WALL_PRESS_A, COLLIDER_o67, 1, 0)
     EndSwitch

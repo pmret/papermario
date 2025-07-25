@@ -12,7 +12,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_SHY_GUYS_TOYBOX)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_SetupMusic))
     ExecWait(N(EVS_SetupLightSource))
     Switch(GB_StoryProgress)

@@ -19,7 +19,7 @@ EvtScript N(EVS_PreBattle) = {
     Set(LVar2, 3000)
     Set(LVar3, 0)
     Exec(N(EVS_TexturePanMain))
-    Call(EnableBattleFloorReflections, TRUE)
+    Call(EnableBattleFloorReflections, true)
     Return
     End
 };

@@ -161,9 +161,9 @@ void state_step_intro(void) {
         case INTRO_LOAD_MAP:
             set_curtain_draw_callback(NULL);
             gGameStatusPtr->context = CONTEXT_WORLD;
-            gGameStatusPtr->debugUnused1 = FALSE;
+            gGameStatusPtr->debugUnused1 = false;
             gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;
-            gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
+            gGameStatusPtr->keepUsingPartnerOnMapChange = false;
 
             if (gGameStatusPtr->introPart == INTRO_PART_NONE) {
                 general_heap_create();
@@ -180,7 +180,7 @@ void state_step_intro(void) {
                 hud_element_clear_cache();
                 clear_trigger_data();
                 clear_printers();
-                clear_entity_data(FALSE);
+                clear_entity_data(false);
                 clear_screen_overlays();
                 clear_player_status();
                 clear_npcs();
@@ -208,7 +208,7 @@ void state_step_intro(void) {
             playerData->level = 0;
 
             for (i = 0; i < ARRAY_COUNT(playerData->partners); i++) {
-                playerData->partners[i].enabled = FALSE;
+                playerData->partners[i].enabled = false;
             }
 
             playerData->curPartner = PARTNER_NONE;

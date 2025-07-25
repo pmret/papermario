@@ -35,7 +35,7 @@ extern EvtScript N(EVS_UseMove2_Impl);
 extern EvtScript N(EVS_UseMove3_Impl);
 
 EvtScript N(EVS_UseMove) = {
-    Call(ShowActionHud, TRUE)
+    Call(ShowActionHud, true)
     Call(SetDamageSource, DMG_SRC_SPIN_SMASH)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
@@ -67,7 +67,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
     Set(LVar1, 0)
     Loop(10)
         Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        IfEq(LVar0, TRUE)
+        IfEq(LVar0, true)
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             BreakLoop
         EndIf
@@ -102,7 +102,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
         Loop(45)
             Wait(1)
             Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-            IfNe(LVar0, FALSE)
+            IfNe(LVar0, false)
                 BreakLoop
             EndIf
         EndLoop
@@ -120,7 +120,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
             EndIf
         EndIf
         Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             BreakLoop
         EndIf
     EndLoop
@@ -147,7 +147,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
     EndIf
     Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
-        CaseGt(FALSE)
+        CaseGt(false)
             Call(func_802A1000_737890)
             Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENTS_HAMMER, 0, LVarF, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
         CaseDefault
@@ -190,7 +190,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
     Set(LVar1, 0)
     Loop(10)
         Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        IfEq(LVar0, TRUE)
+        IfEq(LVar0, true)
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             BreakLoop
         EndIf
@@ -220,11 +220,11 @@ EvtScript N(EVS_UseMove2_Impl) = {
     Wait(8)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash2_Hold1)
     Call(N(ShouldMovesAutoSucceed))
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Loop(45)
             Wait(1)
             Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-            IfNe(LVar0, FALSE)
+            IfNe(LVar0, false)
                 BreakLoop
             EndIf
         EndLoop
@@ -242,7 +242,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
             EndIf
         EndIf
         Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             BreakLoop
         EndIf
     EndLoop
@@ -269,7 +269,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
     EndIf
     Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
-        CaseGt(FALSE)
+        CaseGt(false)
             Call(func_802A1000_737890)
             Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENTS_HAMMER, 0, LVarF, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
         CaseDefault
@@ -312,7 +312,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
     Set(LVar1, 0)
     Loop(10)
         Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        IfEq(LVar0, TRUE)
+        IfEq(LVar0, true)
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             BreakLoop
         EndIf
@@ -340,11 +340,11 @@ EvtScript N(EVS_UseMove3_Impl) = {
     Wait(8)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash3_Hold1)
     Call(N(ShouldMovesAutoSucceed))
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Loop(45)
             Wait(1)
             Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-            IfNe(LVar0, FALSE)
+            IfNe(LVar0, false)
                 BreakLoop
             EndIf
         EndLoop
@@ -362,7 +362,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
             EndIf
         EndIf
         Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             BreakLoop
         EndIf
     EndLoop
@@ -389,7 +389,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
     EndIf
     Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
-        CaseGt(FALSE)
+        CaseGt(false)
             Call(func_802A1000_737890)
             Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENTS_HAMMER, 0, LVarF, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
         CaseDefault

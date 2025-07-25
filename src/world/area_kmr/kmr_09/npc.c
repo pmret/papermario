@@ -10,7 +10,7 @@ NpcData N(NpcData_Goomba_01) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_RECT,
             .centerPos  = { 200, 0, 24 },
@@ -32,7 +32,7 @@ NpcData N(NpcData_Goomba_02) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_RECT,
             .centerPos  = { 250, 0, 35 },
@@ -56,21 +56,21 @@ API_CALLABLE(N(GetAmbushEnemy)) {
 EvtScript N(EVS_OnReadBillboard) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     SuspendGroup(EVT_GROUP_FLAG_INTERACT)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_Sign_BewareOfGoombas, 160, 40)
     ResumeGroup(EVT_GROUP_FLAG_INTERACT)
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Call(N(GetAmbushEnemy))
     IfNe(LVar0, NULL)
         Call(GetNpcVar, NPC_Goomba_Ambush, 0, LVar0)
         IfEq(LVar0, 0)
             Call(SetNpcVar, NPC_Goomba_Ambush, 0, 1)
-            Set(LFlag0, TRUE)
+            Set(LFlag0, true)
             Wait(10)
         EndIf
     EndIf
-    Call(DisablePlayerInput, FALSE)
-    IfEq(LFlag0, TRUE)
+    Call(DisablePlayerInput, false)
+    IfEq(LFlag0, true)
         Unbind
     EndIf
     End
@@ -79,8 +79,8 @@ EvtScript N(EVS_OnReadBillboard) = {
 
 EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
     Call(SetNpcAnimation, NPC_SELF, ANIM_Goomba_Still)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, false)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, true)
     Label(0)
     Call(GetSelfVar, 0, LVar0)
     IfEq(LVar0, 0)
@@ -104,16 +104,16 @@ EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
         Call(SetNpcRotation, NPC_SELF, 0, 0, 0)
     EndThread
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, true)
     Call(SetNpcJumpscale, NPC_SELF, Float(0.6))
     Call(NpcJump0, NPC_SELF, -35, 0, 25, 23)
     Call(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
     Call(InterpNpcYaw, NPC_SELF, 90, 0)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_NO_SHADOW_RAYCAST, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, FALSE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_NO_SHADOW_RAYCAST, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, false)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, true)
     BindTrigger(Ref(N(EVS_OnReadBillboard)), TRIGGER_WALL_PRESS_A, COLLIDER_kan, 1, 0)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Goomba_Wander)))
     Return
@@ -121,7 +121,7 @@ EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
 };
 
 EvtScript N(EVS_NpcInit_Goomba_Ambush) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Goomba_Ambush)))
     Return
     End
@@ -133,7 +133,7 @@ NpcData N(NpcData_Goomba_Ambush) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_RECT,
             .centerPos  = { -20, 0, 10 },
@@ -156,7 +156,7 @@ NpcData N(NpcData_Paragoomba) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_RECT,
             .centerPos  = { 670, 60, 20 },

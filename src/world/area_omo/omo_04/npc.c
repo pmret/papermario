@@ -28,7 +28,7 @@ EvtScript N(EVS_NpcIdle_Goomba) = {
         Wait(1)
         Goto(0)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(N(DisableCameraLeadingPlayer))
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(SetCamProperties, CAM_DEFAULT, Float(5.0), LVar0, LVar1, LVar2, 300, Float(13.0), Float(-9.5))
@@ -41,7 +41,7 @@ EvtScript N(EVS_NpcIdle_Goomba) = {
         Call(N(EnableCameraLeadingPlayer))
         Call(ResetCam, CAM_DEFAULT, Float(4.0))
     EndThread
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
     End
@@ -51,7 +51,7 @@ EvtScript N(EVS_NpcDefeat_Goomba) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Set(GF_OMO04_Item_Mushroom, TRUE)
+            Set(GF_OMO04_Item_Mushroom, true)
             Call(DoNpcDefeat)
         CaseEq(OUTCOME_PLAYER_LOST)
         CaseEq(OUTCOME_PLAYER_FLED)
@@ -125,7 +125,7 @@ NpcData N(NpcData_ShyGuy) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -770, 0, 0 },
@@ -148,7 +148,7 @@ NpcData N(NpcData_SkyGuy) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -170, 60, 30 },

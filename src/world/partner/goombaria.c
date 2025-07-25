@@ -24,7 +24,7 @@ API_CALLABLE(N(Update)) {
     Npc* goombaria = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_walking_enable(goombaria, TRUE);
+        partner_walking_enable(goombaria, true);
     }
 
     partner_walking_update_player_tracking(goombaria);

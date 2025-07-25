@@ -191,7 +191,7 @@ void update_entities(void) {
     }
 
     update_shadows();
-    gCurrentHiddenPanels.tryFlipTrigger = FALSE;
+    gCurrentHiddenPanels.tryFlipTrigger = false;
 }
 
 void update_shadows(void) {
@@ -243,62 +243,62 @@ s32 step_entity_commandlist(Entity* entity) {
             entity->scriptDelay = -1;
             entity->updateScriptCallback = NULL;
             entity->scriptReadPos = NULL;
-            ret = FALSE;
+            ret = false;
             break;
         case ENTITY_SCRIPT_OP_Jump:
             entity->scriptReadPos = (s32*)*args;
             entity->scriptDelay = 1;
             entity->savedReadPos[0] = entity->scriptReadPos;
-            ret = TRUE;
+            ret = true;
             break;
         case ENTITY_SCRIPT_OP_Call:
             tempfunc = (void (*)(Entity*))(*args++);
             entity->scriptReadPos = args;
             (tempfunc)(entity);
-            ret = TRUE;
+            ret = true;
             break;
         case ENTITY_SCRIPT_OP_SetCallback:
             entity->scriptDelay = *args++;
             entity->updateScriptCallback = (s32 (*)(Entity*)) *args++;
             entity->scriptReadPos = args++;
-            ret = FALSE;
+            ret = false;
             break;
         case ENTITY_SCRIPT_OP_Goto:
             entity->scriptReadPos = entity->savedReadPos[*args];
-            ret = TRUE;
+            ret = true;
             break;
         case ENTITY_SCRIPT_OP_Label:
             labelId = *args++;
             entity->savedReadPos[labelId] = args;
             entity->scriptReadPos = args;
-            ret = TRUE;
+            ret = true;
             break;
         case ENTITY_SCRIPT_OP_RestartBoundScript:
             if (entity->boundScriptBytecode != NULL) {
                 entity->flags |= ENTITY_FLAG_BOUND_SCRIPT_DIRTY;
             }
             entity->scriptReadPos = args++;
-            ret = TRUE;
+            ret = true;
             break;
         case ENTITY_SCRIPT_OP_SetFlags:
             entity->flags |= *args++;
             entity->scriptReadPos = args++;
-            ret = TRUE;
+            ret = true;
             break;
         case ENTITY_SCRIPT_OP_ClearFlags:
             entity->flags &= ~*args++;
             entity->scriptReadPos = args++;
-            ret = TRUE;
+            ret = true;
             break;
         case ENTITY_SCRIPT_OP_PlaySound:
             sfx_play_sound(*args++);
             entity->scriptReadPos = args++;
-            ret = TRUE;
+            ret = true;
             break;
         default:
             args++;
             entity->scriptReadPos = args++;
-            ret = TRUE;
+            ret = true;
             break;
     }
     return ret;
@@ -669,7 +669,7 @@ s32 entity_get_collision_flags(Entity* entity) {
 }
 
 s32 entity_try_partner_interaction_trigger(s32 entityIdx) {
-    s32 interacted = FALSE;
+    s32 interacted = false;
     u32 entityType = get_entity_type(entityIdx);
     s32 partnerID = get_current_partner_id();
     Entity* entity;
@@ -678,7 +678,7 @@ s32 entity_try_partner_interaction_trigger(s32 entityIdx) {
         case PARTNER_BOMBETTE:
             switch (entityType) {
                 default:
-                    return FALSE;
+                    return false;
                 case ENTITY_TYPE_BLUE_SWITCH:
                 case ENTITY_TYPE_RED_SWITCH:
                 case ENTITY_TYPE_MULTI_TRIGGER_BLOCK:
@@ -695,13 +695,13 @@ s32 entity_try_partner_interaction_trigger(s32 entityIdx) {
                 case ENTITY_TYPE_BOMBABLE_ROCK:
                     entity = get_entity_by_index(entityIdx);
                     entity->flags |= ENTITY_FLAG_PARTNER_COLLISION;
-                    interacted = TRUE;
+                    interacted = true;
             }
             break;
         case PARTNER_KOOPER:
              switch (entityType) {
                 default:
-                    return FALSE;
+                    return false;
                 case ENTITY_TYPE_BLUE_SWITCH:
                 case ENTITY_TYPE_RED_SWITCH:
                 case ENTITY_TYPE_MULTI_TRIGGER_BLOCK:
@@ -718,7 +718,7 @@ s32 entity_try_partner_interaction_trigger(s32 entityIdx) {
                 case ENTITY_TYPE_SUPER_BLOCK:
                     entity = get_entity_by_index(entityIdx);
                     entity->flags |= ENTITY_FLAG_PARTNER_COLLISION;
-                    interacted = TRUE;
+                    interacted = true;
             }
             break;
     }
@@ -773,11 +773,11 @@ void load_area_specific_entity_data(void) {
             DMA_COPY_SEGMENT(entity_default);
         }
 
-        isAreaSpecificEntityDataLoaded = TRUE;
+        isAreaSpecificEntityDataLoaded = true;
     }
 }
 
-void clear_entity_data(b32 arg0) {
+void clear_entity_data(bool arg0) {
     s32 i;
 
     D_801516FC = 1;
@@ -790,9 +790,9 @@ void clear_entity_data(b32 arg0) {
         gEntityHideMode = ENTITY_HIDE_MODE_0;
     }
 
-    isAreaSpecificEntityDataLoaded = FALSE;
+    isAreaSpecificEntityDataLoaded = false;
     gCurrentHiddenPanels.panelsCount = 0;
-    gCurrentHiddenPanels.activateISpy = FALSE;
+    gCurrentHiddenPanels.activateISpy = false;
     if (!arg0) {
         D_80151344 = 0;
     }
@@ -903,7 +903,7 @@ void entity_swizzle_anim_pointers(EntityBlueprint* entityData, void* baseAnim, v
     StaticAnimatorNode* node;
     s32* ptr = (s32*)((s32)baseAnim + (s32)entityData->modelAnimationNodes);
 
-    while (TRUE) {
+    while (true) {
         if (*ptr == -1) {
             *ptr = 0;
             return;
@@ -946,7 +946,7 @@ s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* blueprint, s32* loade
 
     *loadedStart = 0;
     *loadedEnd = 0;
-    ret = FALSE;
+    ret = false;
 
     if (gGameStatusPtr->context == CONTEXT_WORLD) {
         blueprints = wEntityBlueprint;
@@ -959,7 +959,7 @@ s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* blueprint, s32* loade
         if (bp == NULL) {
             blueprints[0] = blueprint;
             blueprints[1] = NULL;
-            ret = TRUE;
+            ret = true;
             if (blueprint->flags & ENTITY_FLAG_HAS_ANIMATED_MODEL) {
                 s32 size;
                 entDmaList = blueprint->dmaList;
@@ -1037,7 +1037,7 @@ void load_simple_entity_data(Entity* entity, EntityBlueprint* bp, s32 listIndex)
 }
 
 void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 listIndex) {
-    s32 swizzlePointers = FALSE;
+    s32 swizzlePointers = false;
     s32 loadedStart, loadedEnd;
     void* animBaseAddr;
     s16* animationScript;
@@ -1080,7 +1080,7 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
             entity->gfxBaseAddr = (void*)(gEntityHeapBottom + specialSize * 4);
             dma_copy(dmaList[1].start, dmaList[1].end, (void*)(gEntityHeapBottom + specialSize * 4 + dma1size * 4));
             animBaseAddr = (void*)(gEntityHeapBottom + specialSize * 4 + dma1size * 4);
-            swizzlePointers = TRUE;
+            swizzlePointers = true;
         } else if (is_entity_data_loaded(entity, entityData, &loadedStart, &loadedEnd)) {
             if (gGameStatusPtr->context == CONTEXT_WORLD) {
                 totalLoaded = wEntityDataLoadedSize;
@@ -1112,7 +1112,7 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
             } else {
                 bEntityDataLoadedSize = totalLoaded;
             }
-            swizzlePointers = TRUE;
+            swizzlePointers = true;
         } else {
             u32 temp = (dmaList[0].end - dmaList[0].start) >> 2;
             entity->gfxBaseAddr = (void*)(gEntityHeapBase - loadedStart * 4 - temp * 4);
@@ -1145,11 +1145,11 @@ s32 func_80111790(EntityBlueprint* data) {
 
         if (entity != NULL && entity->blueprint->dma.start != NULL) {
             if (entity->blueprint->dma.start == entity->blueprint) {
-                return TRUE;
+                return true;
             }
         }
     }
-    return FALSE;
+    return false;
 }
 
 void entity_free_static_data(EntityBlueprint* data) {
@@ -1358,7 +1358,7 @@ API_CALLABLE(MakeEntity) {
     s32 endOfArgs;
     s32* varArgBufPos;
 
-    if (isInitialCall != TRUE) {
+    if (isInitialCall != true) {
         return ApiStatus_DONE2;
     }
 
@@ -1426,7 +1426,7 @@ API_CALLABLE(UseDynamicShadow) {
 API_CALLABLE(AssignScript) {
     Bytecode* args = script->ptrReadPos;
 
-    if (isInitialCall == TRUE) {
+    if (isInitialCall == true) {
         EvtScript* toBind = (EvtScript*)evt_get_variable(script, *args++);
 
         get_entity_by_index(gLastCreatedEntityIndex)->boundScriptBytecode = toBind;
@@ -1439,7 +1439,7 @@ API_CALLABLE(AssignScript) {
 API_CALLABLE(AssignSwitchFlag) {
     Bytecode* args = script->ptrReadPos;
 
-    if (isInitialCall == TRUE) {
+    if (isInitialCall == true) {
         s32 areaFlag = evt_get_variable(script, *args++);
         Entity* entity = get_entity_by_index(gLastCreatedEntityIndex);
         SwitchData* data = entity->dataBuf.swtch;
@@ -1457,7 +1457,7 @@ API_CALLABLE(AssignSwitchFlag) {
 API_CALLABLE(AssignBlockFlag) {
     Bytecode* args = script->ptrReadPos;
 
-    if (isInitialCall == TRUE) {
+    if (isInitialCall == true) {
         s32 index = evt_get_variable_index(script, *args++);
 
         BlockData* data = get_entity_by_index(gLastCreatedEntityIndex)->dataBuf.block;
@@ -1472,7 +1472,7 @@ API_CALLABLE(AssignBlockFlag) {
 API_CALLABLE(AssignChestFlag) {
     Bytecode* args = script->ptrReadPos;
 
-    if (isInitialCall == TRUE) {
+    if (isInitialCall == true) {
         ChestData* data = get_entity_by_index(gLastCreatedEntityIndex)->dataBuf.chest;
         data->gameFlagIndex = evt_get_variable_index(script, *args);
 
@@ -1485,7 +1485,7 @@ API_CALLABLE(AssignChestFlag) {
 API_CALLABLE(AssignPanelFlag) {
     Bytecode* args = script->ptrReadPos;
 
-    if (isInitialCall == TRUE) {
+    if (isInitialCall == true) {
         HiddenPanelData* data = get_entity_by_index(gLastCreatedEntityIndex)->dataBuf.hiddenPanel;
 
         data->pickupVar = evt_get_variable_index(script, *args++);
@@ -1498,7 +1498,7 @@ API_CALLABLE(AssignPanelFlag) {
 API_CALLABLE(AssignCrateFlag) {
     Bytecode* args = script->ptrReadPos;
 
-    if (isInitialCall == TRUE) {
+    if (isInitialCall == true) {
         WoodenCrateData* data = get_entity_by_index(gLastCreatedEntityIndex)->dataBuf.crate;
 
         data->globalFlagIndex = evt_get_variable_index(script, *args++);
@@ -1528,23 +1528,23 @@ s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
 }
 
 s32 create_shadow_type(s32 type, f32 x, f32 y, f32 z) {
-    s32 isFixedSize = FALSE;
+    s32 isFixedSize = false;
     ShadowBlueprint* bp = &CircularShadowA;
     s32 shadowIndex;
 
     switch (type) {
         case SHADOW_FIXED_CIRCLE:
-            isFixedSize = TRUE;
+            isFixedSize = true;
         case SHADOW_VARYING_CIRCLE:
             bp = &CircularShadowA;
             break;
         case SHADOW_FIXED_SQUARE:
-            isFixedSize = TRUE;
+            isFixedSize = true;
         case SHADOW_VARYING_SQUARE:
             bp = &SquareShadow;
             break;
         case SHADOW_FIXED_ALT_CIRCLE:
-            isFixedSize = TRUE;
+            isFixedSize = true;
         case SHADOW_VARYING_ALT_CIRCLE:
             bp = &CircularShadowB;
             break;
@@ -1653,7 +1653,7 @@ s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32*
     *hitLength = 32767.0f;
     entityID = test_ray_entities(*x, *y, *z, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
     hitID = -1;
-    ret = FALSE;
+    ret = false;
 
     if ((entityID >= 0) && ((get_entity_type(entityID) != ENTITY_TYPE_PUSH_BLOCK) || (hitNx == 0.0f && hitNz == 0.0f && hitNy == 1.0))) {
         hitID = entityID | COLLISION_WITH_ENTITY_BIT;
@@ -1670,7 +1670,7 @@ s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32*
         *y = hitY;
         *hitYaw = -atan2(0.0f, 0.0f, hitNz * 100.0f, hitNy * 100.0f);
         *hitPitch = -atan2(0.0f, 0.0f, hitNx * 100.0f, hitNy * 100.0f);
-        ret = TRUE;
+        ret = true;
     } else {
         *hitYaw = 0.0f;
         *hitPitch = 0.0f;
@@ -1753,7 +1753,7 @@ s32 is_block_on_ground(Entity* block) {
 
     ret = hitLength;
     if (ret == 32767) {
-        ret = FALSE;
+        ret = false;
     }
 
     return ret;

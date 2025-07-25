@@ -29,7 +29,7 @@ EvtScript N(EVS_Main) = {
     Call(PlaySound, SOUND_LOOP_TIK19_WATER)
     Call(PlaySoundAtF, SOUND_LOOP_TIK19_FLOW3, SOUND_SPACE_WITH_DEPTH, 0, -20, 30)
     Call(PlaySoundAtF, SOUND_LOOP_TIK19_FLOW4, SOUND_SPACE_WITH_DEPTH, 270, -20, 30)
-    Call(EnableTexPanning, MODEL_nagare, TRUE)
+    Call(EnableTexPanning, MODEL_nagare, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(   70,  100,  100,  130)
@@ -37,7 +37,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         Exec(N(EVS_UpdateTexturePan))
     EndThread
-    Call(EnableTexPanning, MODEL_taki, TRUE)
+    Call(EnableTexPanning, MODEL_taki, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_4)
         TEX_PAN_PARAMS_STEP(  -50, -900,  -70,-1200)
@@ -45,7 +45,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         Exec(N(EVS_UpdateTexturePan))
     EndThread
-    Call(EnableTexPanning, MODEL_takib, TRUE)
+    Call(EnableTexPanning, MODEL_takib, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_5)
         TEX_PAN_PARAMS_STEP(    0,-1400,-2600,  -60)

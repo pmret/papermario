@@ -6,7 +6,7 @@
 
 EvtScript N(EVS_ExitDoors_pra_03_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_09_ENTRY_0)
     Set(LVar1, COLLIDER_deilittsw)
     Set(LVar2, MODEL_o772)
@@ -61,11 +61,11 @@ BombTrigger N(BombPos_Wall) = {
 
 EvtScript N(EVS_BlastWall) = {
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 38, 30, 1, 10, 30)
-    Call(EnableModel, MODEL_g260, FALSE)
-    Call(EnableModel, MODEL_g265, FALSE)
+    Call(EnableModel, MODEL_g260, false)
+    Call(EnableModel, MODEL_g265, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittse, COLLIDER_FLAGS_UPPER_MASK)
-    Call(EnableModel, MODEL_o952, TRUE)
-    Set(GF_PRA09_BombedWall, TRUE)
+    Call(EnableModel, MODEL_o952, true)
+    Set(GF_PRA09_BombedWall, true)
     Unbind
     Return
     End
@@ -76,15 +76,15 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(SetCamBGColor, CAM_DEFAULT, 24, 24, 40)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
-    IfEq(GF_PRA09_BombedWall, FALSE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
+    IfEq(GF_PRA09_BombedWall, false)
         BindTrigger(Ref(N(EVS_BlastWall)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Wall)), 1, 0)
-        Call(EnableModel, MODEL_o952, FALSE)
+        Call(EnableModel, MODEL_o952, false)
     Else
-        Call(EnableModel, MODEL_g260, FALSE)
-        Call(EnableModel, MODEL_g265, FALSE)
+        Call(EnableModel, MODEL_g260, false)
+        Call(EnableModel, MODEL_g265, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittse, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     Exec(N(EVS_SetupMusic))

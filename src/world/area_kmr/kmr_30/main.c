@@ -6,8 +6,8 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_MARIOS_HOUSE)
     Call(SetSpriteShading, SHADING_KMR_30)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
-    Call(EnableWorldStatusBar, FALSE)
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
+    Call(EnableWorldStatusBar, false)
     Thread
         Call(FadeOutMusic, 0, 0x00001388)
         Wait(390)

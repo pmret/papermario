@@ -15,14 +15,14 @@ EvtScript N(EVS_NpcIdle_Blooper) = {
             EndIf
         EndIf
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Exec(N(EVS_PlayBlooperSong))
     Call(ShowMessageAtScreenPos, MSG_MGM_0000, 160, 40)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, -25, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, -25, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(InterpPlayerYaw, 270, 0)
     Wait(20)
@@ -68,28 +68,28 @@ EvtScript N(EVS_NpcDefeat_Blooper) = {
     Call(NpcFlyTo, NPC_SELF, -40, -250, 0, 40, 0, EASING_LINEAR)
     Call(ResetCam, CAM_DEFAULT, Float(1.0))
     ExecWait(N(EVS_SpawnSwitch))
-    IfEq(GF_TIK_DefeatedOneBlooper, FALSE)
-        Set(GF_TIK_DefeatedOneBlooper, TRUE)
+    IfEq(GF_TIK_DefeatedOneBlooper, false)
+        Set(GF_TIK_DefeatedOneBlooper, true)
     Else
-        Set(GF_TIK_DefeatedTwoBloopers, TRUE)
+        Set(GF_TIK_DefeatedTwoBloopers, true)
     EndIf
-    Set(GF_TIK08_Defeated_Blooper, TRUE)
+    Set(GF_TIK08_Defeated_Blooper, true)
     Exec(N(EVS_SetupMusic))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(RemoveNpc, NPC_SELF)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Blooper) = {
-    IfEq(GF_TIK08_Defeated_Blooper, FALSE)
+    IfEq(GF_TIK08_Defeated_Blooper, false)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Blooper)))
         Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Blooper)))
-        IfEq(GF_TIK_DefeatedOneBlooper, FALSE)
+        IfEq(GF_TIK_DefeatedOneBlooper, false)
             Call(SetNpcScale, NPC_SELF, Float(0.75), Float(0.75), Float(0.75))
             Call(N(GetBlooperBattleID), 0)
         Else
-            IfEq(GF_TIK_DefeatedTwoBloopers, FALSE)
+            IfEq(GF_TIK_DefeatedTwoBloopers, false)
                 Call(SetNpcScale, NPC_SELF, Float(1.25), Float(1.25), Float(1.25))
                 Call(N(GetBlooperBattleID), 1)
             Else

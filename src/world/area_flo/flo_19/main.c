@@ -19,17 +19,17 @@ EvtScript N(EVS_BindExitTriggers) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_CLOUDY_CLIMB)
     Call(SetSpriteShading, SHADING_NONE)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
     EVT_SETUP_CAMERA_DEFAULT()
-    Set(GF_MAP_CloudyClimb, TRUE)
+    Set(GF_MAP_CloudyClimb, true)
     ExecWait(N(EVS_MakeEntities))
     Call(ParentColliderToModel, COLLIDER_o117, MODEL_o142)
-    Call(HidePlayerShadow, TRUE)
+    Call(HidePlayerShadow, true)
     Exec(N(EVS_SetupBeanstalk))
     Exec(N(EVS_SetupClouds))
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o122, SURFACE_TYPE_CLOUD)
-    Call(EnableTexPanning, MODEL_o59, TRUE)
-    Call(EnableTexPanning, MODEL_o60, TRUE)
+    Call(EnableTexPanning, MODEL_o59, true)
+    Call(EnableTexPanning, MODEL_o60, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP( -120,    0,    0,    0)
@@ -46,7 +46,7 @@ EvtScript N(EVS_Main) = {
     EndThread
     Call(GetEntryID, LVar0)
     IfNe(LVar0, flo_19_ENTRY_3)
-        Set(AF_FLO_RidingBeanstalk, FALSE)
+        Set(AF_FLO_RidingBeanstalk, false)
     EndIf
     Switch(LVar0)
         CaseEq(flo_19_ENTRY_0)

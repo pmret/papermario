@@ -1,12 +1,12 @@
 #include "hos_20.h"
 
 API_CALLABLE(N(CheckForSkipInput)) {
-    script->varTable[8] = FALSE;
+    script->varTable[8] = false;
     if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
-        script->varTable[8] = TRUE;
+        script->varTable[8] = true;
     }
     if (gGameStatusPtr->pressedButtons[0] & BUTTON_B) {
-        script->varTable[8] = TRUE;
+        script->varTable[8] = true;
     }
     return ApiStatus_DONE2;
 }
@@ -65,18 +65,18 @@ EvtScript N(EVS_AnimateStarship) = {
 };
 
 EvtScript N(EVS_Starship_Flight1) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAND)
     Call(InterpPlayerYaw, 135, 0)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Call(SetNpcYaw, NPC_PARTNER, 90)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(SetCamPitch, CAM_DEFAULT, Float(18.5), Float(-3.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Set(MV_Starship_PosX, -300)
     Set(MV_Starship_Yaw, 0)
     Exec(N(EVS_AnimateStarship))
@@ -124,7 +124,7 @@ EvtScript N(EVS_Starship_Flight1) = {
         Loop(215)
             Wait(1)
             Call(N(CheckForSkipInput))
-            IfEq(LVar8, TRUE)
+            IfEq(LVar8, true)
                 BreakLoop
             EndIf
         EndLoop
@@ -137,18 +137,18 @@ EvtScript N(EVS_Starship_Flight1) = {
 };
 
 EvtScript N(EVS_Starship_Flight2) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAND)
     Call(InterpPlayerYaw, 135, 0)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Call(SetNpcYaw, NPC_PARTNER, 90)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(SetCamPitch, CAM_DEFAULT, Float(18.5), Float(-3.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(PlaySound, SOUND_STARSHIP_ENGINE_LOOP)
     Set(MV_Starship_PosX, 0)
     Set(MV_Starship_Yaw, 0)
@@ -173,18 +173,18 @@ EvtScript N(EVS_Starship_Flight2) = {
 };
 
 EvtScript N(EVS_Starship_Return) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAND)
     Call(InterpPlayerYaw, 225, 0)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Call(SetNpcYaw, NPC_PARTNER, 270)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(SetCamPitch, CAM_DEFAULT, Float(18.5), Float(-3.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Set(MV_Starship_PosX, 300)
     Set(MV_Starship_Yaw, 180)
     Exec(N(EVS_AnimateStarship))
@@ -218,7 +218,7 @@ EvtScript N(EVS_Starship_Return) = {
     Loop(215)
         Wait(1)
         Call(N(CheckForSkipInput))
-        IfEq(LVar8, TRUE)
+        IfEq(LVar8, true)
             BreakLoop
         EndIf
     EndLoop

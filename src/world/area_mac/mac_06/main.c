@@ -49,7 +49,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_TOAD_TOWN)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     Exec(N(EVS_FlyingGull))
     Exec(N(EVS_WhaleMain))
     Call(SetMusic, 0, SONG_RIDING_THE_WHALE, 0, VOL_LEVEL_FULL)

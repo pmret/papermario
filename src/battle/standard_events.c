@@ -37,7 +37,7 @@ API_CALLABLE(AddEffectOffset) {
 // (in) LVar2: celebration end animID
 // (in) LVar3: idle animID
 EvtScript EVS_Partner_Celebrate = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Loop(2)
         Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
         Call(AddActorPos, ACTOR_SELF, 0, 6, 0)
@@ -95,21 +95,21 @@ EvtScript EVS_Partner_Celebrate = {
 // (in) LVar0: part idx
 // (in) LVar1: run animID
 EvtScript EVS_Partner_RunAway = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(SetActorYaw, ACTOR_SELF, 180)
     Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     Wait(10)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.2))
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
     Wait(5)
     Call(SetActorSpeed, ACTOR_SELF, Float(12.0))
     Call(SetGoalPos, ACTOR_PARTNER, -250, 0, 0)
-    Call(RunToGoal, ACTOR_PARTNER, 0, FALSE)
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(RunToGoal, ACTOR_PARTNER, 0, false)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };
@@ -133,7 +133,7 @@ EvtScript EVS_Partner_BurnContact = {
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.1))
     Call(SetJumpAnimations, ACTOR_PARTNER, 0, LVarA, LVarA, LVarA)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 5, FALSE, FALSE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 5, false, false, false)
     Set(LVar1, LVarA)
     Set(LVar2, LVarC)
     ExecWait(EVS_Partner_BurnHit)
@@ -154,13 +154,13 @@ EvtScript EVS_Partner_BurnContact = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.4))
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 15, false, true, false)
     Sub(LVar0, 20)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
     Sub(LVar0, 10)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, false, true, false)
     Return
     End
 };
@@ -182,7 +182,7 @@ EvtScript EVS_Partner_SpikeContact = {
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.1))
     Call(SetJumpAnimations, ACTOR_PARTNER, 0, LVarA, LVarA, LVarA)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 5, FALSE, FALSE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 5, false, false, false)
     Set(LVar1, LVarA)
     Set(LVar2, 0)
     ExecWait(EVS_Partner_Hit)
@@ -203,13 +203,13 @@ EvtScript EVS_Partner_SpikeContact = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.4))
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 15, false, true, false)
     Sub(LVar0, 20)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
     Sub(LVar0, 10)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, false, true, false)
     Return
     End
 };
@@ -233,7 +233,7 @@ EvtScript EVS_Partner_BombetteSpikeContact = {
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.1))
     Call(SetJumpAnimations, ACTOR_PARTNER, 0, LVarA, LVarA, LVarA)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 5, FALSE, FALSE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 5, false, false, false)
     Set(LVar1, LVarA)
     Set(LVar2, 0)
     ExecWait(EVS_Partner_Hit)
@@ -254,19 +254,19 @@ EvtScript EVS_Partner_BombetteSpikeContact = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.4))
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 15, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarC)
     Wait(1)
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarA)
     Sub(LVar0, 20)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarC)
     Wait(1)
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarA)
     Sub(LVar0, 10)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, false, true, false)
     Return
     End
 };
@@ -288,7 +288,7 @@ EvtScript EVS_Partner_ShockHit = {
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.1))
     Call(SetJumpAnimations, ACTOR_PARTNER, 0, LVarA, LVarA, LVarA)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 5, FALSE, FALSE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 5, false, false, false)
     Call(ShowShockEffect, ACTOR_SELF)
     Set(LVar1, LVarA)
     Set(LVar2, 0)
@@ -310,13 +310,13 @@ EvtScript EVS_Partner_ShockHit = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.4))
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 15, false, true, false)
     Sub(LVar0, 20)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
     Sub(LVar0, 10)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, false, true, false)
     Return
     End
 };
@@ -341,7 +341,7 @@ EvtScript EVS_Partner_UnusedShockHit = {
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.1))
     Call(SetJumpAnimations, ACTOR_PARTNER, 0, LVarA, LVarA, LVarA)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 5, FALSE, FALSE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 5, false, false, false)
     Call(ShowShockEffect, ACTOR_SELF)
     Set(LVar1, LVarA)
     Set(LVar2, 0)
@@ -363,19 +363,19 @@ EvtScript EVS_Partner_UnusedShockHit = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.4))
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 15, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarC)
     Wait(1)
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarA)
     Sub(LVar0, 20)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarC)
     Wait(1)
     Call(SetAnimation, ACTOR_PARTNER, -1, LVarA)
     Sub(LVar0, 10)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, false, true, false)
     Return
     End
 };
@@ -392,10 +392,10 @@ EvtScript EVS_Partner_Recover = {
     Call(SetAnimation, ACTOR_PARTNER, -1, LVar2)
     IfEq(LVar6, 0)
         Call(SetGoalPos, ACTOR_PARTNER, LVar7, LVar6, LVar9)
-        Call(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_PARTNER, 15, false, true, false)
     Else
         Call(SetGoalPos, ACTOR_PARTNER, LVar7, LVar6, LVar9)
-        Call(JumpToGoal, ACTOR_PARTNER, 15, FALSE, FALSE, FALSE)
+        Call(JumpToGoal, ACTOR_PARTNER, 15, false, false, false)
     EndIf
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetActorSpeed, ACTOR_PARTNER, Float(6.0))
@@ -420,11 +420,11 @@ EvtScript EVS_Partner_Drop = {
         Set(LVar1, 0)
         Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
         Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
         Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_PARTNER, 8, false, true, false)
         Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_PARTNER, 5, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_PARTNER, 5, false, true, false)
         Wait(8)
     Label(10)
     Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -1174,7 +1174,7 @@ EvtScript EVS_ForceNextTarget = {
     Call(InitTargetIterator)
     Label(2)
         Call(GetOwnerTarget, LVar0, LVar1)
-        Call(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+        Call(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, true)
         Call(ChooseNextTarget, ITER_NEXT, LVar0)
         IfNe(LVar0, ITER_NO_MORE)
             Goto(2)
@@ -1235,7 +1235,7 @@ EvtScript EVS_Enemy_Hit = {
                     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.01))
                     Add(LVar1, 55)
                     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
+                    Call(JumpToGoal, ACTOR_SELF, 10, false, false, false)
             EndSwitch
             Set(LVar5, 0)
             Loop(30)
@@ -1254,18 +1254,18 @@ EvtScript EVS_Enemy_Hit = {
                     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
                     IfEq(LVar1, 0)
                         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
                         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                        Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
                         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                        Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
                     Else
                         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, FALSE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 15, false, false, false)
                         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                        Call(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 10, false, false, false)
                         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                        Call(JumpToGoal, ACTOR_SELF, 5, FALSE, FALSE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 5, false, false, false)
                     EndIf
             EndSwitch
         CaseOrEq(DMG_SRC_NEXT_SLAP_LEFT)
@@ -1492,7 +1492,7 @@ EvtScript EVS_Enemy_Hit_Impl = {
 EvtScript EVS_Enemy_BurnHit = {
     Call(GetLastEvent, ACTOR_SELF, LVar3)
     IfEq(LVar3, EVENT_BURN_DEATH)
-        Call(EnableActorGlow, ACTOR_SELF, FALSE)
+        Call(EnableActorGlow, ACTOR_SELF, false)
     EndIf
     Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     Call(GetDamageSource, LVar3)
@@ -1508,7 +1508,7 @@ EvtScript EVS_Enemy_BurnHit = {
                     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.01))
                     Add(LVar5, 55)
                     Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                    Call(JumpToGoal, ACTOR_SELF, 8, FALSE, FALSE, FALSE)
+                    Call(JumpToGoal, ACTOR_SELF, 8, false, false, false)
             EndSwitch
             Set(LVar7, 0)
             Loop(30)
@@ -1527,18 +1527,18 @@ EvtScript EVS_Enemy_BurnHit = {
                     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
                     IfEq(LVar5, 0)
                         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
                         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
                         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
                     Else
                         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, FALSE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 15, false, false, false)
                         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        Call(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 10, false, false, false)
                         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-                        Call(JumpToGoal, ACTOR_SELF, 5, FALSE, FALSE, FALSE)
+                        Call(JumpToGoal, ACTOR_SELF, 5, false, false, false)
                     EndIf
             EndSwitch
         CaseDefault
@@ -1706,8 +1706,8 @@ EvtScript EVS_Enemy_Death = {
 // in LVar2: if set to EXEC_DEATH_NO_SPINNING, the actor will not spin around
 EvtScript EVS_Enemy_DeathWithoutRemove = {
     Call(HideHealthBar, ACTOR_SELF)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
-    Call(EnableActorGlow, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
+    Call(EnableActorGlow, ACTOR_SELF, false)
     IfNe(LVar1, -1)
         Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
         Wait(10)
@@ -1725,7 +1725,7 @@ EvtScript EVS_Enemy_DeathWithoutRemove = {
         CaseOrEq(DMG_SRC_SPIN_SMASH)
         EndCaseGroup
         CaseDefault
-            Set(LFlag0, FALSE)
+            Set(LFlag0, false)
             Call(GetOriginalActorType, ACTOR_SELF, LVar1)
             Switch(LVar1)
                 CaseOrEq(ACTOR_TYPE_BOB_OMB)
@@ -1772,14 +1772,14 @@ EvtScript EVS_Enemy_ScareAway = {
     Add(LVarD, 20)
     IfNotFlag(LVar9, ACTOR_FLAG_FLYING)
         Call(SetGoalPos, ACTOR_SELF, LVarA, LVarD, LVarC)
-        Call(JumpToGoal, ACTOR_SELF, 3, FALSE, FALSE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 3, false, false, false)
         Wait(20)
         Call(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
-        Call(EnableActorGlow, ACTOR_SELF, FALSE)
+        Call(EnableActorGlow, ACTOR_SELF, false)
         Call(FallToGoal, ACTOR_SELF, 7)
     Else
         Wait(15)
-        Call(EnableActorGlow, ACTOR_SELF, FALSE)
+        Call(EnableActorGlow, ACTOR_SELF, false)
     EndIf
     Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     Wait(17)
@@ -1789,10 +1789,10 @@ EvtScript EVS_Enemy_ScareAway = {
     Call(SetActorSpeed, ACTOR_SELF, Float(10.0))
     Add(LVarA, 300)
     Call(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     ExecWait(EVS_ForceNextTarget)
     Call(HideHealthBar, ACTOR_SELF)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(RemoveActor, ACTOR_SELF)
     Return
     End
@@ -1827,7 +1827,7 @@ EvtScript EVS_Enemy_SpinSmash_HitNext = {
         Call(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
         Call(SetActorJumpGravity, ACTOR_SELF, Float(0.1))
         Call(SetActorSpeed, ACTOR_SELF, Float(7.0))
-        Call(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 0, false, true, false)
         ChildThread
             Call(ShakeCam, CAM_BATTLE, 0, 2, Float(1.0))
         EndChildThread
@@ -1853,7 +1853,7 @@ EvtScript EVS_Enemy_SpinSmash_HitNext = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.1))
     Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
     Call(SetGoalPos, ACTOR_SELF, 296, 0, 0)
-    Call(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 0, false, true, false)
     Return
     End
 };
@@ -1903,13 +1903,13 @@ EvtScript EVS_Enemy_SpinSmashHit = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.4))
     Call(SetActorSpeed, ACTOR_SELF, Float(10.0))
     Call(AddGoalPos, ACTOR_SELF, -30, 0, 0)
-    Call(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 0, false, true, false)
     Exec(EVS_Enemy_SpinSmash_ShakeCam)
     Call(AddGoalPos, ACTOR_SELF, 20, 0, 0)
-    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
     Exec(EVS_Enemy_SpinSmash_ShakeCam)
     Call(AddGoalPos, ACTOR_SELF, 10, 0, 0)
-    Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
     Exec(EVS_Enemy_SpinSmash_ShakeCam)
     Wait(15)
     Label(0)
@@ -1962,11 +1962,11 @@ EvtScript EVS_Enemy_Knockback = {
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.4))
     Call(AddGoalPos, ACTOR_SELF, 30, 0, 0)
-    Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
     Call(AddGoalPos, ACTOR_SELF, 15, 0, 0)
-    Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
     Call(AddGoalPos, ACTOR_SELF, 5, 0, 0)
-    Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
     Return
     End
 };
@@ -1979,7 +1979,7 @@ EvtScript EVS_Enemy_ReturnHome = {
     IfGe(LVar9, Float(8.0))
         Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
         Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
-        Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+        Call(RunToGoal, ACTOR_SELF, 0, false)
     EndIf
     Call(SetActorYaw, ACTOR_SELF, 0)
     Return
@@ -1993,10 +1993,10 @@ EvtScript EVS_Enemy_Recover = {
     Call(GetActorFlags, ACTOR_SELF, LVar0)
     IfFlag(LVar0, ACTOR_FLAG_FLYING)
         Call(SetGoalPos, ACTOR_SELF, LVar7, LVar8, LVar9)
-        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, FALSE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 15, false, false, false)
     Else
         Call(SetGoalPos, ACTOR_SELF, LVar7, LVar8, LVar9)
-        Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
     EndIf
     Return
     End
@@ -2030,23 +2030,23 @@ EvtScript EVS_Enemy_HopToPos = {
             Sub(LVar4, LVar3)
             IfLt(LVar4, 30)
                 Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+                Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
             Else
                 Set(LVar4, LVar3)
                 Add(LVar3, 30)
                 Call(SetGoalPos, ACTOR_SELF, LVar3, LVar1, LVar2)
-                Call(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
+                Call(JumpToGoal, ACTOR_SELF, 0, false, true, false)
             EndIf
         Else
             Set(LVar4, LVar3)
             Sub(LVar4, LVar0)
             IfLt(LVar4, 30)
                 Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+                Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
             Else
                 Sub(LVar3, 30)
                 Call(SetGoalPos, ACTOR_SELF, LVar3, LVar1, LVar2)
-                Call(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
+                Call(JumpToGoal, ACTOR_SELF, 0, false, true, false)
             EndIf
         EndIf
         Goto(0)
@@ -2078,56 +2078,56 @@ EvtScript EVS_Enemy_BlowAway = {
     IfNotFlag(LVar5, STATUS_FLAGS_IMMOBILIZED)
         Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     Else
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         IfFlag(LVar2, STATUS_FLAG_SLEEP)
             IfFlag(LVar5, STATUS_FLAG_SLEEP)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
         IfFlag(LVar2, STATUS_FLAG_STATIC)
             IfFlag(LVar5, STATUS_FLAG_STATIC)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
         IfFlag(LVar2, STATUS_FLAG_FROZEN)
             IfFlag(LVar5, STATUS_FLAG_FROZEN)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
         IfFlag(LVar2, STATUS_FLAG_FEAR)
             IfFlag(LVar5, STATUS_FLAG_FEAR)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
         IfFlag(LVar2, STATUS_FLAG_PARALYZE)
             IfFlag(LVar5, STATUS_FLAG_PARALYZE)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
         IfFlag(LVar2, STATUS_FLAG_POISON)
             IfFlag(LVar5, STATUS_FLAG_POISON)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
         IfFlag(LVar2, STATUS_FLAG_DIZZY)
             IfFlag(LVar5, STATUS_FLAG_DIZZY)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
         IfFlag(LVar5, STATUS_FLAG_SHRINK)
-            Set(LFlag0, TRUE)
+            Set(LFlag0, true)
         EndIf
         IfFlag(LVar2, STATUS_FLAG_STONE)
             IfFlag(LVar5, STATUS_FLAG_STONE)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
         IfFlag(LVar2, STATUS_FLAG_KO)
             IfFlag(LVar5, STATUS_FLAG_KO)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
-        IfEq(LFlag0, TRUE)
+        IfEq(LFlag0, true)
             Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
         EndIf
     EndIf

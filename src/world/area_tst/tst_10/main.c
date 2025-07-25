@@ -20,7 +20,7 @@ MapSettings N(settings) = {
 
 // note: sets DisablePlayerInput, but does not use EVT_GROUP_EXIT_MAP
 EvtScript N(EVS_ExitWalk_tst_10_2) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseExitHeading, 60, tst_10_ENTRY_0)
     Exec(ExitWalk)
     Call(GotoMap, Ref("tst_10"), tst_10_ENTRY_2)
@@ -31,7 +31,7 @@ EvtScript N(EVS_ExitWalk_tst_10_2) = {
 
 // note: sets DisablePlayerInput, but does not use EVT_GROUP_EXIT_MAP
 EvtScript N(EVS_ExitWalk_tst_10_3) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseExitHeading, 60, tst_10_ENTRY_1)
     Exec(ExitWalk)
     Call(GotoMap, Ref("tst_10"), tst_10_ENTRY_3)
@@ -42,7 +42,7 @@ EvtScript N(EVS_ExitWalk_tst_10_3) = {
 
 // note: sets DisablePlayerInput, but does not use EVT_GROUP_EXIT_MAP
 EvtScript N(EVS_ExitWalk_tst_10_0) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseExitHeading, 60, tst_10_ENTRY_2)
     Exec(ExitWalk)
     Call(GotoMap, Ref("tst_10"), tst_10_ENTRY_0)
@@ -53,7 +53,7 @@ EvtScript N(EVS_ExitWalk_tst_10_0) = {
 
 // note: sets DisablePlayerInput, but does not use EVT_GROUP_EXIT_MAP
 EvtScript N(EVS_ExitWalk_tst_10_1) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseExitHeading, 60, tst_10_ENTRY_3)
     Exec(ExitWalk)
     Call(GotoMap, Ref("tst_10"), tst_10_ENTRY_1)
@@ -63,11 +63,11 @@ EvtScript N(EVS_ExitWalk_tst_10_1) = {
 };
 
 EvtScript N(EVS_DisableExitCameraZones) = {
-    Call(SetZoneEnabled, ZONE_north, FALSE)
-    Call(SetZoneEnabled, ZONE_west,  FALSE)
-    Call(SetZoneEnabled, ZONE_south, FALSE)
-    Call(SetZoneEnabled, ZONE_east,  FALSE)
-    Set(AF_TST_00, FALSE)
+    Call(SetZoneEnabled, ZONE_north, false)
+    Call(SetZoneEnabled, ZONE_west,  false)
+    Call(SetZoneEnabled, ZONE_south, false)
+    Call(SetZoneEnabled, ZONE_east,  false)
+    Set(AF_TST_00, false)
     Return
     End
 };
@@ -86,14 +86,14 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
     ExecWait(N(EVS_MakeEntities))
-    IfEq(AF_TST_00, TRUE)
-        Call(SetZoneEnabled, ZONE_north, FALSE)
-        Call(SetZoneEnabled, ZONE_west,  FALSE)
-        Call(SetZoneEnabled, ZONE_south, FALSE)
-        Call(SetZoneEnabled, ZONE_east,  FALSE)
-        Set(AF_TST_00, FALSE)
+    IfEq(AF_TST_00, true)
+        Call(SetZoneEnabled, ZONE_north, false)
+        Call(SetZoneEnabled, ZONE_west,  false)
+        Call(SetZoneEnabled, ZONE_south, false)
+        Call(SetZoneEnabled, ZONE_east,  false)
+        Set(AF_TST_00, false)
     Else
-        Set(AF_TST_00, TRUE)
+        Set(AF_TST_00, true)
         BindTrigger(Ref(N(EVS_DisableExitCameraZones)), TRIGGER_FLOOR_TOUCH, COLLIDER_change, 1, 0)
     EndIf
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))

@@ -509,7 +509,7 @@ HitID player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32*
 
     hitID = player_raycast_general(PLAYER_COLLISION_0, *x, *y + 0.1, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
     if (hitID > NO_COLLIDER && hitDepth <= depth) {
-        *hasClimbableStep = TRUE;
+        *hasClimbableStep = true;
     }
 
     depth = length + radius;
@@ -636,7 +636,7 @@ void update_player(void) {
     collisionStatus->curWall = NO_COLLIDER;
     collisionStatus->lastWallHammered = NO_COLLIDER;
     collisionStatus->curInspect = NO_COLLIDER;
-    collisionStatus->floorBelow = TRUE;
+    collisionStatus->floorBelow = true;
 
     update_player_input();
     playerStatus->flags &= ~PS_FLAG_SPECIAL_LAND;
@@ -792,16 +792,16 @@ void player_reset_data(void) {
     func_800E5520();
 }
 
-b32 is_player_dismounted(void) {
+bool is_player_dismounted(void) {
     if (gPartnerStatus.partnerActionState == PARTNER_ACTION_USE &&
         (gPartnerStatus.actingPartner == PARTNER_WATT
         || gPartnerStatus.actingPartner == PARTNER_BOW
         || gPartnerStatus.actingPartner == PARTNER_SUSHIE
         || gPartnerStatus.actingPartner == PARTNER_PARAKARRY
         || gPartnerStatus.actingPartner == PARTNER_LAKILESTER)) {
-        return FALSE;
+        return false;
     }
-    return TRUE;
+    return true;
 }
 
 s32 get_overriding_player_anim(s32 anim) {
@@ -891,7 +891,7 @@ void suggest_player_anim_always_forward(AnimID anim) {
 
 void update_player_blink(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 outtaSight = FALSE;
+    s32 outtaSight = false;
     u8 phi_v1;
     u8* alpha;
 
@@ -986,14 +986,14 @@ void func_800E01DC(void) {
     }
 }
 
-b32 check_player_action_debug(void) {
-    b32 ret = FALSE;
+bool check_player_action_debug(void) {
+    bool ret = false;
 
     if (gGameStatusPtr->debugScripts != DEBUG_SCRIPTS_NONE && (gGameStatusPtr->curButtons[0] & BUTTON_R)) {
         if (gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE) {
             set_action_state(ACTION_STATE_IDLE);
         }
-        ret = TRUE;
+        ret = true;
     }
     return ret;
 }
@@ -1084,7 +1084,7 @@ void clear_pulse_stone_icon(void) {
 s32 has_valid_conversation_npc(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = playerStatus->encounteredNPC;
-    s32 ret = FALSE;
+    s32 ret = false;
     s32 cond;
 
     if (npc != NULL && !(npc->flags & NPC_FLAG_USE_INSPECT_ICON)) {
@@ -1141,10 +1141,10 @@ s32 func_800E06D8(void) {
     s32 currentWall;
 
     if (playerStatus->timeInAir != 0 || playerStatus->inputDisabledCount != 0) {
-        return FALSE;
+        return false;
     }
     if (gCollisionStatus.curWall == NO_COLLIDER) {
-        return FALSE;
+        return false;
     }
     if (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC
         && !(playerStatus->flags & PS_FLAG_INPUT_DISABLED)
@@ -1152,31 +1152,31 @@ s32 func_800E06D8(void) {
         && npc->flags & NPC_FLAG_USE_INSPECT_ICON
     ) {
         playerStatus->interactingWithID = NO_COLLIDER;
-        return TRUE;
+        return true;
     }
 
     currentWall = gCollisionStatus.curWall;
     if (!(currentWall & COLLISION_WITH_ENTITY_BIT)) {
         if (!should_collider_allow_interact(currentWall)) {
-            return FALSE;
+            return false;
         }
     } else if (!phys_can_player_interact()) {
         playerStatus->interactingWithID = NO_COLLIDER;
-        return FALSE;
+        return false;
     } else if (get_entity_type(currentWall) == ENTITY_TYPE_PUSH_BLOCK) {
-        return FALSE;
+        return false;
     }
 
     if (interactingID == currentWall) {
         if (playerStatus->flags & PS_FLAG_INTERACTED) {
-            return FALSE;
+            return false;
         }
     } else {
         playerStatus->flags &= ~PS_FLAG_INTERACTED;
     }
     playerStatus->interactingWithID = NO_COLLIDER;
 
-    return TRUE;
+    return true;
 }
 
 static const f32 padding = 0.0f;

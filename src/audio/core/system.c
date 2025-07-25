@@ -8,7 +8,7 @@ NUAuPreNMIFunc nuAuPreNMIFunc = NULL;
 s32 nuAuDmaNext = 0;
 u32 nuAuFrameCounter = 0;
 u8 nuAuTaskStop = NU_AU_TASK_RUN;
-u8 volatile AuSynUseStereo = TRUE;
+u8 volatile AuSynUseStereo = true;
 
 BSS u16 AuInitialGlobalVolume;
 BSS OSThread nuAuMgrThread;
@@ -136,7 +136,7 @@ void nuAuMgr(void* arg) {
     samples = 0;
     cmdListBuf = AlCmdListBuffers[0];
     bufferPtr = D_800A3628[0];
-    while (TRUE) {
+    while (true) {
         osRecvMesg(&auMesgQ, (OSMesg*)&mesg_type, OS_MESG_BLOCK);
         switch (*mesg_type) {
             case NU_SC_RETRACE_MSG:
@@ -155,7 +155,7 @@ void nuAuMgr(void* arg) {
                     }
                 }
                 if (osAiGetStatus() & AI_STATUS_FIFO_FULL) {
-                    cond = FALSE;
+                    cond = false;
                     continue;
                 }
                 sampleSize = osAiGetLength() >> 2;
@@ -166,10 +166,10 @@ void nuAuMgr(void* arg) {
                 }
                 if (sampleSize < AUDIO_MAX_SAMPLES || cond) {
                     samples = AlFrameSize;
-                    cond = FALSE;
+                    cond = false;
                 } else {
                     samples = AlMinFrameSize;
-                    cond = TRUE;
+                    cond = true;
                 }
                 cmdListAfter_ptr = alAudioFrame(cmdListBuf, &cmdList_len, (s16*)osVirtualToPhysical(bufferPtr), samples);
                 if (nuAuPreNMIFunc != 0 && nuAuPreNMI != 0) {
@@ -264,7 +264,7 @@ ALDMAproc nuAuDmaNew(NUDMAState** state) {
     if (!nuAuDmaState.initialized) {
         nuAuDmaState.firstFree = &nuAuDmaBufList[0];
         nuAuDmaState.firstUsed = NULL;
-        nuAuDmaState.initialized = TRUE;
+        nuAuDmaState.initialized = true;
     }
 
     nuAuDmaNext = 0;

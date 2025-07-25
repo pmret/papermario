@@ -20,12 +20,12 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
             Goto(11)
         EndIf
     Call(InterruptUsePartner)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetMusic, 0, SONG_JR_TROOPA_THEME, 0, VOL_LEVEL_FULL)
     Call(SpeakToPlayer, NPC_JrTroopa, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 0, MSG_CH7_00D8)
     Call(SetNpcJumpscale, NPC_JrTroopa, Float(1.0))
     Call(NpcJump0, NPC_JrTroopa, 520, 0, -68, 20 * DT)
-    Call(PlayerFaceNpc, NPC_JrTroopa, FALSE)
+    Call(PlayerFaceNpc, NPC_JrTroopa, false)
     Wait(15 * DT)
     Call(GetNpcPos, NPC_JrTroopa, LVar0, LVar1, LVar2)
     Add(LVar0, -20)
@@ -34,7 +34,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(225.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-8.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_JrTroopa, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_Idle, 0, MSG_CH7_00D9)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -42,7 +42,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_JrTroopa, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 0, MSG_CH7_00DA)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -57,7 +57,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
         Call(NpcMoveTo, NPC_JrTroopa, LVar3, LVar5, 0)
     EndThread
     Call(StartBossBattle, SONG_JR_TROOPA_BATTLE)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Return
     End
 };
@@ -74,9 +74,9 @@ EvtScript N(EVS_NpcHit_JrTroopaHitbox) = {
         CaseOrEq(ENCOUNTER_TRIGGER_JUMP)
         CaseOrEq(ENCOUNTER_TRIGGER_HAMMER)
         CaseOrEq(ENCOUNTER_TRIGGER_PARTNER)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Hurt, ANIM_JrTroopa_Collapse, 5, MSG_CH7_00DF)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
         EndCaseGroup
     EndSwitch
     Return
@@ -96,11 +96,11 @@ EvtScript N(EVS_NpcDefeat_JrTroopa) = {
             Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
             Call(SetCamDistance, CAM_DEFAULT, Float(200.0))
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Thread
                 Wait(5 * DT)
-                Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+                Call(PanToTarget, CAM_DEFAULT, 0, false)
                 Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                 Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
@@ -110,11 +110,11 @@ EvtScript N(EVS_NpcDefeat_JrTroopa) = {
             Call(SetNpcPos, NPC_JrTroopa_Hitbox, LVar0, LVar1, LVar2)
             Call(SetNpcCollisionSize, NPC_JrTroopa, 26, 24)
             Call(SetNpcCollisionSize, NPC_JrTroopa_Hitbox, 26, 24)
-            Call(SetNpcFlagBits, NPC_JrTroopa_Hitbox, NPC_FLAG_INVISIBLE, TRUE)
+            Call(SetNpcFlagBits, NPC_JrTroopa_Hitbox, NPC_FLAG_INVISIBLE, true)
             Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_JrTroopa)))
             Call(BindNpcHit, NPC_JrTroopa_Hitbox, Ref(N(EVS_NpcHit_JrTroopaHitbox)))
             Exec(N(EVS_SetupMusic))
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
         CaseEq(OUTCOME_PLAYER_FLED)
     EndSwitch
     Return
@@ -130,7 +130,7 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
         CaseGe(STORY_CH7_DEFEATED_JR_TROOPA)
             Call(SetNpcPos, NPC_JrTroopa, 399, 6, -100)
             Call(SetNpcAnimation, NPC_JrTroopa, ANIM_JrTroopa_Collapse)
-            Call(EnableModel, MODEL_o44, TRUE)
+            Call(EnableModel, MODEL_o44, true)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o44, COLLIDER_FLAGS_UPPER_MASK)
     EndSwitch
     Return

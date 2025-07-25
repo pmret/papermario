@@ -38,10 +38,10 @@ EvtScript N(EVS_EnterMap) = {
 };
 
 EvtScript N(EVS_HidePlayroomPipe) = {
-    IfEq(GF_MAC03_UnlockedPlayroom, FALSE)
+    IfEq(GF_MAC03_UnlockedPlayroom, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_dokan, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilim, COLLIDER_FLAGS_UPPER_MASK)
-        Call(EnableModel, MODEL_o241, FALSE)
+        Call(EnableModel, MODEL_o241, false)
     EndIf
     Return
     End
@@ -64,13 +64,13 @@ EvtScript N(EVS_Main) = {
     Call(GetLanguage, LVar0)
     Call(SetModelTexVariant, MODEL_o110, LVar0)
 #endif
-    Set(AF_MAC_20, FALSE)
-    Set(AF_MAC_21, FALSE)
-    Set(AF_MAC_22, FALSE)
-    Set(AF_MAC_23, FALSE)
-    Set(AF_MAC_24, FALSE)
-    Set(AF_MAC_25, FALSE)
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Set(AF_MAC_20, false)
+    Set(AF_MAC_21, false)
+    Set(AF_MAC_22, false)
+    Set(AF_MAC_23, false)
+    Set(AF_MAC_24, false)
+    Set(AF_MAC_25, false)
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     Exec(N(EVS_MakeEntities))
     Exec(N(EVS_SetupFoliage))
     Call(GetDemoState, LVar0)
@@ -96,7 +96,7 @@ EvtScript N(EVS_Main) = {
     Exec(N(EVS_SetupMusic))
     Exec(N(EVS_HidePlayroomPipe))
     Exec(N(EVS_EnterMap))
-    Set(GF_MAC01_RowfBadgesChosen, FALSE)
+    Set(GF_MAC01_RowfBadgesChosen, false)
     Wait(1)
     Return
     End

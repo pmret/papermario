@@ -541,7 +541,7 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     s32 margin, margin2;
     s32 state;
 
-    if (evt_get_variable(NULL, GF_Tutorial_Badges) == FALSE) {
+    if (evt_get_variable(NULL, GF_Tutorial_Badges) == false) {
         return;
     }
 

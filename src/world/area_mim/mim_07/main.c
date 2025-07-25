@@ -21,12 +21,12 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_MIM_07)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 650)
     Call(SetCamBGColor, CAM_DEFAULT, 0, 0, 0)
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
     Set(AB_MIM_2, GB_MIM_CurrentMapID)
     Call(GetMapID, GB_MIM_CurrentMapID)
     ExecWait(N(EVS_SetupGates))
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
     Exec(EnterWalk)
@@ -39,10 +39,10 @@ EvtScript N(EVS_Main) = {
         Call(UseSettingsFrom, CAM_DEFAULT, 500, -100, 0)
         Call(SetPanTarget, CAM_DEFAULT, 530, 0, 0)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Wait(1)
         Thread
-            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+            Call(PanToTarget, CAM_DEFAULT, 0, false)
             Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
         EndThread
     Else

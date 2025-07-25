@@ -1,9 +1,9 @@
 #include "MontyMole.h"
 
 EvtScript N(EVS_NpcAuxAI_MontyMole_GroundAmbush) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Sub(LVar1, 30)
     Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -12,7 +12,7 @@ EvtScript N(EVS_NpcAuxAI_MontyMole_GroundAmbush) = {
 };
 
 EvtScript N(EVS_NpcAuxAI_MontyMole_GroundAmbush_Hole) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Sub(LVar1, 30)
     Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -39,7 +39,7 @@ MobileAISettings N(AISettings_MontyMole_GroundAmbush) = {
 EvtScript N(EVS_NpcAI_MontyMole_GroundAmbush) = {
     Call(func_800445D4, LVar0)
     IfEq(LVar0, 100)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, TRUE)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, true)
         Label(10)
         Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         Call(IsPlayerWithin, LVar0, LVar2, 80, LVar3)
@@ -53,8 +53,8 @@ EvtScript N(EVS_NpcAI_MontyMole_GroundAmbush) = {
         Add(LVar2, 30)
         Call(SetNpcPos, LVar0, LVar1, LVar2, LVar3)
         Wait(1)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, FALSE)
-        Call(EnableNpcShadow, NPC_SELF, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, false)
+        Call(EnableNpcShadow, NPC_SELF, true)
         Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Anim0E)
         Call(GetNpcPos, NPC_SELF, LVar4, LVar5, LVar6)
         Add(LVar5, 30)
@@ -62,9 +62,9 @@ EvtScript N(EVS_NpcAI_MontyMole_GroundAmbush) = {
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
         Call(NpcJump0, NPC_SELF, LVar4, LVar5, LVar6, 20)
         Call(SetNpcPos, LVar0, NPC_DISPOSE_LOCATION)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, FALSE)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, false)
         Call(NpcFacePlayer, NPC_SELF, 0)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, true)
         Call(BasicAI_Main, Ref(N(AISettings_MontyMole_GroundAmbush)))
         Return
         End

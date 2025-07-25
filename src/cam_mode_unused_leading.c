@@ -21,12 +21,12 @@ void update_camera_unused_leading(Camera* camera) {
         camera->unusedLeadAmt = 0.0f;
         camera->interpYaw = 0.0f;
         camera->curBoomYaw = 0.0f;
-        camera->needsInit = FALSE;
+        camera->needsInit = false;
         camera->unusedLeadCounter = 0;
         camera->lookAt_obj.x = camera->targetPos.x;
         camera->lookAt_obj.y = camera->targetPos.y + camera->targetOffsetY;
         camera->lookAt_obj.z = camera->targetPos.z;
-        interp_lookat_pos(camera, 0.0f, 0.0f, FALSE);
+        interp_lookat_pos(camera, 0.0f, 0.0f, false);
     } else {
         f32 maxInterpSpeed = (playerStatus->curSpeed * 1.5f) + 1.0f;
         f32 interpRate = (playerStatus->curSpeed * 0.05f) + 0.05f;
@@ -36,11 +36,11 @@ void update_camera_unused_leading(Camera* camera) {
         camera->lookAt_obj_target.z = camera->targetPos.z;
         update_unused_lead_amt(camera);
         if (!(camera->moveFlags & CAMERA_MOVE_IGNORE_PLAYER_Y)) {
-            interp_lookat_pos(camera, interpRate, maxInterpSpeed, FALSE);
+            interp_lookat_pos(camera, interpRate, maxInterpSpeed, false);
         } else {
             lookXDelta = maxInterpSpeed; // needed to match
 
-            interp_lookat_pos(camera, interpRate, lookXDelta, TRUE);
+            interp_lookat_pos(camera, interpRate, lookXDelta, true);
         }
     }
 

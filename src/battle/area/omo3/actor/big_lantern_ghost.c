@@ -356,7 +356,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
         CaseEq(EVENT_BEGIN_FIRST_STRIKE)
@@ -496,7 +496,7 @@ EvtScript N(EVS_HandleEvent) = {
             Return
         CaseDefault
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -529,14 +529,14 @@ EvtScript N(attackHeavyJump) = {
     IfGe(LVar0, 6)
         ExecWait(N(checkExtinguish))
     EndIf
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(SetBattleCamDist, 260)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 20)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Add(LVar0, 50)
@@ -544,7 +544,7 @@ EvtScript N(attackHeavyJump) = {
     Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim06)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
     Wait(8)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_LARGE_ACTOR_JUMP, 0)
@@ -563,17 +563,17 @@ EvtScript N(attackHeavyJump) = {
             Sub(LVar0, 20)
             Set(LVar1, 0)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 20, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
             Call(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
             Sub(LVar0, 15)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 12, false, true, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
             Sub(LVar0, 10)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
             Wait(8)
             IfEq(LVarA, HIT_RESULT_LUCKY)
@@ -582,7 +582,7 @@ EvtScript N(attackHeavyJump) = {
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             ExecWait(N(EVS_ReturnHome))
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -593,7 +593,7 @@ EvtScript N(attackHeavyJump) = {
     EndThread
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
     Call(SetGoalToTarget, ACTOR_SELF)
-    Call(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 16, false, true, false)
     Wait(2)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_TRIGGER_EVENTS)
@@ -607,7 +607,7 @@ EvtScript N(attackHeavyJump) = {
             Call(SetBattleCamDist, 320)
             Call(BattleCamTargetActor, ACTOR_SELF)
             Call(MoveBattleCamOver, 20)
-            Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+            Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
             Thread
                 Wait(5)
                 Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim10)
@@ -617,12 +617,12 @@ EvtScript N(attackHeavyJump) = {
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 12, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
             Add(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
             Wait(8)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -631,7 +631,7 @@ EvtScript N(attackHeavyJump) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -639,14 +639,14 @@ EvtScript N(attackHeavyJump) = {
 EvtScript N(attackLightBeam) = {
     Call(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_HEAVY_JUMP))
     Call(SetActorVar, ACTOR_SELF, N(VAR_LIGHT_BEAM_COUNTER), 3)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR_CLOSE)
     Call(SetBattleCamDist, 240)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 20)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Add(LVar0, 80)
@@ -654,7 +654,7 @@ EvtScript N(attackLightBeam) = {
     Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim06)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
     Wait(20)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR_TARGET_MIDPOINT)
@@ -735,7 +735,7 @@ EvtScript N(attackLightBeam) = {
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     ExecWait(N(EVS_ReturnHome))
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -744,7 +744,7 @@ EvtScript N(extinguish) = {
     Call(SetActorVar, ACTOR_SELF, N(VAR_EXTINGUISHED_ONCE), 1)
     Call(SetActorVar, ACTOR_SELF, N(VAR_6), 1000)
     Call(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_LIGHT_BEAM))
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetActorVar, ACTOR_SELF, N(VAR_SPEAK_FLAGS), LVar0)
     IfNotFlag(LVar0, 2)
@@ -804,7 +804,7 @@ EvtScript N(extinguish) = {
     ExecWait(N(setGhostNoTarget))
     Wait(30)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -854,11 +854,11 @@ EvtScript N(setGhostNoTarget) = {
     Call(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar0)
     Switch(LVar0)
         CaseLt(5)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, true)
         CaseLt(8)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, FALSE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, false)
         CaseDefault
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, FALSE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, false)
     EndSwitch
     Return
     End

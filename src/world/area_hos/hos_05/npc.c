@@ -98,12 +98,12 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Thread
         Call(func_802D2C14, 1)
         Wait(30 * DT)
         Call(PlayerMoveTo, 0, 80, 10)
-        Call(PlayerFaceNpc, NPC_Eldstar, FALSE)
+        Call(PlayerFaceNpc, NPC_Eldstar, false)
     EndThread
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 136, 80)
     Call(SetPanTarget, CAM_DEFAULT, 0, 136, 80)
@@ -112,14 +112,14 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
     Call(SetCamPosB, CAM_DEFAULT, 0, -50)
     Call(SetCamPitch, CAM_DEFAULT, Float(10.0), Float(-2.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.5 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(30 * DT)
     Call(SetPanTarget, CAM_DEFAULT, 0, 220, -275)
     Call(SetCamDistance, CAM_DEFAULT, Float(1.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(-4.5), Float(-3.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_Eldstar, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 512, MSG_HOS_0069)
     Call(func_802D2C14, 0)
@@ -131,7 +131,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
     Call(SetCamPosB, CAM_DEFAULT, 0, -50)
     Call(SetCamPitch, CAM_DEFAULT, Float(10.0), Float(-2.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(MakeLerp, 0, 360, 25, EASING_QUADRATIC_IN)
     Loop(0)
@@ -150,7 +150,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
     EndLoop
     Call(GetPlayerPos, LVar6, LVar7, LVar8)
     Thread
-        Call(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_TOUCHES_GROUND, FALSE)
+        Call(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_TOUCHES_GROUND, false)
         Call(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Leap)
         Call(SetNpcJumpscale, NPC_Eldstar, Float(3.2))
         Call(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
@@ -161,7 +161,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
         PlayEffect(EFFECT_SPARKLES, 0, LVar6, LVar7, LVar8, 10)
     EndThread
     Thread
-        Call(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_TOUCHES_GROUND, FALSE)
+        Call(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_TOUCHES_GROUND, false)
         Call(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Leap)
         Call(SetNpcJumpscale, NPC_Mamar, Float(3.2))
         Call(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
@@ -169,7 +169,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
         Call(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Idle)
     EndThread
     Thread
-        Call(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_TOUCHES_GROUND, FALSE)
+        Call(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_TOUCHES_GROUND, false)
         Call(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Leap)
         Call(SetNpcJumpscale, NPC_Skolar, Float(3.2))
         Call(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)
@@ -177,7 +177,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
         Call(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Idle)
     EndThread
     Thread
-        Call(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_TOUCHES_GROUND, FALSE)
+        Call(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_TOUCHES_GROUND, false)
         Call(SetNpcAnimation, NPC_Muskular, ANIM_WorldMuskular_Leap)
         Call(SetNpcJumpscale, NPC_Muskular, Float(3.2))
         Call(GetNpcPos, NPC_Muskular, LVar0, LVar1, LVar2)
@@ -185,7 +185,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
         Call(SetNpcAnimation, NPC_Muskular, ANIM_WorldMuskular_Idle)
     EndThread
     Thread
-        Call(SetNpcFlagBits, NPC_Misstar, NPC_FLAG_TOUCHES_GROUND, FALSE)
+        Call(SetNpcFlagBits, NPC_Misstar, NPC_FLAG_TOUCHES_GROUND, false)
         Call(SetNpcAnimation, NPC_Misstar, ANIM_WorldMisstar_Leap)
         Call(SetNpcJumpscale, NPC_Misstar, Float(3.2))
         Call(GetNpcPos, NPC_Misstar, LVar0, LVar1, LVar2)
@@ -193,14 +193,14 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
         Call(SetNpcAnimation, NPC_Misstar, ANIM_WorldMisstar_Idle)
     EndThread
     Thread
-        Call(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_TOUCHES_GROUND, FALSE)
+        Call(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_TOUCHES_GROUND, false)
         Call(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Leap)
         Call(SetNpcJumpscale, NPC_Klevar, Float(3.2))
         Call(GetNpcPos, NPC_Klevar, LVar0, LVar1, LVar2)
         Call(NpcJump0, NPC_Klevar, LVar0, LVar1, LVar2, 5)
         Call(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Idle)
     EndThread
-    Call(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_TOUCHES_GROUND, FALSE)
+    Call(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_TOUCHES_GROUND, false)
     Call(SetNpcAnimation, NPC_Kalmar, ANIM_WorldKalmar_Leap)
     Call(SetNpcJumpscale, NPC_Kalmar, Float(3.2))
     Call(GetNpcPos, NPC_Kalmar, LVar0, LVar1, LVar2)
@@ -249,7 +249,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(1.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(-4.5), Float(-3.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_Eldstar, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 512, MSG_HOS_006A)
@@ -260,7 +260,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
     Call(SetCamPosB, CAM_DEFAULT, 0, -50)
     Call(SetCamPitch, CAM_DEFAULT, Float(8.0), Float(-7.9))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(30 * DT)
     Set(GB_StoryProgress, STORY_CH8_STAR_SHIP_ACTIVATED)
@@ -269,7 +269,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(1.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(-4.5), Float(-3.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_Eldstar, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 512, MSG_HOS_006B)
@@ -278,15 +278,15 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
     Call(SetNpcAnimation, NPC_Muskular, ANIM_WorldMuskular_Back)
     Call(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Back)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o616, COLLIDER_FLAGS_UPPER_MASK)
-    Call(SetZoneEnabled, ZONE_o622, FALSE)
+    Call(SetZoneEnabled, ZONE_o622, false)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.5))
-    Call(EnableModel, MODEL_o362, FALSE)
-    Call(EnableModel, MODEL_o397, FALSE)
+    Call(EnableModel, MODEL_o362, false)
+    Call(EnableModel, MODEL_o397, false)
     Wait(15 * DT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

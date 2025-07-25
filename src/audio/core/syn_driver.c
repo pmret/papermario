@@ -13,9 +13,9 @@ BSS s32 AuDelayCount;
 
 AuSynDriver* gActiveSynDriverPtr = NULL;
 AuSynDriver* gSynDriverPtr = NULL;
-u8 AuUseGlobalVolume = FALSE;
+u8 AuUseGlobalVolume = false;
 u16 AuGlobalVolume = AU_MAX_VOLUME_16;
-u8 AuSynStereoDirty = FALSE;
+u8 AuSynStereoDirty = false;
 
 extern s16 AuEqPower[128];
 
@@ -39,9 +39,9 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
 
     gActiveSynDriverPtr = driver;
     gSynDriverPtr = driver;
-    AuUseGlobalVolume = FALSE;
+    AuUseGlobalVolume = false;
     AuGlobalVolume = AU_MAX_VOLUME_16;
-    AuSynStereoDirty = TRUE;
+    AuSynStereoDirty = true;
 
     gSynDriverPtr->pvoices = alHeapAlloc(heap, config->num_pvoice, sizeof(*gSynDriverPtr->pvoices));
 
@@ -56,10 +56,10 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         voice->decoder.memin = NULL;
         voice->resampler.state = alHeapAlloc(heap, 1, sizeof(*voice->resampler.state));
         voice->resampler.delta = 0;
-        voice->resampler.first = TRUE;
+        voice->resampler.first = true;
         voice->resampler.ratio = 1.0f;
         voice->envMixer.state = alHeapAlloc(heap, 1, sizeof(*voice->envMixer.state));
-        voice->envMixer.dirty = TRUE;
+        voice->envMixer.dirty = true;
         voice->envMixer.motion = AL_STOPPED;
         voice->envMixer.volume = 1;
         voice->envMixer.ltgt = 1;
@@ -124,7 +124,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
     s16 mainOut;
     s16 auxOut;
     s32 busID;
-    b32 firstBus;
+    bool firstBus;
 
     // sanity check: ensure audio system is initialized
     if (gActiveSynDriverPtr == NULL) {
@@ -142,7 +142,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
                 au_syn_set_pan(busID, pvoice->envMixer.pan);
             }
         }
-        AuSynStereoDirty = FALSE;
+        AuSynStereoDirty = false;
     }
 
     // process blocks of AUDIO_SAMPLES until outLen is consumed
@@ -165,7 +165,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
         }
 
         // render each effects bus
-        firstBus = TRUE;
+        firstBus = true;
         for (busID = 0; busID < gSynDriverPtr->num_bus; busID++) {
             fxBus = &gSynDriverPtr->fxBus[busID];
             if (fxBus->head != NULL) {
@@ -229,7 +229,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
                 if (firstBus) {
                     // clear accumulation buffer if first bus with output
                     aClearBuffer(cmdListPos++, N_AL_TEMP_0, 4 * AUDIO_SAMPLES);
-                    firstBus = FALSE;
+                    firstBus = false;
                 } else {
                     // load accumulation buffer from DRAM
                     n_aLoadBuffer(cmdListPos++, 4 * AUDIO_SAMPLES, N_AL_TEMP_0, osVirtualToPhysical(gSynDriverPtr->dryAccumBuffer));
@@ -270,7 +270,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
 }
 
 void au_use_global_volume(void) {
-    AuUseGlobalVolume = TRUE;
+    AuUseGlobalVolume = true;
 }
 
 void au_set_global_volume(s16 volume) {
@@ -283,7 +283,7 @@ s16 au_get_global_volume(void) {
 
 void au_set_stereo_enabled(b8 enabled) {
     AuSynUseStereo = enabled;
-    AuSynStereoDirty = TRUE;
+    AuSynStereoDirty = true;
 }
 
 void au_bus_set_volume(u8 busID, u16 value) {
@@ -325,12 +325,12 @@ void au_syn_stop_voice(u8 voiceIdx) {
     AuLoadFilter* decoder = &pvoice->decoder;
 
     pvoice->envMixer.motion = AL_STOPPED;
-    pvoice->envMixer.dirty = TRUE;
+    pvoice->envMixer.dirty = true;
     pvoice->envMixer.volume = 1;
     pvoice->resampler.delta = 0;
     pvoice->resampler.first = 1;
     decoder->lastsam = 0;
-    decoder->first = TRUE;
+    decoder->first = true;
     decoder->sample = 0;
     if (decoder->instrument != NULL) {
         decoder->memin = (s32)decoder->instrument->wavData;
@@ -395,7 +395,7 @@ void au_syn_start_voice_params(u8 voiceIdx, u8 busID, Instrument* instrument, f3
     }
 
     envMixer->motion = AL_PLAYING;
-    envMixer->dirty = TRUE;
+    envMixer->dirty = true;
     envMixer->delta = 0;
     envMixer->segEnd = delta;
     envMixer->pan = pan;
@@ -491,7 +491,7 @@ void au_syn_set_mixer_params(u8 voiceIdx, s16 volume, s32 delta, u8 pan, u8 fxMi
     envMixer->volume = SQ(volume) >> 0xF;
     envMixer->dryamt = AuEqPower[fxMix];
     envMixer->wetamt = AuEqPower[AU_EQPOW_MAX_IDX - fxMix];
-    envMixer->dirty = TRUE;
+    envMixer->dirty = true;
 }
 
 void au_syn_set_pan_fxmix(u8 voiceIdx, u8 pan, u8 fxMix) {
@@ -521,7 +521,7 @@ void au_syn_set_pan_fxmix(u8 voiceIdx, u8 pan, u8 fxMix) {
     envMixer->pan = pan;
     envMixer->dryamt = AuEqPower[fxMix];
     envMixer->wetamt = AuEqPower[AU_EQPOW_MAX_IDX - fxMix];
-    envMixer->dirty = TRUE;
+    envMixer->dirty = true;
 }
 
 void au_syn_set_volume_delta(u8 voiceIdx, s16 vol, s32 delta) {
@@ -551,7 +551,7 @@ void au_syn_set_volume_delta(u8 voiceIdx, s16 vol, s32 delta) {
     envMixer->volume = SQ(vol) >> 0xF;
     envMixer->delta = 0;
     envMixer->segEnd = delta;
-    envMixer->dirty = TRUE;
+    envMixer->dirty = true;
 }
 
 void au_syn_set_pan(u8 voiceIdx, u8 pan) {
@@ -579,7 +579,7 @@ void au_syn_set_pan(u8 voiceIdx, u8 pan) {
     }
 
     envMixer->pan = pan;
-    envMixer->dirty = TRUE;
+    envMixer->dirty = true;
 }
 
 void au_syn_set_fxmix(u8 voiceIdx, u8 fxMix) {
@@ -608,7 +608,7 @@ void au_syn_set_fxmix(u8 voiceIdx, u8 fxMix) {
 
     envMixer->dryamt = AuEqPower[fxMix];
     envMixer->wetamt = AuEqPower[AU_EQPOW_MAX_IDX - fxMix];
-    envMixer->dirty = TRUE;
+    envMixer->dirty = true;
 }
 
 s32 au_syn_get_playing(u8 voiceIdx) {

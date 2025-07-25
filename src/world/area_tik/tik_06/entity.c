@@ -25,21 +25,21 @@ EvtScript N(EVS_MonitorPlayerFallDown) = {
 };
 
 EvtScript N(EVS_OnPound_BoardedFloor) = {
-    Set(GF_TIK02_BoardedFloor, TRUE)
+    Set(GF_TIK02_BoardedFloor, true)
     Exec(N(EVS_MonitorPlayerFallDown))
     Return
     End
 };
 
 EvtScript N(EVS_OnSmash_Block1) = {
-    Set(GF_TIK02_Hammer1Block, TRUE)
+    Set(GF_TIK02_Hammer1Block, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o93, COLLIDER_FLAGS_UPPER_MASK)
     Return
     End
 };
 
 EvtScript N(EVS_OnSmash_Block2) = {
-    Set(GF_TIK02_Hammer2Block, TRUE)
+    Set(GF_TIK02_Hammer2Block, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o90, COLLIDER_FLAGS_UPPER_MASK)
     Return
     End
@@ -47,21 +47,21 @@ EvtScript N(EVS_OnSmash_Block2) = {
 
 EvtScript N(EVS_MakeEntities) = {
     Call(MakeEntity, Ref(Entity_SavePoint), 120, 50, -75, 0, MAKE_ENTITY_END)
-    Call(EnableModel, MODEL_o49, FALSE)
+    Call(EnableModel, MODEL_o49, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o49, COLLIDER_FLAGS_UPPER_MASK)
-    IfEq(GF_TIK02_BoardedFloor, FALSE)
+    IfEq(GF_TIK02_BoardedFloor, false)
         Call(MakeEntity, Ref(Entity_BoardedFloor), -359, -10, -9, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnPound_BoardedFloor)))
     Else
         Exec(N(EVS_MonitorPlayerFallDown))
     EndIf
-    IfEq(GF_TIK02_Hammer1Block, FALSE)
+    IfEq(GF_TIK02_Hammer1Block, false)
         Call(MakeEntity, Ref(Entity_Hammer1Block), 190, -10, 0, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnSmash_Block1)))
     Else
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o93, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
-    IfEq(GF_TIK02_Hammer2Block, FALSE)
+    IfEq(GF_TIK02_Hammer2Block, false)
         Call(MakeEntity, Ref(Entity_Hammer2Block), -540, -10, 0, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnSmash_Block2)))
     Else

@@ -101,7 +101,7 @@ EvtScript N(EVS_SetupFoliage) = {
     BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o357, 1, 0)
     Set(LVar0, Ref(N(SearchBush_Bush3)))
     BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o414, 1, 0)
-    Set(GF_KMR02_Tree1_Goomnut, FALSE)
+    Set(GF_KMR02_Tree1_Goomnut, false)
     Set(LVar0, Ref(N(ShakeTree_Tree1)))
     BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o570, 1, 0)
     BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)

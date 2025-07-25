@@ -140,31 +140,31 @@ API_CALLABLE(N(ReadLetters)){
             numEntries = 0;
 
             for (i = 0; i < ARRAY_COUNT(N(LetterStoryRequirements)); i++) {
-                cond = FALSE;
+                cond = false;
                 storyReq = N(LetterStoryRequirements)[i];
                 switch (storyReq) {
                     case STORY_CH4_PULLED_SWITCH_SWITCH:
                         if (gPlayerData.quizzesCorrect != 0) {
-                            cond = TRUE;
+                            cond = true;
                         }
                         break;
                     case STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY:
                         if (evt_get_variable(NULL, GF_MAC02_TayceT_HasCookbook) != 0) {
-                            cond = TRUE;
+                            cond = true;
                         }
                         break;
                     case STORY_CH4_GOT_TAYCE_TS_CAKE:
-                        temp = FALSE;
+                        temp = false;
                         if (evt_get_variable(NULL, GB_StoryProgress) >= STORY_CH4_BEGAN_PEACH_MISSION) {
                             temp = (evt_get_variable(NULL, GF_MAC01_BoughtBadgeFromRowf) != 0);
                         }
                         if (temp) {
-                            cond = TRUE;
+                            cond = true;
                         }
                         break;
                     default:
                         if (evt_get_variable(NULL, GB_StoryProgress) >= storyReq) {
-                            cond = TRUE;
+                            cond = true;
                         }
                         break;
                 }
@@ -172,7 +172,7 @@ API_CALLABLE(N(ReadLetters)){
                 if (cond) {
                     menu->ptrIcon[numEntries] = &HES_Item_Postcard;
                     menu->userIndex[numEntries] = i;
-                    menu->enabled[numEntries] = TRUE;
+                    menu->enabled[numEntries] = true;
                     menu->nameMsg[numEntries] = N(LetterSenderStringIDs)[i];
                     menu->descMsg[numEntries] = 0;
                     temp = GET_PACKED_FLAG(GB_KMR20_MarioReadLetterFlags_00, i);
@@ -223,7 +223,7 @@ API_CALLABLE(N(ReadLetters)){
                 flags = SET_PACKED_FLAG(GB_KMR20_MarioReadLetterFlags_00, userIndex);
                 set_global_byte(PACKED_BYTE(GB_KMR20_MarioReadLetterFlags_00, userIndex), flags);
                 if (userIndex == 3) {
-                    evt_set_variable(NULL, GF_KMR20_ReadThankYouLetterFromKoopaVillage, TRUE);
+                    evt_set_variable(NULL, GF_KMR20_ReadThankYouLetterFromKoopaVillage, true);
                 }
 
                 dma_copy(charset_ROM_START + (s32) N(LetterDmaOffsets)[0],
@@ -269,15 +269,15 @@ API_CALLABLE(N(CleanupLetters)){
 }
 
 EvtScript N(EVS_Inspect_Letters) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     IfLt(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
-        Set(GF_KMR20_CheckedDeskForMail, TRUE)
+        Set(GF_KMR20_CheckedDeskForMail, true)
         Call(ShowMessageAtScreenPos, MSG_CH0_0102, 160, 40)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Return
     Else
-        IfEq(GF_KMR20_CheckedDeskForMail, FALSE)
-            Set(GF_KMR20_CheckedDeskForMail, TRUE)
+        IfEq(GF_KMR20_CheckedDeskForMail, false)
+            Set(GF_KMR20_CheckedDeskForMail, true)
             Call(ShowMessageAtScreenPos, MSG_CH0_0101, 160, 40)
             Wait(5)
         EndIf
@@ -295,7 +295,7 @@ EvtScript N(EVS_Inspect_Letters) = {
     Call(N(CleanupLetters))
     Goto(0)
     Label(10)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -353,7 +353,7 @@ API_CALLABLE(N(ReadDiary)){
                 if (evt_get_variable(NULL, GB_StoryProgress) >= N(DiaryStoryRequirements)[i]) {
                     menu->ptrIcon[numEntries] = &HES_Item_EmptyBook;
                     menu->userIndex[numEntries] = i;
-                    menu->enabled[numEntries] = TRUE;
+                    menu->enabled[numEntries] = true;
                     menu->nameMsg[numEntries] = 0;
                     menu->descMsg[numEntries] = 0;
                     flags = GET_PACKED_FLAG(GB_KMR20_MarioReadDiaryFlags_00, i);
@@ -415,16 +415,16 @@ API_CALLABLE(N(MuteAmbienceVolume_Documents)){
 }
 
 EvtScript N(EVS_Inspect_LuigisDiary) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     IfLt(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
-        IfEq(AF_KMR_0C, TRUE)
+        IfEq(AF_KMR_0C, true)
             Call(ShowMessageAtScreenPos, MSG_CH0_00EC, 160, 40)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
             Return
         EndIf
     EndIf
-    IfEq(GF_KMR20_FoundLuigisDiary, FALSE)
-        Set(GF_KMR20_FoundLuigisDiary, TRUE)
+    IfEq(GF_KMR20_FoundLuigisDiary, false)
+        Set(GF_KMR20_FoundLuigisDiary, true)
         Call(ShowMessageAtScreenPos, MSG_CH0_0100, 160, 40)
         Wait(5)
     EndIf
@@ -440,7 +440,7 @@ EvtScript N(EVS_Inspect_LuigisDiary) = {
         Call(ShowMessageAtScreenPos, LVar0, 160, 40)
         Goto(0)
     Label(10)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -495,11 +495,11 @@ EvtScript N(EVS_Setup_SecretPanel) = {
             Return
         EndIf
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(N(MuteAmbienceVolume_Documents))
     IfLt(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
-        IfEq(AF_KMR_0C, TRUE)
-            Call(EnableModel, MODEL_o200, FALSE)
+        IfEq(AF_KMR_0C, true)
+            Call(EnableModel, MODEL_o200, false)
         EndIf
     EndIf
     Loop(0)
@@ -519,9 +519,9 @@ EvtScript N(EVS_Setup_SecretPanel) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, FALSE)
-    IfEq(MF_LuigiInBasement, TRUE)
-        Set(MF_LuigiInBasement, FALSE)
+    Call(DisablePlayerInput, false)
+    IfEq(MF_LuigiInBasement, true)
+        Set(MF_LuigiInBasement, false)
         Exec(N(EVS_Scene_CaughtLuigiInBasement))
     EndIf
     Return

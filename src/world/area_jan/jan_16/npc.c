@@ -22,19 +22,19 @@ NpcSettings N(NpcSettings_Raven) = {
 };
 
 EvtScript N(D_802412D4_B812D4) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     IfLt(GB_StoryProgress, STORY_CH5_REACHED_RAPHAELS_TREE)
-        Call(EnableGroup, MODEL_g38, FALSE)
-        Call(EnableGroup, MODEL_g54, FALSE)
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-        Call(SetCamType, CAM_DEFAULT, 1, FALSE)
+        Call(EnableGroup, MODEL_g38, false)
+        Call(EnableGroup, MODEL_g54, false)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
+        Call(SetCamType, CAM_DEFAULT, 1, false)
         Call(UseSettingsFrom, CAM_DEFAULT, -269, 94, -8)
         Call(SetPanTarget, CAM_DEFAULT, -269, 94, -8)
         Call(SetCamDistance, CAM_DEFAULT, 1000)
         Call(SetCamPitch, CAM_DEFAULT, 20, 0)
         Call(SetCamPosA, CAM_DEFAULT, -410, -85)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Wait(10)
         Call(SetCamDistance, CAM_DEFAULT, 400)
@@ -47,11 +47,11 @@ EvtScript N(D_802412D4_B812D4) = {
         Call(ResetCam, CAM_DEFAULT, Float(90.0))
         Set(GB_StoryProgress, STORY_CH5_REACHED_RAPHAELS_TREE)
     EndIf
-    Call(EnableGroup, MODEL_g38, TRUE)
-    Call(EnableGroup, MODEL_g54, TRUE)
-    Call(EnableGroup, MODEL_g39, FALSE)
-    Call(EnableGroup, MODEL_g56, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(EnableGroup, MODEL_g38, true)
+    Call(EnableGroup, MODEL_g54, true)
+    Call(EnableGroup, MODEL_g39, false)
+    Call(EnableGroup, MODEL_g56, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -86,13 +86,13 @@ EvtScript N(EVS_NpcInit_Raven) = {
 };
 
 EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_Idle)
     Call(NpcFacePlayer, NPC_SELF, 4)
     Wait(5 * DT)
-    Call(PlayerFaceNpc, NPC_SELF, FALSE)
+    Call(PlayerFaceNpc, NPC_SELF, false)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(SetCamProperties, CAM_DEFAULT, Float(4.5 / DT), LVar0, LVar1, LVar2, 450, Float(20.0), Float(-9.5))
     Call(InterpNpcYaw, NPC_SELF, 90, 0)
@@ -191,7 +191,7 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
     Call(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_Walk)
     Call(SetNpcSpeed, NPC_RaphaelRaven, Float(4.0 / DT))
     Call(NpcMoveTo, NPC_SELF, 340, 270, 0)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, false)
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
 #if VERSION_PAL
     Call(ResetCam, CAM_DEFAULT, Float(5 * DT))
@@ -199,14 +199,14 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
     Call(ResetCam, CAM_DEFAULT, 5)
 #endif
     Set(GB_StoryProgress, STORY_CH5_RAPHAEL_MOVED_ROOT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_RaphaelRaven) = {
     IfEq(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
         Call(SetNpcPos, NPC_SELF, 85, 0, 410)
         Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_RaphaelRaven)))
         Return

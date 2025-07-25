@@ -80,9 +80,9 @@ EvtScript N(EVS_ParadePhase_Boos) = {
     Call(SetNpcImgFXParams, NPC_Boo1, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     Call(SetNpcImgFXParams, NPC_Boo2, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     Call(SetNpcImgFXParams, NPC_Boo3, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-    Call(EnableNpcShadow, NPC_Boo1, FALSE)
-    Call(EnableNpcShadow, NPC_Boo2, FALSE)
-    Call(EnableNpcShadow, NPC_Boo3, FALSE)
+    Call(EnableNpcShadow, NPC_Boo1, false)
+    Call(EnableNpcShadow, NPC_Boo2, false)
+    Call(EnableNpcShadow, NPC_Boo3, false)
     Call(NpcMoveTo, NPC_TubbasBody, -460, 0, 100 * DT)
     ExecGetTID(N(EVS_MoveBoosToTubbaBody), LVarB)
     Wait(20 * DT)
@@ -102,9 +102,9 @@ EvtScript N(EVS_ParadePhase_Boos) = {
             Call(SetNpcImgFXParams, NPC_Boo3, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
             Wait(1)
         EndLoop
-        Call(EnableNpcShadow, NPC_Boo1, TRUE)
-        Call(EnableNpcShadow, NPC_Boo2, TRUE)
-        Call(EnableNpcShadow, NPC_Boo3, TRUE)
+        Call(EnableNpcShadow, NPC_Boo1, true)
+        Call(EnableNpcShadow, NPC_Boo2, true)
+        Call(EnableNpcShadow, NPC_Boo3, true)
     EndThread
     Wait(30 * DT)
     Call(SetNpcAnimation, NPC_TubbasHeart, ANIM_TubbasHeart_Anim0B)
@@ -200,7 +200,7 @@ EvtScript N(EVS_ParadePhase_GoombaKing) = {
         Call(ShowSweat, NPC_BlueGoombaBros, 0, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
         Wait(10)
     EndLoop
-    Call(SetNpcFlagBits, NPC_GoombaKing, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_GoombaKing, NPC_FLAG_GRAVITY, true)
     Call(SetNpcAnimation, NPC_GoombaKing, ANIM_GoombaKing_Dead)
     Loop(0)
         Call(GetNpcPos, NPC_GoombaKing, LVar0, LVar1, LVar2)
@@ -210,7 +210,7 @@ EvtScript N(EVS_ParadePhase_GoombaKing) = {
         Wait(1)
     EndLoop
     PlayEffect(EFFECT_LANDING_DUST, 4, LVar0, 0, LVar2)
-    Call(SetNpcFlagBits, NPC_GoombaKing, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_GoombaKing, NPC_FLAG_GRAVITY, false)
     Wait(60)
     Thread
         Call(SetNpcAnimation, NPC_GoombaKing, ANIM_GoombaKing_Angry)

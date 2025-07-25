@@ -37,7 +37,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
     SetGroup(EVT_GROUP_NOT_BATTLE)
     Thread
         Wait(3)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Wait(1)
     EndThread
     Call(ShowMessageAtScreenPos, MSG_CH0_00BB, 320, 60)
@@ -48,7 +48,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
     Call(SetCamDistance, CAM_DEFAULT, 300)
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(30 * DT)
     Thread
         Call(SetNpcSpeed, NPC_GoombaBros_Red, Float(6.0 / DT))
@@ -76,7 +76,7 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
     Call(SetCamDistance, CAM_DEFAULT, 450)
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-3.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_GoombaBros_Red, ANIM_GoombaBros_Red_Talk, ANIM_GoombaBros_Red_Idle, 0, MSG_CH0_00BD)
     Wait(10 * DT)
@@ -99,8 +99,8 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
     Wait(15 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Wait(5 * DT)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
     End
@@ -118,7 +118,7 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Red) = {
             Call(SetNpcAnimation, NPC_GoombaBros_Blue, ANIM_GoombaBros_Blue_CryIdle)
             Call(SpeakToPlayer, NPC_GoombaBros_Red, ANIM_GoombaBros_Red_CryTalk, ANIM_GoombaBros_Red_CryIdle, 0, MSG_CH0_00C2)
             Wait(10)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Wait(10)
             Thread
                 Call(SetNpcJumpscale, NPC_GoombaBros_Blue, Float(1.8))
@@ -134,7 +134,7 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Red) = {
                 ExecGetTID(N(EVS_PlayWalkingSounds), LVarA)
                 Call(NpcMoveTo, NPC_GoombaBros_Blue, 616, -47, 0)
                 KillThread(LVarA)
-                Call(SetNpcFlagBits, NPC_GoombaBros_Blue, NPC_FLAG_GRAVITY, FALSE)
+                Call(SetNpcFlagBits, NPC_GoombaBros_Blue, NPC_FLAG_GRAVITY, false)
                 Call(SetNpcPos, NPC_GoombaBros_Blue, NPC_DISPOSE_LOCATION)
                 Wait(1)
             EndThread
@@ -152,13 +152,13 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Red) = {
             ExecGetTID(N(EVS_PlayWalkingSounds), LVarA)
             Call(NpcMoveTo, NPC_GoombaBros_Red, 616, -47, 0)
             KillThread(LVarA)
-            Call(SetNpcFlagBits, NPC_GoombaBros_Red, NPC_FLAG_GRAVITY, FALSE)
+            Call(SetNpcFlagBits, NPC_GoombaBros_Red, NPC_FLAG_GRAVITY, false)
             Call(SetNpcPos, NPC_GoombaBros_Red, NPC_DISPOSE_LOCATION)
             Wait(1)
             Exec(N(EVS_SetupMusic))
-            Set(MV_GoombaBrosDefeated, TRUE)
+            Set(MV_GoombaBrosDefeated, true)
             Set(GB_StoryProgress, STORY_CH0_DEFEATED_GOOMBA_BROS)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
     EndSwitch
     Return
     End
@@ -167,8 +167,8 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Red) = {
 EvtScript N(EVS_NpcInit_GoombaBros_Red) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_GoombaBros_Red)))
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_GoombaBros_Red)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Set(MV_GoombaBrosDefeated, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Set(MV_GoombaBrosDefeated, false)
     IfGe(GB_StoryProgress, STORY_CH0_DEFEATED_GOOMBA_BROS)
         Call(RemoveNpc, NPC_SELF)
     EndIf
@@ -186,7 +186,7 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Blue) = {
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
             Label(0)
-            IfEq(MV_GoombaBrosDefeated, FALSE)
+            IfEq(MV_GoombaBrosDefeated, false)
                 Wait(1)
                 Goto(0)
             EndIf
@@ -198,7 +198,7 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Blue) = {
 EvtScript N(EVS_NpcInit_GoombaBros_Blue) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_GoombaBros_Blue)))
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_GoombaBros_Blue)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     IfGe(GB_StoryProgress, STORY_CH0_DEFEATED_GOOMBA_BROS)
         Call(RemoveNpc, NPC_SELF)
         Return
@@ -214,7 +214,7 @@ NpcData N(NpcData_GoombaBros_Red)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = FALSE,
+                .isFlying = false,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 0, 0, 0 },
@@ -236,7 +236,7 @@ NpcData N(NpcData_GoombaBros_Red)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = FALSE,
+                .isFlying = false,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 0, 0, 0 },

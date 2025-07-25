@@ -4,7 +4,7 @@ s32 N(map_init)(void) {
     if (evt_get_variable(NULL, GB_StoryProgress) == STORY_INTRO) {
         sprintf(wMapBgName, "nok_bg");
     }
-    return FALSE;
+    return false;
 }
 
 EntryList N(Entrances) = {

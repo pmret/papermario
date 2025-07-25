@@ -20,14 +20,14 @@ NpcSettings N(NpcSettings_KoopaBros) = {
 
 EvtScript N(EVS_KoopaBros_SetTrap) = {
     Exec(N(EVS_StartKoopaBrosTheme))
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(DisablePartnerAI, 0)
     Call(SetPlayerPos, -350, 0, 0)
     Call(SetNpcPos, NPC_PARTNER, -350, 0, 0)
     Call(UseSettingsFrom, CAM_DEFAULT, -70, 240, -10)
     Call(SetPanTarget, CAM_DEFAULT, -70, 240, -10)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Idle)
     Thread
         Loop(8)
@@ -169,7 +169,7 @@ EvtScript N(EVS_KoopaBros_SetTrap) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -270, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -270, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetNpcPos, NPC_KoopaBros_01, NPC_DISPOSE_LOCATION)
     Call(PlaySound, SOUND_METAL_DOOR_OPEN)
@@ -182,11 +182,11 @@ EvtScript N(EVS_KoopaBros_SetTrap) = {
     IfEq(LVar1, 1)
         Goto(10)
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(EnablePartnerAI)
     Call(SetPlayerPos, -310, 0, 0)
     ExecWait(N(EVS_EnterMap))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Set(GB_StoryProgress, STORY_CH1_KOOPA_BROS_SET_TRAP)
     Return
     End

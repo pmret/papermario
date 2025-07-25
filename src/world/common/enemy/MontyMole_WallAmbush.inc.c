@@ -1,8 +1,8 @@
 #include "MontyMole.h"
 
 EvtScript N(EVS_NpcAuxAI_MontyMole_WallAmbush) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, true)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Sub(LVar2, 50)
     Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -11,8 +11,8 @@ EvtScript N(EVS_NpcAuxAI_MontyMole_WallAmbush) = {
 };
 
 EvtScript N(EVS_NpcAuxAI_MontyMole_WallAmbush_Hole) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, true)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Sub(LVar2, 50)
     Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -39,7 +39,7 @@ MobileAISettings N(AISettings_MontyMole_WallAmbush) = {
 EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
     Call(func_800445D4, LVar0)
     IfEq(LVar0, 100)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, TRUE)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, true)
         Label(10)
         Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         Add(LVar2, 130)
@@ -55,9 +55,9 @@ EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
         Add(LVar3, 50)
         Call(SetNpcPos, LVar0, LVar1, LVar2, LVar3)
         Wait(1)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, FALSE)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-        Call(EnableNpcShadow, NPC_SELF, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, false)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
+        Call(EnableNpcShadow, NPC_SELF, true)
         Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Anim0E)
         Call(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
         Sub(LVar2, 30)
@@ -65,10 +65,10 @@ EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
         Call(SetNpcJumpscale, NPC_SELF, Float(0.7))
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
         Call(NpcJump0, NPC_SELF, LVar1, LVar2, LVar3, 20)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, FALSE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, false)
         Call(NpcFacePlayer, NPC_SELF, 0)
-        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
+        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, true)
     EndIf
     Call(BasicAI_Main, Ref(N(AISettings_MontyMole_WallAmbush)))
     Return

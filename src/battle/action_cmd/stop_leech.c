@@ -36,7 +36,7 @@ API_CALLABLE(N(init)) {
     acs->actionCommandID = ACTION_COMMAND_STOP_LEECH;
     acs->hudPosX = -48;
     acs->state = AC_STATE_INIT;
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     acs->meterFillLevel = 0;
     acs->meterFillWidth = 0;
     acs->hudPosY = 80;
@@ -72,7 +72,7 @@ API_CALLABLE(N(start)) {
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     acs->meterFillLevel = 0;
     acs->meterFillWidth = 0;
     battleStatus->actionQuality = 0;

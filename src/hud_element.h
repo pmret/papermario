@@ -120,7 +120,7 @@ typedef struct PopupMenu {
     /* 0x104 */ char unk_104[0x4];
     /* 0x108 */ s32 userIndex[32]; // used to map menu order to a user-ID for each item
     /* 0x188 */ char unk_188[0x4];
-    /* 0x18C */ b32 enabled[32];
+    /* 0x18C */ bool enabled[32];
     /* 0x20C */ char unk_20C[0x4];
     /* 0x210 */ s32 value[32]; // sale price, etc
     /* 0x290 */ char unk_290[0x4];

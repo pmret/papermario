@@ -244,7 +244,7 @@ void au_fx_load_preset(AuFX* fx, u8 effectType) {
             delay->rsdelta = 0.0f;
             delay->activeResampler = delay->resamplerTemplate;
             delay->resamplerTemplate->delta = 0.0;
-            delay->activeResampler->first = TRUE;
+            delay->activeResampler->first = true;
         } else {
             delay->activeResampler = NULL;
             j++;
@@ -360,7 +360,7 @@ Acmd* au_pull_fx(AuFX* fx, Acmd* ptr, s16 wetDmem, s16 tempDmem) {
             tmp = outputTapBuffer >> 8;
             n_aResample(cmdBufPos++, osVirtualToPhysical(delay->activeResampler->state),
                 delay->activeResampler->first, ratio, resampleBuffer + (ramAlign<<1), tmp);
-            delay->activeResampler->first = FALSE;
+            delay->activeResampler->first = false;
             delay->rsdelta += count - AUDIO_SAMPLES;
         } else {
             // no resampling -- just load from output pointer

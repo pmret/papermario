@@ -28,10 +28,10 @@ s32 N(CleftAI_CanSeePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     Camera* camera = &gCameras[gCurrentCamID];
     f32 playerX, playerZ;
     f32 angle;
-    s32 seesPlayer = FALSE;
+    s32 seesPlayer = false;
 
     if (ai_check_player_dist(enemy, 0, aiSettings->alertRadius, aiSettings->alertOffsetDist)) {
-        seesPlayer = TRUE;
+        seesPlayer = true;
     }
     if (clamp_angle(get_clamped_angle_diff(camera->curYaw, npc->yaw)) < 180.0) {
         angle = 90.0f;
@@ -42,13 +42,13 @@ s32 N(CleftAI_CanSeePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     playerX = gPlayerStatusPtr->pos.x;
     playerZ = gPlayerStatusPtr->pos.z;
     if (fabsf(get_clamped_angle_diff(angle, atan2(npc->pos.x, npc->pos.z, playerX, playerZ))) > 75.0) {
-        seesPlayer = FALSE;
+        seesPlayer = false;
     }
     if (fabsf(npc->pos.y - gPlayerStatusPtr->pos.y) >= 40.0f) {
-        seesPlayer = FALSE;
+        seesPlayer = false;
     }
     if (gPartnerStatus.actingPartner == PARTNER_BOW) {
-        seesPlayer = FALSE;
+        seesPlayer = false;
     }
     return seesPlayer;
 }
@@ -73,7 +73,7 @@ void N(CleftAI_Hiding)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
 
     if (script->functionTemp[1] <= 0) {
         script->functionTemp[1] = aiSettings->playerSearchInterval;
-        if (basic_ai_check_player_dist(volume, enemy, aiSettings->alertRadius * 0.85, aiSettings->alertOffsetDist, FALSE)) {
+        if (basic_ai_check_player_dist(volume, enemy, aiSettings->alertRadius * 0.85, aiSettings->alertOffsetDist, false)) {
             npc->curAnim = enemy->animList[9];
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
             ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
@@ -168,7 +168,7 @@ void N(CleftAI_RevUp)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
         enemy->unk_10.x = npc->pos.x;
         enemy->unk_10.y = npc->pos.y;
         enemy->unk_10.z = npc->pos.z;
-        enemy->hitboxIsActive = TRUE;
+        enemy->hitboxIsActive = true;
         npc->moveSpeed = aiSettings->chaseSpeed;
         npc->duration = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x,
                                gPlayerStatusPtr->pos.z) / npc->moveSpeed + 0.9;
@@ -183,7 +183,7 @@ void N(CleftAI_Tackle)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ;
-    s32 phi_s1 = FALSE;
+    s32 phi_s1 = false;
 
     spawn_surface_effects(npc, SURFACE_INTERACT_RUN);
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
@@ -192,7 +192,7 @@ void N(CleftAI_Tackle)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
             enemy->territory->wander.detectPos.x, enemy->territory->wander.detectPos.z,
             npc->pos.x, npc->pos.z,
             enemy->territory->wander.detectSize.x, enemy->territory->wander.detectSize.z)) {
-        phi_s1 = TRUE;
+        phi_s1 = true;
     }
 
     posX = npc->pos.x;
@@ -201,16 +201,16 @@ void N(CleftAI_Tackle)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     if (npc_test_move_simple_with_slipping(npc->collisionChannel,
             &posX, &posY, &posZ,
             1.0f, npc->yaw, npc->collisionHeight, npc->collisionDiameter)) {
-        phi_s1 = TRUE;
+        phi_s1 = true;
     }
 
     npc->duration--;
     if (npc->duration <= 0) {
-        phi_s1 = TRUE;
+        phi_s1 = true;
     }
     if (phi_s1) {
         script->AI_TEMP_STATE = AI_STATE_CLEFT_FIND_PLAYER_INIT;
-        enemy->hitboxIsActive = FALSE;
+        enemy->hitboxIsActive = false;
     }
 }
 

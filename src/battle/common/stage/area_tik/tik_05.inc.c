@@ -9,7 +9,7 @@ EvtScript N(EVS_PreBattle) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     Call(SetTexPanner, MODEL_taki1, TEX_PANNER_1)
-    Call(EnableTexPanning, MODEL_taki1, TRUE)
+    Call(EnableTexPanning, MODEL_taki1, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(   0, -2700,   0, -3000)
@@ -18,7 +18,7 @@ EvtScript N(EVS_PreBattle) = {
         Exec(N(EVS_UpdateTexturePan))
     EndThread
     Call(SetTexPanner, MODEL_taki2, TEX_PANNER_2)
-    Call(EnableTexPanning, MODEL_taki2, TRUE)
+    Call(EnableTexPanning, MODEL_taki2, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_2)
         TEX_PAN_PARAMS_STEP(   50, -200,  110, -500)

@@ -30,7 +30,7 @@ BombTrigger N(D_80247A1C_B27F5C) = {
 };
 
 EvtScript N(EVS_80247A2C) = {
-    Set(AF_JAN00_TreeDrop1, FALSE)
+    Set(AF_JAN00_TreeDrop1, false)
     Set(LVar0, Ref(N(ShakeTree_Tree1)))
     BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o282, 1, 0)
     BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(D_80247A1C_B27F5C)), 1, 0)

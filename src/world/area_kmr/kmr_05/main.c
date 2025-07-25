@@ -14,10 +14,10 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_GOOMBA_VILLAGE)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    IfEq(GF_KMR02_ReturnedWithGoompa, FALSE)
-        Call(MakeNpcs, FALSE, Ref(N(NpcsBefore)))
+    IfEq(GF_KMR02_ReturnedWithGoompa, false)
+        Call(MakeNpcs, false, Ref(N(NpcsBefore)))
     Else
-        Call(MakeNpcs, FALSE, Ref(N(NpcsAfter)))
+        Call(MakeNpcs, false, Ref(N(NpcsAfter)))
     EndIf
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
@@ -29,9 +29,9 @@ EvtScript N(EVS_Main) = {
     Wait(1)
     Call(GetEntryID, LVar0)
     IfEq(LVar0, kmr_05_ENTRY_0)
-        IfEq(GF_KMR05_EnemyWarning, FALSE)
+        IfEq(GF_KMR05_EnemyWarning, false)
             Exec(N(EVS_GoompaRemark))
-            Set(GF_KMR05_EnemyWarning, TRUE)
+            Set(GF_KMR05_EnemyWarning, true)
         EndIf
     EndIf
     Return

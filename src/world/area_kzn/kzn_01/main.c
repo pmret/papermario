@@ -16,11 +16,11 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     Call(SetSpriteShading, SHADING_KZN_01)
     EVT_SETUP_CAMERA_DEFAULT()
-    Set(GF_MAP_MtLavalava, TRUE)
+    Set(GF_MAP_MtLavalava, true)
     IfLt(GB_StoryProgress, STORY_CH5_ENTERED_MT_LAVA_LAVA)
         Set(GB_StoryProgress, STORY_CH5_ENTERED_MT_LAVA_LAVA)
     EndIf
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     Set(LVar0, N(EVS_BindExitTriggers))
     Exec(EnterWalk)
     Wait(1)

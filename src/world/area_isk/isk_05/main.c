@@ -21,7 +21,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_DRY_DRY_RUINS)
     Call(SetSpriteShading, SHADING_ISK_05)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
 #if VERSION_PAL
     Call(SetMusic, 0, SONG_DRY_DRY_RUINS, 0, VOL_LEVEL_FULL)
@@ -37,7 +37,7 @@ EvtScript N(EVS_Main) = {
 #endif
     Call(TranslateGroup, MODEL_g304, 0, 65, 0)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
-    IfEq(GF_ISK05_Hammer2Block, FALSE)
+    IfEq(GF_ISK05_Hammer2Block, false)
         Call(SetGroupVisibility, MODEL_wan1, MODEL_GROUP_VISIBLE)
         Call(SetGroupVisibility, MODEL_wan2, MODEL_GROUP_HIDDEN)
     Else

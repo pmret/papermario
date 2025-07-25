@@ -11,7 +11,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_OpenCellDoor) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PlayerMoveTo, -30, 15, 20)
     Call(InterpPlayerYaw, 90, 2)
     Call(PlaySoundAtCollider, COLLIDER_deilittn, SOUND_METAL_GATE_OPEN, SOUND_SPACE_DEFAULT)
@@ -26,7 +26,7 @@ EvtScript N(EVS_OpenCellDoor) = {
         EndIf
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittn, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o297, COLLIDER_FLAGS_UPPER_MASK)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Unbind
     Return
     End
@@ -39,7 +39,7 @@ EvtScript N(EVS_Main) = {
     Set(AB_KPA91_Toad3_Dialogue, 0)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
     Exec(EnterWalk)

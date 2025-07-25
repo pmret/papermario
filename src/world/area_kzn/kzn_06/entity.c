@@ -5,7 +5,7 @@
 #include "world/common/atomic/PushBlockGravity.inc.c"
 
 EvtScript N(EVS_OnBreakBlock) = {
-    Set(GF_KZN06_Hammer3Block, TRUE)
+    Set(GF_KZN06_Hammer3Block, true)
     Return
     End
 };
@@ -13,7 +13,7 @@ EvtScript N(EVS_OnBreakBlock) = {
 EvtScript N(EVS_MakeEntities) = {
     Call(MakeEntity, Ref(Entity_HiddenYellowBlock), 325, 205, -30, 0, ITEM_LIFE_SHROOM, MAKE_ENTITY_END)
     Call(AssignBlockFlag, GF_KZN06_HiddenItem_LifeShroom)
-    IfEq(GF_KZN06_Hammer3Block, FALSE)
+    IfEq(GF_KZN06_Hammer3Block, false)
         Call(MakeEntity, Ref(Entity_Hammer3BlockWideZ), 385, 5, 180, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnBreakBlock)))
     EndIf

@@ -31,7 +31,7 @@ EvtScript N(EVS_PushLeftStatue_Impl) = {
         Return
     EndIf
 #endif
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
     Thread
         Call(ShakeCam, CAM_DEFAULT, 0, 100, Float(0.6))
@@ -59,7 +59,7 @@ EvtScript N(EVS_PushLeftStatue_Impl) = {
             EndIf
         EndLoop
         Call(SetPlayerActionState, ACTION_STATE_IDLE)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndThread
     Call(MakeLerp, LVar6, LVar7, 100, EASING_LINEAR)
     Call(PlaySoundAtCollider, LVar9, SOUND_LOOP_MOVE_STATUE, SOUND_SPACE_DEFAULT)

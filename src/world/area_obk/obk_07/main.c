@@ -12,7 +12,7 @@ EvtScript N(EVS_EnterMap) = {
 
 EvtScript N(EVS_ExitDoors_obk_01_3) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, obk_07_ENTRY_0)
     Set(LVar1, COLLIDER_tt1)
     Set(LVar2, MODEL_door_1)
@@ -28,7 +28,7 @@ EvtScript N(EVS_ExitDoors_obk_01_3) = {
 
 EvtScript N(EVS_TexPan_Fog) = {
     Thread
-        Call(EnableTexPanning, MODEL_ma, TRUE)
+        Call(EnableTexPanning, MODEL_ma, true)
         Set(LVar0, 0)
         Set(LVar1, 0)
         Loop(0)
@@ -55,7 +55,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_BOOS_MANSION)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_TexPan_Fog))
     Exec(N(EVS_SetupFireplace))

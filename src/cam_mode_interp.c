@@ -51,7 +51,7 @@ void update_camera_unused_confined(Camera* camera) {
     camera->curBoomLength = camera->params.confined.dist * CamLengthScale;
     camera->targetOffsetY = camera->params.confined.offsetY * CamLengthScale;
     if (camera->needsInit) {
-        camera->needsInit = FALSE;
+        camera->needsInit = false;
         camera->unk_98 = 0.0f;
         camera->unk_9C = 0.0f;
         camera->lookAt_obj.x = camera->lookAt_obj_target.x;
@@ -146,7 +146,7 @@ void update_camera_interp_pos(Camera *camera) {
     camera->curBoomPitch = camera->params.interp.pitch;
     camera->curBoomYaw = camera->interpYaw;
     if (camera->needsInit) {
-        camera->needsInit = FALSE;
+        camera->needsInit = false;
         camera->unk_98 = 0.0f;
         camera->unk_9C = 0.0f;
 

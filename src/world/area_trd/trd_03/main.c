@@ -86,7 +86,7 @@ BombTrigger N(BombPos_RightCell) = {
 
 EvtScript N(EVS_BombWall_MiddleCell) = {
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 40, 10, 1, 10, 30)
-    Call(EnableModel, MODEL_nk2, TRUE)
+    Call(EnableModel, MODEL_nk2, true)
     Loop(10)
         Call(SetGroupVisibility, MODEL_ana2, MODEL_GROUP_VISIBLE)
         Wait(1)
@@ -95,7 +95,7 @@ EvtScript N(EVS_BombWall_MiddleCell) = {
     EndLoop
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilit2, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt2, COLLIDER_FLAGS_UPPER_MASK)
-    Set(GF_TRD03_BombedCenterCell, TRUE)
+    Set(GF_TRD03_BombedCenterCell, true)
     Unbind
     Return
     End
@@ -103,7 +103,7 @@ EvtScript N(EVS_BombWall_MiddleCell) = {
 
 EvtScript N(EVS_BombWall_RightCell) = {
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 43, 10, 1, 10, 30)
-    Call(EnableModel, MODEL_nk3, TRUE)
+    Call(EnableModel, MODEL_nk3, true)
     Loop(10)
         Call(SetGroupVisibility, MODEL_ana3, MODEL_GROUP_VISIBLE)
         Wait(1)
@@ -112,7 +112,7 @@ EvtScript N(EVS_BombWall_RightCell) = {
     EndLoop
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilit3, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt3, COLLIDER_FLAGS_UPPER_MASK)
-    Set(GF_TRD03_BombedRightCell, TRUE)
+    Set(GF_TRD03_BombedRightCell, true)
     Unbind
     Return
     End
@@ -124,10 +124,10 @@ EvtScript N(EVS_HiddenDoor) = {
     Set(LVarD, 0)
     Set(LVarE, 0)
     Call(CloneModel, MODEL_rou2, CLONED_MODEL(0))
-    Call(EnableModel, CLONED_MODEL(0), FALSE)
+    Call(EnableModel, CLONED_MODEL(0), false)
     Call(ParentColliderToModel, COLLIDER_o84, CLONED_MODEL(0))
     Call(CloneModel, MODEL_rou2, CLONED_MODEL(1))
-    Call(EnableModel, CLONED_MODEL(1), FALSE)
+    Call(EnableModel, CLONED_MODEL(1), false)
     Call(ParentColliderToModel, COLLIDER_o85, CLONED_MODEL(1))
     Label(0)
         IfEq(LVarD, 0)
@@ -200,30 +200,30 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_KOOPA_BROS_FORTRESS)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     IfLt(GB_StoryProgress, STORY_CH1_KOOPA_BROS_HID_KEY)
         Exec(N(EVS_Scene_GreenKoopaBros))
     Else
         Exec(N(EVS_EnterMap))
     EndIf
-    IfEq(GF_TRD02_BombedWall, FALSE)
-        Call(EnableModel, MODEL_nk1, FALSE)
+    IfEq(GF_TRD02_BombedWall, false)
+        Call(EnableModel, MODEL_nk1, false)
     Else
         Call(SetGroupVisibility, MODEL_ana1, MODEL_GROUP_HIDDEN)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilit1, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
-    IfEq(GF_TRD03_BombedCenterCell, FALSE)
-        Call(EnableModel, MODEL_nk2, FALSE)
+    IfEq(GF_TRD03_BombedCenterCell, false)
+        Call(EnableModel, MODEL_nk2, false)
         BindTrigger(Ref(N(EVS_BombWall_MiddleCell)), TRIGGER_POINT_BOMB, Ref(N(BombPos_MiddleCell)), 1, 0)
     Else
         Call(SetGroupVisibility, MODEL_ana2, MODEL_GROUP_HIDDEN)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilit2, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt2, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
-    IfEq(GF_TRD03_BombedRightCell, FALSE)
-        Call(EnableModel, MODEL_nk3, FALSE)
+    IfEq(GF_TRD03_BombedRightCell, false)
+        Call(EnableModel, MODEL_nk3, false)
         BindTrigger(Ref(N(EVS_BombWall_RightCell)), TRIGGER_POINT_BOMB, Ref(N(BombPos_RightCell)), 1, 0)
     Else
         Call(SetGroupVisibility, MODEL_ana3, MODEL_GROUP_HIDDEN)

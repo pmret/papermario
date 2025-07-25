@@ -9,7 +9,7 @@
 
 EvtScript N(EVS_PlayerWatchKolorado) = {
     Loop(0)
-        Call(PlayerFaceNpc, NPC_SELF, FALSE)
+        Call(PlayerFaceNpc, NPC_SELF, false)
         Wait(1)
     EndLoop
     Return
@@ -18,14 +18,14 @@ EvtScript N(EVS_PlayerWatchKolorado) = {
 
 EvtScript N(EVS_Kolorado_RunToVillage) = {
     ExecGetTID(N(EVS_PlayerWatchKolorado), LVar9)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Run)
     Call(SetNpcSpeed, NPC_SELF, Float(4.5 / DT))
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Add(LVar0, 150)
     Call(NpcMoveTo, NPC_SELF, LVar0, 60, 0)
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, false)
     KillThread(LVar9)
     Call(N(EnableCameraLeadingPlayer))
     Call(ResetCam, CAM_DEFAULT, Float(5.0 / DT))
@@ -36,7 +36,7 @@ EvtScript N(EVS_Kolorado_RunToVillage) = {
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Fallen)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
     Loop(0)
         Wait(1)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -44,14 +44,14 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_CH5_000D, 320, 60)
     Call(PlaySoundAtPlayer, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 25, EMOTER_PLAYER, 0, 0, 0, 0)
     Call(PlaySoundAtNpc, NPC_PARTNER, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 25, EMOTER_NPC, 0, 0, 0, 0)
     Wait(25 * DT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Label(0)
         Call(GetSelfVar, 0, LVar0)
         Switch(LVar0)
@@ -62,7 +62,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                     IfNe(LVar0, PARTNER_NONE)
                         Call(InterruptUsePartner)
                     EndIf
-                    Call(DisablePlayerInput, TRUE)
+                    Call(DisablePlayerInput, true)
                     Call(RemoveNpc, NPC_JungleFuzzy_01)
                     Call(ShowMessageAtScreenPos, MSG_CH5_0010, 0, 60)
                     Call(InterpPlayerYaw, 270, 4)
@@ -81,14 +81,14 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                     Call(SetCamDistance, CAM_DEFAULT, 300)
                     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-7.0))
                     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
-                    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                    Call(PanToTarget, CAM_DEFAULT, 0, true)
                     Call(N(DisableCameraLeadingPlayer))
                     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                     Wait(10 * DT)
                     Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0011)
                     Set(GB_StoryProgress, STORY_CH5_KOLORADO_ESCAPED_FUZZIES)
                     ExecWait(N(EVS_Kolorado_RunToVillage))
-                    Call(DisablePlayerInput, FALSE)
+                    Call(DisablePlayerInput, false)
                 EndIf
             CaseEq(1)
                 SetGroup(EVT_GROUP_NEVER_PAUSE)
@@ -96,14 +96,14 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                 Call(func_802D2C14, 1)
                 Wait(10 * DT)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Idle, 0, MSG_CH5_000F)
-                Set(GF_JAN01_SavedKolorado, TRUE)
+                Set(GF_JAN01_SavedKolorado, true)
                 Call(SetSelfVar, 0, 2)
                 Set(GB_StoryProgress, STORY_CH5_KOLORADO_ESCAPED_FUZZIES)
                 ExecWait(N(EVS_Kolorado_RunToVillage))
                 Call(func_802D2C14, 0)
                 Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
                 SetGroup(EVT_GROUP_HOSTILE_NPC)
-                Call(DisablePlayerInput, FALSE)
+                Call(DisablePlayerInput, false)
         EndSwitch
         Call(GetSelfVar, 0, LVar0)
         IfNe(LVar0, 3)
@@ -127,14 +127,14 @@ EvtScript N(EVS_NpcHit_Kolorado) = {
             Set(LVar1, 0)
     EndSwitch
     IfNe(LVar1, 0)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Wait(5)
-        Set(AF_JAN01_KoloradoShouting, TRUE)
+        Set(AF_JAN01_KoloradoShouting, true)
         Wait(10)
         Call(NpcFacePlayer, NPC_SELF, 0)
         Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_000E)
-        Set(AF_JAN01_KoloradoShouting, FALSE)
-        Call(DisablePlayerInput, FALSE)
+        Set(AF_JAN01_KoloradoShouting, false)
+        Call(DisablePlayerInput, false)
     EndIf
     Return
     End
@@ -142,7 +142,7 @@ EvtScript N(EVS_NpcHit_Kolorado) = {
 
 EvtScript N(EVS_NpcInit_Kolorado) = {
     IfLt(GB_StoryProgress, STORY_CH5_KOLORADO_ESCAPED_FUZZIES)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Kolorado)))
         Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Kolorado)))
     Else
@@ -162,16 +162,16 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy_01) = {
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Switch(LVar0)
                 CaseRange(LVar3, LVar4)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, FALSE)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, FALSE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, false)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, false)
                 CaseDefault
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, TRUE)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, TRUE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, true)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, true)
             EndSwitch
             Wait(1)
         EndLoop
     EndChildThread
-    Set(AF_JAN01_KoloradoShouting, FALSE)
+    Set(AF_JAN01_KoloradoShouting, false)
     Call(GetNpcPos, NPC_Kolorado, LVar7, LVar8, LVar9)
     Add(LVar8, 20)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -187,7 +187,7 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy_01) = {
         Add(LVar0, LVar4)
         Call(NpcJump0, NPC_SELF, LVar0, 18, LVar2, 15)
         Call(PlaySoundAtNpc, NPC_Kolorado, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
-        IfNe(AF_JAN01_KoloradoShouting, TRUE)
+        IfNe(AF_JAN01_KoloradoShouting, true)
             ChildThread
                 Call(InterpNpcYaw, NPC_Kolorado, LVar5, 2)
                 PlayEffect(EFFECT_DAMAGE_STARS, FX_DAMAGE_STARS_3, LVar7, LVar8, LVar9, 0, -1, 0, 3)
@@ -198,7 +198,7 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy_01) = {
         Call(NpcJump0, NPC_SELF, LVar0, -12, LVar2, 15)
         Label(1)
             Wait(1)
-            IfEq(AF_JAN01_KoloradoShouting, TRUE)
+            IfEq(AF_JAN01_KoloradoShouting, true)
                 Goto(1)
             EndIf
     EndLoop
@@ -210,13 +210,13 @@ EvtScript N(EVS_NpcDefeat_JungleFuzzyBoss) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Idle)
             Call(GetPartnerInUse, LVar0)
             IfNe(LVar0, PARTNER_NONE)
                 Call(InterruptUsePartner)
             EndIf
-            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Thread
                 Wait(30)
                 Call(GetNpcPos, NPC_Kolorado, LVar3, LVar1, LVar2)
@@ -236,8 +236,8 @@ EvtScript N(EVS_NpcDefeat_JungleFuzzyBoss) = {
                 Call(SetCamDistance, CAM_DEFAULT, 300)
                 Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
                 Call(N(DisableCameraLeadingPlayer))
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
-                Call(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
+                Call(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
                 Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Run)
                 Call(SetNpcSpeed, NPC_Kolorado, Float(3.0))
                 IfLt(LVar2, -45)
@@ -306,7 +306,7 @@ NpcData N(NpcData_JungleFuzzy_02) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -350, 3, 40 },
@@ -330,7 +330,7 @@ NpcData N(NpcData_JungleFuzzy_03) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, -10, 110 },
@@ -354,7 +354,7 @@ NpcData N(NpcData_JungleFuzzy_04) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 350, 3, 40 },

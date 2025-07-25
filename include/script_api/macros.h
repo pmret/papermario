@@ -548,7 +548,7 @@
 /// Resumes a thread by its thread ID.
 #define ResumeThread(TID)                  EVT_CMD(EVT_OP_RESUME_THREAD, TID),
 
-/// Sets OUTVAR to TRUE/FALSE depending on whether a thread with the given ID exists (i.e. has not been killed).
+/// Sets OUTVAR to true/false depending on whether a thread with the given ID exists (i.e. has not been killed).
 #define IsThreadRunning(TID, OUTVAR)      EVT_CMD(EVT_OP_IS_THREAD_RUNNING, TID, OUTVAR),
 
 /// Marks the start of a thread block. Commands between this and a matching EndThread
@@ -683,7 +683,7 @@
 #define EVT_EXIT_WALK_FIXED(walkDistance, exitIdx, map, entryIdx) \
     { \
         SetGroup(EVT_GROUP_EXIT_MAP) \
-        Call(DisablePlayerInput, TRUE) \
+        Call(DisablePlayerInput, true) \
         Call(UseExitHeading, walkDistance, exitIdx) \
         Exec(ExitWalk) \
         Call(GotoMap, Ref(map), entryIdx) \
@@ -695,7 +695,7 @@
 #define EVT_EXIT_SINGLE_DOOR(exitIdx, map, entryIdx, colliderID, modelID, swingDir) \
     { \
         SetGroup(EVT_GROUP_EXIT_MAP) \
-        Call(DisablePlayerInput, TRUE) \
+        Call(DisablePlayerInput, true) \
         Set(LVar0, exitIdx) \
         Set(LVar1, colliderID) \
         Set(LVar2, modelID) \
@@ -711,7 +711,7 @@
 #define EVT_EXIT_SPLIT_SINGLE_DOOR(exitIdx, map, entryIdx, colliderID, topModelID, bottomModelID, swingDir) \
     { \
         SetGroup(EVT_GROUP_EXIT_MAP) \
-        Call(DisablePlayerInput, TRUE) \
+        Call(DisablePlayerInput, true) \
         Set(LVar0, exitIdx) \
         Set(LVar1, colliderID) \
         Set(LVar2, topModelID) \
@@ -728,7 +728,7 @@
 #define EVT_EXIT_DOUBLE_DOOR(exitIdx, map, entryIdx, colliderID, leftDoorModelID, rightDoorModelID) \
     { \
         SetGroup(EVT_GROUP_EXIT_MAP) \
-        Call(DisablePlayerInput, TRUE) \
+        Call(DisablePlayerInput, true) \
         Set(LVar0, exitIdx) \
         Set(LVar1, colliderID) \
         Set(LVar2, leftDoorModelID) \
@@ -748,20 +748,20 @@
 #define EVT_SETUP_CAMERA_DEFAULT() \
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096) \
     Call(SetCamBGColor, CAM_DEFAULT, 0, 0, 0) \
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
 
 #define SetUP_CAMERA_NO_LEAD() \
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096) \
     Call(SetCamBGColor, CAM_DEFAULT, 0, 0, 0) \
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE) \
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(SetCamEnabled, CAM_DEFAULT, true) \
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
 
 // same as SetUP_CAMERA_NO_LEAD with calls reordered
 #define SetUP_CAMERA_ALT_NO_LEAD() \
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096) \
     Call(SetCamBGColor, CAM_DEFAULT, 0, 0, 0) \
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE) \
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false) \
+    Call(SetCamEnabled, CAM_DEFAULT, true)
 
 // allow macros with variable number of arguments
 // see https://stackoverflow.com/questions/11761703/overloading-macro-on-number-of-arguments

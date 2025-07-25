@@ -105,7 +105,7 @@ EvtScript N(EVS_Lakliester_ManageYaw) = {
         Set(LVar2, LVar5)
         Call(GetAngleBetweenNPCs, NPC_PARTNER, NPC_Lakilester, LVarA)
         Call(InterpNpcYaw, NPC_PARTNER, LVarA, 0)
-        Call(PlayerFaceNpc, NPC_Lakilester, FALSE)
+        Call(PlayerFaceNpc, NPC_Lakilester, false)
         Wait(1)
         Goto(0)
     Return
@@ -127,7 +127,7 @@ EvtScript N(EVS_Laklilulu_ManageYaw) = {
             Call(GetAngleBetweenNPCs, NPC_Lakilester, NPC_Lakilulu, LVarB)
             Call(InterpNpcYaw, NPC_Lakilester, LVarB, 0)
         EndIf
-        Call(PlayerFaceNpc, NPC_Lakilulu, FALSE)
+        Call(PlayerFaceNpc, NPC_Lakilulu, false)
         Wait(1)
         Goto(0)
     Return
@@ -229,7 +229,7 @@ EvtScript N(EVS_NpcIdle_Lakilester) = {
         Return
     EndIf
     Call(AwaitPlayerApproach, 200, 20, 275)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetNpcPos, NPC_Lakilester, -250, 120, 45)
     Call(SetMusic, 0, SONG_LAKILESTER_THEME, 0, VOL_LEVEL_FULL)
     Call(ShowMessageAtScreenPos, MSG_CH6_00A0, 160, 40)
@@ -257,7 +257,7 @@ EvtScript N(EVS_NpcIdle_Lakilester) = {
     EndIf
     KillThread(LVar9)
     Call(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Idle)
-    Call(PlayerFaceNpc, NPC_Lakilester, FALSE)
+    Call(PlayerFaceNpc, NPC_Lakilester, false)
     Wait(15)
     Call(GetNpcPos, NPC_Lakilester, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -265,11 +265,11 @@ EvtScript N(EVS_NpcIdle_Lakilester) = {
     Call(SetCamDistance, CAM_DEFAULT, 200)
     Call(SetCamPitch, CAM_DEFAULT, Float(18.0), Float(-8.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Call(PlayerMoveTo, -75, 65, 10)
-        Call(PlayerFaceNpc, NPC_Lakilester, FALSE)
+        Call(PlayerFaceNpc, NPC_Lakilester, false)
     EndThread
     Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00A1)
     Call(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Run)
@@ -279,10 +279,10 @@ EvtScript N(EVS_NpcIdle_Lakilester) = {
         Call(SetCamDistance, CAM_DEFAULT, 1000)
         Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-6.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
     End
@@ -291,14 +291,14 @@ EvtScript N(EVS_NpcIdle_Lakilester) = {
 EvtScript N(EVS_Lakilulu_FlyAway) = {
     Call(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
     Call(AwaitPlayerLeave, LVar0, LVar2, 120)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, 0, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, 250)
     Call(SetCamPitch, CAM_DEFAULT, Float(5.5), Float(-7.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(NpcFaceNpc, NPC_Lakilulu, NPC_Lakilester, 1)
     Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_00B4)
@@ -309,12 +309,12 @@ EvtScript N(EVS_Lakilulu_FlyAway) = {
     Call(SetCamPosB, CAM_DEFAULT, 130, -200)
     Call(SetCamPosC, CAM_DEFAULT, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Call(N(PlayLakiluluFlightSounds), 55)
     EndThread
-    Call(SetNpcFlagBits, NPC_Lakilulu, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Lakilulu, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     ExecGetTID(N(EVS_Laklilulu_ManageYaw), LVar9)
     Call(LoadPath, 55, Ref(N(FlightPath_LakiluluDeparts)), ARRAY_COUNT(N(FlightPath_LakiluluDeparts)), EASING_LINEAR)
     Label(20)
@@ -342,13 +342,13 @@ EvtScript N(EVS_Lakilulu_FlyAway) = {
     Call(EnablePartnerAI)
     Call(PutPartnerAway)
     Call(ResetCam, CAM_DEFAULT, Float(90.0))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Scene_LakilesterDefeated) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(30)
     Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_TiredTalk, ANIM_WorldLakilester_Tired, 0, MSG_CH6_00A2)
     Call(SetNpcPos, NPC_Lakilulu, -290, 120, 45)
@@ -369,13 +369,13 @@ EvtScript N(EVS_Scene_LakilesterDefeated) = {
     Call(SetCamPosB, CAM_DEFAULT, 130, -200)
     Call(SetCamPosC, CAM_DEFAULT, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(1)
     Thread
         Call(SetCamDistance, CAM_DEFAULT, 400)
         Call(SetCamPosB, CAM_DEFAULT, 130, 60)
         Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Thread
@@ -401,7 +401,7 @@ EvtScript N(EVS_Scene_LakilesterDefeated) = {
     Call(SetCamDistance, CAM_DEFAULT, 250)
     Call(SetCamPitch, CAM_DEFAULT, Float(5.5), Float(-7.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH6_00A4)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -409,7 +409,7 @@ EvtScript N(EVS_Scene_LakilesterDefeated) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, 300)
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Shout, ANIM_Lakilulu_Shout, 0, MSG_CH6_00A5)
     Call(GetNpcPos, NPC_Lakilulu, LVar0, LVar1, LVar2)
@@ -417,7 +417,7 @@ EvtScript N(EVS_Scene_LakilesterDefeated) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, 250)
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 0, MSG_CH6_00A6)
     Call(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Idle)
@@ -427,7 +427,7 @@ EvtScript N(EVS_Scene_LakilesterDefeated) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, 350)
     Call(SetCamSpeed, CAM_DEFAULT, Float(10.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Label(10)
     Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_ConcernedTalk, ANIM_Lakilulu_ConcernedNod, 0, MSG_CH6_00A7)
@@ -448,7 +448,7 @@ EvtScript N(EVS_Scene_LakilesterDefeated) = {
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetCamDistance, CAM_DEFAULT, 250)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 0, MSG_CH6_00AA)
         Call(SetNpcAnimation, NPC_Lakilester, ANIM_WorldLakilester_Idle)
@@ -458,7 +458,7 @@ EvtScript N(EVS_Scene_LakilesterDefeated) = {
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetCamDistance, CAM_DEFAULT, 350)
         Call(SetCamSpeed, CAM_DEFAULT, Float(5.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Wait(10)
         Call(SpeakToPlayer, NPC_Lakilester, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 0, MSG_CH6_00AB)
@@ -498,10 +498,10 @@ EvtScript N(EVS_Scene_LakilesterDefeated) = {
     Call(ShowMessageAtScreenPos, MSG_Menus_0190, 160, 40)
     Exec(N(EVS_PopSong))
     Wait(10)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Set(GB_StoryProgress, STORY_CH6_LAKILESTER_JOINED_PARTY)
     Call(EnablePartnerAI)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     ExecWait(N(EVS_Lakilulu_FlyAway))
     Return
     End
@@ -512,7 +512,7 @@ EvtScript N(EVS_NpcDefeat_Lakilester) = {
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
             Call(SetNpcAnimation, NPC_SELF, ANIM_WorldLakilester_Tired)
-            Call(SetCamType, CAM_DEFAULT, 6, TRUE)
+            Call(SetCamType, CAM_DEFAULT, 6, true)
             Call(GetNpcPos, NPC_SELF, LVar3, LVar1, LVar2)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Add(LVar0, LVar3)
@@ -522,7 +522,7 @@ EvtScript N(EVS_NpcDefeat_Lakilester) = {
             Call(SetCamDistance, CAM_DEFAULT, 300)
             Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-7.5))
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Exec(N(EVS_Scene_LakilesterDefeated))
         CaseEq(OUTCOME_PLAYER_LOST)
@@ -685,7 +685,7 @@ NpcData N(NpcData_Lakitu_01) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 335, 90, 45 },
@@ -709,7 +709,7 @@ NpcData N(NpcData_Lakitu_02) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -320, 90, 0 },
@@ -733,7 +733,7 @@ NpcData N(NpcData_Spiny_01) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },
@@ -757,7 +757,7 @@ NpcData N(NpcData_Spiny_02) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },
@@ -781,7 +781,7 @@ NpcData N(NpcData_Spiny_03) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },
@@ -805,7 +805,7 @@ NpcData N(NpcData_Spiny_04) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },
@@ -829,7 +829,7 @@ NpcData N(NpcData_Spiny_05) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },
@@ -853,7 +853,7 @@ NpcData N(NpcData_Spiny_06) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },

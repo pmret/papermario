@@ -42,13 +42,13 @@ API_CALLABLE(N(func_802406E0_AACF10)) {
 }
 
 EvtScript N(EVS_Scene_ShowInvitation) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetCamDistance, CAM_DEFAULT, 775)
     Call(SetCamPitch, CAM_DEFAULT, 20, -19)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
     Call(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
     Call(N(func_80240678_AACEA8), 200, 200, 200, 40, 40, 40)
@@ -65,14 +65,14 @@ EvtScript N(EVS_Scene_ShowInvitation) = {
 };
 
 EvtScript N(EVS_Scene_ApproachParty) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
     Call(SetCamDistance, CAM_DEFAULT, Float(675.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(3.5), Float(-6.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(60.0), 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Call(PlayerMoveTo, 0, -250, 150 * DT)
     EndThread
@@ -85,7 +85,7 @@ EvtScript N(EVS_Scene_ApproachParty) = {
     Wait(100 * DT)
     Call(GotoMap, Ref("kkj_00"), kkj_00_ENTRY_5)
     Wait(100 * DT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

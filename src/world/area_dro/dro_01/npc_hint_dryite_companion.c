@@ -31,12 +31,12 @@ EvtScript N(EVS_NpcInteract_Dryite_04) = {
         EndLoop
     EndChildThread
     Call(N(GetRunToPos))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Dryite_Green_Run)
     Call(SetNpcSpeed, NPC_SELF, Float(3.5))
     Call(NpcMoveTo, NPC_SELF, LVar0, LVar1, 0)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Dryite_Green_Idle)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Wait(5)
     Call(GetNpcYaw, NPC_SELF, LVar0)
     Add(LVar0, 180)

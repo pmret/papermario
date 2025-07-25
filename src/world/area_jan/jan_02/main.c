@@ -16,12 +16,12 @@ API_CALLABLE(N(ManageBigPalmTreeVisibility)) {
     if (N(PrevPalmTreeVisibility) != 0) {
         if (currentFloor == COLLIDER_o327 || currentFloor == COLLIDER_o330) {
             mdl_group_set_visibility(MODEL_g70, MODEL_FLAG_HIDDEN, MODEL_GROUP_HIDDEN);
-            N(PrevPalmTreeVisibility) = FALSE;
+            N(PrevPalmTreeVisibility) = false;
         }
     } else {
         if (currentFloor == COLLIDER_o319 || currentFloor == COLLIDER_o316) {
             mdl_group_set_visibility(MODEL_g70, MODEL_FLAG_HIDDEN, MODEL_GROUP_VISIBLE);
-            N(PrevPalmTreeVisibility) = TRUE;
+            N(PrevPalmTreeVisibility) = true;
         }
     }
     return ApiStatus_BLOCK;
@@ -52,7 +52,7 @@ EvtScript N(EVS_BindExitTriggers) = {
     End
 };
 
-s32 N(PrevPalmTreeVisibility) = TRUE;
+s32 N(PrevPalmTreeVisibility) = true;
 
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_YOSHIS_VILLAGE)
@@ -62,10 +62,10 @@ EvtScript N(EVS_Main) = {
     Call(GetLanguage, LVar0)
     Call(SetModelTexVariant, MODEL_o120, LVar0)
 #endif
-    Set(GF_MAP_YoshisVillage, TRUE)
-    Set(AF_JAN02_RaphaelComment, FALSE)
-    Set(AF_JAN02_MetCouncillor, FALSE)
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Set(GF_MAP_YoshisVillage, true)
+    Set(AF_JAN02_RaphaelComment, false)
+    Set(AF_JAN02_MetCouncillor, false)
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupFoliage))
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitnw, COLLIDER_FLAGS_UPPER_MASK)
@@ -74,9 +74,9 @@ EvtScript N(EVS_Main) = {
     Exec(EnterWalk)
     Exec(N(EVS_SetupMusic))
     Call(PlaySound, SOUND_LOOP_JAN_BEACH_WAVES)
-    Call(EnableTexPanning, MODEL_o202, TRUE)
-    Call(EnableTexPanning, MODEL_o203, TRUE)
-    Call(EnableTexPanning, MODEL_o103, TRUE)
+    Call(EnableTexPanning, MODEL_o202, true)
+    Call(EnableTexPanning, MODEL_o203, true)
+    Call(EnableTexPanning, MODEL_o103, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(    0,  400,    0,    0)

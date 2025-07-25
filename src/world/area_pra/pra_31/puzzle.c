@@ -99,7 +99,7 @@ API_CALLABLE(N(EVS_ManagePuzzle)) {
         }
     }
 
-    incorrect = FALSE;
+    incorrect = false;
     for (i = 0; i < GRID_SIZE_Z; i++) {
         for (j = 0; j < GRID_SIZE_X; j++) {
             if (puzzle->cells[i][j] > CELL_EMPTY) {
@@ -107,13 +107,13 @@ API_CALLABLE(N(EVS_ManagePuzzle)) {
             }
 
             if (puzzle->cells[i][j] != N(PuzzleSolution)[i][j]) {
-                incorrect = TRUE;
+                incorrect = true;
             }
         }
     }
 
     if (!incorrect) {
-        evt_set_variable(script, MV_PuzzleSolved, TRUE);
+        evt_set_variable(script, MV_PuzzleSolved, true);
     }
     return ApiStatus_BLOCK;
 }
@@ -163,26 +163,26 @@ API_CALLABLE(N(IsDestCellUnavailable)) {
     // does another dino exist at the proposed grid cell?
     for (i = 0; i < DINO_COUNT; i++) {
         if (i != idx && ci == puzzle->dinos[i].ci && cj == puzzle->dinos[i].cj) {
-            script->varTable[0] = TRUE;
+            script->varTable[0] = true;
         }
     }
 
     // is the cell out of bounds?
     if (ci < 0) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
     if (ci >= GRID_SIZE_X) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
     if (cj < 0) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
     if (cj >= GRID_SIZE_Z) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
 
     // cancel the push if the cell is invalid
-    if (script->varTable[0] == TRUE && gPlayerStatusPtr->actionState == ACTION_STATE_PUSHING_BLOCK) {
+    if (script->varTable[0] == true && gPlayerStatusPtr->actionState == ACTION_STATE_PUSHING_BLOCK) {
         set_action_state(ACTION_STATE_IDLE);
     }
     return ApiStatus_DONE2;
@@ -306,12 +306,12 @@ API_CALLABLE(N(EndBlockPushingState)) {
 
 EvtScript N(EVS_Scene_PuzzleSolved) = {
     Loop(0)
-        IfEq(MV_PuzzleSolved, TRUE)
+        IfEq(MV_PuzzleSolved, true)
             BreakLoop
         EndIf
         Wait(1)
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Loop(0)
         IfEq(MV_PushingStatue, 0)
             BreakLoop
@@ -327,7 +327,7 @@ EvtScript N(EVS_Scene_PuzzleSolved) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(323.3), Float(-66.5))
     Call(SetCamPosB, CAM_DEFAULT, Float(500.0), Float(296.8))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Wait(45)
@@ -373,26 +373,26 @@ EvtScript N(EVS_Scene_PuzzleSolved) = {
     EndThread
     Thread
         Wait(50)
-        Call(EnableModel, MODEL_n1, FALSE)
-        Call(EnableModel, MODEL_k1, TRUE)
+        Call(EnableModel, MODEL_n1, false)
+        Call(EnableModel, MODEL_k1, true)
         Wait(10)
-        Call(EnableModel, MODEL_n2, FALSE)
-        Call(EnableModel, MODEL_k2, TRUE)
+        Call(EnableModel, MODEL_n2, false)
+        Call(EnableModel, MODEL_k2, true)
         Wait(30)
-        Call(EnableModel, MODEL_n3, FALSE)
-        Call(EnableModel, MODEL_k3, TRUE)
+        Call(EnableModel, MODEL_n3, false)
+        Call(EnableModel, MODEL_k3, true)
         Wait(22)
-        Call(EnableModel, MODEL_n4, FALSE)
-        Call(EnableModel, MODEL_k4, TRUE)
+        Call(EnableModel, MODEL_n4, false)
+        Call(EnableModel, MODEL_k4, true)
         Wait(18)
-        Call(EnableModel, MODEL_n5, FALSE)
-        Call(EnableModel, MODEL_k5, TRUE)
+        Call(EnableModel, MODEL_n5, false)
+        Call(EnableModel, MODEL_k5, true)
     EndThread
     Call(PlayModelAnimation, MDL_ANIMATOR_0, Ref(N(AS_Stairs_Unfold)))
     Wait(200)
     Set(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -453,7 +453,7 @@ EvtScript N(EVS_PushStatue_Impl) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Thread
         Call(N(GetPlayerPushLerpValues), LVarA)
         Call(MakeLerp, LVar3, LVar4, PUSH_TIME, EASING_LINEAR)
@@ -470,14 +470,14 @@ EvtScript N(EVS_PushStatue_Impl) = {
     Thread
         Call(ShakeCam, CAM_DEFAULT, 0, PUSH_TIME, Float(0.3))
     EndThread
-    Set(MV_PushingStatue, TRUE)
+    Set(MV_PushingStatue, true)
     Call(PlaySoundAtCollider, LVar9, SOUND_PRA_PUSH_STATUE, 0)
     Call(N(BeginPushingStatue), LVarA)
     Wait(PUSH_TIME)
-    Set(MV_PushingStatue, FALSE)
+    Set(MV_PushingStatue, false)
     Call(N(EndBlockPushingState))
     Thread
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Wait(2)
         Call(N(UnkFunc11), LVar9)
         IfEq(LVar0, 0)
@@ -499,7 +499,7 @@ EvtScript N(EVS_PushStatue_01) = {
     EndIf
 #endif
     Call(N(IsDestCellUnavailable), NPC_AlbinoDino_01)
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Return
     EndIf
     Set(LVarA, NPC_AlbinoDino_01)
@@ -516,7 +516,7 @@ EvtScript N(EVS_PushStatue_02) = {
     EndIf
 #endif
     Call(N(IsDestCellUnavailable), NPC_AlbinoDino_02)
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Return
     EndIf
     Set(LVarA, NPC_AlbinoDino_02)
@@ -533,7 +533,7 @@ EvtScript N(EVS_PushStatue_03) = {
     EndIf
 #endif
     Call(N(IsDestCellUnavailable), NPC_AlbinoDino_03)
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Return
     EndIf
     Set(LVarA, NPC_AlbinoDino_03)
@@ -564,7 +564,7 @@ EvtScript N(EVS_SetupPuzzle) = {
     Call(ParentColliderToModel, COLLIDER_s03e, MODEL_o1044)
     Call(ParentColliderToModel, COLLIDER_s03s, MODEL_o1044)
     Call(ParentColliderToModel, COLLIDER_s03w, MODEL_o1044)
-    Set(MV_PuzzleSolved, FALSE)
+    Set(MV_PuzzleSolved, false)
     Exec(N(EVS_UpdateStatuePositions))
     BindTrigger(Ref(N(EVS_PushStatue_01)), TRIGGER_WALL_PUSH, COLLIDER_s01e, 1, 0)
     BindTrigger(Ref(N(EVS_PushStatue_02)), TRIGGER_WALL_PUSH, COLLIDER_s02e, 1, 0)

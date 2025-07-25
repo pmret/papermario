@@ -101,7 +101,7 @@ enum ImgFXAnimFlags {
 typedef struct ImgFXRenderMode {
     /* 0x0 */ s32 mode1;
     /* 0x4 */ s32 mode2;
-    /* 0x8 */ u8 flags; // only checks TRUE so far. some kind of switch?
+    /* 0x8 */ u8 flags; // only checks true so far. some kind of switch?
 } ImgFXRenderMode; // size = 0xC
 
 typedef ImgFXState ImgFXInstanceList[MAX_IMGFX_INSTANCES];
@@ -265,7 +265,7 @@ void imgfx_init(void) {
     for (i = 0; i < ARRAY_COUNT(ImgFXDataCache); i++) {
         ImgFXDataCache[i].data = NULL;
         ImgFXDataCache[i].staleCooldownTimer = 0;
-        ImgFXDataCache[i].usingContextualHeap = FALSE;
+        ImgFXDataCache[i].usingContextualHeap = false;
     }
 
     imgfx_vtxCount = 0;
@@ -332,7 +332,7 @@ void imgfx_update_cache_impl(void) {
                 }
 
                 ImgFXDataCache[i].staleCooldownTimer = 0;
-                ImgFXDataCache[i].usingContextualHeap = FALSE;
+                ImgFXDataCache[i].usingContextualHeap = false;
             }
         }
     }
@@ -362,7 +362,7 @@ s32 imgfx_get_free_instances(s32 count) {
     }
 
     firstIdx = 0;
-    foundAny = FALSE;
+    foundAny = false;
     numAssigned = 0;
     iPrev = -1;
     for (i = 1; i < ARRAY_COUNT(*ImgFXInstances); i++) {
@@ -372,7 +372,7 @@ s32 imgfx_get_free_instances(s32 count) {
 
         if (!foundAny) {
             firstIdx = i;
-            foundAny = TRUE;
+            foundAny = true;
         } else {
             (*ImgFXInstances)[iPrev].nextIdx = i;
         }
@@ -431,19 +431,19 @@ void imgfx_cache_instance_data(ImgFXState* state) {
         state->curAnimOffset = NULL;
     }
     if (state->vtxBufs[0] != NULL) {
-        imgfx_add_to_cache(state->vtxBufs[0], TRUE);
+        imgfx_add_to_cache(state->vtxBufs[0], true);
         state->vtxBufs[0] = NULL;
     }
     if (state->vtxBufs[1] != NULL) {
-        imgfx_add_to_cache(state->vtxBufs[1], TRUE);
+        imgfx_add_to_cache(state->vtxBufs[1], true);
         state->vtxBufs[1] = NULL;
     }
     if (state->gfxBufs[0] != NULL) {
-        imgfx_add_to_cache(state->gfxBufs[0], TRUE);
+        imgfx_add_to_cache(state->gfxBufs[0], true);
         state->gfxBufs[0] = NULL;
     }
     if (state->gfxBufs[1] != NULL) {
-        imgfx_add_to_cache(state->gfxBufs[1], TRUE);
+        imgfx_add_to_cache(state->gfxBufs[1], true);
         state->gfxBufs[1] = NULL;
     }
 }
@@ -801,7 +801,7 @@ void imgfx_make_mesh(ImgFXState* state) {
 }
 
 void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
-    s16 skipModeChange = FALSE;
+    s16 skipModeChange = false;
     s32 primAlpha = state->ints.color.a;
     s32 renderType = state->renderType;
     s8 angle1;
@@ -832,7 +832,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
         mode1 = renderMode->mode1;
         mode2 = renderMode->mode2;
         if (renderMode->flags & IMGFX_RENDER_NO_OVERRIDE) {
-            skipModeChange = TRUE;
+            skipModeChange = true;
         }
 
         ifxImgAlpha = (f32) ImgFXCurrentTexturePtr->alphaMultiplier / 255.0;
@@ -857,7 +857,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
             //TODO figure out bits
             mode1 = 0x404B40;
             mode2 = 0x104B40;
-            skipModeChange = TRUE;
+            skipModeChange = true;
         }
 
         if ((state->flags & IMGFX_FLAG_400) && !skipModeChange) {
@@ -1103,7 +1103,7 @@ void imgfx_mesh_make_strip(ImgFXState* state) {
 
     // create remaining pairs of vertices along the strip
     nextY = stepY;
-    while (TRUE) {
+    while (true) {
         rightColor = (nextY * 120) / ImgFXCurrentTexturePtr->tex.height;
         leftColor = rightColor + 120;
         imgfx_vtxCount += 2;
@@ -1468,7 +1468,7 @@ void imgfx_appendGfx_mesh_basic(ImgFXState* state, Matrix4f mtx) {
 
     i = state->firstVtxIdx;
 
-    while (TRUE) {
+    while (true) {
         Camera* cam;
         s32 uls = (imgfx_vtxBuf[i + 0].v.tc[0] >> 0x5) - 256;
         s32 ult = (imgfx_vtxBuf[i + 0].v.tc[1] >> 0x5) - 256;

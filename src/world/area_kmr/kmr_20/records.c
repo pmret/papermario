@@ -74,7 +74,7 @@ void N(appendGfx_records_impl)(GameRecords* records, s32 alpha) {
         gDPFillRectangle(gMainGfxPos++, 63, 43, 257, 192);
         gDPPipeSync(gMainGfxPos++);
 
-        msg_draw_frame(60, 40, 200, 155, MSG_STYLE_INSPECT, MSG_PAL_WHITE, TRUE, alpha * 0.55, alpha);
+        msg_draw_frame(60, 40, 200, 155, MSG_STYLE_INSPECT, MSG_PAL_WHITE, true, alpha * 0.55, alpha);
         draw_msg(MSG_CH0_00FC, 88, 50, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
         draw_number(gPlayerData.totalCoinsEarned, 194, 50, 1, MSG_PAL_WHITE, alpha, 2);
         draw_msg(MSG_CH0_00FD, 124, 65, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
@@ -133,7 +133,7 @@ void N(appendGfx_records_impl)(GameRecords* records, s32 alpha) {
         gDPFillRectangle(gMainGfxPos++, 33, 43, 287, 192);
         gDPPipeSync(gMainGfxPos++);
 
-        msg_draw_frame(30, 40, 260, 155, MSG_STYLE_INSPECT, MSG_PAL_WHITE, TRUE, alpha * 0.55, alpha);
+        msg_draw_frame(30, 40, 260, 155, MSG_STYLE_INSPECT, MSG_PAL_WHITE, true, alpha * 0.55, alpha);
         draw_msg(MSG_CH0_00FC, 206 - get_msg_width(MSG_CH0_00FC, CHARSET), 50, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
         draw_number(gPlayerData.totalCoinsEarned, 216, 51, 1, MSG_PAL_WHITE, alpha, 2);
         draw_msg(MSG_CH0_00FD, 206 - get_msg_width(MSG_CH0_00FD, CHARSET), 65, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
@@ -264,7 +264,7 @@ void N(calculate_records)(GameRecords* records) {
     records->equippedBadges = count;
 
     count = 0;
-    for (i = 0; TRUE; i++) {
+    for (i = 0; true; i++) {
         if (N(RecipeFoundVars)[i] != 0) {
             if (evt_get_variable(NULL, N(RecipeFoundVars)[i]) != 0) {
                 count++;
@@ -302,23 +302,23 @@ API_CALLABLE(N(ShowGameRecords)) {
 }
 
 EvtScript N(EVS_Inspect_Records) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(GetPlayerPos, LVarA, LVarB, LVarC)
     Call(UseSettingsFrom, CAM_DEFAULT, LVarA, 30, LVarC)
     Call(SetPanTarget, CAM_DEFAULT, LVarA, 30, LVarC)
     Call(SetCamDistance, CAM_DEFAULT, Float(320.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.2))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(N(ShowGameRecords))
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.2))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
+    Call(DisablePlayerPhysics, false)
     Return
     End
 };

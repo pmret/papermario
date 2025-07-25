@@ -57,7 +57,7 @@ EvtScript N(EVS_UpdateClockPendulum) = {
 
 EvtScript N(EVS_ExitDoor_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, kkj_18_ENTRY_0)
     Set(LVar1, COLLIDER_ttw)
     Set(LVar2, MODEL_o9)
@@ -75,8 +75,8 @@ EvtScript N(EVS_ExitDoor_0) = {
 };
 
 EvtScript N(EVS_EnterMap) = {
-    Call(DisablePlayerInput, TRUE)
-    IfNe(AF_KKJ_FinishedBakingCake, FALSE)
+    Call(DisablePlayerInput, true)
+    IfNe(AF_KKJ_FinishedBakingCake, false)
         Call(SetPlayerPos, -227, 0, -35)
         Call(SetNpcPos, NPC_PARTNER, -227, 0, -35)
         Wait(30)
@@ -97,7 +97,7 @@ EvtScript N(EVS_EnterMap) = {
     Set(LVar2, MODEL_o9)
     Set(LVar3, DOOR_SWING_OUT)
     ExecWait(EnterSingleDoor)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     BindTrigger(Ref(N(EVS_ExitDoor_0)), TRIGGER_WALL_PRESS_A, COLLIDER_ttw, 1, 0)
     Return
     End
@@ -108,7 +108,7 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
     IfEq(GB_StoryProgress, STORY_CH4_BEGAN_PEACH_MISSION)
-        Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+        Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     EndIf
     Exec(N(EVS_UpdateClockPendulum))
     Call(SetTexPanner, MODEL_o56, TEX_PANNER_0)

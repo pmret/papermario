@@ -153,7 +153,7 @@ EvtScript N(EVS_Init) = {
         Call(SetActorSize, ACTOR_SELF, 20, 25)
         Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(SmallAnims)))
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Anim02)
-        Call(SetActorVar, ACTOR_SELF, AVAR_IsLarge, FALSE)
+        Call(SetActorVar, ACTOR_SELF, AVAR_IsLarge, false)
     Else
         Call(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -8, -13)
         Call(SetProjectileTargetOffset, ACTOR_SELF, PRT_TARGET, -8, -13)
@@ -162,7 +162,7 @@ EvtScript N(EVS_Init) = {
         Call(SetActorSize, ACTOR_SELF, 28, 35)
         Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(LargeAnims)))
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Anim03)
-        Call(SetActorVar, ACTOR_SELF, AVAR_IsLarge, TRUE)
+        Call(SetActorVar, ACTOR_SELF, AVAR_IsLarge, true)
     EndIf
     Call(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, 100)
@@ -247,7 +247,7 @@ EvtScript N(onDeath) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
         CaseEq(EVENT_HIT_COMBO)
@@ -385,17 +385,17 @@ EvtScript N(EVS_HandleEvent) = {
             ExecWait(EVS_Enemy_NoDamageHit)
         CaseDefault
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     // do nothing
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

@@ -34,10 +34,10 @@ void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize);
 
 Quad spr_defaultQuad = {
     {
-    {{{ -16, 56, 0 }, FALSE, {    0,    0 }, { 240, 240, 240, 255 }}},
-    {{{  16, 56, 0 }, FALSE, { 1024,    0 }, { 120, 120, 120, 255 }}},
-    {{{  16,  0, 0 }, FALSE, { 1024, 1792 }, {   0,   0,   0, 255 }}},
-    {{{ -16,  0, 0 }, FALSE, {    0, 1792 }, { 120, 120, 120, 255 }}},
+    {{{ -16, 56, 0 }, false, {    0,    0 }, { 240, 240, 240, 255 }}},
+    {{{  16, 56, 0 }, false, { 1024,    0 }, { 120, 120, 120, 255 }}},
+    {{{  16,  0, 0 }, false, { 1024, 1792 }, {   0,   0,   0, 255 }}},
+    {{{ -16,  0, 0 }, false, {    0, 1792 }, { 120, 120, 120, 255 }}},
     }
 };
 
@@ -721,11 +721,11 @@ s32 spr_component_update(s32 curNotifyValue, SpriteComponent** compList, SpriteA
 
 void spr_init_component_anim_state(SpriteComponent* comp, SpriteAnimComponent* anim) {
     if (anim == PTR_LIST_END) {
-        comp->initialized = FALSE;
+        comp->initialized = false;
         return;
     }
 
-    comp->initialized = TRUE;
+    comp->initialized = true;
     comp->properties = 0;
     comp->readPos = anim->cmdList;
     comp->waitTime = 0;
@@ -761,7 +761,7 @@ void spr_set_anim_timescale(f32 timescale) {
 }
 
 void spr_load_player_sprite(s32 spriteIndex) {
-    SpriteAnimData* playerSprite = spr_load_sprite(spriteIndex - 1, TRUE, FALSE);
+    SpriteAnimData* playerSprite = spr_load_sprite(spriteIndex - 1, true, false);
 
     spr_playerSprites[spriteIndex - 1] = playerSprite;
     if (spr_playerMaxComponents < playerSprite->maxComponents) {
@@ -773,7 +773,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
     s32 loadedFlags;
     s32 i;
 
-    spr_allocateBtlComponentsOnWorldHeap = FALSE;
+    spr_allocateBtlComponentsOnWorldHeap = false;
     _heap_create(&heap_spriteHead, SPRITE_HEAP_SIZE);
     imgfx_init();
 
@@ -891,13 +891,13 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* 
     s32 spriteIdBackFacing;
 
     if (animID == ANIM_LIST_END) {
-        return FALSE;
+        return false;
     }
 
     D_802DF57C = spriteId = ((animID >> 0x10) & 0xFF) - 1;
     spriteData = (u32*)spr_playerSprites[spriteId];
     if (spriteData == NULL) {
-        return FALSE;
+        return false;
     }
 
     // TODO: fake match or not?
@@ -948,7 +948,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* 
     if (spriteInstanceID & DRAW_SPRITE_OVERRIDE_ALPHA) {
         alpha = alphaIn & 0xFF;
         if (alphaIn == 0) {
-            return FALSE;
+            return false;
         }
     } else {
         alpha = 255;
@@ -966,7 +966,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* 
         }
     }
 
-    return TRUE;
+    return true;
 }
 
 s32 func_802DDEC4(s32 spriteIdx) {
@@ -1057,7 +1057,7 @@ s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList) {
         SpriteInstances[listIndex].spriteData = header;
     } else {
         NpcSpriteInstanceCount[spriteIndex] = 1;
-        header = spr_load_sprite(spriteIndex - 1, FALSE, useTailAlloc);
+        header = spr_load_sprite(spriteIndex - 1, false, useTailAlloc);
         SpriteInstances[listIndex].spriteData = header;
         NpcSpriteData[spriteIndex] = header;
         if (extraAnimList != NULL) {
@@ -1119,7 +1119,7 @@ s32 spr_draw_npc_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* palett
     u32* spriteData;
 
     if (animID == ANIM_LIST_END) {
-        return FALSE;
+        return false;
     }
 
     spriteData = (u32*)SpriteInstances[i].spriteData;
@@ -1154,7 +1154,7 @@ s32 spr_draw_npc_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* palett
     if (spriteInstanceID & DRAW_SPRITE_OVERRIDE_ALPHA) {
         alpha = arg2 & 0xFF;
         if (arg2 == 0) {
-            return FALSE;
+            return false;
         }
     } else {
         alpha = 255;
@@ -1172,7 +1172,7 @@ s32 spr_draw_npc_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* palett
         }
     }
 
-    return TRUE;
+    return true;
 }
 
 s32 spr_get_notify_value(s32 spriteIndex) {
@@ -1315,9 +1315,9 @@ s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIn
         out->width = cache->width;
         out->height = cache->height;
         out->defaultPal = paletteOffsetCopy[cache->palette];
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 PAL_PTR* spr_get_npc_palettes(s32 npcSpriteID) {

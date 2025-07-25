@@ -55,7 +55,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_JADE_JUNGLE)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     Exec(N(EVS_CreateDarkness))
     Set(LVar0, Ref(N(D_80241F38_B72798)))
     Exec(EnterWalk)

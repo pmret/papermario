@@ -28,7 +28,7 @@ API_CALLABLE(N(init)) {
     acs->actionCommandID = ACTION_COMMAND_JUMP;
     acs->hudPosX = -48;
     acs->state = 0;
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     acs->hudPosY = 80;
 
     hid = hud_element_create(&HES_AButton);
@@ -63,7 +63,7 @@ API_CALLABLE(N(start)) {
     acs->prepareTime = evt_get_variable(script, *args++);
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     battleStatus->actionQuality = 0;
 
     hid = acs->hudElemIDs[HIDX_BUTTON];
@@ -133,7 +133,7 @@ void N(update)(void) {
             }
             // inputs during this state will cause the action to fail
             if ((battleStatus->curButtonsPressed & BUTTON_A) && !acs->autoSucceed) {
-                acs->wrongButtonPressed = TRUE;
+                acs->wrongButtonPressed = true;
                 battleStatus->actionResult = ACTION_RESULT_EARLY;
             }
             // continue until we begin the window for valid input

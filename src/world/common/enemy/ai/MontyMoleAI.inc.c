@@ -52,19 +52,19 @@ static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyDetectVolume* territory, f
         angle = 90.0f;
     }
     if (fabsf(get_clamped_angle_diff(angle, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z))) > 60.0) {
-        retVal = FALSE;
+        retVal = false;
     }
     // check for overlap with player
     if (get_xz_dist_to_player(npc->pos.x, npc->pos.z) < gPlayerStatusPtr->colliderDiameter + npc->collisionDiameter) {
-        retVal = FALSE;
+        retVal = false;
     }
     // check player elevation difference
     if (fabsf(npc->pos.y - gPlayerStatusPtr->pos.y) >= 40.0f) {
-        retVal = FALSE;
+        retVal = false;
     }
     // check for bow hiding
     if (gPartnerStatus.actingPartner == PARTNER_BOW) {
-        retVal = FALSE;
+        retVal = false;
     }
     return retVal;
 }

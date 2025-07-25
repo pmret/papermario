@@ -8,16 +8,16 @@
 #define NAME_SUFFIX
 
 EvtScript N(EVS_Scene_WishingToadKid) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAND)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Call(UseSettingsFrom, CAM_DEFAULT, -100, 0, 200)
     Call(SetPanTarget, CAM_DEFAULT, -100, 0, 200)
     Call(SetCamDistance, CAM_DEFAULT, Float(-400.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(6.0), Float(-8.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(20)
     Call(SpeakToPlayer, NPC_WishingToadKid, ANIM_ToadKid_Red_Talk, ANIM_ToadKid_Red_Disappointed, 0, MSG_HOS_0070)

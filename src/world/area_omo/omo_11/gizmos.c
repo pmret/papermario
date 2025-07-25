@@ -207,7 +207,7 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
     ringModel->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
     update_collider_transform(COLLIDER_1_0);
 
-    isPounding = FALSE;
+    isPounding = false;
     for (i = 0; i < ARRAY_COUNT(N(RotatingPlatformColliders)); i++) {
         if (gCollisionStatus.curFloor == N(RotatingPlatformColliders)[i]) {
             if (playerStatus->flags & PS_FLAG_NO_STATIC_COLLISION) {
@@ -218,7 +218,7 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
             if (playerStatus->actionState == ACTION_STATE_SPIN_POUND ||
                 playerStatus->actionState == ACTION_STATE_TORNADO_POUND)
             {
-                isPounding = TRUE;
+                isPounding = true;
             }
         }
     }

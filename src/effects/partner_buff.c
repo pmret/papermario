@@ -70,9 +70,9 @@ EffectInstance* partner_buff_main(s32 useRandomValues, f32 arg1, f32 arg2, f32 a
         part->unk_0C[i].stateTimer = 0;
     }
 
-    part->visible = FALSE;
+    part->visible = false;
     if (useRandomValues == 1) {
-        part->visible = TRUE;
+        part->visible = true;
     }
 
     return effect;

@@ -182,7 +182,7 @@ s32 draw_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32
 s32 _update_message(MessagePrintState* printer);
 void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2);
 void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2);
-MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback, s32 arg2);
+MessagePrintState* _msg_get_printer_for_msg(s32 msgID, bool* donePrintingWriteback, s32 arg2);
 void msg_update_rewind_arrow(s32);
 void msg_draw_rewind_arrow(s32);
 void msg_draw_choice_pointer(MessagePrintState* printer);
@@ -290,7 +290,7 @@ s32 _update_message(MessagePrintState* printer) {
     }
     printer->speechPan = speechPan;
 
-    cond = FALSE;
+    cond = false;
     if (!(printer->stateFlags & MSG_STATE_FLAG_40)) {
         if (!(printer->stateFlags & (MSG_STATE_FLAG_20 | MSG_STATE_FLAG_10))) {
             s32 buttons = BUTTON_A;
@@ -305,7 +305,7 @@ s32 _update_message(MessagePrintState* printer) {
                         printer->curPrintDelay = 0;
                         printer->stateFlags |= MSG_STATE_FLAG_4;
                         if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_C_DOWN)) {
-                            cond = TRUE;
+                            cond = true;
                             sfx_play_sound_with_params(SOUND_MENU_NEXT, 0, 0, 0);
                         } else if (printer->srcBuffer[printer->srcBufferPos] != MSG_CHAR_READ_END) {
                             printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY | MSG_STATE_FLAG_4;
@@ -557,7 +557,7 @@ s32 _update_message(MessagePrintState* printer) {
             general_heap_free(printer->letterContentPal);
         }
         if (printer->closedWritebackBool != NULL) {
-            *printer->closedWritebackBool = TRUE;
+            *printer->closedWritebackBool = true;
             printer->closedWritebackBool = NULL;
         }
     }
@@ -845,7 +845,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                 if (printer->stateFlags & MSG_STATE_FLAG_800) {
                     if (printer->stateFlags & MSG_STATE_FLAG_1000) {
                         if (printer->closedWritebackBool != NULL) {
-                            *printer->closedWritebackBool = TRUE;
+                            *printer->closedWritebackBool = true;
                         }
                     }
                     if (printer->style != MSG_STYLE_POPUP && printer->style != MSG_STYLE_B) {
@@ -1299,7 +1299,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
             break;
         }
         arg1 = 10000;
-    } while (TRUE);
+    } while (true);
 
     printer->printBufferPos = printBuf - printer->printBuffer;
     printer->delayFlags = 0;
@@ -1428,11 +1428,11 @@ s8* load_message_to_buffer(s32 msgID) {
     return prevBufferPos;
 }
 
-MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback) {
+MessagePrintState* msg_get_printer_for_msg(s32 msgID, bool* donePrintingWriteback) {
     return _msg_get_printer_for_msg(msgID, donePrintingWriteback, 0);
 }
 
-MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback, s32 arg2) {
+MessagePrintState* _msg_get_printer_for_msg(s32 msgID, bool* donePrintingWriteback, s32 arg2) {
     MessagePrintState* printer;
     s8* srcBuffer;
     s32 height;
@@ -1469,7 +1469,7 @@ MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWritebac
             printer->closedWritebackBool = donePrintingWriteback;
 
             if (donePrintingWriteback != NULL) {
-                *donePrintingWriteback = FALSE;
+                *donePrintingWriteback = false;
             }
             return printer;
         }
@@ -1513,11 +1513,11 @@ void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s32 x, s32 y) 
 
 s32 cancel_message(MessagePrintState* msgPrintState) {
     if (!(msgPrintState->stateFlags & MSG_STATE_FLAG_2)) {
-        return FALSE;
+        return false;
     }
 
     msgPrintState->stateFlags |= MSG_STATE_FLAG_1;
-    return TRUE;
+    return true;
 }
 
 void set_message_images(MessageImageData* images) {
@@ -1537,7 +1537,7 @@ void set_message_text_var(s32 msgID, s32 index) {
 
     i = 0;
     msgVars = gMessageMsgVars[index];
-    while (TRUE) {
+    while (true) {
         msgVars[i] = ((u8*)msgID)[i];
         if (((u8*)msgID)[i] == MSG_CHAR_READ_END) {
             break;
@@ -1735,11 +1735,11 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
     }
 
     i = 0;
-    stop = FALSE;
+    stop = false;
     lineWidth = 0;
     linesOnPage = 0;
     charCount = 0;
-    endl = TRUE;
+    endl = true;
     lineCount = 0;
 
     do {
@@ -1775,7 +1775,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                 }
                 lineWidth = 0;
                 charCount = 0;
-                endl = TRUE;
+                endl = true;
                 break;
             case MSG_CHAR_READ_STYLE:
                 msgStyle = message[i++];
@@ -1802,7 +1802,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                 lineWidths[lineIndex] = lineWidth;
                 lineCharNumbers[lineIndex] = charCount;
                 lineIndex++;
-                stop = TRUE;
+                stop = true;
                 break;
             case MSG_CHAR_READ_FUNCTION:
                 functionCode = message[i++];
@@ -1823,7 +1823,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                     case MSG_READ_FUNC_ENABLE_CDOWN_NEXT:
                         break;
                     default:
-                        stop = TRUE;
+                        stop = true;
                         break;
                     case MSG_READ_FUNC_CUSTOM_VOICE:
                         i++;
@@ -1863,13 +1863,13 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                         break;
                     case MSG_READ_FUNC_CENTER_X:
                         if (message[i] == 0) {
-                            stop = TRUE;
+                            stop = true;
                         }
                         i++;
                         break;
                     case MSG_READ_FUNC_YIELD:
                         if (message[i] == MSG_CHAR_READ_END) {
-                            stop = TRUE;
+                            stop = true;
                         }
                         break;
                     case MSG_READ_FUNC_SIZE:
@@ -1917,7 +1917,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                 if (endl) {
                     lineCount++;
                     linesOnPage++;
-                    endl = FALSE;
+                    endl = false;
                 }
 
 #if VERSION_IQUE

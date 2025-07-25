@@ -121,7 +121,7 @@ void* _heap_malloc(HeapNode* head, u32 size) {
 
             // update the entry id on allocation
             HeapEntryID = heap_nextMallocID;
-            pPrevHeapNode->allocated = TRUE;
+            pPrevHeapNode->allocated = true;
             heap_nextMallocID = HeapEntryID + 1;
             pPrevHeapNode->entryID = HeapEntryID;
 
@@ -129,7 +129,7 @@ void* _heap_malloc(HeapNode* head, u32 size) {
             curHeapNode = pPrevHeapNode->next;
             curHeapNode->next = nextHeapNode;
             curHeapNode->length = smallestBlockFound - newBlockSize;
-            curHeapNode->allocated = FALSE;
+            curHeapNode->allocated = false;
         } else {
             // take this entry out of the free linked list and mark as allocated
             pPrevHeapNode->next = nextHeapNode;
@@ -138,7 +138,7 @@ void* _heap_malloc(HeapNode* head, u32 size) {
             // update the entry id on allocation
             // note, usage of a single ID from above will result in wrong code
             HeapEntryID2 = heap_nextMallocID;
-            pPrevHeapNode->allocated = TRUE;
+            pPrevHeapNode->allocated = true;
             heap_nextMallocID = HeapEntryID2 + 1;
             pPrevHeapNode->entryID = HeapEntryID2;
         }
@@ -192,18 +192,18 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
             // the end of the block instead of the beginning when splitting it up
             curNode->next = (HeapNode*)((u8*)curNode + foundNodeLength - size);
             curNode->length = foundNodeLength - newNodeSize;
-            curNode->allocated = FALSE;
+            curNode->allocated = false;
 
             curNode = curNode->next;
             curNode->next = nextNode;
             curNode->length = size;
-            curNode->allocated = TRUE;
+            curNode->allocated = true;
 
         } else {
             // just return this actual block
             curNode->next = nextNode;
             curNode->length = foundNodeLength;
-            curNode->allocated = TRUE;
+            curNode->allocated = true;
         }
 
         return (u8*)curNode + sizeof(HeapNode);
@@ -222,13 +222,13 @@ u32 _heap_free(HeapNode* heapNodeList, void* addrToFree) {
 
     // if no address to free then return
     if (addrToFree == NULL) {
-        return TRUE;
+        return true;
     }
 
     // if we are not allocated then ignore this request
     nodeToFreeHeader = (HeapNode*)((u8*)addrToFree - sizeof(HeapNode));
     if (!nodeToFreeHeader->allocated) {
-        return TRUE;
+        return true;
     }
 
     nextNode = nodeToFreeHeader->next;
@@ -244,7 +244,7 @@ u32 _heap_free(HeapNode* heapNodeList, void* addrToFree) {
 
     // walk the full heap node list looking for the block before our current entry
     tempNode = heapNodeList;
-    while (TRUE) {
+    while (true) {
         // get the pointer to the next block, if it matches the block being freed then
         // exit the search
         heapNodeList = tempNode->next;
@@ -274,8 +274,8 @@ u32 _heap_free(HeapNode* heapNodeList, void* addrToFree) {
     outNode = nodeToFreeHeader;
     outNode->next = nextNode;
     outNode->length = curNodeLength;
-    outNode->allocated = FALSE;
-    return FALSE;
+    outNode->allocated = false;
+    return false;
 }
 
 void* _heap_realloc(HeapNode* heapNodeList, void* addr, u32 newSize) {
@@ -335,7 +335,7 @@ void* _heap_realloc(HeapNode* heapNodeList, void* addr, u32 newSize) {
         nodeToUpdate = newFreeBlock;
         nodeToUpdate->next = nextNode;
         nodeToUpdate->length = (newNodeLength - newSizeAligned) - sizeof(HeapNode);
-        nodeToUpdate->allocated = FALSE;
+        nodeToUpdate->allocated = false;
     } else {
         // no room, update our next and length
         nodeToUpdate->next = nextNode;
@@ -381,12 +381,12 @@ s32 sign(s32 val) {
 char* int_to_string(s32 integer, char* dest, s32 base) {
     u8 string[40]; // Even for binary this is a little long: 34 would suffice
     s32 i = ARRAY_COUNT(string) - 2;
-    s32 negative = FALSE;
+    s32 negative = false;
     s64 longInteger = integer;
 
     // handle negative integers
     if (longInteger < 0) {
-        negative = TRUE;
+        negative = true;
         longInteger *= -1;
     }
 
@@ -394,7 +394,7 @@ char* int_to_string(s32 integer, char* dest, s32 base) {
     string[ARRAY_COUNT(string) - 1] = '\0';
 
     // extract digits, filling string from the back
-    while (TRUE) {
+    while (true) {
         string[i] = sIntegerDigits[longInteger % base];
         longInteger /= base;
         if (longInteger == 0 || i == 0) {

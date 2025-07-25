@@ -19,7 +19,7 @@ API_CALLABLE(N(GetLargeWheelAngle)) {
 EvtScript N(EVS_SpawnSmoke) = {
     Call(PlaySoundAtModel, MODEL_07, SOUND_SEQ_TRAIN_CHUG, SOUND_SPACE_DEFAULT)
     SetF(LVar0, MV_TrainMoveDist)
-    IfEq(MF_TrainReverseDir, FALSE)
+    IfEq(MF_TrainReverseDir, false)
         AddF(LVar0, -310)
     Else
         AddF(LVar0, -450)
@@ -29,7 +29,7 @@ EvtScript N(EVS_SpawnSmoke) = {
     SetF(LVar3, Float(1.0))
     SetF(LVar4, Float(3.0))
     Add(LVarB, CLONED_MODEL(0))
-    Call(EnableModel, LVarB, TRUE)
+    Call(EnableModel, LVarB, true)
     Loop(20)
         Call(TranslateModel, LVarB, LVar0, LVar1, LVar2)
         Call(ScaleModel, LVarB, LVar3, LVar3, 1)
@@ -38,7 +38,7 @@ EvtScript N(EVS_SpawnSmoke) = {
         MulF(LVar4, Float(0.906))
         Wait(1)
     EndLoop
-    Call(EnableModel, LVarB, FALSE)
+    Call(EnableModel, LVarB, false)
     Return
     End
 };
@@ -66,7 +66,7 @@ EvtScript N(EVS_AnimateTrain) = {
         Call(TranslateModel, MODEL_14, LVar0, 0, 0)
         Call(TranslateModel, MODEL_15, LVar0, 0, 0)
         Call(TranslateModel, MODEL_16, LVar0, 0, 0)
-        IfEq(MF_TrainReverseDir, TRUE)
+        IfEq(MF_TrainReverseDir, true)
             Set(LVar0, 180)
             Call(TranslateModel, MODEL_08, -69, -50, 0)
             Call(TranslateModel, MODEL_07, -69, -50, 0)
@@ -117,7 +117,7 @@ EvtScript N(EVS_AnimateTrain) = {
             Call(TranslateModel, MODEL_15, 25, -30, 0)
             Call(TranslateModel, MODEL_16, 63, -15, 0)
         EndIf
-        IfEq(MF_TrainReverseDir, FALSE)
+        IfEq(MF_TrainReverseDir, false)
             Set(LVar2, MV_TrainMoveDist)
         Else
             Set(LVar2, 1000)
@@ -167,54 +167,54 @@ EvtScript N(EVS_AnimateTrain) = {
             Call(ScaleModel, MODEL_07, LVar1, LVar0, LVar1)
             Call(ScaleModel, MODEL_08, LVar1, LVar0, LVar1)
         EndIf
-        IfEq(MF_TrainArriveDoorOpen, TRUE)
+        IfEq(MF_TrainArriveDoorOpen, true)
             Set(LVar8, 10)
-            Set(LFlag1, TRUE)
-            Set(MF_TrainArriveDoorOpen, FALSE)
+            Set(LFlag1, true)
+            Set(MF_TrainArriveDoorOpen, false)
         EndIf
-        IfEq(MF_TrainArrivePlayerDisembark, TRUE)
+        IfEq(MF_TrainArrivePlayerDisembark, true)
             Set(LVar8, -10)
-            Set(LFlag1, TRUE)
-            Set(MF_TrainArrivePlayerDisembark, FALSE)
+            Set(LFlag1, true)
+            Set(MF_TrainArrivePlayerDisembark, false)
         EndIf
-        IfEq(MF_TrainDepartDoorOpen, TRUE)
+        IfEq(MF_TrainDepartDoorOpen, true)
             Set(LVar8, 10)
-            Set(LFlag2, TRUE)
-            Set(MF_TrainDepartDoorOpen, FALSE)
+            Set(LFlag2, true)
+            Set(MF_TrainDepartDoorOpen, false)
         EndIf
-        IfEq(MF_TrainDepartPlayerBoard, TRUE)
+        IfEq(MF_TrainDepartPlayerBoard, true)
             Set(LVar8, -10)
-            Set(LFlag2, TRUE)
-            Set(MF_TrainDepartPlayerBoard, FALSE)
+            Set(LFlag2, true)
+            Set(MF_TrainDepartPlayerBoard, false)
         EndIf
-        IfEq(LFlag1, TRUE)
+        IfEq(LFlag1, true)
             Add(LVar9, LVar8)
             IfGe(LVar9, 90)
                 Set(LVar9, 90)
-                Set(LFlag1, FALSE)
+                Set(LFlag1, false)
             EndIf
             IfLe(LVar9, 0)
                 Set(LVar9, 0)
-                Set(LFlag1, FALSE)
+                Set(LFlag1, false)
             EndIf
         EndIf
-        IfEq(LFlag2, TRUE)
+        IfEq(LFlag2, true)
             Add(LVarA, LVar8)
             IfGe(LVarA, 90)
                 Set(LVarA, 90)
-                Set(LFlag2, FALSE)
+                Set(LFlag2, false)
             EndIf
             IfLe(LVarA, 0)
                 Set(LVarA, 0)
-                Set(LFlag2, FALSE)
+                Set(LFlag2, false)
             EndIf
         EndIf
         Call(RotateModel, MODEL_omote, LVar9, 0, -1, 0)
         Call(RotateModel, MODEL_ura, LVar9, 0, -1, 0)
         Call(RotateModel, MODEL_omote2, LVarA, 0, 1, 0)
         Call(RotateModel, MODEL_ura2, LVarA, 0, 1, 0)
-        IfEq(MF_TrainScrolling, TRUE)
-            IfEq(MF_TrainReverseDir, FALSE)
+        IfEq(MF_TrainScrolling, true)
+            IfEq(MF_TrainReverseDir, false)
                 Set(LVar0, MV_TrainMoveDist)
                 Add(LVar0, -425)
                 Add(LVar1, 75)
@@ -254,17 +254,17 @@ EvtScript N(EVS_AnimateTrain) = {
 };
 
 EvtScript N(EVS_UpdatePassengerPos) = {
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Label(0)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Set(LVar0, MV_TrainMoveDist)
-        IfEq(MF_TrainReverseDir, FALSE)
+        IfEq(MF_TrainReverseDir, false)
             Add(LVar0, -425)
         Else
             Add(LVar0, -335)
         EndIf
         EVT_VEC3I_VSET(LVar3, LVar0)
-        IfEq(MF_TrainReverseDir, FALSE)
+        IfEq(MF_TrainReverseDir, false)
             Add(LVar3, -57)
         Else
             Add(LVar3, 57)
@@ -272,7 +272,7 @@ EvtScript N(EVS_UpdatePassengerPos) = {
         Add(LVar4, -31)
         Add(LVar5, 0)
         Call(SetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
-        IfEq(MF_TrainReverseDir, FALSE)
+        IfEq(MF_TrainReverseDir, false)
             Add(LVar0, 0)
         Else
             Add(LVar0, 0)
@@ -289,7 +289,7 @@ EvtScript N(EVS_UpdatePassengerPos) = {
 EvtScript N(EVS_FollowTrainCamera) = {
     Label(0)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
-        IfEq(MF_TrainReverseDir, FALSE)
+        IfEq(MF_TrainReverseDir, false)
             IfLt(LVar0, -1100)
                 Set(LVar0, -1100)
             EndIf
@@ -312,17 +312,17 @@ EvtScript N(EVS_FollowTrainCamera) = {
 };
 
 EvtScript N(EVS_TravelToToadTown) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
     Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Call(InterpPlayerYaw, 270, 0)
     Call(InterpNpcYaw, NPC_PARTNER, 270, 0)
-    Call(EnableNpcShadow, NPC_PARTNER, FALSE)
-    Call(HidePlayerShadow, TRUE)
-    Set(MF_TrainScrolling, TRUE)
-    Set(MF_TrainReverseDir, TRUE)
+    Call(EnableNpcShadow, NPC_PARTNER, false)
+    Call(HidePlayerShadow, true)
+    Set(MF_TrainScrolling, true)
+    Set(MF_TrainReverseDir, true)
     Exec(N(EVS_UpdatePassengerPos))
     Thread
         Call(MakeLerp, 6400, -5600, 1200, EASING_LINEAR)
@@ -348,17 +348,17 @@ EvtScript N(EVS_TravelToToadTown) = {
 };
 
 EvtScript N(EVS_TravelToMtRugged) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
     Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Call(InterpPlayerYaw, 90, 0)
     Call(InterpNpcYaw, NPC_PARTNER, 90, 0)
-    Call(EnableNpcShadow, NPC_PARTNER, FALSE)
-    Call(HidePlayerShadow, TRUE)
+    Call(EnableNpcShadow, NPC_PARTNER, false)
+    Call(HidePlayerShadow, true)
     Exec(N(EVS_UpdatePassengerPos))
-    Set(MF_TrainScrolling, TRUE)
+    Set(MF_TrainScrolling, true)
     Call(MakeLerp, 0, 6350, 600, EASING_LINEAR)
     Loop(0)
         Call(UpdateLerp)
@@ -371,8 +371,8 @@ EvtScript N(EVS_TravelToMtRugged) = {
     IfLt(GB_StoryProgress, STORY_CH2_ARRIVED_AT_MT_RUGGED)
         Set(GB_StoryProgress, STORY_CH2_ARRIVED_AT_MT_RUGGED)
     EndIf
-    IfEq(GF_StartedChapter2, FALSE)
-        Set(GF_StartedChapter2, TRUE)
+    IfEq(GF_StartedChapter2, false)
+        Set(GF_StartedChapter2, true)
         Call(FadeOutMusic, 0, 1500)
         Call(GotoMapSpecial, Ref("kmr_22"), kmr_22_ENTRY_2, TRANSITION_BEGIN_OR_END_CHAPTER)
         Wait(100)
@@ -385,8 +385,8 @@ EvtScript N(EVS_TravelToMtRugged) = {
 };
 
 EvtScript N(EVS_InitializeTrainScene) = {
-    Call(EnableModel, MODEL_km, FALSE)
-    Call(SetModelFlags, MODEL_km, MODEL_FLAG_BILLBOARD, TRUE)
+    Call(EnableModel, MODEL_km, false)
+    Call(SetModelFlags, MODEL_km, MODEL_FLAG_BILLBOARD, true)
     Call(CloneModel, MODEL_km, CLONED_MODEL(0))
     Call(CloneModel, MODEL_km, CLONED_MODEL(1))
     Call(CloneModel, MODEL_km, CLONED_MODEL(2))
@@ -397,7 +397,7 @@ EvtScript N(EVS_InitializeTrainScene) = {
     Call(CloneModel, MODEL_km, CLONED_MODEL(7))
     Call(CloneModel, MODEL_km, CLONED_MODEL(8))
     Call(CloneModel, MODEL_km, CLONED_MODEL(9))
-    Set(MF_TrainReverseDir, FALSE)
+    Set(MF_TrainReverseDir, false)
     Set(MV_TrainMoveDist, -6000)
     Set(MV_TrainMoveSpeed, 10)
     Exec(N(EVS_AnimateTrain))

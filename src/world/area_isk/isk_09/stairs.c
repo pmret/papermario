@@ -116,12 +116,12 @@ EvtScript N(EVS_FlipStairsCW_TopRed) = {
 };
 
 EvtScript N(EVS_BlueStairs_FlipCCW) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
     Call(UseSettingsFrom, CAM_DEFAULT, -522, -310, -95)
     Call(SetPanTarget, CAM_DEFAULT, -522, -377, -92)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     ExecWait(N(EVS_FlipStairsCCW_BottomBlue))
     Call(ShakeCam, CAM_DEFAULT, 0, 3, Float(0.1))
@@ -132,19 +132,19 @@ EvtScript N(EVS_BlueStairs_FlipCCW) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_BlueStairs_FlipCW) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
     Call(UseSettingsFrom, CAM_DEFAULT, -522, -310, -95)
     Call(SetPanTarget, CAM_DEFAULT, -522, -377, -92)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     ExecWait(N(EVS_FlipStairsCW_BottomBlue))
     Call(ShakeCam, CAM_DEFAULT, 0, 3, Float(0.1))
@@ -155,19 +155,19 @@ EvtScript N(EVS_BlueStairs_FlipCW) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_RedStairs_FlipCCW) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
     Call(UseSettingsFrom, CAM_DEFAULT, -408, -310, -347)
     Call(SetPanTarget, CAM_DEFAULT, -408, -377, -347)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     ExecWait(N(EVS_FlipStairsCCW_BottomRed))
     Call(ShakeCam, CAM_DEFAULT, 0, 3, Float(0.1))
@@ -178,19 +178,19 @@ EvtScript N(EVS_RedStairs_FlipCCW) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_RedStairs_FlipCW) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
     Call(UseSettingsFrom, CAM_DEFAULT, -408, -310, -347)
     Call(SetPanTarget, CAM_DEFAULT, -408, -377, -347)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     ExecWait(N(EVS_FlipStairsCW_BottomRed))
     Call(ShakeCam, CAM_DEFAULT, 0, 3, Float(0.1))
@@ -201,36 +201,36 @@ EvtScript N(EVS_RedStairs_FlipCW) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_FlipBlueStairs) = {
-    IfEq(MF_BlueStairsFlipped, FALSE)
+    IfEq(MF_BlueStairsFlipped, false)
         ExecWait(N(EVS_BlueStairs_FlipCCW))
-        Set(MF_BlueStairsFlipped, TRUE)
+        Set(MF_BlueStairsFlipped, true)
     Else
         ExecWait(N(EVS_BlueStairs_FlipCW))
-        Set(MF_BlueStairsFlipped, FALSE)
+        Set(MF_BlueStairsFlipped, false)
     EndIf
-    Call(DisablePlayerInput, FALSE)
-    Set(AF_ISK09_FlippingBlueStairs, FALSE)
+    Call(DisablePlayerInput, false)
+    Set(AF_ISK09_FlippingBlueStairs, false)
     Return
     End
 };
 
 EvtScript N(EVS_FlipRedStairs) = {
-    IfEq(MF_RedStairsFlipped, FALSE)
+    IfEq(MF_RedStairsFlipped, false)
         ExecWait(N(EVS_RedStairs_FlipCW))
-        Set(MF_RedStairsFlipped, TRUE)
+        Set(MF_RedStairsFlipped, true)
     Else
         ExecWait(N(EVS_RedStairs_FlipCCW))
-        Set(MF_RedStairsFlipped, FALSE)
+        Set(MF_RedStairsFlipped, false)
     EndIf
-    Call(DisablePlayerInput, FALSE)
-    Set(AF_ISK09_FlippingRedStairs, FALSE)
+    Call(DisablePlayerInput, false)
+    Set(AF_ISK09_FlippingRedStairs, false)
     Return
     End
 };
@@ -242,8 +242,8 @@ EvtScript N(EVS_SetupStairs) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2036, COLLIDER_FLAGS_UPPER_MASK)
     Call(RotateModel, MODEL_g329, 90, 0, 0, 1)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2037, COLLIDER_FLAGS_UPPER_MASK)
-    Set(MF_BlueStairsFlipped, FALSE)
-    Set(MF_RedStairsFlipped, FALSE)
+    Set(MF_BlueStairsFlipped, false)
+    Set(MF_RedStairsFlipped, false)
     BindTrigger(Ref(N(EVS_FlipBlueStairs)), TRIGGER_AREA_FLAG_SET, AF_ISK09_FlippingBlueStairs, 1, 0)
     BindTrigger(Ref(N(EVS_FlipRedStairs)), TRIGGER_AREA_FLAG_SET, AF_ISK09_FlippingRedStairs, 1, 0)
     Return

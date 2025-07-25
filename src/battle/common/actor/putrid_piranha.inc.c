@@ -133,7 +133,7 @@ EvtScript N(EVS_Idle) = {
 EvtScript N(EVS_ReturnHome) = {
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim03)
     Call(SetGoalToHome, ACTOR_SELF)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim01)
     Call(SetActorYaw, ACTOR_SELF, 0)
     Return
@@ -141,7 +141,7 @@ EvtScript N(EVS_ReturnHome) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -229,7 +229,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -251,13 +251,13 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 EvtScript N(EVS_Attack_Bite) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(GetBattlePhase, LVar0)
     IfEq(LVar0, PHASE_FIRST_STRIKE)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim18)
-        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
         Wait(8)
         Call(SetGoalToTarget, ACTOR_SELF)
         Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -280,13 +280,13 @@ EvtScript N(EVS_Attack_Bite) = {
         Wait(20)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
         Call(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
+        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, false)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim17)
         Wait(8)
     Else
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(BattleCamTargetActor, ACTOR_SELF)
-        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim03)
         Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim03)
@@ -300,7 +300,7 @@ EvtScript N(EVS_Attack_Bite) = {
         EndIf
         Set(LVar1, 0)
         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+        Call(RunToGoal, ACTOR_SELF, 0, false)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim01)
     EndIf
     Thread
@@ -326,7 +326,7 @@ EvtScript N(EVS_Attack_Bite) = {
             Call(GetBattlePhase, LVar0)
             IfEq(LVar0, PHASE_FIRST_STRIKE)
                 Call(SetActorSpeed, ACTOR_SELF, Float(7.0))
-                Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+                Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
                 Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim18)
                 Wait(10)
@@ -336,7 +336,7 @@ EvtScript N(EVS_Attack_Bite) = {
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
                 Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim17)
                 Wait(10)
-                Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
+                Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, false)
             Else
                 Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(2.0))
                 Call(SetActorSpeed, ACTOR_SELF, Float(7.0))
@@ -347,7 +347,7 @@ EvtScript N(EVS_Attack_Bite) = {
                 Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(1.0))
             EndIf
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -370,7 +370,7 @@ EvtScript N(EVS_Attack_Bite) = {
             Call(GetBattlePhase, LVar0)
             IfEq(LVar0, PHASE_FIRST_STRIKE)
                 Call(SetActorSpeed, ACTOR_SELF, Float(7.0))
-                Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+                Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
                 Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim18)
                 Wait(10)
@@ -380,7 +380,7 @@ EvtScript N(EVS_Attack_Bite) = {
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
                 Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim17)
                 Wait(10)
-                Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
+                Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, false)
             Else
                 Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
                 ExecWait(N(EVS_ReturnHome))
@@ -388,7 +388,7 @@ EvtScript N(EVS_Attack_Bite) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -396,12 +396,12 @@ EvtScript N(EVS_Attack_Bite) = {
 #include "common/UnkEffect6FFunc.inc.c"
 
 EvtScript N(EVS_Attack_BadBreath) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim03)
     Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim03)
@@ -415,7 +415,7 @@ EvtScript N(EVS_Attack_BadBreath) = {
     EndIf
     Set(LVar1, 0)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim01)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim08)
     Wait(11)
@@ -456,7 +456,7 @@ EvtScript N(EVS_Attack_BadBreath) = {
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(1.0))
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -477,7 +477,7 @@ EvtScript N(EVS_Attack_BadBreath) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

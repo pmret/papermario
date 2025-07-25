@@ -341,14 +341,14 @@ void _render_transition_stencil(u8 stencilType, f32 progress, ScreenOverlay* ove
             break;
         case OVERLAY_WORLD_DARKNESS:
             gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_BlurryCircle);
-            appendGfx_darkness_stencil(TRUE, x2, y2, alpha, progress);
+            appendGfx_darkness_stencil(true, x2, y2, alpha, progress);
             break;
         case OVERLAY_BLUR:
             draw_prev_frame_buffer_at_screen_pos(x1, y1, x2, y2, progress);
             break;
         case OVERLAY_BATTLE_DARKNESS:
             gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_BlurryCircle);
-            appendGfx_darkness_stencil(FALSE, x1, y1, alpha, progress);
+            appendGfx_darkness_stencil(false, x1, y1, alpha, progress);
             break;
         case OVERLAY_INTRO_1:
         case OVERLAY_INTRO_2:
@@ -632,7 +632,7 @@ s16 update_exit_map_screen_overlay(s16* progress) {
 s16 update_enter_map_screen_overlay(s16* progress) {
     u8 fadeInType = OVERLAY_SCREEN_COLOR;
     s32 fadeRate = STANDARD_FADE_RATE;
-    u8 ret = FALSE;
+    u8 ret = false;
 
     switch (CurrentScreenTransition) {
         case TRANSITION_END_DEMO_SCENE_WHITE:
@@ -683,7 +683,7 @@ s16 update_enter_map_screen_overlay(s16* progress) {
     }
 
     if (*progress == 0) {
-        ret = TRUE;
+        ret = true;
     }
 
     *progress -= fadeRate;

@@ -2,7 +2,7 @@
 #include "entity.h"
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_KKJ25_Defeated_Kammy, FALSE)
+    IfEq(GF_KKJ25_Defeated_Kammy, false)
         Call(MakeEntity, Ref(Entity_GreenStompSwitch), 300, 0, 0, 0, MAKE_ENTITY_END)
         Set(MV_SwitchEntityIdx, LVar0)
         Call(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_KKJ_1A))

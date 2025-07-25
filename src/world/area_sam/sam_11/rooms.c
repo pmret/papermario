@@ -34,15 +34,15 @@ EvtScript N(EVS_DropDoor_LeftHouse) = {
 EvtScript N(EVS_RoomListener_LeftHouse) = {
     Switch(LVar0)
         CaseEq(ROOM_UPDATE_ENTER_BEGIN)
-            Set(AF_SAM_Snowing, FALSE)
+            Set(AF_SAM_Snowing, false)
             Call(SetGroupVisibility, MODEL_g_naiso, MODEL_GROUP_VISIBLE)
             IfLt(GB_StoryProgress, STORY_CH7_SPOKE_WITH_HERRINGWAY)
             Else
-                Call(EnableModel, MODEL_ana, FALSE)
+                Call(EnableModel, MODEL_ana, false)
             EndIf
         CaseEq(ROOM_UPDATE_EXIT_BEGIN)
             IfEq(GB_StoryProgress, STORY_CH7_SPOKE_WITH_HERRINGWAY)
-                IfEq(GF_SAM11_LeftHerringwaysHouse, FALSE)
+                IfEq(GF_SAM11_LeftHerringwaysHouse, false)
                     Thread
                         Wait(30 * DT)
                         Call(MakeLerp, 0, 255, 20, EASING_LINEAR)
@@ -56,22 +56,22 @@ EvtScript N(EVS_RoomListener_LeftHouse) = {
                         EndLoop
                         Wait(10 * DT)
                         Call(SetNpcAnimation, NPC_Herringway, ANIM_Herringway_Walk)
-                        Call(PlayerFaceNpc, NPC_Herringway, FALSE)
+                        Call(PlayerFaceNpc, NPC_Herringway, false)
                         Call(NpcMoveTo, NPC_Herringway, -500, 0, 50 * DT)
-                        Call(SetNpcFlagBits, NPC_Herringway, NPC_FLAG_GRAVITY, FALSE)
+                        Call(SetNpcFlagBits, NPC_Herringway, NPC_FLAG_GRAVITY, false)
                         Call(SetNpcPos, NPC_Herringway, NPC_DISPOSE_LOCATION)
                     EndThread
                 EndIf
             EndIf
         CaseEq(ROOM_UPDATE_EXIT_END)
-            Set(AF_SAM_Snowing, TRUE)
+            Set(AF_SAM_Snowing, true)
             Call(SetGroupVisibility, MODEL_g_naiso, MODEL_GROUP_HIDDEN)
-            Call(EnableModel, MODEL_gn_dan1, TRUE)
+            Call(EnableModel, MODEL_gn_dan1, true)
             IfEq(GB_StoryProgress, STORY_CH7_SPOKE_WITH_HERRINGWAY)
-                IfEq(GF_SAM11_LeftHerringwaysHouse, FALSE)
+                IfEq(GF_SAM11_LeftHerringwaysHouse, false)
                     Thread
                     EndThread
-                    Set(GF_SAM11_LeftHerringwaysHouse, TRUE)
+                    Set(GF_SAM11_LeftHerringwaysHouse, true)
                 EndIf
             EndIf
     EndSwitch
@@ -131,7 +131,7 @@ EvtScript N(EVS_UnlockPrompt_LeftHouse) = {
     EndIf
     Call(RemoveKeyItemAt, LVar1)
     Call(CloseChoicePopup)
-    Set(GF_SAM11_UnlockedDoor, TRUE)
+    Set(GF_SAM11_UnlockedDoor, true)
     Call(N(GetEntityPosition), MV_PadlockEntityID, LVar0, LVar1, LVar2)
     Call(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     Set(LVar0, MV_PadlockEntityID)
@@ -145,10 +145,10 @@ EvtScript N(EVS_UnlockPrompt_LeftHouse) = {
 EvtScript N(EVS_RoomListener_RightHouse) = {
     Switch(LVar0)
         CaseEq(0)
-            Set(AF_SAM_Snowing, FALSE)
+            Set(AF_SAM_Snowing, false)
             Call(SetGroupVisibility, MODEL_s_naiso, MODEL_GROUP_VISIBLE)
         CaseEq(3)
-            Set(AF_SAM_Snowing, TRUE)
+            Set(AF_SAM_Snowing, true)
             Call(SetGroupVisibility, MODEL_s_naiso, MODEL_GROUP_HIDDEN)
     EndSwitch
     Return
@@ -184,7 +184,7 @@ EvtScript N(EVS_SetupLockedHouse) = {
 
 EvtScript N(EVS_SetupRooms) = {
     Call(SetGroupVisibility, MODEL_g_naiso, MODEL_GROUP_HIDDEN)
-    Call(EnableModel, MODEL_gn_dan1, TRUE)
+    Call(EnableModel, MODEL_gn_dan1, true)
     // lower left house
     Call(CreateMapRoom,
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
@@ -197,7 +197,7 @@ EvtScript N(EVS_SetupRooms) = {
         MODEL_gon,
         Ref(N(InteriorNPCs_LeftHouse)))
     Call(SetGroupVisibility, MODEL_s_naiso, MODEL_GROUP_HIDDEN)
-    IfEq(GF_SAM11_UnlockedDoor, TRUE)
+    IfEq(GF_SAM11_UnlockedDoor, true)
         ExecWait(N(EVS_SetupLockedHouse))
     Else
         BindPadlock(Ref(N(EVS_UnlockPrompt_LeftHouse)), TRIGGER_WALL_PRESS_A,

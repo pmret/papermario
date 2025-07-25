@@ -65,7 +65,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
     IfEq(LVar0, 0)
         Goto(10)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
 #if !VERSION_JP
     Call(GetPartnerInUse, LVar0)
     IfNe(LVar0, PARTNER_NONE)
@@ -112,7 +112,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
         Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(20.0), Float(-6.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Run)
     Call(NpcMoveTo, NPC_SELF, LVar4, LVar5, 30)
@@ -135,7 +135,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
     Call(EnablePartnerAI)
     Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 0, MSG_CH3_001F)
     Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ChargeArmsUp)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(StartBossBattle, SONG_JR_TROOPA_BATTLE)
     Return
     End
@@ -153,7 +153,7 @@ EvtScript N(EVS_NpcDefeat_JrTroopa) = {
     Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ChargeArmsUp)
     Wait(10 * DT)
     Call(NpcMoveTo, NPC_SELF, LVar0, LVar1, 15)
-    Set(GF_MIM10_Defeated_JrTroopa, TRUE)
+    Set(GF_MIM10_Defeated_JrTroopa, true)
     ExecWait(N(EVS_PlayForestMusic))
     Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
     Call(RemoveNpc, NPC_SELF)
@@ -163,7 +163,7 @@ EvtScript N(EVS_NpcDefeat_JrTroopa) = {
 
 EvtScript N(EVS_NpcInit_JrTroopa) = {
     IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        IfEq(GF_MIM10_Defeated_JrTroopa, FALSE)
+        IfEq(GF_MIM10_Defeated_JrTroopa, false)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_JrTroopa)))
             Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_JrTroopa)))
             Return
@@ -176,7 +176,7 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
 
 EvtScript N(EVS_NpcInit_Fuzzy) = {
     IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        IfEq(GF_MIM10_Defeated_JrTroopa, FALSE)
+        IfEq(GF_MIM10_Defeated_JrTroopa, false)
             Call(RemoveNpc, NPC_SELF)
         EndIf
     EndIf
@@ -190,7 +190,7 @@ NpcData N(NpcData_Fuzzy_01) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },
@@ -214,7 +214,7 @@ NpcData N(NpcData_Fuzzy_02) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },

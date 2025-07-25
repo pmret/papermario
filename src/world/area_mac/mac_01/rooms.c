@@ -48,9 +48,9 @@ EvtScript N(EVS_SetWallRot_PostOffice) = {
     Call(RotateModel, MODEL_y3, LVar1, -1, 0, 0)
     Switch(LVar0)
         CaseEq(90)
-            Call(EnableGroup, MODEL_po_mtx, FALSE)
+            Call(EnableGroup, MODEL_po_mtx, false)
         CaseDefault
-            Call(EnableGroup, MODEL_po_mtx, TRUE)
+            Call(EnableGroup, MODEL_po_mtx, true)
     EndSwitch
     Return
     End
@@ -102,9 +102,9 @@ EvtScript N(EVS_SetWallRot_ToadHouse) = {
     Call(RotateModel, MODEL_kk23, LVar1, 1, 0, 0)
     Switch(LVar0)
         CaseEq(90)
-            Call(EnableGroup, MODEL_kino_out, FALSE)
+            Call(EnableGroup, MODEL_kino_out, false)
         CaseDefault
-            Call(EnableGroup, MODEL_kino_out, TRUE)
+            Call(EnableGroup, MODEL_kino_out, true)
     EndSwitch
     Return
     End
@@ -114,10 +114,10 @@ EvtScript N(EVS_RoomListener_ToadHouse) = {
     Switch(LVar0)
         CaseEq(ROOM_UPDATE_ENTER_BEGIN)
             Call(SetGroupVisibility, MODEL_kino_in, MODEL_GROUP_VISIBLE)
-            Set(MF_InsideToadHouse, TRUE)
+            Set(MF_InsideToadHouse, true)
         CaseEq(ROOM_UPDATE_EXIT_END)
             Call(SetGroupVisibility, MODEL_kino_in, MODEL_GROUP_HIDDEN)
-            Set(MF_InsideToadHouse, FALSE)
+            Set(MF_InsideToadHouse, false)
     EndSwitch
     Return
     End
@@ -151,7 +151,7 @@ EvtScript N(EVS_RoomListener_MerlonHouse) = {
                     IfEq(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
                         BreakSwitch
                     EndIf
-                    IfEq(GF_MAC01_Merlon_HeardAboutDream, FALSE)
+                    IfEq(GF_MAC01_Merlon_HeardAboutDream, false)
                         Call(SpeakToPlayer, NPC_Luigi, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_003C)
                         Set(LVar0, -1)
                         Return
@@ -162,14 +162,14 @@ EvtScript N(EVS_RoomListener_MerlonHouse) = {
                     Return
             EndSwitch
             Call(SetGroupVisibility, MODEL_dr_in, MODEL_GROUP_VISIBLE)
-            Set(MF_MusicMixTrigger1, TRUE)
+            Set(MF_MusicMixTrigger1, true)
         CaseEq(ROOM_UPDATE_ENTER_DONE)
             // do nothing
         CaseEq(ROOM_UPDATE_EXIT_BEGIN)
             // do nothing
         CaseEq(ROOM_UPDATE_EXIT_END)
             Call(SetGroupVisibility, MODEL_dr_in, MODEL_GROUP_HIDDEN)
-            Set(MF_MusicMixTrigger1, FALSE)
+            Set(MF_MusicMixTrigger1, false)
     EndSwitch
     Return
     End

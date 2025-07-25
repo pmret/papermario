@@ -20,7 +20,7 @@ EVT_LETTER_PROMPT(Kolorado, NPC_Kolorado,
 EVT_LETTER_REWARD(Kolorado);
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Loop(0)
         Wait(1)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -45,7 +45,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     Call(NpcMoveTo, NPC_SELF, -740, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -650, 20, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Thrown)
     Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
@@ -98,24 +98,24 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     Call(SetSelfVar, 0, 0)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Fallen)
     Call(InterpNpcYaw, NPC_SELF, 270, 2)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, false)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
     Call(NpcJump0, NPC_SELF, -760, 50, -40, 10)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
     Wait(4)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
     Wait(8)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Fallen)
     Call(InterpNpcYaw, NPC_SELF, 90, 2)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, false)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
     Call(NpcJump0, NPC_SELF, -760, 40, -40, 10)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
     Wait(4)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
     Wait(8)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Fallen)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, false)
     Wait(5)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
     Call(InterpNpcYaw, NPC_SELF, 90, 4)
@@ -123,7 +123,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     Wait(5)
     Call(InterpNpcYaw, NPC_SELF, 270, 4)
     Set(GB_StoryProgress, STORY_CH5_KOLORADO_FELL_IN_LAVA)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -150,7 +150,7 @@ EvtScript N(EVS_NpcInit_Kolorado) = {
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Kolorado)))
             Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Kolorado)))
         CaseLt(STORY_CH5_LAVA_STREAM_BLOCKED)
-            IfEq(GF_KZN06_Visited, FALSE)
+            IfEq(GF_KZN06_Visited, false)
                 Call(SetNpcPos, NPC_SELF, -760, 20, -40)
                 Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Kolorado)))
             Else
@@ -181,7 +181,7 @@ NpcData N(NpcData_LavaBubble) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 250, 50, 0 },

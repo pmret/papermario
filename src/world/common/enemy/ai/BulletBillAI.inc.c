@@ -40,8 +40,8 @@ API_CALLABLE(N(BulletBillAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *script->ptrReadPos);
-    s32 hitDetected = FALSE;
-    s32 done = FALSE;
+    s32 hitDetected = false;
+    s32 done = false;
     Npc* blasterNpc;
     f32 nextX, nextZ;
     f32 deltaY;
@@ -104,7 +104,7 @@ API_CALLABLE(N(BulletBillAI_Main)) {
         case AI_STATE_BULLET_FIRED:
             deltaY = (npc->pos.y - gPlayerStatusPtr->pos.y);
             if ((deltaY > 190.0) || (deltaY < -120.0)) {
-                done = TRUE;
+                done = true;
                 break;
             }
 
@@ -113,11 +113,11 @@ API_CALLABLE(N(BulletBillAI_Main)) {
             add_vec2D_polar(&nextX, &nextZ, npc->moveSpeed, npc->yaw);
             if (npc->yaw < 180.0f) {
                 if (enemy->AI_VAR_BULLET_RANGE <= nextX) {
-                    hitDetected = TRUE;
+                    hitDetected = true;
                 }
             } else {
                 if (nextX <= enemy->AI_VAR_BULLET_RANGE) {
-                    hitDetected = TRUE;
+                    hitDetected = true;
                 }
             }
 
@@ -139,7 +139,7 @@ API_CALLABLE(N(BulletBillAI_Main)) {
         case AI_STATE_BULLET_HIT:
             npc->duration--;
             if (npc->duration <= 0) {
-                done = TRUE;
+                done = true;
             }
             break;
     }

@@ -66,7 +66,7 @@ EvtScript N(EVS_ItemPrompt_Socket1) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     IfNe(GB_ISK11_ItemSocket1, 0)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(N(GetItemNameInSocket), GB_ISK11_ItemSocket1, LVar0)
         Call(SetMessageText, LVar0, 0)
         Call(ShowMessageAtScreenPos, MSG_Menus_ISK11_TakeItemPrompt, 160, 40)
@@ -79,9 +79,9 @@ EvtScript N(EVS_ItemPrompt_Socket1) = {
             Set(GB_ISK11_ItemSocket1, 0)
             Call(RemoveItemEntity, MV_Socket1_ItemEntity)
             Set(MV_Socket1_ItemEntity, -1)
-            Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
+            Call(ShowGotItem, LVar0, false, ITEM_PICKUP_FLAG_NO_SOUND)
         EndIf
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf
@@ -117,7 +117,7 @@ EvtScript N(EVS_ItemPrompt_Socket2) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     IfNe(GB_ISK11_ItemSocket2, 0)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(N(GetItemNameInSocket), GB_ISK11_ItemSocket2, LVar0)
         Call(SetMessageText, LVar0, 0)
         Call(ShowMessageAtScreenPos, MSG_Menus_ISK11_TakeItemPrompt, 160, 40)
@@ -130,9 +130,9 @@ EvtScript N(EVS_ItemPrompt_Socket2) = {
             Set(GB_ISK11_ItemSocket2, 0)
             Call(RemoveItemEntity, MV_Socket2_ItemEntity)
             Set(MV_Socket2_ItemEntity, -1)
-            Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
+            Call(ShowGotItem, LVar0, false, ITEM_PICKUP_FLAG_NO_SOUND)
         EndIf
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf
@@ -168,7 +168,7 @@ EvtScript N(EVS_ItemPrompt_Socket3) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     IfNe(GB_ISK11_ItemSocket3, 0)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(N(GetItemNameInSocket), GB_ISK11_ItemSocket3, LVar0)
         Call(SetMessageText, LVar0, 0)
         Call(ShowMessageAtScreenPos, MSG_Menus_ISK11_TakeItemPrompt, 160, 40)
@@ -181,9 +181,9 @@ EvtScript N(EVS_ItemPrompt_Socket3) = {
             Set(GB_ISK11_ItemSocket3, 0)
             Call(RemoveItemEntity, MV_Socket3_ItemEntity)
             Set(MV_Socket3_ItemEntity, -1)
-            Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
+            Call(ShowGotItem, LVar0, false, ITEM_PICKUP_FLAG_NO_SOUND)
         EndIf
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf
@@ -219,7 +219,7 @@ EvtScript N(EVS_ItemPrompt_Socket4) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     IfNe(GB_ISK11_ItemSocket4, 0)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(N(GetItemNameInSocket), GB_ISK11_ItemSocket4, LVar0)
         Call(SetMessageText, LVar0, 0)
         Call(ShowMessageAtScreenPos, MSG_Menus_ISK11_TakeItemPrompt, 160, 40)
@@ -232,9 +232,9 @@ EvtScript N(EVS_ItemPrompt_Socket4) = {
             Set(GB_ISK11_ItemSocket4, 0)
             Call(RemoveItemEntity, MV_Socket4_ItemEntity)
             Set(MV_Socket4_ItemEntity, -1)
-            Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
+            Call(ShowGotItem, LVar0, false, ITEM_PICKUP_FLAG_NO_SOUND)
         EndIf
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf
@@ -270,7 +270,7 @@ EvtScript N(EVS_ItemPrompt_Socket5) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     IfNe(GB_ISK11_ItemSocket5, 0)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(N(GetItemNameInSocket), GB_ISK11_ItemSocket5, LVar0)
         Call(SetMessageText, LVar0, 0)
         Call(ShowMessageAtScreenPos, MSG_Menus_ISK11_TakeItemPrompt, 160, 40)
@@ -283,9 +283,9 @@ EvtScript N(EVS_ItemPrompt_Socket5) = {
             Set(GB_ISK11_ItemSocket5, 0)
             Call(RemoveItemEntity, MV_Socket5_ItemEntity)
             Set(MV_Socket5_ItemEntity, -1)
-            Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
+            Call(ShowGotItem, LVar0, false, ITEM_PICKUP_FLAG_NO_SOUND)
         EndIf
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf

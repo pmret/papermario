@@ -49,17 +49,17 @@ EvtScript N(EVS_UpdateSpotlight) = {
 };
 
 EvtScript N(D_8024189C_E13FFC) = {
-    Call(EnableModel, MODEL_o64, FALSE)
-    Call(EnableModel, MODEL_o65, FALSE)
-    Call(EnableModel, MODEL_o66, FALSE)
-    Call(EnableModel, MODEL_o67, FALSE)
-    Call(EnableModel, MODEL_o53, FALSE)
-    Call(EnableModel, MODEL_o68, FALSE)
-    Call(EnableModel, MODEL_o73, FALSE)
-    Call(EnableModel, MODEL_o54, FALSE)
-    Call(EnableModel, MODEL_o69, FALSE)
-    Call(EnableModel, MODEL_o55, FALSE)
-    Call(EnableModel, MODEL_o72, FALSE)
+    Call(EnableModel, MODEL_o64, false)
+    Call(EnableModel, MODEL_o65, false)
+    Call(EnableModel, MODEL_o66, false)
+    Call(EnableModel, MODEL_o67, false)
+    Call(EnableModel, MODEL_o53, false)
+    Call(EnableModel, MODEL_o68, false)
+    Call(EnableModel, MODEL_o73, false)
+    Call(EnableModel, MODEL_o54, false)
+    Call(EnableModel, MODEL_o69, false)
+    Call(EnableModel, MODEL_o55, false)
+    Call(EnableModel, MODEL_o72, false)
     Return
     End
 };
@@ -68,7 +68,7 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_ARN_09)
     SetUP_CAMERA_NO_LEAD()
     Call(SetRenderMode, MODEL_o36, RENDER_MODE_SURFACE_XLU_ZB_ZUPD)
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_UpdateSpotlight))
     Exec(N(D_8024189C_E13FFC))

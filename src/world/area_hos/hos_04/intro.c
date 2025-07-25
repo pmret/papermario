@@ -20,7 +20,7 @@ CameraControlSettings N(CamSettings_PreHeist) = {
     .boomPitch = -0.9,
     .points = { .two = { 0.0, -1.0, 0.0, 500.0, -1.0, 0.0 }},
     .viewPitch = -17.4,
-    .flag = FALSE,
+    .flag = false,
 };
 
 CameraControlSettings N(CamSettings_PostHeist) = {
@@ -29,7 +29,7 @@ CameraControlSettings N(CamSettings_PostHeist) = {
     .boomPitch = -0.9,
     .points = { .two = { 0.0, -1.0, 0.0, 500.0, -1.0, 0.0 }},
     .viewPitch = -17.4,
-    .flag = FALSE,
+    .flag = false,
 };
 
 API_CALLABLE(N(SetCamVfov)) {
@@ -67,7 +67,7 @@ API_CALLABLE(N(AnimateBoomLengthPreHeist)) {
 
     N(ColorBufferPtr) = nuGfxCfb_ptr;
     N(lerp_value_with_max_step)(700.0f, 300.0f, N(TargetBoomLengthPre), 1.2f, &N(TargetBoomLengthPre));
-    camera->panActive = TRUE;
+    camera->panActive = true;
     camera->controlSettings.boomLength = N(TargetBoomLengthPre);
     return ApiStatus_BLOCK;
 }
@@ -83,7 +83,7 @@ API_CALLABLE(N(AnimateBoomLengthPostHeist)) {
     }
     N(interp_value_with_easing)(INTRO_MATH_EASING_SIN_OUT, N(CamSettings_PostHeist).boomLength, 700.0f,
         N(TargetBoomLengthPost), 70.0f, &N(CurrentBoomLengthPost));
-    camera->panActive = TRUE;
+    camera->panActive = true;
     camera->controlSettings.boomLength = N(CurrentBoomLengthPost);
     N(TargetBoomLengthPost)++;
     if (N(TargetBoomLengthPost) < (s32)(70 * DT)) {
@@ -103,7 +103,7 @@ API_CALLABLE(N(AnimateViewPitchPostHeist)) {
     }
     N(interp_value_with_easing)(INTRO_MATH_EASING_5, N(CamSettings_PostHeist).viewPitch, -80.0f,
         N(TargetViewPitch), 200.0f, &N(CurrentViewPitch));
-    camera->panActive = TRUE;
+    camera->panActive = true;
     camera->controlSettings.viewPitch = N(CurrentViewPitch);
     N(TargetViewPitch)++;
     if (N(TargetViewPitch) == (s32)(200 * DT)) {
@@ -115,13 +115,13 @@ API_CALLABLE(N(AnimateViewPitchPostHeist)) {
 extern EvtScript N(EVS_ControlTwink);
 
 EvtScript N(EVS_Intro_PostHeist) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
     Call(N(SetCamVfov), CAM_DEFAULT, 75)
     Call(SetPanTarget, CAM_DEFAULT, 0, 30, 0)
     Call(LoadSettings, CAM_DEFAULT, Ref(N(CamSettings_PostHeist)))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Thread
         Exec(N(EVS_ControlTwink))
@@ -174,13 +174,13 @@ EvtScript N(EVS_ControlTwink) = {
 
 // establishing shot of the star shrine; camera slowly moves along the path toward it
 EvtScript N(EVS_Intro_PreHeist_Unused) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
     Call(N(SetCamVfov), CAM_DEFAULT, 75)
     Call(SetPanTarget, CAM_DEFAULT, 0, 30, 0)
     Call(LoadSettings, CAM_DEFAULT, Ref(N(CamSettings_PreHeist)))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Thread
         Call(N(AnimateBoomLengthPreHeist))

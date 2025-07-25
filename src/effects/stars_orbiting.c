@@ -50,7 +50,7 @@ void stars_orbiting_main(
     part->orbitRadius = 0;
     part->yaw = 0;
     part->targetRadius = radius;
-    part->enabled = TRUE;
+    part->enabled = true;
 
     part++;
     for (i = 1; i < numStars; i++, part++) {

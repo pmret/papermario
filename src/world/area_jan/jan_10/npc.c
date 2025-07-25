@@ -9,38 +9,38 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy) = {
     Label(0)
         Call(GetSelfVar, 7, LVar0)
         Wait(1)
-        IfEq(LVar0, FALSE)
+        IfEq(LVar0, false)
             Goto(0)
         EndIf
     Call(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Jungle_Anim09)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, false)
     Call(SetNpcPos, NPC_SELF, -566, 100, 65)
     Call(PlaySoundWithVolume, SOUND_FUZZY_HOP_A, 110)
     Wait(20)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, true)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_JungleFuzzy_Wander)))
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_JungleFuzzy) = {
-    Call(SetSelfVar, 7, FALSE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
+    Call(SetSelfVar, 7, false)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, true)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_JungleFuzzy)))
     Return
     End
 };
 
 EvtScript N(EVS_YoshiKid_CryForHelp) = {
-    Set(AF_JAN_02, FALSE)
+    Set(AF_JAN_02, false)
     Loop(0)
         Call(PlaySoundAtNpc, NPC_YoshiKid, SOUND_YOSHI_KID_CRY, SOUND_SPACE_DEFAULT)
         Wait(20)
-        IfEq(AF_JAN_02, TRUE)
+        IfEq(AF_JAN_02, true)
             BreakLoop
         EndIf
     EndLoop
@@ -50,7 +50,7 @@ EvtScript N(EVS_YoshiKid_CryForHelp) = {
 
 EvtScript N(EVS_NpcInteract_YoshiKid) = {
     Call(AdjustCam, CAM_DEFAULT, Float(4.0), 0, 350, Float(17.0), Float(-7.0))
-    Set(AF_JAN_02, TRUE)
+    Set(AF_JAN_02, true)
     Wait(15)
     Call(GetCurrentPartnerID, LVar0)
     IfEq(LVar0, PARTNER_SUSHIE)
@@ -60,13 +60,13 @@ EvtScript N(EVS_NpcInteract_YoshiKid) = {
     EndIf
     Call(EndSpeech, NPC_SELF, ANIM_YoshiKid_Blue_Talk, ANIM_YoshiKid_Blue_Idle, 0)
     Thread
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Blue_Run)
         Call(SetNpcSpeed, NPC_SELF, Float(5.0))
         Call(NpcMoveTo, NPC_SELF, -240, 10, 0)
         Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EndThread
-    Set(GF_JAN10_SavedYoshi, TRUE)
+    Set(GF_JAN10_SavedYoshi, true)
     Set(LVar0, 0)
     Add(LVar0, GF_JAN05_SavedYoshi)
     Add(LVar0, GF_JAN07_SavedYoshi)
@@ -92,7 +92,7 @@ EvtScript N(EVS_NpcInteract_YoshiKid) = {
 EvtScript N(EVS_NpcInit_YoshiKid) = {
     IfEq(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
         Exec(N(EVS_YoshiKid_CryForHelp))
-        IfEq(GF_JAN10_SavedYoshi, FALSE)
+        IfEq(GF_JAN10_SavedYoshi, false)
             Call(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Blue_Cry)
             Call(SetNpcYaw, NPC_SELF, 90)
             Call(SetNpcPos, NPC_SELF, -450, 0, 70)
@@ -123,7 +123,7 @@ NpcData N(NpcData_JungleFuzzy) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -460, 0, 70 },

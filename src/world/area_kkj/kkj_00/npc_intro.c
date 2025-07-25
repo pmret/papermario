@@ -93,12 +93,12 @@ EvtScript N(EVS_NpcIdle_Toad_03) = {
 };
 
 EvtScript N(EVS_NpcInteract_Luigi) = {
-    Call(EnableNpcAI, NPC_Toad_01, FALSE)
+    Call(EnableNpcAI, NPC_Toad_01, false)
     Call(SetNpcAnimation, NPC_Luigi, ANIM_Luigi_Idle)
     Call(SetNpcAnimation, NPC_Toad_01, ANIM_Toad_Red_Idle)
     Wait(10)
     Call(SpeakToPlayer, NPC_SELF, ANIM_Luigi_Talk, ANIM_Luigi_Idle, 16, MSG_Intro_0025)
-    Call(EnableNpcAI, NPC_Toad_01, TRUE)
+    Call(EnableNpcAI, NPC_Toad_01, true)
     Return
     End
 };
@@ -134,12 +134,12 @@ EvtScript N(EVS_NpcInteract_Toadette_01) = {
 };
 
 EvtScript N(EVS_NpcInteract_Toadette_02) = {
-    Call(EnableNpcAI, NPC_Toadette_01, FALSE)
+    Call(EnableNpcAI, NPC_Toadette_01, false)
     Call(SetNpcAnimation, NPC_Toadette_02, ANIM_Toadette_Green_Idle)
     Call(SetNpcAnimation, NPC_Toadette_01, ANIM_Toadette_Pink_Idle)
     Wait(10)
     Call(SpeakToPlayer, NPC_SELF, ANIM_Toadette_Green_Talk, ANIM_Toadette_Green_Idle, 16, MSG_Intro_002D)
-    Call(EnableNpcAI, NPC_Toadette_01, TRUE)
+    Call(EnableNpcAI, NPC_Toadette_01, true)
     Return
     End
 };
@@ -154,12 +154,12 @@ EvtScript N(EVS_NpcInteract_RussT) = {
 };
 
 EvtScript N(EVS_NpcInteract_ShiverToad) = {
-    Call(EnableNpcAI, NPC_RussT_01, FALSE)
+    Call(EnableNpcAI, NPC_RussT_01, false)
     Call(SetNpcAnimation, NPC_RussT_01, ANIM_RussT_Idle)
     Call(SetNpcAnimation, NPC_ShiverToad_01, ANIM_ShiverToad_Green_Idle)
     Wait(10)
     Call(SpeakToPlayer, NPC_SELF, ANIM_ShiverToad_Green_Talk, ANIM_ShiverToad_Green_Idle, 16, MSG_Intro_0028)
-    Call(EnableNpcAI, NPC_RussT_01, TRUE)
+    Call(EnableNpcAI, NPC_RussT_01, true)
     Return
     End
 };
@@ -293,7 +293,7 @@ NpcData N(NpcData_Characters)[] = {
         .yaw = 90,
         .territory = {
             .patrol = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .numPoints  = 2,
                 .points  = {

@@ -209,20 +209,20 @@ s32 N(PlayerHasBadge)(s32 badgeID) {
 
     for (i = 0; i < ARRAY_COUNT(gPlayerData.badges); i++) {
         if (gPlayerData.badges[i] == badgeID) {
-            return TRUE;
+            return true;
         }
     }
-    return FALSE;
+    return false;
 }
 
 API_CALLABLE(N(ResetHintFlags)) {
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(N(BadgeHintData)); i++) {
-        evt_set_variable(NULL, AF_HOS06_BadgeHints + i, FALSE);
+        evt_set_variable(NULL, AF_HOS06_BadgeHints + i, false);
     }
     for (i = 0; i < ARRAY_COUNT(N(SuperBlockHintData)); i++) {
-        evt_set_variable(NULL, AF_HOS06_SuperBlocksHints + i, FALSE);
+        evt_set_variable(NULL, AF_HOS06_SuperBlocksHints + i, false);
     }
     return ApiStatus_DONE2;
 }
@@ -258,7 +258,7 @@ API_CALLABLE(N(GetBadgeHint)) {
             {
                 if (count == selectedIdx) {
                     script->varTable[1] = hint->hintMsg;
-                    evt_set_variable(NULL, AF_HOS06_BadgeHints + i, TRUE);
+                    evt_set_variable(NULL, AF_HOS06_BadgeHints + i, true);
                     break;
                 }
                 count++;
@@ -334,7 +334,7 @@ API_CALLABLE(N(GetSuperBlockHint)) {
             {
                 if (count == selectedIdx) {
                     script->varTable[1] = hint->hintMsg;
-                    evt_set_variable(NULL, AF_HOS06_SuperBlocksHints + i, TRUE);
+                    evt_set_variable(NULL, AF_HOS06_SuperBlocksHints + i, true);
                     break;
                 }
                 count++;
@@ -377,7 +377,7 @@ API_CALLABLE(N(GetStarPieceHint)) {
             {
                 if (count == selectedIdx) {
                     script->varTable[1] = hint->hintMsg;
-                    evt_set_variable(NULL, AF_HOS06_StarPieceHints + i, TRUE);
+                    evt_set_variable(NULL, AF_HOS06_StarPieceHints + i, true);
                     break;
                 }
                 count++;
@@ -393,9 +393,9 @@ API_CALLABLE(N(HasEnoughCoinsForHint)) {
     s32 outVar = *args++;
 
     if (gPlayerData.coins < N(HintPrices)[hintType]) {
-        evt_set_variable(script, outVar, TRUE);
+        evt_set_variable(script, outVar, true);
     } else {
-        evt_set_variable(script, outVar, FALSE);
+        evt_set_variable(script, outVar, false);
     }
     return ApiStatus_DONE2;
 }
@@ -573,8 +573,8 @@ EvtScript N(EVS_PerformHintRitual) = {
     Call(PlaySoundAt, SOUND_LRAW_CRYSTAL_BALL_GLOW, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     PlayEffect(EFFECT_ENERGY_ORB_WAVE, 1, LVar0, LVar1, LVar2, Float(1.0), -1)
     Set(ArrayVar(1), LVarF)
-    Call(EnableModel, MODEL_o185, FALSE)
-    Call(EnableModel, MODEL_o186, FALSE)
+    Call(EnableModel, MODEL_o185, false)
+    Call(EnableModel, MODEL_o186, false)
     Wait(30)
     Thread
         Call(N(func_802418E8_A3ADC8))
@@ -594,7 +594,7 @@ EvtScript N(EVS_PerformHintRitual) = {
     Call(GetCamPitch, CAM_DEFAULT, LVar0, LVar1)
     SetF(LVar1, Float(-11.0))
     Call(SetCamPitch, CAM_DEFAULT, LVar0, LVar1)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     PlayEffect(EFFECT_MERLIN_HOUSE_STARS, 0, -298, 21, -330)
     Set(ArrayVar(2), LVarF)
@@ -633,8 +633,8 @@ EvtScript N(EVS_PerformHintRitual) = {
     Call(PlaySoundAt, SOUND_LRAW_CRYSTAL_BALL_GLOW | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, LVar0, LVar1, LVar2)
     Call(N(func_80241F98_A3B478), ArrayVar(1))
     Wait(15)
-    Call(EnableModel, MODEL_o185, TRUE)
-    Call(EnableModel, MODEL_o186, TRUE)
+    Call(EnableModel, MODEL_o185, true)
+    Call(EnableModel, MODEL_o186, true)
     Call(DismissEffect, ArrayVar(1))
     Thread
         Call(N(func_80241B74_A3B054))
@@ -655,7 +655,7 @@ EvtScript N(EVS_NpcInit_Merluvlee) = {
 
 EvtScript N(EVS_KootRequestBall_Merluvlee) = {
     IfEq(GB_KootFavor_Current, KOOT_FAVOR_CH4_1)
-        IfEq(GF_HOS06_MerluvleeRequestedCrystalBall, FALSE)
+        IfEq(GF_HOS06_MerluvleeRequestedCrystalBall, false)
             Call(SetPlayerAnimation, ANIM_Mario1_Idle)
             Wait(1)
             Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
@@ -663,7 +663,7 @@ EvtScript N(EVS_KootRequestBall_Merluvlee) = {
             Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0046)
             Wait(10)
             Call(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0047)
-            Set(GF_HOS06_MerluvleeRequestedCrystalBall, TRUE)
+            Set(GF_HOS06_MerluvleeRequestedCrystalBall, true)
         EndIf
     EndIf
     Return
@@ -676,10 +676,10 @@ s32 N(CrystalBallItems)[] = {
 };
 
 EvtScript N(EVS_KootCheckBall_Merluvlee) = {
-    IfEq(GF_HOS06_MerluvleeRequestedCrystalBall, FALSE)
+    IfEq(GF_HOS06_MerluvleeRequestedCrystalBall, false)
         Return
     EndIf
-    IfEq(GF_HOS06_Gift_MerluvleesAutograph, TRUE)
+    IfEq(GF_HOS06_Gift_MerluvleesAutograph, true)
         Return
     EndIf
     Call(FindKeyItem, ITEM_CRYSTAL_BALL, LVar0)
@@ -690,7 +690,7 @@ EvtScript N(EVS_KootCheckBall_Merluvlee) = {
         IfNe(LVar0, -1)
             Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0049)
             EVT_GIVE_KEY_REWARD(ITEM_KOOT_MERLUVLEE_AUTOGRAPH)
-            Set(GF_HOS06_Gift_MerluvleesAutograph, TRUE)
+            Set(GF_HOS06_Gift_MerluvleesAutograph, true)
         Else
             Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0048)
         EndIf
@@ -700,19 +700,19 @@ EvtScript N(EVS_KootCheckBall_Merluvlee) = {
 };
 
 EvtScript N(EVS_AskForHint) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(func_802CF56C, 1)
     Call(PlayerMoveTo, -49, 0, 6)
-    Call(PlayerFaceNpc, NPC_Merluvlee, FALSE)
+    Call(PlayerFaceNpc, NPC_Merluvlee, false)
     IfEq(MV_RitualFXArrayPtr, 0)
         MallocArray(20, MV_RitualFXArrayPtr)
     EndIf
     UseArray(MV_RitualFXArrayPtr)
-    IfEq(AF_HOS06_SpokeWithMerluvlee, FALSE)
-        Set(AF_HOS06_SpokeWithMerluvlee, TRUE)
-        IfEq(GF_HOS06_Met_Merluvlee, FALSE)
+    IfEq(AF_HOS06_SpokeWithMerluvlee, false)
+        Set(AF_HOS06_SpokeWithMerluvlee, true)
+        IfEq(GF_HOS06_Met_Merluvlee, false)
             Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0038)
-            Set(GF_HOS06_Met_Merluvlee, TRUE)
+            Set(GF_HOS06_Met_Merluvlee, true)
         Else
             Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0039)
         EndIf
@@ -724,23 +724,23 @@ EvtScript N(EVS_AskForHint) = {
     IfNe(LVar0, 0)
         Call(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003C)
         Call(func_802CF56C, 0)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Return
     EndIf
-    Call(ShowCoinCounter, TRUE)
+    Call(ShowCoinCounter, true)
     Call(ShowChoice, MSG_Choice_0000)
-    Call(ShowCoinCounter, FALSE)
+    Call(ShowCoinCounter, false)
     IfEq(LVar0, 4)
         Call(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003C)
         Call(func_802CF56C, 0)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Return
     EndIf
     Call(N(HasEnoughCoinsForHint), LVar0, LVar1)
     IfNe(LVar1, 0)
         Call(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003D)
         Call(func_802CF56C, 0)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Return
     EndIf
     Call(N(DeductHintCoins), LVar0)
@@ -784,7 +784,7 @@ EvtScript N(EVS_AskForHint) = {
     EndSwitch
     Label(99)
     Call(func_802CF56C, 0)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

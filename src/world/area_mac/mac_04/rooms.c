@@ -3,7 +3,7 @@
 s32 mdl_set_shroud_tint_params(s32, s32, s32, s32);
 
 API_CALLABLE(N(InitEntryFromToybox)) {
-    mdl_group_set_custom_gfx(MODEL_heiho_house, CUSTOM_GFX_NONE, ENV_TINT_SHROUD, TRUE);
+    mdl_group_set_custom_gfx(MODEL_heiho_house, CUSTOM_GFX_NONE, ENV_TINT_SHROUD, true);
     mdl_set_shroud_tint_params(0, 0, 0, 255);
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
@@ -34,10 +34,10 @@ EvtScript N(EVS_SetWallRot_Shop) = {
 EvtScript N(EVS_RoomListener_Shop) = {
     Switch(LVar0)
         CaseEq(ROOM_UPDATE_ENTER_BEGIN)
-            Call(EnableGroup, MODEL_mise_in, TRUE)
+            Call(EnableGroup, MODEL_mise_in, true)
             Exec(N(EVS_OnEnterShop))
         CaseEq(ROOM_UPDATE_EXIT_END)
-            Call(EnableGroup, MODEL_mise_in, FALSE)
+            Call(EnableGroup, MODEL_mise_in, false)
     EndSwitch
     Return
     End
@@ -71,9 +71,9 @@ EvtScript N(EVS_DropDoor_NiceHouse) = {
 EvtScript N(EVS_RoomListener_NiceHouse) = {
     Switch(LVar0)
         CaseEq(ROOM_UPDATE_ENTER_BEGIN)
-            Call(EnableGroup, MODEL_rin_in, TRUE)
+            Call(EnableGroup, MODEL_rin_in, true)
         CaseEq(ROOM_UPDATE_EXIT_END)
-            Call(EnableGroup, MODEL_rin_in, FALSE)
+            Call(EnableGroup, MODEL_rin_in, false)
     EndSwitch
     Return
     End
@@ -131,14 +131,14 @@ EvtScript N(EVS_SetWallRot_Warehouse) = {
 EvtScript N(EVS_RoomListener_Warehouse) = {
     Switch(LVar0)
         CaseEq(ROOM_UPDATE_ENTER_BEGIN)
-            Call(EnableGroup, MODEL_heiho_in, TRUE)
-            Set(MF_MusicMixTrigger, TRUE)
+            Call(EnableGroup, MODEL_heiho_in, true)
+            Set(MF_MusicMixTrigger, true)
         CaseEq(ROOM_UPDATE_ENTER_DONE)
             Exec(N(EVS_HiddenRoom_WaitForOuttaSight))
         CaseEq(ROOM_UPDATE_EXIT_END)
-            Call(EnableGroup, MODEL_heiho_in, FALSE)
-            Call(EnableGroup, MODEL_hi_soto, TRUE)
-            Set(MF_MusicMixTrigger, FALSE)
+            Call(EnableGroup, MODEL_heiho_in, false)
+            Call(EnableGroup, MODEL_hi_soto, true)
+            Set(MF_MusicMixTrigger, false)
     EndSwitch
     Return
     End

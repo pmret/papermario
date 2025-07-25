@@ -55,7 +55,7 @@ void star_power_shimmer_start(s32 emitterIdx, f32 x, f32 y, f32 scale) {
     s32 j;
 
     if (emitterIdx < ARRAY_COUNT(ShimmerEmitters)) {
-        particle->alive = TRUE;
+        particle->alive = true;
         particle->pos.x = x;
         particle->pos.y = y;
         particle->scale = scale;
@@ -73,7 +73,7 @@ void star_power_shimmer_init(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(ShimmerEmitters); i++) {
-        ShimmerEmitters[i].particles[0].alive = FALSE;
+        ShimmerEmitters[i].particles[0].alive = false;
     }
 }
 
@@ -96,7 +96,7 @@ void star_power_shimmer_update(void) {
         emitter->particles[0].lifetime++;
 
         if (emitter->particles[0].timeLeft < 0) {
-            emitter->particles[0].alive = FALSE;
+            emitter->particles[0].alive = false;
             continue;
         }
 

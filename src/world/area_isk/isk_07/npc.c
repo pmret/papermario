@@ -7,15 +7,15 @@ API_CALLABLE(N(IsLastEnemy)) {
     s32 livingEncounters;
     s32 i, j;
 
-    script->varTable[1] = FALSE;
+    script->varTable[1] = false;
     livingEncounters = 0;
     for (i = 0; i < encounterStatus->numEncounters; i++) {
         Encounter* encounter = encounterStatus->encounterList[i];
         if (encounter != NULL) {
-            s32 hasEnemy = FALSE;
+            s32 hasEnemy = false;
             for (j = 0; j < encounter->count; j++) {
                 if (encounter->enemy[j] != NULL) {
-                    hasEnemy = TRUE;
+                    hasEnemy = true;
                 }
             }
             if (hasEnemy) {
@@ -27,7 +27,7 @@ API_CALLABLE(N(IsLastEnemy)) {
     if (livingEncounters != 1) {
         return ApiStatus_DONE2;
     } else {
-        script->varTable[1] = TRUE;
+        script->varTable[1] = true;
         return ApiStatus_DONE2;
     }
 }
@@ -36,11 +36,11 @@ EvtScript N(EVS_NpcDefeat_Pokey_01) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            IfEq(GF_ISK07_Defeated_Mummies, FALSE)
+            IfEq(GF_ISK07_Defeated_Mummies, false)
                 Thread
                     Call(N(IsLastEnemy))
-                    IfEq(LVar1, TRUE)
-                        Call(DisablePlayerInput, TRUE)
+                    IfEq(LVar1, true)
+                        Call(DisablePlayerInput, true)
                         Call(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
                         Wait(30)
                         Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
@@ -49,11 +49,11 @@ EvtScript N(EVS_NpcDefeat_Pokey_01) = {
                         Call(UseSettingsFrom, CAM_DEFAULT, -251, -390, 553)
                         Call(SetPanTarget, CAM_DEFAULT, -251, -390, 553)
                         Wait(1)
-                        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                        Call(PanToTarget, CAM_DEFAULT, 0, true)
                         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                         Wait(45)
                         Call(MakeItemEntity, ITEM_RUINS_KEY, -250, -240, 545, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_ISK07_Item_RuinsKey)
-                        Set(GF_ISK07_Defeated_Mummies, TRUE)
+                        Set(GF_ISK07_Defeated_Mummies, true)
                         ExecWait(N(EVS_OpenEntryDoor))
                         Wait(60)
                         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
@@ -61,9 +61,9 @@ EvtScript N(EVS_NpcDefeat_Pokey_01) = {
                         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
                         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
                         Wait(1)
-                        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+                        Call(PanToTarget, CAM_DEFAULT, 0, false)
                         Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
-                        Call(DisablePlayerInput, FALSE)
+                        Call(DisablePlayerInput, false)
                     EndIf
                 EndThread
             EndIf
@@ -71,7 +71,7 @@ EvtScript N(EVS_NpcDefeat_Pokey_01) = {
         CaseEq(OUTCOME_PLAYER_FLED)
             Call(OnPlayerFled, 0)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -79,67 +79,67 @@ EvtScript N(EVS_NpcDefeat_Pokey_01) = {
 };
 
 EvtScript N(EVS_NpcIdle_Pokey_01) = {
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
     Label(1)
-    IfEq(AF_ISK07_MummiesReleased, FALSE)
+    IfEq(AF_ISK07_MummiesReleased, false)
         Wait(1)
         Goto(1)
     EndIf
     Call(SetNpcYaw, NPC_SELF, 105)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, false)
     Call(NpcMoveTo, NPC_SELF, -140, 528, 10)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, true)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_PokeyMummy)))
     Return
     End
 };
 
 EvtScript N(EVS_NpcIdle_Pokey_02) = {
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
     Label(1)
-    IfEq(AF_ISK07_MummiesReleased, FALSE)
+    IfEq(AF_ISK07_MummiesReleased, false)
         Wait(1)
         Goto(1)
     EndIf
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, false)
     Wait(15)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, false)
     Call(NpcMoveTo, NPC_SELF, 47, 543, 10)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, true)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_PokeyMummy)))
     Return
     End
 };
 
 EvtScript N(EVS_NpcIdle_Pokey_03) = {
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
     Label(1)
-    IfEq(AF_ISK07_MummiesReleased, FALSE)
+    IfEq(AF_ISK07_MummiesReleased, false)
         Wait(1)
         Goto(1)
     EndIf
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, false)
     Wait(15)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, false)
     Call(NpcMoveTo, NPC_SELF, 227, 489, 10)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, true)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_PokeyMummy)))
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Pokey_01) = {
-    IfEq(GF_ISK07_Defeated_Mummies, FALSE)
+    IfEq(GF_ISK07_Defeated_Mummies, false)
         Call(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
     EndIf
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Pokey_01)))
@@ -151,7 +151,7 @@ EvtScript N(EVS_NpcInit_Pokey_01) = {
 };
 
 EvtScript N(EVS_NpcInit_Pokey_02) = {
-    IfEq(GF_ISK07_Defeated_Mummies, FALSE)
+    IfEq(GF_ISK07_Defeated_Mummies, false)
         Call(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
     EndIf
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Pokey_02)))
@@ -162,7 +162,7 @@ EvtScript N(EVS_NpcInit_Pokey_02) = {
 };
 
 EvtScript N(EVS_NpcInit_Pokey_03) = {
-    IfEq(GF_ISK07_Defeated_Mummies, FALSE)
+    IfEq(GF_ISK07_Defeated_Mummies, false)
         Call(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
     EndIf
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Pokey_03)))
@@ -178,7 +178,7 @@ NpcData N(NpcData_Pokey_01) = {
     .yaw = 304,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -301, 0, 427 },
@@ -201,7 +201,7 @@ NpcData N(NpcData_Pokey_02) = {
     .yaw = 263,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 52, -390, 573 },
@@ -224,7 +224,7 @@ NpcData N(NpcData_Pokey_03) = {
     .yaw = 244,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 243, -390, 523 },

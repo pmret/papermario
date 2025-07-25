@@ -69,9 +69,9 @@ EvtScript N(EVS_SetWallRot_ToadHouse) = {
     Call(RotateGroup, MODEL_g56, LVar1, 0, 1, 0)
     Switch(LVar0)
         CaseEq(90)
-            Call(EnableModel, MODEL_o177, FALSE)
+            Call(EnableModel, MODEL_o177, false)
         CaseDefault
-            Call(EnableModel, MODEL_o177, TRUE)
+            Call(EnableModel, MODEL_o177, true)
     EndSwitch
     Return
     End

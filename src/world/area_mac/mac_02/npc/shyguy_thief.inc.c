@@ -34,7 +34,7 @@ EvtScript N(D_8024B6E8_82E9A8) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_MAC_Bridge_0016, 160, 40)
     Call(SetCamProperties, CAM_DEFAULT, Float(3.0), -140, 20, -140, 400, 15, -6)
     Call(SetNpcPos, NPC_ShyGuy, -200, 20, -260)
@@ -42,7 +42,7 @@ EvtScript N(D_8024B6E8_82E9A8) = {
     Wait(10)
     Exec(N(D_8024B5AC_82E86C))
     Thread
-        Call(EnableGroup, MODEL_cook_in, TRUE)
+        Call(EnableGroup, MODEL_cook_in, true)
         Call(PlaySoundAtCollider, COLLIDER_deilit1u, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
         Set(LVar0, 0)
         Loop(10)
@@ -57,7 +57,7 @@ EvtScript N(D_8024B6E8_82E9A8) = {
             Wait(1)
         EndLoop
         Call(PlaySoundAtCollider, COLLIDER_deilit1u, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-        Call(EnableGroup, MODEL_cook_in, FALSE)
+        Call(EnableGroup, MODEL_cook_in, false)
     EndThread
     Wait(5)
     Call(PlaySoundAtNpc, NPC_ShyGuy, SOUND_SHY_GUY_RUN_AWAY, SOUND_SPACE_DEFAULT)
@@ -73,7 +73,7 @@ EvtScript N(D_8024B6E8_82E9A8) = {
     Set(GB_StoryProgress, STORY_CH4_FRYING_PAN_STOLEN)
     Wait(10)
     Call(ResetCam, CAM_DEFAULT, Float(3.0))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

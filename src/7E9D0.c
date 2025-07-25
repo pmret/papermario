@@ -267,7 +267,7 @@ void phys_update_action_state(void) {
             if (!(playerStatus->flags & PS_FLAG_INPUT_DISABLED)) {
                 cond = check_conversation_trigger();
             } else {
-                cond = FALSE;
+                cond = false;
             }
 
             if ((partnerStatus->partnerActionState == PARTNER_ACTION_NONE) && !(playerStatus->flags & PS_FLAG_PAUSED) && cond) {
@@ -450,49 +450,49 @@ void start_bounce_b(void) {
     playerStatus->flags |= PS_FLAG_SCRIPTED_FALL;
 }
 
-b32 check_input_hammer(void) {
+bool check_input_hammer(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
 
     if (playerStatus->pressedButtons & BUTTON_B) {
         if (playerStatus->flags & PS_FLAG_FALLING) {
-            return FALSE;
+            return false;
         }
 
         if (gPartnerStatus.partnerActionState == PARTNER_ACTION_USE && playerData->curPartner == PARTNER_WATT) {
-            return FALSE;
+            return false;
         }
 
         if (playerData->hammerLevel == -1) {
-            return FALSE;
+            return false;
         }
 
         set_action_state(ACTION_STATE_HAMMER);
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
-b32 check_input_jump(void) {
+bool check_input_jump(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     s32 surfaceType;
 
     if (!(playerStatus->pressedButtons & BUTTON_A)) {
-        return FALSE;
+        return false;
     }
 
     /// @bug? collider flags not properly masked with COLLIDER_FLAG_SURFACE_TYPE
     surfaceType = get_collider_flags((u16)gCollisionStatus.curFloor);
     if ((surfaceType == SURFACE_TYPE_SLIDE) && phys_should_player_be_sliding()) {
-        return FALSE;
+        return false;
     }
 
     if (collisionStatus->touchingWallTrigger != 0 ||
         (playerStatus->animFlags & (PA_FLAG_SPEECH_PROMPT_AVAILABLE |
                                     PA_FLAG_INTERACT_PROMPT_AVAILABLE)))
     {
-        return FALSE;
+        return false;
     }
 
     if ((collisionStatus->curInspect != -1) && (collisionStatus->curInspect & COLLISION_WITH_ENTITY_BIT)) {
@@ -504,16 +504,16 @@ b32 check_input_jump(void) {
                     entity->type == ENTITY_TYPE_BELLBELL_PLANT ||
                     entity->type == ENTITY_TYPE_TRUMPET_PLANT)
                 {
-                    return FALSE;
+                    return false;
                 }
             } else {
-                return FALSE;
+                return false;
             }
         }
     }
 
     set_action_state(ACTION_STATE_JUMP);
-    return TRUE;
+    return true;
 }
 
 void check_input_spin(void) {
@@ -536,7 +536,7 @@ void check_input_spin(void) {
                     if (actionState >= 0 && !(playerStatus->animFlags & PA_FLAG_SPINNING)) {
                         if (btnPressed || spinState->hasBufferedSpin) {
                             set_action_state(ACTION_STATE_SPIN);
-                            if (spinState->hasBufferedSpin != FALSE) {
+                            if (spinState->hasBufferedSpin != false) {
                                 if (spinState->bufferedStickAxis.x != 0 || spinState->bufferedStickAxis.y != 0) {
                                     playerStatus->prevActionState = temp2->prevActionState;
                                 } else {

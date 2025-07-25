@@ -66,7 +66,7 @@ EvtScript N(EVS_ItemPrompt_ToyTrain) = {
         Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(RemoveKeyItemAt, LVar1)
     Call(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_OMO_TOYBOX_LID, SOUND_SPACE_DEFAULT)
     Call(MakeLerp, 0, -90, 10, EASING_LINEAR)
@@ -141,7 +141,7 @@ API_CALLABLE(N(EnforceNewStatLimits)) {
     s32 i;
 
     if (gPlayerData.maxBP >= bpCost) {
-        evt_set_variable(script, outVar, FALSE);
+        evt_set_variable(script, outVar, false);
         return ApiStatus_DONE2;
     } else {
         s16* badges = gPlayerData.equippedBadges;
@@ -150,7 +150,7 @@ API_CALLABLE(N(EnforceNewStatLimits)) {
             badges[i] = 0;
         }
         enforce_hpfp_limits();
-        evt_set_variable(script, outVar, TRUE);
+        evt_set_variable(script, outVar, true);
         return ApiStatus_DONE2;
     }
 }
@@ -229,7 +229,7 @@ NpcData N(NpcData_Townsfolk)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 48, 0, 153 },

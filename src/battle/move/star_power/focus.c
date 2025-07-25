@@ -57,7 +57,7 @@ API_CALLABLE(N(RestoreStarPowerFromPartner)) {
 
 EvtScript N(EVS_UsePower) = {
     ExecWait(N(EVS_StarPower_WishForSpirit))
-    Call(EnableBattleStatusBar, TRUE)
+    Call(EnableBattleStatusBar, true)
     Call(GetOwnerID, LVarA)
     IfEq(LVarA, ACTOR_PLAYER)
         Call(PlaySound, SOUND_STAR_POWER_RECOVERY)

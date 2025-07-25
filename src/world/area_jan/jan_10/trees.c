@@ -6,9 +6,9 @@
 
 API_CALLABLE(N(IsJungleFuzzyAlive)) {
     if (get_enemy_safe(NPC_JungleFuzzy) == NULL) {
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
     } else {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
     return ApiStatus_DONE2;
 }
@@ -16,7 +16,7 @@ API_CALLABLE(N(IsJungleFuzzyAlive)) {
 EvtScript N(EVS_OnShakeTree1) = {
     Wait(15)
     Call(N(IsJungleFuzzyAlive))
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Call(SetNpcVar, NPC_JungleFuzzy, 7, 1)
     EndIf
     Return

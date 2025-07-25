@@ -50,14 +50,14 @@ void spr_swizzle_anim_offsets(s32 arg0, s32 base, void* spriteData) {
     animList = (SpriteAnimComponent***) spriteData;
     animList += 4;
 
-    while (TRUE) {
+    while (true) {
         if (*animList == PTR_LIST_END) {
             break;
         }
         compList = (SpriteAnimComponent**) ((s32)*animList - ALIGN4(base));
         compList = SPR_SWIZZLE(ALIGN4(spriteData), compList);
         *animList = compList;
-        while (TRUE) {
+        while (true) {
             if (*compList == PTR_LIST_END) {
                 break;
             }
@@ -110,7 +110,7 @@ SpriteAnimData* spr_load_sprite(s32 idx, s32 isPlayerSprite, s32 useTailAlloc) {
     data = SPR_SWIZZLE(ALIGN4(animData), data);
     animData->rastersOffset = (SpriteRasterCacheEntry**)data;
 
-    while (TRUE) {
+    while (true) {
         ptr1 = *data;
         if (ptr1 == PTR_LIST_END) {
             break;
@@ -141,7 +141,7 @@ SpriteAnimData* spr_load_sprite(s32 idx, s32 isPlayerSprite, s32 useTailAlloc) {
     // swizzle palettes array
     palettes = SPR_SWIZZLE(ALIGN4(animData), animData->palettesOffset);
     animData->palettesOffset = (PAL_PTR*)palettes;
-    while (TRUE) {
+    while (true) {
         ptr1 = *palettes;
         if (ptr1 == PTR_LIST_END) {
             break;
@@ -250,7 +250,7 @@ void spr_load_npc_extra_anims(SpriteAnimData* header, u32* extraAnimList) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(sawRaster) - 1; i++) {
-        sawRaster[i] = FALSE;
+        sawRaster[i] = false;
     }
 
     while ((extraAnimID = *extraAnimList++) != -1) {
@@ -266,7 +266,7 @@ void spr_load_npc_extra_anims(SpriteAnimData* header, u32* extraAnimList) {
                         i = animCmd; // required to match
                         imgID = i & 0xFF;
                         if (imgID < ARRAY_COUNT(sawRaster) - 1) {
-                            sawRaster[imgID] = TRUE;
+                            sawRaster[imgID] = true;
                         }
                         break;
                     case 0x3000:
@@ -315,7 +315,7 @@ void spr_load_npc_extra_anims(SpriteAnimData* header, u32* extraAnimList) {
         rasterList++;
     }
     // sentinel value to mark end of valid data
-    sawRaster[i] = TRUE;
+    sawRaster[i] = true;
 
     writePos = dataPos;
 

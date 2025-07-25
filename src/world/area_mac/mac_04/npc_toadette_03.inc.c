@@ -9,7 +9,7 @@ EvtScript N(EVS_NpcInteract_Toadette_03) = {
             Set(LVar0, MSG_MAC_Housing_00EB)
 #endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Housing_0061)
             Else
                 Set(LVar0, MSG_MAC_Housing_0062)
@@ -29,7 +29,7 @@ EvtScript N(EVS_NpcInteract_Toadette_03) = {
         CaseLt(STORY_CH4_SOLVED_COLOR_PUZZLE)
             Call(FindKeyItem, ITEM_MYSTERY_NOTE, LVar0)
             IfEq(LVar0, -1)
-                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                IfEq(GF_MAC00_DictionaryReturned, false)
                     Set(LVar0, MSG_MAC_Housing_0069)
                 Else
                     Set(LVar0, MSG_MAC_Housing_006B)

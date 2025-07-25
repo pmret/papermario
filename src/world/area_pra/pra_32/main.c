@@ -12,12 +12,12 @@ API_CALLABLE(N(DisableFloorReflections)) {
 EvtScript N(EVS_SpawnStarCard) = {
     Set(LVar0, 0)
     IfEq(LVar0, 0)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(UseSettingsFrom, CAM_DEFAULT, 595, 185, 116)
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.6))
         Call(SetPanTarget, CAM_DEFAULT, 595, 130, 116)
         EVT_SPIRIT_ADJUST_CAM(10000)
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(N(StarSpiritEffectFunc2), 6, 180, 590, 120, 116, 595, 185, 116, 130, 100)
         Thread
             Call(N(StarSpiritEffectFunc3))
@@ -52,8 +52,8 @@ EvtScript N(EVS_SpawnStarCard) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
         Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-        Call(DisablePlayerInput, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
+        Call(DisablePlayerInput, false)
     Else
         Call(N(StarSpiritEffectFunc5), 6, 595, 130, 116, 100)
         Thread
@@ -63,7 +63,7 @@ EvtScript N(EVS_SpawnStarCard) = {
     EndIf
     Call(N(StarSpiritEffectFunc4), 3)
     Call(PlaySoundAtPlayer, SOUND_RESCUE_STAR_SPIRIT, SOUND_SPACE_DEFAULT)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(GB_StoryProgress, STORY_CH7_STAR_SPIRIT_RESCUED)
     Call(GotoMapSpecial, Ref("kmr_23"), kmr_23_ENTRY_6, TRANSITION_GET_STAR_CARD)
     Wait(100)
@@ -74,12 +74,12 @@ EvtScript N(EVS_SpawnStarCard) = {
 EvtScript N(EVS_RespawnStarCard) = {
     Set(LVar0, 1)
     IfEq(LVar0, 0)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(UseSettingsFrom, CAM_DEFAULT, 595, 185, 116)
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.6))
         Call(SetPanTarget, CAM_DEFAULT, 595, 130, 116)
         EVT_SPIRIT_ADJUST_CAM(10000)
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(N(StarSpiritEffectFunc2), 6, 180, 590, 120, 116, 595, 185, 116, 130, 100)
         Thread
             Call(N(StarSpiritEffectFunc3))
@@ -114,8 +114,8 @@ EvtScript N(EVS_RespawnStarCard) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
         Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-        Call(DisablePlayerInput, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
+        Call(DisablePlayerInput, false)
     Else
         Call(N(StarSpiritEffectFunc5), 6, 595, 130, 116, 100)
         Thread
@@ -125,7 +125,7 @@ EvtScript N(EVS_RespawnStarCard) = {
     EndIf
     Call(N(StarSpiritEffectFunc4), 3)
     Call(PlaySoundAtPlayer, SOUND_RESCUE_STAR_SPIRIT, SOUND_SPACE_DEFAULT)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(GB_StoryProgress, STORY_CH7_STAR_SPIRIT_RESCUED)
     Call(GotoMapSpecial, Ref("kmr_23"), kmr_23_ENTRY_6, TRANSITION_GET_STAR_CARD)
     Wait(100)
@@ -143,7 +143,7 @@ s32 N(DoorModelsR)[] = {
 
 EvtScript N(EVS_ExitDoors_pra_40_1) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_32_ENTRY_0)
     Set(LVar1, COLLIDER_deilittw)
     Set(LVar2, Ref(N(DoorModelsL)))
@@ -175,7 +175,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_CRYSTAL_PALACE)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1309, SURFACE_TYPE_SNOW)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1293, SURFACE_TYPE_SNOW)
     PlayEffect(EFFECT_SNOWFALL, 0, 120)

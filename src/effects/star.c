@@ -44,7 +44,7 @@ EffectInstance* star_main(s32 type, f32 startX, f32 startY, f32 startZ, f32 endX
     part = effect->data.star = general_heap_malloc(numParts * sizeof(*part));
 
     ASSERT(effect->data.star != NULL);
-    part->canBounce = TRUE;
+    part->canBounce = true;
     part->pos.x = startX;
     part->pos.y = startY;
     part->pos.z = startZ;
@@ -155,7 +155,7 @@ void star_update(EffectInstance* effect) {
                 sfx_play_sound_at_position(SOUND_SEQ_SHOOTING_STAR_BOUNCE, SOUND_SPACE_DEFAULT, data->pos.x, data->pos.y, data->pos.z);
             }
 
-            data->canBounce = FALSE;
+            data->canBounce = false;
             if (data->bounceTime >= 10.0f) {
                 data->timeLeft = -1;
             }

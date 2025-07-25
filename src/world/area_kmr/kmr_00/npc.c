@@ -89,7 +89,7 @@ EvtScript N(EVS_NpcAux_StarSpirit) = {
 };
 
 EvtScript N(EVS_NpcInit_StarSpirit) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_StarSpirit)))
     IfGe(GB_StoryProgress, STORY_CH0_WAKE_UP)
         Call(RemoveNpc, NPC_SELF)

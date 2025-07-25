@@ -12,12 +12,12 @@
 EvtScript N(EVS_NpcInteract_Boo_01) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
-            IfEq(AF_ARN_02, FALSE)
+            IfEq(AF_ARN_02, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0073)
-                Set(AF_ARN_02, TRUE)
+                Set(AF_ARN_02, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0074)
-                Set(AF_ARN_02, FALSE)
+                Set(AF_ARN_02, false)
             EndIf
         CaseLt(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0075)
@@ -38,7 +38,7 @@ EvtScript N(EVS_NpcInteract_Boo_01) = {
 };
 
 EvtScript N(EVS_NpcIdle_Boo_01) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(25 * DT)
     Thread
         Wait(50 * DT)
@@ -47,7 +47,7 @@ EvtScript N(EVS_NpcIdle_Boo_01) = {
         Call(SetCamDistance, CAM_DEFAULT, 325)
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Thread
         Wait(20 * DT)
@@ -92,7 +92,7 @@ EvtScript N(EVS_NpcIdle_Boo_01) = {
     Call(func_802CF56C, 2)
     Wait(15 * DT)
     Set(GB_StoryProgress, STORY_CH3_ARRIVED_AT_GHOST_TOWN)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
 #if VERSION_PAL
@@ -100,9 +100,9 @@ EvtScript N(EVS_NpcIdle_Boo_01) = {
 #else
     Call(SetCamSpeed, CAM_DEFAULT, 3)
 #endif
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Return
     End
 };
@@ -126,8 +126,8 @@ EvtScript N(EVS_NpcInteract_Boo_02) = {
             ExecWait(N(GiveItemReward))
             Call(AddKeyItem, ITEM_KOOT_PACKAGE)
             Set(MV_Unk_00, 0)
-            Set(GF_ARN03_RecievedPackage, TRUE)
-            Set(GF_ARN03_WaitingForPackage, FALSE)
+            Set(GF_ARN03_RecievedPackage, true)
+            Set(GF_ARN03_WaitingForPackage, false)
             Return
         Else
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0080)
@@ -136,12 +136,12 @@ EvtScript N(EVS_NpcInteract_Boo_02) = {
     EndIf
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
-            IfEq(AF_ARN_03, FALSE)
+            IfEq(AF_ARN_03, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0079)
-                Set(AF_ARN_03, TRUE)
+                Set(AF_ARN_03, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007A)
-                Set(AF_ARN_03, FALSE)
+                Set(AF_ARN_03, false)
             EndIf
         CaseLt(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007B)
@@ -152,14 +152,14 @@ EvtScript N(EVS_NpcInteract_Boo_02) = {
         CaseGe(STORY_CH5_STAR_SPRIT_DEPARTED)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007E)
     EndSwitch
-    IfEq(GF_ARN03_RecievedPackage, FALSE)
+    IfEq(GF_ARN03_RecievedPackage, false)
         IfEq(GB_KootFavor_Current, KOOT_FAVOR_CH7_2)
             ExecWait(N(EVS_MarioSalute))
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007F)
             Call(EndSpeech, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0)
             Set(MV_Unk_00, 0)
             Set(MV_Unk_01, 450 * DT)
-            Set(GF_ARN03_WaitingForPackage, TRUE)
+            Set(GF_ARN03_WaitingForPackage, true)
             Thread
                 Loop(0)
                     Add(MV_Unk_00, 1)
@@ -278,12 +278,12 @@ EvtScript N(80242C60) = {
 EvtScript N(EVS_NpcInteract_Boo_03) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
-            IfEq(AF_ARN_04, FALSE)
+            IfEq(AF_ARN_04, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0082)
-                Set(AF_ARN_04, TRUE)
+                Set(AF_ARN_04, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0083)
-                Set(AF_ARN_04, FALSE)
+                Set(AF_ARN_04, false)
             EndIf
         CaseLt(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0084)
@@ -291,7 +291,7 @@ EvtScript N(EVS_NpcInteract_Boo_03) = {
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0085)
         CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
             Call(DisablePartnerAI, 0)
-            Call(DisablePlayerPhysics, TRUE)
+            Call(DisablePlayerPhysics, true)
             Thread
                 Call(GetPlayerPos, LVar0, LVar1, LVar2)
                 Add(LVar2, -20)
@@ -301,16 +301,16 @@ EvtScript N(EVS_NpcInteract_Boo_03) = {
             EndThread
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0086)
             ExecWait(N(802428CC))
-            Call(PlayerFaceNpc, NPC_Boo_05, TRUE)
+            Call(PlayerFaceNpc, NPC_Boo_05, true)
             Call(NpcFaceNpc, NPC_PARTNER, NPC_Boo_05, 1)
             Call(SpeakToPlayer, NPC_Boo_05, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_0087)
             ExecWait(N(80242C60))
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0088)
-            Call(DisablePlayerPhysics, FALSE)
+            Call(DisablePlayerPhysics, false)
             Call(EnablePartnerAI)
         CaseGe(STORY_CH5_STAR_SPRIT_DEPARTED)
             Call(DisablePartnerAI, 0)
-            Call(DisablePlayerPhysics, TRUE)
+            Call(DisablePlayerPhysics, true)
             Thread
                 Call(GetPlayerPos, LVar0, LVar1, LVar2)
                 Add(LVar2, -20)
@@ -320,12 +320,12 @@ EvtScript N(EVS_NpcInteract_Boo_03) = {
             EndThread
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_0089)
             ExecWait(N(802428CC))
-            Call(PlayerFaceNpc, NPC_Boo_05, TRUE)
+            Call(PlayerFaceNpc, NPC_Boo_05, true)
             Call(NpcFaceNpc, NPC_PARTNER, NPC_Boo_05, 1)
             Call(SpeakToPlayer, NPC_Boo_05, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_008A)
             ExecWait(N(80242C60))
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_008B)
-            Call(DisablePlayerPhysics, FALSE)
+            Call(DisablePlayerPhysics, false)
             Call(EnablePartnerAI)
     EndSwitch
     Return
@@ -341,12 +341,12 @@ EvtScript N(EVS_NpcInit_Boo_03) = {
 EvtScript N(EVS_NpcInteract_Boo_04) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
-            IfEq(AF_ARN_05, FALSE)
+            IfEq(AF_ARN_05, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_008C)
-                Set(AF_ARN_05, TRUE)
+                Set(AF_ARN_05, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_008D)
-                Set(AF_ARN_05, FALSE)
+                Set(AF_ARN_05, false)
             EndIf
         CaseLt(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_008E)
@@ -379,7 +379,7 @@ NpcData N(NpcData_Boo_01) = {
     .yaw = 90,
     .territory = {
         .patrol = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 2,
             .points  = {
@@ -417,7 +417,7 @@ NpcData N(NpcData_Boo_03) = {
     .yaw = 90,
     .territory = {
         .patrol = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 2,
             .points  = {
@@ -486,28 +486,28 @@ EvtScript N(EVS_NpcIdle_Boo_06) = {
 
 EvtScript N(EVS_NpcInit_Boo_06) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Boo_06)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Boo_07) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Boo_06)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Boo_08) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Boo_06)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Boo_09) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Boo_06)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, false)
     Return
     End
 };

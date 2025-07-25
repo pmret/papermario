@@ -8,14 +8,14 @@
 #include "../common/ApproachPlayer100Units.inc.c"
 
 EvtScript N(EVS_CapturePeach) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     Call(NpcFacePlayer, NPC_SELF, 5)
     Wait(20)
-    Call(PlayerFaceNpc, NPC_SELF, FALSE)
+    Call(PlayerFaceNpc, NPC_SELF, false)
     Call(SetPlayerAnimation, ANIM_Peach2_Gasp)
     Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim02)
     Call(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim09, ANIM_WorldKoopatrol_Anim02, 0, MSG_Peach_0174)
@@ -31,7 +31,7 @@ EvtScript N(EVS_CapturePeach) = {
     Wait(20)
     Call(GotoMapSpecial, Ref("kkj_14"), kkj_14_ENTRY_B, TRANSITION_PEACH_CAPTURED)
     Wait(100)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End

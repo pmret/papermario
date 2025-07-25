@@ -61,7 +61,7 @@ EvtScript N(EVS_PreBattle) = {
         Exec(N(EVS_AnimateCloud))
     EndThread
     Call(CloneModel, MODEL_o427, CLONED_MODEL(0))
-    Call(EnableModel, CLONED_MODEL(0), FALSE)
+    Call(EnableModel, CLONED_MODEL(0), false)
     Call(TranslateModel, CLONED_MODEL(0), 0, 9, 0)
     Call(ParentColliderToModel, 0, CLONED_MODEL(0))
     ExecWait(N(MakeSun))

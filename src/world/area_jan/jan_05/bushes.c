@@ -13,7 +13,7 @@ EvtScript N(EVS_MoveBushes_Separate) = EVT_MOVE_BUSHES(COLLIDER_o64,
 EvtScript N(EVS_MoveBushes) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o64, COLLIDER_FLAGS_UPPER_MASK)
     Exec(N(EVS_MoveBushes_Separate))
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(MakeLerp, 0, 45, 30, EASING_CUBIC_OUT)
     Label(0)
     Call(UpdateLerp)
@@ -24,7 +24,7 @@ EvtScript N(EVS_MoveBushes) = {
         Wait(1)
         Goto(0)
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

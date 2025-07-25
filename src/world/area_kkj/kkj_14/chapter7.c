@@ -237,7 +237,7 @@ EvtScript N(EVS_FocusCam_Door_Ch7) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-13.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(-310.0), Float(32.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -248,15 +248,15 @@ EvtScript N(EVS_FocusCam_Bed) = {
     Call(SetPanTarget, CAM_DEFAULT, 380, 30, 10)
     Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
 };
 
 EvtScript N(EVS_Scene_Chapter7) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
     Call(SetMusic, 0, SONG_BOWSER_THEME, 0, VOL_LEVEL_FULL)
     Call(SetNpcPos, NPC_PARTNER, 440, 65, 0)
@@ -288,7 +288,7 @@ EvtScript N(EVS_Scene_Chapter7) = {
     EndLoop
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_Sad)
     Call(SetNpcPos, NPC_Ch7_Bowser, 100, 0, 20)
-    Call(SetNpcFlagBits, NPC_Ch7_Bowser, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_Ch7_Bowser, NPC_FLAG_GRAVITY, true)
     Call(SetNpcAnimation, NPC_Ch7_Bowser, ANIM_WorldBowser_Walk)
     Call(NpcMoveTo, NPC_Ch7_Bowser, 300, 20, 0)
     Call(SetNpcAnimation, NPC_Ch7_Bowser, ANIM_WorldBowser_Idle)
@@ -296,7 +296,7 @@ EvtScript N(EVS_Scene_Chapter7) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(325.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Ch7_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, MSG_Peach_0162)
     Call(InterpPlayerYaw, 90, 5)
@@ -328,7 +328,7 @@ EvtScript N(EVS_Scene_Chapter7) = {
     Call(SetPanTarget, CAM_DEFAULT, 250, 30, 10)
     Call(SetCamDistance, CAM_DEFAULT, Float(325.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(10 * DT)
     Call(SetNpcPos, NPC_Ch7_Kammy, 50, 0, -10)
     Call(SetNpcAnimation, NPC_Ch7_Kammy, ANIM_WorldKammy_Anim03)
@@ -348,7 +348,7 @@ EvtScript N(EVS_Scene_Chapter7) = {
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Call(InterpNpcYaw, NPC_Ch7_Bowser, 270, 10)
@@ -357,8 +357,8 @@ EvtScript N(EVS_Scene_Chapter7) = {
     Wait(10 * DT)
     Call(SetNpcPos, NPC_Ch7_Koopatrol_01, 48, 0, 70)
     Call(SetNpcPos, NPC_Ch7_Koopatrol_02, 100, 0, 70)
-    Call(SetNpcFlagBits, NPC_Ch7_Koopatrol_01, NPC_FLAG_GRAVITY, TRUE)
-    Call(SetNpcFlagBits, NPC_Ch7_Koopatrol_02, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_Ch7_Koopatrol_01, NPC_FLAG_GRAVITY, true)
+    Call(SetNpcFlagBits, NPC_Ch7_Koopatrol_02, NPC_FLAG_GRAVITY, true)
     Wait(10 * DT)
     ExecWait(N(EVS_ApproachPeach))
     ExecWait(N(EVS_TiePeachUp))
@@ -411,7 +411,7 @@ EvtScript N(EVS_Scene_Chapter7) = {
     Call(InterpPlayerYaw, 90, 0)
     Call(PlaySoundAt, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT, 350, 80, 10)
     PlayEffect(EFFECT_FIREWORK, 0, 350, 80, 10, 1, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Call(SetNpcSpeed, NPC_PARTNER, Float(7.5 / DT))
     Call(NpcFlyTo, NPC_PARTNER, 500, 130, 10, 0, 0, EASING_LINEAR)
     Call(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_TiedIdle, ANIM_Peach2_TiedIdle, 5, MSG_Peach_0171)
@@ -430,10 +430,10 @@ EvtScript N(EVS_Scene_Chapter7) = {
     ExecWait(N(EVS_CarryPeachAway))
     Wait(30 * DT)
     ExecWait(N(EVS_EndPeachChapter7))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(EnablePartnerAI)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

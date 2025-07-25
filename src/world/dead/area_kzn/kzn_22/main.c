@@ -12,7 +12,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 
 EvtScript N(EVS_UpdateTexPan_LavaRiver) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
-    Call(EnableTexPanning, MODEL_yougan1_1, TRUE)
+    Call(EnableTexPanning, MODEL_yougan1_1, true)
     Set(LVar0, 0)
     Set(LVar1, 0)
     Set(LVar2, 0)
@@ -30,7 +30,7 @@ EvtScript N(EVS_UpdateTexPan_LavaRiver) = {
 
 EvtScript N(EVS_UpdateTexPan_LavaFall) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
-    Call(EnableTexPanning, MODEL_yougan2_2, TRUE)
+    Call(EnableTexPanning, MODEL_yougan2_2, true)
     Set(LVar0, 0)
     Set(LVar1, 0)
     Label(10)
@@ -76,7 +76,7 @@ EvtScript N(EVS_UpdateLavaLevel) = {
     SetGroup(EVT_GROUP_NOT_BATTLE)
     Call(SetTexPanner, MODEL_yu1, TEX_PANNER_2)
     Call(SetTexPanner, MODEL_yu, TEX_PANNER_2)
-    Call(EnableModel, MODEL_yu, FALSE)
+    Call(EnableModel, MODEL_yu, false)
     Call(ParentColliderToModel, COLLIDER_o591, MODEL_yu)
     Set(LVar0, 0)
     Set(LVar1, 0)
@@ -101,8 +101,8 @@ EvtScript N(EVS_UpdateLavaLevel) = {
                 Call(N(GetFloorCollider1), LVar0)
                 IfEq(LVar0, COLLIDER_o357)
                     Exec(N(EVS_InterruptPartnersInLava))
-                    Call(EnableModel, MODEL_yu, TRUE)
-                    Call(EnableModel, MODEL_yu1, FALSE)
+                    Call(EnableModel, MODEL_yu, true)
+                    Call(EnableModel, MODEL_yu1, false)
                     Set(LVarA, 10) // set state to 10
                 EndIf
             CaseEq(10)
@@ -110,7 +110,7 @@ EvtScript N(EVS_UpdateLavaLevel) = {
                 IfLt(LVar4, 140)
                     Set(LVar5, Float(1.5))
                 Else
-                    IfEq(AF_KZN22_FlewAway, FALSE)
+                    IfEq(AF_KZN22_FlewAway, false)
                         Set(LVar5, Float(0.0))
                     Else
                         IfLt(LVar4, 285)
@@ -140,7 +140,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_MT_LAVALAVA)
     Call(SetSpriteShading, SHADING_KZN_22)
     EVT_SETUP_CAMERA_DEFAULT()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Set(LVar0, N(EVS_BindExitTriggers))
     Exec(EnterWalk)

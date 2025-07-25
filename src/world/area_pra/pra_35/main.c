@@ -13,7 +13,7 @@ s32 N(RightDoorModelsR)[] = { MODEL_o859, MODEL_o860, -1 };
 
 EvtScript N(EVS_ExitWalk_pra_33_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_35_ENTRY_0)
     Set(LVar1, COLLIDER_deilittsw)
     Set(LVar2, Ref(N(LeftDoorModelsL)))
@@ -28,7 +28,7 @@ EvtScript N(EVS_ExitWalk_pra_33_0) = {
 
 EvtScript N(EVS_ExitWalk_pra_19_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_35_ENTRY_1)
     Set(LVar1, COLLIDER_deilittsw)
     Set(LVar2, Ref(N(RightDoorModelsL)))
@@ -83,7 +83,7 @@ BombTrigger N(D_802432A8_D904F8) = {
 };
 
 EvtScript N(D_802432B8_D90508) = {
-    Call(EnableGroup, MODEL_g297, FALSE)
+    Call(EnableGroup, MODEL_g297, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittnw, COLLIDER_FLAGS_UPPER_MASK)
     Unbind
     Return
@@ -95,9 +95,9 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(SetCamBGColor, CAM_DEFAULT, 24, 24, 40)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     Set(LVar0, 64)
     Set(LVar1, 65)
     Set(LVar2, 0)
@@ -105,10 +105,10 @@ EvtScript N(EVS_Main) = {
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_EnterMap))
     Wait(1)
-    IfEq(GF_PRA33_BombedWall, FALSE)
+    IfEq(GF_PRA33_BombedWall, false)
         BindTrigger(Ref(N(D_802432B8_D90508)), TRIGGER_POINT_BOMB, Ref(N(D_802432A8_D904F8)), 1, 0)
     Else
-        Call(EnableGroup, MODEL_g297, FALSE)
+        Call(EnableGroup, MODEL_g297, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittnw, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     Set(LVar0, 0)

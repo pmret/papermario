@@ -95,14 +95,14 @@ EffectInstance* effect_65_main(
     data->pos.z = posZ;
 
     for (i = 0; i < MAX_POINTS; i++) {
-        data->pathPointEnabled[i] = FALSE;
+        data->pathPointEnabled[i] = false;
     }
 
     data->lastPointIndex = 0;
     data->pathX[0] = posX;
     data->pathY[0] = posY;
     data->pathZ[0] = posZ;
-    data->pathPointEnabled[0] = TRUE;
+    data->pathPointEnabled[0] = true;
     data->pathTimestamp[0] = 0;
     data->pathLength[0] = 0;
     data->pathJitterX = rand_int(30) + 10;
@@ -179,7 +179,7 @@ void effect_65_update(EffectInstance* effect) {
 
         idx = data->lastPointIndex;
 
-        data->pathPointEnabled[idx] = TRUE;
+        data->pathPointEnabled[idx] = true;
         data->pathX[idx] = posX;
         data->pathY[idx] = posY;
         data->pathZ[idx] = posZ;

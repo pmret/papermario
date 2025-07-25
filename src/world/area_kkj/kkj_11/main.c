@@ -14,7 +14,7 @@ API_CALLABLE(N(DisableAllLightSources)) {
 
 EvtScript N(EVS_ExitDoors_kkj_10_1) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
     Set(LVar0, kkj_11_ENTRY_0)
     Set(LVar1, COLLIDER_tts)
@@ -30,7 +30,7 @@ EvtScript N(EVS_ExitDoors_kkj_10_1) = {
 
 EvtScript N(EVS_ExitDoors_kkj_12_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
     Set(LVar0, kkj_11_ENTRY_1)
     Set(LVar1, COLLIDER_ttn)
@@ -46,7 +46,7 @@ EvtScript N(EVS_ExitDoors_kkj_12_0) = {
 
 EvtScript N(EVS_ExitDoor_kkj_14_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_11_ENTRY_4)
     Set(LVar1, COLLIDER_ttn2)
@@ -62,7 +62,7 @@ EvtScript N(EVS_ExitDoor_kkj_14_0) = {
 
 EvtScript N(EVS_ExitDoor_kkj_16_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_11_ENTRY_2)
     Set(LVar1, COLLIDER_ttsw)
@@ -78,7 +78,7 @@ EvtScript N(EVS_ExitDoor_kkj_16_0) = {
 
 EvtScript N(EVS_ExitDoor_kkj_15_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_11_ENTRY_3)
     Set(LVar1, COLLIDER_ttw)
@@ -94,7 +94,7 @@ EvtScript N(EVS_ExitDoor_kkj_15_0) = {
 
 EvtScript N(EVS_ExitDoor_kkj_17_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_11_ENTRY_5)
     Set(LVar1, COLLIDER_tte)
@@ -110,7 +110,7 @@ EvtScript N(EVS_ExitDoor_kkj_17_0) = {
 
 EvtScript N(EVS_ExitDoor_kkj_18_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_11_ENTRY_6)
     Set(LVar1, COLLIDER_ttse)
@@ -191,19 +191,19 @@ EvtScript N(EVS_Main) = {
         CaseOrEq(STORY_CH3_BEGAN_PEACH_MISSION)
         CaseOrEq(STORY_CH4_BEGAN_PEACH_MISSION)
         CaseOrEq(STORY_CH5_BEGAN_PEACH_MISSION)
-            Call(MakeNpcs, FALSE, Ref(N(EarlyNPCs)))
+            Call(MakeNpcs, false, Ref(N(EarlyNPCs)))
         EndCaseGroup
         CaseEq(STORY_CH6_BEGAN_PEACH_MISSION)
             Call(N(SetAvailableDisguise), PEACH_DISGUISE_KOOPATROL)
-            Call(EnableModel, MODEL_o364, FALSE)
-            Call(EnableModel, MODEL_o365, FALSE)
-            Call(EnableModel, MODEL_o366, FALSE)
+            Call(EnableModel, MODEL_o364, false)
+            Call(EnableModel, MODEL_o365, false)
+            Call(EnableModel, MODEL_o366, false)
             Call(N(DisableAllLightSources))
-            Call(MakeNpcs, FALSE, Ref(N(LaterNPCs)))
+            Call(MakeNpcs, false, Ref(N(LaterNPCs)))
         CaseDefault
-            Call(EnableModel, MODEL_o364, FALSE)
-            Call(EnableModel, MODEL_o365, FALSE)
-            Call(EnableModel, MODEL_o366, FALSE)
+            Call(EnableModel, MODEL_o364, false)
+            Call(EnableModel, MODEL_o365, false)
+            Call(EnableModel, MODEL_o366, false)
             Call(N(DisableAllLightSources))
     EndSwitch
     ExecWait(N(EVS_MakeEntities))

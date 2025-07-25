@@ -9,7 +9,7 @@ EvtScript N(EVS_NpcInteract_CookingApprentice) = {
             Set(LVar0, MSG_MAC_Bridge_0099)
 #endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Bridge_004A)
             Else
                 Set(LVar0, MSG_MAC_Bridge_004B)
@@ -25,7 +25,7 @@ EvtScript N(EVS_NpcInteract_CookingApprentice) = {
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
             Set(LVar0, MSG_MAC_Bridge_004E)
         CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC02_TayceT_HasCookbook, FALSE)
+            IfEq(GF_MAC02_TayceT_HasCookbook, false)
                 Set(LVar0, MSG_MAC_Bridge_004F)
             Else
                 Switch(GB_StoryProgress)

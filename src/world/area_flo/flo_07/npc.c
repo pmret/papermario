@@ -7,8 +7,8 @@
 #include "world/common/complete/GiveReward.inc.c"
 
 EvtScript N(EVS_Scene_SunReturns) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(GetNpcPos, NPC_Posie, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Add(LVar0, 30)
@@ -16,7 +16,7 @@ EvtScript N(EVS_Scene_SunReturns) = {
     Call(SetCamDistance, CAM_DEFAULT, 300)
     Call(SetCamPitch, CAM_DEFAULT, Float(11.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(20)
     Call(SpeakToPlayer, NPC_Posie, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_00C5)
@@ -37,7 +37,7 @@ EvtScript N(EVS_ShakeGround) = {
 };
 
 EvtScript N(EVS_MakeCrystalBerry) = {
-    IfEq(AF_FLO_MadeCrystalBerry, TRUE)
+    IfEq(AF_FLO_MadeCrystalBerry, true)
         Return
     EndIf
     Call(SpeakToPlayer, NPC_Posie, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0068)
@@ -45,7 +45,7 @@ EvtScript N(EVS_MakeCrystalBerry) = {
         Call(SetCamDistance, CAM_DEFAULT, 300)
         Call(SetCamPitch, CAM_DEFAULT, Float(18.0), Float(-7.5))
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.5 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Call(PlaySound, SOUND_LOOP_RUMBLE)
     ExecGetTID(N(EVS_ShakeGround), MV_GroundShakingScript)
@@ -54,7 +54,7 @@ EvtScript N(EVS_MakeCrystalBerry) = {
     Call(SetCamDistance, CAM_DEFAULT, 350)
     Call(SetCamPitch, CAM_DEFAULT, Float(18.0), Float(-7.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(8.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -63,11 +63,11 @@ EvtScript N(EVS_MakeCrystalBerry) = {
         Call(MakeItemEntity, ITEM_CRYSTAL_BERRY, -225, 100, -25, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_FLO07_Item_CrystalBerry)
     Else
         Call(MakeItemEntity, ITEM_CRYSTAL_BERRY, -265, 100, 54, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_FLO07_Item_CrystalBerry)
-        Set(GF_FLO07_CrystalBerryFellOnLeftSide, TRUE)
+        Set(GF_FLO07_CrystalBerryFellOnLeftSide, true)
     EndIf
     Call(PlaySound, SOUND_LRAW_RUMBLE | SOUND_ID_TRIGGER_CHANGE_SOUND)
     Call(StopTrackingSoundPos, SOUND_LRAW_RUMBLE)
-    Set(AF_FLO_MadeCrystalBerry, TRUE)
+    Set(AF_FLO_MadeCrystalBerry, true)
     Wait(20 * DT)
     Call(SpeakToPlayer, NPC_Posie, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_006A)
     Set(GB_StoryProgress, STORY_CH6_GOT_CRYSTAL_BERRY)
@@ -80,9 +80,9 @@ EvtScript N(EVS_NpcInteract_Posie) = {
     Call(NpcFacePlayer, NPC_SELF, 1)
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH6_GOT_MAGICAL_BEAN)
-            IfEq(AF_FLO_PoiseHintDialogue, FALSE)
+            IfEq(AF_FLO_PoiseHintDialogue, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0070)
-                Set(AF_FLO_PoiseHintDialogue, TRUE)
+                Set(AF_FLO_PoiseHintDialogue, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0071)
             EndIf
@@ -95,13 +95,13 @@ EvtScript N(EVS_NpcInteract_Posie) = {
             EVT_GIVE_KEY_REWARD(ITEM_FERTILE_SOIL)
             Set(GB_StoryProgress, STORY_CH6_GOT_FERTILE_SOIL)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0066)
-            IfEq(GF_FLO12_RosieRequestedSomethingBeautiful, TRUE)
+            IfEq(GF_FLO12_RosieRequestedSomethingBeautiful, true)
                 ExecWait(N(EVS_MakeCrystalBerry))
             EndIf
             Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
         CaseLt(STORY_CH6_GOT_CRYSTAL_BERRY)
-            IfEq(GF_FLO12_RosieRequestedSomethingBeautiful, TRUE)
-                IfEq(AF_FLO_MadeCrystalBerry, FALSE)
+            IfEq(GF_FLO12_RosieRequestedSomethingBeautiful, true)
+                IfEq(AF_FLO_MadeCrystalBerry, false)
                     Call(AdjustCam, CAM_DEFAULT, Float(4.0), 0, Float(350.0), Float(18.0), Float(-7.5))
                     ExecWait(N(EVS_MakeCrystalBerry))
                     Call(ResetCam, CAM_DEFAULT, Float(4.0))
@@ -112,7 +112,7 @@ EvtScript N(EVS_NpcInteract_Posie) = {
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0072)
             EndIf
         CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-            IfEq(GF_FLO07_Item_CrystalBerry, FALSE)
+            IfEq(GF_FLO07_Item_CrystalBerry, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0072)
             Else
                 IfLt(GB_StoryProgress, STORY_CH6_GOT_WATER_STONE)
@@ -134,15 +134,15 @@ EvtScript N(EVS_NpcInteract_Posie) = {
 
 EvtScript N(EVS_NpcInit_Posie) = {
     IfEq(GB_StoryProgress, STORY_CH6_GOT_CRYSTAL_BERRY)
-        IfEq(GF_FLO07_Item_CrystalBerry, FALSE)
-            IfEq(GF_FLO07_CrystalBerryFellOnLeftSide, FALSE)
+        IfEq(GF_FLO07_Item_CrystalBerry, false)
+            IfEq(GF_FLO07_CrystalBerryFellOnLeftSide, false)
                 Call(MakeItemEntity, ITEM_CRYSTAL_BERRY, -225, 0, -25, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_FLO07_Item_CrystalBerry)
             Else
                 Call(MakeItemEntity, ITEM_CRYSTAL_BERRY, -265, 0, 54, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_FLO07_Item_CrystalBerry)
             EndIf
         EndIf
     EndIf
-    Set(AF_FLO_PoiseHintDialogue, FALSE)
+    Set(AF_FLO_PoiseHintDialogue, false)
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Posie)))
     Return
     End
@@ -150,7 +150,7 @@ EvtScript N(EVS_NpcInit_Posie) = {
 
 EvtScript N(EVS_TryKickingPlayerOut) = {
     IfNe(AB_FLO_PoiseKickedOutCount, 0)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Wait(10)
         IfLt(AB_FLO_PoiseKickedOutCount, 5)
             Call(SpeakToPlayer, NPC_Posie, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_006E)
@@ -161,30 +161,30 @@ EvtScript N(EVS_TryKickingPlayerOut) = {
             Call(SpeakToPlayer, NPC_Posie, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_006F)
             Set(AB_FLO_PoiseKickedOutCount, 0)
         EndIf
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndIf
     Return
     End
 };
 
 EvtScript N(EVS_OnHit_CrystalTree) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     IfLt(GB_StoryProgress, STORY_CH6_GOT_CRYSTAL_BERRY)
         Call(NpcFacePlayer, NPC_Posie, 1)
         Wait(10)
         Call(SpeakToPlayer, NPC_Posie, ANIM_Posie_Confused, ANIM_Posie_Idle, 0, MSG_CH6_0067)
         IfEq(GB_StoryProgress, STORY_CH6_GOT_FERTILE_SOIL)
-            IfEq(GF_FLO12_RosieRequestedSomethingBeautiful, TRUE)
+            IfEq(GF_FLO12_RosieRequestedSomethingBeautiful, true)
                 Call(UseSettingsFrom, CAM_DEFAULT, -250, 0, 0)
                 Call(SetPanTarget, CAM_DEFAULT, -250, 0, 0)
                 Call(SetCamDistance, CAM_DEFAULT, 350)
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
                 ExecWait(N(EVS_MakeCrystalBerry))
                 Call(ResetCam, CAM_DEFAULT, Float(4.0))
             EndIf
         EndIf
     Else
-        IfEq(GF_FLO07_Item_CrystalBerry, FALSE)
+        IfEq(GF_FLO07_Item_CrystalBerry, false)
             Call(NpcFacePlayer, NPC_Posie, 1)
             Wait(10)
             Call(SpeakToPlayer, NPC_Posie, ANIM_Posie_Confused, ANIM_Posie_Idle, 0, MSG_CH6_0067)
@@ -204,7 +204,7 @@ EvtScript N(EVS_OnHit_CrystalTree) = {
         EndIf
     EndIf
     Call(ResetCam, CAM_DEFAULT, Float(4.0))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

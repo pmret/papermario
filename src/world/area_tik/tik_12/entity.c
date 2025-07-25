@@ -15,7 +15,7 @@ EvtScript N(EVS_Chest_ShowGotItem) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
     Wait(40)
-    Call(ShowGotItem, LVar0, FALSE, 0)
+    Call(ShowGotItem, LVar0, false, 0)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     Return
@@ -31,24 +31,24 @@ MAP_RODATA_PAD(1,unk);
 #include "world/common/entity/SuperBlock.inc.c"
 
 EvtScript N(EVS_SmashBlockA) = {
-    Set(GF_TIK12_Hammer3BlockA, TRUE)
+    Set(GF_TIK12_Hammer3BlockA, true)
     Return
     End
 };
 
 EvtScript N(EVS_SmashBlockB) = {
-    Set(GF_TIK12_Hammer3BlockB, TRUE)
+    Set(GF_TIK12_Hammer3BlockB, true)
     Return
     End
 };
 
 EvtScript N(EVS_MakeEntities) = {
     EVT_MAKE_SUPER_BLOCK(240, 0, -40, 0)
-    IfEq(GF_TIK12_Hammer3BlockA, FALSE)
+    IfEq(GF_TIK12_Hammer3BlockA, false)
         Call(MakeEntity, Ref(Entity_Hammer3Block), 140, -135, 55, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_SmashBlockA)))
     EndIf
-    IfEq(GF_TIK12_Hammer3BlockB, FALSE)
+    IfEq(GF_TIK12_Hammer3BlockB, false)
         Call(MakeEntity, Ref(Entity_Hammer3Block), 140, -135, 105, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_SmashBlockB)))
     EndIf

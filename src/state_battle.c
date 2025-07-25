@@ -92,7 +92,7 @@ void state_step_battle(void) {
         clear_item_entity_data();
         clear_script_list();
         clear_npcs();
-        clear_entity_data(TRUE);
+        clear_entity_data(true);
         clear_trigger_data();
         DMA_COPY_SEGMENT(battle_code);
         initialize_battle();

@@ -3,7 +3,7 @@
 // controls the large arrow hovering in front of the train station
 EvtScript N(EVS_UpdateDirectionArrow) = {
     Call(SetTexPanner, MODEL_y_a, TEX_PANNER_2)
-    Call(EnableTexPanning, MODEL_y_a, TRUE)
+    Call(EnableTexPanning, MODEL_y_a, true)
     // adjust color with a UV offset into a color palette texture
     Set(MV_ArrowTexUOffset, 0x4000 * 2)
     Thread
@@ -21,19 +21,19 @@ EvtScript N(EVS_UpdateDirectionArrow) = {
         EndIf
         Call(RotateModel, MODEL_y_a, LVar5, 0, 0, -1)
         Wait(1)
-        IfEq(MF_EitherSwitchPressed, TRUE)
+        IfEq(MF_EitherSwitchPressed, true)
             Goto(10)
         EndIf
         Goto(0)
     Label(10)
-        IfEq(AF_OMO_UsingRightSwitch, FALSE)
+        IfEq(AF_OMO_UsingRightSwitch, false)
             Set(LVar2, 270)
-            Call(EnableTexPanning, MODEL_y_c2, FALSE)
-            Call(EnableTexPanning, MODEL_y_b2, TRUE)
+            Call(EnableTexPanning, MODEL_y_c2, false)
+            Call(EnableTexPanning, MODEL_y_b2, true)
         Else
             Set(LVar2, 90)
-            Call(EnableTexPanning, MODEL_y_b2, FALSE)
-            Call(EnableTexPanning, MODEL_y_c2, TRUE)
+            Call(EnableTexPanning, MODEL_y_b2, false)
+            Call(EnableTexPanning, MODEL_y_c2, true)
         EndIf
         IfLt(LVar2, LVar5)
             Add(LVar2, 360)
@@ -64,7 +64,7 @@ EvtScript N(EVS_UpdateDirectionArrow) = {
             Goto(11)
         EndIf
         Call(PlaySound, SOUND_OMO_TRAIN_SWITCH_SELECT)
-        IfEq(AF_OMO_UsingRightSwitch, FALSE)
+        IfEq(AF_OMO_UsingRightSwitch, false)
             Set(MV_ArrowTexUOffset, 0x4000)
         Else
             Set(MV_ArrowTexUOffset, 0x4000 * 3)
@@ -89,13 +89,13 @@ EvtScript N(EVS_PressSwitch_Left) = {
             Return
         EndIf
     EndIf
-    IfEq(MF_EitherSwitchPressed, TRUE)
-        IfEq(AF_OMO_UsingRightSwitch, FALSE)
+    IfEq(MF_EitherSwitchPressed, true)
+        IfEq(AF_OMO_UsingRightSwitch, false)
             Return
         EndIf
     EndIf
-    Set(MF_EitherSwitchPressed, TRUE)
-    Set(AF_OMO_UsingRightSwitch, FALSE)
+    Set(MF_EitherSwitchPressed, true)
+    Set(AF_OMO_UsingRightSwitch, false)
     Call(MakeLerp, 0, -18, 15, EASING_LINEAR)
     Label(0)
         Call(UpdateLerp)
@@ -130,13 +130,13 @@ EvtScript N(EVS_PressSwitch_Right) = {
             Return
         EndIf
     EndIf
-    IfEq(MF_EitherSwitchPressed, TRUE)
-        IfEq(AF_OMO_UsingRightSwitch, TRUE)
+    IfEq(MF_EitherSwitchPressed, true)
+        IfEq(AF_OMO_UsingRightSwitch, true)
             Return
         EndIf
     EndIf
-    Set(MF_EitherSwitchPressed, TRUE)
-    Set(AF_OMO_UsingRightSwitch, TRUE)
+    Set(MF_EitherSwitchPressed, true)
+    Set(AF_OMO_UsingRightSwitch, true)
     Call(MakeLerp, 0, -18, 15, EASING_LINEAR)
     Label(0)
         Call(UpdateLerp)
@@ -166,8 +166,8 @@ EvtScript N(EVS_PressSwitch_Right) = {
 #include "world/common/atomic/TexturePan.inc.c"
 
 EvtScript N(EVS_SetupSwitches) = {
-    Set(MF_EitherSwitchPressed, FALSE)
-    Set(AF_JAN01_TreeDrop_StarPiece, FALSE)
+    Set(MF_EitherSwitchPressed, false)
+    Set(AF_JAN01_TreeDrop_StarPiece, false)
     Exec(N(EVS_UpdateDirectionArrow))
     Call(ParentColliderToModel, COLLIDER_o920, MODEL_y_b1)
     Call(ParentColliderToModel, COLLIDER_o921, MODEL_y_b2)
