@@ -1,0 +1,10 @@
+[build-system]
+requires = [ "setuptools" ]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "configure"
+version = "0.1.0"
+
+[project.scripts]
+configure = "configure.main:main"
