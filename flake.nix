@@ -153,11 +153,11 @@
           ''
         ) compilers));
 
-        mkVersion = { version, compilers ? commonCompilers }:
+        mkVersion = { version, compilers ? commonCompilers }: { "${version}" =
           let
             baseRom = requireBaseRom version;
           in {
-            "${version}".elf = pkgsCross.ccacheStdenv.mkDerivation {
+            elf = pkgsCross.ccacheStdenv.mkDerivation {
               name = "papermario";
               inherit version;
               src = ./.;
@@ -165,7 +165,7 @@
               configurePhase = ''
                 rm -f ver/${version}/baserom.z64 && cp ${baseRom} ver/${version}/baserom.z64
                 . ${mkCompilerScript compilers}
-                configure
+                configure --ccache
               '';
               buildPhase = ''
                 ninja
@@ -173,13 +173,50 @@
               installPhase = ''
                 cp ver/${version}/build/papermario.elf $out
               '';
-              dontUseBuildDir = true;
+              dontStrip = true;
               enableParallelBuilding = true;
               outputHashMode = "flat";
               outputHashAlgo = "sha256";
               PAPERMARIO_LD = "${binutils2_39}/bin/mips-linux-gnu-ld";
             };
+            lib = pkgsCross.ccacheStdenv.mkDerivation {
+              name = "libpapermario";
+              inherit version;
+              src = ./.;
+              nativeBuildInputs = commonBuildInputs;
+              configurePhase = ''
+                rm -f ver/${version}/baserom.z64 && cp ${baseRom} ver/${version}/baserom.z64
+                configure --ccache --non-matching --debug --modern-gcc --shift
+              '';
+              buildPhase = ''
+                ninja lib_${version} ver/${version}/build/undefined_syms.txt
+              '';
+              installPhase = ''
+                mkdir -p $out/lib
+                cp -r ver/${version}/build/lib $out/lib
+                cp ver/${version}/build/undefined_syms.txt $out/lib/undefined_syms.txt
+                cp -r ver/${version}/build/include $out/include
+                cp -r include $out/include/papermario
+
+                mkdir -p $out/lib/pkgconfig
+                cat > $out/lib/pkgconfig/libpapermario.pc <<EOF
+prefix=$out
+exec_prefix=''${prefix}
+libdir=''${exec_prefix}/lib
+includedir=''${prefix}/include
+
+Name: libpapermario
+Description: Paper Mario game
+Version: ${version}
+Libs: -L''${libdir} -lpapermario
+Cflags: -I''${includedir} -DVERSION_${pkgs.lib.toUpper version} -DVERSION=${version} -D_FINALROM -DF3DEX_GBI_2
+EOF
+              '';
+              dontStrip = true;
+              enableParallelBuilding = true;
+            };
           };
+        };
       in {
         packages = {
           inherit configure; # for `nix run ".#configure.lock"` to update python lockfile

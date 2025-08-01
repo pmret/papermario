@@ -327,6 +327,11 @@ def write_ninja_rules(
 
     ninja.rule("pm_sbn", command=f"$python {BUILD_TOOLS}/audio/sbn.py $out $asset_stack")
 
+    ninja.rule("archive",
+        description="archive $out",
+        command=f"{cross}ar rcs $out $in",
+    )
+
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'pal')} {cflags} -DPERMUTER -fforce-addr\"\n")
         f.write(f'assembler_command = "{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude"\n')
@@ -531,7 +536,7 @@ class Configure:
                     built_objects.add(str(object_path))
                 elif object_path.suffix.endswith(".h") or object_path.suffix.endswith(".c"):
                     generated_code.append(str(object_path))
-                elif object_path.name.endswith(".png.bin") or object_path.name.endswith(".pal.bin"):
+                elif object_path.name.endswith(".png.bin") or object_path.name.endswith(".pal.bin") or object_path.name.endswith(".dat"):
                     inc_img_bins.append(str(object_path))
 
                 # don't rebuild objects if we've already seen all of them
@@ -653,6 +658,7 @@ class Configure:
         import splat
 
         # Build objects
+        overlays = {} # maps overlay name -> top-level segment -> list of linker entries
         for entry in self.linker_entries:
             seg = entry.segment
 
@@ -660,6 +666,17 @@ class Configure:
                 continue
 
             assert entry.object_path is not None
+
+            vram_class = seg.get_most_parent().vram_class
+            if vram_class is not None:
+                overlay_name = vram_class.name
+            else:
+                addr = seg.get_most_parent().vram_start or seg.get_most_parent().rom_start
+                if (addr & 0xF0000000) == 0xE0000000:
+                    overlay_name = "effect"
+                else:
+                    overlay_name = seg.get_most_parent().name
+            overlays.setdefault(overlay_name, {}).setdefault(seg.get_most_parent(), []).append(entry)
 
             if isinstance(seg, splat.segtypes.n64.header.N64SegHeader):
                 build(entry.object_path, entry.src_paths, "as")
@@ -703,9 +720,6 @@ class Configure:
                 if entry.src_paths[0].suffixes[-1] == ".cpp":
                     task = "cxx"
 
-                if modern_gcc:
-                    task = "cc_modern"
-
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
                 elif "gcc_272" in cflags:
@@ -720,6 +734,9 @@ class Configure:
                 elif "gcc_modern" in cflags:
                     task = "cc_modern"
                     cflags = cflags.replace("gcc_modern", "")
+
+                if modern_gcc:
+                    task = "cc_modern"
 
                 if task == "cc_modern":
                     cppflags += " -DMODERN_COMPILER"
@@ -737,13 +754,13 @@ class Configure:
                     encoding = "EUC-JP"
 
                 if use_python_iconv:
-                    iconv = f"tools/build/iconv.py UTF-8 {encoding}"
+                    iconv = f"$python tools/build/iconv.py UTF-8 {encoding}"
                 else:
                     iconv = f"iconv --from UTF-8 --to {encoding}"
 
                 # use tools/sjis-escape.py for src/battle/area/tik2/area.c
                 if self.version != "ique" and seg.dir.parts[-3:] == ("battle", "area", "tik2") and seg.name == "area":
-                    iconv += " | tools/sjis-escape.py"
+                    iconv += " | $python tools/sjis-escape.py"
 
                 # Dead cod
                 if isinstance(seg.parent.yaml, dict) and seg.parent.yaml.get("dead_code", False):
@@ -1231,6 +1248,35 @@ class Configure:
             else:
                 raise Exception(f"don't know how to build {seg.__class__.__name__} '{seg.name}'")
 
+        # Build archive(s) for each overlay
+        overlay_archives = []
+        for overlay_name, segments in overlays.items():
+            is_flat = len(segments) == 1 # "overlays" such as engine1, engine2, main, etc.
+
+            for segment, entries in segments.items():
+                a = self.build_path() / "lib" / overlay_name
+                if not is_flat:
+                    # If segment.name contains forward slashes, use only the last part
+                    seg_name = segment.name.split("/")[-1]
+                    # If segment.name starts with the overlay name, remove it
+                    if seg_name.startswith(overlay_name):
+                        seg_name = seg_name[len(overlay_name) + 1:]
+                    a = a / seg_name
+                a = a.with_suffix(".a")
+                build(
+                    a,
+                    [entry.object_path for entry in entries],
+                    "archive",
+                )
+                overlay_archives.append(a)
+
+        # Phony target for building all overlay archives
+        ninja.build(
+            "lib_" + self.version,
+            "phony",
+            [str(a) for a in overlay_archives],
+        )
+
         # Run undefined_syms through cpp
         ninja.build(
             str(self.undefined_syms_path()),
@@ -1427,8 +1473,8 @@ def main():
             except OSError:
                 pass
 
-    extra_cflags = ""
-    extra_cppflags = ""
+    extra_cflags = os.environ.get("CFLAGS", "")
+    extra_cppflags = os.environ.get("CPPFLAGS", "")
     if args.non_matching:
         extra_cppflags += " -DNON_MATCHING"
 
