@@ -1,5 +1,6 @@
 #include "ultra64.h"
 #include "libc/xstdio.h"
+#include "gcc/memory.h"
 
 static char *proutSprintf(char *dst, const char *src, size_t count);
 

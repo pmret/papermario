@@ -5,6 +5,7 @@
 #include "hud_element.h"
 #include "model_clear_render_tasks.h"
 #include "nu/nusys.h"
+#include "gcc/string.h"
 
 // models are rendered in two stages by the RDP:
 // (1) main and aux textures are combined in the color combiner

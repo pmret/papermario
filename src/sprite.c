@@ -1270,7 +1270,7 @@ s32 spr_get_comp_position(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, 
     u32* spriteData;
 
     if (sprite->componentList == NULL) {
-        return; // bug: does not return a value
+        return MISSING_RETURN_VALUE(-1);
     }
 
     animID = sprite->curAnimID;
@@ -1298,7 +1298,7 @@ s32 spr_get_comp_position(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, 
             }
         }
     } else {
-        return; // bug: does not return a value
+        return MISSING_RETURN_VALUE(-1);
     }
     return -1;
 }
