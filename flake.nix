@@ -156,6 +156,21 @@
         mkVersion = { version, compilers ? commonCompilers }: { "${version}" =
           let
             baseRom = requireBaseRom version;
+            pkgConfigFile = pkgs.writeTextFile {
+              name = "papermario.pc";
+              text = ''
+                prefix=$out
+                exec_prefix=''${prefix}
+                libdir=''${exec_prefix}/lib
+                includedir=''${prefix}/include
+
+                Name: papermario
+                Description: Paper Mario game
+                Version: ${version}
+                Libs: -L''${libdir} -lpapermario
+                Cflags: -I''${includedir} -DVERSION_${pkgs.lib.toUpper version} -DVERSION=${version} -D_FINALROM -DF3DEX_GBI_2
+              '';
+            };
           in {
             elf = pkgsCross.ccacheStdenv.mkDerivation {
               name = "papermario";
@@ -192,25 +207,19 @@
                 ninja lib_${version} ver/${version}/build/undefined_syms.txt
               '';
               installPhase = ''
-                mkdir -p $out/lib
-                cp -r ver/${version}/build/lib $out/lib
-                cp ver/${version}/build/undefined_syms.txt $out/lib/undefined_syms.txt
-                cp -r ver/${version}/build/include $out/include
-                cp -r include $out/include/papermario
-
                 mkdir -p $out/lib/pkgconfig
-                cat > $out/lib/pkgconfig/libpapermario.pc <<EOF
-prefix=$out
-exec_prefix=''${prefix}
-libdir=''${exec_prefix}/lib
-includedir=''${prefix}/include
+                cp ${pkgConfigFile} $out/lib/pkgconfig/papermario.pc
+                # replace $out in the .pc file with the actual output path
+                sed -i "s|\$out|$out|g" $out/lib/pkgconfig/papermario.pc
 
-Name: libpapermario
-Description: Paper Mario game
-Version: ${version}
-Libs: -L''${libdir} -lpapermario
-Cflags: -I''${includedir} -DVERSION_${pkgs.lib.toUpper version} -DVERSION=${version} -D_FINALROM -DF3DEX_GBI_2
-EOF
+                mkdir -p $out/lib
+                cp -r ver/${version}/build/lib/* $out/lib
+                cp ver/${version}/build/undefined_syms.txt $out/lib/undefined_syms.txt
+
+                mkdir -p $out/include
+                cp -r ver/${version}/build/include/* $out/include
+                cd src && cp *.h $out/include && cp --parents **/*.h $out/include && cd ..
+                cp -r include/* $out/include
               '';
               dontStrip = true;
               enableParallelBuilding = true;
