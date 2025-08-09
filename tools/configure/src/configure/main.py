@@ -1248,33 +1248,11 @@ class Configure:
             else:
                 raise Exception(f"don't know how to build {seg.__class__.__name__} '{seg.name}'")
 
-        # Build archive(s) for each overlay
-        overlay_archives = []
-        for overlay_name, segments in overlays.items():
-            is_flat = len(segments) == 1 # "overlays" such as engine1, engine2, main, etc.
-
-            for segment, entries in segments.items():
-                a = self.build_path() / "lib" / overlay_name
-                if not is_flat:
-                    # If segment.name contains forward slashes, use only the last part
-                    seg_name = segment.name.split("/")[-1]
-                    # If segment.name starts with the overlay name, remove it
-                    if seg_name.startswith(overlay_name):
-                        seg_name = seg_name[len(overlay_name) + 1:]
-                    a = a / seg_name
-                a = a.with_suffix(".a")
-                build(
-                    a,
-                    [entry.object_path for entry in entries],
-                    "archive",
-                )
-                overlay_archives.append(a)
-
-        # Phony target for building all overlay archives
+        # Phony target for building all objects but not linking
         ninja.build(
             "lib_" + self.version,
             "phony",
-            [str(a) for a in overlay_archives],
+            [str(obj) for obj in built_objects],
         )
 
         # Run undefined_syms through cpp

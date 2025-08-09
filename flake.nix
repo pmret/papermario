@@ -198,7 +198,7 @@
               name = "libpapermario";
               inherit version;
               src = ./.;
-              nativeBuildInputs = commonBuildInputs;
+              nativeBuildInputs = commonBuildInputs ++ [ pkgs.rsync ];
               configurePhase = ''
                 rm -f ver/${version}/baserom.z64 && cp ${baseRom} ver/${version}/baserom.z64
                 configure --ccache --non-matching --debug --modern-gcc --shift
@@ -213,7 +213,11 @@
                 sed -i "s|\$out|$out|g" $out/lib/pkgconfig/papermario.pc
 
                 mkdir -p $out/lib
-                cp -r ver/${version}/build/lib/* $out/lib
+                rsync -av --include='*/' --include='*.o' --exclude='*' ver/${version}/build/src/ $out/lib/
+                rsync -av --include='*/' --include='*.o' --exclude='*' ver/${version}/build/asm/ $out/lib/
+                rsync -av --include='*/' --include='*.o' --exclude='*' ver/${version}/build/assets/${version}/ $out/lib/
+                rsync -av --include='*/' --include='*.o' --exclude='*' ver/${version}/build/ver/${version}/asm/ $out/lib/
+                rsync -av --include='*/' --include='*.o' --exclude='*' ver/${version}/build/ver/${version}/build/asm/ $out/lib/
                 cp ver/${version}/build/undefined_syms.txt $out/lib/undefined_syms.txt
 
                 mkdir -p $out/include
