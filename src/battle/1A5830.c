@@ -2936,7 +2936,7 @@ API_CALLABLE(EnemyFollowupAfflictTarget) {
     }
 
     evt_set_variable(script, outVar, hitResults);
-    if (does_script_exist_by_ref(script) == nullptr) {
+    if (does_script_exist_by_ref(script) == 0) {
         return ApiStatus_FINISH;
     }
     return ApiStatus_DONE2;

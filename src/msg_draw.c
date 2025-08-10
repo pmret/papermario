@@ -43,7 +43,7 @@ extern s16 MsgStyleVerticalLineOffsets[];
 
 extern MessageCharset* MsgCharsets[5];
 extern PAL_BIN D_802F4560[80][8];
-extern s32 gMessageBoxFrameParts[2][16];
+extern IMG_BIN* gMessageBoxFrameParts[2][16];
 
 #if VERSION_IQUE
 static IMG_BIN D_801544A0[120][128];

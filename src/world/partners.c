@@ -1088,7 +1088,7 @@ void partner_kill_ability_script(void) {
 }
 
 void partner_suspend_ability_script(void) {
-    if (wCurrentPartnerId != nullptr) {
+    if (wCurrentPartnerId != 0) {
         if (does_script_exist(wPartnerCurrentScriptID)) {
             suspend_all_script(wPartnerCurrentScriptID);
         }
@@ -1096,7 +1096,7 @@ void partner_suspend_ability_script(void) {
 }
 
 void partner_resume_ability_script(void) {
-    if (wCurrentPartnerId != nullptr) {
+    if (wCurrentPartnerId != 0) {
         if (does_script_exist(wPartnerCurrentScriptID)) {
             resume_all_script(wPartnerCurrentScriptID);
         }

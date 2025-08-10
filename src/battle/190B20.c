@@ -2023,7 +2023,7 @@ s32 get_npc_anim_for_status(AnimID* animations, s32 statusKey) {
     }
 
     foundAnim = 0;
-    while (animations[DICTIONARY_KEY] != nullptr) {
+    while (animations[DICTIONARY_KEY] != 0) {
         if (animations[DICTIONARY_KEY] == STATUS_KEY_NORMAL) {
             foundAnim = animations[DICTIONARY_VALUE];
         }
@@ -2084,7 +2084,7 @@ s32 get_player_anim_for_status(s32 statusKey) {
     }
 
     // search IdleAnimations to get animID for key
-    while (*anim != nullptr) {
+    while (*anim != 0) {
         if (*anim == 1) {
             ret = anim[1];
         }

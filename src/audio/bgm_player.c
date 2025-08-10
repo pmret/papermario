@@ -277,7 +277,7 @@ AuResult au_bgm_is_song_playing(s32 songName) {
 }
 
 b32 au_bgm_player_is_active(BGMPlayer* player) {
-    if (player->songName != nullptr && player->masterState != 0) {
+    if (player->songName != 0 && player->masterState != 0) {
         return TRUE;
     } else {
         return FALSE;

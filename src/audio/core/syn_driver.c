@@ -53,7 +53,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         voice->decoder.dmaFunc = gSynDriverPtr->dmaNew(&voice->decoder.dmaState);
         voice->decoder.lastsam = 0;
         voice->decoder.first = 1;
-        voice->decoder.memin = nullptr;
+        voice->decoder.memin = (s32)nullptr;
         voice->resampler.state = alHeapAlloc(heap, 1, sizeof(*voice->resampler.state));
         voice->resampler.delta = 0;
         voice->resampler.first = TRUE;

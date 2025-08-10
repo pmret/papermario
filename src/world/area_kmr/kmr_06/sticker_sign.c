@@ -210,9 +210,9 @@ API_CALLABLE(N(DeleteSticker)) {
     heap_free(img);
     heap_free(pal);
 
-    evt_set_variable(script, MV_StickerData, nullptr);
-    evt_set_variable(script, MV_StickerImage, nullptr);
-    evt_set_variable(script, MV_StickerPalette, nullptr);
+    evt_set_variable(script, MV_StickerData, (s32)nullptr);
+    evt_set_variable(script, MV_StickerImage, (s32)nullptr);
+    evt_set_variable(script, MV_StickerPalette, (s32)nullptr);
 
     return ApiStatus_DONE2;
 }

@@ -85,7 +85,7 @@ API_CALLABLE(N(KnockdownDestroy)) {
     imgfx_release_instance(data->imgfxIdx);
     free_worker(data->workerID);
     heap_free(data);
-    evt_set_variable(script, KNOCK_DOWN_MAP_VAR, nullptr);
+    evt_set_variable(script, KNOCK_DOWN_MAP_VAR, (s32)nullptr);
     return ApiStatus_DONE2;
 }
 
