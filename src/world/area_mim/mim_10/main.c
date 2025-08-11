@@ -7,8 +7,8 @@ EvtScript N(EVS_ExitWalk_mim_01_1) = {
     Call(UseExitHeading, 60, mim_10_ENTRY_1)
     Exec(ExitWalk)
     IfEq(GB_StoryProgress, STORY_CH3_INVITED_TO_BOOS_MANSION)
-        IfEq(GF_StartedChapter3, FALSE)
-            Set(GF_StartedChapter3, TRUE)
+        IfEq(GF_StartedChapter3, false)
+            Set(GF_StartedChapter3, true)
             Call(FadeOutMusic, 0, 1500)
             Call(GotoMapSpecial, Ref("kmr_22"), kmr_22_ENTRY_3, TRANSITION_BEGIN_OR_END_CHAPTER)
             Wait(100)
@@ -45,13 +45,13 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_TOAD_TOWN)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     Exec(N(EVS_SetupBootlerTrigger))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
     Exec(N(EVS_EnterMap))
     Wait(1)
-    Set(GF_MAC01_RowfBadgesChosen, FALSE)
+    Set(GF_MAC01_RowfBadgesChosen, false)
     Return
     End
 };

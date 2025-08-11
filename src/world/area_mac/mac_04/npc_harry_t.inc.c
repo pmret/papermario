@@ -21,7 +21,7 @@ EvtScript N(EVS_NpcInteract_HarryT) = {
             CaseEq(0)
             CaseDefault
                 Call(SpeakToPlayer, NPC_HarryT, ANIM_HarryT_Talk, ANIM_HarryT_Idle, 0, MSG_MAC_Housing_0003)
-                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, true)
                 Call(SetNpcAnimation, NPC_HarryT, ANIM_HarryT_Run)
                 Call(NpcMoveTo, NPC_HarryT, 295, -460, 0)
                 Call(NpcMoveTo, NPC_HarryT, 230, -480, 0)
@@ -35,9 +35,9 @@ EvtScript N(EVS_NpcInteract_HarryT) = {
                 Call(SetNpcPos, NPC_HarryT, 200, 30, -524)
                 Call(SetNpcAnimation, NPC_HarryT, ANIM_HarryT_Idle)
                 Call(InterpNpcYaw, NPC_HarryT, 180, 0)
-                Call(PlayerFaceNpc, NPC_HarryT, FALSE)
+                Call(PlayerFaceNpc, NPC_HarryT, false)
                 Call(SpeakToPlayer, NPC_HarryT, ANIM_HarryT_Talk, ANIM_HarryT_Idle, 0, MSG_MAC_Housing_0005)
-                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, FALSE)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, false)
                 Set(GB_StoryProgress, STORY_CH4_RETURNED_STOREROOM_KEY)
         EndSwitch
     Else

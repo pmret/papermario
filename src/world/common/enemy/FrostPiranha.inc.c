@@ -36,7 +36,7 @@ NpcSettings N(NpcSettings_FrostPiranha) = {
 };
 
 EvtScript N(EVS_NpcAI_FrostPiranha_Hitbox) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetSelfVar, 0, 14)
     Call(SetSelfVar, 1, 28)
     Call(SetSelfVar, 4, 3)

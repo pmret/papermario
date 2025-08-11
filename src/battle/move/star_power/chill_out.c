@@ -5,12 +5,12 @@
 
 #define NAMESPACE battle_move_chill_out
 
-BSS b32 DidChillOutHit;
+BSS bool DidChillOutHit;
 
 #include "battle/common/move/StarPowerSupport.inc.c"
 
 API_CALLABLE(N(InitHitCheck)) {
-    DidChillOutHit = FALSE;
+    DidChillOutHit = false;
     return ApiStatus_DONE2;
 }
 
@@ -31,7 +31,7 @@ API_CALLABLE(N(SpawnChillOutFX)) {
     z = rand_int(50) - 25;
 
     fx_sparkles(FX_SPARKLES_4, x, y, z, 40.0f);
-    
+
     return ApiStatus_DONE2;
 }
 
@@ -40,7 +40,7 @@ API_CALLABLE(N(CanChillOutHit)) {
     Actor* target = get_actor(actor->targetActorID);
     ActorPart* part = get_actor_part(target, actor->targetPartID);
 
-    script->varTable[0] = FALSE;
+    script->varTable[0] = false;
 
     if (target->flags & ACTOR_FLAG_TARGET_ONLY) {
         return ApiStatus_DONE2;
@@ -62,7 +62,7 @@ API_CALLABLE(N(CanChillOutHit)) {
         return ApiStatus_DONE2;
     }
 
-    script->varTable[0] = TRUE;
+    script->varTable[0] = true;
     return ApiStatus_DONE2;
 }
 
@@ -109,7 +109,7 @@ API_CALLABLE(N(InflictChillOutHit)) {
 
     fx_stat_change(5, x, y, z, 1.0f, 60);
     sfx_play_sound(SOUND_INFLICT_CHILL_OUT);
-    DidChillOutHit = TRUE;
+    DidChillOutHit = true;
 
     return ApiStatus_DONE2;
 }
@@ -130,7 +130,7 @@ EvtScript N(EVS_UsePower) = {
             Goto(11)
         EndIf
         Call(N(CanChillOutHit))
-        IfEq(LVar0, TRUE)
+        IfEq(LVar0, true)
             Call(GetOwnerTarget, LVarA, LVarB)
             Thread
                 Loop(5)
@@ -175,7 +175,7 @@ EvtScript N(EVS_UsePower) = {
             Goto(1)
         EndIf
         Call(N(CanChillOutHit))
-        IfEq(LVar0, TRUE)
+        IfEq(LVar0, true)
             Call(N(InflictChillOutHit))
         Else
             Call(PlayerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 0, BS_FLAGS1_FORCE_IMMUNE_HIT | BS_FLAGS1_TRIGGER_EVENTS)
@@ -188,14 +188,14 @@ EvtScript N(EVS_UsePower) = {
         EndIf
     Wait(5)
     Call(N(DidMoveHit))
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Call(ShowMessageBox, BTL_MSG_CHILL_OUT_BEGIN, 60)
     EndIf
     Call(PlayerYieldTurn)
     ExecWait(N(EVS_StarPower_SpiritDeparts))
     ExecWait(N(EVS_StarPower_EndWish))
     Call(N(DidMoveHit))
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Call(WaitForMessageBoxDone)
     EndIf
     Return

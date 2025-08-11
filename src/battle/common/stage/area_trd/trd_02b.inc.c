@@ -8,9 +8,9 @@
 EvtScript N(EVS_PreBattle) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    Call(EnableModel, MODEL_saku, FALSE)
-    Call(EnableModel, MODEL_kiwa, FALSE)
-    Call(EnableModel, MODEL_tyuu, FALSE)
+    Call(EnableModel, MODEL_saku, false)
+    Call(EnableModel, MODEL_kiwa, false)
+    Call(EnableModel, MODEL_tyuu, false)
     Thread
         Set(LVar0, MODEL_mizu)
         Exec(N(EVS_AnimateWave))

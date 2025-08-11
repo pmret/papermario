@@ -6,7 +6,7 @@ EvtScript N(EVS_MakeEntities) = {
     Call(AssignBlockFlag, GF_OMO05_ItemBlock_CoinA)
     Call(MakeEntity, Ref(Entity_YellowBlock), 550, 70, -150, 0, ITEM_COIN, MAKE_ENTITY_END)
     Call(AssignBlockFlag, GF_OMO05_ItemBlock_CoinB)
-    IfEq(GF_OMO05_Item_Cookbook, FALSE)
+    IfEq(GF_OMO05_Item_Cookbook, false)
         IfGt(GB_StoryProgress, STORY_CH4_GOT_TAYCE_TS_CAKE)
             Call(MakeItemEntity, ITEM_COOKBOOK, -250, 0, 120, ITEM_SPAWN_MODE_KEY, GF_OMO05_Item_Cookbook)
         EndIf

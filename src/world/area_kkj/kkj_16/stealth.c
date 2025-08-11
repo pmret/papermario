@@ -132,13 +132,13 @@ EvtScript N(EVS_CarryPeachAway) = {
 };
 
 EvtScript N(EVS_ManageSneakingScenes) = {
-    IfEq(AF_KKJ_07, FALSE)
-        Call(DisablePlayerInput, TRUE)
+    IfEq(AF_KKJ_07, false)
+        Call(DisablePlayerInput, true)
         Call(DisablePartnerAI, 1)
         Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_006C)
-        Set(AF_KKJ_07, TRUE)
+        Set(AF_KKJ_07, true)
         Call(EnablePartnerAI)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndIf
     Loop(0)
         Wait(1)
@@ -147,8 +147,8 @@ EvtScript N(EVS_ManageSneakingScenes) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
     Thread
         Call(SetMusic, 0, SONG_PEACH_SNEAKING, 0, VOL_LEVEL_FULL)
@@ -189,7 +189,7 @@ EvtScript N(EVS_ManageSneakingScenes) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-10.5))
     Call(SetCamPosA, CAM_DEFAULT, -775, -50)
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_PLAYER, ANIM_BattleBow_Talk, ANIM_Peach1_Idle, 5, MSG_Peach_0077)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 5, MSG_Peach_0078)
@@ -270,8 +270,8 @@ EvtScript N(EVS_ManageSneakingScenes) = {
     Call(FadeOutMusic, 0, 1000 * DT)
     ExecWait(N(EVS_EndPeachChapter2))
     Call(EnablePartnerAI)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

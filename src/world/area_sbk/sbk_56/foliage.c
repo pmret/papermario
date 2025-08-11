@@ -187,10 +187,10 @@ BombTrigger N(BombPos_Tree10) = {
 };
 
 EvtScript N(EVS_SetupFoliage) = {
-    Set(GF_SBK56_Tree1_Lemon, FALSE)
-    Set(GF_SBK56_UnusedA, FALSE)
-    Set(GF_SBK56_Tree2_Lime, FALSE)
-    Set(GF_SBK56_UnusedB, FALSE)
+    Set(GF_SBK56_Tree1_Lemon, false)
+    Set(GF_SBK56_UnusedA, false)
+    Set(GF_SBK56_Tree2_Lime, false)
+    Set(GF_SBK56_UnusedB, false)
     Set(LVar0, Ref(N(ShakeTree_Tree1)))
     BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_remon, 1, 0)
     BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)

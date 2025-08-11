@@ -33,14 +33,14 @@ EvtScript N(EVS_Scene_RescuedMuskular) = {
     Call(DisablePartnerAI, 0)
     Call(func_802CF56C, 2)
     Call(SetNpcPos, NPC_Muskular, -520, 40, 270)
-    Call(PlayerFaceNpc, NPC_Muskular, FALSE)
+    Call(PlayerFaceNpc, NPC_Muskular, false)
     Call(NpcFaceNpc, NPC_PARTNER, NPC_Muskular, 0)
     Call(UseSettingsFrom, CAM_DEFAULT, -420, 20, 235)
     Call(SetPanTarget, CAM_DEFAULT, -470, 20, 250)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForPlayerInputEnabled)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(40 * DT)
     Call(SpeakToPlayer, NPC_Muskular, ANIM_WorldMuskular_Talk, ANIM_WorldMuskular_Idle, 512, MSG_MAC_Housing_00C5)
     Call(GetNpcPos, NPC_Muskular, LVar0, LVar1, LVar2)
@@ -52,7 +52,7 @@ EvtScript N(EVS_Scene_RescuedMuskular) = {
 #else
     Call(SetCamSpeed, CAM_DEFAULT, 3)
 #endif
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_Muskular, ANIM_WorldMuskular_Talk, ANIM_WorldMuskular_Idle, 512, MSG_MAC_Housing_00C6)
@@ -67,7 +67,7 @@ EvtScript N(EVS_Scene_RescuedMuskular) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(EnableNpcAI, NPC_Muskular, FALSE)
+    Call(EnableNpcAI, NPC_Muskular, false)
     Call(SetNpcAnimation, NPC_Muskular, ANIM_WorldMuskular_Leap)
     Wait(20 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_UsePower)
@@ -92,7 +92,7 @@ EvtScript N(EVS_Scene_RescuedMuskular) = {
     Wait(30 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Call(SetNpcAnimation, NPC_Muskular, ANIM_WorldMuskular_Idle)
-    Call(EnableNpcAI, NPC_Muskular, TRUE)
+    Call(EnableNpcAI, NPC_Muskular, true)
     Call(N(UpgradeStarPowerCh4))
     Call(ShowMessageAtScreenPos, MSG_Menus_0194, 160, 40)
     Wait(10 * DT)
@@ -123,7 +123,7 @@ EvtScript N(EVS_Scene_RescuedMuskular) = {
     Call(SetCamDistance, CAM_DEFAULT, -300)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.5), -9)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(SpeakToNpc, NPC_Muskular, ANIM_WorldMuskular_Talk, ANIM_WorldMuskular_Idle, 512, NPC_Twink, MSG_MAC_Housing_00CF)
@@ -131,7 +131,7 @@ EvtScript N(EVS_Scene_RescuedMuskular) = {
     Call(SetCamDistance, CAM_DEFAULT, -400)
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Call(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, true)
     Thread
         Loop(25)
             Call(GetNpcPos, NPC_Muskular, LVar0, LVar1, LVar2)
@@ -199,13 +199,13 @@ Call(SetNpcSpeed, NPC_Twink, 4)
     Call(SetPlayerAnimation, ANIM_Mario1_NodYes)
     Wait(30 * DT)
     Call(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_MAC_Housing_00D3)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(NpcFlyTo, NPC_Twink, -600, 200, 350, 0, -10, EASING_LINEAR)
     Call(SetNpcPos, NPC_Twink, NPC_DISPOSE_LOCATION)
     Set(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
     Exec(N(EVS_SetupMusic))
     Call(EnablePartnerAI)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

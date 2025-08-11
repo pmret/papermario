@@ -1,7 +1,7 @@
 #include "sam_11.h"
 
 EvtScript N(EVS_LowerStaircase) = {
-    Call(EnableModel, MODEL_ana, FALSE)
+    Call(EnableModel, MODEL_ana, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ana, COLLIDER_FLAGS_UPPER_MASK)
     Call(TranslateModel, MODEL_o733, 0, 0, 0)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o525, COLLIDER_FLAGS_UPPER_MASK)
@@ -91,7 +91,7 @@ EvtScript N(EVS_SetupStaircase) = {
             Call(TranslateModel, MODEL_o733, NPC_DISPOSE_LOCATION)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o525, COLLIDER_FLAGS_UPPER_MASK)
         CaseGe(STORY_CH7_SPOKE_WITH_HERRINGWAY)
-            Call(EnableModel, MODEL_ana, FALSE)
+            Call(EnableModel, MODEL_ana, false)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ana, COLLIDER_FLAGS_UPPER_MASK)
     EndSwitch
     Return

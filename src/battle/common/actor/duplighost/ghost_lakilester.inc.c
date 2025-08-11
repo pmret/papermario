@@ -121,7 +121,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -226,18 +226,18 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleLakilester_Run)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, 20, 30, LVar2)
@@ -258,7 +258,7 @@ EvtScript N(EVS_TakeTurn) = {
     EndIf
     Call(SetPartPos, ACTOR_SELF, PRT_SPINY, LVar0, LVar1, LVar2)
     Wait(1)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_SPINY, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_SPINY, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(SetAnimation, ACTOR_SELF, PRT_SPINY, ANIM_BattleLakilester_Spiny)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleLakilester_LiftSpiny)
     Loop(4)
@@ -319,11 +319,11 @@ EvtScript N(EVS_TakeTurn) = {
             Call(RandInt, 100, LVar3)
             Sub(LVar3, 50)
             Add(LVar0, LVar3)
-            Call(JumpPartTo, ACTOR_SELF, PRT_SPINY, LVar0, 0, LVar2, 20, TRUE)
+            Call(JumpPartTo, ACTOR_SELF, PRT_SPINY, LVar0, 0, LVar2, 20, true)
             Thread
                 Add(LVar0, -50)
-                Call(JumpPartTo, ACTOR_SELF, PRT_SPINY, LVar0, 0, LVar2, 15, TRUE)
-                Call(SetPartFlagBits, ACTOR_SELF, PRT_SPINY, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                Call(JumpPartTo, ACTOR_SELF, PRT_SPINY, LVar0, 0, LVar2, 15, true)
+                Call(SetPartFlagBits, ACTOR_SELF, PRT_SPINY, ACTOR_PART_FLAG_INVISIBLE, true)
             EndThread
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -336,7 +336,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(SetGoalToHome, ACTOR_SELF)
             Call(FlyToGoal, ACTOR_SELF, 30, 0, EASING_COS_IN_OUT)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -344,11 +344,11 @@ EvtScript N(EVS_TakeTurn) = {
     Call(SetPartJumpGravity, ACTOR_SELF, PRT_SPINY, Float(1.5))
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpPartTo, ACTOR_SELF, PRT_SPINY, LVar0, LVar1, LVar2, 20, TRUE)
+    Call(JumpPartTo, ACTOR_SELF, PRT_SPINY, LVar0, LVar1, LVar2, 20, true)
     Thread
         Add(LVar0, -50)
-        Call(JumpPartTo, ACTOR_SELF, PRT_SPINY, LVar0, 0, LVar2, 15, TRUE)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_SPINY, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+        Call(JumpPartTo, ACTOR_SELF, PRT_SPINY, LVar0, 0, LVar2, 15, true)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_SPINY, ACTOR_PART_FLAG_INVISIBLE, true)
     EndThread
     Call(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
     Switch(LVar9)
@@ -375,7 +375,7 @@ EvtScript N(EVS_TakeTurn) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

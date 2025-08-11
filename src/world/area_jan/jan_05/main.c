@@ -20,7 +20,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_JADE_JUNGLE)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupLogs))
     Exec(N(EVS_SetupTrees))
@@ -40,7 +40,7 @@ EvtScript N(EVS_Main) = {
     Exec(EnterWalk)
     Exec(N(EVS_SetupMusic))
     Call(MakeTransformGroup, MODEL_g25)
-    Call(EnableTexPanning, MODEL_o101, TRUE)
+    Call(EnableTexPanning, MODEL_o101, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(  -80,  140,   80, -100)

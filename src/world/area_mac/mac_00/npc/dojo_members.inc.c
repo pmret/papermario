@@ -17,7 +17,7 @@ API_CALLABLE(N(SetDojoBattle)) {
 }
 
 API_CALLABLE(N(ResetBackgroundPostBattle)) {
-    mdl_group_set_custom_gfx(MODEL_minka_1, CUSTOM_GFX_NONE, ENV_TINT_SHROUD, TRUE);
+    mdl_group_set_custom_gfx(MODEL_minka_1, CUSTOM_GFX_NONE, ENV_TINT_SHROUD, true);
     mdl_set_shroud_tint_params(0, 0, 0, 255);
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
@@ -41,18 +41,18 @@ EvtScript N(EVS_NpcAI_Chan) = {
     Call(SpeakToNpc, NPC_SELF, ANIM_Chan_Run, ANIM_Chan_Idle, 0, NPC_TheMaster, MSG_MAC_Gate_001E)
     Wait(10)
     Thread
-        Call(SetNpcFlagBits, NPC_TheMaster, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_TheMaster, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(func_802D2C14, 1)
         Call(PlayerMoveTo, 348, -364, 20)
         Call(InterpPlayerYaw, 20, 0)
         Wait(20)
         Call(func_802D2C14, 0)
-        Call(SetNpcFlagBits, NPC_TheMaster, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_TheMaster, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     EndThread
     Call(SetNpcAnimation, NPC_SELF, ANIM_Chan_Walk)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(NpcMoveTo, NPC_SELF, 380, -400, 30)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Chan_Idle)
     Call(InterpNpcYaw, NPC_SELF, 225, 0)
     Wait(20)
@@ -63,13 +63,13 @@ EvtScript N(EVS_NpcAI_Chan) = {
 };
 
 EvtScript N(EVS_NpcDefeat_Chan) = {
-    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_SKIP_FLEE_DROPS, TRUE)
+    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_SKIP_FLEE_DROPS, true)
     Call(N(ResetBackgroundPostBattle))
     Thread
         Call(SetNpcAnimation, NPC_SELF, ANIM_Chan_Walk)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(NpcMoveTo, NPC_SELF, 310, -390, 30)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
         Call(SetNpcAnimation, NPC_SELF, ANIM_Chan_Idle)
         Call(InterpNpcYaw, NPC_SELF, 45, 0)
     EndThread
@@ -109,18 +109,18 @@ EvtScript N(EVS_NpcAI_Lee) = {
     Call(SpeakToNpc, NPC_SELF, ANIM_Lee_Talk, ANIM_Lee_Idle, 0, NPC_TheMaster, MSG_MAC_Gate_0025)
     Wait(10)
     Thread
-        Call(SetNpcFlagBits, NPC_TheMaster, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_TheMaster, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(func_802D2C14, 1)
         Call(PlayerMoveTo, 348, -364, 20)
         Call(InterpPlayerYaw, 20, 0)
         Wait(20)
         Call(func_802D2C14, 0)
-        Call(SetNpcFlagBits, NPC_TheMaster, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_TheMaster, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     EndThread
     Call(SetNpcAnimation, NPC_SELF, ANIM_Lee_Walk)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(NpcMoveTo, NPC_SELF, 380, -400, 30)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Lee_Idle)
     Call(InterpNpcYaw, NPC_SELF, 225, 0)
     Wait(20)
@@ -131,13 +131,13 @@ EvtScript N(EVS_NpcAI_Lee) = {
 };
 
 EvtScript N(EVS_NpcDefeat_Lee) = {
-    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_SKIP_FLEE_DROPS, TRUE)
+    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_SKIP_FLEE_DROPS, true)
     Call(N(ResetBackgroundPostBattle))
     Thread
         Call(SetNpcAnimation, NPC_SELF, ANIM_Lee_Walk)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(NpcMoveTo, NPC_SELF, 330, -410, 30)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
         Call(SetNpcAnimation, NPC_SELF, ANIM_Lee_Idle)
         Call(InterpNpcYaw, NPC_SELF, 45, 0)
     EndThread
@@ -174,8 +174,8 @@ enum {
 
 EvtScript N(EVS_NpcIdle_TheMaster) = {
     Label(0)
-        Call(SetSelfVar, VAR_FINISHED_BATTLE, FALSE)
-        Call(SetSelfVar, VAR_STARTED_BATTLE, FALSE)
+        Call(SetSelfVar, VAR_FINISHED_BATTLE, false)
+        Call(SetSelfVar, VAR_STARTED_BATTLE, false)
         // wait for battle to start
         Loop(0)
             Call(GetSelfVar, VAR_STARTED_BATTLE, LVar0)
@@ -184,7 +184,7 @@ EvtScript N(EVS_NpcIdle_TheMaster) = {
             EndIf
             Wait(1)
         EndLoop
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         // wait for battle to end
         Loop(0)
             Call(GetSelfVar, VAR_FINISHED_BATTLE, LVar0)
@@ -237,7 +237,7 @@ EvtScript N(EVS_NpcIdle_TheMaster) = {
                     Call(SpeakToPlayer, NPC_TheMaster, ANIM_TheMaster_Talk, ANIM_TheMaster_Idle, 0, MSG_MAC_Gate_0041)
                 EndIf
         EndSwitch
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         // restart cycle, waiting for the next battle
     Goto(0)
     Return
@@ -245,20 +245,20 @@ EvtScript N(EVS_NpcIdle_TheMaster) = {
 };
 
 EvtScript N(EVS_NpcDefeat_Dojo) = {
-    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_SKIP_FLEE_DROPS, TRUE)
+    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_SKIP_FLEE_DROPS, true)
     Call(N(ResetBackgroundPostBattle))
     Call(GetBattleOutcome, LVar0)
     Call(SetSelfVar, VAR_BATTLE_OUTCOME, LVar0)
-    Call(SetSelfVar, VAR_FINISHED_BATTLE, TRUE)
+    Call(SetSelfVar, VAR_FINISHED_BATTLE, true)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Return
     End
 };
 
 EvtScript N(EVS_TheMaster_InteractImpl) = {
-    Call(DisablePlayerInput, TRUE)
-    IfEq(GF_MAC00_Met_TheMaster, FALSE)
-        Set(GF_MAC00_Met_TheMaster, TRUE)
+    Call(DisablePlayerInput, true)
+    IfEq(GF_MAC00_Met_TheMaster, false)
+        Set(GF_MAC00_Met_TheMaster, true)
         Set(LVar0, MSG_MAC_Gate_0017)
     Else
         Set(LVar0, MSG_MAC_Gate_0018)
@@ -267,26 +267,26 @@ EvtScript N(EVS_TheMaster_InteractImpl) = {
     Call(ShowChoice, MSG_Choice_0016)
     IfEq(LVar0, 1)
         Call(ContinueSpeech, NPC_TheMaster, ANIM_TheMaster_Talk, ANIM_TheMaster_Idle, 0, MSG_MAC_Gate_0019)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Return
     EndIf
     IfGt(GB_MAC00_DojoRank, 4)
         Call(ContinueSpeech, NPC_TheMaster, ANIM_TheMaster_Talk, ANIM_TheMaster_Idle, 0, MSG_MAC_Gate_0043)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Return
     EndIf
-    Call(SetSelfVar, VAR_STARTED_BATTLE, TRUE)
+    Call(SetSelfVar, VAR_STARTED_BATTLE, true)
     Wait(1)
     Switch(GB_MAC00_DojoRank)
         CaseEq(0)
             Call(BindNpcDefeat, NPC_Chan, Ref(N(EVS_NpcDefeat_Chan)))
             Call(BindNpcAI, NPC_Chan, Ref(N(EVS_NpcAI_Chan)))
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
             Return
         CaseEq(1)
             Call(BindNpcDefeat, NPC_Lee, Ref(N(EVS_NpcDefeat_Lee)))
             Call(BindNpcAI, NPC_Lee, Ref(N(EVS_NpcAI_Lee)))
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
             Return
         CaseEq(2)
             Set(LVar1, MSG_MAC_Gate_002B)
@@ -297,7 +297,7 @@ EvtScript N(EVS_TheMaster_InteractImpl) = {
     EndSwitch
     Call(ContinueSpeech, NPC_TheMaster, ANIM_TheMaster_Talk, ANIM_TheMaster_Idle, 0, LVar1)
     Wait(10)
-    Call(SetNpcFlagBits, NPC_TheMaster, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_TheMaster, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Thread
         Call(func_802D2C14, 1)
         Call(PlayerMoveTo, 348, -364, 20)
@@ -308,7 +308,7 @@ EvtScript N(EVS_TheMaster_InteractImpl) = {
     Call(NpcMoveTo, NPC_SELF, 375, -400, 30)
     Call(InterpNpcYaw, NPC_TheMaster, 225, 0)
     Wait(30)
-    Call(SetNpcFlagBits, NPC_TheMaster, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_TheMaster, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Dojo)))
     Wait(1)
     Call(N(SetDojoBattle))
@@ -317,7 +317,7 @@ EvtScript N(EVS_TheMaster_InteractImpl) = {
     Else
         Call(StartBattleWith, SONG_MASTER_BATTLE)
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

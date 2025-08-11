@@ -191,12 +191,12 @@ BombTrigger N(BombPos_Tree7) = {
 };
 
 EvtScript N(EVS_SetupFoliage) = {
-    Set(AF_JAN01_TreeDrop2, FALSE)
-    Set(AF_JAN01_TreeDrop3, FALSE)
-    Set(AF_JAN01_TreeDrop4, FALSE)
-    Set(AF_JAN01_TreeDrop5, FALSE)
-    Set(AF_JAN01_TreeDrop6, FALSE)
-    Set(AF_JAN01_TreeDrop7, FALSE)
+    Set(AF_JAN01_TreeDrop2, false)
+    Set(AF_JAN01_TreeDrop3, false)
+    Set(AF_JAN01_TreeDrop4, false)
+    Set(AF_JAN01_TreeDrop5, false)
+    Set(AF_JAN01_TreeDrop6, false)
+    Set(AF_JAN01_TreeDrop7, false)
     Set(LVar0, Ref(N(ShakeTree_Tree1)))
     BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o204, 1, 0)
     BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)
@@ -215,7 +215,7 @@ EvtScript N(EVS_SetupFoliage) = {
     Set(LVar0, Ref(N(ShakeTree_Tree6)))
     BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o103, 1, 0)
     BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree6)), 1, 0)
-    IfEq(GF_JAN01_Tree7_StarPiece, FALSE)
+    IfEq(GF_JAN01_Tree7_StarPiece, false)
         Set(LVar0, Ref(N(ShakeTree_Tree7A)))
     Else
         Set(LVar0, Ref(N(ShakeTree_Tree7B)))

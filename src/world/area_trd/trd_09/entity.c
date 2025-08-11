@@ -2,13 +2,13 @@
 #include "entity.h"
 
 EvtScript N(EVS_BombRock) = {
-    Set(GF_TRD09_BombedRock, TRUE)
+    Set(GF_TRD09_BombedRock, true)
     Return
     End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_TRD09_BombedRock, FALSE)
+    IfEq(GF_TRD09_BombedRock, false)
         Call(MakeEntity, Ref(Entity_BombableRockWide), -470, -75, 139, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_BombRock)))
     EndIf

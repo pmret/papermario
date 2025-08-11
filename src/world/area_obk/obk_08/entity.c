@@ -124,7 +124,7 @@ EvtScript N(EVS_AnimateShutterRight) = {
 EvtScript N(EVS_ManageWindows) = {
     Label(10)
         Call(AwaitPlayerApproach, 0, -390, 150)
-        Set(MV_WindowsIdle, FALSE)
+        Set(MV_WindowsIdle, false)
         Set(LVar5, 0)
         Set(LVar2, MODEL_m21)
         Exec(N(EVS_AnimateShutterLeft))
@@ -154,7 +154,7 @@ EvtScript N(EVS_ManageWindows) = {
         Exec(N(EVS_AnimateShutterRight))
         Wait(2)
         Call(AwaitPlayerLeave, 0, -390, 170)
-        Set(MV_WindowsIdle, TRUE)
+        Set(MV_WindowsIdle, true)
         Goto(10)
     Return
     End

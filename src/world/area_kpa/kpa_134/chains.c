@@ -11,8 +11,8 @@ extern EvtScript N(EVS_SetupUpperChain);
 EvtScript N(EVS_SetupChains) = {
     Call(SetRenderMode, MODEL_s_sui, RENDER_MODE_SURFACE_XLU_LAYER2)
     Call(SetRenderMode, MODEL_o385, RENDER_MODE_SURFACE_XLU_LAYER2)
-    Call(EnableModel, MODEL_o388, FALSE)
-    Call(EnableModel, MODEL_o389, FALSE)
+    Call(EnableModel, MODEL_o388, false)
+    Call(EnableModel, MODEL_o389, false)
     Call(TranslateModel, MODEL_o387, 0, 30, 0)
     Call(TranslateModel, MODEL_o505, 0, 0, 0)
     Switch(GB_KPA_WaterLevel)
@@ -23,7 +23,7 @@ EvtScript N(EVS_SetupChains) = {
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tte, COLLIDER_FLAGS_UPPER_MASK)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_migi, COLLIDER_FLAGS_UPPER_MASK)
         CaseEq(1)
-            Call(EnableModel, MODEL_s_sui, FALSE)
+            Call(EnableModel, MODEL_s_sui, false)
             Call(TranslateGroup, MODEL_sui1, 0, 120, 0)
             Call(TranslateModel, MODEL_o385, 0, 120, 0)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tte, COLLIDER_FLAGS_UPPER_MASK)
@@ -31,7 +31,7 @@ EvtScript N(EVS_SetupChains) = {
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deiliaw, COLLIDER_FLAG_DOCK_WALL)
         CaseEq(2)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_hidari, COLLIDER_FLAGS_UPPER_MASK)
-            Call(EnableModel, MODEL_o385, FALSE)
+            Call(EnableModel, MODEL_o385, false)
             Call(TranslateGroup, MODEL_sui1, 0, 220, 0)
             Call(TranslateModel, MODEL_s_sui, 0, 220, 0)
     EndSwitch
@@ -83,8 +83,8 @@ EvtScript N(EVS_SetupLowerChain) = {
     Call(N(CreateLowerChainShadow))
     Label(10)
         Call(N(DetectLowerChainGrab))
-        Call(DisablePlayerPhysics, TRUE)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerPhysics, true)
+        Call(DisablePlayerInput, true)
         Call(PlaySoundAtPlayer, SOUND_KPA_PULL_CHAIN, SOUND_SPACE_DEFAULT)
         Call(SetPlayerActionState, ACTION_STATE_IDLE)
         Wait(1)
@@ -148,7 +148,7 @@ EvtScript N(EVS_LowerWaterLevel0) = {
         EndIf
     EndThread
     Call(SetGroupVisibility, MODEL_sui1, MODEL_GROUP_VISIBLE)
-    Call(EnableModel, MODEL_o385, TRUE)
+    Call(EnableModel, MODEL_o385, true)
     Call(PlaySound, SOUND_LOOP_KPA_DRAIN_WATER)
     Call(MakeLerp, 120, 20, 120, EASING_LINEAR)
     Label(30)
@@ -162,17 +162,17 @@ EvtScript N(EVS_LowerWaterLevel0) = {
     Call(PlaySound, SOUND_LRAW_KPA_DRAIN_WATER | SOUND_ID_TRIGGER_CHANGE_SOUND)
     Call(StopTrackingSoundPos, SOUND_LRAW_KPA_DRAIN_WATER)
     Call(SetGroupVisibility, MODEL_sui1, MODEL_GROUP_HIDDEN)
-    Call(EnableModel, MODEL_s_sui, FALSE)
-    Call(EnableModel, MODEL_o385, FALSE)
+    Call(EnableModel, MODEL_s_sui, false)
+    Call(EnableModel, MODEL_o385, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_hidari, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_migi, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deiliaw, COLLIDER_FLAGS_UPPER_MASK)
     Wait(10)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(ResetCam, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Thread
         Set(LVar0, 17)
         Loop(13)
@@ -230,7 +230,7 @@ EvtScript N(EVS_RaiseWaterLevel1) = {
         EndLoop
     EndThread
     Thread
-        Call(EnableModel, MODEL_o388, TRUE)
+        Call(EnableModel, MODEL_o388, true)
         Call(MakeLerp, 400, 0, 20, EASING_LINEAR)
         Label(20)
         Call(UpdateLerp)
@@ -240,8 +240,8 @@ EvtScript N(EVS_RaiseWaterLevel1) = {
             Goto(20)
         EndIf
         Call(SetGroupVisibility, MODEL_sui1, MODEL_GROUP_VISIBLE)
-        Call(EnableModel, MODEL_o385, TRUE)
-        Call(EnableModel, MODEL_o389, TRUE)
+        Call(EnableModel, MODEL_o385, true)
+        Call(EnableModel, MODEL_o389, true)
         Call(MakeLerp, 20, 120, 180, EASING_LINEAR)
         Label(30)
         Call(UpdateLerp)
@@ -268,21 +268,21 @@ EvtScript N(EVS_RaiseWaterLevel1) = {
         EndIf
         Call(PlaySound, SOUND_LRAW_KPA_FILL_WATER | SOUND_ID_TRIGGER_CHANGE_SOUND)
         Call(StopTrackingSoundPos, SOUND_LRAW_KPA_FILL_WATER)
-        Call(EnableModel, MODEL_o389, FALSE)
-        Call(EnableModel, MODEL_o388, FALSE)
+        Call(EnableModel, MODEL_o389, false)
+        Call(EnableModel, MODEL_o388, false)
     EndThread
     Wait(230)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(ResetCam, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_hidari, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_migi, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deiliaw, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deiliaw, COLLIDER_FLAG_IGNORE_SHELL)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deiliaw, SURFACE_TYPE_DOCK_WALL)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deiliaw, COLLIDER_FLAG_DOCK_WALL)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Thread
         Set(LVar0, 17)
         Loop(13)
@@ -330,8 +330,8 @@ EvtScript N(EVS_SetupUpperChain) = {
     Call(N(CreateUpperChainShadow))
     Label(10)
         Call(N(DetectUpperChainGrab))
-        Call(DisablePlayerPhysics, TRUE)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerPhysics, true)
+        Call(DisablePlayerInput, true)
         Call(PlaySoundAtPlayer, SOUND_KPA_PULL_CHAIN, SOUND_SPACE_DEFAULT)
         Call(SetPlayerActionState, ACTION_STATE_IDLE)
         Wait(1)
@@ -373,8 +373,8 @@ EvtScript N(EVS_LowerWaterLevel1) = {
     Thread
         Call(ShakeCam, CAM_DEFAULT, 0, 120, Float(1.0))
     EndThread
-    Call(EnableModel, MODEL_s_sui, FALSE)
-    Call(EnableModel, MODEL_o385, TRUE)
+    Call(EnableModel, MODEL_s_sui, false)
+    Call(EnableModel, MODEL_o385, true)
     Thread
         Call(GrabCamera, CAM_DEFAULT, LVar4, LVar5, LVar6, LVar7)
         Call(MakeLerp, LVar6, 600, 20, EASING_LINEAR)
@@ -412,9 +412,9 @@ EvtScript N(EVS_LowerWaterLevel1) = {
     Wait(10)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(ResetCam, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Thread
         Set(LVar0, -13)
         Loop(13)
@@ -432,8 +432,8 @@ EvtScript N(EVS_RaiseWaterLevel2) = {
     Thread
         Call(ShakeCam, CAM_DEFAULT, 0, 220, Float(1.0))
     EndThread
-    Call(EnableModel, MODEL_s_sui, TRUE)
-    Call(EnableModel, MODEL_o385, FALSE)
+    Call(EnableModel, MODEL_s_sui, true)
+    Call(EnableModel, MODEL_o385, false)
     Thread
         Wait(60)
         Call(GrabCamera, CAM_DEFAULT, LVar4, LVar5, LVar6, LVar7)
@@ -474,7 +474,7 @@ EvtScript N(EVS_RaiseWaterLevel2) = {
         EndLoop
     EndThread
     Thread
-        Call(EnableModel, MODEL_o388, TRUE)
+        Call(EnableModel, MODEL_o388, true)
         Call(MakeLerp, 400, 0, 20, EASING_LINEAR)
         Label(20)
         Call(UpdateLerp)
@@ -484,7 +484,7 @@ EvtScript N(EVS_RaiseWaterLevel2) = {
             Goto(20)
         EndIf
         Call(SetGroupVisibility, MODEL_sui1, MODEL_GROUP_VISIBLE)
-        Call(EnableModel, MODEL_o389, TRUE)
+        Call(EnableModel, MODEL_o389, true)
         Call(MakeLerp, 120, 220, 180, EASING_LINEAR)
         Label(30)
         Call(UpdateLerp)
@@ -511,15 +511,15 @@ EvtScript N(EVS_RaiseWaterLevel2) = {
         EndIf
         Call(PlaySound, SOUND_LRAW_KPA_FILL_WATER | SOUND_ID_TRIGGER_CHANGE_SOUND)
         Call(StopTrackingSoundPos, SOUND_LRAW_KPA_FILL_WATER)
-        Call(EnableModel, MODEL_o389, FALSE)
-        Call(EnableModel, MODEL_o388, FALSE)
+        Call(EnableModel, MODEL_o389, false)
+        Call(EnableModel, MODEL_o388, false)
     EndThread
     Wait(230)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(ResetCam, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Thread
         Set(LVar0, -13)
         Loop(13)

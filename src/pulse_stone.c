@@ -38,10 +38,10 @@ s32 should_cancel_pulse_stone(void) {
         if (!(partnerStatus->partnerActionState == PARTNER_ACTION_USE
             && (partnerStatus->actingPartner == PARTNER_BOW || partnerStatus->actingPartner == PARTNER_PARAKARRY))
         ) {
-            return FALSE;
+            return false;
         }
     }
-    return TRUE;
+    return true;
 }
 
 s32 should_continue_pulse_stone(void) {
@@ -58,13 +58,13 @@ s32 should_continue_pulse_stone(void) {
 
         if ((dx + dy) < 6) {
             if (!should_cancel_pulse_stone()) {
-                dy = TRUE; // TODO required to set dy to 1 and return that
+                dy = true; // TODO required to set dy to 1 and return that
 
-                return TRUE;
+                return true;
             }
         }
     }
-    return FALSE;
+    return false;
 }
 
 void pulse_stone_notification_setup(void) {

@@ -64,7 +64,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_TOAD_TOWN_TUNNELS)
     Call(SetSpriteShading, SHADING_TIK_06)
     SetUP_CAMERA_NO_LEAD()
-    Set(GF_MAP_ToadTownTunnels, TRUE)
+    Set(GF_MAP_ToadTownTunnels, true)
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
     Call(PlaySound, SOUND_LOOP_TIK06_WATER)
@@ -72,7 +72,7 @@ EvtScript N(EVS_Main) = {
     Call(PlaySoundAtF, SOUND_LOOP_TIK06_FLOW3, SOUND_SPACE_WITH_DEPTH, -25, -140, -130)
     Call(PlaySoundAtF, SOUND_LOOP_TIK06_FLOW4, SOUND_SPACE_WITH_DEPTH, -35, -180, 130)
     Exec(N(EVS_SetupDrips))
-    Call(EnableTexPanning, MODEL_nagare1, TRUE)
+    Call(EnableTexPanning, MODEL_nagare1, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(   50,  200,  110,  500)
@@ -80,7 +80,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         Exec(N(EVS_UpdateTexturePan))
     EndThread
-    Call(EnableTexPanning, MODEL_mizu, TRUE)
+    Call(EnableTexPanning, MODEL_mizu, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_2)
         TEX_PAN_PARAMS_STEP(    0, -200, -100, -500)
@@ -88,7 +88,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         Exec(N(EVS_UpdateTexturePan))
     EndThread
-    Call(EnableTexPanning, MODEL_mizu2, TRUE)
+    Call(EnableTexPanning, MODEL_mizu2, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_3)
         TEX_PAN_PARAMS_STEP(    0, -250, -100, -500)
@@ -96,9 +96,9 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         Exec(N(EVS_UpdateTexturePan))
     EndThread
-    Call(EnableTexPanning, MODEL_taki, TRUE)
-    Call(EnableTexPanning, MODEL_o72, TRUE)
-    Call(EnableTexPanning, MODEL_o73, TRUE)
+    Call(EnableTexPanning, MODEL_taki, true)
+    Call(EnableTexPanning, MODEL_o72, true)
+    Call(EnableTexPanning, MODEL_o73, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_4)
         TEX_PAN_PARAMS_STEP(  -50, -900,  -70,-1200)
@@ -106,7 +106,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         Exec(N(EVS_UpdateTexturePan))
     EndThread
-    Set(GF_MAC01_RowfBadgesChosen, FALSE)
+    Set(GF_MAC01_RowfBadgesChosen, false)
     Exec(N(EVS_EnterMap))
     Wait(1)
     Return

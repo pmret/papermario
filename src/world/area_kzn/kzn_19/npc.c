@@ -29,18 +29,18 @@ EVT_LETTER_PROMPT(Kolorado, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle
 EVT_LETTER_REWARD(Kolorado);
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
-    IfEq(GF_KZN19_KoloradoDeadEnd, FALSE)
+    IfEq(GF_KZN19_KoloradoDeadEnd, false)
         Label(0)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         IfLt(LVar0, 300)
             Wait(1)
             Goto(0)
         EndIf
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(NpcFacePlayer, NPC_SELF, 4)
         Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0100)
-        Set(GF_KZN19_KoloradoDeadEnd, TRUE)
-        Call(DisablePlayerInput, FALSE)
+        Set(GF_KZN19_KoloradoDeadEnd, true)
+        Call(DisablePlayerInput, false)
         Call(SetSelfVar, 0, 0)
         Label(5)
         Call(InterpNpcYaw, NPC_SELF, 90, 0)
@@ -58,13 +58,13 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
 
 EvtScript N(EVS_Kolorado_Escape) = {
     Label(0)
-        IfEq(MV_BossDefeated, FALSE)
+        IfEq(MV_BossDefeated, false)
             Wait(1)
             Goto(0)
         EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(60 * DT)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetNpcPos, NPC_SELF, 70, 25, 60)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
     Call(SetNpcSpeed, NPC_SELF, Float(4.0 / DT))
@@ -74,19 +74,19 @@ EvtScript N(EVS_Kolorado_Escape) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 450, 25, -20)
     Call(SetPanTarget, CAM_DEFAULT, 450, 25, -20)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.5 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(NpcMoveTo, NPC_SELF, 535, -60, 0)
     Wait(20 * DT)
     Call(SetPanTarget, CAM_DEFAULT, 304, 25, -35)
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetNpcAux, NPC_LavaPiranhaHead, 0)
     Wait(10 * DT)
     Call(FadeOutMusic, 0, 1500)
     Exec(N(EVS_TrySpawningStarCard))
     Wait(30)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -125,7 +125,7 @@ Vec3f N(FlightPath)[] = {
 };
 
 EvtScript N(EVS_Misstar_Escape) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetPlayerPos, 185, 25, -35)
     Call(SetNpcPos, NPC_PARTNER, 155, 25, -35)
     Call(SetNpcPos, NPC_Misstar, 250, 40, -35)
@@ -134,14 +134,14 @@ EvtScript N(EVS_Misstar_Escape) = {
     Call(SetCamDistance, CAM_DEFAULT, 380)
     Call(SetCamPitch, CAM_DEFAULT, Float(12.0), Float(-7.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(30)
-    Set(AF_KZN_BossRoomFloorBroken, TRUE)
+    Set(AF_KZN_BossRoomFloorBroken, true)
     Call(PlaySound, SOUND_LOOP_RUMBLE)
     Loop(0)
         Wait(1)
-        IfNe(AF_KZN_BossRoomFloorBroken, TRUE)
+        IfNe(AF_KZN_BossRoomFloorBroken, true)
             BreakLoop
         EndIf
     EndLoop
@@ -151,13 +151,13 @@ EvtScript N(EVS_Misstar_Escape) = {
     Call(GetNpcPos, NPC_Misstar, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(10)
     Call(SpeakToPlayer, NPC_Misstar, ANIM_WorldMisstar_Talk, ANIM_WorldMisstar_Idle, 0, MSG_CH5_0109)
     Wait(10)
     Call(SetPanTarget, CAM_DEFAULT, 370, 25, 70)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.8))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(InterpNpcYaw, NPC_Misstar, 90, 0)
     Call(LoadPath, 45, Ref(N(FlightPath)), ARRAY_COUNT(N(FlightPath)), EASING_LINEAR)
     Loop(0)
@@ -172,7 +172,7 @@ EvtScript N(EVS_Misstar_Escape) = {
     Wait(15)
     Call(ResetCam, CAM_DEFAULT, Float(3.0))
     Set(GB_StoryProgress, STORY_CH5_MT_LAVA_LAVA_ERUPTING)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -255,7 +255,7 @@ EvtScript N(EVS_NpcIdle_LavaPiranha) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetMusic, 0, SONG_LAVA_PIRANHA_THEME, 0, VOL_LEVEL_FULL)
     Call(LoadAnimatedModel, VINE_0, Ref(N(AnimModel_MainHeadVine)))
     Call(N(LoadAnimationFromTable), VINE_0, 0)
@@ -287,7 +287,7 @@ EvtScript N(EVS_NpcIdle_LavaPiranha) = {
         Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-9.5))
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Call(MakeLerp, 0, 40, 80, EASING_QUADRATIC_OUT)
     Loop(0)
@@ -324,7 +324,7 @@ EvtScript N(EVS_NpcIdle_LavaPiranha) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(420.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(10.0), Float(-10.7))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Exec(N(EVS_PlayVinesAnim_Talk))
     Call(SpeakToPlayer, NPC_SELF, ANIM_LavaPiranha_Anim0E, ANIM_LavaPiranha_Anim03, 768, -30, 30, MSG_CH5_0102)
@@ -348,17 +348,17 @@ EvtScript N(EVS_NpcIdle_LavaPiranha) = {
         Loop(3)
             Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
             Call(SetCamSpeed, CAM_DEFAULT, LVar0)
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Sub(LVar0, 2)
             Call(SetCamDistance, CAM_DEFAULT, Float(440.0))
             Call(SetCamSpeed, CAM_DEFAULT, LVar0)
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Sub(LVar0, 2)
         EndLoop
     EndChildThread
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(StartBossBattle, SONG_LAVA_PIRANHA_BATTLE)
     Return
     End
@@ -543,27 +543,27 @@ EvtScript N(EVS_NpcDefeat_LavaPiranha) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, TRUE)
+            Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, true)
             Call(SetMusic, 0, SONG_MT_LAVALAVA, 0, VOL_LEVEL_FULL)
             Call(SetPlayerPos, 125, 25, -35)
             Call(SetNpcPos, NPC_PARTNER, 100, 25, -35)
-            Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+            Call(SetCamLeadPlayer, CAM_DEFAULT, false)
             Call(UseSettingsFrom, CAM_DEFAULT, 125, 25, -35)
             Call(SetPanTarget, CAM_DEFAULT, 205, 25, -35)
             Call(SetCamDistance, CAM_DEFAULT, 470)
             Call(SetCamPitch, CAM_DEFAULT, Float(16.0), Float(-8.0))
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
-            Call(EnableGroup, MODEL_ato, TRUE)
-            Call(EnableGroup, MODEL_naka, TRUE)
-            Call(EnableGroup, MODEL_mae, FALSE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
+            Call(EnableGroup, MODEL_ato, true)
+            Call(EnableGroup, MODEL_naka, true)
+            Call(EnableGroup, MODEL_mae, false)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_ato, COLLIDER_FLAGS_UPPER_MASK)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mae, COLLIDER_FLAGS_UPPER_MASK)
             Call(PlaySoundAt, SOUND_LAVA_PIRANHA_DEFEAT, SOUND_SPACE_DEFAULT, 330, 25, -50)
             Exec(N(EVS_PlayVinesAnim_Defeat))
             Wait(1)
             Call(SetNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_LavaPiranha)))
-            Set(MV_BossDefeated, TRUE)
+            Set(MV_BossDefeated, true)
         CaseEq(OUTCOME_PLAYER_LOST)
         CaseEq(OUTCOME_PLAYER_FLED)
     EndSwitch

@@ -22,11 +22,11 @@ Vec3f N(FlightPath_Arrival)[] = {
 };
 
 EvtScript N(EVS_Scene_Arrival) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAND)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Set(MV_Starship_Yaw, 0)
     Set(MV_Starship_PosX, 0)
     Set(MV_Starship_PosY, 0)
@@ -36,7 +36,7 @@ EvtScript N(EVS_Scene_Arrival) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 0, -70, 0)
     Call(SetPanTarget, CAM_DEFAULT, 0, -70, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(PlaySound, SOUND_STARSHIP_FLY_AWAY)
     Call(LoadPath, 45, Ref(N(FlightPath_Arrival)), ARRAY_COUNT(N(FlightPath_Arrival)), EASING_LINEAR)
     Label(90)
@@ -49,9 +49,9 @@ EvtScript N(EVS_Scene_Arrival) = {
             Goto(90)
         EndIf
     Wait(20)
-    IfEq(GF_StartedChapter8, FALSE)
+    IfEq(GF_StartedChapter8, false)
         Wait(15)
-        Set(GF_StartedChapter8, TRUE)
+        Set(GF_StartedChapter8, true)
         Call(FadeOutMusic, 0, 1500)
         Call(GotoMapSpecial, Ref("kmr_22"), kmr_22_ENTRY_8, TRANSITION_BEGIN_OR_END_CHAPTER)
         Wait(100)
@@ -71,10 +71,10 @@ Vec3f N(FlightPath_Departure)[] = {
 };
 
 EvtScript N(EVS_Scene_Departure) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Call(InterpPlayerYaw, 180, 1)
     Call(SetNpcYaw, NPC_PARTNER, 270)
     Set(MV_Starship_Yaw, 180)
@@ -86,7 +86,7 @@ EvtScript N(EVS_Scene_Departure) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 0, -70, 0)
     Call(SetPanTarget, CAM_DEFAULT, 0, -70, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Call(PlaySound, SOUND_STARSHIP_FLY_TOWARD)
         Call(LoadPath, 45, Ref(N(FlightPath_Departure)), ARRAY_COUNT(N(FlightPath_Departure)), EASING_LINEAR)

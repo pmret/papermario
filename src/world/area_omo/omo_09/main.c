@@ -13,7 +13,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_SHY_GUYS_TOYBOX)
     IfGe(GB_StoryProgress, STORY_CH4_DEFEATED_GENERAL_GUY)
-        Set(GF_OMO09_SpawnedPeachChoice3, TRUE)
+        Set(GF_OMO09_SpawnedPeachChoice3, true)
     EndIf
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
@@ -25,21 +25,21 @@ EvtScript N(EVS_Main) = {
     Call(SetModelTexVariant, MODEL_s1, LVar0)
     Call(SetModelTexVariant, MODEL_s2, LVar0)
 #endif
-    IfEq(GF_OMO09_SpawnedPeachChoice3, FALSE)
-        Call(MakeNpcs, TRUE, Ref(N(KammySceneNPCs)))
+    IfEq(GF_OMO09_SpawnedPeachChoice3, false)
+        Call(MakeNpcs, true, Ref(N(KammySceneNPCs)))
     Else
-        IfEq(GF_OMO09_Item_SuperSoda, FALSE)
+        IfEq(GF_OMO09_Item_SuperSoda, false)
             Switch(GB_OMO_PeachChoice3)
                 CaseEq(0)
-                    Call(MakeNpcs, TRUE, Ref(N(PokeyAmbushNPCs)))
+                    Call(MakeNpcs, true, Ref(N(PokeyAmbushNPCs)))
                 CaseEq(1)
-                    Call(MakeNpcs, TRUE, Ref(N(KoopatrolAmbushNPCs)))
+                    Call(MakeNpcs, true, Ref(N(KoopatrolAmbushNPCs)))
                 CaseEq(2)
-                    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+                    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
                     Call(MakeItemEntity, ITEM_SUPER_SODA, 1900, 150, 0, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_OMO09_Item_SuperSoda)
             EndSwitch
         Else
-            Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+            Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
         EndIf
     EndIf
     ExecWait(N(EVS_MakeEntities))
@@ -47,7 +47,7 @@ EvtScript N(EVS_Main) = {
     ExecWait(N(EVS_SetupMusic))
     ExecWait(N(EVS_SetupConveyors))
     ExecWait(N(EVS_SetupSlotMachine))
-    IfEq(GF_OMO09_SpawnedPeachChoice3, FALSE)
+    IfEq(GF_OMO09_SpawnedPeachChoice3, false)
         Exec(N(EVS_Scene_KammySetAmbush))
         Wait(2)
     Else

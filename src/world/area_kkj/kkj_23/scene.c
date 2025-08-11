@@ -19,7 +19,7 @@ API_CALLABLE(N(SetLightningBoltColor)) {
 }
 
 API_CALLABLE(N(ForceDisguiseLoss)) {
-    peach_force_disguise_action(FALSE);
+    peach_force_disguise_action(false);
     return ApiStatus_DONE2;
 }
 
@@ -178,7 +178,7 @@ EvtScript N(EVS_RemoveDisguise) = {
 };
 
 EvtScript N(EVS_Scene_KammyUnmasksPeach) = {
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
     Loop(0)
         Wait(1)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -186,12 +186,12 @@ EvtScript N(EVS_Scene_KammyUnmasksPeach) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
     Call(SetMusic, 0, SONG_KAMMY_KOOPA_THEME, 0, VOL_LEVEL_FULL)
     Call(SetNpcVar, NPC_Koopatrol_01, 1, 0)
-    Call(SetNpcFlagBits, NPC_Koopatrol_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Koopatrol_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetNpcPos, NPC_Kammy, -50, 0, -50)
     Exec(N(EVS_OpenAndCloseTowerDoors))
     Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim02)
@@ -244,7 +244,7 @@ EvtScript N(EVS_Scene_KammyUnmasksPeach) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-9.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 5, MSG_Peach_014F)
@@ -341,8 +341,8 @@ EvtScript N(EVS_Scene_KammyUnmasksPeach) = {
     Wait(60 * DT)
     Call(FadeOutMusic, 0, 1000 * DT)
     ExecWait(N(EVS_EndPeachChapter6))
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

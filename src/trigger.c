@@ -263,25 +263,25 @@ s32 is_another_trigger_bound(Trigger* trigger, EvtScript* script) {
         if (listTrigger->flags & TRIGGER_ACTIVE) {
             if (listTrigger->flags & TRIGGER_ACTIVATED) {
                 if (listTrigger->onTriggerEvt == script) {
-                    return TRUE;
+                    return true;
                 }
             }
         }
     }
 
-    return FALSE;
+    return false;
 }
 
 Trigger* get_trigger_by_id(s32 triggerID) {
     return (*gCurrentTriggerListPtr)[triggerID];
 }
 
-/// @returns TRUE if colliderID is bound to an interaction trigger (press A) and the player can use it.
+/// @returns true if colliderID is bound to an interaction trigger (press A) and the player can use it.
 s32 should_collider_allow_interact(s32 colliderID) {
     s32 i;
 
     if (!phys_can_player_interact()) {
-        return FALSE;
+        return false;
     }
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
@@ -292,8 +292,8 @@ s32 should_collider_allow_interact(s32 colliderID) {
             && trigger->location.colliderID == colliderID
             && trigger->flags & TRIGGER_WALL_PRESS_A
         ) {
-            return TRUE;
+            return true;
         }
     }
-    return FALSE;
+    return false;
 }

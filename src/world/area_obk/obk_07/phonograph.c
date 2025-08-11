@@ -309,7 +309,7 @@ API_CALLABLE(N(GetSelectedRecordIndex)) {
     s32 outVal = 0;
     s32* record = N(ItemList_Records);
 
-    while (TRUE) {
+    while (true) {
         if (*record == 0) {
             outVal = -1;
         } else if (*record++ != script->varTable[0]) {
@@ -480,7 +480,7 @@ API_CALLABLE(N(func_80241790_BD0380)) {
     s32 distFromCenter = abs(data->fillValue - 50);
     s32 v1, v0;
 
-    while (TRUE) {
+    while (true) {
         if (distFromCenter < 10) {
             v1 = 10;
             v1 -= distFromCenter;
@@ -662,9 +662,9 @@ EvtScript N(EVS_UpdateRecordRotation) = {
 };
 
 EvtScript N(EVS_SetPhonographScale) = {
-    Set(MF_CancelScaleScript, FALSE)
+    Set(MF_CancelScaleScript, false)
     Loop(0)
-        IfEq(MF_CancelScaleScript, TRUE)
+        IfEq(MF_CancelScaleScript, true)
             Call(N(CheckScaleNearUnity))
             IfEq(LVar2, 1)
                 BreakLoop
@@ -676,16 +676,16 @@ EvtScript N(EVS_SetPhonographScale) = {
         Call(UpdateColliderTransform, COLLIDER_t)
         Wait(1)
     EndLoop
-    Set(MF_CancelScaleScript, FALSE)
+    Set(MF_CancelScaleScript, false)
     Call(ScaleModel, MODEL_rap, 1, 1, 1)
     Return
     End
 };
 
 EvtScript N(EVS_SetCrankRotation) = {
-    Set(MF_CancelCrankScript, FALSE)
+    Set(MF_CancelCrankScript, false)
     Loop(0)
-        IfEq(MF_CancelCrankScript, TRUE)
+        IfEq(MF_CancelCrankScript, true)
             Call(N(CheckAngleNearZero))
             IfEq(LVar2, 1)
                 BreakLoop
@@ -696,16 +696,16 @@ EvtScript N(EVS_SetCrankRotation) = {
         Call(RotateGroup, MODEL_bo, LVar0, 1, 0, 0)
         Wait(1)
     EndLoop
-    Set(MF_CancelCrankScript, FALSE)
+    Set(MF_CancelCrankScript, false)
     Call(RotateGroup, MODEL_bo, 0, 1, 0, 0)
     Return
     End
 };
 
 EvtScript N(EVS_SetRecordRotation) = {
-    Set(MF_CancelRecordScript, FALSE)
+    Set(MF_CancelRecordScript, false)
     Loop(0)
-        IfEq(MF_CancelRecordScript, TRUE)
+        IfEq(MF_CancelRecordScript, true)
             Call(N(CheckAngleNearZero))
             IfEq(LVar2, 1)
                 BreakLoop
@@ -716,14 +716,14 @@ EvtScript N(EVS_SetRecordRotation) = {
         Call(RotateGroup, MODEL_rec, LVar0, 0, -1, 0)
         Wait(1)
     EndLoop
-    Set(MF_CancelRecordScript, FALSE)
+    Set(MF_CancelRecordScript, false)
     Call(RotateGroup, MODEL_rec, 0, 0, -1, 0)
     Return
     End
 };
 
 EvtScript N(EVS_WindDownPhonograph) = {
-    Set(MV_WindingDown, TRUE)
+    Set(MV_WindingDown, true)
     Call(MakeLerp, MV_MashInputsAmount, 0, LVar0, EASING_LINEAR)
     Loop(0)
         Call(UpdateLerp)
@@ -735,15 +735,15 @@ EvtScript N(EVS_WindDownPhonograph) = {
     EndLoop
     Call(SetNpcRotation, NPC_GuardBoo, 0, 0, 0)
     // signal scripts should stop
-    Set(MF_CancelScaleScript, TRUE)
-    Set(MF_CancelCrankScript, TRUE)
-    Set(MF_CancelRecordScript, TRUE)
+    Set(MF_CancelScaleScript, true)
+    Set(MF_CancelCrankScript, true)
+    Set(MF_CancelRecordScript, true)
     // wait for canceled scripts to end
     Loop(0)
         Wait(1)
-        IfEq(MF_CancelScaleScript, FALSE)
-            IfEq(MF_CancelCrankScript, FALSE)
-                IfEq(MF_CancelRecordScript, FALSE)
+        IfEq(MF_CancelScaleScript, false)
+            IfEq(MF_CancelCrankScript, false)
+                IfEq(MF_CancelRecordScript, false)
                     BreakLoop
                 EndIf
             EndIf
@@ -754,13 +754,13 @@ EvtScript N(EVS_WindDownPhonograph) = {
     KillThread(MV_UpdateCrankScript)
     KillThread(MV_UpdateRecordScript)
     Exec(N(EVS_SetupMusic))
-    Set(MV_WindingDown, FALSE)
+    Set(MV_WindingDown, false)
     Return
     End
 };
 
 EvtScript N(EVS_PlayPhonograph) = {
-    IfEq(MV_WindingDown, TRUE)
+    IfEq(MV_WindingDown, true)
         IsThreadRunning(MV_WindDownScript, LVar0)
         IfEq(LVar0, 1)
             KillThread(MV_WindDownScript)
@@ -803,7 +803,7 @@ EvtScript N(EVS_PlayPhonograph) = {
     Loop(0)
         // wait for tutorial message dismissal if there is one
         Wait(1)
-        IfEq(MV_ReadyToPlay, TRUE)
+        IfEq(MV_ReadyToPlay, true)
             BreakLoop
         EndIf
     EndLoop
@@ -812,7 +812,7 @@ EvtScript N(EVS_PlayPhonograph) = {
     Call(N(PlayRecordSong))
     Wait(30)
     Call(N(InitPhonographHud))
-    IfEq(MV_GuardDeparted, FALSE)
+    IfEq(MV_GuardDeparted, false)
         Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_Wary)))
         ExecGetTID(N(EVS_UpdateGuardBoo), MV_UpdateGuardScript)
     Else
@@ -837,15 +837,15 @@ EvtScript N(EVS_PlayPhonograph) = {
     Loop(0)
         // wait for the guard to finish jumping or spinning
         Wait(1)
-        IfEq(MF_GuardBusy, FALSE)
+        IfEq(MF_GuardBusy, false)
             BreakLoop
         EndIf
     EndLoop
     KillThread(MV_UpdateGuardScript)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
-    IfEq(MV_GuardDeparted, FALSE)
-        IfEq(MV_GuardDancing, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
+    IfEq(MV_GuardDeparted, false)
+        IfEq(MV_GuardDancing, true)
             Set(LVar0, 150)
         Else
             Set(LVar0, 80)
@@ -861,12 +861,12 @@ EvtScript N(EVS_PlayPhonograph) = {
 };
 
 EvtScript N(EVS_Inspect_Phonograph) = {
-    IfEq(MV_GuardDancing, TRUE)
-        IfEq(MV_GuardDeparted, FALSE)
+    IfEq(MV_GuardDancing, true)
+        IfEq(MV_GuardDeparted, false)
             Return
         EndIf
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     IfGe(GB_StoryProgress, STORY_CH3_PLAYED_THE_RECORD)
         Goto(50)
     EndIf
@@ -886,7 +886,7 @@ EvtScript N(EVS_Inspect_Phonograph) = {
     Set(GB_OBK07_SelectedRecord, LVar0)
     Call(RemoveKeyItemAt, LVar1)
     Set(GB_StoryProgress, STORY_CH3_PLAYED_THE_RECORD)
-    Call(EnableModel, MODEL_reco, TRUE)
+    Call(EnableModel, MODEL_reco, true)
     Call(SetPlayerAnimation, ANIM_MarioW1_CarryIdle)
     Wait(15)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
@@ -894,12 +894,12 @@ EvtScript N(EVS_Inspect_Phonograph) = {
     Call(CloseChoicePopup)
     // try playing
     Label(50)
-    Set(MV_ReadyToPlay, TRUE)
+    Set(MV_ReadyToPlay, true)
     IfLt(GB_StoryProgress, STORY_CH3_GOT_WEIGHT)
-        Set(MV_ReadyToPlay, FALSE)
+        Set(MV_ReadyToPlay, false)
         Thread
             Call(ShowMessageAtScreenPos, MSG_Menus_0181, 160, 40)
-            Set(MV_ReadyToPlay, TRUE)
+            Set(MV_ReadyToPlay, true)
         EndThread
     EndIf
     ExecWait(N(EVS_PlayPhonograph))
@@ -907,7 +907,7 @@ EvtScript N(EVS_Inspect_Phonograph) = {
     // done
     Label(100)
     Call(CloseChoicePopup)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -968,7 +968,7 @@ EvtScript N(EVS_NpcAI_GuardBoo_Dancing) = {
 
 EvtScript N(EVS_GuardBoo_ReturnToPost) = {
     Wait(1)
-    IfEq(MV_GuardDancing, TRUE)
+    IfEq(MV_GuardDancing, true)
         Wait(150)
         Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_DoNothing)))
         Wait(1)
@@ -999,21 +999,21 @@ EvtScript N(EVS_GuardBoo_ReturnToPost) = {
         EndIf
         Wait(1)
     EndLoop
-    Set(MV_GuardDancing, FALSE)
+    Set(MV_GuardDancing, false)
     Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_Wary)))
     Return
     End
 };
 
 EvtScript N(EVS_UpdateGuardBoo) = {
-    Set(MV_GuardDancing, FALSE)
-    Set(MF_GuardBusy, FALSE)
+    Set(MV_GuardDancing, false)
+    Set(MF_GuardBusy, false)
     Call(InterpNpcYaw, NPC_GuardBoo, 270, 5)
     Set(LVarC, 0)
     Loop(0)
         Call(GetNpcPos, NPC_GuardBoo, LVar0, LVar1, LVar2)
         IfLe(LVar0, -92)
-            Set(MV_GuardDancing, TRUE)
+            Set(MV_GuardDancing, true)
             Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_Dancing)))
             Return
         EndIf
@@ -1037,15 +1037,15 @@ EvtScript N(EVS_UpdateGuardBoo) = {
                     CaseLt(60)
                     CaseLt(80)
                         Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_DoNothing)))
-                        Set(MF_GuardBusy, TRUE)
+                        Set(MF_GuardBusy, true)
                         Call(GetNpcPos, NPC_GuardBoo, LVar0, LVar1, LVar2)
                         Call(SetNpcJumpscale, NPC_GuardBoo, Float(1.0))
                         Call(NpcJump0, NPC_GuardBoo, LVar0, LVar1, LVar2, 10)
-                        Set(MF_GuardBusy, FALSE)
+                        Set(MF_GuardBusy, false)
                         Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_Wary)))
                     CaseLt(99)
                         Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_DoNothing)))
-                        Set(MF_GuardBusy, TRUE)
+                        Set(MF_GuardBusy, true)
                         Call(MakeLerp, 0, 720, 20, EASING_QUADRATIC_OUT)
                         Loop(0)
                             Call(UpdateLerp)
@@ -1055,7 +1055,7 @@ EvtScript N(EVS_UpdateGuardBoo) = {
                                 BreakLoop
                             EndIf
                         EndLoop
-                        Set(MF_GuardBusy, FALSE)
+                        Set(MF_GuardBusy, false)
                         Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_Wary)))
                 EndSwitch
             EndIf
@@ -1093,7 +1093,7 @@ EvtScript N(EVS_GuardBooVanish) = {
             Goto(0)
         EndIf
     Call(SetNpcPos, NPC_GuardBoo, NPC_DISPOSE_LOCATION)
-    Set(MV_GuardDeparted, TRUE)
+    Set(MV_GuardDeparted, true)
     Return
     End
 };
@@ -1101,13 +1101,13 @@ EvtScript N(EVS_GuardBooVanish) = {
 EvtScript N(EVS_NpcInteract_GuardBoo) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_PLAYED_THE_RECORD)
-            IfEq(GF_OBK08_Item_Record, TRUE)
+            IfEq(GF_OBK08_Item_Record, true)
                 Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0036)
             Else
                 Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0035)
             EndIf
         CaseEq(STORY_CH3_PLAYED_THE_RECORD)
-            IfEq(MV_GuardDancing, TRUE)
+            IfEq(MV_GuardDancing, true)
                 Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0037)
             Else
                 Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0038)
@@ -1129,14 +1129,14 @@ EvtScript N(EVS_Scene_PlayerGotChestItem) = {
     KillThread(MV_GuardReturnScript)
     Call(SetNpcRotation, NPC_GuardBoo, 0, 0, 0)
     Exec(N(EVS_SetupMusic))
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_DoNothing)))
     Call(GetNpcPos, NPC_GuardBoo, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Cower, ANIM_Boo_Cower, 0, MSG_CH3_0039)
     Call(SetNpcAnimation, NPC_GuardBoo, ANIM_Boo_Idle)
@@ -1146,10 +1146,10 @@ EvtScript N(EVS_Scene_PlayerGotChestItem) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -1169,7 +1169,7 @@ EvtScript N(EVS_SetupPhonograph) = {
     Call(N(CreatePhonographData))
     Call(ParentColliderToModel, COLLIDER_t, MODEL_rap)
     IfLt(GB_StoryProgress, STORY_CH3_PLAYED_THE_RECORD)
-        Call(EnableModel, MODEL_reco, FALSE)
+        Call(EnableModel, MODEL_reco, false)
     EndIf
     BindPadlock(Ref(N(EVS_Inspect_Phonograph)), TRIGGER_WALL_PRESS_A, COLLIDER_o344, Ref(N(ItemList_Records)), 0, 1)
     Return

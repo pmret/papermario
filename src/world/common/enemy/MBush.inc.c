@@ -2,7 +2,7 @@
 #include "sprite/player.h"
 
 EvtScript N(EVS_NpcAI_MBush) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim00)
     Call(SetSelfVar, 0, 0)
     Label(0)
@@ -13,7 +13,7 @@ EvtScript N(EVS_NpcAI_MBush) = {
     EndIf
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEARCH_BUSH, SOUND_SPACE_DEFAULT)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(SetSelfVar, 10, LVar0)
@@ -42,8 +42,8 @@ EvtScript N(EVS_NpcAI_MBush) = {
         Wait(6)
         Call(InterpPlayerYaw, 90, 0)
     EndThread
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(EnableNpcShadow, NPC_SELF, true)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Add(LVar0, 25)
     Sub(LVar2, 5)
@@ -53,7 +53,7 @@ EvtScript N(EVS_NpcAI_MBush) = {
     Wait(2)
     Call(SetPlayerAnimation, ANIM_Mario1_Flail)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(StartBattle)
 }; // fallthrough :(
 
@@ -74,12 +74,12 @@ EvtScript N(EVS_NpcDefeat_MBush) = {
             Call(GetSelfVar, 11, LVar1)
             Call(GetSelfVar, 12, LVar2)
             Call(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 8)
-            Call(EnableNpcShadow, NPC_SELF, FALSE)
+            Call(EnableNpcShadow, NPC_SELF, false)
             Call(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim00)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
             Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_MBush)))
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return

@@ -27,8 +27,8 @@ EvtScript N(EVS_TetherCamToPlayer) = {
 };
 
 EvtScript N(EVS_UseSpring) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAUNCH)
     IfEq(MV_PlayerHeightLevel, 0)
         Set(LVar3, -275)
@@ -44,8 +44,8 @@ EvtScript N(EVS_UseSpring) = {
     KillThread(LVarA)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Wait(4)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

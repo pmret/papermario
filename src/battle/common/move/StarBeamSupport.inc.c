@@ -232,7 +232,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             }
             break;
         case PEACH_STAR_BEAM_FLY_TO_TARGET:
-            cond = FALSE;
+            cond = false;
             playerState->dist += (48.0f - playerState->dist) * 0.25f;
             N(BeamEffect)->data.peachStarBeam->circleRadius = playerState->dist;
             for (i = 0; i < 2; i++) {
@@ -251,7 +251,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
                         playerState->curPos.y += goalPosY - currentPosY;
                         playerState->curPos.z += goalPosZ - currentPosZ;
                     } else {
-                        cond = TRUE;
+                        cond = true;
                         if (N(SpiritsFlyDelay)[i] != 0) {
                             N(SpiritsFlyDelay)[i]--;
                         } else {
@@ -401,21 +401,21 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
                 script->functionTemp[FT_DELAY]--;
                 if (script->functionTemp[FT_DELAY] == 0) {
                     if (!script->functionTemp[FT_IS_PEACH_BEAM]) {
-                        sfx_stop_tracking_env_sound_pos(SOUND_LRAW_USE_STAR_BEAM, TRUE);
+                        sfx_stop_tracking_env_sound_pos(SOUND_LRAW_USE_STAR_BEAM, true);
                         sfx_play_sound(SOUND_LRAW_USE_STAR_BEAM | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     } else {
-                        sfx_stop_tracking_env_sound_pos(SOUND_LRAW_USE_PEACH_BEAM, TRUE);
+                        sfx_stop_tracking_env_sound_pos(SOUND_LRAW_USE_PEACH_BEAM, true);
                         sfx_play_sound(SOUND_LRAW_USE_PEACH_BEAM | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     }
                 }
             }
-            cond = FALSE;
+            cond = false;
             effectData = N(BeamEffect)->data.peachStarBeam;
             for (i = 0; i < ARRAY_COUNT(effectData->spirits); i++) {
                 if (script->functionTemp[FT_IS_PEACH_BEAM] || i != 0) {
                     spirit = &effectData->spirits[i];
                     if (N(SpiritsFlyAwayDelay)[i] >= 0) {
-                        cond = TRUE;
+                        cond = true;
                         if (N(SpiritsFlyAwayDelay)[i] != 0) {
                             N(SpiritsFlyAwayDelay)[i]--;
                         } else {
@@ -444,14 +444,14 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             }
 
             if (!script->functionTemp[FT_IS_PEACH_BEAM]) {
-                sfx_stop_tracking_env_sound_pos(SOUND_LRAW_USE_STAR_BEAM, FALSE);
+                sfx_stop_tracking_env_sound_pos(SOUND_LRAW_USE_STAR_BEAM, false);
             } else {
-                sfx_stop_tracking_env_sound_pos(SOUND_LRAW_USE_PEACH_BEAM, FALSE);
+                sfx_stop_tracking_env_sound_pos(SOUND_LRAW_USE_PEACH_BEAM, false);
             }
             script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_SPIRITS_SCATTER;
             break;
         case PEACH_STAR_BEAM_SPIRITS_SCATTER:
-            cond = FALSE;
+            cond = false;
             effectData = N(BeamEffect)->data.peachStarBeam;
             for (i = 0; i < ARRAY_COUNT(effectData->spirits);  i++) {
                 if (script->functionTemp[FT_IS_PEACH_BEAM] || i != 0) {
@@ -469,7 +469,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
                         spirit->lockedPos.y += goalPosY - currentPosY;
                         spirit->lockedPos.z += goalPosZ - currentPosZ;
                     } else {
-                        cond = TRUE;
+                        cond = true;
                         if (N(SpiritsFlyDelay)[i] != 0) {
                             N(SpiritsFlyDelay)[i]--;
                         } else {

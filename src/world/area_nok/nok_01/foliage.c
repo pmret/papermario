@@ -48,19 +48,19 @@ SearchBushConfig N(SearchBush_Bush3) = {
 FoliageModelList N(Bush6_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o390, MODEL_o396, MODEL_o397, MODEL_o398);
 
 EvtScript N(EVS_Bush6_HideFlowers) = {
-    Call(EnableModel, MODEL_o396, FALSE)
-    Call(EnableModel, MODEL_o397, FALSE)
-    Call(EnableModel, MODEL_o398, FALSE)
+    Call(EnableModel, MODEL_o396, false)
+    Call(EnableModel, MODEL_o397, false)
+    Call(EnableModel, MODEL_o398, false)
     Return
     End
 };
 
 EvtScript N(EVS_OnSearchBush6) = {
-    Call(EnableModel, MODEL_o396, TRUE)
+    Call(EnableModel, MODEL_o396, true)
     Wait(10)
-    Call(EnableModel, MODEL_o398, TRUE)
+    Call(EnableModel, MODEL_o398, true)
     Wait(10)
-    Call(EnableModel, MODEL_o397, TRUE)
+    Call(EnableModel, MODEL_o397, true)
     Return
     End
 };
@@ -145,19 +145,19 @@ FoliageDropList N(Bush1_Drops) = {
 };
 
 EvtScript N(EVS_Bush2_HideFlowers) = {
-    Call(EnableModel, MODEL_o399, FALSE)
-    Call(EnableModel, MODEL_o400, FALSE)
-    Call(EnableModel, MODEL_o401, FALSE)
+    Call(EnableModel, MODEL_o399, false)
+    Call(EnableModel, MODEL_o400, false)
+    Call(EnableModel, MODEL_o401, false)
     Return
     End
 };
 
 EvtScript N(EVS_OnSearchBush2) = {
-    Call(EnableModel, MODEL_o399, TRUE)
+    Call(EnableModel, MODEL_o399, true)
     Wait(10)
-    Call(EnableModel, MODEL_o401, TRUE)
+    Call(EnableModel, MODEL_o401, true)
     Wait(10)
-    Call(EnableModel, MODEL_o400, TRUE)
+    Call(EnableModel, MODEL_o400, true)
     Return
     End
 };

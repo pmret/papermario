@@ -11,15 +11,15 @@ BSS s32 N(FlowerGuard_ItemChoiceList)[ITEM_NUM_CONSUMABLES + 1];
 #include "world/area_flo/common/ItemChoice_FlowerGuard.inc.c"
 
 EvtScript N(EVS_NpcInteract_GateFlower) = {
-    Call(DisablePlayerInput, TRUE)
-    IfEq(GF_FLO23_GaveBlueBerry, FALSE)
+    Call(DisablePlayerInput, true)
+    IfEq(GF_FLO23_GaveBlueBerry, false)
         Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetCamDistance, CAM_DEFAULT, 350)
         Call(SetCamPitch, CAM_DEFAULT, Float(18.5), Float(-7.5))
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Call(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Talk, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_0049)
         Call(SetPlayerAnimation, ANIM_Mario1_Thinking)
@@ -65,7 +65,7 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
                             EndIf
                         EndLoop
                         Call(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_HappyDance)
-                        Set(GF_FLO23_GaveBlueBerry, TRUE)
+                        Set(GF_FLO23_GaveBlueBerry, true)
                     CaseEq(159)
                         Call(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_Chew, ANIM_GateFlower_Blue_Idle, 0, MSG_CH6_004C)
                         Call(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_Idle)
@@ -136,7 +136,7 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
             Call(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Blue_HappyTalk, ANIM_GateFlower_Blue_HappyIdle, 0, MSG_CH6_004F)
         EndIf
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Unbind
     Return
     End
@@ -144,7 +144,7 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
 
 EvtScript N(EVS_NpcInit_GateFlower) = {
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_GateFlower)))
-    IfEq(GF_FLO23_GaveBlueBerry, TRUE)
+    IfEq(GF_FLO23_GaveBlueBerry, true)
         Call(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Blue_HappyDance)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o95, COLLIDER_FLAGS_UPPER_MASK)
         Call(RotateModel, MODEL_o86, 50, 0, -1, 0)
@@ -176,7 +176,7 @@ NpcData N(NpcData_Spiny_01) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 80, 0, 0 },
@@ -198,7 +198,7 @@ NpcData N(NpcData_Spiny_02) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -320, 0, 0 },

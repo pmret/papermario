@@ -16,12 +16,12 @@ EvtScript N(EVS_TetherCamToPlayer) = {
 };
 
 EvtScript N(EVS_UseSpring_Exit) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_JUMP)
     Wait(1)
     ExecGetTID(N(EVS_TetherCamToPlayer), LVarA)
-    IfEq(AF_OMO_04, FALSE)
+    IfEq(AF_OMO_04, false)
         Call(N(EnableCameraFollowPlayerY_Spring))
         Thread
             Wait(6)
@@ -33,22 +33,22 @@ EvtScript N(EVS_UseSpring_Exit) = {
     Else
         Call(SetPlayerJumpscale, Float(1.0))
         Call(PlayerJump, -95, 0, 250, 25)
-        Set(AF_OMO_04, FALSE)
+        Set(AF_OMO_04, false)
     EndIf
     KillThread(LVarA)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Return
     End
 };
 
 EvtScript N(EVS_Scene_EnterSpring) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_JUMP)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Call(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
     Add(LVar1, 100)
     Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
@@ -66,14 +66,14 @@ EvtScript N(EVS_Scene_EnterSpring) = {
                 Call(NpcJump0, NPC_PARTNER, -150, 25, 250, 37)
                 Call(NpcJump0, NPC_PARTNER, -110, 0, 190, 20)
         EndSwitch
-        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
+        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, true)
         Call(EnablePartnerAI)
     EndThread
     Call(SetPlayerJumpscale, Float(0.7))
     Call(PlayerJump, -150, 25, 250, 25)
     KillThread(LVarA)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Return
     End

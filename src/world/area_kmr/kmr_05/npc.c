@@ -5,14 +5,14 @@
 #include "world/common/enemy/SpikedGoomba_Wander.inc.c"
 
 EvtScript N(EVS_GoompaRemark) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(10 * DT)
     Call(SetPlayerSpeed, Float(3.0 / DT))
     Call(PlayerMoveTo, -60, -19, 0)
     Call(DisablePartnerAI, 0)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00B7)
     Call(EnablePartnerAI)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -57,7 +57,7 @@ EvtScript N(EVS_NpcIdle_SpikedGoomba) = {
             Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
             Call(SetNpcSpeed, NPC_SELF, Float(5.0))
             Call(NpcJump0, NPC_SELF, 685, 100, -35, 0)
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, true)
             Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_SpikedGoomba_Wander)))
         CaseOrEq(102)
         CaseOrEq(3)
@@ -75,7 +75,7 @@ NpcData N(NpcData_Goomba_01) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_RECT,
             .centerPos  = { 305, 50, -13 },
@@ -98,7 +98,7 @@ NpcData N(NpcData_Goomba_02) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_RECT,
             .centerPos  = { 700, 210, -165 },
@@ -128,7 +128,7 @@ NpcData N(NpcData_SpikedGoomba) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_RECT,
             .centerPos  = { 630, 100, 25 },
@@ -152,7 +152,7 @@ NpcData N(NpcData_Paragoomba) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_RECT,
             .centerPos  = { 960, 210, -20 },

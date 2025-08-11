@@ -138,7 +138,7 @@ void render_effects_scene(void) {
 }
 
 void render_effects_UI(void) {
-    s32 cond = TRUE;
+    s32 cond = true;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
@@ -175,7 +175,7 @@ void render_effects_UI(void) {
                                               camera->viewportStartY + camera->viewportH);
                             gSPClipRatio(gMainGfxPos++, FRUSTRATIO_2);
 
-                            cond = FALSE;
+                            cond = false;
                             if (!(camera->flags & CAMERA_FLAG_ORTHO)) {
                                 gSPPerspNormalize(gMainGfxPos++, camera->perspNorm);
                                 gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],

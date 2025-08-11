@@ -108,7 +108,7 @@ EvtScript N(EVS_Init) = {
     Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
     Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
-    Call(SetActorVar, ACTOR_SELF, AVAR_HasBullet, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HasBullet, false)
     Return
     End
 };
@@ -119,7 +119,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -175,13 +175,13 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetActorVar, ACTOR_SELF, AVAR_HasBullet, LVar0)
     Switch(LVar0)
@@ -191,13 +191,13 @@ EvtScript N(EVS_TakeTurn) = {
             ExecWait(N(EVS_Move_CheckForBullet))
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 API_CALLABLE(N(SetBulletInitVars)) {
-    N(BombshellFormation)[0].var0 = TRUE;
+    N(BombshellFormation)[0].var0 = true;
     N(BombshellFormation)[0].var1 = script->owner1.actorID;
 
     return ApiStatus_DONE2;
@@ -219,9 +219,9 @@ EvtScript N(EVS_Move_FireBullet) = {
     PlayEffect(EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 2, 2, 0)
     Wait(2)
     Call(N(SetBulletInitVars))
-    Call(SummonEnemy, Ref(N(BombshellFormation)), FALSE)
+    Call(SummonEnemy, Ref(N(BombshellFormation)), false)
     Call(SetActorVar, ACTOR_SELF, AVAR_BulletID, LVar0)
-    Call(SetActorVar, ACTOR_SELF, AVAR_HasBullet, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HasBullet, true)
     Return
     End
 };
@@ -230,7 +230,7 @@ EvtScript N(EVS_Move_CheckForBullet) = {
     Call(GetActorVar, ACTOR_SELF, AVAR_BulletID, LVar0)
     Call(ActorExists, LVar0, LVar1)
     IfEq(LVar1, 0)
-        Call(SetActorVar, ACTOR_SELF, AVAR_HasBullet, FALSE)
+        Call(SetActorVar, ACTOR_SELF, AVAR_HasBullet, false)
     EndIf
     Return
     End

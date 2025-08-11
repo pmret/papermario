@@ -2,7 +2,7 @@
 #include "entity.h"
 
 EvtScript N(EVS_MakeToadHouseGifts) = {
-    IfEq(GF_SAM02_MushroomPresents, TRUE)
+    IfEq(GF_SAM02_MushroomPresents, true)
         Call(MakeItemEntity, ITEM_ULTRA_SHROOM, 350, 0, -120, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_SAM02_Item_UltraShroom)
         Call(MakeItemEntity, ITEM_MUSHROOM, 330, 0, -100, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_SAM02_Item_MushroomA)
         Call(MakeItemEntity, ITEM_MUSHROOM, 330, 0, -140, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_SAM02_Item_MushroomB)

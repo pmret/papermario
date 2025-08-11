@@ -51,9 +51,9 @@ EvtScript N(EVS_Scene_RotatingWall) = {
         EndLoop
     EndThread
     Thread
-        Call(EnableModel, MODEL_o182, TRUE)
-        Call(EnableModel, MODEL_o184, TRUE)
-        Call(EnableModel, MODEL_o186, TRUE)
+        Call(EnableModel, MODEL_o182, true)
+        Call(EnableModel, MODEL_o184, true)
+        Call(EnableModel, MODEL_o186, true)
         Call(MakeLerp, 8, 255, 40 * DT, EASING_LINEAR)
         Loop(0)
             Call(UpdateLerp)
@@ -65,7 +65,7 @@ EvtScript N(EVS_Scene_RotatingWall) = {
         EndLoop
     EndThread
     Wait(80 * DT)
-    Set(GF_KKJ14_SkipSecretPassage, TRUE)
+    Set(GF_KKJ14_SkipSecretPassage, true)
     Call(GotoMap, Ref("kkj_15"), kkj_15_ENTRY_1)
     Wait(100 * DT)
     Return
@@ -74,7 +74,7 @@ EvtScript N(EVS_Scene_RotatingWall) = {
 
 EvtScript N(EVS_UseRotatingWall) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PlayerMoveTo, -205, -10, 15 * DT)
     Call(InterpPlayerYaw, 270, 5)
     Wait(10 * DT)
@@ -87,14 +87,14 @@ EvtScript N(EVS_UseRotatingWall) = {
     Wait(10 * DT)
     Call(ShakeCam, CAM_DEFAULT, 0, 10, Float(1.0))
     ExecWait(N(EVS_Scene_RotatingWall))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_UseRotatingWall_FirstTime) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(FacePlayerTowardPoint, -222, 0, 5)
     Wait(10 * DT)
     Call(SetPlayerAnimation, ANIM_Peach3_ReachForButton)
@@ -119,15 +119,15 @@ EvtScript N(EVS_UseRotatingWall_FirstTime) = {
     EndThread
     Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(1.0))
     ExecWait(N(EVS_Scene_RotatingWall))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_SetupRotatingWall) = {
-    Call(EnableModel, MODEL_o182, FALSE)
-    Call(EnableModel, MODEL_o184, FALSE)
-    Call(EnableModel, MODEL_o186, FALSE)
+    Call(EnableModel, MODEL_o182, false)
+    Call(EnableModel, MODEL_o184, false)
+    Call(EnableModel, MODEL_o186, false)
     Call(SetModelCustomGfx, MODEL_o182, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
     Call(SetModelCustomGfx, MODEL_o184, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
     Call(SetModelCustomGfx, MODEL_o186, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)

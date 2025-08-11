@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitDoors_mim_11_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, obk_01_ENTRY_0)
     Set(LVar1, COLLIDER_tt1)
@@ -21,7 +21,7 @@ EvtScript N(EVS_ExitDoor_obk_02_0) = {
         Return
     EndIf
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, obk_01_ENTRY_1)
     Set(LVar1, COLLIDER_tt2)
@@ -41,7 +41,7 @@ EvtScript N(EVS_ExitDoor_obk_05_0) = {
         Exec(N(EVS_Scene_JumpScareBoo))
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, obk_01_ENTRY_2)
     Set(LVar1, COLLIDER_tt3)
@@ -61,7 +61,7 @@ EvtScript N(EVS_ExitDoor_obk_07_0) = {
         Exec(N(EVS_Scene_JumpScareBoo))
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, obk_01_ENTRY_3)
     Set(LVar1, COLLIDER_tt4)
@@ -81,7 +81,7 @@ EvtScript N(EVS_ExitDoor_obk_08_0) = {
         Exec(N(EVS_Scene_JumpScareBoo))
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, obk_01_ENTRY_4)
     Set(LVar1, COLLIDER_tt5)
@@ -97,7 +97,7 @@ EvtScript N(EVS_ExitDoor_obk_08_0) = {
 
 EvtScript N(EVS_ExitDoor_obk_09_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, obk_01_ENTRY_5)
     Set(LVar1, COLLIDER_tt6)
@@ -113,7 +113,7 @@ EvtScript N(EVS_ExitDoor_obk_09_0) = {
 
 EvtScript N(EVS_ExitDoor_obk_09_1) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, obk_01_ENTRY_6)
     Set(LVar1, COLLIDER_tt6_1)
@@ -151,8 +151,8 @@ EvtScript N(EVS_EnterMap) = {
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(obk_01_ENTRY_0)
-            IfEq(GF_OBK01_Visited, FALSE)
-                Set(GF_OBK01_Visited, TRUE)
+            IfEq(GF_OBK01_Visited, false)
+                Set(GF_OBK01_Visited, true)
                 Set(GB_StoryProgress, STORY_CH3_ENTERED_BOOS_MANSION)
             EndIf
             Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
@@ -194,8 +194,8 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_BOOS_MANSION)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Set(GF_MAP_BoosMansion, TRUE)
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Set(GF_MAP_BoosMansion, true)
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupChandelier))
     Exec(N(EVS_SetupPortrait))

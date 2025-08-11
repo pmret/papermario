@@ -13,7 +13,7 @@ s32 N(LeftDoorModelsR)[] = { MODEL_o861, -1 };
 
 EvtScript N(EVS_ExitDoors_pra_35_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_33_ENTRY_0)
     Set(LVar1, COLLIDER_deilittse)
     Set(LVar2, Ref(N(RightDoorModelsL)))
@@ -28,7 +28,7 @@ EvtScript N(EVS_ExitDoors_pra_35_0) = {
 
 EvtScript N(EVS_ExitDoors_pra_18_1) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_33_ENTRY_1)
     Set(LVar1, COLLIDER_deilittnw)
     Set(LVar2, Ref(N(LeftDoorModelsL)))
@@ -83,10 +83,10 @@ BombTrigger N(BombPos_Wall) = {
 };
 
 EvtScript N(EVS_BlastWall) = {
-    Set(GF_PRA33_BombedWall, TRUE)
+    Set(GF_PRA33_BombedWall, true)
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 2, 34, 1, 10, 30)
-    Call(EnableGroup, MODEL_g267, FALSE)
-    Call(EnableGroup, MODEL_g270, TRUE)
+    Call(EnableGroup, MODEL_g267, false)
+    Call(EnableGroup, MODEL_g270, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittne, COLLIDER_FLAGS_UPPER_MASK)
     Unbind
     Return
@@ -98,15 +98,15 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(SetCamBGColor, CAM_DEFAULT, 24, 24, 40)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
-    IfEq(GF_PRA33_BombedWall, FALSE)
+    IfEq(GF_PRA33_BombedWall, false)
         BindTrigger(Ref(N(EVS_BlastWall)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Wall)), 1, 0)
-        Call(EnableGroup, MODEL_g270, FALSE)
+        Call(EnableGroup, MODEL_g270, false)
     Else
-        Call(EnableGroup, MODEL_g267, FALSE)
+        Call(EnableGroup, MODEL_g267, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittne, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     Set(LVar0, MODEL_o945)

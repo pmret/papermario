@@ -17,7 +17,7 @@ NpcSettings N(NpcSettings_KoopaBros) = {
 #include "world/common/enemy/Bobomb_Wander.inc.c"
 
 EvtScript N(EVS_Scene_GreenKoopaBros) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Exec(N(EVS_StartKoopaBrosTheme))
     Call(DisablePartnerAI, 0)
     Call(SetNpcPos, NPC_PARTNER, -720, 0, 75)
@@ -30,7 +30,7 @@ EvtScript N(EVS_Scene_GreenKoopaBros) = {
         Call(SetCamDistance, CAM_DEFAULT, 320)
         Call(SetPanTarget, CAM_DEFAULT, -607, 0, 80)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Wait(10 * DT)
     Call(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Idle)
@@ -72,7 +72,7 @@ EvtScript N(EVS_Scene_GreenKoopaBros) = {
     Wait(15 * DT)
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_KoopaBros, ANIM_KoopaBros_Green_Talk, ANIM_KoopaBros_Green_Idle, 5, MSG_CH1_00D3)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
     Wait(10 * DT)
     Call(PlaySoundAtCollider, COLLIDER_ttw, SOUND_METAL_DOOR_OPEN, SOUND_SPACE_DEFAULT)
@@ -109,7 +109,7 @@ EvtScript N(EVS_Scene_GreenKoopaBros) = {
     Call(NpcMoveTo, NPC_KoopaBros, -300, 70, 0)
     Set(GB_StoryProgress, STORY_CH1_KOOPA_BROS_HID_KEY)
     Call(RemoveNpc, NPC_KoopaBros)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Exec(N(EVS_EndKoopaBrosTheme))
     Return
     End
@@ -164,9 +164,9 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
     Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Run)
     Call(SetNpcSpeed, NPC_SELF, Float(7.0))
     Call(NpcMoveTo, NPC_SELF, 35, -130, 0)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Call(NpcMoveTo, NPC_SELF, 90, -130, 0)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
     Call(NpcMoveTo, NPC_SELF, 105, 10, 0)
     Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaTroopa_Walk)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_KoopaTroopa_Wander)))
@@ -214,7 +214,7 @@ NpcData N(NpcData_KoopaTroopa_01) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -520, 0, 15 },
@@ -238,7 +238,7 @@ NpcData N(NpcData_KoopaTroopa_02) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -52, 0, -21 },
@@ -262,7 +262,7 @@ NpcData N(NpcData_KoopaTroopa_03) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 375, 0, 15 },

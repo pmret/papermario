@@ -96,11 +96,11 @@ EvtScript N(EVS_ManageSmallGeyser) = {
         IfEq(LVar1, 0)
             IfNe(LVarD, 0)
             EndIf
-            Call(EnableModel, LVarA, FALSE)
+            Call(EnableModel, LVarA, false)
         Else
             IfNe(LVarD, 0)
             EndIf
-            Call(EnableModel, LVarA, TRUE)
+            Call(EnableModel, LVarA, true)
             Call(ScaleModel, LVarA, LVar3, LVar2, LVar3)
         EndIf
         Wait(1)
@@ -127,7 +127,7 @@ EvtScript N(EVS_ManageLargeGeyser) = {
     Set(LVarD, LVar2) // central collider
     Set(LVar0, 0)
     Set(LVar1, 0)
-    IfEq(GF_JAN13_SolvedBlockPuzzle, TRUE)
+    IfEq(GF_JAN13_SolvedBlockPuzzle, true)
         Goto(10)
     EndIf
     Loop(0)
@@ -154,10 +154,10 @@ EvtScript N(EVS_ManageLargeGeyser) = {
             Set(LVar1, 70)
         EndIf
         IfEq(LVar1, 0)
-            Call(EnableModel, LVarA, FALSE)
+            Call(EnableModel, LVarA, false)
             Wait(1)
         Else
-            Call(EnableModel, LVarA, TRUE)
+            Call(EnableModel, LVarA, true)
             ExecWait(N(SetLargeGeyserScale))
         EndIf
         IfEq(AB_JAN_2, 2)
@@ -175,7 +175,7 @@ EvtScript N(EVS_ManageLargeGeyser) = {
         Else
             Wait(1)
         EndIf
-        IfNe(GF_JAN13_SolvedBlockPuzzle, FALSE)
+        IfNe(GF_JAN13_SolvedBlockPuzzle, false)
             BreakLoop
         EndIf
     EndLoop
@@ -204,10 +204,10 @@ EvtScript N(EVS_ManageLargeGeyser) = {
         Set(LVar1, 100)
     EndIf
     IfEq(LVar1, 0)
-        Call(EnableModel, LVarA, FALSE)
+        Call(EnableModel, LVarA, false)
         Wait(1)
     Else
-        Call(EnableModel, LVarA, TRUE)
+        Call(EnableModel, LVarA, true)
         ExecWait(N(SetLargeGeyserScale))
     EndIf
     Goto(10)
@@ -227,11 +227,11 @@ Vec3i N(GeyserSoundPositions)[] = {
 EvtScript N(EVS_ManageGeyserSounds) = {
     IfNe(AB_JAN13_LastPuzzleProgress, MV_PuzzleProgress)
         Set(AB_JAN13_LastPuzzleProgress, MV_PuzzleProgress)
-        Set(MF_GeyserSoundPlaying, FALSE)
+        Set(MF_GeyserSoundPlaying, false)
         Call(StopSound, SOUND_LOOP_JAN_SMALL_GEYSER)
         Call(StopSound, SOUND_LOOP_JAN_LARGE_GEYSER)
         IfEq(MV_PuzzleProgress, 5)
-            IfEq(GF_JAN13_SolvedBlockPuzzle, FALSE)
+            IfEq(GF_JAN13_SolvedBlockPuzzle, false)
                 Return
             EndIf
         Else
@@ -240,7 +240,7 @@ EvtScript N(EVS_ManageGeyserSounds) = {
             EndIf
         EndIf
         Call(PlaySound, SOUND_LOOP_JAN_SMALL_GEYSER)
-        Set(MF_GeyserSoundPlaying, TRUE)
+        Set(MF_GeyserSoundPlaying, true)
         Set(LVar0, MV_PuzzleProgress)
         Add(LVar0, 1)
         UseBuf(Ref(N(GeyserSoundPositions)))
@@ -261,14 +261,14 @@ EvtScript N(EVS_BoulderTremble) = {
 };
 
 EvtScript N(EVS_ManagePuzzle) = {
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Set(AB_JAN_2, 0)
     Set(AB_JAN13_LastPuzzleProgress, -1)
     Exec(N(EVS_ManageGeyserSounds))
     Label(0)
-        IfEq(GF_JAN13_SolvedBlockPuzzle, TRUE)
-            IfEq(LFlag0, FALSE)
-                Call(EnableModel, MODEL_o33, FALSE)
+        IfEq(GF_JAN13_SolvedBlockPuzzle, true)
+            IfEq(LFlag0, false)
+                Call(EnableModel, MODEL_o33, false)
                 Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o33, COLLIDER_FLAGS_UPPER_MASK)
                 Call(SetPushBlock, 0, 15, 0, PUSH_GRID_EMPTY)
                 Call(SetPushBlock, 0, 16, 0, PUSH_GRID_EMPTY)
@@ -285,7 +285,7 @@ EvtScript N(EVS_ManagePuzzle) = {
                 Call(SetPushBlock, 0, 17, 2, PUSH_GRID_EMPTY)
                 Call(SetPushBlock, 0, 18, 2, PUSH_GRID_EMPTY)
                 Call(SetPushBlock, 0, 19, 2, PUSH_GRID_EMPTY)
-                Set(LFlag0, TRUE)
+                Set(LFlag0, true)
             EndIf
         EndIf
         Call(GetPushBlock, 0, POS_0_I, POS_0_J, LVar0)
@@ -313,8 +313,8 @@ EvtScript N(EVS_ManagePuzzle) = {
             Set(MV_PuzzleProgress, 4)
             Goto(1)
         EndIf
-        IfEq(GF_JAN13_SolvedBlockPuzzle, FALSE)
-            Call(DisablePlayerInput, TRUE)
+        IfEq(GF_JAN13_SolvedBlockPuzzle, false)
+            Call(DisablePlayerInput, true)
             Call(SetPushBlock, 0, 15, 0, PUSH_GRID_EMPTY)
             Call(SetPushBlock, 0, 16, 0, PUSH_GRID_EMPTY)
             Call(SetPushBlock, 0, 17, 0, PUSH_GRID_EMPTY)
@@ -358,7 +358,7 @@ EvtScript N(EVS_ManagePuzzle) = {
                 Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
                 Call(SetCamDistance, CAM_DEFAULT, 400)
                 Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
             EndThread
             Loop(3)
                 Exec(N(EVS_BoulderTremble))
@@ -431,12 +431,12 @@ EvtScript N(EVS_ManagePuzzle) = {
                 Call(RotateModel, MODEL_o33, LVar2, -1, Float(0.1), Float(0.1))
                 Wait(1)
             EndLoop
-            Call(EnableModel, MODEL_o33, FALSE)
+            Call(EnableModel, MODEL_o33, false)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o33, COLLIDER_FLAGS_UPPER_MASK)
-            Set(GF_JAN13_SolvedBlockPuzzle, TRUE)
-            Set(LFlag0, TRUE)
+            Set(GF_JAN13_SolvedBlockPuzzle, true)
+            Set(LFlag0, true)
             Call(ResetCam, CAM_DEFAULT, Float(5.0))
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
         Else
             Call(GetPushBlock, 0, 17, 0, LVar0)
             IfEq(LVar0, 0)
@@ -523,7 +523,7 @@ EvtScript N(EVS_ManageGeyserPlayerPhysics) = {
         EndIf
         // player is standing in a geyser
         IfEq(LVar5, 1)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(N(GetPlayerPosAfterPush))
             Call(InterruptUsePartner)
             Loop(10)
@@ -542,7 +542,7 @@ EvtScript N(EVS_ManageGeyserPlayerPhysics) = {
                 Wait(1)
             EndLoop
             Call(SetPlayerAnimation, ANIM_Mario1_Idle)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
         EndIf
         Wait(1)
     EndLoop
@@ -654,12 +654,12 @@ EvtScript N(EVS_SetupPuzzle) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar2, COLLIDER_FLAGS_UPPER_MASK)
     Exec(N(EVS_ManageLargeGeyser))
     Exec(N(EVS_ManageGeyserPlayerPhysics))
-    Call(EnableTexPanning, MODEL_o72, TRUE)
-    Call(EnableTexPanning, MODEL_o73, TRUE)
-    Call(EnableTexPanning, MODEL_o74, TRUE)
-    Call(EnableTexPanning, MODEL_o75, TRUE)
-    Call(EnableTexPanning, MODEL_o76, TRUE)
-    Call(EnableTexPanning, MODEL_o71, TRUE)
+    Call(EnableTexPanning, MODEL_o72, true)
+    Call(EnableTexPanning, MODEL_o73, true)
+    Call(EnableTexPanning, MODEL_o74, true)
+    Call(EnableTexPanning, MODEL_o75, true)
+    Call(EnableTexPanning, MODEL_o76, true)
+    Call(EnableTexPanning, MODEL_o71, true)
     Call(SetModelCustomGfx, MODEL_o72, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
     Call(SetModelCustomGfx, MODEL_o73, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
     Call(SetModelCustomGfx, MODEL_o74, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)

@@ -184,10 +184,10 @@ EvtScript N(EVS_ProvideDemoInputs) = {
     Call(DemoJoystickXY, -31, 76)
     Wait(51)
     Call(DemoJoystickXY, -29, 76)
-    IfEq(GF_DemoSceneDone, TRUE)
+    IfEq(GF_DemoSceneDone, true)
         Return
     EndIf
-    Set(GF_DemoSceneDone, TRUE)
+    Set(GF_DemoSceneDone, true)
     Call(GotoMapSpecial, Ref("kkj_11"), kkj_11_ENTRY_2, TRANSITION_END_DEMO_SCENE_BLACK)
     Wait(110)
     Return
@@ -203,10 +203,10 @@ EvtScript N(EVS_MonitorDemoState) = {
         EndIf
         Wait(1)
     EndLoop
-    IfEq(GF_DemoSceneDone, TRUE)
+    IfEq(GF_DemoSceneDone, true)
         Return
     EndIf
-    Set(GF_DemoSceneDone, TRUE)
+    Set(GF_DemoSceneDone, true)
     Call(GotoMapSpecial, Ref("kkj_11"), kkj_11_ENTRY_2, TRANSITION_END_DEMO_SCENE_WHITE)
     Wait(100)
     Return
@@ -214,7 +214,7 @@ EvtScript N(EVS_MonitorDemoState) = {
 };
 
 EvtScript N(EVS_PlayDemoScene) = {
-    Set(GF_DemoSceneDone, FALSE)
+    Set(GF_DemoSceneDone, false)
     Exec(N(EVS_MonitorDemoState))
     Exec(N(EVS_ProvideDemoInputs))
     Return

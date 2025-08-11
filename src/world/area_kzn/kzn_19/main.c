@@ -10,8 +10,8 @@ EvtScript N(EVS_TrySpawningStarCard) = {
     // determine if card should be spawned
     Switch(GB_StoryProgress)
         CaseEq(STORY_CH5_KOLORADO_IN_TREASURE_ROOM)
-            Set(LVar0, FALSE)
-            IfEq(MV_BossDefeated, FALSE)
+            Set(LVar0, false)
+            IfEq(MV_BossDefeated, false)
                 Return
             EndIf
             Set(GB_StoryProgress, STORY_CH5_DEFEATED_LAVA_PIRANHA)
@@ -20,18 +20,18 @@ EvtScript N(EVS_TrySpawningStarCard) = {
             IfEq(LVar0, kzn_19_ENTRY_3)
                 Return
             EndIf
-            Set(LVar0, TRUE)
+            Set(LVar0, true)
         CaseDefault
             Return
     EndSwitch
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         // card appearing scene
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(UseSettingsFrom, CAM_DEFAULT, 185, 110, -30)
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.44))
         Call(SetPanTarget, CAM_DEFAULT, 185, 55, -30)
         EVT_SPIRIT_ADJUST_CAM(10000)
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(N(StarSpiritEffectFunc2), 4, 180, 304, 15, -54, 185, 110, -30, 55, 25)
         Thread
             Call(N(StarSpiritEffectFunc3))
@@ -66,8 +66,8 @@ EvtScript N(EVS_TrySpawningStarCard) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
         Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-        Call(DisablePlayerInput, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
+        Call(DisablePlayerInput, false)
     Else
         // just make the card spawn
         Call(N(StarSpiritEffectFunc5), 4, 185, 55, -30, 25)
@@ -79,7 +79,7 @@ EvtScript N(EVS_TrySpawningStarCard) = {
     // wait for pickup
     Call(N(StarSpiritEffectFunc4), 3)
     Call(PlaySoundAtPlayer, SOUND_RESCUE_STAR_SPIRIT, SOUND_SPACE_DEFAULT)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GotoMapSpecial, Ref("kmr_23"), kmr_23_ENTRY_4, TRANSITION_GET_STAR_CARD)
     Wait(100)
     Return
@@ -101,8 +101,8 @@ EvtScript N(EVS_BindExitTriggers) = {
 EvtScript N(EVS_StartTexPanners_Lava) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTexPanner, MODEL_yougan1_1, TEX_PANNER_2)
-    Call(EnableTexPanning, MODEL_toro, TRUE)
-    Call(EnableTexPanning, MODEL_poko, TRUE)
+    Call(EnableTexPanning, MODEL_toro, true)
+    Call(EnableTexPanning, MODEL_poko, true)
     Call(SetTexPanner, MODEL_poko1, TEX_PANNER_E)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_2)
@@ -174,9 +174,9 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
     Call(GetEntryID, LVar0)
     IfEq(LVar0, kzn_19_ENTRY_3)
-        Call(MakeNpcs, TRUE, Ref(N(EscapeNPCs)))
+        Call(MakeNpcs, true, Ref(N(EscapeNPCs)))
     Else
-        Call(MakeNpcs, TRUE, Ref(N(BossNPCs)))
+        Call(MakeNpcs, true, Ref(N(BossNPCs)))
     EndIf
     ExecWait(N(EVS_MakeEntities))
     Call(GetEntryID, LVar0)
@@ -192,19 +192,19 @@ EvtScript N(EVS_Main) = {
     EndIf
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH5_DEFEATED_LAVA_PIRANHA)
-            Call(EnableGroup, MODEL_ato, FALSE)
-            Call(EnableGroup, MODEL_naka, FALSE)
-            Call(EnableGroup, MODEL_g93, FALSE)
+            Call(EnableGroup, MODEL_ato, false)
+            Call(EnableGroup, MODEL_naka, false)
+            Call(EnableGroup, MODEL_g93, false)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ato, COLLIDER_FLAGS_UPPER_MASK)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_hoshi_ato, COLLIDER_FLAGS_UPPER_MASK)
         CaseEq(STORY_CH5_DEFEATED_LAVA_PIRANHA)
-            Call(EnableGroup, MODEL_mae, FALSE)
-            Call(EnableGroup, MODEL_g93, FALSE)
+            Call(EnableGroup, MODEL_mae, false)
+            Call(EnableGroup, MODEL_g93, false)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mae, COLLIDER_FLAGS_UPPER_MASK)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_hoshi_ato, COLLIDER_FLAGS_UPPER_MASK)
         CaseGt(STORY_CH5_DEFEATED_LAVA_PIRANHA)
-            Call(EnableGroup, MODEL_mae, FALSE)
-            Call(EnableGroup, MODEL_naka, FALSE)
+            Call(EnableGroup, MODEL_mae, false)
+            Call(EnableGroup, MODEL_naka, false)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mae, COLLIDER_FLAGS_UPPER_MASK)
     EndSwitch
     Exec(N(EVS_StartTexPanners_Lava))

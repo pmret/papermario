@@ -27,8 +27,8 @@ EvtScript N(EVS_NpcIdle_FuzzyBoss) = {
         IfGt(LVar3, 1200)
             Call(SetNpcPos, NPC_Fuzzy_03, NPC_DISPOSE_LOCATION)
             Call(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
-            Call(EnableNpcShadow, NPC_Fuzzy_03, FALSE)
-            Call(EnableNpcShadow, NPC_KoopersShell, FALSE)
+            Call(EnableNpcShadow, NPC_Fuzzy_03, false)
+            Call(EnableNpcShadow, NPC_KoopersShell, false)
             Return
         EndIf
         Wait(1)
@@ -65,7 +65,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy_01) = {
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
     Call(SetNpcJumpscale, NPC_SELF, Float(1.8))
     Call(NpcJump0, NPC_SELF, -341, 0, 23, 15)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, true)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Fuzzy_Wander)))
     Return
     End
@@ -83,7 +83,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy_02) = {
     Set(LVar1, 0)
     Call(SetNpcJumpscale, NPC_SELF, Float(3.0))
     Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 6)
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, true)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Fuzzy_Wander)))
     Return
     End
@@ -91,26 +91,26 @@ EvtScript N(EVS_NpcIdle_Fuzzy_02) = {
 
 EvtScript N(EVS_NpcInit_Fuzzy_01) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Fuzzy_01)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Fuzzy_02) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Fuzzy_02)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_FuzzyBoss) = {
     IfGe(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_RAN_AWAY)
-        Call(SetNpcFlagBits, NPC_Fuzzy_03, NPC_FLAG_GRAVITY, FALSE)
-        Call(SetNpcFlagBits, NPC_KoopersShell, NPC_FLAG_GRAVITY, FALSE)
+        Call(SetNpcFlagBits, NPC_Fuzzy_03, NPC_FLAG_GRAVITY, false)
+        Call(SetNpcFlagBits, NPC_KoopersShell, NPC_FLAG_GRAVITY, false)
         Call(SetNpcPos, NPC_Fuzzy_03, NPC_DISPOSE_LOCATION)
         Call(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
-        Call(EnableNpcShadow, NPC_Fuzzy_03, FALSE)
-        Call(EnableNpcShadow, NPC_KoopersShell, FALSE)
+        Call(EnableNpcShadow, NPC_Fuzzy_03, false)
+        Call(EnableNpcShadow, NPC_KoopersShell, false)
         Return
     EndIf
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_FuzzyBoss)))
@@ -119,7 +119,7 @@ EvtScript N(EVS_NpcInit_FuzzyBoss) = {
 };
 
 EvtScript N(EVS_NpcInit_KoopersShell) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKooper_StillShellAlt)
     Return
     End
@@ -131,7 +131,7 @@ NpcData N(NpcData_Fuzzy_01) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -388, 100, -107 },
@@ -155,7 +155,7 @@ NpcData N(NpcData_Fuzzy_02) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -76, 118, -43 },
@@ -180,7 +180,7 @@ NpcData N(NpcData_FuzzyBoss)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 0, 0, 0 },

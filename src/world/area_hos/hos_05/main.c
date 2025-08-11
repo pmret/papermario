@@ -17,9 +17,9 @@ EvtScript N(EVS_Main) = {
     SetUP_CAMERA_ALT_NO_LEAD()
     Call(GetEntryID, LVar0)
     IfEq(LVar0, hos_05_ENTRY_3)
-        Call(MakeNpcs, FALSE, Ref(N(IntroNPCs)))
+        Call(MakeNpcs, false, Ref(N(IntroNPCs)))
     Else
-        Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+        Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     EndIf
     Exec(N(EVS_SetupStarshipAndWater))
     ExecWait(N(EVS_SetupMusic))
@@ -39,8 +39,8 @@ EvtScript N(EVS_Main) = {
             ExecWait(N(EVS_Intro_Main))
     EndSwitch
     Exec(N(EVS_SetupNarrator))
-    Call(EnableGroup, MODEL_g277, FALSE)
-    Call(EnableGroup, MODEL_g279, FALSE)
+    Call(EnableGroup, MODEL_g277, false)
+    Call(EnableGroup, MODEL_g279, false)
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseRange(hos_05_ENTRY_0, hos_05_ENTRY_1)

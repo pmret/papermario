@@ -2,7 +2,7 @@
 
 EvtScript N(D_80241140_ABC3D0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
     Set(LVar0, kkj_00_ENTRY_1)
     Set(LVar1, COLLIDER_ttn)
@@ -18,7 +18,7 @@ EvtScript N(D_80241140_ABC3D0) = {
 
 EvtScript N(D_802411F4_ABC484) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_00_ENTRY_3)
     Set(LVar1, COLLIDER_ttne)
@@ -33,24 +33,24 @@ EvtScript N(D_802411F4_ABC484) = {
 };
 
 EvtScript N(EVS_ShowMessage_CantOpen) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_DoesntOpen, 160, 40)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(D_802412F0_ABC580) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(EnableNpcAI, NPC_Luigi, FALSE)
-    Call(EnableNpcAI, NPC_Toad_01, FALSE)
+    Call(DisablePlayerInput, true)
+    Call(EnableNpcAI, NPC_Luigi, false)
+    Call(EnableNpcAI, NPC_Toad_01, false)
     Call(SetNpcAnimation, NPC_Luigi, ANIM_Luigi_Idle)
     Call(SetNpcAnimation, NPC_Toad_01, ANIM_Toad_Red_Idle)
     Wait(10)
     Call(SpeakToPlayer, NPC_Luigi, ANIM_Luigi_Talk, ANIM_Luigi_Idle, 16, MSG_Intro_0026)
-    Call(EnableNpcAI, NPC_Luigi, TRUE)
-    Call(EnableNpcAI, NPC_Toad_01, TRUE)
-    Call(DisablePlayerInput, FALSE)
+    Call(EnableNpcAI, NPC_Luigi, true)
+    Call(EnableNpcAI, NPC_Toad_01, true)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -147,12 +147,12 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
     IfEq(GB_StoryProgress, STORY_INTRO)
-        Call(MakeNpcs, FALSE, Ref(N(IntroNPCs)))
+        Call(MakeNpcs, false, Ref(N(IntroNPCs)))
     Else
-        Call(MakeNpcs, FALSE, Ref(N(EndingNPCs)))
+        Call(MakeNpcs, false, Ref(N(EndingNPCs)))
     EndIf
-    Call(EnableGroup, MODEL_g2, FALSE)
-    Call(EnableGroup, MODEL_g51, FALSE)
+    Call(EnableGroup, MODEL_g2, false)
+    Call(EnableGroup, MODEL_g51, false)
     IfEq(GB_StoryProgress, STORY_INTRO)
         Call(SetMusic, 0, SONG_PEACHS_CASTLE_PARTY, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Else

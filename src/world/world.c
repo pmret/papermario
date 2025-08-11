@@ -192,7 +192,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     reset_battle_status();
     clear_encounter_status();
-    clear_entity_data(TRUE);
+    clear_entity_data(true);
     clear_effect_data();
     clear_player_status();
     player_reset_data();
@@ -256,12 +256,12 @@ s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID) {
             if (strcmp(maps[j].id, mapName) == 0) {
                 *areaID = i;
                 *mapID = j;
-                return TRUE;
+                return true;
             }
         }
     }
 
-    return FALSE;
+    return false;
 }
 
 void* load_asset_by_name(const char* assetName, u32* decompressedSize) {

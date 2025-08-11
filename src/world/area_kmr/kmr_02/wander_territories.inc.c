@@ -6,7 +6,7 @@ EnemyTerritoryWander N(WanderTerritory0) = {
     .detectPos = { 0, 0, 0 },
     .detectSize = { 0, 0 },
     .detectShape = SHAPE_CYLINDER,
-    .isFlying = TRUE,
+    .isFlying = true,
 };
 
 EnemyTerritoryWander N(WanderTerritory1) = {
@@ -17,7 +17,7 @@ EnemyTerritoryWander N(WanderTerritory1) = {
     .detectPos = { 0, 0, 0 },
     .detectSize = { 0, 0 },
     .detectShape = SHAPE_CYLINDER,
-    .isFlying = TRUE,
+    .isFlying = true,
 };
 
 EnemyTerritoryWander N(WanderTerritory2) = {
@@ -28,7 +28,7 @@ EnemyTerritoryWander N(WanderTerritory2) = {
     .detectPos = { 0, 0, 0 },
     .detectSize = { 0, 0 },
     .detectShape = SHAPE_CYLINDER,
-    .isFlying = TRUE,
+    .isFlying = true,
 };
 
 EnemyTerritoryWander N(WanderTerritory3) = {
@@ -39,7 +39,7 @@ EnemyTerritoryWander N(WanderTerritory3) = {
     .detectPos = { 0, 0, 0 },
     .detectSize = { 0, 0 },
     .detectShape = SHAPE_CYLINDER,
-    .isFlying = TRUE,
+    .isFlying = true,
 };
 
 EnemyTerritoryWander* N(WanderTerritories)[] = {

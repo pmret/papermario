@@ -31,7 +31,7 @@ EvtScript N(EVS_NpcDefeat_FlyingMagikoopa) = {
         CaseEq(OUTCOME_PLAYER_FLED)
             Call(OnPlayerFled, 0)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -98,7 +98,7 @@ EvtScript N(EVS_NpcDefeat_FlyingMagikoopa_Hitbox) = {
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             Call(OnPlayerFled, 1)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return

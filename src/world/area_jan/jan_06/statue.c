@@ -116,7 +116,7 @@ EvtScript N(ItemPrompt_Statue) = {
         Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(RemoveKeyItemAt, LVar1)
     Call(MakeItemEntity, ITEM_JADE_RAVEN, 0, 15, -400, ITEM_SPAWN_MODE_DECORATION, 0)
     Set(MV_JadeRavenItemIdx, LVar0)
@@ -128,7 +128,7 @@ EvtScript N(ItemPrompt_Statue) = {
     Wait(10)
     ExecWait(N(EVS_Scene_MoveStatue))
     Set(GB_StoryProgress, STORY_CH5_MOVED_RAVEN_STATUE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

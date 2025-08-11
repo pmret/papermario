@@ -6,19 +6,19 @@ EvtScript N(EVS_InitFakeBowser) = {
 };
 
 EvtScript N(EVS_HideFakeBowser) = {
-    Call(EnableGroup, MODEL_atama, FALSE)
-    Call(EnableGroup, MODEL_left_arm, FALSE)
-    Call(EnableGroup, MODEL_shippo, FALSE)
-    Call(EnableGroup, MODEL_dou, FALSE)
-    Call(EnableGroup, MODEL_koura, FALSE)
-    Call(EnableGroup, MODEL_koma1, FALSE)
-    Call(EnableGroup, MODEL_koma2, FALSE)
-    Call(EnableModel, MODEL_o171, FALSE)
-    Call(EnableModel, MODEL_o172, FALSE)
-    Call(EnableModel, MODEL_o183, FALSE)
-    Call(EnableModel, MODEL_o118, FALSE)
-    Call(EnableModel, MODEL_o120, FALSE)
-    Call(EnableModel, MODEL_o165, FALSE)
+    Call(EnableGroup, MODEL_atama, false)
+    Call(EnableGroup, MODEL_left_arm, false)
+    Call(EnableGroup, MODEL_shippo, false)
+    Call(EnableGroup, MODEL_dou, false)
+    Call(EnableGroup, MODEL_koura, false)
+    Call(EnableGroup, MODEL_koma1, false)
+    Call(EnableGroup, MODEL_koma2, false)
+    Call(EnableModel, MODEL_o171, false)
+    Call(EnableModel, MODEL_o172, false)
+    Call(EnableModel, MODEL_o183, false)
+    Call(EnableModel, MODEL_o118, false)
+    Call(EnableModel, MODEL_o120, false)
+    Call(EnableModel, MODEL_o165, false)
     Return
     End
 };
@@ -44,9 +44,9 @@ EvtScript N(EVS_SetModelsPos) = {
 EvtScript N(EVS_RevealFakeBowser) = {
     Set(LVar0, 100)
     ExecWait(N(EVS_SetModelsPos))
-    Set(AF_TRD_FakeBowserRevealed, FALSE)
+    Set(AF_TRD_FakeBowserRevealed, false)
     Label(0)
-        IfEq(AF_TRD_FakeBowserRevealed, FALSE)
+        IfEq(AF_TRD_FakeBowserRevealed, false)
             Wait(1)
             Goto(0)
         EndIf

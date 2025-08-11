@@ -57,7 +57,7 @@ EvtScript N(EVS_GetPartnerInUseAnims) = {
 EvtScript N(EVS_CrushPlayer) = {
     Thread
         Call(DisablePartnerAI, 0)
-        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
         ExecWait(N(EVS_GetPartnerInUseAnims))
         Call(SetNpcAnimation, NPC_PARTNER, LVarA)
@@ -65,10 +65,10 @@ EvtScript N(EVS_CrushPlayer) = {
         ExecWait(N(EVS_GetPartnerInUseAnims))
         Call(SetNpcAnimation, NPC_PARTNER, LVarB)
         Wait(15)
-        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
         Call(InterpNpcYaw, NPC_PARTNER, 270, 0)
     EndThread
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Wait(8)
     Call(SetPlayerAnimation, ANIM_Mario1_Flail)
     Wait(13)
@@ -113,7 +113,7 @@ EvtScript N(EVS_RestorePlayer) = {
     Wait(25)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Call(EnablePartnerAI)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerPhysics, false)
     Return
     End
 };
@@ -195,16 +195,16 @@ EvtScript N(EVS_Interact_MiddleCabinet) = {
         Call(DeleteTrigger, MV_Trigger_FarCabinet)
         Exec(N(EVS_Scene_BoosUnleashed))
         ExecWait(N(EVS_MiddleCabinet_OpenDoors))
-        Set(AF_OBK08_KeepAwayStarted, TRUE)
+        Set(AF_OBK08_KeepAwayStarted, true)
         Wait(50)
         ExecWait(N(EVS_MiddleCabinet_CloseDoors))
     Else
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(InterruptUsePartner)
         ExecWait(N(EVS_MiddleCabinet_OpenDoors))
         Wait(20)
         ExecWait(N(EVS_MiddleCabinet_CloseDoors))
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndIf
     Return
     End
@@ -212,7 +212,7 @@ EvtScript N(EVS_Interact_MiddleCabinet) = {
 
 EvtScript N(EVS_Interact_NearCabinet) = {
     Label(3)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(InterruptUsePartner)
     Loop(3)
         Call(PlaySoundAtCollider, COLLIDER_tansu1, SOUND_OBK_CHECK_CABINET, SOUND_SPACE_DEFAULT)
@@ -260,14 +260,14 @@ EvtScript N(EVS_Interact_NearCabinet) = {
         Goto(15)
     EndIf
     ExecWait(N(EVS_RestorePlayer))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Interact_FarCabinet) = {
     Label(5)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(InterruptUsePartner)
     Loop(5)
         Call(PlaySoundAtCollider, COLLIDER_tansu3, SOUND_OBK_CHECK_CABINET, SOUND_SPACE_DEFAULT)
@@ -315,7 +315,7 @@ EvtScript N(EVS_Interact_FarCabinet) = {
         Goto(25)
     EndIf
     ExecWait(N(EVS_RestorePlayer))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

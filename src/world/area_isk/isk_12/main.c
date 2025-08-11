@@ -19,10 +19,10 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_ISK_12)
     SetUP_CAMERA_NO_LEAD()
     IfLt(GB_StoryProgress, STORY_CH2_DRAINED_THIRD_SAND_ROOM)
-        Call(SetZoneEnabled, ZONE_deiliw, FALSE)
+        Call(SetZoneEnabled, ZONE_deiliw, false)
     Else
-        Call(SetZoneEnabled, ZONE_deiliw, FALSE)
-        Call(SetZoneEnabled, ZONE_on, FALSE)
+        Call(SetZoneEnabled, ZONE_deiliw, false)
+        Call(SetZoneEnabled, ZONE_on, false)
     EndIf
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupSand))

@@ -67,13 +67,13 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_SHOOTING_STAR_SUMMIT)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    Set(GF_MAP_ShootingStarSummit, TRUE)
-    Set(GF_MAC01_RowfBadgesChosen, FALSE)
+    Set(GF_MAP_ShootingStarSummit, true)
+    Set(GF_MAC01_RowfBadgesChosen, false)
     Call(GetEntryID, LVar0)
     IfEq(LVar0, hos_00_ENTRY_3)
-        Call(MakeNpcs, FALSE, Ref(N(WishingNPCs)))
+        Call(MakeNpcs, false, Ref(N(WishingNPCs)))
     Else
-        Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+        Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     EndIf
     ExecWait(N(EVS_MakeEntities))
     Call(GetEntryID, LVar0)
@@ -82,9 +82,9 @@ EvtScript N(EVS_Main) = {
     EndIf
     ExecWait(N(EVS_SetupMusic))
     IfEq(GB_StoryProgress, STORY_CH0_BEGAN_PEACH_MISSION)
-        IfEq(AF_HOS_B4, FALSE)
+        IfEq(AF_HOS_B4, false)
             Wait(50)
-            Set(AF_HOS_B4, TRUE)
+            Set(AF_HOS_B4, true)
         EndIf
         Exec(N(EVS_Scene_MeetingTwink))
     EndIf

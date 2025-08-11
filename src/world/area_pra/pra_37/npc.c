@@ -4,7 +4,7 @@
 #include "world/common/enemy/FrostClubba_Multi.inc.c"
 
 EvtScript N(EVS_NpcInit_FrostClubba) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_REFLECT_FLOOR, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_REFLECT_FLOOR, true)
     Return
     End
 };
@@ -16,7 +16,7 @@ NpcData N(NpcData_FrostClubba)[] = {
         .yaw = 90,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 175, 0, 75 },

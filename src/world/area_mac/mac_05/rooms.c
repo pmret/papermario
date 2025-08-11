@@ -46,14 +46,14 @@ EvtScript N(D_802525B0_864720) = {
 #if !VERSION_JP
             Call(StopTrackingSoundPos, SOUND_LRAW_MAC_HARBOR_WATER)
 #endif
-            Call(EnableGroup, MODEL_bar_inn, TRUE)
-            Call(EnableModel, MODEL_o139, FALSE)
-            Call(EnableModel, MODEL_o140, FALSE)
+            Call(EnableGroup, MODEL_bar_inn, true)
+            Call(EnableModel, MODEL_o139, false)
+            Call(EnableModel, MODEL_o140, false)
         CaseEq(3)
-            Set(MF_DivaSinging, FALSE)
-            Call(EnableGroup, MODEL_bar_inn, FALSE)
-            Call(EnableModel, MODEL_o139, TRUE)
-            Call(EnableModel, MODEL_o140, TRUE)
+            Set(MF_DivaSinging, false)
+            Call(EnableGroup, MODEL_bar_inn, false)
+            Call(EnableModel, MODEL_o139, true)
+            Call(EnableModel, MODEL_o140, true)
             Wait(5)
             Exec(N(EVS_SetupMusic))
     EndSwitch

@@ -93,5 +93,5 @@ char* is_debug_print(char* arg0, const char* str, size_t count) {
 
 void is_debug_panic(const char* message, char* file, s32 line) {
     osSyncPrintf("File:%s Line:%d  %s \n", file, line, message);
-    do {} while (TRUE);
+    do {} while (true);
 }

@@ -6,13 +6,13 @@
 #include "world/common/entity/SuperBlock.inc.c"
 
 EvtScript N(EVS_OnSmashBlock) = {
-    Set(GF_IWA10_Hammer1Block, TRUE)
+    Set(GF_IWA10_Hammer1Block, true)
     Return
     End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_IWA10_Hammer1Block, FALSE)
+    IfEq(GF_IWA10_Hammer1Block, false)
         Call(MakeEntity, Ref(Entity_Hammer2BlockWideZ), -1040, 160, -425, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnSmashBlock)))
     EndIf

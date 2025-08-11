@@ -68,15 +68,15 @@ EvtScript N(EVS_EnterMap) = {
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(sam_02_ENTRY_2)
-            IfEq(GF_SAM01_Visited, FALSE)
-                Set(GF_SAM01_Visited, TRUE)
+            IfEq(GF_SAM01_Visited, false)
+                Set(GF_SAM01_Visited, true)
                 Set(GB_StoryProgress, STORY_CH7_ARRIVED_AT_SHIVER_CITY)
             EndIf
             EVT_ENTER_PIPE_VERTICAL(N(EVS_BindExitTriggers))
             Wait(1)
         CaseEq(sam_02_ENTRY_3)
-            Call(DisablePlayerInput, TRUE)
-            Call(DisablePlayerPhysics, TRUE)
+            Call(DisablePlayerInput, true)
+            Call(DisablePlayerPhysics, true)
             Call(SetPlayerJumpscale, Float(1.0))
             Call(SetPlayerPos, 650, 0, 50)
             Wait(1)
@@ -97,8 +97,8 @@ EvtScript N(EVS_EnterMap) = {
                 Call(SetPlayerAnimation, ANIM_Mario1_Idle)
                 Wait(1)
                 ExecWait(N(EVS_BindExitTriggers))
-                Call(DisablePlayerInput, FALSE)
-                Call(DisablePlayerPhysics, FALSE)
+                Call(DisablePlayerInput, false)
+                Call(DisablePlayerPhysics, false)
             EndThread
         CaseDefault
             Set(LVar0, Ref(N(EVS_BindExitTriggers)))
@@ -112,7 +112,7 @@ EvtScript N(EVS_EnterMap) = {
 #include "../common/ManageSnowfall.inc.c"
 
 EvtScript N(EVS_TexPan_Fire) = {
-    Call(EnableTexPanning, MODEL_hi1, TRUE)
+    Call(EnableTexPanning, MODEL_hi1, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(   50,   50,  -70,  300)
@@ -128,14 +128,14 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_SHIVER_CITY)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Set(GF_MAP_ShiverCity, TRUE)
+    Set(GF_MAP_ShiverCity, true)
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+            Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
         CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
-            Call(MakeNpcs, FALSE, Ref(N(MysteryNPCs)))
+            Call(MakeNpcs, false, Ref(N(MysteryNPCs)))
         CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
-            Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+            Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     EndSwitch
     ExecWait(N(EVS_MakeEntities))
     ExecWait(N(EVS_SetupMusic))

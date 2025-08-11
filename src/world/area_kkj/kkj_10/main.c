@@ -14,7 +14,7 @@ API_CALLABLE(N(DisableAllLightSources)) {
 
 EvtScript N(EVS_ExitDoors_osr_02_1) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
     Set(LVar0, kkj_10_ENTRY_0)
     Set(LVar1, COLLIDER_tts)
@@ -30,7 +30,7 @@ EvtScript N(EVS_ExitDoors_osr_02_1) = {
 
 EvtScript N(EVS_ExitDoors_kkj_11_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
     Set(LVar0, kkj_10_ENTRY_1)
     Set(LVar1, COLLIDER_ttn)
@@ -46,7 +46,7 @@ EvtScript N(EVS_ExitDoors_kkj_11_0) = {
 
 EvtScript N(EVS_ExitDoors_kkj_21_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_10_ENTRY_2)
     Set(LVar1, COLLIDER_ttw)
@@ -62,7 +62,7 @@ EvtScript N(EVS_ExitDoors_kkj_21_0) = {
 
 EvtScript N(EVS_ExitDoors_kkj_19_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_10_ENTRY_3)
     Set(LVar1, COLLIDER_ttne)
@@ -78,7 +78,7 @@ EvtScript N(EVS_ExitDoors_kkj_19_0) = {
 
 EvtScript N(EVS_ExitDoors_kkj_20_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_10_ENTRY_4)
     Set(LVar1, COLLIDER_tte)
@@ -94,7 +94,7 @@ EvtScript N(EVS_ExitDoors_kkj_20_0) = {
 
 EvtScript N(EVS_ExitDoors_kkj_29_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_10_ENTRY_2)
     Set(LVar1, COLLIDER_ttw)
@@ -163,14 +163,14 @@ EvtScript N(EVS_Main) = {
     Switch(GB_StoryProgress)
         CaseOrEq(STORY_CH4_BEGAN_PEACH_MISSION)
         CaseOrEq(STORY_CH5_BEGAN_PEACH_MISSION)
-            Call(MakeNpcs, FALSE, Ref(N(EarlyNPCs)))
+            Call(MakeNpcs, false, Ref(N(EarlyNPCs)))
         EndCaseGroup
         CaseEq(STORY_CH6_BEGAN_PEACH_MISSION)
             Call(N(SetAvailableDisguise), PEACH_DISGUISE_KOOPATROL)
-            Call(MakeNpcs, FALSE, Ref(N(LaterNPCs)))
+            Call(MakeNpcs, false, Ref(N(LaterNPCs)))
         CaseDefault
-            Call(EnableModel, MODEL_o273, FALSE)
-            Call(EnableModel, MODEL_o274, FALSE)
+            Call(EnableModel, MODEL_o273, false)
+            Call(EnableModel, MODEL_o274, false)
     EndSwitch
     ExecWait(N(EVS_MakeEntities))
     IfGe(GB_StoryProgress, STORY_CH8_REACHED_BOWSERS_CASTLE)

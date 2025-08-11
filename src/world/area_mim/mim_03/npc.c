@@ -3,34 +3,34 @@
 #include "world/common/npc/Oaklie.inc.c"
 
 EvtScript N(EVS_NpcInteract_Oaklie) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_BOW_JOINED_PARTY)
-            IfEq(AF_MIM03_Oaklie_DialogueToggle, FALSE)
+            IfEq(AF_MIM03_Oaklie_DialogueToggle, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_0009)
-                Set(AF_MIM03_Oaklie_DialogueToggle, TRUE)
+                Set(AF_MIM03_Oaklie_DialogueToggle, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_000A)
-                Set(AF_MIM03_Oaklie_DialogueToggle, FALSE)
+                Set(AF_MIM03_Oaklie_DialogueToggle, false)
             EndIf
         CaseLt(STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
-            IfEq(AF_MIM03_Oaklie_DialogueToggle, FALSE)
+            IfEq(AF_MIM03_Oaklie_DialogueToggle, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_000B)
-                Set(AF_MIM03_Oaklie_DialogueToggle, TRUE)
+                Set(AF_MIM03_Oaklie_DialogueToggle, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_000C)
-                Set(AF_MIM03_Oaklie_DialogueToggle, FALSE)
+                Set(AF_MIM03_Oaklie_DialogueToggle, false)
             EndIf
         CaseGe(STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
-            IfEq(AF_MIM03_Oaklie_DialogueToggle, FALSE)
+            IfEq(AF_MIM03_Oaklie_DialogueToggle, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_000D)
-                Set(AF_MIM03_Oaklie_DialogueToggle, TRUE)
+                Set(AF_MIM03_Oaklie_DialogueToggle, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Oaklie_Talk, ANIM_Oaklie_Idle, 0, MSG_CH3_000E)
-                Set(AF_MIM03_Oaklie_DialogueToggle, FALSE)
+                Set(AF_MIM03_Oaklie_DialogueToggle, false)
             EndIf
     EndSwitch
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

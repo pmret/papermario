@@ -24,8 +24,8 @@ EvtScript N(EVS_NpcIdle_Twink) = {
 };
 
 EvtScript N(EVS_NpcInit_Twink) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
     Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(SetNpcCollisionSize, NPC_SELF, 20, 20)

@@ -52,7 +52,7 @@ EvtScript N(EVS_Chest_ShowGotItem) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
     Wait(40)
-    Call(ShowGotItem, LVar0, FALSE, 0)
+    Call(ShowGotItem, LVar0, false, 0)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     Return

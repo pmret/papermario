@@ -24,7 +24,6 @@ typedef void (*AuCallback)(void);
 #define IMG_BIN u8
 #define PAL_BIN u16
 
-typedef s32 b32;
 typedef s16 b16;
 typedef s8 b8;
 
@@ -436,6 +435,7 @@ typedef struct Evt {
     /*       */     s32 functionTemp[4];
     /*       */     f32 functionTempF[4];
     /*       */     void* functionTempPtr[4];
+    /*       */     bool functionTempBool[4];
     /*       */ };
     /* 0x080 */ ApiFunc callFunction;
     /* 0x084 */ union {
@@ -754,7 +754,7 @@ typedef struct CameraControlSettings {
         } three;
     } points;
     /* 0x24 */ f32 viewPitch;
-    /* 0x28 */ b32 flag;
+    /* 0x28 */ bool flag;
 } CameraControlSettings; // size = 0x2C
 
 typedef struct Camera {
@@ -881,7 +881,7 @@ typedef struct Camera {
     /* 0x524 */ f32 prevLeadPosX;
     /* 0x528 */ f32 prevLeadPosZ;
     /* 0x52C */ s32 leadConstrainDir;
-    /* 0x530 */ b32 needsInitialConstrainDir;
+    /* 0x530 */ bool needsInitialConstrainDir;
     /* 0x534 */ CameraControlSettings* prevLeadSettings;
     /* 0x538 */ char unk_538[0x18];
     /* 0x550 */ f32 unusedLeadAmt;
@@ -1264,7 +1264,7 @@ typedef struct MessagePrintState {
     /* 0x4FC */ s32 stateFlags;
     /* 0x500 */ s16 delayFlags; // ?
     /* 0x502 */ char unk_502[0x2];
-    /* 0x504 */ s32* closedWritebackBool; // if not null, writes 1 here when message closes
+    /* 0x504 */ bool* closedWritebackBool; // if not null, writes 1 here when message closes
     /* 0x508 */ u8 style;
     /* 0x509 */ u8 fadeInCounter;
     /* 0x50A */ Vec2s initOpenPos; // where the message originates from, in screen-space coords
@@ -1536,7 +1536,7 @@ typedef struct ItemEntityPhysicsData {
     /* 0x14 */ f32 velZ;
     /* 0x18 */ f32 moveAngle;
     /* 0x1C */ s32 timeLeft;
-    /* 0x20 */ b32 useSimplePhysics;
+    /* 0x20 */ bool useSimplePhysics;
 } ItemEntityPhysicsData; // size = 0x24
 
 typedef struct RenderTask {
@@ -2351,7 +2351,7 @@ typedef struct VirtualEntity {
 typedef VirtualEntity* VirtualEntityList[0x40];
 
 typedef struct Message {
-    /* 0x00 */ b32 unk_00;
+    /* 0x00 */ bool unk_00;
     /* 0x04 */ s32 entityModelIndex;
     /* 0x08 */ Vec3f accel;
     /* 0x14 */ Vec3f vel;

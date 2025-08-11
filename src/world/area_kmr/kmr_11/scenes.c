@@ -44,8 +44,8 @@ EvtScript N(EVS_GoombaKingBlastoff) = {
 };
 
 EvtScript N(EVS_FocusCam_FortressExterior) = {
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(SetCamType, CAM_DEFAULT, 4, false)
     Call(SetCamPitch, CAM_DEFAULT, -7, 0)
     Call(SetCamPosA, CAM_DEFAULT, -1208, 881)
     Call(SetCamPosB, CAM_DEFAULT, -524, -89)
@@ -56,8 +56,8 @@ EvtScript N(EVS_FocusCam_FortressExterior) = {
 };
 
 EvtScript N(EVS_FocusCam_BesidePlayer) = {
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(SetCamType, CAM_DEFAULT, 4, false)
     Call(SetCamPitch, CAM_DEFAULT, -15, 25)
     Call(SetCamPosA, CAM_DEFAULT, -1208, 881)
     Call(SetCamPosB, CAM_DEFAULT, -579, -89)
@@ -68,8 +68,8 @@ EvtScript N(EVS_FocusCam_BesidePlayer) = {
 };
 
 EvtScript N(EVS_FocusCam_Battlement) = {
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(SetCamType, CAM_DEFAULT, 4, false)
     Call(SetCamPitch, CAM_DEFAULT, -7, 2)
     Call(SetCamPosA, CAM_DEFAULT, -1681, 511)
     Call(SetCamPosB, CAM_DEFAULT, -430, -92)
@@ -200,16 +200,16 @@ EvtScript N(EVS_FortressCollapse_PlayerReactions) = {
 };
 
 EvtScript N(EVS_Scene_SelfDestruct) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(15)
-    Call(SetCamType, CAM_DEFAULT, 1, FALSE)
+    Call(SetCamType, CAM_DEFAULT, 1, false)
     Call(SetCamPitch, CAM_DEFAULT, 0, Float(-12.5))
     Call(SetCamDistance, CAM_DEFAULT, 300)
     Call(SetCamPosA, CAM_DEFAULT, -389, -12)
     Call(SetCamPosB, CAM_DEFAULT, -469, 156)
     Call(SetPanTarget, CAM_DEFAULT, -389, 120, -12)
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 * DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetNpcPos, NPC_GoombaKing, -380, 0, -42)
     Wait(20 * DT)
@@ -225,12 +225,12 @@ EvtScript N(EVS_Scene_SelfDestruct) = {
     Call(InterpNpcYaw, NPC_PARTNER, 90, 0)
     Call(SpeakToPlayer, NPC_GoombaKing, ANIM_GoombaKing_Idle, ANIM_GoombaKing_Idle, 0, MSG_CH0_00D8)
     Set(GB_StoryProgress, STORY_CH0_HIT_GATEHOUSE_SWITCH)
-    Call(EnableModel, MODEL_eye_mask, TRUE)
+    Call(EnableModel, MODEL_eye_mask, true)
     Wait(1)
     ExecGetTID(N(EVS_RandomQuaking), LVarA)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.7))
     Call(UseSettingsFrom, CAM_DEFAULT, 0, -100, 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(60 * DT)
     Call(SpeakToPlayer, NPC_GoombaKing, ANIM_GoombaKing_Idle, ANIM_GoombaKing_Idle, 0, MSG_CH0_00D9)
     Loop(100)
@@ -265,20 +265,20 @@ EvtScript N(EVS_Scene_SelfDestruct) = {
     Exec(N(EVS_FortressCollapse_PlayFX))
     Exec(N(EVS_FortressCollapse_PlayerReactions))
     Wait(380)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(UseSettingsFrom, CAM_DEFAULT, 0, -150, 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(20)
     Exec(N(EVS_GoombaKingBlastoff))
     Exec(N(EVS_PlayBridgeAnimation))
     Wait(150)
     Wait(50)
-    Call(EnableModel, MODEL_o416, FALSE)
-    Call(EnableModel, MODEL_o415, FALSE)
-    Call(EnableModel, MODEL_eye_mask, FALSE)
+    Call(EnableModel, MODEL_o416, false)
+    Call(EnableModel, MODEL_o415, false)
+    Call(EnableModel, MODEL_eye_mask, false)
     Call(DeleteAnimatedModel, 1)
     Call(DeleteAnimatedModel, 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Exec(N(EVS_SetupMusic))
     Call(DisablePartnerAI, 0)
@@ -293,7 +293,7 @@ EvtScript N(EVS_Scene_SelfDestruct) = {
     Call(EnablePartnerAI)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt, COLLIDER_FLAGS_UPPER_MASK)
     Set(GB_StoryProgress, STORY_CH0_OPENED_BRIDGE_TO_TOAD_TOWN)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(EnablePartnerAI)
     Unbind
     Return
@@ -314,7 +314,7 @@ EvtScript N(EVS_BouncePlayerAndPartner) = {
 };
 
 EvtScript N(EVS_Scene_MeetGoombaKing_Impl) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     ExecWait(N(EVS_FocusCam_FortressExterior))
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.3 / DT))
     Call(PanToTarget, CAM_DEFAULT, Float(0.5), 1)
@@ -367,7 +367,7 @@ EvtScript N(EVS_Scene_MeetGoombaKing_Impl) = {
     Wait(30 * DT)
     Call(DisablePartnerAI, 0)
     Wait(10 * DT)
-    Call(PlayerFaceNpc, NPC_PARTNER, FALSE)
+    Call(PlayerFaceNpc, NPC_PARTNER, false)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_CH0_00C5)
     Call(InterpPlayerYaw, 90, 0)
     Wait(40 * DT)
@@ -431,24 +431,24 @@ EvtScript N(EVS_Scene_MeetGoombaKing_Impl) = {
     EndThread
     ExecWait(N(EVS_FocusCam_Battlement))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(55 * DT)
     Call(SpeakToPlayer, NPC_GoombaKing, ANIM_GoombaKing_Idle, ANIM_GoombaKing_Idle, 0, MSG_CH0_00C6)
     Call(SpeakToPlayer, NPC_RedGoombaBro, ANIM_GoombaBros_Red_Walk, ANIM_GoombaBros_Red_Idle, 0, MSG_CH0_00C7)
     Call(SpeakToPlayer, NPC_BlueGoombaBro, ANIM_GoombaBros_Blue_Walk, ANIM_GoombaBros_Blue_Idle, 0, MSG_CH0_00C8)
     ExecWait(N(EVS_FocusCam_BesidePlayer))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(DisablePartnerAI, 0)
     Wait(5 * DT)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_CH0_00C9)
     Call(DisablePartnerAI, 0)
     ExecWait(N(EVS_FocusCam_Battlement))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(5 * DT)
     Call(SpeakToPlayer, NPC_GoombaKing, ANIM_GoombaKing_Idle, ANIM_GoombaKing_Idle, 0, MSG_CH0_00CA)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Wait(30 * DT)
     Call(SetNpcVar, NPC_GoombaKing, 0, 1)
     Return
@@ -459,7 +459,7 @@ EvtScript N(EVS_Scene_MeetGoombaKing) = {
     Call(N(SetCameraVFov), 32)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Exec(N(EVS_Scene_MeetGoombaKing_Impl))
     Return
     End

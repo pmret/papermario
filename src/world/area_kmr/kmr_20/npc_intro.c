@@ -8,7 +8,7 @@
 #define NAME_SUFFIX
 
 API_CALLABLE(N(func_80241C9C_8EDABC)) {
-    mdl_group_set_custom_gfx(MODEL_g62, CUSTOM_GFX_NONE, ENV_TINT_SHROUD, TRUE);
+    mdl_group_set_custom_gfx(MODEL_g62, CUSTOM_GFX_NONE, ENV_TINT_SHROUD, true);
     mdl_set_shroud_tint_params(0, 0, 0, 255);
 
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
@@ -58,9 +58,9 @@ EvtScript N(EVS_Luigi_PlayWalkSounds_Intro) = {
 };
 
 EvtScript N(EVS_Player_EnterPipe_Intro) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
-    Call(HidePlayerShadow, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
+    Call(HidePlayerShadow, true)
     Set(LVar0, kmr_20_ENTRY_4)
     Call(N(Pipe_GetEntryPos_Intro))
     Call(PlayerMoveTo, LVar1, LVar3, 3)
@@ -86,9 +86,9 @@ EvtScript N(EVS_Player_EnterPipe_Intro) = {
 };
 
 EvtScript N(EVS_Luigi_EnterPipe_Intro) = {
-    Call(SetNpcFlagBits, NPC_Scene_Luigi, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_Scene_Luigi, NPC_FLAG_FLYING, TRUE)
-    Call(EnableNpcShadow, NPC_Scene_Luigi, FALSE)
+    Call(SetNpcFlagBits, NPC_Scene_Luigi, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_Scene_Luigi, NPC_FLAG_FLYING, true)
+    Call(EnableNpcShadow, NPC_Scene_Luigi, false)
     Set(LVar0, kmr_20_ENTRY_4)
     Call(N(Pipe_GetEntryPos_Intro))
     Call(NpcMoveTo, NPC_Scene_Luigi, LVar1, LVar3, 3)
@@ -117,7 +117,7 @@ EvtScript N(EVS_Luigi_EnterPipe_Intro) = {
 
 EvtScript N(EVS_FocusCam_Unused) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 250, 30, -80)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(N(func_80241CF0_8EDB10), Float(1.8))
     Call(InterpCamTargetPos, 0, 1, 250, 30, -80, 10)
     Call(N(func_80241CF0_8EDB10), 1)
@@ -169,9 +169,9 @@ EvtScript N(EVS_OpenAndCloseDoor_Intro_Impl) = {
 };
 
 EvtScript N(EVS_OpenAndCloseDoor_Intro) = {
-    Call(EnableGroup, MODEL_g72, TRUE)
+    Call(EnableGroup, MODEL_g72, true)
     ExecWait(N(EVS_OpenAndCloseDoor_Intro_Impl))
-    Call(EnableGroup, MODEL_g72, FALSE)
+    Call(EnableGroup, MODEL_g72, false)
     Return
     End
 };
@@ -194,7 +194,7 @@ s32* N(UnknownLists)[] = {
 };
 
 EvtScript N(EVS_Scene_BeginGame) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Thread
         Wait(5 * DT)
         Call(SetMusic, 0, SONG_MAIL_CALL, 0, VOL_LEVEL_FULL)
@@ -204,18 +204,18 @@ EvtScript N(EVS_Scene_BeginGame) = {
     Call(SetNpcPos, NPC_Scene_Luigi, 220, 30, -80)
     Call(SetNpcPos, NPC_Scene_Parakarry, 720, 220, -150)
     Call(SetNpcYaw, NPC_Scene_Parakarry, 270)
-    Call(EnableGroup, MODEL_g94, FALSE)
-    Call(EnableGroup, MODEL_g100, TRUE)
+    Call(EnableGroup, MODEL_g94, false)
+    Call(EnableGroup, MODEL_g100, true)
     Call(UseSettingsFrom, CAM_DEFAULT, 550, 0, 20)
     Call(SetPanTarget, CAM_DEFAULT, 550, 0, 20)
     Call(SetCamDistance, CAM_DEFAULT, 550)
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-14.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(1)
     Call(SetCamDistance, CAM_DEFAULT, 450)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.7))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Wait(10 * DT)
         Call(MakeLerp, 0, 70, 60 * DT, EASING_LINEAR)
@@ -338,19 +338,19 @@ EvtScript N(EVS_Scene_BeginGame) = {
     Call(NpcMoveTo, NPC_Scene_Luigi, 450, -80, 0)
     Call(NpcMoveTo, NPC_Scene_Luigi, 290, -70, 0)
     KillThread(LVarA)
-    Call(EnableGroup, MODEL_g20, TRUE)
-    Call(EnableGroup, MODEL_g21, TRUE)
-    Call(EnableGroup, MODEL_g49, TRUE)
-    Call(EnableModel, MODEL_g56, TRUE)
+    Call(EnableGroup, MODEL_g20, true)
+    Call(EnableGroup, MODEL_g21, true)
+    Call(EnableGroup, MODEL_g49, true)
+    Call(EnableModel, MODEL_g56, true)
     Call(N(func_80241C9C_8EDABC))
     Call(RotateGroup, MODEL_g60, 90, 1, 0, 0)
     Call(RotateGroup, MODEL_g34, 90, -1, 0, 0)
-    Call(EnableGroup, MODEL_g60, FALSE)
-    Call(EnableGroup, MODEL_g34, FALSE)
+    Call(EnableGroup, MODEL_g60, false)
+    Call(EnableGroup, MODEL_g34, false)
     Call(UseSettingsFrom, CAM_DEFAULT, 250, 30, -80)
     Call(SetPanTarget, CAM_DEFAULT, 250, 30, -80)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(N(SetAmbienceVolumeHalf_Intro))
     Exec(N(EVS_OpenAndCloseDoor_Intro_Impl))
     Wait(10)
@@ -395,13 +395,13 @@ EvtScript N(EVS_Scene_BeginGame) = {
 };
 
 EvtScript N(EVS_Scene_SettingOff) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetNpcPos, NPC_Scene_Luigi, 220, 30, -70)
     Call(SetNpcYaw, NPC_Scene_Luigi, 90)
     Call(UseSettingsFrom, CAM_DEFAULT, 320, 30, -70)
     Call(SetPanTarget, CAM_DEFAULT, 320, 30, -70)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(60 * DT)
     Call(SetMusic, 0, SONG_PEACHS_CASTLE_PARTY, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Exec(N(EVS_OpenAndCloseDoor_Intro))
@@ -417,7 +417,7 @@ EvtScript N(EVS_Scene_SettingOff) = {
         KillThread(LVarA)
     EndThread
     Call(func_802D1270, 320, -70, Float(3.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(func_802D1270, 460, -70, Float(3.0 / DT))
     Call(func_802D1270, 570, -170, Float(3.0 / DT))
     Call(SetPlayerJumpscale, Float(1.0))
@@ -439,7 +439,7 @@ EvtScript N(EVS_Scene_SettingOff) = {
     Exec(N(EVS_FadeOutAmbientSounds))
     Call(GotoMap, Ref("mac_00"), mac_00_ENTRY_5)
     Wait(100)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

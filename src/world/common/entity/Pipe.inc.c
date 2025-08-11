@@ -54,7 +54,7 @@ API_CALLABLE(N(Pipe_AwaitDownInput)) {
     s32 stickX, stickY;
 
     if (collisionStatus->curFloor != script->varTable[11]) {
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
         return ApiStatus_DONE2;
     }
 
@@ -63,7 +63,7 @@ API_CALLABLE(N(Pipe_AwaitDownInput)) {
 
     if (stickX != 0 || stickY != 0) {
         if (atan2(0.0f, 0.0f, stickX, stickY) < 60.0f) {
-            script->varTable[0] = TRUE;
+            script->varTable[0] = true;
             return ApiStatus_DONE2;
         }
     }
@@ -113,14 +113,14 @@ API_CALLABLE(N(Pipe_GetPointAheadOfPlayer)) {
 extern EvtScript N(EVS_Pipe_ExitVertical_Impl);
 
 EvtScript N(EVS_Pipe_EnterVertical) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
-    Call(HidePlayerShadow, TRUE)
+    Call(HidePlayerShadow, true)
     Call(SetPlayerAnimation, ANIM_Mario1_Still)
     Call(GetCurrentPartnerID, LVar0)
     IfNe(LVar0, PARTNER_NONE)
-        Call(EnableNpcShadow, NPC_PARTNER, FALSE)
+        Call(EnableNpcShadow, NPC_PARTNER, false)
         Call(SetNpcPos, NPC_PARTNER, NPC_DISPOSE_LOCATION)
     EndIf
     Call(GetEntryID, LVar0)
@@ -145,18 +145,18 @@ EvtScript N(EVS_Pipe_EnterVertical) = {
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Sub(LVar2, 3)
             Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_INVISIBLE, FALSE)
+            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_INVISIBLE, false)
             Call(EnablePartnerAI)
-            Call(EnableNpcShadow, NPC_PARTNER, TRUE)
+            Call(EnableNpcShadow, NPC_PARTNER, true)
         EndThread
     EndIf
     Wait(2)
     Call(UpdatePlayerImgFX, ANIM_Mario1_Still, IMGFX_CLEAR, 0, 0, 0, 0)
     Wait(1)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
-    Call(HidePlayerShadow, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
+    Call(HidePlayerShadow, false)
     Label(0)
     Call(N(Pipe_GetCurrentFloor))
     Wait(1)
@@ -169,9 +169,9 @@ EvtScript N(EVS_Pipe_EnterVertical) = {
 };
 
 EvtScript N(EVS_Pipe_EnterHorizontal) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
-    Call(HidePlayerShadow, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
+    Call(HidePlayerShadow, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVarB, COLLIDER_FLAGS_UPPER_MASK)
     Call(GetEntryID, LVar0)
     Call(N(Pipe_GetEntryPos))
@@ -189,11 +189,11 @@ EvtScript N(EVS_Pipe_EnterHorizontal) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar5, LVar6, LVar7)
     Call(SetPanTarget, CAM_DEFAULT, LVar5, LVar6, LVar7)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(GetCurrentPartnerID, LVar0)
     IfNe(LVar0, PARTNER_NONE)
         Call(DisablePartnerAI, 0)
-        Call(EnableNpcShadow, NPC_PARTNER, FALSE)
+        Call(EnableNpcShadow, NPC_PARTNER, false)
         Call(SetNpcPos, NPC_PARTNER, NPC_DISPOSE_LOCATION)
         Call(InterpNpcYaw, NPC_PARTNER, LVar0, 0)
     EndIf
@@ -201,7 +201,7 @@ EvtScript N(EVS_Pipe_EnterHorizontal) = {
     Call(PlaySound, SOUND_ENTER_PIPE)
     Thread
         Wait(25)
-        Call(HidePlayerShadow, FALSE)
+        Call(HidePlayerShadow, false)
     EndThread
     Call(SetPlayerImgFXFlags, IMGFX_FLAG_REVERSE_ANIM | IMGFX_FLAG_800)
     Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_HORIZONTAL_PIPE_CURL, 1, 1, 0)
@@ -216,16 +216,16 @@ EvtScript N(EVS_Pipe_EnterHorizontal) = {
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Sub(LVar2, 3)
             Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-            Call(EnableNpcShadow, NPC_PARTNER, TRUE)
+            Call(EnableNpcShadow, NPC_PARTNER, true)
             Call(EnablePartnerAI)
         EndThread
     EndIf
     Wait(5)
     Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
     Call(ModifyColliderFlags, 1, LVarB, COLLIDER_FLAGS_UPPER_MASK)
-    Call(DisablePlayerInput, FALSE)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(DisablePlayerInput, false)
+    Call(DisablePlayerPhysics, false)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Exec(LVarA)
     Return
     End
@@ -243,10 +243,10 @@ EvtScript N(EVS_Pipe_ExitVertical) = {
             Return
         Else
             Call(InterruptUsePartner)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
         EndIf
     Else
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
     EndIf
     ExecWait(N(EVS_Pipe_ExitVertical_Impl))
     Return
@@ -256,19 +256,19 @@ EvtScript N(EVS_Pipe_ExitVertical) = {
 EvtScript N(EVS_Pipe_ExitVertical_Impl) = {
     Call(N(Pipe_SetAnimFlag))
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerPhysics, TRUE)
-    Call(HidePlayerShadow, TRUE)
+    Call(DisablePlayerPhysics, true)
+    Call(HidePlayerShadow, true)
     Set(LVar0, LVarA)
     Call(N(Pipe_GetEntryPos))
     Call(PlayerMoveTo, LVar1, LVar3, 3)
     Set(LVar0, LVarA)
     Call(N(Pipe_GetEntryPos))
     Call(SetPlayerPos, LVar1, LVar2, LVar3)
-    Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
+    Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, true)
     Call(N(Pipe_GetCameraYaw))
     Call(InterpPlayerYaw, LVar0, 0)
     Wait(2)
-    Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, FALSE)
+    Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, false)
     Call(PlaySound, SOUND_ENTER_PIPE)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Thread
@@ -289,7 +289,7 @@ EvtScript N(EVS_Pipe_ExitVertical_Impl) = {
 
 EvtScript N(EVS_Pipe_ExitHorizontal) = {
     Call(IsPlayerOnValidFloor, LVar0)
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Return
     EndIf
     Call(GetPlayerActionState, LVar0)
@@ -303,14 +303,14 @@ EvtScript N(EVS_Pipe_ExitHorizontal) = {
             Return
         Else
             Call(InterruptUsePartner)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
         EndIf
     Else
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
     EndIf
     SetGroup(EVT_GROUP_EXIT_MAP)
     Call(N(Pipe_SetAnimFlag))
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVarB, COLLIDER_FLAGS_UPPER_MASK)
     Set(LVar0, LVarA)
     Call(N(Pipe_GetEntryPos))
@@ -333,7 +333,7 @@ EvtScript N(EVS_Pipe_ExitHorizontal) = {
     Call(UpdatePlayerImgFX, ANIM_Mario1_Still, IMGFX_SET_ANIM, IMGFX_ANIM_HORIZONTAL_PIPE_CURL, 1, 1, 0)
     Thread
         Wait(8)
-        Call(HidePlayerShadow, TRUE)
+        Call(HidePlayerShadow, true)
     EndThread
     Thread
         Wait(3)

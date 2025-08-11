@@ -76,7 +76,7 @@ EvtScript N(EVS_NpcAI_BuzzyBeetle_Ceiling) = {
     Call(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_Anim0F)
     Call(N(AwaitPlayerNearNpc))
     Call(SelfEnemyOverrideSyncPos, 1)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
     Call(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_Anim00)
     Call(N(func_802408B4_97BEE4))
     Call(SelfEnemyOverrideSyncPos, 0)

@@ -29,7 +29,7 @@ EvtScript N(EVS_OpenAndCloseFrontDoor_Intro) = {
 };
 
 EvtScript N(EVS_Scene_Intro) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Exec(N(EVS_OpenAndCloseFrontDoor_Intro))
     Thread
         Call(SetNpcSpeed, NPC_Luigi, Float(4.0))
@@ -42,7 +42,7 @@ EvtScript N(EVS_Scene_Intro) = {
     Wait(30 * DT)
     Call(SpeakToPlayer, NPC_Luigi, ANIM_Luigi_Talk, ANIM_Luigi_Idle, 0, MSG_Intro_0024)
     Wait(20 * DT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

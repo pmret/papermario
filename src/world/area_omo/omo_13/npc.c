@@ -21,7 +21,7 @@ s32 N(BribeItemList)[] = {
 };
 
 EvtScript N(EVS_NpcInteract_AntiGuy) = {
-    IfEq(GF_OMO13_Defeated_AntiGuy, TRUE)
+    IfEq(GF_OMO13_Defeated_AntiGuy, true)
         Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim15, ANIM_ShyGuy_Black_Anim15, 5, MSG_CH4_004D)
         Return
     EndIf
@@ -84,7 +84,7 @@ EvtScript N(EVS_NpcInteract_AntiGuy) = {
         Else
             Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_004C)
             Wait(20)
-            Set(GF_OMO13_Defeated_AntiGuy, TRUE)
+            Set(GF_OMO13_Defeated_AntiGuy, true)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_he, COLLIDER_FLAGS_UPPER_MASK)
             Call(SetNpcVar, NPC_SELF, 0, 2)
         EndIf
@@ -150,7 +150,7 @@ EvtScript N(EVS_NpcIdle_AntiGuy) = {
                 EndIf
             Goto(0)
         Else
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Anim02)
             Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             IfLt(LVar2, -60)
@@ -188,7 +188,7 @@ EvtScript N(EVS_NpcIdle_AntiGuy) = {
 #endif
             Call(InterpNpcYaw, NPC_SELF, 90, 0)
             Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Anim15)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
             Label(9)
                 Wait(1)
                 Goto(9)
@@ -203,7 +203,7 @@ EvtScript N(EVS_NpcDefeat_AntiGuy) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Set(GF_OMO13_Defeated_AntiGuy, TRUE)
+            Set(GF_OMO13_Defeated_AntiGuy, true)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_he, COLLIDER_FLAGS_UPPER_MASK)
             Call(DoNpcDefeat)
         CaseEq(OUTCOME_PLAYER_LOST)
@@ -216,7 +216,7 @@ EvtScript N(EVS_NpcDefeat_AntiGuy) = {
 };
 
 EvtScript N(EVS_NpcInit_AntiGuy) = {
-    IfEq(GF_OMO13_Defeated_AntiGuy, FALSE)
+    IfEq(GF_OMO13_Defeated_AntiGuy, false)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_AntiGuy)))
         Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_AntiGuy)))
         Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_AntiGuy)))
@@ -262,7 +262,7 @@ NpcData N(NpcData_ShyGuy) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 300, 0, 50 },
@@ -285,7 +285,7 @@ NpcData N(NpcData_GrooveGuy) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -222, 0, 35 },

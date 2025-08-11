@@ -20,9 +20,9 @@ EvtScript N(EVS_SetWallRot_Shop) = {
 EvtScript N(EVS_RoomListener_Shop) = {
     Switch(LVar0)
         CaseEq(ROOM_UPDATE_ENTER_BEGIN)
-            Call(EnableGroup, MODEL_g126, TRUE)
+            Call(EnableGroup, MODEL_g126, true)
         CaseEq(ROOM_UPDATE_EXIT_END)
-            Call(EnableGroup, MODEL_g126, FALSE)
+            Call(EnableGroup, MODEL_g126, false)
     EndSwitch
     Return
     End

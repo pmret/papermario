@@ -124,7 +124,7 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
         IfLt(LVar0, 0)
             Goto(1)
         EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetPartnerInUse, LVar0)
     IfNe(LVar0, PARTNER_NONE)
         Call(InterruptUsePartner)
@@ -132,7 +132,7 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
     EndIf
     Call(UseSettingsFrom, CAM_DEFAULT, 160, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 160, 0, 0)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetPlayerSpeed, Float(3.0 / DT))
     Call(PlayerMoveTo, 90, 0, 0)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
@@ -158,7 +158,7 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.5))
     Call(SetCamPosB, CAM_DEFAULT, Float(500.0), Float(60.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Merlar, ANIM_Merlar_Talk, ANIM_Merlar_Hover, 0, MSG_CH7_0134)
     Call(SetPanTarget, CAM_DEFAULT, 160, 0, 0)
@@ -176,18 +176,18 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
     EndLoop
     Call(N(SpawnSleepBubble), -90, 6, -5, 2, 0, LVar7)
     Thread
-        Set(MF_DoneFadingIn, FALSE)
+        Set(MF_DoneFadingIn, false)
         SetF(LVar0, Float(255.0))
         Loop(LOOPCOUNT_2)
             AddF(LVar0, Float(-255.0 / LOOPCOUNT_2))
             Call(N(SetScreenFadeAmount), LVar0)
             Wait(1)
         EndLoop
-        Set(MF_DoneFadingIn, TRUE)
+        Set(MF_DoneFadingIn, true)
     EndThread
     Call(ContinueSpeech, NPC_Merlar, ANIM_Merlar_Talk, ANIM_Merlar_Hover, 0, MSG_CH7_0136)
     Label(6)
-        IfEq(MF_DoneFadingIn, FALSE)
+        IfEq(MF_DoneFadingIn, false)
             Wait(1)
             Goto(6)
         EndIf
@@ -208,14 +208,14 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.5))
     Call(SetCamPosB, CAM_DEFAULT, Float(500.0), Float(60.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Merlar, ANIM_Merlar_Talk, ANIM_Merlar_Hover, 0, MSG_CH7_0137)
     Wait(30 * DT)
     Call(SetPanTarget, CAM_DEFAULT, 230, 0, 0)
     Call(SetCamPosB, CAM_DEFAULT, Float(230.0), Float(60.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Loop(5)
@@ -254,8 +254,8 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
     EndLoop
     Call(SetNpcPos, NPC_Merlar, NPC_DISPOSE_LOCATION)
     Set(GB_StoryProgress, STORY_CH7_GOT_STAR_STONE)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

@@ -59,29 +59,29 @@ API_CALLABLE(N(CheckPlayerHasEnoughCoins)) {
 }
 
 EvtScript N(EVS_NpcInteract_RipCheato) = {
-    IfEq(AF_TIK_02, FALSE)
-        IfEq(GF_TIK15_Met_RipCheato, FALSE)
+    IfEq(AF_TIK_02, false)
+        IfEq(GF_TIK15_Met_RipCheato, false)
             Set(LVar0, MSG_MGM_0001)
-            Set(GF_TIK15_Met_RipCheato, TRUE)
+            Set(GF_TIK15_Met_RipCheato, true)
         Else
             Set(LVar0, MSG_MGM_0002)
         EndIf
-        Set(AF_TIK_02, TRUE)
+        Set(AF_TIK_02, true)
     Else
         Set(LVar0, MSG_MGM_0003)
     EndIf
     Call(SpeakToPlayer, NPC_RipCheato, ANIM_RipCheato_Talk, ANIM_RipCheato_Idle, 0, LVar0)
     Label(0)
-    Call(ShowCoinCounter, TRUE)
+    Call(ShowCoinCounter, true)
     Call(ShowChoice, MSG_Choice_0001)
     IfNe(LVar0, 0)
-        Call(ShowCoinCounter, FALSE)
+        Call(ShowCoinCounter, false)
         Call(ContinueSpeech, NPC_RipCheato, ANIM_RipCheato_Talk, ANIM_RipCheato_Idle, 0, MSG_MGM_0005)
         Return
     EndIf
     Call(N(CheckPlayerHasEnoughCoins), LVar0)
     IfEq(LVar0, 0)
-        Call(ShowCoinCounter, FALSE)
+        Call(ShowCoinCounter, false)
         Call(ContinueSpeech, NPC_RipCheato, ANIM_RipCheato_Talk, ANIM_RipCheato_Idle, 0, MSG_MGM_0006)
         Return
     EndIf
@@ -90,23 +90,23 @@ EvtScript N(EVS_NpcInteract_RipCheato) = {
     Switch(LVarA)
         CaseEq(CHEATO_TYPE_STAR_PIECE)
             Call(AddCoin, -RIP_CHEATO_COST)
-            Call(ShowCoinCounter, FALSE)
+            Call(ShowCoinCounter, false)
             Call(EndSpeech, NPC_RipCheato, ANIM_RipCheato_Talk, ANIM_RipCheato_Idle, 0)
             EVT_GIVE_STAR_PIECE()
         CaseEq(CHEATO_TYPE_BADGE)
             Call(AddCoin, -RIP_CHEATO_COST)
-            Call(ShowCoinCounter, FALSE)
+            Call(ShowCoinCounter, false)
             Call(EndSpeech, NPC_RipCheato, ANIM_RipCheato_Talk, ANIM_RipCheato_Idle, 0)
             EVT_GIVE_BADGE_REWARD(ITEM_BUMP_ATTACK)
         CaseEq(CHEATO_TYPE_CONSUMABLE)
             Call(N(CheckPlayerHasEnoughRoom))
             IfLe(LVar0, 0)
-                Call(ShowCoinCounter, FALSE)
+                Call(ShowCoinCounter, false)
                 Call(ContinueSpeech, NPC_RipCheato, ANIM_RipCheato_Talk, ANIM_RipCheato_Idle, 0, MSG_MGM_0007)
                 Return
             EndIf
             Call(AddCoin, -RIP_CHEATO_COST)
-            Call(ShowCoinCounter, FALSE)
+            Call(ShowCoinCounter, false)
             Call(EndSpeech, NPC_RipCheato, ANIM_RipCheato_Talk, ANIM_RipCheato_Idle, 0)
             EVT_GIVE_CONSUMABLE_REWARD_ALT(LVarB)
     EndSwitch
@@ -121,7 +121,7 @@ EvtScript N(EVS_NpcInteract_RipCheato) = {
 
 EvtScript N(EVS_NpcInit_RipCheato) = {
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_RipCheato)))
-    Set(AF_TIK_02, FALSE)
+    Set(AF_TIK_02, false)
     Return
     End
 };

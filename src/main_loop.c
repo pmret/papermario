@@ -187,7 +187,7 @@ void gfx_draw_frame(void) {
     spr_render_init();
 
     if (!(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD)) {
-        render_frame(FALSE);
+        render_frame(false);
     }
 
     player_render_interact_prompts();
@@ -203,7 +203,7 @@ void gfx_draw_frame(void) {
     }
 
     if (!(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD) && gGameStatusPtr->debugScripts == DEBUG_SCRIPTS_NONE) {
-        render_frame(TRUE);
+        render_frame(true);
     }
 
     if (!(gOverrideFlags & GLOBAL_OVERRIDES_MESSAGES_OVER_CURTAINS)
@@ -267,11 +267,11 @@ void load_engine_data(void) {
     gOverrideFlags = 0;
     gGameStatusPtr->unk_79 = 0;
     gGameStatusPtr->backgroundFlags = 0;
-    gGameStatusPtr->musicEnabled = TRUE;
-    gGameStatusPtr->healthBarsEnabled = TRUE;
+    gGameStatusPtr->musicEnabled = true;
+    gGameStatusPtr->healthBarsEnabled = true;
     gGameStatusPtr->introPart = INTRO_PART_NONE;
     gGameStatusPtr->demoBattleFlags = 0;
-    gGameStatusPtr->multiplayerEnabled = FALSE;
+    gGameStatusPtr->multiplayerEnabled = false;
     gGameStatusPtr->altViewportOffset.x = -8;
     gGameStatusPtr->altViewportOffset.y = 4;
     gTimeFreezeMode = TIME_FREEZE_NONE;
@@ -298,7 +298,7 @@ void load_engine_data(void) {
     clear_npcs();
     hud_element_clear_cache();
     clear_trigger_data();
-    clear_entity_data(FALSE);
+    clear_entity_data(false);
     clear_player_data();
     init_encounter_status();
     clear_screen_overlays();

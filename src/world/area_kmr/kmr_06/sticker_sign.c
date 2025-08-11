@@ -220,11 +220,11 @@ API_CALLABLE(N(DeleteSticker)) {
 EvtScript N(EVS_OnInspect_StickerSign) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     SuspendGroup(EVT_GROUP_FLAG_INTERACT)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_Sign_EatMushroomsTip, 160, 40)
-    IfEq(GF_KMR06_Item_Mushroom, FALSE)
-        IfEq(AF_JAN01_TreeDrop_StarPiece, FALSE)
-            Set(AF_JAN01_TreeDrop_StarPiece, TRUE)
+    IfEq(GF_KMR06_Item_Mushroom, false)
+        IfEq(AF_JAN01_TreeDrop_StarPiece, false)
+            Set(AF_JAN01_TreeDrop_StarPiece, true)
             Thread
                 Wait(2)
                 SetF(LVar0, Float(0.0))
@@ -245,13 +245,13 @@ EvtScript N(EVS_OnInspect_StickerSign) = {
         EndIf
     EndIf
     ResumeGroup(EVT_GROUP_FLAG_INTERACT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_SetupStickerSign) = {
-    IfEq(GF_KMR06_Item_Mushroom, FALSE)
+    IfEq(GF_KMR06_Item_Mushroom, false)
         Call(N(CreateSticker), ITEM_MUSHROOM)
         Call(N(SetStickerPos), 362, 40, -17)
     EndIf

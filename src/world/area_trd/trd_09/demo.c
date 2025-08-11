@@ -46,10 +46,10 @@ EvtScript N(EVS_ProvideDemoInputs) = {
     Call(DemoSetButtons, BUTTON_A)
     Wait(9)
     Call(DemoSetButtons, 0)
-    IfEq(GF_DemoSceneDone, TRUE)
+    IfEq(GF_DemoSceneDone, true)
         Return
     EndIf
-    Set(GF_DemoSceneDone, TRUE)
+    Set(GF_DemoSceneDone, true)
     Call(GotoMapSpecial, Ref("trd_09"), trd_09_ENTRY_2, TRANSITION_END_DEMO_SCENE_BLACK)
     Wait(123)
     Return
@@ -65,10 +65,10 @@ EvtScript N(EVS_MonitorDemoState) = {
         EndIf
         Wait(1)
     EndLoop
-    IfEq(GF_DemoSceneDone, TRUE)
+    IfEq(GF_DemoSceneDone, true)
         Return
     EndIf
-    Set(GF_DemoSceneDone, TRUE)
+    Set(GF_DemoSceneDone, true)
     Call(GotoMapSpecial, Ref("trd_09"), trd_09_ENTRY_2, TRANSITION_END_DEMO_SCENE_WHITE)
     Wait(113)
     Return
@@ -107,7 +107,7 @@ API_CALLABLE(N(SetupDemoScene)) {
 EvtScript N(EVS_PlayDemoScene) = {
     Call(N(SetupDemoScene))
     Call(SetNpcYaw, NPC_PARTNER, 90)
-    Set(GF_DemoSceneDone, FALSE)
+    Set(GF_DemoSceneDone, false)
     Exec(N(EVS_MonitorDemoState))
     Exec(N(EVS_ProvideDemoInputs))
     Return

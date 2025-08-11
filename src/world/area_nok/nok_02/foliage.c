@@ -37,19 +37,19 @@ SearchBushConfig N(SearchBush_Bush3) = {
 FoliageModelList N(Bush4_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o446, MODEL_o454, MODEL_o455, MODEL_o456);
 
 EvtScript N(EVS_Bush4_HideFlowers) = {
-    Call(EnableModel, MODEL_o454, FALSE)
-    Call(EnableModel, MODEL_o455, FALSE)
-    Call(EnableModel, MODEL_o456, FALSE)
+    Call(EnableModel, MODEL_o454, false)
+    Call(EnableModel, MODEL_o455, false)
+    Call(EnableModel, MODEL_o456, false)
     Return
     End
 };
 
 EvtScript N(EVS_OnSearchBush4) = {
-    Call(EnableModel, MODEL_o454, TRUE)
+    Call(EnableModel, MODEL_o454, true)
     Wait(10)
-    Call(EnableModel, MODEL_o456, TRUE)
+    Call(EnableModel, MODEL_o456, true)
     Wait(10)
-    Call(EnableModel, MODEL_o455, TRUE)
+    Call(EnableModel, MODEL_o455, true)
     Return
     End
 };
@@ -62,19 +62,19 @@ SearchBushConfig N(SearchBush_Bush4) = {
 FoliageModelList N(Bush5_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o447, MODEL_o457, MODEL_o458, MODEL_o459);
 
 EvtScript N(EVS_Bush5_HideFlowers) = {
-    Call(EnableModel, MODEL_o457, FALSE)
-    Call(EnableModel, MODEL_o458, FALSE)
-    Call(EnableModel, MODEL_o459, FALSE)
+    Call(EnableModel, MODEL_o457, false)
+    Call(EnableModel, MODEL_o458, false)
+    Call(EnableModel, MODEL_o459, false)
     Return
     End
 };
 
 EvtScript N(EVS_OnSearchBush5) = {
-    Call(EnableModel, MODEL_o457, TRUE)
+    Call(EnableModel, MODEL_o457, true)
     Wait(10)
-    Call(EnableModel, MODEL_o459, TRUE)
+    Call(EnableModel, MODEL_o459, true)
     Wait(10)
-    Call(EnableModel, MODEL_o458, TRUE)
+    Call(EnableModel, MODEL_o458, true)
     Return
     End
 };
@@ -108,7 +108,7 @@ FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o283);
 
 EvtScript N(EVS_OnShakeTree1) = {
     Wait(15)
-    Set(AF_NOK_13, TRUE)
+    Set(AF_NOK_13, true)
     Return
     End
 };

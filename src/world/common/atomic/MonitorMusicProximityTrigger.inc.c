@@ -11,7 +11,7 @@
 API_CALLABLE(N(MonitorMusicProximityTrigger)) {
     Bytecode* args = script->ptrReadPos;
     MusicProximityTrigger* trigger;
-    s32 cond = FALSE;
+    s32 cond = false;
     f32 dist;
 
     if (isInitialCall) {
@@ -25,7 +25,7 @@ API_CALLABLE(N(MonitorMusicProximityTrigger)) {
     if (evt_get_variable(script, script->functionTemp[2])) {
         if (script->functionTemp[1] != MUSIC_PROXIMITY_FULL) {
             script->functionTemp[1] = MUSIC_PROXIMITY_FULL;
-            cond = TRUE;
+            cond = true;
         }
     } else {
         dist = dist2D(gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z, trigger->pos.x, trigger->pos.z);
@@ -34,18 +34,18 @@ API_CALLABLE(N(MonitorMusicProximityTrigger)) {
             case MUSIC_PROXIMITY_FAR:
                 if (dist < trigger->innerDist) {
                     script->functionTemp[1] = MUSIC_PROXIMITY_NEAR;
-                    cond = TRUE;
+                    cond = true;
                 }
                 break;
             case MUSIC_PROXIMITY_NEAR:
                 if (dist > trigger->outerDist) {
                     script->functionTemp[1] = MUSIC_PROXIMITY_FAR;
-                    cond = TRUE;
+                    cond = true;
                 }
                 break;
             case MUSIC_PROXIMITY_FULL:
                 script->functionTemp[1] = MUSIC_PROXIMITY_NEAR;
-                cond = TRUE;
+                cond = true;
                 break;
         }
     }

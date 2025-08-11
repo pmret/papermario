@@ -2,7 +2,7 @@
 #include "entity.h"
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_KKJ25_Defeated_Bowser, TRUE)
+    IfEq(GF_KKJ25_Defeated_Bowser, true)
         Return
     EndIf
     IfLt(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)

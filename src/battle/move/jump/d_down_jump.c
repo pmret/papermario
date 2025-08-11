@@ -15,9 +15,9 @@ API_CALLABLE(N(SpawnImpactFX)) {
     s32 z = evt_get_variable(script, *args++);
 
     if (script->varTable[10] == 0) {
-        fx_green_impact(TRUE, x, y, z, 0.0f);
+        fx_green_impact(true, x, y, z, 0.0f);
     } else {
-        fx_green_impact(FALSE, x, y, z, 0.0f);
+        fx_green_impact(false, x, y, z, 0.0f);
     }
 
     return ApiStatus_DONE2;
@@ -28,7 +28,7 @@ extern EvtScript N(EVS_UseMove_Super);
 extern EvtScript N(EVS_UseMove_Ultra);
 
 EvtScript N(EVS_UseMove) = {
-    Call(ShowActionHud, TRUE)
+    Call(ShowActionHud, true)
     Call(SetDamageSource, DMG_SRC_D_DOWN_JUMP)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar1)
@@ -57,7 +57,7 @@ EvtScript N(EVS_UseMove_Basic) = {
     Wait(1)
     Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
-        CaseGt(FALSE)
+        CaseGt(false)
             Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
             Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_ACTOR_JUMPED_1)
             Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
@@ -85,7 +85,7 @@ EvtScript N(EVS_UseMove_Basic) = {
     Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
-    Call(ShowActionHud, FALSE)
+    Call(ShowActionHud, false)
     Call(action_command_jump_start, 24, AC_DIFFICULTY_STANDARD)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_SpinFall)
@@ -115,7 +115,7 @@ EvtScript N(EVS_UseMove_Super) = {
     Wait(1)
     Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
-        CaseGt(FALSE)
+        CaseGt(false)
             Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
             Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
         CaseDefault
@@ -142,7 +142,7 @@ EvtScript N(EVS_UseMove_Super) = {
     Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
-    Call(ShowActionHud, FALSE)
+    Call(ShowActionHud, false)
     Call(action_command_jump_start, 37, AC_DIFFICULTY_STANDARD)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
@@ -176,7 +176,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
     Wait(1)
     Call(GetPlayerActionQuality, LVar0)
     Switch(LVar0)
-        CaseGt(FALSE)
+        CaseGt(false)
             Call(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
             Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 3, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
         CaseDefault
@@ -203,7 +203,7 @@ EvtScript N(EVS_UseMove_Ultra) = {
     Call(InterruptActionCommand)
     Call(LoadActionCommand, ACTION_COMMAND_JUMP)
     Call(action_command_jump_init)
-    Call(ShowActionHud, FALSE)
+    Call(ShowActionHud, false)
     Call(action_command_jump_start, 25, AC_DIFFICULTY_STANDARD)
     Call(SetGoalToTarget, ACTOR_PLAYER)
     Call(EnablePlayerBlur, ACTOR_BLUR_ENABLE)

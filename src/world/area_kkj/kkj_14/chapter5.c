@@ -2,7 +2,7 @@
 #include "sprite/player.h"
 
 EvtScript N(EVS_Scene_Chapter5) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(InterpPlayerYaw, 270, 0)
     Call(DisablePartnerAI, 0)
     Call(SetNpcPos, NPC_PARTNER, -170, 40, -5)
@@ -10,13 +10,13 @@ EvtScript N(EVS_Scene_Chapter5) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -140, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -140, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.6 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Loop(2)
@@ -42,7 +42,7 @@ EvtScript N(EVS_Scene_Chapter5) = {
         Call(EnablePartnerAI)
     EndThread
     Call(ResetCam, CAM_DEFAULT, Float(2.0 / DT))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

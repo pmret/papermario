@@ -3,7 +3,7 @@
 #include "effects.h"
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_ISK04_UnlockedDoor, FALSE)
+    IfEq(GF_ISK04_UnlockedDoor, false)
         Call(MakeEntity, Ref(Entity_Padlock), 600, -330, 100, 160, MAKE_ENTITY_END)
         Set(MV_RuinsLockEntityID, LVar0)
     EndIf

@@ -170,14 +170,14 @@ EvtScript N(EVS_NpcInit_ToadGuard_01) = {
 };
 
 EvtScript N(EVS_Guard_StopPlayer) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(NpcFacePlayer, NPC_ToadGuard_02, 0)
     Wait(5)
     Call(SpeakToPlayer, NPC_ToadGuard_02, ANIM_ToadGuard_Yellow_Talk, ANIM_ToadGuard_Yellow_Idle, 0, MSG_Outro_005C)
     Wait(10)
     Call(SetPlayerSpeed, Float(4.0))
     Call(PlayerMoveTo, 610, 110, 0)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

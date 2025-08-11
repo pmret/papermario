@@ -13,7 +13,7 @@ EvtScript N(EVS_MoveBush_Separate) = EVT_MOVE_BUSHES(COLLIDER_o70,
 EvtScript N(EVS_Inspect_SeparateBushes) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o70, COLLIDER_FLAGS_UPPER_MASK)
     Exec(N(EVS_MoveBush_Separate))
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(MakeLerp, 0, 45, 30, EASING_CUBIC_OUT)
     Loop(0)
         Call(UpdateLerp)
@@ -25,13 +25,13 @@ EvtScript N(EVS_Inspect_SeparateBushes) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Inspect_FlipBush) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PlaySoundAtCollider, COLLIDER_o88, SOUND_SEARCH_BUSH, 0)
     Loop(3)
         Call(N(MoveBush_AnimateShearing), LVar1, 1)
@@ -43,18 +43,18 @@ EvtScript N(EVS_Inspect_FlipBush) = {
     EndLoop
     Call(TranslateModel, LVar1, 0, 0, 0)
     IfEq(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
-        IfEq(GF_JAN08_SavedYoshi, FALSE)
+        IfEq(GF_JAN08_SavedYoshi, false)
             Call(GetPlayerPos, LVar3, LVar4, LVar5)
             Thread
                 Call(DisablePartnerAI, 0)
-                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
+                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
                 Call(NpcMoveTo, NPC_PARTNER, -315, LVar5, 20)
                 Call(NpcFaceNpc, NPC_PARTNER, NPC_YoshiKid, 0)
-                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, FALSE)
+                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, false)
                 Call(EnablePartnerAI)
             EndThread
             Call(PlayerMoveTo, -340, LVar5, 20)
-            Call(PlayerFaceNpc, NPC_YoshiKid, FALSE)
+            Call(PlayerFaceNpc, NPC_YoshiKid, false)
             Wait(10)
             Call(PlaySoundAtCollider, COLLIDER_o88, SOUND_SEPARATE_BUSHES, 0)
             Set(LVar3, 0)
@@ -66,7 +66,7 @@ EvtScript N(EVS_Inspect_FlipBush) = {
             Set(LVar4, 270)
             Call(SetNpcRotation, NPC_YoshiKid, 0, LVar4, 0)
             Call(SetNpcPos, NPC_YoshiKid, -391, 0, -144)
-            Call(SetNpcFlagBits, NPC_YoshiKid, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(SetNpcFlagBits, NPC_YoshiKid, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
             Loop(10)
                 Add(LVar3, 9)
                 Call(RotateModel, LVar1, LVar3, 0, 1, 0)
@@ -74,13 +74,13 @@ EvtScript N(EVS_Inspect_FlipBush) = {
                 Call(SetNpcRotation, NPC_YoshiKid, 0, LVar4, 0)
                 Wait(1)
             EndLoop
-            Call(EnableNpcShadow, NPC_YoshiKid, TRUE)
-            Call(PlayerFaceNpc, NPC_YoshiKid, FALSE)
+            Call(EnableNpcShadow, NPC_YoshiKid, true)
+            Call(PlayerFaceNpc, NPC_YoshiKid, false)
             Wait(20)
             Call(SetNpcVar, NPC_YoshiKid, 0, 1)
         EndIf
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

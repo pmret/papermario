@@ -187,7 +187,7 @@ enum StarFXTypes {
 };
 
 typedef struct StarFXData {
-    /* 0x000 */ b32 canBounce;
+    /* 0x000 */ bool canBounce;
     /* 0x004 */ Vec3f pos;
     /* 0x010 */ Vec3f vel;
     /* 0x01C */ f32 bounceTime;
@@ -249,7 +249,7 @@ enum SparkesFXTypes {
 };
 
 typedef struct ShapeSpellFXData {
-    /* 0x00 */ b32 isChild;
+    /* 0x00 */ bool isChild;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ f32 unk_14;
@@ -1251,7 +1251,7 @@ typedef struct AttackResultTextFXData {
     /* 0x18 */ s32 timeLeft;
     /* 0x1C */ s32 lifetime;
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ b32 isVisible;
+    /* 0x24 */ bool isVisible;
     /* 0x28 */ f32 scale;
     /* 0x2C */ char unk_2C[0x4];
     /* 0x30 */ Vec2f vel;

@@ -25,9 +25,9 @@ void state_step_startup(void) {
     gameStatus->prevArea = -1;
     gameStatus->mapID = 0;
     gameStatus->entryID = 0;
-    gGameStatusPtr->debugUnused1 = FALSE;
+    gGameStatusPtr->debugUnused1 = false;
     gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;
-    gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
+    gGameStatusPtr->keepUsingPartnerOnMapChange = false;
     gGameStatusPtr->introPart = INTRO_PART_NONE;
     gGameStatusPtr->demoBattleFlags = 0;
     gGameStatusPtr->unk_A9 = -1;
@@ -48,7 +48,7 @@ void state_step_startup(void) {
     hud_element_clear_cache();
     clear_trigger_data();
     clear_printers();
-    clear_entity_data(FALSE);
+    clear_entity_data(false);
     clear_screen_overlays();
     clear_player_status();
     clear_npcs();

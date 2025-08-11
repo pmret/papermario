@@ -10,7 +10,7 @@ EvtScript N(EVS_NpcIdle_Blooper) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Exec(N(EVS_PlayBlooperSong))
     Call(ShowMessageAtScreenPos, MSG_MGM_0000, 160, 40)
     Wait(20)
@@ -51,28 +51,28 @@ EvtScript N(EVS_NpcDefeat_Blooper) = {
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     Wait(15)
     ExecWait(N(EVS_SpawnSwitch))
-    IfEq(GF_TIK_DefeatedOneBlooper, FALSE)
-        Set(GF_TIK_DefeatedOneBlooper, TRUE)
+    IfEq(GF_TIK_DefeatedOneBlooper, false)
+        Set(GF_TIK_DefeatedOneBlooper, true)
     Else
-        Set(GF_TIK_DefeatedTwoBloopers, TRUE)
+        Set(GF_TIK_DefeatedTwoBloopers, true)
     EndIf
-    Set(GF_TIK01_Defeated_Blooper, TRUE)
+    Set(GF_TIK01_Defeated_Blooper, true)
     Exec(N(EVS_SetupMusic))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(RemoveNpc, NPC_SELF)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Blooper) = {
-    IfEq(GF_TIK01_Defeated_Blooper, FALSE)
+    IfEq(GF_TIK01_Defeated_Blooper, false)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Blooper)))
         Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Blooper)))
-        IfEq(GF_TIK_DefeatedOneBlooper, FALSE)
+        IfEq(GF_TIK_DefeatedOneBlooper, false)
             Call(SetNpcScale, NPC_SELF, Float(0.75), Float(0.75), Float(0.75))
             Call(N(GetBlooperBattleID), 0)
         Else
-            IfEq(GF_TIK_DefeatedTwoBloopers, FALSE)
+            IfEq(GF_TIK_DefeatedTwoBloopers, false)
                 Call(SetNpcScale, NPC_SELF, Float(1.25), Float(1.25), Float(1.25))
                 Call(N(GetBlooperBattleID), 1)
             Else

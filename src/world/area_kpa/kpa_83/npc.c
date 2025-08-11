@@ -25,14 +25,14 @@ API_CALLABLE(N(SetPlayerSpriteFacingAngle)) {
 }
 
 EvtScript N(EVS_FocusCam_LookAtDoor) = {
-    Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+    Call(SetCamType, CAM_DEFAULT, 4, false)
     Call(SetCamSpeed, CAM_DEFAULT, LVar6)
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-10.0))
     Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(88.0), Float(256.6))
     Call(SetCamPosB, CAM_DEFAULT, Float(195.0), Float(142.0))
     Call(SetCamPosC, CAM_DEFAULT, Float(0.0), Float(0.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -130,25 +130,25 @@ EvtScript N(EVS_KoopaBros_FlingAway) = {
             Call(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Shock)
             Call(SetNpcJumpscale, NPC_KoopaBrosRed, Float(0.7))
             Call(NpcJump0, NPC_KoopaBrosRed, -50, 200, 170, 40)
-            Call(SetNpcFlagBits, NPC_KoopaBrosRed, NPC_FLAG_GRAVITY, FALSE)
+            Call(SetNpcFlagBits, NPC_KoopaBrosRed, NPC_FLAG_GRAVITY, false)
             Call(SetNpcPos, NPC_KoopaBrosRed, NPC_DISPOSE_LOCATION)
         CaseEq(NPC_KoopaBrosBlk)
             Call(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_Shock)
             Call(SetNpcJumpscale, NPC_KoopaBrosBlk, Float(0.7))
             Call(NpcJump0, NPC_KoopaBrosBlk, 0, 200, 127, 40)
-            Call(SetNpcFlagBits, NPC_KoopaBrosRed, NPC_FLAG_GRAVITY, FALSE)
+            Call(SetNpcFlagBits, NPC_KoopaBrosRed, NPC_FLAG_GRAVITY, false)
             Call(SetNpcPos, NPC_KoopaBrosBlk, NPC_DISPOSE_LOCATION)
         CaseEq(NPC_KoopaBrosYlw)
             Call(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_Shock)
             Call(SetNpcJumpscale, NPC_KoopaBrosYlw, Float(0.7))
             Call(NpcJump0, NPC_KoopaBrosYlw, 100, 200, 200, 40)
-            Call(SetNpcFlagBits, NPC_KoopaBrosYlw, NPC_FLAG_GRAVITY, FALSE)
+            Call(SetNpcFlagBits, NPC_KoopaBrosYlw, NPC_FLAG_GRAVITY, false)
             Call(SetNpcPos, NPC_KoopaBrosYlw, NPC_DISPOSE_LOCATION)
         CaseEq(NPC_KoopaBrosGrn)
             Call(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_Shock)
             Call(SetNpcJumpscale, NPC_KoopaBrosGrn, Float(0.7))
             Call(NpcJump0, NPC_KoopaBrosGrn, 150, 200, 150, 40)
-            Call(SetNpcFlagBits, NPC_KoopaBrosGrn, NPC_FLAG_GRAVITY, FALSE)
+            Call(SetNpcFlagBits, NPC_KoopaBrosGrn, NPC_FLAG_GRAVITY, false)
             Call(SetNpcPos, NPC_KoopaBrosGrn, NPC_DISPOSE_LOCATION)
     EndSwitch
     Return
@@ -156,35 +156,35 @@ EvtScript N(EVS_KoopaBros_FlingAway) = {
 };
 
 EvtScript N(EVS_NpcIdle_Door) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPlayerSpeed, Float(3.0 / DT))
     Call(PlayerMoveTo, -150, LVar2, 0)
-    Call(SetCamType, CAM_DEFAULT, 6, FALSE)
+    Call(SetCamType, CAM_DEFAULT, 6, false)
     Set(LVar6, Float(3.0 / DT))
     ExecWait(N(EVS_FocusCam_LookAtDoor))
-    Set(MF_DoneIntroMessage, FALSE)
+    Set(MF_DoneIntroMessage, false)
     Thread
         Call(SetMusic, 0, SONG_FINAL_BOWSER_BATTLE, BGM_VARIATION_1, VOL_LEVEL_FULL)
         Wait(150)
-        IfNe(MF_DoneIntroMessage, FALSE)
+        IfNe(MF_DoneIntroMessage, false)
             Goto(5)
         EndIf
         Call(FadeOutMusic, 0, 250)
         Wait(15)
-        IfNe(MF_DoneIntroMessage, FALSE)
+        IfNe(MF_DoneIntroMessage, false)
             Goto(5)
         EndIf
         Call(SetMusic, 0, SONG_BOWSERS_CASTLE, 0, VOL_LEVEL_FULL)
         Wait(30)
-        IfNe(MF_DoneIntroMessage, FALSE)
+        IfNe(MF_DoneIntroMessage, false)
             Goto(5)
         EndIf
         Call(SetTrackVolumes, TRACK_VOLS_KPA_3)
         Label(5)
     EndThread
     Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0053)
-    Set(MF_DoneIntroMessage, TRUE)
+    Set(MF_DoneIntroMessage, true)
     Wait(2)
     Call(SetMusic, 0, SONG_KOOPA_BROS_THEME, BGM_VARIATION_2, VOL_LEVEL_FULL)
     Set(LVar3, 65)
@@ -196,14 +196,14 @@ EvtScript N(EVS_NpcIdle_Door) = {
     Thread
         Call(SetNpcPos, NPC_KoopaBrosRed, 220, 180, 160)
         Call(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Midair)
-        Call(EnableNpcBlur, NPC_KoopaBrosRed, TRUE)
+        Call(EnableNpcBlur, NPC_KoopaBrosRed, true)
         Call(SetNpcJumpscale, NPC_KoopaBrosRed, Float(1.0))
-        Call(SetNpcFlagBits, NPC_KoopaBrosRed, NPC_FLAG_GRAVITY, TRUE)
-        Call(SetNpcFlagBits, NPC_KoopaBrosRed, NPC_FLAG_FLYING, FALSE)
+        Call(SetNpcFlagBits, NPC_KoopaBrosRed, NPC_FLAG_GRAVITY, true)
+        Call(SetNpcFlagBits, NPC_KoopaBrosRed, NPC_FLAG_FLYING, false)
         Call(NpcMoveTo, NPC_KoopaBrosRed, 20, 160, 20)
         Call(PlaySoundAtNpc, NPC_KoopaBrosRed, SOUND_KOOPA_BROS_LAND, SOUND_SPACE_DEFAULT)
         PlayEffect(EFFECT_LANDING_DUST, 1, 20, 0, 160, 0)
-        Call(EnableNpcBlur, NPC_KoopaBrosRed, FALSE)
+        Call(EnableNpcBlur, NPC_KoopaBrosRed, false)
         Call(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_IdleCrouch)
         Call(SetNpcYaw, NPC_KoopaBrosRed, 270)
     EndThread
@@ -211,14 +211,14 @@ EvtScript N(EVS_NpcIdle_Door) = {
         Wait(5)
         Call(SetNpcPos, NPC_KoopaBrosBlk, 248, 180, 185)
         Call(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_Midair)
-        Call(EnableNpcBlur, NPC_KoopaBrosBlk, TRUE)
+        Call(EnableNpcBlur, NPC_KoopaBrosBlk, true)
         Call(SetNpcJumpscale, NPC_KoopaBrosBlk, Float(1.0))
-        Call(SetNpcFlagBits, NPC_KoopaBrosBlk, NPC_FLAG_GRAVITY, TRUE)
-        Call(SetNpcFlagBits, NPC_KoopaBrosBlk, NPC_FLAG_FLYING, FALSE)
+        Call(SetNpcFlagBits, NPC_KoopaBrosBlk, NPC_FLAG_GRAVITY, true)
+        Call(SetNpcFlagBits, NPC_KoopaBrosBlk, NPC_FLAG_FLYING, false)
         Call(NpcMoveTo, NPC_KoopaBrosBlk, 48, 185, 20)
         Call(PlaySoundAtNpc, NPC_KoopaBrosBlk, SOUND_KOOPA_BROS_LAND, SOUND_SPACE_DEFAULT)
         PlayEffect(EFFECT_LANDING_DUST, 1, 48, 0, 185, 0)
-        Call(EnableNpcBlur, NPC_KoopaBrosBlk, FALSE)
+        Call(EnableNpcBlur, NPC_KoopaBrosBlk, false)
         Call(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_IdleCrouch)
         Call(SetNpcYaw, NPC_KoopaBrosBlk, 270)
     EndThread
@@ -226,14 +226,14 @@ EvtScript N(EVS_NpcIdle_Door) = {
         Wait(10)
         Call(SetNpcPos, NPC_KoopaBrosYlw, 260, 180, 110)
         Call(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_Midair)
-        Call(EnableNpcBlur, NPC_KoopaBrosYlw, TRUE)
+        Call(EnableNpcBlur, NPC_KoopaBrosYlw, true)
         Call(SetNpcJumpscale, NPC_KoopaBrosYlw, Float(1.0))
-        Call(SetNpcFlagBits, NPC_KoopaBrosYlw, NPC_FLAG_GRAVITY, TRUE)
-        Call(SetNpcFlagBits, NPC_KoopaBrosYlw, NPC_FLAG_FLYING, FALSE)
+        Call(SetNpcFlagBits, NPC_KoopaBrosYlw, NPC_FLAG_GRAVITY, true)
+        Call(SetNpcFlagBits, NPC_KoopaBrosYlw, NPC_FLAG_FLYING, false)
         Call(NpcMoveTo, NPC_KoopaBrosYlw, 60, 110, 20)
         Call(PlaySoundAtNpc, NPC_KoopaBrosYlw, SOUND_KOOPA_BROS_LAND, SOUND_SPACE_DEFAULT)
         PlayEffect(EFFECT_LANDING_DUST, 1, 60, 0, 110, 0)
-        Call(EnableNpcBlur, NPC_KoopaBrosYlw, FALSE)
+        Call(EnableNpcBlur, NPC_KoopaBrosYlw, false)
         Call(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_IdleCrouch)
         Call(SetNpcYaw, NPC_KoopaBrosYlw, 270)
     EndThread
@@ -241,14 +241,14 @@ EvtScript N(EVS_NpcIdle_Door) = {
         Wait(15)
         Call(SetNpcPos, NPC_KoopaBrosGrn, 288, 180, 155)
         Call(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_Midair)
-        Call(EnableNpcBlur, NPC_KoopaBrosGrn, TRUE)
+        Call(EnableNpcBlur, NPC_KoopaBrosGrn, true)
         Call(SetNpcJumpscale, NPC_KoopaBrosGrn, Float(1.0))
-        Call(SetNpcFlagBits, NPC_KoopaBrosGrn, NPC_FLAG_GRAVITY, TRUE)
-        Call(SetNpcFlagBits, NPC_KoopaBrosGrn, NPC_FLAG_FLYING, FALSE)
+        Call(SetNpcFlagBits, NPC_KoopaBrosGrn, NPC_FLAG_GRAVITY, true)
+        Call(SetNpcFlagBits, NPC_KoopaBrosGrn, NPC_FLAG_FLYING, false)
         Call(NpcMoveTo, NPC_KoopaBrosGrn, 88, 155, 20)
         Call(PlaySoundAtNpc, NPC_KoopaBrosGrn, SOUND_KOOPA_BROS_LAND, SOUND_SPACE_DEFAULT)
         PlayEffect(EFFECT_LANDING_DUST, 1, 88, 0, 155, 0)
-        Call(EnableNpcBlur, NPC_KoopaBrosGrn, FALSE)
+        Call(EnableNpcBlur, NPC_KoopaBrosGrn, false)
         Call(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_IdleCrouch)
         Call(SetNpcYaw, NPC_KoopaBrosGrn, 270)
     EndThread
@@ -341,7 +341,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
             EndIf
             Wait(1)
         EndLoop
-        Call(SetPlayerFlagBits, PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_ROTATION_LOCKED | PS_FLAG_FACE_FORWARD, TRUE)
+        Call(SetPlayerFlagBits, PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_ROTATION_LOCKED | PS_FLAG_FACE_FORWARD, true)
         Call(MakeLerp, 0, 11 * 180, 50, EASING_QUADRATIC_OUT)
         Loop(0)
             Call(UpdateLerp)
@@ -352,7 +352,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
                 BreakLoop
             EndIf
         EndLoop
-        Call(SetPlayerFlagBits, PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_ROTATION_LOCKED | PS_FLAG_FACE_FORWARD, FALSE)
+        Call(SetPlayerFlagBits, PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_ROTATION_LOCKED | PS_FLAG_FACE_FORWARD, false)
         Call(InterpPlayerYaw, 90, 0)
         Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     EndThread
@@ -453,9 +453,9 @@ EvtScript N(EVS_NpcIdle_Door) = {
     Set(LVar6, Float(3.0 / DT))
     ExecWait(N(EVS_FocusCam_LookAtDoor))
     Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0063)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Set(GB_KPA83_BowserDoorState, 1)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -481,9 +481,9 @@ EvtScript N(EVS_NpcInit_Door) = {
     IfEq(GB_KPA83_BowserDoorState, 0)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Door)))
         Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Door)))
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_USE_INSPECT_ICON, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_USE_INSPECT_ICON, true)
         Call(SetNpcPos, NPC_SELF, 184, 20, 150)
-        Call(EnableNpcShadow, NPC_SELF, FALSE)
+        Call(EnableNpcShadow, NPC_SELF, false)
     EndIf
     Return
     End

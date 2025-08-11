@@ -17,10 +17,10 @@ INCLUDE_IMG("battle/move/item/pebble.png", battle_item_pebble_png);
 INCLUDE_PAL("battle/move/item/pebble.pal", battle_item_pebble_pal);
 
 Vtx N(model)[] = {
-    { .v = { { -16, -16, 0 }, FALSE, { 0,    0 },    { 0, 0, 0, 255 } } },
-    { .v = { { 15,  -16, 0 }, FALSE, { 1024, 0 },    { 0, 0, 0, 255 } } },
-    { .v = { { 15,  15,  0 }, FALSE, { 1024, 1024 }, { 0, 0, 0, 255 } } },
-    { .v = { { -16, 15,  0 }, FALSE, { 0,    1024 }, { 0, 0, 0, 255 } } },
+    { .v = { { -16, -16, 0 }, false, { 0,    0 },    { 0, 0, 0, 255 } } },
+    { .v = { { 15,  -16, 0 }, false, { 1024, 0 },    { 0, 0, 0, 255 } } },
+    { .v = { { 15,  15,  0 }, false, { 1024, 1024 }, { 0, 0, 0, 255 } } },
+    { .v = { { -16, 15,  0 }, false, { 0,    1024 }, { 0, 0, 0, 255 } } },
 };
 
 Gfx N(displayList)[] = {

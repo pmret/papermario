@@ -35,13 +35,13 @@ s32 N(KeyList)[] = {
 
 EvtScript N(EVS_BindExitTriggers) = {
     BindTrigger(Ref(N(EVS_ExitDoors_trd_03_1)), TRIGGER_WALL_PRESS_A, COLLIDER_ttw2, 1, 0)
-    IfEq(GF_TRD04_UnlockedLowerDoor, FALSE)
+    IfEq(GF_TRD04_UnlockedLowerDoor, false)
         BindPadlock(Ref(N(EVS_UnlockLowerRightDoors)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), Ref(N(KeyList)), 0, 1)
     Else
         BindTrigger(Ref(N(EVS_ExitDoors_trd_05_0)), TRIGGER_WALL_PRESS_A, COLLIDER_tte2, 1, 0)
     EndIf
-    IfEq(GF_TRD04_UnlockedUpperDoor, FALSE)
-        IfEq(GF_TRD04_UnlockedLowerDoor, TRUE)
+    IfEq(GF_TRD04_UnlockedUpperDoor, false)
+        IfEq(GF_TRD04_UnlockedLowerDoor, true)
             BindPadlock(Ref(N(EVS_UnlockUpperLeftDoors)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), Ref(N(KeyList)), 0, 1)
         EndIf
     Else
@@ -103,7 +103,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     SuspendGroup(EVT_GROUP_FLAG_INTERACT)
     Set(GB_StoryProgress, STORY_CH1_LOWERED_FIRST_STAIRS)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(30 * DT)
     Thread
         Call(ShakeCam, CAM_DEFAULT, 0, 10 * DT, Float(0.7))
@@ -112,16 +112,16 @@ EvtScript N(EVS_Scene_LowerStairs) = {
         Call(ShakeCam, CAM_DEFAULT, 0, 10 * DT, Float(0.4))
     EndThread
     Wait(30 * DT)
-    Call(EnableModel, MODEL_o6, FALSE)
-    Call(EnableModel, MODEL_o7, FALSE)
-    Call(EnableModel, MODEL_bero2, FALSE)
+    Call(EnableModel, MODEL_o6, false)
+    Call(EnableModel, MODEL_o7, false)
+    Call(EnableModel, MODEL_bero2, false)
     Call(UseSettingsFrom, CAM_DEFAULT, -50, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -50, 0, 0)
     Call(SetCamDistance, CAM_DEFAULT, Float(540.0))
     Call(SetCamPitch, CAM_DEFAULT, 15, -6)
     Call(SetCamPosA, CAM_DEFAULT, -30, -60)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetPlayerPos, -185, 0, -36)
     Call(InterpPlayerYaw, 90, 0)
     Call(SetNpcPos, NPC_PARTNER, -163, 0, -12)
@@ -205,11 +205,11 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(2)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-    Call(EnableModel, MODEL_o6, TRUE)
-    Call(EnableModel, MODEL_o7, TRUE)
-    Call(EnableModel, MODEL_bero2, TRUE)
-    Call(DisablePlayerInput, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
+    Call(EnableModel, MODEL_o6, true)
+    Call(EnableModel, MODEL_o7, true)
+    Call(EnableModel, MODEL_bero2, true)
+    Call(DisablePlayerInput, false)
     ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
     Return
@@ -238,13 +238,13 @@ EvtScript N(EVS_Main) = {
     SetUP_CAMERA_ALT_NO_LEAD()
     Call(SetRenderMode, MODEL_suimen, RENDER_MODE_SURFACE_XLU_LAYER2)
     IfLt(GB_StoryProgress, STORY_CH1_LOWERED_FIRST_STAIRS)
-        Call(MakeNpcs, TRUE, Ref(N(NpcGroupBefore)))
+        Call(MakeNpcs, true, Ref(N(NpcGroupBefore)))
     Else
-        Call(MakeNpcs, TRUE, Ref(N(NpcGroupAfter)))
+        Call(MakeNpcs, true, Ref(N(NpcGroupAfter)))
     EndIf
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
-    Set(AF_TRD04_LowerStairs, FALSE)
+    Set(AF_TRD04_LowerStairs, false)
     Call(ParentColliderToModel, COLLIDER_o86, MODEL_k_dan)
     Call(ParentColliderToModel, COLLIDER_o87, MODEL_k_dan)
     IfLt(GB_StoryProgress, STORY_CH1_LOWERED_FIRST_STAIRS)
@@ -257,12 +257,12 @@ EvtScript N(EVS_Main) = {
     EndIf
     Exec(N(EVS_TexPan_Water))
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)
-    Call(EnableModel, MODEL_o34, FALSE)
-    Call(EnableModel, MODEL_dai, FALSE)
+    Call(EnableModel, MODEL_o34, false)
+    Call(EnableModel, MODEL_dai, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_dai, COLLIDER_FLAGS_UPPER_MASK)
     Exec(N(EVS_EnterMap))
     Wait(1)
-    Call(EnableTexPanning, MODEL_suimen, TRUE)
+    Call(EnableTexPanning, MODEL_suimen, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(    0,   90,  -60,  -70)

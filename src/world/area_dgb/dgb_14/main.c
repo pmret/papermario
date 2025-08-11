@@ -3,7 +3,7 @@
 
 EvtScript N(EVS_ExitDoors_dgb_03_3) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_14_ENTRY_1)
     Set(LVar1, COLLIDER_deilittse)
@@ -19,7 +19,7 @@ EvtScript N(EVS_ExitDoors_dgb_03_3) = {
 
 EvtScript N(EVS_ExitDoors_dgb_15_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_14_ENTRY_0)
     Set(LVar1, COLLIDER_deilittne)
@@ -42,17 +42,17 @@ EvtScript N(EVS_EnterMap) = {
             Set(LVar3, MODEL_o101)
             ExecWait(EnterDoubleDoor)
         CaseEq(dgb_14_ENTRY_1)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Set(LVar2, MODEL_o31)
             Set(LVar3, MODEL_o30)
             ExecWait(EnterDoubleDoor)
-            IfEq(AF_DGB_01, TRUE)
+            IfEq(AF_DGB_01, true)
                 Wait(5)
                 Call(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
                 Wait(20)
                 Call(SetPlayerAnimation, ANIM_Mario1_Idle)
             EndIf
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
     EndSwitch
     Return
     End

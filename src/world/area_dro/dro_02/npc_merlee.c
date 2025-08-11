@@ -85,7 +85,7 @@ API_CALLABLE(N(TryEnchantPlayer)) {
     u8 casts = N(MerleeSpellCasts)[tier];
 
     if (playerData->coins < coins) {
-        evt_set_variable(script, outPrevented, TRUE);
+        evt_set_variable(script, outPrevented, true);
     } else {
         playerData->coins = playerData->coins - coins;
         if (playerData->merleeCastsLeft < casts) {
@@ -106,7 +106,7 @@ API_CALLABLE(N(TryEnchantPlayer)) {
                 playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                 break;
         }
-        evt_set_variable(script, outPrevented, FALSE);
+        evt_set_variable(script, outPrevented, false);
     }
 
     return ApiStatus_DONE2;
@@ -650,7 +650,7 @@ EvtScript N(EVS_PerformRitual) = {
         Call(DismissEffect, RITUAL_VAR_ORB_EFFECT)
     EndThread
     Call(N(DarkenWorld))
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(InterpPlayerYaw, 0, 0)
     Call(N(CreateRitualCards))
     Thread
@@ -731,7 +731,7 @@ EvtScript N(EVS_PerformRitual) = {
     Wait(1)
     Call(SetPlayerPos, RITUAL_VAR_POS_X, RITUAL_VAR_POS_Y, RITUAL_VAR_POS_Z)
     Wait(1)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerPhysics, false)
     Call(N(DestroyRitualCards))
     Thread
         Call(N(UndarkenWorld))
@@ -747,14 +747,14 @@ EvtScript N(EVS_BeginMerleeCamera) = {
     Call(SetPanTarget, 0, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, 0, Float(8.0))
     Call(SetCamPitch, 0, 20, -15)
-    Call(PanToTarget, 0, 0, TRUE)
+    Call(PanToTarget, 0, 0, true)
     Call(WaitForCam, 0, Float(1.0))
     Return
     End
 };
 
 EvtScript N(EVS_EndMerleeCamera) = {
-    Call(PanToTarget, 0, 0, FALSE)
+    Call(PanToTarget, 0, 0, false)
     Call(SetCamSpeed, 0, Float(3.0))
     Call(WaitForCam, 0, Float(1.0))
     Return

@@ -3,7 +3,7 @@
 s32 N(map_init)(void) {
     sprintf((s8*) &wMapShapeName, "tik_18_shape");
     sprintf((s8*) &wMapHitName, "tik_18_hit");
-    return FALSE;
+    return false;
 }
 
 //TODO these shouldnt need to be declared outside of tik_24_2_main

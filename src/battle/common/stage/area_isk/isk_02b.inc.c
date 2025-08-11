@@ -6,12 +6,12 @@
 EvtScript N(EVS_PreBattle) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    Call(EnableModel, MODEL_o365, FALSE)
-    Call(EnableModel, MODEL_o366, FALSE)
-    Call(EnableModel, MODEL_o367, FALSE)
-    Call(EnableModel, MODEL_o389, FALSE)
-    Call(EnableModel, MODEL_o390, FALSE)
-    Call(EnableModel, MODEL_o391, FALSE)
+    Call(EnableModel, MODEL_o365, false)
+    Call(EnableModel, MODEL_o366, false)
+    Call(EnableModel, MODEL_o367, false)
+    Call(EnableModel, MODEL_o389, false)
+    Call(EnableModel, MODEL_o390, false)
+    Call(EnableModel, MODEL_o391, false)
     Return
     End
 };

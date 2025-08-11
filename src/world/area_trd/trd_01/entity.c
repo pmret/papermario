@@ -5,7 +5,7 @@ extern EvtScript N(EVS_ExitDoors_trd_02_0);
 
 EvtScript N(EVS_FocusCamOnLock) = {
     Label(0)
-        IfEq(GF_TRD01_Item_FortressKey, TRUE)
+        IfEq(GF_TRD01_Item_FortressKey, true)
             Call(AwaitPlayerApproach, 320, 0, 40)
             Call(UseSettingsFrom, CAM_DEFAULT, 220, 0, 0)
             Call(SetPanTarget, CAM_DEFAULT, 300, 0, 0)
@@ -13,9 +13,9 @@ EvtScript N(EVS_FocusCamOnLock) = {
             Call(GetCamPosA, CAM_DEFAULT, LVar0, LVar1)
             Call(SetCamPosA, CAM_DEFAULT, Float(-64.0), LVar1)
             Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(AwaitPlayerLeave, 320, 0, 60)
-            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+            Call(PanToTarget, CAM_DEFAULT, 0, false)
         EndIf
         Wait(1)
         Goto(0)
@@ -44,12 +44,12 @@ EvtScript N(EVS_UnlockDoors) = {
     Call(FindKeyItem, ITEM_KOOPA_FORTRESS_KEY, LVar0)
     Call(RemoveKeyItemAt, LVar0)
     Call(CloseChoicePopup)
-    Set(GF_TRD01_UnlockedDoor, TRUE)
+    Set(GF_TRD01_UnlockedDoor, true)
     Call(N(GetEntityPosition), MV_Padlock_EntityIndex, LVar0, LVar1, LVar2)
     Call(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     Set(LVar0, MV_Padlock_EntityIndex)
     Call(N(RemovePadlock))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     ResumeGroup(EVT_GROUP_FLAG_INTERACT)
     Unbind
     Return
@@ -63,7 +63,7 @@ EvtScript N(EVS_BindLockTrigger) = {
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_TRD01_UnlockedDoor, FALSE)
+    IfEq(GF_TRD01_UnlockedDoor, false)
         Call(MakeEntity, Ref(Entity_Padlock), 315, 8, 0, -80, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_BindLockTrigger)))
         Set(MV_Padlock_EntityIndex, LVar0)
@@ -73,8 +73,8 @@ EvtScript N(EVS_MakeEntities) = {
         Call(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_TRD01_RaiseStairs))
     EndIf
     Call(MakeItemEntity, ITEM_SMASH_CHARGE, -268, 656, -40, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_TRD01_Item_SmashCharge)
-    IfEq(GF_TRD01_Defeated_KoopaGuard, TRUE)
-        IfEq(GF_TRD01_Item_FortressKey, FALSE)
+    IfEq(GF_TRD01_Defeated_KoopaGuard, true)
+        IfEq(GF_TRD01_Item_FortressKey, false)
             Call(MakeItemEntity, ITEM_KOOPA_FORTRESS_KEY, 254, 0, 30, ITEM_SPAWN_MODE_KEY, GF_TRD01_Item_FortressKey)
         EndIf
     EndIf

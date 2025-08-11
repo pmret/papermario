@@ -14,11 +14,11 @@ s32 N(BerryList)[] = {
 };
 
 EvtScript N(EVS_SniffleHint) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(20)
     Call(ShowMessageAtScreenPos, MSG_CH6_00DB, 300, 120)
     Wait(10)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -54,11 +54,11 @@ EvtScript N(EVS_TossItemIntoWell) = {
 };
 
 EvtScript N(EVS_OnInteract_Well) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerInput, false)
     Call(ShowConsumableChoicePopup)
     Call(CloseChoicePopup)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar8, LVar0)
     Switch(LVar8)
         CaseLe(-1)
@@ -67,13 +67,13 @@ EvtScript N(EVS_OnInteract_Well) = {
         CaseEq(ITEM_BLUE_BERRY)
             ExecWait(N(EVS_TossItemIntoWell))
             Call(RemoveItemAt, LVar1)
-            IfEq(GF_FLO22_ThrewBlueBerryDownWell, FALSE)
+            IfEq(GF_FLO22_ThrewBlueBerryDownWell, false)
                 Call(ShowMessageAtWorldPos, MSG_CH6_00DD, 35, 35, 0)
-                Set(GF_FLO22_ThrewBlueBerryDownWell, TRUE)
+                Set(GF_FLO22_ThrewBlueBerryDownWell, true)
                 Call(MakeItemEntity, ITEM_FLOWER_SAVER_B, -35, 0, 0, ITEM_SPAWN_MODE_KEY, GF_FLO22_Item_FlowerSaverB)
                 Set(LVar7, LVar0)
-                Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_INVISIBLE, TRUE)
-                Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_HAS_SHADOW, FALSE)
+                Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_INVISIBLE, true)
+                Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_HAS_SHADOW, false)
                 Call(SetNpcPos, NPC_Dummy, 35, 0, 0)
                 Call(SetNpcJumpscale, NPC_Dummy, Float(1.0))
                 Thread
@@ -87,8 +87,8 @@ EvtScript N(EVS_OnInteract_Well) = {
                     Wait(1)
                 EndLoop
                 Call(SetNpcPos, NPC_Dummy, NPC_DISPOSE_LOCATION)
-                Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_INVISIBLE, FALSE)
-                Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_HAS_SHADOW, TRUE)
+                Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_INVISIBLE, false)
+                Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_HAS_SHADOW, true)
             Else
                 Call(ShowMessageAtWorldPos, MSG_CH6_00DE, 35, 35, 0)
             EndIf
@@ -120,14 +120,14 @@ EvtScript N(EVS_OnInteract_Well) = {
                 Set(MV_Dayzee_State, 1)
             EndIf
     EndSwitch
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_SetupWell) = {
     BindPadlock(Ref(N(EVS_OnInteract_Well)), TRIGGER_WALL_PRESS_A, COLLIDER_o5, Ref(N(BerryList)), 0, 1)
-    IfEq(GF_FLO22_ThrewBlueBerryDownWell, TRUE)
+    IfEq(GF_FLO22_ThrewBlueBerryDownWell, true)
         Call(MakeItemEntity, ITEM_FLOWER_SAVER_B, -83, 0, 0, ITEM_SPAWN_MODE_KEY, GF_FLO22_Item_FlowerSaverB)
     EndIf
     Return

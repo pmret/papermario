@@ -53,7 +53,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
         IfGt(LVar2, 185)
             Goto(10)
         EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(10)
     Thread
         Wait(10)
@@ -77,7 +77,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -40, 0, 180)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetPanTarget, CAM_DEFAULT, -40, 0, 180)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetPlayerPos, 740, 0, 180)
     Call(SetNpcPos, NPC_PARTNER, 765, 0, 180)
@@ -255,9 +255,9 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Set(GB_StoryProgress, STORY_CH3_TUBBA_BEGAN_NAPPING)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -372,13 +372,13 @@ EvtScript N(EVS_Scene_YakkeyShouts) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(40)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetNpcPos, NPC_SELF, 845, 0, 140)
     Call(SetNpcJumpscale, NPC_SELF, Float(0.8))
     Call(NpcJump1, NPC_SELF, 845, 35, 145, 15)
-    Call(PlayerFaceNpc, NPC_SELF, FALSE)
+    Call(PlayerFaceNpc, NPC_SELF, false)
     Wait(15)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -386,7 +386,7 @@ EvtScript N(EVS_Scene_YakkeyShouts) = {
     Call(SetCamDistance, CAM_DEFAULT, 300)
     Call(SetCamPosB, CAM_DEFAULT, 800, 245)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 5, MSG_CH3_00F6)
     Wait(15)
     Call(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 5, MSG_CH3_00F7)
@@ -404,13 +404,13 @@ EvtScript N(EVS_Scene_YakkeyShouts) = {
     Call(SetPanTarget, CAM_DEFAULT, 740, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
-        Set(MF_Sync_YakkeyDialogue, FALSE)
+        Set(MF_Sync_YakkeyDialogue, false)
 #if VERSION_JP
         Call(ShowMessageAtScreenPos, MSG_CH3_00FA, 160, 40)
 #else
         Call(SpeakToPlayer, NPC_SELF, ANIM_Yakkey_Talk, ANIM_Yakkey_Idle, 517, MSG_CH3_00FA)
 #endif
-        Set(MF_Sync_YakkeyDialogue, TRUE)
+        Set(MF_Sync_YakkeyDialogue, true)
     EndThread
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -423,7 +423,7 @@ EvtScript N(EVS_Scene_YakkeyShouts) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
         Call(SetPanTarget, CAM_DEFAULT, 740, LVar1, LVar2)
         Wait(1)
-        IfEq(MF_Sync_YakkeyDialogue, TRUE)
+        IfEq(MF_Sync_YakkeyDialogue, true)
             BreakLoop
         EndIf
     EndLoop
@@ -471,15 +471,15 @@ EvtScript N(EVS_Scene_YakkeyShouts) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Sub(LVar1, 10)
     Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10)
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     Set(GB_StoryProgress, STORY_CH3_TUBBA_WOKE_UP)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -497,7 +497,7 @@ NpcData N(NpcData_Tubba) = {
     .yaw = 270,
     .territory = {
         .patrol = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 5,
             .points  = {

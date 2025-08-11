@@ -4,7 +4,7 @@
 #include "world/common/enemy/Duplighost_Wander.inc.c"
 
 EvtScript N(EVS_NpcInit_Duplighost) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_REFLECT_FLOOR, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_REFLECT_FLOOR, true)
     Return
     End
 };
@@ -15,7 +15,7 @@ NpcData N(NpcData_Duplighost) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 250, 0, 75 },

@@ -32,7 +32,7 @@ static f32 BattleCam_InitialPosY;
 static f32 BattleCam_InitialPosZ;
 static EvtScript* BattleCam_ControlScript;
 
-s8 BattleCam_IsFrozen = FALSE;
+s8 BattleCam_IsFrozen = false;
 s32 BattleCam_CurrentPresetID = -1;
 
 API_CALLABLE(BattleCam_Update_Interrupt);
@@ -140,7 +140,7 @@ EvtScript EVS_OnBattleInit = {
     Call(SetCamPerspective, CAM_BATTLE, CAM_UPDATE_NO_INTERP, 25, 16, 1024)
     Call(SetCamViewport, CAM_BATTLE, 12, 20, 296, 200)
     Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    Call(SetCamEnabled, CAM_BATTLE, TRUE)
+    Call(SetCamEnabled, CAM_BATTLE, true)
     Wait(1)
     Call(InitVirtualEntityList)
     Call(InitAnimatedModels)
@@ -153,7 +153,7 @@ EvtScript EVS_OnBattleInit = {
 };
 
 API_CALLABLE(BattleCam_Update_Interrupt) {
-    BattleCam_DoneMoving = TRUE;
+    BattleCam_DoneMoving = true;
     return ApiStatus_BLOCK;
 }
 
@@ -364,7 +364,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointA) {
     camera->params.basic.pitch = LERP(BattleCam_InitialBoomPitch, BattleCam_BoomPitch, alpha);
 
     if (BattleCam_MoveTimeLeft == 0) {
-        BattleCam_DoneMoving = TRUE;
+        BattleCam_DoneMoving = true;
     } else {
         BattleCam_MoveTimeLeft--;
     }
@@ -577,7 +577,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointB) {
     camera->params.basic.pitch = LERP(BattleCam_InitialBoomPitch, BattleCam_BoomPitch, alpha);
 
     if (BattleCam_MoveTimeLeft == 0) {
-        BattleCam_DoneMoving = TRUE;
+        BattleCam_DoneMoving = true;
     } else {
         BattleCam_MoveTimeLeft--;
     }
@@ -773,7 +773,7 @@ API_CALLABLE(BattleCam_Update_FocusActorPart) {
     camera->params.basic.pitch = LERP(BattleCam_InitialBoomPitch, BattleCam_BoomPitch, alpha);
 
     if (BattleCam_MoveTimeLeft == 0) {
-        BattleCam_DoneMoving = TRUE;
+        BattleCam_DoneMoving = true;
     } else {
         BattleCam_MoveTimeLeft--;
     }
@@ -896,7 +896,7 @@ API_CALLABLE(BattleCam_Update_FocusActor) {
     camera->params.basic.pitch = LERP(BattleCam_InitialBoomPitch, BattleCam_BoomPitch, alpha);
 
     if (BattleCam_MoveTimeLeft == 0) {
-        BattleCam_DoneMoving = TRUE;
+        BattleCam_DoneMoving = true;
     } else {
         BattleCam_MoveTimeLeft--;
     }
@@ -1012,7 +1012,7 @@ API_CALLABLE(BattleCam_Update_FocusGoal) {
     camera->params.basic.pitch = LERP(BattleCam_InitialBoomPitch, BattleCam_BoomPitch, alpha);
 
     if (BattleCam_MoveTimeLeft == 0) {
-        BattleCam_DoneMoving = TRUE;
+        BattleCam_DoneMoving = true;
     } else {
         BattleCam_MoveTimeLeft--;
     }
@@ -1058,7 +1058,7 @@ API_CALLABLE(BattleCam_Update_SimpleLerp_Unskippable) {
     camera->params.basic.pitch = LERP(BattleCam_InitialBoomPitch, BattleCam_BoomPitch, alpha);
 
     if (BattleCam_MoveTimeLeft == 0) {
-        BattleCam_DoneMoving = TRUE;
+        BattleCam_DoneMoving = true;
     } else {
         BattleCam_MoveTimeLeft--;
     }
@@ -1119,7 +1119,7 @@ API_CALLABLE(BattleCam_Update_ResetToNeutral_Skippable) {
     camera->params.basic.pitch = LERP(BattleCam_InitialBoomPitch, BattleCam_BoomPitch, alpha);
 
     if (BattleCam_MoveTimeLeft == 0) {
-        BattleCam_DoneMoving = TRUE;
+        BattleCam_DoneMoving = true;
     } else {
         BattleCam_MoveTimeLeft--;
     }
@@ -1171,7 +1171,7 @@ API_CALLABLE(BattleCam_Update_ViewAllEnemies) {
     camera->params.basic.pitch = LERP(BattleCam_InitialBoomPitch, BattleCam_BoomPitch, alpha);
 
     if (BattleCam_MoveTimeLeft == 0) {
-        BattleCam_DoneMoving = TRUE;
+        BattleCam_DoneMoving = true;
     } else {
         BattleCam_MoveTimeLeft--;
     }
@@ -1225,7 +1225,7 @@ API_CALLABLE(BattleCam_Update_ViewAllEnemies_MaintainY) {
     camera->params.basic.pitch = LERP(BattleCam_InitialBoomPitch, BattleCam_BoomPitch, alpha);
 
     if (BattleCam_MoveTimeLeft == 0) {
-        BattleCam_DoneMoving = TRUE;
+        BattleCam_DoneMoving = true;
     } else {
         BattleCam_MoveTimeLeft--;
     }
@@ -1276,7 +1276,7 @@ API_CALLABLE(BattleCam_Update_SimpleLerp_Skippable) {
     camera->params.basic.pitch = LERP(BattleCam_InitialBoomPitch, BattleCam_BoomPitch, alpha);
 
     if (BattleCam_MoveTimeLeft == 0) {
-        BattleCam_DoneMoving = TRUE;
+        BattleCam_DoneMoving = true;
     } else {
         BattleCam_MoveTimeLeft--;
     }
@@ -1453,7 +1453,7 @@ API_CALLABLE(BattleCam_Init) {
     camera->params.basic.yaw = 0;
     camera->params.basic.offsetY = 0;
     BattleCam_BoomYaw = BattleCam_BoomOffsetY = 0;
-    BattleCam_IsFrozen = FALSE;
+    BattleCam_IsFrozen = false;
     D_8029F288 = camera->params.basic.skipRecalc;
     BattleCam_InitialBoomLength = camera->params.basic.dist;
     BattleCam_InitialBoomPitch = camera->params.basic.pitch;
@@ -1467,10 +1467,10 @@ void btl_cam_use_preset_impl(s32 id) {
     Evt* newScript;
 
     if (!BattleCam_IsFrozen) {
-        BattleCam_ClampPosX = TRUE;
+        BattleCam_ClampPosX = true;
         BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_NONE;
         BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_NONE;
-        BattleCam_UseLinearInterp = FALSE;
+        BattleCam_UseLinearInterp = false;
         BattleCam_ExtraOffsetX = 0;
 
         switch (id) {
@@ -1656,9 +1656,9 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomYaw = 0;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_AVG;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PLAYER;
-                BattleCam_IsFrozen = TRUE;
+                BattleCam_IsFrozen = true;
                 preset = &EVS_BattleCam_FocusActor;
                 break;
             case BTL_CAM_VICTORY:
@@ -1691,7 +1691,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_SubjectActor = ACTOR_PLAYER;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_AVG;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
             case BTL_CAM_PLAYER_PRE_JUMP_FINISH:
@@ -1702,7 +1702,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomOffsetY = 0;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_NONE;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PLAYER;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
@@ -1715,7 +1715,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_NONE;
                 BattleCam_SubjectActor = ACTOR_PLAYER;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
             case BTL_CAM_PLAYER_HIT_SPIKE:
@@ -1752,7 +1752,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomYaw = 0;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_AVG;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PLAYER;
                 preset = &EVS_BattleCam_FocusActor;
                 break;
@@ -1765,7 +1765,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_NONE;
                 BattleCam_SubjectActor = ACTOR_PLAYER;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
             case BTL_CAM_PLAYER_JUMP_FINISH:
@@ -1776,8 +1776,8 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomOffsetY = 0;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_NONE;
-                BattleCam_UseLinearInterp = TRUE;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_UseLinearInterp = true;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PLAYER;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
@@ -1789,7 +1789,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomYaw = 0;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_NONE;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PLAYER;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
@@ -1801,8 +1801,8 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomOffsetY = 0;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_NONE;
-                BattleCam_UseLinearInterp = TRUE;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_UseLinearInterp = true;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PLAYER;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
@@ -1814,7 +1814,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomYaw = 0;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_NONE;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PLAYER;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
@@ -1826,7 +1826,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomOffsetY = 0;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_NONE;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PLAYER;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
@@ -1838,7 +1838,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomYaw = 0;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_AVG;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PLAYER;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
@@ -1847,8 +1847,8 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomLength = 200;
                 BattleCam_MoveTimeLeft = 7;
                 BattleCam_MoveTimeTotal = 7;
-                BattleCam_DoneMoving = FALSE;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_DoneMoving = false;
+                BattleCam_ClampPosX = false;
                 preset = BattleCam_ControlScript;
                 break;
             case BTL_CAM_PLAYER_AIM_HAMMER:
@@ -1860,7 +1860,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomYaw = 0;
                 BattleCam_SubjectActor = ACTOR_PLAYER;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_AVG;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
             case BTL_CAM_PLAYER_HAMMER_STRIKE:
@@ -1872,7 +1872,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_SubjectActor = ACTOR_PLAYER;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_NONE;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_AVG;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
             case BTL_CAM_PRESET_UNUSED_2D:
@@ -1909,7 +1909,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomOffsetY = 45;
                 btl_cam_set_target_pos(-70.0f, 0.0f, 0.0f);
                 BattleCam_MoveTimeLeft = 10;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 preset = &EVS_BattleCam_SimpleLerp_Skippable;
                 break;
             case BTL_CAM_PRESET_UNUSED_47:
@@ -1919,7 +1919,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomOffsetY = 45;
                 btl_cam_set_target_pos(0.0f, 0.0f, 0.0f);
                 BattleCam_MoveTimeLeft = 40;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 preset = &EVS_BattleCam_SimpleLerp_Skippable;
                 break;
             case BTL_CAM_PLAYER_WISH:
@@ -1930,7 +1930,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomOffsetY = 45;
                 btl_cam_set_target_pos(-50.0f, 0.0f, 0.0f);
                 BattleCam_MoveTimeLeft = 20;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 preset = &EVS_BattleCam_SimpleLerp_Skippable;
                 break;
             case BTL_CAM_STAR_SPIRIT:
@@ -1955,7 +1955,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_AVG;
                 BattleCam_SubjectActor = ACTOR_PARTNER;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
             case BTL_CAM_CLOSER_PARTNER_APPROACH:
@@ -1965,9 +1965,9 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomOffsetY = 16;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_AVG;
-                BattleCam_UseLinearInterp = TRUE;
+                BattleCam_UseLinearInterp = true;
                 BattleCam_BoomYaw = 0;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PARTNER;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
@@ -1978,9 +1978,9 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomOffsetY = 16;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_AVG;
-                BattleCam_UseLinearInterp = TRUE;
+                BattleCam_UseLinearInterp = true;
                 BattleCam_BoomYaw = 0;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PARTNER;
                 preset = &EVS_BattleCam_FocusActor;
                 break;
@@ -1993,7 +1993,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomOffsetY = 0;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_NONE;
                 BattleCam_SubjectActor = ACTOR_PARTNER;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
             case BTL_CAM_PLAYER_MISTAKE:
@@ -2011,7 +2011,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_BoomYaw = 0;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_NONE;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PARTNER;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
@@ -2020,11 +2020,11 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 60;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
-                BattleCam_UseLinearInterp = TRUE;
+                BattleCam_UseLinearInterp = true;
                 BattleCam_BoomYaw = 0;
                 BattleCam_BoomOffsetY = 0;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_NONE;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PARTNER;
                 preset = &EVS_BattleCam_UnkM_Skippable;
                 break;
@@ -2036,7 +2036,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_AVG;
                 BattleCam_BoomYaw = 0;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 BattleCam_SubjectActor = ACTOR_PARTNER;
                 preset = &EVS_BattleCam_FocusActor;
                 break;
@@ -2095,10 +2095,10 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomOffsetY = 11;
                 BattleCam_AdjustTargetYMode = BTL_CAM_YADJ_AVG;
                 BattleCam_AdjustTargetXMode = BTL_CAM_XADJ_AVG;
-                BattleCam_UseLinearInterp = TRUE;
+                BattleCam_UseLinearInterp = true;
                 BattleCam_BoomYaw = 0;
                 BattleCam_SubjectActor = ACTOR_PARTNER;
-                BattleCam_ClampPosX = FALSE;
+                BattleCam_ClampPosX = false;
                 preset = &EVS_BattleCam_FocusActor;
                 break;
             case BTL_CAM_PRESET_UNUSED_3C:
@@ -2190,7 +2190,7 @@ void btl_cam_use_preset_impl(s32 id) {
 
         BattleCam_ControlScript = preset;
         newScript = start_script(preset, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
-        BattleCam_DoneMoving = FALSE;
+        BattleCam_DoneMoving = false;
         battleStatus->camMovementScript = newScript;
         battleStatus->camMovementScriptID = newScript->id;
     }
@@ -2198,14 +2198,14 @@ void btl_cam_use_preset_impl(s32 id) {
 
 void btl_cam_use_preset_immediately(s32 preset) {
     if (!BattleCam_IsFrozen) {
-        BattleCam_SetImmediately = TRUE;
+        BattleCam_SetImmediately = true;
         btl_cam_use_preset_impl(preset);
     }
 }
 
 void btl_cam_use_preset(s32 preset) {
     if (!BattleCam_IsFrozen) {
-        BattleCam_SetImmediately = FALSE;
+        BattleCam_SetImmediately = false;
         btl_cam_use_preset_impl(preset);
     }
 }
@@ -2290,11 +2290,11 @@ void btl_cam_set_zoffset(s16 zOffset) {
 }
 
 void btl_cam_unfreeze(void) {
-    BattleCam_IsFrozen = FALSE;
+    BattleCam_IsFrozen = false;
 }
 
 void btl_cam_disable_clamp_x(void) {
-    BattleCam_ClampPosX = FALSE;
+    BattleCam_ClampPosX = false;
 }
 
 API_CALLABLE(UseBattleCamPreset) {
@@ -2306,7 +2306,7 @@ API_CALLABLE(UseBattleCamPreset) {
     }
 
     preset = evt_get_variable(script, *args++);
-    BattleCam_SetImmediately = FALSE;
+    BattleCam_SetImmediately = false;
     btl_cam_use_preset_impl(preset);
 
     return ApiStatus_DONE2;
@@ -2321,7 +2321,7 @@ API_CALLABLE(UseBattleCamPresetImmediately) {
     }
 
     preset = evt_get_variable(script, *args++);
-    BattleCam_SetImmediately = TRUE;
+    BattleCam_SetImmediately = true;
     btl_cam_use_preset_impl(preset);
 
     return ApiStatus_DONE2;
@@ -2572,6 +2572,6 @@ API_CALLABLE(FreezeBattleCam) {
 }
 
 API_CALLABLE(DisableBattleCamClampX) {
-    BattleCam_ClampPosX = FALSE;
+    BattleCam_ClampPosX = false;
     return ApiStatus_DONE2;
 }

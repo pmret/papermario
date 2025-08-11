@@ -16,7 +16,7 @@ EvtScript N(EVS_NpcDefeat_MontyMole_Stone) = {
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             Call(OnPlayerFled, 1)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -34,8 +34,8 @@ MobileAISettings N(AISettings_MontyMole_StoneThrower) = {
 };
 
 EvtScript N(EVS_NpcAI_MontyMole_StoneThrower) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_FLIP_INSTANTLY, TRUE)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_FLIP_INSTANTLY, true)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Label(0)
     Call(RandInt, 15, LVar0)
     Add(LVar0, 15)
@@ -83,7 +83,7 @@ EvtScript N(EVS_NpcHit_MontyMole_Stone) = {
         Return
     EndIf
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole_Stone_DoNothing)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(GetOwnerEncounterTrigger, LVar0)
     Switch(LVar0)
         CaseOrEq(ENCOUNTER_TRIGGER_HAMMER)
@@ -129,7 +129,7 @@ NpcSettings N(NpcSettings_MontyMole_Stone) = {
     .drops = NO_DROPS, \
     .territory = { \
         .wander = { \
-            .isFlying = TRUE, \
+            .isFlying = true, \
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED, \
             .wanderShape = SHAPE_CYLINDER, \
             .centerPos  = { NPC_DISPOSE_LOCATION }, \

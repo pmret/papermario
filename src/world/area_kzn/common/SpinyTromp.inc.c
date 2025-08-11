@@ -29,7 +29,7 @@ API_CALLABLE(N(SpinyTromp_GetActingPartner)) {
 #include "world/common/todo/UnkFunc51.inc.c"
 
 EvtScript N(D_80240D10_C7EE90) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Label(10)
     Call(GetPartnerInUse, LVar0)
     IfNe(LVar0, 0)
@@ -66,7 +66,7 @@ EvtScript N(D_80240D10_C7EE90) = {
     Call(UpdatePlayerImgFX, ANIM_Mario1_Fallen, IMGFX_SET_WAVY, Float(3.0), Float(3.0), 0, 0)
     Label(1)
         Wait(1)
-        IfEq(AF_KZN_TrompRollingDone, FALSE)
+        IfEq(AF_KZN_TrompRollingDone, false)
             Goto(1)
         EndIf
     Wait(30)
@@ -74,7 +74,7 @@ EvtScript N(D_80240D10_C7EE90) = {
     Call(SetPlayerAnimation, ANIM_Mario1_GetUp)
     Call(N(UnkFunc48), 0)
     Label(2)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

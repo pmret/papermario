@@ -24,7 +24,7 @@ EvtScript N(EVS_NpcIdle_TubbasHeart) = {
     Call(SetNpcJumpscale, NPC_SELF, Float(2.5))
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
     Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 12)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     Set(GB_StoryProgress, STORY_CH3_HEART_FLED_SECOND_TUNNEL)
     Return
@@ -32,7 +32,7 @@ EvtScript N(EVS_NpcIdle_TubbasHeart) = {
 };
 
 EvtScript N(EVS_NpcDefeat_HyperGoomba) = {
-    Set(GF_ARN10_Defeated_Goomba, TRUE)
+    Set(GF_ARN10_Defeated_Goomba, true)
     Call(DoNpcDefeat)
     Return
     End
@@ -49,7 +49,7 @@ EvtScript N(EVS_NpcInit_TubbasHeart) = {
 
 EvtScript N(EVS_NpcInit_HyperGoomba) = {
     IfLt(GB_StoryProgress, STORY_CH4_FRYING_PAN_STOLEN)
-        IfEq(GF_ARN10_Defeated_Goomba, TRUE)
+        IfEq(GF_ARN10_Defeated_Goomba, true)
             Call(RemoveNpc, NPC_SELF)
             Return
         EndIf
@@ -76,7 +76,7 @@ NpcData N(NpcData_HyperGoomba) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },

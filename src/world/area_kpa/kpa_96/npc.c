@@ -98,9 +98,9 @@ NpcSettings N(NpcSettings_SpikedGoomba) = {
 
 API_CALLABLE(N(CheckPlayerHasCoins)) {
     if (gPlayerData.coins > 0) {
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
     } else {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
     return ApiStatus_DONE2;
 }

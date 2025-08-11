@@ -38,8 +38,8 @@ void N(PiranhaPlantAI_01)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 phi_s7 = FALSE;
-    s32 phi_fp = FALSE;
+    s32 phi_s7 = false;
+    s32 phi_fp = false;
     f32 sp38;
     f32 yaw;
     f32 yaw2;
@@ -136,7 +136,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
                     sp38 = 200.0f;
                     cond2 = npc_raycast_down_sides(npc->collisionChannel, &sp2C, &sp30, &sp34, &sp38);
                     if (!cond1 && cond2 && sp38 > 80.0 && sp38 < 120.0 && npc->pos.y != sp30) {
-                        phi_fp = TRUE;
+                        phi_fp = true;
                     } else {
                         sp20 = gPlayerStatusPtr->pos.x;
                         sp24 = gPlayerStatusPtr->pos.y + 10.0;
@@ -147,7 +147,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
                         npc->pos.z = gPlayerStatusPtr->pos.z;
                         add_vec2D_polar(&npc->pos.x, &npc->pos.z, npc->collisionDiameter, yaw);
                         npc_move_heading(npc, posRadius + npc->collisionDiameter, yaw2);
-                        phi_s7 = TRUE;
+                        phi_s7 = true;
                     }
                 }
             } else {

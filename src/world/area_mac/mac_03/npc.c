@@ -106,13 +106,13 @@ EvtScript N(EVS_LetterReward_ToadKid1B) = {
 };
 
 EvtScript N(EVS_NpcInteract_TrainToad_01) = {
-    IfEq(GF_MAC03_BombedRock, FALSE)
+    IfEq(GF_MAC03_BombedRock, false)
         Call(SpeakToPlayer, NPC_TrainToad_01, ANIM_TrainToad_White_SadTalk, ANIM_TrainToad_White_SadIdle, 0, MSG_MAC_Station_0000)
         Return
     EndIf
     Switch(GB_StoryProgress)
         CaseRange(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
-            IfEq(GF_MAC03_ShyGuyChasedOff, FALSE)
+            IfEq(GF_MAC03_ShyGuyChasedOff, false)
                 Call(SpeakToPlayer, NPC_TrainToad_01, ANIM_TrainToad_White_SadTalk, ANIM_TrainToad_White_SadIdle, 0, MSG_MAC_Station_0007)
                 Return
             EndIf
@@ -122,16 +122,16 @@ EvtScript N(EVS_NpcInteract_TrainToad_01) = {
         Call(SpeakToPlayer, NPC_TrainToad_01, ANIM_TrainToad_White_Talk, ANIM_TrainToad_White_Idle, 0, MSG_MAC_Station_0006)
         Return
     EndIf
-    IfEq(GF_MAC03_ShyGuyChasedOff, FALSE)
-        IfEq(GF_MAC03_Conductor_ThankYouA, FALSE)
-            Set(GF_MAC03_Conductor_ThankYouA, TRUE)
+    IfEq(GF_MAC03_ShyGuyChasedOff, false)
+        IfEq(GF_MAC03_Conductor_ThankYouA, false)
+            Set(GF_MAC03_Conductor_ThankYouA, true)
             Set(LVar0, MSG_MAC_Station_0001)
         Else
             Set(LVar0, MSG_MAC_Station_0002)
         EndIf
     Else
-        IfEq(GF_MAC03_Conductor_ThankYouB, FALSE)
-            Set(GF_MAC03_Conductor_ThankYouB, TRUE)
+        IfEq(GF_MAC03_Conductor_ThankYouB, false)
+            Set(GF_MAC03_Conductor_ThankYouB, true)
             Set(LVar0, MSG_MAC_Station_0008)
         Else
             Set(LVar0, MSG_MAC_Station_0002)
@@ -166,7 +166,7 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
             Set(LVar0, MSG_MAC_Station_0069)
 #endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Station_000A)
             Else
                 Set(LVar0, MSG_MAC_Station_000B)
@@ -174,10 +174,10 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Station_000C)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_ShyGuyBlockingTracks, FALSE)
+            IfEq(GF_MAC03_ShyGuyBlockingTracks, false)
                 Set(LVar0, MSG_MAC_Station_000D)
             Else
-                IfEq(GF_MAC03_ShyGuyChasedOff, FALSE)
+                IfEq(GF_MAC03_ShyGuyChasedOff, false)
                     Set(LVar0, MSG_MAC_Station_000E)
                 Else
                     Set(LVar0, MSG_MAC_Station_000F)
@@ -220,7 +220,7 @@ EvtScript N(EVS_NpcInteract_Toadette_01) = {
             Set(LVar0, MSG_MAC_Station_006C)
 #endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Station_0017)
             Else
                 Set(LVar0, MSG_MAC_Station_0018)
@@ -228,10 +228,10 @@ EvtScript N(EVS_NpcInteract_Toadette_01) = {
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Station_0019)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_ShyGuyBlockingTracks, FALSE)
+            IfEq(GF_MAC03_ShyGuyBlockingTracks, false)
                 Set(LVar0, MSG_MAC_Station_001A)
             Else
-                IfEq(GF_MAC03_ShyGuyChasedOff, FALSE)
+                IfEq(GF_MAC03_ShyGuyChasedOff, false)
                     Set(LVar0, MSG_MAC_Station_001B)
                 Else
                     Set(LVar0, MSG_MAC_Station_001C)
@@ -274,7 +274,7 @@ EvtScript N(EVS_NpcInteract_Toad_02) = {
             Set(LVar0, MSG_MAC_Station_006F)
 #endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Station_0024)
             Else
                 Set(LVar0, MSG_MAC_Station_0025)
@@ -282,10 +282,10 @@ EvtScript N(EVS_NpcInteract_Toad_02) = {
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Station_0026)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_ShyGuyBlockingTracks, FALSE)
+            IfEq(GF_MAC03_ShyGuyBlockingTracks, false)
                 Set(LVar0, MSG_MAC_Station_0027)
             Else
-                IfEq(GF_MAC03_ShyGuyChasedOff, FALSE)
+                IfEq(GF_MAC03_ShyGuyChasedOff, false)
                     Set(LVar0, MSG_MAC_Station_0028)
                 Else
                     Set(LVar0, MSG_MAC_Station_0029)
@@ -320,8 +320,8 @@ EvtScript N(EVS_NpcInit_Toad_02) = {
 EvtScript N(EVS_NpcInteract_ToadKid_02) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
-    Call(EnableNpcAI, NPC_ToadKid_01, FALSE)
-    Call(EnableNpcAI, NPC_ToadKid_02, FALSE)
+    Call(EnableNpcAI, NPC_ToadKid_01, false)
+    Call(EnableNpcAI, NPC_ToadKid_02, false)
     Call(GetNpcAnimation, NPC_ToadKid_01, LVar2)
     Call(GetNpcAnimation, NPC_ToadKid_02, LVar3)
     Call(SetNpcAnimation, NPC_ToadKid_01, ANIM_ToadKid_Red_Idle)
@@ -339,7 +339,7 @@ EvtScript N(EVS_NpcInteract_ToadKid_02) = {
             Set(LVar1, MSG_MAC_Station_0075)
 #endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Station_0031)
                 Set(LVar1, MSG_MAC_Station_0032)
             Else
@@ -350,13 +350,13 @@ EvtScript N(EVS_NpcInteract_ToadKid_02) = {
             Set(LVar0, MSG_MAC_Station_0035)
             Set(LVar1, MSG_MAC_Station_0036)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_ShyGuyBlockingTracks, FALSE)
+            IfEq(GF_MAC03_ShyGuyBlockingTracks, false)
 #if VERSION_JP
                 Set(LVar0, MSG_MAC_Station_0076)
                 Set(LVar1, MSG_MAC_Station_0077)
 #endif
             Else
-                IfEq(GF_MAC03_ShyGuyChasedOff, FALSE)
+                IfEq(GF_MAC03_ShyGuyChasedOff, false)
                     Set(LVar0, MSG_MAC_Station_0037)
                     Set(LVar1, MSG_MAC_Station_0038)
                 Else
@@ -391,8 +391,8 @@ EvtScript N(EVS_NpcInteract_ToadKid_02) = {
     Call(SpeakToPlayer, NPC_ToadKid_02, ANIM_ToadKid_Yellow_Talk, ANIM_ToadKid_Yellow_Idle, 0, LVar1)
     Call(SetNpcAnimation, NPC_ToadKid_01, LVar2)
     Call(SetNpcAnimation, NPC_ToadKid_02, LVar3)
-    Call(EnableNpcAI, NPC_ToadKid_01, TRUE)
-    Call(EnableNpcAI, NPC_ToadKid_02, TRUE)
+    Call(EnableNpcAI, NPC_ToadKid_01, true)
+    Call(EnableNpcAI, NPC_ToadKid_02, true)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
@@ -427,7 +427,7 @@ EvtScript N(EVS_NpcInit_ToadKid_02) = {
 };
 
 EvtScript N(EVS_NpcInteract_Toadette_02) = {
-    IfEq(GF_MAC03_BombedRock, FALSE)
+    IfEq(GF_MAC03_BombedRock, false)
         Set(LVar0, MSG_MAC_Station_0061)
         Set(LVar1, MSG_MAC_Station_0062)
         Set(LVar2, MSG_MAC_Station_0063)
@@ -465,10 +465,10 @@ EvtScript N(EVS_NpcInteract_Toad_03) = {
         Call(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
         Wait(10)
         Call(InterpNpcYaw, NPC_SELF, 90, 0)
-        Set(MF_Unk_08, TRUE)
+        Set(MF_Unk_08, true)
         Return
     EndIf
-    IfEq(MF_Unk_07, FALSE)
+    IfEq(MF_Unk_07, false)
         Set(LVar0, MSG_MAC_Station_0054)
     Else
         Call(N(GetOinkCount))
@@ -535,7 +535,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy) = {
 };
 
 EvtScript N(EVS_NpcAI_ShyGuy) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim0C)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 10)
@@ -546,7 +546,7 @@ EvtScript N(EVS_NpcAI_ShyGuy) = {
     Call(NpcMoveTo, NPC_SELF, -100, 0, 0)
     KillThread(LVarA)
     Call(ShowSweat, NPC_SELF, 1, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
     Call(NpcJump0, NPC_SELF, -30, 0, 0, 20)
     Call(ShowSweat, NPC_SELF, 1, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
@@ -584,9 +584,9 @@ EvtScript N(EVS_NpcHit_ShyGuy) = {
     EndIf
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_SHY_GUY_OUCH, SOUND_SPACE_DEFAULT)
-    Set(GF_MAC03_ShyGuyChasedOff, TRUE)
+    Set(GF_MAC03_ShyGuyChasedOff, true)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy)))
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, true)
     Return
     End
 };
@@ -596,11 +596,11 @@ EvtScript N(EVS_NpcInit_ShyGuy) = {
         CaseRange(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
             Call(GetEntryID, LVar0)
             IfEq(LVar0, mac_03_ENTRY_1)
-                Set(GF_MAC03_ShyGuyBlockingTracks, TRUE)
-                Set(GF_MAC03_ShyGuyChasedOff, TRUE)
+                Set(GF_MAC03_ShyGuyBlockingTracks, true)
+                Set(GF_MAC03_ShyGuyChasedOff, true)
             EndIf
-            IfEq(GF_MAC03_ShyGuyChasedOff, FALSE)
-                Set(GF_MAC03_ShyGuyBlockingTracks, TRUE)
+            IfEq(GF_MAC03_ShyGuyChasedOff, false)
+                Set(GF_MAC03_ShyGuyBlockingTracks, true)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_ShyGuy)))
                 Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_ShyGuy)))
                 Return
@@ -629,16 +629,16 @@ EvtScript N(EVS_NpcIdle_Toad_14) = {
 };
 
 EvtScript N(EVS_NpcInit_Toad_14) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Toad_14)))
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Toad_04) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
     Call(SetNpcPos, NPC_SELF, 420, 20, -170)
     Return
     End
@@ -705,7 +705,7 @@ NpcData N(NpcData_Toads)[] = {
         .yaw = 90,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 260, 20, 410 },
@@ -728,7 +728,7 @@ NpcData N(NpcData_Toads)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 320, 20, 410 },
@@ -829,7 +829,7 @@ NpcData N(NpcData_LilOinks)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 430, 20, -180 },
@@ -851,7 +851,7 @@ NpcData N(NpcData_LilOinks)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 430, 20, -180 },
@@ -873,7 +873,7 @@ NpcData N(NpcData_LilOinks)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 430, 20, -180 },
@@ -895,7 +895,7 @@ NpcData N(NpcData_LilOinks)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 430, 20, -180 },
@@ -917,7 +917,7 @@ NpcData N(NpcData_LilOinks)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 430, 20, -180 },
@@ -939,7 +939,7 @@ NpcData N(NpcData_LilOinks)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 430, 20, -180 },
@@ -961,7 +961,7 @@ NpcData N(NpcData_LilOinks)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 430, 20, -180 },
@@ -983,7 +983,7 @@ NpcData N(NpcData_LilOinks)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 430, 20, -180 },
@@ -1005,7 +1005,7 @@ NpcData N(NpcData_LilOinks)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 430, 20, -180 },
@@ -1027,7 +1027,7 @@ NpcData N(NpcData_LilOinks)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 430, 20, -180 },
@@ -1049,7 +1049,7 @@ NpcData N(NpcData_LilOinks)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 430, 20, -180 },

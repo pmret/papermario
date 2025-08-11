@@ -2,8 +2,8 @@
 #include "sprite/player.h"
 
 EvtScript N(EVS_Scene_WhereIsMario) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetMusic, 0, SONG_PRISONER_PEACH_THEME, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Call(DisablePartnerAI, 0)
     Call(SetNpcPos, NPC_PARTNER, 0, -500, 0)
@@ -16,7 +16,7 @@ EvtScript N(EVS_Scene_WhereIsMario) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(17.5), Float(-10.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(570.0), 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(50)
     Call(func_802D1270, 550, -20, Float(2.0))
     Wait(30)
@@ -28,14 +28,14 @@ EvtScript N(EVS_Scene_WhereIsMario) = {
     Call(ResetCam, CAM_DEFAULT, Float(1.0))
     ExecWait(N(EVS_GotoMap_hos_00_1))
     Call(EnablePartnerAI)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Scene_AfterAllSpiritsRescued) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(DisablePartnerAI, 0)
     Call(SetMusic, 0, SONG_PRISONER_PEACH_THEME, BGM_VARIATION_1, VOL_LEVEL_FULL)
     Call(InterpPlayerYaw, 90, 0)
@@ -46,7 +46,7 @@ EvtScript N(EVS_Scene_AfterAllSpiritsRescued) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetPlayerAnimation, ANIM_Peach2_RaiseArms)
     Wait(10 * DT)
@@ -72,7 +72,7 @@ EvtScript N(EVS_Scene_AfterAllSpiritsRescued) = {
     Wait(17 * DT)
     Call(GotoMap, Ref("kkj_14"), kkj_14_ENTRY_A)
     Wait(100)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

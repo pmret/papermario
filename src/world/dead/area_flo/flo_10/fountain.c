@@ -38,7 +38,7 @@ EvtScript N(EVS_GrowFountain) = {
 };
 
 EvtScript N(EVS_TexPan_Rainbow) = {
-    Call(EnableTexPanning, MODEL_o73, TRUE)
+    Call(EnableTexPanning, MODEL_o73, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_A)
         TEX_PAN_PARAMS_STEP( -150,    0,    0,    0)
@@ -52,7 +52,7 @@ EvtScript N(EVS_TexPan_Rainbow) = {
 
 EvtScript N(EVS_EnableRainbow) = {
     Wait(60)
-    Call(EnableModel, MODEL_o73, TRUE)
+    Call(EnableModel, MODEL_o73, true)
     Exec(N(EVS_TexPan_Rainbow))
     Return
     End
@@ -60,7 +60,7 @@ EvtScript N(EVS_EnableRainbow) = {
 
 EvtScript N(EVS_RaiseLily) = {
     Wait(80)
-    Call(EnableNpcShadow, NPC_Lily, FALSE)
+    Call(EnableNpcShadow, NPC_Lily, false)
     Call(GetNpcPos, NPC_Lily, LVar3, LVar4, LVar5)
     Call(MakeLerp, 10, 55, 108, EASING_LINEAR)
     Loop(0)
@@ -80,7 +80,7 @@ EvtScript N(EVS_RaiseLily) = {
 };
 
 EvtScript N(EVS_RaisePlayer) = {
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Wait(40)
     Call(SetPlayerAnimation, ANIM_MarioW2_SitIdle)
     Call(GetPlayerPos, LVar2, LVar0, LVar3)
@@ -104,7 +104,7 @@ EvtScript N(EVS_RaisePlayer) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerPhysics, false)
     Return
     End
 };
@@ -117,7 +117,7 @@ EvtScript N(EVS_RaiseCamera) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.7))
     Call(SetCamPitch, CAM_DEFAULT, Float(25.0), Float(-22.0))
     Call(SetCamDistance, CAM_DEFAULT, 450)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -181,12 +181,12 @@ EvtScript N(EVS_Scene_ReleaseFountain) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar3, LVar4, LVar5)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
     Call(SetCamDistance, CAM_DEFAULT, 600)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(EnableGroup, MODEL_g22, TRUE)
+    Call(EnableGroup, MODEL_g22, true)
     Call(TranslateGroup, MODEL_g22, 0, -50, 0)
     Call(ScaleGroup, MODEL_g22, 0, 0, 0)
-    Call(EnableGroup, MODEL_g31, TRUE)
+    Call(EnableGroup, MODEL_g31, true)
     ExecWait(N(EVS_UnleashFountain))
     Wait(20)
     Call(PlaySound, SOUND_LOOP_FLO_RELEASE_FOUNTAIN)
@@ -205,18 +205,18 @@ EvtScript N(EVS_Scene_ReleaseFountain) = {
 };
 
 EvtScript N(EVS_Scene_PostReleaseFountain) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerPos, -100, -10, -172)
     Call(InterpPlayerYaw, 150, 0)
     Call(SetPlayerAnimation, ANIM_Mario1_Fallen)
     Call(SetNpcPos, NPC_PARTNER, -129, 9, -177)
     Call(EnablePartnerAI)
     Call(ClearPartnerMoveHistory, NPC_PARTNER)
-    Call(EnableGroup, MODEL_water, TRUE)
-    Call(EnableGroup, MODEL_g2, FALSE)
-    Call(EnableGroup, MODEL_g12, FALSE)
-    Call(EnableGroup, MODEL_g31, FALSE)
+    Call(EnableGroup, MODEL_water, true)
+    Call(EnableGroup, MODEL_g2, false)
+    Call(EnableGroup, MODEL_g12, false)
+    Call(EnableGroup, MODEL_g31, false)
     Call(SetNpcPos, NPC_Lily, -57, -20, -105)
     Call(InterpNpcYaw, NPC_Lily, 90, 0)
     Call(AdjustCam, CAM_DEFAULT, Float(90.0), 0, 450, Float(25.0), Float(-6.0))
@@ -243,32 +243,32 @@ EvtScript N(EVS_Scene_PostReleaseFountain) = {
 #if !VERSION_JP
     ExecWait(N(EVS_PopSong))
 #endif
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_SetupFountain) = {
     IfLt(GB_StoryProgress, STORY_CH6_FILLED_SPRING_WITH_WATER)
-        Call(EnableGroup, MODEL_water, FALSE)
-        Call(EnableGroup, MODEL_g12, FALSE)
+        Call(EnableGroup, MODEL_water, false)
+        Call(EnableGroup, MODEL_g12, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_water, COLLIDER_FLAGS_UPPER_MASK)
     Else
-        Call(EnableGroup, MODEL_g2, FALSE)
-        Call(EnableGroup, MODEL_g12, FALSE)
-        Call(EnableGroup, MODEL_g31, FALSE)
+        Call(EnableGroup, MODEL_g2, false)
+        Call(EnableGroup, MODEL_g12, false)
+        Call(EnableGroup, MODEL_g31, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o83, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o86, COLLIDER_FLAGS_UPPER_MASK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o87, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
-    Call(EnableTexPanning, MODEL_o25, TRUE)
-    Call(EnableTexPanning, MODEL_o40, TRUE)
-    Call(EnableTexPanning, MODEL_o78, TRUE)
-    Call(EnableTexPanning, MODEL_o77, TRUE)
-    Call(EnableTexPanning, MODEL_o118, TRUE)
-    Call(EnableTexPanning, MODEL_o119, TRUE)
+    Call(EnableTexPanning, MODEL_o25, true)
+    Call(EnableTexPanning, MODEL_o40, true)
+    Call(EnableTexPanning, MODEL_o78, true)
+    Call(EnableTexPanning, MODEL_o77, true)
+    Call(EnableTexPanning, MODEL_o118, true)
+    Call(EnableTexPanning, MODEL_o119, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(    0,-2000,    0,    0)

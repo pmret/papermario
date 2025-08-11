@@ -29,9 +29,9 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
     IfLt(GB_StoryProgress, STORY_CH3_DEFEATED_TUBBA_BLUBBA)
-        Call(MakeNpcs, FALSE, Ref(N(BeforeNPCs)))
+        Call(MakeNpcs, false, Ref(N(BeforeNPCs)))
     Else
-        Call(MakeNpcs, FALSE, Ref(N(AfterNPCs)))
+        Call(MakeNpcs, false, Ref(N(AfterNPCs)))
     EndIf
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupTubbaRaid))

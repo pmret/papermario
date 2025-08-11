@@ -9,7 +9,7 @@ extern EvtScript N(EVS_HitSwitch_Third);
 #include "world/common/todo/GetEntityPosition.inc.c"
 
 EvtScript N(EVS_SecondSwitch_Drop) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Thread
         Wait(10)
         Call(N(GetEntityPosition), LVar7, LVarA, LVarB, LVarC)
@@ -28,13 +28,13 @@ EvtScript N(EVS_SecondSwitch_Drop) = {
     Call(PlaySoundAt, SOUND_OBJECT_LAND, SOUND_SPACE_DEFAULT, LVarA, LVarB, LVarC)
     Call(ShakeCam, CAM_DEFAULT, 0, LVar8, Float(1.0))
     Wait(10)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_ThirdSwitch_Drop) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Thread
         Wait(10)
         Call(N(GetEntityPosition), LVar7, LVarA, LVarB, LVarC)
@@ -53,7 +53,7 @@ EvtScript N(EVS_ThirdSwitch_Drop) = {
     Call(PlaySoundAt, SOUND_HEAVY_OBJECT_DROP, SOUND_SPACE_DEFAULT, LVarA, LVarB, LVarC)
     Call(ShakeCam, CAM_DEFAULT, 0, LVar8, Float(1.0))
     Wait(10)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

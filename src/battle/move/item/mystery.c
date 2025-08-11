@@ -18,10 +18,10 @@ INCLUDE_IMG("battle/move/item/mystery.png", battle_item_mystery_png);
 INCLUDE_PAL("battle/move/item/mystery.pal", battle_item_mystery_pal);
 
 Vtx N(model)[] = {
-    { .v = {{ -16, -16, 0 }, FALSE, { 0,    0    }, { 0, 0, 0, 255 }}},
-    { .v = {{ 15,  -16, 0 }, FALSE, { 1024, 0    }, { 0, 0, 0, 255 }}},
-    { .v = {{ 15,  15,  0 }, FALSE, { 1024, 1024 }, { 0, 0, 0, 255 }}},
-    { .v = {{ -16, 15,  0 }, FALSE, { 0,    1024 }, { 0, 0, 0, 255 }}},
+    { .v = {{ -16, -16, 0 }, false, { 0,    0    }, { 0, 0, 0, 255 }}},
+    { .v = {{ 15,  -16, 0 }, false, { 1024, 0    }, { 0, 0, 0, 255 }}},
+    { .v = {{ 15,  15,  0 }, false, { 1024, 1024 }, { 0, 0, 0, 255 }}},
+    { .v = {{ -16, 15,  0 }, false, { 0,    1024 }, { 0, 0, 0, 255 }}},
 };
 
 Gfx N(displayList)[] = {
@@ -277,7 +277,7 @@ EvtScript N(EVS_UseItem) = {
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(N(func_802A188C_72CE3C), LVar0, LVar1, LVar2)
-    Call(SetBattleFlagBits, BS_FLAGS1_TRIGGER_EVENTS, TRUE)
+    Call(SetBattleFlagBits, BS_FLAGS1_TRIGGER_EVENTS, true)
     Call(DispatchDamagePlayerEvent, 1, EVENT_HIT)
     Return
     End

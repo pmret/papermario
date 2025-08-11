@@ -55,21 +55,21 @@ API_CALLABLE(N(MakeAllConsumablesItemList)) {
 }
 
 EvtScript N(EVS_NpcInteract_GourmetGuy) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, 0, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, 0, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, 350)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.5), Float(-10.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(N(MakeAllConsumablesItemList))
     Call(NpcFacePlayer, NPC_SELF, 1)
     Call(SetNpcAnimation, NPC_SELF, ANIM_GourmetGuy_Idle)
-    IfEq(GF_OMO01_Met_GourmetGuy, FALSE)
+    IfEq(GF_OMO01_Met_GourmetGuy, false)
         Call(SpeakToPlayer, NPC_SELF, ANIM_GourmetGuy_Talk, ANIM_GourmetGuy_Idle, 0, MSG_CH4_0040)
-        Set(GF_OMO01_Met_GourmetGuy, TRUE)
+        Set(GF_OMO01_Met_GourmetGuy, true)
     Else
         Call(SpeakToPlayer, NPC_SELF, ANIM_GourmetGuy_Talk, ANIM_GourmetGuy_Idle, 0, MSG_CH4_0041)
     EndIf
@@ -77,7 +77,7 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
     IfLe(LVar0, 0)
         Call(SetNpcAnimation, NPC_SELF, ANIM_GourmetGuy_SitIdle)
         Call(ResetCam, CAM_DEFAULT, Float(8.0 / DT))
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Return
     EndIf
     Set(LVar8, LVar0)
@@ -189,7 +189,7 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
             Call(DisablePartnerAI, 0)
             Call(SetNpcAnimation, NPC_SELF, ANIM_GourmetGuy_Surprise)
             Thread
-                Call(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_INVISIBLE, FALSE)
+                Call(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_INVISIBLE, false)
                 Call(GetNpcPos, NPC_GourmetGuy_Fork, LVar0, LVar1, LVar2)
                 Call(SetNpcJumpscale, NPC_GourmetGuy_Fork, Float(0.05))
                 Call(NpcJump0, NPC_GourmetGuy_Fork, LVar0, 2, LVar2, 8 * DT)
@@ -207,7 +207,7 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
                 Call(RemoveNpc, NPC_GourmetGuy_Fork)
             EndThread
             Thread
-                Call(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_INVISIBLE, FALSE)
+                Call(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_INVISIBLE, false)
                 Call(GetNpcPos, NPC_GourmetGuy_Knife, LVar0, LVar1, LVar2)
                 Call(SetNpcJumpscale, NPC_GourmetGuy_Knife, Float(0.05))
                 Call(NpcJump0, NPC_GourmetGuy_Knife, LVar0, 2, LVar2, 8 * DT)
@@ -229,21 +229,21 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
             Call(SetCamDistance, CAM_DEFAULT, Float(420.0))
             Call(SetCamPitch, CAM_DEFAULT, Float(12.0), Float(-1.5))
             Call(SetCamSpeed, CAM_DEFAULT, Float(25.0 / DT))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Call(PlaySoundAtNpc, NPC_SELF, SOUND_GOURMET_GUY_SHOCK_1, SOUND_SPACE_DEFAULT)
             Wait(33 * DT)
             Call(SetCamDistance, CAM_DEFAULT, Float(320.0))
             Call(SetCamPitch, CAM_DEFAULT, Float(13.0), Float(-0.8))
             Call(SetCamSpeed, CAM_DEFAULT, Float(25.0 / DT))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Call(PlaySoundAtNpc, NPC_SELF, SOUND_GOURMET_GUY_SHOCK_2, SOUND_SPACE_DEFAULT)
             Wait(33 * DT)
             Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
             Call(SetCamPitch, CAM_DEFAULT, Float(14.0), Float(0.0))
             Call(SetCamSpeed, CAM_DEFAULT, Float(25.0 / DT))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Call(PlaySoundAtNpc, NPC_SELF, SOUND_GOURMET_GUY_SHOCK_3, SOUND_SPACE_DEFAULT)
             Wait(18 * DT)
@@ -254,12 +254,12 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
                 Call(SetCamDistance, CAM_DEFAULT, Float(320.0))
                 Call(SetCamPitch, CAM_DEFAULT, Float(14.0), Float(0.0))
                 Call(SetCamSpeed, CAM_DEFAULT, Float(15.0 / DT))
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                 Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
                 Call(SetCamPitch, CAM_DEFAULT, Float(14.0), Float(0.0))
                 Call(SetCamSpeed, CAM_DEFAULT, Float(15.0 / DT))
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             EndLoop
             Call(RotateModel, MODEL_o331, 105, 0, 1, 0)
@@ -276,11 +276,11 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
             Call(UseSettingsFrom, CAM_DEFAULT, -250, 0, 100)
             Call(SetPanTarget, CAM_DEFAULT, -250, 0, 100)
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(SetSelfVar, 0, 1)
             Thread
                 Label(19)
-                Call(PlayerFaceNpc, NPC_SELF, FALSE)
+                Call(PlayerFaceNpc, NPC_SELF, false)
                 Call(GetSelfVar, 0, LVar0)
                 IfNe(LVar0, 0)
                     Wait(1)
@@ -289,15 +289,15 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
             EndThread
             Call(PlaySoundAtNpc, NPC_SELF, SOUND_GOURMET_GUY_RUN, SOUND_SPACE_DEFAULT)
             Call(SetNpcAnimation, NPC_SELF, ANIM_GourmetGuy_Panic)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Call(SetNpcSpeed, NPC_SELF, Float(20.0 / DT))
             Call(NpcMoveTo, NPC_SELF, 0, 110, 0)
             Wait(20 * DT)
             Call(PlaySoundAtNpc, NPC_SELF, SOUND_GOURMET_GUY_RUN, SOUND_SPACE_DEFAULT)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_UPSIDE_DOWN, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_UPSIDE_DOWN, true)
             Call(SetNpcPos, NPC_SELF, 0, 145, 110)
             Call(NpcMoveTo, NPC_SELF, -500, 110, 0)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_UPSIDE_DOWN, FALSE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_UPSIDE_DOWN, false)
             Wait(20 * DT)
             Call(PlaySoundAtNpc, NPC_SELF, SOUND_GOURMET_GUY_RUN, SOUND_SPACE_DEFAULT)
             Call(SetNpcRotation, NPC_SELF, 0, 0, -45)
@@ -330,7 +330,7 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
                 Wait(15 * DT)
                 Call(SetCamPitch, CAM_DEFAULT, Float(-2.5), Float(-24.0))
                 Call(SetCamSpeed, CAM_DEFAULT, Float(1.5 / DT))
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
             EndThread
             Thread
                 Wait(15 * DT)
@@ -363,7 +363,7 @@ EvtScript N(EVS_NpcInteract_GourmetGuy) = {
             Set(GB_StoryProgress, STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY)
     EndSwitch
     Exec(N(EVS_SetupMusic))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     IfEq(GB_StoryProgress, STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY)
         Call(RemoveNpc, NPC_SELF)
     EndIf
@@ -379,10 +379,10 @@ EvtScript N(EVS_NpcInit_GourmetGuy) = {
     Else
         Call(SetNpcAnimation, NPC_SELF, ANIM_GourmetGuy_SitIdle)
         Call(SetNpcAnimation, NPC_GourmetGuy_Fork, ANIM_GourmetGuy_Fork)
-        Call(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_INVISIBLE, TRUE)
+        Call(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_INVISIBLE, true)
         Call(SetNpcPos, NPC_GourmetGuy_Fork, -285, 50, 90)
         Call(SetNpcAnimation, NPC_GourmetGuy_Knife, ANIM_GourmetGuy_Knife)
-        Call(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_INVISIBLE, TRUE)
+        Call(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_INVISIBLE, true)
         Call(SetNpcPos, NPC_GourmetGuy_Knife, -210, 50, 90)
         Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_GourmetGuy)))
     EndIf
@@ -430,7 +430,7 @@ NpcData N(NpcData_GrooveGuy) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 320, 10, -145 },

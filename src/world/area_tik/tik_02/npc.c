@@ -10,7 +10,7 @@ EvtScript N(EVS_NpcIdle_Blooper) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Exec(N(EVS_PlayBlooperSong))
     Call(ShowMessageAtScreenPos, MSG_MGM_0000, 160, 40)
     Thread
@@ -21,7 +21,7 @@ EvtScript N(EVS_NpcIdle_Blooper) = {
     Call(UseSettingsFrom, CAM_DEFAULT, -25, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, -25, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(20)
     Thread
@@ -56,7 +56,7 @@ EvtScript N(EVS_NpcDefeat_Blooper) = {
         Loop(0)
             Call(UpdateLerp)
             Call(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
-            Call(PlayerFaceNpc, NPC_SELF, FALSE)
+            Call(PlayerFaceNpc, NPC_SELF, false)
             Wait(1)
             IfEq(LVar1, 0)
                 BreakLoop
@@ -68,29 +68,29 @@ EvtScript N(EVS_NpcDefeat_Blooper) = {
     Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
     Call(NpcJump0, NPC_SELF, -100, -300, -120, 40)
     Wait(1)
-    IfEq(GF_TIK_DefeatedOneBlooper, FALSE)
-        Set(GF_TIK_DefeatedOneBlooper, TRUE)
+    IfEq(GF_TIK_DefeatedOneBlooper, false)
+        Set(GF_TIK_DefeatedOneBlooper, true)
     Else
-        Set(GF_TIK_DefeatedTwoBloopers, TRUE)
+        Set(GF_TIK_DefeatedTwoBloopers, true)
     EndIf
-    Set(GF_TIK02_Defeated_Blooper, TRUE)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Set(GF_TIK02_Defeated_Blooper, true)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Exec(N(EVS_SetupMusic))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(RemoveNpc, NPC_SELF)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Blooper) = {
-    IfEq(GF_TIK02_Defeated_Blooper, FALSE)
+    IfEq(GF_TIK02_Defeated_Blooper, false)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Blooper)))
         Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Blooper)))
-        IfEq(GF_TIK_DefeatedOneBlooper, FALSE)
+        IfEq(GF_TIK_DefeatedOneBlooper, false)
             Call(SetNpcScale, NPC_SELF, Float(0.75), Float(0.75), Float(0.75))
             Call(N(GetBlooperBattleID), 0)
         Else
-            IfEq(GF_TIK_DefeatedTwoBloopers, FALSE)
+            IfEq(GF_TIK_DefeatedTwoBloopers, false)
                 Call(SetNpcScale, NPC_SELF, Float(1.25), Float(1.25), Float(1.25))
                 Call(N(GetBlooperBattleID), 1)
             Else

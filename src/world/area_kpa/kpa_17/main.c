@@ -4,7 +4,7 @@ EvtScript N(EVS_ExitWalk_kpa_1X_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, kpa_17_ENTRY_1)
     Exec(ExitWalk)
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
         Call(GotoMap, Ref("kpa_11"), kpa_11_ENTRY_2)
     Else
         Call(GotoMap, Ref("kpa_10"), kpa_10_ENTRY_2)
@@ -46,9 +46,9 @@ EvtScript N(EVS_Main) = {
     Set(AB_KPA17_Toad4_Dialogue, 0)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
-    IfEq(GF_KPA17_BombedWall, FALSE)
+    IfEq(GF_KPA17_BombedWall, false)
         BindTrigger(Ref(N(EVS_BlastWall)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Wall)), 1, 0)
     Else
         Call(SetGroupVisibility, MODEL_g296, MODEL_GROUP_HIDDEN)

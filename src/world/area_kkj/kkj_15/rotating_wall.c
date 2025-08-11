@@ -82,9 +82,9 @@ EvtScript N(EVS_RotatingWall_Default) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetCamDistance, CAM_DEFAULT, 400)
     Call(SetPanTarget, CAM_DEFAULT, 50, 10, -35)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     ExecWait(N(EVS_AnimateRotatingWall_Default))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Return
     End
 };
@@ -95,7 +95,7 @@ EvtScript N(EVS_RotatingWall_FirstTime) = {
     Call(SetPanTarget, CAM_DEFAULT, 50, 35, -35)
     Call(SetCamDistance, CAM_DEFAULT, 200)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Call(SetPanTarget, CAM_DEFAULT, 50, 10, -35)
@@ -109,18 +109,18 @@ EvtScript N(EVS_RotatingWall_FirstTime) = {
     EndThread
     ExecWait(N(EVS_AnimateRotatingWall_Default))
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0049)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Return
     End
 };
 
 EvtScript N(EVS_EnterRotatingWall) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
     Call(SetPlayerPos, 50, 10, -250)
     Call(SetNpcPos, NPC_PARTNER, 10, 30, -250)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Call(InterpPlayerYaw, 270, 0)
     Switch(GB_StoryProgress)
         CaseEq(STORY_CH1_BEGAN_PEACH_MISSION)
@@ -129,8 +129,8 @@ EvtScript N(EVS_EnterRotatingWall) = {
             ExecWait(N(EVS_RotatingWall_Default))
     EndSwitch
     Call(EnablePartnerAI)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

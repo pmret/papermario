@@ -11,7 +11,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_EnterMap) = {
-    Set(AF_OMO_04, FALSE)
+    Set(AF_OMO_04, false)
     Call(GetLoadType, LVar1)
     IfEq(LVar1, LOAD_FROM_FILE_SELECT)
         Exec(EnterSavePoint)
@@ -25,7 +25,7 @@ EvtScript N(EVS_EnterMap) = {
             Exec(EnterWalk)
             Wait(1)
         CaseEq(omo_03_ENTRY_4)
-            Set(AF_OMO_04, TRUE)
+            Set(AF_OMO_04, true)
             Exec(N(EVS_BindExitTriggers))
             Exec(N(EVS_Scene_EnterSpring))
         CaseEq(omo_03_ENTRY_5)
@@ -60,13 +60,13 @@ EvtScript N(EVS_Main) = {
         Call(SetModelTexVariant, MODEL_o, LVar0)
         Call(SetModelTexVariant, MODEL_n, LVar0)
 #endif
-    Set(AF_OMO_05, FALSE)
-    Set(GF_MAP_ShyGuysToybox, TRUE)
+    Set(AF_OMO_05, false)
+    Set(GF_MAP_ShyGuysToybox, true)
     Call(GetEntryID, LVar0)
     IfNe(LVar0, omo_03_ENTRY_5)
-        Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+        Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     Else
-        Call(MakeNpcs, TRUE, Ref(N(EpilogueNPCs)))
+        Call(MakeNpcs, true, Ref(N(EpilogueNPCs)))
     EndIf
     ExecWait(N(EVS_MakeEntities))
     ExecWait(N(EVS_SetupGizmos))

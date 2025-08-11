@@ -20,7 +20,7 @@ Vec3f N(TwinkPacingPath3)[] = {
 };
 
 EvtScript N(EVS_Scene_Chapter3) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(InterpPlayerYaw, 270, 0)
     Call(DisablePartnerAI, 0)
     Call(SetNpcPos, NPC_PARTNER, -40, 90, 0)
@@ -65,7 +65,7 @@ EvtScript N(EVS_Scene_Chapter3) = {
     Call(SpeakToPlayer, NPC_PLAYER, ANIM_Peach3_InformalTalk, ANIM_Peach1_Idle, 5, MSG_Peach_0081)
     Call(ResetCam, CAM_DEFAULT, Float(2.0 / DT))
     Call(EnablePartnerAI)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

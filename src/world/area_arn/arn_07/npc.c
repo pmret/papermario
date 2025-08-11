@@ -26,11 +26,11 @@ EvtScript N(EVS_TubbaWalking) = {
 };
 
 EvtScript N(EVS_Scene_TubbaRelents) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseSettingsFrom, CAM_DEFAULT, 236, 0, -46)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetPanTarget, CAM_DEFAULT, 250, 0, -46)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim08)
     Call(SetNpcYaw, NPC_SELF, 90)
@@ -89,7 +89,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Sub(LVar0, 50)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(5 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_Still)
     Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim0F)
@@ -106,7 +106,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     Thread
         Call(func_802CF56C, 2)
         Loop(45 * DT)
-            Call(PlayerFaceNpc, NPC_SELF, TRUE)
+            Call(PlayerFaceNpc, NPC_SELF, true)
         EndLoop
     EndThread
     ExecGetTID(N(EVS_TubbaWalking), LVarA)
@@ -115,7 +115,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     Call(NpcMoveTo, NPC_SELF, LVar0, LVar2, 80 * DT)
     KillThread(LVarA)
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Set(GB_StoryProgress, STORY_CH3_DEFEATED_TUBBA_BLUBBA)
     Call(SetMusic, 0, SONG_CHEERFUL_BOOS_MANSION, 0, VOL_LEVEL_FULL)
     Call(GetCurrentPartnerID, LVar6)
@@ -162,7 +162,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     Call(GetNpcPos, LVar5, LVar0, LVar1, LVar2)
     Add(LVar1, -20)
     Call(SetCamProperties, CAM_DEFAULT, Float(2.0), LVar0, LVar1, LVar2, Float(300.0), Float(15.0), Float(-7.0))
-    Call(PlayerFaceNpc, LVar5, FALSE)
+    Call(PlayerFaceNpc, LVar5, false)
     Wait(10 * DT)
     Call(SpeakToPlayer, LVar5, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_00CE)
     Call(ShowChoice, MSG_Choice_000D)
@@ -235,7 +235,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
         Call(func_802CF56C, 2)
     EndThread
     Wait(20 * DT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -306,7 +306,7 @@ EvtScript N(EVS_NpcIdle_Boo) = {
 };
 
 EvtScript N(EVS_NpcDefeat_Tubba) = {
-    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, TRUE)
+    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, true)
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
@@ -420,7 +420,7 @@ EvtScript N(EVS_Scene_SkolarRescued) = {
     Set(LVar4, LVar1)
     Add(LVar4, 26)
     Call(SetNpcPos, NPC_Skolar, LVar3, LVar4, LVar2)
-    Call(PlayerFaceNpc, NPC_Skolar, FALSE)
+    Call(PlayerFaceNpc, NPC_Skolar, false)
     Call(NpcFaceNpc, NPC_PARTNER, NPC_Skolar, 0)
     Add(LVar0, -25)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -428,16 +428,16 @@ EvtScript N(EVS_Scene_SkolarRescued) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(475.0))
     Call(SetCamPitch, CAM_DEFAULT, 18, -8)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(1)
     Call(WaitForPlayerInputEnabled)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(40 * DT)
     Call(SpeakToPlayer, NPC_Skolar, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 512, MSG_CH3_00D3)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamPitch, CAM_DEFAULT, 18, -9)
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(MakeLerp, 0, 360, 10 * DT, EASING_LINEAR)
     Loop(0)
@@ -448,7 +448,7 @@ EvtScript N(EVS_Scene_SkolarRescued) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(EnableNpcAI, NPC_Skolar, FALSE)
+    Call(EnableNpcAI, NPC_Skolar, false)
     Call(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Leap)
     Wait(20 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_UsePower)
@@ -472,14 +472,14 @@ EvtScript N(EVS_Scene_SkolarRescued) = {
     Wait(30 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Call(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Idle)
-    Call(EnableNpcAI, NPC_Skolar, TRUE)
+    Call(EnableNpcAI, NPC_Skolar, true)
     Call(N(UpgradeStarPowerCh3))
     Call(ShowMessageAtScreenPos, MSG_Menus_0193, 160, 40)
     Wait(10 * DT)
     Call(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_Skolar, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 512, MSG_CH3_00D4)
@@ -489,11 +489,11 @@ EvtScript N(EVS_Scene_SkolarRescued) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_Skolar, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 512, MSG_CH3_00D5)
-    Call(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Call(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, true)
     Thread
         Loop(25)
             Call(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)
@@ -542,7 +542,7 @@ EvtScript N(EVS_Scene_SkolarRescued) = {
     Set(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
     Exec(N(EVS_SetupMusic))
     Call(EnablePartnerAI)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -725,7 +725,7 @@ NpcData N(NpcData_HyperParagoomba_01) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -216, 60, -10 },
@@ -749,7 +749,7 @@ NpcData N(NpcData_HyperParagoomba_02) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 60, 150 },
@@ -773,7 +773,7 @@ NpcData N(NpcData_HyperParagoomba_03) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 260, 60, 30 },

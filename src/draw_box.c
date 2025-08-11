@@ -415,15 +415,15 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
         cornersBitDepth = corners->bitDepth;
 
         if (width <= 0 || height <= 0 || opacity == 0 || posX <= -768 || posY <= -768) {
-            return TRUE;
+            return true;
         }
 
         if (posX >= SCREEN_WIDTH || posY >= SCREEN_HEIGHT) {
-            return TRUE;
+            return true;
         }
 
         if (posX + width >= 768 || posY + height >= 768 || posX + width <= 0 || posY + height <= 0) {
-            return TRUE;
+            return true;
         }
 
         if (flags & DRAW_FLAG_ROTSCALE) {
@@ -827,6 +827,6 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
             gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
             gDPPipeSync(gMainGfxPos++);
         }
-        return FALSE;
+        return false;
     }
 }

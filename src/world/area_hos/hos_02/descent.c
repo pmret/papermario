@@ -5,8 +5,8 @@ EvtScript N(EVS_DescendStarBeam) = {
     Call(N(func_80240F68_A17188), MV_StarBeamEffect)
     Call(SetPlayerSpeed, Float(3.0))
     Call(PlayerMoveTo, -1105, 230, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Call(SetNpcJumpscale, NPC_PARTNER, Float(0.5))
     Call(NpcJump0, NPC_PARTNER, -1105, -171, 220, 5)
     Thread

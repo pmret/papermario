@@ -53,7 +53,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_DRY_DRY_DESERT)
     Call(SetSpriteShading, SHADING_NONE)
     IfEq(GB_StoryProgress, STORY_CH2_GOT_PULSE_STONE)
-        Call(DisablePulseStone, FALSE)
+        Call(DisablePulseStone, false)
     EndIf
     SetUP_CAMERA_NO_LEAD()
     ExecWait(N(EVS_MakeEntities))

@@ -31,11 +31,11 @@ Vec3f N(FlightPath)[] = {
 };
 
 EvtScript N(EVS_Scene_Starship) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAND)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Call(TranslateGroup, MODEL_g277, -700, -350, 1600)
     Set(MV_Starship_Yaw, 50)
     Set(MV_Starship_PosX, -700)
@@ -50,7 +50,7 @@ EvtScript N(EVS_Scene_Starship) = {
     Call(SetPanTarget, CAM_DEFAULT, 0, -1, 0)
     Call(SetCamPitch, CAM_DEFAULT, Float(-13.0), Float(18.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Call(PlaySound, SOUND_STARSHIP_NEAR_FLYBY)
         Call(MakeLerp, 50, 10, 10, EASING_LINEAR)

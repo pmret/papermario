@@ -21,10 +21,10 @@ s32 N(BothRightDoorModelsR)[] = { MODEL_o876, MODEL_o877, MODEL_o878, MODEL_o879
 
 EvtScript N(EVS_ExitDoors_pra_29_1) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_34_ENTRY_0)
     Set(LVar1, COLLIDER_deilittsw)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothLeftDoorModelsL)))
         Set(LVar3, Ref(N(BothLeftDoorModelsR)))
     Else
@@ -41,10 +41,10 @@ EvtScript N(EVS_ExitDoors_pra_29_1) = {
 
 EvtScript N(EVS_ExitDoors_pra_31_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_34_ENTRY_1)
     Set(LVar1, COLLIDER_deilittse)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothRightDoorModelsL)))
         Set(LVar3, Ref(N(BothRightDoorModelsR)))
     Else
@@ -61,10 +61,10 @@ EvtScript N(EVS_ExitDoors_pra_31_0) = {
 
 EvtScript N(EVS_ExitDoors_pra_31_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_34_ENTRY_2)
     Set(LVar1, COLLIDER_deilittne)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothRightDoorModelsL)))
         Set(LVar3, Ref(N(BothRightDoorModelsR)))
     Else
@@ -81,10 +81,10 @@ EvtScript N(EVS_ExitDoors_pra_31_2) = {
 
 EvtScript N(EVS_ExitDoors_pra_29_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_34_ENTRY_3)
     Set(LVar1, COLLIDER_deilittnw)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothLeftDoorModelsL)))
         Set(LVar3, Ref(N(BothLeftDoorModelsR)))
     Else
@@ -124,7 +124,7 @@ EvtScript N(EVS_UnlockPrompt_Doors) = {
     EndIf
     Call(RemoveKeyItemAt, LVar1)
     Call(CloseChoicePopup)
-    Set(GF_PRA34_UnlockedDoor, TRUE)
+    Set(GF_PRA34_UnlockedDoor, true)
     Call(N(GetEntityPosition), MV_FarPadlockEntityID, LVar0, LVar1, LVar2)
     Call(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     Call(N(GetEntityPosition), MV_NearPadlockEntityID, LVar0, LVar1, LVar2)
@@ -142,7 +142,7 @@ EvtScript N(EVS_UnlockPrompt_Doors) = {
 EvtScript N(EVS_BindExitTriggers) = {
     BindTrigger(Ref(N(EVS_ExitDoors_pra_29_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittsw, 1, 0)
     BindTrigger(Ref(N(EVS_ExitDoors_pra_29_2)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittnw, 1, 0)
-    IfEq(GF_PRA34_UnlockedDoor, FALSE)
+    IfEq(GF_PRA34_UnlockedDoor, false)
         BindPadlock(Ref(N(EVS_UnlockPrompt_Doors)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), Ref(N(PalaceKeyList)), 0, 1)
         BindPadlock(Ref(N(EVS_UnlockPrompt_Doors)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(1), Ref(N(PalaceKeyList)), 0, 1)
     Else
@@ -157,7 +157,7 @@ EvtScript N(EVS_EnterMap) = {
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(pra_34_ENTRY_0)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothLeftDoorModelsL)))
                 Set(LVar3, Ref(N(BothLeftDoorModelsR)))
             Else
@@ -165,7 +165,7 @@ EvtScript N(EVS_EnterMap) = {
                 Set(LVar3, Ref(N(NearLeftDoorModelsR)))
             EndIf
         CaseEq(pra_34_ENTRY_1)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothRightDoorModelsL)))
                 Set(LVar3, Ref(N(BothRightDoorModelsR)))
             Else
@@ -173,7 +173,7 @@ EvtScript N(EVS_EnterMap) = {
                 Set(LVar3, Ref(N(NearRightDoorModelsR)))
             EndIf
         CaseEq(pra_34_ENTRY_2)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothRightDoorModelsL)))
                 Set(LVar3, Ref(N(BothRightDoorModelsR)))
             Else
@@ -181,7 +181,7 @@ EvtScript N(EVS_EnterMap) = {
                 Set(LVar3, Ref(N(FarRightDoorModelsR)))
             EndIf
         CaseEq(pra_34_ENTRY_3)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothLeftDoorModelsL)))
                 Set(LVar3, Ref(N(BothLeftDoorModelsR)))
             Else
@@ -200,8 +200,8 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(SetCamBGColor, CAM_DEFAULT, 24, 24, 40)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
     Set(LVar0, MODEL_o945)

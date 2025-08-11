@@ -785,7 +785,7 @@ void appendGfx_animator(ModelAnimator* animator) {
 
     //TODO find better match
     switch (gAnimModelFogEnabled != 0) {
-        case FALSE:
+        case false:
             switch (animator->renderMode) {
                 case RENDER_MODE_SURFACE_OPA:
                     gSPDisplayList(gMainGfxPos++, Gfx_RM1_SURFACE_OPA);
@@ -810,7 +810,7 @@ void appendGfx_animator(ModelAnimator* animator) {
                     break;
             }
             break;
-        case TRUE:
+        case true:
             switch (animator->renderMode) {
                 case RENDER_MODE_SURFACE_OPA:
                     gSPDisplayList(gMainGfxPos++, Gfx_RM3_SURFACE_OPA);
@@ -956,7 +956,7 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
                     temp[0]->words.w0 = w0;
                     temp[0]->words.w1 = w1;
                 }
-            } while (TRUE);
+            } while (true);
 
             gSPEndDisplayList(gfxPos++);
             gSPDisplayList(gMainGfxPos++, bufferHandle->addr);
@@ -1001,11 +1001,11 @@ ModelAnimator* set_animator_render_callback(s32 animModelID, void* callbackArg, 
 }
 
 void enable_anim_model_fog(void) {
-    gAnimModelFogEnabled = TRUE;
+    gAnimModelFogEnabled = true;
 }
 
 void disable_anim_model_fog(void) {
-    gAnimModelFogEnabled = FALSE;
+    gAnimModelFogEnabled = false;
 }
 
 void set_anim_model_fog_dist(s32 start, s32 end) {

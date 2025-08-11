@@ -30,8 +30,8 @@ EvtScript N(EVS_TetherCamToPlayer) = {
 
 EvtScript N(EVS_UseSpring) = {
     Call(N(GiveInitialSpringBoost))
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Wait(1)
     Call(SetPlayerActionState, ACTION_STATE_LAUNCH)
@@ -39,24 +39,24 @@ EvtScript N(EVS_UseSpring) = {
     ExecGetTID(N(EVS_TetherCamToPlayer), LVarA)
     Call(SetPlayerJumpscale, Float(0.1))
     Call(PlayerJump, -556, 300, -195, 15)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerPhysics, false)
     Call(FacePlayerTowardPoint, -630, -50, 0)
     Call(SetPlayerAnimation, ANIM_Mario1_Fall)
     Call(SetPlayerJumpscale, Float(1.0))
     Call(PlayerJump2, -601, 376, -105, 30)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     KillThread(LVarA)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_JAN03_WarpPipe, FALSE)
-        IfEq(GF_TIK08_WarpPipe, TRUE)
+    IfEq(GF_JAN03_WarpPipe, false)
+        IfEq(GF_TIK08_WarpPipe, true)
             Call(GetEntryID, LVar0)
             IfNe(LVar0, jan_03_ENTRY_3)
-                Set(GF_JAN03_WarpPipe, TRUE)
+                Set(GF_JAN03_WarpPipe, true)
             EndIf
         EndIf
     EndIf

@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------
 // Options
 
-// define this TRUE to enable updating the z-pos of the chain
+// define this true to enable updating the z-pos of the chain
 // CHOMP_CHAIN_UPDATE_Z
 
 // ----------------------------------------------------------------
@@ -179,7 +179,7 @@ API_CALLABLE(N(ChompChainUpdate)) {
         if (chain->settleAmt > 4.0) {
             chain->settleAmt = 4.0f;
         }
-        
+
         #if CHOMP_CHAIN_UPDATE_Z == TRUE
         chain->curPos.z = posZ;
         #endif

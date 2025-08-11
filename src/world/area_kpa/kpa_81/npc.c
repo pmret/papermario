@@ -33,9 +33,9 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EndIf
     IfEq(GB_KPA81_BowserDoorState, 1)
         Set(GB_KPA81_BowserDoorState, 2)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Wait(35)
-        Call(SetCamType, CAM_DEFAULT, 6, FALSE)
+        Call(SetCamType, CAM_DEFAULT, 6, false)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetPanTarget, CAM_DEFAULT, 109, 0, 202)
@@ -44,7 +44,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
         Call(SetCamPosA, CAM_DEFAULT, Float(133.0), Float(100.0))
         Call(SetCamPosB, CAM_DEFAULT, Float(216.0), Float(230.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Thread
             Call(SetMusic, 0, SONG_FINAL_BOWSER_BATTLE, BGM_VARIATION_1, VOL_LEVEL_FULL)
@@ -56,16 +56,16 @@ EvtScript N(EVS_NpcIdle_Door) = {
         Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0008)
         Exec(N(EVS_SetupMusic))
         Call(ResetCam, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-        Call(DisablePlayerInput, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
+        Call(DisablePlayerInput, false)
         Return
     EndIf
     Wait(10)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPlayerSpeed, Float(2.0 / DT))
     Call(PlayerMoveTo, -115, LVar2, 0)
-    Call(SetCamType, CAM_DEFAULT, 6, FALSE)
+    Call(SetCamType, CAM_DEFAULT, 6, false)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, 109, 0, 202)
@@ -74,7 +74,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(133.0), Float(100.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(216.0), Float(230.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Call(SetMusic, 0, SONG_FINAL_BOWSER_BATTLE, BGM_VARIATION_1, VOL_LEVEL_FULL)
@@ -88,8 +88,8 @@ EvtScript N(EVS_NpcIdle_Door) = {
     IfEq(LVar0, 0)
         Call(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0003)
         Call(ResetCam, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-        Call(DisablePlayerInput, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
+        Call(DisablePlayerInput, false)
         Label(100)
         Wait(1)
         Call(IsPlayerWithin, 120, 150, 30, LVar0)
@@ -100,23 +100,23 @@ EvtScript N(EVS_NpcIdle_Door) = {
         IfLe(LVar1, 300 * DT)
             Goto(100)
         EndIf
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
 #if !VERSION_JP
         ExecWait(N(EVS_EnsurePartnerNeutral))
 #endif
         Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0004)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Call(AwaitPlayerApproach, 120, 150, 30)
         Goto(2)
     Else
         Call(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0002)
         Call(ResetCam, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-        Call(DisablePlayerInput, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
+        Call(DisablePlayerInput, false)
         Call(AwaitPlayerApproach, 120, 150, 30)
     EndIf
     Label(2)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
 #if !VERSION_JP
     ExecWait(N(EVS_EnsurePartnerNeutral))
 #endif
@@ -126,13 +126,13 @@ EvtScript N(EVS_NpcIdle_Door) = {
         Goto(4)
     Else
         Call(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0002)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Call(AwaitPlayerLeave, 120, 150, 30)
         Call(AwaitPlayerApproach, 120, 150, 30)
         Goto(2)
     EndIf
     Label(3)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     ExecWait(N(EVS_EnsurePartnerNeutral))
     Thread
         Call(DisablePartnerAI, 0)
@@ -152,7 +152,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EndThread
     Call(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0006)
     Label(5)
-    Call(SetCamType, CAM_DEFAULT, 6, FALSE)
+    Call(SetCamType, CAM_DEFAULT, 6, false)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, 163, -71, 108)
@@ -161,12 +161,12 @@ EvtScript N(EVS_NpcIdle_Door) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(133.0), Float(100.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(216.0), Float(230.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(EnableModel, MODEL_o166, TRUE)
+    Call(EnableModel, MODEL_o166, true)
     Thread
         Wait(25)
-        Call(EnableModel, MODEL_o165, FALSE)
+        Call(EnableModel, MODEL_o165, false)
     EndThread
     Call(PlaySoundAtCollider, COLLIDER_deilitts, SOUND_OPEN_TRAPDOOR, SOUND_SPACE_DEFAULT)
     Call(MakeLerp, 0, 90, 30, EASING_COS_SLOW_OVERSHOOT)
@@ -180,7 +180,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EndIf
     Call(SetPlayerAnimation, ANIM_MarioW2_Flail)
     Wait(30 * DT)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
     Call(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
     Wait(10 * DT)
@@ -202,7 +202,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EndLoop
     EndThread
     Wait(65)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Set(GB_KPA81_BowserDoorState, 1)
     Call(GotoMap, Ref(N(KPA_17)), kpa_17_ENTRY_0)
     Return
@@ -211,8 +211,8 @@ EvtScript N(EVS_NpcIdle_Door) = {
 
 EvtScript N(EVS_NpcInit_Door) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Door)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_USE_INSPECT_ICON, TRUE)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_USE_INSPECT_ICON, true)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetNpcPos, NPC_SELF, 184, 20, 150)
     Return
     End

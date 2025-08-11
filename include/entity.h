@@ -212,7 +212,7 @@ typedef struct ChestData {
 typedef struct BlueWarpPipeData {
     /* 0x00 */ s32 unk_00; // proably flags
     /* 0x04 */ s32 timer;
-    /* 0x08 */ b32 isRaised;
+    /* 0x08 */ bool isRaised;
     /* 0x0C */ s32 entryID;
     /* 0x10 */ EvtScript* onEnterPipeEvt;
     /* 0x14 */ s32 flagIndex;

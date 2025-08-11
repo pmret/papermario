@@ -14,9 +14,9 @@ BombTrigger N(BombPos_Wall) = {
 
 EvtScript N(EVS_BlastWall) = {
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 60, 61, 1, 10, 30)
-    Set(GF_NOK15_BombedWall, TRUE)
-    Call(EnableModel, MODEL_bomb_ato, TRUE)
-    Call(EnableModel, MODEL_bomb_1, FALSE)
+    Set(GF_NOK15_BombedWall, true)
+    Call(EnableModel, MODEL_bomb_ato, true)
+    Call(EnableModel, MODEL_bomb_1, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
     Unbind
     Return
@@ -99,15 +99,15 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_PLEASANT_PATH)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupFoliage))
     Exec(N(EVS_TexPan_Water))
-    IfEq(GF_NOK15_BombedWall, FALSE)
-        Call(EnableModel, MODEL_bomb_ato, FALSE)
+    IfEq(GF_NOK15_BombedWall, false)
+        Call(EnableModel, MODEL_bomb_ato, false)
         BindTrigger(Ref(N(EVS_BlastWall)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Wall)), 1, 0)
     Else
-        Call(EnableModel, MODEL_bomb_1, FALSE)
+        Call(EnableModel, MODEL_bomb_1, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     Exec(N(EVS_SetupMusic))

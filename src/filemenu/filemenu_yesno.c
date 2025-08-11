@@ -105,7 +105,7 @@ MenuWindowBP filemenu_yesno_windowBPs[] = {
 };
 
 MenuPanel filemenu_yesno_menuBP = {
-    .initialized = FALSE,
+    .initialized = false,
     .col = 0,
     .row = 0,
     .selected = 0,
@@ -269,7 +269,7 @@ void filemenu_yesno_init(MenuPanel* tab) {
     }
 
     setup_pause_menu_tab(filemenu_yesno_windowBPs, ARRAY_COUNT(filemenu_yesno_windowBPs));
-    tab->initialized = TRUE;
+    tab->initialized = true;
 }
 
 void filemenu_yesno_handle_input(MenuPanel* menu) {
@@ -330,7 +330,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         gSaveSlotMetadata[slot].timePlayed = 0;
                         gSaveSlotMetadata[slot].spiritsRescued = 0;
                         fio_erase_game(slot);
-                        gSaveSlotHasData[slot] = FALSE;
+                        gSaveSlotHasData[slot] = false;
                         break;
                     case FM_CONFIRM_COPY:
                         filemenu_currentMenu = FILE_MENU_MESSAGE;
@@ -345,13 +345,13 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         if (fio_load_game(filemenu_loadedFileIdx)) {
                             gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_loadedFileIdx];
                             fio_save_game(filemenu_iterFileIdx);
-                            gSaveSlotHasData[filemenu_iterFileIdx] = TRUE;
+                            gSaveSlotHasData[filemenu_iterFileIdx] = true;
                         }
 #else
                         fio_load_game(filemenu_loadedFileIdx);
                         gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_loadedFileIdx];
                         fio_save_game(filemenu_iterFileIdx);
-                        gSaveSlotHasData[filemenu_iterFileIdx] = TRUE;
+                        gSaveSlotHasData[filemenu_iterFileIdx] = true;
 #endif
                         break;
 #if !VERSION_PAL
@@ -366,7 +366,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32)filemenu_update_hidden_name_confirm);
                         gSaveSlotMetadata[filemenu_menus[FILE_MENU_MAIN]->selected] = gSaveSlotMetadata[gGameStatusPtr->saveSlot];
                         fio_save_game(filemenu_menus[FILE_MENU_MAIN]->selected);
-                        gSaveSlotHasData[filemenu_menus[FILE_MENU_MAIN]->selected] = TRUE;
+                        gSaveSlotHasData[filemenu_menus[FILE_MENU_MAIN]->selected] = true;
                         break;
 #endif
                     case FM_CONFIRM_CREATE:
@@ -382,7 +382,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                             gSaveSlotMetadata[slot2].filename[i] = filemenu_filename[i];
                         }
                         fio_save_game(slot2);
-                        gSaveSlotHasData[slot2] = TRUE;
+                        gSaveSlotHasData[slot2] = true;
                         set_window_update(WIN_FILES_INPUT_FIELD, (s32)filemenu_update_hidden_name_input);
                         set_window_update(WIN_FILES_INPUT_KEYBOARD, (s32)filemenu_update_hidden_name_input);
                         set_window_update(WIN_FILES_TITLE, (s32)filemenu_update_show_with_rotation);

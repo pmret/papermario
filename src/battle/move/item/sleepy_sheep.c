@@ -52,7 +52,7 @@ API_CALLABLE(N(func_802A123C_71E88C)) {
             break;
         case 1:
             posPtr->x += 6.0f;
-            cond = FALSE;
+            cond = false;
             if (!((gGameStatusPtr->frameCounter % 3) & 0xFFFF)) {
                 script->functionTemp[1] = (script->functionTemp[1] + 1) % 10;
             }
@@ -76,7 +76,7 @@ API_CALLABLE(N(func_802A123C_71E88C)) {
                         x = -(x - 40.0f);
                     }
                     fx_landing_dust(3, x, y, z, 0.0f);
-                    cond = TRUE;
+                    cond = true;
                 }
             }
             if (gGameStatusPtr->frameCounter & 1) {
@@ -141,7 +141,7 @@ API_CALLABLE(N(func_802A1848_71EE98)) {
         script->functionTemp[0] = 0;
     }
 
-    cond = FALSE;
+    cond = false;
 
     for (i = 0; i < player->targetListLength; i++) {
         s8 targetIdx = player->targetIndexList[i];
@@ -156,7 +156,7 @@ API_CALLABLE(N(func_802A1848_71EE98)) {
                     if (targetActor->yaw >= 360.0f) {
                         targetActor->yaw = 360.0f;
                     }
-                    cond = TRUE;
+                    cond = true;
                 }
             }
         }
@@ -185,10 +185,10 @@ INCLUDE_IMG("battle/move/item/sleepy_sheep3.png", battle_item_sleepy_sheep3_png)
 INCLUDE_PAL("battle/move/item/sleepy_sheep3.pal", battle_item_sleepy_sheep3_pal);
 
 Vtx N(model)[] = {
-    { .v = {{ -28,  0,  0 }, FALSE, { 0,    1536 }, { 0, 0, 0, 255 }}},
-    { .v = {{  27,  0,  0 }, FALSE, { 1792, 1536 }, { 0, 0, 0, 255 }}},
-    { .v = {{  27, 47,  0 }, FALSE, { 1792,    0 }, { 0, 0, 0, 255 }}},
-    { .v = {{ -28, 47,  0 }, FALSE, { 0,       0 }, { 0, 0, 0, 255 }}},
+    { .v = {{ -28,  0,  0 }, false, { 0,    1536 }, { 0, 0, 0, 255 }}},
+    { .v = {{  27,  0,  0 }, false, { 1792, 1536 }, { 0, 0, 0, 255 }}},
+    { .v = {{  27, 47,  0 }, false, { 1792,    0 }, { 0, 0, 0, 255 }}},
+    { .v = {{ -28, 47,  0 }, false, { 0,       0 }, { 0, 0, 0, 255 }}},
 };
 
 Gfx N(frame1_displayList)[] = {

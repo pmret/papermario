@@ -118,7 +118,7 @@ EvtScript N(EVS_NpcAux_TrafficBoo) = {
 EvtScript N(EVS_NpcInit_TrafficBoo1) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TrafficBoo)))
     Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_TrafficBoo)))
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Return
     End
 };
@@ -126,7 +126,7 @@ EvtScript N(EVS_NpcInit_TrafficBoo1) = {
 EvtScript N(EVS_NpcInit_TrafficBoo2) = {
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TrafficBoo)))
     Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_TrafficBoo)))
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Return
     End
 };
@@ -158,8 +158,8 @@ EvtScript N(EVS_NpcInteract_Franky) = {
         Return
     EndIf
     IfEq(GB_KootFavor_Current, KOOT_FAVOR_CH5_3)
-        IfEq(GF_OBK01_Gift_OldPhoto, FALSE)
-            Set(GF_OBK01_Gift_OldPhoto, TRUE)
+        IfEq(GF_OBK01_Gift_OldPhoto, false)
+            Set(GF_OBK01_Gift_OldPhoto, true)
             ExecWait(N(EVS_MarioSalute))
             Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_006B)
             EVT_GIVE_KEY_REWARD(ITEM_KOOT_OLD_PHOTO)
@@ -226,7 +226,7 @@ NpcData N(NpcData_Boos)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 422, -200, 112 },
@@ -249,7 +249,7 @@ NpcData N(NpcData_Boos)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 397, -410, 352 },

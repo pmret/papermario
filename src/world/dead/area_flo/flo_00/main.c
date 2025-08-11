@@ -9,7 +9,7 @@ API_CALLABLE(N(SpawnSunEffect)) {
 }
 
 EvtScript N(EVS_Wisterwood_Exit) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittn, COLLIDER_FLAGS_UPPER_MASK)
     Call(PlayerMoveTo, 30, -170, 10)
     Call(InterpPlayerYaw, 0, 0)
@@ -46,7 +46,7 @@ EvtScript N(EVS_Wisterwood_Exit) = {
 };
 
 EvtScript N(EVS_Wisterwood_Enter) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittn, COLLIDER_FLAGS_UPPER_MASK)
     Call(InterpPlayerYaw, 180, 0)
     Call(PlaySoundAtCollider, COLLIDER_deilittn, SOUND_WOODEN_DOOR_OPEN, SOUND_SPACE_DEFAULT)
@@ -72,7 +72,7 @@ EvtScript N(EVS_Wisterwood_Enter) = {
         EndIf
     EndLoop
     Call(PlaySoundAtCollider, COLLIDER_deilittn, SOUND_WOODEN_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilittn, COLLIDER_FLAGS_UPPER_MASK)
     Return
     End
@@ -106,7 +106,7 @@ EvtScript N(EVS_EnterMap) = {
     Else
         Call(GetEntryID, LVar0)
         IfNe(LVar0, flo_00_ENTRY_8)
-            Set(AF_FLO_RidingBeanstalk, FALSE)
+            Set(AF_FLO_RidingBeanstalk, false)
         EndIf
         Switch(LVar0)
             CaseEq(flo_00_ENTRY_0)
@@ -145,18 +145,18 @@ EvtScript N(EVS_EnterMap) = {
 EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_FLOWER_FIELDS)
     Call(SetSpriteShading, SHADING_NONE)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
     EVT_SETUP_CAMERA_DEFAULT()
-    Set(GF_MAP_FlowerFields, TRUE)
+    Set(GF_MAP_FlowerFields, true)
     IfLt(GB_StoryProgress, STORY_CH6_GREW_MAGIC_BEANSTALK)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o351, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
-    Set(GF_MAC01_RowfBadgesChosen, FALSE)
+    Set(GF_MAC01_RowfBadgesChosen, false)
     Call(GetEntryID, LVar0)
     IfEq(LVar0, flo_00_ENTRY_B)
-        Call(MakeNpcs, FALSE, Ref(N(EpilogueNPCs)))
+        Call(MakeNpcs, false, Ref(N(EpilogueNPCs)))
     Else
-        Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+        Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     EndIf
     ExecWait(N(EVS_MakeEntities))
     Call(ParentColliderToModel, COLLIDER_o240, MODEL_o142)
@@ -186,7 +186,7 @@ EvtScript N(EVS_Main) = {
     EndIf
     // thread to manage wisterwood blinking
     Thread
-        Call(EnableTexPanning, MODEL_o47, TRUE)
+        Call(EnableTexPanning, MODEL_o47, true)
         Set(LVar0, 0)
         Label(0)
             Call(RandInt, 300, LVar1)

@@ -7,7 +7,7 @@ EvtScript N(EVS_NpcInteract_WaterfrontDad) = {
         CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
             Set(LVar0, MSG_MAC_Gate_0046)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Gate_0047)
             Else
                 Set(LVar0, MSG_MAC_Gate_0048)
@@ -15,10 +15,10 @@ EvtScript N(EVS_NpcInteract_WaterfrontDad) = {
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Gate_0049)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+            IfEq(GF_MAC00_DictionaryStolen, false)
                 Set(LVar0, MSG_MAC_Gate_004A)
             Else
-                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                IfEq(GF_MAC00_DictionaryReturned, false)
                     Set(LVar0, MSG_MAC_Gate_004B)
                 Else
                     Set(LVar0, MSG_MAC_Gate_004C)
@@ -55,7 +55,7 @@ EvtScript N(EVS_NpcInteract_WaterfrontMom) = {
         CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
             Set(LVar0, MSG_MAC_Gate_0056)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Gate_0057)
             Else
                 Set(LVar0, MSG_MAC_Gate_0058)
@@ -64,10 +64,10 @@ EvtScript N(EVS_NpcInteract_WaterfrontMom) = {
             Set(LVar0, MSG_MAC_Gate_0059)
 #if VERSION_JP
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+            IfEq(GF_MAC00_DictionaryStolen, false)
                 Set(LVar0, MSG_MAC_Gate_0123)
             Else
-                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                IfEq(GF_MAC00_DictionaryReturned, false)
                     Set(LVar0, MSG_MAC_Gate_0124)
                 Else
                     Set(LVar0, MSG_MAC_Gate_0125)
@@ -105,7 +105,7 @@ EvtScript N(EVS_NpcInteract_WaterfrontKid1) = {
         CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
             Set(LVar0, MSG_MAC_Gate_0063)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Gate_0064)
             Else
                 Set(LVar0, MSG_MAC_Gate_0065)
@@ -113,10 +113,10 @@ EvtScript N(EVS_NpcInteract_WaterfrontKid1) = {
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Gate_0066)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+            IfEq(GF_MAC00_DictionaryStolen, false)
                 Set(LVar0, MSG_MAC_Gate_0067)
             Else
-                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                IfEq(GF_MAC00_DictionaryReturned, false)
                     Set(LVar0, MSG_MAC_Gate_0068)
                 Else
                     Set(LVar0, MSG_MAC_Gate_0069)
@@ -153,7 +153,7 @@ EvtScript N(EVS_NpcInteract_WaterfrontKid2) = {
         CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
             Set(LVar0, MSG_MAC_Gate_0073)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Gate_0074)
             Else
                 Set(LVar0, MSG_MAC_Gate_0075)
@@ -162,10 +162,10 @@ EvtScript N(EVS_NpcInteract_WaterfrontKid2) = {
             Set(LVar0, MSG_MAC_Gate_0076)
 #if VERSION_JP
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+            IfEq(GF_MAC00_DictionaryStolen, false)
                 Set(LVar0, MSG_MAC_Gate_0126)
             Else
-                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                IfEq(GF_MAC00_DictionaryReturned, false)
                     Set(LVar0, MSG_MAC_Gate_0127)
                 Else
                     Set(LVar0, MSG_MAC_Gate_0128)
@@ -227,11 +227,11 @@ EvtScript N(EVS_WaterfrontHouse_DoorLocked) = {
     EndIf
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+            IfEq(GF_MAC00_DictionaryStolen, false)
                 Set(LVar0, MSG_MAC_Gate_004A)
                 Set(LVar1, MSG_MAC_Gate_0067)
             Else
-                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                IfEq(GF_MAC00_DictionaryReturned, false)
                     Set(LVar0, MSG_MAC_Gate_004B)
                     Set(LVar1, MSG_MAC_Gate_0068)
                 Else
@@ -240,11 +240,11 @@ EvtScript N(EVS_WaterfrontHouse_DoorLocked) = {
                 EndIf
             EndIf
     EndSwitch
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, LVar0, 160, 40)
     Wait(5)
     Call(ShowMessageAtScreenPos, LVar1, 160, 40)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

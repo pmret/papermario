@@ -259,7 +259,7 @@ void appendGfx_entity_model(EntityModel* model) {
             gSPSetOtherMode(gMainGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_POINT | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_NONE | G_CYC_1CYCLE);
 
             switch (entity_fog_enabled && !(model->flags & ENTITY_MODEL_FLAG_FOG_DISABLED)) {
-                case FALSE:
+                case false:
                     switch (model->renderMode) {
                         case RENDER_MODE_SURFACE_OPA:
                             gSPDisplayList(gMainGfxPos++, Gfx_RM1_SURFACE_OPA);
@@ -315,7 +315,7 @@ void appendGfx_entity_model(EntityModel* model) {
                             break;
                     }
                     break;
-                case TRUE:
+                case true:
                     switch (model->renderMode) {
                         case RENDER_MODE_SURFACE_OPA:
                             gSPDisplayList(gMainGfxPos++, Gfx_RM3_SURFACE_OPA);
@@ -572,7 +572,7 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     if (!(model->flags & ENTITY_MODEL_FLAG_USE_IMAGE)) {
         switch (entity_fog_enabled && !(model->flags & ENTITY_MODEL_FLAG_FOG_DISABLED)) {
-            case FALSE:
+            case false:
                 switch (model->renderMode) {
                     case RENDER_MODE_SURFACE_OPA:
                         gSPDisplayList(gMainGfxPos++, Gfx_RM1_SURFACE_OPA);
@@ -628,7 +628,7 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
                         break;
                 }
                 break;
-            case TRUE:
+            case true:
                 switch (model->renderMode) {
                     case RENDER_MODE_SURFACE_OPA:
                         gSPDisplayList(gMainGfxPos++, Gfx_RM3_SURFACE_OPA);

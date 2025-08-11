@@ -11,9 +11,9 @@
 BSS f32 N(WaterSurfaceY);
 BSS s32 N(DiveState);
 BSS s32 N(DiveTime);
-BSS b32 N(IsRiding);
+BSS bool N(IsRiding);
 BSS s32 N(TouchDockTime);
-BSS b32 N(IsUnderwater);
+BSS bool N(IsUnderwater);
 BSS f32 N(InertialMoveSpeed);
 BSS f32 N(InertialMoveAngle);
 BSS f32 N(UnusedMoveX);
@@ -280,7 +280,7 @@ void N(update_riding_physics)(Npc* sushie) {
             sushie->curAnim = ANIM_WorldSushie_Ride;
         }
         if (!N(IsUnderwater) && (playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f) < N(WaterSurfaceY))) {
-            N(IsUnderwater) = TRUE;
+            N(IsUnderwater) = true;
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             set_player_imgfx_all(playerStatus->trueAnimation, IMGFX_SET_WAVY, 2, 0, 0, 0, 0);
             npc_set_imgfx_params(sushie, IMGFX_SET_WAVY, 2, 0, 0, 0, 0);
@@ -320,7 +320,7 @@ void N(update_riding_physics)(Npc* sushie) {
         }
         if ((N(WaterSurfaceY) - sushie->moveToPos.y) - (sushie->collisionHeight * 0.5f) <= 0.0f) {
             if (N(IsUnderwater)) {
-                N(IsUnderwater) = FALSE;
+                N(IsUnderwater) = false;
                 set_player_imgfx_all(ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0, 0);
                 npc_set_imgfx_params(sushie, IMGFX_CLEAR, 0, 0, 0, 0, 0);
             }
@@ -409,7 +409,7 @@ API_CALLABLE(N(UseAbility)) {
                 // resume riding state from previous map
                 sushie->moveToPos.y = sushie->pos.y;
                 playerStatus->pos.y = sushie->moveToPos.y + 16.0f;
-                N(IsRiding) = TRUE;
+                N(IsRiding) = true;
                 sushie->flags |= NPC_FLAG_FLYING;
                 sushie->flags &= ~NPC_FLAG_GRAVITY;
                 sushie->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
@@ -421,7 +421,7 @@ API_CALLABLE(N(UseAbility)) {
                 sushie->moveSpeed = playerStatus->runSpeed;
                 sushie->jumpScale = 0.0f;
                 partnerStatus->partnerActionState = PARTNER_ACTION_USE;
-                gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
+                gGameStatusPtr->keepUsingPartnerOnMapChange = false;
                 partnerStatus->actingPartner = PARTNER_SUSHIE;
                 N(DiveState) = DIVE_STATE_NONE;
                 N(DiveTime) = 0;
@@ -451,7 +451,7 @@ API_CALLABLE(N(UseAbility)) {
                 return ApiStatus_DONE1;
             }
 
-            N(IsRiding) = TRUE;
+            N(IsRiding) = true;
             set_action_state(ACTION_STATE_RIDE);
             disable_player_static_collisions();
             disable_player_input();
@@ -540,7 +540,7 @@ API_CALLABLE(N(UseAbility)) {
             playerStatus->targetYaw = sushie->yaw;
             sushie->moveSpeed = 3.0f;
             partnerStatus->partnerActionState = PARTNER_ACTION_USE;
-            gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
+            gGameStatusPtr->keepUsingPartnerOnMapChange = false;
             partnerStatus->actingPartner = PARTNER_SUSHIE;
             N(DiveState) = DIVE_STATE_NONE;
             N(DiveTime) = 0;
@@ -720,11 +720,11 @@ API_CALLABLE(N(UseAbility)) {
                 set_action_state(ACTION_STATE_IDLE);
                 enable_npc_shadow(sushie);
                 partner_clear_player_tracking(sushie);
-                N(IsRiding) = FALSE;
+                N(IsRiding) = false;
                 sushie->flags &= ~NPC_FLAG_FLYING;
                 sushie->flags |= NPC_FLAG_GRAVITY;
                 sushie->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
-                gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
+                gGameStatusPtr->keepUsingPartnerOnMapChange = false;
                 partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
                 partnerStatus->actingPartner = 0;
                 set_player_imgfx_all(ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0, 0);
@@ -747,11 +747,11 @@ void N(init)(Npc* sushie) {
     sushie->collisionHeight = 24;
     sushie->collisionDiameter = 36;
     sushie->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
-    N(IsRiding) = FALSE;
+    N(IsRiding) = false;
     N(DiveState) = DIVE_STATE_NONE;
     N(DiveTime) = 0;
     N(TouchDockTime) = 0;
-    N(IsUnderwater) = FALSE;
+    N(IsUnderwater) = false;
 }
 
 API_CALLABLE(N(TakeOut)) {
@@ -894,7 +894,7 @@ void N(pre_battle)(Npc* sushie) {
 
     if (N(IsRiding)) {
         partnerStatus->npc = *sushie;
-        partnerStatus->shouldResumeAbility = TRUE;
+        partnerStatus->shouldResumeAbility = true;
         enable_player_static_collisions();
         enable_player_input();
         set_action_state(ACTION_STATE_IDLE);
@@ -924,7 +924,7 @@ API_CALLABLE(N(EnterMap)) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            gGameStatusPtr->keepUsingPartnerOnMapChange = TRUE;
+            gGameStatusPtr->keepUsingPartnerOnMapChange = true;
             disable_player_static_collisions();
             disable_player_input();
             partnerNPC->pos.x = playerStatus->pos.x;
@@ -951,7 +951,7 @@ API_CALLABLE(N(EnterMap)) {
                 suggest_player_anim_always_forward(ANIM_MarioW2_RideSushie);
                 if ((partnerNPC->yaw >= 0.0f) && (partnerNPC->yaw <= 180.0f)) {
                     partnerNPC->yawCamOffset = partnerNPC->yaw;
-                    partnerNPC->isFacingAway = TRUE;
+                    partnerNPC->isFacingAway = true;
                 }
             }
             script->functionTemp[1] = 25;

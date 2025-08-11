@@ -12,7 +12,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_SHIVER_MOUNTAIN)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     ExecWait(N(EVS_SetupMusic))
     IfLt(GB_StoryProgress, STORY_CH7_GOT_STAR_STONE)

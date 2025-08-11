@@ -168,7 +168,7 @@ EvtScript N(EVS_ReturnHome) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -259,18 +259,18 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_FlyingTackle) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim07)
     Wait(20)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_DUPLIGHOST_LEAP, 0)
@@ -284,7 +284,7 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
             Call(SetGoalToTarget, ACTOR_SELF)
             Call(AddGoalPos, ACTOR_SELF, -100, 0, 0)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(0.3))
-            Call(JumpToGoal, ACTOR_SELF, 17, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 17, false, true, false)
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EndIf
@@ -301,7 +301,7 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -314,7 +314,7 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
         Call(AddGoalPos, ACTOR_SELF, 10, -15, 0)
     EndIf
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.3))
-    Call(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 12, false, true, false)
     Wait(2)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_FLYING_LEAP, BS_FLAGS1_TRIGGER_EVENTS)
@@ -328,17 +328,17 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
             Call(SetActorJumpGravity, ACTOR_SELF, Float(0.5))
             Add(LVar0, 30)
             Call(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 20, false, true, false)
             Add(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
             Wait(10)
             Call(YieldTurn)
             ExecWait(N(EVS_ReturnHome))
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -351,12 +351,12 @@ EvtScript A(EVS_Duplighost_OnDeath) = {
 };
 
 EvtScript A(EVS_Duplighost_OnHitElectric) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(HideHealthBar, ACTOR_SELF)
     Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     Wait(30)
     Call(GetActorVar, ACTOR_SELF, AVAR_Copy_ParentActorID, LVarA)
-    Call(UseIdleAnimation, LVarA, FALSE)
+    Call(UseIdleAnimation, LVarA, false)
     Call(HideHealthBar, LVarA)
     Call(CopyStatusEffects, ACTOR_SELF, LVarA)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SMOKE_BURST)
@@ -375,12 +375,12 @@ EvtScript A(EVS_Duplighost_OnHitElectric) = {
     Call(CopyBuffs, ACTOR_SELF, LVarA)
     Call(GetActorPos, ACTOR_SELF, LVarB, LVarC, LVarD)
     Call(SetActorPos, LVarA, LVarB, LVarC, LVarD)
-    Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
-    Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY, FALSE)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+    Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_PRIMARY_TARGET, true)
+    Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, false)
+    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY, false)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
     Call(SetActorVar, LVarA, AVAR_State, AVAL_State_ReadyToTackle)
-    Call(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, true)
     Call(SetIdleAnimations, LVarA, PRT_MAIN, Ref(N(FlailingAnims)))
     Call(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim0A)
     Wait(30)
@@ -391,12 +391,12 @@ EvtScript A(EVS_Duplighost_OnHitElectric) = {
         Call(SetActorJumpGravity, LVarA, Float(0.5))
         Call(SetActorSounds, LVarA, ACTOR_SOUND_JUMP, SOUND_FALL_QUICK, 0)
         Call(SetGoalPos, LVarA, LVarB, LVarC, LVarD)
-        Call(JumpToGoal, LVarA, 15, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, LVarA, 15, false, true, false)
         Call(ResetActorSounds, LVarA, ACTOR_SOUND_JUMP)
         Call(SetGoalPos, LVarA, LVarB, LVarC, LVarD)
-        Call(JumpToGoal, LVarA, 10, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, LVarA, 10, false, true, false)
         Call(SetGoalPos, LVarA, LVarB, LVarC, LVarD)
-        Call(JumpToGoal, LVarA, 5, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, LVarA, 5, false, true, false)
     EndIf
     Call(ForceHomePos, LVarA, LVarB, LVarC, LVarD)
     Call(HPBarToHome, LVarA)
@@ -412,7 +412,7 @@ EvtScript A(EVS_Duplighost_OnHitElectric) = {
 
 EvtScript A(EVS_Duplighost_OnShockHit) = {
     Set(LVar9, LVar0)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(HideHealthBar, ACTOR_SELF)
     Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
@@ -422,10 +422,10 @@ EvtScript A(EVS_Duplighost_OnShockHit) = {
     Add(LVar3, 10)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
     Call(SetGoalPos, ACTOR_SELF, LVar2, LVar3, LVar4)
-    Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
     ExecWait(EVS_Enemy_ShockHit)
     Call(GetActorVar, ACTOR_SELF, AVAR_Copy_ParentActorID, LVarA)
-    Call(UseIdleAnimation, LVarA, FALSE)
+    Call(UseIdleAnimation, LVarA, false)
     Call(HideHealthBar, LVarA)
     Call(CopyStatusEffects, ACTOR_SELF, LVarA)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SMOKE_BURST)
@@ -444,12 +444,12 @@ EvtScript A(EVS_Duplighost_OnShockHit) = {
     Call(CopyBuffs, ACTOR_SELF, LVarA)
     Call(GetActorPos, ACTOR_SELF, LVarB, LVarC, LVarD)
     Call(SetActorPos, LVarA, LVarB, LVarC, LVarD)
-    Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
-    Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY, FALSE)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+    Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_PRIMARY_TARGET, true)
+    Call(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, false)
+    Call(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY, false)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
     Call(SetActorVar, LVarA, AVAR_State, AVAL_State_WaitToTackle)
-    Call(SetPartFlagBits, ACTOR_SELF, LVar9, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, LVar9, ACTOR_PART_FLAG_INVISIBLE, true)
     Call(SetIdleAnimations, LVarA, PRT_MAIN, Ref(N(FlailingAnims)))
     Call(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim0A)
     Wait(15)
@@ -459,13 +459,13 @@ EvtScript A(EVS_Duplighost_OnShockHit) = {
     Add(LVarB, 30)
     Set(LVarC, 0)
     Call(SetGoalPos, LVarA, LVarB, LVarC, LVarD)
-    Call(JumpToGoal, LVarA, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, LVarA, 15, false, true, false)
     Add(LVarB, 20)
     Call(SetGoalPos, LVarA, LVarB, LVarC, LVarD)
-    Call(JumpToGoal, LVarA, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, LVarA, 10, false, true, false)
     Add(LVarB, 10)
     Call(SetGoalPos, LVarA, LVarB, LVarC, LVarD)
-    Call(JumpToGoal, LVarA, 5, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, LVarA, 5, false, true, false)
     Wait(20)
     Call(AddActorDecoration, LVarA, 1, 0, ACTOR_DECORATION_SWEAT)
     Call(SetActorYaw, LVarA, 180)
@@ -475,7 +475,7 @@ EvtScript A(EVS_Duplighost_OnShockHit) = {
     Call(SetGoalToHome, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVarB, LVarC, LVarD)
     Call(SetGoalPos, LVarA, LVarB, 0, LVarD)
-    Call(RunToGoal, LVarA, 0, FALSE)
+    Call(RunToGoal, LVarA, 0, false)
     Call(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim02)
     Call(SetActorYaw, LVarA, 0)
     Call(RemoveActorDecoration, LVarA, 1, 0)
@@ -505,7 +505,7 @@ EvtScript A(EVS_Duplighost_OnShockDeath) = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.1))
     Call(SetAnimation, ACTOR_SELF, LVarA, LVarB)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 5, FALSE, FALSE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 5, false, false, false)
     Set(LVar0, LVarA)
     Set(LVar1, LVarB)
     ExecWait(EVS_Enemy_ShockHit)
@@ -525,13 +525,13 @@ EvtScript A(EVS_Duplighost_OnShockDeath) = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.4))
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
     Add(LVar0, 20)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
     Add(LVar0, 10)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 4, false, true, false)
     Return
     End
 };
@@ -594,7 +594,7 @@ API_CALLABLE(N(AdjustFormationPriority)) {
 }
 
 EvtScript N(EVS_CopyPartner) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_SELF)
@@ -625,21 +625,21 @@ EvtScript N(EVS_CopyPartner) = {
     Call(N(AdjustFormationPriority), LVar5)
     Switch(LVar5)
         CaseEq(PARTNER_GOOMBARIO)
-            Call(SummonEnemy, Ref(A(GoombarioCloneFormation)), FALSE)
+            Call(SummonEnemy, Ref(A(GoombarioCloneFormation)), false)
         CaseEq(PARTNER_KOOPER)
-            Call(SummonEnemy, Ref(A(KooperCloneFormation)), FALSE)
+            Call(SummonEnemy, Ref(A(KooperCloneFormation)), false)
         CaseEq(PARTNER_BOMBETTE)
-            Call(SummonEnemy, Ref(A(BombetteCloneFormation)), FALSE)
+            Call(SummonEnemy, Ref(A(BombetteCloneFormation)), false)
         CaseEq(PARTNER_PARAKARRY)
-            Call(SummonEnemy, Ref(A(ParakarryCloneFormation)), FALSE)
+            Call(SummonEnemy, Ref(A(ParakarryCloneFormation)), false)
         CaseEq(PARTNER_BOW)
-            Call(SummonEnemy, Ref(A(BowCloneFormation)), FALSE)
+            Call(SummonEnemy, Ref(A(BowCloneFormation)), false)
         CaseEq(PARTNER_WATT)
-            Call(SummonEnemy, Ref(A(WattCloneFormation)), FALSE)
+            Call(SummonEnemy, Ref(A(WattCloneFormation)), false)
         CaseEq(PARTNER_SUSHIE)
-            Call(SummonEnemy, Ref(A(SushieCloneFormation)), FALSE)
+            Call(SummonEnemy, Ref(A(SushieCloneFormation)), false)
         CaseEq(PARTNER_LAKILESTER)
-            Call(SummonEnemy, Ref(A(LakilesterCloneFormation)), FALSE)
+            Call(SummonEnemy, Ref(A(LakilesterCloneFormation)), false)
     EndSwitch
     Set(LVarA, LVar0)
     Call(CopyStatusEffects, ACTOR_SELF, LVarA)
@@ -657,9 +657,9 @@ EvtScript N(EVS_CopyPartner) = {
     Wait(5)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetActorPos, LVarA, LVar0, LVar1, LVar2)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, TRUE)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, true)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_PRIMARY_TARGET, false)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY, true)
     Call(GetActorHP, ACTOR_SELF, LVar0)
     Call(SetEnemyHP, LVarA, LVar0)
     Call(CopyBuffs, ACTOR_SELF, LVarA)
@@ -685,7 +685,7 @@ EvtScript N(EVS_CopyPartner) = {
             Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
             Call(SetActorJumpGravity, LVarA, Float(0.01))
             Call(SetGoalPos, LVarA, LVar0, 10, LVar2)
-            Call(JumpToGoal, LVarA, 10, FALSE, FALSE, FALSE)
+            Call(JumpToGoal, LVarA, 10, false, false, false)
             Wait(10)
         CaseOrEq(6)
         CaseOrEq(9)
@@ -693,7 +693,7 @@ EvtScript N(EVS_CopyPartner) = {
             Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
             Call(SetActorJumpGravity, LVarA, Float(0.01))
             Call(SetGoalPos, LVarA, LVar0, 30, LVar2)
-            Call(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
+            Call(JumpToGoal, LVarA, 20, false, false, false)
         EndCaseGroup
     EndSwitch
     Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
@@ -706,7 +706,7 @@ EvtScript N(EVS_CopyPartner) = {
     Call(HPBarToHome, ACTOR_SELF)
     Call(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_CopiedPartner)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

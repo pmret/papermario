@@ -18,7 +18,7 @@ EvtScript N(EVS_ExitStarBeam) = {
     IfLt(GB_StoryProgress, STORY_CH8_OPENED_PATH_TO_STAR_WAY)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetPartnerInUse, LVar0)
     IfNe(LVar0, PARTNER_NONE)
         Call(InterruptUsePartner)
@@ -26,12 +26,12 @@ EvtScript N(EVS_ExitStarBeam) = {
         Loop(0)
             Wait(1)
             Call(IsPlayerOnValidFloor, LVar0)
-            IfEq(LVar0, TRUE)
+            IfEq(LVar0, true)
                 BreakLoop
             EndIf
         EndLoop
     EndIf
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
     ExecWait(N(EVS_AscendStarBeam))
     Call(GotoMap, Ref("hos_02"), hos_02_ENTRY_0)
@@ -51,16 +51,16 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_EnterStarBeam) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAND)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(UseSettingsFrom, CAM_DEFAULT, -30, 250, -160)
     Call(SetPanTarget, CAM_DEFAULT, -30, 250, -160)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Set(LVar2, 360)
     Call(MakeLerp, 500, 250, 60, EASING_QUADRATIC_OUT)
@@ -95,12 +95,12 @@ EvtScript N(EVS_EnterStarBeam) = {
         EndIf
     Call(SetNpcRotation, NPC_PARTNER, 0, 0, 0)
     Call(N(func_80240AAC_A1132C), MV_StarBeamFXPtr)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, true)
     Call(EnablePartnerAI)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(SetMusic, 0, SONG_SHOOTING_STAR_SUMMIT, 0, VOL_LEVEL_FULL)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Label(20)
         Call(N(GetFloorCollider), LVar0)
         IfNe(LVar0, COLLIDER_o234)
@@ -122,10 +122,10 @@ EvtScript N(EVS_Main) = {
             Wait(1)
             Goto(1)
         EndIf
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         ExecWait(N(EVS_GotoMap_kmr_24_0))
     EndThread
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupModelFX))
     Exec(N(EVS_Starfall_Random))

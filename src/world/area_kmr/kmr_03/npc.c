@@ -23,11 +23,11 @@ NpcSettings N(NpcSettings_Goompa) = {
 
 EvtScript N(EVS_NpcAux_Goompa) = {
     Label(1)
-    IfEq(AF_KMR_08, TRUE)
+    IfEq(AF_KMR_08, true)
         Label(100)
         Call(AwaitPlayerLeave, 294, 123, 170)
-        Call(EnableNpcAI, NPC_Goompa, FALSE)
-        Call(DisablePlayerInput, TRUE)
+        Call(EnableNpcAI, NPC_Goompa, false)
+        Call(DisablePlayerInput, true)
         Call(SetNpcSpeed, NPC_Goompa, Float(4.0))
         Call(SetNpcAnimation, NPC_Goompa, ANIM_Goompa_Run)
         Call(N(func_802401B0_8C8140))
@@ -42,8 +42,8 @@ EvtScript N(EVS_NpcAux_Goompa) = {
         Call(SetPlayerSpeed, Float(3.0))
         Call(PlayerMoveTo, 243, 243, 0)
         Call(SetNpcVar, NPC_Goompa, 0, 1)
-        Call(EnableNpcAI, NPC_Goompa, TRUE)
-        Call(DisablePlayerInput, FALSE)
+        Call(EnableNpcAI, NPC_Goompa, true)
+        Call(DisablePlayerInput, false)
         Goto(100)
     EndIf
     Wait(1)
@@ -62,7 +62,7 @@ EvtScript N(EVS_NpcAI_Goompa) = {
             IfEq(LVar0, 0)
                 Goto(89)
             EndIf
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(SetNpcAux, NPC_Goompa, 0)
             Call(PlaySoundAtNpc, NPC_Goompa, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
             Call(ShowEmote, NPC_Goompa, EMOTE_EXCLAMATION, 45, 15, EMOTER_NPC, 0, 0, 0, 0)
@@ -75,7 +75,7 @@ EvtScript N(EVS_NpcAI_Goompa) = {
             Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-8.5))
             Call(SetCamDistance, CAM_DEFAULT, 275)
             Call(SetCamSpeed, CAM_DEFAULT, Float(1.5 / DT))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Thread
                 Wait(20 * DT)
                 Call(SetPlayerSpeed, Float(2.0))
@@ -99,11 +99,11 @@ EvtScript N(EVS_NpcAI_Goompa) = {
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
             Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+            Call(PanToTarget, CAM_DEFAULT, 0, false)
             Call(EnablePartnerAI)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
             Wait(1)
     EndSwitch
     Return
@@ -120,17 +120,17 @@ EvtScript N(EVS_NpcHit_Goompa) = {
         Switch(LVar0)
             CaseEq(ENCOUNTER_TRIGGER_JUMP)
                 Call(SetNpcVar, NPC_Goompa, 0, 1)
-                IfEq(AF_KMR_06, TRUE)
+                IfEq(AF_KMR_06, true)
                 Else
-                    Set(AF_KMR_06, TRUE)
-                    Set(AF_KMR_07, FALSE)
+                    Set(AF_KMR_06, true)
+                    Set(AF_KMR_07, false)
                 EndIf
             CaseEq(ENCOUNTER_TRIGGER_HAMMER)
                 Call(SetNpcVar, NPC_Goompa, 0, 1)
-                IfEq(AF_KMR_07, TRUE)
+                IfEq(AF_KMR_07, true)
                 Else
-                    Set(AF_KMR_06, FALSE)
-                    Set(AF_KMR_07, TRUE)
+                    Set(AF_KMR_06, false)
+                    Set(AF_KMR_07, true)
                 EndIf
         EndSwitch
         Wait(10)
@@ -139,9 +139,9 @@ EvtScript N(EVS_NpcHit_Goompa) = {
         Wait(10)
         Call(GetNpcPos, NPC_Goompa, LVar0, LVar1, LVar2)
         Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
+        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, true)
         Call(SetNpcPos, NPC_Goompa, NPC_DISPOSE_LOCATION)
-        Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
         Call(EnablePartnerAI)
         Call(SetNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Goompa)))
         Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Goompa)))
@@ -156,8 +156,8 @@ EvtScript N(EVS_NpcInit_Goompa) = {
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Goompa)))
     Switch(GB_StoryProgress)
         CaseGe(STORY_CH0_GOOMPA_JOINED_PARTY)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, false)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, true)
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EndSwitch
     Return

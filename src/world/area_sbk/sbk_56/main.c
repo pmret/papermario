@@ -23,12 +23,12 @@ MapSettings N(settings) = {
 #include "world/common/todo/SpawnSunEffect.inc.c"
 
 API_CALLABLE(N(StartOasisTracks)) {
-    bgm_set_linked_mode(0, TRUE);
+    bgm_set_linked_mode(0, true);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(StopOasisTracks)) {
-    bgm_set_linked_mode(0, FALSE);
+    bgm_set_linked_mode(0, false);
     return ApiStatus_DONE2;
 }
 
@@ -74,7 +74,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_TexPan_Water) = {
-    Call(EnableTexPanning, MODEL_o49, TRUE)
+    Call(EnableTexPanning, MODEL_o49, true)
     Set(LVar0, 0)
     Label(10)
         Set(LVar1, 0)
@@ -92,7 +92,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_DRY_DRY_DESERT)
     Call(SetSpriteShading, SHADING_NONE)
     IfEq(GB_StoryProgress, STORY_CH2_GOT_PULSE_STONE)
-        Call(DisablePulseStone, FALSE)
+        Call(DisablePulseStone, false)
     EndIf
     SetUP_CAMERA_NO_LEAD()
     ExecWait(N(EVS_MakeEntities))

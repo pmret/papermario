@@ -5,7 +5,7 @@
 extern EvtScript N(EVS_NpcInteract_HeartPlant);
 
 EvtScript N(EVS_NpcAuxAI_HeartPlant) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetSelfVar, 0, 0)
     Call(SetSelfVar, 1, 0)
     Return

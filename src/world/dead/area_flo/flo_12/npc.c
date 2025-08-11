@@ -15,8 +15,8 @@ s32 N(KeyList)[] = {
 };
 
 EvtScript N(EVS_Scene_SunReturns) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(GetNpcPos, NPC_Rosie, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -25,7 +25,7 @@ EvtScript N(EVS_Scene_SunReturns) = {
     Call(SetCamPosA, CAM_DEFAULT, 0, 0)
     Call(SetCamPosB, CAM_DEFAULT, 0, -50)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(20)
     Call(SpeakToPlayer, NPC_Rosie, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_00C7)
@@ -38,22 +38,22 @@ EvtScript N(EVS_Scene_SunReturns) = {
 
 EvtScript N(EVS_PlayerApproachRosie) = {
     Wait(10)
-    Call(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(PlayerMoveTo, -5, 20, 20)
-    Call(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    Call(PlayerFaceNpc, NPC_Rosie, TRUE)
+    Call(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
+    Call(PlayerFaceNpc, NPC_Rosie, true)
     Return
     End
 };
 
 EvtScript N(EVS_PlayerApproachRosieAndItem) = {
     Wait(10)
-    Call(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(PlayerMoveTo, -5, 20, 20)
-    Call(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    Call(PlayerFaceNpc, NPC_Rosie, TRUE)
+    Call(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
+    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
+    Call(PlayerFaceNpc, NPC_Rosie, true)
     Return
     End
 };
@@ -77,7 +77,7 @@ EvtScript N(EVS_NpcInteract_Rosie) = {
                         CaseEq(1)
                             Call(ContinueSpeech, NPC_SELF, ANIM_Rosie_Talk, ANIM_Rosie_Idle, 5, MSG_CH6_008E)
                     EndSwitch
-                    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+                    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
                     Call(SetNpcAnimation, NPC_SELF, ANIM_Rosie_TakeOut)
                     Wait(10)
                     Call(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
@@ -95,13 +95,13 @@ EvtScript N(EVS_NpcInteract_Rosie) = {
                             Wait(40)
                             Call(SetPlayerAnimation, ANIM_Mario1_Idle)
                             Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0092)
-                            Set(GF_FLO12_RosieRequestedSomethingBeautiful, TRUE)
+                            Set(GF_FLO12_RosieRequestedSomethingBeautiful, true)
                     EndSwitch
-                    Set(GF_FLO12_Met_Rosie, TRUE)
+                    Set(GF_FLO12_Met_Rosie, true)
                 CaseEq(1)
                     Switch(GF_FLO12_RosieRequestedSomethingBeautiful)
                         CaseEq(0)
-                            IfEq(GF_FLO10_LilyRequestedWaterStone, TRUE)
+                            IfEq(GF_FLO10_LilyRequestedWaterStone, true)
                                 Exec(N(EVS_PlayerApproachRosieAndItem))
                                 Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_TalkHold, 5, MSG_CH6_0090)
                                 Call(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
@@ -110,7 +110,7 @@ EvtScript N(EVS_NpcInteract_Rosie) = {
                                 Wait(40)
                                 Call(SetPlayerAnimation, ANIM_Mario1_Idle)
                                 Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0092)
-                                Set(GF_FLO12_RosieRequestedSomethingBeautiful, TRUE)
+                                Set(GF_FLO12_RosieRequestedSomethingBeautiful, true)
                             Else
                                 Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_TalkHold, 5, MSG_CH6_0090)
                             EndIf
@@ -138,7 +138,7 @@ EvtScript N(EVS_NpcInteract_Rosie) = {
                     EVT_GIVE_KEY_REWARD(ITEM_WATER_STONE)
                     Wait(10)
                     Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0096)
-                    Set(AF_FLO_GivenCrystalBerry, TRUE)
+                    Set(AF_FLO_GivenCrystalBerry, true)
                     Set(GB_StoryProgress, STORY_CH6_GOT_WATER_STONE)
             EndSwitch
         CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
@@ -164,23 +164,23 @@ EvtScript N(EVS_NpcInit_Rosie) = {
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Add(LVar0, 35)
     Call(SetNpcPos, NPC_Dummy, LVar0, LVar1, LVar2)
-    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_INVISIBLE, TRUE)
-    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_HAS_SHADOW, TRUE)
+    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_INVISIBLE, true)
+    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_HAS_SHADOW, true)
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH6_GOT_CRYSTAL_BERRY)
-            IfEq(GF_FLO12_Met_Rosie, TRUE)
-                Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            IfEq(GF_FLO12_Met_Rosie, true)
+                Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
                 Call(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
                 Call(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
                 Set(LVarA, LVar0)
             EndIf
         CaseLt(STORY_CH6_GOT_WATER_STONE)
-            Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
             Call(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
             Call(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
             Set(LVarA, LVar0)
         CaseDefault
-            Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
             Call(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
             Call(MakeItemEntity, ITEM_CRYSTAL_BERRY, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
             Set(LVarA, LVar0)

@@ -54,27 +54,27 @@ EvtScript N(EVS_UseBasketElevator) = {
         Return
     EndIf
     Call(IsPlayerOnValidFloor, LVar0)
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Return
     EndIf
     Call(IsPlayerWithin, 200, 0, 25, LVar0)
     IfEq(LVar0, 0)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
-    Call(HidePlayerShadow, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
+    Call(HidePlayerShadow, true)
     Wait(7)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(GetPlayerPos, LVar3, LVar4, LVar5)
     Call(GetPartnerInUse, LVar0)
     IfEq(LVar0, 0)
         Add(LVar5, -5)
         Call(SetNpcJumpscale, NPC_PARTNER, Float(0.5))
         Call(NpcJump0, NPC_PARTNER, LVar3, LVar4, LVar5, 10)
-        Call(EnableNpcShadow, NPC_PARTNER, FALSE)
+        Call(EnableNpcShadow, NPC_PARTNER, false)
     EndIf
     ExecGetTID(N(EVS_TetherCamToBasketPlayer), LVar7)
     Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
@@ -105,7 +105,7 @@ EvtScript N(EVS_UseBasketElevator) = {
         EndIf
     EndLoop
     KillThread(LVar7)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerPhysics, false)
     Wait(5)
     Thread
         Wait(15)
@@ -128,21 +128,21 @@ EvtScript N(EVS_UseBasketElevator) = {
     Thread
         Call(SetPlayerJumpscale, Float(1.0))
         Call(PlayerJump, 270, 205, 15, 20)
-        Call(HidePlayerShadow, FALSE)
+        Call(HidePlayerShadow, false)
         Call(SetPlayerSpeed, Float(3.0))
         Call(PlayerMoveTo, 285, 15, 0)
     EndThread
     Call(PartnerIsFlying, LVar0)
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Wait(10)
         Call(SetNpcJumpscale, NPC_PARTNER, Float(1.0))
         Call(NpcJump0, NPC_PARTNER, 260, 205, 15, 15)
     EndIf
-    Call(EnableNpcShadow, NPC_PARTNER, TRUE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(EnableNpcShadow, NPC_PARTNER, true)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
     Call(EnablePartnerAI)
     Wait(5)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -177,34 +177,34 @@ EvtScript N(EVS_GatherRavensNearRaphael) = {
 EvtScript N(EVS_Ravens_LeapIntoTree) = {
     ChildThread
         Call(PlaySoundAtNpc, NPC_Raven_02, SOUND_RAVEN_LEAP_A, SOUND_SPACE_DEFAULT)
-        Call(SetNpcFlagBits, NPC_Raven_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_Raven_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(SetNpcAnimation, NPC_Raven_02, ANIM_Raven_Flail)
         Call(NpcJump0, NPC_Raven_02, 271, 325, -17, 30 * DT)
     EndChildThread
     ChildThread
         Wait(3 * DT)
         Call(PlaySoundAtNpc, NPC_Raven_05, SOUND_RAVEN_LEAP_B, SOUND_SPACE_DEFAULT)
-        Call(SetNpcFlagBits, NPC_Raven_05, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_Raven_05, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(SetNpcAnimation, NPC_Raven_05, ANIM_Raven_Flail)
         Call(NpcJump0, NPC_Raven_05, 400, 215, -23, 30 * DT)
     EndChildThread
     ChildThread
         Wait(6 * DT)
         Call(PlaySoundAtNpc, NPC_Raven_01, SOUND_RAVEN_LEAP_A, SOUND_SPACE_DEFAULT)
-        Call(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(SetNpcAnimation, NPC_Raven_01, ANIM_Raven_Flail)
         Call(NpcJump0, NPC_Raven_01, 208, 335, -17, 30 * DT)
     EndChildThread
     ChildThread
         Wait(9 * DT)
         Call(PlaySoundAtNpc, NPC_Raven_03, SOUND_RAVEN_LEAP_B, SOUND_SPACE_DEFAULT)
-        Call(SetNpcFlagBits, NPC_Raven_03, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_Raven_03, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(SetNpcAnimation, NPC_Raven_03, ANIM_Raven_Flail)
         Call(NpcJump0, NPC_Raven_03, 327, 200, -8, 30 * DT)
     EndChildThread
     Wait(30 * DT)
     Call(PlaySoundAtNpc, NPC_Raven_04, SOUND_RAVEN_LEAP_A, SOUND_SPACE_DEFAULT)
-    Call(SetNpcFlagBits, NPC_Raven_04, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Raven_04, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetNpcAnimation, NPC_Raven_04, ANIM_Raven_Flail)
     Call(NpcJump0, NPC_Raven_04, 222, 284, -13, 15 * DT)
     Return
@@ -217,11 +217,11 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-8.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.5 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(N(DisableCameraLeadingPlayer))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
-    Call(SetNpcFlagBits, NPC_RaphaelRaven, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_RaphaelRaven, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(NpcFacePlayer, NPC_SELF, 0)
     Call(SpeakToPlayer, NPC_SELF, ANIM_RaphaelRaven_Talk, ANIM_RaphaelRaven_Idle, 0, MSG_CH5_00C7)
     Wait(10 * DT)
@@ -249,7 +249,7 @@ EvtScript N(EVS_NpcInit_RaphaelRaven) = {
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_RaphaelRaven)))
         CaseEq(STORY_CH5_RAPHAEL_WAITING_FOR_MARIO)
             Call(SetNpcPos, NPC_SELF, 125, 0, -40)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
             Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_RaphaelRaven)))
         CaseDefault
             Call(RemoveNpc, NPC_SELF)
@@ -259,9 +259,9 @@ EvtScript N(EVS_NpcInit_RaphaelRaven) = {
 };
 
 EvtScript N(EVS_NpcInteract_Raven) = {
-    IfEq(GF_JAN22_Met_Raven, FALSE)
+    IfEq(GF_JAN22_Met_Raven, false)
         Call(SpeakToPlayer, NPC_Raven_01, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_00D2)
-        Set(GF_JAN22_Met_Raven, TRUE)
+        Set(GF_JAN22_Met_Raven, true)
     Else
         Call(SpeakToPlayer, NPC_Raven_01, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_00D3)
     EndIf
@@ -323,7 +323,7 @@ EvtScript N(EVS_ManageRavens) = {
         Call(GetSelfVar, 0, LVar0)
         Switch(LVar0)
             CaseEq(RAVEN_SCENE_LEAP_INTO_ACTION)
-                Call(DisablePlayerInput, TRUE)
+                Call(DisablePlayerInput, true)
                 Call(InterpNpcYaw, NPC_Raven_01, 90, 0)
                 Call(InterpNpcYaw, NPC_Raven_02, 90, 0)
                 Call(InterpNpcYaw, NPC_Raven_03, 90, 0)
@@ -342,7 +342,7 @@ EvtScript N(EVS_ManageRavens) = {
                 Call(UseSettingsFrom, CAM_DEFAULT, 300, 250, 150)
                 Call(SetPanTarget, CAM_DEFAULT, 300, 250, 150)
                 Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
                 // repeat the action with a time delay across the sudden camera cut
                 Exec(N(EVS_GatherRavensNearRaphael))
                 Wait(10 * DT)
@@ -367,7 +367,7 @@ EvtScript N(EVS_ManageRavens) = {
                 Wait(3 * DT)
                 Call(PlaySoundAtNpc, NPC_Raven_04, SOUND_RAVEN_FALL_A, SOUND_SPACE_DEFAULT)
                 Call(SetNpcRotation, NPC_Raven_04, 0, 0, 180)
-                Call(SetNpcFlagBits, NPC_Raven_04, NPC_FLAG_GRAVITY, TRUE)
+                Call(SetNpcFlagBits, NPC_Raven_04, NPC_FLAG_GRAVITY, true)
                 Call(InterpNpcYaw, NPC_Raven_03, 270, 0)
                 Call(InterpNpcYaw, NPC_Raven_05, 270, 0)
                 Call(SetNpcYaw, NPC_RaphaelRaven, 90)
@@ -386,9 +386,9 @@ EvtScript N(EVS_ManageRavens) = {
                 Call(SetPanTarget, CAM_DEFAULT, 165, 0, 0)
                 Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-8.5))
                 Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
                 Wait(20 * DT)
-                Call(SetNpcFlagBits, NPC_Raven_04, NPC_FLAG_GRAVITY, FALSE)
+                Call(SetNpcFlagBits, NPC_Raven_04, NPC_FLAG_GRAVITY, false)
                 Call(NpcMoveTo, NPC_Raven_04, 260, -20, 0)
                 Call(SetNpcRotation, NPC_Raven_04, 0, 0, 90)
                 Call(SetNpcAnimation, NPC_Raven_04, ANIM_Raven_Walk)
@@ -437,7 +437,7 @@ EvtScript N(EVS_ManageRavens) = {
                 Call(UseSettingsFrom, CAM_DEFAULT, 300, 250, 150)
                 Call(SetPanTarget, CAM_DEFAULT, 300, 250, 150)
                 Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
                 Wait(15 * DT)
                 Call(PlaySoundAtNpc, NPC_Raven_05, SOUND_RAVEN_LEAP_A, SOUND_SPACE_DEFAULT)
                 Call(SetNpcPos, NPC_Raven_05, 350, 0, 100)
@@ -470,7 +470,7 @@ EvtScript N(EVS_ManageRavens) = {
                 Call(SetPanTarget, CAM_DEFAULT, 165, 0, 0)
                 Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-8.5))
                 Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                 Wait(10 * DT)
                 Call(SpeakToPlayer, NPC_RaphaelRaven, ANIM_RaphaelRaven_Talk, ANIM_RaphaelRaven_Idle, 0, MSG_CH5_00CE)
@@ -523,13 +523,13 @@ EvtScript N(EVS_ManageRavens) = {
                     Call(SetCamDistance, CAM_DEFAULT, 350)
                     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
                     Call(SetCamSpeed, CAM_DEFAULT, Float(10.0 / DT))
-                    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                    Call(PanToTarget, CAM_DEFAULT, 0, true)
                     EVT_GIVE_KEY_REWARD(ITEM_ULTRA_STONE)
                     Wait(20 * DT)
                     Call(SetCamDistance, CAM_DEFAULT, 400)
                     Call(SetCamPitch, CAM_DEFAULT, Float(20.0), Float(-11.5))
                     Call(SetCamSpeed, CAM_DEFAULT, Float(3.5 / DT))
-                    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                    Call(PanToTarget, CAM_DEFAULT, 0, true)
                     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                     Call(SpeakToPlayer, NPC_RaphaelRaven, ANIM_RaphaelRaven_Talk, ANIM_RaphaelRaven_Idle, 0, MSG_CH5_00D1)
                     Set(LVar0, NPC_Raven_02)
@@ -555,11 +555,11 @@ EvtScript N(EVS_ManageRavens) = {
                     Call(SetNpcPos, NPC_RaphaelRaven, NPC_DISPOSE_LOCATION)
                     Wait(40 * DT)
                     Call(BindNpcInteract, NPC_Raven_01, Ref(N(EVS_NpcInteract_Raven)))
-                    Call(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+                    Call(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
                     Call(N(EnableCameraLeadingPlayer))
                     Call(ResetCam, CAM_DEFAULT, Float(1.5 / DT))
                     Set(GB_StoryProgress, STORY_CH5_ZIP_LINE_READY)
-                    Call(DisablePlayerInput, FALSE)
+                    Call(DisablePlayerInput, false)
                     Return
                 EndIf
         EndSwitch
@@ -579,7 +579,7 @@ EvtScript N(EVS_NpcInit_Raven) = {
         CaseRange(STORY_CH5_ZIP_LINE_READY, STORY_CH5_OPENED_ESCAPE_ROUTE)
             Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Raven)))
             Call(SetNpcPos, NPC_Raven_01, 260, 205, -25)
-            Call(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
             Goto(30)
         CaseDefault
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o346, COLLIDER_FLAGS_UPPER_MASK)
@@ -601,7 +601,7 @@ Vec3f N(RaphaelWalkPath)[] = {
 };
 
 EvtScript N(EVS_Scene_RaphaelComingThrough) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetNpcPos, NPC_RaphaelRaven, -200, 0, -170)
     Call(InterpPlayerYaw, 90, 0)
     Call(SetPlayerPos, -190, 0, -200)
@@ -613,7 +613,7 @@ EvtScript N(EVS_Scene_RaphaelComingThrough) = {
     Thread
         Call(NpcMoveTo, NPC_RaphaelRaven, 125, -40, 0)
         Call(SetNpcAnimation, NPC_RaphaelRaven, ANIM_RaphaelRaven_Idle)
-        Call(SetNpcFlagBits, NPC_RaphaelRaven, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_RaphaelRaven, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
         Call(InterpNpcYaw, NPC_RaphaelRaven, 270, 0)
     EndThread
     Wait(15 * DT)
@@ -670,7 +670,7 @@ EvtScript N(EVS_Scene_RaphaelComingThrough) = {
     Call(NpcMoveTo, NPC_Raven_05, 77, -10, 0)
     Call(SetNpcAnimation, NPC_Raven_05, ANIM_Raven_Idle)
     Set(GB_StoryProgress, STORY_CH5_RAPHAEL_WAITING_FOR_MARIO)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -678,11 +678,11 @@ EvtScript N(EVS_Scene_RaphaelComingThrough) = {
 EvtScript N(D_8024511C_B8929C) = {
     ChildThread
         Loop(0)
-            Call(PlayerFaceNpc, NPC_SELF, FALSE)
+            Call(PlayerFaceNpc, NPC_SELF, false)
             Wait(1)
         EndLoop
     EndChildThread
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Add(LVar0, 150)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Run)
@@ -701,14 +701,14 @@ EvtScript N(EVS_NpcIdle_Kolorado_HeldCaptive) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_CH5_00BC, 320, 60)
     Call(PlaySoundAtPlayer, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 25, EMOTER_PLAYER, 0, 0, 0, 0)
     Call(PlaySoundAtNpc, NPC_PARTNER, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 25, EMOTER_NPC, 0, 0, 0, 0)
     Wait(25 * DT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Label(0)
     Call(GetSelfVar, 0, LVar0)
     Switch(LVar0)
@@ -719,11 +719,11 @@ EvtScript N(EVS_NpcIdle_Kolorado_HeldCaptive) = {
                 IfNe(LVar0, PARTNER_NONE)
                     Call(InterruptUsePartner)
                 EndIf
-                Call(DisablePlayerInput, TRUE)
+                Call(DisablePlayerInput, true)
                 Call(func_802D2C14, 1)
-                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
                 Call(RemoveNpc, NPC_SpearGuy)
-                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
                 Call(ShowMessageAtScreenPos, MSG_CH5_00C0, 0, 60)
                 Call(InterpPlayerYaw, 270, 4)
                 Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
@@ -739,21 +739,21 @@ EvtScript N(EVS_NpcIdle_Kolorado_HeldCaptive) = {
                 Call(SetCamDistance, CAM_DEFAULT, 300)
                 Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-7.5))
                 Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
                 Call(N(DisableCameraLeadingPlayer))
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                 Wait(10 * DT)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00C1)
                 Call(SetSelfVar, 0, 2)
                 Call(func_802D2C14, 0)
-                Call(DisablePlayerInput, FALSE)
+                Call(DisablePlayerInput, false)
             EndIf
         CaseEq(1)
             SetGroup(EVT_GROUP_NEVER_PAUSE)
             Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
             Call(func_802D2C14, 1)
             Wait(10 * DT)
-            IfEq(GF_JAN01_SavedKolorado, FALSE)
+            IfEq(GF_JAN01_SavedKolorado, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Idle, 0, MSG_CH5_00BE)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Idle, 0, MSG_CH5_00BF)
@@ -762,9 +762,9 @@ EvtScript N(EVS_NpcIdle_Kolorado_HeldCaptive) = {
             Call(func_802D2C14, 0)
             Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
             SetGroup(EVT_GROUP_HOSTILE_NPC)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
         CaseEq(2)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Thread
                 Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
                 IfLt(LVar0, 70)
@@ -784,7 +784,7 @@ EvtScript N(EVS_NpcIdle_Kolorado_HeldCaptive) = {
             Call(ResetCam, CAM_DEFAULT, Float(5.0))
             KillThread(LVar9)
             Call(SetSelfVar, 0, 3)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
         CaseEq(3)
     EndSwitch
     IfLt(GB_StoryProgress, STORY_CH5_KOLORADO_ESCAPED_SPEAR_GUYS)
@@ -807,27 +807,27 @@ EvtScript N(EVS_NpcIdle_Kolorado_Before) = {
         Wait(1)
         Goto(1)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_CH5_00C5, 0, 60)
     Call(PlaySoundAtPlayer, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)
     Call(PlaySoundAtNpc, NPC_PARTNER, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     Wait(20 * DT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Label(2)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     IfGt(LVar0, -250)
         Wait(1)
         Goto(2)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00C6)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Run)
     Call(SetNpcSpeed, NPC_SELF, Float(5.0))
     Call(NpcMoveTo, NPC_SELF, -470, 0, 0)
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -837,7 +837,7 @@ EvtScript N(EVS_NpcIdle_Kolorado_After) = {
     Call(GetSelfVar, 0, LVar0)
     Switch(LVar0)
         CaseEq(10)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(SetNpcPos, NPC_SELF, -100, 0, 60)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Sub(LVar0, 60)
@@ -847,20 +847,20 @@ EvtScript N(EVS_NpcIdle_Kolorado_After) = {
             Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
             Call(SpeakToPlayer, NPC_Kolorado_02, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00CB)
             Call(SetSelfVar, 0, 0)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
         CaseEq(20)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00CF)
             Thread
                 Label(20)
-                Call(PlayerFaceNpc, NPC_Kolorado_02, FALSE)
+                Call(PlayerFaceNpc, NPC_Kolorado_02, false)
                 Call(GetSelfVar, 0, LVar0)
                 IfEq(LVar0, 20)
                     Wait(1)
                     Goto(20)
                 EndIf
             EndThread
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
             Call(SetNpcSpeed, NPC_SELF, Float(3.0 / DT))
             Call(NpcMoveTo, NPC_SELF, 190, 60, 0)
@@ -906,7 +906,7 @@ EvtScript N(EVS_NpcIdle_Kolorado_After) = {
                 EndIf
             EndLoop
             Call(SetSelfVar, 0, -1)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
     EndSwitch
     IfNe(LVar0, -1)
         Wait(1)
@@ -945,7 +945,7 @@ EvtScript N(EVS_NpcInteract_Kolorado_Before) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamPitch, CAM_DEFAULT, Float(16.0), Float(-11.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(40 * DT)
     Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_CH5_00C3)
@@ -954,11 +954,11 @@ EvtScript N(EVS_NpcInteract_Kolorado_Before) = {
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00C4)
     Call(ResetCam, CAM_DEFAULT, Float(5.0 / DT))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Run)
     Call(SetNpcSpeed, NPC_SELF, Float(5.0 / DT))
     Call(NpcMoveTo, NPC_SELF, 500, 0, 0)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Call(SetNpcPos, NPC_SELF, -300, 0, 0)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
     Call(InterpNpcYaw, NPC_SELF, 90, 4)
@@ -981,16 +981,16 @@ EvtScript N(EVS_NpcHit_Kolorado_HeldCaptive) = {
             Set(LVar1, 0)
     EndSwitch
     IfNe(LVar1, 0)
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Wait(5 * DT)
-        Set(AF_JAN_0A, TRUE)
+        Set(AF_JAN_0A, true)
         Wait(10 * DT)
         Call(SetNpcAnimation, NPC_SpearGuy, ANIM_SpearGuy_Anim0D)
         Call(NpcFacePlayer, NPC_SELF, 0)
         Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00BD)
-        Set(AF_JAN_0A, FALSE)
+        Set(AF_JAN_0A, false)
         Call(SetNpcAnimation, NPC_SpearGuy, ANIM_SpearGuy_Anim10)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndIf
     Return
     End
@@ -998,7 +998,7 @@ EvtScript N(EVS_NpcHit_Kolorado_HeldCaptive) = {
 
 EvtScript N(EVS_NpcInit_Kolorado_HeldCaptive) = {
     Call(SetSelfVar, 0, 0)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     IfLt(GB_StoryProgress, STORY_CH5_KOLORADO_ESCAPED_SPEAR_GUYS)
         Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Fallen)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Kolorado_HeldCaptive)))
@@ -1048,7 +1048,7 @@ EvtScript N(EVS_SyncZiplineDummyNPC2) = {
 };
 
 EvtScript N(EVS_NpcInit_ZiplineDummy) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
     Call(SetNpcScale, NPC_SELF, Float(0.3), 1, Float(0.3))
     Return
     End
@@ -1064,16 +1064,16 @@ EvtScript N(EVS_NpcIdle_SpearGuy) = {
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Switch(LVar0)
                 CaseRange(LVar3, LVar4)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, FALSE)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, FALSE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, false)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, false)
                 CaseDefault
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, TRUE)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, TRUE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, true)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, true)
             EndSwitch
             Wait(1)
         EndLoop
     EndChildThread
-    Set(AF_JAN_0A, FALSE)
+    Set(AF_JAN_0A, false)
     Set(LVar9, 0)
     Set(LVar8, 2)
     Loop(0)
@@ -1090,7 +1090,7 @@ EvtScript N(EVS_NpcIdle_SpearGuy) = {
         Call(InterpNpcYaw, NPC_Kolorado_01, 270, 2)
         Wait(2)
         Label(1)
-        IfEq(AF_JAN_0A, FALSE)
+        IfEq(AF_JAN_0A, false)
             Call(InterpNpcYaw, NPC_Kolorado_01, 90, 2)
             IfEq(LVar8, 0)
                 Call(PlaySoundAtNpc, NPC_Kolorado_01, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
@@ -1111,7 +1111,7 @@ EvtScript N(EVS_NpcDefeat_SpearGuy) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(SetNpcYaw, NPC_Kolorado_01, 90)
             Call(SetNpcAnimation, NPC_Kolorado_01, ANIM_Kolorado_Idle)
             Thread
@@ -1134,8 +1134,8 @@ EvtScript N(EVS_NpcDefeat_SpearGuy) = {
                 Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-7.5))
                 Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
                 Call(N(DisableCameraLeadingPlayer))
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
-                Call(SetNpcFlagBits, NPC_Kolorado_01, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
+                Call(SetNpcFlagBits, NPC_Kolorado_01, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
                 Call(SetNpcAnimation, NPC_Kolorado_01, ANIM_Kolorado_Run)
                 Call(SetNpcSpeed, NPC_Kolorado_01, Float(2.5 / DT))
                 Call(NpcMoveTo, NPC_Kolorado_01, LVar4, LVar2, 0)
@@ -1183,14 +1183,14 @@ EvtScript N(EVS_Misstar_Bobbing) = {
 };
 
 EvtScript N(EVS_Misstar_CarryingParty) = {
-    Set(AF_JAN22_MisstarReleasedParty, FALSE)
-    Set(AF_JAN22_MisstarReleasedKolorado, FALSE)
+    Set(AF_JAN22_MisstarReleasedParty, false)
+    Set(AF_JAN22_MisstarReleasedKolorado, false)
     Label(0)
         Call(GetNpcPos, NPC_Misstar, LVar4, LVar2, LVar3)
         Add(LVar4, 10)
         Sub(LVar3, 5)
         Call(SetNpcPos, NPC_Kolorado_02, LVar4, LVar2, LVar3)
-        IfEq(AF_JAN22_MisstarReleasedParty, FALSE)
+        IfEq(AF_JAN22_MisstarReleasedParty, false)
             Sub(LVar4, 20)
             Add(LVar3, 10)
             Call(SetPlayerPos, LVar4, LVar2, LVar3)
@@ -1198,7 +1198,7 @@ EvtScript N(EVS_Misstar_CarryingParty) = {
             Add(LVar3, -5)
             Call(SetNpcPos, NPC_PARTNER, LVar4, LVar2, LVar3)
         EndIf
-        IfEq(AF_JAN22_MisstarReleasedKolorado, FALSE)
+        IfEq(AF_JAN22_MisstarReleasedKolorado, false)
             Wait(1)
             Goto(0)
         EndIf
@@ -1208,7 +1208,7 @@ EvtScript N(EVS_Misstar_CarryingParty) = {
 
 EvtScript N(EVS_PartnerFaceMisstar) = {
     Label(0)
-        Call(PlayerFaceNpc, NPC_Misstar, TRUE)
+        Call(PlayerFaceNpc, NPC_Misstar, true)
         Call(NpcFaceNpc, NPC_PARTNER, NPC_Misstar, 1)
         Wait(1)
         Goto(0)
@@ -1225,10 +1225,10 @@ Vec3f N(MisstarDescentPath)[] = {
 
 EvtScript N(EVS_Scene_Misstar) = {
     Call(WaitForPlayerInputEnabled)
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
     Exec(N(EVS_Misstar_CarryingParty))
     Wait(30 * DT)
     Call(LoadPath, 45 * DT, Ref(N(MisstarDescentPath)), ARRAY_COUNT(N(MisstarDescentPath)), EASING_LINEAR)
@@ -1239,17 +1239,17 @@ EvtScript N(EVS_Scene_Misstar) = {
         IfEq(LVar0, 1)
             Goto(0)
         EndIf
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, true)
+    Call(DisablePlayerPhysics, false)
     Call(SetNpcJumpscale, NPC_SELF, Float(0.4))
-    Set(AF_JAN22_MisstarReleasedParty, TRUE)
+    Set(AF_JAN22_MisstarReleasedParty, true)
     Call(NpcJump0, NPC_SELF, 625, 20, 0, 25 * DT)
     Thread
         Call(SetNpcSpeed, NPC_PARTNER, Float(1.0 / DT))
         Call(NpcMoveTo, NPC_PARTNER, 700, 0, 0)
     EndThread
-    Set(AF_JAN22_MisstarReleasedKolorado, TRUE)
-    Call(SetNpcFlagBits, NPC_Kolorado_02, NPC_FLAG_GRAVITY, TRUE)
+    Set(AF_JAN22_MisstarReleasedKolorado, true)
+    Call(SetNpcFlagBits, NPC_Kolorado_02, NPC_FLAG_GRAVITY, true)
     Call(NpcJump0, NPC_SELF, 675, 40, 0, 20 * DT)
     ExecGetTID(N(EVS_Misstar_Bobbing), LVar9)
     Wait(20 * DT)
@@ -1259,7 +1259,7 @@ EvtScript N(EVS_Scene_Misstar) = {
     Call(SetCamDistance, CAM_DEFAULT, 325)
     Call(SetCamPitch, CAM_DEFAULT, Float(16.0), Float(-11.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.5 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SpeakToPlayer, NPC_Kolorado_02, ANIM_Kolorado_TalkSad, ANIM_Kolorado_IdleSad, 0, MSG_CH5_00D4)
     Call(NpcFaceNpc, NPC_SELF, NPC_Kolorado_02, 1)
     Wait(10 * DT)
@@ -1283,7 +1283,7 @@ EvtScript N(EVS_Scene_Misstar) = {
     Add(LVar0, 30)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, 0, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.5 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(InterpNpcYaw, NPC_Kolorado_02, 90, 10)
     ExecGetTID(N(EVS_PartnerFaceMisstar), LVar8)
     Call(SetNpcJumpscale, NPC_SELF, Float(0.5))
@@ -1331,7 +1331,7 @@ EvtScript N(EVS_Scene_Misstar) = {
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_SELF, ANIM_WorldMisstar_Talk, ANIM_WorldMisstar_Idle, 512, MSG_CH5_00D8)
     Wait(10 * DT)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, true)
     Thread
         Loop(25)
             Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -1390,10 +1390,10 @@ EvtScript N(EVS_Scene_Misstar) = {
     Call(SetNpcAnimation, NPC_Kolorado_02, ANIM_Kolorado_WalkSad)
     Call(SetNpcSpeed, NPC_Kolorado_02, Float(1.0 / DT))
     Call(NpcMoveTo, NPC_Kolorado_02, 530, 0, 0)
-    Call(SetNpcFlagBits, NPC_Kolorado_02, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_Kolorado_02, NPC_FLAG_GRAVITY, false)
     Call(SetNpcPos, NPC_Kolorado_02, NPC_DISPOSE_LOCATION)
     Call(EnablePartnerAI)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -1412,7 +1412,7 @@ EvtScript N(EVS_NpcInit_Misstar) = {
         Call(SetPanTarget, CAM_DEFAULT, 700, 0, 0)
         Call(SetCamDistance, CAM_DEFAULT, 500)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_Scene_Misstar)))
     Else
         Call(RemoveNpc, NPC_SELF)
@@ -1474,7 +1474,7 @@ NpcData N(NpcData_SpearGuy) = {
     .yaw = 270,
     .territory = {
         .patrol = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 3,
             .points  = {

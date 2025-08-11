@@ -24,12 +24,12 @@ EvtScript N(EVS_NpcAI_Bzzap_02) = {
                     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Bzzap)))
                 EndIf
             CaseEq(2)
-                Call(DisablePlayerInput, TRUE)
+                Call(DisablePlayerInput, true)
                 Wait(25)
                 Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, false)
                 Call(SetSelfVar, 0, 0)
-                Call(DisablePlayerInput, FALSE)
+                Call(DisablePlayerInput, false)
         EndSwitch
         Wait(1)
     EndLoop
@@ -64,7 +64,7 @@ NpcData N(NpcData_Dayzee_01) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -350, 0, 40 },
@@ -87,7 +87,7 @@ NpcData N(NpcData_Dayzee_02) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 260, 0, 75 },
@@ -110,7 +110,7 @@ NpcData N(NpcData_Bzzap_01) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -50, 55, 90 },
@@ -133,7 +133,7 @@ NpcData N(NpcData_Bzzap_02) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -50, 55, 90 },

@@ -19,12 +19,12 @@ enum EnterWorldStates {
 };
 
 void state_init_enter_demo(void) {
-    gLoadedFromFileSelect = FALSE;
+    gLoadedFromFileSelect = false;
     init_enter_world_shared();
 }
 
 void state_init_enter_world(void) {
-    gLoadedFromFileSelect = TRUE;
+    gLoadedFromFileSelect = true;
     set_map_transition_effect(TRANSITION_ENTER_WORLD);
     init_enter_world_shared();
 }
@@ -122,10 +122,10 @@ void state_init_change_map(void) {
     gMapTransitionState = CHANGE_MAP_INIT;
 
     if (gGameStatusPtr->prevArea != gGameStatusPtr->areaID) {
-        gGameStatusPtr->didAreaChange = TRUE;
+        gGameStatusPtr->didAreaChange = true;
         gGameStatusPtr->prevArea = gGameStatusPtr->areaID;
     } else {
-        gGameStatusPtr->didAreaChange = FALSE;
+        gGameStatusPtr->didAreaChange = false;
     }
 }
 

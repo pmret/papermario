@@ -162,8 +162,8 @@ API_CALLABLE(N(Quizmo_ShouldAppear)) {
     s32 numAnswered;
 
     if (curTown1 != locTown) {
-        changedLocation = FALSE;
-        hasLocation = FALSE;
+        changedLocation = false;
+        hasLocation = false;
     }
 
     if (!hasLocation) {
@@ -172,7 +172,7 @@ API_CALLABLE(N(Quizmo_ShouldAppear)) {
             locTown = curTown1;
             evt_set_variable(script, GB_ChuckQuizmo_Town, locTown);
             evt_set_variable(script, GB_ChuckQuizmo_Map, locMap);
-            hasLocation = TRUE;
+            hasLocation = true;
         }
     }
 
@@ -194,10 +194,10 @@ API_CALLABLE(N(Quizmo_ShouldAppear)) {
 
     if ((((curTown2 == locTown) && (curMap == locMap) && (changedLocation == 0) && test2)) ||
         (gGameStatusPtr->debugQuizmo && var)) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     } else {
         kill_enemy(enemy);
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
     }
 
     return ApiStatus_DONE2;
@@ -595,7 +595,7 @@ EvtScript N(EVS_Quizmo_SetQuizCamera) = {
     SetF(LVar0, Float(13.0))
     SetF(LVar1, Float(-10.0))
     Call(SetCamPitch, 0, LVar0, LVar1)
-    Call(PanToTarget, 0, 0, TRUE)
+    Call(PanToTarget, 0, 0, true)
     Call(SetCamLeadPlayer, 0, 0)
     Return
     End
@@ -621,7 +621,7 @@ EvtScript N(EVS_Quizmo_OtherCamScript) = {
 
 EvtScript N(EVS_Quizmo_ResetCamera) = {
     Call(N(Quizmo_SetCamVfov), 0, QUIZ_ARRAY_SAVED_FOV)
-    Call(PanToTarget, 0, 0, FALSE)
+    Call(PanToTarget, 0, 0, false)
     Return
     End
 };
@@ -989,10 +989,10 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
     Call(N(Quizmo_HideWorld))
     Exec(N(EVS_Quizmo_SetQuizCamera))
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
     ExecGetTID(N(EVS_Quizmo_SetCharacterPositons), LVar1)
     Call(ContinueSpeech, -1, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000B)
@@ -1180,7 +1180,7 @@ EvtScript N(EVS_Quizmo_NPC_OtherAI) = {
     IfEq(LVar0, 0)
         Return
     EndIf
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_NO_SPRITE, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_NO_SPRITE, false)
     Call(SetNpcSprite, -1, ANIM_ChuckQuizmo_Idle)
     Call(N(Quizmo_RenderInit))
     Return
@@ -1189,11 +1189,11 @@ EvtScript N(EVS_Quizmo_NPC_OtherAI) = {
 
 EvtScript N(EVS_Quizmo_NPC_Interact) = {
     UseArray(Ref(N(Quizmo_ScriptArray)))
-    Set(GF_Quizmo_ChangedLocation, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Set(GF_Quizmo_ChangedLocation, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerFlagBits, PS_FLAG_MOVEMENT_LOCKED, 1)
     ExecWait(N(EVS_Quizmo_QuizMain))
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerPhysics, false)
     Call(SetPlayerFlagBits, PS_FLAG_MOVEMENT_LOCKED, 0)
     Return
     End

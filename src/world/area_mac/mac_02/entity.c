@@ -24,7 +24,7 @@ EvtScript N(EVS_ChooseItem_OddKey) = {
     Call(N(RemovePadlock))
     Wait(5)
     Call(RemoveKeyItemAt, LVar1)
-    Set(GF_MAC02_UnlockedHouse, TRUE)
+    Set(GF_MAC02_UnlockedHouse, true)
     Call(CloseChoicePopup)
     Unbind
     Return
@@ -32,17 +32,17 @@ EvtScript N(EVS_ChooseItem_OddKey) = {
 };
 
 EvtScript N(EVS_ReadSign) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_016B, 160, 40)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_OnInspect_StreetSign) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_0171, 160, 40)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -50,7 +50,7 @@ EvtScript N(EVS_OnInspect_StreetSign) = {
 EvtScript N(EVS_MakeEntities) = {
     Call(GetEntryID, LVar0)
     IfEq(LVar0, mac_02_ENTRY_5)
-        IfEq(GF_MAC02_UnlockedHouse, FALSE)
+        IfEq(GF_MAC02_UnlockedHouse, false)
             Call(MakeEntity, Ref(Entity_Padlock), -470, 30, -155, 180, MAKE_ENTITY_END)
             Set(MV_BlueHouseLockEntityID, LVar0)
             BindPadlock(Ref(N(EVS_ChooseItem_OddKey)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), Ref(N(ItemList_OddKey)), 0, 1)

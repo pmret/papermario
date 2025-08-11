@@ -233,12 +233,12 @@ s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s1
     return _bgm_set_song(playerIndex, songID, variation, fadeOutTime, volume);
 }
 
-b32 bgm_fade_in_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 fadeStartVolume, s16 fadeEndVolume) {
+bool bgm_fade_in_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 fadeStartVolume, s16 fadeEndVolume) {
     MusicControlData* music;
     s32 mapSongVariation;
 
     if (gGameStatusPtr->demoState) {
-        return TRUE;
+        return true;
     }
 
     music = &gMusicControlData[playerIndex];
@@ -246,7 +246,7 @@ b32 bgm_fade_in_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime,
     if (!gGameStatusPtr->musicEnabled) {
         snd_song_stop(music->songName);
         music->flags &= ~MUSIC_FLAG_PLAYING;
-        return TRUE;
+        return true;
     }
 
     mapSongVariation = bgm_get_map_default_variation(songID);
@@ -263,18 +263,18 @@ b32 bgm_fade_in_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime,
     music->state = MUSIC_STATE_STOP_CURRENT;
     music->flags &= ~MUSIC_FLAG_ENABLE_PROX_MIX;
 
-    return TRUE;
+    return true;
 }
 
 s32 bgm_adjust_proximity(s32 playerIndex, s32 mix, s16 state) {
     MusicControlData* music = &gMusicControlData[playerIndex];
 
     if (!(music->flags & MUSIC_FLAG_PLAYING)) {
-        return FALSE;
+        return false;
     }
 
     if (!(music->flags & MUSIC_FLAG_ENABLE_PROX_MIX)) {
-        return FALSE;
+        return false;
     }
 
     switch (state) {
@@ -288,7 +288,7 @@ s32 bgm_adjust_proximity(s32 playerIndex, s32 mix, s16 state) {
             snd_song_set_proximity_mix_full(music->songName, mix);
             break;
     }
-    return TRUE;
+    return true;
 }
 
 AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet) {
@@ -364,18 +364,18 @@ void bgm_update_volume(void) {
     }
 }
 
-b32 bgm_is_any_song_playing(void) {
+bool bgm_is_any_song_playing(void) {
     MusicControlData* music = gMusicControlData;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gMusicControlData); i++, music++) {
         if (music->flags & MUSIC_FLAG_PLAYING) {
             if (snd_song_is_playing(music->songName)) {
-                return TRUE;
+                return true;
             }
         }
     }
-    return FALSE;
+    return false;
 }
 
 void bgm_pop_song(void) {

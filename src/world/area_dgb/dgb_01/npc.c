@@ -94,12 +94,12 @@ EvtScript N(EVS_NpcDefeat_Tubba_Floor2) = {
 EvtScript N(EVS_NpcInit_Tubba_Floor2) = {
     IfNe(GB_ARN_Tubba_MapID, 1)
         Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, true)
         Return
     EndIf
     IfGe(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_HALL)
         Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, true)
         Return
     EndIf
     Call(SetNpcPos, NPC_Tubba, 137, 244, 35)
@@ -190,8 +190,8 @@ EvtScript N(EVS_NpcInit_Tubba_Floor1) = {
 EvtScript N(EVS_NpcInit_Sentinel_01) = {
     Set(LVar0, GB_StoryProgress)
     IfGe(LVar0, STORY_CH3_TUBBA_WOKE_UP)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-        Call(EnableNpcShadow, NPC_SELF, FALSE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, true)
+        Call(EnableNpcShadow, NPC_SELF, false)
         Call(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
         Call(SetNpcPos, NPC_SELF, -33, -3, 8)
         Call(SetNpcRotation, NPC_SELF, -50, 30, 10)
@@ -204,8 +204,8 @@ EvtScript N(EVS_NpcInit_Sentinel_01) = {
 EvtScript N(EVS_NpcInit_Sentinel_02) = {
     Set(LVar0, GB_StoryProgress)
     IfGe(LVar0, STORY_CH3_TUBBA_WOKE_UP)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-        Call(EnableNpcShadow, NPC_SELF, FALSE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, true)
+        Call(EnableNpcShadow, NPC_SELF, false)
         Call(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
         Call(SetNpcPos, NPC_SELF, -486, 182, 28)
         Call(SetNpcRotation, NPC_SELF, -10, 50, 0)
@@ -218,8 +218,8 @@ EvtScript N(EVS_NpcInit_Sentinel_02) = {
 EvtScript N(EVS_NpcInit_Sentinel_03) = {
     Set(LVar0, GB_StoryProgress)
     IfGe(LVar0, STORY_CH3_TUBBA_WOKE_UP)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-        Call(EnableNpcShadow, NPC_SELF, FALSE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, true)
+        Call(EnableNpcShadow, NPC_SELF, false)
         Call(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
         Call(SetNpcPos, NPC_SELF, -201, 0, -143)
         Call(SetNpcRotation, NPC_SELF, -50, 0, 0)
@@ -232,8 +232,8 @@ EvtScript N(EVS_NpcInit_Sentinel_03) = {
 EvtScript N(EVS_NpcInit_Sentinel_04) = {
     Set(LVar0, GB_StoryProgress)
     IfGe(LVar0, STORY_CH3_TUBBA_WOKE_UP)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-        Call(EnableNpcShadow, NPC_SELF, FALSE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, true)
+        Call(EnableNpcShadow, NPC_SELF, false)
         Call(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
         Call(SetNpcPos, NPC_SELF, -305, -1, -80)
         Call(SetNpcRotation, NPC_SELF, -65, -30, 0)
@@ -249,7 +249,7 @@ NpcData N(NpcData_Sentinel_01) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -180, 100, 230 },
@@ -272,7 +272,7 @@ NpcData N(NpcData_Sentinel_02) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 180, 100, 230 },
@@ -295,7 +295,7 @@ NpcData N(NpcData_Sentinel_03) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -180, 100, -230 },
@@ -318,7 +318,7 @@ NpcData N(NpcData_Sentinel_04) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 180, 100, -230 },
@@ -368,7 +368,7 @@ NpcData N(NpcData_Tubba_Floor2) = {
     .yaw = 270,
     .territory = {
         .patrol = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 2,
             .points  = {
@@ -395,7 +395,7 @@ NpcData N(NpcData_Tubba_Floor1) = {
     .yaw = 270,
     .territory = {
         .patrol = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 8,
             .points  = {

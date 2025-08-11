@@ -115,7 +115,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -220,18 +220,18 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_SkyDive) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Run)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, 20, 0, 0)
@@ -282,7 +282,7 @@ EvtScript N(EVS_Attack_SkyDive) = {
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Run)
             Call(FlyToGoal, ACTOR_SELF, 0, -5, EASING_LINEAR)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -309,7 +309,7 @@ EvtScript N(EVS_Attack_SkyDive) = {
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Dive)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.4))
             Call(AddGoalPos, ACTOR_SELF, 50, 0, 0)
-            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, FALSE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 15, false, false, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Still)
             Thread
                 Wait(4)
@@ -327,7 +327,7 @@ EvtScript N(EVS_Attack_SkyDive) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

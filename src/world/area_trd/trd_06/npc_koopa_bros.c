@@ -33,9 +33,9 @@ NpcSettings N(NpcSettings_Unused) = {
 
 EvtScript N(EVS_Scene_ImprisonedKoopaBros) = {
     Wait(60)
-    Call(EnableNpcAI, NPC_KoopaBros_Red, FALSE)
+    Call(EnableNpcAI, NPC_KoopaBros_Red, false)
     Call(SpeakToPlayer, NPC_KoopaBros_Red, ANIM_KoopaBros_Red_Dizzy, ANIM_KoopaBros_Red_Dizzy, 0, MSG_CH1_010C)
-    Call(EnableNpcAI, NPC_KoopaBros_Red, TRUE)
+    Call(EnableNpcAI, NPC_KoopaBros_Red, true)
     Wait(30)
     Call(FadeOutMusic, 0, 2000)
     Wait(30)
@@ -53,7 +53,7 @@ NpcData N(NpcData_KoopaBros)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 60, 0, -60 },
@@ -74,7 +74,7 @@ NpcData N(NpcData_KoopaBros)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 60, 0, 0 },
@@ -95,7 +95,7 @@ NpcData N(NpcData_KoopaBros)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -10, 0, -60 },
@@ -116,7 +116,7 @@ NpcData N(NpcData_KoopaBros)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 0, 0, 0 },

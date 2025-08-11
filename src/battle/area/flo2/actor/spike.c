@@ -139,7 +139,7 @@ EvtScript N(EVS_ReturnHome) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -235,18 +235,18 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_Attack_SpinyToss) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleLakilester_Run)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, 20, 30, LVar2)
@@ -267,7 +267,7 @@ EvtScript N(EVS_Attack_SpinyToss) = {
     EndIf
     Call(SetPartPos, ACTOR_SELF, PRT_SPINY_BALL, LVar0, LVar1, LVar2)
     Wait(1)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_SPINY_BALL, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_SPINY_BALL, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(SetAnimation, ACTOR_SELF, PRT_SPINY_BALL, ANIM_BattleLakilester_Spiny)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleLakilester_LiftSpiny)
     Loop(4)
@@ -329,12 +329,12 @@ EvtScript N(EVS_Attack_SpinyToss) = {
             Call(RandInt, 100, LVar3)
             Sub(LVar3, 50)
             Add(LVar0, LVar3)
-            Call(JumpPartTo, ACTOR_SELF, PRT_SPINY_BALL, LVar0, 0, LVar2, 20, TRUE)
+            Call(JumpPartTo, ACTOR_SELF, PRT_SPINY_BALL, LVar0, 0, LVar2, 20, true)
             Call(ResetAllActorSounds, ACTOR_SELF)
             Thread
                 Add(LVar0, -50)
-                Call(JumpPartTo, ACTOR_SELF, PRT_SPINY_BALL, LVar0, 0, LVar2, 15, TRUE)
-                Call(SetPartFlagBits, ACTOR_SELF, PRT_SPINY_BALL, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                Call(JumpPartTo, ACTOR_SELF, PRT_SPINY_BALL, LVar0, 0, LVar2, 15, true)
+                Call(SetPartFlagBits, ACTOR_SELF, PRT_SPINY_BALL, ACTOR_PART_FLAG_INVISIBLE, true)
             EndThread
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -348,7 +348,7 @@ EvtScript N(EVS_Attack_SpinyToss) = {
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -356,12 +356,12 @@ EvtScript N(EVS_Attack_SpinyToss) = {
     Call(SetPartJumpGravity, ACTOR_SELF, PRT_SPINY_BALL, Float(1.5))
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpPartTo, ACTOR_SELF, PRT_SPINY_BALL, LVar0, LVar1, LVar2, 20, TRUE)
+    Call(JumpPartTo, ACTOR_SELF, PRT_SPINY_BALL, LVar0, LVar1, LVar2, 20, true)
     Call(ResetAllActorSounds, ACTOR_SELF)
     Thread
         Add(LVar0, -50)
-        Call(JumpPartTo, ACTOR_SELF, PRT_SPINY_BALL, LVar0, 0, LVar2, 15, TRUE)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_SPINY_BALL, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+        Call(JumpPartTo, ACTOR_SELF, PRT_SPINY_BALL, LVar0, 0, LVar2, 15, true)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_SPINY_BALL, ACTOR_PART_FLAG_INVISIBLE, true)
     EndThread
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_SPINY_TOSS, BS_FLAGS1_TRIGGER_EVENTS)
@@ -375,7 +375,7 @@ EvtScript N(EVS_Attack_SpinyToss) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

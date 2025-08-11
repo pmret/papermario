@@ -143,11 +143,11 @@ API_CALLABLE(N(SuperBlock_ShowSelectPartnerMenu)) {
                 canUpgradePartner = N(SuperBlock_get_partner_rank)(partnerID, hasUltraStone);
                 if (canUpgradePartner >= 0) {
                     popupMenu->ptrIcon[entryIndex] = wPartnerHudScripts[partnerID];
-                    popupMenu->enabled[entryIndex] = TRUE;
+                    popupMenu->enabled[entryIndex] = true;
                     popupMenu->descMsg[entryIndex] = N(SuperBlock_UpgradeDescMessages)[i][canUpgradePartner];
                 } else {
                     popupMenu->ptrIcon[entryIndex] = wDisabledPartnerHudScripts[partnerID];
-                    popupMenu->enabled[entryIndex] = FALSE;
+                    popupMenu->enabled[entryIndex] = false;
                     popupMenu->descMsg[entryIndex] = N(SuperBlock_CantUpgradeMessages)[hasUltraStone];
                 }
                 popupMenu->value[entryIndex] = playerData->partners[partnerID].level;
@@ -428,9 +428,9 @@ API_CALLABLE(N(SuperBlock_PartnerSparkles4)) {
 }
 
 API_CALLABLE(N(SuperBlock_WaitForPlayerToLand)) {
-    script->varTable[0] = FALSE;
+    script->varTable[0] = false;
     if ((gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) && (gPartnerStatus.actingPartner == PARTNER_BOMBETTE)) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
     return ApiStatus_DONE2;
 }
@@ -481,9 +481,9 @@ EvtScript N(SuperBlock_OnHit) = {
     EndIf
     Call(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS)
     Call(N(SuperBlock_SetOverride40))
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(N(SuperBlock_StartGlowEffect), SUPER_BLOCK_MAPVAR, LVar9)
     Call(FindKeyItem, ITEM_ULTRA_STONE, LVarC)
     Call(N(SuperBlock_CountEligiblePartners))
@@ -491,7 +491,7 @@ EvtScript N(SuperBlock_OnHit) = {
         Call(ShowMessageAtScreenPos, MSG_Menus_00DC, 160, 40)
         Wait(10)
         Call(N(SuperBlock_EndGlowEffect), LVar9)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Call(EnablePartnerAI)
         Call(ModifyGlobalOverrideFlags, 0, GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS)
         Call(N(SuperBlock_ClearOverride40))
@@ -506,7 +506,7 @@ EvtScript N(SuperBlock_OnHit) = {
     Call(N(SuperBlock_ShowSelectPartnerMenu))
     IfEq(LVar0, -1)
         Call(N(SuperBlock_EndGlowEffect), LVar9)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Call(EnablePartnerAI)
         Call(ModifyGlobalOverrideFlags, 0, GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS)
         Call(N(SuperBlock_ClearOverride40))
@@ -527,7 +527,7 @@ EvtScript N(SuperBlock_OnHit) = {
     Call(CloseMessage)
     IfNe(LVar0, 0)
         Call(N(SuperBlock_EndGlowEffect), LVar9)
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Call(EnablePartnerAI)
         Call(ModifyGlobalOverrideFlags, 0, GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS)
         Call(N(SuperBlock_ClearOverride40))
@@ -543,7 +543,7 @@ EvtScript N(SuperBlock_OnHit) = {
     Else
         Call(ShowMessageAtScreenPos, MSG_Menus_00DE, 160, 40)
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(EnablePartnerAI)
     Call(ModifyGlobalOverrideFlags, 0, GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS)
     Call(N(SuperBlock_ClearOverride40))

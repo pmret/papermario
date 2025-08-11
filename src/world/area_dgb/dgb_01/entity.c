@@ -22,7 +22,7 @@ EvtScript N(EVS_UnlockPrompt_Door) = {
     Call(FindKeyItem, ITEM_TUBBA_CASTLE_KEY, LVar0)
     Call(RemoveKeyItemAt, LVar0)
     Call(CloseChoicePopup)
-    Set(GF_DGB01_UnlockedEastWing, TRUE)
+    Set(GF_DGB01_UnlockedEastWing, true)
     Call(N(GetEntityPosition), MV_PadlockEntityID, LVar0, LVar1, LVar2)
     Call(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     Set(LVar0, MV_PadlockEntityID)
@@ -40,7 +40,7 @@ EvtScript N(EVS_OpenLockedDoor) = {
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_DGB01_UnlockedEastWing, FALSE)
+    IfEq(GF_DGB01_UnlockedEastWing, false)
         Call(MakeEntity, Ref(Entity_Padlock), 490, 8, 0, -80, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OpenLockedDoor)))
         Set(MV_PadlockEntityID, LVar0)

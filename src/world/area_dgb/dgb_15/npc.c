@@ -23,8 +23,8 @@ EvtScript N(EVS_WaitForCloseCall) = {
         EndIf
         Wait(1)
     EndLoop
-    Set(GF_DGB15_CloseCallWithTubba, TRUE)
-    Set(AF_DGB_01, TRUE)
+    Set(GF_DGB15_CloseCallWithTubba, true)
+    Set(AF_DGB_01, true)
     Return
     End
 };
@@ -37,14 +37,14 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
         EndIf
         Wait(1)
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetMusic, 0, SONG_TUBBA_BLUBBA_THEME, 0, VOL_LEVEL_FULL)
     Wait(15)
     Thread
         Call(UseSettingsFrom, CAM_DEFAULT, -50, 0, 180)
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
         Call(SetPanTarget, CAM_DEFAULT, -50, 0, 180)
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Set(GB_ARN_Tubba_MapID, 15)
     Call(SetNpcPos, NPC_SELF, 0, 0, 88)
@@ -62,8 +62,8 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
         Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-        Call(DisablePlayerInput, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
+        Call(DisablePlayerInput, false)
     EndThread
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Tubba)))
     Return
@@ -127,7 +127,7 @@ MobileAISettings N(AISettings_Tubba) = {
 
 EvtScript N(EVS_NpcAI_Tubba) = {
     Exec(N(EVS_WaitForCloseCall))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
     Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim0C)
     Exec(N(EVS_PlayFootstepFX))
     Call(N(PatrolNoAttackAI_Main), Ref(N(AISettings_Tubba)))
@@ -168,7 +168,7 @@ NpcData N(NpcData_Tubba) = {
     .yaw = 270,
     .territory = {
         .patrol = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 7,
             .points  = {

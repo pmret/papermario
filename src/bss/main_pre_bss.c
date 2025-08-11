@@ -79,7 +79,7 @@ BSS s16 gFirstStrikeMessagePos;
 BSS Gfx* gMainGfxPos;
 BSS s8 LastBattleStartedBySpin;
 BSS DisplayContext* gDisplayContext;
-BSS b32 EncounterStateChanged;
+BSS bool EncounterStateChanged;
 BSS s32 D_8009A67C;
 #if VERSION_IQUE || VERSION_PAL
 BSS s32 D_80099258[2];

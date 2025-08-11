@@ -35,19 +35,19 @@ EvtScript N(EVS_LetterReward_Nomadimouse) = {
 EvtScript N(EVS_NpcInteract_Nomadimouse) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
-            IfEq(GF_SBK34_Met_Nomadimouse, FALSE)
+            IfEq(GF_SBK34_Met_Nomadimouse, false)
                 Call(AdjustCam, CAM_DEFAULT, Float(4.0), 0, Float(250.0), Float(15.0), Float(-6.0))
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_0056)
-                Set(GF_SBK34_Met_Nomadimouse, TRUE)
+                Set(GF_SBK34_Met_Nomadimouse, true)
                 Call(ResetCam, CAM_DEFAULT, 4)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_0057)
             EndIf
         CaseLt(STORY_CH2_UNCOVERED_DRY_DRY_RUINS)
-            IfEq(GF_SBK34_Met_Nomadimouse, FALSE)
+            IfEq(GF_SBK34_Met_Nomadimouse, false)
                 Call(AdjustCam, CAM_DEFAULT, Float(4.0), 0, Float(250.0), Float(15.0), Float(-6.0))
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_0058)
-                Set(GF_SBK34_Met_Nomadimouse, TRUE)
+                Set(GF_SBK34_Met_Nomadimouse, true)
                 Call(ResetCam, CAM_DEFAULT, 4)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_0059)

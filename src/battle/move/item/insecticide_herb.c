@@ -62,10 +62,10 @@ INCLUDE_IMG("battle/move/item/insecticide_herb.png", battle_item_insecticide_her
 INCLUDE_PAL("battle/move/item/insecticide_herb.pal", battle_item_insecticide_herb_pal);
 
 Vtx N(model)[] = {
-    { .v = { .ob = {-16, -16, 0}, FALSE, .tc = {0,    0},    .cn = {0, 0, 0, 255} } },
-    { .v = { .ob = {15,  -16, 0}, FALSE, .tc = {1024, 0},    .cn = {0, 0, 0, 255} } },
-    { .v = { .ob = {15,  15,  0}, FALSE, .tc = {1024, 1024}, .cn = {0, 0, 0, 255} } },
-    { .v = { .ob = {-16, 15,  0}, FALSE, .tc = {0,    1024}, .cn = {0, 0, 0, 255} } },
+    { .v = { .ob = {-16, -16, 0}, false, .tc = {0,    0},    .cn = {0, 0, 0, 255} } },
+    { .v = { .ob = {15,  -16, 0}, false, .tc = {1024, 0},    .cn = {0, 0, 0, 255} } },
+    { .v = { .ob = {15,  15,  0}, false, .tc = {1024, 1024}, .cn = {0, 0, 0, 255} } },
+    { .v = { .ob = {-16, 15,  0}, false, .tc = {0,    1024}, .cn = {0, 0, 0, 255} } },
 };
 
 Gfx N(displayList)[] = {

@@ -57,7 +57,7 @@ API_CALLABLE(N(AdjustFog)) {
 }
 
 API_CALLABLE(N(func_80240A44_C6D364)) {
-    snd_ambient_fade_out(0, TRUE);
+    snd_ambient_fade_out(0, true);
     return ApiStatus_DONE2;
 }
 
@@ -84,9 +84,9 @@ EvtScript N(EVS_8024137C) = {
 };
 
 EvtScript N(EVS_LowerMainLavaLevel) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(3)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(N(func_80240A44_C6D364))
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Add(LVar0, -20)
@@ -95,7 +95,7 @@ EvtScript N(EVS_LowerMainLavaLevel) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(600.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(5.0), Float(8.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(15)
     Thread
@@ -128,10 +128,10 @@ EvtScript N(EVS_LowerMainLavaLevel) = {
     Call(ResetCam, CAM_DEFAULT, Float(90.0))
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_yougan1, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, 1, COLLIDER_yougan, COLLIDER_FLAGS_UPPER_MASK)
-    Call(EnableGroup, MODEL_i_on, FALSE)
-    Call(EnableGroup, MODEL_i_off, TRUE)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(EnableGroup, MODEL_i_on, false)
+    Call(EnableGroup, MODEL_i_off, true)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -145,7 +145,7 @@ EvtScript N(EVS_MonitorPushBlockPuzzle) = {
         Goto(10)
     EndIf
     // begin the scene
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(40)
     Thread
         Set(LVar0, 0)
@@ -159,19 +159,19 @@ EvtScript N(EVS_MonitorPushBlockPuzzle) = {
     EndThread
     ExecWait(N(EVS_LowerMainLavaLevel))
     Set(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_SetupLavaPuzzle) = {
     IfLt(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)
-        Call(EnableGroup, MODEL_i_off, FALSE)
+        Call(EnableGroup, MODEL_i_off, false)
         Exec(N(EVS_MonitorPushBlockPuzzle))
         SetF(MV_GlowIntensity, Float(1.0))
     Else
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_yougan1, COLLIDER_FLAGS_UPPER_MASK)
-        Call(EnableGroup, MODEL_i_on, FALSE)
+        Call(EnableGroup, MODEL_i_on, false)
         Call(TranslateGroup, MODEL_you, 0, -14, -2)
         Call(TranslateModel, MODEL_yougan, 0, -25, -50)
         Call(TranslateModel, MODEL_spot, 0, -25, 0)

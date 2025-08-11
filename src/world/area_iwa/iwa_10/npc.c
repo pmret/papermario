@@ -35,7 +35,7 @@ EvtScript N(EVS_NpcInit_TrainToad_01) = {
 };
 
 EvtScript N(EVS_NpcInit_TrainToad_02) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(GetEntryID, LVar0)
     IfEq(LVar0, iwa_10_ENTRY_0)
         Call(SetNpcPos, NPC_SELF, -425, 70, -20)
@@ -87,12 +87,12 @@ EvtScript N(EVS_NpcInit_Toadette_02) = {
 EvtScript N(EVS_NpcInteract_Dryite) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(AF_IWA_SpokeWIthDryite, FALSE)
+            IfEq(AF_IWA_SpokeWIthDryite, false)
                 Set(LVar0, MSG_CH2_0005)
-                Set(AF_IWA_SpokeWIthDryite, TRUE)
+                Set(AF_IWA_SpokeWIthDryite, true)
             Else
                 Set(LVar0, MSG_CH2_0006)
-                Set(AF_IWA_SpokeWIthDryite, TRUE)
+                Set(AF_IWA_SpokeWIthDryite, true)
             EndIf
         CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
             Set(LVar0, MSG_CH2_0007)

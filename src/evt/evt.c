@@ -902,15 +902,15 @@ ApiStatus evt_handle_call(Evt* script) {
     ApiStatus ret;
 
     if (script->blocked) {
-        isInitialCall = FALSE;
+        isInitialCall = false;
         func = script->callFunction;
         ret = func(script, isInitialCall);
     } else {
         script->callFunction = (ApiFunc)evt_get_variable(script, *args++);
         script->ptrReadPos = args;
         script->curArgc--;
-        script->blocked = TRUE;
-        isInitialCall = TRUE;
+        script->blocked = true;
+        isInitialCall = true;
         func = script->callFunction;
         ret = func(script, isInitialCall);
     }
@@ -1366,7 +1366,7 @@ ApiStatus func_802C73B8(Evt* script) {
 }
 
 s32 evt_execute_next_command(Evt* script) {
-    while (TRUE) {
+    while (true) {
         s32 status = ApiStatus_DONE2;
         s32* lines;
         s32 nargs;
@@ -1378,7 +1378,7 @@ s32 evt_execute_next_command(Evt* script) {
                 script->curOpcode = *lines++;
                 nargs = *lines++;
                 script->ptrReadPos = lines;
-                script->blocked = FALSE;
+                script->blocked = false;
                 script->curArgc = nargs;
                 lines = &lines[nargs];
                 script->ptrNextLine = lines;
@@ -2087,7 +2087,7 @@ Bytecode* evt_skip_if(Evt* script) {
                 }
             break;
         }
-    } while (TRUE);
+    } while (true);
 }
 
 Bytecode* evt_skip_else(Evt* script) {
@@ -2135,7 +2135,7 @@ Bytecode* evt_skip_else(Evt* script) {
                 nestedIfDepth++;
                 break;
         }
-    } while (TRUE);
+    } while (true);
 }
 
 Bytecode* evt_goto_end_case(Evt* script) {
@@ -2163,7 +2163,7 @@ Bytecode* evt_goto_end_case(Evt* script) {
                 }
                 break;
         }
-    } while (TRUE);
+    } while (true);
 }
 
 Bytecode* evt_goto_next_case(Evt* script) {
@@ -2206,7 +2206,7 @@ Bytecode* evt_goto_next_case(Evt* script) {
                 }
                 break;
         }
-    } while (TRUE);
+    } while (true);
 }
 
 Bytecode* evt_goto_end_loop(Evt* script) {
@@ -2234,5 +2234,5 @@ Bytecode* evt_goto_end_loop(Evt* script) {
                 loopDepth++;
                 break;
         }
-    } while (TRUE);
+    } while (true);
 }

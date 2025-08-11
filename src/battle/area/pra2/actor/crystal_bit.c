@@ -256,7 +256,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
@@ -302,7 +302,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
             Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
             Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
             Call(GetOwnerID, LVar0)
             Call(GetActorVar, ACTOR_KING, AVAR_King_CubeBitID, LVar1)
             IfEq(LVar0, LVar1)
@@ -321,13 +321,13 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
             Call(AddVectorPolar, LVar1, LVar3, Float(30.0), LVar0)
             Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
             Call(AddVectorPolar, LVar1, LVar3, Float(20.0), LVar0)
             Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
             Call(AddVectorPolar, LVar1, LVar3, Float(10.0), LVar0)
             Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
             Set(LVar0, 255)
             Loop(20)
                 Sub(LVar0, 12)
@@ -364,19 +364,19 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
             Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
             Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.2))
             Call(RandInt, 360, LVar0)
             Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
             Call(AddVectorPolar, LVar1, LVar3, Float(30.0), LVar0)
             Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
             Call(AddVectorPolar, LVar1, LVar3, Float(20.0), LVar0)
             Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
             Call(AddVectorPolar, LVar1, LVar3, Float(10.0), LVar0)
             Call(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
-            Call(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 5, false, true, false)
             Set(LVar0, 255)
             Loop(20)
                 Sub(LVar0, 12)
@@ -393,7 +393,7 @@ EvtScript N(EVS_HandleEvent) = {
             Return
         CaseDefault
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

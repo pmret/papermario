@@ -22,10 +22,10 @@ EvtScript N(EVS_ProvideDemoInputs1) = {
     Wait(14)
     Call(DemoSetButtons, 0)
     Wait(10)
-    IfEq(GF_DemoSceneDone, TRUE)
+    IfEq(GF_DemoSceneDone, true)
         Return
     EndIf
-    Set(GF_DemoSceneDone, TRUE)
+    Set(GF_DemoSceneDone, true)
     Call(GotoMapSpecial, Ref("nok_12"), nok_12_ENTRY_2, TRANSITION_END_DEMO_SCENE_BLACK)
     Wait(100)
     Return
@@ -41,10 +41,10 @@ EvtScript N(EVS_MonitorDemoState1) = {
         EndIf
         Wait(1)
     EndLoop
-    IfEq(GF_DemoSceneDone, TRUE)
+    IfEq(GF_DemoSceneDone, true)
         Return
     EndIf
-    Set(GF_DemoSceneDone, TRUE)
+    Set(GF_DemoSceneDone, true)
     Call(GotoMapSpecial, Ref("nok_12"), nok_12_ENTRY_2, TRANSITION_END_DEMO_SCENE_WHITE)
     Wait(100)
     Return
@@ -101,10 +101,10 @@ EvtScript N(EVS_ProvideDemoInputs2) = {
     Wait(1)
     Call(DemoJoystickXY, 70, 0)
     Wait(20)
-    IfEq(GF_DemoSceneDone, TRUE)
+    IfEq(GF_DemoSceneDone, true)
         Return
     EndIf
-    Set(GF_DemoSceneDone, TRUE)
+    Set(GF_DemoSceneDone, true)
     Call(GotoMapSpecial, Ref("nok_12"), nok_12_ENTRY_2, TRANSITION_END_DEMO_SCENE_BLACK)
     Wait(100)
     Return
@@ -120,10 +120,10 @@ EvtScript N(EVS_MonitorDemoState2) = {
         EndIf
         Wait(1)
     EndLoop
-    IfEq(GF_DemoSceneDone, TRUE)
+    IfEq(GF_DemoSceneDone, true)
         Return
     EndIf
-    Set(GF_DemoSceneDone, TRUE)
+    Set(GF_DemoSceneDone, true)
     Call(GotoMapSpecial, Ref("nok_12"), nok_12_ENTRY_2, TRANSITION_END_DEMO_SCENE_WHITE)
     Wait(216)
     Return
@@ -159,7 +159,7 @@ API_CALLABLE(N(SetupDemoScene1)) {
 
 EvtScript N(EVS_PlayDemoScene1) = {
     Call(N(SetupDemoScene1))
-    Set(GF_DemoSceneDone, FALSE)
+    Set(GF_DemoSceneDone, false)
     Exec(N(EVS_MonitorDemoState1))
     Exec(N(EVS_ProvideDemoInputs1))
     Return
@@ -195,7 +195,7 @@ API_CALLABLE(N(SetupDemoScene2)) {
 
 EvtScript N(EVS_PlayDemoScene2) = {
     Call(N(SetupDemoScene2))
-    Set(GF_DemoSceneDone, FALSE)
+    Set(GF_DemoSceneDone, false)
     Exec(N(EVS_MonitorDemoState2))
     Exec(N(EVS_ProvideDemoInputs2))
     Return

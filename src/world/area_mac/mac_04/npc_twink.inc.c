@@ -23,7 +23,7 @@ Vec3f N(FlightPath_TwinkDepart)[] = {
 
 EvtScript N(EVS_NpcIdle_TwinkStartCh4) = {
     Call(WaitForPlayerInputEnabled)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PushSong, SONG_TWINK_THEME, 0)
     Call(ShowMessageAtScreenPos, MSG_MAC_Bridge_008F, 160, 40)
     Call(GetPlayerPos, LVar4, LVar5, LVar6)
@@ -64,7 +64,7 @@ EvtScript N(EVS_NpcIdle_TwinkStartCh4) = {
     Call(AdjustCam, CAM_DEFAULT, Float(3.0 / DT), -40, -200, 15, -15)
     Call(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_MAC_Bridge_0093)
     Wait(5 * DT)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(InterpNpcYaw, NPC_Twink, 270, 0)
     Call(GetNpcPos, NPC_Twink, LVar4, LVar5, LVar6)
     Call(LoadPath, 35 * DT, Ref(N(FlightPath_TwinkDepart)), ARRAY_COUNT(N(FlightPath_TwinkDepart)), EASING_QUADRATIC_IN)
@@ -82,7 +82,7 @@ EvtScript N(EVS_NpcIdle_TwinkStartCh4) = {
     Call(SetNpcPos, NPC_Twink, NPC_DISPOSE_LOCATION)
     Call(PopSong)
     Set(GB_StoryProgress, STORY_CH4_MET_WITH_TWINK)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

@@ -52,10 +52,10 @@ AuResult au_bgm_process_init_song(SongStartRequest* event);
 AuResult au_bgm_stop_song(s32 songName);
 void au_bgm_stop_all(void);
 AuResult au_bgm_is_song_playing(s32 songName);
-b32 au_bgm_player_is_active(BGMPlayer* player);
+bool au_bgm_player_is_active(BGMPlayer* player);
 AuResult au_bgm_process_fade_out(SongFadeOutRequest* s);
 AuResult au_bgm_complete_push(s32 songName);
-AuResult au_bgm_process_suspend(SongSuspendRequest* update, b32 skipStop);
+AuResult au_bgm_process_suspend(SongSuspendRequest* update, bool skipStop);
 AuResult au_bgm_process_resume(SongResumeRequest* update);
 void au_bgm_restore_copied_player(AuGlobals* globals);
 AuResult au_bgm_adjust_volume(SongStartRequest* update);
@@ -156,7 +156,7 @@ AuResult snd_song_request_pause(s32 songName);
 AuResult snd_song_request_unpause(s32 songName);
 AuResult snd_song_set_volume_quiet(s32 songName);
 AuResult snd_song_set_volume_full(s32 songName);
-AuResult snd_song_set_linked_mode(s32 songName, b32 mode);
+AuResult snd_song_set_linked_mode(s32 songName, bool mode);
 */
 AuResult snd_song_get_playing_info(s32 songName, BGMHeader** outTrackData, BGMPlayer** outPlayer);
 /*

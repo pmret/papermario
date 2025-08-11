@@ -4,9 +4,9 @@
 #include "world/common/enemy/ShyGuy_Wander.inc.c"
 
 EvtScript N(EVS_NpcInteract_Conductor) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     ExecWait(N(EVS_80247100))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -22,10 +22,10 @@ EvtScript N(EVS_NpcInteract_TrainToad) = {
         CaseLt(STORY_CH4_SOLVED_COLOR_PUZZLE)
             Call(FindKeyItem, ITEM_MYSTERY_NOTE, LVar0)
             IfEq(LVar0, -1)
-                IfEq(GF_OMO09_SpawnedPeachChoice3, FALSE)
+                IfEq(GF_OMO09_SpawnedPeachChoice3, false)
                     Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002B)
                 Else
-                    IfEq(GF_OMO09_Chest_Dictionary, FALSE)
+                    IfEq(GF_OMO09_Chest_Dictionary, false)
                         Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002C)
                     Else
                         Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002F)
@@ -62,13 +62,13 @@ EvtScript N(EVS_NpcAI_BoxedShyGuy) = {
                     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy_Wander)))
                 EndIf
             CaseEq(2)
-                Call(DisablePlayerInput, TRUE)
+                Call(DisablePlayerInput, true)
                 Wait(25)
                 Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, false)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
                 Call(SetSelfVar, 0, 0)
-                Call(DisablePlayerInput, FALSE)
+                Call(DisablePlayerInput, false)
         EndSwitch
         Wait(1)
     EndLoop
@@ -128,7 +128,7 @@ NpcData N(NpcData_ShyGuy_01) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -15, 0, 365 },
@@ -151,7 +151,7 @@ NpcData N(NpcData_ShyGuy_02) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 64, 0, 275 },
@@ -174,7 +174,7 @@ NpcData N(NpcData_ShyGuy_03) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 145, 0, 365 },
@@ -197,7 +197,7 @@ NpcData N(NpcData_ShyGuy_04) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 224, 0, 275 },

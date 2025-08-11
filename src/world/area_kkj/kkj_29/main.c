@@ -12,7 +12,7 @@ EvtScript N(EVS_EndPeachChapter5) = {
 
 EvtScript N(EVS_ExitDoor_kkj_10_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, kkj_29_ENTRY_0)
     Set(LVar1, COLLIDER_tte)
     Set(LVar2, MODEL_o57)
@@ -43,7 +43,7 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
     IfEq(GB_StoryProgress, STORY_CH5_BEGAN_PEACH_MISSION)
-        Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+        Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     EndIf
     Exec(N(EVS_ManageStageEffects))
     IfLt(GB_StoryProgress, STORY_CH8_REACHED_PEACHS_CASTLE)

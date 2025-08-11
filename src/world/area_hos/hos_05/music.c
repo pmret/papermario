@@ -19,7 +19,7 @@ EvtScript N(EVS_SetupMusic) = {
             Exec(N(EVS_PlayIntroStoryMusic))
         CaseEq(hos_05_ENTRY_4)
         CaseDefault
-            IfEq(AF_HOS_B5, FALSE)
+            IfEq(AF_HOS_B5, false)
                 Call(SetMusic, 0, SONG_STAR_SANCTUARY, 0, VOL_LEVEL_FULL)
             EndIf
             Call(PlaySound, SOUND_LOOP_STAR_SANCTUARY_INSIDE)

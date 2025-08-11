@@ -9,7 +9,7 @@ EvtScript N(EVS_NpcInteract_NewResident1) = {
             Set(LVar0, MSG_MAC_Housing_00D6)
 #endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Housing_0006)
             Else
                 Set(LVar0, MSG_MAC_Housing_0007)
@@ -17,7 +17,7 @@ EvtScript N(EVS_NpcInteract_NewResident1) = {
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Housing_0008)
         CaseLt(STORY_CH4_RETURNED_STOREROOM_KEY)
-            IfEq(GF_MAC04_StoreroomKeyStolen, FALSE)
+            IfEq(GF_MAC04_StoreroomKeyStolen, false)
                 Set(LVar0, MSG_MAC_Housing_0009)
             Else
                 Set(LVar0, MSG_MAC_Housing_000A)
@@ -45,7 +45,7 @@ EvtScript N(EVS_NpcInteract_NewResident1) = {
 };
 
 EvtScript N(EVS_NpcInit_NewResident1) = {
-    Set(AF_MAC_2D, FALSE)
+    Set(AF_MAC_2D, false)
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_NewResident1)))
     Return
     End
@@ -62,7 +62,7 @@ EvtScript N(EVS_NpcInteract_NewResident2) = {
             Set(LVar0, MSG_MAC_Housing_00D9)
 #endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Housing_0013)
             Else
                 Set(LVar0, MSG_MAC_Housing_0014)
@@ -70,7 +70,7 @@ EvtScript N(EVS_NpcInteract_NewResident2) = {
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Housing_0015)
         CaseLt(STORY_CH4_RETURNED_STOREROOM_KEY)
-            IfEq(GF_MAC04_StoreroomKeyStolen, FALSE)
+            IfEq(GF_MAC04_StoreroomKeyStolen, false)
                 Set(LVar0, MSG_MAC_Housing_0016)
             Else
                 Set(LVar0, MSG_MAC_Housing_0017)
@@ -98,7 +98,7 @@ EvtScript N(EVS_NpcInteract_NewResident2) = {
 };
 
 EvtScript N(EVS_NpcInit_NewResident2) = {
-    Set(AF_MAC_2E, FALSE)
+    Set(AF_MAC_2E, false)
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_NewResident2)))
     Return
     End

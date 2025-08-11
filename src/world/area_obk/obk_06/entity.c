@@ -2,11 +2,11 @@
 #include "entity.h"
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_OBK06_Item_BoosPortrait, FALSE)
+    IfEq(GF_OBK06_Item_BoosPortrait, false)
         Call(MakeItemEntity, ITEM_BOO_PORTRAIT, 230, 125, -215, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_OBK06_Item_BoosPortrait)
         Thread
             Loop(0)
-                IfNe(GF_OBK06_Item_BoosPortrait, FALSE)
+                IfNe(GF_OBK06_Item_BoosPortrait, false)
                     Set(GB_StoryProgress, STORY_CH3_GOT_BOO_PORTRAIT)
                     BreakLoop
                 EndIf

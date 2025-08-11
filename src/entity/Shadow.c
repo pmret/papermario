@@ -12,9 +12,9 @@ s32 entity_can_collide_with_jumping_player(Entity* entity) {
     if ((entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_CEILING)
         && (gPlayerStatus.flags & PS_FLAG_JUMPING)
     ) {
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 INCLUDE_IMG("entity/shadow/square.png", D_802E9170);

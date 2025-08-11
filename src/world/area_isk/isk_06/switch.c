@@ -5,7 +5,7 @@ extern EvtScript N(EVS_OnTouch_DrainSwitch);
 EvtScript N(EVS_SetupSwitch) = {
     Call(ParentColliderToModel, COLLIDER_o2090, MODEL_g336)
     Call(ParentColliderToModel, COLLIDER_o2091, MODEL_g336)
-    IfEq(AF_ISK06_SandSwitchActivated, FALSE)
+    IfEq(AF_ISK06_SandSwitchActivated, false)
         BindTrigger(Ref(N(EVS_OnTouch_DrainSwitch)), TRIGGER_FLOOR_TOUCH, COLLIDER_o2091, 1, 0)
     Else
         Call(TranslateModel, MODEL_g336, 0, -14, 0)
@@ -18,14 +18,14 @@ EvtScript N(EVS_SetupSwitch) = {
 
 EvtScript N(EVS_OnTouch_DrainSwitch) = {
     Call(IsPlayerOnValidFloor, LVar0)
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Label(5)
         Wait(1)
         Call(PartnerCanUseAbility, LVar0)
-        IfEq(LVar0, TRUE)
+        IfEq(LVar0, true)
             Goto(5)
         EndIf
     Call(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
@@ -50,7 +50,7 @@ EvtScript N(EVS_OnTouch_DrainSwitch) = {
         Goto(10)
     EndIf
     Call(PlaySoundAtCollider, COLLIDER_o2091, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_DEFAULT)
-    Set(AF_ISK06_SandSwitchActivated, TRUE)
+    Set(AF_ISK06_SandSwitchActivated, true)
     Unbind
     Return
     End

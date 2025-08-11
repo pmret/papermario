@@ -71,9 +71,9 @@ API_CALLABLE(N(GetActingPartner)) {
 
 API_CALLABLE(N(IsPartnerWatt)) {
     if (gPartnerStatus.actingPartner == PARTNER_WATT) {
-        script->varTable[1] = TRUE;
+        script->varTable[1] = true;
     } else {
-        script->varTable[1] = FALSE;
+        script->varTable[1] = false;
     }
     return ApiStatus_DONE2;
 }
@@ -96,7 +96,7 @@ Vec2i N(CrowdChaseGoalPositions)[] = {
 
 EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
     SetF(LVarA, Float(3.5 / DT))
-    Set(AF_OMO_11, FALSE)
+    Set(AF_OMO_11, false)
     Call(SetNpcSpeed, NPC_SELF, LVarA)
     Label(0)
     Call(GetSelfVar, 0, LVar0)
@@ -142,8 +142,8 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                                 Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
                                 Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15 * DT)
                             EndIf
-                            IfEq(AF_OMO_11, FALSE)
-                                Set(AF_OMO_11, TRUE)
+                            IfEq(AF_OMO_11, false)
+                                Set(AF_OMO_11, true)
                             EndIf
                             UseBuf(Ref(N(CrowdChaseGoalPositions)))
                             BufRead2(LVar1, LVar2)
@@ -156,11 +156,11 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                                 Call(NpcJump0, NPC_SELF, LVar3, 0, LVar4, 15 * DT)
                                 Wait(30 * DT)
                             Else
-                                Call(DisablePlayerInput, TRUE)
+                                Call(DisablePlayerInput, true)
                                 Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
                                 Call(NpcJump0, NPC_SELF, LVar3, 0, LVar4, 15 * DT)
                                 Wait(30 * DT)
-                                Call(DisablePlayerInput, FALSE)
+                                Call(DisablePlayerInput, false)
                             EndIf
                             Call(SetSelfVar, 0, 1)
                         EndIf
@@ -185,7 +185,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                     Call(SetSelfVar, 0, 0)
                 EndIf
             Else
-                Call(DisablePlayerInput, TRUE)
+                Call(DisablePlayerInput, true)
                 Call(SpeakToPlayer, NPC_SELF, -1, -1, 5, MSG_CH4_005D)
                 Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
                 Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
@@ -206,13 +206,13 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                 EndThread
                 Call(PlaySoundAtCollider, COLLIDER_tt1, SOUND_TROMP_CRASH, SOUND_SPACE_DEFAULT)
                 PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 37, 37, 1, 10, 30)
-                Call(EnableModel, MODEL_o821, TRUE)
+                Call(EnableModel, MODEL_o821, true)
                 Loop(10)
-                    Call(EnableModel, MODEL_o823, TRUE)
-                    Call(EnableModel, MODEL_o828, TRUE)
+                    Call(EnableModel, MODEL_o823, true)
+                    Call(EnableModel, MODEL_o828, true)
                     Wait(1)
-                    Call(EnableModel, MODEL_o823, FALSE)
-                    Call(EnableModel, MODEL_o828, FALSE)
+                    Call(EnableModel, MODEL_o823, false)
+                    Call(EnableModel, MODEL_o828, false)
                     Wait(1)
                 EndLoop
                 Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
@@ -223,7 +223,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                 Call(NpcMoveTo, NPC_SELF, 300, 0, 0)
                 Set(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
                 Wait(30 * DT)
-                Call(DisablePlayerInput, FALSE)
+                Call(DisablePlayerInput, false)
                 Call(RemoveNpc, NPC_SELF)
             EndIf
     EndSwitch
@@ -327,7 +327,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Crowd) = {
             Wait(30 * DT)
             Call(SetSelfVar, 0, 3)
         CaseEq(3)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
             Call(SetNpcSpeed, NPC_SELF, Float(4.0 / DT))
             Call(NpcMoveTo, NPC_SELF, 235, 0, 0)
             Call(NpcMoveTo, NPC_SELF, 300, 0, 0)

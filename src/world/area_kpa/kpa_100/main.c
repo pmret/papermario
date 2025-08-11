@@ -4,7 +4,7 @@
 s32 N(map_init)(void) {
     sprintf(wMapShapeName, "kpa_117_shape");
     sprintf(wMapHitName, "kpa_117_hit");
-    return FALSE;
+    return false;
 }
 
 EvtScript N(EVS_ExitWalk_kpa_08_1) = EVT_EXIT_WALK(60, kpa_100_ENTRY_0, "kpa_08", kpa_08_ENTRY_1);

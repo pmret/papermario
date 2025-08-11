@@ -10,14 +10,14 @@
 #include "../common/ApproachPlayer50Units.inc.c"
 
 EvtScript N(EVS_CapturePeach) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     Call(NpcFacePlayer, NPC_SELF, 0)
     Wait(20)
-    Call(PlayerFaceNpc, NPC_SELF, FALSE)
+    Call(PlayerFaceNpc, NPC_SELF, false)
     Call(SetPlayerAnimation, ANIM_Peach2_Gasp)
     Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim01)
     Call(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_0174)
@@ -33,7 +33,7 @@ EvtScript N(EVS_CapturePeach) = {
     Wait(20)
     Call(GotoMapSpecial, Ref("kkj_14"), kkj_14_ENTRY_B, TRANSITION_PEACH_CAPTURED)
     Wait(100)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -153,8 +153,8 @@ EvtScript N(EVS_NpcInit_Koopatrol_02) = {
 };
 
 EvtScript N(EVS_NpcInit_Koopatrol_03) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
     Call(SetNpcPos, NPC_SELF, -250, 0, -15)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Koopatrol_03)))
     Return

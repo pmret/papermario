@@ -16,7 +16,7 @@ MobileAISettings N(AISettings_JungleFuzzy_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_JungleFuzzy_Wander) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Call(N(HoppingAI_Main), Ref(N(AISettings_JungleFuzzy_Wander)), 2)
     Return
     End

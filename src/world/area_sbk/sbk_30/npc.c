@@ -54,7 +54,7 @@ s32 N(ArtifactList)[] = {
 };
 
 EvtScript N(EVS_ArtifactPrompt) = {
-    Set(GF_SBK_GaveArtifactToKolorado, TRUE)
+    Set(GF_SBK_GaveArtifactToKolorado, true)
     Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0044)
     EVT_GIVE_STAR_PIECE()
     Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0045)
@@ -65,23 +65,23 @@ EvtScript N(EVS_ArtifactPrompt) = {
 EvtScript N(EVS_NpcInteract_Kolorado) = {
     Call(GetNpcAnimation, NPC_SELF, LVar9)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-    IfEq(GF_SBK30_Met_Kolorado, FALSE)
+    IfEq(GF_SBK30_Met_Kolorado, false)
         Call(AdjustCam, CAM_DEFAULT, Float(4.0), 0, Float(300.0), Float(15.0), Float(-7.5))
         Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0037)
         Call(ResetCam, CAM_DEFAULT, 4)
-        Set(GF_SBK30_Met_Kolorado, TRUE)
+        Set(GF_SBK30_Met_Kolorado, true)
         Goto(50)
     EndIf
-    IfEq(GF_SBK_GaveArtifactToKolorado, TRUE)
+    IfEq(GF_SBK_GaveArtifactToKolorado, true)
         Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0046)
         Goto(50)
     EndIf
     Call(HasKeyItem, ITEM_ARTIFACT, LVar0)
     IfEq(LVar0, 1)
-        IfEq(GF_SBK_KeptArtifactFromKolorado, TRUE)
+        IfEq(GF_SBK_KeptArtifactFromKolorado, true)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0043)
         Else
-            Set(GF_SBK_KeptArtifactFromKolorado, TRUE)
+            Set(GF_SBK_KeptArtifactFromKolorado, true)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0040)
         EndIf
         EVT_CHOOSE_KEY_ITEM_FROM(N(ArtifactList))
@@ -102,32 +102,32 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
         EndSwitch
     EndIf
     IfGe(GB_StoryProgress, STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
-        IfEq(GF_DRO02_Sheek_SpokeTo, FALSE)
-            IfEq(AF_SBK_04, FALSE)
+        IfEq(GF_DRO02_Sheek_SpokeTo, false)
+            IfEq(AF_SBK_04, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0039)
-                Set(AF_SBK_04, TRUE)
+                Set(AF_SBK_04, true)
                 Goto(50)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003A)
                 Goto(50)
             EndIf
         EndIf
-        IfEq(GF_DRO02_Sheek_AskedAboutRuins, FALSE)
-            IfEq(AF_SBK_05, FALSE)
+        IfEq(GF_DRO02_Sheek_AskedAboutRuins, false)
+            IfEq(AF_SBK_05, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003B)
-                Set(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, TRUE)
-                Set(AF_SBK_05, TRUE)
+                Set(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, true)
+                Set(AF_SBK_05, true)
                 Goto(50)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003C)
                 Goto(50)
             EndIf
         EndIf
-        IfEq(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, TRUE)
-            IfEq(GF_DRO02_Sheek_AskedAboutMoustafa, FALSE)
-                IfEq(AF_SBK_06, FALSE)
+        IfEq(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, true)
+            IfEq(GF_DRO02_Sheek_AskedAboutMoustafa, false)
+                IfEq(AF_SBK_06, false)
                     Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003D)
-                    Set(AF_SBK_06, TRUE)
+                    Set(AF_SBK_06, true)
                     Goto(50)
                 Else
                     Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003E)
@@ -143,8 +143,8 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
     Label(90)
     Call(GetCurrentPartnerID, LVar0)
     IfEq(LVar0, PARTNER_KOOPER)
-        IfEq(GF_SBK30_KooperMetKolorado, FALSE)
-            Set(GF_SBK30_KooperMetKolorado, TRUE)
+        IfEq(GF_SBK30_KooperMetKolorado, false)
+            Set(GF_SBK30_KooperMetKolorado, true)
             Call(DisablePartnerAI, 0)
             Call(SpeakToNpc, NPC_PARTNER, ANIM_WorldKooper_CelebrateLoop, ANIM_WorldKooper_Idle, 0, NPC_SELF, MSG_CH2_0047)
             Call(SpeakToNpc, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, NPC_PARTNER, MSG_CH2_0048)
@@ -226,15 +226,15 @@ EvtScript N(EVS_NpcIdle_Archeologist_01) = {
 EvtScript N(EVS_NpcInteract_Archeologist_01) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_GOT_PULSE_STONE)
-            IfEq(AF_SBK_02, FALSE)
+            IfEq(AF_SBK_02, false)
                 Set(LVar0, MSG_CH2_004E)
-                Set(AF_SBK_02, TRUE)
+                Set(AF_SBK_02, true)
             Else
                 Set(LVar0, MSG_CH2_004F)
-                Set(AF_SBK_02, FALSE)
+                Set(AF_SBK_02, false)
             EndIf
         CaseDefault
-            IfEq(GF_SBK_GaveArtifactToKolorado, FALSE)
+            IfEq(GF_SBK_GaveArtifactToKolorado, false)
                 Set(LVar0, MSG_CH2_0050)
             Else
                 Set(LVar0, MSG_CH2_0051)
@@ -261,15 +261,15 @@ EvtScript N(EVS_NpcInit_Archeologist_01) = {
 EvtScript N(EVS_NpcInteract_Archeologist_02) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH2_GOT_PULSE_STONE)
-            IfEq(AF_SBK_03, FALSE)
+            IfEq(AF_SBK_03, false)
                 Set(LVar0, MSG_CH2_0052)
-                Set(AF_SBK_03, TRUE)
+                Set(AF_SBK_03, true)
             Else
                 Set(LVar0, MSG_CH2_0053)
-                Set(AF_SBK_03, FALSE)
+                Set(AF_SBK_03, false)
             EndIf
         CaseDefault
-            IfEq(GF_SBK_GaveArtifactToKolorado, FALSE)
+            IfEq(GF_SBK_GaveArtifactToKolorado, false)
                 Set(LVar0, MSG_CH2_0054)
             Else
                 Set(LVar0, MSG_CH2_0055)
@@ -311,7 +311,7 @@ NpcData N(NpcData_Archeologist_02)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 0, 0, 0 },
@@ -334,7 +334,7 @@ NpcData N(NpcData_Archeologist_02)[] = {
         .yaw = 90,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 0, 0, 0 },

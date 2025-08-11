@@ -4,7 +4,7 @@
 
 char gCloudyFlowerFieldsBg[] = "fla_bg";
 char gSunnyFlowerFieldsBg[] = "flb_bg";
-s8 gBackroundWaveEnabled = FALSE;
+s8 gBackroundWaveEnabled = false;
 s16 gBackroundTextureYOffset = 0;
 f32 gBackroundWavePhase = 0.0f;
 
@@ -36,7 +36,7 @@ void load_map_bg(char* optAssetName) {
 
 void reset_background_settings(void) {
     gBackroundLastScrollValue = 0;
-    gBackroundWaveEnabled = FALSE;
+    gBackroundWaveEnabled = false;
     gGameStatusPtr->backgroundDarkness = 180;
     gGameStatusPtr->backgroundFlags &= BACKGROUND_RENDER_STATE_MASK;
 }
@@ -311,11 +311,11 @@ void appendGfx_background_texture(void) {
 }
 
 void enable_background_wave(void) {
-    gBackroundWaveEnabled = TRUE;
+    gBackroundWaveEnabled = true;
 }
 
 void disable_background_wave(void) {
-    gBackroundWaveEnabled = FALSE;
+    gBackroundWaveEnabled = false;
 }
 
 // TODO figure out why it is needed

@@ -7,7 +7,7 @@
 #include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 
 EvtScript N(EVS_NpcInit_EnableReflection) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_REFLECT_FLOOR, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_REFLECT_FLOOR, true)
     Return
     End
 };
@@ -19,7 +19,7 @@ NpcData N(NpcData_Clubba)[] = {
         .yaw = 90,
         .territory = {
             .patrol = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .numPoints  = 2,
                 .points  = {
@@ -47,7 +47,7 @@ NpcData N(NpcData_Duplighost) = {
     .yaw = 90,
     .territory = {
         .patrol = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 2,
             .points  = {

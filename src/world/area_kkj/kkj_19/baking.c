@@ -416,8 +416,8 @@ EvtScript N(EVS_TakeIngredient) = {
         CaseDefault
             Return
     EndSwitch
-    Call(DisablePlayerInput, TRUE)
-    Set(AF_KKJ19_CanTakeIngredients, FALSE)
+    Call(DisablePlayerInput, true)
+    Set(AF_KKJ19_CanTakeIngredients, false)
     Wait(5)
     Set(LVarA, LVar0)
     Set(LVarB, LVar0)
@@ -511,9 +511,9 @@ EvtScript N(EVS_TakeIngredient) = {
             EndIf
         EndIf
     EndIf
-    Set(AF_KKJ19_CanTakeIngredients, TRUE)
+    Set(AF_KKJ19_CanTakeIngredients, true)
     Wait(5)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -544,11 +544,11 @@ EvtScript N(EVS_ItemPrompt_AddIngredient) = {
         CaseEq(BAKE_STEP_ADD_SUGAR_AND_EGGS)
             Switch(LVar0)
                 CaseEq(ITEM_BAKING_SUGAR)
-                    Set(AF_KKJ19_AddedSugar, TRUE)
+                    Set(AF_KKJ19_AddedSugar, true)
                 CaseEq(ITEM_BAKING_EGG)
-                    Set(AF_KKJ19_AddedEgg, TRUE)
+                    Set(AF_KKJ19_AddedEgg, true)
                 CaseDefault
-                    Set(AF_KKJ19_AddedNothingWrong, FALSE)
+                    Set(AF_KKJ19_AddedNothingWrong, false)
             EndSwitch
             IfEq(AB_KKJ19_BakeStepProgress, 0)
                 Call(RemoveItemEntity, AB_KKJ19_CookwareItemIdx)
@@ -556,49 +556,49 @@ EvtScript N(EVS_ItemPrompt_AddIngredient) = {
                 Set(AB_KKJ19_CookwareItemIdx, LVar0)
             EndIf
             IfGt(AB_KKJ19_BakeStepProgress, 1)
-                Set(AF_KKJ19_AddedNothingWrong, FALSE)
+                Set(AF_KKJ19_AddedNothingWrong, false)
             EndIf
         CaseEq(BAKE_STEP_ADD_FLOUR_AND_BUTTER)
             Switch(LVar0)
                 CaseEq(ITEM_BAKING_FLOUR)
-                    Set(AF_KKJ19_AddedFlour, TRUE)
+                    Set(AF_KKJ19_AddedFlour, true)
                 CaseEq(ITEM_BAKING_BUTTER)
-                    Set(AF_KKJ19_AddedButter, TRUE)
+                    Set(AF_KKJ19_AddedButter, true)
                 CaseDefault
-                    Set(AF_KKJ19_AddedNothingWrong, FALSE)
+                    Set(AF_KKJ19_AddedNothingWrong, false)
             EndSwitch
             IfGt(AB_KKJ19_BakeStepProgress, 1)
-                Set(AF_KKJ19_AddedNothingWrong, FALSE)
+                Set(AF_KKJ19_AddedNothingWrong, false)
             EndIf
         CaseEq(BAKE_STEP_DECORATING)
             Switch(AB_KKJ19_BakeStepProgress)
                 CaseEq(0)
                     IfNe(LVar0, ITEM_BAKING_CREAM)
-                        Set(AF_KKJ19_FailedBakingTask, TRUE)
+                        Set(AF_KKJ19_FailedBakingTask, true)
                     EndIf
                 CaseEq(1)
                     IfNe(LVar0, ITEM_BAKING_STRAWBERRY)
-                        Set(AF_KKJ19_FailedBakingTask, TRUE)
+                        Set(AF_KKJ19_FailedBakingTask, true)
                     EndIf
                 CaseDefault
-                    Set(AF_KKJ19_FailedBakingTask, TRUE)
+                    Set(AF_KKJ19_FailedBakingTask, true)
             EndSwitch
             Call(RemoveItemEntity, AB_KKJ19_CakeItemIdx)
             Switch(LVar0)
                 CaseEq(ITEM_BAKING_STRAWBERRY)
-                    IfEq(AB_KKJ19_AddedIcing, FALSE)
+                    IfEq(AB_KKJ19_AddedIcing, false)
                         Call(MakeItemEntity, ITEM_CAKE_WITH_BERRIES, 287, 20, -30, ITEM_SPAWN_MODE_DECORATION, 0)
                         Set(AB_KKJ19_CakeItemIdx, LVar0)
                     Else
                         Call(MakeItemEntity, ITEM_CAKE_DONE, 287, 20, -30, ITEM_SPAWN_MODE_DECORATION, 0)
                         Set(AB_KKJ19_CakeItemIdx, LVar0)
                     EndIf
-                    Set(AB_KKJ19_AddedBerries, TRUE)
+                    Set(AB_KKJ19_AddedBerries, true)
                 CaseDefault
                     Call(MakeItemEntity, ITEM_CAKE_WITH_ICING, 287, 20, -30, ITEM_SPAWN_MODE_DECORATION, 0)
                     Set(AB_KKJ19_CakeItemIdx, LVar0)
-                    Set(AB_KKJ19_AddedIcing, TRUE)
-                    Set(AB_KKJ19_AddedBerries, FALSE)
+                    Set(AB_KKJ19_AddedIcing, true)
+                    Set(AB_KKJ19_AddedBerries, false)
             EndSwitch
     EndSwitch
     Add(AB_KKJ19_BakeStepProgress, 1)
@@ -653,10 +653,10 @@ EvtScript N(EVS_CloseOverDoor) = {
 };
 
 EvtScript N(EVS_PickupFinalCake) = {
-    IfEq(AB_KKJ19_AddedBerries, FALSE)
+    IfEq(AB_KKJ19_AddedBerries, false)
         Set(LVar0, PEACH_BAKING_CAKE_WITH_ICING)
     Else
-        IfEq(AB_KKJ19_AddedIcing, FALSE)
+        IfEq(AB_KKJ19_AddedIcing, false)
             Set(LVar0, PEACH_BAKING_CAKE_WITH_BERRIES)
         Else
             Set(LVar0, PEACH_BAKING_COMPLETE_CAKE)
@@ -665,7 +665,7 @@ EvtScript N(EVS_PickupFinalCake) = {
     Call(RemoveItemEntity, AB_KKJ19_CakeItemIdx)
     Call(N(SetHeldBakingItem), LVar0)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
-    Set(AF_KKJ_FinishedBakingCake, TRUE)
+    Set(AF_KKJ_FinishedBakingCake, true)
     Unbind
     Return
     End
@@ -692,7 +692,7 @@ EvtScript N(EVS_FocusCam_Twink) = {
     Call(SetCamDistance, CAM_DEFAULT, 200)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-4.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -710,7 +710,7 @@ EvtScript N(EVS_FocusCam_PeachAndTwink) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, 275)
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -722,7 +722,7 @@ EvtScript N(EVS_FocusCam_Oven) = {
     Call(SetCamDistance, CAM_DEFAULT, 250)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-13.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -733,14 +733,14 @@ EvtScript N(EVS_FocusCam_Table) = {
     Call(SetPanTarget, CAM_DEFAULT, 330, 0, -80)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
 };
 
 EvtScript N(EVS_Twink_FlyToPlayer) = {
-    Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, TRUE)
+    Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, true)
     Call(SetNpcVar, NPC_Twink, 1, 0)
     Call(GetNpcPos, NPC_PARTNER, LVar3, LVar1, LVar2)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -765,14 +765,14 @@ EvtScript N(EVS_Twink_FlyToHighPos) = {
 };
 
 EvtScript N(EVS_ExitDoorWithCake) = {
-    IfEq(AF_KKJ_FinishedBakingCake, FALSE)
-        Call(DisablePlayerInput, TRUE)
+    IfEq(AF_KKJ_FinishedBakingCake, false)
+        Call(DisablePlayerInput, true)
         IfEq(AB_KKJ19_CurrentBakeStep, CAKE_TYPE_DONE)
             Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_00C1)
         Else
             Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_00BE)
         EndIf
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     Else
         Set(LVar0, kkj_19_ENTRY_0)
         Set(LVar1, COLLIDER_ttse)
@@ -860,7 +860,7 @@ EvtScript N(EVS_EnterKitchen_FirstTime) = {
     Call(InterpNpcYaw, NPC_PARTNER, 270, 5)
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_00BA)
-    Call(EnableModel, MODEL_o128, FALSE)
+    Call(EnableModel, MODEL_o128, false)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_TakeBook)
     Wait(30 * DT)
     Thread
@@ -896,7 +896,7 @@ EvtScript N(EVS_EnterKitchen_FirstTime) = {
 };
 
 EvtScript N(EVS_EnterKitchen_TryAgain) = {
-    Call(EnableModel, MODEL_o128, FALSE)
+    Call(EnableModel, MODEL_o128, false)
     Call(SetPlayerAnimation, ANIM_Peach2_ArmsCrossedIdle)
     Call(SetPlayerPos, 400, 0, -30)
     Call(InterpPlayerYaw, 90, 0)
@@ -917,11 +917,11 @@ EvtScript N(EVS_EnterKitchen_TryAgain) = {
 };
 
 EvtScript N(EVS_ManageBaking) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(DisablePartnerAI, 0)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(EnableModel, MODEL_o46, FALSE)
-    Call(EnableModel, MODEL_o50, FALSE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(EnableModel, MODEL_o46, false)
+    Call(EnableModel, MODEL_o50, false)
     ExecWait(N(EVS_SetCookwareOnTable))
     BindTrigger(Ref(N(EVS_ExitDoorWithCake)), TRIGGER_WALL_PRESS_A, COLLIDER_ttse, 1, 0)
     Exec(N(EVS_BindInteractTriggers))
@@ -933,10 +933,10 @@ EvtScript N(EVS_ManageBaking) = {
 
     // start of cooking process
     Label(LBL_TRY_RESUME)
-    Set(AF_KKJ_FinishedBakingCake, FALSE)
-    Set(AF_KKJ19_FailedBakingTask, FALSE)
+    Set(AF_KKJ_FinishedBakingCake, false)
+    Set(AF_KKJ19_FailedBakingTask, false)
     Set(AB_KKJ19_HeldIngredient, PEACH_BAKING_NONE)
-    Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, TRUE)
+    Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, true)
     Call(SetNpcVar, NPC_Twink, 1, 0)
     IfEq(AB_KKJ_CompletedBakeStep, CAKE_TYPE_READY_TO_MIX)
         // resume mixing
@@ -999,7 +999,7 @@ EvtScript N(EVS_ManageBaking) = {
         Wait(20)
         Thread
             ExecWait(N(EVS_Twink_FlyToHighPos))
-            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, FALSE)
+            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, false)
             Call(SetNpcVar, NPC_Twink, 1, 1)
         EndThread
         Set(LVarA, 1)
@@ -1010,10 +1010,10 @@ EvtScript N(EVS_ManageBaking) = {
     Label(LBL_ADD_SUGAR_EGGS)
     Set(AB_KKJ19_CurrentBakeStep, BAKE_STEP_ADD_SUGAR_AND_EGGS)
     Set(AB_KKJ19_BakeStepProgress, 0)
-    Set(AF_KKJ19_CanTakeIngredients, TRUE)
-    Set(AF_KKJ19_AddedSugar, FALSE)
-    Set(AF_KKJ19_AddedEgg, FALSE)
-    Set(AF_KKJ19_AddedNothingWrong, TRUE)
+    Set(AF_KKJ19_CanTakeIngredients, true)
+    Set(AF_KKJ19_AddedSugar, false)
+    Set(AF_KKJ19_AddedEgg, false)
+    Set(AF_KKJ19_AddedNothingWrong, true)
     ExecWait(N(EVS_FocusCam_Twink))
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_ReadBook, ANIM_Twink_IdleBook, 0, MSG_Peach_00D1)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_CloseBook)
@@ -1022,17 +1022,17 @@ EvtScript N(EVS_ManageBaking) = {
     Set(LVarA, 1)
     Thread
         ExecWait(N(EVS_Twink_FlyToHighPos))
-        Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, FALSE)
+        Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, false)
         Call(SetNpcVar, NPC_Twink, 1, 1)
     EndThread
     // wait for peach to tell twink shes done
     Label(LBL_ADD_SUGAR_EGGS_WAITING)
         Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
         IfEq(LVarA, 0)
-            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, FALSE)
+            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, false)
             Call(SetNpcVar, NPC_Twink, 1, 1)
         EndIf
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Call(SetNpcVar, NPC_Twink, 0, 1)
         Loop(0)
             Wait(1)
@@ -1041,7 +1041,7 @@ EvtScript N(EVS_ManageBaking) = {
                 BreakLoop
             EndIf
         EndLoop
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         ExecWait(N(EVS_Twink_FlyToPlayer))
         ExecWait(N(EVS_FocusCam_PeachAndTwink))
         Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_00D2)
@@ -1069,9 +1069,9 @@ EvtScript N(EVS_ManageBaking) = {
     Add(LVar0, AF_KKJ19_AddedEgg)
     Add(LVar0, AF_KKJ19_AddedNothingWrong)
     IfNe(LVar0, 3)
-        Set(AF_KKJ19_FailedBakingTask, TRUE)
+        Set(AF_KKJ19_FailedBakingTask, true)
     EndIf
-    IfEq(AF_KKJ19_FailedBakingTask, FALSE)
+    IfEq(AF_KKJ19_FailedBakingTask, false)
         Set(AB_KKJ_CompletedBakeStep, CAKE_TYPE_READY_TO_MIX)
     EndIf
 
@@ -1090,7 +1090,7 @@ EvtScript N(EVS_ManageBaking) = {
     Label(LBL_MIX_RESUME)
     Set(AB_KKJ19_CurrentBakeStep, BAKE_STEP_MIXING)
     Set(AB_KKJ19_BakeStepProgress, 0)
-    Set(AF_KKJ19_CanTakeIngredients, FALSE)
+    Set(AF_KKJ19_CanTakeIngredients, false)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPlayerSpeed, Float(2.0 / DT))
     Call(PlayerMoveTo, LVar0, -74, 0)
@@ -1111,7 +1111,7 @@ EvtScript N(EVS_ManageBaking) = {
     Call(FadeOutMusic, 0, 500)
     KillThread(LVarA)
     IfLt(LVar0, MIXING_REQUIRED_INPUTS)
-        Set(AF_KKJ19_FailedBakingTask, TRUE)
+        Set(AF_KKJ19_FailedBakingTask, true)
     EndIf
     Wait(10 * DT)
     Thread
@@ -1139,7 +1139,7 @@ EvtScript N(EVS_ManageBaking) = {
             Goto(LBL_START_OVER)
         EndIf
     EndIf
-    IfEq(AF_KKJ19_FailedBakingTask, FALSE)
+    IfEq(AF_KKJ19_FailedBakingTask, false)
         Set(AB_KKJ_CompletedBakeStep, CAKE_TYPE_MIXED)
     EndIf
 
@@ -1156,24 +1156,24 @@ EvtScript N(EVS_ManageBaking) = {
     Label(LBL_ADD_FLOUR_BUTTER_RESUME)
     Set(AB_KKJ19_CurrentBakeStep, BAKE_STEP_ADD_FLOUR_AND_BUTTER)
     Set(AB_KKJ19_BakeStepProgress, 0)
-    Set(AF_KKJ19_CanTakeIngredients, TRUE)
-    Set(AF_KKJ19_AddedFlour, FALSE)
-    Set(AF_KKJ19_AddedButter, FALSE)
-    Set(AF_KKJ19_AddedNothingWrong, TRUE)
+    Set(AF_KKJ19_CanTakeIngredients, true)
+    Set(AF_KKJ19_AddedFlour, false)
+    Set(AF_KKJ19_AddedButter, false)
+    Set(AF_KKJ19_AddedNothingWrong, true)
     Set(LVarA, 1)
     Thread
         ExecWait(N(EVS_Twink_FlyToHighPos))
-        Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, FALSE)
+        Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, false)
         Call(SetNpcVar, NPC_Twink, 1, 1)
     EndThread
     // wait for peach to tell twink shes done
     Label(LBL_ADD_FLOUR_BUTTER_WAITING)
         Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
         IfEq(LVarA, 0)
-            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, FALSE)
+            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, false)
             Call(SetNpcVar, NPC_Twink, 1, 1)
         EndIf
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Call(SetNpcVar, NPC_Twink, 0, 1)
         Loop(0)
             Wait(1)
@@ -1182,7 +1182,7 @@ EvtScript N(EVS_ManageBaking) = {
                 BreakLoop
             EndIf
         EndLoop
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         ExecWait(N(EVS_Twink_FlyToPlayer))
         ExecWait(N(EVS_FocusCam_PeachAndTwink))
         Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_00D9)
@@ -1212,9 +1212,9 @@ EvtScript N(EVS_ManageBaking) = {
     Add(LVar0, AF_KKJ19_AddedButter)
     Add(LVar0, AF_KKJ19_AddedNothingWrong)
     IfNe(LVar0, 3)
-        Set(AF_KKJ19_FailedBakingTask, TRUE)
+        Set(AF_KKJ19_FailedBakingTask, true)
     EndIf
-    IfEq(AF_KKJ19_FailedBakingTask, FALSE)
+    IfEq(AF_KKJ19_FailedBakingTask, false)
         Set(AB_KKJ_CompletedBakeStep, CAKE_TYPE_READY_TO_BAKE)
     EndIf
 
@@ -1227,7 +1227,7 @@ EvtScript N(EVS_ManageBaking) = {
     // resume failed step from here
     Label(LBL_BAKE_RESUME)
     Set(AB_KKJ19_CurrentBakeStep, BAKE_STEP_BAKING)
-    Set(AF_KKJ19_CanTakeIngredients, FALSE)
+    Set(AF_KKJ19_CanTakeIngredients, false)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPlayerSpeed, Float(2.0 / DT))
     Call(PlayerMoveTo, LVar0, -74, 0)
@@ -1312,10 +1312,10 @@ EvtScript N(EVS_ManageBaking) = {
     Wait(10 * DT)
     // check baking time
     IfLt(LVar0, BAKING_TIME_MIN_FRAMES)
-        Set(AF_KKJ19_FailedBakingTask, TRUE)
+        Set(AF_KKJ19_FailedBakingTask, true)
     EndIf
     IfGt(LVar0, BAKING_TIME_MAX_FRAMES)
-        Set(AF_KKJ19_FailedBakingTask, TRUE)
+        Set(AF_KKJ19_FailedBakingTask, true)
     EndIf
     Exec(N(EVS_SetupMusic))
     ExecWait(N(EVS_OpenOverDoor))
@@ -1355,7 +1355,7 @@ EvtScript N(EVS_ManageBaking) = {
     Call(MakeItemEntity, ITEM_CAKE_BARE, 287, 20, -30, ITEM_SPAWN_MODE_DECORATION, 0)
     Set(AB_KKJ19_CakeItemIdx, LVar0)
     Wait(10 * DT)
-    IfEq(AF_KKJ19_FailedBakingTask, FALSE)
+    IfEq(AF_KKJ19_FailedBakingTask, false)
         Set(AB_KKJ_CompletedBakeStep, CAKE_TYPE_BAKED)
     EndIf
 
@@ -1373,17 +1373,17 @@ EvtScript N(EVS_ManageBaking) = {
     Label(LBL_DECORATE_RESUME)
     Set(AB_KKJ19_CurrentBakeStep, BAKE_STEP_DECORATING)
     Set(AB_KKJ19_BakeStepProgress, 0)
-    Set(AF_KKJ19_CanTakeIngredients, TRUE)
-    Set(AB_KKJ19_AddedIcing, FALSE)
-    Set(AB_KKJ19_AddedBerries, FALSE)
+    Set(AF_KKJ19_CanTakeIngredients, true)
+    Set(AB_KKJ19_AddedIcing, false)
+    Set(AB_KKJ19_AddedBerries, false)
     // wait for peach to tell twink shes done
     Label(LBL_DECORATE_WAITING)
         Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
         IfEq(LVarA, 0)
-            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, FALSE)
+            Call(SetEnemyFlagBits, NPC_Twink, ENEMY_FLAG_CANT_INTERACT, false)
             Call(SetNpcVar, NPC_Twink, 1, 1)
         EndIf
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Call(SetNpcVar, NPC_Twink, 0, 1)
         Loop(0)
             Wait(1)
@@ -1392,7 +1392,7 @@ EvtScript N(EVS_ManageBaking) = {
                 BreakLoop
             EndIf
         EndLoop
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         ExecWait(N(EVS_Twink_FlyToPlayer))
         ExecWait(N(EVS_FocusCam_PeachAndTwink))
         Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_00E2)
@@ -1418,10 +1418,10 @@ EvtScript N(EVS_ManageBaking) = {
             Goto(LBL_START_OVER)
         EndIf
     ExecWait(N(EVS_ReturnHeldIngredient))
-    IfEq(AB_KKJ19_AddedBerries, FALSE)
-        Set(AF_KKJ19_FailedBakingTask, TRUE)
+    IfEq(AB_KKJ19_AddedBerries, false)
+        Set(AF_KKJ19_FailedBakingTask, true)
     EndIf
-    IfEq(AF_KKJ19_FailedBakingTask, FALSE)
+    IfEq(AF_KKJ19_FailedBakingTask, false)
         Set(AB_KKJ_CompletedBakeStep, CAKE_TYPE_DONE)
     EndIf
     Call(SetPlayerAnimation, ANIM_Peach2_Delighted)
@@ -1431,11 +1431,11 @@ EvtScript N(EVS_ManageBaking) = {
     // cake ready for gourmet guy (but not necessarily succcesful)
     Label(LBL_FINISHED)
     Set(AB_KKJ19_CurrentBakeStep, BAKE_STEP_DONE)
-    Set(AF_KKJ19_CanTakeIngredients, FALSE)
+    Set(AF_KKJ19_CanTakeIngredients, false)
     Call(ResetCam, CAM_DEFAULT, Float(5.0 / DT))
     Exec(N(EVS_BindCakePickup))
     Call(EnablePartnerAI)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
 
     // starting over

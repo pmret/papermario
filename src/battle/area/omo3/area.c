@@ -61,8 +61,8 @@ Formation A(Formation_07) = {
 };
 
 Formation A(Formation_08) = {
-    ACTOR_BY_IDX(A(pokey), BTL_POS_GROUND_B, 10, 0, TRUE),
-    ACTOR_BY_IDX(A(pokey), BTL_POS_GROUND_C,  9, 0, TRUE),
+    ACTOR_BY_IDX(A(pokey), BTL_POS_GROUND_B, 10, 0, true),
+    ACTOR_BY_IDX(A(pokey), BTL_POS_GROUND_C,  9, 0, true),
 };
 
 Formation A(Formation_09) = {

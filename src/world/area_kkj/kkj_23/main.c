@@ -13,7 +13,7 @@ EvtScript N(EVS_EndPeachChapter6) = {
 
 EvtScript N(EVS_ExitDoors_kkj_22_1) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, kkj_23_ENTRY_0)
     Set(LVar1, COLLIDER_tte)
     Set(LVar2, MODEL_o5)
@@ -57,9 +57,9 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
     IfEq(GB_StoryProgress, STORY_CH6_BEGAN_PEACH_MISSION)
         Call(N(SetAvailableDisguise), PEACH_DISGUISE_KOOPATROL)
-        Call(MakeNpcs, FALSE, Ref(N(PeachNPCs)))
+        Call(MakeNpcs, false, Ref(N(PeachNPCs)))
     Else
-        Call(MakeNpcs, FALSE, Ref(N(FinaleNPCs)))
+        Call(MakeNpcs, false, Ref(N(FinaleNPCs)))
     EndIf
     Exec(N(EVS_SetupMusic))
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)

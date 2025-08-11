@@ -33,7 +33,7 @@ API_CALLABLE(N(ChangeNpcToPartner)) {
             break;
         case 2:
             playerData->curPartner = partnerID;
-            playerData->partners[partnerID].enabled = TRUE;
+            playerData->partners[partnerID].enabled = true;
             partner_clear_player_tracking(npc);
             func_800EB2A4(playerData->curPartner);
             script->functionTemp[0] = 3;

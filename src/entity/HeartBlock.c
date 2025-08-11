@@ -15,7 +15,7 @@ extern Gfx Entity_HeartBlockContent_RenderHeartSleeping[];
 extern Gfx Entity_HeartBlockContent_RenderHeartAwake[];
 extern Gfx Entity_HeartBlockContent_RenderHeartHappy[];
 
-BSS u32 HeartBlockPrinterClosed;
+BSS bool HeartBlockPrinterClosed;
 
 f32 entity_HeartBlockContent_get_previous_yaw(HeartBlockContentData* data, s32 lagTime) {
     s32 bufIdx = data->yawBufferPos - lagTime;
@@ -359,7 +359,7 @@ void entity_HeartBlock_change_render_script(Entity* entity) {
 
 void entity_HeartBlock_show_tutorial_message(Entity* entity) {
     if (!gPlayerData.partners[PARTNER_GOOMBARIO].enabled && !get_global_flag(GF_Tutorial_HeartBlock)) {
-        HeartBlockPrinterClosed = FALSE;
+        HeartBlockPrinterClosed = false;
         msg_get_printer_for_msg(MSG_Menus_Tutorial_HeartBlock, &HeartBlockPrinterClosed);
         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
@@ -389,7 +389,7 @@ s8 entity_HeartBlock_create_child_entity(Entity* entity, EntityBlueprint* bp) {
     data = childEntity->dataBuf.heartBlockContent;
     data->parentEntityIndex = entity->listIndex;
 
-    if (useAltSparkleType == FALSE) {
+    if (useAltSparkleType == false) {
         data->sparkleEffectType = 3;
     } else {
         data->sparkleEffectType = 6;

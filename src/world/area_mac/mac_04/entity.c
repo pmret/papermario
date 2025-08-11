@@ -55,7 +55,7 @@ void N(appendGfx_shrunk_player)(void* data) {
 
 EvtScript N(EVS_ShrinkPlayer) = {
     SetF(MV_PlayerShrinkScale, Float(1.0))
-    Call(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, TRUE)
+    Call(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, true)
     Call(N(CreateShrinkingWorker))
     Thread
         Wait(8)
@@ -76,7 +76,7 @@ EvtScript N(EVS_ShrinkPlayer) = {
 
 EvtScript N(EVS_UnshrinkPlayer) = {
     SetF(MV_PlayerShrinkScale, Float(0.2))
-    Call(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, TRUE)
+    Call(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, true)
     Call(N(CreateShrinkingWorker))
     Thread
         Call(MakeLerp, 20, 100, 40, EASING_QUADRATIC_OUT)
@@ -95,7 +95,7 @@ EvtScript N(EVS_UnshrinkPlayer) = {
 };
 
 EvtScript N(EVS_FinishUnshrinking) = {
-    Call(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, FALSE)
+    Call(SetPlayerFlagBits, PS_FLAG_TIME_STOPPED, false)
     Call(N(DestroyShrinkingWorker))
     Return
     End
@@ -112,8 +112,8 @@ EvtScript N(EVS_FocusCameraOnPlayer) = {
 };
 
 EvtScript N(EVS_EnterToybox) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     ExecWait(N(EVS_ShrinkPlayer))
     Call(SetPlayerActionState, ACTION_STATE_JUMP)
     Wait(1)
@@ -140,8 +140,8 @@ EvtScript N(EVS_EnterToybox) = {
         Call(PlayerJump, -450, 20, -160, 32)
     EndThread
     Wait(25)
-    IfEq(GF_StartedChapter4, FALSE)
-        Set(GF_StartedChapter4, TRUE)
+    IfEq(GF_StartedChapter4, false)
+        Set(GF_StartedChapter4, true)
         Call(FadeOutMusic, 0, 1500)
         Call(GotoMapSpecial, Ref("kmr_22"), kmr_22_ENTRY_4, TRANSITION_BEGIN_OR_END_CHAPTER)
         Wait(100)
@@ -154,9 +154,9 @@ EvtScript N(EVS_EnterToybox) = {
 };
 
 EvtScript N(EVS_ExitToybox) = {
-    Set(AF_ExitingToybox, TRUE)
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Set(AF_ExitingToybox, true)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     ExecWait(N(EVS_UnshrinkPlayer))
     Call(SetPlayerActionState, ACTION_STATE_JUMP)
     Wait(1)
@@ -182,32 +182,32 @@ EvtScript N(EVS_ExitToybox) = {
     Call(PlayerJump, -480, 45, -90, 25)
     ExecWait(N(EVS_FinishUnshrinking))
     KillThread(LVarA)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Return
     End
 };
 
 EvtScript N(EVS_BounceOffSpring) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_JUMP)
     Wait(1)
     ExecGetTID(N(EVS_FocusCameraOnPlayer), LVarA)
     Call(SetPlayerJumpscale, Float(0.7))
     Call(PlayerJump, -430, 20, -45, 15)
-    Set(AF_ExitingToybox, FALSE)
+    Set(AF_ExitingToybox, false)
     KillThread(LVarA)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Return
     End
 };
 
 EvtScript N(EVS_UseSpring_Toybox) = {
-    IfEq(AF_ExitingToybox, FALSE)
+    IfEq(AF_ExitingToybox, false)
         Exec(N(EVS_EnterToybox))
     Else
         Exec(N(EVS_BounceOffSpring))
@@ -247,19 +247,19 @@ EvtScript N(EVS_ItemPrompt_StoreroomKey) = {
     Call(RemoveKeyItemAt, LVar1)
     Call(CloseChoicePopup)
     Unbind
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SpeakToPlayer, NPC_HarryT, ANIM_HarryT_Talk, ANIM_HarryT_Idle, 0, MSG_MAC_Housing_0004)
-    Call(SetNpcFlagBits, NPC_HarryT, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_HarryT, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetNpcAnimation, NPC_HarryT, ANIM_HarryT_Run)
     Call(NpcMoveTo, NPC_HarryT, 295, -460, 0)
     Call(NpcMoveTo, NPC_HarryT, 230, -480, 0)
     Call(NpcJump0, NPC_HarryT, 200, 30, -524, 0)
     Call(SetNpcPos, NPC_HarryT, 200, 30, -524)
     Call(SetNpcAnimation, NPC_HarryT, ANIM_HarryT_Idle)
-    Call(SetNpcFlagBits, NPC_HarryT, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_HarryT, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Call(SpeakToPlayer, NPC_HarryT, ANIM_HarryT_Talk, ANIM_HarryT_Idle, 0, MSG_MAC_Housing_0005)
     Set(GB_StoryProgress, STORY_CH4_RETURNED_STOREROOM_KEY)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -272,9 +272,9 @@ EvtScript N(EVS_ForceStoreroomUnlock) = {
 };
 
 EvtScript N(EVS_OnInspect_StreetSign) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_0173, 160, 40)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -291,7 +291,7 @@ EvtScript N(EVS_MakeEntities) = {
     Thread
         IfLt(GB_StoryProgress, STORY_CH4_GOT_TOY_TRAIN)
             Loop(0)
-                IfNe(GF_MAC04_Item_ToyTrain, FALSE)
+                IfNe(GF_MAC04_Item_ToyTrain, false)
                     Set(GB_StoryProgress, STORY_CH4_GOT_TOY_TRAIN)
                     BreakLoop
                 EndIf

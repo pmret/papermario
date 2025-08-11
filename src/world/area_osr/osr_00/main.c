@@ -69,10 +69,10 @@ EvtScript N(EVS_Main) = {
     Switch(GB_StoryProgress)
         CaseEq(STORY_INTRO)
             Call(N(CreateSunshine))
-            Call(MakeNpcs, FALSE, Ref(N(IntroNPCs)))
+            Call(MakeNpcs, false, Ref(N(IntroNPCs)))
         CaseGe(STORY_EPILOGUE)
             Call(N(SpawnSunEffect))
-            Call(MakeNpcs, FALSE, Ref(N(EpilogueNPCs)))
+            Call(MakeNpcs, false, Ref(N(EpilogueNPCs)))
     EndSwitch
     Call(GetEntryID, LVar0)
     IfNe(LVar0, osr_00_ENTRY_3)

@@ -107,8 +107,8 @@ EvtScript N(EVS_ManageSecretPassage) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o2226, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o2226, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o2227, COLLIDER_FLAGS_UPPER_MASK)
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Wait(10 * DT)
     Thread
         Call(PlaySoundAtCollider, COLLIDER_o2092, SOUND_LARGE_LENS_FLARE, SOUND_SPACE_DEFAULT)
@@ -138,8 +138,8 @@ EvtScript N(EVS_ManageSecretPassage) = {
         EndLoop
     EndThread
     Wait(10 * DT)
-    Set(MV_HiddenStairsRevealed, FALSE)
-    Set(MV_PlayerPanicDone, FALSE)
+    Set(MV_HiddenStairsRevealed, false)
+    Set(MV_PlayerPanicDone, false)
     Thread
         Wait(20 * DT)
         Label(20)
@@ -166,7 +166,7 @@ EvtScript N(EVS_ManageSecretPassage) = {
             Goto(30)
         EndIf
         Call(PlayerMoveTo, 0, 555, 0)
-        Set(MV_PlayerPanicDone, TRUE)
+        Set(MV_PlayerPanicDone, true)
     EndThread
     Wait(40 * DT)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
@@ -174,10 +174,10 @@ EvtScript N(EVS_ManageSecretPassage) = {
     Call(SetCamDistance, CAM_DEFAULT, 140)
     Call(SetCamPitch, CAM_DEFAULT, Float(22.7), Float(-22.7))
     Call(SetPanTarget, CAM_DEFAULT, 0, -520, 530)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
-    Call(EnableGroup, MODEL_15, TRUE)
-    Call(EnableGroup, MODEL_g377, FALSE)
-    Call(EnableModel, MODEL_o2205, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
+    Call(EnableGroup, MODEL_15, true)
+    Call(EnableGroup, MODEL_g377, false)
+    Call(EnableModel, MODEL_o2205, false)
     Wait(60)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
     Call(UseSettingsFrom, CAM_DEFAULT, 0, -520, 530)
@@ -187,19 +187,19 @@ EvtScript N(EVS_ManageSecretPassage) = {
     Wait(90 * DT)
     Exec(N(EVS_DropHiddenStairs))
     Wait(60 * DT)
-    Set(MV_HiddenStairsRevealed, TRUE)
+    Set(MV_HiddenStairsRevealed, true)
     Wait(100 * DT)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Wait(1)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Set(GB_StoryProgress, STORY_CH2_SOLVED_ARTIFACT_PUZZLE)
     Call(SetMusic, 0, SONG_RUINS_BASEMENT, 0, VOL_LEVEL_FULL)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2186, COLLIDER_FLAGS_UPPER_MASK)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

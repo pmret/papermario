@@ -4,7 +4,7 @@ EvtScript N(EVS_SetupMusic) = {
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(flo_00_ENTRY_8)
-            IfNe(AF_FLO_RidingBeanstalk, FALSE)
+            IfNe(AF_FLO_RidingBeanstalk, false)
                 Call(SetMusic, 0, SONG_MAGIC_BEANSTALK, BGM_VARIATION_1, VOL_LEVEL_FULL)
             Else
                 Call(SetMusic, 0, SONG_FLOWER_FIELDS_SUNNY, 0, VOL_LEVEL_FULL)

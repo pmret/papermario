@@ -113,7 +113,7 @@ EvtScript N(EVS_NpcInteract_MayorPenguin) = {
                 Set(MV_PlayerLeftOfMayor, 1)
             EndIf
             Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003A)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Call(SetNpcAnimation, NPC_SELF, ANIM_MayorPenguin_Walk)
             Call(NpcMoveTo, NPC_SELF, -338, -247, 20)
             Call(PlaySoundAtCollider, COLLIDER_yana, SOUND_WOODEN_DOOR_OPEN, 0)
@@ -160,11 +160,11 @@ EvtScript N(EVS_NpcInteract_MayorPenguin) = {
             Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
             Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-8.5))
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003D)
             Call(ResetCam, CAM_DEFAULT, Float(3.0 / DT))
-            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(PanToTarget, CAM_DEFAULT, 0, false)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
             Set(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_BUCKET)
         CaseLt(STORY_CH7_UNLOCKED_SHIVER_MOUNTAIN)
             Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003E)
@@ -185,9 +185,9 @@ EvtScript N(EVS_NpcInteract_MayorPenguin) = {
 EvtScript N(EVS_NpcInteract_MayorPenguinWife) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            IfEq(GF_SAM01_Met_MayorsWife, FALSE)
+            IfEq(GF_SAM01_Met_MayorsWife, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Talk, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0000)
-                Set(GF_SAM01_Met_MayorsWife, TRUE)
+                Set(GF_SAM01_Met_MayorsWife, true)
             Else
                 Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Talk, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0001)
             EndIf
@@ -221,7 +221,7 @@ EvtScript N(EVS_NpcIdle_PenguinPatrol) = {
     Label(0)
         Switch(GB_StoryProgress)
             CaseEq(STORY_CH7_HERRINGWAY_AT_MAYORS_HOUSE)
-                IfEq(AF_SAM_03, TRUE)
+                IfEq(AF_SAM_03, true)
                     Call(GetPlayerPos, LVar0, LVar1, LVar2)
                     IfLt(LVar2, -130)
                         ExecWait(N(EVS_Scene_MysterySolved))
@@ -235,7 +235,7 @@ EvtScript N(EVS_NpcIdle_PenguinPatrol) = {
 };
 
 EvtScript N(EVS_NpcInteract_Herringway) = {
-    IfEq(AF_SAM_04, FALSE)
+    IfEq(AF_SAM_04, false)
         Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D3)
     Else
         Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D4)
@@ -389,10 +389,10 @@ EvtScript N(EVS_NpcInteract_Penguin_04) = {
 };
 
 EvtScript N(EVS_PenguinCrowd_Leave) = {
-    Call(SetNpcFlagBits, NPC_Penguin_05, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Penguin_06, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Penguin_07, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Penguin_08, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Penguin_05, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Penguin_06, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Penguin_07, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Penguin_08, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(BindNpcInteract, NPC_Penguin_05, 0)
     Call(BindNpcInteract, NPC_Penguin_06, 0)
     Call(BindNpcInteract, NPC_Penguin_07, 0)
@@ -532,7 +532,7 @@ EvtScript N(EVS_NpcInit_PenguinPatrol) = {
 EvtScript N(EVS_NpcInit_Herringway) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH7_SPOKE_WITH_HERRINGWAY)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, true)
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         CaseLt(STORY_CH7_HERRINGWAY_AT_MAYORS_HOUSE)
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
@@ -542,7 +542,7 @@ EvtScript N(EVS_NpcInit_Herringway) = {
             Call(SetNpcPos, NPC_SELF, -228, 0, 91)
             Call(InterpNpcYaw, NPC_SELF, 270, 0)
         CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, true)
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EndSwitch
     Return
@@ -626,8 +626,8 @@ EvtScript N(EVS_NpcInit_Penguin_09) = {
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_Inspect_Present)))
 #endif
     IfLt(GB_StoryProgress, STORY_CH7_MAYOR_MURDER_SOLVED)
-        Call(SetNpcFlagBits, NPC_Penguin_09, NPC_FLAG_INVISIBLE | NPC_FLAG_USE_INSPECT_ICON, TRUE)
-        Call(EnableNpcShadow, NPC_Penguin_09, FALSE)
+        Call(SetNpcFlagBits, NPC_Penguin_09, NPC_FLAG_INVISIBLE | NPC_FLAG_USE_INSPECT_ICON, true)
+        Call(EnableNpcShadow, NPC_Penguin_09, false)
         Call(SetNpcPos, NPC_Penguin_09, -325, 0, -240)
     EndIf
     Return
@@ -696,7 +696,7 @@ NpcData N(NpcData_MayorPenguin)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -150, 0, 400 },
@@ -719,7 +719,7 @@ NpcData N(NpcData_MayorPenguin)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 100, 0, 250 },
@@ -742,7 +742,7 @@ NpcData N(NpcData_MayorPenguin)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 400, 0, 50 },

@@ -116,7 +116,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -219,13 +219,13 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Wait(10)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOO_APPEAR_A)
@@ -256,7 +256,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(UseBattleCamPreset, BTL_CAM_ACTOR_FAR)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 30)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOO_VANISH_A)
     Set(LVar0, 55)
     Loop(20)
@@ -320,7 +320,7 @@ EvtScript N(EVS_TakeTurn) = {
             EndLoop
             Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 255)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -339,9 +339,9 @@ EvtScript N(EVS_TakeTurn) = {
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BOW_SMACK)
         Add(LVarA, 1)
         Call(SetPartScale, ACTOR_SELF, PRT_MAIN, Float(1.4), Float(1.4), Float(1.0))
-        IfEq(LFlag0, FALSE)
+        IfEq(LFlag0, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBow_SlapOnce)
-            Set(LFlag0, TRUE)
+            Set(LFlag0, true)
             IfEq(LVarA, LVar8)
                 Call(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
             Else
@@ -349,7 +349,7 @@ EvtScript N(EVS_TakeTurn) = {
             EndIf
         Else
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBow_SlapBack)
-            Set(LFlag0, FALSE)
+            Set(LFlag0, false)
             IfEq(LVarA, LVar8)
                 Call(SetDamageSource, DMG_SRC_LAST_SLAP_RIGHT)
             Else
@@ -414,7 +414,7 @@ EvtScript N(EVS_TakeTurn) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

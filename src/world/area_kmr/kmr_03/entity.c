@@ -9,7 +9,7 @@ EvtScript N(EVS_OnSmashBlock1) = {
 };
 
 EvtScript N(EVS_OnSmashBlock2) = {
-    Set(GF_KMR03_Hammer1Block, TRUE)
+    Set(GF_KMR03_Hammer1Block, true)
     Return
     End
 };
@@ -47,7 +47,7 @@ EvtScript N(EVS_MakeEntities) = {
     Else
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
-    IfEq(GF_KMR03_Hammer1Block, FALSE)
+    IfEq(GF_KMR03_Hammer1Block, false)
         Call(MakeEntity, Ref(Entity_Hammer2Block), 230, 0, 310, 15, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnSmashBlock2)))
     EndIf

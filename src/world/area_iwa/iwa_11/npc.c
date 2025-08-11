@@ -5,7 +5,7 @@
 #include "world/common/npc/Dryite_Stationary.inc.c"
 
 EvtScript N(EVS_NpcInit_TrainToad) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(GetEntryID, LVar0)
     IfEq(LVar0, iwa_11_ENTRY_0)
         Call(SetNpcPos, NPC_SELF, -425, 70, -20)

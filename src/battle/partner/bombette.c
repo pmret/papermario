@@ -165,9 +165,9 @@ API_CALLABLE(N(GetBombDamage)) {
     }
 
     if (mashResult > 99) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     } else {
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
     }
 
     script->varTable[15] = damage;
@@ -212,9 +212,9 @@ API_CALLABLE(N(GetPowerBombDamage)) {
     }
 
     if (mashResult > 99) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     } else {
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
     }
 
     script->varTable[15] = damage;
@@ -246,9 +246,9 @@ API_CALLABLE(N(GetMegaBombDamage)) {
     }
 
     if (mashResult > 99) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     } else {
-        script->varTable[0] = FALSE;
+        script->varTable[0] = false;
     }
 
     script->varTable[15] = damage;
@@ -350,7 +350,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(InterruptActionCommand)
     Call(StopSound, SOUND_LRAW_BOMBETTE_FUSE)
     Call(GetLastEvent, ACTOR_PARTNER, LVar0)
@@ -417,17 +417,17 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetActorSpeed, ACTOR_PARTNER, Float(4.0))
             Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.6))
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Aftermath)
-            Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 20, false, true, false)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
             Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
             Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
             Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 8, false, true, false)
             Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_PARTNER, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 5, false, true, false)
             SetConst(LVar1, ANIM_BattleBombette_Hurt)
             ExecWait(EVS_Partner_Drop)
         CaseEq(EVENT_BURN_CONTACT)
@@ -441,7 +441,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleBombette_BurnHurt, ANIM_BattleBombette_BurnHurt, ANIM_BattleBombette_BurnHurt)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_BurnHurt)
             Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_PARTNER, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 5, false, true, false)
             SetConst(LVar1, ANIM_BattleBombette_BurnHurt)
             SetConst(LVar2, ANIM_BattleBombette_BurnStill)
             ExecWait(EVS_Partner_BurnHit)
@@ -482,17 +482,17 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetActorSpeed, ACTOR_PARTNER, Float(4.0))
             Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.6))
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Aftermath)
-            Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 20, false, true, false)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
             Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
             Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
             Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 8, false, true, false)
             Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_PARTNER, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 5, false, true, false)
             SetConst(LVar1, ANIM_BattleBombette_Hurt)
             ExecWait(EVS_Partner_Drop)
         CaseEq(EVENT_SHOCK_HIT)
@@ -513,7 +513,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.1))
             Call(SetJumpAnimations, ACTOR_PARTNER, 0, LVarA, LVarA, LVarA)
             Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_PARTNER, 5, FALSE, FALSE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 5, false, false, false)
             Call(ShowShockEffect, ACTOR_SELF)
             Set(LVar1, LVarA)
             Set(LVar2, 0)
@@ -557,17 +557,17 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetActorSpeed, ACTOR_PARTNER, Float(4.0))
             Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.6))
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Aftermath)
-            Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 20, false, true, false)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
             Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
             Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 10, false, true, false)
             Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 8, false, true, false)
             Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_PARTNER, 5, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 5, false, true, false)
             SetConst(LVar1, ANIM_BattleBombette_Hurt)
             ExecWait(EVS_Partner_Drop)
         CaseEq(EVENT_33)
@@ -589,7 +589,7 @@ EvtScript N(EVS_HandleEvent) = {
         EndCaseGroup
         CaseDefault
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };
@@ -623,8 +623,8 @@ EvtScript N(EVS_Celebrate) = {
 };
 
 EvtScript N(EVS_ExecuteAction) = {
-    Call(ShowActionHud, TRUE)
-    Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+    Call(ShowActionHud, true)
+    Call(SetBattleFlagBits, BS_FLAGS1_4000, false)
     Call(GetMenuSelection, LVar0, LVar1, LVar2)
     Switch(LVar0)
         CaseEq(BTL_MENU_TYPE_STAR_POWERS)
@@ -674,14 +674,14 @@ EvtScript N(EVS_RunAway) = {
 };
 
 EvtScript N(EVS_RunAwayFail) = {
-    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(SetActorSpeed, ACTOR_PARTNER, Float(6.0))
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Run)
     Call(SetActorYaw, ACTOR_PARTNER, 0)
     Call(RunToGoal, ACTOR_PARTNER, 0)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Idle)
-    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Return
     End
 };
@@ -701,24 +701,24 @@ EvtScript N(EVS_ReturnHome_Success) = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.4))
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 25, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 25, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire1)
     Wait(1)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
     Sub(LVar0, 30)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 8, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire1)
     Wait(1)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
     Sub(LVar0, 20)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 6, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 6, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire1)
     Wait(1)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
     Sub(LVar0, 10)
-    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire1)
     Wait(1)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Idle)
@@ -742,24 +742,24 @@ EvtScript N(EVS_ReturnHome_Miss) = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.4))
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 15, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire1)
     Wait(1)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
     Sub(LVar0, 30)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 8, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire1)
     Wait(1)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
     Sub(LVar0, 20)
     Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_PARTNER, 6, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 6, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire1)
     Wait(1)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
     Sub(LVar0, 10)
-    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, false, true, false)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire1)
     Wait(1)
     Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Idle)
@@ -816,7 +816,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
     Set(LF_MashStarted, 0)
     Loop(60)
         Call(CheckButtonDown, BUTTON_A, LVar0)
-        IfNe(LVar0, FALSE)
+        IfNe(LVar0, false)
             Set(LF_MashStarted, 1)
             BreakLoop
         EndIf
@@ -829,7 +829,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
         ExecGetTID(N(runToTarget), LVarA)
         Loop(35)
             Call(CheckButtonDown, BUTTON_A, LVar0)
-            IfEq(LVar0, FALSE)
+            IfEq(LVar0, false)
                 Set(LF_MashEnded, 1)
                 BreakLoop
             EndIf
@@ -843,7 +843,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
         ExecGetTID(N(animBrace), LVarA)
         Loop(30)
             Call(CheckButtonDown, BUTTON_A, LVar0)
-            IfEq(LVar0, FALSE)
+            IfEq(LVar0, false)
                 Set(LF_MashEnded, 1)
                 BreakLoop
             EndIf
@@ -857,7 +857,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             ExecGetTID(N(animHold), LVarA)
             Loop(30)
                 Call(CheckButtonDown, BUTTON_A, LVar0)
-                IfEq(LVar0, FALSE)
+                IfEq(LVar0, false)
                     Set(LF_MashEnded, 1)
                     BreakLoop
                 EndIf
@@ -873,14 +873,14 @@ EvtScript N(EVS_Attack_BodySlam) = {
         ExecGetTID(N(runToTarget), LVarA)
         Loop(35)
             Call(CheckButtonDown, BUTTON_A, LVar0)
-            IfNe(LVar0, FALSE)
+            IfNe(LVar0, false)
                 IfEq(LF_MashStarted, 0)
                     Call(action_command_body_slam_start, 0, 92, AC_DIFFICULTY_STANDARD, ACV_SLAM_BOMBETTE)
                     Set(LF_MashStarted, 1)
                 EndIf
             EndIf
             IfEq(LF_MashStarted, 1)
-                IfEq(LVar0, FALSE)
+                IfEq(LVar0, false)
                     Set(LF_MashEnded, 1)
                     BreakLoop
                 EndIf
@@ -895,14 +895,14 @@ EvtScript N(EVS_Attack_BodySlam) = {
         ExecGetTID(N(animBrace), LVarA)
         Loop(30)
             Call(CheckButtonDown, BUTTON_A, LVar0)
-            IfNe(LVar0, FALSE)
+            IfNe(LVar0, false)
                 IfEq(LF_MashStarted, 0)
                     Call(action_command_body_slam_start, 0, 92, AC_DIFFICULTY_STANDARD, ACV_SLAM_BOMBETTE)
                     Set(LF_MashStarted, 1)
                 EndIf
             EndIf
             IfEq(LF_MashStarted, 1)
-                IfEq(LVar0, FALSE)
+                IfEq(LVar0, false)
                     Set(LF_MashEnded, 1)
                     BreakLoop
                 EndIf
@@ -917,7 +917,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             ExecGetTID(N(animHold), LVarA)
             Loop(30)
                 Call(CheckButtonDown, BUTTON_A, LVar0)
-                IfEq(LVar0, FALSE)
+                IfEq(LVar0, false)
                     Set(LF_MashEnded, 1)
                     BreakLoop
                 EndIf
@@ -1333,7 +1333,7 @@ EvtScript N(EVS_Attack_Bomb) = {
             Call(SetActorSpeed, ACTOR_PARTNER, Float(4.0))
             Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.6))
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Aftermath)
-            Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 20, false, true, false)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Idle)
         EndCaseGroup
     EndSwitch
@@ -1430,7 +1430,7 @@ EvtScript N(EVS_Attack_FirstStrike) = {
             Call(SetActorSpeed, ACTOR_PARTNER, Float(4.0))
             Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.6))
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Aftermath)
-            Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_PARTNER, 20, false, true, false)
             Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Idle)
         EndCaseGroup
     EndSwitch

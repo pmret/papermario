@@ -73,13 +73,13 @@ EvtScript N(EVS_FocusCam_Door_Ch2) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamPosA, CAM_DEFAULT, Float(-310.0), Float(32.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Return
     End
 };
 
 EvtScript N(EVS_Scene_Chapter2) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetMusic, 0, SONG_BOWSER_THEME, 0, VOL_LEVEL_FULL)
     Call(DisablePartnerAI, 0)
     Call(SetNpcPos, NPC_PARTNER, 110, 0, -190)
@@ -233,7 +233,7 @@ EvtScript N(EVS_Scene_Chapter2) = {
     Exec(N(EVS_SetupMusic))
     Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
     Call(EnablePartnerAI)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

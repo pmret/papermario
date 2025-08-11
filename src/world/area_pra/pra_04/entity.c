@@ -51,8 +51,8 @@ EvtScript N(EVS_TetherCamToPlayerWithCeiling) = {
 };
 
 EvtScript N(EVS_UseSpring) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAUNCH)
     Call(GetPlayerPos, LVar7, LVar8, LVar9)
     IfEq(MV_PlayerFloor, 0)
@@ -74,16 +74,16 @@ EvtScript N(EVS_UseSpring) = {
     KillThread(LVarA)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
     Wait(2)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_BreakFloor) = {
-    Set(GF_PRA04_BoardedFloor, TRUE)
+    Set(GF_PRA04_BoardedFloor, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitts, COLLIDER_FLAGS_UPPER_MASK)
-    Call(EnableModel, MODEL_o994, FALSE)
+    Call(EnableModel, MODEL_o994, false)
     Return
     End
 };
@@ -94,7 +94,7 @@ EvtScript N(EVS_MakeEntities) = {
     EndThread
     Call(MakeEntity, Ref(Entity_ScriptSpring), 124, -200, 80, 0, MAKE_ENTITY_END)
     Call(AssignScript, Ref(N(EVS_UseSpring)))
-    IfEq(GF_PRA04_BoardedFloor, FALSE)
+    IfEq(GF_PRA04_BoardedFloor, false)
         Call(MakeEntity, Ref(Entity_BoardedFloor), 124, 0, 80, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_BreakFloor)))
     EndIf

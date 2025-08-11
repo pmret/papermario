@@ -40,14 +40,14 @@ EvtScript N(EVS_NpcDefeat_ShyGuy) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Set(GF_OMO09_Defeated_CalculatorThief, TRUE)
+            Set(GF_OMO09_Defeated_CalculatorThief, true)
             Call(SetSelfVar, 10, 1)
             Wait(2)
             Call(DoNpcDefeat)
         CaseEq(OUTCOME_PLAYER_FLED)
             Call(OnPlayerFled, 0)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
             Call(SetSelfVar, 10, 1)
     EndSwitch
@@ -56,14 +56,14 @@ EvtScript N(EVS_NpcDefeat_ShyGuy) = {
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy) = {
-    IfEq(GF_OMO09_Defeated_CalculatorThief, TRUE)
-        IfEq(GF_OMO01_Item_Calculator, FALSE)
+    IfEq(GF_OMO09_Defeated_CalculatorThief, true)
+        IfEq(GF_OMO01_Item_Calculator, false)
             Call(RemoveNpc, NPC_SELF)
         EndIf
     EndIf
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_ShyGuy)))
     Set(LVar0, NPC_ShyGuy_01)
-    IfEq(GF_OMO01_Item_Calculator, FALSE)
+    IfEq(GF_OMO01_Item_Calculator, false)
         Set(LVar1, ITEM_CALCULATOR)
         Set(LVar2, ITEM_TYPE_KEY)
         SetConst(LVar3, GF_OMO01_Item_Calculator)
@@ -83,7 +83,7 @@ NpcData N(NpcData_ShyGuy_01) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -165, 0, -50 },
@@ -118,7 +118,7 @@ NpcData N(NpcData_ShyGuy_02) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -25, 0, -160 },
@@ -153,7 +153,7 @@ NpcData N(NpcData_ShyGuy_03) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -60, 0, 390 },
@@ -188,7 +188,7 @@ NpcData N(NpcData_ShyGuy_04) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 50, 0, 230 },
@@ -223,7 +223,7 @@ NpcData N(NpcData_ShyGuy_05) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 340, 0, 120 },

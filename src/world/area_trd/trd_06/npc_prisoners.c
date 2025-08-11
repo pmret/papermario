@@ -27,7 +27,7 @@ NpcSettings N(NpcSettings_KoopaTroopa) = {
 EvtScript N(EVS_Bombette_DemonstrateAbility) = {
     Call(SetPanTarget, CAM_DEFAULT, 96, 0, 129)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.6 / DT))
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(DisablePartnerAI, 0)
     Thread
         Call(SetNpcAnimation, NPC_PARTNER, ANIM_WorldBombette_Walk)
@@ -42,7 +42,7 @@ EvtScript N(EVS_Bombette_DemonstrateAbility) = {
     Call(GetAngleToNPC, NPC_PARTNER, LVar0)
     Call(InterpPlayerYaw, LVar0, 5)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_00E1)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(EnablePartnerAI)
     Return
     End
@@ -71,8 +71,8 @@ EvtScript N(EVS_NpcInteract_Bombette) = {
         Call(PlayerFaceNpc, NPC_Bombette, 3)
     EndIf
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    IfEq(GF_TRD06_Met_Bombette, FALSE)
-        Set(GF_TRD06_Met_Bombette, TRUE)
+    IfEq(GF_TRD06_Met_Bombette, false)
+        Set(GF_TRD06_Met_Bombette, true)
         Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_00DA)
         Wait(10 * DT)
         Call(SetPlayerAnimation, ANIM_Mario1_NodYes)
@@ -91,11 +91,11 @@ EvtScript N(EVS_NpcInteract_Bombette) = {
         EndIf
     EndIf
     IfEq(LVar0, 0)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(SetNpcJumpscale, NPC_SELF, Float(0.8))
         Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 15 * DT)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
         Call(ContinueSpeech, NPC_SELF, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_00DE)
         Call(N(ChangeNpcToPartner), NPC_Bombette, PARTNER_BOMBETTE)
         Set(GB_StoryProgress, STORY_CH1_BOMBETTE_JOINED_PARTY)
@@ -139,7 +139,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa) = {
     IfEq(LVar0, 0)
         Goto(0)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PlaySoundAtCollider, COLLIDER_ttw, SOUND_METAL_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     Call(MakeLerp, 0, 90, 15, EASING_COS_IN_OUT)
     Label(10)
@@ -159,9 +159,9 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa) = {
     Call(SetNpcAnimation, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Run)
     Call(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Run)
     Call(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Run)
-    Call(SetNpcFlagBits, NPC_Jailer_KoopaTroopa, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Jailer_Bobomb_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Jailer_Bobomb_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Jailer_KoopaTroopa, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Jailer_Bobomb_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Jailer_Bobomb_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Thread
         Call(NpcMoveTo, NPC_Jailer_KoopaTroopa, -237, 0, 0)
     EndThread
@@ -175,13 +175,13 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa) = {
     Call(SetPanTarget, CAM_DEFAULT, -260, 0, 0)
     Call(SetCamDistance, CAM_DEFAULT, 300)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Idle)
     Call(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Idle)
     Call(SpeakToPlayer, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Run, ANIM_KoopaTroopa_Idle, 0, MSG_CH1_00F0)
     Call(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Run)
     Call(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Run)
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Thread
         Wait(60)
         Call(MakeLerp, 90, 0, 15, EASING_COS_IN_OUT)
@@ -215,7 +215,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa) = {
     Call(SpeakToPlayer, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Run, ANIM_KoopaTroopa_Idle, 0, MSG_CH1_00F1)
     Call(SetNpcAnimation, NPC_Jailer_Bobomb_01, ANIM_Bobomb_Run)
     Call(SetNpcAnimation, NPC_Jailer_Bobomb_02, ANIM_Bobomb_Run)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
     End
@@ -230,7 +230,7 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
         CaseEq(OUTCOME_PLAYER_LOST)
 #if VERSION_JP
         CaseEq(OUTCOME_PLAYER_FLED)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(SetPlayerAnimation, ANIM_Mario1_Run)
             Call(PlayerMoveTo, 82, 264, 20)
             Call(SetPlayerAnimation, ANIM_Mario1_Idle)
@@ -245,12 +245,12 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
                 IfGt(LVar0, -120)
                     Goto(10)
                 EndIf
-                Call(DisablePlayerInput, TRUE)
+                Call(DisablePlayerInput, true)
                 Call(SpeakToPlayer, NPC_Jailer_KoopaTroopa, ANIM_KoopaTroopa_Run, ANIM_KoopaTroopa_Idle, 0, MSG_CH1_013B)
-                Call(DisablePlayerInput, FALSE)
+                Call(DisablePlayerInput, false)
                 Call(StartBossBattle, SONG_SPECIAL_BATTLE)
             EndThread
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
 #endif
     EndSwitch
     Return
@@ -276,13 +276,13 @@ EvtScript N(EVS_NpcInit_Bobomb_Jailer) = {
 };
 
 EvtScript N(EVS_NpcInteract_Bobomb_01) = {
-    IfEq(GF_TRD06_BombedWall, FALSE)
-        IfEq(AF_TRD_MetPrisoner1, FALSE)
+    IfEq(GF_TRD06_BombedWall, false)
+        IfEq(AF_TRD_MetPrisoner1, false)
             Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, MSG_CH1_00E4)
-            Set(AF_TRD_MetPrisoner1, TRUE)
+            Set(AF_TRD_MetPrisoner1, true)
         Else
             Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, MSG_CH1_00E5)
-            Set(AF_TRD_MetPrisoner1, FALSE)
+            Set(AF_TRD_MetPrisoner1, false)
         EndIf
     Else
         Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Red_Talk, ANIM_WorldBobomb_Red_Idle, 0, MSG_CH1_00E6)
@@ -292,13 +292,13 @@ EvtScript N(EVS_NpcInteract_Bobomb_01) = {
 };
 
 EvtScript N(EVS_NpcInteract_Bobomb_02) = {
-    IfEq(GF_TRD06_BombedWall, FALSE)
-        IfEq(AF_TRD_MetPrisoner2, FALSE)
+    IfEq(GF_TRD06_BombedWall, false)
+        IfEq(AF_TRD_MetPrisoner2, false)
             Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_00E7)
-            Set(AF_TRD_MetPrisoner2, TRUE)
+            Set(AF_TRD_MetPrisoner2, true)
         Else
             Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_00E8)
-            Set(AF_TRD_MetPrisoner2, FALSE)
+            Set(AF_TRD_MetPrisoner2, false)
         EndIf
     Else
         Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_00E9)
@@ -308,13 +308,13 @@ EvtScript N(EVS_NpcInteract_Bobomb_02) = {
 };
 
 EvtScript N(EVS_NpcInteract_Bobomb_03) = {
-    IfEq(GF_TRD06_BombedWall, FALSE)
-        IfEq(AF_TRD_MetPrisoner3, FALSE)
+    IfEq(GF_TRD06_BombedWall, false)
+        IfEq(AF_TRD_MetPrisoner3, false)
             Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_00EA)
-            Set(AF_TRD_MetPrisoner3, TRUE)
+            Set(AF_TRD_MetPrisoner3, true)
         Else
             Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_00EB)
-            Set(AF_TRD_MetPrisoner3, FALSE)
+            Set(AF_TRD_MetPrisoner3, false)
         EndIf
     Else
         Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_00EC)
@@ -324,13 +324,13 @@ EvtScript N(EVS_NpcInteract_Bobomb_03) = {
 };
 
 EvtScript N(EVS_NpcInteract_Bobomb_04) = {
-    IfEq(GF_TRD06_BombedWall, FALSE)
-        IfEq(AF_TRD_MetPrisoner4, FALSE)
+    IfEq(GF_TRD06_BombedWall, false)
+        IfEq(AF_TRD_MetPrisoner4, false)
             Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_00ED)
-            Set(AF_TRD_MetPrisoner4, TRUE)
+            Set(AF_TRD_MetPrisoner4, true)
         Else
             Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_00EE)
-            Set(AF_TRD_MetPrisoner4, FALSE)
+            Set(AF_TRD_MetPrisoner4, false)
         EndIf
     Else
         Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_00EF)

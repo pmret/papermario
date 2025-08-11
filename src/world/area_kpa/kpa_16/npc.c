@@ -12,7 +12,7 @@ API_CALLABLE(N(SetScreenBlackFadeAmount)) {
 }
 
 API_CALLABLE(N(FadeOutAmbience)) {
-    snd_ambient_fade_out(0, TRUE);
+    snd_ambient_fade_out(0, true);
     return ApiStatus_DONE2;
 }
 
@@ -26,11 +26,11 @@ NpcSettings N(NpcSettings_Dummy) = {
 
 EvtScript N(EVS_Scene_LavaShutoff) = {
     Label(0)
-    IfEq(AF_KPA16_HitSwitch, FALSE)
+    IfEq(AF_KPA16_HitSwitch, false)
         Wait(1)
         Goto(0)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Loop(0)
         Wait(1)
         Call(GetPlayerActionState, LVar0)
@@ -44,7 +44,7 @@ EvtScript N(EVS_Scene_LavaShutoff) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
     Call(SetPanTarget, CAM_DEFAULT, 330, 230, -150)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(1)
     Call(SetPanTarget, CAM_DEFAULT, 330, 170, -150)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
@@ -83,11 +83,11 @@ EvtScript N(EVS_Scene_LavaShutoff) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deiliw, 0)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o952, COLLIDER_FLAGS_UPPER_MASK)
     Exec(N(EVS_TexPan_Steam))
-    Call(EnableGroup, MODEL_before, FALSE)
-    Call(EnableGroup, MODEL_after, TRUE)
+    Call(EnableGroup, MODEL_before, false)
+    Call(EnableGroup, MODEL_after, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o782, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o954, COLLIDER_FLAGS_UPPER_MASK)
-    Set(GF_KPA16_ShutOffLava, TRUE)
+    Set(GF_KPA16_ShutOffLava, true)
     Call(ResetCam, CAM_DEFAULT, Float(90.0))
     Call(MakeLerp, 255, 0, 50 * DT, EASING_LINEAR)
     Loop(0)
@@ -120,7 +120,7 @@ EvtScript N(EVS_Scene_LavaShutoff) = {
             Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 0, MSG_CH8_0022)
     EndSwitch
     Call(EnablePartnerAI)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -157,7 +157,7 @@ EvtScript N(EVS_NpcIdle_Guards) = {
         IfGt(LVar0, 710)
             Goto(0)
         EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PlaySoundAtNpc, NPC_Koopatrol_01, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(PlaySoundAtNpc, NPC_Koopatrol_02, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(PlaySoundAtNpc, NPC_Koopatrol_03, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
@@ -178,7 +178,7 @@ EvtScript N(EVS_NpcIdle_Guards) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(10.0), Float(-10.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Call(SetPlayerSpeed, Float(3.0 / DT))
@@ -236,11 +236,11 @@ EvtScript N(EVS_NpcIdle_Guards) = {
     Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim06)
     Call(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim06)
     Exec(N(EVS_ChargeAtPlayer))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Thread
         Loop(0)
             Wait(1)
-            IfEq(GF_KPA16_Defeated_SwitchGuards, TRUE)
+            IfEq(GF_KPA16_Defeated_SwitchGuards, true)
                 BreakLoop
             EndIf
         EndLoop
@@ -259,7 +259,7 @@ EvtScript N(EVS_NpcDefeat_Guards) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Set(GF_KPA16_Defeated_SwitchGuards, TRUE)
+            Set(GF_KPA16_Defeated_SwitchGuards, true)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o958, COLLIDER_FLAGS_UPPER_MASK)
             Call(DoNpcDefeat)
         CaseEq(OUTCOME_PLAYER_LOST)
@@ -270,10 +270,10 @@ EvtScript N(EVS_NpcDefeat_Guards) = {
 };
 
 EvtScript N(EVS_NpcInit_Guards) = {
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
         Exec(N(EVS_Scene_LavaShutoff))
     EndIf
-    IfEq(GF_KPA16_Defeated_SwitchGuards, FALSE)
+    IfEq(GF_KPA16_Defeated_SwitchGuards, false)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Guards)))
         Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Guards)))
     Else

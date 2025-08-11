@@ -3,9 +3,9 @@
 #include "world/common/atomic/ApplyTint.inc.c"
 
 EvtScript N(EVS_TexPan_ShyGuyFloat_Sides) = {
-    Call(EnableTexPanning, MODEL_omo1, TRUE)
-    Call(EnableTexPanning, MODEL_omo4, TRUE)
-    Call(EnableTexPanning, MODEL_omo6, TRUE)
+    Call(EnableTexPanning, MODEL_omo1, true)
+    Call(EnableTexPanning, MODEL_omo4, true)
+    Call(EnableTexPanning, MODEL_omo6, true)
     Set(LVar1, LVar0)
     Set(LVar0, 0)
     Loop(0)
@@ -18,8 +18,8 @@ EvtScript N(EVS_TexPan_ShyGuyFloat_Sides) = {
 };
 
 EvtScript N(EVS_TexPan_ShyGuyFloat_Top) = {
-    Call(EnableTexPanning, MODEL_omo8, TRUE)
-    Call(EnableTexPanning, MODEL_omo13, TRUE)
+    Call(EnableTexPanning, MODEL_omo8, true)
+    Call(EnableTexPanning, MODEL_omo13, true)
     Set(LVar0, 0)
     Loop(0)
         Add(LVar0, 0x4000)

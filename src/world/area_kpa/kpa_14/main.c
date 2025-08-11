@@ -17,10 +17,10 @@ EvtScript N(EVS_ExitWalk_kpa_13_1) = EVT_EXIT_WALK(60, kpa_14_ENTRY_0, "kpa_13",
 
 EvtScript N(EVS_ExitDoor_kpa_01_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, kpa_14_ENTRY_1)
     Set(LVar1, COLLIDER_deilitte)
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
         Set(LVar2, MODEL_o1035)
     Else
         Set(LVar2, MODEL_o1036)
@@ -139,9 +139,9 @@ EvtScript N(EVS_SetupLavaFall) = {
                 IfLt(LVar1, 120)
                     Switch(LVar0)
                         CaseRange(1200, 1245)
-                            Call(DisablePlayerInput, TRUE)
-                            Call(DisablePlayerPhysics, TRUE)
-                            Set(MV_TakingLavaFallDamage, TRUE)
+                            Call(DisablePlayerInput, true)
+                            Call(DisablePlayerPhysics, true)
+                            Set(MV_TakingLavaFallDamage, true)
                             Call(SetPlayerActionState, ACTION_STATE_LAND)
                             ExecGetTID(N(EVS_MakeSmokeEffects), LVar9)
                             IfEq(MV_LastFloorBeforeLavaFall, COLLIDER_o195)
@@ -156,7 +156,7 @@ EvtScript N(EVS_SetupLavaFall) = {
                             Call(UseSettingsFrom, CAM_DEFAULT, LVar5, 30, -135)
                             Call(SetPanTarget, CAM_DEFAULT, LVar5, 30, -135)
                             Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
-                            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                            Call(PanToTarget, CAM_DEFAULT, 0, true)
                             Call(MakeLerp, LVar0, LVar5, 30, EASING_LINEAR)
                             Loop(0)
                                 Call(UpdateLerp)
@@ -197,11 +197,11 @@ EvtScript N(EVS_SetupLavaFall) = {
                             EndLoop
                             Wait(5)
                             Call(SetPlayerAnimation, ANIM_Mario1_Idle)
-                            Call(DisablePlayerPhysics, FALSE)
-                            Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-                            Call(DisablePlayerInput, FALSE)
+                            Call(DisablePlayerPhysics, false)
+                            Call(PanToTarget, CAM_DEFAULT, 0, false)
+                            Call(DisablePlayerInput, false)
                             Wait(1)
-                            Set(MV_TakingLavaFallDamage, FALSE)
+                            Set(MV_TakingLavaFallDamage, false)
                     EndSwitch
                 EndIf
         EndSwitch
@@ -216,18 +216,18 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
     ExecWait(N(EVS_MakeEntities))
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
-        Call(EnableGroup, MODEL_after, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
+        Call(EnableGroup, MODEL_after, false)
         Exec(N(EVS_TexPan_Lava))
     Else
-        Call(EnableGroup, MODEL_before, FALSE)
+        Call(EnableGroup, MODEL_before, false)
     EndIf
     Exec(N(EVS_EnterMap))
     Exec(N(EVS_SetupMusic))
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
         Exec(N(EVS_SetupPlatforms))
     EndIf
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
         Thread
             Wait(2)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o625, SURFACE_TYPE_LAVA)

@@ -159,7 +159,7 @@ EvtScript N(EVS_FocusCam_Everyone) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 720, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, 720, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, LVar0)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -171,7 +171,7 @@ EvtScript N(EVS_FocusCam_OnPeach) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -184,7 +184,7 @@ EvtScript N(EVS_FocusCam_OnBowser) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, LVar0)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -192,14 +192,14 @@ EvtScript N(EVS_FocusCam_OnBowser) = {
 
 EvtScript N(EVS_Scene_BowserAttacks) = {
     Call(SetMusic, 0, SONG_BOWSER_ATTACKS, 0, VOL_LEVEL_FULL)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetNpcPos, NPC_Peach, 680, 0, -15)
     Call(UseSettingsFrom, CAM_DEFAULT, 600, 0, -15)
     Call(SetPanTarget, CAM_DEFAULT, 600, 0, -15)
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-10.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Call(PlaySound, SOUND_LOOP_KKJ_RUMBLING)
 #if VERSION_PAL
@@ -261,7 +261,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 600, 0, -15)
     Call(SetPanTarget, CAM_DEFAULT, 600, 0, -15)
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 * DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Peach, SPRITE_ID_BACK_FACING | ANIM_Peach1_Idle, SPRITE_ID_BACK_FACING | ANIM_Peach1_Idle, 5, MSG_Intro_004F)
     Wait(30 * DT)
@@ -305,10 +305,10 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     Thread
         Wait(20 * DT)
         Call(N(ScreenWhiteFlashOn))
-        Call(EnableGroup, MODEL_g133, FALSE)
-        Call(EnableGroup, MODEL_g147, FALSE)
-        Call(EnableGroup, MODEL_g152, TRUE)
-        Call(EnableGroup, MODEL_g154, TRUE)
+        Call(EnableGroup, MODEL_g133, false)
+        Call(EnableGroup, MODEL_g147, false)
+        Call(EnableGroup, MODEL_g152, true)
+        Call(EnableGroup, MODEL_g154, true)
         Call(PlaySoundAt, SOUND_GLASS_SHATTER, SOUND_SPACE_DEFAULT, 600, 60, -150)
         PlayEffect(EFFECT_SPARKLES, 0, 600, 60, -150, 120)
         Call(N(ShatterWindow))
@@ -321,7 +321,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     EndThread
     Loop(70 * DT)
         Wait(1)
-        Call(PlayerFaceNpc, NPC_Bowser_Body, FALSE)
+        Call(PlayerFaceNpc, NPC_Bowser_Body, false)
         Call(NpcFaceNpc, NPC_Peach, NPC_Bowser_Body, 0)
     EndLoop
     Call(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Idle)
@@ -351,7 +351,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SpeakToNpc, NPC_Peach, ANIM_Peach2_Shout, ANIM_Peach2_EndShout, 0, NPC_Bowser_Body, MSG_Intro_0051)
     Set(LVar0, Float(1.0))
     ExecWait(N(EVS_FocusCam_OnBowser))
@@ -388,7 +388,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     Call(PlayerMoveTo, 695, 0, 10)
     Call(SetPlayerJumpscale, Float(0.75))
     Call(PlayerJump, 720, 80, 0, 20 * DT)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Loop(0)
         Wait(1)
         Call(GetNpcVar, NPC_Bowser_Body, 0, LVar0)
@@ -411,7 +411,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_Bowser_Body, ANIM_WorldBowser_RearUpLaugh, ANIM_WorldBowser_RearUpLaugh, 5, MSG_Intro_005E)
     Wait(10 * DT)
@@ -462,15 +462,15 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     Wait(30 * DT)
     Call(GotoMap, Ref("osr_03"), osr_03_ENTRY_2)
     Wait(100 * DT)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_Scene_PeachCaptured) = {
     Call(FadeOutMusic, 0, 500)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetNpcAnimation, NPC_Peach, SPRITE_ID_BACK_FACING | ANIM_Peach1_Idle)
     Call(SetNpcYaw, NPC_Peach, 315)
     Call(SetNpcPos, NPC_Peach, 613, 0, -90)
@@ -505,7 +505,7 @@ EvtScript N(EVS_Scene_PeachCaptured) = {
     Call(InterpNpcYaw, NPC_Kammy, 270, 0)
     Call(GotoMap, Ref("hos_10"), hos_10_ENTRY_5)
     Wait(100 * DT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

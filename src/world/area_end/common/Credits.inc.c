@@ -511,7 +511,7 @@ void N(credits_update_line)(CreditsLine* line) {
     s32 posX;
     s32 i;
 
-    doneCurrentState = FALSE;
+    doneCurrentState = false;
     if (line->flags & CREDITS_LINE_FLAG_2) {
         line->flags &= ~CREDITS_LINE_FLAG_2;
         line->time = 0;
@@ -529,7 +529,7 @@ void N(credits_update_line)(CreditsLine* line) {
     do {
         curMsgChar = line->message[readPos++];
         nextMsgChar1 = line->message[readPos];
-        doneCalcLoop = FALSE;
+        doneCalcLoop = false;
 
         switch (curMsgChar) {
             case MSG_CHAR_READ_VARIANT0:
@@ -539,7 +539,7 @@ void N(credits_update_line)(CreditsLine* line) {
                 break;
             case MSG_CHAR_READ_ENDL:
             case MSG_CHAR_READ_END:
-                doneCalcLoop = TRUE;
+                doneCalcLoop = true;
                 break;
             case MSG_CHAR_READ_FUNCTION:
                 // only support function for selecting font
@@ -597,7 +597,7 @@ void N(credits_update_line)(CreditsLine* line) {
     do {
         curMsgChar = line->message[readPos++];
         nextMsgChar2 = line->message[readPos];
-        doneDrawLoop = FALSE;
+        doneDrawLoop = false;
 
         switch (curMsgChar) {
             case MSG_CHAR_READ_VARIANT0:
@@ -607,7 +607,7 @@ void N(credits_update_line)(CreditsLine* line) {
                 break;
             case MSG_CHAR_READ_ENDL:
             case MSG_CHAR_READ_END:
-                doneDrawLoop = TRUE;
+                doneDrawLoop = true;
                 break;
             case MSG_CHAR_READ_FUNCTION:
                 if (line->message[readPos++] == 0) {
@@ -628,7 +628,7 @@ void N(credits_update_line)(CreditsLine* line) {
                                     curChar->fadeInTime = line->appearTime;
                                 }
                                 if ((nextMsgChar2 == MSG_CHAR_READ_END) && (curChar->fadeInTime == line->appearTime)) {
-                                    doneCurrentState = TRUE;
+                                    doneCurrentState = true;
                                 }
                                 switch (line->appearMode) {
                                     case 0:
@@ -656,7 +656,7 @@ void N(credits_update_line)(CreditsLine* line) {
                         case CREDITS_LINE_HOLDING:
                             if (nextMsgChar2 == MSG_CHAR_READ_END) {
                                 if (line->time == line->holdTime) {
-                                    doneCurrentState = TRUE;
+                                    doneCurrentState = true;
                                 }
                             }
                             N(CharAnim_Hold)(line, curChar);
@@ -671,7 +671,7 @@ void N(credits_update_line)(CreditsLine* line) {
                                 curChar->fadeInTime = line->vanishTime;
                             }
                             if (nextMsgChar2 == MSG_CHAR_READ_END && curChar->fadeInTime == line->vanishTime) {
-                                doneCurrentState = TRUE;
+                                doneCurrentState = true;
                             }
 
                             switch (line->vanishMode) {
@@ -767,7 +767,7 @@ void N(credits_load_message)(CreditsEntry* entry) {
     s32 numSpaces;
     s32 i = 0;
 
-    while (TRUE) {
+    while (true) {
         if (!(N(CreditsDataPtr)->lines[i].flags & CREDITS_LINE_FLAG_1)) {
             break;
         }
@@ -838,7 +838,7 @@ API_CALLABLE(N(ShowCreditList)) {
 
     switch (script->varTable[0]) {
         case 0:
-            while (TRUE) {
+            while (true) {
                 if (creditList[script->varTable[2]].msgID != 0) {
                     N(credits_load_message)(&creditList[script->varTable[2]]);
                 }

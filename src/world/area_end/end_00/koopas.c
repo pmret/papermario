@@ -3,7 +3,7 @@
 #include "world/common/atomic/WhaleGeyser.inc.c"
 
 EvtScript N(EVS_FakeBowserFloat) = {
-    Call(EnableModel, MODEL_o81, FALSE)
+    Call(EnableModel, MODEL_o81, false)
     Loop(0)
         Call(MakeLerp, 15, -15, 30, EASING_QUADRATIC_OUT)
         Loop(0)
@@ -29,7 +29,7 @@ EvtScript N(EVS_FakeBowserFloat) = {
 };
 
 EvtScript N(EVS_KoopaBros_Red) = {
-    Call(EnableNpcShadow, NPC_KoopaBrosRed, FALSE)
+    Call(EnableNpcShadow, NPC_KoopaBrosRed, false)
     Wait(150)
     Call(GetNpcPos, NPC_KoopaBrosRed, LVar0, LVar1, LVar2)
     Add(LVar0, 5)
@@ -48,7 +48,7 @@ EvtScript N(EVS_KoopaBros_Red) = {
 };
 
 EvtScript N(EVS_KoopaBros_Black) = {
-    Call(EnableNpcShadow, NPC_KoopaBrosBlack, FALSE)
+    Call(EnableNpcShadow, NPC_KoopaBrosBlack, false)
     Wait(155)
     Call(GetNpcPos, NPC_KoopaBrosBlack, LVar0, LVar1, LVar2)
     Add(LVar0, -5)
@@ -67,7 +67,7 @@ EvtScript N(EVS_KoopaBros_Black) = {
 };
 
 EvtScript N(EVS_KoopaBros_Yellow) = {
-    Call(EnableNpcShadow, NPC_KoopaBrosYellow, FALSE)
+    Call(EnableNpcShadow, NPC_KoopaBrosYellow, false)
     Wait(160)
     Call(GetNpcPos, NPC_KoopaBrosYellow, LVar0, LVar1, LVar2)
     Add(LVar0, 5)
@@ -86,7 +86,7 @@ EvtScript N(EVS_KoopaBros_Yellow) = {
 };
 
 EvtScript N(EVS_KoopaBros_Green) = {
-    Call(EnableNpcShadow, NPC_KoopaBrosGreen, FALSE)
+    Call(EnableNpcShadow, NPC_KoopaBrosGreen, false)
     Wait(165)
     Call(GetNpcPos, NPC_KoopaBrosGreen, LVar0, LVar1, LVar2)
     Add(LVar0, -5)
@@ -105,7 +105,7 @@ EvtScript N(EVS_KoopaBros_Green) = {
 };
 
 EvtScript N(EVS_Bobomb1) = {
-    Call(SetNpcFlagBits, NPC_Bobomb1, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Bobomb1, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
     Wait(180)
     Call(NpcMoveTo, NPC_Bobomb1, -1900, 43, 70)
     Call(SetNpcAnimation, NPC_Bobomb1, ANIM_Bobomb_AngryIdle)
@@ -115,7 +115,7 @@ EvtScript N(EVS_Bobomb1) = {
     Call(SetNpcAnimation, NPC_Bobomb1, ANIM_Bobomb_FaceFwd)
     Call(GetNpcPos, NPC_Bobomb1, LVar0, LVar1, LVar2)
     PlayEffect(EFFECT_00, LVar0, LVar1, LVar2, 1, 20, 3, 2)
-    Call(EnableNpcShadow, NPC_Bobomb1, FALSE)
+    Call(EnableNpcShadow, NPC_Bobomb1, false)
     Call(NpcFlyTo, NPC_Bobomb1, LVar0, 200, LVar2, 10, 0, EASING_LINEAR)
     Call(SetNpcPos, NPC_Bobomb1, -1870, 200, 40)
     Call(NpcFlyTo, NPC_Bobomb1, -1870, 12, 40, 20, 0, EASING_LINEAR)
@@ -127,7 +127,7 @@ EvtScript N(EVS_Bobomb1) = {
 };
 
 EvtScript N(EVS_Bobomb2) = {
-    Call(SetNpcFlagBits, NPC_Bobomb2, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Bobomb2, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
     Wait(180)
     Call(NpcMoveTo, NPC_Bobomb2, -1870, 43, 70)
     Call(SetNpcAnimation, NPC_Bobomb2, ANIM_Bobomb_AngryIdle)
@@ -137,7 +137,7 @@ EvtScript N(EVS_Bobomb2) = {
     Call(SetNpcAnimation, NPC_Bobomb2, ANIM_Bobomb_FaceFwd)
     Call(GetNpcPos, NPC_Bobomb2, LVar0, LVar1, LVar2)
     PlayEffect(EFFECT_00, LVar0, LVar1, LVar2, 1, 20, 3, 2)
-    Call(EnableNpcShadow, NPC_Bobomb2, FALSE)
+    Call(EnableNpcShadow, NPC_Bobomb2, false)
     Call(NpcFlyTo, NPC_Bobomb2, LVar0, 200, LVar2, 10, 0, EASING_LINEAR)
     Call(SetNpcPos, NPC_Bobomb2, -1860, 200, 13)
     Call(NpcFlyTo, NPC_Bobomb2, -1860, 65, 13, 20, 0, EASING_LINEAR)
@@ -149,7 +149,7 @@ EvtScript N(EVS_Bobomb2) = {
 };
 
 EvtScript N(EVS_Bobomb3) = {
-    Call(SetNpcFlagBits, NPC_Bobomb3, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Bobomb3, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
     Wait(180)
     Call(NpcMoveTo, NPC_Bobomb3, -1840, 43, 70)
     Call(SetNpcAnimation, NPC_Bobomb3, ANIM_Bobomb_AngryIdle)
@@ -159,7 +159,7 @@ EvtScript N(EVS_Bobomb3) = {
     Call(SetNpcAnimation, NPC_Bobomb3, ANIM_Bobomb_FaceFwd)
     Call(GetNpcPos, NPC_Bobomb3, LVar0, LVar1, LVar2)
     PlayEffect(EFFECT_00, LVar0, LVar1, LVar2, 1, 20, 3, 2)
-    Call(EnableNpcShadow, NPC_Bobomb3, FALSE)
+    Call(EnableNpcShadow, NPC_Bobomb3, false)
     Call(NpcFlyTo, NPC_Bobomb3, LVar0, 200, LVar2, 10, 0, EASING_LINEAR)
     Call(SetNpcPos, NPC_Bobomb3, -1840, 200, 13)
     Call(NpcFlyTo, NPC_Bobomb3, -1840, 65, 13, 20, 0, EASING_LINEAR)
@@ -171,7 +171,7 @@ EvtScript N(EVS_Bobomb3) = {
 };
 
 EvtScript N(EVS_Bobomb4) = {
-    Call(SetNpcFlagBits, NPC_Bobomb4, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Bobomb4, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
     Wait(180)
     Call(NpcMoveTo, NPC_Bobomb4, -1810, 43, 70)
     Call(SetNpcAnimation, NPC_Bobomb4, ANIM_Bobomb_AngryIdle)
@@ -181,7 +181,7 @@ EvtScript N(EVS_Bobomb4) = {
     Call(SetNpcAnimation, NPC_Bobomb4, ANIM_Bobomb_FaceFwd)
     Call(GetNpcPos, NPC_Bobomb4, LVar0, LVar1, LVar2)
     PlayEffect(EFFECT_00, LVar0, LVar1, LVar2, 1, 20, 3, 2)
-    Call(EnableNpcShadow, NPC_Bobomb4, FALSE)
+    Call(EnableNpcShadow, NPC_Bobomb4, false)
     Call(NpcFlyTo, NPC_Bobomb4, LVar0, 200, LVar2, 10, 0, EASING_LINEAR)
     Call(SetNpcPos, NPC_Bobomb4, -1830, 200, 40)
     Call(NpcFlyTo, NPC_Bobomb4, -1830, 12, 40, 20, 0, EASING_LINEAR)

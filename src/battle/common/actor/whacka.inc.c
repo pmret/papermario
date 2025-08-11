@@ -113,11 +113,11 @@ EvtScript N(EVS_Init) = {
     Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
     Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
-    Call(SetActorVar, ACTOR_SELF, AVAR_SpawnedBump, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_SpawnedBump, false)
     Call(N(IsHitEightTimes))
     IfEq(LVar0, 0)
-        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_INVISIBLE | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_INVISIBLE | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, true)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, true)
     EndIf
     Return
     End
@@ -132,7 +132,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -276,7 +276,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -292,7 +292,7 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 EvtScript N(EVS_MakeWhackaBump) = {
-    Call(SetActorVar, ACTOR_SELF, AVAR_SpawnedBump, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_SpawnedBump, true)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_WHACKA)
     Thread
         Wait(15)
@@ -308,17 +308,17 @@ EvtScript N(EVS_MakeWhackaBump) = {
 };
 
 EvtScript N(EVS_Death) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Whacka_Burrow)
     Wait(40)
     Call(GetActorVar, ACTOR_SELF, AVAR_SpawnedBump, LVar0)
-    IfNe(LVar0, FALSE)
-        Call(SetBattleFlagBits2, BS_FLAGS2_DROP_WHACKA_BUMP, TRUE)
+    IfNe(LVar0, false)
+        Call(SetBattleFlagBits2, BS_FLAGS2_DROP_WHACKA_BUMP, true)
     EndIf
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_INVISIBLE | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, true)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_INVISIBLE | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, true)
     Call(RemoveActor, ACTOR_SELF)
     Return
     End

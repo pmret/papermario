@@ -121,12 +121,12 @@ s32 should_continue_inspect(void) {
         ) {
             curInteraction = npc->npcID | COLLISION_WITH_NPC_BIT;
             if (playerStatus->interactingWithID == curInteraction) {
-                return TRUE;
+                return true;
             }
         } else {
             playerStatus->interactingWithID = NO_COLLIDER;
             playerStatus->flags &= ~PS_FLAG_INTERACTED;
-            return FALSE;
+            return false;
         }
     } else {
         if (!(curInteraction & COLLISION_WITH_ENTITY_BIT)) {
@@ -134,27 +134,27 @@ s32 should_continue_inspect(void) {
                 if (!should_collider_allow_interact(curInteraction)) {
                     playerStatus->interactingWithID = NO_COLLIDER;
                     playerStatus->flags &= ~PS_FLAG_INTERACTED;
-                    return FALSE;
+                    return false;
                 }
             }
         } else {
             if (!phys_can_player_interact()) {
                 playerStatus->interactingWithID = NO_COLLIDER;
                 playerStatus->flags &= ~PS_FLAG_INTERACTED;
-                return FALSE;
+                return false;
             }
         }
     }
     if (playerStatus->interactingWithID == curInteraction) {
         if ((playerStatus->flags & PS_FLAG_INTERACTED)) {
-            return FALSE;
+            return false;
         }
     } else {
         playerStatus->flags &= ~PS_FLAG_INTERACTED;
     }
 
     playerStatus->interactingWithID = curInteraction;
-    return TRUE;
+    return true;
 }
 
 void update_inspect_icon_pos(void) {

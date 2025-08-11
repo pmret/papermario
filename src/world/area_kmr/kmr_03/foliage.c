@@ -28,10 +28,10 @@ FoliageVectorList N(Tree1_Effects) = {
 };
 
 EvtScript N(EVS_OnShakeTree1) = {
-    IfEq(GF_KMR03_Tree1_Mushroom, TRUE)
+    IfEq(GF_KMR03_Tree1_Mushroom, true)
         Return
     EndIf
-    IfEq(AF_JAN01_TreeDrop_StarPiece, TRUE)
+    IfEq(AF_JAN01_TreeDrop_StarPiece, true)
         Return
     EndIf
     Wait(10)
@@ -41,7 +41,7 @@ EvtScript N(EVS_OnShakeTree1) = {
     Else
         Call(MakeItemEntity, ITEM_MUSHROOM, -85, 100, 16, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_KMR03_Tree1_Mushroom)
     EndIf
-    Set(AF_JAN01_TreeDrop_StarPiece, TRUE)
+    Set(AF_JAN01_TreeDrop_StarPiece, true)
     Return
     End
 };

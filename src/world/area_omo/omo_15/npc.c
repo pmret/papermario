@@ -21,7 +21,7 @@ s32 N(BeginSurroundCrowdPositions)[] = {
 };
 
 EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(30 * DT)
     Thread
         Wait(10 * DT)
@@ -30,7 +30,7 @@ EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
             Call(InterruptUsePartner)
             Wait(30 * DT)
             Call(func_802D2C14, 1)
-            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Wait(45 * DT)
             Call(func_802D2C14, 0)
         EndIf
@@ -41,7 +41,7 @@ EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
     Call(SetPanTarget, CAM_DEFAULT, 250, -50, 10)
     Call(SetCamPosB, CAM_DEFAULT, Float(205.0), Float(11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(20 * DT)
     Call(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0A, ANIM_GeneralGuy_Anim02, 0, MSG_CH4_0060)
     Wait(20 * DT)
@@ -107,11 +107,11 @@ EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
     Call(InterpPlayerYaw, 90, 0)
     Call(SetPanTarget, CAM_DEFAULT, 150, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.5 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(FadeOutMusic, 0, 3000 * DT)
     Exec(N(EVS_TrySpawningStarCard))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -362,7 +362,7 @@ EvtScript N(EVS_BossDefeated_RunAway) = {
             EndIf
         EndLoop
     EndIf
-    Call(SetNpcFlagBits, LVar9, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, LVar9, NPC_FLAG_GRAVITY, false)
     Call(SetNpcPos, LVar9, NPC_DISPOSE_LOCATION)
     Return
     End
@@ -375,7 +375,7 @@ EvtScript N(EVS_NpcDefeat_GeneralGuy) = {
             Call(SetMusic, 0, SONG_SHY_GUY_TOYBOX, 0, VOL_LEVEL_FULL)
             Call(GetSelfNpcID, LVar0)
             IfEq(LVar0, NPC_GeneralGuy)
-                Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, TRUE)
+                Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, true)
                 UseBuf(Ref(N(FinalSurroundCrowdPositions)))
                 Set(LVar0, NPC_ShyGuy_01)
                 Loop(9)

@@ -4,7 +4,7 @@ s32 N(map_init)(void) {
     gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_COMBINED_EPILOGUE;
     sprintf(wMapShapeName, "osr_03_shape");
     sprintf(wMapHitName, "osr_03_hit");
-    return FALSE;
+    return false;
 }
 
 API_CALLABLE(N(MakeCastleChainAngle)) {
@@ -435,9 +435,9 @@ EvtScript N(EVS_RaiseSmokeClouds) = {
 };
 
 EvtScript N(EVS_Scene_BowsersAssault) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
-    Call(EnableGroup, MODEL_yoru, FALSE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
+    Call(EnableGroup, MODEL_yoru, false)
     Call(SetPlayerPos, 0, 0, 2000)
     Thread
         Call(PlaySound, SOUND_LOOP_OSR_RUMBLING)
@@ -466,7 +466,7 @@ EvtScript N(EVS_Scene_BowsersAssault) = {
                 BreakLoop
             EndIf
         EndLoop
-        Call(EnableGroup, MODEL_ki1, FALSE)
+        Call(EnableGroup, MODEL_ki1, false)
     EndThread
     Thread
         Wait(45 * DT)
@@ -489,7 +489,7 @@ EvtScript N(EVS_Scene_BowsersAssault) = {
                 BreakLoop
             EndIf
         EndLoop
-        Call(EnableGroup, MODEL_ki2, FALSE)
+        Call(EnableGroup, MODEL_ki2, false)
     EndThread
     Thread
         Wait(75 * DT)
@@ -574,8 +574,8 @@ EvtScript N(EVS_Scene_BowsersAssault) = {
     ExecWait(N(EVS_LiftCastleUp))
     Call(GotoMap, Ref("kkj_03"), kkj_03_ENTRY_1)
     Wait(100 * DT)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

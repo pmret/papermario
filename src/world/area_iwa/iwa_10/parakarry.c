@@ -18,7 +18,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     IfLt(LVar0, -600)
         Goto(0)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_CH2_000E, 320, 150)
     Thread
         Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
@@ -35,7 +35,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EndThread
     Wait(20 * DT)
     Call(SetNpcPos, NPC_Parakarry, -400, 215, -510)
-    Call(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Thread
         Call(SetNpcRotation, NPC_Parakarry, 0, 0, 15)
         Call(InterpNpcYaw, NPC_Parakarry, 270, 0)
@@ -87,7 +87,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     Set(LVarA, LVar0)
     Set(LVarB, 230)
     Set(LVarC, LVar2)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     IfGt(LVar2, -380)
         Set(LVar2, -380)
@@ -110,7 +110,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
         Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(1.0))
     EndThread
     Sub(LVar0, 15)
-    Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
+    Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, true)
     Call(InterpPlayerYaw, 270, 0)
     Wait(1)
     Call(SetPlayerAnimation, ANIM_Mario1_Fallen)
@@ -127,7 +127,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     Call(GetNpcPos, NPC_Parakarry, LVar0, LVar1, LVar2)
     Add(LVar1, 20)
     Call(NpcJump1, NPC_Parakarry, LVar0, LVar1, LVar2, 8 * DT)
-    Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, FALSE)
+    Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, false)
     Call(InterpPlayerYaw, 90, 0)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Wait(30 * DT)
@@ -150,8 +150,8 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     Call(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH2_0011)
     Set(GB_StoryProgress, STORY_CH2_SPOKE_WITH_PARAKARRY)
     Call(ResetCam, CAM_DEFAULT, Float(3.0 / DT))
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Call(BindNpcAI, NPC_Parakarry, Ref(N(EVS_NpcIdle_Parakarry)))
     Return
     End
@@ -165,16 +165,16 @@ s32 N(LetterList)[] = {
 };
 
 EvtScript N(EVS_NpcInteract_Parakarry) = {
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     IfEq(GB_IWA10_ReturnedLetterCount, 2)
         Set(LVar0, 0)
-        IfEq(GF_IWA01_Item_Letter01, TRUE)
+        IfEq(GF_IWA01_Item_Letter01, true)
             Add(LVar0, 1)
         EndIf
-        IfEq(GF_IWA03_Item_LettertoKolorado, TRUE)
+        IfEq(GF_IWA03_Item_LettertoKolorado, true)
             Add(LVar0, 1)
         EndIf
-        IfEq(GF_IWA04_Item_Letter10, TRUE)
+        IfEq(GF_IWA04_Item_Letter10, true)
             Add(LVar0, 1)
         EndIf
         IfEq(LVar0, 3)
@@ -186,7 +186,7 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
                 Add(LVar4, 30)
             EndIf
             Call(PlayerMoveTo, LVar4, LVar6, 20 * DT)
-            Call(PlayerFaceNpc, NPC_Parakarry, FALSE)
+            Call(PlayerFaceNpc, NPC_Parakarry, false)
             Wait(10 * DT)
             Call(func_802CF56C, 2)
             Call(AdjustCam, CAM_DEFAULT, Float(4.0 / DT), Float(0.0), Float(300.0), Float(17.5), Float(-10.0))
@@ -212,7 +212,7 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
                         Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
                         Return
                     EndIf
-                    Set(LFlag0, TRUE)
+                    Set(LFlag0, true)
             EndSwitch
         CaseEq(-1)
             Call(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH2_0013)
@@ -240,10 +240,10 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
                             Return
                         EndIf
                     EndIf
-                    Set(LFlag0, TRUE)
+                    Set(LFlag0, true)
             EndSwitch
     EndSwitch
-    IfEq(LFlag0, TRUE)
+    IfEq(LFlag0, true)
         Call(DisablePartnerAI, 0)
         Call(ContinueSpeech, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH2_001D)
         Call(N(ChangeNpcToPartner), 4, 4)

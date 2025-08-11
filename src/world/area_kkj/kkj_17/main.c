@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitDoors_kkj_11_5) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, kkj_17_ENTRY_0)
     Set(LVar1, COLLIDER_ttw)
     Set(LVar2, MODEL_o2)

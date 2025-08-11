@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitDoor_dgb_02_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, dgb_07_ENTRY_0)
     Set(LVar1, COLLIDER_deilits)
@@ -36,7 +36,7 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
     IfLt(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
-        Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+        Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     EndIf
     ExecWait(N(EVS_MakeEntities))
     BindTrigger(Ref(N(EVS_ExitDoor_dgb_02_2)), TRIGGER_WALL_PRESS_A, COLLIDER_deilits, 1, 0)

@@ -122,7 +122,7 @@ EvtScript N(EVS_PlayDetonateFX) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -237,7 +237,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -245,7 +245,7 @@ EvtScript N(EVS_HandleEvent) = {
 #include "common/UnkActorPosFunc.inc.c"
 
 EvtScript N(EVS_TakeTurn) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Wait(10)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
@@ -255,7 +255,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(AddGoalPos, ACTOR_SELF, 40, 0, 0)
     Call(MoveBattleCamOver, 30)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Run)
-    Call(RunToGoal, ACTOR_SELF, 30, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 30, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Idle)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Brace)
     Wait(15)
@@ -269,7 +269,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(SetGoalToTarget, ACTOR_SELF)
             Call(AddGoalPos, ACTOR_SELF, -10, 0, 0)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_BodySlam)
-            Call(RunToGoal, ACTOR_SELF, 5, FALSE)
+            Call(RunToGoal, ACTOR_SELF, 5, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Idle)
             Thread
                 Call(SetActorRotationOffset, ACTOR_SELF, 0, 15, 0)
@@ -282,7 +282,7 @@ EvtScript N(EVS_TakeTurn) = {
                 Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EndThread
             Call(AddGoalPos, ACTOR_SELF, -60, 0, 0)
-            Call(RunToGoal, ACTOR_SELF, 10, FALSE)
+            Call(RunToGoal, ACTOR_SELF, 10, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Idle)
             Thread
                 Call(N(UnkActorPosFunc))
@@ -296,16 +296,16 @@ EvtScript N(EVS_TakeTurn) = {
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Run)
             Call(SetGoalToHome, ACTOR_SELF)
             Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
-            Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+            Call(RunToGoal, ACTOR_SELF, 0, false)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
     Set(LVarA, LVar0)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_BodySlam)
-    Call(RunToGoal, ACTOR_SELF, 4, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 4, false)
     Call(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
     Switch(LVar9)
         CaseEq(PARTNER_RANK_NORMAL)
@@ -334,25 +334,25 @@ EvtScript N(EVS_TakeTurn) = {
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.4))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 20, false, true, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire1)
             Wait(1)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire2)
             Add(LVar0, 40)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire1)
             Wait(1)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire2)
             Add(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire1)
             Wait(1)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire2)
             Add(LVar0, 10)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 4, false, true, false)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire1)
             Wait(1)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Idle)
@@ -361,11 +361,11 @@ EvtScript N(EVS_TakeTurn) = {
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Run)
             Call(SetGoalToHome, ACTOR_SELF)
             Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
-            Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+            Call(RunToGoal, ACTOR_SELF, 0, false)
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

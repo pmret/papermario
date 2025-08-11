@@ -1,14 +1,14 @@
 #include "osr_03.h"
 
 EvtScript N(EVS_HideGroundModels) = {
-    Call(EnableGroup, MODEL_hiru, FALSE)
-    Call(EnableGroup, MODEL_niwa, FALSE)
-    Call(EnableGroup, MODEL_jimidori, FALSE)
-    Call(EnableGroup, MODEL_kumo, FALSE)
-    Call(EnableGroup, MODEL_ki1, FALSE)
-    Call(EnableGroup, MODEL_jimen, FALSE)
-    Call(EnableGroup, MODEL_kemuri, FALSE)
-    Call(EnableGroup, MODEL_obj, FALSE)
+    Call(EnableGroup, MODEL_hiru, false)
+    Call(EnableGroup, MODEL_niwa, false)
+    Call(EnableGroup, MODEL_jimidori, false)
+    Call(EnableGroup, MODEL_kumo, false)
+    Call(EnableGroup, MODEL_ki1, false)
+    Call(EnableGroup, MODEL_jimen, false)
+    Call(EnableGroup, MODEL_kemuri, false)
+    Call(EnableGroup, MODEL_obj, false)
     Return
     End
 };
@@ -51,7 +51,7 @@ EvtScript N(EVS_Main) = {
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(osr_03_ENTRY_4)
-            Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+            Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
         CaseDefault
     EndSwitch
     Switch(GB_StoryProgress)
@@ -74,7 +74,7 @@ EvtScript N(EVS_Main) = {
             Call(ClearAmbientSounds, 250)
             Call(FadeOutMusic, 0, 500)
         CaseDefault
-            IfEq(GF_KKJ25_Defeated_Bowser, FALSE)
+            IfEq(GF_KKJ25_Defeated_Bowser, false)
             Else
                 Call(SetMusic, 0, SONG_BOWSERS_CASTLE_FALLS, 0, VOL_LEVEL_FULL)
             EndIf

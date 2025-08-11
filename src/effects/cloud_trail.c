@@ -61,16 +61,16 @@ void cloud_trail_init(EffectInstance* effect) {
 
 void cloud_trail_update(EffectInstance* effect) {
     CloudTrailFXData* part = effect->data.cloudTrail;
-    s32 cond = FALSE;
+    s32 cond = false;
     s32 i;
 
     for (i = 0; i < effect->numParts; i++, part++) {
         if (part->alive) {
             part->lifetime--;
             if (part->lifetime <= 0) {
-                part->alive = FALSE;
+                part->alive = false;
             } else {
-                cond = TRUE;
+                cond = true;
                 part->unk_30 = clamp_angle(part->unk_30 + 12.0f);
                 part->unk_1C = part->unk_28 + sin_deg(part->unk_30) * 0.1;
                 part->unk_20 = part->unk_2C + cos_deg(part->unk_30) * 0.1;

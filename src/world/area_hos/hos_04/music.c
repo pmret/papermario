@@ -16,7 +16,7 @@ EvtScript N(EVS_SetupMusic) = {
         CaseEq(hos_04_ENTRY_4)
             Exec(N(EVS_PlayIntroSong))
         CaseDefault
-            IfEq(GF_HOS04_Visited, FALSE)
+            IfEq(GF_HOS04_Visited, false)
                 Call(SetMusic, 0, SONG_STAR_SANCTUARY, BGM_VARIATION_1, VOL_LEVEL_FULL)
             Else
                 Call(SetMusic, 0, SONG_STAR_HAVEN, 0, VOL_LEVEL_FULL)

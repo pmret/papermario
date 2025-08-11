@@ -3,14 +3,14 @@
 
 EvtScript N(EVS_ReadSign) = {
     Call(IsStartingConversation, LVar0)
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         Return
     EndIf
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_017F, 160, 40)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End

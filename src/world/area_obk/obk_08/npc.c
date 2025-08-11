@@ -73,7 +73,7 @@ API_CALLABLE(N(func_80240AF0_BD4360)) {
     switch (script->functionTemp[1]) {
         case RING_STATE_0:
             temp_v0 = evt_get_variable(script, AF_OBK08_KeepAwayStarted);
-            if (temp_v0 == TRUE) {
+            if (temp_v0 == true) {
                 *isGameStarted = temp_v0;
                 script->functionTemp[1] = RING_STATE_10;
             }
@@ -135,7 +135,7 @@ API_CALLABLE(func_80240D10_BD4580) {
     switch (script->functionTemp[1]) {
         case RING_STATE_0:
             npc->yaw = clamp_angle(script->functionTemp[2] + hiddenBoo->yaw);
-            if (*isGameStarted == TRUE) {
+            if (*isGameStarted == true) {
                 script->functionTemp[1] = RING_STATE_1;
                 npc->duration = rand_int(20) + 10;
             }
@@ -590,7 +590,7 @@ EvtScript N(EVS_NpcInit_Boo_12) = {
 };
 
 EvtScript N(EVS_NpcInit_Boo_13) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, true)
     Return
     End
 };

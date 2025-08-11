@@ -40,7 +40,7 @@ EvtScript N(EVS_EnterMap) = {
             Exec(N(EVS_ExitToybox))
             Thread
                 Wait(20)
-                Set(MF_MusicMixTrigger, TRUE)
+                Set(MF_MusicMixTrigger, true)
             EndThread
         CaseEq(mac_04_ENTRY_3)
             Exec(N(EVS_BindExitTriggers))
@@ -48,7 +48,7 @@ EvtScript N(EVS_EnterMap) = {
             Call(SetNpcPos, NPC_PARTNER, -420, 20, -65)
             Thread
                 Wait(20)
-                Set(MF_MusicMixTrigger, TRUE)
+                Set(MF_MusicMixTrigger, true)
             EndThread
         CaseEq(mac_04_ENTRY_4)
             Call(N(SetNightTintMode))
@@ -70,24 +70,24 @@ EvtScript N(EVS_Main) = {
     SetUP_CAMERA_NO_LEAD()
     Call(GetEntryID, LVar0)
     IfEq(LVar0, mac_04_ENTRY_4)
-        Call(MakeNpcs, FALSE, Ref(N(WishSceneNPCs)))
+        Call(MakeNpcs, false, Ref(N(WishSceneNPCs)))
     Else
         Switch(GB_StoryProgress)
             CaseLt(STORY_CH3_STAR_SPRIT_DEPARTED)
-                Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+                Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
             CaseLt(STORY_CH4_BEGAN_PEACH_MISSION)
-                Call(MakeNpcs, FALSE, Ref(N(Chapter4NPCs)))
+                Call(MakeNpcs, false, Ref(N(Chapter4NPCs)))
             CaseEq(STORY_CH4_BEGAN_PEACH_MISSION)
-                Call(MakeNpcs, FALSE, Ref(N(PostChapter4NPCs)))
+                Call(MakeNpcs, false, Ref(N(PostChapter4NPCs)))
             CaseLt(STORY_CH5_RETURNED_TO_TOAD_TOWN)
-                Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+                Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
             CaseLt(STORY_CH7_BEGAN_PEACH_MISSION)
-                Call(MakeNpcs, FALSE, Ref(N(Chapter7NPCs)))
+                Call(MakeNpcs, false, Ref(N(Chapter7NPCs)))
             CaseDefault
-                Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+                Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
         EndSwitch
     EndIf
-    Set(AF_MAC_31, FALSE)
+    Set(AF_MAC_31, false)
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupRooms))
     Exec(N(EVS_SetupFoliage))
@@ -105,7 +105,7 @@ EvtScript N(EVS_Main) = {
     Else
         Wait(1)
     EndIf
-    Set(GF_MAC01_RowfBadgesChosen, FALSE)
+    Set(GF_MAC01_RowfBadgesChosen, false)
     Return
     End
 };

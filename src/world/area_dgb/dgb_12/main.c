@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitDoor_dgb_09_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, dgb_12_ENTRY_0)
     Set(LVar1, COLLIDER_deilits)

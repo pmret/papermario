@@ -81,7 +81,7 @@ void surface_standard_behavior(void) {
     f32 x, y, z;
     s32 cond;
 
-    cond = FALSE;
+    cond = false;
     if (gGameStatusPtr->areaID == AREA_HOS) {
         cond = gGameStatusPtr->mapID == 2;
     }

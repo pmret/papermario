@@ -1,7 +1,7 @@
 #include "common.h"
 #include "sprite/player.h"
 
-/// Provide arg `TRUE` on `LVar1` to disable refunding.
+/// Provide arg `true` on `LVar1` to disable refunding.
 EvtScript N(UseItemWithEffect) = {
     IfEq(LVar1, 0)
         Call(UseBattleCamPreset, BTL_CAM_PLAYER_WISH)
@@ -66,13 +66,13 @@ EvtScript N(UseItem) = {
 };
 
 EvtScript N(PlayerGoHome) = {
-    Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    Call(UseIdleAnimation, ACTOR_PLAYER, false)
     Call(SetGoalToHome, ACTOR_PLAYER)
     Call(SetActorSpeed, ACTOR_PLAYER, Float(8.0))
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     Call(PlayerRunToGoal, 0)
     Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    Call(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    Call(UseIdleAnimation, ACTOR_PLAYER, true)
     Return
     End
 };

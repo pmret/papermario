@@ -22,10 +22,10 @@ EvtScript N(EVS_ExitWalk_pra_19_1) = EVT_EXIT_WALK(60, pra_20_ENTRY_0, "pra_19",
 
 EvtScript N(EVS_ExitDoor_pra_21_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_20_ENTRY_1)
     Set(LVar1, COLLIDER_deilittssw)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(NearSingleDoorModels)))
         Set(LVar3, Ref(N(FarSingleDoorModels)))
     Else
@@ -42,10 +42,10 @@ EvtScript N(EVS_ExitDoor_pra_21_0) = {
 
 EvtScript N(EVS_ExitDoors_pra_29_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_20_ENTRY_2)
     Set(LVar1, COLLIDER_deilittse)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothRightDoorModelsL)))
         Set(LVar3, Ref(N(BothRightDoorModelsR)))
     Else
@@ -62,10 +62,10 @@ EvtScript N(EVS_ExitDoors_pra_29_0) = {
 
 EvtScript N(EVS_ExitDoors_pra_29_3) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_20_ENTRY_3)
     Set(LVar1, COLLIDER_deilittne)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothRightDoorModelsL)))
         Set(LVar3, Ref(N(BothRightDoorModelsR)))
     Else
@@ -82,10 +82,10 @@ EvtScript N(EVS_ExitDoors_pra_29_3) = {
 
 EvtScript N(EVS_ExitDoor_pra_22_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_20_ENTRY_4)
     Set(LVar1, COLLIDER_deilittnnw)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(NearSingleDoorModels)))
         Set(LVar3, Ref(N(FarSingleDoorModels)))
     Else
@@ -117,7 +117,7 @@ EvtScript N(EVS_EnterMap) = {
             Set(LVar0, Ref(N(EVS_BindExitTriggers)))
             Exec(EnterWalk)
         CaseEq(pra_20_ENTRY_1)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(NearSingleDoorModels)))
                 Set(LVar3, Ref(N(FarSingleDoorModels)))
             Else
@@ -127,7 +127,7 @@ EvtScript N(EVS_EnterMap) = {
             ExecWait(BaseEnterDoor)
             Exec(N(EVS_BindExitTriggers))
         CaseEq(pra_20_ENTRY_2)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothRightDoorModelsL)))
                 Set(LVar3, Ref(N(BothRightDoorModelsR)))
             Else
@@ -137,7 +137,7 @@ EvtScript N(EVS_EnterMap) = {
             ExecWait(BaseEnterDoor)
             Exec(N(EVS_BindExitTriggers))
         CaseEq(pra_20_ENTRY_3)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothRightDoorModelsL)))
                 Set(LVar3, Ref(N(BothRightDoorModelsR)))
             Else
@@ -147,7 +147,7 @@ EvtScript N(EVS_EnterMap) = {
             ExecWait(BaseEnterDoor)
             Exec(N(EVS_BindExitTriggers))
         CaseEq(pra_20_ENTRY_4)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(NearSingleDoorModels)))
                 Set(LVar3, Ref(N(FarSingleDoorModels)))
             Else
@@ -166,10 +166,10 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(SetCamBGColor, CAM_DEFAULT, 24, 24, 40)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
     Exec(N(EVS_SetupMusic))
-    Call(EnableModel, MODEL_o981, FALSE)
+    Call(EnableModel, MODEL_o981, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1019, COLLIDER_FLAGS_UPPER_MASK)
     Set(LVar0, MODEL_o945)
     Set(LVar1, MODEL_o947)

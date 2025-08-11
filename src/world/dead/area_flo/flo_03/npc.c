@@ -40,8 +40,8 @@ Vec3i N(BurrowLocations_Mole_04)[] = {
 };
 
 EvtScript N(EVS_Scene_SunReturns) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetNpcYaw, NPC_Petunia, 90)
     Call(GetNpcPos, NPC_Petunia, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -51,7 +51,7 @@ EvtScript N(EVS_Scene_SunReturns) = {
     Call(SetCamPosA, CAM_DEFAULT, -27, 0)
     Call(SetCamPosB, CAM_DEFAULT, 0, -50)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(20)
     Call(SpeakToPlayer, NPC_Petunia, ANIM_Petunia_Talk, ANIM_Petunia_Idle, 0, MSG_CH6_00C8)
@@ -128,7 +128,7 @@ EvtScript N(EVS_NpcDefeat_Dayzee) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Set(GF_FLO03_Defeated_Dayzee, TRUE)
+            Set(GF_FLO03_Defeated_Dayzee, true)
             Call(DoNpcDefeat)
         CaseEq(OUTCOME_PLAYER_LOST)
         CaseEq(OUTCOME_PLAYER_FLED)
@@ -151,7 +151,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
     ExecWait(N(EVS_PushFlowerSong))
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
-            Set(MV_PauseBurrowing, TRUE)
+            Set(MV_PauseBurrowing, true)
             Set(LVar4, Float(3.5))
             ExecWait(N(EVS_FocusCamBetween))
             Call(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0050)
@@ -167,7 +167,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
             Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-8.0))
             Call(SetCamDistance, CAM_DEFAULT, 200)
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Wait(20)
             Call(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
@@ -183,7 +183,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
             Call(SetCamDistance, CAM_DEFAULT, 200)
             Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-8.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim00)
             Wait(20)
@@ -198,7 +198,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
             Call(SetCamDistance, CAM_DEFAULT, 200)
             Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-8.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Wait(20)
             Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim14)
@@ -209,7 +209,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
             Call(SetCamDistance, CAM_DEFAULT, 200)
             Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-9.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim06)
             Wait(20)
@@ -225,7 +225,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
             Call(SetCamDistance, CAM_DEFAULT, 300)
             Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-9.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Call(SetNpcAnimation, NPC_Dayzee, ANIM_Dayzee_Anim0D)
             Call(PlaySoundAtNpc, NPC_Dayzee, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
@@ -235,17 +235,17 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Set(LVar4, Float(90.0))
             ExecWait(N(EVS_FocusCamBetween))
             Call(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0057)
-            Call(SetEnemyFlagBits, NPC_Dayzee, ENEMY_FLAG_PASSIVE, FALSE)
-            Call(SetEnemyFlagBits, NPC_MontyMole_01, ENEMY_FLAG_PASSIVE, FALSE)
-            Call(SetEnemyFlagBits, NPC_MontyMole_02, ENEMY_FLAG_PASSIVE, FALSE)
-            Call(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAG_PASSIVE, FALSE)
-            Call(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAG_PASSIVE, FALSE)
+            Call(SetEnemyFlagBits, NPC_Dayzee, ENEMY_FLAG_PASSIVE, false)
+            Call(SetEnemyFlagBits, NPC_MontyMole_01, ENEMY_FLAG_PASSIVE, false)
+            Call(SetEnemyFlagBits, NPC_MontyMole_02, ENEMY_FLAG_PASSIVE, false)
+            Call(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAG_PASSIVE, false)
+            Call(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAG_PASSIVE, false)
             Call(BindNpcAI, NPC_Dayzee, Ref(N(EVS_NpcAI_Dayzee)))
-            Set(MV_PauseBurrowing, FALSE)
+            Set(MV_PauseBurrowing, false)
             Set(MV_NextBurrowTriggerRadius, 60)
             Set(GB_StoryProgress, STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
         CaseEq(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
-            IfEq(GF_FLO03_DefeatedAll_MontyMoles, FALSE)
+            IfEq(GF_FLO03_DefeatedAll_MontyMoles, false)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0058)
                 Call(SetNpcAnimation, NPC_SELF, ANIM_Petunia_Angry)
             Else
@@ -282,7 +282,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
 
 EvtScript N(EVS_NpcInit_Petunia) = {
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Petunia)))
-    IfEq(GF_FLO03_DefeatedAll_MontyMoles, FALSE)
+    IfEq(GF_FLO03_DefeatedAll_MontyMoles, false)
         Call(SetNpcAnimation, NPC_Petunia, ANIM_Petunia_Angry)
     Else
         Call(SetNpcAnimation, NPC_Petunia, ANIM_Petunia_Idle)
@@ -293,13 +293,13 @@ EvtScript N(EVS_NpcInit_Petunia) = {
 
 EvtScript N(EVS_NpcInit_Dayzee) = {
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Dayzee)))
-    Call(EnableNpcShadow, NPC_Dayzee, FALSE)
+    Call(EnableNpcShadow, NPC_Dayzee, false)
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
             Call(SetNpcPos, NPC_Dayzee, NPC_DISPOSE_LOCATION)
         CaseDefault
-            IfEq(GF_FLO03_Defeated_Dayzee, FALSE)
-                Call(SetEnemyFlagBits, NPC_Dayzee, ENEMY_FLAG_PASSIVE, FALSE)
+            IfEq(GF_FLO03_Defeated_Dayzee, false)
+                Call(SetEnemyFlagBits, NPC_Dayzee, ENEMY_FLAG_PASSIVE, false)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcAI_Dayzee)))
             Else
                 Call(SetNpcPos, NPC_Dayzee, NPC_DISPOSE_LOCATION)
@@ -310,7 +310,7 @@ EvtScript N(EVS_NpcInit_Dayzee) = {
 };
 
 EvtScript N(EVS_SetupMoles) = {
-    Set(MV_PauseBurrowing, FALSE)
+    Set(MV_PauseBurrowing, false)
     Set(MV_NextBurrowTime_Mole_01, 0)
     Set(MV_NextBurrowTime_Mole_02, 0)
     Set(MV_NextBurrowTime_Mole_03, 0)
@@ -328,13 +328,13 @@ EvtScript N(EVS_NpcDefeat_MontyMole) = {
             Call(GetSelfNpcID, LVar0)
             Switch(LVar0)
                 CaseEq(NPC_MontyMole_01)
-                    Set(GF_FLO03_Defeated_MontyMoleA, TRUE)
+                    Set(GF_FLO03_Defeated_MontyMoleA, true)
                 CaseEq(NPC_MontyMole_02)
-                    Set(GF_FLO03_Defeated_MontyMoleB, TRUE)
+                    Set(GF_FLO03_Defeated_MontyMoleB, true)
                 CaseEq(NPC_MontyMole_03)
-                    Set(GF_FLO03_Defeated_MontyMoleC, TRUE)
+                    Set(GF_FLO03_Defeated_MontyMoleC, true)
                 CaseEq(NPC_MontyMole_04)
-                    Set(GF_FLO03_Defeated_MontyMoleD, TRUE)
+                    Set(GF_FLO03_Defeated_MontyMoleD, true)
             EndSwitch
             // count number of defeated moles
             Set(LVar0, 0)
@@ -347,7 +347,7 @@ EvtScript N(EVS_NpcDefeat_MontyMole) = {
                 Call(SetNpcAnimation, NPC_Petunia, ANIM_Petunia_Angry)
             Else
                 Call(SetNpcAnimation, NPC_Petunia, ANIM_Petunia_Idle)
-                Set(GF_FLO03_DefeatedAll_MontyMoles, TRUE)
+                Set(GF_FLO03_DefeatedAll_MontyMoles, true)
                 ExecWait(N(EVS_SetupMusic))
             EndIf
             Call(DoNpcDefeat)
@@ -394,10 +394,10 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
 #endif
     Loop(0)
         IfEq(MV_NextBurrowTime_Mole_01, 0)
-            IfEq(AF_FLO_IsUnderground_Mole_01, TRUE)
+            IfEq(AF_FLO_IsUnderground_Mole_01, true)
                 Goto(0)
             EndIf
-            Set(LV_ShouldBurrow, TRUE)
+            Set(LV_ShouldBurrow, true)
         Else
             Label(0)
             Call(GetNpcPos, NPC_MontyMole_01, LVar0, LVar1, LVar2)
@@ -406,18 +406,18 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
 #if !VERSION_JP
         Call(GetPartnerInUse, LVar9)
         IfEq(LVar9, PARTNER_BOW)
-            Set(LVar3, FALSE)
+            Set(LVar3, false)
         EndIf
 #endif
-        IfEq(MV_PauseBurrowing, TRUE)
-            Set(LV_ShouldBurrow, FALSE)
+        IfEq(MV_PauseBurrowing, true)
+            Set(LV_ShouldBurrow, false)
         EndIf
-        IfEq(LV_ShouldBurrow, TRUE)
-            IfEq(AF_FLO_IsUnderground_Mole_01, FALSE)
-                Call(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
+        IfEq(LV_ShouldBurrow, true)
+            IfEq(AF_FLO_IsUnderground_Mole_01, false)
+                Call(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
                 Call(NpcFacePlayer, NPC_MontyMole_01, 1)
                 Wait(1)
-                Set(AF_FLO_IsUnderground_Mole_01, TRUE)
+                Set(AF_FLO_IsUnderground_Mole_01, true)
                 IfNe(MV_NextBurrowTime_Mole_01, 0)
                     IfLt(GB_StoryProgress, STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
                         Set(LVar1, 4)
@@ -427,19 +427,19 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
                     Call(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
                     Call(ShowEmote, NPC_MontyMole_01, EMOTE_EXCLAMATION, 0, LVar1, EMOTER_NPC, 0, 0, 0, 0)
                     Wait(LVar1)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, true)
                 EndIf
                 Call(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim11)
                 Wait(20)
-                IfEq(GF_FLO03_Defeated_MontyMoleA, FALSE)
+                IfEq(GF_FLO03_Defeated_MontyMoleA, false)
                     Call(SetNpcPos, NPC_MontyMole_01, 0, -50, 0)
                 EndIf
                 Wait(45)
             EndIf
         Else
-            IfEq(AF_FLO_IsUnderground_Mole_01, TRUE)
-                IfEq(GF_FLO03_Defeated_MontyMoleA, FALSE)
+            IfEq(AF_FLO_IsUnderground_Mole_01, true)
+                IfEq(GF_FLO03_Defeated_MontyMoleA, false)
                     Call(RandInt, ARRAY_COUNT(N(BurrowLocations_Mole_01)) - 1, LVar0)
                     Add(LVar0, 1)
                     UseBuf(Ref(N(BurrowLocations_Mole_01)))
@@ -448,14 +448,14 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
                     EndLoop
                     Call(SetNpcPos, NPC_MontyMole_01, LVar1, LVar2, LVar3)
                 EndIf
-                Call(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
-                Set(AF_FLO_IsUnderground_Mole_01, FALSE)
+                Call(SetNpcFlagBits, NPC_MontyMole_01, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
+                Set(AF_FLO_IsUnderground_Mole_01, false)
                 Call(NpcFacePlayer, NPC_MontyMole_01, 1)
                 Wait(1)
                 Call(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim10)
                 Wait(10)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, FALSE)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, false)
                 Call(RandInt, 30, LVar0)
                 Add(LVar0, 60)
                 Set(MV_NextBurrowTime_Mole_01, LVar0)
@@ -478,10 +478,10 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
 #endif
     Loop(0)
         IfEq(MV_NextBurrowTime_Mole_02, 0)
-            IfEq(AF_FLO_IsUnderground_Mole_02, TRUE)
+            IfEq(AF_FLO_IsUnderground_Mole_02, true)
                 Goto(0)
             EndIf
-            Set(LV_ShouldBurrow, TRUE)
+            Set(LV_ShouldBurrow, true)
         Else
             Label(0)
             Call(GetNpcPos, NPC_MontyMole_02, LVar0, LVar1, LVar2)
@@ -490,18 +490,18 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
 #if !VERSION_JP
         Call(GetPartnerInUse, LVar9)
         IfEq(LVar9, PARTNER_BOW)
-            Set(LV_ShouldBurrow, FALSE)
+            Set(LV_ShouldBurrow, false)
         EndIf
 #endif
-        IfEq(MV_PauseBurrowing, TRUE)
-            Set(LV_ShouldBurrow, FALSE)
+        IfEq(MV_PauseBurrowing, true)
+            Set(LV_ShouldBurrow, false)
         EndIf
-        IfEq(LV_ShouldBurrow, TRUE)
-            IfEq(AF_FLO_IsUnderground_Mole_02, FALSE)
-                Call(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
+        IfEq(LV_ShouldBurrow, true)
+            IfEq(AF_FLO_IsUnderground_Mole_02, false)
+                Call(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
                 Call(NpcFacePlayer, NPC_MontyMole_02, 1)
                 Wait(1)
-                Set(AF_FLO_IsUnderground_Mole_02, TRUE)
+                Set(AF_FLO_IsUnderground_Mole_02, true)
                 IfNe(MV_NextBurrowTime_Mole_02, 0)
                     IfLt(GB_StoryProgress, STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
                         Set(LVar1, 4)
@@ -511,19 +511,19 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
                     Call(PlaySoundAtNpc, NPC_MontyMole_02, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
                     Call(ShowEmote, NPC_MontyMole_02, EMOTE_EXCLAMATION, 0, LVar1, EMOTER_NPC, 0, 0, 0, 0)
                     Wait(LVar1)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, true)
                 EndIf
                 Call(PlaySoundAtNpc, NPC_MontyMole_02, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim11)
                 Wait(20)
-                IfEq(GF_FLO03_Defeated_MontyMoleB, FALSE)
+                IfEq(GF_FLO03_Defeated_MontyMoleB, false)
                     Call(SetNpcPos, NPC_MontyMole_02, 0, -50, 0)
                 EndIf
                 Wait(45)
             EndIf
         Else
-            IfEq(AF_FLO_IsUnderground_Mole_02, TRUE)
-                IfEq(GF_FLO03_Defeated_MontyMoleB, FALSE)
+            IfEq(AF_FLO_IsUnderground_Mole_02, true)
+                IfEq(GF_FLO03_Defeated_MontyMoleB, false)
                     Call(RandInt, ARRAY_COUNT(N(BurrowLocations_Mole_02)) - 1, LVar0)
                     Add(LVar0, 1)
                     UseBuf(Ref(N(BurrowLocations_Mole_02)))
@@ -532,14 +532,14 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
                     EndLoop
                     Call(SetNpcPos, NPC_MontyMole_02, LVar1, LVar2, LVar3)
                 EndIf
-                Call(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
-                Set(AF_FLO_IsUnderground_Mole_02, FALSE)
+                Call(SetNpcFlagBits, NPC_MontyMole_02, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
+                Set(AF_FLO_IsUnderground_Mole_02, false)
                 Call(NpcFacePlayer, NPC_MontyMole_02, 1)
                 Wait(1)
                 Call(PlaySoundAtNpc, NPC_MontyMole_02, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim10)
                 Wait(10)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, FALSE)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, false)
                 Call(RandInt, 35, LVar0)
                 Add(LVar0, 55)
                 Set(MV_NextBurrowTime_Mole_02, LVar0)
@@ -562,10 +562,10 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
 #endif
     Loop(0)
         IfEq(MV_NextBurrowTime_Mole_03, 0)
-            IfEq(AF_FLO_IsUnderground_Mole_03, TRUE)
+            IfEq(AF_FLO_IsUnderground_Mole_03, true)
                 Goto(0)
             EndIf
-            Set(LV_ShouldBurrow, TRUE)
+            Set(LV_ShouldBurrow, true)
         Else
             Label(0)
             Call(GetNpcPos, NPC_MontyMole_03, LVar0, LVar1, LVar2)
@@ -574,18 +574,18 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
 #if !VERSION_JP
         Call(GetPartnerInUse, LVar9)
         IfEq(LVar9, PARTNER_BOW)
-            Set(LV_ShouldBurrow, FALSE)
+            Set(LV_ShouldBurrow, false)
         EndIf
 #endif
-        IfEq(MV_PauseBurrowing, TRUE)
-            Set(LV_ShouldBurrow, FALSE)
+        IfEq(MV_PauseBurrowing, true)
+            Set(LV_ShouldBurrow, false)
         EndIf
-        IfEq(LV_ShouldBurrow, TRUE)
-            IfEq(AF_FLO_IsUnderground_Mole_03, FALSE)
-                Call(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
+        IfEq(LV_ShouldBurrow, true)
+            IfEq(AF_FLO_IsUnderground_Mole_03, false)
+                Call(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
                 Call(NpcFacePlayer, NPC_MontyMole_03, 1)
                 Wait(1)
-                Set(AF_FLO_IsUnderground_Mole_03, TRUE)
+                Set(AF_FLO_IsUnderground_Mole_03, true)
                 IfNe(MV_NextBurrowTime_Mole_03, 0)
                     IfLt(GB_StoryProgress, STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
                         Set(LVar1, 4)
@@ -595,19 +595,19 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
                     Call(PlaySoundAtNpc, NPC_MontyMole_03, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
                     Call(ShowEmote, NPC_MontyMole_03, EMOTE_EXCLAMATION, 0, LVar1, EMOTER_NPC, 0, 0, 0, 0)
                     Wait(LVar1)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, true)
                 EndIf
                 Call(PlaySoundAtNpc, NPC_MontyMole_03, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim11)
                 Wait(20)
-                IfEq(GF_FLO03_Defeated_MontyMoleC, FALSE)
+                IfEq(GF_FLO03_Defeated_MontyMoleC, false)
                     Call(SetNpcPos, NPC_MontyMole_03, 0, -50, 0)
                 EndIf
                 Wait(45)
             EndIf
         Else
-            IfEq(AF_FLO_IsUnderground_Mole_03, TRUE)
-                IfEq(GF_FLO03_Defeated_MontyMoleC, FALSE)
+            IfEq(AF_FLO_IsUnderground_Mole_03, true)
+                IfEq(GF_FLO03_Defeated_MontyMoleC, false)
                     Call(RandInt, ARRAY_COUNT(N(BurrowLocations_Mole_03)) - 1, LVar0)
                     Add(LVar0, 1)
                     UseBuf(Ref(N(BurrowLocations_Mole_03)))
@@ -616,14 +616,14 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
                     EndLoop
                     Call(SetNpcPos, NPC_MontyMole_03, LVar1, LVar2, LVar3)
                 EndIf
-                Call(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
-                Set(AF_FLO_IsUnderground_Mole_03, FALSE)
+                Call(SetNpcFlagBits, NPC_MontyMole_03, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
+                Set(AF_FLO_IsUnderground_Mole_03, false)
                 Call(NpcFacePlayer, NPC_MontyMole_03, 1)
                 Wait(1)
                 Call(PlaySoundAtNpc, NPC_MontyMole_03, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim10)
                 Wait(10)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, FALSE)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, false)
                 Call(RandInt, 40, LVar0)
                 Add(LVar0, 50)
                 Set(MV_NextBurrowTime_Mole_03, LVar0)
@@ -646,10 +646,10 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
 #endif
     Loop(0)
         IfEq(MV_NextBurrowTime_Mole_04, 0)
-            IfEq(AF_FLO_IsUnderground_Mole_04, TRUE)
+            IfEq(AF_FLO_IsUnderground_Mole_04, true)
                 Goto(0)
             EndIf
-            Set(LV_ShouldBurrow, TRUE)
+            Set(LV_ShouldBurrow, true)
         Else
             Label(0)
             Call(GetNpcPos, NPC_MontyMole_04, LVar0, LVar1, LVar2)
@@ -658,18 +658,18 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
 #if !VERSION_JP
         Call(GetPartnerInUse, LVar9)
         IfEq(LVar9, PARTNER_BOW)
-            Set(LV_ShouldBurrow, FALSE)
+            Set(LV_ShouldBurrow, false)
         EndIf
 #endif
-        IfEq(MV_PauseBurrowing, TRUE)
-            Set(LV_ShouldBurrow, FALSE)
+        IfEq(MV_PauseBurrowing, true)
+            Set(LV_ShouldBurrow, false)
         EndIf
-        IfEq(LV_ShouldBurrow, TRUE)
-            IfEq(AF_FLO_IsUnderground_Mole_04, FALSE)
-                Call(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
+        IfEq(LV_ShouldBurrow, true)
+            IfEq(AF_FLO_IsUnderground_Mole_04, false)
+                Call(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
                 Call(NpcFacePlayer, NPC_MontyMole_04, 1)
                 Wait(1)
-                Set(AF_FLO_IsUnderground_Mole_04, TRUE)
+                Set(AF_FLO_IsUnderground_Mole_04, true)
                 IfNe(MV_NextBurrowTime_Mole_04, 0)
                     IfLt(GB_StoryProgress, STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
                         Set(LVar1, 4)
@@ -679,19 +679,19 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
                     Call(PlaySoundAtNpc, NPC_MontyMole_04, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
                     Call(ShowEmote, NPC_MontyMole_04, EMOTE_EXCLAMATION, 0, LVar1, EMOTER_NPC, 0, 0, 0, 0)
                     Wait(LVar1)
-                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
+                    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, true)
                 EndIf
                 Call(PlaySoundAtNpc, NPC_MontyMole_04, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim11)
                 Wait(20)
-                IfEq(GF_FLO03_Defeated_MontyMoleD, FALSE)
+                IfEq(GF_FLO03_Defeated_MontyMoleD, false)
                     Call(SetNpcPos, NPC_MontyMole_04, 0, -50, 0)
                 EndIf
                 Wait(45)
             EndIf
         Else
-            IfEq(AF_FLO_IsUnderground_Mole_04, TRUE)
-                IfEq(GF_FLO03_Defeated_MontyMoleD, FALSE)
+            IfEq(AF_FLO_IsUnderground_Mole_04, true)
+                IfEq(GF_FLO03_Defeated_MontyMoleD, false)
                     Call(RandInt, ARRAY_COUNT(N(BurrowLocations_Mole_04)) - 1, LVar0)
                     Add(LVar0, 1)
                     UseBuf(Ref(N(BurrowLocations_Mole_04)))
@@ -700,14 +700,14 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
                     EndLoop
                     Call(SetNpcPos, NPC_MontyMole_04, LVar1, LVar2, LVar3)
                 EndIf
-                Call(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
-                Set(AF_FLO_IsUnderground_Mole_04, FALSE)
+                Call(SetNpcFlagBits, NPC_MontyMole_04, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, true)
+                Set(AF_FLO_IsUnderground_Mole_04, false)
                 Call(NpcFacePlayer, NPC_MontyMole_04, 1)
                 Wait(1)
                 Call(PlaySoundAtNpc, NPC_MontyMole_04, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
                 Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim10)
                 Wait(10)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, FALSE)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, false)
                 Call(RandInt, 45, LVar0)
                 Add(LVar0, 45)
                 Set(MV_NextBurrowTime_Mole_04, LVar0)
@@ -728,16 +728,16 @@ EvtScript N(EVS_NpcInit_MontyMole_01) = {
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole)))
 #endif
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_MontyMole)))
-    Call(EnableNpcShadow, NPC_MontyMole_01, FALSE)
+    Call(EnableNpcShadow, NPC_MontyMole_01, false)
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_01)))
             Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim10)
         CaseEq(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
-            IfEq(GF_FLO03_Defeated_MontyMoleA, FALSE)
+            IfEq(GF_FLO03_Defeated_MontyMoleA, false)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_01)))
                 Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim10)
-                Call(SetEnemyFlagBits, NPC_MontyMole_01, ENEMY_FLAG_PASSIVE, FALSE)
+                Call(SetEnemyFlagBits, NPC_MontyMole_01, ENEMY_FLAG_PASSIVE, false)
             Else
                 Call(SetNpcPos, NPC_MontyMole_01, NPC_DISPOSE_LOCATION)
             EndIf
@@ -753,16 +753,16 @@ EvtScript N(EVS_NpcInit_MontyMole_02) = {
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole)))
 #endif
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_MontyMole)))
-    Call(EnableNpcShadow, NPC_MontyMole_02, FALSE)
+    Call(EnableNpcShadow, NPC_MontyMole_02, false)
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_02)))
             Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim10)
         CaseEq(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
-            IfEq(GF_FLO03_Defeated_MontyMoleB, FALSE)
+            IfEq(GF_FLO03_Defeated_MontyMoleB, false)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_02)))
                 Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim10)
-                Call(SetEnemyFlagBits, NPC_MontyMole_02, ENEMY_FLAG_PASSIVE, FALSE)
+                Call(SetEnemyFlagBits, NPC_MontyMole_02, ENEMY_FLAG_PASSIVE, false)
             Else
                 Call(SetNpcPos, NPC_MontyMole_02, NPC_DISPOSE_LOCATION)
             EndIf
@@ -778,16 +778,16 @@ EvtScript N(EVS_NpcInit_MontyMole_03) = {
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole)))
 #endif
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_MontyMole)))
-    Call(EnableNpcShadow, NPC_MontyMole_03, FALSE)
+    Call(EnableNpcShadow, NPC_MontyMole_03, false)
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_03)))
             Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim10)
         CaseEq(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
-            IfEq(GF_FLO03_Defeated_MontyMoleC, FALSE)
+            IfEq(GF_FLO03_Defeated_MontyMoleC, false)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_03)))
                 Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim10)
-                Call(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAG_PASSIVE, FALSE)
+                Call(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAG_PASSIVE, false)
             Else
                 Call(SetNpcPos, NPC_MontyMole_03, NPC_DISPOSE_LOCATION)
             EndIf
@@ -803,16 +803,16 @@ EvtScript N(EVS_NpcInit_MontyMole_04) = {
     Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_MontyMole)))
 #endif
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_MontyMole)))
-    Call(EnableNpcShadow, NPC_MontyMole_04, FALSE)
+    Call(EnableNpcShadow, NPC_MontyMole_04, false)
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_04)))
             Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim10)
         CaseEq(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
-            IfEq(GF_FLO03_Defeated_MontyMoleD, FALSE)
+            IfEq(GF_FLO03_Defeated_MontyMoleD, false)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_04)))
                 Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim10)
-                Call(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAG_PASSIVE, FALSE)
+                Call(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAG_PASSIVE, false)
             Else
                 Call(SetNpcPos, NPC_MontyMole_04, NPC_DISPOSE_LOCATION)
             EndIf

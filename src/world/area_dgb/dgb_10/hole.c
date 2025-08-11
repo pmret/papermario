@@ -36,7 +36,7 @@ EvtScript N(EVS_SetupHoles) = {
     Call(N(AwaitFallDownHole))
 #if VERSION_PAL
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
 #endif
     Call(InterruptUsePartner)
     Call(GotoMap, Ref("dgb_11"), LVar0)

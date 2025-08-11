@@ -89,7 +89,7 @@ API_CALLABLE(N(func_80241BA8_991388)) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     ambush = heap_malloc(sizeof(*ambush));
-    ambush->useBitingAnim = FALSE;
+    ambush->useBitingAnim = false;
     ambush->spriteIndex = SPR_StoneChomp;
     ambush->rasterIndex = 0;
     spr_get_npc_raster_info(&rasterInfo, ambush->spriteIndex, ambush->rasterIndex);
@@ -190,17 +190,17 @@ API_CALLABLE(N(func_80241EF8_9916D8)) {
 
 API_CALLABLE(N(func_80242044_991824)) {
     StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, MV_AmbushPtr);
-    ambush->useBitingAnim = TRUE;
+    ambush->useBitingAnim = true;
     return ApiStatus_DONE2;
 }
 
 EvtScript N(EVS_NpcIdle_StoneChomp) = {
     Label(0)
     Wait(1)
-    IfEq(GF_ISK13_Item_LunarStone, FALSE)
+    IfEq(GF_ISK13_Item_LunarStone, false)
         Goto(0)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(N(func_80241BA8_991388))
     Call(N(func_80241EF8_9916D8), 255, 128, 255, 0)
     Thread
@@ -259,16 +259,16 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
         Call(N(func_80241D38_991518), LVar0, LVar1, LVar2)
         Wait(1)
     EndLoop
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
     End
 };
 
 EvtScript N(EVS_NpcDefeat_StoneChomp_Override) = {
-    Set(GF_ISK13_Defeated_StoneChomp, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Set(GF_ISK13_Defeated_StoneChomp, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, false)
+    Call(EnableNpcShadow, NPC_SELF, true)
     Call(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
     Call(N(DestroyAmbushWorker))
     Call(GetBattleOutcome, LVar0)
@@ -284,14 +284,14 @@ EvtScript N(EVS_NpcDefeat_StoneChomp_Override) = {
 };
 
 EvtScript N(EVS_NpcInit_StoneChomp) = {
-    IfEq(GF_ISK13_Defeated_StoneChomp, TRUE)
+    IfEq(GF_ISK13_Defeated_StoneChomp, true)
         Call(RemoveNpc, NPC_SELF)
         Return
     EndIf
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_StoneChomp)))
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_StoneChomp_Override)))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Return
     End
 };
@@ -302,7 +302,7 @@ NpcData N(NpcData_StoneChomp) = {
     .yaw = 320,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 468, 0, -378 },

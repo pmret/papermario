@@ -88,7 +88,7 @@ API_CALLABLE(N(init)) {
     acs->variation = evt_get_variable(script, *args++);
     acs->actionCommandID = ACTION_COMMAND_WHIRLWIND;
     acs->state = AC_STATE_INIT;
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     acs->meterFillLevel = 0;
     acs->meterFillWidth = 0;
     if (acs->variation == ACV_WHIRLWIND_HUFF) {
@@ -143,7 +143,7 @@ API_CALLABLE(N(start)) {
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     acs->meterFillLevel = 0;
     acs->meterFillWidth = 0;
     battleStatus->actionQuality = 0;

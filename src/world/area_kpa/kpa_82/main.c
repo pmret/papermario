@@ -3,7 +3,7 @@
 s32 N(map_init)(void) {
     sprintf(wMapShapeName, "kpa_80_shape");
     sprintf(wMapHitName, "kpa_80_hit");
-    return FALSE;
+    return false;
 }
 
 s32 N(RightDoorModels)[] = {
@@ -30,7 +30,7 @@ EvtScript N(EVS_ExitDoors_kpa_113_1) = EVT_EXIT_DOUBLE_DOOR(kpa_82_ENTRY_0, "kpa
 
 EvtScript N(EVS_ExitDoors_kpa_61_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, kpa_82_ENTRY_1)
     Set(LVar1, COLLIDER_o166)
     Set(LVar2, Ref(N(RightDoorModels)))
@@ -44,10 +44,10 @@ EvtScript N(EVS_ExitDoors_kpa_61_0) = {
 };
 
 EvtScript N(EVS_Inspect_FaceDoor) = {
-    IfEq(GF_KPA82_PassedThroughDoor, TRUE)
+    IfEq(GF_KPA82_PassedThroughDoor, true)
         Return
     EndIf
-    Set(GF_KPA82_PassedThroughDoor, TRUE)
+    Set(GF_KPA82_PassedThroughDoor, true)
     Return
     End
 };
@@ -87,26 +87,26 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_BOWSERS_CASTLE)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
-    Call(EnableModel, MODEL_o166, FALSE)
-    Call(EnableModel, MODEL_m_, FALSE)
-    Call(EnableModel, MODEL_m_kai, FALSE)
-    Call(EnableModel, MODEL_m1, FALSE)
-    Call(EnableModel, MODEL_m2, FALSE)
-    Call(EnableModel, MODEL_m3, FALSE)
-    Call(EnableModel, MODEL_m4, FALSE)
-    Call(EnableModel, MODEL_m5, FALSE)
-    Call(EnableModel, MODEL_m6, FALSE)
-    Call(EnableModel, MODEL_m7, FALSE)
-    Call(EnableModel, MODEL_b_, FALSE)
-    Call(EnableModel, MODEL_b_kai, FALSE)
-    Call(EnableModel, MODEL_b1, FALSE)
-    Call(EnableModel, MODEL_b2, FALSE)
-    Call(EnableModel, MODEL_b3, FALSE)
-    Call(EnableModel, MODEL_b4, FALSE)
-    Call(EnableModel, MODEL_b5, FALSE)
-    Call(EnableModel, MODEL_b6, FALSE)
-    Call(EnableModel, MODEL_b7, FALSE)
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
+    Call(EnableModel, MODEL_o166, false)
+    Call(EnableModel, MODEL_m_, false)
+    Call(EnableModel, MODEL_m_kai, false)
+    Call(EnableModel, MODEL_m1, false)
+    Call(EnableModel, MODEL_m2, false)
+    Call(EnableModel, MODEL_m3, false)
+    Call(EnableModel, MODEL_m4, false)
+    Call(EnableModel, MODEL_m5, false)
+    Call(EnableModel, MODEL_m6, false)
+    Call(EnableModel, MODEL_m7, false)
+    Call(EnableModel, MODEL_b_, false)
+    Call(EnableModel, MODEL_b_kai, false)
+    Call(EnableModel, MODEL_b1, false)
+    Call(EnableModel, MODEL_b2, false)
+    Call(EnableModel, MODEL_b3, false)
+    Call(EnableModel, MODEL_b4, false)
+    Call(EnableModel, MODEL_b5, false)
+    Call(EnableModel, MODEL_b6, false)
+    Call(EnableModel, MODEL_b7, false)
     Exec(N(EVS_EnterMap))
     Wait(1)
     Exec(N(EVS_SetupMusic))

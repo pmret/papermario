@@ -129,7 +129,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_ReturnHome) = {
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim04)
     Wait(10)
@@ -139,13 +139,13 @@ EvtScript N(EVS_ReturnHome) = {
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim03)
     Wait(10)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, false)
     Return
     End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -235,10 +235,10 @@ EvtScript N(EVS_HandleEvent) = {
             ExecWait(EVS_Enemy_Hit)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim04)
-            Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+            Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
             Wait(20)
             Call(HideHealthBar, ACTOR_SELF)
-            Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+            Call(UseIdleAnimation, ACTOR_SELF, false)
             Call(RemoveActor, ACTOR_SELF)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
@@ -253,22 +253,22 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(GetBattlePhase, LVar0)
     IfEq(LVar0, PHASE_FIRST_STRIKE)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim04)
-        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(BattleCamTargetActor, ACTOR_SELF)
-        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+        Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
         Call(MoveBattleCamOver, 1)
         Call(SetGoalToTarget, ACTOR_SELF)
         Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -280,7 +280,7 @@ EvtScript N(EVS_TakeTurn) = {
     EndIf
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim04)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
     Wait(8)
     Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -290,7 +290,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
     Call(SetBattleCamDist, 350)
     Call(SetBattleCamOffsetY, 45)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(MoveBattleCamOver, 20)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -299,11 +299,11 @@ EvtScript N(EVS_TakeTurn) = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 20, false, true, false)
     Label(123)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
     Call(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim03)
     Wait(10)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim05)
@@ -326,7 +326,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
             ExecWait(N(EVS_ReturnHome))
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -349,7 +349,7 @@ EvtScript N(EVS_TakeTurn) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

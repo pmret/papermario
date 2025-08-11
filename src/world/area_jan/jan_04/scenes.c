@@ -34,8 +34,8 @@ Vec3f N(YoshiKidsRunPath)[] = {
 };
 
 EvtScript N(EVS_Scene_Epilogue) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAND)
     Call(SetNpcPos, NPC_Sushie, -40, 0, 15)
     Call(SetNpcYaw, NPC_Sushie, 270)
@@ -47,7 +47,7 @@ EvtScript N(EVS_Scene_Epilogue) = {
     Call(SetCamDistance, CAM_DEFAULT, 350)
     Call(SetCamPitch, CAM_DEFAULT, Float(16.0), Float(-7.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(90)
     Thread
         Call(SetNpcPos, NPC_YoshiKid_01, -350, 0, 15)
@@ -81,7 +81,7 @@ EvtScript N(EVS_Scene_Epilogue) = {
     Call(GetNpcPos, NPC_Sushie, LVar0, LVar1, LVar2)
     Call(NpcJump0, NPC_Sushie, LVar0, LVar1, LVar2, 10)
     Call(SetNpcAnimation, NPC_YoshiKid_01, ANIM_YoshiKid_Green_Talk)
-    Call(SetNpcFlagBits, NPC_YoshiKid_03, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_YoshiKid_03, NPC_FLAG_GRAVITY, true)
     Call(SetNpcPos, NPC_YoshiKid_03, -350, 0, 15)
 #if VERSION_JP
     Call(SetNpcSpeed, NPC_YoshiKid_03, Float(3.0))

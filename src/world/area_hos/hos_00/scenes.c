@@ -57,7 +57,7 @@ Vec3f N(TwinkDepartPath2)[] = {
 };
 
 API_CALLABLE(N(EnableActionCommands)) {
-    gPlayerData.hasActionCommands = TRUE;
+    gPlayerData.hasActionCommands = true;
     return ApiStatus_DONE2;
 }
 
@@ -128,7 +128,7 @@ EvtScript N(EVS_UpdateFacingMagikoopa) = {
         Set(LVar6, LVar9)
         Set(LVar7, LVarA)
         Set(LVar8, LVarB)
-        Call(PlayerFaceNpc, NPC_FlyingMagikoopa, FALSE)
+        Call(PlayerFaceNpc, NPC_FlyingMagikoopa, false)
         Call(GetAngleBetweenNPCs, NPC_Twink, NPC_FlyingMagikoopa, LVar0)
         Call(InterpNpcYaw, NPC_Twink, LVar0, 0)
         Call(GetAngleBetweenNPCs, NPC_PARTNER, NPC_FlyingMagikoopa, LVar0)
@@ -192,7 +192,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(func_802CF56C, 2)
     Thread
         Add(LVar0, -20)
@@ -249,7 +249,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
     Call(SetCamDistance, CAM_DEFAULT, 275)
     Call(SetCamPitch, CAM_DEFAULT, Float(16.0), Float(-8.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetNpcSpeed, NPC_Twink, Float(3.0 / DT))
     Call(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
     Add(LVar0, 40)
@@ -336,7 +336,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
     Call(SetNpcAnimation, NPC_Twink, ANIM_Twink_Pleased)
     Set(LVar0, 7)
     Set(LVar1, 4)
-    Call(ShowGotItem, LVar0, TRUE, 0)
+    Call(ShowGotItem, LVar0, true, 0)
     Call(AddKeyItem, LVar0)
     Call(N(EnableActionCommands))
     Call(SetNpcAnimation, NPC_Twink, ANIM_Twink_Idle)
@@ -376,7 +376,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Thread
         Wait(20 * DT)
@@ -385,12 +385,12 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
         Div(LVar0, 2)
         Call(SetPanTarget, CAM_DEFAULT, -250, 53, 0)
         Call(SetCamSpeed, CAM_DEFAULT, Float(1.4 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Wait(10 * DT)
         Call(SetPanTarget, CAM_DEFAULT, LVar0, 0, 0)
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     ExecGetTID(N(EVS_UpdateFacingMagikoopa), LVarA)
@@ -439,7 +439,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(260.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(13.0), Float(-8.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(1)
     Call(SpeakToPlayer, NPC_FlyingMagikoopa, ANIM_FlyingMagikoopa_Anim09, ANIM_FlyingMagikoopa_Anim00, 512, MSG_HOS_0033)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -448,7 +448,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, 0, 0)
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetNpcVar, NPC_FlyingMagikoopa, 0, 1)
     Call(EnablePartnerAI)
     Unbind
@@ -460,7 +460,7 @@ EvtScript N(EVS_Scene_TwinkDeparts) = {
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     Call(SetMusic, 0, SONG_TWINK_THEME, 0, VOL_LEVEL_FULL)
     Wait(60 * DT)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, true)
     Call(GetNpcPos, NPC_Twink, LVar3, LVar1, LVar2)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Add(LVar0, LVar3)
@@ -469,7 +469,7 @@ EvtScript N(EVS_Scene_TwinkDeparts) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(16.0), Float(-9.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(1)
     Call(InterpNpcYaw, NPC_Twink, 90, 0)
     Call(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_HOS_0034)
@@ -483,7 +483,7 @@ EvtScript N(EVS_Scene_TwinkDeparts) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(700.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.3 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(GetNpcPos, NPC_Twink, LVar4, LVar5, LVar6)
     Call(LoadPath, 85 * DT, Ref(N(TwinkDepartPath1)), ARRAY_COUNT(N(TwinkDepartPath1)), EASING_LINEAR)
     Label(0)
@@ -519,7 +519,7 @@ EvtScript N(EVS_Scene_TwinkDeparts) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(16.0), Float(-8.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_HOS_0036)
     Thread
@@ -543,26 +543,26 @@ EvtScript N(EVS_Scene_TwinkDeparts) = {
     Call(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
     Call(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.5))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(30 * DT)
-    Call(SetNpcFlagBits, NPC_Twink, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Call(SetNpcFlagBits, NPC_Twink, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, true)
     SetF(LVar0, Float(0.0))
     Loop(10)
         AddF(LVar0, Float(36.0))
         Call(SetNpcRotation, NPC_Twink, 0, LVar0, 0)
         Wait(1)
     EndLoop
-    Call(SetNpcFlagBits, NPC_Twink, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, FALSE)
+    Call(SetNpcFlagBits, NPC_Twink, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, false)
     Wait(120 * DT)
     Call(InterpNpcYaw, NPC_PARTNER, 270, 0)
-    Call(PlayerFaceNpc, NPC_PARTNER, FALSE)
+    Call(PlayerFaceNpc, NPC_PARTNER, false)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(13.0), Float(-7.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(10 * DT)
     Call(DisablePartnerAI, 0)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_HOS_0037)
@@ -576,7 +576,7 @@ EvtScript N(EVS_Scene_TwinkDeparts) = {
         Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
     EndThread
     Wait(10 * DT)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

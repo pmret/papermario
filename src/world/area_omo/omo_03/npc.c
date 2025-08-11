@@ -6,56 +6,56 @@
 #include "world/common/enemy/ShyGuy_Stationary.inc.c"
 
 EvtScript N(EVS_ItemPrompt_ToyTrain) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     IfLt(GB_StoryProgress, STORY_CH4_RETURNED_TOY_TRAIN)
         Call(ShowKeyChoicePopup)
         Call(CloseChoicePopup)
         IfEq(LVar0, ITEM_TOY_TRAIN)
             Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0002)
         Else
-            IfEq(AF_OMO_05, FALSE)
+            IfEq(AF_OMO_05, false)
                 Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_SadTalk, ANIM_TrainToad_SadIdle, 0, MSG_CH4_0000)
-                Set(AF_OMO_05, TRUE)
+                Set(AF_OMO_05, true)
             Else
                 Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_SadTalk, ANIM_TrainToad_SadIdle, 0, MSG_CH4_0001)
-                Set(AF_OMO_05, FALSE)
+                Set(AF_OMO_05, false)
             EndIf
         EndIf
     Else
-        IfEq(GF_OMO03_LearnedAboutTrainSwitches, FALSE)
-            IfEq(AF_OMO_05, FALSE)
+        IfEq(GF_OMO03_LearnedAboutTrainSwitches, false)
+            IfEq(AF_OMO_05, false)
                 Thread
-                    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+                    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
                     Call(SetNpcJumpscale, NPC_Conductor, Float(1.0))
                     Call(GetNpcPos, NPC_Conductor, LVar0, LVar1, LVar2)
                     Loop(2)
                         Call(NpcJump1, NPC_Conductor, LVar0, LVar1, LVar2, 15)
                     EndLoop
-                    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+                    Call(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
                 EndThread
                 Wait(10)
-                IfEq(MF_EitherSwitchPressed, FALSE)
+                IfEq(MF_EitherSwitchPressed, false)
                     Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0003)
                     Call(EndSpeech, NPC_Conductor, -1, -1, 0)
                 Else
                     Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0003)
                     Call(ContinueSpeech, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0005)
-                    Set(GF_OMO03_LearnedAboutTrainSwitches, TRUE)
+                    Set(GF_OMO03_LearnedAboutTrainSwitches, true)
                 EndIf
-                Set(AF_OMO_05, TRUE)
+                Set(AF_OMO_05, true)
             Else
                 Call(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 0, MSG_CH4_0004)
-                Set(GF_OMO03_LearnedAboutTrainSwitches, TRUE)
+                Set(GF_OMO03_LearnedAboutTrainSwitches, true)
             EndIf
         Else
-            IfEq(AF_OMO_06, FALSE)
+            IfEq(AF_OMO_06, false)
                 ExecWait(N(EVS_8024705C))
             Else
                 ExecWait(N(EVS_80246108))
             EndIf
         EndIf
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Unbind
     Return
     End

@@ -33,9 +33,9 @@ API_CALLABLE(N(init)) {
     action_command_init_status();
 
     acs->actionCommandID = ACTION_COMMAND_BREAK_FREE;
-    acs->showHud = TRUE;
+    acs->showHud = true;
     acs->state = AC_STATE_INIT;
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     acs->meterFillLevel = 0;
     acs->escapeThreshold = 0;
     acs->meterFillWidth = 0;
@@ -88,7 +88,7 @@ API_CALLABLE(N(start)) {
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     acs->meterFillLevel = 0;
     acs->escapeThreshold = 0;
     acs->meterFillWidth = 0;

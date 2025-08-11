@@ -7,16 +7,16 @@ EvtScript N(EVS_NpcDefeat_Koopatrol) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Set(GF_KPA11_Defeated_Guard, TRUE)
+            Set(GF_KPA11_Defeated_Guard, true)
             Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             Call(MakeItemEntity, ITEM_BOWSER_CASTLE_KEY, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA11_Item_CastleKey2)
             Call(DoNpcDefeat)
         CaseEq(OUTCOME_PLAYER_FLED)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Set(GF_KPA11_Defeated_Guard, TRUE)
+            Set(GF_KPA11_Defeated_Guard, true)
             Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             Call(MakeItemEntity, ITEM_BOWSER_CASTLE_KEY, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA11_Item_CastleKey2)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -24,7 +24,7 @@ EvtScript N(EVS_NpcDefeat_Koopatrol) = {
 };
 
 EvtScript N(EVS_NpcInit_Koopatrol) = {
-    IfEq(GF_KPA11_Defeated_Guard, FALSE)
+    IfEq(GF_KPA11_Defeated_Guard, false)
         Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Koopatrol)))
     Else
         Call(RemoveNpc, NPC_SELF)
@@ -39,7 +39,7 @@ NpcData N(NpcData_Koopatrol) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 550, 30, -145 },

@@ -29,7 +29,7 @@ EvtScript N(EVS_NpcIdle_Bowser) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-7.0))
         Call(SetCamDistance, CAM_DEFAULT, 1000)
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Call(StartBossBattle, SONG_FINAL_BOWSER_BATTLE)
     Goto(0)
@@ -40,9 +40,9 @@ EvtScript N(EVS_NpcIdle_Bowser) = {
 #include "world/common/todo/UnkFunc1.inc.c"
 
 EvtScript N(EVS_NpcDefeat_Bowser) = {
-    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, TRUE)
+    Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, true)
     Call(N(UnkFunc1))
-    Set(GF_KKJ25_Defeated_Bowser, TRUE)
+    Set(GF_KKJ25_Defeated_Bowser, true)
     // reload the map in the 'final' configuration
     Call(GotoMap, Ref("kkj_25"), kkj_25_ENTRY_2)
     Wait(100)
@@ -111,7 +111,7 @@ EvtScript N(EVS_NpcInit_Twink) = {
 
 EvtScript N(EVS_NpcInit_Eldstar) = {
     Call(SetNpcImgFXParams, NPC_Eldstar, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-    Call(EnableNpcShadow, NPC_Eldstar, FALSE)
+    Call(EnableNpcShadow, NPC_Eldstar, false)
     Call(SetNpcPos, NPC_Eldstar, 100, 45, 0)
     Return
     End
@@ -119,7 +119,7 @@ EvtScript N(EVS_NpcInit_Eldstar) = {
 
 EvtScript N(EVS_NpcInit_Mamar) = {
     Call(SetNpcImgFXParams, NPC_Mamar, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-    Call(EnableNpcShadow, NPC_Mamar, FALSE)
+    Call(EnableNpcShadow, NPC_Mamar, false)
     Call(SetNpcPos, NPC_Mamar, 46, 45, -27)
     Return
     End
@@ -127,7 +127,7 @@ EvtScript N(EVS_NpcInit_Mamar) = {
 
 EvtScript N(EVS_NpcInit_Skolar) = {
     Call(SetNpcImgFXParams, NPC_Skolar, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-    Call(EnableNpcShadow, NPC_Skolar, FALSE)
+    Call(EnableNpcShadow, NPC_Skolar, false)
     Call(SetNpcPos, NPC_Skolar, 33, 45, -95)
     Return
     End
@@ -135,7 +135,7 @@ EvtScript N(EVS_NpcInit_Skolar) = {
 
 EvtScript N(EVS_NpcInit_Muskular) = {
     Call(SetNpcImgFXParams, NPC_Muskular, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-    Call(EnableNpcShadow, NPC_Muskular, FALSE)
+    Call(EnableNpcShadow, NPC_Muskular, false)
     Call(SetNpcPos, NPC_Muskular, 71, 45, -132)
     Return
     End
@@ -143,7 +143,7 @@ EvtScript N(EVS_NpcInit_Muskular) = {
 
 EvtScript N(EVS_NpcInit_Misstar) = {
     Call(SetNpcImgFXParams, NPC_Misstar, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-    Call(EnableNpcShadow, NPC_Misstar, FALSE)
+    Call(EnableNpcShadow, NPC_Misstar, false)
     Call(SetNpcPos, NPC_Misstar, 131, 45, -132)
     Return
     End
@@ -151,7 +151,7 @@ EvtScript N(EVS_NpcInit_Misstar) = {
 
 EvtScript N(EVS_NpcInit_Klevar) = {
     Call(SetNpcImgFXParams, NPC_Klevar, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-    Call(EnableNpcShadow, NPC_Klevar, FALSE)
+    Call(EnableNpcShadow, NPC_Klevar, false)
     Call(SetNpcPos, NPC_Klevar, 169, 45, -95)
     Return
     End
@@ -159,7 +159,7 @@ EvtScript N(EVS_NpcInit_Klevar) = {
 
 EvtScript N(EVS_NpcInit_Kalmar) = {
     Call(SetNpcImgFXParams, NPC_Kalmar, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-    Call(EnableNpcShadow, NPC_Kalmar, FALSE)
+    Call(EnableNpcShadow, NPC_Kalmar, false)
     Call(SetNpcPos, NPC_Kalmar, 156, 45, -27)
     Return
     End

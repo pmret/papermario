@@ -17,11 +17,11 @@ s32 N(BothLeftDoorModelsR)[] = { MODEL_o768, MODEL_o846, MODEL_o861, MODEL_o862,
 
 EvtScript N(EVS_ExitDoors_pra_02_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, 0)
     Set(LVar1, 20)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothLeftDoorModelsL)))
         Set(LVar3, Ref(N(BothLeftDoorModelsR)))
     Else
@@ -52,11 +52,11 @@ EvtScript N(EVS_Unused_2) = {
 
 EvtScript N(EVS_ExitDoors_pra_02_3) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, 3)
     Set(LVar1, 24)
-    IfEq(GF_PRA_BrokeIllusion, FALSE)
+    IfEq(GF_PRA_BrokeIllusion, false)
         Set(LVar2, Ref(N(BothLeftDoorModelsL)))
         Set(LVar3, Ref(N(BothLeftDoorModelsR)))
     Else
@@ -85,7 +85,7 @@ EvtScript N(EVS_EnterMap) = {
     Switch(LVar0)
         CaseEq(pra_13_ENTRY_0)
             Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothLeftDoorModelsL)))
                 Set(LVar3, Ref(N(BothLeftDoorModelsR)))
             Else
@@ -102,7 +102,7 @@ EvtScript N(EVS_EnterMap) = {
             Exec(EnterWalk)
         CaseEq(pra_13_ENTRY_3)
             Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
-            IfEq(GF_PRA_BrokeIllusion, FALSE)
+            IfEq(GF_PRA_BrokeIllusion, false)
                 Set(LVar2, Ref(N(BothLeftDoorModelsL)))
                 Set(LVar3, Ref(N(BothLeftDoorModelsR)))
             Else
@@ -128,12 +128,12 @@ BombTrigger N(BombPos_FarWall) = {
 
 EvtScript N(EVS_BlastWall_Near) = {
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 50, 34, 1, 10, 30)
-    Call(EnableModel, MODEL_g260, FALSE)
-    Call(EnableModel, MODEL_g265, FALSE)
-    Call(EnableModel, MODEL_o952, TRUE)
+    Call(EnableModel, MODEL_g260, false)
+    Call(EnableModel, MODEL_g265, false)
+    Call(EnableModel, MODEL_o952, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittse, COLLIDER_FLAGS_UPPER_MASK)
-    Set(GF_PRA13_BombedWallA, TRUE)
-    Set(GF_PRA_BrokeIllusion, TRUE)
+    Set(GF_PRA13_BombedWallA, true)
+    Set(GF_PRA_BrokeIllusion, true)
     Unbind
     Return
     End
@@ -141,11 +141,11 @@ EvtScript N(EVS_BlastWall_Near) = {
 
 EvtScript N(EVS_BlastWall_Far) = {
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 65, 34, 1, 10, 30)
-    Call(EnableModel, MODEL_g289, FALSE)
-    Call(EnableModel, MODEL_g290, FALSE)
-    Call(EnableModel, MODEL_o1009, TRUE)
+    Call(EnableModel, MODEL_g289, false)
+    Call(EnableModel, MODEL_g290, false)
+    Call(EnableModel, MODEL_o1009, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittne, COLLIDER_FLAGS_UPPER_MASK)
-    Set(GF_PRA13_BombedWallB, TRUE)
+    Set(GF_PRA13_BombedWallB, true)
     Unbind
     Return
     End
@@ -156,9 +156,9 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(SetCamBGColor, CAM_DEFAULT, 24, 24, 40)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     Set(LVar0, MODEL_o945)
     Set(LVar1, MODEL_o947)
     Set(LVar2, 0)
@@ -169,20 +169,20 @@ EvtScript N(EVS_Main) = {
     Exec(N(EVS_EnterMap))
     Wait(1)
     Exec(N(EVS_SetupMusic))
-    IfEq(GF_PRA13_BombedWallA, FALSE)
+    IfEq(GF_PRA13_BombedWallA, false)
         BindTrigger(Ref(N(EVS_BlastWall_Near)), TRIGGER_POINT_BOMB, Ref(N(BombPos_NearWall)), 1, 0)
-        Call(EnableModel, MODEL_o952, FALSE)
+        Call(EnableModel, MODEL_o952, false)
     Else
-        Call(EnableModel, MODEL_g260, FALSE)
-        Call(EnableModel, MODEL_g265, FALSE)
+        Call(EnableModel, MODEL_g260, false)
+        Call(EnableModel, MODEL_g265, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittse, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
-    IfEq(GF_PRA13_BombedWallB, FALSE)
+    IfEq(GF_PRA13_BombedWallB, false)
         BindTrigger(Ref(N(EVS_BlastWall_Far)), TRIGGER_POINT_BOMB, Ref(N(BombPos_FarWall)), 1, 0)
-        Call(EnableModel, MODEL_o1009, FALSE)
+        Call(EnableModel, MODEL_o1009, false)
     Else
-        Call(EnableModel, MODEL_g289, FALSE)
-        Call(EnableModel, MODEL_g290, FALSE)
+        Call(EnableModel, MODEL_g289, false)
+        Call(EnableModel, MODEL_g290, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittne, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     Return

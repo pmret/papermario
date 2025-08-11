@@ -27,7 +27,7 @@ EvtScript N(EVS_NpcDefeat_DarkTroopa) = {
         CaseEq(OUTCOME_PLAYER_WON)
             Call(N(GetDefeatedEnemyCount), LVar0)
             IfEq(LVar0, 1)
-                Set(GF_TIK09_Defeated_Ambush, TRUE)
+                Set(GF_TIK09_Defeated_Ambush, true)
                 Exec(N(EVS_SpawnSwitch))
                 Exec(N(EVS_OpenGates))
             EndIf
@@ -40,7 +40,7 @@ EvtScript N(EVS_NpcDefeat_DarkTroopa) = {
 };
 
 EvtScript N(EVS_NpcInit_DarkTroopa) = {
-    IfEq(GF_TIK09_Defeated_Ambush, FALSE)
+    IfEq(GF_TIK09_Defeated_Ambush, false)
         Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_DarkTroopa)))
     Else
         Call(RemoveNpc, NPC_SELF)
@@ -55,7 +55,7 @@ NpcData N(NpcData_KoopaTroopa_01) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -80, -10, 0 },
@@ -79,7 +79,7 @@ NpcData N(NpcData_KoopaTroopa_02) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 60, -10, 0 },
@@ -103,7 +103,7 @@ NpcData N(NpcData_KoopaTroopa_03) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 180, -10, 0 },

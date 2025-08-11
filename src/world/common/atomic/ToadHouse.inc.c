@@ -58,7 +58,7 @@ API_CALLABLE(N(ToadHouse_PartnerResumeAbilityScript)) {
 API_CALLABLE(N(ToadHouse_DoesPlayerNeedSleep)) {
     PlayerData* playerData = &gPlayerData;
 
-    script->varTable[1] = FALSE;
+    script->varTable[1] = false;
     if (playerData->curMaxHP != playerData->curHP) {
         return ApiStatus_DONE2;
     }
@@ -68,7 +68,7 @@ API_CALLABLE(N(ToadHouse_DoesPlayerNeedSleep)) {
     if (playerData->starPower != playerData->maxStarPower * SP_PER_BAR) {
         return ApiStatus_DONE2;
     }
-    script->varTable[1] = TRUE;
+    script->varTable[1] = true;
 
     return ApiStatus_DONE2;
 }

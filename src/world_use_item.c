@@ -89,10 +89,10 @@ API_CALLABLE(WorldItem_GetItemProperties) {
 
     script->varTable[11] = (&gItemTable[itemIdx])->potencyA;
     script->varTable[12] = (&gItemTable[itemIdx])->potencyB;
-    script->varTable[13] = FALSE;
+    script->varTable[13] = false;
 
     if ((&gItemTable[itemIdx])->typeFlags & ITEM_TYPE_FLAG_USE_DRINK_ANIMATION) {
-        script->varTable[13] = TRUE;
+        script->varTable[13] = true;
     }
 
     var15 = 0;
@@ -153,7 +153,7 @@ EvtScript EVS_WorldItem_PlayDrinkingSounds = {
 
 EvtScript EVS_World_UseItem = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetPartnerInUse, LVar0)
     IfNe(LVar0, 0)
         Call(InterruptUsePartner)
@@ -203,7 +203,7 @@ EvtScript EVS_World_UseItem = {
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Wait(20)
     Call(WorldItem_ConsumeItem)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(WorldItem_UnpauseTime)
     Return
     End

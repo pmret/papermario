@@ -34,9 +34,9 @@ EvtScript N(EVS_BreakBlock_Third) = {
 EvtScript N(EVS_ReadSign_Directions) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_0178, 160, 40)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Return
     End
@@ -45,7 +45,7 @@ EvtScript N(EVS_ReadSign_Directions) = {
 EvtScript N(EVS_MakeEntities) = {
     Call(MakeEntity, Ref(Entity_Signpost), -430, 150, -75, 0, MAKE_ENTITY_END)
     Call(AssignScript, Ref(N(EVS_ReadSign_Directions)))
-    IfEq(GF_NOK13_BadgeBlock_AttackFXB, FALSE)
+    IfEq(GF_NOK13_BadgeBlock_AttackFXB, false)
         Set(AB_NOK_1, 0)
         Call(MakeEntity, Ref(Entity_BrickBlock), 70, 0, -250, 90, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_BreakBlock_First)))

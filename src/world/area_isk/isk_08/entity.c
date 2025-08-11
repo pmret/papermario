@@ -18,26 +18,26 @@ BombTrigger N(BombPos_Wall) = {
 EvtScript N(EVS_OnBlast_Wall) = {
     PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 36, 12, 1, 10, 30)
     Loop(10)
-        Call(EnableModel, MODEL_g293, TRUE)
+        Call(EnableModel, MODEL_g293, true)
         Wait(1)
-        Call(EnableModel, MODEL_g293, FALSE)
+        Call(EnableModel, MODEL_g293, false)
         Wait(1)
     EndLoop
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
-    Set(GF_ISK_BombedWallFrom08, TRUE)
+    Set(GF_ISK_BombedWallFrom08, true)
     Unbind
     Return
     End
 };
 
 EvtScript N(EVS_HideDestroyedWall) = {
-    Call(EnableModel, MODEL_o2012, FALSE)
-    Call(EnableModel, MODEL_o2019, FALSE)
-    Call(EnableModel, MODEL_o2021, FALSE)
-    Call(EnableModel, MODEL_o2018, FALSE)
-    Call(EnableModel, MODEL_o2020, FALSE)
-    Call(EnableModel, MODEL_o2022, FALSE)
-    Call(EnableModel, MODEL_o2023, FALSE)
+    Call(EnableModel, MODEL_o2012, false)
+    Call(EnableModel, MODEL_o2019, false)
+    Call(EnableModel, MODEL_o2021, false)
+    Call(EnableModel, MODEL_o2018, false)
+    Call(EnableModel, MODEL_o2020, false)
+    Call(EnableModel, MODEL_o2022, false)
+    Call(EnableModel, MODEL_o2023, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2029, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2030, COLLIDER_FLAGS_UPPER_MASK)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o2032, COLLIDER_FLAGS_UPPER_MASK)
@@ -46,16 +46,16 @@ EvtScript N(EVS_HideDestroyedWall) = {
 };
 
 EvtScript N(EVS_SetupBombableWall) = {
-    IfEq(GF_ISK_BombedWallFrom08, FALSE)
-        IfEq(GF_ISK_BombedWallFrom10, FALSE)
+    IfEq(GF_ISK_BombedWallFrom08, false)
+        IfEq(GF_ISK_BombedWallFrom10, false)
             BindTrigger(Ref(N(EVS_OnBlast_Wall)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Wall)), 1, 0)
             ExecWait(N(EVS_HideDestroyedWall))
         Else
-            Call(EnableModel, MODEL_g293, FALSE)
+            Call(EnableModel, MODEL_g293, false)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
         EndIf
     Else
-        Call(EnableModel, MODEL_g293, FALSE)
+        Call(EnableModel, MODEL_g293, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
         ExecWait(N(EVS_HideDestroyedWall))
     EndIf

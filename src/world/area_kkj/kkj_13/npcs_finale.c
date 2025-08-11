@@ -25,7 +25,7 @@ EvtScript N(EVS_UpdatePropellerSounds) = {
         IfLt(LVar0, 0)
             BreakLoop
         EndIf
-        IfEq(GF_KKJ13_BowserTaunts, TRUE)
+        IfEq(GF_KKJ13_BowserTaunts, true)
             BreakLoop
         EndIf
         Wait(1)
@@ -45,7 +45,7 @@ EvtScript N(EVS_MoveToBattlePositions) = {
         Call(UseSettingsFrom, CAM_DEFAULT, 600, 0, 0)
         Call(SetPanTarget, CAM_DEFAULT, 600, 0, 0)
         Call(SetCamSpeed, CAM_DEFAULT, Float(1.5))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Thread
         Wait(20)
@@ -71,16 +71,16 @@ EvtScript N(EVS_Scene_MarioConfrontsBowser) = {
     IfLt(GB_StoryProgress, STORY_CH8_OPENED_PATH_TO_STAR_WAY)
         Return
     EndIf
-    IfEq(GF_KKJ13_BowserTaunts, TRUE)
+    IfEq(GF_KKJ13_BowserTaunts, true)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetNpcPos, NPC_Bowser_Body, 725, 210, -25)
     Call(SetNpcPos, NPC_Bowser_Prop, 725, 210, -25)
     Exec(N(EVS_UpdatePropellerSounds))
     Call(SpeakToPlayer, NPC_CaptivePeach, ANIM_Peach2_TiedHangStruggle, ANIM_Peach2_TiedHangIdle, 0, MSG_CH8_006F)
-    Call(EnableNpcShadow, NPC_Bowser_Body, FALSE)
-    Call(SetCamType, CAM_DEFAULT, 1, FALSE)
+    Call(EnableNpcShadow, NPC_Bowser_Body, false)
+    Call(SetCamType, CAM_DEFAULT, 1, false)
     Set(LVar0, 725)
     Set(LVar1, 50)
     Set(LVar2, -25)
@@ -91,9 +91,9 @@ EvtScript N(EVS_Scene_MarioConfrontsBowser) = {
     Call(SetCamDistance, CAM_DEFAULT, 600)
     Call(SetCamPosA, CAM_DEFAULT, Float(85.0), Float(-3.5))
     Call(SetCamPosB, CAM_DEFAULT, Float(210.0), Float(240.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(60)
-    Call(EnableNpcShadow, NPC_Bowser_Body, TRUE)
+    Call(EnableNpcShadow, NPC_Bowser_Body, true)
     Thread
         Call(SetNpcJumpscale, NPC_Bowser_Body, Float(0.0))
         Call(NpcJump0, NPC_Bowser_Body, 725, 50, -25, 20)
@@ -109,7 +109,7 @@ EvtScript N(EVS_Scene_MarioConfrontsBowser) = {
     Call(SetCamDistance, CAM_DEFAULT, 350)
     Call(SetCamPosA, CAM_DEFAULT, Float(72.5), Float(-25.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(210.0), Float(240.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10)
     Call(SpeakToPlayer, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarTalk, ANIM_WorldBowser_ClownCarIdle, 0, MSG_CH8_0070)
@@ -122,13 +122,13 @@ EvtScript N(EVS_Scene_MarioConfrontsBowser) = {
     Call(SetCamDistance, CAM_DEFAULT, 325)
     Call(SetCamPosA, CAM_DEFAULT, Float(72.0), Float(0.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(170.0), Float(240.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(20)
     Call(SpeakToPlayer, NPC_CaptivePeach, ANIM_Peach2_TiedHangStruggle, ANIM_Peach2_TiedHangIdle, 0, MSG_CH8_0071)
     Wait(20)
     Call(SetPlayerPos, 400, 0, -15)
     Call(PartnerIsFlying, LVar0)
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Call(SetNpcPos, NPC_PARTNER, 370, 20, -15)
     Else
         Call(SetNpcPos, NPC_PARTNER, 370, 0, -15)
@@ -152,7 +152,7 @@ EvtScript N(EVS_Scene_MarioConfrontsBowser) = {
         Call(NpcMoveTo, NPC_Bowser_Body, 630, 0, 25)
         Call(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_Idle)
     EndThread
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -243,13 +243,13 @@ EvtScript N(EVS_BowserFliesAway) = {
 };
 
 EvtScript N(EVS_Scene_BowserDefeated) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(DisablePartnerAI, 1)
-    Call(EnableGroup, MODEL_g153, FALSE)
+    Call(EnableGroup, MODEL_g153, false)
     Call(SetPlayerPos, 525, 0, 0)
 #if !VERSION_JP
     Call(PartnerIsFlying, LVar0)
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Set(LVar1, 10)
     Else
         Set(LVar1, 0)
@@ -278,8 +278,8 @@ EvtScript N(EVS_Scene_BowserDefeated) = {
     Wait(10)
     Call(SpeakToPlayer, NPC_Bowser_Body, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, MSG_CH8_007A)
     Call(ResetCam, CAM_DEFAULT, Float(1.0))
-    Set(GF_KKJ13_BowserTaunts, TRUE)
-    Call(DisablePlayerInput, FALSE)
+    Set(GF_KKJ13_BowserTaunts, true)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -288,7 +288,7 @@ EvtScript N(EVS_NpcDefeat_Bowser_Body) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, TRUE)
+            Call(SetEncounterStatusFlags, ENCOUNTER_FLAG_CANT_SKIP_WIN_DELAY, true)
             Exec(N(EVS_Scene_BowserDefeated))
         CaseEq(OUTCOME_PLAYER_LOST)
         CaseEq(OUTCOME_PLAYER_FLED)
@@ -299,7 +299,7 @@ EvtScript N(EVS_NpcDefeat_Bowser_Body) = {
 
 EvtScript N(EVS_NpcInit_Bowser_Body) = {
     Call(SetNpcPos, NPC_Bowser_Body, NPC_DISPOSE_LOCATION)
-    IfEq(GF_KKJ13_BowserTaunts, TRUE)
+    IfEq(GF_KKJ13_BowserTaunts, true)
         Return
     EndIf
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_BowserAwaitBattle)))
@@ -310,9 +310,9 @@ EvtScript N(EVS_NpcInit_Bowser_Body) = {
 };
 
 EvtScript N(EVS_NpcInit_Bowser_Prop) = {
-    Call(EnableNpcShadow, NPC_Bowser_Prop, FALSE)
+    Call(EnableNpcShadow, NPC_Bowser_Prop, false)
     Call(SetNpcPos, NPC_Bowser_Prop, NPC_DISPOSE_LOCATION)
-    IfEq(GF_KKJ13_BowserTaunts, TRUE)
+    IfEq(GF_KKJ13_BowserTaunts, true)
         Return
     EndIf
     Call(SetNpcAnimation, NPC_Bowser_Prop, ANIM_WorldBowser_ClownCarPropeller)
@@ -322,7 +322,7 @@ EvtScript N(EVS_NpcInit_Bowser_Prop) = {
 
 EvtScript N(EVS_NpcInit_CaptivePeach) = {
     Call(SetNpcPos, NPC_CaptivePeach, NPC_DISPOSE_LOCATION)
-    IfEq(GF_KKJ13_BowserTaunts, TRUE)
+    IfEq(GF_KKJ13_BowserTaunts, true)
         Return
     EndIf
     Call(SetNpcPos, NPC_CaptivePeach, 775, 90, 0)

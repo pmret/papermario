@@ -39,14 +39,14 @@ EvtScript N(EVS_UpdatePropellerSounds) = {
 };
 
 EvtScript N(EVS_BowserTauntMario) = {
-    IfEq(GF_KKJ13_BowserTaunts, TRUE)
-        IfEq(GF_KKJ23_BowserFledToTower, TRUE)
+    IfEq(GF_KKJ13_BowserTaunts, true)
+        IfEq(GF_KKJ23_BowserFledToTower, true)
             Return
         EndIf
     EndIf
     Call(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarIdle)
     Call(AwaitPlayerApproach, 100, -60, 300)
-    Set(GF_KKJ23_BowserFledToTower, TRUE)
+    Set(GF_KKJ23_BowserFledToTower, true)
     Thread
         Call(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarLaugh)
         Wait(30)
@@ -124,8 +124,8 @@ EvtScript N(EVS_NpcIdle_Peach) = {
 
 EvtScript N(EVS_NpcInit_Bowser_Body) = {
     Call(SetNpcPos, NPC_Bowser_Body, NPC_DISPOSE_LOCATION)
-    IfEq(GF_KKJ13_BowserTaunts, TRUE)
-        IfEq(GF_KKJ23_BowserFledToTower, TRUE)
+    IfEq(GF_KKJ13_BowserTaunts, true)
+        IfEq(GF_KKJ23_BowserFledToTower, true)
             Return
         EndIf
     EndIf
@@ -139,8 +139,8 @@ EvtScript N(EVS_NpcInit_Bowser_Body) = {
 
 EvtScript N(EVS_NpcInit_Bowser_Propeller) = {
     Call(SetNpcPos, NPC_Bowser_Prop, NPC_DISPOSE_LOCATION)
-    IfEq(GF_KKJ13_BowserTaunts, TRUE)
-        IfEq(GF_KKJ23_BowserFledToTower, TRUE)
+    IfEq(GF_KKJ13_BowserTaunts, true)
+        IfEq(GF_KKJ23_BowserFledToTower, true)
             Return
         EndIf
     EndIf
@@ -155,8 +155,8 @@ EvtScript N(EVS_NpcInit_Bowser_Propeller) = {
 
 EvtScript N(EVS_NpcInit_Peach) = {
     Call(SetNpcPos, NPC_Peach, NPC_DISPOSE_LOCATION)
-    IfEq(GF_KKJ13_BowserTaunts, TRUE)
-        IfEq(GF_KKJ23_BowserFledToTower, TRUE)
+    IfEq(GF_KKJ13_BowserTaunts, true)
+        IfEq(GF_KKJ23_BowserFledToTower, true)
             Return
         EndIf
     EndIf

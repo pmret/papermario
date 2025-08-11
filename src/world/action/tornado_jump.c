@@ -127,7 +127,7 @@ void action_update_tornado_jump(void) {
                         sfx_play_sound_at_player(SOUND_LAND_TORANDO_JUMP, SOUND_SPACE_DEFAULT);
                         start_rumble(256, 50);
 
-                        gCurrentHiddenPanels.tryFlipTrigger = TRUE;
+                        gCurrentHiddenPanels.tryFlipTrigger = true;
                         gCurrentHiddenPanels.flipTriggerPosY = playerStatus->pos.y;
                         playerStatus->flags |= PS_FLAG_SPECIAL_LAND;
                         return;
@@ -156,7 +156,7 @@ void action_update_tornado_jump(void) {
                 sfx_play_sound_at_player(SOUND_LAND_TORANDO_JUMP, SOUND_SPACE_DEFAULT);
                 start_rumble(256, 50);
 
-                gCurrentHiddenPanels.tryFlipTrigger = TRUE;
+                gCurrentHiddenPanels.tryFlipTrigger = true;
                 gCurrentHiddenPanels.flipTriggerPosY = playerStatus->pos.y;
                 playerStatus->flags |= PS_FLAG_SPECIAL_LAND;
             }

@@ -4,7 +4,7 @@ s32 N(map_init)(void) {
     gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_MARIO_REFLECT_FLOOR;
     sprintf(wMapShapeName, "pra_05_shape");
     sprintf(wMapHitName, "pra_05_hit");
-    return FALSE;
+    return false;
 }
 
 #include "../common/Reflection.inc.c"
@@ -12,7 +12,7 @@ s32 N(map_init)(void) {
 
 EvtScript N(EVS_ExitDoors_pra_39_1) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_06_ENTRY_0)
     Set(LVar1, COLLIDER_deilittsw)
     Set(LVar2, MODEL_o772)
@@ -50,8 +50,8 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(SetCamBGColor, CAM_DEFAULT, 24, 24, 40)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
     Set(LVar0, REFLECTION_FLOOR_ONLY)

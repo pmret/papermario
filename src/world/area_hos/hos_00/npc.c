@@ -14,13 +14,13 @@ NpcSettings N(NpcSettings_FlyingMagikoopa) = {
 };
 
 EvtScript N(EVS_Scene_Wishing) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseSettingsFrom, CAM_DEFAULT, 305, -10, -50)
     Call(SetPanTarget, CAM_DEFAULT, 305, -10, -50)
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(9.0), Float(-10.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(30)
     Call(SpeakToPlayer, NPC_ToadKid, ANIM_ToadKid_Red_Talk, ANIM_ToadKid_Red_Disappointed, 0, MSG_HOS_006C)

@@ -22,8 +22,8 @@ EvtScript N(EVS_NpcIdle_SpikedGloomba) = {
         Goto(100)
     EndIf
     Call(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Run)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_NO_SHADOW_RAYCAST, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_NO_SHADOW_RAYCAST, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
     Call(SetNpcSpeed, NPC_SELF, 2)
     Call(GetSelfNpcID, LVar0)
     IfEq(LVar0, 0)
@@ -50,7 +50,7 @@ NpcData N(NpcData_SpikedGloomba_01) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 40, -135, 10 },
@@ -73,7 +73,7 @@ NpcData N(NpcData_SpikedGloomba_02) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 141, -135, 85 },

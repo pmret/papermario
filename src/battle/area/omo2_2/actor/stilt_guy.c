@@ -262,11 +262,11 @@ EvtScript N(EVS_Init) = {
     Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
     Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
-    Call(SetActorVar, ACTOR_SELF, AVAR_HasFallen, FALSE)
-    Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, FALSE)
-    Call(SetPartTargetFlagBits, ACTOR_SELF, PRT_4, ACTOR_PART_TARGET_NO_JUMP, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HasFallen, false)
+    Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, false)
+    Call(SetPartTargetFlagBits, ACTOR_SELF, PRT_4, ACTOR_PART_TARGET_NO_JUMP, true)
     Call(SetPartSize, ACTOR_SELF, PRT_GUY, 24, 30)
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetPartRotationOffset, ACTOR_SELF, PRT_UNFOLD_4, 0, 13, 0)
     Call(SetPartRotationOffset, ACTOR_SELF, PRT_UNFOLD_3, 0, 13, 0)
@@ -308,7 +308,7 @@ EvtScript N(EVS_Init) = {
         Call(SetAnimation, ACTOR_GENERAL, PRT_GUY, ANIM_GeneralGuy_Anim02)
         Call(SetAnimation, ACTOR_GENERAL, PRT_GUY, ANIM_GeneralGuy_Anim0A)
         Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_GUY, SOUND_GENERAL_WHISTLE)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_4, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_4, ACTOR_PART_FLAG_INVISIBLE, false)
         Call(FallPartTo, ACTOR_SELF, PRT_UNFOLD_4, LVar0, -9, LVar2, 80)
     EndThread
     Thread
@@ -343,7 +343,7 @@ EvtScript N(EVS_Init) = {
         Sub(LVar2, 13)
         Call(SetPartPos, ACTOR_SELF, PRT_UNFOLD_3, LVar0, 200, LVar2)
         Wait(15)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_3, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_3, ACTOR_PART_FLAG_INVISIBLE, false)
         Call(FallPartTo, ACTOR_SELF, PRT_UNFOLD_3, LVar0, -9, LVar2, 80)
     EndThread
     Thread
@@ -378,7 +378,7 @@ EvtScript N(EVS_Init) = {
         Sub(LVar2, 13)
         Call(SetPartPos, ACTOR_SELF, PRT_UNFOLD_2, LVar0, 200, LVar2)
         Wait(30)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_2, ACTOR_PART_FLAG_INVISIBLE, false)
         Call(FallPartTo, ACTOR_SELF, PRT_UNFOLD_2, LVar0, -9, LVar2, 80)
     EndThread
     Thread
@@ -413,13 +413,13 @@ EvtScript N(EVS_Init) = {
         Sub(LVar2, 13)
         Call(SetPartPos, ACTOR_SELF, PRT_UNFOLD_1, LVar0, 200, LVar2)
         Wait(45)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_1, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_1, ACTOR_PART_FLAG_INVISIBLE, false)
         Call(FallPartTo, ACTOR_SELF, PRT_UNFOLD_1, LVar0, -9, LVar2, 80)
         Wait(15)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_3, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_4, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-        Call(SetPartFlagBits, ACTOR_SELF, PRT_STILTS, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_2, ACTOR_PART_FLAG_INVISIBLE, true)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_3, ACTOR_PART_FLAG_INVISIBLE, true)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_4, ACTOR_PART_FLAG_INVISIBLE, true)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_STILTS, ACTOR_PART_FLAG_INVISIBLE, true)
         Call(GetPartOffset, ACTOR_SELF, PRT_UNFOLD_4, LVar0, LVar1, LVar2)
         Add(LVar2, 13)
         Call(ForceHomePos, ACTOR_SELF, LVar0, 0, LVar2)
@@ -433,24 +433,24 @@ EvtScript N(EVS_Init) = {
         Call(SetPartRotationOffset, ACTOR_SELF, PRT_UNFOLD_1, 0, 0, 0)
         Call(PlaySoundAtPart, ACTOR_SELF, PRT_UNFOLD_1, SOUND_STILT_GUY_UNFOLD)
         Call(SetAnimation, ACTOR_SELF, PRT_UNFOLD_1, ANIM_StiltGuyUnfold_Anim05)
-        Call(EnableActorPaletteEffects, ACTOR_SELF, PRT_UNFOLD_1, TRUE)
+        Call(EnableActorPaletteEffects, ACTOR_SELF, PRT_UNFOLD_1, true)
         Call(SetActorPaletteSwapParams, ACTOR_SELF, PRT_UNFOLD_1, SPR_PAL_StiltGuyUnfold_Alt, SPR_PAL_StiltGuyUnfold, 0, 36, 0, 255, 0, 0)
         Call(SetActorPaletteEffect, ACTOR_SELF, PRT_UNFOLD_1, ACTOR_PAL_ADJUST_BLEND_PALSETS)
         Wait(18)
-        Call(EnableActorPaletteEffects, ACTOR_SELF, PRT_UNFOLD_1, FALSE)
+        Call(EnableActorPaletteEffects, ACTOR_SELF, PRT_UNFOLD_1, false)
         Call(SetAnimation, ACTOR_SELF, PRT_UNFOLD_1, ANIM_StiltGuyUnfold_Anim04)
         Wait(5)
         Loop(20)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_1, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_STILTS, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_1, ACTOR_PART_FLAG_INVISIBLE, false)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_STILTS, ACTOR_PART_FLAG_INVISIBLE, true)
             Wait(1)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_1, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-            Call(SetPartFlagBits, ACTOR_SELF, PRT_STILTS, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_UNFOLD_1, ACTOR_PART_FLAG_INVISIBLE, true)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_STILTS, ACTOR_PART_FLAG_INVISIBLE, false)
             Wait(1)
         EndLoop
         Call(HPBarToHome, ACTOR_SELF)
         Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-        Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+        Call(UseIdleAnimation, ACTOR_SELF, true)
         Call(GetActorVar, ACTOR_SELF, AVAR_IN_Order, LVar0)
         IfEq(LVar0, 1)
             Call(SetActorVar, ACTOR_TANK, AVAR_Tank_SquadPhase, AVAL_SquadPhase_Next)
@@ -471,7 +471,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_ReturnHome) = {
     Call(GetActorVar, ACTOR_SELF, AVAR_HasFallen, LVar0)
-    IfEq(LVar0, TRUE)
+    IfEq(LVar0, true)
         ExecWait(N(EVS_ShyGuy_ReturnHome))
         Return
     EndIf
@@ -484,7 +484,7 @@ EvtScript N(EVS_ReturnHome) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(GetLastElement, LVarF)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -509,8 +509,8 @@ EvtScript N(EVS_HandleEvent) = {
                     Set(LVar0, PRT_STILTS)
                     Set(LVar1, ANIM_StiltGuy_Anim01)
                     ExecWait(EVS_Enemy_NoDamageHit)
-                    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
-                    Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, FALSE)
+                    Call(UseIdleAnimation, ACTOR_SELF, true)
+                    Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, false)
                     Return
                 EndIf
             EndIf
@@ -522,7 +522,7 @@ EvtScript N(EVS_HandleEvent) = {
             IfTrue(LVar0)
                 ExecWait(N(EVS_FallDown))
             EndIf
-            Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, FALSE)
+            Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, false)
         EndCaseGroup
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             Call(SetAnimation, ACTOR_SELF, PRT_STILTS, ANIM_StiltGuy_Anim06)
@@ -607,7 +607,7 @@ EvtScript N(EVS_HandleEvent) = {
             Return
         CaseDefault
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -616,7 +616,7 @@ EvtScript N(EVS_RegisterComboHit) = {
     Call(GetBattleFlags, LVar0)
     IfNotFlag(LVar0, BS_FLAGS1_PARTNER_ACTING)
         IfFlag(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
-            Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, TRUE)
+            Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, true)
         EndIf
     Else
         Call(N(GetSelectedMoveID), LVar0)
@@ -627,7 +627,7 @@ EvtScript N(EVS_RegisterComboHit) = {
             CaseOrEq(MOVE_MULTIBONK)
                 Call(GetBattleFlags, LVar0)
                 IfFlag(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
-                    Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, TRUE)
+                    Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, true)
                 EndIf
             EndCaseGroup
         EndSwitch
@@ -642,18 +642,18 @@ EvtScript N(EVS_RegisterHit) = {
         // jump attacks knock down stilts
         IfFlag(LVarF, DAMAGE_TYPE_JUMP)
             IfFlag(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
-                Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, TRUE)
+                Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, true)
             EndIf
         EndIf
         // quake attacks knock down stilts
         IfFlag(LVarF, DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE)
-            Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, TRUE)
+            Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, true)
         EndIf
     EndIf
     // status effects knock down stilts
     Call(GetStatusFlags, ACTOR_SELF, LVar0)
     IfFlag(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_SHRINK | STATUS_FLAG_STOP)
-        Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, TRUE)
+        Call(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, true)
     EndIf
     Return
     End
@@ -666,14 +666,14 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 EvtScript N(EVS_Attack_Leap) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(SetBattleCamOffsetY, 40)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 20)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetAnimation, ACTOR_SELF, PRT_STILTS, ANIM_StiltGuy_Anim03)
     Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -681,7 +681,7 @@ EvtScript N(EVS_Attack_Leap) = {
     Add(LVar0, 50)
     Set(LVar1, 0)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_STILTS, ANIM_StiltGuy_Anim04)
     Wait(8)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
@@ -702,12 +702,12 @@ EvtScript N(EVS_Attack_Leap) = {
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.5))
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_HOP)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 18, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_STILT_GUY_STEP)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 25)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_STILT_GUY_STEP)
             Wait(15)
             IfEq(LVarA, HIT_RESULT_LUCKY)
@@ -721,7 +721,7 @@ EvtScript N(EVS_Attack_Leap) = {
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_STILTS, 0)
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -736,7 +736,7 @@ EvtScript N(EVS_Attack_Leap) = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.5))
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_HOP)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_LEAP, BS_FLAGS1_TRIGGER_EVENTS)
     Set(LVarF, LVar0)
@@ -750,7 +750,7 @@ EvtScript N(EVS_Attack_Leap) = {
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_STILT_GUY_STEP)
             Call(SetAnimation, ACTOR_SELF, PRT_STILTS, ANIM_StiltGuy_Anim01)
             Wait(8)
@@ -759,13 +759,13 @@ EvtScript N(EVS_Attack_Leap) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_FallDown) = {
-    Call(SetActorVar, ACTOR_SELF, AVAR_HasFallen, TRUE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_HasFallen, true)
     Call(SetPartFlags, ACTOR_SELF, PRT_GUY, ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_PRIMARY_TARGET)
     Call(SetPartFlags, ACTOR_SELF, PRT_TARGET, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_NO_TARGET)
     Call(SetPartFlags, ACTOR_SELF, PRT_4, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_NO_TARGET)
@@ -796,13 +796,13 @@ EvtScript N(EVS_FallDown) = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.5))
     Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
     Call(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
     Call(RandInt, 100, LVar1)
     IfLt(LVar1, 50)
         Call(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
-        Call(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
         Call(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
-        Call(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 4, false, true, false)
     Else
         Call(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim10)
         Wait(10)
@@ -811,7 +811,7 @@ EvtScript N(EVS_FallDown) = {
     Call(BindIdle, ACTOR_SELF, Ref(N(EVS_ShyGuy_Idle)))
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_ShyGuy_HandleEvent)))
     Call(SetActorType, ACTOR_SELF, ACTOR_TYPE_SHY_GUY)
-    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, true)
     Call(HPBarToHome, ACTOR_SELF)
     Call(ResetAllActorSounds, ACTOR_SELF)
     Call(GetActorSize, ACTOR_SELF, LVar0, LVar1)
@@ -823,13 +823,13 @@ EvtScript N(EVS_FallDown) = {
 
 EvtScript N(EVS_Death) = {
     ExecWait(EVS_Enemy_DeathWithoutRemove)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_STILTS, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-    Call(SetPartFlagBits, ACTOR_SELF, PRT_GUY, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_STILTS, ACTOR_PART_FLAG_INVISIBLE, true)
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_GUY, ACTOR_PART_FLAG_INVISIBLE, true)
     Call(GetActorVar, ACTOR_TANK, AVAR_Tank_StiltPhase, LVar0)
     Add(LVar0, 1)
     Call(SetActorVar, ACTOR_TANK, AVAR_Tank_StiltPhase, LVar0)
     IfGe(LVar0, AVAL_StiltPhase_Defeated)
-        Call(FreezeBattleState, TRUE)
+        Call(FreezeBattleState, true)
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 100)
@@ -881,7 +881,7 @@ EvtScript N(EVS_ShyGuy_SpinSmash) = {
         Call(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
         Call(SetActorJumpGravity, ACTOR_SELF, Float(0.1))
         Call(SetActorSpeed, ACTOR_SELF, Float(7.0))
-        Call(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 0, false, true, false)
         Thread
             Call(ShakeCam, CAM_BATTLE, 0, 2, Float(1.0))
         EndThread
@@ -906,7 +906,7 @@ EvtScript N(EVS_ShyGuy_SpinSmash) = {
         Set(LVar5, 0)
     EndIf
     Call(SetGoalPos, ACTOR_SELF, LVar4, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, LVar5, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, LVar5, false, true, false)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.5))
     Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
     Call(SetGoalToHome, ACTOR_SELF)
@@ -915,15 +915,15 @@ EvtScript N(EVS_ShyGuy_SpinSmash) = {
     IfLe(LVar4, LVar6)
         Set(LVar4, LVar6)
         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 12, false, true, false)
     Else
         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 12, false, true, false)
         Call(SetGoalToHome, ACTOR_SELF)
         Call(GetGoalPos, ACTOR_SELF, LVar4, LVar7, LVar8)
         Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
         Call(SetGoalPos, ACTOR_SELF, LVar4, LVar1, LVar2)
-        Call(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
+        Call(JumpToGoal, ACTOR_SELF, 12, false, true, false)
     EndIf
     KillThread(LVarE)
     Call(SetActorYaw, ACTOR_SELF, 0)
@@ -982,7 +982,7 @@ EvtScript N(EVS_ShyGuy_ReturnHome) = {
 };
 
 EvtScript N(EVS_ShyGuy_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
@@ -1071,19 +1071,19 @@ EvtScript N(EVS_ShyGuy_HandleEvent) = {
             Return
         CaseDefault
     EndSwitch
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_ShyGuy_Attack_Tackle) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 20)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim03)
     Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -1091,7 +1091,7 @@ EvtScript N(EVS_ShyGuy_Attack_Tackle) = {
     Add(LVar0, 50)
     Set(LVar1, 0)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_MISS)
@@ -1103,21 +1103,21 @@ EvtScript N(EVS_ShyGuy_Attack_Tackle) = {
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
             Call(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim04)
             Call(SetGoalToTarget, ACTOR_SELF)
-            Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+            Call(RunToGoal, ACTOR_SELF, 0, false)
             Call(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim05)
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
             Call(SetActorJumpGravity, ACTOR_SELF, Float(0.5))
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 30)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EndIf
             Call(ResetAllActorSounds, ACTOR_SELF)
             Sub(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             Wait(15)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(SetActorYaw, ACTOR_SELF, 180)
@@ -1130,7 +1130,7 @@ EvtScript N(EVS_ShyGuy_Attack_Tackle) = {
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim01)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -1147,7 +1147,7 @@ EvtScript N(EVS_ShyGuy_Attack_Tackle) = {
     Add(LVar0, 10)
     Set(LVar1, 0)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim05)
     Wait(2)
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -1160,25 +1160,25 @@ EvtScript N(EVS_ShyGuy_Attack_Tackle) = {
     Set(LVar1, 0)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
     Call(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim01)
     Wait(8)
     Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
     ExecWait(N(EVS_ShyGuy_ReturnHome))
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
 
 EvtScript N(EVS_ShyGuy_Attack_Vault) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 20)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_TIMING_BAR_GO)
     Call(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim09)
     Wait(20)
@@ -1189,14 +1189,14 @@ EvtScript N(EVS_ShyGuy_Attack_Vault) = {
     Add(LVar0, 80)
     Set(LVar1, 0)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
     Call(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim04)
     Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
     Sub(LVar0, 40)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_MISS)
@@ -1214,7 +1214,7 @@ EvtScript N(EVS_ShyGuy_Attack_Vault) = {
             Sub(LVar0, 10)
             Set(LVar1, 0)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 24, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 24, false, true, false)
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EndIf
@@ -1224,10 +1224,10 @@ EvtScript N(EVS_ShyGuy_Attack_Vault) = {
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 30)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             Sub(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             Wait(15)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(MoveBattleCamOver, 15)
@@ -1241,7 +1241,7 @@ EvtScript N(EVS_ShyGuy_Attack_Vault) = {
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim01)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
         EndCaseGroup
     EndSwitch
@@ -1253,7 +1253,7 @@ EvtScript N(EVS_ShyGuy_Attack_Vault) = {
     EndThread
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
     Call(SetGoalToTarget, ACTOR_SELF)
-    Call(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_SELF, 18, false, true, false)
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_VAULT, BS_FLAGS1_TRIGGER_EVENTS)
     Switch(LVar0)
@@ -1288,7 +1288,7 @@ EvtScript N(EVS_ShyGuy_Attack_Vault) = {
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 20, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_CHEERING)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_CHEERING | SOUND_ID_TRIGGER_CHANGE_SOUND)
             Call(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim09)
@@ -1302,7 +1302,7 @@ EvtScript N(EVS_ShyGuy_Attack_Vault) = {
             Set(LVar1, 0)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 20, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_COLLAPSE)
             Call(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim10)
             Wait(10)
@@ -1327,7 +1327,7 @@ EvtScript N(EVS_ShyGuy_Attack_Vault) = {
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

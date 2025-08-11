@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitDoor_obk_02_1) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, obk_03_ENTRY_0)
     Set(LVar1, COLLIDER_tt2)
     Set(LVar2, MODEL_door_2_1)
@@ -18,7 +18,7 @@ EvtScript N(EVS_ExitDoor_obk_02_1) = {
 
 EvtScript N(EVS_ExitDoor_obk_04_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, obk_03_ENTRY_1)
     Set(LVar1, COLLIDER_tt1)
     Set(LVar2, MODEL_door_1)
@@ -69,7 +69,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_BOOS_MANSION)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupStairs))
     Exec(N(EVS_SetupRockingChair))

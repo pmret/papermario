@@ -25,14 +25,14 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
     Thread
         Wait(20)
         Call(N(ToadHouse_CamSetFOV), 0, 40)
-        Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+        Call(SetCamType, CAM_DEFAULT, 4, false)
         Call(SetCamPitch, CAM_DEFAULT, 34, -8)
         Call(SetCamDistance, CAM_DEFAULT, 220)
         Call(SetCamPosA, CAM_DEFAULT, Float(-3.0), Float(-240.0))
         Call(SetCamPosB, CAM_DEFAULT, Float(-150.0), Float(-56.0))
         Call(SetCamPosC, CAM_DEFAULT, 1, 10)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Call(SetPlayerSpeed, Float(3.0))
@@ -41,7 +41,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
     Call(SetPlayerPos, -160, 22, -123)
     Wait(5)
     Call(InterpPlayerYaw, 114, 1)
-    Call(HidePlayerShadow, TRUE)
+    Call(HidePlayerShadow, true)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Call(SetPlayerImgFXFlags, IMGFX_FLAG_2000 | IMGFX_FLAG_800)
     Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
@@ -52,7 +52,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Return
@@ -65,7 +65,7 @@ EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetPanTarget, CAM_DEFAULT, MV_LastPlayerPosX, MV_LastPlayerPosY, MV_LastPlayerPosZ)
     Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
-    Call(HidePlayerShadow, FALSE)
+    Call(HidePlayerShadow, false)
     Call(SetPlayerPos, -139, 0, -90)
     Call(PlayerMoveTo, -102, -130, 20)
     Exec(N(EVS_SetupMusic))
@@ -76,7 +76,7 @@ EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
 EvtScript N(EVS_NpcInteract_Toad_01) = {
     Call(GetPlayerPos, MV_LastPlayerPosX, MV_LastPlayerPosY, MV_LastPlayerPosZ)
     ExecWait(N(EVS_NpcInteract_ToadHouseKeeper))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Return
     End
 };
@@ -205,16 +205,16 @@ EvtScript N(EVS_NpcDefeat_Koopatrol) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Set(GF_KPA95_Defeated_Guard, TRUE)
+            Set(GF_KPA95_Defeated_Guard, true)
             Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             Call(MakeItemEntity, ITEM_PRISON_KEY, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA95_Item_PrisonKey1)
             Call(DoNpcDefeat)
         CaseEq(OUTCOME_PLAYER_FLED)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Set(GF_KPA95_Defeated_Guard, TRUE)
+            Set(GF_KPA95_Defeated_Guard, true)
             Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             Call(MakeItemEntity, ITEM_PRISON_KEY, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA95_Item_PrisonKey1)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -222,7 +222,7 @@ EvtScript N(EVS_NpcDefeat_Koopatrol) = {
 };
 
 EvtScript N(EVS_NpcInit_Koopatrol) = {
-    IfEq(GF_KPA95_Defeated_Guard, FALSE)
+    IfEq(GF_KPA95_Defeated_Guard, false)
         Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Koopatrol)))
     Else
         Call(RemoveNpc, NPC_SELF)
@@ -237,7 +237,7 @@ NpcData N(NpcData_Koopatrol) = {
     .yaw = 270,
     .territory = {
         .patrol = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 2,
             .points  = {

@@ -3,7 +3,7 @@
 #include "world/common/atomic/TexturePan.inc.c"
 
 EvtScript N(EVS_TexPan_MysticPyramid) = {
-    Call(EnableTexPanning, MODEL_o185, TRUE)
+    Call(EnableTexPanning, MODEL_o185, true)
     Set(LVar0, 0)
     Loop(0)
         Add(LVar0, 0x4000)
@@ -60,8 +60,8 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_SHOOTING_STAR_SUMMIT)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Set(AF_HOS06_SpokeWithMerluvlee, FALSE)
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Set(AF_HOS06_SpokeWithMerluvlee, false)
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMagicChest))
     Exec(N(EVS_Animate_MysticPyramid))

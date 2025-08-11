@@ -76,7 +76,7 @@ void big_smoke_puff_init(EffectInstance* effect) {
 
 void big_smoke_puff_update(EffectInstance* effect) {
     BigSmokePuffFXData* data = effect->data.bigSmokePuff;
-    s32 cond = FALSE;
+    s32 cond = false;
     s32 i;
 
     for (i = 0; i < effect->numParts; i++, data++) {
@@ -88,7 +88,7 @@ void big_smoke_puff_update(EffectInstance* effect) {
                 data->partY += data->unk_24;
                 data->unk_00++;
                 data->unk_02--;
-                cond = TRUE;
+                cond = true;
 
                 if (data->unk_02 >= 0) {
                     data->unk_06--;

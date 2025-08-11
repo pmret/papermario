@@ -1319,7 +1319,7 @@
     tattleCamOffset: [ 0, 0, 0 ]
     shadowOffset: 0
 - Unused_78:
-    ignoreDuringCount: TRUE
+    ignoreDuringCount: true
     level: 0
     nameMsg: MSG_EnemyName_TheMaster
     tattleMsg: MSG_EnemyTattle_TheMaster1
@@ -1617,7 +1617,7 @@
     tattleCamOffset: [ 0, 6, 10 ]
     shadowOffset: 0
 - GoomnutTree:
-    ignoreDuringCount: TRUE
+    ignoreDuringCount: true
     level: 1
     nameMsg: MSG_EnemyName_GoomnutTree
     tattleMsg: MSG_EnemyTattle_GoomnutTree
@@ -1684,7 +1684,7 @@
     tattleCamOffset: [ 0, 0, 0 ]
     shadowOffset: 0
 - FakeBowser:
-    ignoreDuringCount: TRUE
+    ignoreDuringCount: true
     level: 0
     nameMsg: MSG_EnemyName_FakeBowser
     tattleMsg: MSG_EnemyTattle_FakeBowser
@@ -1960,7 +1960,7 @@
     tattleCamOffset: [ 0, 0, 0 ]
     shadowOffset: 0
 - GoombaKing_Dup:
-    ignoreDuringCount: TRUE
+    ignoreDuringCount: true
     level: 49
     nameMsg: MSG_EnemyName_GoombaKing
     tattleMsg: MSG_EnemyTattle_GoombaKing

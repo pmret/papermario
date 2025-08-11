@@ -1310,7 +1310,7 @@ enum SoundIDs {
     SOUND_LULLABY                               = 0x000003F4,
     SOUND_BUBBLES_RISING                        = 0x000003F5, // unused
     SOUND_DRIP                                  = 0x000003F6,
-    STONE_STONE_CHOMP_STEP                      = 0x000003F9,
+    SOUND_STONE_CHOMP_STEP                      = 0x000003F9,
     SOUND_THROW                                 = 0x000003FA,
     SOUND_PLAYER_COLLAPSE                       = 0x000003FB,
     SOUND_LUCKY                                 = 0x000003FC,
@@ -4774,9 +4774,9 @@ enum CameraUpdateMode {
     CAM_UPDATE_FROM_ZONE            = 3,
 
     // this camera uses a set of control parameters to calculate its lookAt_obj and lookAt_eye positions,
-    // which are only updated if skipRecalc = FALSE
+    // which are only updated if skipRecalc = false
     // the ultimate target is given by lookAt_obj_target, with an offset given by targetPos (?!)
-    // in practice, this is used for CAM_BATTLE and CAM_TATTLE, with skipRecalc almost always set to FALSE
+    // in practice, this is used for CAM_BATTLE and CAM_TATTLE, with skipRecalc almost always set to false
     CAM_UPDATE_NO_INTERP            = 6,
 
     // this camera tracks lookAt_obj_target in a circular region centered on targetPos. the camera does not update

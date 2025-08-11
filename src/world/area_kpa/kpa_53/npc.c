@@ -45,7 +45,7 @@ EvtScript N(EVS_NpcAI_Duplighost_Flee) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     Call(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
     Wait(20)
@@ -56,13 +56,13 @@ EvtScript N(EVS_NpcAI_Duplighost_Flee) = {
     Call(NpcMoveTo, NPC_SELF, LVar0, -30, 20)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Duplighost_Anim02)
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcAI_Duplighost_Caught) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(GetNpcPos, NPC_Follower, LVar2, LVar3, LVar4)
     Thread
         Add(LVar4, 15)
@@ -84,7 +84,7 @@ EvtScript N(EVS_NpcAI_Duplighost_Caught) = {
     Call(PlaySoundAtNpc, NPC_Follower, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
     Call(SetNpcPos, NPC_Guardian, NPC_DISPOSE_LOCATION)
     Call(SetNpcPos, NPC_Follower, NPC_DISPOSE_LOCATION)
-    Call(EnableNpcShadow, NPC_Follower, FALSE)
+    Call(EnableNpcShadow, NPC_Follower, false)
     Call(SetNpcPos, NPC_SELF, LVar2, LVar3, LVar4)
     Call(SetNpcYaw, NPC_SELF, 270)
     Call(MakeLerp, -1440, 0, 20, EASING_QUADRATIC_OUT)
@@ -112,17 +112,17 @@ EvtScript N(EVS_NpcAI_Duplighost_Caught) = {
 EvtScript N(EVS_NpcDefeat_Duplighost) = {
     Call(RemoveNpc, NPC_Follower)
     Call(RemoveNpc, NPC_Guardian)
-    Set(GF_KPA53_Defeated_PeachImposter, TRUE)
+    Set(GF_KPA53_Defeated_PeachImposter, true)
     BindTrigger(Ref(N(EVS_ExitDoors_kpa_83_0)), TRIGGER_WALL_PRESS_A, COLLIDER_tte, 1, 0)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(DoNpcDefeat)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Duplighost) = {
-    IfEq(GF_KPA53_Defeated_PeachImposter, FALSE)
-        IfEq(GF_KPA53_Met_PeachImposter, TRUE)
+    IfEq(GF_KPA53_Defeated_PeachImposter, false)
+        IfEq(GF_KPA53_Met_PeachImposter, true)
             Call(SetNpcPos, NPC_SELF, -120, 0, -30)
             Call(SetNpcYaw, NPC_SELF, 270)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcAI_Duplighost_Flee)))
@@ -148,7 +148,7 @@ EvtScript N(EVS_NpcInteract_Follower_FirstTime) = {
             Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
             Wait(35)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_0024)
-            Set(GF_KPA53_Met_PeachImposter, TRUE)
+            Set(GF_KPA53_Met_PeachImposter, true)
             Call(SetSelfVar, 0, 1)
             Call(SetSelfVar, 1, 1)
         CaseEq(1)
@@ -190,7 +190,7 @@ EvtScript N(EVS_NpcHit_Guardian_FirstTime) = {
         CaseOrEq(ENCOUNTER_TRIGGER_HAMMER)
         CaseOrEq(ENCOUNTER_TRIGGER_JUMP)
         CaseOrEq(ENCOUNTER_TRIGGER_PARTNER)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(SetNpcVar, NPC_Follower, 2, 1)
             Call(InterpNpcYaw, NPC_Follower, 270, 0)
             Call(SetNpcAnimation, NPC_Follower, ANIM_Peach2_RaiseArms)
@@ -201,7 +201,7 @@ EvtScript N(EVS_NpcHit_Guardian_FirstTime) = {
             Wait(10)
             Call(SetNpcAnimation, NPC_Follower, ANIM_Peach1_Idle)
             Call(SetNpcVar, NPC_Follower, 2, 0)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
         EndCaseGroup
     EndSwitch
     Return
@@ -214,7 +214,7 @@ EvtScript N(EVS_NpcHit_Guardian) = {
         CaseOrEq(ENCOUNTER_TRIGGER_HAMMER)
         CaseOrEq(ENCOUNTER_TRIGGER_JUMP)
         CaseOrEq(ENCOUNTER_TRIGGER_PARTNER)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(SetNpcVar, NPC_Follower, 2, 1)
             Call(InterpNpcYaw, NPC_Follower, 270, 0)
             Call(SetNpcAnimation, NPC_Follower, ANIM_Peach2_RaiseArms)
@@ -234,7 +234,7 @@ EvtScript N(EVS_NpcHit_Guardian) = {
                         Call(SpeakToPlayer, NPC_Follower, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_002B)
                     Else
                         Call(SpeakToPlayer, NPC_Follower, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, MSG_CH8_002C)
-                        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, TRUE)
+                        Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, true)
                         Call(BindNpcAI, NPC_Duplighost, Ref(N(EVS_NpcAI_Duplighost_Caught)))
                     EndIf
             EndSwitch
@@ -242,7 +242,7 @@ EvtScript N(EVS_NpcHit_Guardian) = {
             Wait(10)
             Call(SetNpcAnimation, NPC_Follower, ANIM_Peach1_Idle)
             Call(SetNpcVar, NPC_Follower, 2, 0)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
         EndCaseGroup
     EndSwitch
     Return
@@ -308,9 +308,9 @@ EvtScript N(EVS_NpcIdle_Follower) = {
 };
 
 EvtScript N(EVS_NpcInit_Follower) = {
-    IfEq(GF_KPA53_Defeated_PeachImposter, FALSE)
+    IfEq(GF_KPA53_Defeated_PeachImposter, false)
         Call(SetNpcPos, NPC_SELF, 765, 0, -30)
-        IfEq(GF_KPA53_Met_PeachImposter, FALSE)
+        IfEq(GF_KPA53_Met_PeachImposter, false)
             Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Follower_FirstTime)))
         Else
             Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Follower)))
@@ -324,11 +324,11 @@ EvtScript N(EVS_NpcInit_Follower) = {
 };
 
 EvtScript N(EVS_NpcInit_Guardian) = {
-    IfEq(GF_KPA53_Defeated_PeachImposter, FALSE)
+    IfEq(GF_KPA53_Defeated_PeachImposter, false)
         Call(SetNpcPos, NPC_SELF, 765, 0, -30)
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-        Call(EnableNpcShadow, NPC_SELF, FALSE)
-        IfEq(GF_KPA53_Met_PeachImposter, FALSE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, true)
+        Call(EnableNpcShadow, NPC_SELF, false)
+        IfEq(GF_KPA53_Met_PeachImposter, false)
             Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Guardian_FirstTime)))
         Else
             Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Guardian)))

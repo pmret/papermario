@@ -15,7 +15,7 @@ EvtScript N(EVS_EnterDoor_obk_05_0) = {
 
 EvtScript N(EVS_ExitDoor_obk_01_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, obk_05_ENTRY_0)
     Set(LVar1, COLLIDER_tt1)
     Set(LVar2, MODEL_door1)
@@ -58,25 +58,25 @@ API_CALLABLE(N(RetroJar_AwaitPlayerEntry)) {
 EvtScript N(EVS_ManageRetroJar) = {
     Loop(0)
         Call(N(RetroJar_AwaitPlayerEntry))
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Wait(1)
-        IfEq(MF_IsRetroMario, FALSE)
+        IfEq(MF_IsRetroMario, false)
             Call(PlaySoundAtPlayer, SOUND_JUMP_8BIT_MARIO, SOUND_SPACE_DEFAULT)
-            Call(Disable8bitMario, FALSE)
+            Call(Disable8bitMario, false)
             Call(SetMusic, 0, SONG_CHAPTER_START, BGM_VARIATION_1, VOL_LEVEL_FULL)
-            Set(MF_IsRetroMario, TRUE)
+            Set(MF_IsRetroMario, true)
         Else
             Call(PlaySoundAtPlayer, SOUND_QUICK_PLAYER_JUMP, SOUND_SPACE_DEFAULT)
-            Call(Disable8bitMario, TRUE)
+            Call(Disable8bitMario, true)
             Exec(N(EVS_SetupMusic))
-            Set(MF_IsRetroMario, FALSE)
+            Set(MF_IsRetroMario, false)
         EndIf
         Call(N(DisableCameraFollowPlayerY))
         Call(SetPlayerJumpscale, Float(1.0))
         Call(PlayerJump, -105, 30, -55, 30)
         Wait(1)
         Call(N(EnableCameraFollowPlayerY))
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndLoop
     Return
     End
@@ -86,7 +86,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_BOOS_MANSION)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupRockingChairs))
     Exec(N(EVS_ManageHole))

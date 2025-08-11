@@ -11,10 +11,10 @@ EvtScript N(EVS_TexPan_MotionLines) = {
         Call(RotateModel, MODEL_h3, 180, 0, 0, 1)
         Call(RotateModel, MODEL_h4, 180, 0, 0, 1)
     EndIf
-    Call(EnableTexPanning, MODEL_h1, TRUE)
-    Call(EnableTexPanning, MODEL_h2, TRUE)
-    Call(EnableTexPanning, MODEL_h3, TRUE)
-    Call(EnableTexPanning, MODEL_h4, TRUE)
+    Call(EnableTexPanning, MODEL_h1, true)
+    Call(EnableTexPanning, MODEL_h2, true)
+    Call(EnableTexPanning, MODEL_h3, true)
+    Call(EnableTexPanning, MODEL_h4, true)
     Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_C)
         TEX_PAN_PARAMS_STEP(-2048,-2048,    0,    0)

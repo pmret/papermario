@@ -246,21 +246,21 @@ API_CALLABLE(N(UpdateRecordDisplay)) {
 }
 
 EvtScript N(EVS_OnInteract_JumpRecords) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(N(UpdateRecordDisplay), MINIGAME_TYPE_JUMP)
-    Call(DisablePlayerInput, FALSE)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, false)
+    Call(DisablePlayerPhysics, false)
     Return
     End
 };
 
 EvtScript N(EVS_OnInteract_SmashRecords) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(N(UpdateRecordDisplay), MINIGAME_TYPE_SMASH)
-    Call(DisablePlayerInput, FALSE)
-    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, false)
+    Call(DisablePlayerPhysics, false)
     Return
     End
 };

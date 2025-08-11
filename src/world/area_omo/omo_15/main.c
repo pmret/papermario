@@ -8,21 +8,21 @@ EvtScript N(EVS_TrySpawningStarCard) = {
     // determine if card should be spawned
     Switch(GB_StoryProgress)
         CaseEq(STORY_CH4_OPENED_GENERAL_GUY_ROOM)
-            Set(LVar0, FALSE)
+            Set(LVar0, false)
             Set(GB_StoryProgress, STORY_CH4_DEFEATED_GENERAL_GUY)
         CaseEq(STORY_CH4_DEFEATED_GENERAL_GUY)
-            Set(LVar0, TRUE)
+            Set(LVar0, true)
         CaseDefault
             Return
     EndSwitch
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         // card appearing scene
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
         Call(UseSettingsFrom, CAM_DEFAULT, -100, 85, 0)
         Call(SetCamSpeed, CAM_DEFAULT, Float(0.5))
         Call(SetPanTarget, CAM_DEFAULT, -100, 30, 0)
         EVT_SPIRIT_ADJUST_CAM(10000)
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(N(StarSpiritEffectFunc2), 3, 180, 215, 60, 0, -100, 85, 0, 30, 0)
         Thread
             Call(N(StarSpiritEffectFunc3))
@@ -57,8 +57,8 @@ EvtScript N(EVS_TrySpawningStarCard) = {
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
         Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-        Call(DisablePlayerInput, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
+        Call(DisablePlayerInput, false)
     Else
         // just make the card spawn
         Call(N(StarSpiritEffectFunc5), 3, -100, 30, 0, 0)
@@ -70,7 +70,7 @@ EvtScript N(EVS_TrySpawningStarCard) = {
     // wait for pickup
     Call(N(StarSpiritEffectFunc4), 3)
     Call(PlaySoundAtPlayer, SOUND_RESCUE_STAR_SPIRIT, SOUND_SPACE_DEFAULT)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(GB_StoryProgress, STORY_CH4_STAR_SPIRIT_RESCUED)
     Call(GotoMapSpecial, Ref("kmr_23"), kmr_23_ENTRY_3, TRANSITION_GET_STAR_CARD)
     Wait(100)
@@ -90,7 +90,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_SHY_GUYS_TOYBOX)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_SetupMusic))
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
     Exec(EnterWalk)

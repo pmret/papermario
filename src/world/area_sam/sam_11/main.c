@@ -68,7 +68,7 @@ EvtScript N(EVS_ExitWalk_sam_03_0) = {
     IfLt(GB_StoryProgress, STORY_CH7_MAYOR_MURDER_SOLVED)
         Return
     EndIf
-    Set(GF_SAM11_LeftTown, TRUE)
+    Set(GF_SAM11_LeftTown, true)
     Call(UseExitHeading, 60, sam_11_ENTRY_1)
     Exec(ExitWalk)
     Call(GotoMap, Ref("sam_03"), sam_03_ENTRY_0)
@@ -94,17 +94,17 @@ EvtScript N(EVS_Main) = {
     IfNe(LVar0, sam_11_ENTRY_2)
         Goto(10)
     EndIf
-        Call(MakeNpcs, FALSE, Ref(N(EpilogueNPCs)))
+        Call(MakeNpcs, false, Ref(N(EpilogueNPCs)))
         Call(FadeInMusic, 0, SONG_SHIVER_CITY, 0, 3000, 0, 127)
         Return
     Label(10)
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            Call(MakeNpcs, FALSE, Ref(N(BeforeNPCs)))
+            Call(MakeNpcs, false, Ref(N(BeforeNPCs)))
         CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
-            Call(MakeNpcs, FALSE, Ref(N(MysteryNPCs)))
+            Call(MakeNpcs, false, Ref(N(MysteryNPCs)))
         CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
-            Call(MakeNpcs, FALSE, Ref(N(AfterNPCs)))
+            Call(MakeNpcs, false, Ref(N(AfterNPCs)))
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o621, COLLIDER_FLAGS_UPPER_MASK)
     EndSwitch
     ExecWait(N(EVS_MakeEntities))

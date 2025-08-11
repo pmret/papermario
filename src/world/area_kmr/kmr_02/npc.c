@@ -15,7 +15,7 @@ BSS u8 N(savedColA); // a
 BSS u8 oldPrimR, oldPrimG, oldPrimB;
 BSS u8 oldEnvR, oldEnvG, oldEnvB;
 
-#define QUIZMO_PRE_STATIC_PAD TRUE
+#define QUIZMO_PRE_STATIC_PAD true
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
 
@@ -135,20 +135,20 @@ EvtScript N(EVS_NpcIdle_Goombario) = {
 EvtScript N(EVS_NpcInteract_Goombario) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH0_GATE_CRUSHED)
-            IfEq(GF_KMR02_Met_Goombario, FALSE)
-                Set(GF_KMR02_Met_Goombario, TRUE)
+            IfEq(GF_KMR02_Met_Goombario, false)
+                Set(GF_KMR02_Met_Goombario, true)
                 Call(AdjustCam, CAM_DEFAULT, Float(5.0 * DT), 0, Float(-275.0), Float(15.2), Float(-7.5))
                 Call(SpeakToPlayer, NPC_Goombario, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 5, MSG_CH0_004D)
                 Thread
                     Call(ResetCam, CAM_DEFAULT, Float(4.0 * DT))
                 EndThread
             Else
-                IfEq(GF_KMR02_Goombario_SwapDialogue, FALSE)
+                IfEq(GF_KMR02_Goombario_SwapDialogue, false)
                     Call(SpeakToPlayer, NPC_Goombario, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 5, MSG_CH0_004E)
-                    Set(GF_KMR02_Goombario_SwapDialogue, TRUE)
+                    Set(GF_KMR02_Goombario_SwapDialogue, true)
                 Else
                     Call(SpeakToPlayer, NPC_Goombario, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 5, MSG_CH0_004F)
-                    Set(GF_KMR02_Goombario_SwapDialogue, FALSE)
+                    Set(GF_KMR02_Goombario_SwapDialogue, false)
                 EndIf
             EndIf
         CaseEq(STORY_CH0_GATE_CRUSHED)
@@ -210,7 +210,7 @@ EvtScript N(EVS_Goombaria_Kiss) = {
 EvtScript N(EVS_Goombaria_RequestDolly) = {
     Call(SpeakToPlayer, NPC_Goombaria, ANIM_Goombaria_Talk, ANIM_Goombaria_Idle, 0, MSG_CH0_0096)
     Wait(10)
-    IfEq(GF_KMR02_KeptDolly, FALSE)
+    IfEq(GF_KMR02_KeptDolly, false)
         Call(SpeakToPlayer, NPC_Goombaria, ANIM_Goombaria_Talk, ANIM_Goombaria_Idle, 0, MSG_CH0_0097)
     Else
         Call(SpeakToPlayer, NPC_Goombaria, ANIM_Goombaria_Talk, ANIM_Goombaria_Idle, 0, MSG_CH0_0098)
@@ -241,7 +241,7 @@ EvtScript N(EVS_Goombaria_RequestDolly) = {
         Wait(20)
     Else
         Call(ContinueSpeech, NPC_Goombaria, ANIM_Goombaria_Talk, ANIM_Goombaria_Idle, 0, MSG_CH0_0099)
-        Set(GF_KMR02_KeptDolly, TRUE)
+        Set(GF_KMR02_KeptDolly, true)
         Wait(10)
     EndIf
     Return
@@ -348,7 +348,7 @@ API_CALLABLE(N(LoadHeartBlockMsgImg)) {
 }
 
 API_CALLABLE(N(RemoveGoompaPartner)) {
-    gPlayerData.partners[PARTNER_GOOMPA].enabled = FALSE;
+    gPlayerData.partners[PARTNER_GOOMPA].enabled = false;
     func_800EB2A4(PARTNER_NONE);
     return ApiStatus_DONE1;
 }
@@ -387,16 +387,16 @@ EvtScript N(EVS_PromptForBadgeTutorial) = {
     Call(N(WaitForStartInput))
     Call(EndSpeech, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0)
     Wait(10)
-    Set(GF_Tutorial_Badges, TRUE)
+    Set(GF_Tutorial_Badges, true)
     Call(N(OpenPauseMenu))
     Call(N(CloseStatusBar))
-    Set(GF_Tutorial_Badges, FALSE)
+    Set(GF_Tutorial_Badges, false)
     Return
     End
 };
 
 EvtScript N(EVS_ReturnToVillage) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(N(func_80242014_8B2084))
     Call(DisablePartnerAI, 0)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_001D)
@@ -419,19 +419,19 @@ EvtScript N(EVS_ReturnToVillage) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_mm2, COLLIDER_FLAGS_UPPER_MASK)
     Call(EnablePartnerAI)
     Call(SetNpcAnimation, NPC_Goombaria, ANIM_Goombaria_SadIdle)
-    Call(EnableNpcAI, NPC_Goombario, FALSE)
-    Call(EnableNpcAI, NPC_Goombaria, FALSE)
-    Call(EnableNpcAI, NPC_Gooma, FALSE)
-    Call(EnableNpcAI, NPC_Goomama, FALSE)
+    Call(EnableNpcAI, NPC_Goombario, false)
+    Call(EnableNpcAI, NPC_Goombaria, false)
+    Call(EnableNpcAI, NPC_Gooma, false)
+    Call(EnableNpcAI, NPC_Goomama, false)
     Call(SetNpcPos, NPC_Goombario, -95, 0, -86)
     Call(SetNpcPos, NPC_Goombaria, -92, 0, -46)
-    Call(SetNpcFlagBits, NPC_Goombario, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Goombario, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(UseSettingsFrom, CAM_DEFAULT, -189, 0, -40)
     Call(SetPanTarget, CAM_DEFAULT, -189, 0, -40)
     Call(SetCamDistance, CAM_DEFAULT, -350)
     Call(SetCamSpeed, CAM_DEFAULT, Float(1.3 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Call(SetNpcSpeed, NPC_Goombario, Float(4.0 / DT))
         Call(SetNpcAnimation, NPC_Goombario, ANIM_WorldGoombario_Run)
@@ -466,7 +466,7 @@ EvtScript N(EVS_ReturnToVillage) = {
     Call(SetCamDistance, CAM_DEFAULT, -350)
     Call(SetCamSpeed, CAM_DEFAULT, Float(0.4 / DT))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-6.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Wait(30 * DT)
         Call(SetPlayerSpeed, Float(3.0 / DT))
@@ -502,7 +502,7 @@ EvtScript N(EVS_ReturnToVillage) = {
         Call(RotateModel, MODEL_syoumen_enter, LVar0, 0, 1, 0)
         Wait(1)
     EndLoop
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_WearyWalk)
     Call(NpcMoveTo, NPC_PARTNER, 127, -157, 0)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
@@ -516,7 +516,7 @@ EvtScript N(EVS_ReturnToVillage) = {
     Call(NpcFacePlayer, NPC_Goombaria, 3)
     Call(NpcFacePlayer, NPC_Goombario, 3)
     Call(PlayerFaceNpc, NPC_Goombario, 3)
-    IfEq(GF_KMR04_Tree3_Dolly, TRUE)
+    IfEq(GF_KMR04_Tree3_Dolly, true)
         Thread
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -525,11 +525,11 @@ EvtScript N(EVS_ReturnToVillage) = {
             Call(SetCamDistance, CAM_DEFAULT, Float(-350.0))
             Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-6.0))
             Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         EndThread
         Wait(30 * DT)
-        Call(PlayerFaceNpc, NPC_Goombario, TRUE)
+        Call(PlayerFaceNpc, NPC_Goombario, true)
         Call(SpeakToPlayer, NPC_Goombario, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_CH0_0022)
         Wait(10 * DT)
         Call(ShowChoice, MSG_Choice_0011)
@@ -539,7 +539,7 @@ EvtScript N(EVS_ReturnToVillage) = {
                 Call(CloseMessage)
                 Call(FindKeyItem, ITEM_DOLLY, LVar0)
                 Call(RemoveKeyItemAt, LVar0)
-                Call(PlayerFaceNpc, NPC_Goombaria, TRUE)
+                Call(PlayerFaceNpc, NPC_Goombaria, true)
                 Call(PlayerMoveTo, -50, -24, 0)
                 Call(InterpPlayerYaw, 94, 0)
                 Wait(10 * DT)
@@ -570,11 +570,11 @@ EvtScript N(EVS_ReturnToVillage) = {
                 Call(NpcFacePlayer, NPC_Goombaria, 3)
                 Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
                 Call(PlayerMoveTo, -85, -10, 0)
-                Call(PlayerFaceNpc, NPC_Goombaria, TRUE)
+                Call(PlayerFaceNpc, NPC_Goombaria, true)
                 Wait(20 * DT)
             CaseEq(1)
                 Call(ContinueSpeech, NPC_Goombario, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_CH0_0023)
-                Set(GF_KMR02_KeptDolly, TRUE)
+                Set(GF_KMR02_KeptDolly, true)
                 Wait(10)
         EndSwitch
         Thread
@@ -610,7 +610,7 @@ EvtScript N(EVS_ReturnToVillage) = {
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Run)
     Call(NpcMoveTo, NPC_PARTNER, 32, -151, 0)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
     Call(GetAngleBetweenNPCs, NPC_Goombaria, NPC_PARTNER, LVar0)
     Call(InterpNpcYaw, NPC_Goombaria, LVar0, 0)
     Call(GetAngleBetweenNPCs, NPC_Goombario, NPC_PARTNER, LVar0)
@@ -630,26 +630,26 @@ EvtScript N(EVS_ReturnToVillage) = {
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Run)
     Call(NpcMoveTo, NPC_PARTNER, 3, 9, 0)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
     Call(PlayerFaceNpc, NPC_PARTNER, 3)
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_002C)
     Wait(10 * DT)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Walk)
     Call(NpcMoveTo, NPC_PARTNER, -60, -14, 0)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
     Wait(10 * DT)
     EVT_GIVE_BADGE_REWARD(ITEM_POWER_JUMP)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Walk)
     Call(NpcMoveTo, NPC_PARTNER, 3, 9, 0)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
     Wait(10 * DT)
     ExecWait(N(EVS_PromptForBadgeTutorial))
-    Call(EnableNpcAI, NPC_Goombario, FALSE)
-    Call(EnableNpcAI, NPC_Goombaria, FALSE)
-    Call(EnableNpcAI, NPC_Gooma, FALSE)
-    Call(EnableNpcAI, NPC_Goomama, FALSE)
+    Call(EnableNpcAI, NPC_Goombario, false)
+    Call(EnableNpcAI, NPC_Goombaria, false)
+    Call(EnableNpcAI, NPC_Gooma, false)
+    Call(EnableNpcAI, NPC_Goomama, false)
     Call(N(LoadHeartBlockMsgImg))
     Call(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_0031)
     Wait(10 * DT)
@@ -712,7 +712,7 @@ EvtScript N(EVS_ReturnToVillage) = {
     Call(SetNpcAnimation, NPC_Gooma, ANIM_Gooma_Run)
     Call(NpcMoveTo, NPC_Gooma, 127, -157, 0)
     Call(SetNpcAnimation, NPC_Gooma, ANIM_Gooma_Idle)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Run)
     Call(NpcMoveTo, NPC_PARTNER, 80, -154, 0)
     Call(NpcMoveTo, NPC_PARTNER, 111, -200, 0)
@@ -733,26 +733,26 @@ EvtScript N(EVS_ReturnToVillage) = {
     Call(N(ChangeNpcToPartner), NPC_Goombario, PARTNER_GOOMBARIO)
     Wait(10 * DT)
     Call(SetNpcPos, NPC_Goombario, NPC_DISPOSE_LOCATION)
-    Call(SetNpcFlagBits, NPC_Goombario, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_Goombario, NPC_FLAG_GRAVITY, false)
     Call(SetNpcPos, NPC_Gooma, 115, 0, -309)
-    Call(SetNpcFlagBits, NPC_Gooma, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_GRAVITY, TRUE)
-    Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_FLYING, FALSE)
+    Call(SetNpcFlagBits, NPC_Gooma, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
+    Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_GRAVITY, true)
+    Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_FLYING, false)
     Call(SetNpcPos, NPC_Goompa, 184, 0, -149)
-    Call(EnableNpcShadow, NPC_Goompa, TRUE)
+    Call(EnableNpcShadow, NPC_Goompa, true)
     Call(SetNpcPos, NPC_SELF, 200, 0, 100)
     Call(RestartNpcAI, NPC_Goombaria)
-    Call(EnableNpcAI, NPC_Gooma, TRUE)
-    Call(EnableNpcAI, NPC_Goomama, TRUE)
+    Call(EnableNpcAI, NPC_Gooma, true)
+    Call(EnableNpcAI, NPC_Goomama, true)
     Thread
         Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
     EndThread
-    Call(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Call(EnablePartnerAI)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Set(GB_StoryProgress, STORY_CH0_GOOMBARIO_JOINED_PARTY)
     Unbind
-    Call(SetNpcFlagBits, NPC_Goomama, NPC_FLAG_INACTIVE, FALSE)
+    Call(SetNpcFlagBits, NPC_Goomama, NPC_FLAG_INACTIVE, false)
     Return
     End
 };
@@ -764,8 +764,8 @@ EvtScript N(EVS_NpcIdle_Goompa) = {
 
 EvtScript N(EVS_KootFavorCheck_Goompa) = {
     IfEq(GB_KootFavor_Current, KOOT_FAVOR_CH2_2)
-        IfEq(GF_KMR02_Gift_TheTape, FALSE)
-            Set(GF_KMR02_Gift_TheTape, TRUE)
+        IfEq(GF_KMR02_Gift_TheTape, false)
+            Set(GF_KMR02_Gift_TheTape, true)
             ExecWait(N(EVS_MarioSalute))
             Call(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_0049)
             Call(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_004A)
@@ -774,10 +774,10 @@ EvtScript N(EVS_KootFavorCheck_Goompa) = {
                 Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
                 Call(SetCamSpeed, CAM_DEFAULT, Float(0.2))
                 Call(SetPanTarget, CAM_DEFAULT, 297, LVar1, -84)
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
             EndThread
             Call(GetNpcPos, NPC_Goompa, LVar0, LVar1, LVar2)
-            Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Call(SetNpcAnimation, NPC_Goompa, ANIM_Goompa_Walk)
             Call(SetNpcSpeed, NPC_Goompa, Float(2.0))
             Call(NpcMoveTo, NPC_Goompa, 260, -94, 0)
@@ -789,16 +789,16 @@ EvtScript N(EVS_KootFavorCheck_Goompa) = {
                 Wait(20)
                 Call(GetPlayerPos, LVar0, LVar1, LVar2)
                 Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
                 Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-                Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+                Call(PanToTarget, CAM_DEFAULT, 0, false)
             EndThread
             Call(SetNpcAnimation, NPC_Goompa, ANIM_Goompa_Walk)
             Call(NpcMoveTo, NPC_Goompa, 344, -113, 0)
             Call(NpcMoveTo, NPC_Goompa, 260, -94, 0)
             Call(NpcMoveTo, NPC_Goompa, LVar0, LVar2, 0)
             Call(SetNpcPos, NPC_Goompa, LVar0, LVar1, LVar2)
-            Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
             Call(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_004B)
             EVT_GIVE_KEY_REWARD(ITEM_KOOT_THE_TAPE)
             Call(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_004C)
@@ -817,7 +817,7 @@ API_CALLABLE(N(AddGoompaRenderYaw)) {
 }
 
 EvtScript N(EVS_Goompa_TurnAround) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, true)
     Loop(5)
         Call(N(AddGoompaRenderYaw), Float(-18.0))
         Wait(1)
@@ -843,7 +843,7 @@ EvtScript N(EVS_Goompa_TurnBack) = {
         Call(N(AddGoompaRenderYaw), Float(18.0))
         Wait(1)
     EndLoop
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, false)
     Return
     End
 };
@@ -851,7 +851,7 @@ EvtScript N(EVS_Goompa_TurnBack) = {
 EvtScript N(EVS_NpcInteract_Goompa) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH0_GATE_CRUSHED)
-            IfEq(GF_KMR02_Met_Goompa, FALSE)
+            IfEq(GF_KMR02_Met_Goompa, false)
                 Call(AdjustCam, CAM_DEFAULT, Float(5.0 * DT), 0, Float(-275.0), Float(20.0), Float(-8.5))
                 ExecWait(N(EVS_Goompa_TurnAround))
                 Call(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_0019)
@@ -860,24 +860,24 @@ EvtScript N(EVS_NpcInteract_Goompa) = {
                 Call(SetPanTarget, CAM_DEFAULT, 499, 70, -378)
                 Call(SetCamDistance, CAM_DEFAULT, 370)
                 Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 * DT))
-                Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
-                Set(GF_KMR02_Met_Goompa, TRUE)
+                Call(PanToTarget, CAM_DEFAULT, 0, true)
+                Set(GF_KMR02_Met_Goompa, true)
                 Set(GB_StoryProgress, STORY_CH0_MET_GOOMPA)
                 Call(SetNpcPos, NPC_Goombaria, 215, 0, 215)
                 Call(BindNpcAI, NPC_Goombaria, Ref(N(EVS_NpcAI_GoombaFamily_NoAI)))
-                IfEq(GF_KMR02_Met_Goompapa, TRUE)
+                IfEq(GF_KMR02_Met_Goompapa, true)
                     Call(SetNpcPos, NPC_Goompapa, 265, 0, 245)
                     Call(BindNpcAI, NPC_Goompapa, Ref(N(EVS_NpcAI_GoombaFamily_NoAI)))
                     Call(SetNpcAnimation, NPC_Goompapa, ANIM_Goompapa_Idle)
                 EndIf
             Else
                 ExecWait(N(EVS_Goompa_TurnAround))
-                IfEq(GF_KMR02_Goompa_SwapDialogue, FALSE)
+                IfEq(GF_KMR02_Goompa_SwapDialogue, false)
                     Call(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_001A)
-                    Set(GF_KMR02_Goompa_SwapDialogue, TRUE)
+                    Set(GF_KMR02_Goompa_SwapDialogue, true)
                 Else
                     Call(SpeakToPlayer, NPC_Goompa, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_001B)
-                    Set(GF_KMR02_Goompa_SwapDialogue, FALSE)
+                    Set(GF_KMR02_Goompa_SwapDialogue, false)
                 EndIf
                 ExecWait(N(EVS_Goompa_TurnBack))
             EndIf
@@ -925,15 +925,15 @@ EvtScript N(EVS_NpcInit_Goompa) = {
             Call(SetNpcAnimation, NPC_SELF, ANIM_Goompa_Rummage)
             Call(InterpNpcYaw, NPC_SELF, 200, 0)
         CaseLt(STORY_CH0_FELL_OFF_CLIFF)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, false)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, true)
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            Call(EnableNpcShadow, NPC_SELF, FALSE)
+            Call(EnableNpcShadow, NPC_SELF, false)
         CaseLt(STORY_CH0_GOOMBARIO_JOINED_PARTY)
             BindTrigger(Ref(N(EVS_ReturnToVillage)), TRIGGER_WALL_PRESS_A, COLLIDER_mm1, 1, 0)
         CaseGe(STORY_CH0_GOOMBARIO_JOINED_PARTY)
             Call(SetNpcPos, NPC_Goompa, 172, 0, -183)
-            Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+            Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
             Call(RotateModel, MODEL_m_d1, 120, 0, -1, 0)
             Call(RotateModel, MODEL_m_d2, 120, 0, 1, 0)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mm1, COLLIDER_FLAGS_UPPER_MASK)
@@ -971,7 +971,7 @@ EvtScript N(EVS_NpcIdle_Goompapa) = {
             CaseLt(STORY_CH0_MET_GOOMPA)
                 ExecWait(N(D_8024BEF8_8BBF68))
             CaseLt(STORY_CH0_GATE_CRUSHED)
-                IfEq(GF_KMR02_Met_Goompapa, FALSE)
+                IfEq(GF_KMR02_Met_Goompapa, false)
                     ExecWait(N(D_8024BEF8_8BBF68))
                 EndIf
             CaseLt(STORY_CH0_SMASHED_GATE_BLOCK)
@@ -987,19 +987,19 @@ EvtScript N(EVS_NpcIdle_Goompapa) = {
 EvtScript N(EVS_NpcInteract_Goompapa) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH0_MET_GOOMPA)
-            IfEq(GF_KMR02_Met_Goompapa, FALSE)
+            IfEq(GF_KMR02_Met_Goompapa, false)
                 Call(SpeakToPlayer, NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, MSG_CH0_0052)
                 Call(SetPlayerAnimation, ANIM_Mario1_Idle)
                 Wait(10)
                 Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
                 Wait(10)
                 Call(SpeakToPlayer, NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, MSG_CH0_0053)
-                Set(GF_KMR02_Met_Goompapa, TRUE)
+                Set(GF_KMR02_Met_Goompapa, true)
             Else
                 Call(SpeakToPlayer, NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, MSG_CH0_0054)
             EndIf
         CaseEq(STORY_CH0_MET_GOOMPA)
-            IfEq(GF_KMR02_Met_Goompapa, FALSE)
+            IfEq(GF_KMR02_Met_Goompapa, false)
                 Call(SetNpcAnimation, NPC_Goompapa, ANIM_Goompapa_Idle)
                 Call(SpeakToPlayer, NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, MSG_CH0_0056)
                 Call(SetPlayerAnimation, ANIM_Mario1_Idle)
@@ -1008,7 +1008,7 @@ EvtScript N(EVS_NpcInteract_Goompapa) = {
                 Wait(30)
                 Call(SpeakToPlayer, NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, MSG_CH0_0057)
                 Call(BindNpcAI, NPC_Goompapa, Ref(N(EVS_NpcAI_GoombaFamily_NoAI)))
-                Set(GF_KMR02_Met_Goompapa, TRUE)
+                Set(GF_KMR02_Met_Goompapa, true)
             Else
                 Call(SpeakToPlayer, NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, MSG_CH0_0055)
             EndIf
@@ -1022,14 +1022,14 @@ EvtScript N(EVS_NpcInteract_Goompapa) = {
         CaseLt(STORY_CH0_FELL_OFF_CLIFF)
             Call(SpeakToPlayer, NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, MSG_CH0_0063)
         CaseLt(STORY_CH0_DEFEATED_GOOMBA_KING)
-            IfEq(GF_KMR02_Goompapa_SaidFarewell, FALSE)
+            IfEq(GF_KMR02_Goompapa_SaidFarewell, false)
                 Call(DisablePartnerAI, 0)
                 Call(SpeakToNpc, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, NPC_Goompapa, MSG_CH0_0064)
                 Call(SetNpcAnimation, NPC_PARTNER, ANIM_WorldGoombario_Idle)
                 Wait(10)
                 Call(EnablePartnerAI)
                 Call(SpeakToNpc, NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, NPC_PARTNER, MSG_CH0_0065)
-                Set(GF_KMR02_Goompapa_SaidFarewell, TRUE)
+                Set(GF_KMR02_Goompapa_SaidFarewell, true)
             Else
                 Call(SpeakToPlayer, NPC_Goompapa, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, MSG_CH0_0068)
                 Call(SetNpcAnimation, NPC_PARTNER, ANIM_WorldGoombario_Idle)
@@ -1072,7 +1072,7 @@ EvtScript N(EVS_NpcInit_Goompapa) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH0_MET_GOOMPA)
         CaseEq(STORY_CH0_MET_GOOMPA)
-            IfEq(GF_KMR02_Met_Goompapa, TRUE)
+            IfEq(GF_KMR02_Met_Goompapa, true)
                 Call(SetNpcPos, NPC_Goompapa, 265, 0, 245)
                 Call(BindNpcAI, NPC_Goompapa, Ref(N(EVS_NpcAI_GoombaFamily_NoAI)))
                 Call(SetNpcAnimation, NPC_Goompapa, ANIM_Goompapa_Idle)
@@ -1107,16 +1107,16 @@ EvtScript N(EVS_NpcIdle_Goomama) = {
 EvtScript N(EVS_NpcInteract_Goomama) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH0_GATE_CRUSHED)
-            IfEq(GF_KMR02_Met_Goomama, FALSE)
+            IfEq(GF_KMR02_Met_Goomama, false)
                 Call(SpeakToPlayer, NPC_Goomama, ANIM_Goomama_Talk, ANIM_Goomama_Idle, 0, MSG_CH0_0077)
-                Set(GF_KMR02_Met_Goomama, TRUE)
+                Set(GF_KMR02_Met_Goomama, true)
             Else
                 Call(SpeakToPlayer, NPC_Goomama, ANIM_Goomama_Talk, ANIM_Goomama_Idle, 0, MSG_CH0_0078)
             EndIf
         CaseLt(STORY_CH0_LEFT_THE_PLAYGROUND)
             Call(SpeakToPlayer, NPC_Goomama, ANIM_Goomama_Talk, ANIM_Goomama_Idle, 0, MSG_CH0_0079)
         CaseLt(STORY_CH0_DEFEATED_GOOMBA_KING)
-            IfEq(GF_KMR02_Goomama_SaidFarewell, FALSE)
+            IfEq(GF_KMR02_Goomama_SaidFarewell, false)
                 Call(DisablePartnerAI, 0)
                 Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 5, MSG_CH0_007A)
                 Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
@@ -1131,7 +1131,7 @@ EvtScript N(EVS_NpcInteract_Goomama) = {
                 Wait(10)
                 Call(SpeakToPlayer, NPC_Goomama, ANIM_Goomama_Talk, ANIM_Goomama_Idle, 0, MSG_CH0_007F)
                 Wait(10)
-                Set(GF_KMR02_Goomama_SaidFarewell, TRUE)
+                Set(GF_KMR02_Goomama_SaidFarewell, true)
                 Call(EnablePartnerAI)
             Else
                 Call(SpeakToPlayer, NPC_Goomama, ANIM_Goomama_Talk, ANIM_Goomama_Idle, 0, MSG_CH0_0080)
@@ -1179,7 +1179,7 @@ EvtScript N(EVS_NpcInit_Goomama) = {
         CaseLt(STORY_CH0_GOOMBARIO_JOINED_PARTY)
             Call(SetNpcPos, NPC_SELF, 200, 0, 100)
             Wait(1)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, true)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Goomama)))
         CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Goomama)))
@@ -1219,8 +1219,8 @@ EvtScript N(EVS_NpcIdle_Gooma) = {
 EvtScript N(EVS_NpcInteract_Gooma) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH0_GATE_CRUSHED)
-            IfEq(GF_KMR02_Met_Gooma, FALSE)
-                Set(GF_KMR02_Met_Gooma, TRUE)
+            IfEq(GF_KMR02_Met_Gooma, false)
+                Set(GF_KMR02_Met_Gooma, true)
                 Call(AdjustCam, CAM_DEFAULT, Float(5.0 * DT), 0, Float(-275.5), Float(15.5), Float(-10.0))
                 Call(SpeakToPlayer, NPC_Gooma, ANIM_Gooma_Talk, ANIM_Gooma_Idle, 5, MSG_CH0_009C)
                 Thread
@@ -1232,9 +1232,9 @@ EvtScript N(EVS_NpcInteract_Gooma) = {
         CaseLt(STORY_CH0_FELL_OFF_CLIFF)
             Call(SpeakToPlayer, NPC_Gooma, ANIM_Gooma_Talk, ANIM_Gooma_Idle, 0, MSG_CH0_009E)
         CaseLt(STORY_CH0_DEFEATED_GOOMBA_KING)
-            IfEq(GF_KMR02_Gooma_HealthAdvice, FALSE)
+            IfEq(GF_KMR02_Gooma_HealthAdvice, false)
                 Call(SpeakToPlayer, NPC_Gooma, ANIM_Gooma_Talk, ANIM_Gooma_Idle, 0, MSG_CH0_009F)
-                Set(GF_KMR02_Gooma_HealthAdvice, TRUE)
+                Set(GF_KMR02_Gooma_HealthAdvice, true)
             Else
                 Call(SpeakToPlayer, NPC_Gooma, ANIM_Gooma_Talk, ANIM_Gooma_Idle, 0, MSG_CH0_00A0)
             EndIf
@@ -1412,7 +1412,7 @@ API_CALLABLE(N(func_80242F08_8B2F78)) {
 }
 
 API_CALLABLE(N(func_80242F28_8B2F98)) {
-    mdl_group_set_custom_gfx(MODEL_kinopi, CUSTOM_GFX_NONE, ENV_TINT_SHROUD, TRUE);
+    mdl_group_set_custom_gfx(MODEL_kinopi, CUSTOM_GFX_NONE, ENV_TINT_SHROUD, true);
     mdl_set_shroud_tint_params(0, 0, 0, 255);
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
@@ -1422,27 +1422,27 @@ API_CALLABLE(N(func_80242F28_8B2F98)) {
 
 EvtScript N(EVS_Scene_EldstarsPlea) = {
     Call(FadeOutMusic, 0, 500)
-    Call(SetNpcFlagBits, NPC_Goombario, NPC_FLAG_HIDING, TRUE)
-    Call(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_HIDING, TRUE)
-    Call(SetNpcFlagBits, NPC_Goompapa, NPC_FLAG_HIDING, TRUE)
-    Call(SetNpcFlagBits, NPC_Goomama, NPC_FLAG_HIDING, TRUE)
-    Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_HIDING, TRUE)
-    Call(SetNpcFlagBits, NPC_Gooma, NPC_FLAG_HIDING, TRUE)
+    Call(SetNpcFlagBits, NPC_Goombario, NPC_FLAG_HIDING, true)
+    Call(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_HIDING, true)
+    Call(SetNpcFlagBits, NPC_Goompapa, NPC_FLAG_HIDING, true)
+    Call(SetNpcFlagBits, NPC_Goomama, NPC_FLAG_HIDING, true)
+    Call(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_HIDING, true)
+    Call(SetNpcFlagBits, NPC_Gooma, NPC_FLAG_HIDING, true)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(-375.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(20.0), Float(-9.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(N(func_80242BA8_8B2C18))
     Call(N(func_8024295C_8B29CC), 0, 0, 0, 255, 0)
     Call(N(func_80242F08_8B2F78))
     Call(N(func_80242BC0_8B2C30), 30, 30, 30, 0, 0, 0, 0)
     Call(SetGroupVisibility, MODEL_Root, MODEL_GROUP_HIDDEN)
     Call(SetGroupVisibility, MODEL_kinopi, MODEL_GROUP_VISIBLE)
-    Call(EnableModel, MODEL_o561, FALSE)
-    Call(DisablePlayerInput, TRUE)
+    Call(EnableModel, MODEL_o561, false)
+    Call(DisablePlayerInput, true)
     Call(FullyRestoreHPandFP)
     Call(N(SyncStatusBar))
     Call(InterpPlayerYaw, 143, 0)
@@ -1493,7 +1493,7 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(30.0), Float(-22.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(-160.0), Float(-310.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Eldstar_02, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 0, MSG_CH0_0009)
     Call(MakeLerp, 120, 60, 20 * DT, EASING_LINEAR)
@@ -1512,7 +1512,7 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(20.0), Float(-9.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetCamPosB, CAM_DEFAULT, Float(-190.0), Float(-310.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Thread
@@ -1543,9 +1543,9 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
     Wait(30 * DT)
     Call(SetGroupVisibility, MODEL_Root, MODEL_GROUP_VISIBLE)
     Call(N(func_80242F28_8B2F98))
-    Call(EnableModel, MODEL_o561, FALSE)
-    Call(EnableGroup, MODEL_2, FALSE)
-    Call(EnableGroup, MODEL_4, FALSE)
+    Call(EnableModel, MODEL_o561, false)
+    Call(EnableGroup, MODEL_2, false)
+    Call(EnableGroup, MODEL_4, false)
     Call(SetPlayerJumpscale, Float(1.0))
     Call(PlayerJump, -180, 19, -335, 10)
     Call(InterpPlayerYaw, 143, 0)
@@ -1568,7 +1568,7 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
     Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
     Call(SetNpcPos, NPC_Toad, -197, 39, -188)
     Call(SetNpcAnimation, NPC_Toad, ANIM_Toad_Red_Walk)
-    Call(SetNpcFlagBits, NPC_Toad, NPC_FLAG_GRAVITY, TRUE)
+    Call(SetNpcFlagBits, NPC_Toad, NPC_FLAG_GRAVITY, true)
     Thread
         Call(PlaySoundAtCollider, COLLIDER_deilit7, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
         Call(MakeLerp, 0, 90, 10 * DT, EASING_LINEAR)
@@ -1639,7 +1639,7 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(-375.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(20.0), Float(-9.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetPlayerAnimation, ANIM_Mario1_Jump)
     Call(SetPlayerJumpscale, Float(2.0))
@@ -1649,7 +1649,7 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
     Call(BindNpcInteract, NPC_Toad, Ref(N(EVS_NpcInteract_Toad)))
     Set(GB_StoryProgress, STORY_CH0_MET_INNKEEPER)
     Wait(1)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -1748,7 +1748,7 @@ NpcData N(NpcData_GoombaFamily)[] = {
         .yaw = 45,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 506, 30, -364 },
@@ -1771,7 +1771,7 @@ NpcData N(NpcData_GoombaFamily)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 92, 0, 76 },
@@ -1794,7 +1794,7 @@ NpcData N(NpcData_GoombaFamily)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -50, 0, -30 },
@@ -1816,7 +1816,7 @@ NpcData N(NpcData_GoombaFamily)[] = {
         .yaw = 90,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 100, 0, -256 },
@@ -1839,7 +1839,7 @@ NpcData N(NpcData_GoombaFamily)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 163, 0, 283 },
@@ -1864,7 +1864,7 @@ NpcData N(NpcData_Goomama) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -200, 0, 100 },
@@ -1894,7 +1894,7 @@ NpcData N(NpcData_Toad) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },
@@ -1928,7 +1928,7 @@ NpcData N(NpcData_Kammy) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 0, 0, 0 },
@@ -1966,7 +1966,7 @@ EvtScript N(EVS_NpcInit_Eldstar_01) = {
     Call(GetEntryID, LVar0)
     IfEq(LVar0, kmr_02_ENTRY_5)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_Scene_EldstarsPlea)))
-        Call(SetNpcFlagBits, NPC_Toad, NPC_FLAG_GRAVITY, FALSE)
+        Call(SetNpcFlagBits, NPC_Toad, NPC_FLAG_GRAVITY, false)
         Call(SetNpcPos, NPC_Toad, NPC_DISPOSE_LOCATION)
     EndIf
     Return
@@ -2107,7 +2107,7 @@ EvtScript N(EVS_NpcIdle_Eldstar_Epilogue) = {
         Call(SetCamDistance, CAM_DEFAULT, Float(-300.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-6.5))
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Wait(30)
     Call(SpeakToPlayer, NPC_Goombario, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 5, MSG_Outro_0010)
@@ -2148,7 +2148,7 @@ EvtScript N(EVS_NpcIdle_Eldstar_Epilogue) = {
         Call(SetCamDistance, CAM_DEFAULT, Float(-300.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-6.5))
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Wait(1)
         IfEq(LVar1, 1)
             Goto(10)
@@ -2175,18 +2175,18 @@ EvtScript N(EVS_NpcInit_Eldstar_Epilogue) = {
     Call(UseSettingsFrom, CAM_DEFAULT, 60, 0, 10)
     Call(SetPanTarget, CAM_DEFAULT, 60, 0, 10)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetNpcPos, NPC_Goombario, 11, 0, 63)
     Call(SetNpcPos, NPC_Goombaria, 84, 0, 69)
     Call(SetNpcPos, NPC_Parakarry, NPC_DISPOSE_LOCATION)
-    Call(SetNpcFlagBits, NPC_Goombario, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    Call(SetNpcFlagBits, NPC_Goombario, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_GRAVITY, FALSE)
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(SetNpcFlagBits, NPC_Goombario, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+    Call(SetNpcFlagBits, NPC_Goombario, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_GRAVITY, false)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerPos, NPC_DISPOSE_LOCATION)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Eldstar_Epilogue)))
     Return

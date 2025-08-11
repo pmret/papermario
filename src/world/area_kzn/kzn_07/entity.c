@@ -5,14 +5,14 @@
 #include "world/common/atomic/PushBlockGravity.inc.c"
 
 API_CALLABLE(func_802407F4_C6EB24) {
-    get_entity_by_index(script->varTable[0])->dataBuf.chest->gotItemDone = TRUE;
+    get_entity_by_index(script->varTable[0])->dataBuf.chest->gotItemDone = true;
     return ApiStatus_DONE2;
 }
 
 EvtScript N(EVS_MonitorChestStatus) = {
-    IfEq(GF_KZN07_GiantChest, FALSE)
+    IfEq(GF_KZN07_GiantChest, false)
         Label(10)
-        IfEq(GF_KZN07_GiantChest, FALSE)
+        IfEq(GF_KZN07_GiantChest, false)
             Wait(1)
             Goto(10)
         EndIf
@@ -27,7 +27,7 @@ EvtScript N(EVS_MonitorChestStatus) = {
 };
 
 EvtScript N(EVS_OnBreakBlock) = {
-    Set(GF_KZN07_Hammer3Block, TRUE)
+    Set(GF_KZN07_Hammer3Block, true)
     Return
     End
 };
@@ -36,7 +36,7 @@ EvtScript N(EVS_MakeEntities) = {
     Call(MakeEntity, Ref(Entity_GiantChest), 0, 45, -290, 0, ITEM_ULTRA_HAMMER, MAKE_ENTITY_END)
     Call(AssignChestFlag, GF_KZN07_GiantChest)
     Exec(N(EVS_MonitorChestStatus))
-    IfEq(GF_KZN07_Hammer3Block, FALSE)
+    IfEq(GF_KZN07_Hammer3Block, false)
         Call(MakeEntity, Ref(Entity_Hammer3BlockWideZ), 175, 35, -185, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_OnBreakBlock)))
     EndIf

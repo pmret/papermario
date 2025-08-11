@@ -51,7 +51,7 @@ API_CALLABLE(N(StarRodPowerUpEffect)) {
             effectState->unk_24 = 90.0f;
             effectState->unk_28 = 0.0f;
             effectState->unk_2C = 0.0f;
-            effectState->effectEnded = FALSE;
+            effectState->effectEnded = false;
         }
         return ApiStatus_BLOCK;
     }
@@ -138,7 +138,7 @@ API_CALLABLE(N(StarRodPowerUpEffect)) {
 
             if (effectState->duration <= 0) {
                 remove_effect(effectState->effect);
-                effectState->effectEnded = TRUE;
+                effectState->effectEnded = true;
             }
         }
     }

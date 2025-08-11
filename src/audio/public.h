@@ -49,7 +49,7 @@ AuResult snd_song_request_pause(s32 songName);
 AuResult snd_song_request_unpause(s32 songName);
 AuResult snd_song_set_volume_quiet(s32 songName);
 AuResult snd_song_set_volume_full(s32 songName);
-AuResult snd_song_set_linked_mode(s32 songName, b32 mode);
+AuResult snd_song_set_linked_mode(s32 songName, bool mode);
 //AuResult snd_song_get_playing_info(s32 songName, BGMHeader** outTrackData, BGMPlayer** outPlayer);
 AuResult snd_song_set_playback_rate(s32 songName, f32 arg1);
 /*
@@ -90,10 +90,10 @@ s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s1
 void bgm_set_battle_song(s32, s32);
 void bgm_push_battle_song(void);
 s32 bgm_adjust_proximity(s32 playerIndex, s32 arg1, s16 arg2);
-b32 bgm_fade_in_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5);
+bool bgm_fade_in_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5);
 
 void bgm_update_music_control(void);
-b32 bgm_is_any_song_playing(void);
+bool bgm_is_any_song_playing(void);
 void bgm_reset_sequence_players(void);
 void bgm_pop_song(void);
 void bgm_push_song(s32 songID, s32 variation);

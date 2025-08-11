@@ -44,8 +44,8 @@ EvtScript N(EVS_Main) = {
     Call(GetLanguage, LVar0)
     Call(SetModelTexVariant, MODEL_o110, LVar0)
 #endif
-    Set(GF_MAP_MtRugged, TRUE)
-    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Set(GF_MAP_MtRugged, true)
+    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
     Call(ClearDefeatedEnemies)
     ExecWait(N(EVS_MakeEntities))
     ExecWait(N(EVS_InitializeTrainScene))
@@ -67,8 +67,8 @@ EvtScript N(EVS_Main) = {
     Thread
         Call(SetTexPanner, MODEL_o256, TEX_PANNER_2)
         Call(SetTexPanner, MODEL_o266, TEX_PANNER_2)
-        Call(EnableTexPanning, MODEL_o256, TRUE)
-        Call(EnableTexPanning, MODEL_o266, TRUE)
+        Call(EnableTexPanning, MODEL_o256, true)
+        Call(EnableTexPanning, MODEL_o266, true)
         Set(LVar0, 0)
         Label(20)
         Sub(LVar0, 3000)

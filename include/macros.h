@@ -56,7 +56,7 @@
 
 #define PTR_LIST_END ((void*) -1)
 
-#define API_CALLABLE(name) ApiStatus name(Evt* script, b32 isInitialCall)
+#define API_CALLABLE(name) ApiStatus name(Evt* script, bool isInitialCall)
 
 // standardized padding macros for map overlays
 #define MAP_RODATA_PAD(n,name) const s32 N(rodata_pad_##name)[n] = {};
@@ -68,7 +68,7 @@
 #ifdef DEBUG
 #define IS_DEBUG_PANIC(statement, file, line) is_debug_panic(statement, file, line)
 #else
-#define IS_DEBUG_PANIC(statement, file, line) do {} while(TRUE)
+#define IS_DEBUG_PANIC(statement, file, line) do {} while(true)
 #endif
 
 #define PANIC() IS_DEBUG_PANIC("Panic", __FILE__, __LINE__)
@@ -537,5 +537,12 @@ typedef s32 Difficulty2D[AC_DIFFICULTY_LEN][2];
 #endif
 
 #define DMA_COPY_SEGMENT(segment) dma_copy(segment##_ROM_START, segment##_ROM_END, segment##_VRAM)
+
+#if __STDC_VERSION__ < 202311L
+typedef enum {
+    false,
+    true
+} bool;
+#endif
 
 #endif

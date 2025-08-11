@@ -26,7 +26,7 @@ API_CALLABLE(N(SetupDemoPlayerMove)) {
 EvtScript NAMESPACE = {
     Wait(3)
     Call(SetCamViewport, CAM_BATTLE, 29, 20, 262, 177)
-    Call(EnableBattleStatusBar, FALSE)
+    Call(EnableBattleStatusBar, false)
     Set(LVar0, 15)
     Call(N(SetDemoBattleBeginDelay))
     Call(WaitForState, BATTLE_STATE_PLAYER_MENU)

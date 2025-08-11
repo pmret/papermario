@@ -147,8 +147,8 @@ EvtScript N(EVS_CarryPeachAway_Ch3) = {
 };
 
 EvtScript N(EVS_Scene_Chapter3) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(DisablePartnerAI, 0)
     Call(SetMusic, 0, SONG_BOWSER_THEME, 0, VOL_LEVEL_FULL)
     Call(InterpPlayerYaw, 270, 0)
@@ -162,13 +162,13 @@ EvtScript N(EVS_Scene_Chapter3) = {
     Call(SetPanTarget, CAM_DEFAULT, -50, 0, -20)
     Call(SetCamDistance, CAM_DEFAULT, 300)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(30 * DT)
     Call(SpeakToNpc, NPC_Bowser, ANIM_WorldBowser_AngryTalk, ANIM_WorldBowser_Idle, 0, NPC_Kammy, MSG_Peach_0082)
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
     Call(SetCamDistance, CAM_DEFAULT, 400)
     Call(SetPanTarget, CAM_DEFAULT, -50, 0, -20)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToNpc, NPC_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 0, NPC_Bowser, MSG_Peach_0083)
     Thread
@@ -191,7 +191,7 @@ EvtScript N(EVS_Scene_Chapter3) = {
                 BreakLoop
             EndIf
         EndLoop
-        Call(EnableNpcShadow, NPC_PARTNER, FALSE)
+        Call(EnableNpcShadow, NPC_PARTNER, false)
     EndThread
     Call(SpeakToNpc, NPC_Bowser, ANIM_WorldBowser_AngryTalk, ANIM_WorldBowser_Idle, 0, NPC_Kammy, MSG_Peach_0084)
     Call(SetNpcAnimation, NPC_Bowser, ANIM_WorldBowser_Tantrum)
@@ -233,11 +233,11 @@ EvtScript N(EVS_Scene_Chapter3) = {
         Wait(30 * DT)
         Call(SetPlayerAnimation, ANIM_Peach2_LookAround)
         Wait(60 * DT)
-        Call(DisablePlayerPhysics, FALSE)
+        Call(DisablePlayerPhysics, false)
         Call(N(SetPeachDepressed))
         Call(SetPlayerAnimation, ANIM_Peach2_SadStill)
         Call(func_802D1270, 30, -10, Float(2.0 / DT))
-        Call(DisablePlayerPhysics, TRUE)
+        Call(DisablePlayerPhysics, true)
         Call(N(ClearPeachDepressed))
         Call(SetNpcVar, NPC_Bowser, 0, 0)
     EndThread
@@ -260,25 +260,25 @@ EvtScript N(EVS_Scene_Chapter3) = {
     Call(ShowChoice, MSG_Choice_0026)
     Set(GB_OMO_PeachChoice1, LVar0)
     IfNe(LVar0, 2)
-        Set(AF_KKJ_08, TRUE)
+        Set(AF_KKJ_08, true)
     EndIf
     Call(ContinueSpeech, NPC_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, MSG_Peach_008C)
     Call(ShowChoice, MSG_Choice_0027)
     Set(GB_OMO_PeachChoice2, LVar0)
     IfNe(LVar0, 2)
-        Set(AF_KKJ_08, TRUE)
+        Set(AF_KKJ_08, true)
     EndIf
     Call(ContinueSpeech, NPC_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, MSG_Peach_008D)
     Call(ShowChoice, MSG_Choice_0028)
     Set(GB_OMO_PeachChoice3, LVar0)
     IfNe(LVar0, 2)
-        Set(AF_KKJ_08, TRUE)
+        Set(AF_KKJ_08, true)
     EndIf
     Call(ContinueSpeech, NPC_Bowser, ANIM_WorldBowser_TalkEyesClosed, ANIM_WorldBowser_Idle, 0, MSG_Peach_008E)
     Call(InterpNpcYaw, NPC_Bowser, 270, 7)
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 5, MSG_Peach_008F)
-    IfEq(AF_KKJ_08, FALSE)
+    IfEq(AF_KKJ_08, false)
         Call(SpeakToNpc, NPC_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 0, NPC_Bowser, MSG_Peach_0090)
     Else
         Call(SpeakToNpc, NPC_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 0, NPC_Bowser, MSG_Peach_0091)
@@ -304,7 +304,7 @@ EvtScript N(EVS_Scene_Chapter3) = {
     ExecWait(N(EVS_CarryPeachAway_Ch3))
     Call(InterpNpcYaw, NPC_PARTNER, 90, 0)
     Call(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_Cringe)
-    Call(EnableNpcShadow, NPC_PARTNER, TRUE)
+    Call(EnableNpcShadow, NPC_PARTNER, true)
     Call(LoadPath, 80 * DT, Ref(N(TwinkFollowCh3Path1)), ARRAY_COUNT(N(TwinkFollowCh3Path1)), EASING_LINEAR)
     Loop(0)
         Call(GetNextPathPos)
@@ -337,10 +337,10 @@ EvtScript N(EVS_Scene_Chapter3) = {
     Wait(30 * DT)
     Call(FadeOutMusic, 0, 1000 * DT)
     ExecWait(N(EVS_EndPeachChapter3))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(EnablePartnerAI)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

@@ -6,9 +6,9 @@
 EvtScript N(EVS_OpenChest_Mailbag) = {
     Set(LVarA, ITEM_MAILBAG)
     Set(LVarB, ITEM_TYPE_KEY)
-    Set(GF_OMO06_Chest_Mailbag, TRUE)
+    Set(GF_OMO06_Chest_Mailbag, true)
     ExecWait(N(EVS_Chest_GetItem))
-    Set(GF_MAC01_MailbagStolen, TRUE)
+    Set(GF_MAC01_MailbagStolen, true)
     Return
     End
 };

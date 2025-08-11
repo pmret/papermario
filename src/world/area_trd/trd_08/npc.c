@@ -14,14 +14,14 @@ EvtScript N(EVS_FireBar_Defeated) = {
     Set(LVarB, LVar1)
     Loop(15)
         Loop(LVar1)
-            Call(SetNpcFlagBits, LVar0, NPC_FLAG_INVISIBLE, TRUE)
+            Call(SetNpcFlagBits, LVar0, NPC_FLAG_INVISIBLE, true)
             Add(LVar0, 1)
         EndLoop
         Wait(1)
         Set(LVar0, LVarA)
         Set(LVar1, LVarB)
         Loop(LVar1)
-            Call(SetNpcFlagBits, LVar0, NPC_FLAG_INVISIBLE, FALSE)
+            Call(SetNpcFlagBits, LVar0, NPC_FLAG_INVISIBLE, false)
             Add(LVar0, 1)
         EndLoop
         Wait(1)
@@ -40,16 +40,16 @@ EvtScript N(EVS_FireBar_Defeated) = {
         PlayEffect(EFFECT_00, LVar1, LVar2, LVar3, 1, 20, 3, 2)
     EndLoop
     IfEq(LVarA, NPC_FireBar_1A)
-        IfEq(AF_TRD08_FireBar1_Coins, FALSE)
-            Set(AF_TRD08_FireBar1_Coins, TRUE)
+        IfEq(AF_TRD08_FireBar1_Coins, false)
+            Set(AF_TRD08_FireBar1_Coins, true)
             Loop(10)
                 Call(MakeItemEntity, ITEM_COIN, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0)
             EndLoop
         EndIf
     EndIf
     IfEq(LVarA, NPC_FireBar_2A)
-        IfEq(AF_TRD08_FireBar2_Coins, FALSE)
-            Set(AF_TRD08_FireBar2_Coins, TRUE)
+        IfEq(AF_TRD08_FireBar2_Coins, false)
+            Set(AF_TRD08_FireBar2_Coins, true)
             Loop(10)
                 Call(MakeItemEntity, ITEM_COIN, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0)
             EndLoop
@@ -77,9 +77,9 @@ FireBarAISettings N(AISettings_FireBar_02) = {
 };
 
 EvtScript N(EVS_NpcAuxAI_00) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, 0, TRUE)
-    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, false)
+    Call(SetNpcFlagBits, NPC_SELF, 0, true)
+    Call(EnableNpcShadow, NPC_SELF, true)
     Thread
         Call(RandInt, 5, LVar0)
         Add(LVar0, 1)

@@ -7,7 +7,7 @@ EvtScript N(EVS_OpenChest_BooWeight) = {
     Set(LVarA, ITEM_BOO_WEIGHT)
     Set(LVarB, ITEM_TYPE_KEY)
     Set(GB_StoryProgress, STORY_CH3_GOT_WEIGHT)
-    Set(GF_OBK07_Chest_Weight, TRUE)
+    Set(GF_OBK07_Chest_Weight, true)
     ExecWait(N(EVS_Chest_GetItem))
     ExecWait(N(EVS_Scene_PlayerGotChestItem))
     Return

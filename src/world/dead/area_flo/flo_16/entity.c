@@ -16,8 +16,8 @@ EvtScript N(EVS_TetherCameraToPlayer) = {
 };
 
 EvtScript N(EVS_UseSpring) = {
-    Call(DisablePlayerInput, TRUE)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, true)
+    Call(DisablePlayerPhysics, true)
     Call(SetPlayerActionState, ACTION_STATE_LAUNCH)
     Wait(2)
     Call(GetPlayerPos, LVar7, LVar8, LVar9)
@@ -25,22 +25,22 @@ EvtScript N(EVS_UseSpring) = {
     Call(SetPlayerJumpscale, Float(0.7))
     Call(PlayerJump, 450, 180, -120, 30)
     Call(SetPlayerActionState, ACTION_STATE_IDLE)
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 API_CALLABLE(N(IsPlayerPounding)) {
-    script->varTable[0] = FALSE;
+    script->varTable[0] = false;
     if (gPlayerStatus.actionState == ACTION_STATE_SPIN_POUND || gPlayerStatus.actionState == ACTION_STATE_TORNADO_POUND) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
     return ApiStatus_DONE2;
 }
 
 EvtScript N(EVS_MonitorCeilingPound) = {
-    IfEq(AF_FLO16_FoundHiddenStarPiece, FALSE)
+    IfEq(AF_FLO16_FoundHiddenStarPiece, false)
         Call(N(IsPlayerPounding))
         IfEq(LVar0, 0)
             Return
@@ -49,7 +49,7 @@ EvtScript N(EVS_MonitorCeilingPound) = {
         Switch(LVar0)
             CaseRange(620, 660)
                 Call(MakeItemEntity, ITEM_STAR_PIECE, 640, 145, -100, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_FLO16_Item_StarPiece)
-                Set(AF_FLO16_FoundHiddenStarPiece, TRUE)
+                Set(AF_FLO16_FoundHiddenStarPiece, true)
         EndSwitch
     EndIf
     Return
@@ -57,7 +57,7 @@ EvtScript N(EVS_MonitorCeilingPound) = {
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    Set(AF_FLO16_FoundHiddenStarPiece, FALSE)
+    Set(AF_FLO16_FoundHiddenStarPiece, false)
     BindTrigger(Ref(N(EVS_MonitorCeilingPound)), TRIGGER_FLOOR_TOUCH, COLLIDER_o214, 1, 0)
     EVT_MAKE_SUPER_BLOCK(350, 240, -100, 0)
     Call(MakeEntity, Ref(Entity_ScriptSpring), 472, 100, -100, 0, MAKE_ENTITY_END)

@@ -6,11 +6,11 @@
 EvtScript N(EVS_Scene_BuildBridge) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
     Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(10)
-    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerPhysics, true)
     Call(N(DisableCameraLeadingPlayer))
-    Call(InterpCamTargetPos, CAM_DEFAULT, TRUE, 3, 0, -60, 20)
+    Call(InterpCamTargetPos, CAM_DEFAULT, true, 3, 0, -60, 20)
     Wait(10)
     Set(GB_StoryProgress, STORY_CH1_MADE_SECOND_BRIDGE)
     Call(PlaySoundAt, SOUND_NOK_BRIDGE_THUD_1, SOUND_SPACE_DEFAULT, 0, 0, -60)
@@ -116,10 +116,10 @@ EvtScript N(EVS_Scene_BuildBridge) = {
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o255, COLLIDER_FLAGS_UPPER_MASK)
     Wait(20)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
-    Call(InterpCamTargetPos, CAM_DEFAULT, TRUE, LVar0, LVar1, LVar2, 10)
+    Call(InterpCamTargetPos, CAM_DEFAULT, true, LVar0, LVar1, LVar2, 10)
     Call(N(EnableCameraLeadingPlayer))
-    Call(DisablePlayerPhysics, FALSE)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, false)
+    Call(DisablePlayerInput, false)
     Call(SetTimeFreezeMode, TIME_FREEZE_NONE)
     Unbind
     Return

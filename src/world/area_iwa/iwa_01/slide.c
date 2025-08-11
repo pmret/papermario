@@ -37,7 +37,7 @@ EvtScript N(EVS_UpdateSliding2) = {
 };
 
 EvtScript N(EVS_UseSlide1) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(10)
     Thread
         Call(PlaySoundAtCollider, COLLIDER_st1, SOUND_IWA_SLIDE_GATE, SOUND_SPACE_DEFAULT)
@@ -54,7 +54,7 @@ EvtScript N(EVS_UseSlide1) = {
     Wait(15)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_st1, COLLIDER_FLAGS_UPPER_MASK)
     Call(PlayerMoveTo, -440, 60, 30)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Wait(100)
     Thread
         Call(PlaySoundAtCollider, COLLIDER_st1, SOUND_IWA_SLIDE_GATE, SOUND_SPACE_DEFAULT)
@@ -74,7 +74,7 @@ EvtScript N(EVS_UseSlide1) = {
 };
 
 EvtScript N(EVS_UseSlide2) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(10)
     Thread
         Call(PlaySoundAtCollider, COLLIDER_st2, SOUND_IWA_SLIDE_GATE, SOUND_SPACE_DEFAULT)
@@ -91,7 +91,7 @@ EvtScript N(EVS_UseSlide2) = {
     Wait(15)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_st2, COLLIDER_FLAGS_UPPER_MASK)
     Call(PlayerMoveTo, 543, 50, 20)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Wait(100)
     Thread
         Call(PlaySoundAtCollider, COLLIDER_st2, SOUND_IWA_SLIDE_GATE, SOUND_SPACE_DEFAULT)

@@ -11,13 +11,13 @@ EvtScript N(EVS_EnterMap) = {
                 Call(SetPlayerSpeed, Float(3.0))
                 Call(PlayerMoveTo, -150, LVar2, 0)
             EndThread
-            Call(EnableModel, MODEL_door_off1, FALSE)
-            Call(EnableModel, MODEL_door_off2, FALSE)
+            Call(EnableModel, MODEL_door_off1, false)
+            Call(EnableModel, MODEL_door_off2, false)
             Set(LVar2, MODEL_door1)
             Set(LVar3, DOOR_SWING_IN)
             ExecWait(EnterSingleDoor)
-            Call(EnableModel, MODEL_door_off1, TRUE)
-            Call(EnableModel, MODEL_door_off2, TRUE)
+            Call(EnableModel, MODEL_door_off1, true)
+            Call(EnableModel, MODEL_door_off2, true)
             Wait(20)
             Call(MakeLerp, 0, -90, 15, EASING_QUADRATIC_IN)
             Loop(0)
@@ -35,7 +35,7 @@ EvtScript N(EVS_EnterMap) = {
             PlayEffect(EFFECT_LANDING_DUST, 1, -185, 0, 25, 0)
             PlayEffect(EFFECT_LANDING_DUST, 1, -185, 0, -25, 0)
             Wait(20)
-            Call(EnableModel, MODEL_door1, FALSE)
+            Call(EnableModel, MODEL_door1, false)
             Call(MakeLerp, 0, 10, 15, EASING_LINEAR)
             Loop(0)
                 Call(UpdateLerp)
@@ -45,7 +45,7 @@ EvtScript N(EVS_EnterMap) = {
                     BreakLoop
                 EndIf
             EndLoop
-            Call(EnableModel, MODEL_door_off3, FALSE)
+            Call(EnableModel, MODEL_door_off3, false)
     EndSwitch
     Return
     End
@@ -72,7 +72,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_BOOS_MANSION)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_ManageHole))
     Exec(N(EVS_TexPan_Fog))

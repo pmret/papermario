@@ -21,9 +21,9 @@ API_CALLABLE(N(SetNewWanderCenterPos)) {
 }
 
 EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Call(GetSelfNpcID, LVar0)
     IfEq(LVar0, 1)
         Call(SetNpcPos, NPC_SELF, 45, -30, 20)
@@ -31,7 +31,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
         Call(SetNpcPos, NPC_SELF, -70, -30, -20)
     EndIf
     Call(InterpNpcYaw, NPC_SELF, 90, 0)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(GetNpcPos, NPC_SELF, LVar2, LVar3, LVar4)
     Label(0)
     Call(MakeLerp, Float(-2.0), Float(2.0), 30, EASING_COS_IN_OUT)
@@ -63,23 +63,23 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
     EndIf
     Wait(5)
     Goto(0)
-    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, true)
     Label(100)
     Call(GetSelfNpcID, LVar0)
     IfEq(LVar0, 1)
-        IfEq(NPC_KoopaTroopa_02_DonePanic, FALSE)
+        IfEq(NPC_KoopaTroopa_02_DonePanic, false)
             Wait(1)
             Goto(100)
         EndIf
     Else
-        IfEq(NPC_KoopaTroopa_03_DonePanic, FALSE)
+        IfEq(NPC_KoopaTroopa_03_DonePanic, false)
             Wait(1)
             Goto(100)
         EndIf
     EndIf
     Wait(10)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, false)
     Call(GetSelfNpcID, LVar0)
     IfEq(LVar0, 1)
         Call(SetNpcSpeed, NPC_SELF, Float(3.0))
@@ -92,9 +92,9 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
     EndIf
     Call(SetNpcSpeed, NPC_SELF, Float(1.5))
     Call(N(SetNewWanderCenterPos))
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, true)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_KoopaTroopa_Wander)))
     Return
     End
@@ -121,7 +121,7 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa_01) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Set(GF_TRD01_Defeated_KoopaGuard, TRUE)
+            Set(GF_TRD01_Defeated_KoopaGuard, true)
             Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             Call(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
             Call(MakeItemEntity, ITEM_KOOPA_FORTRESS_KEY, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_TRD01_Item_FortressKey)
@@ -135,7 +135,7 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa_01) = {
 };
 
 EvtScript N(EVS_NpcInit_KoopaTroopa_01) = {
-    IfEq(GF_TRD01_Defeated_KoopaGuard, TRUE)
+    IfEq(GF_TRD01_Defeated_KoopaGuard, true)
         Call(RemoveNpc, NPC_SELF)
         Return
     EndIf
@@ -150,7 +150,7 @@ NpcData N(NpcData_KoopaTroopa_01) = {
     .yaw = 0,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_RECT,
             .centerPos  = { 260, 0, 40 },
@@ -174,7 +174,7 @@ NpcData N(NpcData_KoopaTroopa_02) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 240, 220, 130 },
@@ -198,7 +198,7 @@ NpcData N(NpcData_KoopaTroopa_03) = {
     .yaw = 90,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { 80, 220, 265 },
@@ -222,7 +222,7 @@ NpcData N(NpcData_Bobomb) = {
     .yaw = 180,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -255, 640, 35 },

@@ -319,7 +319,7 @@ def fix_args(self, func, args, info):
                 continue
 
             if info[i] == "Bool":
-                new_args.append(f"{'TRUE' if argNum == True else 'FALSE'}")
+                new_args.append(f"{'true' if argNum == True else 'false'}")
             elif info[i] == "Hex" and argNum > 0:
                 new_args.append(f"0x{argNum:08X}")
             elif info[i] == "CustomAnim":

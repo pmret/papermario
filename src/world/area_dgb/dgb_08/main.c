@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitDoors_dgb_01_2) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_08_ENTRY_0)
     Set(LVar1, COLLIDER_deilittse)
@@ -18,7 +18,7 @@ EvtScript N(EVS_ExitDoors_dgb_01_2) = {
 
 EvtScript N(EVS_ExitDoors_dgb_01_4) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
     Set(LVar0, dgb_08_ENTRY_1)
     Set(LVar1, COLLIDER_deilittne)
@@ -57,11 +57,11 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH3_TUBBA_SMASHED_THE_BRIDGES)
-            Call(MakeNpcs, TRUE, Ref(N(BeforeNPCs)))
+            Call(MakeNpcs, true, Ref(N(BeforeNPCs)))
         CaseLt(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
-            Call(MakeNpcs, TRUE, Ref(N(TubbaNPCs)))
+            Call(MakeNpcs, true, Ref(N(TubbaNPCs)))
         CaseLt(STORY_CH6_RETURNED_TO_TOAD_TOWN)
-            Call(MakeNpcs, TRUE, Ref(N(AfterNPCs)))
+            Call(MakeNpcs, true, Ref(N(AfterNPCs)))
     EndSwitch
     ExecWait(N(EVS_MakeEntities))
     BindTrigger(Ref(N(EVS_ExitDoors_dgb_01_2)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittse, 1, 0)

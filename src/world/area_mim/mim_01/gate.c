@@ -3,37 +3,37 @@
 EvtScript N(EVS_SetGateCameraZones) = {
     Switch(LVar1)
         CaseEq(0)
-            Call(SetZoneEnabled, ZONE_north, TRUE)
-            Call(SetZoneEnabled, ZONE_west, TRUE)
-            Call(SetZoneEnabled, ZONE_south, TRUE)
-            Call(SetZoneEnabled, ZONE_east, TRUE)
-            Call(SetZoneEnabled, ZONE_higashi, FALSE)
-            Call(SetZoneEnabled, ZONE_nishi, FALSE)
-            Call(SetZoneEnabled, ZONE_minami, FALSE)
-            Call(SetZoneEnabled, ZONE_kita, FALSE)
-            Call(SetZoneEnabled, ZONE_stage, FALSE)
+            Call(SetZoneEnabled, ZONE_north, true)
+            Call(SetZoneEnabled, ZONE_west, true)
+            Call(SetZoneEnabled, ZONE_south, true)
+            Call(SetZoneEnabled, ZONE_east, true)
+            Call(SetZoneEnabled, ZONE_higashi, false)
+            Call(SetZoneEnabled, ZONE_nishi, false)
+            Call(SetZoneEnabled, ZONE_minami, false)
+            Call(SetZoneEnabled, ZONE_kita, false)
+            Call(SetZoneEnabled, ZONE_stage, false)
             Set(LVar1, 0)
         CaseEq(1)
-            Call(SetZoneEnabled, ZONE_north, FALSE)
-            Call(SetZoneEnabled, ZONE_west, FALSE)
-            Call(SetZoneEnabled, ZONE_south, FALSE)
-            Call(SetZoneEnabled, ZONE_east, FALSE)
-            Call(SetZoneEnabled, ZONE_higashi, FALSE)
-            Call(SetZoneEnabled, ZONE_nishi, FALSE)
-            Call(SetZoneEnabled, ZONE_minami, FALSE)
-            Call(SetZoneEnabled, ZONE_kita, FALSE)
-            Call(SetZoneEnabled, ZONE_stage, TRUE)
+            Call(SetZoneEnabled, ZONE_north, false)
+            Call(SetZoneEnabled, ZONE_west, false)
+            Call(SetZoneEnabled, ZONE_south, false)
+            Call(SetZoneEnabled, ZONE_east, false)
+            Call(SetZoneEnabled, ZONE_higashi, false)
+            Call(SetZoneEnabled, ZONE_nishi, false)
+            Call(SetZoneEnabled, ZONE_minami, false)
+            Call(SetZoneEnabled, ZONE_kita, false)
+            Call(SetZoneEnabled, ZONE_stage, true)
             Set(LVar1, 1)
         CaseEq(2)
-            Call(SetZoneEnabled, ZONE_north, FALSE)
-            Call(SetZoneEnabled, ZONE_west, TRUE)
-            Call(SetZoneEnabled, ZONE_south, FALSE)
-            Call(SetZoneEnabled, ZONE_east, FALSE)
-            Call(SetZoneEnabled, ZONE_higashi, TRUE)
-            Call(SetZoneEnabled, ZONE_nishi, FALSE)
-            Call(SetZoneEnabled, ZONE_minami, TRUE)
-            Call(SetZoneEnabled, ZONE_kita, TRUE)
-            Call(SetZoneEnabled, ZONE_stage, FALSE)
+            Call(SetZoneEnabled, ZONE_north, false)
+            Call(SetZoneEnabled, ZONE_west, true)
+            Call(SetZoneEnabled, ZONE_south, false)
+            Call(SetZoneEnabled, ZONE_east, false)
+            Call(SetZoneEnabled, ZONE_higashi, true)
+            Call(SetZoneEnabled, ZONE_nishi, false)
+            Call(SetZoneEnabled, ZONE_minami, true)
+            Call(SetZoneEnabled, ZONE_kita, true)
+            Call(SetZoneEnabled, ZONE_stage, false)
             Set(LVar1, 2)
     EndSwitch
     Return
@@ -113,7 +113,7 @@ EvtScript N(EVS_UseGate) = {
             EndIf
             Exec(N(EVS_ResetGates))
             Set(AB_MIM_1, 1)
-            Set(GF_MIM_ChoosingPath, TRUE)
+            Set(GF_MIM_ChoosingPath, true)
         CaseEq(1)
             Thread
                 Call(MakeLerp, 360, 270, 10, EASING_QUADRATIC_IN)
@@ -183,37 +183,37 @@ EvtScript N(EVS_UseGate) = {
 };
 
 EvtScript N(EVS_UseGate_North) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar7, 0)
     Set(LVar8, 70)
     Set(LVar9, 26)
     Set(LVarA, 155)
     ExecWait(N(EVS_UseGate))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_UseGate_South) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar7, 0)
     Set(LVar8, -70)
     Set(LVar9, 30)
     Set(LVarA, 161)
     ExecWait(N(EVS_UseGate))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_UseGate_East) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar7, -70)
     Set(LVar8, 0)
     Set(LVar9, 28)
     Set(LVarA, 158)
     ExecWait(N(EVS_UseGate))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -221,7 +221,7 @@ EvtScript N(EVS_UseGate_East) = {
 EvtScript N(EVS_UseGate_West) = {
     Set(LVar9, 32)
     Exec(N(EVS_PlayGateSounds))
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     IfNe(AB_MIM_1, 1)
         Thread
             Call(MakeLerp, 10, 90, 10, EASING_QUADRATIC_IN)
@@ -253,7 +253,7 @@ EvtScript N(EVS_UseGate_West) = {
         EndIf
         Exec(N(EVS_ResetGates))
         Set(AB_MIM_1, 1)
-        Set(GF_MIM_ChoosingPath, TRUE)
+        Set(GF_MIM_ChoosingPath, true)
     Else
         Thread
             Call(MakeLerp, 360, 270, 10, EASING_QUADRATIC_IN)
@@ -285,7 +285,7 @@ EvtScript N(EVS_UseGate_West) = {
         EndIf
         Set(AB_MIM_1, 0)
     EndIf
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

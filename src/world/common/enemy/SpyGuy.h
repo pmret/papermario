@@ -68,7 +68,7 @@
     .drops = NO_DROPS, \
     .territory = { \
         .wander = { \
-            .isFlying = TRUE, \
+            .isFlying = true, \
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED, \
             .wanderShape = SHAPE_CYLINDER, \
             .centerPos  = { NPC_DISPOSE_LOCATION }, \

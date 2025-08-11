@@ -2,8 +2,8 @@
 #include "entity.h"
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_OMO09_Defeated_CalculatorThief, TRUE)
-        IfEq(GF_OMO01_Item_Calculator, FALSE)
+    IfEq(GF_OMO09_Defeated_CalculatorThief, true)
+        IfEq(GF_OMO01_Item_Calculator, false)
             Call(MakeItemEntity, ITEM_CALCULATOR, -93, 0, 35, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_OMO01_Item_Calculator)
         EndIf
     EndIf

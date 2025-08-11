@@ -4,7 +4,7 @@ EvtScript N(EVS_ExitDoors_kpa_83_1) = EVT_EXIT_DOUBLE_DOOR(kpa_121_ENTRY_0, "kpa
 
 EvtScript N(EVS_ExitDoor_osr_02_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     IfLt(GB_StoryProgress, STORY_CH8_REACHED_PEACHS_CASTLE)
         Set(GB_StoryProgress, STORY_CH8_REACHED_PEACHS_CASTLE)
     EndIf

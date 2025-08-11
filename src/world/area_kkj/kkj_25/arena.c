@@ -51,7 +51,7 @@ EvtScript N(EVS_BowserActivatesSwitch) = {
         EndIf
         Wait(30)
         Call(N(SetEntityPositionF), MV_SwitchEntityIdx, LVar7, -20, LVar9)
-        Call(SetNpcFlagBits, NPC_Bowser_01, NPC_FLAG_DIRTY_SHADOW, TRUE)
+        Call(SetNpcFlagBits, NPC_Bowser_01, NPC_FLAG_DIRTY_SHADOW, true)
     EndThread
     Thread
         Set(MV_Unk_0A, 0)
@@ -74,7 +74,7 @@ EvtScript N(EVS_BowserActivatesSwitch) = {
     Call(NpcJump0, NPC_Bowser_01, 300, 0, 0, 20)
     Call(PlaySoundAtNpc, NPC_Bowser_01, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_DEFAULT)
     Call(PlaySoundAtNpc, NPC_Bowser_01, SOUND_LARGE_NPC_IMPACT, SOUND_SPACE_DEFAULT)
-    Set(AF_KKJ_1A, TRUE)
+    Set(AF_KKJ_1A, true)
     Return
     End
 };
@@ -87,7 +87,7 @@ EvtScript N(EVS_802459E4) = {
         CaseEq(PARTNER_BOMBETTE)
         CaseEq(PARTNER_SUSHIE)
         CaseDefault
-            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
             Call(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
             Set(LVar1, 19)
             Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
@@ -123,14 +123,14 @@ EvtScript N(EVS_Scene_BowserTrapsMario) = {
             Goto(0)
         EndIf
 #if VERSION_PAL
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
 #endif
     Thread
         Wait(1)
 #if !VERSION_PAL
-        Call(DisablePlayerInput, TRUE)
+        Call(DisablePlayerInput, true)
 #endif
-        Call(PlayerFaceNpc, NPC_Bowser_01, FALSE)
+        Call(PlayerFaceNpc, NPC_Bowser_01, false)
         Call(GetPartnerInUse, LVar0)
         Call(GetCurrentPartnerID, LVar1)
         IfEq(LVar1, PARTNER_BOMBETTE)
@@ -169,7 +169,7 @@ EvtScript N(EVS_Scene_BowserTrapsMario) = {
     Call(SetCamDistance, CAM_DEFAULT, 450)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-7.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10)
     Call(SpeakToPlayer, NPC_Bowser_01, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, MSG_CH8_007D)
@@ -181,7 +181,7 @@ EvtScript N(EVS_Scene_BowserTrapsMario) = {
     Call(SetCamPosA, CAM_DEFAULT, -480, -480)
     Call(SetCamPosB, CAM_DEFAULT, 0, 480)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Return
     End
@@ -266,7 +266,7 @@ EvtScript N(EVS_AnimateBridgeCollapsing) = {
                     BreakLoop
                 EndIf
             EndLoop
-            Call(EnableGroup, LVar3, FALSE)
+            Call(EnableGroup, LVar3, false)
         EndThread
         Add(LVar2, 2)
         Wait(5)
@@ -290,7 +290,7 @@ Vec3i N(PowerUpBoltOrigins2)[] = {
 };
 
 EvtScript N(EVS_Scene_ActivateMachine) = {
-    Set(AF_KKJ_1A, FALSE)
+    Set(AF_KKJ_1A, false)
     Wait(10)
     Call(UseSettingsFrom, CAM_DEFAULT, -150, 0, 0)
     Call(SetPanTarget, CAM_DEFAULT, -150, 0, 0)
@@ -299,7 +299,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     Call(SetCamPosA, CAM_DEFAULT, -480, -480)
     Call(SetCamPosB, CAM_DEFAULT, 0, 480)
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(1)
     Thread
         Call(InterpPlayerYaw, 270, 0)
@@ -311,7 +311,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
     Call(SetPlayerPos, 100, 0, 0)
     Call(PartnerIsFlying, LVar0)
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Call(SetNpcPos, NPC_PARTNER, 60, 10, 0)
     Else
         Call(SetNpcPos, NPC_PARTNER, 60, 0, 0)
@@ -326,7 +326,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     Call(SetCamDistance, CAM_DEFAULT, 330)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(10)
     Call(SpeakToPlayer, NPC_Bowser_01, ANIM_WorldBowser_RearUpLaugh, ANIM_WorldBowser_RearUpLaugh, 0, MSG_CH8_007E)
     Thread
@@ -348,7 +348,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     Call(SetCamDistance, CAM_DEFAULT, 250)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-8.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_Idle)
     Wait(10)
@@ -389,7 +389,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     Call(SetCamDistance, CAM_DEFAULT, 400)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-10.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_Shock)
     Call(GetNpcPos, NPC_Bowser_01, LVar3, LVar4, LVar5)
@@ -430,7 +430,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     Call(SetCamDistance, CAM_DEFAULT, 500)
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Thread
         Wait(8)
         Loop(4)
@@ -478,7 +478,7 @@ EvtScript N(EVS_ManageArenaEffects) = {
     ChildThread
         Set(LVar2, 0)
         Set(LVar3, 0)
-        IfEq(GF_KKJ25_Defeated_Kammy, FALSE)
+        IfEq(GF_KKJ25_Defeated_Kammy, false)
             Thread
                 Wait(50)
                 Call(PlaySound, SOUND_LRAW_KPA_ARENA_TURN_ON)
@@ -497,7 +497,7 @@ EvtScript N(EVS_ManageArenaEffects) = {
                 EndIf
             EndLoop
         Else
-            IfEq(GF_KKJ25_Defeated_Bowser, FALSE)
+            IfEq(GF_KKJ25_Defeated_Bowser, false)
                 Call(PlaySound, SOUND_LRAW_KPA_ARENA_ACTIVE)
             EndIf
             Set(LVar0, 5)
@@ -561,8 +561,8 @@ EvtScript N(EVS_ManageArenaEffects) = {
         EndLoop
     EndChildThread
     ChildThread
-        IfEq(GF_KKJ25_Defeated_Kammy, FALSE)
-            Call(EnableModel, MODEL_o122, TRUE)
+        IfEq(GF_KKJ25_Defeated_Kammy, false)
+            Call(EnableModel, MODEL_o122, true)
             Call(MakeLerp, 0, 250, 100, EASING_QUADRATIC_IN)
             Loop(0)
                 Call(UpdateLerp)

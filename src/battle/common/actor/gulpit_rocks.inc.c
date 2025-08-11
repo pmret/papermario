@@ -134,7 +134,7 @@ EvtScript N(EVS_SelectRockAnim) = {
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(GetLastEvent, ACTOR_SELF, LVar0)
     Switch(LVar0)
@@ -164,7 +164,7 @@ EvtScript N(EVS_HandleEvent) = {
             SetConst(LVar2, ANIM_Gulpit_Anim12)
             ExecWait(N(EVS_SelectRockAnim))
             ExecWait(EVS_Enemy_Hit)
-            Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+            Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
             Call(GetActorVar, ACTOR_SELF, AVAR_RockType, LVar0)
             Switch(LVar0)
                 CaseEq(0)
@@ -181,7 +181,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseDefault
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };

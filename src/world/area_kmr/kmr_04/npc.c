@@ -8,10 +8,10 @@ NpcSettings N(NpcSettings_JrTroopa) = {
 };
 
 EvtScript N(EVS_NpcAuxAI_Goompa) = {
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, true)
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Return
     End
 };
@@ -40,7 +40,7 @@ EvtScript N(EVS_NpcAI_Goompa) = {
                     BreakLoop
                 EndIf
             EndLoop
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(func_802CF56C, 0)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Add(LVar0, 30)
@@ -52,7 +52,7 @@ EvtScript N(EVS_NpcAI_Goompa) = {
             Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
             Call(EnablePartnerAI)
             Wait(10 * DT)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
             Set(GB_StoryProgress, STORY_CH0_LOOKING_FOR_HAMMER)
         CaseEq(STORY_CH0_FOUND_HAMMER)
             IfEq(AB_KMR_0, 0)
@@ -71,10 +71,10 @@ EvtScript N(EVS_NpcAI_Goompa) = {
                 IfGt(LVar2, 85)
                     Goto(10)
                 EndIf
-                Call(DisablePlayerInput, TRUE)
+                Call(DisablePlayerInput, true)
                 Call(N(CheckPartnerFlags1000))
                 Call(DisablePartnerAI, 0)
-                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
                 Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Walk)
                 Call(SetNpcSpeed, NPC_PARTNER, Float(3.0))
                 Call(NpcMoveTo, NPC_PARTNER, 420, 6, 0)
@@ -90,12 +90,12 @@ EvtScript N(EVS_NpcAI_Goompa) = {
                     Call(PlayerMoveTo, 395, 0, 0)
                     Call(InterpPlayerYaw, 90, 0)
                 EndThread
-                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING, TRUE)
+                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING, true)
                 Call(SetNpcSpeed, NPC_PARTNER, Float(6.0))
                 Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Run)
                 Call(NpcMoveTo, NPC_PARTNER, 582, 6, 0)
                 Call(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
-                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING, FALSE)
+                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING, false)
                 Call(PlaySoundAtNpc, NPC_PARTNER, SOUND_GOOMPA_ATTACKED, SOUND_SPACE_DEFAULT)
                 Call(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00AD)
                 Wait(10 * DT)
@@ -105,7 +105,7 @@ EvtScript N(EVS_NpcAI_Goompa) = {
                     Loop(60 * DT)
                         Add(LVar0, 53)
                         Call(SetNpcRotation, NPC_PARTNER, 0, 0, LVar0)
-                        Call(PlayerFaceNpc, NPC_PARTNER, FALSE)
+                        Call(PlayerFaceNpc, NPC_PARTNER, false)
                         Wait(1)
                     EndLoop
                     Call(SetNpcRotationPivot, NPC_PARTNER, 0)
@@ -162,11 +162,11 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
                         Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
                         Call(SetCamPitch, CAM_DEFAULT, Float(17.5), Float(-7.5))
                         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
-                        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                        Call(PanToTarget, CAM_DEFAULT, 0, true)
                         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                     EndThread
                     Call(SetNpcPos, NPC_JrTroopa, 630, 0, 0)
-                    Call(EnableNpcShadow, NPC_SELF, TRUE)
+                    Call(EnableNpcShadow, NPC_SELF, true)
                     Wait(1)
                     Call(PlayerFaceNpc, NPC_JrTroopa, 3)
                     Call(SetNpcSpeed, NPC_JrTroopa, Float(3.0 / DT))
@@ -181,9 +181,9 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
                         Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
                         Call(SetPanTarget, CAM_DEFAULT, 430, LVar1, LVar2)
                         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-                        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                        Call(PanToTarget, CAM_DEFAULT, 0, true)
                         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-                        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+                        Call(PanToTarget, CAM_DEFAULT, 0, false)
                     EndThread
                     Call(StartBossBattle, SONG_JR_TROOPA_BATTLE)
             EndSwitch
@@ -209,9 +209,9 @@ EvtScript N(EVS_NpcDefeat_JrTroopa) = {
             Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
             Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.5))
             Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-            Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+            Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-            Call(PlayerFaceNpc, NPC_SELF, FALSE)
+            Call(PlayerFaceNpc, NPC_SELF, false)
             Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Hurt)
             Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Hurt, ANIM_JrTroopa_Hurt, 0, MSG_CH0_00B5)
             Call(SetNpcSpeed, NPC_SELF, Float(6.0 / DT))
@@ -235,7 +235,7 @@ EvtScript N(EVS_NpcDefeat_JrTroopa) = {
             Exec(N(EVS_SetNormalMusic))
             Set(AB_KMR_0, 0)
             Set(GB_StoryProgress, STORY_CH0_DEFEATED_JR_TROOPA)
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
     EndSwitch
     Return
     End
@@ -255,7 +255,7 @@ NpcSettings N(NpcSettings_Goompa) = {
 
 EvtScript N(EVS_NpcInit_JrTroopa) = {
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_JrTroopa)))
     Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_JrTroopa)))
     Return

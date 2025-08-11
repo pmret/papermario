@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_ExitDoors_kkj_00_1) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
     Set(LVar0, kkj_01_ENTRY_0)
     Set(LVar1, COLLIDER_tts)
@@ -18,7 +18,7 @@ EvtScript N(EVS_ExitDoors_kkj_00_1) = {
 
 EvtScript N(EVS_ExitDoors_kkj_02_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
     Set(LVar0, kkj_01_ENTRY_1)
     Set(LVar1, COLLIDER_ttn)
@@ -34,7 +34,7 @@ EvtScript N(EVS_ExitDoors_kkj_02_0) = {
 
 EvtScript N(EVS_ExitDoors_kkj_14_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
     Set(LVar0, kkj_01_ENTRY_4)
     Set(LVar1, COLLIDER_ttn2)
@@ -49,15 +49,15 @@ EvtScript N(EVS_ExitDoors_kkj_14_0) = {
 };
 
 EvtScript N(EVS_ShowMessage_CantOpen) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_DoesntOpen, 160, 40)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_BindExitTriggers) = {
-    IfEq(AF_KKJ_01, TRUE)
+    IfEq(AF_KKJ_01, true)
         BindTrigger(Ref(N(EVS_ExitDoors_kkj_14_0)), TRIGGER_WALL_PRESS_A, COLLIDER_ttn2, 1, 0)
     EndIf
     BindTrigger(Ref(N(EVS_ShowMessage_CantOpen)), TRIGGER_WALL_PRESS_A, COLLIDER_tte, 1, 0)
@@ -113,14 +113,14 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_PEACH_CASTLE_GROUNDS)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     IfNe(GB_StoryProgress, STORY_INTRO)
-        Call(EnableModel, MODEL_g74, FALSE)
+        Call(EnableModel, MODEL_g74, false)
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_g77, COLLIDER_FLAGS_UPPER_MASK)
     Else
-        Call(EnableModel, MODEL_o321, FALSE)
-        Call(EnableModel, MODEL_o337, FALSE)
-        Call(EnableModel, MODEL_o330, FALSE)
+        Call(EnableModel, MODEL_o321, false)
+        Call(EnableModel, MODEL_o337, false)
+        Call(EnableModel, MODEL_o330, false)
     EndIf
     Exec(N(EVS_SetupMusic))
     Exec(N(EVS_BindExitTriggers))

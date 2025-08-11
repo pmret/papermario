@@ -29,7 +29,7 @@ void N(GetFirstTriangleNormal)(Gfx* inGfx, f32* outNx, f32* outNy, f32* outNz) {
     v2x = v2y = v2z = 0.0f;
     v3x = v3y = v3z = 0.0f;
 
-    while (TRUE) {
+    while (true) {
         u32 w0 = gfx->words.w0;
         u32 w1 = gfx->words.w1;
         s32 op = w0 >> 24;

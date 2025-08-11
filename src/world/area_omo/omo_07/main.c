@@ -14,28 +14,28 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_SHY_GUYS_TOYBOX)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    IfEq(GF_OMO07_SpawnedPeachChoice2, FALSE)
-        Call(MakeNpcs, TRUE, Ref(N(KammySceneNPCs)))
+    IfEq(GF_OMO07_SpawnedPeachChoice2, false)
+        Call(MakeNpcs, true, Ref(N(KammySceneNPCs)))
     Else
-        IfEq(GF_OMO07_Item_ThunderRage, FALSE)
+        IfEq(GF_OMO07_Item_ThunderRage, false)
             Switch(GB_OMO_PeachChoice2)
                 CaseEq(0)
-                    Call(MakeNpcs, TRUE, Ref(N(FuzzyAmbushNPCs)))
+                    Call(MakeNpcs, true, Ref(N(FuzzyAmbushNPCs)))
                 CaseEq(1)
-                    Call(MakeNpcs, TRUE, Ref(N(HammerBrosAmbushNPCs)))
+                    Call(MakeNpcs, true, Ref(N(HammerBrosAmbushNPCs)))
                 CaseEq(2)
-                    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+                    Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
                     Call(MakeItemEntity, ITEM_THUNDER_RAGE, 1080, 0, 0, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_OMO07_Item_ThunderRage)
             EndSwitch
         Else
-            Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+            Call(MakeNpcs, true, Ref(N(DefaultNPCs)))
         EndIf
     EndIf
     ExecWait(N(EVS_MakeEntities))
     ExecWait(N(EVS_SetupGizmos))
     ExecWait(N(EVS_SetupMusic))
     Exec(N(EVS_SetupShyGuyPool))
-    IfEq(GF_OMO07_SpawnedPeachChoice2, FALSE)
+    IfEq(GF_OMO07_SpawnedPeachChoice2, false)
         Exec(N(EVS_Scene_KammySetAmbush))
         Wait(2)
     Else

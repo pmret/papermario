@@ -97,7 +97,7 @@ void boot_main(void* data) {
     gRandSeed += osGetCount();
     nuGfxDisplayOn();
 
-    while (TRUE) {}
+    while (true) {}
 }
 
 void gfxRetrace_Callback(s32 gfxTaskNum) {

@@ -57,7 +57,7 @@ API_CALLABLE(N(SetShyGuyPoolState)) {
 }
 
 EvtScript N(EVS_Push_SecretDoor) = {
-    IfEq(AF_OMO07_DoorOpening, TRUE)
+    IfEq(AF_OMO07_DoorOpening, true)
         Return
     EndIf
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -69,9 +69,9 @@ EvtScript N(EVS_Push_SecretDoor) = {
             Return
         EndIf
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
-    Set(AF_OMO07_DoorOpening, TRUE)
+    Set(AF_OMO07_DoorOpening, true)
     Call(PlaySoundAt, SOUND_OMO_DOOR_FLIP, SOUND_SPACE_DEFAULT, 25, 0, -55)
     Thread
         IfLt(LVar0, 25)
@@ -100,9 +100,9 @@ EvtScript N(EVS_Push_SecretDoor) = {
     Wait(10)
     Call(SetPlayerSpeed, Float(3.0))
     Call(PlayerMoveTo, LVar0, LVar2, 0)
-    Set(AF_OMO07_DoorOpening, FALSE)
+    Set(AF_OMO07_DoorOpening, false)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -110,10 +110,10 @@ EvtScript N(EVS_Push_SecretDoor) = {
 EvtScript N(EVS_SetupShyGuyPool) = {
     Call(ParentColliderToModel, COLLIDER_tt1, MODEL_k)
     BindTrigger(Ref(N(EVS_Push_SecretDoor)), TRIGGER_WALL_PUSH, COLLIDER_tt1, 1, 0)
-    Set(AF_OMO07_NpcPool0, FALSE)
-    Set(AF_OMO07_NpcPool1, FALSE)
-    Set(AF_OMO07_NpcPool2, FALSE)
-    Set(AF_OMO07_NpcPool3, FALSE)
+    Set(AF_OMO07_NpcPool0, false)
+    Set(AF_OMO07_NpcPool1, false)
+    Set(AF_OMO07_NpcPool2, false)
+    Set(AF_OMO07_NpcPool3, false)
     Label(0)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Wait(1)
@@ -122,21 +122,21 @@ EvtScript N(EVS_SetupShyGuyPool) = {
         EndIf
     Label(1)
         Set(LVar4, -1)
-        IfEq(AF_OMO07_NpcPool3, FALSE)
+        IfEq(AF_OMO07_NpcPool3, false)
             Set(LVar4, NPC_ShyGuy_03)
         EndIf
-        IfEq(AF_OMO07_NpcPool2, FALSE)
+        IfEq(AF_OMO07_NpcPool2, false)
             Set(LVar4, NPC_ShyGuy_02)
         EndIf
-        IfEq(AF_OMO07_NpcPool1, FALSE)
+        IfEq(AF_OMO07_NpcPool1, false)
             Set(LVar4, NPC_ShyGuy_01)
         EndIf
         IfEq(LVar4, -1)
             Wait(1)
             Goto(1)
         EndIf
-        IfEq(AF_OMO07_NpcPool0, FALSE)
-            Set(AF_OMO07_NpcPool0, TRUE)
+        IfEq(AF_OMO07_NpcPool0, false)
+            Set(AF_OMO07_NpcPool0, true)
         Else
             Wait(40)
         EndIf
@@ -150,7 +150,7 @@ EvtScript N(EVS_SetupShyGuyPool) = {
         IfGt(LVar0, 600)
             Goto(1)
         EndIf
-        Call(N(SetShyGuyPoolState), LVar4, TRUE)
+        Call(N(SetShyGuyPoolState), LVar4, true)
         Call(SetNpcVar, LVar4, SHYGUY_VAR_STATE, SHYGUY_STATE_RUN_TO_DOOR)
         Wait(1)
         Label(2)
@@ -171,9 +171,9 @@ EvtScript N(EVS_NpcAI_ShyGuy) = {
             CaseEq(SHYGUY_STATE_FREE)
                 Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             CaseEq(SHYGUY_STATE_RUN_TO_DOOR)
-                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-                Call(EnableNpcShadow, NPC_SELF, TRUE)
-                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_PASSIVE, FALSE)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, false)
+                Call(EnableNpcShadow, NPC_SELF, true)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_PASSIVE, false)
                 Call(SetNpcPos, NPC_SELF, 800, 0, 75)
                 Call(SetNpcSpeed, NPC_SELF, Float(4.0))
                 Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
@@ -202,7 +202,7 @@ EvtScript N(EVS_NpcAI_ShyGuy) = {
             CaseEq(SHYGUY_STATE_OPEN_DOOR)
                 Call(PlaySoundAt, SOUND_OMO_DOOR_FLIP, SOUND_SPACE_DEFAULT, 25, 0, -55)
                 Thread
-                    Set(AF_OMO07_DoorOpening, TRUE)
+                    Set(AF_OMO07_DoorOpening, true)
                     Set(LVar2, MV_SecretDoorAngle)
                     Add(LVar2, 180)
                     Call(MakeLerp, MV_SecretDoorAngle, LVar2, 30, EASING_COS_IN_OUT)
@@ -216,8 +216,8 @@ EvtScript N(EVS_NpcAI_ShyGuy) = {
                     EndIf
                     Set(MV_SecretDoorAngle, LVar2)
                     Mod(MV_SecretDoorAngle, 360)
-                    Set(AF_OMO07_DoorOpening, FALSE)
-                    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+                    Set(AF_OMO07_DoorOpening, false)
+                    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, false)
                 EndThread
                 Wait(10)
                 Call(NpcMoveTo, NPC_SELF, -10, 50, 0)
@@ -230,18 +230,18 @@ EvtScript N(EVS_NpcAI_ShyGuy) = {
                 Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy_Patrol)))
                 Wait(10)
             CaseEq(SHYGUY_STATE_RECYCLE)
-                Call(DisablePlayerInput, TRUE)
+                Call(DisablePlayerInput, true)
                 Loop(30)
                     Call(GetSelfNpcID, LVar0)
-                    Call(N(SetShyGuyPoolState), LVar0, FALSE)
+                    Call(N(SetShyGuyPoolState), LVar0, false)
                     Wait(1)
                 EndLoop
                 Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                Call(DisablePlayerInput, FALSE)
+                Call(DisablePlayerInput, false)
                 Call(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_FREE)
             CaseEq(SHYGUY_STATE_FORCE_RECYCLE)
                 Call(GetSelfNpcID, LVar0)
-                Call(N(SetShyGuyPoolState), LVar0, FALSE)
+                Call(N(SetShyGuyPoolState), LVar0, false)
                 Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
                 Call(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_FREE)
         EndSwitch
@@ -255,9 +255,9 @@ EvtScript N(EVS_NpcDefeat_ShyGuy) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_PASSIVE, TRUE)
-            Call(EnableNpcShadow, NPC_SELF, FALSE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_PASSIVE, true)
+            Call(EnableNpcShadow, NPC_SELF, false)
             Call(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_RECYCLE)
             Wait(1)
             Call(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_RECYCLE)
@@ -287,7 +287,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy) = {
         Wait(1)
         Goto(0)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(N(DisableCameraLeadingPlayer))
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(SetCamProperties, CAM_DEFAULT, Float(5.0), LVar0, LVar1, LVar2, 300, Float(13.0), Float(-9.5))
@@ -300,7 +300,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy) = {
         Call(N(EnableCameraLeadingPlayer))
         Call(ResetCam, CAM_DEFAULT, Float(4.0))
     EndThread
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     Return
     End
@@ -310,7 +310,7 @@ EvtScript N(EVS_NpcDefeat_Fuzzy) = {
     Call(GetBattleOutcome, LVar0)
     Switch(LVar0)
         CaseEq(OUTCOME_PLAYER_WON)
-            Set(GF_OMO07_Item_ThunderRage, TRUE)
+            Set(GF_OMO07_Item_ThunderRage, true)
             Call(DoNpcDefeat)
         CaseEq(OUTCOME_PLAYER_LOST)
         CaseEq(OUTCOME_PLAYER_FLED)
@@ -353,7 +353,7 @@ NpcData N(NpcData_ShyGuy) = {
     .yaw = 270,
     .territory = {
         .patrol = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 6,
             .points  = {
@@ -382,7 +382,7 @@ NpcData N(NpcData_ShyGuy_02) = {
     .yaw = 270,
     .territory = {
         .patrol = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 6,
             .points  = {
@@ -411,7 +411,7 @@ NpcData N(NpcData_ShyGuy_03) = {
     .yaw = 270,
     .territory = {
         .patrol = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 6,
             .points  = {
@@ -440,7 +440,7 @@ NpcData N(NpcData_ShyGuy_04) = {
     .yaw = 270,
     .territory = {
         .patrol = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 6,
             .points  = {
@@ -533,7 +533,7 @@ NpcData N(NpcData_SkyGuy_01) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -650, 140, -105 },
@@ -556,7 +556,7 @@ NpcData N(NpcData_SkyGuy_02) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -550, 60, 70 },

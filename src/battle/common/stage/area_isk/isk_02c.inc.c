@@ -6,8 +6,8 @@
 EvtScript N(EVS_PreBattle) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    Call(EnableModel, MODEL_kai2, FALSE)
-    Call(EnableModel, MODEL_kai1, FALSE)
+    Call(EnableModel, MODEL_kai2, false)
+    Call(EnableModel, MODEL_kai1, false)
     Return
     End
 };

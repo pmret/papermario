@@ -16,13 +16,13 @@ API_CALLABLE(N(PreventFalling)) {
 
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
-    script->varTable[10] = FALSE;
+    script->varTable[10] = false;
     if (playerStatus->pos.y != y) {
         playerStatus->pos.y = 0.0f;
         script->varTable[3]++;
         if (script->varTable[3] >= 30) {
             // player may now fall
-            script->varTable[10] = TRUE;
+            script->varTable[10] = true;
         }
     }
     return ApiStatus_DONE2;
@@ -33,7 +33,7 @@ s32 N(DoorModelsR)[] = { MODEL_o1002, -1 };
 
 EvtScript N(EVS_ExitDoors_pra_20_4) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_22_ENTRY_0)
     Set(LVar1, COLLIDER_deilittssw)
     Set(LVar2, MODEL_o1085)
@@ -48,7 +48,7 @@ EvtScript N(EVS_ExitDoors_pra_20_4) = {
 
 EvtScript N(EVS_ExitDoors_pra_37_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, pra_22_ENTRY_1)
     Set(LVar1, COLLIDER_deilittsse)
     Set(LVar2, Ref(N(DoorModelsL)))
@@ -116,7 +116,7 @@ EvtScript N(EVS_PushRightStatue_Impl) = {
         Return
     EndIf
 #endif
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Thread
         Call(ShakeCam, CAM_DEFAULT, 0, 100, Float(0.6))
     EndThread
@@ -138,7 +138,7 @@ EvtScript N(EVS_PushRightStatue_Impl) = {
             Call(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
             Call(UpdateLerp)
             Call(N(PreventFalling))
-            IfEq(LVarA, TRUE)
+            IfEq(LVarA, true)
                 BreakLoop
             EndIf
             Wait(1)
@@ -149,17 +149,17 @@ EvtScript N(EVS_PushRightStatue_Impl) = {
         Call(SetPlayerActionState, ACTION_STATE_IDLE)
         Wait(1)
         IfEq(LVarA, 1)
-            Call(DisablePlayerPhysics, TRUE)
+            Call(DisablePlayerPhysics, true)
             Wait(1)
             Call(SetPlayerAnimation, ANIM_MarioW2_TouchedLava)
             Wait(15)
             Call(SetPlayerAnimation, ANIM_Mario1_Idle)
             Wait(1)
-            Call(DisablePlayerPhysics, FALSE)
+            Call(DisablePlayerPhysics, false)
             Call(SetPlayerActionState, ACTION_STATE_FALLING)
             Wait(1)
         EndIf
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
     EndThread
     Call(MakeLerp, LVar6, LVar7, 100, EASING_LINEAR)
     Call(PlaySoundAtCollider, COLLIDER_o1064, SOUND_LOOP_MOVE_STATUE, SOUND_SPACE_DEFAULT)
@@ -214,8 +214,8 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     Call(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     Call(SetCamBGColor, CAM_DEFAULT, 24, 24, 40)
-    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    Call(SetCamEnabled, CAM_DEFAULT, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, false)
+    Call(SetCamEnabled, CAM_DEFAULT, true)
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_SetupMusic))
     IfLt(GB_StoryProgress, STORY_CH7_FOUND_HIDDEN_ROOM_UNDER_STATUE)

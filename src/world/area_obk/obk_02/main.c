@@ -10,7 +10,7 @@ enum {
 
 EvtScript N(EVS_ExitDoor_obk_01_1) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, obk_02_ENTRY_0)
     Set(LVar1, COLLIDER_tt1)
     Set(LVar2, MODEL_door1b)
@@ -25,7 +25,7 @@ EvtScript N(EVS_ExitDoor_obk_01_1) = {
 
 EvtScript N(EVS_ExitDoor_obk_03_0) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Set(LVar0, obk_02_ENTRY_1)
     Set(LVar1, COLLIDER_tt2)
     Set(LVar2, MODEL_door2)
@@ -117,40 +117,40 @@ EvtScript N(EVS_OnStep_LowerFloor) = {
 };
 
 EvtScript N(EVS_EnableModels_LowerFloor) = {
-    Call(EnableGroup, MODEL_off_1, TRUE)
-    Call(EnableGroup, MODEL_bom, TRUE)
-    Call(EnableGroup, MODEL_tokei, TRUE)
-    Call(EnableGroup, MODEL_hikido, TRUE)
-    IfEq(GF_OBK06_BombedWall, FALSE)
-        Call(EnableModel, MODEL_bomu_ato, FALSE)
+    Call(EnableGroup, MODEL_off_1, true)
+    Call(EnableGroup, MODEL_bom, true)
+    Call(EnableGroup, MODEL_tokei, true)
+    Call(EnableGroup, MODEL_hikido, true)
+    IfEq(GF_OBK06_BombedWall, false)
+        Call(EnableModel, MODEL_bomu_ato, false)
     Else
-        Call(EnableModel, MODEL_bom_mae, FALSE)
+        Call(EnableModel, MODEL_bom_mae, false)
     EndIf
     Return
     End
 };
 
 EvtScript N(EVS_DisableModels_LowerFloor) = {
-    Call(EnableGroup, MODEL_off_1, FALSE)
-    Call(EnableGroup, MODEL_bom, FALSE)
-    Call(EnableGroup, MODEL_tokei, FALSE)
-    Call(EnableGroup, MODEL_hikido, FALSE)
+    Call(EnableGroup, MODEL_off_1, false)
+    Call(EnableGroup, MODEL_bom, false)
+    Call(EnableGroup, MODEL_tokei, false)
+    Call(EnableGroup, MODEL_hikido, false)
     Return
     End
 };
 
 EvtScript N(EVS_EnableModels_UpperFloor) = {
-    Call(EnableGroup, MODEL_off_2, TRUE)
-    Call(EnableGroup, MODEL_shiyan, TRUE)
-    Call(EnableGroup, MODEL_door_1, TRUE)
+    Call(EnableGroup, MODEL_off_2, true)
+    Call(EnableGroup, MODEL_shiyan, true)
+    Call(EnableGroup, MODEL_door_1, true)
     Return
     End
 };
 
 EvtScript N(EVS_DisableModels_UpperFloor) = {
-    Call(EnableGroup, MODEL_off_2, FALSE)
-    Call(EnableGroup, MODEL_shiyan, FALSE)
-    Call(EnableGroup, MODEL_door_1, FALSE)
+    Call(EnableGroup, MODEL_off_2, false)
+    Call(EnableGroup, MODEL_shiyan, false)
+    Call(EnableGroup, MODEL_door_1, false)
     Return
     End
 };
@@ -186,7 +186,7 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_BOOS_MANSION)
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_NO_LEAD()
-    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     ExecWait(N(EVS_MakeEntities))
     Exec(N(EVS_TexPan_Fog))
     Exec(N(EVS_SetupBombableWall))

@@ -5,11 +5,11 @@ API_CALLABLE(N(ItemChoice_WaitForSelection)) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        N(ItemChoice_HasSelectedItem) = FALSE;
+        N(ItemChoice_HasSelectedItem) = false;
     }
 
     if (N(ItemChoice_HasSelectedItem)) {
-        N(ItemChoice_HasSelectedItem) = FALSE;
+        N(ItemChoice_HasSelectedItem) = false;
         evt_set_variable(script, *args++, N(ItemChoice_SelectedItemID));
         return ApiStatus_DONE2;
     }

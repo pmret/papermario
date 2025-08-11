@@ -24,7 +24,7 @@ EvtScript N(EVS_SpawnSwitch) = {
 };
 
 EvtScript N(EVS_SmashBlock) = {
-    Set(GF_TIK01_Hammer2Block, TRUE)
+    Set(GF_TIK01_Hammer2Block, true)
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o64, COLLIDER_FLAGS_UPPER_MASK)
     Return
     End
@@ -54,26 +54,26 @@ EvtScript N(EVS_GotoMap_dro_01_2) = {
 EvtScript N(EVS_OnSwitchActivate) = {
     Wait(10)
     Call(PlaySound, SOUND_GROW)
-    Set(GF_TIK01_WarpPipes, TRUE)
+    Set(GF_TIK01_WarpPipes, true)
     Unbind
     Return
     End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    IfEq(GF_TIK01_Hammer2Block, FALSE)
+    IfEq(GF_TIK01_Hammer2Block, false)
         Call(MakeEntity, Ref(Entity_Hammer2Block), -240, -10, 0, 0, MAKE_ENTITY_END)
         Call(AssignScript, Ref(N(EVS_SmashBlock)))
     Else
         Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o64, COLLIDER_FLAGS_UPPER_MASK)
     EndIf
     Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o63, COLLIDER_FLAGS_UPPER_MASK)
-    IfEq(GF_TIK01_WarpPipes, FALSE)
+    IfEq(GF_TIK01_WarpPipes, false)
         Call(MakeEntity, Ref(Entity_BlueSwitch), NPC_DISPOSE_LOCATION, 0, MAKE_ENTITY_END)
         Call(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_TIK_03))
         Set(MV_Unk_01, LVar0)
         BindTrigger(Ref(N(EVS_OnSwitchActivate)), TRIGGER_AREA_FLAG_SET, AF_TIK_03, 1, 0)
-        IfEq(GF_TIK01_Defeated_Blooper, TRUE)
+        IfEq(GF_TIK01_Defeated_Blooper, true)
             Call(N(SetEntityPosition), MV_Unk_01, 125, -10, 25)
         EndIf
     EndIf

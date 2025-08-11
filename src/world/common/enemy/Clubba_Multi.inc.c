@@ -9,7 +9,7 @@ EvtScript N(EVS_NpcDefeat_Clubba) = {
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             Call(OnPlayerFled, 1)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -156,7 +156,7 @@ NpcSettings N(NpcSettings_Clubba_Napping) = {
 #include "world/common/enemy/ai/MeleeHitbox.inc.c"
 
 EvtScript N(EVS_NpcAI_Clubba_Hitbox) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetSelfVar, 0, 4)
     Call(SetSelfVar, 1, 32)
     Call(SetSelfVar, 2, 50)

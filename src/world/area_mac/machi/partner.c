@@ -34,9 +34,9 @@ EvtScript N(EVS_ChasePartner) = {
 
 EvtScript N(EVS_FlyPartnerAround) = {
     Call(DisablePartnerAI, 0)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING, TRUE)
-    Call(EnableNpcBlur, NPC_PARTNER, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING, true)
+    Call(EnableNpcBlur, NPC_PARTNER, true)
     Label(10)
         Call(LoadPath, 500, Ref(N(FlightPath)), ARRAY_COUNT(N(FlightPath)), EASING_LINEAR)
         Label(0)

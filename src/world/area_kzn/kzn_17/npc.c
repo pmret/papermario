@@ -41,7 +41,7 @@ EvtScript N(EVS_Kolorado_TrompPanic) = {
 };
 
 EvtScript N(EVS_Kolorado_TrompImpact) = {
-    Call(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, TRUE)
+    Call(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, true)
     Call(SetNpcRotationPivot, NPC_Kolorado, 13)
     Call(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
     Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
@@ -66,7 +66,7 @@ EvtScript N(EVS_Kolorado_TrompImpact) = {
 EvtScript N(EVS_Kolorado_HurtInit) = {
     Call(SetNpcPos, NPC_Kolorado, 447, 0, 70)
     Call(SetNpcYaw, NPC_Kolorado, 270)
-    Call(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, TRUE)
+    Call(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER, true)
     Call(SetNpcRotationPivot, NPC_Kolorado, 13)
     Call(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
     Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
@@ -82,18 +82,18 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
         Wait(1)
         Goto(0)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_CH5_00F7, 160, 40)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SetNpcPos, NPC_SELF, 290, 0, 30)
     Call(SetNpcSpeed, NPC_SELF, Float(5.0 / DT))
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
     Call(NpcMoveTo, NPC_SELF, 640, 80, 0)
-    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Yell)
     Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00F8)
     Set(GB_StoryProgress, STORY_CH5_KOLORADO_AT_DEAD_END)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -152,7 +152,7 @@ NpcData N(NpcData_Piranha)[] = {
         .yaw = 270,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -325, 0, 150 },
@@ -177,7 +177,7 @@ NpcData N(NpcData_SpikeTop) = {
     .yaw = 270,
     .territory = {
         .wander = {
-            .isFlying = FALSE,
+            .isFlying = false,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .wanderShape = SHAPE_CYLINDER,
             .centerPos  = { -450, 0, 100 },

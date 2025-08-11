@@ -25,7 +25,7 @@ enum {
 // how much to add to the meter per input if all modifiers are neutral
 #define METER_FILL_TICK 600
 
-BSS b32 N(HasStarted);
+BSS bool N(HasStarted);
 
 API_CALLABLE(N(init)) {
     ActionCommandStatus* acs = &gActionCommandStatus;
@@ -37,14 +37,14 @@ API_CALLABLE(N(init)) {
     battleStatus->maxActionQuality = 5;
     battleStatus->actionCmdDifficultyTable = actionCmdTable07;
 
-    acs->autoSucceed = FALSE;
+    acs->autoSucceed = false;
     acs->actionCommandID = ACTION_COMMAND_UNUSED_FLEE;
     acs->state = AC_STATE_INIT;
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     acs->meterFillLevel = evt_get_variable(script, *args);
     acs->hudPosX = -48;
     acs->meterFillWidth = 0;
-    N(HasStarted) = FALSE;
+    N(HasStarted) = false;
     acs->hudPosY = 80;
 
     hid = hud_element_create(&HES_AButton);
@@ -76,13 +76,13 @@ API_CALLABLE(N(start)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    acs->autoSucceed = FALSE;
+    acs->autoSucceed = false;
     acs->prepareTime = evt_get_variable(script, *args++);
     acs->duration = evt_get_variable(script, *args++);
     acs->difficulty = evt_get_variable(script, *args++);
     acs->difficulty = adjust_action_command_difficulty(acs->difficulty);
 
-    acs->wrongButtonPressed = FALSE;
+    acs->wrongButtonPressed = false;
     battleStatus->actionQuality = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
 
@@ -144,7 +144,7 @@ void N(update)(void) {
 
             hud_element_set_script(acs->hudElemIDs[HIDX_BUTTON], &HES_MashAButton);
             battleStatus->actionQuality = 0;
-            N(HasStarted) = TRUE;
+            N(HasStarted) = true;
             acs->flee.drainDelay = 0;
             acs->state = AC_STATE_ACTIVE;
             acs->stateTimer = acs->duration;

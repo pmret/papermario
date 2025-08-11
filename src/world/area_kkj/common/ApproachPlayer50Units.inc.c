@@ -20,9 +20,9 @@ API_CALLABLE(N(ApproachPlayer50Units)) {
     }
 
     if (dist2D(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z) < 50.0f) {
-        phi_s4 = FALSE;
+        phi_s4 = false;
     } else {
-        phi_s4 = TRUE;
+        phi_s4 = true;
     }
 
     angle = clamp_angle(atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z));

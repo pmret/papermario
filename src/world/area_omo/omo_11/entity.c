@@ -9,7 +9,7 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_MAKE_SUPER_BLOCK(-115, 270, -120, 0)
     Call(MakeEntity, Ref(Entity_MulticoinBlock), 315, 270, -100, 0, MAKE_ENTITY_END)
     Call(AssignBlockFlag, GF_OMO11_MultiCoinBrick)
-    Call(UseDynamicShadow, TRUE)
+    Call(UseDynamicShadow, true)
     Call(MakeEntity, Ref(Entity_HiddenYellowBlock), 685, 60, -100, 0, ITEM_VOLT_SHROOM, MAKE_ENTITY_END)
     Call(AssignBlockFlag, GF_OMO11_HiddenItem_VoltShroom)
     Call(MakeEntity, Ref(Entity_HiddenYellowBlock), -600, 60, -50, 0, ITEM_SNOWMAN_DOLL, MAKE_ENTITY_END)

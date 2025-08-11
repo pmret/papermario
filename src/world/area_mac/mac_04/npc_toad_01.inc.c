@@ -9,7 +9,7 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
             Set(LVar0, MSG_MAC_Housing_00DC)
 #endif
         CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
-            IfEq(GF_MAC03_BombedRock, FALSE)
+            IfEq(GF_MAC03_BombedRock, false)
                 Set(LVar0, MSG_MAC_Housing_0020)
             Else
                 Set(LVar0, MSG_MAC_Housing_0021)
@@ -17,7 +17,7 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
         CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
             Set(LVar0, MSG_MAC_Housing_0022)
         CaseLt(STORY_CH4_RETURNED_STOREROOM_KEY)
-            IfEq(GF_MAC04_StoreroomKeyStolen, FALSE)
+            IfEq(GF_MAC04_StoreroomKeyStolen, false)
                 Set(LVar0, MSG_MAC_Housing_0023)
             Else
                 Set(LVar0, MSG_MAC_Housing_0024)

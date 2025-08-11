@@ -118,7 +118,7 @@ EvtScript N(EVS_Init) = {
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
     Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_HandlePhase)))
     Call(SetActorVar, ACTOR_SELF, AVAR_InvunerableTaunt, AVAL_Taunt_None)
-    Call(SetActorVar, ACTOR_SELF, AVAR_CaughtYouTaunt, FALSE)
+    Call(SetActorVar, ACTOR_SELF, AVAR_CaughtYouTaunt, false)
     ExecGetTID(N(EVS_PlayFootstepQuaking), LVar0)
     Call(SetActorVar, ACTOR_SELF, AVAR_QuakingScriptID, LVar0)
     Return
@@ -172,7 +172,7 @@ EvtScript N(EVS_ReturnHome) = {
     Call(SetGoalToHome, ACTOR_SELF)
     Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim07)
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim02)
     Call(SetActorYaw, ACTOR_SELF, 0)
     Return
@@ -180,7 +180,7 @@ EvtScript N(EVS_ReturnHome) = {
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
@@ -189,7 +189,7 @@ EvtScript N(EVS_TakeTurn) = {
         Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim07)
         Call(SetGoalPos, ACTOR_SELF, 0, 0, 0)
-        Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+        Call(RunToGoal, ACTOR_SELF, 0, false)
         Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim01)
         Wait(30)
         Set(LVar0, 0)
@@ -223,17 +223,17 @@ EvtScript N(EVS_TakeTurn) = {
         Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         Set(LVar0, 220)
         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+        Call(RunToGoal, ACTOR_SELF, 0, false)
         Call(GetActorVar, ACTOR_SELF, AVAR_QuakingScriptID, LVar0)
         KillThread(LVar0)
-        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
-        Call(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, TRUE)
+        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, true)
+        Call(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, true)
         Call(SetEndBattleFadeOutRate, 10)
         Return
     EndIf
     Call(GetActorVar, ACTOR_SELF, AVAR_InvunerableTaunt, LVar0)
     IfEq(LVar0, AVAL_Taunt_Ready)
-        Call(EnableBattleStatusBar, FALSE)
+        Call(EnableBattleStatusBar, false)
         Call(SetActorVar, ACTOR_SELF, AVAR_InvunerableTaunt, AVAL_Taunt_Done)
         Call(ActorSpeak, MSG_CH3_0103, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim09, ANIM_BattleTubba_Anim02)
         Thread
@@ -247,11 +247,11 @@ EvtScript N(EVS_TakeTurn) = {
         Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
         Call(MoveBattleCamOver, 15)
         Wait(15)
-        Call(EnableBattleStatusBar, TRUE)
+        Call(EnableBattleStatusBar, true)
     EndIf
     ExecWait(N(EVS_Attack_BodySlam))
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
     End
 };
@@ -261,7 +261,7 @@ EvtScript N(EVS_Attack_SlamFist) = {
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(SetBattleCamDist, 150)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim07)
     Call(SetGoalToTarget, ACTOR_SELF)
     IfNotFlag(LVar5, STATUS_FLAG_SHRINK)
@@ -270,7 +270,7 @@ EvtScript N(EVS_Attack_SlamFist) = {
         Call(AddGoalPos, ACTOR_SELF, 20, 0, 0)
     EndIf
     Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim15)
     Wait(8)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim16)
@@ -340,12 +340,12 @@ EvtScript N(EVS_Attack_BodySlam) = {
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(SetBattleCamDist, 180)
     Call(BattleCamTargetActor, ACTOR_SELF)
-    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, FALSE)
+    Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim07)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, 70, 0, 0)
     Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
-    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(RunToGoal, ACTOR_SELF, 0, false)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim0F)
     Wait(8)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim10)
@@ -366,7 +366,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
             Call(PlaySound, SOUND_ACTOR_JUMP)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 23, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 23, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim12)
             Thread
@@ -382,7 +382,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             Add(LVar2, 5)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
             Call(ShakeCam, CAM_BATTLE, 0, 5, Float(3.0))
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             PlayEffect(EFFECT_SMOKE_IMPACT, 0, LVar0, LVar1, LVar2, 60, 8, 10, 20, 0)
@@ -405,7 +405,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             Call(SetGoalToTarget, ACTOR_SELF)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
             Call(PlaySound, SOUND_ACTOR_JUMP)
-            Call(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 16, false, true, false)
     EndSwitch
     Wait(2)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
@@ -455,7 +455,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             Add(LVar2, 5)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
             Call(ShakeCam, CAM_BATTLE, 0, 5, Float(3.0))
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             PlayEffect(EFFECT_SMOKE_IMPACT, 0, LVar0, LVar1, LVar2, 60, 8, 10, 20, 0)
@@ -477,7 +477,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
                 Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim0E)
             EndThread
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
             IfNotFlag(LVar5, STATUS_FLAG_SHRINK)
                 Call(ShakeCam, CAM_BATTLE, 0, 5, Float(3.0))
                 Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

@@ -1,31 +1,31 @@
 #include "flo_16.h"
 
 API_CALLABLE(N(CheckForPoundInput)) {
-    script->varTable[0] = FALSE;
+    script->varTable[0] = false;
     if (gPlayerStatus.actionState == ACTION_STATE_SPIN_POUND || gPlayerStatus.actionState == ACTION_STATE_TORNADO_POUND) {
-        script->varTable[0] = TRUE;
+        script->varTable[0] = true;
     }
     return ApiStatus_DONE2;
 }
 
 EvtScript N(EVS_OnTouch_RedPillar) = {
     Call(N(CheckForPoundInput))
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
-    IfEq(AF_FLO_RaisedRedPillar, FALSE)
+    Call(DisablePlayerInput, true)
+    IfEq(AF_FLO_RaisedRedPillar, false)
         Set(LVar5, 0)
         Set(LVar6, 50)
         Set(LVar7, 0)
         Set(LVar8, 180)
-        Set(AF_FLO_RaisedRedPillar, TRUE)
+        Set(AF_FLO_RaisedRedPillar, true)
     Else
         Set(LVar5, 50)
         Set(LVar6, 0)
         Set(LVar7, 180)
         Set(LVar8, 0)
-        Set(AF_FLO_RaisedRedPillar, FALSE)
+        Set(AF_FLO_RaisedRedPillar, false)
     EndIf
     Wait(15)
     Call(PlaySound, SOUND_FLO_MOVE_PILLAR)
@@ -51,7 +51,7 @@ EvtScript N(EVS_OnTouch_RedPillar) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Wait(10)
     Call(MakeLerp, LVar7, LVar8, 15, EASING_LINEAR)
     Loop(0)
@@ -73,22 +73,22 @@ EvtScript N(EVS_OnTouch_RedPillar) = {
 
 EvtScript N(EVS_OnTouch_GreenPillar) = {
     Call(N(CheckForPoundInput))
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
-    IfEq(AF_FLO_RaisedGreenPillar, FALSE)
+    Call(DisablePlayerInput, true)
+    IfEq(AF_FLO_RaisedGreenPillar, false)
         Set(LVar5, 0)
         Set(LVar6, 50)
         Set(LVar7, 0)
         Set(LVar8, 180)
-        Set(AF_FLO_RaisedGreenPillar, TRUE)
+        Set(AF_FLO_RaisedGreenPillar, true)
     Else
         Set(LVar5, 50)
         Set(LVar6, 0)
         Set(LVar7, 180)
         Set(LVar8, 0)
-        Set(AF_FLO_RaisedGreenPillar, FALSE)
+        Set(AF_FLO_RaisedGreenPillar, false)
     EndIf
     Wait(15)
     Call(PlaySound, SOUND_FLO_MOVE_PILLAR)
@@ -119,7 +119,7 @@ EvtScript N(EVS_OnTouch_GreenPillar) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Wait(10)
     Call(MakeLerp, LVar7, LVar8, 15, EASING_LINEAR)
     Loop(0)
@@ -144,22 +144,22 @@ EvtScript N(EVS_OnTouch_GreenPillar) = {
 
 EvtScript N(EVS_OnTouch_PurplePillar) = {
     Call(N(CheckForPoundInput))
-    IfEq(LVar0, FALSE)
+    IfEq(LVar0, false)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
-    IfEq(AF_FLO_LoweredPurplePillar, FALSE)
+    Call(DisablePlayerInput, true)
+    IfEq(AF_FLO_LoweredPurplePillar, false)
         Set(LVar5, 0)
         Set(LVar6, -50)
         Set(LVar7, 0)
         Set(LVar8, 180)
-        Set(AF_FLO_LoweredPurplePillar, TRUE)
+        Set(AF_FLO_LoweredPurplePillar, true)
     Else
         Set(LVar5, -50)
         Set(LVar6, 0)
         Set(LVar7, 180)
         Set(LVar8, 0)
-        Set(AF_FLO_LoweredPurplePillar, FALSE)
+        Set(AF_FLO_LoweredPurplePillar, false)
     EndIf
     Wait(15)
     Call(PlaySound, SOUND_FLO_MOVE_PILLAR)
@@ -185,7 +185,7 @@ EvtScript N(EVS_OnTouch_PurplePillar) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Wait(10)
     Call(MakeLerp, LVar7, LVar8, 15, EASING_LINEAR)
     Loop(0)
@@ -206,9 +206,9 @@ EvtScript N(EVS_OnTouch_PurplePillar) = {
 };
 
 EvtScript N(EVS_SetupPillarPuzzle) = {
-    Set(AF_FLO_RaisedRedPillar, FALSE)
-    Set(AF_FLO_RaisedGreenPillar, FALSE)
-    Set(AF_FLO_LoweredPurplePillar, FALSE)
+    Set(AF_FLO_RaisedRedPillar, false)
+    Set(AF_FLO_RaisedGreenPillar, false)
+    Set(AF_FLO_LoweredPurplePillar, false)
     Call(ParentColliderToModel, COLLIDER_o242, MODEL_g81)
     Call(ParentColliderToModel, COLLIDER_o250, MODEL_g81)
     Call(ParentColliderToModel, COLLIDER_o243, MODEL_g83)

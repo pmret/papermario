@@ -21,11 +21,11 @@ EvtScript N(EVS_RaisePipe_JumpAttack) = {
     Call(SetPanTarget, CAM_DEFAULT, -25, 0, -155)
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.2))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(5)
     Call(PlaySoundWithVolume, SOUND_GROW, 0)
-    Call(EnableModel, MODEL_o5, TRUE)
+    Call(EnableModel, MODEL_o5, true)
     Set(LVar0, -30)
     Loop(30)
         Add(LVar0, 1)
@@ -46,11 +46,11 @@ EvtScript N(EVS_RaisePipe_SmashAttack) = {
     Call(SetPanTarget, CAM_DEFAULT, 95, 0, -155)
     Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.2))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(5)
     Call(PlaySoundWithVolume, SOUND_GROW, 0)
-    Call(EnableModel, MODEL_o9, TRUE)
+    Call(EnableModel, MODEL_o9, true)
     Set(LVar0, -30)
     Loop(30)
         Add(LVar0, 1)
@@ -73,9 +73,9 @@ EvtScript N(EVS_SetCamera_RaisePipe) = {
     Call(SetPanTarget, CAM_DEFAULT, LVar0, 0, LVar2)
     Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.2))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Return
     End
 };
@@ -84,7 +84,7 @@ EvtScript N(EVS_NpcInteract_RedToad) = {
     Call(N(GetAvailableGamesCount))
     Set(LVar6, 0)
     Set(LVar7, 0)
-    IfEq(GF_MGM_Unlocked_JumpAttack, FALSE)
+    IfEq(GF_MGM_Unlocked_JumpAttack, false)
         Switch(LVar5)
             CaseEq(0)
             CaseEq(1)
@@ -95,7 +95,7 @@ EvtScript N(EVS_NpcInteract_RedToad) = {
                 Set(LVar7, 3)
         EndSwitch
     Else
-        IfEq(GF_MGM_Unlocked_SmashAttack, FALSE)
+        IfEq(GF_MGM_Unlocked_SmashAttack, false)
             IfLe(LVar5, 1)
                 Set(LVar6, 2)
             Else
@@ -106,8 +106,8 @@ EvtScript N(EVS_NpcInteract_RedToad) = {
             Set(LVar6, 4)
         EndIf
     EndIf
-    IfEq(GF_MGM00_Met_Receptionist, FALSE)
-        Set(GF_MGM00_Met_Receptionist, TRUE)
+    IfEq(GF_MGM00_Met_Receptionist, false)
+        Set(GF_MGM00_Met_Receptionist, true)
         Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0012)
     Else
         Switch(LVar6)
@@ -139,16 +139,16 @@ EvtScript N(EVS_NpcInteract_RedToad) = {
     Switch(LVar7)
         CaseEq(0)
         CaseEq(1)
-            Set(GF_MGM_Unlocked_JumpAttack, TRUE)
+            Set(GF_MGM_Unlocked_JumpAttack, true)
             ExecWait(N(EVS_RaisePipe_JumpAttack))
             ExecWait(N(EVS_SetCamera_RaisePipe))
         CaseEq(2)
-            Set(GF_MGM_Unlocked_SmashAttack, TRUE)
+            Set(GF_MGM_Unlocked_SmashAttack, true)
             ExecWait(N(EVS_RaisePipe_SmashAttack))
             ExecWait(N(EVS_SetCamera_RaisePipe))
         CaseEq(3)
-            Set(GF_MGM_Unlocked_JumpAttack, TRUE)
-            Set(GF_MGM_Unlocked_SmashAttack, TRUE)
+            Set(GF_MGM_Unlocked_JumpAttack, true)
+            Set(GF_MGM_Unlocked_SmashAttack, true)
             ExecWait(N(EVS_RaisePipe_JumpAttack))
             Wait(10)
             ExecWait(N(EVS_RaisePipe_SmashAttack))
@@ -211,7 +211,7 @@ NpcData N(NpcData_GreenToad) = {
     .yaw = 270,
     .territory = {
         .patrol = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 2,
             .points = {
@@ -261,7 +261,7 @@ NpcData N(NpcData_BlueToad) = {
     .yaw = 90,
     .territory = {
         .patrol = {
-            .isFlying = TRUE,
+            .isFlying = true,
             .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
             .numPoints  = 2,
             .points = {

@@ -6,7 +6,7 @@ EvtScript N(EVS_ExitWalk_kpa_1X_Upper) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, kpa_12_ENTRY_0)
     Exec(ExitWalk)
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
         Call(GotoMap, Ref("kpa_11"), kpa_11_ENTRY_1)
     Else
         Call(GotoMap, Ref("kpa_10"), kpa_10_ENTRY_1)
@@ -20,7 +20,7 @@ EvtScript N(EVS_ExitWalk_kpa_1X_Lower) = {
     SetGroup(EVT_GROUP_EXIT_MAP)
     Call(UseExitHeading, 60, kpa_12_ENTRY_2)
     Exec(ExitWalk)
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
         Call(GotoMap, Ref("kpa_11"), kpa_11_ENTRY_4)
     Else
         Call(GotoMap, Ref("kpa_10"), kpa_10_ENTRY_4)
@@ -74,19 +74,19 @@ EvtScript N(EVS_Main) = {
     Set(GB_WorldLocation, LOCATION_BOWSERS_CASTLE)
     Call(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_DEFAULT()
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
-        Call(EnableGroup, MODEL_after, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
+        Call(EnableGroup, MODEL_after, false)
         Exec(N(EVS_TexPan_Lava))
     Else
-        Call(EnableGroup, MODEL_before, FALSE)
+        Call(EnableGroup, MODEL_before, false)
     EndIf
     Exec(N(EVS_SetupMusic))
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
         Exec(N(EVS_SetupPlatforms))
     EndIf
     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
     Exec(EnterWalk)
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
         Thread
             Wait(2)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o356, SURFACE_TYPE_LAVA)

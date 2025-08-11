@@ -136,7 +136,7 @@ MenuWindowBP D_filemenu_8024F1D8[] = {
 };
 
 MenuPanel filemenu_selectlanguage_menuBP = {
-    .initialized = FALSE,
+    .initialized = false,
     .col = 0,
     .row = 0,
     .selected = 0,
@@ -246,7 +246,7 @@ void filemenu_selectlanguage_handle_input(MenuPanel* menu) {
     s32 var_a1;
 
     if (filemenu_heldButtons & BUTTON_STICK_LEFT) {
-        while (TRUE) {
+        while (true) {
             menu->col--;
             if (menu->col < 0) {
                 menu->col = 0;
@@ -259,7 +259,7 @@ void filemenu_selectlanguage_handle_input(MenuPanel* menu) {
     }
 
     if (filemenu_heldButtons & BUTTON_STICK_RIGHT) {
-        while (TRUE) {
+        while (true) {
             menu->col++;
             if (menu->col >= menu->numCols) {
                 menu->col = menu->numCols - 1;

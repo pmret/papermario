@@ -32,7 +32,7 @@ EvtScript N(EVS_NpcIdle_Bootler) = {
         EndIf
     EndLoop
     Call(SetMusic, 0, SONG_BOOS_MANSION, 0, VOL_LEVEL_FULL)
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_MAC_Bridge_0022, 400, 100)
     Thread
         Call(SetNpcPos, NPC_SELF, 430, 60, -40)
@@ -47,7 +47,7 @@ EvtScript N(EVS_NpcIdle_Bootler) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(18.5), Float(-10.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SetPlayerSpeed, Float(4.0 / DT))
     Call(PlayerMoveTo, 430, -40, 0)
@@ -113,14 +113,14 @@ EvtScript N(EVS_NpcIdle_Bootler) = {
     Exec(N(EVS_SetupMusicTriggers))
     Set(GB_StoryProgress, STORY_CH3_SAW_BOO_ENTER_FOREST)
     Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_Bootler) = {
     IfEq(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
-        Call(EnableNpcShadow, NPC_SELF, FALSE)
+        Call(EnableNpcShadow, NPC_SELF, false)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Bootler)))
     Else
         Call(RemoveNpc, NPC_SELF)

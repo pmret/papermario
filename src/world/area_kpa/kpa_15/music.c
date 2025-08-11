@@ -2,7 +2,7 @@
 
 EvtScript N(EVS_SetupMusic) = {
     Call(SetMusic, 0, SONG_BOWSERS_CASTLE, 0, VOL_LEVEL_FULL)
-    IfEq(GF_KPA16_ShutOffLava, FALSE)
+    IfEq(GF_KPA16_ShutOffLava, false)
         Call(PlayAmbientSounds, AMBIENT_LAVA_1)
     EndIf
     Call(UseDoorSounds, DOOR_SOUNDS_METAL)

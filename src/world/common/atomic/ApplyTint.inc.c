@@ -24,7 +24,7 @@ API_CALLABLE(N(SetModelTintMode)) {
 
     switch (mode) {
         case APPLY_TINT_MODELS:
-            while (TRUE) {
+            while (true) {
                 if (*modelIDList == 0xFFFF) {
                     break;
                 }
@@ -36,11 +36,11 @@ API_CALLABLE(N(SetModelTintMode)) {
             break;
 
         case APPLY_TINT_GROUPS:
-            while (TRUE) {
+            while (true) {
                 if (*modelIDList == 0xFFFF) {
                     break;
                 }
-                mdl_group_set_custom_gfx(*modelIDList, CUSTOM_GFX_NONE, tintType, FALSE);
+                mdl_group_set_custom_gfx(*modelIDList, CUSTOM_GFX_NONE, tintType, false);
                 modelIDList++;
             };
             break;

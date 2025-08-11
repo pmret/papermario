@@ -27,7 +27,7 @@ EvtScript N(EVS_NpcIdle_Bowser) = {
         Call(SetCamDistance, CAM_DEFAULT, 1000)
         Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-7.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
     EndThread
     Call(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE)
     Call(StopSound, SOUND_LRAW_KPA_ARENA_TURN_ON)
@@ -64,7 +64,7 @@ EvtScript N(EVS_NpcIdle_Kammy_Broom) = {
     EndLoop
     Call(SetPlayerImgFXFlags, IMGFX_FLAG_2000)
     Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_TINT, 0, 0, 0, 0)
-    Call(HidePlayerShadow, TRUE)
+    Call(HidePlayerShadow, true)
     Call(DisablePartnerAI, 0)
     Wait(1)
     Call(GetNpcPos, NPC_Peach_01, LVar0, LVar1, LVar2)
@@ -87,7 +87,7 @@ API_CALLABLE(N(func_80240020_B06A20)) {
 EvtScript N(EVS_NpcDefeat_Kammy_Broom) = {
     Call(GetBattleOutcome, LVar0)
     Call(N(func_80240020_B06A20))
-    Set(GF_KKJ25_Defeated_Kammy, TRUE)
+    Set(GF_KKJ25_Defeated_Kammy, true)
     // reload the map in the 'midpoint' configuration
     Call(GotoMap, Ref("kkj_25"), kkj_25_ENTRY_1)
     Wait(100)
@@ -139,7 +139,7 @@ EvtScript N(EVS_NpcInit_BattleKooper_01) = {
 
 EvtScript N(EVS_NpcInit_Twink) = {
     Call(SetNpcAnimation, NPC_Twink_01, ANIM_Twink_Idle)
-    Call(EnableNpcShadow, NPC_Twink_01, FALSE)
+    Call(EnableNpcShadow, NPC_Twink_01, false)
     Call(SetNpcPos, NPC_Twink_01, 300, -100, 0)
     Return
     End

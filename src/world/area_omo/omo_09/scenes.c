@@ -57,8 +57,8 @@ EvtScript N(EVS_NpcAux_Kammy) = {
 };
 
 EvtScript N(EVS_Scene_KammySetAmbush) = {
-    Call(DisablePlayerInput, TRUE)
-    Set(GF_OMO09_SpawnedPeachChoice3, TRUE)
+    Call(DisablePlayerInput, true)
+    Set(GF_OMO09_SpawnedPeachChoice3, true)
     Set(AB_OMO_CurrentPeachChoice, GB_OMO_PeachChoice3)
     Switch(AB_OMO_CurrentPeachChoice)
         CaseEq(0)
@@ -79,7 +79,7 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(5 * DT)
     Call(SetNpcVar, NPC_Kammy, 0, 1)

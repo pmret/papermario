@@ -99,12 +99,12 @@ API_CALLABLE(N(func_80245028_8058A8)) {
                 if (cond) {
                     menu->ptrIcon[numEntries] = wPartnerHudScripts[partnerID];
                     menu->userIndex[numEntries] = partnerID;
-                    menu->enabled[numEntries] = TRUE;
+                    menu->enabled[numEntries] = true;
                     menu->nameMsg[numEntries] = temp_s2->nameMsg;
                     menu->descMsg[numEntries] = temp_s2->worldDescMsg;
                     menu->value[numEntries] = playerData->partners[partnerID].level;
-                    if (cond == TRUE) {
-                        menu->enabled[numEntries] = FALSE;
+                    if (cond == true) {
+                        menu->enabled[numEntries] = false;
                         menu->ptrIcon[numEntries] = wDisabledPartnerHudScripts[partnerID];
                     }
                     numEntries++;
@@ -169,10 +169,10 @@ API_CALLABLE(N(func_8024522C_805AAC)) {
                 menu->value[numEntries] = 0;
                 if (hasRead) {
                     menu->ptrIcon[numEntries] = scriptPair->disabled;
-                    menu->enabled[numEntries] = FALSE;
+                    menu->enabled[numEntries] = false;
                 } else {
                     menu->ptrIcon[numEntries] = scriptPair->enabled;
-                    menu->enabled[numEntries] = TRUE;
+                    menu->enabled[numEntries] = true;
                 }
                 numEntries++;
             }
@@ -224,9 +224,9 @@ API_CALLABLE(N(func_80245440_805CC0)) {
 
 #if VERSION_JP
 EvtScript N(D_80256C10_81EF80) = {
-    IfEq(GF_MAC01_Met_Postmaster, FALSE)
+    IfEq(GF_MAC01_Met_Postmaster, false)
         Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_00EA)
-        Set(GF_MAC01_Met_Postmaster, TRUE)
+        Set(GF_MAC01_Met_Postmaster, true)
     Else
         Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_00EB)
     EndIf
@@ -254,7 +254,7 @@ EvtScript N(EVS_ItemPrompt_Mailbag) = {
                 Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0063)
             CaseDefault
                 Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0062)
-                Set(GF_MAC01_MailbagReturned, TRUE)
+                Set(GF_MAC01_MailbagReturned, true)
                 Wait(10)
                 EVT_GIVE_STAR_PIECE()
                 Wait(10)
@@ -266,13 +266,13 @@ EvtScript N(EVS_ItemPrompt_Mailbag) = {
 
 EvtScript N(EVS_NpcInteract_Postmaster) = {
     IfGe(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
-        IfEq(GF_MAC01_MailbagReturned, FALSE)
+        IfEq(GF_MAC01_MailbagReturned, false)
             ExecWait(N(EVS_ItemPrompt_Mailbag))
             Return
         EndIf
     EndIf
-    IfEq(GF_MAC01_Met_Postmaster, FALSE)
-        Set(GF_MAC01_Met_Postmaster, TRUE)
+    IfEq(GF_MAC01_Met_Postmaster, false)
+        Set(GF_MAC01_Met_Postmaster, true)
         Call(N(func_80244E90_805710))
         Switch(LVar0)
             CaseEq(-1)
@@ -335,9 +335,9 @@ EvtScript N(EVS_NpcInteract_Postmaster) = {
         Goto(0)
     EndIf
     Label(99)
-    IfEq(GF_MAC01_CheckedForLetters, FALSE)
+    IfEq(GF_MAC01_CheckedForLetters, false)
         Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_005D)
-        Set(GF_MAC01_CheckedForLetters, TRUE)
+        Set(GF_MAC01_CheckedForLetters, true)
     Else
         Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_005E)
     EndIf
@@ -360,59 +360,59 @@ EvtScript N(EVS_NpcInit_Postmaster) = {
             Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Postmaster)))
     EndSwitch
     IfGe(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
-        Set(GF_MAC01_UnlockedLetter_01, TRUE)
+        Set(GF_MAC01_UnlockedLetter_01, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
-        Set(GF_MAC01_UnlockedLetter_00, TRUE)
+        Set(GF_MAC01_UnlockedLetter_00, true)
     EndIf
-    Set(GF_MAC01_UnlockedLetter_02, TRUE)
+    Set(GF_MAC01_UnlockedLetter_02, true)
     IfGe(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
-        Set(GF_MAC01_UnlockedLetter_05, TRUE)
+        Set(GF_MAC01_UnlockedLetter_05, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
-        Set(GF_MAC01_UnlockedLetter_04, TRUE)
+        Set(GF_MAC01_UnlockedLetter_04, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
-        Set(GF_MAC01_UnlockedLetter_03, TRUE)
+        Set(GF_MAC01_UnlockedLetter_03, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
-        Set(GF_MAC01_UnlockedLetter_08, TRUE)
+        Set(GF_MAC01_UnlockedLetter_08, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
-        Set(GF_MAC01_UnlockedLetter_06, TRUE)
+        Set(GF_MAC01_UnlockedLetter_06, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH7_RAISED_FROZEN_STAIRS)
-        Set(GF_MAC01_UnlockedLetter_07, TRUE)
+        Set(GF_MAC01_UnlockedLetter_07, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
-        Set(GF_MAC01_UnlockedLetter_09, TRUE)
+        Set(GF_MAC01_UnlockedLetter_09, true)
     EndIf
     IfGe(GB_IWA00_Whacka_HitCount, 2)
-        Set(GF_MAC01_UnlockedLetter_0A, TRUE)
+        Set(GF_MAC01_UnlockedLetter_0A, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
-        Set(GF_MAC01_UnlockedLetter_0B, TRUE)
+        Set(GF_MAC01_UnlockedLetter_0B, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
-        Set(GF_MAC01_UnlockedLetter_0C, TRUE)
+        Set(GF_MAC01_UnlockedLetter_0C, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        Set(GF_MAC01_UnlockedLetter_0D, TRUE)
+        Set(GF_MAC01_UnlockedLetter_0D, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
-        Set(GF_MAC01_UnlockedLetter_0E, TRUE)
+        Set(GF_MAC01_UnlockedLetter_0E, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-        Set(GF_MAC01_UnlockedLetter_10, TRUE)
+        Set(GF_MAC01_UnlockedLetter_10, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH8_REACHED_STAR_HAVEN)
-        Set(GF_MAC01_UnlockedLetter_0F, TRUE)
+        Set(GF_MAC01_UnlockedLetter_0F, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
-        Set(GF_MAC01_UnlockedLetter_12, TRUE)
+        Set(GF_MAC01_UnlockedLetter_12, true)
     EndIf
     IfGe(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        Set(GF_MAC01_UnlockedLetter_11, TRUE)
+        Set(GF_MAC01_UnlockedLetter_11, true)
     EndIf
     Return
     End
@@ -460,7 +460,7 @@ EvtScript N(EVS_PostOfficeShyGuy_Escape) = {
     Call(SetNpcPos, NPC_PostOfficeShyGuy, 357, 20, -440)
     Call(SetNpcAnimation, NPC_PostOfficeShyGuy, ANIM_ShyGuy_Red_Anim04)
     Exec(N(EVS_CarryItem_PostOfficeShyGuy))
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Wait(60)
     Call(PlaySoundAtNpc, NPC_PostOfficeShyGuy, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
     Call(NpcJump0, NPC_PostOfficeShyGuy, 247, 20, -440, 20)
@@ -471,8 +471,8 @@ EvtScript N(EVS_PostOfficeShyGuy_Escape) = {
     Call(NpcMoveTo, NPC_PostOfficeShyGuy, 150, -333, 8)
     KillThread(LVarA)
     Call(SetNpcPos, NPC_PostOfficeShyGuy, NPC_DISPOSE_LOCATION)
-    Set(GF_MAC01_MailbagStolen, TRUE)
-    Call(DisablePlayerInput, FALSE)
+    Set(GF_MAC01_MailbagStolen, true)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -484,13 +484,13 @@ EvtScript N(EVS_Scene_MailbagTheft) = {
     IfGt(GB_StoryProgress, STORY_CH4_STAR_SPIRIT_RESCUED)
         Return
     EndIf
-    IfNe(GF_MAC01_MailbagStolen, FALSE)
+    IfNe(GF_MAC01_MailbagStolen, false)
         Return
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_IdleAlt, 0, MSG_MAC_Plaza_005F)
     Exec(N(EVS_PostOfficeShyGuy_Escape))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

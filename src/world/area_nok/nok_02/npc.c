@@ -67,7 +67,7 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
 #else
         Call(SetCamSpeed, CAM_DEFAULT, 4)
 #endif
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(SetGroupVisibility, MODEL_g111, MODEL_GROUP_VISIBLE)
         Thread
             Wait(10 * DT)
@@ -83,7 +83,7 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
         EndThread
         Thread
             Call(PlayerMoveTo, -25, -130, 10 * DT)
-            Call(PlayerFaceNpc, NPC_Kooper, FALSE)
+            Call(PlayerFaceNpc, NPC_Kooper, false)
         EndThread
         Thread
             Call(N(SwitchToPartner), 1)
@@ -92,14 +92,14 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
             Call(NpcFaceNpc, NPC_PARTNER, NPC_Kooper, 0)
             Call(EnablePartnerAI)
         EndThread
-        Call(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(SetNpcPos, NPC_Kooper, 0, 0, -207)
         Call(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
         Wait(35 * DT)
         Call(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Run)
         Thread
             Loop(30 * DT)
-                Call(PlayerFaceNpc, NPC_Kooper, FALSE)
+                Call(PlayerFaceNpc, NPC_Kooper, false)
                 Wait(1)
             EndLoop
         EndThread
@@ -119,7 +119,7 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
         Call(NpcMoveTo, NPC_Kooper, 25, -130, 10 * DT)
         Call(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
         Call(NpcFacePlayer, NPC_Kooper, 0)
-        Call(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+        Call(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
         Wait(10 * DT)
         Call(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Celebrate, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00B5)
         Call(SetPlayerAnimation, ANIM_Mario1_NodYes)
@@ -149,14 +149,14 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
         Wait(10 * DT)
         Thread
             Wait(3 * DT)
-            Call(PlayerFaceNpc, NPC_PARTNER, FALSE)
+            Call(PlayerFaceNpc, NPC_PARTNER, false)
         EndThread
         Call(DisablePartnerAI, 0)
         Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_CH1_00B7)
         Call(EnablePartnerAI)
         Call(AdjustCam, CAM_DEFAULT, Float(90.0), 0, Float(375.0), Float(17.0), Float(-5.5))
         Wait(10 * DT)
-        Call(PlayerFaceNpc, NPC_Kooper, FALSE)
+        Call(PlayerFaceNpc, NPC_Kooper, false)
         Wait(10 * DT)
         Call(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00B8)
         Call(BindNpcInteract, NPC_Kooper, Ref(N(EVS_NpcInteract_Kooper)))
@@ -188,13 +188,13 @@ EvtScript N(EVS_FuzzyBoss_PlayerEntersKoopersHouse) = {
     IfGe(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_LEFT_TOWN)
         Return
     EndIf
-    IfEq(MF_FuzzyBossTaunt, TRUE)
+    IfEq(MF_FuzzyBossTaunt, true)
         Return
     EndIf
-    Set(MF_FuzzyBossTaunt, TRUE)
-    Call(DisablePlayerInput, TRUE)
+    Set(MF_FuzzyBossTaunt, true)
+    Call(DisablePlayerInput, true)
     Call(SpeakToPlayer, NPC_FuzzyBoss, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 0, MSG_CH1_00B9)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(SetNpcAnimation, NPC_FuzzyBoss, ANIM_Fuzzy_Walk)
     Call(GetNpcPos, NPC_FuzzyBoss, LVarA, LVarB, LVarC)
     Set(LVarD, LVarA)
@@ -225,8 +225,8 @@ EvtScript N(EVS_FuzzyBoss_PlayerEntersKoopersHouse) = {
     Call(SetNpcJumpscale, NPC_FuzzyBoss, 2)
     Call(PlaySoundAtNpc, NPC_FuzzyBoss, SOUND_FUZZY_HOP_A, SOUND_SPACE_DEFAULT)
     Call(NpcJump0, NPC_FuzzyBoss, LVarB, LVarC, LVarD, LVarE)
-    Call(SetNpcFlagBits, NPC_FuzzyBoss, NPC_FLAG_GRAVITY, FALSE)
-    Call(SetNpcFlagBits, NPC_KoopersShell, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_FuzzyBoss, NPC_FLAG_GRAVITY, false)
+    Call(SetNpcFlagBits, NPC_KoopersShell, NPC_FLAG_GRAVITY, false)
     Call(SetNpcPos, NPC_FuzzyBoss, NPC_DISPOSE_LOCATION)
     Call(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
     Return
@@ -331,7 +331,7 @@ EvtScript N(EVS_MiscFuzzyFlee) = {
     Call(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Run)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
     Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15)
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     Return
     End
@@ -339,7 +339,7 @@ EvtScript N(EVS_MiscFuzzyFlee) = {
 
 EvtScript N(EVS_NpcHit_MiscFuzzy1) = {
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_MiscFuzzyFlee)))
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, true)
     Return
     End
 };
@@ -349,7 +349,7 @@ EvtScript N(EVS_NpcIdle_MiscFuzzy2) = {
         Return
     EndIf
     Label(100)
-        IfEq(AF_NOK_13, FALSE)
+        IfEq(AF_NOK_13, false)
             Wait(1)
             Goto(100)
         EndIf
@@ -379,7 +379,7 @@ EvtScript N(EVS_NpcIdle_MiscFuzzy2) = {
 
 EvtScript N(EVS_NpcHit_MiscFuzzy2) = {
     Call(BindNpcAI, NPC_SELF, Ref(N(EVS_MiscFuzzyFlee)))
-    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, true)
     Return
     End
 };
@@ -406,17 +406,17 @@ EvtScript N(EVS_NpcInit_Fuzzy_Later) = {
 };
 
 EvtScript N(EVS_BreakBlock_DropShell) = {
-    IfEq(GF_NOK02_RecoveredShellB, TRUE)
+    IfEq(GF_NOK02_RecoveredShellB, true)
         Return
     EndIf
-    Set(GF_NOK02_RecoveredShellB, TRUE)
+    Set(GF_NOK02_RecoveredShellB, true)
     Call(BindNpcAI, NPC_Koopa_02, Ref(N(EVS_DoNothing)))
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(NpcJump0, NPC_KoopaShell_02, 227, 0, 247, 20)
     Call(PlaySoundAtNpc, NPC_KoopaShell_02, SOUND_ITEM_BOUNCE, SOUND_SPACE_DEFAULT)
-    Call(PlayerFaceNpc, NPC_KoopaShell_02, FALSE)
+    Call(PlayerFaceNpc, NPC_KoopaShell_02, false)
     Call(NpcFaceNpc, NPC_Koopa_02, NPC_KoopaShell_02, 0)
-    Call(SetNpcFlagBits, NPC_Koopa_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Koopa_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Add(LVar0, -1)
     Add(LVar2, -1)
     Call(GetNpcPos, NPC_Koopa_02, LVar0, LVar1, LVar2)
@@ -433,11 +433,11 @@ EvtScript N(EVS_BreakBlock_DropShell) = {
     Add(LVar2, 1)
     Add(LVar1, 10)
     Call(NpcJump0, NPC_KoopaShell_02, LVar0, LVar1, LVar2, 10)
-    Call(PlayerFaceNpc, NPC_Koopa_02, FALSE)
+    Call(PlayerFaceNpc, NPC_Koopa_02, false)
     Call(NpcFacePlayer, NPC_Koopa_02, 0)
     Wait(10)
     Call(SetNpcAnimation, NPC_Koopa_02, ANIM_KoopaWithoutShell_Still)
-    Call(EnableNpcBlur, NPC_KoopaShell_02, TRUE)
+    Call(EnableNpcBlur, NPC_KoopaShell_02, true)
     Call(GetNpcPos, NPC_Koopa_02, LVar0, LVar1, LVar2)
     Add(LVar0, 1)
     Add(LVar2, 1)
@@ -449,15 +449,15 @@ EvtScript N(EVS_BreakBlock_DropShell) = {
     Call(NpcJump0, NPC_KoopaShell_02, LVar0, LVar1, LVar2, 30)
     Call(SetNpcPos, NPC_KoopaShell_02, NPC_DISPOSE_LOCATION)
     Call(SetNpcSprite, NPC_Koopa_02, ANIM_Koopa_Idle)
-    Call(SetNpcFlagBits, NPC_Koopa_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_Koopa_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Call(SetNpcAnimation, NPC_Koopa_02, ANIM_Koopa_Still)
     Wait(4)
-    Call(EnableNpcBlur, NPC_KoopaShell_02, TRUE)
+    Call(EnableNpcBlur, NPC_KoopaShell_02, true)
     Call(SetNpcAnimation, NPC_Koopa_02, ANIM_Koopa_Happy)
     Wait(30)
     Call(SetNpcAnimation, NPC_Koopa_02, ANIM_Koopa_Idle)
     Call(SpeakToPlayer, NPC_Koopa_02, ANIM_Koopa_Happy, ANIM_Koopa_Idle, 0, MSG_CH1_005E)
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };
@@ -492,9 +492,9 @@ EvtScript N(EVS_AnimateDoor_KoloradoHouse) = {
 };
 
 EvtScript N(EVS_KoloradoWife_FetchFromHouse) = {
-    Call(EnableModel, MODEL_g98, TRUE)
-    Call(EnableGroup, MODEL_g109, TRUE)
-    Call(EnableGroup, MODEL_g47, TRUE)
+    Call(EnableModel, MODEL_g98, true)
+    Call(EnableGroup, MODEL_g109, true)
+    Call(EnableGroup, MODEL_g47, true)
     Set(LVarA, MODEL_g42)
     Set(LVar9, COLLIDER_o310)
     Exec(N(EVS_AnimateDoor_KoloradoHouse))
@@ -510,9 +510,9 @@ EvtScript N(EVS_KoloradoWife_FetchFromHouse) = {
     Call(NpcFacePlayer, NPC_KoloradoWife, 0)
     Wait(20)
     Call(SetNpcAnimation, NPC_KoloradoWife, ANIM_KoloradoWife_Idle)
-    Call(EnableModel, MODEL_g98, FALSE)
-    Call(EnableGroup, MODEL_g109, FALSE)
-    Call(EnableGroup, MODEL_g47, FALSE)
+    Call(EnableModel, MODEL_g98, false)
+    Call(EnableGroup, MODEL_g109, false)
+    Call(EnableGroup, MODEL_g47, false)
     Return
     End
 };
@@ -538,13 +538,13 @@ EvtScript N(EVS_KoloradoWife_FetchFromOffice) = {
 };
 
 EvtScript N(EVS_KoloradoWife_FetchKoopaLegends) = {
-    Call(SetNpcFlagBits, NPC_KoloradoWife, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_KoloradoWife, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
     Call(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0090)
     Call(SetNpcAnimation, NPC_KoloradoWife, ANIM_KoloradoWife_Walk)
     IfGe(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
         ExecWait(N(EVS_KoloradoWife_FetchFromHouse))
     Else
-        IfEq(GF_NOK11_Defeated_KentC, TRUE)
+        IfEq(GF_NOK11_Defeated_KentC, true)
             ExecWait(N(EVS_KoloradoWife_FetchFromHouse))
         Else
             ExecWait(N(EVS_KoloradoWife_FetchFromOffice))
@@ -553,7 +553,7 @@ EvtScript N(EVS_KoloradoWife_FetchKoopaLegends) = {
     Call(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0091)
     EVT_GIVE_KEY_REWARD(ITEM_KOOT_KOOPA_LEGENDS)
     Call(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0092)
-    Call(SetNpcFlagBits, NPC_KoloradoWife, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_KoloradoWife, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Return
     End
 };
@@ -561,8 +561,8 @@ EvtScript N(EVS_KoloradoWife_FetchKoopaLegends) = {
 EvtScript N(EVS_NpcInteract_KoloradoWife) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH1_KOOPER_JOINED_PARTY)
-            IfEq(GF_NOK02_KoloradoWife_FuzzyComplaint, FALSE)
-                Set(GF_NOK02_KoloradoWife_FuzzyComplaint, TRUE)
+            IfEq(GF_NOK02_KoloradoWife_FuzzyComplaint, false)
+                Set(GF_NOK02_KoloradoWife_FuzzyComplaint, true)
                 Call(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_0088)
                 Return
             EndIf
@@ -576,7 +576,7 @@ EvtScript N(EVS_NpcInteract_KoloradoWife) = {
         CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
             Call(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008D)
         CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
-            IfEq(GF_NOK11_Defeated_KentC, FALSE)
+            IfEq(GF_NOK11_Defeated_KentC, false)
                 Call(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008E)
             Else
                 Call(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008F)
@@ -585,8 +585,8 @@ EvtScript N(EVS_NpcInteract_KoloradoWife) = {
             Call(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_CH1_008F)
     EndSwitch
     IfEq(GB_KootFavor_Current, KOOT_FAVOR_CH1_2)
-        IfEq(GF_NOK02_Gift_KoopaLegends, FALSE)
-            Set(GF_NOK02_Gift_KoopaLegends, TRUE)
+        IfEq(GF_NOK02_Gift_KoopaLegends, false)
+            Set(GF_NOK02_Gift_KoopaLegends, true)
             ExecWait(N(EVS_MarioSalute))
             ExecWait(N(EVS_KoloradoWife_FetchKoopaLegends))
         EndIf
@@ -601,7 +601,7 @@ EvtScript N(EVS_NpcInit_KoloradoWife) = {
         Call(SetNpcPos, NPC_SELF, -338, 0, -85)
         Return
     EndIf
-    IfEq(GF_NOK11_Defeated_KentC, TRUE)
+    IfEq(GF_NOK11_Defeated_KentC, true)
         Call(SetNpcPos, NPC_SELF, -338, 0, -85)
         Return
     EndIf
@@ -644,7 +644,7 @@ NpcData N(NpcData_Crisis)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -109, 0, 191 },
@@ -687,7 +687,7 @@ NpcData N(NpcData_Crisis)[] = {
         .yaw = 0,
         .territory = {
             .patrol = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .numPoints  = 2,
                 .points  = {
@@ -778,7 +778,7 @@ NpcData N(NpcData_Normal)[] = {
         .yaw = 0,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { -124, 0, 250 },
@@ -801,7 +801,7 @@ NpcData N(NpcData_Normal)[] = {
         .yaw = 90,
         .territory = {
             .wander = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_RECT,
                 .centerPos  = { 200, 0, 117 },
@@ -915,7 +915,7 @@ NpcData N(NpcData_Shared)[] = {
         .yaw = 270,
         .territory = {
             .patrol = {
-                .isFlying = TRUE,
+                .isFlying = true,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .numPoints  = 2,
                 .points  = {

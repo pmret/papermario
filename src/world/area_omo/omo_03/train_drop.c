@@ -19,7 +19,7 @@ Vec3f N(SecondBouncePath)[] = {
 };
 
 EvtScript N(EVS_Scene_TrainDropped) = {
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(SetCamProperties, CAM_DEFAULT, Float(90.0), 82, 24, 12, 580, Float(16.5), Float(-8.5))
     Call(TranslateGroup, MODEL_po, -170, 400, -196)
     Set(MV_DroppedTrainAngle, 30)

@@ -74,8 +74,8 @@ EvtScript N(EVS_FlowersWither) = {
         MulF(LVar3, Float(0.965))
         Wait(2)
     EndLoop
-    Call(EnableModel, LVarA, FALSE)
-    Call(EnableModel, LVarB, FALSE)
+    Call(EnableModel, LVarA, false)
+    Call(EnableModel, LVarB, false)
     Return
     End
 };

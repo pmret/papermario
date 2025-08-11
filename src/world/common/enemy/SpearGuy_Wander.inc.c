@@ -29,7 +29,7 @@ EvtScript N(EVS_NpcDefeat_SpearGuy_Hitbox) = {
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             Call(OnPlayerFled, 1)
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -70,7 +70,7 @@ NpcSettings N(NpcSettings_SpearGuy_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_SpearGuy_Hitbox) = {
-    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, false)
     Call(SetSelfVar, 0, 4)
     Call(SetSelfVar, 1, 22)
     Call(SetSelfVar, 2, 40)

@@ -2,14 +2,14 @@
 #include "effects.h"
 
 EvtScript N(EVS_Scene_MonstarAppears) = {
-    Set(LFlag0, FALSE)
+    Set(LFlag0, false)
     Label(0)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Wait(1)
     IfLt(LVar0, 450)
         Goto(0)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(InterruptUsePartner)
     Call(SetMusic, 0, SONG_MONSTAR_THEME, 0, VOL_LEVEL_FULL)
     Call(ShowMessageAtScreenPos, MSG_CH7_00E0, 160, 40)
@@ -24,12 +24,12 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
     Add(LVar0, -25)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    IfEq(LFlag0, FALSE)
+    IfEq(LFlag0, false)
         Call(SetNpcPos, NPC_Monstar, 615, 85, 0)
         Wait(1)
-        Set(LFlag0, TRUE)
+        Set(LFlag0, true)
     EndIf
     Call(SpeakToPlayer, NPC_Monstar, ANIM_Monstar_Talk, ANIM_Monstar_Idle1, 256, 50, 100, MSG_CH7_00E1)
     Call(SetPlayerPos, 495, 80, 0)
@@ -50,7 +50,7 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
 #endif
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-9.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(5 * DT)
     Call(SpeakToPlayer, NPC_Monstar, ANIM_Monstar_Talk, ANIM_Monstar_Idle1, 256, 0, 100, MSG_CH7_00E2)
@@ -64,16 +64,16 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
         Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-5.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+        Call(PanToTarget, CAM_DEFAULT, 0, false)
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Call(SetNpcAnimation, NPC_SELF, ANIM_Monstar_Idle1)
         Exec(N(EVS_SetupMusic))
-        Call(DisablePlayerInput, FALSE)
+        Call(DisablePlayerInput, false)
         Label(4)
         Call(GetPlayerPos, LVar3, LVar4, LVar5)
         Wait(1)
         IfGt(LVar3, LVar0)
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(InterruptUsePartner)
             Call(SetMusic, 0, SONG_MONSTAR_THEME, 0, VOL_LEVEL_FULL)
             Goto(2)
@@ -82,7 +82,7 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
             Goto(4)
         EndIf
         Call(SetNpcPos, NPC_Monstar, NPC_DISPOSE_LOCATION)
-        Set(LFlag0, FALSE)
+        Set(LFlag0, false)
         Goto(0)
     Else
         Call(CloseMessage)
@@ -94,7 +94,7 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
         Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
         Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-12.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-        Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+        Call(PanToTarget, CAM_DEFAULT, 0, true)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Call(SpeakToPlayer, NPC_Monstar, ANIM_Monstar_RearUp, ANIM_Monstar_RearUp, 256, 0, 200, MSG_CH7_00E4)
         Call(SetNpcVar, NPC_Monstar, 0, 1)
@@ -169,7 +169,7 @@ EvtScript N(EVS_StarKid_RunAway) = {
             Goto(0)
         EndIf
     Call(SetNpcPos, LVarA, NPC_DISPOSE_LOCATION)
-    Call(EnableNpcShadow, LVar0, FALSE)
+    Call(EnableNpcShadow, LVar0, false)
     Return
     End
 };
@@ -204,7 +204,7 @@ EvtScript N(EVS_StarKidsFlee) = {
         EndIf
         Call(SetNpcPos, LVar0, LVar1, LVar2, LVar3)
 #if VERSION_JP
-        Call(EnableNpcShadow, LVar0, TRUE)
+        Call(EnableNpcShadow, LVar0, true)
 #endif
     EndLoop
     Call(PlaySoundAtNpc, NPC_Monstar, SOUND_MONSTAR_BREAKS_APART, SOUND_SPACE_DEFAULT)
@@ -250,7 +250,7 @@ EvtScript N(EVS_StarKidsFlee) = {
 EvtScript N(EVS_Scene_MonstarDefeated) = {
     Call(ClearDefeatedEnemies)
 #if !VERSION_JP
-    Call(SetNpcFlagBits, NPC_Monstar, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_Monstar, NPC_FLAG_GRAVITY, false)
     Call(SetNpcPos, NPC_Monstar, 615, 87, -4)
 #endif
     Call(SetNpcAnimation, NPC_SELF, ANIM_Monstar_Flail)
@@ -267,7 +267,7 @@ EvtScript N(EVS_Scene_MonstarDefeated) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(375.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-9.5))
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+    Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToPlayer, NPC_Monstar, ANIM_Monstar_Flail, ANIM_Monstar_Flail, 256, 170, 150, MSG_CH7_00E8)
     ExecWait(N(EVS_StarKidsFlee))
@@ -279,9 +279,9 @@ EvtScript N(EVS_Scene_MonstarDefeated) = {
     Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-5.0))
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
+    Call(PanToTarget, CAM_DEFAULT, 0, false)
     Exec(N(EVS_SetupMusic))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Return
     End
 };

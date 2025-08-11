@@ -8,7 +8,7 @@ s32 func_80262130(f32 inX, f32 inY, f32 inZ, f32 height, f32 radius) {
     f32 y = inY;
     f32 z = inZ;
     f32 hitDepth = height;
-    s32 ret = FALSE;
+    s32 ret = false;
     s32 combinedFlags = 0;
 
     if (npc_raycast_down_around(0, &x, &y, &z, &hitDepth, 90.0f, radius) && hitDepth <= height) {
@@ -22,7 +22,7 @@ s32 func_80262130(f32 inX, f32 inY, f32 inZ, f32 height, f32 radius) {
     }
 
     if (combinedFlags == 1) {
-        ret = TRUE;
+        ret = true;
     }
 
     return ret;

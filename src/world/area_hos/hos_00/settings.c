@@ -4,7 +4,7 @@ s32 N(map_init)(void) {
     if (gGameStatusPtr->entryID == hos_00_ENTRY_3) {
         sprintf(wMapBgName, "hos_bg");
     }
-    return FALSE;
+    return false;
 }
 
 MAP_RODATA_PAD(1, init);

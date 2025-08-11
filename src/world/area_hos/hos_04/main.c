@@ -25,18 +25,18 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_EnterMap) = {
-    Set(AF_HOS_B5, FALSE)
+    Set(AF_HOS_B5, false)
     Call(GetEntryID, LVar0)
     Switch(LVar0)
         CaseEq(hos_04_ENTRY_0)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitnw, COLLIDER_FLAGS_UPPER_MASK)
-            IfEq(GF_HOS04_Visited, FALSE)
+            IfEq(GF_HOS04_Visited, false)
 #if VERSION_JP
                 Call(SetPlayerPos, -630, 0, 0)
                 Call(SetNpcPos, NPC_PARTNER, -630, 0, 0)
 #endif
                 Thread
-                    Call(DisablePlayerInput, TRUE)
+                    Call(DisablePlayerInput, true)
 #if !VERSION_JP
                     Call(SetPlayerPos, -630, 0, 0)
                     Call(GetPartnerInUse, LVar0)
@@ -54,27 +54,27 @@ EvtScript N(EVS_EnterMap) = {
                     Call(SetCamPosA, CAM_DEFAULT, Float(-15.0), Float(-100.0))
                     Call(SetCamPosB, CAM_DEFAULT, Float(87.5), Float(50.0))
                     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-                    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                    Call(PanToTarget, CAM_DEFAULT, 0, true)
                     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                     Wait(10)
                     Call(SetCamPitch, CAM_DEFAULT, Float(4.0), Float(-7.5))
                     Call(SetCamSpeed, CAM_DEFAULT, Float(0.15))
-                    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                    Call(PanToTarget, CAM_DEFAULT, 0, true)
                     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
                     Wait(30)
                     Set(LVar0, Ref(N(EVS_BindExitTriggers)))
                     ExecWait(EnterWalk)
                     Wait(20)
-                    Set(GF_HOS04_Visited, TRUE)
+                    Set(GF_HOS04_Visited, true)
                     Call(GetPlayerPos, LVar0, LVar1, LVar2)
                     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, 0, LVar2)
                     Call(SetPanTarget, CAM_DEFAULT, LVar0, 0, LVar2)
                     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
-                    Call(PanToTarget, CAM_DEFAULT, 0, TRUE)
+                    Call(PanToTarget, CAM_DEFAULT, 0, true)
                     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-                    Call(PanToTarget, CAM_DEFAULT, 0, FALSE)
-                    Set(AF_HOS_B5, TRUE)
-                    Call(DisablePlayerInput, FALSE)
+                    Call(PanToTarget, CAM_DEFAULT, 0, false)
+                    Set(AF_HOS_B5, true)
+                    Call(DisablePlayerInput, false)
                 EndThread
             Else
                 Set(LVar0, Ref(N(EVS_BindExitTriggers)))
@@ -92,13 +92,13 @@ EvtScript N(EVS_EnterMap) = {
         CaseEq(hos_04_ENTRY_4)
             ExecWait(N(EVS_Intro_PostHeist))
         CaseEq(hos_04_ENTRY_5)
-            Call(EnableGroup, MODEL_g1, FALSE)
+            Call(EnableGroup, MODEL_g1, false)
             Exec(N(EVS_BetaStarship_Flight1))
         CaseEq(hos_04_ENTRY_6)
-            Call(EnableGroup, MODEL_g1, FALSE)
+            Call(EnableGroup, MODEL_g1, false)
             Exec(N(EVS_BetaStarship_Flight2))
         CaseEq(hos_04_ENTRY_7)
-            Call(EnableGroup, MODEL_g1, FALSE)
+            Call(EnableGroup, MODEL_g1, false)
             Exec(N(EVS_BetaStarship_Return))
     EndSwitch
     Return
@@ -110,7 +110,7 @@ EvtScript N(EVS_Main) = {
     Call(SetSpriteShading, SHADING_NONE)
     SetUP_CAMERA_ALT_NO_LEAD()
     Thread
-        Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+        Call(MakeNpcs, false, Ref(N(DefaultNPCs)))
     EndThread
     Exec(N(EVS_SetupFountains))
     ExecWait(N(EVS_SetupMusic))

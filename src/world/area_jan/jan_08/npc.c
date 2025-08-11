@@ -9,11 +9,11 @@
 #include "world/common/enemy/SpearGuy_Wander.inc.c"
 
 EvtScript N(EVS_YoshiKid_CryForHelp) = {
-    Set(AF_JAN_02, FALSE)
+    Set(AF_JAN_02, false)
     Loop(0)
         Call(PlaySoundAtNpc, NPC_YoshiKid, SOUND_YOSHI_KID_CRY, SOUND_SPACE_DEFAULT)
         Wait(20)
-        IfEq(AF_JAN_02, TRUE)
+        IfEq(AF_JAN_02, true)
             BreakLoop
         EndIf
     EndLoop
@@ -31,10 +31,10 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
             IfEq(LVar0, jan_08_ENTRY_0)
                 Wait(18)
             EndIf
-            Call(DisablePlayerInput, TRUE)
+            Call(DisablePlayerInput, true)
             Call(ShowMessageAtScreenPos, MSG_CH5_00AF, 160, 40)
             Exec(N(EVS_YoshiKid_CryForHelp))
-            Call(DisablePlayerInput, FALSE)
+            Call(DisablePlayerInput, false)
             Set(LVar0, 1)
         EndIf
     EndIf
@@ -48,11 +48,11 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
         Wait(1)
         Goto(10)
     EndIf
-    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerInput, true)
     Call(AdjustCam, CAM_DEFAULT, Float(4.0), -23, 350, Float(17.0), Float(-7.0))
     Call(NpcFacePlayer, NPC_SELF, 0)
     Call(GetCurrentPartnerID, LVar0)
-    Set(AF_JAN_02, TRUE)
+    Set(AF_JAN_02, true)
     Wait(15)
     IfEq(LVar0, PARTNER_SUSHIE)
         Call(SpeakToPlayer, NPC_SELF, ANIM_YoshiKid_Red_SadTalk, ANIM_YoshiKid_Red_SadIdle, 0, MSG_CH5_00B0)
@@ -61,7 +61,7 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
     EndIf
     Call(EndSpeech, NPC_SELF, ANIM_YoshiKid_Red_Talk, ANIM_YoshiKid_Red_Idle, 0)
     Thread
-        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
         Call(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Red_Run)
         Call(SetNpcSpeed, NPC_SELF, Float(5.0))
         Call(NpcMoveTo, NPC_SELF, -418, -60, 0)
@@ -69,7 +69,7 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
         Call(NpcMoveTo, NPC_SELF, -320, 115, 0)
         Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EndThread
-    Set(GF_JAN08_SavedYoshi, TRUE)
+    Set(GF_JAN08_SavedYoshi, true)
     Set(LVar0, 0)
     Add(LVar0, GF_JAN05_SavedYoshi)
     Add(LVar0, GF_JAN07_SavedYoshi)
@@ -87,7 +87,7 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
         Wait(40)
     EndIf
     Call(ResetCam, CAM_DEFAULT, Float(4.0))
-    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerInput, false)
     Call(RemoveNpc, NPC_SELF)
     Return
     End
@@ -95,9 +95,9 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
 
 EvtScript N(EVS_NpcInit_YoshiKid) = {
     IfEq(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
-        IfEq(GF_JAN08_SavedYoshi, FALSE)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-            Call(EnableNpcShadow, NPC_SELF, FALSE)
+        IfEq(GF_JAN08_SavedYoshi, false)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
+            Call(EnableNpcShadow, NPC_SELF, false)
             Call(SetNpcAnimation, NPC_SELF, ANIM_YoshiKid_Red_Cry)
             Call(SetNpcYaw, NPC_SELF, 90)
             Call(SetNpcPos, NPC_SELF, -391, 0, -164)
@@ -122,12 +122,12 @@ EvtScript N(EVS_NpcDefeat_MBush_Copy) = {
             Call(GetSelfVar, 11, LVar1)
             Call(GetSelfVar, 12, LVar2)
             Call(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 8)
-            Call(EnableNpcShadow, NPC_SELF, FALSE)
+            Call(EnableNpcShadow, NPC_SELF, false)
             Call(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim00)
-            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
             Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_MBush)))
         CaseEq(OUTCOME_ENEMY_FLED)
-            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, TRUE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, true)
             Call(RemoveNpc, NPC_SELF)
     EndSwitch
     Return
@@ -148,7 +148,7 @@ NpcData N(NpcData_SpearGuy)[] = {
         .yaw = 90,
         .territory = {
             .wander = {
-                .isFlying = FALSE,
+                .isFlying = false,
                 .moveSpeedOverride = NO_OVERRIDE_MOVEMENT_SPEED,
                 .wanderShape = SHAPE_CYLINDER,
                 .centerPos  = { 255, 0, -65 },
