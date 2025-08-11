@@ -6,7 +6,7 @@
 
 API_CALLABLE(N(IsJungleFuzzyAlive)) {
     if (get_enemy_safe(NPC_JungleFuzzy) == nullptr) {
-        script->varTable[0] = true;
+        script->varTable[0] = false;
     } else {
         script->varTable[0] = true;
     }
