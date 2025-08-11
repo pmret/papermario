@@ -238,7 +238,7 @@ void gfx_draw_frame(void) {
         switch (SoftResetState) {
             case 0:
             case 1:
-                _render_transition_stencil(OVERLAY_SCREEN_MARIO, SoftResetOverlayAlpha, NULL);
+                _render_transition_stencil(OVERLAY_SCREEN_MARIO, SoftResetOverlayAlpha, nullptr);
                 break;
         }
     }

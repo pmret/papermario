@@ -12,9 +12,9 @@ extern Gfx D_090024A8_337118[];
 extern Gfx D_09002550_3371C0[];
 extern Gfx D_09002578_3371E8[];
 
-Gfx* D_E0020C90[] = { D_090022E0_336F50, NULL, D_090023B0_337020, D_09002480_3370F0, D_09002550_3371C0 };
+Gfx* D_E0020C90[] = { D_090022E0_336F50, nullptr, D_090023B0_337020, D_09002480_3370F0, D_09002550_3371C0 };
 
-Gfx* D_E0020CA4[] = { D_09002238_336EA8, NULL, D_09002308_336F78, D_090023D8_337048, D_090024A8_337118 };
+Gfx* D_E0020CA4[] = { D_09002238_336EA8, nullptr, D_09002308_336F78, D_090023D8_337048, D_090024A8_337118 };
 
 s8 D_E0020CB8[40] = {
     0, 0, 1, 2, 3, 5, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
@@ -71,7 +71,7 @@ void func_E0020000(EmoteFXData* part, s32 arg1) {
         part->unk_04 = gPlayerStatus.pos.x + part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
         part->unk_08 = gPlayerStatus.pos.y + part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);
         part->unk_0C = gPlayerStatus.pos.z + part->unk_18 + sp18[1][2] * (unk_20 + 16.0f);
-    } else if (npc != NULL) {
+    } else if (npc != nullptr) {
         part->unk_04 = npc->pos.x + part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
         part->unk_08 = npc->pos.y + part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);
         part->unk_0C = npc->pos.z + part->unk_18 + sp18[1][2] * (unk_20 + 16.0f);
@@ -102,14 +102,14 @@ void emote_main(s32 arg0, Npc* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32
     bp.init = emote_init;
     bp.update = emote_update;
     bp.renderScene = emote_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_EMOTE;
 
     effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
     data = effect->data.emote = general_heap_malloc(numParts * sizeof(*data));
 
-    ASSERT(effect->data.emote != NULL);
+    ASSERT(effect->data.emote != nullptr);
     data->unk_3C = arg1;
     data->unk_00 = arg0;
     data->unk_30 = arg0;
@@ -175,7 +175,7 @@ void emote_update(EffectInstance* effect) {
         return;
     }
 
-    if (part->unk_3C != NULL) {
+    if (part->unk_3C != nullptr) {
         if (type == 1) {
             s32 i;
 
@@ -296,13 +296,13 @@ void emote_appendGfx(void* effect) {
             break;
     }
 
-    if (dlist != NULL) {
+    if (dlist != nullptr) {
         gSPDisplayList(gMainGfxPos++, dlist);
     }
 
     gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, uls * 4, ult * 4, (uls + w) * 4, (ult + h) * 4);
 
-    if (dlist2 != NULL) {
+    if (dlist2 != nullptr) {
         gSPDisplayList(gMainGfxPos++, dlist2);
     }
 

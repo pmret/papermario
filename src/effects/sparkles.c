@@ -80,13 +80,13 @@ void sparkles_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     bpPtr->update = sparkles_update;
     bpPtr->renderScene = sparkles_render;
     bpPtr->unk_00 = 0;
-    bpPtr->renderUI = NULL;
+    bpPtr->renderUI = nullptr;
     bpPtr->effectID = EFFECT_SPARKLES;
 
     effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
     part = effect->data.sparkles = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.sparkles != NULL);
+    ASSERT(effect->data.sparkles != nullptr);
 
     part->unk_04 = arg1;
     part->unk_08 = arg2;

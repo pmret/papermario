@@ -187,12 +187,12 @@ EvtScript N(EVS_MakeHiddenRoom) = {
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_HiddenRoom)),
         Ref(N(EVS_SetWallRot_HiddenRoom)),
-        NULL,
+        nullptr,
         Ref(N(EVS_RoomListener_HiddenRoom)),
         COLLIDER_deilit_hk,
         COLLIDER_deilit_hku,
         MODEL_o13,
-        NULL)
+        nullptr)
     Return
     End
 };
@@ -207,7 +207,7 @@ EvtScript N(EVS_MakeStoreroom) = {
         COLLIDER_deilit_sku,
         COLLIDER_deilit_sk,
         MODEL_o13,
-        NULL)
+        nullptr)
     Return
     End
 };
@@ -218,7 +218,7 @@ EvtScript N(EVS_SetupRooms) = {
         PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_Shop)),
         Ref(N(EVS_SetWallRot_Shop)),
-        NULL,
+        nullptr,
         Ref(N(EVS_RoomListener_Shop)),
         COLLIDER_deilit_m,
         COLLIDER_deilit_mu,
@@ -240,7 +240,7 @@ EvtScript N(EVS_SetupRooms) = {
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_Warehouse)),
         Ref(N(EVS_SetWallRot_Warehouse)),
-        NULL,
+        nullptr,
         Ref(N(EVS_RoomListener_Warehouse)),
         COLLIDER_deilit_h,
         COLLIDER_deilit_hu,

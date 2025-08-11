@@ -37,13 +37,13 @@ EffectInstance* moving_cloud_main(
     bp.update = moving_cloud_update;
     bp.renderScene = moving_cloud_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_MOVING_CLOUD;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.movingCloud = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.movingCloud != NULL);
+    ASSERT(effect->data.movingCloud != nullptr);
 
     data->unk_00 = arg0;
     data->unk_20 = 0;

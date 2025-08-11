@@ -7,9 +7,9 @@
 extern AnimScript Entity_SimpleSpring_AnimLaunch;
 
 API_CALLABLE(N(PlaySpringReboundAnimation)) {
-    Entity* entity = get_entity_by_index(evt_get_variable(NULL, MV_SpringEntityIndex));
+    Entity* entity = get_entity_by_index(evt_get_variable(nullptr, MV_SpringEntityIndex));
 
-    if (entity == NULL) {
+    if (entity == nullptr) {
         return ApiStatus_BLOCK;
     }
 

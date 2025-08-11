@@ -93,7 +93,7 @@ API_CALLABLE(N(ChompChainUpdate)) {
     s32 i;
 
     actor = get_actor(script->owner1.actorID);
-    if (actor == NULL) {
+    if (actor == nullptr) {
         return ApiStatus_BLOCK;
     }
 

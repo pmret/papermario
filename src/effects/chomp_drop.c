@@ -22,13 +22,13 @@ EffectInstance* chomp_drop_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
     bp.update = chomp_drop_update;
     bp.renderScene = chomp_drop_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_CHOMP_DROP;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.chompDrop = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.chompDrop != NULL);
+    ASSERT(effect->data.chompDrop != nullptr);
 
     data->unk_00 = arg0;
     data->unk_04 = arg1;

@@ -247,12 +247,12 @@ EvtScript N(EVS_SetupMayorRooms) = {
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_MayorOffice)),
         Ref(N(EVS_SetWallRot_MayorOffice)),
-        NULL,
+        nullptr,
         Ref(N(EVS_RoomListener_MayorOffice)),
         COLLIDER_ttsn,
         COLLIDER_o353,
         MODEL_o430,
-        NULL)
+        nullptr)
     Return
     End
 };
@@ -268,7 +268,7 @@ EvtScript N(EVS_SetupRooms) = {
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_MiddleHouse)),
         Ref(N(EVS_SetWallRot_MiddleHouse)),
-        NULL,
+        nullptr,
         Ref(N(EVS_RoomListener_MiddleHouse)),
         COLLIDER_ttf2,
         COLLIDER_o354,
@@ -280,7 +280,7 @@ EvtScript N(EVS_SetupRooms) = {
         PACK_ROOM_FLAGS(VIS_GROUP_1, ROOM_DOOR_LEFT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_UpperRightHouse)),
         Ref(N(EVS_SetWallRot_RightHouse)),
-        NULL,
+        nullptr,
         Ref(N(EVS_RoomListener_UpperRightHouse)),
         COLLIDER_ttm,
         COLLIDER_o355,
@@ -292,7 +292,7 @@ EvtScript N(EVS_SetupRooms) = {
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_LowerRightHouse)),
         Ref(N(EVS_SetWallRot_RightHouse)),
-        NULL,
+        nullptr,
         Ref(N(EVS_RoomListener_LowerRightHouse)),
         COLLIDER_o376,
         COLLIDER_o390,

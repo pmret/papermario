@@ -86,7 +86,7 @@ void state_step_battle(void) {
         clear_entity_models();
         clear_animator_list();
         clear_worker_list();
-        hud_element_set_aux_cache(NULL, 0);
+        hud_element_set_aux_cache(nullptr, 0);
         hud_element_clear_cache();
         reset_status_bar();
         clear_item_entity_data();
@@ -184,12 +184,12 @@ void state_step_end_battle(void) {
                 initialize_collision();
                 restore_map_collision_data();
 
-                if (mapConfig->dmaStart != NULL) {
+                if (mapConfig->dmaStart != nullptr) {
                     dma_copy(mapConfig->dmaStart, mapConfig->dmaEnd, mapConfig->dmaDest);
                 }
 
                 load_map_bg(mapConfig->bgName);
-                if (mapSettings->background != NULL) {
+                if (mapSettings->background != nullptr) {
                     set_background(mapSettings->background);
                 } else {
                     set_background_size(296, 200, 12, 20);

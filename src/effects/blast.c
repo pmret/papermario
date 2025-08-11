@@ -36,7 +36,7 @@ void blast_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     bp.update = blast_update;
     bp.renderScene = blast_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_BLAST;
 
     effect = create_effect_instance(bpPtr);
@@ -44,7 +44,7 @@ void blast_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
 
     part = effect->data.blast = general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data.blast != NULL);
+    ASSERT(effect->data.blast != nullptr);
 
     mem_clear(part, numParts * sizeof(*part));
 

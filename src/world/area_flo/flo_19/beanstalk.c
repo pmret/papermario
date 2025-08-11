@@ -14,14 +14,14 @@ API_CALLABLE(N(GetPlayerAngles)) {
 }
 
 API_CALLABLE(N(PlayerRideBeanstalk)) {
-    f32 temp = evt_get_variable(NULL, script->varTable[2]);
+    f32 temp = evt_get_variable(nullptr, script->varTable[2]);
     f32 dist = dist2D(0.0f, 0.0f, script->varTable[9], script->varTable[11]);
     f32 angle = atan2(0.0f, 0.0f, script->varTable[9], script->varTable[11]);
     f32 clamped = clamp_angle(angle - temp);
 
     temp = sin_deg(clamped);
     gPlayerStatus.pos.x = (dist * temp) + 0.0f;
-    gPlayerStatus.pos.y = evt_get_variable(NULL, script->varTable[10]) + evt_get_variable(NULL, script->varTable[3]);
+    gPlayerStatus.pos.y = evt_get_variable(nullptr, script->varTable[10]) + evt_get_variable(nullptr, script->varTable[3]);
     temp = cos_deg(clamped);
     gPlayerStatus.pos.z = 0.0f - (dist * temp);
 
@@ -30,14 +30,14 @@ API_CALLABLE(N(PlayerRideBeanstalk)) {
 
 API_CALLABLE(N(PartnerRideBeanstalk)) {
     Npc* npc = get_npc_by_index(NPC_Dummy_Partner);
-    f32 temp = evt_get_variable(NULL, script->varTable[2]);
+    f32 temp = evt_get_variable(nullptr, script->varTable[2]);
     f32 dist = dist2D(0.0f, 0.0f, script->varTable[12], script->varTable[14]);
     f32 angle = atan2(0.0f, 0.0f, script->varTable[12], script->varTable[14]);
     f32 clamped = clamp_angle(angle - temp);
 
     temp = sin_deg(clamped);
     npc->pos.x = (dist * temp) + 0.0f;
-    npc->pos.y = evt_get_variable(NULL, script->varTable[13]) + evt_get_variable(NULL, script->varTable[3]);
+    npc->pos.y = evt_get_variable(nullptr, script->varTable[13]) + evt_get_variable(nullptr, script->varTable[3]);
     temp = cos_deg(clamped);
     npc->pos.z = 0.0f - (dist * temp);
 

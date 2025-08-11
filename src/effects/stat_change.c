@@ -156,7 +156,7 @@ EffectInstance* stat_change_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32 t
     effect->numParts = numParts;
     part = effect->data.statChange = general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data.statChange != NULL);
+    ASSERT(effect->data.statChange != nullptr);
 
     part->unk_00 = arg0;
     part->pos.x = x;

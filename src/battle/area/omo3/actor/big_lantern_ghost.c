@@ -181,13 +181,13 @@ API_CALLABLE(N(update_effect)) {
     s32 opacity;
     s32 compListIdx;
 
-    if (actor == NULL) {
+    if (actor == nullptr) {
         set_screen_overlay_alpha(SCREEN_LAYER_BACK, 0.0f);
         return ApiStatus_BLOCK;
     }
 
     actorState = &actor->state;
-    if (effect != NULL) {
+    if (effect != nullptr) {
         effectData = effect->data.bulbGlow;
     }
 
@@ -272,7 +272,7 @@ API_CALLABLE(N(update_effect)) {
     actorPart->partOffset.x = partX - 5;
     actorPart->partOffset.y = partY + 5;
 
-    if (effect != NULL) {
+    if (effect != nullptr) {
         effectData->pos.x = actorState->varTable[N(VAR_LANTERN_X)];
         effectData->pos.y = actorState->varTable[N(VAR_LANTERN_Y)];
         effectData->pos.z = actorState->varTable[N(VAR_LANTERN_Z)] + 25;

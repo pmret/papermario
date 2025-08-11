@@ -34,7 +34,7 @@ API_CALLABLE(N(SetPassengerPos)) {
             break;
         case 1:
             partner = get_npc_safe(NPC_PARTNER);
-            if (partner != NULL) {
+            if (partner != nullptr) {
                 partner->pos.x = x;
                 partner->pos.y = y;
                 partner->pos.z = z;

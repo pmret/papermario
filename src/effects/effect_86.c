@@ -39,7 +39,7 @@ EffectInstance* effect_86_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
     bp.update = effect_86_update;
     bp.renderScene = effect_86_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_86;
 
     effect = create_effect_instance(&bp);
@@ -49,7 +49,7 @@ EffectInstance* effect_86_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
     effect->data.unk_86 = data;
     part = data;
 
-    ASSERT(data != NULL);
+    ASSERT(data != nullptr);
 
     part->unk_00 = arg0;
     part->unk_14 = 0;

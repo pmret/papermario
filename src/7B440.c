@@ -54,10 +54,10 @@ void reset_player_status(void) {
     f32* floatsTemp;
 
     PeachDisguiseNpcIndex = -1;
-    TweesterTouchingPartner = NULL;
-    PulseStoneNotificationCallback = NULL;
-    TalkNotificationCallback = NULL;
-    InteractNotificationCallback = NULL;
+    TweesterTouchingPartner = nullptr;
+    PulseStoneNotificationCallback = nullptr;
+    TalkNotificationCallback = nullptr;
+    InteractNotificationCallback = nullptr;
     D_8010C92C = 0;
     PrevPlayerDirection = 0;
     PlayerRunStateTime = 0;
@@ -115,7 +115,7 @@ void reset_player_status(void) {
 
     mapSettings = gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID].settings;
 
-    if (mapSettings->entryList != NULL) {
+    if (mapSettings->entryList != nullptr) {
         if (gGameStatusPtr->entryID < mapSettings->entryCount) {
             playerStatus->pos.x = (*mapSettings->entryList)[gGameStatusPtr->entryID].x;
             playerStatus->pos.y = (*mapSettings->entryList)[gGameStatusPtr->entryID].y;

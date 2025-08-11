@@ -62,13 +62,13 @@ EffectInstance* stop_watch_main(
     bp.update = stop_watch_update;
     bp.renderScene = stop_watch_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_STOP_WATCH;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.stopWatch = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.stopWatch != NULL);
+    ASSERT(effect->data.stopWatch != nullptr);
 
     data->unk_00 = arg0;
     data->unk_14 = 0;

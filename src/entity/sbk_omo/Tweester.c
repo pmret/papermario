@@ -266,7 +266,7 @@ void entity_Tweester_idle(Entity* entity) {
     if (partnerStatus->partnerActionState == PARTNER_ACTION_NONE || partnerStatus->actingPartner != PARTNER_BOW) {
         if (playerStatus->actionState == ACTION_STATE_USE_TWEESTER) {
             Npc* npc = npc_find_closest_simple(entity->pos.x, entity->pos.y, entity->pos.z, 50.0f);
-            if (npc != NULL && (npc->flags & NPC_FLAG_PARTNER)) {
+            if (npc != nullptr && (npc->flags & NPC_FLAG_PARTNER)) {
                 TweesterTouchingPartner = entity;
             }
         }
@@ -319,7 +319,7 @@ EntityBlueprint Entity_Tweester = {
     .modelAnimationNodes = 0,
     .fpInit = entity_Tweester_init,
     .updateEntityScript = Entity_Tweester_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dma = ENTITY_ROM(Tweester) },
     .entityType = ENTITY_TYPE_TWEESTER,
     .aabbSize = { 50, 70, 50 }

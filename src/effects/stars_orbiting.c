@@ -39,7 +39,7 @@ void stars_orbiting_main(
     effect = create_effect_instance(&bp);
     effect->numParts = numStars;
     part = effect->data.starsOrbiting = general_heap_malloc(numStars * sizeof(*part));
-    ASSERT(effect->data.starsOrbiting != NULL);
+    ASSERT(effect->data.starsOrbiting != nullptr);
 
     mem_clear(part, numStars * sizeof(*part));
 

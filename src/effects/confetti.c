@@ -105,13 +105,13 @@ EffectInstance* confetti_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
     bpPtr->update = confetti_update;
     bpPtr->renderScene = confetti_render;
     bpPtr->unk_00 = 0;
-    bpPtr->renderUI = NULL;
+    bpPtr->renderUI = nullptr;
     bpPtr->effectID = EFFECT_CONFETTI;
 
     effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
     data = effect->data.confetti = (ConfettiFXData*)general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.confetti != NULL);
+    ASSERT(effect->data.confetti != nullptr);
 
     data->unk_04 = arg1;
     data->unk_08 = arg2;

@@ -992,7 +992,7 @@ s32 evt_trigger_on_activate_exec_script(Trigger* trigger) {
     EvtScript* scriptStart;
     Evt* script;
 
-    if (trigger->runningScript == NULL) {
+    if (trigger->runningScript == nullptr) {
         scriptStart = trigger->onTriggerEvt;
         if (is_another_trigger_bound(trigger, scriptStart)) {
             return 0;
@@ -1008,7 +1008,7 @@ s32 evt_trigger_on_activate_exec_script(Trigger* trigger) {
     }
 
     if (!does_script_exist(trigger->runningScriptID)) {
-        trigger->runningScript = NULL;
+        trigger->runningScript = nullptr;
         return 0; // stop calling this function
     }
 
@@ -1034,7 +1034,7 @@ ApiStatus evt_handle_bind(Evt* script) {
 
     trigger = create_trigger(&bp);
     trigger->onTriggerEvt = (EvtScript*)triggerScript;
-    trigger->runningScript = NULL;
+    trigger->runningScript = nullptr;
     trigger->priority = script->priority;
     trigger->varTable[0] = evt_get_variable(script, script->varTable[0]);
     trigger->varTable[1] = evt_get_variable(script, script->varTable[1]);
@@ -1117,7 +1117,7 @@ ApiStatus evt_handle_does_script_exist(Evt* script) {
 }
 
 s32 evt_trigger_on_activate_lock(Trigger* trigger) {
-    if (trigger->runningScript == NULL) {
+    if (trigger->runningScript == nullptr) {
         Evt* newScript = start_script(trigger->onTriggerEvt, trigger->priority, EVT_FLAG_RUN_IMMEDIATELY);
         trigger->runningScript = newScript;
         trigger->runningScriptID = newScript->id;
@@ -1128,7 +1128,7 @@ s32 evt_trigger_on_activate_lock(Trigger* trigger) {
     }
 
     if (!does_script_exist(trigger->runningScriptID)) {
-        trigger->runningScript = NULL;
+        trigger->runningScript = nullptr;
         trigger->flags &= ~TRIGGER_ACTIVATED;
     }
 }
@@ -1154,7 +1154,7 @@ ApiStatus evt_handle_bind_lock(Evt* script) {
 
     trigger = create_trigger(&bp);
     trigger->onTriggerEvt = (EvtScript*)triggerScript;
-    trigger->runningScript = NULL;
+    trigger->runningScript = nullptr;
     trigger->priority = script->priority;
     trigger->varTable[0] = evt_get_variable(script, script->varTable[0]);
     trigger->varTable[1] = evt_get_variable(script, script->varTable[1]);

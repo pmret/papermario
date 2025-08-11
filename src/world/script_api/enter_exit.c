@@ -8,7 +8,7 @@ API_CALLABLE(CheckUsingRideablePartner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     script->varTable[10] = 0;
-    if (partner_get_enter_map_script() != NULL) {
+    if (partner_get_enter_map_script() != nullptr) {
         if (gPartnerStatus.partnerActionState == ACTION_STATE_IDLE) {
             script->varTable[10] = 0;
         } else {

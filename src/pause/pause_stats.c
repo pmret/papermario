@@ -227,7 +227,7 @@ MenuWindowBP gStatsMenuWindowBPs[] = {
         .height = 154,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_stats_draw_contents,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
@@ -247,7 +247,7 @@ MenuPanel gPausePanelStats = {
     .gridData = gPauseStatsGridData,
     .fpInit = &pause_stats_init,
     .fpHandleInput = &pause_stats_handle_input,
-    .fpUpdate = NULL,
+    .fpUpdate = nullptr,
     .fpCleanup = &pause_stats_cleanup
 };
 
@@ -340,7 +340,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     hammerLevel = gPlayerData.hammerLevel;
     level = gPlayerData.level;
     draw_box(4, &gPauseWS_10, baseX + 7, baseY + 12, 0, PAUSE_BOX_WIDTH + (level >= 10 ? 8 : 0), 17, 255, 0,
-        0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+        0.0f, 0.0f, 0.0f, 0.0f, 0.0f, nullptr, nullptr, nullptr, SCREEN_WIDTH, SCREEN_HEIGHT, nullptr);
 
     // draw level
 #if !VERSION_IQUE
@@ -795,14 +795,14 @@ void pause_stats_handle_input(MenuPanel* panel) {
             msgOffset = hammerMsgIdx;
             break;
         case PAUSE_MSG_TIP_SECRETS:
-            if (evt_get_variable(NULL, GF_Tutorial_GotStarPiece)) {
+            if (evt_get_variable(nullptr, GF_Tutorial_GotStarPiece)) {
                 msgOffset = 1;
             }
             break;
     }
 
     gPauseCurrentDescMsg = pause_get_menu_msg(gStatsMenuEntries[panel->selected].baseMsgID + msgOffset);
-    gPauseCurrentDescIconScript = NULL;
+    gPauseCurrentDescIconScript = nullptr;
 
     if (gPausePressedButtons & BUTTON_B) {
         sfx_play_sound(SOUND_MENU_BACK);

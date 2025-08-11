@@ -33,13 +33,13 @@ EffectInstance* red_impact_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
     bpPtr->init = red_impact_init;
     bpPtr->update = red_impact_update;
     bpPtr->renderScene = red_impact_render;
-    bpPtr->renderUI = NULL;
+    bpPtr->renderUI = nullptr;
     bpPtr->effectID = EFFECT_RED_IMPACT;
 
     effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
     part = effect->data.redImpact = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.redImpact != NULL);
+    ASSERT(effect->data.redImpact != nullptr);
 
     part->unk_2C = 0;
     part->unk_00 = arg0;

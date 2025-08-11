@@ -29,7 +29,7 @@ EffectInstance* breaking_junk_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32
     bp.init = breaking_junk_init;
     bp.update = breaking_junk_update;
     bp.renderScene = breaking_junk_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_BREAKING_JUNK;
 
     effect = create_effect_instance(bpPtr);
@@ -37,7 +37,7 @@ EffectInstance* breaking_junk_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32
 
     data = effect->data.breakingJunk = general_heap_malloc(numParts * sizeof(*data));
 
-    ASSERT(effect->data.breakingJunk != NULL);
+    ASSERT(effect->data.breakingJunk != nullptr);
 
     data->unk_00 = arg0;
     data->lifeTime = 0;

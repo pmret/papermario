@@ -31,13 +31,13 @@ EffectInstance* effect_65_main(
     bp.update = effect_65_update;
     bp.renderScene = effect_65_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_65;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.unk_65 = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.unk_65 != NULL);
+    ASSERT(effect->data.unk_65 != nullptr);
 
     data->variation = variation;
     data->lifeTime = 0;

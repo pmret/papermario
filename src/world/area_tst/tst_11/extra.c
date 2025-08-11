@@ -10,7 +10,7 @@ void N(test_reflection_worker_partner)(void);
 
 // identical to final version
 API_CALLABLE(N(EnableWallReflectionTest)) {
-    script->array[0] = (s32) create_worker_frontUI(NULL, N(test_reflection_worker_render_wall));
+    script->array[0] = (s32) create_worker_frontUI(nullptr, N(test_reflection_worker_render_wall));
     return ApiStatus_DONE2;
 }
 
@@ -57,11 +57,11 @@ void N(appendGfx_test_reflection_wall)(void* data) {
     guMtxCatF(main, translation, main);
     // draw sprite is handled differently in final version
     spr_update_player_sprite(PLAYER_SPRITE_AUX1, playerStatus->trueAnimation ^ SPRITE_ID_BACK_FACING, 1.0f);
-    spr_draw_player_sprite(PLAYER_SPRITE_AUX1, 0, 0, NULL, main);
+    spr_draw_player_sprite(PLAYER_SPRITE_AUX1, 0, 0, nullptr, main);
 }
 
 API_CALLABLE(N(EnableFloorReflectionTest)) {
-    script->array[0] = (s32) create_worker_frontUI(NULL, &N(test_reflection_worker_render_floor));
+    script->array[0] = (s32) create_worker_frontUI(nullptr, &N(test_reflection_worker_render_floor));
     return ApiStatus_DONE2;
 }
 
@@ -128,10 +128,10 @@ void N(appendGfx_test_reflection_floor)(void* data) {
 API_CALLABLE(N(PartnerReflectTest)) {
     Npc* partner;
 
-    script->array[1] = create_worker_scene(N(test_reflection_worker_partner), NULL);
+    script->array[1] = create_worker_scene(N(test_reflection_worker_partner), nullptr);
     partner = get_npc_safe(NPC_PARTNER);
 
-    if (partner == NULL) {
+    if (partner == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -142,7 +142,7 @@ API_CALLABLE(N(PartnerReflectTest)) {
 void N(test_reflection_worker_partner)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
-    if (partner != NULL) {
+    if (partner != nullptr) {
         partner->flags |= (NPC_FLAG_REFLECT_WALL | NPC_FLAG_REFLECT_FLOOR);
     }
 }

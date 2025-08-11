@@ -47,13 +47,13 @@ EffectInstance* lightning_main(
     bp.update = lightning_update;
     bp.renderScene = lightning_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_LIGHTNING;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.lightning = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.lightning != NULL);
+    ASSERT(effect->data.lightning != nullptr);
 
     data->unk_00 = arg0;
     data->unk_18 = 0;
@@ -68,8 +68,8 @@ EffectInstance* lightning_main(
     data->unk_04 = arg1;
     data->unk_08 = arg2;
     data->unk_0C = arg3;
-    data->unk_48 = NULL;
-    data->unk_44 = NULL;
+    data->unk_48 = nullptr;
+    data->unk_44 = nullptr;
     data->unk_1C = data->unk_20 = 0.0f;
     data->unk_2C = 48.0f;
     data->unk_30 = 32.0f;
@@ -135,22 +135,22 @@ void lightning_update(EffectInstance* effect) {
     if (data->unk_14 < 0) {
         remove_effect(effect);
 
-        if (data->unk_48 != NULL) {
+        if (data->unk_48 != nullptr) {
             remove_effect(data->unk_48);
-            data->unk_48 = NULL;
+            data->unk_48 = nullptr;
         }
 
-        if (data->unk_44 != NULL) {
+        if (data->unk_44 != nullptr) {
             remove_effect(data->unk_44);
-            data->unk_44 = NULL;
+            data->unk_44 = nullptr;
         }
     } else {
         s32 unk_14 = data->unk_14;
         s32 unk_18 = data->unk_18;
 
-        if (data->unk_44 != NULL && unk_18 >= 18) {
+        if (data->unk_44 != nullptr && unk_18 >= 18) {
             remove_effect(data->unk_44);
-            data->unk_44 = NULL;
+            data->unk_44 = nullptr;
         }
 
         if (unk_00 < 3 || unk_18 < 7) {

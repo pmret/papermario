@@ -20,7 +20,7 @@ typedef struct StoneChompAmbushIsk13 {
 } StoneChompAmbushIsk13; // size = 0x54
 
 void N(func_80241610_990DF0)(void) {
-    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(NULL, MV_AmbushPtr);
+    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(nullptr, MV_AmbushPtr);
     Camera* cam = &gCameras[gCurrentCameraID];
     ImgFXTexture ifxImg;
     SpriteRasterInfo spriteRaster;
@@ -112,7 +112,7 @@ API_CALLABLE(N(func_80241BA8_991388)) {
     ambush->color.a = 0.0f;
     ambush->imgfxIdx = 0;
 
-    ambush->workerID = create_worker_frontUI(NULL, N(func_80241610_990DF0));
+    ambush->workerID = create_worker_frontUI(nullptr, N(func_80241610_990DF0));
     evt_set_variable(script, MV_AmbushPtr, (s32) ambush);
     return ApiStatus_DONE2;
 }

@@ -187,7 +187,7 @@ void entity_SuperBlockContent_idle(Entity* entity) {
 
     entity_SuperBlockContent_attach_to_parent(entity);
     if (data->isHidden) {
-        entity->renderSetupFunc = NULL;
+        entity->renderSetupFunc = nullptr;
     }
 
     entity->rot.y = clamp_angle(entity->rot.y + 3.0);
@@ -258,7 +258,7 @@ EntityBlueprint Entity_SuperBlockContent = {
     .modelAnimationNodes = 0,
     .fpInit = entity_init_SuperBlockContent,
     .updateEntityScript = Entity_SuperBlockContent_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dma = ENTITY_ROM(SuperBlockContent) },
     .entityType = ENTITY_TYPE_SUPER_BLOCK_HIT_EFFECT,
     .aabbSize = { 18, 6, 18 }
@@ -284,7 +284,7 @@ EntityBlueprint Entity_UltraBlockContent = {
     .modelAnimationNodes = 0,
     .fpInit = entity_init_UltraBlockContent,
     .updateEntityScript = Entity_UltraBlockContent_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dma = ENTITY_ROM(UltraBlockContent) },
     .entityType = ENTITY_TYPE_ULTRA_BLOCK_HIT_EFFECT,
     .aabbSize = { 18, 6, 18 }

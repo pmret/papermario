@@ -263,7 +263,7 @@ EvtScript N(EVS_Init) = {
 };
 
 EvtScript N(EVS_HandlePhase) = {
-    Call(BindHandlePhase, ACTOR_SELF, NULL)
+    Call(BindHandlePhase, ACTOR_SELF, nullptr)
     Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
     Return
     End

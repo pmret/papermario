@@ -158,24 +158,24 @@ EntityScript Entity_SaveBlock_Script = {
     es_Call(entity_SaveBlock_pause_game)
     es_Call(entity_block_hit_init_scale)
     es_SetCallback(entity_block_hit_animate_scale, 6)
-    es_SetCallback(NULL, 2)
+    es_SetCallback(nullptr, 2)
     es_Call(entity_SaveBlock_show_tutorial_message)
     es_SetCallback(entity_SaveBlock_wait_for_close_tutorial, 0)
-    es_SetCallback(NULL, 14)
+    es_SetCallback(nullptr, 14)
     es_Call(entity_SaveBlock_show_choice_message)
     es_SetCallback(entity_SaveBlock_wait_for_close_choice, 0)
     es_Call(entity_SaveBlock_save_data)
     es_Call(entity_SaveBlock_show_result_message)
     es_SetCallback(entity_SaveBlock_wait_for_close_result, 0)
     es_Call(entity_SaveBlock_resume_game)
-    es_SetCallback(NULL, 12)
+    es_SetCallback(nullptr, 12)
     es_Restart
     es_End
 };
 
 EntityScript Entity_SaveBlock_ScriptResume = {
     es_Call(entity_SaveBlock_resume_game)
-    es_SetCallback(NULL, 2)
+    es_SetCallback(nullptr, 2)
     es_Jump(Entity_SaveBlock_Script)
     es_End
 };

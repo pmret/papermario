@@ -98,7 +98,7 @@ void landing_dust_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
     bpPtr->update = landing_dust_update;
     bpPtr->renderScene = landing_dust_render;
     bpPtr->unk_00 = 0;
-    bpPtr->renderUI = NULL;
+    bpPtr->renderUI = nullptr;
     bpPtr->effectID = EFFECT_LANDING_DUST;
 
     effect = create_effect_instance(bpPtr);
@@ -106,7 +106,7 @@ void landing_dust_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
 
     data = general_heap_malloc(numParts * sizeof(*data));
     effect->data.landingDust = data;
-    ASSERT(effect->data.landingDust != NULL);
+    ASSERT(effect->data.landingDust != nullptr);
 
     mem_clear(data, numParts * sizeof(*data));
 

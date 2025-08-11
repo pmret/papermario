@@ -106,7 +106,7 @@ API_CALLABLE(N(SetupDemoScene)) {
     switch (N(DemoInitState)) {
         case 0:
             rideScriptSrc = partner_get_enter_map_script();
-            if (rideScriptSrc != NULL) {
+            if (rideScriptSrc != nullptr) {
                 Evt* newScript;
 
                 N(DemoInitState)++;

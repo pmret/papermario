@@ -29,35 +29,35 @@ API_CALLABLE(N(GetKeepAwayCarrierYaw)) {
     switch (script->varTable[0]) {
         case KEEP_AWAY_BOO_0:
             script->varTable[0] = npc1->yaw;
-            evt_set_variable(NULL, MV_ThrowTargetNpc, NPC_KeepAwayBoo1);
+            evt_set_variable(nullptr, MV_ThrowTargetNpc, NPC_KeepAwayBoo1);
             break;
         case KEEP_AWAY_BOO_1:
             script->varTable[0] = npc2->yaw;
-            evt_set_variable(NULL, MV_ThrowTargetNpc, NPC_KeepAwayBoo2);
+            evt_set_variable(nullptr, MV_ThrowTargetNpc, NPC_KeepAwayBoo2);
             break;
         case KEEP_AWAY_BOO_2:
             script->varTable[0] = npc3->yaw;
-            evt_set_variable(NULL, MV_ThrowTargetNpc, NPC_KeepAwayBoo3);
+            evt_set_variable(nullptr, MV_ThrowTargetNpc, NPC_KeepAwayBoo3);
             break;
         case KEEP_AWAY_BOO_3:
             script->varTable[0] = npc4->yaw;
-            evt_set_variable(NULL, MV_ThrowTargetNpc, NPC_KeepAwayBoo4);
+            evt_set_variable(nullptr, MV_ThrowTargetNpc, NPC_KeepAwayBoo4);
             break;
         case KEEP_AWAY_BOO_4:
             script->varTable[0] = npc5->yaw;
-            evt_set_variable(NULL, MV_ThrowTargetNpc, NPC_KeepAwayBoo5);
+            evt_set_variable(nullptr, MV_ThrowTargetNpc, NPC_KeepAwayBoo5);
             break;
         case KEEP_AWAY_BOO_5:
             script->varTable[0] = npc6->yaw;
-            evt_set_variable(NULL, MV_ThrowTargetNpc, NPC_KeepAwayBoo6);
+            evt_set_variable(nullptr, MV_ThrowTargetNpc, NPC_KeepAwayBoo6);
             break;
         case KEEP_AWAY_BOO_6:
             script->varTable[0] = npc7->yaw;
-            evt_set_variable(NULL, MV_ThrowTargetNpc, NPC_KeepAwayBoo7);
+            evt_set_variable(nullptr, MV_ThrowTargetNpc, NPC_KeepAwayBoo7);
             break;
         case KEEP_AWAY_BOO_7:
             script->varTable[0] = npc8->yaw;
-            evt_set_variable(NULL, MV_ThrowTargetNpc, NPC_KeepAwayBoo8);
+            evt_set_variable(nullptr, MV_ThrowTargetNpc, NPC_KeepAwayBoo8);
             break;
     }
     script->varTable[0] += script->varTable[1];
@@ -80,7 +80,7 @@ API_CALLABLE(N(GetItemJumpDest)) {
 }
 
 API_CALLABLE(N(GetKeepAwayCarrierPos)) {
-    Npc* npc = get_npc_unsafe(evt_get_variable(NULL, MV_ThrowTargetNpc));
+    Npc* npc = get_npc_unsafe(evt_get_variable(nullptr, MV_ThrowTargetNpc));
 
     script->varTable[0] = npc->pos.x;
     script->varTable[1] = npc->pos.y;
