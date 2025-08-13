@@ -189,7 +189,7 @@ API_CALLABLE(N(MakeLightningBolts)) {
     f32 scale;
     s32 i;
 
-    if (actor == NULL) {
+    if (actor == nullptr) {
         return ApiStatus_DONE2;
     }
 

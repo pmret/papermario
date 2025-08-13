@@ -62,7 +62,7 @@ void entity_Chest_adjust_camera(Entity* entity) {
     EvtScript* script;
 
     areaID = gGameStatusPtr->areaID;
-    script = NULL;
+    script = nullptr;
     if (areaID == AREA_ISK) {
         script = &Entity_Chest_AdjustCam_ISK;
     } else if (areaID == AREA_TIK) {
@@ -70,7 +70,7 @@ void entity_Chest_adjust_camera(Entity* entity) {
     } else if (areaID == AREA_KZN) {
         script = &Entity_Chest_AdjustCam_KZN;
     }
-    if (script != NULL) {
+    if (script != nullptr) {
         start_script(script, EVT_PRIORITY_A, EVT_FLAG_RUN_IMMEDIATELY);
     }
 }
@@ -80,7 +80,7 @@ void entity_Chest_reset_camera(Entity* entity) {
     EvtScript* script;
 
     areaID = gGameStatusPtr->areaID;
-    script = NULL;
+    script = nullptr;
     if (areaID == AREA_ISK) {
         script = &Entity_Chest_ResetCam_ISK;
     } else {
@@ -255,7 +255,7 @@ void entity_GiantChest_hide_effect(Entity* entity) {
     ChestData* chest = entity->dataBuf.chest;
     EffectInstance* effect = chest->gotItemEffect;
 
-    if (effect != NULL) {
+    if (effect != nullptr) {
         effect->data.gotItemOutline->timeLeft = 10;
     }
 }
@@ -462,13 +462,13 @@ EntityScript Entity_GiantChest_Script = {
     es_Call(entity_GiantChest_hide_effect)
     es_Call(entity_Chest_reset_camera)
     es_SetCallback(entity_Chest_close, 0)
-    es_SetCallback(NULL, 0)
+    es_SetCallback(nullptr, 0)
     es_Restart
     es_End
 };
 
 EntityScript Entity_Chest_ScriptOpened = {
-    es_SetCallback(NULL, 0)
+    es_SetCallback(nullptr, 0)
     es_End
 };
 EntityScript Entity_Chest_Script = {
@@ -480,7 +480,7 @@ EntityScript Entity_Chest_Script = {
     es_SetCallback(entity_Chest_open, 0)
     es_Call(entity_Chest_enable_player_input)
     es_SetCallback(entity_Chest_close, 0)
-    es_SetCallback(NULL, 0)
+    es_SetCallback(nullptr, 0)
     es_Restart
     es_End
 };
@@ -493,7 +493,7 @@ EntityBlueprint Entity_GiantChest = {
     .modelAnimationNodes = 0,
     .fpInit = entity_GiantChest_init,
     .updateEntityScript = Entity_GiantChest_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dma = ENTITY_ROM(Chest) },
     .entityType = ENTITY_TYPE_CHEST,
     .aabbSize = { 50, 45, 46 }
@@ -505,7 +505,7 @@ EntityBlueprint Entity_Chest = {
     .modelAnimationNodes = 0,
     .fpInit = entity_Chest_init,
     .updateEntityScript = Entity_Chest_Script,
-    .fpHandleCollision = NULL,
+    .fpHandleCollision = nullptr,
     { .dma = ENTITY_ROM(Chest) },
     .entityType = ENTITY_TYPE_CHEST,
     .aabbSize = { 28, 26, 23 }

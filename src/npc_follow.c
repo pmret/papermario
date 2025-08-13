@@ -41,7 +41,7 @@ void npc_follow_init(Npc* npc, s32 targetNpcID, FollowAnims* anims, f32 walkSpee
     s32 i;
 
     npc->blur.followData = followData = heap_malloc(sizeof(*followData));
-    ASSERT(followData != NULL);
+    ASSERT(followData != nullptr);
 
     for (i = 0; i < ARRAY_COUNT(followData->moveHistory); i++) {
         followData->moveHistory[i].pos.x = playerStatus->pos.x;

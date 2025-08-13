@@ -30,14 +30,14 @@ EffectInstance* quizmo_stage_main(s32 arg0, f32 posX, f32 posY, f32 posZ) {
     effectBp.update = quizmo_stage_update;
     effectBp.renderScene = quizmo_stage_render;
     effectBp.unk_00 = 0;
-    effectBp.renderUI = NULL;
+    effectBp.renderUI = nullptr;
     effectBp.effectID = EFFECT_QUIZMO_STAGE;
 
     effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
 
     data = effect->data.quizmoStage = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(data != NULL);
+    ASSERT(data != nullptr);
 
     data->vanishTimer = 100;
     data->microphoneRaiseAmt = 255;

@@ -23,14 +23,14 @@ EffectInstance* gather_magic_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     bp.init = gather_magic_init;
     bp.update = gather_magic_update;
     bp.renderScene = gather_magic_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_GATHER_MAGIC;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = general_heap_malloc(numParts * sizeof(*data));
     effect->data.gatherMagic = data;
-    ASSERT(effect->data.gatherMagic != NULL);
+    ASSERT(effect->data.gatherMagic != nullptr);
 
     data->unk_04 = arg0;
     data->unk_1C = 0;

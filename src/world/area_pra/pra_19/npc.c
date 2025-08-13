@@ -84,7 +84,7 @@ void N(appendGfx_example_player)(void* data);
 void N(worker_draw_example_player)(void);
 
 API_CALLABLE(N(CreateExamplePlayerRenderer)) {
-    script->array[0] = create_worker_scene(NULL, N(worker_draw_example_player));
+    script->array[0] = create_worker_scene(nullptr, N(worker_draw_example_player));
     return ApiStatus_DONE2;
 }
 

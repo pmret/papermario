@@ -53,13 +53,13 @@ UnkStruct D_E010E79C[] = {
     { D_0900C1B0_3F8010, 104, 20, 128, 10 },
     { D_0900C1F8_3F8058, 104, 30, 128, 10 },
 #endif
-    {              NULL,   0,  0,   0,  0 }
+    {              nullptr,   0,  0,   0,  0 }
 };
 
 UnkStruct D_E010E7D8[] = {
     { D_0900C458_3F82B8, -16, -6, 144, 20 },
     { D_0900C540_3F83A0, -16, 14, 144, 20 },
-    {              NULL,   0,  0,   0,  0 }
+    {              nullptr,   0,  0,   0,  0 }
 };
 
 UnkStruct D_E010E7FC[] = {
@@ -72,7 +72,7 @@ UnkStruct D_E010E7FC[] = {
     { D_0900C1B0_3F8010, 0, 14, 128, 10 },
     { D_0900C1F8_3F8058, 0, 24, 128, 10 },
 #endif
-    {              NULL, 0,  0,   0,  0 }
+    {              nullptr, 0,  0,   0,  0 }
 };
 
 UnkStruct D_E010E838[] = {
@@ -88,7 +88,7 @@ UnkStruct D_E010E838[] = {
     { D_0900C328_3F8188,   0, 20, 104, 20 },
     { D_0900C370_3F81D0, 232,  0,  16, 40 },
 #endif
-    {              NULL,   0,  0,   0,  0 }
+    {              nullptr,   0,  0,   0,  0 }
 };
 
 #if VERSION_PAL
@@ -97,14 +97,14 @@ UnkStruct D_E010E838_b[] = {
     { D_0900C168_3F7FC8, 0, 10, 128, 10 },
     { D_0900C1B0_3F8010, 0, 20, 128, 10 },
     { D_0900C1F8_3F8058, 0, 30, 128, 10 },
-    {              NULL, 0,  0,   0,  0 }
+    {              nullptr, 0,  0,   0,  0 }
 };
 
 UnkStruct D_E010E838_c[] = {
         { D_0900C240_3F80A0, 128,  0, 104, 20 },
         { D_0900C328_3F8188, 128, 20, 104, 20 },
         { D_0900C370_3F81D0, 232,  0,  16, 40 },
-        {              NULL,   0,  0,   0,  0 }
+        {              nullptr,   0,  0,   0,  0 }
 };
 #endif
 
@@ -118,21 +118,21 @@ UnkStruct D_E010E838_c[] = {
 
 UnkStruct D_E010E868[] = {
     { D_0900BE40_3F7CA0, X_VAR, Y_VAR, 64, 64 },
-    {              NULL,     0,     0,  0,  0 },
+    {              nullptr,     0,     0,  0,  0 },
     { D_0900BE88_3F7CE8, X_VAR, Y_VAR, 64, 64 },
-    {              NULL,     0,     0,  0,  0 },
+    {              nullptr,     0,     0,  0,  0 },
     { D_0900BED0_3F7D30, X_VAR, Y_VAR, 64, 64 },
-    {              NULL,     0,     0,  0,  0 },
+    {              nullptr,     0,     0,  0,  0 },
     { D_0900BF18_3F7D78, X_VAR, Y_VAR, 64, 64 },
-    {              NULL,     0,     0,  0,  0 },
+    {              nullptr,     0,     0,  0,  0 },
     { D_0900BF60_3F7DC0, X_VAR, Y_VAR, 64, 64 },
-    {              NULL,     0,     0,  0,  0 },
+    {              nullptr,     0,     0,  0,  0 },
     { D_0900BFA8_3F7E08, X_VAR, Y_VAR, 64, 64 },
-    {              NULL,     0,     0,  0,  0 },
+    {              nullptr,     0,     0,  0,  0 },
     { D_0900BFF0_3F7E50, X_VAR, Y_VAR, 64, 64 },
-    {              NULL,     0,     0,  0,  0 },
+    {              nullptr,     0,     0,  0,  0 },
     { D_0900C038_3F7E98, X_VAR, Y_VAR, 64, 64 },
-    {              NULL,     0,     0,  0,  0 }
+    {              nullptr,     0,     0,  0,  0 }
 };
 
 void chapter_change_init(EffectInstance* effect);
@@ -155,8 +155,8 @@ void func_E010E000(ChapterChangeFXData* data, s32 arg1, UnkStruct* arg2) {
         posY = data->endOfPos.y;
     }
 
-    if (arg2 != NULL) {
-        for (it = arg2; it->displayList != NULL; it++) {
+    if (arg2 != nullptr) {
+        for (it = arg2; it->displayList != nullptr; it++) {
             gSPDisplayList(gMainGfxPos++, it->displayList);
 
             temp = it->x - 384;
@@ -183,13 +183,13 @@ EffectInstance* chapter_change_main(s32 arg0, f32 posX, f32 posY, f32 arg3, f32 
     bp.update = chapter_change_update;
     bp.renderScene = chapter_change_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_CHAPTER_CHANGE;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.chapterChange = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.chapterChange != NULL);
+    ASSERT(effect->data.chapterChange != nullptr);
 
     data->unk_00 = arg0;
     data->lifetime = 0;
@@ -284,7 +284,7 @@ void chapter_change_appendGfx(void* effect) {
             break;
         case 9:
             ptr0 = D_E010E7D8;
-            ptr1 = NULL;
+            ptr1 = nullptr;
             break;
         case 0:
         case 10:
@@ -307,8 +307,8 @@ void chapter_change_appendGfx(void* effect) {
             ptr1 = D_E010E838;
             break;
         default:
-            ptr1 = NULL;
-            ptr0 = NULL;
+            ptr1 = nullptr;
+            ptr0 = nullptr;
             break;
     }
 

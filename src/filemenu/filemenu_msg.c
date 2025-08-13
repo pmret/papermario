@@ -60,7 +60,7 @@ Gfx filemenu_dl_draw_char_init[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx* filemenu_savedGfxPos = NULL;
+Gfx* filemenu_savedGfxPos = nullptr;
 s32 filemenu_charset = 0;
 s32 filemenu_charset_raster_id = 0;
 s32 filemenu_char_color = -1;
@@ -380,7 +380,7 @@ u8 filemenu_msg_34[] = { 0x0E, 0xFD };
 #endif
 
 u8 *gFileMenuMessages[] = {
-    [FILE_MESSAGE_NONE]                        NULL,
+    [FILE_MESSAGE_NONE]                        nullptr,
     [FILE_MESSAGE_SELECT_FILE_TO_START]        filemenu_msg_01,
     [FILE_MESSAGE_SELECT_FILE_TO_DELETE]       filemenu_msg_02,
 #if !VERSION_PAL
@@ -450,7 +450,7 @@ u8 *gFileMenuMessages[] = {
 
 #if VERSION_PAL
 u8* gFileMenuMessages_de[] = {
-    [FILE_MESSAGE_NONE]                        NULL,
+    [FILE_MESSAGE_NONE]                        nullptr,
     [FILE_MESSAGE_SELECT_FILE_TO_START]        filemenu_msg_01_de,
     [FILE_MESSAGE_SELECT_FILE_TO_DELETE]       filemenu_msg_02_de,
     [FILE_MESSAGE_COPY_WHICH_FILE]             filemenu_msg_04_de,
@@ -493,7 +493,7 @@ u8* gFileMenuMessages_de[] = {
 };
 
 u8* gFileMenuMessages_fr[] = {
-    [FILE_MESSAGE_NONE]                        NULL,
+    [FILE_MESSAGE_NONE]                        nullptr,
     [FILE_MESSAGE_SELECT_FILE_TO_START]        filemenu_msg_01_fr,
     [FILE_MESSAGE_SELECT_FILE_TO_DELETE]       filemenu_msg_02_fr,
     [FILE_MESSAGE_COPY_WHICH_FILE]             filemenu_msg_04_fr,
@@ -536,7 +536,7 @@ u8* gFileMenuMessages_fr[] = {
 };
 
 u8* gFileMenuMessages_es[] = {
-    [FILE_MESSAGE_NONE]                        NULL,
+    [FILE_MESSAGE_NONE]                        nullptr,
     [FILE_MESSAGE_SELECT_FILE_TO_START]        filemenu_msg_01_es,
     [FILE_MESSAGE_SELECT_FILE_TO_DELETE]       filemenu_msg_02_es,
     [FILE_MESSAGE_COPY_WHICH_FILE]             filemenu_msg_04_es,

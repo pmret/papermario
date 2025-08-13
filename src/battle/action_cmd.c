@@ -53,7 +53,7 @@ Difficulty1D actionCmdTableTidalWave = { 130, 120, 110, 100, 90, 80, 70, 60 };
     action_cmd_ ## name ## _ROM_START, action_cmd_ ## name ## _ROM_END, action_cmd_ ## name ## _VRAM
 
 void* actionCommandDmaTable[] = {
-    NULL, NULL, NULL,
+    nullptr, nullptr, nullptr,
     AC_TBL_ENTRY(jump),
     AC_TBL_ENTRY(hammer),
     AC_TBL_ENTRY(flee),

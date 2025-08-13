@@ -71,13 +71,13 @@ EffectInstance* tubba_heart_attack_main(
     bp.update = tubba_heart_attack_update;
     bp.renderScene = tubba_heart_attack_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_TUBBA_HEART_ATTACK;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.tubbaHeartAttack = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.tubbaHeartAttack != NULL);
+    ASSERT(effect->data.tubbaHeartAttack != nullptr);
 
     data->type = type;
     data->lifetime = 0;

@@ -19,13 +19,13 @@ EffectInstance* merlin_house_stars_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) 
     bp.update = merlin_house_stars_update;
     bp.renderScene = merlin_house_stars_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_MERLIN_HOUSE_STARS;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.merlinHouseStars = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.merlinHouseStars != NULL);
+    ASSERT(effect->data.merlinHouseStars != nullptr);
 
     data->unk_04 = 100;
     data->unk_00 = arg0;

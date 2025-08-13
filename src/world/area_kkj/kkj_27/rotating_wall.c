@@ -131,7 +131,7 @@ EvtScript N(EVS_SetupRotatingWall) = {
     Call(SetModelCustomGfx, MODEL_o182, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
     Call(SetModelCustomGfx, MODEL_o184, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
     Call(SetModelCustomGfx, MODEL_o186, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
-    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(setup_gfx_spill_light)), NULL)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(setup_gfx_spill_light)), nullptr)
     IfEq(GB_StoryProgress, STORY_CH1_BEGAN_PEACH_MISSION)
         BindTrigger(Ref(N(EVS_UseRotatingWall_FirstTime)), TRIGGER_WALL_PRESS_A, COLLIDER_o193, 1, 0)
     Else

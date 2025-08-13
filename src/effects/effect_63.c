@@ -9,7 +9,7 @@ Gfx* D_E00C6C90[] = {
 };
 
 Gfx* D_E00C6C9C[] = {
-    D_09001B70_3CF250, D_09001B70_3CF250, D_09001B70_3CF250, NULL, NULL
+    D_09001B70_3CF250, D_09001B70_3CF250, D_09001B70_3CF250, nullptr, nullptr
 };
 
 void effect_63_init(EffectInstance* effect);
@@ -47,13 +47,13 @@ EffectInstance* effect_63_main(
     bpPtr->update = effect_63_update;
     bpPtr->renderScene = effect_63_render;
     bpPtr->unk_00 = 0;
-    bpPtr->renderUI = NULL;
+    bpPtr->renderUI = nullptr;
     bpPtr->effectID = EFFECT_63;
 
     effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
     part = effect->data.unk_63 = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.unk_63 != NULL);
+    ASSERT(effect->data.unk_63 != nullptr);
 
     if (arg9 <= 0) {
         part->unk_20 = 1000;

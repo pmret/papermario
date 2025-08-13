@@ -55,14 +55,14 @@ void flower_splash_main(f32 posX, f32 posY, f32 posZ, f32 angle) {
     bp.update = flower_splash_update;
     bp.renderScene = flower_splash_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_FLOWER_SPLASH;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
 
     part = effect->data.flowerSplash = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.flowerSplash != NULL);
+    ASSERT(effect->data.flowerSplash != nullptr);
 
     mem_clear(part, numParts * sizeof(*part));
 

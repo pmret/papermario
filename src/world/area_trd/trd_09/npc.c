@@ -15,7 +15,7 @@ API_CALLABLE(N(GetBulletBillVar)) {
     }
 
     npc = get_enemy(npcID);
-    if (npc != NULL) {
+    if (npc != nullptr) {
         evt_set_variable(script, outVar, npc->varTable[varIdx]);
     } else {
         evt_set_variable(script, outVar, -1);

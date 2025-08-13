@@ -9,9 +9,9 @@ API_CALLABLE(N(SwingCameraPitchUpward)) {
         script->functionTemp[0] = 40;
     }
     script->functionTemp[0]--;
-    if (camera->curSettings != NULL) {
+    if (camera->curSettings != nullptr) {
         camera->curSettings->viewPitch -= 1.0 - ((f32) (40 - script->functionTemp[0]) * 0.01);
-    } else if (camera->prevSettings != NULL) {
+    } else if (camera->prevSettings != nullptr) {
         camera->prevSettings->viewPitch -= 1.0 - ((f32) (40 - script->functionTemp[0]) * 0.01);
     }
 

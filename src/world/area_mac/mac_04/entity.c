@@ -9,7 +9,7 @@ MAP_RODATA_PAD(2,unk);
 
 API_CALLABLE(N(CreateShrinkingWorker)) {
     gPlayerStatus.animFlags |= PA_FLAG_INVISIBLE;
-    evt_set_variable(script, MV_DrawShinkingPlayerWorker, create_worker_scene(NULL, N(render_shrunk_player)));
+    evt_set_variable(script, MV_DrawShinkingPlayerWorker, create_worker_scene(nullptr, N(render_shrunk_player)));
 
     return ApiStatus_DONE2;
 }
@@ -40,7 +40,7 @@ void N(render_shrunk_player)(void) {
 
 void N(appendGfx_shrunk_player)(void* data) {
     PlayerStatus* playerStatus = data;
-    f32 shrinkScale = evt_get_float_variable(NULL, MV_PlayerShrinkScale);
+    f32 shrinkScale = evt_get_float_variable(nullptr, MV_PlayerShrinkScale);
     Matrix4f transformMtx;
     Matrix4f tempMtx;
 
@@ -50,7 +50,7 @@ void N(appendGfx_shrunk_player)(void* data) {
     guTranslateF(tempMtx, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z);
     guMtxCatF(transformMtx, tempMtx, transformMtx);
     playerStatus->animNotifyValue = spr_update_player_sprite(PLAYER_SPRITE_MAIN, playerStatus->trueAnimation, 1.0f);
-    spr_draw_player_sprite(PLAYER_SPRITE_MAIN, 0, 0, NULL, transformMtx);
+    spr_draw_player_sprite(PLAYER_SPRITE_MAIN, 0, 0, nullptr, transformMtx);
 }
 
 EvtScript N(EVS_ShrinkPlayer) = {

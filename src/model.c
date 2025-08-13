@@ -1395,20 +1395,20 @@ void appendGfx_model(void* data) {
         textureHandle = &TextureHandles[model->textureID + model->textureVariation];
         textureHeader = &textureHandle->header;
 
-        if (textureHandle->gfx != NULL) {
+        if (textureHandle->gfx != nullptr) {
             extraTileType = textureHandle->header.extraTiles;
         } else {
-            textureHeader = NULL;
+            textureHeader = nullptr;
         }
     } else {
-        textureHandle = NULL;
-        textureHeader = NULL;
+        textureHandle = nullptr;
+        textureHeader = nullptr;
     }
 
     renderMode = model->renderMode;
     tintCombineType = 0;
 
-    if (textureHeader != NULL) {
+    if (textureHeader != nullptr) {
         switch (extraTileType) {
             case EXTRA_TILE_NONE:
                 renderClass = RENDER_CLASS_1CYC;
@@ -1426,7 +1426,7 @@ void appendGfx_model(void* data) {
         renderClass = RENDER_CLASS_1CYC;
     }
 
-    if (textureHeader != NULL || renderMode <= RENDER_MODES_LAST_OPAQUE) {
+    if (textureHeader != nullptr || renderMode <= RENDER_MODES_LAST_OPAQUE) {
         if (gFogSettings->enabled && !(flags & MODEL_FLAG_IGNORE_FOG)) {
             renderClass = RENDER_CLASS_FOG;
             tintCombineType = TINT_COMBINE_FOG;
@@ -1458,9 +1458,9 @@ void appendGfx_model(void* data) {
 
     gDPPipeSync((*gfxPos)++);
 
-    if (model->groupData != NULL) {
+    if (model->groupData != nullptr) {
         Lightsn* lights = model->groupData->lightingGroup;
-        if (model->groupData->lightingGroup != NULL) {
+        if (model->groupData->lightingGroup != nullptr) {
             switch (model->groupData->numLights) {
                 case 0:
                     gSPSetLights0((*gfxPos)++, lights[0]);
@@ -1490,12 +1490,12 @@ void appendGfx_model(void* data) {
         }
     }
 
-    if (textureHeader != NULL) {
+    if (textureHeader != nullptr) {
         switch (extraTileType) {
             case EXTRA_TILE_AUX_INDEPENDENT:
             case EXTRA_TILE_4:
                 prop = get_model_property(modelNode, MODEL_PROP_KEY_SPECIAL);
-                if (prop != NULL) {
+                if (prop != nullptr) {
                     s32 shift = prop->data.s;
                     u16 offsetS = prop->dataType;
                     s32 offsetT = prop->dataType;
@@ -1532,7 +1532,7 @@ void appendGfx_model(void* data) {
         // (B) 0x08 -> 2, 0
         // (C) 0x0D -> 3, 1
         // (D) 0x10 -> 4, 0
-        if (textureHeader != NULL) {
+        if (textureHeader != nullptr) {
             u32 auxCombineType = textureHeader->auxCombineType;
             if (auxCombineType >= 3) {
                 // combine modes 3, 4, ... are directly appended to the end of the table and subtype is ignored
@@ -1947,13 +1947,13 @@ void appendGfx_model(void* data) {
     // custom gfx 'pre'
     if (flags & MODEL_FLAG_USES_CUSTOM_GFX) {
         customGfxIndex = (model->customGfxIndex & 0xF) * 2;
-        if ((*gCurrentCustomModelGfxPtr)[customGfxIndex] != NULL) {
+        if ((*gCurrentCustomModelGfxPtr)[customGfxIndex] != nullptr) {
             gSPDisplayList((*gfxPos)++, (*gCurrentCustomModelGfxPtr)[customGfxIndex]);
         }
     }
 
     // add tex panner gfx
-    if (textureHeader != NULL) {
+    if (textureHeader != nullptr) {
         if (flags & MODEL_FLAG_HAS_TEX_PANNER) {
             s32 panMainU = texPannerMainU[model->texPannerID] >> 8;
             s32 panMainV = texPannerMainV[model->texPannerID] >> 8;
@@ -1994,7 +1994,7 @@ void appendGfx_model(void* data) {
     // custom gfx 'post'
     if (flags & MODEL_FLAG_USES_CUSTOM_GFX) {
         customGfxIndex++;
-        if ((*gCurrentCustomModelGfxPtr)[customGfxIndex] != NULL) {
+        if ((*gCurrentCustomModelGfxPtr)[customGfxIndex] != nullptr) {
             gSPDisplayList((*gfxPos)++, (*gCurrentCustomModelGfxPtr)[customGfxIndex]);
         }
     }
@@ -2014,7 +2014,7 @@ void load_texture_impl(u32 romOffset, TextureHandle* handle, TextureHeader* head
     if (mainPalSize != 0) {
         handle->palette = (PAL_PTR) (TextureHeapPos + mainSize);
     } else {
-        handle->palette = NULL;
+        handle->palette = nullptr;
     }
     dma_copy((u8*) romOffset, (u8*) (romOffset + mainSize + mainPalSize), TextureHeapPos);
     romOffset += mainSize + mainPalSize;
@@ -2026,13 +2026,13 @@ void load_texture_impl(u32 romOffset, TextureHandle* handle, TextureHeader* head
         if (auxPalSize != 0) {
             handle->auxPalette = (PAL_PTR) (TextureHeapPos + auxSize);
         } else {
-            handle->auxPalette = NULL;
+            handle->auxPalette = nullptr;
         }
         dma_copy((u8*) romOffset, (u8*) (romOffset + auxSize + auxPalSize), TextureHeapPos);
         TextureHeapPos += auxSize + auxPalSize;
     } else {
-        handle->auxPalette = NULL;
-        handle->auxRaster = NULL;
+        handle->auxPalette = nullptr;
+        handle->auxRaster = nullptr;
     }
 
     // copy header data and create a display list for the texture
@@ -2056,7 +2056,7 @@ void load_texture_by_name(ModelNodeProperty* propertyName, s32 romOffset, s32 si
     TextureHandle* textureHandle;
     s32 mainSize;
 
-    if (textureName == NULL) {
+    if (textureName == nullptr) {
         (*gCurrentModelTreeNodeInfo)[TreeIterPos].textureID = 0;
         return;
     }
@@ -2162,7 +2162,7 @@ void load_texture_by_name(ModelNodeProperty* propertyName, s32 romOffset, s32 si
     textureHandle = &TextureHandles[(*gCurrentModelTreeNodeInfo)[TreeIterPos].textureID];
     romOffset += sizeof(*header);
 
-    if (textureHandle->gfx == NULL) {
+    if (textureHandle->gfx == nullptr) {
         load_texture_impl(romOffset, textureHandle, header, rasterSize, paletteSize, auxRasterSize, auxPaletteSize);
         load_texture_variants(romOffset + rasterSize + paletteSize + auxRasterSize + auxPaletteSize, (*gCurrentModelTreeNodeInfo)[TreeIterPos].textureID, startOffset, size);
     }
@@ -2288,13 +2288,13 @@ ModelNodeProperty* get_model_property(ModelNode* node, ModelPropertyKeys key) {
             return propertyList;
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 // load textures used by models, starting from current model
 void load_next_model_textures(ModelNode* model, s32 romOffset, s32 texSize) {
     if (model->type != SHAPE_TYPE_MODEL) {
-        if (model->groupData != NULL) {
+        if (model->groupData != nullptr) {
             s32 numChildren = model->groupData->numChildren;
 
             if (numChildren != 0) {
@@ -2307,7 +2307,7 @@ void load_next_model_textures(ModelNode* model, s32 romOffset, s32 texSize) {
         }
     } else {
         ModelNodeProperty* propTextureName = get_model_property(model, MODEL_PROP_KEY_TEXTURE_NAME);
-        if (propTextureName != NULL) {
+        if (propTextureName != nullptr) {
             load_texture_by_name(propTextureName, romOffset, texSize);
         }
     }
@@ -2325,15 +2325,15 @@ void mdl_load_all_textures(ModelNode* rootModel, s32 romOffset, s32 size) {
 
     TextureHeapPos = TextureHeapBase + baseOffset;
 
-    if (rootModel != NULL && romOffset != 0 && size != 0) {
+    if (rootModel != nullptr && romOffset != 0 && size != 0) {
         s32 i;
 
         for (i = 0; i < ARRAY_COUNT(TextureHandles); i++) {
-            TextureHandles[i].gfx = NULL;
+            TextureHandles[i].gfx = nullptr;
         }
 
         TreeIterPos = 0;
-        if (rootModel != NULL) {
+        if (rootModel != nullptr) {
             load_next_model_textures(rootModel, romOffset, size);
         }
     }
@@ -2342,7 +2342,7 @@ void mdl_load_all_textures(ModelNode* rootModel, s32 romOffset, s32 size) {
 s32 mdl_get_child_count(ModelNode* model) {
     s32 ret = 0;
 
-    if (model->type != SHAPE_TYPE_MODEL && model->groupData != NULL) {
+    if (model->type != SHAPE_TYPE_MODEL && model->groupData != nullptr) {
         s32 numChildren = model->groupData->numChildren;
 
         if (numChildren != 0) {
@@ -2399,7 +2399,7 @@ void clear_model_data(void) {
         (*gCurrentCustomModelGfxBuildersPtr)[i] = 0;
     }
 
-    *gCurrentModelTreeRoot = NULL;
+    *gCurrentModelTreeRoot = nullptr;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModelTreeNodeInfo); i++) {
         (*gCurrentModelTreeNodeInfo)[i].modelIndex = -1;
@@ -2454,7 +2454,7 @@ void mdl_calculate_model_sizes(void) {
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         Model* model = (*gCurrentModels)[i];
 
-        if (model != NULL) {
+        if (model != nullptr) {
             ModelBoundingBox* bb = (ModelBoundingBox*)get_model_property(model->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
 
             bb->halfSizeX = (bb->maxX - bb->minX) * 0.5;
@@ -2475,12 +2475,12 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
 
     prop = get_model_property(node, MODEL_PROP_KEY_SPECIAL);
     modelIdx = 0;
-    if (prop != NULL) {
+    if (prop != nullptr) {
         s32 replaceWithFlame = (prop->data.s >> 4) & 0xF;
 
         if (replaceWithFlame != 0) {
             prop = get_model_property(node, MODEL_PROP_KEY_BOUNDING_BOX);
-            if (prop != NULL) {
+            if (prop != nullptr) {
                 ModelBoundingBox* bb = (ModelBoundingBox*) prop;
                 EffectInstance* effect;
 
@@ -2496,7 +2496,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
     }
 
     for (modelIdx = 0; modelIdx < ARRAY_COUNT(*gCurrentModels); modelIdx++) {
-        if ((*gCurrentModels)[modelIdx] == NULL) {
+        if ((*gCurrentModels)[modelIdx] == nullptr) {
             break;
         }
     }
@@ -2510,7 +2510,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
     node = model->modelNode;
 
     prop = get_model_property(node, MODEL_PROP_KEY_SPECIAL);
-    if (prop != NULL) {
+    if (prop != nullptr) {
         model->texPannerID = prop->data.s & 0xF;
     } else {
         model->texPannerID = TEX_PANNER_0;
@@ -2522,13 +2522,13 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
     } else {
         prop = get_model_property(node, MODEL_PROP_KEY_GROUP_INFO);
 
-        if (prop != NULL) {
+        if (prop != nullptr) {
             // GROUP_INFO properties always come in pairs, with the second giving the render mode
             prop++;
         }
     }
 
-    if (prop != NULL) {
+    if (prop != nullptr) {
         model->renderMode = prop->data.s;
     } else {
         model->renderMode = RENDER_MODE_SURFACE_OPA;
@@ -2542,15 +2542,15 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
         *model->bakedMtx = *bp->mtx;
         model->savedMtx = *model->bakedMtx;
     } else {
-        model->bakedMtx = NULL;
+        model->bakedMtx = nullptr;
         guMtxIdent(&model->savedMtx);
         model->flags |= MODEL_FLAG_IGNORE_MATRIX;
     }
 
     guMtxIdentF(model->userTransformMtx);
-    model->finalMtx = NULL;
+    model->finalMtx = nullptr;
     prop = get_model_property(node, MODEL_PROP_KEY_BOUNDING_BOX);
-    if (prop != NULL) {
+    if (prop != nullptr) {
         ModelBoundingBox* bb = (ModelBoundingBox*) prop;
 
         x = (bb->minX + bb->maxX) * 0.5f;
@@ -2560,7 +2560,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
         x = y = z = 0.0f;
     }
 
-    if (model->bakedMtx != NULL) {
+    if (model->bakedMtx != nullptr) {
         guMtxXFML(model->bakedMtx, x, y, z, &x, &y, &z);
     }
 
@@ -2576,7 +2576,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
     bb->halfSizeY = y * 0.5;
     bb->halfSizeZ = z * 0.5;
 
-    if (model->bakedMtx == NULL && x < 100.0f && y < 100.0f && z < 100.0f) {
+    if (model->bakedMtx == nullptr && x < 100.0f && y < 100.0f && z < 100.0f) {
         model->flags |= MODEL_FLAG_DO_BOUNDS_CULLING;
     }
     (*gCurrentModelTreeNodeInfo)[TreeIterPos].modelIndex = modelIdx;
@@ -2584,13 +2584,13 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
 
 // Mysterious no-op
 void iterate_models(void) {
-    Model* last = NULL;
+    Model* last = nullptr;
     Model* mdl;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         mdl = (*gCurrentModels)[i];
-        if (mdl != NULL) {
+        if (mdl != nullptr) {
             last = mdl;
         }
     }
@@ -2610,7 +2610,7 @@ void mdl_update_transform_matrices(void) {
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         model = (*gCurrentModels)[i];
-        if (model != NULL && (model->flags != 0) && !(model->flags & MODEL_FLAG_INACTIVE)) {
+        if (model != nullptr && (model->flags != 0) && !(model->flags & MODEL_FLAG_INACTIVE)) {
             if (!(model->flags & MODEL_FLAG_MATRIX_DIRTY)) {
                 if (model->matrixFreshness != 0) {
                     // matrix was recalculated recently and stored on the matrix stack
@@ -2635,7 +2635,7 @@ void mdl_update_transform_matrices(void) {
 
                 // write matrix to the matrix stack
                 curMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
-                if (model->bakedMtx == NULL || (model->flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER)) {
+                if (model->bakedMtx == nullptr || (model->flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER)) {
                     guMtxF2L(model->userTransformMtx, curMtx);
                 } else {
                     guMtxL2F(tempModelMtx, model->bakedMtx);
@@ -2665,7 +2665,7 @@ void mdl_update_transform_matrices(void) {
 
     for (i = 0; i < ARRAY_COUNT((*gCurrentTransformGroups)); i++) {
         mtg = (*gCurrentTransformGroups)[i];
-        if (mtg != NULL && mtg->flags != 0 && !(mtg->flags & TRANSFORM_GROUP_FLAG_INACTIVE)) {
+        if (mtg != nullptr && mtg->flags != 0 && !(mtg->flags & TRANSFORM_GROUP_FLAG_INACTIVE)) {
             if (!(mtg->flags & TRANSFORM_GROUP_FLAG_MATRIX_DIRTY)) {
                 if (mtg->matrixFreshness != 0) {
                     // matrix was recalculated recently and stored on the matrix stack
@@ -2690,7 +2690,7 @@ void mdl_update_transform_matrices(void) {
 
                 // write matrix to the matrix stack
                 curMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
-                if (mtg->bakedMtx == NULL) {
+                if (mtg->bakedMtx == nullptr) {
                     guMtxF2L(mtg->userTransformMtx, curMtx);
                 } else {
                     guMtxL2F(tempGroupMtx, mtg->bakedMtx);
@@ -2776,7 +2776,7 @@ void render_models(void) {
     // enqueue all visible models not in transform groups
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         model = (*gCurrentModels)[i];
-        if (model == NULL) {
+        if (model == nullptr) {
             continue;
         }
         if (model->flags == 0) {
@@ -2896,7 +2896,7 @@ void render_models(void) {
     // only the center of the group is used for depth sorting
     for (i = 0; i < ARRAY_COUNT(*gCurrentTransformGroups); i++) {
         transformGroup = (*gCurrentTransformGroups)[i];
-        if (transformGroup == NULL) {
+        if (transformGroup == nullptr) {
             continue;
         }
 
@@ -2953,7 +2953,7 @@ void func_80117D00(Model* model) {
     ModelNode* modelNode = mdl->modelNode;
 
     if (model->modelNode->type != SHAPE_TYPE_MODEL) {
-        if (modelNode->groupData != NULL) {
+        if (modelNode->groupData != nullptr) {
             s32 numChildren = modelNode->groupData->numChildren;
 
             if (numChildren != 0) {
@@ -2972,10 +2972,10 @@ void func_80117D00(Model* model) {
                     if (newModel.modelNode->type == SHAPE_TYPE_MODEL) {
                         prop = get_model_property(newModel.modelNode, MODEL_PROP_KEY_RENDER_MODE);
                     } else {
-                        prop = NULL;
+                        prop = nullptr;
                     }
 
-                    if (prop != NULL) {
+                    if (prop != nullptr) {
                         newModel.renderMode = prop->data.s;
                     } else {
                         newModel.renderMode = 0;
@@ -2997,11 +2997,11 @@ void render_transform_group_node(ModelNode* node) {
     Gfx** gfx = &gMainGfxPos;
     Model* model;
 
-    if (node != NULL) {
+    if (node != nullptr) {
         if (node->type == SHAPE_TYPE_GROUP) {
             ModelNodeProperty* groupInfoProp = get_model_property(node, MODEL_PROP_KEY_GROUP_INFO);
 
-            if (groupInfoProp != NULL && groupInfoProp->data.s != 0) {
+            if (groupInfoProp != nullptr && groupInfoProp->data.s != 0) {
                 model = get_model_from_list_index(mtg_IterIdx);
                 if (!(model->flags & MODEL_FLAG_HIDDEN)) {
                     appendGfx_model_group(model);
@@ -3011,11 +3011,11 @@ void render_transform_group_node(ModelNode* node) {
             }
         }
         if (node->type != SHAPE_TYPE_MODEL) {
-            if (node->groupData != NULL) {
+            if (node->groupData != nullptr) {
                 s32 numChildren;
                 s32 i;
 
-                if (node->groupData->transformMatrix != NULL) {
+                if (node->groupData->transformMatrix != nullptr) {
                     gSPMatrix((*gfx)++, node->groupData->transformMatrix, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
                 }
 
@@ -3026,7 +3026,7 @@ void render_transform_group_node(ModelNode* node) {
                     }
                 }
 
-                if (node->groupData->transformMatrix != NULL) {
+                if (node->groupData->transformMatrix != nullptr) {
                     gSPPopMatrix((*gfx)++, G_MTX_MODELVIEW);
                 }
             }
@@ -3113,23 +3113,23 @@ void make_texture_gfx(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_P
     auxBitDepth = header->auxBitDepth;
 
     if (extraTileType == EXTRA_TILE_AUX_INDEPENDENT) {
-        if (palette != NULL) {
+        if (palette != nullptr) {
             auxPaletteIndex = 1;
         } else {
             auxPaletteIndex = 0;
         }
     }
 
-    if (palette != NULL || auxPalette != NULL) {
+    if (palette != nullptr || auxPalette != nullptr) {
         lutMode = G_TT_RGBA16;
-        if (palette != NULL) {
+        if (palette != nullptr) {
             if (mainBitDepth == G_IM_SIZ_4b) {
                 gDPLoadTLUT_pal16((*gfxPos)++, 0, palette);
             } else if (mainBitDepth == G_IM_SIZ_8b) {
                 gDPLoadTLUT_pal256((*gfxPos)++, palette);
             }
         }
-        if (auxPalette != NULL) {
+        if (auxPalette != nullptr) {
             if (auxBitDepth == G_IM_SIZ_4b) {
                 gDPLoadTLUT_pal16((*gfxPos)++, auxPaletteIndex, auxPalette);
             } else if (auxBitDepth == G_IM_SIZ_8b) {
@@ -3338,8 +3338,8 @@ void load_data_for_models(ModelNode* rootModel, s32 texturesOffset, s32 size) {
     *gCurrentModelTreeRoot = rootModel;
     TreeIterPos = 0;
 
-    if (rootModel != NULL) {
-        load_model_transforms(rootModel, NULL, mtx, 0);
+    if (rootModel != nullptr) {
+        load_model_transforms(rootModel, nullptr, mtx, 0);
     }
 }
 
@@ -3352,10 +3352,10 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTran
     ModelNode* modelTemp;
     s32 i;
 
-    if (model->groupData != NULL && model->groupData->numChildren != 0) {
+    if (model->groupData != nullptr && model->groupData->numChildren != 0) {
         s32 groupType;
 
-        if (model->groupData->transformMatrix != NULL) {
+        if (model->groupData->transformMatrix != nullptr) {
             Matrix4f tempMtx;
 
             guMtxL2F(tempMtx, model->groupData->transformMatrix);
@@ -3363,7 +3363,7 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTran
         }
 
         prop = get_model_property(model, MODEL_PROP_KEY_GROUP_INFO);
-        if (prop == NULL) {
+        if (prop == nullptr) {
             groupType = GROUP_TYPE_0;
         } else {
             groupType = prop->data.s;
@@ -3372,7 +3372,7 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTran
         if (model->type != SHAPE_TYPE_GROUP || groupType == GROUP_TYPE_0) {
             for (i = 0; i < model->groupData->numChildren; i++) {
                 load_model_transforms(model->groupData->childList[i], model,
-                                      model->groupData->transformMatrix != NULL ? combinedMtx : mdlTransformMtx,
+                                      model->groupData->transformMatrix != nullptr ? combinedMtx : mdlTransformMtx,
                                       treeDepth + 1);
             }
 
@@ -3418,7 +3418,7 @@ s32 get_model_list_index_from_tree_index(s32 treeIndex) {
     for (i = 0; i < MAX_MODELS; i++) {
         Model* model = get_model_from_list_index(i);
 
-        if (model != NULL && model->modelID == treeIndex) {
+        if (model != nullptr && model->modelID == treeIndex) {
             return i;
         }
     }
@@ -3432,7 +3432,7 @@ s32 get_transform_group_index(s32 modelID) {
     for (i = 0; i < MAX_MODEL_TRANSFORM_GROUPS; i++) {
         group = get_transform_group(i);
 
-        if (group != NULL && group->groupModelID == modelID) {
+        if (group != nullptr && group->groupModelID == modelID) {
             return i;
         }
     }
@@ -3451,7 +3451,7 @@ void get_model_center_and_size(u16 modelID, f32* centerX, f32* centerY, f32* cen
 
     bb = (ModelBoundingBox*)get_model_property(node, MODEL_PROP_KEY_BOUNDING_BOX);
 
-    if (bb != NULL) {
+    if (bb != nullptr) {
         *sizeX = bb->halfSizeX;
         *sizeY = bb->halfSizeY;
         *sizeZ = bb->halfSizeZ;
@@ -3481,14 +3481,14 @@ void func_8011B1D8(ModelNode* node) {
     // stop searching if node is a group with GROUP_TYPE_0
     if (node->type == SHAPE_TYPE_GROUP) {
         prop = get_model_property(node, MODEL_PROP_KEY_GROUP_INFO);
-        if (prop != NULL && prop->data.s != GROUP_TYPE_0) {
+        if (prop != nullptr && prop->data.s != GROUP_TYPE_0) {
             TreeIterPos += mdl_get_child_count(node);
             mtg_MaxChild = TreeIterPos;
             return;
         }
     }
 
-    if (node->groupData != NULL) {
+    if (node->groupData != nullptr) {
         numChildren = node->groupData->numChildren;
         if (numChildren != 0) {
             for (i = 0; i < numChildren; i++) {
@@ -3497,13 +3497,13 @@ void func_8011B1D8(ModelNode* node) {
 
                 if (currentNode->type == SHAPE_TYPE_GROUP) {
                     prop = get_model_property(currentNode, MODEL_PROP_KEY_GROUP_INFO);
-                    if (prop != NULL && prop->data.s != GROUP_TYPE_0) {
+                    if (prop != nullptr && prop->data.s != GROUP_TYPE_0) {
                         currentID += mdl_get_child_count(currentNode);
                     }
                 }
                 func_8011B1D8(currentNode);
 
-                if (mtg_FoundModelNode != NULL) {
+                if (mtg_FoundModelNode != nullptr) {
                     // not possible
                     return;
                 }
@@ -3523,13 +3523,13 @@ void func_8011B1D8(ModelNode* node) {
 
 void mdl_make_transform_group(u16 modelID) {
     TreeIterPos = 0;
-    mtg_FoundModelNode = NULL;
+    mtg_FoundModelNode = nullptr;
     mtg_SearchModelID = modelID;
     mtg_MaxChild = 0;
     mtg_MinChild = 0;
     func_8011B1D8(*gCurrentModelTreeRoot);
 
-    if (mtg_FoundModelNode != NULL) {
+    if (mtg_FoundModelNode != nullptr) {
         ModelTransformGroup* newMtg;
         ModelNode* node;
         ModelNodeProperty* prop;
@@ -3538,7 +3538,7 @@ void mdl_make_transform_group(u16 modelID) {
         s32 i;
 
         for (i = 0; i < ARRAY_COUNT(*gCurrentTransformGroups); i++) {
-            if ((*gCurrentTransformGroups)[i] == NULL) {
+            if ((*gCurrentTransformGroups)[i] == nullptr) {
                 break;
             }
         }
@@ -3549,7 +3549,7 @@ void mdl_make_transform_group(u16 modelID) {
         newMtg->minChildModelIndex = get_model_list_index_from_tree_index(mtg_MinChild);
         newMtg->maxChildModelIndex = get_model_list_index_from_tree_index(mtg_MaxChild);
         newMtg->matrixFreshness = 0;
-        newMtg->bakedMtx = NULL;
+        newMtg->bakedMtx = nullptr;
         newMtg->baseModelNode = mtg_FoundModelNode;
         guMtxIdent(&newMtg->savedMtx);
         newMtg->flags |= TRANSFORM_GROUP_FLAG_IGNORE_MATRIX;
@@ -3562,20 +3562,20 @@ void mdl_make_transform_group(u16 modelID) {
         } else {
             prop = get_model_property(node, MODEL_PROP_KEY_GROUP_INFO);
 
-            if (prop != NULL) {
+            if (prop != nullptr) {
                 // GROUP_INFO properties always come in pairs, with the second giving the render mode
                 prop++;
             }
         }
 
-        if (prop != NULL) {
+        if (prop != nullptr) {
             newMtg->renderMode = prop->data.s;
         } else {
             newMtg->renderMode = RENDER_MODE_SURFACE_OPA;
         }
 
         bb = (ModelBoundingBox*)get_model_property(node, MODEL_PROP_KEY_BOUNDING_BOX);
-        if (bb != NULL) {
+        if (bb != nullptr) {
             x = (bb->minX + bb->maxX) * 0.5f;
             y = (bb->minY + bb->maxY) * 0.5f;
             z = (bb->minZ + bb->maxZ) * 0.5f;
@@ -3583,7 +3583,7 @@ void mdl_make_transform_group(u16 modelID) {
             x = y = z = 0.0f;
         }
 
-        if (newMtg->bakedMtx != NULL) {
+        if (newMtg->bakedMtx != nullptr) {
             guMtxXFML(newMtg->bakedMtx, x, y, z, &x, &y, &z);
         }
 
@@ -3605,7 +3605,7 @@ void enable_transform_group(u16 modelID) {
 
         model->flags |= MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
 
-        if (model->bakedMtx != NULL) {
+        if (model->bakedMtx != nullptr) {
             model->flags |= MODEL_FLAG_MATRIX_DIRTY;
         }
     }
@@ -3622,7 +3622,7 @@ void disable_transform_group(u16 modelID) {
 
         model->flags &= ~MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
 
-        if (model->bakedMtx != NULL) {
+        if (model->bakedMtx != nullptr) {
             model->flags |= MODEL_FLAG_MATRIX_DIRTY;
         }
     }
@@ -3634,7 +3634,7 @@ void clone_model(u16 srcModelID, u16 newModelID) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
-        if ((*gCurrentModels)[i] == NULL) {
+        if ((*gCurrentModels)[i] == nullptr) {
             break;
         }
     }
@@ -3691,7 +3691,7 @@ void mdl_group_set_visibility(u16 treeIndex, s32 flags, s32 mode) {
         }
         for (i = maxGroupIndex + 1; i < MAX_MODELS; i++) {
             Model* model = (*gCurrentModels)[i];
-            if (model != NULL) {
+            if (model != nullptr) {
                 if (mode == MODEL_GROUP_OTHERS_VISIBLE) {
                     model->flags &= ~flags;
                 } else {
@@ -3756,7 +3756,7 @@ void mdl_group_set_custom_gfx(u16 groupModelID, s32 customGfxIndex, s32 tintType
         }
         for (i = maxGroupIndex + 1; i < MAX_MODELS; i++) {
             Model* model = (*gCurrentModels)[i];
-            if (model != NULL) {
+            if (model != nullptr) {
                 model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + packed;
             }
         }
@@ -3769,7 +3769,7 @@ void mdl_reset_transform_flags(void) {
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         Model* model = (*gCurrentModels)[i];
 
-        if (model != NULL) {
+        if (model != nullptr) {
             model->flags &= ~MODEL_FLAG_HAS_TRANSFORM;
         }
     }
@@ -3777,7 +3777,7 @@ void mdl_reset_transform_flags(void) {
     for (i = 0; i < ARRAY_COUNT(*gCurrentTransformGroups); i++) {
         ModelTransformGroup* transformGroup = (*gCurrentTransformGroups)[i];
 
-        if (transformGroup != NULL) {
+        if (transformGroup != nullptr) {
             transformGroup->flags &= ~TRANSFORM_GROUP_FLAG_HAS_TRANSFORM;
         }
     }
@@ -3873,14 +3873,14 @@ void build_custom_gfx(void) {
     for (i = 0; i < ARRAY_COUNT(*gCurrentCustomModelGfxPtr) / 2; i++) {
         preFunc = (*gCurrentCustomModelGfxBuildersPtr)[i * 2];
 
-        if (preFunc != NULL) {
+        if (preFunc != nullptr) {
             (*gCurrentCustomModelGfxPtr)[i * 2] = gMainGfxPos;
             preFunc(i);
             gSPEndDisplayList(gMainGfxPos++);
         }
 
         postFunc = (*gCurrentCustomModelGfxBuildersPtr)[i * 2 + 1];
-        if (postFunc != NULL) {
+        if (postFunc != nullptr) {
             (*gCurrentCustomModelGfxPtr)[i * 2 + 1] = gMainGfxPos;
             postFunc(i);
             gSPEndDisplayList(gMainGfxPos++);
@@ -3892,13 +3892,13 @@ void build_custom_gfx(void) {
 }
 
 // weird temps necessary to match
-/// @returns true if mtx is NULL or identity.
+/// @returns true if mtx is nullptr or identity.
 s32 is_identity_fixed_mtx(Mtx* mtx) {
     s32* mtxIt = (s32*)mtx;
     s32* identityIt;
     s32 i;
 
-    if (mtx == NULL) {
+    if (mtx == nullptr) {
         return true;
     }
 
@@ -3984,9 +3984,9 @@ void mdl_get_vertex_count(Gfx* gfx, s32* numVertices, Vtx** baseVtx, s32* gfxCou
     minVtx = 0;
     maxVtx = 0;
 
-    if (gfx == NULL) {
+    if (gfx == nullptr) {
         *numVertices = 0;
-        *baseVtx = NULL;
+        *baseVtx = nullptr;
     } else {
         Gfx* baseGfx = gfx;
 
@@ -3997,7 +3997,7 @@ void mdl_get_vertex_count(Gfx* gfx, s32* numVertices, Vtx** baseVtx, s32* gfxCou
 
             if (cmd == G_VTX) {
                 vtxStartAddr = w1;
-                if (baseAddr != NULL) {
+                if (baseAddr != nullptr) {
                     vtxStartAddr = (vtxStartAddr & 0xFFFF) + (s32)baseAddr;
                 }
                 vtxCount = _SHIFTR(w0,12,8);
@@ -4058,7 +4058,7 @@ void mdl_make_local_vertex_copy(s32 copyIndex, u16 modelID, s32 isMakingCopy) {
 
     model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
     nodeDlist = model->modelNode->displayData->displayList;
-    mdl_get_vertex_count(nodeDlist, &numVertices, &baseVtx, &gfxCount, NULL);
+    mdl_get_vertex_count(nodeDlist, &numVertices, &baseVtx, &gfxCount, nullptr);
 
     copy = (*gCurrentModelLocalVtxBuffers)[copyIndex] = heap_malloc(sizeof(*copy));
 
@@ -4072,8 +4072,8 @@ void mdl_make_local_vertex_copy(s32 copyIndex, u16 modelID, s32 isMakingCopy) {
         model->flags |= MODEL_FLAG_HAS_LOCAL_VERTEX_COPY;
     } else {
         for (i = 0; i < ARRAY_COUNT(copy->gfxCopy); i++) {
-            copy->gfxCopy[i] = NULL;
-            copy->vtxCopy[i] = NULL;
+            copy->gfxCopy[i] = nullptr;
+            copy->vtxCopy[i] = nullptr;
         }
         model->flags |= MODEL_FLAG_HIDDEN;
     }
@@ -4245,7 +4245,7 @@ void mdl_project_tex_coords(s32 modelID, Gfx* outGfx, Matrix4f arg2, Vtx* arg3) 
         ob0 = baseVtx->v.ob[0];
         ob1 = baseVtx->v.ob[1];
         ob2 = baseVtx->v.ob[2];
-        if (arg2 != NULL) {
+        if (arg2 != nullptr) {
             var_f10 = (arg2[0][0] * ob0) + (arg2[1][0] * ob1) + (arg2[2][0] * ob2) + arg2[3][0];
             var_f6_2 = (arg2[0][2] * ob0) + (arg2[1][2] * ob1) + (arg2[2][2] * ob2) + arg2[3][2];
         } else {
@@ -4521,7 +4521,7 @@ void* mdl_get_next_texture_address(s32 size) {
     offset = (offset >> 6) << 6;
 
     if (size + offset > WORLD_TEXTURE_MEMORY_SIZE + BATTLE_TEXTURE_MEMORY_SIZE) {
-        return NULL;
+        return nullptr;
     } else {
         return TextureHeapBase + offset;
     }
@@ -4536,7 +4536,7 @@ void mdl_set_all_tint_type(s32 tintType) {
     for (i = 0; i < ARRAY_COUNT(*modelList); i++) {
         model = (*modelList)[i];
 
-        if (model != NULL) {
+        if (model != nullptr) {
             set_mdl_custom_gfx_set(model, CUSTOM_GFX_NONE, type);
         }
     }
@@ -4659,7 +4659,7 @@ void execute_render_tasks(void) {
     taskList = RenderTaskLists[RenderTaskListIdx];
     if (gOverrideFlags & GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION) {
         Mtx* dispMtx;
-        Gfx* savedGfxPos = NULL;
+        Gfx* savedGfxPos = nullptr;
 
         guScaleF(mtxFlipY, 1.0f, -1.0f, 1.0f);
         guMtxF2L(mtxFlipY, &gDisplayContext->matrixStack[gMatrixListPos]);

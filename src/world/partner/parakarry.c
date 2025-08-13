@@ -70,13 +70,13 @@ API_CALLABLE(N(Update)) {
     if (isInitialCall) {
         partner_flying_enable(parakarry, 1);
         mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
-        TweesterTouchingPartner = NULL;
+        TweesterTouchingPartner = nullptr;
     }
 
     playerData->partnerUsedTime[PARTNER_PARAKARRY]++;
     entity = TweesterTouchingPartner;
 
-    if (entity == NULL) {
+    if (entity == nullptr) {
         partner_flying_update_player_tracking(parakarry);
         partner_flying_update_motion(parakarry);
         return ApiStatus_BLOCK;
@@ -137,7 +137,7 @@ API_CALLABLE(N(Update)) {
 
             if (--N(TweesterPhysicsPtr)->countdown == 0) {
                 N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
-                TweesterTouchingPartner = NULL;
+                TweesterTouchingPartner = nullptr;
             }
             break;
     }
@@ -152,7 +152,7 @@ EvtScript EVS_WorldParakarry_Update = {
 
 void N(try_cancel_tweester)(Npc* parakarry) {
     if (TweesterTouchingPartner) {
-        TweesterTouchingPartner = NULL;
+        TweesterTouchingPartner = nullptr;
         parakarry->flags = N(TweesterPhysicsPtr)->prevFlags;
         N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking (parakarry);

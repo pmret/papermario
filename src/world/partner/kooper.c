@@ -108,13 +108,13 @@ API_CALLABLE(N(Update)) {
     if (isInitialCall) {
         partner_walking_enable(kooper, 1);
         mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
-        TweesterTouchingPartner = NULL;
+        TweesterTouchingPartner = nullptr;
     }
 
     playerData->partnerUsedTime[PARTNER_KOOPER]++;
     entity = TweesterTouchingPartner;
 
-    if (entity == NULL) {
+    if (entity == nullptr) {
         partner_walking_update_player_tracking(kooper);
         partner_walking_update_motion(kooper);
         return ApiStatus_BLOCK;
@@ -175,7 +175,7 @@ API_CALLABLE(N(Update)) {
 
             if (--N(TweesterPhysicsPtr)->countdown == 0) {
                 N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
-                TweesterTouchingPartner = NULL;
+                TweesterTouchingPartner = nullptr;
             }
             break;
     }
@@ -183,8 +183,8 @@ API_CALLABLE(N(Update)) {
 }
 
 void N(try_cancel_tweester)(Npc* kooper) {
-    if (TweesterTouchingPartner != NULL) {
-        TweesterTouchingPartner = NULL;
+    if (TweesterTouchingPartner != nullptr) {
+        TweesterTouchingPartner = nullptr;
         kooper->flags = N(TweesterPhysicsPtr)->prevFlags;
         N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(kooper);

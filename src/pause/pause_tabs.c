@@ -97,7 +97,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .height = 15,
         .priority = WINDOW_PRIORITY_64,
         .fpDrawContents = pause_tabs_draw_stats,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
@@ -111,7 +111,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .height = 15,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = pause_tabs_draw_badges,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { .func = pause_update_tab_default },
         .extraFlags = 0,
@@ -125,7 +125,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .height = 15,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = pause_tabs_draw_items,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { .func = pause_update_tab_default },
         .extraFlags = 0,
@@ -139,7 +139,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .height = 15,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = pause_tabs_draw_party,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { .func = pause_update_tab_default },
         .extraFlags = 0,
@@ -153,7 +153,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .height = 15,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = pause_tabs_draw_spirits,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { .func = pause_update_tab_default },
         .extraFlags = 0,
@@ -167,7 +167,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .height = 15,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = pause_tabs_draw_map,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_PAUSE_MAIN,
         .fpUpdate = { .func = pause_update_tab_default },
         .extraFlags = 0,
@@ -181,7 +181,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .height = 16,
         .priority = WINDOW_PRIORITY_64,
         .fpDrawContents = pause_tabs_draw_invis,
-        .tab = NULL,
+        .tab = nullptr,
         .parentID = WIN_NONE,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
@@ -444,7 +444,7 @@ void pause_tabs_handle_input(MenuPanel* tab) {
     }
 
     gPauseCurrentDescMsg = pause_get_menu_msg(gPauseTabsMessages[tab->col]);
-    gPauseCurrentDescIconScript = NULL;
+    gPauseCurrentDescIconScript = nullptr;
 }
 
 void pause_tabs_update(MenuPanel* tab) {

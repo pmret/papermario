@@ -9,7 +9,7 @@ extern s8 pause_image_143FF0_png[];
 //TODO replace with array when pause_stats_draw_contents is matched
 WindowStyleCustom gPauseWS_0 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_I,
         .bitDepth = G_IM_SIZ_8b,
         .width = 0,
@@ -18,7 +18,7 @@ WindowStyleCustom gPauseWS_0 = {
         .size = 0
     },
     .corners = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .size1 = { .x = 0, .y = 0},
@@ -61,7 +61,7 @@ WindowStyleCustom gPauseWS_1 = {
 };
 WindowStyleCustom gPauseWS_2 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_I,
         .bitDepth = G_IM_SIZ_4b,
         .width = 16,
@@ -70,7 +70,7 @@ WindowStyleCustom gPauseWS_2 = {
         .size = 128
     },
     .corners = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_IA,
         .bitDepth = G_IM_SIZ_8b,
         .size1 = { .x = 8, .y = 8 },
@@ -87,7 +87,7 @@ WindowStyleCustom gPauseWS_2 = {
 };
 WindowStyleCustom gPauseWS_3 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,
@@ -113,7 +113,7 @@ WindowStyleCustom gPauseWS_3 = {
 };
 WindowStyleCustom gPauseWS_4 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,
@@ -139,7 +139,7 @@ WindowStyleCustom gPauseWS_4 = {
 };
 WindowStyleCustom gPauseWS_5 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,
@@ -165,7 +165,7 @@ WindowStyleCustom gPauseWS_5 = {
 };
 WindowStyleCustom gPauseWS_6 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,
@@ -191,7 +191,7 @@ WindowStyleCustom gPauseWS_6 = {
 };
 WindowStyleCustom gPauseWS_7 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,
@@ -217,7 +217,7 @@ WindowStyleCustom gPauseWS_7 = {
 };
 WindowStyleCustom gPauseWS_8 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,
@@ -243,7 +243,7 @@ WindowStyleCustom gPauseWS_8 = {
 };
 WindowStyleCustom gPauseWS_9 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,
@@ -252,7 +252,7 @@ WindowStyleCustom gPauseWS_9 = {
         .size = 0
     },
     .corners = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .size1 = { .x = 0, .y = 0 },
@@ -269,7 +269,7 @@ WindowStyleCustom gPauseWS_9 = {
 };
 WindowStyleCustom gPauseWS_10 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,
@@ -295,7 +295,7 @@ WindowStyleCustom gPauseWS_10 = {
 };
 WindowStyleCustom gPauseWS_11 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,
@@ -347,7 +347,7 @@ WindowStyleCustom gPauseWS_12 = {
 };
 WindowStyleCustom gPauseWS_13 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,
@@ -373,7 +373,7 @@ WindowStyleCustom gPauseWS_13 = {
 };
 WindowStyleCustom gPauseWS_14 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,
@@ -451,7 +451,7 @@ WindowStyleCustom gPauseWS_16 = {
 };
 WindowStyleCustom gPauseWS_17 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,
@@ -581,7 +581,7 @@ WindowStyleCustom gPauseWS_21 = {
 };
 WindowStyleCustom gPauseWS_22 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,
@@ -737,7 +737,7 @@ WindowStyleCustom gPauseWS_27 = {
 };
 WindowStyleCustom gPauseWS_28 = {
     .background = {
-        .imgData = NULL,
+        .imgData = nullptr,
         .fmt = G_IM_FMT_RGBA,
         .bitDepth = G_IM_SIZ_4b,
         .width = 0,

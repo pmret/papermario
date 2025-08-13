@@ -159,7 +159,7 @@ void pulse_stone_notification_update(void) {
     PulseStonePtr->pos.z = playerStatus->pos.z;
 
     if (!should_continue_pulse_stone()) {
-        PulseStoneNotificationCallback = NULL;
+        PulseStoneNotificationCallback = nullptr;
         playerStatus->animFlags &= ~PA_FLAG_PULSE_STONE_VISIBLE;
         return;
     }

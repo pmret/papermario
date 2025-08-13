@@ -190,7 +190,7 @@ API_CALLABLE(N(PlayWaterBlockFX)) {
     f32 posZ = evt_get_float_variable(script, *args++);
     EffectInstance* effect = battleStatus->waterBlockEffect;
 
-    if (effect != NULL) {
+    if (effect != nullptr) {
         remove_effect(effect);
     }
 

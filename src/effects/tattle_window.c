@@ -76,7 +76,7 @@ EffectInstance* tattle_window_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, s32 
     effect->numParts = numParts;
     part = effect->data.tattleWindow = general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data.tattleWindow != NULL);
+    ASSERT(effect->data.tattleWindow != nullptr);
 
     part->type = type;
     part->unk_14 = 0;
@@ -243,6 +243,6 @@ void func_E00D8630(EffectInstance* effect) {
         255, 0,
         data->scale, data->scale,
         data->rot.x, data->rot.y, data->rot.z,
-        (void (*)(void*)) func_E00D8334, data, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+        (void (*)(void*)) func_E00D8334, data, nullptr, SCREEN_WIDTH, SCREEN_HEIGHT, nullptr);
     gDPPipeSync(gMainGfxPos++);
 }

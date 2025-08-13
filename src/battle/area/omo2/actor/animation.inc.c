@@ -204,7 +204,7 @@ StaticAnimatorNode* toy_tank_model[] = {
     &N(Node21),
     &N(Node22),
     &N(Node23),
-    NULL,
+    nullptr,
 };
 
 AnimScript AS_ToyTank_Shake = {

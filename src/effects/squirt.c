@@ -22,13 +22,13 @@ EffectInstance* squirt_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f3
     bp.update = squirt_update;
     bp.renderScene = squirt_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_SQUIRT;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.squirt = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.squirt != NULL);
+    ASSERT(effect->data.squirt != nullptr);
 
     data->unk_00 = arg0;
     data->unk_30 = 0;

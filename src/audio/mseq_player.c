@@ -90,7 +90,7 @@ AuResult au_mseq_start(s32 index, s32 time) {
     MSEQHeader* mseq = gAuAmbienceManager->mseqFiles[index];
     AuResult status = AU_RESULT_OK;
 
-    if (mseq != NULL) {
+    if (mseq != nullptr) {
         if (player->mseqName == 0) {
             au_mseq_play_sequence(gAuAmbienceManager, mseq, index);
             if (time != 0) {
@@ -137,7 +137,7 @@ void au_mseq_fade_setup(AmbiencePlayer* player) {
 void au_mseq_pause(s32 index, s32 time) {
     AmbiencePlayer* player = &gAuAmbienceManager->players[index];
 
-    if (player->mseqReadStart != NULL && player->mseqReadPos != NULL) {
+    if (player->mseqReadStart != nullptr && player->mseqReadPos != nullptr) {
         if (time != 0) {
             player->fadeSettingsInitial = 255;
             player->fadeSettingsTime = time;
@@ -152,7 +152,7 @@ void au_mseq_pause(s32 index, s32 time) {
 void au_mseq_resume(s32 index, s32 time) {
     AmbiencePlayer* player = &gAuAmbienceManager->players[index];
 
-    if (player->mseqReadStart != NULL && player->mseqReadPos != NULL) {
+    if (player->mseqReadStart != nullptr && player->mseqReadPos != nullptr) {
         player->mode = MSEQ_MODE_RESUMING;
         if (time != 0) {
             player->fadeSettingsTime = time;
@@ -168,9 +168,9 @@ void au_mseq_resume(s32 index, s32 time) {
 void au_mseq_stop_quick(s32 index) {
     AmbiencePlayer* player = &gAuAmbienceManager->players[index];
 
-    if (player->mseqReadStart != NULL && player->mseqReadPos != NULL) {
+    if (player->mseqReadStart != nullptr && player->mseqReadPos != nullptr) {
         if (player->mode != MSEQ_MODE_PLAYING) {
-            player->mseqReadPos = NULL;
+            player->mseqReadPos = nullptr;
             player->mseqName = 0;
             player->mode = MSEQ_MODE_PLAYING;
             return;
@@ -183,7 +183,7 @@ void au_mseq_stop_quick(s32 index) {
 void au_mseq_stop_slow(s32 index, s32 time) {
     AmbiencePlayer* player = &gAuAmbienceManager->players[index];
 
-    if (player->mseqReadStart != NULL && player->mseqReadPos != NULL) {
+    if (player->mseqReadStart != nullptr && player->mseqReadPos != nullptr) {
         if (time != 0) {
             player->fadeSettingsTime = time;
         } else {
@@ -218,7 +218,7 @@ AuResult au_mseq_check_stopped(s32 index) {
     AmbiencePlayer* player = &gAuAmbienceManager->players[index];
     AuResult status = AU_RESULT_OK;
 
-    if (player->mseqReadStart != NULL && player->mseqReadPos != NULL) {
+    if (player->mseqReadStart != nullptr && player->mseqReadPos != nullptr) {
         status = AU_AMBIENCE_STOP_ERROR_1;
         if (player->mode != MSEQ_MODE_PLAYING) {
             status = AU_AMBIENCE_STOP_ERROR_2;
@@ -283,7 +283,7 @@ void au_mseq_manager_audio_frame_update(AmbienceManager* manager) {
         AmbiencePlayer* player = &manager->players[j];
         s32 mode;
 
-        if (player->mseqReadPos != NULL) {
+        if (player->mseqReadPos != nullptr) {
             if (manager->loadTracksFadeInfo) {
                 au_mseq_load_track_fade_info(manager, player);
             }
@@ -452,7 +452,7 @@ void au_mseq_player_update(AmbienceManager* manager, AmbiencePlayer* player) {
             if ((s8)op >= 0) {
                 if (op == 0) {
                     // stop
-                    player->mseqReadPos = NULL;
+                    player->mseqReadPos = nullptr;
                     player->mseqName = 0;
                     au_mseq_player_stop(manager, player);
                     break;

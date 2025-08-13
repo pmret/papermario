@@ -38,13 +38,13 @@ void ending_decals_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 arg4, Effect
     bp.update = ending_decals_update;
     bp.renderScene = ending_decals_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_ENDING_DECALS;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.endingDecals = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.endingDecals != NULL);
+    ASSERT(effect->data.endingDecals != nullptr);
 
     data->type = type;
     data->pos.x = posX;

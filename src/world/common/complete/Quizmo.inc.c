@@ -178,8 +178,8 @@ API_CALLABLE(N(Quizmo_ShouldAppear)) {
 
     evt_set_variable(script, GF_Quizmo_HasLocation, hasLocation);
     evt_set_variable(script, GF_Quizmo_ChangedLocation, changedLocation);
-    numAnswered = evt_get_variable(NULL, GB_CompletedQuizzes);
-    progress = evt_get_variable(NULL, GB_StoryProgress);
+    numAnswered = evt_get_variable(nullptr, GB_CompletedQuizzes);
+    progress = evt_get_variable(nullptr, GB_StoryProgress);
 
     // vanilla bug? never checks the final requirement in the list
     for (i = 0; i < 8; i++) {
@@ -239,7 +239,7 @@ API_CALLABLE(N(Quizmo_HideWorld)) {
 
         for (i = 0; i < MAX_NPCS; i++) {
             Npc* npc = get_npc_by_index(i);
-            if (npc != NULL && npc->flags != 0) {
+            if (npc != nullptr && npc->flags != 0) {
                 if (npc->npcID != NPC_PARTNER && npc->npcID != CHUCK_QUIZMO_NPC_ID) {
                     npc->flags |= NPC_FLAG_HIDING;
                 }
@@ -248,7 +248,7 @@ API_CALLABLE(N(Quizmo_HideWorld)) {
 
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* itemEntity = get_item_entity(i);
-            if (itemEntity != NULL && itemEntity->flags & ITEM_ENTITY_FLAG_10) {
+            if (itemEntity != nullptr && itemEntity->flags & ITEM_ENTITY_FLAG_10) {
                 itemEntity->flags |= ITEM_ENTITY_FLAG_HIDING;
             }
         }
@@ -293,7 +293,7 @@ API_CALLABLE(N(Quizmo_FadeInWorld)) {
 
         for (i = 0; i < MAX_NPCS; i++) {
             Npc* npc = get_npc_by_index(i);
-            if (npc != NULL && npc->flags != 0) {
+            if (npc != nullptr && npc->flags != 0) {
                 if (npc->npcID != NPC_PARTNER && npc->npcID != CHUCK_QUIZMO_NPC_ID) {
                     npc->flags &= ~NPC_FLAG_HIDING;
                 }
@@ -302,7 +302,7 @@ API_CALLABLE(N(Quizmo_FadeInWorld)) {
 
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* entity = get_item_entity(i);
-            if (entity != NULL && entity->flags & ITEM_ENTITY_FLAG_10) {
+            if (entity != nullptr && entity->flags & ITEM_ENTITY_FLAG_10) {
                 entity->flags &= ~ITEM_ENTITY_FLAG_HIDING;
             }
         }
@@ -320,7 +320,7 @@ API_CALLABLE(N(Quizmo_UpdateRecords)) {
         gPlayerData.quizzesAnswered++;
     }
 
-    if (script->varTable[0] == N(Quizmo_Answers)[evt_get_variable(NULL, GB_CompletedQuizzes)]) {
+    if (script->varTable[0] == N(Quizmo_Answers)[evt_get_variable(nullptr, GB_CompletedQuizzes)]) {
         script->varTable[0] = 1;
         gPlayerData.quizzesCorrect++;
     } else {
@@ -548,7 +548,7 @@ API_CALLABLE(N(Quizmo_UpdatePartnerPosition)) {
 }
 
 void N(Quizmo_CreateReactionEffect)(void) {
-    s32 result = evt_get_variable(NULL, N(Quizmo_ScriptArray[QUIZ_ARRAY_INDEX_ANSWER_RESULT]));
+    s32 result = evt_get_variable(nullptr, N(Quizmo_ScriptArray[QUIZ_ARRAY_INDEX_ANSWER_RESULT]));
 
     if (result == 1) {
         fx_quizmo_answer(0, 0, 0, 0);
@@ -558,7 +558,7 @@ void N(Quizmo_CreateReactionEffect)(void) {
 }
 
 API_CALLABLE(N(Quizmo_CreateWorker)) {
-    N(Quizmo_Worker) = create_worker_frontUI(NULL, N(Quizmo_CreateReactionEffect));
+    N(Quizmo_Worker) = create_worker_frontUI(nullptr, N(Quizmo_CreateReactionEffect));
     return ApiStatus_DONE2;
 }
 

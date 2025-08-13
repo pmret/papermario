@@ -43,13 +43,13 @@ EffectInstance* shimmer_burst_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
     bp.update = shimmer_burst_update;
     bp.renderScene = shimmer_burst_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_SHIMMER_BURST;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     part = effect->data.shimmerBurst = general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.shimmerBurst != NULL);
+    ASSERT(effect->data.shimmerBurst != nullptr);
 
     part->unk_00 = arg0;
     part->unk_3C = 0;

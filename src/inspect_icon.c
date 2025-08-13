@@ -116,7 +116,7 @@ s32 should_continue_inspect(void) {
             }
         } else if (!(playerStatus->flags & PS_FLAG_INPUT_DISABLED)
             && (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC)
-            && (npc != NULL)
+            && (npc != nullptr)
             && (npc->flags & NPC_FLAG_USE_INSPECT_ICON)
         ) {
             curInteraction = npc->npcID | COLLISION_WITH_NPC_BIT;
@@ -266,8 +266,8 @@ void interact_inspect_update(void) {
 void interact_inspect_dismiss(void) {
     update_inspect_icon_pos();
     gPlayerStatusPtr->interactingWithID = NO_COLLIDER;
-    InteractNotificationCallback = NULL;
-    gPlayerStatusPtr->encounteredNPC = NULL;
+    InteractNotificationCallback = nullptr;
+    gPlayerStatusPtr->encounteredNPC = nullptr;
     gPlayerStatusPtr->animFlags &= ~PA_FLAG_INTERACT_PROMPT_AVAILABLE;
     func_800EF3D4(0);
     partner_reset_tether_distance();

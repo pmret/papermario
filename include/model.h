@@ -79,7 +79,7 @@ typedef struct Model {
 typedef struct ModelTransformGroup {
     /* 0x00 */ u16 flags;
     /* 0x02 */ u16 groupModelID;
-    /* 0x04 */ Mtx* bakedMtx; // would point to copy of matrix from shape file, but seems to always be NULL.
+    /* 0x04 */ Mtx* bakedMtx; // would point to copy of matrix from shape file, but seems to always be nullptr.
     /* 0x08 */ ModelNode* baseModelNode;
     /* 0x0C */ Mtx* finalMtx; // the matrix actually used while building the display list
     /* 0x10 */ Mtx savedMtx;

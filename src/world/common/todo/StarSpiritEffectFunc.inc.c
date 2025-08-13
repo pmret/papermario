@@ -35,7 +35,7 @@ API_CALLABLE(N(StarSpiritEffectFunc2)) {
         StarSpiritData* ptr = heap_malloc(sizeof(*ptr));
 
         script->varTablePtr[0] = ptr;
-        evt_set_variable(NULL, STAR_SPIRIT_DATA_VAR, script->varTable[0]);
+        evt_set_variable(nullptr, STAR_SPIRIT_DATA_VAR, script->varTable[0]);
         ptr->unk_38 = evt_get_variable(script, *args++);
         ptr->unk_3C = evt_get_variable(script, *args++);
         ptr->unk_0C = evt_get_float_variable(script, *args++);

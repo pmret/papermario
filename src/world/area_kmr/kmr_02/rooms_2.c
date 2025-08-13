@@ -92,7 +92,7 @@ EvtScript N(EVS_SetupToadHouse) = {
         PACK_ROOM_FLAGS(VIS_GROUP_0, ROOM_DOOR_RIGHT_HINGE_OPENS_OUT),
         Ref(N(EVS_SetDoorRot_ToadHouse)),
         Ref(N(EVS_SetWallRot_ToadHouse)),
-        NULL,
+        nullptr,
         Ref(N(EVS_RoomListener_ToadHouse)),
         COLLIDER_deilit7,
         COLLIDER_deilit8,

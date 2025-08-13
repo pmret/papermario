@@ -179,7 +179,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointA) {
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
             actor = battleStatus->playerActor;
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             x = actor->curPos.x;
@@ -191,7 +191,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointA) {
             averageSize = (sizeY + sizeX) / 2;
 
             targetActor = get_actor(actor->targetActorID);
-            if (targetActor == NULL) {
+            if (targetActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
 
@@ -218,7 +218,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointA) {
             break;
         case ACTOR_CLASS_PARTNER:
             actor = battleStatus->partnerActor;
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             x = actor->curPos.x;
@@ -230,7 +230,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointA) {
             averageSize = (sizeY + sizeX) / 2;
 
             targetActor = get_actor(actor->targetActorID);
-            if (targetActor == NULL) {
+            if (targetActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
 
@@ -253,7 +253,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointA) {
             break;
         case ACTOR_CLASS_ENEMY:
             actor = battleStatus->enemyActors[actorID];
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             x = actor->curPos.x;
@@ -265,7 +265,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointA) {
             averageSize = (sizeY + sizeX) * 0.5f;
 
             targetActor = get_actor(actor->targetActorID);
-            if (targetActor == NULL) {
+            if (targetActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
 
@@ -393,7 +393,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointB) {
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
             actor = battleStatus->playerActor;
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             x = actor->curPos.x;
@@ -405,7 +405,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointB) {
             averageSize = (sizeY + sizeX) / 2;
 
             targetActor = get_actor(actor->targetActorID);
-            if (targetActor == NULL) {
+            if (targetActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
 
@@ -432,7 +432,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointB) {
             break;
         case ACTOR_CLASS_PARTNER:
             actor = battleStatus->partnerActor;
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             x = actor->curPos.x;
@@ -444,7 +444,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointB) {
             averageSize = (sizeY + sizeX) / 2;
 
             targetActor = get_actor(actor->targetActorID);
-            if (targetActor == NULL) {
+            if (targetActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
 
@@ -467,7 +467,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointB) {
             break;
         case ACTOR_CLASS_ENEMY:
             actor = battleStatus->enemyActors[actorID];
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             x = actor->curPos.x;
@@ -479,7 +479,7 @@ API_CALLABLE(BattleCam_Update_FocusMidpointB) {
             averageSize = (sizeY + sizeX) * 0.5f;
 
             targetActor = get_actor(actor->targetActorID);
-            if (targetActor == NULL) {
+            if (targetActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
 
@@ -604,7 +604,7 @@ API_CALLABLE(BattleCam_Update_FocusActorPart) {
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
             actor = battleStatus->playerActor;
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             x = actor->curPos.x;
@@ -615,7 +615,7 @@ API_CALLABLE(BattleCam_Update_FocusActorPart) {
             sizeX = actor->size.x;
 
             targetActor = get_actor(actor->targetActorID);
-            if (targetActor == NULL) {
+            if (targetActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
 
@@ -638,7 +638,7 @@ API_CALLABLE(BattleCam_Update_FocusActorPart) {
             break;
         case ACTOR_CLASS_PARTNER:
             actor = battleStatus->partnerActor;
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             x = actor->curPos.x;
@@ -649,7 +649,7 @@ API_CALLABLE(BattleCam_Update_FocusActorPart) {
             sizeX = actor->size.x;
 
             targetActor = get_actor(actor->targetActorID);
-            if (targetActor == NULL) {
+            if (targetActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
 
@@ -672,7 +672,7 @@ API_CALLABLE(BattleCam_Update_FocusActorPart) {
             break;
         case ACTOR_CLASS_ENEMY:
             targetActor = battleStatus->enemyActors[actorID];
-            if (targetActor == NULL) {
+            if (targetActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             actorPart = get_actor_part(targetActor, BattleCam_SubjectActorPart);
@@ -684,7 +684,7 @@ API_CALLABLE(BattleCam_Update_FocusActorPart) {
             sizeX = actorPart->size.x;
 
             targetActor = get_actor(targetActor->targetActorID);
-            if (targetActor == NULL) {
+            if (targetActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
 
@@ -797,7 +797,7 @@ API_CALLABLE(BattleCam_Update_FocusActor) {
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
             actor = battleStatus->playerActor;
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 return ApiStatus_BLOCK;
             }
@@ -811,7 +811,7 @@ API_CALLABLE(BattleCam_Update_FocusActor) {
             break;
         case ACTOR_CLASS_PARTNER:
             actor = battleStatus->partnerActor;
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 return ApiStatus_BLOCK;
             }
@@ -825,7 +825,7 @@ API_CALLABLE(BattleCam_Update_FocusActor) {
             break;
         case ACTOR_CLASS_ENEMY:
             actor = battleStatus->enemyActors[actorID];
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 return ApiStatus_BLOCK;
             }
@@ -920,7 +920,7 @@ API_CALLABLE(BattleCam_Update_FocusGoal) {
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
             actor = battleStatus->playerActor;
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             currentX = actor->curPos.x;
@@ -932,7 +932,7 @@ API_CALLABLE(BattleCam_Update_FocusGoal) {
             break;
         case ACTOR_CLASS_PARTNER:
             actor = battleStatus->partnerActor;
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             currentX = actor->curPos.x;
@@ -944,7 +944,7 @@ API_CALLABLE(BattleCam_Update_FocusGoal) {
             break;
         case ACTOR_CLASS_ENEMY:
             actor = battleStatus->enemyActors[actorID];
-            if (actor == NULL) {
+            if (actor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             currentX = actor->curPos.x;
@@ -1309,19 +1309,19 @@ API_CALLABLE(BattleCam_Update_FollowActorY) {
 
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
-            if (battleStatus->playerActor == NULL) {
+            if (battleStatus->playerActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             y = battleStatus->playerActor->curPos.y + (playerStatus->colliderHeight / 2);
             break;
         case ACTOR_CLASS_PARTNER:
-            if (battleStatus->partnerActor == NULL) {
+            if (battleStatus->partnerActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             y = battleStatus->partnerActor->curPos.y;
             break;
         case ACTOR_CLASS_ENEMY:
-            if (battleStatus->enemyActors[actorID] == NULL) {
+            if (battleStatus->enemyActors[actorID] == nullptr) {
                 return ApiStatus_BLOCK;
             }
             y = battleStatus->enemyActors[actorID]->curPos.y;
@@ -1362,7 +1362,7 @@ API_CALLABLE(BattleCam_Update_FollowActorPos) {
 
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
-            if (battleStatus->playerActor == NULL) {
+            if (battleStatus->playerActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             x = battleStatus->playerActor->curPos.x;
@@ -1370,7 +1370,7 @@ API_CALLABLE(BattleCam_Update_FollowActorPos) {
             z = battleStatus->playerActor->curPos.z;
             break;
         case ACTOR_CLASS_PARTNER:
-            if (battleStatus->partnerActor == NULL) {
+            if (battleStatus->partnerActor == nullptr) {
                 return ApiStatus_BLOCK;
             }
             x = battleStatus->partnerActor->curPos.x;
@@ -1379,7 +1379,7 @@ API_CALLABLE(BattleCam_Update_FollowActorPos) {
             break;
         case ACTOR_CLASS_ENEMY:
         default:
-            if (battleStatus->enemyActors[actorID] == NULL) {
+            if (battleStatus->enemyActors[actorID] == nullptr) {
                 return ApiStatus_BLOCK;
             }
             x = battleStatus->enemyActors[actorID]->curPos.x;
@@ -1463,7 +1463,7 @@ API_CALLABLE(BattleCam_Init) {
 
 void btl_cam_use_preset_impl(s32 id) {
     BattleStatus* battleStatus = &gBattleStatus;
-    EvtScript* preset = NULL;
+    EvtScript* preset = nullptr;
     Evt* newScript;
 
     if (!BattleCam_IsFrozen) {
@@ -2184,7 +2184,7 @@ void btl_cam_use_preset_impl(s32 id) {
 
         BattleCam_CurrentPresetID = id;
 
-        if (battleStatus->camMovementScript != NULL) {
+        if (battleStatus->camMovementScript != nullptr) {
             kill_script_by_ID(battleStatus->camMovementScriptID);
         }
 
@@ -2243,7 +2243,7 @@ void btl_cam_move(s16 moveTime) {
 
     if (!BattleCam_IsFrozen) {
         BattleCam_MoveTimeLeft = moveTime;
-        if (battleStatus->camMovementScript != NULL) {
+        if (battleStatus->camMovementScript != nullptr) {
             restart_script(battleStatus->camMovementScript);
         }
     }
@@ -2524,7 +2524,7 @@ API_CALLABLE(MoveBattleCamOver) {
     BattleCam_MoveTimeLeft = evt_get_variable(script, *args++);
     BattleCam_CurrentPresetID = 0;
 
-    if (battleStatus->camMovementScript != NULL) {
+    if (battleStatus->camMovementScript != nullptr) {
         restart_script(battleStatus->camMovementScript);
     }
 

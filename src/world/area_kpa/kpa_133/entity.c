@@ -8,7 +8,7 @@ extern EvtScript N(EVS_SetupHiddenSpring);
 
 API_CALLABLE(N(SetSpringRotation)) {
     Bytecode* args = script->ptrReadPos;
-    Entity* entity = get_entity_by_index(evt_get_variable(NULL, MV_SpringEntityID));
+    Entity* entity = get_entity_by_index(evt_get_variable(nullptr, MV_SpringEntityID));
 
     entity->rot.x = evt_get_variable(script, *args++);
     entity->rot.y = evt_get_variable(script, *args++);
@@ -18,7 +18,7 @@ API_CALLABLE(N(SetSpringRotation)) {
 
 API_CALLABLE(N(SetSpringPosition)) {
     Bytecode* args = script->ptrReadPos;
-    Entity* entity = get_entity_by_index(evt_get_variable(NULL, MV_SpringEntityID));
+    Entity* entity = get_entity_by_index(evt_get_variable(nullptr, MV_SpringEntityID));
 
     entity->pos.x = evt_get_variable(script, *args++);
     entity->pos.y = evt_get_variable(script, *args++);

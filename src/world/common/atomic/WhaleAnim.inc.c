@@ -20,7 +20,7 @@ API_CALLABLE(N(UnkAngleFunc001)) {
     Npc* npc = N(resolve_npc)(script, npcID);
     f32 y;
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 

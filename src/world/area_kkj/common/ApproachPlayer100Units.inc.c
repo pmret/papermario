@@ -14,7 +14,7 @@ API_CALLABLE(N(ApproachPlayer100Units)) {
     f32 posX;
     f32 posZ;
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 

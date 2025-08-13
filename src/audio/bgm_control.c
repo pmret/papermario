@@ -104,7 +104,7 @@ void bgm_update_music_control(void) {
                             }
                         }
                     } else if (!(music->flags & MUSIC_FLAG_PUSHING)) {
-                        if (snd_song_request_fade_out(music->songName, music->fadeOutTime, NULL) == AU_RESULT_OK) {
+                        if (snd_song_request_fade_out(music->songName, music->fadeOutTime, nullptr) == AU_RESULT_OK) {
                             music->state = stateFadeOut;
                         }
                     } else {

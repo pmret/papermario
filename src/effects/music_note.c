@@ -45,7 +45,7 @@ void music_note_main(s32 type, f32 posX, f32 posY, f32 posZ) {
     bp.init = music_note_init;
     bp.update = music_note_update;
     bp.renderScene = music_note_render;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_MUSIC_NOTE;
 
     effect = create_effect_instance(bpPtr);
@@ -53,7 +53,7 @@ void music_note_main(s32 type, f32 posX, f32 posY, f32 posZ) {
 
     part = effect->data.musicNote = general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data.musicNote != NULL);
+    ASSERT(effect->data.musicNote != nullptr);
 
     part->type = type;
     part->pos.x = posX;

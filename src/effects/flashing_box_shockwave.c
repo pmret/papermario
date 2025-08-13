@@ -28,13 +28,13 @@ EffectInstance* flashing_box_shockwave_main(
     bp.update = flashing_box_shockwave_update;
     bp.renderScene = flashing_box_shockwave_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_FLASHING_BOX_SHOCKWAVE;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.flashingBoxShockwave = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.flashingBoxShockwave != NULL);
+    ASSERT(effect->data.flashingBoxShockwave != nullptr);
 
     data->type = type;
     data->timeLeft = 30;

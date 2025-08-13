@@ -684,9 +684,9 @@ API_CALLABLE(N(GetSpinySurgeDamage)) {
 API_CALLABLE(N(RemoveCloudNineFX)) {
     EffectInstance* effect = gBattleStatus.cloudNineEffect;
 
-    if (effect != NULL) {
+    if (effect != nullptr) {
         remove_effect(effect);
-        gBattleStatus.cloudNineEffect = NULL;
+        gBattleStatus.cloudNineEffect = nullptr;
         gBattleStatus.cloudNineTurnsLeft = 0;
         return ApiStatus_DONE2;
     }

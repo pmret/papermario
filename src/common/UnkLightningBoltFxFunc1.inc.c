@@ -17,7 +17,7 @@ API_CALLABLE(N(UnkLightningBoltFxFunc1)) {
     FxLightningBoltState* effectState;
     ActorState* actorState;
 
-    if (actor == NULL) {
+    if (actor == nullptr) {
         return ApiStatus_DONE2;
     }
 

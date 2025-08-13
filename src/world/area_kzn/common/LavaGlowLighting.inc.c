@@ -27,7 +27,7 @@ API_CALLABLE(N(ApplyLavaGlowLighting)) {
     s32 i;
 
     if (isInitialCall) {
-        if (modelIDs != NULL) {
+        if (modelIDs != nullptr) {
             // apply effect to models in the list
             u16* idList = modelIDs->list;
             for (i = 0; i < modelIDs->count; i++, idList++) {
@@ -36,10 +36,10 @@ API_CALLABLE(N(ApplyLavaGlowLighting)) {
                 set_mdl_custom_gfx_set(mdl, CUSTOM_GFX_NONE, ENV_TINT_DEPTH);
             }
         } else {
-            // list is NULL -> apply effect to ALL models
+            // list is nullptr -> apply effect to ALL models
             Model** models = (Model**) gCurrentModels;
             for (i = 0; i < MAX_MODELS; i++, models++) {
-                if (*models != NULL) {
+                if (*models != nullptr) {
                     set_mdl_custom_gfx_set(*models, CUSTOM_GFX_NONE, ENV_TINT_DEPTH);
                 }
             }
@@ -53,7 +53,7 @@ API_CALLABLE(N(ApplyLavaGlowLighting)) {
 
     switch (glowMode) {
         case LAVA_GLOW_MODE_1:
-            if (evt_get_float_variable(NULL, MV_GlowIntensity) <= 0.0f) {
+            if (evt_get_float_variable(nullptr, MV_GlowIntensity) <= 0.0f) {
                 return ApiStatus_DONE2;
             }
             deltaX = -75.0f - playerStatus->pos.x;
@@ -64,12 +64,12 @@ API_CALLABLE(N(ApplyLavaGlowLighting)) {
             if (baseAlpha < 0.0f) {
                 baseAlpha = 0.0f;
             }
-            baseAlpha *= 0.2 * evt_get_float_variable(NULL, MV_GlowIntensity);
+            baseAlpha *= 0.2 * evt_get_float_variable(nullptr, MV_GlowIntensity);
             fogStart = 970;
             break;
         case LAVA_GLOW_MODE_2:
             baseAlpha = 100.0f;
-            fogStart = 995 - evt_get_variable(NULL, MV_GlowIntensity);
+            fogStart = 995 - evt_get_variable(nullptr, MV_GlowIntensity);
             break;
         case LAVA_GLOW_MODE_END:
             return ApiStatus_BLOCK;
@@ -92,7 +92,7 @@ API_CALLABLE(N(ClearLavaGlowLighting)) {
     ModelIDList* modelIDs = (ModelIDList*) evt_get_variable(script, *args++);
     s32 i;
 
-    if (modelIDs != NULL) {
+    if (modelIDs != nullptr) {
         // clear effect from models in the list
         u16* idList = modelIDs->list;
         for (i = 0; i < modelIDs->count; i++, idList++) {
@@ -101,10 +101,10 @@ API_CALLABLE(N(ClearLavaGlowLighting)) {
             set_mdl_custom_gfx_set(mdl, CUSTOM_GFX_NONE, ENV_TINT_NONE);
         }
     } else {
-        // list is NULL -> clear effect from ALL models
+        // list is nullptr -> clear effect from ALL models
         Model** models = (Model**) gCurrentModels;
         for (i = 0; i < MAX_MODELS; i++, models++) {
-            if (*models != NULL) {
+            if (*models != nullptr) {
                 set_mdl_custom_gfx_set(*models, CUSTOM_GFX_NONE, ENV_TINT_NONE);
             }
         }

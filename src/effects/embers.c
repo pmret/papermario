@@ -45,13 +45,13 @@ EffectInstance* embers_main(
     bp.update = embers_update;
     bp.renderScene = embers_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_EMBERS;
 
     effect = create_effect_instance(&bp);
     effect->numParts = arg7;
     part = effect->data.embers = general_heap_malloc(arg7 * sizeof(*part));
-    ASSERT(effect->data.embers != NULL);
+    ASSERT(effect->data.embers != nullptr);
 
     part->unk_00 = arg0;
     part->lifetime = 0;

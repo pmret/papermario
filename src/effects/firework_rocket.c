@@ -91,13 +91,13 @@ EffectInstance* firework_rocket_main(s32 variation, f32 centerX, f32 centerY, f3
     bp.update = firework_rocket_update;
     bp.renderScene = firework_rocket_render;
     bp.unk_00 = 0;
-    bp.renderUI = NULL;
+    bp.renderUI = nullptr;
     bp.effectID = EFFECT_FIREWORK_ROCKET;
 
     effect = create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.fireworkRocket = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(effect->data.fireworkRocket != NULL);
+    ASSERT(effect->data.fireworkRocket != nullptr);
 
     data->variation = variation;
     data->lifeTime = 0;
@@ -284,7 +284,7 @@ void firework_rocket_appendGfx(void* effect) {
         sparkDir = D_E010AF68[variation].sparks;
         numSparks = D_E010AF68[variation].num;
     } else {
-        sparkDir = NULL;
+        sparkDir = nullptr;
         numSparks = 4;
     }
 

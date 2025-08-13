@@ -24,14 +24,14 @@ EffectInstance* star_outline_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 ar
     effectBp.update = star_outline_update;
     effectBp.renderScene = star_outline_render;
     effectBp.unk_00 = 0;
-    effectBp.renderUI = NULL;
+    effectBp.renderUI = nullptr;
     effectBp.effectID = EFFECT_STAR_OUTLINE;
 
     effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
 
     data = effect->data.starOutline = general_heap_malloc(numParts * sizeof(*data));
-    ASSERT(data != NULL);
+    ASSERT(data != nullptr);
 
     data->unk_00 = 1;
     data->unk_02 = arg0;

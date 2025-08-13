@@ -36,8 +36,8 @@ API_CALLABLE(CreateNpc) {
 
     blueprint.flags = 0;
     blueprint.initialAnim = initialAnim;
-    blueprint.onUpdate = NULL;
-    blueprint.onRender = NULL;
+    blueprint.onUpdate = nullptr;
+    blueprint.onRender = nullptr;
 
     npc = get_npc_by_index(create_basic_npc(&blueprint));
     npc->npcID = npcID;
@@ -49,7 +49,7 @@ API_CALLABLE(DeleteNpc) {
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(evt_get_variable(script, *args++));
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -74,7 +74,7 @@ API_CALLABLE(SetNpcPos) {
     f32 z = evt_get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -97,7 +97,7 @@ API_CALLABLE(SetNpcRotation) {
     f32 rotZ = evt_get_float_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -114,7 +114,7 @@ API_CALLABLE(SetNpcRotationPivot) {
     Npc* npc;
 
     npc = resolve_npc(script, npcId);
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -130,7 +130,7 @@ API_CALLABLE(SetNpcScale) {
     f32 scaleZ = evt_get_float_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -147,7 +147,7 @@ API_CALLABLE(SetNpcCollisionSize) {
     s32 radius = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -162,7 +162,7 @@ API_CALLABLE(SetNpcSpeed) {
     f32 speed = evt_get_float_variable(script, *ptrReadPos);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -176,7 +176,7 @@ API_CALLABLE(SetNpcJumpscale) {
     f32 jumpScale = evt_get_float_variable(script, *ptrReadPos);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -190,7 +190,7 @@ API_CALLABLE(SetNpcAnimation) {
     s32 animation = evt_get_variable(script, *ptrReadPos);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -204,7 +204,7 @@ API_CALLABLE(GetNpcAnimation) {
     Bytecode outVar = *ptrReadPos++;
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -218,7 +218,7 @@ API_CALLABLE(SetNpcAnimationSpeed) {
     f32 animationSpeed = evt_get_float_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -243,7 +243,7 @@ API_CALLABLE(NpcMoveTo) {
         s32 duration = evt_get_variable(script, *args++);
 
         npc = resolve_npc(script, npcID);
-        if (npc == NULL) {
+        if (npc == nullptr) {
             return ApiStatus_DONE2;
         }
 
@@ -306,7 +306,7 @@ ApiStatus _npc_jump_to(Evt* script, s32 isInitialCall, s32 snapYaw) {
 
         npc = resolve_npc(script, npcID);
 
-        if (npc == NULL) {
+        if (npc == nullptr) {
             return ApiStatus_DONE2;
         }
 
@@ -376,7 +376,7 @@ API_CALLABLE(NpcFlyTo) {
 
     if (isInitialCall) {
         npc = resolve_npc(script, evt_get_variable(script, *args++));
-        if (npc == NULL) {
+        if (npc == nullptr) {
             return ApiStatus_DONE2;
         }
 
@@ -443,7 +443,7 @@ API_CALLABLE(GetNpcYaw) {
     Bytecode outVar = *ptrReadPos++;
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -456,7 +456,7 @@ API_CALLABLE(SetNpcYaw) {
     s32 npcID = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -476,7 +476,7 @@ API_CALLABLE(InterpNpcYaw) {
         s32 npcID = evt_get_variable(script, *args++);
 
         npc = resolve_npc(script, npcID);
-        if (npc == NULL) {
+        if (npc == nullptr) {
             return ApiStatus_DONE2;
         }
 
@@ -524,7 +524,7 @@ API_CALLABLE(NpcFacePlayer) {
         s32 npcID = evt_get_variable(script, *args++);
 
         npc = resolve_npc(script, npcID);
-        if (npc == NULL) {
+        if (npc == nullptr) {
             return ApiStatus_DONE2;
         }
 
@@ -567,12 +567,12 @@ API_CALLABLE(NpcFaceNpc) {
         s32 targetNpcID = evt_get_variable(script, *args++);
 
         targetNpc = resolve_npc(script, targetNpcID);
-        if (targetNpc == NULL) {
+        if (targetNpc == nullptr) {
             return ApiStatus_DONE2;
         }
 
         turningNpc = resolve_npc(script, turningNpcID);
-        if (turningNpc == NULL) {
+        if (turningNpc == nullptr) {
             return ApiStatus_DONE2;
         }
 
@@ -609,7 +609,7 @@ API_CALLABLE(SetNpcFlagBits) {
     s32 mode = evt_get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -630,7 +630,7 @@ API_CALLABLE(GetNpcPos) {
     s32 outZ = *args++;
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -646,7 +646,7 @@ API_CALLABLE(SetNpcCollisionChannel) {
     Bytecode channel = *args;
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -660,11 +660,11 @@ API_CALLABLE(SetNpcSprite) {
     Bytecode animID = *args;
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
-    set_npc_sprite(npc, animID, NULL);
+    set_npc_sprite(npc, animID, nullptr);
     return ApiStatus_DONE2;
 }
 
@@ -674,7 +674,7 @@ API_CALLABLE(EnableNpcShadow) {
     s32 enableShadow = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -692,7 +692,7 @@ API_CALLABLE(EnableNpcBlur) {
     s32 enableBlur = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -709,7 +709,7 @@ API_CALLABLE(ClearPartnerMoveHistory) {
     s32 npcID = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -720,7 +720,7 @@ API_CALLABLE(ClearPartnerMoveHistory) {
 API_CALLABLE(NpcSetHomePosToCurrent) {
     Npc* npc = resolve_npc(script, evt_get_variable(script, *script->ptrReadPos));
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -737,7 +737,7 @@ API_CALLABLE(GetPartnerPos) {
     Bytecode posZ = *ptrReadPos++;
     Npc* npc = get_npc_unsafe(NPC_PARTNER);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -808,8 +808,8 @@ API_CALLABLE(BringPartnerOut) {
 
         bpPointer->flags = NPC_FLAG_IGNORE_PLAYER_COLLISION;
         bpPointer->initialAnim = gPartnerAnimations[wExtraPartnerID].fly;
-        bpPointer->onUpdate = NULL;
-        bpPointer->onRender = NULL;
+        bpPointer->onUpdate = nullptr;
+        bpPointer->onRender = nullptr;
 
         wExtraPartnerNpcID = create_basic_npc(bpPointer);
         npc = get_npc_by_index(wExtraPartnerNpcID);
@@ -975,7 +975,7 @@ API_CALLABLE(SetNpcImgFXParams) {
     Bytecode var5 = evt_get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcId);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -989,7 +989,7 @@ API_CALLABLE(SetNpcImgFXFlags) {
     Bytecode flags = *args;
     Npc* npc = resolve_npc(script, npcId);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -1003,7 +1003,7 @@ API_CALLABLE(SetNpcPaletteSwapMode) {
     Bytecode palAdjustMode = evt_get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcId);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -1020,7 +1020,7 @@ API_CALLABLE(SetNpcPaletteSwapLower) {
     Bytecode var4 = evt_get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcId);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -1041,7 +1041,7 @@ API_CALLABLE(SetNpcPaletteSwapping) {
     Bytecode var8 = evt_get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcId);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -1057,7 +1057,7 @@ API_CALLABLE(SetNpcDecoration) {
     s32 value2 = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 
@@ -1072,7 +1072,7 @@ API_CALLABLE(PlaySoundAtNpc) {
     s32 flags = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
-    if (npc == NULL) {
+    if (npc == nullptr) {
         return ApiStatus_DONE2;
     }
 

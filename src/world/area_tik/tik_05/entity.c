@@ -9,7 +9,7 @@ API_CALLABLE(N(PlaySpringAnimation)) {
     Bytecode* args = script->ptrReadPos;
     Entity* entity = get_entity_by_index(evt_get_variable(script, *args++));
 
-    if (entity == NULL) {
+    if (entity == nullptr) {
         return ApiStatus_BLOCK;
     }
 

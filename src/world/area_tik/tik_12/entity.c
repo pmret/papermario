@@ -9,7 +9,7 @@
 #include "world/common/todo/SomeItemEntityFunc.inc.c"
 #include "world/common/todo/IsItemBadge.inc.c"
 
-s32** N(varStash) = NULL;
+s32** N(varStash) = nullptr;
 
 EvtScript N(EVS_Chest_ShowGotItem) = {
     SetGroup(EVT_GROUP_NEVER_PAUSE)
