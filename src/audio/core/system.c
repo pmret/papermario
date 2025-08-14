@@ -33,8 +33,8 @@ AuSynDriver auSynDriver;
 u8 rspbootUcodeBuffer[0x100] ALIGNED(16);
 #endif
 
-extern u64 n_aspMain_text_bin[];
-extern u64 n_aspMain_data_bin[];
+extern u64 n_aspMainTextStart[];
+extern u64 n_aspMainDataStart[];
 
 extern u8 AuHeapBase[AUDIO_HEAP_SIZE];
 
@@ -72,8 +72,8 @@ void create_audio_system(void) {
         nuAuTasks[i].list.t.ucode_boot = (u64*) rspbootUcodeBuffer;
         nuAuTasks[i].list.t.ucode_boot_size = 0x100;
 #endif
-        nuAuTasks[i].list.t.ucode = n_aspMain_text_bin;
-        nuAuTasks[i].list.t.ucode_data = n_aspMain_data_bin;
+        nuAuTasks[i].list.t.ucode = n_aspMainTextStart;
+        nuAuTasks[i].list.t.ucode_data = n_aspMainDataStart;
         nuAuTasks[i].list.t.ucode_data_size = SP_UCODE_DATA_SIZE;
         nuAuTasks[i].list.t.dram_stack = nullptr;
         nuAuTasks[i].list.t.dram_stack_size = 0;

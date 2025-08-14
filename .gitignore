@@ -63,3 +63,5 @@ build/
 .cache/clangd/
 # compile_commands.json requires hardcoded paths, so it can't be committed
 compile_commands.json
+
+/ver/*/asm/data/rsp/*.s

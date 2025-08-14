@@ -15,7 +15,7 @@ options:
   symbol_addrs_path: ver/us/symbol_addrs.txt
   ld_script_path: ver/us/papermario.ld
   ld_symbol_header_path: ver/us/build/include/ld_addrs.h
-  ld_generate_symbol_per_data_segment: True
+  ld_generate_symbol_per_data_segment: False
   src_path: src
   asm_path: ver/us/asm
   asset_path: assets/us
@@ -28,7 +28,6 @@ options:
   ld_wildcard_sections: True
   ld_use_symbolic_vram_addresses: False
   hasm_in_src_path: True
-  # ld_generate_symbol_per_data_segment: False
 vram_classes:
   # Main
   - { name: main, vram: 0x80025C00 }
@@ -344,7 +343,7 @@ segments:
     - [auto, c, bss/main_post_bss]
     - [auto, c, battle/battle]
     - [auto, c, battle/battle_bss]
-    - [0x4E5A0, bin, n_aspMain_text]
+    - [0x4E5A0, textbin, rsp/n_aspMain]
     - start: 0x4F200
       type: .data
       name: main_pre
@@ -377,9 +376,9 @@ segments:
       subsegments:
       - [0x52690, i1, crash_screen/font, 32, 64]
       - [0x52790]
-    - [0x71430, bin, gspF3DEX2kawase_fifo_text]
-    - [0x72A60, bin, gspF3DEX2kawase_fifo_data]
-    - [0x72E80, bin, n_aspMain_data]
+    - { start: 0x71430, type: textbin, name: rsp/gspF3DEX2kawase_fifo, linker_section_order: .data }
+    - [0x72A60, databin, rsp/gspF3DEX2kawase_fifo]
+    - [0x72E80, databin, rsp/n_aspMain]
     - [0x73130]
   - name: engine1
     type: code
