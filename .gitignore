@@ -1,6 +1,7 @@
 # Python
 __pycache__/
 venv/
+.venv/
 .lark_cache*
 .splat_cache
 

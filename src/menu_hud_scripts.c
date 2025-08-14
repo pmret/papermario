@@ -15,6 +15,8 @@ INCLUDE_IMG("ui/files/filename_caret.png", ui_files_filename_caret_png);
 INCLUDE_PAL("ui/files/filename_caret.pal", ui_files_filename_caret_pal);
 INCLUDE_IMG("ui/files/filename_space.png", ui_files_filename_space_png);
 INCLUDE_PAL("ui/files/filename_space.pal", ui_files_filename_space_pal);
+
+#if !VERSION_JP
 INCLUDE_IMG("ui/pause/label_stats.png", ui_pause_label_stats_png);
 INCLUDE_PAL("ui/pause/label_stats.pal", ui_pause_label_stats_pal);
 INCLUDE_IMG("ui/pause/label_badges.png", ui_pause_label_badges_png);
@@ -23,10 +25,54 @@ INCLUDE_IMG("ui/pause/label_items.png", ui_pause_label_items_png);
 INCLUDE_PAL("ui/pause/label_items.pal", ui_pause_label_items_pal);
 INCLUDE_IMG("ui/pause/label_party.png", ui_pause_label_party_png);
 INCLUDE_PAL("ui/pause/label_party.pal", ui_pause_label_party_pal);
+#endif
+
 INCLUDE_IMG("ui/pause/label_spirits.png", ui_pause_label_spirits_png);
 INCLUDE_PAL("ui/pause/label_spirits.pal", ui_pause_label_spirits_pal);
 INCLUDE_IMG("ui/pause/label_map.png", ui_pause_label_map_png);
 INCLUDE_PAL("ui/pause/label_map.pal", ui_pause_label_map_pal);
+
+#if VERSION_PAL
+INCLUDE_IMG("de/ui/pause/label_stats.png", de_ui_pause_label_stats_png);
+INCLUDE_PAL("de/ui/pause/label_stats.pal", de_ui_pause_label_stats_pal);
+INCLUDE_IMG("de/ui/pause/label_badges.png", de_ui_pause_label_badges_png);
+INCLUDE_PAL("de/ui/pause/label_badges.pal", de_ui_pause_label_badges_pal);
+INCLUDE_IMG("de/ui/pause/label_items.png", de_ui_pause_label_items_png);
+INCLUDE_PAL("de/ui/pause/label_items.pal", de_ui_pause_label_items_pal);
+INCLUDE_IMG("de/ui/pause/label_party.png", de_ui_pause_label_party_png);
+INCLUDE_PAL("de/ui/pause/label_party.pal", de_ui_pause_label_party_pal);
+INCLUDE_IMG("de/ui/pause/label_spirits.png", de_ui_pause_label_spirits_png);
+INCLUDE_PAL("de/ui/pause/label_spirits.pal", de_ui_pause_label_spirits_pal);
+INCLUDE_IMG("de/ui/pause/label_map.png", de_ui_pause_label_map_png);
+INCLUDE_PAL("de/ui/pause/label_map.pal", de_ui_pause_label_map_pal);
+
+INCLUDE_IMG("fr/ui/pause/label_stats.png", fr_ui_pause_label_stats_png);
+INCLUDE_PAL("fr/ui/pause/label_stats.pal", fr_ui_pause_label_stats_pal);
+INCLUDE_IMG("fr/ui/pause/label_badges.png", fr_ui_pause_label_badges_png);
+INCLUDE_PAL("fr/ui/pause/label_badges.pal", fr_ui_pause_label_badges_pal);
+INCLUDE_IMG("fr/ui/pause/label_items.png", fr_ui_pause_label_items_png);
+INCLUDE_PAL("fr/ui/pause/label_items.pal", fr_ui_pause_label_items_pal);
+INCLUDE_IMG("fr/ui/pause/label_party.png", fr_ui_pause_label_party_png);
+INCLUDE_PAL("fr/ui/pause/label_party.pal", fr_ui_pause_label_party_pal);
+INCLUDE_IMG("fr/ui/pause/label_spirits.png", fr_ui_pause_label_spirits_png);
+INCLUDE_PAL("fr/ui/pause/label_spirits.pal", fr_ui_pause_label_spirits_pal);
+INCLUDE_IMG("fr/ui/pause/label_map.png", fr_ui_pause_label_map_png);
+INCLUDE_PAL("fr/ui/pause/label_map.pal", fr_ui_pause_label_map_pal);
+
+INCLUDE_IMG("es/ui/pause/label_stats.png", es_ui_pause_label_stats_png);
+INCLUDE_PAL("es/ui/pause/label_stats.pal", es_ui_pause_label_stats_pal);
+INCLUDE_IMG("es/ui/pause/label_badges.png", es_ui_pause_label_badges_png);
+INCLUDE_PAL("es/ui/pause/label_badges.pal", es_ui_pause_label_badges_pal);
+INCLUDE_IMG("es/ui/pause/label_items.png", es_ui_pause_label_items_png);
+INCLUDE_PAL("es/ui/pause/label_items.pal", es_ui_pause_label_items_pal);
+INCLUDE_IMG("es/ui/pause/label_party.png", es_ui_pause_label_party_png);
+INCLUDE_PAL("es/ui/pause/label_party.pal", es_ui_pause_label_party_pal);
+INCLUDE_IMG("es/ui/pause/label_spirits.png", es_ui_pause_label_spirits_png);
+INCLUDE_PAL("es/ui/pause/label_spirits.pal", es_ui_pause_label_spirits_pal);
+INCLUDE_IMG("es/ui/pause/label_map.png", es_ui_pause_label_map_png);
+INCLUDE_PAL("es/ui/pause/label_map.pal", es_ui_pause_label_map_pal);
+#endif
+
 INCLUDE_IMG("ui/pause/small_digit_0.png", ui_pause_small_digit_0_png);
 INCLUDE_PAL("ui/pause/small_digit_0.pal", ui_pause_small_digit_0_pal);
 INCLUDE_IMG("ui/pause/small_digit_1.png", ui_pause_small_digit_1_png);
@@ -53,6 +99,8 @@ INCLUDE_IMG("ui/pause/label_jp_file.png", ui_pause_label_jp_file_png);
 INCLUDE_PAL("ui/pause/label_jp_file.pal", ui_pause_label_jp_file_pal);
 INCLUDE_IMG("ui/pause/label_jp_file_disabled.png", ui_pause_label_jp_file_disabled_png);
 INCLUDE_PAL("ui/pause/label_jp_file_disabled.pal", ui_pause_label_jp_file_disabled_pal);
+
+// English
 INCLUDE_IMG("ui/files/option_mono_on.png", ui_files_option_mono_on_png);
 INCLUDE_PAL("ui/files/option_mono_on.pal", ui_files_option_mono_on_pal);
 INCLUDE_IMG("ui/files/option_mono_off.png", ui_files_option_mono_off_png);
@@ -61,6 +109,39 @@ INCLUDE_IMG("ui/files/option_stereo_on.png", ui_files_option_stereo_on_png);
 INCLUDE_PAL("ui/files/option_stereo_on.pal", ui_files_option_stereo_on_pal);
 INCLUDE_IMG("ui/files/option_stereo_off.png", ui_files_option_stereo_off_png);
 INCLUDE_PAL("ui/files/option_stereo_off.pal", ui_files_option_stereo_off_pal);
+
+#if VERSION_PAL
+// German
+INCLUDE_IMG("de/ui/files/option_mono_on.png", de_ui_files_option_mono_on_png);
+INCLUDE_PAL("de/ui/files/option_mono_on.pal", de_ui_files_option_mono_on_pal);
+INCLUDE_IMG("de/ui/files/option_mono_off.png", de_ui_files_option_mono_off_png);
+INCLUDE_PAL("de/ui/files/option_mono_off.pal", de_ui_files_option_mono_off_pal);
+INCLUDE_IMG("de/ui/files/option_stereo_on.png", de_ui_files_option_stereo_on_png);
+INCLUDE_PAL("de/ui/files/option_stereo_on.pal", de_ui_files_option_stereo_on_pal);
+INCLUDE_IMG("de/ui/files/option_stereo_off.png", de_ui_files_option_stereo_off_png);
+INCLUDE_PAL("de/ui/files/option_stereo_off.pal", de_ui_files_option_stereo_off_pal);
+
+// French
+INCLUDE_IMG("fr/ui/files/option_mono_on.png", fr_ui_files_option_mono_on_png);
+INCLUDE_PAL("fr/ui/files/option_mono_on.pal", fr_ui_files_option_mono_on_pal);
+INCLUDE_IMG("fr/ui/files/option_mono_off.png", fr_ui_files_option_mono_off_png);
+INCLUDE_PAL("fr/ui/files/option_mono_off.pal", fr_ui_files_option_mono_off_pal);
+INCLUDE_IMG("fr/ui/files/option_stereo_on.png", fr_ui_files_option_stereo_on_png);
+INCLUDE_PAL("fr/ui/files/option_stereo_on.pal", fr_ui_files_option_stereo_on_pal);
+INCLUDE_IMG("fr/ui/files/option_stereo_off.png", fr_ui_files_option_stereo_off_png);
+INCLUDE_PAL("fr/ui/files/option_stereo_off.pal", fr_ui_files_option_stereo_off_pal);
+
+// Spanish
+INCLUDE_IMG("es/ui/files/option_mono_on.png", es_ui_files_option_mono_on_png);
+INCLUDE_PAL("es/ui/files/option_mono_on.pal", es_ui_files_option_mono_on_pal);
+INCLUDE_IMG("es/ui/files/option_mono_off.png", es_ui_files_option_mono_off_png);
+INCLUDE_PAL("es/ui/files/option_mono_off.pal", es_ui_files_option_mono_off_pal);
+INCLUDE_IMG("es/ui/files/option_stereo_on.png", es_ui_files_option_stereo_on_png);
+INCLUDE_PAL("es/ui/files/option_stereo_on.pal", es_ui_files_option_stereo_on_pal);
+INCLUDE_IMG("es/ui/files/option_stereo_off.png", es_ui_files_option_stereo_off_png);
+INCLUDE_PAL("es/ui/files/option_stereo_off.pal", es_ui_files_option_stereo_off_pal);
+#endif
+
 INCLUDE_IMG("ui/files/eldstar.png", ui_files_eldstar_png);
 INCLUDE_PAL("ui/files/eldstar.pal", ui_files_eldstar_pal);
 INCLUDE_IMG("ui/files/eldstar_silhouette.png", ui_files_eldstar_silhouette_png);
@@ -111,8 +192,21 @@ INCLUDE_IMG("ui/pause/desc_msg_prev.png", ui_pause_desc_msg_prev_png);
 INCLUDE_PAL("ui/pause/desc_msg_prev.pal", ui_pause_desc_msg_prev_pal);
 INCLUDE_IMG("ui/pause/desc_msg_next.png", ui_pause_desc_msg_next_png);
 INCLUDE_PAL("ui/pause/desc_msg_next.pal", ui_pause_desc_msg_next_pal);
+
 INCLUDE_IMG("ui/pause/bp_needed.png", ui_pause_bp_needed_png);
 INCLUDE_PAL("ui/pause/bp_needed.pal", ui_pause_bp_needed_pal);
+
+#if VERSION_PAL
+INCLUDE_IMG("de/ui/pause/bp_needed.png", de_ui_pause_bp_needed_png);
+INCLUDE_PAL("de/ui/pause/bp_needed.pal", de_ui_pause_bp_needed_pal);
+
+INCLUDE_IMG("fr/ui/pause/bp_needed.png", fr_ui_pause_bp_needed_png);
+INCLUDE_PAL("fr/ui/pause/bp_needed.pal", fr_ui_pause_bp_needed_pal);
+
+INCLUDE_IMG("es/ui/pause/bp_needed.png", es_ui_pause_bp_needed_png);
+INCLUDE_PAL("es/ui/pause/bp_needed.pal", es_ui_pause_bp_needed_pal);
+#endif
+
 INCLUDE_IMG("ui/pause/mario_large.png", ui_pause_mario_large_png);
 INCLUDE_PAL("ui/pause/mario_large.pal", ui_pause_mario_large_pal);
 INCLUDE_IMG("ui/pause/dash.png", ui_pause_dash_png);

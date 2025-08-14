@@ -1076,6 +1076,7 @@ segments:
       - [auto, palette, ui/files/filename_caret]
       - [auto, ci4, ui/files/filename_space, 8, 8]
       - [auto, palette, ui/files/filename_space]
+
       - [auto, ci4, ui/pause/label_stats, 48, 16]
       - [auto, palette, ui/pause/label_stats]
       - [auto, ci4, ui/pause/label_badges, 48, 16]
@@ -1084,10 +1085,12 @@ segments:
       - [auto, palette, ui/pause/label_items]
       - [auto, ci4, ui/pause/label_party, 48, 16]
       - [auto, palette, ui/pause/label_party]
+
       - [auto, ci4, ui/pause/label_spirits, 48, 16]
       - [auto, palette, ui/pause/label_spirits]
       - [auto, ci4, ui/pause/label_map, 48, 16]
       - [auto, palette, ui/pause/label_map]
+
       - [auto, ci4, ui/pause/small_digit_0, 8, 8]
       - [auto, palette, ui/pause/small_digit_0]
       - [auto, ci4, ui/pause/small_digit_1, 8, 8]
@@ -1114,6 +1117,7 @@ segments:
       - [auto, palette, ui/pause/label_jp_file]
       - [auto, ci4, ui/pause/label_jp_file_disabled, 32, 16]
       - [auto, palette, ui/pause/label_jp_file_disabled]
+
       - [auto, ci4, ui/files/option_mono_on, 64, 16]
       - [auto, palette, ui/files/option_mono_on]
       - [auto, ci4, ui/files/option_mono_off, 64, 16]
@@ -1122,6 +1126,7 @@ segments:
       - [auto, palette, ui/files/option_stereo_on]
       - [auto, ci4, ui/files/option_stereo_off, 64, 16]
       - [auto, palette, ui/files/option_stereo_off]
+
       - [auto, ci4, ui/files/eldstar, 16, 16]
       - [auto, palette, ui/files/eldstar]
       - [auto, ci4, ui/files/eldstar_silhouette, 16, 16]
@@ -1172,8 +1177,10 @@ segments:
       - [auto, palette, ui/pause/desc_msg_prev]
       - [auto, ci4, ui/pause/desc_msg_next, 16, 16]
       - [auto, palette, ui/pause/desc_msg_next]
+
       - [auto, ci4, ui/pause/bp_needed, 48, 8]
       - [auto, palette, ui/pause/bp_needed]
+
       - [auto, ci4, ui/pause/mario_large, 32, 32]
       - [auto, palette, ui/pause/mario_large]
       - [auto, ci4, ui/pause/dash, 16, 8]
