@@ -30,6 +30,7 @@ options:
   ld_wildcard_sections: True
   ld_use_symbolic_vram_addresses: False
   hasm_in_src_path: True
+  # ld_generate_symbol_per_data_segment: False
 asset_stack:
   - ique
 segments:

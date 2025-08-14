@@ -28,6 +28,7 @@ options:
   symbol_name_format: PAL_$VRAM
   symbol_name_format_no_rom: PAL_$VRAM_$SEG
   hasm_in_src_path: True
+  # ld_generate_symbol_per_data_segment: False
 asset_stack:
   - pal
 segments:
