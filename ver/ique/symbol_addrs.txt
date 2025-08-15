@@ -70,8 +70,6 @@ nuAuTaskStop = 0x80076de0;
 AlFrameSize = 0x800a0044;
 AlCmdListBuffers = 0x8009ff20;
 AlMinFrameSize = 0x800a0048;
-n_aspMain_text_bin = 0x80071e10;
-n_aspMain_data_bin = 0x80096700;
 nuAuTasks = 0x8009ff30;
 D_800A3628 = 0x800a0038;
 nuAuDmaBufList = 0x800a05f0;
@@ -113,7 +111,6 @@ __osViNext = 0x80094654;
 osViModePalLan1 = 0x80094660;
 AuHeapBase = 0x801aa000;
 nuAuMgr = 0x8004a4c0;
-rspbootTextStart = 0x80071d40;
 alHeapAlloc = 0x80057650;
 alLink = 0x8004aaa4;
 nuAuPreNMIProc = 0x8004a9e0;
@@ -4756,3 +4753,10 @@ D_09001518_39A0D8 = 0x09001518; // rom:0x3E2B28
 charset_peach_letter_png = 0x00051020; //rom:0x15F140
 charset_postcard_png = 0x00054FA8; //rom:0x1630C8
 charset_letter_content_1_png = 0x00056E90; //rom:0x164FB0
+
+// RSP symbols
+rspbootTextStart = 0x80071D40; // size:0xD0 name_end:rspbootTextEnd
+n_aspMainTextStart = 0x80071E10; // size:0xC60 name_end:n_aspMainTextEnd
+gspF3DZEX2_NoN_PosLight_fifoTextStart = 0x80094CB0; // size:0x1630 name_end:gspF3DZEX2_NoN_PosLight_fifoTextEnd
+gspF3DZEX2_NoN_PosLight_fifoDataStart = 0x800962E0; // size:0x420 name_end:gspF3DZEX2_NoN_PosLight_fifoDataEnd
+n_aspMainDataStart = 0x80096700; // size:0x2B0 name_end:n_aspMainDataEnd
