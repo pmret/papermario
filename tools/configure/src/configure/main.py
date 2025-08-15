@@ -327,11 +327,6 @@ def write_ninja_rules(
 
     ninja.rule("pm_sbn", command=f"$python {BUILD_TOOLS}/audio/sbn.py $out $asset_stack")
 
-    ninja.rule("archive",
-        description="archive $out",
-        command=f"{cross}ar rcs $out $in",
-    )
-
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'pal')} {cflags} -DPERMUTER -fforce-addr\"\n")
         f.write(f'assembler_command = "{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude"\n')
@@ -658,7 +653,6 @@ class Configure:
         import splat
 
         # Build objects
-        overlays = {} # maps overlay name -> top-level segment -> list of linker entries
         for entry in self.linker_entries:
             seg = entry.segment
 
@@ -666,17 +660,6 @@ class Configure:
                 continue
 
             assert entry.object_path is not None
-
-            vram_class = seg.get_most_parent().vram_class
-            if vram_class is not None:
-                overlay_name = vram_class.name
-            else:
-                addr = seg.get_most_parent().vram_start or seg.get_most_parent().rom_start
-                if (addr & 0xF0000000) == 0xE0000000:
-                    overlay_name = "effect"
-                else:
-                    overlay_name = seg.get_most_parent().name
-            overlays.setdefault(overlay_name, {}).setdefault(seg.get_most_parent(), []).append(entry)
 
             if isinstance(seg, splat.segtypes.n64.header.N64SegHeader):
                 build(entry.object_path, entry.src_paths, "as")
