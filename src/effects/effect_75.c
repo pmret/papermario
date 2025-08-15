@@ -162,7 +162,7 @@ void effect_75_render(EffectInstance* effect) {
     f32 outZ;
     f32 outS;
 
-    transform_point(&gCameras[gCurrentCameraID].mtxPerspective[0],
+    transform_point(gCameras[gCurrentCameraID].mtxPerspective,
         data->pos.x, data->pos.y, data->pos.z, 1.0f,
         &outX, &outY, &outZ, &outS);
 

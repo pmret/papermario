@@ -77,6 +77,13 @@
         IS_DEBUG_PANIC("Assertion failed: " #condition, __FILE__, __LINE__); \
     }
 
+// For functions that are expected to return a value but do not
+#ifdef MODERN_COMPILER
+#define MISSING_RETURN_VALUE(value) (value)
+#else
+#define MISSING_RETURN_VALUE(value)
+#endif
+
 #define BADGE_MENU_PAGE(index) (&gPauseBadgesPages[index])
 #define ITEM_MENU_PAGE(index) (&gPauseItemsPages[index])
 
