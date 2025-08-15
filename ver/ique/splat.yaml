@@ -328,8 +328,8 @@ segments:
       - [0x4FED0]
       - [0x501B0, ia8, ui/no_controller, 128, 32]
       - [0x511B0]
-    - { start: 0x700B0, type: textbin, name: rsp/gspF3DEX2kawase_fifo, linker_section_order: .data }
-    - [0x716E0, databin, rsp/gspF3DEX2kawase_fifo]
+    - { start: 0x700B0, type: textbin, name: rsp/gspF3DEX2_PosLight_fifo, linker_section_order: .data }
+    - [0x716E0, databin, rsp/gspF3DEX2_PosLight_fifo]
     - [0x71B00, databin, rsp/n_aspMain]
     - [0x71DB0]
 

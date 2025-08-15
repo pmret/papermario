@@ -1,11 +1,11 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-extern u64 gspF3DEX2kawase_fifoTextStart[];
-extern u64 gspF3DEX2kawase_fifoDataStart[];
+extern u64 gspF3DZEX2_NoN_PosLight_fifoTextStart[];
+extern u64 gspF3DZEX2_NoN_PosLight_fifoDataStart[];
 
 NUUcode nugfx_ucode = {
-    gspF3DEX2kawase_fifoTextStart, gspF3DEX2kawase_fifoDataStart,
+    gspF3DZEX2_NoN_PosLight_fifoTextStart, gspF3DZEX2_NoN_PosLight_fifoDataStart,
 };
 
 extern u16 gFrameBuf0[];

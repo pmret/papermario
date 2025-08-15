@@ -336,8 +336,8 @@ segments:
       - [0x4E300, vtx, theater/curtain_vtx]
       - [0x4E4F0, vtx, theater/wall_shadows_vtx]
       - [0x4E570]
-    - { start: 0x6D820, type: textbin, name: rsp/gspF3DEX2kawase_fifo, linker_section_order: .data }
-    - [0x6EE50, databin, rsp/gspF3DEX2kawase_fifo]
+    - { start: 0x6D820, type: textbin, name: rsp/gspF3DEX2_PosLight_fifo, linker_section_order: .data }
+    - [0x6EE50, databin, rsp/gspF3DEX2_PosLight_fifo]
     - [0x6F270, databin, rsp/n_aspMain]
     - [0x6F520]
 

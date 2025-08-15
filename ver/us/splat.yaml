@@ -376,8 +376,8 @@ segments:
       subsegments:
       - [0x52690, i1, crash_screen/font, 32, 64]
       - [0x52790]
-    - { start: 0x71430, type: textbin, name: rsp/gspF3DEX2kawase_fifo, linker_section_order: .data }
-    - [0x72A60, databin, rsp/gspF3DEX2kawase_fifo]
+    - { start: 0x71430, type: textbin, name: rsp/gspF3DEX2_PosLight_fifo, linker_section_order: .data }
+    - [0x72A60, databin, rsp/gspF3DEX2_PosLight_fifo]
     - [0x72E80, databin, rsp/n_aspMain]
     - [0x73130]
   - name: engine1

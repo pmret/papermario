@@ -3152,6 +3152,6 @@ D_802A32D8_7AAC78 = 0x802ADF58; // rom:0x81AFC8
 
 // RSP symbols
 n_aspMainTextStart = 0x800704B0; // size:0xC60 name_end:n_aspMainTextEnd
-gspF3DEX2kawase_fifoTextStart = 0x80092420; // size:0x1630 name_end:gspF3DEX2kawase_fifoTextEnd
-gspF3DEX2kawase_fifoDataStart = 0x80093A50; // size:0x420 name_end:gspF3DEX2kawase_fifoDataEnd
+gspF3DZEX2_NoN_PosLight_fifoTextStart = 0x80092420; // size:0x1630 name_end:gspF3DZEX2_NoN_PosLight_fifoTextEnd
+gspF3DZEX2_NoN_PosLight_fifoDataStart = 0x80093A50; // size:0x420 name_end:gspF3DZEX2_NoN_PosLight_fifoDataEnd
 n_aspMainDataStart = 0x80093E70; // size:0x2B0 name_end:n_aspMainDataEnd

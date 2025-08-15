@@ -4757,6 +4757,6 @@ charset_letter_content_1_png = 0x00056E90; //rom:0x164FB0
 // RSP symbols
 rspbootTextStart = 0x80071D40; // size:0xD0 name_end:rspbootTextEnd
 n_aspMainTextStart = 0x80071E10; // size:0xC60 name_end:n_aspMainTextEnd
-gspF3DEX2kawase_fifoTextStart = 0x80094CB0; // size:0x1630 name_end:gspF3DEX2kawase_fifoTextEnd
-gspF3DEX2kawase_fifoDataStart = 0x800962E0; // size:0x420 name_end:gspF3DEX2kawase_fifoDataEnd
+gspF3DZEX2_NoN_PosLight_fifoTextStart = 0x80094CB0; // size:0x1630 name_end:gspF3DZEX2_NoN_PosLight_fifoTextEnd
+gspF3DZEX2_NoN_PosLight_fifoDataStart = 0x800962E0; // size:0x420 name_end:gspF3DZEX2_NoN_PosLight_fifoDataEnd
 n_aspMainDataStart = 0x80096700; // size:0x2B0 name_end:n_aspMainDataEnd
