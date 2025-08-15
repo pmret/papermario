@@ -18,27 +18,34 @@
       "papermario-dx.cachix.org-1:VTXILrqiajck9s5U2O3nDJH0pAI64GAJK41b2pt1JIk="
     ];
   };
-  outputs = { nixpkgs, nixpkgs-binutils-2_39, flake-utils, dream2nix, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
+  outputs = {
+    nixpkgs,
+    nixpkgs-binutils-2_39,
+    flake-utils,
+    dream2nix,
+    ...
+  }:
+    flake-utils.lib.eachDefaultSystem (
+      system: let
         crossSystem = {
           config = "mips-linux-gnu";
         };
-        pkgs = import nixpkgs { inherit system; };
-        pkgsCross = import nixpkgs { inherit system crossSystem; };
-        binutils2_39 = (import nixpkgs-binutils-2_39 { inherit system crossSystem; }).buildPackages.binutilsNoLibc;
+        pkgs = import nixpkgs {inherit system;};
+        pkgsCross = import nixpkgs {inherit system crossSystem;};
+        binutils2_39 = (import nixpkgs-binutils-2_39 {inherit system crossSystem;}).buildPackages.binutilsNoLibc;
 
         hashFromVersion = version: builtins.elemAt (builtins.match "([a-f0-9]+) .*" (builtins.readFile ./ver/${version}/checksum.sha1)) 0;
-        requireBaseRom = version: pkgs.requireFile rec {
-          name = "papermario.${version}.z64";
-          message = ''
-            papermario requires a base ROM.
+        requireBaseRom = version:
+          pkgs.requireFile rec {
+            name = "papermario.${version}.z64";
+            message = ''
+              papermario requires a base ROM.
 
-            Please add it to the Nix store using
-                nix store add --mode flat --name ${name} --hash-algo sha1 path/to/${name}
-          '';
-          sha1 = hashFromVersion version;
-        };
+              Please add it to the Nix store using
+                  nix store add --mode flat --name ${name} --hash-algo sha1 path/to/${name}
+            '';
+            sha1 = hashFromVersion version;
+          };
 
         configure = dream2nix.lib.evalModules {
           packageSets.nixpkgs = pkgs;
@@ -64,24 +71,22 @@
           git
           iconv
           gcc # for n64crc
-          (callPackage ./tools/pigment64.nix { })
-          (callPackage ./tools/crunch64.nix { })
+          (callPackage ./tools/pigment64.nix {})
+          (callPackage ./tools/crunch64.nix {})
         ];
         commonCompilers = {
           gcc = [
             (pkgs.fetchzip {
               name = "gcc-papermario";
               version = "master";
-              url =
-                "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz";
+              url = "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz";
               sha256 = "sha256-bFlt13n13a7UZulwkcdrwRbXfXRWkUTqszAczzAs8Ac=";
               stripRoot = false;
             })
             (pkgs.fetchzip {
               name = "binutils-papermario";
               version = "master";
-              url =
-                "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz";
+              url = "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz";
               sha256 = "sha256-HdVaaOjFBJYywA/+uQ2wsqmJrEwBEuFSdo9jPb4qceE=";
               stripRoot = false;
             })
@@ -90,16 +95,14 @@
             (pkgs.fetchzip {
               name = "mips-gcc";
               version = "2.7.2";
-              url =
-                "https://github.com/decompals/mips-gcc-2.7.2/releases/download/main/gcc-2.7.2-linux.tar.gz";
+              url = "https://github.com/decompals/mips-gcc-2.7.2/releases/download/main/gcc-2.7.2-linux.tar.gz";
               sha256 = "sha256-0orDbWWom581bJ60SvE96ct5H9Mua0c3gyMHbY7DzRE=";
               stripRoot = false;
             })
             (pkgs.fetchzip {
               name = "mips-binutils";
               version = "2.6";
-              url =
-                "https://github.com/decompals/mips-binutils-2.6/releases/download/main/binutils-2.6-linux.tar.gz";
+              url = "https://github.com/decompals/mips-binutils-2.6/releases/download/main/binutils-2.6-linux.tar.gz";
               sha256 = "sha256-237UECnNLGSBZEyLJr9rEHC3cT2m5pS0ApDjgkL3WqM=";
               stripRoot = false;
             })
@@ -108,8 +111,7 @@
             (pkgs.fetchzip {
               name = "ido";
               version = "5.3";
-              url =
-                "https://github.com/decompals/ido-static-recomp/releases/download/v0.2/ido-5.3-recomp-ubuntu-latest.tar.gz";
+              url = "https://github.com/decompals/ido-static-recomp/releases/download/v0.2/ido-5.3-recomp-ubuntu-latest.tar.gz";
               sha256 = "sha256-LvEmsxIeF+JFZFLjIBBbHjDb1ZuvFB5XParZDqamVhE=";
               stripRoot = false;
             })
@@ -120,128 +122,80 @@
             (pkgs.fetchzip {
               name = "egcs-gcc";
               version = "2.91.66";
-              url =
-                "https://github.com/decompals/mips-gcc-egcs-2.91.66/releases/latest/download/mips-gcc-egcs-2.91.66-linux.tar.gz";
+              url = "https://github.com/decompals/mips-gcc-egcs-2.91.66/releases/latest/download/mips-gcc-egcs-2.91.66-linux.tar.gz";
               sha256 = "sha256-nEr2btiRvUnciBK8Rh42JyJmseT3PAZvhs/UUiMLvH4=";
               stripRoot = false;
             })
             (pkgs.fetchzip {
               name = "egcs-binutils";
               version = "2.9.5";
-              url =
-                "https://github.com/decompals/mips-binutils-egcs-2.9.5/releases/latest/download/mips-binutils-egcs-2.9.5-linux.tar.gz";
+              url = "https://github.com/decompals/mips-binutils-egcs-2.9.5/releases/latest/download/mips-binutils-egcs-2.9.5-linux.tar.gz";
               sha256 = "sha256-v8KAW4OoLtxyPMeO1Uw5bTXFxOaEUi8ZN52J8l/Zols=";
               stripRoot = false;
             })
           ];
         };
-        mkCompilerScript = compilers: let lib = pkgs.lib; in pkgs.writeShellScript "setup-compilers.sh" (lib.concatStringsSep "\n" (lib.mapAttrsToList (name: paths:
-          let
-            quotedPaths = lib.concatStringsSep " " (map (p: "\"${p}\"") paths);
-          in ''
-            rm -rf tools/build/cc/${name}/*
-            mkdir -p tools/build/cc/${name}
+        mkCompilerScript = compilers: let
+          lib = pkgs.lib;
+        in
+          pkgs.writeShellScript "setup-compilers.sh" (lib.concatStringsSep "\n" (lib.mapAttrsToList (
+              name: paths: let
+                quotedPaths = lib.concatStringsSep " " (map (p: "\"${p}\"") paths);
+              in ''
+                rm -rf tools/build/cc/${name}/*
+                mkdir -p tools/build/cc/${name}
 
-            for path in ${quotedPaths}; do
-              cp -r "$path"/* tools/build/cc/${name}/
-            done
+                for path in ${quotedPaths}; do
+                  cp -r "$path"/* tools/build/cc/${name}/
+                done
 
-            # Fix 'cannot execute: required file not found' errors
-            for bin in tools/build/cc/${name}/*; do
-              ${pkgs.patchelf}/bin/patchelf --set-interpreter "${pkgs.glibc}/lib/ld-linux-x86-64.so.2" $bin 2>/dev/null || true
-            done
-          ''
-        ) compilers));
+                # Fix 'cannot execute: required file not found' errors
+                for bin in tools/build/cc/${name}/*; do
+                  ${pkgs.patchelf}/bin/patchelf --set-interpreter "${pkgs.glibc}/lib/ld-linux-x86-64.so.2" $bin 2>/dev/null || true
+                done
+              ''
+            )
+            compilers));
 
-        mkVersion = { version, compilers ? commonCompilers }: { "${version}" =
-          let
-            baseRom = requireBaseRom version;
-            pkgConfigFile = pkgs.writeTextFile {
-              name = "papermario.pc";
-              text = ''
-                prefix=$out
-                exec_prefix=''${prefix}
-                libdir=''${exec_prefix}/lib
-                includedir=''${prefix}/include
-
-                Name: papermario
-                Description: Paper Mario game
-                Version: ${version}
-                Libs: -L''${libdir} -lpapermario
-                Cflags: -I''${includedir} -DVERSION_${pkgs.lib.toUpper version} -DVERSION=${version} -D_FINALROM -DF3DEX_GBI_2
-              '';
-            };
-          in {
-            elf = pkgsCross.ccacheStdenv.mkDerivation {
-              name = "papermario";
-              inherit version;
-              src = ./.;
-              nativeBuildInputs = commonBuildInputs;
-              configurePhase = ''
-                rm -f ver/${version}/baserom.z64 && cp ${baseRom} ver/${version}/baserom.z64
-                . ${mkCompilerScript compilers}
-                configure --ccache
-              '';
-              buildPhase = ''
-                ninja
-              '';
-              installPhase = ''
-                cp ver/${version}/build/papermario.elf $out
-              '';
-              dontStrip = true;
-              enableParallelBuilding = true;
-              outputHashMode = "flat";
-              outputHashAlgo = "sha256";
-              PAPERMARIO_LD = "${binutils2_39}/bin/mips-linux-gnu-ld";
-            };
-            lib = pkgsCross.ccacheStdenv.mkDerivation {
-              name = "libpapermario";
-              inherit version;
-              src = ./.;
-              nativeBuildInputs = commonBuildInputs ++ [ pkgs.rsync ];
-              configurePhase = ''
-                rm -f ver/${version}/baserom.z64 && cp ${baseRom} ver/${version}/baserom.z64
-                configure --ccache --non-matching --debug --modern-gcc --shift
-              '';
-              buildPhase = ''
-                ninja lib_${version} ver/${version}/build/undefined_syms.txt
-              '';
-              installPhase = ''
-                mkdir -p $out/lib/pkgconfig
-                cp ${pkgConfigFile} $out/lib/pkgconfig/papermario.pc
-                # replace $out in the .pc file with the actual output path
-                sed -i "s|\$out|$out|g" $out/lib/pkgconfig/papermario.pc
-
-                mkdir -p $out/lib
-                rsync -av --include='*/' --include='*.o' --exclude='*' ver/${version}/build/src/ $out/lib/
-                rsync -av --include='*/' --include='*.o' --exclude='*' ver/${version}/build/asm/ $out/lib/
-                rsync -av --include='*/' --include='*.o' --exclude='*' ver/${version}/build/assets/${version}/ $out/lib/
-                rsync -av --include='*/' --include='*.o' --exclude='*' ver/${version}/build/ver/${version}/asm/ $out/lib/
-                rsync -av --include='*/' --include='*.o' --exclude='*' ver/${version}/build/ver/${version}/build/asm/ $out/lib/
-                cp ver/${version}/build/undefined_syms.txt $out/lib/undefined_syms.txt
-
-                mkdir -p $out/include
-                cp -r ver/${version}/build/include/* $out/include
-                cd src && cp *.h $out/include && cp --parents **/*.h $out/include && cd ..
-                cp -r include/* $out/include
-              '';
-              dontStrip = true;
-              enableParallelBuilding = true;
-            };
+        mkVersion = {
+          version,
+          compilers ? commonCompilers,
+        }: {
+          "papermario_${version}" = pkgsCross.ccacheStdenv.mkDerivation {
+            name = "papermario";
+            inherit version;
+            src = ./.;
+            nativeBuildInputs = commonBuildInputs;
+            configurePhase = ''
+              rm -f ver/${version}/baserom.z64 && cp ${requireBaseRom version} ver/${version}/baserom.z64
+              . ${mkCompilerScript compilers}
+              configure --ccache
+            '';
+            buildPhase = ''
+              ninja
+            '';
+            installPhase = ''
+              cp ver/${version}/build/papermario.elf $out
+            '';
+            dontStrip = true;
+            enableParallelBuilding = true;
+            outputHashMode = "flat";
+            outputHashAlgo = "sha256";
+            PAPERMARIO_LD = "${binutils2_39}/bin/mips-linux-gnu-ld";
           };
         };
       in {
-        packages = {
-          inherit configure; # for `nix run ".#configure.lock"` to update python lockfile
-          papermario =
-            mkVersion { version = "us"; } //
-            mkVersion { version = "jp"; } //
-            mkVersion { version = "pal"; } //
-            mkVersion {
-              version = "ique";
-              compilers = commonCompilers // iqueCompilers;
-            };
-        };
+        packages =
+          {
+            inherit configure; # for `nix run ".#configure.lock"` to update python lockfile
+          }
+          // mkVersion {version = "us";}
+          // mkVersion {version = "jp";}
+          // mkVersion {version = "pal";}
+          // mkVersion {
+            version = "ique";
+            compilers = commonCompilers // iqueCompilers;
+          };
         devShells = {
           default = pkgsCross.mkShell {
             name = "papermario-dx";
@@ -258,6 +212,7 @@
             PAPERMARIO_LD = "${binutils2_39}/bin/mips-linux-gnu-ld";
           };
         };
+        formatter = pkgs.alejandra;
       }
     );
 }
