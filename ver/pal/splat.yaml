@@ -1104,7 +1104,6 @@ segments:
     start: 0x132E40
     vram: 0x8023E000
     subsegments:
-    subsegments:
     - type: .data
       name: menu_hud_scripts
       subsegments:
