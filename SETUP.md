@@ -63,9 +63,15 @@ If you have Visual Studio Code, you can type `code .` to open the repo within it
 ## Nix
 
 1. Install [Nix](https://nixos.org/download.html)
+1. [Enable nix-command and flakes experimental features](https://nix.dev/manual/nix/2.25/command-ref/conf-file#conf-experimental-features)
 2. Clone the repository and `cd` into it
-3. Enter a shell with `NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 NIX_BUILD_CORES=0 nix-shell`
-4. Continue with [building](#building)
+3. Add **all** baseroms to the store:
+    * `nix store add --mode flat --name papermario.us.z64 --hash-algo sha1 path/to/papermario.us.z64`
+    * `nix store add --mode flat --name papermario.jp.z64 --hash-algo sha1 path/to/papermario.jp.z64`
+    * `nix store add --mode flat --name papermario.pal.z64 --hash-algo sha1 path/to/papermario.pal.z64`
+    * `nix store add --mode flat --name papermario.ique.z64 --hash-algo sha1 path/to/papermario.ique.z64`
+4. Enter a shell with `nix develop`
+5. Continue with [building](#building) (ignore baserom instructions)
 
 # Building
 
