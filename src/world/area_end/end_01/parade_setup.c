@@ -3,7 +3,7 @@
 
 extern HeapNode heap_spriteHead;
 
-extern s32 spr_allocateBtlComponentsOnWorldHeap;
+extern b32 SpriteUseGeneralHeap;
 extern ParadeNpcInfo N(ParadeNpcsTable)[];
 
 extern EvtScript N(EVS_ParadePhase_Wizards);
@@ -34,7 +34,7 @@ API_CALLABLE(N(CreateParadeNPC)) {
     bp.onUpdate = NULL;
     bp.onRender = NULL;
 
-    spr_allocateBtlComponentsOnWorldHeap = TRUE;
+    SpriteUseGeneralHeap = TRUE;
 
     npc = get_npc_by_index(create_standard_npc(&bp, npcInfo->animList));
     npc->npcID = npcID;

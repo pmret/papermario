@@ -120,16 +120,6 @@ typedef struct Quad {
     Vtx v[4];
 } Quad; // size = 0x40
 
-extern Quad SprTemplateQuad;
-extern Vp SprPauseVp;
-extern Vp SprPauseVpAlt;
-extern Gfx OpaqueSpriteGfx[];
-extern Gfx TranslucentSpriteGfx[];
-extern Gfx OpaqueShadedSpriteGfx[];
-extern Gfx TranslucentShadedSpriteGfx[];
-extern f32 SpriteAnimUpdateTimescale;
-extern PlayerSpriteSet spr_playerSpriteSets[7];
-
 void imgfx_init(void);
 
 void spr_init_sprites(s32 playerSpriteSet);

@@ -7,17 +7,17 @@ extern HeapNode heap_generalHead;
 extern HeapNode heap_spriteHead;
 
 BSS s32 D_802DF520; // unused?
-BSS s32 spr_allocateBtlComponentsOnWorldHeap;
+BSS b32 SpriteUseGeneralHeap;
 BSS s32 D_802DF528[2]; // unused?
 BSS s32 MaxLoadedSpriteInstanceID;
 BSS s32 D_802DF534[3]; // unused?
-BSS s32 D_802DF540;
+BSS s32 CurSpriteImgFX;
 BSS s32 D_802DF544; // unused?
-BSS SpriteAnimData* spr_playerSprites[13];
+BSS SpriteAnimData* PlayerSprites[13];
 BSS s32 CurPlayerSpriteIndex;
-BSS s32 spr_playerMaxComponents;
+BSS s32 MaxPlayerSpriteComponents;
 BSS s32 D_802DF584; // unused?
-BSS PlayerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
+BSS PlayerCurrentAnimInfo CurPlayerAnimInfo[3];
 BSS s32 D_802DF5AC; // unused?
 BSS SpriteAnimData* NpcSpriteData[MAX_SPRITE_ID];
 BSS u8 NpcSpriteInstanceCount[MAX_SPRITE_ID];
@@ -32,7 +32,7 @@ SpriteComponent** spr_allocate_components(s32);
 void spr_load_npc_extra_anims(SpriteAnimData*, u32*);
 void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize);
 
-Quad SprTemplateQuad = {
+Quad SpriteQuadTemplate = {
     {
     {{{ -16, 56, 0 }, FALSE, {    0,    0 }, { 240, 240, 240, 255 }}},
     {{{  16, 56, 0 }, FALSE, { 1024,    0 }, { 120, 120, 120, 255 }}},
@@ -41,13 +41,13 @@ Quad SprTemplateQuad = {
     }
 };
 
-Vp SprPauseVp = {{
+Vp SpritePauseVp = {{
         { 640, 480, 511, 0 },
         { 640, 480, 511, 0 },
     }
 };
 
-Vp SprPauseVpAlt = {{
+Vp SpritePauseVpAlt = {{
         { 640, 480, 511, 0 },
         { 640, 480, 512, 0 },
     }
@@ -118,7 +118,7 @@ f32 SpriteAnimUpdateTimescale = 1.0f;
 
 // TODO(player raster splat header generation):
 // - macroify rasterSize based on the biggest raster
-PlayerSpriteSet spr_playerSpriteSets[] = {
+PlayerSpriteSet PlayerSpriteSets[] = {
     [PLAYER_SPRITES_MARIO_WORLD]            {  6, 0x700, MARIO_SPRITE_WORLD_BITS },
     [PLAYER_SPRITES_MARIO_REFLECT_FLOOR]    { 18, 0x700, MARIO_SPRITE_WORLD_BITS },
     [PLAYER_SPRITES_COMBINED_EPILOGUE]      { 10, 0x900, MARIO_SPRITE_WORLD_BITS | PEACH_SPRITE_BITS },
@@ -149,7 +149,7 @@ void spr_make_quad_for_size(Quad* quad, s32 width, s32 height) {
     Vtx* vtx = &quad->v[0];
     s32 w = width; // required to match
 
-    *quad = SprTemplateQuad;
+    *quad = SpriteQuadTemplate;
 
     vtx->v.ob[0] = -w / 2;
     vtx->v.ob[1] = height;
@@ -242,7 +242,7 @@ void spr_appendGfx_component_flat(
         if (gSpriteShadingProfile->flags & SPR_SHADING_FLAG_SET_VIEWPORT) {
             Camera* camera = &gCameras[gCurrentCamID];
             if (gGameStatusPtr->context == CONTEXT_PAUSE) {
-                gSPViewport(gMainGfxPos++, &SprPauseVpAlt);
+                gSPViewport(gMainGfxPos++, &SpritePauseVpAlt);
             } else {
                 gSPViewport(gMainGfxPos++, &camera->vpAlt);
             }
@@ -269,7 +269,7 @@ void spr_appendGfx_component_flat(
         if (gSpriteShadingProfile->flags & SPR_SHADING_FLAG_SET_VIEWPORT) {
             Camera* camera =  &gCameras[gCurrentCamID];
             if (gGameStatusPtr->context == CONTEXT_PAUSE) {
-                gSPViewport(gMainGfxPos++, &SprPauseVpAlt);
+                gSPViewport(gMainGfxPos++, &SpritePauseVpAlt);
             } else {
                 gSPViewport(gMainGfxPos++, &camera->vpAlt);
             }
@@ -305,9 +305,9 @@ void spr_appendGfx_component_flat(
         Camera* camera =  &gCameras[gCurrentCamID];
 
         if (gGameStatusPtr->context == CONTEXT_PAUSE) {
-            gSPViewport(gMainGfxPos++, &SprPauseVp);
-            SprPauseVpAlt.vp.vtrans[0] = SprPauseVp.vp.vtrans[0] + gGameStatusPtr->altViewportOffset.x;
-            SprPauseVpAlt.vp.vtrans[1] = SprPauseVp.vp.vtrans[1] + gGameStatusPtr->altViewportOffset.y;
+            gSPViewport(gMainGfxPos++, &SpritePauseVp);
+            SpritePauseVpAlt.vp.vtrans[0] = SpritePauseVp.vp.vtrans[0] + gGameStatusPtr->altViewportOffset.x;
+            SpritePauseVpAlt.vp.vtrans[1] = SpritePauseVp.vp.vtrans[1] + gGameStatusPtr->altViewportOffset.y;
         } else {
             gSPViewport(gMainGfxPos++, &camera->vp);
         }
@@ -377,7 +377,7 @@ void spr_appendGfx_component(
     height = cache->height;
     quadIndex = cache->quadCacheIndex;
     quad = NULL;
-    if (!(D_802DF540 & SPR_IMGFX_FLAG_ALL)) {
+    if (!(CurSpriteImgFX & SPR_IMGFX_FLAG_ALL)) {
         quad = spr_get_quad_for_size(&quadIndex, width, height);
         cache->quadCacheIndex = quadIndex;
     }
@@ -392,8 +392,8 @@ void spr_appendGfx_component(
         ifxImg.xOffset = -(width / 2);
         ifxImg.yOffset = height;
         ifxImg.alpha = opacity;
-        if (imgfx_appendGfx_component((u8) D_802DF540, &ifxImg, IMGFX_FLAG_80000, mtxTransform) == 1) {
-            D_802DF540 &= ~SPR_IMGFX_FLAG_ALL;
+        if (imgfx_appendGfx_component((u8) CurSpriteImgFX, &ifxImg, IMGFX_FLAG_80000, mtxTransform) == 1) {
+            CurSpriteImgFX &= ~SPR_IMGFX_FLAG_ALL;
         }
     }
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
@@ -453,7 +453,7 @@ void spr_draw_component(s32 drawOpts, SpriteComponent* component, SpriteAnimComp
         if (drawOpts & DRAW_SPRITE_USE_PLAYER_RASTERS) {
             cacheEntry->image = spr_get_player_raster(component->curRaster & 0xFFF, CurPlayerSpriteIndex);
         }
-        D_802DF540 = component->imgfxIdx;
+        CurSpriteImgFX = component->imgfxIdx;
         pal = palettes[paletteIdx];
 
         spr_appendGfx_component(
@@ -467,7 +467,7 @@ void spr_draw_component(s32 drawOpts, SpriteComponent* component, SpriteAnimComp
             component->scale.z,
             drawOpts, pal, mtx
         );
-        component->imgfxIdx = D_802DF540;
+        component->imgfxIdx = CurSpriteImgFX;
     }
 }
 
@@ -763,9 +763,9 @@ void spr_set_anim_timescale(f32 timescale) {
 void spr_load_player_sprite(s32 spriteIndex) {
     SpriteAnimData* playerSprite = spr_load_sprite(spriteIndex - 1, TRUE, FALSE);
 
-    spr_playerSprites[spriteIndex - 1] = playerSprite;
-    if (spr_playerMaxComponents < playerSprite->maxComponents) {
-        spr_playerMaxComponents = playerSprite->maxComponents;
+    PlayerSprites[spriteIndex - 1] = playerSprite;
+    if (MaxPlayerSpriteComponents < playerSprite->maxComponents) {
+        MaxPlayerSpriteComponents = playerSprite->maxComponents;
     }
 }
 
@@ -773,24 +773,24 @@ void spr_init_sprites(s32 playerSpriteSet) {
     s32 loadedFlags;
     s32 i;
 
-    spr_allocateBtlComponentsOnWorldHeap = FALSE;
+    SpriteUseGeneralHeap = FALSE;
     _heap_create(&heap_spriteHead, SPRITE_HEAP_SIZE);
     imgfx_init();
 
-    for (i = 0; i < ARRAY_COUNT(spr_playerSprites); i++) {
-        SpriteAnimData** playerSprites = spr_playerSprites;
+    for (i = 0; i < ARRAY_COUNT(PlayerSprites); i++) {
+        SpriteAnimData** playerSprites = PlayerSprites;
         playerSprites[i] = 0;
     }
 
-    spr_playerMaxComponents = 0;
+    MaxPlayerSpriteComponents = 0;
 
     if (gGameStatusPtr->peachFlags & PEACH_FLAG_IS_PEACH) {
         playerSpriteSet = PLAYER_SPRITES_PEACH_WORLD;
     }
 
-    loadedFlags = (&spr_playerSpriteSets[playerSpriteSet])->initiallyLoaded;
-    spr_init_player_raster_cache((&spr_playerSpriteSets[playerSpriteSet])->cacheSize,
-                  (&spr_playerSpriteSets[playerSpriteSet])->rasterSize);
+    loadedFlags = (&PlayerSpriteSets[playerSpriteSet])->initiallyLoaded;
+    spr_init_player_raster_cache((&PlayerSpriteSets[playerSpriteSet])->cacheSize,
+                  (&PlayerSpriteSets[playerSpriteSet])->rasterSize);
 
     for (i = 1; i <= SPR_Peach3; i++) {
         if ((loadedFlags >> i) & 1) {
@@ -798,9 +798,9 @@ void spr_init_sprites(s32 playerSpriteSet) {
         }
     }
 
-    for (i = 0; i < ARRAY_COUNT(spr_playerCurrentAnimInfo); i++) {
-        spr_playerCurrentAnimInfo[i].componentList = NULL;
-        spr_playerCurrentAnimInfo[i].animID = -1;
+    for (i = 0; i < ARRAY_COUNT(CurPlayerAnimInfo); i++) {
+        CurPlayerAnimInfo[i].componentList = NULL;
+        CurPlayerAnimInfo[i].animID = -1;
     }
 
     for (i = 0; i < ARRAY_COUNT(NpcSpriteData); i++) {
@@ -824,7 +824,7 @@ void spr_render_init(void) {
     spr_clear_quad_cache();
 }
 
-s32 func_802DDA84(void) {
+s32 spr_unused_nop(void) {
     return 0;
 }
 
@@ -839,9 +839,9 @@ s32 spr_update_player_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
     s32 animIndex = SPR_UNPACK_ANIM(animID);
     CurPlayerSpriteIndex = spriteIdx;
 
-    if (spr_playerCurrentAnimInfo[instanceIdx].componentList == NULL) {
-        compList = spr_allocate_components(spr_playerMaxComponents);
-        spr_playerCurrentAnimInfo[instanceIdx].componentList = compList;
+    if (CurPlayerAnimInfo[instanceIdx].componentList == NULL) {
+        compList = spr_allocate_components(MaxPlayerSpriteComponents);
+        CurPlayerAnimInfo[instanceIdx].componentList = compList;
         while (*compList != PTR_LIST_END) {
             component = *compList;
             component->imgfxIdx = imgfx_get_free_instances(1);
@@ -849,8 +849,8 @@ s32 spr_update_player_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
         }
     }
 
-    spriteData = (u32*)spr_playerSprites[spriteIdx];
-    compList = spr_playerCurrentAnimInfo[instanceIdx].componentList;
+    spriteData = (u32*)PlayerSprites[spriteIdx];
+    compList = CurPlayerAnimInfo[instanceIdx].componentList;
 
     if (spriteData == NULL) {
         return 0;
@@ -862,24 +862,24 @@ s32 spr_update_player_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
 
     spr_set_anim_timescale(timeScale);
     if ((spriteInstanceID & DRAW_SPRITE_OVERRIDE_ALPHA) ||
-        (animID & ~SPRITE_ID_BACK_FACING) != (spr_playerCurrentAnimInfo[instanceIdx].animID & ~SPRITE_ID_BACK_FACING))
+        (animID & ~SPRITE_ID_BACK_FACING) != (CurPlayerAnimInfo[instanceIdx].animID & ~SPRITE_ID_BACK_FACING))
     {
         spr_init_anim_state(compList, animList);
-        spr_playerCurrentAnimInfo[instanceIdx].notifyValue = 0;
+        CurPlayerAnimInfo[instanceIdx].notifyValue = 0;
     }
 
-    spr_playerCurrentAnimInfo[instanceIdx].animID = animID;
+    CurPlayerAnimInfo[instanceIdx].animID = animID;
 
     if (!(spriteInstanceID & DRAW_SPRITE_OVERRIDE_YAW)) {
-        spr_playerCurrentAnimInfo[instanceIdx].notifyValue = spr_component_update(spr_playerCurrentAnimInfo[instanceIdx].notifyValue,
+        CurPlayerAnimInfo[instanceIdx].notifyValue = spr_component_update(CurPlayerAnimInfo[instanceIdx].notifyValue,
                 compList, animList, rasterList, 0);
     }
-    return spr_playerCurrentAnimInfo[instanceIdx].notifyValue;
+    return CurPlayerAnimInfo[instanceIdx].notifyValue;
 }
 
 s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* paletteList, Matrix4f mtx) {
     s32 instanceIdx = spriteInstanceID & 0xFF;
-    s32 animID = spr_playerCurrentAnimInfo[instanceIdx].animID;
+    s32 animID = CurPlayerAnimInfo[instanceIdx].animID;
     SpriteRasterCacheEntry** rasters;
     PAL_PTR* palettes;
     SpriteAnimComponent** animComponents;
@@ -895,7 +895,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* 
     }
 
     CurPlayerSpriteIndex = spriteIdx = SPR_UNPACK_SPR(animID) - 1;
-    spriteData = (u32*)spr_playerSprites[spriteIdx];
+    spriteData = (u32*)PlayerSprites[spriteIdx];
     if (spriteData == NULL) {
         return FALSE;
     }
@@ -914,7 +914,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* 
             case SPR_Peach1 - 1:
                 spriteIdBackFacing = spriteIdx + 1;
                 // TODO find better match
-                rasters = (SpriteRasterCacheEntry**)spr_playerSprites[spriteIdBackFacing];
+                rasters = (SpriteRasterCacheEntry**)PlayerSprites[spriteIdBackFacing];
                 CurPlayerSpriteIndex = spriteIdBackFacing;
                 rasters = (SpriteRasterCacheEntry**)*rasters;
                 break;
@@ -954,7 +954,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* 
         alpha = 255;
     }
 
-    components = spr_playerCurrentAnimInfo[instanceIdx].componentList;
+    components = CurPlayerAnimInfo[instanceIdx].componentList;
     if (spriteInstanceID & DRAW_SPRITE_OVERRIDE_PALETTES) {
         palettes = paletteList;
     }
@@ -970,7 +970,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* 
 }
 
 s32 func_802DDEC4(s32 spriteIdx) {
-    return spr_playerCurrentAnimInfo[spriteIdx].notifyValue;
+    return CurPlayerAnimInfo[spriteIdx].notifyValue;
 }
 
 void set_player_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgFXType imgfx, s32 imgfxArg1, s32 imgfxArg2, s32 imgfxArg3, s32 imgfxArg4, s32 flags) {
@@ -978,8 +978,8 @@ void set_player_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgFXType imgfx, s32 imgf
     SpriteComponent** componentListIt;
     s32 i;
 
-    if (spr_playerCurrentAnimInfo[spriteIdx].componentList != NULL) {
-        componentListIt = spr_playerCurrentAnimInfo[spriteIdx].componentList;
+    if (CurPlayerAnimInfo[spriteIdx].componentList != NULL) {
+        componentListIt = CurPlayerAnimInfo[spriteIdx].componentList;
         i = 0;
 
         while (*componentListIt != PTR_LIST_END) {
@@ -1009,7 +1009,7 @@ void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 r
     u16** paletteOffsetCopy;
 
     playerSpriteID--;
-    sprite = spr_playerSprites[playerSpriteID];
+    sprite = PlayerSprites[playerSpriteID];
     if (sprite != NULL) {
         paletteOffsetCopy = sprite->palettesOffset;
         cache = sprite->rastersOffset[rasterIndex];
@@ -1021,7 +1021,7 @@ void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 r
 }
 
 PAL_PTR* spr_get_player_palettes(s32 spriteIndex) {
-    SpriteAnimData* sprites = spr_playerSprites[spriteIndex - 1];
+    SpriteAnimData* sprites = PlayerSprites[spriteIndex - 1];
 
     if (sprites == NULL) {
         return NULL;
@@ -1206,7 +1206,7 @@ s32 spr_free_sprite(s32 spriteInstanceID) {
         _heap_free(&heap_spriteHead, spriteData);
     }
 
-    if (spr_allocateBtlComponentsOnWorldHeap) {
+    if (SpriteUseGeneralHeap) {
         _heap_free(&heap_generalHead, compList);
     } else {
         _heap_free(&heap_spriteHead, compList);
