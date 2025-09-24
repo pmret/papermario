@@ -3665,7 +3665,7 @@ enum BattleStates {
     BATTLE_STATE_END_TURN                   = 6,
     BATTLE_STATE_BEGIN_PLAYER_TURN          = 7,
     BATTLE_STATE_BEGIN_PARTNER_TURN         = 8,
-    BATTLE_STATE_9                          = 9,    // can be reached from BATTLE_STATE_PARTNER_MOVE if partner == nullptr
+    BATTLE_STATE_END_TEAM_TURN              = 9,    // can be reached from BATTLE_STATE_PARTNER_MOVE if partner == nullptr
     BATTLE_STATE_SWITCH_TO_PLAYER           = 10,
     BATTLE_STATE_SWITCH_TO_PARTNER          = 11,
     BATTLE_STATE_PREPARE_MENU               = 12,
@@ -3758,15 +3758,15 @@ enum BattleSubStates {
     BTL_SUBSTATE_BEGIN_PARTNER_TURN_END_DELAY               = 10,
     BTL_SUBSTATE_BEGIN_PARTNER_TURN_RESET_STATE             = 100,
 
-    // BATTLE_STATE_9
-    BTL_SUBSTATE_9_INIT                                     = 0,
-    BTL_SUBSTATE_9_1                                        = 1,
-    BTL_SUBSTATE_9_2                                        = 2,
-    BTL_SUBSTATE_9_3                                        = 3,
-    BTL_SUBSTATE_9_4                                        = 4,
-    BTL_SUBSTATE_9_5                                        = 5,
-    BTL_SUBSTATE_9_6                                        = 6,
-    BTL_SUBSTATE_9_7                                        = 7,
+    // BATTLE_STATE_END_TEAM_TURN
+    BTL_SUBSTATE_END_TEAM_TURN_INIT                         = 0,
+    BTL_SUBSTATE_END_TEAM_TURN_PROCESS_STATUS               = 1,
+    BTL_SUBSTATE_END_TEAM_TURN_AWAIT_SCRIPTS                = 2,
+    BTL_SUBSTATE_END_TEAM_TURN_SWAP_POSITIONS               = 3,
+    BTL_SUBSTATE_END_TEAM_TURN_HANDLE_MERLEE                = 4,
+    BTL_SUBSTATE_END_TEAM_TURN_EXEC_PHASE_SCRIPTS           = 5,
+    BTL_SUBSTATE_END_TEAM_TURN_AWAIT_PHASE_SCRIPTS          = 6,
+    BTL_SUBSTATE_END_TEAM_TURN_DONE                         = 7,
 
     // BATTLE_STATE_SWITCH_TO_PLAYER
     // BATTLE_STATE_SWITCH_TO_PARTNER

@@ -317,8 +317,8 @@ void btl_update(void) {
             case BATTLE_STATE_BEGIN_PARTNER_TURN:
                 btl_state_update_begin_partner_turn();
                 break;
-            case BATTLE_STATE_9:
-                btl_state_update_9();
+            case BATTLE_STATE_END_TEAM_TURN:
+                btl_state_update_end_team_turn();
                 break;
             case BATTLE_STATE_BEGIN_TURN:
                 btl_state_update_begin_turn();
@@ -528,8 +528,8 @@ void btl_draw_ui(void) {
             case BATTLE_STATE_BEGIN_PARTNER_TURN:
                 btl_state_draw_begin_partner_turn();
                 break;
-            case BATTLE_STATE_9:
-                btl_state_draw_9();
+            case BATTLE_STATE_END_TEAM_TURN:
+                btl_state_draw_end_team_turn();
                 break;
             case BATTLE_STATE_BEGIN_TURN:
                 btl_state_draw_begin_turn();
