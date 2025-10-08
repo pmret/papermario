@@ -37,7 +37,10 @@ if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; th
 
     echo "Installing packages for Debian or derivative (apt)"
 
+    ${SUDO} apt update
     ${SUDO} apt install -y curl git python3 python3-pip python3-setuptools build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev ninja-build cpp-mips-linux-gnu gcc-mips-linux-gnu || exit 1
+    python3 -m venv venv
+    source venv/bin/activate
     python3 -m pip install -U -r tools/configure/requirements.txt
     cp tools/precommit_check_no_assets.sh "$(git rev-parse --git-path hooks)/pre-commit" || exit 1
 
@@ -54,6 +57,7 @@ if cat /etc/os-release | grep -E ID=fedora &> /dev/null; then
 
     echo "Installing packages for Fedora (dnf)"
 
+    ${SUDO} dnf check-update
     ${SUDO} dnf install -y curl git python3 python3-pip python3-setuptools ninja-build gcc-mips64-linux-gnu libyaml-devel zlib-devel || exit 1
     ${SUDO} dnf group info "C Development Tools and Libraries" "Development Tools" || exit 1
     # Install binutils if required
@@ -88,6 +92,8 @@ if cat /etc/os-release | grep -E ID=fedora &> /dev/null; then
         # go back to old dir
         cd "${RETURNDIR}"
     fi
+    python3 -m venv venv
+    source venv/bin/activate
     python3 -m pip install -U -r tools/configure/requirements.txt
     cp tools/precommit_check_no_assets.sh "$(git rev-parse --git-path hooks)/pre-commit" || exit 1
 
@@ -109,6 +115,8 @@ if cat /etc/os-release | grep -E 'ID=arch|ID_LIKE="?arch"?' &> /dev/null; then
 
     # Install dependencies
     ${SUDO} pacman -S --noconfirm --needed curl git python python-pip python-setuptools base-devel zlib libyaml ninja || exit 1
+    python3 -m venv venv
+    source venv/bin/activate
     python3 -m pip install -U -r tools/configure/requirements.txt
     cp tools/precommit_check_no_assets.sh "$(git rev-parse --git-path hooks)/pre-commit" || exit 1
 
@@ -164,6 +172,8 @@ if cat /etc/os-release | grep ID=opensuse &> /dev/null; then
     ${SUDO} ln -s /usr/bin/mips-suse-linux-strings /usr/bin/mips-linux-gnu-strings
     ${SUDO} ln -s /usr/bin/mips-suse-linux-strip /usr/bin/mips-linux-gnu-strip
 
+    python3 -m venv venv
+    source venv/bin/activate
     python3 -m pip install -U -r tools/configure/requirements.txt
     cp tools/precommit_check_no_assets.sh "$(git rev-parse --git-path hooks)/pre-commit" || exit 1
 
@@ -186,7 +196,10 @@ if cat /etc/os-release | grep ID=alpine &> /dev/null; then
     fi
 
     # Install dependencies
+    ${SUDO} apk update
     ${SUDO} apk add --no-cache bash curl wget git python3 python3-dev py3-pip build-base zlib-dev yaml-dev ninja
+    python3 -m venv venv
+    source venv/bin/activate
     python3 -m pip install -U -r tools/configure/requirements.txt
     cp tools/precommit_check_no_assets.sh "$(git rev-parse --git-path hooks)/pre-commit" || exit 1
 
