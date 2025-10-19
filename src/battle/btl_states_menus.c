@@ -4010,7 +4010,7 @@ void btl_state_update_partner_menu(void) {
         battleStatus->selectedMoveID = MOVE_NONE;
         battleStatus->curAttackElement = 0;
         if (!can_switch_to_partner()) {
-            btl_set_state(BATTLE_STATE_9);
+            btl_set_state(BATTLE_STATE_END_TEAM_TURN);
         } else {
             btl_cam_use_preset(BTL_CAM_DEFAULT);
             battleStatus->flags1 |= BS_FLAGS1_MENU_OPEN;
