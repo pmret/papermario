@@ -63,9 +63,11 @@ class ELFSymbol:
         return line
 
 
-def read_ignores():
+def read_ignores() -> typing.Set[str]:
     with open(IGNORES_PATH) as f:
         lines = f.readlines()
+
+    ignores: typing.Set[str] = set()
 
     for line in lines:
         ignore = IGNORE_RE.match(line)
@@ -73,10 +75,13 @@ def read_ignores():
         if ignore:
             ignores.add(ignore.group("symbol"))
 
+    return ignores
 
-def scan_map():
+
+def scan_map(map_path: pathlib.Path):
     ram_offset = None
     cur_file = "<no file>"
+    map_symbols: typing.Dict[str, MapSymbol] = {}
 
     with open(map_path) as f:
         for line in f:
@@ -112,9 +117,14 @@ def scan_map():
 
             map_symbols[sym] = MapSymbol(rom=rom, file=cur_file, ram=ram)
 
+    return map_symbols
 
-def read_symbol_addrs():
+
+def read_symbol_addrs(symbol_addrs_path: pathlib.Path) -> typing.Tuple[typing.List[ELFSymbol], typing.List[ELFSymbol]]:
     unique_lines: typing.Set[str] = set()
+
+    symbol_addrs: typing.List[ELFSymbol] = []
+    dead_symbols: typing.List[ELFSymbol] = []
 
     with open(symbol_addrs_path, "r") as f:
         for line in f.readlines():
@@ -147,8 +157,15 @@ def read_symbol_addrs():
             else:
                 dead_symbols.append(ELFSymbol(name=name, addr=addr, type=type, rom=rom, opts=opts))
 
+    return (symbol_addrs, dead_symbols)
 
-def read_elf():
+
+def read_elf(
+    elf_path: pathlib.Path,
+    map_symbols: typing.Dict[str, MapSymbol]
+) -> typing.List[ELFSymbol]:
+    elf_symbols: typing.List[ELFSymbol] = []
+
     try:
         result = subprocess.run(["mips-linux-gnu-objdump", "-x", elf_path], stdout=subprocess.PIPE)
         objdump_lines = result.stdout.decode().split("\n")
@@ -190,13 +207,18 @@ def read_elf():
 
             elf_symbols.append(ELFSymbol(name=name, addr=addr, type=type, rom=rom, opts={}))
 
+    return elf_symbols
+
 
 def log(s: str):
     if verbose:
         print(s)
 
 
-def reconcile_symbols():
+def reconcile_symbols(
+    elf_symbols: typing.List[ELFSymbol],
+    symbol_addrs: typing.List[ELFSymbol],
+):
     print(f"Processing {str(len(elf_symbols))} elf symbols...")
 
     for elf_sym in tqdm.tqdm(elf_symbols, total=len(elf_symbols)):
@@ -245,7 +267,11 @@ def reconcile_symbols():
             name_match.rom = elf_sym.rom
 
 
-def write_new_symbol_addrs():
+def write_new_symbol_addrs(
+    symbol_addrs_path: pathlib.Path,
+    symbol_addrs: typing.List[ELFSymbol],
+    dead_symbols: typing.List[ELFSymbol],
+):
     with open(symbol_addrs_path, "w", newline="\n") as f:
         for symbol in sorted(symbol_addrs, key=ELFSymbol.ordering):
             f.write(symbol.format() + "\n")
@@ -279,16 +305,9 @@ if __name__ == '__main__':
 
 
     # Runtime
-    map_symbols: typing.Dict[str, MapSymbol] = {}
-    symbol_addrs: typing.List[ELFSymbol] = []
-    dead_symbols: typing.List[ELFSymbol] = []
-    elf_symbols: typing.List[ELFSymbol] = []
-
-    ignores: typing.Set[str] = set()
-
-    read_ignores()
-    scan_map()
-    read_symbol_addrs()
-    read_elf()
-    reconcile_symbols()
-    write_new_symbol_addrs()
+    ignores = read_ignores()
+    map_symbols = scan_map(map_path)
+    symbol_addrs, dead_symbols = read_symbol_addrs(symbol_addrs_path)
+    elf_symbols = read_elf(elf_path, map_symbols)
+    reconcile_symbols(elf_symbols, symbol_addrs)
+    write_new_symbol_addrs(symbol_addrs_path, symbol_addrs, dead_symbols)
