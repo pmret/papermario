@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import dataclasses
 import pathlib
 import re
 import subprocess
@@ -24,6 +25,39 @@ MAP_ENTRY_RE = re.compile(r"(?:\.(?P<bss_label>\S+))?\s+0[xX](?P<ram>[0-9a-fA-F]
 SYMBOL_ADDR_RE = re.compile(r"(?:(?P<symbol>\S+))?\s*=\s*0[xX](?P<addr>[0-9a-fA-F]+);(?:\s*//\s*(?P<opts>.+?)\s*)?$")
 SYMBOL_ADDR_OPT_RE = re.compile(r"(?P<key>\S+):(?P<value>\S*)")
 
+
+# Dataclass definitions
+@dataclasses.dataclass
+class MapSymbol:
+    rom: int
+    file: str
+    ram: int
+
+@dataclasses.dataclass
+class ELFSymbol:
+    name: str
+    addr: int
+    type: str
+    rom: typing.Optional[int]
+    opts: typing.Dict[str, str]
+
+    def ordering(self):
+        return (not self.rom, self.rom, self.addr, self.name)
+
+    def format(self) -> str:
+        line = f"{self.name} = 0x{self.addr:X}; //"
+
+        if self.type and len(self.type) > 0:
+            line += f" type:{self.type}"
+        if self.rom:
+            line += f" rom:0x{self.rom:X}"
+        if self.opts:
+            for key, value in self.opts.items():
+                line += f" {key}:{value}"
+
+        return line
+
+
 # Varies on version
 current_ver = sys.argv[1] if len(sys.argv) > 1 else 'current'
 current_ver_dir = VERSION_DIRECTORY / current_ver
@@ -33,11 +67,12 @@ symbol_addrs_path = current_ver_dir / 'symbol_addrs.txt'
 elf_path = current_ver_dir / 'build' / 'papermario.elf'
 map_path = current_ver_dir / 'build' / 'papermario.map'
 
+
 # Runtime
-map_symbols = {}
-symbol_addrs = []
-dead_symbols = []
-elf_symbols = []
+map_symbols: typing.Dict[str, MapSymbol] = {}
+symbol_addrs: typing.List[ELFSymbol] = []
+dead_symbols: typing.List[ELFSymbol] = []
+elf_symbols: typing.List[ELFSymbol] = []
 
 ignores: typing.Set[str] = set()
 
@@ -91,7 +126,11 @@ def scan_map():
                 cur_file = sym
                 continue
 
-            map_symbols[sym] = (rom, cur_file, ram)
+            map_symbols[sym] = MapSymbol(
+                rom=rom,
+                file=cur_file,
+                ram=ram
+            )
 
 
 def read_symbol_addrs():
@@ -120,13 +159,17 @@ def read_symbol_addrs():
                     opts[opt_group.group('key')] = opt_group.group('value')
 
             dead = 'dead' in opts
-            type = opts.get('type', '')
-            rom = int(opts['rom'], 16) if 'rom' in opts else -1
+            type = opts.pop('type', '')
+            rom = int(opts.pop('rom'), 16) if 'rom' in opts else None
 
             if not dead:
-                symbol_addrs.append([name, addr, type, rom, opts])
+                symbol_addrs.append(ELFSymbol(
+                    name=name, addr=addr, type=type, rom=rom, opts=opts
+                ))
             else:
-                dead_symbols.append([name, addr, type, rom, opts])
+                dead_symbols.append(ELFSymbol(
+                    name=name, addr=addr, type=type, rom=rom, opts=opts
+                ))
 
 
 def read_elf():
@@ -165,14 +208,20 @@ def read_elf():
             rom = None
 
             if name in map_symbols:
-                rom = map_symbols[name][0]
+                rom = map_symbols[name].rom
             elif re.match(".*_[0-9A-F]{8}_[0-9A-F]{6}", name):
                 rom = int(name.split("_")[-1], 16)
 
-            elf_symbols.append((name, addr, type, rom))
+            elf_symbols.append(ELFSymbol(
+                name=name,
+                addr=addr,
+                type=type,
+                rom=rom,
+                opts={}
+            ))
 
 
-def log(s):
+def log(s: str):
     if verbose:
         print(s)
 
@@ -180,72 +229,59 @@ def log(s):
 def reconcile_symbols():
     print(f"Processing {str(len(elf_symbols))} elf symbols...")
 
-    for i, elf_sym in tqdm.tqdm(enumerate(elf_symbols), total=len(elf_symbols)):
-        name_match = None
-        rom_match = None
+    for elf_sym in tqdm.tqdm(elf_symbols, total=len(elf_symbols)):
+        name_match: typing.Optional[ELFSymbol] = None
+        rom_match: typing.Optional[ELFSymbol] = None
 
         for known_sym in symbol_addrs:
             # Name
             if not name_match:
-                if elf_sym[0] == known_sym[0]:
+                if elf_sym.name == known_sym.name:
                     name_match = known_sym
 
-                    if elf_sym[1] != known_sym[1]:
+                    if elf_sym.addr != known_sym.addr:
                         log(
-                            f"Ram mismatch! {elf_sym[0]} is 0x{elf_sym[1]:X} in the elf and 0x{known_sym[1]} in symbol_addrs"
+                            f"Ram mismatch! {elf_sym.name} is 0x{elf_sym.addr:X} in the elf and 0x{known_sym.addr} in symbol_addrs"
                         )
 
             # Rom
             if not rom_match:
                 # Todo account for either or both syms not containing a rom addr
-                if elf_sym[3]:
-                    if elf_sym[3] == known_sym[3]:
+                if elf_sym.rom:
+                    if elf_sym.rom == known_sym.rom:
                         rom_match = known_sym
 
-        if not name_match and not rom_match:
-            log(f"Creating new symbol {elf_sym[0]}")
-            symbol_addrs.append(
-                [
-                    elf_sym[0],
-                    elf_sym[1],
-                    elf_sym[2],
-                    elf_sym[3] if elf_sym[3] else -1,
-                    [],
-                ]
-            )
-        elif not name_match:
-            log(f"Renaming identical rom address symbol {rom_match[0]} to {elf_sym[0]}")
-            rom_match[0] = elf_sym[0]
-        elif not rom_match and elf_sym[3]:
-            if name_match[3] >= 0:
-                log(f"Correcting rom address {name_match[3]} to {elf_sym[3]} for symbol {name_match[0]}")
+        if not name_match:
+            if not rom_match:
+                log(f"Creating new symbol {elf_sym.name}")
+                symbol_addrs.append(
+                    ELFSymbol(
+                        name=elf_sym.name,
+                        addr=elf_sym.addr,
+                        type=elf_sym.type,
+                        rom=elf_sym.rom,
+                        opts={},
+                    )
+                )
             else:
-                log(f"Adding rom address {elf_sym[3]} to symbol {name_match[0]}")
-            name_match[3] = elf_sym[3]
+                log(f"Renaming identical rom address symbol {rom_match.name} to {elf_sym.name}")
+                rom_match.name = elf_sym.name
+
+        elif not rom_match and elf_sym.rom:
+            if name_match.rom:
+                log(f"Correcting rom address {name_match.rom} to {elf_sym.rom} for symbol {name_match.name}")
+            else:
+                log(f"Adding rom address {elf_sym.rom} to symbol {name_match.name}")
+            name_match.rom = elf_sym.rom
 
 
 def write_new_symbol_addrs():
     with open(symbol_addrs_path, "w", newline="\n") as f:
-        for symbol in sorted(symbol_addrs, key=lambda x: (x[3] == -1, x[3], x[1], x[0])):
-            line = f"{symbol[0]} = 0x{symbol[1]:X}; //"
-            if symbol[2] and len(symbol[2]) > 0:
-                line += f" type:{symbol[2]}"
-            if symbol[3] >= 0:
-                line += f" rom:0x{symbol[3]:X}"
-            if len(symbol[4]) > 0:
-                for thing in symbol[4]:
-                    line += f" {thing}"
-            f.write(line + "\n")
-        for symbol in sorted(dead_symbols, key=lambda x: (x[3] == -1, x[3], x[1], x[0])):
-            line = f"{symbol[0]} = 0x{symbol[1]:X}; //"
-            if symbol[2] and len(symbol[2]) > 0:
-                line += f" type:{symbol[2]}"
-            if symbol[3] >= 0:
-                line += f" rom:0x{symbol[3]:X}"
-            if len(symbol[4]) > 0:
-                for thing in symbol[4]:
-                    line += f" {thing}"
-            f.write(line + "\n")
+        for symbol in sorted(symbol_addrs, key=ELFSymbol.ordering):
+            f.write(symbol.format() + "\n")
+
+        for symbol in sorted(dead_symbols, key=ELFSymbol.ordering):
+            f.write(symbol.format() + "\n")
 
 
 read_ignores()
