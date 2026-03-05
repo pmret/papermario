@@ -9,19 +9,22 @@ import typing
 
 import tqdm
 
-
 # Always the same
 SCRIPT_DIRECTORY = pathlib.Path(__file__).parent
 ROOT_DIRECTORY = SCRIPT_DIRECTORY.parent
-VERSION_DIRECTORY = ROOT_DIRECTORY / 'ver'
+VERSION_DIRECTORY = ROOT_DIRECTORY / "ver"
 AVAILABLE_VERSIONS = [item.name for item in VERSION_DIRECTORY.iterdir() if item.is_dir()]
 
-ASM_DIRECTORY = ROOT_DIRECTORY / 'asm' / 'nonmatchings'
-IGNORES_PATH = ROOT_DIRECTORY / 'tools' / 'ignored_funcs.txt'
+ASM_DIRECTORY = ROOT_DIRECTORY / "asm" / "nonmatchings"
+IGNORES_PATH = ROOT_DIRECTORY / "tools" / "ignored_funcs.txt"
 
 IGNORE_RE = re.compile(r"(?P<symbol>\S+)\s*=\s*0[xX](?P<address>[0-9a-fA-F]+);")
-MAP_BLOCK_RE = re.compile(r"(?:\.(?P<label>\S+))?\s+0[xX](?P<ram>[0-9a-fA-F]+)\s+0[xX](?P<size>[0-9a-fA-F]+) load address 0[xX](?P<rom>[0-9a-fA-F]+)")
-MAP_ENTRY_RE = re.compile(r"(?:\.(?P<bss_label>\S+))?\s+0[xX](?P<ram>[0-9a-fA-F]+)\s+(?:0[xX](?P<bss_size>[0-9a-fA-F]+)\s+)?(?P<label>\S+)")
+MAP_BLOCK_RE = re.compile(
+    r"(?:\.(?P<label>\S+))?\s+0[xX](?P<ram>[0-9a-fA-F]+)\s+0[xX](?P<size>[0-9a-fA-F]+) load address 0[xX](?P<rom>[0-9a-fA-F]+)"
+)
+MAP_ENTRY_RE = re.compile(
+    r"(?:\.(?P<bss_label>\S+))?\s+0[xX](?P<ram>[0-9a-fA-F]+)\s+(?:0[xX](?P<bss_size>[0-9a-fA-F]+)\s+)?(?P<label>\S+)"
+)
 SYMBOL_ADDR_RE = re.compile(r"(?:(?P<symbol>\S+))?\s*=\s*0[xX](?P<addr>[0-9a-fA-F]+);(?:\s*//\s*(?P<opts>.+?)\s*)?$")
 SYMBOL_ADDR_OPT_RE = re.compile(r"(?P<key>\S+):(?P<value>\S*)")
 
@@ -32,6 +35,7 @@ class MapSymbol:
     rom: int
     file: str
     ram: int
+
 
 @dataclasses.dataclass
 class ELFSymbol:
@@ -59,13 +63,15 @@ class ELFSymbol:
 
 
 # Varies on version
-current_ver = sys.argv[1] if len(sys.argv) > 1 else 'current'
+current_ver = sys.argv[1] if len(sys.argv) > 1 else "current"
 current_ver_dir = VERSION_DIRECTORY / current_ver
-assert current_ver_dir.is_dir(), f"first argument passed (`{current_ver}`) should be a valid version, available: {', '.join(AVAILABLE_VERSIONS)}"
+assert (
+    current_ver_dir.is_dir()
+), f"first argument passed (`{current_ver}`) should be a valid version, available: {', '.join(AVAILABLE_VERSIONS)}"
 
-symbol_addrs_path = current_ver_dir / 'symbol_addrs.txt'
-elf_path = current_ver_dir / 'build' / 'papermario.elf'
-map_path = current_ver_dir / 'build' / 'papermario.map'
+symbol_addrs_path = current_ver_dir / "symbol_addrs.txt"
+elf_path = current_ver_dir / "build" / "papermario.elf"
+map_path = current_ver_dir / "build" / "papermario.map"
 
 
 # Runtime
@@ -87,7 +93,7 @@ def read_ignores():
         ignore = IGNORE_RE.match(line)
 
         if ignore:
-            ignores.add(ignore.group('symbol'))
+            ignores.add(ignore.group("symbol"))
 
 
 def scan_map():
@@ -102,8 +108,8 @@ def scan_map():
                 if block is None:
                     continue
 
-                ram = int(block.group('ram'), 16)
-                rom = int(block.group('rom'), 16)
+                ram = int(block.group("ram"), 16)
+                rom = int(block.group("rom"), 16)
                 ram_offset = ram - rom
                 continue
 
@@ -115,7 +121,7 @@ def scan_map():
             if entry is None:
                 continue
 
-            ram = int(entry.group('ram'), 16)
+            ram = int(entry.group("ram"), 16)
             rom = ram - ram_offset
             sym = line.split()[-1]
 
@@ -126,11 +132,7 @@ def scan_map():
                 cur_file = sym
                 continue
 
-            map_symbols[sym] = MapSymbol(
-                rom=rom,
-                file=cur_file,
-                ram=ram
-            )
+            map_symbols[sym] = MapSymbol(rom=rom, file=cur_file, ram=ram)
 
 
 def read_symbol_addrs():
@@ -149,27 +151,23 @@ def read_symbol_addrs():
             if entry is None:
                 continue
 
-            name = entry.group('symbol')
-            addr = int(entry.group('addr'), 16)
-            opts_group = entry.group('opts')
+            name = entry.group("symbol")
+            addr = int(entry.group("addr"), 16)
+            opts_group = entry.group("opts")
             opts: typing.Dict[str, str] = {}
 
             if opts_group is not None:
                 for opt_group in SYMBOL_ADDR_OPT_RE.finditer(opts_group):
-                    opts[opt_group.group('key')] = opt_group.group('value')
+                    opts[opt_group.group("key")] = opt_group.group("value")
 
-            dead = 'dead' in opts
-            type = opts.pop('type', '')
-            rom = int(opts.pop('rom'), 16) if 'rom' in opts else None
+            dead = "dead" in opts
+            type = opts.pop("type", "")
+            rom = int(opts.pop("rom"), 16) if "rom" in opts else None
 
             if not dead:
-                symbol_addrs.append(ELFSymbol(
-                    name=name, addr=addr, type=type, rom=rom, opts=opts
-                ))
+                symbol_addrs.append(ELFSymbol(name=name, addr=addr, type=type, rom=rom, opts=opts))
             else:
-                dead_symbols.append(ELFSymbol(
-                    name=name, addr=addr, type=type, rom=rom, opts=opts
-                ))
+                dead_symbols.append(ELFSymbol(name=name, addr=addr, type=type, rom=rom, opts=opts))
 
 
 def read_elf():
@@ -212,13 +210,7 @@ def read_elf():
             elif re.match(".*_[0-9A-F]{8}_[0-9A-F]{6}", name):
                 rom = int(name.split("_")[-1], 16)
 
-            elf_symbols.append(ELFSymbol(
-                name=name,
-                addr=addr,
-                type=type,
-                rom=rom,
-                opts={}
-            ))
+            elf_symbols.append(ELFSymbol(name=name, addr=addr, type=type, rom=rom, opts={}))
 
 
 def log(s: str):
