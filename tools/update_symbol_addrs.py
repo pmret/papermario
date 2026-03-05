@@ -2,6 +2,7 @@
 
 import argparse
 import dataclasses
+import json
 import logging
 import pathlib
 import re
@@ -10,6 +11,7 @@ import sys
 import typing
 
 import tqdm
+import mapfile_parser
 
 # Always the same
 LOGGER = logging.getLogger('update_symbol_addrs')
@@ -36,9 +38,10 @@ SYMBOL_ADDR_OPT_RE = re.compile(r"(?P<key>\S+):(?P<value>\S*)")
 # Dataclass definitions
 @dataclasses.dataclass
 class MapSymbol:
-    rom: int
     file: str
     ram: int
+    size: int
+    rom: typing.Optional[int]
 
 
 @dataclasses.dataclass
@@ -81,44 +84,18 @@ def read_ignores() -> typing.Set[str]:
     return ignores
 
 
-def scan_map(map_path: pathlib.Path):
-    ram_offset = None
-    cur_file = "<no file>"
+def scan_map(map_file: mapfile_parser.MapFile):
     map_symbols: typing.Dict[str, MapSymbol] = {}
 
-    with open(map_path) as f:
-        for line in f:
-            if "load address" in line:
-                block = MAP_BLOCK_RE.match(line)
-
-                if block is None:
-                    continue
-
-                ram = int(block.group("ram"), 16)
-                rom = int(block.group("rom"), 16)
-                ram_offset = ram - rom
-                continue
-
-            if ram_offset is None or "=" in line or "*fill*" in line or " 0x" not in line:
-                continue
-
-            entry = MAP_ENTRY_RE.match(line)
-
-            if entry is None:
-                continue
-
-            ram = int(entry.group("ram"), 16)
-            rom = ram - ram_offset
-            sym = line.split()[-1]
-
-            if "0x" in sym:
-                ram_offset = None
-                continue
-            elif "/" in sym:
-                cur_file = sym
-                continue
-
-            map_symbols[sym] = MapSymbol(rom=rom, file=cur_file, ram=ram)
+    for segment in map_file:
+        for section in segment:
+            for symbol in section:
+                map_symbols[symbol.name] = MapSymbol(
+                    file=str(section.filepath),
+                    ram=symbol.vram,
+                    size=symbol.size,
+                    rom=symbol.vrom,
+                )
 
     return map_symbols
 
@@ -286,6 +263,8 @@ if __name__ == '__main__':
 
     parser.add_argument('version', type=str, help="The version to use (e.g. 'pal')")
     parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose output')
+    parser.add_argument('--output-csv', type=str, default=None, help="An optional path to output a map file CSV to.")
+    parser.add_argument('--output-json', type=str, default=None, help="An optional path to output a map file CSV to.")
 
     args = parser.parse_args()
 
@@ -306,9 +285,21 @@ if __name__ == '__main__':
     map_path = current_ver_dir / "build" / "papermario.map"
 
     # Runtime
+    map_file = mapfile_parser.MapFile.newFromMapFile(map_path)
+
+    if args.output_csv:
+        with open(args.output_csv, 'w', encoding='utf-8') as fp:
+            fp.write(map_file.toCsv())
+
+    if args.output_json:
+        with open(args.output_json, 'w', encoding='utf-8') as fp:
+            json.dump(map_file.toJson(), fp)
+
     ignores = read_ignores()
-    map_symbols = scan_map(map_path)
+    map_symbols = scan_map(map_file)
+
     symbol_addrs, dead_symbols = read_symbol_addrs(symbol_addrs_path)
     elf_symbols = read_elf(elf_path, map_symbols)
+
     reconcile_symbols(elf_symbols, symbol_addrs)
     write_new_symbol_addrs(symbol_addrs_path, symbol_addrs, dead_symbols)
