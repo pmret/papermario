@@ -1,60 +1,86 @@
 #!/usr/bin/env python3
 
-import os
+import pathlib
 import re
 import subprocess
 import sys
+import typing
+
 import tqdm
 
-script_dir = os.path.dirname(os.path.realpath(__file__))
-root_dir = script_dir + "/../"
 
-current_ver_dir = script_dir + "/../ver/current/"
-asm_dir = root_dir + "asm/nonmatchings/"
+# Always the same
+SCRIPT_DIRECTORY = pathlib.Path(__file__).parent
+ROOT_DIRECTORY = SCRIPT_DIRECTORY.parent
+VERSION_DIRECTORY = ROOT_DIRECTORY / 'ver'
+AVAILABLE_VERSIONS = [item.name for item in VERSION_DIRECTORY.iterdir() if item.is_dir()]
 
-symbol_addrs_path = os.path.join(current_ver_dir, "symbol_addrs.txt")
-elf_path = os.path.join(current_ver_dir, "build", "papermario.elf")
-map_path = os.path.join(current_ver_dir, "build", "papermario.map")
-ignores_path = os.path.join(root_dir, "tools", "ignored_funcs.txt")
+ASM_DIRECTORY = ROOT_DIRECTORY / 'asm' / 'nonmatchings'
+IGNORES_PATH = ROOT_DIRECTORY / 'tools' / 'ignored_funcs.txt'
 
+IGNORE_RE = re.compile(r"(?P<symbol>\S+)\s*=\s*0[xX](?P<address>[0-9a-fA-F]+);")
+MAP_BLOCK_RE = re.compile(r"(?:\.(?P<label>\S+))?\s+0[xX](?P<ram>[0-9a-fA-F]+)\s+0[xX](?P<size>[0-9a-fA-F]+) load address 0[xX](?P<rom>[0-9a-fA-F]+)")
+MAP_ENTRY_RE = re.compile(r"(?:\.(?P<bss_label>\S+))?\s+0[xX](?P<ram>[0-9a-fA-F]+)\s+(?:0[xX](?P<bss_size>[0-9a-fA-F]+)\s+)?(?P<label>\S+)")
+SYMBOL_ADDR_RE = re.compile(r"(?:(?P<symbol>\S+))?\s*=\s*0[xX](?P<addr>[0-9a-fA-F]+);(?:\s*//\s*(?P<opts>.+?)\s*)?$")
+SYMBOL_ADDR_OPT_RE = re.compile(r"(?P<key>\S+):(?P<value>\S*)")
+
+# Varies on version
+current_ver = sys.argv[1] if len(sys.argv) > 1 else 'current'
+current_ver_dir = VERSION_DIRECTORY / current_ver
+assert current_ver_dir.is_dir(), f"first argument passed (`{current_ver}`) should be a valid version, available: {', '.join(AVAILABLE_VERSIONS)}"
+
+symbol_addrs_path = current_ver_dir / 'symbol_addrs.txt'
+elf_path = current_ver_dir / 'build' / 'papermario.elf'
+map_path = current_ver_dir / 'build' / 'papermario.map'
+
+# Runtime
 map_symbols = {}
 symbol_addrs = []
 dead_symbols = []
 elf_symbols = []
 
-ignores = set()
+ignores: typing.Set[str] = set()
 
 verbose = False
 
 
 def read_ignores():
-    with open(ignores_path) as f:
+    with open(IGNORES_PATH) as f:
         lines = f.readlines()
 
     for line in lines:
-        name = line.split(" = ")[0].strip()
-        if name != "":
-            ignores.add(name)
+        ignore = IGNORE_RE.match(line)
+
+        if ignore:
+            ignores.add(ignore.group('symbol'))
 
 
 def scan_map():
     ram_offset = None
     cur_file = "<no file>"
-    prev_line = ""
+
     with open(map_path) as f:
         for line in f:
             if "load address" in line:
-                ram = int(line[16 : 16 + 18], 0)
-                rom = int(line[59 : 59 + 18], 0)
+                block = MAP_BLOCK_RE.match(line)
+
+                if block is None:
+                    continue
+
+                ram = int(block.group('ram'), 16)
+                rom = int(block.group('rom'), 16)
                 ram_offset = ram - rom
                 continue
-
-            prev_line = line
 
             if ram_offset is None or "=" in line or "*fill*" in line or " 0x" not in line:
                 continue
 
-            ram = int(line[16 : 16 + 18], 0)
+            entry = MAP_ENTRY_RE.match(line)
+
+            if entry is None:
+                continue
+
+            ram = int(entry.group('ram'), 16)
             rom = ram - ram_offset
             sym = line.split()[-1]
 
@@ -69,7 +95,7 @@ def scan_map():
 
 
 def read_symbol_addrs():
-    unique_lines = set()
+    unique_lines: typing.Set[str] = set()
 
     with open(symbol_addrs_path, "r") as f:
         for line in f.readlines():
@@ -79,48 +105,35 @@ def read_symbol_addrs():
             if "_ROM_START" in line or "_ROM_END" in line:
                 continue
 
-            main_split = line.rstrip().split(";")
-            main = main_split[0]
+            entry = SYMBOL_ADDR_RE.match(line)
 
-            dead = False
-            opts = []
-            type = ""
-            rom = -1
+            if entry is None:
+                continue
 
-            if len(main_split) > 1:
-                ext = main_split[1]
-                opts = ext.split("//")[-1].strip().split(" ")
+            name = entry.group('symbol')
+            addr = int(entry.group('addr'), 16)
+            opts_group = entry.group('opts')
+            opts: typing.Dict[str, str] = {}
 
-                for opt in list(opts):
-                    if opt.strip() == "":
-                        opts.remove(opt)
-                    if "type:" in opt:
-                        type = opt.split(":")[1]
-                        opts.remove(opt)
-                    elif "rom:" in opt:
-                        rom = int(opt.split(":")[1], 16)
-                        opts.remove(opt)
-                    elif "dead:" in opt:
-                        dead = True
+            if opts_group is not None:
+                for opt_group in SYMBOL_ADDR_OPT_RE.finditer(opts_group):
+                    opts[opt_group.group('key')] = opt_group.group('value')
 
-            eqsplit = main.split(" = ")
-            if len(eqsplit) != 2:
-                print(f"Line malformed: '{main}'")
-                sys.exit(1)
-
-            name, addr = main.split(" = ")
+            dead = 'dead' in opts
+            type = opts.get('type', '')
+            rom = int(opts['rom'], 16) if 'rom' in opts else -1
 
             if not dead:
-                symbol_addrs.append([name, int(addr, 0), type, rom, opts])
+                symbol_addrs.append([name, addr, type, rom, opts])
             else:
-                dead_symbols.append([name, int(addr, 0), type, rom, opts])
+                dead_symbols.append([name, addr, type, rom, opts])
 
 
 def read_elf():
     try:
         result = subprocess.run(["mips-linux-gnu-objdump", "-x", elf_path], stdout=subprocess.PIPE)
         objdump_lines = result.stdout.decode().split("\n")
-    except:
+    except Exception:
         print(f"Error: Could not run objdump on {elf_path} - make sure that the project is built")
         sys.exit(1)
 
