@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import dataclasses
 import pathlib
 import re
@@ -60,29 +61,6 @@ class ELFSymbol:
                 line += f" {key}:{value}"
 
         return line
-
-
-# Varies on version
-current_ver = sys.argv[1] if len(sys.argv) > 1 else "current"
-current_ver_dir = VERSION_DIRECTORY / current_ver
-assert (
-    current_ver_dir.is_dir()
-), f"first argument passed (`{current_ver}`) should be a valid version, available: {', '.join(AVAILABLE_VERSIONS)}"
-
-symbol_addrs_path = current_ver_dir / "symbol_addrs.txt"
-elf_path = current_ver_dir / "build" / "papermario.elf"
-map_path = current_ver_dir / "build" / "papermario.map"
-
-
-# Runtime
-map_symbols: typing.Dict[str, MapSymbol] = {}
-symbol_addrs: typing.List[ELFSymbol] = []
-dead_symbols: typing.List[ELFSymbol] = []
-elf_symbols: typing.List[ELFSymbol] = []
-
-ignores: typing.Set[str] = set()
-
-verbose = False
 
 
 def read_ignores():
@@ -233,7 +211,7 @@ def reconcile_symbols():
 
                     if elf_sym.addr != known_sym.addr:
                         log(
-                            f"Ram mismatch! {elf_sym.name} is 0x{elf_sym.addr:X} in the elf and 0x{known_sym.addr} in symbol_addrs"
+                            f"Ram mismatch! {elf_sym.name} is 0x{elf_sym.addr:X} in the elf and 0x{known_sym.addr:X} in symbol_addrs"
                         )
 
             # Rom
@@ -276,40 +254,41 @@ def write_new_symbol_addrs():
             f.write(symbol.format() + "\n")
 
 
-read_ignores()
-scan_map()
-read_symbol_addrs()
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description="Updates symbol_addrs.txt files"
+    )
 
-# chicken scratch cod to print out new / renamed symbols
-# with open("tools/new_syms.txt") as f:
-#     new_syms = f.readlines()
+    parser.add_argument('version', type=str, help="The version to use (e.g. 'pal')")
+    parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose output')
 
-# new_sym_dict = {}
-# for sym_line in new_syms:
-#     sym_line = sym_line.strip()
-#     if sym_line:
-#         name, rest = sym_line.split(" = ")
-#         vram = int(rest.split(";")[0], 0)
-#         new_sym_dict[vram] = name
+    args = parser.parse_args()
 
-# renames = []
-# adds = []
-# for addr in new_sym_dict:
-#     found = False
-#     for thing in symbol_addrs:
-#         if thing[1] == addr and not thing[0].startswith("func_") and not thing[0].startswith("D_"):
-#             if new_sym_dict[addr] != thing[0]:
-#                 renames.append(f"{thing[0]} -> {new_sym_dict[addr]}")
-#             found = True
-#             break
-#     if not found:
-#         adds.append(f"{new_sym_dict[addr]} = {addr:X}")
+    # Varies on version
+    version: str = args.version
+    verbose: bool = args.verbose
 
-# for r in renames:
-#     print(r)
-# for a in adds:
-#     print(a)
+    current_ver_dir = VERSION_DIRECTORY / version
+    assert (
+        current_ver_dir.is_dir()
+    ), f"first argument passed (`{version}`) should be a valid version, available: {', '.join(AVAILABLE_VERSIONS)}"
 
-read_elf()
-reconcile_symbols()
-write_new_symbol_addrs()
+    symbol_addrs_path = current_ver_dir / "symbol_addrs.txt"
+    elf_path = current_ver_dir / "build" / "papermario.elf"
+    map_path = current_ver_dir / "build" / "papermario.map"
+
+
+    # Runtime
+    map_symbols: typing.Dict[str, MapSymbol] = {}
+    symbol_addrs: typing.List[ELFSymbol] = []
+    dead_symbols: typing.List[ELFSymbol] = []
+    elf_symbols: typing.List[ELFSymbol] = []
+
+    ignores: typing.Set[str] = set()
+
+    read_ignores()
+    scan_map()
+    read_symbol_addrs()
+    read_elf()
+    reconcile_symbols()
+    write_new_symbol_addrs()
