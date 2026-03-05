@@ -14,7 +14,7 @@ import tqdm
 import mapfile_parser
 
 # Always the same
-LOGGER = logging.getLogger('update_symbol_addrs')
+LOGGER = logging.getLogger("update_symbol_addrs")
 
 SCRIPT_DIRECTORY = pathlib.Path(__file__).parent
 ROOT_DIRECTORY = SCRIPT_DIRECTORY.parent
@@ -140,10 +140,7 @@ def read_symbol_addrs(symbol_addrs_path: pathlib.Path) -> typing.Tuple[typing.Li
     return (symbol_addrs, dead_symbols)
 
 
-def read_elf(
-    elf_path: pathlib.Path,
-    map_symbols: typing.Dict[str, MapSymbol]
-) -> typing.List[ELFSymbol]:
+def read_elf(elf_path: pathlib.Path, map_symbols: typing.Dict[str, MapSymbol]) -> typing.List[ELFSymbol]:
     elf_symbols: typing.List[ELFSymbol] = []
 
     try:
@@ -255,16 +252,14 @@ def write_new_symbol_addrs(
             f.write(symbol.format() + "\n")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Parse arguments
-    parser = argparse.ArgumentParser(
-        description="Updates symbol_addrs.txt files"
-    )
+    parser = argparse.ArgumentParser(description="Updates symbol_addrs.txt files")
 
-    parser.add_argument('version', type=str, help="The version to use (e.g. 'pal')")
-    parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose output')
-    parser.add_argument('--output-csv', type=str, default=None, help="An optional path to output a map file CSV to.")
-    parser.add_argument('--output-json', type=str, default=None, help="An optional path to output a map file CSV to.")
+    parser.add_argument("version", type=str, help="The version to use (e.g. 'pal')")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Enable verbose output")
+    parser.add_argument("--output-csv", type=str, default=None, help="An optional path to output a map file CSV to.")
+    parser.add_argument("--output-json", type=str, default=None, help="An optional path to output a map file CSV to.")
 
     args = parser.parse_args()
 
@@ -288,11 +283,11 @@ if __name__ == '__main__':
     map_file = mapfile_parser.MapFile.newFromMapFile(map_path)
 
     if args.output_csv:
-        with open(args.output_csv, 'w', encoding='utf-8') as fp:
+        with open(args.output_csv, "w", encoding="utf-8") as fp:
             fp.write(map_file.toCsv())
 
     if args.output_json:
-        with open(args.output_json, 'w', encoding='utf-8') as fp:
+        with open(args.output_json, "w", encoding="utf-8") as fp:
             json.dump(map_file.toJson(), fp)
 
     ignores = read_ignores()
