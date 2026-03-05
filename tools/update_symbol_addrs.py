@@ -2,6 +2,7 @@
 
 import argparse
 import dataclasses
+import logging
 import pathlib
 import re
 import subprocess
@@ -11,6 +12,8 @@ import typing
 import tqdm
 
 # Always the same
+LOGGER = logging.getLogger('update_symbol_addrs')
+
 SCRIPT_DIRECTORY = pathlib.Path(__file__).parent
 ROOT_DIRECTORY = SCRIPT_DIRECTORY.parent
 VERSION_DIRECTORY = ROOT_DIRECTORY / "ver"
@@ -170,7 +173,7 @@ def read_elf(
         result = subprocess.run(["mips-linux-gnu-objdump", "-x", elf_path], stdout=subprocess.PIPE)
         objdump_lines = result.stdout.decode().split("\n")
     except Exception:
-        print(f"Error: Could not run objdump on {elf_path} - make sure that the project is built")
+        LOGGER.error(f"Error: Could not run objdump on {elf_path} - make sure that the project is built")
         sys.exit(1)
 
     for line in objdump_lines:
@@ -210,16 +213,11 @@ def read_elf(
     return elf_symbols
 
 
-def log(s: str):
-    if verbose:
-        print(s)
-
-
 def reconcile_symbols(
     elf_symbols: typing.List[ELFSymbol],
     symbol_addrs: typing.List[ELFSymbol],
 ):
-    print(f"Processing {str(len(elf_symbols))} elf symbols...")
+    LOGGER.info(f"Processing {str(len(elf_symbols))} elf symbols...")
 
     for elf_sym in tqdm.tqdm(elf_symbols, total=len(elf_symbols)):
         name_match: typing.Optional[ELFSymbol] = None
@@ -232,7 +230,7 @@ def reconcile_symbols(
                     name_match = known_sym
 
                     if elf_sym.addr != known_sym.addr:
-                        log(
+                        LOGGER.debug(
                             f"Ram mismatch! {elf_sym.name} is 0x{elf_sym.addr:X} in the elf and 0x{known_sym.addr:X} in symbol_addrs"
                         )
 
@@ -245,7 +243,7 @@ def reconcile_symbols(
 
         if not name_match:
             if not rom_match:
-                log(f"Creating new symbol {elf_sym.name}")
+                LOGGER.debug(f"Creating new symbol {elf_sym.name}")
                 symbol_addrs.append(
                     ELFSymbol(
                         name=elf_sym.name,
@@ -256,14 +254,14 @@ def reconcile_symbols(
                     )
                 )
             else:
-                log(f"Renaming identical rom address symbol {rom_match.name} to {elf_sym.name}")
+                LOGGER.debug(f"Renaming identical rom address symbol {rom_match.name} to {elf_sym.name}")
                 rom_match.name = elf_sym.name
 
         elif not rom_match and elf_sym.rom:
             if name_match.rom:
-                log(f"Correcting rom address {name_match.rom} to {elf_sym.rom} for symbol {name_match.name}")
+                LOGGER.debug(f"Correcting rom address {name_match.rom} to {elf_sym.rom} for symbol {name_match.name}")
             else:
-                log(f"Adding rom address {elf_sym.rom} to symbol {name_match.name}")
+                LOGGER.debug(f"Adding rom address {elf_sym.rom} to symbol {name_match.name}")
             name_match.rom = elf_sym.rom
 
 
@@ -281,6 +279,7 @@ def write_new_symbol_addrs(
 
 
 if __name__ == '__main__':
+    # Parse arguments
     parser = argparse.ArgumentParser(
         description="Updates symbol_addrs.txt files"
     )
@@ -290,10 +289,13 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    # Varies on version
     version: str = args.version
     verbose: bool = args.verbose
 
+    # Initialize logging
+    logging.basicConfig(level=logging.DEBUG if verbose else logging.INFO)
+
+    # Version-specific files
     current_ver_dir = VERSION_DIRECTORY / version
     assert (
         current_ver_dir.is_dir()
@@ -302,7 +304,6 @@ if __name__ == '__main__':
     symbol_addrs_path = current_ver_dir / "symbol_addrs.txt"
     elf_path = current_ver_dir / "build" / "papermario.elf"
     map_path = current_ver_dir / "build" / "papermario.map"
-
 
     # Runtime
     ignores = read_ignores()
