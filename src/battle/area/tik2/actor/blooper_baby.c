@@ -27,8 +27,8 @@ enum N(ActorParams) {
 };
 
 EvtScript N(EVS_FloatToPos) = {
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Still)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Idle)
     Call(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     IfGt(LVarB, 20)
         Sub(LVarB, 20)
@@ -55,8 +55,8 @@ EvtScript N(EVS_FloatToPos) = {
     Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
     Call(SetGoalPos, ACTOR_SELF, LVar7, LVar8, LVar9)
     Call(FlyToGoal, ACTOR_SELF, LVar3, -2, EASING_CUBIC_OUT)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Still)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Idle)
     Call(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     Sub(LVarB, 20)
     Call(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
@@ -78,8 +78,8 @@ EvtScript N(EVS_FloatToPos) = {
     Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
     Call(SetGoalPos, ACTOR_SELF, LVar7, LVar8, LVar9)
     Call(FlyToGoal, ACTOR_SELF, LVar3, -2, EASING_CUBIC_OUT)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Still)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Idle)
     Call(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     Sub(LVarB, 20)
     Call(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
@@ -103,35 +103,35 @@ EvtScript N(EVS_FloatToHome) = {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_STOP,      ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_BabyBlooper_Anim06,
-    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim07,
-    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_BabyBlooper_Anim07,
-    STATUS_KEY_SHRINK,    ANIM_BabyBlooper_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_BabyBlooper_Still,
+    STATUS_KEY_STOP,      ANIM_BabyBlooper_Still,
+    STATUS_KEY_SLEEP,     ANIM_BabyBlooper_Sleep,
+    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Dizzy,
+    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Still,
+    STATUS_KEY_DIZZY,     ANIM_BabyBlooper_Dizzy,
+    STATUS_KEY_SHRINK,    ANIM_BabyBlooper_Still,
     STATUS_END,
 };
 
 s32 N(AscendAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BabyBlooper_Anim01,
-    STATUS_KEY_STOP,      ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_BabyBlooper_Anim06,
-    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim07,
-    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_BabyBlooper_Anim07,
-    STATUS_KEY_SHRINK,    ANIM_BabyBlooper_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_BabyBlooper_Idle,
+    STATUS_KEY_STOP,      ANIM_BabyBlooper_Still,
+    STATUS_KEY_SLEEP,     ANIM_BabyBlooper_Sleep,
+    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Dizzy,
+    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Still,
+    STATUS_KEY_DIZZY,     ANIM_BabyBlooper_Dizzy,
+    STATUS_KEY_SHRINK,    ANIM_BabyBlooper_Idle,
     STATUS_END,
 };
 
 s32 N(DescendAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_STOP,      ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_BabyBlooper_Anim06,
-    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim07,
-    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_BabyBlooper_Anim07,
-    STATUS_KEY_SHRINK,    ANIM_BabyBlooper_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_BabyBlooper_Still,
+    STATUS_KEY_STOP,      ANIM_BabyBlooper_Still,
+    STATUS_KEY_SLEEP,     ANIM_BabyBlooper_Sleep,
+    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Dizzy,
+    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Still,
+    STATUS_KEY_DIZZY,     ANIM_BabyBlooper_Dizzy,
+    STATUS_KEY_SHRINK,    ANIM_BabyBlooper_Still,
     STATUS_END,
 };
 
@@ -223,8 +223,8 @@ EvtScript N(EVS_Init) = {
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BABY_BLOOPER_MOVE)
     Call(N(StartRumbleWithParams), 80, 20)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Still)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Idle)
     Call(GetActorPos, ACTOR_ENEMY0, LVar0, LVar1, LVar2)
     Add(LVar1, 10)
     Sub(LVar2, 10)
@@ -265,9 +265,9 @@ EvtScript N(EVS_Idle) = {
             Goto(11)
         EndIf
         Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(AscendAnims)))
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Still)
         Wait(9)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim01)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Idle)
         Call(SetActorIdleJumpGravity, ACTOR_SELF, Float(1.0))
         Call(SetActorIdleSpeed, ACTOR_SELF, Float(1.0))
         Call(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -286,9 +286,9 @@ EvtScript N(EVS_Idle) = {
             Goto(12)
         EndIf
         Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(AscendAnims)))
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Still)
         Wait(9)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim01)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Idle)
         Call(SetActorIdleJumpGravity, ACTOR_SELF, Float(1.0))
         Call(SetActorIdleSpeed, ACTOR_SELF, Float(1.0))
         Call(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -322,74 +322,74 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim02)
+            SetConst(LVar1, ANIM_BabyBlooper_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim02)
+            SetConst(LVar1, ANIM_BabyBlooper_Hurt)
             ExecWait(EVS_Enemy_Hit)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim03)
+            SetConst(LVar1, ANIM_BabyBlooper_Dead)
             ExecWait(N(EVS_Death))
             Return
         CaseEq(EVENT_BURN_HIT)
             Set(LVar0, 1)
-            Set(LVar1, ANIM_BabyBlooper_Anim04)
-            Set(LVar2, ANIM_BabyBlooper_Anim05)
+            Set(LVar1, ANIM_BabyBlooper_BurnHurt)
+            Set(LVar2, ANIM_BabyBlooper_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             Set(LVar0, 1)
-            Set(LVar1, ANIM_BabyBlooper_Anim04)
-            Set(LVar2, ANIM_BabyBlooper_Anim05)
+            Set(LVar1, ANIM_BabyBlooper_BurnHurt)
+            Set(LVar2, ANIM_BabyBlooper_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim05)
+            SetConst(LVar1, ANIM_BabyBlooper_BurnStill)
             ExecWait(N(EVS_Death))
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim02)
+            SetConst(LVar1, ANIM_BabyBlooper_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim02)
+            SetConst(LVar1, ANIM_BabyBlooper_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim03)
+            SetConst(LVar1, ANIM_BabyBlooper_Dead)
             ExecWait(N(EVS_Death))
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim00)
+            SetConst(LVar1, ANIM_BabyBlooper_Still)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_SHOCK_HIT)
             Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim02)
+            SetConst(LVar1, ANIM_BabyBlooper_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim02)
+            SetConst(LVar1, ANIM_BabyBlooper_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             ExecWait(N(EVS_FloatToHome))
         CaseOrEq(EVENT_SHOCK_DEATH)
             Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim02)
+            SetConst(LVar1, ANIM_BabyBlooper_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim02)
+            SetConst(LVar1, ANIM_BabyBlooper_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim03)
+            SetConst(LVar1, ANIM_BabyBlooper_Dead)
             ExecWait(N(EVS_Death))
             Return
         CaseEq(EVENT_END_FIRST_STRIKE)
             ExecWait(N(EVS_FloatToHome))
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BabyBlooper_Anim00)
+            SetConst(LVar1, ANIM_BabyBlooper_Still)
             ExecWait(EVS_Enemy_Recover)
         CaseDefault
     EndSwitch
@@ -423,7 +423,7 @@ EvtScript N(EVS_TakeTurn) = {
     Switch(LVarF)
         CaseOrEq(HIT_RESULT_MISS)
         CaseOrEq(HIT_RESULT_LUCKY)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Hurt)
             Call(SetGoalToTarget, ACTOR_SELF)
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Set(LVar1, 0)
@@ -446,7 +446,7 @@ EvtScript N(EVS_TakeTurn) = {
         EndCaseGroup
         CaseOrEq(HIT_RESULT_HIT_STATIC)
         CaseOrEq(HIT_RESULT_IMMUNE)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Hurt)
             Call(SetGoalToTarget, ACTOR_SELF)
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.5))
@@ -470,7 +470,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
     Call(SetBattleCamDist, 325)
     Call(MoveBattleCamOver, 30)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Hurt)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -479,7 +479,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(JumpToGoal, ACTOR_SELF, 16, false, true, false)
     Call(SetGoalToTarget, ACTOR_SELF)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim08)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Leech)
     Call(ShowMessageBox, BTL_MSG_ACTION_TIP_MASH_BUTTON, AC_LEECH_MAX_TIME)
     Call(ShowActionHud, true)
     Call(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
@@ -671,9 +671,9 @@ EvtScript N(EVS_TakeTurn) = {
     Call(MoveBattleCamOver, 20)
     Call(GetStatusFlags, ACTOR_PLAYER, LVar0)
     IfFlag(LVar0, STATUS_FLAG_STONE)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim02)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Hurt)
     Else
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Still)
     EndIf
     Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

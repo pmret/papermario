@@ -18,15 +18,15 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BattleClubba_Anim01,
-    STATUS_KEY_STONE,     ANIM_BattleClubba_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_BattleClubba_Anim03,
-    STATUS_KEY_POISON,    ANIM_BattleClubba_Anim01,
-    STATUS_KEY_STOP,      ANIM_BattleClubba_Anim00,
-    STATUS_KEY_STATIC,    ANIM_BattleClubba_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_BattleClubba_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_BattleClubba_Anim05,
-    STATUS_KEY_UNUSED,    ANIM_BattleClubba_Anim05,
+    STATUS_KEY_NORMAL,    ANIM_BattleClubba_Idle,
+    STATUS_KEY_STONE,     ANIM_BattleClubba_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleClubba_Sleep,
+    STATUS_KEY_POISON,    ANIM_BattleClubba_Idle,
+    STATUS_KEY_STOP,      ANIM_BattleClubba_Still,
+    STATUS_KEY_STATIC,    ANIM_BattleClubba_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_BattleClubba_Still,
+    STATUS_KEY_DIZZY,     ANIM_BattleClubba_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_BattleClubba_Dizzy,
     STATUS_END,
 };
 
@@ -119,86 +119,86 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim04)
+            SetConst(LVar1, ANIM_BattleClubba_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim06)
-            SetConst(LVar2, ANIM_BattleClubba_Anim07)
+            SetConst(LVar1, ANIM_BattleClubba_BurnHurt)
+            SetConst(LVar2, ANIM_BattleClubba_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim06)
-            SetConst(LVar2, ANIM_BattleClubba_Anim07)
+            SetConst(LVar1, ANIM_BattleClubba_BurnHurt)
+            SetConst(LVar2, ANIM_BattleClubba_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim07)
+            SetConst(LVar1, ANIM_BattleClubba_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim04)
+            SetConst(LVar1, ANIM_BattleClubba_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim04)
+            SetConst(LVar1, ANIM_BattleClubba_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim04)
+            SetConst(LVar1, ANIM_BattleClubba_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim04)
+            SetConst(LVar1, ANIM_BattleClubba_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim04)
+            SetConst(LVar1, ANIM_BattleClubba_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim02)
+            SetConst(LVar1, ANIM_BattleClubba_Run)
             ExecWait(EVS_Enemy_ReturnHome)
         CaseEq(EVENT_SHOCK_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim04)
+            SetConst(LVar1, ANIM_BattleClubba_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim04)
+            SetConst(LVar1, ANIM_BattleClubba_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim01)
+            SetConst(LVar1, ANIM_BattleClubba_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim04)
+            SetConst(LVar1, ANIM_BattleClubba_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim04)
+            SetConst(LVar1, ANIM_BattleClubba_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim01)
+            SetConst(LVar1, ANIM_BattleClubba_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim02)
-            SetConst(LVar2, ANIM_BattleClubba_Anim04)
+            SetConst(LVar1, ANIM_BattleClubba_Run)
+            SetConst(LVar2, ANIM_BattleClubba_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim04)
+            SetConst(LVar1, ANIM_BattleClubba_Hurt)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim04)
+            SetConst(LVar1, ANIM_BattleClubba_Hurt)
             ExecWait(EVS_Enemy_BlowAway)
             Return
         CaseDefault
@@ -226,7 +226,7 @@ EvtScript N(EVS_TakeTurn) = {
         Call(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         Wait(15)
     Else
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Anim02)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Run)
         Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
         Call(SetGoalToTarget, ACTOR_SELF)
         Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -236,7 +236,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(AddGoalPos, ACTOR_SELF, 10, 0, -6)
         EndIf
         Call(RunToGoal, ACTOR_SELF, 0, false)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Anim01)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Idle)
         Wait(10)
     EndIf
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
@@ -245,7 +245,7 @@ EvtScript N(EVS_TakeTurn) = {
         CaseOrEq(HIT_RESULT_LUCKY)
             Set(LVarA, LVar0)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Anim08)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_ClubAttack)
             Wait(10)
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -256,7 +256,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(SetActorYaw, ACTOR_SELF, 180)
             Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim02)
+            SetConst(LVar1, ANIM_BattleClubba_Run)
             ExecWait(EVS_Enemy_ReturnHome)
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(SetActorYaw, ACTOR_SELF, 0)
@@ -265,10 +265,10 @@ EvtScript N(EVS_TakeTurn) = {
             Return
         EndCaseGroup
     EndSwitch
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Anim09)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_RaiseClub)
     Wait(15)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Anim0A)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_SwingClub)
     Wait(2)
     Wait(2)
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -283,7 +283,7 @@ EvtScript N(EVS_TakeTurn) = {
             Wait(19)
             Call(YieldTurn)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleClubba_Anim02)
+            SetConst(LVar1, ANIM_BattleClubba_Run)
             ExecWait(EVS_Enemy_ReturnHome)
         EndCaseGroup
     EndSwitch

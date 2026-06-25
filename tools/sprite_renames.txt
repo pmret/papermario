@@ -1,0 +1,83 @@
+# One whitespace-separated rename per line:
+# anim SpriteName OldAnimationName NewAnimationName
+# img SpriteName OldRasterName NewRasterName
+#
+# Example:
+# anim BabyBlooper Anim00 Still
+# img BabyBlooper Raster00 Neutral
+
+anim BabyBlooper Anim00	Still
+anim BabyBlooper Anim01	Idle
+anim BabyBlooper Anim02	Hurt
+anim BabyBlooper Anim03	Dead
+anim BabyBlooper Anim04	BurnHurt
+anim BabyBlooper Anim05	BurnStill
+anim BabyBlooper Anim06	Sleep
+anim BabyBlooper Anim07	Dizzy
+anim BabyBlooper Anim08	Leech
+img	BabyBlooper	Raster00	Neutral
+img	BabyBlooper	Raster01	Idle1
+img	BabyBlooper	Raster02	Idle2
+img	BabyBlooper	Raster03	Hurt1
+img	BabyBlooper	Raster04	Hurt2
+img	BabyBlooper	Raster05	Sleep1
+img	BabyBlooper	Raster06	Sleep2
+img	BabyBlooper	Raster07	Dizzy1
+img	BabyBlooper	Raster08	Dizzy2
+img	BabyBlooper	Raster09	Dizzy3
+img	BabyBlooper	Raster0A	Dizzy4
+img	BabyBlooper	Raster0B	Dead
+img	BabyBlooper	Raster0C	Leech1
+img	BabyBlooper	Raster0D	Leech2
+img	BabyBlooper	Raster0E	Leech3
+img	BabyBlooper	Raster0F	Leech4
+img	BabyBlooper	Raster10	BurnStill
+img	BabyBlooper	Raster11	Burn1
+img	BabyBlooper	Raster12	Burn2
+
+anim	BattleClubba	Anim00	Still
+anim	BattleClubba	Anim01	Idle
+anim	BattleClubba	Anim02	Run
+anim	BattleClubba	Anim03	Sleep
+anim	BattleClubba	Anim04	Hurt
+anim	BattleClubba	Anim05	Dizzy
+anim	BattleClubba	Anim06	BurnHurt
+anim	BattleClubba	Anim07	BurnStill
+anim	BattleClubba	Anim08	ClubAttack
+anim	BattleClubba	Anim09	RaiseClub
+anim	BattleClubba	Anim0A	SwingClub
+img	BattleClubba	Raster00	Neutral
+img	BattleClubba	Raster01	Idle1
+img	BattleClubba	Raster02	Idle2
+img	BattleClubba	Raster03	Step1
+img	BattleClubba	Raster04	Step2
+img	BattleClubba	Raster05	Step3
+img	BattleClubba	Raster06	Sleep1
+img	BattleClubba	Raster07	Sleep2
+img	BattleClubba	Raster08	Sleep3
+img	BattleClubba	Raster09	BurnStill
+img	BattleClubba	Raster0A	Swing1
+img	BattleClubba	Raster0B	Swing2
+img	BattleClubba	Raster0C	Hurt1
+img	BattleClubba	Raster0D	Hurt2
+img	BattleClubba	Raster0E	Bubble1
+img	BattleClubba	Raster0F	Bubble2
+img	BattleClubba	Raster10	BurnHurt1
+img	BattleClubba	Raster11	BurnHurt2
+img	BattleClubba	Raster12	Dizzy1
+img	BattleClubba	Raster13	Dizzy2
+img	BattleClubba	Raster14	Dizzy3
+img	BattleClubba	Raster15	Dizzy4
+img	BattleClubba	Raster16	ClubIdle1
+img	BattleClubba	Raster17	ClubIdle2
+img	BattleClubba	Raster18	ClubShake1
+img	BattleClubba	Raster19	ClubShake2
+img	BattleClubba	Raster1A	BurnedClub1
+img	BattleClubba	Raster1B	BurnedClub2
+img	BattleClubba	Raster1C	ClubHigh1
+img	BattleClubba	Raster1D	ClubHigh2
+img	BattleClubba	Raster1E	ClubLow1
+img	BattleClubba	Raster1F	ClubLow2
+img	BattleClubba	Raster20	ClubHigh3
+img	BattleClubba	Raster21	ClubTrail
+
