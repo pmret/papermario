@@ -96,7 +96,7 @@ EvtScript N(EVS_SummonGateBlock) = {
         EndIf
     Call(PlaySoundAt, SOUND_KAMMY_RAISE_OBJECT, SOUND_SPACE_DEFAULT, LVar2, LVar0, LVar4)
     Wait(20 * DT)
-    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim0F)
+    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_FlyRodCast)
     Thread
         Wait(15)
         PlayEffect(EFFECT_LANDING_DUST, 4, LVar2, 0, LVar4, 0)

@@ -215,16 +215,16 @@ EvtScript N(EVS_Scene_TubbaReunion) = {
         Call(SetCamPosC, CAM_DEFAULT, 0, 0)
         Call(SetPanTarget, CAM_DEFAULT, 65, 0, -137)
         Call(PanToTarget, CAM_DEFAULT, 0, true)
-        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim22)
+        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_OpenWide)
     EndThread
     Call(PlaySoundAtNpc, NPC_TubbasHeart, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
     Call(NpcJump0, NPC_TubbasHeart, 298, 56, 31, 18)
     Call(SetNpcPos, NPC_TubbasHeart, NPC_DISPOSE_LOCATION)
     Call(EnableNpcShadow, NPC_TubbasHeart, false)
     Thread
-        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim23)
+        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Chew)
         Wait(20 * DT)
-        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim06)
+        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Idle)
     EndThread
     Wait(20 * DT)
     Thread
@@ -268,7 +268,7 @@ EvtScript N(EVS_Scene_TubbaReunion) = {
     EndThread
     Call(PlayerMoveTo, 200, 0, 35 * DT)
     Wait(5 * DT)
-    Call(SpeakToPlayer, NPC_Tubba, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim06, 0, MSG_CH3_00C8)
+    Call(SpeakToPlayer, NPC_Tubba, ANIM_WorldTubba_Talk, ANIM_WorldTubba_Idle, 0, MSG_CH3_00C8)
     Call(SetNpcVar, NPC_Tubba, 0, 1)
     Wait(30 * DT)
     Call(DisablePlayerInput, false)

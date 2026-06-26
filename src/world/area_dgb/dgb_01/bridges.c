@@ -129,7 +129,7 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
     Call(ShakeCam, CAM_DEFAULT, 0, 300, Float(1.0))
     Call(StopSound, SOUND_LOOP_DGB_COLLAPSE)
     Thread
-        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim0D)
+        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_RunAngry)
         Call(SetNpcSpeed, NPC_Tubba, Float(3.0))
         Call(NpcMoveTo, NPC_Tubba, 176, 0, 0)
     EndThread
@@ -153,7 +153,7 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
     Call(DeleteAnimatedModel, 0)
     Thread
         Wait(30)
-        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim0D)
+        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_RunAngry)
         Call(SetNpcPos, NPC_Tubba, 137, 244, 35)
         Call(SetNpcSpeed, NPC_Tubba, Float(3.0))
         Call(NpcMoveTo, NPC_Tubba, 470, 0, 0)

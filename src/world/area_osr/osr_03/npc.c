@@ -3,21 +3,21 @@
 #include "world/common/enemy/Kammy.inc.c"
 
 AnimID N(ExtraAnims_Kammy)[] = {
-    ANIM_WorldKammy_Anim09,
-    ANIM_WorldKammy_Anim0A,
-    ANIM_WorldKammy_Anim0B,
-    ANIM_WorldKammy_Anim0C,
-    ANIM_WorldKammy_Anim0D,
-    ANIM_WorldKammy_Anim0E,
-    ANIM_WorldKammy_Anim0F,
-    ANIM_WorldKammy_Anim10,
-    ANIM_WorldKammy_Anim11,
-    ANIM_WorldKammy_Anim12,
-    ANIM_WorldKammy_Anim13,
-    ANIM_WorldKammy_Anim14,
-    ANIM_WorldKammy_Anim15,
-    ANIM_WorldKammy_Anim16,
-    ANIM_WorldKammy_Anim1A,
+    ANIM_WorldKammy_FlyStill,
+    ANIM_WorldKammy_FlyIdle,
+    ANIM_WorldKammy_FlySlow,
+    ANIM_WorldKammy_FlyFast,
+    ANIM_WorldKammy_FlyTalk,
+    ANIM_WorldKammy_FlyRodTalk,
+    ANIM_WorldKammy_FlyRodCast,
+    ANIM_WorldKammy_FlyBrake,
+    ANIM_WorldKammy_FlyChuckle,
+    ANIM_WorldKammy_FlyLaugh,
+    ANIM_WorldKammy_FlyIdleSly,
+    ANIM_WorldKammy_FlySlowSly,
+    ANIM_WorldKammy_FlyFastSly,
+    ANIM_WorldKammy_FlyTalkSly,
+    ANIM_WorldKammy_FlyBack,
     ANIM_LIST_END
 };
 

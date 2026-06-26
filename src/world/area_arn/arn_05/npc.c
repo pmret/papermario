@@ -455,9 +455,9 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     EndThread
     Set(LVar0, 4)
     Exec(N(EVS_TubbaWalking))
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim09)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Walk)
     Call(NpcMoveTo, NPC_Tubba, 550, 196, 0)
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim06)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Idle)
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.5))
     Call(SetCamDistance, CAM_DEFAULT, 375)
@@ -471,11 +471,11 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Thread
         Set(LVar0, 7)
         Exec(N(EVS_TubbaWalking))
-        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim09)
+        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Walk)
         Call(NpcMoveTo, NPC_Tubba, 370, 220, 0)
         Call(GetNpcPos, NPC_Boo_03, LVar0, LVar1, LVar2)
         Call(NpcMoveTo, NPC_Tubba, 330, LVar2, 0)
-        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim06)
+        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Idle)
         Set(MV_Unk_01, 1)
     EndThread
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
@@ -499,15 +499,15 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Wait(30 * DT)
     Call(SpeakToPlayer, NPC_Boo_03, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_00A5)
     Call(SetNpcAnimation, NPC_Boo_03, ANIM_Boo_Tan_Cower)
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim1E)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Reach)
     Call(SetNpcJumpscale, NPC_Boo_03, Float(0.0))
     Call(NpcJump1, NPC_Boo_03, 265, 206, 212, 3 * DT)
     Wait(20 * DT)
-    Call(SpeakToPlayer, NPC_Tubba, ANIM_WorldTubba_Anim1E, ANIM_WorldTubba_Anim1E, 5, MSG_CH3_00A6)
+    Call(SpeakToPlayer, NPC_Tubba, ANIM_WorldTubba_Reach, ANIM_WorldTubba_Reach, 5, MSG_CH3_00A6)
     Call(SetNpcPos, NPC_Boo_03, 303, 237, 228)
     Call(SetNpcAnimation, NPC_Boo_03, ANIM_Boo_Tan_Flail)
     Call(EnableNpcShadow, NPC_Boo_03, false)
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim1F)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_OpenMouth)
     Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-17.0))
     Call(SetCamDistance, CAM_DEFAULT, 250)
@@ -522,7 +522,7 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     EndThread
     Wait(40 * DT)
     Call(SetNpcPos, NPC_Boo_03, NPC_DISPOSE_LOCATION)
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim20)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Devour)
     Wait(80 * DT)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-11.5))
@@ -533,25 +533,25 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     Call(SetPanTarget, CAM_DEFAULT, 240, 169, 206)
     Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim06)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Idle)
     Wait(15 * DT)
-    Call(SpeakToPlayer, NPC_Tubba, ANIM_WorldTubba_Anim21, ANIM_WorldTubba_Anim06, 5, MSG_CH3_00A7)
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim21)
+    Call(SpeakToPlayer, NPC_Tubba, ANIM_WorldTubba_Burp, ANIM_WorldTubba_Idle, 5, MSG_CH3_00A7)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Burp)
     Call(GetNpcPos, NPC_Tubba, LVar0, LVar1, LVar2)
     Add(LVar0, -50)
     Add(LVar1, 50)
     Add(LVar2, 10)
     PlayEffect(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 10)
     Wait(20 * DT)
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim06)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Idle)
     Call(InterpNpcYaw, NPC_Tubba, 90, 1)
     Wait(30 * DT)
     Set(LVar0, 7)
     Exec(N(EVS_TubbaWalking))
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim09)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Walk)
     Call(NpcMoveTo, NPC_Tubba, 370, 220, 0)
     Call(NpcMoveTo, NPC_Tubba, 550, 196, 0)
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim06)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Idle)
     Call(SetNpcPos, NPC_Tubba, NPC_DISPOSE_LOCATION)
     Call(SetNpcFlagBits, NPC_Tubba, NPC_FLAG_GRAVITY, false)
     Call(NpcFacePlayer, NPC_Boo_01, 3)
@@ -625,12 +625,12 @@ EvtScript N(EVS_NpcInit_Tubba) = {
 };
 
 AnimID N(ExtraAnims_Tubba)[] = {
-    ANIM_WorldTubba_Anim06,
-    ANIM_WorldTubba_Anim09,
-    ANIM_WorldTubba_Anim1E,
-    ANIM_WorldTubba_Anim1F,
-    ANIM_WorldTubba_Anim20,
-    ANIM_WorldTubba_Anim21,
+    ANIM_WorldTubba_Idle,
+    ANIM_WorldTubba_Walk,
+    ANIM_WorldTubba_Reach,
+    ANIM_WorldTubba_OpenMouth,
+    ANIM_WorldTubba_Devour,
+    ANIM_WorldTubba_Burp,
     ANIM_LIST_END
 };
 

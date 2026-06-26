@@ -48,13 +48,13 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
     EndThread
     Set(GB_ARN_Tubba_MapID, 15)
     Call(SetNpcPos, NPC_SELF, 0, 0, 88)
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim09)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Walk)
     Call(SetNpcYaw, NPC_SELF, 270)
     Call(NpcMoveTo, NPC_SELF, -53, 180, 60)
     Call(SetMusic, 0, SONG_TUBBA_BLUBBA_THEME, 0, VOL_LEVEL_FULL)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim06)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Idle)
     Wait(15)
-    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim06, 0, MSG_CH3_00F3)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Talk, ANIM_WorldTubba_Idle, 0, MSG_CH3_00F3)
     Wait(15)
     Thread
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -128,7 +128,7 @@ MobileAISettings N(AISettings_Tubba) = {
 EvtScript N(EVS_NpcAI_Tubba) = {
     Exec(N(EVS_WaitForCloseCall))
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim0C)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Run)
     Exec(N(EVS_PlayFootstepFX))
     Call(N(PatrolNoAttackAI_Main), Ref(N(AISettings_Tubba)))
     Return

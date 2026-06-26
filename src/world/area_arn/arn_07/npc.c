@@ -32,14 +32,14 @@ EvtScript N(EVS_Scene_TubbaRelents) = {
     Call(SetPanTarget, CAM_DEFAULT, 250, 0, -46)
     Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(SetPlayerAnimation, ANIM_Mario1_Idle)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim08)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_IdleSad)
     Call(SetNpcYaw, NPC_SELF, 90)
     Wait(10 * DT)
-    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim12, ANIM_WorldTubba_Anim08, 5, MSG_CH3_00CA)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_TalkSad, ANIM_WorldTubba_IdleSad, 5, MSG_CH3_00CA)
     Wait(10 * DT)
     Call(InterpNpcYaw, NPC_SELF, 270, 0)
     Wait(10 * DT)
-    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim12, ANIM_WorldTubba_Anim08, 5, MSG_CH3_00CB)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_TalkSad, ANIM_WorldTubba_IdleSad, 5, MSG_CH3_00CB)
     Call(SetCamDistance, CAM_DEFAULT, 300)
     Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
     Call(SetCamPitch, CAM_DEFAULT, Float(5.0), Float(-16.0))
@@ -52,7 +52,7 @@ EvtScript N(EVS_Scene_TubbaRelents) = {
 
 EvtScript N(EVS_Scene_BossDefeated) = {
     Wait(10 * DT)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim22)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_OpenWide)
     Wait(15 * DT)
     Loop(4)
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
@@ -75,14 +75,14 @@ EvtScript N(EVS_Scene_BossDefeated) = {
         Wait(6 * DT)
     EndLoop
     Wait(10 * DT)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim23)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Chew)
     Wait(30 * DT)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim22)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_OpenWide)
     Wait(10 * DT)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
     Call(SetNpcVar, NPC_Boo_02, 0, 1)
     Wait(15 * DT)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim21)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Burp)
     Wait(45 * DT)
     Call(UseSettingsFrom, CAM_DEFAULT, 236, 0, -46)
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
@@ -92,8 +92,8 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(5 * DT)
     Call(SetPlayerAnimation, ANIM_Mario1_Still)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim0F)
-    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim12, ANIM_WorldTubba_Anim08, 0, MSG_CH3_00CC)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_SprintCry)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_TalkSad, ANIM_WorldTubba_IdleSad, 0, MSG_CH3_00CC)
     Thread
         Wait(5 * DT)
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
@@ -366,14 +366,14 @@ EvtScript N(EVS_NpcInit_Bootler) = {
 };
 
 AnimID N(ExtraAnims_Tubba)[] = {
-    ANIM_WorldTubba_Anim00,
-    ANIM_WorldTubba_Anim22,
-    ANIM_WorldTubba_Anim23,
-    ANIM_WorldTubba_Anim06,
-    ANIM_WorldTubba_Anim10,
-    ANIM_WorldTubba_Anim08,
-    ANIM_WorldTubba_Anim0F,
-    ANIM_WorldTubba_Anim12,
+    ANIM_WorldTubba_Still,
+    ANIM_WorldTubba_OpenWide,
+    ANIM_WorldTubba_Chew,
+    ANIM_WorldTubba_Idle,
+    ANIM_WorldTubba_Talk,
+    ANIM_WorldTubba_IdleSad,
+    ANIM_WorldTubba_SprintCry,
+    ANIM_WorldTubba_TalkSad,
     ANIM_LIST_END
 };
 

@@ -77,7 +77,7 @@ EvtScript N(EVS_NpcIdle_Clubba_01) = {
     EndLoop
     IfNe(LVar0, 2)
         Call(DisablePlayerInput, true)
-        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Anim05, ANIM_WorldClubba_Frost_Anim02, 0, MSG_CH7_0150)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Talk, ANIM_WorldClubba_Frost_Idle, 0, MSG_CH7_0150)
         Call(DisablePlayerInput, false)
     EndIf
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
@@ -100,7 +100,7 @@ EvtScript N(EVS_NpcIdle_Clubba_02) = {
     EndLoop
     IfNe(LVar0, 2)
         Call(DisablePlayerInput, true)
-        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Anim05, ANIM_WorldClubba_Frost_Anim02, 0, MSG_CH7_0151)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Talk, ANIM_WorldClubba_Frost_Idle, 0, MSG_CH7_0151)
         Call(DisablePlayerInput, false)
     EndIf
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
@@ -124,7 +124,7 @@ EvtScript N(EVS_NpcIdle_Clubba_03) = {
     Call(GetSelfVar, 0, LVar0)
     IfNe(LVar0, 2)
         Call(DisablePlayerInput, true)
-        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Anim05, ANIM_WorldClubba_Frost_Anim02, 0, MSG_CH7_0152)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Talk, ANIM_WorldClubba_Frost_Idle, 0, MSG_CH7_0152)
         Call(DisablePlayerInput, false)
     EndIf
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)

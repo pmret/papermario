@@ -31,11 +31,11 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor3) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim0A)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_WalkAngry)
     Call(SetNpcPos, NPC_SELF, 520, 420, 0)
     Call(SetNpcYaw, NPC_SELF, 270)
     Call(NpcMoveTo, NPC_SELF, 390, 0, 30)
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim07)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_IdleAngry)
     Thread
         Wait(20)
         Call(MakeLerp, 80, 0, 10, EASING_LINEAR)
@@ -50,17 +50,17 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor3) = {
         EndLoop
         Call(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EndThread
-    Call(SpeakToPlayer, NPC_Tubba, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim06, 0, MSG_CH3_0101)
+    Call(SpeakToPlayer, NPC_Tubba, ANIM_WorldTubba_Talk, ANIM_WorldTubba_Idle, 0, MSG_CH3_0101)
     Thread
-        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim19)
+        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_LeanAngry)
         Wait(4)
-        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim1A)
+        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_JumpAngry)
         Wait(17)
-        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim1B)
+        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_FallAngry)
         Wait(11)
-        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim1C)
+        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_LandAngry)
         Wait(30)
-        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim1D)
+        Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_GetUpAngry)
     EndThread
     Wait(4)
     Call(SetNpcJumpscale, NPC_Tubba, Float(1.0))
@@ -134,7 +134,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor1) = {
     EndLoop
     Call(SetNpcPos, NPC_SELF, 555, 0, 0)
     Call(SetNpcYaw, NPC_SELF, 270)
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim0A)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_WalkAngry)
     Call(NpcMoveTo, NPC_SELF, 426, 0, 30)
     Thread
         Wait(20)
@@ -336,17 +336,17 @@ NpcData N(NpcData_Sentinel_04) = {
 };
 
 AnimID N(ExtraAnims_Tubba)[] = {
-    ANIM_WorldTubba_Anim06,
-    ANIM_WorldTubba_Anim10,
-    ANIM_WorldTubba_Anim09,
-    ANIM_WorldTubba_Anim07,
-    ANIM_WorldTubba_Anim0A,
-    ANIM_WorldTubba_Anim0D,
-    ANIM_WorldTubba_Anim19,
-    ANIM_WorldTubba_Anim1A,
-    ANIM_WorldTubba_Anim1B,
-    ANIM_WorldTubba_Anim1C,
-    ANIM_WorldTubba_Anim1D,
+    ANIM_WorldTubba_Idle,
+    ANIM_WorldTubba_Talk,
+    ANIM_WorldTubba_Walk,
+    ANIM_WorldTubba_IdleAngry,
+    ANIM_WorldTubba_WalkAngry,
+    ANIM_WorldTubba_RunAngry,
+    ANIM_WorldTubba_LeanAngry,
+    ANIM_WorldTubba_JumpAngry,
+    ANIM_WorldTubba_FallAngry,
+    ANIM_WorldTubba_LandAngry,
+    ANIM_WorldTubba_GetUpAngry,
     ANIM_LIST_END
 };
 

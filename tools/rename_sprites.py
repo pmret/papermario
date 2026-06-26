@@ -37,6 +37,16 @@ SKIP_DIRS = {
     "build",
 }
 WORD_EDGE = r"[A-Za-z0-9_]"
+INPUT_KIND_TO_INTERNAL = {"anim": "anim", "raster": "img"}
+DISPLAY_KIND_BY_INTERNAL = {"anim": "anim", "img": "raster"}
+
+
+def warn(message: str) -> None:
+    print(f"warning: {message}")
+
+
+def display_kind(kind: str) -> str:
+    return DISPLAY_KIND_BY_INTERNAL.get(kind, kind)
 
 
 @dataclass(frozen=True)
@@ -59,17 +69,25 @@ def parse_renames(path: Path) -> list[Rename]:
                 continue
 
             parts = stripped.split()
-            if len(parts) != 4 or parts[0] not in {"anim", "img"}:
+            if len(parts) != 4 or parts[1] not in INPUT_KIND_TO_INTERNAL:
                 raise ValueError(
-                    f"{path}:{line_num}: expected: anim|img SpriteName OldName NewName"
+                    f"{path}:{line_num}: expected: "
+                    "SpriteName anim|raster OldName NewName"
                 )
 
-            rename = Rename(*parts, line_num=line_num)
+            sprite, kind_text, old, new = parts
+            rename = Rename(
+                kind=INPUT_KIND_TO_INTERNAL[kind_text],
+                sprite=sprite,
+                old=old,
+                new=new,
+                line_num=line_num,
+            )
             key = (rename.kind, rename.sprite, rename.old)
             if key in seen:
                 raise ValueError(
-                    f"{path}:{line_num}: duplicate rename for {rename.kind} "
-                    f"{rename.sprite} {rename.old}"
+                    f"{path}:{line_num}: duplicate rename for "
+                    f"{rename.sprite} {display_kind(rename.kind)} {rename.old}"
                 )
             seen.add(key)
             renames.append(rename)
@@ -94,27 +112,48 @@ def get_sprite_cfg(npc_cfg: dict, sprite: str, yaml_path: Path) -> dict:
     return cfg
 
 
-def validate_yaml_renames(npc_cfg: dict, renames: Iterable[Rename]) -> None:
+def validate_yaml_renames(npc_cfg: dict, renames: Iterable[Rename]) -> list[Rename]:
     list_key_by_kind = {"anim": "animations", "img": "frames"}
+    valid_renames: list[Rename] = []
 
     for rename in renames:
-        cfg = get_sprite_cfg(npc_cfg, rename.sprite, NPC_NAMES_YAML)
         list_key = list_key_by_kind[rename.kind]
+        cfg = npc_cfg.get(rename.sprite)
+        if cfg is None:
+            warn(
+                f"{NPC_NAMES_YAML}: sprite '{rename.sprite}' does not exist; "
+                f"skipping YAML update for line {rename.line_num}"
+            )
+            continue
+        if not isinstance(cfg, dict):
+            warn(
+                f"{NPC_NAMES_YAML}: sprite '{rename.sprite}' entry is not a mapping; "
+                f"skipping YAML update for line {rename.line_num}"
+            )
+            continue
+
         values = cfg.get(list_key)
         if not isinstance(values, list):
-            raise ValueError(
-                f"{NPC_NAMES_YAML}: sprite '{rename.sprite}' has no '{list_key}' list"
+            warn(
+                f"{NPC_NAMES_YAML}: sprite '{rename.sprite}' has no '{list_key}' list; "
+                f"skipping YAML update for line {rename.line_num}"
             )
+            continue
         if rename.old not in values:
-            raise ValueError(
+            warn(
                 f"{NPC_NAMES_YAML}: sprite '{rename.sprite}' {list_key} does not "
-                f"contain '{rename.old}'"
+                f"contain '{rename.old}'; skipping YAML update for line {rename.line_num}"
             )
+            continue
         if rename.new in values and rename.new != rename.old:
             raise ValueError(
                 f"{NPC_NAMES_YAML}: sprite '{rename.sprite}' {list_key} already "
                 f"contains '{rename.new}'"
             )
+
+        valid_renames.append(rename)
+
+    return valid_renames
 
 
 def find_top_level_block(lines: list[str], sprite: str) -> tuple[int, int]:
@@ -156,10 +195,15 @@ def update_yaml_text(path: Path, renames: Iterable[Rename]) -> int:
     changed = 0
 
     for rename in renames:
-        sprite_start, sprite_end = find_top_level_block(lines, rename.sprite)
-        list_start, list_end = find_list_block(
-            lines, sprite_start, sprite_end, list_key_by_kind[rename.kind]
-        )
+        try:
+            sprite_start, sprite_end = find_top_level_block(lines, rename.sprite)
+            list_start, list_end = find_list_block(
+                lines, sprite_start, sprite_end, list_key_by_kind[rename.kind]
+            )
+        except ValueError as err:
+            warn(f"{err}; skipping YAML update for line {rename.line_num}")
+            continue
+
         item_re = re.compile(rf"^(\s*-\s*){re.escape(rename.old)}(\s*(?:#.*)?\n?)$")
 
         for i in range(list_start, list_end):
@@ -169,9 +213,10 @@ def update_yaml_text(path: Path, renames: Iterable[Rename]) -> int:
                 changed += 1
                 break
         else:
-            raise ValueError(
-                f"{path}: could not update {rename.kind} {rename.sprite} "
-                f"{rename.old}"
+            warn(
+                f"{path}: could not update {display_kind(rename.kind)} "
+                f"{rename.sprite} {rename.old}; skipping YAML update for "
+                f"line {rename.line_num}"
             )
 
     path.write_text("".join(lines), newline="\n")
@@ -179,16 +224,32 @@ def update_yaml_text(path: Path, renames: Iterable[Rename]) -> int:
 
 
 def animation_symbol_renames(npc_cfg: dict, rename: Rename) -> dict[str, str]:
-    cfg = get_sprite_cfg(npc_cfg, rename.sprite, NPC_NAMES_YAML)
-    palettes = cfg.get("palettes") or ["Default"]
-    if not isinstance(palettes, list):
-        raise ValueError(
-            f"{NPC_NAMES_YAML}: sprite '{rename.sprite}' palettes entry is not a list"
-        )
-
     replacements = {
         f"ANIM_{rename.sprite}_{rename.old}": f"ANIM_{rename.sprite}_{rename.new}"
     }
+
+    cfg = npc_cfg.get(rename.sprite)
+    if cfg is None:
+        warn(
+            f"{NPC_NAMES_YAML}: sprite '{rename.sprite}' does not exist; "
+            f"only replacing base animation symbol for line {rename.line_num}"
+        )
+        return replacements
+    if not isinstance(cfg, dict):
+        warn(
+            f"{NPC_NAMES_YAML}: sprite '{rename.sprite}' entry is not a mapping; "
+            f"only replacing base animation symbol for line {rename.line_num}"
+        )
+        return replacements
+
+    palettes = cfg.get("palettes") or ["Default"]
+    if not isinstance(palettes, list):
+        warn(
+            f"{NPC_NAMES_YAML}: sprite '{rename.sprite}' palettes entry is not a list; "
+            f"only replacing base animation symbol for line {rename.line_num}"
+        )
+        return replacements
+
     for palette in palettes:
         if palette == "Default":
             continue
@@ -308,7 +369,7 @@ def apply_renames(rename_file: Path, dry_run: bool) -> None:
         return
 
     npc_cfg = load_npc_config(NPC_NAMES_YAML)
-    validate_yaml_renames(npc_cfg, renames)
+    yaml_renames = validate_yaml_renames(npc_cfg, renames)
     replacements = build_text_replacements(npc_cfg, renames)
 
     print(f"Loaded {len(renames)} sprite renames")
@@ -317,7 +378,7 @@ def apply_renames(rename_file: Path, dry_run: bool) -> None:
     if dry_run:
         print("Dry run: no files will be changed")
     else:
-        yaml_changes = update_yaml_text(NPC_NAMES_YAML, renames)
+        yaml_changes = update_yaml_text(NPC_NAMES_YAML, yaml_renames)
         print(f"Updated {yaml_changes} entries in {NPC_NAMES_YAML.relative_to(ROOT_DIR)}")
 
     text_files = replace_text_files(replacements, dry_run)

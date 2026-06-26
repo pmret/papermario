@@ -29,12 +29,12 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BattleKammy_Anim05,
+    STATUS_KEY_NORMAL,    ANIM_BattleKammy_FlyIdle,
     STATUS_END,
 };
 
 s32 N(BroomAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BattleKammy_Anim0C,
+    STATUS_KEY_NORMAL,    ANIM_BattleKammy_Broom,
     STATUS_END,
 };
 
@@ -159,20 +159,20 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleKammy_Anim0D)
+            SetConst(LVar1, ANIM_BattleKammy_FlyHurt)
             ExecWait(EVS_Enemy_Hit)
             ExecWait(N(EVS_CommentOnHit))
         EndCaseGroup
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleKammy_Anim05)
+            SetConst(LVar1, ANIM_BattleKammy_FlyIdle)
             ExecWait(EVS_Enemy_NoDamageHit)
             ExecWait(N(EVS_CommentOnHit))
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BattleKammy_Anim0D)
+            SetConst(LVar1, ANIM_BattleKammy_FlyHurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             ExecWait(N(EVS_Death))
@@ -268,7 +268,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Wait(30)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim07)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_FlyRodTalk)
     Wait(5)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_KAMMY_SUMMON_MAGIC)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -312,7 +312,7 @@ EvtScript N(EVS_TakeTurn) = {
         EndIf
     EndLoop
     Wait(20)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim08)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_FlyRodCast)
     Wait(10)
     Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
     Call(SetBattleCamTarget, -80, 37, 5)
@@ -355,7 +355,7 @@ EvtScript N(EVS_TakeTurn) = {
         Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.5))
         Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.2))
     EndChildThread
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim05)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_FlyIdle)
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_BLOCK_DROP, BS_FLAGS1_TRIGGER_EVENTS)
     Set(LVarF, LVar0)
@@ -380,7 +380,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(AddGoalPos, ACTOR_SELF, 10, 5, 0)
             Call(FlyToGoal, ACTOR_SELF, 6, 0, EASING_LINEAR)
         EndThread
-        Call(ActorSpeak, MSG_CH8_009A, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim05)
+        Call(ActorSpeak, MSG_CH8_009A, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_FlyTalk, ANIM_BattleKammy_FlyIdle)
         Wait(10)
         Call(FreezeBattleCam, false)
         Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -405,7 +405,7 @@ EvtScript N(EVS_HandlePhase) = {
                     Call(SetBattleCamOffsetY, 62)
                     Call(MoveBattleCamOver, 20)
                     Wait(20)
-                    Call(ActorSpeak, MSG_CH8_0093, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim05)
+                    Call(ActorSpeak, MSG_CH8_0093, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_FlyTalk, ANIM_BattleKammy_FlyIdle)
                     Wait(10)
                     Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
                     Call(SetBattleCamTarget, -56, -9, -18)
@@ -448,7 +448,7 @@ EvtScript N(EVS_CommentOnHit) = {
             Call(MoveBattleCamOver, 20)
             Call(FreezeBattleCam, true)
             Wait(20)
-            Call(ActorSpeak, MSG_CH8_0097, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim09, ANIM_BattleKammy_Anim05)
+            Call(ActorSpeak, MSG_CH8_0097, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_FlyLaugh, ANIM_BattleKammy_FlyIdle)
             Wait(10)
             Call(FreezeBattleCam, false)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -461,7 +461,7 @@ EvtScript N(EVS_CommentOnHit) = {
             Call(MoveBattleCamOver, 20)
             Call(FreezeBattleCam, true)
             Wait(20)
-            Call(ActorSpeak, MSG_CH8_0098, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim0A, ANIM_BattleKammy_Anim05)
+            Call(ActorSpeak, MSG_CH8_0098, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_FlyGrowl, ANIM_BattleKammy_FlyIdle)
             Wait(10)
             Call(FreezeBattleCam, false)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -484,7 +484,7 @@ EvtScript N(EVS_CommentOnHit) = {
             Call(MoveBattleCamOver, 20)
             Call(FreezeBattleCam, true)
             Wait(20)
-            Call(ActorSpeak, MSG_CH8_0099, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim05)
+            Call(ActorSpeak, MSG_CH8_0099, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_FlyTalk, ANIM_BattleKammy_FlyIdle)
             Wait(10)
             Call(FreezeBattleCam, false)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -505,7 +505,7 @@ EvtScript N(EVS_Death) = {
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 60)
     Wait(10)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Fall)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Sub(LVar2, 1)
     Call(SetPartPos, ACTOR_SELF, PRT_BROOM, LVar0, LVar1, LVar2)
@@ -526,11 +526,11 @@ EvtScript N(EVS_Death) = {
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SEEING_STARS)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Slump)
     Wait(50)
     Call(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, true)
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, true)
-    Call(ActorSpeak, MSG_CH8_009B, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim03, ANIM_BattleKammy_Anim03)
+    Call(ActorSpeak, MSG_CH8_009B, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Slump, ANIM_BattleKammy_Slump)
     Wait(10)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 60)

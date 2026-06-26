@@ -33,15 +33,15 @@ AnimID N(ExtraAnims_Koopatrol)[] = {
 };
 
 AnimID N(ExtraAnims_Clubba)[] = {
-    ANIM_WorldClubba_Anim00,
-    ANIM_WorldClubba_Anim02,
-    ANIM_WorldClubba_Anim03,
-    ANIM_WorldClubba_Anim04,
-    ANIM_WorldClubba_Anim05,
-    ANIM_WorldClubba_Anim08,
-    ANIM_WorldClubba_Anim07,
-    ANIM_WorldClubba_Anim13,
-    ANIM_WorldClubba_Anim14,
+    ANIM_WorldClubba_Still,
+    ANIM_WorldClubba_Idle,
+    ANIM_WorldClubba_Walk,
+    ANIM_WorldClubba_Run,
+    ANIM_WorldClubba_Talk,
+    ANIM_WorldClubba_WakeUp,
+    ANIM_WorldClubba_Sleep,
+    ANIM_WorldClubba_IdleMini,
+    ANIM_WorldClubba_GotItem,
     ANIM_LIST_END
 };
 

@@ -2010,7 +2010,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
     Call(InterpNpcYaw, NPC_Bowser_Prop, 90, 0)
     Call(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarTalk)
     Call(SetNpcAnimation, NPC_Bowser_Prop, ANIM_WorldBowser_ClownCarPropeller)
-    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim17)
+    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_FlyRodStill)
     Call(InterpNpcYaw, NPC_Kammy, 45, 0)
     Call(SetNpcPos, NPC_Kammy, -145, 147, 84)
     Call(SetNpcAnimation, NPC_Misstar, ANIM_WorldMisstar_Still)
@@ -2100,7 +2100,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
         Call(SetNpcAnimation, NPC_Misstar, ANIM_WorldMisstar_Panic)
         Call(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Panic)
         Call(SetNpcAnimation, NPC_Kalmar, ANIM_WorldKalmar_Panic)
-        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim0E)
+        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_FlyRodTalk)
         PlayEffect(EFFECT_ENDING_DECALS, 2, 0, 180, 0, Float(2.59375), ArrayVar(15))
         PlayEffect(EFFECT_LIGHT_RAYS, 1, 0, 200, 0, Float(1.0), ArrayVar(16))
     EndThread
@@ -2207,7 +2207,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
     Call(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_ClownCarCloseMouth)
     Call(SetNpcPos, NPC_Bowser_Body, -30, 150, 162)
     Call(SetNpcPos, NPC_Bowser_Prop, -30, 150, 162)
-    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim11)
+    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_FlyChuckle)
     Thread
         Call(N(SetWorldColorParams), 23, 10, 10, 0, 0, 0, 15)
         Wait(28)
@@ -2466,18 +2466,18 @@ EvtScript N(EVS_Scene_IntroStory) = {
         Wait(45)
         Call(NpcFaceNpc, NPC_Bowser_Body, NPC_Eldstar, 0)
     EndThread
-    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim12)
+    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_FlyLaugh)
     Exec(N(EVS_CaptureSpirits))
     Call(N(CamPanAcrossRoom))
     Wait(15 * DT)
-    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim09)
+    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_FlyStill)
     Thread
         Wait(10)
-        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim12)
+        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_FlyLaugh)
         Wait(20)
-        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim0D)
+        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_FlyTalk)
         Wait(40)
-        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim09)
+        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_FlyStill)
     EndThread
     Call(N(CamMove_OrbitKammy))
     Call(N(AdjustCamVfov), 0, 50)
@@ -2492,7 +2492,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
         Call(func_80244550_A2E790)
     EndThread
     Wait(1)
-    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim0B)
+    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_FlySlow)
     Call(N(KammyFlyToBowser))
     Thread
         Call(N(SetCardCaptureState3))
@@ -2503,9 +2503,9 @@ EvtScript N(EVS_Scene_IntroStory) = {
         Call(N(SetCardCaptureState3))
         Call(N(SetCardCaptureState3))
     EndThread
-    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim0D)
+    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_FlyTalk)
     Wait(15 * DT)
-    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim11)
+    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_FlyChuckle)
     Wait(32 * DT)
     Call(SetNpcJumpscale, NPC_Eldstar, Float(0.0))
     Call(SetNpcJumpscale, NPC_Mamar, Float(0.0))

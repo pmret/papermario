@@ -67,10 +67,10 @@ AnimID N(ExtraAnims_GourmetGuy)[] = {
 };
 
 AnimID N(ExtraAnims_Kammy)[] = {
-    ANIM_WorldKammy_Anim01,
-    ANIM_WorldKammy_Anim02,
-    ANIM_WorldKammy_Anim04,
-    ANIM_WorldKammy_Anim05,
+    ANIM_WorldKammy_Idle,
+    ANIM_WorldKammy_Walk,
+    ANIM_WorldKammy_Talk,
+    ANIM_WorldKammy_Shout,
     ANIM_LIST_END
 };
 

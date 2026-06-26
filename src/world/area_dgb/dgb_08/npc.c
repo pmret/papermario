@@ -45,7 +45,7 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim0A)
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_WalkAngry)
     Call(SetNpcPos, NPC_SELF, -665, 210, 180)
     Call(SetNpcYaw, NPC_SELF, 90)
     Call(NpcMoveTo, NPC_SELF, -530, 180, 30)
@@ -336,21 +336,21 @@ API_CALLABLE(N(PlayAlertSound)) {
 
 EvtScript N(EVS_NpcIdle_LastClubba) = {
     Label(0)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Sleep)
         Wait(30)
         Loop(15)
             Call(N(PlayAlertSound))
             Wait(60)
         EndLoop
-        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim0C)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Hurt)
         Wait(20)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Sleep)
         Wait(30)
         Loop(5)
             Call(N(PlayAlertSound))
             Wait(60)
         EndLoop
-        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim0C)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Hurt)
         Wait(15)
         Goto(0)
     Return
@@ -358,10 +358,10 @@ EvtScript N(EVS_NpcIdle_LastClubba) = {
 };
 
 EvtScript N(EVS_NpcInteract_LastClubba) = {
-    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim08)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_WakeUp)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_SNAP_AWAKE_A, SOUND_SPACE_DEFAULT)
     Wait(10)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim02)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Idle)
     Wait(20)
     Call(GetNpcYaw, NPC_SELF, LVar0)
     Add(LVar0, 180)
@@ -376,18 +376,18 @@ EvtScript N(EVS_NpcInteract_LastClubba) = {
     Call(InterpNpcYaw, NPC_SELF, LVar0, 0)
     Wait(15)
     Call(NpcFacePlayer, NPC_SELF, 0)
-    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Anim05, ANIM_WorldClubba_Anim02, 0, MSG_CH3_00F2)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Talk, ANIM_WorldClubba_Idle, 0, MSG_CH3_00F2)
     Wait(10)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim06)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_FallAsleep)
     Wait(10)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Sleep)
     Return
     End
 };
 
 EvtScript N(EVS_NpcInit_LastClubba) = {
     Call(SetNpcCollisionSize, NPC_SELF, 36, 30)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Sleep)
     Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_LastClubba)))
     Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_LastClubba)))
     Return

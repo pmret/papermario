@@ -306,12 +306,12 @@ AnimID N(ExtraAnims_MageJrTroopa)[] = {
 };
 
 AnimID N(ExtraAnims_Kammy)[] = {
-    ANIM_WorldKammy_Anim14,
-    ANIM_WorldKammy_Anim0C,
-    ANIM_WorldKammy_Anim0E,
-    ANIM_WorldKammy_Anim0F,
-    ANIM_WorldKammy_Anim12,
-    ANIM_WorldKammy_Anim07,
+    ANIM_WorldKammy_FlySlowSly,
+    ANIM_WorldKammy_FlyFast,
+    ANIM_WorldKammy_FlyRodTalk,
+    ANIM_WorldKammy_FlyRodCast,
+    ANIM_WorldKammy_FlyLaugh,
+    ANIM_WorldKammy_BurnSlump,
     ANIM_LIST_END
 };
 
@@ -744,7 +744,7 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 270.0f
     },
     [NPC_Kammy] {
-        .initialAnim = ANIM_WorldKammy_Anim14,
+        .initialAnim = ANIM_WorldKammy_FlySlowSly,
         .animList = N(ExtraAnims_Kammy),
         .pos = { 2160.0f, 60.0f, 0.0f },
         .yaw = 270.0f

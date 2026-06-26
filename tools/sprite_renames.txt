@@ -6,78 +6,486 @@
 # anim BabyBlooper Anim00 Still
 # img BabyBlooper Raster00 Neutral
 
-anim BabyBlooper Anim00	Still
-anim BabyBlooper Anim01	Idle
-anim BabyBlooper Anim02	Hurt
-anim BabyBlooper Anim03	Dead
-anim BabyBlooper Anim04	BurnHurt
-anim BabyBlooper Anim05	BurnStill
-anim BabyBlooper Anim06	Sleep
-anim BabyBlooper Anim07	Dizzy
-anim BabyBlooper Anim08	Leech
-img	BabyBlooper	Raster00	Neutral
-img	BabyBlooper	Raster01	Idle1
-img	BabyBlooper	Raster02	Idle2
-img	BabyBlooper	Raster03	Hurt1
-img	BabyBlooper	Raster04	Hurt2
-img	BabyBlooper	Raster05	Sleep1
-img	BabyBlooper	Raster06	Sleep2
-img	BabyBlooper	Raster07	Dizzy1
-img	BabyBlooper	Raster08	Dizzy2
-img	BabyBlooper	Raster09	Dizzy3
-img	BabyBlooper	Raster0A	Dizzy4
-img	BabyBlooper	Raster0B	Dead
-img	BabyBlooper	Raster0C	Leech1
-img	BabyBlooper	Raster0D	Leech2
-img	BabyBlooper	Raster0E	Leech3
-img	BabyBlooper	Raster0F	Leech4
-img	BabyBlooper	Raster10	BurnStill
-img	BabyBlooper	Raster11	Burn1
-img	BabyBlooper	Raster12	Burn2
+# BabyBlooper anim Anim00    Still
+# BabyBlooper anim Anim01    Idle
+# BabyBlooper anim Anim02    Hurt
+# BabyBlooper anim Anim03    Dead
+# BabyBlooper anim Anim04    BurnHurt
+# BabyBlooper anim Anim05    BurnStill
+# BabyBlooper anim Anim06    Sleep
+# BabyBlooper anim Anim07    Dizzy
+# BabyBlooper anim Anim08    Leech
+# BabyBlooper raster  Raster00  Neutral
+# BabyBlooper raster  Raster01  Idle1
+# BabyBlooper raster  Raster02  Idle2
+# BabyBlooper raster  Raster03  Hurt1
+# BabyBlooper raster  Raster04  Hurt2
+# BabyBlooper raster  Raster05  Sleep1
+# BabyBlooper raster  Raster06  Sleep2
+# BabyBlooper raster  Raster07  Dizzy1
+# BabyBlooper raster  Raster08  Dizzy2
+# BabyBlooper raster  Raster09  Dizzy3
+# BabyBlooper raster  Raster0A  Dizzy4
+# BabyBlooper raster  Raster0B  Dead
+# BabyBlooper raster  Raster0C  Leech1
+# BabyBlooper raster  Raster0D  Leech2
+# BabyBlooper raster  Raster0E  Leech3
+# BabyBlooper raster  Raster0F  Leech4
+# BabyBlooper raster  Raster10  BurnStill
+# BabyBlooper raster  Raster11  Burn1
+# BabyBlooper raster  Raster12  Burn2
 
-anim	BattleClubba	Anim00	Still
-anim	BattleClubba	Anim01	Idle
-anim	BattleClubba	Anim02	Run
-anim	BattleClubba	Anim03	Sleep
-anim	BattleClubba	Anim04	Hurt
-anim	BattleClubba	Anim05	Dizzy
-anim	BattleClubba	Anim06	BurnHurt
-anim	BattleClubba	Anim07	BurnStill
-anim	BattleClubba	Anim08	ClubAttack
-anim	BattleClubba	Anim09	RaiseClub
-anim	BattleClubba	Anim0A	SwingClub
-img	BattleClubba	Raster00	Neutral
-img	BattleClubba	Raster01	Idle1
-img	BattleClubba	Raster02	Idle2
-img	BattleClubba	Raster03	Step1
-img	BattleClubba	Raster04	Step2
-img	BattleClubba	Raster05	Step3
-img	BattleClubba	Raster06	Sleep1
-img	BattleClubba	Raster07	Sleep2
-img	BattleClubba	Raster08	Sleep3
-img	BattleClubba	Raster09	BurnStill
-img	BattleClubba	Raster0A	Swing1
-img	BattleClubba	Raster0B	Swing2
-img	BattleClubba	Raster0C	Hurt1
-img	BattleClubba	Raster0D	Hurt2
-img	BattleClubba	Raster0E	Bubble1
-img	BattleClubba	Raster0F	Bubble2
-img	BattleClubba	Raster10	BurnHurt1
-img	BattleClubba	Raster11	BurnHurt2
-img	BattleClubba	Raster12	Dizzy1
-img	BattleClubba	Raster13	Dizzy2
-img	BattleClubba	Raster14	Dizzy3
-img	BattleClubba	Raster15	Dizzy4
-img	BattleClubba	Raster16	ClubIdle1
-img	BattleClubba	Raster17	ClubIdle2
-img	BattleClubba	Raster18	ClubShake1
-img	BattleClubba	Raster19	ClubShake2
-img	BattleClubba	Raster1A	BurnedClub1
-img	BattleClubba	Raster1B	BurnedClub2
-img	BattleClubba	Raster1C	ClubHigh1
-img	BattleClubba	Raster1D	ClubHigh2
-img	BattleClubba	Raster1E	ClubLow1
-img	BattleClubba	Raster1F	ClubLow2
-img	BattleClubba	Raster20	ClubHigh3
-img	BattleClubba	Raster21	ClubTrail
+# BattleClubba anim Anim00    Still
+# BattleClubba anim Anim01    Idle
+# BattleClubba anim Anim02    Run
+# BattleClubba anim Anim03    Sleep
+# BattleClubba anim Anim04    Hurt
+# BattleClubba anim Anim05    Dizzy
+# BattleClubba anim Anim06    BurnHurt
+# BattleClubba anim Anim07    BurnStill
+# BattleClubba anim Anim08    ClubAttack
+# BattleClubba anim Anim09    RaiseClub
+# BattleClubba anim Anim0A    SwingClub
+# BattleClubba raster  Raster00  Neutral
+# BattleClubba raster  Raster01  Idle1
+# BattleClubba raster  Raster02  Idle2
+# BattleClubba raster  Raster03  Step1
+# BattleClubba raster  Raster04  Step2
+# BattleClubba raster  Raster05  Step3
+# BattleClubba raster  Raster06  Sleep1
+# BattleClubba raster  Raster07  Sleep2
+# BattleClubba raster  Raster08  Sleep3
+# BattleClubba raster  Raster09  BurnStill
+# BattleClubba raster  Raster0A  Swing1
+# BattleClubba raster  Raster0B  Swing2
+# BattleClubba raster  Raster0C  Hurt1
+# BattleClubba raster  Raster0D  Hurt2
+# BattleClubba raster  Raster0E  Bubble1
+# BattleClubba raster  Raster0F  Bubble2
+# BattleClubba raster  Raster10  BurnHurt1
+# BattleClubba raster  Raster11  BurnHurt2
+# BattleClubba raster  Raster12  Dizzy1
+# BattleClubba raster  Raster13  Dizzy2
+# BattleClubba raster  Raster14  Dizzy3
+# BattleClubba raster  Raster15  Dizzy4
+# BattleClubba raster  Raster16  ClubIdle1
+# BattleClubba raster  Raster17  ClubIdle2
+# BattleClubba raster  Raster18  ClubShake1
+# BattleClubba raster  Raster19  ClubShake2
+# BattleClubba raster  Raster1A  BurnedClub1
+# BattleClubba raster  Raster1B  BurnedClub2
+# BattleClubba raster  Raster1C  ClubHigh1
+# BattleClubba raster  Raster1D  ClubHigh2
+# BattleClubba raster  Raster1E  ClubLow1
+# BattleClubba raster  Raster1F  ClubLow2
+# BattleClubba raster  Raster20  ClubHigh3
+# BattleClubba raster  Raster21  ClubTrail
 
+# WorldClubba	anim	Anim00	Still
+# WorldClubba	anim	Anim01	StillSleep
+# WorldClubba	anim	Anim02	Idle
+# WorldClubba	anim	Anim03	Walk
+# WorldClubba	anim	Anim04	Run
+# WorldClubba	anim	Anim05	Talk
+# WorldClubba	anim	Anim06	FallAsleep
+# WorldClubba	anim	Anim07	Sleep
+# WorldClubba	anim	Anim08	WakeUp
+# WorldClubba	anim	Anim09	GetUp
+# WorldClubba	anim	Anim0A	IdleFrontal
+# WorldClubba	anim	Anim0B	StillFrontal
+# WorldClubba	anim	Anim0C	Hurt
+# WorldClubba	anim	Anim0D	Dizzy
+# WorldClubba	anim	Anim0E	BurnHurt
+# WorldClubba	anim	Anim0F	BurnStill
+# WorldClubba	anim	Anim10	ClubAttack
+# WorldClubba	anim	Anim11	RaiseClub
+# WorldClubba	anim	Anim12	SwingClub
+# WorldClubba	anim	Anim13	IdleMini
+# WorldClubba	anim	Anim14	GotItem
+# WorldClubba	raster	Raster00	Neutral
+# WorldClubba	raster	Raster01	Idle1
+# WorldClubba	raster	Raster02	Idle2
+# WorldClubba	raster	Raster03	Step1
+# WorldClubba	raster	Raster04	Step2
+# WorldClubba	raster	Raster05	Step3
+# WorldClubba	raster	Raster06	Sleep1
+# WorldClubba	raster	Raster07	Sleep2
+# WorldClubba	raster	Raster08	Sleep3
+# WorldClubba	raster	Raster09	Frontal1
+# WorldClubba	raster	Raster0A	Frontal2
+# WorldClubba	raster	Raster0B	WakeUp1
+# WorldClubba	raster	Raster0C	WakeUp2
+# WorldClubba	raster	Raster0D	BurnStill
+# WorldClubba	raster	Raster0E	GotItem
+# WorldClubba	raster	Raster0F	Swing1
+# WorldClubba	raster	Raster10	Swing2
+# WorldClubba	raster	Raster11	Hurt1
+# WorldClubba	raster	Raster12	Hurt2
+# WorldClubba	raster	Raster13	Bubble1
+# WorldClubba	raster	Raster14	Bubble2
+# WorldClubba	raster	Raster15	BubbleBurst1
+# WorldClubba	raster	Raster16	BubbleBurst2
+# WorldClubba	raster	Raster17	BurnHurt1
+# WorldClubba	raster	Raster18	BurnHurt2
+# WorldClubba	raster	Raster19	Dizzy1
+# WorldClubba	raster	Raster1A	Dizzy2
+# WorldClubba	raster	Raster1B	Dizzy3
+# WorldClubba	raster	Raster1C	Dizzy4
+# WorldClubba	raster	Raster1D	Talk
+# WorldClubba	raster	Raster1E	Slump
+# WorldClubba	raster	Raster1F	IdleMini1
+# WorldClubba	raster	Raster20	IdleMini2
+# WorldClubba	raster	Raster21	IdleMini3
+# WorldClubba	raster	Raster22	ClubIdle1
+# WorldClubba	raster	Raster23	ClubIdle2
+# WorldClubba	raster	Raster24	ClubVertical
+# WorldClubba	raster	Raster25	ClubShake1
+# WorldClubba	raster	Raster26	ClubShake2
+# WorldClubba	raster	Raster27	BurnedClub1
+# WorldClubba	raster	Raster28	BurnedClub2
+# WorldClubba	raster	Raster29	ClubHigh1
+# WorldClubba	raster	Raster2A	ClubHigh2
+# WorldClubba	raster	Raster2B	ClubLow1
+# WorldClubba	raster	Raster2C	ClubLow2
+# WorldClubba	raster	Raster2D	ClubHigh3
+# WorldClubba	raster	Raster2E	ClubTrail
+# WorldClubba	raster	Raster2F	ClubUnhanded
+
+# BattleKammy   anim    Anim00    Idle
+# BattleKammy   anim    Anim01    Talk
+# BattleKammy   anim    Anim02    Fall
+# BattleKammy   anim    Anim03    Slump
+# BattleKammy   anim    Anim04    FlyStill
+# BattleKammy   anim    Anim05    FlyIdle
+# BattleKammy   anim    Anim06    FlyTalk
+# BattleKammy   anim    Anim07    FlyRodTalk
+# BattleKammy   anim    Anim08    FlyRodCast
+# BattleKammy   anim    Anim09    FlyLaugh
+# BattleKammy   anim    Anim0A    FlyGrowl
+# BattleKammy   anim    Anim0B    FlyRodStill
+# BattleKammy   anim    Anim0C    Broom
+# BattleKammy   anim    Anim0D    FlyHurt
+# BattleKammy   raster  Raster00  Idle1
+# BattleKammy   raster  Raster01  Idle2
+# BattleKammy   raster  Raster02  Idle3
+# BattleKammy   raster  Raster03  Chew1
+# BattleKammy   raster  Raster04  Chew2
+# BattleKammy   raster  Raster05  Talk1
+# BattleKammy   raster  Raster06  Talk2
+# BattleKammy   raster  Raster07  FlyIdle1
+# BattleKammy   raster  Raster08  FlyIdle2
+# BattleKammy   raster  Raster09  FlyIdle3
+# BattleKammy   raster  Raster0A  FlyTalk1
+# BattleKammy   raster  Raster0B  FlyTalk2
+# BattleKammy   raster  Raster0C  FlyChew1
+# BattleKammy   raster  Raster0D  FlyChew2
+# BattleKammy   raster  Raster0E  FlyRodTalk1
+# BattleKammy   raster  Raster0F  FlyRodTalk2
+# BattleKammy   raster  Raster10  FlyLaugh1
+# BattleKammy   raster  Raster11  FlyLaugh2
+# BattleKammy   raster  Raster12  FlyGrowl1
+# BattleKammy   raster  Raster13  FlyGrowl2
+# BattleKammy   raster  Raster14  FlyRodCast
+# BattleKammy   raster  Raster15  Slump
+# BattleKammy   raster  Raster16  Fall
+# BattleKammy   raster  Raster17  BroomStill
+# BattleKammy   raster  Raster18  FlyHurt1
+# BattleKammy   raster  Raster19  FlyHurt2
+# BattleKammy   raster  Raster1A  BroomIdle1
+# BattleKammy   raster  Raster1B  BroomIdle2
+# BattleKammy   raster  Raster1C  BroomIdle3
+# BattleKammy   raster  Raster1D  BroomTilt
+# BattleKammy   raster  Raster1E  CastArm
+# BattleKammy   raster  Raster1F  Shoe
+
+# WorldKammy	anim	Anim00	Still
+# WorldKammy	anim	Anim01	Idle
+# WorldKammy	anim	Anim02	Walk
+# WorldKammy	anim	Anim03	Run
+# WorldKammy	anim	Anim04	Talk
+# WorldKammy	anim	Anim05	Shout
+# WorldKammy	anim	Anim06	Fall
+# WorldKammy	anim	Anim07	BurnSlump
+# WorldKammy	anim	Anim08	Slump
+# WorldKammy	anim	Anim09	FlyStill
+# WorldKammy	anim	Anim0A	FlyIdle
+# WorldKammy	anim	Anim0B	FlySlow
+# WorldKammy	anim	Anim0C	FlyFast
+# WorldKammy	anim	Anim0D	FlyTalk
+# WorldKammy	anim	Anim0E	FlyRodTalk
+# WorldKammy	anim	Anim0F	FlyRodCast
+# WorldKammy	anim	Anim10	FlyBrake
+# WorldKammy	anim	Anim11	FlyChuckle
+# WorldKammy	anim	Anim12	FlyLaugh
+# WorldKammy	anim	Anim13	FlyIdleSly
+# WorldKammy	anim	Anim14	FlySlowSly
+# WorldKammy	anim	Anim15	FlyFastSly
+# WorldKammy	anim	Anim16	FlyTalkSly
+# WorldKammy	anim	Anim17	FlyRodStill
+# WorldKammy	anim	Anim18	Broom
+# WorldKammy	anim	Anim19	FlyHurt
+# WorldKammy	anim	Anim1A	FlyBack
+# WorldKammy	raster	Raster00	Idle1
+# WorldKammy	raster	Raster01	Step1
+# WorldKammy	raster	Raster02	Step2
+# WorldKammy	raster	Raster03	Step3
+# WorldKammy	raster	Raster04	Shout1
+# WorldKammy	raster	Raster05	Shout2
+# WorldKammy	raster	Raster06	Idle2
+# WorldKammy	raster	Raster07	Idle3
+# WorldKammy	raster	Raster08	Chew
+# WorldKammy	raster	Raster09	Neutral
+# WorldKammy	raster	Raster0A	Talk1
+# WorldKammy	raster	Raster0B	Talk2
+# WorldKammy	raster	Raster0C	FlyIdle1
+# WorldKammy	raster	Raster0D	FlyIdle2
+# WorldKammy	raster	Raster0E	FlyIdle3
+# WorldKammy	raster	Raster0F	FlyTalk1
+# WorldKammy	raster	Raster10	FlyChew1
+# WorldKammy	raster	Raster11	FlyNeutral
+# WorldKammy	raster	Raster12	FlyChew2
+# WorldKammy	raster	Raster13	FlyRodTalk1
+# WorldKammy	raster	Raster14	FlyRodTalk2
+# WorldKammy	raster	Raster15	FlyChuckle1
+# WorldKammy	raster	Raster16	FlyChuckle2
+# WorldKammy	raster	Raster17	FlyLaugh1
+# WorldKammy	raster	Raster18	FlyLaugh2
+# WorldKammy	raster	Raster19	FlyTalkSly
+# WorldKammy	raster	Raster1A	FlySly1
+# WorldKammy	raster	Raster1B	FlySly2
+# WorldKammy	raster	Raster1C	FlySly3
+# WorldKammy	raster	Raster1D	FlyRodCast
+# WorldKammy	raster	Raster1E	FlyBrake
+# WorldKammy	raster	Raster1F	Slump
+# WorldKammy	raster	Raster20	BurnSlump
+# WorldKammy	raster	Raster21	Fall
+# WorldKammy	raster	Raster22	BroomStill
+# WorldKammy	raster	Raster23	FlyHurt1
+# WorldKammy	raster	Raster24	FlyHurt2
+# WorldKammy	raster	Raster25	BroomIdle1
+# WorldKammy	raster	Raster26	BroomIdle2
+# WorldKammy	raster	Raster27	BroomIdle3
+# WorldKammy	raster	Raster28	BroomTilt
+# WorldKammy	raster	Raster29	BroomBrake
+# WorldKammy	raster	Raster2A	CastArm
+# WorldKammy	raster	Raster2B	Shoe
+# WorldKammy	raster	Raster2C	FlyBack
+
+# BattleTubba	anim	Anim00	Still
+# BattleTubba	anim	Anim01	Idle
+# BattleTubba	anim	Anim02	IdleAngry
+# BattleTubba	anim	Anim03	Walk
+# BattleTubba	anim	Anim04	WalkAngry
+# BattleTubba	anim	Anim05	WalkCry
+# BattleTubba	anim	Anim06	Run
+# BattleTubba	anim	Anim07	RunAngry
+# BattleTubba	anim	Anim08	Talk
+# BattleTubba	anim	Anim09	TalkAngry
+# BattleTubba	anim	Anim0A	Lean
+# BattleTubba	anim	Anim0B	Jump
+# BattleTubba	anim	Anim0C	Fall
+# BattleTubba	anim	Anim0D	Land
+# BattleTubba	anim	Anim0E	GetUp
+# BattleTubba	anim	Anim0F	LeanAngry
+# BattleTubba	anim	Anim10	JumpAngry
+# BattleTubba	anim	Anim11	FallAngry
+# BattleTubba	anim	Anim12	LandAngry
+# BattleTubba	anim	Anim13	GetUpAngry
+# BattleTubba	anim	Anim14	Hurt
+# BattleTubba	anim	Anim15	TenseArms
+# BattleTubba	anim	Anim16	RaiseArms
+# BattleTubba	anim	Anim17	SlamArms
+# BattleTubba	anim	Anim18	Sleep
+# BattleTubba	raster	Raster00	Body
+# BattleTubba	raster	Raster01	Eyes
+# BattleTubba	raster	Raster02	MouthClosed
+# BattleTubba	raster	Raster03	LArm
+# BattleTubba	raster	Raster04	RArm
+# BattleTubba	raster	Raster05	LFoot
+# BattleTubba	raster	Raster06	RFoot
+# BattleTubba	raster	Raster07	LFootStep1
+# BattleTubba	raster	Raster08	RFootStep1
+# BattleTubba	raster	Raster09	LFootStep2
+# BattleTubba	raster	Raster0A	RFootStep2
+# BattleTubba	raster	Raster0B	LFootStep3
+# BattleTubba	raster	Raster0C	RFootStep3
+# BattleTubba	raster	Raster0D	HairSlam
+# BattleTubba	raster	Raster0E	EyesSlam
+# BattleTubba	raster	Raster0F	MouthSlam
+# BattleTubba	raster	Raster10	HairWave1
+# BattleTubba	raster	Raster11	HairWave2
+# BattleTubba	raster	Raster12	HairWave3
+# BattleTubba	raster	Raster13	HairWave4
+# BattleTubba	raster	Raster14	HairWave5
+# BattleTubba	raster	Raster15	EyesBlink1
+# BattleTubba	raster	Raster16	EyesBlink2
+# BattleTubba	raster	Raster17	BodyLean
+# BattleTubba	raster	Raster18	LArmJump
+# BattleTubba	raster	Raster19	RArmJump1
+# BattleTubba	raster	Raster1A	RArmJump2
+# BattleTubba	raster	Raster1B	LFootJump
+# BattleTubba	raster	Raster1C	RFootJump
+# BattleTubba	raster	Raster1D	HairSettle
+# BattleTubba	raster	Raster1E	HairFall1
+# BattleTubba	raster	Raster1F	HairFall2
+# BattleTubba	raster	Raster20	HairLand1
+# BattleTubba	raster	Raster21	HairLand2
+# BattleTubba	raster	Raster22	MouthJump
+# BattleTubba	raster	Raster23	EyesJump
+# BattleTubba	raster	Raster24	BodyLand
+# BattleTubba	raster	Raster25	BodyHurt
+# BattleTubba	raster	Raster26	MouthWide
+# BattleTubba	raster	Raster27	Tounge
+# BattleTubba	raster	Raster28	LArmRaised1
+# BattleTubba	raster	Raster29	LArmRaised2
+# BattleTubba	raster	Raster2A	BodyRearUp
+# BattleTubba	raster	Raster2B	MouthChew1
+# BattleTubba	raster	Raster2C	MouthTense
+# BattleTubba	raster	Raster2D	MouthHalfOpen
+# BattleTubba	raster	Raster2E	MouthChew2
+# BattleTubba	raster	Raster2F	EyesAngry
+# BattleTubba	raster	Raster30	BodyTalk
+# BattleTubba	raster	Raster31	EyesAngryTalk
+# BattleTubba	raster	Raster32	EyesTalk
+# BattleTubba	raster	Raster33	LTear
+# BattleTubba	raster	Raster34	RTear
+# BattleTubba	raster	Raster35	LCry1
+# BattleTubba	raster	Raster36	LCry2
+# BattleTubba	raster	Raster37	RCry1
+# BattleTubba	raster	Raster38	RCry2
+# BattleTubba	raster	Raster39	EyesCry
+# BattleTubba	raster	Raster3A	LFootStretch
+# BattleTubba	raster	Raster3B	RFootStretch
+# BattleTubba	raster	Raster3C	LFootRaised
+# BattleTubba	raster	Raster3D	RArmChest
+# BattleTubba	raster	Raster3E	EyesHurt
+# BattleTubba	raster	Raster3F	BodySlam
+# BattleTubba	raster	Raster40	RArmSlam
+# BattleTubba	raster	Raster41	LArmSlam
+# BattleTubba	raster	Raster42	RFootSlam
+# BattleTubba	raster	Raster43	MouthOpen
+# BattleTubba	raster	Raster44	HairHeadBack
+# BattleTubba	raster	Raster45	EyesAngryJump
+# BattleTubba	raster	Raster46	HairRearUp
+# BattleTubba	raster	Raster47	EyesRearUp
+# BattleTubba	raster	Raster48	MouthRoar
+# BattleTubba	raster	Raster49	HairFullBack
+
+# WorldTubba	anim	Anim00	Still
+# WorldTubba	anim	Anim01	StillDaze
+# WorldTubba	anim	Anim02	StillSleep
+# WorldTubba	anim	Anim03	CenteredStand
+# WorldTubba	anim	Anim04	CenteredSleep
+# WorldTubba	anim	Anim05	StillWake
+# WorldTubba	anim	Anim06	Idle
+# WorldTubba	anim	Anim07	IdleAngry
+# WorldTubba	anim	Anim08	IdleSad
+# WorldTubba	anim	Anim09	Walk
+# WorldTubba	anim	Anim0A	WalkAngry
+# WorldTubba	anim	Anim0B	WalkCry
+# WorldTubba	anim	Anim0C	Run
+# WorldTubba	anim	Anim0D	RunAngry
+# WorldTubba	anim	Anim0E	RunCry
+# WorldTubba	anim	Anim0F	SprintCry
+# WorldTubba	anim	Anim10	Talk
+# WorldTubba	anim	Anim11	TalkAngry
+# WorldTubba	anim	Anim12	TalkSad
+# WorldTubba	anim	Anim13	HalfAwake
+# WorldTubba	anim	Anim14	Lean
+# WorldTubba	anim	Anim15	Jump
+# WorldTubba	anim	Anim16	Fall
+# WorldTubba	anim	Anim17	Land
+# WorldTubba	anim	Anim18	GetUp
+# WorldTubba	anim	Anim19	LeanAngry
+# WorldTubba	anim	Anim1A	JumpAngry
+# WorldTubba	anim	Anim1B	FallAngry
+# WorldTubba	anim	Anim1C	LandAngry
+# WorldTubba	anim	Anim1D	GetUpAngry
+# WorldTubba	anim	Anim1E	Reach
+# WorldTubba	anim	Anim1F	OpenMouth
+# WorldTubba	anim	Anim20	Devour
+# WorldTubba	anim	Anim21	Burp
+# WorldTubba	anim	Anim22	OpenWide
+# WorldTubba	anim	Anim23	Chew
+# WorldTubba	anim	Anim24	Sleep
+# WorldTubba	anim	Anim25	WakeUp
+# WorldTubba	raster	Raster00	Body
+# WorldTubba	raster	Raster01	Eyes
+# WorldTubba	raster	Raster02	MouthClosed
+# WorldTubba	raster	Raster03	LArm
+# WorldTubba	raster	Raster04	RArm
+# WorldTubba	raster	Raster05	LFoot
+# WorldTubba	raster	Raster06	RFoot
+# WorldTubba	raster	Raster07	LFootStep1
+# WorldTubba	raster	Raster08	RFootStep1
+# WorldTubba	raster	Raster09	LFootStep2
+# WorldTubba	raster	Raster0A	RFootStep2
+# WorldTubba	raster	Raster0B	LFootStep3
+# WorldTubba	raster	Raster0C	RFootStep3
+# WorldTubba	raster	Raster0D	HairWave1
+# WorldTubba	raster	Raster0E	HairWave2
+# WorldTubba	raster	Raster0F	HairWave3
+# WorldTubba	raster	Raster10	HairWave4
+# WorldTubba	raster	Raster11	HairWave5
+# WorldTubba	raster	Raster12	EyesBlink1
+# WorldTubba	raster	Raster13	EyesBlink2
+# WorldTubba	raster	Raster14	BodyLean
+# WorldTubba	raster	Raster15	LArmJump
+# WorldTubba	raster	Raster16	RArmJump1
+# WorldTubba	raster	Raster17	RArmJump2
+# WorldTubba	raster	Raster18	LFootJump
+# WorldTubba	raster	Raster19	RFootJump
+# WorldTubba	raster	Raster1A	HairSettle
+# WorldTubba	raster	Raster1B	HairFall1
+# WorldTubba	raster	Raster1C	HairFall2
+# WorldTubba	raster	Raster1D	HairLand1
+# WorldTubba	raster	Raster1E	HairLand2
+# WorldTubba	raster	Raster1F	MouthJump
+# WorldTubba	raster	Raster20	EyesJump
+# WorldTubba	raster	Raster21	BodyLand
+# WorldTubba	raster	Raster22	BodyHurt
+# WorldTubba	raster	Raster23	MouthWide
+# WorldTubba	raster	Raster24	ToungeOut1
+# WorldTubba	raster	Raster25	ToungeOut2
+# WorldTubba	raster	Raster26	ToungeOut3
+# WorldTubba	raster	Raster27	Tounge
+# WorldTubba	raster	Raster28	LArmRaised1
+# WorldTubba	raster	Raster29	LArmRaised2
+# WorldTubba	raster	Raster2A	ToungeIn1
+# WorldTubba	raster	Raster2B	ToungeIn2
+# WorldTubba	raster	Raster2C	ToungeIn3
+# WorldTubba	raster	Raster2D	BodyRearUp
+# WorldTubba	raster	Raster2E	MouthChew1
+# WorldTubba	raster	Raster2F	MouthTense
+# WorldTubba	raster	Raster30	MouthHalfOpen
+# WorldTubba	raster	Raster31	MouthChew2
+# WorldTubba	raster	Raster32	EyesAngry
+# WorldTubba	raster	Raster33	BodyTalk
+# WorldTubba	raster	Raster34	EyesAngryTalk
+# WorldTubba	raster	Raster35	EyesTalk
+# WorldTubba	raster	Raster36	LTear
+# WorldTubba	raster	Raster37	RTear
+# WorldTubba	raster	Raster38	LCry1
+# WorldTubba	raster	Raster39	LCry2
+# WorldTubba	raster	Raster3A	RCry1
+# WorldTubba	raster	Raster3B	RCry2
+# WorldTubba	raster	Raster3C	EyesCry
+# WorldTubba	raster	Raster3D	EyesTalkSad
+# WorldTubba	raster	Raster3E	LFootStretch
+# WorldTubba	raster	Raster3F	RFootStretch
+# WorldTubba	raster	Raster40	BodySleep
+# WorldTubba	raster	Raster41	MouthSleep
+# WorldTubba	raster	Raster42	RFootRaised
+# WorldTubba	raster	Raster43	LFootRaised
+# WorldTubba	raster	Raster44	RArmChest
+# WorldTubba	raster	Raster45	LArmChest
+# WorldTubba	raster	Raster46	EyesSleepy
+# WorldTubba	raster	Raster47	MouthOpen
+# WorldTubba	raster	Raster48	HairHeadBack
+# WorldTubba	raster	Raster49	EyesAngryJump
+# WorldTubba	raster	Raster4A	HairRearUp
+# WorldTubba	raster	Raster4B	EyesRearUp
+# WorldTubba	raster	Raster4C	MouthRoar
+# WorldTubba	raster	Raster4D	EyesUpward
+# WorldTubba	raster	Raster4E	HairFullBack
+# WorldTubba	raster	Raster4F	HairSleep

@@ -81,7 +81,7 @@ EvtScript N(EVS_KammyReturnsToCastle) = {
         EndLoop
     EndThread
     ExecGetTID(N(EVS_PlayKammyFlightFX), LVar9)
-    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim1A)
+    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_FlyBack)
     Call(LoadPath, 30, Ref(N(KammyFlightPath1)), ARRAY_COUNT(N(KammyFlightPath1)), EASING_LINEAR)
     Loop(0)
         Call(GetNextPathPos)
