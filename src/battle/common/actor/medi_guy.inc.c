@@ -23,15 +23,15 @@ enum N(ActorParams) {
 #include "common/MediGuySpriteRotationFunc.inc.c"
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_MediGuy_Anim01,
-    STATUS_KEY_STONE,     ANIM_MediGuy_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_MediGuy_Anim04,
-    STATUS_KEY_POISON,    ANIM_MediGuy_Anim01,
-    STATUS_KEY_STOP,      ANIM_MediGuy_Anim00,
-    STATUS_KEY_STATIC,    ANIM_MediGuy_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_MediGuy_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_MediGuy_Anim0A,
-    STATUS_KEY_UNUSED,    ANIM_MediGuy_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_MediGuy_Idle,
+    STATUS_KEY_STONE,     ANIM_MediGuy_Still,
+    STATUS_KEY_SLEEP,     ANIM_MediGuy_Sleep,
+    STATUS_KEY_POISON,    ANIM_MediGuy_Idle,
+    STATUS_KEY_STOP,      ANIM_MediGuy_Still,
+    STATUS_KEY_STATIC,    ANIM_MediGuy_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_MediGuy_Still,
+    STATUS_KEY_DIZZY,     ANIM_MediGuy_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_MediGuy_Dizzy,
     STATUS_END,
 };
 
@@ -138,10 +138,10 @@ EvtScript N(EVS_ReturnHome) = {
     Call(ResetAllActorSounds, ACTOR_SELF)
     Call(SetPartRotation, ACTOR_SELF, PRT_MAIN, 0, 0, 0)
     Call(SetActorYaw, ACTOR_SELF, 180)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_FlyFast)
     Call(SetGoalToHome, ACTOR_SELF)
     Call(FlyToGoal, ACTOR_SELF, 0, 1, EASING_LINEAR)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Idle)
     Call(SetActorYaw, ACTOR_SELF, 0)
     Return
     End
@@ -155,67 +155,67 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim06)
+            SetConst(LVar1, ANIM_MediGuy_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim08)
-            SetConst(LVar2, ANIM_MediGuy_Anim09)
+            SetConst(LVar1, ANIM_MediGuy_BurnHurt)
+            SetConst(LVar2, ANIM_MediGuy_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim08)
-            SetConst(LVar2, ANIM_MediGuy_Anim09)
+            SetConst(LVar1, ANIM_MediGuy_BurnHurt)
+            SetConst(LVar2, ANIM_MediGuy_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim09)
+            SetConst(LVar1, ANIM_MediGuy_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim06)
+            SetConst(LVar1, ANIM_MediGuy_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim06)
+            SetConst(LVar1, ANIM_MediGuy_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim07)
+            SetConst(LVar1, ANIM_MediGuy_HurtStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim06)
+            SetConst(LVar1, ANIM_MediGuy_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim06)
+            SetConst(LVar1, ANIM_MediGuy_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim06)
+            SetConst(LVar1, ANIM_MediGuy_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             Call(SetPartRotation, ACTOR_SELF, PRT_MAIN, 0, 0, 0)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim07)
+            SetConst(LVar1, ANIM_MediGuy_HurtStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim01)
+            SetConst(LVar1, ANIM_MediGuy_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim06)
+            SetConst(LVar1, ANIM_MediGuy_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim07)
+            SetConst(LVar1, ANIM_MediGuy_HurtStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_BEGIN_FIRST_STRIKE)
@@ -227,22 +227,22 @@ EvtScript N(EVS_HandleEvent) = {
             Call(HPBarToHome, ACTOR_SELF)
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim01)
+            SetConst(LVar1, ANIM_MediGuy_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, false)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim03)
-            SetConst(LVar2, ANIM_MediGuy_Anim0B)
+            SetConst(LVar1, ANIM_MediGuy_FlyFast)
+            SetConst(LVar2, ANIM_MediGuy_Scared)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim06)
+            SetConst(LVar1, ANIM_MediGuy_Hurt)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MediGuy_Anim06)
+            SetConst(LVar1, ANIM_MediGuy_Hurt)
             ExecWait(EVS_Enemy_BlowAway)
             Return
         CaseDefault
@@ -268,7 +268,7 @@ EvtScript N(EVS_Attack_Swoop) = {
             Wait(1)
         EndLoop
     EndThread
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_FlyFast)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
@@ -281,7 +281,7 @@ EvtScript N(EVS_Attack_Swoop) = {
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_GATHER_SMALL)
             Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_ArmsUp)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
@@ -303,7 +303,7 @@ EvtScript N(EVS_Attack_Swoop) = {
             Add(LVar2, 1)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_ArmsUp)
             Call(FlyToGoal, ACTOR_SELF, 0, -10, EASING_QUADRATIC_OUT)
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -324,7 +324,7 @@ EvtScript N(EVS_Attack_Swoop) = {
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_GATHER_SMALL)
     Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_ArmsUp)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
@@ -338,7 +338,7 @@ EvtScript N(EVS_Attack_Swoop) = {
     Add(LVar2, 1)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_ArmsUp)
     Call(FlyToGoal, ACTOR_SELF, 0, -10, EASING_QUADRATIC_OUT)
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_SWOOP, BS_FLAGS1_TRIGGER_EVENTS)
@@ -374,12 +374,12 @@ EvtScript N(EVS_Move_HealOne) = {
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_GATHER_SMALL)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEART_BOUNCE)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_NONE)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_ArmsUp)
     Add(LVar2, 50)
     PlayEffect(EFFECT_SPARKLES, 1, LVar1, LVar2, LVar3, 10, 0)
     PlayEffect(EFFECT_RECOVER, 2, LVar1, LVar2, LVar3, 0, 0)
     Wait(30)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Idle)
     Wait(10)
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, LVarA)

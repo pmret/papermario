@@ -719,70 +719,535 @@
 # Bzzap	raster	Raster24	Threaten3
 # Bzzap	raster	Raster25	Threaten4
 
-Cleft	anim	Anim00	Still
-Cleft	anim	Anim01	ToppleStill
-Cleft	anim	Anim02	Idle
-Cleft	anim	Anim03	ToppleKick
-Cleft	anim	Anim04	Party
-Cleft	anim	Anim05	ToppleIdle
-Cleft	anim	Anim06	Walk
-Cleft	anim	Anim07	Run
-Cleft	anim	Anim08	Hurt
-Cleft	anim	Anim09	ToppleHurt
-Cleft	anim	Anim0A	ToppleStillAlt
-Cleft	anim	Anim0B	ToppleHurtAlt
-Cleft	anim	Anim0C	Sleep
-Cleft	anim	Anim0D	ToppleSleep
-Cleft	anim	Anim0E	Dizzy
-Cleft	anim	Anim0F	ToppleDizzy
-Cleft	anim	Anim10	Crouch
-Cleft	anim	Anim11	Charge
-Cleft	anim	Anim12	RockWobble
-Cleft	anim	Anim13	Reveal
-Cleft	anim	Anim14	Hiding
-Cleft	anim	Anim15	Disguise
-Cleft	anim	Anim16	CamoOn
-Cleft	anim	Anim17	CamoOff
-Cleft	anim	Anim18	Laugh
-Cleft	anim	Anim19	HyperCamoOn
-Cleft	anim	Anim1A	HyperCamoOff
-Cleft	raster	Raster00	Neutral
-Cleft	raster	Raster01	Idle1
-Cleft	raster	Raster02	Idle2
-Cleft	raster	Raster03	Idle3
-Cleft	raster	Raster04	Step1
-Cleft	raster	Raster05	Step2
-Cleft	raster	Raster06	Hurt1
-Cleft	raster	Raster07	Hurt2
-Cleft	raster	Raster08	Topple
-Cleft	raster	Raster09	ToppleHurt1
-Cleft	raster	Raster0A	ToppleHurt2
-Cleft	raster	Raster0B	ToppleHurt3
-Cleft	raster	Raster0C	Sleep1
-Cleft	raster	Raster0D	Sleep2
-Cleft	raster	Raster0E	Sleep3
-Cleft	raster	Raster0F	Sleep4
-Cleft	raster	Raster10	Sleep5
-Cleft	raster	Raster11	Sleep6
-Cleft	raster	Raster12	EyesPanic1
-Cleft	raster	Raster13	EyesPanic2
-Cleft	raster	Raster14	EyesPanic3
-Cleft	raster	Raster15	EyesPanic4
-Cleft	raster	Raster16	Dizzy1
-Cleft	raster	Raster17	Dizzy2
-Cleft	raster	Raster18	Dizzy3
-Cleft	raster	Raster19	Dizzy4
-Cleft	raster	Raster1A	Dizzy5
-Cleft	raster	Raster1B	Dizzy6
-Cleft	raster	Raster1C	Crouch
-Cleft	raster	Raster1D	Charge1
-Cleft	raster	Raster1E	Charge2
-Cleft	raster	Raster1F	Charge3
-Cleft	raster	Raster20	Rock
-Cleft	raster	Raster21	Reveal1
-Cleft	raster	Raster22	Reveal2
-Cleft	raster	Raster23	Reveal3
-Cleft	raster	Raster24	Reveal4
-Cleft	raster	Raster25	Reveal5
-Cleft	raster	Raster26	Laugh1
-Cleft	raster	Raster27	Laugh2
+# Cleft	anim	Anim00	Still
+# Cleft	anim	Anim01	ToppleStill
+# Cleft	anim	Anim02	Idle
+# Cleft	anim	Anim03	ToppleKick
+# Cleft	anim	Anim04	Party
+# Cleft	anim	Anim05	ToppleIdle
+# Cleft	anim	Anim06	Walk
+# Cleft	anim	Anim07	Run
+# Cleft	anim	Anim08	Hurt
+# Cleft	anim	Anim09	ToppleHurt
+# Cleft	anim	Anim0A	ToppleStillAlt
+# Cleft	anim	Anim0B	ToppleHurtAlt
+# Cleft	anim	Anim0C	Sleep
+# Cleft	anim	Anim0D	ToppleSleep
+# Cleft	anim	Anim0E	Dizzy
+# Cleft	anim	Anim0F	ToppleDizzy
+# Cleft	anim	Anim10	Crouch
+# Cleft	anim	Anim11	Charge
+# Cleft	anim	Anim12	RockWobble
+# Cleft	anim	Anim13	Reveal
+# Cleft	anim	Anim14	Hiding
+# Cleft	anim	Anim15	Disguise
+# Cleft	anim	Anim16	CamoOn
+# Cleft	anim	Anim17	CamoOff
+# Cleft	anim	Anim18	Laugh
+# Cleft	anim	Anim19	HyperCamoOn
+# Cleft	anim	Anim1A	HyperCamoOff
+# Cleft	raster	Raster00	Neutral
+# Cleft	raster	Raster01	Idle1
+# Cleft	raster	Raster02	Idle2
+# Cleft	raster	Raster03	Idle3
+# Cleft	raster	Raster04	Step1
+# Cleft	raster	Raster05	Step2
+# Cleft	raster	Raster06	Hurt1
+# Cleft	raster	Raster07	Hurt2
+# Cleft	raster	Raster08	Topple
+# Cleft	raster	Raster09	ToppleHurt1
+# Cleft	raster	Raster0A	ToppleHurt2
+# Cleft	raster	Raster0B	ToppleHurt3
+# Cleft	raster	Raster0C	Sleep1
+# Cleft	raster	Raster0D	Sleep2
+# Cleft	raster	Raster0E	Sleep3
+# Cleft	raster	Raster0F	Sleep4
+# Cleft	raster	Raster10	Sleep5
+# Cleft	raster	Raster11	Sleep6
+# Cleft	raster	Raster12	EyesPanic1
+# Cleft	raster	Raster13	EyesPanic2
+# Cleft	raster	Raster14	EyesPanic3
+# Cleft	raster	Raster15	EyesPanic4
+# Cleft	raster	Raster16	Dizzy1
+# Cleft	raster	Raster17	Dizzy2
+# Cleft	raster	Raster18	Dizzy3
+# Cleft	raster	Raster19	Dizzy4
+# Cleft	raster	Raster1A	Dizzy5
+# Cleft	raster	Raster1B	Dizzy6
+# Cleft	raster	Raster1C	Crouch
+# Cleft	raster	Raster1D	Charge1
+# Cleft	raster	Raster1E	Charge2
+# Cleft	raster	Raster1F	Charge3
+# Cleft	raster	Raster20	Rock
+# Cleft	raster	Raster21	Reveal1
+# Cleft	raster	Raster22	Reveal2
+# Cleft	raster	Raster23	Reveal3
+# Cleft	raster	Raster24	Reveal4
+# Cleft	raster	Raster25	Reveal5
+# Cleft	raster	Raster26	Laugh1
+# Cleft	raster	Raster27	Laugh2
+
+# StiltGuyUnfold anim  Anim00 Segment1
+# StiltGuyUnfold anim  Anim01 Segment2
+# StiltGuyUnfold anim  Anim02 Segment3
+# StiltGuyUnfold anim  Anim03 Segment4
+# StiltGuyUnfold anim  Anim04 Whole
+# StiltGuyUnfold anim  Anim05 Unfold
+# StiltGuyUnfold raster	Raster00 Whole
+# StiltGuyUnfold raster	Raster01 Segment1
+# StiltGuyUnfold raster	Raster02 Segment2
+# StiltGuyUnfold raster	Raster03 Segment3
+# StiltGuyUnfold raster	Raster04 Segment4
+
+# StiltGuy	anim	Anim00	Still
+# StiltGuy	anim	Anim01	Idle
+# StiltGuy	anim	Anim02	Walk
+# StiltGuy	anim	Anim03	Run
+# StiltGuy	anim	Anim04	Fall
+# StiltGuy	anim	Anim05	Jump
+# StiltGuy	anim	Anim06	Hurt
+# StiltGuy	anim	Anim07	HurtStill
+# StiltGuy	anim	Anim08	Stilts
+# StiltGuy	anim	Anim09	BurnHurt
+# StiltGuy	anim	Anim0A	BurnStill
+# StiltGuy	raster	Raster00	Stilt
+# StiltGuy	raster	Raster01	Idle1
+# StiltGuy	raster	Raster02	Idle2
+# StiltGuy	raster	Raster03	FallArms
+# StiltGuy	raster	Raster04	JumpArms
+# StiltGuy	raster	Raster05	FallBody
+# StiltGuy	raster	Raster06	JumpBody
+# StiltGuy	raster	Raster07	Hurt1
+# StiltGuy	raster	Raster08	Hurt2
+# StiltGuy	raster	Raster09	BurnHurt1
+# StiltGuy	raster	Raster0A	BurnHurt2
+# StiltGuy	raster	Raster0B	WalkBody1
+# StiltGuy	raster	Raster0C	WalkArms1
+# StiltGuy	raster	Raster0D	WalkBody2
+# StiltGuy	raster	Raster0E	WalkArms2
+# StiltGuy	raster	Raster0F	WalkBody3
+# StiltGuy	raster	Raster10	WalkArms3
+# StiltGuy	raster	Raster11	WalkBody4
+# StiltGuy	raster	Raster12	WalkArms4
+
+# ShyStackRock anim	Anim00	  Still
+# ShyStackRock raster	Raster00  Rock
+
+# ShyStackUnfold	anim	Anim00	Whole
+# ShyStackUnfold	anim	Anim01	Segment1
+# ShyStackUnfold	anim	Anim02	Segment2
+# ShyStackUnfold	anim	Anim03	Segment3
+# ShyStackUnfold	anim	Anim04	Segment4
+# ShyStackUnfold	anim	Anim05	Unfold
+# ShyStackUnfold	raster	Raster00	Whole
+# ShyStackUnfold	raster	Raster01	Segment1
+# ShyStackUnfold	raster	Raster02	Segment2
+# ShyStackUnfold	raster	Raster03	Segment3
+# ShyStackUnfold	raster	Raster04	Segment4
+
+# ShyStackDamage	anim	Anim00	Hurt
+# ShyStackDamage	anim	Anim01	BurnHurt
+# ShyStackDamage	raster	Raster00	Hurt1
+# ShyStackDamage	raster	Raster01	Hurt2
+# ShyStackDamage	raster	Raster02	BurnHurt1
+# ShyStackDamage	raster	Raster03	BurnHurt2
+
+# ShyStackGuy	anim	Anim00	4xStill
+# ShyStackGuy	anim	Anim01	3xStill
+# ShyStackGuy	anim	Anim02	2xStill
+# ShyStackGuy	anim	Anim03	1xStill
+# ShyStackGuy	anim	Anim04	4xIdle
+# ShyStackGuy	anim	Anim05	3xIdle
+# ShyStackGuy	anim	Anim06	2xIdle
+# ShyStackGuy	anim	Anim07	1xIdle
+# ShyStackGuy	anim	Anim08	4xHurt
+# ShyStackGuy	anim	Anim09	3xHurt
+# ShyStackGuy	anim	Anim0A	2xHurt
+# ShyStackGuy	anim	Anim0B	1xHurt
+# ShyStackGuy	anim	Anim0C	4xDizzy
+# ShyStackGuy	anim	Anim0D	3xDizzy
+# ShyStackGuy	anim	Anim0E	2xDizzy
+# ShyStackGuy	anim	Anim0F	1xDizzy
+# ShyStackGuy	anim	Anim10	4xBurnHurt
+# ShyStackGuy	anim	Anim11	3xBurnHurt
+# ShyStackGuy	anim	Anim12	2xBurnHurt
+# ShyStackGuy	anim	Anim13	1xBurnHurt
+# ShyStackGuy	anim	Anim14	4xBurnStill
+# ShyStackGuy	anim	Anim15	3xBurnStill
+# ShyStackGuy	anim	Anim16	2xBurnStill
+# ShyStackGuy	anim	Anim17	1xBurnStill
+# ShyStackGuy	anim	Anim18	3xFall
+# ShyStackGuy	anim	Anim19	2xFall
+# ShyStackGuy	anim	Anim1A	1xFall
+# ShyStackGuy	anim	Anim1B	4xDraw
+# ShyStackGuy	anim	Anim1C	3xDraw
+# ShyStackGuy	anim	Anim1D	2xDraw
+# ShyStackGuy	anim	Anim1E	1xDraw
+# ShyStackGuy	anim	Anim1F	4xFire
+# ShyStackGuy	anim	Anim20	3xFire
+# ShyStackGuy	anim	Anim21	2xFire
+# ShyStackGuy	anim	Anim22	1xFire
+# ShyStackGuy	raster	Raster00	Idle1
+# ShyStackGuy	raster	Raster01	Idle2
+# ShyStackGuy	raster	Raster02	Hurt1
+# ShyStackGuy	raster	Raster03	Hurt2
+# ShyStackGuy	raster	Raster04	BurnHurt1
+# ShyStackGuy	raster	Raster05	BurnHurt2
+# ShyStackGuy	raster	Raster06	Fall1
+# ShyStackGuy	raster	Raster07	Fall2
+# ShyStackGuy	raster	Raster08	Dizzy
+# ShyStackGuy	raster	Raster09	BurnStill
+# ShyStackGuy	raster	Raster0A	Draw1
+# ShyStackGuy	raster	Raster0B	Draw2
+# ShyStackGuy	raster	Raster0C	Draw3
+# ShyStackGuy	raster	Raster0D	Draw4
+# ShyStackGuy	raster	Raster0E	Draw5
+# ShyStackGuy	raster	Raster0F	Fire1
+# ShyStackGuy	raster	Raster10	Fire2
+
+# ShyGuy	anim	Anim00	Still
+# ShyGuy	anim	Anim01	Idle
+# ShyGuy	anim	Anim02	Walk
+# ShyGuy	anim	Anim03	Run
+# ShyGuy	anim	Anim04	Dash
+# ShyGuy	anim	Anim05	Tackle
+# ShyGuy	anim	Anim06	ArmsUp
+# ShyGuy	anim	Anim07	Bow
+# ShyGuy	anim	Anim08	Neutral
+# ShyGuy	anim	Anim09	Jump
+# ShyGuy	anim	Anim0A	FallingKick
+# ShyGuy	anim	Anim0B	NeutralAlt
+# ShyGuy	anim	Anim0C	Hurt
+# ShyGuy	anim	Anim0D	BurnHurt
+# ShyGuy	anim	Anim0E	BurnStill
+# ShyGuy	anim	Anim0F	Smoke
+# ShyGuy	anim	Anim10	Crashed
+# ShyGuy	anim	Anim11	Excited
+# ShyGuy	anim	Anim12	Slouch
+# ShyGuy	anim	Anim13	Dizzy
+# ShyGuy	anim	Anim14	Scared
+# ShyGuy	anim	Anim15	Hiding
+# ShyGuy	raster	Raster00	Idle1
+# ShyGuy	raster	Raster01	Idle2
+# ShyGuy	raster	Raster02	Step1
+# ShyGuy	raster	Raster03	Step2
+# ShyGuy	raster	Raster04	Step3
+# ShyGuy	raster	Raster05	Step4
+# ShyGuy	raster	Raster06	Excited
+# ShyGuy	raster	Raster07	Neutral
+# ShyGuy	raster	Raster08	Hurt1
+# ShyGuy	raster	Raster09	Hurt2
+# ShyGuy	raster	Raster0A	BurnStill
+# ShyGuy	raster	Raster0B	Jump
+# ShyGuy	raster	Raster0C	FallingKick1
+# ShyGuy	raster	Raster0D	FallingKick2
+# ShyGuy	raster	Raster0E	Tackle1
+# ShyGuy	raster	Raster0F	ArmsUp
+# ShyGuy	raster	Raster10	Bow1
+# ShyGuy	raster	Raster11	Bow2
+# ShyGuy	raster	Raster12	Bow3
+# ShyGuy	raster	Raster13	Bow4
+# ShyGuy	raster	Raster14	Dash1
+# ShyGuy	raster	Raster15	Dash2
+# ShyGuy	raster	Raster16	Dash3
+# ShyGuy	raster	Raster17	Crashed1
+# ShyGuy	raster	Raster18	Crashed2
+# ShyGuy	raster	Raster19	Tackle2
+# ShyGuy	raster	Raster1A	Slouch
+# ShyGuy	raster	Raster1B	Dizzy1
+# ShyGuy	raster	Raster1C	Dizzy2
+# ShyGuy	raster	Raster1D	Dizzy3
+# ShyGuy	raster	Raster1E	BurnHurt1
+# ShyGuy	raster	Raster1F	BurnHurt2
+# ShyGuy	raster	Raster20	Smoke1
+# ShyGuy	raster	Raster21	Smoke2
+# ShyGuy	raster	Raster22	Smoke3
+# ShyGuy	raster	Raster23	Smoke4
+# ShyGuy	raster	Raster24	Smoke5
+# ShyGuy	raster	Raster25	Smoke6
+# ShyGuy	raster	Raster26	Smoke7
+# ShyGuy	raster	Raster27	Hiding1
+# ShyGuy	raster	Raster28	Hiding2
+
+# ShySquadGuy	anim	Anim00	Still
+# ShySquadGuy	anim	Anim01	Idle
+# ShySquadGuy	anim	Anim02	Walk
+# ShySquadGuy	anim	Anim03	Run
+# ShySquadGuy	anim	Anim04	Dash
+# ShySquadGuy	anim	Anim05	Tackle
+# ShySquadGuy	anim	Anim06	ArmsUp
+# ShySquadGuy	anim	Anim07	Bow
+# ShySquadGuy	anim	Anim08	Panic
+# ShySquadGuy	anim	Anim09	Neutral
+# ShySquadGuy	anim	Anim0A	Jump
+# ShySquadGuy	anim	Anim0B	FallingKick
+# ShySquadGuy	anim	Anim0C	NeutralAlt
+# ShySquadGuy	anim	Anim0D	Hurt
+# ShySquadGuy	anim	Anim0E	BurnHurt
+# ShySquadGuy	anim	Anim0F	BurnStill
+# ShySquadGuy	anim	Anim10	Crashed
+# ShySquadGuy	anim	Anim11	Excited
+# ShySquadGuy	anim	Anim12	Slouch
+# ShySquadGuy	anim	Anim13	Dizzy
+# ShySquadGuy	anim	Anim14	Scared
+# ShySquadGuy	anim	Anim15	Hiding
+# ShySquadGuy	raster	Raster00	Idle1
+# ShySquadGuy	raster	Raster01	Idle2
+# ShySquadGuy	raster	Raster02	Step1
+# ShySquadGuy	raster	Raster03	Step2
+# ShySquadGuy	raster	Raster04	Step3
+# ShySquadGuy	raster	Raster05	Step4
+# ShySquadGuy	raster	Raster06	Excited
+# ShySquadGuy	raster	Raster07	Neutral
+# ShySquadGuy	raster	Raster08	Hurt1
+# ShySquadGuy	raster	Raster09	Hurt2
+# ShySquadGuy	raster	Raster0A	BurnStill
+# ShySquadGuy	raster	Raster0B	Jump
+# ShySquadGuy	raster	Raster0C	FallingKick1
+# ShySquadGuy	raster	Raster0D	FallingKick2
+# ShySquadGuy	raster	Raster0E	Tackle1
+# ShySquadGuy	raster	Raster0F	ArmsUp
+# ShySquadGuy	raster	Raster10	Bow1
+# ShySquadGuy	raster	Raster11	Bow2
+# ShySquadGuy	raster	Raster12	Bow3
+# ShySquadGuy	raster	Raster13	Bow4
+# ShySquadGuy	raster	Raster14	Dash1
+# ShySquadGuy	raster	Raster15	Dash2
+# ShySquadGuy	raster	Raster16	Dash3
+# ShySquadGuy	raster	Raster17	Crashed1
+# ShySquadGuy	raster	Raster18	Crashed2
+# ShySquadGuy	raster	Raster19	Tackle2
+# ShySquadGuy	raster	Raster1A	Slouch
+# ShySquadGuy	raster	Raster1B	Dizzy1
+# ShySquadGuy	raster	Raster1C	Dizzy2
+# ShySquadGuy	raster	Raster1D	Dizzy3
+# ShySquadGuy	raster	Raster1E	BurnHurt1
+# ShySquadGuy	raster	Raster1F	BurnHurt2
+# ShySquadGuy	raster	Raster20	Panic1
+# ShySquadGuy	raster	Raster21	Panic2
+# ShySquadGuy	raster	Raster22	Panic3
+# ShySquadGuy	raster	Raster23	Panic4
+# ShySquadGuy	raster	Raster24	Hiding1
+# ShySquadGuy	raster	Raster25	Hiding2
+
+# GeneralGuyBomb	anim	Anim00 Still
+# GeneralGuyBomb	anim	Anim01 Lit
+# GeneralGuyBomb	anim	Anim02 Burned
+# GeneralGuyBomb	raster	Raster00 Bomb
+# GeneralGuyBomb	raster	Raster01 Burned
+# GeneralGuyBomb	raster	Raster02 Fuse1
+# GeneralGuyBomb	raster	Raster03 Fuse2
+# GeneralGuyBomb	raster	Raster04 Fuse3
+
+# GrooveGuy	anim	Anim00	Still
+# GrooveGuy	anim	Anim01	Idle
+# GrooveGuy	anim	Anim02	Shuffle
+# GrooveGuy	anim	Anim03	Walk
+# GrooveGuy	anim	Anim04	Run
+# GrooveGuy	anim	Anim05	Jump
+# GrooveGuy	anim	Anim06	Sleep
+# GrooveGuy	anim	Anim07	Dizzy
+# GrooveGuy	anim	Anim08	Hurt
+# GrooveGuy	anim	Anim09	HurtStill
+# GrooveGuy	anim	Anim0A	Swing
+# GrooveGuy	anim	Anim0B	LeanLeft
+# GrooveGuy	anim	Anim0C	Forward
+# GrooveGuy	anim	Anim0D	LeanRight
+# GrooveGuy	anim	Anim0E	BurnHurt
+# GrooveGuy	anim	Anim0F	BurnStill
+# GrooveGuy	anim	Anim10	Panic
+# GrooveGuy	anim	Anim11	Scared
+# GrooveGuy	raster	Raster00	Neutral
+# GrooveGuy	raster	Raster01	Idle1
+# GrooveGuy	raster	Raster02	Idle2
+# GrooveGuy	raster	Raster03	Idle3
+# GrooveGuy	raster	Raster04	Idle4
+# GrooveGuy	raster	Raster05	Step1
+# GrooveGuy	raster	Raster06	Step2
+# GrooveGuy	raster	Raster07	Step3
+# GrooveGuy	raster	Raster08	Jump1
+# GrooveGuy	raster	Raster09	Jump2
+# GrooveGuy	raster	Raster0A	Asleep
+# GrooveGuy	raster	Raster0B	Hurt1
+# GrooveGuy	raster	Raster0C	Hurt2
+# GrooveGuy	raster	Raster0D	BurnHurt1
+# GrooveGuy	raster	Raster0E	BurnHurt2
+# GrooveGuy	raster	Raster0F	BurnStill
+# GrooveGuy	raster	Raster10	LeanLeft
+# GrooveGuy	raster	Raster11	Forward
+# GrooveGuy	raster	Raster12	LeanRight
+# GrooveGuy	raster	Raster13	Dizzy
+# GrooveGuy	raster	Raster14	Swing1
+# GrooveGuy	raster	Raster15	Swing2
+# GrooveGuy	raster	Raster16	HurtStill
+# GrooveGuy	raster	Raster17	Panic1
+# GrooveGuy	raster	Raster18	Panic2
+# GrooveGuy	raster	Raster19	Panic3
+
+# MarshalGuy	anim	Anim00	Still
+# MarshalGuy	anim	Anim01	Idle
+# MarshalGuy	anim	Anim02	Crashed
+# MarshalGuy	anim	Anim03	Hiding
+# MarshalGuy	anim	Anim04	Signal
+# MarshalGuy	anim	Anim05	SignalFaster
+# MarshalGuy	anim	Anim06	SignalStill
+# MarshalGuy	anim	Anim07	SignalStop
+# MarshalGuy	anim	Anim08	SignalUp
+# MarshalGuy	anim	Anim09	SignalFrantic
+# MarshalGuy	anim	Anim0A	Hurt
+# MarshalGuy	anim	Anim0B	HurtStill
+# MarshalGuy	anim	Anim0C	Panic
+# MarshalGuy	anim	Anim0D	BatonRed
+# MarshalGuy	anim	Anim0E	BatonBlue
+# MarshalGuy	anim	Anim0F	Run
+# MarshalGuy	raster	Raster00	Idle1
+# MarshalGuy	raster	Raster01	Idle2
+# MarshalGuy	raster	Raster02	Crashed1
+# MarshalGuy	raster	Raster03	Crashed2
+# MarshalGuy	raster	Raster04	Hiding1
+# MarshalGuy	raster	Raster05	Hiding2
+# MarshalGuy	raster	Raster06	Signal1
+# MarshalGuy	raster	Raster07	Signal2
+# MarshalGuy	raster	Raster08	Signal3
+# MarshalGuy	raster	Raster09	Signal4
+# MarshalGuy	raster	Raster0A	Hurt1
+# MarshalGuy	raster	Raster0B	Hurt2
+# MarshalGuy	raster	Raster0C	HurtStill
+# MarshalGuy	raster	Raster0D	Panic1
+# MarshalGuy	raster	Raster0E	Panic2
+# MarshalGuy	raster	Raster0F	Panic3
+# MarshalGuy	raster	Raster10	Panic4
+# MarshalGuy	raster	Raster11	Panic5
+# MarshalGuy	raster	Raster12	BatonRed
+# MarshalGuy	raster	Raster13	BatonBlue
+# MarshalGuy	raster	Raster14	SignalFrantic1
+# MarshalGuy	raster	Raster15	SignalFrantic2
+# MarshalGuy	raster	Raster16	SignalFrantic3
+# MarshalGuy	raster	Raster17	Step1
+# MarshalGuy	raster	Raster18	Step2
+# MarshalGuy	raster	Raster19	Step3
+# MarshalGuy	raster	Raster1A	Step4
+
+# MediGuy	anim	Anim00	Still
+# MediGuy	anim	Anim01	Idle
+# MediGuy	anim	Anim02	FlySlow
+# MediGuy	anim	Anim03	FlyFast
+# MediGuy	anim	Anim04	Sleep
+# MediGuy	anim	Anim05	ArmsUp
+# MediGuy	anim	Anim06	Hurt
+# MediGuy	anim	Anim07	HurtStill
+# MediGuy	anim	Anim08	BurnHurt
+# MediGuy	anim	Anim09	BurnStill
+# MediGuy	anim	Anim0A	Dizzy
+# MediGuy	anim	Anim0B	Scared
+# MediGuy	raster	Raster00	Idle1
+# MediGuy	raster	Raster01	Idle2
+# MediGuy	raster	Raster02	Idle3
+# MediGuy	raster	Raster03	Duck
+# MediGuy	raster	Raster04	ArmsUp
+# MediGuy	raster	Raster05	Hurt
+# MediGuy	raster	Raster06	BurnHurt
+# MediGuy	raster	Raster07	BurnStill
+
+# PyroGuy	anim	Anim00	Still
+# PyroGuy	anim	Anim01	Idle
+# PyroGuy	anim	Anim02	Walk
+# PyroGuy	anim	Anim03	Run
+# PyroGuy	anim	Anim04	Dash
+# PyroGuy	anim	Anim05	Tackle
+# PyroGuy	anim	Anim06	Hurt
+# PyroGuy	anim	Anim07	Sleep
+# PyroGuy	anim	Anim08	Dizzy
+# PyroGuy	anim	Anim09	Scared
+# PyroGuy	raster	Raster00	Idle1
+# PyroGuy	raster	Raster01	Idle2
+# PyroGuy	raster	Raster02	Idle3
+# PyroGuy	raster	Raster03	StepBody1
+# PyroGuy	raster	Raster04	StepBody2
+# PyroGuy	raster	Raster05	StepBody3
+# PyroGuy	raster	Raster06	Hurt1
+# PyroGuy	raster	Raster07	Hurt2
+# PyroGuy	raster	Raster08	Sleep1
+# PyroGuy	raster	Raster09	Sleep2
+# PyroGuy	raster	Raster0A	Sleep3
+# PyroGuy	raster	Raster0B	Tackle1
+# PyroGuy	raster	Raster0C	Tackle2
+# PyroGuy	raster	Raster0D	Dizzy1
+# PyroGuy	raster	Raster0E	Dizzy2
+# PyroGuy	raster	Raster0F	StepFeet1
+# PyroGuy	raster	Raster10	StepFeet2
+# PyroGuy	raster	Raster11	StepFeet3
+# PyroGuy	raster	Raster12	RFootStep
+# PyroGuy	raster	Raster13	DashFeet1
+# PyroGuy	raster	Raster14	DashFeet2
+# PyroGuy	raster	Raster15	DashFeet3
+# PyroGuy	raster	Raster16	LFootIdle1
+# PyroGuy	raster	Raster17	RFootIdle1
+# PyroGuy	raster	Raster18	LFootIdle2
+# PyroGuy	raster	Raster19	RFootIdle2
+# PyroGuy	raster	Raster1A	Dizzy3
+
+# SpyGuy	anim	Anim00	StillSling
+# SpyGuy	anim	Anim01	StillHammer
+# SpyGuy	anim	Anim02	IdleSling
+# SpyGuy	anim	Anim03	IdleHammer
+# SpyGuy	anim	Anim04	WalkSling
+# SpyGuy	anim	Anim05	RunSling
+# SpyGuy	anim	Anim06	DashSling
+# SpyGuy	anim	Anim07	DashHammer
+# SpyGuy	anim	Anim08	SlingAttack
+# SpyGuy	anim	Anim09	LeanBack
+# SpyGuy	anim	Anim0A	HammerAttack
+# SpyGuy	anim	Anim0B	Hurt
+# SpyGuy	anim	Anim0C	HurtStill
+# SpyGuy	anim	Anim0D	BurnHurt
+# SpyGuy	anim	Anim0E	BurnStill
+# SpyGuy	anim	Anim0F	Sleep
+# SpyGuy	anim	Anim10	Stone
+# SpyGuy	anim	Anim11	Scared
+# SpyGuy	anim	Anim12	Dizzy
+# SpyGuy	anim	Anim13	RaiseHammerAlt
+# SpyGuy	anim	Anim14	SwingHammerAlt
+# SpyGuy	anim	Anim15	DrawSling
+# SpyGuy	anim	Anim16	FireSling
+# SpyGuy	anim	Anim17	JumpSling
+# SpyGuy	anim	Anim18	JumpHammer
+# SpyGuy	anim	Anim19	SwitchToSling
+# SpyGuy	anim	Anim1A	SwitchToHammer
+# SpyGuy	raster	Raster00	Idle1
+# SpyGuy	raster	Raster01	Idle2
+# SpyGuy	raster	Raster02	Step1
+# SpyGuy	raster	Raster03	Step2
+# SpyGuy	raster	Raster04	Step3
+# SpyGuy	raster	Raster05	Step4
+# SpyGuy	raster	Raster06	Dash1
+# SpyGuy	raster	Raster07	Dash2
+# SpyGuy	raster	Raster08	Dash3
+# SpyGuy	raster	Raster09	DrawSling1
+# SpyGuy	raster	Raster0A	DrawSling2
+# SpyGuy	raster	Raster0B	DrawSling3
+# SpyGuy	raster	Raster0C	DrawSling4
+# SpyGuy	raster	Raster0D	FireSling1
+# SpyGuy	raster	Raster0E	FireSling2
+# SpyGuy	raster	Raster0F	LeanBack1
+# SpyGuy	raster	Raster10	LeanBack2
+# SpyGuy	raster	Raster11	LeanBack3
+# SpyGuy	raster	Raster12	Scared1
+# SpyGuy	raster	Raster13	Scared2
+# SpyGuy	raster	Raster14	BurnHurt1
+# SpyGuy	raster	Raster15	BurnHurt2
+# SpyGuy	raster	Raster16	Dizzy1
+# SpyGuy	raster	Raster17	Dizzy2
+# SpyGuy	raster	Raster18	Dizzy3
+# SpyGuy	raster	Raster19	RaiseHammer
+# SpyGuy	raster	Raster1A	SwingHammer1
+# SpyGuy	raster	Raster1B	SwingHammer2
+# SpyGuy	raster	Raster1C	SwingHammer3
+# SpyGuy	raster	Raster1D	Rock
+# SpyGuy	raster	Raster1E	BurnStill
+# SpyGuy	raster	Raster1F	Slingshot
+# SpyGuy	raster	Raster20	HammerSwing1
+# SpyGuy	raster	Raster21	HammerSwing2
+# SpyGuy	raster	Raster22	HammerSwing3
+# SpyGuy	raster	Raster23	Jump
+# SpyGuy	raster	Raster24	Crouch

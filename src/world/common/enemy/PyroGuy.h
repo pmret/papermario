@@ -16,20 +16,20 @@
 
 #define PYRO_GUY_ANIMS \
 { \
-    .idle   = ANIM_PyroGuy_Anim01, \
-    .walk   = ANIM_PyroGuy_Anim02, \
-    .run    = ANIM_PyroGuy_Anim03, \
-    .chase  = ANIM_PyroGuy_Anim02, \
-    .anim_4 = ANIM_PyroGuy_Anim01, \
-    .anim_5 = ANIM_PyroGuy_Anim01, \
-    .death  = ANIM_PyroGuy_Anim06, \
-    .hit    = ANIM_PyroGuy_Anim06, \
-    .anim_8 = ANIM_PyroGuy_Anim01, \
-    .anim_9 = ANIM_PyroGuy_Anim01, \
-    .anim_A = ANIM_PyroGuy_Anim01, \
-    .anim_B = ANIM_PyroGuy_Anim01, \
-    .anim_C = ANIM_PyroGuy_Anim01, \
-    .anim_D = ANIM_PyroGuy_Anim01, \
-    .anim_E = ANIM_PyroGuy_Anim01, \
-    .anim_F = ANIM_PyroGuy_Anim01, \
+    .idle   = ANIM_PyroGuy_Idle, \
+    .walk   = ANIM_PyroGuy_Walk, \
+    .run    = ANIM_PyroGuy_Run, \
+    .chase  = ANIM_PyroGuy_Walk, \
+    .anim_4 = ANIM_PyroGuy_Idle, \
+    .anim_5 = ANIM_PyroGuy_Idle, \
+    .death  = ANIM_PyroGuy_Hurt, \
+    .hit    = ANIM_PyroGuy_Hurt, \
+    .anim_8 = ANIM_PyroGuy_Idle, \
+    .anim_9 = ANIM_PyroGuy_Idle, \
+    .anim_A = ANIM_PyroGuy_Idle, \
+    .anim_B = ANIM_PyroGuy_Idle, \
+    .anim_C = ANIM_PyroGuy_Idle, \
+    .anim_D = ANIM_PyroGuy_Idle, \
+    .anim_E = ANIM_PyroGuy_Idle, \
+    .anim_F = ANIM_PyroGuy_Idle, \
 }

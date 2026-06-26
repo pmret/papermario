@@ -176,7 +176,7 @@ EvtScript N(EVS_NpcAI_ShyGuy) = {
                 Call(SetSelfEnemyFlagBits, ENEMY_FLAG_PASSIVE, false)
                 Call(SetNpcPos, NPC_SELF, 800, 0, 75)
                 Call(SetNpcSpeed, NPC_SELF, Float(4.0))
-                Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+                Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Run)
                 Call(SetNpcSpeed, NPC_SELF, Float(5.0))
                 Call(NpcMoveTo, NPC_SELF, 665, 75, 0)
                 Call(SetNpcSpeed, NPC_SELF, Float(4.0))
@@ -265,9 +265,9 @@ EvtScript N(EVS_NpcDefeat_ShyGuy) = {
             Call(DoNpcDefeat)
             Wait(1)
         CaseEq(OUTCOME_PLAYER_LOST)
-            Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Run)
         CaseEq(OUTCOME_PLAYER_FLED)
-            Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Run)
     EndSwitch
     Return
     End

@@ -458,7 +458,7 @@ EvtScript N(EVS_CarryItem_PostOfficeShyGuy) = {
 
 EvtScript N(EVS_PostOfficeShyGuy_Escape) = {
     Call(SetNpcPos, NPC_PostOfficeShyGuy, 357, 20, -440)
-    Call(SetNpcAnimation, NPC_PostOfficeShyGuy, ANIM_ShyGuy_Red_Anim04)
+    Call(SetNpcAnimation, NPC_PostOfficeShyGuy, ANIM_ShyGuy_Red_Dash)
     Exec(N(EVS_CarryItem_PostOfficeShyGuy))
     Call(DisablePlayerInput, true)
     Wait(60)

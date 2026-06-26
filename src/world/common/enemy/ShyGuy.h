@@ -24,222 +24,222 @@
 
 #define RED_SHY_GUY_ANIMS \
 { \
-    .idle   = ANIM_ShyGuy_Red_Anim01, \
-    .walk   = ANIM_ShyGuy_Red_Anim02, \
-    .run    = ANIM_ShyGuy_Red_Anim03, \
-    .chase  = ANIM_ShyGuy_Red_Anim03, \
-    .anim_4 = ANIM_ShyGuy_Red_Anim01, \
-    .anim_5 = ANIM_ShyGuy_Red_Anim01, \
-    .death  = ANIM_ShyGuy_Red_Anim0C, \
-    .hit    = ANIM_ShyGuy_Red_Anim0C, \
-    .anim_8 = ANIM_ShyGuy_Red_Anim15, \
-    .anim_9 = ANIM_ShyGuy_Red_Anim12, \
-    .anim_A = ANIM_ShyGuy_Red_Anim11, \
-    .anim_B = ANIM_ShyGuy_Red_Anim10, \
-    .anim_C = ANIM_ShyGuy_Red_Anim05, \
-    .anim_D = ANIM_ShyGuy_Red_Anim01, \
-    .anim_E = ANIM_ShyGuy_Red_Anim01, \
-    .anim_F = ANIM_ShyGuy_Red_Anim01, \
+    .idle   = ANIM_ShyGuy_Red_Idle, \
+    .walk   = ANIM_ShyGuy_Red_Walk, \
+    .run    = ANIM_ShyGuy_Red_Run, \
+    .chase  = ANIM_ShyGuy_Red_Run, \
+    .anim_4 = ANIM_ShyGuy_Red_Idle, \
+    .anim_5 = ANIM_ShyGuy_Red_Idle, \
+    .death  = ANIM_ShyGuy_Red_Hurt, \
+    .hit    = ANIM_ShyGuy_Red_Hurt, \
+    .anim_8 = ANIM_ShyGuy_Red_Hiding, \
+    .anim_9 = ANIM_ShyGuy_Red_Slouch, \
+    .anim_A = ANIM_ShyGuy_Red_Excited, \
+    .anim_B = ANIM_ShyGuy_Red_Crashed, \
+    .anim_C = ANIM_ShyGuy_Red_Tackle, \
+    .anim_D = ANIM_ShyGuy_Red_Idle, \
+    .anim_E = ANIM_ShyGuy_Red_Idle, \
+    .anim_F = ANIM_ShyGuy_Red_Idle, \
 }
 
 #define BLUE_SHY_GUY_ANIMS \
 { \
-    .idle   = ANIM_ShyGuy_Blue_Anim01, \
-    .walk   = ANIM_ShyGuy_Blue_Anim02, \
-    .run    = ANIM_ShyGuy_Blue_Anim03, \
-    .chase  = ANIM_ShyGuy_Blue_Anim03, \
-    .anim_4 = ANIM_ShyGuy_Blue_Anim01, \
-    .anim_5 = ANIM_ShyGuy_Blue_Anim01, \
-    .death  = ANIM_ShyGuy_Blue_Anim0C, \
-    .hit    = ANIM_ShyGuy_Blue_Anim0C, \
-    .anim_8 = ANIM_ShyGuy_Blue_Anim15, \
-    .anim_9 = ANIM_ShyGuy_Blue_Anim12, \
-    .anim_A = ANIM_ShyGuy_Blue_Anim11, \
-    .anim_B = ANIM_ShyGuy_Blue_Anim10, \
-    .anim_C = ANIM_ShyGuy_Blue_Anim05, \
-    .anim_D = ANIM_ShyGuy_Blue_Anim01, \
-    .anim_E = ANIM_ShyGuy_Blue_Anim01, \
-    .anim_F = ANIM_ShyGuy_Blue_Anim01, \
+    .idle   = ANIM_ShyGuy_Blue_Idle, \
+    .walk   = ANIM_ShyGuy_Blue_Walk, \
+    .run    = ANIM_ShyGuy_Blue_Run, \
+    .chase  = ANIM_ShyGuy_Blue_Run, \
+    .anim_4 = ANIM_ShyGuy_Blue_Idle, \
+    .anim_5 = ANIM_ShyGuy_Blue_Idle, \
+    .death  = ANIM_ShyGuy_Blue_Hurt, \
+    .hit    = ANIM_ShyGuy_Blue_Hurt, \
+    .anim_8 = ANIM_ShyGuy_Blue_Hiding, \
+    .anim_9 = ANIM_ShyGuy_Blue_Slouch, \
+    .anim_A = ANIM_ShyGuy_Blue_Excited, \
+    .anim_B = ANIM_ShyGuy_Blue_Crashed, \
+    .anim_C = ANIM_ShyGuy_Blue_Tackle, \
+    .anim_D = ANIM_ShyGuy_Blue_Idle, \
+    .anim_E = ANIM_ShyGuy_Blue_Idle, \
+    .anim_F = ANIM_ShyGuy_Blue_Idle, \
 }
 
 #define GREEN_SHY_GUY_ANIMS \
 { \
-    .idle   = ANIM_ShyGuy_Green_Anim01, \
-    .walk   = ANIM_ShyGuy_Green_Anim02, \
-    .run    = ANIM_ShyGuy_Green_Anim03, \
-    .chase  = ANIM_ShyGuy_Green_Anim03, \
-    .anim_4 = ANIM_ShyGuy_Green_Anim01, \
-    .anim_5 = ANIM_ShyGuy_Green_Anim01, \
-    .death  = ANIM_ShyGuy_Green_Anim0C, \
-    .hit    = ANIM_ShyGuy_Green_Anim0C, \
-    .anim_8 = ANIM_ShyGuy_Green_Anim15, \
-    .anim_9 = ANIM_ShyGuy_Green_Anim12, \
-    .anim_A = ANIM_ShyGuy_Green_Anim11, \
-    .anim_B = ANIM_ShyGuy_Green_Anim10, \
-    .anim_C = ANIM_ShyGuy_Green_Anim05, \
-    .anim_D = ANIM_ShyGuy_Green_Anim01, \
-    .anim_E = ANIM_ShyGuy_Green_Anim01, \
-    .anim_F = ANIM_ShyGuy_Green_Anim01, \
+    .idle   = ANIM_ShyGuy_Green_Idle, \
+    .walk   = ANIM_ShyGuy_Green_Walk, \
+    .run    = ANIM_ShyGuy_Green_Run, \
+    .chase  = ANIM_ShyGuy_Green_Run, \
+    .anim_4 = ANIM_ShyGuy_Green_Idle, \
+    .anim_5 = ANIM_ShyGuy_Green_Idle, \
+    .death  = ANIM_ShyGuy_Green_Hurt, \
+    .hit    = ANIM_ShyGuy_Green_Hurt, \
+    .anim_8 = ANIM_ShyGuy_Green_Hiding, \
+    .anim_9 = ANIM_ShyGuy_Green_Slouch, \
+    .anim_A = ANIM_ShyGuy_Green_Excited, \
+    .anim_B = ANIM_ShyGuy_Green_Crashed, \
+    .anim_C = ANIM_ShyGuy_Green_Tackle, \
+    .anim_D = ANIM_ShyGuy_Green_Idle, \
+    .anim_E = ANIM_ShyGuy_Green_Idle, \
+    .anim_F = ANIM_ShyGuy_Green_Idle, \
 }
 
 #define PINK_SHY_GUY_ANIMS \
 { \
-    .idle   = ANIM_ShyGuy_Pink_Anim01, \
-    .walk   = ANIM_ShyGuy_Pink_Anim02, \
-    .run    = ANIM_ShyGuy_Pink_Anim03, \
-    .chase  = ANIM_ShyGuy_Pink_Anim03, \
-    .anim_4 = ANIM_ShyGuy_Pink_Anim01, \
-    .anim_5 = ANIM_ShyGuy_Pink_Anim01, \
-    .death  = ANIM_ShyGuy_Pink_Anim0C, \
-    .hit    = ANIM_ShyGuy_Pink_Anim0C, \
-    .anim_8 = ANIM_ShyGuy_Pink_Anim15, \
-    .anim_9 = ANIM_ShyGuy_Pink_Anim12, \
-    .anim_A = ANIM_ShyGuy_Pink_Anim11, \
-    .anim_B = ANIM_ShyGuy_Pink_Anim10, \
-    .anim_C = ANIM_ShyGuy_Pink_Anim05, \
-    .anim_D = ANIM_ShyGuy_Pink_Anim01, \
-    .anim_E = ANIM_ShyGuy_Pink_Anim01, \
-    .anim_F = ANIM_ShyGuy_Pink_Anim01, \
+    .idle   = ANIM_ShyGuy_Pink_Idle, \
+    .walk   = ANIM_ShyGuy_Pink_Walk, \
+    .run    = ANIM_ShyGuy_Pink_Run, \
+    .chase  = ANIM_ShyGuy_Pink_Run, \
+    .anim_4 = ANIM_ShyGuy_Pink_Idle, \
+    .anim_5 = ANIM_ShyGuy_Pink_Idle, \
+    .death  = ANIM_ShyGuy_Pink_Hurt, \
+    .hit    = ANIM_ShyGuy_Pink_Hurt, \
+    .anim_8 = ANIM_ShyGuy_Pink_Hiding, \
+    .anim_9 = ANIM_ShyGuy_Pink_Slouch, \
+    .anim_A = ANIM_ShyGuy_Pink_Excited, \
+    .anim_B = ANIM_ShyGuy_Pink_Crashed, \
+    .anim_C = ANIM_ShyGuy_Pink_Tackle, \
+    .anim_D = ANIM_ShyGuy_Pink_Idle, \
+    .anim_E = ANIM_ShyGuy_Pink_Idle, \
+    .anim_F = ANIM_ShyGuy_Pink_Idle, \
 }
 
 #define YELLOW_SHY_GUY_ANIMS \
 { \
-    .idle   = ANIM_ShyGuy_Yellow_Anim01, \
-    .walk   = ANIM_ShyGuy_Yellow_Anim02, \
-    .run    = ANIM_ShyGuy_Yellow_Anim03, \
-    .chase  = ANIM_ShyGuy_Yellow_Anim03, \
-    .anim_4 = ANIM_ShyGuy_Yellow_Anim01, \
-    .anim_5 = ANIM_ShyGuy_Yellow_Anim01, \
-    .death  = ANIM_ShyGuy_Yellow_Anim0C, \
-    .hit    = ANIM_ShyGuy_Yellow_Anim0C, \
-    .anim_8 = ANIM_ShyGuy_Yellow_Anim15, \
-    .anim_9 = ANIM_ShyGuy_Yellow_Anim12, \
-    .anim_A = ANIM_ShyGuy_Yellow_Anim11, \
-    .anim_B = ANIM_ShyGuy_Yellow_Anim10, \
-    .anim_C = ANIM_ShyGuy_Yellow_Anim05, \
-    .anim_D = ANIM_ShyGuy_Yellow_Anim01, \
-    .anim_E = ANIM_ShyGuy_Yellow_Anim01, \
-    .anim_F = ANIM_ShyGuy_Yellow_Anim01, \
+    .idle   = ANIM_ShyGuy_Yellow_Idle, \
+    .walk   = ANIM_ShyGuy_Yellow_Walk, \
+    .run    = ANIM_ShyGuy_Yellow_Run, \
+    .chase  = ANIM_ShyGuy_Yellow_Run, \
+    .anim_4 = ANIM_ShyGuy_Yellow_Idle, \
+    .anim_5 = ANIM_ShyGuy_Yellow_Idle, \
+    .death  = ANIM_ShyGuy_Yellow_Hurt, \
+    .hit    = ANIM_ShyGuy_Yellow_Hurt, \
+    .anim_8 = ANIM_ShyGuy_Yellow_Hiding, \
+    .anim_9 = ANIM_ShyGuy_Yellow_Slouch, \
+    .anim_A = ANIM_ShyGuy_Yellow_Excited, \
+    .anim_B = ANIM_ShyGuy_Yellow_Crashed, \
+    .anim_C = ANIM_ShyGuy_Yellow_Tackle, \
+    .anim_D = ANIM_ShyGuy_Yellow_Idle, \
+    .anim_E = ANIM_ShyGuy_Yellow_Idle, \
+    .anim_F = ANIM_ShyGuy_Yellow_Idle, \
 }
 
 #define ANTI_GUY_ANIMS \
 { \
-    .idle   = ANIM_ShyGuy_Black_Anim01, \
-    .walk   = ANIM_ShyGuy_Black_Anim02, \
-    .run    = ANIM_ShyGuy_Black_Anim03, \
-    .chase  = ANIM_ShyGuy_Black_Anim02, \
-    .anim_4 = ANIM_ShyGuy_Black_Anim01, \
-    .anim_5 = ANIM_ShyGuy_Black_Anim01, \
-    .death  = ANIM_ShyGuy_Black_Anim0C, \
-    .hit    = ANIM_ShyGuy_Black_Anim0C, \
-    .anim_8 = ANIM_ShyGuy_Black_Anim15, \
-    .anim_9 = ANIM_ShyGuy_Black_Anim12, \
-    .anim_A = ANIM_ShyGuy_Black_Anim11, \
-    .anim_B = ANIM_ShyGuy_Black_Anim10, \
-    .anim_C = ANIM_ShyGuy_Black_Anim05, \
-    .anim_D = ANIM_ShyGuy_Black_Anim01, \
-    .anim_E = ANIM_ShyGuy_Black_Anim01, \
-    .anim_F = ANIM_ShyGuy_Black_Anim01, \
+    .idle   = ANIM_ShyGuy_Black_Idle, \
+    .walk   = ANIM_ShyGuy_Black_Walk, \
+    .run    = ANIM_ShyGuy_Black_Run, \
+    .chase  = ANIM_ShyGuy_Black_Walk, \
+    .anim_4 = ANIM_ShyGuy_Black_Idle, \
+    .anim_5 = ANIM_ShyGuy_Black_Idle, \
+    .death  = ANIM_ShyGuy_Black_Hurt, \
+    .hit    = ANIM_ShyGuy_Black_Hurt, \
+    .anim_8 = ANIM_ShyGuy_Black_Hiding, \
+    .anim_9 = ANIM_ShyGuy_Black_Slouch, \
+    .anim_A = ANIM_ShyGuy_Black_Excited, \
+    .anim_B = ANIM_ShyGuy_Black_Crashed, \
+    .anim_C = ANIM_ShyGuy_Black_Tackle, \
+    .anim_D = ANIM_ShyGuy_Black_Idle, \
+    .anim_E = ANIM_ShyGuy_Black_Idle, \
+    .anim_F = ANIM_ShyGuy_Black_Idle, \
 }
 
 // shy guys who avoid the player
 
 #define RED_AVOID_SHY_GUY_ANIMS \
 { \
-    .idle   = ANIM_ShyGuy_Red_Anim01, \
-    .walk   = ANIM_ShyGuy_Red_Anim02, \
-    .run    = ANIM_ShyGuy_Red_Anim04, \
-    .chase  = ANIM_ShyGuy_Red_Anim04, \
-    .anim_4 = ANIM_ShyGuy_Red_Anim01, \
-    .anim_5 = ANIM_ShyGuy_Red_Anim01, \
-    .death  = ANIM_ShyGuy_Red_Anim0C, \
-    .hit    = ANIM_ShyGuy_Red_Anim0C, \
-    .anim_8 = ANIM_ShyGuy_Red_Anim15, \
-    .anim_9 = ANIM_ShyGuy_Red_Anim12, \
-    .anim_A = ANIM_ShyGuy_Red_Anim11, \
-    .anim_B = ANIM_ShyGuy_Red_Anim10, \
-    .anim_C = ANIM_ShyGuy_Red_Anim05, \
-    .anim_D = ANIM_ShyGuy_Red_Anim01, \
-    .anim_E = ANIM_ShyGuy_Red_Anim01, \
-    .anim_F = ANIM_ShyGuy_Red_Anim01, \
+    .idle   = ANIM_ShyGuy_Red_Idle, \
+    .walk   = ANIM_ShyGuy_Red_Walk, \
+    .run    = ANIM_ShyGuy_Red_Dash, \
+    .chase  = ANIM_ShyGuy_Red_Dash, \
+    .anim_4 = ANIM_ShyGuy_Red_Idle, \
+    .anim_5 = ANIM_ShyGuy_Red_Idle, \
+    .death  = ANIM_ShyGuy_Red_Hurt, \
+    .hit    = ANIM_ShyGuy_Red_Hurt, \
+    .anim_8 = ANIM_ShyGuy_Red_Hiding, \
+    .anim_9 = ANIM_ShyGuy_Red_Slouch, \
+    .anim_A = ANIM_ShyGuy_Red_Excited, \
+    .anim_B = ANIM_ShyGuy_Red_Crashed, \
+    .anim_C = ANIM_ShyGuy_Red_Tackle, \
+    .anim_D = ANIM_ShyGuy_Red_Idle, \
+    .anim_E = ANIM_ShyGuy_Red_Idle, \
+    .anim_F = ANIM_ShyGuy_Red_Idle, \
 }
 
 #define BLUE_AVOID_SHY_GUY_ANIMS \
 { \
-    .idle   = ANIM_ShyGuy_Blue_Anim01, \
-    .walk   = ANIM_ShyGuy_Blue_Anim02, \
-    .run    = ANIM_ShyGuy_Blue_Anim04, \
-    .chase  = ANIM_ShyGuy_Blue_Anim04, \
-    .anim_4 = ANIM_ShyGuy_Blue_Anim01, \
-    .anim_5 = ANIM_ShyGuy_Blue_Anim01, \
-    .death  = ANIM_ShyGuy_Blue_Anim0C, \
-    .hit    = ANIM_ShyGuy_Blue_Anim0C, \
-    .anim_8 = ANIM_ShyGuy_Blue_Anim15, \
-    .anim_9 = ANIM_ShyGuy_Blue_Anim12, \
-    .anim_A = ANIM_ShyGuy_Blue_Anim11, \
-    .anim_B = ANIM_ShyGuy_Blue_Anim10, \
-    .anim_C = ANIM_ShyGuy_Blue_Anim05, \
-    .anim_D = ANIM_ShyGuy_Blue_Anim01, \
-    .anim_E = ANIM_ShyGuy_Blue_Anim01, \
-    .anim_F = ANIM_ShyGuy_Blue_Anim01, \
+    .idle   = ANIM_ShyGuy_Blue_Idle, \
+    .walk   = ANIM_ShyGuy_Blue_Walk, \
+    .run    = ANIM_ShyGuy_Blue_Dash, \
+    .chase  = ANIM_ShyGuy_Blue_Dash, \
+    .anim_4 = ANIM_ShyGuy_Blue_Idle, \
+    .anim_5 = ANIM_ShyGuy_Blue_Idle, \
+    .death  = ANIM_ShyGuy_Blue_Hurt, \
+    .hit    = ANIM_ShyGuy_Blue_Hurt, \
+    .anim_8 = ANIM_ShyGuy_Blue_Hiding, \
+    .anim_9 = ANIM_ShyGuy_Blue_Slouch, \
+    .anim_A = ANIM_ShyGuy_Blue_Excited, \
+    .anim_B = ANIM_ShyGuy_Blue_Crashed, \
+    .anim_C = ANIM_ShyGuy_Blue_Tackle, \
+    .anim_D = ANIM_ShyGuy_Blue_Idle, \
+    .anim_E = ANIM_ShyGuy_Blue_Idle, \
+    .anim_F = ANIM_ShyGuy_Blue_Idle, \
 }
 
 #define GREEN_AVOID_SHY_GUY_ANIMS \
 { \
-    .idle   = ANIM_ShyGuy_Green_Anim01, \
-    .walk   = ANIM_ShyGuy_Green_Anim02, \
-    .run    = ANIM_ShyGuy_Green_Anim04, \
-    .chase  = ANIM_ShyGuy_Green_Anim04, \
-    .anim_4 = ANIM_ShyGuy_Green_Anim01, \
-    .anim_5 = ANIM_ShyGuy_Green_Anim01, \
-    .death  = ANIM_ShyGuy_Green_Anim0C, \
-    .hit    = ANIM_ShyGuy_Green_Anim0C, \
-    .anim_8 = ANIM_ShyGuy_Green_Anim15, \
-    .anim_9 = ANIM_ShyGuy_Green_Anim12, \
-    .anim_A = ANIM_ShyGuy_Green_Anim11, \
-    .anim_B = ANIM_ShyGuy_Green_Anim10, \
-    .anim_C = ANIM_ShyGuy_Green_Anim05, \
-    .anim_D = ANIM_ShyGuy_Green_Anim01, \
-    .anim_E = ANIM_ShyGuy_Green_Anim01, \
-    .anim_F = ANIM_ShyGuy_Green_Anim01, \
+    .idle   = ANIM_ShyGuy_Green_Idle, \
+    .walk   = ANIM_ShyGuy_Green_Walk, \
+    .run    = ANIM_ShyGuy_Green_Dash, \
+    .chase  = ANIM_ShyGuy_Green_Dash, \
+    .anim_4 = ANIM_ShyGuy_Green_Idle, \
+    .anim_5 = ANIM_ShyGuy_Green_Idle, \
+    .death  = ANIM_ShyGuy_Green_Hurt, \
+    .hit    = ANIM_ShyGuy_Green_Hurt, \
+    .anim_8 = ANIM_ShyGuy_Green_Hiding, \
+    .anim_9 = ANIM_ShyGuy_Green_Slouch, \
+    .anim_A = ANIM_ShyGuy_Green_Excited, \
+    .anim_B = ANIM_ShyGuy_Green_Crashed, \
+    .anim_C = ANIM_ShyGuy_Green_Tackle, \
+    .anim_D = ANIM_ShyGuy_Green_Idle, \
+    .anim_E = ANIM_ShyGuy_Green_Idle, \
+    .anim_F = ANIM_ShyGuy_Green_Idle, \
 }
 
 #define PINK_AVOID_SHY_GUY_ANIMS \
 { \
-    .idle   = ANIM_ShyGuy_Pink_Anim01, \
-    .walk   = ANIM_ShyGuy_Pink_Anim02, \
-    .run    = ANIM_ShyGuy_Pink_Anim04, \
-    .chase  = ANIM_ShyGuy_Pink_Anim04, \
-    .anim_4 = ANIM_ShyGuy_Pink_Anim01, \
-    .anim_5 = ANIM_ShyGuy_Pink_Anim01, \
-    .death  = ANIM_ShyGuy_Pink_Anim0C, \
-    .hit    = ANIM_ShyGuy_Pink_Anim0C, \
-    .anim_8 = ANIM_ShyGuy_Pink_Anim15, \
-    .anim_9 = ANIM_ShyGuy_Pink_Anim12, \
-    .anim_A = ANIM_ShyGuy_Pink_Anim11, \
-    .anim_B = ANIM_ShyGuy_Pink_Anim10, \
-    .anim_C = ANIM_ShyGuy_Pink_Anim05, \
-    .anim_D = ANIM_ShyGuy_Pink_Anim01, \
-    .anim_E = ANIM_ShyGuy_Pink_Anim01, \
-    .anim_F = ANIM_ShyGuy_Pink_Anim01, \
+    .idle   = ANIM_ShyGuy_Pink_Idle, \
+    .walk   = ANIM_ShyGuy_Pink_Walk, \
+    .run    = ANIM_ShyGuy_Pink_Dash, \
+    .chase  = ANIM_ShyGuy_Pink_Dash, \
+    .anim_4 = ANIM_ShyGuy_Pink_Idle, \
+    .anim_5 = ANIM_ShyGuy_Pink_Idle, \
+    .death  = ANIM_ShyGuy_Pink_Hurt, \
+    .hit    = ANIM_ShyGuy_Pink_Hurt, \
+    .anim_8 = ANIM_ShyGuy_Pink_Hiding, \
+    .anim_9 = ANIM_ShyGuy_Pink_Slouch, \
+    .anim_A = ANIM_ShyGuy_Pink_Excited, \
+    .anim_B = ANIM_ShyGuy_Pink_Crashed, \
+    .anim_C = ANIM_ShyGuy_Pink_Tackle, \
+    .anim_D = ANIM_ShyGuy_Pink_Idle, \
+    .anim_E = ANIM_ShyGuy_Pink_Idle, \
+    .anim_F = ANIM_ShyGuy_Pink_Idle, \
 }
 
 #define YELLOW_AVOID_SHY_GUY_ANIMS \
 { \
-    .idle   = ANIM_ShyGuy_Yellow_Anim01, \
-    .walk   = ANIM_ShyGuy_Yellow_Anim02, \
-    .run    = ANIM_ShyGuy_Yellow_Anim04, \
-    .chase  = ANIM_ShyGuy_Yellow_Anim04, \
-    .anim_4 = ANIM_ShyGuy_Yellow_Anim01, \
-    .anim_5 = ANIM_ShyGuy_Yellow_Anim01, \
-    .death  = ANIM_ShyGuy_Yellow_Anim0C, \
-    .hit    = ANIM_ShyGuy_Yellow_Anim0C, \
-    .anim_8 = ANIM_ShyGuy_Yellow_Anim15, \
-    .anim_9 = ANIM_ShyGuy_Yellow_Anim12, \
-    .anim_A = ANIM_ShyGuy_Yellow_Anim11, \
-    .anim_B = ANIM_ShyGuy_Yellow_Anim10, \
-    .anim_C = ANIM_ShyGuy_Yellow_Anim05, \
-    .anim_D = ANIM_ShyGuy_Yellow_Anim01, \
-    .anim_E = ANIM_ShyGuy_Yellow_Anim01, \
-    .anim_F = ANIM_ShyGuy_Yellow_Anim01, \
+    .idle   = ANIM_ShyGuy_Yellow_Idle, \
+    .walk   = ANIM_ShyGuy_Yellow_Walk, \
+    .run    = ANIM_ShyGuy_Yellow_Dash, \
+    .chase  = ANIM_ShyGuy_Yellow_Dash, \
+    .anim_4 = ANIM_ShyGuy_Yellow_Idle, \
+    .anim_5 = ANIM_ShyGuy_Yellow_Idle, \
+    .death  = ANIM_ShyGuy_Yellow_Hurt, \
+    .hit    = ANIM_ShyGuy_Yellow_Hurt, \
+    .anim_8 = ANIM_ShyGuy_Yellow_Hiding, \
+    .anim_9 = ANIM_ShyGuy_Yellow_Slouch, \
+    .anim_A = ANIM_ShyGuy_Yellow_Excited, \
+    .anim_B = ANIM_ShyGuy_Yellow_Crashed, \
+    .anim_C = ANIM_ShyGuy_Yellow_Tackle, \
+    .anim_D = ANIM_ShyGuy_Yellow_Idle, \
+    .anim_E = ANIM_ShyGuy_Yellow_Idle, \
+    .anim_F = ANIM_ShyGuy_Yellow_Idle, \
 }

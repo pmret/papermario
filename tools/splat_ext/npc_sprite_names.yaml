@@ -3427,47 +3427,47 @@ ShyGuy:
     - Variant04
     - Variant05
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
-    - Raster28
+    - Idle1
+    - Idle2
+    - Step1
+    - Step2
+    - Step3
+    - Step4
+    - Excited
+    - Neutral
+    - Hurt1
+    - Hurt2
+    - BurnStill
+    - Jump
+    - FallingKick1
+    - FallingKick2
+    - Tackle1
+    - ArmsUp
+    - Bow1
+    - Bow2
+    - Bow3
+    - Bow4
+    - Dash1
+    - Dash2
+    - Dash3
+    - Crashed1
+    - Crashed2
+    - Tackle2
+    - Slouch
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - BurnHurt1
+    - BurnHurt2
+    - Smoke1
+    - Smoke2
+    - Smoke3
+    - Smoke4
+    - Smoke5
+    - Smoke6
+    - Smoke7
+    - Hiding1
+    - Hiding2
   palettes:
     - Red
     - Blue
@@ -3495,56 +3495,56 @@ ShyGuy:
     - Black_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Dash
+    - Tackle
+    - ArmsUp
+    - Bow
+    - Neutral
+    - Jump
+    - FallingKick
+    - NeutralAlt
+    - Hurt
+    - BurnHurt
+    - BurnStill
+    - Smoke
+    - Crashed
+    - Excited
+    - Slouch
+    - Dizzy
+    - Scared
+    - Hiding
 GrooveGuy:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
+    - Neutral
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - Step1
+    - Step2
+    - Step3
+    - Jump1
+    - Jump2
+    - Asleep
+    - Hurt1
+    - Hurt2
+    - BurnHurt1
+    - BurnHurt2
+    - BurnStill
+    - LeanLeft
+    - Forward
+    - LeanRight
+    - Dizzy
+    - Swing1
+    - Swing2
+    - HurtStill
+    - Panic1
+    - Panic2
+    - Panic3
   palettes:
     - Default
     - Poisoned
@@ -3555,24 +3555,24 @@ GrooveGuy:
     - Unused_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
+    - Still
+    - Idle
+    - Shuffle
+    - Walk
+    - Run
+    - Jump
+    - Sleep
+    - Dizzy
+    - Hurt
+    - HurtStill
+    - Swing
+    - LeanLeft
+    - Forward
+    - LeanRight
+    - BurnHurt
+    - BurnStill
+    - Panic
+    - Scared
 SkyGuy:
   frames:
     - Raster00
@@ -3697,33 +3697,33 @@ PyroGuy:
     - Variant00
     - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
+    - Idle1
+    - Idle2
+    - Idle3
+    - StepBody1
+    - StepBody2
+    - StepBody3
+    - Hurt1
+    - Hurt2
+    - Sleep1
+    - Sleep2
+    - Sleep3
+    - Tackle1
+    - Tackle2
+    - Dizzy1
+    - Dizzy2
+    - StepFeet1
+    - StepFeet2
+    - StepFeet3
+    - RFootStep
+    - DashFeet1
+    - DashFeet2
+    - DashFeet3
+    - LFootIdle1
+    - RFootIdle1
+    - LFootIdle2
+    - RFootIdle2
+    - Dizzy3
   palettes:
     - Default
     - Glow
@@ -3734,55 +3734,55 @@ PyroGuy:
     - Shocked
     - Glow_Shocked
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Dash
+    - Tackle
+    - Hurt
+    - Sleep
+    - Dizzy
+    - Scared
 SpyGuy:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
+    - Idle1
+    - Idle2
+    - Step1
+    - Step2
+    - Step3
+    - Step4
+    - Dash1
+    - Dash2
+    - Dash3
+    - DrawSling1
+    - DrawSling2
+    - DrawSling3
+    - DrawSling4
+    - FireSling1
+    - FireSling2
+    - LeanBack1
+    - LeanBack2
+    - LeanBack3
+    - Scared1
+    - Scared2
+    - BurnHurt1
+    - BurnHurt2
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - RaiseHammer
+    - SwingHammer1
+    - SwingHammer2
+    - SwingHammer3
+    - Rock
+    - BurnStill
+    - Slingshot
+    - HammerSwing1
+    - HammerSwing2
+    - HammerSwing3
+    - Jump
+    - Crouch
   palettes:
     - Default
     - Poisoned
@@ -3790,33 +3790,33 @@ SpyGuy:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
-    - Anim18
-    - Anim19
-    - Anim1A
+    - StillSling
+    - StillHammer
+    - IdleSling
+    - IdleHammer
+    - WalkSling
+    - RunSling
+    - DashSling
+    - DashHammer
+    - SlingAttack
+    - LeanBack
+    - HammerAttack
+    - Hurt
+    - HurtStill
+    - BurnHurt
+    - BurnStill
+    - Sleep
+    - Stone
+    - Scared
+    - Dizzy
+    - RaiseHammerAlt
+    - SwingHammerAlt
+    - DrawSling
+    - FireSling
+    - JumpSling
+    - JumpHammer
+    - SwitchToSling
+    - SwitchToHammer
 MediGuy:
   variations:
     - Variant00
@@ -3826,14 +3826,14 @@ MediGuy:
     - Variant04
     - Variant05
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
+    - Idle1
+    - Idle2
+    - Idle3
+    - Duck
+    - ArmsUp
+    - Hurt
+    - BurnHurt
+    - BurnStill
   palettes:
     - Default
     - Blue
@@ -3861,18 +3861,18 @@ MediGuy:
     - Black_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
+    - Still
+    - Idle
+    - FlySlow
+    - FlyFast
+    - Sleep
+    - ArmsUp
+    - Hurt
+    - HurtStill
+    - BurnHurt
+    - BurnStill
+    - Dizzy
+    - Scared
 Fuzzipede:
   frames:
     - Raster00
@@ -6779,44 +6779,44 @@ ShySquadGuy:
     - Variant04
     - Variant05
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
+    - Idle1
+    - Idle2
+    - Step1
+    - Step2
+    - Step3
+    - Step4
+    - Excited
+    - Neutral
+    - Hurt1
+    - Hurt2
+    - BurnStill
+    - Jump
+    - FallingKick1
+    - FallingKick2
+    - Tackle1
+    - ArmsUp
+    - Bow1
+    - Bow2
+    - Bow3
+    - Bow4
+    - Dash1
+    - Dash2
+    - Dash3
+    - Crashed1
+    - Crashed2
+    - Tackle2
+    - Slouch
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - BurnHurt1
+    - BurnHurt2
+    - Panic1
+    - Panic2
+    - Panic3
+    - Panic4
+    - Hiding1
+    - Hiding2
   palettes:
     - Default
     - Blue
@@ -6844,100 +6844,100 @@ ShySquadGuy:
     - Black_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Dash
+    - Tackle
+    - ArmsUp
+    - Bow
+    - Panic
+    - Neutral
+    - Jump
+    - FallingKick
+    - NeutralAlt
+    - Hurt
+    - BurnHurt
+    - BurnStill
+    - Crashed
+    - Excited
+    - Slouch
+    - Dizzy
+    - Scared
+    - Hiding
 MarshalGuy:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
+    - Idle1
+    - Idle2
+    - Crashed1
+    - Crashed2
+    - Hiding1
+    - Hiding2
+    - Signal1
+    - Signal2
+    - Signal3
+    - Signal4
+    - Hurt1
+    - Hurt2
+    - HurtStill
+    - Panic1
+    - Panic2
+    - Panic3
+    - Panic4
+    - Panic5
+    - BatonRed
+    - BatonBlue
+    - SignalFrantic1
+    - SignalFrantic2
+    - SignalFrantic3
+    - Step1
+    - Step2
+    - Step3
+    - Step4
   palettes:
     - Default
     - Poisoned
     - Dizzy
     - Shocked
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
+    - Still
+    - Idle
+    - Crashed
+    - Hiding
+    - Signal
+    - SignalFaster
+    - SignalStill
+    - SignalStop
+    - SignalUp
+    - SignalFrantic
+    - Hurt
+    - HurtStill
+    - Panic
+    - BatonRed
+    - BatonBlue
+    - Run
 StiltGuy:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
+    - Stilt
+    - Idle1
+    - Idle2
+    - FallArms
+    - JumpArms
+    - FallBody
+    - JumpBody
+    - Hurt1
+    - Hurt2
+    - BurnHurt1
+    - BurnHurt2
+    - WalkBody1
+    - WalkArms1
+    - WalkBody2
+    - WalkArms2
+    - WalkBody3
+    - WalkArms3
+    - WalkBody4
+    - WalkArms4
   palettes:
     - Default
     - Poisoned
@@ -6945,39 +6945,39 @@ StiltGuy:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Fall
+    - Jump
+    - Hurt
+    - HurtStill
+    - Stilts
+    - BurnHurt
+    - BurnStill
 StiltGuyUnfold:
   variations:
     - Variant00
     - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
+    - Whole
+    - Segment1
+    - Segment2
+    - Segment3
+    - Segment4
   palettes:
     - Default
     - Alt
     - Darker
     - Dark
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
+    - Segment1
+    - Segment2
+    - Segment3
+    - Segment4
+    - Whole
+    - Unfold
 ShyStackGuy:
   variations:
     - Variant00
@@ -6987,23 +6987,23 @@ ShyStackGuy:
     - Variant04
     - Variant05
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
+    - Idle1
+    - Idle2
+    - Hurt1
+    - Hurt2
+    - BurnHurt1
+    - BurnHurt2
+    - Fall1
+    - Fall2
+    - Dizzy
+    - BurnStill
+    - Draw1
+    - Draw2
+    - Draw3
+    - Draw4
+    - Draw5
+    - Fire1
+    - Fire2
   palettes:
     - Default
     - Blue
@@ -7031,63 +7031,63 @@ ShyStackGuy:
     - Black_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
-    - Anim18
-    - Anim19
-    - Anim1A
-    - Anim1B
-    - Anim1C
-    - Anim1D
-    - Anim1E
-    - Anim1F
-    - Anim20
-    - Anim21
-    - Anim22
+    - 4xStill
+    - 3xStill
+    - 2xStill
+    - 1xStill
+    - 4xIdle
+    - 3xIdle
+    - 2xIdle
+    - 1xIdle
+    - 4xHurt
+    - 3xHurt
+    - 2xHurt
+    - 1xHurt
+    - 4xDizzy
+    - 3xDizzy
+    - 2xDizzy
+    - 1xDizzy
+    - 4xBurnHurt
+    - 3xBurnHurt
+    - 2xBurnHurt
+    - 1xBurnHurt
+    - 4xBurnStill
+    - 3xBurnStill
+    - 2xBurnStill
+    - 1xBurnStill
+    - 3xFall
+    - 2xFall
+    - 1xFall
+    - 4xDraw
+    - 3xDraw
+    - 2xDraw
+    - 1xDraw
+    - 4xFire
+    - 3xFire
+    - 2xFire
+    - 1xFire
 ShyStackUnfold:
   variations:
     - Variant00
     - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
+    - Whole
+    - Segment1
+    - Segment2
+    - Segment3
+    - Segment4
   palettes:
     - Default
     - Alt
     - Darker
     - Dark
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
+    - Whole
+    - Segment1
+    - Segment2
+    - Segment3
+    - Segment4
+    - Unfold
 ShyStackDamage:
   variations:
     - Variant00
@@ -7097,10 +7097,10 @@ ShyStackDamage:
     - Variant04
     - Variant05
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
+    - Hurt1
+    - Hurt2
+    - BurnHurt1
+    - BurnHurt2
   palettes:
     - Default
     - Blue
@@ -7127,15 +7127,15 @@ ShyStackDamage:
     - Unused11
     - Unused12
   animations:
-    - Anim00
-    - Anim01
+    - Hurt
+    - BurnHurt
 ShyStackRock:
   frames:
-    - Raster00
+    - Rock
   palettes:
     - Default
   animations:
-    - Anim00
+    - Still
 GeneralGuy:
   frames:
     - Raster00
@@ -7192,19 +7192,19 @@ GeneralGuy:
     - Anim11
 GeneralGuyBomb:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
+    - Bomb
+    - Burned
+    - Fuse1
+    - Fuse2
+    - Fuse3
   palettes:
     - Default
     - Gray
     - Fuse
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
+    - Still
+    - Lit
+    - Burned
 TankGuy:
   variations:
     - Variant00

@@ -343,7 +343,7 @@ EvtScript N(EVS_NpcInit_ShyGuy_Loner) = {
     IfLt(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_ShyGuy_Loner)))
         Call(SetNpcPos, NPC_SELF, 120, 0, 0)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim02)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Walk)
     Else
         Call(RemoveNpc, NPC_SELF)
     EndIf
@@ -374,7 +374,7 @@ EvtScript N(EVS_NpcInit_ShyGuy_Crowd) = {
             BufRead3(LVar1, LVar2, LVar3)
         EndLoop
         Call(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim02)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Walk)
     Else
         Call(RemoveNpc, NPC_SELF)
     EndIf

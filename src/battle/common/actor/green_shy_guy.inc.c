@@ -1,27 +1,26 @@
 #define NAMESPACE A(green_shy_guy)
 
-#define ANIM_SHYGUY_Anim00 ANIM_ShyGuy_Green_Anim00
-#define ANIM_SHYGUY_Anim01 ANIM_ShyGuy_Green_Anim01
-#define ANIM_SHYGUY_Anim02 ANIM_ShyGuy_Green_Anim02
-#define ANIM_SHYGUY_Anim03 ANIM_ShyGuy_Green_Anim03
-#define ANIM_SHYGUY_Anim04 ANIM_ShyGuy_Green_Anim04
-#define ANIM_SHYGUY_Anim05 ANIM_ShyGuy_Green_Anim05
-#define ANIM_SHYGUY_Anim06 ANIM_ShyGuy_Green_Anim06
-#define ANIM_SHYGUY_Anim07 ANIM_ShyGuy_Green_Anim07
-#define ANIM_SHYGUY_Anim08 ANIM_ShyGuy_Green_Anim08
-#define ANIM_SHYGUY_Anim09 ANIM_ShyGuy_Green_Anim09
-#define ANIM_SHYGUY_Anim0A ANIM_ShyGuy_Green_Anim0A
-#define ANIM_SHYGUY_Anim0B ANIM_ShyGuy_Green_Anim0B
-#define ANIM_SHYGUY_Anim0C ANIM_ShyGuy_Green_Anim0C
-#define ANIM_SHYGUY_Anim0D ANIM_ShyGuy_Green_Anim0D
-#define ANIM_SHYGUY_Anim0E ANIM_ShyGuy_Green_Anim0E
-#define ANIM_SHYGUY_Anim0F ANIM_ShyGuy_Green_Anim0F
-#define ANIM_SHYGUY_Anim10 ANIM_ShyGuy_Green_Anim10
-#define ANIM_SHYGUY_Anim11 ANIM_ShyGuy_Green_Anim11
-#define ANIM_SHYGUY_Anim12 ANIM_ShyGuy_Green_Anim12
-#define ANIM_SHYGUY_Anim13 ANIM_ShyGuy_Green_Anim13
-#define ANIM_SHYGUY_Anim14 ANIM_ShyGuy_Green_Anim14
-#define ANIM_SHYGUY_Anim15 ANIM_ShyGuy_Green_Anim15
+#define ANIM_SHYGUY_Still           ANIM_ShyGuy_Green_Still
+#define ANIM_SHYGUY_Idle            ANIM_ShyGuy_Green_Idle
+#define ANIM_SHYGUY_Walk            ANIM_ShyGuy_Green_Walk
+#define ANIM_SHYGUY_Run             ANIM_ShyGuy_Green_Run
+#define ANIM_SHYGUY_Dash            ANIM_ShyGuy_Green_Dash
+#define ANIM_SHYGUY_Tackle          ANIM_ShyGuy_Green_Tackle
+#define ANIM_SHYGUY_ArmsUp          ANIM_ShyGuy_Green_ArmsUp
+#define ANIM_SHYGUY_Bow             ANIM_ShyGuy_Green_Bow
+#define ANIM_SHYGUY_Neutral         ANIM_ShyGuy_Green_Neutral
+#define ANIM_SHYGUY_Jump            ANIM_ShyGuy_Green_Jump
+#define ANIM_SHYGUY_FallingKick     ANIM_ShyGuy_Green_FallingKick
+#define ANIM_SHYGUY_NeutralAlt      ANIM_ShyGuy_Green_NeutralAlt
+#define ANIM_SHYGUY_Hurt            ANIM_ShyGuy_Green_Hurt
+#define ANIM_SHYGUY_BurnHurt        ANIM_ShyGuy_Green_BurnHurt
+#define ANIM_SHYGUY_BurnStill       ANIM_ShyGuy_Green_BurnStill
+#define ANIM_SHYGUY_Smoke           ANIM_ShyGuy_Green_Smoke
+#define ANIM_SHYGUY_Crashed         ANIM_ShyGuy_Green_Crashed
+#define ANIM_SHYGUY_Excited         ANIM_ShyGuy_Green_Excited
+#define ANIM_SHYGUY_Slouch          ANIM_ShyGuy_Green_Slouch
+#define ANIM_SHYGUY_Dizzy           ANIM_ShyGuy_Green_Dizzy
+#define ANIM_SHYGUY_Scared          ANIM_ShyGuy_Green_Scared
+#define ANIM_SHYGUY_Hiding          ANIM_ShyGuy_Green_Hiding
 
 #include "shy_guy_base.inc.c"
-

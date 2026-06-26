@@ -85,7 +85,7 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_MarshalGuy_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_MarshalGuy_Idle,
     STATUS_END,
 };
 
@@ -97,17 +97,17 @@ EvtScript N(EVS_Init) = {
     Call(ForceHomePos, ACTOR_SELF, 180, 0, 0)
     Call(HPBarToHome, ACTOR_SELF)
     Thread
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim0F)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Run)
         Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
         Call(SetGoalPos, ACTOR_SELF, 0, 0, 0)
         Call(RunToGoal, ACTOR_SELF, 0, false)
         Call(SetActorYaw, ACTOR_SELF, 180)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_GENERAL_WHISTLE)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim04)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Signal)
         Wait(20)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim05)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_SignalFaster)
         Wait(15)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim09)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_SignalFrantic)
     EndThread
     Return
     End
@@ -137,16 +137,16 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_SPIKE_TAUNT)
         CaseOrEq(EVENT_DEATH)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim0A)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Hurt)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.5))
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 35)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
             Call(SetActorYaw, ACTOR_SELF, 0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Crashed)
             Wait(24)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim03)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Hiding)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Add(LVar0, 5)
             Add(LVar1, 10)
@@ -156,7 +156,7 @@ EvtScript N(EVS_HandleEvent) = {
             EndLoop
             Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B)
             Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Anim0C)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MarshalGuy_Panic)
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
             Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_STEAM_EMITTER)
             Call(SetGoalPos, ACTOR_SELF, -200, 0, 20)
@@ -169,21 +169,21 @@ EvtScript N(EVS_HandleEvent) = {
             Call(HPBarToHome, ACTOR_SELF)
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MarshalGuy_Anim01)
+            SetConst(LVar1, ANIM_MarshalGuy_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_30)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MarshalGuy_Anim0A)
+            SetConst(LVar1, ANIM_MarshalGuy_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(1000)
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MarshalGuy_Anim01)
-            SetConst(LVar2, ANIM_MarshalGuy_Anim0A)
+            SetConst(LVar1, ANIM_MarshalGuy_Idle)
+            SetConst(LVar2, ANIM_MarshalGuy_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseDefault
-            SetConst(LVar1, ANIM_MarshalGuy_Anim0A)
+            SetConst(LVar1, ANIM_MarshalGuy_Hurt)
             Call(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
             Wait(20)
     EndSwitch

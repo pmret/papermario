@@ -336,17 +336,17 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_ShySquadGuy_Anim01,
-    STATUS_KEY_STONE,     ANIM_ShySquadGuy_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_ShySquadGuy_Anim12,
-    STATUS_KEY_POISON,    ANIM_ShySquadGuy_Anim01,
-    STATUS_KEY_STOP,      ANIM_ShySquadGuy_Anim00,
-    STATUS_KEY_STATIC,    ANIM_ShySquadGuy_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_ShySquadGuy_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_ShySquadGuy_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_ShySquadGuy_Anim13,
-    STATUS_KEY_DIZZY,     ANIM_ShySquadGuy_Anim13,
-    STATUS_KEY_UNUSED,    ANIM_ShySquadGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_ShySquadGuy_Idle,
+    STATUS_KEY_STONE,     ANIM_ShySquadGuy_Still,
+    STATUS_KEY_SLEEP,     ANIM_ShySquadGuy_Slouch,
+    STATUS_KEY_POISON,    ANIM_ShySquadGuy_Idle,
+    STATUS_KEY_STOP,      ANIM_ShySquadGuy_Still,
+    STATUS_KEY_STATIC,    ANIM_ShySquadGuy_Still,
+    STATUS_KEY_PARALYZE,  ANIM_ShySquadGuy_Still,
+    STATUS_KEY_PARALYZE,  ANIM_ShySquadGuy_Still,
+    STATUS_KEY_DIZZY,     ANIM_ShySquadGuy_Dizzy,
+    STATUS_KEY_DIZZY,     ANIM_ShySquadGuy_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_ShySquadGuy_Still,
     STATUS_END,
 };
 
@@ -483,14 +483,14 @@ EvtScript N(EVS_HandlePhase) = {
             IfEq(LVar0, 0)
                 Call(SetActorVar, ACTOR_SELF, AVAR_SquadArrived, true)
                 LOOP_MEMBERS(LVar0)
-                    Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Anim03)
+                    Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Run)
                     Add(LVar0, 1)
                 EndLoop
                 Call(SetHomePos, ACTOR_SELF, 65, 0, -10)
                 Call(HPBarToHome, ACTOR_SELF)
                 Call(SetActorYaw, ACTOR_SELF, 0)
                 Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
-                Set(LVar1, ANIM_ShySquadGuy_Anim03)
+                Set(LVar1, ANIM_ShySquadGuy_Run)
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SHY_GUY_SCREAMS1)
                 ExecWait(N(EVS_MoveSquadHome))
                 Wait(10)
@@ -500,15 +500,15 @@ EvtScript N(EVS_HandlePhase) = {
                 Call(MoveBattleCamOver, 30)
                 Wait(30)
                 Call(EnableBattleStatusBar, false)
-                Call(ActorSpeak, MSG_CH4_0065, ACTOR_SELF, PRT_MEMBER_08, ANIM_ShySquadGuy_Anim11, ANIM_ShySquadGuy_Anim11)
+                Call(ActorSpeak, MSG_CH4_0065, ACTOR_SELF, PRT_MEMBER_08, ANIM_ShySquadGuy_Excited, ANIM_ShySquadGuy_Excited)
                 LOOP_MEMBERS(LVar0)
-                    Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Anim0A)
+                    Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Jump)
                     Add(LVar0, 1)
                 EndLoop
                 Call(EndActorSpeech, ACTOR_SELF, PRT_MAIN, -1, -1)
                 Call(EnableBattleStatusBar, true)
                 LOOP_MEMBERS(LVar0)
-                    Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Anim01)
+                    Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Idle)
                     Add(LVar0, 1)
                 EndLoop
             EndIf
@@ -582,7 +582,7 @@ EvtScript N(EVS_MoveSquadHome) = {
             Add(LVarA, LVarB)
             IfGe(LVar0, LVarA)
                 Call(SetPartYaw, ACTOR_SELF, LVar0, 0)
-                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Anim01)
+                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Idle)
             EndIf
         EndThread
         Add(LVar0, 1)
@@ -831,83 +831,83 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             Call(SetActorVar, ACTOR_SELF, AVAR_HasBeenAttacked, 1)
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_ReduceCrowdSize))
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_HitReaction))
         EndCaseGroup
         CaseEq(EVENT_DEATH)
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_ReduceCrowdSize))
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_HitReaction))
             Wait(10)
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_Death))
             Return
         CaseEq(EVENT_BURN_HIT)
             Call(SetActorVar, ACTOR_SELF, AVAR_HasBeenAttacked, 1)
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0E)
+            SetConst(LVar1, ANIM_ShySquadGuy_BurnHurt)
             ExecWait(N(EVS_ReduceCrowdSize))
             LOOP_MEMBERS(LVar0)
-                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Anim0E)
+                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_BurnHurt)
                 Add(LVar0, 1)
             EndLoop
             Wait(20)
             LOOP_MEMBERS(LVar0)
-                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Anim0F)
+                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_BurnStill)
                 Add(LVar0, 1)
             EndLoop
             Wait(15)
         CaseEq(EVENT_BURN_DEATH)
             Call(SetActorVar, ACTOR_SELF, AVAR_HasBeenAttacked, 1)
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0E)
+            SetConst(LVar1, ANIM_ShySquadGuy_BurnHurt)
             ExecWait(N(EVS_ReduceCrowdSize))
             LOOP_MEMBERS(LVar0)
-                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Anim0E)
+                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_BurnHurt)
                 Add(LVar0, 1)
             EndLoop
             Wait(20)
             LOOP_MEMBERS(LVar0)
-                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Anim0F)
+                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_BurnStill)
                 Add(LVar0, 1)
             EndLoop
             Wait(15)
             Wait(10)
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0F)
+            SetConst(LVar1, ANIM_ShySquadGuy_BurnStill)
             ExecWait(N(EVS_Death))
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             Call(SetActorVar, ACTOR_SELF, AVAR_HasBeenAttacked, 1)
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_ReduceCrowdSize))
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_HitReaction))
         CaseEq(EVENT_SPIN_SMASH_DEATH)
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_ReduceCrowdSize))
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_HitReaction))
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_Death))
             Return
         CaseEq(EVENT_SHOCK_HIT)
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_ReduceCrowdSize))
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_Shock))
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(MoveBattleCamOver, 20)
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
             Call(SetActorYaw, ACTOR_SELF, 180)
-            Set(LVar1, ANIM_ShySquadGuy_Anim03)
+            Set(LVar1, ANIM_ShySquadGuy_Run)
             ExecWait(N(EVS_MoveSquadHome))
         CaseEq(EVENT_SHOCK_DEATH)
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_ReduceCrowdSize))
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_Shock))
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(N(EVS_Death))
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
@@ -918,39 +918,39 @@ EvtScript N(EVS_HandleEvent) = {
             IfFlag(LVar2, BS_FLAGS1_PARTNER_ACTING)
                 Call(GetMenuSelection, LVar0, LVar1, LVar2)
                 IfEq(LVar2, MOVE_SPOOK)
-                    Set(LVar1, ANIM_ShySquadGuy_Anim01)
+                    Set(LVar1, ANIM_ShySquadGuy_Idle)
                     ExecWait(N(EVS_SetMembersAnimation))
                     Call(UseIdleAnimation, ACTOR_SELF, true)
                     Return
                 EndIf
             EndIf
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim01)
+            SetConst(LVar1, ANIM_ShySquadGuy_Idle)
             ExecWait(N(EVS_HitReaction))
         EndCaseGroup
         CaseEq(EVENT_BEGIN_AIR_LIFT)
-            Set(LVar1, ANIM_ShySquadGuy_Anim08)
+            Set(LVar1, ANIM_ShySquadGuy_Panic)
             ExecWait(N(EVS_SetMembersAnimation))
             Wait(1000)
         CaseEq(EVENT_END_FIRST_STRIKE)
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
             Call(SetActorYaw, ACTOR_SELF, 180)
-            Set(LVar1, ANIM_ShySquadGuy_Anim03)
+            Set(LVar1, ANIM_ShySquadGuy_Run)
             ExecWait(N(EVS_MoveSquadHome))
             Call(HPBarToHome, ACTOR_SELF)
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim01)
+            SetConst(LVar1, ANIM_ShySquadGuy_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_30)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_ShySquadGuy_Anim0D)
+            SetConst(LVar1, ANIM_ShySquadGuy_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(1000)
         CaseEq(EVENT_SCARE_AWAY)
         CaseDefault
     EndSwitch
-    Set(LVar1, ANIM_ShySquadGuy_Anim01)
+    Set(LVar1, ANIM_ShySquadGuy_Idle)
     ExecWait(N(EVS_SetMembersAnimation))
     Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
@@ -1145,7 +1145,7 @@ EvtScript N(EVS_Attack_Swarm) = {
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LARGE_CROWD_WALK)
     EndSwitch
     Set(LVar0, PRT_MEMBER_01)
-    Set(LVar1, ANIM_ShySquadGuy_Anim03)
+    Set(LVar1, ANIM_ShySquadGuy_Run)
     Loop(NUM_MEMBERS)
         Thread
             Call(GetActorPos, ACTOR_PLAYER, LVar2, LVar5, LVar3)
@@ -1177,9 +1177,9 @@ EvtScript N(EVS_Attack_Swarm) = {
         EndIf
         Call(RandInt, 100, LVar7)
         IfLt(LVar7, 50)
-            Set(LVar7, ANIM_ShySquadGuy_Anim0D)
+            Set(LVar7, ANIM_ShySquadGuy_Hurt)
         Else
-            Set(LVar7, ANIM_ShySquadGuy_Anim11)
+            Set(LVar7, ANIM_ShySquadGuy_Excited)
         EndIf
         Call(SetAnimation, ACTOR_SELF, LVar0, LVar7)
         Add(LVar0, 1)
@@ -1221,9 +1221,9 @@ EvtScript N(EVS_Attack_Swarm) = {
             EndSwitch
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
             Call(SetActorYaw, ACTOR_SELF, 180)
-            Set(LVar1, ANIM_ShySquadGuy_Anim04)
+            Set(LVar1, ANIM_ShySquadGuy_Dash)
             ExecWait(N(EVS_MoveSquadHome))
-            Set(LVar1, ANIM_ShySquadGuy_Anim01)
+            Set(LVar1, ANIM_ShySquadGuy_Idle)
             ExecWait(N(EVS_SetMembersAnimation))
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             Call(UseIdleAnimation, ACTOR_SELF, true)
@@ -1278,9 +1278,9 @@ EvtScript N(EVS_Attack_Swarm) = {
         CaseDefault
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LARGE_CROWD_WALK)
     EndSwitch
-    Set(LVar1, ANIM_ShySquadGuy_Anim04)
+    Set(LVar1, ANIM_ShySquadGuy_Dash)
     ExecWait(N(EVS_MoveSquadHome))
-    Set(LVar1, ANIM_ShySquadGuy_Anim01)
+    Set(LVar1, ANIM_ShySquadGuy_Idle)
     ExecWait(N(EVS_SetMembersAnimation))
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     Call(UseIdleAnimation, ACTOR_SELF, true)
@@ -1297,7 +1297,7 @@ EvtScript N(EVS_TakeTurn) = {
 EvtScript N(EVS_Flee) = {
     Call(EnableBattleStatusBar, false)
     LOOP_MEMBERS(LVar0)
-        Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Anim08)
+        Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Panic)
         Add(LVar0, 1)
     EndLoop
     Call(UseBattleCamPreset, BTL_CAM_ACTOR)
@@ -1309,7 +1309,7 @@ EvtScript N(EVS_Flee) = {
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 30)
     Set(LVar0, PRT_MEMBER_01)
-    Set(LVar1, ANIM_ShySquadGuy_Anim08)
+    Set(LVar1, ANIM_ShySquadGuy_Panic)
     Loop(NUM_MEMBERS - 1)
         Thread
             Call(RandInt, 100, LVar2)
@@ -1324,7 +1324,7 @@ EvtScript N(EVS_Flee) = {
     EndLoop
     Thread
         Set(LVar0, PRT_MEMBER_15)
-        Set(LVar1, ANIM_ShySquadGuy_Anim08)
+        Set(LVar1, ANIM_ShySquadGuy_Panic)
         Set(LVar2, 240)
         Set(LVar3, 0)
         SetF(LVar4, Float(6.0))
@@ -1372,7 +1372,7 @@ EvtScript N(EVS_Flee) = {
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_RUN_AWAY)
     EndThread
     Set(LVar0, PRT_MEMBER_01)
-    Set(LVar1, ANIM_ShySquadGuy_Anim08)
+    Set(LVar1, ANIM_ShySquadGuy_Panic)
     Loop(NUM_MEMBERS - 1)
         Thread
             Call(RandInt, 100, LVar2)
@@ -1417,7 +1417,7 @@ EvtScript N(EVS_Flee) = {
     EndThread
     Thread
         Set(LVar0, PRT_MEMBER_15)
-        Set(LVar1, ANIM_ShySquadGuy_Anim08)
+        Set(LVar1, ANIM_ShySquadGuy_Panic)
         Set(LVar2, -240)
         Set(LVar3, 0)
         SetF(LVar4, Float(10.0))

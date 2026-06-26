@@ -52,7 +52,7 @@ EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
     Call(PlayerMoveTo, -200, 0, 0)
     Set(LVar0, NPC_ShyGuy_01)
     Loop(9)
-        Call(SetNpcAnimation, LVar0, ANIM_ShyGuy_Red_Anim02)
+        Call(SetNpcAnimation, LVar0, ANIM_ShyGuy_Red_Walk)
         Add(LVar0, 1)
     EndLoop
     Call(SetNpcAnimation, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0C)
@@ -61,7 +61,7 @@ EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
     Wait(20 * DT)
     Set(LVar0, NPC_ShyGuy_01)
     Loop(9)
-        Call(SetNpcAnimation, LVar0, ANIM_ShyGuy_Red_Anim01)
+        Call(SetNpcAnimation, LVar0, ANIM_ShyGuy_Red_Idle)
         Add(LVar0, 1)
     EndLoop
     Call(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim02, ANIM_GeneralGuy_Anim0A, 0, MSG_CH4_0064)
@@ -251,7 +251,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy) = {
                     Loop(LVar0)
                         BufRead3(LVar1, LVar2, LVar3)
                     EndLoop
-                    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+                    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Run)
                     Call(SetNpcSpeed, NPC_SELF, Float(3.0))
                     Call(NpcMoveTo, NPC_SELF, LVar1, LVar2, LVar3)
                 EndThread
@@ -311,7 +311,7 @@ EvtScript N(EVS_BossDefeated_RunAway) = {
             Switch(LVar2)
                 CaseEq(op_CS_MOVE)
                     BufRead2(LVar3, LVar4)
-                    Call(SetNpcAnimation, LVar9, ANIM_ShyGuy_Red_Anim04)
+                    Call(SetNpcAnimation, LVar9, ANIM_ShyGuy_Red_Dash)
                     Call(SetNpcSpeed, LVar9, Float(8.0))
                     Call(NpcMoveTo, LVar9, LVar3, LVar4, 0)
                 CaseEq(op_CS_JUMP)
@@ -332,7 +332,7 @@ EvtScript N(EVS_BossDefeated_RunAway) = {
                     Thread
                         Wait(10)
                         Call(SetNpcRotation, LVar9, 0, 0, 0)
-                        Call(SetNpcAnimation, LVar9, ANIM_ShyGuy_Red_Anim10)
+                        Call(SetNpcAnimation, LVar9, ANIM_ShyGuy_Red_Crashed)
                         Call(PlayerFaceNpc, LVar9, 3)
                         Call(NpcFaceNpc, NPC_PARTNER, LVar9, 3)
                     EndThread
@@ -346,7 +346,7 @@ EvtScript N(EVS_BossDefeated_RunAway) = {
                     EndLoop
                     Wait(6)
                     Call(SetNpcRotationPivot, LVar9, 0)
-                    Call(SetNpcAnimation, LVar9, ANIM_ShyGuy_Red_Anim01)
+                    Call(SetNpcAnimation, LVar9, ANIM_ShyGuy_Red_Idle)
                     Call(NpcJump0, LVar9, -230, 0, 63, 10)
                     Call(InterpNpcYaw, LVar9, 90, 0)
                     Wait(20)

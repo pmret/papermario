@@ -1717,7 +1717,7 @@ EvtScript N(D_8025B854_81C0D4) = {
         Wait(1)
     EndLoop
     Call(SetNpcPos, NPC_PostOfficeShyGuy, -313, 0, 330)
-    Call(SetNpcAnimation, NPC_PostOfficeShyGuy, ANIM_ShyGuy_Red_Anim04)
+    Call(SetNpcAnimation, NPC_PostOfficeShyGuy, ANIM_ShyGuy_Red_Dash)
     Wait(21)
     Call(DisablePlayerInput, true)
     Call(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0007)
@@ -1851,7 +1851,7 @@ EvtScript N(EVS_NpcInit_ToadHouseKeeper) = {
 EvtScript N(EVS_NpcIdle_ShyGuy_02) = {
     Call(SetNpcPos, NPC_SELF, 572, 36, -226)
     Call(InterpNpcYaw, NPC_SELF, 270, 1)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Run)
     Loop(0)
         Call(InterpNpcYaw, NPC_SELF, 270, 1)
         Wait(3)
@@ -1875,11 +1875,11 @@ EvtScript N(EVS_NpcIdle_ShyGuy_02) = {
 EvtScript N(EVS_NpcAI_ShyGuy_02) = {
     Call(DisablePlayerInput, true)
     Call(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim0C)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Hurt)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(NpcJump0, NPC_SELF, LVar0, 36, LVar2, 10)
     Call(SetNpcSpeed, NPC_SELF, Float(8.0))
-    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Run)
     Call(InterpNpcYaw, NPC_SELF, 270, 1)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
     Call(NpcJump0, NPC_SELF, 550, 20, -161, 0)

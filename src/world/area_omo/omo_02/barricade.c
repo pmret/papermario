@@ -368,7 +368,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     Wait(165)
     Call(PlaySound, SOUND_LRAW_SHY_GUY_CROWD_2 | SOUND_ID_TRIGGER_CHANGE_SOUND)
     Call(StopTrackingSoundPos, SOUND_LRAW_SHY_GUY_CROWD_2)
-    Call(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim04)
+    Call(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Dash)
     Call(SetNpcPos, NPC_ShyGuy_01, -285, 0, 35)
     Call(SetNpcSpeed, NPC_ShyGuy_01, Float(8.0))
     Call(NpcMoveTo, NPC_ShyGuy_01, -135, 23, 0)
@@ -386,7 +386,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     Thread
         Wait(10)
         Call(SetNpcRotation, NPC_ShyGuy_01, 0, 0, 0)
-        Call(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim10)
+        Call(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Crashed)
     EndThread
     Call(NpcJump0, NPC_ShyGuy_01, -45, 0, -8, 10)
     Call(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_ACTOR_TRIP, SOUND_SPACE_DEFAULT)
@@ -397,12 +397,12 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
         Wait(7)
     EndLoop
     Call(SetNpcRotationPivot, NPC_ShyGuy_01, 0)
-    Call(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim01)
+    Call(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Idle)
     Call(NpcJump0, NPC_ShyGuy_01, -50, 0, -8, 10)
     Call(InterpNpcYaw, NPC_ShyGuy_01, 270, 0)
     Wait(20)
     Call(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_SHY_GUY_FLEE_LOOP, SOUND_SPACE_DEFAULT)
-    Call(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim04)
+    Call(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Dash)
     Call(SetNpcSpeed, NPC_ShyGuy_01, Float(6.0))
     Call(NpcMoveTo, NPC_ShyGuy_01, 100, 50, 0)
     Call(RemoveNpc, NPC_ShyGuy_01)

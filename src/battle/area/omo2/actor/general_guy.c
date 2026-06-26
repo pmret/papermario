@@ -133,7 +133,7 @@ s32 N(DefaultAnims)[] = {
 };
 
 s32 N(BombAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_GeneralGuyBomb_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_GeneralGuyBomb_Still,
     STATUS_END,
 };
 
@@ -326,7 +326,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
     Add(LVar1, 27)
     Sub(LVar2, 4)
     Call(SetPartPos, ACTOR_SELF, PRT_BOMB, LVar0, LVar1, LVar2)
-    Call(SetAnimation, ACTOR_SELF, PRT_BOMB, ANIM_GeneralGuyBomb_Anim00)
+    Call(SetAnimation, ACTOR_SELF, PRT_BOMB, ANIM_GeneralGuyBomb_Still)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_BOMB, ACTOR_PART_FLAG_INVISIBLE, false)
     Wait(15)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Anim0A)
@@ -336,7 +336,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
     Sub(LVar0, 8)
     Add(LVar1, 20)
     Call(SetPartPos, ACTOR_SELF, PRT_BOMB, LVar0, LVar1, LVar2)
-    Call(SetAnimation, ACTOR_SELF, PRT_BOMB, ANIM_GeneralGuyBomb_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_BOMB, ANIM_GeneralGuyBomb_Lit)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_BOMB, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 4, BS_FLAGS1_TRIGGER_EVENTS)
     Switch(LVar0)
