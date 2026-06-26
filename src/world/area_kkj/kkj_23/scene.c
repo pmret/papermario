@@ -31,10 +31,10 @@ EvtScript N(EVS_ApproachPeach) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Add(LVar0, 26)
         Add(LVar2, 2)
-        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Run)
         Call(SetNpcSpeed, NPC_Koopatrol_01, Float(5.0))
         Call(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 0)
-        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Idle)
         Call(NpcFacePlayer, NPC_Koopatrol_01, 5)
     EndThread
     Call(SetNpcVar, NPC_Koopatrol_02, 0, 1)
@@ -42,10 +42,10 @@ EvtScript N(EVS_ApproachPeach) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Sub(LVar0, 26)
         Sub(LVar2, 2)
-        Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Run)
         Call(SetNpcSpeed, NPC_Koopatrol_02, Float(5.0))
         Call(NpcMoveTo, NPC_Koopatrol_02, LVar0, LVar2, 0)
-        Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Idle)
         Call(NpcFacePlayer, NPC_Koopatrol_02, 5)
         Call(SetNpcVar, NPC_Koopatrol_02, 0, 0)
     EndThread
@@ -66,7 +66,7 @@ EvtScript N(EVS_PickUpPeach) = {
         Call(GetNpcPos, NPC_Koopatrol_01, LVar0, LVar1, LVar2)
         Sub(LVar0, 5)
         Call(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 5)
-        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim12)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Lift)
         Sub(LVar0, 5)
         Call(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 5)
     EndThread
@@ -74,7 +74,7 @@ EvtScript N(EVS_PickUpPeach) = {
         Call(GetNpcPos, NPC_Koopatrol_02, LVar0, LVar1, LVar2)
         Add(LVar0, 5)
         Call(NpcMoveTo, NPC_Koopatrol_02, LVar0, LVar2, 5)
-        Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim12)
+        Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Lift)
         Add(LVar0, 5)
         Call(NpcMoveTo, NPC_Koopatrol_02, LVar0, LVar2, 5)
     EndThread
@@ -110,12 +110,12 @@ EvtScript N(EVS_CarryPeachAway) = {
         EndLoop
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim14)
+        Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_CarryFast)
         Call(SetNpcSpeed, NPC_Koopatrol_02, Float(5.0))
         Call(NpcMoveTo, NPC_Koopatrol_02, 684, -52, 0)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim14)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_CarryFast)
         Call(SetNpcSpeed, NPC_Koopatrol_01, Float(5.0))
         Call(NpcMoveTo, NPC_Koopatrol_01, 716, -48, 0)
     EndThread
@@ -248,7 +248,7 @@ EvtScript N(EVS_Scene_KammyUnmasksPeach) = {
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Talk, ANIM_WorldKammy_Idle, 5, MSG_Peach_014F)
-    Call(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_Kammy, MSG_Peach_0150)
+    Call(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Talk, ANIM_WorldKoopatrol_Idle, 0, NPC_Kammy, MSG_Peach_0150)
     Call(SetNpcVar, NPC_Kammy, 0, 1)
     Thread
         Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))

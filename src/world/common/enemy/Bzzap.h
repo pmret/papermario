@@ -17,20 +17,20 @@
 
 #define BZZAP_ANIMS \
 { \
-    .idle   = ANIM_Bzzap_Anim02, \
-    .walk   = ANIM_Bzzap_Anim02, \
-    .run    = ANIM_Bzzap_Anim03, \
-    .chase  = ANIM_Bzzap_Anim03, \
-    .anim_4 = ANIM_Bzzap_Anim01, \
-    .anim_5 = ANIM_Bzzap_Anim02, \
-    .death  = ANIM_Bzzap_Anim06, \
-    .hit    = ANIM_Bzzap_Anim06, \
-    .anim_8 = ANIM_Bzzap_Anim04, \
-    .anim_9 = ANIM_Bzzap_Anim02, \
-    .anim_A = ANIM_Bzzap_Anim01, \
-    .anim_B = ANIM_Bzzap_Anim01, \
-    .anim_C = ANIM_Bzzap_Anim01, \
-    .anim_D = ANIM_Bzzap_Anim01, \
-    .anim_E = ANIM_Bzzap_Anim01, \
-    .anim_F = ANIM_Bzzap_Anim01, \
+    .idle   = ANIM_Bzzap_FlySlow, \
+    .walk   = ANIM_Bzzap_FlySlow, \
+    .run    = ANIM_Bzzap_FlyFast, \
+    .chase  = ANIM_Bzzap_FlyFast, \
+    .anim_4 = ANIM_Bzzap_Idle, \
+    .anim_5 = ANIM_Bzzap_FlySlow, \
+    .death  = ANIM_Bzzap_Hurt, \
+    .hit    = ANIM_Bzzap_Hurt, \
+    .anim_8 = ANIM_Bzzap_Sting, \
+    .anim_9 = ANIM_Bzzap_FlySlow, \
+    .anim_A = ANIM_Bzzap_Idle, \
+    .anim_B = ANIM_Bzzap_Idle, \
+    .anim_C = ANIM_Bzzap_Idle, \
+    .anim_D = ANIM_Bzzap_Idle, \
+    .anim_E = ANIM_Bzzap_Idle, \
+    .anim_F = ANIM_Bzzap_Idle, \
 }

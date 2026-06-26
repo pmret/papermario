@@ -68,10 +68,10 @@ AnimID N(ExtraAnims_Kammy)[] = {
 };
 
 AnimID N(ExtraAnims_Koopatrol)[] = {
-    ANIM_WorldKoopatrol_Anim00,
-    ANIM_WorldKoopatrol_Anim01,
-    ANIM_WorldKoopatrol_Anim04,
-    ANIM_WorldKoopatrol_Anim06,
+    ANIM_WorldKoopatrol_Still,
+    ANIM_WorldKoopatrol_Idle,
+    ANIM_WorldKoopatrol_Walk,
+    ANIM_WorldKoopatrol_Run,
     ANIM_LIST_END
 };
 

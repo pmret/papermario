@@ -68,13 +68,13 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
     EndThread
     Call(SetNpcVar, NPC_Koopatrol_Guard_01, 0, 1)
     Thread
-        Call(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Anim14)
+        Call(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_CarryFast)
         Call(SetNpcSpeed, NPC_Koopatrol_Guard_01, Float(5.0))
         Call(NpcMoveTo, NPC_Koopatrol_Guard_01, -316, -32, 0)
         Call(SetNpcVar, NPC_Koopatrol_Guard_01, 0, 0)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Anim14)
+        Call(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_CarryFast)
         Call(SetNpcSpeed, NPC_Koopatrol_Guard_02, Float(5.0))
         Call(NpcMoveTo, NPC_Koopatrol_Guard_02, -284, -28, 0)
     EndThread
@@ -89,12 +89,12 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Anim12)
-    Call(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Anim12)
+    Call(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Lift)
+    Call(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Lift)
     Wait(20 * DT)
     Call(SetPlayerAnimation, ANIM_Peach2_Thrown)
-    Call(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Anim15)
-    Call(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Anim15)
+    Call(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Toss)
+    Call(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Toss)
     Call(LoadPath, 15 * DT, Ref(N(PeachTossPath)), ARRAY_COUNT(N(PeachTossPath)), EASING_LINEAR)
     Loop(0)
         Call(GetNextPathPos)
@@ -119,16 +119,16 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
         EndLoop
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Idle)
         Wait(20 * DT)
-        Call(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Run)
         Call(NpcMoveTo, NPC_Koopatrol_Guard_01, -462, -30, 0)
         Call(SetNpcPos, NPC_Koopatrol_Guard_01, NPC_DISPOSE_LOCATION)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Idle)
         Wait(20 * DT)
-        Call(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Run)
         Call(NpcMoveTo, NPC_Koopatrol_Guard_02, -430, -30, 0)
         Call(SetNpcPos, NPC_Koopatrol_Guard_02, NPC_DISPOSE_LOCATION)
         Call(MakeLerp, 120, 0, 8, EASING_LINEAR)
@@ -195,11 +195,11 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
 #include "world/common/enemy/Koopatrol_Stationary.inc.c"
 
 AnimID N(ExtraAnims_Koopatrol)[] = {
-    ANIM_WorldKoopatrol_Anim01,
-    ANIM_WorldKoopatrol_Anim06,
-    ANIM_WorldKoopatrol_Anim12,
-    ANIM_WorldKoopatrol_Anim14,
-    ANIM_WorldKoopatrol_Anim15,
+    ANIM_WorldKoopatrol_Idle,
+    ANIM_WorldKoopatrol_Run,
+    ANIM_WorldKoopatrol_Lift,
+    ANIM_WorldKoopatrol_CarryFast,
+    ANIM_WorldKoopatrol_Toss,
     ANIM_LIST_END
 };
 

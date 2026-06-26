@@ -83,37 +83,37 @@ AnimID HammerBroDisguiseExtraAnims[] = {
 };
 
 AnimID KoopatrolDisguiseExtraAnims[] = {
-    ANIM_WorldKoopatrol_Anim00,
-    ANIM_WorldKoopatrol_Anim01,
-    ANIM_WorldKoopatrol_Anim02,
-    ANIM_WorldKoopatrol_Anim04,
-    ANIM_WorldKoopatrol_Anim05,
-    ANIM_WorldKoopatrol_Anim06,
-    ANIM_WorldKoopatrol_Anim07,
-    ANIM_WorldKoopatrol_Anim08,
-    ANIM_WorldKoopatrol_Anim09,
-    ANIM_WorldKoopatrol_Anim12,
-    ANIM_WorldKoopatrol_Anim14,
-    ANIM_WorldKoopatrol_Anim1B,
+    ANIM_WorldKoopatrol_Still,
+    ANIM_WorldKoopatrol_Idle,
+    ANIM_WorldKoopatrol_IdleFlashlight,
+    ANIM_WorldKoopatrol_Walk,
+    ANIM_WorldKoopatrol_WalkFlashlight,
+    ANIM_WorldKoopatrol_Run,
+    ANIM_WorldKoopatrol_RunFlashlight,
+    ANIM_WorldKoopatrol_Talk,
+    ANIM_WorldKoopatrol_TalkFlashlight,
+    ANIM_WorldKoopatrol_Lift,
+    ANIM_WorldKoopatrol_CarryFast,
+    ANIM_WorldKoopatrol_GotItem,
     ANIM_LIST_END
 };
 
 DisguiseAnims BasicPeachDisguiseAnims[] = {
     [PEACH_DISGUISE_NONE] {
-        ANIM_WorldKoopatrol_Anim01,
-        ANIM_WorldKoopatrol_Anim04,
-        ANIM_WorldKoopatrol_Anim06,
-        ANIM_WorldKoopatrol_Anim08,
-        ANIM_WorldKoopatrol_Anim00,
-        ANIM_WorldKoopatrol_Anim1B
+        ANIM_WorldKoopatrol_Idle,
+        ANIM_WorldKoopatrol_Walk,
+        ANIM_WorldKoopatrol_Run,
+        ANIM_WorldKoopatrol_Talk,
+        ANIM_WorldKoopatrol_Still,
+        ANIM_WorldKoopatrol_GotItem
     },
     [PEACH_DISGUISE_KOOPATROL] {
-        ANIM_WorldKoopatrol_Anim01,
-        ANIM_WorldKoopatrol_Anim04,
-        ANIM_WorldKoopatrol_Anim06,
-        ANIM_WorldKoopatrol_Anim08,
-        ANIM_WorldKoopatrol_Anim00,
-        ANIM_WorldKoopatrol_Anim1B
+        ANIM_WorldKoopatrol_Idle,
+        ANIM_WorldKoopatrol_Walk,
+        ANIM_WorldKoopatrol_Run,
+        ANIM_WorldKoopatrol_Talk,
+        ANIM_WorldKoopatrol_Still,
+        ANIM_WorldKoopatrol_GotItem
     },
     [PEACH_DISGUISE_HAMMER_BROS] {
         ANIM_HammerBros_Anim03,

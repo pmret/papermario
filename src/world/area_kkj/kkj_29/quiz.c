@@ -29,7 +29,7 @@ API_CALLABLE(N(AwaitPlayerBuzzIn)) {
 }
 
 EvtScript N(EVS_GiveItemToKoopatrol) = {
-    Call(SetNpcAnimation, LVar1, ANIM_WorldKoopatrol_Anim1B)
+    Call(SetNpcAnimation, LVar1, ANIM_WorldKoopatrol_GotItem)
     Set(LVarA, LVar0)
     Call(GetNpcPos, LVar1, LVar5, LVar6, LVar7)
     Add(LVar6, 40)
@@ -38,7 +38,7 @@ EvtScript N(EVS_GiveItemToKoopatrol) = {
     Call(PlaySound, SOUND_JINGLE_GOT_KEY)
     Call(ShowMessageAtScreenPos, LVar2, 160, 40)
     Call(RemoveItemEntity, LVarB)
-    Call(SetNpcAnimation, LVar1, ANIM_WorldKoopatrol_Anim03)
+    Call(SetNpcAnimation, LVar1, ANIM_WorldKoopatrol_IdleForward)
     Return
     End
 };
@@ -149,12 +149,12 @@ EvtScript N(Script_DoRound) = {
     // get an answer
     Switch(AB_KKJ29_AnsweringContestant)
         CaseEq(CONTESTANT_LEFT)
-            Call(SpeakToPlayer, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim03, ANIM_WorldKoopatrol_Anim03, 5, LVar3)
+            Call(SpeakToPlayer, NPC_Koopatrol_01, ANIM_WorldKoopatrol_IdleForward, ANIM_WorldKoopatrol_IdleForward, 5, LVar3)
             Set(LVar0, LVar5)
         CaseEq(CONTESTANT_PEACH)
             Call(ShowChoice, LVar4)
         CaseEq(CONTESTANT_RIGHT)
-            Call(SpeakToPlayer, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim03, ANIM_WorldKoopatrol_Anim03, 5, LVar3)
+            Call(SpeakToPlayer, NPC_Koopatrol_02, ANIM_WorldKoopatrol_IdleForward, ANIM_WorldKoopatrol_IdleForward, 5, LVar3)
             Set(LVar0, LVar5)
     EndSwitch
     // handle the choice
@@ -281,7 +281,7 @@ EvtScript N(EVS_TexPan_StarTrim) = {
 EvtScript N(EVS_SetNoAnswerEffects) = {
     Switch(AB_KKJ29_AnsweringContestant)
         CaseEq(CONTESTANT_LEFT)
-            Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim03)
+            Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_IdleForward)
             Call(EnableTexPanning, MODEL_o25, false)
             Call(EnableTexPanning, MODEL_o32, false)
             Call(EnableModel, MODEL_o32, false)
@@ -312,7 +312,7 @@ EvtScript N(EVS_SetNoAnswerEffects) = {
             Call(EnableModel, MODEL_o118, true)
             Set(LVar2, MODEL_g18)
         CaseEq(CONTESTANT_RIGHT)
-            Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim03)
+            Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_IdleForward)
             Call(EnableTexPanning, MODEL_o91, false)
             Call(EnableTexPanning, MODEL_o95, false)
             Call(EnableModel, MODEL_o95, false)
@@ -382,7 +382,7 @@ EvtScript N(EVS_SetRightAnswerEffects) = {
             Call(EnableTexPanning, MODEL_o31, true)
             Call(EnableModel, MODEL_o20, false)
             Call(EnableModel, MODEL_o36, true)
-            Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim19)
+            Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_CheerForward)
         CaseEq(CONTESTANT_PEACH)
             Call(EnableTexPanning, MODEL_o65, true)
             Call(EnableModel, MODEL_o68, false)
@@ -411,7 +411,7 @@ EvtScript N(EVS_SetRightAnswerEffects) = {
             Call(EnableTexPanning, MODEL_o93, true)
             Call(EnableModel, MODEL_o119, false)
             Call(EnableModel, MODEL_o120, true)
-            Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim19)
+            Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_CheerForward)
     EndSwitch
     Return
     End
@@ -424,7 +424,7 @@ EvtScript N(EVS_SetWrongAnswerEffects) = {
             Call(EnableTexPanning, MODEL_o27, false)
             Call(EnableModel, MODEL_o20, false)
             Call(EnableModel, MODEL_o37, true)
-            Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim1A)
+            Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_SulkForward)
         CaseEq(CONTESTANT_PEACH)
             Call(EnableTexPanning, MODEL_o63, false)
             Call(EnableTexPanning, MODEL_o64, false)
@@ -437,7 +437,7 @@ EvtScript N(EVS_SetWrongAnswerEffects) = {
             Call(EnableTexPanning, MODEL_o90, false)
             Call(EnableModel, MODEL_o119, false)
             Call(EnableModel, MODEL_o121, true)
-            Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim1A)
+            Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_SulkForward)
     EndSwitch
     Return
     End
@@ -661,7 +661,7 @@ EvtScript N(EVS_DeclareWinner) = {
         CaseEq(OUTCOME_LEFT_WON)
             Call(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 0, NPC_Koopatrol_01, MSG_Peach_011B)
             Call(PlaySound, SOUND_AUDIENCE_CHEER)
-            Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim19)
+            Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_CheerForward)
             Call(ContinueSpeech, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, MSG_Peach_011C)
             Wait(10)
             Set(LVar0, ITEM_JAMMIN_JELLY)
@@ -682,7 +682,7 @@ EvtScript N(EVS_DeclareWinner) = {
         CaseEq(OUTCOME_RIGHT_WON)
             Call(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 0, NPC_Koopatrol_02, MSG_Peach_011E)
             Call(PlaySound, SOUND_AUDIENCE_CHEER)
-            Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim19)
+            Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_CheerForward)
             Call(ContinueSpeech, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, MSG_Peach_011F)
             Wait(10)
             Set(LVar0, ITEM_JAMMIN_JELLY)
@@ -762,10 +762,10 @@ EvtScript N(EVS_ApproachPeach) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Add(LVar0, 26)
         Add(LVar2, 2)
-        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Run)
         Call(SetNpcSpeed, NPC_Koopatrol_01, Float(5.0))
         Call(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 0)
-        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Idle)
         Call(NpcFacePlayer, NPC_Koopatrol_01, 5)
     EndThread
     Loop(0)
@@ -793,7 +793,7 @@ EvtScript N(EVS_PickUpPeach) = {
         Call(GetNpcPos, NPC_Koopatrol_01, LVar0, LVar1, LVar2)
         Sub(LVar0, 5)
         Call(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 5)
-        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim12)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Lift)
         Sub(LVar0, 5)
         Call(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 5)
     EndThread
@@ -836,7 +836,7 @@ EvtScript N(EVS_CarryPeachAway) = {
         Call(SetNpcVar, NPC_HammerBros, 0, 0)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim14)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_CarryFast)
         Call(SetNpcSpeed, NPC_Koopatrol_01, Float(5.0))
         Call(NpcMoveTo, NPC_Koopatrol_01, 436, -22, 0)
     EndThread
@@ -923,10 +923,10 @@ EvtScript N(EVS_ManageQuizGame) = {
     Wait(20 * DT)
     Call(InterpNpcYaw, NPC_Koopatrol_01, 90, 5)
     Wait(10 * DT)
-    Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim17)
+    Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_RaisedArms)
     Call(NpcJump0, NPC_Koopatrol_01, 175, 0, -25, 10 * DT)
-    Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
-    Call(SpeakToPlayer, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_00EF)
+    Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Idle)
+    Call(SpeakToPlayer, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Talk, ANIM_WorldKoopatrol_Idle, 0, MSG_Peach_00EF)
     Call(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim09)
     Call(SetNpcSpeed, NPC_HammerBros, Float(5.0 / DT))
     Call(NpcMoveTo, NPC_HammerBros, 130, -25, 0)
@@ -940,7 +940,7 @@ EvtScript N(EVS_ManageQuizGame) = {
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Call(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 0, NPC_Koopatrol_01, MSG_Peach_00F0)
     Call(InterpNpcYaw, NPC_Koopatrol_01, 270, 0)
-    Call(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_HammerBros, MSG_Peach_00F1)
+    Call(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Talk, ANIM_WorldKoopatrol_Idle, 0, NPC_HammerBros, MSG_Peach_00F1)
     Call(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim06)
     Call(SetNpcSpeed, NPC_HammerBros, Float(2.0 / DT))
     Call(NpcMoveTo, NPC_HammerBros, 130, 0, 0)
@@ -949,10 +949,10 @@ EvtScript N(EVS_ManageQuizGame) = {
     Call(InterpNpcYaw, NPC_Koopatrol_01, 90, 5)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Sub(LVar0, 40)
-    Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim04)
+    Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Walk)
     Call(SetNpcSpeed, NPC_Koopatrol_01, Float(2.0 / DT))
     Call(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 0)
-    Call(SpeakToPlayer, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_00F3)
+    Call(SpeakToPlayer, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Talk, ANIM_WorldKoopatrol_Idle, 0, MSG_Peach_00F3)
     Thread
         Call(func_802D1270, 0, -25, Float(2.0 / DT))
         Call(SetPlayerAnimation, ANIM_Peach2_ForwardIdle)
@@ -960,7 +960,7 @@ EvtScript N(EVS_ManageQuizGame) = {
     EndThread
     Thread
         Call(NpcMoveTo, NPC_Koopatrol_01, 0, -25, 0)
-        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim03)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_IdleForward)
         Call(SetNpcPos, NPC_Koopatrol_01, -320, 30, -140)
         Call(SetNpcYaw, NPC_Koopatrol_01, 90)
     EndThread
@@ -1136,16 +1136,16 @@ EvtScript N(EVS_ManageQuizGame) = {
     EndThread
     Thread
         Wait(15 * DT)
-        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim04)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Walk)
         Call(SetNpcFlagBits, NPC_Koopatrol_01, NPC_FLAG_GRAVITY, true)
         Call(SetNpcSpeed, NPC_Koopatrol_02, Float(2.0 / DT))
         Call(NpcMoveTo, NPC_Koopatrol_01, -400, -140, 0)
         Call(SetNpcFlagBits, NPC_Koopatrol_01, NPC_FLAG_GRAVITY, false)
-        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Idle)
     EndThread
     Thread
         Wait(10 * DT)
-        Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim04)
+        Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Walk)
         Call(SetNpcFlagBits, NPC_Koopatrol_02, NPC_FLAG_GRAVITY, true)
         Call(SetNpcSpeed, NPC_Koopatrol_02, Float(2.0 / DT))
         Call(NpcMoveTo, NPC_Koopatrol_02, 0, -140, 0)
@@ -1285,7 +1285,7 @@ EvtScript N(EVS_ManageQuizGame) = {
     Call(SpeakToPlayer, NPC_Bowser, ANIM_WorldBowser_Shock, ANIM_WorldBowser_Shock, 5, MSG_Peach_012B)
     Call(SetNpcAnimation, NPC_Bowser, ANIM_WorldBowser_Idle)
     Call(EndSpeech, NPC_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 5)
-    Call(SpeakToPlayer, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 5, MSG_Peach_012C)
+    Call(SpeakToPlayer, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Talk, ANIM_WorldKoopatrol_Idle, 5, MSG_Peach_012C)
     ExecWait(N(EVS_ApproachPeach))
     Call(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, MSG_Peach_012D)
     ExecWait(N(EVS_PickUpPeach))

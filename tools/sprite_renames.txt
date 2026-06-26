@@ -489,3 +489,300 @@
 # WorldTubba	raster	Raster4D	EyesUpward
 # WorldTubba	raster	Raster4E	HairFullBack
 # WorldTubba	raster	Raster4F	HairSleep
+
+# WorldKoopatrol	anim	Anim00	Still
+# WorldKoopatrol	anim	Anim01	Idle
+# WorldKoopatrol	anim	Anim02	IdleFlashlight
+# WorldKoopatrol	anim	Anim03	IdleForward
+# WorldKoopatrol	anim	Anim04	Walk
+# WorldKoopatrol	anim	Anim05	WalkFlashlight
+# WorldKoopatrol	anim	Anim06	Run
+# WorldKoopatrol	anim	Anim07	RunFlashlight
+# WorldKoopatrol	anim	Anim08	Talk
+# WorldKoopatrol	anim	Anim09	TalkFlashlight
+# WorldKoopatrol	anim	Anim0A	ShellStill
+# WorldKoopatrol	anim	Anim0B	ShellSpin
+# WorldKoopatrol	anim	Anim0C	ShellEnter
+# WorldKoopatrol	anim	Anim0D	ShellExit
+# WorldKoopatrol	anim	Anim0E	LeanSide
+# WorldKoopatrol	anim	Anim0F	HurtStill
+# WorldKoopatrol	anim	Anim10	Hurt
+# WorldKoopatrol	anim	Anim11	ShellUnused
+# WorldKoopatrol	anim	Anim12	Lift
+# WorldKoopatrol	anim	Anim13	CarrySlow
+# WorldKoopatrol	anim	Anim14	CarryFast
+# WorldKoopatrol	anim	Anim15	Toss
+# WorldKoopatrol	anim	Anim16	SpreadArms
+# WorldKoopatrol	anim	Anim17	RaisedArms
+# WorldKoopatrol	anim	Anim18	Panic
+# WorldKoopatrol	anim	Anim19	CheerForward
+# WorldKoopatrol	anim	Anim1A	SulkForward
+# WorldKoopatrol	anim	Anim1B	GotItem
+# WorldKoopatrol	raster	Raster00	Step1
+# WorldKoopatrol	raster	Raster01	Step2
+# WorldKoopatrol	raster	Raster02	Step3
+# WorldKoopatrol	raster	Raster03	Idle1
+# WorldKoopatrol	raster	Raster04	Idle2
+# WorldKoopatrol	raster	Raster05	Lean
+# WorldKoopatrol	raster	Raster06	HurtStill
+# WorldKoopatrol	raster	Raster07	Hurt1
+# WorldKoopatrol	raster	Raster08	Hurt2
+# WorldKoopatrol	raster	Raster09	ShellSpin1
+# WorldKoopatrol	raster	Raster0A	ShellSpin2
+# WorldKoopatrol	raster	Raster0B	ShellSpin3
+# WorldKoopatrol	raster	Raster0C	ShellSpin4
+# WorldKoopatrol	raster	Raster0D	ShellSpin5
+# WorldKoopatrol	raster	Raster0E	ShellSpin6
+# WorldKoopatrol	raster	Raster0F	ShellEnter1
+# WorldKoopatrol	raster	Raster10	ShellEnter2
+# WorldKoopatrol	raster	Raster11	ShellEnter3
+# WorldKoopatrol	raster	Raster12	Talk1
+# WorldKoopatrol	raster	Raster13	Talk2
+# WorldKoopatrol	raster	Raster14	Lift1
+# WorldKoopatrol	raster	Raster15	Lift2
+# WorldKoopatrol	raster	Raster16	Carry1
+# WorldKoopatrol	raster	Raster17	Carry2
+# WorldKoopatrol	raster	Raster18	Carry3
+# WorldKoopatrol	raster	Raster19	Toss1
+# WorldKoopatrol	raster	Raster1A	Toss2
+# WorldKoopatrol	raster	Raster1B	Toss3
+# WorldKoopatrol	raster	Raster1C	Panic1
+# WorldKoopatrol	raster	Raster1D	Panic2
+# WorldKoopatrol	raster	Raster1E	Panic3
+# WorldKoopatrol	raster	Raster1F	SpreadArms
+# WorldKoopatrol	raster	Raster20	RaisedArms
+# WorldKoopatrol	raster	Raster21	IdleForward1
+# WorldKoopatrol	raster	Raster22	IdleForward2
+# WorldKoopatrol	raster	Raster23	SulkForward1
+# WorldKoopatrol	raster	Raster24	SulkForward2
+# WorldKoopatrol	raster	Raster25	CheerForward1
+# WorldKoopatrol	raster	Raster26	CheerForward2
+# WorldKoopatrol	raster	Raster27	CheerForward3
+# WorldKoopatrol	raster	Raster28	StepFlashlight1
+# WorldKoopatrol	raster	Raster29	StepFlashlight2
+# WorldKoopatrol	raster	Raster2A	StepFlashlight3
+# WorldKoopatrol	raster	Raster2B	IdleFlashlight1
+# WorldKoopatrol	raster	Raster2C	IdleFlashlight2
+# WorldKoopatrol	raster	Raster2D	TalkFlashlight1
+# WorldKoopatrol	raster	Raster2E	TalkFlashlight2
+
+# Koopatrol	anim 	Anim00	Still
+# Koopatrol	anim 	Anim01	Idle
+# Koopatrol	anim 	Anim02	FaceFront
+# Koopatrol	anim 	Anim03	Walk
+# Koopatrol	anim 	Anim04	Run
+# Koopatrol	anim 	Anim05	Shell
+# Koopatrol	anim 	Anim06	ShellSpin
+# Koopatrol	anim 	Anim07	ShellEnter
+# Koopatrol	anim 	Anim08	ShellExit
+# Koopatrol	anim 	Anim09	LeanSide
+# Koopatrol	anim 	Anim0A	HurtStill
+# Koopatrol	anim 	Anim0B	Hurt
+# Koopatrol	anim 	Anim0C	BurnHurt
+# Koopatrol	anim 	Anim0D	BurnStill
+# Koopatrol	anim 	Anim0E	ShellUnused
+# Koopatrol	anim 	Anim0F	ToppleStruggle
+# Koopatrol	anim 	Anim10	ToppleIdle
+# Koopatrol	anim 	Anim11	Sleep
+# Koopatrol	anim 	Anim12	ToppleSleep
+# Koopatrol	anim 	Anim13	Dizzy
+# Koopatrol	anim 	Anim14	ToppleDizzy
+# Koopatrol	anim 	Anim15	Lift
+# Koopatrol	anim 	Anim16	Panic
+# Koopatrol	raster	Raster00	Step1
+# Koopatrol	raster	Raster01	Step2
+# Koopatrol	raster	Raster02	Step3
+# Koopatrol	raster	Raster03	Idle1
+# Koopatrol	raster	Raster04	Idle2
+# Koopatrol	raster	Raster05	Lean
+# Koopatrol	raster	Raster06	HurtStill
+# Koopatrol	raster	Raster07	Hurt1
+# Koopatrol	raster	Raster08	Hurt2
+# Koopatrol	raster	Raster09	BurnStill
+# Koopatrol	raster	Raster0A	Struggle1
+# Koopatrol	raster	Raster0B	Struggle2
+# Koopatrol	raster	Raster0C	ShellSpin1
+# Koopatrol	raster	Raster0D	ShellSpin2
+# Koopatrol	raster	Raster0E	ShellSpin3
+# Koopatrol	raster	Raster0F	Topple
+# Koopatrol	raster	Raster10	ShellSpin4
+# Koopatrol	raster	Raster11	ShellSpin5
+# Koopatrol	raster	Raster12	ShellSpin6
+# Koopatrol	raster	Raster13	Sleep1
+# Koopatrol	raster	Raster14	Sleep2
+# Koopatrol	raster	Raster15	Sleep3
+# Koopatrol	raster	Raster16	ShellEnter1
+# Koopatrol	raster	Raster17	ShellEnter2
+# Koopatrol	raster	Raster18	ShellEnter3
+# Koopatrol	raster	Raster19	BurnHurt1
+# Koopatrol	raster	Raster1A	BurnHurt2
+# Koopatrol	raster	Raster1B	Lift1
+# Koopatrol	raster	Raster1C	Lift2
+# Koopatrol	raster	Raster1D	ToppleSleep1
+# Koopatrol	raster	Raster1E	ToppleSleep2
+# Koopatrol	raster	Raster1F	ToppleSleep3
+# Koopatrol	raster	Raster20	Panic1
+# Koopatrol	raster	Raster21	Panic2
+# Koopatrol	raster	Raster22	Panic3
+# Koopatrol	raster	Raster23	IdleForward1
+# Koopatrol	raster	Raster24	IdleForward2
+# Koopatrol	raster	Raster25	ToppleDizzy1
+# Koopatrol	raster	Raster26	ToppleDizzy2
+# Koopatrol	raster	Raster27	ToppleDizzy3
+# Koopatrol	raster	Raster28	ToppleDizzy4
+# Koopatrol	raster	Raster29	Dizzy
+
+# Blooper	anim	Anim00	Idle
+# Blooper	anim	Anim01	LeanLeft
+# Blooper	anim	Anim02	LeanRight
+# Blooper	anim	Anim03	Squirt
+# Blooper	anim	Anim04	Hurt
+# Blooper	anim	Anim05	BurnHurt
+# Blooper	anim	Anim06	BurnStill
+# Blooper	anim	Anim07	Sleep
+# Blooper	anim	Anim08	Dizzy
+# Blooper	anim	Anim09	Strain
+# Blooper	anim	Anim0A	StrainMore
+# Blooper	anim	Anim0B	StrainMax
+# Blooper	anim	Anim0C	Jump
+# Blooper	anim	Anim0D	Fall
+# Blooper	anim	Anim0E	Land
+# Blooper	raster	Raster00	Idle1
+# Blooper	raster	Raster01	Idle2
+# Blooper	raster	Raster02	Idle3
+# Blooper	raster	Raster03	Sleep
+# Blooper	raster	Raster04	Extend
+# Blooper	raster	Raster05	Squirt
+# Blooper	raster	Raster06	BurnIdle1
+# Blooper	raster	Raster07	BurnIdle2
+# Blooper	raster	Raster08	EyesShut
+# Blooper	raster	Raster09	EyesDizzy1
+# Blooper	raster	Raster0A	EyesDizzy2
+# Blooper	raster	Raster0B	EyesDizzy3
+# Blooper	raster	Raster0C	EyesDizzy4
+# Blooper	raster	Raster0D	EyesSleep1
+# Blooper	raster	Raster0E	EyesOpen1
+# Blooper	raster	Raster0F	EyesOpen2
+# Blooper	raster	Raster10	EyesSleep2
+# Blooper	raster	Raster11	BurnEyes
+# Blooper	raster	Raster12	EyesStrain
+# Blooper	raster	Raster13	Fall
+
+# Bzzap	anim	Anim00	Still
+# Bzzap	anim	Anim01	Idle
+# Bzzap	anim	Anim02	FlySlow
+# Bzzap	anim	Anim03	FlyFast
+# Bzzap	anim	Anim04	Sting
+# Bzzap	anim	Anim05	Threaten
+# Bzzap	anim	Anim06	Hurt
+# Bzzap	anim	Anim07	BurnHurt
+# Bzzap	anim	Anim08	BurnStill
+# Bzzap	anim	Anim09	Sleep
+# Bzzap	anim	Anim0A	Dizzy
+# Bzzap	anim	Anim0B	HurtStill
+# Bzzap	raster	Raster00	Idle1
+# Bzzap	raster	Raster01	Idle2
+# Bzzap	raster	Raster02	Idle3
+# Bzzap	raster	Raster03	Idle4
+# Bzzap	raster	Raster04	Fly1
+# Bzzap	raster	Raster05	Fly2
+# Bzzap	raster	Raster06	Fly3
+# Bzzap	raster	Raster07	Fly4
+# Bzzap	raster	Raster08	Sleep1
+# Bzzap	raster	Raster09	Sleep2
+# Bzzap	raster	Raster0A	Sleep3
+# Bzzap	raster	Raster0B	Sleep4
+# Bzzap	raster	Raster0C	Hurt1
+# Bzzap	raster	Raster0D	Hurt2
+# Bzzap	raster	Raster0E	Hurt3
+# Bzzap	raster	Raster0F	BurnStill
+# Bzzap	raster	Raster10	HurtStill
+# Bzzap	raster	Raster11	BurnHurt1
+# Bzzap	raster	Raster12	BurnHurt2
+# Bzzap	raster	Raster13	BurnHurt3
+# Bzzap	raster	Raster14	BurnHurt4
+# Bzzap	raster	Raster15	Sting01
+# Bzzap	raster	Raster16	Sting02
+# Bzzap	raster	Raster17	Sting03
+# Bzzap	raster	Raster18	Sting04
+# Bzzap	raster	Raster19	Sting05
+# Bzzap	raster	Raster1A	Sting06
+# Bzzap	raster	Raster1B	Sting07
+# Bzzap	raster	Raster1C	Sting08
+# Bzzap	raster	Raster1D	Sting09
+# Bzzap	raster	Raster1E	Sting10
+# Bzzap	raster	Raster1F	Sting11
+# Bzzap	raster	Raster20	Sting12
+# Bzzap	raster	Raster21	Sting13
+# Bzzap	raster	Raster22	Threaten1
+# Bzzap	raster	Raster23	Threaten2
+# Bzzap	raster	Raster24	Threaten3
+# Bzzap	raster	Raster25	Threaten4
+
+Cleft	anim	Anim00	Still
+Cleft	anim	Anim01	ToppleStill
+Cleft	anim	Anim02	Idle
+Cleft	anim	Anim03	ToppleKick
+Cleft	anim	Anim04	Party
+Cleft	anim	Anim05	ToppleIdle
+Cleft	anim	Anim06	Walk
+Cleft	anim	Anim07	Run
+Cleft	anim	Anim08	Hurt
+Cleft	anim	Anim09	ToppleHurt
+Cleft	anim	Anim0A	ToppleStillAlt
+Cleft	anim	Anim0B	ToppleHurtAlt
+Cleft	anim	Anim0C	Sleep
+Cleft	anim	Anim0D	ToppleSleep
+Cleft	anim	Anim0E	Dizzy
+Cleft	anim	Anim0F	ToppleDizzy
+Cleft	anim	Anim10	Crouch
+Cleft	anim	Anim11	Charge
+Cleft	anim	Anim12	RockWobble
+Cleft	anim	Anim13	Reveal
+Cleft	anim	Anim14	Hiding
+Cleft	anim	Anim15	Disguise
+Cleft	anim	Anim16	CamoOn
+Cleft	anim	Anim17	CamoOff
+Cleft	anim	Anim18	Laugh
+Cleft	anim	Anim19	HyperCamoOn
+Cleft	anim	Anim1A	HyperCamoOff
+Cleft	raster	Raster00	Neutral
+Cleft	raster	Raster01	Idle1
+Cleft	raster	Raster02	Idle2
+Cleft	raster	Raster03	Idle3
+Cleft	raster	Raster04	Step1
+Cleft	raster	Raster05	Step2
+Cleft	raster	Raster06	Hurt1
+Cleft	raster	Raster07	Hurt2
+Cleft	raster	Raster08	Topple
+Cleft	raster	Raster09	ToppleHurt1
+Cleft	raster	Raster0A	ToppleHurt2
+Cleft	raster	Raster0B	ToppleHurt3
+Cleft	raster	Raster0C	Sleep1
+Cleft	raster	Raster0D	Sleep2
+Cleft	raster	Raster0E	Sleep3
+Cleft	raster	Raster0F	Sleep4
+Cleft	raster	Raster10	Sleep5
+Cleft	raster	Raster11	Sleep6
+Cleft	raster	Raster12	EyesPanic1
+Cleft	raster	Raster13	EyesPanic2
+Cleft	raster	Raster14	EyesPanic3
+Cleft	raster	Raster15	EyesPanic4
+Cleft	raster	Raster16	Dizzy1
+Cleft	raster	Raster17	Dizzy2
+Cleft	raster	Raster18	Dizzy3
+Cleft	raster	Raster19	Dizzy4
+Cleft	raster	Raster1A	Dizzy5
+Cleft	raster	Raster1B	Dizzy6
+Cleft	raster	Raster1C	Crouch
+Cleft	raster	Raster1D	Charge1
+Cleft	raster	Raster1E	Charge2
+Cleft	raster	Raster1F	Charge3
+Cleft	raster	Raster20	Rock
+Cleft	raster	Raster21	Reveal1
+Cleft	raster	Raster22	Reveal2
+Cleft	raster	Raster23	Reveal3
+Cleft	raster	Raster24	Reveal4
+Cleft	raster	Raster25	Reveal5
+Cleft	raster	Raster26	Laugh1
+Cleft	raster	Raster27	Laugh2

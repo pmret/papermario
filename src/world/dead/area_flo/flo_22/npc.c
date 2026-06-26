@@ -34,7 +34,7 @@ EvtScript N(EVS_NpcDefeat_Bzzap) = {
         CaseEq(OUTCOME_PLAYER_LOST)
             Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         CaseEq(OUTCOME_PLAYER_FLED)
-            Call(SetNpcAnimation, NPC_SELF, ANIM_Bzzap_Anim01)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Bzzap_Idle)
             Call(SetNpcPos, NPC_SELF, 30, 60, 0)
             Wait(10)
             Call(SetNpcJumpscale, NPC_SELF, 0)

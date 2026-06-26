@@ -12,20 +12,20 @@
 
 #define HYPER_CLEFT_ANIMS \
 { \
-    .idle   = ANIM_Cleft_Hyper_Anim02, \
-    .walk   = ANIM_Cleft_Hyper_Anim06, \
-    .run    = ANIM_Cleft_Hyper_Anim07, \
-    .chase  = ANIM_Cleft_Hyper_Anim07, \
-    .anim_4 = ANIM_Cleft_Hyper_Anim02, \
-    .anim_5 = ANIM_Cleft_Hyper_Anim02, \
-    .death  = ANIM_Cleft_Hyper_Anim08, \
-    .hit    = ANIM_Cleft_Hyper_Anim08, \
-    .anim_8 = ANIM_Cleft_Hyper_Anim14, \
-    .anim_9 = ANIM_Cleft_Hyper_Anim17, \
-    .anim_A = ANIM_Cleft_Hyper_Anim13, \
-    .anim_B = ANIM_Cleft_Hyper_Anim15, \
-    .anim_C = ANIM_Cleft_Hyper_Anim10, \
-    .anim_D = ANIM_Cleft_Hyper_Anim11, \
-    .anim_E = ANIM_Cleft_Hyper_Anim16, \
-    .anim_F = ANIM_Cleft_Hyper_Anim00, \
+    .idle   = ANIM_Cleft_Hyper_Idle, \
+    .walk   = ANIM_Cleft_Hyper_Walk, \
+    .run    = ANIM_Cleft_Hyper_Run, \
+    .chase  = ANIM_Cleft_Hyper_Run, \
+    .anim_4 = ANIM_Cleft_Hyper_Idle, \
+    .anim_5 = ANIM_Cleft_Hyper_Idle, \
+    .death  = ANIM_Cleft_Hyper_Hurt, \
+    .hit    = ANIM_Cleft_Hyper_Hurt, \
+    .anim_8 = ANIM_Cleft_Hyper_Hiding, \
+    .anim_9 = ANIM_Cleft_Hyper_CamoOff, \
+    .anim_A = ANIM_Cleft_Hyper_Reveal, \
+    .anim_B = ANIM_Cleft_Hyper_Disguise, \
+    .anim_C = ANIM_Cleft_Hyper_Crouch, \
+    .anim_D = ANIM_Cleft_Hyper_Charge, \
+    .anim_E = ANIM_Cleft_Hyper_CamoOn, \
+    .anim_F = ANIM_Cleft_Hyper_Still, \
 }

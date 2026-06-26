@@ -24,24 +24,24 @@ EvtScript N(EVS_ApproachPeach) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Sub(LVar0, 26)
         Sub(LVar2, 2)
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Run)
         Call(SetNpcSpeed, NPC_Ch7_Koopatrol_01, Float(5.0))
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_01, LVar0, 70, 0)
         Call(NpcFacePlayer, NPC_Ch7_Koopatrol_01, 5)
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_01, LVar0, LVar2, 0)
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Idle)
     EndThread
     Call(SetNpcVar, NPC_Ch7_Koopatrol_02, 0, 1)
     Thread
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Add(LVar0, 26)
         Add(LVar2, 2)
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Run)
         Call(SetNpcSpeed, NPC_Ch7_Koopatrol_02, Float(5.0))
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_02, LVar0, 70, 0)
         Call(NpcFacePlayer, NPC_Ch7_Koopatrol_02, 5)
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_02, LVar0, LVar2, 0)
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Idle)
         Call(SetNpcVar, NPC_Ch7_Koopatrol_02, 0, 0)
     EndThread
     Loop(0)
@@ -58,7 +58,7 @@ EvtScript N(EVS_ApproachPeach) = {
 
 EvtScript N(EVS_TiePeachUp) = {
     Thread
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Anim18)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Panic)
         Call(GetNpcPos, NPC_Ch7_Koopatrol_01, LVar0, LVar1, LVar2)
         Loop(5)
             Loop(5)
@@ -72,10 +72,10 @@ EvtScript N(EVS_TiePeachUp) = {
                 Wait(1)
             EndLoop
         EndLoop
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Idle)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Anim18)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Panic)
         Call(GetNpcPos, NPC_Ch7_Koopatrol_02, LVar0, LVar1, LVar2)
         Loop(5)
             Loop(5)
@@ -89,7 +89,7 @@ EvtScript N(EVS_TiePeachUp) = {
                 Wait(1)
             EndLoop
         EndLoop
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Idle)
     EndThread
     Thread
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -133,13 +133,13 @@ EvtScript N(EVS_TiePeachUp) = {
 EvtScript N(EVS_PickUpPeach) = {
     Thread
         Call(GetNpcPos, NPC_Ch7_Koopatrol_01, LVar0, LVar1, LVar2)
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Anim12)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Lift)
         Add(LVar0, 10)
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_01, LVar0, LVar2, 10)
     EndThread
     Thread
         Call(GetNpcPos, NPC_Ch7_Koopatrol_02, LVar0, LVar1, LVar2)
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Anim12)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Lift)
         Sub(LVar0, 10)
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_02, LVar0, LVar2, 10)
     EndThread
@@ -174,13 +174,13 @@ EvtScript N(EVS_CarryPeachAway) = {
         EndLoop
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Anim14)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_CarryFast)
         Call(SetNpcSpeed, NPC_Ch7_Koopatrol_01, Float(5.0))
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_01, 364, 68, 0)
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_01, 84, 68, 0)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Anim14)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_CarryFast)
         Call(SetNpcSpeed, NPC_Ch7_Koopatrol_02, Float(5.0))
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_02, 396, 72, 0)
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_02, 116, 72, 0)

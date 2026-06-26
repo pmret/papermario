@@ -490,13 +490,13 @@ EvtScript N(EVS_Scene_PeachCaptured) = {
     Wait(30 * DT)
     Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Idle)
     Thread
-        Call(SetNpcAnimation, NPC_CaptivePeach, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcAnimation, NPC_CaptivePeach, ANIM_WorldKoopatrol_Run)
         Call(SetNpcPos, NPC_CaptivePeach, 900, 0, 30)
         Call(SetNpcSpeed, NPC_CaptivePeach, Float(4.0 / DT))
         Call(NpcMoveTo, NPC_CaptivePeach, 660, 30, 0)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Run)
         Call(SetNpcPos, NPC_Koopatrol_02, 940, 0, 30)
         Call(SetNpcSpeed, NPC_Koopatrol_02, Float(4.0 / DT))
         Call(NpcMoveTo, NPC_Koopatrol_02, 700, 30, 0)

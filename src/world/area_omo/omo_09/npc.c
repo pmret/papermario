@@ -109,7 +109,7 @@ EvtScript N(EVS_NpcIdle_Pokey) = {
     IfEq(GB_OMO_PeachChoice3, 0)
         Call(SpeakToPlayer, NPC_Pokey, ANIM_Pokey_Idle4, ANIM_Pokey_Idle4, 0, MSG_CH4_003E)
     Else
-        Call(SpeakToPlayer, NPC_Koopatrol, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_CH4_003F)
+        Call(SpeakToPlayer, NPC_Koopatrol, ANIM_WorldKoopatrol_Talk, ANIM_WorldKoopatrol_Idle, 0, MSG_CH4_003F)
     EndIf
     Thread
         Call(N(EnableCameraLeadingPlayer))

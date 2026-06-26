@@ -19,7 +19,7 @@ EvtScript N(EVS_NpcInit_Koopatrol_01) = {
 };
 
 EvtScript N(EVS_NpcInit_Koopatrol_02) = {
-    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim03)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_IdleForward)
     Call(SetNpcPos, NPC_SELF, -140, 30, -140)
     Return
     End
@@ -49,16 +49,16 @@ AnimID N(ExtraAnims_HammerBros)[] = {
 };
 
 AnimID N(ExtraAnims_Koopatrol)[] = {
-    ANIM_WorldKoopatrol_Anim00,
-    ANIM_WorldKoopatrol_Anim01,
-    ANIM_WorldKoopatrol_Anim03,
-    ANIM_WorldKoopatrol_Anim04,
-    ANIM_WorldKoopatrol_Anim08,
-    ANIM_WorldKoopatrol_Anim17,
-    ANIM_WorldKoopatrol_Anim19,
-    ANIM_WorldKoopatrol_Anim1A,
-    ANIM_WorldKoopatrol_Anim12,
-    ANIM_WorldKoopatrol_Anim14,
+    ANIM_WorldKoopatrol_Still,
+    ANIM_WorldKoopatrol_Idle,
+    ANIM_WorldKoopatrol_IdleForward,
+    ANIM_WorldKoopatrol_Walk,
+    ANIM_WorldKoopatrol_Talk,
+    ANIM_WorldKoopatrol_RaisedArms,
+    ANIM_WorldKoopatrol_CheerForward,
+    ANIM_WorldKoopatrol_SulkForward,
+    ANIM_WorldKoopatrol_Lift,
+    ANIM_WorldKoopatrol_CarryFast,
     ANIM_LIST_END
 };
 

@@ -16,20 +16,20 @@
 
 #define KOOPATROL_ANIMS \
 { \
-    .idle   = ANIM_WorldKoopatrol_Anim01, \
-    .walk   = ANIM_WorldKoopatrol_Anim04, \
-    .run    = ANIM_WorldKoopatrol_Anim06, \
-    .chase  = ANIM_WorldKoopatrol_Anim06, \
-    .anim_4 = ANIM_WorldKoopatrol_Anim01, \
-    .anim_5 = ANIM_WorldKoopatrol_Anim01, \
-    .death  = ANIM_WorldKoopatrol_Anim10, \
-    .hit    = ANIM_WorldKoopatrol_Anim10, \
-    .anim_8 = ANIM_WorldKoopatrol_Anim0C, \
-    .anim_9 = ANIM_WorldKoopatrol_Anim0B, \
-    .anim_A = ANIM_WorldKoopatrol_Anim0D, \
-    .anim_B = ANIM_WorldKoopatrol_Anim01, \
-    .anim_C = ANIM_WorldKoopatrol_Anim01, \
-    .anim_D = ANIM_WorldKoopatrol_Anim01, \
-    .anim_E = ANIM_WorldKoopatrol_Anim01, \
-    .anim_F = ANIM_WorldKoopatrol_Anim01, \
+    .idle   = ANIM_WorldKoopatrol_Idle, \
+    .walk   = ANIM_WorldKoopatrol_Walk, \
+    .run    = ANIM_WorldKoopatrol_Run, \
+    .chase  = ANIM_WorldKoopatrol_Run, \
+    .anim_4 = ANIM_WorldKoopatrol_Idle, \
+    .anim_5 = ANIM_WorldKoopatrol_Idle, \
+    .death  = ANIM_WorldKoopatrol_Hurt, \
+    .hit    = ANIM_WorldKoopatrol_Hurt, \
+    .anim_8 = ANIM_WorldKoopatrol_ShellEnter, \
+    .anim_9 = ANIM_WorldKoopatrol_ShellSpin, \
+    .anim_A = ANIM_WorldKoopatrol_ShellExit, \
+    .anim_B = ANIM_WorldKoopatrol_Idle, \
+    .anim_C = ANIM_WorldKoopatrol_Idle, \
+    .anim_D = ANIM_WorldKoopatrol_Idle, \
+    .anim_E = ANIM_WorldKoopatrol_Idle, \
+    .anim_F = ANIM_WorldKoopatrol_Idle, \
 }
