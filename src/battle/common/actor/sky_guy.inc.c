@@ -41,59 +41,59 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_SkyGuy_Anim01,
-    STATUS_KEY_STONE,     ANIM_SkyGuy_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_SkyGuy_Anim04,
-    STATUS_KEY_POISON,    ANIM_SkyGuy_Anim01,
-    STATUS_KEY_STOP,      ANIM_SkyGuy_Anim00,
-    STATUS_KEY_STATIC,    ANIM_SkyGuy_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_SkyGuy_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_SkyGuy_Anim05,
-    STATUS_KEY_UNUSED,    ANIM_SkyGuy_Anim05,
+    STATUS_KEY_NORMAL,    ANIM_SkyGuy_Idle,
+    STATUS_KEY_STONE,     ANIM_SkyGuy_Still,
+    STATUS_KEY_SLEEP,     ANIM_SkyGuy_Sleep,
+    STATUS_KEY_POISON,    ANIM_SkyGuy_Idle,
+    STATUS_KEY_STOP,      ANIM_SkyGuy_Still,
+    STATUS_KEY_STATIC,    ANIM_SkyGuy_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_SkyGuy_Still,
+    STATUS_KEY_DIZZY,     ANIM_SkyGuy_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_SkyGuy_Dizzy,
     STATUS_END,
 };
 
 s32 N(YellowBalloonAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_SkyGuy_Anim10,
-    STATUS_KEY_STONE,     ANIM_SkyGuy_Anim0D,
-    STATUS_KEY_SLEEP,     ANIM_SkyGuy_Anim19,
-    STATUS_KEY_POISON,    ANIM_SkyGuy_Anim10,
-    STATUS_KEY_STOP,      ANIM_SkyGuy_Anim0D,
-    STATUS_KEY_STATIC,    ANIM_SkyGuy_Anim10,
-    STATUS_KEY_PARALYZE,  ANIM_SkyGuy_Anim0D,
-    STATUS_KEY_DIZZY,     ANIM_SkyGuy_Anim10,
-    STATUS_KEY_UNUSED,    ANIM_SkyGuy_Anim10,
+    STATUS_KEY_NORMAL,    ANIM_SkyGuy_IdleY,
+    STATUS_KEY_STONE,     ANIM_SkyGuy_StillY,
+    STATUS_KEY_SLEEP,     ANIM_SkyGuy_SleepY,
+    STATUS_KEY_POISON,    ANIM_SkyGuy_IdleY,
+    STATUS_KEY_STOP,      ANIM_SkyGuy_StillY,
+    STATUS_KEY_STATIC,    ANIM_SkyGuy_IdleY,
+    STATUS_KEY_PARALYZE,  ANIM_SkyGuy_StillY,
+    STATUS_KEY_DIZZY,     ANIM_SkyGuy_IdleY,
+    STATUS_KEY_UNUSED,    ANIM_SkyGuy_IdleY,
     STATUS_END,
 };
 
 s32 N(RedBalloonAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_SkyGuy_Anim0F,
-    STATUS_KEY_STONE,     ANIM_SkyGuy_Anim0C,
-    STATUS_KEY_SLEEP,     ANIM_SkyGuy_Anim18,
-    STATUS_KEY_POISON,    ANIM_SkyGuy_Anim0F,
-    STATUS_KEY_STOP,      ANIM_SkyGuy_Anim0C,
-    STATUS_KEY_STATIC,    ANIM_SkyGuy_Anim0F,
-    STATUS_KEY_PARALYZE,  ANIM_SkyGuy_Anim0C,
-    STATUS_KEY_DIZZY,     ANIM_SkyGuy_Anim0F,
-    STATUS_KEY_UNUSED,    ANIM_SkyGuy_Anim0F,
+    STATUS_KEY_NORMAL,    ANIM_SkyGuy_IdleR,
+    STATUS_KEY_STONE,     ANIM_SkyGuy_StillR,
+    STATUS_KEY_SLEEP,     ANIM_SkyGuy_SleepR,
+    STATUS_KEY_POISON,    ANIM_SkyGuy_IdleR,
+    STATUS_KEY_STOP,      ANIM_SkyGuy_StillR,
+    STATUS_KEY_STATIC,    ANIM_SkyGuy_IdleR,
+    STATUS_KEY_PARALYZE,  ANIM_SkyGuy_StillR,
+    STATUS_KEY_DIZZY,     ANIM_SkyGuy_IdleR,
+    STATUS_KEY_UNUSED,    ANIM_SkyGuy_IdleR,
     STATUS_END,
 };
 
 s32 N(BlueBalloonAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_SkyGuy_Anim11,
-    STATUS_KEY_STONE,     ANIM_SkyGuy_Anim0E,
-    STATUS_KEY_SLEEP,     ANIM_SkyGuy_Anim1A,
-    STATUS_KEY_POISON,    ANIM_SkyGuy_Anim11,
-    STATUS_KEY_STOP,      ANIM_SkyGuy_Anim0E,
-    STATUS_KEY_STATIC,    ANIM_SkyGuy_Anim11,
-    STATUS_KEY_PARALYZE,  ANIM_SkyGuy_Anim0E,
-    STATUS_KEY_DIZZY,     ANIM_SkyGuy_Anim11,
-    STATUS_KEY_UNUSED,    ANIM_SkyGuy_Anim11,
+    STATUS_KEY_NORMAL,    ANIM_SkyGuy_IdleB,
+    STATUS_KEY_STONE,     ANIM_SkyGuy_StillB,
+    STATUS_KEY_SLEEP,     ANIM_SkyGuy_SleepB,
+    STATUS_KEY_POISON,    ANIM_SkyGuy_IdleB,
+    STATUS_KEY_STOP,      ANIM_SkyGuy_StillB,
+    STATUS_KEY_STATIC,    ANIM_SkyGuy_IdleB,
+    STATUS_KEY_PARALYZE,  ANIM_SkyGuy_StillB,
+    STATUS_KEY_DIZZY,     ANIM_SkyGuy_IdleB,
+    STATUS_KEY_UNUSED,    ANIM_SkyGuy_IdleB,
     STATUS_END,
 };
 
 s32 N(StoneAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_SkyGuy_Anim0B,
+    STATUS_KEY_NORMAL,    ANIM_SkyGuy_Stone,
     STATUS_END,
 };
 
@@ -309,10 +309,10 @@ EvtScript N(EVS_KillActor) = {
 };
 
 EvtScript N(EVS_ResetAnimations) = {
-    Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Anim02)
-    Call(SetAnimation, ACTOR_SELF, PRT_YELLOW_BALLOON, ANIM_SkyGuy_Anim13)
-    Call(SetAnimation, ACTOR_SELF, PRT_RED_BALLOON, ANIM_SkyGuy_Anim12)
-    Call(SetAnimation, ACTOR_SELF, PRT_BLUE_BALLOON, ANIM_SkyGuy_Anim14)
+    Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Swaying)
+    Call(SetAnimation, ACTOR_SELF, PRT_YELLOW_BALLOON, ANIM_SkyGuy_SwayingY)
+    Call(SetAnimation, ACTOR_SELF, PRT_RED_BALLOON, ANIM_SkyGuy_SwayingR)
+    Call(SetAnimation, ACTOR_SELF, PRT_BLUE_BALLOON, ANIM_SkyGuy_SwayingB)
     Return
     End
 };
@@ -362,9 +362,9 @@ EvtScript N(EVS_PopBalloons) = {
             Wait(20)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SKY_GUY_BALLOON_POP)
         EndThread
-        Call(SetAnimation, ACTOR_SELF, PRT_YELLOW_BALLOON, ANIM_SkyGuy_Anim2E)
-        Call(SetAnimation, ACTOR_SELF, PRT_RED_BALLOON, ANIM_SkyGuy_Anim2D)
-        Call(SetAnimation, ACTOR_SELF, PRT_BLUE_BALLOON, ANIM_SkyGuy_Anim2F)
+        Call(SetAnimation, ACTOR_SELF, PRT_YELLOW_BALLOON, ANIM_SkyGuy_BurstY)
+        Call(SetAnimation, ACTOR_SELF, PRT_RED_BALLOON, ANIM_SkyGuy_BurstR)
+        Call(SetAnimation, ACTOR_SELF, PRT_BLUE_BALLOON, ANIM_SkyGuy_BurstB)
         Wait(30)
         Call(SetPartFlagBits, ACTOR_SELF, PRT_YELLOW_BALLOON, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, true)
         Call(SetPartFlagBits, ACTOR_SELF, PRT_RED_BALLOON, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, true)
@@ -372,13 +372,13 @@ EvtScript N(EVS_PopBalloons) = {
         Call(SetActorVar, ACTOR_SELF, AVAR_BalloonState, AVAL_Balloons_Popped)
         Wait(15)
         Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Anim00)
+        Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Still)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_EMOTE_QUESTION)
         PlayEffect(EFFECT_EMOTE, EMOTE_QUESTION, 0, LVar0, LVar1, LVar2, 24, 0, 25, 0, 0)
         Wait(25)
-        Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Anim06)
+        Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Hurt)
         Wait(30)
-        Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Anim06)
+        Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Hurt)
         Call(SetActorJumpGravity, ACTOR_SELF, Float(0.5))
         Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         Set(LVar1, 0)
@@ -422,7 +422,7 @@ EvtScript N(EVS_Flying_HandleEvent) = {
                 ExecWait(N(EVS_StretchBalloons))
             Else
                 SetConst(LVar0, PRT_FLYING)
-                SetConst(LVar1, ANIM_SkyGuy_Anim06)
+                SetConst(LVar1, ANIM_SkyGuy_Hurt)
                 ExecWait(EVS_Enemy_Hit)
             EndIf
         CaseEq(EVENT_HIT)
@@ -432,21 +432,21 @@ EvtScript N(EVS_Flying_HandleEvent) = {
                 ExecWait(N(EVS_PopBalloons))
             Else
                 SetConst(LVar0, PRT_FLYING)
-                SetConst(LVar1, ANIM_SkyGuy_Anim06)
+                SetConst(LVar1, ANIM_SkyGuy_Hurt)
                 ExecWait(EVS_Enemy_Hit)
             EndIf
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_SkyGuy_Anim09)
-            SetConst(LVar2, ANIM_SkyGuy_Anim0A)
+            SetConst(LVar1, ANIM_SkyGuy_BurnHurt)
+            SetConst(LVar2, ANIM_SkyGuy_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_SkyGuy_Anim09)
-            SetConst(LVar2, ANIM_SkyGuy_Anim0A)
+            SetConst(LVar1, ANIM_SkyGuy_BurnHurt)
+            SetConst(LVar2, ANIM_SkyGuy_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_SkyGuy_Anim0A)
+            SetConst(LVar1, ANIM_SkyGuy_BurnStill)
             ExecWait(N(EVS_KillActor))
             Return
         CaseEq(EVENT_ZERO_DAMAGE)
@@ -455,7 +455,7 @@ EvtScript N(EVS_Flying_HandleEvent) = {
                 ExecWait(N(EVS_StretchBalloons))
             Else
                 SetConst(LVar0, PRT_FLYING)
-                SetConst(LVar1, ANIM_SkyGuy_Anim01)
+                SetConst(LVar1, ANIM_SkyGuy_Idle)
                 ExecWait(EVS_Enemy_NoDamageHit)
             EndIf
         CaseOrEq(EVENT_IMMUNE)
@@ -465,17 +465,17 @@ EvtScript N(EVS_Flying_HandleEvent) = {
                 ExecWait(N(EVS_StretchBalloons))
             Else
                 SetConst(LVar0, PRT_FLYING)
-                SetConst(LVar1, ANIM_SkyGuy_Anim01)
+                SetConst(LVar1, ANIM_SkyGuy_Idle)
                 ExecWait(EVS_Enemy_NoDamageHit)
             EndIf
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_SkyGuy_Anim06)
+            SetConst(LVar1, ANIM_SkyGuy_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_SkyGuy_Anim06)
+            SetConst(LVar1, ANIM_SkyGuy_Hurt)
             ExecWait(N(EVS_KillActor))
             Return
         CaseEq(EVENT_BEGIN_FIRST_STRIKE)
@@ -483,36 +483,36 @@ EvtScript N(EVS_Flying_HandleEvent) = {
             Call(HPBarToCurrent, ACTOR_SELF)
         CaseEq(EVENT_END_FIRST_STRIKE)
             Call(SetActorYaw, ACTOR_SELF, 180)
-            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Anim03)
+            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Scared)
             Call(SetGoalToHome, ACTOR_SELF)
             Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
             Call(FlyToGoal, ACTOR_SELF, 0, 1, EASING_LINEAR)
-            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Idle)
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(HPBarToHome, ACTOR_SELF)
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_SkyGuy_Anim01)
+            SetConst(LVar1, ANIM_SkyGuy_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_YELLOW_BALLOON, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, false)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_RED_BALLOON, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, false)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_BLUE_BALLOON, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_YELLOW_BALLOON, ANIM_SkyGuy_Anim1F)
-            Call(SetAnimation, ACTOR_SELF, PRT_RED_BALLOON, ANIM_SkyGuy_Anim1E)
-            Call(SetAnimation, ACTOR_SELF, PRT_BLUE_BALLOON, ANIM_SkyGuy_Anim20)
+            Call(SetAnimation, ACTOR_SELF, PRT_YELLOW_BALLOON, ANIM_SkyGuy_HurtY)
+            Call(SetAnimation, ACTOR_SELF, PRT_RED_BALLOON, ANIM_SkyGuy_HurtR)
+            Call(SetAnimation, ACTOR_SELF, PRT_BLUE_BALLOON, ANIM_SkyGuy_HurtB)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_SkyGuy_Anim03)
-            SetConst(LVar2, ANIM_SkyGuy_Anim06)
+            SetConst(LVar1, ANIM_SkyGuy_Scared)
+            SetConst(LVar2, ANIM_SkyGuy_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_SkyGuy_Anim03)
+            SetConst(LVar1, ANIM_SkyGuy_Scared)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_SkyGuy_Anim07)
+            SetConst(LVar1, ANIM_SkyGuy_HurtStill)
             ExecWait(EVS_Enemy_BlowAway)
             Return
         CaseDefault
@@ -534,13 +534,13 @@ EvtScript N(EVS_Flying_TakeTurn) = {
         Call(MoveBattleCamOver, 1)
     EndIf
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SLINGSHOT_DRAW)
-    Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Anim08)
+    Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_FireSling)
     Wait(12)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Add(LVar1, 20)
     Add(LVar2, 2)
     Call(SetPartPos, ACTOR_SELF, PRT_STONE, LVar0, LVar1, LVar2)
-    Call(SetAnimation, ACTOR_SELF, PRT_STONE, ANIM_SkyGuy_Anim0B)
+    Call(SetAnimation, ACTOR_SELF, PRT_STONE, ANIM_SkyGuy_Stone)
     Wait(12)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_STONE, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SLINGSHOT_FIRE)
@@ -570,7 +570,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
             Call(SetPartMoveSpeed, ACTOR_SELF, PRT_STONE, Float(14.0))
             Call(SetPartJumpGravity, ACTOR_SELF, PRT_STONE, Float(0.1))
             Call(FlyPartTo, ACTOR_SELF, PRT_STONE, LVar0, LVar1, LVar2, 0, 30, EASING_LINEAR)
-            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_HurtStill)
             Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             Sub(LVar0, 65)

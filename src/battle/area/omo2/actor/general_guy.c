@@ -118,17 +118,17 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_GeneralGuy_Anim02,
-    STATUS_KEY_STONE,     ANIM_GeneralGuy_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_GeneralGuy_Anim00,
-    STATUS_KEY_POISON,    ANIM_GeneralGuy_Anim02,
-    STATUS_KEY_STOP,      ANIM_GeneralGuy_Anim00,
-    STATUS_KEY_STATIC,    ANIM_GeneralGuy_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_GeneralGuy_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_GeneralGuy_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_GeneralGuy_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_GeneralGuy_Anim00,
-    STATUS_KEY_UNUSED,    ANIM_GeneralGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_GeneralGuy_Idle,
+    STATUS_KEY_STONE,     ANIM_GeneralGuy_Still,
+    STATUS_KEY_SLEEP,     ANIM_GeneralGuy_Still,
+    STATUS_KEY_POISON,    ANIM_GeneralGuy_Idle,
+    STATUS_KEY_STOP,      ANIM_GeneralGuy_Still,
+    STATUS_KEY_STATIC,    ANIM_GeneralGuy_Still,
+    STATUS_KEY_PARALYZE,  ANIM_GeneralGuy_Still,
+    STATUS_KEY_PARALYZE,  ANIM_GeneralGuy_Still,
+    STATUS_KEY_DIZZY,     ANIM_GeneralGuy_Still,
+    STATUS_KEY_DIZZY,     ANIM_GeneralGuy_Still,
+    STATUS_KEY_UNUSED,    ANIM_GeneralGuy_Still,
     STATUS_END,
 };
 
@@ -139,13 +139,13 @@ s32 N(BombAnims)[] = {
 
 // unused
 s32 N(PanicAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_GeneralGuy_Anim0E,
-    STATUS_KEY_POISON,    ANIM_GeneralGuy_Anim0E,
-    STATUS_KEY_STOP,      ANIM_GeneralGuy_Anim00,
-    STATUS_KEY_STATIC,    ANIM_GeneralGuy_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_GeneralGuy_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_GeneralGuy_Anim00,
-    STATUS_KEY_UNUSED,    ANIM_GeneralGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_GeneralGuy_Panic,
+    STATUS_KEY_POISON,    ANIM_GeneralGuy_Panic,
+    STATUS_KEY_STOP,      ANIM_GeneralGuy_Still,
+    STATUS_KEY_STATIC,    ANIM_GeneralGuy_Still,
+    STATUS_KEY_PARALYZE,  ANIM_GeneralGuy_Still,
+    STATUS_KEY_DIZZY,     ANIM_GeneralGuy_Still,
+    STATUS_KEY_UNUSED,    ANIM_GeneralGuy_Still,
     STATUS_END,
 };
 
@@ -170,7 +170,7 @@ EvtScript N(EVS_Init) = {
     Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
     Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_HandlePhase)))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Idle)
     Call(SetActorVar, ACTOR_SELF, AVAR_General_DoingTankPhase, false)
     Call(SetActorVar, ACTOR_SELF, AVAR_General_Flags, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_General_WavesDefeated, 0)
@@ -196,81 +196,81 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim05)
+            SetConst(LVar1, ANIM_GeneralGuy_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             Set(LVar0, 1)
-            Set(LVar1, ANIM_GeneralGuy_Anim08)
-            Set(LVar2, ANIM_GeneralGuy_Anim09)
+            Set(LVar1, ANIM_GeneralGuy_BurnHurt)
+            Set(LVar2, ANIM_GeneralGuy_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             Set(LVar0, 1)
-            Set(LVar1, ANIM_GeneralGuy_Anim08)
-            Set(LVar2, ANIM_GeneralGuy_Anim09)
+            Set(LVar1, ANIM_GeneralGuy_BurnHurt)
+            Set(LVar2, ANIM_GeneralGuy_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim09)
+            SetConst(LVar1, ANIM_GeneralGuy_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim05)
+            SetConst(LVar1, ANIM_GeneralGuy_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim05)
+            SetConst(LVar1, ANIM_GeneralGuy_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim05)
+            SetConst(LVar1, ANIM_GeneralGuy_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim05)
+            SetConst(LVar1, ANIM_GeneralGuy_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim05)
+            SetConst(LVar1, ANIM_GeneralGuy_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim0E)
+            SetConst(LVar1, ANIM_GeneralGuy_Panic)
             ExecWait(EVS_Enemy_ReturnHome)
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim02)
+            SetConst(LVar1, ANIM_GeneralGuy_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_SPIKE_TAUNT)
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim05)
+            SetConst(LVar1, ANIM_GeneralGuy_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim05)
+            SetConst(LVar1, ANIM_GeneralGuy_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_END_FIRST_STRIKE)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim0E)
+            SetConst(LVar1, ANIM_GeneralGuy_Panic)
             ExecWait(EVS_Enemy_ReturnHome)
             Call(HPBarToHome, ACTOR_SELF)
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim02)
+            SetConst(LVar1, ANIM_GeneralGuy_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_30)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim05)
+            SetConst(LVar1, ANIM_GeneralGuy_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(1000)
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_GeneralGuy_Anim02)
-            SetConst(LVar2, ANIM_GeneralGuy_Anim05)
+            SetConst(LVar1, ANIM_GeneralGuy_Idle)
+            SetConst(LVar2, ANIM_GeneralGuy_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseDefault
@@ -316,11 +316,11 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
     EndThread
     Wait(5)
     Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_OPEN_HATCH)
-    Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim0B)
+    Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Lift)
     Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(PlayModelAnimation, 0, Ref(AS_ToyTank_OpenHatch))
     Wait(20)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Anim0B)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Lift)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Sub(LVar0, 8)
     Add(LVar1, 27)
@@ -329,7 +329,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
     Call(SetAnimation, ACTOR_SELF, PRT_BOMB, ANIM_GeneralGuyBomb_Still)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_BOMB, ACTOR_PART_FLAG_INVISIBLE, false)
     Wait(15)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Anim0A)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Whistle)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_BOMB, ACTOR_PART_FLAG_INVISIBLE, true)
     Wait(6)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -350,7 +350,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
             Call(SetPartJumpGravity, ACTOR_SELF, PRT_BOMB, Float(0.1))
             Call(JumpPartTo, ACTOR_SELF, PRT_BOMB, LVar0, LVar1, LVar2, 0, true)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_BOMB, ACTOR_PART_FLAG_INVISIBLE, true)
-            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
+            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Idle)
             Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
             Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
             Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
@@ -376,7 +376,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
             Call(SetPartJumpGravity, ACTOR_SELF, PRT_BOMB, Float(0.1))
             Call(FlyPartTo, ACTOR_SELF, PRT_BOMB, LVar0, LVar1, LVar2, 0, 15, EASING_LINEAR)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_BOMB, ACTOR_PART_FLAG_INVISIBLE, true)
-            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
+            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Idle)
             Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
             Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
             Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
@@ -400,10 +400,10 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
         CaseOrEq(HIT_RESULT_10)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Idle)
             Wait(30)
             IfEq(LVarF, HIT_RESULT_10)
-                Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
+                Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Idle)
                 Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
                 Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
                 Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
@@ -411,7 +411,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
             EndIf
         EndCaseGroup
     EndSwitch
-    Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
+    Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Idle)
     Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
     Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
     Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
@@ -434,7 +434,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
     Call(MoveBattleCamOver, 40)
     Wait(40)
     Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_OPEN_HATCH)
-    Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim0B)
+    Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Lift)
     Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(PlayModelAnimation, 0, Ref(AS_ToyTank_OpenHatch))
     Wait(10)
@@ -442,7 +442,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
     IfTrue(LVar0)
         Call(SetDarknessMode, BTL_DARKNESS_MODE_2)
     EndIf
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Point)
     Wait(20)
     Call(SetActorVar, ACTOR_TANK, AVAR_Tank_UsingBulbAttack, true)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -492,7 +492,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
                 Call(SetDarknessMode, BTL_DARKNESS_MODE_3)
             EndIf
             Call(N(FadeBackgroundLighten))
-            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
+            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Idle)
             Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
             Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
             Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
@@ -521,7 +521,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
                 Call(SetDarknessMode, BTL_DARKNESS_MODE_3)
             EndIf
             Call(N(FadeBackgroundLighten))
-            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
+            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Idle)
             Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
             Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
             Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
@@ -542,11 +542,11 @@ EvtScript N(EVS_Attack_ShootLightning) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
         CaseOrEq(HIT_RESULT_10)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Idle)
             IfEq(LVarF, HIT_RESULT_10)
                 Call(SetActorVar, ACTOR_TANK, AVAR_Tank_UsingBulbAttack, false)
                 Wait(30)
-                Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
+                Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Idle)
                 Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
                 Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
                 Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
@@ -569,7 +569,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
         Call(SetDarknessMode, BTL_DARKNESS_MODE_3)
     EndIf
     Call(N(FadeBackgroundLighten))
-    Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
+    Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Idle)
     Call(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
     Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
     Call(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)

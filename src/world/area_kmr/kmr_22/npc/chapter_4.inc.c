@@ -6,7 +6,7 @@ EvtScript N(EVS_NpcInit_Muskular) = {
 };
 
 EvtScript N(EVS_NpcInit_GeneralGuy) = {
-    Call(SetNpcAnimation, NPC_SELF, ANIM_GeneralGuy_Anim03)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_GeneralGuy_Point)
     Call(SetNpcImgFXParams, NPC_SELF, IMGFX_FILL_COLOR, 80, 80, 80, 0)
     Return
     End

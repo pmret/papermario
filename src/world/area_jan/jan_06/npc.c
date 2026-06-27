@@ -38,18 +38,18 @@ NpcData N(NpcData_JungleFuzzy) = {
 };
 
 AnimID N(ExtraAnims_SpearGuy_Custom)[] = {
-    ANIM_SpearGuy_Anim03,
-    ANIM_SpearGuy_Anim04,
-    ANIM_SpearGuy_Anim05,
-    ANIM_SpearGuy_Anim06,
-    ANIM_SpearGuy_Anim0F,
-    ANIM_SpearGuy_Anim10,
-    ANIM_SpearGuy_Anim07,
-    ANIM_SpearGuy_Anim08,
-    ANIM_SpearGuy_Anim09,
-    ANIM_SpearGuy_Anim0D,
-    ANIM_SpearGuy_Anim1A,
-    ANIM_SpearGuy_Anim1B,
+    ANIM_SpearGuy_IdleUp,
+    ANIM_SpearGuy_IdleFwd,
+    ANIM_SpearGuy_Walk,
+    ANIM_SpearGuy_Run,
+    ANIM_SpearGuy_Dizzy,
+    ANIM_SpearGuy_ShakeSpear,
+    ANIM_SpearGuy_HurtUp,
+    ANIM_SpearGuy_HurtFwd,
+    ANIM_SpearGuy_HurtStill,
+    ANIM_SpearGuy_Sleep,
+    ANIM_SpearGuy_StabWindup,
+    ANIM_SpearGuy_StabThrust,
     ANIM_LIST_END
 };
 

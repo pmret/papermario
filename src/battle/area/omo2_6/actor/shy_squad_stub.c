@@ -199,17 +199,17 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_TankGuy_Anim01,
-    STATUS_KEY_STONE,     ANIM_TankGuy_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_TankGuy_Anim00,
-    STATUS_KEY_POISON,    ANIM_TankGuy_Anim01,
-    STATUS_KEY_STOP,      ANIM_TankGuy_Anim00,
-    STATUS_KEY_STATIC,    ANIM_TankGuy_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_TankGuy_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_TankGuy_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_TankGuy_Anim01,
-    STATUS_KEY_DIZZY,     ANIM_TankGuy_Anim01,
-    STATUS_KEY_UNUSED,    ANIM_TankGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_TankGuy_Idle,
+    STATUS_KEY_STONE,     ANIM_TankGuy_Still,
+    STATUS_KEY_SLEEP,     ANIM_TankGuy_Still,
+    STATUS_KEY_POISON,    ANIM_TankGuy_Idle,
+    STATUS_KEY_STOP,      ANIM_TankGuy_Still,
+    STATUS_KEY_STATIC,    ANIM_TankGuy_Still,
+    STATUS_KEY_PARALYZE,  ANIM_TankGuy_Still,
+    STATUS_KEY_PARALYZE,  ANIM_TankGuy_Still,
+    STATUS_KEY_DIZZY,     ANIM_TankGuy_Idle,
+    STATUS_KEY_DIZZY,     ANIM_TankGuy_Idle,
+    STATUS_KEY_UNUSED,    ANIM_TankGuy_Still,
     STATUS_END,
 };
 
@@ -240,7 +240,7 @@ EvtScript N(EVS_Init) = {
     Call(ForceHomePos, ACTOR_SELF, 20, 0, -10)
     Call(HPBarToHome, ACTOR_SELF)
     Set(LVar0, PRT_MEMBER_01)
-    Set(LVar1, ANIM_TankGuy_Anim03)
+    Set(LVar1, ANIM_TankGuy_Flee)
     Set(LVar4, Float(4.0))
     Set(LVar5, 5)
     Loop(NUM_MEMBERS)
@@ -249,7 +249,7 @@ EvtScript N(EVS_Init) = {
             Call(GetPartMovementVar, ACTOR_SELF, LVar0, HOME_OFFSET_Z, LVar3)
             Set(LVar5, 20)
             ExecWait(N(EVS_MoveMemberToPos))
-            Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim01)
+            Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Idle)
         EndThread
         Add(LVar0, 1)
     EndLoop

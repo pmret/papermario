@@ -320,14 +320,14 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(DarkAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_TankGuy_Anim01,
-    STATUS_KEY_STOP,      ANIM_TankGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_TankGuy_Idle,
+    STATUS_KEY_STOP,      ANIM_TankGuy_Still,
     STATUS_END,
 };
 
 s32 N(BrightAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_TankGuy_Anim07,
-    STATUS_KEY_STOP,      ANIM_TankGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_TankGuy_Excited,
+    STATUS_KEY_STOP,      ANIM_TankGuy_Still,
     STATUS_END,
 };
 
@@ -440,7 +440,7 @@ EvtScript N(EVS_Init) = {
         Add(LVar0, 1)
     EndLoop
     Set(LVar0, PRT_MEMBER_01)
-    Set(LVar1, ANIM_TankGuy_Anim03)
+    Set(LVar1, ANIM_TankGuy_Flee)
     Set(LVar2, 55)
     Set(LVar3, 47)
     Set(LVar4, Float(4.0))
@@ -454,7 +454,7 @@ EvtScript N(EVS_Init) = {
             Call(GetPartMovementVar, ACTOR_SELF, LVar0, HOME_OFFSET_Z, LVar3)
             Set(LVar5, 20)
             ExecWait(N(EVS_MoveMemberToPos))
-            Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim01)
+            Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Idle)
         EndThread
         Add(LVar0, 1)
         Add(LVarF, 5)
@@ -762,103 +762,103 @@ EvtScript N(EVS_HandleEvent) = {
         CaseEq(EVENT_BEGIN_FIRST_STRIKE)
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_ReduceCrowdSize))
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_HitReaction))
         EndCaseGroup
         CaseEq(EVENT_DEATH)
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_ReduceCrowdSize))
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_HitReaction))
             Wait(10)
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_Death))
             Return
         CaseOrEq(EVENT_BURN_HIT)
         CaseOrEq(EVENT_BURN_DEATH)
-            SetConst(LVar1, ANIM_TankGuy_Anim05)
+            SetConst(LVar1, ANIM_TankGuy_BurnHurt)
             ExecWait(N(EVS_ReduceCrowdSize))
             LOOP_MEMBERS(LVar0)
-                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim05)
+                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_BurnHurt)
                 Add(LVar0, 1)
             EndLoop
             Wait(20)
             LOOP_MEMBERS(LVar0)
-                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim05)
+                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_BurnHurt)
                 Add(LVar0, 1)
             EndLoop
             Wait(15)
             IfEq(LVar0, 36)
                 Wait(10)
-                SetConst(LVar1, ANIM_TankGuy_Anim05)
+                SetConst(LVar1, ANIM_TankGuy_BurnHurt)
                 ExecWait(N(EVS_Death))
                 Return
             EndIf
         EndCaseGroup
         CaseEq(EVENT_SPIN_SMASH_HIT)
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_ReduceCrowdSize))
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_HitReaction))
         CaseEq(EVENT_SPIN_SMASH_DEATH)
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_ReduceCrowdSize))
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_HitReaction))
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_Death))
             Return
         CaseEq(EVENT_SHOCK_HIT)
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_ReduceCrowdSize))
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_Shock))
             Wait(40)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(MoveBattleCamOver, 20)
             ExecWait(N(EVS_MoveSquadHome))
         CaseEq(EVENT_SHOCK_DEATH)
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_ReduceCrowdSize))
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_Shock))
             Wait(40)
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_Death))
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_SPIKE_TAUNT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_TankGuy_Anim01)
+            SetConst(LVar1, ANIM_TankGuy_Idle)
             ExecWait(N(EVS_HitReaction))
         EndCaseGroup
         CaseEq(EVENT_BEGIN_AIR_LIFT)
-            Set(LVar1, ANIM_TankGuy_Anim04)
+            Set(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(N(EVS_SetMembersAnimation))
             Wait(1000)
         CaseEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_TankGuy_Anim01)
+            SetConst(LVar1, ANIM_TankGuy_Idle)
             ExecWait(N(EVS_HitReaction))
         CaseEq(EVENT_END_FIRST_STRIKE)
             Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
             Call(HPBarToHome, ACTOR_SELF)
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_TankGuy_Anim01)
+            SetConst(LVar1, ANIM_TankGuy_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_30)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            SetConst(LVar1, ANIM_TankGuy_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(1000)
         CaseEq(EVENT_SCARE_AWAY)
         CaseDefault
     EndSwitch
-    Set(LVar1, ANIM_TankGuy_Anim01)
+    Set(LVar1, ANIM_TankGuy_Idle)
     ExecWait(N(EVS_SetMembersAnimation))
     Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
@@ -1068,7 +1068,7 @@ EvtScript N(EVS_Flee) = {
             Call(SetActorVar, ACTOR_SELF, AVAR_FleeState, AVAL_Flee_Looping)
             Thread
                 Wait(LVar1)
-                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim03)
+                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Flee)
                 Call(SetPartYaw, ACTOR_SELF, LVar0, 180)
                 Call(RunPartTo, ACTOR_SELF, LVar0, 55, 0, 47, 20)
                 Call(RunPartTo, ACTOR_SELF, LVar0, 185, 0, 47, 30)
@@ -1107,7 +1107,7 @@ EvtScript N(EVS_Attack_Swarm) = {
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 30)
     Set(LVar0, PRT_MEMBER_01)
-    Set(LVar1, ANIM_TankGuy_Anim03)
+    Set(LVar1, ANIM_TankGuy_Flee)
     Loop(NUM_MEMBERS)
         Thread
             Call(GetActorPos, ACTOR_PLAYER, LVar2, LVar5, LVar3)
@@ -1139,9 +1139,9 @@ EvtScript N(EVS_Attack_Swarm) = {
         EndIf
         Call(RandInt, 100, LVar7)
         IfLt(LVar7, 50)
-            Set(LVar7, ANIM_TankGuy_Anim04)
+            Set(LVar7, ANIM_TankGuy_Hurt)
         Else
-            Set(LVar7, ANIM_TankGuy_Anim07)
+            Set(LVar7, ANIM_TankGuy_Excited)
         EndIf
         Call(SetAnimation, ACTOR_SELF, LVar0, LVar7)
         Add(LVar0, 1)
@@ -1170,7 +1170,7 @@ EvtScript N(EVS_Attack_Swarm) = {
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(MoveBattleCamOver, 30)
             ExecWait(N(EVS_MoveSquadHome))
-            Set(LVar1, ANIM_TankGuy_Anim01)
+            Set(LVar1, ANIM_TankGuy_Idle)
             ExecWait(N(EVS_SetMembersAnimation))
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             Call(UseIdleAnimation, ACTOR_SELF, true)
@@ -1212,7 +1212,7 @@ EvtScript N(EVS_Attack_Swarm) = {
     Call(MoveBattleCamOver, 30)
     Wait(20)
     ExecWait(N(EVS_MoveSquadHome))
-    Set(LVar1, ANIM_TankGuy_Anim01)
+    Set(LVar1, ANIM_TankGuy_Idle)
     ExecWait(N(EVS_SetMembersAnimation))
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     Call(UseIdleAnimation, ACTOR_SELF, true)
@@ -1222,7 +1222,7 @@ EvtScript N(EVS_Attack_Swarm) = {
 
 EvtScript N(EVS_MoveSquadHome) = {
     Set(LVar0, PRT_MEMBER_01)
-    Set(LVar1, ANIM_TankGuy_Anim03)
+    Set(LVar1, ANIM_TankGuy_Flee)
     Loop(NUM_MEMBERS)
         Thread
             Call(SetGoalToHome, ACTOR_SELF)
@@ -1234,7 +1234,7 @@ EvtScript N(EVS_MoveSquadHome) = {
             SetF(LVar4, Float(6.0))
             Set(LVar5, 30)
             ExecWait(N(EVS_MoveMemberToPos))
-            Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim01)
+            Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Idle)
             Call(SetPartYaw, ACTOR_SELF, LVar0, 0)
         EndThread
         Add(LVar0, 1)

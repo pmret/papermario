@@ -3,20 +3,20 @@
 #include "world/common/enemy/ai/SpearGuyAI.inc.c"
 
 AnimID N(ExtraAnims_SpearGuy)[] = {
-    ANIM_SpearGuy_Anim00,
-    ANIM_SpearGuy_Anim03,
-    ANIM_SpearGuy_Anim05,
-    ANIM_SpearGuy_Anim06,
-    ANIM_SpearGuy_Anim07,
-    ANIM_SpearGuy_Anim0F,
-    ANIM_SpearGuy_Anim10,
-    ANIM_SpearGuy_Anim1A,
-    ANIM_SpearGuy_Anim1B,
+    ANIM_SpearGuy_Still,
+    ANIM_SpearGuy_IdleUp,
+    ANIM_SpearGuy_Walk,
+    ANIM_SpearGuy_Run,
+    ANIM_SpearGuy_HurtUp,
+    ANIM_SpearGuy_Dizzy,
+    ANIM_SpearGuy_ShakeSpear,
+    ANIM_SpearGuy_StabWindup,
+    ANIM_SpearGuy_StabThrust,
     ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_SpearGuy_Hitbox)[] = {
-    ANIM_SpearGuy_Anim00,
+    ANIM_SpearGuy_Still,
     ANIM_LIST_END,
 };
 
