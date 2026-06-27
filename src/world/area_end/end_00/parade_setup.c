@@ -261,7 +261,7 @@ AnimID N(ExtraAnims_RaphaelRaven)[] = {
 };
 
 AnimID N(ExtraAnims_LavaPiranha)[] = {
-    ANIM_LavaPiranha_Anim04,
+    ANIM_LavaPiranha_TongueWag,
     ANIM_LIST_END
 };
 
@@ -642,7 +642,7 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 90.0f
     },
     [NPC_LavaPiranha] {
-        .initialAnim = ANIM_LavaPiranha_Anim04,
+        .initialAnim = ANIM_LavaPiranha_TongueWag,
         .animList = N(ExtraAnims_LavaPiranha),
         .pos = { 507.0f, 50.0f, -5.0f },
         .yaw = 90.0f

@@ -51,7 +51,7 @@ EvtScript N(EVS_NpcAI_Sentinel) = {
     Add(LVar2, 2)
     Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(func_80045838, -1, SOUND_SENTINEL_PICKUP, 0)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim08)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Grab)
     Wait(10)
     Call(SetPlayerAnimation, ANIM_MarioW2_Flail)
     Wait(10)

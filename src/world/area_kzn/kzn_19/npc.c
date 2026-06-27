@@ -327,22 +327,22 @@ EvtScript N(EVS_NpcIdle_LavaPiranha) = {
     Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Exec(N(EVS_PlayVinesAnim_Talk))
-    Call(SpeakToPlayer, NPC_SELF, ANIM_LavaPiranha_Anim0E, ANIM_LavaPiranha_Anim03, 768, -30, 30, MSG_CH5_0102)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_LavaPiranha_Talk, ANIM_LavaPiranha_Idle, 768, -30, 30, MSG_CH5_0102)
     Exec(N(EVS_PlayVinesAnim_Idle))
     Wait(10 * DT)
-    Call(EndSpeech, NPC_SELF, ANIM_LavaPiranha_Anim0E, ANIM_LavaPiranha_Anim03, 256, -30, 30)
+    Call(EndSpeech, NPC_SELF, ANIM_LavaPiranha_Talk, ANIM_LavaPiranha_Idle, 256, -30, 30)
     Exec(N(EVS_PlayVinesAnim_Talk))
     Wait(30 * DT)
-    Call(SpeakToPlayer, NPC_SELF, ANIM_LavaPiranha_Anim0E, ANIM_LavaPiranha_Anim03, 768, -30, 30, MSG_CH5_0103)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_LavaPiranha_Talk, ANIM_LavaPiranha_Idle, 768, -30, 30, MSG_CH5_0103)
     Exec(N(EVS_PlayVinesAnim_Idle))
     Wait(10 * DT)
-    Call(EndSpeech, NPC_SELF, ANIM_LavaPiranha_Anim0E, ANIM_LavaPiranha_Anim03, 768, -30, 30)
+    Call(EndSpeech, NPC_SELF, ANIM_LavaPiranha_Talk, ANIM_LavaPiranha_Idle, 768, -30, 30)
     Exec(N(EVS_PlayVinesAnim_Talk))
     Wait(10 * DT)
-    Call(EndSpeech, NPC_SELF, ANIM_LavaPiranha_Anim0E, ANIM_LavaPiranha_Anim03, 768, -30, 30)
+    Call(EndSpeech, NPC_SELF, ANIM_LavaPiranha_Talk, ANIM_LavaPiranha_Idle, 768, -30, 30)
     Exec(N(EVS_PlayVinesAnim_Idle))
     Wait(10 * DT)
-    Call(EndSpeech, NPC_SELF, ANIM_LavaPiranha_Anim0E, ANIM_LavaPiranha_Anim03, 768, -30, 30)
+    Call(EndSpeech, NPC_SELF, ANIM_LavaPiranha_Talk, ANIM_LavaPiranha_Idle, 768, -30, 30)
     ChildThread
         Set(LVar0, 20)
         Loop(3)
@@ -575,9 +575,9 @@ EvtScript N(EVS_NpcInit_LavaPiranha) = {
     Call(GetEntryID, LVar0)
     IfEq(LVar0, kzn_19_ENTRY_1)
         IfLt(GB_StoryProgress, STORY_CH5_DEFEATED_LAVA_PIRANHA)
-            Call(SetNpcAnimation, NPC_LavaPiranhaHead, ANIM_LavaPiranha_Anim03)
-            Call(SetNpcAnimation, NPC_LavaBud_01, ANIM_LavaBud_Anim03)
-            Call(SetNpcAnimation, NPC_LavaBud_02, ANIM_LavaBud_Anim03)
+            Call(SetNpcAnimation, NPC_LavaPiranhaHead, ANIM_LavaPiranha_Idle)
+            Call(SetNpcAnimation, NPC_LavaBud_01, ANIM_LavaBud_Idle)
+            Call(SetNpcAnimation, NPC_LavaBud_02, ANIM_LavaBud_Idle)
             MallocArray(64, LVar0)
             Call(SetSelfVar, 0, LVar0)
             UseArray(LVar0)
@@ -639,13 +639,13 @@ NpcData N(NpcData_Misstar) = {
 };
 
 AnimID N(ExtraAnims_LavaPiranha)[] = {
-    ANIM_LavaPiranha_Anim03,
-    ANIM_LavaPiranha_Anim0E,
+    ANIM_LavaPiranha_Idle,
+    ANIM_LavaPiranha_Talk,
     ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_LavaBud)[] = {
-    ANIM_LavaBud_Anim03,
+    ANIM_LavaBud_Idle,
     ANIM_LIST_END
 };
 

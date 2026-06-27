@@ -16,22 +16,22 @@
 
 #define FROST_PIRANHA_ANIMS \
 { \
-    .idle   = ANIM_LargePiranha_Frost_Anim01, \
-    .walk   = ANIM_LargePiranha_Frost_Anim02, \
-    .run    = ANIM_LargePiranha_Frost_Anim03, \
-    .chase  = ANIM_LargePiranha_Frost_Anim03, \
-    .anim_4 = ANIM_LargePiranha_Frost_Anim01, \
-    .anim_5 = ANIM_LargePiranha_Frost_Anim01, \
-    .death  = ANIM_LargePiranha_Frost_Anim0E, \
-    .hit    = ANIM_LargePiranha_Frost_Anim0E, \
-    .anim_8 = ANIM_LargePiranha_Frost_Anim18, \
-    .anim_9 = ANIM_LargePiranha_Frost_Anim17, \
-    .anim_A = ANIM_LargePiranha_Frost_Anim05, \
-    .anim_B = ANIM_LargePiranha_Frost_Anim06, \
-    .anim_C = ANIM_LargePiranha_Frost_Anim12, \
-    .anim_D = ANIM_LargePiranha_Frost_Anim13, \
-    .anim_E = ANIM_LargePiranha_Frost_Anim14, \
-    .anim_F = ANIM_LargePiranha_Frost_Anim01, \
+    .idle   = ANIM_LargePiranha_Frost_Idle, \
+    .walk   = ANIM_LargePiranha_Frost_Walk, \
+    .run    = ANIM_LargePiranha_Frost_Run, \
+    .chase  = ANIM_LargePiranha_Frost_Run, \
+    .anim_4 = ANIM_LargePiranha_Frost_Idle, \
+    .anim_5 = ANIM_LargePiranha_Frost_Idle, \
+    .death  = ANIM_LargePiranha_Frost_Hurt, \
+    .hit    = ANIM_LargePiranha_Frost_Hurt, \
+    .anim_8 = ANIM_LargePiranha_Frost_Burrow, \
+    .anim_9 = ANIM_LargePiranha_Frost_Emerge, \
+    .anim_A = ANIM_LargePiranha_Frost_Windup, \
+    .anim_B = ANIM_LargePiranha_Frost_Bite, \
+    .anim_C = ANIM_LargePiranha_Frost_Retract, \
+    .anim_D = ANIM_LargePiranha_Frost_Hidden, \
+    .anim_E = ANIM_LargePiranha_Frost_Extend, \
+    .anim_F = ANIM_LargePiranha_Frost_Idle, \
 }
 
 // auxiliary NPC used for triggering enemy first strikes during the bite animation

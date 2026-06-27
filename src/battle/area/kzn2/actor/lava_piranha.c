@@ -148,34 +148,34 @@ extern Formation N(LeftBudFormation);
 extern Formation N(RightBudFormation);
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_LavaPiranha_Anim03,
-    STATUS_KEY_STONE,     ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_LavaPiranha_Anim0A,
-    STATUS_KEY_POISON,    ANIM_LavaPiranha_Anim03,
-    STATUS_KEY_STOP,      ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_STATIC,    ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_LavaPiranha_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_LavaPiranha_Idle,
+    STATUS_KEY_STONE,     ANIM_LavaPiranha_Still,
+    STATUS_KEY_SLEEP,     ANIM_LavaPiranha_Sleep,
+    STATUS_KEY_POISON,    ANIM_LavaPiranha_Idle,
+    STATUS_KEY_STOP,      ANIM_LavaPiranha_Still,
+    STATUS_KEY_STATIC,    ANIM_LavaPiranha_Still,
+    STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Still,
+    STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Still,
+    STATUS_KEY_DIZZY,     ANIM_LavaPiranha_Sleep,
     STATUS_END,
 };
 
 s32 N(FieryAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_LavaPiranha_Anim04,
-    STATUS_KEY_STONE,     ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_LavaPiranha_Anim04,
-    STATUS_KEY_POISON,    ANIM_LavaPiranha_Anim04,
-    STATUS_KEY_STOP,      ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_STATIC,    ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_LavaPiranha_Anim0C,
+    STATUS_KEY_NORMAL,    ANIM_LavaPiranha_TongueWag,
+    STATUS_KEY_STONE,     ANIM_LavaPiranha_Still,
+    STATUS_KEY_SLEEP,     ANIM_LavaPiranha_TongueWag,
+    STATUS_KEY_POISON,    ANIM_LavaPiranha_TongueWag,
+    STATUS_KEY_STOP,      ANIM_LavaPiranha_Still,
+    STATUS_KEY_STATIC,    ANIM_LavaPiranha_Still,
+    STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Still,
+    STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Still,
+    STATUS_KEY_DIZZY,     ANIM_LavaPiranha_Dizzy,
     STATUS_END,
 };
 
 s32 N(StunnedAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_LavaPiranha_Anim10,
-    STATUS_KEY_STOP,      ANIM_LavaPiranha_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_LavaPiranha_Stunned,
+    STATUS_KEY_STOP,      ANIM_LavaPiranha_Still,
     STATUS_END,
 };
 
@@ -563,8 +563,8 @@ EvtScript N(EVS_Init) = {
     Call(SetActorVar, ACTOR_SELF, AVAR_Flags, 0)
     Set(LVar0, 30)
     Call(SetActorVar, ACTOR_SELF, AVAR_Common_NextTwitchTime, LVar0)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaPiranha_Anim03)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaPiranha_Anim09)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaPiranha_Idle)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaPiranha_Hurt)
     Call(ForceHomePos, ACTOR_SELF, 61, 61, 0)
     Call(LoadAnimatedModel, VINE_0, Ref(N(AnimModel_MainHeadVine)))
     Call(OverrideBattleDmaDest, VINE_0_BASE)
@@ -1034,7 +1034,7 @@ EvtScript N(EVS_HandleEvent) = {
             Return
         CaseEq(EVENT_SHOCK_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaPiranha_Anim09)
+            SetConst(LVar1, ANIM_LavaPiranha_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
         CaseEq(EVENT_SHOCK_DEATH)
             ExecWait(N(EVS_Death))
@@ -1056,7 +1056,7 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetAnimatorFlags, VINE_0, MODEL_ANIMATOR_FLAG_FREEZE_ANIMATION, 0)
         CaseEq(EVENT_30)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaPiranha_Anim09)
+            SetConst(LVar1, ANIM_LavaPiranha_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(1000)
         CaseDefault
@@ -1104,8 +1104,8 @@ EvtScript N(EVS_BurnHit) = {
             Call(OverrideBattleDmaDest, VINE_0_BASE)
             Call(LoadBattleDmaData, VINE_ANIM_BOSS_RECOVER)
             Call(PlayModelAnimation, VINE_0, VINE_0_BASE)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaPiranha_Anim03)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaPiranha_Anim09)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaPiranha_Idle)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaPiranha_Hurt)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(FieryAnims)))
             Call(SetDefenseTable, ACTOR_SELF, PRT_MAIN, Ref(N(FieryDefense)))
             Call(SetDefenseTable, ACTOR_SELF, PRT_TARGET, Ref(N(FieryDefense)))
@@ -1157,7 +1157,7 @@ EvtScript N(EVS_TakeTurn) = {
                     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LAVA_PIRANHA_RECOVER)
                     Set(LVar0, ACTOR_BOSS)
                     ExecWait(N(EVS_Ignite))
-                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim04)
+                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_TongueWag)
                     Call(OverrideBattleDmaDest, VINE_0_BASE)
                     Call(LoadBattleDmaData, VINE_ANIM_BOSS_RECOVER)
                     Call(PlayModelAnimation, VINE_0, VINE_0_BASE)
@@ -1201,11 +1201,11 @@ EvtScript N(EVS_Attack_SpitFire) = {
     Call(LoadBattleDmaData, VINE_ANIM_BOSS_ATTACK)
     Call(PlayModelAnimation, VINE_0, VINE_0_BASE)
     Wait(14)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim05)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_SpitFireIn)
     Wait(10)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LAVA_PIRANHA_INHALE)
     Wait(45)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_SpitFireOut)
     Call(GetPartOffset, ACTOR_SELF, PRT_MAIN, LVar0, LVar1, LVar2)
     Sub(LVar0, 50)
     Sub(LVar1, 15)
@@ -1225,7 +1225,7 @@ EvtScript N(EVS_Attack_SpitFire) = {
     Switch(LVarA)
         CaseOrEq(HIT_RESULT_MISS)
         CaseOrEq(HIT_RESULT_LUCKY)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim03)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Idle)
             Wait(19)
             Call(OverrideBattleDmaDest, VINE_0_BASE)
             Call(LoadBattleDmaData, VINE_ANIM_BOSS_IDLE)
@@ -1248,7 +1248,7 @@ EvtScript N(EVS_Attack_SpitFire) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
         CaseOrEq(HIT_RESULT_10)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim03)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Idle)
             Wait(19)
             Call(OverrideBattleDmaDest, VINE_0_BASE)
             Call(LoadBattleDmaData, VINE_ANIM_BOSS_IDLE)
@@ -1283,11 +1283,11 @@ EvtScript N(EVS_Attack_FireBreath) = {
     Call(LoadBattleDmaData, VINE_ANIM_BOSS_ATTACK)
     Call(PlayModelAnimation, VINE_0, VINE_0_BASE)
     Wait(14)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim0E)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Talk)
     Wait(10)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LAVA_PIRANHA_INHALE)
     Wait(45)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim08)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_FireBreathOut)
     Call(GetPartOffset, ACTOR_SELF, PRT_MAIN, LVar0, LVar1, LVar2)
     Sub(LVar0, 40)
     Set(LVar1, -10)
@@ -1308,9 +1308,9 @@ EvtScript N(EVS_Attack_FireBreath) = {
             Call(OverrideBattleDmaDest, VINE_0_BASE)
             Call(LoadBattleDmaData, VINE_ANIM_BOSS_POST_ATTACK)
             Call(PlayModelAnimation, VINE_0, VINE_0_BASE)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_FireBreathIn)
             Wait(19)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_TongueWag)
             Call(OverrideBattleDmaDest, VINE_0_BASE)
             Call(LoadBattleDmaData, VINE_ANIM_BOSS_IDLE)
             Call(PlayModelAnimation, VINE_0, VINE_0_BASE)
@@ -1331,9 +1331,9 @@ EvtScript N(EVS_Attack_FireBreath) = {
     Call(OverrideBattleDmaDest, VINE_0_BASE)
     Call(LoadBattleDmaData, VINE_ANIM_BOSS_POST_ATTACK)
     Call(PlayModelAnimation, VINE_0, VINE_0_BASE)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim07)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_FireBreathIn)
     Wait(19)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_TongueWag)
     Call(OverrideBattleDmaDest, VINE_0_BASE)
     Call(LoadBattleDmaData, VINE_ANIM_BOSS_IDLE)
     Call(PlayModelAnimation, VINE_0, VINE_0_BASE)
@@ -1444,7 +1444,7 @@ EvtScript N(EVS_Death) = {
         Call(HideHealthBar, ACTOR_SELF)
         Call(HideHealthBar, ACTOR_BUD_1)
         Call(HideHealthBar, ACTOR_BUD_2)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim0D)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_PlayDead)
         Call(OverrideBattleDmaDest, VINE_0_BASE)
         Call(LoadBattleDmaData, VINE_ANIM_BOSS_DEATH_MIDDLE)
         Call(PlayModelAnimation, VINE_0, VINE_0_BASE)
@@ -1466,7 +1466,7 @@ EvtScript N(EVS_Death) = {
             EndLoop
         EndThread
         Wait(10)
-        Call(SetAnimation, ACTOR_BUD_1, PRT_MAIN, ANIM_LavaBud_Anim0D)
+        Call(SetAnimation, ACTOR_BUD_1, PRT_MAIN, ANIM_LavaBud_PlayDead)
         Call(OverrideBattleDmaDest, VINE_1_BASE)
         Call(LoadBattleDmaData, VINE_ANIM_BUD_DEATH_MIDDLE)
         Call(PlayModelAnimation, VINE_1, VINE_1_BASE)
@@ -1487,7 +1487,7 @@ EvtScript N(EVS_Death) = {
             EndLoop
         EndThread
         Wait(5)
-        Call(SetAnimation, ACTOR_BUD_2, PRT_MAIN, ANIM_LavaBud_Anim0D)
+        Call(SetAnimation, ACTOR_BUD_2, PRT_MAIN, ANIM_LavaBud_PlayDead)
         Call(OverrideBattleDmaDest, VINE_2_BASE)
         Call(LoadBattleDmaData, VINE_ANIM_BUD_DEATH_MIDDLE)
         Call(PlayModelAnimation, VINE_2, VINE_2_BASE)
@@ -1588,12 +1588,12 @@ EvtScript N(EVS_Death) = {
             Wait(85)
         EndChildThread
         Call(SetActorVar, ACTOR_SELF, AVAR_Boss_IsSecondPhase, true)
-        Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaPiranha_Anim04)
-        Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaPiranha_Anim0A)
-        Call(SetActorVar, ACTOR_BUD_1, AVAR_Common_UnkAnim1, ANIM_LavaBud_Anim04)
-        Call(SetActorVar, ACTOR_BUD_1, AVAR_Common_UnkAnim2, ANIM_LavaBud_Anim0B)
-        Call(SetActorVar, ACTOR_BUD_2, AVAR_Common_UnkAnim1, ANIM_LavaBud_Anim04)
-        Call(SetActorVar, ACTOR_BUD_2, AVAR_Common_UnkAnim2, ANIM_LavaBud_Anim0B)
+        Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaPiranha_TongueWag)
+        Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaPiranha_Sleep)
+        Call(SetActorVar, ACTOR_BUD_1, AVAR_Common_UnkAnim1, ANIM_LavaBud_IdleFiery)
+        Call(SetActorVar, ACTOR_BUD_1, AVAR_Common_UnkAnim2, ANIM_LavaBud_HurtFiery)
+        Call(SetActorVar, ACTOR_BUD_2, AVAR_Common_UnkAnim1, ANIM_LavaBud_IdleFiery)
+        Call(SetActorVar, ACTOR_BUD_2, AVAR_Common_UnkAnim2, ANIM_LavaBud_HurtFiery)
         Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(A(lava_bud_FieryAnims)))
         Call(SetIdleAnimations, ACTOR_BUD_1, PRT_MAIN, Ref(A(lava_bud_FieryAnims)))
         Call(SetIdleAnimations, ACTOR_BUD_2, PRT_MAIN, Ref(A(lava_bud_FieryAnims)))
@@ -1613,13 +1613,13 @@ EvtScript N(EVS_Death) = {
         Call(SetPartFlagBits, ACTOR_BUD_2, PRT_TARGET, ACTOR_PART_FLAG_DAMAGE_IMMUNE, false)
         Set(LVar0, ACTOR_BOSS)
         ExecWait(N(EVS_Ignite))
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim04)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_TongueWag)
         Set(LVar0, ACTOR_BUD_1)
         ExecWait(N(EVS_Ignite))
-        Call(SetAnimation, ACTOR_BUD_1, PRT_MAIN, ANIM_LavaBud_Anim04)
+        Call(SetAnimation, ACTOR_BUD_1, PRT_MAIN, ANIM_LavaBud_IdleFiery)
         Set(LVar0, ACTOR_BUD_2)
         ExecWait(N(EVS_Ignite))
-        Call(SetAnimation, ACTOR_BUD_2, PRT_MAIN, ANIM_LavaBud_Anim04)
+        Call(SetAnimation, ACTOR_BUD_2, PRT_MAIN, ANIM_LavaBud_IdleFiery)
         Call(SetActorType, ACTOR_SELF, ACTOR_TYPE_LAVA_PIRANHA_PHASE_2)
         Call(SetActorType, ACTOR_BUD_1, ACTOR_TYPE_LAVA_BUD_PHASE_2)
         Call(SetActorType, ACTOR_BUD_2, ACTOR_TYPE_LAVA_BUD_PHASE_2)
@@ -1675,7 +1675,7 @@ EvtScript N(EVS_Death) = {
         Call(OverrideBattleDmaDest, VINE_0_BASE)
         Call(LoadBattleDmaData, VINE_ANIM_BOSS_IDLE)
         Call(PlayModelAnimation, VINE_0, VINE_0_BASE)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim0E)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Talk)
         Wait(5)
         Call(OverrideBattleDmaDest, VINE_2_BASE)
         Call(LoadBattleDmaData, VINE_ANIM_BUD_IDLE)
@@ -1735,7 +1735,7 @@ EvtScript N(EVS_Death) = {
             EndIf
             Wait(121)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LAVA_PIRANHA_COLLAPSE)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim0A)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Sleep)
             Call(OverrideBattleDmaDest, VINE_0_BASE)
             Call(LoadBattleDmaData, VINE_ANIM_BOSS_DEATH_COLLAPSE)
             Call(PlayModelAnimation, VINE_0, VINE_0_BASE)
@@ -1834,9 +1834,9 @@ EvtScript N(EVS_Death) = {
         EndThread
         Wait(212)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim0F)
-        Call(SetAnimation, ACTOR_BUD_1, PRT_MAIN, ANIM_LavaBud_Anim0F)
-        Call(SetAnimation, ACTOR_BUD_2, PRT_MAIN, ANIM_LavaBud_Anim0F)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Dead)
+        Call(SetAnimation, ACTOR_BUD_1, PRT_MAIN, ANIM_LavaBud_Dead)
+        Call(SetAnimation, ACTOR_BUD_2, PRT_MAIN, ANIM_LavaBud_Dead)
         PlayEffect(EFFECT_SHOCKWAVE, 0, -60, 0, 2, 0)
         Thread
             Call(N(StartRumbleWithParams), 180, 16)
@@ -1885,7 +1885,7 @@ EvtScript N(EVS_RemovePetitPiranha) = {
         Return
     EndIf
     Thread
-        Call(SetAnimation, LVar0, 1, ANIM_PetitPiranha_Anim03)
+        Call(SetAnimation, LVar0, 1, ANIM_PetitPiranha_Hurt)
         Wait(10)
         Set(LVar2, 0)
         Loop(24)
@@ -1960,8 +1960,8 @@ EvtScript N(EVS_Ignite) = {
             Call(SetDefenseTable, ACTOR_BUD_1, PRT_TARGET, Ref(A(lava_bud_FieryDefense)))
             Call(SetPartEventBits, ACTOR_BUD_1, PRT_MAIN, ACTOR_EVENT_FLAG_FIREY, true)
             Call(SetPartEventBits, ACTOR_BUD_1, PRT_TARGET, ACTOR_EVENT_FLAG_FIREY, true)
-            Call(SetActorVar, ACTOR_BUD_1, AVAR_Common_UnkAnim1, ANIM_LavaBud_Anim04)
-            Call(SetActorVar, ACTOR_BUD_1, AVAR_Common_UnkAnim2, ANIM_LavaBud_Anim0B)
+            Call(SetActorVar, ACTOR_BUD_1, AVAR_Common_UnkAnim1, ANIM_LavaBud_IdleFiery)
+            Call(SetActorVar, ACTOR_BUD_1, AVAR_Common_UnkAnim2, ANIM_LavaBud_HurtFiery)
             Call(SetActorVar, ACTOR_BUD_1, AVAR_Common_PiranhaState, PIRANHA_STATE_FIERY)
             Call(SetPartFlagBits, ACTOR_BUD_1, PRT_TARGET, ACTOR_PART_FLAG_NO_TARGET, false)
             Call(SetActorFlagBits, ACTOR_BUD_1, ACTOR_FLAG_NO_HEALTH_BAR, false)
@@ -1981,8 +1981,8 @@ EvtScript N(EVS_Ignite) = {
             Call(SetDefenseTable, ACTOR_BUD_2, PRT_TARGET, Ref(A(lava_bud_FieryDefense)))
             Call(SetPartEventBits, ACTOR_BUD_2, PRT_MAIN, ACTOR_EVENT_FLAG_FIREY, true)
             Call(SetPartEventBits, ACTOR_BUD_2, PRT_TARGET, ACTOR_EVENT_FLAG_FIREY, true)
-            Call(SetActorVar, ACTOR_BUD_2, AVAR_Common_UnkAnim1, ANIM_LavaBud_Anim04)
-            Call(SetActorVar, ACTOR_BUD_2, AVAR_Common_UnkAnim2, ANIM_LavaBud_Anim0B)
+            Call(SetActorVar, ACTOR_BUD_2, AVAR_Common_UnkAnim1, ANIM_LavaBud_IdleFiery)
+            Call(SetActorVar, ACTOR_BUD_2, AVAR_Common_UnkAnim2, ANIM_LavaBud_HurtFiery)
             Call(SetActorVar, ACTOR_BUD_2, AVAR_Common_PiranhaState, PIRANHA_STATE_FIERY)
             Call(SetPartFlagBits, ACTOR_BUD_2, PRT_TARGET, ACTOR_PART_FLAG_NO_TARGET, false)
             Call(SetActorFlagBits, ACTOR_BUD_2, ACTOR_FLAG_NO_HEALTH_BAR, false)
@@ -2002,8 +2002,8 @@ EvtScript N(EVS_Ignite) = {
             Call(SetDefenseTable, ACTOR_BOSS, PRT_TARGET, Ref(N(FieryDefense)))
             Call(SetPartEventBits, ACTOR_BOSS, PRT_MAIN, ACTOR_EVENT_FLAG_FIREY, true)
             Call(SetPartEventBits, ACTOR_BOSS, PRT_TARGET, ACTOR_EVENT_FLAG_FIREY, true)
-            Call(SetActorVar, ACTOR_BOSS, AVAR_Common_UnkAnim1, ANIM_LavaPiranha_Anim04)
-            Call(SetActorVar, ACTOR_BOSS, AVAR_Common_UnkAnim2, ANIM_LavaPiranha_Anim0A)
+            Call(SetActorVar, ACTOR_BOSS, AVAR_Common_UnkAnim1, ANIM_LavaPiranha_TongueWag)
+            Call(SetActorVar, ACTOR_BOSS, AVAR_Common_UnkAnim2, ANIM_LavaPiranha_Sleep)
             Call(SetActorVar, ACTOR_BOSS, AVAR_Common_PiranhaState, PIRANHA_STATE_FIERY)
             Call(ForceHomePos, ACTOR_SELF, 61, 61, 0)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR, false)
@@ -2100,8 +2100,8 @@ EvtScript N(EVS_Hit_Inner) = {
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(StunnedAnims)))
             Call(SetDefenseTable, ACTOR_SELF, PRT_MAIN, Ref(N(StunnedDefense)))
             Call(SetDefenseTable, ACTOR_SELF, PRT_TARGET, Ref(N(StunnedDefense)))
-            Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaPiranha_Anim0A)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaPiranha_Anim09)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaPiranha_Sleep)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaPiranha_Hurt)
             Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FIREY, false)
             Call(SetPartEventBits, ACTOR_SELF, PRT_TARGET, ACTOR_EVENT_FLAG_FIREY, false)
             Wait(29)

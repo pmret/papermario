@@ -18,25 +18,25 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Anim01,
-    STATUS_KEY_STONE,     ANIM_SmallPiranha_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_SmallPiranha_Anim00,
-    STATUS_KEY_POISON,    ANIM_SmallPiranha_Anim01,
-    STATUS_KEY_STOP,      ANIM_SmallPiranha_Anim00,
-    STATUS_KEY_STATIC,    ANIM_SmallPiranha_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_SmallPiranha_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_SmallPiranha_Anim01,
-    STATUS_KEY_UNUSED,    ANIM_SmallPiranha_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Idle,
+    STATUS_KEY_STONE,     ANIM_SmallPiranha_Still,
+    STATUS_KEY_SLEEP,     ANIM_SmallPiranha_Still,
+    STATUS_KEY_POISON,    ANIM_SmallPiranha_Idle,
+    STATUS_KEY_STOP,      ANIM_SmallPiranha_Still,
+    STATUS_KEY_STATIC,    ANIM_SmallPiranha_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_SmallPiranha_Still,
+    STATUS_KEY_DIZZY,     ANIM_SmallPiranha_Idle,
+    STATUS_KEY_UNUSED,    ANIM_SmallPiranha_Idle,
     STATUS_END,
 };
 
 s32 N(UnusedAnims1)[] = {
-    STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Idle,
     STATUS_END,
 };
 
 s32 N(UnusedAnims2)[] = {
-    STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Anim06,
+    STATUS_KEY_NORMAL,    ANIM_SmallPiranha_ResetUp,
     STATUS_END,
 };
 
@@ -126,13 +126,13 @@ EvtScript N(EVS_ReturnHome) = {
     Call(MoveBattleCamOver, 20)
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Burrow)
     Wait(10)
     Call(SetGoalToHome, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Emerge)
     Wait(10)
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, false)
     Return
@@ -147,54 +147,54 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim09)
+            SetConst(LVar1, ANIM_SmallPiranha_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim0A)
-            SetConst(LVar2, ANIM_SmallPiranha_Anim0B)
+            SetConst(LVar1, ANIM_SmallPiranha_BurnHurt)
+            SetConst(LVar2, ANIM_SmallPiranha_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim0A)
-            SetConst(LVar2, ANIM_SmallPiranha_Anim0B)
+            SetConst(LVar1, ANIM_SmallPiranha_BurnHurt)
+            SetConst(LVar2, ANIM_SmallPiranha_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim0B)
+            SetConst(LVar1, ANIM_SmallPiranha_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim09)
+            SetConst(LVar1, ANIM_SmallPiranha_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim09)
+            SetConst(LVar1, ANIM_SmallPiranha_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim09)
+            SetConst(LVar1, ANIM_SmallPiranha_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim09)
+            SetConst(LVar1, ANIM_SmallPiranha_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim09)
+            SetConst(LVar1, ANIM_SmallPiranha_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim09)
+            SetConst(LVar1, ANIM_SmallPiranha_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim01)
+            SetConst(LVar1, ANIM_SmallPiranha_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_SPIKE_TAUNT)
@@ -213,31 +213,31 @@ EvtScript N(EVS_HandleEvent) = {
                 Wait(20)
             EndThread
             Loop(40)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim01)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Idle)
                 Wait(1)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim06)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_ResetUp)
                 Wait(1)
             EndLoop
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Idle)
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim09)
+            SetConst(LVar1, ANIM_SmallPiranha_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim09)
+            SetConst(LVar1, ANIM_SmallPiranha_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim01)
+            SetConst(LVar1, ANIM_SmallPiranha_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim09)
+            SetConst(LVar1, ANIM_SmallPiranha_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Burrow)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
             Wait(8)
             Call(HideHealthBar, ACTOR_SELF)
@@ -246,11 +246,11 @@ EvtScript N(EVS_HandleEvent) = {
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim09)
+            SetConst(LVar1, ANIM_SmallPiranha_Hurt)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_SmallPiranha_Anim09)
+            SetConst(LVar1, ANIM_SmallPiranha_Hurt)
             ExecWait(EVS_Enemy_BlowAway)
             Return
         CaseDefault
@@ -267,7 +267,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(GetBattlePhase, LVar0)
     IfEq(LVar0, PHASE_FIRST_STRIKE)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim04)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Burrow)
         Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(BattleCamTargetActor, ACTOR_SELF)
@@ -282,7 +282,7 @@ EvtScript N(EVS_TakeTurn) = {
         Goto(123)
     EndIf
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Burrow)
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
     Wait(8)
     Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
@@ -313,9 +313,9 @@ EvtScript N(EVS_TakeTurn) = {
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
     Call(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Emerge)
     Wait(8)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim05)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_BiteUp)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_MISS)
@@ -323,16 +323,16 @@ EvtScript N(EVS_TakeTurn) = {
             Set(LVarA, LVar0)
             Call(GetStatusFlags, ACTOR_SELF, LVar5)
             IfNotFlag(LVar5, STATUS_FLAG_SHRINK)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim06)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_ResetUp)
                 Wait(2)
             EndIf
             Thread
                 Wait(6)
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_PIRANHA_BITE)
             EndThread
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_BiteSide)
             Wait(10)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim08)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_ResetSide)
             Wait(2)
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -347,13 +347,13 @@ EvtScript N(EVS_TakeTurn) = {
             Return
         EndCaseGroup
     EndSwitch
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_ResetUp)
     Wait(2)
     Thread
         Wait(6)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_PIRANHA_BITE)
     EndThread
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim07)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_BiteSide)
     Wait(10)
     Wait(2)
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -363,7 +363,7 @@ EvtScript N(EVS_TakeTurn) = {
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Wait(2)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim08)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_ResetSide)
             Wait(15)
             Call(YieldTurn)
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))

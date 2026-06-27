@@ -61,20 +61,20 @@ BSS u8 Vine0Base[0x4000];
     Call(LoadBattleDmaData, anim)
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_LavaBud_Anim03,
-    STATUS_KEY_STOP,      ANIM_LavaBud_Anim02,
+    STATUS_KEY_NORMAL,    ANIM_LavaBud_Idle,
+    STATUS_KEY_STOP,      ANIM_LavaBud_Still,
     STATUS_END,
 };
 
 s32 N(FieryAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_LavaBud_Anim04,
-    STATUS_KEY_STOP,      ANIM_LavaBud_Anim02,
+    STATUS_KEY_NORMAL,    ANIM_LavaBud_IdleFiery,
+    STATUS_KEY_STOP,      ANIM_LavaBud_Still,
     STATUS_END,
 };
 
 s32 N(StunnedAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_LavaBud_Anim0F,
-    STATUS_KEY_STOP,      ANIM_LavaBud_Anim0F,
+    STATUS_KEY_NORMAL,    ANIM_LavaBud_Dead,
+    STATUS_KEY_STOP,      ANIM_LavaBud_Dead,
     STATUS_END,
 };
 
@@ -191,8 +191,8 @@ EvtScript N(EVS_Init) = {
     Call(RandInt, 20, LVar0)
     Add(LVar0, 15)
     Call(SetActorVar, ACTOR_SELF, AVAR_Common_NextTwitchTime, LVar0)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaBud_Anim03)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaBud_Anim09)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaBud_Idle)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaBud_Hurt)
     Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
     Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
@@ -351,8 +351,8 @@ EvtScript N(EVS_BurnHit) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_Bud_WhichVine, LVar0)
             EVT_LOAD_BUD_ANIM(LVar0, VINE_ANIM_BUD_RECOVER)
             ExecWait(N(EVS_PlayAnimForVine))
-            Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaBud_Anim03)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaBud_Anim09)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaBud_Idle)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaBud_Hurt)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(FieryAnims)))
             Call(SetDefenseTable, ACTOR_SELF, PRT_MAIN, Ref(N(FieryDefense)))
             Call(SetDefenseTable, ACTOR_SELF, PRT_TARGET, Ref(N(FieryDefense)))
@@ -424,7 +424,7 @@ EvtScript N(EVS_TakeTurn) = {
                 Call(MoveBattleCamOver, 15)
                 Call(GetEnemyMaxHP, ACTOR_SELF, LVar0)
                 Call(SetEnemyHP, ACTOR_SELF, LVar0)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim04)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_IdleFiery)
                 Call(GetActorVar, ACTOR_SELF, AVAR_Bud_WhichVine, LVar0)
                 IfEq(LVar0, VINE_1)
                     Set(LVar0, ACTOR_BUD_1)
@@ -494,11 +494,11 @@ EvtScript N(EVS_Move_SummonPetit) = {
     ExecWait(N(EVS_PlayAnimForVine))
     Thread
         Wait(20)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim07)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_SpitWindupFiery)
         Wait(34)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim08)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_SpitReleaseFiery)
         Wait(10)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim04)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_IdleFiery)
         EVT_LOAD_BUD_ANIM(LVar0, VINE_ANIM_BUD_IDLE)
         ExecWait(N(EVS_PlayAnimForVine))
     EndThread
@@ -591,9 +591,9 @@ EvtScript N(EVS_Death) = {
         Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(StunnedAnims)))
         Call(SetDefenseTable, ACTOR_SELF, PRT_MAIN, Ref(N(StunnedDefense)))
         Call(SetDefenseTable, ACTOR_SELF, PRT_TARGET, Ref(N(StunnedDefense)))
-        Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaBud_Anim0F)
-        Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaBud_Anim09)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim0F)
+        Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaBud_Dead)
+        Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaBud_Hurt)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Dead)
         Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FIREY, false)
         Call(SetPartEventBits, ACTOR_SELF, PRT_TARGET, ACTOR_EVENT_FLAG_FIREY, false)
         Wait(29)
@@ -615,8 +615,8 @@ EvtScript N(EVS_Death) = {
         EVT_LOAD_BUD_ANIM(LVar0, VINE_ANIM_BUD_HEAVY_HIT)
         ExecWait(N(EVS_PlayAnimForVine))
         Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(StunnedAnims)))
-        Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaBud_Anim0F)
-        Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaBud_Anim09)
+        Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaBud_Dead)
+        Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaBud_Hurt)
         Wait(29)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LAVA_BUD_WITHER)
         Call(GetActorVar, ACTOR_SELF, AVAR_Bud_WhichVine, LVar0)
@@ -743,9 +743,9 @@ EvtScript N(EVS_Hit) = {
                 Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(StunnedAnims)))
                 Call(SetDefenseTable, ACTOR_SELF, PRT_MAIN, Ref(N(StunnedDefense)))
                 Call(SetDefenseTable, ACTOR_SELF, PRT_TARGET, Ref(N(StunnedDefense)))
-                Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaBud_Anim0F)
-                Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaBud_Anim09)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim0F)
+                Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim1, ANIM_LavaBud_Dead)
+                Call(SetActorVar, ACTOR_SELF, AVAR_Common_UnkAnim2, ANIM_LavaBud_Hurt)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Dead)
                 Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FIREY, false)
                 Call(SetPartEventBits, ACTOR_SELF, PRT_TARGET, ACTOR_EVENT_FLAG_FIREY, false)
                 Wait(29)
@@ -825,11 +825,11 @@ EvtScript N(EVS_Attack_SpitPetit) = {
     ExecWait(N(EVS_PlayAnimForVine))
     Thread
         Wait(20)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim05)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_SpitWindup)
         Wait(39)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim06)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_SpitRelease)
         Wait(5)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim03)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Idle)
         EVT_LOAD_BUD_ANIM(LVar0, VINE_ANIM_BUD_IDLE)
         ExecWait(N(EVS_PlayAnimForVine))
     EndThread
@@ -842,7 +842,7 @@ EvtScript N(EVS_Attack_SpitPetit) = {
     Call(SetActorPos, LVar5, LVar0, LVar1, LVar2)
     Sub(LVar0, 30)
     Sub(LVar1, 15)
-    Call(SetAnimation, LVar5, 1, ANIM_PetitPiranha_Anim05)
+    Call(SetAnimation, LVar5, 1, ANIM_PetitPiranha_Dive)
     Call(SetGoalPos, LVar5, LVar0, LVar1, LVar2)
     Call(SetActorSpeed, LVar5, Float(6.0))
     Call(SetActorJumpGravity, LVar5, Float(1.8))

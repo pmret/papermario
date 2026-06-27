@@ -3108,43 +3108,43 @@ LargePiranha:
     - Variant00
     - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
+    - HeadIdle1
+    - HeadIdle2
+    - HeadIdle3
+    - HeadBud
+    - HeadRelease
+    - HeadTalk
+    - HeadBreath
+    - StemForward
+    - StemIdle1
+    - StemIdle2
+    - StemIdle3
+    - LLeafIdle1
+    - RLeafIdle1
+    - StemBackward
+    - LLeafIdle2
+    - RLeafIdle2
+    - LLeafStep1
+    - RLeafStep1
+    - LLeafStep2
+    - RLeafStep2
+    - LLeafStep3
+    - RLeafStep3
+    - HeadHurt1
+    - HeadHurt2
+    - HeadFrostBreath
+    - HeadBurrow1
+    - HeadBurrow2
+    - HeadBurrow3
+    - HeadBurrow4
+    - HeadBurrow5
+    - HeadBurn1
+    - HeadBurn2
+    - LLeafBurn1
+    - LLeafBurn2
+    - RLeftBurn1
+    - RLeftBurn2
+    - StemBurn
   palettes:
     - Putrid
     - Frost
@@ -3156,50 +3156,50 @@ LargePiranha:
     - Frost_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
-    - Anim18
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - Talk
+    - Windup
+    - Bite
+    - PostBite
+    - BadBreathStart
+    - BadBreathLoop
+    - BadBreathEnd
+    - FrostBreathStart
+    - FrostBreathLoop
+    - FrostBreathEnd
+    - Hurt
+    - Dizzy
+    - BurnHurt
+    - BurnStill
+    - Retract
+    - Hidden
+    - Extend
+    - CeilingStill
+    - CeilingIdle
+    - Emerge
+    - Burrow
 SmallPiranha:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
+    - Idle1
+    - Idle2
+    - Idle3
+    - Burrow3
+    - Burrow1
+    - Burrow2
+    - Bite1
+    - Bite2
+    - Hurt1
+    - Hurt2
+    - BurnStill
+    - BiteSide1
+    - BiteSide2
+    - BiteSide3
+    - AfterBite
+    - BurnHurt1
+    - BurnHurt2
   palettes:
     - Default
     - Poisoned
@@ -3207,18 +3207,18 @@ SmallPiranha:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
+    - Still
+    - Idle
+    - Biting
+    - Emerge
+    - Burrow
+    - BiteUp
+    - ResetUp
+    - BiteSide
+    - ResetSide
+    - Hurt
+    - BurnHurt
+    - BurnStill
 Sentinel:
   variations:
     - Variant00
@@ -3230,27 +3230,27 @@ Sentinel:
     - Variant06
     - Variant07
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
+    - Neutral
+    - Grab1
+    - Grab2
+    - Sad
+    - Alert1
+    - Alert2
+    - Alert3
+    - Alert4
+    - Alert5
+    - Idle1
+    - Idle2
+    - Propeller1
+    - Propeller2
+    - Propeller3
+    - QuestionMark
+    - Smoke1
+    - Smoke2
+    - Smoke3
+    - Smoke4
+    - Smoke5
+    - Smoke6
   palettes:
     - Default
     - Question
@@ -3262,16 +3262,16 @@ Sentinel:
     - Glow2
     - Smoke
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
+    - Still
+    - Idle
+    - FlySlow
+    - FlyFast
+    - Smoke
+    - Alert
+    - Sad
+    - Questions
+    - Grab
+    - Release
 WorldClubba:
   variations:
     - Variant00
@@ -7276,29 +7276,29 @@ LavaPiranha:
     - Variant00
     - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
+    - TongueWag1
+    - TongueWag2
+    - TongueWag3
+    - Idle1
+    - Idle2
+    - VineSegment
+    - SpitFire1
+    - SpitFire2
+    - SpitFire3
+    - FireBreath1
+    - FireBreath2
+    - FireBreath3
+    - Hurt1
+    - Hurt2
+    - Laugh1
+    - Laugh2
+    - PlayDead
+    - Stunned1
+    - Stunned2
+    - Talk1
+    - Talk2
+    - Talk3
+    - Dead
   palettes:
     - Default
     - Glow
@@ -7309,86 +7309,86 @@ LavaPiranha:
     - Shocked
     - Glow_Shocked
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
+    - Still
+    - VineSegmentA
+    - VineSegmentB
+    - Idle
+    - TongueWag
+    - SpitFireIn
+    - SpitFireOut
+    - FireBreathIn
+    - FireBreathOut
+    - Hurt
+    - Sleep
+    - Laugh
+    - Dizzy
+    - PlayDead
+    - Talk
+    - Dead
+    - Stunned
 PetitPiranha:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
+    - Idle1
+    - Idle2
+    - Idle3
+    - Idle4
+    - OpenWide1
+    - OpenWide2
+    - Strain1
+    - Strain2
+    - Strain3
+    - Strain4
+    - Dive1
+    - Dive2
+    - Dive3
+    - Dive4
   palettes:
     - Default
     - Poisoned
     - Dizzy
     - Shocked
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
+    - Still
+    - Idle
+    - Talk
+    - Hurt
+    - Strain
+    - Dive
+    - Curl
 LavaBud:
   variations:
     - Variant00
     - Variant01
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
+    - VineSegment
+    - Idle1
+    - Idle2
+    - SpitRelease
+    - IdleFiery1
+    - IdleFiery2
+    - IdleFiery3
+    - IdleFiery4
+    - SpitWindup
+    - SpitReleaseFiery1
+    - SpitReleaseFiery2
+    - SpitReleaseFiery3
+    - SpitWindupFiery1
+    - SpitWindupFiery2
+    - SpitWindupFiery3
+    - SpitWindupFiery4
+    - Hurt1
+    - Hurt2
+    - HurtFiery1
+    - HurtFiery2
+    - HurtFiery3
+    - HurtFiery4
+    - Talk1
+    - Talk2
+    - Talk3
+    - Talk4
+    - Struggle1
+    - Struggle2
+    - Dead
   palettes:
     - Default
     - Glow
@@ -7399,23 +7399,23 @@ LavaBud:
     - Shocked
     - Glow_Shocked
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
+    - VineSegmentA
+    - VineSegmentB
+    - Still
+    - Idle
+    - IdleFiery
+    - SpitWindup
+    - SpitRelease
+    - SpitWindupFiery
+    - SpitReleaseFiery
+    - Hurt
+    - HurtStill
+    - HurtFiery
+    - HurtStillFiery
+    - PlayDead
+    - Talk
+    - Dead
+    - Struggle
 HuffNPuff:
   variations:
     - Variant00

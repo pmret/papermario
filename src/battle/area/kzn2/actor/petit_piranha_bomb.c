@@ -13,16 +13,16 @@ enum N(ActorPartIDs) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_PetitPiranha_Anim01,
-    STATUS_KEY_STONE,     ANIM_PetitPiranha_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_PetitPiranha_Anim00,
-    STATUS_KEY_POISON,    ANIM_PetitPiranha_Anim01,
-    STATUS_KEY_STOP,      ANIM_PetitPiranha_Anim00,
-    STATUS_KEY_STATIC,    ANIM_PetitPiranha_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_PetitPiranha_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_PetitPiranha_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_PetitPiranha_Anim01,
-    STATUS_KEY_DIZZY,     ANIM_PetitPiranha_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_PetitPiranha_Idle,
+    STATUS_KEY_STONE,     ANIM_PetitPiranha_Still,
+    STATUS_KEY_SLEEP,     ANIM_PetitPiranha_Still,
+    STATUS_KEY_POISON,    ANIM_PetitPiranha_Idle,
+    STATUS_KEY_STOP,      ANIM_PetitPiranha_Still,
+    STATUS_KEY_STATIC,    ANIM_PetitPiranha_Still,
+    STATUS_KEY_PARALYZE,  ANIM_PetitPiranha_Still,
+    STATUS_KEY_PARALYZE,  ANIM_PetitPiranha_Still,
+    STATUS_KEY_DIZZY,     ANIM_PetitPiranha_Idle,
+    STATUS_KEY_DIZZY,     ANIM_PetitPiranha_Idle,
     STATUS_END,
 };
 
