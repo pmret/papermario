@@ -28,7 +28,7 @@ EvtScript N(EVS_MonitorFlyingAnimation) = {
     Loop(0)
         Loop(0)
             Call(GetNpcAnimation, NPC_SELF, LVar0)
-            IfEq(LVar0, ANIM_Buzzar_Anim02)
+            IfEq(LVar0, ANIM_Buzzar_Fly)
                 BreakLoop
             EndIf
             Wait(1)
@@ -36,7 +36,7 @@ EvtScript N(EVS_MonitorFlyingAnimation) = {
         ExecGetTID(N(EVS_FlapWingSounds), LVarA)
         Loop(0)
             Call(GetNpcAnimation, NPC_SELF, LVar0)
-            IfNe(LVar0, ANIM_Buzzar_Anim02)
+            IfNe(LVar0, ANIM_Buzzar_Fly)
                 BreakLoop
             EndIf
             Wait(1)
@@ -101,8 +101,8 @@ EvtScript N(EVS_NpcAI_Buzzar) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
     Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(SpeakToPlayer, NPC_SELF, ANIM_Buzzar_Anim05, ANIM_Buzzar_Anim05, 5, MSG_CH2_0031)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_Buzzar_Anim02)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Buzzar_Roost, ANIM_Buzzar_Roost, 5, MSG_CH2_0031)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Buzzar_Fly)
     Call(GetNpcPos, NPC_SELF, LVar2, LVar3, LVar4)
     Set(LVar5, LVar3)
     Add(LVar5, 150)
@@ -154,18 +154,18 @@ EvtScript N(EVS_NpcAI_Buzzar) = {
             BreakLoop
         EndIf
     EndLoop
-    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_Anim01)
+    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_Idle)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(30 * DT)
-    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_Anim07)
+    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_FindPoster)
     Wait(30 * DT)
-    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_Anim08)
+    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_RetrievePoster)
     Wait(30 * DT)
-    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_Anim09)
+    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_ReadPoster)
     Wait(30 * DT)
-    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_Anim0A)
+    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_StashPoster)
     Wait(30 * DT)
-    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_Anim01)
+    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_Idle)
     Wait(30 * DT)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, 0, LVar2)
@@ -175,21 +175,21 @@ EvtScript N(EVS_NpcAI_Buzzar) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(10 * DT)
-    Call(SpeakToPlayer, NPC_SELF, ANIM_Buzzar_Anim03, ANIM_Buzzar_Anim01, 0, MSG_CH2_0032)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Buzzar_Talk, ANIM_Buzzar_Idle, 0, MSG_CH2_0032)
     Call(AdjustCam, CAM_DEFAULT, Float(90.0), 50, 350, Float(15.0), Float(-12.0))
     Call(ShowChoice, MSG_Choice_0017)
-    Call(EndSpeech, NPC_SELF, ANIM_Buzzar_Anim03, ANIM_Buzzar_Anim01, 0)
+    Call(EndSpeech, NPC_SELF, ANIM_Buzzar_Talk, ANIM_Buzzar_Idle, 0)
     Set(LVarA, LVar0)
     Switch(LVarA)
         CaseEq(0)
             Set(LVarB, MSG_CH2_0033)
-            Set(LVarC, ANIM_Buzzar_Anim04)
+            Set(LVarC, ANIM_Buzzar_Shout)
         CaseEq(1)
             Set(LVarB, MSG_CH2_0034)
-            Set(LVarC, ANIM_Buzzar_Anim03)
+            Set(LVarC, ANIM_Buzzar_Talk)
         CaseEq(2)
             Set(LVarB, MSG_CH2_0035)
-            Set(LVarC, ANIM_Buzzar_Anim04)
+            Set(LVarC, ANIM_Buzzar_Shout)
     EndSwitch
     Wait(10 * DT)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -201,12 +201,12 @@ EvtScript N(EVS_NpcAI_Buzzar) = {
     Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     Wait(10 * DT)
-    Call(SpeakToPlayer, NPC_SELF, LVarC, ANIM_Buzzar_Anim01, 0, LVarB)
+    Call(SpeakToPlayer, NPC_SELF, LVarC, ANIM_Buzzar_Idle, 0, LVarB)
     IfEq(LVarA, 1)
         Exec(N(EVS_SetupMusic))
-        Call(SetNpcAnimation, NPC_SELF, ANIM_Buzzar_Anim06)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Buzzar_WaveThrough)
         Wait(30 * DT)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_Buzzar_Anim02)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Buzzar_Fly)
         Call(PanToTarget, CAM_DEFAULT, 0, false)
         Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
         Call(GetNpcPos, NPC_SELF, LVar2, LVar3, LVar4)
@@ -223,7 +223,7 @@ EvtScript N(EVS_NpcAI_Buzzar) = {
         EndLoop
         Call(SetNpcPos, NPC_SELF, 10, 96, -347)
         Call(EnableNpcShadow, NPC_SELF, false)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_Buzzar_Anim05)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Buzzar_Roost)
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
         Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
         Call(SetPlayerAnimation, ANIM_Mario1_Idle)
@@ -246,7 +246,7 @@ EvtScript N(EVS_NpcDefeat_Buzzar) = {
             Set(GF_IWA04_Defeated_Buzzar, true)
             Exec(N(EVS_SetupMusic))
             Call(SetNpcPos, NPC_SELF, 530, 15, -20)
-            Call(SetNpcAnimation, NPC_SELF, ANIM_Buzzar_Anim0B)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Buzzar_Hurt)
             Call(AdjustCam, CAM_DEFAULT, Float(90.0), 50, 350, Float(15.0), Float(-12.0))
             Wait(10 * DT)
             Call(SpeakToPlayer, NPC_SELF, -1, -1, 0, MSG_CH2_0036)
@@ -270,7 +270,7 @@ EvtScript N(EVS_NpcDefeat_Buzzar) = {
 };
 
 NpcSettings N(NpcSettings_Buzzar) = {
-    .defaultAnim = ANIM_Buzzar_Anim05,
+    .defaultAnim = ANIM_Buzzar_Roost,
     .height = 32,
     .radius = 32,
     .otherAI = &N(EVS_NpcAuxAI_Buzzar),
@@ -315,22 +315,22 @@ NpcData N(NpcData_Buzzar) = {
         .maxCoinBonus = 3,
     },
     .animations = {
-        .idle   = ANIM_Buzzar_Anim01,
-        .walk   = ANIM_Buzzar_Anim01,
-        .run    = ANIM_Buzzar_Anim01,
-        .chase  = ANIM_Buzzar_Anim01,
-        .anim_4 = ANIM_Buzzar_Anim01,
-        .anim_5 = ANIM_Buzzar_Anim01,
-        .death  = ANIM_Buzzar_Anim0B,
-        .hit    = ANIM_Buzzar_Anim0B,
-        .anim_8 = ANIM_Buzzar_Anim01,
-        .anim_9 = ANIM_Buzzar_Anim01,
-        .anim_A = ANIM_Buzzar_Anim01,
-        .anim_B = ANIM_Buzzar_Anim01,
-        .anim_C = ANIM_Buzzar_Anim01,
-        .anim_D = ANIM_Buzzar_Anim01,
-        .anim_E = ANIM_Buzzar_Anim01,
-        .anim_F = ANIM_Buzzar_Anim01,
+        .idle   = ANIM_Buzzar_Idle,
+        .walk   = ANIM_Buzzar_Idle,
+        .run    = ANIM_Buzzar_Idle,
+        .chase  = ANIM_Buzzar_Idle,
+        .anim_4 = ANIM_Buzzar_Idle,
+        .anim_5 = ANIM_Buzzar_Idle,
+        .death  = ANIM_Buzzar_Hurt,
+        .hit    = ANIM_Buzzar_Hurt,
+        .anim_8 = ANIM_Buzzar_Idle,
+        .anim_9 = ANIM_Buzzar_Idle,
+        .anim_A = ANIM_Buzzar_Idle,
+        .anim_B = ANIM_Buzzar_Idle,
+        .anim_C = ANIM_Buzzar_Idle,
+        .anim_D = ANIM_Buzzar_Idle,
+        .anim_E = ANIM_Buzzar_Idle,
+        .anim_F = ANIM_Buzzar_Idle,
     },
 };
 

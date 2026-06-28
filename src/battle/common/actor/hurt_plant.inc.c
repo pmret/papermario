@@ -18,15 +18,15 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_HurtPlant_Anim02,
-    STATUS_KEY_STONE,     ANIM_HurtPlant_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_HurtPlant_Anim0C,
-    STATUS_KEY_POISON,    ANIM_HurtPlant_Anim02,
-    STATUS_KEY_STOP,      ANIM_HurtPlant_Anim00,
-    STATUS_KEY_STATIC,    ANIM_HurtPlant_Anim02,
-    STATUS_KEY_PARALYZE,  ANIM_HurtPlant_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_HurtPlant_Anim09,
-    STATUS_KEY_UNUSED,    ANIM_HurtPlant_Anim09,
+    STATUS_KEY_NORMAL,    ANIM_HurtPlant_Idle,
+    STATUS_KEY_STONE,     ANIM_HurtPlant_Still,
+    STATUS_KEY_SLEEP,     ANIM_HurtPlant_Sleep,
+    STATUS_KEY_POISON,    ANIM_HurtPlant_Idle,
+    STATUS_KEY_STOP,      ANIM_HurtPlant_Still,
+    STATUS_KEY_STATIC,    ANIM_HurtPlant_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_HurtPlant_Still,
+    STATUS_KEY_DIZZY,     ANIM_HurtPlant_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_HurtPlant_Dizzy,
     STATUS_END,
 };
 
@@ -131,13 +131,13 @@ EvtScript N(EVS_Idle) = {
 EvtScript N(EVS_ReturnHome) = {
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Burrow)
     Wait(10)
     Call(SetGoalToHome, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Emerge)
     Wait(10)
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, false)
     Return
@@ -151,90 +151,90 @@ EvtScript N(EVS_HandleEvent) = {
     Switch(LVar0)
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Stun)
             Wait(3)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim0E)
+            SetConst(LVar1, ANIM_HurtPlant_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim0A)
+            SetConst(LVar1, ANIM_HurtPlant_BurnHurt)
             SetConst(LVar2, -1)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim0A)
+            SetConst(LVar1, ANIM_HurtPlant_BurnHurt)
             SetConst(LVar2, -1)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim0A)
+            SetConst(LVar1, ANIM_HurtPlant_BurnHurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Stun)
             Wait(3)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim0E)
+            SetConst(LVar1, ANIM_HurtPlant_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Stun)
             Wait(3)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim0E)
+            SetConst(LVar1, ANIM_HurtPlant_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim0E)
+            SetConst(LVar1, ANIM_HurtPlant_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Stun)
             Wait(3)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim0E)
+            SetConst(LVar1, ANIM_HurtPlant_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Stun)
             Wait(3)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim0E)
+            SetConst(LVar1, ANIM_HurtPlant_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim0E)
+            SetConst(LVar1, ANIM_HurtPlant_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim02)
+            SetConst(LVar1, ANIM_HurtPlant_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Stun)
             Wait(3)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim0E)
+            SetConst(LVar1, ANIM_HurtPlant_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim0E)
+            SetConst(LVar1, ANIM_HurtPlant_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim02)
+            SetConst(LVar1, ANIM_HurtPlant_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Stun)
             Wait(3)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim0E)
+            SetConst(LVar1, ANIM_HurtPlant_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Burrow)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
             Wait(20)
             Call(HideHealthBar, ACTOR_SELF)
@@ -243,11 +243,11 @@ EvtScript N(EVS_HandleEvent) = {
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim02)
+            SetConst(LVar1, ANIM_HurtPlant_Idle)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HurtPlant_Anim02)
+            SetConst(LVar1, ANIM_HurtPlant_Idle)
             ExecWait(EVS_Enemy_BlowAway)
             Return
         CaseDefault
@@ -264,7 +264,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(GetBattlePhase, LVar0)
     IfEq(LVar0, PHASE_FIRST_STRIKE)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim04)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Burrow)
         Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(BattleCamTargetActor, ACTOR_SELF)
@@ -279,7 +279,7 @@ EvtScript N(EVS_TakeTurn) = {
         Goto(123)
     EndIf
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Burrow)
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
     Wait(8)
     Call(UseBattleCamPreset, BTL_CAM_REPOSITION)
@@ -304,19 +304,19 @@ EvtScript N(EVS_TakeTurn) = {
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
     Call(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Emerge)
     Wait(10)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim05)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_WindupBite)
     Wait(10)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HURT_PLANT_BITE)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Bite)
     Wait(6)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_MISS)
         CaseOrEq(HIT_RESULT_LUCKY)
             Set(LVarA, LVar0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_ReleaseBite)
             Wait(5)
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -342,7 +342,7 @@ EvtScript N(EVS_TakeTurn) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_ReleaseBite)
             Wait(5)
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
             ExecWait(N(EVS_ReturnHome))

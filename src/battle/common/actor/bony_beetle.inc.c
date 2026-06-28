@@ -40,54 +40,54 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BonyBeetle_Anim04,
-    STATUS_KEY_STONE,     ANIM_BonyBeetle_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_BonyBeetle_Anim2A,
-    STATUS_KEY_POISON,    ANIM_BonyBeetle_Anim04,
-    STATUS_KEY_STOP,      ANIM_BonyBeetle_Anim00,
-    STATUS_KEY_STATIC,    ANIM_BonyBeetle_Anim04,
-    STATUS_KEY_PARALYZE,  ANIM_BonyBeetle_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_BonyBeetle_Anim26,
-    STATUS_KEY_UNUSED,    ANIM_BonyBeetle_Anim26,
+    STATUS_KEY_NORMAL,    ANIM_BonyBeetle_Idle,
+    STATUS_KEY_STONE,     ANIM_BonyBeetle_Still,
+    STATUS_KEY_SLEEP,     ANIM_BonyBeetle_Sleep,
+    STATUS_KEY_POISON,    ANIM_BonyBeetle_Idle,
+    STATUS_KEY_STOP,      ANIM_BonyBeetle_Still,
+    STATUS_KEY_STATIC,    ANIM_BonyBeetle_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_BonyBeetle_Still,
+    STATUS_KEY_DIZZY,     ANIM_BonyBeetle_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_BonyBeetle_Dizzy,
     STATUS_END,
 };
 
 s32 N(SpikyAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BonyBeetle_Anim05,
-    STATUS_KEY_STONE,     ANIM_BonyBeetle_Anim01,
-    STATUS_KEY_SLEEP,     ANIM_BonyBeetle_Anim2B,
-    STATUS_KEY_POISON,    ANIM_BonyBeetle_Anim05,
-    STATUS_KEY_STOP,      ANIM_BonyBeetle_Anim01,
-    STATUS_KEY_STATIC,    ANIM_BonyBeetle_Anim05,
-    STATUS_KEY_PARALYZE,  ANIM_BonyBeetle_Anim01,
-    STATUS_KEY_DIZZY,     ANIM_BonyBeetle_Anim27,
-    STATUS_KEY_UNUSED,    ANIM_BonyBeetle_Anim27,
+    STATUS_KEY_NORMAL,    ANIM_BonyBeetle_IdleSpiky,
+    STATUS_KEY_STONE,     ANIM_BonyBeetle_StillSpiky,
+    STATUS_KEY_SLEEP,     ANIM_BonyBeetle_SleepSpiky,
+    STATUS_KEY_POISON,    ANIM_BonyBeetle_IdleSpiky,
+    STATUS_KEY_STOP,      ANIM_BonyBeetle_StillSpiky,
+    STATUS_KEY_STATIC,    ANIM_BonyBeetle_IdleSpiky,
+    STATUS_KEY_PARALYZE,  ANIM_BonyBeetle_StillSpiky,
+    STATUS_KEY_DIZZY,     ANIM_BonyBeetle_DizzySpiky,
+    STATUS_KEY_UNUSED,    ANIM_BonyBeetle_DizzySpiky,
     STATUS_END,
 };
 
 s32 N(ToppledAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BonyBeetle_Anim06,
-    STATUS_KEY_STONE,     ANIM_BonyBeetle_Anim02,
-    STATUS_KEY_SLEEP,     ANIM_BonyBeetle_Anim2C,
-    STATUS_KEY_POISON,    ANIM_BonyBeetle_Anim06,
-    STATUS_KEY_STOP,      ANIM_BonyBeetle_Anim02,
-    STATUS_KEY_STATIC,    ANIM_BonyBeetle_Anim06,
-    STATUS_KEY_PARALYZE,  ANIM_BonyBeetle_Anim02,
-    STATUS_KEY_DIZZY,     ANIM_BonyBeetle_Anim28,
-    STATUS_KEY_UNUSED,    ANIM_BonyBeetle_Anim28,
+    STATUS_KEY_NORMAL,    ANIM_BonyBeetle_IdleTopple,
+    STATUS_KEY_STONE,     ANIM_BonyBeetle_StillTopple,
+    STATUS_KEY_SLEEP,     ANIM_BonyBeetle_SleepToppled,
+    STATUS_KEY_POISON,    ANIM_BonyBeetle_IdleTopple,
+    STATUS_KEY_STOP,      ANIM_BonyBeetle_StillTopple,
+    STATUS_KEY_STATIC,    ANIM_BonyBeetle_IdleTopple,
+    STATUS_KEY_PARALYZE,  ANIM_BonyBeetle_StillTopple,
+    STATUS_KEY_DIZZY,     ANIM_BonyBeetle_DizzyToppled,
+    STATUS_KEY_UNUSED,    ANIM_BonyBeetle_DizzyToppled,
     STATUS_END,
 };
 
 s32 N(ToppledSpikyAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BonyBeetle_Anim07,
-    STATUS_KEY_STONE,     ANIM_BonyBeetle_Anim03,
-    STATUS_KEY_SLEEP,     ANIM_BonyBeetle_Anim2D,
-    STATUS_KEY_POISON,    ANIM_BonyBeetle_Anim07,
-    STATUS_KEY_STOP,      ANIM_BonyBeetle_Anim03,
-    STATUS_KEY_STATIC,    ANIM_BonyBeetle_Anim07,
-    STATUS_KEY_PARALYZE,  ANIM_BonyBeetle_Anim03,
-    STATUS_KEY_DIZZY,     ANIM_BonyBeetle_Anim29,
-    STATUS_KEY_UNUSED,    ANIM_BonyBeetle_Anim29,
+    STATUS_KEY_NORMAL,    ANIM_BonyBeetle_IdleSpikyTopple,
+    STATUS_KEY_STONE,     ANIM_BonyBeetle_StillSpikyTopple,
+    STATUS_KEY_SLEEP,     ANIM_BonyBeetle_SleepToppledSpiky,
+    STATUS_KEY_POISON,    ANIM_BonyBeetle_IdleSpikyTopple,
+    STATUS_KEY_STOP,      ANIM_BonyBeetle_StillSpikyTopple,
+    STATUS_KEY_STATIC,    ANIM_BonyBeetle_IdleSpikyTopple,
+    STATUS_KEY_PARALYZE,  ANIM_BonyBeetle_StillSpikyTopple,
+    STATUS_KEY_DIZZY,     ANIM_BonyBeetle_DizzyToppledSpiky,
+    STATUS_KEY_UNUSED,    ANIM_BonyBeetle_DizzyToppledSpiky,
     STATUS_END,
 };
 
@@ -172,12 +172,12 @@ EvtScript N(EVS_Init) = {
             Call(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_SpikyUpright)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(SpikyAnims)))
             Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, true)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim05)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_IdleSpiky)
         Else
             Call(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_SmoothUpright)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(DefaultAnims)))
             Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Idle)
         EndIf
     Else
         Call(RandInt, 1000, LVar0)
@@ -185,12 +185,12 @@ EvtScript N(EVS_Init) = {
             Call(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_SmoothUpright)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(DefaultAnims)))
             Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Idle)
         Else
             Call(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_SpikyUpright)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(SpikyAnims)))
             Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, true)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim05)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_IdleSpiky)
         EndIf
     EndIf
 EndIf
@@ -260,14 +260,14 @@ EvtScript N(EVS_TrySwitchingSpikyState) = {
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BONY_BEETLE_EXTEND_SPIKES)
             Call(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_SpikyUpright)
             Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, true)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim2E)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_ExtendSpikes)
             Wait(25)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(SpikyAnims)))
         CaseEq(AVAL_State_SpikyUpright)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BONY_BEETLE_RETRACT_SPIKES)
             Call(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_SmoothUpright)
             Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim2F)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_RetractSpikes)
             Wait(25)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(DefaultAnims)))
         CaseEq(AVAL_State_SmoothToppled)
@@ -301,36 +301,36 @@ EvtScript N(EVS_HandleEvent_SmoothUpright) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BonyBeetle_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Call(SetActorVar, ACTOR_SELF, AVAR_ShouldTrySwitching, true)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1E)
-            SetConst(LVar2, ANIM_BonyBeetle_Anim1F)
+            SetConst(LVar1, ANIM_BonyBeetle_BurnHurt)
+            SetConst(LVar2, ANIM_BonyBeetle_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             Call(SetActorVar, ACTOR_SELF, AVAR_ShouldTrySwitching, true)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1E)
-            SetConst(LVar2, ANIM_BonyBeetle_Anim1F)
+            SetConst(LVar1, ANIM_BonyBeetle_BurnHurt)
+            SetConst(LVar2, ANIM_BonyBeetle_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1F)
+            SetConst(LVar1, ANIM_BonyBeetle_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BonyBeetle_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             Call(SetActorVar, ACTOR_SELF, AVAR_ShouldTrySwitching, true)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BonyBeetle_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BonyBeetle_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_FLIP_TRIGGER)
@@ -342,7 +342,7 @@ EvtScript N(EVS_HandleEvent_SmoothUpright) = {
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(ToppledAnims)))
             Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, false)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, true)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim08)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_FlipOver)
             UseBuf(N(FlipPosOffsets))
             Loop(20)
                 BufRead1(LVar0)
@@ -352,61 +352,61 @@ EvtScript N(EVS_HandleEvent_SmoothUpright) = {
             Wait(20)
         CaseEq(EVENT_SHOCK_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BonyBeetle_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BonyBeetle_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim0E)
+            SetConst(LVar1, ANIM_BonyBeetle_Run)
             ExecWait(EVS_Enemy_ReturnHome)
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim10)
+            SetConst(LVar1, ANIM_BonyBeetle_ShellEnter)
             ExecWait(EVS_Enemy_NoDamageHit)
             Wait(20)
             Call(GetStatusFlags, ACTOR_SELF, LVar0)
             IfNotFlag(LVar0, STATUS_FLAGS_IMMOBILIZED)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim12)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_ShellExit)
                 Wait(10)
             EndIf
         EndCaseGroup
         CaseEq(EVENT_SHOCK_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BonyBeetle_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BonyBeetle_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BonyBeetle_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BonyBeetle_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim04)
+            SetConst(LVar1, ANIM_BonyBeetle_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim0E)
-            SetConst(LVar2, ANIM_BonyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BonyBeetle_Run)
+            SetConst(LVar2, ANIM_BonyBeetle_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim0E)
+            SetConst(LVar1, ANIM_BonyBeetle_Run)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BonyBeetle_Hurt)
             ExecWait(EVS_Enemy_BlowAway)
             Return
         CaseDefault
@@ -424,13 +424,13 @@ EvtScript N(EVS_Attack_ShellToss) = {
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(BattleCamTargetActor, ACTOR_SELF)
         Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim16)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_ShellSpin)
         Goto(100)
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim10)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_ShellEnter)
     Wait(10)
     Thread
         Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -441,7 +441,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
         PlayEffect(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
     EndThread
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SHELL_SPIN)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim16)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_ShellSpin)
     Wait(15)
     Label(100)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SHELL_TOSS)
@@ -461,17 +461,17 @@ EvtScript N(EVS_Attack_ShellToss) = {
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EndIf
             Wait(20)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim12)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_ShellExit)
             Wait(15)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(ResetAllActorSounds, ACTOR_SELF)
             Call(SetActorYaw, ACTOR_SELF, 180)
             Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim0E)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Run)
             Call(SetGoalToHome, ACTOR_SELF)
             Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
             Call(RunToGoal, ACTOR_SELF, 0, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Idle)
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -502,13 +502,13 @@ EvtScript N(EVS_Attack_ShellToss) = {
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
             Wait(15)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim12)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_ShellExit)
             Wait(5)
             Call(YieldTurn)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim0E)
+            SetConst(LVar1, ANIM_BonyBeetle_Run)
             ExecWait(EVS_Enemy_ReturnHome)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Idle)
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -523,36 +523,36 @@ EvtScript N(EVS_HandleEvent_SpikyUpright) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtSpiky)
             ExecWait(EVS_Enemy_Hit)
             Call(SetActorVar, ACTOR_SELF, AVAR_ShouldTrySwitching, true)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim20)
-            SetConst(LVar2, ANIM_BonyBeetle_Anim21)
+            SetConst(LVar1, ANIM_BonyBeetle_BurnHurtSpiky)
+            SetConst(LVar2, ANIM_BonyBeetle_BurnStillSpiky)
             ExecWait(EVS_Enemy_BurnHit)
             Call(SetActorVar, ACTOR_SELF, AVAR_ShouldTrySwitching, true)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim20)
-            SetConst(LVar2, ANIM_BonyBeetle_Anim21)
+            SetConst(LVar1, ANIM_BonyBeetle_BurnHurtSpiky)
+            SetConst(LVar2, ANIM_BonyBeetle_BurnStillSpiky)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim21)
+            SetConst(LVar1, ANIM_BonyBeetle_BurnStillSpiky)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtSpiky)
             ExecWait(EVS_Enemy_SpinSmashHit)
             Call(SetActorVar, ACTOR_SELF, AVAR_ShouldTrySwitching, true)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtSpiky)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtSpiky)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_FLIP_TRIGGER)
@@ -564,7 +564,7 @@ EvtScript N(EVS_HandleEvent_SpikyUpright) = {
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(ToppledSpikyAnims)))
             Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, false)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, true)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim09)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_FlipOverSpiky)
             UseBuf(N(FlipPosOffsets))
             Loop(20)
                 BufRead1(LVar0)
@@ -576,23 +576,23 @@ EvtScript N(EVS_HandleEvent_SpikyUpright) = {
             Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtSpiky)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtSpiky)
             ExecWait(EVS_Enemy_Knockback)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim0F)
+            SetConst(LVar1, ANIM_BonyBeetle_RunSpiky)
             ExecWait(EVS_Enemy_ReturnHome)
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim11)
+            SetConst(LVar1, ANIM_BonyBeetle_ShellEnterSpiky)
             ExecWait(EVS_Enemy_NoDamageHit)
             Wait(20)
             Call(GetStatusFlags, ACTOR_SELF, LVar0)
             IfNotFlag(LVar0, STATUS_FLAGS_IMMOBILIZED)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim13)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_ShellExitSpiky)
             EndIf
             Wait(10)
         EndCaseGroup
@@ -621,29 +621,29 @@ EvtScript N(EVS_HandleEvent_SpikyUpright) = {
             Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtSpiky)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtSpiky)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtSpiky)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtSpiky)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim05)
+            SetConst(LVar1, ANIM_BonyBeetle_IdleSpiky)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim0F)
-            SetConst(LVar2, ANIM_BonyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BonyBeetle_RunSpiky)
+            SetConst(LVar2, ANIM_BonyBeetle_HurtSpiky)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseDefault
@@ -661,14 +661,14 @@ EvtScript N(EVS_Attack_SpikeBounce) = {
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(BattleCamTargetActor, ACTOR_SELF)
         Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim17)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_ShellSpinSpiky)
         Wait(10)
         Goto(100)
     EndIf
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim11)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_ShellEnterSpiky)
     Wait(10)
     Thread
         Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -683,7 +683,7 @@ EvtScript N(EVS_Attack_SpikeBounce) = {
         PlayEffect(EFFECT_SMOKE_IMPACT, 0, LVar0, LVar1, LVar2, 32, 12, 0, 10, 0)
     EndThread
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SHELL_SPIN)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim17)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_ShellSpinSpiky)
     Wait(15)
     Label(100)
     Thread
@@ -772,7 +772,7 @@ EvtScript N(EVS_Attack_SpikeBounce) = {
             Call(SetActorYaw, ACTOR_SELF, 180)
             Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim0F)
+            SetConst(LVar1, ANIM_BonyBeetle_RunSpiky)
             ExecWait(EVS_Enemy_ReturnHome)
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(SetActorYaw, ACTOR_SELF, 0)
@@ -846,12 +846,12 @@ EvtScript N(EVS_Attack_SpikeBounce) = {
             Wait(5)
             Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim13)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_ShellExitSpiky)
             Wait(5)
             Call(YieldTurn)
             Call(SetActorYaw, ACTOR_SELF, 180)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim0F)
+            SetConst(LVar1, ANIM_BonyBeetle_RunSpiky)
             ExecWait(EVS_Enemy_ReturnHome)
             Call(SetActorYaw, ACTOR_SELF, 0)
         EndCaseGroup
@@ -875,7 +875,7 @@ EvtScript N(EVS_FallFromCeiling) = {
     Call(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
     Call(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
     Call(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_IdleTopple)
     Call(SetActorYaw, ACTOR_SELF, 180)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Sub(LVar1, 24)
@@ -903,33 +903,33 @@ EvtScript N(EVS_HandleEvent_SmoothToppled) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1A)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppled)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim22)
-            SetConst(LVar2, ANIM_BonyBeetle_Anim23)
+            SetConst(LVar1, ANIM_BonyBeetle_BurnHurtToppled)
+            SetConst(LVar2, ANIM_BonyBeetle_BurnStillToppled)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim22)
-            SetConst(LVar2, ANIM_BonyBeetle_Anim23)
+            SetConst(LVar1, ANIM_BonyBeetle_BurnHurtToppled)
+            SetConst(LVar2, ANIM_BonyBeetle_BurnStillToppled)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim23)
+            SetConst(LVar1, ANIM_BonyBeetle_BurnStillToppled)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1A)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppled)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1A)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppled)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1A)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppled)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_FLIP_TRIGGER)
@@ -940,7 +940,7 @@ EvtScript N(EVS_HandleEvent_SmoothToppled) = {
             Call(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, 1)
             Call(SetDefenseTable, ACTOR_SELF, PRT_MAIN, Ref(N(ToppledDefenseTable)))
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(ToppledAnims)))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1A)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_HurtToppled)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, true)
             UseBuf(N(FlipPosOffsets))
             Loop(20)
@@ -954,37 +954,37 @@ EvtScript N(EVS_HandleEvent_SmoothToppled) = {
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim06)
+            SetConst(LVar1, ANIM_BonyBeetle_IdleTopple)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_SHOCK_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1A)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppled)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1A)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppled)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1A)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppled)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1A)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppled)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim06)
+            SetConst(LVar1, ANIM_BonyBeetle_IdleTopple)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim06)
+            SetConst(LVar1, ANIM_BonyBeetle_IdleTopple)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1A)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppled)
             ExecWait(EVS_Enemy_BlowAway)
     EndSwitch
     Return
@@ -1000,9 +1000,9 @@ EvtScript N(EVS_TryGettingUp_Smooth) = {
     IfGt(LVar0, 0)
         Call(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, LVar0)
         Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1C)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Struggle)
         Wait(20)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim06)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_IdleTopple)
         Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
     Else
         Call(UseBattleCamPreset, BTL_CAM_ACTOR_FAR)
@@ -1010,11 +1010,11 @@ EvtScript N(EVS_TryGettingUp_Smooth) = {
         Call(SetBattleCamOffsetY, 20)
         Call(BattleCamTargetActor, ACTOR_SELF)
         Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1C)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Struggle)
         Wait(20)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim06)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_IdleTopple)
         Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim0A)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_FlipUp)
         Wait(20)
         Call(SetActorYaw, ACTOR_SELF, 0)
         Call(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_SmoothUpright)
@@ -1035,33 +1035,33 @@ EvtScript N(EVS_HandleEvent_SpikyToppled) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1B)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppledSpiky)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim24)
-            SetConst(LVar2, ANIM_BonyBeetle_Anim25)
+            SetConst(LVar1, ANIM_BonyBeetle_BurnHurtToppledSpiky)
+            SetConst(LVar2, ANIM_BonyBeetle_BurnStillToppledSpiky)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim24)
-            SetConst(LVar2, ANIM_BonyBeetle_Anim25)
+            SetConst(LVar1, ANIM_BonyBeetle_BurnHurtToppledSpiky)
+            SetConst(LVar2, ANIM_BonyBeetle_BurnStillToppledSpiky)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim25)
+            SetConst(LVar1, ANIM_BonyBeetle_BurnStillToppledSpiky)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1B)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppledSpiky)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1B)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppledSpiky)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1B)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppledSpiky)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_FLIP_TRIGGER)
@@ -1072,7 +1072,7 @@ EvtScript N(EVS_HandleEvent_SpikyToppled) = {
             Call(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, 1)
             Call(SetDefenseTable, ACTOR_SELF, PRT_MAIN, Ref(N(ToppledDefenseTable)))
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(ToppledSpikyAnims)))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1B)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_HurtToppledSpiky)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, true)
             UseBuf(N(FlipPosOffsets))
             Loop(20)
@@ -1086,37 +1086,37 @@ EvtScript N(EVS_HandleEvent_SpikyToppled) = {
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim07)
+            SetConst(LVar1, ANIM_BonyBeetle_IdleSpikyTopple)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_SHOCK_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1B)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppledSpiky)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1B)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppledSpiky)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1B)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppledSpiky)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1B)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppledSpiky)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim07)
+            SetConst(LVar1, ANIM_BonyBeetle_IdleSpikyTopple)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim07)
+            SetConst(LVar1, ANIM_BonyBeetle_IdleSpikyTopple)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BonyBeetle_Anim1B)
+            SetConst(LVar1, ANIM_BonyBeetle_HurtToppledSpiky)
             ExecWait(EVS_Enemy_BlowAway)
             Return
     EndSwitch
@@ -1133,9 +1133,9 @@ EvtScript N(EVS_TryGettingUp_Spiky) = {
     IfGt(LVar0, 0)
         Call(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, LVar0)
         Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1D)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_StruggleSpiky)
         Wait(20)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim07)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_IdleSpikyTopple)
         Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
     Else
         Call(UseBattleCamPreset, BTL_CAM_ACTOR_FAR)
@@ -1143,11 +1143,11 @@ EvtScript N(EVS_TryGettingUp_Spiky) = {
         Call(SetBattleCamOffsetY, 20)
         Call(BattleCamTargetActor, ACTOR_SELF)
         Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1D)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_StruggleSpiky)
         Wait(20)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim07)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_IdleSpikyTopple)
         Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim0B)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_FlipUpSpiky)
         Wait(20)
         Call(SetActorYaw, ACTOR_SELF, 0)
         Call(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_SpikyUpright)

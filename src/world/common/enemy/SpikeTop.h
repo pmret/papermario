@@ -107,20 +107,20 @@
 
 #define BONY_BEETLE_ANIMS \
 { \
-    .idle   = ANIM_BonyBeetle_Anim04, \
-    .walk   = ANIM_BonyBeetle_Anim0C, \
-    .run    = ANIM_BonyBeetle_Anim0E, \
-    .chase  = ANIM_BonyBeetle_Anim0E, \
-    .anim_4 = ANIM_BonyBeetle_Anim04, \
-    .anim_5 = ANIM_BonyBeetle_Anim04, \
-    .death  = ANIM_BonyBeetle_Anim18, \
-    .hit    = ANIM_BonyBeetle_Anim18, \
-    .anim_8 = ANIM_BonyBeetle_Anim10, \
-    .anim_9 = ANIM_BonyBeetle_Anim16, \
-    .anim_A = ANIM_BonyBeetle_Anim12, \
-    .anim_B = ANIM_BonyBeetle_Anim04, \
-    .anim_C = ANIM_BonyBeetle_Anim04, \
-    .anim_D = ANIM_BonyBeetle_Anim04, \
-    .anim_E = ANIM_BonyBeetle_Anim04, \
-    .anim_F = ANIM_BonyBeetle_Anim04, \
+    .idle   = ANIM_BonyBeetle_Idle, \
+    .walk   = ANIM_BonyBeetle_Walk, \
+    .run    = ANIM_BonyBeetle_Run, \
+    .chase  = ANIM_BonyBeetle_Run, \
+    .anim_4 = ANIM_BonyBeetle_Idle, \
+    .anim_5 = ANIM_BonyBeetle_Idle, \
+    .death  = ANIM_BonyBeetle_Hurt, \
+    .hit    = ANIM_BonyBeetle_Hurt, \
+    .anim_8 = ANIM_BonyBeetle_ShellEnter, \
+    .anim_9 = ANIM_BonyBeetle_ShellSpin, \
+    .anim_A = ANIM_BonyBeetle_ShellExit, \
+    .anim_B = ANIM_BonyBeetle_Idle, \
+    .anim_C = ANIM_BonyBeetle_Idle, \
+    .anim_D = ANIM_BonyBeetle_Idle, \
+    .anim_E = ANIM_BonyBeetle_Idle, \
+    .anim_F = ANIM_BonyBeetle_Idle, \
 }

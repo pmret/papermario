@@ -292,7 +292,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy) = {
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(SetCamProperties, CAM_DEFAULT, Float(5.0), LVar0, LVar1, LVar2, 300, Float(13.0), Float(-9.5))
     IfEq(GB_OMO_PeachChoice2, 0)
-        Call(SpeakToPlayer, NPC_Fuzzy, ANIM_Fuzzy_Anim0B, ANIM_Fuzzy_Idle, 0, MSG_CH4_003C)
+        Call(SpeakToPlayer, NPC_Fuzzy, ANIM_Fuzzy_Talk, ANIM_Fuzzy_Idle, 0, MSG_CH4_003C)
     Else
         Call(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_CH4_003D)
     EndIf

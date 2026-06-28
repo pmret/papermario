@@ -2338,25 +2338,25 @@ Fuzzy:
     - Neutral
     - Step1
     - Step2
-    - Raster03
-    - Raster04
-    - Raster05
+    - Hop1
+    - Hop2
+    - Hurt3
     - Hurt1
     - Hurt2
     - Stunned1
     - Stunned2
     - Stunned3
     - Stunned4
-    - Raster0C
+    - OpenMouth
     - Bite1
     - Bite2
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
+    - Pause1
+    - Pause2
+    - Sleep
+    - BurnHurt1
+    - BurnHurt2
+    - BurnHurt3
+    - BurnHurt4
     - Cry1
     - Cry2
   palettes:
@@ -2384,14 +2384,14 @@ Fuzzy:
     - Run
     - Leech
     - Jump
-    - Anim06
+    - Ambush
     - Bite
     - Hurt
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
+    - Confused
+    - HurtLoop
+    - Talk
+    - Shout
+    - Divide
     - Sleep
     - Stunned
     - Burn
@@ -4082,91 +4082,91 @@ SpearGuy:
     - StabThrust
 HeartPlant:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
+    - StemNeutral
+    - StemReact01
+    - StemReact02
+    - StemReact03
+    - StemReact04
+    - StemReact05
+    - StemReact06
+    - StemReact07
+    - StemReact08
+    - StemReact09
+    - StemReact10
+    - StemReact11
+    - LeafNeutral
+    - LeafReact1
+    - LeafReact2
+    - LeafReact3
+    - LeafReact4
+    - LeafReact5
+    - LeafReact6
+    - LeafReact7
   palettes:
     - Default
     - Gray
   animations:
-    - Anim00
-    - Anim01
+    - Idle
+    - Interact
 HurtPlant:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
-    - Raster28
-    - Raster29
-    - Raster2A
-    - Raster2B
-    - Raster2C
-    - Raster2D
-    - Raster2E
-    - Raster2F
-    - Raster30
-    - Raster31
-    - Raster32
-    - Raster33
-    - Raster34
-    - Raster35
-    - Raster36
-    - Raster37
-    - Raster38
+    - Reveal01
+    - Reveal02
+    - Reveal03
+    - Reveal04
+    - Reveal05
+    - Reveal06
+    - Reveal07
+    - Reveal08
+    - Reveal09
+    - Reveal10
+    - Reveal11
+    - Reveal12
+    - Reveal13
+    - Idle1
+    - Idle2
+    - IdleLeaf1
+    - IdleLeaf2
+    - RevealLeaf1
+    - RevealLeaf2
+    - RevealLeaf3
+    - RevealLeaf4
+    - RevealLeaf5
+    - RevealLeaf6
+    - Release2
+    - BiteWindup
+    - Bite1
+    - Bite2
+    - Bite3
+    - Burrow1
+    - Release1
+    - BurnHurt1
+    - Sleep1
+    - Sleep2
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Burrow2
+    - Burrow3
+    - Burrow4
+    - Burrow5
+    - Stun
+    - Hurt1
+    - Hurt2
+    - BurrowLeaf1
+    - BurrowLeaf2
+    - BurrowLeaf3
+    - StunLeaf
+    - HurtLeaf1
+    - HurtLeaf2
+    - BurnHurt2
+    - FlattenLeaf1
+    - FlattenLeaf2
+    - SleepLeaf
+    - BurnHurtLeaf1
+    - BurnHurtLeaf2
+    - BurnStillLeaf
+    - BurnStill
   palettes:
     - Default
     - Poisoned
@@ -4174,52 +4174,52 @@ HurtPlant:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
+    - Still
+    - Hiding
+    - Idle
+    - Emerge
+    - Burrow
+    - WindupBite
+    - Bite
+    - ReleaseBite
+    - Reveal
+    - Dizzy
+    - BurnHurt
+    - BurnStill
+    - Sleep
+    - Stun
+    - Hurt
 MBush:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
+    - Bush
+    - Reveal3
+    - Reveal2
+    - Reveal1
+    - Step1
+    - Step2
+    - Step3
+    - Bite1
+    - Bite2
+    - Bite3
+    - Bite4
+    - Bite5
+    - Bite6
+    - Hurt1
+    - Hurt2
+    - Hurt3
+    - Hurt4
+    - Sleep1
+    - Sleep2
+    - Sleep3
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - BurnHurt1
+    - BurnHurt2
+    - BurnHurt3
+    - BurnHurt4
+    - Idle1
+    - Idle2
   palettes:
     - Default
     - Poisoned
@@ -4227,18 +4227,18 @@ MBush:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
+    - Hidden
+    - Still
+    - Idle
+    - Reveal
+    - Walk
+    - Run
+    - Bite
+    - Hurt
+    - Sleep
+    - Dizzy
+    - BurnHurt
+    - BurnStill
 LavaBubble:
   variations:
     - Variant00
@@ -4759,48 +4759,48 @@ Bzzap:
     - HurtStill
 TuffPuff:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
+    - SmallIdle
+    - SmallGrin
+    - SmallHurt1
+    - SmallHurt2
+    - SmallHorror
+    - SmallShock
+    - LargeIdle
+    - LargeGrin
+    - LargeHorror
+    - LargeHurt1
+    - LargeHurt2
+    - LargeShock
+    - SmallTalk
+    - LargeTalk
   palettes:
     - Default
     - Missing1
     - Missing2
     - Missing3
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
+    - StillSmall
+    - StillLarge
+    - IdleSmall
+    - IdleLarge
+    - FlySlowSmall
+    - FlySlowLarge
+    - FlyFastSmall
+    - FlyFastLarge
+    - HorrorSmall
+    - GrinSmall
+    - HorrorLarge
+    - GrinLarge
+    - HurtSmall
+    - HurtLarge
+    - BurnHurtSmall
+    - BurnStillSmall
+    - BurnHurtLarge
+    - BurnStillLarge
+    - ShockSmall
+    - ShockLarge
+    - TalkSmall
+    - TalkLarge
 SpikeTop:
   frames:
     - Raster00
@@ -5207,87 +5207,87 @@ ThrownBone:
     - Still
 BonyBeetle:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
-    - Raster28
-    - Raster29
-    - Raster2A
-    - Raster2B
-    - Raster2C
-    - Raster2D
-    - Raster2E
-    - Raster2F
-    - Raster30
-    - Raster31
-    - Raster32
-    - Raster33
-    - Raster34
-    - Raster35
-    - Raster36
-    - Raster37
-    - Raster38
-    - Raster39
-    - Raster3A
-    - Raster3B
-    - Raster3C
-    - Raster3D
-    - Raster3E
-    - Raster3F
-    - Raster40
-    - Raster41
-    - Raster42
-    - Raster43
-    - Raster44
-    - Raster45
-    - Raster46
-    - Raster47
-    - Raster48
-    - Raster49
-    - Raster4A
-    - Raster4B
-    - Raster4C
-    - Raster4D
-    - Raster4E
-    - Raster4F
-    - Raster50
+    - Idle1
+    - Idle2
+    - Step1
+    - Step2
+    - Step3
+    - IdleSpiky1
+    - IdleSpiky2
+    - StepSpiky1
+    - StepSpiky2
+    - StepSpiky3
+    - HalfInsideSpiky
+    - HalfSpiky
+    - ShellSpinSpiky1
+    - ShellSpinSpiky2
+    - ShellSpinSpiky3
+    - ShellSpinSpiky4
+    - ShellSpinSpiky5
+    - ShellSpinSpiky6
+    - Hurt1
+    - Hurt2
+    - HurtSpiky1
+    - HurtSpiky2
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
+    - Sleep1
+    - Sleep2
+    - Sleep3
+    - BurnStill
+    - BurnStillSpiky
+    - SleepSpiky1
+    - SleepSpiky2
+    - SleepSpiky3
+    - DizzySpiky1
+    - DizzySpiky2
+    - DizzySpiky3
+    - DizzySpiky4
+    - BurnHurt1
+    - BurnHurt2
+    - BurnHurtSpiky1
+    - BurnHurtSpiky2
+    - ShellSpin1
+    - ShellSpin2
+    - ShellSpin3
+    - ShellSpin4
+    - ShellSpin5
+    - ShellSpin6
+    - FlipUp1
+    - IdleToppled2
+    - IdleToppled1
+    - HalfInside
+    - HurtToppled1
+    - HurtToppled2
+    - FlipUp2
+    - DizzyToppled1
+    - DizzyToppled2
+    - DizzyToppled3
+    - DizzyToppled4
+    - SleepToppled1
+    - SleepToppled2
+    - SleepToppled3
+    - SleepToppledSpiky1
+    - SleepToppledSpiky2
+    - SleepToppledSpiky3
+    - HurtToppledSpiky1
+    - HurtToppledSpiky2
+    - DizzyToppledSpiky1
+    - DizzyToppledSpiky2
+    - DizzyToppledSpiky3
+    - DizzyToppledSpiky4
+    - FlipUpSpiky2
+    - FlipUpSpiky1
+    - IdleToppledSpiky2
+    - IdleToppledSpiky1
+    - BurnHurtToppledSpiky1
+    - BurnHurtToppledSpiky2
+    - BurnStillToppledSpiky
+    - BurnHurtToppled1
+    - BurnHurtToppled2
+    - BurnStillToppled
   palettes:
     - Default
     - Poisoned
@@ -5295,54 +5295,54 @@ BonyBeetle:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
-    - Anim18
-    - Anim19
-    - Anim1A
-    - Anim1B
-    - Anim1C
-    - Anim1D
-    - Anim1E
-    - Anim1F
-    - Anim20
-    - Anim21
-    - Anim22
-    - Anim23
-    - Anim24
-    - Anim25
-    - Anim26
-    - Anim27
-    - Anim28
-    - Anim29
-    - Anim2A
-    - Anim2B
-    - Anim2C
-    - Anim2D
-    - Anim2E
-    - Anim2F
+    - Still
+    - StillSpiky
+    - StillTopple
+    - StillSpikyTopple
+    - Idle
+    - IdleSpiky
+    - IdleTopple
+    - IdleSpikyTopple
+    - FlipOver
+    - FlipOverSpiky
+    - FlipUp
+    - FlipUpSpiky
+    - Walk
+    - WalkSpiky
+    - Run
+    - RunSpiky
+    - ShellEnter
+    - ShellEnterSpiky
+    - ShellExit
+    - ShellExitSpiky
+    - ShellStill
+    - ShellStillSpiky
+    - ShellSpin
+    - ShellSpinSpiky
+    - Hurt
+    - HurtSpiky
+    - HurtToppled
+    - HurtToppledSpiky
+    - Struggle
+    - StruggleSpiky
+    - BurnHurt
+    - BurnStill
+    - BurnHurtSpiky
+    - BurnStillSpiky
+    - BurnHurtToppled
+    - BurnStillToppled
+    - BurnHurtToppledSpiky
+    - BurnStillToppledSpiky
+    - Dizzy
+    - DizzySpiky
+    - DizzyToppled
+    - DizzyToppledSpiky
+    - Sleep
+    - SleepSpiky
+    - SleepToppled
+    - SleepToppledSpiky
+    - ExtendSpikes
+    - RetractSpikes
 Magikoopa:
   variations:
     - Variant00
@@ -6156,120 +6156,120 @@ KoopaBros:
     - DizzyToppled
 Buzzar:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
-    - Raster28
-    - Raster29
-    - Raster2A
-    - Raster2B
-    - Raster2C
-    - Raster2D
-    - Raster2E
-    - Raster2F
-    - Raster30
-    - Raster31
-    - Raster32
-    - Raster33
-    - Raster34
-    - Raster35
-    - Raster36
-    - Raster37
-    - Raster38
-    - Raster39
-    - Raster3A
-    - Raster3B
-    - Raster3C
-    - Raster3D
-    - Raster3E
-    - Raster3F
-    - Raster40
-    - Raster41
-    - Raster42
-    - Raster43
-    - Raster44
-    - Raster45
-    - Raster46
-    - Raster47
-    - Raster48
-    - Raster49
-    - Raster4A
-    - Raster4B
-    - Raster4C
-    - Raster4D
-    - Raster4E
-    - Raster4F
-    - Raster50
-    - Raster51
+    - HeadNeutral
+    - BodyIdle1
+    - RWingIdle1
+    - ClawsIdle
+    - LWingIdle1
+    - FeatherHeadIdle1
+    - FeatherTailIdle1
+    - BodyIdle2
+    - FeatherTailIdle2
+    - FeatherHeadIdle2
+    - LWingIdle2
+    - RWingIdle2
+    - BodyIdle3
+    - FeatherTailIdle3
+    - FeatherHeadIdle3
+    - LWingIdle3
+    - RWingIdle3
+    - BodyIdle4
+    - FeatherHeadIdle4
+    - LWingIdle4
+    - RWingIdle4
+    - HeadTalk
+    - HeadAngry
+    - ClawsGrab
+    - HeadShout
+    - FeatherHeadShout1
+    - LWingShout1
+    - RWingShout1
+    - HeadGrin
+    - FeatherHeadShout2
+    - LWingShout2
+    - RWingShout2
+    - FeatherTailRoost
+    - LWingRoost
+    - RWingRoost
+    - FeatherDart1
+    - FeatherDart2
+    - FeatherDart3
+    - HeadWave
+    - FeatherHeadWave
+    - LWingWave
+    - RWingWave1
+    - RWingWave2
+    - RWingWave3
+    - FeatherTailWave
+    - HeadTurn1
+    - FeatherHeadTurn1
+    - LWingStretch1
+    - FeatherTailTurn
+    - LWingStretch2
+    - HeadTurn2
+    - FeatherHeadTurn2
+    - RWingGather1
+    - LWingGather1
+    - HeadFaceAway1
+    - FeatherHeadFaceAway1
+    - FeatherTailHurt
+    - LWingGather2
+    - RWingGather2
+    - HeadFaceAway2
+    - LWingGather3
+    - RWingGather3
+    - HeadTurnBack
+    - FeatherHeadFaceAway2
+    - LWingHoldPaper
+    - HeadRead1
+    - RWingRead
+    - LWingRead
+    - Shoulder
+    - HeadRead2
+    - HeadFaceAwayGrin
+    - HeadHurt1
+    - FeatherHeadHurt1
+    - LWingHurt1
+    - ClawsHurt1
+    - HeadHurt2
+    - FeatherHeadHurt2
+    - LWingHurt2
+    - RWingHurt
+    - ClawsHurt2
+    - LWingDive
+    - HeadSleep
   palettes:
     - Default
     - Poisoned
     - Dizzy
     - Shocked
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
-    - Anim18
-    - Anim19
+    - Still
+    - Idle
+    - Fly
+    - Talk
+    - Shout
+    - Roost
+    - WaveThrough
+    - FindPoster
+    - RetrievePoster
+    - ReadPoster
+    - StashPoster
+    - Hurt
+    - Dizzy
+    - Angry
+    - GatherFeathers
+    - HoldFeathers
+    - ThrowFeathers
+    - GatherWind
+    - HoldWind
+    - ReleaseWind
+    - FeatherStill
+    - FeatherFly
+    - Grab
+    - Lift
+    - Dive
+    - Sleep
 Tutankoopa:
   frames:
     - Headdress
@@ -6691,44 +6691,44 @@ BigLanternGhost:
     - Variant02
     - Variant03
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
+    - Idle1
+    - Idle2
+    - Step1
+    - Step2
+    - Talk
+    - Reveal
+    - Hurt1
+    - Hurt2
+    - Dizzy1
+    - Dizzy2
+    - Sleep1
+    - Sleep2
+    - BlowOut1
+    - BlowOut2
+    - Jump
+    - Fall
+    - RaiseLantern1
+    - RaiseLantern2
+    - SwingLantern
+    - LanternSleep1
+    - LanternSleep2
+    - LanternIdle1
+    - LanternIdle2
+    - LanternJump1
+    - LanternJump2
+    - BurnHurt1
+    - BurnHurt2
+    - LanternDark
+    - LanternTop
+    - LanternBottom
+    - Flee1
+    - Flee2
+    - Flee3
+    - LanternHurt1
+    - LanternHurt2
+    - LanternBurnHurt
+    - LanternFall1
+    - LanternFall2
   palettes:
     - Default
     - Bright
@@ -6749,27 +6749,27 @@ BigLanternGhost:
     - Burnt
     - Gray
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
+    - Still
+    - Idle
+    - Lantern
+    - LanternTop
+    - LanternBottom
+    - Talk
+    - Walk
+    - Run
+    - Flee
+    - Hurt
+    - BurnHurt
+    - BurnStill
+    - Sleep
+    - Dizzy
+    - BlowOut
+    - Reveal
+    - Jump
+    - Fall
+    - SwingLantern
+    - RaiseLantern
+    - LowerLantern
 ShySquadGuy:
   variations:
     - Variant00

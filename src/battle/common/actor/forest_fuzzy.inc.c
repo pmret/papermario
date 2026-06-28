@@ -220,7 +220,7 @@ EvtScript N(EVS_HandleEvent) = {
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
             SetConst(LVar1, ANIM_Fuzzy_Forest_Run)
-            SetConst(LVar2, ANIM_Fuzzy_Forest_Anim09)
+            SetConst(LVar2, ANIM_Fuzzy_Forest_Confused)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
@@ -266,7 +266,7 @@ EvtScript N(EVS_Move_Clone) = {
         EndLoop
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_FUZZY_DIVIDE)
     EndThread
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Anim0D)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Divide)
     Wait(130)
     Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Walk)
     Call(SummonEnemy, Ref(N(CloneFormation)), false)
@@ -352,7 +352,7 @@ EvtScript N(EVS_Attack_Leech) = {
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 11, false, true, false)
             Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Anim09)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Confused)
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 20)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(3.0))

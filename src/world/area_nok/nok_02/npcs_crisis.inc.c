@@ -350,7 +350,7 @@ EvtScript N(EVS_NpcIdle_Koopa_01_Crisis) = {
             Call(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_A, SOUND_SPACE_DEFAULT)
             Call(NpcJump0, NPC_FuzzyThief, LVar0, 0, LVar2, 15)
             Add(LVar0, 30)
-            Call(SetNpcAnimation, NPC_FuzzyThief, ANIM_Fuzzy_Anim09)
+            Call(SetNpcAnimation, NPC_FuzzyThief, ANIM_Fuzzy_Confused)
             Call(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_A, SOUND_SPACE_DEFAULT)
             Call(NpcJump0, NPC_FuzzyThief, LVar0, 0, LVar2, 13)
             Add(LVar0, 20)

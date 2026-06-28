@@ -243,8 +243,8 @@ AnimID N(ExtraAnims_Mouser)[] = {
 };
 
 AnimID N(ExtraAnims_Buzzar)[] = {
-    ANIM_Buzzar_Anim05,
-    ANIM_Buzzar_Anim03,
+    ANIM_Buzzar_Roost,
+    ANIM_Buzzar_Talk,
     ANIM_LIST_END
 };
 
@@ -523,7 +523,7 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 270.0f
     },
     [NPC_Buzzar] {
-        .initialAnim = ANIM_Buzzar_Anim05,
+        .initialAnim = ANIM_Buzzar_Roost,
         .animList = N(ExtraAnims_Buzzar),
         .pos = { -855.0f, 70.0f, -140.0f },
         .yaw = 270.0f

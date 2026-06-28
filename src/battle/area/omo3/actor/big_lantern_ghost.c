@@ -131,16 +131,16 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BigLanternGhost_Anim01,
-    STATUS_KEY_STONE,     ANIM_BigLanternGhost_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_BigLanternGhost_Anim0C,
-    STATUS_KEY_POISON,    ANIM_BigLanternGhost_Anim01,
-    STATUS_KEY_STOP,      ANIM_BigLanternGhost_Anim00,
-    STATUS_KEY_STATIC,    ANIM_BigLanternGhost_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_BigLanternGhost_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_BigLanternGhost_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_BigLanternGhost_Anim0D,
-    STATUS_KEY_UNUSED,    ANIM_BigLanternGhost_Anim0D,
+    STATUS_KEY_NORMAL,    ANIM_BigLanternGhost_Idle,
+    STATUS_KEY_STONE,     ANIM_BigLanternGhost_Still,
+    STATUS_KEY_SLEEP,     ANIM_BigLanternGhost_Sleep,
+    STATUS_KEY_POISON,    ANIM_BigLanternGhost_Idle,
+    STATUS_KEY_STOP,      ANIM_BigLanternGhost_Still,
+    STATUS_KEY_STATIC,    ANIM_BigLanternGhost_Still,
+    STATUS_KEY_PARALYZE,  ANIM_BigLanternGhost_Still,
+    STATUS_KEY_PARALYZE,  ANIM_BigLanternGhost_Still,
+    STATUS_KEY_DIZZY,     ANIM_BigLanternGhost_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_BigLanternGhost_Dizzy,
     STATUS_END,
 };
 
@@ -200,7 +200,7 @@ API_CALLABLE(N(update_effect)) {
     rotZ = actor->rot.z;
 
     actorPart = get_actor_part(actor, 1);
-    if (actorPart->curAnimation == ANIM_BigLanternGhost_Anim0C) {
+    if (actorPart->curAnimation == ANIM_BigLanternGhost_Sleep) {
         spr_get_comp_position(actor->partsTable->spriteInstanceID, 0, &partX, &partY, &partZ);
     } else {
         spr_get_comp_position(actor->partsTable->spriteInstanceID, 1, &partX, &partY, &partZ);
@@ -317,7 +317,7 @@ EvtScript N(EVS_HandlePhase) = {
                 Call(SetBattleCamOffsetY, 40)
                 Call(MoveBattleCamOver, 30)
                 Wait(30)
-                Call(ActorSpeak, MSG_CH4_0051, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim05, ANIM_BigLanternGhost_Anim01)
+                Call(ActorSpeak, MSG_CH4_0051, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Talk, ANIM_BigLanternGhost_Idle)
                 Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EndIf
         CaseEq(PHASE_ENEMY_BEGIN)
@@ -365,7 +365,7 @@ EvtScript N(EVS_HandleEvent) = {
             ExecWait(N(onHit))
             ExecWait(N(checkExtinguish))
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            SetConst(LVar1, ANIM_BigLanternGhost_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
@@ -383,42 +383,42 @@ EvtScript N(EVS_HandleEvent) = {
             ExecWait(EVS_Enemy_BurnHit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim0B)
+            SetConst(LVar1, ANIM_BigLanternGhost_BurnStill)
             ExecWait(N(onDeath))
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             ExecWait(N(onHit))
             ExecWait(N(checkExtinguish))
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            SetConst(LVar1, ANIM_BigLanternGhost_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            SetConst(LVar1, ANIM_BigLanternGhost_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            SetConst(LVar1, ANIM_BigLanternGhost_Hurt)
             ExecWait(N(onDeath))
             Return
         CaseEq(EVENT_SHOCK_HIT)
             ExecWait(N(onHit))
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            SetConst(LVar1, ANIM_BigLanternGhost_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            SetConst(LVar1, ANIM_BigLanternGhost_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
             ExecWait(N(onHit))
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            SetConst(LVar1, ANIM_BigLanternGhost_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            SetConst(LVar1, ANIM_BigLanternGhost_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            SetConst(LVar1, ANIM_BigLanternGhost_Hurt)
             ExecWait(N(onDeath))
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
@@ -456,24 +456,24 @@ EvtScript N(EVS_HandleEvent) = {
                 EndIf
             EndIf
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim01)
+            SetConst(LVar1, ANIM_BigLanternGhost_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim01)
+            SetConst(LVar1, ANIM_BigLanternGhost_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         CaseEq(EVENT_SPIKE_TAUNT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim01)
+            SetConst(LVar1, ANIM_BigLanternGhost_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            SetConst(LVar1, ANIM_BigLanternGhost_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            SetConst(LVar1, ANIM_BigLanternGhost_Hurt)
             ExecWait(N(onDeath))
             Return
         CaseEq(EVENT_END_FIRST_STRIKE)
@@ -481,17 +481,17 @@ EvtScript N(EVS_HandleEvent) = {
             Call(HPBarToHome, ACTOR_SELF)
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim01)
+            SetConst(LVar1, ANIM_BigLanternGhost_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_30)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            SetConst(LVar1, ANIM_BigLanternGhost_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(1000)
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BigLanternGhost_Anim01)
-            SetConst(LVar2, ANIM_BigLanternGhost_Anim09)
+            SetConst(LVar1, ANIM_BigLanternGhost_Idle)
+            SetConst(LVar2, ANIM_BigLanternGhost_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseDefault
@@ -542,20 +542,20 @@ EvtScript N(attackHeavyJump) = {
     Add(LVar0, 50)
     Set(LVar1, 0)
     Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Walk)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(RunToGoal, ACTOR_SELF, 0, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Idle)
     Wait(8)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_LARGE_ACTOR_JUMP, 0)
     Call(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVarA)
         CaseOrEq(HIT_RESULT_MISS)
         CaseOrEq(HIT_RESULT_LUCKY)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim10)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Jump)
             Thread
                 Wait(10)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim11)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Fall)
             EndThread
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
             Call(SetGoalToTarget, ACTOR_SELF)
@@ -570,7 +570,7 @@ EvtScript N(attackHeavyJump) = {
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 12, false, true, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Idle)
             Sub(LVar0, 10)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
@@ -586,10 +586,10 @@ EvtScript N(attackHeavyJump) = {
             Return
         EndCaseGroup
     EndSwitch
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim10)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Jump)
     Thread
         Wait(7)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim11)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Fall)
     EndThread
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -610,7 +610,7 @@ EvtScript N(attackHeavyJump) = {
             Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
             Thread
                 Wait(5)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim10)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Jump)
             EndThread
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Add(LVar0, 40)
@@ -619,7 +619,7 @@ EvtScript N(attackHeavyJump) = {
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 12, false, true, false)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Idle)
             Add(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
@@ -652,10 +652,10 @@ EvtScript N(attackLightBeam) = {
     Add(LVar0, 80)
     Set(LVar1, 0)
     Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Walk)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(RunToGoal, ACTOR_SELF, 0, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Idle)
     Wait(20)
     Call(UseBattleCamPreset, BTL_CAM_ACTOR_TARGET_MIDPOINT)
     Call(SetBattleCamDist, 350)
@@ -663,7 +663,7 @@ EvtScript N(attackLightBeam) = {
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 8)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_LIGHT)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim0F)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Reveal)
     Call(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar5)
     Call(SetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), 11)
     Call(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_X), LVar0)
@@ -730,7 +730,7 @@ EvtScript N(attackLightBeam) = {
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_1)
         EndSwitch
     EndThread
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim14)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_LowerLantern)
     Wait(60)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     ExecWait(N(EVS_ReturnHome))
@@ -758,9 +758,9 @@ EvtScript N(extinguish) = {
         Call(GetEnemyMaxHP, ACTOR_SELF, LVar0)
         Call(GetActorHP, ACTOR_SELF, LVar1)
         IfEq(LVar0, LVar1)
-            Call(ActorSpeak, MSG_CH4_0053, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim05, ANIM_BigLanternGhost_Anim01)
+            Call(ActorSpeak, MSG_CH4_0053, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Talk, ANIM_BigLanternGhost_Idle)
         Else
-            Call(ActorSpeak, MSG_CH4_0052, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim05, ANIM_BigLanternGhost_Anim01)
+            Call(ActorSpeak, MSG_CH4_0052, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Talk, ANIM_BigLanternGhost_Idle)
         EndIf
     EndIf
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -771,13 +771,13 @@ EvtScript N(extinguish) = {
     Call(MoveBattleCamOver, 20)
     Wait(20)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_INHALE)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim0F)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Reveal)
     Wait(8)
     Thread
         Wait(2)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_BLOW)
     EndThread
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim0E)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_BlowOut)
     Wait(5)
     Call(SetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), 2)
     Thread
@@ -800,7 +800,7 @@ EvtScript N(extinguish) = {
     Wait(15)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Wait(2)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Idle)
     ExecWait(N(setGhostNoTarget))
     Wait(30)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -843,9 +843,9 @@ EvtScript N(EVS_TakeTurn) = {
 
 EvtScript N(EVS_ReturnHome) = {
     SetConst(LVar0, PRT_MAIN)
-    SetConst(LVar1, ANIM_BigLanternGhost_Anim07)
+    SetConst(LVar1, ANIM_BigLanternGhost_Run)
     ExecWait(EVS_Enemy_ReturnHome)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Idle)
     Return
     End
 };

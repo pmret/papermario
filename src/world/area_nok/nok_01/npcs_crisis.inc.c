@@ -207,7 +207,7 @@ EvtScript N(EVS_Scene_KooverGetsMugged) = {
     Call(PlaySoundAtNpc, NPC_FuzzyWithShell, SOUND_FUZZY_HOP_A, SOUND_SPACE_DEFAULT)
     Call(NpcJump0, NPC_FuzzyWithShell, LVar0, 0, LVar2, 20)
     Call(SetNpcAnimation, NPC_Koover, ANIM_KoopaWithoutShell_Idle)
-    Call(SetNpcAnimation, NPC_FuzzyWithShell, ANIM_Fuzzy_Anim0C)
+    Call(SetNpcAnimation, NPC_FuzzyWithShell, ANIM_Fuzzy_Shout)
     Thread
         Add(LVar0, 1)
         Add(LVar2, 1)
@@ -384,7 +384,7 @@ EvtScript N(EVS_NpcHit_FuzzyWithShell) = {
             Call(NpcJump0, NPC_FuzzyWithShell, LVar0, 0, LVar2, 15)
             Add(LVar0, 30)
             Add(LVar2, -30)
-            Call(SetNpcAnimation, NPC_FuzzyWithShell, ANIM_Fuzzy_Anim09)
+            Call(SetNpcAnimation, NPC_FuzzyWithShell, ANIM_Fuzzy_Confused)
             Call(PlaySoundAtNpc, NPC_FuzzyWithShell, SOUND_FUZZY_HOP_A, SOUND_SPACE_DEFAULT)
             Call(NpcJump0, NPC_FuzzyWithShell, LVar0, 0, LVar2, 13)
             Add(LVar0, 20)

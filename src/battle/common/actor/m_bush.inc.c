@@ -18,15 +18,15 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_MBush_Anim02,
-    STATUS_KEY_STONE,     ANIM_MBush_Anim01,
-    STATUS_KEY_SLEEP,     ANIM_MBush_Anim08,
-    STATUS_KEY_POISON,    ANIM_MBush_Anim02,
-    STATUS_KEY_STOP,      ANIM_MBush_Anim01,
-    STATUS_KEY_STATIC,    ANIM_MBush_Anim02,
-    STATUS_KEY_PARALYZE,  ANIM_MBush_Anim01,
-    STATUS_KEY_DIZZY,     ANIM_MBush_Anim09,
-    STATUS_KEY_UNUSED,    ANIM_MBush_Anim09,
+    STATUS_KEY_NORMAL,    ANIM_MBush_Idle,
+    STATUS_KEY_STONE,     ANIM_MBush_Still,
+    STATUS_KEY_SLEEP,     ANIM_MBush_Sleep,
+    STATUS_KEY_POISON,    ANIM_MBush_Idle,
+    STATUS_KEY_STOP,      ANIM_MBush_Still,
+    STATUS_KEY_STATIC,    ANIM_MBush_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_MBush_Still,
+    STATUS_KEY_DIZZY,     ANIM_MBush_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_MBush_Dizzy,
     STATUS_END,
 };
 
@@ -114,10 +114,10 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_ReturnHome) = {
     Call(SetActorYaw, ACTOR_SELF, 180)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim05)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Run)
     Call(SetGoalToHome, ACTOR_SELF)
     Call(RunToGoal, ACTOR_SELF, 0, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Idle)
     Call(SetActorYaw, ACTOR_SELF, 0)
     Return
     End
@@ -131,85 +131,85 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim07)
+            SetConst(LVar1, ANIM_MBush_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim0A)
-            SetConst(LVar2, ANIM_MBush_Anim0B)
+            SetConst(LVar1, ANIM_MBush_BurnHurt)
+            SetConst(LVar2, ANIM_MBush_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim0A)
-            SetConst(LVar2, ANIM_MBush_Anim0B)
+            SetConst(LVar1, ANIM_MBush_BurnHurt)
+            SetConst(LVar2, ANIM_MBush_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim0B)
+            SetConst(LVar1, ANIM_MBush_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim07)
+            SetConst(LVar1, ANIM_MBush_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim07)
+            SetConst(LVar1, ANIM_MBush_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim07)
+            SetConst(LVar1, ANIM_MBush_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim07)
+            SetConst(LVar1, ANIM_MBush_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim07)
+            SetConst(LVar1, ANIM_MBush_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim07)
+            SetConst(LVar1, ANIM_MBush_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim07)
+            SetConst(LVar1, ANIM_MBush_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim02)
+            SetConst(LVar1, ANIM_MBush_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim07)
+            SetConst(LVar1, ANIM_MBush_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim07)
+            SetConst(LVar1, ANIM_MBush_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim02)
+            SetConst(LVar1, ANIM_MBush_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim05)
-            SetConst(LVar2, ANIM_MBush_Anim09)
+            SetConst(LVar1, ANIM_MBush_Run)
+            SetConst(LVar2, ANIM_MBush_Dizzy)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim05)
+            SetConst(LVar1, ANIM_MBush_Run)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MBush_Anim05)
+            SetConst(LVar1, ANIM_MBush_Run)
             ExecWait(EVS_Enemy_BlowAway)
             Return
         CaseDefault
@@ -227,7 +227,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Walk)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Add(LVar0, 50)
@@ -241,7 +241,7 @@ EvtScript N(EVS_TakeTurn) = {
         CaseOrEq(HIT_RESULT_MISS)
         CaseOrEq(HIT_RESULT_LUCKY)
             Set(LVarA, LVar0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim06)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Bite)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
             Call(SetGoalToTarget, ACTOR_SELF)
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -257,7 +257,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
             Wait(15)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Idle)
             Wait(15)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(YieldTurn)
@@ -270,7 +270,7 @@ EvtScript N(EVS_TakeTurn) = {
             Return
         EndCaseGroup
     EndSwitch
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Bite)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
@@ -288,7 +288,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Idle)
             Wait(8)
             Call(YieldTurn)
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))

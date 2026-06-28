@@ -17,20 +17,20 @@
 
 #define MBUSH_ANIMS \
 { \
-    .idle   = ANIM_MBush_Anim02, \
-    .walk   = ANIM_MBush_Anim02, \
-    .run    = ANIM_MBush_Anim02, \
-    .chase  = ANIM_MBush_Anim02, \
-    .anim_4 = ANIM_MBush_Anim02, \
-    .anim_5 = ANIM_MBush_Anim02, \
-    .death  = ANIM_MBush_Anim07, \
-    .hit    = ANIM_MBush_Anim07, \
-    .anim_8 = ANIM_MBush_Anim02, \
-    .anim_9 = ANIM_MBush_Anim02, \
-    .anim_A = ANIM_MBush_Anim02, \
-    .anim_B = ANIM_MBush_Anim02, \
-    .anim_C = ANIM_MBush_Anim02, \
-    .anim_D = ANIM_MBush_Anim02, \
-    .anim_E = ANIM_MBush_Anim02, \
-    .anim_F = ANIM_MBush_Anim02, \
+    .idle   = ANIM_MBush_Idle, \
+    .walk   = ANIM_MBush_Idle, \
+    .run    = ANIM_MBush_Idle, \
+    .chase  = ANIM_MBush_Idle, \
+    .anim_4 = ANIM_MBush_Idle, \
+    .anim_5 = ANIM_MBush_Idle, \
+    .death  = ANIM_MBush_Hurt, \
+    .hit    = ANIM_MBush_Hurt, \
+    .anim_8 = ANIM_MBush_Idle, \
+    .anim_9 = ANIM_MBush_Idle, \
+    .anim_A = ANIM_MBush_Idle, \
+    .anim_B = ANIM_MBush_Idle, \
+    .anim_C = ANIM_MBush_Idle, \
+    .anim_D = ANIM_MBush_Idle, \
+    .anim_E = ANIM_MBush_Idle, \
+    .anim_F = ANIM_MBush_Idle, \
 }
