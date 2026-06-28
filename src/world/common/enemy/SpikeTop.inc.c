@@ -73,11 +73,11 @@ EvtScript N(EVS_NpcAI_BonyBeetle) = {
 
 EvtScript N(EVS_NpcAI_BuzzyBeetle_Ceiling) = {
     Call(N(func_80240814_97BE44))
-    Call(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_Anim0F)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_CeilingIdle)
     Call(N(AwaitPlayerNearNpc))
     Call(SelfEnemyOverrideSyncPos, 1)
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_Anim00)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_BuzzyBeetle_Still)
     Call(N(func_802408B4_97BEE4))
     Call(SelfEnemyOverrideSyncPos, 0)
     Call(SetSelfVar, 2, 5)

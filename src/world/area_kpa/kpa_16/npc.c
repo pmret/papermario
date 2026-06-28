@@ -223,7 +223,7 @@ EvtScript N(EVS_NpcIdle_Guards) = {
     Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Idle)
     Call(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Idle)
     Call(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Idle)
-    Call(SpeakToPlayer, NPC_Magikoopa, ANIM_Magikoopa_Anim02, ANIM_Magikoopa_Anim01, 0, MSG_CH8_0019)
+    Call(SpeakToPlayer, NPC_Magikoopa, ANIM_Magikoopa_Shout, ANIM_Magikoopa_Idle, 0, MSG_CH8_0019)
     Thread
         Wait(15 * DT)
         Call(InterpNpcYaw, NPC_Koopatrol_03, 90, 0)

@@ -27,25 +27,25 @@ enum N(ActorParams) {
 #define BASE_COLLAPSE_DURATION  2
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_DryBones_Anim02,
-    STATUS_KEY_STONE,     ANIM_DryBones_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_DryBones_Anim0E,
-    STATUS_KEY_POISON,    ANIM_DryBones_Anim02,
-    STATUS_KEY_STOP,      ANIM_DryBones_Anim00,
-    STATUS_KEY_STATIC,    ANIM_DryBones_Anim02,
-    STATUS_KEY_PARALYZE,  ANIM_DryBones_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_DryBones_Anim0D,
-    STATUS_KEY_UNUSED,    ANIM_DryBones_Anim0D,
+    STATUS_KEY_NORMAL,    ANIM_DryBones_Idle,
+    STATUS_KEY_STONE,     ANIM_DryBones_Still,
+    STATUS_KEY_SLEEP,     ANIM_DryBones_Sleep,
+    STATUS_KEY_POISON,    ANIM_DryBones_Idle,
+    STATUS_KEY_STOP,      ANIM_DryBones_Still,
+    STATUS_KEY_STATIC,    ANIM_DryBones_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_DryBones_Still,
+    STATUS_KEY_DIZZY,     ANIM_DryBones_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_DryBones_Dizzy,
     STATUS_END,
 };
 
 s32 N(CollapsedAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_DryBones_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_DryBones_BonePile,
     STATUS_END,
 };
 
 s32 N(BoneAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_DryBones_Anim0F,
+    STATUS_KEY_NORMAL,    ANIM_DryBones_Bone,
     STATUS_END,
 };
 
@@ -247,7 +247,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_Collapse) = {
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_DRY_BONES_COLLAPSE)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim08)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Collapse)
     Wait(20)
     Call(SetActorVar, ACTOR_SELF, AVAR_Collapsed, true)
     Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(CollapsedAnims)))
@@ -304,35 +304,35 @@ EvtScript N(EVS_HandleEvent) = {
     Switch(LVar0)
         CaseEq(EVENT_HIT_COMBO)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_DryBones_Anim07)
+            SetConst(LVar1, ANIM_DryBones_Hurt)
             ExecWait(EVS_Enemy_Hit)
         CaseEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_DryBones_Anim07)
+            SetConst(LVar1, ANIM_DryBones_Hurt)
             ExecWait(EVS_Enemy_Hit)
         CaseEq(EVENT_BURN_HIT)
             Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION, true)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_DryBones_Anim0B)
-            SetConst(LVar2, ANIM_DryBones_Anim0C)
+            SetConst(LVar1, ANIM_DryBones_BurnHurt)
+            SetConst(LVar2, ANIM_DryBones_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION, false)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_DryBones_Anim0B)
-            SetConst(LVar2, ANIM_DryBones_Anim0C)
+            SetConst(LVar1, ANIM_DryBones_BurnHurt)
+            SetConst(LVar2, ANIM_DryBones_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_DryBones_Anim0C)
+            SetConst(LVar1, ANIM_DryBones_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_DryBones_Anim07)
+            SetConst(LVar1, ANIM_DryBones_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_DryBones_Anim07)
+            SetConst(LVar1, ANIM_DryBones_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             ExecWait(N(EVS_Collapse))
         CaseOrEq(EVENT_ZERO_DAMAGE)
@@ -340,17 +340,17 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_Collapsed, LVar0)
             IfEq(LVar0, 0)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_DryBones_Anim02)
+                SetConst(LVar1, ANIM_DryBones_Idle)
                 ExecWait(EVS_Enemy_NoDamageHit)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_DryBones_Anim01)
+                SetConst(LVar1, ANIM_DryBones_BonePile)
                 ExecWait(EVS_Enemy_NoDamageHit)
             EndIf
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_DryBones_Anim07)
+            SetConst(LVar1, ANIM_DryBones_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Call(GetActorVar, ACTOR_SELF, AVAR_Collapsed, LVar0)
             IfEq(LVar0, 0)
@@ -361,24 +361,24 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_Collapsed, LVar0)
             IfEq(LVar0, 0)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_DryBones_Anim02)
+                SetConst(LVar1, ANIM_DryBones_Idle)
                 ExecWait(EVS_Enemy_Recover)
             EndIf
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_DryBones_Anim04)
-            SetConst(LVar2, ANIM_DryBones_Anim07)
+            SetConst(LVar1, ANIM_DryBones_Run)
+            SetConst(LVar2, ANIM_DryBones_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             Call(GetActorVar, ACTOR_SELF, AVAR_Collapsed, LVar0)
             IfEq(LVar0, 0)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_DryBones_Anim04)
+                SetConst(LVar1, ANIM_DryBones_Run)
                 ExecWait(EVS_Enemy_AirLift)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_DryBones_Anim09)
+                SetConst(LVar1, ANIM_DryBones_Struggle)
                 ExecWait(EVS_Enemy_AirLift)
             EndIf
         CaseEq(EVENT_BLOW_AWAY)
@@ -393,11 +393,11 @@ EvtScript N(EVS_HandleEvent) = {
                     EndIf
                 EndIf
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_DryBones_Anim07)
+                SetConst(LVar1, ANIM_DryBones_Hurt)
                 ExecWait(EVS_Enemy_BlowAway)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_DryBones_Anim09)
+                SetConst(LVar1, ANIM_DryBones_Struggle)
                 ExecWait(EVS_Enemy_BlowAway)
             EndIf
             Return
@@ -405,11 +405,11 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_Collapsed, LVar0)
             IfEq(LVar0, 0)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_DryBones_Anim02)
+                SetConst(LVar1, ANIM_DryBones_Idle)
                 ExecWait(EVS_Enemy_NoDamageHit)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_DryBones_Anim01)
+                SetConst(LVar1, ANIM_DryBones_BonePile)
                 ExecWait(EVS_Enemy_NoDamageHit)
             EndIf
         CaseDefault
@@ -443,7 +443,7 @@ EvtScript N(EVS_TakeTurn) = {
     EndIf
     Call(GetBattlePhase, LVar0)
     IfEq(LVar0, PHASE_FIRST_STRIKE)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim06)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_ThrowBone)
         Goto(100)
     EndIf
     Call(GetActorVar, ACTOR_SELF, AVAR_Collapsed, LVar0)
@@ -452,10 +452,10 @@ EvtScript N(EVS_TakeTurn) = {
         Sub(LVar0, 1)
         IfEq(LVar0, 0)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_DRY_BONES_RATTLE)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim09)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Struggle)
             Wait(10)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_DRY_BONES_ARISE)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim0A)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Reform)
             Wait(20)
             Call(SetActorVar, ACTOR_SELF, AVAR_Collapsed, false)
             Call(SetActorVar, ACTOR_SELF, AVAR_CollapseTurns, 0)
@@ -469,7 +469,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(SetEnemyHP, ACTOR_SELF, LVar0)
         Else
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_DRY_BONES_RATTLE)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim09)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Struggle)
             Wait(10)
             Call(SetActorVar, ACTOR_SELF, AVAR_CollapseTurns, LVar0)
         EndIf
@@ -477,12 +477,12 @@ EvtScript N(EVS_TakeTurn) = {
         Call(UseIdleAnimation, ACTOR_SELF, true)
         Return
     EndIf
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim05)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_AimBone)
     Wait(15)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_ThrowBone)
     Thread
         Wait(8)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim02)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Idle)
     EndThread
     Label(100)
     Call(GetStatusFlags, ACTOR_SELF, LVar0)

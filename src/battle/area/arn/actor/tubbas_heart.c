@@ -40,32 +40,32 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_TubbasHeart_Anim01,
-    STATUS_KEY_STONE,     ANIM_TubbasHeart_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_TubbasHeart_Anim04,
-    STATUS_KEY_POISON,    ANIM_TubbasHeart_Anim01,
-    STATUS_KEY_STOP,      ANIM_TubbasHeart_Anim00,
-    STATUS_KEY_STATIC,    ANIM_TubbasHeart_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_TubbasHeart_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_TubbasHeart_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_TubbasHeart_Anim0D,
-    STATUS_KEY_DIZZY,     ANIM_TubbasHeart_Anim0D,
-    STATUS_KEY_UNUSED,    ANIM_TubbasHeart_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_TubbasHeart_Idle,
+    STATUS_KEY_STONE,     ANIM_TubbasHeart_Still,
+    STATUS_KEY_SLEEP,     ANIM_TubbasHeart_Sleep,
+    STATUS_KEY_POISON,    ANIM_TubbasHeart_Idle,
+    STATUS_KEY_STOP,      ANIM_TubbasHeart_Still,
+    STATUS_KEY_STATIC,    ANIM_TubbasHeart_Still,
+    STATUS_KEY_PARALYZE,  ANIM_TubbasHeart_Still,
+    STATUS_KEY_PARALYZE,  ANIM_TubbasHeart_Still,
+    STATUS_KEY_DIZZY,     ANIM_TubbasHeart_Dizzy,
+    STATUS_KEY_DIZZY,     ANIM_TubbasHeart_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_TubbasHeart_Talk,
     STATUS_END,
 };
 
 s32 N(ChargedAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_TubbasHeart_Anim0B,
-    STATUS_KEY_STONE,     ANIM_TubbasHeart_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_TubbasHeart_Anim04,
-    STATUS_KEY_POISON,    ANIM_TubbasHeart_Anim0B,
-    STATUS_KEY_STOP,      ANIM_TubbasHeart_Anim00,
-    STATUS_KEY_STATIC,    ANIM_TubbasHeart_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_TubbasHeart_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_TubbasHeart_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_TubbasHeart_Anim0D,
-    STATUS_KEY_DIZZY,     ANIM_TubbasHeart_Anim0D,
-    STATUS_KEY_UNUSED,    ANIM_TubbasHeart_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_TubbasHeart_TalkAngry,
+    STATUS_KEY_STONE,     ANIM_TubbasHeart_Still,
+    STATUS_KEY_SLEEP,     ANIM_TubbasHeart_Sleep,
+    STATUS_KEY_POISON,    ANIM_TubbasHeart_TalkAngry,
+    STATUS_KEY_STOP,      ANIM_TubbasHeart_Still,
+    STATUS_KEY_STATIC,    ANIM_TubbasHeart_Still,
+    STATUS_KEY_PARALYZE,  ANIM_TubbasHeart_Still,
+    STATUS_KEY_PARALYZE,  ANIM_TubbasHeart_Still,
+    STATUS_KEY_DIZZY,     ANIM_TubbasHeart_Dizzy,
+    STATUS_KEY_DIZZY,     ANIM_TubbasHeart_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_TubbasHeart_Talk,
     STATUS_END,
 };
 
@@ -206,10 +206,10 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_SelectAnimation) = {
-    Set(LVar1, ANIM_TubbasHeart_Anim0E)
+    Set(LVar1, ANIM_TubbasHeart_Hurt)
     Call(GetActorVar, ACTOR_SELF, AVAR_ChargeLevel, LVar0)
     IfNe(LVar0, 0)
-        Set(LVar1, ANIM_TubbasHeart_Anim0B)
+        Set(LVar1, ANIM_TubbasHeart_TalkAngry)
     EndIf
     Return
     End
@@ -230,8 +230,8 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_BURN_HIT)
         CaseOrEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_TubbasHeart_Anim10)
-            SetConst(LVar2, ANIM_TubbasHeart_Anim11)
+            SetConst(LVar1, ANIM_TubbasHeart_BurnHurt)
+            SetConst(LVar2, ANIM_TubbasHeart_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         EndCaseGroup
         CaseEq(EVENT_SPIN_SMASH_HIT)
@@ -246,16 +246,16 @@ EvtScript N(EVS_HandleEvent) = {
             ExecWait(N(EVS_SelectAnimation))
             SetConst(LVar0, PRT_MAIN)
             ExecWait(EVS_Enemy_Knockback)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim03)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Run)
             ExecWait(N(EVS_ReturnHome))
         EndCaseGroup
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
-            Set(LVar1, ANIM_TubbasHeart_Anim01)
+            Set(LVar1, ANIM_TubbasHeart_Idle)
             Call(GetActorVar, ACTOR_SELF, AVAR_ChargeLevel, LVar0)
             IfNe(LVar0, 0)
-                Set(LVar1, ANIM_TubbasHeart_Anim0B)
+                Set(LVar1, ANIM_TubbasHeart_TalkAngry)
             EndIf
             SetConst(LVar0, PRT_MAIN)
             ExecWait(EVS_Enemy_NoDamageHit)
@@ -272,12 +272,12 @@ EvtScript N(EVS_HandleEvent) = {
         CaseEq(EVENT_SPIKE_CONTACT)
         CaseEq(EVENT_BURN_CONTACT)
         CaseEq(EVENT_END_FIRST_STRIKE)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim03)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Run)
             ExecWait(N(EVS_ReturnHome))
             Call(HPBarToHome, ACTOR_SELF)
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_TubbasHeart_Anim01)
+            SetConst(LVar1, ANIM_TubbasHeart_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseDefault
     EndSwitch
@@ -297,7 +297,7 @@ EvtScript N(EVS_FleeFromBattle) = {
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 40)
     Wait(40)
-    Call(ActorSpeak, MSG_CH3_00C6, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim0D, ANIM_TubbasHeart_Anim0D)
+    Call(ActorSpeak, MSG_CH3_00C6, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Dizzy, ANIM_TubbasHeart_Dizzy)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 25)
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, true)
@@ -317,7 +317,7 @@ EvtScript N(EVS_ReturnHome) = {
     ExecWait(EVS_Enemy_HopToPos)
     Call(SetGoalToHome, ACTOR_SELF)
     Call(JumpToGoal, ACTOR_SELF, 12, false, true, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Idle)
     Call(SetActorYaw, ACTOR_SELF, 0)
     Return
     End
@@ -340,7 +340,7 @@ EvtScript N(EVS_TakeTurn) = {
                 Call(BattleCamTargetActor, ACTOR_SELF)
                 Call(MoveBattleCamOver, 40)
                 Wait(40)
-                Call(ActorSpeak, MSG_CH3_00C3, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim0B, ANIM_TubbasHeart_Anim01)
+                Call(ActorSpeak, MSG_CH3_00C3, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_TalkAngry, ANIM_TubbasHeart_Idle)
                 Call(UseBattleCamPreset, BTL_CAM_ACTOR)
                 Call(BattleCamTargetActor, ACTOR_PARTNER)
                 Call(MoveBattleCamOver, 25)
@@ -375,7 +375,7 @@ EvtScript N(EVS_TakeTurn) = {
                 Call(BattleCamTargetActor, ACTOR_SELF)
                 Call(MoveBattleCamOver, 40)
                 Wait(40)
-                Call(ActorSpeak, MSG_CH3_00C5, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim0B, ANIM_TubbasHeart_Anim01)
+                Call(ActorSpeak, MSG_CH3_00C5, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_TalkAngry, ANIM_TubbasHeart_Idle)
             EndIf
             ExecWait(N(EVS_Move_Charge))
             Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_NextMove_Swarm)
@@ -413,7 +413,7 @@ EvtScript N(EVS_Attack_Leap) = {
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Run)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Sub(LVar0, 45)
@@ -427,10 +427,10 @@ EvtScript N(EVS_Attack_Leap) = {
     Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
     ExecWait(EVS_Enemy_HopToPos)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim01)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim16)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Idle)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Squeeze)
     Wait(5)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim15)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Leap)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_MISS)
@@ -457,7 +457,7 @@ EvtScript N(EVS_Attack_Leap) = {
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EndIf
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim03)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Run)
             ExecWait(N(EVS_ReturnHome))
             Return
         EndCaseGroup
@@ -475,7 +475,7 @@ EvtScript N(EVS_Attack_Leap) = {
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
         CaseOrEq(HIT_RESULT_10)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Idle)
             Call(SetActorScale, ACTOR_SELF, Float(1.1), Float(0.8), Float(1.0))
             Wait(1)
             Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
@@ -498,7 +498,7 @@ EvtScript N(EVS_Attack_Leap) = {
             EndIf
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(YieldTurn)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim03)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Run)
             ExecWait(N(EVS_ReturnHome))
         EndCaseGroup
     EndSwitch
@@ -513,7 +513,7 @@ EvtScript N(EVS_Move_Charge) = {
     Call(SetBattleCamOffsetY, 0)
     Call(MoveBattleCamOver, 40)
     Wait(40)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim0B)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_TalkAngry)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(GetStatusFlags, ACTOR_SELF, LVar4)
     IfNotFlag(LVar4, STATUS_FLAG_SHRINK)
@@ -560,7 +560,7 @@ EvtScript N(EVS_Attack_DarkSwarm) = {
     Call(MoveBattleCamOver, 20)
     Wait(20)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST1)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim0C)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Enraged)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(GetStatusFlags, ACTOR_SELF, LVar3)
     IfNotFlag(LVar3, STATUS_FLAG_SHRINK)
@@ -572,7 +572,7 @@ EvtScript N(EVS_Attack_DarkSwarm) = {
     Wait(60)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 20)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim0B)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_TalkAngry)
     Thread
         Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         Call(SetActorJumpGravity, ACTOR_SELF, Float(0.8))

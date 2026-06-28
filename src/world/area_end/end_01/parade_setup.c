@@ -299,12 +299,12 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 270.0f
     },
     [NPC_AmayzeDayzee1] {
-        .initialAnim = ANIM_Dayzee_Amazy_Anim02,
+        .initialAnim = ANIM_Dayzee_Amazy_Walk,
         .pos = { -2210.0f, 0.0f, -20.0f },
         .yaw = 270.0f
     },
     [NPC_AmayzeDayzee2] {
-        .initialAnim = ANIM_Dayzee_Amazy_Anim02,
+        .initialAnim = ANIM_Dayzee_Amazy_Walk,
         .pos = { -2210.0f, 0.0f, 20.0f },
         .yaw = 270.0f
     },

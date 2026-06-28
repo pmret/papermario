@@ -20,40 +20,40 @@
 
 #define MAGIKOOPA_YELLOW_ANIMS \
 { \
-    .idle   = ANIM_Magikoopa_Yellow_Anim01, \
-    .walk   = ANIM_Magikoopa_Yellow_Anim01, \
-    .run    = ANIM_Magikoopa_Yellow_Anim01, \
-    .chase  = ANIM_Magikoopa_Yellow_Anim01, \
-    .anim_4 = ANIM_Magikoopa_Yellow_Anim01, \
-    .anim_5 = ANIM_Magikoopa_Yellow_Anim01, \
-    .death  = ANIM_Magikoopa_Yellow_Anim04, \
-    .hit    = ANIM_Magikoopa_Yellow_Anim04, \
-    .anim_8 = ANIM_Magikoopa_Yellow_Anim01, \
-    .anim_9 = ANIM_Magikoopa_Yellow_Anim01, \
-    .anim_A = ANIM_Magikoopa_Yellow_Anim01, \
-    .anim_B = ANIM_Magikoopa_Yellow_Anim01, \
-    .anim_C = ANIM_Magikoopa_Yellow_Anim01, \
-    .anim_D = ANIM_Magikoopa_Yellow_Anim01, \
-    .anim_E = ANIM_Magikoopa_Yellow_Anim01, \
-    .anim_F = ANIM_Magikoopa_Yellow_Anim01, \
+    .idle   = ANIM_Magikoopa_Yellow_Idle, \
+    .walk   = ANIM_Magikoopa_Yellow_Idle, \
+    .run    = ANIM_Magikoopa_Yellow_Idle, \
+    .chase  = ANIM_Magikoopa_Yellow_Idle, \
+    .anim_4 = ANIM_Magikoopa_Yellow_Idle, \
+    .anim_5 = ANIM_Magikoopa_Yellow_Idle, \
+    .death  = ANIM_Magikoopa_Yellow_Hurt, \
+    .hit    = ANIM_Magikoopa_Yellow_Hurt, \
+    .anim_8 = ANIM_Magikoopa_Yellow_Idle, \
+    .anim_9 = ANIM_Magikoopa_Yellow_Idle, \
+    .anim_A = ANIM_Magikoopa_Yellow_Idle, \
+    .anim_B = ANIM_Magikoopa_Yellow_Idle, \
+    .anim_C = ANIM_Magikoopa_Yellow_Idle, \
+    .anim_D = ANIM_Magikoopa_Yellow_Idle, \
+    .anim_E = ANIM_Magikoopa_Yellow_Idle, \
+    .anim_F = ANIM_Magikoopa_Yellow_Idle, \
 }
 
 #define FLYING_MAGIKOOPA_YELLOW_ANIMS \
 { \
-    .idle   = ANIM_FlyingMagikoopa_Yellow_Anim01, \
-    .walk   = ANIM_FlyingMagikoopa_Yellow_Anim01, \
-    .run    = ANIM_FlyingMagikoopa_Yellow_Anim01, \
-    .chase  = ANIM_FlyingMagikoopa_Yellow_Anim01, \
-    .anim_4 = ANIM_FlyingMagikoopa_Yellow_Anim01, \
-    .anim_5 = ANIM_FlyingMagikoopa_Yellow_Anim01, \
-    .death  = ANIM_FlyingMagikoopa_Yellow_Anim04, \
-    .hit    = ANIM_FlyingMagikoopa_Yellow_Anim04, \
-    .anim_8 = ANIM_FlyingMagikoopa_Yellow_Anim01, \
-    .anim_9 = ANIM_FlyingMagikoopa_Yellow_Anim01, \
-    .anim_A = ANIM_FlyingMagikoopa_Yellow_Anim01, \
-    .anim_B = ANIM_FlyingMagikoopa_Yellow_Anim01, \
-    .anim_C = ANIM_FlyingMagikoopa_Yellow_Anim01, \
-    .anim_D = ANIM_FlyingMagikoopa_Yellow_Anim01, \
-    .anim_E = ANIM_FlyingMagikoopa_Yellow_Anim01, \
-    .anim_F = ANIM_FlyingMagikoopa_Yellow_Anim01, \
+    .idle   = ANIM_FlyingMagikoopa_Yellow_Idle, \
+    .walk   = ANIM_FlyingMagikoopa_Yellow_Idle, \
+    .run    = ANIM_FlyingMagikoopa_Yellow_Idle, \
+    .chase  = ANIM_FlyingMagikoopa_Yellow_Idle, \
+    .anim_4 = ANIM_FlyingMagikoopa_Yellow_Idle, \
+    .anim_5 = ANIM_FlyingMagikoopa_Yellow_Idle, \
+    .death  = ANIM_FlyingMagikoopa_Yellow_Hurt, \
+    .hit    = ANIM_FlyingMagikoopa_Yellow_Hurt, \
+    .anim_8 = ANIM_FlyingMagikoopa_Yellow_Idle, \
+    .anim_9 = ANIM_FlyingMagikoopa_Yellow_Idle, \
+    .anim_A = ANIM_FlyingMagikoopa_Yellow_Idle, \
+    .anim_B = ANIM_FlyingMagikoopa_Yellow_Idle, \
+    .anim_C = ANIM_FlyingMagikoopa_Yellow_Idle, \
+    .anim_D = ANIM_FlyingMagikoopa_Yellow_Idle, \
+    .anim_E = ANIM_FlyingMagikoopa_Yellow_Idle, \
+    .anim_F = ANIM_FlyingMagikoopa_Yellow_Idle, \
 }

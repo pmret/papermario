@@ -87,15 +87,15 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Dayzee_Anim01,
-    STATUS_KEY_STONE,     ANIM_Dayzee_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_Dayzee_Anim0C,
-    STATUS_KEY_POISON,    ANIM_Dayzee_Anim01,
-    STATUS_KEY_STOP,      ANIM_Dayzee_Anim00,
-    STATUS_KEY_STATIC,    ANIM_Dayzee_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_Dayzee_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_Dayzee_Anim0B,
-    STATUS_KEY_UNUSED,    ANIM_Dayzee_Anim0B,
+    STATUS_KEY_NORMAL,    ANIM_Dayzee_Idle,
+    STATUS_KEY_STONE,     ANIM_Dayzee_Still,
+    STATUS_KEY_SLEEP,     ANIM_Dayzee_Sleep,
+    STATUS_KEY_POISON,    ANIM_Dayzee_Idle,
+    STATUS_KEY_STOP,      ANIM_Dayzee_Still,
+    STATUS_KEY_STATIC,    ANIM_Dayzee_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_Dayzee_Still,
+    STATUS_KEY_DIZZY,     ANIM_Dayzee_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_Dayzee_Dizzy,
     STATUS_END,
 };
 
@@ -114,7 +114,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_ReturnHome) = {
     SetConst(LVar0, PRT_MAIN)
-    SetConst(LVar1, ANIM_Dayzee_Anim03)
+    SetConst(LVar1, ANIM_Dayzee_Run)
     ExecWait(EVS_Enemy_ReturnHome)
     Return
     End
@@ -127,80 +127,80 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim08)
+            SetConst(LVar1, ANIM_Dayzee_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim09)
-            SetConst(LVar2, ANIM_Dayzee_Anim0A)
+            SetConst(LVar1, ANIM_Dayzee_BurnHurt)
+            SetConst(LVar2, ANIM_Dayzee_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim09)
-            SetConst(LVar2, ANIM_Dayzee_Anim0A)
+            SetConst(LVar1, ANIM_Dayzee_BurnHurt)
+            SetConst(LVar2, ANIM_Dayzee_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim0A)
+            SetConst(LVar1, ANIM_Dayzee_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim08)
+            SetConst(LVar1, ANIM_Dayzee_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim08)
+            SetConst(LVar1, ANIM_Dayzee_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim08)
+            SetConst(LVar1, ANIM_Dayzee_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim08)
+            SetConst(LVar1, ANIM_Dayzee_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim08)
+            SetConst(LVar1, ANIM_Dayzee_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim08)
+            SetConst(LVar1, ANIM_Dayzee_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim08)
+            SetConst(LVar1, ANIM_Dayzee_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim01)
+            SetConst(LVar1, ANIM_Dayzee_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim08)
+            SetConst(LVar1, ANIM_Dayzee_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim08)
+            SetConst(LVar1, ANIM_Dayzee_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim01)
+            SetConst(LVar1, ANIM_Dayzee_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim04)
-            SetConst(LVar2, ANIM_Dayzee_Anim08)
+            SetConst(LVar1, ANIM_Dayzee_Dash)
+            SetConst(LVar2, ANIM_Dayzee_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim04)
+            SetConst(LVar1, ANIM_Dayzee_Dash)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -212,7 +212,7 @@ EvtScript N(EVS_HandleEvent) = {
                 EndIf
             EndIf
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Dayzee_Anim08)
+            SetConst(LVar1, ANIM_Dayzee_Hurt)
             ExecWait(EVS_Enemy_BlowAway)
             Return
         CaseDefault
@@ -237,10 +237,10 @@ EvtScript N(EVS_Attack_Sing) = {
         Set(LFlag0, false)
         Label(0)
         IfEq(LFlag0, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim0E)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Skip1)
             Set(LFlag0, true)
         Else
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim0F)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Skip2)
             Set(LFlag0, false)
         EndIf
         Wait(1)
@@ -253,10 +253,10 @@ EvtScript N(EVS_Attack_Sing) = {
             Goto(0)
         EndIf
         IfEq(LFlag0, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim0E)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Skip1)
             Set(LFlag0, true)
         Else
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim0F)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Skip2)
             Set(LFlag0, false)
         EndIf
         Wait(1)
@@ -264,12 +264,12 @@ EvtScript N(EVS_Attack_Sing) = {
         Call(SetGoalPos, ACTOR_SELF, -35, 0, 10)
         Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
     EndIf
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Idle)
     Wait(10)
     Thread
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim06)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_SingSlow)
         Wait(40)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim07)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_SingFast)
     EndThread
     Wait(20)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_DAYZEE_SONG)
@@ -283,7 +283,7 @@ EvtScript N(EVS_Attack_Sing) = {
         PlayEffect(EFFECT_MUSIC_NOTE, 1, LVar3, LVar1, LVar2, 0)
         Wait(10)
     EndLoop
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Idle)
     Wait(10)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVar0)
@@ -334,7 +334,7 @@ EvtScript N(EVS_Move_Flee) = {
     Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
     Call(MoveBattleCamOver, 30)
     Call(SetActorYaw, ACTOR_SELF, 180)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Run)
     Wait(10)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetActorSpeed, ACTOR_SELF, Float(1.0))
@@ -344,7 +344,7 @@ EvtScript N(EVS_Move_Flee) = {
     Wait(20)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Dash)
     Call(SetActorSpeed, ACTOR_SELF, Float(12.0))
     Add(LVar0, 200)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)

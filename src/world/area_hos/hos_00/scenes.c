@@ -421,7 +421,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
             Wait(3)
         EndLoop
     EndChildThread
-    Call(SetNpcAnimation, NPC_FlyingMagikoopa, ANIM_FlyingMagikoopa_Anim00)
+    Call(SetNpcAnimation, NPC_FlyingMagikoopa, ANIM_FlyingMagikoopa_Still)
     Loop(3)
         Call(SetNpcRotation, NPC_FlyingMagikoopa, 0, 0, 10)
         Wait(1)
@@ -441,7 +441,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(1)
-    Call(SpeakToPlayer, NPC_FlyingMagikoopa, ANIM_FlyingMagikoopa_Anim09, ANIM_FlyingMagikoopa_Anim00, 512, MSG_HOS_0033)
+    Call(SpeakToPlayer, NPC_FlyingMagikoopa, ANIM_FlyingMagikoopa_Talk, ANIM_FlyingMagikoopa_Still, 512, MSG_HOS_0033)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Add(LVar0, -250)
     Div(LVar0, 2)

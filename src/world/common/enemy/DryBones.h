@@ -16,22 +16,22 @@
 
 #define DRY_BONES_ANIMS \
 { \
-    .idle   = ANIM_DryBones_Anim02, \
-    .walk   = ANIM_DryBones_Anim03, \
-    .run    = ANIM_DryBones_Anim04, \
-    .chase  = ANIM_DryBones_Anim04, \
-    .anim_4 = ANIM_DryBones_Anim02, \
-    .anim_5 = ANIM_DryBones_Anim02, \
-    .death  = ANIM_DryBones_Anim07, \
-    .hit    = ANIM_DryBones_Anim07, \
-    .anim_8 = ANIM_DryBones_Anim05, \
-    .anim_9 = ANIM_DryBones_Anim06, \
-    .anim_A = ANIM_DryBones_Anim02, \
-    .anim_B = ANIM_DryBones_Anim02, \
-    .anim_C = ANIM_DryBones_Anim02, \
-    .anim_D = ANIM_DryBones_Anim02, \
-    .anim_E = ANIM_DryBones_Anim02, \
-    .anim_F = ANIM_DryBones_Anim02, \
+    .idle   = ANIM_DryBones_Idle, \
+    .walk   = ANIM_DryBones_Walk, \
+    .run    = ANIM_DryBones_Run, \
+    .chase  = ANIM_DryBones_Run, \
+    .anim_4 = ANIM_DryBones_Idle, \
+    .anim_5 = ANIM_DryBones_Idle, \
+    .death  = ANIM_DryBones_Hurt, \
+    .hit    = ANIM_DryBones_Hurt, \
+    .anim_8 = ANIM_DryBones_AimBone, \
+    .anim_9 = ANIM_DryBones_ThrowBone, \
+    .anim_A = ANIM_DryBones_Idle, \
+    .anim_B = ANIM_DryBones_Idle, \
+    .anim_C = ANIM_DryBones_Idle, \
+    .anim_D = ANIM_DryBones_Idle, \
+    .anim_E = ANIM_DryBones_Idle, \
+    .anim_F = ANIM_DryBones_Idle, \
 }
 
 #define DRY_BONES_BONE_HITBOX(npcID) \

@@ -3,20 +3,20 @@
 
 #define TUBBAS_HEART_ANIMS \
 { \
-    .idle   = ANIM_TubbasHeart_Anim01, \
-    .walk   = ANIM_TubbasHeart_Anim01, \
-    .run    = ANIM_TubbasHeart_Anim01, \
-    .chase  = ANIM_TubbasHeart_Anim01, \
-    .anim_4 = ANIM_TubbasHeart_Anim01, \
-    .anim_5 = ANIM_TubbasHeart_Anim01, \
-    .death  = ANIM_TubbasHeart_Anim01, \
-    .hit    = ANIM_TubbasHeart_Anim01, \
-    .anim_8 = ANIM_TubbasHeart_Anim01, \
-    .anim_9 = ANIM_TubbasHeart_Anim01, \
-    .anim_A = ANIM_TubbasHeart_Anim01, \
-    .anim_B = ANIM_TubbasHeart_Anim01, \
-    .anim_C = ANIM_TubbasHeart_Anim01, \
-    .anim_D = ANIM_TubbasHeart_Anim01, \
-    .anim_E = ANIM_TubbasHeart_Anim01, \
-    .anim_F = ANIM_TubbasHeart_Anim01, \
+    .idle   = ANIM_TubbasHeart_Idle, \
+    .walk   = ANIM_TubbasHeart_Idle, \
+    .run    = ANIM_TubbasHeart_Idle, \
+    .chase  = ANIM_TubbasHeart_Idle, \
+    .anim_4 = ANIM_TubbasHeart_Idle, \
+    .anim_5 = ANIM_TubbasHeart_Idle, \
+    .death  = ANIM_TubbasHeart_Idle, \
+    .hit    = ANIM_TubbasHeart_Idle, \
+    .anim_8 = ANIM_TubbasHeart_Idle, \
+    .anim_9 = ANIM_TubbasHeart_Idle, \
+    .anim_A = ANIM_TubbasHeart_Idle, \
+    .anim_B = ANIM_TubbasHeart_Idle, \
+    .anim_C = ANIM_TubbasHeart_Idle, \
+    .anim_D = ANIM_TubbasHeart_Idle, \
+    .anim_E = ANIM_TubbasHeart_Idle, \
+    .anim_F = ANIM_TubbasHeart_Idle, \
 }

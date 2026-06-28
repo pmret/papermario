@@ -590,7 +590,7 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 90.0f
     },
     [NPC_TubbasHeart] {
-        .initialAnim = ANIM_TubbasHeart_Anim01,
+        .initialAnim = ANIM_TubbasHeart_Idle,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 270.0f
     },
@@ -709,37 +709,37 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 270.0f
     },
     [NPC_Duplighost1] {
-        .initialAnim = ANIM_Duplighost_Anim0A,
+        .initialAnim = ANIM_Duplighost_Hurt,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
     [NPC_Duplighost2] {
-        .initialAnim = ANIM_Duplighost_Anim0A,
+        .initialAnim = ANIM_Duplighost_Hurt,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
     [NPC_TrueCrystalKing] {
-        .initialAnim = ANIM_CrystalKing_Anim0E,
+        .initialAnim = ANIM_CrystalKing_Walk,
         .pos = { 1440.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
     [NPC_FakeCrystalKing] {
-        .initialAnim = ANIM_CrystalKing_Anim0E,
+        .initialAnim = ANIM_CrystalKing_Walk,
         .pos = { 1600.0f, 0.0f, 0.0f },
         .yaw = 270.0f
     },
     [NPC_CrystalBit1] {
-        .initialAnim = ANIM_CrystalKing_Anim0A,
+        .initialAnim = ANIM_CrystalKing_CubeIdle,
         .pos = { 2000.0f, 100.0f, 0.0f },
         .yaw = 270.0f
     },
     [NPC_CrystalBit2] {
-        .initialAnim = ANIM_CrystalKing_Anim0B,
+        .initialAnim = ANIM_CrystalKing_SphereIdle,
         .pos = { 2050.0f, 100.0f, 0.0f },
         .yaw = 270.0f
     },
     [NPC_CrystalBit3] {
-        .initialAnim = ANIM_CrystalKing_Anim0C,
+        .initialAnim = ANIM_CrystalKing_PrismIdle,
         .pos = { 2100.0f, 100.0f, 0.0f },
         .yaw = 270.0f
     },

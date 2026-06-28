@@ -16,17 +16,17 @@ enum N(ActorPartIDs) {
 };
 
 s32 N(CubeAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_CrystalKing_CubeIdle,
     STATUS_END,
 };
 
 s32 N(SphereAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0B,
+    STATUS_KEY_NORMAL,    ANIM_CrystalKing_SphereIdle,
     STATUS_END,
 };
 
 s32 N(PrismAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0C,
+    STATUS_KEY_NORMAL,    ANIM_CrystalKing_PrismIdle,
     STATUS_END,
 };
 
@@ -270,19 +270,19 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetActorVar, ACTOR_KING, AVAR_King_CubeBitID, LVar3)
             IfEq(LVar0, LVar3)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_CrystalKing_Anim22)
+                SetConst(LVar1, ANIM_CrystalKing_CubeBurnHurt)
                 SetConst(LVar2, -1)
             EndIf
             Call(GetActorVar, ACTOR_KING, AVAR_King_SphereBitID, LVar3)
             IfEq(LVar0, LVar3)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_CrystalKing_Anim23)
+                SetConst(LVar1, ANIM_CrystalKing_SphereBurnHurt)
                 SetConst(LVar2, -1)
             EndIf
             Call(GetActorVar, ACTOR_KING, AVAR_King_PrismBitID, LVar3)
             IfEq(LVar0, LVar3)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_CrystalKing_Anim24)
+                SetConst(LVar1, ANIM_CrystalKing_PrismBurnHurt)
                 SetConst(LVar2, -1)
             EndIf
             ExecWait(EVS_Enemy_BurnHit)
@@ -306,15 +306,15 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetOwnerID, LVar0)
             Call(GetActorVar, ACTOR_KING, AVAR_King_CubeBitID, LVar1)
             IfEq(LVar0, LVar1)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim05)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_CubeInert)
             EndIf
             Call(GetActorVar, ACTOR_KING, AVAR_King_SphereBitID, LVar1)
             IfEq(LVar0, LVar1)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim06)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_SphereInert)
             EndIf
             Call(GetActorVar, ACTOR_KING, AVAR_King_PrismBitID, LVar1)
             IfEq(LVar0, LVar1)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim07)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_PrismInert)
             EndIf
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.2))
             Call(RandInt, 360, LVar0)
@@ -343,19 +343,19 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetActorVar, ACTOR_KING, AVAR_King_CubeBitID, LVar3)
             IfEq(LVar0, LVar3)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_CrystalKing_Anim22)
+                SetConst(LVar1, ANIM_CrystalKing_CubeBurnHurt)
                 SetConst(LVar2, -1)
             EndIf
             Call(GetActorVar, ACTOR_KING, AVAR_King_SphereBitID, LVar3)
             IfEq(LVar0, LVar3)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_CrystalKing_Anim23)
+                SetConst(LVar1, ANIM_CrystalKing_SphereBurnHurt)
                 SetConst(LVar2, -1)
             EndIf
             Call(GetActorVar, ACTOR_KING, AVAR_King_PrismBitID, LVar3)
             IfEq(LVar0, LVar3)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_CrystalKing_Anim24)
+                SetConst(LVar1, ANIM_CrystalKing_PrismBurnHurt)
                 SetConst(LVar2, -1)
             EndIf
             ExecWait(EVS_Enemy_BurnHit)

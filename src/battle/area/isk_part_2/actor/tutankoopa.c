@@ -92,7 +92,7 @@ s32 N(FallenAnims)[] = {
 };
 
 s32 N(BeetleShellAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BuzzyBeetle_Anim06,
+    STATUS_KEY_NORMAL,    ANIM_BuzzyBeetle_ShellStill,
     STATUS_END,
 };
 
@@ -629,7 +629,7 @@ EvtScript N(EVS_Attack_ThrowShell) = {
     Call(SetPartJumpGravity, ACTOR_SELF, LVar9, Float(0.8))
     Call(JumpPartTo, ACTOR_SELF, LVar9, LVar0, LVar1, LVar2, 5, true)
     Wait(8)
-    Call(SetAnimation, ACTOR_SELF, LVar9, ANIM_BuzzyBeetle_Anim05)
+    Call(SetAnimation, ACTOR_SELF, LVar9, ANIM_BuzzyBeetle_ShellSpin)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_TOSS)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)

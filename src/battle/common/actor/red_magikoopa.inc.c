@@ -193,33 +193,33 @@ ActorBlueprint N(flying) = {
 };
 
 s32 N(GroundAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Magikoopa_Red_Anim01,
-    STATUS_KEY_STONE,     ANIM_Magikoopa_Red_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_Magikoopa_Red_Anim08,
-    STATUS_KEY_POISON,    ANIM_Magikoopa_Red_Anim01,
-    STATUS_KEY_STOP,      ANIM_Magikoopa_Red_Anim00,
-    STATUS_KEY_STATIC,    ANIM_Magikoopa_Red_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_Magikoopa_Red_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_Magikoopa_Red_Anim07,
-    STATUS_KEY_UNUSED,    ANIM_Magikoopa_Red_Anim07,
+    STATUS_KEY_NORMAL,    ANIM_Magikoopa_Red_Idle,
+    STATUS_KEY_STONE,     ANIM_Magikoopa_Red_Still,
+    STATUS_KEY_SLEEP,     ANIM_Magikoopa_Red_Sleep,
+    STATUS_KEY_POISON,    ANIM_Magikoopa_Red_Idle,
+    STATUS_KEY_STOP,      ANIM_Magikoopa_Red_Still,
+    STATUS_KEY_STATIC,    ANIM_Magikoopa_Red_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_Magikoopa_Red_Still,
+    STATUS_KEY_DIZZY,     ANIM_Magikoopa_Red_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_Magikoopa_Red_Dizzy,
     STATUS_END,
 };
 
 s32 N(FlyingAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_FlyingMagikoopa_Red_Anim01,
-    STATUS_KEY_STONE,     ANIM_FlyingMagikoopa_Red_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_FlyingMagikoopa_Red_Anim08,
-    STATUS_KEY_POISON,    ANIM_FlyingMagikoopa_Red_Anim01,
-    STATUS_KEY_STOP,      ANIM_FlyingMagikoopa_Red_Anim00,
-    STATUS_KEY_STATIC,    ANIM_FlyingMagikoopa_Red_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_FlyingMagikoopa_Red_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_FlyingMagikoopa_Red_Anim07,
-    STATUS_KEY_UNUSED,    ANIM_FlyingMagikoopa_Red_Anim07,
+    STATUS_KEY_NORMAL,    ANIM_FlyingMagikoopa_Red_Idle,
+    STATUS_KEY_STONE,     ANIM_FlyingMagikoopa_Red_Still,
+    STATUS_KEY_SLEEP,     ANIM_FlyingMagikoopa_Red_Sleep,
+    STATUS_KEY_POISON,    ANIM_FlyingMagikoopa_Red_Idle,
+    STATUS_KEY_STOP,      ANIM_FlyingMagikoopa_Red_Still,
+    STATUS_KEY_STATIC,    ANIM_FlyingMagikoopa_Red_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_FlyingMagikoopa_Red_Still,
+    STATUS_KEY_DIZZY,     ANIM_FlyingMagikoopa_Red_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_FlyingMagikoopa_Red_Dizzy,
     STATUS_END,
 };
 
 s32 N(BroomAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_FlyingMagikoopa_Red_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_FlyingMagikoopa_Red_Broom,
     STATUS_END,
 };
 
@@ -242,68 +242,68 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_GROUND)
-            SetConst(LVar1, ANIM_Magikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_Magikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_GROUND)
-            SetConst(LVar1, ANIM_Magikoopa_Red_Anim05)
-            SetConst(LVar2, ANIM_Magikoopa_Red_Anim06)
+            SetConst(LVar1, ANIM_Magikoopa_Red_BurnHurt)
+            SetConst(LVar2, ANIM_Magikoopa_Red_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_GROUND)
-            SetConst(LVar1, ANIM_Magikoopa_Red_Anim05)
-            SetConst(LVar2, ANIM_Magikoopa_Red_Anim06)
+            SetConst(LVar1, ANIM_Magikoopa_Red_BurnHurt)
+            SetConst(LVar2, ANIM_Magikoopa_Red_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_GROUND)
-            SetConst(LVar1, ANIM_Magikoopa_Red_Anim06)
+            SetConst(LVar1, ANIM_Magikoopa_Red_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_GROUND)
-            SetConst(LVar1, ANIM_Magikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_Magikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_GROUND)
-            SetConst(LVar1, ANIM_Magikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_Magikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_GROUND)
-            SetConst(LVar1, ANIM_Magikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_Magikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_GROUND)
-            SetConst(LVar1, ANIM_Magikoopa_Red_Anim01)
+            SetConst(LVar1, ANIM_Magikoopa_Red_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_GROUND)
-            SetConst(LVar1, ANIM_Magikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_Magikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_GROUND)
-            SetConst(LVar1, ANIM_Magikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_Magikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_GROUND)
-            SetConst(LVar1, ANIM_Magikoopa_Red_Anim01)
+            SetConst(LVar1, ANIM_Magikoopa_Red_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
-            Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Hurt)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.5))
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
             Wait(15)
-            Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Shout)
             ExecWait(N(EVS_Flee))
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_GROUND)
-            SetConst(LVar1, ANIM_Magikoopa_Red_Anim02)
+            SetConst(LVar1, ANIM_Magikoopa_Red_Shout)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -315,7 +315,7 @@ EvtScript N(EVS_HandleEvent) = {
                 EndIf
             EndIf
             SetConst(LVar0, PRT_GROUND)
-            SetConst(LVar1, ANIM_Magikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_Magikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_BlowAway)
             Return
         CaseDefault
@@ -353,12 +353,12 @@ EvtScript N(EVS_KnockDownCheck) = {
 EvtScript N(EVS_KnockDown) = {
     Call(GetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, LVar0)
     IfEq(LVar0, 1)
-        Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Anim04)
+        Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Hurt)
         Goto(0)
     EndIf
     Call(GetLastElement, LVar0)
     IfFlag(LVar0, DAMAGE_TYPE_POW)
-        Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Anim04)
+        Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Hurt)
         Goto(0)
     EndIf
     Return
@@ -389,7 +389,7 @@ EvtScript N(EVS_KnockDown) = {
     EndThread
     Call(GetLastEvent, ACTOR_SELF, LVar3)
     IfEq(LVar3, EVENT_15)
-        Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Anim04)
+        Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Hurt)
         Call(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
         Add(LVar4, 10)
         Add(LVar5, 5)
@@ -406,7 +406,7 @@ EvtScript N(EVS_KnockDown) = {
         Wait(1)
     EndLoop
     Call(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_INVISIBLE, true)
-    Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Idle)
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, false)
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
     Call(SetActorType, ACTOR_SELF, ACTOR_TYPE_RED_MAGIKOOPA)
@@ -434,13 +434,13 @@ EvtScript N(EVS_HandleEvent_Flying) = {
         CaseEq(EVENT_HIT_COMBO)
             ExecWait(N(EVS_KnockDownCheck))
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_Hit)
         CaseOrEq(EVENT_HIT)
         CaseOrEq(EVENT_FALL_TRIGGER)
             ExecWait(N(EVS_KnockDownCheck))
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_Hit)
             ExecWait(N(EVS_KnockDown))
         EndCaseGroup
@@ -448,75 +448,75 @@ EvtScript N(EVS_HandleEvent_Flying) = {
         CaseOrEq(EVENT_15)
             ExecWait(N(EVS_KnockDownCheck))
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim05)
-            SetConst(LVar2, ANIM_FlyingMagikoopa_Red_Anim06)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_BurnHurt)
+            SetConst(LVar2, ANIM_FlyingMagikoopa_Red_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             ExecWait(N(EVS_KnockDown))
         EndCaseGroup
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim05)
-            SetConst(LVar2, ANIM_FlyingMagikoopa_Red_Anim06)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_BurnHurt)
+            SetConst(LVar2, ANIM_FlyingMagikoopa_Red_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim06)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim01)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_BEGIN_FIRST_STRIKE)
             Call(SetActorPos, ACTOR_SELF, 20, 0, 0)
             Call(HPBarToCurrent, ACTOR_SELF)
         CaseEq(EVENT_END_FIRST_STRIKE)
-            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Idle)
             Call(SetGoalToHome, ACTOR_SELF)
             Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
             Call(FlyToGoal, ACTOR_SELF, 0, 1, EASING_LINEAR)
-            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Idle)
             Call(HPBarToHome, ACTOR_SELF)
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim01)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
-            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Hurt)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.5))
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
             Wait(15)
-            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Shout)
             ExecWait(N(EVS_Flee))
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim02)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Shout)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -528,7 +528,7 @@ EvtScript N(EVS_HandleEvent_Flying) = {
                 EndIf
             EndIf
             SetConst(LVar0, PRT_FLYING)
-            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Anim04)
+            SetConst(LVar1, ANIM_FlyingMagikoopa_Red_Hurt)
             ExecWait(EVS_Enemy_BlowAway)
             Return
         CaseDefault
@@ -562,7 +562,7 @@ EvtScript N(EVS_Attack_MagicBlast) = {
         Add(LVar1, 36)
     EndIf
     PlayEffect(EFFECT_GATHER_MAGIC, 0, LVar0, LVar1, LVar2, Float(0.5), 30, 0)
-    Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Shout)
     Wait(30)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVar0)
@@ -570,7 +570,7 @@ EvtScript N(EVS_Attack_MagicBlast) = {
         CaseOrEq(HIT_RESULT_LUCKY)
             Set(LVarA, LVar0)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST2)
-            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Anim03)
+            Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_CastSpell)
             Wait(5)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(GetStatusFlags, ACTOR_SELF, LVar9)
@@ -601,7 +601,7 @@ EvtScript N(EVS_Attack_MagicBlast) = {
         EndCaseGroup
     EndSwitch
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST2)
-    Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_CastSpell)
     Wait(5)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(GetStatusFlags, ACTOR_SELF, LVarA)
@@ -641,7 +641,7 @@ EvtScript N(EVS_Attack_WandStrike) = {
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_MAGIKOOPA_VANISH)
     Thread
-        Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Anim02)
+        Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Shout)
         Set(LVar0, 200)
         Loop(20)
             Sub(LVar0, 10)
@@ -668,7 +668,7 @@ EvtScript N(EVS_Attack_WandStrike) = {
         Wait(1)
     EndLoop
     Call(SetPartAlpha, ACTOR_SELF, PRT_GROUND, 255)
-    Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_CastSpell)
     Wait(11)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_MAGIKOOPA_WAND_STRIKE)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
@@ -689,7 +689,7 @@ EvtScript N(EVS_Attack_WandStrike) = {
             EndLoop
             Call(YieldTurn)
             Call(SetGoalToHome, ACTOR_SELF)
-            Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Idle)
             Call(FlyToGoal, ACTOR_SELF, 30, 0, EASING_COS_IN_OUT)
             Set(LVar0, 55)
             Loop(20)
@@ -719,7 +719,7 @@ EvtScript N(EVS_Attack_WandStrike) = {
             EndLoop
             Call(YieldTurn)
             Call(SetGoalToHome, ACTOR_SELF)
-            Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Idle)
             Call(FlyToGoal, ACTOR_SELF, 20, 0, EASING_COS_IN_OUT)
             Set(LVar0, 55)
             Loop(20)
@@ -847,9 +847,9 @@ EvtScript N(EVS_TakeTurn) = {
     Wait(15)
     Call(GetActorFlags, ACTOR_SELF, LVar0)
     IfNotFlag(LVar0, ACTOR_FLAG_FLYING)
-        Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Anim02)
+        Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Shout)
     Else
-        Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Anim02)
+        Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Shout)
     EndIf
     Wait(5)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST1)
@@ -886,9 +886,9 @@ EvtScript N(EVS_TakeTurn) = {
     Wait(30)
     Call(GetActorFlags, ACTOR_SELF, LVar0)
     IfNotFlag(LVar0, ACTOR_FLAG_FLYING)
-        Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Anim01)
+        Call(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Red_Idle)
     Else
-        Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Anim01)
+        Call(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_Red_Idle)
     EndIf
     Wait(5)
     Thread

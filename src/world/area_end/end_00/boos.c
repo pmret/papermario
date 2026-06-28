@@ -107,7 +107,7 @@ EvtScript N(EVS_ParadePhase_Boos) = {
         Call(EnableNpcShadow, NPC_Boo3, true)
     EndThread
     Wait(30 * DT)
-    Call(SetNpcAnimation, NPC_TubbasHeart, ANIM_TubbasHeart_Anim0B)
+    Call(SetNpcAnimation, NPC_TubbasHeart, ANIM_TubbasHeart_TalkAngry)
     Wait(20 * DT)
     Call(SetNpcAnimation, NPC_Bootler, ANIM_Bootler_Spook)
     Call(SetNpcAnimation, NPC_Boo1, ANIM_Boo_CarryWalk)
@@ -116,9 +116,9 @@ EvtScript N(EVS_ParadePhase_Boos) = {
     Wait(10 * DT)
     Thread
         Loop(6)
-            Call(SetNpcAnimation, NPC_TubbasHeart, ANIM_TubbasHeart_Anim16)
+            Call(SetNpcAnimation, NPC_TubbasHeart, ANIM_TubbasHeart_Squeeze)
             Wait(5)
-            Call(SetNpcAnimation, NPC_TubbasHeart, ANIM_TubbasHeart_Anim0B)
+            Call(SetNpcAnimation, NPC_TubbasHeart, ANIM_TubbasHeart_TalkAngry)
             Wait(10)
         EndLoop
     EndThread
@@ -161,7 +161,7 @@ EvtScript N(EVS_ParadePhase_Boos) = {
     EndThread
     Wait(30 * DT)
     KillThread(LVarC)
-    Call(SetNpcAnimation, NPC_TubbasHeart, ANIM_TubbasHeart_Anim0B)
+    Call(SetNpcAnimation, NPC_TubbasHeart, ANIM_TubbasHeart_TalkAngry)
     Call(GetNpcPos, NPC_TubbasHeart, LVar0, LVar1, LVar2)
     Loop(6)
         Sub(LVar0, 45)

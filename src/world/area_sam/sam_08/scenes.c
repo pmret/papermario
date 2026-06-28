@@ -545,7 +545,7 @@ EvtScript N(EVS_Scene_HitFakeKooper) = {
         Set(MF_KooperDoneMoving, true)
     EndThread
     Call(PlayerFaceNpc, NPC_Duplighost, false)
-    Call(SpeakToPlayer, NPC_Duplighost, ANIM_Duplighost_Anim05, ANIM_Duplighost_Anim02, 0, MSG_CH7_0130)
+    Call(SpeakToPlayer, NPC_Duplighost, ANIM_Duplighost_Talk, ANIM_Duplighost_Idle, 0, MSG_CH7_0130)
     Label(0)
     IfEq(MF_KooperDoneMoving, false)
         Wait(1)
@@ -553,8 +553,8 @@ EvtScript N(EVS_Scene_HitFakeKooper) = {
     EndIf
     Call(SpeakToPlayer, NPC_Kooper_01A, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_CH7_0131)
     Wait(10 * DT)
-    Call(SpeakToPlayer, NPC_Duplighost, ANIM_Duplighost_Anim05, ANIM_Duplighost_Anim02, 0, MSG_CH7_0132)
-    Call(SetNpcAnimation, NPC_Duplighost, ANIM_Duplighost_Anim06)
+    Call(SpeakToPlayer, NPC_Duplighost, ANIM_Duplighost_Talk, ANIM_Duplighost_Idle, 0, MSG_CH7_0132)
+    Call(SetNpcAnimation, NPC_Duplighost, ANIM_Duplighost_Threaten)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)

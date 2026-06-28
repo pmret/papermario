@@ -152,20 +152,20 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_LavaBubble_Blue_Anim01,
-    STATUS_KEY_STONE,     ANIM_LavaBubble_Blue_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_LavaBubble_Blue_Anim01,
-    STATUS_KEY_POISON,    ANIM_LavaBubble_Blue_Anim01,
-    STATUS_KEY_STOP,      ANIM_LavaBubble_Blue_Anim00,
-    STATUS_KEY_STATIC,    ANIM_LavaBubble_Blue_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_LavaBubble_Blue_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_LavaBubble_Blue_Anim0A,
-    STATUS_KEY_UNUSED,    ANIM_LavaBubble_Blue_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_LavaBubble_Blue_Idle,
+    STATUS_KEY_STONE,     ANIM_LavaBubble_Blue_Still,
+    STATUS_KEY_SLEEP,     ANIM_LavaBubble_Blue_Idle,
+    STATUS_KEY_POISON,    ANIM_LavaBubble_Blue_Idle,
+    STATUS_KEY_STOP,      ANIM_LavaBubble_Blue_Still,
+    STATUS_KEY_STATIC,    ANIM_LavaBubble_Blue_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_LavaBubble_Blue_Still,
+    STATUS_KEY_DIZZY,     ANIM_LavaBubble_Blue_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_LavaBubble_Blue_Dizzy,
     STATUS_END,
 };
 
 s32 N(ProjectileAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_LavaBubble_Blue_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_LavaBubble_Blue_Idle,
     STATUS_END,
 };
 
@@ -242,14 +242,14 @@ EvtScript N(EVS_Idle) = {
 #include "common/PlayLavaBubbleFlightSound.inc.c"
 
 EvtScript N(EVS_FlyHome) = {
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_FlyFast)
     Call(SetGoalToHome, ACTOR_SELF)
     Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
     Thread
         Call(N(PlayLavaBubbleFlightSound))
     EndThread
     Call(FlyToGoal, ACTOR_SELF, 0, 1, EASING_SIN_OUT)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Idle)
     Return
     End
 };
@@ -362,53 +362,53 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT)
             Exec(N(EVS_TrySplit))
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim07)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             Exec(N(EVS_TrySplit))
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim08)
-            SetConst(LVar2, ANIM_LavaBubble_Blue_Anim09)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_BurnHurt)
+            SetConst(LVar2, ANIM_LavaBubble_Blue_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim08)
-            SetConst(LVar2, ANIM_LavaBubble_Blue_Anim09)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_BurnHurt)
+            SetConst(LVar2, ANIM_LavaBubble_Blue_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim09)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             Exec(N(EVS_TrySplit))
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim07)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim07)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim07)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_EMBER_FLY | SOUND_ID_TRIGGER_CHANGE_SOUND)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim07)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim07)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             ExecWait(N(EVS_FlyHome))
         CaseEq(EVENT_SHOCK_DEATH)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_EMBER_FLY | SOUND_ID_TRIGGER_CHANGE_SOUND)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim07)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim07)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
@@ -416,15 +416,15 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
         CaseOrEq(EVENT_BURN_TAUNT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim01)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim07)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_Hurt)
             ExecWait(EVS_Enemy_Hit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim07)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_BEGIN_FIRST_STRIKE)
@@ -435,21 +435,21 @@ EvtScript N(EVS_HandleEvent) = {
             Call(HPBarToHome, ACTOR_SELF)
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim01)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim03)
-            SetConst(LVar2, ANIM_LavaBubble_Blue_Anim07)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_FlyFast)
+            SetConst(LVar2, ANIM_LavaBubble_Blue_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim03)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_FlyFast)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_LavaBubble_Blue_Anim03)
+            SetConst(LVar1, ANIM_LavaBubble_Blue_FlyFast)
             ExecWait(EVS_Enemy_BlowAway)
             Return
         CaseEq(EVENT_UP_AND_AWAY)
@@ -469,7 +469,7 @@ EvtScript N(EVS_Attack_Tackle) = {
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_FlyFast)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Add(LVar0, 30)
@@ -480,13 +480,13 @@ EvtScript N(EVS_Attack_Tackle) = {
         Call(N(PlayLavaBubbleFlightSound))
     EndThread
     Call(FlyToGoal, ACTOR_SELF, 0, 0, EASING_SIN_OUT)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Idle)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_MISS)
         CaseOrEq(HIT_RESULT_LUCKY)
             Set(LVarA, LVar0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Confused)
             Call(SetGoalToTarget, ACTOR_SELF)
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 20)
@@ -519,7 +519,7 @@ EvtScript N(EVS_Attack_Tackle) = {
             Return
         EndCaseGroup
     EndSwitch
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Confused)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Add(LVar2, 1)
@@ -533,7 +533,7 @@ EvtScript N(EVS_Attack_Tackle) = {
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Set(LVar0, PRT_MAIN)
-            Set(LVar1, ANIM_LavaBubble_Blue_Anim04)
+            Set(LVar1, ANIM_LavaBubble_Blue_Confused)
             ExecWait(EVS_Enemy_Knockback)
             Wait(5)
             ExecWait(N(EVS_FlyHome))
@@ -604,22 +604,22 @@ EvtScript N(EVS_Attack_ShootPartner) = {
         Set(LVar1, 50)
     EndIf
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_FlyFast)
     Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
     Thread
         Call(N(PlayLavaBubbleFlightSound))
     EndThread
     Call(FlyToGoal, ACTOR_SELF, 0, -4, EASING_SIN_OUT)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Idle)
     Wait(10)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim05)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Inhale)
     Wait(30)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVar0)
         CaseOrEq(HIT_RESULT_MISS)
         CaseOrEq(HIT_RESULT_LUCKY)
             Set(LVarA, LVar0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim06)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Exhale)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar0, 5)
             Add(LVar1, 4)
@@ -645,7 +645,7 @@ EvtScript N(EVS_Attack_ShootPartner) = {
             Return
         EndCaseGroup
     EndSwitch
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Exhale)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Sub(LVar0, 5)
     Add(LVar1, 4)
@@ -678,7 +678,7 @@ EvtScript N(EVS_Attack_AirSweep) = {
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_FlyFast)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, 30, 0, 0)
     Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
@@ -696,7 +696,7 @@ EvtScript N(EVS_Attack_AirSweep) = {
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_EMBER_JUMP)
             Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Confused)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 10, false, false, false)
@@ -708,7 +708,7 @@ EvtScript N(EVS_Attack_AirSweep) = {
             Add(LVar2, 2)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Confused)
             Call(FlyToGoal, ACTOR_SELF, 0, -10, EASING_QUADRATIC_OUT)
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -730,7 +730,7 @@ EvtScript N(EVS_Attack_AirSweep) = {
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_EMBER_JUMP)
     Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Confused)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(JumpToGoal, ACTOR_SELF, 10, false, false, false)

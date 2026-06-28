@@ -225,7 +225,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-9.0))
             Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-            Call(SetNpcAnimation, NPC_Dayzee, ANIM_Dayzee_Anim0D)
+            Call(SetNpcAnimation, NPC_Dayzee, ANIM_Dayzee_Shocked)
             Call(PlaySoundAtNpc, NPC_Dayzee, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
             Call(ShowEmote, NPC_Dayzee, EMOTE_EXCLAMATION, 45, 30, EMOTER_NPC, 0, 0, 0, 0)
             Wait(15 * DT)
@@ -815,22 +815,22 @@ NpcData N(NpcData_Dayzee) = {
     .flags = BASE_PASSIVE_FLAGS,
     .drops = NO_DROPS,
     .animations = {
-        .idle   = ANIM_Dayzee_Anim01,
-        .walk   = ANIM_Dayzee_Anim02,
-        .run    = ANIM_Dayzee_Anim03,
-        .chase  = ANIM_Dayzee_Anim03,
-        .anim_4 = ANIM_Dayzee_Anim01,
-        .anim_5 = ANIM_Dayzee_Anim01,
-        .death  = ANIM_Dayzee_Anim08,
-        .hit    = ANIM_Dayzee_Anim08,
-        .anim_8 = ANIM_Dayzee_Anim06,
-        .anim_9 = ANIM_Dayzee_Anim07,
-        .anim_A = ANIM_Dayzee_Anim01,
-        .anim_B = ANIM_Dayzee_Anim01,
-        .anim_C = ANIM_Dayzee_Anim01,
-        .anim_D = ANIM_Dayzee_Anim01,
-        .anim_E = ANIM_Dayzee_Anim01,
-        .anim_F = ANIM_Dayzee_Anim01,
+        .idle   = ANIM_Dayzee_Idle,
+        .walk   = ANIM_Dayzee_Walk,
+        .run    = ANIM_Dayzee_Run,
+        .chase  = ANIM_Dayzee_Run,
+        .anim_4 = ANIM_Dayzee_Idle,
+        .anim_5 = ANIM_Dayzee_Idle,
+        .death  = ANIM_Dayzee_Hurt,
+        .hit    = ANIM_Dayzee_Hurt,
+        .anim_8 = ANIM_Dayzee_SingSlow,
+        .anim_9 = ANIM_Dayzee_SingFast,
+        .anim_A = ANIM_Dayzee_Idle,
+        .anim_B = ANIM_Dayzee_Idle,
+        .anim_C = ANIM_Dayzee_Idle,
+        .anim_D = ANIM_Dayzee_Idle,
+        .anim_E = ANIM_Dayzee_Idle,
+        .anim_F = ANIM_Dayzee_Idle,
     },
 };
 

@@ -112,7 +112,7 @@ EvtScript N(EVS_OnInteract_Well) = {
                 Set(MV_Bzzap_State, 1)
             Else
                 Call(SetNpcPos, NPC_Dayzee, 30, 0, 0)
-                Call(SetNpcAnimation, NPC_Dayzee, ANIM_Dayzee_Anim0E)
+                Call(SetNpcAnimation, NPC_Dayzee, ANIM_Dayzee_Skip1)
                 Call(GetPlayerPos, LVar0, LVar1, LVar2)
                 Add(LVar1, 20)
                 Call(SetNpcJumpscale, NPC_Dayzee, Float(2.0))

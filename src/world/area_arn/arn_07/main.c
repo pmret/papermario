@@ -190,7 +190,7 @@ EvtScript N(EVS_Scene_TubbaReunion) = {
         Call(PlaySoundAtCollider, COLLIDER_tt3, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EndThread
     Call(NpcFaceNpc, NPC_TubbasHeart, NPC_Tubba, 0)
-    Call(SpeakToPlayer, NPC_TubbasHeart, ANIM_TubbasHeart_Anim0A, ANIM_TubbasHeart_Anim01, 5, MSG_CH3_00C7)
+    Call(SpeakToPlayer, NPC_TubbasHeart, ANIM_TubbasHeart_Talk, ANIM_TubbasHeart_Idle, 5, MSG_CH3_00C7)
     Call(SetNpcVar, NPC_TubbasHeart, 0, 1)
     Loop(0)
         Call(GetNpcVar, NPC_TubbasHeart, 0, LVar0)

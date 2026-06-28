@@ -108,40 +108,40 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(GroundAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BuzzyBeetle_Anim01,
-    STATUS_KEY_STONE,     ANIM_BuzzyBeetle_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_BuzzyBeetle_Anim09,
-    STATUS_KEY_POISON,    ANIM_BuzzyBeetle_Anim01,
-    STATUS_KEY_STOP,      ANIM_BuzzyBeetle_Anim00,
-    STATUS_KEY_STATIC,    ANIM_BuzzyBeetle_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_BuzzyBeetle_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_BuzzyBeetle_Anim0A,
-    STATUS_KEY_UNUSED,    ANIM_BuzzyBeetle_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_BuzzyBeetle_Idle,
+    STATUS_KEY_STONE,     ANIM_BuzzyBeetle_Still,
+    STATUS_KEY_SLEEP,     ANIM_BuzzyBeetle_Sleep,
+    STATUS_KEY_POISON,    ANIM_BuzzyBeetle_Idle,
+    STATUS_KEY_STOP,      ANIM_BuzzyBeetle_Still,
+    STATUS_KEY_STATIC,    ANIM_BuzzyBeetle_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_BuzzyBeetle_Still,
+    STATUS_KEY_DIZZY,     ANIM_BuzzyBeetle_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_BuzzyBeetle_Dizzy,
     STATUS_END,
 };
 
 s32 N(CeilingAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BuzzyBeetle_Anim0F,
-    STATUS_KEY_STONE,     ANIM_BuzzyBeetle_Anim0E,
-    STATUS_KEY_SLEEP,     ANIM_BuzzyBeetle_Anim14,
-    STATUS_KEY_POISON,    ANIM_BuzzyBeetle_Anim0F,
-    STATUS_KEY_STOP,      ANIM_BuzzyBeetle_Anim0E,
-    STATUS_KEY_STATIC,    ANIM_BuzzyBeetle_Anim0F,
-    STATUS_KEY_PARALYZE,  ANIM_BuzzyBeetle_Anim0E,
-    STATUS_KEY_DIZZY,     ANIM_BuzzyBeetle_Anim15,
-    STATUS_KEY_UNUSED,    ANIM_BuzzyBeetle_Anim15,
+    STATUS_KEY_NORMAL,    ANIM_BuzzyBeetle_CeilingIdle,
+    STATUS_KEY_STONE,     ANIM_BuzzyBeetle_CeilingStill,
+    STATUS_KEY_SLEEP,     ANIM_BuzzyBeetle_CeilingSleep,
+    STATUS_KEY_POISON,    ANIM_BuzzyBeetle_CeilingIdle,
+    STATUS_KEY_STOP,      ANIM_BuzzyBeetle_CeilingStill,
+    STATUS_KEY_STATIC,    ANIM_BuzzyBeetle_CeilingIdle,
+    STATUS_KEY_PARALYZE,  ANIM_BuzzyBeetle_CeilingStill,
+    STATUS_KEY_DIZZY,     ANIM_BuzzyBeetle_CeilingDizzy,
+    STATUS_KEY_UNUSED,    ANIM_BuzzyBeetle_CeilingDizzy,
     STATUS_END,
 };
 
 s32 N(ToppledAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BuzzyBeetle_Anim02,
-    STATUS_KEY_STONE,     ANIM_BuzzyBeetle_Anim1A,
-    STATUS_KEY_SLEEP,     ANIM_BuzzyBeetle_Anim1B,
-    STATUS_KEY_POISON,    ANIM_BuzzyBeetle_Anim02,
-    STATUS_KEY_STOP,      ANIM_BuzzyBeetle_Anim1A,
-    STATUS_KEY_STATIC,    ANIM_BuzzyBeetle_Anim02,
-    STATUS_KEY_DIZZY,     ANIM_BuzzyBeetle_Anim1C,
-    STATUS_KEY_UNUSED,    ANIM_BuzzyBeetle_Anim1C,
+    STATUS_KEY_NORMAL,    ANIM_BuzzyBeetle_ToppleIdle,
+    STATUS_KEY_STONE,     ANIM_BuzzyBeetle_ToppleStill,
+    STATUS_KEY_SLEEP,     ANIM_BuzzyBeetle_ToppleSleep,
+    STATUS_KEY_POISON,    ANIM_BuzzyBeetle_ToppleIdle,
+    STATUS_KEY_STOP,      ANIM_BuzzyBeetle_ToppleStill,
+    STATUS_KEY_STATIC,    ANIM_BuzzyBeetle_ToppleIdle,
+    STATUS_KEY_DIZZY,     ANIM_BuzzyBeetle_ToppleStruggle,
+    STATUS_KEY_UNUSED,    ANIM_BuzzyBeetle_ToppleStruggle,
     STATUS_END,
 };
 
@@ -193,7 +193,7 @@ EvtScript N(EVS_FallFromCeiling) = {
     Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, false)
     Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FLIPABLE, true)
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, true)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim08)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_FallDown)
     Call(SetActorYaw, ACTOR_SELF, 180)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Sub(LVar1, 24)
@@ -221,7 +221,7 @@ EvtScript N(EVS_FallFromCeiling) = {
     Add(LVar1, LVarE)
     Add(LVar2, LVarF)
     Call(ResetAllActorSounds, ACTOR_SELF)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_ToppleIdle)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(JumpToGoal, ACTOR_SELF, 10, false, true, false)
     Call(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
@@ -238,58 +238,58 @@ EvtScript N(EVS_HandleEvent_Ceiling) = {
     Switch(LVar0)
         CaseEq(EVENT_HIT_COMBO)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim13)
+            SetConst(LVar1, ANIM_BuzzyBeetle_CeilingHurt)
             ExecWait(EVS_Enemy_Hit)
         CaseEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim13)
+            SetConst(LVar1, ANIM_BuzzyBeetle_CeilingHurt)
             ExecWait(EVS_Enemy_Hit)
             ExecWait(N(EVS_FallFromCeiling))
         CaseEq(EVENT_FLIP_TRIGGER)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim13)
+            SetConst(LVar1, ANIM_BuzzyBeetle_CeilingHurt)
             ExecWait(EVS_Enemy_Hit)
             ExecWait(N(EVS_FallFromCeiling))
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim18)
-            SetConst(LVar2, ANIM_BuzzyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BuzzyBeetle_CeilingBurnHurt)
+            SetConst(LVar2, ANIM_BuzzyBeetle_CeilingBurnHurt)
             ExecWait(EVS_Enemy_BurnHit)
             ExecWait(N(EVS_FallFromCeiling))
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim18)
-            SetConst(LVar2, ANIM_BuzzyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BuzzyBeetle_CeilingBurnHurt)
+            SetConst(LVar2, ANIM_BuzzyBeetle_CeilingBurnHurt)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim18)
+            SetConst(LVar1, ANIM_BuzzyBeetle_CeilingBurnHurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim13)
+            SetConst(LVar1, ANIM_BuzzyBeetle_CeilingHurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim07)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim04)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Run)
             ExecWait(EVS_Enemy_ReturnHome)
         CaseEq(EVENT_SHOCK_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim13)
+            SetConst(LVar1, ANIM_BuzzyBeetle_CeilingHurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim07)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_ZERO_DAMAGE)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim16)
+            SetConst(LVar1, ANIM_BuzzyBeetle_CeilingShellEnter)
             ExecWait(EVS_Enemy_NoDamageHit)
         CaseEq(EVENT_IMMUNE)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim16)
+            SetConst(LVar1, ANIM_BuzzyBeetle_CeilingShellEnter)
             ExecWait(EVS_Enemy_NoDamageHit)
             Wait(2)
             Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -298,11 +298,11 @@ EvtScript N(EVS_HandleEvent_Ceiling) = {
             EndIf
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim13)
+            SetConst(LVar1, ANIM_BuzzyBeetle_CeilingHurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim13)
+            SetConst(LVar1, ANIM_BuzzyBeetle_CeilingHurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
@@ -310,8 +310,8 @@ EvtScript N(EVS_HandleEvent_Ceiling) = {
         CaseEq(EVENT_SCARE_AWAY)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, true)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim11)
-            SetConst(LVar2, ANIM_BuzzyBeetle_Anim13)
+            SetConst(LVar1, ANIM_BuzzyBeetle_CeilingRun)
+            SetConst(LVar2, ANIM_BuzzyBeetle_CeilingHurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseDefault
@@ -342,8 +342,8 @@ EvtScript N(EVS_HandleEvent_Ground) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim07)
-            SetConst(LVar2, ANIM_BuzzyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Hurt)
+            SetConst(LVar2, ANIM_BuzzyBeetle_ToppleHurt)
             ExecWait(N(EVS_CheckToppleAnim))
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
@@ -351,39 +351,39 @@ EvtScript N(EVS_HandleEvent_Ground) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
             IfNe(LVar0, AVAL_State_Toppled)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim0B)
-                SetConst(LVar2, ANIM_BuzzyBeetle_Anim0B)
+                SetConst(LVar1, ANIM_BuzzyBeetle_BurnHurt)
+                SetConst(LVar2, ANIM_BuzzyBeetle_BurnHurt)
                 ExecWait(EVS_Enemy_BurnHit)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim1D)
-                SetConst(LVar2, ANIM_BuzzyBeetle_Anim1D)
+                SetConst(LVar1, ANIM_BuzzyBeetle_ToppleBurnHurt)
+                SetConst(LVar2, ANIM_BuzzyBeetle_ToppleBurnHurt)
                 ExecWait(EVS_Enemy_BurnHit)
             EndIf
         CaseEq(EVENT_BURN_DEATH)
             Call(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
             IfNe(LVar0, AVAL_State_Toppled)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim0B)
-                SetConst(LVar2, ANIM_BuzzyBeetle_Anim0B)
+                SetConst(LVar1, ANIM_BuzzyBeetle_BurnHurt)
+                SetConst(LVar2, ANIM_BuzzyBeetle_BurnHurt)
                 ExecWait(EVS_Enemy_BurnHit)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim0B)
+                SetConst(LVar1, ANIM_BuzzyBeetle_BurnHurt)
                 ExecWait(EVS_Enemy_Death)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim1D)
-                SetConst(LVar2, ANIM_BuzzyBeetle_Anim1D)
+                SetConst(LVar1, ANIM_BuzzyBeetle_ToppleBurnHurt)
+                SetConst(LVar2, ANIM_BuzzyBeetle_ToppleBurnHurt)
                 ExecWait(EVS_Enemy_BurnHit)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim1D)
+                SetConst(LVar1, ANIM_BuzzyBeetle_ToppleBurnHurt)
                 ExecWait(EVS_Enemy_Death)
             EndIf
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim07)
-            SetConst(LVar2, ANIM_BuzzyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Hurt)
+            SetConst(LVar2, ANIM_BuzzyBeetle_ToppleHurt)
             ExecWait(N(EVS_CheckToppleAnim))
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_FLIP_TRIGGER)
@@ -394,7 +394,7 @@ EvtScript N(EVS_HandleEvent_Ground) = {
             Call(SetDefenseTable, ACTOR_SELF, PRT_MAIN, Ref(N(ToppledDefense)))
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(ToppledAnims)))
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, true)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Hurt)
             Call(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
             Thread
                 Wait(1)
@@ -418,49 +418,49 @@ EvtScript N(EVS_HandleEvent_Ground) = {
             Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim19)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_ToppleHurt)
         CaseEq(EVENT_SHOCK_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim07)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim07)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim04)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Run)
             ExecWait(EVS_Enemy_ReturnHome)
         CaseEq(EVENT_SHOCK_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim07)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim07)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_ZERO_DAMAGE)
             Call(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
             IfEq(LVar0, AVAL_State_Ground)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim0C)
+                SetConst(LVar1, ANIM_BuzzyBeetle_ShellEnter)
                 ExecWait(EVS_Enemy_NoDamageHit)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim17)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_CeilingShellExit)
                 Wait(8)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim02)
+                SetConst(LVar1, ANIM_BuzzyBeetle_ToppleIdle)
                 ExecWait(EVS_Enemy_NoDamageHit)
             EndIf
         CaseEq(EVENT_IMMUNE)
             Call(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
             IfEq(LVar0, AVAL_State_Ground)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim0C)
+                SetConst(LVar1, ANIM_BuzzyBeetle_ShellEnter)
                 ExecWait(EVS_Enemy_NoDamageHit)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim0D)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_ShellExit)
                 Wait(8)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim02)
+                SetConst(LVar1, ANIM_BuzzyBeetle_ToppleIdle)
                 ExecWait(EVS_Enemy_NoDamageHit)
             EndIf
         CaseEq(EVENT_SPIKE_TAUNT)
@@ -476,26 +476,26 @@ EvtScript N(EVS_HandleEvent_Ground) = {
             Wait(20)
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim07)
-            SetConst(LVar2, ANIM_BuzzyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Hurt)
+            SetConst(LVar2, ANIM_BuzzyBeetle_ToppleHurt)
             ExecWait(N(EVS_CheckToppleAnim))
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim07)
-            SetConst(LVar2, ANIM_BuzzyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Hurt)
+            SetConst(LVar2, ANIM_BuzzyBeetle_ToppleHurt)
             ExecWait(N(EVS_CheckToppleAnim))
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim07)
-            SetConst(LVar2, ANIM_BuzzyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Hurt)
+            SetConst(LVar2, ANIM_BuzzyBeetle_ToppleHurt)
             ExecWait(N(EVS_CheckToppleAnim))
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim07)
-            SetConst(LVar2, ANIM_BuzzyBeetle_Anim19)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Hurt)
+            SetConst(LVar2, ANIM_BuzzyBeetle_ToppleHurt)
             ExecWait(N(EVS_CheckToppleAnim))
             ExecWait(EVS_Enemy_Death)
             Return
@@ -503,40 +503,40 @@ EvtScript N(EVS_HandleEvent_Ground) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
             IfEq(LVar0, AVAL_State_Ground)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim01)
+                SetConst(LVar1, ANIM_BuzzyBeetle_Idle)
                 ExecWait(EVS_Enemy_Recover)
             EndIf
         CaseEq(EVENT_SCARE_AWAY)
             Call(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
             IfEq(LVar0, AVAL_State_Ground)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim04)
-                SetConst(LVar2, ANIM_BuzzyBeetle_Anim07)
+                SetConst(LVar1, ANIM_BuzzyBeetle_Run)
+                SetConst(LVar2, ANIM_BuzzyBeetle_Hurt)
                 ExecWait(EVS_Enemy_ScareAway)
                 Return
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim02)
+                SetConst(LVar1, ANIM_BuzzyBeetle_ToppleIdle)
                 ExecWait(EVS_Enemy_NoDamageHit)
             EndIf
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             Call(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
             IfEq(LVar0, AVAL_State_Ground)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim04)
+                SetConst(LVar1, ANIM_BuzzyBeetle_Run)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim02)
+                SetConst(LVar1, ANIM_BuzzyBeetle_ToppleIdle)
             EndIf
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             Call(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
             IfEq(LVar0, AVAL_State_Ground)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim07)
+                SetConst(LVar1, ANIM_BuzzyBeetle_Hurt)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim08)
+                SetConst(LVar1, ANIM_BuzzyBeetle_FallDown)
             EndIf
             ExecWait(EVS_Enemy_BlowAway)
             Return
@@ -544,13 +544,13 @@ EvtScript N(EVS_HandleEvent_Ground) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
             IfEq(LVar0, AVAL_State_Ground)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim0C)
+                SetConst(LVar1, ANIM_BuzzyBeetle_ShellEnter)
                 ExecWait(EVS_Enemy_NoDamageHit)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim0D)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_ShellExit)
                 Wait(8)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_BuzzyBeetle_Anim02)
+                SetConst(LVar1, ANIM_BuzzyBeetle_ToppleIdle)
                 ExecWait(EVS_Enemy_NoDamageHit)
             EndIf
         CaseDefault
@@ -589,16 +589,16 @@ EvtScript N(EVS_TakeTurn_Ceiling) = {
         Call(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
         Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         Call(SetActorPos, ACTOR_SELF, LVar0, LVar4, LVar2)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim0E)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_CeilingStill)
     Else
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim11)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_CeilingRun)
         Call(SetGoalToTarget, ACTOR_SELF)
         Call(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
         Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         Call(SetGoalPos, ACTOR_SELF, LVar0, LVar4, LVar2)
         Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
         Call(RunToGoal, ACTOR_SELF, 0, false)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim0E)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_CeilingStill)
         Wait(8)
     EndIf
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_FALL_QUICK, 0)
@@ -617,7 +617,7 @@ EvtScript N(EVS_TakeTurn_Ceiling) = {
             Set(LVarA, LVar0)
             Call(SetActorYaw, ACTOR_SELF, 180)
             Call(SetPartYaw, ACTOR_SELF, PRT_MAIN, 180)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim08)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_FallDown)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Sub(LVar1, 24)
             Call(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -635,7 +635,7 @@ EvtScript N(EVS_TakeTurn_Ceiling) = {
             Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
             Thread
                 Wait(5)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim00)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Still)
             EndThread
             Add(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -645,10 +645,10 @@ EvtScript N(EVS_TakeTurn_Ceiling) = {
             Call(YieldTurn)
             Call(SetGoalToHome, ACTOR_SELF)
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Run)
             Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             Call(RunToGoal, ACTOR_SELF, 0, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Idle)
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -657,7 +657,7 @@ EvtScript N(EVS_TakeTurn_Ceiling) = {
         EndCaseGroup
     EndSwitch
     Call(SetActorYaw, ACTOR_SELF, 180)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim08)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_FallDown)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Sub(LVar1, 24)
     Call(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -682,7 +682,7 @@ EvtScript N(EVS_TakeTurn_Ceiling) = {
             Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
             Thread
                 Wait(5)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim00)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Still)
             EndThread
             Add(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -690,9 +690,9 @@ EvtScript N(EVS_TakeTurn_Ceiling) = {
             Wait(8)
             Call(YieldTurn)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim04)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Run)
             ExecWait(EVS_Enemy_ReturnHome)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Idle)
         EndCaseGroup
     EndSwitch
     Label(10)
@@ -720,8 +720,8 @@ EvtScript N(EVS_TakeTurn_Ground) = {
             Wait(20)
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim02)
-            SetConst(LVar2, ANIM_BuzzyBeetle_Anim01)
+            SetConst(LVar1, ANIM_BuzzyBeetle_ToppleIdle)
+            SetConst(LVar2, ANIM_BuzzyBeetle_Idle)
             ExecWait(EVS_Enemy_FlipBackUp)
             Call(SetActorYaw, ACTOR_SELF, 0)
             Call(SetActorVar, ACTOR_SELF, AVAR_ToppleState, AVAL_State_Ground)
@@ -740,9 +740,9 @@ EvtScript N(EVS_TakeTurn_Ground) = {
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim0C)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_ShellEnter)
     Wait(10)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_ShellStill)
     Thread
         Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         PlayEffect(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
@@ -752,7 +752,7 @@ EvtScript N(EVS_TakeTurn_Ground) = {
         PlayEffect(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
     EndThread
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SHELL_SPIN)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim05)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_ShellSpin)
     Wait(20)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SHELL_TOSS)
@@ -793,7 +793,7 @@ EvtScript N(EVS_TakeTurn_Ground) = {
             Call(SetActorSpeed, ACTOR_SELF, Float(10.0))
             Call(RunToGoal, ACTOR_SELF, 0, false)
             Wait(10)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim0D)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_ShellExit)
             Wait(10)
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -822,14 +822,14 @@ EvtScript N(EVS_TakeTurn_Ground) = {
             Add(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 6, false, true, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Idle)
             Wait(8)
             Call(YieldTurn)
             Call(ResetAllActorSounds, ACTOR_SELF)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_BuzzyBeetle_Anim04)
+            SetConst(LVar1, ANIM_BuzzyBeetle_Run)
             ExecWait(EVS_Enemy_ReturnHome)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Idle)
         EndCaseGroup
     EndSwitch
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)

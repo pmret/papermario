@@ -113,7 +113,7 @@ EvtScript N(EVS_Scene_CrystalKingAppears) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(SpeakToPlayer, NPC_CrystalKing_01, ANIM_CrystalKing_Anim09, ANIM_CrystalKing_Anim09, 0, MSG_CH7_016B)
+    Call(SpeakToPlayer, NPC_CrystalKing_01, ANIM_CrystalKing_Idle, ANIM_CrystalKing_Idle, 0, MSG_CH7_016B)
     Call(PanToTarget, CAM_DEFAULT, 0, false)
     Call(SetPlayerAnimation, ANIM_Mario1_Run)
     Call(SetPlayerSpeed, Float(2.5 / DT))
@@ -143,7 +143,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
     Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(SpeakToPlayer, NPC_CrystalKing_01, ANIM_CrystalKing_Anim09, ANIM_CrystalKing_Anim09, 0, MSG_CH7_016C)
+    Call(SpeakToPlayer, NPC_CrystalKing_01, ANIM_CrystalKing_Idle, ANIM_CrystalKing_Idle, 0, MSG_CH7_016C)
     Thread
         Call(SetNpcRotationPivot, NPC_CrystalKing_01, 30)
         Call(MakeLerp, 0, 19 * 360, 210 * DT, EASING_COS_IN_OUT)

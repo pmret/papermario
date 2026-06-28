@@ -157,11 +157,11 @@ EvtScript N(EVS_Imposter_Unmask) = {
     IfEq(LVar1, 1)
         Goto(1)
     EndIf
-    Call(EndSpeech, LVar4, ANIM_Duplighost_Anim05, ANIM_Duplighost_Anim02, 0)
+    Call(EndSpeech, LVar4, ANIM_Duplighost_Talk, ANIM_Duplighost_Idle, 0)
     ExecWait(N(EVS_FocusCam_OnPlayer))
     Call(PanToTarget, CAM_DEFAULT, 0, false)
     Thread
-        Call(SetNpcAnimation, LVar4, ANIM_Duplighost_Anim04)
+        Call(SetNpcAnimation, LVar4, ANIM_Duplighost_Run)
         Call(InterpNpcYaw, LVar4, 90, 0)
         Call(SetNpcSpeed, LVar4, Float(6.5))
         Call(PlaySoundAtNpc, LVar4, SOUND_DUPLIGHOST_LEAP, SOUND_SPACE_DEFAULT)
@@ -191,7 +191,7 @@ EvtScript N(EVS_RevealEveryImposter) = {
             Call(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
             Call(SetNpcPos, NPC_Duplighost_01, LVar0, LVar1, LVar2)
             Call(PlaySoundAtNpc, NPC_Duplighost_01, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
-            Call(SetNpcAnimation, NPC_Duplighost_01, ANIM_Duplighost_Anim04)
+            Call(SetNpcAnimation, NPC_Duplighost_01, ANIM_Duplighost_Run)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Call(NpcMoveTo, NPC_Duplighost_01, LVar0, LVar2, 30)
         EndThread
@@ -203,7 +203,7 @@ EvtScript N(EVS_RevealEveryImposter) = {
             Call(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
             Call(SetNpcPos, NPC_Duplighost_02, LVar0, LVar1, LVar2)
             Call(PlaySoundAtNpc, NPC_Duplighost_02, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
-            Call(SetNpcAnimation, NPC_Duplighost_02, ANIM_Duplighost_Anim04)
+            Call(SetNpcAnimation, NPC_Duplighost_02, ANIM_Duplighost_Run)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Call(NpcMoveTo, NPC_Duplighost_02, LVar0, LVar2, 30)
         EndThread
@@ -215,7 +215,7 @@ EvtScript N(EVS_RevealEveryImposter) = {
             Call(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
             Call(SetNpcPos, NPC_Duplighost_03, LVar0, LVar1, LVar2)
             Call(PlaySoundAtNpc, NPC_Duplighost_03, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
-            Call(SetNpcAnimation, NPC_Duplighost_03, ANIM_Duplighost_Anim04)
+            Call(SetNpcAnimation, NPC_Duplighost_03, ANIM_Duplighost_Run)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Call(NpcMoveTo, NPC_Duplighost_03, LVar0, LVar2, 30)
         EndThread
@@ -227,7 +227,7 @@ EvtScript N(EVS_RevealEveryImposter) = {
             Call(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
             Call(SetNpcPos, NPC_Duplighost_04, LVar0, LVar1, LVar2)
             Call(PlaySoundAtNpc, NPC_Duplighost_04, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
-            Call(SetNpcAnimation, NPC_Duplighost_04, ANIM_Duplighost_Anim04)
+            Call(SetNpcAnimation, NPC_Duplighost_04, ANIM_Duplighost_Run)
             Call(GetPlayerPos, LVar0, LVar1, LVar2)
             Call(NpcMoveTo, NPC_Duplighost_04, LVar0, LVar2, 30)
         EndThread

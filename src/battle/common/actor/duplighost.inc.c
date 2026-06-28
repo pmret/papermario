@@ -39,25 +39,25 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Duplighost_Anim02,
-    STATUS_KEY_STONE,     ANIM_Duplighost_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_Duplighost_Anim0D,
-    STATUS_KEY_POISON,    ANIM_Duplighost_Anim02,
-    STATUS_KEY_STOP,      ANIM_Duplighost_Anim00,
-    STATUS_KEY_STATIC,    ANIM_Duplighost_Anim02,
-    STATUS_KEY_PARALYZE,  ANIM_Duplighost_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_Duplighost_Anim0E,
-    STATUS_KEY_UNUSED,    ANIM_Duplighost_Anim0E,
+    STATUS_KEY_NORMAL,    ANIM_Duplighost_Idle,
+    STATUS_KEY_STONE,     ANIM_Duplighost_Still,
+    STATUS_KEY_SLEEP,     ANIM_Duplighost_Sleep,
+    STATUS_KEY_POISON,    ANIM_Duplighost_Idle,
+    STATUS_KEY_STOP,      ANIM_Duplighost_Still,
+    STATUS_KEY_STATIC,    ANIM_Duplighost_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_Duplighost_Still,
+    STATUS_KEY_DIZZY,     ANIM_Duplighost_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_Duplighost_Dizzy,
     STATUS_END,
 };
 
 s32 N(FlailingAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Duplighost_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_Duplighost_Hurt,
     STATUS_END,
 };
 
 s32 N(RunAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Duplighost_Anim04,
+    STATUS_KEY_NORMAL,    ANIM_Duplighost_Run,
     STATUS_END,
 };
 
@@ -161,7 +161,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_ReturnHome) = {
     SetConst(LVar0, PRT_MAIN)
-    SetConst(LVar1, ANIM_Duplighost_Anim04)
+    SetConst(LVar1, ANIM_Duplighost_Run)
     ExecWait(EVS_Enemy_ReturnHome)
     Return
     End
@@ -175,85 +175,85 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0A)
+            SetConst(LVar1, ANIM_Duplighost_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0C)
+            SetConst(LVar1, ANIM_Duplighost_BurnHurt)
             SetConst(LVar2, -1)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0C)
+            SetConst(LVar1, ANIM_Duplighost_BurnHurt)
             SetConst(LVar2, -1)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0C)
+            SetConst(LVar1, ANIM_Duplighost_BurnHurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0A)
+            SetConst(LVar1, ANIM_Duplighost_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0A)
+            SetConst(LVar1, ANIM_Duplighost_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0A)
+            SetConst(LVar1, ANIM_Duplighost_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             Call(ResetAllActorSounds, ACTOR_SELF)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0A)
+            SetConst(LVar1, ANIM_Duplighost_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0A)
+            SetConst(LVar1, ANIM_Duplighost_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0A)
+            SetConst(LVar1, ANIM_Duplighost_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0A)
+            SetConst(LVar1, ANIM_Duplighost_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim02)
+            SetConst(LVar1, ANIM_Duplighost_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0A)
+            SetConst(LVar1, ANIM_Duplighost_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0A)
+            SetConst(LVar1, ANIM_Duplighost_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim02)
+            SetConst(LVar1, ANIM_Duplighost_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim04)
-            SetConst(LVar2, ANIM_Duplighost_Anim0A)
+            SetConst(LVar1, ANIM_Duplighost_Run)
+            SetConst(LVar2, ANIM_Duplighost_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim04)
+            SetConst(LVar1, ANIM_Duplighost_Run)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Duplighost_Anim0A)
+            SetConst(LVar1, ANIM_Duplighost_Hurt)
             ExecWait(EVS_Enemy_BlowAway)
             Return
         CaseDefault
@@ -271,7 +271,7 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim07)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Crouch)
     Wait(20)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_DUPLIGHOST_LEAP, 0)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
@@ -280,7 +280,7 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
         CaseOrEq(HIT_RESULT_LUCKY)
             Set(LVarA, LVar0)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim08)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Leap)
             Call(SetGoalToTarget, ACTOR_SELF)
             Call(AddGoalPos, ACTOR_SELF, -100, 0, 0)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(0.3))
@@ -291,7 +291,7 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
             Wait(10)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetActorPos, ACTOR_SELF, LVar0, 0, LVar2)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Idle)
             Call(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
             Wait(15)
             Call(YieldTurn)
@@ -305,7 +305,7 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
             Return
         EndCaseGroup
     EndSwitch
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim08)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Leap)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetStatusFlags, ACTOR_SELF, LVarA)
     IfFlag(LVarA, STATUS_FLAG_SHRINK)
@@ -323,7 +323,7 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim09)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Land)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(0.5))
             Add(LVar0, 30)
@@ -382,7 +382,7 @@ EvtScript A(EVS_Duplighost_OnHitElectric) = {
     Call(SetActorVar, LVarA, AVAR_State, AVAL_State_ReadyToTackle)
     Call(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, true)
     Call(SetIdleAnimations, LVarA, PRT_MAIN, Ref(N(FlailingAnims)))
-    Call(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim0A)
+    Call(SetAnimation, LVarA, 1, ANIM_Duplighost_Hurt)
     Wait(30)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(GetActorPos, LVarA, LVarB, LVarC, LVarD)
@@ -401,7 +401,7 @@ EvtScript A(EVS_Duplighost_OnHitElectric) = {
     Call(ForceHomePos, LVarA, LVarB, LVarC, LVarD)
     Call(HPBarToHome, LVarA)
     Call(SetIdleAnimations, LVarA, PRT_MAIN, Ref(N(DefaultAnims)))
-    Call(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim02)
+    Call(SetAnimation, LVarA, 1, ANIM_Duplighost_Idle)
     Call(SetActorPos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     Call(ForceHomePos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     Call(HPBarToHome, ACTOR_SELF)
@@ -451,7 +451,7 @@ EvtScript A(EVS_Duplighost_OnShockHit) = {
     Call(SetActorVar, LVarA, AVAR_State, AVAL_State_WaitToTackle)
     Call(SetPartFlagBits, ACTOR_SELF, LVar9, ACTOR_PART_FLAG_INVISIBLE, true)
     Call(SetIdleAnimations, LVarA, PRT_MAIN, Ref(N(FlailingAnims)))
-    Call(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim0A)
+    Call(SetAnimation, LVarA, 1, ANIM_Duplighost_Hurt)
     Wait(15)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(SetActorJumpGravity, LVarA, Float(0.5))
@@ -470,13 +470,13 @@ EvtScript A(EVS_Duplighost_OnShockHit) = {
     Call(AddActorDecoration, LVarA, 1, 0, ACTOR_DECORATION_SWEAT)
     Call(SetActorYaw, LVarA, 180)
     Call(SetIdleAnimations, LVarA, PRT_MAIN, Ref(N(RunAnims)))
-    Call(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim04)
+    Call(SetAnimation, LVarA, 1, ANIM_Duplighost_Run)
     Call(SetActorSpeed, LVarA, Float(8.0))
     Call(SetGoalToHome, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVarB, LVarC, LVarD)
     Call(SetGoalPos, LVarA, LVarB, 0, LVarD)
     Call(RunToGoal, LVarA, 0, false)
-    Call(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim02)
+    Call(SetAnimation, LVarA, 1, ANIM_Duplighost_Idle)
     Call(SetActorYaw, LVarA, 0)
     Call(RemoveActorDecoration, LVarA, 1, 0)
     Call(SetIdleAnimations, LVarA, PRT_MAIN, Ref(N(DefaultAnims)))
@@ -600,7 +600,7 @@ EvtScript N(EVS_CopyPartner) = {
     Call(BattleCamTargetActor, ACTOR_SELF)
     Wait(15)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_GHOST_TRANSFORM)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Threaten)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(GetStatusFlags, ACTOR_SELF, LVarA)
     IfFlag(LVarA, STATUS_FLAG_SHRINK)
