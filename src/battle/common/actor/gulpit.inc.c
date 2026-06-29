@@ -27,25 +27,25 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim01,
-    STATUS_KEY_STONE,     ANIM_Gulpit_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_Gulpit_Anim0F,
-    STATUS_KEY_POISON,    ANIM_Gulpit_Anim01,
-    STATUS_KEY_STOP,      ANIM_Gulpit_Anim00,
-    STATUS_KEY_STATIC,    ANIM_Gulpit_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_Gulpit_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_Gulpit_Anim0E,
-    STATUS_KEY_UNUSED,    ANIM_Gulpit_Anim0E,
+    STATUS_KEY_NORMAL,    ANIM_Gulpit_Idle,
+    STATUS_KEY_STONE,     ANIM_Gulpit_Still,
+    STATUS_KEY_SLEEP,     ANIM_Gulpit_Sleep,
+    STATUS_KEY_POISON,    ANIM_Gulpit_Idle,
+    STATUS_KEY_STOP,      ANIM_Gulpit_Still,
+    STATUS_KEY_STATIC,    ANIM_Gulpit_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_Gulpit_Still,
+    STATUS_KEY_DIZZY,     ANIM_Gulpit_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_Gulpit_Dizzy,
     STATUS_END,
 };
 
 s32 N(BigRockAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim10,
+    STATUS_KEY_NORMAL,    ANIM_Gulpit_LargeRock,
     STATUS_END,
 };
 
 s32 N(SmallRockAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim12,
+    STATUS_KEY_NORMAL,    ANIM_Gulpit_SmallRock,
     STATUS_END,
 };
 
@@ -156,9 +156,9 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_ReturnHome) = {
     SetConst(LVar0, PRT_MAIN)
-    SetConst(LVar1, ANIM_Gulpit_Anim03)
+    SetConst(LVar1, ANIM_Gulpit_Run)
     ExecWait(EVS_Enemy_ReturnHome)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Idle)
     Return
     End
 };
@@ -171,84 +171,84 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim0B)
+            SetConst(LVar1, ANIM_Gulpit_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim0C)
-            SetConst(LVar2, ANIM_Gulpit_Anim0D)
+            SetConst(LVar1, ANIM_Gulpit_BurnHurt)
+            SetConst(LVar2, ANIM_Gulpit_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim0C)
-            SetConst(LVar2, ANIM_Gulpit_Anim0D)
+            SetConst(LVar1, ANIM_Gulpit_BurnHurt)
+            SetConst(LVar2, ANIM_Gulpit_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim0D)
+            SetConst(LVar1, ANIM_Gulpit_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim0B)
+            SetConst(LVar1, ANIM_Gulpit_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim0B)
+            SetConst(LVar1, ANIM_Gulpit_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim0B)
+            SetConst(LVar1, ANIM_Gulpit_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim0B)
+            SetConst(LVar1, ANIM_Gulpit_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim0B)
+            SetConst(LVar1, ANIM_Gulpit_Hurt)
             ExecWait(EVS_Enemy_Knockback)
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim0B)
+            SetConst(LVar1, ANIM_Gulpit_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim0B)
+            SetConst(LVar1, ANIM_Gulpit_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim01)
+            SetConst(LVar1, ANIM_Gulpit_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim0B)
+            SetConst(LVar1, ANIM_Gulpit_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim0B)
+            SetConst(LVar1, ANIM_Gulpit_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim01)
+            SetConst(LVar1, ANIM_Gulpit_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim03)
-            SetConst(LVar2, ANIM_Gulpit_Anim0B)
+            SetConst(LVar1, ANIM_Gulpit_Run)
+            SetConst(LVar2, ANIM_Gulpit_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim03)
+            SetConst(LVar1, ANIM_Gulpit_Run)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim03)
+            SetConst(LVar1, ANIM_Gulpit_Run)
             ExecWait(EVS_Enemy_BlowAway)
         CaseDefault
     EndSwitch
@@ -273,7 +273,7 @@ EvtScript N(EVS_Attack_Lick) = {
         Set(LVar1, 0)
         Call(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EndIf
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Run)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(GetStatusFlags, ACTOR_SELF, LVar0)
     IfFlag(LVar0, STATUS_FLAG_SHRINK)
@@ -283,13 +283,13 @@ EvtScript N(EVS_Attack_Lick) = {
     EndIf
     Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
     Call(RunToGoal, ACTOR_SELF, 0, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Idle)
     Wait(10)
     Thread
         Wait(3)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_GULPIT_LICK)
     EndThread
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Lick)
     Wait(9)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVar0)
@@ -340,33 +340,33 @@ EvtScript N(EVS_Attack_SpitRock) = {
     Call(GetActorPos, LVarA, LVar0, LVar1, LVar2)
     Add(LVar0, 20)
     Sub(LVar2, 1)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Walk)
     Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(RunToGoal, ACTOR_SELF, 0, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Idle)
     Wait(10)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_GULPIT_LICK)
     Call(GetActorVar, LVarA, AVAR_Rock_Type, LVar0)
     Set(LVarB, LVar0)
     Switch(LVarB)
         CaseEq(0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim05)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_EatLargeRock)
             Wait(3)
             Call(RemoveActor, LVarA)
             Wait(20)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim06)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_HoldLargeRock)
             Wait(15)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_SpitLargeRock)
             Set(LVarA, 2)
         CaseEq(1)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim08)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_EatSmallRock)
             Wait(3)
             Call(RemoveActor, LVarA)
             Wait(20)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim09)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_HoldSmallRock)
             Wait(15)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim0A)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_SpitSmallRock)
             Set(LVarA, 3)
     EndSwitch
     Call(SetPartSounds, ACTOR_SELF, LVarA, ACTOR_SOUND_JUMP, SOUND_LIGHT_THROW, SOUND_NONE)
@@ -423,7 +423,7 @@ EvtScript N(EVS_Attack_SpitRock) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Idle)
             Call(GetPartOffset, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2)
             Add(LVar0, -100)
             Call(SetPartJumpGravity, ACTOR_SELF, LVarA, Float(1.0))

@@ -19,20 +19,20 @@
 
 #define LAKITU_ANIMS \
 { \
-    .idle   = ANIM_Lakitu_Anim01, \
-    .walk   = ANIM_Lakitu_Anim02, \
-    .run    = ANIM_Lakitu_Anim03, \
-    .chase  = ANIM_Lakitu_Anim03, \
-    .anim_4 = ANIM_Lakitu_Anim01, \
-    .anim_5 = ANIM_Lakitu_Anim01, \
-    .death  = ANIM_Lakitu_Anim04, \
-    .hit    = ANIM_Lakitu_Anim04, \
-    .anim_8 = ANIM_Lakitu_Anim03, \
-    .anim_9 = ANIM_Lakitu_Anim01, \
-    .anim_A = ANIM_Lakitu_Anim01, \
-    .anim_B = ANIM_Lakitu_Anim01, \
-    .anim_C = ANIM_Lakitu_Anim01, \
-    .anim_D = ANIM_Lakitu_Anim01, \
-    .anim_E = ANIM_Lakitu_Anim01, \
-    .anim_F = ANIM_Lakitu_Anim01, \
+    .idle   = ANIM_Lakitu_Idle, \
+    .walk   = ANIM_Lakitu_FlySlow, \
+    .run    = ANIM_Lakitu_FlyFast, \
+    .chase  = ANIM_Lakitu_FlyFast, \
+    .anim_4 = ANIM_Lakitu_Idle, \
+    .anim_5 = ANIM_Lakitu_Idle, \
+    .death  = ANIM_Lakitu_Horror, \
+    .hit    = ANIM_Lakitu_Horror, \
+    .anim_8 = ANIM_Lakitu_FlyFast, \
+    .anim_9 = ANIM_Lakitu_Idle, \
+    .anim_A = ANIM_Lakitu_Idle, \
+    .anim_B = ANIM_Lakitu_Idle, \
+    .anim_C = ANIM_Lakitu_Idle, \
+    .anim_D = ANIM_Lakitu_Idle, \
+    .anim_E = ANIM_Lakitu_Idle, \
+    .anim_F = ANIM_Lakitu_Idle, \
 }

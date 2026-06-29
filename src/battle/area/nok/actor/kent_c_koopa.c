@@ -50,22 +50,22 @@ enum N(ActorParams) {
 s32 N(FlipPosOffsets)[] = { 9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0, 4, 6, 7, 6, 4, 0, 2, 0 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_KentCKoopa_Anim01,
-    STATUS_KEY_STONE,     ANIM_KentCKoopa_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_KentCKoopa_Anim13,
-    STATUS_KEY_POISON,    ANIM_KentCKoopa_Anim01,
-    STATUS_KEY_STOP,      ANIM_KentCKoopa_Anim00,
-    STATUS_KEY_STATIC,    ANIM_KentCKoopa_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_KentCKoopa_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_KentCKoopa_Anim14,
-    STATUS_KEY_UNUSED,    ANIM_KentCKoopa_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_KentCKoopa_Idle,
+    STATUS_KEY_STONE,     ANIM_KentCKoopa_Still,
+    STATUS_KEY_SLEEP,     ANIM_KentCKoopa_Sleep,
+    STATUS_KEY_POISON,    ANIM_KentCKoopa_Idle,
+    STATUS_KEY_STOP,      ANIM_KentCKoopa_Still,
+    STATUS_KEY_STATIC,    ANIM_KentCKoopa_Still,
+    STATUS_KEY_PARALYZE,  ANIM_KentCKoopa_Still,
+    STATUS_KEY_DIZZY,     ANIM_KentCKoopa_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_KentCKoopa_Still,
     STATUS_END,
 };
 
 s32 N(FlippedAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_KentCKoopa_Anim1A,
-    STATUS_KEY_STOP,      ANIM_KentCKoopa_Anim19,
-    STATUS_KEY_PARALYZE,  ANIM_KentCKoopa_Anim19,
+    STATUS_KEY_NORMAL,    ANIM_KentCKoopa_IdleTopple,
+    STATUS_KEY_STOP,      ANIM_KentCKoopa_StillTopple,
+    STATUS_KEY_PARALYZE,  ANIM_KentCKoopa_StillTopple,
     STATUS_END,
 };
 
@@ -257,7 +257,7 @@ EvtScript N(EVS_Init) = {
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
     Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_HandlePhase)))
     Call(SetActorVar, ACTOR_SELF, AVAR_IsFlipped, false)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_KentCKoopa_Anim1C)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_KentCKoopa_Hurt)
     Call(SetActorVar, ACTOR_SELF, AVAR_FlippedTurns, 0)
     Call(SetActorVar, ACTOR_SELF, AVAR_CoinsToDrop, 20)
     Call(SetActorVar, ACTOR_SELF, AVAR_FlipResistance, 2)
@@ -317,25 +317,25 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_IsFlipped, LVar0)
             IfEq(LVar0, 0)
                 Set(LVar0, 1)
-                Set(LVar1, ANIM_KentCKoopa_Anim15)
-                Set(LVar2, ANIM_KentCKoopa_Anim16)
+                Set(LVar1, ANIM_KentCKoopa_BurnHurt)
+                Set(LVar2, ANIM_KentCKoopa_BurnStill)
                 ExecWait(EVS_Enemy_BurnHit)
             Else
                 Set(LVar0, 1)
-                Set(LVar1, ANIM_KentCKoopa_Anim17)
-                Set(LVar2, ANIM_KentCKoopa_Anim18)
+                Set(LVar1, ANIM_KentCKoopa_BurnHurtTopple)
+                Set(LVar2, ANIM_KentCKoopa_BurnStillTopple)
                 ExecWait(EVS_Enemy_BurnHit)
             EndIf
         CaseEq(EVENT_BURN_DEATH)
             Call(GetActorVar, ACTOR_SELF, AVAR_IsFlipped, LVar0)
             IfEq(LVar0, 0)
                 Set(LVar0, 1)
-                Set(LVar1, ANIM_KentCKoopa_Anim15)
-                Set(LVar2, ANIM_KentCKoopa_Anim16)
+                Set(LVar1, ANIM_KentCKoopa_BurnHurt)
+                Set(LVar2, ANIM_KentCKoopa_BurnStill)
             Else
                 Set(LVar0, 1)
-                Set(LVar1, ANIM_KentCKoopa_Anim17)
-                Set(LVar2, ANIM_KentCKoopa_Anim18)
+                Set(LVar1, ANIM_KentCKoopa_BurnHurtTopple)
+                Set(LVar2, ANIM_KentCKoopa_BurnStillTopple)
             EndIf
             ExecWait(EVS_Enemy_BurnHit)
             Wait(10)
@@ -396,11 +396,11 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_IsFlipped, LVar0)
             IfEq(LVar0, 0)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_KentCKoopa_Anim09)
+                SetConst(LVar1, ANIM_KentCKoopa_Shell)
                 ExecWait(EVS_Enemy_NoDamageHit)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_KentCKoopa_Anim1A)
+                SetConst(LVar1, ANIM_KentCKoopa_IdleTopple)
                 ExecWait(EVS_Enemy_NoDamageHit)
             EndIf
         CaseEq(EVENT_IMMUNE)
@@ -408,25 +408,25 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_IsFlipped, LVar0)
             IfEq(LVar0, 0)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_KentCKoopa_Anim09)
+                SetConst(LVar1, ANIM_KentCKoopa_Shell)
                 ExecWait(EVS_Enemy_NoDamageHit)
                 Call(GetStatusFlags, ACTOR_SELF, LVar2)
                 IfEq(LVar2, 0)
                     Wait(20)
-                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0C)
+                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_ShellExit)
                     Wait(8)
                 EndIf
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_KentCKoopa_Anim1A)
+                SetConst(LVar1, ANIM_KentCKoopa_IdleTopple)
                 ExecWait(EVS_Enemy_NoDamageHit)
             EndIf
         CaseEq(EVENT_AIR_LIFT_FAILED)
             Call(GetActorVar, ACTOR_SELF, AVAR_IsFlipped, LVar0)
             IfEq(LVar0, 0)
-                Set(LVar1, ANIM_KentCKoopa_Anim01)
+                Set(LVar1, ANIM_KentCKoopa_Idle)
             Else
-                Set(LVar1, ANIM_KentCKoopa_Anim1A)
+                Set(LVar1, ANIM_KentCKoopa_IdleTopple)
             EndIf
             Set(LVar0, 1)
             ExecWait(EVS_Enemy_NoDamageHit)
@@ -436,19 +436,19 @@ EvtScript N(EVS_HandleEvent) = {
         CaseEq(EVENT_RECOVER_STATUS)
             Call(GetActorVar, ACTOR_SELF, AVAR_IsFlipped, LVar0)
             IfEq(LVar0, 0)
-                SetConst(LVar1, ANIM_KentCKoopa_Anim01)
+                SetConst(LVar1, ANIM_KentCKoopa_Idle)
                 SetConst(LVar0, PRT_MAIN)
                 ExecWait(EVS_Enemy_Recover)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_KentCKoopa_Anim1A)
+                SetConst(LVar1, ANIM_KentCKoopa_IdleTopple)
                 ExecWait(EVS_Enemy_NoDamageHit)
             EndIf
         CaseEq(EVENT_FLIP_TRIGGER)
             Call(GetActorVar, ACTOR_SELF, AVAR_IsFlipped, LVar0)
             IfEq(LVar0, 1)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_KentCKoopa_Anim12)
+                SetConst(LVar1, ANIM_KentCKoopa_Struggle)
                 ExecWait(EVS_Enemy_Hit)
                 Return
             EndIf
@@ -478,22 +478,22 @@ EvtScript N(EVS_HandleEvent) = {
                     Call(GetLastDamage, ACTOR_SELF, LVar0)
                     IfGt(LVar0, 0)
                         SetConst(LVar0, PRT_MAIN)
-                        SetConst(LVar1, ANIM_KentCKoopa_Anim1C)
+                        SetConst(LVar1, ANIM_KentCKoopa_Hurt)
                         ExecWait(EVS_Enemy_Hit)
                     Else
                         SetConst(LVar0, PRT_MAIN)
-                        SetConst(LVar1, ANIM_KentCKoopa_Anim09)
+                        SetConst(LVar1, ANIM_KentCKoopa_Shell)
                         ExecWait(EVS_Enemy_NoDamageHit)
                         Call(GetStatusFlags, ACTOR_SELF, LVar2)
                         IfEq(LVar2, 0)
                             Wait(20)
-                            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0C)
+                            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_ShellExit)
                             Wait(8)
                         EndIf
                     EndIf
                 Else
                     SetConst(LVar0, PRT_MAIN)
-                    SetConst(LVar1, ANIM_KentCKoopa_Anim1C)
+                    SetConst(LVar1, ANIM_KentCKoopa_Hurt)
                     ExecWait(EVS_Enemy_Hit)
                 EndIf
             EndIf
@@ -552,7 +552,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             Call(MoveBattleCamOver, 15)
             Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(1.0))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim19)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_StillTopple)
             Thread
                 Wait(3)
                 Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -580,7 +580,7 @@ EvtScript N(EVS_TakeTurn) = {
             Wait(3)
             Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0C)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_ShellExit)
             Wait(10)
             Call(SetDefenseTable, ACTOR_SELF, PRT_MAIN, Ref(N(NormalDefense)))
             Call(SetEnemyTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 60)
@@ -591,7 +591,7 @@ EvtScript N(EVS_TakeTurn) = {
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(DefaultAnims)))
             Call(N(SetAbsoluteStatusOffsets), -26, 38, 2, 63)
             Call(SetActorVar, ACTOR_SELF, AVAR_IsFlipped, false)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_KentCKoopa_Anim1C)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_KentCKoopa_Hurt)
         EndIf
     EndIf
     Call(RandInt, 100, LVar0)
@@ -619,7 +619,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 25)
     Wait(20)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0B)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_ShellEnter)
     Wait(10)
     Thread
         Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -632,7 +632,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
     EndThread
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_KENT_C_SHELL_TOSS_LOOP)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0A)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_ShellSpin)
     Wait(10)
     Call(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 3, BS_FLAGS1_INCLUDE_POWER_UPS)
     Switch(LVarA)
@@ -656,10 +656,10 @@ EvtScript N(EVS_Attack_ShellToss) = {
                     Call(RunToGoal, ACTOR_SELF, 0, false)
                     Call(ResetAllActorSounds, ACTOR_SELF)
                     Call(StopSound, SOUND_KENT_C_SHELL_TOSS_LOOP)
-                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0C)
+                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_ShellExit)
                     Wait(8)
                     Call(YieldTurn)
-                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim01)
+                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Idle)
                     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
                     Call(UseIdleAnimation, ACTOR_SELF, true)
                     Return
@@ -757,10 +757,10 @@ EvtScript N(EVS_Attack_ShellToss) = {
             Call(RunToGoal, ACTOR_SELF, 0, false)
             Call(ResetAllActorSounds, ACTOR_SELF)
             Call(StopSound, SOUND_KENT_C_SHELL_TOSS_LOOP)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0C)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_ShellExit)
             Wait(8)
             Call(YieldTurn)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Idle)
             Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
@@ -807,15 +807,15 @@ EvtScript N(EVS_Attack_ShellToss) = {
     EndThread
     Call(ResetAllActorSounds, ACTOR_SELF)
     Call(StopSound, SOUND_KENT_C_SHELL_TOSS_LOOP)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0C)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_ShellExit)
     Wait(8)
     Call(YieldTurn)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Call(MoveBattleCamOver, 20)
     SetConst(LVar0, PRT_MAIN)
-    SetConst(LVar1, ANIM_KentCKoopa_Anim04)
+    SetConst(LVar1, ANIM_KentCKoopa_Run)
     ExecWait(EVS_Enemy_ReturnHome)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Idle)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     Call(UseIdleAnimation, ACTOR_SELF, true)
     Return
@@ -836,10 +836,10 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
     Add(LVar0, 50)
     Set(LVar1, 0)
     Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim03)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Walk)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(RunToGoal, ACTOR_SELF, 0, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Idle)
     Wait(8)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LARGE_ACTOR_JUMP)
     Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
@@ -847,12 +847,12 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
         CaseOrEq(HIT_RESULT_MISS)
         CaseOrEq(HIT_RESULT_LUCKY)
             Set(LVarA, LVar0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim06)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Jump)
             Thread
                 Wait(7)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim07)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Fall)
                 Wait(4)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim08)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Land)
             EndThread
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
             Call(SetGoalToTarget, ACTOR_SELF)
@@ -881,7 +881,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
                     Call(ShakeCam, CAM_BATTLE, 0, 1, Float(0.5))
                 EndIf
             EndThread
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Idle)
             Sub(LVar0, 10)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
@@ -907,11 +907,11 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
             EndLoop
             Call(SetGoalToHome, ACTOR_SELF)
             Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Run)
             Call(SetPartYaw, ACTOR_SELF, PRT_MAIN, 180)
             Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             Call(RunToGoal, ACTOR_SELF, 0, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Idle)
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             Set(LVar3, 180)
             Loop(15)
@@ -925,12 +925,12 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
             Return
         EndCaseGroup
     EndSwitch
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Jump)
     Thread
         Wait(5)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim07)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Fall)
         Wait(2)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim08)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Land)
     EndThread
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.3))
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -969,7 +969,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
             EndThread
             Thread
                 Wait(5)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim06)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Jump)
             EndThread
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Add(LVar0, 40)
@@ -985,7 +985,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
                     Call(ShakeCam, CAM_BATTLE, 0, 1, Float(0.5))
                 EndIf
             EndThread
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Idle)
             Add(LVar0, 20)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 8, false, true, false)
@@ -1015,7 +1015,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
 
 EvtScript N(EVS_KentC_GoHome) = {
     SetConst(LVar0, PRT_MAIN)
-    SetConst(LVar1, ANIM_KentCKoopa_Anim04)
+    SetConst(LVar1, ANIM_KentCKoopa_Run)
     ExecWait(EVS_Enemy_ReturnHome)
     Return
     End
@@ -1026,9 +1026,9 @@ EvtScript N(EVS_FlipOver) = {
     Call(SetDefenseTable, ACTOR_SELF, PRT_MAIN, Ref(N(FlippedDefense)))
     Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(FlippedAnims)))
     Call(N(SetAbsoluteStatusOffsets), -24, 47, 23, 37)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim1C)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Hurt)
     Call(SetActorVar, ACTOR_SELF, AVAR_IsFlipped, true)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_KentCKoopa_Anim12)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_KentCKoopa_Struggle)
     Thread
         Wait(4)
         Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -1062,9 +1062,9 @@ EvtScript N(EVS_FlipOver) = {
     Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
     Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim1D)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_FlipHurt)
     Wait(1)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim1E)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_FlipWithdraw)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_WEAK_POINT, ACTOR_PART_FLAG_NO_TARGET, false)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_WEAK_POINT, ACTOR_PART_FLAG_PRIMARY_TARGET, true)
     Call(SetPartFlags, ACTOR_SELF, PRT_FLIPPED, ACTOR_PART_FLAG_NO_SHADOW)

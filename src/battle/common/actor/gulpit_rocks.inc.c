@@ -19,12 +19,12 @@ enum N(ActorVars) {
 };
 
 s32 N(BigRockAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim10,
+    STATUS_KEY_NORMAL,    ANIM_Gulpit_LargeRock,
     STATUS_END,
 };
 
 s32 N(SmallRockAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim12,
+    STATUS_KEY_NORMAL,    ANIM_Gulpit_SmallRock,
     STATUS_END,
 };
 
@@ -104,12 +104,12 @@ EvtScript N(EVS_Init) = {
     Switch(LVar0)
         CaseEq(0)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(BigRockAnims)))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim10)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_LargeRock)
             Call(GetActorVar, ACTOR_SELF, AVAR_RockType, 0)
             Call(SetActorSize, ACTOR_SELF, 24, 15)
         CaseEq(1)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(SmallRockAnims)))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim12)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_SmallRock)
             Call(GetActorVar, ACTOR_SELF, AVAR_RockType, 1)
             Call(SetActorSize, ACTOR_SELF, 10, 8)
     EndSwitch
@@ -142,8 +142,8 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT)
         CaseOrEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim10)
-            SetConst(LVar2, ANIM_Gulpit_Anim12)
+            SetConst(LVar1, ANIM_Gulpit_LargeRock)
+            SetConst(LVar2, ANIM_Gulpit_SmallRock)
             ExecWait(N(EVS_SelectRockAnim))
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
@@ -152,25 +152,25 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_BEGIN_AIR_LIFT)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim10)
-            SetConst(LVar2, ANIM_Gulpit_Anim12)
+            SetConst(LVar1, ANIM_Gulpit_LargeRock)
+            SetConst(LVar2, ANIM_Gulpit_SmallRock)
             ExecWait(N(EVS_SelectRockAnim))
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseOrEq(EVENT_BURN_DEATH)
         CaseOrEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Gulpit_Anim10)
-            SetConst(LVar2, ANIM_Gulpit_Anim12)
+            SetConst(LVar1, ANIM_Gulpit_LargeRock)
+            SetConst(LVar2, ANIM_Gulpit_SmallRock)
             ExecWait(N(EVS_SelectRockAnim))
             ExecWait(EVS_Enemy_Hit)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, true)
             Call(GetActorVar, ACTOR_SELF, AVAR_RockType, LVar0)
             Switch(LVar0)
                 CaseEq(0)
-                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim11)
+                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_LargeRockShatter)
                 CaseEq(1)
-                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim13)
+                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_SmallRockShatter)
             EndSwitch
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             PlayEffect(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0)

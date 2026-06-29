@@ -169,12 +169,12 @@ EvtScript N(EVS_NpcInit_Koopatrol_04) = {
 };
 
 AnimID N(ExtraAnims_HammerBros)[] = {
-    ANIM_HammerBros_Anim00,
-    ANIM_HammerBros_Anim02,
-    ANIM_HammerBros_Anim04,
-    ANIM_HammerBros_Anim08,
-    ANIM_HammerBros_Anim0A,
-    ANIM_HammerBros_Anim13,
+    ANIM_HammerBros_Still,
+    ANIM_HammerBros_Idle,
+    ANIM_HammerBros_Walk,
+    ANIM_HammerBros_CarryFast,
+    ANIM_HammerBros_Talk,
+    ANIM_HammerBros_Lift,
     ANIM_LIST_END
 };
 

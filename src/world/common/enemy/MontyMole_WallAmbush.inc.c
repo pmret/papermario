@@ -16,7 +16,7 @@ EvtScript N(EVS_NpcAuxAI_MontyMole_WallAmbush_Hole) = {
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Sub(LVar2, 50)
     Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Anim13)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_WallHole)
     Return
     End
 };
@@ -58,7 +58,7 @@ EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
         Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, false)
         Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, true)
         Call(EnableNpcShadow, NPC_SELF, true)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Anim0E)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_PopOutStill)
         Call(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
         Sub(LVar2, 30)
         Add(LVar3, 80)

@@ -140,21 +140,21 @@ NpcSettings N(NpcSettings_MontyMole_Stone) = {
         } \
     }, \
     .animations = { \
-        .idle   = ANIM_MontyMole_Anim0F, \
-        .walk   = ANIM_MontyMole_Anim0F, \
-        .run    = ANIM_MontyMole_Anim0F, \
-        .chase  = ANIM_MontyMole_Anim0F, \
-        .anim_4 = ANIM_MontyMole_Anim0F, \
-        .anim_5 = ANIM_MontyMole_Anim0F, \
-        .death  = ANIM_MontyMole_Anim0F, \
-        .hit    = ANIM_MontyMole_Anim0F, \
-        .anim_8 = ANIM_MontyMole_Anim0F, \
-        .anim_9 = ANIM_MontyMole_Anim0F, \
-        .anim_A = ANIM_MontyMole_Anim0F, \
-        .anim_B = ANIM_MontyMole_Anim0F, \
-        .anim_C = ANIM_MontyMole_Anim0F, \
-        .anim_D = ANIM_MontyMole_Anim0F, \
-        .anim_E = ANIM_MontyMole_Anim0F, \
-        .anim_F = ANIM_MontyMole_Anim0F, \
+        .idle   = ANIM_MontyMole_Rock, \
+        .walk   = ANIM_MontyMole_Rock, \
+        .run    = ANIM_MontyMole_Rock, \
+        .chase  = ANIM_MontyMole_Rock, \
+        .anim_4 = ANIM_MontyMole_Rock, \
+        .anim_5 = ANIM_MontyMole_Rock, \
+        .death  = ANIM_MontyMole_Rock, \
+        .hit    = ANIM_MontyMole_Rock, \
+        .anim_8 = ANIM_MontyMole_Rock, \
+        .anim_9 = ANIM_MontyMole_Rock, \
+        .anim_A = ANIM_MontyMole_Rock, \
+        .anim_B = ANIM_MontyMole_Rock, \
+        .anim_C = ANIM_MontyMole_Rock, \
+        .anim_D = ANIM_MontyMole_Rock, \
+        .anim_E = ANIM_MontyMole_Rock, \
+        .anim_F = ANIM_MontyMole_Rock, \
     }, \
 }

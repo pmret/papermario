@@ -6,16 +6,16 @@
 #include "world/common/enemy/HammerBros.inc.c"
 
 AnimID N(ExtraAnims_HammerBros)[] = {
-    ANIM_HammerBros_Anim00,
-    ANIM_HammerBros_Anim02,
-    ANIM_HammerBros_Anim03,
-    ANIM_HammerBros_Anim04,
-    ANIM_HammerBros_Anim06,
-    ANIM_HammerBros_Anim07,
-    ANIM_HammerBros_Anim09,
-    ANIM_HammerBros_Anim0A,
-    ANIM_HammerBros_Anim0B,
-    ANIM_HammerBros_Anim1A,
+    ANIM_HammerBros_Still,
+    ANIM_HammerBros_Idle,
+    ANIM_HammerBros_IdleDisarmed,
+    ANIM_HammerBros_Walk,
+    ANIM_HammerBros_WalkDisarmed,
+    ANIM_HammerBros_Run,
+    ANIM_HammerBros_RunDisarmed,
+    ANIM_HammerBros_Talk,
+    ANIM_HammerBros_TalkDisarmed,
+    ANIM_HammerBros_GotItem,
     ANIM_LIST_END
 };
 
@@ -26,11 +26,11 @@ AnimID N(ExtraAnims_HammerBros)[] = {
 
 EvtScript N(EVS_NpcInteract_HammerBros_01) = {
     IfEq(GF_KKJ16_Gift_ShootingStar, false)
-        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 16, MSG_Peach_013A)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Talk, ANIM_HammerBros_Idle, 16, MSG_Peach_013A)
         Call(ShowGotItem, ITEM_SHOOTING_STAR, true, ITEM_PICKUP_FLAG_NO_ANIMS)
         Set(GF_KKJ16_Gift_ShootingStar, true)
     Else
-        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 16, MSG_Peach_013B)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Talk, ANIM_HammerBros_Idle, 16, MSG_Peach_013B)
     EndIf
     Return
     End
@@ -40,10 +40,10 @@ EvtScript N(EVS_NpcInteract_HammerBros_02) = {
     Call(DisablePlayerInput, true)
     Call(GetSelfVar, 0, LVar0)
     IfEq(LVar0, 0)
-        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0136)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Talk, ANIM_HammerBros_Idle, 0, MSG_Peach_0136)
         Call(SetSelfVar, 0, 1)
     Else
-        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0137)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Talk, ANIM_HammerBros_Idle, 0, MSG_Peach_0137)
         Call(SetSelfVar, 0, 0)
     EndIf
     Call(DisablePlayerInput, false)
@@ -55,10 +55,10 @@ EvtScript N(EVS_NpcInteract_HammerBros_03) = {
     Call(DisablePlayerInput, true)
     Call(GetSelfVar, 0, LVar0)
     IfEq(LVar0, 0)
-        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0138)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Talk, ANIM_HammerBros_Idle, 0, MSG_Peach_0138)
         Call(SetSelfVar, 0, 1)
     Else
-        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0139)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Talk, ANIM_HammerBros_Idle, 0, MSG_Peach_0139)
         Call(SetSelfVar, 0, 0)
     EndIf
     Call(DisablePlayerInput, false)
@@ -77,16 +77,16 @@ EvtScript N(EVS_CapturePeach) = {
     Wait(20)
     Call(PlayerFaceNpc, NPC_SELF, false)
     Call(SetPlayerAnimation, ANIM_Peach2_Gasp)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
-    Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0174)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Idle)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Talk, ANIM_HammerBros_Idle, 0, MSG_Peach_0174)
     Call(N(ApproachPlayer50Units), -1, LVar3, LVar0, LVar2)
     IfNe(LVar3, 0)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim07)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Run)
         Call(SetNpcSpeed, NPC_SELF, Float(5.0))
         Call(NpcMoveTo, NPC_SELF, LVar0, LVar2, 0)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Idle)
     EndIf
-    Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0175)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Talk, ANIM_HammerBros_Idle, 0, MSG_Peach_0175)
     Call(SetPlayerAnimation, ANIM_Peach2_ForwardSad)
     Wait(20)
     Call(GotoMapSpecial, Ref("kkj_14"), kkj_14_ENTRY_B, TRANSITION_PEACH_CAPTURED)
@@ -123,18 +123,18 @@ EvtScript N(EVS_NpcIdle_HammerBros_01) = {
 
 EvtScript N(EVS_NpcIdle_HammerBros_02) = {
     Exec(N(EVS_WatchForPlayer))
-    Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Walk)
     Call(SetNpcSpeed, NPC_SELF, Float(1.7))
     Loop(0)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Idle)
         Wait(20)
         Call(InterpNpcYaw, NPC_SELF, 90, 15)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Walk)
         Call(NpcMoveTo, NPC_SELF, 280, 50, 0)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Idle)
         Wait(20)
         Call(InterpNpcYaw, NPC_SELF, 270, 15)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Walk)
         Call(NpcMoveTo, NPC_SELF, 80, 50, 0)
     EndLoop
     Return
@@ -143,18 +143,18 @@ EvtScript N(EVS_NpcIdle_HammerBros_02) = {
 
 EvtScript N(EVS_NpcIdle_HammerBros_03) = {
     Exec(N(EVS_WatchForPlayer))
-    Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Walk)
     Call(SetNpcSpeed, NPC_SELF, Float(1.7))
     Loop(0)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Idle)
         Wait(30)
         Call(InterpNpcYaw, NPC_SELF, 270, 15)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Walk)
         Call(NpcMoveTo, NPC_SELF, -600, 50, 0)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim02)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Idle)
         Wait(30)
         Call(InterpNpcYaw, NPC_SELF, 90, 15)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Anim04)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HammerBros_Walk)
         Call(NpcMoveTo, NPC_SELF, -420, 50, 0)
     EndLoop
     Return

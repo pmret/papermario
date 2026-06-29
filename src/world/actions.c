@@ -69,16 +69,16 @@ AnimID ClubbaDisguiseExtraAnims[] = {
 };
 
 AnimID HammerBroDisguiseExtraAnims[] = {
-    ANIM_HammerBros_Anim00,
-    ANIM_HammerBros_Anim02,
-    ANIM_HammerBros_Anim03,
-    ANIM_HammerBros_Anim04,
-    ANIM_HammerBros_Anim06,
-    ANIM_HammerBros_Anim07,
-    ANIM_HammerBros_Anim09,
-    ANIM_HammerBros_Anim0A,
-    ANIM_HammerBros_Anim0B,
-    ANIM_HammerBros_Anim1A,
+    ANIM_HammerBros_Still,
+    ANIM_HammerBros_Idle,
+    ANIM_HammerBros_IdleDisarmed,
+    ANIM_HammerBros_Walk,
+    ANIM_HammerBros_WalkDisarmed,
+    ANIM_HammerBros_Run,
+    ANIM_HammerBros_RunDisarmed,
+    ANIM_HammerBros_Talk,
+    ANIM_HammerBros_TalkDisarmed,
+    ANIM_HammerBros_GotItem,
     ANIM_LIST_END
 };
 
@@ -116,12 +116,12 @@ DisguiseAnims BasicPeachDisguiseAnims[] = {
         ANIM_WorldKoopatrol_GotItem
     },
     [PEACH_DISGUISE_HAMMER_BROS] {
-        ANIM_HammerBros_Anim03,
-        ANIM_HammerBros_Anim06,
-        ANIM_HammerBros_Anim09,
-        ANIM_HammerBros_Anim0B,
-        ANIM_HammerBros_Anim00,
-        ANIM_HammerBros_Anim1A
+        ANIM_HammerBros_IdleDisarmed,
+        ANIM_HammerBros_WalkDisarmed,
+        ANIM_HammerBros_RunDisarmed,
+        ANIM_HammerBros_TalkDisarmed,
+        ANIM_HammerBros_Still,
+        ANIM_HammerBros_GotItem
     },
     [PEACH_DISGUISE_CLUBBA] {
         ANIM_WorldClubba_Idle,

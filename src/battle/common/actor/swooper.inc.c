@@ -92,28 +92,28 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(CeilingAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Swooper_Anim0C,
-    STATUS_KEY_STONE,     ANIM_Swooper_Anim0B,
-    STATUS_KEY_SLEEP,     ANIM_Swooper_Anim0F,
-    STATUS_KEY_POISON,    ANIM_Swooper_Anim0C,
-    STATUS_KEY_STOP,      ANIM_Swooper_Anim0B,
-    STATUS_KEY_STATIC,    ANIM_Swooper_Anim0C,
-    STATUS_KEY_PARALYZE,  ANIM_Swooper_Anim0B,
-    STATUS_KEY_DIZZY,     ANIM_Swooper_Anim10,
-    STATUS_KEY_UNUSED,    ANIM_Swooper_Anim10,
+    STATUS_KEY_NORMAL,    ANIM_Swooper_IdleHang,
+    STATUS_KEY_STONE,     ANIM_Swooper_StillHang,
+    STATUS_KEY_SLEEP,     ANIM_Swooper_SleepHang,
+    STATUS_KEY_POISON,    ANIM_Swooper_IdleHang,
+    STATUS_KEY_STOP,      ANIM_Swooper_StillHang,
+    STATUS_KEY_STATIC,    ANIM_Swooper_IdleHang,
+    STATUS_KEY_PARALYZE,  ANIM_Swooper_StillHang,
+    STATUS_KEY_DIZZY,     ANIM_Swooper_DizzyHang,
+    STATUS_KEY_UNUSED,    ANIM_Swooper_DizzyHang,
     STATUS_END,
 };
 
 s32 N(FlyingAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Swooper_Anim02,
-    STATUS_KEY_STONE,     ANIM_Swooper_Anim01,
-    STATUS_KEY_SLEEP,     ANIM_Swooper_Anim13,
-    STATUS_KEY_POISON,    ANIM_Swooper_Anim02,
-    STATUS_KEY_STOP,      ANIM_Swooper_Anim01,
-    STATUS_KEY_STATIC,    ANIM_Swooper_Anim02,
-    STATUS_KEY_PARALYZE,  ANIM_Swooper_Anim01,
-    STATUS_KEY_DIZZY,     ANIM_Swooper_Anim14,
-    STATUS_KEY_UNUSED,    ANIM_Swooper_Anim14,
+    STATUS_KEY_NORMAL,    ANIM_Swooper_Idle,
+    STATUS_KEY_STONE,     ANIM_Swooper_Still,
+    STATUS_KEY_SLEEP,     ANIM_Swooper_Sleep,
+    STATUS_KEY_POISON,    ANIM_Swooper_Idle,
+    STATUS_KEY_STOP,      ANIM_Swooper_Still,
+    STATUS_KEY_STATIC,    ANIM_Swooper_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_Swooper_Still,
+    STATUS_KEY_DIZZY,     ANIM_Swooper_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_Swooper_Dizzy,
     STATUS_END,
 };
 
@@ -135,20 +135,20 @@ EvtScript N(EVS_ReturnHome) = {
     Call(GetActorVar, ACTOR_SELF, AVAR_IsFlying, LVar0)
     Switch(LVar0)
         CaseEq(0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Idle)
             Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
             Call(SetGoalToHome, ACTOR_SELF)
             Call(AddGoalPos, ACTOR_SELF, 0, -24, 0)
             Call(FlyToGoal, ACTOR_SELF, 0, 1, EASING_SIN_OUT)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, true)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(CeilingAnims)))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim0C)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_IdleHang)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Add(LVar1, 24)
             Call(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(HPBarToHome, ACTOR_SELF)
         CaseEq(1)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Idle)
             Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
             Call(SetGoalToHome, ACTOR_SELF)
             Call(FlyToGoal, ACTOR_SELF, 0, 1, EASING_SIN_OUT)
@@ -165,77 +165,77 @@ EvtScript N(EVS_Flying_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim15)
+            SetConst(LVar1, ANIM_Swooper_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim17)
-            SetConst(LVar2, ANIM_Swooper_Anim18)
+            SetConst(LVar1, ANIM_Swooper_BurnHurt)
+            SetConst(LVar2, ANIM_Swooper_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim17)
-            SetConst(LVar2, ANIM_Swooper_Anim18)
+            SetConst(LVar1, ANIM_Swooper_BurnHurt)
+            SetConst(LVar2, ANIM_Swooper_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim18)
+            SetConst(LVar1, ANIM_Swooper_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             Call(InterruptLeechActionCommand)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim15)
+            SetConst(LVar1, ANIM_Swooper_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
             Call(InterruptLeechActionCommand)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim15)
+            SetConst(LVar1, ANIM_Swooper_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             Thread
                 Wait(30)
                 Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EndThread
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim15)
+            SetConst(LVar1, ANIM_Swooper_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim02)
+            SetConst(LVar1, ANIM_Swooper_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim15)
+            SetConst(LVar1, ANIM_Swooper_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim15)
+            SetConst(LVar1, ANIM_Swooper_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim02)
+            SetConst(LVar1, ANIM_Swooper_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, false)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim02)
-            SetConst(LVar2, ANIM_Swooper_Anim15)
+            SetConst(LVar1, ANIM_Swooper_Idle)
+            SetConst(LVar2, ANIM_Swooper_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim02)
+            SetConst(LVar1, ANIM_Swooper_Idle)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim15)
+            SetConst(LVar1, ANIM_Swooper_Hurt)
             ExecWait(EVS_Enemy_BlowAway)
             Return
     EndSwitch
@@ -254,7 +254,7 @@ EvtScript N(EVS_FallFromCeiling) = {
         Return
     EndIf
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Idle)
     Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Sub(LVar1, 24)
@@ -305,22 +305,22 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetBattlePhase, LVar0)
             IfEq(LVar0, PHASE_FIRST_STRIKE)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim15)
+                SetConst(LVar1, ANIM_Swooper_Hurt)
                 ExecWait(EVS_Enemy_Hit)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim0E)
+                SetConst(LVar1, ANIM_Swooper_HurtHang)
                 ExecWait(EVS_Enemy_Hit)
             EndIf
         CaseEq(EVENT_HIT)
             Call(GetBattlePhase, LVar0)
             IfEq(LVar0, PHASE_FIRST_STRIKE)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim15)
+                SetConst(LVar1, ANIM_Swooper_Hurt)
                 ExecWait(EVS_Enemy_Hit)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim0E)
+                SetConst(LVar1, ANIM_Swooper_HurtHang)
                 ExecWait(EVS_Enemy_Hit)
                 ExecWait(N(EVS_FallFromCeiling))
             EndIf
@@ -328,13 +328,13 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetBattlePhase, LVar0)
             IfEq(LVar0, PHASE_FIRST_STRIKE)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim17)
-                SetConst(LVar2, ANIM_Swooper_Anim18)
+                SetConst(LVar1, ANIM_Swooper_BurnHurt)
+                SetConst(LVar2, ANIM_Swooper_BurnStill)
                 ExecWait(EVS_Enemy_BurnHit)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim11)
-                SetConst(LVar2, ANIM_Swooper_Anim12)
+                SetConst(LVar1, ANIM_Swooper_BurnHurtHang)
+                SetConst(LVar2, ANIM_Swooper_BurnStillHang)
                 ExecWait(EVS_Enemy_BurnHit)
                 ExecWait(N(EVS_FallFromCeiling))
             EndIf
@@ -342,72 +342,72 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetBattlePhase, LVar0)
             IfEq(LVar0, PHASE_FIRST_STRIKE)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim17)
-                SetConst(LVar2, ANIM_Swooper_Anim18)
+                SetConst(LVar1, ANIM_Swooper_BurnHurt)
+                SetConst(LVar2, ANIM_Swooper_BurnStill)
                 ExecWait(EVS_Enemy_BurnHit)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim18)
+                SetConst(LVar1, ANIM_Swooper_BurnStill)
                 ExecWait(EVS_Enemy_Death)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim11)
-                SetConst(LVar2, ANIM_Swooper_Anim12)
+                SetConst(LVar1, ANIM_Swooper_BurnHurtHang)
+                SetConst(LVar2, ANIM_Swooper_BurnStillHang)
                 ExecWait(EVS_Enemy_BurnHit)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim12)
+                SetConst(LVar1, ANIM_Swooper_BurnStillHang)
                 ExecWait(EVS_Enemy_Death)
             EndIf
             Return
         CaseEq(EVENT_SHOCK_HIT)
             Call(InterruptLeechActionCommand)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim15)
+            SetConst(LVar1, ANIM_Swooper_Hurt)
             ExecWait(EVS_Enemy_ShockHit_Impl)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
             Call(InterruptLeechActionCommand)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim15)
+            SetConst(LVar1, ANIM_Swooper_Hurt)
             ExecWait(EVS_Enemy_ShockHit_Impl)
             Thread
                 Wait(30)
                 Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EndThread
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim15)
+            SetConst(LVar1, ANIM_Swooper_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim0C)
+            SetConst(LVar1, ANIM_Swooper_IdleHang)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             Call(GetBattlePhase, LVar0)
             IfEq(LVar0, PHASE_FIRST_STRIKE)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim15)
+                SetConst(LVar1, ANIM_Swooper_Hurt)
                 ExecWait(EVS_Enemy_Hit)
                 Wait(10)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim15)
+                SetConst(LVar1, ANIM_Swooper_Hurt)
                 ExecWait(EVS_Enemy_Death)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim0E)
+                SetConst(LVar1, ANIM_Swooper_HurtHang)
                 ExecWait(EVS_Enemy_Hit)
                 Wait(10)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Swooper_Anim0E)
+                SetConst(LVar1, ANIM_Swooper_HurtHang)
                 ExecWait(EVS_Enemy_Death)
             EndIf
             Return
         CaseEq(EVENT_BEGIN_FIRST_STRIKE)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, false)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(FlyingAnims)))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Idle)
             Call(SetActorPos, ACTOR_SELF, 20, 0, 0)
             Call(HPBarToCurrent, ACTOR_SELF)
         CaseEq(EVENT_END_FIRST_STRIKE)
@@ -419,8 +419,8 @@ EvtScript N(EVS_HandleEvent) = {
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, false)
             Call(SetActorDispOffset, ACTOR_SELF, 0, -24, 0)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Swooper_Anim02)
-            SetConst(LVar2, ANIM_Swooper_Anim15)
+            SetConst(LVar1, ANIM_Swooper_Idle)
+            SetConst(LVar2, ANIM_Swooper_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
     EndSwitch
@@ -436,7 +436,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
     Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     Call(GetBattlePhase, LVar0)
     IfEq(LVar0, PHASE_FIRST_STRIKE)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim02)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Idle)
         Call(SetGoalToTarget, ACTOR_SELF)
         Call(AddGoalPos, ACTOR_SELF, 50, 10, 0)
         Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
@@ -446,7 +446,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
         Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         Call(BattleCamTargetActor, ACTOR_SELF)
         Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim02)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Idle)
         Call(SetGoalToTarget, ACTOR_SELF)
         Call(AddGoalPos, ACTOR_SELF, 50, 10, 0)
         Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
@@ -460,7 +460,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
             Wait(10)
             Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim06)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Fly)
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(JumpToGoal, ACTOR_SELF, 10, false, false, false)
@@ -469,7 +469,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
             Sub(LVar0, 50)
             Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim06)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Fly)
             Call(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
             Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(10.0))
             Wait(15)
@@ -499,13 +499,13 @@ EvtScript N(EVS_Flying_TakeTurn) = {
     Wait(10)
     Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Fly)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(JumpToGoal, ACTOR_SELF, 10, false, false, false)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Fly)
     Call(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_SWOOP, BS_FLAGS1_TRIGGER_EVENTS)
@@ -513,7 +513,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, 50, 10, 0)
     Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Idle)
     Call(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
     Wait(10)
     Call(YieldTurn)
@@ -536,7 +536,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Idle)
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, false)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Sub(LVar1, 24)
@@ -549,12 +549,12 @@ EvtScript N(EVS_TakeTurn) = {
             Wait(10)
             Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim06)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Fly)
             Call(SetGoalToTarget, ACTOR_SELF)
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(AddGoalPos, ACTOR_SELF, -50, 0, 0)
             Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim06)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Fly)
             Call(FlyToGoal, ACTOR_SELF, 0, -40, EASING_LINEAR)
             Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(10.0))
             Wait(15)
@@ -584,10 +584,10 @@ EvtScript N(EVS_TakeTurn) = {
     Wait(10)
     Call(SetActorSpeed, ACTOR_SELF, Float(5.0))
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Fly)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Fly)
     Call(FlyToGoal, ACTOR_SELF, 0, -40, EASING_LINEAR)
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_SWOOP, BS_FLAGS1_TRIGGER_EVENTS)
@@ -595,7 +595,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(AddGoalPos, ACTOR_SELF, 50, 10, 0)
     Call(SetActorSpeed, ACTOR_SELF, Float(8.0))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Idle)
     Call(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
     Wait(10)
     Call(YieldTurn)

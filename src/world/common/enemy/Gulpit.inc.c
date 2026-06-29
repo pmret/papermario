@@ -59,16 +59,16 @@ NpcSettings N(NpcSettings_Gulpit_Hitbox) = {
 };
 
 AnimID N(ExtraAnims_Gulpit_Hitbox)[] = {
-    ANIM_Gulpit_Anim00,
+    ANIM_Gulpit_Still,
     ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_Gulpit)[] = {
-    ANIM_Gulpit_Anim00,
-    ANIM_Gulpit_Anim01,
-    ANIM_Gulpit_Anim0B,
-    ANIM_Gulpit_Anim04,
-    ANIM_Gulpit_Anim02,
-    ANIM_Gulpit_Anim03,
+    ANIM_Gulpit_Still,
+    ANIM_Gulpit_Idle,
+    ANIM_Gulpit_Hurt,
+    ANIM_Gulpit_Lick,
+    ANIM_Gulpit_Walk,
+    ANIM_Gulpit_Run,
     ANIM_LIST_END
 };

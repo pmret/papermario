@@ -61,22 +61,22 @@
 
 #define SPIKE_TOP_ANIMS \
 { \
-    .idle   = ANIM_SpikeTop_Anim03, \
-    .walk   = ANIM_SpikeTop_Anim06, \
-    .run    = ANIM_SpikeTop_Anim08, \
-    .chase  = ANIM_SpikeTop_Anim08, \
-    .anim_4 = ANIM_SpikeTop_Anim03, \
-    .anim_5 = ANIM_SpikeTop_Anim03, \
-    .death  = ANIM_SpikeTop_Anim13, \
-    .hit    = ANIM_SpikeTop_Anim13, \
-    .anim_8 = ANIM_SpikeTop_Anim0B, \
-    .anim_9 = ANIM_SpikeTop_Anim0A, \
-    .anim_A = ANIM_SpikeTop_Anim0C, \
-    .anim_B = ANIM_SpikeTop_Anim03, \
-    .anim_C = ANIM_SpikeTop_Anim03, \
-    .anim_D = ANIM_SpikeTop_Anim03, \
-    .anim_E = ANIM_SpikeTop_Anim03, \
-    .anim_F = ANIM_SpikeTop_Anim03, \
+    .idle   = ANIM_SpikeTop_Idle, \
+    .walk   = ANIM_SpikeTop_Walk, \
+    .run    = ANIM_SpikeTop_Run, \
+    .chase  = ANIM_SpikeTop_Run, \
+    .anim_4 = ANIM_SpikeTop_Idle, \
+    .anim_5 = ANIM_SpikeTop_Idle, \
+    .death  = ANIM_SpikeTop_Hurt, \
+    .hit    = ANIM_SpikeTop_Hurt, \
+    .anim_8 = ANIM_SpikeTop_ShellEnter, \
+    .anim_9 = ANIM_SpikeTop_ShellSpin, \
+    .anim_A = ANIM_SpikeTop_ShellExit, \
+    .anim_B = ANIM_SpikeTop_Idle, \
+    .anim_C = ANIM_SpikeTop_Idle, \
+    .anim_D = ANIM_SpikeTop_Idle, \
+    .anim_E = ANIM_SpikeTop_Idle, \
+    .anim_F = ANIM_SpikeTop_Idle, \
 }
 
 #define BONY_BEETLE_DROPS_ALT \

@@ -27,33 +27,33 @@ enum N(ActorParams) {
 };
 
 s32 N(UprightAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Spiny_Anim01,
-    STATUS_KEY_STONE,     ANIM_Spiny_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_Spiny_Anim10,
-    STATUS_KEY_POISON,    ANIM_Spiny_Anim01,
-    STATUS_KEY_STOP,      ANIM_Spiny_Anim00,
-    STATUS_KEY_STATIC,    ANIM_Spiny_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_Spiny_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_Spiny_Anim12,
-    STATUS_KEY_UNUSED,    ANIM_Spiny_Anim12,
+    STATUS_KEY_NORMAL,    ANIM_Spiny_Idle,
+    STATUS_KEY_STONE,     ANIM_Spiny_Still,
+    STATUS_KEY_SLEEP,     ANIM_Spiny_Sleep,
+    STATUS_KEY_POISON,    ANIM_Spiny_Idle,
+    STATUS_KEY_STOP,      ANIM_Spiny_Still,
+    STATUS_KEY_STATIC,    ANIM_Spiny_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_Spiny_Still,
+    STATUS_KEY_DIZZY,     ANIM_Spiny_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_Spiny_Dizzy,
     STATUS_END,
 };
 
 s32 N(ToppledAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Spiny_Anim02,
-    STATUS_KEY_STONE,     ANIM_Spiny_Anim15,
-    STATUS_KEY_SLEEP,     ANIM_Spiny_Anim11,
-    STATUS_KEY_POISON,    ANIM_Spiny_Anim02,
-    STATUS_KEY_STOP,      ANIM_Spiny_Anim15,
-    STATUS_KEY_STATIC,    ANIM_Spiny_Anim02,
-    STATUS_KEY_PARALYZE,  ANIM_Spiny_Anim15,
-    STATUS_KEY_DIZZY,     ANIM_Spiny_Anim13,
-    STATUS_KEY_UNUSED,    ANIM_Spiny_Anim13,
+    STATUS_KEY_NORMAL,    ANIM_Spiny_IdleTopple,
+    STATUS_KEY_STONE,     ANIM_Spiny_StillTopple,
+    STATUS_KEY_SLEEP,     ANIM_Spiny_SleepTopple,
+    STATUS_KEY_POISON,    ANIM_Spiny_IdleTopple,
+    STATUS_KEY_STOP,      ANIM_Spiny_StillTopple,
+    STATUS_KEY_STATIC,    ANIM_Spiny_IdleTopple,
+    STATUS_KEY_PARALYZE,  ANIM_Spiny_StillTopple,
+    STATUS_KEY_DIZZY,     ANIM_Spiny_DizzyTopple,
+    STATUS_KEY_UNUSED,    ANIM_Spiny_DizzyTopple,
     STATUS_END,
 };
 
 s32 N(SpinyBallAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Lakitu_Anim0B,
+    STATUS_KEY_NORMAL,    ANIM_Lakitu_SpinyLargeStill,
     STATUS_END,
 };
 
@@ -158,7 +158,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(EVS_ReturnHome) = {
-    Call(SetAnimation, ACTOR_SELF, PRT_BALL, ANIM_Lakitu_Anim0C)
+    Call(SetAnimation, ACTOR_SELF, PRT_BALL, ANIM_Lakitu_SpinyLargeSpin)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_BALL, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(SetActorYaw, ACTOR_SELF, 180)
@@ -167,9 +167,9 @@ EvtScript N(EVS_ReturnHome) = {
     Call(SetActorYaw, ACTOR_SELF, 0)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_BALL, ACTOR_PART_FLAG_INVISIBLE, true)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Anim1A)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Uncurl)
     Wait(8)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Idle)
     Return
     End
 };
@@ -193,8 +193,8 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Spiny_Anim09)
-            SetConst(LVar2, ANIM_Spiny_Anim0A)
+            SetConst(LVar1, ANIM_Spiny_Hurt)
+            SetConst(LVar2, ANIM_Spiny_HurtTopple)
             ExecWait(N(EVS_CheckToppleAnim))
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
@@ -202,59 +202,59 @@ EvtScript N(EVS_HandleEvent) = {
             Call(GetActorVar, ACTOR_SELF, AVAR_Toppled, LVar0)
             IfNe(LVar0, 1)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Spiny_Anim0B)
-                SetConst(LVar2, ANIM_Spiny_Anim0C)
+                SetConst(LVar1, ANIM_Spiny_BurnHurt)
+                SetConst(LVar2, ANIM_Spiny_BurnStill)
                 ExecWait(EVS_Enemy_BurnHit)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Spiny_Anim0D)
-                SetConst(LVar2, ANIM_Spiny_Anim0E)
+                SetConst(LVar1, ANIM_Spiny_BurnHurtTopple)
+                SetConst(LVar2, ANIM_Spiny_BurnStillTopple)
                 ExecWait(EVS_Enemy_BurnHit)
             EndIf
         CaseEq(EVENT_BURN_DEATH)
             Call(GetActorVar, ACTOR_SELF, AVAR_Toppled, LVar0)
             IfNe(LVar0, 1)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Spiny_Anim0B)
-                SetConst(LVar2, ANIM_Spiny_Anim0C)
+                SetConst(LVar1, ANIM_Spiny_BurnHurt)
+                SetConst(LVar2, ANIM_Spiny_BurnStill)
                 ExecWait(EVS_Enemy_BurnHit)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Spiny_Anim0C)
+                SetConst(LVar1, ANIM_Spiny_BurnStill)
                 ExecWait(EVS_Enemy_Death)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Spiny_Anim0D)
-                SetConst(LVar2, ANIM_Spiny_Anim0E)
+                SetConst(LVar1, ANIM_Spiny_BurnHurtTopple)
+                SetConst(LVar2, ANIM_Spiny_BurnStillTopple)
                 ExecWait(EVS_Enemy_BurnHit)
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_Spiny_Anim0E)
+                SetConst(LVar1, ANIM_Spiny_BurnStillTopple)
                 ExecWait(EVS_Enemy_Death)
             EndIf
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Spiny_Anim09)
-            SetConst(LVar2, ANIM_Spiny_Anim0A)
+            SetConst(LVar1, ANIM_Spiny_Hurt)
+            SetConst(LVar2, ANIM_Spiny_HurtTopple)
             ExecWait(N(EVS_CheckToppleAnim))
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Spiny_Anim09)
-            SetConst(LVar2, ANIM_Spiny_Anim0A)
+            SetConst(LVar1, ANIM_Spiny_Hurt)
+            SetConst(LVar2, ANIM_Spiny_HurtTopple)
             ExecWait(N(EVS_CheckToppleAnim))
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Spiny_Anim09)
-            SetConst(LVar2, ANIM_Spiny_Anim0A)
+            SetConst(LVar1, ANIM_Spiny_Hurt)
+            SetConst(LVar2, ANIM_Spiny_HurtTopple)
             ExecWait(N(EVS_CheckToppleAnim))
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_FLIP_TRIGGER)
             Call(GetActorVar, ACTOR_SELF, AVAR_Toppled, LVar0)
             IfEq(LVar0, 1)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Anim0A)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_HurtTopple)
             Else
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Anim16)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_FlipOver)
             EndIf
             Call(SetActorVar, ACTOR_SELF, AVAR_Toppled, 1)
             Call(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, 1)
@@ -276,13 +276,13 @@ EvtScript N(EVS_HandleEvent) = {
             Switch(LVar0)
                 CaseEq(0)
                     SetConst(LVar0, PRT_MAIN)
-                    SetConst(LVar1, ANIM_Spiny_Anim06)
+                    SetConst(LVar1, ANIM_Spiny_ShellEnter)
                     ExecWait(EVS_Enemy_NoDamageHit)
-                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Anim07)
+                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_ShellExit)
                     Wait(10)
                 CaseEq(1)
                     SetConst(LVar0, PRT_MAIN)
-                    SetConst(LVar1, ANIM_Spiny_Anim02)
+                    SetConst(LVar1, ANIM_Spiny_IdleTopple)
                     ExecWait(EVS_Enemy_NoDamageHit)
             EndSwitch
         EndCaseGroup
@@ -307,14 +307,14 @@ EvtScript N(EVS_HandleEvent) = {
             Wait(20)
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Spiny_Anim09)
-            SetConst(LVar2, ANIM_Spiny_Anim0A)
+            SetConst(LVar1, ANIM_Spiny_Hurt)
+            SetConst(LVar2, ANIM_Spiny_HurtTopple)
             ExecWait(N(EVS_CheckToppleAnim))
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Spiny_Anim09)
-            SetConst(LVar2, ANIM_Spiny_Anim0A)
+            SetConst(LVar1, ANIM_Spiny_Hurt)
+            SetConst(LVar2, ANIM_Spiny_HurtTopple)
             ExecWait(N(EVS_CheckToppleAnim))
             ExecWait(EVS_Enemy_Death)
             Return
@@ -323,11 +323,11 @@ EvtScript N(EVS_HandleEvent) = {
             Switch(LVar0)
                 CaseEq(0)
                     SetConst(LVar0, PRT_MAIN)
-                    SetConst(LVar1, ANIM_Spiny_Anim01)
+                    SetConst(LVar1, ANIM_Spiny_Idle)
                     ExecWait(EVS_Enemy_Recover)
                 CaseEq(1)
                     SetConst(LVar0, PRT_MAIN)
-                    SetConst(LVar1, ANIM_Spiny_Anim02)
+                    SetConst(LVar1, ANIM_Spiny_IdleTopple)
                     ExecWait(EVS_Enemy_NoDamageHit)
             EndSwitch
         CaseEq(EVENT_SCARE_AWAY)
@@ -335,13 +335,13 @@ EvtScript N(EVS_HandleEvent) = {
             Switch(LVar0)
                 CaseEq(0)
                     SetConst(LVar0, PRT_MAIN)
-                    SetConst(LVar1, ANIM_Spiny_Anim04)
-                    SetConst(LVar2, ANIM_Spiny_Anim09)
+                    SetConst(LVar1, ANIM_Spiny_Run)
+                    SetConst(LVar2, ANIM_Spiny_Hurt)
                     ExecWait(EVS_Enemy_ScareAway)
                     Return
                 CaseEq(1)
                     SetConst(LVar0, PRT_MAIN)
-                    SetConst(LVar1, ANIM_Spiny_Anim02)
+                    SetConst(LVar1, ANIM_Spiny_IdleTopple)
                     ExecWait(EVS_Enemy_NoDamageHit)
             EndSwitch
         CaseEq(EVENT_BEGIN_AIR_LIFT)
@@ -349,10 +349,10 @@ EvtScript N(EVS_HandleEvent) = {
             Switch(LVar0)
                 CaseEq(0)
                     SetConst(LVar0, PRT_MAIN)
-                    SetConst(LVar1, ANIM_Spiny_Anim04)
+                    SetConst(LVar1, ANIM_Spiny_Run)
                 CaseEq(1)
                     SetConst(LVar0, PRT_MAIN)
-                    SetConst(LVar1, ANIM_Spiny_Anim02)
+                    SetConst(LVar1, ANIM_Spiny_IdleTopple)
             EndSwitch
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
@@ -360,10 +360,10 @@ EvtScript N(EVS_HandleEvent) = {
             Switch(LVar0)
                 CaseEq(0)
                     SetConst(LVar0, PRT_MAIN)
-                    SetConst(LVar1, ANIM_Spiny_Anim04)
+                    SetConst(LVar1, ANIM_Spiny_Run)
                 CaseEq(1)
                     SetConst(LVar0, PRT_MAIN)
-                    SetConst(LVar1, ANIM_Spiny_Anim02)
+                    SetConst(LVar1, ANIM_Spiny_IdleTopple)
             EndSwitch
             ExecWait(EVS_Enemy_BlowAway)
             Return
@@ -384,18 +384,18 @@ EvtScript N(EVS_TakeTurn) = {
         Sub(LVar0, 1)
         Call(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, LVar0)
         IfGt(LVar0, 0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Anim14)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Struggle)
             Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             Wait(30)
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
         Else
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Anim14)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Struggle)
             Call(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             Wait(20)
             Call(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Spiny_Anim02)
-            SetConst(LVar2, ANIM_Spiny_Anim01)
+            SetConst(LVar1, ANIM_Spiny_IdleTopple)
+            SetConst(LVar2, ANIM_Spiny_Idle)
             ExecWait(EVS_Enemy_FlipBackUp)
             Call(SetActorVar, ACTOR_SELF, AVAR_Toppled, 0)
             Call(SetDefenseTable, ACTOR_SELF, PRT_MAIN, Ref(N(UprightDefense)))
@@ -414,9 +414,9 @@ EvtScript N(EVS_TakeTurn) = {
     Call(GetActorVar, ACTOR_SELF, AVAR_Toppled, LVar0)
     IfEq(LVar0, 0)
         Wait(10)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Anim19)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_CurlUp)
         Wait(8)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Anim18)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Spiny_Ball)
         Wait(10)
     Else
         Wait(20)
@@ -432,7 +432,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, true)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_BALL, ACTOR_PART_FLAG_INVISIBLE, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_BALL, ANIM_Lakitu_Anim0C)
+    Call(SetAnimation, ACTOR_SELF, PRT_BALL, ANIM_Lakitu_SpinyLargeSpin)
     Wait(10)
     Call(PlaySoundAtPart, ACTOR_SELF, PRT_BALL, SOUND_SPINY_SPIN_UP)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
@@ -483,7 +483,7 @@ EvtScript N(EVS_TakeTurn) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            Call(SetAnimation, ACTOR_SELF, PRT_BALL, ANIM_Lakitu_Anim0B)
+            Call(SetAnimation, ACTOR_SELF, PRT_BALL, ANIM_Lakitu_SpinyLargeStill)
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Add(LVar0, 20)
             Set(LVar1, 0)

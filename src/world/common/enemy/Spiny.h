@@ -12,20 +12,20 @@
 
 #define SPINY_ANIMS \
 { \
-    .idle   = ANIM_Spiny_Anim01, \
-    .walk   = ANIM_Spiny_Anim03, \
-    .run    = ANIM_Spiny_Anim04, \
-    .chase  = ANIM_Spiny_Anim04, \
-    .anim_4 = ANIM_Spiny_Anim01, \
-    .anim_5 = ANIM_Spiny_Anim01, \
-    .death  = ANIM_Spiny_Anim09, \
-    .hit    = ANIM_Spiny_Anim09, \
-    .anim_8 = ANIM_Spiny_Anim06, \
-    .anim_9 = ANIM_Spiny_Anim08, \
-    .anim_A = ANIM_Spiny_Anim07, \
-    .anim_B = ANIM_Spiny_Anim01, \
-    .anim_C = ANIM_Spiny_Anim01, \
-    .anim_D = ANIM_Spiny_Anim01, \
-    .anim_E = ANIM_Spiny_Anim01, \
-    .anim_F = ANIM_Spiny_Anim01, \
+    .idle   = ANIM_Spiny_Idle, \
+    .walk   = ANIM_Spiny_Walk, \
+    .run    = ANIM_Spiny_Run, \
+    .chase  = ANIM_Spiny_Run, \
+    .anim_4 = ANIM_Spiny_Idle, \
+    .anim_5 = ANIM_Spiny_Idle, \
+    .death  = ANIM_Spiny_Hurt, \
+    .hit    = ANIM_Spiny_Hurt, \
+    .anim_8 = ANIM_Spiny_ShellEnter, \
+    .anim_9 = ANIM_Spiny_ShellSpin, \
+    .anim_A = ANIM_Spiny_ShellExit, \
+    .anim_B = ANIM_Spiny_Idle, \
+    .anim_C = ANIM_Spiny_Idle, \
+    .anim_D = ANIM_Spiny_Idle, \
+    .anim_E = ANIM_Spiny_Idle, \
+    .anim_F = ANIM_Spiny_Idle, \
 }

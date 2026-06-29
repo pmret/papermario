@@ -38,13 +38,13 @@ AnimID N(ExtraAnims_Bowser)[] = {
 };
 
 AnimID N(ExtraAnims_HammerBros)[] = {
-    ANIM_HammerBros_Anim01,
-    ANIM_HammerBros_Anim03,
-    ANIM_HammerBros_Anim06,
-    ANIM_HammerBros_Anim08,
-    ANIM_HammerBros_Anim09,
-    ANIM_HammerBros_Anim0B,
-    ANIM_HammerBros_Anim13,
+    ANIM_HammerBros_StillDisarmed,
+    ANIM_HammerBros_IdleDisarmed,
+    ANIM_HammerBros_WalkDisarmed,
+    ANIM_HammerBros_CarryFast,
+    ANIM_HammerBros_RunDisarmed,
+    ANIM_HammerBros_TalkDisarmed,
+    ANIM_HammerBros_Lift,
     ANIM_LIST_END
 };
 

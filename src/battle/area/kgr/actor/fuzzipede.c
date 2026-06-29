@@ -38,28 +38,28 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Fuzzipede_Anim04,
-    STATUS_KEY_STONE,     ANIM_Fuzzipede_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_Fuzzipede_Anim29,
-    STATUS_KEY_POISON,    ANIM_Fuzzipede_Anim04,
-    STATUS_KEY_STOP,      ANIM_Fuzzipede_Anim00,
-    STATUS_KEY_STATIC,    ANIM_Fuzzipede_Anim04,
-    STATUS_KEY_PARALYZE,  ANIM_Fuzzipede_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_Fuzzipede_Anim26,
-    STATUS_KEY_UNUSED,    ANIM_Fuzzipede_Anim26,
+    STATUS_KEY_NORMAL,    ANIM_Fuzzipede_Idle,
+    STATUS_KEY_STONE,     ANIM_Fuzzipede_Still,
+    STATUS_KEY_SLEEP,     ANIM_Fuzzipede_Sleep,
+    STATUS_KEY_POISON,    ANIM_Fuzzipede_Idle,
+    STATUS_KEY_STOP,      ANIM_Fuzzipede_Still,
+    STATUS_KEY_STATIC,    ANIM_Fuzzipede_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_Fuzzipede_Still,
+    STATUS_KEY_DIZZY,     ANIM_Fuzzipede_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_Fuzzipede_Dizzy,
     STATUS_END,
 };
 
 s32 N(HangingAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Fuzzipede_Anim06,
-    STATUS_KEY_STONE,     ANIM_Fuzzipede_Anim02,
-    STATUS_KEY_SLEEP,     ANIM_Fuzzipede_Anim2A,
-    STATUS_KEY_POISON,    ANIM_Fuzzipede_Anim06,
-    STATUS_KEY_STOP,      ANIM_Fuzzipede_Anim02,
-    STATUS_KEY_STATIC,    ANIM_Fuzzipede_Anim06,
-    STATUS_KEY_PARALYZE,  ANIM_Fuzzipede_Anim02,
-    STATUS_KEY_DIZZY,     ANIM_Fuzzipede_Anim27,
-    STATUS_KEY_UNUSED,    ANIM_Fuzzipede_Anim27,
+    STATUS_KEY_NORMAL,    ANIM_Fuzzipede_IdleCeiling,
+    STATUS_KEY_STONE,     ANIM_Fuzzipede_StillCeiling,
+    STATUS_KEY_SLEEP,     ANIM_Fuzzipede_SleepCeiling,
+    STATUS_KEY_POISON,    ANIM_Fuzzipede_IdleCeiling,
+    STATUS_KEY_STOP,      ANIM_Fuzzipede_StillCeiling,
+    STATUS_KEY_STATIC,    ANIM_Fuzzipede_IdleCeiling,
+    STATUS_KEY_PARALYZE,  ANIM_Fuzzipede_StillCeiling,
+    STATUS_KEY_DIZZY,     ANIM_Fuzzipede_DizzyCeiling,
+    STATUS_KEY_UNUSED,    ANIM_Fuzzipede_DizzyCeiling,
     STATUS_END,
 };
 
@@ -170,7 +170,7 @@ EvtScript N(EVS_HandlePhase) = {
         Call(SetBattleCamOffsetY, 10)
         Call(MoveBattleCamOver, 30)
         Wait(30)
-        Call(ActorSpeak, MSG_MAC_Port_009C, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim24, ANIM_Fuzzipede_Anim04)
+        Call(ActorSpeak, MSG_MAC_Port_009C, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Talk, ANIM_Fuzzipede_Idle)
         Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
         Call(MoveBattleCamOver, 30)
         Wait(30)
@@ -189,7 +189,7 @@ EvtScript N(EVS_HopOntoCrate) = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
     Call(SetActorSpeed, ACTOR_SELF, Float(7.0))
     Call(SetActorYaw, ACTOR_SELF, 180)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim0A)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Run)
     Call(SetGoalToHome, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Sub(LVar0, 60)
@@ -198,7 +198,7 @@ EvtScript N(EVS_HopOntoCrate) = {
     Call(SetGoalToHome, ACTOR_SELF)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.2))
     Call(JumpToGoal, ACTOR_SELF, 15, false, true, false)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Idle)
     Call(SetActorYaw, ACTOR_SELF, 0)
     Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(DefaultAnims)))
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_Floor_HandleEvent)))
@@ -220,7 +220,7 @@ EvtScript N(EVS_HopToGround) = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
     Call(SetActorSpeed, ACTOR_SELF, Float(7.0))
     Call(SetActorYaw, ACTOR_SELF, 180)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim0A)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Run)
     Call(SetGoalToHome, ACTOR_SELF)
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     ExecWait(EVS_Enemy_HopToPos)
@@ -245,7 +245,7 @@ EvtScript N(EVS_ClimbOntoCeiling) = {
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
     Call(SetActorSpeed, ACTOR_SELF, Float(7.0))
     Call(SetActorYaw, ACTOR_SELF, 180)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim0A)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Run)
     Set(LVar0, 65)
     Set(LVar1, 0)
     Set(LVar2, -15)
@@ -284,7 +284,7 @@ EvtScript N(EVS_ClimbOntoCeiling) = {
     EndLoop
     Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(HangingAnims)))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim06)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_IdleCeiling)
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_Ceiling_HandleEvent)))
     Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, true)
     Call(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 2, 24)
@@ -341,77 +341,77 @@ EvtScript N(EVS_Floor_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1B)
+            SetConst(LVar1, ANIM_Fuzzipede_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1E)
-            SetConst(LVar2, ANIM_Fuzzipede_Anim1F)
+            SetConst(LVar1, ANIM_Fuzzipede_BurnHurt)
+            SetConst(LVar2, ANIM_Fuzzipede_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1E)
-            SetConst(LVar2, ANIM_Fuzzipede_Anim1F)
+            SetConst(LVar1, ANIM_Fuzzipede_BurnHurt)
+            SetConst(LVar2, ANIM_Fuzzipede_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1F)
+            SetConst(LVar1, ANIM_Fuzzipede_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1B)
+            SetConst(LVar1, ANIM_Fuzzipede_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1B)
+            SetConst(LVar1, ANIM_Fuzzipede_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1B)
+            SetConst(LVar1, ANIM_Fuzzipede_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1B)
+            SetConst(LVar1, ANIM_Fuzzipede_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim08)
+            SetConst(LVar1, ANIM_Fuzzipede_Walk)
             ExecWait(EVS_Enemy_Knockback)
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
             Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1B)
+            SetConst(LVar1, ANIM_Fuzzipede_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1B)
+            SetConst(LVar1, ANIM_Fuzzipede_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim04)
+            SetConst(LVar1, ANIM_Fuzzipede_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1B)
+            SetConst(LVar1, ANIM_Fuzzipede_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1B)
+            SetConst(LVar1, ANIM_Fuzzipede_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             Call(SetActorYaw, ACTOR_SELF, 0)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim04)
+            SetConst(LVar1, ANIM_Fuzzipede_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_RECEIVE_BUFF)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim19)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Happy1)
             Call(UseBattleCamPreset, BTL_CAM_INTERRUPT)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
             Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -459,62 +459,62 @@ EvtScript N(EVS_Ceiling_HandleEvent) = {
     Switch(LVar0)
         CaseEq(EVENT_HIT_COMBO)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1C)
+            SetConst(LVar1, ANIM_Fuzzipede_HurtCeiling)
             ExecWait(EVS_Enemy_Hit)
         CaseEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1C)
+            SetConst(LVar1, ANIM_Fuzzipede_HurtCeiling)
             ExecWait(EVS_Enemy_Hit)
             ExecWait(N(EVS_CeilingHit))
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim20)
-            SetConst(LVar2, ANIM_Fuzzipede_Anim21)
+            SetConst(LVar1, ANIM_Fuzzipede_BurnHurtCeiling)
+            SetConst(LVar2, ANIM_Fuzzipede_BurnStillCeiling)
             ExecWait(EVS_Enemy_BurnHit)
             ExecWait(N(EVS_CeilingHit))
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim20)
-            SetConst(LVar2, ANIM_Fuzzipede_Anim21)
+            SetConst(LVar1, ANIM_Fuzzipede_BurnHurtCeiling)
+            SetConst(LVar2, ANIM_Fuzzipede_BurnStillCeiling)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim21)
+            SetConst(LVar1, ANIM_Fuzzipede_BurnStillCeiling)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SHOCK_HIT)
             Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1B)
+            SetConst(LVar1, ANIM_Fuzzipede_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim08)
+            SetConst(LVar1, ANIM_Fuzzipede_Walk)
             ExecWait(EVS_Enemy_Knockback)
             ExecWait(N(EVS_ReturnHome))
         CaseEq(EVENT_SHOCK_DEATH)
             Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1B)
+            SetConst(LVar1, ANIM_Fuzzipede_Hurt)
             ExecWait(EVS_Enemy_ShockHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1B)
+            SetConst(LVar1, ANIM_Fuzzipede_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
         CaseOrEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim06)
+            SetConst(LVar1, ANIM_Fuzzipede_IdleCeiling)
             ExecWait(EVS_Enemy_NoDamageHit)
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1C)
+            SetConst(LVar1, ANIM_Fuzzipede_HurtCeiling)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_Fuzzipede_Anim1C)
+            SetConst(LVar1, ANIM_Fuzzipede_HurtCeiling)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseDefault
@@ -541,7 +541,7 @@ EvtScript N(EVS_LeaveHome) = {
         CaseOrEq(AVAL_Home_Ceiling2)
         CaseOrEq(AVAL_Home_Ceiling3)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING | ACTOR_FLAG_UPSIDE_DOWN, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Idle)
             Call(SetActorRotation, ACTOR_SELF, 0, 0, 180)
             Call(SetActorYaw, ACTOR_SELF, 180)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(0.002))
@@ -593,7 +593,7 @@ EvtScript N(EVS_Attack_Leap) = {
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     ExecWait(N(EVS_LeaveHome))
     Call(SetActorYaw, ACTOR_SELF, 0)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim0A)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Run)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
     Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -601,7 +601,7 @@ EvtScript N(EVS_Attack_Leap) = {
     Add(LVar0, 50)
     Set(LVar1, 0)
     ExecWait(EVS_Enemy_HopToPos)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim12)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_ChargeUp)
     Wait(10)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_FUZZIPEDE_LEAP)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
@@ -610,7 +610,7 @@ EvtScript N(EVS_Attack_Leap) = {
         CaseOrEq(HIT_RESULT_MISS)
         CaseOrEq(HIT_RESULT_LUCKY)
             Set(LVarA, LVar0)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim05)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_IdleAngry)
             Thread
                 Set(LVar0, 0)
                 Call(SetActorRotationOffset, ACTOR_SELF, 0, 14, 0)
@@ -633,7 +633,7 @@ EvtScript N(EVS_Attack_Leap) = {
             Call(ResetAllActorSounds, ACTOR_SELF)
             Thread
                 Wait(5)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim04)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Idle)
             EndThread
             Call(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             Call(SetActorRotation, ACTOR_SELF, 0, 0, 0)
@@ -648,7 +648,7 @@ EvtScript N(EVS_Attack_Leap) = {
             Call(UseIdleAnimation, ACTOR_SELF, true)
             Return
     EndSwitch
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim05)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_IdleAngry)
     Thread
         Set(LVar0, 0)
         Call(SetActorRotationOffset, ACTOR_SELF, 0, 14, 0)
@@ -675,7 +675,7 @@ EvtScript N(EVS_Attack_Leap) = {
         CaseOrEq(HIT_RESULT_HIT)
         CaseOrEq(HIT_RESULT_NO_DAMAGE)
             Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Idle)
             Thread
                 Set(LVar0, 180)
                 Call(SetActorRotationOffset, ACTOR_SELF, 0, 14, 0)
@@ -757,7 +757,7 @@ EvtScript N(EVS_Attack_DisableTackle) = {
     Call(SetBattleCamTargetingModes, BTL_CAM_YADJ_TARGET, BTL_CAM_XADJ_AVG, false)
     ExecWait(N(EVS_LeaveHome))
     Call(SetActorYaw, ACTOR_SELF, 0)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim0A)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Run)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(1.8))
     Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
     Call(SetGoalToTarget, ACTOR_SELF)
@@ -765,7 +765,7 @@ EvtScript N(EVS_Attack_DisableTackle) = {
     Add(LVar0, 80)
     Set(LVar1, 0)
     ExecWait(EVS_Enemy_HopToPos)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim12)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_ChargeUp)
     Wait(30)
     Call(PlaySoundAtActor, ACTOR_SELF, SOUND_FUZZIPEDE_STRIKE)
     Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
@@ -773,7 +773,7 @@ EvtScript N(EVS_Attack_DisableTackle) = {
     Switch(LVarF)
         CaseOrEq(HIT_RESULT_MISS)
         CaseOrEq(HIT_RESULT_LUCKY)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim11)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Launch)
             Call(SetGoalToTarget, ACTOR_SELF)
             Call(SetActorJumpGravity, ACTOR_SELF, Float(0.002))
             Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -785,7 +785,7 @@ EvtScript N(EVS_Attack_DisableTackle) = {
                 Call(EnemyTestTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EndIf
             Call(ResetAllActorSounds, ACTOR_SELF)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Idle)
             Thread
                 Set(LVar0, 90)
                 Call(SetActorRotationOffset, ACTOR_SELF, 0, 14, 0)
@@ -824,7 +824,7 @@ EvtScript N(EVS_Attack_DisableTackle) = {
             Return
         EndCaseGroup
     EndSwitch
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim11)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Launch)
     Call(SetGoalToTarget, ACTOR_SELF)
     Call(SetActorJumpGravity, ACTOR_SELF, Float(0.002))
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -866,7 +866,7 @@ EvtScript N(EVS_Attack_DisableTackle) = {
             IfEq(LFlag0, true)
                 Call(SetActorVar, ACTOR_SELF, AVAR_CommandLossState, AVAL_LossState_KnockAway)
                 Exec(N(EVS_ManageCommandLoss))
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim04)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Idle)
                 Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 Add(LVar0, 40)
                 Set(LVar1, 0)
@@ -882,7 +882,7 @@ EvtScript N(EVS_Attack_DisableTackle) = {
                 Add(LVar0, 10)
                 Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 Call(JumpToGoal, ACTOR_SELF, 4, false, true, false)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim04)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Idle)
                 Wait(8)
                 Label(0)
                     Call(GetActorVar, ACTOR_SELF, AVAR_CommandLossState, LVar0)
@@ -901,11 +901,11 @@ EvtScript N(EVS_Attack_DisableTackle) = {
                 PlayEffect(EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, Float(1.0), 0, 0)
                 Call(N(StartRumbleWithParams), 200, 10)
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_COMMAND_LOSS)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim13)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Kick)
                 Wait(20)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim04)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Idle)
             Else
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim04)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Idle)
                 Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 Add(LVar0, 40)
                 Set(LVar1, 0)
@@ -921,7 +921,7 @@ EvtScript N(EVS_Attack_DisableTackle) = {
                 Add(LVar0, 10)
                 Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 Call(JumpToGoal, ACTOR_SELF, 4, false, true, false)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim04)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Idle)
                 Wait(8)
                 Wait(10)
             EndIf
@@ -942,9 +942,9 @@ EvtScript N(EVS_Recover) = {
     Call(BattleCamTargetActor, ACTOR_SELF)
     Call(MoveBattleCamOver, 20)
     Wait(20)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim12)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_ChargeUp)
     Wait(30)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Idle)
     Thread
         Wait(5)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)

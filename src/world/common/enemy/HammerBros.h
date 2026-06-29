@@ -17,22 +17,22 @@
 
 #define HAMMER_BROS_ANIMS \
 { \
-    .idle   = ANIM_HammerBros_Anim02, \
-    .walk   = ANIM_HammerBros_Anim04, \
-    .run    = ANIM_HammerBros_Anim07, \
-    .chase  = ANIM_HammerBros_Anim07, \
-    .anim_4 = ANIM_HammerBros_Anim02, \
-    .anim_5 = ANIM_HammerBros_Anim02, \
-    .death  = ANIM_HammerBros_Anim0E, \
-    .hit    = ANIM_HammerBros_Anim0E, \
-    .anim_8 = ANIM_HammerBros_Anim18, \
-    .anim_9 = ANIM_HammerBros_Anim19, \
-    .anim_A = ANIM_HammerBros_Anim02, \
-    .anim_B = ANIM_HammerBros_Anim02, \
-    .anim_C = ANIM_HammerBros_Anim02, \
-    .anim_D = ANIM_HammerBros_Anim02, \
-    .anim_E = ANIM_HammerBros_Anim02, \
-    .anim_F = ANIM_HammerBros_Anim02, \
+    .idle   = ANIM_HammerBros_Idle, \
+    .walk   = ANIM_HammerBros_Walk, \
+    .run    = ANIM_HammerBros_Run, \
+    .chase  = ANIM_HammerBros_Run, \
+    .anim_4 = ANIM_HammerBros_Idle, \
+    .anim_5 = ANIM_HammerBros_Idle, \
+    .death  = ANIM_HammerBros_Hurt, \
+    .hit    = ANIM_HammerBros_Hurt, \
+    .anim_8 = ANIM_HammerBros_WorldAim, \
+    .anim_9 = ANIM_HammerBros_WorldThrow, \
+    .anim_A = ANIM_HammerBros_Idle, \
+    .anim_B = ANIM_HammerBros_Idle, \
+    .anim_C = ANIM_HammerBros_Idle, \
+    .anim_D = ANIM_HammerBros_Idle, \
+    .anim_E = ANIM_HammerBros_Idle, \
+    .anim_F = ANIM_HammerBros_Idle, \
 }
 
 #define HAMMER_BROS_HAMMER_HITBOX(npcID) \
@@ -56,22 +56,22 @@
         } \
     }, \
     .animations = { \
-        .idle   = ANIM_HammerBros_Anim0D, \
-        .walk   = ANIM_HammerBros_Anim0D, \
-        .run    = ANIM_HammerBros_Anim0D, \
-        .chase  = ANIM_HammerBros_Anim0D, \
-        .anim_4 = ANIM_HammerBros_Anim0D, \
-        .anim_5 = ANIM_HammerBros_Anim0D, \
-        .death  = ANIM_HammerBros_Anim0D, \
-        .hit    = ANIM_HammerBros_Anim0D, \
-        .anim_8 = ANIM_HammerBros_Anim0D, \
-        .anim_9 = ANIM_HammerBros_Anim0D, \
-        .anim_A = ANIM_HammerBros_Anim0D, \
-        .anim_B = ANIM_HammerBros_Anim0D, \
-        .anim_C = ANIM_HammerBros_Anim0D, \
-        .anim_D = ANIM_HammerBros_Anim0D, \
-        .anim_E = ANIM_HammerBros_Anim0D, \
-        .anim_F = ANIM_HammerBros_Anim0D, \
+        .idle   = ANIM_HammerBros_Hammer, \
+        .walk   = ANIM_HammerBros_Hammer, \
+        .run    = ANIM_HammerBros_Hammer, \
+        .chase  = ANIM_HammerBros_Hammer, \
+        .anim_4 = ANIM_HammerBros_Hammer, \
+        .anim_5 = ANIM_HammerBros_Hammer, \
+        .death  = ANIM_HammerBros_Hammer, \
+        .hit    = ANIM_HammerBros_Hammer, \
+        .anim_8 = ANIM_HammerBros_Hammer, \
+        .anim_9 = ANIM_HammerBros_Hammer, \
+        .anim_A = ANIM_HammerBros_Hammer, \
+        .anim_B = ANIM_HammerBros_Hammer, \
+        .anim_C = ANIM_HammerBros_Hammer, \
+        .anim_D = ANIM_HammerBros_Hammer, \
+        .anim_E = ANIM_HammerBros_Hammer, \
+        .anim_F = ANIM_HammerBros_Hammer, \
     }, \
     .extraAnimations = N(ExtraAnims_HammerBros_Hammer), \
 }

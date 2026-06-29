@@ -28,20 +28,20 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_HammerBros_Anim02,
-    STATUS_KEY_STONE,     ANIM_HammerBros_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_HammerBros_Anim11,
-    STATUS_KEY_POISON,    ANIM_HammerBros_Anim02,
-    STATUS_KEY_STOP,      ANIM_HammerBros_Anim00,
-    STATUS_KEY_STATIC,    ANIM_HammerBros_Anim02,
-    STATUS_KEY_PARALYZE,  ANIM_HammerBros_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_HammerBros_Anim12,
-    STATUS_KEY_UNUSED,    ANIM_HammerBros_Anim12,
+    STATUS_KEY_NORMAL,    ANIM_HammerBros_Idle,
+    STATUS_KEY_STONE,     ANIM_HammerBros_Still,
+    STATUS_KEY_SLEEP,     ANIM_HammerBros_Sleep,
+    STATUS_KEY_POISON,    ANIM_HammerBros_Idle,
+    STATUS_KEY_STOP,      ANIM_HammerBros_Still,
+    STATUS_KEY_STATIC,    ANIM_HammerBros_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_HammerBros_Still,
+    STATUS_KEY_DIZZY,     ANIM_HammerBros_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_HammerBros_Dizzy,
     STATUS_END,
 };
 
 s32 N(HammerAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_HammerBros_Anim0D,
+    STATUS_KEY_NORMAL,    ANIM_HammerBros_Hammer,
     STATUS_END,
 };
 
@@ -214,68 +214,68 @@ EvtScript N(EVS_HandleEvent) = {
         CaseOrEq(EVENT_HIT_COMBO)
         CaseOrEq(EVENT_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim0E)
+            SetConst(LVar1, ANIM_HammerBros_Hurt)
             ExecWait(EVS_Enemy_Hit)
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim0F)
-            SetConst(LVar2, ANIM_HammerBros_Anim10)
+            SetConst(LVar1, ANIM_HammerBros_BurnHurt)
+            SetConst(LVar2, ANIM_HammerBros_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim0F)
-            SetConst(LVar2, ANIM_HammerBros_Anim10)
+            SetConst(LVar1, ANIM_HammerBros_BurnHurt)
+            SetConst(LVar2, ANIM_HammerBros_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim10)
+            SetConst(LVar1, ANIM_HammerBros_BurnStill)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_SPIN_SMASH_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim0E)
+            SetConst(LVar1, ANIM_HammerBros_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
         CaseEq(EVENT_SPIN_SMASH_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim0E)
+            SetConst(LVar1, ANIM_HammerBros_Hurt)
             ExecWait(EVS_Enemy_SpinSmashHit)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim0E)
+            SetConst(LVar1, ANIM_HammerBros_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
         CaseOrEq(EVENT_IMMUNE)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim15)
+            SetConst(LVar1, ANIM_HammerBros_ShellEnter)
             ExecWait(EVS_Enemy_NoDamageHit)
             Call(GetStatusFlags, ACTOR_SELF, LVar0)
             IfNotFlag(LVar0, STATUS_FLAGS_IMMOBILIZED)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim17)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_ShellExit)
                 Wait(10)
             EndIf
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim0E)
+            SetConst(LVar1, ANIM_HammerBros_Hurt)
             ExecWait(EVS_Enemy_Hit)
             Wait(10)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim0E)
+            SetConst(LVar1, ANIM_HammerBros_Hurt)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim02)
+            SetConst(LVar1, ANIM_HammerBros_Idle)
             ExecWait(EVS_Enemy_Recover)
         CaseEq(EVENT_SCARE_AWAY)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim07)
-            SetConst(LVar2, ANIM_HammerBros_Anim0E)
+            SetConst(LVar1, ANIM_HammerBros_Run)
+            SetConst(LVar2, ANIM_HammerBros_Hurt)
             ExecWait(EVS_Enemy_ScareAway)
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim07)
+            SetConst(LVar1, ANIM_HammerBros_Run)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             Call(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -287,12 +287,12 @@ EvtScript N(EVS_HandleEvent) = {
                 EndIf
             EndIf
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim0E)
+            SetConst(LVar1, ANIM_HammerBros_Hurt)
             ExecWait(EVS_Enemy_BlowAway)
             Return
         CaseEq(EVENT_AIR_LIFT_FAILED)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_HammerBros_Anim02)
+            SetConst(LVar1, ANIM_HammerBros_Idle)
             ExecWait(EVS_Enemy_NoDamageHit)
         CaseDefault
     EndSwitch
@@ -324,7 +324,7 @@ EvtScript N(EVS_Attack_HammerThrow) = {
         EndChildThread
         Call(SetPartPos, ACTOR_SELF, PRT_HAMMER_1, 0, 50, 0)
         Call(SetPartFlagBits, ACTOR_SELF, PRT_HAMMER_1, ACTOR_PART_FLAG_INVISIBLE, false)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim0C)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Throw)
         Goto(100)
     EndIf
     ChildThread
@@ -341,13 +341,13 @@ EvtScript N(EVS_Attack_HammerThrow) = {
     Add(LVar1, 23)
     Sub(LVar2, 2)
     Call(SetPartPos, ACTOR_SELF, PRT_HAMMER_1, LVar0, LVar1, LVar2)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim0C)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Throw)
     Wait(8)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_HAMMER_1, ACTOR_PART_FLAG_INVISIBLE, false)
     Label(100)
     Thread
         Wait(15)
-        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Idle)
     EndThread
     Call(GetStatusFlags, ACTOR_SELF, LVar0)
     IfFlag(LVar0, STATUS_FLAG_SHRINK)
@@ -420,8 +420,8 @@ EvtScript N(EVS_Attack_HammerThrow) = {
 
 EvtScript N(EVS_HammerSurge_Miss) = {
     Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(2.0))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim0C)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Idle)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Throw)
     Wait(4)
     Call(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(SetPartSounds, ACTOR_SELF, LVar0, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
@@ -449,8 +449,8 @@ EvtScript N(EVS_HammerSurge_Miss) = {
 
 EvtScript N(EVS_HammerSurge_Hit) = {
     Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(2.0))
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim0C)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Idle)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Throw)
     Wait(4)
     Call(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, false)
     Call(SetPartSounds, ACTOR_SELF, LVar0, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
@@ -532,7 +532,7 @@ EvtScript N(EVS_Attack_HammerSurge) = {
             Exec(N(EVS_HammerSurge_Miss))
             Wait(5)
             Wait(20)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Idle)
             IfEq(LVarA, HIT_RESULT_LUCKY)
                 Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EndIf
@@ -572,7 +572,7 @@ EvtScript N(EVS_Attack_HammerSurge) = {
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_HAMMER_SURGE, BS_FLAGS1_NICE_HIT)
     Wait(5)
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Idle)
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_HAMMER_SURGE, BS_FLAGS1_NICE_HIT)
     Wait(5)

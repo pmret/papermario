@@ -302,13 +302,13 @@ EvtScript N(EVS_FirstReactionDialogue) = {
             Call(SpeakToPlayer, NPC_Magikoopa, ANIM_Magikoopa_Yellow_Shout, ANIM_Magikoopa_Yellow_Idle, 16, MSG_CH6_00B9)
             Call(InterpNpcYaw, NPC_Magikoopa, 90, 0)
         CaseEq(1)
-            Call(SpeakToPlayer, NPC_Lakitu_01, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 16, MSG_CH6_00BF)
+            Call(SpeakToPlayer, NPC_Lakitu_01, ANIM_Lakitu_Talk, ANIM_Lakitu_Idle, 16, MSG_CH6_00BF)
             Call(InterpNpcYaw, NPC_Lakitu_01, 90, 0)
         CaseEq(2)
-            Call(SpeakToPlayer, NPC_Lakitu_02, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 16, MSG_CH6_00BF)
+            Call(SpeakToPlayer, NPC_Lakitu_02, ANIM_Lakitu_Talk, ANIM_Lakitu_Idle, 16, MSG_CH6_00BF)
             Call(InterpNpcYaw, NPC_Lakitu_02, 270, 0)
         CaseEq(3)
-            Call(SpeakToPlayer, NPC_Lakitu_03, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 16, MSG_CH6_00BF)
+            Call(SpeakToPlayer, NPC_Lakitu_03, ANIM_Lakitu_Talk, ANIM_Lakitu_Idle, 16, MSG_CH6_00BF)
             Call(InterpNpcYaw, NPC_Lakitu_03, 270, 0)
     EndSwitch
     Return
@@ -320,11 +320,11 @@ EvtScript N(EVS_SecondReactionDialogue) = {
         CaseEq(0)
             Call(SpeakToPlayer, NPC_Magikoopa, ANIM_Magikoopa_Yellow_Shout, ANIM_Magikoopa_Yellow_Idle, 16, MSG_CH6_00BA)
         CaseEq(1)
-            Call(SpeakToPlayer, NPC_Lakitu_01, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 16, MSG_CH6_00C0)
+            Call(SpeakToPlayer, NPC_Lakitu_01, ANIM_Lakitu_Talk, ANIM_Lakitu_Idle, 16, MSG_CH6_00C0)
         CaseEq(2)
-            Call(SpeakToPlayer, NPC_Lakitu_02, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 16, MSG_CH6_00C0)
+            Call(SpeakToPlayer, NPC_Lakitu_02, ANIM_Lakitu_Talk, ANIM_Lakitu_Idle, 16, MSG_CH6_00C0)
         CaseEq(3)
-            Call(SpeakToPlayer, NPC_Lakitu_03, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 16, MSG_CH6_00C0)
+            Call(SpeakToPlayer, NPC_Lakitu_03, ANIM_Lakitu_Talk, ANIM_Lakitu_Idle, 16, MSG_CH6_00C0)
     EndSwitch
     Call(SetNpcVar, NPC_Magikoopa, 0, 1)
     Wait(5)
@@ -552,7 +552,7 @@ EvtScript N(EVS_NpcInteract_Lakitu) = {
             IfEq(LVar0, 3)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Magikoopa_Yellow_Shout, ANIM_Magikoopa_Yellow_Idle, 5, MSG_CH6_00B6)
             Else
-                Call(SpeakToPlayer, NPC_SELF, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 5, MSG_CH6_00BC)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Lakitu_Talk, ANIM_Lakitu_Idle, 5, MSG_CH6_00BC)
             EndIf
             Add(AB_FLO_GuardLakituTalkCount, 1)
         CaseEq(1)
@@ -560,7 +560,7 @@ EvtScript N(EVS_NpcInteract_Lakitu) = {
             IfEq(LVar0, 3)
                 Call(SpeakToPlayer, NPC_SELF, ANIM_Magikoopa_Yellow_Shout, ANIM_Magikoopa_Yellow_Idle, 5, MSG_CH6_00B7)
             Else
-                Call(SpeakToPlayer, NPC_SELF, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 5, MSG_CH6_00BD)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Lakitu_Talk, ANIM_Lakitu_Idle, 5, MSG_CH6_00BD)
             EndIf
             Add(AB_FLO_GuardLakituTalkCount, 1)
         CaseEq(2)
@@ -572,10 +572,10 @@ EvtScript N(EVS_NpcInteract_Lakitu) = {
                 Wait(15)
                 Call(EndSpeech, NPC_SELF, ANIM_Magikoopa_Yellow_Shout, ANIM_Magikoopa_Yellow_Idle, 0)
             Else
-                Call(SpeakToPlayer, NPC_SELF, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 5, MSG_CH6_00BE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Lakitu_Talk, ANIM_Lakitu_Idle, 5, MSG_CH6_00BE)
                 Call(NpcFacePlayer, NPC_SELF, 0)
                 Wait(15)
-                Call(EndSpeech, NPC_SELF, ANIM_Lakitu_Anim16, ANIM_Lakitu_Anim01, 0)
+                Call(EndSpeech, NPC_SELF, ANIM_Lakitu_Talk, ANIM_Lakitu_Idle, 0)
             EndIf
             Call(SetNpcVar, NPC_Magikoopa, 0, 1)
             Wait(5)

@@ -294,7 +294,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy) = {
     IfEq(GB_OMO_PeachChoice2, 0)
         Call(SpeakToPlayer, NPC_Fuzzy, ANIM_Fuzzy_Talk, ANIM_Fuzzy_Idle, 0, MSG_CH4_003C)
     Else
-        Call(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_CH4_003D)
+        Call(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Talk, ANIM_HammerBros_Idle, 0, MSG_CH4_003D)
     EndIf
     Thread
         Call(N(EnableCameraLeadingPlayer))
@@ -508,22 +508,22 @@ NpcData N(NpcData_HammerBros) = {
 #endif
     .drops = NO_DROPS,
     .animations = {
-        .idle   = ANIM_HammerBros_Anim02,
-        .walk   = ANIM_HammerBros_Anim04,
-        .run    = ANIM_HammerBros_Anim07,
-        .chase  = ANIM_HammerBros_Anim07,
-        .anim_4 = ANIM_HammerBros_Anim02,
-        .anim_5 = ANIM_HammerBros_Anim02,
-        .death  = ANIM_HammerBros_Anim0E,
-        .hit    = ANIM_HammerBros_Anim0E,
-        .anim_8 = ANIM_HammerBros_Anim18,
-        .anim_9 = ANIM_HammerBros_Anim19,
-        .anim_A = ANIM_HammerBros_Anim02,
-        .anim_B = ANIM_HammerBros_Anim02,
-        .anim_C = ANIM_HammerBros_Anim02,
-        .anim_D = ANIM_HammerBros_Anim02,
-        .anim_E = ANIM_HammerBros_Anim02,
-        .anim_F = ANIM_HammerBros_Anim02,
+        .idle   = ANIM_HammerBros_Idle,
+        .walk   = ANIM_HammerBros_Walk,
+        .run    = ANIM_HammerBros_Run,
+        .chase  = ANIM_HammerBros_Run,
+        .anim_4 = ANIM_HammerBros_Idle,
+        .anim_5 = ANIM_HammerBros_Idle,
+        .death  = ANIM_HammerBros_Hurt,
+        .hit    = ANIM_HammerBros_Hurt,
+        .anim_8 = ANIM_HammerBros_WorldAim,
+        .anim_9 = ANIM_HammerBros_WorldThrow,
+        .anim_A = ANIM_HammerBros_Idle,
+        .anim_B = ANIM_HammerBros_Idle,
+        .anim_C = ANIM_HammerBros_Idle,
+        .anim_D = ANIM_HammerBros_Idle,
+        .anim_E = ANIM_HammerBros_Idle,
+        .anim_F = ANIM_HammerBros_Idle,
     },
 };
 

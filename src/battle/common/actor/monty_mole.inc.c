@@ -118,31 +118,31 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_MontyMole_Anim01,
-    STATUS_KEY_STONE,     ANIM_MontyMole_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_MontyMole_Anim14,
-    STATUS_KEY_POISON,    ANIM_MontyMole_Anim01,
-    STATUS_KEY_STOP,      ANIM_MontyMole_Anim00,
-    STATUS_KEY_STATIC,    ANIM_MontyMole_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_MontyMole_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_MontyMole_Anim14,
-    STATUS_KEY_UNUSED,    ANIM_MontyMole_Anim14,
+    STATUS_KEY_NORMAL,    ANIM_MontyMole_Idle,
+    STATUS_KEY_STONE,     ANIM_MontyMole_Still,
+    STATUS_KEY_SLEEP,     ANIM_MontyMole_Sleep,
+    STATUS_KEY_POISON,    ANIM_MontyMole_Idle,
+    STATUS_KEY_STOP,      ANIM_MontyMole_Still,
+    STATUS_KEY_STATIC,    ANIM_MontyMole_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_MontyMole_Still,
+    STATUS_KEY_DIZZY,     ANIM_MontyMole_Sleep,
+    STATUS_KEY_UNUSED,    ANIM_MontyMole_Sleep,
     STATUS_END,
 };
 
 s32 N(RockAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_MontyMole_Anim0F,
+    STATUS_KEY_NORMAL,    ANIM_MontyMole_Rock,
     STATUS_END,
 };
 
 s32 N(EmptyHoleAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_MontyMole_Anim12,
+    STATUS_KEY_NORMAL,    ANIM_MontyMole_Hole,
     STATUS_END,
 };
 
 // unused
 s32 N(LeapAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_MontyMole_Anim06,
+    STATUS_KEY_NORMAL,    ANIM_MontyMole_HurtJump,
     STATUS_END,
 };
 
@@ -242,32 +242,32 @@ EvtScript N(EVS_HandleEvent) = {
             IfFlag(LVarE, DAMAGE_TYPE_SMASH)
                 ChildThread
                     Wait(8)
-                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim07)
+                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_HurtMidair)
                 EndChildThread
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_MontyMole_Anim06)
+                SetConst(LVar1, ANIM_MontyMole_HurtJump)
                 ExecWait(EVS_Enemy_Hit)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim08)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_HurtDropDown)
                 Wait(10)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_MontyMole_Anim05)
+                SetConst(LVar1, ANIM_MontyMole_Hurt)
                 ExecWait(EVS_Enemy_Hit)
             EndIf
         EndCaseGroup
         CaseEq(EVENT_BURN_HIT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MontyMole_Anim0A)
-            SetConst(LVar2, ANIM_MontyMole_Anim0B)
+            SetConst(LVar1, ANIM_MontyMole_BurnHurt)
+            SetConst(LVar2, ANIM_MontyMole_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
         CaseEq(EVENT_BURN_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MontyMole_Anim0A)
-            SetConst(LVar2, ANIM_MontyMole_Anim0B)
+            SetConst(LVar1, ANIM_MontyMole_BurnHurt)
+            SetConst(LVar2, ANIM_MontyMole_BurnStill)
             ExecWait(EVS_Enemy_BurnHit)
             ExecWait(N(EVS_CreateEmptyHole))
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MontyMole_Anim0C)
+            SetConst(LVar1, ANIM_MontyMole_BurnHurtJump)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseOrEq(EVENT_ZERO_DAMAGE)
@@ -276,78 +276,78 @@ EvtScript N(EVS_HandleEvent) = {
             IfFlag(LVar0, DAMAGE_TYPE_SMASH)
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
                 Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(2.0))
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim11)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Burrow)
                 Wait(80)
                 Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
                 Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(1.0))
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim10)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Emerge)
                 Wait(20)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim14)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Sleep)
                 Wait(20)
             Else
                 SetConst(LVar0, PRT_MAIN)
-                SetConst(LVar1, ANIM_MontyMole_Anim01)
+                SetConst(LVar1, ANIM_MontyMole_Idle)
                 ExecWait(EVS_Enemy_NoDamageHit)
             EndIf
         EndCaseGroup
         CaseEq(EVENT_DEATH)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MontyMole_Anim05)
+            SetConst(LVar1, ANIM_MontyMole_Hurt)
             ExecWait(EVS_Enemy_Hit)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim06)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_HurtJump)
             Wait(10)
             ExecWait(N(EVS_CreateEmptyHole))
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MontyMole_Anim09)
+            SetConst(LVar1, ANIM_MontyMole_Panic)
             ExecWait(EVS_Enemy_Death)
             Return
         CaseEq(EVENT_RECOVER_STATUS)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim06)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_HurtJump)
             Wait(8)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_HurtMidair)
             Wait(5)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim08)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_HurtDropDown)
             Wait(8)
         CaseEq(EVENT_SCARE_AWAY)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim06)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_HurtJump)
             Wait(15)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_HurtMidair)
             Wait(15)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim08)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_HurtDropDown)
             Wait(15)
             Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_DMG_APPLY, true)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(EmptyHoleAnims)))
             Return
         CaseEq(EVENT_BEGIN_AIR_LIFT)
             SetConst(LVar0, PRT_MAIN)
-            SetConst(LVar1, ANIM_MontyMole_Anim05)
+            SetConst(LVar1, ANIM_MontyMole_Hurt)
             ExecWait(EVS_Enemy_AirLift)
         CaseEq(EVENT_BLOW_AWAY)
             ExecWait(N(EVS_CreateEmptyHole))
             Call(GetStatusFlags, ACTOR_SELF, LVar0)
             IfFlag(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 Call(SetActorDispOffset, ACTOR_SELF, 0, -5, 0)
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim19)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Stand)
             Else
                 IfFlag(LVar0, STATUS_FLAG_SHRINK)
                     Call(SetActorDispOffset, ACTOR_SELF, 0, -9, 0)
                 Else
                     Call(SetActorDispOffset, ACTOR_SELF, 0, -23, 0)
                 EndIf
-                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim09)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Panic)
             EndIf
             Wait(1000)
             Return
         CaseEq(EVENT_AIR_LIFT_FAILED)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
             Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(2.0))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim11)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Burrow)
             Wait(40)
             Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
             Call(SetAnimationRate, ACTOR_SELF, PRT_MAIN, Float(1.0))
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim10)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Emerge)
             Wait(20)
-            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim14)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Sleep)
             Wait(20)
         CaseEq(EVENT_UP_AND_AWAY)
             ExecWait(N(EVS_CreateEmptyHole))
@@ -374,7 +374,7 @@ EvtScript N(EVS_TakeTurn) = {
         Wait(20)
         Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
     EndChildThread
-    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Anim04)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_ThrowAttack)
     Wait(37)
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Add(LVar1, 20)
@@ -401,7 +401,7 @@ EvtScript N(EVS_TakeTurn) = {
             Set(LVar1, -5)
             Call(SetPartMoveSpeed, ACTOR_SELF, PRT_ROCK, Float(12.0))
             Call(SetPartJumpGravity, ACTOR_SELF, PRT_ROCK, Float(0.1))
-            Call(SetAnimation, ACTOR_SELF, PRT_ROCK, ANIM_MontyMole_Anim0F)
+            Call(SetAnimation, ACTOR_SELF, PRT_ROCK, ANIM_MontyMole_Rock)
             Call(FlyPartTo, ACTOR_SELF, PRT_ROCK, LVar0, LVar1, LVar2, 0, 30, EASING_LINEAR)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_ROCK, ACTOR_PART_FLAG_INVISIBLE, true)
             IfEq(LVarA, HIT_RESULT_LUCKY)
@@ -418,7 +418,7 @@ EvtScript N(EVS_TakeTurn) = {
     Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(SetPartMoveSpeed, ACTOR_SELF, PRT_ROCK, Float(12.0))
     Call(SetPartJumpGravity, ACTOR_SELF, PRT_ROCK, Float(0.1))
-    Call(SetAnimation, ACTOR_SELF, PRT_ROCK, ANIM_MontyMole_Anim0F)
+    Call(SetAnimation, ACTOR_SELF, PRT_ROCK, ANIM_MontyMole_Rock)
     Call(FlyPartTo, ACTOR_SELF, PRT_ROCK, LVar0, LVar1, LVar2, 0, 20, EASING_LINEAR)
     Wait(2)
     Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_TOSS, BS_FLAGS1_TRIGGER_EVENTS)

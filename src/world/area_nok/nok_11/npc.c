@@ -207,7 +207,7 @@ EvtScript N(EVS_NpcDefeat_JrTroopa_01) = {
 };
 
 EvtScript N(EVS_NpcInteract_KentCKoopa_02) = {
-    Call(SpeakToPlayer, NPC_SELF, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0134)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_0134)
     Return
     End
 };
@@ -255,14 +255,14 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
     Call(DisablePlayerInput, true)
     Call(InterruptUsePartner)
     Call(SetMusic, 0, SONG_MINIBOSS_BATTLE, 0, VOL_LEVEL_FULL)
-    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_012C)
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_012C)
     IfEq(AB_NOK_2, 0)
         Set(LVar0, 20)
     Else
         Set(LVar0, -20)
     EndIf
     Call(AdjustCam, CAM_DEFAULT, Float(5.0), LVar0, Float(275.0), Float(17.5), Float(-12.0))
-    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_012D)
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_012D)
     Label(15)
     Call(ShowCoinCounter, true)
     Call(ShowChoice, MSG_Choice_0045)
@@ -278,7 +278,7 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
         Set(LVar0, -20)
     EndIf
     Call(ShowCoinCounter, false)
-    Call(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_012E)
+    Call(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_012E)
     Call(ShowCoinCounter, true)
     Call(ShowChoice, MSG_Choice_0045)
     IfEq(LVar0, 0)
@@ -289,7 +289,7 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
     EndIf
     Call(ShowCoinCounter, false)
     Label(20)
-    Call(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0135)
+    Call(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_0135)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     IfEq(AB_NOK_2, 0)
         Set(LVar0, 20)
@@ -298,14 +298,14 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
     EndIf
 #if VERSION_JP
     IfEq(AF_NOK_14, 0)
-        Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0136)
+        Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_0136)
     Else
-        Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0139)
+        Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_0139)
     EndIf
 #else
-    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0136)
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_0136)
 #endif
-    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim05)
+    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Flee)
     IfEq(AB_NOK_2, 0)
         Set(LVar0, 90)
     Else
@@ -335,19 +335,19 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
     Else
         Set(LVar0, -100)
     EndIf
-    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim03)
+    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Walk)
     Call(NpcMoveTo, NPC_KentCKoopa_02, LVar0, LVar2, 20)
-    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim01)
+    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Idle)
     Call(N(KentTakeCoins))
     Call(ShowCoinCounter, false)
-    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0133)
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_0133)
     Wait(20)
-    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim03)
+    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Walk)
     Call(NpcMoveTo, NPC_KentCKoopa_02, -167, -100, 20)
     Call(SetNpcFlagBits, NPC_KentCKoopa_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
     Call(BindNpcInteract, NPC_KentCKoopa_02, Ref(N(EVS_NpcInteract_KentCKoopa_02)))
     Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim01)
+    Call(SetNpcAnimation, NPC_KentCKoopa_02, ANIM_KentCKoopa_Idle)
     IfEq(AB_NOK_2, 0)
         Set(LVar0, 270)
     Else
@@ -355,12 +355,12 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
     EndIf
     Call(InterpNpcYaw, NPC_KentCKoopa_02, LVar0, 0)
     Wait(10)
-    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0134)
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_0134)
     Call(ResetCam, CAM_DEFAULT, Float(5.0))
     Goto(100)
     Label(40)
     Call(ShowCoinCounter, false)
-    Call(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_012F)
+    Call(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_012F)
     Call(ResetCam, CAM_DEFAULT, Float(5.0))
     Exec(N(EVS_SetupMusic))
     Wait(30)
@@ -389,14 +389,14 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
     Call(DisablePlayerInput, true)
     Call(InterruptUsePartner)
     Call(SetPlayerPos, LVar3, LVar1, LVar2)
-    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0130)
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_0130)
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPlayerPos, LVar3, LVar1, LVar2)
     Call(DisablePlayerInput, false)
     Goto(41)
     Label(50)
     Call(ShowCoinCounter, false)
-    Call(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0131)
+    Call(ContinueSpeech, NPC_KentCKoopa_02, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_0131)
     Call(ResetCam, CAM_DEFAULT, Float(5.0))
     Exec(N(EVS_SetupMusic))
     Wait(30)
@@ -426,7 +426,7 @@ EvtScript N(EVS_NpcIdle_KentCKoopa_01) = {
     Call(InterruptUsePartner)
     Call(SetMusic, 0, SONG_MINIBOSS_BATTLE, 0, VOL_LEVEL_FULL)
     Call(SetPlayerPos, LVar3, LVar1, LVar2)
-    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Anim02, ANIM_KentCKoopa_Anim01, 0, MSG_CH1_0132)
+    Call(SpeakToPlayer, NPC_KentCKoopa_02, ANIM_KentCKoopa_Talk, ANIM_KentCKoopa_Idle, 0, MSG_CH1_0132)
     IfEq(AB_NOK_2, 0)
         Set(LVar0, 20)
     Else
