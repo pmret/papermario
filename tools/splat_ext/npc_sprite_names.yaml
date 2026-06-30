@@ -4373,11 +4373,11 @@ KentCKoopa:
     - HeadFlipHurt
     - ShellInnerToppled
     - ShellOuterToppled
-    - LArmFlipOver
+    - LArmFlipOver1
     - LArmFlipOver2
     - LFootFlipOver
     - RFootFlipOver
-    - ShellWithdraw
+    - HeadToppled
     - HeadFlipOver
     - HeadFlipUp
     - LArmToppled
@@ -7487,56 +7487,56 @@ HuffNPuff:
     - Unused5
     - Unused6
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
-    - Anim18
-    - Anim19
-    - Anim1A
-    - Anim1B
-    - Anim1C
-    - Anim1D
-    - Anim1E
-    - Anim1F
-    - Anim20
-    - Anim21
-    - Anim22
-    - Anim23
-    - Anim24
-    - Anim25
-    - Anim26
-    - Anim27
-    - Anim28
-    - Anim29
-    - Anim2A
-    - Anim2B
-    - Anim2C
-    - Anim2D
-    - Anim2E
-    - Anim2F
-    - Anim30
-    - Anim31
+    - WholeIdle
+    - IdleBody
+    - IdleFace
+    - IdleArms
+    - IdleSadBody
+    - IdleSadFace
+    - IdleSadArms
+    - HurtBody
+    - HurtFace
+    - HurtArms
+    - SmallPuff1
+    - JumpBody
+    - JumpFace
+    - JumpArms
+    - UnleashBody
+    - UnleashFace
+    - UnleashArms
+    - IdleChargedBody
+    - IdleChargedFace
+    - IdleChargedArms
+    - BraceBody
+    - BraceFace
+    - BraceArms
+    - BragBody
+    - BragFace
+    - BragArms
+    - InhaleBody
+    - InhaleFace
+    - InhaleArms
+    - HoldBreathBody
+    - HoldBreathFace
+    - HoldBreathArms
+    - BlowBody
+    - BlowFace
+    - BlowArms
+    - PanicBody
+    - PanicFace
+    - PanicArms
+    - FrownBody
+    - FrownFace
+    - FrownArms
+    - OpenWideFace
+    - SmallPuff2
+    - SmallPuff3
+    - TalkBody
+    - TalkFace
+    - TalkArms
+    - TalkSadBody
+    - TalkSadFace
+    - TalkSadArms
 RuffPuff:
   frames:
     - Neutral

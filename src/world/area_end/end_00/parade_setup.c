@@ -266,15 +266,15 @@ AnimID N(ExtraAnims_LavaPiranha)[] = {
 };
 
 AnimID N(ExtraAnims_HuffNPuff)[] = {
-    ANIM_HuffNPuff_Anim01,
-    ANIM_HuffNPuff_Anim02,
-    ANIM_HuffNPuff_Anim03,
-    ANIM_HuffNPuff_Anim07,
-    ANIM_HuffNPuff_Anim08,
-    ANIM_HuffNPuff_Anim09,
-    ANIM_HuffNPuff_Anim26,
-    ANIM_HuffNPuff_Anim27,
-    ANIM_HuffNPuff_Anim28,
+    ANIM_HuffNPuff_IdleBody,
+    ANIM_HuffNPuff_IdleFace,
+    ANIM_HuffNPuff_IdleArms,
+    ANIM_HuffNPuff_HurtBody,
+    ANIM_HuffNPuff_HurtFace,
+    ANIM_HuffNPuff_HurtArms,
+    ANIM_HuffNPuff_FrownBody,
+    ANIM_HuffNPuff_FrownFace,
+    ANIM_HuffNPuff_FrownArms,
     ANIM_LIST_END
 };
 
@@ -673,19 +673,19 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 90.0f
     },
     [NPC_HuffNPuffBody] {
-        .initialAnim = ANIM_HuffNPuff_Anim01,
+        .initialAnim = ANIM_HuffNPuff_IdleBody,
         .animList = N(ExtraAnims_HuffNPuff),
         .pos = { 1060.0f, 80.0f, 0.0f },
         .yaw = 270.0f
     },
     [NPC_HuffNPuffFace] {
-        .initialAnim = ANIM_HuffNPuff_Anim02,
+        .initialAnim = ANIM_HuffNPuff_IdleFace,
         .animList = N(ExtraAnims_HuffNPuff),
         .pos = { 1060.0f, 80.0f, 0.0f },
         .yaw = 270.0f
     },
     [NPC_HuffNPuffArms] {
-        .initialAnim = ANIM_HuffNPuff_Anim03,
+        .initialAnim = ANIM_HuffNPuff_IdleArms,
         .animList = N(ExtraAnims_HuffNPuff),
         .pos = { 1060.0f, 80.0f, 0.0f },
         .yaw = 270.0f
