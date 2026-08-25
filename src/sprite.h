@@ -6,6 +6,10 @@
 #define SPR_PLAYER_COLOR_VARIATIONS 6
 #define SPR_PEACH_BTL_PAL_STRIDE 4
 
+#define SPR_UNPACK_SPR(animID) (((animID) >> 16) & 0xFF)
+#define SPR_UNPACK_PAL(animID) (((animID) >> 8) & 0xFF)
+#define SPR_UNPACK_ANIM(animID) ((animID) & 0xFF)
+
 enum SpriteIDFields {
     SPRITE_ID_ANIM_MASK         = 0x000000FF,
     SPRITE_ID_PAL_MASK          = 0x0000FF00,
@@ -116,16 +120,6 @@ typedef struct Quad {
     Vtx v[4];
 } Quad; // size = 0x40
 
-extern Quad spr_defaultQuad;
-extern Vp SprPauseVp;
-extern Vp SprPauseVpAlt;
-extern Gfx D_802DF3F0[];
-extern Gfx D_802DF428[];
-extern Gfx D_802DF460[];
-extern Gfx D_802DF490[];
-extern f32 spr_animUpdateTimeScale;
-extern PlayerSpriteSet spr_playerSpriteSets[7];
-
 void imgfx_init(void);
 
 void spr_init_sprites(s32 playerSpriteSet);
@@ -155,9 +149,9 @@ s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList);
 
 s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale);
 
-s32 spr_draw_npc_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* paletteList, Matrix4f mtx);
+s32 spr_draw_npc_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* paletteList, Matrix4f mtx);
 
-s32 spr_get_notify_value(s32 arg0);
+s32 spr_get_notify_value(s32 spriteInstanceID);
 
 s32 spr_free_sprite(s32 spriteInstanceID);
 

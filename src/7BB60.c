@@ -1097,13 +1097,13 @@ void check_input_midair_jump(void) {
         && gPlayerStatus.pressedButtons & BUTTON_A
     ) {
         switch (gPlayerData.bootsLevel) {
-            case 0:
+            case GEAR_RANK_NORMAL:
                 break;
-            case 1:
+            case GEAR_RANK_SUPER:
                 set_action_state(ACTION_STATE_SPIN_JUMP);
                 gPlayerStatus.flags |= PS_FLAG_FLYING;
                 break;
-            case 2:
+            case GEAR_RANK_ULTRA:
                 set_action_state(ACTION_STATE_TORNADO_JUMP);
                 gPlayerStatus.flags |= PS_FLAG_FLYING;
                 break;

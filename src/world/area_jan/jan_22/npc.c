@@ -985,11 +985,11 @@ EvtScript N(EVS_NpcHit_Kolorado_HeldCaptive) = {
         Wait(5 * DT)
         Set(AF_JAN_0A, true)
         Wait(10 * DT)
-        Call(SetNpcAnimation, NPC_SpearGuy, ANIM_SpearGuy_Anim0D)
+        Call(SetNpcAnimation, NPC_SpearGuy, ANIM_SpearGuy_Sleep)
         Call(NpcFacePlayer, NPC_SELF, 0)
         Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00BD)
         Set(AF_JAN_0A, false)
-        Call(SetNpcAnimation, NPC_SpearGuy, ANIM_SpearGuy_Anim10)
+        Call(SetNpcAnimation, NPC_SpearGuy, ANIM_SpearGuy_ShakeSpear)
         Call(DisablePlayerInput, false)
     EndIf
     Return
@@ -1153,7 +1153,7 @@ EvtScript N(EVS_NpcDefeat_SpearGuy) = {
 
 EvtScript N(EVS_NpcInit_SpearGuy) = {
     IfLt(GB_StoryProgress, STORY_CH5_KOLORADO_ESCAPED_SPEAR_GUYS)
-        Call(SetNpcAnimation, NPC_SELF, ANIM_SpearGuy_Anim10)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_SpearGuy_ShakeSpear)
         Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_SpearGuy)))
         Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_SpearGuy)))
     Else

@@ -334,7 +334,7 @@ API_CALLABLE(N(UseAbility)) {
             if (script->functionTemp[1] < 45) {
                 if (!(npc->flags & NPC_FLAG_COLLDING_WITH_WORLD) && !N(MovementBlocked)) {
                     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-                    spawn_surface_effects(npc, SURFACE_INTERACT_WALK);
+                    npc_surface_spawn_fx(npc, SURFACE_INTERACT_WALK);
                 } else {
                     N(MovementBlocked) = true;
                 }
@@ -424,7 +424,7 @@ API_CALLABLE(N(UseAbility)) {
                     break;
             }
             exec_ShakeCam1(0, 0, 20);
-            spawn_surface_effects(npc, SURFACE_INTERACT_LAND);
+            npc_surface_spawn_fx(npc, SURFACE_INTERACT_LAND);
             collisionStatus->bombetteExploded = 0;
             collisionStatus->bombetteExplosionPos.x = npc->pos.x;
             collisionStatus->bombetteExplosionPos.y = npc->pos.y;

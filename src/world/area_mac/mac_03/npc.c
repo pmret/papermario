@@ -518,7 +518,7 @@ EvtScript N(D_8024A7F4_83BFF4) = {
 EvtScript N(EVS_NpcIdle_ShyGuy) = {
     Call(SetNpcPos, NPC_SELF, -100, 0, -25)
     Call(InterpNpcYaw, NPC_SELF, 270, 1)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Run)
     Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
     Loop(0)
         Call(NpcMoveTo, NPC_SELF, -250, -25, 30)
@@ -536,11 +536,11 @@ EvtScript N(EVS_NpcIdle_ShyGuy) = {
 
 EvtScript N(EVS_NpcAI_ShyGuy) = {
     Call(DisablePlayerInput, true)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim0C)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Hurt)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 10)
     Call(SetNpcSpeed, NPC_SELF, Float(8.0))
-    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Run)
     Call(InterpNpcYaw, NPC_SELF, 90, 1)
     ExecGetTID(N(D_8024A7F4_83BFF4), LVarA)
     Call(NpcMoveTo, NPC_SELF, -100, 0, 0)
@@ -803,22 +803,22 @@ NpcData N(NpcData_ShyGuy) = {
     .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_IGNORE_TOUCH,
     .drops = NO_DROPS,
     .animations = {
-        .idle   = ANIM_ShyGuy_Red_Anim01,
-        .walk   = ANIM_ShyGuy_Red_Anim02,
-        .run    = ANIM_ShyGuy_Red_Anim03,
-        .chase  = ANIM_ShyGuy_Red_Anim03,
-        .anim_4 = ANIM_ShyGuy_Red_Anim01,
-        .anim_5 = ANIM_ShyGuy_Red_Anim01,
-        .death  = ANIM_ShyGuy_Red_Anim0C,
-        .hit    = ANIM_ShyGuy_Red_Anim0C,
-        .anim_8 = ANIM_ShyGuy_Red_Anim15,
-        .anim_9 = ANIM_ShyGuy_Red_Anim12,
-        .anim_A = ANIM_ShyGuy_Red_Anim11,
-        .anim_B = ANIM_ShyGuy_Red_Anim10,
-        .anim_C = ANIM_ShyGuy_Red_Anim05,
-        .anim_D = ANIM_ShyGuy_Red_Anim01,
-        .anim_E = ANIM_ShyGuy_Red_Anim01,
-        .anim_F = ANIM_ShyGuy_Red_Anim01,
+        .idle   = ANIM_ShyGuy_Red_Idle,
+        .walk   = ANIM_ShyGuy_Red_Walk,
+        .run    = ANIM_ShyGuy_Red_Run,
+        .chase  = ANIM_ShyGuy_Red_Run,
+        .anim_4 = ANIM_ShyGuy_Red_Idle,
+        .anim_5 = ANIM_ShyGuy_Red_Idle,
+        .death  = ANIM_ShyGuy_Red_Hurt,
+        .hit    = ANIM_ShyGuy_Red_Hurt,
+        .anim_8 = ANIM_ShyGuy_Red_Hiding,
+        .anim_9 = ANIM_ShyGuy_Red_Slouch,
+        .anim_A = ANIM_ShyGuy_Red_Excited,
+        .anim_B = ANIM_ShyGuy_Red_Crashed,
+        .anim_C = ANIM_ShyGuy_Red_Tackle,
+        .anim_D = ANIM_ShyGuy_Red_Idle,
+        .anim_E = ANIM_ShyGuy_Red_Idle,
+        .anim_F = ANIM_ShyGuy_Red_Idle,
     },
 };
 

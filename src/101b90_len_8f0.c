@@ -14,7 +14,7 @@
 #define SPRITE_ROM_START 0x1A40000 + 0x10
 #endif
 
-extern s32 spr_allocateBtlComponentsOnWorldHeap;
+extern bool SpriteUseGeneralHeap;
 extern HeapNode heap_generalHead;
 extern HeapNode heap_spriteHead;
 
@@ -365,7 +365,7 @@ SpriteComponent** spr_allocate_components(s32 count) {
     listSize = (count + 1) * 4;
     totalSize = (count * sizeof(SpriteComponent)) + listSize;
 
-    if (spr_allocateBtlComponentsOnWorldHeap) {
+    if (SpriteUseGeneralHeap) {
         listStart = _heap_malloc(&heap_generalHead, totalSize);
         listPos = listStart;
         component = (SpriteComponent*) listPos;

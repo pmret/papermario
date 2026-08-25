@@ -535,7 +535,7 @@ API_CALLABLE(N(UseAbility)) {
                             parakarry->pos.y = playerStatus->pos.y + 32.0f;
                             y = parakarry->pos.y;
                             parakarry->pos.y = playerStatus->pos.y;
-                            spawn_surface_effects(parakarry, SURFACE_INTERACT_WALK);
+                            npc_surface_spawn_fx(parakarry, SURFACE_INTERACT_WALK);
                             parakarry->pos.y = y;
 
                             if (hitAbove) {

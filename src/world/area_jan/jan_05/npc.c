@@ -16,7 +16,7 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy) = {
     IfEq(LVar0, 0)
         Goto(0)
     EndIf
-    Call(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Jungle_Anim09)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Jungle_Confused)
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, true)
     Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, false)
     Call(SetNpcPos, NPC_SELF, 125, 100, -392)

@@ -68,7 +68,7 @@ EvtScript N(EVS_NpcDefeat_Duplighost) = {
             Call(SetNpcFlagBits, NPC_Duplighost, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
             Call(SetNpcSpeed, NPC_Duplighost, Float(3.0 / DT))
             Call(SetNpcJumpscale, NPC_Duplighost, Float(1.5))
-            Call(SetNpcAnimation, NPC_Duplighost, ANIM_Duplighost_Anim04)
+            Call(SetNpcAnimation, NPC_Duplighost, ANIM_Duplighost_Run)
             Call(GetNpcPos, NPC_Duplighost, LVar0, LVar1, LVar2)
             Add(LVar0, 50)
             Call(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
@@ -187,22 +187,22 @@ NpcData N(NpcData_Ambush)[] = {
         .flags = COMMON_PASSIVE_FLAGS | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
-            .idle   = ANIM_Duplighost_Anim02,
-            .walk   = ANIM_Duplighost_Anim03,
-            .run    = ANIM_Duplighost_Anim04,
-            .chase  = ANIM_Duplighost_Anim04,
-            .anim_4 = ANIM_Duplighost_Anim02,
-            .anim_5 = ANIM_Duplighost_Anim02,
-            .death  = ANIM_Duplighost_Anim0A,
-            .hit    = ANIM_Duplighost_Anim0A,
-            .anim_8 = ANIM_Duplighost_Anim02,
-            .anim_9 = ANIM_Duplighost_Anim02,
-            .anim_A = ANIM_Duplighost_Anim02,
-            .anim_B = ANIM_Duplighost_Anim02,
-            .anim_C = ANIM_Duplighost_Anim02,
-            .anim_D = ANIM_Duplighost_Anim02,
-            .anim_E = ANIM_Duplighost_Anim02,
-            .anim_F = ANIM_Duplighost_Anim02,
+            .idle   = ANIM_Duplighost_Idle,
+            .walk   = ANIM_Duplighost_Walk,
+            .run    = ANIM_Duplighost_Run,
+            .chase  = ANIM_Duplighost_Run,
+            .anim_4 = ANIM_Duplighost_Idle,
+            .anim_5 = ANIM_Duplighost_Idle,
+            .death  = ANIM_Duplighost_Hurt,
+            .hit    = ANIM_Duplighost_Hurt,
+            .anim_8 = ANIM_Duplighost_Idle,
+            .anim_9 = ANIM_Duplighost_Idle,
+            .anim_A = ANIM_Duplighost_Idle,
+            .anim_B = ANIM_Duplighost_Idle,
+            .anim_C = ANIM_Duplighost_Idle,
+            .anim_D = ANIM_Duplighost_Idle,
+            .anim_E = ANIM_Duplighost_Idle,
+            .anim_F = ANIM_Duplighost_Idle,
         },
     },
 };

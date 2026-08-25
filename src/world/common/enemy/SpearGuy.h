@@ -16,22 +16,22 @@
 
 #define SPEAR_GUY_ANIMS \
 { \
-    .idle   = ANIM_SpearGuy_Anim03, \
-    .walk   = ANIM_SpearGuy_Anim05, \
-    .run    = ANIM_SpearGuy_Anim06, \
-    .chase  = ANIM_SpearGuy_Anim06, \
-    .anim_4 = ANIM_SpearGuy_Anim03, \
-    .anim_5 = ANIM_SpearGuy_Anim03, \
-    .death  = ANIM_SpearGuy_Anim07, \
-    .hit    = ANIM_SpearGuy_Anim07, \
-    .anim_8 = ANIM_SpearGuy_Anim1A, \
-    .anim_9 = ANIM_SpearGuy_Anim1B, \
-    .anim_A = ANIM_SpearGuy_Anim03, \
-    .anim_B = ANIM_SpearGuy_Anim03, \
-    .anim_C = ANIM_SpearGuy_Anim03, \
-    .anim_D = ANIM_SpearGuy_Anim03, \
-    .anim_E = ANIM_SpearGuy_Anim03, \
-    .anim_F = ANIM_SpearGuy_Anim03, \
+    .idle   = ANIM_SpearGuy_IdleUp, \
+    .walk   = ANIM_SpearGuy_Walk, \
+    .run    = ANIM_SpearGuy_Run, \
+    .chase  = ANIM_SpearGuy_Run, \
+    .anim_4 = ANIM_SpearGuy_IdleUp, \
+    .anim_5 = ANIM_SpearGuy_IdleUp, \
+    .death  = ANIM_SpearGuy_HurtUp, \
+    .hit    = ANIM_SpearGuy_HurtUp, \
+    .anim_8 = ANIM_SpearGuy_StabWindup, \
+    .anim_9 = ANIM_SpearGuy_StabThrust, \
+    .anim_A = ANIM_SpearGuy_IdleUp, \
+    .anim_B = ANIM_SpearGuy_IdleUp, \
+    .anim_C = ANIM_SpearGuy_IdleUp, \
+    .anim_D = ANIM_SpearGuy_IdleUp, \
+    .anim_E = ANIM_SpearGuy_IdleUp, \
+    .anim_F = ANIM_SpearGuy_IdleUp, \
 }
 
 #define SPEAR_GUY_HITBOX(npcID) \

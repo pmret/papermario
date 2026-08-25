@@ -57,7 +57,7 @@ void clear_player_data(void) {
     ShowingCoinCounter = false;
     HidingCoinCounter = false;
 
-    playerData->hammerLevel = -1;
+    playerData->hammerLevel = GEAR_RANK_NONE;
     playerData->curHP = 10;
     playerData->curMaxHP = 10;
     playerData->hardMaxHP = 10;
@@ -66,7 +66,7 @@ void clear_player_data(void) {
     playerData->hardMaxFP = 5;
     playerData->maxBP = 3;
     playerData->level = 1;
-    playerData->bootsLevel = 0;
+    playerData->bootsLevel = GEAR_RANK_NORMAL;
     playerData->hasActionCommands = false;
     playerData->coins = 0;
     playerData->fortressKeyCount = 0;
@@ -386,16 +386,16 @@ void initialize_status_bar(void) {
             break;
     }
 
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 #else
     statusBar->hpIconHIDs[0] = hid = hud_element_create(&HES_StatusHP);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 #endif
 
     statusBar->hpIconHIDs[1] = hid = hud_element_create(&HES_StatusHeart);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 
 #if VERSION_PAL
@@ -414,52 +414,52 @@ void initialize_status_bar(void) {
             break;
     }
 
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 #else
     statusBar->fpIconHIDs[0] = hid = hud_element_create(&HES_StatusFP);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 #endif
 
     statusBar->fpIconHIDs[1] = hid = hud_element_create(&HES_StatusFlower);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 
     statusBar->coinIconHID = hid = hud_element_create(&HES_StatusCoin);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 
     statusBar->coinSparkleHID = hid = hud_element_create(&HES_Item_CoinSparkleRandom);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 
     statusBar->spIconHID = hid = hud_element_create(&HES_StatusStarPoint);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 
     statusBar->spShineHID = hid = hud_element_create(&HES_StatusSPShine);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 
     statusBar->hpTimesHID = hid = hud_element_create(&HES_StatusTimes);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 
     statusBar->fpTimesHID = hid = hud_element_create(&HES_StatusTimes);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 
     statusBar->spTimesHID = hid = hud_element_create(&HES_StatusTimes);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 
     statusBar->coinTimesHID = hid = hud_element_create(&HES_StatusTimes);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 
     statusBar->starIconHID = hid = hud_element_create(&HES_StatusStar1);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
     hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX);
 
     star_power_shimmer_init();
@@ -1225,10 +1225,10 @@ void show_coin_counter(void) {
         set_window_properties(WIN_CURRENCY_COUNTER, 32, 164, 64, 20, WINDOW_PRIORITY_21, coin_counter_draw_content, 0, -1);
         set_window_update(WIN_CURRENCY_COUNTER, (s32)basic_window_update);
         statusBar->coinCountTimesHID = hid = hud_element_create(&HES_MenuTimes);
-        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
         hud_element_set_tint(hid, 255, 255, 255);
         statusBar->coinCountIconHID = hid = hud_element_create(&HES_StatusCoin);
-        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
         hud_element_set_tint(hid, 255, 255, 255);
         statusBar->coinCounterHideDelay = 0;
 

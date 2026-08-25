@@ -33,7 +33,7 @@ typedef struct GameModeIncomplete {
     /* 0x0C */ UNK_FUN_PTR(unusedFunc);
     /* 0x10 */ void (*render)(void);
     #ifdef AVOID_UB
-    /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
+    /* 0x14 */ void (*renderAux)(void); ///< @see render_game_mode_frontUI
     #endif
 } GameModeIncomplete; // size = 0x14
 

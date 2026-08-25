@@ -647,7 +647,7 @@ void pause_partners_init(MenuPanel* panel) {
 
     for (i = 0; i < ARRAY_COUNT(gPausePartnersHudScripts[0]); i++) {
         gPausePartnersHIDs[i] = hud_element_create(gPausePartnersHudScripts[gCurrentLanguage][i]);
-        hud_element_set_flags(gPausePartnersHIDs[i], HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(gPausePartnersHIDs[i], HUD_ELEMENT_FLAG_MANUAL_RENDER);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPausePartnersWindowBPs); i++) {

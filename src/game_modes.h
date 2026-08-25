@@ -41,15 +41,15 @@ typedef struct GameMode {
     /* 0x08 */ void (*step)(void);
     /* 0x0C */ UNK_FUN_PTR(unusedFunc);
     /* 0x10 */ void (*render)(void);
-    /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
+    /* 0x14 */ void (*renderAux)(void); ///< @see render_game_mode_frontUI
 } GameMode; // size = 0x18
 
 void set_game_mode(s16 mode);
-void clear_game_modes(void);
+void clear_game_mode(void);
 GameMode* set_game_mode_slot(s32 i, GameMode* mode);
-void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void));
-void step_current_game_mode(void);
-void state_render_backUI(void);
-void state_render_frontUI(void);
+void set_game_mode_render_frontUI(s32 i, void (*fn)(void));
+void step_game_mode(void);
+void render_game_mode_backUI(void);
+void render_game_mode_frontUI(void);
 
 #endif

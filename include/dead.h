@@ -71,7 +71,7 @@
 #define sfx_play_sound_with_params dead_sfx_play_sound_with_params
 #define sfx_get_spatialized_sound_params dead_sfx_get_spatialized_sound_params
 #define npc_test_move_simple_without_slipping dead_npc_test_move_simple_without_slipping
-#define spawn_surface_effects dead_spawn_surface_effects
+#define npc_surface_spawn_fx dead_npc_surface_spawn_fx
 #define get_item_entity dead_get_item_entity
 #define gOverrideFlags dead_gOverrideFlags
 #define set_message_text_var dead_set_message_text_var

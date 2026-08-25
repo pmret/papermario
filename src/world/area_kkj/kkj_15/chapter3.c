@@ -43,10 +43,10 @@ EvtScript N(EVS_ApproachPeach_Ch3) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Sub(LVar0, 26)
         Sub(LVar2, 2)
-        Call(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Run)
         Call(SetNpcSpeed, NPC_Koopatrol_03, Float(5.0))
         Call(NpcMoveTo, NPC_Koopatrol_03, LVar0, LVar2, 0)
-        Call(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Idle)
         Call(NpcFacePlayer, NPC_Koopatrol_03, 5)
         Call(SetNpcVar, NPC_Koopatrol_03, 0, 0)
     EndThread
@@ -54,10 +54,10 @@ EvtScript N(EVS_ApproachPeach_Ch3) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Add(LVar0, 26)
         Add(LVar2, 2)
-        Call(SetNpcAnimation, NPC_Koopatrol_04, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcAnimation, NPC_Koopatrol_04, ANIM_WorldKoopatrol_Run)
         Call(SetNpcSpeed, NPC_Koopatrol_04, Float(5.0))
         Call(NpcMoveTo, NPC_Koopatrol_04, LVar0, LVar2, 0)
-        Call(SetNpcAnimation, NPC_Koopatrol_04, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Koopatrol_04, ANIM_WorldKoopatrol_Idle)
         Call(NpcFacePlayer, NPC_Koopatrol_04, 5)
     EndThread
     Loop(0)
@@ -77,7 +77,7 @@ EvtScript N(EVS_PickUpPeach_Ch3) = {
         Call(GetNpcPos, NPC_Koopatrol_03, LVar0, LVar1, LVar2)
         Add(LVar0, 5)
         Call(NpcMoveTo, NPC_Koopatrol_03, LVar0, LVar2, 5)
-        Call(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim12)
+        Call(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Lift)
         Add(LVar0, 5)
         Call(NpcMoveTo, NPC_Koopatrol_03, LVar0, LVar2, 5)
     EndThread
@@ -85,7 +85,7 @@ EvtScript N(EVS_PickUpPeach_Ch3) = {
         Call(GetNpcPos, NPC_Koopatrol_04, LVar0, LVar1, LVar2)
         Sub(LVar0, 5)
         Call(NpcMoveTo, NPC_Koopatrol_04, LVar0, LVar2, 5)
-        Call(SetNpcAnimation, NPC_Koopatrol_04, ANIM_WorldKoopatrol_Anim12)
+        Call(SetNpcAnimation, NPC_Koopatrol_04, ANIM_WorldKoopatrol_Lift)
         Sub(LVar0, 5)
         Call(NpcMoveTo, NPC_Koopatrol_04, LVar0, LVar2, 5)
     EndThread
@@ -122,13 +122,13 @@ EvtScript N(EVS_CarryPeachAway_Ch3) = {
     EndThread
     Call(SetNpcVar, NPC_Koopatrol_03, 0, 1)
     Thread
-        Call(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim14)
+        Call(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_CarryFast)
         Call(SetNpcSpeed, NPC_Koopatrol_03, Float(7.5))
         Call(NpcMoveTo, NPC_Koopatrol_03, 249, -72, 0)
         Call(SetNpcVar, NPC_Koopatrol_03, 0, 0)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Koopatrol_04, ANIM_WorldKoopatrol_Anim14)
+        Call(SetNpcAnimation, NPC_Koopatrol_04, ANIM_WorldKoopatrol_CarryFast)
         Call(SetNpcSpeed, NPC_Koopatrol_04, Float(7.5))
         Call(NpcMoveTo, NPC_Koopatrol_04, 281, -68, 0)
     EndThread
@@ -170,7 +170,7 @@ EvtScript N(EVS_Scene_Chapter3) = {
     Call(SetPanTarget, CAM_DEFAULT, -50, 0, -20)
     Call(PanToTarget, CAM_DEFAULT, 0, true)
     Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-    Call(SpeakToNpc, NPC_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 0, NPC_Bowser, MSG_Peach_0083)
+    Call(SpeakToNpc, NPC_Kammy, ANIM_WorldKammy_Talk, ANIM_WorldKammy_Idle, 0, NPC_Bowser, MSG_Peach_0083)
     Thread
         ExecWait(N(EVS_AnimateRotatingWall_AlmostCaught))
         Call(SetPlayerAnimation, ANIM_Peach2_Gasp)
@@ -200,7 +200,7 @@ EvtScript N(EVS_Scene_Chapter3) = {
     Wait(30 * DT)
     Call(SetNpcAnimation, NPC_Bowser, ANIM_WorldBowser_Idle)
     Call(SpeakToNpc, NPC_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, NPC_Kammy, MSG_Peach_0085)
-    Call(SpeakToNpc, NPC_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 0, NPC_Bowser, MSG_Peach_0086)
+    Call(SpeakToNpc, NPC_Kammy, ANIM_WorldKammy_Talk, ANIM_WorldKammy_Idle, 0, NPC_Bowser, MSG_Peach_0086)
     Call(SpeakToNpc, NPC_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, NPC_Kammy, MSG_Peach_0087)
     Call(SetNpcAnimation, NPC_Bowser, ANIM_WorldBowser_ArmsCrossed)
     Wait(30 * DT)
@@ -225,7 +225,7 @@ EvtScript N(EVS_Scene_Chapter3) = {
         Call(NpcJump0, NPC_Bowser, -50, 0, -20, 10)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim05)
+        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Shout)
         Call(NpcJump0, NPC_Kammy, -130, 0, -20, 10)
     EndThread
     Thread
@@ -244,7 +244,7 @@ EvtScript N(EVS_Scene_Chapter3) = {
     Call(SpeakToPlayer, NPC_Bowser, ANIM_WorldBowser_Shock, ANIM_WorldBowser_Shock, 0, MSG_Peach_0089)
     Wait(20 * DT)
     Call(SetNpcAnimation, NPC_Bowser, ANIM_WorldBowser_Idle)
-    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim01)
+    Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Idle)
     Call(ContinueSpeech, NPC_Bowser, ANIM_WorldBowser_AngryTalk, ANIM_WorldBowser_Idle, 0, MSG_Peach_008A)
     Loop(0)
         Wait(1)
@@ -279,9 +279,9 @@ EvtScript N(EVS_Scene_Chapter3) = {
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 5, MSG_Peach_008F)
     IfEq(AF_KKJ_08, false)
-        Call(SpeakToNpc, NPC_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 0, NPC_Bowser, MSG_Peach_0090)
+        Call(SpeakToNpc, NPC_Kammy, ANIM_WorldKammy_Talk, ANIM_WorldKammy_Idle, 0, NPC_Bowser, MSG_Peach_0090)
     Else
-        Call(SpeakToNpc, NPC_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 0, NPC_Bowser, MSG_Peach_0091)
+        Call(SpeakToNpc, NPC_Kammy, ANIM_WorldKammy_Talk, ANIM_WorldKammy_Idle, 0, NPC_Bowser, MSG_Peach_0091)
     EndIf
     Call(SpeakToNpc, NPC_Bowser, ANIM_WorldBowser_TalkEyesClosed, ANIM_WorldBowser_Idle, 0, NPC_Kammy, MSG_Peach_0092)
     Call(SetNpcAnimation, NPC_Bowser, ANIM_WorldBowser_Idle)
@@ -291,11 +291,11 @@ EvtScript N(EVS_Scene_Chapter3) = {
     Call(SetNpcAnimation, NPC_Bowser, ANIM_WorldBowser_Idle)
     Call(InterpNpcYaw, NPC_Bowser, 90, 7 * DT)
     Wait(10 * DT)
-    Call(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 5, MSG_Peach_0094)
+    Call(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Talk, ANIM_WorldKammy_Idle, 5, MSG_Peach_0094)
     Call(RotateModel, MODEL_o2, 120, 0, 1, 0)
     Call(SetNpcPos, NPC_Koopatrol_03, 249, 0, -70)
     Call(SetNpcPos, NPC_Koopatrol_04, 281, 0, -70)
-    Call(SpeakToNpc, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_Bowser, MSG_Peach_0095)
+    Call(SpeakToNpc, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Talk, ANIM_WorldKoopatrol_Idle, 0, NPC_Bowser, MSG_Peach_0095)
     Call(InterpPlayerYaw, 90, 0)
     Call(SetPlayerAnimation, ANIM_Peach1_Idle)
     ExecWait(N(EVS_ApproachPeach_Ch3))

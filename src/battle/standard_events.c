@@ -2094,8 +2094,8 @@ EvtScript EVS_Enemy_BlowAway = {
                 Set(LFlag0, true)
             EndIf
         EndIf
-        IfFlag(LVar2, STATUS_FLAG_FEAR)
-            IfFlag(LVar5, STATUS_FLAG_FEAR)
+        IfFlag(LVar2, STATUS_FLAG_UNUSED)
+            IfFlag(LVar5, STATUS_FLAG_UNUSED)
                 Set(LFlag0, true)
             EndIf
         EndIf

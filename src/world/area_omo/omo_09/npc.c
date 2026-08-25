@@ -109,7 +109,7 @@ EvtScript N(EVS_NpcIdle_Pokey) = {
     IfEq(GB_OMO_PeachChoice3, 0)
         Call(SpeakToPlayer, NPC_Pokey, ANIM_Pokey_Idle4, ANIM_Pokey_Idle4, 0, MSG_CH4_003E)
     Else
-        Call(SpeakToPlayer, NPC_Koopatrol, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_CH4_003F)
+        Call(SpeakToPlayer, NPC_Koopatrol, ANIM_WorldKoopatrol_Talk, ANIM_WorldKoopatrol_Idle, 0, MSG_CH4_003F)
     EndIf
     Thread
         Call(N(EnableCameraLeadingPlayer))
@@ -354,12 +354,12 @@ NpcData N(NpcData_ShyGuy_05) = {
 };
 
 AnimID N(ExtraAnims_Kammy)[] = {
-    ANIM_WorldKammy_Anim0E,
-    ANIM_WorldKammy_Anim0F,
-    ANIM_WorldKammy_Anim10,
-    ANIM_WorldKammy_Anim13,
-    ANIM_WorldKammy_Anim15,
-    ANIM_WorldKammy_Anim16,
+    ANIM_WorldKammy_FlyRodTalk,
+    ANIM_WorldKammy_FlyRodCast,
+    ANIM_WorldKammy_FlyBrake,
+    ANIM_WorldKammy_FlyIdleSly,
+    ANIM_WorldKammy_FlyFastSly,
+    ANIM_WorldKammy_FlyTalkSly,
     ANIM_LIST_END
 };
 

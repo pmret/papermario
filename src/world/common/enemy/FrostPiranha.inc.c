@@ -70,17 +70,17 @@ NpcSettings N(NpcSettings_FrostPiranha_Hitbox) = {
 };
 
 AnimID N(ExtraAnims_FrostPiranha_Hitbox)[] = {
-    ANIM_LargePiranha_Frost_Anim00,
+    ANIM_LargePiranha_Frost_Still,
     ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_FrostPiranha)[] = {
-    ANIM_LargePiranha_Frost_Anim00,
-    ANIM_LargePiranha_Frost_Anim01,
-    ANIM_LargePiranha_Frost_Anim0E,
-    ANIM_LargePiranha_Frost_Anim05,
-    ANIM_LargePiranha_Frost_Anim06,
-    ANIM_LargePiranha_Frost_Anim18,
-    ANIM_LargePiranha_Frost_Anim17,
+    ANIM_LargePiranha_Frost_Still,
+    ANIM_LargePiranha_Frost_Idle,
+    ANIM_LargePiranha_Frost_Hurt,
+    ANIM_LargePiranha_Frost_Windup,
+    ANIM_LargePiranha_Frost_Bite,
+    ANIM_LargePiranha_Frost_Burrow,
+    ANIM_LargePiranha_Frost_Emerge,
     ANIM_LIST_END
 };

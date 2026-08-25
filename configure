@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-python3 tools/build/configure.py "$@"
+python3 tools/configure/src/configure/main.py "$@"

@@ -198,7 +198,7 @@ void action_update_run(void) {
     playerData->runningStepsTaken++;
 }
 
-void func_802B6550_E23C30(void) {
+void action_update_walk_set_peach_anim(void) {
     if (!(gPlayerStatus.animFlags & PA_FLAG_INVISIBLE)) {
         if (!(gGameStatusPtr->peachFlags & PEACH_FLAG_DEPRESSED)) {
             suggest_player_anim_allow_backward(WalkPeachAnims[gGameStatusPtr->peachBakingIngredient]);
@@ -221,7 +221,7 @@ static void action_update_walk_peach(void) {
         if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
             playerStatus->curSpeed = playerStatus->walkSpeed;
         }
-        func_802B6550_E23C30();
+        action_update_walk_set_peach_anim();
     }
 
     if (playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT) {

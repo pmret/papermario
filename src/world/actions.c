@@ -46,8 +46,8 @@ f32 GravityParamsStartJump[] = { 15.7566404343f, -7.38624f, 3.44693994522f, -0.7
 f32 GravityParamsStartFall[] = { 0.154342994094f, -0.350080013275f, -0.182262003422f, 0.0115200001746f };
 
  // default move speeds
-f32 D_800F7B70 = 2.0f; // walk
-f32 D_800F7B74 = 4.0f; // run
+f32 DefaultWalkSpeed = 2.0f; // walk
+f32 DefaultMoveSpeed = 4.0f; // run
 f32 D_800F7B78 = 32.0f; // max jump
 f32 D_800F7B7C = -32.0f; // ???
 
@@ -56,80 +56,80 @@ s32 D_800F7B84[] = { 0, 0, 0};
 f32 LastMidairPlayerVelY = 0.0;
 
 AnimID ClubbaDisguiseExtraAnims[] = {
-    ANIM_WorldClubba_Anim00,
-    ANIM_WorldClubba_Anim02,
-    ANIM_WorldClubba_Anim03,
-    ANIM_WorldClubba_Anim04,
-    ANIM_WorldClubba_Anim05,
-    ANIM_WorldClubba_Anim08,
-    ANIM_WorldClubba_Anim07,
-    ANIM_WorldClubba_Anim13,
-    ANIM_WorldClubba_Anim14,
+    ANIM_WorldClubba_Still,
+    ANIM_WorldClubba_Idle,
+    ANIM_WorldClubba_Walk,
+    ANIM_WorldClubba_Run,
+    ANIM_WorldClubba_Talk,
+    ANIM_WorldClubba_WakeUp,
+    ANIM_WorldClubba_Sleep,
+    ANIM_WorldClubba_IdleMini,
+    ANIM_WorldClubba_GotItem,
     ANIM_LIST_END
 };
 
 AnimID HammerBroDisguiseExtraAnims[] = {
-    ANIM_HammerBros_Anim00,
-    ANIM_HammerBros_Anim02,
-    ANIM_HammerBros_Anim03,
-    ANIM_HammerBros_Anim04,
-    ANIM_HammerBros_Anim06,
-    ANIM_HammerBros_Anim07,
-    ANIM_HammerBros_Anim09,
-    ANIM_HammerBros_Anim0A,
-    ANIM_HammerBros_Anim0B,
-    ANIM_HammerBros_Anim1A,
+    ANIM_HammerBros_Still,
+    ANIM_HammerBros_Idle,
+    ANIM_HammerBros_IdleDisarmed,
+    ANIM_HammerBros_Walk,
+    ANIM_HammerBros_WalkDisarmed,
+    ANIM_HammerBros_Run,
+    ANIM_HammerBros_RunDisarmed,
+    ANIM_HammerBros_Talk,
+    ANIM_HammerBros_TalkDisarmed,
+    ANIM_HammerBros_GotItem,
     ANIM_LIST_END
 };
 
 AnimID KoopatrolDisguiseExtraAnims[] = {
-    ANIM_WorldKoopatrol_Anim00,
-    ANIM_WorldKoopatrol_Anim01,
-    ANIM_WorldKoopatrol_Anim02,
-    ANIM_WorldKoopatrol_Anim04,
-    ANIM_WorldKoopatrol_Anim05,
-    ANIM_WorldKoopatrol_Anim06,
-    ANIM_WorldKoopatrol_Anim07,
-    ANIM_WorldKoopatrol_Anim08,
-    ANIM_WorldKoopatrol_Anim09,
-    ANIM_WorldKoopatrol_Anim12,
-    ANIM_WorldKoopatrol_Anim14,
-    ANIM_WorldKoopatrol_Anim1B,
+    ANIM_WorldKoopatrol_Still,
+    ANIM_WorldKoopatrol_Idle,
+    ANIM_WorldKoopatrol_IdleFlashlight,
+    ANIM_WorldKoopatrol_Walk,
+    ANIM_WorldKoopatrol_WalkFlashlight,
+    ANIM_WorldKoopatrol_Run,
+    ANIM_WorldKoopatrol_RunFlashlight,
+    ANIM_WorldKoopatrol_Talk,
+    ANIM_WorldKoopatrol_TalkFlashlight,
+    ANIM_WorldKoopatrol_Lift,
+    ANIM_WorldKoopatrol_CarryFast,
+    ANIM_WorldKoopatrol_GotItem,
     ANIM_LIST_END
 };
 
 DisguiseAnims BasicPeachDisguiseAnims[] = {
     [PEACH_DISGUISE_NONE] {
-        ANIM_WorldKoopatrol_Anim01,
-        ANIM_WorldKoopatrol_Anim04,
-        ANIM_WorldKoopatrol_Anim06,
-        ANIM_WorldKoopatrol_Anim08,
-        ANIM_WorldKoopatrol_Anim00,
-        ANIM_WorldKoopatrol_Anim1B
+        ANIM_WorldKoopatrol_Idle,
+        ANIM_WorldKoopatrol_Walk,
+        ANIM_WorldKoopatrol_Run,
+        ANIM_WorldKoopatrol_Talk,
+        ANIM_WorldKoopatrol_Still,
+        ANIM_WorldKoopatrol_GotItem
     },
     [PEACH_DISGUISE_KOOPATROL] {
-        ANIM_WorldKoopatrol_Anim01,
-        ANIM_WorldKoopatrol_Anim04,
-        ANIM_WorldKoopatrol_Anim06,
-        ANIM_WorldKoopatrol_Anim08,
-        ANIM_WorldKoopatrol_Anim00,
-        ANIM_WorldKoopatrol_Anim1B
+        ANIM_WorldKoopatrol_Idle,
+        ANIM_WorldKoopatrol_Walk,
+        ANIM_WorldKoopatrol_Run,
+        ANIM_WorldKoopatrol_Talk,
+        ANIM_WorldKoopatrol_Still,
+        ANIM_WorldKoopatrol_GotItem
     },
     [PEACH_DISGUISE_HAMMER_BROS] {
-        ANIM_HammerBros_Anim03,
-        ANIM_HammerBros_Anim06,
-        ANIM_HammerBros_Anim09,
-        ANIM_HammerBros_Anim0B,
-        ANIM_HammerBros_Anim00,
-        ANIM_HammerBros_Anim1A
+        ANIM_HammerBros_IdleDisarmed,
+        ANIM_HammerBros_WalkDisarmed,
+        ANIM_HammerBros_RunDisarmed,
+        ANIM_HammerBros_TalkDisarmed,
+        ANIM_HammerBros_Still,
+        ANIM_HammerBros_GotItem
     },
     [PEACH_DISGUISE_CLUBBA] {
-        ANIM_WorldClubba_Anim02,
-        ANIM_WorldClubba_Anim03,
-        ANIM_WorldClubba_Anim04,
-        ANIM_WorldClubba_Anim05,
-        ANIM_WorldClubba_Anim00,
-        ANIM_WorldClubba_Anim14
+        ANIM_WorldClubba_Idle,
+        ANIM_WorldClubba_Walk,
+        ANIM_WorldClubba_Run,
+        ANIM_WorldClubba_Talk,
+        ANIM_WorldClubba_Still,
+        ANIM_WorldClubba_GotItem
     },
 };
 

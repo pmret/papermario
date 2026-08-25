@@ -340,7 +340,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     EndThread
     Call(SpeakToPlayer, NPC_Peach_01, ANIM_Peach3_TiedShout, ANIM_Peach2_TiedIdle, 0, MSG_CH8_007F)
     Wait(15)
-    Call(SpeakToPlayer, NPC_Kammy_01, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim04, 512, MSG_CH8_0080)
+    Call(SpeakToPlayer, NPC_Kammy_01, ANIM_BattleKammy_FlyTalk, ANIM_BattleKammy_FlyStill, 512, MSG_CH8_0080)
     Wait(15)
     Call(GetNpcPos, NPC_Kammy_01, LVar0, LVar1, LVar2)
     Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -358,17 +358,17 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
         Wait(30)
         Call(InterpNpcYaw, NPC_Peach_01, 270, 0)
     EndThread
-    Call(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_Anim07)
-    Call(SpeakToPlayer, NPC_Kammy_01, ANIM_BattleKammy_Anim07, ANIM_BattleKammy_Anim07, 512, MSG_CH8_0081)
+    Call(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_FlyRodTalk)
+    Call(SpeakToPlayer, NPC_Kammy_01, ANIM_BattleKammy_FlyRodTalk, ANIM_BattleKammy_FlyRodTalk, 512, MSG_CH8_0081)
     Call(FadeOutMusic, 0, 1500)
-    Call(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_Anim08)
+    Call(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_FlyRodCast)
     Call(GetNpcPos, NPC_Kammy_01, LVar0, LVar1, LVar2)
     Add(LVar0, -30)
     Call(PlaySoundAt, SOUND_KAMMY_SUMMON_MAGIC, SOUND_SPACE_DEFAULT, LVar0, 22, 0)
     PlayEffect(EFFECT_GATHER_ENERGY_PINK, 0, LVar0, 22, 0, 1, 80)
     Thread
         Wait(80)
-        Call(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_Anim04)
+        Call(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_FlyStill)
     EndThread
     Wait(40)
     Call(SetCamProperties, CAM_DEFAULT, Float(4.0), 300, 0, 0, 1100, Float(7.0), Float(0.0))

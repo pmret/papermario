@@ -90,7 +90,7 @@ API_CALLABLE(N(func_802A13E4_7316E4)) {
             for (i = 0; i < ARRAY_COUNT(D_802A2DD8); i++) {
                 hid = hud_element_create(N(D_802A2848_732B48)[N(D_802A2858_732B58)[i]]);
                 D_802A2DD8[i] = hid;
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
             }
             D_802A2DEC = 1;
 

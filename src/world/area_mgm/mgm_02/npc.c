@@ -213,14 +213,14 @@ API_CALLABLE(N(CreateScoreDisplay)) {
         hidButton = hud_element_create(&HES_AButton);
         data->buttonHID = hidButton;
         hud_element_set_render_depth(hidButton, 0);
-        hud_element_set_flags(hidButton, HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(hidButton, HUD_ELEMENT_FLAG_MANUAL_RENDER);
         hud_element_set_tint(hidButton, 255, 255, 255);
         hud_element_set_script(hidButton, &HES_AButton);
 
         hidMeter = hud_element_create(&HES_BlueMeter);
         data->meterHID = hidMeter;
         hud_element_set_render_depth(hidMeter, 0);
-        hud_element_set_flags(hidMeter, HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(hidMeter, HUD_ELEMENT_FLAG_MANUAL_RENDER);
     }
 
     return ApiStatus_BLOCK;

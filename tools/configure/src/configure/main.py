@@ -15,11 +15,8 @@ VERSIONS = ["us", "jp", "ique", "pal"]
 DO_SHA1_CHECK = True
 
 # Paths:
-ROOT = Path(__file__).parent.parent.parent
-if ROOT.is_absolute():
-    ROOT = ROOT.relative_to(Path.cwd())
-
-BUILD_TOOLS = Path("tools/build")
+ROOT = Path.cwd()
+BUILD_TOOLS = ROOT / "tools/build"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
 PIGMENT64 = "pigment64"
@@ -88,7 +85,7 @@ def write_ninja_rules(
 
     cflags_egcs = f"-c -fno-PIC -mno-abicalls -mcpu=4300 -G 0 -x c -B {cc_egcs_dir} {extra_cflags}"
 
-    ninja.variable("python", sys.executable)
+    ninja.variable("python", "python3")
 
     ld_args = f"-T ver/$version/build/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map $mapfile --no-check-sections -T $in -o $out"
     ld = f"{cross}ld" if not "PAPERMARIO_LD" in os.environ else os.environ["PAPERMARIO_LD"]
@@ -368,7 +365,7 @@ def does_iconv_work() -> bool:
         sub = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, input=stdin, cwd=ROOT)
         return sub.stdout
 
-    expected_stdout = run(["tools/build/iconv.py", "UTF-8", "CP932"], stdin)
+    expected_stdout = run(["python3", str(BUILD_TOOLS / "iconv.py"), "UTF-8", "CP932"], stdin)
     actual_stdout = run(["iconv", "--from", "UTF-8", "--to", "CP932"], stdin)
     return expected_stdout == actual_stdout
 
@@ -534,7 +531,11 @@ class Configure:
                     built_objects.add(str(object_path))
                 elif object_path.suffix.endswith(".h") or object_path.suffix.endswith(".c"):
                     generated_code.append(str(object_path))
-                elif object_path.name.endswith(".png.bin") or object_path.name.endswith(".pal.bin"):
+                elif (
+                    object_path.name.endswith(".png.bin")
+                    or object_path.name.endswith(".pal.bin")
+                    or object_path.name.endswith(".dat")
+                ):
                     inc_img_bins.append(str(object_path))
 
                 # don't rebuild objects if we've already seen all of them
@@ -570,7 +571,7 @@ class Configure:
 
         # Effect data includes
         effect_yaml = ROOT / "src/effects.yaml"
-        effect_data_outdir = ROOT / "assets" / version / "effects"
+        effect_data_outdir = ROOT / "assets" / self.version / "effects"
         effect_macros_path = effect_data_outdir / "effect_macros.h"
         effect_defs_path = effect_data_outdir / "effect_defs.h"
         effect_table_path = effect_data_outdir / "effect_table.c"
@@ -614,7 +615,7 @@ class Configure:
         )
 
         item_table_data = Path("src/item_table.yaml")
-        if version == "pal":
+        if self.version == "pal":
             item_table_data = Path("src/item_table_pal.yaml")
 
         build(
@@ -669,7 +670,7 @@ class Configure:
             elif isinstance(seg, splat.segtypes.common.hasm.CommonSegHasm):
                 cppflags = f"-DVERSION_{self.version.upper()}"
 
-                if version == "ique" and seg.name.startswith("os/"):
+                if self.version == "ique" and seg.name.startswith("os/"):
                     cppflags += " -DBBPLAYER"
 
                 build(entry.object_path, entry.src_paths, "as", variables={"cppflags": cppflags})
@@ -706,9 +707,6 @@ class Configure:
                 if entry.src_paths[0].suffixes[-1] == ".cpp":
                     task = "cxx"
 
-                if modern_gcc:
-                    task = "cc_modern"
-
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
                 elif "gcc_272" in cflags:
@@ -724,10 +722,13 @@ class Configure:
                     task = "cc_modern"
                     cflags = cflags.replace("gcc_modern", "")
 
+                if modern_gcc:
+                    task = "cc_modern"
+
                 if task == "cc_modern":
                     cppflags += " -DMODERN_COMPILER"
 
-                if version == "ique":
+                if self.version == "ique":
                     if "nusys" in entry.src_paths[0].parts:
                         pass
                     elif "os" in entry.src_paths[0].parts:
@@ -736,17 +737,17 @@ class Configure:
                         cppflags += " -DBBPLAYER"
 
                 encoding = "CP932"  # similar to SHIFT-JIS, but includes backslash and tilde
-                if version == "ique":
+                if self.version == "ique":
                     encoding = "EUC-JP"
 
                 if use_python_iconv:
-                    iconv = f"tools/build/iconv.py UTF-8 {encoding}"
+                    iconv = f"$python tools/build/iconv.py UTF-8 {encoding}"
                 else:
                     iconv = f"iconv --from UTF-8 --to {encoding}"
 
                 # use tools/sjis-escape.py for src/battle/area/tik2/area.c
-                if version != "ique" and seg.dir.parts[-3:] == ("battle", "area", "tik2") and seg.name == "area":
-                    iconv += " | tools/sjis-escape.py"
+                if self.version != "ique" and seg.dir.parts[-3:] == ("battle", "area", "tik2") and seg.name == "area":
+                    iconv += " | $python tools/sjis-escape.py"
 
                 # Dead cod
                 if isinstance(seg.parent.yaml, dict) and seg.parent.yaml.get("dead_code", False):
@@ -1234,6 +1235,13 @@ class Configure:
             else:
                 raise Exception(f"don't know how to build {seg.__class__.__name__} '{seg.name}'")
 
+        # Phony target for building all objects but not linking
+        ninja.build(
+            "lib_" + self.version,
+            "phony",
+            [str(obj) for obj in built_objects],
+        )
+
         # Run undefined_syms through cpp
         ninja.build(
             str(self.undefined_syms_path()),
@@ -1292,7 +1300,7 @@ class Configure:
         ninja.build("ver/current/build/papermario.z64", "phony", str(self.rom_path()))
 
 
-if __name__ == "__main__":
+def main():
     from argparse import ArgumentParser
 
     parser = ArgumentParser(description="Paper Mario build.ninja generator")
@@ -1430,8 +1438,8 @@ if __name__ == "__main__":
             except OSError:
                 pass
 
-    extra_cflags = ""
-    extra_cppflags = ""
+    extra_cflags = os.environ.get("CFLAGS", "")
+    extra_cppflags = os.environ.get("CPPFLAGS", "")
     if args.non_matching:
         extra_cppflags += " -DNON_MATCHING"
 
@@ -1449,6 +1457,9 @@ if __name__ == "__main__":
 
     # add splat to python import path
     sys.path.insert(0, str((ROOT / args.splat / "src").resolve()))
+
+    # add tools/build to import path
+    sys.path.insert(0, str(BUILD_TOOLS.resolve()))
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w"), width=9999)
 
@@ -1499,3 +1510,7 @@ if __name__ == "__main__":
     else:
         ninja.build("all", "phony", all_rom_oks)
     ninja.default("all")
+
+
+if __name__ == "__main__":
+    main()

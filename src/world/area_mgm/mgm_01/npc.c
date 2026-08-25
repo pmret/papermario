@@ -634,7 +634,7 @@ API_CALLABLE(N(CreateMinigame)) {
 
     hid = hud_element_create(&HES_StatusCoin);
     data->hudElemID = hid;
-    hud_element_set_flags(data->hudElemID, HUD_ELEMENT_FLAG_80);
+    hud_element_set_flags(data->hudElemID, HUD_ELEMENT_FLAG_MANUAL_RENDER);
     hud_element_set_tint(data->hudElemID, 255, 255, 255);
 
     data->scoreWindowPosX = SCREEN_WIDTH + 1;

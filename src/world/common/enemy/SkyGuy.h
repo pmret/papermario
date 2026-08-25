@@ -17,20 +17,20 @@
 
 #define SKY_GUY_ANIMS \
 { \
-    .idle   = ANIM_SkyGuy_Anim34, \
-    .walk   = ANIM_SkyGuy_Anim34, \
-    .run    = ANIM_SkyGuy_Anim38, \
-    .chase  = ANIM_SkyGuy_Anim38, \
-    .anim_4 = ANIM_SkyGuy_Anim33, \
-    .anim_5 = ANIM_SkyGuy_Anim33, \
-    .death  = ANIM_SkyGuy_Anim39, \
-    .hit    = ANIM_SkyGuy_Anim39, \
-    .anim_8 = ANIM_SkyGuy_Anim38, \
-    .anim_9 = ANIM_SkyGuy_Anim38, \
-    .anim_A = ANIM_SkyGuy_Anim01, \
-    .anim_B = ANIM_SkyGuy_Anim01, \
-    .anim_C = ANIM_SkyGuy_Anim01, \
-    .anim_D = ANIM_SkyGuy_Anim01, \
-    .anim_E = ANIM_SkyGuy_Anim01, \
-    .anim_F = ANIM_SkyGuy_Anim01, \
+    .idle   = ANIM_SkyGuy_WorldIdle, \
+    .walk   = ANIM_SkyGuy_WorldIdle, \
+    .run    = ANIM_SkyGuy_WorldRun, \
+    .chase  = ANIM_SkyGuy_WorldRun, \
+    .anim_4 = ANIM_SkyGuy_WorldAlert, \
+    .anim_5 = ANIM_SkyGuy_WorldAlert, \
+    .death  = ANIM_SkyGuy_WorldHurt, \
+    .hit    = ANIM_SkyGuy_WorldHurt, \
+    .anim_8 = ANIM_SkyGuy_WorldRun, \
+    .anim_9 = ANIM_SkyGuy_WorldRun, \
+    .anim_A = ANIM_SkyGuy_Idle, \
+    .anim_B = ANIM_SkyGuy_Idle, \
+    .anim_C = ANIM_SkyGuy_Idle, \
+    .anim_D = ANIM_SkyGuy_Idle, \
+    .anim_E = ANIM_SkyGuy_Idle, \
+    .anim_F = ANIM_SkyGuy_Idle, \
 }

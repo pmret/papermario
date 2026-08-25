@@ -209,13 +209,13 @@ NpcData N(NpcData_Bootler) = {
 };
 
 AnimID N(ExtraAnims_ShyGuy)[] = {
-    ANIM_ShyGuy_Red_Anim00,
-    ANIM_ShyGuy_Red_Anim01,
-    ANIM_ShyGuy_Red_Anim02,
-    ANIM_ShyGuy_Red_Anim03,
-    ANIM_ShyGuy_Red_Anim11,
-    ANIM_ShyGuy_Red_Anim02,
-    ANIM_ShyGuy_Red_Anim04,
+    ANIM_ShyGuy_Red_Still,
+    ANIM_ShyGuy_Red_Idle,
+    ANIM_ShyGuy_Red_Walk,
+    ANIM_ShyGuy_Red_Run,
+    ANIM_ShyGuy_Red_Excited,
+    ANIM_ShyGuy_Red_Walk,
+    ANIM_ShyGuy_Red_Dash,
     ANIM_LIST_END
 };
 

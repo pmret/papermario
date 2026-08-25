@@ -970,7 +970,7 @@ void pause_badges_init(MenuPanel* panel) {
 
     for (i = 0; i < ARRAY_COUNT(gPauseBadgesIconIDs); i++) {
         gPauseBadgesIconIDs[i] = hud_element_create(gPauseBadgesElements[gCurrentLanguage][i]);
-        hud_element_set_flags(gPauseBadgesIconIDs[i], HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(gPauseBadgesIconIDs[i], HUD_ELEMENT_FLAG_MANUAL_RENDER);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseBadgesWindowBPs); i++) {

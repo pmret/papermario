@@ -21,9 +21,9 @@ s32 D_800778AC[] = {
 };
 #endif
 
-BSS s8 D_800A0900;
-BSS s32 D_800A0904;
-BSS s32 D_800A0908;
+BSS s8 BattleTransitionDelay;
+BSS s32 SavedWorldAnimFlags;
+BSS s32 SavedWorldFreezeMode;
 
 #if defined(SHIFT) || VERSION_IQUE
 #define shim_battle_heap_create_obfuscated battle_heap_create
@@ -32,29 +32,29 @@ BSS s32 D_800A0908;
 extern ShapeFile gMapShapeData;
 
 void state_init_battle(void) {
-    D_800A0900 = 5;
+    BattleTransitionDelay = 5;
 }
 
 void state_step_battle(void) {
-    u32 currentBattleSelection;
+    u32 currentBattleArea;
     u32 currentBattleIndex;
 
-    if (D_800A0900 == 5) {
+    if (BattleTransitionDelay == 5) {
         if (nuGfxCfb[1] != nuGfxCfb_ptr) {
             return;
         }
-        D_800A0900--;
+        BattleTransitionDelay--;
         gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
         nuContRmbForceStop();
     }
 
-    if (D_800A0900 >= 0) {
-        if (D_800A0900 > 0) {
-            D_800A0900--;
+    if (BattleTransitionDelay >= 0) {
+        if (BattleTransitionDelay > 0) {
+            BattleTransitionDelay--;
             return;
         }
 
-        D_800A0900 = -1;
+        BattleTransitionDelay = -1;
         nuGfxSetCfb(bFrameBuffers, 2);
         nuContRmbForceStopEnd();
         sfx_stop_env_sounds();
@@ -69,11 +69,11 @@ void state_step_battle(void) {
 
         sfx_clear_env_sounds(0);
 
-        currentBattleSelection = UNPACK_BTL_AREA(gCurrentBattleID);
+        currentBattleArea = UNPACK_BTL_AREA(gCurrentBattleID);
         currentBattleIndex = UNPACK_BTL_INDEX(gCurrentBattleID);
 
         if (gGameStatusPtr->peachFlags & PEACH_FLAG_IS_PEACH ||
-            (currentBattleSelection == BTL_AREA_KKJ && currentBattleIndex == 0)) {
+            (currentBattleArea == BTL_AREA_KKJ && currentBattleIndex == 0)) {
             gGameStatusPtr->peachFlags |= PEACH_FLAG_IS_PEACH;
             spr_init_sprites(PLAYER_SPRITES_PEACH_BATTLE);
         } else {
@@ -98,13 +98,13 @@ void state_step_battle(void) {
         initialize_battle();
         btl_save_world_cameras();
         load_battle_section();
-        D_800A0904 = gPlayerStatusPtr->animFlags;
+        SavedWorldAnimFlags = gPlayerStatusPtr->animFlags;
         gPlayerStatusPtr->animFlags &= ~PA_FLAG_PULSE_STONE_VISIBLE;
-        D_800A0908 = get_time_freeze_mode();
+        SavedWorldFreezeMode = get_time_freeze_mode();
         set_time_freeze_mode(TIME_FREEZE_NONE);
         gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
 
-        if (D_800A0900 >= 0) {
+        if (BattleTransitionDelay >= 0) {
             return;
         }
     }
@@ -120,7 +120,7 @@ void state_step_battle(void) {
 
 void state_drawUI_battle(void) {
     draw_encounter_ui();
-    if (D_800A0900 < 0) {
+    if (BattleTransitionDelay < 0) {
         btl_draw_ui();
     }
 }
@@ -128,7 +128,7 @@ void state_drawUI_battle(void) {
 void state_init_end_battle(void) {
     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
     nuContRmbForceStop();
-    D_800A0900 = 5;
+    BattleTransitionDelay = 5;
 }
 
 void state_step_end_battle(void) {
@@ -137,10 +137,10 @@ void state_step_end_battle(void) {
     MapSettings* mapSettings;
     MapConfig* mapConfig;
 
-    if (D_800A0900 >= 0) {
-        D_800A0900--;
-        if (D_800A0900 == 0) {
-            D_800A0900 = -1;
+    if (BattleTransitionDelay >= 0) {
+        BattleTransitionDelay--;
+        if (BattleTransitionDelay == 0) {
+            BattleTransitionDelay = -1;
             nuGfxSetCfb(bFrameBuffers, 3);
             gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
             nuContRmbForceStopEnd();
@@ -170,7 +170,7 @@ void state_step_end_battle(void) {
 
             if (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED) {
                 npc_reload_all();
-                playerStatus->animFlags = D_800A0904;
+                playerStatus->animFlags = SavedWorldAnimFlags;
                 set_game_mode(GAME_MODE_DEMO);
             } else {
                 void* mapShape;
@@ -192,16 +192,17 @@ void state_step_end_battle(void) {
                 if (mapSettings->background != nullptr) {
                     set_background(mapSettings->background);
                 } else {
-                    set_background_size(296, 200, 12, 20);
+                    set_background_size(SCREEN_XMAX - SCREEN_XMIN, SCREEN_YMAX - SCREEN_YMIN,
+                        SCREEN_INSET_X, SCREEN_INSET_Y);
                 }
 
                 mdl_load_all_textures(mapSettings->modelTreeRoot, get_asset_offset(wMapTexName, &sizeTemp), sizeTemp);
                 mdl_calculate_model_sizes();
                 npc_reload_all();
 
-                playerStatus->animFlags = D_800A0904;
-                if (D_800A0908 != 0) {
-                    set_time_freeze_mode(D_800A0908);
+                playerStatus->animFlags = SavedWorldAnimFlags;
+                if (SavedWorldFreezeMode != 0) {
+                    set_time_freeze_mode(SavedWorldFreezeMode);
                 }
                 set_game_mode(GAME_MODE_WORLD);
             }

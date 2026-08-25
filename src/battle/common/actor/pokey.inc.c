@@ -70,7 +70,7 @@ s32 N(StatusTable)[] = {
     STATUS_KEY_POISON,              0,
     STATUS_KEY_FROZEN,              0,
     STATUS_KEY_DIZZY,              90,
-    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_UNUSED,              0,
     STATUS_KEY_STATIC,              0,
     STATUS_KEY_PARALYZE,          100,
     STATUS_KEY_SHRINK,             90,
@@ -80,7 +80,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_POISON,         0,
     STATUS_TURN_MOD_FROZEN,         0,
     STATUS_TURN_MOD_DIZZY,          0,
-    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_UNUSED,         0,
     STATUS_TURN_MOD_STATIC,         0,
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
@@ -193,7 +193,7 @@ s32 N(FourPartAnims)[] = {
     STATUS_KEY_STOP,      ANIM_Pokey_Still4,
     STATUS_KEY_PARALYZE,  ANIM_Pokey_Still4,
     STATUS_KEY_DIZZY,     ANIM_Pokey_Dizzy4,
-    STATUS_KEY_FEAR,      ANIM_Pokey_Dizzy4,
+    STATUS_KEY_UNUSED,    ANIM_Pokey_Dizzy4,
     STATUS_END,
 };
 
@@ -204,7 +204,7 @@ s32 N(ThreePartAnims)[] = {
     STATUS_KEY_STOP,      ANIM_Pokey_Still3,
     STATUS_KEY_PARALYZE,  ANIM_Pokey_Still3,
     STATUS_KEY_DIZZY,     ANIM_Pokey_Dizzy3,
-    STATUS_KEY_FEAR,      ANIM_Pokey_Dizzy3,
+    STATUS_KEY_UNUSED,    ANIM_Pokey_Dizzy3,
     STATUS_END,
 };
 
@@ -215,7 +215,7 @@ s32 N(TwoPartAnims)[] = {
     STATUS_KEY_STOP,      ANIM_Pokey_Still2,
     STATUS_KEY_PARALYZE,  ANIM_Pokey_Still2,
     STATUS_KEY_DIZZY,     ANIM_Pokey_Dizzy2,
-    STATUS_KEY_FEAR,      ANIM_Pokey_Dizzy2,
+    STATUS_KEY_UNUSED,    ANIM_Pokey_Dizzy2,
     STATUS_END,
 };
 
@@ -226,7 +226,7 @@ s32 N(OnePartAnims)[] = {
     STATUS_KEY_STOP,      ANIM_Pokey_Still1,
     STATUS_KEY_PARALYZE,  ANIM_Pokey_Still1,
     STATUS_KEY_DIZZY,     ANIM_Pokey_Dizzy1,
-    STATUS_KEY_FEAR,      ANIM_Pokey_Dizzy1,
+    STATUS_KEY_UNUSED,    ANIM_Pokey_Dizzy1,
     STATUS_END,
 };
 

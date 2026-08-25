@@ -381,7 +381,7 @@ void update_all_status_icons(void* data) {
                 case STATUS_KEY_DIZZY:
                     elementID = icon->status1.activeElementHID = hud_element_create(&HES_DizzyBegin);
                     break;
-                case STATUS_KEY_FEAR:
+                case STATUS_KEY_UNUSED:
                     elementID = icon->status1.activeElementHID = hud_element_create(&HES_WeakenedLoop);
                     break;
                 case STATUS_KEY_STOP:
@@ -401,7 +401,7 @@ void update_all_status_icons(void* data) {
                     break;
             }
             hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_DISABLED);
-            hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_MANUAL_RENDER);
             icon->status1.activeTask = STATUS_ICON_TASK_DRAW;
         }
 
@@ -419,7 +419,7 @@ void update_all_status_icons(void* data) {
                     case STATUS_KEY_DIZZY:
                         hud_element_set_script(icon->status1.removingElementHID, &HES_DizzyEnd);
                         break;
-                    case STATUS_KEY_FEAR:
+                    case STATUS_KEY_UNUSED:
                         hud_element_set_script(icon->status1.removingElementHID, &HES_WeakenedLoop);
                         break;
                     case STATUS_KEY_STOP:
@@ -465,7 +465,7 @@ void update_all_status_icons(void* data) {
             }
 
             hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_DISABLED);
-            hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_MANUAL_RENDER);
             icon->status2.activeTask = STATUS_ICON_TASK_DRAW;
         }
 
@@ -507,7 +507,7 @@ void update_all_status_icons(void* data) {
             }
 
             hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_DISABLED);
-            hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_MANUAL_RENDER);
             icon->status3.activeTask = STATUS_ICON_TASK_DRAW;
         }
 
@@ -541,7 +541,7 @@ void update_all_status_icons(void* data) {
         if (icon->status4.activeTask == STATUS_ICON_TASK_LOAD) {
             elementID = icon->status4.activeElementHID = hud_element_create(&HES_WeakenedBegin);
             hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_DISABLED);
-            hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(elementID, HUD_ELEMENT_FLAG_MANUAL_RENDER);
             icon->status4.activeTask = STATUS_ICON_TASK_DRAW;
         }
 
@@ -1187,7 +1187,7 @@ void create_status_icon_boost_jump(s32 iconID) {
         statusIcon->boostJump.active = true;
         hid = hud_element_create(&HES_BoostJumpBegin);
         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
-        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
         statusIcon->boostJump.activeElementID = hid;
     }
 }
@@ -1219,7 +1219,7 @@ void create_status_icon_boost_hammer(s32 iconID) {
         statusIcon->boostHammer.active = true;
         hid = hud_element_create(&HES_BoostHammerBegin);
         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
-        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
         statusIcon->boostHammer.activeElementID = hid;
     }
 }
@@ -1251,7 +1251,7 @@ void create_status_icon_boost_partner(s32 iconID) {
         statusIcon->boostPartner.active = true;
         hid = hud_element_create(&HES_BoostPartner);
         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
-        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
         statusIcon->boostPartner.activeElementID = hid;
     }
 }
@@ -1280,7 +1280,7 @@ void create_status_icon_surprise(s32 iconID) {
         statusIcon->surprise.active = true;
         hid = hud_element_create(&HES_Surprise);
         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
-        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
         statusIcon->surprise.activeElementID = hid;
     }
 }
@@ -1326,7 +1326,7 @@ void create_status_icon_peril(s32 iconID) {
         hid = hud_element_create(&HES_Peril);
 #endif
         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
-        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
         statusIcon->peril.activeElementID = hid;
     }
 }
@@ -1372,7 +1372,7 @@ void create_status_icon_danger(s32 iconID) {
         hid = hud_element_create(&HES_Danger);
 #endif
         hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
-        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
         statusIcon->danger.activeElementID = hid;
     }
 }

@@ -116,6 +116,14 @@ typedef s32 Difficulty2D[AC_DIFFICULTY_LEN][2];
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
+#define SCREEN_INSET_X 12
+#define SCREEN_INSET_Y 20
+
+#define SCREEN_XMIN (SCREEN_INSET_X)
+#define SCREEN_XMAX (SCREEN_WIDTH - SCREEN_INSET_X)
+#define SCREEN_YMIN (SCREEN_INSET_Y)
+#define SCREEN_YMAX (SCREEN_HEIGHT - SCREEN_INSET_Y)
+
 #define LAST_DEMO_SCENE_IDX 18
 
 #define WORLD_ENTITY_HEAP_SIZE 0x17FF0
@@ -232,8 +240,8 @@ typedef s32 Difficulty2D[AC_DIFFICULTY_LEN][2];
 
 #define STATUS_KEY_IGNORE_RES 0xFE
 #define STATUS_KEY_NEVER 0xFF
-#define DMG_STATUS_KEY(typeFlag, duration, chance) (STATUS_FLAG_80000000 | typeFlag | (duration << 8) | chance)
-#define DMG_STATUS_ALWAYS(typeFlag, duration) (STATUS_FLAG_80000000 | STATUS_FLAG_RIGHT_ON | typeFlag | (duration << 8))
+#define DMG_STATUS_KEY(typeFlag, duration, chance) (STATUS_FLAG_USE_DURATION | typeFlag | (duration << 8) | chance)
+#define DMG_STATUS_ALWAYS(typeFlag, duration) (STATUS_FLAG_USE_DURATION | STATUS_FLAG_RIGHT_ON | typeFlag | (duration << 8))
 #define DMG_STATUS_IGNORE_RES(typeFlag, duration) (STATUS_KEY_IGNORE_RES | typeFlag | (duration << 8))
 
 #define _RDP_WHOLE(x) (((s32)(x * 65536.0) >> 16) & 0xFFFF)
@@ -538,7 +546,7 @@ typedef s32 Difficulty2D[AC_DIFFICULTY_LEN][2];
 
 #define DMA_COPY_SEGMENT(segment) dma_copy(segment##_ROM_START, segment##_ROM_END, segment##_VRAM)
 
-#if __STDC_VERSION__ < 202311L
+#if defined(OLD_GCC) || __STDC_VERSION__ < 202311L
 typedef enum {
     false,
     true

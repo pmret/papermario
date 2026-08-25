@@ -253,7 +253,8 @@ void state_step_unpause(void) {
                     if (mapSettings->background != nullptr) {
                         set_background(mapSettings->background);
                     } else {
-                        set_background_size(296, 200, 12, 20);
+                        set_background_size(SCREEN_XMAX - SCREEN_XMIN, SCREEN_YMAX - SCREEN_YMIN,
+                            SCREEN_INSET_X, SCREEN_INSET_Y);
                     }
 
                     gGameStatusPtr->backgroundDarkness = gGameStatusPtr->savedBackgroundDarkness;

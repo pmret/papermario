@@ -68,10 +68,10 @@ void appendGfx_speech_bubble(void) {
         ifxImg.xOffset = -16;
         ifxImg.yOffset = 26;
         ifxImg.alpha = 255;
-        imgfx_update(0, IMGFX_CLEAR, 0, 0, 0, 0, IMGFX_FLAG_400 | IMGFX_FLAG_40);
+        imgfx_update(0, IMGFX_CLEAR, 0, 0, 0, 0, IMGFX_FLAG_400 | IMGFX_FLAG_SKIP_ZBUF);
         imgfx_update(0, IMGFX_SET_COLOR,
                     SpeechBubblePtr->brightness, SpeechBubblePtr->brightness, SpeechBubblePtr->brightness, 255, 0x440);
-        imgfx_appendGfx_component(0, &ifxImg, IMGFX_FLAG_40, mtxTransform);
+        imgfx_appendGfx_component(0, &ifxImg, IMGFX_FLAG_SKIP_ZBUF, mtxTransform);
 
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }

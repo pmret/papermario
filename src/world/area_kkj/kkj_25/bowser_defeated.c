@@ -455,7 +455,7 @@ EvtScript N(EVS_Scene_BowserDefeated) = {
     PlayEffect(EFFECT_RING_BLAST, 0, 350, 50, -100, Float(4.0), 20)
     Set(MV_DestructState, DESTRUCT_STATE_5)
     Wait(25)
-    Call(SpeakToNpc, NPC_Kammy_05, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim04, 512, NPC_Bowser_03, MSG_CH8_00AF)
+    Call(SpeakToNpc, NPC_Kammy_05, ANIM_BattleKammy_FlyTalk, ANIM_BattleKammy_FlyStill, 512, NPC_Bowser_03, MSG_CH8_00AF)
     Wait(10)
     Thread
         Call(SetNpcAnimation, NPC_Bowser_03, ANIM_WorldBowser_Shock)

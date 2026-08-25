@@ -16,20 +16,20 @@
 
 #define SWOOPULA_ANIMS \
 { \
-    .idle   = ANIM_Swooper_Gray_Anim1B, \
-    .walk   = ANIM_Swooper_Gray_Anim02, \
-    .run    = ANIM_Swooper_Gray_Anim02, \
-    .chase  = ANIM_Swooper_Gray_Anim02, \
-    .anim_4 = ANIM_Swooper_Gray_Anim1B, \
-    .anim_5 = ANIM_Swooper_Gray_Anim1B, \
-    .death  = ANIM_Swooper_Gray_Anim04, \
-    .hit    = ANIM_Swooper_Gray_Anim15, \
-    .anim_8 = ANIM_Swooper_Gray_Anim00, \
-    .anim_9 = ANIM_Swooper_Gray_Anim00, \
-    .anim_A = ANIM_Swooper_Gray_Anim01, \
-    .anim_B = ANIM_Swooper_Gray_Anim01, \
-    .anim_C = ANIM_Swooper_Gray_Anim01, \
-    .anim_D = ANIM_Swooper_Gray_Anim01, \
-    .anim_E = ANIM_Swooper_Gray_Anim01, \
-    .anim_F = ANIM_Swooper_Gray_Anim01, \
+    .idle   = ANIM_Swooper_Gray_IdleRoost, \
+    .walk   = ANIM_Swooper_Gray_Idle, \
+    .run    = ANIM_Swooper_Gray_Idle, \
+    .chase  = ANIM_Swooper_Gray_Idle, \
+    .anim_4 = ANIM_Swooper_Gray_IdleRoost, \
+    .anim_5 = ANIM_Swooper_Gray_IdleRoost, \
+    .death  = ANIM_Swooper_Gray_WorldDead, \
+    .hit    = ANIM_Swooper_Gray_Hurt, \
+    .anim_8 = ANIM_Swooper_Gray_StillRoost, \
+    .anim_9 = ANIM_Swooper_Gray_StillRoost, \
+    .anim_A = ANIM_Swooper_Gray_Still, \
+    .anim_B = ANIM_Swooper_Gray_Still, \
+    .anim_C = ANIM_Swooper_Gray_Still, \
+    .anim_D = ANIM_Swooper_Gray_Still, \
+    .anim_E = ANIM_Swooper_Gray_Still, \
+    .anim_F = ANIM_Swooper_Gray_Still, \
 }

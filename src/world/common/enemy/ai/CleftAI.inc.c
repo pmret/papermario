@@ -185,7 +185,7 @@ void N(CleftAI_Tackle)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     f32 posX, posY, posZ;
     s32 phi_s1 = false;
 
-    spawn_surface_effects(npc, SURFACE_INTERACT_RUN);
+    npc_surface_spawn_fx(npc, SURFACE_INTERACT_RUN);
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     if (is_point_outside_territory(enemy->territory->wander.detectShape,

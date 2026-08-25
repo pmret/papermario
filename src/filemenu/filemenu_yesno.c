@@ -342,14 +342,14 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         set_window_update(WIN_FILES_MESSAGE, WINDOW_UPDATE_SHOW);
                         set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32)filemenu_update_hidden_name_confirm);
 #if VERSION_PAL
-                        if (fio_load_game(filemenu_loadedFileIdx)) {
-                            gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_loadedFileIdx];
+                        if (fio_load_game(filemenu_CopyFromFileIdx)) {
+                            gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_CopyFromFileIdx];
                             fio_save_game(filemenu_iterFileIdx);
                             gSaveSlotHasData[filemenu_iterFileIdx] = true;
                         }
 #else
-                        fio_load_game(filemenu_loadedFileIdx);
-                        gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_loadedFileIdx];
+                        fio_load_game(filemenu_CopyFromFileIdx);
+                        gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_CopyFromFileIdx];
                         fio_save_game(filemenu_iterFileIdx);
                         gSaveSlotHasData[filemenu_iterFileIdx] = true;
 #endif

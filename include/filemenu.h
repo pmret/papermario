@@ -72,7 +72,7 @@ extern s32 filemenu_pressedButtons;
 extern HudElemID filemenu_cursorHID;
 extern s32 filemenu_heldButtons;
 extern s8 filemenu_filename_pos;
-extern s32 filemenu_loadedFileIdx;
+extern s32 filemenu_CopyFromFileIdx;
 extern s8 filemenu_currentMenu;
 extern s32 filemenu_8024C09C;
 extern HudElemID filemenu_cursorHIDs[1];

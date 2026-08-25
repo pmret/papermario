@@ -16,20 +16,20 @@
 
 #define LAVA_BUBBLE_ANIMS \
 { \
-    .idle   = ANIM_LavaBubble_Anim01, \
-    .walk   = ANIM_LavaBubble_Anim02, \
-    .run    = ANIM_LavaBubble_Anim03, \
-    .chase  = ANIM_LavaBubble_Anim03, \
-    .anim_4 = ANIM_LavaBubble_Anim01, \
-    .anim_5 = ANIM_LavaBubble_Anim01, \
-    .death  = ANIM_LavaBubble_Anim07, \
-    .hit    = ANIM_LavaBubble_Anim07, \
-    .anim_8 = ANIM_LavaBubble_Anim04, \
-    .anim_9 = ANIM_LavaBubble_Anim01, \
-    .anim_A = ANIM_LavaBubble_Anim01, \
-    .anim_B = ANIM_LavaBubble_Anim01, \
-    .anim_C = ANIM_LavaBubble_Anim01, \
-    .anim_D = ANIM_LavaBubble_Anim01, \
-    .anim_E = ANIM_LavaBubble_Anim01, \
-    .anim_F = ANIM_LavaBubble_Anim01, \
+    .idle   = ANIM_LavaBubble_Idle, \
+    .walk   = ANIM_LavaBubble_FlySlow, \
+    .run    = ANIM_LavaBubble_FlyFast, \
+    .chase  = ANIM_LavaBubble_FlyFast, \
+    .anim_4 = ANIM_LavaBubble_Idle, \
+    .anim_5 = ANIM_LavaBubble_Idle, \
+    .death  = ANIM_LavaBubble_Hurt, \
+    .hit    = ANIM_LavaBubble_Hurt, \
+    .anim_8 = ANIM_LavaBubble_Confused, \
+    .anim_9 = ANIM_LavaBubble_Idle, \
+    .anim_A = ANIM_LavaBubble_Idle, \
+    .anim_B = ANIM_LavaBubble_Idle, \
+    .anim_C = ANIM_LavaBubble_Idle, \
+    .anim_D = ANIM_LavaBubble_Idle, \
+    .anim_E = ANIM_LavaBubble_Idle, \
+    .anim_F = ANIM_LavaBubble_Idle, \
 }

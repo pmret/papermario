@@ -327,7 +327,7 @@ void pause_map_init(MenuPanel* tab) {
 
     for (i = 0; i < ARRAY_COUNT(PauseMapHudScripts); i++) {
         PauseMapHIDs[i] = hud_element_create(PauseMapHudScripts[i]);
-        hud_element_set_flags(PauseMapHIDs[i], HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(PauseMapHIDs[i], HUD_ELEMENT_FLAG_MANUAL_RENDER);
     }
 
     for (i = 0; i < ARRAY_COUNT(PauseMapWindowBPs); i++) {

@@ -385,7 +385,7 @@ void pause_tabs_init(MenuPanel* tab) {
 
     for (i = 0; i < ARRAY_COUNT(gPauseTabsHudScripts[0]); i++) {
         gPauseTabsHIDs[i] = hud_element_create(gPauseTabsHudScripts[gCurrentLanguage][i]);
-        hud_element_set_flags(gPauseTabsHIDs[i], HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(gPauseTabsHIDs[i], HUD_ELEMENT_FLAG_MANUAL_RENDER);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseTabsWindowBPs); i++) {

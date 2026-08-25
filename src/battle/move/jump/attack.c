@@ -11,13 +11,13 @@ API_CALLABLE(N(GetJumpDamage)) {
     script->varTable[15] = 1;
 
     switch (gPlayerData.bootsLevel) {
-        case 0:
+        case GEAR_RANK_NORMAL:
             script->varTable[15] = 1;
             break;
-        case 1:
+        case GEAR_RANK_SUPER:
             script->varTable[15] = 2;
             break;
-        case 2:
+        case GEAR_RANK_ULTRA:
             script->varTable[15] = 3;
             break;
     }

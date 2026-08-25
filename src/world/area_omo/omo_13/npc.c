@@ -22,7 +22,7 @@ s32 N(BribeItemList)[] = {
 
 EvtScript N(EVS_NpcInteract_AntiGuy) = {
     IfEq(GF_OMO13_Defeated_AntiGuy, true)
-        Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim15, ANIM_ShyGuy_Black_Anim15, 5, MSG_CH4_004D)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Hiding, ANIM_ShyGuy_Black_Hiding, 5, MSG_CH4_004D)
         Return
     EndIf
     Call(AdjustCam, CAM_DEFAULT, Float(5.0), 10, Float(300.0), Float(15.0), Float(-7.5))
@@ -34,55 +34,55 @@ EvtScript N(EVS_NpcInteract_AntiGuy) = {
             Wait(20)
             Call(SetPlayerAnimation, ANIM_Mario1_Idle)
         EndThread
-        Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0046)
-        Call(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim13, ANIM_ShyGuy_Black_Anim01, 0)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0, MSG_CH4_0046)
+        Call(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Dizzy, ANIM_ShyGuy_Black_Idle, 0)
         Call(ShowChoice, MSG_Choice_0044)
         IfEq(LVar0, 0)
-            Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0048)
+            Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0, MSG_CH4_0048)
         Else
             Wait(5)
-            Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0047)
+            Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0, MSG_CH4_0047)
             Call(ShowChoice, MSG_Choice_0044)
             IfEq(LVar0, 0)
-                Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0048)
+                Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0, MSG_CH4_0048)
             Else
-                Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0049)
+                Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0, MSG_CH4_0049)
                 Call(SetNpcVar, NPC_SELF, 0, 1)
             EndIf
         EndIf
     Else
-        Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_004A)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0, MSG_CH4_004A)
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
         Call(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
         Wait(30)
-        Call(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0)
+        Call(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0)
         Wait(15)
         Call(SetPlayerAnimation, ANIM_MarioW2_JoltAwake)
         Wait(15)
         Call(SetPlayerAnimation, ANIM_Mario1_NodYes)
         Wait(15)
-        Call(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0)
+        Call(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0)
         Set(LVar0, Ref(N(BribeItemList)))
         Set(LVar1, -1)
         ExecWait(N(EVS_ChooseItem))
         IfEq(LVar0, -1)
-            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_004B)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0, MSG_CH4_004B)
             Call(ShowChoice, MSG_Choice_0044)
             IfEq(LVar0, 0)
-                Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0048)
+                Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0, MSG_CH4_0048)
             Else
                 Wait(5)
-                Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0047)
+                Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0, MSG_CH4_0047)
                 Call(ShowChoice, MSG_Choice_0044)
                 IfEq(LVar0, 0)
-                    Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0048)
+                    Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0, MSG_CH4_0048)
                 Else
-                    Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0049)
+                    Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0, MSG_CH4_0049)
                     Call(SetNpcVar, NPC_SELF, 0, 1)
                 EndIf
             EndIf
         Else
-            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_004C)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Excited, ANIM_ShyGuy_Black_Idle, 0, MSG_CH4_004C)
             Wait(20)
             Set(GF_OMO13_Defeated_AntiGuy, true)
             Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_he, COLLIDER_FLAGS_UPPER_MASK)
@@ -115,8 +115,8 @@ API_CALLABLE(N(UpdateAntiGuyPosition)) {
     }
 
     if (npc->pos.x != x || npc->pos.y != y || npc->pos.z != z) {
-        if (npc->curAnim != ANIM_ShyGuy_Black_Anim02 && script->varTable[10]++ >= 6) {
-            npc->curAnim = ANIM_ShyGuy_Black_Anim02;
+        if (npc->curAnim != ANIM_ShyGuy_Black_Walk && script->varTable[10]++ >= 6) {
+            npc->curAnim = ANIM_ShyGuy_Black_Walk;
             script->varTable[10] = 0;
         }
         npc->pos.x = x;
@@ -125,8 +125,8 @@ API_CALLABLE(N(UpdateAntiGuyPosition)) {
         npc->colliderPos.y = npc->pos.y;
         npc->colliderPos.z = npc->pos.z;
         npc->flags |= NPC_FLAG_DIRTY_SHADOW;
-    } else if (npc->curAnim != ANIM_ShyGuy_Black_Anim01) {
-        npc->curAnim = ANIM_ShyGuy_Black_Anim01;
+    } else if (npc->curAnim != ANIM_ShyGuy_Black_Idle) {
+        npc->curAnim = ANIM_ShyGuy_Black_Idle;
     }
     npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
     return ApiStatus_DONE2;
@@ -151,7 +151,7 @@ EvtScript N(EVS_NpcIdle_AntiGuy) = {
             Goto(0)
         Else
             Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, true)
-            Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Anim02)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Walk)
             Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
             IfLt(LVar2, -60)
 #if VERSION_JP
@@ -187,7 +187,7 @@ EvtScript N(EVS_NpcIdle_AntiGuy) = {
             Call(NpcMoveTo, NPC_SELF, LVar0, -100, 0)
 #endif
             Call(InterpNpcYaw, NPC_SELF, 90, 0)
-            Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Anim15)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Hiding)
             Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, false)
             Label(9)
                 Wait(1)
@@ -236,22 +236,22 @@ NpcData N(NpcData_AntiGuy) = {
     .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_DO_NOT_AUTO_FACE_PLAYER,
     .drops = NO_DROPS,
     .animations = {
-        .idle   = ANIM_ShyGuy_Black_Anim01,
-        .walk   = ANIM_ShyGuy_Black_Anim02,
-        .run    = ANIM_ShyGuy_Black_Anim03,
-        .chase  = ANIM_ShyGuy_Black_Anim02,
-        .anim_4 = ANIM_ShyGuy_Black_Anim01,
-        .anim_5 = ANIM_ShyGuy_Black_Anim01,
-        .death  = ANIM_ShyGuy_Black_Anim0C,
-        .hit    = ANIM_ShyGuy_Black_Anim0C,
-        .anim_8 = ANIM_ShyGuy_Black_Anim15,
-        .anim_9 = ANIM_ShyGuy_Black_Anim12,
-        .anim_A = ANIM_ShyGuy_Black_Anim11,
-        .anim_B = ANIM_ShyGuy_Black_Anim10,
-        .anim_C = ANIM_ShyGuy_Black_Anim05,
-        .anim_D = ANIM_ShyGuy_Black_Anim01,
-        .anim_E = ANIM_ShyGuy_Black_Anim01,
-        .anim_F = ANIM_ShyGuy_Black_Anim01,
+        .idle   = ANIM_ShyGuy_Black_Idle,
+        .walk   = ANIM_ShyGuy_Black_Walk,
+        .run    = ANIM_ShyGuy_Black_Run,
+        .chase  = ANIM_ShyGuy_Black_Walk,
+        .anim_4 = ANIM_ShyGuy_Black_Idle,
+        .anim_5 = ANIM_ShyGuy_Black_Idle,
+        .death  = ANIM_ShyGuy_Black_Hurt,
+        .hit    = ANIM_ShyGuy_Black_Hurt,
+        .anim_8 = ANIM_ShyGuy_Black_Hiding,
+        .anim_9 = ANIM_ShyGuy_Black_Slouch,
+        .anim_A = ANIM_ShyGuy_Black_Excited,
+        .anim_B = ANIM_ShyGuy_Black_Crashed,
+        .anim_C = ANIM_ShyGuy_Black_Tackle,
+        .anim_D = ANIM_ShyGuy_Black_Idle,
+        .anim_E = ANIM_ShyGuy_Black_Idle,
+        .anim_F = ANIM_ShyGuy_Black_Idle,
     },
     .tattle = MSG_NpcTattle_AntiGuy,
 };

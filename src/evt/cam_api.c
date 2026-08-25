@@ -360,7 +360,7 @@ API_CALLABLE(SetCamLeadPlayer) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802CB710) {
+API_CALLABLE(SetCamLeadScale) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     f32 value = evt_get_variable(script, *args++);

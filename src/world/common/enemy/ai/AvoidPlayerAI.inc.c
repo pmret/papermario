@@ -132,9 +132,9 @@ void N(AvoidPlayerAI_Chase)(Evt* script, MobileAISettings* npcAISettings, EnemyD
     } else {
         if (npc->curAnim != enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE]) {
             if (npc->moveSpeed < 4.0) {
-                spawn_surface_effects(npc, SURFACE_INTERACT_WALK);
+                npc_surface_spawn_fx(npc, SURFACE_INTERACT_WALK);
             } else {
-                spawn_surface_effects(npc, SURFACE_INTERACT_RUN);
+                npc_surface_spawn_fx(npc, SURFACE_INTERACT_RUN);
             }
             npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         }

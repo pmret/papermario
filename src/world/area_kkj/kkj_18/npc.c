@@ -67,19 +67,19 @@ AnimID N(ExtraAnims_GourmetGuy)[] = {
 };
 
 AnimID N(ExtraAnims_Kammy)[] = {
-    ANIM_WorldKammy_Anim01,
-    ANIM_WorldKammy_Anim02,
-    ANIM_WorldKammy_Anim04,
-    ANIM_WorldKammy_Anim05,
+    ANIM_WorldKammy_Idle,
+    ANIM_WorldKammy_Walk,
+    ANIM_WorldKammy_Talk,
+    ANIM_WorldKammy_Shout,
     ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_Koopatrol)[] = {
-    ANIM_WorldKoopatrol_Anim01,
-    ANIM_WorldKoopatrol_Anim06,
-    ANIM_WorldKoopatrol_Anim08,
-    ANIM_WorldKoopatrol_Anim12,
-    ANIM_WorldKoopatrol_Anim14,
+    ANIM_WorldKoopatrol_Idle,
+    ANIM_WorldKoopatrol_Run,
+    ANIM_WorldKoopatrol_Talk,
+    ANIM_WorldKoopatrol_Lift,
+    ANIM_WorldKoopatrol_CarryFast,
     ANIM_LIST_END
 };
 

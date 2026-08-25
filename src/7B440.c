@@ -91,7 +91,7 @@ void reset_player_status(void) {
     }
 
     // TODO required to match
-    floatsTemp = &(&D_800F7B74)[-1]; // index of 0 does not work
+    floatsTemp = &(&DefaultMoveSpeed)[-1]; // index of 0 does not work
     playerStatus->walkSpeed = *floatsTemp++ * one;
     playerStatus->runSpeed = *floatsTemp++ * one;
     playerStatus->maxJumpSpeed = *floatsTemp++ * one;

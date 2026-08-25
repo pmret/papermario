@@ -282,7 +282,7 @@ EvtScript N(EVS_NpcInit_GoombaKing) = {
 };
 
 NpcSettings N(NpcSettings_Kammy) = {
-    .defaultAnim = ANIM_WorldKammy_Anim0A,
+    .defaultAnim = ANIM_WorldKammy_FlyIdle,
     .height = 24,
     .radius = 24,
     .otherAI = &N(EVS_NpcAuxAI_Kammy),

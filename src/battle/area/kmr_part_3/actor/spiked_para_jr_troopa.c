@@ -69,7 +69,7 @@ s32 N(StatusTable)[] = {
     STATUS_KEY_POISON,              0,
     STATUS_KEY_FROZEN,              0,
     STATUS_KEY_DIZZY,              90,
-    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_UNUSED,              0,
     STATUS_KEY_STATIC,              0,
     STATUS_KEY_PARALYZE,           45,
     STATUS_KEY_SHRINK,             60,
@@ -79,7 +79,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_POISON,         0,
     STATUS_TURN_MOD_FROZEN,         0,
     STATUS_TURN_MOD_DIZZY,          0,
-    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_UNUSED,         0,
     STATUS_TURN_MOD_STATIC,         0,
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
@@ -564,7 +564,7 @@ API_CALLABLE(N(ShowPointerHudElem)) {
 
     hud_element_set_render_pos(hid, posX, posY);
     hud_element_set_scale(hid, 1.5f);
-    hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_200000 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_clear_flags(hid, HUD_ELEMENT_FLAG_INVISIBLE | HUD_ELEMENT_FLAG_DISABLED);
     evt_set_variable(script, *args++, hid);
     load_tattle_flags(ACTOR_TYPE_JR_TROOPA_4);
     return ApiStatus_DONE2;

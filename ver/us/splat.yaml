@@ -131,7 +131,7 @@ segments:
     - [auto, c, encounter]
     - [auto, c, encounter_api]
     - [auto, c, status_icons]
-    - [auto, c, 23680]
+    - [auto, c, enemy_ai]
     - [auto, c, 25AF0]
     - [auto, c, audio/core/system]
     - [auto, c, audio/sfx_player]

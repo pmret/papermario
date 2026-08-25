@@ -35,7 +35,7 @@ EvtScript N(EVS_NpcIdle_Goomba) = {
     IfEq(GB_OMO_PeachChoice1, 0)
         Call(SpeakToPlayer, NPC_Goomba, ANIM_Goomba_Run, ANIM_Goomba_Idle, 0, MSG_CH4_003A)
     Else
-        Call(SpeakToPlayer, NPC_Clubba, ANIM_WorldClubba_Anim05, ANIM_WorldClubba_Anim02, 0, MSG_CH4_003B)
+        Call(SpeakToPlayer, NPC_Clubba, ANIM_WorldClubba_Talk, ANIM_WorldClubba_Idle, 0, MSG_CH4_003B)
     EndIf
     Thread
         Call(N(EnableCameraLeadingPlayer))
@@ -166,12 +166,12 @@ NpcData N(NpcData_SkyGuy) = {
 };
 
 AnimID N(ExtraAnims_Kammy)[] = {
-    ANIM_WorldKammy_Anim0E,
-    ANIM_WorldKammy_Anim0F,
-    ANIM_WorldKammy_Anim10,
-    ANIM_WorldKammy_Anim13,
-    ANIM_WorldKammy_Anim15,
-    ANIM_WorldKammy_Anim16,
+    ANIM_WorldKammy_FlyRodTalk,
+    ANIM_WorldKammy_FlyRodCast,
+    ANIM_WorldKammy_FlyBrake,
+    ANIM_WorldKammy_FlyIdleSly,
+    ANIM_WorldKammy_FlyFastSly,
+    ANIM_WorldKammy_FlyTalkSly,
     ANIM_LIST_END
 };
 

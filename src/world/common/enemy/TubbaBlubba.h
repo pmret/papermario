@@ -3,40 +3,40 @@
 
 #define TUBBA_ANIMS \
 { \
-    .idle   = ANIM_WorldTubba_Anim06, \
-    .walk   = ANIM_WorldTubba_Anim09, \
-    .run    = ANIM_WorldTubba_Anim0C, \
-    .chase  = ANIM_WorldTubba_Anim0C, \
-    .anim_4 = ANIM_WorldTubba_Anim00, \
-    .anim_5 = ANIM_WorldTubba_Anim00, \
-    .death  = ANIM_WorldTubba_Anim00, \
-    .hit    = ANIM_WorldTubba_Anim00, \
-    .anim_8 = ANIM_WorldTubba_Anim00, \
-    .anim_9 = ANIM_WorldTubba_Anim00, \
-    .anim_A = ANIM_WorldTubba_Anim00, \
-    .anim_B = ANIM_WorldTubba_Anim00, \
-    .anim_C = ANIM_WorldTubba_Anim00, \
-    .anim_D = ANIM_WorldTubba_Anim00, \
-    .anim_E = ANIM_WorldTubba_Anim00, \
-    .anim_F = ANIM_WorldTubba_Anim00, \
+    .idle   = ANIM_WorldTubba_Idle, \
+    .walk   = ANIM_WorldTubba_Walk, \
+    .run    = ANIM_WorldTubba_Run, \
+    .chase  = ANIM_WorldTubba_Run, \
+    .anim_4 = ANIM_WorldTubba_Still, \
+    .anim_5 = ANIM_WorldTubba_Still, \
+    .death  = ANIM_WorldTubba_Still, \
+    .hit    = ANIM_WorldTubba_Still, \
+    .anim_8 = ANIM_WorldTubba_Still, \
+    .anim_9 = ANIM_WorldTubba_Still, \
+    .anim_A = ANIM_WorldTubba_Still, \
+    .anim_B = ANIM_WorldTubba_Still, \
+    .anim_C = ANIM_WorldTubba_Still, \
+    .anim_D = ANIM_WorldTubba_Still, \
+    .anim_E = ANIM_WorldTubba_Still, \
+    .anim_F = ANIM_WorldTubba_Still, \
 }
 
 #define TUBBA_ANGRY_ANIMS \
 { \
-    .idle   = ANIM_WorldTubba_Anim07, \
-    .walk   = ANIM_WorldTubba_Anim0A, \
-    .run    = ANIM_WorldTubba_Anim0D, \
-    .chase  = ANIM_WorldTubba_Anim0D, \
-    .anim_4 = ANIM_WorldTubba_Anim19, \
-    .anim_5 = ANIM_WorldTubba_Anim07, \
-    .death  = ANIM_WorldTubba_Anim07, \
-    .hit    = ANIM_WorldTubba_Anim07, \
-    .anim_8 = ANIM_WorldTubba_Anim07, \
-    .anim_9 = ANIM_WorldTubba_Anim07, \
-    .anim_A = ANIM_WorldTubba_Anim07, \
-    .anim_B = ANIM_WorldTubba_Anim07, \
-    .anim_C = ANIM_WorldTubba_Anim07, \
-    .anim_D = ANIM_WorldTubba_Anim07, \
-    .anim_E = ANIM_WorldTubba_Anim07, \
-    .anim_F = ANIM_WorldTubba_Anim07, \
+    .idle   = ANIM_WorldTubba_IdleAngry, \
+    .walk   = ANIM_WorldTubba_WalkAngry, \
+    .run    = ANIM_WorldTubba_RunAngry, \
+    .chase  = ANIM_WorldTubba_RunAngry, \
+    .anim_4 = ANIM_WorldTubba_LeanAngry, \
+    .anim_5 = ANIM_WorldTubba_IdleAngry, \
+    .death  = ANIM_WorldTubba_IdleAngry, \
+    .hit    = ANIM_WorldTubba_IdleAngry, \
+    .anim_8 = ANIM_WorldTubba_IdleAngry, \
+    .anim_9 = ANIM_WorldTubba_IdleAngry, \
+    .anim_A = ANIM_WorldTubba_IdleAngry, \
+    .anim_B = ANIM_WorldTubba_IdleAngry, \
+    .anim_C = ANIM_WorldTubba_IdleAngry, \
+    .anim_D = ANIM_WorldTubba_IdleAngry, \
+    .anim_E = ANIM_WorldTubba_IdleAngry, \
+    .anim_F = ANIM_WorldTubba_IdleAngry, \
 }

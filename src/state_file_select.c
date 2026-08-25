@@ -427,7 +427,8 @@ void state_step_exit_language_select(void) {
                     if (bgHeader != nullptr) {
                         set_background(bgHeader);
                     } else {
-                        set_background_size(296, 200, 12, 20);
+                        set_background_size(SCREEN_XMAX - SCREEN_XMIN, SCREEN_YMAX - SCREEN_YMIN,
+                            SCREEN_INSET_X, SCREEN_INSET_Y);
                     }
 
                     mdl_calculate_model_sizes();

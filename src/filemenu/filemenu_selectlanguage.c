@@ -209,7 +209,7 @@ void filemenu_selectlanguage_init(MenuPanel* menu) {
 
     for (i = 0; i < ARRAY_COUNT(PauseLanguageHudScripts); i++) {
         PauseLanguageHIDs[i] = hud_element_create(PauseLanguageHudScripts[i]);
-        hud_element_set_flags(PauseLanguageHIDs[i], HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(PauseLanguageHIDs[i], HUD_ELEMENT_FLAG_MANUAL_RENDER);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_filemenu_8024F1D8); i++) {

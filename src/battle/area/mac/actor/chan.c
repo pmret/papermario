@@ -53,7 +53,7 @@ s32 N(StatusTable)[] = {
     STATUS_KEY_POISON,              0,
     STATUS_KEY_FROZEN,              0,
     STATUS_KEY_DIZZY,              50,
-    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_UNUSED,              0,
     STATUS_KEY_STATIC,             50,
     STATUS_KEY_PARALYZE,           50,
     STATUS_KEY_SHRINK,             50,
@@ -63,7 +63,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_POISON,         0,
     STATUS_TURN_MOD_FROZEN,         0,
     STATUS_TURN_MOD_DIZZY,          0,
-    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_UNUSED,         0,
     STATUS_TURN_MOD_STATIC,         0,
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
@@ -118,7 +118,7 @@ s32 N(UprightAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_Chan_Idle,
     STATUS_KEY_PARALYZE,  ANIM_Chan_Still,
     STATUS_KEY_DIZZY,     ANIM_Chan_Dizzy,
-    STATUS_KEY_FEAR,      ANIM_Chan_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_Chan_Dizzy,
     STATUS_END,
 };
 
@@ -131,7 +131,7 @@ s32 N(DefaultAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_Chan_Idle,
     STATUS_KEY_PARALYZE,  ANIM_Chan_Still,
     STATUS_KEY_DIZZY,     ANIM_Chan_Dizzy,
-    STATUS_KEY_FEAR,      ANIM_Chan_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_Chan_Dizzy,
     STATUS_END,
 };
 
@@ -143,7 +143,7 @@ s32 N(ToppledAnims)[] = {
     STATUS_KEY_STOP,      ANIM_Chan_ToppledStill,
     STATUS_KEY_STATIC,    ANIM_Chan_Toppled,
     STATUS_KEY_DIZZY,     ANIM_Chan_ToppledDizzy,
-    STATUS_KEY_FEAR,      ANIM_Chan_ToppledDizzy,
+    STATUS_KEY_UNUSED,    ANIM_Chan_ToppledDizzy,
     STATUS_END,
 };
 

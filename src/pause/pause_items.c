@@ -540,7 +540,7 @@ void pause_items_init(MenuPanel* panel) {
 
     for (i = 0; i < ARRAY_COUNT(gPauseItemsHIDs); i++) {
         gPauseItemsHIDs[i] = hud_element_create(gPauseItemsHudScripts[i]);
-        hud_element_set_flags(gPauseItemsHIDs[i], HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(gPauseItemsHIDs[i], HUD_ELEMENT_FLAG_MANUAL_RENDER);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseItemsWindowBPs); i++) {

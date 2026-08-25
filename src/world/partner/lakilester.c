@@ -464,7 +464,7 @@ void N(update_riding_physics)(Npc* lakilester) {
             lakilester->pos.z += (z - lakilester->pos.z) / 5.0f;
         }
 
-        spawn_surface_effects(lakilester, SURFACE_INTERACT_RUN);
+        npc_surface_spawn_fx(lakilester, SURFACE_INTERACT_RUN);
 
     } else {
         moveAngle = 90.0f;

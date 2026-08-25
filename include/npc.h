@@ -596,7 +596,7 @@ void npc_imgfx_update(Npc* npc);
 
 void npc_set_imgfx_params(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
-void spawn_surface_effects(Npc* npc, SurfaceInteractMode mode);
+void npc_surface_spawn_fx(Npc* npc, SurfaceInteractMode mode);
 
 void spawn_default_surface_effects(Npc* npc, SurfaceInteractMode mode);
 

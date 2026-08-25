@@ -45,7 +45,7 @@ s32 N(StatusTable)[] = {
     STATUS_KEY_POISON,              0,
     STATUS_KEY_FROZEN,              0,
     STATUS_KEY_DIZZY,               0,
-    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_UNUSED,              0,
     STATUS_KEY_STATIC,              0,
     STATUS_KEY_PARALYZE,            0,
     STATUS_KEY_SHRINK,              0,
@@ -55,7 +55,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_POISON,         0,
     STATUS_TURN_MOD_FROZEN,         0,
     STATUS_TURN_MOD_DIZZY,          0,
-    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_UNUSED,         0,
     STATUS_TURN_MOD_STATIC,         0,
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
@@ -325,7 +325,7 @@ EvtScript N(EVS_ManageTutorial) = {
     Call(SetGoalToHome, ACTOR_PARTNER)
     Call(FlyToGoal, ACTOR_PARTNER, 20, 20, EASING_COS_IN_OUT)
     Call(SetActionCommandMode, AC_MODE_TUTORIAL)
-    Call(WaitForState, BATTLE_STATE_0)
+    Call(WaitForState, BATTLE_STATE_NONE)
     Call(SetBattleFlagBits2, BS_FLAGS2_DOING_JUMP_TUTORIAL, true)
     Loop(0)
         Call(GetActionCommandMode, LVar0)
@@ -362,14 +362,14 @@ EvtScript N(EVS_ManageTutorial) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(ActorSpeak, MSG_HOS_001D, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     Call(UseIdleAnimation, ACTOR_PARTNER, true)
-    Call(WaitForState, BATTLE_STATE_9)
+    Call(WaitForState, BATTLE_STATE_TRANSFER_TURN)
     Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
     Wait(15)
     Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(ActorSpeak, MSG_HOS_001E, ACTOR_ENEMY0, 1, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)
     Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Call(SetActionCommandMode, AC_MODE_TUTORIAL)
-    Call(WaitForState, BATTLE_STATE_0)
+    Call(WaitForState, BATTLE_STATE_NONE)
     Loop(0)
         Call(GetActionCommandMode, LVar0)
         IfNe(LVar0, AC_MODE_TUTORIAL)
@@ -427,7 +427,7 @@ EvtScript N(EVS_ManageTutorial) = {
     Call(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Call(SetActionCommandMode, AC_MODE_LEARNED)
-    Call(WaitForState, BATTLE_STATE_0)
+    Call(WaitForState, BATTLE_STATE_NONE)
     Wait(5)
     Call(SetActionCommandMode, AC_MODE_TUTORIAL)
     Loop(0)
@@ -482,7 +482,7 @@ EvtScript N(EVS_ManageTutorial) = {
     Call(ActorSpeak, MSG_HOS_0025, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     Call(UseIdleAnimation, ACTOR_PARTNER, true)
     Call(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_NO_ATTACK, true)
-    Call(WaitForState, BATTLE_STATE_0)
+    Call(WaitForState, BATTLE_STATE_NONE)
     Call(WaitForState, BATTLE_STATE_PLAYER_MENU)
     Call(ShowBattleChoice, MSG_Choice_001D)
     Call(EndActorSpeech, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
@@ -537,7 +537,7 @@ EvtScript N(EVS_ManageTutorial) = {
     Call(UseIdleAnimation, ACTOR_PARTNER, false)
     Call(ActorSpeak, MSG_HOS_002C, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     Label(100)
-    Call(WaitForState, BATTLE_STATE_0)
+    Call(WaitForState, BATTLE_STATE_NONE)
     Call(SetBattleState, BATTLE_STATE_END_TRAINING_BATTLE)
     Call(N(SetPartnerGoombario))
     Wait(10000)

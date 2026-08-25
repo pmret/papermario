@@ -229,6 +229,12 @@ class AnimComponent:
     def parse_commands(command_list: List[int]) -> List[Animation]:
         ret: List[Animation] = []
 
+        def sign_extend(value, bits):
+            sign_bit = 1 << (bits - 1)
+            mask = (1 << bits) - 1
+            value &= mask
+            return value | ~mask if value & sign_bit else value
+
         labels = {}
         boundaries = []
         labels[0] = "Start"
@@ -240,7 +246,7 @@ class AnimComponent:
             cmd_arg = cmd_start & 0xFFF
 
             if cmd_op == CMD.GOTO:
-                dest = cmd_arg
+                dest = sign_extend(cmd_arg, 12)
                 if dest in boundaries and dest not in labels:
                     labels[dest] = f"Pos_{dest}"
             elif cmd_op == CMD.SET_POS:
@@ -250,14 +256,11 @@ class AnimComponent:
             elif cmd_op == CMD.SET_SCALE:
                 i += 1
             elif cmd_op == CMD.LOOP:
-                dest = cmd_arg
+                dest = sign_extend(cmd_arg, 12)
                 if dest in boundaries and dest not in labels:
                     labels[dest] = f"Pos_{dest}"
                 i += 1
             i += 1
-
-        def to_signed(value):
-            return -(value & 0x8000) | (value & 0x7FFF)
 
         i = 0
         while i < len(command_list):
@@ -276,7 +279,7 @@ class AnimComponent:
                     raster = -1
                 ret.append(SetRaster(raster))
             elif cmd_op == CMD.GOTO:
-                dest = cmd_arg
+                dest = sign_extend(cmd_arg, 12)
                 if dest in labels:
                     lbl_name = labels[dest]
                     ret.append(Goto(lbl_name, 0))
@@ -285,16 +288,16 @@ class AnimComponent:
             elif cmd_op == CMD.SET_POS:
                 flag = cmd_arg
                 x, y, z = command_list[i + 1 : i + 4]
-                x = to_signed(x)
-                y = to_signed(y)
-                z = to_signed(z)
+                x = sign_extend(x, 16)
+                y = sign_extend(y, 16)
+                z = sign_extend(z, 16)
                 i += 3
                 ret.append(SetPos(flag, x, y, z))
             elif cmd_op == CMD.SET_ROT:
                 x, y, z = command_list[i : i + 3]
-                x = (cmd_arg << 20) >> 20
-                y = to_signed(y)
-                z = to_signed(z)
+                x = sign_extend(cmd_arg, 12)
+                y = sign_extend(y, 16)
+                z = sign_extend(z, 16)
                 i += 2
                 ret.append(SetRot(x, y, z))
             elif cmd_op == CMD.SET_SCALE:
@@ -308,7 +311,7 @@ class AnimComponent:
                     palette = -1
                 ret.append(SetPalette(palette))
             elif cmd_op == CMD.LOOP:
-                dest = cmd_arg
+                dest = sign_extend(cmd_arg, 12)
                 count = command_list[i + 1]
                 if dest in labels:
                     lbl_name = labels[dest]

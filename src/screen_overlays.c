@@ -2,10 +2,12 @@
 #include "overlay.h"
 #include "include_asset.h"
 
+#define OVERLAY_RENDER_OFF (-1.0f)
+
 BSS s32 screen_overlay_frontType;
-BSS f32 screen_overlay_frontZoom;
+BSS f32 screen_overlay_frontProgress;
 BSS s32 screen_overlay_backType;
-BSS f32 screen_overlay_backZoom;
+BSS f32 screen_overlay_backProgress;
 BSS s32 D_80156910;
 ScreenOverlay ScreenOverlays[2];
 
@@ -360,23 +362,23 @@ void _render_transition_stencil(u8 stencilType, f32 progress, ScreenOverlay* ove
 
 void set_screen_overlay_params_front(u8 type, f32 zoom) {
     screen_overlay_frontType = type;
-    screen_overlay_frontZoom = zoom;
+    screen_overlay_frontProgress = zoom;
 }
 
 void set_screen_overlay_params_back(u8 type, f32 zoom) {
     screen_overlay_backType = type;
-    screen_overlay_backZoom = zoom;
+    screen_overlay_backProgress = zoom;
 }
 
 void get_screen_overlay_params(s32 layer, u8* type, f32* zoom) {
     switch (layer) {
         case SCREEN_LAYER_FRONT:
             *type = screen_overlay_frontType;
-            *zoom = screen_overlay_frontZoom;
+            *zoom = screen_overlay_frontProgress;
             break;
         case SCREEN_LAYER_BACK:
             *type = screen_overlay_backType;
-            *zoom = screen_overlay_backZoom;
+            *zoom = screen_overlay_backProgress;
             break;
     }
 }
@@ -454,8 +456,8 @@ void clear_screen_overlays(void) {
 
     screen_overlay_frontType = OVERLAY_NONE;
     screen_overlay_backType  = OVERLAY_NONE;
-    screen_overlay_frontZoom = -1.0f;
-    screen_overlay_backZoom  = -1.0f;
+    screen_overlay_frontProgress = OVERLAY_RENDER_OFF;
+    screen_overlay_backProgress  = OVERLAY_RENDER_OFF;
 
     for (it = &ScreenOverlays[0], i = 0; i < ARRAY_COUNT(ScreenOverlays); i++, it++) {
         it->color.b = 0;
@@ -469,8 +471,8 @@ void clear_screen_overlays(void) {
     }
 }
 
-void func_80138188(void) {
-    screen_overlay_backZoom = 0;
+void reset_back_screen_overlay_progress(void) {
+    screen_overlay_backProgress = 0;
 }
 
 void func_80138198(void) {
@@ -478,19 +480,19 @@ void func_80138198(void) {
 
 void render_screen_overlay_frontUI(void) {
     if (screen_overlay_frontType != OVERLAY_NONE
-        && screen_overlay_frontZoom != -1.0f
+        && screen_overlay_frontProgress != OVERLAY_RENDER_OFF
         && gGameStatusPtr->context != CONTEXT_PAUSE
     ) {
-        _render_transition_stencil(screen_overlay_frontType, screen_overlay_frontZoom, &ScreenOverlays[0]);
+        _render_transition_stencil(screen_overlay_frontType, screen_overlay_frontProgress, &ScreenOverlays[0]);
     }
 }
 
 void render_screen_overlay_backUI(void) {
     if (screen_overlay_backType != OVERLAY_NONE
-        && screen_overlay_backZoom != -1.0f
+        && screen_overlay_backProgress != OVERLAY_RENDER_OFF
         && gGameStatusPtr->context != CONTEXT_PAUSE
     ) {
-        _render_transition_stencil(screen_overlay_backType, screen_overlay_backZoom, &ScreenOverlays[1]);
+        _render_transition_stencil(screen_overlay_backType, screen_overlay_backProgress, &ScreenOverlays[1]);
     }
 }
 

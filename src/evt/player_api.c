@@ -318,7 +318,7 @@ ApiStatus player_jump(Evt* script, s32 isInitialCall, s32 mode) {
                 anim = ANIM_Mario1_TiredIdle;
             }
             suggest_player_anim_allow_backward(anim);
-            spawn_surface_effects(playerNpc, SURFACE_INTERACT_LAND);
+            npc_surface_spawn_fx(playerNpc, SURFACE_INTERACT_LAND);
         }
 
         if (mode == 0 || mode == 2) {

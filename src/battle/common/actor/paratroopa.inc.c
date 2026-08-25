@@ -67,7 +67,7 @@ s32 N(DownedStatusTable)[] = {
     STATUS_KEY_POISON,             60,
     STATUS_KEY_FROZEN,            100,
     STATUS_KEY_DIZZY,              90,
-    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_UNUSED,              0,
     STATUS_KEY_STATIC,             80,
     STATUS_KEY_PARALYZE,           90,
     STATUS_KEY_SHRINK,             90,
@@ -77,7 +77,7 @@ s32 N(DownedStatusTable)[] = {
     STATUS_TURN_MOD_POISON,         0,
     STATUS_TURN_MOD_FROZEN,         0,
     STATUS_TURN_MOD_DIZZY,          0,
-    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_UNUSED,         0,
     STATUS_TURN_MOD_STATIC,         0,
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
@@ -92,7 +92,7 @@ s32 N(FlyingStatusTable)[] = {
     STATUS_KEY_POISON,             60,
     STATUS_KEY_FROZEN,            100,
     STATUS_KEY_DIZZY,              90,
-    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_UNUSED,              0,
     STATUS_KEY_STATIC,             80,
     STATUS_KEY_PARALYZE,           90,
     STATUS_KEY_SHRINK,             90,
@@ -102,7 +102,7 @@ s32 N(FlyingStatusTable)[] = {
     STATUS_TURN_MOD_POISON,         0,
     STATUS_TURN_MOD_FROZEN,         0,
     STATUS_TURN_MOD_DIZZY,          1,
-    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_UNUSED,         0,
     STATUS_TURN_MOD_STATIC,         0,
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
@@ -181,7 +181,7 @@ s32 N(FlyingAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_ParaTroopa_Idle,
     STATUS_KEY_PARALYZE,  ANIM_ParaTroopa_Still,
     STATUS_KEY_DIZZY,     ANIM_ParaTroopa_Stunned,
-    STATUS_KEY_FEAR,      ANIM_ParaTroopa_Stunned,
+    STATUS_KEY_UNUSED,    ANIM_ParaTroopa_Stunned,
     STATUS_END,
 };
 
@@ -194,7 +194,7 @@ s32 N(FlyingShuffleAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_ParaTroopa_Idle,
     STATUS_KEY_PARALYZE,  ANIM_ParaTroopa_Still,
     STATUS_KEY_DIZZY,     ANIM_ParaTroopa_Stunned,
-    STATUS_KEY_FEAR,      ANIM_ParaTroopa_Stunned,
+    STATUS_KEY_UNUSED,    ANIM_ParaTroopa_Stunned,
     STATUS_END,
 };
 
@@ -207,7 +207,7 @@ s32 N(WingAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_ParaTroopa_WingsStill,
     STATUS_KEY_PARALYZE,  ANIM_ParaTroopa_Still,
     STATUS_KEY_DIZZY,     ANIM_ParaTroopa_Stunned,
-    STATUS_KEY_FEAR,      ANIM_ParaTroopa_Stunned,
+    STATUS_KEY_UNUSED,    ANIM_ParaTroopa_Stunned,
     STATUS_END,
 };
 
@@ -670,7 +670,7 @@ s32 N(DownedAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_KoopaTroopa_Idle,
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Still,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Stunned,
-    STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Stunned,
+    STATUS_KEY_UNUSED,    ANIM_KoopaTroopa_Stunned,
     STATUS_END,
 };
 
@@ -683,7 +683,7 @@ s32 N(DownedShuffleAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_KoopaTroopa_Walk,
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Still,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Stunned,
-    STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Stunned,
+    STATUS_KEY_UNUSED,    ANIM_KoopaTroopa_Stunned,
     STATUS_END,
 };
 
@@ -696,7 +696,7 @@ s32 N(DownedFlippedAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_KoopaTroopa_ToppleStruggle,
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_ToppleStill,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_ToppleStunned,
-    STATUS_KEY_FEAR,      ANIM_KoopaTroopa_ToppleStunned,
+    STATUS_KEY_UNUSED,    ANIM_KoopaTroopa_ToppleStunned,
     STATUS_END,
 };
 

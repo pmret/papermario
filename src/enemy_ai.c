@@ -813,7 +813,7 @@ void basic_ai_chase(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume
         }
     }
 
-    spawn_surface_effects(npc, SURFACE_INTERACT_RUN);
+    npc_surface_spawn_fx(npc, SURFACE_INTERACT_RUN);
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     if (npc->moveSpeed > 8.0 && !(gGameStatusPtr->frameCounter % 5)) {

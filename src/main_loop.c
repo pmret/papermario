@@ -24,8 +24,8 @@ GameStatus gGameStatus = {
     .prevButtons = { 0 },
     .stickX = { 0 },
     .stickY = { 0 },
-    .unk_48 = { 0 },
-    .unk_50 = { 0 },
+    .holdDelayTime = { 0 },
+    .holdRepeatInterval = { 0 },
 };
 
 GameStatus* gGameStatusPtr = &gGameStatus;
@@ -87,7 +87,7 @@ void step_game_loop(void) {
     update_scripts();
     update_messages();
     update_hud_elements();
-    step_current_game_mode();
+    step_game_mode();
     update_entities();
     func_80138198();
     bgm_update_music_control();
@@ -196,7 +196,7 @@ void gfx_draw_frame(void) {
     render_workers_backUI();
     render_hud_elements_backUI();
     render_effects_UI();
-    state_render_backUI();
+    render_game_mode_backUI();
 
     if (!(gOverrideFlags & GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS)) {
         render_window_root();
@@ -232,7 +232,7 @@ void gfx_draw_frame(void) {
         render_window_root();
     }
 
-    state_render_frontUI();
+    render_game_mode_frontUI();
 
     if (gOverrideFlags & GLOBAL_OVERRIDES_SOFT_RESET) {
         switch (SoftResetState) {
@@ -279,7 +279,7 @@ void load_engine_data(void) {
     gGameStepDelayCount = 5;
     gGameStatusPtr->saveCount = 0;
     fio_init_flash();
-    func_80028838();
+    clear_input();
     general_heap_create();
     clear_render_tasks();
     clear_worker_list();
@@ -294,7 +294,7 @@ void load_engine_data(void) {
     reset_background_settings();
     clear_character_set();
     clear_printers();
-    clear_game_modes();
+    clear_game_mode();
     clear_npcs();
     hud_element_clear_cache();
     clear_trigger_data();
@@ -312,9 +312,9 @@ void load_engine_data(void) {
     initialize_curtains();
     poll_rumble();
 
-    for (i = 0; i < ARRAY_COUNT(gGameStatusPtr->unk_50); i++) {
-        gGameStatusPtr->unk_50[i] = 3;
-        gGameStatusPtr->unk_48[i] = 12;
+    for (i = 0; i < ARRAY_COUNT(gGameStatusPtr->holdRepeatInterval); i++) {
+        gGameStatusPtr->holdRepeatInterval[i] = 3;
+        gGameStatusPtr->holdDelayTime[i] = 12;
     }
 
     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;

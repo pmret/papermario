@@ -20,22 +20,22 @@
 
 #define MAGIKOOPA_ANIMS \
 { \
-    .idle   = ANIM_Magikoopa_Anim01, \
-    .walk   = ANIM_Magikoopa_Anim01, \
-    .run    = ANIM_Magikoopa_Anim01, \
-    .chase  = ANIM_Magikoopa_Anim01, \
-    .anim_4 = ANIM_Magikoopa_Anim01, \
-    .anim_5 = ANIM_Magikoopa_Anim01, \
-    .death  = ANIM_Magikoopa_Anim04, \
-    .hit    = ANIM_Magikoopa_Anim04, \
-    .anim_8 = ANIM_Magikoopa_Anim02, \
-    .anim_9 = ANIM_Magikoopa_Anim03, \
-    .anim_A = ANIM_Magikoopa_Anim01, \
-    .anim_B = ANIM_Magikoopa_Anim01, \
-    .anim_C = ANIM_Magikoopa_Anim01, \
-    .anim_D = ANIM_Magikoopa_Anim01, \
-    .anim_E = ANIM_Magikoopa_Anim01, \
-    .anim_F = ANIM_Magikoopa_Anim01, \
+    .idle   = ANIM_Magikoopa_Idle, \
+    .walk   = ANIM_Magikoopa_Idle, \
+    .run    = ANIM_Magikoopa_Idle, \
+    .chase  = ANIM_Magikoopa_Idle, \
+    .anim_4 = ANIM_Magikoopa_Idle, \
+    .anim_5 = ANIM_Magikoopa_Idle, \
+    .death  = ANIM_Magikoopa_Hurt, \
+    .hit    = ANIM_Magikoopa_Hurt, \
+    .anim_8 = ANIM_Magikoopa_Shout, \
+    .anim_9 = ANIM_Magikoopa_CastSpell, \
+    .anim_A = ANIM_Magikoopa_Idle, \
+    .anim_B = ANIM_Magikoopa_Idle, \
+    .anim_C = ANIM_Magikoopa_Idle, \
+    .anim_D = ANIM_Magikoopa_Idle, \
+    .anim_E = ANIM_Magikoopa_Idle, \
+    .anim_F = ANIM_Magikoopa_Idle, \
 }
 
 #define MAGIKOOPA_SPELL_HITBOX(npcID) \
@@ -47,21 +47,21 @@
     .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DROPS, \
     .drops = NO_DROPS, \
     .animations = { \
-        .idle   = ANIM_Magikoopa_Anim00, \
-        .walk   = ANIM_Magikoopa_Anim00, \
-        .run    = ANIM_Magikoopa_Anim00, \
-        .chase  = ANIM_Magikoopa_Anim00, \
-        .anim_4 = ANIM_Magikoopa_Anim00, \
-        .anim_5 = ANIM_Magikoopa_Anim00, \
-        .death  = ANIM_Magikoopa_Anim00, \
-        .hit    = ANIM_Magikoopa_Anim00, \
-        .anim_8 = ANIM_Magikoopa_Anim00, \
-        .anim_9 = ANIM_Magikoopa_Anim00, \
-        .anim_A = ANIM_Magikoopa_Anim00, \
-        .anim_B = ANIM_Magikoopa_Anim00, \
-        .anim_C = ANIM_Magikoopa_Anim00, \
-        .anim_D = ANIM_Magikoopa_Anim00, \
-        .anim_E = ANIM_Magikoopa_Anim00, \
-        .anim_F = ANIM_Magikoopa_Anim00, \
+        .idle   = ANIM_Magikoopa_Still, \
+        .walk   = ANIM_Magikoopa_Still, \
+        .run    = ANIM_Magikoopa_Still, \
+        .chase  = ANIM_Magikoopa_Still, \
+        .anim_4 = ANIM_Magikoopa_Still, \
+        .anim_5 = ANIM_Magikoopa_Still, \
+        .death  = ANIM_Magikoopa_Still, \
+        .hit    = ANIM_Magikoopa_Still, \
+        .anim_8 = ANIM_Magikoopa_Still, \
+        .anim_9 = ANIM_Magikoopa_Still, \
+        .anim_A = ANIM_Magikoopa_Still, \
+        .anim_B = ANIM_Magikoopa_Still, \
+        .anim_C = ANIM_Magikoopa_Still, \
+        .anim_D = ANIM_Magikoopa_Still, \
+        .anim_E = ANIM_Magikoopa_Still, \
+        .anim_F = ANIM_Magikoopa_Still, \
     }, \
 }

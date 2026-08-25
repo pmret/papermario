@@ -109,7 +109,7 @@ EvtScript N(EVS_Fuzzipede_ReactToLight) = {
                 Call(NpcJump0, NPC_SELF, LVar0, 0, 0, 20)
                 Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
                 Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10)
-                Call(SpeakToPlayer, NPC_SELF, ANIM_Fuzzipede_Anim24, ANIM_Fuzzipede_Anim04, 0, MSG_MAC_Port_009B)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Fuzzipede_Talk, ANIM_Fuzzipede_Idle, 0, MSG_MAC_Port_009B)
                 Call(SetSelfVar, 0, 1)
                 Set(LVarB, 1)
                 Call(DisablePlayerInput, false)
@@ -196,7 +196,7 @@ EvtScript N(EVS_NpcDefeat_Fuzzipede) = {
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(1)
-    Call(SpeakToPlayer, NPC_SELF, ANIM_Fuzzipede_Anim24, ANIM_Fuzzipede_Anim04, 0, MSG_MAC_Port_009D)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Fuzzipede_Talk, ANIM_Fuzzipede_Idle, 0, MSG_MAC_Port_009D)
     Wait(10)
     Call(ShowMessageAtScreenPos, MSG_MAC_Port_009E, -300, 100)
     Wait(10)
@@ -277,7 +277,7 @@ EvtScript N(EVS_NpcAuxAI_Fuzzipede) = {
 };
 
 NpcSettings N(NpcSettings_Fuzzipede) = {
-    .defaultAnim = ANIM_Fuzzipede_Anim04,
+    .defaultAnim = ANIM_Fuzzipede_Idle,
     .height = 24,
     .radius = 24,
     .otherAI = &N(EVS_NpcAuxAI_Fuzzipede),
@@ -295,7 +295,7 @@ NpcData N(NpcData_Fuzzipede) = {
     .flags = ENEMY_FLAG_DO_NOT_KILL | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_USE_INSPECT_ICON | ENEMY_FLAG_NO_DELAY_AFTER_FLEE | ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER,
     .drops = NO_DROPS,
     .animations = {
-        .idle   = ANIM_Fuzzipede_Anim04,
+        .idle   = ANIM_Fuzzipede_Idle,
     },
 };
 

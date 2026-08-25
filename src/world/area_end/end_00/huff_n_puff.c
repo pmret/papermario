@@ -66,9 +66,9 @@ EvtScript N(EVS_HoldPosition_Puffs) = {
 };
 
 EvtScript N(EVS_Puffs_Surprise) = {
-    Call(SetNpcAnimation, NPC_HuffNPuffBody, ANIM_HuffNPuff_Anim26)
-    Call(SetNpcAnimation, NPC_HuffNPuffFace, ANIM_HuffNPuff_Anim27)
-    Call(SetNpcAnimation, NPC_HuffNPuffArms, ANIM_HuffNPuff_Anim28)
+    Call(SetNpcAnimation, NPC_HuffNPuffBody, ANIM_HuffNPuff_FrownBody)
+    Call(SetNpcAnimation, NPC_HuffNPuffFace, ANIM_HuffNPuff_FrownFace)
+    Call(SetNpcAnimation, NPC_HuffNPuffArms, ANIM_HuffNPuff_FrownArms)
     Call(SetNpcAnimation, NPC_RuffPuff1, ANIM_RuffPuff_Blush)
     Call(SetNpcAnimation, NPC_RuffPuff2, ANIM_RuffPuff_Blush)
     Return
@@ -76,9 +76,9 @@ EvtScript N(EVS_Puffs_Surprise) = {
 };
 
 EvtScript N(EVS_Puffs_Hurt) = {
-    Call(SetNpcAnimation, NPC_HuffNPuffBody, ANIM_HuffNPuff_Anim07)
-    Call(SetNpcAnimation, NPC_HuffNPuffFace, ANIM_HuffNPuff_Anim08)
-    Call(SetNpcAnimation, NPC_HuffNPuffArms, ANIM_HuffNPuff_Anim09)
+    Call(SetNpcAnimation, NPC_HuffNPuffBody, ANIM_HuffNPuff_HurtBody)
+    Call(SetNpcAnimation, NPC_HuffNPuffFace, ANIM_HuffNPuff_HurtFace)
+    Call(SetNpcAnimation, NPC_HuffNPuffArms, ANIM_HuffNPuff_HurtArms)
     Call(SetNpcAnimation, NPC_RuffPuff1, ANIM_RuffPuff_Hurt)
     Call(SetNpcAnimation, NPC_RuffPuff2, ANIM_RuffPuff_Hurt)
     Return

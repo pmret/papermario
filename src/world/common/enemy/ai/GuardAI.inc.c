@@ -121,7 +121,7 @@ void N(GuardAI_Chase)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVolum
         script->AI_TEMP_STATE = AI_STATE_LOSE_PLAYER;
     } else {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-        spawn_surface_effects(npc, SURFACE_INTERACT_RUN);
+        npc_surface_spawn_fx(npc, SURFACE_INTERACT_RUN);
         npc->duration--;
         if (npc->duration == 0) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;

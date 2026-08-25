@@ -629,7 +629,7 @@ s32 func_8026324C(Actor* actor, Actor* targetActor) {
     return func_80263064(actor, targetActor, true);
 }
 
-void func_80263268(void) {
+void btl_check_can_change_partner(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     Actor* partner = battleStatus->partnerActor;
@@ -649,7 +649,7 @@ void func_80263268(void) {
         }
 
         if (partnersEnabled >= 2) {
-            if (partner->koStatus == STATUS_KEY_DAZE) {
+            if (partner->koStatus == STATUS_KEY_KO) {
                 battleStatus->changePartnerAllowed = 0;
             } else if (partner->debuff == STATUS_KEY_FROZEN) {
                 battleStatus->changePartnerAllowed = 0;
@@ -664,7 +664,7 @@ void func_80263268(void) {
     }
 }
 
-void func_80263300(void) {
+void btl_init_menu_items(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     PlayerData* playerData = &gPlayerData;
@@ -1292,7 +1292,7 @@ void load_player_actor(void) {
 
     ASSERT(player != nullptr);
 
-    player->unk_134 = battleStatus->unk_93++;
+    player->ordinal = battleStatus->nextActorOrdinal++;
     player->footStepCounter = 0;
     player->flags = 0;
     player->actorBlueprint = &bPlayerActorBlueprint;
@@ -1536,7 +1536,7 @@ void load_partner_actor(void) {
         ASSERT(partnerActor != nullptr);
 
         actorBP->level = playerData->partners[playerData->curPartner].level;
-        partnerActor->unk_134 = battleStatus->unk_93++;
+        partnerActor->ordinal = battleStatus->nextActorOrdinal++;
         partnerActor->footStepCounter = 0;
         partnerActor->actorBlueprint = actorBP;
         partnerActor->actorType = actorBP->type;
@@ -1782,7 +1782,7 @@ Actor* create_actor(Formation formation) {
 
     ASSERT(actor != nullptr);
 
-    actor->unk_134 = battleStatus->unk_93++;
+    actor->ordinal = battleStatus->nextActorOrdinal++;
     actor->footStepCounter = 0;
     actor->actorBlueprint = formationActor;
     actor->actorType = formationActor->type;
@@ -2160,7 +2160,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
     EffectInstance* effect;
 
     switch (statusTypeKey) {
-        case STATUS_KEY_FEAR:
+        case STATUS_KEY_UNUSED:
         case STATUS_KEY_DIZZY:
         case STATUS_KEY_PARALYZE:
         case STATUS_KEY_SLEEP:
@@ -2205,9 +2205,9 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                         case STATUS_KEY_DIZZY:
                             create_status_debuff(target->hudElementDataIndex, STATUS_KEY_DIZZY);
                             return true;
-                        case STATUS_KEY_FEAR:
+                        case STATUS_KEY_UNUSED:
                             set_actor_pal_adjustment(target, ACTOR_PAL_ADJUST_FEAR);
-                            create_status_debuff(target->hudElementDataIndex, STATUS_KEY_FEAR);
+                            create_status_debuff(target->hudElementDataIndex, STATUS_KEY_UNUSED);
                             return true;
                         case STATUS_KEY_POISON:
                             set_actor_pal_adjustment(target, ACTOR_PAL_ADJUST_POISON);
@@ -2245,14 +2245,14 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 target->statusAfflicted = STATUS_KEY_STONE;
             }
             return true;
-        case STATUS_KEY_DAZE:
+        case STATUS_KEY_KO:
             if (target->koStatus < statusTypeKey) {
-                target->koStatus = STATUS_KEY_DAZE;
+                target->koStatus = STATUS_KEY_KO;
                 target->koDuration = duration;
                 if ((s8)duration > 9) {
                     target->koDuration = 9;
                 }
-                target->statusAfflicted = STATUS_KEY_DAZE;
+                target->statusAfflicted = STATUS_KEY_KO;
             }
             return true;
         case STATUS_KEY_TRANSPARENT:
@@ -2275,9 +2275,9 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
 }
 
 s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
-    if (statusTypeKey == STATUS_KEY_DAZE) {
+    if (statusTypeKey == STATUS_KEY_KO) {
         if (statusTypeKey != target->koStatus) {
-            inflict_status(target, STATUS_KEY_DAZE, duration);
+            inflict_status(target, STATUS_KEY_KO, duration);
             sfx_play_sound(SOUND_INFLICT_KO);
         } else {
             target->koDuration += duration;
@@ -2514,7 +2514,7 @@ void show_action_rating(s32 rating, Actor* actor, f32 x, f32 y, f32 z) {
     }
 }
 
-void func_80266970(Actor* target) {
+void cancel_action_rating_combo(Actor* target) {
     target->actionRatingCombo = 0;
 }
 
@@ -2642,7 +2642,7 @@ s32 try_inflict_status(Actor* actor, s32 statusTypeKey, s32 statusKey) {
     }
 
     if (duration > 0) {
-        if (battleStatus->curAttackStatus < 0) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_USE_DURATION) {
             duration = battleStatus->statusDuration;
             duration += lookup_status_duration_mod(actor->statusTable, statusKey);
             inflict_status(actor, statusTypeKey, duration);
@@ -2980,7 +2980,7 @@ void btl_update_ko_status(void) {
 
     player->koDuration = player->debuffDuration;
     if (player->koDuration > 0) {
-        player->koStatus = STATUS_KEY_DAZE;
+        player->koStatus = STATUS_KEY_KO;
         player->disableEffect->data.disableX->koDuration = player->koDuration;
 
         if (koDuration == 0) {
@@ -2990,12 +2990,12 @@ void btl_update_ko_status(void) {
 
     if (partner != nullptr) {
         if (partner->koDuration < partner->debuffDuration) {
-            partner->koStatus = STATUS_KEY_DAZE;
+            partner->koStatus = STATUS_KEY_KO;
             partner->koDuration = partner->debuffDuration;
         }
 
         if (partner->koDuration > 0) {
-            partner->koStatus = STATUS_KEY_DAZE;
+            partner->koStatus = STATUS_KEY_KO;
             partner->disableEffect->data.disableX->koDuration = partner->koDuration;
         }
     }
@@ -3006,7 +3006,7 @@ void btl_update_ko_status(void) {
         if (enemy != nullptr) {
             enemy->koDuration = enemy->debuffDuration;
             if (enemy->koDuration > 0) {
-                enemy->koStatus = STATUS_KEY_DAZE;
+                enemy->koStatus = STATUS_KEY_KO;
                 enemy->disableEffect->data.disableX->koDuration = enemy->koDuration;
             }
         }

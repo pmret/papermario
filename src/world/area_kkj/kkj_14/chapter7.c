@@ -24,24 +24,24 @@ EvtScript N(EVS_ApproachPeach) = {
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Sub(LVar0, 26)
         Sub(LVar2, 2)
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Run)
         Call(SetNpcSpeed, NPC_Ch7_Koopatrol_01, Float(5.0))
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_01, LVar0, 70, 0)
         Call(NpcFacePlayer, NPC_Ch7_Koopatrol_01, 5)
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_01, LVar0, LVar2, 0)
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Idle)
     EndThread
     Call(SetNpcVar, NPC_Ch7_Koopatrol_02, 0, 1)
     Thread
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
         Add(LVar0, 26)
         Add(LVar2, 2)
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Run)
         Call(SetNpcSpeed, NPC_Ch7_Koopatrol_02, Float(5.0))
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_02, LVar0, 70, 0)
         Call(NpcFacePlayer, NPC_Ch7_Koopatrol_02, 5)
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_02, LVar0, LVar2, 0)
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Idle)
         Call(SetNpcVar, NPC_Ch7_Koopatrol_02, 0, 0)
     EndThread
     Loop(0)
@@ -58,7 +58,7 @@ EvtScript N(EVS_ApproachPeach) = {
 
 EvtScript N(EVS_TiePeachUp) = {
     Thread
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Anim18)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Panic)
         Call(GetNpcPos, NPC_Ch7_Koopatrol_01, LVar0, LVar1, LVar2)
         Loop(5)
             Loop(5)
@@ -72,10 +72,10 @@ EvtScript N(EVS_TiePeachUp) = {
                 Wait(1)
             EndLoop
         EndLoop
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Idle)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Anim18)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Panic)
         Call(GetNpcPos, NPC_Ch7_Koopatrol_02, LVar0, LVar1, LVar2)
         Loop(5)
             Loop(5)
@@ -89,7 +89,7 @@ EvtScript N(EVS_TiePeachUp) = {
                 Wait(1)
             EndLoop
         EndLoop
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Anim01)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Idle)
     EndThread
     Thread
         Call(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -133,13 +133,13 @@ EvtScript N(EVS_TiePeachUp) = {
 EvtScript N(EVS_PickUpPeach) = {
     Thread
         Call(GetNpcPos, NPC_Ch7_Koopatrol_01, LVar0, LVar1, LVar2)
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Anim12)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Lift)
         Add(LVar0, 10)
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_01, LVar0, LVar2, 10)
     EndThread
     Thread
         Call(GetNpcPos, NPC_Ch7_Koopatrol_02, LVar0, LVar1, LVar2)
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Anim12)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Lift)
         Sub(LVar0, 10)
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_02, LVar0, LVar2, 10)
     EndThread
@@ -174,13 +174,13 @@ EvtScript N(EVS_CarryPeachAway) = {
         EndLoop
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_Anim14)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_01, ANIM_WorldKoopatrol_CarryFast)
         Call(SetNpcSpeed, NPC_Ch7_Koopatrol_01, Float(5.0))
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_01, 364, 68, 0)
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_01, 84, 68, 0)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_Anim14)
+        Call(SetNpcAnimation, NPC_Ch7_Koopatrol_02, ANIM_WorldKoopatrol_CarryFast)
         Call(SetNpcSpeed, NPC_Ch7_Koopatrol_02, Float(5.0))
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_02, 396, 72, 0)
         Call(NpcMoveTo, NPC_Ch7_Koopatrol_02, 116, 72, 0)
@@ -314,13 +314,13 @@ EvtScript N(EVS_Scene_Chapter7) = {
     Call(SetPlayerAnimation, ANIM_Peach1_Idle)
     ExecWait(N(EVS_FocusCam_Door_Ch7))
     Exec(N(EVS_OpenDoor_Ch7))
-    Call(SetNpcAnimation, NPC_Ch7_Kammy, ANIM_WorldKammy_Anim03)
+    Call(SetNpcAnimation, NPC_Ch7_Kammy, ANIM_WorldKammy_Run)
     Call(SetNpcPos, NPC_Ch7_Kammy, -470, 0, -30)
     Call(SetNpcSpeed, NPC_Ch7_Bowser, Float(5.0 / DT))
     Call(NpcMoveTo, NPC_Ch7_Kammy, -340, -30, 0)
-    Call(SetNpcAnimation, NPC_Ch7_Kammy, ANIM_WorldKammy_Anim01)
+    Call(SetNpcAnimation, NPC_Ch7_Kammy, ANIM_WorldKammy_Idle)
     Wait(10 * DT)
-    Call(SpeakToNpc, NPC_Ch7_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 0, NPC_Ch7_Bowser, MSG_Peach_0168)
+    Call(SpeakToNpc, NPC_Ch7_Kammy, ANIM_WorldKammy_Talk, ANIM_WorldKammy_Idle, 0, NPC_Ch7_Bowser, MSG_Peach_0168)
     Call(SetNpcAnimation, NPC_Ch7_Bowser, ANIM_WorldBowser_Idle)
     Call(SetNpcYaw, NPC_Ch7_Bowser, 270)
     Call(SetNpcYaw, NPC_PARTNER, 270)
@@ -331,12 +331,12 @@ EvtScript N(EVS_Scene_Chapter7) = {
     Call(PanToTarget, CAM_DEFAULT, 0, true)
     Wait(10 * DT)
     Call(SetNpcPos, NPC_Ch7_Kammy, 50, 0, -10)
-    Call(SetNpcAnimation, NPC_Ch7_Kammy, ANIM_WorldKammy_Anim03)
+    Call(SetNpcAnimation, NPC_Ch7_Kammy, ANIM_WorldKammy_Run)
     Call(NpcMoveTo, NPC_Ch7_Kammy, 180, -10, 0)
-    Call(SetNpcAnimation, NPC_Ch7_Kammy, ANIM_WorldKammy_Anim01)
+    Call(SetNpcAnimation, NPC_Ch7_Kammy, ANIM_WorldKammy_Idle)
     Wait(10 * DT)
     Call(SpeakToNpc, NPC_Ch7_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, NPC_Ch7_Kammy, MSG_Peach_0169)
-    Call(SpeakToNpc, NPC_Ch7_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 0, NPC_Ch7_Bowser, MSG_Peach_016A)
+    Call(SpeakToNpc, NPC_Ch7_Kammy, ANIM_WorldKammy_Talk, ANIM_WorldKammy_Idle, 0, NPC_Ch7_Bowser, MSG_Peach_016A)
     Call(SetNpcAnimation, NPC_Ch7_Bowser, ANIM_WorldBowser_Shock)
     Call(GetNpcPos, NPC_Ch7_Bowser, LVar0, LVar1, LVar2)
     Call(NpcJump0, NPC_Ch7_Bowser, LVar0, LVar1, LVar2, 10 * DT)

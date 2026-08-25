@@ -1,3 +1,4 @@
+setuptools
 PyYAML
 lark-parser
 pypng

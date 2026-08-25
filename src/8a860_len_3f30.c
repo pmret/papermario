@@ -251,7 +251,7 @@ void destroy_popup_menu(void) {
     gPopupState = POPUP_STATE_MINUS_4;
 }
 
-void func_800F16CC(void) {
+void show_popup_menu(void) {
     if (PopupNotBattle) {
         switch (gPopupMenu->popupType) {
             case POPUP_MENU_USE_ITEM:
@@ -421,7 +421,7 @@ s32 popup_menu_update(void) {
             D_8010D68C = 0;
             hid = hud_element_create(&HES_EmptyBar);
             PopupMenu_EmptybarHID = hid;
-            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
             hud_element_set_tint(hid, 255, 255, 255);
             if (gPopupMenu->popupType != POPUP_MENU_THROW_AWAY_ITEM) {
                 hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DISABLED);
@@ -431,48 +431,48 @@ s32 popup_menu_update(void) {
             hid = hud_element_create(gPopupMenu->ptrIcon[0]);
             PopupMenu_EntryIconHID = hid;
             hud_element_set_scale(hid, 0.45f);
-            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_MANUAL_RENDER);
 
             hid = hud_element_create(&HES_AnimatedHandPointer);
             PopupMenu_CursorHID = hid;
-            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_MANUAL_RENDER);
 
             hid = hud_element_create(&HES_GreenArrowUp);
             PopupMenu_UpArrowHID = hid;
-            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_MANUAL_RENDER);
 
             hid = hud_element_create(&HES_GreenArrowDown);
             PopupMenu_DownArrowHID = hid;
-            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_MANUAL_RENDER);
 
             if (gPopupMenu->popupType == POPUP_MENU_TRADE_FOR_BADGE) {
                 PopupMenu_TitleIconHID = hud_element_create(&HES_StatusStarPiece);
                 hid = PopupMenu_TitleIconHID;
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
                 hud_element_set_tint(hid, 255, 255, 255);
             }
             if (gPopupMenu->popupType == POPUP_MENU_UPGRADE_PARTNER) {
                 PopupMenu_TitleIconHID = hud_element_create(&HES_StatusStarPiece);
                 hid = PopupMenu_TitleIconHID;
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_MANUAL_RENDER);
                 hud_element_set_tint(hid, 255, 255, 255);
             }
             if (gPopupMenu->popupType == POPUP_MENU_SELL_ITEM) {
                 PopupMenu_TitleIconHID = hud_element_create(&HES_StatusCoin);
                 hid = PopupMenu_TitleIconHID;
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
                 hud_element_set_tint(hid, 255, 255, 255);
             }
             if (gPopupMenu->popupType == POPUP_MENU_TRADE_FOR_BADGE || gPopupMenu->popupType == POPUP_MENU_UPGRADE_PARTNER) {
                 PopupMenu_TimesHID = hud_element_create(&HES_MenuTimes);
                 hid = PopupMenu_TimesHID;
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
                 hud_element_set_tint(hid, 255, 255, 255);
             }
             if (gPopupMenu->popupType == one || gPopupMenu->popupType == POPUP_MENU_UPGRADE_PARTNER) {
                 PopupMenu_PartnerLevelHID = hud_element_create(D_80109890[0]);
                 hid = PopupMenu_PartnerLevelHID;
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
                 hud_element_set_tint(hid, 255, 255, 255);
             }
 
@@ -2365,6 +2365,6 @@ void create_battle_popup_menu(PopupMenu* popup) {
     gPopupWorker = create_worker_frontUI((void (*) (void)) popup_menu_update, nullptr);
 }
 
-void func_800F52BC(void) {
+void flush_popup_menu(void) {
     popup_menu_update();
 }

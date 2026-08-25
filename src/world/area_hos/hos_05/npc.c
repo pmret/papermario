@@ -477,13 +477,13 @@ AnimID N(ExtraAnims_Bowser)[] = {
 };
 
 AnimID N(ExtraAnims_Kammy)[] = {
-    ANIM_WorldKammy_Anim09,
-    ANIM_WorldKammy_Anim0B,
-    ANIM_WorldKammy_Anim0D,
-    ANIM_WorldKammy_Anim0E,
-    ANIM_WorldKammy_Anim11,
-    ANIM_WorldKammy_Anim12,
-    ANIM_WorldKammy_Anim17,
+    ANIM_WorldKammy_FlyStill,
+    ANIM_WorldKammy_FlySlow,
+    ANIM_WorldKammy_FlyTalk,
+    ANIM_WorldKammy_FlyRodTalk,
+    ANIM_WorldKammy_FlyChuckle,
+    ANIM_WorldKammy_FlyLaugh,
+    ANIM_WorldKammy_FlyRodStill,
     ANIM_LIST_END
 };
 

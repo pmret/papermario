@@ -5,17 +5,17 @@
 API_CALLABLE(N(SetupDemoPlayerMove)) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
-    s32 selectedItemID;
+    s32 itemID;
     Actor* player = battleStatus->playerActor;
     SelectableTarget* selectableTarget;
 
     battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
     battleStatus->moveArgument = ITEM_THUNDER_RAGE;
-    selectedItemID = battleStatus->moveArgument;
+    itemID = battleStatus->moveArgument;
     battleStatus->selectedMoveID = 0;
     battleStatus->curAttackElement = 0;
-    playerData->invItems[0] = selectedItemID;
-    battleStatus->curTargetListFlags = gItemTable[selectedItemID].targetFlags | TARGET_FLAG_PRIMARY_ONLY;
+    playerData->invItems[0] = itemID;
+    battleStatus->curTargetListFlags = gItemTable[itemID].targetFlags | TARGET_FLAG_PRIMARY_ONLY;
 
     create_current_pos_target_list(player);
     player->selectedTargetIndex = 0;

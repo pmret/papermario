@@ -41,7 +41,7 @@ extern HiddenPanelsData gCurrentHiddenPanels;
 
 extern BackgroundHeader gBackgroundImage;
 
-extern f32 D_800F7B74;
+extern f32 DefaultMoveSpeed;
 
 extern CollisionData gZoneCollisionData;
 

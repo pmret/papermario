@@ -12,20 +12,20 @@
 
 #define CLEFT_ANIMS \
 { \
-    .idle   = ANIM_Cleft_Anim02, \
-    .walk   = ANIM_Cleft_Anim06, \
-    .run    = ANIM_Cleft_Anim07, \
-    .chase  = ANIM_Cleft_Anim07, \
-    .anim_4 = ANIM_Cleft_Anim02, \
-    .anim_5 = ANIM_Cleft_Anim02, \
-    .death  = ANIM_Cleft_Anim08, \
-    .hit    = ANIM_Cleft_Anim08, \
-    .anim_8 = ANIM_Cleft_Anim14, \
-    .anim_9 = ANIM_Cleft_Anim17, \
-    .anim_A = ANIM_Cleft_Anim13, \
-    .anim_B = ANIM_Cleft_Anim15, \
-    .anim_C = ANIM_Cleft_Anim10, \
-    .anim_D = ANIM_Cleft_Anim11, \
-    .anim_E = ANIM_Cleft_Anim16, \
-    .anim_F = ANIM_Cleft_Anim00, \
+    .idle   = ANIM_Cleft_Idle, \
+    .walk   = ANIM_Cleft_Walk, \
+    .run    = ANIM_Cleft_Run, \
+    .chase  = ANIM_Cleft_Run, \
+    .anim_4 = ANIM_Cleft_Idle, \
+    .anim_5 = ANIM_Cleft_Idle, \
+    .death  = ANIM_Cleft_Hurt, \
+    .hit    = ANIM_Cleft_Hurt, \
+    .anim_8 = ANIM_Cleft_Hiding, \
+    .anim_9 = ANIM_Cleft_CamoOff, \
+    .anim_A = ANIM_Cleft_Reveal, \
+    .anim_B = ANIM_Cleft_Disguise, \
+    .anim_C = ANIM_Cleft_Crouch, \
+    .anim_D = ANIM_Cleft_Charge, \
+    .anim_E = ANIM_Cleft_CamoOn, \
+    .anim_F = ANIM_Cleft_Still, \
 }

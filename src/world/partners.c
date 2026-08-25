@@ -1292,7 +1292,7 @@ void partner_walking_follow_player(Npc* partner) {
             }
             partner->yaw = yaw;
             npc_move_heading(partner, partner->moveSpeed, partner->yaw);
-            spawn_surface_effects(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
+            npc_surface_spawn_fx(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
             surfaceType = get_collider_flags(partner->curFloor);
             if (surfaceType == SURFACE_TYPE_SPIKES
                 || surfaceType == SURFACE_TYPE_LAVA
@@ -1409,7 +1409,7 @@ void partner_walking_follow_player(Npc* partner) {
                         partner->jumpVel = 0.0f;
                         partner->pos.y = y;
                         partner->yaw = atan2(x, z, playerStatus->pos.x, playerStatus->pos.z);
-                        spawn_surface_effects(partner, SURFACE_INTERACT_LAND);
+                        npc_surface_spawn_fx(partner, SURFACE_INTERACT_LAND);
                         wPartnerFollowState = 0;
                         distance = dist2D(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                         if (distance < 5.0) {
@@ -1485,7 +1485,7 @@ void partner_walking_follow_player(Npc* partner) {
                     }
                     partner->yaw = yaw;
                     npc_move_heading(partner, partner->moveSpeed, yaw);
-                    spawn_surface_effects(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
+                    npc_surface_spawn_fx(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
                     distance = 1000.0f;
                     x = partner->pos.x;
                     z = partner->pos.z;
@@ -1604,7 +1604,7 @@ void partner_walking_follow_player(Npc* partner) {
                         partner->moveSpeed = wPartnerMoveSpeed;
                         partner->yaw = D_800F8034;
                         npc_move_heading(partner, partner->moveSpeed, partner->yaw);
-                        spawn_surface_effects(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
+                        npc_surface_spawn_fx(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
                     } else {
                         partner_clear_player_tracking(partner);
                         partner->moveSpeed = 0.0f;
@@ -1665,7 +1665,7 @@ void partner_walking_follow_player(Npc* partner) {
                 partner->jumpVel = 0.0f;
                 partner->pos.y = y;
                 partner->yaw = atan2(x, z, playerStatus->pos.x, playerStatus->pos.z);
-                spawn_surface_effects(partner, SURFACE_INTERACT_LAND);
+                npc_surface_spawn_fx(partner, SURFACE_INTERACT_LAND);
                 wPartnerFollowState = 50;
             }
             break;
@@ -2344,7 +2344,7 @@ s32 partner_get_out(Npc* partner) {
             partner->pos.z = partner->moveToPos.z;
             if (partner->flags & NPC_FLAG_GROUNDED) {
                 if (!wPartner->isFlying) {
-                    spawn_surface_effects(partner, SURFACE_INTERACT_LAND);
+                    npc_surface_spawn_fx(partner, SURFACE_INTERACT_LAND);
                 }
             }
             return true;
@@ -2559,7 +2559,7 @@ void partner_move_to_goal(Npc* partner, s32 isFlying) {
                     npc_move_heading(partner, partner->moveSpeed, partner->yaw);
                 }
 
-                spawn_surface_effects(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
+                npc_surface_spawn_fx(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
             } else {
                 partner->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
                 partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;

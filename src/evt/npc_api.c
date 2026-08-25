@@ -269,9 +269,9 @@ API_CALLABLE(NpcMoveTo) {
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     if (npc->moveSpeed < 4.0) {
-        spawn_surface_effects(npc, SURFACE_INTERACT_WALK);
+        npc_surface_spawn_fx(npc, SURFACE_INTERACT_WALK);
     } else {
-        spawn_surface_effects(npc, SURFACE_INTERACT_RUN);
+        npc_surface_spawn_fx(npc, SURFACE_INTERACT_RUN);
     }
 
     dist = dist2D(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
@@ -351,7 +351,7 @@ ApiStatus _npc_jump_to(Evt* script, s32 isInitialCall, s32 snapYaw) {
         npc->pos.y = npc->moveToPos.y;
         npc->pos.z = npc->moveToPos.z;
         npc->flags &= ~NPC_FLAG_JUMPING;
-        spawn_surface_effects(npc, SURFACE_INTERACT_LAND);
+        npc_surface_spawn_fx(npc, SURFACE_INTERACT_LAND);
         return ApiStatus_DONE1;
     }
     return ApiStatus_BLOCK;

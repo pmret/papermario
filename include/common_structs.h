@@ -30,6 +30,7 @@ typedef s8 b8;
 typedef s32 HitID;
 typedef u32 AnimID;
 typedef s32 HudElemID;
+typedef s32 MsgID;
 
 typedef struct {
     u8 r, g, b, a;
@@ -898,9 +899,9 @@ typedef struct BattleStatus {
     /*       */     void* varTablePtr[16];
     /*       */ };
     /* 0x048 */ s8 curSubmenu;
-    /* 0x049 */ s8 unk_49;
+    /* 0x049 */ s8 lastSelectedAbility;
     /* 0x04A */ s8 curPartnerSubmenu;
-    /* 0x04B */ s8 unk_4B;
+    /* 0x04B */ s8 lastPartnerPowerSelection;
     /* 0x04C */ s8 lastPlayerMenuSelection[16];
     /* 0x05C */ s8 lastPartnerMenuSelection[16];
     /* 0x06C */ s16 cancelTargetMenuSubstate; // might be more generally for returning from nested 'inner' state
@@ -931,8 +932,8 @@ typedef struct BattleStatus {
     /* 0x08F */ char unk_8F[1];
     /* 0x090 */ s16 unk_90;
     /* 0x092 */ s8 reflectFlags;
-    /* 0x093 */ s8 unk_93;
-    /* 0x094 */ s8 unk_94;
+    /* 0x093 */ s8 nextActorOrdinal;
+    /* 0x094 */ s8 cancelTurnMode;
     /* 0x095 */ s8 waitForState;
     /* 0x096 */ s8 hammerCharge;
     /* 0x097 */ s8 jumpCharge;
@@ -996,8 +997,8 @@ typedef struct BattleStatus {
     /* 0x1A6 */ s8 curTargetPart2;
     /* 0x1A7 */ s8 battlePhase;
     /* 0x1A8 */ s16 attackerActorID;
-    /* 0x1AA */ s16 unk_1AA;
-    /* 0x1AC */ s8 unk_1AC;
+    /* 0x1AA */ s16 lastSelectedItem; // itemID of most recently selected item
+    /* 0x1AC */ s8 lastSelectedPartner; // partnerID of most recently selected partner
     /* 0x1AD */ char unk_1AD;
     /* 0x1AE */ s16 submenuIcons[24]; /* icon IDs */
     /* 0x1DE */ u8 submenuMoves[24]; /* move IDs */
@@ -1419,11 +1420,11 @@ typedef struct GameStatus {
     /* 0x030 */ u32 prevButtons[4]; /* from previous frame */
     /* 0x040 */ s8 stickX[4]; /* with deadzone */
     /* 0x044 */ s8 stickY[4]; /* with deadzone */
-    /* 0x048 */ s16 unk_48[4];
-    /* 0x050 */ s16 unk_50[4];
-    /* 0x058 */ s16 unk_58;
+    /* 0x048 */ s16 holdDelayTime[4];
+    /* 0x050 */ s16 holdRepeatInterval[4];
+    /* 0x058 */ s16 holdDelayCounter;
     /* 0x05A */ char unk_5A[6];
-    /* 0x060 */ s16 unk_60;
+    /* 0x060 */ s16 holdRepeatCounter;
     /* 0x062 */ char unk_62[6];
     /* 0x068 */ s16 demoButtonInput;
     /* 0x06A */ s8 demoStickX;
@@ -1893,7 +1894,7 @@ typedef struct Actor {
     /* 0x00C */ ActorState state;
     /* 0x0C8 */ ActorMovement fly;
     /* 0x124 */ char unk_124[16];
-    /* 0x134 */ u8 unk_134;
+    /* 0x134 */ u8 ordinal; // unique identifier for actor, holds a value of N for the Nth actor spawned
     /* 0x135 */ u8 footStepCounter;
     /* 0x136 */ u8 actorType;
     /* 0x137 */ char unk_137;
@@ -1933,7 +1934,7 @@ typedef struct Actor {
     /* 0x1E0 */ s32 idleScriptID;
     /* 0x1E4 */ s32 takeTurnScriptID;
     /* 0x1E8 */ s32 handleEventScriptID;
-    /* 0x1EC */ s32 handleBatttlePhaseScriptID;
+    /* 0x1EC */ s32 handlePhaseScriptID;
     /* 0x1F0 */ s8 lastEventType;
     /* 0x1F1 */ s8 turnPriority;
     /* 0x1F2 */ s8 enemyIndex; /* actorID = this | 200 */

@@ -761,7 +761,7 @@ void filemenu_main_init(MenuPanel* menu) {
 
     for (i = 0; i < ARRAY_COUNT(filemenu_mainHIDs); i++) {
         filemenu_mainHIDs[i] = hud_element_create(filemenu_main_hudScripts[gCurrentLanguage][i]);
-        hud_element_set_flags(filemenu_mainHIDs[i], HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(filemenu_mainHIDs[i], HUD_ELEMENT_FLAG_MANUAL_RENDER);
     }
 
     for (i = 0; i < ARRAY_COUNT(filemenu_main_windowBPs); i++) {
@@ -1083,7 +1083,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     if (gSaveSlotHasData[menu->selected]) {
                         sfx_play_sound(SOUND_MENU_NEXT);
                         menu->state = FM_MAIN_SELECT_COPY_TO;
-                        filemenu_loadedFileIdx = menu->selected;
+                        filemenu_CopyFromFileIdx = menu->selected;
                     } else {
                         sfx_play_sound(SOUND_MENU_ERROR);
                     }
@@ -1097,7 +1097,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                     filemenu_set_selected(menu, 0, 2);
                 } else if (menu->selected <= FM_MAIN_OPT_FILE_4) {
                     // selected a file
-                    if (filemenu_loadedFileIdx == menu->selected) {
+                    if (filemenu_CopyFromFileIdx == menu->selected) {
                         sfx_play_sound(SOUND_MENU_ERROR);
                     } else {
                         filemenu_iterFileIdx = menu->selected;
@@ -1113,14 +1113,14 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                             set_window_update(WIN_FILES_MESSAGE, WINDOW_UPDATE_SHOW);
                             set_window_update(WIN_FILES_CONFIRM_OPTIONS, WINDOW_UPDATE_HIDE);
 #if VERSION_PAL
-                            if (fio_load_game(filemenu_loadedFileIdx)) {
-                                gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_loadedFileIdx];
+                            if (fio_load_game(filemenu_CopyFromFileIdx)) {
+                                gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_CopyFromFileIdx];
                                 fio_save_game(filemenu_iterFileIdx);
                                 gSaveSlotHasData[filemenu_iterFileIdx] = true;
                             }
 #else
-                            fio_load_game(filemenu_loadedFileIdx);
-                            gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_loadedFileIdx];
+                            fio_load_game(filemenu_CopyFromFileIdx);
+                            gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_CopyFromFileIdx];
                             fio_save_game(filemenu_iterFileIdx);
                             gSaveSlotHasData[filemenu_iterFileIdx] = true;
 #endif
@@ -1248,7 +1248,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 break;
             case FM_MAIN_SELECT_COPY_TO:
                 menu->state = FM_MAIN_SELECT_COPY_FROM;
-                filemenu_set_selected(menu, (filemenu_loadedFileIdx % 2) * 2, filemenu_loadedFileIdx / 2);
+                filemenu_set_selected(menu, (filemenu_CopyFromFileIdx % 2) * 2, filemenu_CopyFromFileIdx / 2);
                 sfx_play_sound(SOUND_MENU_BACK);
                 break;
 #if !VERSION_PAL
@@ -1299,7 +1299,7 @@ void filemenu_main_update(MenuPanel* menu) {
 
     // also add highlight to "copy to" target
     if (filemenu_menus[FILE_MENU_MAIN]->state == FM_MAIN_SELECT_COPY_TO) {
-        switch (filemenu_loadedFileIdx) {
+        switch (filemenu_CopyFromFileIdx) {
             case FM_MAIN_OPT_FILE_1:
                 gWindowStyles[WIN_FILES_SLOT1_BODY].customStyle = &filemenu_windowStyles[16];
                 gWindowStyles[WIN_FILES_SLOT1_TITLE].customStyle = &filemenu_windowStyles[18];

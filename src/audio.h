@@ -217,8 +217,8 @@ typedef enum BGMCompositionCommands {
     BGM_COMP_START_LOOP             = 3,
     BGM_COMP_WAIT                   = 4,
     BGM_COMP_END_LOOP               = 5,
-    BGM_COMP_END_COND_LOOP_false    = 6,
-    BGM_COMP_END_COND_LOOP_true     = 7,
+    BGM_COMP_END_COND_LOOP_FALSE    = 6,
+    BGM_COMP_END_COND_LOOP_TRUE     = 7,
 } BGMCompositionCommands;
 
 typedef enum BGMSpecialSubops {

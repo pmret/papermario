@@ -62,14 +62,14 @@ API_CALLABLE(N(init)) {
     acs->hudElemIDs[HIDX_METER] = hid;
     hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY + 28);
     hud_element_set_render_depth(hid, 0);
-    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER | HUD_ELEMENT_FLAG_DISABLED);
 
     for (i = HIDX_FIRST_BUTTON; i < ARRAY_COUNT(acs->hudElemIDs) - 1; i++) {
         hid = hud_element_create(&HES_AButton);
         acs->hudElemIDs[i] = hid;
         hud_element_set_render_pos(hid, acs->hudPosX, acs->hudPosY);
         hud_element_set_render_depth(hid, 0);
-        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+        hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER | HUD_ELEMENT_FLAG_DISABLED);
     }
 
     return ApiStatus_DONE2;

@@ -11,7 +11,7 @@ EvtScript N(EVS_MinhThankYou) = {
 
 EvtScript N(EVS_NpcIdle_GardenShyGuy1) = {
     Call(SetNpcPos, NPC_SELF, 170, 27, 380)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Run)
     Loop(0)
         Call(InterpNpcYaw, NPC_SELF, 90, 1)
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
@@ -33,7 +33,7 @@ EvtScript N(EVS_NpcIdle_GardenShyGuy1) = {
 
 EvtScript N(EVS_NpcIdle_GardenShyGuy2) = {
     Call(SetNpcPos, NPC_SELF, 350, 27, 280)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Run)
     Loop(0)
         Call(InterpNpcYaw, NPC_SELF, 270, 1)
         Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
@@ -57,11 +57,11 @@ EvtScript N(EVS_GardenShyGuy_RunAway) = {
     Set(LVarA, GF_MAC01_ChasedShyGuysFromGardenA)
     Add(LVarA, GF_MAC01_ChasedShyGuysFromGardenB)
     Call(DisablePlayerInput, true)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim0C)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Hurt)
     Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(NpcJump0, NPC_SELF, LVar0, 27, LVar2, 10)
     Call(SetNpcSpeed, NPC_SELF, Float(8.0))
-    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Run)
     Call(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
     Call(InterpNpcYaw, NPC_SELF, 270, 1)
     Set(LVar0, -1)

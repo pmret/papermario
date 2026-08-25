@@ -54,7 +54,7 @@ s32 N(StatusTable)[] = {
     STATUS_KEY_POISON,             60,
     STATUS_KEY_FROZEN,            100,
     STATUS_KEY_DIZZY,              50,
-    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_UNUSED,              0,
     STATUS_KEY_STATIC,             80,
     STATUS_KEY_PARALYZE,           90,
     STATUS_KEY_SHRINK,             75,
@@ -64,7 +64,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_POISON,         0,
     STATUS_TURN_MOD_FROZEN,         0,
     STATUS_TURN_MOD_DIZZY,         -1,
-    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_UNUSED,         0,
     STATUS_TURN_MOD_STATIC,         0,
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
@@ -119,7 +119,7 @@ s32 N(KoopaAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_KoopaTroopa_Dark_Idle,
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Dark_Still,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Dark_Stunned,
-    STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Dark_Stunned,
+    STATUS_KEY_UNUSED,    ANIM_KoopaTroopa_Dark_Stunned,
     STATUS_END,
 };
 
@@ -132,7 +132,7 @@ s32 N(ShuffleAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_KoopaTroopa_Dark_Walk,
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Dark_Still,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Dark_Stunned,
-    STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Dark_Stunned,
+    STATUS_KEY_UNUSED,    ANIM_KoopaTroopa_Dark_Stunned,
     STATUS_END,
 };
 
@@ -145,7 +145,7 @@ s32 N(HyperAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_KoopaTroopa_Dark_Scramble,
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Dark_Still,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Dark_Stunned,
-    STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Dark_Stunned,
+    STATUS_KEY_UNUSED,    ANIM_KoopaTroopa_Dark_Stunned,
     STATUS_END,
 };
 
@@ -158,7 +158,7 @@ s32 N(HyperShuffleAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_KoopaTroopa_Dark_Walk,
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Dark_Still,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Dark_Stunned,
-    STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Dark_Stunned,
+    STATUS_KEY_UNUSED,    ANIM_KoopaTroopa_Dark_Stunned,
     STATUS_END,
 };
 
@@ -171,7 +171,7 @@ s32 N(ToppledAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_KoopaTroopa_Dark_ToppleStruggle,
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Dark_ToppleStill,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Dark_ToppleStunned,
-    STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Dark_ToppleStunned,
+    STATUS_KEY_UNUSED,    ANIM_KoopaTroopa_Dark_ToppleStunned,
     STATUS_END,
 };
 

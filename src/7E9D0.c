@@ -463,7 +463,7 @@ bool check_input_hammer(void) {
             return false;
         }
 
-        if (playerData->hammerLevel == -1) {
+        if (playerData->hammerLevel == GEAR_RANK_NONE) {
             return false;
         }
 

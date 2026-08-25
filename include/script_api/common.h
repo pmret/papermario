@@ -247,7 +247,7 @@ API_CALLABLE(ShakeCam);
 API_CALLABLE(SetCamLeadPlayer);
 
 /// @evtapi
-API_CALLABLE(func_802CB710);
+API_CALLABLE(SetCamLeadScale);
 
 /// @evtapi
 API_CALLABLE(PanToTarget);

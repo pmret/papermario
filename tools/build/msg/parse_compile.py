@@ -3252,6 +3252,8 @@ if __name__ == "__main__":
                     message = Message(name, section, index)
                 messages.append(message)
 
+                font = 0
+
                 if version == "jp":
                     charset = CHARSET_KANA
                 elif version == "ique":

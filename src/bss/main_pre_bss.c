@@ -13,7 +13,7 @@
 
 BSS u8 nuScPreNMIFlag;
 BSS s32 D_8009A5B4;
-BSS s32 D_8009A5B8;
+BSS s32 ContPadData;
 BSS s32 D_8009A5BC;
 #if VERSION_IQUE || VERSION_PAL
 BSS s32 __osFlashVersion;

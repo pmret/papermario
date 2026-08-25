@@ -459,7 +459,7 @@ API_CALLABLE(N(UseAbility)) {
             kooper->pos.y = posY;
             kooper->pos.z = posZ;
             kooper->planarFlyDist += kooper->moveSpeed;
-            spawn_surface_effects(kooper, SURFACE_INTERACT_RUN);
+            npc_surface_spawn_fx(kooper, SURFACE_INTERACT_RUN);
 
             kooper->moveSpeed += 2.0;
             if (kooper->moveSpeed > 14.0) {
@@ -526,7 +526,7 @@ API_CALLABLE(N(UseAbility)) {
             kooper->pos.z = posZ;
 
             kooper->planarFlyDist += kooper->moveSpeed;
-            spawn_surface_effects(kooper, SURFACE_INTERACT_RUN);
+            npc_surface_spawn_fx(kooper, SURFACE_INTERACT_RUN);
             kooper->moveSpeed -= 6.0;
 
             if (kooper->moveSpeed < 0.01) {
@@ -560,7 +560,7 @@ API_CALLABLE(N(UseAbility)) {
             kooper->yaw = angleToStartPos + get_clamped_angle_diff(kooper->yaw, angleToStartPos) * 0.125f;
             npc_move_heading(kooper, -kooper->moveSpeed, kooper->yaw);
             kooper->planarFlyDist -= kooper->moveSpeed;
-            spawn_surface_effects(kooper, SURFACE_INTERACT_RUN);
+            npc_surface_spawn_fx(kooper, SURFACE_INTERACT_RUN);
             kooper->moveSpeed += 4.0/3.0;
 
             if (kooper->moveSpeed > 14.0) {

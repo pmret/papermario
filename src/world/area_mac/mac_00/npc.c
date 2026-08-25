@@ -19,15 +19,15 @@ MAP_STATIC_PAD(1,item_choice);
 
 EvtScript N(EVS_NpcAI_ShyGuy_03) = {
     Call(DisablePlayerInput, true)
-    Call(SetNpcAnimation, NPC_ShyGuy_02, ANIM_ShyGuy_Red_Anim0C)
+    Call(SetNpcAnimation, NPC_ShyGuy_02, ANIM_ShyGuy_Red_Hurt)
     Wait(10)
-    Call(SetNpcAnimation, NPC_ShyGuy_02, ANIM_ShyGuy_Red_Anim03)
+    Call(SetNpcAnimation, NPC_ShyGuy_02, ANIM_ShyGuy_Red_Run)
     Call(SetNpcJumpscale, NPC_ShyGuy_02, Float(1.0))
     Call(PlaySoundAtNpc, NPC_ShyGuy_02, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
     Call(NpcJump0, NPC_ShyGuy_02, 400, 20, -300, 20)
     Call(NpcFacePlayer, NPC_ShyGuy_02, 0)
     Wait(10)
-    Call(SpeakToPlayer, NPC_ShyGuy_02, ANIM_ShyGuy_Red_Anim11, ANIM_ShyGuy_Red_Anim01, 0, MSG_MAC_Gate_0002)
+    Call(SpeakToPlayer, NPC_ShyGuy_02, ANIM_ShyGuy_Red_Excited, ANIM_ShyGuy_Red_Idle, 0, MSG_MAC_Gate_0002)
     Call(ShowSweat, NPC_ShyGuy_02, 1, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
     Wait(10)
     Call(ShowSweat, NPC_ShyGuy_02, 1, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
@@ -99,7 +99,7 @@ EvtScript N(EVS_NpcHit_ShyGuy_03) = {
 };
 
 EvtScript N(EVS_NpcInteract_ShyGuy_02) = {
-    Call(SpeakToPlayer, NPC_ShyGuy_02, ANIM_ShyGuy_Red_Anim11, ANIM_ShyGuy_Red_Anim01, 0, MSG_MAC_Gate_0001)
+    Call(SpeakToPlayer, NPC_ShyGuy_02, ANIM_ShyGuy_Red_Excited, ANIM_ShyGuy_Red_Idle, 0, MSG_MAC_Gate_0001)
     Return
     End
 };

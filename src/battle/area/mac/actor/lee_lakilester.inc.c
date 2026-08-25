@@ -15,7 +15,7 @@ s32 N(DefaultAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_BattleLakilester_Idle,
     STATUS_KEY_PARALYZE,  ANIM_BattleLakilester_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleLakilester_Injured,
-    STATUS_KEY_FEAR,      ANIM_BattleLakilester_Idle,
+    STATUS_KEY_UNUSED,    ANIM_BattleLakilester_Idle,
     STATUS_END,
 };
 
@@ -36,7 +36,7 @@ s32 N(StatusTable)[] = {
     STATUS_KEY_POISON,              0,
     STATUS_KEY_FROZEN,              0,
     STATUS_KEY_DIZZY,              75,
-    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_UNUSED,              0,
     STATUS_KEY_STATIC,              0,
     STATUS_KEY_PARALYZE,           75,
     STATUS_KEY_SHRINK,             80,
@@ -46,7 +46,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_POISON,         0,
     STATUS_TURN_MOD_FROZEN,         0,
     STATUS_TURN_MOD_DIZZY,         -1,
-    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_UNUSED,         0,
     STATUS_TURN_MOD_STATIC,         0,
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,

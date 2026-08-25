@@ -137,7 +137,7 @@ API_CALLABLE(N(func_802A13E4_72C994)) {
             for (i = 0; i < ARRAY_COUNT(D_802A25C8); i++) {
                 hid = hud_element_create(gItemHudScripts[gItemTable[D_802A25FC[i]].hudElemID].enabled);
                 D_802A25C8[i] = hid;
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
             }
             D_802A25E4 = 1;
             return ApiStatus_BLOCK;

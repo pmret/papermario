@@ -52,7 +52,7 @@ EvtScript N(EVS_NpcIdle_Blooper) = {
 EvtScript N(EVS_NpcDefeat_Blooper) = {
     Wait(5)
     Thread
-        Call(SetNpcAnimation, NPC_SELF, ANIM_Blooper_Anim04)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Blooper_Hurt)
         Call(MakeLerp, 0, 6 * 360, 40, EASING_LINEAR)
         Loop(0)
             Call(UpdateLerp)

@@ -2153,7 +2153,7 @@ void update_item_entity_pickup(ItemEntity* item) {
             }
 
             ItemPickupIconHID = hud_element_create(gItemHudScripts[gItemTable[item->itemID].hudElemID].enabled);
-            hud_element_set_flags(ItemPickupIconHID, HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(ItemPickupIconHID, HUD_ELEMENT_FLAG_MANUAL_RENDER);
             hud_element_set_render_pos(ItemPickupIconHID, -100, -100);
             item->state = ITEM_PICKUP_STATE_SHOW_GOT_ITEM;
 

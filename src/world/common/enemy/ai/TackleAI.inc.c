@@ -76,10 +76,10 @@ API_CALLABLE(N(TackleAI_Main)) {
     if (enemy->varTable[9] > 0) {
         enemy->varTable[9]--;
         if (enemy->varTable[9] == 0) {
-            if (npc->curAnim == ANIM_BonyBeetle_Anim2E ||
-                npc->curAnim == ANIM_BonyBeetle_Anim2F)
+            if (npc->curAnim == ANIM_BonyBeetle_ExtendSpikes ||
+                npc->curAnim == ANIM_BonyBeetle_RetractSpikes)
             {
-                npc->curAnim = ANIM_BonyBeetle_Anim0C;
+                npc->curAnim = ANIM_BonyBeetle_Walk;
             }
         } else {
             return ApiStatus_BLOCK;
@@ -100,11 +100,11 @@ API_CALLABLE(N(TackleAI_Main)) {
                     if (enemy->varTable[8] != 0) {
                         enemy->varTable[8] = 0;
                         enemy->instigatorValue = 0;
-                        npc->curAnim = ANIM_BonyBeetle_Anim2F;
+                        npc->curAnim = ANIM_BonyBeetle_RetractSpikes;
                     } else {
                         enemy->varTable[8] = 1;
                         enemy->instigatorValue = 1;
-                        npc->curAnim = ANIM_BonyBeetle_Anim2E;
+                        npc->curAnim = ANIM_BonyBeetle_ExtendSpikes;
                     }
                     enemy->varTable[9] = 7;
                     return ApiStatus_BLOCK;
@@ -137,13 +137,13 @@ API_CALLABLE(N(TackleAI_Main)) {
         }
         if (enemy->varTable[8] != 0) {
             switch (npc->curAnim) {
-                case ANIM_BonyBeetle_Anim04:
-                case ANIM_BonyBeetle_Anim0C:
-                case ANIM_BonyBeetle_Anim0E:
-                case ANIM_BonyBeetle_Anim10:
-                case ANIM_BonyBeetle_Anim12:
-                case ANIM_BonyBeetle_Anim16:
-                case ANIM_BonyBeetle_Anim18:
+                case ANIM_BonyBeetle_Idle:
+                case ANIM_BonyBeetle_Walk:
+                case ANIM_BonyBeetle_Run:
+                case ANIM_BonyBeetle_ShellEnter:
+                case ANIM_BonyBeetle_ShellExit:
+                case ANIM_BonyBeetle_ShellSpin:
+                case ANIM_BonyBeetle_Hurt:
                     npc->curAnim++;
                     break;
             }

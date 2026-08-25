@@ -16,22 +16,22 @@
 
 #define PIRANHA_PLANT_ANIMS \
 { \
-    .idle   = ANIM_SmallPiranha_Anim01, \
-    .walk   = ANIM_SmallPiranha_Anim01, \
-    .run    = ANIM_SmallPiranha_Anim01, \
-    .chase  = ANIM_SmallPiranha_Anim01, \
-    .anim_4 = ANIM_SmallPiranha_Anim01, \
-    .anim_5 = ANIM_SmallPiranha_Anim01, \
-    .death  = ANIM_SmallPiranha_Anim09, \
-    .hit    = ANIM_SmallPiranha_Anim09, \
-    .anim_8 = ANIM_SmallPiranha_Anim04, \
-    .anim_9 = ANIM_SmallPiranha_Anim03, \
-    .anim_A = ANIM_SmallPiranha_Anim07, \
-    .anim_B = ANIM_SmallPiranha_Anim07, \
-    .anim_C = ANIM_SmallPiranha_Anim08, \
-    .anim_D = ANIM_SmallPiranha_Anim01, \
-    .anim_E = ANIM_SmallPiranha_Anim01, \
-    .anim_F = ANIM_SmallPiranha_Anim01, \
+    .idle   = ANIM_SmallPiranha_Idle, \
+    .walk   = ANIM_SmallPiranha_Idle, \
+    .run    = ANIM_SmallPiranha_Idle, \
+    .chase  = ANIM_SmallPiranha_Idle, \
+    .anim_4 = ANIM_SmallPiranha_Idle, \
+    .anim_5 = ANIM_SmallPiranha_Idle, \
+    .death  = ANIM_SmallPiranha_Hurt, \
+    .hit    = ANIM_SmallPiranha_Hurt, \
+    .anim_8 = ANIM_SmallPiranha_Burrow, \
+    .anim_9 = ANIM_SmallPiranha_Emerge, \
+    .anim_A = ANIM_SmallPiranha_BiteSide, \
+    .anim_B = ANIM_SmallPiranha_BiteSide, \
+    .anim_C = ANIM_SmallPiranha_ResetSide, \
+    .anim_D = ANIM_SmallPiranha_Idle, \
+    .anim_E = ANIM_SmallPiranha_Idle, \
+    .anim_F = ANIM_SmallPiranha_Idle, \
 }
 
 #define PIRANHA_PLANT_HITBOX(npcID) \
@@ -43,21 +43,21 @@
     .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DROPS, \
     .drops = NO_DROPS, \
     .animations = { \
-        .idle   = ANIM_SmallPiranha_Anim01, \
-        .walk   = ANIM_SmallPiranha_Anim01, \
-        .run    = ANIM_SmallPiranha_Anim01, \
-        .chase  = ANIM_SmallPiranha_Anim01, \
-        .anim_4 = ANIM_SmallPiranha_Anim01, \
-        .anim_5 = ANIM_SmallPiranha_Anim01, \
-        .death  = ANIM_SmallPiranha_Anim09, \
-        .hit    = ANIM_SmallPiranha_Anim09, \
-        .anim_8 = ANIM_SmallPiranha_Anim04, \
-        .anim_9 = ANIM_SmallPiranha_Anim03, \
-        .anim_A = ANIM_SmallPiranha_Anim07, \
-        .anim_B = ANIM_SmallPiranha_Anim07, \
-        .anim_C = ANIM_SmallPiranha_Anim08, \
-        .anim_D = ANIM_SmallPiranha_Anim01, \
-        .anim_E = ANIM_SmallPiranha_Anim01, \
-        .anim_F = ANIM_SmallPiranha_Anim01, \
+        .idle   = ANIM_SmallPiranha_Idle, \
+        .walk   = ANIM_SmallPiranha_Idle, \
+        .run    = ANIM_SmallPiranha_Idle, \
+        .chase  = ANIM_SmallPiranha_Idle, \
+        .anim_4 = ANIM_SmallPiranha_Idle, \
+        .anim_5 = ANIM_SmallPiranha_Idle, \
+        .death  = ANIM_SmallPiranha_Hurt, \
+        .hit    = ANIM_SmallPiranha_Hurt, \
+        .anim_8 = ANIM_SmallPiranha_Burrow, \
+        .anim_9 = ANIM_SmallPiranha_Emerge, \
+        .anim_A = ANIM_SmallPiranha_BiteSide, \
+        .anim_B = ANIM_SmallPiranha_BiteSide, \
+        .anim_C = ANIM_SmallPiranha_ResetSide, \
+        .anim_D = ANIM_SmallPiranha_Idle, \
+        .anim_E = ANIM_SmallPiranha_Idle, \
+        .anim_F = ANIM_SmallPiranha_Idle, \
     }, \
 }

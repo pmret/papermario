@@ -16,20 +16,20 @@
 
 #define DUPLIGHOST_ANIMS \
 { \
-    .idle   = ANIM_Duplighost_Anim02, \
-    .walk   = ANIM_Duplighost_Anim03, \
-    .run    = ANIM_Duplighost_Anim04, \
-    .chase  = ANIM_Duplighost_Anim04, \
-    .anim_4 = ANIM_Duplighost_Anim02, \
-    .anim_5 = ANIM_Duplighost_Anim02, \
-    .death  = ANIM_Duplighost_Anim0A, \
-    .hit    = ANIM_Duplighost_Anim0A, \
-    .anim_8 = ANIM_Duplighost_Anim02, \
-    .anim_9 = ANIM_Duplighost_Anim02, \
-    .anim_A = ANIM_Duplighost_Anim02, \
-    .anim_B = ANIM_Duplighost_Anim02, \
-    .anim_C = ANIM_Duplighost_Anim02, \
-    .anim_D = ANIM_Duplighost_Anim02, \
-    .anim_E = ANIM_Duplighost_Anim02, \
-    .anim_F = ANIM_Duplighost_Anim02, \
+    .idle   = ANIM_Duplighost_Idle, \
+    .walk   = ANIM_Duplighost_Walk, \
+    .run    = ANIM_Duplighost_Run, \
+    .chase  = ANIM_Duplighost_Run, \
+    .anim_4 = ANIM_Duplighost_Idle, \
+    .anim_5 = ANIM_Duplighost_Idle, \
+    .death  = ANIM_Duplighost_Hurt, \
+    .hit    = ANIM_Duplighost_Hurt, \
+    .anim_8 = ANIM_Duplighost_Idle, \
+    .anim_9 = ANIM_Duplighost_Idle, \
+    .anim_A = ANIM_Duplighost_Idle, \
+    .anim_B = ANIM_Duplighost_Idle, \
+    .anim_C = ANIM_Duplighost_Idle, \
+    .anim_D = ANIM_Duplighost_Idle, \
+    .anim_E = ANIM_Duplighost_Idle, \
+    .anim_F = ANIM_Duplighost_Idle, \
 }

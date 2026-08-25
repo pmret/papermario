@@ -8,7 +8,7 @@
 #ifndef SHIFT
 
 BSS SpriteShadingProfile* gAuxSpriteShadingProfile;
-BSS s32 gHudElementsNumber;
+BSS s32 HudElemCount;
 BSS ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
 BSS s32 D_801512BC;
 BSS s32 entity_numEntities;

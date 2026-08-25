@@ -883,12 +883,12 @@ void au_bgm_player_read_composition(BGMPlayer* player) {
                 case BGM_COMP_END_LOOP << 16:
                     au_bgm_end_composition_loop(player, cmd);
                     break;
-                case BGM_COMP_END_COND_LOOP_false << 16:
+                case BGM_COMP_END_COND_LOOP_FALSE << 16:
                     if (!(player->conditionalLoopFlags & 1)) {
                         au_bgm_end_composition_loop(player, cmd);
                     }
                     break;
-                case BGM_COMP_END_COND_LOOP_true << 16:
+                case BGM_COMP_END_COND_LOOP_TRUE << 16:
                     if (player->conditionalLoopFlags & 1) {
                         au_bgm_end_composition_loop(player, cmd);
                     }

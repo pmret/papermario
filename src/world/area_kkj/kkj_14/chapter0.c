@@ -121,10 +121,10 @@ EvtScript N(EVS_Scene_Chapter0) = {
         Call(SetNpcVar, NPC_Bowser, 0, 0)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim02)
+        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Walk)
         Call(SetNpcSpeed, NPC_Kammy, Float(3.0 / DT))
         Call(NpcMoveTo, NPC_Kammy, -110, 30, 0)
-        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim01)
+        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Idle)
     EndThread
     Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
     Thread
@@ -154,7 +154,7 @@ EvtScript N(EVS_Scene_Chapter0) = {
     Call(SetNpcAnimation, NPC_Bowser, ANIM_WorldBowser_Idle)
     Wait(1)
     Call(EndSpeech, NPC_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0)
-    Call(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 0, MSG_Peach_001B)
+    Call(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Talk, ANIM_WorldKammy_Idle, 0, MSG_Peach_001B)
     Call(SetNpcAnimation, NPC_Bowser, ANIM_WorldBowser_Brandish)
     Wait(10 * DT)
     Call(SpeakToPlayer, NPC_Bowser, ANIM_WorldBowser_BrandishTalk, ANIM_WorldBowser_BrandishIdle, 0, MSG_Peach_001C)
@@ -162,9 +162,9 @@ EvtScript N(EVS_Scene_Chapter0) = {
     Call(SetNpcAnimation, NPC_Bowser, ANIM_WorldBowser_Idle)
     Call(EndSpeech, NPC_Bowser, ANIM_WorldBowser_BrandishTalk, ANIM_WorldBowser_BrandishIdle, 0)
     Call(SetPlayerAnimation, ANIM_Peach1_Idle)
-    Call(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 0, MSG_Peach_001D)
+    Call(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Talk, ANIM_WorldKammy_Idle, 0, MSG_Peach_001D)
     Call(SpeakToPlayer, NPC_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, MSG_Peach_001E)
-    Call(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim04, ANIM_WorldKammy_Anim01, 0, MSG_Peach_001F)
+    Call(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Talk, ANIM_WorldKammy_Idle, 0, MSG_Peach_001F)
     Wait(15 * DT)
     Thread
         Call(SetNpcAnimation, NPC_Bowser, ANIM_WorldBowser_Walk)
@@ -173,9 +173,9 @@ EvtScript N(EVS_Scene_Chapter0) = {
     Thread
         Call(InterpNpcYaw, NPC_Kammy, 270, 5)
         Wait(60 * DT)
-        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim02)
+        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Walk)
         Call(NpcMoveTo, NPC_Kammy, -510, 30, 0)
-        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim01)
+        Call(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Idle)
     EndThread
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)

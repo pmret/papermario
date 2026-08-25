@@ -85,7 +85,7 @@ API_CALLABLE(N(ModifyBowPos)) {
 API_CALLABLE(N(IsPlayerImmobile)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
-    s32 isImmobile = playerActor->debuff == STATUS_KEY_FEAR
+    s32 isImmobile = playerActor->debuff == STATUS_KEY_UNUSED
                      || playerActor->debuff == STATUS_KEY_DIZZY
                      || playerActor->debuff == STATUS_KEY_PARALYZE
                      || playerActor->debuff == STATUS_KEY_SLEEP
@@ -155,7 +155,7 @@ s32 N(DefaultAnims)[] = {
     STATUS_KEY_SLEEP,     ANIM_BattleBow_Pray,
     STATUS_KEY_POISON,    ANIM_BattleBow_Still,
     STATUS_KEY_STOP,      ANIM_BattleBow_Still,
-    STATUS_KEY_DAZE,      ANIM_BattleBow_Injured,
+    STATUS_KEY_KO,        ANIM_BattleBow_Injured,
     STATUS_KEY_INACTIVE,  ANIM_BattleBow_Still,
     STATUS_END,
 };
@@ -172,7 +172,7 @@ s32 N(StatusTable)[] = {
     STATUS_KEY_POISON,            100,
     STATUS_KEY_FROZEN,            100,
     STATUS_KEY_DIZZY,             100,
-    STATUS_KEY_FEAR,              100,
+    STATUS_KEY_UNUSED,            100,
     STATUS_KEY_STATIC,            100,
     STATUS_KEY_PARALYZE,          100,
     STATUS_KEY_SHRINK,            100,
@@ -182,7 +182,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_POISON,         0,
     STATUS_TURN_MOD_FROZEN,         0,
     STATUS_TURN_MOD_DIZZY,          0,
-    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_UNUSED,         0,
     STATUS_TURN_MOD_STATIC,         0,
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
@@ -936,9 +936,9 @@ EvtScript N(spook) = {
         Call(SetDamageSource, DMG_SRC_SPOOK)
         Switch(LVarF)
             CaseGt(99)
-                Call(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_400000, LVarF, 0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
+                Call(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_FEAR, LVarF, 0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
             CaseDefault
-                Call(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_400000, LVarF, 0, BS_FLAGS1_NO_RATING | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
+                Call(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_FEAR, LVarF, 0, BS_FLAGS1_NO_RATING | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
         EndSwitch
         Label(10)
         Wait(5)

@@ -61,7 +61,7 @@ void btl_set_player_idle_anims(void) {
 API_CALLABLE(IsPlayerImmobile) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
-    s32 isImmobile = playerActor->debuff == STATUS_KEY_FEAR
+    s32 isImmobile = playerActor->debuff == STATUS_KEY_UNUSED
                      || playerActor->debuff == STATUS_KEY_DIZZY
                      || playerActor->debuff == STATUS_KEY_PARALYZE
                      || playerActor->debuff == STATUS_KEY_SLEEP
@@ -95,7 +95,7 @@ API_CALLABLE(TryPlayerLucky) {
     sfx_play_sound(SOUND_LUCKY);
 
     script->varTable[0] = false;
-    if (player->debuff == STATUS_KEY_FEAR
+    if (player->debuff == STATUS_KEY_UNUSED
         || player->debuff == STATUS_KEY_DIZZY
         || player->debuff == STATUS_KEY_PARALYZE
         || player->debuff == STATUS_KEY_SLEEP
@@ -917,7 +917,7 @@ EvtScript EVS_StartDefend = {
 EvtScript EVS_Player_HandleEvent = {
     Call(GetLastEvent, ACTOR_PLAYER, LVarF)
     Switch(LVarF)
-        CaseNe(EVENT_32)
+        CaseNe(EVENT_RECOVER_FROZEN)
             Call(UseIdleAnimation, ACTOR_PLAYER, false)
     EndSwitch
     Call(InterruptActionCommand)
@@ -1057,7 +1057,7 @@ EvtScript EVS_Player_HandleEvent = {
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
             Call(PlayerRunToGoal, 0)
             Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-        CaseEq(EVENT_32)
+        CaseEq(EVENT_RECOVER_FROZEN)
             Wait(10)
             Call(UseIdleAnimation, ACTOR_PLAYER, false)
             Call(SetActorJumpGravity, ACTOR_PLAYER, Float(1.8))

@@ -93,13 +93,13 @@ API_CALLABLE(N(RunMixingMinigame)) {
             N(MixingGameHudElems)[0] = hid;
             hud_element_set_render_pos(hid, N(MixingGameUIBaseX), N(MixingGameUIBaseY));
             hud_element_set_render_depth(hid, 0);
-            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER | HUD_ELEMENT_FLAG_DISABLED);
 
             hid = hud_element_create(&HES_BlueMeter);
             N(MixingGameHudElems)[1] = hid;
             hud_element_set_render_pos(hid, N(MixingGameUIBaseX), N(MixingGameUIBaseY) + 28);
             hud_element_set_render_depth(hid, 0);
-            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+            hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER | HUD_ELEMENT_FLAG_DISABLED);
 
             hid = N(MixingGameHudElems)[0];
             hud_element_set_alpha(hid, 255);

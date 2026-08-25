@@ -439,7 +439,7 @@
     actionTip: BTL_MSG_ACTION_TIP_NOT_USED_3
     costFP: 2
     costBP: 2
-- Unused_DefendPlus:
+- Defend:
     nameMsg: MSG_MoveName_DefendPlus
     fullDescMsg: MSG_ItemFullDesc_DefendPlus
     shortDescMsg: MSG_ItemShortDesc_DefendPlus
@@ -493,7 +493,7 @@
     actionTip: NONE
     costFP: 6
     costBP: 3
-- Unused_37:
+- ChangePartner:
     nameMsg: (s32) "つうじょう"
     fullDescMsg: MSG_NONE
     shortDescMsg: MSG_NONE
@@ -511,7 +511,7 @@
     actionTip: NONE
     costFP: 0
     costBP: 4
-- Unused_39:
+- RunAway:
     nameMsg: (s32) "つうじょう"
     fullDescMsg: MSG_NONE
     shortDescMsg: MSG_NONE

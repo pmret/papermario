@@ -24,7 +24,7 @@ AnimID StepUpPeachAnims[] = {
     [PEACH_BAKING_CAKE_WITH_BERRIES]    ANIM_Peach1_CarryBerryCake,
 };
 
-void func_802B6198_E24768(void);
+void action_update_step_up_set_peach_anim(void);
 
 void action_update_step_up(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -44,7 +44,7 @@ void action_update_step_up(void) {
             }
             suggest_player_anim_allow_backward(anim);
         } else {
-            func_802B6198_E24768();
+            action_update_step_up_set_peach_anim();
         }
         playerStatus->actionSubstate = 0;
         playerStatus->timeInAir = 0;
@@ -76,7 +76,7 @@ void action_update_step_up(void) {
     }
 }
 
-void func_802B6198_E24768(void) {
+void action_update_step_up_set_peach_anim(void) {
     if (!(gPlayerStatus.animFlags & PA_FLAG_INVISIBLE)) {
         if (!(gGameStatusPtr->peachFlags & PEACH_FLAG_DEPRESSED)) {
             suggest_player_anim_allow_backward(StepUpPeachAnims[gGameStatusPtr->peachBakingIngredient]);

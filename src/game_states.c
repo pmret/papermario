@@ -4,10 +4,10 @@
 BSS GameMode gMainGameMode[2];
 BSS s32 D_80151730[4]; // unused? or probably a part of GameMode?
 
-void mode_default_nop(void) {
+void game_mode_nop(void) {
 }
 
-void clear_game_modes(void) {
+void clear_game_mode(void) {
     GameMode* gameMode;
     s32 i;
 
@@ -36,19 +36,19 @@ GameMode* set_next_game_mode(GameMode* mode) {
     gameMode->unusedFunc = nullptr;
 
     if (gameMode->init == nullptr) {
-        gameMode->init = mode_default_nop;
+        gameMode->init = game_mode_nop;
     }
     if (gameMode->step == nullptr) {
-        gameMode->step = mode_default_nop;
+        gameMode->step = game_mode_nop;
     }
     if (gameMode->unusedFunc == nullptr) {
-        gameMode->unusedFunc = mode_default_nop;
+        gameMode->unusedFunc = game_mode_nop;
     }
     if (gameMode->render == nullptr) {
-        gameMode->render = mode_default_nop;
+        gameMode->render = game_mode_nop;
     }
 
-    gameMode->renderAux = mode_default_nop;
+    gameMode->renderAux = game_mode_nop;
     gameMode->init();
 
     return gameMode;
@@ -64,18 +64,18 @@ GameMode* set_game_mode_slot(s32 i, GameMode* mode) {
     gameMode->step = mode->step;
     gameMode->render = mode->render;
     gameMode->unusedFunc = nullptr;
-    if (gameMode->init == nullptr) gameMode->init = mode_default_nop;
-    if (gameMode->step == nullptr) gameMode->step = mode_default_nop;
-    if (gameMode->unusedFunc == nullptr) gameMode->unusedFunc = mode_default_nop;
-    if (gameMode->render == nullptr) gameMode->render = mode_default_nop;
+    if (gameMode->init == nullptr) gameMode->init = game_mode_nop;
+    if (gameMode->step == nullptr) gameMode->step = game_mode_nop;
+    if (gameMode->unusedFunc == nullptr) gameMode->unusedFunc = game_mode_nop;
+    if (gameMode->render == nullptr) gameMode->render = game_mode_nop;
 
-    gameMode->renderAux = mode_default_nop;
+    gameMode->renderAux = game_mode_nop;
     gameMode->init();
 
     return gameMode;
 }
 
-void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void)) {
+void set_game_mode_render_frontUI(s32 i, void (*fn)(void)) {
     GameMode* gameMode = &gMainGameMode[i];
 
     ASSERT(i < ARRAY_COUNT(gMainGameMode));
@@ -84,7 +84,7 @@ void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void)) {
     gameMode->flags |= MODE_FLAG_RENDER_AUX_SET;
 
     if (fn == nullptr) {
-        gameMode->renderAux = mode_default_nop;
+        gameMode->renderAux = game_mode_nop;
     }
 }
 
@@ -109,7 +109,7 @@ void set_game_mode_flag_10(s32 i) {
     gMainGameMode[i].flags |= MODE_FLAG_10;
 }
 
-void step_current_game_mode(void) {
+void step_game_mode(void) {
     GameMode* gameMode = gMainGameMode;
     s32 i;
 
@@ -141,7 +141,7 @@ void state_do_unk(void) {
     }
 }
 
-void state_render_backUI(void) {
+void render_game_mode_backUI(void) {
     GameMode* gameMode = gMainGameMode;
     s32 i;
 
@@ -156,7 +156,7 @@ void state_render_backUI(void) {
     }
 }
 
-void state_render_frontUI(void) {
+void render_game_mode_frontUI(void) {
     GameMode* gameMode = gMainGameMode;
     s32 i;
 

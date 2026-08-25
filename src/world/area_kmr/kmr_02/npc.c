@@ -1913,12 +1913,12 @@ NpcData N(NpcData_Toad) = {
 };
 
 AnimID N(ExtraAnims_Kammy)[] = {
-    ANIM_WorldKammy_Anim15,
-    ANIM_WorldKammy_Anim10,
-    ANIM_WorldKammy_Anim0E,
-    ANIM_WorldKammy_Anim0F,
-    ANIM_WorldKammy_Anim16,
-    ANIM_WorldKammy_Anim13,
+    ANIM_WorldKammy_FlyFastSly,
+    ANIM_WorldKammy_FlyBrake,
+    ANIM_WorldKammy_FlyRodTalk,
+    ANIM_WorldKammy_FlyRodCast,
+    ANIM_WorldKammy_FlyTalkSly,
+    ANIM_WorldKammy_FlyIdleSly,
     ANIM_LIST_END
 };
 

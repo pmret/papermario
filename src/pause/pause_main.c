@@ -623,9 +623,9 @@ void pause_init(void) {
     for (i = 0; i < ARRAY_COUNT(gPauseHudScripts); i++) {
         gPauseCommonHIDs[i] = hud_element_create(gPauseHudScripts[i]);
         if (gPauseHudScripts[i] == &HES_AnimatedCursorHand) {
-            hud_element_set_flags(gPauseCommonHIDs[i], HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(gPauseCommonHIDs[i], HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_MANUAL_RENDER);
         } else {
-            hud_element_set_flags(gPauseCommonHIDs[i], HUD_ELEMENT_FLAG_80);
+            hud_element_set_flags(gPauseCommonHIDs[i], HUD_ELEMENT_FLAG_MANUAL_RENDER);
         }
     }
 

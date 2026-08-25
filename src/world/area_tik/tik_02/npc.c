@@ -32,10 +32,10 @@ EvtScript N(EVS_NpcIdle_Blooper) = {
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_BLOOPER_MOVE, SOUND_SPACE_DEFAULT)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_LARGE_ACTOR_JUMP, SOUND_SPACE_DEFAULT)
     Call(SetNpcPos, NPC_SELF, -100, -300, -120)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_Blooper_Anim01)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Blooper_LeanLeft)
     Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
     Call(NpcJump0, NPC_SELF, 175, 0, 0, 40)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_Blooper_Anim0C)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Blooper_Jump)
     Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(1.0))
     Wait(15)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
@@ -51,7 +51,7 @@ EvtScript N(EVS_NpcDefeat_Blooper) = {
         Call(WaitForCam, CAM_DEFAULT, Float(1.0))
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_SELF, ANIM_Blooper_Anim04)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Blooper_Hurt)
         Call(MakeLerp, 0, 6 * 360, 40, EASING_LINEAR)
         Loop(0)
             Call(UpdateLerp)

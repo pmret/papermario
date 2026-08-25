@@ -102,7 +102,7 @@ Vp D_80249D60 = {
         .vtrans = { 640, 480, 511, 0},
     }
 };
-f32 D_80249D70[15] = { 7.0f, 12.5f, 13.0f, 14.5f, 14.0f, 13.0f, 11.5f, 9.5f, 7.5f, 5.5f, 3.5f, 2.0f, 1.0f, 0.5f, 0.0f };
+f32 CopyArrowAnimOffsets[15] = { 7.0f, 12.5f, 13.0f, 14.5f, 14.0f, 13.0f, 11.5f, 9.5f, 7.5f, 5.5f, 3.5f, 2.0f, 1.0f, 0.5f, 0.0f };
 
 MenuWindowBP filemenu_common_windowBPs[3] = {
     {
@@ -164,7 +164,7 @@ BSS s32 filemenu_pressedButtons;
 BSS HudElemID filemenu_cursorHID;
 BSS s32 filemenu_heldButtons;
 BSS s8 filemenu_filename_pos;
-BSS s32 filemenu_loadedFileIdx;
+BSS s32 filemenu_CopyFromFileIdx;
 BSS s8 filemenu_currentMenu;
 BSS s32 filemenu_8024C09C;
 BSS HudElemID filemenu_cursorHIDs[1];
@@ -912,7 +912,7 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
     }
 
     // check if different files are selected
-    if (filemenu_menus[FILE_MENU_MAIN]->selected == filemenu_loadedFileIdx) {
+    if (filemenu_menus[FILE_MENU_MAIN]->selected == filemenu_CopyFromFileIdx) {
         return;
     }
 
@@ -921,7 +921,7 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
         return;
     }
 
-    switch (filemenu_loadedFileIdx) {
+    switch (filemenu_CopyFromFileIdx) {
         case 0:
             startX = 130.0f;
             startZ = 90.0f;
@@ -984,7 +984,7 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
     gSPDisplayList(gMainGfxPos++, D_8024B6F0);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
-    guTranslateF(tempMtx, D_80249D70[gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70)], 0.0f, 0.0f);
+    guTranslateF(tempMtx, CopyArrowAnimOffsets[gGameStatusPtr->frameCounter % ARRAY_COUNT(CopyArrowAnimOffsets)], 0.0f, 0.0f);
     guMtxCatF(tempMtx, transformMtx, transformMtx);
     guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
@@ -1009,7 +1009,7 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
     gSPDisplayList(gMainGfxPos++, D_8024B6F0);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
-    guTranslateF(tempMtx, D_80249D70[(gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70))], 0.0f, 0.0f);
+    guTranslateF(tempMtx, CopyArrowAnimOffsets[(gGameStatusPtr->frameCounter % ARRAY_COUNT(CopyArrowAnimOffsets))], 0.0f, 0.0f);
     guMtxCatF(tempMtx, transformMtx, transformMtx);
     guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
@@ -1032,7 +1032,7 @@ void filemenu_init(s32 mode) {
 
     for (i = 0; i < ARRAY_COUNT(filemenu_cursorHIDs); i++) {
         filemenu_cursorHIDs[i] = hud_element_create(filemenu_cursor_hudElemScripts[i]);
-        hud_element_set_flags(filemenu_cursorHIDs[i], HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(filemenu_cursorHIDs[i], HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_MANUAL_RENDER);
     }
 
     filemenu_cursorHID = filemenu_cursorHIDs[0];

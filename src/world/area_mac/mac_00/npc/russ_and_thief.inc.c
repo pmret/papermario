@@ -187,7 +187,7 @@ EvtScript N(EVS_ShyGuy_StealDictionary) = {
         Wait(1)
     EndLoop
     Call(SetNpcPos, NPC_ShyGuyThief, -30, 20, -470)
-    Call(SetNpcAnimation, NPC_ShyGuyThief, ANIM_ShyGuy_Red_Anim04)
+    Call(SetNpcAnimation, NPC_ShyGuyThief, ANIM_ShyGuy_Red_Dash)
     Wait(1)
     Call(DisablePlayerInput, true)
     Call(ShowMessageAtScreenPos, MSG_MAC_Gate_0009, 160, 40)

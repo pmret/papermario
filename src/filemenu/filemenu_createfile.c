@@ -347,7 +347,7 @@ void filemenu_choose_name_init(MenuPanel* menu) {
 
     for (i = 0; i < ARRAY_COUNT(filemenu_createfile_hudScripts); i++) {
         filemenu_createfile_HIDs[i] = hud_element_create(filemenu_createfile_hudScripts[i]);
-        hud_element_set_flags(filemenu_createfile_HIDs[i], HUD_ELEMENT_FLAG_80);
+        hud_element_set_flags(filemenu_createfile_HIDs[i], HUD_ELEMENT_FLAG_MANUAL_RENDER);
     }
 
     for (i = 0; i < ARRAY_COUNT(filemenu_createfile_windowBPs); i++) {

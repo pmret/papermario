@@ -17,20 +17,20 @@ EvtScript N(EVS_NpcDefeat_FrostClubba) = {
 };
 
 AnimID N(ExtraAnims_FrostClubba)[] = {
-    ANIM_WorldClubba_Anim00,
-    ANIM_WorldClubba_Anim02,
-    ANIM_WorldClubba_Anim03,
-    ANIM_WorldClubba_Anim04,
-    ANIM_WorldClubba_Anim0C,
-    ANIM_WorldClubba_Anim07,
-    ANIM_WorldClubba_Anim08,
-    ANIM_WorldClubba_Anim11,
-    ANIM_WorldClubba_Anim12,
+    ANIM_WorldClubba_Still,
+    ANIM_WorldClubba_Idle,
+    ANIM_WorldClubba_Walk,
+    ANIM_WorldClubba_Run,
+    ANIM_WorldClubba_Hurt,
+    ANIM_WorldClubba_Sleep,
+    ANIM_WorldClubba_WakeUp,
+    ANIM_WorldClubba_RaiseClub,
+    ANIM_WorldClubba_SwingClub,
     ANIM_LIST_END
 };
 
 AnimID N(ExtraAnims_FrostClubba_Hitbox)[] = {
-    ANIM_WorldClubba_Anim00,
+    ANIM_WorldClubba_Still,
     ANIM_LIST_END
 };
 

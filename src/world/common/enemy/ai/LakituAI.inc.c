@@ -222,7 +222,7 @@ API_CALLABLE(N(LakituAI_Main)) {
             spinyEnemy->varTable[10] = 1;
             spinyEnemy->varTable[11] = enemy->npcID;
             npc->duration = 15;
-            npc->curAnim = ANIM_Lakitu_Anim14;
+            npc->curAnim = ANIM_Lakitu_GetSpiny;
             script->AI_TEMP_STATE = 30;
         }
     }
@@ -255,7 +255,7 @@ API_CALLABLE(N(LakituAI_Main)) {
             if (npc->duration > 0) {
                 break;
             }
-            npc->curAnim = ANIM_Lakitu_Anim15;
+            npc->curAnim = ANIM_Lakitu_ThrowSpiny;
             spinyEnemy = get_enemy(enemy->varTable[4]);
             spinyEnemy->varTable[10] = 3;
             npc->duration = 10;

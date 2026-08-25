@@ -2043,6 +2043,13 @@ enum DamageSources {
     DMG_SRC_INK_BLAST               = 26,
 };
 
+enum GearRank {
+    GEAR_RANK_NONE   = -1,
+    GEAR_RANK_NORMAL = 0,
+    GEAR_RANK_SUPER  = 1,
+    GEAR_RANK_ULTRA  = 2,
+};
+
 enum PartnerRank {
     PARTNER_RANK_NORMAL = 0,
     PARTNER_RANK_SUPER  = 1,
@@ -2194,7 +2201,7 @@ enum Events {
     EVENT_SHOCK_HIT                   = 0x0000002F,
     EVENT_30                          = 0x00000030,
     EVENT_RECOVER_STATUS              = 0x00000031,
-    EVENT_32                          = 0x00000032,
+    EVENT_RECOVER_FROZEN              = 0x00000032,
     EVENT_33                          = 0x00000033,
     EVENT_RECOVER_FROM_KO             = 0x00000034,
     EVENT_END_FIRST_STRIKE            = 0x00000035,
@@ -2217,53 +2224,6 @@ enum HitSounds {
     HIT_SOUND_FIRE             = 3,
     HIT_SOUND_ICE              = 4,
     HIT_SOUND_SHOCK            = 5,
-};
-
-// Player.debuff
-// Partner.debuff
-enum StatusKeys {
-    STATUS_END                      = 0x00000000,
-    STATUS_KEY_NORMAL               = 0x00000001,
-    STATUS_KEY_DEFAULT              = 0x00000002,
-    STATUS_KEY_FEAR                 = 0x00000003,
-    STATUS_KEY_DIZZY                = 0x00000004,
-    STATUS_KEY_PARALYZE             = 0x00000005,
-    STATUS_KEY_SLEEP                = 0x00000006,
-    STATUS_KEY_FROZEN               = 0x00000007,
-    STATUS_KEY_STOP                 = 0x00000008,
-    STATUS_KEY_POISON               = 0x00000009,
-    STATUS_KEY_SHRINK               = 0x0000000A,
-    STATUS_KEY_STATIC               = 0x0000000B,
-    STATUS_KEY_STONE                = 0x0000000C,
-    STATUS_KEY_DAZE                 = 0x0000000D,
-    STATUS_KEY_TRANSPARENT          = 0x0000000E,
-    STATUS_KEY_KO                   = 0x0000000F,
-    STATUS_KEY_BERSERK              = 0x00000010,
-    STATUS_KEY_11                   = 0x00000011,
-    STATUS_KEY_INACTIVE             = 0x00000012,
-    STATUS_KEY_INACTIVE_BERSERK     = 0x00000013,
-    STATUS_KEY_14                   = 0x00000014, // probably STATUS_KEY_INACTIVE_FROZEN
-    STATUS_KEY_INACTIVE_SLEEP       = 0x00000015,
-    STATUS_KEY_INACTIVE_WEARY       = 0x00000016,
-    STATUS_KEY_17                   = 0x00000017,
-    STATUS_KEY_INACTIVE_DIZZY       = 0x00000018,
-    STATUS_KEY_HUSTLE               = 0x00000019,
-    STATUS_KEY_DANGER               = 0x0000001A,
-    STATUS_KEY_1B                   = 0x0000001B,
-    STATUS_KEY_THINKING             = 0x0000001C,
-    STATUS_KEY_WEARY                = 0x0000001D,
-    STATUS_KEY_1E                   = 0x0000001E,
-    STATUS_TURN_MOD_DEFAULT         = 0x0000001F,
-    STATUS_TURN_MOD_SLEEP           = 0x00000020,
-    STATUS_TURN_MOD_STATIC          = 0x00000021,
-    STATUS_TURN_MOD_FROZEN          = 0x00000022,
-    STATUS_TURN_MOD_FEAR            = 0x00000023,
-    STATUS_TURN_MOD_DIZZY           = 0x00000024,
-    STATUS_TURN_MOD_POISON          = 0x00000025,
-    STATUS_TURN_MOD_PARALYZE        = 0x00000026,
-    STATUS_TURN_MOD_SHRINK          = 0x00000027,
-    STATUS_TURN_MOD_STONE           = 0x00000028,
-    STATUS_TURN_MOD_STOP            = 0x00000029,
 };
 
 enum ActorPaletteAdjustments {
@@ -2823,8 +2783,9 @@ enum Buttons {
     BUTTON_STICK_RIGHT  = 0x00080000,
 };
 
+// only used with RemovePlayerBuffs
 enum PlayerBuffs {
-    PLAYER_BUFF_ALL             = 0xFFFFFFFF,
+    PLAYER_BUFF_ALL             = 0x0FFFFFFF,
     PLAYER_BUFF_JUMP_CHARGE     = 0x00000001,
     PLAYER_BUFF_HAMMER_CHARGE   = 0x00000002,
     PLAYER_BUFF_STONE           = 0x00000008,
@@ -2837,18 +2798,65 @@ enum PlayerBuffs {
     PLAYER_BUFF_PARTNER_GLOWING = 0x00010000,
 };
 
+// Player.debuff
+// Partner.debuff
+enum StatusKeys {
+    STATUS_END                      = 0x00000000,
+    STATUS_KEY_NORMAL               = 0x00000001,
+    STATUS_KEY_DEFAULT              = 0x00000002,
+    STATUS_KEY_UNUSED               = 0x00000003,
+    STATUS_KEY_DIZZY                = 0x00000004,
+    STATUS_KEY_PARALYZE             = 0x00000005,
+    STATUS_KEY_SLEEP                = 0x00000006,
+    STATUS_KEY_FROZEN               = 0x00000007,
+    STATUS_KEY_STOP                 = 0x00000008,
+    STATUS_KEY_POISON               = 0x00000009,
+    STATUS_KEY_SHRINK               = 0x0000000A,
+    STATUS_KEY_STATIC               = 0x0000000B,
+    STATUS_KEY_STONE                = 0x0000000C,
+    STATUS_KEY_KO                   = 0x0000000D,
+    STATUS_KEY_TRANSPARENT          = 0x0000000E,
+    STATUS_KEY_0F                   = 0x0000000F,
+    STATUS_KEY_BERSERK              = 0x00000010,
+    STATUS_KEY_11                   = 0x00000011,
+    STATUS_KEY_INACTIVE             = 0x00000012,
+    STATUS_KEY_INACTIVE_BERSERK     = 0x00000013,
+    STATUS_KEY_14                   = 0x00000014, // probably STATUS_KEY_INACTIVE_FROZEN
+    STATUS_KEY_INACTIVE_SLEEP       = 0x00000015,
+    STATUS_KEY_INACTIVE_WEARY       = 0x00000016,
+    STATUS_KEY_17                   = 0x00000017,
+    STATUS_KEY_INACTIVE_DIZZY       = 0x00000018,
+    STATUS_KEY_HUSTLE               = 0x00000019,
+    STATUS_KEY_DANGER               = 0x0000001A,
+    STATUS_KEY_1B                   = 0x0000001B,
+    STATUS_KEY_THINKING             = 0x0000001C,
+    STATUS_KEY_WEARY                = 0x0000001D,
+    STATUS_KEY_1E                   = 0x0000001E,
+    STATUS_TURN_MOD_DEFAULT         = 0x0000001F,
+    STATUS_TURN_MOD_SLEEP           = 0x00000020,
+    STATUS_TURN_MOD_STATIC          = 0x00000021,
+    STATUS_TURN_MOD_FROZEN          = 0x00000022,
+    STATUS_TURN_MOD_UNUSED          = 0x00000023,
+    STATUS_TURN_MOD_DIZZY           = 0x00000024,
+    STATUS_TURN_MOD_POISON          = 0x00000025,
+    STATUS_TURN_MOD_PARALYZE        = 0x00000026,
+    STATUS_TURN_MOD_SHRINK          = 0x00000027,
+    STATUS_TURN_MOD_STONE           = 0x00000028,
+    STATUS_TURN_MOD_STOP            = 0x00000029,
+};
+
 enum StatusFlags {
     STATUS_FLAG_SLEEP           = 0x00001000,
     STATUS_FLAG_STATIC          = 0x00002000,
     STATUS_FLAG_FROZEN          = 0x00004000,
-    STATUS_FLAG_FEAR            = 0x00008000,
+    STATUS_FLAG_UNUSED          = 0x00008000, // an unused 'disabling' status like sleep, paralyze, or dizzy
     STATUS_FLAG_PARALYZE        = 0x00010000,
     STATUS_FLAG_POISON          = 0x00020000,
     STATUS_FLAG_DIZZY           = 0x00040000,
     STATUS_FLAG_SHRINK          = 0x00080000,
     STATUS_FLAG_STONE           = 0x00100000,
     STATUS_FLAG_STOP            = 0x00200000,
-    STATUS_FLAG_400000          = 0x00400000,
+    STATUS_FLAG_FEAR            = 0x00400000, // used only by Bow's Spook attack to trigger enemy fleeing. note: fright jar uses DAMAGE_TYPE_FEAR instead.
     STATUS_FLAG_KO              = 0x01000000,
     STATUS_FLAG_GLOWING         = 0x02000000,
     STATUS_FLAG_TRANSPARENT     = 0x04000000,
@@ -2856,26 +2864,26 @@ enum StatusFlags {
     STATUS_FLAG_DEFENSE_BOOST   = 0x10000000,
     STATUS_FLAG_CHILL_OUT       = 0x20000000,
     STATUS_FLAG_RIGHT_ON        = 0x40000000,
-    STATUS_FLAG_80000000        = 0x80000000,
+    STATUS_FLAG_USE_DURATION    = 0x80000000, // indicates the status being inflicted should derive duration from BattleStatus::statusDuration
 };
 
 // general combination of flags for checking if an enemy is immobilized
 #define STATUS_FLAGS_IMMOBILIZED \
-     (STATUS_FLAG_SLEEP \
+    ( STATUS_FLAG_SLEEP \
     | STATUS_FLAG_FROZEN \
-    | STATUS_FLAG_FEAR \
+    | STATUS_FLAG_UNUSED \
     | STATUS_FLAG_PARALYZE \
     | STATUS_FLAG_DIZZY \
     | STATUS_FLAG_STONE \
-    | STATUS_FLAG_STOP)
+    | STATUS_FLAG_STOP )
 
 // common set of flags used in checks throughout Dojo fights
 #define STATUS_FLAGS_DOJO \
-     (STATUS_FLAG_SLEEP \
+    ( STATUS_FLAG_SLEEP \
     | STATUS_FLAG_PARALYZE \
     | STATUS_FLAG_DIZZY \
     | STATUS_FLAG_STONE \
-    | STATUS_FLAG_STOP)
+    | STATUS_FLAG_STOP )
 
 enum DamageTypes {
     DAMAGE_TYPE_FIRE                       = 0x00000002,
@@ -3655,9 +3663,9 @@ enum BattleStatusReflectionFlags {
 };
 
 enum BattleStates {
-    BATTLE_STATE_NEGATIVE_1                 = -1,
-    BATTLE_STATE_0                          = 0,
-    BATTLE_STATE_NORMAL_START               = 1,
+    BATTLE_STATE_INVALID                    = -1,  // may have been part of a debug state at some point, unused
+    BATTLE_STATE_NONE                       = 0,
+    BATTLE_STATE_START                      = 1,
     BATTLE_STATE_FIRST_STRIKE               = 2,
     BATTLE_STATE_PARTNER_FIRST_STRIKE       = 3,
     BATTLE_STATE_ENEMY_FIRST_STRIKE         = 4,
@@ -3665,7 +3673,7 @@ enum BattleStates {
     BATTLE_STATE_END_TURN                   = 6,
     BATTLE_STATE_BEGIN_PLAYER_TURN          = 7,
     BATTLE_STATE_BEGIN_PARTNER_TURN         = 8,
-    BATTLE_STATE_9                          = 9,    // can be reached from BATTLE_STATE_PARTNER_MOVE if partner == nullptr
+    BATTLE_STATE_TRANSFER_TURN              = 9,
     BATTLE_STATE_SWITCH_TO_PLAYER           = 10,
     BATTLE_STATE_SWITCH_TO_PARTNER          = 11,
     BATTLE_STATE_PREPARE_MENU               = 12,
@@ -3698,7 +3706,7 @@ enum BattleSubStates {
     // shared
     BTL_SUBSTATE_INIT                                       = 0,
 
-    // BATTLE_STATE_NORMAL_START
+    // BATTLE_STATE_START
     BTL_SUBSTATE_NORMAL_START_INIT                          = 0, // loads assets, initializes state, and runs OnBattleInit script
     BTL_SUBSTATE_NORMAL_START_CREATE_ENEMIES                = 1,
     BTL_SUBSTATE_NORMAL_START_CHECK_FIRST_STRIKE            = 4, // wait for actor scripts to finish
@@ -3758,15 +3766,15 @@ enum BattleSubStates {
     BTL_SUBSTATE_BEGIN_PARTNER_TURN_END_DELAY               = 10,
     BTL_SUBSTATE_BEGIN_PARTNER_TURN_RESET_STATE             = 100,
 
-    // BATTLE_STATE_9
-    BTL_SUBSTATE_9_INIT                                     = 0,
-    BTL_SUBSTATE_9_1                                        = 1,
-    BTL_SUBSTATE_9_2                                        = 2,
-    BTL_SUBSTATE_9_3                                        = 3,
-    BTL_SUBSTATE_9_4                                        = 4,
-    BTL_SUBSTATE_9_5                                        = 5,
-    BTL_SUBSTATE_9_6                                        = 6,
-    BTL_SUBSTATE_9_7                                        = 7,
+    // BATTLE_STATE_TRANSFER_TURN
+    BTL_SUBSTATE_TRANSFER_TURN_INIT                         = 0,
+    BTL_SUBSTATE_TRANSFER_TURN_RESET_ENEMIES                = 1,
+    BTL_SUBSTATE_TRANSFER_TURN_AWAIT_ALL                    = 2,
+    BTL_SUBSTATE_TRANSFER_TURN_RESET_POSITIONS              = 3,
+    BTL_SUBSTATE_TRANSFER_TURN_TRY_MERLEE_DEF               = 4,
+    BTL_SUBSTATE_TRANSFER_TURN_NOTIFY_ENEMY_PHASE           = 5,
+    BTL_SUBSTATE_TRANSFER_TURN_AWAIT_ENEMY_PHASE            = 6,
+    BTL_SUBSTATE_TRANSFER_TURN_DONE                         = 7,
 
     // BATTLE_STATE_SWITCH_TO_PLAYER
     // BATTLE_STATE_SWITCH_TO_PARTNER
@@ -3947,139 +3955,142 @@ enum BattleSubStates {
 
 // used with BATTLE_STATE_PLAYER_MENU
 enum BattlePlayerMenuSubstates {
-    BTL_SUBSTATE_PLAYER_MENU_INIT                           = 0,
+    BTL_SUBSTATE_PLAYER_MENU_INIT                                        = 0,
     // Main menu
-    BTL_SUBSTATE_PLAYER_MENU_CHOOSE_CATEGORY                = 1,
-    BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_2                    = 2,
-    BTL_SUBSTATE_PLAYER_MENU_MOVE_CHOOSE_TARGET             = 3,
-    BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_4                    = 4,
-    BTL_SUBSTATE_PLAYER_MENU_MOVE_TARGET_CANCEL             = 5,
-    BTL_SUBSTATE_PLAYER_MENU_MOVE_TARGET_CHOSEN             = 6,
-    BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_7                    = 7,
-    BTL_SUBSTATE_PLAYER_MENU_MAIN_SHOW_CANT_SWAP            = 8,
-    BTL_SUBSTATE_PLAYER_MENU_MAIN_AWAIT_CANT_SWAP           = 9,
-    BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_10                   = 10,
-    BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_11                   = 11,
-    BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_12                   = 12,
-    BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_13                   = 13,
-    BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_14                   = 14,
-    // Unknown
-    BTL_SUBSTATE_PLAYER_MENU_UNKNOWN_1                      = 20,
-    BTL_SUBSTATE_PLAYER_MENU_DIPPING_CHOOSE_TARGET          = 21,
-    BTL_SUBSTATE_PLAYER_MENU_UNKNOWN_3                      = 22,
-    BTL_SUBSTATE_PLAYER_MENU_UNKNOWN_4                      = 23,
-    BTL_SUBSTATE_PLAYER_MENU_DIPPING_TARGET_CANCEL          = 24,
-    BTL_SUBSTATE_PLAYER_MENU_DIPPING_TARGET_CHOSEN          = 25,
-    // Change Member
-    BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_1                = 30,
-    BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_2                = 31,
-    BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_3                = 32,
-    BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_4                = 33,
-    BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_5                = 34,
-    BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_6                = 35,
-    BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_7                = 36,
+    BTL_SUBSTATE_PLAYER_MENU_MAIN_CHOOSING                               = 1,
+    // selecting options from jump, hammer, or outermost items submenus
+    BTL_SUBSTATE_PLAYER_MENU_ABILITIES_CHOOSING                          = 2,
+    BTL_SUBSTATE_PLAYER_MENU_ABILITIES_HANDOVER                          = 3,
+    BTL_SUBSTATE_PLAYER_MENU_ABILITIES_REOPEN_MENU                       = 4,
+    BTL_SUBSTATE_PLAYER_MENU_ABILITIES_TARGET_CANCEL                     = 5,
+    BTL_SUBSTATE_PLAYER_MENU_ABILITIES_TARGET_CHOSEN                     = 6,
+    BTL_SUBSTATE_PLAYER_MENU_ABILITIES_SHOW_ERROR                        = 7,
+    BTL_SUBSTATE_PLAYER_MENU_MAIN_SHOW_CANT_SWAP                         = 8,
+    BTL_SUBSTATE_PLAYER_MENU_MAIN_AWAIT_CANT_SWAP                        = 9,
+    // states for target selection when there is no submenu after main
+    // this occurs when there are no additional options for Jump/Hammer apart from the base move
+    BTL_SUBSTATE_PLAYER_MENU_NOSUBMENU_SHOW                              = 10,
+    BTL_SUBSTATE_PLAYER_MENU_NOSUBMENU_HANDOVER                          = 11,
+    BTL_SUBSTATE_PLAYER_MENU_NOSUBMENU_RETURN_MAIN                       = 12,
+    BTL_SUBSTATE_PLAYER_MENU_NOSUBMENU_TARGET_CANCEL                     = 13,
+    BTL_SUBSTATE_PLAYER_MENU_NOSUBMENU_TARGET_CHOSEN                     = 14,
+    // Initial selection and use for Double/Triple dip
+    BTL_SUBSTATE_PLAYER_MENU_DIPPING_BUILD_MENU                          = 20,
+    BTL_SUBSTATE_PLAYER_MENU_DIPPING_CHOOSING                            = 21, // choosing double dip item
+    BTL_SUBSTATE_PLAYER_MENU_DIPPING_HANDOVER                            = 22, // selecting target
+    BTL_SUBSTATE_PLAYER_MENU_DIPPING_REOPEN_MENU                         = 23,
+    BTL_SUBSTATE_PLAYER_MENU_DIPPING_TARGET_CANCEL                       = 24,
+    BTL_SUBSTATE_PLAYER_MENU_DIPPING_TARGET_CHOSEN                       = 25,
+    // Change Partner
+    BTL_SUBSTATE_PLAYER_MENU_CHANGE_PARTNER_BUILD_MENU                   = 30,
+    BTL_SUBSTATE_PLAYER_MENU_CHANGE_PARTNER_CHOOSING                     = 31,
+    BTL_SUBSTATE_PLAYER_MENU_CHANGE_PARTNER_HANDOVER                     = 32,
+    BTL_SUBSTATE_PLAYER_MENU_CHANGE_PARTNER_REOPEN_MENU                  = 33,
+    BTL_SUBSTATE_PLAYER_MENU_CHANGE_PARTNER_TARGET_CANCEL                = 34,
+    BTL_SUBSTATE_PLAYER_MENU_CHANGE_PARTNER_TARGET_CHOSEN                = 35,
+    BTL_SUBSTATE_PLAYER_MENU_CHANGE_PARTNER_ERROR                        = 36,
     // Items
-    BTL_SUBSTATE_PLAYER_MENU_ITEMS_1                        = 40,
-    BTL_SUBSTATE_PLAYER_MENU_ITEMS_2                        = 41,
-    BTL_SUBSTATE_PLAYER_MENU_ITEMS_3                        = 42,
-    BTL_SUBSTATE_PLAYER_MENU_ITEMS_4                        = 43,
-    BTL_SUBSTATE_PLAYER_MENU_ITEMS_5                        = 44,
-    BTL_SUBSTATE_PLAYER_MENU_ITEMS_6                        = 45,
+    BTL_SUBSTATE_PLAYER_MENU_ITEMS_BUILD_MENU                            = 40,
+    BTL_SUBSTATE_PLAYER_MENU_ITEMS_CHOOSING                              = 41,
+    BTL_SUBSTATE_PLAYER_MENU_ITEMS_HANDOVER                              = 42,
+    BTL_SUBSTATE_PLAYER_MENU_ITEMS_REOPEN_MENU                           = 43,
+    BTL_SUBSTATE_PLAYER_MENU_ITEMS_TARGET_CANCEL                         = 44,
+    BTL_SUBSTATE_PLAYER_MENU_ITEMS_TARGET_CHOSEN                         = 45,
     // Star Spirits
-    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_1                 = 60,
-    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_2                 = 61,
-    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_3                 = 62,
-    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_4                 = 63,
-    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_5                 = 64,
-    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_6                 = 65,
-    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_7                 = 66,
+    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_BUILD_MENU                     = 60,
+    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_CHOOSING                       = 61,
+    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_HANDOVER                       = 62,
+    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_REOPEN_MENU                    = 63,
+    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_TARGET_CANCEL                  = 64,
+    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_TARGET_CHOSEN                  = 65,
+    BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_SHOW_ERROR                     = 66,
     // additional item use from Double/Triple dip
-    BTL_SUBSTATE_PLAYER_MENU_DIPPING_1                      = 70,
-    BTL_SUBSTATE_PLAYER_MENU_DIPPING_2                      = 71,
-    BTL_SUBSTATE_PLAYER_MENU_DIPPING_3                      = 72,
-    BTL_SUBSTATE_PLAYER_MENU_DIPPING_4                      = 73,
-    BTL_SUBSTATE_PLAYER_MENU_DIPPING_5                      = 74,
-    BTL_SUBSTATE_PLAYER_MENU_DIPPING_6                      = 75,
+    BTL_SUBSTATE_PLAYER_MENU_NEXT_DIP_BUILD_MENU                         = 70,
+    BTL_SUBSTATE_PLAYER_MENU_NEXT_DIP_CHOOSING                           = 71,
+    BTL_SUBSTATE_PLAYER_MENU_NEXT_DIP_HANDOVER                           = 72,
+    BTL_SUBSTATE_PLAYER_MENU_NEXT_DIP_REOPEN_MENU                        = 73,
+    BTL_SUBSTATE_PLAYER_MENU_NEXT_DIP_TARGET_CANCEL                      = 74,
+    BTL_SUBSTATE_PLAYER_MENU_NEXT_DIP_TARGET_CHOSEN                      = 75,
     // Berserker
-    BTL_SUBSTATE_PLAYER_MENU_BERSERKER_CHOOSE               = 100,
+    BTL_SUBSTATE_PLAYER_MENU_BERSERKER_CHOOSE                            = 100,
     // Strategies
-    BTL_SUBSTATE_PLAYER_MENU_BUILD_STRATEGIES               = 200,
-    BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_2                   = 201,
-    BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_3                   = 202,
-    BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_4                   = 203,
-    BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_5                   = 204,
-    BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_6                   = 205,
-    BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_8                   = 207,
+    BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_BUILD_MENU                       = 200,
+    BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_CHOOSING                         = 201,
+    BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_HANDOVER                         = 202,
+    BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_REOPEN_MENU                      = 203,
+    BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_TARGET_CANCEL                    = 204,
+    BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_TARGET_CHOSEN                    = 205,
+    BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_SHOW_ERROR                       = 207,
     // initialize
-    BTL_SUBSTATE_PLAYER_MENU_PERFORM_SWAP                   = 300,
-    BTL_SUBSTATE_PLAYER_MENU_CREATE_MAIN_MENU               = 302,
+    BTL_SUBSTATE_PLAYER_MENU_PERFORM_SWAP                                = 300,
+    BTL_SUBSTATE_PLAYER_MENU_CREATE_MAIN_MENU                            = 302,
 };
 
 enum BattlePartnerMenuSubstates {
-    BTL_SUBSTATE_PARTNER_MENU_NONE                            = 0,
+    BTL_SUBSTATE_PARTNER_MENU_NONE                                        = 0,
     // Main menu
-    BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_1                     = 2,
-    BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_2                     = 3,
-    BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_3                     = 4,
-    BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_4                     = 5,
-    BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_5                     = 6,
-    BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_6                     = 7,
-    BTL_SUBSTATE_PARTNER_MENU_MAIN_SHOW_CANT_SWAP             = 8,
-    BTL_SUBSTATE_PARTNER_MENU_MAIN_AWAIT_CANT_SWAP            = 9,
+    BTL_SUBSTATE_PARTNER_MENU_MAIN_BEGIN                                  = 2,
+    BTL_SUBSTATE_PARTNER_MENU_MAIN_CHOOSING                               = 3,
+    BTL_SUBSTATE_PARTNER_MENU_MAIN_HANDOVER                               = 4,
+    BTL_SUBSTATE_PARTNER_MENU_MAIN_REOPEN_MENU                            = 5,
+    BTL_SUBSTATE_PARTNER_MENU_MAIN_TARGET_CANCEL                          = 6,
+    BTL_SUBSTATE_PARTNER_MENU_MAIN_TARGET_CHOSEN                          = 7,
+    BTL_SUBSTATE_PARTNER_MENU_MAIN_SHOW_CANT_SWAP                         = 8,
+    BTL_SUBSTATE_PARTNER_MENU_MAIN_AWAIT_CANT_SWAP                        = 9,
     // Abilities
-    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_1                     = 10,
-    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_2                     = 11,
-    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_3                     = 12,
-    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_4                     = 13,
-    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_5                     = 14,
-    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_6                     = 15,
-    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_7                     = 16,
+    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_BUILD_MENU                        = 10,
+    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_CHOOSING                          = 11,
+    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_HANDOVER                          = 12,
+    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_REOPEN_MENU                       = 13,
+    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_TARGET_CANCEL                     = 14,
+    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_TARGET_CHOSEN                     = 15,
+    BTL_SUBSTATE_PARTNER_MENU_ABILITIES_SHOW_ERROR                        = 16,
     // Unknown, referenced only in btl_state_draw_partner_menu
-    BTL_SUBSTATE_PARTNER_MENU_UNKNOWN_1                       = 20,
-    BTL_SUBSTATE_PARTNER_MENU_UNKNOWN_2                       = 21,
-    BTL_SUBSTATE_PARTNER_MENU_UNKNOWN_3                       = 22,
-    BTL_SUBSTATE_PARTNER_MENU_UNKNOWN_4                       = 23,
-    BTL_SUBSTATE_PARTNER_MENU_UNKNOWN_5                       = 24,
+    BTL_SUBSTATE_PARTNER_MENU_UNKNOWN_1                                   = 20,
+    BTL_SUBSTATE_PARTNER_MENU_UNKNOWN_2                                   = 21,
+    BTL_SUBSTATE_PARTNER_MENU_UNKNOWN_3                                   = 22,
+    BTL_SUBSTATE_PARTNER_MENU_UNKNOWN_4                                   = 23,
+    BTL_SUBSTATE_PARTNER_MENU_UNKNOWN_5                                   = 24,
     // Change Partner
-    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_1                = 30,
-    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_2                = 31,
-    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_3                = 32,
-    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_4                = 33,
-    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_5                = 34,
-    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_6                = 35,
-    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_7                = 36,
+    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_BUILD_MENU                   = 30,
+    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_CHOOSING                     = 31,
+    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_HANDOVER                     = 32,
+    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_REOPEN_MENU                  = 33,
+    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_TARGET_CANCEL                = 34,
+    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_TARGET_CHOSEN                = 35,
+    BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_ERROR                        = 36,
     // Items
-    BTL_SUBSTATE_PARTNER_MENU_ITEMS_1                         = 40,
-    BTL_SUBSTATE_PARTNER_MENU_ITEMS_2                         = 41,
-    BTL_SUBSTATE_PARTNER_MENU_ITEMS_3                         = 42,
-    BTL_SUBSTATE_PARTNER_MENU_ITEMS_4                         = 43,
-    BTL_SUBSTATE_PARTNER_MENU_ITEMS_5                         = 44,
-    BTL_SUBSTATE_PARTNER_MENU_ITEMS_6                         = 45,
+    BTL_SUBSTATE_PARTNER_MENU_ITEMS_BUILD_MENU                            = 40,
+    BTL_SUBSTATE_PARTNER_MENU_ITEMS_CHOOSING                              = 41,
+    BTL_SUBSTATE_PARTNER_MENU_ITEMS_HANDOVER                              = 42,
+    BTL_SUBSTATE_PARTNER_MENU_ITEMS_REOPEN_MENU                           = 43,
+    BTL_SUBSTATE_PARTNER_MENU_ITEMS_TARGET_CANCEL                         = 44,
+    BTL_SUBSTATE_PARTNER_MENU_ITEMS_TARGET_CHOSEN                         = 45,
     // Switch partner (unused)
-    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_1         = 50,
-    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_2         = 51,
-    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_3         = 52,
-    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_4         = 53,
-    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_5         = 54,
-    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_6         = 55,
-    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_7         = 56,
+    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_BUILD_MENU                    = 50,
+    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_CHOOSING              = 51,
+    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_HANDOVER              = 52,
+    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_REOPEN_MENU           = 53,
+    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_TARGET_CANCEL         = 54,
+    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_TARGET_CHOSEN         = 55,
+    BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_SHOW_ERROR            = 56,
     // Focus
-    BTL_SUBSTATE_PARTNER_MENU_FOCUS_1                         = 60,
-    BTL_SUBSTATE_PARTNER_MENU_FOCUS_2                         = 61,
-    BTL_SUBSTATE_PARTNER_MENU_FOCUS_3                         = 62,
-    BTL_SUBSTATE_PARTNER_MENU_FOCUS_4                         = 63,
-    BTL_SUBSTATE_PARTNER_MENU_FOCUS_5                         = 64,
-    BTL_SUBSTATE_PARTNER_MENU_FOCUS_6                         = 65,
+    BTL_SUBSTATE_PARTNER_MENU_FOCUS_BUILD_MENU                            = 60,
+    BTL_SUBSTATE_PARTNER_MENU_FOCUS_CHOOSING                              = 61,
+    BTL_SUBSTATE_PARTNER_MENU_FOCUS_HANDOVER                              = 62,
+    BTL_SUBSTATE_PARTNER_MENU_FOCUS_REOPEN_MENU                           = 63,
+    BTL_SUBSTATE_PARTNER_MENU_FOCUS_CANCELED                              = 64,
+    BTL_SUBSTATE_PARTNER_MENU_FOCUS_SELECTED                              = 65,
     // Strategies
-    BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_1                    = 200,
-    BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_2                    = 201,
-    BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_3                    = 202,
-    BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_4                    = 203,
-    BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_5                    = 204,
-    BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_6                    = 205,
+    BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_BUILD_MENU                       = 200,
+    BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_CHOOSING                         = 201,
+    BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_HANDOVER                         = 202,
+    BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_REOPEN_MENU                      = 203,
+    BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_TARGET_CANCEL                    = 204,
+    BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_TARGET_CHOSEN                    = 205,
     // initialize
-    BTL_SUBSTATE_PARTNER_MENU_12D                             = 301,
-    BTL_SUBSTATE_PARTNER_MENU_INIT_MENU                       = 302,
+    BTL_SUBSTATE_PARTNER_MENU_PERFORM_SWAP                                = 301,
+    BTL_SUBSTATE_PARTNER_MENU_CREATE_MAIN_MENU                            = 302,
 };
 
 enum BattleMessages {
@@ -4195,45 +4206,44 @@ enum BattleMessageStates {
 
 // BattleMenuState
 enum BattleMenuStates {
-    BTL_MENU_STATE_OPENED_SUBMENU       = -1,
-    BTL_MENU_STATE_CREATE               = 0,
-    BTL_MENU_STATE_UNK_1                = 1,
-    BTL_MENU_STATE_ACCEPT_INPUT         = 2,
-    BTL_MENU_STATE_UNK_A                = 10,
-    BTL_MENU_STATE_UNK_B                = 11,
-    BTL_MENU_STATE_UNK_14               = 20,
-    BTL_MENU_STATE_UNK_1E               = 30,
-    BTL_MENU_STATE_SHOW_DISABLED_POPUP  = 100,
-    BTL_MENU_STATE_AWAIT_DISABLED_POPUP = 101,
+    BTL_MENU_STATE_SUBMENU_OPEN                  = -1,
+    BTL_MENU_STATE_CREATE                        = 0,
+    BTL_MENU_STATE_SHOW_REEL                     = 1,
+    BTL_MENU_STATE_CHOOSING                      = 2,
+    BTL_MENU_STATE_HIDE_INIT                     = 10,
+    BTL_MENU_STATE_HIDE_HOLD                     = 11,
+    BTL_MENU_STATE_RESTORE                       = 20,
+    BTL_MENU_STATE_RESUME_SUBMENU                = 30,
+    BTL_MENU_STATE_ERROR_SHOW                    = 100,
+    BTL_MENU_STATE_ERROR_DONE                    = 101,
 };
 
 enum BattleMoveSubmenuStates {
-    BTL_SUBMENU_MOVES_STATE_UNK_NEGATIVE_TWO     = -2, // go back
-    BTL_SUBMENU_MOVES_STATE_UNK_NEGATIVE_ONE     = -1,
-    BTL_SUBMENU_MOVES_STATE_UNK_0                = 0,
-    BTL_SUBMENU_MOVES_STATE_UNK_1                = 1,
-    BTL_SUBMENU_MOVES_STATE_UNK_A                = 10,
-    BTL_SUBMENU_MOVES_STATE_UNK_B                = 11,
-    BTL_SUBMENU_MOVES_STATE_UNK_14               = 20,
-    BTL_SUBMENU_MOVES_STATE_UNK_1E               = 30,
-    BTL_SUBMENU_MOVES_STATE_UNK_28               = 40,
-    BTL_SUBMENU_MOVES_STATE_UNK_29               = 41,
-    BTL_SUBMENU_MOVES_STATE_UNK_2A               = 42,
+    BTL_SUBMENU_MOVES_STATE_CANCEL               = -2, // selection is canceled
+    BTL_SUBMENU_MOVES_STATE_SELECT               = -1, // a result is selected
+    BTL_SUBMENU_MOVES_STATE_INIT                 = 0,  // build and initialize the menu
+    BTL_SUBMENU_MOVES_STATE_CHOOSING             = 1,  // selecting an option
+    BTL_SUBMENU_MOVES_STATE_HIDE_INIT            = 10, // begin hiding the menu, will quickly change to HIDE_HOLD
+    BTL_SUBMENU_MOVES_STATE_HIDE_HOLD            = 11,
+    BTL_SUBMENU_MOVES_STATE_RESTORE              = 20, // reappear and resume choosing
+    BTL_SUBMENU_MOVES_STATE_LOCK                 = 30,
+    BTL_SUBMENU_MOVES_STATE_ERROR_INIT           = 40,
+    BTL_SUBMENU_MOVES_STATE_ERROR_SHOW           = 41,
+    BTL_SUBMENU_MOVES_STATE_ERROR_DONE           = 42,
 };
 
-
 enum BattleStratsSubmenuStates {
-    BTL_SUBMENU_STRATS_STATE_CANCEL               = -2, // go back
-    BTL_SUBMENU_STRATS_STATE_SELECT               = -1, // approve choice
-    BTL_SUBMENU_STRATS_STATE_INIT                 = 0,
-    BTL_SUBMENU_STRATS_STATE_CHOOSE               = 1,
-    BTL_SUBMENU_STRATS_STATE_UNK_10               = 10,
-    BTL_SUBMENU_STRATS_STATE_UNK_11               = 11,
-    BTL_SUBMENU_STRATS_STATE_UNK_20               = 20,
-    BTL_SUBMENU_STRATS_STATE_UNK_30               = 30,
-    BTL_SUBMENU_STRATS_STATE_ERROR_INIT           = 40,
-    BTL_SUBMENU_STRATS_STATE_ERROR_SHOW           = 41,
-    BTL_SUBMENU_STRATS_STATE_ERROR_DONE           = 42,
+    BTL_SUBMENU_STRATS_STATE_CANCEL              = -2, // selection is canceled
+    BTL_SUBMENU_STRATS_STATE_SELECT              = -1, // a result is selected
+    BTL_SUBMENU_STRATS_STATE_INIT                = 0,  // build and initialize the menu
+    BTL_SUBMENU_STRATS_STATE_CHOOSING            = 1,  // selecting an option
+    BTL_SUBMENU_STRATS_STATE_HIDE_INIT           = 10,
+    BTL_SUBMENU_STRATS_STATE_HIDE_HOLD           = 11,
+    BTL_SUBMENU_STRATS_STATE_RESTORE             = 20,
+    BTL_SUBMENU_STRATS_STATE_LOCK                = 30,
+    BTL_SUBMENU_STRATS_STATE_ERROR_INIT          = 40,
+    BTL_SUBMENU_STRATS_STATE_ERROR_SHOW          = 41,
+    BTL_SUBMENU_STRATS_STATE_ERROR_DONE          = 42,
 };
 
 enum BattleMenuIndex {
@@ -4303,20 +4313,6 @@ enum DebugScriptstModes {
     DEBUG_SCRIPTS_NONE              = 0,
     DEBUG_SCRIPTS_NO_UPDATE         = 1,
     DEBUG_SCRIPTS_BLOCK_FUNC_DONE   = 2,
-};
-
-enum DebuffTypes {
-    DEBUFF_TYPE_SLEEP               = 0x00001000,
-    DEBUFF_TYPE_STATIC              = 0x00002000,
-    DEBUFF_TYPE_FROZEN              = 0x00004000,
-    DEBUFF_TYPE_PARALYZED           = 0x00010000,
-    DEBUFF_TYPE_POISON              = 0x00020000,
-    DEBUFF_TYPE_DIZZY               = 0x00040000,
-    DEBUFF_TYPE_SHRINK              = 0x00080000,
-    DEBUFF_TYPE_STONE               = 0x00100000,
-    DEBUFF_TYPE_STOP                = 0x00200000,
-    DEBUFF_TYPE_DAZE                = 0x01000000,
-    DEBUFF_TYPE_INVISIBLE           = 0x04000000,
 };
 
 enum PlayerBasicJump {
@@ -5115,7 +5111,7 @@ enum ImgFXStateFlags {
     IMGFX_FLAG_8                    = 0x00000008,
     IMGFX_FLAG_SKIP_GFX_SETUP       = 0x00000010,
     IMGFX_FLAG_SKIP_TEX_SETUP       = 0x00000020,
-    IMGFX_FLAG_40                   = 0x00000040,
+    IMGFX_FLAG_SKIP_ZBUF            = 0x00000040,
     IMGFX_FLAG_LOOP_ANIM            = 0x00000080,
     IMGFX_FLAG_REVERSE_ANIM         = 0x00000100, // fold animation plays backwards (from end to start)
     IMGFX_FLAG_200                  = 0x00000200,

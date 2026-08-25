@@ -20,42 +20,42 @@
 
 #define SPY_GUY_ANIMS \
 { \
-    .idle   = ANIM_SpyGuy_Anim02, \
-    .walk   = ANIM_SpyGuy_Anim04, \
-    .run    = ANIM_SpyGuy_Anim05, \
-    .chase  = ANIM_SpyGuy_Anim04, \
-    .anim_4 = ANIM_SpyGuy_Anim02, \
-    .anim_5 = ANIM_SpyGuy_Anim02, \
-    .death  = ANIM_SpyGuy_Anim0B, \
-    .hit    = ANIM_SpyGuy_Anim0B, \
-    .anim_8 = ANIM_SpyGuy_Anim15, \
-    .anim_9 = ANIM_SpyGuy_Anim16, \
-    .anim_A = ANIM_SpyGuy_Anim02, \
-    .anim_B = ANIM_SpyGuy_Anim02, \
-    .anim_C = ANIM_SpyGuy_Anim02, \
-    .anim_D = ANIM_SpyGuy_Anim02, \
-    .anim_E = ANIM_SpyGuy_Anim02, \
-    .anim_F = ANIM_SpyGuy_Anim02, \
+    .idle   = ANIM_SpyGuy_IdleSling, \
+    .walk   = ANIM_SpyGuy_WalkSling, \
+    .run    = ANIM_SpyGuy_RunSling, \
+    .chase  = ANIM_SpyGuy_WalkSling, \
+    .anim_4 = ANIM_SpyGuy_IdleSling, \
+    .anim_5 = ANIM_SpyGuy_IdleSling, \
+    .death  = ANIM_SpyGuy_Hurt, \
+    .hit    = ANIM_SpyGuy_Hurt, \
+    .anim_8 = ANIM_SpyGuy_DrawSling, \
+    .anim_9 = ANIM_SpyGuy_FireSling, \
+    .anim_A = ANIM_SpyGuy_IdleSling, \
+    .anim_B = ANIM_SpyGuy_IdleSling, \
+    .anim_C = ANIM_SpyGuy_IdleSling, \
+    .anim_D = ANIM_SpyGuy_IdleSling, \
+    .anim_E = ANIM_SpyGuy_IdleSling, \
+    .anim_F = ANIM_SpyGuy_IdleSling, \
 }
 
 #define SPY_GUY_ROCK_ANIMS \
 { \
-    .idle   = ANIM_SpyGuy_Anim10, \
-    .walk   = ANIM_SpyGuy_Anim10, \
-    .run    = ANIM_SpyGuy_Anim10, \
-    .chase  = ANIM_SpyGuy_Anim10, \
-    .anim_4 = ANIM_SpyGuy_Anim10, \
-    .anim_5 = ANIM_SpyGuy_Anim10, \
-    .death  = ANIM_SpyGuy_Anim10, \
-    .hit    = ANIM_SpyGuy_Anim10, \
-    .anim_8 = ANIM_SpyGuy_Anim10, \
-    .anim_9 = ANIM_SpyGuy_Anim10, \
-    .anim_A = ANIM_SpyGuy_Anim10, \
-    .anim_B = ANIM_SpyGuy_Anim10, \
-    .anim_C = ANIM_SpyGuy_Anim10, \
-    .anim_D = ANIM_SpyGuy_Anim10, \
-    .anim_E = ANIM_SpyGuy_Anim10, \
-    .anim_F = ANIM_SpyGuy_Anim10, \
+    .idle   = ANIM_SpyGuy_Stone, \
+    .walk   = ANIM_SpyGuy_Stone, \
+    .run    = ANIM_SpyGuy_Stone, \
+    .chase  = ANIM_SpyGuy_Stone, \
+    .anim_4 = ANIM_SpyGuy_Stone, \
+    .anim_5 = ANIM_SpyGuy_Stone, \
+    .death  = ANIM_SpyGuy_Stone, \
+    .hit    = ANIM_SpyGuy_Stone, \
+    .anim_8 = ANIM_SpyGuy_Stone, \
+    .anim_9 = ANIM_SpyGuy_Stone, \
+    .anim_A = ANIM_SpyGuy_Stone, \
+    .anim_B = ANIM_SpyGuy_Stone, \
+    .anim_C = ANIM_SpyGuy_Stone, \
+    .anim_D = ANIM_SpyGuy_Stone, \
+    .anim_E = ANIM_SpyGuy_Stone, \
+    .anim_F = ANIM_SpyGuy_Stone, \
 }
 
 #define SPY_GUY_ROCK_HITBOX(npcID) \

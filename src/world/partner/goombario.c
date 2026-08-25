@@ -315,42 +315,42 @@ API_CALLABLE(N(SelectTattleMsg)) {
                     switch (temp) {
                         case ENTITY_TYPE_HAMMER2_BLOCK:
                         case ENTITY_TYPE_HAMMER2_BLOCK_TINY:
-                            if (gPlayerData.hammerLevel >= 1) {
+                            if (gPlayerData.hammerLevel >= GEAR_RANK_SUPER) {
                                 msgID = MSG_EntityTattle_HammerBlock2_CanBreak;
                             }
                             break;
                         case ENTITY_TYPE_HAMMER3_BLOCK:
                         case ENTITY_TYPE_HAMMER3_BLOCK_TINY:
-                            if (gPlayerData.hammerLevel >= 2) {
+                            if (gPlayerData.hammerLevel >= GEAR_RANK_ULTRA) {
                                 msgID = MSG_EntityTattle_HammerBlock3_CanBreak;
                             }
                             break;
                         case ENTITY_TYPE_WOODEN_CRATE:
-                            if (gPlayerData.bootsLevel == 1) {
+                            if (gPlayerData.bootsLevel == GEAR_RANK_SUPER) {
                                 msgID = MSG_EntityTattle_WoodenCrate_SpinJump;
-                            } else if (gPlayerData.bootsLevel == 2) {
+                            } else if (gPlayerData.bootsLevel == GEAR_RANK_ULTRA) {
                                 msgID = MSG_EntityTattle_WoodenCrate_TornadoJump;
                             }
                             break;
                         case ENTITY_TYPE_BOARDED_FLOOR:
-                            if (gPlayerData.bootsLevel == 1) {
+                            if (gPlayerData.bootsLevel == GEAR_RANK_SUPER) {
                                 msgID = MSG_EntityTattle_BoardedFloor_SpinJump;
-                            } else if (gPlayerData.bootsLevel == 2) {
+                            } else if (gPlayerData.bootsLevel == GEAR_RANK_ULTRA) {
                                 msgID = MSG_EntityTattle_BoardedFloor_TornadoJump;
                             }
                             break;
                         case ENTITY_TYPE_HUGE_BLUE_SWITCH:
-                            if (gPlayerData.bootsLevel >= 2) {
+                            if (gPlayerData.bootsLevel >= GEAR_RANK_ULTRA) {
                                 msgID = MSG_EntityTattle_BigSwitch_TornadoJump;
                             }
                             break;
                         case ENTITY_TYPE_GREEN_STOMP_SWITCH:
-                            if (gPlayerData.bootsLevel >= 2) {
+                            if (gPlayerData.bootsLevel >= GEAR_RANK_ULTRA) {
                                 msgID = MSG_EntityTattle_FloorSwitch_TornadoJump;
                             }
                             break;
                         case ENTITY_TYPE_STAR_BOX_LAUNCHER:
-                            if (gPlayerData.bootsLevel >= 2) {
+                            if (gPlayerData.bootsLevel >= GEAR_RANK_ULTRA) {
                                 msgID = MSG_EntityTattle_JackInTheBox_TornadoJump;
                             }
                             break;

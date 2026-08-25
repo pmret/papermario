@@ -61,7 +61,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
         npc->collisionHeight = enemy->varTable[6];
         enemy->aiFlags &= ~AI_FLAG_SUSPEND;
         if (npc->flags & NPC_FLAG_JUMPING) {
-            npc->curAnim = ANIM_Spiny_Anim18;
+            npc->curAnim = ANIM_Spiny_Ball;
             npc->moveSpeed = 0.0f;
             npc->jumpVel = 0.0f;
             npc->jumpScale = 1.0f;
@@ -131,7 +131,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
             npc->flags &= ~NPC_FLAG_INVISIBLE;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->renderYaw = 0.0f;
-            npc->curAnim = ANIM_Spiny_Anim18;
+            npc->curAnim = ANIM_Spiny_Ball;
             script->AI_TEMP_STATE = 101;
         case 101:
             if (enemy->varTable[10] != 3) {
@@ -189,7 +189,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
                     npc->flags &= ~NPC_FLAG_JUMPING;
                     npc->jumpVel = 0.0f;
                     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
-                    npc->curAnim = ANIM_Spiny_Anim1A;
+                    npc->curAnim = ANIM_Spiny_Uncurl;
                     npc->duration = 3;
                     script->AI_TEMP_STATE = 103;
                     break;
@@ -202,7 +202,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
             npc->duration--;
             if (npc->duration <= 0) {
                 npc->flags &= ~NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
-                npc->curAnim = ANIM_Spiny_Anim01;
+                npc->curAnim = ANIM_Spiny_Idle;
                 script->AI_TEMP_STATE = 0;
             }
             break;

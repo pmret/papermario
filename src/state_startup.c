@@ -66,9 +66,9 @@ void state_step_startup(void) {
     bgm_reset_volume();
     initialize_curtains();
 
-    for (i = 0; i < ARRAY_COUNT(gGameStatusPtr->unk_50); i++) {
-        gGameStatusPtr->unk_50[i] = 4;
-        gGameStatusPtr->unk_48[i] = 15;
+    for (i = 0; i < ARRAY_COUNT(gGameStatusPtr->holdRepeatInterval); i++) {
+        gGameStatusPtr->holdRepeatInterval[i] = 4;
+        gGameStatusPtr->holdDelayTime[i] = 15;
     }
 
     fio_load_globals();

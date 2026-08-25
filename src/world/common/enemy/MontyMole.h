@@ -16,40 +16,40 @@
 
 #define MONTY_MOLE_AMBUSH_ANIMS \
 { \
-    .idle   = ANIM_MontyMole_Anim19, \
-    .walk   = ANIM_MontyMole_Anim02, \
-    .run    = ANIM_MontyMole_Anim03, \
-    .chase  = ANIM_MontyMole_Anim03, \
-    .anim_4 = ANIM_MontyMole_Anim19, \
-    .anim_5 = ANIM_MontyMole_Anim19, \
-    .death  = ANIM_MontyMole_Anim09, \
-    .hit    = ANIM_MontyMole_Anim09, \
-    .anim_8 = ANIM_MontyMole_Anim19, \
-    .anim_9 = ANIM_MontyMole_Anim19, \
-    .anim_A = ANIM_MontyMole_Anim19, \
-    .anim_B = ANIM_MontyMole_Anim19, \
-    .anim_C = ANIM_MontyMole_Anim19, \
-    .anim_D = ANIM_MontyMole_Anim19, \
-    .anim_E = ANIM_MontyMole_Anim19, \
-    .anim_F = ANIM_MontyMole_Anim19, \
+    .idle   = ANIM_MontyMole_Stand, \
+    .walk   = ANIM_MontyMole_Walk, \
+    .run    = ANIM_MontyMole_Run, \
+    .chase  = ANIM_MontyMole_Run, \
+    .anim_4 = ANIM_MontyMole_Stand, \
+    .anim_5 = ANIM_MontyMole_Stand, \
+    .death  = ANIM_MontyMole_Panic, \
+    .hit    = ANIM_MontyMole_Panic, \
+    .anim_8 = ANIM_MontyMole_Stand, \
+    .anim_9 = ANIM_MontyMole_Stand, \
+    .anim_A = ANIM_MontyMole_Stand, \
+    .anim_B = ANIM_MontyMole_Stand, \
+    .anim_C = ANIM_MontyMole_Stand, \
+    .anim_D = ANIM_MontyMole_Stand, \
+    .anim_E = ANIM_MontyMole_Stand, \
+    .anim_F = ANIM_MontyMole_Stand, \
 }
 
 #define MONTY_MOLE_THROWER_ANIMS \
 { \
-    .idle   = ANIM_MontyMole_Anim01, \
-    .walk   = ANIM_MontyMole_Anim02, \
-    .run    = ANIM_MontyMole_Anim03, \
-    .chase  = ANIM_MontyMole_Anim03, \
-    .anim_4 = ANIM_MontyMole_Anim01, \
-    .anim_5 = ANIM_MontyMole_Anim01, \
-    .death  = ANIM_MontyMole_Anim05, \
-    .hit    = ANIM_MontyMole_Anim05, \
-    .anim_8 = ANIM_MontyMole_Anim00, \
-    .anim_9 = ANIM_MontyMole_Anim00, \
-    .anim_A = ANIM_MontyMole_Anim00, \
-    .anim_B = ANIM_MontyMole_Anim00, \
-    .anim_C = ANIM_MontyMole_Anim00, \
-    .anim_D = ANIM_MontyMole_Anim00, \
-    .anim_E = ANIM_MontyMole_Anim00, \
-    .anim_F = ANIM_MontyMole_Anim00, \
+    .idle   = ANIM_MontyMole_Idle, \
+    .walk   = ANIM_MontyMole_Walk, \
+    .run    = ANIM_MontyMole_Run, \
+    .chase  = ANIM_MontyMole_Run, \
+    .anim_4 = ANIM_MontyMole_Idle, \
+    .anim_5 = ANIM_MontyMole_Idle, \
+    .death  = ANIM_MontyMole_Hurt, \
+    .hit    = ANIM_MontyMole_Hurt, \
+    .anim_8 = ANIM_MontyMole_Still, \
+    .anim_9 = ANIM_MontyMole_Still, \
+    .anim_A = ANIM_MontyMole_Still, \
+    .anim_B = ANIM_MontyMole_Still, \
+    .anim_C = ANIM_MontyMole_Still, \
+    .anim_D = ANIM_MontyMole_Still, \
+    .anim_E = ANIM_MontyMole_Still, \
+    .anim_F = ANIM_MontyMole_Still, \
 }

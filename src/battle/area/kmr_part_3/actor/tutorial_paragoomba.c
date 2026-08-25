@@ -45,7 +45,7 @@ s32 N(DownedStatusTable)[] = {
     STATUS_KEY_POISON,            100,
     STATUS_KEY_FROZEN,            100,
     STATUS_KEY_DIZZY,             100,
-    STATUS_KEY_FEAR,              100,
+    STATUS_KEY_UNUSED,            100,
     STATUS_KEY_STATIC,            100,
     STATUS_KEY_PARALYZE,          100,
     STATUS_KEY_SHRINK,            100,
@@ -55,7 +55,7 @@ s32 N(DownedStatusTable)[] = {
     STATUS_TURN_MOD_POISON,         0,
     STATUS_TURN_MOD_FROZEN,         0,
     STATUS_TURN_MOD_DIZZY,          0,
-    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_UNUSED,         0,
     STATUS_TURN_MOD_STATIC,         0,
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
@@ -70,7 +70,7 @@ s32 N(FlyingStatusTable)[] = {
     STATUS_KEY_POISON,             80,
     STATUS_KEY_FROZEN,            100,
     STATUS_KEY_DIZZY,             100,
-    STATUS_KEY_FEAR,               80,
+    STATUS_KEY_UNUSED,               80,
     STATUS_KEY_STATIC,             80,
     STATUS_KEY_PARALYZE,          100,
     STATUS_KEY_SHRINK,            100,
@@ -80,7 +80,7 @@ s32 N(FlyingStatusTable)[] = {
     STATUS_TURN_MOD_POISON,         0,
     STATUS_TURN_MOD_FROZEN,         0,
     STATUS_TURN_MOD_DIZZY,          1,
-    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_UNUSED,         0,
     STATUS_TURN_MOD_STATIC,         0,
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
@@ -171,7 +171,7 @@ s32 N(DefaultAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_Paragoomba_Idle,
     STATUS_KEY_PARALYZE,  ANIM_Paragoomba_Still,
     STATUS_KEY_DIZZY,     ANIM_Paragoomba_Dizzy,
-    STATUS_KEY_FEAR,      ANIM_Paragoomba_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_Paragoomba_Dizzy,
     STATUS_END,
 };
 
@@ -184,7 +184,7 @@ s32 N(ShuffleAnims)[] = {
     STATUS_KEY_STATIC,    ANIM_Paragoomba_Run,
     STATUS_KEY_PARALYZE,  ANIM_Paragoomba_Still,
     STATUS_KEY_DIZZY,     ANIM_Paragoomba_Dizzy,
-    STATUS_KEY_FEAR,      ANIM_Paragoomba_Dizzy,
+    STATUS_KEY_UNUSED,    ANIM_Paragoomba_Dizzy,
     STATUS_END,
 };
 

@@ -202,8 +202,8 @@ void state_step_intro(void) {
             playerData->curMaxFP = 5;
             playerData->hardMaxFP = 5;
             playerData->maxBP = 2;
-            playerData->bootsLevel = 0;
-            playerData->hammerLevel = -1;
+            playerData->bootsLevel = GEAR_RANK_NORMAL;
+            playerData->hammerLevel = GEAR_RANK_NONE;
             playerData->fortressKeyCount = 0;
             playerData->level = 0;
 

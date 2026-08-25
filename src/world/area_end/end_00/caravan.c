@@ -192,7 +192,7 @@ EvtScript N(EVS_ParadePhase_BuzzarNest) = {
     Wait(200 * DT)
     Call(ShowEmote, NPC_Buzzar, EMOTE_SHOCK, 45, 30, EMOTER_NPC, 0, 0, 0, 0)
     Wait(40 * DT)
-    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_Anim03)
+    Call(SetNpcAnimation, NPC_Buzzar, ANIM_Buzzar_Talk)
     Call(NpcFlyTo, NPC_Buzzar, -855, 100, -180, 60 * DT, 0, EASING_LINEAR)
     Call(SetNpcAnimation, NPC_VultureChick1, ANIM_ParadeChick_EggTremble)
     Call(SetNpcAnimation, NPC_VultureChick2, ANIM_ParadeChick_EggTremble)

@@ -824,22 +824,22 @@ void btl_state_update_celebration(void) {
                 hid = hud_element_create(&HES_level_up_heart);
                 LevelUpStatEmblemIDs[0] = hid;
                 hud_element_set_render_pos(hid, 310, 140);
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
 
                 hid = hud_element_create(&HES_level_up_flower);
                 LevelUpStatEmblemIDs[1] = hid;
                 hud_element_set_render_pos(hid, 158, 340);
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
 
                 hid = hud_element_create(&HES_level_up_leaves);
                 LevelUpStatEmblemIDs[3] = hid;
                 hud_element_set_render_pos(hid, 158, 340);
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
 
                 hid = hud_element_create(&HES_level_up_badge);
                 LevelUpStatEmblemIDs[2] = hid;
                 hud_element_set_render_pos(hid, 6, 140);
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
 
 #if VERSION_PAL
                 hid = hud_element_create(levelup_stat_scripts[0][gCurrentLanguage]);
@@ -848,13 +848,13 @@ void btl_state_update_celebration(void) {
 #endif
                 LevelUpStatTextIDs[LVL_UP_FP][LVL_UP_TITLE] = hid;
                 hud_element_set_render_pos(hid, 160, 317);
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
 
                 for (i = 1; i < ARRAY_COUNT(LevelUpStatTextIDs[LVL_UP_FP]); i++) {
                     hid = hud_element_create(HES_LevelUpDigits[LVL_UP_FP][0]);
                     LevelUpStatTextIDs[LVL_UP_FP][i] = hid;
                     hud_element_set_render_pos(hid, 160, 317);
-                    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+                    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER | HUD_ELEMENT_FLAG_DISABLED);
                 }
 
 #if VERSION_PAL
@@ -864,13 +864,13 @@ void btl_state_update_celebration(void) {
 #endif
                 LevelUpStatTextIDs[LVL_UP_HP][LVL_UP_TITLE] = hid;
                 hud_element_set_render_pos(hid, 312, 117);
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
 
                 for (i = 1; i < ARRAY_COUNT(LevelUpStatTextIDs[LVL_UP_HP]); i++) {
                     hid = hud_element_create(HES_LevelUpDigits[LVL_UP_HP][0]);
                     LevelUpStatTextIDs[LVL_UP_HP][i] = hid;
                     hud_element_set_render_pos(hid, 312, 117);
-                    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+                    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER | HUD_ELEMENT_FLAG_DISABLED);
                 }
 
 #if VERSION_PAL
@@ -880,13 +880,13 @@ void btl_state_update_celebration(void) {
 #endif
                 LevelUpStatTextIDs[LVL_UP_BP][LVL_UP_TITLE] = hid;
                 hud_element_set_render_pos(hid, 8, 117);
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
 
                 for (i = 1; i < ARRAY_COUNT(LevelUpStatTextIDs[LVL_UP_BP]); i++) {
                     hid = hud_element_create(HES_LevelUpDigits[LVL_UP_BP][0]);
                     LevelUpStatTextIDs[LVL_UP_BP][i] = hid;
                     hud_element_set_render_pos(hid, 8, 117);
-                    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
+                    hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER | HUD_ELEMENT_FLAG_DISABLED);
                 }
 
                 CantLevelUpStat[MENU_HP] = false;
@@ -1097,7 +1097,7 @@ void btl_state_update_celebration(void) {
                 hud_element_set_transform_rotation(hid, 0.0f, 0.0f, 180.0f);
                 hud_element_set_transform_scale(hid, 1.0f, 1.5f, 1.0f);
                 hud_element_set_alpha(hid, 200);
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_MANUAL_RENDER);
 
 #if VERSION_PAL
                 LevelUpSelectTextID = hid = hud_element_create(HES_LevelUpUpgradeLanguages[gCurrentLanguage]);
@@ -1105,7 +1105,7 @@ void btl_state_update_celebration(void) {
                 LevelUpSelectTextID = hid = hud_element_create(&HES_level_up_select_one_to_upgrade);
 #endif
                 hud_element_set_render_pos(hid, 0, 0);
-                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_80);
+                hud_element_set_flags(hid, HUD_ELEMENT_FLAG_MANUAL_RENDER);
                 battleStatus->curSubmenu = 1;
 
                 CelebrateSubstateTime = 10;
@@ -1212,7 +1212,7 @@ void btl_state_update_celebration(void) {
             set_window_update(WIN_BTL_DESC_BOX, WINDOW_UPDATE_HIDE);
 
             switch (battleStatus->curSubmenu) {
-                case 0:
+                case MENU_HP:
                     playerData->hardMaxHP += 5;
                     playerData->curMaxHP += 5;
                     playerData->curHP += 5;
@@ -1225,7 +1225,7 @@ void btl_state_update_celebration(void) {
                     player->maxHP = playerData->curMaxHP;
                     player->curHP = playerData->curHP;
                     break;
-                case 1:
+                case MENU_FP:
                     playerData->hardMaxFP += 5;
                     playerData->curMaxFP += 5;
                     playerData->curFP += 5;
@@ -1236,7 +1236,7 @@ void btl_state_update_celebration(void) {
                         playerData->curFP = playerData->curMaxFP;
                     }
                     break;
-                case 2:
+                case MENU_BP:
                     playerData->maxBP += 3;
                     if (playerData->maxBP > 30) {
                         playerData->maxBP = 30;
@@ -1261,27 +1261,27 @@ void btl_state_update_celebration(void) {
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_FADE_OUT:
             if ((gGameStatusPtr->frameCounter % 2) != 0) {
                 switch (battleStatus->curSubmenu) {
-                    case 0:
+                    case MENU_HP:
                         hud_element_set_flags(LevelUpStatEmblemIDs[0], HUD_ELEMENT_FLAG_DISABLED);
                         break;
-                    case 1:
+                    case MENU_FP:
                         hud_element_set_flags(LevelUpStatEmblemIDs[1], HUD_ELEMENT_FLAG_DISABLED);
                         hud_element_set_flags(LevelUpStatEmblemIDs[3], HUD_ELEMENT_FLAG_DISABLED);
                         break;
-                    case 2:
+                    case MENU_BP:
                         hud_element_set_flags(LevelUpStatEmblemIDs[2], HUD_ELEMENT_FLAG_DISABLED);
                         break;
                 }
             } else {
                 switch (battleStatus->curSubmenu) {
-                    case 0:
+                    case MENU_HP:
                         hud_element_clear_flags(LevelUpStatEmblemIDs[0], HUD_ELEMENT_FLAG_DISABLED);
                         break;
-                    case 1:
+                    case MENU_FP:
                         hud_element_clear_flags(LevelUpStatEmblemIDs[1], HUD_ELEMENT_FLAG_DISABLED);
                         hud_element_clear_flags(LevelUpStatEmblemIDs[3], HUD_ELEMENT_FLAG_DISABLED);
                         break;
-                    case 2:
+                    case MENU_BP:
                         hud_element_clear_flags(LevelUpStatEmblemIDs[2], HUD_ELEMENT_FLAG_DISABLED);
                         break;
                 }
@@ -1490,7 +1490,7 @@ void btl_state_draw_celebration(void) {
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_INVALID:
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_INVALID_DELAY:
             switch (battleStatus->curSubmenu) {
-                case 0:
+                case MENU_HP:
                     rotZ = 152;
                     hud_element_set_tint(LevelUpStatEmblemIDs[0], 255, 255, 255);
                     hud_element_set_tint(LevelUpStatEmblemIDs[3], 128, 128, 128);
@@ -1532,7 +1532,7 @@ void btl_state_draw_celebration(void) {
                         hud_element_set_script(id, &HES_level_up_badge);
                     }
                     break;
-                case 1:
+                case MENU_FP:
                     rotZ = 180;
                     hud_element_set_tint(LevelUpStatEmblemIDs[0], 128, 128, 128);
                     hud_element_set_tint(LevelUpStatEmblemIDs[3], 255, 255, 255);
@@ -1557,7 +1557,7 @@ void btl_state_draw_celebration(void) {
                         hud_element_set_tint(id, 128, 128, 128);
                     }
                     break;
-                case 2:
+                case MENU_BP:
                 default:
                     rotZ = 208;
                     hud_element_set_tint(LevelUpStatEmblemIDs[0], 128, 128, 128);
@@ -1597,10 +1597,10 @@ void btl_state_draw_celebration(void) {
                 }
             }
 
-            func_80144218(-1);
+            hud_element_draw_complex_hud_first(-1);
             id = LevelUpSpotlightID;
             hud_element_set_transform_rotation(id, 0.0f, 0.0f, rotZ);
-            func_80144238(id);
+            hud_element_draw_complex_hud_next(id);
             break;
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_UPGRADE:
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_FADE_OUT:

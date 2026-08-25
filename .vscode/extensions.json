@@ -2,6 +2,7 @@
     "recommendations": [
         "ms-vscode.cpptools",
         "nanaian.vscode-star-rod",
+        "bierner.markdown-mermaid",
         "notskm.clang-tidy",
         "EditorConfig.EditorConfig",
         "xaver.clang-format"

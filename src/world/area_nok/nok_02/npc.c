@@ -193,7 +193,7 @@ EvtScript N(EVS_FuzzyBoss_PlayerEntersKoopersHouse) = {
     EndIf
     Set(MF_FuzzyBossTaunt, true)
     Call(DisablePlayerInput, true)
-    Call(SpeakToPlayer, NPC_FuzzyBoss, ANIM_Fuzzy_Anim0C, ANIM_Fuzzy_Idle, 0, MSG_CH1_00B9)
+    Call(SpeakToPlayer, NPC_FuzzyBoss, ANIM_Fuzzy_Shout, ANIM_Fuzzy_Idle, 0, MSG_CH1_00B9)
     Call(DisablePlayerInput, false)
     Call(SetNpcAnimation, NPC_FuzzyBoss, ANIM_Fuzzy_Walk)
     Call(GetNpcPos, NPC_FuzzyBoss, LVarA, LVarB, LVarC)
@@ -315,7 +315,7 @@ EvtScript N(EVS_MiscFuzzyFlee) = {
     Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15)
     Add(LVar0, 30)
     Add(LVar2, -30)
-    Call(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Anim09)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Confused)
     Call(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
     Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 13)
     Add(LVar0, 20)

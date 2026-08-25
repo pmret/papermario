@@ -81,10 +81,10 @@ void appendGfx_interact_prompt(void) {
         ifxImg.xOffset = -16;
         ifxImg.yOffset = 26;
         ifxImg.alpha = 255;
-        imgfx_update(0, IMGFX_CLEAR, 0, 0, 0, 0, IMGFX_FLAG_400 | IMGFX_FLAG_40);
+        imgfx_update(0, IMGFX_CLEAR, 0, 0, 0, 0, IMGFX_FLAG_400 | IMGFX_FLAG_SKIP_ZBUF);
         imgfx_update(0, IMGFX_SET_COLOR,
                     InspectIconPtr->brightness, InspectIconPtr->brightness, InspectIconPtr->brightness, 255,
-                    IMGFX_FLAG_400 | IMGFX_FLAG_40 | IMGFX_FLAG_8);
+                    IMGFX_FLAG_400 | IMGFX_FLAG_SKIP_ZBUF | IMGFX_FLAG_8);
         imgfx_appendGfx_component(0, &ifxImg, 0, sp78);
 
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);

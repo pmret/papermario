@@ -30,7 +30,7 @@ enum {
     HUD_ELEMENT_OP_UseIA8,
     HUD_ELEMENT_OP_SetCustomSize,
     HUD_ELEMENT_OP_RandomRestart,
-    HUD_ELEMENT_OP_op_15,
+    HUD_ELEMENT_OP_SetVariable,
     HUD_ELEMENT_OP_op_16,
     HUD_ELEMENT_OP_RandomBranch,
     HUD_ELEMENT_OP_SetFlags,
@@ -71,13 +71,13 @@ enum HudElementFlags {
     HUD_ELEMENT_FLAG_INITIALIZED        = 0x00000001,
     HUD_ELEMENT_FLAG_DISABLED           = 0x00000002,
     HUD_ELEMENT_FLAG_ANIMATION_FINISHED = 0x00000004,
-    HUD_ELEMENT_FLAG_8                  = 0x00000008,
+    HUD_ELEMENT_FLAG_8                  = 0x00000008, // unused
     HUD_ELEMENT_FLAG_SCALED             = 0x00000010,
     HUD_ELEMENT_FLAG_TRANSPARENT        = 0x00000020,
     HUD_ELEMENT_FLAG_FRONTUI            = 0x00000040,
-    HUD_ELEMENT_FLAG_80                 = 0x00000080,
-    HUD_ELEMENT_FLAG_FIXEDSCALE         = 0x00000100,
-    HUD_ELEMENT_FLAG_200                = 0x00000200,
+    HUD_ELEMENT_FLAG_MANUAL_RENDER      = 0x00000080, // user has responsibility for rendering
+    HUD_ELEMENT_FLAG_RESIZING           = 0x00000100,
+    HUD_ELEMENT_FLAG_RESIZE_DIR         = 0x00000200,
     HUD_ELEMENT_FLAG_BATTLE             = 0x00000400,
     HUD_ELEMENT_FLAG_REPEATED           = 0x00000800,
     HUD_ELEMENT_FLAG_FLIPX              = 0x00001000,
@@ -89,17 +89,13 @@ enum HudElementFlags {
     HUD_ELEMENT_FLAG_DELETE             = 0x00040000,
     HUD_ELEMENT_FLAG_FMT_IA8            = 0x00080000,
     HUD_ELEMENT_FLAG_CUSTOM_SIZE        = 0x00100000,
-    HUD_ELEMENT_FLAG_200000             = 0x00200000,
+    HUD_ELEMENT_FLAG_INVISIBLE          = 0x00200000, // do not render
     HUD_ELEMENT_FLAG_MEMOFFSET          = 0x00400000,
     HUD_ELEMENT_FLAG_ANTIALIASING       = 0x00800000,
-    HUD_ELEMENT_FLAG_1000000            = 0x01000000,
-    HUD_ELEMENT_FLAG_2000000            = 0x02000000,
-    HUD_ELEMENT_FLAG_4000000            = 0x04000000,
-    HUD_ELEMENT_FLAG_8000000            = 0x08000000,
-    HUD_ELEMENT_FLAG_10000000           = 0x10000000,
+    HUD_ELEMENT_VARIABLE_MASK           = 0x0F000000, // users and scripts can read/write a value at this nibble
+    HUD_ELEMENT_FLAG_HIDDEN             = 0x10000000, // same effect as HUD_ELEMENT_FLAG_INVISIBLE, allows two independent controls over visiblity
     HUD_ELEMENT_FLAG_DROP_SHADOW        = 0x20000000,
-    HUD_ELEMENT_FLAG_40000000           = 0x40000000,
-    HUD_ELEMENT_FLAG_80000000           = 0x80000000,
+    HUD_ELEMENT_FLAG_BATTLE_CAM         = 0x40000000,
 };
 
 enum {
@@ -174,7 +170,7 @@ typedef struct HudTransform {
     /* 0x10 */ Vec3f rot;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Vec2s pivot;
-    /* 0x30 */ VtxRect unk_30[3];
+    /* 0x30 */ VtxRect quadBuffers[3];
 } HudTransform; // size = 0xF0
 
 typedef struct HudElement {
@@ -182,13 +178,13 @@ typedef struct HudElement {
     /* 0x04 */ HudScript* readPos;
     /* 0x08 */ HudScript* anim;
     /* 0x0C */ HudScript* loopStartPos;
-    /* 0x10 */ u8* imageAddr;
+    /* 0x10 */ IMG_PTR imageAddr;
     /* 0x14 */ u8* paletteAddr;
     /* 0x18 */ s32 memOffset;
     /* 0x1C */ HudTransform* hudTransform;
     /* 0x20 */ f32 deltaSizeX;
     /* 0x24 */ f32 deltaSizeY;
-    /* 0x28 */ f32 unkImgScale[2];
+    /* 0x28 */ f32 dynamicSize[2];
     /* 0x30 */ f32 uniformScale;
     /* 0x34 */ s32 widthScale; ///< X10
     /* 0x38 */ s32 heightScale; ///< X10
@@ -257,7 +253,7 @@ extern HudScript* wPartnerHudScripts[];
 /// Restarts the loop if cutoff < rand_int(max)
 #define hs_RandomRestart(max, cutoff) HUD_ELEMENT_OP_RandomRestart, max, cutoff,
 
-#define hs_op_15(arg0) HUD_ELEMENT_OP_op_15, arg0,
+#define hs_SetVariable(arg0) HUD_ELEMENT_OP_SetVariable, arg0,
 #define hs_RandomBranch(args...) HUD_ELEMENT_OP_RandomBranch, (sizeof((s32[]){args})/sizeof(s32)), args,
 #define hs_SetFlags(arg0) HUD_ELEMENT_OP_SetFlags, arg0,
 #define hs_ClearFlags(arg0) HUD_ELEMENT_OP_ClearFlags, arg0,
@@ -395,7 +391,7 @@ extern HudScript* wPartnerHudScripts[];
         hs_SetVisible \
         hs_SetTileSize(HUD_ELEMENT_SIZE_24x24) \
         hs_Loop \
-            hs_op_15(0) \
+            hs_SetVariable(0) \
             hs_SetIcon(3, anim_coin_0) \
             hs_SetIcon(3, anim_coin_1) \
             hs_SetIcon(3, anim_coin_4) \
@@ -405,7 +401,7 @@ extern HudScript* wPartnerHudScripts[];
             hs_SetIcon(3, anim_coin_8) \
             hs_SetIcon(3, anim_coin_9) \
             hs_RandomRestart(100, 70) \
-            hs_op_15(1) \
+            hs_SetVariable(1) \
             hs_SetIcon(3, anim_coin_0) \
             hs_SetIcon(2, anim_coin_1) \
             hs_SetIcon(1, anim_coin_2) \
@@ -472,15 +468,15 @@ void render_hud_elements_backUI(void);
 
 void render_hud_elements_frontUI(void);
 
-void render_hud_element(HudElement* hudElement);
+void render_complex_hud_element(HudElement* hudElement);
 
 void render_transformed_hud_elements(void);
 
-void func_80143C48(s32 arg0, s32 arg1, s32 camID);
-void func_80144218(s32 arg0);
-void func_80144238(s32 arg0);
-void func_80144258(s32 arg0);
-void func_80144278(s32 arg0);
+void immediately_render_complex_hud_element(s32 arg0, s32 arg1, s32 camID);
+void hud_element_draw_complex_hud_first(s32 arg0);
+void hud_element_draw_complex_hud_next(s32 arg0);
+void hud_element_draw_complex_battle_first(s32 arg0);
+void hud_element_draw_complex_battle_next(s32 arg0);
 
 void draw_hud_element_internal(s32 id, s32 clipMode);
 void hud_element_draw_clipped(s32 id);
@@ -514,9 +510,9 @@ void hud_element_set_scale(s32 index, f32 scale);
 
 void hud_element_use_preset_size(s32 id, s8 size);
 
-s32 func_80144E4C(s32 id);
+s32 hud_element_get_variable(s32 id);
 
-void func_80144E74(s32 id, s32 arg1);
+void hud_element_set_variable(s32 id, s32 arg1);
 
 /// @param opacity 0 = invisible; 255 = opaque
 void hud_element_set_alpha(s32 id, s32 opacity);

@@ -452,7 +452,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
                     gBattleStatus.flags1 |= BS_FLAGS1_ATK_BLOCKED;
                     break;
                 }
-                func_80266970(target);
+                cancel_action_rating_combo(target);
             }
             break;
         case ACTOR_CLASS_PARTNER:
@@ -465,14 +465,14 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
                         gBattleStatus.flags1 |= BS_FLAGS1_ATK_BLOCKED;
                         break;
                     }
-                    func_80266970(target);
+                    cancel_action_rating_combo(target);
                 }
             }
             break;
     }
 
     if (gBattleStatus.flags1 & BS_FLAGS1_TRIGGER_EVENTS) {
-        func_80266970(target);
+        cancel_action_rating_combo(target);
     }
 
     // deal damage and determine resulting battle event
@@ -633,7 +633,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->curAttackStatus & STATUS_FLAG_FEAR && try_inflict_status(target, STATUS_KEY_FEAR, STATUS_TURN_MOD_FEAR)) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_UNUSED && try_inflict_status(target, STATUS_KEY_UNUSED, STATUS_TURN_MOD_UNUSED)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
@@ -684,7 +684,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         && gBattleStatus.flags1 & BS_FLAGS1_TRIGGER_EVENTS
         && !(target->flags & ACTOR_FLAG_NO_DMG_APPLY))
     {
-        inflict_partner_ko(target, STATUS_KEY_DAZE, battleStatus->lastAttackDamage);
+        inflict_partner_ko(target, STATUS_KEY_KO, battleStatus->lastAttackDamage);
     }
 
     if (!(target->flags & ACTOR_FLAG_NO_DMG_POPUP)) {

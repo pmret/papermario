@@ -86,7 +86,7 @@ s32 N(StatusTable)[] = {
     STATUS_KEY_POISON,              0,
     STATUS_KEY_FROZEN,              0,
     STATUS_KEY_DIZZY,              60,
-    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_UNUSED,              0,
     STATUS_KEY_STATIC,              0,
     STATUS_KEY_PARALYZE,           90,
     STATUS_KEY_SHRINK,             75,
@@ -96,7 +96,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_POISON,         0,
     STATUS_TURN_MOD_FROZEN,         0,
     STATUS_TURN_MOD_DIZZY,          0,
-    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_UNUSED,         0,
     STATUS_TURN_MOD_STATIC,         0,
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
@@ -299,77 +299,77 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(FourStackAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_ShyStackGuy_Anim04,
-    STATUS_KEY_STONE,     ANIM_ShyStackGuy_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_ShyStackGuy_Anim00,
-    STATUS_KEY_POISON,    ANIM_ShyStackGuy_Anim04,
-    STATUS_KEY_STOP,      ANIM_ShyStackGuy_Anim00,
-    STATUS_KEY_STATIC,    ANIM_ShyStackGuy_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0C,
-    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0C,
-    STATUS_KEY_FEAR,      ANIM_ShyStackGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_ShyStackGuy_4xIdle,
+    STATUS_KEY_STONE,     ANIM_ShyStackGuy_4xStill,
+    STATUS_KEY_SLEEP,     ANIM_ShyStackGuy_4xStill,
+    STATUS_KEY_POISON,    ANIM_ShyStackGuy_4xIdle,
+    STATUS_KEY_STOP,      ANIM_ShyStackGuy_4xStill,
+    STATUS_KEY_STATIC,    ANIM_ShyStackGuy_4xStill,
+    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_4xStill,
+    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_4xStill,
+    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_4xDizzy,
+    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_4xDizzy,
+    STATUS_KEY_UNUSED,    ANIM_ShyStackGuy_4xStill,
     STATUS_END,
 };
 
 s32 N(ThreeStackAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_ShyStackGuy_Anim05,
-    STATUS_KEY_STONE,     ANIM_ShyStackGuy_Anim01,
-    STATUS_KEY_SLEEP,     ANIM_ShyStackGuy_Anim01,
-    STATUS_KEY_POISON,    ANIM_ShyStackGuy_Anim05,
-    STATUS_KEY_STOP,      ANIM_ShyStackGuy_Anim01,
-    STATUS_KEY_STATIC,    ANIM_ShyStackGuy_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_Anim01,
-    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0D,
-    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0D,
-    STATUS_KEY_FEAR,      ANIM_ShyStackGuy_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_ShyStackGuy_3xIdle,
+    STATUS_KEY_STONE,     ANIM_ShyStackGuy_3xStill,
+    STATUS_KEY_SLEEP,     ANIM_ShyStackGuy_3xStill,
+    STATUS_KEY_POISON,    ANIM_ShyStackGuy_3xIdle,
+    STATUS_KEY_STOP,      ANIM_ShyStackGuy_3xStill,
+    STATUS_KEY_STATIC,    ANIM_ShyStackGuy_3xStill,
+    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_3xStill,
+    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_3xStill,
+    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_3xDizzy,
+    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_3xDizzy,
+    STATUS_KEY_UNUSED,    ANIM_ShyStackGuy_3xStill,
     STATUS_END,
 };
 
 s32 N(TwoStackAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_ShyStackGuy_Anim06,
-    STATUS_KEY_STONE,     ANIM_ShyStackGuy_Anim02,
-    STATUS_KEY_SLEEP,     ANIM_ShyStackGuy_Anim02,
-    STATUS_KEY_POISON,    ANIM_ShyStackGuy_Anim06,
-    STATUS_KEY_STOP,      ANIM_ShyStackGuy_Anim02,
-    STATUS_KEY_STATIC,    ANIM_ShyStackGuy_Anim02,
-    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_Anim02,
-    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_Anim02,
-    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0E,
-    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0E,
-    STATUS_KEY_FEAR,      ANIM_ShyStackGuy_Anim02,
+    STATUS_KEY_NORMAL,    ANIM_ShyStackGuy_2xIdle,
+    STATUS_KEY_STONE,     ANIM_ShyStackGuy_2xStill,
+    STATUS_KEY_SLEEP,     ANIM_ShyStackGuy_2xStill,
+    STATUS_KEY_POISON,    ANIM_ShyStackGuy_2xIdle,
+    STATUS_KEY_STOP,      ANIM_ShyStackGuy_2xStill,
+    STATUS_KEY_STATIC,    ANIM_ShyStackGuy_2xStill,
+    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_2xStill,
+    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_2xStill,
+    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_2xDizzy,
+    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_2xDizzy,
+    STATUS_KEY_UNUSED,    ANIM_ShyStackGuy_2xStill,
     STATUS_END,
 };
 
 s32 N(OneStackAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_ShyStackGuy_Anim07,
-    STATUS_KEY_STONE,     ANIM_ShyStackGuy_Anim03,
-    STATUS_KEY_SLEEP,     ANIM_ShyStackGuy_Anim03,
-    STATUS_KEY_POISON,    ANIM_ShyStackGuy_Anim07,
-    STATUS_KEY_STOP,      ANIM_ShyStackGuy_Anim03,
-    STATUS_KEY_STATIC,    ANIM_ShyStackGuy_Anim03,
-    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_Anim03,
-    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_Anim03,
-    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0F,
-    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0F,
-    STATUS_KEY_FEAR,      ANIM_ShyStackGuy_Anim03,
+    STATUS_KEY_NORMAL,    ANIM_ShyStackGuy_1xIdle,
+    STATUS_KEY_STONE,     ANIM_ShyStackGuy_1xStill,
+    STATUS_KEY_SLEEP,     ANIM_ShyStackGuy_1xStill,
+    STATUS_KEY_POISON,    ANIM_ShyStackGuy_1xIdle,
+    STATUS_KEY_STOP,      ANIM_ShyStackGuy_1xStill,
+    STATUS_KEY_STATIC,    ANIM_ShyStackGuy_1xStill,
+    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_1xStill,
+    STATUS_KEY_PARALYZE,  ANIM_ShyStackGuy_1xStill,
+    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_1xDizzy,
+    STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_1xDizzy,
+    STATUS_KEY_UNUSED,    ANIM_ShyStackGuy_1xStill,
     STATUS_END,
 };
 
 s32 N(RockAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_ShyStackRock_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_ShyStackRock_Still,
     STATUS_END,
 };
 
 s32 N(DamageAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_ShyStackDamage_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_ShyStackDamage_Hurt,
     STATUS_END,
 };
 
 s32 N(ShyGuyAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_ShyGuy_Red_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_ShyGuy_Red_Idle,
     STATUS_END,
 };
 
@@ -377,12 +377,12 @@ EvtScript N(EVS_Init) = {
     Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
     Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
     Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
-    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Still, ANIM_ShyStackGuy_Anim00)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Idle, ANIM_ShyStackGuy_Anim04)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_ShyStackGuy_Anim08)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnHurt, ANIM_ShyStackGuy_Anim10)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_ShyStackGuy_Anim14)
-    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Attack, ANIM_ShyStackGuy_Anim1B)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Still, ANIM_ShyStackGuy_4xStill)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Idle, ANIM_ShyStackGuy_4xIdle)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_ShyStackGuy_4xHurt)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnHurt, ANIM_ShyStackGuy_4xBurnHurt)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_ShyStackGuy_4xBurnStill)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Attack, ANIM_ShyStackGuy_4xDraw)
     Call(SetActorVar, ACTOR_SELF, AVAR_DefeatedCount, 0)
     Call(UseIdleAnimation, ACTOR_SELF, false)
     Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
@@ -398,13 +398,13 @@ EvtScript N(EVS_Init) = {
             Call(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_4, SOUND_FALL_QUICK)
         EndThread
         Thread
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_4, ANIM_ShyGuy_Red_Anim0A)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_4, ANIM_ShyGuy_Red_FallingKick)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_GUY_4, ACTOR_PART_FLAG_INVISIBLE, false)
             Call(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_4, Float(1.0))
             Call(SetPartSounds, ACTOR_SELF, PRT_GUY_4, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
             Call(FallPartTo, ACTOR_SELF, PRT_GUY_4, LVar0, 0, 0, 36)
             Call(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_4, SOUND_SHY_STACK_SQUISH)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_4, ANIM_ShyGuy_Red_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_4, ANIM_ShyGuy_Red_Bow)
         EndThread
         Thread
             Wait(36)
@@ -412,13 +412,13 @@ EvtScript N(EVS_Init) = {
         EndThread
         Thread
             Wait(31)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_Anim0A)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_FallingKick)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_GUY_3, ACTOR_PART_FLAG_INVISIBLE, false)
             Call(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_3, Float(1.0))
             Call(SetPartSounds, ACTOR_SELF, PRT_GUY_3, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
             Call(FallPartTo, ACTOR_SELF, PRT_GUY_3, LVar0, 18, 0, 32)
             Call(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_3, SOUND_SHY_STACK_SQUISH)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_Bow)
             Call(SetPartScale, ACTOR_SELF, PRT_GUY_4, Float(1.1), Float(0.9), Float(1.0))
             Call(SetPartDispOffset, ACTOR_SELF, PRT_GUY_3, 0, -3, 0)
             Wait(1)
@@ -437,13 +437,13 @@ EvtScript N(EVS_Init) = {
         EndThread
         Thread
             Wait(62)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_Anim0A)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_FallingKick)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_GUY_2, ACTOR_PART_FLAG_INVISIBLE, false)
             Call(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_2, Float(1.0))
             Call(SetPartSounds, ACTOR_SELF, PRT_GUY_2, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
             Call(FallPartTo, ACTOR_SELF, PRT_GUY_2, LVar0, 36, 0, 28)
             Call(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_2, SOUND_SHY_STACK_SQUISH)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_Bow)
             Call(SetPartScale, ACTOR_SELF, PRT_GUY_4, Float(1.1), Float(0.9), Float(1.0))
             Call(SetPartScale, ACTOR_SELF, PRT_GUY_3, Float(1.1), Float(0.9), Float(1.0))
             Call(SetPartDispOffset, ACTOR_SELF, PRT_GUY_3, 0, -2, 0)
@@ -470,13 +470,13 @@ EvtScript N(EVS_Init) = {
         EndThread
         Thread
             Wait(93)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_Anim0A)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_FallingKick)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_GUY_1, ACTOR_PART_FLAG_INVISIBLE, false)
             Call(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_1, Float(1.0))
             Call(SetPartSounds, ACTOR_SELF, PRT_GUY_1, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
             Call(FallPartTo, ACTOR_SELF, PRT_GUY_1, LVar0, 54, 0, 24)
             Call(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_1, SOUND_SHY_STACK_SQUISH)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_Bow)
             Call(SetPartScale, ACTOR_SELF, PRT_GUY_4, Float(1.1), Float(0.9), Float(1.0))
             Call(SetPartScale, ACTOR_SELF, PRT_GUY_3, Float(1.1), Float(0.9), Float(1.0))
             Call(SetPartScale, ACTOR_SELF, PRT_GUY_2, Float(1.1), Float(0.9), Float(1.0))
@@ -522,24 +522,24 @@ EvtScript N(EVS_Init) = {
         Call(SetPartPos, ACTOR_SELF, PRT_GUY_2, 200, 0, 47)
         Call(SetPartPos, ACTOR_SELF, PRT_GUY_1, 200, 0, 47)
         Thread
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_4, ANIM_ShyGuy_Red_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_4, ANIM_ShyGuy_Red_Dash)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_GUY_4, ACTOR_PART_FLAG_INVISIBLE, false)
             Call(SetPartMoveSpeed, ACTOR_SELF, PRT_GUY_4, Float(4.0))
             Call(RunPartTo, ACTOR_SELF, PRT_GUY_4, 55, 0, 47, false)
             Call(RunPartTo, ACTOR_SELF, PRT_GUY_4, 50, 0, 0, false)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_4, ANIM_ShyGuy_Red_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_4, ANIM_ShyGuy_Red_Bow)
         EndThread
         Thread
             Wait(31)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_Dash)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_GUY_3, ACTOR_PART_FLAG_INVISIBLE, false)
             Call(SetPartMoveSpeed, ACTOR_SELF, PRT_GUY_3, Float(4.0))
             Call(RunPartTo, ACTOR_SELF, PRT_GUY_3, 55, 0, 47, 36)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_Anim09)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_Jump)
             Call(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_3, Float(1.0))
             Call(JumpPartTo, ACTOR_SELF, PRT_GUY_3, 50, 18, 0, 20, true)
             Call(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_3, SOUND_SHY_STACK_SQUISH)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_Bow)
             Call(SetPartScale, ACTOR_SELF, PRT_GUY_4, Float(1.1), Float(0.9), Float(1.0))
             Call(SetPartDispOffset, ACTOR_SELF, PRT_GUY_3, 0, -3, 0)
             Wait(1)
@@ -554,19 +554,19 @@ EvtScript N(EVS_Init) = {
         EndThread
         Thread
             Wait(77)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_Anim0A)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_FallingKick)
         EndThread
         Thread
             Wait(62)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_Dash)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_GUY_2, ACTOR_PART_FLAG_INVISIBLE, false)
             Call(SetPartMoveSpeed, ACTOR_SELF, PRT_GUY_2, Float(4.0))
             Call(RunPartTo, ACTOR_SELF, PRT_GUY_2, 55, 0, 47, 36)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_Anim09)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_Jump)
             Call(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_2, Float(1.0))
             Call(JumpPartTo, ACTOR_SELF, PRT_GUY_2, 50, 36, 0, 20, true)
             Call(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_2, SOUND_SHY_STACK_SQUISH)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_Anim07)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_Bow)
             Call(SetPartScale, ACTOR_SELF, PRT_GUY_4, Float(1.1), Float(0.9), Float(1.0))
             Call(SetPartScale, ACTOR_SELF, PRT_GUY_3, Float(1.1), Float(0.9), Float(1.0))
             Call(SetPartDispOffset, ACTOR_SELF, PRT_GUY_3, 0, -2, 0)
@@ -589,22 +589,22 @@ EvtScript N(EVS_Init) = {
         EndThread
         Thread
             Wait(108)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_Anim0A)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_FallingKick)
         EndThread
         Thread
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_Dash)
             Wait(143)
             Wait(10)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_Anim09)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_Jump)
             Wait(15)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_Anim0A)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_FallingKick)
         EndThread
         Thread
             Wait(133)
             Call(GetActorPos, ACTOR_GENERAL, LVar0, LVar1, LVar2)
             Add(LVar1, -3)
             Call(SetPartPos, ACTOR_SELF, PRT_GUY_1, LVar0, LVar1, LVar2)
-            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim05)
+            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Hurt)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_GUY_1, ACTOR_PART_FLAG_INVISIBLE, false)
             Add(LVar0, -20)
             Add(LVar1, 18)
@@ -613,8 +613,8 @@ EvtScript N(EVS_Init) = {
             Call(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_1, Float(0.3))
             Call(JumpPartTo, ACTOR_SELF, PRT_GUY_1, 50, 54, 0, 30, true)
             Call(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_1, SOUND_SHY_STACK_SQUISH)
-            Call(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_Anim07)
-            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_Bow)
+            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_BowHead)
             Call(SetPartScale, ACTOR_SELF, PRT_GUY_4, Float(1.1), Float(0.9), Float(1.0))
             Call(SetPartScale, ACTOR_SELF, PRT_GUY_3, Float(1.1), Float(0.9), Float(1.0))
             Call(SetPartScale, ACTOR_SELF, PRT_GUY_2, Float(1.1), Float(0.9), Float(1.0))
@@ -643,7 +643,7 @@ EvtScript N(EVS_Init) = {
             Call(SetPartDispOffset, ACTOR_SELF, PRT_GUY_2, 0, 0, 0)
             Call(SetPartDispOffset, ACTOR_SELF, PRT_GUY_1, 0, 0, 0)
             Wait(12)
-            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim03)
+            Call(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Point)
             Call(GetPartOffset, ACTOR_SELF, PRT_GUY_4, LVar0, LVar1, LVar2)
             Call(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_GUY_1, ACTOR_PART_FLAG_INVISIBLE, true)
@@ -1003,12 +1003,12 @@ EvtScript N(EVS_DetachMember) = {
     Switch(LVarA)
         CaseEq(0)
             Call(SetActorVar, ACTOR_SELF, AVAR_DefeatedCount, 1)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Still, ANIM_ShyStackGuy_Anim01)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Idle, ANIM_ShyStackGuy_Anim05)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_ShyStackGuy_Anim09)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnHurt, ANIM_ShyStackGuy_Anim11)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_ShyStackGuy_Anim15)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Attack, ANIM_ShyStackGuy_Anim1C)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Still, ANIM_ShyStackGuy_3xStill)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Idle, ANIM_ShyStackGuy_3xIdle)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_ShyStackGuy_3xHurt)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnHurt, ANIM_ShyStackGuy_3xBurnHurt)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_ShyStackGuy_3xBurnStill)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Attack, ANIM_ShyStackGuy_3xDraw)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(ThreeStackAnims)))
             Call(SetPartFlagBits, ACTOR_SELF, PRT_STACK_1, ACTOR_PART_FLAG_PRIMARY_TARGET, false)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_STACK_1, ACTOR_PART_FLAG_NO_TARGET, true)
@@ -1019,12 +1019,12 @@ EvtScript N(EVS_DetachMember) = {
             Call(SetPartSize, ACTOR_SELF, PRT_MAIN, 57, 30)
         CaseEq(1)
             Call(SetActorVar, ACTOR_SELF, AVAR_DefeatedCount, 2)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Still, ANIM_ShyStackGuy_Anim02)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Idle, ANIM_ShyStackGuy_Anim06)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_ShyStackGuy_Anim0A)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnHurt, ANIM_ShyStackGuy_Anim12)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_ShyStackGuy_Anim16)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Attack, ANIM_ShyStackGuy_Anim1D)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Still, ANIM_ShyStackGuy_2xStill)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Idle, ANIM_ShyStackGuy_2xIdle)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_ShyStackGuy_2xHurt)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnHurt, ANIM_ShyStackGuy_2xBurnHurt)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_ShyStackGuy_2xBurnStill)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Attack, ANIM_ShyStackGuy_2xDraw)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(TwoStackAnims)))
             Call(SetPartFlagBits, ACTOR_SELF, PRT_STACK_2, ACTOR_PART_FLAG_PRIMARY_TARGET, false)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_STACK_2, ACTOR_PART_FLAG_NO_TARGET, true)
@@ -1035,12 +1035,12 @@ EvtScript N(EVS_DetachMember) = {
             Call(SetPartSize, ACTOR_SELF, PRT_MAIN, 39, 30)
         CaseEq(2)
             Call(SetActorVar, ACTOR_SELF, AVAR_DefeatedCount, 3)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Still, ANIM_ShyStackGuy_Anim03)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Idle, ANIM_ShyStackGuy_Anim07)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_ShyStackGuy_Anim0B)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnHurt, ANIM_ShyStackGuy_Anim13)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_ShyStackGuy_Anim17)
-            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Attack, ANIM_ShyStackGuy_Anim1E)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Still, ANIM_ShyStackGuy_1xStill)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Idle, ANIM_ShyStackGuy_1xIdle)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, ANIM_ShyStackGuy_1xHurt)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnHurt, ANIM_ShyStackGuy_1xBurnHurt)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_ShyStackGuy_1xBurnStill)
+            Call(SetActorVar, ACTOR_SELF, AVAR_Anim_Attack, ANIM_ShyStackGuy_1xDraw)
             Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(OneStackAnims)))
             Call(SetPartFlagBits, ACTOR_SELF, PRT_STACK_3, ACTOR_PART_FLAG_PRIMARY_TARGET, false)
             Call(SetPartFlagBits, ACTOR_SELF, PRT_STACK_3, ACTOR_PART_FLAG_NO_TARGET, true)
@@ -1106,7 +1106,7 @@ EvtScript N(EVS_SpinSmashHit_Stack) = {
     Call(N(PrintDebugValue), Ref("X"), LVar0)
     Call(N(PrintDebugValue), Ref("Y"), LVar1)
     Call(N(PrintDebugValue), Ref("Z"), LVar2)
-    Call(SetAnimation, ACTOR_SELF, PRT_KNOCKOFF, ANIM_ShyStackDamage_Anim00)
+    Call(SetAnimation, ACTOR_SELF, PRT_KNOCKOFF, ANIM_ShyStackDamage_Hurt)
     Call(SetPartPos, ACTOR_SELF, PRT_KNOCKOFF, LVar0, LVar1, LVar2)
     Call(SetPartRotation, ACTOR_SELF, PRT_KNOCKOFF, 0, 0, 0)
     Call(SetPartFlagBits, ACTOR_SELF, PRT_KNOCKOFF, ACTOR_PART_FLAG_INVISIBLE, false)
@@ -1197,9 +1197,9 @@ EvtScript N(EVS_SpinSmashHit_Stack) = {
 EvtScript N(EVS_SpinSmashLaunch) = {
     Call(GetDamageSource, LVar0)
     IfEq(LVar0, DMG_SRC_FIRE_SHELL)
-        Call(SetAnimation, ACTOR_SELF, PRT_KNOCKOFF, ANIM_ShyStackDamage_Anim01)
+        Call(SetAnimation, ACTOR_SELF, PRT_KNOCKOFF, ANIM_ShyStackDamage_BurnHurt)
     Else
-        Call(SetAnimation, ACTOR_SELF, PRT_KNOCKOFF, ANIM_ShyStackDamage_Anim00)
+        Call(SetAnimation, ACTOR_SELF, PRT_KNOCKOFF, ANIM_ShyStackDamage_Hurt)
     EndIf
     Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     Call(N(PrintDebugValue), Ref("X"), LVar0)
@@ -1427,7 +1427,7 @@ EvtScript N(EVS_ShootRock) = {
     EndIf
     Call(SetPartSounds, ACTOR_SELF, LVar2, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
     Call(SetPartPos, ACTOR_SELF, LVar2, LVar3, LVar4, LVar5)
-    Call(SetAnimation, ACTOR_SELF, LVar2, ANIM_ShyStackRock_Anim00)
+    Call(SetAnimation, ACTOR_SELF, LVar2, ANIM_ShyStackRock_Still)
     Call(SetPartFlagBits, ACTOR_SELF, LVar2, ACTOR_PART_FLAG_INVISIBLE, false)
     Wait(1)
     Call(SetGoalToTarget, ACTOR_SELF)

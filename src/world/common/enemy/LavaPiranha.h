@@ -17,40 +17,40 @@
 
 #define LAVA_PIRANHA_HEAD_ANIMS \
 { \
-    .idle   = ANIM_LavaPiranha_Anim03, \
-    .walk   = ANIM_LavaPiranha_Anim03, \
-    .run    = ANIM_LavaPiranha_Anim03, \
-    .chase  = ANIM_LavaPiranha_Anim03, \
-    .anim_4 = ANIM_LavaPiranha_Anim03, \
-    .anim_5 = ANIM_LavaPiranha_Anim03, \
-    .death  = ANIM_LavaPiranha_Anim03, \
-    .hit    = ANIM_LavaPiranha_Anim03, \
-    .anim_8 = ANIM_LavaPiranha_Anim03, \
-    .anim_9 = ANIM_LavaPiranha_Anim03, \
-    .anim_A = ANIM_LavaPiranha_Anim03, \
-    .anim_B = ANIM_LavaPiranha_Anim03, \
-    .anim_C = ANIM_LavaPiranha_Anim03, \
-    .anim_D = ANIM_LavaPiranha_Anim03, \
-    .anim_E = ANIM_LavaPiranha_Anim03, \
-    .anim_F = ANIM_LavaPiranha_Anim03, \
+    .idle   = ANIM_LavaPiranha_Idle, \
+    .walk   = ANIM_LavaPiranha_Idle, \
+    .run    = ANIM_LavaPiranha_Idle, \
+    .chase  = ANIM_LavaPiranha_Idle, \
+    .anim_4 = ANIM_LavaPiranha_Idle, \
+    .anim_5 = ANIM_LavaPiranha_Idle, \
+    .death  = ANIM_LavaPiranha_Idle, \
+    .hit    = ANIM_LavaPiranha_Idle, \
+    .anim_8 = ANIM_LavaPiranha_Idle, \
+    .anim_9 = ANIM_LavaPiranha_Idle, \
+    .anim_A = ANIM_LavaPiranha_Idle, \
+    .anim_B = ANIM_LavaPiranha_Idle, \
+    .anim_C = ANIM_LavaPiranha_Idle, \
+    .anim_D = ANIM_LavaPiranha_Idle, \
+    .anim_E = ANIM_LavaPiranha_Idle, \
+    .anim_F = ANIM_LavaPiranha_Idle, \
 }
 
 #define LAVA_PIRANHA_BUD_ANIMS \
 { \
-    .idle   = ANIM_LavaBud_Anim03, \
-    .walk   = ANIM_LavaBud_Anim03, \
-    .run    = ANIM_LavaBud_Anim03, \
-    .chase  = ANIM_LavaBud_Anim03, \
-    .anim_4 = ANIM_LavaBud_Anim03, \
-    .anim_5 = ANIM_LavaBud_Anim03, \
-    .death  = ANIM_LavaBud_Anim03, \
-    .hit    = ANIM_LavaBud_Anim03, \
-    .anim_8 = ANIM_LavaBud_Anim03, \
-    .anim_9 = ANIM_LavaBud_Anim03, \
-    .anim_A = ANIM_LavaBud_Anim03, \
-    .anim_B = ANIM_LavaBud_Anim03, \
-    .anim_C = ANIM_LavaBud_Anim03, \
-    .anim_D = ANIM_LavaBud_Anim03, \
-    .anim_E = ANIM_LavaBud_Anim03, \
-    .anim_F = ANIM_LavaBud_Anim03, \
+    .idle   = ANIM_LavaBud_Idle, \
+    .walk   = ANIM_LavaBud_Idle, \
+    .run    = ANIM_LavaBud_Idle, \
+    .chase  = ANIM_LavaBud_Idle, \
+    .anim_4 = ANIM_LavaBud_Idle, \
+    .anim_5 = ANIM_LavaBud_Idle, \
+    .death  = ANIM_LavaBud_Idle, \
+    .hit    = ANIM_LavaBud_Idle, \
+    .anim_8 = ANIM_LavaBud_Idle, \
+    .anim_9 = ANIM_LavaBud_Idle, \
+    .anim_A = ANIM_LavaBud_Idle, \
+    .anim_B = ANIM_LavaBud_Idle, \
+    .anim_C = ANIM_LavaBud_Idle, \
+    .anim_D = ANIM_LavaBud_Idle, \
+    .anim_E = ANIM_LavaBud_Idle, \
+    .anim_F = ANIM_LavaBud_Idle, \
 }

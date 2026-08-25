@@ -103,10 +103,10 @@ BattleArea gBattleAreas[] = {
 
 void reset_battle_status(void) {
     gGameStatusPtr->demoBattleFlags = 0;
-    gBattleState = BATTLE_STATE_0;
+    gBattleState = BATTLE_STATE_NONE;
     D_800DC4E0 = 1;
     gBattleSubState = BTL_SUBSTATE_INIT;
-    gLastDrawBattleState = BATTLE_STATE_0;
+    gLastDrawBattleState = BATTLE_STATE_NONE;
     D_800DC4F0 = 0;
     D_800DC4D4 = 0;
     gCurrentBattlePtr = nullptr;
@@ -140,15 +140,15 @@ void load_battle_section(void) {
         gCurrentStagePtr = &(*battleArea->stages)[gCurrentStageID];
     }
 
-    btl_set_state(BATTLE_STATE_NORMAL_START);
-    gLastDrawBattleState = BATTLE_STATE_0;
+    btl_set_state(BATTLE_STATE_START);
+    gLastDrawBattleState = BATTLE_STATE_NONE;
 }
 
 void load_battle(s32 battleID) {
     gCurrentBattleID = battleID;
     set_game_mode(GAME_MODE_BATTLE);
-    gBattleState = BATTLE_STATE_0;
-    gLastDrawBattleState = BATTLE_STATE_0;
+    gBattleState = BATTLE_STATE_NONE;
+    gLastDrawBattleState = BATTLE_STATE_NONE;
     gBattleSubState = BTL_SUBSTATE_INIT;
 }
 
@@ -235,7 +235,7 @@ void load_demo_battle(u32 index) {
     clear_model_data();
     clear_sprite_shading_data();
     reset_background_settings();
-    func_80138188();
+    reset_back_screen_overlay_progress();
     reset_battle_status();
     clear_encounter_status();
     clear_entity_data(true);

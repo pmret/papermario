@@ -157,7 +157,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Call(SetPlayerAnimation, ANIM_Mario1_NodYes)
             Wait(20 * DT)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0051)
-            Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim12)
+            Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Hole)
             Call(SetNpcYaw, NPC_MontyMole_01, 270)
             Call(GetNpcPos, NPC_MontyMole_01, LVar0, LVar1, LVar2)
             Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -169,7 +169,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Wait(20 * DT)
             Call(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
-            Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim16)
+            Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_WorldEmerge)
             Wait(10 * DT)
             Call(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_EMOTE_QUESTION, SOUND_SPACE_DEFAULT)
             Call(ShowEmote, NPC_MontyMole_01, EMOTE_QUESTION, -45, 30, EMOTER_NPC, 0, 0, 0, 0)
@@ -183,11 +183,11 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-8.0))
             Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-            Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim00)
+            Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Still)
             Wait(20 * DT)
             Call(PlaySoundAtNpc, NPC_MontyMole_02, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
             Call(SetNpcPos, NPC_MontyMole_02, LVar0, LVar1, LVar2)
-            Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim10)
+            Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Emerge)
             Wait(20 * DT)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0053)
             Call(SetNpcYaw, NPC_MontyMole_03, 270)
@@ -199,7 +199,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
             Wait(20 * DT)
-            Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim14)
+            Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Sleep)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0054)
             Call(SetNpcYaw, NPC_MontyMole_04, 270)
             Call(GetNpcPos, NPC_MontyMole_04, LVar0, LVar1, LVar2)
@@ -209,13 +209,13 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-9.0))
             Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-            Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim06)
+            Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_HurtJump)
             Wait(20 * DT)
-            Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim07)
+            Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_HurtMidair)
             Wait(20 * DT)
-            Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim08)
+            Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_HurtDropDown)
             Wait(20 * DT)
-            Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim16)
+            Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_WorldEmerge)
             Call(SpeakToPlayer, NPC_SELF, ANIM_Petunia_AngryTalk, ANIM_Petunia_Angry, 0, MSG_CH6_0055)
             Call(SetNpcPos, NPC_Dayzee, -233, 0, -217)
             Call(GetNpcPos, NPC_Dayzee, LVar0, LVar1, LVar2)
@@ -225,7 +225,7 @@ EvtScript N(EVS_NpcInteract_Petunia) = {
             Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-9.0))
             Call(PanToTarget, CAM_DEFAULT, 0, true)
             Call(WaitForCam, CAM_DEFAULT, Float(1.0))
-            Call(SetNpcAnimation, NPC_Dayzee, ANIM_Dayzee_Anim0D)
+            Call(SetNpcAnimation, NPC_Dayzee, ANIM_Dayzee_Shocked)
             Call(PlaySoundAtNpc, NPC_Dayzee, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
             Call(ShowEmote, NPC_Dayzee, EMOTE_EXCLAMATION, 45, 30, EMOTER_NPC, 0, 0, 0, 0)
             Wait(15 * DT)
@@ -350,9 +350,9 @@ EvtScript N(EVS_NpcDefeat_MontyMole) = {
             EndIf
             Call(DoNpcDefeat)
         CaseEq(OUTCOME_PLAYER_LOST)
-            Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Dark_Anim01)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Dark_Idle)
         CaseEq(OUTCOME_PLAYER_FLED)
-            Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Dark_Anim01)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Dark_Idle)
     EndSwitch
     Return
     End
@@ -362,7 +362,7 @@ EvtScript N(EVS_NpcHit_MontyMole) = {
     IfEq(GB_StoryProgress, STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
         Call(GetOwnerEncounterTrigger, LVar0)
         IfNe(LVar0, ENCOUNTER_TRIGGER_NONE)
-            Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Dark_Anim05)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_MontyMole_Dark_Hurt)
         EndIf
     EndIf
     Return
@@ -407,7 +407,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
                     Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, true)
                 EndIf
                 Call(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
-                Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim11)
+                Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Burrow)
                 Wait(20)
                 IfEq(GF_FLO03_Defeated_MontyMoleA, false)
                     Call(SetNpcPos, NPC_MontyMole_01, 0, -50, 0)
@@ -430,7 +430,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_01) = {
                 Call(NpcFacePlayer, NPC_MontyMole_01, 1)
                 Wait(1)
                 Call(PlaySoundAtNpc, NPC_MontyMole_01, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
-                Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim10)
+                Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Emerge)
                 Wait(10)
                 Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, false)
                 Call(RandInt, 30, LVar0)
@@ -486,7 +486,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
                     Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, true)
                 EndIf
                 Call(PlaySoundAtNpc, NPC_MontyMole_02, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
-                Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim11)
+                Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Burrow)
                 Wait(20)
                 IfEq(GF_FLO03_Defeated_MontyMoleB, false)
                     Call(SetNpcPos, NPC_MontyMole_02, 0, -50, 0)
@@ -509,7 +509,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_02) = {
                 Call(NpcFacePlayer, NPC_MontyMole_02, 1)
                 Wait(1)
                 Call(PlaySoundAtNpc, NPC_MontyMole_02, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
-                Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim10)
+                Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Emerge)
                 Wait(10)
                 Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, false)
                 Call(RandInt, 35, LVar0)
@@ -565,7 +565,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
                     Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, true)
                 EndIf
                 Call(PlaySoundAtNpc, NPC_MontyMole_03, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
-                Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim11)
+                Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Burrow)
                 Wait(20)
                 IfEq(GF_FLO03_Defeated_MontyMoleC, false)
                     Call(SetNpcPos, NPC_MontyMole_03, 0, -50, 0)
@@ -588,7 +588,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_03) = {
                 Call(NpcFacePlayer, NPC_MontyMole_03, 1)
                 Wait(1)
                 Call(PlaySoundAtNpc, NPC_MontyMole_03, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
-                Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim10)
+                Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Emerge)
                 Wait(10)
                 Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, false)
                 Call(RandInt, 40, LVar0)
@@ -644,7 +644,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
                     Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, true)
                 EndIf
                 Call(PlaySoundAtNpc, NPC_MontyMole_04, SOUND_BURROW_DIG, SOUND_SPACE_DEFAULT)
-                Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim11)
+                Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Burrow)
                 Wait(20)
                 IfEq(GF_FLO03_Defeated_MontyMoleD, false)
                     Call(SetNpcPos, NPC_MontyMole_04, 0, -50, 0)
@@ -667,7 +667,7 @@ EvtScript N(EVS_NpcIdle_MontyMole_04) = {
                 Call(NpcFacePlayer, NPC_MontyMole_04, 1)
                 Wait(1)
                 Call(PlaySoundAtNpc, NPC_MontyMole_04, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
-                Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim10)
+                Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Emerge)
                 Wait(10)
                 Call(SetSelfEnemyFlagBits, ENEMY_FLAG_SKIP_BATTLE | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, false)
                 Call(RandInt, 45, LVar0)
@@ -692,11 +692,11 @@ EvtScript N(EVS_NpcInit_MontyMole_01) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_01)))
-            Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim10)
+            Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Emerge)
         CaseEq(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
             IfEq(GF_FLO03_Defeated_MontyMoleA, false)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_01)))
-                Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Anim10)
+                Call(SetNpcAnimation, NPC_MontyMole_01, ANIM_MontyMole_Dark_Emerge)
                 Call(SetEnemyFlagBits, NPC_MontyMole_01, ENEMY_FLAG_PASSIVE, false)
             Else
                 Call(SetNpcPos, NPC_MontyMole_01, NPC_DISPOSE_LOCATION)
@@ -715,11 +715,11 @@ EvtScript N(EVS_NpcInit_MontyMole_02) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_02)))
-            Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim10)
+            Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Emerge)
         CaseEq(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
             IfEq(GF_FLO03_Defeated_MontyMoleB, false)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_02)))
-                Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Anim10)
+                Call(SetNpcAnimation, NPC_MontyMole_02, ANIM_MontyMole_Dark_Emerge)
                 Call(SetEnemyFlagBits, NPC_MontyMole_02, ENEMY_FLAG_PASSIVE, false)
             Else
                 Call(SetNpcPos, NPC_MontyMole_02, NPC_DISPOSE_LOCATION)
@@ -738,11 +738,11 @@ EvtScript N(EVS_NpcInit_MontyMole_03) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_03)))
-            Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim10)
+            Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Emerge)
         CaseEq(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
             IfEq(GF_FLO03_Defeated_MontyMoleC, false)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_03)))
-                Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Anim10)
+                Call(SetNpcAnimation, NPC_MontyMole_03, ANIM_MontyMole_Dark_Emerge)
                 Call(SetEnemyFlagBits, NPC_MontyMole_03, ENEMY_FLAG_PASSIVE, false)
             Else
                 Call(SetNpcPos, NPC_MontyMole_03, NPC_DISPOSE_LOCATION)
@@ -761,11 +761,11 @@ EvtScript N(EVS_NpcInit_MontyMole_04) = {
     Switch(GB_StoryProgress)
         CaseLt(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
             Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_04)))
-            Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim10)
+            Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Emerge)
         CaseEq(STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES)
             IfEq(GF_FLO03_Defeated_MontyMoleD, false)
                 Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MontyMole_04)))
-                Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Anim10)
+                Call(SetNpcAnimation, NPC_MontyMole_04, ANIM_MontyMole_Dark_Emerge)
                 Call(SetEnemyFlagBits, NPC_MontyMole_04, ENEMY_FLAG_PASSIVE, false)
             Else
                 Call(SetNpcPos, NPC_MontyMole_04, NPC_DISPOSE_LOCATION)
@@ -815,22 +815,22 @@ NpcData N(NpcData_Dayzee) = {
     .flags = BASE_PASSIVE_FLAGS,
     .drops = NO_DROPS,
     .animations = {
-        .idle   = ANIM_Dayzee_Anim01,
-        .walk   = ANIM_Dayzee_Anim02,
-        .run    = ANIM_Dayzee_Anim03,
-        .chase  = ANIM_Dayzee_Anim03,
-        .anim_4 = ANIM_Dayzee_Anim01,
-        .anim_5 = ANIM_Dayzee_Anim01,
-        .death  = ANIM_Dayzee_Anim08,
-        .hit    = ANIM_Dayzee_Anim08,
-        .anim_8 = ANIM_Dayzee_Anim06,
-        .anim_9 = ANIM_Dayzee_Anim07,
-        .anim_A = ANIM_Dayzee_Anim01,
-        .anim_B = ANIM_Dayzee_Anim01,
-        .anim_C = ANIM_Dayzee_Anim01,
-        .anim_D = ANIM_Dayzee_Anim01,
-        .anim_E = ANIM_Dayzee_Anim01,
-        .anim_F = ANIM_Dayzee_Anim01,
+        .idle   = ANIM_Dayzee_Idle,
+        .walk   = ANIM_Dayzee_Walk,
+        .run    = ANIM_Dayzee_Run,
+        .chase  = ANIM_Dayzee_Run,
+        .anim_4 = ANIM_Dayzee_Idle,
+        .anim_5 = ANIM_Dayzee_Idle,
+        .death  = ANIM_Dayzee_Hurt,
+        .hit    = ANIM_Dayzee_Hurt,
+        .anim_8 = ANIM_Dayzee_SingSlow,
+        .anim_9 = ANIM_Dayzee_SingFast,
+        .anim_A = ANIM_Dayzee_Idle,
+        .anim_B = ANIM_Dayzee_Idle,
+        .anim_C = ANIM_Dayzee_Idle,
+        .anim_D = ANIM_Dayzee_Idle,
+        .anim_E = ANIM_Dayzee_Idle,
+        .anim_F = ANIM_Dayzee_Idle,
     },
 };
 
@@ -843,22 +843,22 @@ NpcData N(NpcData_MontyMole_01) = {
     .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_IGNORE_PLAYER_COLLISION,
     .drops = NO_DROPS,
     .animations = {
-        .idle   = ANIM_MontyMole_Dark_Anim01,
-        .walk   = ANIM_MontyMole_Dark_Anim02,
-        .run    = ANIM_MontyMole_Dark_Anim03,
-        .chase  = ANIM_MontyMole_Dark_Anim03,
-        .anim_4 = ANIM_MontyMole_Dark_Anim01,
-        .anim_5 = ANIM_MontyMole_Dark_Anim01,
-        .death  = ANIM_MontyMole_Dark_Anim05,
-        .hit    = ANIM_MontyMole_Dark_Anim05,
-        .anim_8 = ANIM_MontyMole_Dark_Anim00,
-        .anim_9 = ANIM_MontyMole_Dark_Anim00,
-        .anim_A = ANIM_MontyMole_Dark_Anim00,
-        .anim_B = ANIM_MontyMole_Dark_Anim00,
-        .anim_C = ANIM_MontyMole_Dark_Anim00,
-        .anim_D = ANIM_MontyMole_Dark_Anim00,
-        .anim_E = ANIM_MontyMole_Dark_Anim00,
-        .anim_F = ANIM_MontyMole_Dark_Anim00,
+        .idle   = ANIM_MontyMole_Dark_Idle,
+        .walk   = ANIM_MontyMole_Dark_Walk,
+        .run    = ANIM_MontyMole_Dark_Run,
+        .chase  = ANIM_MontyMole_Dark_Run,
+        .anim_4 = ANIM_MontyMole_Dark_Idle,
+        .anim_5 = ANIM_MontyMole_Dark_Idle,
+        .death  = ANIM_MontyMole_Dark_Hurt,
+        .hit    = ANIM_MontyMole_Dark_Hurt,
+        .anim_8 = ANIM_MontyMole_Dark_Still,
+        .anim_9 = ANIM_MontyMole_Dark_Still,
+        .anim_A = ANIM_MontyMole_Dark_Still,
+        .anim_B = ANIM_MontyMole_Dark_Still,
+        .anim_C = ANIM_MontyMole_Dark_Still,
+        .anim_D = ANIM_MontyMole_Dark_Still,
+        .anim_E = ANIM_MontyMole_Dark_Still,
+        .anim_F = ANIM_MontyMole_Dark_Still,
     },
 };
 
@@ -871,22 +871,22 @@ NpcData N(NpcData_MontyMole_02) = {
     .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_IGNORE_PLAYER_COLLISION,
     .drops = NO_DROPS,
     .animations = {
-        .idle   = ANIM_MontyMole_Dark_Anim01,
-        .walk   = ANIM_MontyMole_Dark_Anim02,
-        .run    = ANIM_MontyMole_Dark_Anim03,
-        .chase  = ANIM_MontyMole_Dark_Anim03,
-        .anim_4 = ANIM_MontyMole_Dark_Anim01,
-        .anim_5 = ANIM_MontyMole_Dark_Anim01,
-        .death  = ANIM_MontyMole_Dark_Anim05,
-        .hit    = ANIM_MontyMole_Dark_Anim05,
-        .anim_8 = ANIM_MontyMole_Dark_Anim00,
-        .anim_9 = ANIM_MontyMole_Dark_Anim00,
-        .anim_A = ANIM_MontyMole_Dark_Anim00,
-        .anim_B = ANIM_MontyMole_Dark_Anim00,
-        .anim_C = ANIM_MontyMole_Dark_Anim00,
-        .anim_D = ANIM_MontyMole_Dark_Anim00,
-        .anim_E = ANIM_MontyMole_Dark_Anim00,
-        .anim_F = ANIM_MontyMole_Dark_Anim00,
+        .idle   = ANIM_MontyMole_Dark_Idle,
+        .walk   = ANIM_MontyMole_Dark_Walk,
+        .run    = ANIM_MontyMole_Dark_Run,
+        .chase  = ANIM_MontyMole_Dark_Run,
+        .anim_4 = ANIM_MontyMole_Dark_Idle,
+        .anim_5 = ANIM_MontyMole_Dark_Idle,
+        .death  = ANIM_MontyMole_Dark_Hurt,
+        .hit    = ANIM_MontyMole_Dark_Hurt,
+        .anim_8 = ANIM_MontyMole_Dark_Still,
+        .anim_9 = ANIM_MontyMole_Dark_Still,
+        .anim_A = ANIM_MontyMole_Dark_Still,
+        .anim_B = ANIM_MontyMole_Dark_Still,
+        .anim_C = ANIM_MontyMole_Dark_Still,
+        .anim_D = ANIM_MontyMole_Dark_Still,
+        .anim_E = ANIM_MontyMole_Dark_Still,
+        .anim_F = ANIM_MontyMole_Dark_Still,
     },
 };
 
@@ -899,22 +899,22 @@ NpcData N(NpcData_MontyMole_03) = {
     .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_IGNORE_PLAYER_COLLISION,
     .drops = NO_DROPS,
     .animations = {
-        .idle   = ANIM_MontyMole_Dark_Anim01,
-        .walk   = ANIM_MontyMole_Dark_Anim02,
-        .run    = ANIM_MontyMole_Dark_Anim03,
-        .chase  = ANIM_MontyMole_Dark_Anim03,
-        .anim_4 = ANIM_MontyMole_Dark_Anim01,
-        .anim_5 = ANIM_MontyMole_Dark_Anim01,
-        .death  = ANIM_MontyMole_Dark_Anim05,
-        .hit    = ANIM_MontyMole_Dark_Anim05,
-        .anim_8 = ANIM_MontyMole_Dark_Anim00,
-        .anim_9 = ANIM_MontyMole_Dark_Anim00,
-        .anim_A = ANIM_MontyMole_Dark_Anim00,
-        .anim_B = ANIM_MontyMole_Dark_Anim00,
-        .anim_C = ANIM_MontyMole_Dark_Anim00,
-        .anim_D = ANIM_MontyMole_Dark_Anim00,
-        .anim_E = ANIM_MontyMole_Dark_Anim00,
-        .anim_F = ANIM_MontyMole_Dark_Anim00,
+        .idle   = ANIM_MontyMole_Dark_Idle,
+        .walk   = ANIM_MontyMole_Dark_Walk,
+        .run    = ANIM_MontyMole_Dark_Run,
+        .chase  = ANIM_MontyMole_Dark_Run,
+        .anim_4 = ANIM_MontyMole_Dark_Idle,
+        .anim_5 = ANIM_MontyMole_Dark_Idle,
+        .death  = ANIM_MontyMole_Dark_Hurt,
+        .hit    = ANIM_MontyMole_Dark_Hurt,
+        .anim_8 = ANIM_MontyMole_Dark_Still,
+        .anim_9 = ANIM_MontyMole_Dark_Still,
+        .anim_A = ANIM_MontyMole_Dark_Still,
+        .anim_B = ANIM_MontyMole_Dark_Still,
+        .anim_C = ANIM_MontyMole_Dark_Still,
+        .anim_D = ANIM_MontyMole_Dark_Still,
+        .anim_E = ANIM_MontyMole_Dark_Still,
+        .anim_F = ANIM_MontyMole_Dark_Still,
     },
 };
 
@@ -927,22 +927,22 @@ NpcData N(NpcData_MontyMole_04) = {
     .flags = BASE_PASSIVE_FLAGS | ENEMY_FLAG_IGNORE_PLAYER_COLLISION,
     .drops = NO_DROPS,
     .animations = {
-        .idle   = ANIM_MontyMole_Dark_Anim01,
-        .walk   = ANIM_MontyMole_Dark_Anim02,
-        .run    = ANIM_MontyMole_Dark_Anim03,
-        .chase  = ANIM_MontyMole_Dark_Anim03,
-        .anim_4 = ANIM_MontyMole_Dark_Anim01,
-        .anim_5 = ANIM_MontyMole_Dark_Anim01,
-        .death  = ANIM_MontyMole_Dark_Anim05,
-        .hit    = ANIM_MontyMole_Dark_Anim05,
-        .anim_8 = ANIM_MontyMole_Dark_Anim00,
-        .anim_9 = ANIM_MontyMole_Dark_Anim00,
-        .anim_A = ANIM_MontyMole_Dark_Anim00,
-        .anim_B = ANIM_MontyMole_Dark_Anim00,
-        .anim_C = ANIM_MontyMole_Dark_Anim00,
-        .anim_D = ANIM_MontyMole_Dark_Anim00,
-        .anim_E = ANIM_MontyMole_Dark_Anim00,
-        .anim_F = ANIM_MontyMole_Dark_Anim00,
+        .idle   = ANIM_MontyMole_Dark_Idle,
+        .walk   = ANIM_MontyMole_Dark_Walk,
+        .run    = ANIM_MontyMole_Dark_Run,
+        .chase  = ANIM_MontyMole_Dark_Run,
+        .anim_4 = ANIM_MontyMole_Dark_Idle,
+        .anim_5 = ANIM_MontyMole_Dark_Idle,
+        .death  = ANIM_MontyMole_Dark_Hurt,
+        .hit    = ANIM_MontyMole_Dark_Hurt,
+        .anim_8 = ANIM_MontyMole_Dark_Still,
+        .anim_9 = ANIM_MontyMole_Dark_Still,
+        .anim_A = ANIM_MontyMole_Dark_Still,
+        .anim_B = ANIM_MontyMole_Dark_Still,
+        .anim_C = ANIM_MontyMole_Dark_Still,
+        .anim_D = ANIM_MontyMole_Dark_Still,
+        .anim_E = ANIM_MontyMole_Dark_Still,
+        .anim_F = ANIM_MontyMole_Dark_Still,
     },
 };
 

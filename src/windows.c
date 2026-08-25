@@ -49,63 +49,63 @@ SimpleWindowUpdateData gSimpleWindowUpdates[] = {
         .darkening = 0,
         .opacity = 0
     },
-    {
+    [WINDOW_UPDATE_SHOW] {
         .flags = 0,
         .windowFlagsSet = 0,
         .windowFlagsUnset = WINDOW_FLAG_HIDDEN | WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
-    {
+    [WINDOW_UPDATE_HIDE] {
         .flags = 0,
         .windowFlagsSet = WINDOW_FLAG_HIDDEN,
         .windowFlagsUnset = WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
-    {
+    [WINDOW_UPDATE_HIER_UPDATE] {
         .flags = SIMPLE_WINDOW_UPDATE_1,
         .windowFlagsSet = 0,
         .windowFlagsUnset = WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
-    {
+    [WINDOW_UPDATE_DARKENED] {
         .flags = SIMPLE_WINDOW_UPDATE_DARKENING,
         .windowFlagsSet = 0,
         .windowFlagsUnset = WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 100,
         .opacity = 0
     },
-    {
+    [WINDOW_UPDATE_TRANSPARENT] {
         .flags = SIMPLE_WINDOW_UPDATE_DARKENING,
         .windowFlagsSet = 0,
         .windowFlagsUnset = WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
-    {
+    [WINDOW_UPDATE_OPAQUE] {
         .flags = SIMPLE_WINDOW_UPDATE_OPACITY,
         .windowFlagsSet = 0,
         .windowFlagsUnset = WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 184
     },
-    {
+    [WINDOW_UPDATE_SHOW_TRANSPARENT] {
         .flags = SIMPLE_WINDOW_UPDATE_OPACITY,
         .windowFlagsSet = 0,
         .windowFlagsUnset = WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 255
     },
-    {
+    [WINDOW_UPDATE_SHOW_DARKENED] {
         .flags = SIMPLE_WINDOW_UPDATE_OPACITY,
         .windowFlagsSet = 0,
         .windowFlagsUnset = WINDOW_FLAG_HIDDEN | WINDOW_FLAG_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 184
     },
-    {
+    [WINDOW_UPDATE_9] {
         .flags = SIMPLE_WINDOW_UPDATE_DARKENING,
         .windowFlagsSet = 0,
         .windowFlagsUnset = WINDOW_FLAG_HIDDEN | WINDOW_FLAG_INITIAL_ANIMATION,
@@ -115,7 +115,7 @@ SimpleWindowUpdateData gSimpleWindowUpdates[] = {
     {},
     {},
     {},
-    {}
+    {},
 };
 
 u8 gWindowAppearScales[] = { 50, 80, 100, 105, 100 };
@@ -272,7 +272,7 @@ void render_windows(s32* windowsArray, s32 parent, s32 flags, s32 baseX, s32 bas
         width = childWindow->width;
         height = childWindow->height;
 
-        if (fpUpdateIdx > 0 && fpUpdateIdx < 14) {
+        if (fpUpdateIdx > 0 && fpUpdateIdx < ARRAY_COUNT(gSimpleWindowUpdates)) {
             SimpleWindowUpdateData* updateData = &gSimpleWindowUpdates[fpUpdateIdx];
             childWindow->flags |= updateData->windowFlagsSet;
             childWindow->flags &= ~updateData->windowFlagsUnset;

@@ -124,7 +124,7 @@ class HudElementScript:
             elif op == 0x14:
                 print(f"{indent}hs_RandomRestart({next(buf)}, {next(buf)})")
             elif op == 0x15:
-                print(f"{indent}hs_op_15({next(buf)})")
+                print(f"{indent}hs_SetVariable({next(buf)})")
             elif op == 0x17:
                 count = next(buf)
                 args = []

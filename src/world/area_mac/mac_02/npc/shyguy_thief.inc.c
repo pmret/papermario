@@ -38,7 +38,7 @@ EvtScript N(D_8024B6E8_82E9A8) = {
     Call(ShowMessageAtScreenPos, MSG_MAC_Bridge_0016, 160, 40)
     Call(SetCamProperties, CAM_DEFAULT, Float(3.0), -140, 20, -140, 400, 15, -6)
     Call(SetNpcPos, NPC_ShyGuy, -200, 20, -260)
-    Call(SetNpcAnimation, NPC_ShyGuy, ANIM_ShyGuy_Red_Anim04)
+    Call(SetNpcAnimation, NPC_ShyGuy, ANIM_ShyGuy_Red_Dash)
     Wait(10)
     Exec(N(D_8024B5AC_82E86C))
     Thread

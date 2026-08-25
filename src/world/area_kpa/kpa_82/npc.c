@@ -346,8 +346,8 @@ EvtScript N(EVS_NpcIdle_ShyGuy) = {
 };
 
 EvtScript N(EVS_Release_RedShyGuy) = {
-    Set(LVar3, ANIM_ShyGuy_Red_Anim04)
-    Set(LVar4, ANIM_ShyGuy_Red_Anim01)
+    Set(LVar3, ANIM_ShyGuy_Red_Dash)
+    Set(LVar4, ANIM_ShyGuy_Red_Idle)
     Set(LVar5, Ref(N(EVS_NpcAI_ShyGuy)))
     ExecWait(N(EVS_ReleaseFrom_RandomDoor))
     Return
@@ -355,15 +355,15 @@ EvtScript N(EVS_Release_RedShyGuy) = {
 };
 
 EvtScript N(EVS_Withdraw_RedShyGuy) = {
-    Set(LVar3, ANIM_ShyGuy_Red_Anim04)
+    Set(LVar3, ANIM_ShyGuy_Red_Dash)
     ExecWait(N(EVS_WithdrawTo_RandomDoor))
     Return
     End
 };
 
 EvtScript N(EVS_Release_RedShyGuy_Door_1) = {
-    Set(LVar3, ANIM_ShyGuy_Red_Anim04)
-    Set(LVar4, ANIM_ShyGuy_Red_Anim01)
+    Set(LVar3, ANIM_ShyGuy_Red_Dash)
+    Set(LVar4, ANIM_ShyGuy_Red_Idle)
     Set(LVar5, Ref(N(EVS_NpcAI_ShyGuy)))
     ExecWait(N(EVS_ReleaseFrom_Door_1))
     Return
@@ -371,15 +371,15 @@ EvtScript N(EVS_Release_RedShyGuy_Door_1) = {
 };
 
 EvtScript N(EVS_Withdraw_RedShyGuy_Door_1) = {
-    Set(LVar3, ANIM_ShyGuy_Red_Anim04)
+    Set(LVar3, ANIM_ShyGuy_Red_Dash)
     ExecWait(N(EVS_WithdrawTo_Door_1))
     Return
     End
 };
 
 EvtScript N(EVS_Release_BlueShyGuy) = {
-    Set(LVar3, ANIM_ShyGuy_Blue_Anim04)
-    Set(LVar4, ANIM_ShyGuy_Blue_Anim01)
+    Set(LVar3, ANIM_ShyGuy_Blue_Dash)
+    Set(LVar4, ANIM_ShyGuy_Blue_Idle)
     Set(LVar5, Ref(N(EVS_NpcAI_ShyGuy)))
     ExecWait(N(EVS_ReleaseFrom_RandomDoor))
     Return
@@ -387,15 +387,15 @@ EvtScript N(EVS_Release_BlueShyGuy) = {
 };
 
 EvtScript N(EVS_Withdraw_BlueShyGuy) = {
-    Set(LVar3, ANIM_ShyGuy_Blue_Anim04)
+    Set(LVar3, ANIM_ShyGuy_Blue_Dash)
     ExecWait(N(EVS_WithdrawTo_RandomDoor))
     Return
     End
 };
 
 EvtScript N(EVS_Release_BlueShyGuy_Door_2) = {
-    Set(LVar3, ANIM_ShyGuy_Blue_Anim04)
-    Set(LVar4, ANIM_ShyGuy_Blue_Anim01)
+    Set(LVar3, ANIM_ShyGuy_Blue_Dash)
+    Set(LVar4, ANIM_ShyGuy_Blue_Idle)
     Set(LVar5, Ref(N(EVS_NpcAI_ShyGuy)))
     ExecWait(N(EVS_ReleaseFrom_Door_2))
     Return
@@ -403,15 +403,15 @@ EvtScript N(EVS_Release_BlueShyGuy_Door_2) = {
 };
 
 EvtScript N(EVS_Withdraw_BlueShyGuy_Door_2) = {
-    Set(LVar3, ANIM_ShyGuy_Blue_Anim04)
+    Set(LVar3, ANIM_ShyGuy_Blue_Dash)
     ExecWait(N(EVS_WithdrawTo_Door_2))
     Return
     End
 };
 
 EvtScript N(EVS_Release_GreenShyGuy) = {
-    Set(LVar3, ANIM_ShyGuy_Green_Anim04)
-    Set(LVar4, ANIM_ShyGuy_Green_Anim01)
+    Set(LVar3, ANIM_ShyGuy_Green_Dash)
+    Set(LVar4, ANIM_ShyGuy_Green_Idle)
     Set(LVar5, Ref(N(EVS_NpcAI_ShyGuy)))
     ExecWait(N(EVS_ReleaseFrom_RandomDoor))
     Return
@@ -419,7 +419,7 @@ EvtScript N(EVS_Release_GreenShyGuy) = {
 };
 
 EvtScript N(EVS_Withdraw_GreenShyGuy) = {
-    Set(LVar3, ANIM_ShyGuy_Green_Anim04)
+    Set(LVar3, ANIM_ShyGuy_Green_Dash)
     ExecWait(N(EVS_WithdrawTo_RandomDoor))
     Return
     End
@@ -787,7 +787,7 @@ EvtScript N(EVS_AskQuestion) = {
     ExecWait(N(EVS_SetCam_AskQuestion))
     Switch(AB_KPA82_QuizRound)
         CaseEq(0)
-            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0035)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_0035)
             Call(ShowChoice, MSG_Choice_0046)
             IfEq(LVar0, 0)
                 Set(LVar0, ANSWER_CORRECT)
@@ -795,7 +795,7 @@ EvtScript N(EVS_AskQuestion) = {
                 Set(LVar0, ANSWER_WRONG)
             EndIf
         CaseEq(1)
-            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0036)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_0036)
             Call(ShowChoice, MSG_Choice_0047)
             IfEq(LVar0, 0)
                 Set(LVar0, ANSWER_CORRECT)
@@ -803,7 +803,7 @@ EvtScript N(EVS_AskQuestion) = {
                 Set(LVar0, ANSWER_WRONG)
             EndIf
         CaseEq(2)
-            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0037)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_0037)
             Call(ShowChoice, MSG_Choice_0048)
             IfEq(LVar0, 1)
                 Set(LVar0, ANSWER_CORRECT)
@@ -811,7 +811,7 @@ EvtScript N(EVS_AskQuestion) = {
                 Set(LVar0, ANSWER_WRONG)
             EndIf
         CaseEq(3)
-            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0038)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_0038)
             Call(ShowChoice, MSG_Choice_0049)
             IfEq(LVar0, 0)
                 Set(LVar0, ANSWER_CORRECT)
@@ -819,7 +819,7 @@ EvtScript N(EVS_AskQuestion) = {
                 Set(LVar0, ANSWER_WRONG)
             EndIf
         CaseEq(4)
-            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0039)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_0039)
             Call(ShowChoice, MSG_Choice_004A)
             IfEq(LVar0, 0)
                 Set(LVar0, ANSWER_CORRECT)
@@ -827,7 +827,7 @@ EvtScript N(EVS_AskQuestion) = {
                 Set(LVar0, ANSWER_WRONG)
             EndIf
         CaseEq(5)
-            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_003A)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_003A)
             Call(ShowChoice, MSG_Choice_004B)
             IfEq(LVar0, 2)
                 Set(LVar0, ANSWER_CORRECT)
@@ -835,7 +835,7 @@ EvtScript N(EVS_AskQuestion) = {
                 Set(LVar0, ANSWER_WRONG)
             EndIf
         CaseEq(6)
-            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_003B)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_003B)
             Call(ShowChoice, MSG_Choice_004C)
             IfEq(LVar0, 1)
                 Set(LVar0, ANSWER_CORRECT)
@@ -1048,16 +1048,16 @@ EvtScript N(EVS_NpcIdle_Door) = {
         Label(5)
     EndThread
     IfEq(GF_KPA82_SpokeToDoor, false)
-        Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_002E)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_002E)
         Set(GF_KPA82_SpokeToDoor, true)
     Else
-        Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_002F)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_002F)
     EndIf
     Call(ShowChoice, MSG_Choice_0013)
     IfEq(LVar0, 0)
-        Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0031)
+        Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_0031)
     Else
-        Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0030)
+        Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_0030)
         Call(ResetCam, CAM_DEFAULT, Float(4.0))
         Call(PanToTarget, CAM_DEFAULT, 0, false)
         Set(GF_KPA82_PassedThroughDoor, false)
@@ -1066,9 +1066,9 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EndIf
     Call(ShowChoice, MSG_Choice_0013)
     IfEq(LVar0, 0)
-        Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0032)
+        Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_0032)
     Else
-        Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0033)
+        Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_0033)
     EndIf
     Call(DisablePartnerAI, 0)
     Thread
@@ -1124,9 +1124,9 @@ EvtScript N(EVS_NpcIdle_Door) = {
                 Goto(30)
             EndIf
             IfEq(AB_KPA82_RightAnswers, 4)
-                Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_003D)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_003D)
             Else
-                Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_003C)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_003C)
             EndIf
         Else
             Add(AB_KPA82_WrongAnswers, 1)
@@ -1134,16 +1134,16 @@ EvtScript N(EVS_NpcIdle_Door) = {
                 Goto(20)
             EndIf
             IfEq(AB_KPA82_WrongAnswers, 1)
-                Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_003E)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_003E)
             EndIf
             IfEq(AB_KPA82_WrongAnswers, 2)
-                Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0040)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_0040)
             EndIf
         EndIf
         Add(AB_KPA82_QuizRound, 1)
         Goto(10)
     Label(20)
-    Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0041)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_0041)
     Set(LVar6, Float(2.0 / DT))
     ExecWait(N(EVS_SetCam_ViewRoom))
     Call(SetNpcPos, NPC_AntiGuy_01, -100, 0, 0)
@@ -1152,29 +1152,29 @@ EvtScript N(EVS_NpcIdle_Door) = {
     Call(InterpPlayerYaw, 315, 0)
     Call(InterpNpcYaw, NPC_PARTNER, 315, 0)
     ExecWait(N(EVS_SetDoorRots))
-    Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0042)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_0042)
     Call(PlayerFaceNpc, NPC_AntiGuy_02, 5)
     Call(GetPlayerPos, LVar3, LVar4, LVar5)
     Set(LVar6, Float(3.0 / DT))
     ExecWait(N(EVS_SetCam_BeforeBattle))
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Thread
-        Call(SetNpcAnimation, NPC_AntiGuy_01, ANIM_ShyGuy_Black_Anim04)
+        Call(SetNpcAnimation, NPC_AntiGuy_01, ANIM_ShyGuy_Black_Dash)
         Call(NpcMoveTo, NPC_AntiGuy_01, LVar0, LVar2, 30 * DT)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_AntiGuy_02, ANIM_ShyGuy_Black_Anim04)
+        Call(SetNpcAnimation, NPC_AntiGuy_02, ANIM_ShyGuy_Black_Dash)
         Call(NpcMoveTo, NPC_AntiGuy_02, LVar0, LVar2, 30 * DT)
     EndThread
     Thread
-        Call(SetNpcAnimation, NPC_AntiGuy_03, ANIM_ShyGuy_Black_Anim04)
+        Call(SetNpcAnimation, NPC_AntiGuy_03, ANIM_ShyGuy_Black_Dash)
         Call(NpcMoveTo, NPC_AntiGuy_03, LVar0, LVar2, 30 * DT)
     EndThread
     Call(GetPlayerPos, LVar0, LVar1, LVar2)
     Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     Call(StartBossBattle, SONG_SPECIAL_BATTLE)
     ExecWait(N(EVS_SetCam_AfterBattle))
-    Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0043)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_0043)
     Goto(40)
     Label(30)
     Thread
@@ -1193,7 +1193,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         Call(NpcMoveTo, NPC_PARTNER, 80, 145, 0)
         Call(EnablePartnerAI)
     EndThread
-    Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_003F)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Idle, ANIM_ShyGuy_Black_Idle, 0, MSG_CH8_003F)
     Label(40)
     Call(EnablePartnerAI)
     Call(PanToTarget, CAM_DEFAULT, 0, false)

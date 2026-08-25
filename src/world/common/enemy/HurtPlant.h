@@ -17,20 +17,20 @@
 
 #define HURT_PLANT_ANIMS \
 { \
-    .idle   = ANIM_HurtPlant_Anim01, \
-    .walk   = ANIM_HurtPlant_Anim01, \
-    .run    = ANIM_HurtPlant_Anim01, \
-    .chase  = ANIM_HurtPlant_Anim01, \
-    .anim_4 = ANIM_HurtPlant_Anim01, \
-    .anim_5 = ANIM_HurtPlant_Anim01, \
-    .death  = ANIM_HurtPlant_Anim0E, \
-    .hit    = ANIM_HurtPlant_Anim0E, \
-    .anim_8 = ANIM_HurtPlant_Anim01, \
-    .anim_9 = ANIM_HurtPlant_Anim01, \
-    .anim_A = ANIM_HurtPlant_Anim01, \
-    .anim_B = ANIM_HurtPlant_Anim01, \
-    .anim_C = ANIM_HurtPlant_Anim01, \
-    .anim_D = ANIM_HurtPlant_Anim01, \
-    .anim_E = ANIM_HurtPlant_Anim01, \
-    .anim_F = ANIM_HurtPlant_Anim01, \
+    .idle   = ANIM_HurtPlant_Hiding, \
+    .walk   = ANIM_HurtPlant_Hiding, \
+    .run    = ANIM_HurtPlant_Hiding, \
+    .chase  = ANIM_HurtPlant_Hiding, \
+    .anim_4 = ANIM_HurtPlant_Hiding, \
+    .anim_5 = ANIM_HurtPlant_Hiding, \
+    .death  = ANIM_HurtPlant_Hurt, \
+    .hit    = ANIM_HurtPlant_Hurt, \
+    .anim_8 = ANIM_HurtPlant_Hiding, \
+    .anim_9 = ANIM_HurtPlant_Hiding, \
+    .anim_A = ANIM_HurtPlant_Hiding, \
+    .anim_B = ANIM_HurtPlant_Hiding, \
+    .anim_C = ANIM_HurtPlant_Hiding, \
+    .anim_D = ANIM_HurtPlant_Hiding, \
+    .anim_E = ANIM_HurtPlant_Hiding, \
+    .anim_F = ANIM_HurtPlant_Hiding, \
 }

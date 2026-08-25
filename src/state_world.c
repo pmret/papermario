@@ -5,7 +5,7 @@
 void state_world_draw_aux_ui(void);
 
 void state_init_world(void) {
-    game_mode_set_fpDrawAuxUI(0, state_world_draw_aux_ui);
+    set_game_mode_render_frontUI(0, state_world_draw_aux_ui);
 }
 
 void state_step_world(void) {
