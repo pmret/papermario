@@ -45,6 +45,7 @@ jobs:
       - name: Install dependencies
         run: |
           python3 -m pip install -U -r tools/configure/requirements.txt --break-system-packages
+          python3 -m pip install -U -r tools/configure/requirements_extra.txt --break-system-packages
           cargo install pigment64
           cargo install crunch64-cli
 
