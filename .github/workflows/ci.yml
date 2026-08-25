@@ -29,7 +29,7 @@ jobs:
             ln -s "/orig/${version}/baserom.z64" "ver/${version}/baserom.z64"
           done
 
-      - name: Set up dependencies
+      - name: Obtain compilers
         run: |
           wget -qO- "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc
           wget -qO- "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc
@@ -38,7 +38,10 @@ jobs:
           wget -qO- "https://github.com/decompals/mips-binutils-2.6/releases/download/main/binutils-2.6-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2
           wget -qO- "https://github.com/decompals/mips-binutils-egcs-2.9.5/releases/latest/download/mips-binutils-egcs-2.9.5-linux.tar.gz" | tar zx -C tools/build/cc/egcs
           wget -qO- "https://github.com/decompals/mips-gcc-egcs-2.91.66/releases/latest/download/mips-gcc-egcs-2.91.66-linux.tar.gz" | tar zx -C tools/build/cc/egcs
-          pip install -U -r tools/configure/requirements.txt --break-system-packages
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install -U -r tools/configure/requirements.txt --break-system-packages
           cargo install pigment64
           cargo install crunch64-cli
 
