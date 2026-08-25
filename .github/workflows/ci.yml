@@ -1,0 +1,151 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+  packages: read
+  pull-requests: write
+
+jobs:
+  build_repo:
+    name: Build repo
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/pmret/papermario-build:main
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      # The build image provides extracted compiler binaries in /compiler and
+      # baseroms in /orig/<version>/baserom.z64.
+      - name: Provide build dependencies
+        run: |
+          cp -a /compiler/. tools/build/cc/
+          for version in us jp ique pal; do
+            ln -s "/orig/${version}/baserom.z64" "ver/${version}/baserom.z64"
+          done
+
+      - name: Setup
+        run: ./configure
+
+      - name: Build
+        run: bash -o pipefail -c 'ninja 2>&1 | tee build_log.txt'
+
+      - name: Generate pull request report
+        if: >-
+          github.event_name == 'pull_request' &&
+          github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          : > pr-comment.md
+          for version in us jp ique pal; do
+            python3 progress.py "$version" --pr-comment >> pr-comment.md
+          done
+          ./tools/warnings_count/compare_warnings.py --pr-message >> pr-comment.md
+
+      - name: Update pull request report
+        if: >-
+          github.event_name == 'pull_request' &&
+          github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- papermario-build-report -->';
+            const report = fs.readFileSync('pr-comment.md', 'utf8').trim();
+
+            if (!report) {
+              return;
+            }
+
+            const body = `${marker}\n${report}`;
+            const comments = await github.paginate(
+              github.rest.issues.listComments,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                per_page: 100,
+              },
+            );
+            const existing = comments.find((comment) =>
+              comment.user.type === 'Bot' && comment.body.includes(marker),
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+      - name: Generate progress reports
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          mkdir reports
+
+          for version in us jp ique pal; do
+            python3 progress.py "$version" --csv > "reports/progress_${version}.csv"
+            python3 progress.py "$version" --shield-json > "reports/progress_${version}_shield.json"
+          done
+
+          grep warning build_log.txt | sort > reports/warnings.txt || true
+
+      - name: Stage progress reports on papermar.io
+        if: >-
+          github.event_name == 'push' &&
+          github.ref == 'refs/heads/main' &&
+          github.repository == 'pmret/papermario'
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: reports/*
+          target: /tmp/papermario-ci-${{ github.run_id }}
+          strip_components: 1
+
+      - name: Publish progress reports
+        if: >-
+          github.event_name == 'push' &&
+          github.ref == 'refs/heads/main' &&
+          github.repository == 'pmret/papermario'
+        uses: appleboy/ssh-action@v1
+        env:
+          REPORTS_DIR: /tmp/papermario-ci-${{ github.run_id }}
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          envs: REPORTS_DIR
+          script: |
+            set -eu
+            target=/var/www/papermar.io/html/reports
+
+            for version in us jp ique pal; do
+              cat "$REPORTS_DIR/progress_${version}.csv" >> "$target/progress_${version}.csv"
+              cp "$REPORTS_DIR/progress_${version}_shield.json" "$target/progress_${version}_shield.json"
+            done
+
+            cp "$REPORTS_DIR/warnings.txt" "$target/warnings.txt"
+            rm -r -- "$REPORTS_DIR"
+
+      - name: Build shifted US ROM
+        run: |
+          ./configure --shift us
+          ninja
