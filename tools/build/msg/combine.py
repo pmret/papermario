@@ -111,7 +111,7 @@ if __name__ == "__main__":
         f.write(b"\0\0\0\0")
 
     if header_file is not None:
-        with open(header_file, "w") as f:
+        with open(header_file, "w", encoding="utf-8") as f:
             f.write(f"#ifndef _MESSAGE_IDS_H_\n" f"#define _MESSAGE_IDS_H_\n" "\n" '#include "messages.h"\n' "\n")
 
             for message in messages:

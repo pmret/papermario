@@ -32,7 +32,7 @@ def sort_by_id_or_auto(list):
 def from_yaml(yaml_path: Path, asset_stack: Tuple[Path, ...]) -> SBN:
     sbn = SBN()
 
-    with yaml_path.open("r") as f:
+    with yaml_path.open("r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
     unknown_bin_path = get_asset_path("audio/unknown.bin", asset_stack)

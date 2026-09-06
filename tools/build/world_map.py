@@ -32,7 +32,7 @@ def generate(in_xml: Path, out_c: Path):
     xml = ET.parse(in_xml)
     ScriptList = xml.getroot()
 
-    with open(out_c, "w") as f:
+    with open(out_c, "w", encoding="utf-8") as f:
         f.write("#ifndef WORLD_MAP_H\n")
         f.write("#define WORLD_MAP_H\n")
         f.write("/* This file is auto-generated. Do not edit. */\n\n")

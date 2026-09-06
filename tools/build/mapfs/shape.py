@@ -646,7 +646,7 @@ def run(in_bin: Path, out: Path) -> None:
         shape = ShapeFile(map_name, file_bytes)
         shape.digest()
 
-        with open(out, "w") as out_file:
+        with open(out, "w", encoding="utf-8") as out_file:
             shape.write_to_c(out_file)
 
 
