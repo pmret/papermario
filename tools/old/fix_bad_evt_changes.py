@@ -19,7 +19,7 @@ for filename, line_number, bad_symbol_name in problems:
 
     old_line = old_lines[line_number - 1].strip()
 
-    with open(filename, "r") as f:
+    with open(filename, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
     line = lines[line_number - 1]
@@ -36,5 +36,5 @@ for filename, line_number, bad_symbol_name in problems:
 
     lines[line_number - 1] = line.replace(bad_symbol_name, good_symbol_name)
 
-    with open(filename, "w") as f:
+    with open(filename, "w", encoding="utf-8") as f:
         f.writelines(lines)

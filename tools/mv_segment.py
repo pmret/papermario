@@ -18,10 +18,10 @@ if os.path.exists(f"src/{args.src}.c"):
     print("moving c file")
     os.rename(f"src/{args.src}.c", f"src/{args.dest}.c")
 
-    with open(f"src/{args.dest}.c") as f:
+    with open(f"src/{args.dest}.c", "r", encoding="utf-8") as f:
         content = f.read()
 
-    with open(f"src/{args.dest}.c", "w") as f:
+    with open(f"src/{args.dest}.c", "w", encoding="utf-8") as f:
         f.write(content.replace(f'"{args.src}"', f'"{args.dest}"'))
 
 if os.path.exists(f"ver/current/asm/nonmatchings/{args.src}"):

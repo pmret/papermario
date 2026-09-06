@@ -1,4 +1,4 @@
-with open("errs.txt") as f:
+with open("errs.txt", "r", encoding="utf-8") as f:
     inlines = f.readlines()
 
 renames = {}
@@ -25,11 +25,11 @@ pairs = []
 for k, v in sorted(renames.items()):
     pairs.append((k, v))
 
-with open("bloop.txt") as f:
+with open("bloop.txt", "r", encoding="utf-8") as f:
     blooplines = f.readlines()
 
 
-with open("duplicate_renames.txt", "w", newline="\n") as f:
+with open("duplicate_renames.txt", "w", newline="\n", encoding="utf-8") as f:
     for pair in pairs:
         first = pair[0]
         second = pair[1]

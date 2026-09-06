@@ -125,7 +125,7 @@ def pretty_print_xml(tree: ET.ElementTree, path: Path):
     indent(root)
     xml_str = ET.tostring(root, encoding="unicode")
     xml_str = re.sub(" />", "/>", xml_str)
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.write(xml_str)
 
 
@@ -720,12 +720,12 @@ class N64SegPm_sprites(Segment):
         super().__init__(rom_start, rom_end, type, name, vram_start, args=args, yaml=yaml)
 
         path = Path(__file__).parent / f"npc_sprite_names.yaml"
-        with path.open("r") as f:
+        with path.open("r", encoding="utf-8") as f:
             self.npc_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
         self.npc_cfg_modified_time = path.stat().st_mtime
 
         path = Path(__file__).parent / f"player_sprite_names.yaml"
-        with path.open("r") as f:
+        with path.open("r", encoding="utf-8") as f:
             self.player_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
         self.player_cfg_modified_time = path.stat().st_mtime
 

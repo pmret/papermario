@@ -18,7 +18,7 @@ deletes = []
 
 
 def handle_file(f_path, try_rename_file=False):
-    with open(f_path) as f:
+    with open(f_path, "r", encoding="utf-8") as f:
         f_text_orig = f.read()
 
     if try_rename_file:
@@ -44,7 +44,7 @@ def handle_file(f_path, try_rename_file=False):
         to_join.append(f_text[pos:])
         f_text = "".join(to_join)
         # save changes
-        with open(f_path, "w", newline="\n") as f:
+        with open(f_path, "w", newline="\n", encoding="utf-8") as f:
             f.write(f_text)
 
 
@@ -53,7 +53,7 @@ def apply_renames(file_path: str):
 
     # Read input file
     # One valid whitespace-separated find-replace pair is given per line
-    with open(file_path) as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         renames_text = f.readlines()
 
     # Create dict of old -> new names

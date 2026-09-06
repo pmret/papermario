@@ -54,9 +54,8 @@ def single_translation(file_path):
     ret = ""
 
     try:
-        file = open(file_path)
-        file_content = file.read()
-        file.close()
+        with open(file_path, "r", encoding="utf-8") as file:
+            file_content = file.read()
     except:
         print("File not found at the given path.")
         return "t", "y"
@@ -80,9 +79,8 @@ def recursive_translation(database_path):
     stuff = [f for f in glob(database_path + "/**/*.*", recursive=True) if f.endswith(".enum") or f.endswith(".flags")]
     for element in stuff:
         try:
-            file = open(element)
-            file_content = file.read()
-            file.close()
+            with open(element, "r", encoding="utf-8") as file:
+                file_content = file.read()
         except:
             continue
 
@@ -111,9 +109,8 @@ def main(args):
 
     ret += result
 
-    file = open("" + enum_name + ".txt", "w+")
-    file.write(ret)
-    file.close()
+    with open("" + enum_name + ".txt", "w+", encoding="utf-8") as file:
+        file.write(ret)
 
 
 parser = argparse.ArgumentParser(

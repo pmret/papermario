@@ -33,7 +33,7 @@ def search_address(target_addr, map=get_map()):
     cur_file = "<no file>"
     prev_file = cur_file
     prev_line = ""
-    with open(map) as f:
+    with open(map, "r", encoding="utf-8") as f:
         for line in f:
             if "load address" in line:
                 # Ignore .bss sections if we're looking for a ROM address
@@ -79,7 +79,7 @@ def search_symbol(target_sym, map=get_map()):
     ram_offset = None
     cur_file = "<no file>"
     prev_line = ""
-    with open(map) as f:
+    with open(map, "r", encoding="utf-8") as f:
         for line in f:
             if "load address" in line:
                 ram = int(line[16 : 16 + 18], 0)

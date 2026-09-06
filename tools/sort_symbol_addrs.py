@@ -11,7 +11,7 @@ for version in ["us", "jp"]:
     syms = {}
     file_path = os.path.join(script_dir, f"../ver/{version}/symbol_addrs.txt")
 
-    with open(file_path) as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         symbol_lines = f.readlines()
 
     for line in symbol_lines:
@@ -22,6 +22,6 @@ for version in ["us", "jp"]:
             sys.exit(55)
         syms[addr] = line
 
-    with open(file_path, newline="\n", mode="w") as f:
+    with open(file_path, "w", newline="\n", encoding="utf-8") as f:
         for addr in sorted(syms):
             f.write(syms[addr])
