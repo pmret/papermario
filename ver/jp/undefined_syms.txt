@@ -373,22 +373,8 @@ dead_Entity_HiddenPanel = Entity_HiddenPanel + 0xDD30;
 dead_Entity_Chest = Entity_Chest + 0xDD30;
 dead_osSyncPrintf = osSyncPrintf + 0x4488C;
 
-filemenu_ROM_START = 0x0016B550;
-filemenu_ROM_END = 0x01749F0;
-filemenu_VRAM = 0x80242370;
-filemenu_TEXT_START = 0x80242370;
-filemenu_TEXT_END = 0x802492C0;
-filemenu_DATA_START = 0x802492C0;
-filemenu_RODATA_END = 0x8024B810;
-filemenu_BSS_START = 0x8024B810;
-filemenu_BSS_END = 0x8024B8B0;
-
 sprite_shading_profiles_data_ROM_START = sprite_shading_profiles_ROM_START + 0x1D0;
 
 // subsequent segments
 gBackgroundImage = 0x80200000;
-filemenu_update = 0x80242970;
-filemenu_init = 0x802440B0;
-filemenu_cleanup = 0x802442D0;
-filemenu_get_exit_mode = 0x80244394;
 heap_battleHead = 0x803DA800;

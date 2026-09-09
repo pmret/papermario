@@ -50,6 +50,13 @@ extern u8   D_filemenu_80250954[4];
 #define DELETE_CONFIRM_PROMPT_WIDTH   (D_filemenu_80250920[gCurrentLanguage])
 #define FILE_COPIED_MESSAGE_WIDTH     (D_filemenu_80250954[gCurrentLanguage])
 #define COPY_CONFIRM_PROMPT_WIDTH     (D_filemenu_80250940[gCurrentLanguage])
+#elif VERSION_JP
+#define SAVE_OFFSET_X                 6
+#define COPY_OFFSET_X                 26
+#define SELECT_CONFIRM_PROMPT_WIDTH   192
+#define DELETE_CONFIRM_PROMPT_WIDTH   192
+#define FILE_COPIED_MESSAGE_WIDTH     154
+#define COPY_CONFIRM_PROMPT_WIDTH     182
 #else
 #define SAVE_OFFSET_X                 25
 #define COPY_OFFSET_X                 16
@@ -70,6 +77,15 @@ BSS u8 filemenu_filename[8];
 #define FILE_NUMBER_X       36
 #define FILE_NAME_X         48
 #define NUMBER_OFFSET_Y     1
+#elif VERSION_JP
+#define OFFSET_WIDTH        0
+#define DELETE_OFFSET_X     6
+#define CENTER_CANCEL_X     18
+#define RIGHT_CANCEL_X      18
+#define FILE_X              5
+#define FILE_NUMBER_X       31
+#define FILE_NAME_X         43
+#define NUMBER_OFFSET_Y     0
 #else
 #define OFFSET_WIDTH        0
 #define DELETE_OFFSET_X     8
@@ -183,8 +199,13 @@ MenuWindowBP filemenu_main_windowBPs[] = {
     {
         .windowID = WIN_FILES_OPTION_LEFT,
         .unk_01 = 0,
+#if VERSION_JP
+        .pos = { .x = 9, .y = 171 },
+        .width = 80,
+#else
         .pos = { .x = 5, .y = 171 },
         .width = 88,
+#endif
         .height = 16,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &filemenu_draw_contents_option_left,
@@ -198,7 +219,11 @@ MenuWindowBP filemenu_main_windowBPs[] = {
         .windowID = WIN_FILES_OPTION_CENTER,
         .unk_01 = 0,
         .pos = { .x = 0, .y = 171 },
+#if VERSION_JP
+        .width = 80,
+#else
         .width = 88,
+#endif
         .height = 16,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &filemenu_draw_contents_option_center,
@@ -211,8 +236,13 @@ MenuWindowBP filemenu_main_windowBPs[] = {
     {
         .windowID = WIN_FILES_OPTION_RIGHT,
         .unk_01 = 0,
+#if VERSION_JP
+        .pos = { .x = 199, .y = 171 },
+        .width = 80,
+#else
         .pos = { .x = 195, .y = 171 },
         .width = 88,
+#endif
         .height = 16,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &filemenu_draw_contents_option_right,
@@ -239,8 +269,13 @@ MenuWindowBP filemenu_main_windowBPs[] = {
     {
         .windowID = WIN_FILES_SLOT3_TITLE,
         .unk_01 = 0,
+#if VERSION_JP
+        .pos = { .x = 4, .y = -8 },
+        .width = 121,
+#else
         .pos = { .x = 3, .y = -8 },
         .width = 124 + OFFSET_WIDTH,
+#endif
         .height = 15,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &filemenu_draw_contents_file_2_title,
@@ -267,8 +302,13 @@ MenuWindowBP filemenu_main_windowBPs[] = {
     {
         .windowID = WIN_FILES_SLOT4_TITLE,
         .unk_01 = 0,
+#if VERSION_JP
+        .pos = { .x = 4, .y = -8 },
+        .width = 121,
+#else
         .pos = { .x = 3, .y = -8 },
         .width = 124 + OFFSET_WIDTH,
+#endif
         .height = 15,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &filemenu_draw_contents_file_3_title,
@@ -295,8 +335,13 @@ MenuWindowBP filemenu_main_windowBPs[] = {
     {
         .windowID = WIN_FILES_SLOT1_TITLE,
         .unk_01 = 0,
+#if VERSION_JP
+        .pos = { .x = 4, .y = -8 },
+        .width = 121,
+#else
         .pos = { .x = 3, .y = -8 },
         .width = 124 + OFFSET_WIDTH,
+#endif
         .height = 15,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &filemenu_draw_contents_file_0_title,
@@ -323,8 +368,13 @@ MenuWindowBP filemenu_main_windowBPs[] = {
     {
         .windowID = WIN_FILES_SLOT2_TITLE,
         .unk_01 = 0,
+#if VERSION_JP
+        .pos = { .x = 4, .y = -8 },
+        .width = 121,
+#else
         .pos = { .x = 3, .y = -8 },
         .width = 124 + OFFSET_WIDTH,
+#endif
         .height = 15,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &filemenu_draw_contents_file_1_title,
@@ -365,7 +415,11 @@ void filemenu_draw_contents_title(
     switch (menu->state) {
         case FM_MAIN_SELECT_FILE:
             msgIdx = FILE_MESSAGE_SELECT_FILE_TO_START;
+#if VERSION_JP
+            xOffset = 11;
+#else
             xOffset = 9;
+#endif
             yOffset = 4;
             break;
         case FM_MAIN_SELECT_DELETE:
@@ -447,7 +501,11 @@ void filemenu_draw_contents_option_left(
     if (menu->col == 0 && menu->row == 2) {
         filemenu_set_cursor_goal_pos(WIN_FILES_OPTION_LEFT, baseX, baseY + 8);
     }
-    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + 8 + OFFSET_WIDTH, baseY + 2, 255, 0, 1);
+#if VERSION_JP
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + 10, baseY + 2, 255, 0, 1);
+#else
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + (8 + OFFSET_WIDTH), baseY + 2, 255, 0, 1);
+#endif
 #endif
 }
 
@@ -510,10 +568,18 @@ void filemenu_draw_contents_option_center(
             break;
         default:
             msgIdx = FILE_MESSAGE_COPY_FILE;
+#if VERSION_JP
+            xOffset = 6;
+#else
             xOffset = 14;
+#endif
             yOffset = 0;
             if (menu->col == 1 && menu->row == 2) {
+#if VERSION_JP
+                filemenu_set_cursor_goal_pos(WIN_FILES_OPTION_CENTER, baseX + (-4), baseY + 8);
+#else
                 filemenu_set_cursor_goal_pos(WIN_FILES_OPTION_CENTER, baseX + 4, baseY + 8);
+#endif
             }
             break;
     }
@@ -574,7 +640,11 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
 #if VERSION_PAL
         xOffset = D_filemenu_802508E4[gCurrentLanguage];
 #else
+#if VERSION_JP
+        xOffset = 40;
+#else
         xOffset = 30;
+#endif
 #endif
         filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FIRST_PLAY), baseX + xOffset, baseY + 20, 255, 0xA, 0);
         return;
@@ -583,7 +653,11 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
 #if VERSION_PAL
     xOffset = D_filemenu_802508D8[gCurrentLanguage];
 #else
+#if VERSION_JP
+    xOffset = 31;
+#else
     xOffset = 34;
+#endif
 #endif
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_LEVEL), baseX + xOffset, baseY + 10, 255, 0xA, 1);
     temp_s3_2 = gSaveSlotMetadata[fileIdx].level;
@@ -593,7 +667,11 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
 #if VERSION_PAL
     xOffset = D_filemenu_802508DC[gCurrentLanguage];
 #else
+#if VERSION_JP
+    xOffset = 15;
+#else
     xOffset = 11;
+#endif
 #endif
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PLAY_TIME), baseX + xOffset, baseY + 24, 255, 0xA, 1);
 
@@ -602,14 +680,32 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
         temp_s3_2 = MAX_DISPLAYED_TIME;
     }
 
+#if VERSION_JP
+    draw_number((temp_s3_2 / 2160000) % 10, baseX + 72, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+#else
     draw_number((temp_s3_2 / 2160000) % 10, baseX + 76, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+#endif
     temp_s1_2 = temp_s3_2 / 216000;
+#if VERSION_JP
+    draw_number(temp_s1_2 - ((temp_s3_2 / 2160000) * 10), baseX + 81, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 90, baseY + 23, 255, 0xA, 1);
+#else
     draw_number(temp_s1_2 - ((temp_s3_2 / 2160000) * 10), baseX + 85, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 95, baseY + 23, 255, 0xA, 1);
+#endif
+#if VERSION_JP
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 90, baseY + 18, 255, 0xA, 1);
+#else
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 95, baseY + 18, 255, 0xA, 1);
+#endif
     temp_s0_3 = temp_s3_2 / 36000;
+#if VERSION_JP
+    draw_number(temp_s0_3 - (temp_s1_2 * 6), baseX + 97, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number((temp_s3_2 / 3600) - (temp_s0_3 * 10), baseX + 106, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+#else
     draw_number(temp_s0_3 - (temp_s1_2 * 6), baseX + 100, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
     draw_number((temp_s3_2 / 3600) - (temp_s0_3 * 10), baseX + 109, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+#endif
 
     for (i = 0; i < 7; i++) {
         if (i < gSaveSlotMetadata[fileIdx].spiritsRescued) {
@@ -667,14 +763,28 @@ void filemenu_draw_contents_file_title(
     s32 opacity, s32 darkening)
 {
     if (filemenu_currentMenu == FILE_MENU_MAIN && menu->selected == fileIdx) {
+#if VERSION_JP
+        filemenu_set_cursor_goal_pos(fileIdx + 60, baseX - 4, baseY + 8);
+#else
         filemenu_set_cursor_goal_pos(fileIdx + 60, baseX - 3, baseY + 8);
+#endif
     }
 
+#if !VERSION_JP
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + FILE_X, baseY + 1, 255, 0, 1);
+#endif
 
     if (!gSaveSlotHasData[fileIdx]) {
+#if VERSION_JP
+        hud_element_set_render_pos(filemenu_mainHIDs[14], baseX + 18, baseY + 7);
+        hud_element_draw_without_clipping(filemenu_mainHIDs[14]);
+#endif
         draw_number(fileIdx + 1, baseX + FILE_NUMBER_X, baseY + 1 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE);
     } else {
+#if VERSION_JP
+        hud_element_set_render_pos(filemenu_mainHIDs[14], baseX + 18, baseY + 7);
+        hud_element_draw_without_clipping(filemenu_mainHIDs[14]);
+#endif
         draw_number(fileIdx + 1, baseX + FILE_NUMBER_X, baseY + 1 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE);
         filemenu_draw_file_name(
             gSaveSlotMetadata[fileIdx].filename,
@@ -782,7 +892,11 @@ void filemenu_main_init(MenuPanel* menu) {
         gWindows[WIN_FILES_TITLE].height = 25;
     } else {
         gWindows[WIN_FILES_TITLE].pos.y = 1;
+#if VERSION_JP
+        gWindows[WIN_FILES_TITLE].width = 168;
+#else
         gWindows[WIN_FILES_TITLE].width = 162;
+#endif
         gWindows[WIN_FILES_TITLE].height = 25;
     }
 #endif

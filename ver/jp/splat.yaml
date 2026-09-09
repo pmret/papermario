@@ -1230,7 +1230,29 @@ segments:
       - [0x16A010, .data,      pause_gfx]
     - [0x16B3F0]
 
-  - [0x16B550, bin]
+  - name: filemenu
+    type: code
+    dir: filemenu
+    start: 0x16B550
+    vram: 0x80242370
+    subsegments:
+    - [auto, c, filemenu_common]
+    - [auto, c, filemenu_main]
+    - [auto, c, filemenu_yesno]
+    - [auto, c, filemenu_info]
+    - [auto, c, filemenu_createfile]
+    - [auto, c, filemenu_gfx]
+    - [auto, c, filemenu_msg]
+    - [auto, c, filemenu_styles]
+    - start: 0x172B20
+      type: .data
+      name: filemenu_gfx
+      subsegments:
+      - [auto, ia4, copyarrow, 64, 16]
+      - [auto, rgba32, corners_yellow, 16, 64]
+      - [auto, ia8, corners_gray, 16, 32]
+      - [auto, .data, filemenu_gfx]
+    - [0x1748E0]
 
   - name: battle_code
     type: code

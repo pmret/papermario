@@ -15,6 +15,10 @@
 #define START_GAME_NUMBER_X             42
 #define START_GAME_QMARK_X              (-2)
 #define NUMBER_OFFSET_Y                 1
+#elif VERSION_JP
+#define COPY_FILE_NUMBER_X              52
+#define CREATE_FILE_FILE_X              164
+#define NUMBER_OFFSET_Y                 (-2)
 #elif VERSION_PAL
 extern u8 D_filemenu_80250924[4];
 extern u8 D_filemenu_80250928[4];
@@ -57,6 +61,10 @@ extern u8 D_filemenu_80250964[4];
 #define DELETE_FILE_MESSAGE_WIDTH       (D_filemenu_80250930[gCurrentLanguage])
 #define COPY_FILE_MESSAGE_WIDTH         (D_filemenu_80250954[gCurrentLanguage])
 #define CREATE_FILE_MESSAGE_WIDTH       (D_filemenu_80250964[gCurrentLanguage])
+#elif VERSION_JP
+#define DELETE_FILE_MESSAGE_WIDTH       134
+#define COPY_FILE_MESSAGE_WIDTH         154
+#define CREATE_FILE_MESSAGE_WIDTH       142
 #else
 #define DELETE_FILE_MESSAGE_WIDTH       182
 #define COPY_FILE_MESSAGE_WIDTH         154
@@ -194,6 +202,11 @@ void filemenu_yesno_draw_prompt_contents(
 
     switch (menu->state) {
         case FM_CONFIRM_DELETE:
+#if VERSION_JP
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_22), baseX + 10, baseY + 4, 0xFF, 0, 0);
+            draw_number(filemenu_menus[FILE_MENU_MAIN]->selected + 1, baseX + 62, baseY + 4, DRAW_NUMBER_CHARSET_NORMAL, MSG_PAL_WHITE, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE), baseX + 63, baseY + 4, 0xFF, 0, 0);
+#else
             xOffset = DELETE_FILE_DELETE_X;
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE), baseX + xOffset, baseY + 4, 0xFF, 0, 0);
             xOffset = DELETE_FILE_FILE_X;
@@ -202,6 +215,7 @@ void filemenu_yesno_draw_prompt_contents(
             draw_number(filemenu_menus[FILE_MENU_MAIN]->selected + 1, baseX + xOffset, baseY + 6 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_NORMAL, MSG_PAL_WHITE, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
             xOffset += DELETE_FILE_QMARK_X;
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_QUESTION), baseX + xOffset, baseY + 4, 0xFF, 0, 0);
+#endif
             break;
         case FM_CONFIRM_COPY:
             xOffset = 10;
@@ -216,7 +230,11 @@ void filemenu_yesno_draw_prompt_contents(
             xOffset++;
 #endif
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_WILL_BE_DELETED), baseX + xOffset, baseY + 4, 0xFF, 0, 0);
+#if VERSION_JP
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_OK_TO_COPY_TO_THIS_FILE), baseX + 26, baseY + 18, 0xFF, 0, 0);
+#else
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_OK_TO_COPY_TO_THIS_FILE), baseX + 10, baseY + 18, 0xFF, 0, 0);
+#endif
             break;
 #if !VERSION_PAL
         case FM_CONFIRM_DUMMY:
@@ -236,10 +254,18 @@ void filemenu_yesno_draw_prompt_contents(
             xOffset = ((CREATE_FILE_FILE_X - 17) - (i * 11)) / 2;
             filemenu_draw_file_name(filemenu_filename, i + 1, baseX + xOffset, baseY + 22, 0xFF, 0, 8, 0xB);
             xOffset += (i + 1) * 11;
+#if VERSION_JP
+            xOffset += 6;
+#endif
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_20), baseX + xOffset, baseY + 22, 0xFF, 0, 0);
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_OK), baseX + 70, baseY + 38, 0xFF, 0, 0);
             break;
         case FM_CONFIRM_START:
+#if VERSION_JP
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_22), baseX + 10, baseY + 4, 0xFF, 0, 0);
+            draw_number(filemenu_menus[FILE_MENU_MAIN]->selected + 1, baseX + 62, baseY + 4, DRAW_NUMBER_CHARSET_NORMAL, MSG_PAL_WHITE, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_START_GAME_WITH), baseX + 63, baseY + 4, 0xFF, 0, 0);
+#else
             xOffset = START_GAME_START_WITH_X;
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_START_GAME_WITH), baseX + xOffset, baseY + 4, 0xFF, 0, 0);
 #if VERSION_PAL
@@ -256,6 +282,7 @@ void filemenu_yesno_draw_prompt_contents(
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PAL_QUESTION_24), baseX + xOffset, baseY + 4, 0xFF, 0, 0);
 #else
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_QUESTION), baseX + xOffset, baseY + 4, 0xFF, 0, 0);
+#endif
 #endif
             break;
     }
