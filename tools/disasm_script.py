@@ -21,7 +21,7 @@ def script_lib(offset=0):
         LIB_LINE_RE = re.compile(r"\s+:\s+")
         NAME_RE = re.compile(r"({[^}]*})?\s*([a-zA-Z0-9_]+)")
         for filename in Path(path.dirname(__file__), "star-rod", "database").rglob("*.lib"):
-            with open(filename, "r", encoding='utf-8') as file:
+            with open(filename, "r", encoding="utf-8") as file:
                 for line in file.readlines():
                     parts = LIB_LINE_RE.split(line)
                     if len(parts) >= 3:
@@ -37,7 +37,7 @@ def script_lib(offset=0):
 
         repo_root = Path(__file__).resolve().parent.parent
         symbols = Path(repo_root / "ver" / "current" / "symbol_addrs.txt")
-        with open(symbols, "r", encoding='utf-8') as file:
+        with open(symbols, "r", encoding="utf-8") as file:
             for line in file.readlines():
                 s = [s.strip() for s in line.split("=", 1)]
                 name = s[0]
