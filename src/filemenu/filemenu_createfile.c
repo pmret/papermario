@@ -19,6 +19,11 @@ s32 D_8024A18C = -4;
 #define ROWS (8)
 extern u8 D_filemenu_80250958[];
 extern u8 D_filemenu_80250960[];
+#elif VERSION_JP
+#define WINDOW_1_Y (0)
+#define WINDOW_2_Y (47)
+#define WINDOW_2_HEIGHT (146)
+#define ROWS (9)
 #else
 #define WINDOW_1_Y (10)
 #define WINDOW_2_Y (67)
@@ -160,7 +165,7 @@ void filemenu_draw_contents_file_create_header(
 
 s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
 
-#if VERSION_PAL
+#if VERSION_PAL || VERSION_JP
 #define FILEMENU_ROW_AMT (15)
 #define FILEMENU_C9_OFFSET (16)
 #else
@@ -225,19 +230,33 @@ void filemenu_draw_contents_choose_name(
                             flags = 0;
                             color = 10;
                         }
+#if VERSION_JP
+                        xOffset = 17 * col + 13 + (col / 5) * 10;
+                        yOffset = FILEMENU_ROW_AMT * row + 4;
+#else
                         xOffset = 19 * col + 12;
                         yOffset = FILEMENU_ROW_AMT * row + 5;
+#endif
 #if VERSION_PAL
                         xNudge = msg_get_print_char_width(c, 0, 0, 1.0f, 0, 1);
 #endif
                         specialChar = c;
-                        if (c >= 0xA2 && c < 0xF0) {
+#if VERSION_JP
+                        if (c >= (0xC6) && c < 0xF0) {
+#else
+                        if (c >= (0xA2) && c < 0xF0) {
+#endif
                             if (c >= MSG_CHAR_MENU_SPACE) {
                                 hud_element_set_render_pos(filemenu_createfile_HIDs[2], baseX + xOffset + 22, baseY + yOffset + 8);
                                 hud_element_draw_without_clipping(filemenu_createfile_HIDs[2]);
                                 flags = 0;
                             }
                         }
+#if VERSION_JP
+                        if (specialChar == MSG_CHAR_MENU_BACK || specialChar == MSG_CHAR_MENU_END) {
+                            xOffset += 6;
+                        }
+#else
                         if (specialChar == MSG_CHAR_MENU_SPACE) {
                             xOffset--;
                         }
@@ -263,6 +282,7 @@ void filemenu_draw_contents_choose_name(
                             yOffset--;
                             xNudge = 9;
                         }
+#endif
 #if VERSION_PAL
                         filemenu_draw_message((u8*)c, baseX + xOffset + ((8 - xNudge) / 2), baseY + yOffset, 255, color, flags);
 #else
@@ -279,6 +299,9 @@ void filemenu_draw_contents_choose_name(
                 c = menu->gridData[menu->state * menu->numCols * menu->numRows + menu->numCols * row + col];
                 if (c != MSG_CHAR_READ_SPACE) {
                     s32 xNudge, specialChar;
+#if VERSION_JP
+                    s32 color, flags;
+#endif
 
                     if (col == menu->col && row == menu->row) {
                         flags = 8;
@@ -287,19 +310,33 @@ void filemenu_draw_contents_choose_name(
                         flags = 0;
                         color = 10;
                     }
+#if VERSION_JP
+                    xOffset = col * 17 + 13 + (col / 5) * 10;
+                    yOffset = row * FILEMENU_ROW_AMT + 4;
+#else
                     xOffset = col * 19 + 12;
                     yOffset = row * FILEMENU_ROW_AMT + 5;
+#endif
 #if VERSION_PAL
                     xNudge = msg_get_print_char_width(c, 0, 0, 1.0f, 0, 1);
 #endif
                     specialChar = c;
-                    if (c >= 0xA2 && c < 0xF0) {
+#if VERSION_JP
+                    if (c >= (0xC6) && c < 0xF0) {
+#else
+                    if (c >= (0xA2) && c < 0xF0) {
+#endif
                         if (c >= MSG_CHAR_MENU_SPACE) {
                             hud_element_set_render_pos(filemenu_createfile_HIDs[2], baseX + xOffset + 22, baseY + yOffset + 8);
                             hud_element_draw_without_clipping(filemenu_createfile_HIDs[2]);
                             flags = 0;
                         }
                     }
+#if VERSION_JP
+                    if (specialChar == MSG_CHAR_MENU_BACK || specialChar == MSG_CHAR_MENU_END) {
+                        xOffset += 6;
+                    }
+#else
                     if (specialChar == MSG_CHAR_MENU_SPACE) {
                         xOffset--;
                     }
@@ -321,6 +358,7 @@ void filemenu_draw_contents_choose_name(
                         yOffset--;
                         xNudge = 9;
                     }
+#endif
 #if VERSION_PAL
                     filemenu_draw_message((u8*)c, baseX + xOffset + ((8 - xNudge) / 2), baseY + yOffset, 255, color, flags);
 #else
@@ -337,8 +375,13 @@ void filemenu_draw_contents_choose_name(
         }
         D_8024A18C++;
         filemenu_set_cursor_goal_pos(WIN_FILES_INPUT_KEYBOARD,
+#if VERSION_JP
+                                     baseX + (menu->col * 17 + 3 + (s8)(menu->col / 5) * 10),
+                                     baseY + 12 + menu->row * FILEMENU_ROW_AMT);
+#else
                                      baseX + 2 + menu->col * 19,
                                      baseY + 13 + menu->row * FILEMENU_ROW_AMT);
+#endif
     }
 }
 
@@ -381,6 +424,11 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
         if (menu->col >= menu->numCols) {
             menu->col = 0;
         }
+#if VERSION_JP
+        if (menu->col > 10 && menu->row >= 4) {
+            menu->col = 0;
+        }
+#else
         if (menu->row == menu->numRows - 1) {
             if (menu->col > 10) {
                 menu->col = 0;
@@ -393,6 +441,7 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
             }
 #endif
         }
+#endif
     }
 
     if (filemenu_heldButtons & BUTTON_STICK_UP) {
@@ -407,6 +456,11 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
         }
     }
 
+#if VERSION_JP
+    if (menu->col > 10 && menu->row >= 4) {
+        menu->col = 10;
+    }
+#else
     if (menu->row == menu->numRows - 1) {
         if (menu->col > 10) {
             menu->col = 10;
@@ -419,6 +473,7 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
         }
 #endif
     }
+#endif
 
     menu->selected = MENU_PANEL_SELECTED_GRID_DATA(menu);
     if (oldSelected != menu->selected) {
@@ -472,7 +527,11 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
 
                 sfx_play_sound(SOUND_MENU_NEXT);
                 set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32) filemenu_update_show_name_confirm);
+#if VERSION_JP
+                gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.y = 109;
+#else
                 gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.y = 121;
+#endif
                 gWindows[WIN_FILES_CONFIRM_OPTIONS].width = 69;
                 gWindows[WIN_FILES_CONFIRM_OPTIONS].height = 44;
                 gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_OPTIONS);
@@ -512,7 +571,11 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
             && menu->selected != MSG_CHAR_MENU_BACK
             && filemenu_filename_pos == ARRAY_COUNT(filemenu_filename)
         ) {
+#if VERSION_JP
+            filemenu_set_selected(menu, 10, 8);
+#else
             filemenu_set_selected(menu, menu->numCols - 3, menu->numRows - 1);
+#endif
         }
     }
 
@@ -560,7 +623,11 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
         sfx_play_sound(SOUND_MENU_NEXT);
         set_window_update(WIN_FILES_CONFIRM_OPTIONS, (s32) filemenu_update_show_name_confirm);
 
+#if VERSION_JP
+        gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.y = 109;
+#else
         gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.y = 121;
+#endif
         gWindows[WIN_FILES_CONFIRM_OPTIONS].width = 69;
         gWindows[WIN_FILES_CONFIRM_OPTIONS].height = 44;
         gWindows[WIN_FILES_CONFIRM_OPTIONS].pos.x = CENTER_WINDOW_X(WIN_FILES_CONFIRM_OPTIONS);
