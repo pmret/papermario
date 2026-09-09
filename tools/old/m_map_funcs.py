@@ -21,11 +21,11 @@ for root, dir, files in os.walk(os.path.join(asm_dir, "nonmatchings", "world")):
     for fname in files:
         if fname.endswith(".s"):
             prefix = Path(root).parent.name + "_"
-            with open(os.path.join(root, fname)) as f:
+            with open(os.path.join(root, fname), "r", encoding="utf-8") as f:
                 orig_text = f.read()
             new_text = orig_text
             for common in common_files:
                 new_text = new_text.replace(" " + common, " " + prefix + common)
             if new_text != orig_text:
-                with open(os.path.join(root, fname), "w", newline="\n") as f:
+                with open(os.path.join(root, fname), "w", newline="\n", encoding="utf-8") as f:
                     f.write(new_text)

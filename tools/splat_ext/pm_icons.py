@@ -33,7 +33,7 @@ def pretty_print_xml(tree: ET.ElementTree, path: Path):
     indent(root)
     xml_str = ET.tostring(root, encoding="unicode")
     xml_str = re.sub(" />", "/>", xml_str)
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.write(xml_str)
 
 
@@ -50,7 +50,7 @@ class N64SegPm_icons(Segment):
     def split(self, rom_bytes):
         self.out_dir = options.opts.asset_path / "icon"
 
-        with open(script_dir / "icon.yaml") as f:
+        with open(script_dir / "icon.yaml", "r", encoding="utf-8") as f:
             self.icons = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
         data = rom_bytes[self.rom_start : self.rom_end]

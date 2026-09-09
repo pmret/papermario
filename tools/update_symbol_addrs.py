@@ -28,7 +28,7 @@ verbose = False
 
 
 def read_ignores():
-    with open(ignores_path) as f:
+    with open(ignores_path, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
     for line in lines:
@@ -41,7 +41,7 @@ def scan_map():
     ram_offset = None
     cur_file = "<no file>"
     prev_line = ""
-    with open(map_path) as f:
+    with open(map_path, "r", encoding="utf-8") as f:
         for line in f:
             if "load address" in line:
                 ram = int(line[16 : 16 + 18], 0)
@@ -71,7 +71,7 @@ def scan_map():
 def read_symbol_addrs():
     unique_lines = set()
 
-    with open(symbol_addrs_path, "r") as f:
+    with open(symbol_addrs_path, "r", encoding="utf-8") as f:
         for line in f.readlines():
             unique_lines.add(line)
 
@@ -212,7 +212,7 @@ def reconcile_symbols():
 
 
 def write_new_symbol_addrs():
-    with open(symbol_addrs_path, "w", newline="\n") as f:
+    with open(symbol_addrs_path, "w", newline="\n", encoding="utf-8") as f:
         for symbol in sorted(symbol_addrs, key=lambda x: (x[3] == -1, x[3], x[1], x[0])):
             line = f"{symbol[0]} = 0x{symbol[1]:X}; //"
             if symbol[2] and len(symbol[2]) > 0:

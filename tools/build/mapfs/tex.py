@@ -150,7 +150,7 @@ def build(out_path: Path, tex_name: str, asset_stack: Tuple[Path, ...], endian: 
 
     json_path = get_asset_path(Path(f"mapfs/tex/{tex_name}.json"), asset_stack)
 
-    with open(json_path) as json_file:
+    with open(json_path, "r", encoding="utf-8") as json_file:
         json_str = json_file.read()
         json_data = json.loads(json_str)
 

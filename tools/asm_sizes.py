@@ -20,7 +20,7 @@ funcs = {}
 # Calculate the number of instructions in a .s file
 def calc_insns(f_path):
     ret = 0
-    with open(f_path) as f:
+    with open(f_path, "r", encoding="utf-8") as f:
         f_lines = f.readlines()
     for line in f_lines:
         if line.startswith("/* "):

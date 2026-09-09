@@ -418,7 +418,7 @@ def write_player_sprite_header(
             sprite_id += 1
 
     out_file.parent.mkdir(exist_ok=True, parents=True)
-    with open(out_file, "w") as f:
+    with open(out_file, "w", encoding="utf-8") as f:
         f.write(f"#ifndef {ifdef_name}\n")
         f.write(f"#define {ifdef_name}\n\n")
 

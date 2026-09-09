@@ -44,7 +44,7 @@ class ActorTypeEntry:
 def read_actors_yaml(in_yaml: Path) -> List[ActorTypeEntry]:
     actors: List[ActorTypeEntry] = []
 
-    with open(in_yaml) as f:
+    with open(in_yaml, "r", encoding="utf-8") as f:
         entry_list = yaml.load(f.read(), Loader=yaml.SafeLoader)
 
         for entry in entry_list:
@@ -129,7 +129,7 @@ if __name__ == "__main__":
 
     actors = read_actors_yaml(args.actors_yaml)
 
-    with open(args.out_data, "w") as fout:
+    with open(args.out_data, "w", encoding="utf-8") as fout:
         fout.write("/* This file is auto-generated. Do not edit. */\n")
         fout.write('#include "common.h"\n')
         fout.write('#include "message_ids.h"\n')
@@ -137,7 +137,7 @@ if __name__ == "__main__":
 
         generate_actors_data(fout, actors)
 
-    with open(args.out_enum, "w") as fout:
+    with open(args.out_enum, "w", encoding="utf-8") as fout:
         fout.write("/* This file is auto-generated. Do not edit. */\n")
         fout.write("\n")
 

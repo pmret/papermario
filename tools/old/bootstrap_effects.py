@@ -20,7 +20,7 @@ for root, dirs, files in os.walk(asm_effects_dir):
 
             effect_num = f_name.split("_")[1]
 
-            with open(f_path) as f:
+            with open(f_path, "r", encoding="utf-8") as f:
                 asm_text = f.read()
 
             funcs = []
@@ -37,5 +37,5 @@ for root, dirs, files in os.walk(asm_effects_dir):
 
             renames.append(f"{funcs[0]} fx_{effect_num}_appendGfx\n")
 
-with open("tools/to_rename.txt", "w", newline="\n") as f:
+with open("tools/to_rename.txt", "w", newline="\n", encoding="utf-8") as f:
     f.writelines(renames)

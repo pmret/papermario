@@ -1461,7 +1461,7 @@ def main():
     # add tools/build to import path
     sys.path.insert(0, str(BUILD_TOOLS.resolve()))
 
-    ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w"), width=9999)
+    ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w", encoding="utf-8"), width=9999)
 
     non_matching = args.non_matching or args.modern_gcc or args.shift
 
