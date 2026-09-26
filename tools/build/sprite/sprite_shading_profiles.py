@@ -95,13 +95,13 @@ def build(
 ):
     END = ">" if endian == "big" else "<"
 
-    with open(input, "r") as f:
+    with open(input, "r", encoding="utf-8") as f:
         json_data = json.load(f)
 
     groups = groups_from_json(json_data)
 
     # Header creation
-    with open(header_out, "w") as f:
+    with open(header_out, "w", encoding="utf-8") as f:
         f.write("#ifndef SHADING_PROFILES_H\n")
         f.write("#define SHADING_PROFILES_H\n")
         f.write(f"/* This file is auto-generated from {input.name}. Do not edit. */\n\n")

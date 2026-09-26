@@ -22,7 +22,7 @@ def main():
     current_warnings = [line for line in current_warnings if line]
 
     # Write the current warnings to a file
-    with open(script_dir / "warnings.txt", "w") as f:
+    with open(script_dir / "warnings.txt", "w", encoding="utf-8") as f:
         for line in current_warnings:
             f.write(line + "\n")
 
@@ -31,11 +31,11 @@ def main():
         print("build_log.txt not found. Exiting.")
         sys.exit(1)
 
-    with open(root_dir / "build_log.txt") as f:
+    with open(root_dir / "build_log.txt", "r", encoding="utf-8") as f:
         new_warnings = [line for line in f.readlines() if "warning" in line]
 
     # Write the new warnings to a file
-    with open(script_dir / "warnings_new.txt", "w") as f:
+    with open(script_dir / "warnings_new.txt", "w", encoding="utf-8") as f:
         f.writelines(new_warnings)
 
     num_current_warnings = len(current_warnings)

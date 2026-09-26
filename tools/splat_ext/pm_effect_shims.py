@@ -49,7 +49,7 @@ glabel {name}
             yaml=yaml,
         )
 
-        with open(options.opts.src_path / "effect_shims.yaml") as f:
+        with open(options.opts.src_path / "effect_shims.yaml", "r", encoding="utf-8") as f:
             self.shims = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):
@@ -58,7 +58,7 @@ glabel {name}
 
             self.shim_path("").parent.mkdir(parents=True, exist_ok=True)
 
-            with open(self.shim_path(shim), "w") as f:
+            with open(self.shim_path(shim), "w", encoding="utf-8") as f:
                 f.write(shim_asm)
 
     def get_linker_entries(self):

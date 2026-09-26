@@ -44,7 +44,7 @@ def main(args):
     to_write.append(f"fx_{id}_appendGfx {to}_appendGfx")
     to_write.append(f"EFFECT_ID_{hex_str} EFFECT_{to.upper()}")
 
-    with open(os.path.join(script_dir, "to_rename.txt"), "a") as f:
+    with open(os.path.join(script_dir, "to_rename.txt"), "a", encoding="utf-8") as f:
         for line in to_write:
             f.write(f"{line}\n")
 

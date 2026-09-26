@@ -20,7 +20,7 @@ with open("tools/symz.txt") as f:
 for root, dirs, files in os.walk("src"):
     for file in files:
         if file.endswith(".c") and "bss" not in file:
-            with open(os.path.join(root, file)) as f:
+            with open(os.path.join(root, file), "r", encoding="utf-8") as f:
                 text = f.read()
                 for sym in syms:
                     if sym["name"] in text:
@@ -30,7 +30,7 @@ for root, dirs, files in os.walk("src"):
 for root, dirs, files in os.walk("ver/us/asm"):
     for file in files:
         if file.endswith(".s"):
-            with open(os.path.join(root, file)) as f:
+            with open(os.path.join(root, file), "r", encoding="utf-8") as f:
                 text = f.read()
                 for sym in syms:
                     if sym["name"] in text:

@@ -23,7 +23,7 @@ if __name__ == "__main__":
     img = png.Reader(infile)
     width, height, rows, info = img.read()
 
-    with open(outfile, "w") as f:
+    with open(outfile, "w", encoding="utf-8") as f:
         f.write("// Generated file, do not edit.\n")
         f.write(f"#ifndef _{cname.upper()}_\n")
         f.write(f"#define _{cname.upper()}_\n")

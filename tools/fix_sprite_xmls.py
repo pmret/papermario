@@ -6,7 +6,7 @@ import glob
 
 
 def process_file(file_path):
-    with open(file_path, "r") as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         content = file.read()
 
     # Skip files that already have fixed="true"
@@ -35,7 +35,7 @@ def process_file(file_path):
         r'<SetParent index="(\d+)"/>', lambda m: f'<SetParent index="{hex(int(m.group(1)))[2:].upper()}"/>', content
     )
 
-    with open(file_path, "w") as file:
+    with open(file_path, "w", encoding="utf-8") as file:
         file.write(content)
     print(f"Updated: {file_path}")
 

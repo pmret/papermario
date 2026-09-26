@@ -14,7 +14,7 @@ def img_replacer(match):
 
     for version in ["us", "pal", "ique", "jp"]:
         try:
-            with open(f"ver/{version}/build/include/" + png_inc_c_path, "r") as f:
+            with open(f"ver/{version}/build/include/" + png_inc_c_path, "r", encoding="utf-8") as f:
                 png_inc_c_content = f.read()
             break
         except FileNotFoundError:
@@ -35,7 +35,7 @@ def img_replacer(match):
 for dirs, subdirs, files in os.walk("src"):
     for file in files:
         if file.endswith(".c"):
-            with open(os.path.join(dirs, file), "r") as f:
+            with open(os.path.join(dirs, file), "r", encoding="utf-8") as f:
                 source_lines = f.readlines()
 
             if any(IMG_C_RE.match(l) or PAL_C_RE.match(l) for l in source_lines):
@@ -59,5 +59,5 @@ for dirs, subdirs, files in os.walk("src"):
                     source_lines[i] = re.sub(IMG_C_RE, img_replacer, source_lines[i])
                     source_lines[i] = re.sub(PAL_C_RE, img_replacer, source_lines[i])
 
-                with open(os.path.join(dirs, file), "w") as f:
+                with open(os.path.join(dirs, file), "w", encoding="utf-8") as f:
                     f.writelines(source_lines)

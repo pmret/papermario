@@ -86,7 +86,7 @@ def build(out_bin: Path, out_header: Path, asset_stack: Tuple[Path, ...]):
     with open(out_bin, "wb") as f:
         f.write(out_bytes)
 
-    with open(out_header, "w") as f:
+    with open(out_header, "w", encoding="utf-8") as f:
         f.write("#ifndef ICON_OFFSETS_H\n")
         f.write("#define ICON_OFFSETS_H\n")
         f.write(f"/* This file is auto-generated. Do not edit. */\n\n")

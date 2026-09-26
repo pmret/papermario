@@ -41,7 +41,7 @@ class Symbol:
 
 
 def parse_symbol_addrs():
-    with open("ver/us/symbol_addrs.txt", "r") as f:
+    with open("ver/us/symbol_addrs.txt", "r", encoding="utf-8") as f:
         lines = f.readlines()
 
     symbol_addrs = {}
@@ -97,7 +97,7 @@ def eval_namespace(sym, namespace):
 
 
 def replace_old_script_macros(filename, symbol_addrs):
-    with open(filename, "r") as f:
+    with open(filename, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
     with open("ver/us/baserom.z64", "rb") as rom:
@@ -158,7 +158,7 @@ def replace_old_script_macros(filename, symbol_addrs):
             num_scripts_replaced += 1
 
     if num_scripts_replaced > 0:
-        with open(filename, "w") as f:
+        with open(filename, "w", encoding="utf-8") as f:
             f.writelines(lines)
 
     return num_scripts_replaced

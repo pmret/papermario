@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     asset_stack = tuple(Path(d) for d in asset_stack_raw.split(","))
 
-    with open(outfile, "w") as f:
+    with open(outfile, "w", encoding="utf-8") as f:
         # get sprite index
         s = int(s_in)
         assert s >= 1

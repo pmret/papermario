@@ -25,7 +25,7 @@ class DoubleRecipe:
 
 
 def generate(in_yaml: Path, out_c: Path):
-    with open(in_yaml) as f:
+    with open(in_yaml, "r", encoding="utf-8") as f:
         data = yaml.load(f.read(), Loader=yaml.SafeLoader)
 
     products = data["Products"]
@@ -69,7 +69,7 @@ def generate(in_yaml: Path, out_c: Path):
     #        if not recipe[2] in product_idx:
     #            raise Exception(f"Product {recipe[2]} for ExtraDoubleRecipe ({recipe[0]}, {recipe[1]}) not listed in Products")
 
-    with open(out_c, "w") as f:
+    with open(out_c, "w", encoding="utf-8") as f:
         f.write("/* This file is auto-generated. Do not edit. */\n\n")
         f.write('#include "common.h"\n\n')
 

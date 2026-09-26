@@ -16,8 +16,8 @@ def find_dir(query):
 
 
 def data_to_c(file_path):
-    file = open(file_path)
-    s = file.read()
+    with open(file_path, "r", encoding="utf-8") as f:
+        s = f.read()
 
     output = ""
     pattern = re.compile(r"(dlabel (jtbl_.*|.+_.*)\n.(\w+) (.*))")
@@ -33,7 +33,6 @@ def data_to_c(file_path):
         else:
             output += all + "\n\n"
 
-    file.close()
     return output
 
 
@@ -43,9 +42,8 @@ def out_to_file(output, file_path):
         os.mkdir(output_dir)
 
     file_name = file_path[file_path.rfind("/") : -7]
-    file = open("data2c/" + file_name + ".c", "w+")
-    file.write(output)
-    file.close()
+    with open("data2c/" + file_name + ".c", "w+", encoding="utf-8") as file:
+        file.write(output)
 
 
 def get_all():

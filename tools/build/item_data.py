@@ -35,7 +35,7 @@ class ItemEntry:
 def read_items_yaml(in_yaml: Path) -> List[ItemEntry]:
     items: List[ItemEntry] = []
 
-    with open(in_yaml) as f:
+    with open(in_yaml, "r", encoding="utf-8") as f:
         entry_list = yaml.load(f.read(), Loader=yaml.SafeLoader)
 
         for entry in entry_list:
@@ -309,7 +309,7 @@ if __name__ == "__main__":
     }
     items.sort(key=lambda x: CATEGORY_ORDER.get(x.category, 999))
 
-    with open(args.out_data, "w") as fout:
+    with open(args.out_data, "w", encoding="utf-8") as fout:
         fout.write("/* This file is auto-generated. Do not edit. */\n")
         fout.write('#include "common.h"\n')
         fout.write('#include "message_ids.h"\n')
@@ -334,7 +334,7 @@ if __name__ == "__main__":
         generate_item_entity_scripts_table(fout, items)
         generate_item_icon_tables(fout, items)
 
-    with open(args.out_enum, "w") as fout:
+    with open(args.out_enum, "w", encoding="utf-8") as fout:
         fout.write("/* This file is auto-generated. Do not edit. */\n")
         fout.write("\n")
 

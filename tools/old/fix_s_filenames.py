@@ -15,7 +15,7 @@ for root, dirs, files in os.walk(asm_dir):
         if f_name.endswith(".s"):
             f_path = os.path.join(root, f_name)
 
-            with open(f_path, "r") as f:
+            with open(f_path, "r", encoding="utf-8") as f:
                 line = f.readlines()[3]
 
             if not line.startswith("glabel "):

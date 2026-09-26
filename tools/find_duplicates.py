@@ -68,7 +68,7 @@ def parse_map(fname):
     syms = {}
     prev_sym = None
     prev_line = ""
-    with open(fname) as f:
+    with open(fname, "r", encoding="utf-8") as f:
         for line in f:
             if "load address" in line:
                 if "noload" in line or "noload" in prev_line:
@@ -246,26 +246,23 @@ def output_match_dict(
     num_perfect_dupes,
     num_checked_files,
 ):
-    out_file = open(datetime.today().strftime("%Y-%m-%d-%H-%M-%S") + "_all_matches.txt", "w+")
+    with open(datetime.today().strftime("%Y-%m-%d-%H-%M-%S") + "_all_matches.txt", "w+", encoding="utf-8") as out_file:
+        out_file.write(
+            "Number of s-files: " + str(len(s_files)) + "\n"
+            "Number of checked s-files: " + str(round(num_checked_files)) + "\n"
+            "Number of decompiled duplicates found: " + str(num_decomped_dupes) + "\n"
+            "Number of undecompiled duplicates found: " + str(num_undecomped_dupes) + "\n"
+            "Number of overall exact duplicates found: " + str(num_perfect_dupes) + "\n\n"
+        )
 
-    out_file.write(
-        "Number of s-files: " + str(len(s_files)) + "\n"
-        "Number of checked s-files: " + str(round(num_checked_files)) + "\n"
-        "Number of decompiled duplicates found: " + str(num_decomped_dupes) + "\n"
-        "Number of undecompiled duplicates found: " + str(num_undecomped_dupes) + "\n"
-        "Number of overall exact duplicates found: " + str(num_perfect_dupes) + "\n\n"
-    )
+        sorted_dict = OrderedDict(sorted(match_dict.items(), key=lambda item: item[1][0], reverse=True))
 
-    sorted_dict = OrderedDict(sorted(match_dict.items(), key=lambda item: item[1][0], reverse=True))
-
-    print("Creating output file: " + out_file.name, end="\n")
-    for file_name, matches in sorted_dict.items():
-        out_file.write(file_name + " - found " + str(matches[0]) + " matches total:\n")
-        for match in matches[1]:
-            out_file.write(match + "\n")
-        out_file.write("\n")
-
-    out_file.close()
+        print("Creating output file: " + out_file.name, end="\n")
+        for file_name, matches in sorted_dict.items():
+            out_file.write(file_name + " - found " + str(matches[0]) + " matches total:\n")
+            for match in matches[1]:
+                out_file.write(match + "\n")
+            out_file.write("\n")
 
 
 def is_decompiled(sym):

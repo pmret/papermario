@@ -1205,7 +1205,7 @@ if __name__ == "__main__":
 
     disasm_script.get_constants()
 
-    with open(os.path.join(DIR, "../ver/current/splat.yaml")) as f:
+    with open(os.path.join(DIR, "../ver/current/splat.yaml"), "r", encoding="utf-8") as f:
         splat_config = yaml.safe_load(f.read())
 
         rom_offset = -1
@@ -1227,7 +1227,7 @@ if __name__ == "__main__":
     else:
         function_replacements = {}
 
-    with open(args.idxfile, "r") as f:
+    with open(args.idxfile, "r", encoding="utf-8") as f:
         midx = parse_midx(f, vram=vram)
 
     with open(os.path.join(DIR, "../ver/current/baserom.z64"), "rb") as romfile:

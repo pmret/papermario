@@ -31,7 +31,7 @@ class MoveEntry:
 def read_moves_yaml(in_yaml: Path) -> List[MoveEntry]:
     items: List[MoveEntry] = []
 
-    with open(in_yaml) as f:
+    with open(in_yaml, "r", encoding="utf-8") as f:
         entry_list = yaml.load(f.read(), Loader=yaml.SafeLoader)
 
         for entry in entry_list:
@@ -98,7 +98,7 @@ if __name__ == "__main__":
 
     moves = read_moves_yaml(args.moves_yaml)
 
-    with open(args.out_data, "w") as fout:
+    with open(args.out_data, "w", encoding="utf-8") as fout:
         fout.write("/* This file is auto-generated. Do not edit. */\n")
         fout.write('#include "common.h"\n')
         fout.write('#include "message_ids.h"\n')
@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
         generate_move_table(fout, moves)
 
-    with open(args.out_enum, "w") as fout:
+    with open(args.out_enum, "w", encoding="utf-8") as fout:
         fout.write("/* This file is auto-generated. Do not edit. */\n")
         fout.write("\n")
 

@@ -13,7 +13,7 @@ asm_world_dir = asm_dir + "nonmatchings/world/"
 asm_data_dir = asm_dir + "data/"
 src_dir = root_dir + "src/"
 
-with open(root_dir + "ver/current/splat.yaml") as f:
+with open(root_dir + "ver/current/splat.yaml", "r", encoding="utf-8") as f:
     config = yaml.load(f.read(), Loader=yaml.SafeLoader)
 
 for segment in config["segments"]:
@@ -23,7 +23,7 @@ for segment in config["segments"]:
         if not os.path.exists(c_file_path):
             continue
 
-        with open(c_file_path) as f:
+        with open(c_file_path, "r", encoding="utf-8") as f:
             c_lines = f.readlines()
 
         if len(c_lines[1].strip()) != 0:
@@ -42,7 +42,7 @@ for segment in config["segments"]:
         if not os.path.exists(asm_file_path):
             continue
 
-        with open(asm_file_path) as f:
+        with open(asm_file_path, "r", encoding="utf-8") as f:
             asm_lines = f.readlines()
 
         exit_data = asm_lines[5].strip()
@@ -62,5 +62,5 @@ for segment in config["segments"]:
             c_lines.insert(2 + i, f'static char* N(exit_str_{i}) = "{exit_strings[i]}";\n')
         c_lines.insert(2 + len(exit_strings), "\n")
 
-        with open(c_file_path, "w", newline="\n") as f:
+        with open(c_file_path, "w", newline="\n", encoding="utf-8") as f:
             f.write("".join(c_lines))

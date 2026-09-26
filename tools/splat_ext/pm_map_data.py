@@ -95,7 +95,7 @@ class N64SegPm_map_data(Segment):
             cfg_name = "mapfs.yaml"
 
         self.files = {}
-        with open(script_dir / cfg_name) as f:
+        with open(script_dir / cfg_name, "r", encoding="utf-8") as f:
             mapfs_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
             for file in mapfs_cfg:
                 if isinstance(file, dict):

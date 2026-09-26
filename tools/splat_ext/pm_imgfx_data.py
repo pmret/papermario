@@ -109,7 +109,7 @@ class N64SegPm_imgfx_data(Segment):
     def split(self, rom_bytes):
         self.OUT_DIR.mkdir(parents=True, exist_ok=True)
         for anim in self.anims:
-            with open(f"{self.OUT_DIR}/{anim.name}.json", "w") as f:
+            with open(f"{self.OUT_DIR}/{anim.name}.json", "w", encoding="utf-8") as f:
                 f.write(anim.toJSON())
 
     def get_linker_entries(self):

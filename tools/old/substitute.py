@@ -21,7 +21,7 @@ args = parser.parse_args()
 
 from_funcs = []
 
-with open(args.from_list) as f:
+with open(args.from_list, "r", encoding="utf-8") as f:
     from_text = f.readlines()
 
 to_line = """
@@ -46,7 +46,7 @@ for root, dirs, files in os.walk(src_dir):
     for f_name in files:
         if f_name.endswith(".c"):
             f_path = os.path.join(root, f_name)
-            with open(f_path) as f:
+            with open(f_path, "r", encoding="utf-8") as f:
                 f_text_orig = f.read()
 
             f_text = f_text_orig
@@ -54,7 +54,7 @@ for root, dirs, files in os.walk(src_dir):
                 search_pattern = re.compile("\n.*" + func + "\).*\n")
                 f_text = re.sub(search_pattern, to_line, f_text)
             if f_text != f_text_orig:
-                with open(f_path, "w", newline="\n") as f:
+                with open(f_path, "w", newline="\n", encoding="utf-8") as f:
                     f.write(f_text)
 
 # # Rename symbols in from_funcs to namespace equivalents
@@ -66,7 +66,7 @@ for root, dirs, files in os.walk(asm_dir):
     for f_name in files:
         if f_name.endswith(".s"):
             f_path = os.path.join(root, f_name)
-            with open(f_path) as f:
+            with open(f_path, "r", encoding="utf-8") as f:
                 f_text_orig = f.read()
 
             f_text = f_text_orig
@@ -89,8 +89,8 @@ for root, dirs, files in os.walk(asm_dir):
                     to_replace.append(syms[0] + " " + namespace + "_ItemChoice_HasSelectedItem\n")
                     to_replace.append(syms[1] + " " + namespace + "_ItemChoice_SelectedItemID\n")
 
-                with open(f_path, "w", newline="\n") as f:
+                with open(f_path, "w", newline="\n", encoding="utf-8") as f:
                     f.write(f_text)
 
-with open("to_rename.txt", "w") as f:
+with open("to_rename.txt", "w", encoding="utf-8") as f:
     f.writelines(to_replace)

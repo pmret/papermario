@@ -16,7 +16,7 @@ def handle_symbol(area, symbol):
             if f_name.endswith(".s"):
                 f_path = os.path.join(root, f_name)
 
-                with open(f_path) as f:
+                with open(f_path, "r", encoding="utf-8") as f:
                     asm_lines = f.readlines()
 
                 has_rodata_section = False
@@ -34,7 +34,7 @@ def handle_symbol(area, symbol):
                         asm_lines.insert(6, f"{symbol[2]}\n")
                         asm_lines.insert(7, "\n")
 
-                        with open(f_path, "w", newline="\n") as f:
+                        with open(f_path, "w", newline="\n", encoding="utf-8") as f:
                             f.write("".join(asm_lines))
 
                         return True
@@ -42,7 +42,7 @@ def handle_symbol(area, symbol):
 
 
 def handle_file(f_path):
-    with open(f_path) as f:
+    with open(f_path, "r", encoding="utf-8") as f:
         rodata_lines = f.readlines()[4:]
 
     area = Path(f_path).parent.parts[-2:]

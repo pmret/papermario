@@ -574,5 +574,5 @@ class TexArchive:
         json_out = json.dumps(out, sort_keys=False, indent=4)
 
         json_fn = str(tex_path) + ".json"
-        with open(json_fn, "w") as f:
+        with open(json_fn, "w", encoding="utf-8") as f:
             f.write(json_out)
