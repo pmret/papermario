@@ -1268,7 +1268,7 @@ void partner_walking_follow_player(Npc* partner) {
                     break;
                 } else {
                     D_8010CFBC++;
-                    if (D_8010CFBC >= 40) {
+                    if (D_8010CFBC >= ARRAY_COUNT(gPlayerMoveHistory)) {
                         D_8010CFBC = 0;
                     }
                     currentSnapshot = &gPlayerMoveHistory[D_8010CFBC];
@@ -1300,7 +1300,7 @@ void partner_walking_follow_player(Npc* partner) {
             ) {
                 if (!func_800EA4B0(partner->curWall)) {
                     D_8010CFBC++;
-                    if (D_8010CFBC >= 40) {
+                    if (D_8010CFBC >= ARRAY_COUNT(gPlayerMoveHistory)) {
                         D_8010CFBC = 0;
                     }
                     currentSnapshot = &gPlayerMoveHistory[D_8010CFBC];
@@ -1329,7 +1329,7 @@ void partner_walking_follow_player(Npc* partner) {
                 }
             } else {
                 D_8010CFBC++;
-                if (D_8010CFBC >= 40) {
+                if (D_8010CFBC >= ARRAY_COUNT(gPlayerMoveHistory)) {
                     D_8010CFBC = 0;
                 }
                 currentSnapshot = &gPlayerMoveHistory[D_8010CFBC];
@@ -1528,7 +1528,7 @@ void partner_walking_follow_player(Npc* partner) {
                         break;
                     }
                     D_8010CFBC++;
-                    if (D_8010CFBC >= 40) {
+                    if (D_8010CFBC >= ARRAY_COUNT(gPlayerMoveHistory)) {
                         D_8010CFBC = 0;
                     }
                     currentSnapshot = &gPlayerMoveHistory[D_8010CFBC];
@@ -1551,7 +1551,7 @@ void partner_walking_follow_player(Npc* partner) {
                         break;
                     }
                     D_8010CFBC++;
-                    if (D_8010CFBC >= 40) {
+                    if (D_8010CFBC >= ARRAY_COUNT(gPlayerMoveHistory)) {
                         D_8010CFBC = 0;
                     }
                     currentSnapshot = &gPlayerMoveHistory[D_8010CFBC];
@@ -1926,7 +1926,7 @@ void partner_flying_follow_player(Npc* partner) {
         case 3:
             if (D_8010CFBC != gPlayerMoveHistoryIndex) {
                 D_8010CFBC++;
-                if (D_8010CFBC >= 40) {
+                if (D_8010CFBC >= ARRAY_COUNT(gPlayerMoveHistory)) {
                     D_8010CFBC = 0;
                 }
                 currentSnapshot = &gPlayerMoveHistory[D_8010CFBC];
